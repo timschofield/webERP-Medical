@@ -5,6 +5,13 @@
 
 
 Class PurchOrder {
+	const STATUS_NEW_ORDER  = 'New Order';
+	const STATUS_PENDING    = 'Pending';
+	const STATUS_AUTHORISED = 'Authorised';
+	const STATUS_REJECTED   = 'Rejected';
+	const STATUS_CANCELLED  = 'Cancelled';
+	const STATUS_PRINTED    = 'Printed';
+	const STATUS_COMPLITED  = 'Completed';
 
 	var $LineItems; /*array of objects of class LineDetails using the product id as the pointer */
 	var $CurrCode;
@@ -41,7 +48,7 @@ Class PurchOrder {
 	var $GLLink; /*Is the GL link to stock activated only checked when order initiated or reading in for modification */
 	var $Version;
 	var $Status;
-	var $StatusComments;
+	var $StatComments;
 	var $AllowPrintPO;
 	var $Revised;
 	var $DeliveryBy;
@@ -87,7 +94,7 @@ Class PurchOrder {
 											$Total_Quantity=0,
 											$Total_Amount=0,
 											$AssetID=0){
-							
+
 		if ($Qty!=0 && isset($Qty)){
 
 			$this->LineItems[$LineNo] = new LineDetails($LineNo,

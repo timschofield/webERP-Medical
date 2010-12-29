@@ -34,7 +34,7 @@
 														purchorders.suppdeladdress4,
 														purchorders.suppdeladdress5,
 														purchorders.suppdeladdress6,
-														purchorders.suppliercontact,
+														purchorders.contact,
 														purchorders.supptel,
 														purchorders.contact,
 														purchorders.allowprint,
@@ -54,7 +54,7 @@
 														suppliers
 													WHERE purchorders.supplierno = suppliers.supplierid
 													AND purchorders.orderno = ' . $_GET['ModifyOrderNumber'];
-										
+
 	   $ErrMsg =  _('The order cannot be retrieved because');
 	   $DbgMsg =  _('The SQL statement that was used and failed was');
 	   $GetOrdHdrResult = DB_query($OrderHeaderSQL,$db,$ErrMsg,$DbgMsg);
@@ -87,7 +87,7 @@
 			$_SESSION['PO'.$identifier]->SuppDelAdd4 = $myrow['suppdeladdress4'];
 			$_SESSION['PO'.$identifier]->SuppDelAdd5 = $myrow['suppdeladdress5'];
 			$_SESSION['PO'.$identifier]->SuppDelAdd6 = $myrow['suppdeladdress6'];
-			$_SESSION['PO'.$identifier]->SupplierContact = $myrow['suppliercontact'];
+			$_SESSION['PO'.$identifier]->SupplierContact = $myrow['contact'];
 			$_SESSION['PO'.$identifier]->SuppTel= $myrow['supptel'];
 			$_SESSION['PO'.$identifier]->Contact = $myrow['contact'];
 			$_SESSION['PO'.$identifier]->Managed = $myrow['managed'];
@@ -244,7 +244,7 @@
 																									$myrow['total_quantity'],
 																									$myrow['total_amount'],
 																									$myrow['assetid'] );
-																		
+
 					$_SESSION['PO'.$identifier]->LineItems[$_SESSION['PO'.$identifier]->LinesOnOrder]->PODetailRec = $myrow['podetailitem'];
 					$_SESSION['PO'.$identifier]->LineItems[$_SESSION['PO'.$identifier]->LinesOnOrder]->StandardCost = $myrow['stdcostunit'];  /*Needed for receiving goods and GL interface */
 			 } /* line PO from purchase order details */

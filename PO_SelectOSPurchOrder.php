@@ -435,7 +435,7 @@ else {
 //			$PrintPurchOrder = '<font color=GREY>' . _('Printed') . '</font>';
 
 		}
-		if ($myrow['status'] == 'Authorisied') {
+		if ($myrow['status']=='Authorised') {
 			$PrintPurchOrder = '<a target="_blank" href="' . $rootpath . '/PO_PDFPurchOrder.php?' . SID . '&OrderNo=' . $myrow['orderno'] . '&realorderno=' . $myrow['realorderno'] . '&ViewingOnly=2">
 				' . _('Print') . '
 				</a>';

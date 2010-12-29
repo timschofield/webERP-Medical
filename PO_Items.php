@@ -131,9 +131,8 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 																			suppdeladdress4,
 																			suppdeladdress5,
 																			suppdeladdress6,
-																			suppliercontact,
-																			supptel,
 																			contact,
+																			supptel,
 																			version,
 																			revised,
 																			deliveryby,
@@ -162,7 +161,6 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 																				'" . $_SESSION['PO'.$identifier]->SuppDelAdd4 . "',
 																				'" . $_SESSION['PO'.$identifier]->SuppDelAdd5 . "',
 																				'" . $_SESSION['PO'.$identifier]->SuppDelAdd6 . "',
-																				'" . $_SESSION['PO'.$identifier]->SupplierContact . "',
 																				'" . $_SESSION['PO'.$identifier]->SuppTel. "',
 																				'" . $_SESSION['PO'.$identifier]->Contact . "',
 																				'" . $_SESSION['PO'.$identifier]->Version . "',
@@ -213,7 +211,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 																							'" . $POLine->ShiptRef . "',
 																							'" . $POLine->JobRef . "',
 																							'" . $POLine->ItemNo . "',
-																							'" . $POLine->uom . "',
+																							'" . $POLine->SuppUOM . "',
 																							'" . $POLine->Suppliers_PartNo . "',
 																							'" . $POLine->SubTotal_Amount . "',
 																							'" . $POLine->Package . "',
@@ -259,9 +257,8 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 																		suppdeladdress4='" . $_SESSION['PO'.$identifier]->SuppDelAdd4 . "',
 																		suppdeladdress5='" . $_SESSION['PO'.$identifier]->SuppDelAdd5 . "',
 																		suppdeladdress6='" . $_SESSION['PO'.$identifier]->SuppDelAdd6 . "',
-																		suppliercontact='" . $_SESSION['PO'.$identifier]->SupplierContact . "',
+																		contact='" . $_SESSION['PO'.$identifier]->SupplierContact . "',
 																		supptel='" . $_SESSION['PO'.$identifier]->SuppTel . "',
-																		contact='" . $_SESSION['PO'.$identifier]->Contact . "',
 																		paymentterms='" . $_SESSION['PO'.$identifier]->PaymentTerms . "',
 																		allowprint='" . $_SESSION['PO'.$identifier]->AllowPrintPO . "',
 																		status = '" . PurchOrder::STATUS_PENDING . "'
@@ -294,6 +291,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 																							jobref,
 																							itemno,
 																							uom,
+																							conversionfactor,
 																							suppliers_partno,
 																							subtotal_amount,
 																							package,
@@ -316,6 +314,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 																							'" . $POLine->JobRef . "',
 																							'" . $POLine->ItemNo . "',
 																							'" . $POLine->uom . "',
+																							'" . $POLine->ConversionFactor . "',
 																							'" . $POLine->Suppliers_PartNo . "',
 																							'" . $POLine->SubTotal_Amount . "',
 																							'" . $POLine->Package . "',
@@ -339,6 +338,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 																							jobref='" . $POLine->JobRef . "',
 																							itemno='" . $POLine->ItemNo . "',
 																							uom='" . $POLine->uom . "',
+																							uom='" . $POLine->ConversionFactor. "',
 																							suppliers_partno='" . $POLine->Suppliers_PartNo . "',
 																							subtotal_amount='" . $POLine->SubTotal_Amount . "',
 																							package='" . $POLine->Package . "',
@@ -362,6 +362,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 																								jobref='" . $POLine->JobRef . "',
 																								itemno='" . $POLine->ItemNo . "',
 																								uom='" . $POLine->uom . "',
+																								uom='" . $POLine->ConversionFactor . "',
 																								suppliers_partno='" . $POLine->Suppliers_PartNo . "',
 																								subtotal_amount='" . $POLine->SubTotal_Amount . "',
 																								package='" . $POLine->Package . "',
@@ -539,6 +540,7 @@ if (isset($_POST['LookupPrice']) and isset($_POST['StockID2'])){
 	if (DB_num_rows($LookupResult)==1){
 		$myrow = DB_fetch_array($LookupResult);
 		$_POST['Price'] = $myrow['price']/$myrow['conversionfactor'];
+		$_POST['ConversionFactor'] = $myrow['conversionfactor'];
 	} else {
 		prnMsg(_('Sorry') . ' ... ' . _('there is no purchasing data set up for this supplier') . '  - ' . $_SESSION['PO'.$identifier]->SupplierID . ' ' . _('and item') . ' ' . strtoupper($_POST['StockID']),'warn');
 	}
@@ -593,7 +595,7 @@ if (isset($_POST['UpdateLine'])){
 																								$_POST['JobRef'],
 																								$_POST['ItemNo'],
 																								$_SESSION['PO'.$identifier]->LineItems[$_POST['LineNo']]->uom,
-																								1, //conversion factor not set??
+																								$_POST['ConversionFactor'],
 																								$_POST['Suppliers_PartNo'],
 																								$_POST['Qty']*$_POST['Price'],
 																								$_POST['Package'],
@@ -708,7 +710,7 @@ if (isset($_POST['EnterLine'])){ /*Inputs from the form directly without selecti
 																							2,
 																							$_POST['ItemNo'],
 																							$_POST['uom'],
-																							1,
+																							$_POST['ConversionFactor'],
 																							1,
 																							$_POST['Suppliers_PartNo'],
 																							$_POST['SubTotal_Amount'],
@@ -967,7 +969,7 @@ if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
 			} else {
 				$Uom=$POLine->Units;
 			}
-
+			echo '<input type="hidden" name="ConversionFactor" value="'.$UomRow['conversionfactor'].'" />';
 			echo '<td>' . $POLine->StockID  . '</td>
 				<td>' . $POLine->ItemDescription . '</td>
 				<td><input type="text" class="number" name="Qty' . $POLine->LineNo .'" size="11" value="' . $DisplayQuantity . '"></td>

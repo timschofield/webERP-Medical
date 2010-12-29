@@ -71,7 +71,7 @@ if (isset($_POST['Select']) and empty($_POST['SupplierContact'])) {
 if (isset($_POST['UpdateStat']) AND $_POST['UpdateStat']!='') {
 	/*The cancel button on the header screen - to delete order */
 	$OK_to_updstat = 1;
-	$OldStatus=$_SESSION['PO'.$identifier]->Stat;
+	$OldStatus=$_SESSION['PO'.$identifier]->Status;
 	$NewStatus=$_POST['Stat'];
 	$EmailSQL='SELECT email FROM www_users WHERE userid="'.$_SESSION['PO'.$identifier]->Initiator.'"';
 	$EmailResult=DB_query($EmailSQL, $db);
@@ -873,13 +873,13 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	echo '</table>';
 
 	echo '<td style="width:50%" valign="top"><table class="selection" width="100%">';
-	if($_SESSION['ExistingOrder'] != 0 and $_SESSION['PO'.$identifier]->Stat == PurchOrder::STATUS_PRINTED){
+	if($_SESSION['ExistingOrder'] != 0 and $_SESSION['PO'.$identifier]->Status == PurchOrder::STATUS_PRINTED){
 		echo '<tr><td><a href="' .$rootpath . "/GoodsReceived.php?" . SID . "&PONumber=" .
 			$_SESSION['PO'.$identifier]->OrderNo . "&identifier=".$identifier.'">'._('Receive this order').'</a></td></tr>';
 	}
 	echo '<td>' . _('Status') . ' :  </td><td><select name="Stat" onChange="ReloadForm(form1.UpdateStat)">';
 
-	switch ($_SESSION['PO'.$identifier]->Stat) {
+	switch ($_SESSION['PO'.$identifier]->Status) {
 		case '':
 			$StatusList = array(PurchOrder::STATUS_NEW_ORDER);
 			break;
