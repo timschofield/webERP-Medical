@@ -17,18 +17,22 @@ if(isset($ForceConfigReload) and $ForceConfigReload==TRUE OR !isset($_SESSION['C
 		}
 	} //end loop through all config variables
 	$_SESSION['CompanyDefaultsLoaded'] = true;
-	
+
 	DB_free_result($ConfigResult); // no longer needed
 	/*Maybe we should check config directories exist and try to create if not */
-	
+
 	/*Load the pagesecurity settings from the database */
-	
-	$sql='SELECT script, pagesecurity FROM scripts';
-	$ErrMsg = _('Could not get the page security details from the database because');
-	$result=DB_query($sql, $db);
-	
-	while ($myrow=DB_fetch_array($result)) {
-		$_SESSION['PageSecurity'][$myrow['script']]=$myrow['pagesecurity'];
+
+	if (DB_table_exists('pagesecurity', $db)) {
+		$sql='SELECT script, security FROM pagesecurity';
+		$ErrMsg = _('Could not get the page security details from the database because');
+		$result=DB_query($sql, $db);
+
+		while ($myrow=DB_fetch_array($result)) {
+			$_SESSION['PageSecurity'][$myrow['script']]=$myrow['security'];
+		}
+	} else {
+		header('Location: UpgradeDatabase.php'); //divert to the db upgrade if the table doesn't exist
 	}
 
 	if (!isset($_SESSION['DBUpdateNumber'])){ // the config record for DBUpdateNumber is not yet added
@@ -75,7 +79,7 @@ if(isset($ForceConfigReload) and $ForceConfigReload==TRUE OR !isset($_SESSION['C
 	} else {
 		$_SESSION['CompanyRecord'] = DB_fetch_array($ReadCoyResult);
 	}
-	
+
 	/*Now read in smtp email settings - not needed in a properly set up server environment - but helps for those who can't control their server .. I think! */
 	$sql='SELECT id,
 				host,

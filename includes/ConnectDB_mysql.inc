@@ -57,7 +57,7 @@ function DB_query ($SQL,
 
 	global $debug;
 	global $PathPrefix;
-	
+
 	$result=mysql_query($SQL,$Conn);
 	$_SESSION['LastInsertId'] = mysql_insert_id($Conn);
 
@@ -216,6 +216,16 @@ function DB_IgnoreForeignKeys($Conn){
 }
 function DB_ReinstateForeignKeys($Conn){
 	msql_query('SET FOREIGN_KEY_CHECKS=1',$Conn);
+}
+
+function DB_table_exists($Tablename, $Conn) {
+	$ShowSQL="SHOW TABLES WHERE Tables_in_".$_SESSION['DatabaseName']."='".$TableName."'";
+	$result=DB_Query($ShowSQL, $Conn);
+	if (DB_num_rows($result)>0) {
+		return True;
+	} else {
+		return False;
+	}
 }
 
 ?>

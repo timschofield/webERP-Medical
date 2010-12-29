@@ -155,7 +155,7 @@ if (count($_SESSION['PO']->LineItems)>0 and !isset($_POST['ProcessGoodsReceived'
 		echo '<td>' . $LnItm->StockID . '</td>';
 		echo '<td>' . $LnItm->ItemDescription . '</td>';
 		echo '<td class=number>' . $DisplayQtyOrd . '</td>';
-		echo '<td>' . $LnItm->uom . '</td>';
+		echo '<td>' . $LnItm->SuppUOM . '</td>';
 		echo '<td class=number>' . $DisplayQtyRec . '</td>';
 		echo '<td class=number>';
 
@@ -582,7 +582,7 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 																						transdate,
 																						periodno,
 																						inputdate,
-																						fixedassettranstype
+																						fixedassettranstype,
 																						amount)
 																	VALUES ('" . $OrderLine->AssetID . "',
 																					25,

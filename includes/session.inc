@@ -13,7 +13,7 @@ if (!file_exists($PathPrefix . 'config.php')){
 	header('Location:' . $rootpath . '/install/index.php');
 }
 include($PathPrefix . 'config.php');
-
+$DBVersion=54;
 if (isset($SessionSavePath)){
 	session_save_path($SessionSavePath);
 }
@@ -115,9 +115,9 @@ if (!isset($AllowAnyone)){ /* only do security checks if AllowAnyone is not true
 /*User is logged in so get configuration parameters  - save in session*/
 include($PathPrefix . 'includes/GetConfig.php');
 
-if (isset($_SESSION[basename($_SERVER['SCRIPT_NAME'])])) {
+if (isset($_SESSION['PageSecurity'][basename($_SERVER['SCRIPT_NAME'])])) {
 	/*The page security variable is now retrieved from the database in GetConfig.php and stored in the $SESSION['PageSecurity'] array
-	 * the key for the array is the script name - the script name is retrieved from the basename ($_SERVER['SCRIPT_NAME']) 
+	 * the key for the array is the script name - the script name is retrieved from the basename ($_SERVER['SCRIPT_NAME'])
 	 */
 	$PageSecurity = $_SESSION['PageSecurity'][basename($_SERVER['SCRIPT_NAME'])];
 }

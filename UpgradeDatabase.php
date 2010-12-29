@@ -1,112 +1,74 @@
 <?php
-/* $Id:  $*/
+
 $PageSecurity = 15;
+
 include('includes/session.inc');
-$title = _('Upgrade webERP Database');
+
+$title = _('Database Upgrade');
+
+//ob_start(); /*what is this for? */
+
 include('includes/header.inc');
 
-
-if (empty($_POST['DoUpgrade'])){
-	
-	prnMsg(_('This script will run perform any modifications to the database since v 3.11 required to allow the additional functionality in later scripts'),'info');
-
-	echo "<p><form method='post' action='" . $_SERVER['PHP_SELF'] . '?' . SID . "'>";
-	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<div class="centre"><input type="submit" name="DoUpgrade" VALUE="' . _('Perform Database Upgrade') . '"></div>';
-	echo '</form>';
+function executeSQL($sql, $db, $TrapErrors=False) {
+	global $SQLFile;
+/* Run an sql statement and return an error code */
+	if (!isset($SQLFile)) {
+		$result = DB_query($sql, $db, '', '', false, $TrapErrors);
+		return DB_error_no($db);
+	} else {
+		fwrite($SQLFile, $sql.";\n");
+	}
 }
 
-if ($_POST['DoUpgrade'] == _('Perform Database Upgrade')){
-
-	echo '<br>';
-	prnMsg(_('If there are any failures then please check with your system administrator').
-		'. '._('Please read all notes carefully to ensure they are expected'),'info');
-
-	if($_SESSION['DBUpdateNumber']< 1) { /* DBUpdateNumber set to 1 when upgrade3.11.1-4.00.sql is run */
-		if ($dbType=='mysql' OR $dbType =='mysqli'){
-			$SQLScripts[0] = './sql/mysql/upgrade3.11.1-4.00.sql';
-		}
+function updateDBNo($NewNumber, $db) {
+	global $SQLFile;
+	if (!isset($SQLFile)) {
+		$sql="UPDATE config SET confvalue='".$NewNumber."' WHERE confname='DBUpdateNumber'";
+		executeSQL($sql, $db);
+		$_SESSION['DBUpdateNumber']=$NewNumber;
 	}
-	$result = DB_IgnoreForeignKeys($db);
-	
-	foreach ($SQLScripts AS $SQLScriptFile) {
-		
-		$SQLEntries = file($SQLScriptFile);
-		$ScriptFileEntries = sizeof($SQLEntries);
-		$ErrMsg = _('The script to upgrade the database failed because');
-		$sql ='';
-		$InAFunction = false;
-		echo '<br><table>
-					<tr><th colspan=2>' . _('Applying') . ' ' . $SQLScriptFile . '</th></tr>';
+}
 
-		for ($i=0; $i<=$ScriptFileEntries; $i++) {
-	
-			$SQLEntries[$i] = trim($SQLEntries[$i]);
+if ($dbType='mysql' or $dbType='mysqli') {
+	include('includes/UpgradeDB_mysql.inc');
+} else {
+	prnMsg( _('Your database type is not covered by this upgrade script. Please see your system administrator'), 'error');
+}
 
-			if (substr($SQLEntries[$i], 0, 2) != '--'
-				AND substr($SQLEntries[$i], 0, 3) != 'USE'
-				AND strstr($SQLEntries[$i],'/*')==FALSE
-				AND strlen($SQLEntries[$i])>1){
-	
-				$sql .= ' ' . $SQLEntries[$i];
-	
-				//check if this line kicks off a function definition - pg chokes otherwise
-				if (substr($SQLEntries[$i],0,15) == 'CREATE FUNCTION'){
-					$InAFunction = true;
-				}
-				//check if this line completes a function definition - pg chokes otherwise
-				if (substr($SQLEntries[$i],0,8) == 'LANGUAGE'){
-					$InAFunction = false;
-				}
-				if (strpos($SQLEntries[$i],';')>0 AND ! $InAFunction){
-					$sql = substr($sql,0,strlen($sql)-1);
-					$result = DB_query($sql, $db, $ErrMsg, $DBMsg, false, false);
-					switch (DB_error_no($db)) {
-						case 0:
-							echo '<tr><td>' . $sql . '</td><td bgcolor="green">'._('Success').'</td></tr>';
-							break;
-						case 1050:
-							echo '<tr><td>' . $sql . '</td><td bgcolor="yellow">'._('Note').' - '.
-								_('Table has already been created').'</td></tr>';
-							break;
-						case 1060:
-							echo '<tr><td>' . $sql . '</td><td bgcolor="yellow">'._('Note').' - '.
-								_('Column has already been created').'</td></tr>';
-							break;
-						case 1061:
-							echo '<tr><td>' . $sql . '</td><td bgcolor="yellow">'._('Note').' - '.
-								_('Index already exists').'</td></tr>';
-							break;
-						case 1062:
-							echo '<tr><td>' . $sql . '</td><td bgcolor="yellow">'._('Note').' - '.
-								_('Entry has already been done').'</td></tr>';
-							break;
-						case 1068:
-							echo '<tr><td>' . $sql . '</td><td bgcolor="yellow">'._('Note').' - '.
-								_('Primary key already exists').'</td></tr>';
-							break;
-						case 1091:
-							echo '<tr><td>' . $sql . '</td><td bgcolor="yellow">'._('Note').' - '.
-								_('Index already dropped previously').'</td></tr>';
-							break;
-						default:
-							echo '<tr><td>' . $sql . '</td><td bgcolor="red">'._('Failure').' - '.
-								_('Error number').' - '.DB_error_no($db) .'</td></tr>';
-							break;
-					}
-					unset($sql);
-				}
-			} //end if its a valid sql line not a comment
-		} //end of for loop around the lines of the sql script
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>';
+
+if (!isset($_POST['continue']) and !isset($_POST['CreateSQLFile'])) {
+	echo '<form method="post" id="AccountGroups" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '">';
+	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
+
+	echo '<div class="page_help_text">' . _('You have database updates that are required.').'<br />'.
+		_('Please ensure that you have taken a backup of your current database before continuing.'). '</div><br />';
+
+	echo '<div class="centre"><input type="submit" name="continue" value="'.('Continue With Updates').'" />
+		<input type="submit" name="CreateSQLFile" value="'.('Create an SQL file to apply manually').'" /></div>';
+	echo '</form>';
+} else {
+	$StartingUpdate=$_SESSION['DBUpdateNumber']+1;
+	$EndingUpdate=$DBVersion;
+	if (isset($_POST['CreateSQLFile'])) {
+		$SQLFile=fopen("./companies/" . $_SESSION['DatabaseName'] . "/reportwriter/UpgradeDB" . $StartingUpdate ."-".$EndingUpdate.".sql","w");
+	}
+	echo '<table>';
+	for($UpdateNumber=$StartingUpdate; $UpdateNumber<=$EndingUpdate; $UpdateNumber++) {
+		echo '<tr><td>'.$UpdateNumber.'</td>';
+		$sql="SET FOREIGN_KEY_CHECKS=0";
+		$result=DB_Query($sql, $db);
+		include('sql/mysql/updates/'.$UpdateNumber.'.php');
+		$sql="SET FOREIGN_KEY_CHECKS=1";
+		$result=DB_Query($sql, $db);
+		echo '</tr>';
+	}
 	echo '</table>';
-	} //end of loop around SQLScripts to apply
-	$result =DB_ReinstateForeignKeys($db);
-	/*Now get the modified DBUpgradeNumber */
-	$result = DB_query('SELECT confvalue FROM config WHERE confname="DBUpdateNumber"',$db);
-	$myrow = DB_fetch_array($result);
-	$_SESSION['DBUpdateNumber'] = $myrow['confvalue'];
-
-} /*Dont do upgrade */
+	if (isset($SQLFile)) {
+//		header('Location: UpgradeDatabase.php'); //divert to the db upgrade if the table doesn't exist
+	}
+}
 
 include('includes/footer.inc');
 ?>
