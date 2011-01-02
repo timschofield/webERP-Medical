@@ -35,9 +35,9 @@ if(isset($ForceConfigReload) and $ForceConfigReload==TRUE OR !isset($_SESSION['C
 		header('Location: UpgradeDatabase.php'); //divert to the db upgrade if the table doesn't exist
 	}
 
-	if (!isset($_SESSION['DBUpdateNumber'])){ // the config record for DBUpdateNumber is not yet added
+	if (!isset($_SESSION['DBUpdateNumber'])){ // the config record for VersionNumber is not yet added
 		$_SESSION['DBUpdateNumber']=-1;
-		header('Location: UpgradeDatabase.php'); //divert to the db upgrade if the DBUpdateNumber is not in the config table
+		header('Location: UpgradeDatabase.php'); //divert to the db upgrade if the VersionNumber is not in the config table
 	}
 
 /* Also reads all the company data set up in the company record and returns an array */
