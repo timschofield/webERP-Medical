@@ -1,10 +1,10 @@
 <?php
-/* $Id: SelectOrderItems.php 3453 2010-05-06 06:39:52Z lindsayh $*/
+/* $Id:  $*/
 
 include('includes/DefineCartClass.php');
 //$PageSecurity = 1;
 /* Session started in session.inc for password checking and authorisation level check
-config.php is in turn included in session.inc*/
+config.php is in turn included in session.inc $PageSecurity now comes from session.inc (and gets read in by GetConfig.php*/
 
 include('includes/session.inc');
 
