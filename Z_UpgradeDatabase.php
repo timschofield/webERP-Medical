@@ -64,11 +64,11 @@ if (!isset($_POST['continue']) and !isset($_POST['CreateSQLFile'])) {
 		$result=DB_Query($sql, $db);
 		echo '</tr>';
 	}
-	echo '</table>';
-	if (isset($SQLFile)) {
-//		header('Location: UpgradeDatabase.php'); //divert to the db upgrade if the table doesn't exist
-	}
 }
+if (isset($SQLFile)) {
+//		header('Location: UpgradeDatabase.php'); //divert to the db upgrade if the table doesn't exist
+}
+
 
 include('includes/footer.inc');
 ?>
