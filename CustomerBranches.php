@@ -179,7 +179,7 @@ if (isset($_POST['submit'])) {
 	} else if ($InputError !=1) {
 
 	/*Selected branch is null cos no item selected on first time round so must be adding a	record must be submitting new entries in the new Customer Branches form */
-
+		$SelectedBranch=$_POST['BranchCode'];
         $sql = "INSERT INTO custbranch (branchcode,
 						debtorno,
 						brname,
@@ -250,6 +250,13 @@ if (isset($_POST['submit'])) {
 	$ErrMsg = _('The branch record could not be inserted or updated because');
 	if ($InputError==0) {
 		$result = DB_query($sql,$db, $ErrMsg);
+		if (isset($_POST['CashSalesBranch'])) {
+			$LocationsSQL="UPDATE locations
+					SET cashsalecustomer='".$DebtorNo."',
+						cashsalebranch='".$SelectedBranch."'
+					WHERE loccode='".$_POST['DefaultLocation']."'";
+			$LocationsResult=DB_query($LocationsSQL, $db);
+		}
 	}
 
 	if (DB_error_no($db) ==0 and $InputError==0) {
@@ -700,6 +707,30 @@ if (!isset($_GET['delete'])) {
 	} //end while loop
 
 	echo '</select></td></tr>';
+
+	if (isset($SelectedBranch)) {
+		$sql="SELECT count(loccode)
+			FROM locations
+			WHERE loccode='".$_POST['DefaultLocation']."'
+				AND cashsalecustomer='".$DebtorNo."'
+				AND cashsalebranch='".$SelectedBranch."'";
+		$result=DB_query($sql, $db);
+		$myrow=DB_fetch_row($result);
+		if ($myrow[0]>0) {
+			$IsCashSaleBranch=True;
+		} else {
+			$IsCashSaleBranch=False;
+		}
+	} else {
+		$IsCashSaleBranch=False;
+	}
+
+	echo '<tr><td>'. _('Use as default for cash sales from this location').'</td>';
+	if ($IsCashSaleBranch) {
+		echo '<td><input type="checkbox" checked="True" name="CashSalesBranch" /></td></tr>';
+	} else {
+		echo '<td><input type="checkbox" name="CashSalesBranch" /></td></tr>';
+	}
 	echo '<tr><td>'._('Phone Number').':</td>';
 	if (!isset($_POST['PhoneNo'])) {$_POST['PhoneNo']='';}
 	echo '<td><input tabindex=16 type="Text" name="PhoneNo" size=22 maxlength=20 value="'. $_POST['PhoneNo'].'"></td></tr>';

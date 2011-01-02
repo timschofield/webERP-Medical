@@ -30,30 +30,6 @@ if (isset($_POST['submit'])) {
 		$InputError = 1;
 		prnMsg( _('The location code may not be empty'), 'error');
 	}
-	if ($_POST['CashSaleCustomer']!=''){
-		if (!strstr($_POST['CashSaleCustomer'],'-')){
-			$InputError =1;
-			prnMsg(_('The cash sale customers '.$_POST['CashSaleCustomer'].' account must be a valid customer account separated by " - " then the branch code of the customer entered'), 'error');
-		} else {
-			// $Branch = substr($_POST['CashSaleCustomer'],strpos($_POST['CashSaleCustomer'],' - ')+3);
-			// $DebtorNo = substr($_POST['CashSaleCustomer'],0,strpos($_POST['CashSaleCustomer'],' - '));
-			$arr = explode('-',$_POST['CashSaleCustomer']);
-			$DebtorNo = $arr[0];
-			$Branch = $arr[1];
-
-			$sql = "SELECT * FROM custbranch
-					WHERE debtorno='" . $DebtorNo . "'
-					AND branchcode='" . $Branch . "'";
-
-			// echo $sql;
-			$result = DB_query($sql,$db);
-			if (DB_num_rows($result)==0){
-				$InputError = 1;
-				prnMsg(_('The cash sale customer for this location must be a valid customer code separated by " - " then a valid branch code for this customer'),'error');
-			}
-		}
-	} //end of checking the customer - branch code entered
-
 
 	if (isset($SelectedLocation) AND $InputError !=1) {
 
@@ -78,7 +54,6 @@ if (isset($_POST['submit'])) {
 				email='" . $_POST['Email'] . "',
 				contact='" . $_POST['Contact'] . "',
 				taxprovinceid = '" . $_POST['TaxProvince'] . "',
-				cashsalecustomer ='" . $_POST['CashSaleCustomer'] . "',
 				managed = '" . $_POST['Managed'] . "'
 			WHERE loccode = '" . $SelectedLocation . "'";
 
@@ -101,7 +76,6 @@ if (isset($_POST['submit'])) {
 		unset($_POST['Email']);
 		unset($_POST['TaxProvince']);
 		unset($_POST['Managed']);
-		unset($_POST['CashSaleCustomer']);
 		unset($SelectedLocation);
 		unset($_POST['Contact']);
 
@@ -131,7 +105,6 @@ if (isset($_POST['submit'])) {
 					email,
 					contact,
 					taxprovinceid,
-					cashsalecustomer,
 					managed
 					)
 			VALUES (
@@ -148,7 +121,6 @@ if (isset($_POST['submit'])) {
 				'" . $_POST['Email'] . "',
 				'" . $_POST['Contact'] . "',
 				'" . $_POST['TaxProvince'] . "',
-				'" . $_POST['CashSaleCustomer'] . "',
 				'" . $_POST['Managed'] . "'
 			)";
 
@@ -540,9 +512,6 @@ if (!isset($_GET['delete'])) {
 	}
 
 	echo '</select></td></tr>';
-	echo '<tr><td>' . _('Default Counter Sales Customer') . ':' . '</td>';
-	echo '<td><input type="Text" name="CashSaleCustomer" value="' . $_POST['CashSaleCustomer'] .
-		'" size=25 maxlength=23></td></tr>';
 	/*
 	This functionality is not written yet ...
 	<tr><td><?php echo _('Enable Warehouse Management') . ':'; ?></td>

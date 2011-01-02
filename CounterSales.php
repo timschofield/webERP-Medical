@@ -66,6 +66,7 @@ if (!isset($_SESSION['Items'.$identifier])){
 	$_SESSION['PrintedPackingSlip'] = 0; /*Of course 'cos the order ain't even started !!*/
 	/*Get the default customer-branch combo from the user's default location record */
 	$sql = "SELECT cashsalecustomer,
+								cashsalebranch,
 								locationname,
 								taxprovinceid
 						 FROM locations
@@ -84,7 +85,8 @@ if (!isset($_SESSION['Items'.$identifier])){
 			exit;
 		}
 
-		$CashSaleCustomer = explode('-',$myrow['cashsalecustomer']);
+		$CashSaleCustomer[0]=$myrow['cashsalecustomer'];
+		$CashSaleCustomer[1]=$myrow['cashsalebranch'];
 
 		$_SESSION['Items'.$identifier]->Branch  = $CashSaleCustomer[1];
 		$_SESSION['Items'.$identifier]->DebtorNo = $CashSaleCustomer[0];
