@@ -311,11 +311,7 @@ function CryptPass( $Password ) {
 			return $Password;
 		}
  }
-if (isset($_SESSION['VersionNumber'])) {
-	$Version = $_SESSION['VersionNumber'];
-} else {
-	$Version='';
-}
+
 
 if (sizeof($_POST) > 0) {
 	if (!isset($_POST['FormID']) or ($_POST['FormID'] != $_SESSION['FormID'])) {

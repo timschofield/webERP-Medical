@@ -69,6 +69,5 @@ if (isset($SQLFile)) {
 //		header('Location: UpgradeDatabase.php'); //divert to the db upgrade if the table doesn't exist
 }
 
-
 include('includes/footer.inc');
 ?>
