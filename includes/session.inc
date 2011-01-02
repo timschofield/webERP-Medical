@@ -122,8 +122,8 @@ if (isset($_SESSION['PageSecurity'][basename($_SERVER['SCRIPT_NAME'])])) {
 	$PageSecurity = $_SESSION['PageSecurity'][basename($_SERVER['SCRIPT_NAME'])];
 }
 /*If the Code $Version - held in ConnectDB.inc is > than the Database VersionNumber held in config table then do upgrades */
-if (($Version>$_SESSION['VersionNumber']) and (basename($_SERVER['SCRIPT_NAME'])!='UpgradeDatabase.php')) {
-	header('Location: UpgradeDatabase.php');
+if (($DBVersion>$_SESSION['DBUpdateNumber']) and (basename($_SERVER['SCRIPT_NAME'])!='Z_UpgradeDatabase.php')) {
+	header('Location: Z_UpgradeDatabase.php');
 }
 
 if(isset($_SESSION['DB_Maintenance'])){
