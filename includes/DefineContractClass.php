@@ -1,5 +1,5 @@
 <?php
-/* $Id: $*/
+/* $Id:  $*/
 /* definition of the Contract class */
 
 Class Contract {
@@ -60,7 +60,10 @@ Class Contract {
 
 	function Remove_ContractComponent($ContractComponent_ID){
 		global $db;
-		$result = DB_query("DELETE FROM contractbom WHERE contractref='" . $this->ContractRef . "' AND stockid='" . $this->ContractBOM[$ContractComponent_ID]->StockID . "'",$db);
+		$result = DB_query("DELETE FROM contractbom
+											WHERE contractref='" . $this->ContractRef . "'
+											AND stockid='" . $this->ContractBOM[$ContractComponent_ID]->StockID . "'",
+											$db);
 		unset($this->ContractBOM[$ContractComponent_ID]);
 	}
 
@@ -93,8 +96,13 @@ Class ContractComponent {
 	var $ItemCost;
 	var $UOM;
 
-	function ContractComponent ($ComponentID, $StockID, $ItemDescription, $WorkCentre, $Quantity, $ItemCost, $UOM){
-
+	function ContractComponent ($ComponentID,
+															$StockID,
+															$ItemDescription,
+															$WorkCentre,
+															$Quantity,
+															$ItemCost,
+															$UOM){
 /* Constructor function to add a new Contract Component object with passed params */
 		$this->ComponentID = $ComponentID;
 		$this->StockID = $StockID;
@@ -113,8 +121,10 @@ Class ContractRequirement {
 	var $Quantity;
 	var $CostPerUnit;
 
-	function ContractRequirement ($Requirement, $Quantity, $CostPerUnit,$ContractReqID=0){
-
+	function ContractRequirement ($Requirement,
+																$Quantity,
+																$CostPerUnit,
+																$ContractReqID=0){
 /* Constructor function to add a new Contract Component object with passed params */
 		$this->Requirement = $Requirement;
 		$this->Quantity = $Quantity;
@@ -122,5 +132,4 @@ Class ContractRequirement {
 		$this->ContractReqID = $ContractReqID;
 	}
 }
-
 ?>

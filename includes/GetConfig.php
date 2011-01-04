@@ -20,7 +20,6 @@ if(isset($ForceConfigReload) and $ForceConfigReload==TRUE OR !isset($_SESSION['C
 
 	DB_free_result($ConfigResult); // no longer needed
 	/*Maybe we should check config directories exist and try to create if not */
-
 	/*Load the pagesecurity settings from the database */
 
 	if (DB_table_exists('pagesecurity', $db)) {
@@ -34,7 +33,6 @@ if(isset($ForceConfigReload) and $ForceConfigReload==TRUE OR !isset($_SESSION['C
 	} else {
 		header('Location: Z_UpgradeDatabase.php'); //divert to the db upgrade if the table doesn't exist
 	}
-
 
 	if (!isset($_SESSION['DBUpdateNumber'])){ // the config record for VersionNumber is not yet added
 		$_SESSION['DBUpdateNumber']=-1;
