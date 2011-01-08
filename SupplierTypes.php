@@ -166,7 +166,7 @@ if (!isset($SelectedType)){
  * the same page again and allow update/input or deletion of the records
  */
 
-	$sql = 'SELECT typeid, typename FROM suppliertype';
+	$sql = "SELECT typeid, typename FROM suppliertype";
 	$result = DB_query($sql,$db);
 
 	echo '<table class=selection>';
