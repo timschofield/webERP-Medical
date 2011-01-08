@@ -5,17 +5,17 @@
 $AllowAnyone = true;
 
 /* Get this puppy to run from cron (cd weberp && php -f RecurringSalesOrdersProcess.php "weberpdemo") or direct URL (RecurringSalesOrdersProcess.php?Database=weberpdemo) */
-if (isset($_GET['Database'])) { 
-	$_SESSION['DatabaseName'] = $_GET['Database']; 
-	$DatabaseName = $_GET['Database']; 
-	$_POST['CompanyNameField'] = $_GET['Database']; 
+if (isset($_GET['Database'])) {
+	$_SESSION['DatabaseName'] = $_GET['Database'];
+	$DatabaseName = $_GET['Database'];
+	$_POST['CompanyNameField'] = $_GET['Database'];
 }
 
 if (isset($argc)) {
-	if (isset($argv[1])) { 
-		$_SESSION['DatabaseName'] = $argv[1]; 
-		$DatabaseName = $argv[1]; 
-		$_POST['CompanyNameField'] = $argv[1]; 
+	if (isset($argv[1])) {
+		$_SESSION['DatabaseName'] = $argv[1];
+		$DatabaseName = $argv[1];
+		$_POST['CompanyNameField'] = $argv[1];
 	}
 }
 include('includes/session.inc');
@@ -27,7 +27,7 @@ include('includes/SQL_CommonFunctions.inc');
 include('includes/GetSalesTransGLCodes.inc');
 include('includes/htmlMimeMail.php');
 
-$sql = 'SELECT recurringsalesorders.recurrorderno,
+$sql = "SELECT recurringsalesorders.recurrorderno,
 		recurringsalesorders.debtorno,
   		recurringsalesorders.branchcode,
   		recurringsalesorders.customerref,
@@ -70,7 +70,7 @@ $sql = 'SELECT recurringsalesorders.recurrorderno,
 	AND recurringsalesorders.fromstkloc=locations.loccode
 	AND recurringsalesorders.ordertype=salestypes.typeabbrev
 	AND (TO_DAYS(NOW()) - TO_DAYS(recurringsalesorders.lastrecurrence)) > (365/recurringsalesorders.frequency)
-	AND DATE_ADD(recurringsalesorders.lastrecurrence, ' . INTERVAL ('365/recurringsalesorders.frequency', 'DAY') . ') <= recurringsalesorders.stopdate';
+	AND DATE_ADD(recurringsalesorders.lastrecurrence, " . INTERVAL ('365/recurringsalesorders.frequency', 'DAY') . ") <= recurringsalesorders.stopdate";
 
 $RecurrOrdersDueResult = DB_query($sql,$db,_('There was a problem retrieving the recurring sales order templates. The database reported:'));
 
