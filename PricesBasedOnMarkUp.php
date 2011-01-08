@@ -16,7 +16,7 @@ echo '<br><div class="page_help_text">' . _('This page adds new prices or update
 echo "<form method='POST' action='" . $_SERVER['PHP_SELF'] . '?' . SID . "'>";
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-$SQL = 'SELECT sales_type, typeabbrev FROM salestypes';
+$SQL = "SELECT sales_type, typeabbrev FROM salestypes";
 
 $PricesResult = DB_query($SQL,$db);
 
@@ -39,7 +39,7 @@ while ($PriceLists=DB_fetch_array($PricesResult)){
 
 echo '</select></td></tr>';
 
-$SQL = 'SELECT currency, currabrev FROM currencies';
+$SQL = "SELECT currency, currabrev FROM currencies";
 
 $result = DB_query($SQL,$db);
 
@@ -106,7 +106,7 @@ if (isset($_POST['CostType']) and $_POST['CostType']=='OtherPriceList'){
 echo '<tr><td>' . _('Stock Category From') . ':</td>
                 <td><select name="StkCatFrom">';
 
-$sql = 'SELECT categoryid, categorydescription FROM stockcategory';
+$sql = "SELECT categoryid, categorydescription FROM stockcategory";
 
 $ErrMsg = _('The stock categories could not be retrieved because');
 $DbgMsg = _('The SQL used to retrieve stock categories and failed was');
