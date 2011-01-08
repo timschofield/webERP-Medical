@@ -139,7 +139,7 @@ if(isset($_POST['Submit']) AND $InputError==False){
 	echo '<tr><th colspan=4><input type=hidden name="Trf_ID" VALUE="' . $Trf_ID . '"><font size=3 color=blue>'.
 			_('Inventory Location Transfer Shipment Reference').' # '. $Trf_ID. '</font></th></tr>';
 
-	$sql = 'SELECT loccode, locationname FROM locations';
+	$sql = "SELECT loccode, locationname FROM locations";
 	$resultStkLocs = DB_query($sql,$db);
 	echo '<tr><td>'._('From Stock Location').':</td><td><select name="FromStockLocation">';
 	while ($myrow=DB_fetch_array($resultStkLocs)){
