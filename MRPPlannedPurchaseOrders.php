@@ -34,7 +34,7 @@ if (isset($_POST['PrintPDF'])) {
 			   $reportdate = _(' Through  ') . Format_Date($_POST['cutoffdate']);
 	}
 	if ($_POST['Consolidation'] == 'None') {
-		$sql = 'SELECT mrpplannedorders.*,
+		$sql = "SELECT mrpplannedorders.*,
 					   stockmaster.stockid,
 					   stockmaster.description,
 					   stockmaster.mbflag,
@@ -43,11 +43,11 @@ if (isset($_POST['PrintPDF'])) {
 					   (stockmaster.materialcost + stockmaster.labourcost +
 						stockmaster.overheadcost ) as computedcost
 				FROM mrpplannedorders, stockmaster
-				WHERE mrpplannedorders.part = stockmaster.stockid '  . "$wheredate" .
-				  ' AND stockmaster.mbflag IN ("B","P")
-				ORDER BY mrpplannedorders.part,mrpplannedorders.duedate';
+				WHERE mrpplannedorders.part = stockmaster.stockid "  . $wheredate .
+				  " AND stockmaster.mbflag IN ('B','P')
+				ORDER BY mrpplannedorders.part,mrpplannedorders.duedate";
 	} elseif ($_POST['Consolidation'] == 'Weekly') {
-		$sql = 'SELECT mrpplannedorders.part,
+		$sql = "SELECT mrpplannedorders.part,
 					   SUM(mrpplannedorders.supplyquantity) as supplyquantity,
 					   TRUNCATE(((TO_DAYS(duedate) - TO_DAYS(CURRENT_DATE)) / 7),0) AS weekindex,
 					   MIN(mrpplannedorders.duedate) as duedate,
@@ -61,8 +61,8 @@ if (isset($_POST['PrintPDF'])) {
 					   (stockmaster.materialcost + stockmaster.labourcost +
 						stockmaster.overheadcost ) as computedcost
 				FROM mrpplannedorders, stockmaster
-				WHERE mrpplannedorders.part = stockmaster.stockid '  . "$wheredate" .
-				  ' AND stockmaster.mbflag IN ("B","P")
+				WHERE mrpplannedorders.part = stockmaster.stockid "  . $wheredate .
+				  " AND stockmaster.mbflag IN ('B','P')
 				GROUP BY mrpplannedorders.part,
 						 weekindex,
 						 stockmaster.stockid,
@@ -74,9 +74,9 @@ if (isset($_POST['PrintPDF'])) {
 					   stockmaster.labourcost,
 					   stockmaster.overheadcost,
 					   computedcost
-				ORDER BY mrpplannedorders.part,weekindex';
+				ORDER BY mrpplannedorders.part,weekindex";
 	} else {  // This else consolidates by month
-		$sql = 'SELECT mrpplannedorders.part,
+		$sql = "SELECT mrpplannedorders.part,
 					   SUM(mrpplannedorders.supplyquantity) as supplyquantity,
 					   EXTRACT(YEAR_MONTH from duedate) AS yearmonth,
 					   MIN(mrpplannedorders.duedate) as duedate,
@@ -90,8 +90,8 @@ if (isset($_POST['PrintPDF'])) {
 					   (stockmaster.materialcost + stockmaster.labourcost +
 						stockmaster.overheadcost ) as computedcost
 				FROM mrpplannedorders, stockmaster
-				WHERE mrpplannedorders.part = stockmaster.stockid  '  . "$wheredate" .
-				  ' AND stockmaster.mbflag IN ("B","P")
+				WHERE mrpplannedorders.part = stockmaster.stockid  "  . $wheredate .
+				  " AND stockmaster.mbflag IN ('B','P')
 				GROUP BY mrpplannedorders.part,
 						 yearmonth,
 						 stockmaster.stockid,
@@ -103,7 +103,7 @@ if (isset($_POST['PrintPDF'])) {
 					   stockmaster.labourcost,
 					   stockmaster.overheadcost,
 					   computedcost
-				ORDER BY mrpplannedorders.part,yearmonth ';
+				ORDER BY mrpplannedorders.part,yearmonth ";
 	};
 	$result = DB_query($sql,$db,'','',false,true);
 
@@ -337,28 +337,28 @@ function PrintHeader(&$pdf,&$YPos,&$PageNumber,$Page_Height,$Top_Margin,$Left_Ma
 function GetPartInfo(&$db,$part) {
 	// Get last purchase order date and supplier for part, and also preferred supplier
 	// Printed when there is a part break
-	$sql = 'SELECT orddate as maxdate,
+	$sql = "SELECT orddate as maxdate,
 				   purchorders.orderno
 			FROM purchorders,
 				 purchorderdetails
 			WHERE purchorders.orderno = purchorderdetails.orderno
-			  AND purchorderdetails.itemcode = "'.$part .'"
-			  ORDER BY orddate DESC LIMIT 1';
+			  AND purchorderdetails.itemcode = '".$part ."'
+			  ORDER BY orddate DESC LIMIT 1";
 	$result = DB_query($sql,$db);
 	if (DB_num_rows($result)>0) {
 		$myrow = DB_fetch_array($result,$db);
 		$partinfo[] = ConvertSQLDate($myrow['maxdate']);
 		$orderno = $myrow['orderno'];
-		$sql = 'SELECT supplierno
+		$sql = "SELECT supplierno
 			FROM purchorders
-			WHERE purchorders.orderno = "'.$orderno . '"';
+			WHERE purchorders.orderno = '".$orderno . "'";
 		$result = DB_query($sql,$db);
 		$myrow = DB_fetch_array($result,$db);
 		$partinfo[] = $myrow['supplierno'];
-		$sql = 'SELECT supplierno
+		$sql = "SELECT supplierno
 			FROM purchdata
-			WHERE stockid = "' . $part . '"
-				AND preferred="1"';
+			WHERE stockid = '" . $part . "'
+				AND preferred='1'";
 		$result = DB_query($sql,$db);
 		$myrow = DB_fetch_array($result,$db);
 		$partinfo[] = $myrow['supplierno'];
