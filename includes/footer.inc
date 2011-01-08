@@ -28,7 +28,7 @@
 	echo '<tr><td class="footer">webERP v' . $_SESSION['VersionNumber'] . ' ' . _('Copyright') . ' &copy; weberp.org - '.date('Y').'</td></tr>';
 
 	if(http_file_exists('http://sflogo.sourceforge.net/sflogo.php')) {
-//		echo '<tr><td class="footer"><a href="https://sourceforge.net/projects/web-erp"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=70949&type=12" width="120" height="30" border="0" alt="Get webERP web-based ERP Accounting at SourceForge.net. Fast, secure and Free Open Source software downloads" /></a></td></tr>';
+		echo '<tr><td class="footer"><a href="https://sourceforge.net/projects/weberp"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=391629&amp;type=12" width="120" height="30" border="0" alt="Get webERP web-based ERP Accounting at SourceForge.net. Fast, secure and Free Open Source software downloads" /></a></td></tr>';
 	}
 
 	echo '</table>';

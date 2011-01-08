@@ -16,7 +16,7 @@ echo '<p Class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/i
 echo "<form action='" . $_SERVER['PHP_SELF'] . "?". SID . "' method=post>";
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-$sql = 'SELECT categoryid, categorydescription FROM stockcategory';
+$sql = "SELECT categoryid, categorydescription FROM stockcategory";
 $resultStkLocs = DB_query($sql, $db);
 
 echo '<table class=selection><tr>';
@@ -36,7 +36,7 @@ while ($myrow=DB_fetch_array($resultStkLocs)){
 }
 echo '</select></td>';
 
-$sql = 'SELECT loccode, locationname FROM locations';
+$sql = "SELECT loccode, locationname FROM locations";
 $resultStkLocs = DB_query($sql, $db);
 
 echo '<td>' . _('For Stock Location') . ":</td>
