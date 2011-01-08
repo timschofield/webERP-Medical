@@ -349,7 +349,7 @@ echo '</td></tr>';
 echo '<tr><td><font size=3><b>' . _('OR') . '</b></font></td><td>' . _('Choose a Type') . ':</td><td>';
 if (isset($_POST['CustType'])) {
 	// Show Customer Type drop down list
-	$result2 = DB_query('SELECT typeid, typename FROM debtortype ', $db);
+	$result2 = DB_query("SELECT typeid, typename FROM debtortype", $db);
 	// Error if no customer types setup
 	if (DB_num_rows($result2) == 0) {
 		$DataError = 1;
@@ -371,7 +371,7 @@ if (isset($_POST['CustType'])) {
 	}
 } else {
 	// No option selected yet, so show Customer Type drop down list
-	$result2 = DB_query('SELECT typeid, typename FROM debtortype ', $db);
+	$result2 = DB_query("SELECT typeid, typename FROM debtortype", $db);
 	// Error if no customer types setup
 	if (DB_num_rows($result2) == 0) {
 		$DataError = 1;
@@ -391,7 +391,7 @@ if (isset($_POST['CustType'])) {
 
 /* Option to select a sales area */
 echo '<td><font size=3><b>' . _('OR') . '</b></font></td><td>' . _('Choose an Area') . ':</td><td>';
-$result2 = DB_query('SELECT areacode, areadescription FROM areas ', $db);
+$result2 = DB_query("SELECT areacode, areadescription FROM areas", $db);
 // Error if no sales areas setup
 if (DB_num_rows($result2) == 0) {
 	$DataError = 1;
@@ -594,7 +594,7 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 		}
 		// Customer Contacts
 		echo '<tr><td colspan=2>';
-		$sql = 'SELECT * FROM custcontacts where debtorno="' . $_SESSION['CustomerID'] . '" ORDER BY contid';
+		$sql = "SELECT * FROM custcontacts where debtorno='" . $_SESSION['CustomerID'] . "' ORDER BY contid";
 		$result = DB_query($sql, $db);
 		if (DB_num_rows($result) <> 0) {
 			echo '<table width=45%>';
@@ -632,7 +632,7 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 		}
 		// Customer Notes
 		echo '<tr><td colspan=2>';
-		$sql = 'SELECT * FROM custnotes where debtorno="' . $_SESSION['CustomerID'] . '" ORDER BY date DESC';
+		$sql = "SELECT * FROM custnotes where debtorno='" . $_SESSION['CustomerID'] . "' ORDER BY date DESC";
 		$result = DB_query($sql, $db);
 		if (DB_num_rows($result) <> 0) {
 			echo '<br><div class="centre"><img src="' . $rootpath . '/css/' . $theme . '/images/note_add.png" title="' . _('Customer Notes') . '" alt="">' . ' ' . _('Customer Notes') . '</div><br>';
@@ -670,7 +670,7 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 		}
 		// Custome Type Notes
 		echo '<tr><td colspan=2>';
-		$sql = 'SELECT * FROM debtortypenotes where typeid="' . $CustomerType . '" ORDER BY date DESC';
+		$sql = "SELECT * FROM debtortypenotes where typeid='" . $CustomerType . "' ORDER BY date DESC";
 		$result = DB_query($sql, $db);
 		if (DB_num_rows($result) <> 0) {
 			echo '<br><div class="centre"><img src="' . $rootpath . '/css/' . $theme . '/images/folder_add.png" title="' . _('Customer Type (Group) Notes') . '" alt="">' . ' ' . _('Customer Type (Group) Notes for:' . '<b> ' . $CustomerTypeName . '</b>') . '</div><br>';
