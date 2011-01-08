@@ -113,7 +113,7 @@ if (isset($_POST['BankAccount']) and $_POST['BankAccount']!=''){
 	$_SESSION['PaymentDetail']->Account=$_POST['BankAccount'];
 	/*Get the bank account currency and set that too */
 	$ErrMsg = _('Could not get the currency of the bank account');
-	$result = DB_query('SELECT currcode FROM bankaccounts WHERE accountcode =' . $_POST['BankAccount'],$db,$ErrMsg);
+	$result = DB_query("SELECT currcode FROM bankaccounts WHERE accountcode ='" . $_POST['BankAccount'] . "'",$db,$ErrMsg);
 	$myrow = DB_fetch_row($result);
 	$_SESSION['PaymentDetail']->AccountCurrency=$myrow[0];
 
@@ -232,10 +232,10 @@ if (isset($_POST['CommitBatch'])){
 	}
 
 	/*Make an array of the defined bank accounts */
-	$SQL = 'SELECT bankaccounts.accountcode
+	$SQL = "SELECT bankaccounts.accountcode
 			FROM bankaccounts,
 				chartmaster
-		WHERE bankaccounts.accountcode=chartmaster.accountcode';
+		WHERE bankaccounts.accountcode=chartmaster.accountcode";
 	$result = DB_query($SQL,$db);
 	$BankAccounts = array();
 	$i=0;
@@ -718,12 +718,12 @@ if ($_SESSION['PaymentDetail']->BankAccountName!=""){
 
 echo ' ' . _('on') . ' ' . $_SESSION['PaymentDetail']->DatePaid . '</font></th></tr>';
 
-$SQL = 'SELECT bankaccountname,
+$SQL = "SELECT bankaccountname,
 		bankaccounts.accountcode,
 		bankaccounts.currcode
 		FROM bankaccounts,
 		chartmaster
-		WHERE bankaccounts.accountcode=chartmaster.accountcode';
+		WHERE bankaccounts.accountcode=chartmaster.accountcode";
 
 $ErrMsg = _('The bank accounts could not be retrieved because');
 $DbgMsg = _('The SQL used to retrieve the bank accounts was');
@@ -757,7 +757,7 @@ echo '<tr><td>' . _('Date Paid') . ':</td>
 
 if ($_SESSION['PaymentDetail']->SupplierID==''){
 	echo '<tr><td>' . _('Currency of Payment') . ':</td><td><select name="Currency" onChange="ReloadForm(UpdateHeader)">';
-	$SQL = 'SELECT currency, currabrev, rate FROM currencies';
+	$SQL = "SELECT currency, currabrev, rate FROM currencies";
 	$result=DB_query($SQL,$db);
 
 	if (DB_num_rows($result)==0){
@@ -864,10 +864,10 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 	//Select the tag
 	echo '<tr><td>' . _('Select Tag') . ':</td><td><select name="tag">';
 
-	$SQL = 'SELECT tagref,
+	$SQL = "SELECT tagref,
 				tagdescription
 		FROM tags
-		ORDER BY tagref';
+		ORDER BY tagref";
 
 	$result=DB_query($SQL,$db);
 	echo '<option value=0></option';
@@ -895,10 +895,10 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 	echo '<tr><td>' . _('Select GL Account') . ':</td>
 		<td><select name="GLCode" onChange="return assignComboToInput(this,'.'GLManualCode'.')">';
 
-	$SQL = 'SELECT accountcode,
+	$SQL = "SELECT accountcode,
 					accountname
 			FROM chartmaster
-			ORDER BY accountcode';
+			ORDER BY accountcode";
 
 	$result=DB_query($SQL,$db);
 	if (DB_num_rows($result)==0){
@@ -944,7 +944,7 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 
 		$PaymentTotal = 0;
 		foreach ($_SESSION['PaymentDetail']->GLItems as $PaymentItem) {
-			$tagsql='SELECT tagdescription from tags where tagref='.$PaymentItem->tag;
+			$tagsql="SELECT tagdescription from tags where tagref='".$PaymentItem->tag . "'";
 			$tagresult=DB_query($tagsql, $db);
 			$tagmyrow=DB_fetch_row($tagresult);
 			if ($PaymentItem->tag==0) {
