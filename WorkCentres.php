@@ -110,14 +110,14 @@ links to delete or edit each. These will call the same page again and allow upda
 or deletion of the records*/
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p>';
 
-	$sql = 'SELECT workcentres.code,
+	$sql = "SELECT workcentres.code,
 			workcentres.description,
 			locations.locationname,
 			workcentres.overheadrecoveryact,
 			workcentres.overheadperhour
 		FROM workcentres,
 			locations
-		WHERE workcentres.location = locations.loccode';
+		WHERE workcentres.location = locations.loccode";
 
 	$result = DB_query($sql,$db);
 	echo "<table class=selection>
@@ -196,9 +196,9 @@ if (isset($SelectedWC)) {
 			</tr>";
 }
 
-$SQL = 'SELECT locationname,
+$SQL = "SELECT locationname,
 		loccode
-		FROM locations';
+		FROM locations";
 $result = DB_query($SQL,$db);
 
 if (!isset($_POST['Description'])) {
@@ -228,12 +228,12 @@ echo '</select></td></tr>
 		<td><select name='OverheadRecoveryAct'>";
 
 //SQL to poulate account selection boxes
-$SQL = 'SELECT accountcode,
+$SQL = "SELECT accountcode,
 		accountname
 	FROM chartmaster INNER JOIN accountgroups
 		ON chartmaster.group_=accountgroups.groupname
 	WHERE accountgroups.pandl!=0
-	ORDER BY accountcode';
+	ORDER BY accountcode";
 
 $result = DB_query($SQL,$db);
 
