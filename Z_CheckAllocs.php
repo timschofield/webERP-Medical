@@ -38,7 +38,7 @@ while ($myrow = DB_fetch_array($result)){
 	echo '<br>' . _('Total amount recorded as allocated against it') . ': ' . $myrow['alloc'];
 	echo '<br>' . _('Total of allocation records') . ': ' . $myrow['totalalloc'];
 
-	$sql = 'SELECT type,
+	$sql = "SELECT type,
 			transno,
 			trandate,
 			debtortrans.debtorno,
@@ -48,7 +48,7 @@ while ($myrow = DB_fetch_array($result)){
 			custallocns.amt
 		FROM debtortrans
 			INNER JOIN custallocns ON debtortrans.id=custallocns.transid_allocfrom
-		WHERE custallocns.transid_allocto='. $AllocToID;
+		WHERE custallocns.transid_allocto='". $AllocToID . "'";
 
 	$ErrMsg = _('The customer transactions for the selected criteria could not be retrieved because');
 	$TransResult = DB_query($sql,$db,$ErrMsg);
