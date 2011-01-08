@@ -175,8 +175,8 @@ echo "</table><br />
 	<div class='centre'><input type='Submit' name='submit' value='" . _('Enter Role') . "'></div></form>";
 
 if (isset($SelectedRole)) {
-	$sql = 'SELECT tokenid, tokenname
-			FROM securitytokens';
+	$sql = "SELECT tokenid, tokenname
+			FROM securitytokens";
 
 	$sqlUsed = "SELECT tokenid FROM securitygroups WHERE secroleid='". $SelectedRole . "'";
 
