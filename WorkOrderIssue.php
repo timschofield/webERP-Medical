@@ -537,7 +537,7 @@ echo '<table cellpadding=2 class=selection>
 	<td class="label">' . _('Issued From') . ':</td><td>';
 
 if (!isset($_POST['IssueItem'])){
-	$LocResult = DB_query('SELECT loccode, locationname FROM locations',$db);
+	$LocResult = DB_query("SELECT loccode, locationname FROM locations",$db);
 
 	echo '<select name="FromLocation">';
 
