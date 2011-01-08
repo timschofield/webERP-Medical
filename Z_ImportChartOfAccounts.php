@@ -10,7 +10,7 @@ include('xmlrpc/lib/xmlrpc.inc');
 include('api/api_errorcodes.php');
 
 $weberpuser = $_SESSION['UserID'];
-$sql='SELECT password FROM www_users WHERE userid="'.$weberpuser.'"';
+$sql="SELECT password FROM www_users WHERE userid='".$weberpuser."'";
 $result=DB_query($sql, $db);
 $myrow=DB_fetch_array($result);
 $weberppassword = $myrow[0];
