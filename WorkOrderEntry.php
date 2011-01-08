@@ -443,7 +443,7 @@ if (DB_num_rows($WOResult)==1){
 				}
 		  		$_POST['Controlled'.$i] =$WOItem['controlled'];
 		  		$_POST['Serialised'.$i] =$WOItem['serialised'];
-		  		$HasWOSerialNosResult = DB_query('SELECT * FROM woserialnos WHERE wo=' . $_POST['WO'],$db);
+		  		$HasWOSerialNosResult = DB_query("SELECT * FROM woserialnos WHERE wo='" . $_POST['WO'] . "'",$db);
 		  		if (DB_num_rows($HasWOSerialNosResult)>0){
 		  		   $_POST['HasWOSerialNos']=true;
 		  		} else {
@@ -457,7 +457,7 @@ echo '<input type=hidden name="WO" value=' .$_POST['WO'] . '>';
 echo '<tr><td class="label">' . _('Work Order Reference') . ':</td><td>' . $_POST['WO'] . '</td></tr>';
 echo '<tr><td class="label">' . _('Factory Location') .':</td>
 	<td><select name="StockLocation">';
-$LocResult = DB_query('SELECT loccode,locationname FROM locations',$db);
+$LocResult = DB_query("SELECT loccode,locationname FROM locations",$db);
 while ($LocRow = DB_fetch_array($LocResult)){
 	if ($_POST['StockLocation']==$LocRow['loccode']){
 		echo '<option selected value="' . $LocRow['loccode'] .'">' . $LocRow['locationname'] . '</option>';
