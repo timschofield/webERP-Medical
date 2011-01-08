@@ -58,8 +58,8 @@ if (isset($OrderNumber) && $OrderNumber!='') {
 }
 
 if (isset($_POST['SearchParts'])) {
-	
-	
+
+
 	if (isset($_POST['Keywords']) AND isset($_POST['StockCode'])) {
 		echo '<div class="page_help_text">' ._('Stock description keywords have been used in preference to the Stock code extract entered') . '.</div>';
 	}
@@ -97,7 +97,7 @@ if (isset($_POST['SearchParts'])) {
 					ON stockmaster.stockid=purchorderdetails.itemcode
 			WHERE purchorderdetails.completed=0
 			AND stockmaster.stockid LIKE '%" . $_POST['StockCode'] . "%'
-			AND stockmaster.categoryid='" . $_POST['StockCat'] . "' 
+			AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
 			GROUP BY stockmaster.stockid,
 				stockmaster.description,
 				stockmaster.units
@@ -114,7 +114,7 @@ if (isset($_POST['SearchParts'])) {
 				INNER JOIN purchorderdetails
 					ON stockmaster.stockid=purchorderdetails.itemcode
 			WHERE purchorderdetails.completed=0
-			AND stockmaster.categoryid='" . $_POST['StockCat'] . "' 
+			AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
 			GROUP BY stockmaster.stockid,
 				stockmaster.description,
 				stockmaster.units
@@ -135,7 +135,7 @@ if (!isset($OrderNumber) or $OrderNumber=='' ){
 	echo '<a href="' . $rootpath . '/PO_Header.php?' .SID . '&NewOrder=Yes">' . _('Add Purchase Order') . '</a>';
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="">' . ' ' . $title.'</p>';
 	echo '<table class=selection><tr><td>'._('Order Number') . ': <input type=text name="OrderNumber" MAXLENGTH =8 size=9>  ' . _('Into Stock Location') . ':<select name="StockLocation"> ';
-	$sql = 'SELECT loccode, locationname FROM locations';
+	$sql = "SELECT loccode, locationname FROM locations";
 	$resultStkLocs = DB_query($sql,$db);
 	while ($myrow=DB_fetch_array($resultStkLocs)){
 		if (isset($_POST['StockLocation'])){
@@ -323,7 +323,7 @@ else {
 								AND purchorderdetails.completed=0
 								AND purchorderdetails.itemcode='". $SelectedStockItem ."'
 								AND purchorders.supplierno='" . $SelectedSupplier ."'
-								AND purchorders.intostocklocation = '". $_POST['StockLocation'] . "' 
+								AND purchorders.intostocklocation = '". $_POST['StockLocation'] . "'
 								" . $StatusCriteria . "
 								GROUP BY purchorders.orderno ASC,
 												purchorders.realorderno,
@@ -352,7 +352,7 @@ else {
 								AND purchorders.supplierno = suppliers.supplierid
 								AND purchorderdetails.completed=0
 								AND purchorders.supplierno='" . $SelectedSupplier ."'
-								AND purchorders.intostocklocation = '". $_POST['StockLocation'] . "' 
+								AND purchorders.intostocklocation = '". $_POST['StockLocation'] . "'
 								" . $StatusCriteria . "
 								GROUP BY purchorders.orderno ASC,
 												purchorders.realorderno,
@@ -384,7 +384,7 @@ else {
 								AND purchorders.supplierno = suppliers.supplierid
 								AND purchorderdetails.completed=0
 								AND purchorderdetails.itemcode='". $SelectedStockItem ."'
-								AND purchorders.intostocklocation = '". $_POST['StockLocation'] . "' 
+								AND purchorders.intostocklocation = '". $_POST['StockLocation'] . "'
 								" . $StatusCriteria . "
 								GROUP BY purchorders.orderno ASC,
 												purchorders.realorderno,
@@ -412,7 +412,7 @@ else {
 								WHERE purchorders.orderno = purchorderdetails.orderno
 								AND purchorders.supplierno = suppliers.supplierid
 								AND purchorderdetails.completed=0
-								AND purchorders.intostocklocation = '". $_POST['StockLocation'] . "' 
+								AND purchorders.intostocklocation = '". $_POST['StockLocation'] . "'
 								" . $StatusCriteria . "
 								GROUP BY purchorders.orderno ASC,
 												purchorders.realorderno,
