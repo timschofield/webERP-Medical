@@ -12,15 +12,15 @@ if (isset($_POST['TaxAuthority']) AND
 
 	include('includes/PDFStarter.php');
 
-	$sql = 'SELECT lastdate_in_period
+	$sql = "SELECT lastdate_in_period
 		FROM periods
-		WHERE periodno=' . $_POST['ToPeriod'];
+		WHERE periodno='" . $_POST['ToPeriod'] . "'";
 	$ErrMsg = _('Could not determine the last date of the period selected') . '. ' . _('The sql returned the following error');
 	$PeriodEndResult = DB_query($sql,$db,$ErrMsg);
 	$PeriodEndRow = DB_fetch_row($PeriodEndResult);
 	$PeriodEnd = ConvertSQLDate($PeriodEndRow[0]);
 
-	$result = DB_query('SELECT description FROM taxauthorities WHERE taxid=' . $_POST['TaxAuthority'],$db);
+	$result = DB_query("SELECT description FROM taxauthorities WHERE taxid='" . $_POST['TaxAuthority'] . "'",$db);
 	$TaxAuthDescription = DB_fetch_row($result);
 	$TaxAuthorityName =  $TaxAuthDescription[0];
 
@@ -304,7 +304,7 @@ if (isset($_POST['TaxAuthority']) AND
 	echo '<tr><td>' . _('Tax Authority To Report On:') . ':</font></td>
 			<td><select name=TaxAuthority>';
 
-	$result = DB_query('SELECT taxid, description FROM taxauthorities',$db);
+	$result = DB_query("SELECT taxid, description FROM taxauthorities",$db);
 	while ($myrow = DB_fetch_array($result)){
 		echo '<option Value=' . $myrow['taxid'] . '>' . $myrow['description'];
 	}
@@ -324,9 +324,9 @@ if (isset($_POST['TaxAuthority']) AND
 
 	$DefaultPeriod = GetPeriod(Date($_SESSION['DefaultDateFormat'],Mktime(0,0,0,Date('m'),0,Date('Y'))),$db);
 
-	$sql = 'SELECT periodno,
+	$sql = "SELECT periodno,
 			lastdate_in_period
-		FROM periods';
+		FROM periods";
 
 	$ErrMsg = _('Could not retrieve the period data because');
 	$Periods = DB_query($sql,$db,$ErrMsg);
