@@ -100,7 +100,7 @@ include ('includes/PDFCustTransListingPageHeader.inc');
 
 while ($myrow=DB_fetch_array($result)){
 
-	$sql='SELECT name FROM debtorsmaster WHERE debtorno="'.$myrow['debtorno'].'"';
+	$sql="SELECT name FROM debtorsmaster WHERE debtorno='".$myrow['debtorno']."'";
 	$supplierresult=DB_query($sql, $db);
 	$supplierrow=DB_fetch_array($supplierresult);
 
