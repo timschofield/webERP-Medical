@@ -174,7 +174,7 @@ if (!isset($SelectedSalesPostingID)) {
 
 			$result = DB_query($SQL,$db);
 		}
-		$SQL = 'SELECT accountcode FROM chartmaster WHERE accountcode =1';
+		$SQL = "SELECT accountcode FROM chartmaster WHERE accountcode =1";
 		$result = DB_query($SQL,$db);
 		if (DB_num_rows($result)==0){
 		/* account number 1 is not used, so insert a new account */
@@ -299,8 +299,8 @@ if (!isset($_GET['delete'])) {
 	}
 /*end of if $SelectedSalesPostingID only do the else when a new record is being entered */
 
-	$SQL = 'SELECT areacode,
-			areadescription FROM areas';
+	$SQL = "SELECT areacode,
+			areadescription FROM areas";
 	$result = DB_query($SQL,$db);
 
 	echo '<br /><table class=selection>
@@ -320,7 +320,7 @@ if (!isset($_GET['delete'])) {
 
 	DB_free_result($result);
 
-	$SQL = 'SELECT categoryid, categorydescription FROM stockcategory';
+	$SQL = "SELECT categoryid, categorydescription FROM stockcategory";
 	$result = DB_query($SQL,$db);
 
 	echo '</select></td></tr>';
@@ -345,9 +345,9 @@ if (!isset($_GET['delete'])) {
 
 	DB_free_result($result);
 
-	$SQL = 'SELECT typeabbrev,
+	$SQL = "SELECT typeabbrev,
 			sales_type
-		FROM salestypes';
+		FROM salestypes";
 	$result = DB_query($SQL,$db);
 
 
