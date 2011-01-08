@@ -107,13 +107,13 @@ echo '<tr><td>' . _('Shipment Reference') . ':</td>
 	<td><input type="text" name="ShiptRef" size="12" maxlength="11" VALUE="' .  $_POST['ShiptRef'] . '"></td></tr>';
 echo '<tr><td>' . _('Shipment Selection') . ':<br> ' . _('If you know the code enter it above') . '<br>' . _('otherwise select the shipment from the list') . '</td><td><select name="ShiptSelection">';
 
-$sql = 'SELECT shiptref,
+$sql = "SELECT shiptref,
 							vessel,
 							eta,
 							suppname
 						FROM shipments INNER JOIN suppliers
 							ON shipments.supplierid=suppliers.supplierid
-						WHERE closed=0';
+						WHERE closed=0";
 
 $result = DB_query($sql, $db);
 
