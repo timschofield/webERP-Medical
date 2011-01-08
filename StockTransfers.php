@@ -18,9 +18,9 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/m
 		'" alt="" />' . ' ' . _('Select Item to Transfer') . '</p>';
 
 	if (strlen($_POST['StockText'])>0) {
-		$sql='SELECT stockid, description from stockmaster where description like "%'.$_POST['StockText'].'%"';
+		$sql="SELECT stockid, description from stockmaster where description like '%".$_POST['StockText']."%'";
 	} else {
-		$sql='SELECT stockid, description from stockmaster where stockid like "%'.$_POST['StockCode'].'%"';
+		$sql="SELECT stockid, description from stockmaster where stockid like '%".$_POST['StockCode']."%'";
 	}
 	$ErrMsg=_('The stock information cannot be retrieved because');
 	$DbgMsg=_('The SQL to get the stock description was');
@@ -449,7 +449,7 @@ if (strlen($_SESSION['Transfer']->TransferItem[0]->ItemDescription)>1){
 
 echo '<tr><td>' . _('From Stock Location').':</td><td><select name="StockLocationFrom">';
 
-$sql = 'SELECT loccode, locationname FROM locations';
+$sql = "SELECT loccode, locationname FROM locations";
 $resultStkLocs = DB_query($sql,$db);
 while ($myrow=DB_fetch_array($resultStkLocs)){
 	if (isset($_SESSION['Transfer']->StockLocationFrom)){
