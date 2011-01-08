@@ -95,7 +95,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 /*If all clear then proceed to update the database
  */
 	if ($InputError!=1){
-		
+
 		$result = DB_Txn_Begin($db);
 
 		if ($_SESSION['ExistingOrder']==0){ /*its a new order to be inserted */
@@ -663,13 +663,13 @@ if (isset($_POST['EnterLine'])){ /*Inputs from the form directly without selecti
 			$_POST['GLCode']=0;
 		}
 		if ($_POST['AssetID'] !='Not an Asset'){
-			$ValidAssetResult = DB_query('SELECT assetid,
+			$ValidAssetResult = DB_query("SELECT assetid,
 																					description,
 																					costact
 																		FROM fixedassets
 																		INNER JOIN fixedassetcategories
 																		ON fixedassets.assetcategoryid=fixedassetcategories.categoryid
-																		WHERE assetid="' . $_POST['AssetID'] . '"',$db);
+																		WHERE assetid='" . $_POST['AssetID'] . "'",$db);
 			if (DB_num_rows($ValidAssetResult)==0){ // then the asset id entered doesn't exist
 				$AllowUpdate = false;
 				prnMsg(_('An asset code was entered but it does not yet exist. Only pre-existing asset ids can be entered when ordering a fixed asset'),'error');
@@ -997,10 +997,10 @@ if (isset($_POST['NonStockOrder'])) {
 	echo '<td><input type=text name=ItemDescription size=40></td></tr>';
 	echo '<tr><td>'._('General Ledger Code').'</td>';
 	echo '<td><select name="GLCode">';
-	$sql='SELECT accountcode,
+	$sql="SELECT accountcode,
 							accountname
 				FROM chartmaster
-				ORDER BY accountcode ASC';
+				ORDER BY accountcode ASC";
 
 	$result=DB_query($sql, $db);
 	while ($myrow=DB_fetch_array($result)) {
@@ -1009,7 +1009,7 @@ if (isset($_POST['NonStockOrder'])) {
 	echo '</select></td></tr>';
 	echo '<tr><td>'._('OR Asset ID'). '</td>
 						<td><select name="AssetID">';
-	$AssetsResult = DB_query('SELECT assetid, description, datepurchased FROM fixedassets ORDER BY assetid DESC',$db);
+	$AssetsResult = DB_query("SELECT assetid, description, datepurchased FROM fixedassets ORDER BY assetid DESC",$db);
 	echo '<option selected value="Not an Asset">' . _('Not an Asset') . '</option>';
 	while ($AssetRow = DB_fetch_array($AssetsResult)){
 		if ($AssetRow['datepurchased']=='0000-00-00'){
@@ -1034,12 +1034,12 @@ if (isset($_POST['NonStockOrder'])) {
 /* Now show the stock item selection search stuff below */
 
 if (!isset($_GET['Edit'])) {
-	$sql='SELECT categoryid,
+	$sql="SELECT categoryid,
 							categorydescription
 				FROM stockcategory
-				WHERE stocktype<>"L"
-				AND stocktype<>"D"
-				ORDER BY categorydescription';
+				WHERE stocktype<>'L'
+				AND stocktype<>'D'
+				ORDER BY categorydescription";
 	$ErrMsg = _('The supplier category details could not be retrieved because');
 	$DbgMsg = _('The SQL used to retrieve the category details but failed was');
 	$result1 = DB_query($sql,$db,$ErrMsg,$DbgMsg);
