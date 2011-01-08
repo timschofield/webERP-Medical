@@ -41,7 +41,7 @@
 	} else {
 		$DefaultFromDate = Date ('Y-m-d', Mktime(0,0,0,$_SESSION['YearEnd'] + 2,0,Date('Y')-1));
 	}
-	$sql = 'SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno';
+	$sql = "SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno";
 	$Periods = DB_query($sql,$db);
 
 	while ($myrow=DB_fetch_array($Periods,$db)){
@@ -81,7 +81,7 @@
 	}
 	echo '</select></td></tr>';
 
-	$AreasResult = DB_query('SELECT areacode, areadescription FROM areas',$db);
+	$AreasResult = DB_query("SELECT areacode, areadescription FROM areas",$db);
 
 	if (!isset($_POST['SalesArea'])){
 		$_POST['SalesArea']='';
@@ -101,7 +101,7 @@
 	}
 	echo '</select></td></tr>';
 
-	$CategoriesResult = DB_query('SELECT categoryid, categorydescription FROM stockcategory',$db);
+	$CategoriesResult = DB_query("SELECT categoryid, categorydescription FROM stockcategory",$db);
 
 	if (!isset($_POST['CategoryID'])){
 		$_POST['CategoryID']='';
@@ -121,7 +121,7 @@
 	}
 	echo '</select></td></tr>';
 
-	$SalesFolkResult = DB_query('SELECT salesmancode, salesmanname FROM salesman',$db);
+	$SalesFolkResult = DB_query("SELECT salesmancode, salesmanname FROM salesman",$db);
 
 
 	if (! isset($_POST['SalesmanCode'])){
@@ -236,14 +236,14 @@
 
 	$WhereClause = 'WHERE ' . $WhereClause . ' salesanalysis.periodno>=' . $_POST['FromPeriod'] . ' AND salesanalysis.periodno <= ' . $_POST['ToPeriod'];
 
-	$SQL = 'SELECT salesanalysis.periodno,
+	$SQL = "SELECT salesanalysis.periodno,
 				periods.lastdate_in_period,
-				SUM(CASE WHEN budgetoractual=1 THEN ' . $SelectClause . ' ELSE 0 END) AS sales,
-				SUM(CASE WHEN  budgetoractual=0 THEN ' . $SelectClause . ' ELSE 0 END) AS budget
-		FROM salesanalysis INNER JOIN periods ON salesanalysis.periodno=periods.periodno ' . $WhereClause . '
+				SUM(CASE WHEN budgetoractual=1 THEN " . $SelectClause . " ELSE 0 END) AS sales,
+				SUM(CASE WHEN  budgetoractual=0 THEN " . $SelectClause . " ELSE 0 END) AS budget
+		FROM salesanalysis INNER JOIN periods ON salesanalysis.periodno=periods.periodno " . $WhereClause . "
 		GROUP BY salesanalysis.periodno,
 			periods.lastdate_in_period
-		ORDER BY salesanalysis.periodno';
+		ORDER BY salesanalysis.periodno";
 
 
 	$graph->SetTitle($GraphTitle);
