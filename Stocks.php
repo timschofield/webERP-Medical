@@ -716,7 +716,7 @@ if ($StockImgLink!=_('No Image')) {
 
  echo '<tr><td>' . _('Category') . ':</td><td><select name="CategoryID" onChange="ReloadForm(ItemForm.UpdateCategories)">';
 
-$sql = 'SELECT categoryid, categorydescription FROM stockcategory WHERE stocktype!="A"';
+$sql = "SELECT categoryid, categorydescription FROM stockcategory";
 $ErrMsg = _('The stock categories could not be retrieved because');
 $DbgMsg = _('The SQL used to retrieve stock categories and failed was');
 $result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
@@ -778,7 +778,7 @@ echo '<tr><td>' . _('Packaged Weight (KGs)') . ':</td><td><input ' . (in_array('
 echo '<tr><td>' . _('Units of Measure') . ':</td><td><select ' . (in_array('Description',$Errors) ?  'class="selecterror"' : '' ) .'  name="Units">';
 
 
-$sql = 'SELECT unitname FROM unitsofmeasure ORDER by unitname';
+$sql = "SELECT unitname FROM unitsofmeasure ORDER by unitname";
 $UOMResult = DB_query($sql,$db);
 
 if (!isset($_POST['Units'])) {
@@ -907,7 +907,7 @@ if (isset($_POST['DiscountCategory'])) {
 echo '<tr><td>' . _('Discount Category') . ':</td><td><input type="Text" name="DiscountCategory" size=2 maxlength=2 value="' . $DiscountCategory . '"></td></tr>';
 
 echo '<tr><td>' . _('Tax Category') . ':</td><td><select name="TaxCat">';
-$sql = 'SELECT taxcatid, taxcatname FROM taxcategories ORDER BY taxcatname';
+$sql = "SELECT taxcatid, taxcatname FROM taxcategories ORDER BY taxcatname";
 $result = DB_query($sql, $db);
 
 if (!isset($_POST['TaxCat'])){
