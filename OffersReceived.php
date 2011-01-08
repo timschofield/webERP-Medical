@@ -153,7 +153,7 @@ if (!isset($_POST['submit']) and isset($_POST['supplierid'])) {
 			$_SESSION['CompanyRecord']['coyname']."\n";
 		$MailText.=_('The following offers you made have been accepted')."\n";
 		$MailText.=_('An official order will be sent to you in due course')."\n\n";
-		$sql='SELECT rate FROM currencies where currabrev="'.$CurrCode.'"';
+		$sql="SELECT rate FROM currencies where currabrev='".$CurrCode."'";
 		$result=DB_query($sql, $db);
 		$myrow=DB_fetch_array($result);
 		$Rate=$myrow['rate'];
