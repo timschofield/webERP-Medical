@@ -19,9 +19,9 @@ if (!isset($_POST['FromPeriod'])){
                                  <td>' . _('Select Period From') . ":</td>
                                  <td><select Name='FromPeriod'>";
 
-	$sql = 'SELECT periodno,
+	$sql = "SELECT periodno,
                        lastdate_in_period
-                FROM periods ORDER BY periodno';
+                FROM periods ORDER BY periodno";
 	$Periods = DB_query($sql,$db);
 
 	while ($myrow=DB_fetch_array($Periods,$db)){
@@ -46,7 +46,7 @@ if (!isset($_POST['FromPeriod'])){
 	$sql = 'UPDATE chartdetails SET actual =0 WHERE period >= ' . $_POST['FromPeriod'];
 	$UpdActualChartDetails = DB_query($sql,$db);
 
-	$ChartDetailBFwdResult = DB_query('SELECT accountcode, bfwd FROM chartdetails WHERE period=' . $_POST['FromPeriod'],$db);
+	$ChartDetailBFwdResult = DB_query("SELECT accountcode, bfwd FROM chartdetails WHERE period='" . $_POST['FromPeriod'] . "'",$db);
 	while ($ChartRow=DB_fetch_array($ChartDetailBFwdResult)){
 		$sql = 'UPDATE chartdetails SET bfwd =' . $ChartRow['bfwd'] . ' WHERE period > ' . $_POST['FromPeriod'] . ' AND accountcode=' . $ChartRow['accountcode'];
 		$UpdActualChartDetails = DB_query($sql,$db);
