@@ -133,13 +133,13 @@ if (isset($_POST['submit'])) {
 			/* Alter the exchange rates in the currencies table */
 
 			/* Get default currency rate */
-			$sql='SELECT rate from currencies WHERE currabrev="'.$_POST['CurrencyDefault'].'"';
+			$sql="SELECT rate from currencies WHERE currabrev='".$_POST['CurrencyDefault']."'";
 			$result = DB_query($sql,$db);
 			$myrow = DB_fetch_row($result);
 			$NewCurrencyRate=$myrow[0];
 
 			/* Set new rates */
-			$sql='UPDATE currencies SET rate=rate/"'.$NewCurrencyRate.'"';
+			$sql="UPDATE currencies SET rate=rate/'".$NewCurrencyRate."'";
 			$ErrMsg =  _('Could not update the currency rates');
 			$result = DB_query($sql,$db,$ErrMsg);
 
@@ -370,13 +370,13 @@ echo '</select></td></tr>';
 
 echo '<tr><td>' . _('Freight Re-charged GL Account') . ':</td><td><select tabindex="19" Name=FreightAct>';
 
-$result=DB_query('SELECT accountcode,
+$result=DB_query("SELECT accountcode,
 			accountname
 		FROM chartmaster,
 			accountgroups
 		WHERE chartmaster.group_=accountgroups.groupname
 		AND accountgroups.pandl=1
-		ORDER BY chartmaster.accountcode',$db);
+		ORDER BY chartmaster.accountcode",$db);
 
 while ($myrow = DB_fetch_row($result)) {
 	if ($_POST['FreightAct']==$myrow[0]){
