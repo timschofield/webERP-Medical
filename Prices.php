@@ -285,7 +285,7 @@ if ($InputError ==0){
 		}
 	}
 
-	$SQL = 'SELECT currabrev, currency FROM currencies';
+	$SQL = "SELECT currabrev, currency FROM currencies";
 	$result = DB_query($SQL,$db);
 
 	echo '<br><table class=selection>';
@@ -304,7 +304,7 @@ if ($InputError ==0){
 
 	echo '</select>	</td></tr><tr><td>' . _('Sales Type Price List') . ':</td><td><select name="TypeAbbrev">';
 
-	$SQL = 'SELECT typeabbrev, sales_type FROM salestypes';
+	$SQL = "SELECT typeabbrev, sales_type FROM salestypes";
 	$result = DB_query($SQL,$db);
 
 	while ($myrow = DB_fetch_array($result)) {
