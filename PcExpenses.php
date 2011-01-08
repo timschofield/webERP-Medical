@@ -139,8 +139,8 @@ then none of the above are true and the list of sales types will be displayed wi
 links to delete or edit each. These will call the same page again and allow update/input
 or deletion of the records*/
 
-	$sql = 'SELECT *
-			FROM pcexpenses';
+	$sql = "SELECT *
+			FROM pcexpenses";
 	$result = DB_query($sql,$db);
 
 	echo '<table class=selection>';
