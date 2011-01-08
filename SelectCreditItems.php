@@ -72,7 +72,7 @@ if (isset($_POST['SearchCust']) AND $_SESSION['RequireCustomerSelection']==1){
 		  //insert wildcard characters in spaces
 			$SearchString = '%' . str_replace(' ', '%', $_POST['Keywords']) . '%';
 
-			   $SQL = 'SELECT
+			   $SQL = "SELECT
 			   		custbranch.debtorno,
 					custbranch.brname,
 					custbranch.contactname,
@@ -80,12 +80,12 @@ if (isset($_POST['SearchCust']) AND $_SESSION['RequireCustomerSelection']==1){
 					custbranch.faxno,
 					custbranch.branchcode
 				FROM custbranch
-				WHERE custbranch.brname ' . LIKE  ."'$SearchString'
+				WHERE custbranch.brname " . LIKE  ." ".$SearchString."
 				AND custbranch.disabletrans=0";
 
 		  } elseif (strlen($_POST['CustCode'])>0){
 
-			   $SQL = 'SELECT
+			   $SQL = "SELECT
 			   		custbranch.debtorno,
 					custbranch.brname,
 					custbranch.contactname,
@@ -93,7 +93,7 @@ if (isset($_POST['SearchCust']) AND $_SESSION['RequireCustomerSelection']==1){
 					custbranch.faxno,
 					custbranch.branchcode
 				FROM custbranch
-				WHERE custbranch.branchcode ' . LIKE  . "'%" . $_POST['CustCode'] . "%'
+				WHERE custbranch.branchcode " . LIKE  . "'%" . $_POST['CustCode'] . "%'
 				AND custbranch.disabletrans=0";
 		  }
 
@@ -510,7 +510,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 			$_SESSION['CreditItems']->Location = $_POST['Location'];
 
-			$NewDispatchTaxProvResult = DB_query('SELECT taxprovinceid FROM locations WHERE loccode="' . $_POST['Location'] . '"',$db);
+			$NewDispatchTaxProvResult = DB_query("SELECT taxprovinceid FROM locations WHERE loccode='" . $_POST['Location'] . "'",$db);
 			$myrow = DB_fetch_array($NewDispatchTaxProvResult);
 
 			$_SESSION['CreditItems']->DispatchTaxProvince = $myrow['taxprovinceid'];
