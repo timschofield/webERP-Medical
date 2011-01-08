@@ -263,7 +263,7 @@ If ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 
 
 	echo '<tr><td>' . _('For Suppliers Trading in') . ':</td><td><select name="Currency">';
-	$sql = 'SELECT currency, currabrev FROM currencies';
+	$sql = "SELECT currency, currabrev FROM currencies";
 	$result=DB_query($sql,$db);
 
 	while ($myrow=DB_fetch_array($result)){
@@ -292,7 +292,7 @@ If ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 	echo '<tr><td>' . _('Payments Due To') . ':</td>
             <td><input type=text class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="AmountsDueBy" maxlength=11 size=12 VALUE=' . $DefaultDate . '></td></tr>';
 
-	$SQL = 'SELECT bankaccountname, accountcode FROM bankaccounts';
+	$SQL = "SELECT bankaccountname, accountcode FROM bankaccounts";
 
 	$AccountsResults = DB_query($SQL,$db,'','',false,false);
 
