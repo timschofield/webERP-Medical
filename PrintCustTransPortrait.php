@@ -81,9 +81,9 @@ If (isset($PrintPDF)
 	nobble the invoice reprints */
 
 	// check if the user has set a default bank account for invoices, if not leave it blank
-		$sql = 'SELECT bankaccounts.invoice, bankaccounts.bankaccountnumber, bankaccounts.bankaccountcode
+		$sql = "SELECT bankaccounts.invoice, bankaccounts.bankaccountnumber, bankaccounts.bankaccountcode
 				from bankaccounts
-				WHERE bankaccounts.invoice = 1';
+				WHERE bankaccounts.invoice = 1";
 		$result=DB_query($sql,$db,'','',false,false);
 		if (DB_error_no($db)!=1) {
 			if (DB_num_rows($result)==1){
@@ -329,9 +329,9 @@ If (isset($PrintPDF)
 
 				if ($myrow2['controlled']==1){
 
-					$GetControlMovts = DB_query('SELECT moveqty, serialno
+					$GetControlMovts = DB_query("SELECT moveqty, serialno
 												 FROM   stockserialmoves
-												 WHERE  stockmoveno=' . $myrow2['stkmoveno'],$db);
+												 WHERE  stockmoveno='" . $myrow2['stkmoveno'] . "'",$db);
 
 					if ($myrow2['serialised']==1){
 						while ($ControlledMovtRow = DB_fetch_array($GetControlMovts)){
@@ -629,14 +629,14 @@ class concat_pdf extends FPDI {
 		echo "<div class='centre'><br><input type=Submit Name='Print' Value='" . _('Print Preview') . "'><p>";
 		echo "<input type=Submit Name='PrintPDF' Value='" . _('Print PDF') . "'></div>";
 
-		$sql = 'SELECT typeno FROM systypes WHERE typeid=10';
+		$sql = "SELECT typeno FROM systypes WHERE typeid=10";
 
 		$result = DB_query($sql,$db);
 		$myrow = DB_fetch_row($result);
 
 		echo '<div class="page_help_text"><b>' . _('The last invoice created was number') . ' ' . $myrow[0] . '</b><br>' . _('If only a single invoice is required') . ', ' . _('enter the invoice number to print in the Start transaction number to print field and leave the End transaction number to print field blank') . '. ' . _('Only use the end invoice to print field if you wish to print a sequential range of invoices') . '';
 
-		$sql = 'SELECT typeno FROM systypes WHERE typeid=11';
+		$sql = "SELECT typeno FROM systypes WHERE typeid=11";
 
 		$result = DB_query($sql,$db);
 		$myrow = DB_fetch_row($result);
