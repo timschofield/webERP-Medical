@@ -37,7 +37,7 @@ if (isset($_POST['AddAssetToInvoice'])){
 	if ($_POST['AssetID'] == ''){
 		$_POST['AssetID'] = $_POST['AssetSelection'];
 	} else {
-		$result = DB_query('SELECT assetid FROM fixedassets WHERE assetid="' . $_POST['AssetID'] . '"',$db);
+		$result = DB_query("SELECT assetid FROM fixedassets WHERE assetid='" . $_POST['AssetID'] . "'",$db);
 		if (DB_num_rows($result)==0) {
 			prnMsg(_('The asset ID entered manually is not a valid fixed asset. If you do not know the asset reference, select it from the list'),'error');
 			$InputError = True;
@@ -111,11 +111,11 @@ echo '<tr><td>' . _('Asset ID') . ':</td>
 	<td><input type="text" name="AssetID" size="5" maxlength="6" VALUE="' .  $_POST['AssetID'] . '"> <a href="FixedAssetItems.php" target=_blank>'. _('New Fixed Asset') . '</a></td></tr>';
 echo '<tr><td>' . _('Asset Selection') . ':</td><td><select name="AssetSelection">';
 
-$sql = 'SELECT assetid,
+$sql = "SELECT assetid,
 							description
 						FROM fixedassets
 						WHERE cost=0
-						ORDER BY assetid DESC';
+						ORDER BY assetid DESC";
 
 $result = DB_query($sql, $db);
 
