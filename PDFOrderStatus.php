@@ -55,7 +55,7 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate'])){
 	echo '<tr><td>' . _('Inventory Location') . ':</td><td><select name="Location">';
 	echo '<option selected value="All">' . _('All Locations');
 
-	$result= DB_query('SELECT loccode, locationname FROM locations',$db);
+	$result= DB_query("SELECT loccode, locationname FROM locations",$db);
 	while ($myrow=DB_fetch_array($result)){
 		echo "<option VALUE='" . $myrow['loccode'] . "'>" . $myrow['locationname'];
 	}
