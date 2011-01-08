@@ -45,7 +45,7 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate'])){
 	</tr>";
 	 echo '<tr><td>' . _('Bank Account') . '</td><td>';
 
-	 $sql = 'SELECT bankaccountname, accountcode FROM bankaccounts';
+	 $sql = "SELECT bankaccountname, accountcode FROM bankaccounts";
 	 $result = DB_query($sql,$db);
 
 
