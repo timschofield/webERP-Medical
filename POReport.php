@@ -1489,7 +1489,7 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 	echo '</select></td><td>&nbsp</td></tr>';
 
 	echo '<tr><td>' . _('Stock Categories') . ":</td><td><select name='Category'>";
-	$sql='SELECT categoryid, categorydescription FROM stockcategory';
+	$sql="SELECT categoryid, categorydescription FROM stockcategory";
 	$CategoryResult= DB_query($sql,$db);
 	echo '<option selected value="All">' . _('All Categories');
 	While ($myrow = DB_fetch_array($CategoryResult)){
