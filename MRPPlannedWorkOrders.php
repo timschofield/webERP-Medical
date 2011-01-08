@@ -27,7 +27,7 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 	}
 
 	if ($_POST['Consolidation'] == 'None') {
-		$sql = 'SELECT mrpplannedorders.*,
+		$sql = "SELECT mrpplannedorders.*,
 					   stockmaster.stockid,
 					   stockmaster.description,
 					   stockmaster.mbflag,
@@ -36,11 +36,11 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 					  (stockmaster.materialcost + stockmaster.labourcost +
 					   stockmaster.overheadcost ) as computedcost
 				FROM mrpplannedorders, stockmaster
-				WHERE mrpplannedorders.part = stockmaster.stockid '  . "$wheredate" .
-				  ' AND stockmaster.mbflag = "M"
-				ORDER BY mrpplannedorders.part,mrpplannedorders.duedate';
+				WHERE mrpplannedorders.part = stockmaster.stockid "  . $wheredate .
+				  " AND stockmaster.mbflag = 'M'
+				ORDER BY mrpplannedorders.part,mrpplannedorders.duedate";
 	} elseif ($_POST['Consolidation'] == 'Weekly') {
-		$sql = 'SELECT mrpplannedorders.part,
+		$sql = "SELECT mrpplannedorders.part,
 					   SUM(mrpplannedorders.supplyquantity) as supplyquantity,
 					   TRUNCATE(((TO_DAYS(duedate) - TO_DAYS(CURRENT_DATE)) / 7),0) AS weekindex,
 					   MIN(mrpplannedorders.duedate) as duedate,
@@ -54,8 +54,8 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 					  (stockmaster.materialcost + stockmaster.labourcost +
 					   stockmaster.overheadcost ) as computedcost
 				FROM mrpplannedorders, stockmaster
-				WHERE mrpplannedorders.part = stockmaster.stockid '  . "$wheredate" .
-				  ' AND stockmaster.mbflag = "M"
+				WHERE mrpplannedorders.part = stockmaster.stockid "  . $wheredate .
+				  " AND stockmaster.mbflag = 'M'
 				GROUP BY mrpplannedorders.part,
 						 weekindex,
 						 stockmaster.stockid,
@@ -68,9 +68,9 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 						 stockmaster.overheadcost,
 						 computedcost
 				ORDER BY mrpplannedorders.part,weekindex
-		';
+		";
 	} else {
-		$sql = 'SELECT mrpplannedorders.part,
+		$sql = "SELECT mrpplannedorders.part,
 					   SUM(mrpplannedorders.supplyquantity) as supplyquantity,
 					   EXTRACT(YEAR_MONTH from duedate) AS yearmonth,
 					   MIN(mrpplannedorders.duedate) as duedate,
@@ -84,8 +84,8 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 					  (stockmaster.materialcost + stockmaster.labourcost +
 					   stockmaster.overheadcost ) as computedcost,
 				FROM mrpplannedorders, stockmaster
-				WHERE mrpplannedorders.part = stockmaster.stockid '  . "$wheredate" .
-				  ' AND stockmaster.mbflag = "M"
+				WHERE mrpplannedorders.part = stockmaster.stockid "  . $wheredate .
+				  " AND stockmaster.mbflag = 'M'
 				GROUP BY mrpplannedorders.part,
 						 yearmonth,
 					   	 stockmaster.stockid,
@@ -97,7 +97,7 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 						 stockmaster.labourcost,
 						 stockmaster.overheadcost,
 						 computedcost
-				ORDER BY mrpplannedorders.part,yearmonth ';
+				ORDER BY mrpplannedorders.part,yearmonth ";
 	};
 	$result = DB_query($sql,$db,'','',false,true);
 
