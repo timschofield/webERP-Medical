@@ -100,7 +100,7 @@ include ('includes/PDFSuppTransListingPageHeader.inc');
 
 while ($myrow=DB_fetch_array($result)){
 
-	$sql='SELECT suppname FROM suppliers WHERE supplierid="'.$myrow['supplierno'].'"';
+	$sql="SELECT suppname FROM suppliers WHERE supplierid='".$myrow['supplierno']."'";
 	$supplierresult=DB_query($sql, $db);
 	$supplierrow=DB_fetch_array($supplierresult);
 
