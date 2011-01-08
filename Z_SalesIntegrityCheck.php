@@ -173,7 +173,7 @@ while ($myrow = DB_fetch_array($Result)) {
 
 
 echo '<br><br>'._('Check for orphan Stock Moves').'<br>';
-$SQL = 'SELECT stkmoveno, transno FROM stockmoves';
+$SQL = "SELECT stkmoveno, transno FROM stockmoves";
 $Result = DB_query($SQL,$db);
 
 while ($myrow = DB_fetch_array($Result)) {
