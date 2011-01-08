@@ -126,7 +126,7 @@ if (!isset($SelectedTaxAuthID)) {
 
 /* It could still be the second time the page has been run and a record has been selected for modification - SelectedTaxAuthID will exist because it was sent with the new call. If its the first time the page has been displayed with no parameters then none of the above are true and the list of tax authorities will be displayed with links to delete or edit each. These will call the same page again and allow update/input or deletion of the records*/
 
-	$sql = 'SELECT taxid,
+	$sql = "SELECT taxid,
 			description,
 			taxglcode,
 			purchtaxglaccount,
@@ -134,7 +134,7 @@ if (!isset($SelectedTaxAuthID)) {
 			bankacc,
 			bankacctype,
 			bankswift
-		FROM taxauthorities';
+		FROM taxauthorities";
 
 	$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The defined tax authorities could not be retrieved because');
 	$DbgMsg = _('The following SQL to retrieve the tax authorities was used');
@@ -237,13 +237,13 @@ if (isset($SelectedTaxAuthID)) {
 }  //end of if $SelectedTaxAuthID only do the else when a new record is being entered
 
 
-$SQL = 'SELECT accountcode,
+$SQL = "SELECT accountcode,
 		accountname
 	FROM chartmaster,
 		accountgroups
 	WHERE chartmaster.group_=accountgroups.groupname
 	AND accountgroups.pandl=0
-	ORDER BY accountcode';
+	ORDER BY accountcode";
 $result = DB_query($SQL,$db);
 
 if (!isset($_POST['Description'])) {
