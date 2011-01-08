@@ -150,7 +150,7 @@ echo '<tr>
 	<td>' . _('Account Selection') . ':<br>(' . _('If you know the code enter it above') . '<br>' . _('otherwise select the account from the list') . ')</td>
 	<td><select name="AcctSelection">';
 
-$sql = 'SELECT accountcode, accountname FROM chartmaster ORDER BY accountcode';
+$sql = "SELECT accountcode, accountname FROM chartmaster ORDER BY accountcode";
 
 $result = DB_query($sql, $db);
 echo '<option value=""></option>';
