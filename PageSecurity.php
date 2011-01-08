@@ -18,10 +18,10 @@ if (isset($_POST['Update'])) {
 	}
 }
 
-$sql='SELECT script,
+$sql="SELECT script,
 							pagesecurity,
 							description
-			FROM scripts';
+			FROM scripts";
 
 $result=DB_query($sql, $db);
 
