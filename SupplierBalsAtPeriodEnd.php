@@ -137,7 +137,7 @@ If (isset($_POST['PrintPDF'])
 	echo '<tr><td>' . _('Balances As At') . ":</td>
 			<td><select Name='PeriodEnd'>";
 
-	$sql = 'SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno DESC';
+	$sql = "SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno DESC";
 
 	$ErrMsg = _('Could not retrieve period data because');
 	$Periods = DB_query($sql,$db,$ErrMsg);
