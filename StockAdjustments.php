@@ -55,9 +55,9 @@ if (isset($_POST['CheckCode'])) {
 		'" alt="" />' . ' ' . _('Select Item to Adjust') . '</p>';
 
 	if (strlen($_POST['StockText'])>0) {
-		$sql='SELECT stockid, description from stockmaster where description like "%'.$_POST['StockText'].'%"';
+		$sql="SELECT stockid, description from stockmaster where description like '%".$_POST['StockText']."%'";
 	} else {
-		$sql='SELECT stockid, description from stockmaster where stockid like "%'.$_POST['StockCode'].'%"';
+		$sql="SELECT stockid, description from stockmaster where stockid like '%".$_POST['StockCode']."%'";
 	}
 	$ErrMsg=_('The stock information cannot be retrieved because');
 	$DbgMsg=_('The SQL to get the stock description was');
@@ -339,7 +339,7 @@ if (isset($_SESSION['Adjustment']) and strlen($_SESSION['Adjustment']->ItemDescr
 
 echo '<tr><td>'. _('Adjustment to Stock At Location').':</td><td><select name="StockLocation"> ';
 
-$sql = 'SELECT loccode, locationname FROM locations';
+$sql = "SELECT loccode, locationname FROM locations";
 $resultStkLocs = DB_query($sql,$db);
 while ($myrow=DB_fetch_array($resultStkLocs)){
 	if (isset($_SESSION['Adjustment']->StockLocation)){

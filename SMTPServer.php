@@ -24,7 +24,7 @@ if (isset($_POST['submit'])) {
 	echo '<br>';
 }
 
-$sql='SELECT id,
+$sql="SELECT id,
 				host,
 				port,
 				heloaddress,
@@ -32,7 +32,7 @@ $sql='SELECT id,
 				password,
 				timeout,
 				auth
-			FROM emailsettings';
+			FROM emailsettings";
 $result=DB_query($sql, $db);
 $myrow=DB_fetch_array($result);
 echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . "?" . SID . ">";
