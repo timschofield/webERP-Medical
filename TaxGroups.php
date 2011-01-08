@@ -232,10 +232,10 @@ echo '<td><input type="submit" name="submit" value="' . _('Enter Group') . '"></
 if (isset($SelectedGroup)) {
 	echo '</table><br>';
 
-	$sql = 'SELECT taxid,
+	$sql = "SELECT taxid,
 			description as taxname
 			FROM taxauthorities
-		ORDER BY taxid';
+		ORDER BY taxid";
 
 	$sqlUsed = "SELECT taxauthid,
 				description AS taxname,
