@@ -479,7 +479,7 @@ echo '<tr style="outline: 1px solid"><td>' . _('Controlled Items Must Exist For 
 	<td>' . _('This parameter relates to the behaviour of the controlled items code. If a serial numbered item has not previously existed then a credit note for it will not be allowed if this is set to Yes') . '</td></tr>';
 
 // DefaultPriceList
-$sql = 'SELECT typeabbrev, sales_type FROM salestypes ORDER BY sales_type';
+$sql = "SELECT typeabbrev, sales_type FROM salestypes ORDER BY sales_type";
 $ErrMsg = _('Could not load price lists');
 $result = DB_query($sql,$db,$ErrMsg);
 echo '<tr style="outline: 1px solid"><td>' . _('Default Price List') . ':</td>';
@@ -495,7 +495,7 @@ echo '</select></td>
 	<td>' . _('This price list is used as a last resort where there is no price set up for an item in the price list that the customer is set up for') . '</td></tr>';
 
 // Default_Shipper
-$sql = 'SELECT shipper_id, shippername FROM shippers ORDER BY shippername';
+$sql = "SELECT shipper_id, shippername FROM shippers ORDER BY shippername";
 $ErrMsg = _('Could not load shippers');
 $result = DB_query($sql,$db,$ErrMsg);
 echo '<tr style="outline: 1px solid"><td>' . _('Default Shipper') . ':</td>';
@@ -539,7 +539,7 @@ echo '</select></td>
 	<td>' . _('Set to Automatic - customer codes are automatically created - as a sequential number') .'</td></tr>';
 
 //==HJ== drop down list for tax category
-$sql = 'SELECT taxcatid, taxcatname FROM taxcategories ORDER BY taxcatname';
+$sql = "SELECT taxcatid, taxcatname FROM taxcategories ORDER BY taxcatname";
 $ErrMsg = _('Could not load tax categories table');
 $result = DB_query($sql,$db,$ErrMsg);
 echo '<tr style="outline: 1px solid"><td>' . _('Default Tax Category') . ':</td>';
@@ -561,7 +561,7 @@ echo '<tr style="outline: 1px solid"><td>' . _('TaxAuthorityReferenceName') . ':
 	<td>' . _('This parameter is what is displayed on tax invoices and credits for the tax authority of the company eg. in Australian this would by A.B.N.: - in NZ it would be GST No: in the UK it would be VAT Regn. No') .'</td></tr>';
 
 // CountryOfOperation
-$sql = 'SELECT currabrev, country FROM currencies ORDER BY country';
+$sql = "SELECT currabrev, country FROM currencies ORDER BY country";
 $ErrMsg = _('Could not load the countries from the currency table');
 $result = DB_query($sql,$db,$ErrMsg);
 echo '<tr style="outline: 1px solid"><td>' . _('Country Of Operation') . ':</td>';
@@ -663,9 +663,9 @@ echo '<tr style="outline: 1px solid"><td>' . _('Maximum Size in KB of uploaded i
 	<td>' . _('Picture files of items can be uploaded to the server. The system will check that files uploaded are less than this size (in KB) before they will be allowed to be uploaded. Large pictures will make the system slow and will be difficult to view in the stock maintenance screen.') .'</td>
 </tr>';
 //NumberOfMonthMustBeShown
-$sql = 'SELECT confvalue
+$sql = "SELECT confvalue
 		FROM `config`
-		WHERE confname ="numberOfMonthMustBeShown"';
+		WHERE confname ='numberOfMonthMustBeShown'";
 
 $ErrMsg = _('Could not load the Number Of Month Must be Shown');
 $result = DB_query($sql,$db,$ErrMsg);
@@ -844,7 +844,7 @@ echo '</select></td><td>' . _('Setting this to prohibited prevents accidentally 
 echo '<tr style="outline: 1px solid"><td>' . _('Prohibit GL Journals to Periods Prior To') . ':</td>
 	<td><select Name="X_ProhibitPostingsBefore">';
 
-$sql = 'SELECT lastdate_in_period FROM periods ORDER BY periodno DESC';
+$sql = "SELECT lastdate_in_period FROM periods ORDER BY periodno DESC";
 $ErrMsg = _('Could not load periods table');
 $result = DB_query($sql,$db,$ErrMsg);
 while ($PeriodRow = DB_fetch_row($result)){
@@ -964,7 +964,7 @@ echo '</select></td><td>' . _('Setting this parameter to Yes will ensure that wh
 echo '<tr style="outline: 1px solid"><td>' . _('Default Factory Location') . ':</td>
 	<td><select Name="X_DefaultFactoryLocation">';
 
-$sql = 'SELECT loccode,locationname FROM locations';
+$sql = "SELECT loccode,locationname FROM locations";
 $ErrMsg = _('Could not load locations table');
 $result = DB_query($sql,$db,$ErrMsg);
 while ($LocationRow = DB_fetch_array($result)){
