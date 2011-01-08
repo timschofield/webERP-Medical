@@ -19,7 +19,7 @@ if (DB_num_rows($TestAlreadyDoneResult)>0){
 $lineno = 1;
 $orderno = 0;
 
-$SalesOrdersResult = DB_query('SELECT orderno, stkcode FROM salesorderdetails ORDER BY orderno', $db);
+$SalesOrdersResult = DB_query("SELECT orderno, stkcode FROM salesorderdetails ORDER BY orderno", $db);
 
 while ($SalesOrderDetails = DB_fetch_array($SalesOrdersResult)) {
 
@@ -30,14 +30,14 @@ while ($SalesOrderDetails = DB_fetch_array($SalesOrdersResult)) {
 	}
 
 	$OrderNo = $SalesOrderDetails['orderno'];
-	DB_query('UPDATE salesorderdetails
-		SET orderlineno=' . $LineNo . '
-		WHERE orderno=' . $OrderNo . "
+	DB_query("UPDATE salesorderdetails
+		SET orderlineno='" . $LineNo . "'
+		WHERE orderno='" . $OrderNo . "'
 		AND stkcode='" . $SalesOrderDetails['stkcode'] ."'", $db);
 
 }
 
-DB_query( 'ALTER TABLE salesorderdetails ADD CONSTRAINT salesorderdetails_pk primary key(orderno, orderlineno)',$db);
+DB_query( "ALTER TABLE salesorderdetails ADD CONSTRAINT salesorderdetails_pk primary key(orderno, orderlineno)",$db);
 
 prnMsg(_('The sales orderdetails lines have been numbered appropriately for version 3.02'),'success');
 include('includes/footer.inc');
