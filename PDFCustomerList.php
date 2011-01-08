@@ -374,7 +374,7 @@ if (isset($_POST['PrintPDF'])){
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<tr><td>' . _('For Sales Areas') . ':</td><td><select name=Areas[] multiple>';
 
-	$sql='SELECT areacode, areadescription FROM areas';
+	$sql="SELECT areacode, areadescription FROM areas";
 	$AreasResult= DB_query($sql,$db);
 
 	echo '<option selected value="All">' . _('All Areas');
@@ -388,7 +388,7 @@ if (isset($_POST['PrintPDF'])){
 
 	echo '<option selected value="All">'. _('All sales folk');
 
-	$sql = 'SELECT salesmancode, salesmanname FROM salesman';
+	$sql = "SELECT salesmancode, salesmanname FROM salesman";
 	$SalesFolkResult = DB_query($sql,$db);
 
 	While ($myrow = DB_fetch_array($SalesFolkResult)){
