@@ -18,7 +18,7 @@ echo '<table cellpadding=2 class=selection><tr>';
 
 echo '<td>' . _('Type') . ":</td><td><select name='TransType'> ";
 
-$sql = 'SELECT typeid, typename FROM systypes WHERE typeid >= 20 AND typeid <= 23';
+$sql = "SELECT typeid, typename FROM systypes WHERE typeid >= 20 AND typeid <= 23";
 $resultTypes = DB_query($sql,$db);
 
 echo "<option Value='All'> All";
