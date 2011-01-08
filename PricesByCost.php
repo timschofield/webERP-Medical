@@ -167,9 +167,9 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 	echo '</br></br><form action="' . $_SERVER['PHP_SELF'] . '" method="post"><table class=selection>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-	$SQL = 'SELECT categoryid, categorydescription
+	$SQL = "SELECT categoryid, categorydescription
 		      FROM stockcategory
-			  ORDER BY categorydescription';
+			  ORDER BY categorydescription";
 	$result1 = DB_query($SQL, $db);
 	echo '<tr>
 			<td>' . _('Category') . ':</td>
@@ -193,7 +193,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 	}
 	echo '<td>
 				<input type="text" class="number" name="Margin" MAXLENGTH =8 size=8 value=' .$_POST['Margin'] . '></td></tr>';
-	$result = DB_query('SELECT typeabbrev, sales_type FROM salestypes ', $db);
+	$result = DB_query("SELECT typeabbrev, sales_type FROM salestypes ", $db);
 	echo '<tr><td>' . _('Sales Type') . '/' . _('Price List') . ":</td>
 		<td><select name='SalesType'>";
 	while ($myrow = DB_fetch_array($result)) {
@@ -204,7 +204,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 		}
 	} //end while loop
 	DB_data_seek($result, 0);
-	$result = DB_query('SELECT currency, currabrev FROM currencies', $db);
+	$result = DB_query("SELECT currency, currabrev FROM currencies", $db);
 	echo '</select></td></tr>
 		<tr><td>' . _('Currency') . ":</td>
 		<td><select name='CurrCode'>";
