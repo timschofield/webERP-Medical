@@ -410,7 +410,7 @@ if (!isset($_GET['delete'])) {
 
 		echo '<tr><td>' . _('From Period') . ':</td>
 			<td><select name="PeriodFrom"';
-		$sql = 'SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno DESC';
+		$sql = "SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno DESC";
 		$ErrMsg = _('Could not load periods table');
 		$result = DB_query($sql,$db,$ErrMsg);
 		while ($PeriodRow = DB_fetch_row($result)){
@@ -424,7 +424,7 @@ if (!isset($_GET['delete'])) {
 
 		echo '<tr><td>' . _('ToPeriod') . ':</td>
 			<td><select name="PeriodTo"';
-		$sql = 'SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno DESC';
+		$sql = "SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno DESC";
 		$ErrMsg = _('Could not load periods table');
 		$result = DB_query($sql,$db,$ErrMsg);
 		while ($PeriodRow = DB_fetch_row($result)){
