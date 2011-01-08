@@ -260,7 +260,7 @@ If (isset($_POST['PrintPDF'])) {
 	}
 	echo '</select></td></tr>';
 
-	$SQL='SELECT categoryid, categorydescription FROM stockcategory WHERE stocktype<>"A" ORDER BY categorydescription';
+	$SQL="SELECT categoryid, categorydescription FROM stockcategory ORDER BY categorydescription";
 	$result1 = DB_query($SQL,$db);
 	if (DB_num_rows($result1)==0){
 		echo '</table></td></tr>
