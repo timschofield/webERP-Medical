@@ -426,7 +426,7 @@ if (!isset($OrderNumber) or $OrderNumber==''){
 echo '</table>';
 
 if (!isset($SelectedStockItem)) {
-	$SQL='SELECT categoryid, categorydescription FROM stockcategory ORDER BY categorydescription';
+	$SQL="SELECT categoryid, categorydescription FROM stockcategory ORDER BY categorydescription";
 	$result1 = DB_query($SQL,$db);
 
    echo '<br>';
