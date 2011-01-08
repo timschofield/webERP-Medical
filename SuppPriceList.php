@@ -215,7 +215,7 @@ if (isset($_POST['PrintPDF'])) {
 	}
 	echo '</select></td></tr>';
 
-	$sql='SELECT categoryid,categorydescription FROM `stockcategory`';
+	$sql="SELECT categoryid,categorydescription FROM `stockcategory`";
 	$result = DB_query($sql,$db);
 	echo '<tr><td>' . _('Category') . ':</td><td><select name="category"> ';
 		echo '<option Value="all">' ._('ALL').'';
