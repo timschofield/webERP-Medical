@@ -19,12 +19,12 @@ if (!isset($_POST['BatchNo'])){
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' .
 		 $title . '" alt="" />' . ' ' . $title . '</p>';
 
-	$sql='SELECT DISTINCT
+	$sql="SELECT DISTINCT
 			transno,
 			transdate
 		FROM banktrans
 		WHERE type=12
-		ORDER BY transno DESC';
+		ORDER BY transno DESC";
 	$result=DB_query($sql, $db);
 
 	echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . '><table class=selection>';
@@ -42,7 +42,7 @@ if (!isset($_POST['BatchNo'])){
 }
 
 if (isset($_POST['BatchNo']) and $_POST['BatchNo']!='') {
-	$SQL= 'SELECT bankaccountname,
+	$SQL= "SELECT bankaccountname,
 								bankaccountnumber,
 								ref,
 								transdate,
@@ -54,8 +54,8 @@ if (isset($_POST['BatchNo']) and $_POST['BatchNo']!='') {
 							FROM bankaccounts,
 								banktrans
 							WHERE bankaccounts.accountcode=banktrans.bankact
-							AND banktrans.transno="' . $_POST['BatchNo'] . '"
-							AND banktrans.type=12';
+							AND banktrans.transno='" . $_POST['BatchNo'] . "'
+							AND banktrans.type=12";
 
 	$ErrMsg = _('An error occurred getting the header information about the receipt batch number') . ' ' . $_POST['BatchNo'];
 	$DbgMsg = _('The SQL used to get the receipt header information that failed was');
