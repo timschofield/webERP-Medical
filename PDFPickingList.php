@@ -23,9 +23,9 @@ if ($_SESSION['RequirePickingNote']==0) {
 if ((!isset($_GET['TransNo']) or $_GET['TransNo']=="") and !isset($_POST['TransDate'])){
 	$title = _('Select Picking Lists');
 	include('includes/header.inc');
-	$sql='SELECT loccode,
+	$sql="SELECT loccode,
 				locationname
-			FROM locations';
+			FROM locations";
 	$result=DB_query($sql, $db);
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/sales.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
 	echo '<form action=' . $_SERVER['PHP_SELF'] . '?' . SID . ' method=post name="form">';
@@ -204,9 +204,9 @@ for ($i=0;$i<sizeof($OrdersToPick);$i++){
 			$OrdersToPick[$i]['orderno'] . ' ' . _('from the database');
 
 		/* Are there any picking lists for this order already */
-		$sql='SELECT COUNT(orderno)
+		$sql="SELECT COUNT(orderno)
 				FROM pickinglists
-				WHERE orderno='.$OrdersToPick[$i]['orderno'];
+				WHERE orderno='".$OrdersToPick[$i]['orderno'] . "'";
 		$countresult=DB_query($sql, $db);
 		$count=DB_fetch_row($countresult);
 		if ($count[0]==0) {
