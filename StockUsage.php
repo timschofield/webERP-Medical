@@ -60,7 +60,7 @@ echo _('Stock Code') . ":<input type=text name='StockID' size=21 maxlength=20 va
 
 echo _('From Stock Location') . ":<select name='StockLocation'>";
 
-$sql = 'SELECT loccode, locationname FROM locations';
+$sql = "SELECT loccode, locationname FROM locations";
 $resultStkLocs = DB_query($sql,$db);
 while ($myrow=DB_fetch_array($resultStkLocs)){
 	if (isset($_POST['StockLocation'])){
