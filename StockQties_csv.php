@@ -18,7 +18,7 @@ echo '<div class=centre>' . _('Making a comma separated values file of the curre
 
 $ErrMsg = _('The SQL to get the stock quantities failed with the message');
 
-$sql = 'SELECT stockid, SUM(quantity) FROM locstock GROUP BY stockid HAVING SUM(quantity)<>0';
+$sql = "SELECT stockid, SUM(quantity) FROM locstock GROUP BY stockid HAVING SUM(quantity)<>0";
 $result = DB_query($sql, $db, $ErrMsg);
 
 if (!file_exists($_SESSION['reports_dir'])){
