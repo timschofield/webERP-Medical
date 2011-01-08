@@ -36,7 +36,7 @@ include('includes/SQL_CommonFunctions.inc');
 //echo "<a href='" . $rootpath . '/SelectSupplier.php?' . SID . "'>" . _('Back to Suppliers') . '</a><br>';
 
 if (!isset($_SESSION['SuppTrans']->SupplierName)) {
-	$sql='SELECT suppname FROM suppliers WHERE supplierid="'.$_GET['SupplierID'].'"';
+	$sql="SELECT suppname FROM suppliers WHERE supplierid='".$_GET['SupplierID']."'";
 	$result = DB_query($sql,$db);
 	$myrow = DB_fetch_row($result);
 	$SupplierName=$myrow[0];
@@ -962,10 +962,10 @@ then do the updates and inserts to process the credit note entered */
 							if ($EnteredGRN->AssetID!=0) { //then it is an asset
 
 								/*Need to get the asset details  for posting */
-								$result = DB_query('SELECT costact
+								$result = DB_query("SELECT costact
 																	FROM fixedassets INNER JOIN fixedassetcategories
 																	ON fixedassets.assetcategoryid= fixedassetcategories.categoryid
-																	WHERE assetid="' . $EnteredGRN->AssetID . '"',$db);
+																	WHERE assetid='" . $EnteredGRN->AssetID . "'",$db);
 								$AssetRow = DB_fetch_array($result);
 								$GLCode = $AssetRow['costact'];
 							} //the item was an asset
