@@ -63,7 +63,7 @@ if (isset($_POST['UpdateStat']) AND $_POST['UpdateStat']!='') {
 	$OK_to_updstat = 1;
 	$OldStatus=$_SESSION['PO'.$identifier]->Status;
 	$NewStatus=$_POST['Stat'];
-	$EmailSQL='SELECT email FROM www_users WHERE userid="'.$_SESSION['PO'.$identifier]->Initiator.'"';
+	$EmailSQL="SELECT email FROM www_users WHERE userid='".$_SESSION['PO'.$identifier]->Initiator."'";
 	$EmailResult=DB_query($EmailSQL, $db);
 	$EmailRow=DB_fetch_array($EmailResult);
 
@@ -839,9 +839,9 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	echo '<table class=selection width=100%><tr><td>' . _('Warehouse') . ':</td>
 			<td><select name=StkLocation onChange="ReloadForm(form1.LookupDeliveryAddress)">';
 
-	$sql = 'SELECT loccode,
+	$sql = "SELECT loccode,
 					locationname
-					FROM locations';
+					FROM locations";
 	$LocnResult = DB_query($sql,$db);
 
 	while ($LocnRow=DB_fetch_array($LocnResult)){
@@ -970,7 +970,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 
 	echo '<tr><td>' . _('Delivery By') . ':</td><td><select name=DeliveryBy>';
 
-	$ShipperResult = DB_query('SELECT shipper_id, shippername FROM shippers',$db);
+	$ShipperResult = DB_query("SELECT shipper_id, shippername FROM shippers",$db);
 
 	while ($ShipperRow=DB_fetch_array($ShipperResult)){
 		if (isset($_POST['DeliveryBy']) and ($_POST['DeliveryBy'] == $ShipperRow['shipper_id'])) {
@@ -987,7 +987,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	echo '<table class=selection width=100%><tr><td>' . _('Supplier Selection') . ':</td><td>
 		<select name=Keywords onChange="ReloadForm(form1.SearchSuppliers)">';
 
-	$SuppCoResult = DB_query('SELECT supplierid, suppname FROM suppliers ORDER BY suppname',$db);
+	$SuppCoResult = DB_query("SELECT supplierid, suppname FROM suppliers ORDER BY suppname",$db);
 
 	while ( $SuppCoRow=DB_fetch_array($SuppCoResult)){
 		if ($SuppCoRow['suppname'] == $_SESSION['PO'.$identifier]->SupplierName) {
@@ -1003,7 +1003,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	echo '</td></tr><tr><td>' . _('Supplier Contact') . ':</td><td>
 		<select name=SupplierContact>';
 
-	$sql = 'SELECT contact FROM suppliercontacts WHERE supplierid="' . $_POST['Select'] .'"';
+	$sql = "SELECT contact FROM suppliercontacts WHERE supplierid='" . $_POST['Select'] ."'";
 	$SuppCoResult = DB_query($sql,$db);
 
 	while ( $SuppCoRow=DB_fetch_array($SuppCoResult)){
@@ -1038,7 +1038,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 		</td><td><input type="text" name="SuppTel" size="31" maxlength="30" value="' . $_SESSION['PO'.$identifier]->SuppTel  . '"></td>
 		</tr>';
 
-	$result=DB_query('SELECT terms, termsindicator FROM paymentterms', $db);
+	$result=DB_query("SELECT terms, termsindicator FROM paymentterms", $db);
 
 	echo '<tr><td>' . _('Payment Terms') . ':</td><td><select name="PaymentTerms">';
 
@@ -1052,7 +1052,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	DB_data_seek($result, 0);
 	echo '</select></td></tr>';
 
-	$result=DB_query('SELECT loccode, locationname FROM locations WHERE loccode="' . $_SESSION['PO'.$identifier]->Port.'"', $db);
+	$result=DB_query("SELECT loccode, locationname FROM locations WHERE loccode='" . $_SESSION['PO'.$identifier]->Port."'", $db);
 	$myrow = DB_fetch_array($result);
 	$_POST['Port'] = $myrow['locationname'];
 
