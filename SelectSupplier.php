@@ -85,7 +85,7 @@ if (isset($_POST['Search']) OR isset($_POST['Go']) OR isset($_POST['Next']) OR i
 		prnMsg( '<br>' . _('Supplier name keywords have been used in preference to the Supplier code extract entered'), 'info' );
 	}
 	if ($_POST['Keywords'] == '' AND $_POST['SupplierCode'] == '') {
-		$SQL = 'SELECT supplierid,
+		$SQL = "SELECT supplierid,
 					suppname,
 					currcode,
 					address1,
@@ -93,7 +93,7 @@ if (isset($_POST['Search']) OR isset($_POST['Go']) OR isset($_POST['Next']) OR i
 					address3,
 					address4
 				FROM suppliers
-				ORDER BY suppname';
+				ORDER BY suppname";
 	} else {
 		if (strlen($_POST['Keywords']) > 0) {
 			$_POST['Keywords'] = strtoupper($_POST['Keywords']);
