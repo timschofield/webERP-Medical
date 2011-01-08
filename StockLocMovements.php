@@ -18,7 +18,7 @@ echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/
 echo '<table class=selection><tr><td>';
 echo '  ' . _('From Stock Location') . ':<select name="StockLocation"> ';
 
-$sql = 'SELECT loccode, locationname FROM locations';
+$sql = "SELECT loccode, locationname FROM locations";
 $resultStkLocs = DB_query($sql,$db);
 while ($myrow=DB_fetch_array($resultStkLocs)){
 	if (isset($_POST['StockLocation']) AND $_POST['StockLocation']!='All'){
