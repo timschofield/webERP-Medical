@@ -24,7 +24,7 @@ if (!isset($_POST['FromPeriod']) OR !isset($_POST['ToPeriod'])){
 /*Show a form to allow input of criteria for TB to show */
 	echo '<table><tr><td>' . _('Select Period From') . ":</td><td><select Name='FromPeriod'>";
 
-	$sql = 'SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno';
+	$sql = "SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno";
 	$Periods = DB_query($sql,$db);
 
 
@@ -36,7 +36,7 @@ if (!isset($_POST['FromPeriod']) OR !isset($_POST['ToPeriod'])){
 
 	echo '</select></td></tr>';
 
-	$sql = 'SELECT MAX(periodno) FROM periods';
+	$sql = "SELECT MAX(periodno) FROM periods";
 	$MaxPrd = DB_query($sql,$db);
 	$MaxPrdrow = DB_fetch_row($MaxPrd);
 
@@ -62,7 +62,7 @@ if (!isset($_POST['FromPeriod']) OR !isset($_POST['ToPeriod'])){
 
 	for ($i=$_POST['FromPeriod'];$i<=$_POST['ToPeriod'];$i++){
 
-		$sql='SELECT accountcode, period, budget, actual, bfwd, bfwdbudget FROM chartdetails WHERE period ='. $i;
+		$sql="SELECT accountcode, period, budget, actual, bfwd, bfwdbudget FROM chartdetails WHERE period ='". $i. "'";
 
 		$ErrMsg = _('Could not retrieve the ChartDetail records because');
 		$result = DB_query($sql,$db,$ErrMsg);
@@ -74,7 +74,7 @@ if (!isset($_POST['FromPeriod']) OR !isset($_POST['ToPeriod'])){
 
 			echo '<br>' . _('Account Code') . ': ' . $myrow['accountcode'] . ' ' . _('Period') .': ' . $myrow['period'];
 
-			$sql = 'UPDATE chartdetails SET bfwd=' . $CFwd . ', bfwdbudget=' . $CFwdBudget . ' WHERE period=' . ($myrow['period'] +1) . ' AND  accountcode = ' . $myrow['accountcode'];
+			$sql = "UPDATE chartdetails SET bfwd='" . $CFwd . "', bfwdbudget='" . $CFwdBudget . "' WHERE period='" . ($myrow['period'] +1) . "' AND  accountcode = '" . $myrow['accountcode'] . "'";
 
 			$ErrMsg =_('Could not update the chartdetails record because');
 			$updresult = DB_query($sql,$db,$ErrMsg);
