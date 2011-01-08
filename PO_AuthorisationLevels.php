@@ -161,7 +161,7 @@ if (isset($_GET['Edit'])) {
 	echo '<input type=hidden name=userid value="'.$UserID.'"';
 } else {
 	echo '<tr><td>'._('User ID').'</td><td><select name=userid>';
-	$usersql='SELECT userid FROM www_users';
+	$usersql="SELECT userid FROM www_users";
 	$userresult=DB_query($usersql,$db);
 	while ($myrow=DB_fetch_array($userresult)) {
 		if ($myrow['userid']==$UserID) {
@@ -174,14 +174,14 @@ if (isset($_GET['Edit'])) {
 }
 
 if (isset($_GET['Edit'])) {
-	$currencysql='SELECT currency FROM currencies WHERE currabrev="'.$Currency.'"';
+	$currencysql="SELECT currency FROM currencies WHERE currabrev='".$Currency."'";
 	$currencyresult=DB_query($currencysql,$db);
 	$myrow=DB_fetch_array($currencyresult);
 	echo '<tr><td>'._('Currency').'</td><td>'.$myrow['currency'].'</td></tr>';
 	echo '<input type=hidden name=currabrev value="'.$Currency.'"';
 } else {
 	echo '<tr><td>'._('Currency').'</td><td><select name=currabrev>';
-	$currencysql='SELECT currabrev,currency FROM currencies';
+	$currencysql="SELECT currabrev,currency FROM currencies";
 	$currencyresult=DB_query($currencysql,$db);
 	while ($myrow=DB_fetch_array($currencyresult)) {
 		if ($myrow['currabrev']==$Currency) {
