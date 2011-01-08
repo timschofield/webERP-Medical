@@ -15,7 +15,7 @@ prnMsg (_('This script takes no account of start and end dates of prices and upd
 echo "<form method='POST' action='" . $_SERVER['PHP_SELF'] . '?' . SID . "'>";
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-$SQL = 'SELECT sales_type, typeabbrev FROM salestypes';
+$SQL = "SELECT sales_type, typeabbrev FROM salestypes";
 
 $result = DB_query($SQL,$db);
 
@@ -37,7 +37,7 @@ echo '</select></td></tr>';
 echo '<tr><td>' . _('Category') . ":</td>
                 <td><select name='StkCat'>";
 
-$sql = 'SELECT categoryid, categorydescription FROM stockcategory';
+$sql = "SELECT categoryid, categorydescription FROM stockcategory";
 
 $ErrMsg = _('The stock categories could not be retrieved because');
 $DbgMsg = _('The SQL used to retrieve stock categories and failed was');
