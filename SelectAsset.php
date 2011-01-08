@@ -27,10 +27,10 @@ if (isset($_POST['AssetCode'])) {
 	$_POST['AssetCode'] = trim(strtoupper($_POST['AssetCode']));
 }
 // Always show the search facilities
-$SQL = 'SELECT categoryid,
+$SQL = "SELECT categoryid,
 								categorydescription
 							FROM fixedassetcategories
-							ORDER BY categorydescription';
+							ORDER BY categorydescription";
 $result = DB_query($SQL, $db);
 if (DB_num_rows($result) == 0) {
 	echo '<p><font size=4 color=red>' . _('Problem Report') . ':</font><br>' . _('There are no asset categories currently defined please use the link below to set them up');
@@ -79,7 +79,7 @@ if ($_POST['AssetLocation']=='ALL'){
 } else {
 	echo '<option value="ALL">' . _('Any asset location') . '</option>';
 }
-$result = DB_query('SELECT locationid, locationdescription FROM fixedassetlocations',$db);
+$result = DB_query("SELECT locationid, locationdescription FROM fixedassetlocations",$db);
 
 while ($myrow = DB_fetch_array($result)) {
 	if ($myrow['locationid'] == $_POST['AssetLocation']) {
@@ -113,12 +113,12 @@ if (isset($_POST['Search']) OR isset($_POST['Go']) OR isset($_POST['Next']) OR i
 	if ($_POST['Keywords'] AND $_POST['AssetCode']) {
 		prnMsg( _('Asset description keywords have been used in preference to the asset code extract entered'), 'info' );
 	}
-	$SQL = 'SELECT assetid,
+	$SQL = "SELECT assetid,
 									description,
 									datepurchased,
 									fixedassetlocations.locationdescription
 							FROM fixedassets INNER JOIN fixedassetlocations
-							ON fixedassets.assetlocation=fixedassetlocations.locationid ';
+							ON fixedassets.assetlocation=fixedassetlocations.locationid ";
 
 	if ($_POST['Keywords']) {
 		//insert wildcard characters in spaces
