@@ -14,7 +14,7 @@ echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/
 echo '<table class=selection><tr><td>';
 echo _('Select recurring order templates for delivery from:') . ' </td><td>' . '<select name="StockLocation">';
 
-$sql = 'SELECT loccode, locationname FROM locations';
+$sql = "SELECT loccode, locationname FROM locations";
 
 $resultStkLocs = DB_query($sql,$db);
 
