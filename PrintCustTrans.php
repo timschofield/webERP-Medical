@@ -476,11 +476,11 @@ if (($InvOrCredit == 'Invoice' or $InvOrCredit == 'Credit') and isset($PrintPDF)
 		echo '<tr><td>' . _('End invoice/credit note number to print') . "</td><td><input Type=text class=number max=6 size=7 name='ToTransNo'></td></tr></table>";
 		echo "<br><div class='centre'><input type=Submit Name='Print' Value='" . _('Print') . "'><p>";
 		echo "<input type=Submit Name='PrintPDF' Value='" . _('Print PDF') . "'></div>";
-		$sql = 'SELECT typeno FROM systypes WHERE typeid=10';
+		$sql = "SELECT typeno FROM systypes WHERE typeid=10";
 		$result = DB_query($sql, $db);
 		$myrow = DB_fetch_row($result);
 		echo '<div class="page_help_text"><b>' . _('The last invoice created was number') . ' ' . $myrow[0] . '</b><br>' . _('If only a single invoice is required') . ', ' . _('enter the invoice number to print in the Start transaction number to print field and leave the End transaction number to print field blank') . '. ' . _('Only use the end invoice to print field if you wish to print a sequential range of invoices') . '';
-		$sql = 'SELECT typeno FROM systypes WHERE typeid=11';
+		$sql = "SELECT typeno FROM systypes WHERE typeid=11";
 		$result = DB_query($sql, $db);
 		$myrow = DB_fetch_row($result);
 		echo '<br /><b>' . _('The last credit note created was number') . ' ' . $myrow[0] . '</b><br />' . _('A sequential range can be printed using the same method as for invoices above') . '. ' . _('A single credit note can be printed by only entering a start transaction number') . '</DIV';
