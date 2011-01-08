@@ -110,7 +110,7 @@ if (!isset($StockID)) {
 		}
 		echo _('Work Order number') . ": <input type=text name='WO' MAXLENGTH =8 size=9>&nbsp " . _('Processing at') . ":<select name='StockLocation'> ";
 
-		$sql = 'SELECT loccode, locationname FROM locations';
+		$sql = "SELECT loccode, locationname FROM locations";
 
 		$resultStkLocs = DB_query($sql,$db);
 
@@ -148,10 +148,10 @@ if (!isset($StockID)) {
 		echo '&nbsp;&nbsp;<a href="' . $rootpath . '/WorkOrderEntry.php?' . SID . '">' . _('New Work Order') . '</a></td></tr></table><br />';
 	}
 
-	$SQL='SELECT categoryid,
+	$SQL="SELECT categoryid,
 			categorydescription
 		FROM stockcategory
-		ORDER BY categorydescription';
+		ORDER BY categorydescription";
 
 	$result1 = DB_query($SQL,$db);
 
