@@ -663,7 +663,7 @@ if (!isset($SupplierID)) {
 	echo '<tr><td>' . _('Facsimile') . ":</td><td><input type='text' name='Fax' size=30 maxlength=40></td></tr>";
 	echo '<tr><td>' . _('Email Address') . ":</td><td><input type='text' name='Email' size=30 maxlength=40></td></tr>";
 	echo '<tr><td>' . _('Supplier Type') . ":</td><td><select name='SupplierType'>";
-	$result=DB_query('SELECT typeid, typename FROM suppliertype', $db);
+	$result=DB_query("SELECT typeid, typename FROM suppliertype", $db);
 	while ($myrow = DB_fetch_array($result)) {
 		echo "<option VALUE='". $myrow['typeid'] . "'>" . $myrow['typename'];
 	} //end while loop
@@ -675,7 +675,7 @@ if (!isset($SupplierID)) {
 	echo '<tr><td>' . _('Bank reference') . ":</td><td><input type='text' name='BankRef' VALUE=0 size=13 maxlength=12></td></tr>";
 	echo '<tr><td>' . _('Bank Account No') . ":</td><td><input type='text' name='BankAct' size=31 maxlength=30></td></tr>";
 
-	$result=DB_query('SELECT terms, termsindicator FROM paymentterms', $db);
+	$result=DB_query("SELECT terms, termsindicator FROM paymentterms", $db);
 
 	echo '<tr><td>' . _('Payment Terms') . ":</td><td><select name='PaymentTerms'>";
 
@@ -685,7 +685,7 @@ if (!isset($SupplierID)) {
 	DB_data_seek($result, 0);
 	echo '</select></td></tr>';
 
-	$result=DB_query('SELECT id, coyname FROM factorcompanies', $db);
+	$result=DB_query("SELECT id, coyname FROM factorcompanies", $db);
 
 	echo '<tr><td>' . _('Factor Company') . ":</td><td><select name='FactorID'>";
 	echo '<option VALUE=0>' . _('None');
@@ -700,9 +700,9 @@ if (!isset($SupplierID)) {
 	echo '</select></td></tr>';
 	echo '<tr><td>' . _('Tax Reference') . ":</td><td><input type='text' name='TaxRef' size=21 maxlength=20></td></tr>";
 
-	$result=DB_query('SELECT currency, currabrev FROM currencies', $db);
+	$result=DB_query("SELECT currency, currabrev FROM currencies", $db);
 	if (!isset($_POST['CurrCode'])){
-		$CurrResult = DB_query('SELECT currencydefault FROM companies WHERE coycode=1', $db);
+		$CurrResult = DB_query("SELECT currencydefault FROM companies WHERE coycode=1", $db);
 		$myrow = DB_fetch_row($CurrResult);
 		$_POST['CurrCode'] = $myrow[0];
 	}
@@ -727,7 +727,7 @@ if (!isset($SupplierID)) {
 
 	DB_data_seek($result, 0);
 
-	$sql = 'SELECT taxgroupid, taxgroupdescription FROM taxgroups';
+	$sql = "SELECT taxgroupid, taxgroupdescription FROM taxgroups";
 	$result = DB_query($sql, $db);
 
 	while ($myrow = DB_fetch_array($result)) {
@@ -813,7 +813,7 @@ if (!isset($SupplierID)) {
 	echo '<tr><td>' . _('Facsimile') . ':</td><td><input '.(in_array('Name',$Errors) ? 'class="inputerror"' : '').' type="text" name="Fax" VALUE="' . $_POST['Fax'] . '" size=42 maxlength=40></td></tr>';
 	echo '<tr><td>' . _('Email Address') . ':</td><td><input '.(in_array('Name',$Errors) ? 'class="inputerror"' : '').' type="text" name="Email" VALUE="' . $_POST['Email'] . '" size=42 maxlength=40></td></tr>';
 	echo '<tr><td>' . _('Supplier Type') . ":</td><td><select name='SupplierType'>";
-	$result=DB_query('SELECT typeid, typename FROM suppliertype', $db);
+	$result=DB_query("SELECT typeid, typename FROM suppliertype", $db);
 	while ($myrow = DB_fetch_array($result)) {
 		if ($_POST['SupplierType']==$myrow['typeid']) {
 			echo "<option selected value='". $myrow['typeid'] . "'>" . $myrow['typename'];
@@ -828,7 +828,7 @@ if (!isset($SupplierID)) {
 	echo '<tr><td>' . _('Bank Reference') . ':</td><td><input '.(in_array('BankRef',$Errors) ? 'class="inputerror"' : '').'  type="text" name="BankRef" size=13 maxlength=12 VALUE="' . $_POST['BankRef'] . '"></td></tr>';
 	echo '<tr><td>' . _('Bank Account No') . ":</td><td><input type='text' name='BankAct' size=31 maxlength=30 VALUE='" . $_POST['BankAct'] . "'></td></tr>";
 
-	$result=DB_query('SELECT terms, termsindicator FROM paymentterms', $db);
+	$result=DB_query("SELECT terms, termsindicator FROM paymentterms", $db);
 
 	echo '<tr><td>' . _('Payment Terms') . ":</td><td><select name='PaymentTerms'>";
 
@@ -841,7 +841,7 @@ if (!isset($SupplierID)) {
 	} //end while loop
 	DB_data_seek($result, 0);
 
-	$result=DB_query('SELECT id, coyname FROM factorcompanies', $db);
+	$result=DB_query("SELECT id, coyname FROM factorcompanies", $db);
 
 	echo '<tr><td>' . _('Factor Company') . ":</td><td><select name='FactorID'>";
 	echo '<option VALUE=0>' . _('None');
@@ -855,7 +855,7 @@ if (!isset($SupplierID)) {
 	DB_data_seek($result, 0);
 	echo '<tr><td>' . _('Tax Reference') . ":</td><td><input type='text' name='TaxRef' size=21 maxlength=20 VALUE='".$_POST['TaxRef']."'></td></tr>";
 
-	$result=DB_query('SELECT currency, currabrev FROM currencies', $db);
+	$result=DB_query("SELECT currency, currabrev FROM currencies", $db);
 
 	echo '</select></td></tr><tr><td>' . _('Supplier Currency') . ":</td><td><select name='CurrCode'>";
 	while ($myrow = DB_fetch_array($result)) {
@@ -884,7 +884,7 @@ if (!isset($SupplierID)) {
 
 	DB_data_seek($result, 0);
 
-	$sql = 'SELECT taxgroupid, taxgroupdescription FROM taxgroups';
+	$sql = "SELECT taxgroupid, taxgroupdescription FROM taxgroups";
 	$result = DB_query($sql, $db);
 
 	while ($myrow = DB_fetch_array($result)) {
