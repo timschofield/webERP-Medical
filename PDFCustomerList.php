@@ -30,7 +30,7 @@ if (isset($_POST['PrintPDF'])){
 
 	if (in_array('All', $_POST['Areas'])){
 		if (in_array('All', $_POST['SalesPeople'])){
-			$SQL = 'SELECT debtorsmaster.debtorno,
+			$SQL = "SELECT debtorsmaster.debtorno,
 					debtorsmaster.name,
 					debtorsmaster.address1,
 					debtorsmaster.address2,
@@ -64,10 +64,10 @@ if (isset($_POST['PrintPDF'])){
 				ORDER BY area,
 					salesman,
 					debtorsmaster.debtorno,
-					custbranch.branchcode';
+					custbranch.branchcode";
 		} else {
 		/* there are a range of salesfolk selected need to build the where clause */
-			$SQL = 'SELECT debtorsmaster.debtorno,
+			$SQL = "SELECT debtorsmaster.debtorno,
 					debtorsmaster.name,
 					debtorsmaster.address1,
 					debtorsmaster.address2,
@@ -98,25 +98,25 @@ if (isset($_POST['PrintPDF'])){
 				ON custbranch.area = areas.areacode
 				INNER JOIN salesman
 				ON custbranch.salesman=salesman.salesmancode
-				WHERE (';
+				WHERE (";
 
 				$i=0;
 				foreach ($_POST['SalesPeople'] as $Salesperson){
 					if ($i>0){
-						$SQL .= ' OR ';
+						$SQL .= " OR ";
 					}
 					$i++;
 					$SQL .= "custbranch.salesman='" . $Salesperson ."'";
 				}
 
-				$SQL .=') ORDER BY area,
+				$SQL .=") ORDER BY area,
 						salesman,
 						debtorsmaster.debtorno,
-						custbranch.branchcode';
+						custbranch.branchcode";
 		} /*end if SalesPeople =='All' */
 	} else { /* not all sales areas has been selected so need to build the where clause */
 		if (in_array('All', $_POST['SalesPeople'])){
-			$SQL = 'SELECT debtorsmaster.debtorno,
+			$SQL = "SELECT debtorsmaster.debtorno,
 					debtorsmaster.name,
 					debtorsmaster.address1,
 					debtorsmaster.address2,
@@ -147,24 +147,24 @@ if (isset($_POST['PrintPDF'])){
 				ON custbranch.area = areas.areacode
 				INNER JOIN salesman
 				ON custbranch.salesman=salesman.salesmancode
-				WHERE (';
+				WHERE (";
 
 			$i=0;
 			foreach ($_POST['Areas'] as $Area){
 				if ($i>0){
-					$SQL .= ' OR ';
+					$SQL .= " OR ";
 				}
 				$i++;
 				$SQL .= "custbranch.area='" . $Area ."'";
 			}
 
-			$SQL .= ') ORDER BY custbranch.area,
+			$SQL .= ") ORDER BY custbranch.area,
 					custbranch.salesman,
 					debtorsmaster.debtorno,
-					custbranch.branchcode';
+					custbranch.branchcode";
 		} else {
 		/* there are a range of salesfolk selected need to build the where clause */
-			$SQL = 'SELECT debtorsmaster.debtorno,
+			$SQL = "SELECT debtorsmaster.debtorno,
 					debtorsmaster.name,
 					debtorsmaster.address1,
 					debtorsmaster.address2,
@@ -195,32 +195,32 @@ if (isset($_POST['PrintPDF'])){
 				ON custbranch.area = areas.areacode
 				INNER JOIN salesman
 				ON custbranch.salesman=salesman.salesmancode
-				WHERE (';
+				WHERE (";
 
 			$i=0;
 			foreach ($_POST['Areas'] as $Area){
 				if ($i>0){
-					$SQL .= ' OR ';
+					$SQL .= " OR ";
 				}
 				$i++;
 				$SQL .= "custbranch.area='" . $Area ."'";
 			}
 
-			$SQL .= ') AND (';
+			$SQL .= ") AND (";
 
 			$i=0;
 			foreach ($_POST['SalesPeople'] as $Salesperson){
 				if ($i>0){
-					$SQL .= ' OR ';
+					$SQL .= " OR ";
 				}
 				$i++;
 				$SQL .= "custbranch.salesman='" . $Salesperson ."'";
 			}
 
-			$SQL .=') ORDER BY custbranch.area,
+			$SQL .=") ORDER BY custbranch.area,
 					custbranch.salesman,
 					debtorsmaster.debtorno,
-					custbranch.branchcode';
+					custbranch.branchcode";
 		} /*end if Salesfolk =='All' */
 
 	} /* end if not all sales areas was selected */
