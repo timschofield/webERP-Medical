@@ -29,7 +29,7 @@ include('includes/header.inc');
 
 	if ( !isset($_POST['ToPeriod']) OR $_POST['ToPeriod']=='' )
 	{
-			$SQL = 'SELECT Max(periodno) FROM periods';
+			$SQL = "SELECT Max(periodno) FROM periods";
 			$prdResult = DB_query($SQL,$db);
 			$MaxPrdrow = DB_fetch_row($prdResult);
 			DB_free_result($prdResult);
@@ -41,7 +41,7 @@ include('includes/header.inc');
 	echo '<tr><td>' . _('Start Period:') . '</td><td><select name="FromPeriod">';
 	$toSelect = '<tr><td>' . _('End Period:') .'</td><td><select name="ToPeriod">';
 
-	$SQL = 'SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno';
+	$SQL = "SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno";
 	$perResult = DB_query($SQL,$db);
 
 	while ( $perRow=DB_fetch_array($perResult) )
