@@ -618,7 +618,7 @@ if (isset($_POST['AllocTrans'])){
   unset($_SESSION['Alloc']->Allocs);
   unset($_SESSION['Alloc']);
 
-  $sql = 'SELECT id,
+  $sql = "SELECT id,
   		transno,
 		typename,
 		type,
@@ -635,7 +635,7 @@ if (isset($_POST['AllocTrans'])){
   	WHERE supptrans.type=systypes.typeid
   	AND supptrans.supplierno=suppliers.supplierid
   	AND (type=21 or type=22)
-  	AND settled=0 ORDER BY id';
+  	AND settled=0 ORDER BY id";
 
   $result = DB_query($sql, $db);
 
