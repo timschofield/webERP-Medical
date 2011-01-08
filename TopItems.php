@@ -14,9 +14,9 @@ if (!(isset($_POST['Location']) and isset($_POST['NumberOfDays']) and isset($_PO
 	echo '<table cellpadding=3 colspan=4 class=selection>';
 	//to view store location
 	echo '<tr><td width="150">' . _('Select Location') . '  </td><td>:</td><td><select name=Location>';
-	$sql = 'SELECT loccode,
+	$sql = "SELECT loccode,
 					locationname
-				FROM `locations`';
+				FROM `locations`";
 	$result = DB_query($sql, $db);
 	echo "<option value='All'>" . _('All');
 	while ($myrow = DB_fetch_array($result)) {
@@ -25,9 +25,9 @@ if (!(isset($_POST['Location']) and isset($_POST['NumberOfDays']) and isset($_PO
 	echo "</select></td></tr>";
 	//to view list of customer
 	echo '<tr><td width="150">' . _('Select Customer Type') . '   </td><td>:</td><td><select name=Customers>';
-	$sql = 'SELECT typename,
+	$sql = "SELECT typename,
 					typeid
-				FROM debtortype';
+				FROM debtortype";
 	$result = DB_query($sql, $db);
 	echo "<option value='All'>" . _('All');
 	while ($myrow = DB_fetch_array($result)) {
