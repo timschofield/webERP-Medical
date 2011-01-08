@@ -22,7 +22,7 @@ include('includes/SQL_CommonFunctions.inc');
 //echo "<a href='" . $rootpath . '/SelectSupplier.php?' . SID . "'>" . _('Back to Suppliers') . '</a><br>';
 
 if (!isset($_SESSION['SuppTrans']->SupplierName)) {
-	$sql='SELECT suppname FROM suppliers WHERE supplierid="'.$_GET['SupplierID'].'"';
+	$sql="SELECT suppname FROM suppliers WHERE supplierid='".$_GET['SupplierID']."'";
 	$result = DB_query($sql,$db);
 	$myrow = DB_fetch_row($result);
 	$SupplierName=$myrow[0];
@@ -730,21 +730,21 @@ then do the updates and inserts to process the invoice entered */
 	/*contract postings need to get the WIP from the contract item's stock category record
 	*  debit postings to this WIP account
 	* the WIP account is tidied up when the contract is closed*/
-				$result = DB_query('SELECT wipact FROM stockcategory
+				$result = DB_query("SELECT wipact FROM stockcategory
 																					INNER JOIN stockmaster ON
 																					stockcategory.categoryid=stockmaster.categoryid
-														WHERE stockmaster.stockid="' . $Contract->ContractRef . '"',$db);
+														WHERE stockmaster.stockid='" . $Contract->ContractRef . "'",$db);
 				$WIPRow = DB_fetch_row($result);
 				$WIPAccount = $WIPRow[0];
-				$SQL = 'INSERT INTO gltrans (type,
+				$SQL = "INSERT INTO gltrans (type,
 																	typeno,
 																	trandate,
 																	periodno,
 																	account,
 																	narrative,
 																	amount)
-													VALUES (20, ' .
-																	$InvoiceNo . ",
+													VALUES (20, '" .
+																	$InvoiceNo . "',
 																	'" . $SQLInvoiceDate . "',
 																	'" . $PeriodNo . "',
 																	'". $WIPAccount . "',
@@ -945,10 +945,10 @@ then do the updates and inserts to process the invoice entered */
 							if ($EnteredGRN->AssetID!=0) { //then it is an asset
 
 								/*Need to get the asset details  for posting */
-								$result = DB_query('SELECT costact
+								$result = DB_query("SELECT costact
 																	FROM fixedassets INNER JOIN fixedassetcategories
 																	ON fixedassets.assetcategoryid= fixedassetcategories.categoryid
-																	WHERE assetid="' . $EnteredGRN->AssetID . '"',$db);
+																	WHERE assetid='" . $EnteredGRN->AssetID . "'",$db);
 								if (DB_num_rows($result)!=0){ // the asset exists
 									$AssetRow = DB_fetch_array($result);
 									$GLCode = $AssetRow['costact'];
@@ -1272,9 +1272,9 @@ then do the updates and inserts to process the invoice entered */
 			$Result = DB_query($SQL,$db,$ErrMsg, $DbgMsg, true);
 
 			/*Now update the asset cost in fixedassets table */
-			$result = DB_query('SELECT datepurchased
+			$result = DB_query("SELECT datepurchased
 												FROM fixedassets
-												WHERE assetid="' . $AssetAddition->AssetID . '"',$db);
+												WHERE assetid='" . $AssetAddition->AssetID . "'",$db);
 			$AssetRow = DB_fetch_array($result);
 
 			$SQL = "UPDATE fixedassets SET cost = cost + " . ($AssetAddition->Amount  / $_SESSION['SuppTrans']->ExRate) ;
