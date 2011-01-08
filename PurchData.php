@@ -437,7 +437,7 @@ if (!isset($SuppliersResult)) {
 	}
     echo '<tr><td>' . _('Suppliers Unit of Measure') . ':</td>';
     echo '<td><select name="SuppliersUOM">';
-    $sql = 'SELECT * FROM unitsofmeasure';
+    $sql = "SELECT * FROM unitsofmeasure";
     $result = DB_query($sql, $db);
     while ($myrow = DB_fetch_array($result)) {
         if ($_POST['SuppliersUOM'] == $myrow['unitid']) {
