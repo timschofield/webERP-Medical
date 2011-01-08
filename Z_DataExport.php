@@ -537,7 +537,7 @@ if ( isset($_POST['pricelist']) ) {
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table>';
 	echo '<tr><th colspan=2>' . _('Price List Export') . '</th></tr>';
-	$sql = 'SELECT sales_type, typeabbrev FROM salestypes';
+	$sql = "SELECT sales_type, typeabbrev FROM salestypes";
 	$SalesTypesResult=DB_query($sql,$db);
 	echo '<tr><td>' . _('For Sales Type/Price List') . ':</td>';
 	echo '<td><select name="SalesType">';
@@ -546,7 +546,7 @@ if ( isset($_POST['pricelist']) ) {
 	}
 	echo '</select></td></tr>';
 
-	$sql = 'SELECT loccode, locationname FROM locations';
+	$sql = "SELECT loccode, locationname FROM locations";
 	$SalesTypesResult=DB_query($sql,$db);
 	echo '<tr><td>' . _('For Location') . ':</td>';
 	echo '<td><select name="Location">';
@@ -568,7 +568,7 @@ if ( isset($_POST['pricelist']) ) {
 	echo '<table>';
 	echo '<tr><th colspan=2>' . _('Customer List Export') . '</th></tr>';
 
-	$sql = 'SELECT loccode, locationname FROM locations';
+	$sql = "SELECT loccode, locationname FROM locations";
 	$SalesTypesResult=DB_query($sql,$db);
 	echo '<tr><td>' . _('For Location') . ':</td>';
 	echo '<td><select name="Location">';
