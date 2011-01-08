@@ -21,7 +21,7 @@ if (!isset($_GET['CreditNoteNo'])){
 }
 /*get the order number that was credited */
 
-$SQL = 'SELECT order_ FROM debtortrans WHERE transno=' . $_GET['CreditNoteNo'] . ' AND type=11';
+$SQL = "SELECT order_ FROM debtortrans WHERE transno='" . $_GET['CreditNoteNo'] . "' AND type=11";
 $Result = DB_query($SQL, $db);
 
 $myrow = DB_fetch_row($Result);
@@ -29,14 +29,14 @@ $OrderNo = $myrow[0];
 
 /*Now get the stock movements that were credited into an array */
 
-$SQL = 'SELECT stockid,
+$SQL = "SELECT stockid,
                loccode,
                debtorno,
                branchcode,
                prd,
                qty
         FROM stockmoves
-        WHERE transno =' .$_GET['CreditNoteNo'] . ' AND type=11';
+        WHERE transno ='" .$_GET['CreditNoteNo'] . "' AND type=11";
 $Result = DB_query($SQL,$db);
 
 $i=0;
