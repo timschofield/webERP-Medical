@@ -520,10 +520,10 @@ if (isset($_POST['PrintPDF']) AND $_POST['Part']!='') {
 		prnMsg(_('This report shows the MRP calculation for a specific item - a part code must be selected'),'warn');
 	}
 	// Always show the search facilities
-	$SQL = 'SELECT categoryid,
+	$SQL = "SELECT categoryid,
 			categorydescription
 		FROM stockcategory
-		ORDER BY categorydescription';
+		ORDER BY categorydescription";
 	$result1 = DB_query($SQL, $db);
 	if (DB_num_rows($result1) == 0) {
 		echo '<p><font size=4 color=red>' . _('Problem Report') . ':</font><br>' . _('There are no stock categories currently defined please use the link below to set them up');
