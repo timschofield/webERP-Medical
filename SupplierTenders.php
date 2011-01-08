@@ -11,7 +11,7 @@ include('includes/header.inc');
 $Maximum_Number_Of_Parts_To_Show=50;
 
 if (!isset($_POST['SupplierID'])) {
-	$sql='SELECT supplierid FROM www_users WHERE userid="'.$_SESSION['UserID'].'"';
+	$sql="SELECT supplierid FROM www_users WHERE userid='".$_SESSION['UserID']."'";
 	$result=DB_query($sql, $db);
 	$myrow=DB_fetch_array($result);
 	if ($myrow['supplierid']=='') {
@@ -29,7 +29,7 @@ if (isset($_GET['Delete'])) {
 	$_SESSION['offer']->remove_from_offer($_GET['Delete']);
 }
 
-$sql='SELECT suppname, currcode FROM suppliers WHERE supplierid="'.$_POST['SupplierID'].'"';
+$sql="SELECT suppname, currcode FROM suppliers WHERE supplierid='".$_POST['SupplierID']."'";
 $result=DB_query($sql, $db);
 $myrow=DB_fetch_array($result);
 $Supplier=$myrow['suppname'];
@@ -71,7 +71,7 @@ if (isset($_POST['NewItem']) and !isset($_POST['Refresh'])) {
 			$UOM=$value;
 		}
 		if (isset($UOM)) {
-			$sql='SELECT description, decimalplaces FROM stockmaster WHERE stockid="'.$StockID.'"';
+			$sql="SELECT description, decimalplaces FROM stockmaster WHERE stockid='".$StockID."'";
 			$result=DB_query($sql, $db);
 			$myrow=DB_fetch_array($result);
 			$_SESSION['offer']->add_to_offer(
@@ -225,7 +225,7 @@ if (isset($_POST['Save'])) {
 /*The supplier has chosen option 1
  */
 if (isset($_POST['TenderType']) and $_POST['TenderType']==1 and !isset($_POST['Refresh'])) {
-	$sql='SELECT offers.offerid,
+	$sql="SELECT offers.offerid,
 				offers.stockid,
 				stockmaster.description,
 				offers.quantity,
@@ -236,7 +236,7 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==1 and !isset($_POST['R
 			FROM offers
 			LEFT JOIN stockmaster
 				ON offers.stockid=stockmaster.stockid
-			WHERE offers.supplierid="'.$_POST['SupplierID'].'"';
+			WHERE offers.supplierid='".$_POST['SupplierID']."'";
 	$result=DB_query($sql, $db);
 	$_SESSION['offer']=new Offer();
 	$_SESSION['offer']->SupplierID=$_POST['SupplierID'];
@@ -316,10 +316,10 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==2 and !isset($_POST['S
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' .
 		_('Search') . '" alt="" />' . ' ' . _('Search for Inventory Items') . '</p>';
-	$sql = 'SELECT categoryid,
+	$sql = "SELECT categoryid,
 			categorydescription
 		FROM stockcategory
-		ORDER BY categorydescription';
+		ORDER BY categorydescription";
 	$result = DB_query($sql, $db);
 	if (DB_num_rows($result) == 0) {
 		echo '<p><font size=4 color=red>' . _('Problem Report') . ':</font><br>' .
@@ -517,14 +517,14 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 				$ImageSource = '<i>'._('No Image').'</i>';
 			}
 
-			$uomsql='SELECT conversionfactor,
+			$uomsql="SELECT conversionfactor,
 						suppliersuom,
 						unitsofmeasure.unitname
 					FROM purchdata
 					LEFT JOIN unitsofmeasure
 					ON purchdata.suppliersuom=unitsofmeasure.unitid
-					WHERE supplierno="'.$_POST['SupplierID'].'"
-					AND stockid="'.$myrow['stockid'].'"';
+					WHERE supplierno='".$_POST['SupplierID']."'
+					AND stockid='".$myrow['stockid']."'";
 
 			$uomresult=DB_query($uomsql, $db);
 			if (DB_num_rows($uomresult)>0) {
