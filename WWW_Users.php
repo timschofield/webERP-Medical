@@ -38,9 +38,9 @@ include('includes/SQL_CommonFunctions.inc');
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/group_add.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
 
 // Make an array of the security roles
-$sql = 'SELECT secroleid,
+$sql = "SELECT secroleid,
 		secrolename
-	FROM securityroles ORDER BY secroleid';
+	FROM securityroles ORDER BY secroleid";
 $Sec_Result = DB_query($sql, $db);
 $SecurityRoles = array();
 // Now load it into an a ray using Key/Value pairs
@@ -224,7 +224,7 @@ if (isset($_POST['submit'])) {
 		prnMsg(_('The demonstration user called demo cannot be deleted'),'error');
 	} else {
 	*/
-		$sql='SELECT userid FROM audittrail where userid="'. $SelectedUser .'"';
+		$sql="SELECT userid FROM audittrail where userid='". $SelectedUser ."'";
 		$result=DB_query($sql, $db);
 		if (DB_num_rows($result)!=0) {
 			prnMsg(_('Cannot delete user as entries already exist in the audit trail'), 'warn');
@@ -244,7 +244,7 @@ if (!isset($SelectedUser)) {
 
 /* If its the first time the page has been displayed with no parameters then none of the above are true and the list of Users will be displayed with links to delete or edit each. These will call the same page again and allow update/input or deletion of the records*/
 
-	$sql = 'SELECT
+	$sql = "SELECT
 			userid,
 			realname,
 			phone,
@@ -258,7 +258,7 @@ if (!isset($SelectedUser)) {
 			pagesize,
 			theme,
 			language
-		FROM www_users';
+		FROM www_users";
 	$result = DB_query($sql,$db);
 
 	echo '<table class=selection>';
@@ -446,7 +446,7 @@ echo '<input type="hidden" name="ID" value="'.$_SESSION['UserID'].'">';
 echo '<tr><td>' . _('Default Location') . ':</td>
 	<td><select name="DefaultLocation">';
 
-$sql = 'SELECT loccode, locationname FROM locations';
+$sql = "SELECT loccode, locationname FROM locations";
 $result = DB_query($sql,$db);
 
 while ($myrow=DB_fetch_array($result)){
@@ -484,7 +484,7 @@ echo '<tr><td>' . _('Supplier Code') . ':</td>
 echo '<tr><td>' . _('Restrict to Sales Person') . ':</td>
 	<td><select name="Salesman">';
 
-$sql = 'SELECT salesmancode, salesmanname FROM salesman';
+$sql = "SELECT salesmancode, salesmanname FROM salesman";
 $result = DB_query($sql,$db);
 if ((isset($_POST['Salesman']) and $_POST['Salesman']=='') OR !isset($_POST['Salesman'])){
 	echo '<option selected value="">' .  _('Not a salesperson only login') . '</option>';
