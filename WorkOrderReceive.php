@@ -757,7 +757,7 @@ echo '<table cellpadding=2 class=selection>
 if (!isset($_POST['IntoLocation'])){
 		$_POST['IntoLocation']=$WORow['loccode'];
 }
-$LocResult = DB_query('SELECT loccode, locationname FROM locations',$db);
+$LocResult = DB_query("SELECT loccode, locationname FROM locations",$db);
 while ($LocRow = DB_fetch_array($LocResult)){
 	if ($_POST['IntoLocation'] ==$LocRow['loccode']){
 		echo '<option selected value="' . $LocRow['loccode'] .'">' . $LocRow['locationname'];
