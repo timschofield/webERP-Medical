@@ -17,7 +17,7 @@ $Header = "<tr>
 
 echo $Header;
 
-$sql = 'SELECT gltrans.type,
+$sql = "SELECT gltrans.type,
 		systypes.typename,
 		gltrans.typeno,
 		periodno,
@@ -29,7 +29,7 @@ $sql = 'SELECT gltrans.type,
 		systypes.typename,
 		typeno,
 		periodno
-	HAVING ABS(SUM(amount))>0.01';
+	HAVING ABS(SUM(amount))>0.01";
 
 $OutOfWackResult = DB_query($sql,$db);
 
