@@ -259,7 +259,7 @@ If (isset($_POST['PrintPDF'])
 
 		echo '<tr><td>'. _('From Inventory Category Code') .':</font></td><td><select name=FromCriteria>';
 
-		$sql='SELECT categoryid, categorydescription FROM stockcategory ORDER BY categoryid';
+		$sql="SELECT categoryid, categorydescription FROM stockcategory ORDER BY categoryid";
 		$CatResult= DB_query($sql,$db);
 		While ($myrow = DB_fetch_array($CatResult)){
 			echo "<option VALUE='" . $myrow['categoryid'] . "'>" . $myrow['categoryid'] . ' - ' . $myrow['categorydescription'];
@@ -277,7 +277,7 @@ If (isset($_POST['PrintPDF'])
 		echo '</select></td></tr>';
 
 		echo '<tr><td>' . _('For Sales Type/Price List').':</td><td><select name="SalesType">';
-		$sql = 'SELECT sales_type, typeabbrev FROM salestypes';
+		$sql = "SELECT sales_type, typeabbrev FROM salestypes";
 		$SalesTypesResult=DB_query($sql,$db);
 
 		while ($myrow=DB_fetch_array($SalesTypesResult)){
