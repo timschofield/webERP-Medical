@@ -81,7 +81,7 @@ if ($_GET['Action'] == 'Enter'){
 
 	echo '<table cellpadding=2 class=selection>';
 	echo '<tr><th colspan=3>'._('Stock Check Counts at Location') . ":<select name='Location'>";
-	$sql = 'SELECT loccode, locationname FROM locations';
+	$sql = "SELECT loccode, locationname FROM locations";
 	$result = DB_query($sql,$db);
 
 	while ($myrow=DB_fetch_array($result)){
