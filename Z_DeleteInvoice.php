@@ -19,9 +19,9 @@ if (!isset($_GET['InvoiceNo'])){
 }
 /*Get the order number that was invoiced */
 
-$SQL = 'SELECT order_
+$SQL = "SELECT order_
                FROM debtortrans
-        WHERE debtortrans.type = 10	and transno = ' . $_GET['InvoiceNo'];
+        WHERE debtortrans.type = 10	and transno = '" . $_GET['InvoiceNo'] . "'";
 
 $Result = DB_query($SQL,$db);
 $myrow = DB_fetch_row($Result);
@@ -30,7 +30,7 @@ $ProcessingOrder = $myrow[0];
 
 /*Now get the stock movements that were invoiced into an array */
 
-//$SQL = 'SELECT stockid,
+//$SQL = "SELECT stockid,
 //               loccode,
 //               bundle, <-- This column does not exist
 //               debtorno,
@@ -40,7 +40,7 @@ $ProcessingOrder = $myrow[0];
 //               mbflag
 
 // We now use fully qualified column names
-$SQL = 'SELECT stockmoves.stockid,
+$SQL = "SELECT stockmoves.stockid,
                stockmoves.loccode,
                stockmoves.debtorno,
                stockmoves.branchcode,
@@ -49,7 +49,7 @@ $SQL = 'SELECT stockmoves.stockid,
                stockmaster.mbflag
         FROM stockmoves INNER JOIN stockmaster
              ON stockmoves.stockid = stockmaster.stockid
-        WHERE transno =' .$_GET['InvoiceNo'] . ' AND type=10';
+        WHERE transno ='" .$_GET['InvoiceNo'] . "' AND type=10";
 
 $Result = DB_query($SQL,$db);
 
