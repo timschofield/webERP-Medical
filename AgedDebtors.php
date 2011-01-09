@@ -485,7 +485,7 @@ if (isset($_POST['PrintPDF'])
 
 		echo '<tr><td>' . _('Only Show Customers Of') . ':' . "</td><td><select tabindex='4' name='Salesman'>";
 
-		$sql = 'SELECT salesmancode, salesmanname FROM salesman';
+		$sql = "SELECT salesmancode, salesmanname FROM salesman";
 
 		$result=DB_query($sql,$db);
 		echo "<option value=''></option>";
@@ -497,7 +497,7 @@ if (isset($_POST['PrintPDF'])
 
 		echo '<tr><td>' . _('Only show customers trading in') . ':' . "</td><td><select tabindex='5' name='Currency'>";
 
-		$sql = 'SELECT currency, currabrev FROM currencies';
+		$sql = "SELECT currency, currabrev FROM currencies";
 
 		$result=DB_query($sql,$db);
 
