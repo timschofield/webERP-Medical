@@ -179,7 +179,7 @@ then none of the above are true and the list of sales types will be displayed wi
 links to delete or edit each. These will call the same page again and allow update/input
 or deletion of the records*/
 
-	$sql = 'SELECT typeid, typename FROM debtortype';
+	$sql = "SELECT typeid, typename FROM debtortype";
 	$result = DB_query($sql,$db);
 
 	echo '<br><table class=selection>';
