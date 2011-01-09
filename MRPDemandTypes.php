@@ -104,9 +104,9 @@ if (!isset($SelectedDT) or isset($_GET['delete'])) {
 //links to delete or edit each. These will call the same page again and allow update/input
 //or deletion of the records
 
-	$sql = 'SELECT mrpdemandtype,
+	$sql = "SELECT mrpdemandtype,
 	        description
-		FROM mrpdemandtypes';
+		FROM mrpdemandtypes";
 
 	$result = DB_query($sql,$db);
 
