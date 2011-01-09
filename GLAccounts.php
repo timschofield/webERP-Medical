@@ -244,7 +244,7 @@ if (!isset($_GET['delete'])) {
 	if (!isset($_POST['AccountName'])) {$_POST['AccountName']='';}
 	echo '<tr><td>' . _('Account Name') . ":</td><td><input type='Text' size=51 maxlength=50 name='AccountName' value='" . $_POST['AccountName'] . "'></td></tr>";
 
-	$sql = 'SELECT groupname FROM accountgroups ORDER BY sequenceintb';
+	$sql = "SELECT groupname FROM accountgroups ORDER BY sequenceintb";
 	$result = DB_query($sql, $db);
 
 	echo '<tr><td>' . _('Account Group') . ':</td><td><select name=Group>';
