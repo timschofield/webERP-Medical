@@ -89,9 +89,9 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 
 echo '<table class=selection>';
 
-$sql = 'SELECT typeabbrev,
+$sql = "SELECT typeabbrev,
 		sales_type
-	FROM salestypes';
+	FROM salestypes";
 
 $result = DB_query($sql, $db);
 
@@ -140,7 +140,7 @@ echo '</table><br>';
 
 echo "<div class='centre'><input tabindex=5 type='submit' name='submit' value='" . _('Enter Information') . "'></div><br>";
 
-$sql = 'SELECT sales_type,
+$sql = "SELECT sales_type,
 		salestype,
 		discountcategory,
 		quantitybreak,
@@ -149,7 +149,7 @@ $sql = 'SELECT sales_type,
 		ON discountmatrix.salestype=salestypes.typeabbrev
 	ORDER BY salestype,
 		discountcategory,
-		quantitybreak';
+		quantitybreak";
 
 $result = DB_query($sql,$db);
 
