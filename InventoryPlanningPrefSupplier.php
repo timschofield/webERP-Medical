@@ -362,8 +362,8 @@ if (isset($_POST['PrintPDF'])){
 		}
 
 		if ($_POST['Location']=='All'){
-			$SQL = "SELECT SUM(purchorderdetails.quantityord*(CASE WHEN purchdata.conversionfactor IS NULL THEN 1 ELSE purchdata.conversionfactor END)
-				- purchorderdetails.quantityrecd*(CASE WHEN purchdata.conversionfactor IS NULL THEN 1 ELSE purchdata.conversionfactor END)) as qtyonorder
+			$SQL = "SELECT SUM(purchorderdetails.quantityord*purchorderdetails.conversionfactor
+				- purchorderdetails.quantityrecd*purchorderdetails.conversionfactor) as qtyonorder
 				FROM purchorderdetails
 				LEFT JOIN purchorders
 				ON purchorderdetails.orderno = purchorders.orderno
@@ -376,8 +376,8 @@ if (isset($_POST['PrintPDF'])){
 				AND purchorders.status <> 'Rejected'
 				AND purchorders.status <> 'Pending'";
 		} else {
-			$SQL = "SELECT SUM(purchorderdetails.quantityord*(CASE WHEN purchdata.conversionfactor IS NULL THEN 1 ELSE purchdata.conversionfactor END)
-				- purchorderdetails.quantityrecd*(CASE WHEN purchdata.conversionfactor IS NULL THEN 1 ELSE purchdata.conversionfactor END)) as qtyonorder
+			$SQL = "SELECT SUM(purchorderdetails.quantityord*purchorderdetails.conversionfactor
+				- purchorderdetails.quantityrecd*purchorderdetails.conversionfactor) as qtyonorder
 				FROM purchorderdetails
 				LEFT JOIN purchorders
 				ON purchorderdetails.orderno = purchorders.orderno
