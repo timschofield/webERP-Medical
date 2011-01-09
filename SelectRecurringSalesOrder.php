@@ -66,7 +66,7 @@ if (isset($_POST['SearchRecurringOrders'])){
 				recurringsalesorders.lastrecurrence,
 				recurringsalesorders.stopdate,
 				recurringsalesorders.frequency";
-echo $SQL;
+
 	$ErrMsg = _('No recurring orders were returned by the SQL because');
 	$SalesOrdersResult = DB_query($SQL,$db,$ErrMsg);
 
