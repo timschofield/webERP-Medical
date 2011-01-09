@@ -138,7 +138,7 @@ if (isset($_POST['submit'])) {
 
 if (!isset($SelectedArea)) {
 
-	$sql = 'SELECT * FROM areas';
+	$sql = "SELECT * FROM areas";
 	$result = DB_query($sql,$db);
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' .
