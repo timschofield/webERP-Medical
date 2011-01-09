@@ -656,7 +656,7 @@ if (!isset($_GET['delete'])) {
 
 	DB_data_seek($result,0);
 
-	$sql = 'SELECT areacode, areadescription FROM areas';
+	$sql = "SELECT areacode, areadescription FROM areas";
 	$result = DB_query($sql,$db);
 	if (DB_num_rows($result)==0){
 		echo '</table>';
@@ -682,7 +682,7 @@ if (!isset($_GET['delete'])) {
 	echo '</select></td></tr>';
 	DB_data_seek($result,0);
 
-	$sql = 'SELECT loccode, locationname FROM locations';
+	$sql = "SELECT loccode, locationname FROM locations";
 	$result = DB_query($sql,$db);
 
 	if (DB_num_rows($result)==0){
@@ -749,7 +749,7 @@ if (!isset($_GET['delete'])) {
 
 	DB_data_seek($result,0);
 
-	$sql = 'SELECT taxgroupid, taxgroupdescription FROM taxgroups';
+	$sql = "SELECT taxgroupid, taxgroupdescription FROM taxgroups";
 	$result = DB_query($sql,$db);
 
 	while ($myrow = DB_fetch_array($result)) {
@@ -775,7 +775,7 @@ if (!isset($_GET['delete'])) {
 	echo '	</select></td></tr>';
 
 	echo '<tr><td>'._('Default freight/shipper method').":</td><td><select tabindex=21 name='DefaultShipVia'>";
-	$SQL = 'SELECT shipper_id, shippername FROM shippers';
+	$SQL = "SELECT shipper_id, shippername FROM shippers";
 	$ShipperResults = DB_query($SQL,$db);
 	while ($myrow=DB_fetch_array($ShipperResults)){
 		if (isset($_POST['DefaultShipVia'])and $myrow['shipper_id']==$_POST['DefaultShipVia']){
