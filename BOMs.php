@@ -362,7 +362,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 		$DbgMsg = _('The SQL used to delete the BOM was');
 		$result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
-		$ComponentSQL = 'SELECT component from bom where parent="' . $SelectedParent .'"';
+		$ComponentSQL = "SELECT component from bom where parent='" . $SelectedParent ."'";
 		$ComponentResult = DB_query($ComponentSQL,$db);
 		$ComponentArray = DB_fetch_row($ComponentResult);
 		UpdateCost($db, $ComponentArray[0]);
@@ -636,7 +636,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 		echo "<tr><td>" . _('Location') . ": </td><td><select tabindex='2' name='LocCode'>";
 
 		DB_free_result($result);
-		$sql = 'SELECT locationname, loccode FROM locations';
+		$sql = "SELECT locationname, loccode FROM locations";
 		$result = DB_query($sql,$db);
 
 		while ($myrow = DB_fetch_array($result)) {
@@ -654,7 +654,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 		echo "</select></td></tr><tr><td>" . _('Work Centre Added') . ": </td><td>";
 		echo "<select tabindex='3' name='WorkCentreAdded'>";
 
-		$sql = 'SELECT code, description FROM workcentres';
+		$sql = "SELECT code, description FROM workcentres";
 		$result = DB_query($sql,$db);
 
 		if (DB_num_rows($result)==0){
