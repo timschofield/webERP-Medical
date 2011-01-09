@@ -179,7 +179,6 @@ if (isset($_POST['DeleteRecurringOrder'])){
 	exit;
 }
 If (isset($_POST['Process'])) {
-	$Result = DB_Txn_Begin($db);
 	$InputErrors =0;
 	If (!Is_Date($_POST['StartDate'])){
 		$InputErrors =1;
@@ -267,7 +266,7 @@ If (isset($_POST['Process'])) {
 						discountpercent,
 						narrative)
 					values ('";
-echo $StartOf_LineItemsSQL;
+
 			foreach ($_SESSION['Items'.$identifier]->LineItems as $StockItem) {
 
 				$LineItemsSQL = $StartOf_LineItemsSQL .
@@ -305,7 +304,6 @@ echo $StartOf_LineItemsSQL;
 	exit;
 
 	}
-	$result = DB_Txn_Commit($db);
 }
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Search') .
