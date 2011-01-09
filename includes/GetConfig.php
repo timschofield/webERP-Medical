@@ -5,7 +5,7 @@
 
 if(isset($ForceConfigReload) and $ForceConfigReload==TRUE OR !isset($_SESSION['CompanyDefaultsLoaded'])) {
 	global  $db;		// It is global, we may not be.
-	$sql = 'SELECT confname, confvalue FROM config';
+	$sql = "SELECT confname, confvalue FROM config";
 	$ErrMsg = _('Could not get the configuration parameters from the database because');
 	$ConfigResult = DB_query($sql,$db,$ErrMsg);
 	while( $myrow = DB_fetch_row($ConfigResult) ) {
@@ -23,7 +23,7 @@ if(isset($ForceConfigReload) and $ForceConfigReload==TRUE OR !isset($_SESSION['C
 	/*Load the pagesecurity settings from the database */
 
 	if (DB_table_exists('pagesecurity', $db)) {
-		$sql='SELECT script, security FROM pagesecurity';
+		$sql="SELECT script, security FROM pagesecurity";
 		$ErrMsg = _('Could not get the page security details from the database because');
 		$result=DB_query($sql, $db);
 
@@ -41,7 +41,7 @@ if(isset($ForceConfigReload) and $ForceConfigReload==TRUE OR !isset($_SESSION['C
 
 /* Also reads all the company data set up in the company record and returns an array */
 
-	$sql=	'SELECT	coyname,
+	$sql=	"SELECT	coyname,
 								gstno,
 								regoffice1,
 								regoffice2,
@@ -66,7 +66,7 @@ if(isset($ForceConfigReload) and $ForceConfigReload==TRUE OR !isset($_SESSION['C
 								gllink_creditors,
 								gllink_stock
 							FROM companies
-								WHERE coycode=1';
+								WHERE coycode=1";
 
 	$ErrMsg = _('An error occurred accessing the database to retrieve the company information');
 	$ReadCoyResult = DB_query($sql,$db,$ErrMsg);
@@ -80,7 +80,7 @@ if(isset($ForceConfigReload) and $ForceConfigReload==TRUE OR !isset($_SESSION['C
 	}
 
 	/*Now read in smtp email settings - not needed in a properly set up server environment - but helps for those who can't control their server .. I think! */
-	$sql='SELECT id,
+	$sql="SELECT id,
 				host,
 				port,
 				heloaddress,
@@ -88,7 +88,7 @@ if(isset($ForceConfigReload) and $ForceConfigReload==TRUE OR !isset($_SESSION['C
 				password,
 				timeout,
 				auth
-			FROM emailsettings';
+			FROM emailsettings";
 	$result=DB_query($sql, $db);
 	$myrow=DB_fetch_array($result);
 
