@@ -342,7 +342,7 @@ if (! isset($_GET['delete'])) {
 	<td><select tabindex="2" ' . (in_array('ParentGroupName',$Errors) ?  'class="selecterror"' : '' ) .
 		'  name="ParentGroupName">';
 
-	$sql = 'SELECT groupname FROM accountgroups';
+	$sql = "SELECT groupname FROM accountgroups";
 	$groupresult = DB_query($sql, $db,$ErrMsg,$DbgMsg);
 	if (!isset($_POST['ParentGroupName'])){
 		echo '<option selected="selected" value="">' ._('Top Level Group').'</option>';
@@ -365,7 +365,7 @@ if (! isset($_GET['delete'])) {
 	<td><select tabindex="3" ' . (in_array('SectionInAccounts',$Errors) ?  'class="selecterror"' : '' ) .
       '  name="SectionInAccounts">';
 
-	$sql = 'SELECT sectionid, sectionname FROM accountsection ORDER BY sectionid';
+	$sql = "SELECT sectionid, sectionname FROM accountsection ORDER BY sectionid";
 	$secresult = DB_query($sql, $db,$ErrMsg,$DbgMsg);
 	while( $secrow = DB_fetch_array($secresult) ) {
 		if ($_POST['SectionInAccounts']==$secrow['sectionid']) {
