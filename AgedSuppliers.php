@@ -299,7 +299,7 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/m
 		echo '<tr><td>' . _('For suppliers trading in') . ':' . "</td>
 			<td><select tabindex='4' name='Currency'>";
 
-		$sql = 'SELECT currency, currabrev FROM currencies';
+		$sql = "SELECT currency, currabrev FROM currencies";
 		$result=DB_query($sql,$db);
 
 		while ($myrow=DB_fetch_array($result)){
