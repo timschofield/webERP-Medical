@@ -28,7 +28,7 @@ if ((!(Is_Date($_POST['FromDate'])) OR (!Is_Date($_POST['ToDate']))) AND (isset(
 $tableresult = DB_show_tables($db);
 
 // Get list of users
-$userresult = DB_query('SELECT userid FROM www_users',$db);
+$userresult = DB_query("SELECT userid FROM www_users",$db);
 
 echo '<form action=' . $_SERVER['PHP_SELF'] . '?' . SID . ' method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
