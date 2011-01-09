@@ -51,10 +51,10 @@ if (isset($_POST['submit'])) {
 		$InputError =1;
 	}
 	/*Make an array of the defined bank accounts */
-	$SQL = 'SELECT bankaccounts.accountcode
+	$SQL = "SELECT bankaccounts.accountcode
 			FROM bankaccounts,
 				chartmaster
-		WHERE bankaccounts.accountcode=chartmaster.accountcode';
+		WHERE bankaccounts.accountcode=chartmaster.accountcode";
 	$result = DB_query($SQL,$db);
 	$BankAccounts = array();
 	$i=0;
@@ -146,13 +146,13 @@ then none of the above are true and the list of stock categorys will be displaye
 links to delete or edit each. These will call the same page again and allow update/input
 or deletion of the records*/
 
-	$sql = 'SELECT categoryid,
+	$sql = "SELECT categoryid,
 								categorydescription,
 								costact,
 								depnact,
 								disposalact,
 								accumdepnact
-								FROM fixedassetcategories';
+								FROM fixedassetcategories";
 	$result = DB_query($sql,$db);
 
 	echo "<br><table class=selection>\n";
