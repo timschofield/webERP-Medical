@@ -36,7 +36,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 	/*Show a form to allow input of criteria for profit and loss to show */
 	echo '<table class=selection><tr><td>'._('Select Period From').":</td><td><select Name='FromPeriod'>";
 
-	$sql = 'SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno DESC';
+	$sql = "SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno DESC";
 	$Periods = DB_query($sql,$db);
 
 
@@ -84,10 +84,10 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 	//Select the tag
 	echo '<tr><td>'._('Select tag').'<td><select name="tag">';
 
-	$SQL = 'SELECT tagref,
+	$SQL = "SELECT tagref,
 				tagdescription
 				FROM tags
-				ORDER BY tagref';
+				ORDER BY tagref";
 
 	$result=DB_query($SQL,$db);
 	echo '<option value=0>0 - None';
@@ -138,24 +138,24 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 		exit;
 	}
 
-	$sql = 'SELECT lastdate_in_period FROM periods WHERE periodno=' . $_POST['ToPeriod'];
+	$sql = "SELECT lastdate_in_period FROM periods WHERE periodno='" . $_POST['ToPeriod'] . "'";
 	$PrdResult = DB_query($sql, $db);
 	$myrow = DB_fetch_row($PrdResult);
 	$PeriodToDate = MonthAndYearFromSQLDate($myrow[0]);
 
 
-	$SQL = 'SELECT accountgroups.sectioninaccounts,
+	$SQL = "SELECT accountgroups.sectioninaccounts,
 			accountgroups.groupname,
 			accountgroups.parentgroupname,
 			gltrans.account ,
 			chartmaster.accountname,
-			Sum(CASE WHEN (gltrans.periodno>=' . $_POST['FromPeriod'] . ' and gltrans.periodno<=' . $_POST['ToPeriod'] . ') THEN gltrans.amount ELSE 0 END) AS TotalAllPeriods,
-			Sum(CASE WHEN (gltrans.periodno=' . $_POST['ToPeriod'] . ') THEN gltrans.amount ELSE 0 END) AS TotalThisPeriod
+			Sum(CASE WHEN (gltrans.periodno>='" . $_POST['FromPeriod'] . "' and gltrans.periodno<='" . $_POST['ToPeriod'] . "') THEN gltrans.amount ELSE 0 END) AS TotalAllPeriods,
+			Sum(CASE WHEN (gltrans.periodno='" . $_POST['ToPeriod'] . "') THEN gltrans.amount ELSE 0 END) AS TotalThisPeriod
 		FROM chartmaster INNER JOIN accountgroups
 		ON chartmaster.group_ = accountgroups.groupname INNER JOIN gltrans
 		ON chartmaster.accountcode= gltrans.account
 		WHERE accountgroups.pandl=1
-			AND gltrans.tag='.$_POST['tag'].'
+			AND gltrans.tag='".$_POST['tag']."'
 		GROUP BY accountgroups.sectioninaccounts,
 			accountgroups.groupname,
 			accountgroups.parentgroupname,
@@ -165,7 +165,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 		ORDER BY accountgroups.sectioninaccounts,
 			accountgroups.sequenceintb,
 			accountgroups.groupname,
-			gltrans.account';
+			gltrans.account";
 
 
 	$AccountsResult = DB_query($SQL,$db);
@@ -457,24 +457,24 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 		exit;
 	}
 
-	$sql = 'SELECT lastdate_in_period FROM periods WHERE periodno=' . $_POST['ToPeriod'];
+	$sql = "SELECT lastdate_in_period FROM periods WHERE periodno='" . $_POST['ToPeriod'] . "'";
 	$PrdResult = DB_query($sql, $db);
 	$myrow = DB_fetch_row($PrdResult);
 	$PeriodToDate = MonthAndYearFromSQLDate($myrow[0]);
 
 
-	$SQL = 'SELECT accountgroups.sectioninaccounts,
+	$SQL = "SELECT accountgroups.sectioninaccounts,
 			accountgroups.groupname,
 			accountgroups.parentgroupname,
 			gltrans.account ,
 			chartmaster.accountname,
-			Sum(CASE WHEN (gltrans.periodno>=' . $_POST['FromPeriod'] . ' and gltrans.periodno<=' . $_POST['ToPeriod'] . ') THEN gltrans.amount ELSE 0 END) AS TotalAllPeriods,
-			Sum(CASE WHEN (gltrans.periodno=' . $_POST['ToPeriod'] . ') THEN gltrans.amount ELSE 0 END) AS TotalThisPeriod
+			Sum(CASE WHEN (gltrans.periodno>='" . $_POST['FromPeriod'] . "' and gltrans.periodno<='" . $_POST['ToPeriod'] . "') THEN gltrans.amount ELSE 0 END) AS TotalAllPeriods,
+			Sum(CASE WHEN (gltrans.periodno='" . $_POST['ToPeriod'] . "') THEN gltrans.amount ELSE 0 END) AS TotalThisPeriod
 		FROM chartmaster INNER JOIN accountgroups
 		ON chartmaster.group_ = accountgroups.groupname INNER JOIN gltrans
 		ON chartmaster.accountcode= gltrans.account
 		WHERE accountgroups.pandl=1
-			AND gltrans.tag='.$_POST['tag'].'
+			AND gltrans.tag='".$_POST['tag']."'
 		GROUP BY accountgroups.sectioninaccounts,
 			accountgroups.groupname,
 			accountgroups.parentgroupname,
@@ -484,11 +484,11 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 		ORDER BY accountgroups.sectioninaccounts,
 			accountgroups.sequenceintb,
 			accountgroups.groupname,
-			gltrans.account';
+			gltrans.account";
 
 
 	$AccountsResult = DB_query($SQL,$db,_('No general ledger accounts were returned by the SQL because'),_('The SQL that failed was'));
-	$sql='SELECT tagdescription FROM tags WHERE tagref='.$_POST['tag'];
+	$sql="SELECT tagdescription FROM tags WHERE tagref='".$_POST['tag'] . "'";
 	$result=DB_query($sql, $db);
 	$myrow=DB_fetch_row($result);
 
