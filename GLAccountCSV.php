@@ -30,7 +30,7 @@ echo '<table>
 	        <tr>
 	         <td>'._('Selected Accounts') . ':</td>
 	         <td><select name="Account[]" multiple>';
-$sql = 'SELECT accountcode, accountname FROM chartmaster ORDER BY accountcode';
+$sql = "SELECT accountcode, accountname FROM chartmaster ORDER BY accountcode";
 $AccountsResult = DB_query($sql,$db);
 $i=0;
 while ($myrow=DB_fetch_array($AccountsResult,$db)){
@@ -45,7 +45,7 @@ echo '</select></td>';
 
 echo '<td>'._('For Period range').':</td>
 		<td><select Name=Period[] multiple>';
-$sql = 'SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno DESC';
+$sql = "SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno DESC";
 $Periods = DB_query($sql,$db);
 $id=0;
 
@@ -62,10 +62,10 @@ echo '</select></td></tr>';
 //Select the tag
 echo '<tr><td>' . _('Select Tag') . ':</td><td><select name="tag">';
 
-$SQL = 'SELECT tagref,
+$SQL = "SELECT tagref,
 	       tagdescription
 	FROM tags
-	ORDER BY tagref';
+	ORDER BY tagref";
 
 $result=DB_query($SQL,$db);
 echo '<option value=0>0 - '._('All tags');
@@ -228,7 +228,7 @@ if (isset($_POST['MakeCSV'])){
 
 			$FormatedTranDate = ConvertSQLDate($myrow['trandate']);
 
-			$tagsql='SELECT tagdescription FROM tags WHERE tagref='.$myrow['tag'];
+			$tagsql="SELECT tagdescription FROM tags WHERE tagref=".$myrow['tag'];
 			$tagresult=DB_query($tagsql,$db);
 			$tagrow = DB_fetch_array($tagresult);
 			if ($myrow['amount']<0){
