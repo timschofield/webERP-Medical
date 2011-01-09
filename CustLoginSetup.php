@@ -43,7 +43,7 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/c
 //- Only one entry in securitygroups AND the tokenid of this entry == 1
 
 //First get all available security role ID's'
-$query_roles = 'SELECT secroleid FROM securityroles';
+$query_roles = "SELECT secroleid FROM securityroles";
 $result_roles = DB_query($query_roles, $db);
 
 //Check for every security role if they have only one entry in securitygroups, if so check if the tokenid == 1, then store in selection box
@@ -235,7 +235,7 @@ if (isset($_POST['submit'])) {
 		prnMsg(_('The demonstration user called demo cannot be deleted'),'error');
 	} else {
 	*/
-		$sql='SELECT userid FROM audittrail where userid="'. $SelectedUser .'"';
+		$sql="SELECT userid FROM audittrail where userid='". $SelectedUser ."'";
 		$result=DB_query($sql, $db);
 		if (DB_num_rows($result)!=0) {
 			prnMsg(_('Cannot delete user as entries already exist in the audit trail'), 'warn');
