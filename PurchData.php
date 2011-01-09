@@ -149,7 +149,8 @@ if (!isset($_GET['Edit'])) {
 								purchdata.leadtime,
 								purchdata.suppliers_partno,
 								purchdata.minorderqty,
-								purchdata.preferred
+								purchdata.preferred,
+								purchdata.conversionfactor
 						FROM purchdata INNER JOIN suppliers
 							ON purchdata.supplierno=suppliers.supplierid
 						LEFT JOIN unitsofmeasure
@@ -168,6 +169,7 @@ if (!isset($_GET['Edit'])) {
 						<th>' . _('Currency') . '</th>
 						<th>' . _('Effective From') . '</th>
 						<th>' . _('Supplier Unit') . '</th>
+						<th>' . _('Conversion Factor') . '</th>
 						<th>' . _('Min Order Qty') . '</th>
 						<th>' . _('Lead Time') . '</th>
 						<th>' . _('Preferred') . '</th>
@@ -196,12 +198,13 @@ if (!isset($_GET['Edit'])) {
 							<td>%s</td>
 							<td>%s</td>
 							<td>%s</td>
-				                     <td>%s</td>
+							<td class='number'>%s</td>
+							<td class='number'>%s</td>
 							<td class=number>%s " . _('days') . "</td>
 							<td>%s</td>
 							<td><a href='%s?%s&StockID=%s&SupplierID=%s&Edit=1&EffectiveFrom=%s'>" . _('Edit') . "</a></td>
 							<td><a href='%s?%s&StockID=%s&SupplierID=%s&Delete=1&EffectiveFrom=%s' onclick=\"return confirm('" . _('Are you sure you wish to delete this suppliers price?') . "');\">" . _('Delete') . "</a></td>
-							</tr>", $myrow['suppname'], number_format($myrow['price'], 3), $myrow['currcode'], ConvertSQLDate($myrow['effectivefrom']), $myrow['unitname'],$myrow['minorderqty'], $myrow['leadtime'], $DisplayPreferred, $_SERVER['PHP_SELF'], SID, $StockID, $myrow['supplierno'], $myrow['effectivefrom'], $_SERVER['PHP_SELF'], SID, $StockID, $myrow['supplierno'], $myrow['effectivefrom']);
+							</tr>", $myrow['suppname'], number_format($myrow['price'], 3), $myrow['currcode'], ConvertSQLDate($myrow['effectivefrom']), $myrow['unitname'], $myrow['conversionfactor'],$myrow['minorderqty'], $myrow['leadtime'], $DisplayPreferred, $_SERVER['PHP_SELF'], SID, $StockID, $myrow['supplierno'], $myrow['effectivefrom'], $_SERVER['PHP_SELF'], SID, $StockID, $myrow['supplierno'], $myrow['effectivefrom']);
         } //end of while loop
         echo '</table><br/>';
         if ($CountPreferreds > 1) {
