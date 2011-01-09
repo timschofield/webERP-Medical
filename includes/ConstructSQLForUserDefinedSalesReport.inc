@@ -131,7 +131,7 @@ if (isset($ReportID)){
 	$_GET['ReportID']==$ReportID;
 }
 
-$GetReportSpecSQL='SELECT reportheading,
+$GetReportSpecSQL="SELECT reportheading,
 				groupbydata1,
 				newpageafter1,
 				lower1,
@@ -149,12 +149,12 @@ $GetReportSpecSQL='SELECT reportheading,
 				lower4,
 				upper4
 			FROM reportheaders
-			WHERE reportid=' . $_GET['ReportID'];
+			WHERE reportid='" . $_GET['ReportID'] . "'";
 
 $SpecResult= DB_query($GetReportSpecSQL,$db);
 $ReportSpec = DB_fetch_array($SpecResult);
 
-$GetColsSQL = 'SELECT colno,
+$GetColsSQL = "SELECT colno,
 			heading1,
 			heading2,
 			calculation,
@@ -168,7 +168,7 @@ $GetColsSQL = 'SELECT colno,
 			budgetoractual,
 			valformat
 		FROM reportcolumns
-		WHERE reportid=' . $_GET['ReportID'];
+		WHERE reportid='" . $_GET['ReportID'] . "'";
 
 $ColsResult = DB_query($GetColsSQL,$db);
 
@@ -192,7 +192,7 @@ If (DB_num_rows($ColsResult)== 0) {
 
 
 $SQLFromCls = ' FROM ((((((salesanalysis LEFT JOIN salestypes ON salesanalysis.typeabbrev = salestypes.typeabbrev) LEFT JOIN stockmaster ON salesanalysis.stockid = stockmaster.stockid) LEFT JOIN areas ON salesanalysis.area = areas.areacode) LEFT JOIN debtorsmaster ON salesanalysis.cust = debtorsmaster.debtorno) LEFT JOIN custbranch ON (salesanalysis.custbranch = custbranch.branchcode AND salesanalysis.cust=custbranch.debtorno)) LEFT JOIN stockcategory ON salesanalysis.stkcategory = stockcategory.categoryid) LEFT JOIN salesman ON salesanalysis.salesperson = salesman.salesmancode ';
-$SQLSelectCls = 'SELECT ';
+$SQLSelectCls = "SELECT ";
 $SQLGroupCls = 'GROUP BY ';
 
 $SQLWhereCls = 'WHERE ';
@@ -204,9 +204,9 @@ $SQLGroupCls = $SQLGroupCls . GetGroupBySQL($ReportSpec['groupbydata1']);
 
 If ($ReportSpec['groupbydata2'] != 'Not Used') {
      $SQLSelectCls = $SQLSelectCls . ', ' . GetFieldSQL($ReportSpec['groupbydata2'],3);
-     
+
      $SQLWhereCls = $SQLWhereCls . " AND " . GetHavingSQL($ReportSpec['groupbydata2']) . " >= '" . $ReportSpec['lower2'] . "' AND " . GetHavingSQL($ReportSpec['groupbydata2']) . " <= '" . $ReportSpec['upper2'] . "'";
-     
+
 
      $SQLGroupCls = $SQLGroupCls . ', ' . GetGroupBySQL($ReportSpec['groupbydata2']);
 } else {
@@ -216,9 +216,9 @@ If ($ReportSpec['groupbydata2'] != 'Not Used') {
 
 If ($ReportSpec['groupbydata3'] != 'Not Used') {
 	 $SQLSelectCls = $SQLSelectCls . ', ' . GetFieldSQL($ReportSpec['groupbydata3'],5);
-	 
+
 	$SQLWhereCls = $SQLWhereCls . " AND " . GetHavingSQL($ReportSpec['groupbydata3']) . " >= '" . $ReportSpec['lower3'] . "' AND " . GetHavingSQL($ReportSpec['groupbydata3']) . " <= '" . $ReportSpec['upper3'] . "'";
-		 
+
 	 $SQLGroupCls = $SQLGroupCls . ', ' . GetGroupBySQL($ReportSpec['groupbydata3']);
 } else {
     	 $ReportSpec['groupbydata4'] = 'Not Used'; /*This is forced if no entry in Group By 3 */
@@ -228,7 +228,7 @@ If ($ReportSpec['groupbydata3'] != 'Not Used') {
 If ($ReportSpec['groupbydata4'] != 'Not Used') {
 	 $SQLSelectCls = $SQLSelectCls . ', ' . GetFieldSQL($ReportSpec['groupbydata4'],7);
 	$SQLWhereCls = $SQLWhereCls . " AND " . GetHavingSQL($ReportSpec['groupbydata4']) . " >= '" . $ReportSpec['lower4'] . "' AND " . GetHavingSQL($ReportSpec['groupbydata4']) . " <= '" . $ReportSpec['upper4'] . "'";
-	
+
 	 $SQLGroupCls = $SQLGroupCls . ', ' . GetGroupBySQL($ReportSpec['groupbydata4']);
 } else {
 	 $SQLSelectCls = $SQLSelectCls . ', 0 AS col7, 0 AS col8';
