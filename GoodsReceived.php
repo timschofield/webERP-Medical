@@ -147,7 +147,7 @@ if (count($_SESSION['PO']->LineItems)>0 and !isset($_POST['ProcessGoodsReceived'
 			}
 			$ConversionFactor=$SupplierUOMRow['conversionfactor'];
 		} else { //using our units throughout
-			$Uom=$LnItm->Units;
+			$Uom=$LnItm->UOM;
 			$ConversionFactor=1;
 		}
 
@@ -458,7 +458,7 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 				}
 
 				$SQL = "UPDATE locstock
-								SET quantity = locstock.quantity + '" . $OrderLine->ReceiveQty . "'
+								SET quantity = locstock.quantity + '" . $OrderLine->ReceiveQty*$OrderLine->ConversionFactor . "'
 								WHERE locstock.stockid = '" . $OrderLine->StockID . "'
 								AND loccode = '" . $_SESSION['PO']->Location . "'";
 
@@ -488,9 +488,9 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 																		'" . $LocalCurrencyPrice . "',
 																		'" . $PeriodNo . "',
 																		'" . $_SESSION['PO']->SupplierID . " (" . $_SESSION['PO']->SupplierName . ") - " .$_SESSION['PO']->OrderNo . "',
-																		'" . $OrderLine->ReceiveQty . "',
-																		'" . $_SESSION['PO']->LineItems[$OrderLine->LineNo]->StandardCost . "',
-																		'" . ($QtyOnHandPrior + $OrderLine->ReceiveQty) . "'
+																		'" . $OrderLine->ReceiveQty*$OrderLine->ConversionFactor . "',
+																		'" . $_SESSION['PO']->LineItems[$OrderLine->LineNo]->StandardCost/$OrderLine->ConversionFactor . "',
+																		'" . ($QtyOnHandPrior + ($OrderLine->ReceiveQty*$OrderLine->ConversionFactor)) . "'
 																		)";
 
 				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('stock movement records could not be inserted because');
@@ -634,9 +634,9 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 																'" . $PeriodNo . "',
 																'" . $OrderLine->GLCode . "',
 																'PO: " . $_SESSION['PO']->OrderNo . " " . $_SESSION['PO']->SupplierID . " - " . $OrderLine->StockID
-																		. " - " . $OrderLine->ItemDescription . " x " . $OrderLine->ReceiveQty . " @ " .
+																		. " - " . $OrderLine->ItemDescription . " x " . $OrderLine->ReceiveQty*$OrderLine->ConversionFactor . " @ " .
 																			number_format($CurrentStandardCost,2) . "',
-																'" . $CurrentStandardCost * $OrderLine->ReceiveQty . "'
+																'" . $CurrentStandardCost * $OrderLine->ReceiveQty*$OrderLine->ConversionFactor  . "'
 																)";
 
 				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The purchase GL posting could not be inserted because');
@@ -660,8 +660,8 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 																'" . $_SESSION['CompanyRecord']['grnact'] . "',
 																'" . _('PO') . ': ' . $_SESSION['PO']->OrderNo . ' ' . $_SESSION['PO']->SupplierID . ' - ' .
 																			$OrderLine->StockID . ' - ' . $OrderLine->ItemDescription . ' x ' .
-																				$OrderLine->ReceiveQty . ' @ ' . number_format($UnitCost,2) . "',
-																'" . -$UnitCost * $OrderLine->ReceiveQty . "'
+																				$OrderLine->ReceiveQty*$OrderLine->ConversionFactor . ' @ ' . number_format($UnitCost,2) . "',
+																'" . -$UnitCost * $OrderLine->ReceiveQty*$OrderLine->ConversionFactor . "'
 																)";
 
 				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The GRN suspense side of the GL posting could not be inserted because');
