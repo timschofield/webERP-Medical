@@ -786,7 +786,7 @@ if (count($_SESSION['Items'.$identifier]->LineItems)>0 and !isset($_POST['Proces
 	echo '</td><th valign="bottom">'; //for the master table
 	echo '<table class="selection">'; // a new nested table in the second column of master table
 	//now the payment stuff in this column
-	$PaymentMethodsResult = DB_query('SELECT paymentid, paymentname FROM paymentmethods',$db);
+	$PaymentMethodsResult = DB_query("SELECT paymentid, paymentname FROM paymentmethods",$db);
 
 	echo '<tr><td>' . _('Payment Type') . ':</td><td><select name="PaymentMethod">';
 	while ($PaymentMethodRow = DB_fetch_array($PaymentMethodsResult)){
@@ -798,7 +798,7 @@ if (count($_SESSION['Items'.$identifier]->LineItems)>0 and !isset($_POST['Proces
 	}
 	echo '</select></td></tr>';
 
-	$BankAccountsResult = DB_query('SELECT bankaccountname, accountcode FROM bankaccounts',$db);
+	$BankAccountsResult = DB_query("SELECT bankaccountname, accountcode FROM bankaccounts",$db);
 
 	echo '<tr><td>' . _('Banked to') . ':</td><td><select name="BankAccount">';
 	while ($BankAccountsRow = DB_fetch_array($BankAccountsResult)){

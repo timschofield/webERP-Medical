@@ -76,14 +76,14 @@ if (!isset($SelectedCOGSPostingID)) {
 
 	$ShowLivePostingRecords = true;
 
-	$sql = 'SELECT cogsglpostings.id,
+	$sql = "SELECT cogsglpostings.id,
 			cogsglpostings.area,
 			cogsglpostings.stkcat,
 			cogsglpostings.salestype,
 			chartmaster.accountname
 		FROM cogsglpostings LEFT JOIN chartmaster
 			ON cogsglpostings.glcode = chartmaster.accountcode
-				WHERE chartmaster.accountcode IS NULL';
+				WHERE chartmaster.accountcode IS NULL";
 
 	$result = DB_query($sql,$db);
 	if (DB_num_rows($result)>0){
@@ -124,11 +124,11 @@ if (!isset($SelectedCOGSPostingID)) {
 		echo '</table>';
 	}
 
-	$sql = 'SELECT cogsglpostings.id,
+	$sql = "SELECT cogsglpostings.id,
 			cogsglpostings.area,
 			cogsglpostings.stkcat,
 			cogsglpostings.salestype
-		FROM cogsglpostings';
+		FROM cogsglpostings";
 
 	$result = DB_query($sql,$db);
 
@@ -152,7 +152,7 @@ if (!isset($SelectedCOGSPostingID)) {
 
 			$result = DB_query($sql,$db);
 		}
-		$sql = 'SELECT accountcode FROM chartmaster WHERE accountcode =1';
+		$sql = "SELECT accountcode FROM chartmaster WHERE accountcode =1";
 		$result = DB_query($sql,$db);
 		if (DB_num_rows($result)==0){
 		/* account number 1 is not used, so insert a new account */
@@ -182,14 +182,14 @@ if (!isset($SelectedCOGSPostingID)) {
 	}
 
 	if ($ShowLivePostingRecords){
-		$sql = 'SELECT cogsglpostings.id,
+		$sql = "SELECT cogsglpostings.id,
 				cogsglpostings.area,
 				cogsglpostings.stkcat,
 				cogsglpostings.salestype,
 				chartmaster.accountname
 			FROM cogsglpostings,
 				chartmaster
-			WHERE cogsglpostings.glcode = chartmaster.accountcode';
+			WHERE cogsglpostings.glcode = chartmaster.accountcode";
 
 		$result = DB_query($sql,$db);
 
@@ -283,7 +283,7 @@ while ($myrow = DB_fetch_array($result)) {
 } //end while loop
 DB_free_result($result);
 
-$sql = 'SELECT categoryid, categorydescription FROM stockcategory';
+$sql = "SELECT categoryid, categorydescription FROM stockcategory";
 $result = DB_query($sql,$db);
 
 echo "</select></td></tr><tr><td>" . _('Stock Category') . ":</td><td><select tabindex=2 name='StkCat'>
@@ -301,7 +301,7 @@ while ($myrow = DB_fetch_array($result)) {
 
 DB_free_result($result);
 
-$sql = 'SELECT typeabbrev, sales_type FROM salestypes';
+$sql = "SELECT typeabbrev, sales_type FROM salestypes";
 $result = DB_query($sql,$db);
 
 echo "</select></td></tr><tr><td>" . _('Sales Type') . " / " . _('Price List') . ":</td>

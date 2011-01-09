@@ -144,7 +144,7 @@ then none of the above are true and the list of status codes will be displayed w
 links to delete or edit each. These will call the same page again and allow update/input
 or deletion of the records*/
 
-	$sql = 'SELECT reasoncode, reasondescription, dissallowinvoices FROM holdreasons';
+	$sql = "SELECT reasoncode, reasondescription, dissallowinvoices FROM holdreasons";
 	$result = DB_query($sql, $db);
 
 	echo '<table class=selection>';
