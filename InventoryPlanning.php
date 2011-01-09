@@ -379,7 +379,7 @@ if (isset($_POST['PrintPDF'])
 					<td>' . _('From Inventory Category Code') . ':</td>
 					<td><select name="FromCriteria">';
 
-					$sql='SELECT categoryid, categorydescription FROM stockcategory ORDER BY categoryid';
+					$sql="SELECT categoryid, categorydescription FROM stockcategory ORDER BY categoryid";
 					$CatResult= DB_query($sql,$db);
 					While ($myrow = DB_fetch_array($CatResult)){
 					echo "<option value='" . $myrow['categoryid'] . "'>" . $myrow['categoryid'] . " - " . $myrow['categorydescription'] .'</option>';
@@ -403,7 +403,7 @@ if (isset($_POST['PrintPDF'])
 
 		echo '<tr>
 					<td>' . _('For Inventory in Location') . ":</td><td><select name='Location'>";
-					$sql = 'SELECT loccode, locationname FROM locations';
+					$sql = "SELECT loccode, locationname FROM locations";
 					$LocnResult=DB_query($sql,$db);
 
 					echo "<option value='All'>" . _('All Locations').'</option>';
