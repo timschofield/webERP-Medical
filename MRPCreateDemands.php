@@ -189,9 +189,9 @@ prnMsg( $totalrecords . ' ' . _('records have been created'),'success');
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class=selection>';
 	echo '<tr><td>' . _('Demand Type') . ':</td><td><select name="MRPDemandtype">';
-	$sql = 'SELECT mrpdemandtype,
+	$sql = "SELECT mrpdemandtype,
 					description
-			FROM mrpdemandtypes';
+			FROM mrpdemandtypes";
 	$result = DB_query($sql,$db);
 	while ($myrow = DB_fetch_array($result)) {
 		 echo '<option value="';
@@ -200,9 +200,9 @@ prnMsg( $totalrecords . ' ' . _('records have been created'),'success');
 	echo '</select></td></tr>';
 	echo '<tr><td>' . _('Inventory Category') . ':</td><td><select name="CategoryID">';
 	echo '<option selected value="All">' . _('All Stock Categories');
-	$sql = 'SELECT categoryid,
+	$sql = "SELECT categoryid,
 				   categorydescription
-			FROM stockcategory';
+			FROM stockcategory";
 	$result = DB_query($sql,$db);
 	while ($myrow = DB_fetch_array($result)) {
 		echo '<option value="';
@@ -212,9 +212,9 @@ prnMsg( $totalrecords . ' ' . _('records have been created'),'success');
 	echo '<tr><td>' . _('Inventory Location') . ':</td><td><select name="Location">';
 	echo '<option selected value="All">' . _('All Locations');
 
-	$result= DB_query('SELECT loccode,
+	$result= DB_query("SELECT loccode,
 							   locationname
-						FROM locations',$db);
+						FROM locations",$db);
 	while ($myrow=DB_fetch_array($result)){
 		echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
 	}
