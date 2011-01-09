@@ -35,7 +35,7 @@ if (!isset($LocationFrom) OR !isset($ShipperID)) {
 
 	echo "<form method='post' action='" . $_SERVER['PHP_SELF'] . '?' . SID . "'>";
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	$sql = 'SELECT shippername, shipper_id FROM shippers';
+	$sql = "SELECT shippername, shipper_id FROM shippers";
 	$ShipperResults = DB_query($sql,$db);
 
 	echo '<table class=selection>
@@ -51,7 +51,7 @@ if (!isset($LocationFrom) OR !isset($ShipperID)) {
 				<td>' . _('Select the warehouse') . ' (' . _('ship from location') . ")</td>
 				<td><select name='LocationFrom'>";
 
-	$sql = 'SELECT loccode, locationname FROM locations';
+	$sql = "SELECT loccode, locationname FROM locations";
 	$LocationResults = DB_query($sql,$db);
 
 	while ($myrow = DB_fetch_array($LocationResults)){

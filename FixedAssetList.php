@@ -7,7 +7,7 @@ include('includes/header.inc');
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' .
 	 _('Search') . '" alt="" />' . ' ' . $title .'</p>';
 
-$sql='SELECT stockmaster.stockid,
+$sql="SELECT stockmaster.stockid,
 			assetmanager.serialno,
 			stockmaster.description,
 			stockcatproperties.label,
@@ -20,7 +20,7 @@ $sql='SELECT stockmaster.stockid,
 		LEFT JOIN stockitemproperties
 			ON stockcatproperties.stkcatpropid=stockitemproperties.stkcatpropid
 		WHERE stockmaster.stockid=stockitemproperties.stockid
-		ORDER BY assetmanager.serialno,stockmaster.stockid';
+		ORDER BY assetmanager.serialno,stockmaster.stockid";
 
 $result=DB_query($sql, $db);
 echo '<table class=selection>';

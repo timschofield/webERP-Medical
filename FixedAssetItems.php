@@ -277,25 +277,25 @@ if (isset($_POST['submit'])) {
 
 	$CancelDelete = 0;
 	//what validation is required before allowing deletion of assets ....  maybe there should be no deletion option?
-	$result = DB_query('SELECT cost,
+	$result = DB_query("SELECT cost,
 														accumdepn,
 														accumdepnact,
 														costact
 											FROM fixedassets INNER JOIN fixedassetcategories
 											ON fixedassets.assetcategoryid=fixedassetcategories.categoryid
-											WHERE assetid="' . $AssetID . '"', $db);
+											WHERE assetid='" . $AssetID . "'", $db);
 	$AssetRow = DB_fetch_array($result);
 	$NBV = $AssetRow['cost'] -$AssetRow['accumdepn'];
 	if ($NBV!=0) {
 		$CancelDelete =1; //cannot delete assets where NBV is not 0
 		prnMsg(_('The asset still has a net book value - only assets with a zero net book value can be deleted'),'error');
 	}
-	$result = DB_query('SELECT * FROM fixedassettrans WHERE assetid="' . $AssetID . '"',$db);
+	$result = DB_query("SELECT * FROM fixedassettrans WHERE assetid='" . $AssetID . "'",$db);
 	if (DB_num_rows($result) > 0){
 		$CancelDelete =1; /*cannot delete assets with transactions */
 		prnMsg(_('The asset has transactions associated with it. The asset can only be deleted when the fixed asset transactions are purged, otherwise the integrity of fixed asset reports may be compromised'),'error');
 	}
-	$result = DB_query('SELECT * FROM purchorderdetails WHERE assetid="' . $AssetID . '"',$db);
+	$result = DB_query("SELECT * FROM purchorderdetails WHERE assetid='" . $AssetID . "'",$db);
 	if (DB_num_rows($result) > 0){
 		$CancelDelete =1; /*cannot delete assets where there is a purchase order set up for it */
 		prnMsg(_('There is a purchase order set up for this asset. The purchase order line must be deleted first'),'error');
@@ -464,7 +464,7 @@ if ($New == 0) { //ie not new at all!
 
 echo '<tr><td>' . _('Asset Category') . ':</td><td><select name="AssetCategoryID">';
 
-$sql = 'SELECT categoryid, categorydescription FROM fixedassetcategories';
+$sql = "SELECT categoryid, categorydescription FROM fixedassetcategories";
 $ErrMsg = _('The asset categories could not be retrieved because');
 $DbgMsg = _('The SQL used to retrieve stock categories and failed was');
 $result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
@@ -486,7 +486,7 @@ if ($AssetRow['datepurchased']!='0000-00-00' AND $AssetRow['datepurchased']!='')
 	echo '<tr><td>' . _('Date Purchased') . ':</td><td>' . ConvertSQLDate($AssetRow['datepurchased']) . '</td></tr>';
 }
 
-$sql = 'SELECT locationid, locationdescription FROM fixedassetlocations';
+$sql = "SELECT locationid, locationdescription FROM fixedassetlocations";
 $ErrMsg = _('The asset locations could not be retrieved because');
 $DbgMsg = _('The SQL used to retrieve asset locations and failed was');
 $result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
@@ -531,7 +531,7 @@ echo '<tr><td>' . _('Accumulated Costs') . ':</td><td class="number">' . number_
 echo '<tr><td>' . _('Accumulated Depreciation') . ':</td><td class="number">' . number_format($AssetRow['accumdepn'],2) . '</td></tr>';
 echo '<tr><td>' . _('Net Book Value') . ':</td><td class="number">' . number_format($AssetRow['cost']-$AssetRow['accumdepn'],2) . '</td></tr>';
 
-$result = DB_query('SELECT periods.lastdate_in_period, max(fixedassettrans.periodno) FROM fixedassettrans INNER JOIN periods ON fixedassettrans.periodno=periods.periodno WHERE transtype=44 GROUP BY periods.lastdate_in_period',$db);
+$result = DB_query("SELECT periods.lastdate_in_period, max(fixedassettrans.periodno) FROM fixedassettrans INNER JOIN periods ON fixedassettrans.periodno=periods.periodno WHERE transtype=44 GROUP BY periods.lastdate_in_period",$db);
 $LastDepnRun = DB_fetch_row($result);
 if(DB_num_rows($result)==0){
 	$LastRunDate = _('Not Yet Run');
