@@ -261,7 +261,7 @@ if (isset($_POST['PrintPDF'])
 		}
 
 		if ($_POST['Location']=='All'){
-			$SQL = "SELECT SUM(purchorderdetails.quantityord - purchorderdetails.quantityrecd) as qtyonorder
+			$SQL = "SELECT SUM(purchorderdetails.quantityord*purchorderdetails.conversionfactor - purchorderdetails.quantityrecd*purchorderdetails.conversionfactor) as qtyonorder
 							FROM purchorderdetails INNER JOIN purchorders
 							ON purchorderdetails.orderno = purchorders.orderno
 							WHERE  purchorderdetails.itemcode = '" . $InventoryPlan['stockid'] . "'
@@ -270,7 +270,7 @@ if (isset($_POST['PrintPDF'])
 							AND purchorders.status <> 'Rejected'
 							AND purchorders.status <> 'Pending'";
 		} else {
-			$SQL = "SELECT SUM(purchorderdetails.quantityord - purchorderdetails.quantityrecd) as qtyonorder
+			$SQL = "SELECT SUM(purchorderdetails.quantityord*purchorderdetails.conversionfactor - purchorderdetails.quantityrecd*purchorderdetails.conversionfactor) as qtyonorder
 							FROM purchorderdetails INNER JOIN purchorders
 							ON purchorderdetails.orderno = purchorders.orderno
 							WHERE purchorderdetails.itemcode = '" . $InventoryPlan['stockid'] . "'
