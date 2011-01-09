@@ -92,9 +92,9 @@ if (isset($_POST['submit'])) {
 		$result = DB_query($sql,$db);
 
 
-		$sql = 'SELECT COUNT(*) FROM bom
+		$sql = "SELECT COUNT(*) FROM bom
 						INNER JOIN passbom ON bom.parent = passbom.part
-						GROUP BY bom.parent';
+						GROUP BY bom.parent";
 		$result = DB_query($sql,$db);
 
 		$myrow = DB_fetch_row($result);
@@ -104,9 +104,9 @@ if (isset($_POST['submit'])) {
 
 	prnMsg(_('Creating bomlevels table'),'info');
 	flush();
-	$sql = 'CREATE TEMPORARY TABLE bomlevels (
+	$sql = "CREATE TEMPORARY TABLE bomlevels (
 									part char(20),
-									level int) DEFAULT CHARSET=utf8';
+									level int) DEFAULT CHARSET=utf8";
 	$result = DB_query($sql,$db);
 
 	// Read tempbom and split sortpart into separate parts. For each separate part, calculate level as
@@ -114,7 +114,7 @@ if (isset($_POST['submit'])) {
 	// part in the array for a level 4 sortpart would be created as a level 3 in levels, the fourth
 	// and last part in sortpart would have a level code of zero, meaning it has no components
 
-	$sql = 'SELECT * FROM tempbom';
+	$sql = "SELECT * FROM tempbom";
 	$result = DB_query($sql,$db);
 	while ($myrow=DB_fetch_array($result)) {
 			$parts = explode('%',$myrow['sortpart']);
@@ -132,15 +132,15 @@ if (isset($_POST['submit'])) {
 	flush();
 	// Create levels from bomlevels using the highest level number found for a part
 
-	$sql = 'CREATE TABLE levels (
+	$sql = "CREATE TABLE levels (
 							part char(20),
 							level int,
-							leadtime smallint(6) NOT NULL default "0",
-							pansize double NOT NULL default "0",
-							shrinkfactor double NOT NULL default "0",
-							eoq double NOT NULL default "0") DEFAULT CHARSET=utf8';
+							leadtime smallint(6) NOT NULL default '0',
+							pansize double NOT NULL default '0',
+							shrinkfactor double NOT NULL default '0',
+							eoq double NOT NULL default '0') DEFAULT CHARSET=utf8";
 	$result = DB_query($sql,$db);
-	$sql = 'INSERT INTO levels (part,
+	$sql = "INSERT INTO levels (part,
 													level,
 													leadtime,
 													pansize,
@@ -157,15 +157,15 @@ if (isset($_POST['submit'])) {
 									 GROUP BY bomlevels.part,
 											  pansize,
 											  shrinkfactor,
-											  stockmaster.eoq';
+											  stockmaster.eoq";
 	$result = DB_query($sql,$db);
-	$sql = 'ALTER TABLE levels ADD INDEX part(part)';
+	$sql = "ALTER TABLE levels ADD INDEX part(part)";
 	$result = DB_query($sql,$db);
 
 	// Create levels records with level of zero for all parts in stockmaster that
 	// are not in bom
 
-	$sql = 'INSERT INTO levels (part,
+	$sql = "INSERT INTO levels (part,
 								level,
 								leadtime,
 								pansize,
@@ -179,21 +179,21 @@ if (isset($_POST['submit'])) {
 						stockmaster.eoq
 				FROM stockmaster
 				LEFT JOIN levels ON stockmaster.stockid = levels.part
-				WHERE levels.part IS NULL';
+				WHERE levels.part IS NULL";
 	$result = DB_query($sql,$db);
 
 	// Update leadtime in levels from purchdata. Do it twice so can make sure leadtime from preferred
 	// vendor is used
-	$sql = 'UPDATE levels,purchdata
+	$sql = "UPDATE levels,purchdata
 							SET levels.leadtime = purchdata.leadtime
 					WHERE levels.part = purchdata.stockid
-					AND purchdata.leadtime > 0';
+					AND purchdata.leadtime > 0";
 	$result = DB_query($sql,$db);
-	$sql = 'UPDATE levels,purchdata
+	$sql = "UPDATE levels,purchdata
 						SET levels.leadtime = purchdata.leadtime
 					WHERE levels.part = purchdata.stockid
 					AND purchdata.preferred = 1
-					AND purchdata.leadtime > 0';
+					AND purchdata.leadtime > 0";
 	$result = DB_query($sql,$db);
 
 	prnMsg(_('Levels table has been created'),'info');
@@ -448,7 +448,7 @@ if (isset($_POST['submit'])) {
 	$result = DB_query($sql,$db,_('Create of mrpplannedorders failed because'));
 
 	// Find the highest and lowest level number
-	$sql = 'SELECT MAX(level),MIN(level) from levels';
+	$sql = "SELECT MAX(level),MIN(level) from levels";
 	$result = DB_query($sql,$db);
 
 	$myrow = DB_fetch_row($result);
@@ -462,7 +462,7 @@ if (isset($_POST['submit'])) {
 	// part, that serves as a gross requirement for a lower level part, so will read down through
 	// the Bill of Materials to generate those requirements in function LevelNetting().
 	for ($level = $maxlevel; $level >= $minlevel; $level--) {
-		$sql = 'SELECT * FROM levels WHERE level = "' . $level .'" LIMIT 50000'; //should cover most eventualities!! ... yes indeed :-)
+		$sql = "SELECT * FROM levels WHERE level = '" . $level ."' LIMIT 50000"; //should cover most eventualities!! ... yes indeed :-)
 
 		prnMsg('</br>------ ' . _('Processing level') .' ' . $level . ' ------','info');
 		flush();
@@ -518,7 +518,7 @@ if (isset($_POST['submit'])) {
 			_('Inventory') . '" alt="" />' . ' ' . $title . '</p>';
 
 	// Display parameters from last run
-	$sql = 'SELECT * FROM mrpparameters';
+	$sql = "SELECT * FROM mrpparameters";
 	$result = DB_query($sql,$db,'','',false,false);
 	if (DB_error_no($db)==0){
 
@@ -563,9 +563,9 @@ if (isset($_POST['submit'])) {
 	 <td>' . _('Location') . '</td>
 	 <td><select name="location[]" multiple>
 	 <option value="All" selected>' . _('All') . '</option>';
-	 $sql = 'SELECT loccode,
+	 $sql = "SELECT loccode,
 				locationname
-			   FROM locations';
+			   FROM locations";
 	$result = DB_query($sql,$db);
 	while ($myrow = DB_fetch_array($result)) {
 		echo '<option value="';
