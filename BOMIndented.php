@@ -17,19 +17,19 @@ if (isset($_POST['PrintPDF'])) {
 	$PageNumber=1;
 	$line_height=12;
 
-	$sql = 'DROP TABLE IF EXISTS tempbom';
+	$sql = "DROP TABLE IF EXISTS tempbom";
 	$result = DB_query($sql,$db);
-	$sql = 'DROP TABLE IF EXISTS passbom';
+	$sql = "DROP TABLE IF EXISTS passbom";
 	$result = DB_query($sql,$db);
-	$sql = 'DROP TABLE IF EXISTS passbom2';
+	$sql = "DROP TABLE IF EXISTS passbom2";
 	$result = DB_query($sql,$db);
-	$sql = 'CREATE TEMPORARY TABLE passbom (
+	$sql = "CREATE TEMPORARY TABLE passbom (
 				part char(20),
-				sortpart text)';
+				sortpart text)";
 	$ErrMsg = _('The SQL to create passbom failed with the message');
 	$result = DB_query($sql,$db,$ErrMsg);
 
-	$sql = 'CREATE TEMPORARY TABLE tempbom (
+	$sql = "CREATE TEMPORARY TABLE tempbom (
 				parent char(20),
 				component char(20),
 				sortpart text,
@@ -38,7 +38,7 @@ if (isset($_POST['PrintPDF'])) {
 				loccode char(5),
 				effectiveafter date,
 				effectiveto date,
-				quantity double)';
+				quantity double)";
 	$result = DB_query($sql,$db,_('Create of tempbom failed because'));
 	// First, find first level of components below requested assembly
 	// Put those first level parts in passbom, use COMPONENT in passbom
@@ -46,11 +46,11 @@ if (isset($_POST['PrintPDF'])) {
 	// those parts into tempbom
 
 	// This finds the top level
-	$sql = 'INSERT INTO passbom (part, sortpart)
+	$sql = "INSERT INTO passbom (part, sortpart)
 			   SELECT bom.component AS part,
 					  CONCAT(bom.parent,bom.component) AS sortpart
 			  FROM bom
-			  WHERE bom.parent =' . "'" . $_POST['Part'] . "'
+			  WHERE bom.parent =" . "'" . $_POST['Part'] . "'
 			  AND bom.effectiveto >= NOW() AND bom.effectiveafter <= NOW()";
 	$result = DB_query($sql,$db);
 
@@ -112,18 +112,18 @@ if (isset($_POST['PrintPDF'])) {
 				  AND bom.effectiveto >= NOW() AND bom.effectiveafter <= NOW()";
 			$result = DB_query($sql,$db);
 
-			$sql = 'DROP TABLE IF EXISTS passbom2';
+			$sql = "DROP TABLE IF EXISTS passbom2";
 			$result = DB_query($sql,$db);
 
-			$sql = 'ALTER TABLE passbom RENAME AS passbom2';
+			$sql = "ALTER TABLE passbom RENAME AS passbom2";
 			$result = DB_query($sql,$db);
 
-			$sql = 'DROP TABLE IF EXISTS passbom';
+			$sql = "DROP TABLE IF EXISTS passbom";
 			$result = DB_query($sql,$db);
 
-			$sql = 'CREATE TEMPORARY TABLE passbom (
+			$sql = "CREATE TEMPORARY TABLE passbom (
 				part char(20),
-				sortpart text)';
+				sortpart text)";
 			$result = DB_query($sql,$db);
 
 
@@ -136,7 +136,7 @@ if (isset($_POST['PrintPDF'])) {
 			$result = DB_query($sql,$db);
 
 
-			$sql = 'SELECT COUNT(*) FROM bom,passbom WHERE bom.parent = passbom.part';
+			$sql = "SELECT COUNT(*) FROM bom,passbom WHERE bom.parent = passbom.part";
 			$result = DB_query($sql,$db);
 
 			$myrow = DB_fetch_row($result);
@@ -158,10 +158,10 @@ if (isset($_POST['PrintPDF'])) {
 	}
 
 
-    $sql = 'SELECT stockmaster.stockid,
+    $sql = "SELECT stockmaster.stockid,
                    stockmaster.description
               FROM stockmaster
-              WHERE stockid = ' . "'" . $_POST['Part'] . "'";
+              WHERE stockid = " . "'" . $_POST['Part'] . "'";
 	$result = DB_query($sql,$db);
 	$myrow = DB_fetch_array($result,$db);
 	$assembly = $_POST['Part'];
@@ -171,12 +171,12 @@ if (isset($_POST['PrintPDF'])) {
 	                   $Right_Margin,$assemblydesc);
 
     $Tot_Val=0;
-    $sql = 'SELECT tempbom.*,
+    $sql = "SELECT tempbom.*,
                    stockmaster.description,
                    stockmaster.mbflag
               FROM tempbom,stockmaster
               WHERE tempbom.component = stockmaster.stockid
-              ORDER BY sortpart';
+              ORDER BY sortpart";
 	$result = DB_query($sql,$db);
 
 	// $fill is used to alternate between lines with transparent and painted background
