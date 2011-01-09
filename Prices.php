@@ -95,7 +95,7 @@ if (isset($_POST['submit'])) {
 	if (Is_Date($_POST['EndDate'])){
 		$SQLEndDate = FormatDateForSQL($_POST['EndDate']);
 	} else {
-		$SQLEndDate = '0000-00-00';
+		$SQLEndDate = '2030-01-01';
 	}
 	if (isset($_POST['OldTypeAbbrev']) AND isset($_POST['OldCurrAbrev']) AND strlen($Item)>1 AND $InputError !=1) {
 
@@ -324,7 +324,7 @@ if ($InputError ==0){
 	}
 
 	if (!isset($_POST['EndDate'])){
-		$_POST['EndDate'] = DateAdd(date($_SESSION['DefaultDateFormat']),'y',1);
+		$_POST['EndDate'] = DateAdd(date($_SESSION['DefaultDateFormat']),'y',3);
 	}
 	echo '<tr><td>' . _('Price Effective From Date')  . ':</td>
 				<td><input type="Text" class=date alt="'.$_SESSION['DefaultDateFormat'].'" name="StartDate" size=10 maxlength=10 value="' . $_POST['StartDate'] . '"></td></tr>';
