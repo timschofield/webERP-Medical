@@ -225,7 +225,7 @@ Class LineDetails {
 	Var $GLActName;
 	Var $Quantity;
 	Var $Price;
-	Var $Units; //errrrr what is uom for then
+	Var $UOM; //errrrr what is uom for then
 	Var $ReqDelDate;
 	Var $QtyInv;
 	Var $QtyReceived;
@@ -295,7 +295,7 @@ Class LineDetails {
 		$this->Quantity = $Qty;
 		$this->ReqDelDate = $ReqDelDate;
 		$this->Price = $Price;
-		$this->Units = $UOM;
+		$this->UOM = $UOM;
 		$this->QtyReceived = $QtyRecd;
 		$this->QtyInv = $QtyInv;
 		$this->GLCode = $GLCode;

@@ -58,11 +58,11 @@ if (isset($_POST['Select']) and empty($_POST['SupplierContact'])) {
 	}
 }
 
-if (isset($_POST['UpdateStat']) AND $_POST['UpdateStat']!='') {
+if (isset($_POST['UpdateStatus']) AND $_POST['UpdateStatus']!='') {
 	/*The cancel button on the header screen - to delete order */
-	$OK_to_updstat = 1;
+	$OKToUpdateStatus = 1;
 	$OldStatus=$_SESSION['PO'.$identifier]->Status;
-	$NewStatus=$_POST['Stat'];
+	$NewStatus=$_POST['Status'];
 	$EmailSQL="SELECT email FROM www_users WHERE userid='".$_SESSION['PO'.$identifier]->Initiator."'";
 	$EmailResult=DB_query($EmailSQL, $db);
 	$EmailRow=DB_fetch_array($EmailResult);
@@ -773,7 +773,6 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 		echo '<tr><td><a href="' .$rootpath . "/GoodsReceived.php?" . SID . "&PONumber=" .
 			$_SESSION['PO'.$identifier]->OrderNo . "&identifier=".$identifier.'">'._('Receive this order').'</a></td></tr>';
 	}
-	echo '<td>' . _('Status') . ' :  </td><td><select name="Stat" onChange="ReloadForm(form1.UpdateStat)">';
 
 	switch ($_SESSION['PO'.$identifier]->Status) {
 		case '':
@@ -808,22 +807,23 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 			break;
 	}
 
+	echo '<td>' . _('Status') . ' :  </td><td><select name="Status" onChange="ReloadForm(UpdateStatus)">';
 	foreach ($StatusList as $Status) {
-		if ($_SESSION['PO'.$identifier]->Stat == $Status){
+		if ($_SESSION['PO'.$identifier]->Status == $Status){
 			echo '<option selected value="' . $Status . '">' . _($Status) . '</option>';
 		} else {
 			echo '<option value="'.$Status.'">' . _($Status) . '</option>';
 		}
 
-		echo '</select></td></tr>';
-
-		echo '<tr><td>' . _('Status Comment') . ':</td>
-						<td><input type=text name="StatusComments" size=50></td></tr>
-					<tr><td colspan=2><b>' . $_SESSION['PO'.$identifier]->StatusComments .'</b></td></tr>';
-		//need to use single quotes as double quotes inside the string of StatusComments
-		echo "<input type='hidden' name='StatusCommentsComplete' value='" . $_SESSION['PO'.$identifier]->StatusComments ."'>";
-		echo '<tr><td><input type="submit" name="UpdateStatus" value="' . _('Status Update') .'"></td>';
 	} //end its not a new order
+	echo '</select></td></tr>';
+
+	echo '<tr><td>' . _('Status Comment') . ':</td>
+						<td><input type=text name="StatusComments" size=50></td></tr>
+					<tr><td colspan=2><b>' . $_SESSION['PO'.$identifier]->StatComments .'</b></td></tr>';
+	//need to use single quotes as double quotes inside the string of StatusComments
+	echo "<input type='hidden' name='StatusCommentsComplete' value='" . $_SESSION['PO'.$identifier]->StatComments ."'>";
+	echo '<tr><td><input type="submit" name="UpdateStatus" value="' . _('Status Update') .'"></td>';
 
 	echo '</tr></table></td>';
 

@@ -15,7 +15,7 @@
 
 /*read in all the guff from the selected order into the PO PurchOrder Class variable  */
 
-	$OrderHeaderSQL = 'SELECT purchorders.supplierno,
+	$OrderHeaderSQL = "SELECT purchorders.supplierno,
 														suppliers.suppname,
 														purchorders.comments,
 														purchorders.orddate,
@@ -53,7 +53,7 @@
 														LEFT JOIN locations ON purchorders.intostocklocation=locations.loccode,
 														suppliers
 													WHERE purchorders.supplierno = suppliers.supplierid
-													AND purchorders.orderno = ' . $_GET['ModifyOrderNumber'];
+													AND purchorders.orderno = '" . $_GET['ModifyOrderNumber'] . "'";
 
 	   $ErrMsg =  _('The order cannot be retrieved because');
 	   $DbgMsg =  _('The SQL statement that was used and failed was');
@@ -94,7 +94,7 @@
 			$_SESSION['PO'.$identifier]->Version = $myrow['version'];
 			$_SESSION['PO'.$identifier]->Port = $myrow['port'];
 			$_SESSION['PO'.$identifier]->Status = $myrow['status'];
-			$_SESSION['PO'.$identifier]->StatusComments = $myrow['stat_comment'];
+			$_SESSION['PO'.$identifier]->StatComments = $myrow['stat_comment'];
 			$_SESSION['PO'.$identifier]->DeliveryDate = ConvertSQLDate($myrow['deliverydate']);
 			$_SESSION['ExistingOrder'] = $_SESSION['PO'.$identifier]->OrderNo;
 			$_SESSION['PO'.$identifier]->PaymentTerms= $myrow['paymentterms'];
@@ -152,7 +152,8 @@
 																cuft,
 																total_quantity,
 																total_amount,
-																assetid
+																assetid,
+																uom
 																FROM purchorderdetails
 																	LEFT JOIN stockmaster
 																	ON purchorderdetails.itemcode=stockmaster.stockid
@@ -187,27 +188,27 @@
 					} else {
 						$StockID = $myrow['itemcode'];
 					}
-					$LatestPurchDataSQL='SELECT max(effectivefrom)
+					$LatestPurchDataSQL="SELECT max(effectivefrom)
 											FROM purchdata
-											WHERE supplierno="'.$_SESSION['PO'.$identifier]->SupplierID.'"
-												AND stockid="'. $StockID.'"
-												AND effectivefrom<="'.$_SESSION['PO'.$identifier]->Orig_OrderDate.'"';
+											WHERE supplierno='".$_SESSION['PO'.$identifier]->SupplierID."'
+												AND stockid='". $StockID."'
+												AND effectivefrom<='".$_SESSION['PO'.$identifier]->Orig_OrderDate."'";
 					$LatestPurchDataResult=DB_query($LatestPurchDataSQL, $db);
 					$LatestPurchDataRow=DB_fetch_row($LatestPurchDataResult);
 					if ($LatestPurchDataRow[0] != '') {
-						$sql='SELECT unitsofmeasure.unitname,
+						$sql="SELECT unitsofmeasure.unitname,
 												suppliers_partno,
 												conversionfactor
 											FROM purchdata
 											LEFT JOIN unitsofmeasure
 											ON purchdata.suppliersuom=unitsofmeasure.unitid
-											WHERE supplierno="'.$_SESSION['PO'.$identifier]->SupplierID.'"
-											AND stockid="'.$StockID.'"
-											AND effectivefrom="'.$LatestPurchDataRow[0].'"';
+											WHERE supplierno='".$_SESSION['PO'.$identifier]->SupplierID."'
+											AND stockid='".$StockID."'
+											AND effectivefrom='".$LatestPurchDataRow[0]."'";
 						$PurchDataResult=DB_query($sql, $db);
 						$myrow2=DB_fetch_array($PurchDataResult);
 					} else {
-						$sql='SELECT units as unitname, stockid as suppliers_partno FROM stockmaster WHERE stockid="'.$StockID.'"';
+						$sql="SELECT units as unitname, stockid as suppliers_partno FROM stockmaster WHERE stockid='".$StockID."'";
 						$PurchDataResult=DB_query($sql, $db);
 						$myrow2=DB_fetch_array($PurchDataResult);
 						$myrow2['conversionfactor']=1;
@@ -220,7 +221,7 @@
 																									$myrow['quantityord'],
 																									stripslashes($myrow['itemdescription']),
 																									$myrow['unitprice'],
-																									$Units,
+																									$myrow['uom'],
 																									$GLCode,
 																									ConvertSQLDate($myrow['deliverydate']),
 																									$myrow['shiptref'],

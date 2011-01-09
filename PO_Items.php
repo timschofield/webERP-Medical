@@ -39,6 +39,8 @@ if (isset($_POST['StockID2']) AND $_GET['Edit']=='') {
  */
 	$sql = "SELECT stockmaster.description,
 								purchdata.suppliers_partno,
+								purchdata.conversionfactor,
+								purchdata.suppliersuom,
 								stockmaster.pkg_type,
 								stockmaster.units,
 								stockmaster.netweight,
@@ -53,15 +55,16 @@ if (isset($_POST['StockID2']) AND $_GET['Edit']=='') {
 		_('cannot be retrieved because');
 	$DbgMsg = _('The SQL used to retrieve the supplier details and failed was');
 	$result =DB_query($sql,$db,$ErrMsg,$DbgMsg);
-	$myrow = DB_fetch_row($result);
+	$myrow = DB_fetch_array($result);
 
-	$_POST['ItemDescription'] = $myrow[0];
-	$_POST['Suppliers_PartNo'] = $myrow[1];
-	$_POST['Package'] = $myrow[2];
-	$_POST['uom'] = $myrow[3];
-	$_POST['nw'] = $myrow[4];
-	$_POST['gw'] = $myrow[5];
-	$_POST['CuFt'] = $myrow[6];
+	$_POST['ItemDescription'] = $myrow['description'];
+	$_POST['Suppliers_PartNo'] = $myrow['suppliers_partno'];
+	$_POST['ConversionFactor'] = $myrow['conversionfactor'];
+	$_POST['Package'] = $myrow['pkg_type'];
+	$_POST['uom'] = $myrow['suppliersuom'];
+	$_POST['nw'] = $myrow['netweight'];
+	$_POST['gw'] = $myrow['kgs'];
+	$_POST['CuFt'] = $myrow['volume'];
 } // end if (isset($_POST['StockID2']) && $_GET['Edit']=='')
 
 if (isset($_POST['UpdateLines']) OR isset($_POST['Commit'])) {
@@ -187,6 +190,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 																							jobref,
 																							itemno,
 																							uom,
+																							conversionfactor,
 																							suppliers_partno,
 																							subtotal_amount,
 																							package,
@@ -209,6 +213,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 																							'" . $POLine->JobRef . "',
 																							'" . $POLine->ItemNo . "',
 																							'" . $POLine->SuppUOM . "',
+																							'" . $POLine->ConversionFactor . "',
 																							'" . $POLine->Suppliers_PartNo . "',
 																							'" . $POLine->SubTotal_Amount . "',
 																							'" . $POLine->Package . "',
@@ -334,8 +339,8 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 																							shiptref='" . $POLine->ShiptRef . "',
 																							jobref='" . $POLine->JobRef . "',
 																							itemno='" . $POLine->ItemNo . "',
-																							uom='" . $POLine->uom . "',
-																							uom='" . $POLine->ConversionFactor. "',
+																							uom='" . $POLine->UOM . "',
+																							conversionfactor='" . $POLine->ConversionFactor. "',
 																							suppliers_partno='" . $POLine->Suppliers_PartNo . "',
 																							subtotal_amount='" . $POLine->SubTotal_Amount . "',
 																							package='" . $POLine->Package . "',
@@ -358,8 +363,8 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 																								shiptref='" . $POLine->ShiptRef . "',
 																								jobref='" . $POLine->JobRef . "',
 																								itemno='" . $POLine->ItemNo . "',
-																								uom='" . $POLine->uom . "',
-																								uom='" . $POLine->ConversionFactor . "',
+																								uom='" . $POLine->UOM. "',
+																								conversionfactor='" . $POLine->ConversionFactor . "',
 																								suppliers_partno='" . $POLine->Suppliers_PartNo . "',
 																								subtotal_amount='" . $POLine->SubTotal_Amount . "',
 																								package='" . $POLine->Package . "',
@@ -816,7 +821,7 @@ if (isset($_POST['NewItem'])){ /* NewItem is set from the part selection list as
 																										$Quantity, /* Qty */
 																										$myrow['description'],
 																										$myrow['price'],
-																										$myrow['units'],
+																										$myrow['unitname'],
 																										$myrow['stockact'],
 																										$_SESSION['PO'.$identifier]->DeliveryDate,
 																										0,
@@ -945,28 +950,8 @@ if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
 				echo '<tr class="OddTableRows">';
 				$k=1;
 			}
-			$UomSQL="SELECT conversionfactor,
-												suppliersuom,
-												unitsofmeasure.
-												unitname
-										FROM purchdata
-										LEFT JOIN unitsofmeasure
-										ON purchdata.suppliersuom=unitsofmeasure.unitid
-										WHERE supplierno='".$_SESSION['PO'.$identifier]->SupplierID."'
-										AND stockid='".$POLine->StockID."'";
-
-			$UomResult=DB_query($UomSQL, $db);
-			if (DB_num_rows($UomResult)>0) {
-				$UomRow=DB_fetch_array($UomResult);
-				if (strlen($UomRow['suppliersuom'])>0) {
-					$Uom=$UomRow['unitname'];
-				} else {
-					$Uom=$POLine->Units;
-				}
-			} else {
-				$Uom=$POLine->Units;
-			}
-			echo '<input type="hidden" name="ConversionFactor" value="'.$UomRow['conversionfactor'].'" />';
+			$Uom=$POLine->UOM;
+			echo '<input type="hidden" name="ConversionFactor" value="'.$POLine->ConversionFactor.'" />';
 			echo '<td>' . $POLine->StockID  . '</td>
 				<td>' . $POLine->ItemDescription . '</td>
 				<td><input type="text" class="number" name="Qty' . $POLine->LineNo .'" size="11" value="' . $DisplayQuantity . '"></td>
