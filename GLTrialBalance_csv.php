@@ -26,17 +26,17 @@ $NumberOfMonths = $_GET['ToPeriod'] - $_GET['FromPeriod'] + 1;
 
 $RetainedEarningsAct = $_SESSION['CompanyRecord']['retainedearnings'];
 
-$SQL = 'SELECT accountgroups.groupname,
+$SQL = "SELECT accountgroups.groupname,
 		accountgroups.parentgroupname,
 		accountgroups.pandl,
 		chartdetails.accountcode ,
 		chartmaster.accountname,
-		Sum(CASE WHEN chartdetails.period=' . $_GET['FromPeriod'] . ' THEN chartdetails.bfwd ELSE 0 END) AS firstprdbfwd,
-		Sum(CASE WHEN chartdetails.period=' . $_GET['FromPeriod'] . ' THEN chartdetails.bfwdbudget ELSE 0 END) AS firstprdbudgetbfwd,
-		Sum(CASE WHEN chartdetails.period=' . $_GET['ToPeriod'] . ' THEN chartdetails.bfwd + chartdetails.actual ELSE 0 END) AS lastprdcfwd,
-		Sum(CASE WHEN chartdetails.period=' . $_GET['ToPeriod'] . ' THEN chartdetails.actual ELSE 0 END) AS monthactual,
-		Sum(CASE WHEN chartdetails.period=' . $_GET['ToPeriod'] . ' THEN chartdetails.budget ELSE 0 END) AS monthbudget,
-		Sum(CASE WHEN chartdetails.period=' . $_GET['ToPeriod'] . ' THEN chartdetails.bfwdbudget + chartdetails.budget ELSE 0 END) AS lastprdbudgetcfwd
+		Sum(CASE WHEN chartdetails.period='" . $_GET['FromPeriod'] . "' THEN chartdetails.bfwd ELSE 0 END) AS firstprdbfwd,
+		Sum(CASE WHEN chartdetails.period='" . $_GET['FromPeriod'] . "' THEN chartdetails.bfwdbudget ELSE 0 END) AS firstprdbudgetbfwd,
+		Sum(CASE WHEN chartdetails.period='" . $_GET['ToPeriod'] . "' THEN chartdetails.bfwd + chartdetails.actual ELSE 0 END) AS lastprdcfwd,
+		Sum(CASE WHEN chartdetails.period='" . $_GET['ToPeriod'] . "' THEN chartdetails.actual ELSE 0 END) AS monthactual,
+		Sum(CASE WHEN chartdetails.period='" . $_GET['ToPeriod'] . "' THEN chartdetails.budget ELSE 0 END) AS monthbudget,
+		Sum(CASE WHEN chartdetails.period='" . $_GET['ToPeriod'] . "' THEN chartdetails.bfwdbudget + chartdetails.budget ELSE 0 END) AS lastprdbudgetcfwd
 	FROM chartmaster INNER JOIN accountgroups ON chartmaster.group_ = accountgroups.groupname
 		INNER JOIN chartdetails ON chartmaster.accountcode= chartdetails.accountcode
 	GROUP BY accountgroups.groupname,
@@ -48,7 +48,7 @@ $SQL = 'SELECT accountgroups.groupname,
 	ORDER BY accountgroups.pandl desc,
 		accountgroups.sequenceintb,
 		accountgroups.groupname,
-		chartdetails.accountcode';
+		chartdetails.accountcode";
 
 $AccountsResult = DB_query($SQL,$db);
 
