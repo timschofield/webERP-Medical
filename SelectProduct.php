@@ -1,4 +1,4 @@
-<?php
+c<?php
 /* $Id$*/
 //$PageSecurity = 2;
 $PricesSecurity = 12;
@@ -244,14 +244,11 @@ switch ($myrow['mbflag']) {
 						WHERE stockid = '" . $StockID . "'", $db);
 		$QOHRow = DB_fetch_row($QOHResult);
 		$QOH = number_format($QOHRow[0], $myrow['decimalplaces']);
-		$QOOSQL="SELECT SUM(purchorderdetails.quantityord*(CASE WHEN purchdata.conversionfactor IS NULL THEN 1 ELSE purchdata.conversionfactor END) -
-									purchorderdetails.quantityrecd*(CASE WHEN purchdata.conversionfactor IS NULL THEN 1 ELSE purchdata.conversionfactor END))
+		$QOOSQL="SELECT SUM((purchorderdetails.quantityord*purchorderdetails.conversionfactor) -
+									(purchorderdetails.quantityrecd*purchorderdetails.conversionfactor))
 								FROM purchorders
 								LEFT JOIN purchorderdetails
 									ON purchorders.orderno=purchorderdetails.orderno
-								LEFT JOIN purchdata
-									ON purchorders.supplierno=purchdata.supplierno
-									AND purchorderdetails.itemcode=purchdata.stockid
 								WHERE purchorderdetails.itemcode='" . $StockID . "'
 									AND purchorderdetails.completed =0
 									AND purchorders.status<>'Cancelled'
