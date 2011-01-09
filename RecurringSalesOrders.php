@@ -17,9 +17,9 @@ if (empty($_GET['identifier'])) {
 	$identifier=$_GET['identifier'];
 }
 
-if ($_GET['NewRecurringOrder']=='Yes'){
+if (isset($_GET['NewRecurringOrder'])){
 	$NewRecurringOrder ='Yes';
-} elseif ($_POST['NewRecurringOrder']=='Yes'){
+} elseif (isset($_POST['NewRecurringOrder'])){
 	$NewRecurringOrder ='Yes';
 } else {
 	$NewRecurringOrder ='No';
@@ -85,7 +85,7 @@ if ($_GET['NewRecurringOrder']=='Yes'){
 			$_SESSION['Items'.$identifier]->ShipVia = $myrow['shipvia'];
 			$BestShipper = $myrow['shipvia'];
 			$_SESSION['Items'.$identifier]->DeliverTo = $myrow['deliverto'];
-			$_SESSION['Items'.$identifier]->DeliveryDate = ConvertSQLDate($myrow['deliverydate']);
+//			$_SESSION['Items'.$identifier]->DeliveryDate = ConvertSQLDate($myrow['deliverydate']);
 			$_SESSION['Items'.$identifier]->DelAdd1 = $myrow['deladd1'];
 			$_SESSION['Items'.$identifier]->DelAdd2 = $myrow['deladd2'];
 			$_SESSION['Items'.$identifier]->DelAdd3 = $myrow['deladd3'];
@@ -499,7 +499,7 @@ if ($NewRecurringOrder=='Yes'){
 	echo '<input type=hidden name="ExistingRecurrOrderNo" value=' . $_POST['ExistingRecurrOrderNo'] . '>';
 
 	echo "<input type=submit name='Process' value='" . _('Update Recurring Order Details') . "'>";
-	echo '<hr>';
+
 	echo '<br><br><input type=submit name="DeleteRecurringOrder" value="' . _('Delete Recurring Order') . ' ' . $_POST['ExistingRecurrOrderNo'] . '" onclick="return confirm(\'' . _('Are you sure you wish to delete this recurring order template?') . '\');">';
 }
 
