@@ -34,7 +34,7 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 	$myrow=DB_fetch_array($result, $db);
 	$lastdate_in_period=$myrow[0];
 
-	$sql = 'SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno DESC';
+	$sql = "SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno DESC";
 	$Periods = DB_query($sql,$db);
 
 	while ($myrow=DB_fetch_array($Periods,$db)){
