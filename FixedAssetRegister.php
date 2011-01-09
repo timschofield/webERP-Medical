@@ -103,10 +103,10 @@ if (isset($_POST['submit']) or isset($_POST['pdf']) or isset($_POST['csv'])) {
 		$Ancestors[0] = $myrow['locationdescription'];
 		$i = 0;
 		while ($Ancestors[$i] != '') {
-			$LocationSQL = 'SELECT parentlocationid from fixedassetlocations where locationdescription="' . $Ancestors[$i] . '"';
+			$LocationSQL = "SELECT parentlocationid from fixedassetlocations where locationdescription='" . $Ancestors[$i] . "'";
 			$LocationResult = DB_query($LocationSQL, $db);
 			$LocationRow = DB_fetch_array($LocationResult);
-			$ParentSQL = 'SELECT locationdescription from fixedassetlocations where locationid="' . $LocationRow['parentlocationid'] . '"';
+			$ParentSQL = "SELECT locationdescription from fixedassetlocations where locationid='" . $LocationRow['parentlocationid'] . "'";
 			$ParentResult = DB_query($ParentSQL, $db);
 			$ParentRow = DB_fetch_array($ParentResult);
 			$i++;
