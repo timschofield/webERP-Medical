@@ -18,7 +18,7 @@ if (isset($_POST['DebtorNo'])){
 	$DebtorNo = $_GET['DebtorNo'];
 }
 echo "<a href='" . $rootpath . '/Customers.php?' . SID .'&DebtorNo='.$DebtorNo."'>" . _('Back to Customers') . '</a><br>';
-$SQLname='SELECT * from debtorsmaster where debtorno="'.$DebtorNo.'"';
+$SQLname="SELECT * from debtorsmaster where debtorno='".$DebtorNo."'";
 $Result = DB_query($SQLname,$db);
 $row = DB_fetch_array($Result);
 if (!isset($_GET['Id'])) {
