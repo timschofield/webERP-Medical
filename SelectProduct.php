@@ -1,4 +1,4 @@
-c<?php
+<?php
 /* $Id$*/
 //$PageSecurity = 2;
 $PricesSecurity = 12;
