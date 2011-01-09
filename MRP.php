@@ -18,21 +18,21 @@ if (isset($_POST['submit'])) {
 	echo '</br>'  ._('Start time') . ': ' . date('h:i:s') . '</br>';
 	echo '</br>' . _('Initialising tables .....') . '</br>';
 	flush();
-	$result = DB_query('DROP TABLE IF EXISTS tempbom',$db);
-	$result = DB_query('DROP TABLE IF EXISTS passbom',$db);
-	$result = DB_query('DROP TABLE IF EXISTS passbom2',$db);
-	$result = DB_query('DROP TABLE IF EXISTS bomlevels',$db);
-	$result = DB_query('DROP TABLE IF EXISTS levels',$db);
+	$result = DB_query("DROP TABLE IF EXISTS tempbom",$db);
+	$result = DB_query("DROP TABLE IF EXISTS passbom",$db);
+	$result = DB_query("DROP TABLE IF EXISTS passbom2",$db);
+	$result = DB_query("DROP TABLE IF EXISTS bomlevels",$db);
+	$result = DB_query("DROP TABLE IF EXISTS levels",$db);
 
-	$sql = 'CREATE TEMPORARY TABLE passbom (part char(20),
-																						sortpart text) DEFAULT CHARSET=utf8';
+	$sql = "CREATE TEMPORARY TABLE passbom (part char(20),
+																						sortpart text) DEFAULT CHARSET=utf8";
 	$ErrMsg = _('The SQL to to create passbom failed with the message');
 	$result = DB_query($sql,$db,$ErrMsg);
 
-	$sql = 'CREATE TEMPORARY TABLE tempbom (parent char(20),
+	$sql = "CREATE TEMPORARY TABLE tempbom (parent char(20),
 																						component char(20),
 																						sortpart text,
-																						level int) DEFAULT CHARSET=utf8';
+																						level int) DEFAULT CHARSET=utf8";
 	$result = DB_query($sql,$db,_('Create of tempbom failed because'));
 	// To create levels, first, find parts in bom that are top level assemblies.
 	// Do this by doing a LEFT JOIN from bom to bom (as bom2), linking
@@ -44,11 +44,11 @@ if (isset($_POST['submit'])) {
 	prnMsg(_('Creating first level'),'info');
 	flush();
 	// This finds the top level
-	$sql = 'INSERT INTO passbom (part, sortpart)
+	$sql = "INSERT INTO passbom (part, sortpart)
 								   SELECT bom.component AS part,
-										  CONCAT(bom.parent,"%",bom.component) AS sortpart
+										  CONCAT(bom.parent,'%',bom.component) AS sortpart
 										  FROM bom LEFT JOIN bom as bom2 ON bom.parent = bom2.component
-								  WHERE bom2.component IS NULL';
+								  WHERE bom2.component IS NULL";
 	$result = DB_query($sql,$db);
 
 	$lctr = 2;
@@ -76,9 +76,9 @@ if (isset($_POST['submit'])) {
 			 FROM bom,passbom WHERE bom.parent = passbom.part";
 		$result = DB_query($sql,$db);
 
-		$result = DB_query('DROP TABLE IF EXISTS passbom2',$db);
-		$result = DB_query('ALTER TABLE passbom RENAME AS passbom2',$db);
-		$result = DB_query('DROP TABLE IF EXISTS passbom',$db);
+		$result = DB_query("DROP TABLE IF EXISTS passbom2",$db);
+		$result = DB_query("ALTER TABLE passbom RENAME AS passbom2",$db);
+		$result = DB_query("DROP TABLE IF EXISTS passbom",$db);
 
 		$sql = 'CREATE TEMPORARY TABLE passbom (part char(20),
 																							sortpart text) DEFAULT CHARSET=utf8';
@@ -200,37 +200,37 @@ if (isset($_POST['submit'])) {
 	flush();
 
 	// Get rid if temporary tables
-	$sql = 'DROP TABLE IF EXISTS tempbom';
+	$sql = "DROP TABLE IF EXISTS tempbom";
 	//$result = DB_query($sql,$db);
-	$sql = 'DROP TABLE IF EXISTS passbom';
+	$sql = "DROP TABLE IF EXISTS passbom";
 	//$result = DB_query($sql,$db);
-	$sql = 'DROP TABLE IF EXISTS passbom2';
+	$sql = "DROP TABLE IF EXISTS passbom2";
 	//$result = DB_query($sql,$db);
-	$sql = 'DROP TABLE IF EXISTS bomlevels';
+	$sql = "DROP TABLE IF EXISTS bomlevels";
 	//$result = DB_query($sql,$db);
 
 	// In the following section, create mrprequirements from open sales orders and
 	// mrpdemands
 	prnMsg(_('Creating requirements table'),'info');
 	flush();
-	$result = DB_query('DROP TABLE IF EXISTS mrprequirements',$db);
+	$result = DB_query("DROP TABLE IF EXISTS mrprequirements",$db);
 	// directdemand is 1 if demand is directly for this part, is 0 if created because have netted
 	// out supply and demands for a top level part and determined there is still a net
 	// requirement left and have to pass that down to the BOM parts using the
 	// CreateLowerLevelRequirement() function. Mostly do this so can distinguish the type
 	// of requirements for the MRPShortageReport so don't show double requirements.
-	$sql = 'CREATE TABLE mrprequirements (	part char(20),
+	$sql = "CREATE TABLE mrprequirements (	part char(20),
 																				daterequired date,
 																				quantity double,
 																				mrpdemandtype varchar(6),
 																				orderno int(11),
 																				directdemand smallint,
-																				whererequired char(20)) DEFAULT CHARSET=utf8';
+																				whererequired char(20)) DEFAULT CHARSET=utf8";
 	$result = DB_query($sql,$db,_('Create of mrprequirements failed because'));
 
 	prnMsg(_('Loading requirements from sales orders'),'info');
 	flush();
-	$sql = 'INSERT INTO mrprequirements	(part,
+	$sql = "INSERT INTO mrprequirements	(part,
 																			 daterequired,
 																			 quantity,
 																			 mrpdemandtype,
@@ -240,22 +240,22 @@ if (isset($_POST['submit'])) {
 																   SELECT stkcode,
 																		  deliverydate,
 																		  (quantity - qtyinvoiced) AS netqty,
-																		  "SO",
+																		  'SO',
 																		  salesorderdetails.orderno,
-																		  "1",
+																		  '1',
 																		  stkcode
 																  FROM salesorders, salesorderdetails
 																  WHERE salesorders.orderno = salesorderdetails.orderno
 																	  AND (quantity - qtyinvoiced) > 0
 																	  AND salesorderdetails.completed = 0
-																	  AND salesorders.quotation = 0';
+																	  AND salesorders.quotation = 0";
 	$result = DB_query($sql,$db);
 
 
 	prnMsg(_('Loading requirements from work orders'),'info');
 	flush();
 	// Definition of demand from SelectProduct.php
-	$sql = 'INSERT INTO mrprequirements	(part,
+	$sql = "INSERT INTO mrprequirements	(part,
 																			 daterequired,
 																			 quantity,
 																			 mrpdemandtype,
@@ -265,19 +265,19 @@ if (isset($_POST['submit'])) {
 																   SELECT worequirements.stockid,
 																		  workorders.requiredby,
 																		  qtypu*(woitems.qtyreqd - woitems.qtyrecd) AS netqty,
-																		  "WO",
+																		  'WO',
 																		  woitems.wo,
-																		  "1",
+																		  '1',
 																		  parentstockid
 																		  FROM woitems INNER JOIN worequirements
 																			ON woitems.stockid=worequirements.parentstockid
 																		INNER JOIN workorders
 																		  ON woitems.wo=workorders.wo
 																		  AND woitems.wo=worequirements.wo
-																		WHERE workorders.closed=0';
+																		WHERE workorders.closed=0";
 	$result = DB_query($sql,$db);
 
-	$sql = 'INSERT INTO mrprequirements	(part,
+	$sql = "INSERT INTO mrprequirements	(part,
 																			 daterequired,
 																			 quantity,
 																			 mrpdemandtype,
@@ -289,15 +289,15 @@ if (isset($_POST['submit'])) {
 																		  quantity,
 																		  mrpdemandtype,
 																		  demandid,
-																		  "1",
+																		  '1',
 																		  stockid
-																	 FROM mrpdemands';
+																	 FROM mrpdemands";
 	if ($_POST['usemrpdemands'] == 'y') {
 		$result = DB_query($sql,$db);
 		prnMsg(_('Loading requirements based on mrpdemands'),'info');
 		flush();
 	}
-	$sql = 'INSERT INTO mrprequirements	(part,
+	$sql = "INSERT INTO mrprequirements	(part,
 																			 daterequired,
 																			 quantity,
 																			 mrpdemandtype,
@@ -307,17 +307,17 @@ if (isset($_POST['submit'])) {
 																   SELECT stockid,
 																		  NOW(),
 																		  (reorderlevel - quantity) AS reordqty,
-																		  "REORD",
-																		  "1",
-																		  "1",
+																		  'REORD',
+																		  '1',
+																		  '1',
 																		  stockid
 																	 FROM locstock
-																	 WHERE reorderlevel > quantity';
+																	 WHERE reorderlevel > quantity";
 	$result = DB_query($sql,$db);
 	prnMsg(_('Loading requirements based on reorder level'),'info');
 	flush();
 
-	$result = DB_query('ALTER TABLE mrprequirements ADD INDEX part(part)',$db);
+	$result = DB_query("ALTER TABLE mrprequirements ADD INDEX part(part)",$db);
 
 	// In the following section, create mrpsupplies from open purchase orders,
 	// open work orders, and current quantity onhand from locstock
@@ -326,7 +326,7 @@ if (isset($_POST['submit'])) {
 	$result = DB_query('DROP TABLE IF EXISTS mrpsupplies',$db);
 	// updateflag is set to 1 in UpdateSupplies if change date when matching requirements to
 	// supplies. Actually only change update flag in the array created from mrpsupplies
-	$sql = 'CREATE TABLE mrpsupplies (	id int(11) NOT NULL auto_increment,
+	$sql = "CREATE TABLE mrpsupplies (	id int(11) NOT NULL auto_increment,
 																		part char(20),
 																		duedate date,
 																		supplyquantity double,
@@ -334,12 +334,12 @@ if (isset($_POST['submit'])) {
 																		orderno int(11),
 																		mrpdate date,
 																		updateflag smallint(6),
-																		PRIMARY KEY (id)) DEFAULT CHARSET=utf8';
+																		PRIMARY KEY (id)) DEFAULT CHARSET=utf8";
 	$result = DB_query($sql,$db,_('Create of mrpsupplies failed because'));
 
 	prnMsg(_('Loading supplies from purchase orders'),'info');
 	flush();
-	$sql = 'INSERT INTO mrpsupplies	(id,
+	$sql = "INSERT INTO mrpsupplies	(id,
 																 part,
 																 duedate,
 																 supplyquantity,
@@ -351,16 +351,16 @@ if (isset($_POST['submit'])) {
 															  purchorderdetails.itemcode,
 															  purchorderdetails.deliverydate,
 															  (quantityord - quantityrecd) AS netqty,
-															  "PO",
+															  'PO',
 															  purchorderdetails.orderno,
 															  purchorderdetails.deliverydate,
 															  0
 														  FROM purchorderdetails,
 															   purchorders
 													  WHERE purchorderdetails.orderno = purchorders.orderno
-														AND purchorders.status != "Cancelled"
-														AND purchorders.status != "Rejected"
-														AND(quantityord - quantityrecd) > 0';
+														AND purchorders.status != 'Cancelled'
+														AND purchorders.status != 'Rejected'
+														AND(quantityord - quantityrecd) > 0";
 	$result = DB_query($sql,$db);
 
 	prnMsg(_('Loading supplies from inventory on hand'),'info');
@@ -382,7 +382,7 @@ if (isset($_POST['submit'])) {
 		} // End of foreach
 		$WhereLocation .= ')';
 	}
-	$sql = 'INSERT INTO mrpsupplies	(id,
+	$sql = "INSERT INTO mrpsupplies	(id,
 																 part,
 																 duedate,
 																 supplyquantity,
@@ -392,21 +392,21 @@ if (isset($_POST['submit'])) {
 																 updateflag)
 													   SELECT Null,
 															  stockid,
-															  "0000-00-00",
+															  '0000-00-00',
 															  SUM(quantity),
-															  "QOH",
+															  'QOH',
 															  1,
-															  "0000-00-00",
+															  '0000-00-00',
 															  0
 														  FROM locstock
-														  WHERE quantity > 0 ' .
+														  WHERE quantity > 0 ".
 														  $WhereLocation .
-													  'GROUP BY stockid';
+													  "GROUP BY stockid";
 	$result = DB_query($sql,$db);
 
 	prnMsg(_('Loading supplies from work orders'),'info');
 	flush();
-	$sql = 'INSERT INTO mrpsupplies	(id,
+	$sql = "INSERT INTO mrpsupplies	(id,
 																 part,
 																 duedate,
 																 supplyquantity,
@@ -418,16 +418,16 @@ if (isset($_POST['submit'])) {
 															  stockid,
 															  workorders.requiredby,
 															  (woitems.qtyreqd-woitems.qtyrecd) AS netqty,
-															  "WO",
+															  'WO',
 															  woitems.wo,
 															  workorders.requiredby,
 															  0
 														  FROM woitems INNER JOIN workorders
 															ON woitems.wo=workorders.wo
-															WHERE workorders.closed=0';
+															WHERE workorders.closed=0";
 	$result = DB_query($sql,$db);
 
-	$sql = 'ALTER TABLE mrpsupplies ADD INDEX part(part)';
+	$sql = "ALTER TABLE mrpsupplies ADD INDEX part(part)";
 	$result = DB_query($sql,$db);
 
 	// Create mrpplannedorders table to create a record for any unmet requirments
@@ -435,8 +435,8 @@ if (isset($_POST['submit'])) {
 	// open work orders, and current quantity onhand from locstock
 	prnMsg(_('Creating planned orders table'),'info');
 	flush();
-	$result = DB_query('DROP TABLE IF EXISTS mrpplannedorders',$db);
-	$sql = 'CREATE TABLE mrpplannedorders (id int(11) NOT NULL auto_increment,
+	$result = DB_query("DROP TABLE IF EXISTS mrpplannedorders",$db);
+	$sql = "CREATE TABLE mrpplannedorders (id int(11) NOT NULL auto_increment,
 																				part char(20),
 																				duedate date,
 																				supplyquantity double,
@@ -444,7 +444,7 @@ if (isset($_POST['submit'])) {
 																				orderno int(11),
 																				mrpdate date,
 																				updateflag smallint(6),
-																				PRIMARY KEY (id))';
+																				PRIMARY KEY (id))";
 	$result = DB_query($sql,$db,_('Create of mrpplannedorders failed because'));
 
 	// Find the highest and lowest level number
@@ -474,16 +474,16 @@ if (isset($_POST['submit'])) {
 	echo '</br>' . _('End time') . ': ' . date('h:i:s') . '</br>';
 
 	// Create mrpparameters table
-	$sql = 'DROP TABLE IF EXISTS mrpparameters';
+	$sql = "DROP TABLE IF EXISTS mrpparameters";
 	$result = DB_query($sql,$db);
-	$sql = 'CREATE TABLE mrpparameters  (
+	$sql = "CREATE TABLE mrpparameters  (
 						runtime datetime,
 						location varchar(50),
 						pansizeflag varchar(5),
 						shrinkageflag varchar(5),
 						eoqflag varchar(5),
 						usemrpdemands varchar(5),
-						leeway smallint) DEFAULT CHARSET=utf8';
+						leeway smallint) DEFAULT CHARSET=utf8";
 	$result = DB_query($sql,$db);
 	// Create entry for location field from $_POST['location'], which is an array
 	// since multiple locations can be selected
