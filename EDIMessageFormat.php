@@ -174,13 +174,13 @@ or deletion of the records*/
 if (isset($SelectedMessageLine)) {
 	//editing an existing message line
 
-	$sql = 'SELECT messagetype,
+	$sql = "SELECT messagetype,
 			partnercode,
 			section,
 			sequenceno,
 			linetext
 		FROM edimessageformat
-		WHERE id=' . $SelectedMessageLine;
+		WHERE id=" . $SelectedMessageLine;
 
 	$result = DB_query($sql, $db);
 	$myrow = DB_fetch_array($result);

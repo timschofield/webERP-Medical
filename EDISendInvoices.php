@@ -11,7 +11,7 @@ include('includes/SQL_CommonFunctions.inc'); //need for EDITransNo
 include('includes/htmlMimeMail.php'); // need for sending email attachments
 
 /*Get the Customers who are enabled for EDI invoicing */
-$sql = 'SELECT debtorno,
+$sql = "SELECT debtorno,
 		edireference,
 		editransport,
 		ediaddress,
@@ -20,7 +20,7 @@ $sql = 'SELECT debtorno,
 		daysbeforedue,
 		dayinfollowingmonth
 	FROM debtorsmaster INNER JOIN paymentterms ON debtorsmaster.paymentterms=paymentterms.termsindicator
-	WHERE ediinvoices=1';
+	WHERE ediinvoices=1";
 
 $EDIInvCusts = DB_query($sql,$db);
 

@@ -29,7 +29,7 @@ if ( isset($_GET['CurrencyToShow']) ){
 		_('View Currency Trend') . '" alt="" />' . ' ' . _('View Currency Trend') . '</p>';
 	echo '<table>'; // First column
 
-	$SQL = 'SELECT * FROM currencies';
+	$SQL = "SELECT * FROM currencies";
 	$result=DB_query($SQL,$db);
 
 

@@ -40,7 +40,7 @@ If the order processed ok then move the file to processed and go on to next file
 /*Read in the EANCOM Order Segments for the current seg group from the segments table */
 
 
-$sql = 'SELECT id, segtag, maxoccur, seggroup FROM edi_orders_segs';
+$sql = "SELECT id, segtag, maxoccur, seggroup FROM edi_orders_segs";
 $OrderSeg = DB_query($sql,$db);
 $i=0;
 $Seg = array();
