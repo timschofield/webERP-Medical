@@ -150,7 +150,7 @@ if (isset($_POST['PrintPDF'])
 
 		echo '<tr><td>' . _('Balances As At') . ":</td><td><select tabindex=3 Name='PeriodEnd'>";
 
-		$sql = 'SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno DESC';
+		$sql = "SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno DESC";
 		$Periods = DB_query($sql,$db,_('Could not retrieve period data because'),_('The SQL that failed to get the period data was'));
 
 		while ($myrow = DB_fetch_array($Periods,$db)){

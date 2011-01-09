@@ -14,12 +14,12 @@ if (!isset($_POST['Show'])) {
 
 	echo '<table class=selection>';
 
-	$SQL = 'SELECT bankaccountname,
+	$SQL = "SELECT bankaccountname,
 				bankaccounts.accountcode,
 				bankaccounts.currcode
 			FROM bankaccounts,
 				chartmaster
-			WHERE bankaccounts.accountcode=chartmaster.accountcode';
+			WHERE bankaccounts.accountcode=chartmaster.accountcode";
 
 	$ErrMsg = _('The bank accounts could not be retrieved because');
 	$DbgMsg = _('The SQL used to retrieve the bank accounts was');

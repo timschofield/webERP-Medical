@@ -918,8 +918,8 @@ if ($_SESSION['Items'.$identifier]->Location=='' OR !isset($_SESSION['Items'.$id
 
 $ErrMsg = _('The stock locations could not be retrieved');
 $DbgMsg = _('SQL used to retrieve the stock locations was') . ':';
-$StkLocsResult = DB_query('SELECT locationname,loccode
-					FROM locations',$db, $ErrMsg, $DbgMsg);
+$StkLocsResult = DB_query("SELECT locationname,loccode
+					FROM locations",$db, $ErrMsg, $DbgMsg);
 
 while ($myrow=DB_fetch_row($StkLocsResult)){
 	if ($_SESSION['Items'.$identifier]->Location==$myrow[1]){
@@ -1055,8 +1055,8 @@ if ((!isset($_POST['ShipVia']) OR $_POST['ShipVia']=='') AND isset($_SESSION['It
 echo '<tr><td>'. _('Freight/Shipper Method') .':</td><td><select name="ShipVia">';
 $ErrMsg = _('The shipper details could not be retrieved');
 $DbgMsg = _('SQL used to retrieve the shipper details was') . ':';
-$sql = 'SELECT shipper_id, shippername
-		FROM shippers';
+$sql = "SELECT shipper_id, shippername
+		FROM shippers";
 $ShipperResults = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 while ($myrow=DB_fetch_array($ShipperResults)){
 	if ($myrow['shipper_id']==$_POST['ShipVia']){

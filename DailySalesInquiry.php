@@ -25,7 +25,7 @@ if (!isset($_POST['MonthToShow'])){
 	$_POST['MonthToShow'] = GetPeriod(Date($_SESSION['DefaultDateFormat']),$db);
 }
 
-$PeriodsResult = DB_query('SELECT periodno, lastdate_in_period FROM periods',$db);
+$PeriodsResult = DB_query("SELECT periodno, lastdate_in_period FROM periods",$db);
 
 while ($PeriodRow = DB_fetch_array($PeriodsResult)){
 	if ($_POST['MonthToShow']==$PeriodRow['periodno']) {
@@ -38,7 +38,7 @@ while ($PeriodRow = DB_fetch_array($PeriodsResult)){
 echo '</select></td>';
 echo '<td>' . _('Salesperson') . ':</td><td><select tabindex=2 name="Salesperson">';
 
-$SalespeopleResult = DB_query('SELECT salesmancode, salesmanname FROM salesman',$db);
+$SalespeopleResult = DB_query("SELECT salesmancode, salesmanname FROM salesman",$db);
 if (!isset($_POST['Salesperson'])){
 	$_POST['Salesperson'] = 'All';
 	echo '<option selected value="All">' . _('All') . '</option>';
