@@ -267,7 +267,7 @@ If (isset($_POST['Process'])) {
 						discountpercent,
 						narrative)
 					values ('";
-
+echo $StartOf_LineItemsSQL;
 			foreach ($_SESSION['Items'.$identifier]->LineItems as $StockItem) {
 
 				$LineItemsSQL = $StartOf_LineItemsSQL .
