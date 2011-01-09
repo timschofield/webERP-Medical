@@ -272,15 +272,15 @@ function listall(&$db,$part,$demandtype)  {//####LISTALL_LISTALL_LISTALL_LISTALL
 		$where = ' WHERE mrpdemands.stockid =' . "'"  .  $part . "'";
 	}
 	// If part is entered, it overrides demandtype
-	$sql = 'SELECT mrpdemands.demandid,
+	$sql = "SELECT mrpdemands.demandid,
 				   mrpdemands.stockid,
 				   mrpdemands.mrpdemandtype,
 				   mrpdemands.quantity,
 				   mrpdemands.duedate,
 				   stockmaster.description
 		FROM mrpdemands
-		LEFT JOIN stockmaster on mrpdemands.stockid = stockmaster.stockid' .
-		 $where	. ' ORDER BY mrpdemands.stockid, mrpdemands.duedate';
+		LEFT JOIN stockmaster on mrpdemands.stockid = stockmaster.stockid" .
+		 $where	. " ORDER BY mrpdemands.stockid, mrpdemands.duedate";
 	//echo "<br/>sql is $sql<br/>";
 	$ErrMsg = _('The SQL to find the parts selected failed with the message');
 	$result = DB_query($sql,$db,$ErrMsg);
@@ -384,9 +384,9 @@ function display(&$db,&$StockID,&$DemandID) { //####DISPLAY_DISPLAY_DISPLAY_DISP
 			maxlength=12 value=" . $_POST['Duedate'] . '></td></tr>';
 		// Generate selections for Demand Type
 		echo '<tr><td>' . _('Demand Type') . "</td><td><select name='MRPDemandtype'>";
-		$sql = 'SELECT mrpdemandtype,
+		$sql = "SELECT mrpdemandtype,
 						description
-				FROM mrpdemandtypes';
+				FROM mrpdemandtypes";
 		$result = DB_query($sql,$db);
 		while ($myrow = DB_fetch_array($result)) {
 			if (isset($_POST['MRPDemandtype']) and $myrow['mrpdemandtype']==$_POST['MRPDemandtype']) {
