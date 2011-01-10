@@ -54,16 +54,25 @@ if (!isset($_POST['continue']) and !isset($_POST['CreateSQLFile'])) {
 	if (isset($_POST['CreateSQLFile'])) {
 		$SQLFile=fopen("./companies/" . $_SESSION['DatabaseName'] . "/reportwriter/UpgradeDB" . $StartingUpdate ."-".$EndingUpdate.".sql","w");
 	}
-	echo '<table>';
+	unset($_SESSION['Updates']);
+	$_SESSION['Updates']['Errors']=0;
+	$_SESSION['Updates']['Successes']=0;
+	$_SESSION['Updates']['Warnings']=0;
 	for($UpdateNumber=$StartingUpdate; $UpdateNumber<=$EndingUpdate; $UpdateNumber++) {
-		echo '<tr><td>'.$UpdateNumber.'</td>';
+//		echo '<tr><td>'.$UpdateNumber.'</td>';
 		$sql="SET FOREIGN_KEY_CHECKS=0";
 		$result=DB_Query($sql, $db);
 		include('sql/mysql/updates/'.$UpdateNumber.'.php');
 		$sql="SET FOREIGN_KEY_CHECKS=1";
 		$result=DB_Query($sql, $db);
-		echo '</tr>';
+//		echo '</tr>';
 	}
+	echo '<table class="selection"><tr>';
+	echo '<th colspan="4"><font size="2" color="navy"><b>'._('Database Updates Have Been Run').'</b></font></th></tr>';
+	echo '<tr><td style="background-color: #fddbdb;color: red;">'.$_SESSION['Updates']['Errors'].' '._('updates have errors in them').'</td></tr>';
+	echo '<tr><td style="background-color: #b9ecb4;color: #006400;">'.$_SESSION['Updates']['Successes'].' '._('updates have succeeded').'</td></tr>';
+	echo '<tr><td style="background-color: #c7ccf6;color: navy;">'.$_SESSION['Updates']['Warnings'].' '._('updates have not been done as the update was unnecessary on this database').'</td></tr>';
+	echo '</table>';
 }
 if (isset($SQLFile)) {
 //		header('Location: Z_UpgradeDatabase.php'); //divert to the db upgrade if the table doesn't exist

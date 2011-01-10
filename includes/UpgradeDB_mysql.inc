@@ -368,14 +368,18 @@ function RenameTable($OldName, $NewName, $db) {
 
 function OutputResult($msg, $status) {
 	if ($status=='error') {
-		echo '<td style="background-color: #fddbdb;color: red;">';
+		$_SESSION['Updates']['Errors']++;
+		$_SESSION['Updates']['Messages'][]=$msg;
+//		echo '<td style="background-color: #fddbdb;color: red;">';
 	} else if ($status=='success') {
-		echo '<td style="background-color: #b9ecb4;color: #006400;">';
+		$_SESSION['Updates']['Successes']++;
+//		echo '<td style="background-color: #b9ecb4;color: #006400;">';
 	} else {
-		echo '<td style="background-color: #c7ccf6;color: navy;">';
+		$_SESSION['Updates']['Warnings']++;
+//		echo '<td style="background-color: #c7ccf6;color: navy;">';
 	}
-	echo $msg;
-	echo '</td>';
+//	echo $msg;
+//	echo '</td>';
 }
 
 
