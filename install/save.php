@@ -2,7 +2,7 @@
 /* $Id$*/
 error_reporting(E_ALL);
 ini_set('display_errors', "On");
-ini_set('max_execution_time', "180");
+ini_set('max_execution_time', "360");
 
 require_once('../includes/MiscFunctions.php');
 // Start a session
@@ -56,7 +56,7 @@ function set_error($message) {
 				$_SESSION['world_writeable'] = true;
 			}
 			$_SESSION['database_host'] = $_POST['database_host'];
-			$_SESSION['database_username'] = Replace_Dodgy_Characters($_POST['database_username']);
+			$_SESSION['database_username'] = $_POST['database_username'];
 			$_SESSION['database_password'] = $_POST['database_password'];
 			$_SESSION['install_tables'] = $_POST['install_tables'];
 			$_SESSION['database_name'] = Replace_Dodgy_Characters($_POST['company_name']);
@@ -178,6 +178,7 @@ if (!isset($_POST['database_host']) || $_POST['database_host'] == '') {
 if (!isset($_POST['database_username']) || $_POST['database_username'] == '') {
 	set_error('Please enter a database username');
 }
+echo $_POST['database_username'];
 // Check if user has entered a database password
 if (!isset($_POST['database_password'])) {
 	set_error('Please enter a database password');
@@ -257,15 +258,72 @@ if ($_POST['DemoData']==false){
 	}
 }
 
-//Need to get the new version number
-$ConfigDistributionFile = file($path_to_root . '/config.distrib.php');
-$ConfigDistributionFileLines = sizeof($ConfigDistributionFile);
-for ($i=0; $i<$ConfigDistributionFileLines; $i++) {
-	$ConfigDistributionFile[$i] = trim($ConfigDistributionFile[$i]);
-	if (substr($ConfigDistributionFile[$i], 0, 8) == '$Version'){
-		$VersionString = $ConfigDistributionFile[$i];
-	}
+// Try connecting to database
+
+$db = mysqli_connect($_POST['database_host'], $_POST['database_username'], $_POST['database_password']);
+if (!$db){
+	set_error("Database host name,username, and/or password incorrect. MySQL Error:<br />". mysqli_error());
 }
+
+if($_POST['install_tables'] == true){
+
+	/* Need to read in the sql script and process the queries to initate a new DB */
+	if ($_POST['DemoData'] == true){ //installing the demo data
+		$SQLScriptFile = file($path_to_root . '/sql/mysql/weberp-demo.sql');
+		//need to drop any pre-existing weberpdemo database
+		mysqli_query($db, "DROP DATABASE 'weberpdemo'");
+	} else { //creating a new database with no demo data
+		$SQLScriptFile = file($path_to_root . '/sql/mysql/weberp-new.sql');
+	}
+	mysqli_query($db, 'CREATE DATABASE IF NOT EXISTS `' . mysqli_real_escape_string($db, $_POST['company_name']) . '`');
+	    mysqli_select_db($db, $_POST['company_name']);
+	$ScriptFileEntries = sizeof($SQLScriptFile);
+	$SQL ='';
+	$InAFunction = false;
+	for ($i=0; $i<$ScriptFileEntries; $i++) {
+
+		$SQLScriptFile[$i] = trim($SQLScriptFile[$i]);
+		//ignore lines that start with -- or USE or /*
+		if (substr($SQLScriptFile[$i], 0, 2) != '--'
+			AND strstr($SQLScriptFile[$i],'/*')==FALSE
+			AND strlen($SQLScriptFile[$i])>1){
+
+			$SQL .= ' ' . $SQLScriptFile[$i];
+
+			//check if this line kicks off a function definition - pg chokes otherwise
+			if (substr($SQLScriptFile[$i],0,15) == 'CREATE FUNCTION'){
+				$InAFunction = true;
+			}
+			//check if this line completes a function definition - pg chokes otherwise
+			if (substr($SQLScriptFile[$i],0,8) == 'LANGUAGE'){
+				$InAFunction = false;
+			}
+			if (strpos($SQLScriptFile[$i],';')>0 AND ! $InAFunction){
+				// Database created above with correct name.
+				if (strncasecmp($SQL, ' CREATE DATABASE ', 17)
+				    AND strncasecmp($SQL, ' USE ', 5)){
+					$SQL = substr($SQL,0,strlen($SQL)-1);
+					$result = mysqli_query($db,$SQL);
+				    }
+				    $SQL = '';
+			}
+
+		} //end if its a valid sql line not a comment
+	} //end of for loop around the lines of the sql script
+}
+
+// now write to the config file as some parameters need to be gotten from the database.
+// set teh
+
+$sql = "SELECT confvalue FROM config WHERE confname='VersionNumber'";
+$result = mysqli_query($db,$sql) or die (mysql_error());
+$myrow = mysqli_fetch_row($result);
+$VersionString = $myrow[0];
+
+if (!isset($VersionString) || $VersionString == "") {
+	$VersionString = "4.00 RC2";
+}
+
 //$msg holds the text of the new config.php file
 $msg = "<?php\n\n";
 $msg .= "/* \$Revision: 1.7 $ */\n";
@@ -276,7 +334,7 @@ $msg .= "\$DefaultLanguage ='en_GB.utf8';\n\n";
 $msg .= "// Whether to display the demo login and password or not on the login screen\n";
 $msg .= "\$allow_demo_mode = False;\n\n";
 $msg .= "// webERP version\n\n";
-$msg .= $VersionString . "\n\n";
+$msg .=  "\$Version = '".$VersionString ."';\n\n";
 $msg .= "//  Connection information for the database\n";
 $msg .= "// \$host is the computer ip address or name where the database is located\n";
 $msg .= "// assuming that the web server is also the sql server\n";
@@ -327,59 +385,6 @@ if (!$zp = fopen($path_to_root . '/config.php', 'w')){
 	fclose($zp);
 }
 
-// Try connecting to database
-
-$db = mysqli_connect($_POST['database_host'], $_POST['database_username'], $_POST['database_password']);
-if (!$db){
-	set_error('Database host name, username and/or password incorrect. MySQL Error:<br />'. mysqli_error());
-}
-
-if($_POST['install_tables'] == true){
-
-	/* Need to read in the sql script and process the queries to initate a new DB */
-	if ($_POST['DemoData'] == true){ //installing the demo data
-		$SQLScriptFile = file($path_to_root . '/sql/mysql/weberp-demo.sql');
-		//need to drop any pre-existing weberpdemo database
-		mysqli_query($db, "DROP DATABASE 'weberpdemo'");
-	} else { //creating a new database with no demo data
-		$SQLScriptFile = file($path_to_root . '/sql/mysql/weberp-new.sql');
-	}
-	mysqli_query($db, 'CREATE DATABASE IF NOT EXISTS `' . mysqli_real_escape_string($db, $_POST['company_name']) . '`');
-	    mysqli_select_db($db, $_POST['company_name']);
-	$ScriptFileEntries = sizeof($SQLScriptFile);
-	$SQL ='';
-	$InAFunction = false;
-	for ($i=0; $i<$ScriptFileEntries; $i++) {
-
-		$SQLScriptFile[$i] = trim($SQLScriptFile[$i]);
-		//ignore lines that start with -- or USE or /*
-		if (substr($SQLScriptFile[$i], 0, 2) != '--'
-			AND strstr($SQLScriptFile[$i],'/*')==FALSE
-			AND strlen($SQLScriptFile[$i])>1){
-
-			$SQL .= ' ' . $SQLScriptFile[$i];
-
-			//check if this line kicks off a function definition - pg chokes otherwise
-			if (substr($SQLScriptFile[$i],0,15) == 'CREATE FUNCTION'){
-				$InAFunction = true;
-			}
-			//check if this line completes a function definition - pg chokes otherwise
-			if (substr($SQLScriptFile[$i],0,8) == 'LANGUAGE'){
-				$InAFunction = false;
-			}
-			if (strpos($SQLScriptFile[$i],';')>0 AND ! $InAFunction){
-				// Database created above with correct name.
-				if (strncasecmp($SQL, ' CREATE DATABASE ', 17)
-				    AND strncasecmp($SQL, ' USE ', 5)){
-					$SQL = substr($SQL,0,strlen($SQL)-1);
-					$result = mysqli_query($db,$SQL);
-				    }
-				    $SQL = '';
-			}
-
-		} //end if its a valid sql line not a comment
-	} //end of for loop around the lines of the sql script
-}
 $sql = "UPDATE www_users
 			SET password = '" . sha1($_POST['admin_password']) . "',
 				email = '".mysqli_real_escape_string($db, $_POST['admin_email']) ."'

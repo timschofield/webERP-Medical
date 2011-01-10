@@ -135,13 +135,13 @@ function change_data(type) {
 			<td colspan="8"><h1>Step 2</h1>Please check the following files/folders are writeable before continuing...</td>
 		</tr>
 		<tr>
-			<td style="color: #666666;">Configuration file</td>
-			<td><?php if(is_writable($PathToRoot)) {
-						echo '<font class="good">Writeable</font>';
-					  } else {
-						echo '<font class="bad">Unwriteable</font>';
-					  } ?>
-			</td>
+			<!-- <td style="color: #666666;">Configuration file</td>
+			<td><?php //if(is_writable($PathToRoot)) {
+						//echo '<font class="good">Writeable</font>';
+					 // } else {
+					//	echo '<font class="bad">Unwriteable</font>';
+					 // } ?>
+			</td> -->
 			<td style="color: #666666;"><?php echo 'Company data dirs ('.  $CompanyPath. '/*)'; ?>
 			</td>
 			<td><?php if(is_writable($CompanyPath)) {
@@ -225,7 +225,7 @@ function change_data(type) {
 		</table>
 		<table cellpadding="5" cellspacing="0" width="100%" align="center">
 		<tr>
-			<td colspan="5">Please enter your MySQL database server details below...</td>
+			<td colspan="5">Please enter your MySQL databasedatabase server details below...</td>
 		</tr>
 		<tr>
 			<td width="120" style="color: #666666;">Host Name:</td>
