@@ -72,7 +72,13 @@ if (!isset($_POST['continue']) and !isset($_POST['CreateSQLFile'])) {
 	echo '<tr><td style="background-color: #fddbdb;color: red;">'.$_SESSION['Updates']['Errors'].' '._('updates have errors in them').'</td></tr>';
 	echo '<tr><td style="background-color: #b9ecb4;color: #006400;">'.$_SESSION['Updates']['Successes'].' '._('updates have succeeded').'</td></tr>';
 	echo '<tr><td style="background-color: #c7ccf6;color: navy;">'.$_SESSION['Updates']['Warnings'].' '._('updates have not been done as the update was unnecessary on this database').'</td></tr>';
-	echo '</table>';
+	if ($_SESSION['Updates']['Errors']>0) {
+		for ($i=0; $i<sizeOf($_SESSION['Updates']['Messages']); $i++) {
+			echo '<tr><td>'.$_SESSION['Updates']['Messages'][$i].'</td></tr>';
+		}
+	}
+	echo '</table><br />';
+	prnMsg( _('You must logout and log back in to ensure that all the updates take affect') , 'warn');
 }
 if (isset($SQLFile)) {
 //		header('Location: Z_UpgradeDatabase.php'); //divert to the db upgrade if the table doesn't exist
