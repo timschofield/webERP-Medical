@@ -6,22 +6,22 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Victor's-webERP romanian translation\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-04 22:11+1200\n"
-"PO-Revision-Date: 2010-01-14 19:36-0500\n"
-"Last-Translator: Victor Onofrei <info@onofrei.net>\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2011-01-04 22:15+1200\n"
+"PO-Revision-Date: 2010-12-29 17:04+0000\n"
+"Last-Translator: Mihai Oghinciuc <Unknown>\n"
 "Language-Team: Victor <info@onofrei.net>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Romanian\n"
+"X-Launchpad-Export-Date: 2011-01-10 14:13+0000\n"
+"X-Generator: Launchpad (build 12161)\n"
 "X-Poedit-Country: MOLDOVA, REPUBLIC OF\n"
-"X-Launchpad-Export-Date: 2010-09-16 09:48+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Poedit-Language: Romanian\n"
 
 #: AccountGroups.php:9 index.php:1273
 msgid "Account Groups"
-msgstr "Grupurile de conturi"
+msgstr "Grupuri de conturi"
 
 #: AccountGroups.php:19
 msgid ""
@@ -46,16 +46,16 @@ msgstr ""
 
 #: AccountGroups.php:65
 msgid "The account group name already exists in the database"
-msgstr ""
+msgstr "Numele grupului de conturi există deja in baza de date"
 
 #: AccountGroups.php:71
 msgid "The account group name cannot contain the character"
-msgstr ""
+msgstr "Numele contului nu poate să conţină acest caracter"
 
 #: AccountGroups.php:71 AccountSections.php:75 PaymentMethods.php:41
 #: TaxCategories.php:33 TaxProvinces.php:32 UnitsOfMeasure.php:32
 msgid "or the character"
-msgstr ""
+msgstr "sau caracterul"
 
 #: AccountGroups.php:77
 msgid "The account group name must be at least one character long"
@@ -85,9 +85,8 @@ msgid "The sequence in the TB must be numeric and less than"
 msgstr ""
 
 #: AccountGroups.php:136
-#, fuzzy
 msgid "An error occurred in updating the account group"
-msgstr "Eroare la actualizarea"
+msgstr ""
 
 #: AccountGroups.php:137
 msgid "The SQL that was used to update the account group was"
@@ -98,9 +97,8 @@ msgid "Record Updated"
 msgstr "Inregistrare actualizata"
 
 #: AccountGroups.php:157
-#, fuzzy
 msgid "An error occurred in inserting the account group"
-msgstr "Eroare la actualizarea"
+msgstr ""
 
 #: AccountGroups.php:158
 msgid "The SQL that was used to insert the account group was"
@@ -111,7 +109,8 @@ msgid "Record inserted"
 msgstr "Inregistrare inserata"
 
 #: AccountGroups.php:176
-msgid "An error occurred in retrieving the group information from chartmaster"
+msgid ""
+"An error occurred in retrieving the group information from chartmaster"
 msgstr ""
 
 #: AccountGroups.php:181
@@ -162,9 +161,8 @@ msgid "account groups that have this group as its/there parent account group"
 msgstr ""
 
 #: AccountGroups.php:195
-#, fuzzy
 msgid "An error occurred in deleting the account group"
-msgstr "Eroare la actualizarea"
+msgstr ""
 
 #: AccountGroups.php:196
 msgid "The SQL that was used to delete the account group was"
@@ -1070,7 +1068,7 @@ msgstr "ID Utilizator"
 
 #: AuditTrail.php:56
 msgid "Table "
-msgstr "Tabel"
+msgstr "Tabel "
 
 #: AuditTrail.php:68 MRPReport.php:789 PO_SelectPurchOrder.php:357
 #: SelectContract.php:196 SelectProduct.php:710
@@ -1208,9 +1206,8 @@ msgid "Bank Account Name"
 msgstr ""
 
 #: BankAccounts.php:198 BankAccounts.php:328
-#, fuzzy
 msgid "Bank Account Code"
-msgstr "Nume Cont"
+msgstr ""
 
 #: BankAccounts.php:199 BankAccounts.php:330
 msgid "Bank Account Number"
@@ -1236,9 +1233,8 @@ msgid "Currency"
 msgstr ""
 
 #: BankAccounts.php:202 BankAccounts.php:351
-#, fuzzy
 msgid "Default for Invoices"
-msgstr "Comanda pentru facturare"
+msgstr ""
 
 #: BankAccounts.php:251
 msgid "Show All Bank Accounts Defined"
@@ -1430,7 +1426,8 @@ msgid "after"
 msgstr "dupa"
 
 #: BankMatching.php:218
-msgid "The payments with the selected criteria could not be retrieved because"
+msgid ""
+"The payments with the selected criteria could not be retrieved because"
 msgstr ""
 
 #: BankMatching.php:221 ShipmentCosting.php:502 ShipmentCosting.php:573
@@ -1692,9 +1689,8 @@ msgid "There were no items for the selected assembly"
 msgstr ""
 
 #: BOMExtendedQty.php:290 BOMIndented.php:266 BOMIndentedReverse.php:260
-#, fuzzy
 msgid "Part"
-msgstr "Imprimare"
+msgstr ""
 
 #: BOMExtendedQty.php:291 BOMExtendedQty.php:342 BOMExtendedQty.php:343
 #: BOMExtendedQty.php:344 BOMExtendedQty.php:345 BOMIndented.php:316
@@ -1744,14 +1740,12 @@ msgid "Quantity"
 msgstr "Numar/cantitate"
 
 #: BOMExtendedQty.php:292
-#, fuzzy
 msgid "Selection Option"
-msgstr "Sectiune"
+msgstr ""
 
 #: BOMExtendedQty.php:293
-#, fuzzy
 msgid "Show All Parts"
-msgstr "Vizionare integrala"
+msgstr ""
 
 #: BOMExtendedQty.php:294
 msgid "Only Show Shortages"
@@ -1760,9 +1754,8 @@ msgstr ""
 #: BOMExtendedQty.php:296 BOMIndented.php:274 BOMIndentedReverse.php:262
 #: MRPPlannedPurchaseOrders.php:273 MRPPlannedWorkOrders.php:339
 #: MRPReschedules.php:156 MRPShortages.php:258
-#, fuzzy
 msgid "Print Option"
-msgstr "Descriere"
+msgstr ""
 
 #: BOMExtendedQty.php:297 BOMIndented.php:275 BOMIndentedReverse.php:263
 #: MRPPlannedPurchaseOrders.php:274 MRPPlannedWorkOrders.php:340
@@ -1773,9 +1766,8 @@ msgstr ""
 #: BOMExtendedQty.php:298 BOMIndented.php:276 BOMIndentedReverse.php:264
 #: MRPPlannedPurchaseOrders.php:275 MRPPlannedWorkOrders.php:341
 #: MRPReschedules.php:158 MRPShortages.php:260
-#, fuzzy
 msgid "Plain Print"
-msgstr "Imprimare"
+msgstr ""
 
 #: BOMExtendedQty.php:322
 msgid "Extended Quantity BOM Listing For       "
@@ -1872,9 +1864,8 @@ msgid "Page"
 msgstr ""
 
 #: BOMExtendedQty.php:327
-#, fuzzy
 msgid "Build Quantity:  "
-msgstr "Numar/cantitate"
+msgstr ""
 
 #: BOMExtendedQty.php:334
 msgid "Build"
@@ -1910,9 +1901,8 @@ msgstr ""
 #: SalesInquiry.php:776 SalesInquiry.php:802 SalesInquiry.php:821
 #: SalesInquiry.php:931 SalesInquiry.php:1072 SalesInquiry.php:1140
 #: SalesInquiry.php:1155 StockDispatch.php:356 StockDispatch.php:363
-#, fuzzy
 msgid "Part Number"
-msgstr "Numar"
+msgstr ""
 
 #: BOMExtendedQty.php:340 BOMIndented.php:312 BOMIndentedReverse.php:300
 #: MRPShortages.php:303
@@ -2006,9 +1996,8 @@ msgid "WC"
 msgstr ""
 
 #: BOMIndented.php:324
-#, fuzzy
 msgid "Assembly:"
-msgstr "Asamblat"
+msgstr ""
 
 #: BOMIndented.php:329 BOMIndentedReverse.php:315
 msgid " 12345678901234567890"
@@ -2027,9 +2016,8 @@ msgid "Reverse Indented BOM Listing"
 msgstr ""
 
 #: BOMIndentedReverse.php:309
-#, fuzzy
 msgid "Component:"
-msgstr "Component"
+msgstr ""
 
 #: BOMInquiry.php:7
 msgid "Costed Bill Of Material"
@@ -2190,9 +2178,8 @@ msgid "there are no components defined for it"
 msgstr ""
 
 #: BOMInquiry.php:163
-#, fuzzy
 msgid "Return to Main Menu"
-msgstr "Meniul Principal"
+msgstr ""
 
 #: BOMInquiry.php:168
 msgid "per"
@@ -2219,9 +2206,8 @@ msgid "Total Cost"
 msgstr "Costul total"
 
 #: BOMInquiry.php:218
-#, fuzzy
 msgid "Labour Cost"
-msgstr "Manopera"
+msgstr ""
 
 #: BOMInquiry.php:221
 msgid "Overhead Cost"
@@ -2244,7 +2230,8 @@ msgid "Bill of Materials Listing"
 msgstr "Vizionare bonuri de producere"
 
 #: BOMListing.php:50
-msgid "The Bill of Material listing could not be retrieved by the SQL because"
+msgid ""
+"The Bill of Material listing could not be retrieved by the SQL because"
 msgstr ""
 
 #: BOMListing.php:61
@@ -2304,14 +2291,14 @@ msgstr ""
 
 #: BOMs.php:225
 msgid ""
-"The effective after date field must be a date in the format dd/mm/yy or dd/"
-"mm/yyyy or ddmmyy or ddmmyyyy or dd-mm-yy or dd-mm-yyyy"
+"The effective after date field must be a date in the format dd/mm/yy or "
+"dd/mm/yyyy or ddmmyy or ddmmyyyy or dd-mm-yy or dd-mm-yyyy"
 msgstr ""
 
 #: BOMs.php:231
 msgid ""
-"The effective to date field must be a date in the format dd/mm/yy or dd/mm/"
-"yyyy or ddmmyy or ddmmyyyy or dd-mm-yy or dd-mm-yyyy"
+"The effective to date field must be a date in the format dd/mm/yy or "
+"dd/mm/yyyy or ddmmyy or ddmmyyyy or dd-mm-yy or dd-mm-yyyy"
 msgstr ""
 
 #: BOMs.php:237 StockAdjustments.php:83 StockTransfers.php:130
@@ -3584,7 +3571,8 @@ msgid "The following SQL to update the sales order detail record was used"
 msgstr ""
 
 #: ConfirmDispatch_Invoice.php:852 ConfirmDispatch_Invoice.php:881
-msgid "The order delivery differences log record could not be inserted because"
+msgid ""
+"The order delivery differences log record could not be inserted because"
 msgstr ""
 
 #: ConfirmDispatch_Invoice.php:853 ConfirmDispatch_Invoice.php:882
@@ -3635,7 +3623,8 @@ msgid "because"
 msgstr ""
 
 #: ConfirmDispatch_Invoice.php:975 CounterSales.php:1293
-msgid "Can not retrieve assembly components location stock quantities because "
+msgid ""
+"Can not retrieve assembly components location stock quantities because "
 msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1011 CounterSales.php:1329
@@ -3746,7 +3735,8 @@ msgstr ""
 #: StockLocTransferReceive.php:173 StockLocTransferReceive.php:286
 #: StockTransfers.php:261 StockTransfers.php:369 WorkOrderIssue.php:231
 #: WorkOrderIssue.php:286 WorkOrderReceive.php:508 WorkOrderReceive.php:579
-msgid "The following SQL to insert the serial stock movement records was used"
+msgid ""
+"The following SQL to insert the serial stock movement records was used"
 msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1206 CounterSales.php:1530
@@ -3855,7 +3845,8 @@ msgstr ""
 #: ConfirmDispatch_Invoice.php:1502 GoodsReceived.php:596 ReverseGRN.php:176
 #: SupplierCredit.php:1190 SupplierCredit.php:1277 SupplierInvoice.php:1187
 #: SupplierInvoice.php:1271
-msgid "The following SQL to insert the fixed asset transaction record was used"
+msgid ""
+"The following SQL to insert the fixed asset transaction record was used"
 msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1509
@@ -3963,9 +3954,8 @@ msgid "Process Invoice"
 msgstr ""
 
 #: ContractBOM.php:10
-#, fuzzy
 msgid "Contract Bill of Materials"
-msgstr "Arata Bon de Materiale"
+msgstr ""
 
 #: ContractBOM.php:43 ContractOtherReqts.php:45
 msgid ""
@@ -4052,14 +4042,12 @@ msgid ""
 msgstr ""
 
 #: ContractBOM.php:232
-#, fuzzy
 msgid "Contract Bill of Material"
-msgstr "Arata Bon de Materiale"
+msgstr ""
 
 #: ContractBOM.php:237 ContractOtherReqts.php:90
-#, fuzzy
 msgid "Contract Reference:"
-msgstr "Setari Companie"
+msgstr ""
 
 #: ContractBOM.php:244 PO_Items.php:913 SupplierTenders.php:267
 #: includes/PDFTransPageHeader.inc:188
@@ -4076,9 +4064,8 @@ msgid "Update Lines"
 msgstr ""
 
 #: ContractBOM.php:279 ContractOtherReqts.php:128
-#, fuzzy
 msgid "Back To Contract Header"
-msgstr "Inapoi la bonuri de lucru"
+msgstr ""
 
 #: ContractBOM.php:290 PO_Items.php:1041
 msgid "The supplier category details could not be retrieved because"
@@ -4126,9 +4113,8 @@ msgid "Enter extract of the Stock Code"
 msgstr ""
 
 #: ContractBOM.php:329 PO_Items.php:1079
-#, fuzzy
 msgid "Create a New Stock Item"
-msgstr "Inregistreaza Articol nou in Stock"
+msgstr ""
 
 #: ContractBOM.php:346 FixedAssetItems.php:457 Stocks.php:712
 #: SupplierTenders.php:491
@@ -4156,14 +4142,12 @@ msgid "Please restrict your search to only the parts required"
 msgstr ""
 
 #: ContractBOM.php:393
-#, fuzzy
 msgid "Add to Contract Bill Of Material"
-msgstr "Arata Bon de Materiale"
+msgstr ""
 
 #: ContractCosting.php:8
-#, fuzzy
 msgid "Contract Costing"
-msgstr "Costul total"
+msgstr ""
 
 #: ContractCosting.php:20
 msgid ""
@@ -4182,9 +4166,8 @@ msgid "Contract"
 msgstr ""
 
 #: ContractCosting.php:57
-#, fuzzy
 msgid "Closed"
-msgstr "Cod"
+msgstr ""
 
 #: ContractCosting.php:59
 msgid "Current Confirmed"
@@ -4199,14 +4182,12 @@ msgid "Original Costing"
 msgstr ""
 
 #: ContractCosting.php:68
-#, fuzzy
 msgid "Actual Costs"
-msgstr "Costul total"
+msgstr ""
 
 #: ContractCosting.php:70
-#, fuzzy
 msgid "Inventory Required"
-msgstr "Setari Inventar"
+msgstr ""
 
 #: ContractCosting.php:75 ContractCosting.php:81 Contracts.php:921
 #: CounterSales.php:664 DeliveryDetails.php:786 DeliveryDetails.php:851
@@ -4232,9 +4213,8 @@ msgid "Total Inventory Actual Cost"
 msgstr ""
 
 #: ContractCosting.php:125
-#, fuzzy
 msgid "Other Costs"
-msgstr "Costul unitatii"
+msgstr ""
 
 #: ContractCosting.php:130 ContractCosting.php:150 Contracts.php:943
 msgid "Requirement"
@@ -4394,14 +4374,12 @@ msgid "Update Other Requirements Lines"
 msgstr ""
 
 #: ContractOtherReqts.php:140
-#, fuzzy
 msgid "Enter New Requirements"
-msgstr "Inregistrare plati"
+msgstr ""
 
 #: ContractOtherReqts.php:141
-#, fuzzy
 msgid "Requirement Description"
-msgstr "Descriere Categorie"
+msgstr ""
 
 #: ContractOtherReqts.php:143 SelectWorkOrder.php:303 WhereUsedInquiry.php:68
 #: WorkOrderCosting.php:85
@@ -4615,19 +4593,16 @@ msgid ""
 msgstr ""
 
 #: Contracts.php:378
-#, fuzzy
 msgid "Go to Quotation"
-msgstr "Amplasament Inventar"
+msgstr ""
 
 #: Contracts.php:412
-#, fuzzy
 msgid "The new contract could not be added because"
-msgstr "Inregistrare inserata"
+msgstr ""
 
 #: Contracts.php:441
-#, fuzzy
 msgid "The new contract has been added to the database"
-msgstr "Inregistrare inserata"
+msgstr ""
 
 #: Contracts.php:464
 msgid "The item could not be retrieved because"
@@ -4638,9 +4613,8 @@ msgid "The SQL that was used to find the item failed was"
 msgstr ""
 
 #: Contracts.php:483
-#, fuzzy
 msgid "The new contract item could not be added because"
-msgstr "Inregistrare inserata"
+msgstr ""
 
 #: Contracts.php:484
 msgid "The SQL that was used to insert the contract item failed was"
@@ -4676,9 +4650,8 @@ msgid ""
 msgstr ""
 
 #: Contracts.php:567
-#, fuzzy
 msgid "The quotation cannot be added because"
-msgstr "inregistrare amplasament deoarece"
+msgstr ""
 
 #: Contracts.php:584
 msgid "Unable to add the quotation line"
@@ -4732,9 +4705,8 @@ msgid "Note a Customer Branch Name may be different to the Customer Name"
 msgstr ""
 
 #: Contracts.php:704
-#, fuzzy
 msgid "The customer record selected"
-msgstr "Inregistrare inserata"
+msgstr ""
 
 #: Contracts.php:705 CounterSales.php:112 CounterSales.php:147
 #: CounterSales.php:1979 CounterSales.php:2170 DeliveryDetails.php:148
@@ -4846,9 +4818,8 @@ msgstr ""
 
 #: Contracts.php:825 SelectContract.php:29 SelectContract.php:39
 #: SuppContractChgs.php:117
-#, fuzzy
 msgid "Contract Reference"
-msgstr "Setari Companie"
+msgstr ""
 
 #: Contracts.php:834 InventoryQuantities.php:213 PDFPriceList.php:352
 #: PDFPrintLabel.php:95 PricesByCost.php:175 ReorderLevelLocation.php:189
@@ -4874,18 +4845,16 @@ msgid "Add or Modify Contract Categories"
 msgstr ""
 
 #: Contracts.php:852
-#, fuzzy
 msgid "The stock locations could not be retrieved because"
-msgstr "Codul amplasamentului nu poate fi vid"
+msgstr ""
 
 #: Contracts.php:853
 msgid "The SQL used to retrieve stock locations and failed was"
 msgstr ""
 
 #: Contracts.php:867
-#, fuzzy
 msgid "Contract Description"
-msgstr "Descriere Categorie"
+msgstr ""
 
 #: Contracts.php:870
 msgid "Drawing File"
@@ -4921,9 +4890,8 @@ msgid "Exchange Rate"
 msgstr ""
 
 #: Contracts.php:891
-#, fuzzy
 msgid "Contract Status"
-msgstr "Stare Inventar"
+msgstr ""
 
 #: Contracts.php:894 CustLoginSetup.php:22 index.php:22 SuppLoginSetup.php:21
 #: WWW_Users.php:23
@@ -4937,19 +4905,16 @@ msgstr ""
 #: Contracts.php:896 PO_Header.php:795 POReport.php:1487 SalesInquiry.php:1104
 #: SelectContract.php:52 SelectContract.php:58 SelectContract.php:64
 #: SelectContract.php:70 SelectContract.php:76
-#, fuzzy
 msgid "Completed"
-msgstr "Component"
+msgstr ""
 
 #: Contracts.php:898
-#, fuzzy
 msgid "Contract Setup"
-msgstr "Setari Inventar"
+msgstr ""
 
 #: Contracts.php:900
-#, fuzzy
 msgid "Customer Quoted"
-msgstr "Rapoarte Speciale"
+msgstr ""
 
 #: Contracts.php:902 SelectContract.php:51 SelectContract.php:57
 #: SelectContract.php:63 SelectContract.php:69 SelectContract.php:75
@@ -4961,18 +4926,16 @@ msgid "Quotation Reference/Sales Order No"
 msgstr ""
 
 #: Contracts.php:910
-#, fuzzy
 msgid "Contract Work Order Ref"
-msgstr "Inapoi la bonuri de lucru"
+msgstr ""
 
 #: Contracts.php:915
 msgid "Stock Items Required"
 msgstr ""
 
 #: Contracts.php:934
-#, fuzzy
 msgid "Total stock cost"
-msgstr "Costul total"
+msgstr ""
 
 #: Contracts.php:936 Contracts.php:957
 msgid "None Entered"
@@ -4983,23 +4946,20 @@ msgid "Other Requirements"
 msgstr ""
 
 #: Contracts.php:955
-#, fuzzy
 msgid "Total other costs"
-msgstr "Costul total"
+msgstr ""
 
 #: Contracts.php:961
-#, fuzzy
 msgid "Total Contract Cost"
-msgstr "Costul total"
+msgstr ""
 
 #: Contracts.php:961
 msgid "Contract Price"
 msgstr ""
 
 #: Contracts.php:964
-#, fuzzy
 msgid "Enter Items Required"
-msgstr "Introduceti Codul Articolului"
+msgstr ""
 
 #: Contracts.php:965
 msgid "Enter Other Requirements"
@@ -5246,9 +5206,8 @@ msgid "Banked to"
 msgstr ""
 
 #: CounterSales.php:814
-#, fuzzy
 msgid "Amount Paid"
-msgstr "Suma"
+msgstr ""
 
 #: CounterSales.php:818 SelectOrderItems.php:1407
 msgid "Re-Calculate"
@@ -5322,9 +5281,8 @@ msgid "The work order item could not be added"
 msgstr ""
 
 #: CounterSales.php:1104 DeliveryDetails.php:521
-#, fuzzy
 msgid "A new work order has been created for"
-msgstr "Inregistrare inserata"
+msgstr ""
 
 #: CounterSales.php:1106 DeliveryDetails.php:523
 msgid "These are for"
@@ -5335,9 +5293,8 @@ msgid "there order ref"
 msgstr ""
 
 #: CounterSales.php:1106 DeliveryDetails.php:523
-#, fuzzy
 msgid "our order number"
-msgstr "Numar Bon de Lucru"
+msgstr ""
 
 #: CounterSales.php:1110 DeliveryDetails.php:527
 msgid "The following serial numbers have been reserved for this work order"
@@ -5358,9 +5315,8 @@ msgid "Could not update the new next serial number for the item"
 msgstr ""
 
 #: CounterSales.php:1138 DeliveryDetails.php:554
-#, fuzzy
 msgid "New Work Order Number"
-msgstr "Numar Bon de Lucru"
+msgstr ""
 
 #: CounterSales.php:1138 DeliveryDetails.php:554 EDIMessageFormat.php:129
 #: EDIMessageFormat.php:206 Prices_Customer.php:47
@@ -5424,7 +5380,8 @@ msgid "Cannot insert a receipt transaction against the customer because"
 msgstr ""
 
 #: CounterSales.php:1866 CustomerReceipt.php:413
-msgid "The SQL that failed to update the date of the last payment received was"
+msgid ""
+"The SQL that failed to update the date of the last payment received was"
 msgstr ""
 
 #: CounterSales.php:1867 CustomerReceipt.php:414
@@ -5488,14 +5445,12 @@ msgid "The order details for this product cannot be retrieved because"
 msgstr ""
 
 #: CounterSales.php:2056 CounterSales.php:2120 CounterSales.php:2256
-#, fuzzy
 msgid "Add to Sale"
-msgstr "Inregistrare Furnizor"
+msgstr ""
 
 #: CounterSales.php:2063 CounterSales.php:2064
-#, fuzzy
 msgid "Search for Items"
-msgstr "Cautare Bon de Lucru"
+msgstr ""
 
 #: CounterSales.php:2064 SelectOrderItems.php:1558
 msgid ""
@@ -5508,9 +5463,8 @@ msgid "Select a Stock Category"
 msgstr ""
 
 #: CounterSales.php:2090 SelectOrderItems.php:1583
-#, fuzzy
 msgid "Enter partial Description"
-msgstr "Descriere Categorie"
+msgstr ""
 
 #: CounterSales.php:2098 SelectOrderItems.php:1598
 msgid "Use Quick Entry"
@@ -5534,7 +5488,8 @@ msgid "Next"
 msgstr ""
 
 #: CounterSales.php:2265
-msgid "Use this form to add items quickly if the item codes are already known"
+msgid ""
+"Use this form to add items quickly if the item codes are already known"
 msgstr ""
 
 #: CounterSales.php:2291 SelectCreditItems.php:951 SelectCreditItems.php:1001
@@ -5552,9 +5507,8 @@ msgid "Cancel Sale"
 msgstr ""
 
 #: CounterSales.php:2296
-#, fuzzy
 msgid "Are you sure you wish to cancel this sale?"
-msgstr "Confirma iesirea din sistem"
+msgstr ""
 
 #: Credit_Invoice.php:15
 msgid "Credit An Invoice"
@@ -7224,9 +7178,8 @@ msgid "Summary of Receipt Batch"
 msgstr ""
 
 #: CustomerReceipt.php:236
-#, fuzzy
 msgid "Batch Number"
-msgstr "Numar"
+msgstr ""
 
 #: CustomerReceipt.php:237 CustomerReceipt.php:754
 msgid "Date Banked"
@@ -7241,9 +7194,8 @@ msgid "Amount of Receipt"
 msgstr ""
 
 #: CustomerReceipt.php:263
-#, fuzzy
 msgid "Print a Customer Receipt"
-msgstr "Inregistrare plati"
+msgstr ""
 
 #: CustomerReceipt.php:287
 msgid "Cannot insert a GL entry for the receipt because"
@@ -7471,9 +7423,8 @@ msgid "code"
 msgstr ""
 
 #: CustomerReceipt.php:1034
-#, fuzzy
 msgid "Customer invoice number"
-msgstr "Numar Factura"
+msgstr ""
 
 #: CustomerReceipt.php:1039
 msgid "Enter A GL Receipt"
@@ -7493,7 +7444,8 @@ msgid "The customer number already exists in the database"
 msgstr ""
 
 #: Customers.php:46
-msgid "The customer name must be entered and be forty characters or less long"
+msgid ""
+"The customer name must be entered and be forty characters or less long"
 msgstr ""
 
 #: Customers.php:51
@@ -7625,9 +7577,8 @@ msgstr ""
 #: MRPPlannedWorkOrders.php:15 MRPReschedules.php:18 MRPShortages.php:17
 #: OffersReceived.php:229 PO_Header.php:437 includes/ConnectDB_mysqli.inc:32
 #: includes/ConnectDB_mysql.inc:26
-#, fuzzy
 msgid "here"
-msgstr "Aparenta"
+msgstr ""
 
 #: Customers.php:436
 msgid "to set up your price lists"
@@ -7855,11 +7806,13 @@ msgid "Add/edit/delete Customer Types"
 msgstr ""
 
 #: CustomerTypes.php:39
-msgid "The customer type name description must be 100 characters or less long"
+msgid ""
+"The customer type name description must be 100 characters or less long"
 msgstr ""
 
 #: CustomerTypes.php:47
-msgid "The customer type name description must contain at least one character"
+msgid ""
+"The customer type name description must contain at least one character"
 msgstr ""
 
 #: CustomerTypes.php:60
@@ -7926,9 +7879,8 @@ msgid "The Type record could not be deleted because"
 msgstr ""
 
 #: CustomerTypes.php:187 SupplierTypes.php:174
-#, fuzzy
 msgid "Type ID"
-msgstr "Tip"
+msgstr ""
 
 #: CustomerTypes.php:188 CustomerTypes.php:263 SalesTypes.php:190
 #: SupplierTypes.php:175 SupplierTypes.php:245
@@ -8004,19 +7956,16 @@ msgid "Bank Accounts have not yet been defined. You must first"
 msgstr ""
 
 #: DailyBankTransactions.php:49
-#, fuzzy
 msgid "Transactions Dated"
-msgstr "Tranzactii"
+msgstr ""
 
 #: DailyBankTransactions.php:56
-#, fuzzy
 msgid "Show transactions"
-msgstr "Tranzactii"
+msgstr ""
 
 #: DailyBankTransactions.php:75
-#, fuzzy
 msgid "Account Transactions For"
-msgstr "Tranzactii Articol"
+msgstr ""
 
 #: DailyBankTransactions.php:75
 msgid "On"
@@ -8024,14 +7973,12 @@ msgstr ""
 
 #: DailyBankTransactions.php:78 PDFCustTransListing.php:38
 #: PDFStockTransListing.php:38 PDFSuppTransListing.php:38
-#, fuzzy
 msgid "Transaction type"
-msgstr "Tranzactii"
+msgstr ""
 
 #: DailyBankTransactions.php:81 DailyBankTransactions.php:83
-#, fuzzy
 msgid "Amount in"
-msgstr "Suma"
+msgstr ""
 
 #: DailyBankTransactions.php:82 DailyBankTransactions.php:84
 msgid "Running Total"
@@ -8042,18 +7989,16 @@ msgid "There are no transactions for this account on that day"
 msgstr ""
 
 #: DailyBankTransactions.php:116
-#, fuzzy
 msgid "Select Another Date"
-msgstr "Selectare Articol"
+msgstr ""
 
 #: DailySalesInquiry.php:9 index.php:188
 msgid "Daily Sales Inquiry"
 msgstr ""
 
 #: DailySalesInquiry.php:13
-#, fuzzy
 msgid "Daily Sales"
-msgstr "Achitari furnizori"
+msgstr ""
 
 #: DailySalesInquiry.php:14
 msgid "Select the month to show daily sales for"
@@ -8076,9 +8021,8 @@ msgid "Sunday"
 msgstr ""
 
 #: DailySalesInquiry.php:99 MRPCalendar.php:277
-#, fuzzy
 msgid "Monday"
-msgstr "Mai"
+msgstr ""
 
 #: DailySalesInquiry.php:100 MRPCalendar.php:281
 msgid "Tuesday"
@@ -8297,9 +8241,8 @@ msgid "Sales Order"
 msgstr ""
 
 #: DeliveryDetails.php:579
-#, fuzzy
 msgid "Print Sales Order / Pro-forma Invoice"
-msgstr "Comanda pentru facturare"
+msgstr ""
 
 #: DeliveryDetails.php:583
 msgid "Print Quotation"
@@ -8541,36 +8484,32 @@ msgid "Select"
 msgstr ""
 
 #: DiscountCategories.php:118
-#, fuzzy
 msgid "Enter Stock Code"
-msgstr "Inregistreaza Numarare Inventar"
+msgstr ""
 
 #: DiscountCategories.php:120
 msgid "Partial code"
 msgstr ""
 
 #: DiscountCategories.php:121
-#, fuzzy
 msgid "Partial description"
-msgstr "Descriere"
+msgstr ""
 
 #: DiscountCategories.php:126
 msgid "Update Item"
 msgstr ""
 
 #: DiscountCategories.php:138
-#, fuzzy
 msgid "Select a part code"
-msgstr "Selecteaza Bon de lucru"
+msgstr ""
 
 #: DiscountCategories.php:145
 msgid "Assign discount category"
 msgstr ""
 
 #: DiscountCategories.php:147
-#, fuzzy
 msgid "to all items in stock category"
-msgstr "Selecteaza Categorie Inventar"
+msgstr ""
 
 #: DiscountCategories.php:157
 msgid "Update Items"
@@ -8610,14 +8549,12 @@ msgid "Update discount category for"
 msgstr ""
 
 #: DiscountCategories.php:228
-#, fuzzy
 msgid "a single stock item"
-msgstr "Manopera"
+msgstr ""
 
 #: DiscountCategories.php:229
-#, fuzzy
 msgid "a complete stock category"
-msgstr "Selecteaza Categorie Inventar"
+msgstr ""
 
 #: DiscountMatrix.php:7
 msgid "Discount Matrix Maintenance"
@@ -8997,7 +8934,8 @@ msgid "Payment will be effected by promissory note"
 msgstr ""
 
 #: EDIProcessOrders.php:314
-msgid "Payment will be effected by a bill drawn by the creditor on the debtor"
+msgid ""
+"Payment will be effected by a bill drawn by the creditor on the debtor"
 msgstr ""
 
 #: EDIProcessOrders.php:316
@@ -9360,9 +9298,8 @@ msgid "Factor Company Maintenance"
 msgstr ""
 
 #: Factors.php:26
-#, fuzzy
 msgid "Factor Companies"
-msgstr "Amplasament Producere"
+msgstr ""
 
 #: Factors.php:38
 msgid ""
@@ -9415,9 +9352,8 @@ msgid "ID"
 msgstr ""
 
 #: Factors.php:162
-#, fuzzy
 msgid "Company Name"
-msgstr "Companie"
+msgstr ""
 
 #: Factors.php:163 PurchData.php:316 SelectSupplier.php:252
 msgid "Address 1"
@@ -9478,9 +9414,8 @@ msgid "Are you sure you wish to delete this factoring company?"
 msgstr ""
 
 #: FixedAssetCategories.php:8
-#, fuzzy
 msgid "Fixed Asset Category Maintenance"
-msgstr "Reglaje Categorii Vanzari"
+msgstr ""
 
 #: FixedAssetCategories.php:13
 msgid "Fixed Asset Categories"
@@ -9535,9 +9470,8 @@ msgid "Could not insert the new fixed asset category"
 msgstr ""
 
 #: FixedAssetCategories.php:110
-#, fuzzy
 msgid "A new fixed asset category record has been added for"
-msgstr "Inregistrare inserata"
+msgstr ""
 
 #: FixedAssetCategories.php:131
 msgid ""
@@ -9550,9 +9484,8 @@ msgid "fixed assets referring to this category code"
 msgstr ""
 
 #: FixedAssetCategories.php:137
-#, fuzzy
 msgid "The fixed asset category"
-msgstr "Selecteaza Categorie Inventar"
+msgstr ""
 
 #: FixedAssetCategories.php:159 StockCategories.php:217
 msgid "Cat Code"
@@ -9626,9 +9559,8 @@ msgstr ""
 #: FixedAssetRegister.php:324 FixedAssetTransfer.php:124
 #: SuppFixedAssetChgs.php:75 SuppFixedAssetChgs.php:110 SupplierCredit.php:367
 #: SupplierInvoice.php:340
-#, fuzzy
 msgid "Asset ID"
-msgstr "ID Utilizator"
+msgstr ""
 
 #: FixedAssetDepreciation.php:84 PricesByCost.php:94 SalesAnalReptCols.php:38
 #: SalesAnalReptCols.php:40 SelectProduct.php:173 SelectProduct.php:323
@@ -9646,14 +9578,12 @@ msgid "B/fwd Book Value"
 msgstr ""
 
 #: FixedAssetDepreciation.php:87
-#, fuzzy
 msgid "Depn Type"
-msgstr "Tip"
+msgstr ""
 
 #: FixedAssetDepreciation.php:88
-#, fuzzy
 msgid "Depn Rate"
-msgstr "Data"
+msgstr ""
 
 #: FixedAssetDepreciation.php:89
 msgid "New Depn"
@@ -9709,9 +9639,8 @@ msgid "GRAND Total"
 msgstr ""
 
 #: FixedAssetDepreciation.php:245 FixedAssetRegister.php:354
-#, fuzzy
 msgid "Depreciation"
-msgstr "Descriere"
+msgstr ""
 
 #: FixedAssetDepreciation.php:245 GLJournal.php:115 Payments.php:575
 msgid "has been successfully entered"
@@ -9735,9 +9664,8 @@ msgid "Fixed Assets"
 msgstr ""
 
 #: FixedAssetItems.php:13
-#, fuzzy
 msgid "Back to Select"
-msgstr "Inapoi la meniu"
+msgstr ""
 
 #: FixedAssetItems.php:16
 msgid "Fixed Asset Items"
@@ -9781,9 +9709,8 @@ msgstr ""
 
 #: FixedAssetItems.php:147 FixedAssetItems.php:167 FixedAssetItems.php:187
 #: FixedAssetItems.php:207
-#, fuzzy
 msgid "change category"
-msgstr "Categorie Inventar"
+msgstr ""
 
 #: FixedAssetItems.php:150 FixedAssetItems.php:170 FixedAssetItems.php:190
 #: FixedAssetItems.php:210
@@ -9805,9 +9732,8 @@ msgstr ""
 
 #: FixedAssetItems.php:230 FixedAssetRegister.php:263
 #: FixedAssetRegister.php:347
-#, fuzzy
 msgid "Asset"
-msgstr "Asamblat"
+msgstr ""
 
 #: FixedAssetItems.php:252 Z_ImportFixedAssets.php:212
 msgid "The asset could not be added because"
@@ -9845,9 +9771,8 @@ msgid ""
 msgstr ""
 
 #: FixedAssetItems.php:323 FixedAssetItems.php:343
-#, fuzzy
 msgid "Delete asset"
-msgstr "Sterge"
+msgstr ""
 
 #: FixedAssetItems.php:326
 msgid "Cannot insert a GL entry for the deletion of the asset because"
@@ -9868,14 +9793,12 @@ msgid "Deleted the asset  record for asset number"
 msgstr ""
 
 #: FixedAssetItems.php:413 FixedAssetItems.php:417 SelectAsset.php:222
-#, fuzzy
 msgid "Asset Code"
-msgstr "Cod Inventar"
+msgstr ""
 
 #: FixedAssetItems.php:426 FixedAssetItems.php:434
-#, fuzzy
 msgid "Asset Description"
-msgstr "Descriere"
+msgstr ""
 
 #: FixedAssetItems.php:426 Stocks.php:645
 msgid "short"
@@ -9890,9 +9813,8 @@ msgid "Image File (.jpg)"
 msgstr ""
 
 #: FixedAssetItems.php:465 FixedAssetRegister.php:237
-#, fuzzy
 msgid "Asset Category"
-msgstr "Categorie Inventar"
+msgstr ""
 
 #: FixedAssetItems.php:468
 msgid "The asset categories could not be retrieved because"
@@ -9903,14 +9825,12 @@ msgid "Add or Modify Asset Categories"
 msgstr ""
 
 #: FixedAssetItems.php:486 SelectAsset.php:225
-#, fuzzy
 msgid "Date Purchased"
-msgstr "Cumparate"
+msgstr ""
 
 #: FixedAssetItems.php:490
-#, fuzzy
 msgid "The asset locations could not be retrieved because"
-msgstr "Codul amplasamentului nu poate fi vid"
+msgstr ""
 
 #: FixedAssetItems.php:491
 msgid "The SQL used to retrieve asset locations and failed was"
@@ -9918,9 +9838,8 @@ msgstr ""
 
 #: FixedAssetItems.php:494 FixedAssetRegister.php:250 SelectAsset.php:73
 #: SelectAsset.php:224
-#, fuzzy
 msgid "Asset Location"
-msgstr "Toate Amplasamentele"
+msgstr ""
 
 #: FixedAssetItems.php:504 Stocks.php:900 includes/DefineLabelClass.php:50
 msgid "Bar Code"
@@ -9973,9 +9892,8 @@ msgid "Depreciation last run"
 msgstr ""
 
 #: FixedAssetItems.php:546
-#, fuzzy
 msgid "Insert New Fixed Asset"
-msgstr "Insereaza Articol nou"
+msgstr ""
 
 #: FixedAssetItems.php:551
 msgid ""
@@ -9984,9 +9902,8 @@ msgid ""
 msgstr ""
 
 #: FixedAssetItems.php:552
-#, fuzzy
 msgid "Delete This Asset"
-msgstr "Sterge acest Articol"
+msgstr ""
 
 #: FixedAssetItems.php:552
 msgid "Are You Sure? Only assets with a zero book value can be deleted."
@@ -9997,23 +9914,20 @@ msgid "Fixed Asset Properties List"
 msgstr ""
 
 #: FixedAssetList.php:28
-#, fuzzy
 msgid "Asset Type"
-msgstr "Tip Inventar"
+msgstr ""
 
 #: FixedAssetList.php:29
 msgid "Asset Reference"
 msgstr ""
 
 #: FixedAssetList.php:31
-#, fuzzy
 msgid "Depreciation %"
-msgstr "Descriere"
+msgstr ""
 
 #: FixedAssetLocations.php:6
-#, fuzzy
 msgid "Fixed Asset Locations"
-msgstr "Inregistrare Amplasari Inventar"
+msgstr ""
 
 #: FixedAssetLocations.php:14
 msgid "You must enter at least one character in the location ID"
@@ -10032,29 +9946,24 @@ msgid "You have assets in this location location so it cannot be removed"
 msgstr ""
 
 #: FixedAssetLocations.php:81
-#, fuzzy
 msgid "The location has been deleted successfully"
-msgstr "Inregistrare inserata"
+msgstr ""
 
 #: FixedAssetLocations.php:91 FixedAssetLocations.php:108
-#, fuzzy
 msgid "Location ID"
-msgstr "Amplasare"
+msgstr ""
 
 #: FixedAssetLocations.php:92 FixedAssetLocations.php:116
-#, fuzzy
 msgid "Location Description"
-msgstr "Descriere Categorie"
+msgstr ""
 
 #: FixedAssetLocations.php:93 FixedAssetLocations.php:119
-#, fuzzy
 msgid "Parent Location"
-msgstr "Amplasament Inventar"
+msgstr ""
 
 #: FixedAssetLocations.php:146
-#, fuzzy
 msgid "Delete This Location"
-msgstr "Sterge acest Articol"
+msgstr ""
 
 #: FixedAssetRegister.php:4 FixedAssetRegister.php:50
 msgid "Fixed Asset Register"
@@ -10118,34 +10027,28 @@ msgid "ALL"
 msgstr ""
 
 #: FixedAssetRegister.php:281
-#, fuzzy
 msgid " From Date"
-msgstr "Din Data"
+msgstr ""
 
 #: FixedAssetRegister.php:283
-#, fuzzy
 msgid "To Date "
-msgstr "In Data"
+msgstr ""
 
 #: FixedAssetRegister.php:287
-#, fuzzy
 msgid "Show Assets"
-msgstr "Afiseaza selectia"
+msgstr ""
 
 #: FixedAssetRegister.php:322
-#, fuzzy
 msgid "Asset Category "
-msgstr "Categorie Inventar"
+msgstr ""
 
 #: FixedAssetRegister.php:323
-#, fuzzy
 msgid "Asset Location "
-msgstr "Toate Amplasamentele"
+msgstr ""
 
 #: FixedAssetRegister.php:349
-#, fuzzy
 msgid "Serial No."
-msgstr "Cautare"
+msgstr ""
 
 #: FixedAssetRegister.php:351
 msgid "Cost B/Fwd"
@@ -10164,14 +10067,12 @@ msgid "Depn C/Fwd"
 msgstr ""
 
 #: FixedAssetTransfer.php:7 index.php:1319
-#, fuzzy
 msgid "Change Asset Location"
-msgstr "Amplasament Inventar"
+msgstr ""
 
 #: FixedAssetTransfer.php:34 SelectAsset.php:46
-#, fuzzy
 msgid "In Asset Category"
-msgstr "Categorie Inventar"
+msgstr ""
 
 #: FixedAssetTransfer.php:50 FixedAssetTransfer.php:61
 #: FixedAssetTransfer.php:72 MRPReport.php:556 MRPReport.php:563
@@ -10181,9 +10082,8 @@ msgid "Enter partial"
 msgstr ""
 
 #: FixedAssetTransfer.php:126
-#, fuzzy
 msgid "Serial number"
-msgstr "Comanda speciala"
+msgstr ""
 
 #: FixedAssetTransfer.php:127 SpecialOrder.php:552
 msgid "Purchase Cost"
@@ -10194,9 +10094,8 @@ msgid "Total Depreciation"
 msgstr ""
 
 #: FixedAssetTransfer.php:129
-#, fuzzy
 msgid "Current Location"
-msgstr "Amplasament Inventar"
+msgstr ""
 
 #: FixedAssetTransfer.php:130
 msgid "Move To :"
@@ -10237,18 +10136,16 @@ msgid "See your system administrator to correct this problem"
 msgstr ""
 
 #: FormDesigner.php:136
-#, fuzzy
 msgid "Select the form to edit"
-msgstr "Alege depozitul"
+msgstr ""
 
 #: FormDesigner.php:149
 msgid "Edit Form Layout"
 msgstr ""
 
 #: FormDesigner.php:159
-#, fuzzy
 msgid "Form Design"
-msgstr "Din Data"
+msgstr ""
 
 #: FormDesigner.php:160
 msgid "Enter the changes that you want in the form layout below."
@@ -10259,9 +10156,8 @@ msgid "All measurements are in millimetres"
 msgstr ""
 
 #: FormDesigner.php:166
-#, fuzzy
 msgid "Form Name"
-msgstr "Din Data"
+msgstr ""
 
 #: FormDesigner.php:168
 msgid "Paper Size"
@@ -10312,9 +10208,8 @@ msgid "Freight Costs Set Up"
 msgstr ""
 
 #: FreightCosts.php:32
-#, fuzzy
 msgid "Freight Costs"
-msgstr "Costul unitatii"
+msgstr ""
 
 #: FreightCosts.php:43
 msgid "Select A Freight Company to set up costs for"
@@ -10756,9 +10651,8 @@ msgstr ""
 
 #: GLAccountCSV.php:8 GLAccountCSV.php:18 GLAccountReport.php:248
 #: GLAccountReport.php:252
-#, fuzzy
 msgid "General Ledger Account Report"
-msgstr "Contabilitate"
+msgstr ""
 
 #: GLAccountCSV.php:18 GLAccountInquiry.php:8 GLAccountInquiry.php:24
 #: GLAccountReport.php:252
@@ -10770,9 +10664,8 @@ msgid "Use the keyboard Shift key to select multiple accounts and periods"
 msgstr ""
 
 #: GLAccountCSV.php:31 GLAccountReport.php:265
-#, fuzzy
 msgid "Selected Accounts"
-msgstr "Selectare Articol"
+msgstr ""
 
 #: GLAccountCSV.php:46 GLAccountInquiry.php:66 GLAccountReport.php:280
 msgid "For Period range"
@@ -10854,9 +10747,8 @@ msgid "Show Account Transactions"
 msgstr ""
 
 #: GLAccountInquiry.php:150
-#, fuzzy
 msgid "Transactions for account"
-msgstr "Tranzactii"
+msgstr ""
 
 #: GLAccountInquiry.php:155 GLAccountReport.php:370 GLJournal.php:340
 #: GLJournal.php:361
@@ -10900,27 +10792,24 @@ msgid "A log of the account differences for the periods report shows below"
 msgstr ""
 
 #: GLAccountReport.php:32 GLAccountReport.php:33 GLAccountReport.php:351
-#, fuzzy
 msgid "GL Account Report"
-msgstr "Numar Cont"
+msgstr ""
 
 #: GLAccountReport.php:102
 msgid "Listing for Period"
 msgstr ""
 
 #: GLAccountReport.php:318
-#, fuzzy
 msgid "Run Report"
-msgstr "Rapoarte Speciale"
+msgstr ""
 
 #: GLAccounts.php:7
 msgid "Chart of Accounts Maintenance"
 msgstr "Reglaje Plan conturi"
 
 #: GLAccounts.php:18
-#, fuzzy
 msgid "General Ledger Accounts"
-msgstr "Contabilitate"
+msgstr ""
 
 #: GLAccounts.php:32
 msgid "The account code must be an integer"
@@ -11150,9 +11039,8 @@ msgid "There were no entries to print out for the selections specified"
 msgstr ""
 
 #: GLBalanceSheet.php:351
-#, fuzzy
 msgid "HTML View"
-msgstr "Vizionare"
+msgstr ""
 
 #: GLBalanceSheet.php:354 includes/PDFBalanceSheetPageHeader.inc:20
 msgid "Balance Sheet as at"
@@ -11488,9 +11376,8 @@ msgid "Income and Expenditure by Tag"
 msgstr ""
 
 #: GLTagProfit_Loss.php:85
-#, fuzzy
 msgid "Select tag"
-msgstr "Selectare Articol"
+msgstr ""
 
 #: GLTagProfit_Loss.php:111
 msgid "Show Statement of Income and Expenditure"
@@ -11531,9 +11418,8 @@ msgid "Deficit"
 msgstr ""
 
 #: GLTags.php:6
-#, fuzzy
 msgid "Maintain General Ledger Tags"
-msgstr "Contabilitate"
+msgstr ""
 
 #: GLTags.php:46
 msgid "Insert"
@@ -11978,14 +11864,12 @@ msgid "Enter An Order or Quotation"
 msgstr ""
 
 #: index.php:134
-#, fuzzy
 msgid "Enter Counter Sales"
-msgstr "Inregistreaza Numarare Inventar"
+msgstr ""
 
 #: index.php:139 PDFPickingList.php:42
-#, fuzzy
 msgid "Print Picking Lists"
-msgstr "Imprimare Liste preturi"
+msgstr ""
 
 #: index.php:144
 msgid "Outstanding Sales Orders/Quotations"
@@ -12033,18 +11917,16 @@ msgid "Sales Order Detail Or Summary Inquiries"
 msgstr ""
 
 #: index.php:208
-#, fuzzy
 msgid "Top Sales Items Report"
-msgstr "Raport analiza-vanzari"
+msgstr ""
 
 #: index.php:213
 msgid "Sales With Low Gross Profit Report"
 msgstr ""
 
 #: index.php:231 SelectContract.php:8
-#, fuzzy
 msgid "Select Contract"
-msgstr "Selectare Articol"
+msgstr ""
 
 #: index.php:236
 msgid "Create Contract"
@@ -12112,9 +11994,8 @@ msgid "Sales Graphs"
 msgstr ""
 
 #: index.php:355 index.php:443
-#, fuzzy
 msgid "List Daily Transactions"
-msgstr "Tranzactii Articol"
+msgstr ""
 
 #: index.php:369
 msgid "Add Customer"
@@ -12232,9 +12113,8 @@ msgid "Serial Item Research Tool"
 msgstr ""
 
 #: index.php:618 PDFPrintLabel.php:76
-#, fuzzy
 msgid "Print Price Labels"
-msgstr "Imprimare Liste preturi"
+msgstr ""
 
 #: index.php:623
 msgid "Inventory Item Movements"
@@ -12249,9 +12129,8 @@ msgid "Inventory Item Usage"
 msgstr "Utilizarea Articolului din Inventar"
 
 #: index.php:638 InventoryQuantities.php:83
-#, fuzzy
 msgid "Inventory Quantities"
-msgstr "Evaluare Inventar"
+msgstr ""
 
 #: index.php:643 ReorderLevelLocation.php:60 ReorderLevel.php:59
 msgid "Reorder Level"
@@ -12262,9 +12141,8 @@ msgid "Reorder Level By Category/Location"
 msgstr ""
 
 #: index.php:653
-#, fuzzy
 msgid "Stock Dispatch"
-msgstr "Stare Inventar"
+msgstr ""
 
 #: index.php:658 InventoryValuation.php:17 MailInventoryValuation.php:47
 #: MailInventoryValuation.php:226
@@ -12348,9 +12226,8 @@ msgid "Where Used Inquiry"
 msgstr "Folosirea materialelor"
 
 #: index.php:802
-#, fuzzy
 msgid "Indented Bill Of Material Listing"
-msgstr "Vizionare bon de producere"
+msgstr ""
 
 #: index.php:807
 msgid "List Components Required"
@@ -12373,9 +12250,8 @@ msgid "MRP Suggested Purchase Orders"
 msgstr ""
 
 #: index.php:832
-#, fuzzy
 msgid "MRP Suggested Work Orders"
-msgstr "Cautare Bon de Lucru"
+msgstr ""
 
 #: index.php:837
 msgid "MRP Reschedules Required"
@@ -12394,9 +12270,8 @@ msgid "Auto Create Master Schedule"
 msgstr ""
 
 #: index.php:872
-#, fuzzy
 msgid "MRP Calculation"
-msgstr "Calculat"
+msgstr ""
 
 #: index.php:898
 msgid "General Setup Options"
@@ -12431,9 +12306,8 @@ msgid "Role Permissions"
 msgstr ""
 
 #: index.php:960
-#, fuzzy
 msgid "Page Security Settings"
-msgstr "Setari Utilizatori"
+msgstr ""
 
 #: index.php:965
 msgid "Bank Accounts"
@@ -12484,9 +12358,8 @@ msgid "Form Layout Editor"
 msgstr ""
 
 #: index.php:1025
-#, fuzzy
 msgid "Label Templates Maintenance"
-msgstr "Reglaje Vanzari"
+msgstr ""
 
 #: index.php:1030
 msgid "SMTP Server Details"
@@ -12499,9 +12372,8 @@ msgstr ""
 #: index.php:1050 SupplierTypes.php:8 SupplierTypes.php:23
 #: SuppPaymentRun.php:237 SystemParameters.php:13 TaxAuthorities.php:10
 #: TaxAuthorityRates.php:17 TaxCategories.php:12 Tax.php:298
-#, fuzzy
 msgid "Supplier Types"
-msgstr "Inregistrare Furnizor"
+msgstr ""
 
 #: index.php:1065
 msgid "Set Purchase Order Authorisation levels"
@@ -12584,9 +12456,8 @@ msgid "Account Inquiry"
 msgstr ""
 
 #: index.php:1209
-#, fuzzy
 msgid "Account Listing"
-msgstr "Grupurile de conturi"
+msgstr ""
 
 #: index.php:1214
 msgid "Account Listing to CSV File"
@@ -12601,18 +12472,16 @@ msgid "Cheque Payments Listing"
 msgstr ""
 
 #: index.php:1229
-#, fuzzy
 msgid "Daily Bank Transactions"
-msgstr "Tranzactii"
+msgstr ""
 
 #: index.php:1234
 msgid "Profit and Loss Statement"
 msgstr ""
 
 #: index.php:1244
-#, fuzzy
 msgid "Tag Reports"
-msgstr "Rapoarte Speciale"
+msgstr ""
 
 #: index.php:1249
 msgid "Tax Reports"
@@ -12627,14 +12496,12 @@ msgid "GL Tags"
 msgstr ""
 
 #: index.php:1309
-#, fuzzy
 msgid "Add a new Asset"
-msgstr "Insereaza Articol nou"
+msgstr ""
 
 #: index.php:1314 SelectAsset.php:6
-#, fuzzy
 msgid "Select an Asset"
-msgstr "Selectare Articol"
+msgstr ""
 
 #: index.php:1324
 msgid "Depreciation Journal"
@@ -12645,9 +12512,8 @@ msgid "Asset Register"
 msgstr ""
 
 #: index.php:1347
-#, fuzzy
 msgid "Asset Categories Maintenance"
-msgstr "Reglaje Categorii de Inventar"
+msgstr ""
 
 #: index.php:1352
 msgid "Add or Maintain Asset Locations"
@@ -12736,12 +12602,13 @@ msgid ""
 msgstr ""
 
 #: InventoryPlanning.php:292 InventoryPlanningPrefSupplier.php:403
-msgid "The purchase order quantities could not be retrieved by the SQL because"
+msgid ""
+"The purchase order quantities could not be retrieved by the SQL because"
 msgstr ""
 
 #: InventoryPlanning.php:332
 msgid "   "
-msgstr ""
+msgstr "   "
 
 #: InventoryPlanning.php:353 InventoryPlanningPrefSupplier.php:457
 msgid "Print Inventory Planning Report Empty"
@@ -12778,9 +12645,8 @@ msgid "All Locations"
 msgstr "Toate Amplasamentele"
 
 #: InventoryPlanning.php:419
-#, fuzzy
 msgid "Stock Planning"
-msgstr "Amplasament Inventar"
+msgstr ""
 
 #: InventoryPlanning.php:421
 msgid "One Month MAX"
@@ -12863,9 +12729,8 @@ msgid "Standard"
 msgstr ""
 
 #: InventoryPlanningPrefSupplier.php:86
-#, fuzzy
 msgid "Deviation"
-msgstr "Descriere"
+msgstr ""
 
 #: InventoryPlanningPrefSupplier.php:89 PurchData.php:172 PurchData.php:464
 #: SelectProduct.php:326
@@ -12937,31 +12802,29 @@ msgstr ""
 
 #: InventoryQuantities.php:14 InventoryQuantities.php:147
 #: InventoryQuantities.php:209
-#, fuzzy
 msgid "Inventory Quantities Report"
-msgstr "Raport Evaluare Inventar"
+msgstr ""
 
 #: InventoryQuantities.php:15
 msgid "Parts With Quantities"
 msgstr ""
 
 #: InventoryQuantities.php:85
-msgid "The Inventory Quantity report could not be retrieved by the SQL because"
+msgid ""
+"The Inventory Quantity report could not be retrieved by the SQL because"
 msgstr ""
 
 #: InventoryQuantities.php:94
-#, fuzzy
 msgid "Print Inventory Quantities Report"
-msgstr "Raport Evaluare Inventar"
+msgstr ""
 
 #: InventoryQuantities.php:96
 msgid "There were no items with inventory quantities"
 msgstr ""
 
 #: InventoryQuantities.php:145
-#, fuzzy
 msgid "Inventory Quantities Reporting"
-msgstr "Raport Evaluare Inventar"
+msgstr ""
 
 #: InventoryQuantities.php:148
 msgid ""
@@ -12970,9 +12833,8 @@ msgid ""
 msgstr ""
 
 #: InventoryQuantities.php:154 MRPReschedules.php:160
-#, fuzzy
 msgid "Selection"
-msgstr "Sectiune"
+msgstr ""
 
 #: InventoryQuantities.php:156
 msgid "Only Parts With Multiple Locations"
@@ -12999,9 +12861,8 @@ msgid "In Stock Category"
 msgstr ""
 
 #: InventoryQuantities.php:225 ReorderLevel.php:269
-#, fuzzy
 msgid "Reorder"
-msgstr "Inregistrare inserata"
+msgstr ""
 
 #: InventoryValuation.php:18 InventoryValuation.php:76
 #: MailInventoryValuation.php:48 MailInventoryValuation.php:115
@@ -13031,18 +12892,16 @@ msgid "Inventory Valuation Reporting"
 msgstr ""
 
 #: Labels.php:19
-#, fuzzy
 msgid "Label Templates Maintainance"
-msgstr "Reglaje Vanzari"
+msgstr ""
 
 #: Labels.php:50 Labels.php:61
 msgid "Correct data"
 msgstr ""
 
 #: Labels.php:70
-#, fuzzy
 msgid "New ID"
-msgstr "ID Utilizator"
+msgstr ""
 
 #: Labels.php:71
 msgid "Edit data new label"
@@ -13127,9 +12986,8 @@ msgid ""
 msgstr ""
 
 #: Labels.php:265
-#, fuzzy
 msgid "Save"
-msgstr "Vanzari"
+msgstr ""
 
 #: Labels.php:413 includes/DefineLabelClass.php:8
 msgid "Label id"
@@ -13144,9 +13002,8 @@ msgid "New"
 msgstr ""
 
 #: Labels.php:414
-#, fuzzy
 msgid "Copy"
-msgstr "Companie"
+msgstr ""
 
 #: Labels.php:415
 msgid "Do you really want to erase the label"
@@ -13335,14 +13192,12 @@ msgid "Review Records"
 msgstr ""
 
 #: Locations.php:458
-#, fuzzy
 msgid "Amend Location details"
-msgstr "Toate Amplasamentele"
+msgstr ""
 
 #: Locations.php:465
-#, fuzzy
 msgid "New Location details"
-msgstr "Cod Amplasament"
+msgstr ""
 
 #: Locations.php:510
 msgid "Contact for deliveries"
@@ -13405,14 +13260,12 @@ msgid "MRP Calendar"
 msgstr ""
 
 #: MRPCalendar.php:47 POReport.php:89 POReport.php:779 SalesInquiry.php:71
-#, fuzzy
 msgid "Invalid From Date"
-msgstr "Din Data"
+msgstr ""
 
 #: MRPCalendar.php:52 POReport.php:93 POReport.php:783 SalesInquiry.php:75
-#, fuzzy
 msgid "Invalid To Date"
-msgstr "In Data"
+msgstr ""
 
 #: MRPCalendar.php:69
 msgid "To Date Must Be Greater Than From Date"
@@ -13431,9 +13284,8 @@ msgid "Cannot update the MRP Calendar"
 msgstr ""
 
 #: MRPCalendar.php:218
-#, fuzzy
 msgid "Manufacturing Date"
-msgstr "Producere"
+msgstr ""
 
 #: MRPCalendar.php:267
 msgid "Exclude The Following Days"
@@ -13448,9 +13300,8 @@ msgid "List Date Range"
 msgstr ""
 
 #: MRPCalendar.php:306
-#, fuzzy
 msgid "Change Date Status"
-msgstr "Info Articol din Inventar"
+msgstr ""
 
 #: MRPCreateDemands.php:9
 msgid "MRP Create Demands"
@@ -13491,9 +13342,8 @@ msgid "Inventory Category"
 msgstr ""
 
 #: MRPCreateDemands.php:202
-#, fuzzy
 msgid "All Stock Categories"
-msgstr "Categorie Inventar"
+msgstr ""
 
 #: MRPCreateDemands.php:212 PDFDeliveryDifferences.php:53 PDFDIFOT.php:56
 #: PDFOrdersInvoiced.php:58 PDFOrderStatus.php:55
@@ -13501,14 +13351,12 @@ msgid "Inventory Location"
 msgstr "Amplasament Inventar"
 
 #: MRPCreateDemands.php:231
-#, fuzzy
 msgid "From Sales Date"
-msgstr "Din Data"
+msgstr ""
 
 #: MRPCreateDemands.php:233
-#, fuzzy
 msgid "To Sales Date"
-msgstr "In Data"
+msgstr ""
 
 #: MRPCreateDemands.php:235
 msgid "Start Date For Distribution"
@@ -13579,23 +13427,20 @@ msgid "Invalid demand type"
 msgstr ""
 
 #: MRPDemands.php:167
-#, fuzzy
 msgid "is not a valid item code"
-msgstr "Utilizator inexistent in sistem"
+msgstr ""
 
 #: MRPDemands.php:181
 msgid "Record already exists for part number/demand type/date"
 msgstr ""
 
 #: MRPDemands.php:197
-#, fuzzy
 msgid "The MRP demand record has been updated for"
-msgstr "Inregistrare inserata"
+msgstr ""
 
 #: MRPDemands.php:210
-#, fuzzy
 msgid "A new MRP demand record has been added to the database for"
-msgstr "Inregistrare inserata"
+msgstr ""
 
 #: MRPDemands.php:214
 msgid "The update/addition of the MRP demand record failed because"
@@ -13629,9 +13474,8 @@ msgid "List All Demands"
 msgstr ""
 
 #: MRPDemands.php:403
-#, fuzzy
 msgid "List Selection"
-msgstr "Sectiune"
+msgstr ""
 
 #: MRPDemands.php:404
 msgid "Delete Demand Type"
@@ -13654,14 +13498,12 @@ msgid "The Demand Type description must be at least 3 characters long"
 msgstr ""
 
 #: MRPDemandTypes.php:54
-#, fuzzy
 msgid "The demand type record has been updated"
-msgstr "Inregistrare inserata"
+msgstr ""
 
 #: MRPDemandTypes.php:65
-#, fuzzy
 msgid "The new demand type has been added to the database"
-msgstr "Inregistrare inserata"
+msgstr ""
 
 #: MRPDemandTypes.php:70
 msgid "The update/addition of the demand type failed because"
@@ -13677,18 +13519,16 @@ msgid "MRP Demands referring to this type"
 msgstr ""
 
 #: MRPDemandTypes.php:93
-#, fuzzy
 msgid "The selected demand type record has been deleted"
-msgstr "Inregistrare inserata"
+msgstr ""
 
 #: MRPDemandTypes.php:139
 msgid "Show all Demand Types"
 msgstr ""
 
 #: MRPDemandTypes.php:177
-#, fuzzy
 msgid "Demand Type Description"
-msgstr "Descriere Categorie"
+msgstr ""
 
 #: MRP.php:8
 msgid "Run MRP Calculation"
@@ -13807,9 +13647,8 @@ msgid "Use Pan Size"
 msgstr ""
 
 #: MRP.php:554
-#, fuzzy
 msgid "Use Shrinkage"
-msgstr "Nume Utilizator"
+msgstr ""
 
 #: MRP.php:561
 msgid "This Run Details"
@@ -13828,9 +13667,8 @@ msgid "Use Pan Size?"
 msgstr ""
 
 #: MRP.php:586
-#, fuzzy
 msgid "Use Shrinkage?"
-msgstr "Nume Utilizator"
+msgstr ""
 
 #: MRP.php:588
 msgid "Run MRP"
@@ -13873,9 +13711,8 @@ msgstr ""
 
 #: MRPPlannedPurchaseOrders.php:158 MRPPlannedPurchaseOrders.php:222
 #: MRPPlannedWorkOrders.php:166 MRPPlannedWorkOrders.php:218
-#, fuzzy
 msgid "Unit Cost: "
-msgstr "Costul unitatii"
+msgstr ""
 
 #: MRPPlannedPurchaseOrders.php:163 MRPPlannedPurchaseOrders.php:226
 #: MRPPlannedWorkOrders.php:171 MRPPlannedWorkOrders.php:222
@@ -13887,23 +13724,20 @@ msgid "Last Purchase Date: "
 msgstr ""
 
 #: MRPPlannedPurchaseOrders.php:174 MRPPlannedPurchaseOrders.php:237
-#, fuzzy
 msgid "Supplier: "
-msgstr "Inregistrare Furnizor"
+msgstr ""
 
 #: MRPPlannedPurchaseOrders.php:176 MRPPlannedPurchaseOrders.php:239
-#, fuzzy
 msgid "Preferred Supplier: "
-msgstr "Selectare Furnizor"
+msgstr ""
 
 #: MRPPlannedPurchaseOrders.php:250
 msgid "Number of Purchase Orders: "
 msgstr ""
 
 #: MRPPlannedPurchaseOrders.php:252 MRPPlannedWorkOrders.php:235
-#, fuzzy
 msgid "Total Extended Cost:"
-msgstr "Costul total"
+msgstr ""
 
 #: MRPPlannedPurchaseOrders.php:261
 msgid "MRP Planned Purchase Orders Reporting"
@@ -13917,9 +13751,8 @@ msgstr ""
 #: MRPPlannedWorkOrders.php:335 MRPPlannedWorkOrders.php:371 Suppliers.php:691
 #: Suppliers.php:847 SystemParameters.php:904 SystemParameters.php:910
 #: SystemParameters.php:916 SystemParameters.php:922 SystemParameters.php:928
-#, fuzzy
 msgid "None"
-msgstr "Nu"
+msgstr ""
 
 #: MRPPlannedPurchaseOrders.php:277 MRPPlannedWorkOrders.php:343
 msgid "Cut Off Date"
@@ -13931,25 +13764,21 @@ msgstr ""
 
 #: MRPPlannedPurchaseOrders.php:322 MRPPlannedWorkOrders.php:259
 #: MRPPlannedWorkOrders.php:387 MRPReport.php:421 MRPReschedules.php:207
-#, fuzzy
 msgid "MRP Date"
-msgstr "Data"
+msgstr ""
 
 #: MRPPlannedPurchaseOrders.php:324 MRPPlannedWorkOrders.php:263
 #: MRPPlannedWorkOrders.php:389
-#, fuzzy
 msgid "Ext. Cost"
-msgstr "Costul unitatii"
+msgstr ""
 
 #: MRPPlannedPurchaseOrders.php:326 MRPPlannedWorkOrders.php:391
-#, fuzzy
 msgid "Source Type"
-msgstr "Tip Inventar"
+msgstr ""
 
 #: MRPPlannedPurchaseOrders.php:327 MRPPlannedWorkOrders.php:392
-#, fuzzy
 msgid "Source Order"
-msgstr "Comanda speciala"
+msgstr ""
 
 #: MRPPlannedPurchaseOrders.php:329 MRPPlannedWorkOrders.php:394
 msgid "Consolidation Count"
@@ -13957,9 +13786,8 @@ msgstr ""
 
 #: MRPPlannedWorkOrders.php:105 MRPPlannedWorkOrders.php:116
 #: MRPPlannedWorkOrders.php:131
-#, fuzzy
 msgid "MRP Planned Work Orders"
-msgstr "Cautare Bon de Lucru"
+msgstr ""
 
 #: MRPPlannedWorkOrders.php:107
 msgid "The MRP planned work orders could not be retrieved by the SQL because"
@@ -13974,37 +13802,32 @@ msgid "MRP Planned Work Orders Report"
 msgstr ""
 
 #: MRPPlannedWorkOrders.php:233 MRPPlannedWorkOrders.php:312
-#, fuzzy
 msgid "Number of Work Orders: "
-msgstr "Cautare Bon de Lucru"
+msgstr ""
 
 #: MRPPlannedWorkOrders.php:246
 msgid "Review/Convert MRP Planned Work Orders"
 msgstr ""
 
 #: MRPPlannedWorkOrders.php:264
-#, fuzzy
 msgid "Consolidations"
-msgstr "Tranzactii"
+msgstr ""
 
 #: MRPPlannedWorkOrders.php:288
-#, fuzzy
 msgid "Convert"
-msgstr "Component"
+msgstr ""
 
 #: MRPPlannedWorkOrders.php:314
-#, fuzzy
 msgid "Total Extended Cost: "
-msgstr "Costul total"
+msgstr ""
 
 #: MRPPlannedWorkOrders.php:327
 msgid "MRP Planned Work Orders Reporting"
 msgstr ""
 
 #: MRPPlannedWorkOrders.php:344
-#, fuzzy
 msgid "Review"
-msgstr "Vizionare"
+msgstr ""
 
 #: MRPReport.php:19 MRPReport.php:20 MRPReport.php:147 MRPReport.php:516
 #: MRPReport.php:825
@@ -14038,18 +13861,16 @@ msgid "The MRP Report could not be retrieved by the SQL because"
 msgstr ""
 
 #: MRPReport.php:179
-#, fuzzy
 msgid "Part:"
-msgstr "Imprimare"
+msgstr ""
 
 #: MRPReport.php:181
 msgid "EOQ:"
 msgstr ""
 
 #: MRPReport.php:183
-#, fuzzy
 msgid "On Hand:"
-msgstr "In depozit"
+msgstr ""
 
 #: MRPReport.php:186
 msgid "Desc:"
@@ -14060,18 +13881,16 @@ msgid "Pan Size:"
 msgstr ""
 
 #: MRPReport.php:190
-#, fuzzy
 msgid "On Order:"
-msgstr "Articole Comandate"
+msgstr ""
 
 #: MRPReport.php:197
 msgid "Gross Req:"
 msgstr ""
 
 #: MRPReport.php:202
-#, fuzzy
 msgid "Last Cost:"
-msgstr "Costul unitatii"
+msgstr ""
 
 #: MRPReport.php:219 PrintCustStatements.php:365
 msgid "Past Due"
@@ -14082,9 +13901,8 @@ msgid "Gross Reqts"
 msgstr ""
 
 #: MRPReport.php:243 MRPReport.php:305 MRPReport.php:367
-#, fuzzy
 msgid "Open Order"
-msgstr "Comanda speciala"
+msgstr ""
 
 #: MRPReport.php:255 MRPReport.php:317 MRPReport.php:379
 msgid "Planned"
@@ -14095,23 +13913,20 @@ msgid "Proj Avail"
 msgstr ""
 
 #: MRPReport.php:410
-#, fuzzy
 msgid "Dem Type"
-msgstr "Tip"
+msgstr ""
 
 #: MRPReport.php:411
-#, fuzzy
 msgid "Where Required"
-msgstr "Folosirea materialelor"
+msgstr ""
 
 #: MRPReport.php:416 MRPReschedules.php:203
 msgid "Order No."
 msgstr ""
 
 #: MRPReport.php:417
-#, fuzzy
 msgid "Sup Type"
-msgstr "Tip"
+msgstr ""
 
 #: MRPReport.php:418 SalesGraph.php:207 SalesGraph.php:215
 msgid "For"
@@ -14206,24 +14021,20 @@ msgid "MRP Reschedule Reporting"
 msgstr ""
 
 #: MRPReschedules.php:152 MRPShortages.php:249 Stocks.php:36
-#, fuzzy
 msgid "Stock"
-msgstr "ID Inventar"
+msgstr ""
 
 #: MRPReschedules.php:162
-#, fuzzy
 msgid "Work Orders Only"
-msgstr "Inserare Bon de Lucru"
+msgstr ""
 
 #: MRPReschedules.php:163
-#, fuzzy
 msgid "Purchase Orders Only"
-msgstr "Cumparate"
+msgstr ""
 
 #: MRPReschedules.php:193
-#, fuzzy
 msgid "Selection:"
-msgstr "Sectiune"
+msgstr ""
 
 #: MRPShortages.php:25 MRPShortages.php:285
 msgid "MRP Shortages Report"
@@ -14266,9 +14077,8 @@ msgid "Extended Shortage Dollars"
 msgstr ""
 
 #: MRPShortages.php:305
-#, fuzzy
 msgid "Supply"
-msgstr "Iulie"
+msgstr ""
 
 #: MRPShortages.php:306 StockLocStatus.php:152 StockStatus.php:85
 #: StockStatus.php:92
@@ -14288,9 +14098,8 @@ msgid "There are no offers outstanding that you are authorised to deal with"
 msgstr ""
 
 #: OffersReceived.php:91
-#, fuzzy
 msgid "Offer ID"
-msgstr "ID Utilizator"
+msgstr ""
 
 #: OffersReceived.php:93 PurchData.php:305 Stocks.php:355
 #: includes/PDFStockTransListingPageHeader.inc:67
@@ -14306,9 +14115,8 @@ msgid "Reject"
 msgstr ""
 
 #: OffersReceived.php:102
-#, fuzzy
 msgid "Defer"
-msgstr "Decembrie"
+msgstr ""
 
 #: OffersReceived.php:152 OffersReceived.php:232
 msgid ""
@@ -14395,9 +14203,8 @@ msgid "The SQL that failed to get the order header was"
 msgstr ""
 
 #: OrderDetails.php:59
-#, fuzzy
 msgid "Order Details"
-msgstr "Modificare Detalii Articol"
+msgstr ""
 
 #: OrderDetails.php:63
 msgid "Order Header Details For Order No"
@@ -14486,21 +14293,20 @@ msgid "Payment Allocation for Supplier"
 msgstr ""
 
 #: PaymentAllocations.php:33
-#, fuzzy
 msgid " and"
-msgstr "In depozit"
+msgstr ""
 
 #: PaymentAllocations.php:35
 msgid "This shows how the payment to the supplier was allocated"
 msgstr ""
 
 #: PaymentAllocations.php:35
-#, fuzzy
 msgid "Back to supplier inquiry"
-msgstr "Inapoi la meniu"
+msgstr ""
 
 #: PaymentAllocations.php:67
-msgid "There may be a problem retrieving the information. No data is returned"
+msgid ""
+"There may be a problem retrieving the information. No data is returned"
 msgstr ""
 
 #: PaymentAllocations.php:68
@@ -14693,7 +14499,8 @@ msgid "Cannot insert a payment transaction against the supplier because"
 msgstr ""
 
 #: Payments.php:422
-msgid "Cannot insert a payment transaction against the supplier using the SQL"
+msgid ""
+"Cannot insert a payment transaction against the supplier using the SQL"
 msgstr ""
 
 #: Payments.php:433
@@ -14709,7 +14516,8 @@ msgid ""
 msgstr ""
 
 #: Payments.php:458
-msgid "Cannot insert a GL transaction for the creditors account debit because"
+msgid ""
+"Cannot insert a GL transaction for the creditors account debit because"
 msgstr ""
 
 #: Payments.php:459
@@ -14718,7 +14526,8 @@ msgid ""
 msgstr ""
 
 #: Payments.php:479
-msgid "Cannot insert a GL transaction for the payment discount credit because"
+msgid ""
+"Cannot insert a GL transaction for the payment discount credit because"
 msgstr ""
 
 #: Payments.php:480
@@ -14744,9 +14553,8 @@ msgid "The commit of the database transaction failed"
 msgstr ""
 
 #: Payments.php:596
-#, fuzzy
 msgid "Enter another Payment for"
-msgstr "Introduceti Codul Articolului"
+msgstr ""
 
 #: Payments.php:598
 msgid "Enter another General Ledger Payment"
@@ -14937,9 +14745,8 @@ msgid "The payment term definition record has been deleted"
 msgstr ""
 
 #: PaymentTerms.php:178
-#, fuzzy
 msgid "Payment Terms."
-msgstr "Achitari"
+msgstr ""
 
 #: PaymentTerms.php:179 PaymentTerms.php:250 PaymentTerms.php:263
 msgid "Term Code"
@@ -14973,9 +14780,8 @@ msgid "Update Payment Terms."
 msgstr ""
 
 #: PaymentTerms.php:262
-#, fuzzy
 msgid "New Payment Terms."
-msgstr "Achitari"
+msgstr ""
 
 #: PaymentTerms.php:268
 msgid "Terms Description"
@@ -15025,9 +14831,8 @@ msgstr ""
 
 #: PcAssignCashToTab.php:213 PcAuthorizeExpenses.php:82
 #: PcExpensesTypeTab.php:144
-#, fuzzy
 msgid "Expense Code"
-msgstr "Introduceti Codul Articolului"
+msgstr ""
 
 #: PcAssignCashToTab.php:215 PO_AuthoriseMyOrders.php:90 PO_Header.php:783
 #: PO_Header.php:788 PO_Header.php:800 PO_Header.php:804
@@ -15044,9 +14849,8 @@ msgid ""
 msgstr ""
 
 #: PcAssignCashToTab.php:280 PcClaimExpensesFromTab.php:271
-#, fuzzy
 msgid "Current balance"
-msgstr "Reglaje valuta"
+msgstr ""
 
 #: PcAssignCashToTab.php:297
 msgid "Update Cash Assignment"
@@ -15077,9 +14881,8 @@ msgid "Authorized"
 msgstr ""
 
 #: PcAuthorizeExpenses.php:91 ReorderLevelLocation.php:64
-#, fuzzy
 msgid "update"
-msgstr "Data"
+msgstr ""
 
 #: PcAuthorizeExpenses.php:271
 msgid "Authorize expenses to Petty Cash Tab"
@@ -15123,9 +14926,8 @@ msgid "Date Of Expense"
 msgstr ""
 
 #: PcClaimExpensesFromTab.php:192 PcReportTab.php:346
-#, fuzzy
 msgid "Expense Description"
-msgstr "Descriere"
+msgstr ""
 
 #: PcClaimExpensesFromTab.php:312 PcExpenses.php:148 PcExpenses.php:220
 #: PcExpenses.php:230
@@ -15183,9 +14985,8 @@ msgid "Expense type"
 msgstr ""
 
 #: PcExpenses.php:151
-#, fuzzy
 msgid "Account Description"
-msgstr "Descriere"
+msgstr ""
 
 #: PcExpenses.php:177
 #, php-format
@@ -15239,9 +15040,8 @@ msgid "Expense Codes for Type of Tab "
 msgstr ""
 
 #: PcExpensesTypeTab.php:182
-#, fuzzy
 msgid "Select Expense Code"
-msgstr "Selectare Articol"
+msgstr ""
 
 #: PcReportTab.php:10
 msgid "Petty Cash Management Report"
@@ -15252,19 +15052,16 @@ msgid "Code Of Petty Cash Tab"
 msgstr ""
 
 #: PcReportTab.php:66
-#, fuzzy
 msgid "From Date :"
-msgstr "Din Data"
+msgstr ""
 
 #: PcReportTab.php:69
-#, fuzzy
 msgid "To Date:"
-msgstr "In Data"
+msgstr ""
 
 #: PcReportTab.php:72
-#, fuzzy
 msgid "Show HTML"
-msgstr "Vizionare"
+msgstr ""
 
 #: PcReportTab.php:81 PcReportTab.php:82
 msgid "Petty Cash Report Of Tab"
@@ -15304,9 +15101,8 @@ msgid "No Petty Cash tabs were returned by the SQL because"
 msgstr ""
 
 #: PcReportTab.php:136
-#, fuzzy
 msgid "Tab Code :"
-msgstr "Tabel"
+msgstr ""
 
 #: PcReportTab.php:137 PcReportTab.php:140 PcReportTab.php:145
 #: PcReportTab.php:148 PcReportTab.php:153 PcReportTab.php:158
@@ -15316,28 +15112,24 @@ msgid ": "
 msgstr ""
 
 #: PcReportTab.php:139
-#, fuzzy
 msgid "From "
-msgstr "Din Data"
+msgstr ""
 
 #: PcReportTab.php:144
-#, fuzzy
 msgid "User "
-msgstr "Utilizator"
+msgstr ""
 
 #: PcReportTab.php:147
-#, fuzzy
 msgid "To "
-msgstr "In Data"
+msgstr ""
 
 #: PcReportTab.php:152
 msgid "Authorizer "
 msgstr ""
 
 #: PcReportTab.php:157
-#, fuzzy
 msgid "Currency "
-msgstr "Valuta contului"
+msgstr ""
 
 #: PcReportTab.php:162 PcReportTab.php:307
 msgid "Balance before "
@@ -15360,9 +15152,8 @@ msgid "No Petty Cash Tabs were returned by the SQL because"
 msgstr ""
 
 #: PcReportTab.php:277 PcTabs.php:144
-#, fuzzy
 msgid "Tab Code"
-msgstr "Cod"
+msgstr ""
 
 #: PcReportTab.php:289 PcTabs.php:149 PcTabs.php:321
 msgid "Authorizer"
@@ -15385,9 +15176,8 @@ msgid "Balance At"
 msgstr ""
 
 #: PcReportTab.php:424
-#, fuzzy
 msgid "Select A Different Date"
-msgstr "Selectare Articol"
+msgstr ""
 
 #: PcTabs.php:7
 msgid "Maintenance Of Petty Cash Tabs"
@@ -15418,9 +15208,8 @@ msgid "The Tab record could not be deleted because"
 msgstr ""
 
 #: PcTabs.php:124 PcTypeTabs.php:134
-#, fuzzy
 msgid "Tab type"
-msgstr "Tip"
+msgstr ""
 
 #: PcTabs.php:145 PcTabs.php:256 PO_AuthorisationLevels.php:124
 #: SMTPServer.php:57 UserSettings.php:114
@@ -15455,9 +15244,8 @@ msgid "Show All Tabs Defined"
 msgstr ""
 
 #: PcTabs.php:238 PcTabs.php:247
-#, fuzzy
 msgid "Tabcode"
-msgstr "Tabel"
+msgstr ""
 
 #: PcTabs.php:319
 msgid "Limit Of Tab"
@@ -15488,9 +15276,8 @@ msgid "The Tab type "
 msgstr ""
 
 #: PcTypeTabs.php:84
-#, fuzzy
 msgid "Tabs type"
-msgstr "Tip"
+msgstr ""
 
 #: PcTypeTabs.php:107 PcTypeTabs.php:116
 msgid "The number of tabs using this Tab type could not be retrieved"
@@ -15527,9 +15314,8 @@ msgid "Select the batch number of receipts to be printed"
 msgstr ""
 
 #: PDFBankingSummary.php:35
-#, fuzzy
 msgid "Batch"
-msgstr "Martie"
+msgstr ""
 
 #: PDFBankingSummary.php:38 PDFChequeListing.php:64 PDFCustTransListing.php:48
 #: PDFDeliveryDifferences.php:65 PDFDIFOT.php:68 PDFOrdersInvoiced.php:67
@@ -15740,9 +15526,8 @@ msgstr ""
 
 #: PDFCustTransListing.php:20 PDFCustTransListing.php:24
 #: PDFCustTransListing.php:93
-#, fuzzy
 msgid "Customer Transaction Listing"
-msgstr "Tranzactii Articol"
+msgstr ""
 
 #: PDFCustTransListing.php:34 PDFStockTransListing.php:34
 #: PDFSuppTransListing.php:34
@@ -15763,9 +15548,8 @@ msgid "Credit Notes"
 msgstr ""
 
 #: PDFCustTransListing.php:74 PDFStockTransListing.php:85
-#, fuzzy
 msgid "An error occurred getting the transactions"
-msgstr "Eroare la actualizarea"
+msgstr ""
 
 #: PDFCustTransListing.php:76
 msgid "The SQL used to get the transaction information that failed was"
@@ -16042,9 +15826,8 @@ msgid "Create picking lists for all deliveries to be made on"
 msgstr ""
 
 #: PDFPickingList.php:36
-#, fuzzy
 msgid "From Warehouse"
-msgstr "Din Data"
+msgstr ""
 
 #: PDFPickingList.php:48
 msgid ""
@@ -16052,30 +15835,28 @@ msgid ""
 msgstr ""
 
 #: PDFPickingList.php:128 PDFPickingList.php:322
-#, fuzzy
 msgid "Print Picking List Error"
-msgstr "Imprimare Liste preturi"
+msgstr ""
 
 #: PDFPickingList.php:131
 msgid "Unable to Locate any orders for this criteria "
 msgstr ""
 
 #: PDFPickingList.php:133
-#, fuzzy
 msgid "Enter Another Date"
-msgstr "Introduceti Codul Articolului"
+msgstr ""
 
 #: PDFPickingList.php:184 includes/PDFPickingListHeader.inc:12
-#, fuzzy
 msgid "Picking List"
-msgstr "Lista Preturi"
+msgstr ""
 
 #: PDFPickingList.php:185
 msgid "Laser Picking List"
 msgstr ""
 
 #: PDFPickingList.php:203
-msgid "There was a problem retrieving the order line details for Order Number"
+msgid ""
+"There was a problem retrieving the order line details for Order Number"
 msgstr ""
 
 #: PDFPriceList.php:16
@@ -16136,23 +15917,20 @@ msgstr ""
 
 #: PDFPriceList.php:172 PricesByCost.php:140 Prices_Customer.php:220
 #: Prices_Customer.php:274 Prices.php:215
-#, fuzzy
 msgid "No End Date"
-msgstr "In Data"
+msgstr ""
 
 #: PDFPriceList.php:240
-#, fuzzy
 msgid "Price_List"
-msgstr "Lista Preturi"
+msgstr ""
 
 #: PDFPriceList.php:247
 msgid "Price Listing"
 msgstr ""
 
 #: PDFPriceList.php:251
-#, fuzzy
 msgid "Print a price list"
-msgstr "Imprimare Liste preturi"
+msgstr ""
 
 #: PDFPriceList.php:279 Z_DataExport.php:542
 msgid "For Sales Type/Price List"
@@ -16179,9 +15957,8 @@ msgid "Default Sales Type Prices"
 msgstr ""
 
 #: PDFPriceList.php:296
-#, fuzzy
 msgid "Full Description"
-msgstr "Descriere"
+msgstr ""
 
 #: PDFPriceList.php:299 PDFPriceList.php:336 PDFPriceList.php:338
 msgid "Effective As At"
@@ -16233,9 +16010,8 @@ msgid "Label Sticker Printing"
 msgstr ""
 
 #: PDFPrintLabel.php:92
-#, fuzzy
 msgid "Select label type"
-msgstr "Selectare Articol"
+msgstr ""
 
 #: PDFPrintLabel.php:93
 msgid "Number of labels per item"
@@ -16258,14 +16034,12 @@ msgid "Print labels with borders"
 msgstr ""
 
 #: PDFPrintLabel.php:230
-#, fuzzy
 msgid "Select a Category"
-msgstr "Selecteaza Categorie Inventar"
+msgstr ""
 
 #: PDFPrintLabel.php:235
-#, fuzzy
 msgid "This category has no items to show"
-msgstr "Nu este nici un raport"
+msgstr ""
 
 #: PDFPrintLabel.php:339
 msgid "Unit not defined in scale operation! Correct the template"
@@ -16348,9 +16122,8 @@ msgid "Print Another Quotation"
 msgstr ""
 
 #: PDFReceipt.php:10
-#, fuzzy
 msgid "Sales Receipt"
-msgstr "Plati"
+msgstr ""
 
 #: PDFReceipt.php:31
 msgid "Customer Receipt Number "
@@ -16414,38 +16187,32 @@ msgid "Remittance_Advices"
 msgstr ""
 
 #: PDFRemittanceAdvice.php:149
-#, fuzzy
 msgid "Date Of Payment"
-msgstr "Achitari"
+msgstr ""
 
 #: PDFRemittanceAdvice.php:174
-#, fuzzy
 msgid "Total Payment:"
-msgstr "Achitari"
+msgstr ""
 
 #: PDFRemittanceAdvice.php:216
-#, fuzzy
 msgid "printed:"
-msgstr "Imprimare"
+msgstr ""
 
 #: PDFRemittanceAdvice.php:269
-#, fuzzy
 msgid "Our Code:"
-msgstr "Cod"
+msgstr ""
 
 #: PDFRemittanceAdvice.php:311
-#, fuzzy
 msgid "This Payment"
-msgstr "Achitari"
+msgstr ""
 
 #: PDFStockCheckComparison.php:13
 msgid "Check Comparison Report"
 msgstr ""
 
 #: PDFStockCheckComparison.php:14
-#, fuzzy
 msgid "Inventory Check Comparison"
-msgstr "Amplasament Inventar"
+msgstr ""
 
 #: PDFStockCheckComparison.php:35 StockCheck.php:65
 msgid "Stock Freeze"
@@ -16542,9 +16309,8 @@ msgid "No counts entered"
 msgstr ""
 
 #: PDFStockCheckComparison.php:347
-#, fuzzy
 msgid "Inventory Comparison Report"
-msgstr "Raport Evaluare Inventar"
+msgstr ""
 
 #: PDFStockCheckComparison.php:356
 msgid "Choose Option"
@@ -16632,19 +16398,16 @@ msgid "Stock Transfer Form"
 msgstr ""
 
 #: PDFStockTransfer.php:37
-#, fuzzy
 msgid "There are no decription for "
-msgstr "Nu este nici un raport"
+msgstr ""
 
 #: PDFStockTransfer.php:50
-#, fuzzy
 msgid "There are no location From for "
-msgstr "Nu este nici un raport"
+msgstr ""
 
 #: PDFStockTransfer.php:63
-#, fuzzy
 msgid "There are no location To for "
-msgstr "Nu este nici un raport"
+msgstr ""
 
 #: PDFStockTransfer.php:77
 msgid "Date of transfer: "
@@ -16652,9 +16415,8 @@ msgstr ""
 
 #: PDFStockTransListing.php:20 PDFStockTransListing.php:24
 #: PDFStockTransListing.php:101
-#, fuzzy
 msgid "Stock Transaction Listing"
-msgstr "Tranzactii Articol"
+msgstr ""
 
 #: PDFStockTransListing.php:42 PrintCustTrans.php:37
 #: PrintCustTransPortrait.php:59 SalesInquiry.php:1061
@@ -16667,33 +16429,28 @@ msgid "Sales Credit Note"
 msgstr ""
 
 #: PDFStockTransListing.php:44
-#, fuzzy
 msgid "Location Transfer"
-msgstr "Cod Amplasament"
+msgstr ""
 
 #: PDFStockTransListing.php:45
-#, fuzzy
 msgid "Stock Adjustment"
-msgstr "Ajustari Inventar"
+msgstr ""
 
 #: PDFStockTransListing.php:46
 msgid "Purchase Order Delivery"
 msgstr ""
 
 #: PDFStockTransListing.php:47
-#, fuzzy
 msgid "Work Order Receipt"
-msgstr "Inserare Bon de Lucru"
+msgstr ""
 
 #: PDFStockTransListing.php:48
-#, fuzzy
 msgid "Work Order Issue"
-msgstr "Numar Bon de Lucru"
+msgstr ""
 
 #: PDFStockTransListing.php:83 PDFStockTransListing.php:89
-#, fuzzy
 msgid "Transaction Listing"
-msgstr "Tranzactii"
+msgstr ""
 
 #: PDFStockTransListing.php:102
 msgid "Stock transaction listing from"
@@ -16701,9 +16458,8 @@ msgstr ""
 
 #: PDFSuppTransListing.php:20 PDFSuppTransListing.php:24
 #: PDFSuppTransListing.php:93
-#, fuzzy
 msgid "Supplier Transaction Listing"
-msgstr "Tranzactii Articol"
+msgstr ""
 
 #: PDFSuppTransListing.php:94
 msgid "Supplier transaction listing from"
@@ -16714,9 +16470,8 @@ msgid "Top Items Search Result"
 msgstr ""
 
 #: PDFTopItems.php:122
-#, fuzzy
 msgid "There were no records returned "
-msgstr "Nu este nici un raport"
+msgstr ""
 
 #: PeriodsInquiry.php:10
 msgid "Periods Inquiry"
@@ -16735,9 +16490,8 @@ msgid "Date of Last Day"
 msgstr ""
 
 #: PO_AuthorisationLevels.php:9
-#, fuzzy
 msgid "Purchase Order Authorisation Maintenance"
-msgstr "Reglaje Amplasamente"
+msgstr ""
 
 #: PO_AuthorisationLevels.php:51
 msgid "The authentication details cannot be inserted because"
@@ -16760,9 +16514,8 @@ msgid "The authentication details cannot be retrieved because"
 msgstr ""
 
 #: PO_AuthorisationLevels.php:126
-#, fuzzy
 msgid "Create Order"
-msgstr "Comanda speciala"
+msgstr ""
 
 #: PO_AuthorisationLevels.php:127
 msgid "Can Release"
@@ -16773,9 +16526,8 @@ msgid "Authority Level"
 msgstr ""
 
 #: PO_AuthorisationLevels.php:196
-#, fuzzy
 msgid "User can create orders"
-msgstr "Introduceti Codul Articolului"
+msgstr ""
 
 #: PO_AuthorisationLevels.php:203
 msgid "User can release invoices"
@@ -16794,9 +16546,8 @@ msgid "Authorised by"
 msgstr ""
 
 #: PO_AuthoriseMyOrders.php:57
-#, fuzzy
 msgid "Date Ordered"
-msgstr "Inregistrare comanda"
+msgstr ""
 
 #: PO_AuthoriseMyOrders.php:58 PO_OrderDetails.php:105
 #: PO_SelectPurchOrder.php:362 includes/PO_PDFOrderPageHeader.inc:54
@@ -16805,9 +16556,8 @@ msgstr ""
 
 #: PO_AuthoriseMyOrders.php:59 PO_Header.php:722 PO_Items.php:1026
 #: POReport.php:1429 includes/PDFPickingListHeader.inc:46
-#, fuzzy
 msgid "Delivery Date"
-msgstr "Sterge"
+msgstr ""
 
 #: PO_AuthoriseMyOrders.php:91 PO_Header.php:784 PO_Header.php:798
 #: PO_SelectOSPurchOrder.php:176 PO_SelectOSPurchOrder.php:178
@@ -16818,9 +16568,8 @@ msgstr ""
 #: PO_AuthoriseMyOrders.php:92 PO_Header.php:803 PO_SelectOSPurchOrder.php:171
 #: PO_SelectOSPurchOrder.php:173 PO_SelectPurchOrder.php:140
 #: PO_SelectPurchOrder.php:142
-#, fuzzy
 msgid "Cancelled"
-msgstr "Calculat"
+msgstr ""
 
 #: PO_AuthoriseMyOrders.php:105
 msgid "Product"
@@ -16886,7 +16635,8 @@ msgid "You can only authorise up to"
 msgstr ""
 
 #: PO_Header.php:96 PO_Header.php:120 PO_Header.php:138
-msgid "If you think this is a mistake please contact the systems administrator"
+msgid ""
+"If you think this is a mistake please contact the systems administrator"
 msgstr ""
 
 #: PO_Header.php:106
@@ -16933,7 +16683,8 @@ msgid "Order set to pending status by"
 msgstr ""
 
 #: PO_Header.php:138
-msgid "You do not have permission to change the status of this purchase order"
+msgid ""
+"You do not have permission to change the status of this purchase order"
 msgstr ""
 
 #: PO_Header.php:155
@@ -17012,9 +16763,8 @@ msgid "Purchase Order"
 msgstr ""
 
 #: PO_Header.php:508
-#, fuzzy
 msgid "Purchase Order: Select Supplier"
-msgstr "Selectare Furnizor"
+msgstr ""
 
 #: PO_Header.php:514
 msgid "Enter text in the supplier name"
@@ -17036,14 +16786,12 @@ msgstr ""
 #: PO_Header.php:533 PO_Header.php:940 PO_Header.php:943 PO_Header.php:946
 #: PO_Header.php:949 PO_Header.php:952 PO_Header.php:955 PO_Header.php:1013
 #: PO_Header.php:1016 PO_Header.php:1019 PO_Header.php:1022 PO_Header.php:1025
-#, fuzzy
 msgid "Address"
-msgstr "Adresa Bancii"
+msgstr ""
 
 #: PO_Header.php:584
-#, fuzzy
 msgid " Modify Purchase Order Number"
-msgstr "Numar Bon de Lucru"
+msgstr ""
 
 #: PO_Header.php:589
 msgid "Purchase Item(s) with this code"
@@ -17058,9 +16806,8 @@ msgid "Order Initiation Details"
 msgstr ""
 
 #: PO_Header.php:695
-#, fuzzy
 msgid "PO Date"
-msgstr "Data"
+msgstr ""
 
 #: PO_Header.php:717
 msgid "Version"
@@ -17095,28 +16842,24 @@ msgid "Receive this order"
 msgstr ""
 
 #: PO_Header.php:776
-#, fuzzy
 msgid "New Purchase Order"
-msgstr "Cumparate"
+msgstr ""
 
 #: PO_Header.php:811
-#, fuzzy
 msgid "Status Comment"
-msgstr "Statut"
+msgstr ""
 
 #: PO_Header.php:816
-#, fuzzy
 msgid "Status Update"
-msgstr "Statut"
+msgstr ""
 
 #: PO_Header.php:823
 msgid "Warehouse Info"
 msgstr ""
 
 #: PO_Header.php:825
-#, fuzzy
 msgid "Supplier Info"
-msgstr "Inregistrare Furnizor"
+msgstr ""
 
 #: PO_Header.php:830 includes/PDFPickingListHeader.inc:13
 msgid "Warehouse"
@@ -17145,9 +16888,8 @@ msgid "Supplier Selection"
 msgstr ""
 
 #: PO_Header.php:992
-#, fuzzy
 msgid "Select Now"
-msgstr "Cautare"
+msgstr ""
 
 #: PO_Header.php:994
 msgid "Supplier Contact"
@@ -17405,9 +17147,8 @@ msgid ""
 msgstr ""
 
 #: PO_Items.php:907
-#, fuzzy
 msgid " Order Summary"
-msgstr "Numar Bon de Lucru"
+msgstr ""
 
 #: PO_Items.php:914 SelectProduct.php:110
 msgid "Weight"
@@ -17426,9 +17167,8 @@ msgid " excluding Tax"
 msgstr ""
 
 #: PO_Items.php:996
-#, fuzzy
 msgid "General Ledger Code"
-msgstr "Contabilitate"
+msgstr ""
 
 #: PO_Items.php:1008
 msgid "OR Asset ID"
@@ -17439,28 +17179,24 @@ msgid "Not an Asset"
 msgstr ""
 
 #: PO_Items.php:1014
-#, fuzzy
 msgid "Not yet purchased"
-msgstr "Cumparate"
+msgstr ""
 
 #: PO_Items.php:1021 SuppFixedAssetChgs.php:111
 msgid "New Fixed Asset"
 msgstr ""
 
 #: PO_Items.php:1022
-#, fuzzy
 msgid "Quantity to purchase"
-msgstr "Articole Comandate"
+msgstr ""
 
 #: PO_Items.php:1024
-#, fuzzy
 msgid "Price per item"
-msgstr "Lista Preturi"
+msgstr ""
 
 #: PO_Items.php:1082
-#, fuzzy
 msgid "Order a non stock item"
-msgstr "Manopera"
+msgstr ""
 
 #: PO_Items.php:1097
 msgid "Go to end of list"
@@ -17699,9 +17435,8 @@ msgid "You must first set up supplier contacts before emailing an order"
 msgstr ""
 
 #: POReport.php:12 POReport.php:513 POReport.php:1202
-#, fuzzy
 msgid "Purchase Order Report"
-msgstr "Cumparate"
+msgstr ""
 
 #: POReport.php:493 POReport.php:539 POReport.php:600 POReport.php:689
 #: POReport.php:701 POReport.php:1184 POReport.php:1227 POReport.php:1278
@@ -17715,9 +17450,8 @@ msgstr ""
 #: SalesInquiry.php:757 SalesInquiry.php:779 SalesInquiry.php:927
 #: SalesInquiry.php:942 SalesInquiry.php:948 SalesInquiry.php:1080
 #: SalesInquiry.php:1141 SalesInquiry.php:1157
-#, fuzzy
 msgid "Customer Number"
-msgstr "Numar Bon de Lucru"
+msgstr ""
 
 #: POReport.php:496 POReport.php:693 POReport.php:694 POReport.php:1187
 #: POReport.php:1359 POReport.php:1360 POReport.php:1517 SalesGraph.php:252
@@ -17727,15 +17461,13 @@ msgid "Month"
 msgstr ""
 
 #: POReport.php:512
-#, fuzzy
 msgid "Header Details"
-msgstr "Modificare Detalii Articol"
+msgstr ""
 
 #: POReport.php:514 POReport.php:1203 POReport.php:1426 SalesInquiry.php:773
 #: SalesInquiry.php:1052
-#, fuzzy
 msgid "Date Type"
-msgstr "Data/Ora"
+msgstr ""
 
 #: POReport.php:515 POReport.php:1204 POReport.php:1433 SalesInquiry.php:774
 #: SalesInquiry.php:1066 StockStatus.php:308
@@ -17748,9 +17480,8 @@ msgstr ""
 
 #: POReport.php:525 POReport.php:1214 POReport.php:1484 SalesInquiry.php:784
 #: SalesInquiry.php:1101
-#, fuzzy
 msgid "Line Item Status"
-msgstr "Info Articol din Inventar"
+msgstr ""
 
 #: POReport.php:532 POReport.php:593 POReport.php:1220 POReport.php:1271
 #: SalesInquiry.php:801 SalesInquiry.php:819
@@ -17762,9 +17493,8 @@ msgid "Order No"
 msgstr ""
 
 #: POReport.php:535 POReport.php:596 POReport.php:1223 POReport.php:1274
-#, fuzzy
 msgid "Supplier No"
-msgstr "Inregistrare Furnizor"
+msgstr ""
 
 #: POReport.php:537 POReport.php:1225 SalesInquiry.php:807
 msgid "Order Qty"
@@ -17779,20 +17509,17 @@ msgstr ""
 #: POReport.php:540 POReport.php:601 POReport.php:702 POReport.php:1228
 #: POReport.php:1279 POReport.php:1368 SalesInquiry.php:810
 #: SalesInquiry.php:826 SalesInquiry.php:977
-#, fuzzy
 msgid "Invoiced Qty"
-msgstr "Numar Factura"
+msgstr ""
 
 #: POReport.php:541 POReport.php:602 POReport.php:1229 POReport.php:1280
 #: SalesInquiry.php:811 SalesInquiry.php:829
-#, fuzzy
 msgid "Line Status"
-msgstr "Statut"
+msgstr ""
 
 #: POReport.php:542 POReport.php:1230 SalesInquiry.php:812
-#, fuzzy
 msgid "Item Due"
-msgstr "Articole"
+msgstr ""
 
 #: POReport.php:580 POReport.php:642 POReport.php:735 POReport.php:1258
 #: POReport.php:1310 POReport.php:1395 SalesInquiry.php:888
@@ -17835,9 +17562,8 @@ msgid "Not Completed"
 msgstr ""
 
 #: POReport.php:1491 SalesInquiry.php:1108
-#, fuzzy
 msgid "Stock Categories"
-msgstr "Categorie Inventar"
+msgstr ""
 
 #: POReport.php:1494 PricesByCost.php:177 SalesInquiry.php:1111
 msgid "All Categories"
@@ -17906,9 +17632,8 @@ msgid "Into Stock Location"
 msgstr ""
 
 #: PO_SelectOSPurchOrder.php:154 PO_SelectPurchOrder.php:123
-#, fuzzy
 msgid "Order Status:"
-msgstr "Statut"
+msgstr ""
 
 #: PO_SelectOSPurchOrder.php:156 PO_SelectOSPurchOrder.php:158
 #: PO_SelectPurchOrder.php:125 PO_SelectPurchOrder.php:127
@@ -18085,7 +17810,8 @@ msgid ""
 msgstr ""
 
 #: PricesBasedOnMarkUp.php:196
-msgid "The date this new price is to start from is expected to be after today"
+msgid ""
+"The date this new price is to start from is expected to be after today"
 msgstr ""
 
 #: PricesBasedOnMarkUp.php:199
@@ -18209,34 +17935,28 @@ msgid "the"
 msgstr ""
 
 #: PricesByCost.php:79
-#, fuzzy
 msgid "category"
-msgstr "Categorie Inventar"
+msgstr ""
 
 #: PricesByCost.php:81
-#, fuzzy
 msgid "all Categories"
-msgstr "Reglaje Categorii Vanzari"
+msgstr ""
 
 #: PricesByCost.php:84
-#, fuzzy
 msgid "Items in"
-msgstr "Articole"
+msgstr ""
 
 #: PricesByCost.php:84
-#, fuzzy
 msgid "With Prices"
-msgstr "Imprimare Liste preturi"
+msgstr ""
 
 #: PricesByCost.php:84
-#, fuzzy
 msgid "times"
-msgstr "Articole"
+msgstr ""
 
 #: PricesByCost.php:84
-#, fuzzy
 msgid "Cost in Price List"
-msgstr "Imprimare Liste preturi"
+msgstr ""
 
 #: PricesByCost.php:92 Prices_Customer.php:360 Prices.php:201
 #: RecurringSalesOrders.php:414 WorkOrderEntry.php:475
@@ -18418,14 +18138,12 @@ msgid "The price has been updated"
 msgstr ""
 
 #: Prices.php:142
-#, fuzzy
 msgid "The new price could not be added"
-msgstr "Inregistrare inserata"
+msgstr ""
 
 #: Prices.php:146
-#, fuzzy
 msgid "The new price has been inserted"
-msgstr "Inregistrare inserata"
+msgstr ""
 
 #: Prices.php:162
 msgid "Could not delete this price"
@@ -18592,9 +18310,8 @@ msgid "No Statements Found"
 msgstr ""
 
 #: PrintCustStatements.php:422
-#, fuzzy
 msgid "There were no statements to print"
-msgstr "Nu este nici un raport"
+msgstr ""
 
 #: PrintCustStatements.php:429
 msgid "Select Statements to Print"
@@ -18831,14 +18548,12 @@ msgid "GST Number"
 msgstr ""
 
 #: PrintCustTransPortrait.php:91
-#, fuzzy
 msgid "Account:"
-msgstr "Suma"
+msgstr ""
 
 #: PrintCustTransPortrait.php:92
-#, fuzzy
 msgid "Bank Code:"
-msgstr "Adresa Bancii"
+msgstr ""
 
 #: PrintCustTransPortrait.php:597
 msgid "Print Invoices or Credit Notes (Portrait Mode)"
@@ -18950,9 +18665,8 @@ msgid "This purchasing data record has been successfully deleted"
 msgstr ""
 
 #: PurchData.php:141 PurchData.php:231 PurchData.php:250
-#, fuzzy
 msgid "For Stock Code"
-msgstr "Cod Inventar"
+msgstr ""
 
 #: PurchData.php:159
 msgid ""
@@ -18969,9 +18683,8 @@ msgid "Supplier Unit"
 msgstr ""
 
 #: PurchData.php:171 SelectProduct.php:327
-#, fuzzy
 msgid "Min Order Qty"
-msgstr "Inserare Bon de Lucru"
+msgstr ""
 
 #: PurchData.php:173
 msgid "Preferred"
@@ -19093,9 +18806,8 @@ msgid "Date Updated"
 msgstr ""
 
 #: PurchData.php:434
-#, fuzzy
 msgid "Our Unit of Measure"
-msgstr "Unitatea de masura"
+msgstr ""
 
 #: PurchData.php:438
 msgid "Suppliers Unit of Measure"
@@ -19106,18 +18818,16 @@ msgid "Conversion Factor (to our UOM)"
 msgstr ""
 
 #: PurchData.php:455
-#, fuzzy
 msgid "Supplier Stock Code"
-msgstr "Cod Inventar"
+msgstr ""
 
 #: PurchData.php:457
 msgid "MinOrderQty"
 msgstr ""
 
 #: PurchData.php:459
-#, fuzzy
 msgid "Supplier Stock Description"
-msgstr "Descriere Categorie"
+msgstr ""
 
 #: PurchData.php:464
 msgid "in days from date of order"
@@ -19199,7 +18909,8 @@ msgid ""
 msgstr ""
 
 #: RecurringSalesOrders.php:189
-msgid "The end date of this recurring order must be a valid date in the format"
+msgid ""
+"The end date of this recurring order must be a valid date in the format"
 msgstr ""
 
 #: RecurringSalesOrders.php:193
@@ -19406,23 +19117,20 @@ msgid "Reorder Level Location Reporting"
 msgstr ""
 
 #: ReorderLevelLocation.php:13
-#, fuzzy
 msgid "Inventory Reorder Level Location Report"
-msgstr "Raport Evaluare Inventar"
+msgstr ""
 
 #: ReorderLevelLocation.php:51
-#, fuzzy
 msgid "Location : "
-msgstr "Amplasare"
+msgstr ""
 
 #: ReorderLevelLocation.php:52
 msgid "Number Of Days Sales : "
 msgstr ""
 
 #: ReorderLevelLocation.php:52
-#, fuzzy
 msgid " Days "
-msgstr "Zile"
+msgstr ""
 
 #: ReorderLevelLocation.php:56 ReorderLevelLocation.php:57
 #: ReorderLevelLocation.php:202 TopItems.php:158
@@ -19430,34 +19138,28 @@ msgid "Total Invoiced"
 msgstr ""
 
 #: ReorderLevelLocation.php:56 ReorderLevelLocation.php:58
-#, fuzzy
 msgid "At All Locations"
-msgstr "Toate Amplasamentele"
+msgstr ""
 
 #: ReorderLevelLocation.php:57 ReorderLevelLocation.php:59
-#, fuzzy
 msgid "At Location"
-msgstr "Amplasare"
+msgstr ""
 
 #: ReorderLevelLocation.php:96
-#, fuzzy
 msgid "order"
-msgstr "Cod"
+msgstr ""
 
 #: ReorderLevelLocation.php:97
-#, fuzzy
 msgid "StockLocation"
-msgstr "Amplasament Inventar"
+msgstr ""
 
 #: ReorderLevelLocation.php:98
-#, fuzzy
 msgid "StockCat"
-msgstr "Categorie Inventar"
+msgstr ""
 
 #: ReorderLevelLocation.php:99
-#, fuzzy
 msgid "NumberOfDays"
-msgstr "Numar"
+msgstr ""
 
 #: ReorderLevelLocation.php:100
 msgid "id"
@@ -19498,9 +19200,8 @@ msgid "Reorder Level Reporting"
 msgstr ""
 
 #: ReorderLevel.php:173
-#, fuzzy
 msgid "Inventory Reorder Level Report"
-msgstr "Raport Evaluare Inventar"
+msgstr ""
 
 #: ReorderLevel.php:182 SelectSalesOrder.php:119 StockDispatch.php:240
 #: StockLocMovements.php:19 StockLocStatus.php:30 StockLocTransfer.php:144
@@ -19790,7 +19491,8 @@ msgid "The SQL used to delete this report column was"
 msgstr ""
 
 #: SalesAnalReptCols.php:242
-msgid "The column definitions could not be retrieved from the database because"
+msgid ""
+"The column definitions could not be retrieved from the database because"
 msgstr ""
 
 #: SalesAnalReptCols.php:243
@@ -20497,9 +20199,8 @@ msgid "There is not sales data for the criteria entered to graph"
 msgstr ""
 
 #: SalesInquiry.php:10 SalesInquiry.php:767
-#, fuzzy
 msgid "Sales Inquiry"
-msgstr "Folosirea materialelor"
+msgstr ""
 
 #: SalesInquiry.php:80
 msgid "Cannot summarize by transaction number with a date type of Order Date"
@@ -20518,18 +20219,16 @@ msgid "Order Type - Quotations"
 msgstr ""
 
 #: SalesInquiry.php:795 SalesInquiry.php:1058
-#, fuzzy
 msgid "Invoice Type"
-msgstr "Numar Factura"
+msgstr ""
 
 #: SalesInquiry.php:804 SalesInquiry.php:823
 msgid "Debtor No"
 msgstr ""
 
 #: SalesInquiry.php:805 SalesInquiry.php:824
-#, fuzzy
 msgid "Debtor Name"
-msgstr "Nume utilizator"
+msgstr ""
 
 #: SalesInquiry.php:820
 msgid "Trans. No"
@@ -20549,9 +20248,8 @@ msgid "Salesman Name"
 msgstr ""
 
 #: SalesInquiry.php:964
-#, fuzzy
 msgid "Area Description"
-msgstr "Descriere"
+msgstr ""
 
 #: SalesInquiry.php:1046
 msgid "Order Type"
@@ -20594,7 +20292,8 @@ msgid "The salesperson name must be thirty characters or less long"
 msgstr ""
 
 #: SalesPeople.php:52 SalesPeople.php:56
-msgid "The salesperson telephone number must be twenty characters or less long"
+msgid ""
+"The salesperson telephone number must be twenty characters or less long"
 msgstr ""
 
 #: SalesPeople.php:60
@@ -20808,24 +20507,20 @@ msgid "Define Asset Categories"
 msgstr ""
 
 #: SelectAsset.php:53 SelectAsset.php:55
-#, fuzzy
 msgid "Any asset category"
-msgstr "Selecteaza Categorie Inventar"
+msgstr ""
 
 #: SelectAsset.php:67
-#, fuzzy
 msgid "Enter partial description"
-msgstr "Descriere Categorie"
+msgstr ""
 
 #: SelectAsset.php:78 SelectAsset.php:80
-#, fuzzy
 msgid "Any asset location"
-msgstr "Amplasament Inventar"
+msgstr ""
 
 #: SelectAsset.php:93
-#, fuzzy
 msgid "Enter partial asset code"
-msgstr "Introduceti Codul Articolului"
+msgstr ""
 
 #: SelectAsset.php:114
 msgid ""
@@ -20892,9 +20587,8 @@ msgid "Sales Orders"
 msgstr ""
 
 #: SelectContract.php:11
-#, fuzzy
 msgid "Select A Contract"
-msgstr "Selectare Articol"
+msgstr ""
 
 #: SelectContract.php:49 SelectContract.php:55 SelectContract.php:61
 #: SelectContract.php:67 SelectContract.php:73
@@ -20908,9 +20602,8 @@ msgstr ""
 
 #: SelectContract.php:53 SelectContract.php:59 SelectContract.php:65
 #: SelectContract.php:71 SelectContract.php:77
-#, fuzzy
 msgid "All Contracts"
-msgstr "Toate Amplasamentele"
+msgstr ""
 
 #: SelectContract.php:82
 msgid "New Contract"
@@ -20968,9 +20661,8 @@ msgid "The customer record of the customer selected"
 msgstr ""
 
 #: SelectCreditItems.php:204
-#, fuzzy
 msgid "Select Customer For Credit Note"
-msgstr "Creare nota de credit"
+msgstr ""
 
 #: SelectCreditItems.php:206
 msgid "Customer Selection"
@@ -21161,7 +20853,8 @@ msgid ""
 msgstr ""
 
 #: SelectCreditItems.php:1758 SelectCreditItems.php:1786
-msgid "The cost of the stock credited GL posting could not be inserted because"
+msgid ""
+"The cost of the stock credited GL posting could not be inserted because"
 msgstr ""
 
 #: SelectCreditItems.php:1811
@@ -21219,14 +20912,12 @@ msgid "Customer Inquiries"
 msgstr ""
 
 #: SelectCustomer.php:279 SelectCustomer.php:302
-#, fuzzy
 msgid "Customer Transactions"
-msgstr "Tranzactii Articol"
+msgstr ""
 
 #: SelectCustomer.php:284
-#, fuzzy
 msgid "View Customer Details"
-msgstr "Modificare Detalii Articol"
+msgstr ""
 
 #: SelectCustomer.php:285
 msgid "Print Customer Statement"
@@ -21273,9 +20964,8 @@ msgid "Enter a partial Phone Number"
 msgstr ""
 
 #: SelectCustomer.php:341
-#, fuzzy
 msgid "Enter part of the Address"
-msgstr "Introduceti Codul Articolului"
+msgstr ""
 
 #: SelectCustomer.php:349
 msgid "Choose a Type"
@@ -21294,9 +20984,8 @@ msgid "Choose an Area"
 msgstr ""
 
 #: SelectCustomer.php:399
-#, fuzzy
 msgid "No Sales Areas defined"
-msgstr "Reglaje Vanzari"
+msgstr ""
 
 #: SelectCustomer.php:418
 msgid "Your account enables you to see only customers allocated to you"
@@ -21536,9 +21225,8 @@ msgid "This sales order has been cancelled as requested"
 msgstr ""
 
 #: SelectOrderItems.php:736
-#, fuzzy
 msgid "Quotation for customer"
-msgstr "inregistrare amplasament deoarece"
+msgstr ""
 
 #: SelectOrderItems.php:738
 msgid "Order for customer"
@@ -21590,7 +21278,8 @@ msgid ""
 msgstr ""
 
 #: SelectOrderItems.php:1126
-msgid "The quantity delivered and invoiced cannot be modified retrospectively"
+msgid ""
+"The quantity delivered and invoiced cannot be modified retrospectively"
 msgstr ""
 
 #: SelectOrderItems.php:1149
@@ -21611,8 +21300,8 @@ msgstr ""
 #: SelectOrderItems.php:1295
 msgid ""
 "Quantity (required) - Enter the number of units ordered.  Price (required) - "
-"Enter the unit price.  Discount (optional) - Enter a percentage discount.  GP"
-"% (optional) - Enter a percentage Gross Profit (GP) to add to the unit "
+"Enter the unit price.  Discount (optional) - Enter a percentage discount.  "
+"GP% (optional) - Enter a percentage Gross Profit (GP) to add to the unit "
 "cost.  Due Date (optional) - Enter a date for delivery."
 msgstr ""
 
@@ -21674,14 +21363,12 @@ msgid "Search Inventory Items"
 msgstr ""
 
 #: SelectProduct.php:14 SelectRecurringSalesOrder.php:12
-#, fuzzy
 msgid "Inventory Items"
-msgstr "Insereaza Articole Inventar"
+msgstr ""
 
 #: SelectProduct.php:74
-#, fuzzy
 msgid "Item Type:"
-msgstr "Tip Inventar"
+msgstr ""
 
 #: SelectProduct.php:77
 msgid "Assembly Item"
@@ -21970,9 +21657,8 @@ msgstr ""
 
 #: SelectSupplier.php:165 SuppPriceList.php:17 SuppPriceList.php:197
 #: SuppPriceList.php:199
-#, fuzzy
 msgid "Supplier Price List"
-msgstr "Lista Preturi"
+msgstr ""
 
 #: SelectSupplier.php:167
 msgid "Enter a Purchase Order for This Supplier"
@@ -22067,9 +21753,8 @@ msgid "No items were returned by the SQL because"
 msgstr ""
 
 #: SelectWorkOrder.php:109
-#, fuzzy
 msgid "For the item"
-msgstr "Manopera"
+msgstr ""
 
 #: SelectWorkOrder.php:111
 msgid "Work Order number"
@@ -22610,9 +22295,8 @@ msgid "SMTP Server"
 msgstr ""
 
 #: SMTPServer.php:12
-#, fuzzy
 msgid "SMTP Server Settings"
-msgstr "Setari Utilizatori"
+msgstr ""
 
 #: SMTPServer.php:23
 msgid "The settings for the SMTP server have been successfully updated"
@@ -22639,9 +22323,8 @@ msgid "True"
 msgstr ""
 
 #: SMTPServer.php:51 SMTPServer.php:54
-#, fuzzy
 msgid "False"
-msgstr "Tabel"
+msgstr ""
 
 #: SMTPServer.php:61
 msgid "Timeout (seconds)"
@@ -22712,7 +22395,8 @@ msgid ""
 msgstr ""
 
 #: SpecialOrder.php:183 SpecialOrder.php:255
-msgid "The person entering this order must be specified in the initiator field"
+msgid ""
+"The person entering this order must be specified in the initiator field"
 msgstr ""
 
 #: SpecialOrder.php:183 SpecialOrder.php:255
@@ -22778,7 +22462,8 @@ msgid ""
 msgstr ""
 
 #: SpecialOrder.php:423
-msgid "The SQL statement used to get the delivery details and that failed was"
+msgid ""
+"The SQL statement used to get the delivery details and that failed was"
 msgstr ""
 
 #: SpecialOrder.php:466
@@ -22906,14 +22591,12 @@ msgstr ""
 
 #: StockAdjustments.php:50 StockCategories.php:13 StockCostUpdate.php:23
 #: StockCounts.php:16
-#, fuzzy
 msgid "Inventory Adjustment"
-msgstr "Ajustari Inventar"
+msgstr ""
 
 #: StockAdjustments.php:55
-#, fuzzy
 msgid "Select Item to Adjust"
-msgstr "Alege depozitul"
+msgstr ""
 
 #: StockAdjustments.php:62 StockTransfers.php:25
 msgid "The stock information cannot be retrieved because"
@@ -22928,9 +22611,8 @@ msgid "Stock Description"
 msgstr ""
 
 #: StockAdjustments.php:67
-#, fuzzy
 msgid "Adjust"
-msgstr "August"
+msgstr ""
 
 #: StockAdjustments.php:80 StockCostUpdate.php:43 StockCostUpdate.php:65
 #: StockTransfers.php:126 StockTransfers.php:214
@@ -23259,16 +22941,16 @@ msgid ""
 msgstr ""
 
 #: StockCheck.php:14 StockCheck.php:15
-#, fuzzy
 msgid "Stock Count Sheets"
-msgstr "Inregistreaza Numarare Inventar"
+msgstr ""
 
 #: StockCheck.php:44 StockCheck.php:150
 msgid "Stock Count Sheets - Problem Report"
 msgstr ""
 
 #: StockCheck.php:46 StockCheck.php:97
-msgid "The inventory quantities could not be added to the freeze file because"
+msgid ""
+"The inventory quantities could not be added to the freeze file because"
 msgstr ""
 
 #: StockCheck.php:67
@@ -23311,9 +22993,8 @@ msgid "Stock Check Sheets"
 msgstr ""
 
 #: StockCheck.php:265
-#, fuzzy
 msgid "print"
-msgstr "Imprimare"
+msgstr ""
 
 #: StockCheck.php:298
 msgid "Action for Stock Check Freeze"
@@ -23493,9 +23174,8 @@ msgid "Save Changes"
 msgstr ""
 
 #: StockDispatch.php:18 StockDispatch.php:218
-#, fuzzy
 msgid "Stock Dispatch Report"
-msgstr "Categorie Inventar"
+msgstr ""
 
 #: StockDispatch.php:19
 msgid "Parts to dispatch to another location to cover reorder level"
@@ -23526,9 +23206,8 @@ msgid "Prepared By :"
 msgstr ""
 
 #: StockDispatch.php:190 StockDispatch.php:202
-#, fuzzy
 msgid "Hour"
-msgstr "Manopera"
+msgstr ""
 
 #: StockDispatch.php:192 StockDispatch.php:204
 msgid "Signature"
@@ -23539,9 +23218,8 @@ msgid "Received By :"
 msgstr ""
 
 #: StockDispatch.php:220
-#, fuzzy
 msgid "Inventory Stock Dispatch Report"
-msgstr "Formulare de verificare Inventar"
+msgstr ""
 
 #: StockDispatch.php:221
 msgid ""
@@ -23572,9 +23250,8 @@ msgid "Report Only"
 msgstr ""
 
 #: StockDispatch.php:303
-#, fuzzy
 msgid "Template"
-msgstr "Aparenta"
+msgstr ""
 
 #: StockDispatch.php:306
 msgid "Simple"
@@ -23585,9 +23262,8 @@ msgid "Stock Dispatch "
 msgstr ""
 
 #: StockDispatch.php:334
-#, fuzzy
 msgid "From :"
-msgstr "Din Data"
+msgstr ""
 
 #: StockDispatch.php:340
 msgid "Transfer No."
@@ -23598,9 +23274,8 @@ msgid "To :"
 msgstr ""
 
 #: StockDispatch.php:349
-#, fuzzy
 msgid "Percent"
-msgstr "Imprimare"
+msgstr ""
 
 #: StockDispatch.php:358
 msgid "QOH-From"
@@ -23642,9 +23317,8 @@ msgid "Trans No"
 msgstr ""
 
 #: StockLocMovements.php:91
-#, fuzzy
 msgid "Quantity on Hand"
-msgstr "Cantitate in depozit"
+msgstr ""
 
 #: StockLocStatus.php:8
 msgid "All Stock Status By Location/Category"
@@ -24176,7 +23850,8 @@ msgid "The economic order quantity must be a positive number"
 msgstr ""
 
 #: Stocks.php:162 Z_ImportStocks.php:166
-msgid "The item can only be serialised if there is lot control enabled already"
+msgid ""
+"The item can only be serialised if there is lot control enabled already"
 msgstr ""
 
 #: Stocks.php:162 Z_ImportStocks.php:166
@@ -24220,8 +23895,8 @@ msgstr ""
 
 #: Stocks.php:180
 msgid ""
-"Assemblies/Dummies/Phantom and Kitsets are not physical items and batch/"
-"serial control is therefore not appropriate"
+"Assemblies/Dummies/Phantom and Kitsets are not physical items and "
+"batch/serial control is therefore not appropriate"
 msgstr ""
 
 #: Stocks.php:186 Z_ImportStocks.php:180
@@ -24277,7 +23952,8 @@ msgid "The make or buy flag cannot be changed to"
 msgstr ""
 
 #: Stocks.php:265
-msgid "where there is a quantity outstanding to be received on purchase orders"
+msgid ""
+"where there is a quantity outstanding to be received on purchase orders"
 msgstr ""
 
 #: Stocks.php:265
@@ -24653,9 +24329,8 @@ msgid "Stock Transfers"
 msgstr ""
 
 #: StockTransfers.php:18
-#, fuzzy
 msgid "Select Item to Transfer"
-msgstr "Transfer Inventar"
+msgstr ""
 
 #: StockTransfers.php:78
 msgid "Unable to locate Stock Code"
@@ -24747,7 +24422,8 @@ msgid ""
 msgstr ""
 
 #: StockUsageGraph.php:61
-msgid "There are no movements of this item from the selected location to graph"
+msgid ""
+"There are no movements of this item from the selected location to graph"
 msgstr ""
 
 #: StockUsage.php:9
@@ -24806,14 +24482,12 @@ msgid ""
 msgstr ""
 
 #: SuppContractChgs.php:62
-#, fuzzy
 msgid "Contract charges on Invoice"
-msgstr "Comanda pentru facturare"
+msgstr ""
 
 #: SuppContractChgs.php:64
-#, fuzzy
 msgid "Contract credits on Credit Note"
-msgstr "Creare nota de credit"
+msgstr ""
 
 #: SuppContractChgs.php:104 SuppFixedAssetChgs.php:21 SuppInvGRNs.php:152
 #: SuppShiptChgs.php:23 SuppTransGLAnalysis.php:131
@@ -24821,9 +24495,8 @@ msgid "Back to Invoice Entry"
 msgstr ""
 
 #: SuppContractChgs.php:119
-#, fuzzy
 msgid "Contract Selection"
-msgstr "Setari Configurare"
+msgstr ""
 
 #: SuppContractChgs.php:119 SuppShiptChgs.php:108 SuppTransGLAnalysis.php:150
 msgid "If you know the code enter it above"
@@ -24834,9 +24507,8 @@ msgid "otherwise select the contract from the list"
 msgstr ""
 
 #: SuppContractChgs.php:146
-#, fuzzy
 msgid "Aniticpated Cost"
-msgstr "Costul unitatii"
+msgstr ""
 
 #: SuppContractChgs.php:156
 msgid "Enter Contract Charge"
@@ -25021,9 +24693,8 @@ msgid ""
 msgstr ""
 
 #: SuppFixedAssetChgs.php:112
-#, fuzzy
 msgid "Asset Selection"
-msgstr "Sectiune"
+msgstr ""
 
 #: SuppFixedAssetChgs.php:140
 msgid "Enter Fixed Asset"
@@ -25139,9 +24810,8 @@ msgid "Add Whole PO to Invoice"
 msgstr ""
 
 #: SuppInvGRNs.php:323
-#, fuzzy
 msgid "Select All"
-msgstr "Selectare Articol"
+msgstr ""
 
 #: SuppInvGRNs.php:324
 msgid "Deselect All"
@@ -25318,9 +24988,8 @@ msgid "Supplier Balances - Problem Report"
 msgstr ""
 
 #: SupplierBalsAtPeriodEnd.php:67
-#, fuzzy
 msgid "There are no supplier balances to list"
-msgstr "Nu este nici un raport"
+msgstr ""
 
 #: SupplierBalsAtPeriodEnd.php:116
 msgid "Supplier Balances At A Period End"
@@ -25400,9 +25069,8 @@ msgid "Supplier Credit Note"
 msgstr ""
 
 #: SupplierCredit.php:48
-#, fuzzy
 msgid "Enter Supplier Credit Note:"
-msgstr "Creare nota de credit"
+msgstr ""
 
 #: SupplierCredit.php:90 SupplierInvoice.php:74
 msgid "The supplier record selected"
@@ -25502,9 +25170,8 @@ msgid "Contract Charges"
 msgstr ""
 
 #: SupplierCredit.php:431 SupplierInvoice.php:405
-#, fuzzy
 msgid "General Ledger Analysis"
-msgstr "Contabilitate"
+msgstr ""
 
 #: SupplierCredit.php:478 SupplierCredit.php:481
 msgid "Credit Amount in Supplier Currency"
@@ -25587,7 +25254,8 @@ msgid ""
 msgstr ""
 
 #: SupplierCredit.php:615
-msgid "the general ledger entries (if any) and the charges for goods received"
+msgid ""
+"the general ledger entries (if any) and the charges for goods received"
 msgstr ""
 
 #: SupplierCredit.php:615
@@ -26169,7 +25837,8 @@ msgid "The supplier number already exists in the database"
 msgstr ""
 
 #: Suppliers.php:333
-msgid "The supplier name must be entered and be forty characters or less long"
+msgid ""
+"The supplier name must be entered and be forty characters or less long"
 msgstr ""
 
 #: Suppliers.php:339
@@ -26255,9 +25924,8 @@ msgid "Supplier record for"
 msgstr ""
 
 #: Suppliers.php:665 Suppliers.php:815
-#, fuzzy
 msgid "Supplier Type"
-msgstr "Inregistrare Furnizor"
+msgstr ""
 
 #: Suppliers.php:673 Suppliers.php:826
 msgid "Supplier Since"
@@ -26339,9 +26007,8 @@ msgid "Create or View Offers from"
 msgstr ""
 
 #: SupplierTenders.php:50
-#, fuzzy
 msgid "Select option for tendering"
-msgstr "Selectare Bon de lucru"
+msgstr ""
 
 #: SupplierTenders.php:52
 msgid "View or Amend outstanding offers from"
@@ -26415,14 +26082,12 @@ msgstr ""
 #: api/api_xml-rpc.php:896 api/api_xml-rpc.php:927 api/api_xml-rpc.php:970
 #: api/api_xml-rpc.php:2195 api/api_xml-rpc.php:2231 api/api_xml-rpc.php:2277
 #: api/api_xml-rpc.php:2473 api/api_xml-rpc.php:2637
-#, fuzzy
 msgid "Stock ID"
-msgstr "ID Inventar"
+msgstr ""
 
 #: SupplierTenders.php:270
-#, fuzzy
 msgid "Expiry Date"
-msgstr "Din Data"
+msgstr ""
 
 #: SupplierTenders.php:375
 msgid "Select items to offer from"
@@ -26463,11 +26128,13 @@ msgid "Add/edit/delete Supplier Types"
 msgstr ""
 
 #: SupplierTypes.php:39
-msgid "The supplier type name description must be 100 characters or less long"
+msgid ""
+"The supplier type name description must be 100 characters or less long"
 msgstr ""
 
 #: SupplierTypes.php:46
-msgid "The supplier type name description must contain at least one character"
+msgid ""
+"The supplier type name description must contain at least one character"
 msgstr ""
 
 #: SupplierTypes.php:58
@@ -26483,9 +26150,8 @@ msgid "The supplier type "
 msgstr ""
 
 #: SupplierTypes.php:93 SupplierTypes.php:153
-#, fuzzy
 msgid "Supplier type"
-msgstr "Inregistrare Furnizor"
+msgstr ""
 
 #: SupplierTypes.php:142
 msgid ""
@@ -26503,9 +26169,9 @@ msgid "suppliers with this type code"
 msgstr ""
 
 #: SupplierTypes.php:194
-#, fuzzy, php-format
+#, php-format
 msgid "Are you sure you wish to delete this Supplier Type?"
-msgstr "Confirma iesirea din sistem"
+msgstr ""
 
 #: SuppPaymentRun.php:32 SuppPaymentRun.php:234
 msgid "Payment Run"
@@ -26609,42 +26275,36 @@ msgid "All Price"
 msgstr ""
 
 #: SuppPriceList.php:49
-#, fuzzy
 msgid "Current Price"
-msgstr "Reglaje valuta"
+msgstr ""
 
 #: SuppPriceList.php:199
-#, fuzzy
 msgid "Purchase"
-msgstr "Cumparate"
+msgstr ""
 
 #: SuppPriceList.php:200
 msgid "View the Price List from supplier"
 msgstr ""
 
 #: SuppPriceList.php:232
-#, fuzzy
 msgid "All Prices"
-msgstr "Lista Preturi"
+msgstr ""
 
 #: SuppPriceList.php:233
 msgid "Only Current Price"
 msgstr ""
 
 #: SuppPriceList.php:261
-#, fuzzy
 msgid "Supplier Price List for"
-msgstr "Lista Preturi"
+msgstr ""
 
 #: SuppPriceList.php:284
-#, fuzzy
 msgid "Date Price"
-msgstr "Data/Ora"
+msgstr ""
 
 #: SuppPriceList.php:285
-#, fuzzy
 msgid "Supp Code"
-msgstr "Cod Inventar"
+msgstr ""
 
 #: SuppShiptChgs.php:18
 msgid "Shipment Charges or Credits"
@@ -26817,7 +26477,8 @@ msgid "DefaultTaxCategory must be between 1 and 9"
 msgstr ""
 
 #: SystemParameters.php:78
-msgid "Default maximum number of records to display must be between 1 and 500"
+msgid ""
+"Default maximum number of records to display must be between 1 and 500"
 msgstr ""
 
 #: SystemParameters.php:82
@@ -27628,9 +27289,8 @@ msgid ""
 msgstr ""
 
 #: SystemParameters.php:951
-#, fuzzy
 msgid "Auto Create Work Orders"
-msgstr "Cautare Bon de Lucru"
+msgstr ""
 
 #: SystemParameters.php:962
 msgid ""
@@ -27640,9 +27300,8 @@ msgid ""
 msgstr ""
 
 #: SystemParameters.php:964
-#, fuzzy
 msgid "Default Factory Location"
-msgstr "Amplasament Producere"
+msgstr ""
 
 #: SystemParameters.php:968
 msgid "Could not load locations table"
@@ -27962,7 +27621,8 @@ msgid "customer branches referring to this tax group"
 msgstr ""
 
 #: TaxGroups.php:134
-msgid "Cannot delete this tax group because some suppliers are setup using it"
+msgid ""
+"Cannot delete this tax group because some suppliers are setup using it"
 msgstr ""
 
 #: TaxGroups.php:135
@@ -28063,7 +27723,8 @@ msgid "Total Outputs"
 msgstr ""
 
 #: Tax.php:176
-msgid "The accounts payable transaction details could not be retrieved because"
+msgid ""
+"The accounts payable transaction details could not be retrieved because"
 msgstr ""
 
 #: Tax.php:187 Tax.php:274
@@ -28099,9 +27760,8 @@ msgid ""
 msgstr ""
 
 #: Tax.php:285
-#, fuzzy
 msgid "There are no tax entries to list"
-msgstr "Nu este nici un raport"
+msgstr ""
 
 #: Tax.php:295
 msgid "Tax Reporting"
@@ -28249,33 +27909,28 @@ msgid "Top Sales Order Search"
 msgstr ""
 
 #: TopItems.php:16
-#, fuzzy
 msgid "Select Location"
-msgstr "Amplasament Inventar"
+msgstr ""
 
 #: TopItems.php:27
-#, fuzzy
 msgid "Select Customer Type"
-msgstr "Selecteaza Categorie Inventar"
+msgstr ""
 
 #: TopItems.php:39
-#, fuzzy
 msgid "Select Order By "
-msgstr "Comanda pentru facturare"
+msgstr ""
 
 #: TopItems.php:42
-#, fuzzy
 msgid "Total Pieces"
-msgstr "Costul total"
+msgstr ""
 
 #: TopItems.php:43
 msgid "Value of Sales"
 msgstr ""
 
 #: TopItems.php:47 includes/PDFTopItemsHeader.inc:28
-#, fuzzy
 msgid "Number Of Days"
-msgstr "Numar"
+msgstr ""
 
 #: TopItems.php:52
 msgid "Number Of Top Items"
@@ -28290,14 +27945,12 @@ msgid "#"
 msgstr ""
 
 #: TopItems.php:160 includes/PDFTopItemsHeader.inc:58
-#, fuzzy
 msgid "Value Sales"
-msgstr "Vanzari"
+msgstr ""
 
 #: TopItems.php:202
-#, fuzzy
 msgid "Print To PDF"
-msgstr "Afiseaza PDF"
+msgstr ""
 
 #: UnitsOfMeasure.php:8
 msgid "Units Of Measure"
@@ -28554,9 +28207,8 @@ msgstr ""
 
 #: UpgradeDatabase.php:166 Z_Upgrade_3.10-3.11.php:83
 #: Z_Upgrade_3.11-4.00.php:83
-#, fuzzy
 msgid "Error number"
-msgstr "Numar Bon de Lucru"
+msgstr ""
 
 #: UserSettings.php:8 UserSettings.php:12
 msgid "User Settings"
@@ -29384,9 +29036,8 @@ msgid "Manual Issue"
 msgstr ""
 
 #: WOSerialNos.php:17
-#, fuzzy
 msgid "Work Order Serial Numbers in Progress"
-msgstr "Numar Bon de Lucru"
+msgstr ""
 
 #: WOSerialNos.php:19
 msgid "Work Order Batches in Progress"
@@ -29397,9 +29048,8 @@ msgid "This page must to be called from the work order entry screen"
 msgstr ""
 
 #: WOSerialNos.php:42
-#, fuzzy
 msgid "For Work Order Number"
-msgstr "Numar Bon de Lucru"
+msgstr ""
 
 #: WOSerialNos.php:42
 msgid "and output item"
@@ -29518,9 +29168,8 @@ msgid "Batch Ref"
 msgstr ""
 
 #: WOSerialNos.php:317
-#, fuzzy
 msgid "Back To Work Order"
-msgstr "Inapoi la bonuri de lucru"
+msgstr ""
 
 #: WWW_Access.php:9
 msgid "Access Permission Maintenance"
@@ -29695,7 +29344,8 @@ msgid "Inserting the new customer branches master record"
 msgstr ""
 
 #: Z_ChangeBranchCode.php:109
-msgid "The SQL to insert the new customer branch master record failed because"
+msgid ""
+"The SQL to insert the new customer branch master record failed because"
 msgstr ""
 
 #: Z_ChangeBranchCode.php:112
@@ -29801,7 +29451,8 @@ msgid "does not currently exist as a customer code in the system"
 msgstr ""
 
 #: Z_ChangeCustomerCode.php:22
-msgid "The new customer code to change the old code to must be entered as well"
+msgid ""
+"The new customer code to change the old code to must be entered as well"
 msgstr ""
 
 #: Z_ChangeCustomerCode.php:29
@@ -29900,9 +29551,8 @@ msgid "UTILITY PAGE Change A Stock Category"
 msgstr ""
 
 #: Z_ChangeStockCategory.php:17
-#, fuzzy
 msgid "The stock Category"
-msgstr "Categorie Inventar"
+msgstr ""
 
 #: Z_ChangeStockCategory.php:17
 msgid "does not currently exist as a stock category in the system"
@@ -29919,9 +29569,8 @@ msgid "The new stock code to change the old code to must be entered as well"
 msgstr ""
 
 #: Z_ChangeStockCategory.php:39
-#, fuzzy
 msgid "The replacement stock category"
-msgstr "Selecteaza Categorie Inventar"
+msgstr ""
 
 #: Z_ChangeStockCategory.php:39
 msgid "already exists as a stock category in the system"
@@ -29976,9 +29625,8 @@ msgid "The SQL to update stock master transaction records failed"
 msgstr ""
 
 #: Z_ChangeStockCategory.php:85
-#, fuzzy
 msgid "Deleting the old stock category record"
-msgstr "Selecteaza Categorie Inventar"
+msgstr ""
 
 #: Z_ChangeStockCategory.php:87
 msgid "The SQL to delete the old stock category record failed"
@@ -29993,9 +29641,8 @@ msgid "Existing Inventory Category Code"
 msgstr ""
 
 #: Z_ChangeStockCategory.php:97
-#, fuzzy
 msgid "New Inventory Category Code"
-msgstr "Cod Categorie"
+msgstr ""
 
 #: Z_ChangeStockCode.php:7
 msgid "UTILITY PAGE Change A Stock Code"
@@ -30318,7 +29965,8 @@ msgid "Create Chart Details Records"
 msgstr ""
 
 #: Z_CreateChartDetails.php:33 includes/GLPostings.inc:61
-msgid "Could not test to see that all chart detail records properly initiated"
+msgid ""
+"Could not test to see that all chart detail records properly initiated"
 msgstr ""
 
 #: Z_CreateChartDetails.php:46 includes/GLPostings.inc:74
@@ -30586,8 +30234,8 @@ msgstr ""
 
 #: Z_DeleteInvoice.php:16
 msgid ""
-"This page must be called with the InvoiceNo to delete Z_DeleteInvoice.php?"
-"InvoiceNo=XX"
+"This page must be called with the InvoiceNo to delete "
+"Z_DeleteInvoice.php?InvoiceNo=XX"
 msgstr ""
 
 #: Z_DeleteInvoice.php:16
@@ -30625,7 +30273,8 @@ msgid "The sales order records have been updated as not invoiced"
 msgstr ""
 
 #: Z_DeleteInvoice.php:105
-msgid "The SQL to reverse update to the location stock records failed because"
+msgid ""
+"The SQL to reverse update to the location stock records failed because"
 msgstr ""
 
 #: Z_DeleteInvoice.php:107
@@ -30934,9 +30583,8 @@ msgid "Row:"
 msgstr ""
 
 #: Z_ImportFixedAssets.php:125
-#, fuzzy
 msgid "Invalid Description:"
-msgstr "Descriere"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:129
 msgid "The depreciation rate is expected to be numeric"
@@ -30965,9 +30613,8 @@ msgid "The cost is expected to be numeric"
 msgstr ""
 
 #: Z_ImportFixedAssets.php:148 Z_ImportFixedAssets.php:152
-#, fuzzy
 msgid "Invalid Cost:"
-msgstr "Costul unitatii"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:151
 msgid "The cost is expected to be a positive number"
@@ -30989,9 +30636,8 @@ msgid ""
 msgstr ""
 
 #: Z_ImportFixedAssets.php:164
-#, fuzzy
 msgid "Invalid asset category:"
-msgstr "Selecteaza Categorie Inventar"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:169
 msgid ""
@@ -31533,8 +31179,8 @@ msgstr ""
 
 #: Z_poEditLangHeader.php:88
 msgid ""
-"Your existing translation file (messages.po) will be backed up as messages."
-"po.old"
+"Your existing translation file (messages.po) will be backed up as "
+"messages.po.old"
 msgstr ""
 
 #: Z_poEditLangHeader.php:89
@@ -32267,7 +31913,8 @@ msgid "could not be updated"
 msgstr ""
 
 #: includes/DefineCartClass.php:211
-msgid "No Line Number passed to remove_from_cart, so nothing has been removed."
+msgid ""
+"No Line Number passed to remove_from_cart, so nothing has been removed."
 msgstr ""
 
 #: includes/DefineCartClass.php:222
@@ -32359,19 +32006,16 @@ msgid "Data to display"
 msgstr ""
 
 #: includes/DefineLabelClass.php:44
-#, fuzzy
 msgid "Code item"
-msgstr "Cod"
+msgstr ""
 
 #: includes/DefineLabelClass.php:46
-#, fuzzy
 msgid "Description remainder"
-msgstr "Descriere"
+msgstr ""
 
 #: includes/DefineLabelClass.php:47
-#, fuzzy
 msgid "Long description"
-msgstr "Descriere"
+msgstr ""
 
 #: includes/DefineLabelClass.php:48
 msgid "Long description remainder"
@@ -32685,9 +32329,8 @@ msgid "Could not retrieve user details on login because"
 msgstr ""
 
 #: includes/ConnectDB.inc:17
-#, fuzzy
 msgid "The company name entered ("
-msgstr "Componentul"
+msgstr ""
 
 #: includes/ConnectDB.inc:18
 msgid "Check the company name entered ("
@@ -32747,9 +32390,9 @@ msgstr ""
 
 #: includes/ConnectDB_postgres.inc:28
 msgid ""
-"The company name entered together with the configuration in the file config."
-"php for the database user name and password do not provide the information "
-"required to connect to the database."
+"The company name entered together with the configuration in the file "
+"config.php for the database user name and password do not provide the "
+"information required to connect to the database."
 msgstr ""
 
 #: includes/ConnectDB_postgres.inc:28
@@ -32779,7 +32422,8 @@ msgid "The report does not have any output columns"
 msgstr ""
 
 #: includes/ConstructSQLForUserDefinedSalesReport.inc:178
-msgid "You need to set up the data columns that you wish to show in the report"
+msgid ""
+"You need to set up the data columns that you wish to show in the report"
 msgstr ""
 
 #: includes/ConstructSQLForUserDefinedSalesReport.inc:178
@@ -32809,7 +32453,8 @@ msgstr ""
 
 #: includes/ConstructSQLForUserDefinedSalesReport.inc:267
 #: includes/ConstructSQLForUserDefinedSalesReport.inc:293
-msgid "Calculated fields must use columns defined in the report specification"
+msgid ""
+"Calculated fields must use columns defined in the report specification"
 msgstr ""
 
 #: includes/ConstructSQLForUserDefinedSalesReport.inc:267
@@ -33072,14 +32717,12 @@ msgstr ""
 
 #: includes/PDFCustTransListingPageHeader.inc:18
 #: includes/PDFStockTransListingPageHeader.inc:18
-#, fuzzy
 msgid "Customer Credit Notes"
-msgstr "Creare nota de credit"
+msgstr ""
 
 #: includes/PDFCustTransListingPageHeader.inc:21
-#, fuzzy
 msgid "Customer Payments"
-msgstr "Rapoarte Speciale"
+msgstr ""
 
 #: includes/PDFCustTransListingPageHeader.inc:28
 #: includes/PDFSuppTransListingPageHeader.inc:28
@@ -33089,15 +32732,13 @@ msgstr ""
 #: includes/PDFCustTransListingPageHeader.inc:50
 #: includes/PDFStockTransListingPageHeader.inc:69
 #: includes/PDFSuppTransListingPageHeader.inc:50
-#, fuzzy
 msgid "Trans Date"
-msgstr "In Data"
+msgstr ""
 
 #: includes/PDFCustTransListingPageHeader.inc:51
 #: includes/PDFSuppTransListingPageHeader.inc:51
-#, fuzzy
 msgid "Net Amount"
-msgstr "Suma"
+msgstr ""
 
 #: includes/PDFCustTransListingPageHeader.inc:52
 #: includes/PDFQuotationPageHeader.inc:106
@@ -33107,9 +32748,8 @@ msgstr ""
 
 #: includes/PDFCustTransListingPageHeader.inc:53
 #: includes/PDFSuppTransListingPageHeader.inc:53
-#, fuzzy
 msgid "Total Amount"
-msgstr "Costul total"
+msgstr ""
 
 #: includes/PDFDebtorBalsPageHeader.inc:17
 msgid "Customer Balances For Customers between"
@@ -33343,9 +32983,8 @@ msgid "GRAND TOTAL"
 msgstr ""
 
 #: includes/PDFSalesOrder_generic.inc:18 includes/PDFSalesOrder_generic.inc:21
-#, fuzzy
 msgid "This is not an invoice"
-msgstr "Imprimare Factura"
+msgstr ""
 
 #: includes/PDFStatementPageHeader.inc:14
 msgid "Statement"
@@ -33404,14 +33043,12 @@ msgid "Purchase Order Deliveries"
 msgstr ""
 
 #: includes/PDFStockTransListingPageHeader.inc:30
-#, fuzzy
 msgid "Work Order Receipts"
-msgstr "Inserare Bon de Lucru"
+msgstr ""
 
 #: includes/PDFStockTransListingPageHeader.inc:33
-#, fuzzy
 msgid "Work Order Issues"
-msgstr "Numar Bon de Lucru"
+msgstr ""
 
 #: includes/PDFSupplierBalsPageHeader.inc:17
 msgid "Supplier Balances For Suppliers between"
@@ -33422,24 +33059,20 @@ msgid "Suppier Invoices"
 msgstr ""
 
 #: includes/PDFSuppTransListingPageHeader.inc:18
-#, fuzzy
 msgid "Suppier Credit Notes"
-msgstr "Creare nota de credit"
+msgstr ""
 
 #: includes/PDFSuppTransListingPageHeader.inc:21
-#, fuzzy
 msgid "Suppier Payments"
-msgstr "Achitari"
+msgstr ""
 
 #: includes/PDFTagProfitAndLossPageHeader.inc:22
-#, fuzzy
 msgid "Transactions for tag"
-msgstr "Tranzactii"
+msgstr ""
 
 #: includes/PDFTopItemsHeader.inc:26
-#, fuzzy
 msgid "Search On Location"
-msgstr "Amplasament Inventar"
+msgstr ""
 
 #: includes/PDFTopItemsHeader.inc:29
 msgid "Number Of Items"
@@ -33450,9 +33083,8 @@ msgid "Top Items Sales Search Result"
 msgstr ""
 
 #: includes/PDFTopItemsHeader.inc:56
-#, fuzzy
 msgid "Total Inv"
-msgstr "Costul total"
+msgstr ""
 
 #: includes/PDFTransPageHeader.inc:70
 msgid "CREDIT NOTE"
@@ -33554,7 +33186,8 @@ msgid "Item Does Not Exist"
 msgstr ""
 
 #: includes/SelectOrderItems_IntoCart.inc:63
-msgid "could not be added to the order because it has been flagged as obsolete"
+msgid ""
+"could not be added to the order because it has been flagged as obsolete"
 msgstr ""
 
 #: includes/SelectOrderItems_IntoCart.inc:63
@@ -33600,18 +33233,16 @@ msgid "is not a valid user of the system"
 msgstr "Utilizator inexistent in sistem"
 
 #: includes/session.inc:108
-#, fuzzy
 msgid "system maintenance"
-msgstr "Reglaje Articol"
+msgstr ""
 
 #: includes/session.inc:108
 msgid "webERP is not available right now"
 msgstr ""
 
 #: includes/session.inc:108
-#, fuzzy
 msgid "during maintenance of the system"
-msgstr "Utilizator inexistent in sistem"
+msgstr ""
 
 #: includes/session.inc:142 api/api_login.php:122
 msgid "There was a problem deleting expired audit-trail history"
@@ -33767,9 +33398,8 @@ msgid "Invalid EDI Transport"
 msgstr ""
 
 #: api/api_errorcodes.php:186
-#, fuzzy
 msgid "Invalid EDI Address"
-msgstr "Adresa postala"
+msgstr ""
 
 #: api/api_errorcodes.php:187
 msgid "Invalid EDI Server User"
@@ -33792,9 +33422,8 @@ msgid "Database Update Failed"
 msgstr ""
 
 #: api/api_errorcodes.php:192
-#, fuzzy
 msgid "No Debtor Number"
-msgstr "Numar Bon de Lucru"
+msgstr ""
 
 #: api/api_errorcodes.php:193
 msgid "Debtor Does not Exist"
@@ -33829,14 +33458,12 @@ msgid "Invalid Fwd Date"
 msgstr ""
 
 #: api/api_errorcodes.php:201
-#, fuzzy
 msgid "Invalid Phone Number"
-msgstr "Numar Factura"
+msgstr ""
 
 #: api/api_errorcodes.php:202
-#, fuzzy
 msgid "Invalid Fax Number"
-msgstr "Numar Factura"
+msgstr ""
 
 #: api/api_errorcodes.php:203
 msgid "Invalid Contact Name"
@@ -33847,9 +33474,8 @@ msgid "Invalid Email Address"
 msgstr ""
 
 #: api/api_errorcodes.php:205
-#, fuzzy
 msgid "Location Code Not Setup"
-msgstr "Cod Amplasament"
+msgstr ""
 
 #: api/api_errorcodes.php:206
 msgid "Tax Group Id Not Setup"
@@ -33864,9 +33490,8 @@ msgid "Invalid Deliver Blind"
 msgstr ""
 
 #: api/api_errorcodes.php:209
-#, fuzzy
 msgid "Invalid Disable Transactions"
-msgstr "Tranzactii Articol"
+msgstr ""
 
 #: api/api_errorcodes.php:210
 msgid "Invalid Special Instructions"
@@ -33885,9 +33510,8 @@ msgid "Stock Code Does not Exist"
 msgstr ""
 
 #: api/api_errorcodes.php:214
-#, fuzzy
 msgid "Stock Category Does not Exist"
-msgstr "Categorie Inventar"
+msgstr ""
 
 #: api/api_errorcodes.php:215
 msgid "Incorrect Stock Description Length"
@@ -33970,9 +33594,8 @@ msgid "Transaction Number Already Exists"
 msgstr ""
 
 #: api/api_errorcodes.php:235
-#, fuzzy
 msgid "Invalid Transaction Date"
-msgstr "Tranzactii Articol"
+msgstr ""
 
 #: api/api_errorcodes.php:236
 msgid "Invalid Settled"
@@ -33987,9 +33610,8 @@ msgid "Incorrect TPE"
 msgstr ""
 
 #: api/api_errorcodes.php:239
-#, fuzzy
 msgid "Invalid Order Numbers"
-msgstr "Numar Bon de Lucru"
+msgstr ""
 
 #: api/api_errorcodes.php:240
 msgid "Invalid Exchange Rate"
@@ -34012,9 +33634,8 @@ msgid "Invalid Diff On Exchange"
 msgstr ""
 
 #: api/api_errorcodes.php:245
-#, fuzzy
 msgid "Invalid Allocation"
-msgstr "Toate Amplasamentele"
+msgstr ""
 
 #: api/api_errorcodes.php:246
 msgid "Incorrect Invoice Text"
@@ -34033,14 +33654,12 @@ msgid "Invalid Consignment"
 msgstr ""
 
 #: api/api_errorcodes.php:250
-#, fuzzy
 msgid "Invalid Last Cost"
-msgstr "Costul unitatii"
+msgstr ""
 
 #: api/api_errorcodes.php:251
-#, fuzzy
 msgid "Invalid Material Cost"
-msgstr "Materie Prima"
+msgstr ""
 
 #: api/api_errorcodes.php:252
 msgid "Invalid Labour Cost"
@@ -34091,9 +33710,8 @@ msgid "Invalid unit cost"
 msgstr ""
 
 #: api/api_errorcodes.php:264
-#, fuzzy
 msgid "Invalid Quantity"
-msgstr "Numar/cantitate"
+msgstr ""
 
 #: api/api_errorcodes.php:265
 msgid "Invalid Discount Percent"
@@ -34180,9 +33798,8 @@ msgid "Invalid category id"
 msgstr ""
 
 #: api/api_errorcodes.php:287
-#, fuzzy
 msgid "Invalid category description"
-msgstr "Descriere Categorie"
+msgstr ""
 
 #: api/api_errorcodes.php:288
 msgid "Invalid stock type"
@@ -34193,9 +33810,8 @@ msgid "GL account code does not exist"
 msgstr ""
 
 #: api/api_errorcodes.php:290
-#, fuzzy
 msgid "Stock category already exists"
-msgstr "Categorie Inventar"
+msgstr ""
 
 #: api/api_errorcodes.php:291
 msgid "Supplier code already exists"
@@ -34214,14 +33830,12 @@ msgid "Incorrect bank account"
 msgstr ""
 
 #: api/api_errorcodes.php:295
-#, fuzzy
 msgid "Incorrect bank reference"
-msgstr "Setari Companie"
+msgstr ""
 
 #: api/api_errorcodes.php:296
-#, fuzzy
 msgid "Incorrect bank partics"
-msgstr "Parola incorecta"
+msgstr ""
 
 #: api/api_errorcodes.php:297
 msgid "Incorrect remittance flags"
@@ -34288,9 +33902,8 @@ msgid "Invalid Serial Number or Lot Reference"
 msgstr ""
 
 #: api/api_errorcodes.php:313
-#, fuzzy
 msgid "Work order number does not exist"
-msgstr "Numar Bon de Lucru"
+msgstr ""
 
 #: api/api_errorcodes.php:314
 msgid "Invalid issued quantity"
@@ -34346,9 +33959,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:16
-#, fuzzy
 msgid "Database Name"
-msgstr "Nume utilizator"
+msgstr ""
 
 #: api/api_xml-rpc.php:17
 msgid "The name of the database to use for the transactions to come. "
@@ -34396,9 +34008,8 @@ msgstr ""
 #: api/api_xml-rpc.php:2406 api/api_xml-rpc.php:2442 api/api_xml-rpc.php:2483
 #: api/api_xml-rpc.php:2521 api/api_xml-rpc.php:2550 api/api_xml-rpc.php:2579
 #: api/api_xml-rpc.php:2608 api/api_xml-rpc.php:2641
-#, fuzzy
 msgid "User password"
-msgstr "Parola noua"
+msgstr ""
 
 #: api/api_xml-rpc.php:21 api/api_xml-rpc.php:71 api/api_xml-rpc.php:107
 #: api/api_xml-rpc.php:144 api/api_xml-rpc.php:181 api/api_xml-rpc.php:214
@@ -34456,9 +34067,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:62 api/api_xml-rpc.php:135
-#, fuzzy
 msgid "Customer Details"
-msgstr "Rapoarte Speciale"
+msgstr ""
 
 #: api/api_xml-rpc.php:63 api/api_xml-rpc.php:100 api/api_xml-rpc.php:136
 #: api/api_xml-rpc.php:173 api/api_xml-rpc.php:476 api/api_xml-rpc.php:1079
@@ -34485,9 +34095,8 @@ msgstr ""
 #: api/api_xml-rpc.php:1149 api/api_xml-rpc.php:1184 api/api_xml-rpc.php:2055
 #: api/api_xml-rpc.php:2091 api/api_xml-rpc.php:2365 api/api_xml-rpc.php:2401
 #: api/api_xml-rpc.php:2437
-#, fuzzy
 msgid "here "
-msgstr "Aparenta"
+msgstr ""
 
 #: api/api_xml-rpc.php:65 api/api_xml-rpc.php:102 api/api_xml-rpc.php:138
 #: api/api_xml-rpc.php:175 api/api_xml-rpc.php:317 api/api_xml-rpc.php:478
@@ -34669,7 +34278,8 @@ msgid "custbranch table. "
 msgstr ""
 
 #: api/api_xml-rpc.php:253
-msgid "All fields will be in the set regardless of whether the value was set."
+msgid ""
+"All fields will be in the set regardless of whether the value was set."
 msgstr ""
 
 #: api/api_xml-rpc.php:280 api/api_xml-rpc.php:313
@@ -34695,9 +34305,8 @@ msgid "The name of a database field to search on. "
 msgstr ""
 
 #: api/api_xml-rpc.php:318
-#, fuzzy
 msgid "Search Criteria"
-msgstr "Cautare Bon de Lucru"
+msgstr ""
 
 #: api/api_xml-rpc.php:319
 msgid "A (partial) string to match in the above Field Name."
@@ -34724,9 +34333,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:383
-#, fuzzy
 msgid "Currency abbreviation"
-msgstr "Reglaje valuta"
+msgstr ""
 
 #: api/api_xml-rpc.php:384
 msgid "A currency abbreviation as returned by the GetCurrencyList function."
@@ -34755,7 +34363,8 @@ msgid "Sales type abbreviation"
 msgstr ""
 
 #: api/api_xml-rpc.php:445
-msgid "A sales type abbreviation as returned by the GetSalesTypeList function."
+msgid ""
+"A sales type abbreviation as returned by the GetSalesTypeList function."
 msgstr ""
 
 #: api/api_xml-rpc.php:450
@@ -34828,9 +34437,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:629 api/api_xml-rpc.php:662
-#, fuzzy
 msgid "Stock Item Details"
-msgstr "Modificare Detalii Articol"
+msgstr ""
 
 #: api/api_xml-rpc.php:630
 msgid ""
@@ -34982,9 +34590,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:929 api/api_xml-rpc.php:972
-#, fuzzy
 msgid "Currency Code"
-msgstr "Valuta contului"
+msgstr ""
 
 #: api/api_xml-rpc.php:930 api/api_xml-rpc.php:973
 msgid "The currency involved."
@@ -35024,9 +34631,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1009
-#, fuzzy
 msgid "Invoice Details"
-msgstr "Modificare Detalii Articol"
+msgstr ""
 
 #: api/api_xml-rpc.php:1010
 msgid "An array of index/value items describing the invoice."
@@ -35062,9 +34668,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1048
-#, fuzzy
 msgid "Credit Details"
-msgstr "Modificare Detalii Articol"
+msgstr ""
 
 #: api/api_xml-rpc.php:1049
 msgid ""
@@ -35090,9 +34695,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1113
-#, fuzzy
 msgid "Modify Sales Order Header Details"
-msgstr "Modificare Detalii Articol"
+msgstr ""
 
 #: api/api_xml-rpc.php:1122
 msgid ""
@@ -35123,9 +34727,8 @@ msgid "The orderno and stkcode keys must be one of these values. "
 msgstr ""
 
 #: api/api_xml-rpc.php:1216
-#, fuzzy
 msgid "Account Details"
-msgstr "Nume Cont"
+msgstr ""
 
 #: api/api_xml-rpc.php:1217
 msgid ""
@@ -35137,13 +34740,13 @@ msgid "Account Section Details"
 msgstr ""
 
 #: api/api_xml-rpc.php:1246
-msgid "An array of index/value items describing the account section to insert."
+msgid ""
+"An array of index/value items describing the account section to insert."
 msgstr ""
 
 #: api/api_xml-rpc.php:1274
-#, fuzzy
 msgid "Account Group Details"
-msgstr "Grupurile de conturi"
+msgstr ""
 
 #: api/api_xml-rpc.php:1275
 msgid "An array of index/value items describing the account group to insert."
@@ -35164,9 +34767,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1331
-#, fuzzy
 msgid "Stock Location Code"
-msgstr "Amplasament Inventar"
+msgstr ""
 
 #: api/api_xml-rpc.php:1332
 msgid "A stock location code as returned by the GetLocationList function."
@@ -35190,9 +34792,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1390
-#, fuzzy
 msgid "Stock Shipper ID"
-msgstr "Tip Inventar"
+msgstr ""
 
 #: api/api_xml-rpc.php:1391
 msgid "A stock shipper ID as returned by the GetShippersList function."
@@ -35216,9 +34817,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1449 api/api_xml-rpc.php:1568
-#, fuzzy
 msgid "Sales Area Code"
-msgstr "Reglaje Vanzari"
+msgstr ""
 
 #: api/api_xml-rpc.php:1450
 msgid "A sales area code as returned by the GetSalesAreasList function."
@@ -35235,18 +34835,16 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1480
-#, fuzzy
 msgid "Sales Area Description"
-msgstr "Descriere Categorie"
+msgstr ""
 
 #: api/api_xml-rpc.php:1481
 msgid "A sales area description of the sales area of interest."
 msgstr ""
 
 #: api/api_xml-rpc.php:1510
-#, fuzzy
 msgid "Sales Area Details"
-msgstr "Reglaje Vanzari"
+msgstr ""
 
 #: api/api_xml-rpc.php:1511
 msgid "An array of index/value items describing the sales area to insert."
@@ -35342,16 +34940,17 @@ msgid "This function returns an array of customer type details."
 msgstr ""
 
 #: api/api_xml-rpc.php:1776 api/api_xml-rpc.php:1805
-#, fuzzy
 msgid "Category Details"
-msgstr "Descriere Categorie"
+msgstr ""
 
 #: api/api_xml-rpc.php:1777
-msgid "An array of index/value items describing the stock category to insert."
+msgid ""
+"An array of index/value items describing the stock category to insert."
 msgstr ""
 
 #: api/api_xml-rpc.php:1806
-msgid "An array of index/value items describing the stock category to modify."
+msgid ""
+"An array of index/value items describing the stock category to modify."
 msgstr ""
 
 #: api/api_xml-rpc.php:1833
@@ -35375,9 +34974,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1862
-#, fuzzy
 msgid "Stock Category ID"
-msgstr "Categorie Inventar"
+msgstr ""
 
 #: api/api_xml-rpc.php:1863
 msgid "A Stock Category ID as returned by the *WHAT* function."
@@ -35388,9 +34986,8 @@ msgid "This function returns an array of stock category details."
 msgstr ""
 
 #: api/api_xml-rpc.php:1925
-#, fuzzy
 msgid "Label Name"
-msgstr "Nume de camp"
+msgstr ""
 
 #: api/api_xml-rpc.php:1926
 msgid "The category label to search on."
@@ -35411,9 +35008,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1987
-#, fuzzy
 msgid "General Ledger Account Code"
-msgstr "Contabilitate"
+msgstr ""
 
 #: api/api_xml-rpc.php:1988
 msgid ""
@@ -35435,9 +35031,8 @@ msgid "The stock ID of the item whose tax rate is desired."
 msgstr ""
 
 #: api/api_xml-rpc.php:2020
-#, fuzzy
 msgid "Tax Authority Code"
-msgstr "Cod Categorie"
+msgstr ""
 
 #: api/api_xml-rpc.php:2021
 msgid "The code identifying the tax authority of interest."
@@ -35469,9 +35064,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:2126
-#, fuzzy
 msgid "Supplier ID"
-msgstr "Inregistrare Furnizor"
+msgstr ""
 
 #: api/api_xml-rpc.php:2127
 msgid ""
@@ -35521,7 +35115,8 @@ msgid "Returns a two dimensional array of stock batch details. "
 msgstr ""
 
 #: api/api_xml-rpc.php:2204
-msgid "The fields returned are stockid, loccode, batchno, quantity, itemcost. "
+msgid ""
+"The fields returned are stockid, loccode, batchno, quantity, itemcost. "
 msgstr ""
 
 #: api/api_xml-rpc.php:2230
@@ -35537,9 +35132,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:2237 api/api_xml-rpc.php:2283 api/api_xml-rpc.php:2479
-#, fuzzy
 msgid "Transaction Date"
-msgstr "Tranzactii"
+msgstr ""
 
 #: api/api_xml-rpc.php:2243 api/api_xml-rpc.php:2291 api/api_xml-rpc.php:2485
 msgid "If successful this function returns 0. "
@@ -35556,9 +35150,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:2285
-#, fuzzy
 msgid "Batch number"
-msgstr "Numar Factura"
+msgstr ""
 
 #: api/api_xml-rpc.php:2286
 msgid ""
@@ -35588,9 +35181,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:2363 api/api_xml-rpc.php:2399
-#, fuzzy
 msgid "Purchasing data"
-msgstr "Cumparate"
+msgstr ""
 
 #: api/api_xml-rpc.php:2398
 msgid ""
@@ -35604,9 +35196,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:2435
-#, fuzzy
 msgid "Work order details"
-msgstr "Bon de Lucru"
+msgstr ""
 
 #: api/api_xml-rpc.php:2470
 msgid "Receives stock from a given work order from the given location"
@@ -35696,9 +35287,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:3022
-#, fuzzy
 msgid "Parameters"
-msgstr "Achitari"
+msgstr ""
 
 #: api/api_xml-rpc.php:3027
 msgid "Return Value"

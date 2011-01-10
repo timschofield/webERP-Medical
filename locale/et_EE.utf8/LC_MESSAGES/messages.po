@@ -3,20 +3,19 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-04 22:11+1200\n"
-"PO-Revision-Date: 2010-12-3 HO:MI+ZONE\n"
-"Last-Translator: Matt Elbrecht <matteuspoiss@gmail.com>\n"
+"POT-Creation-Date: 2011-01-04 22:15+1200\n"
+"PO-Revision-Date: 2011-01-05 20:57+0000\n"
+"Last-Translator: Tim Schofield <Unknown>\n"
 "Language-Team: Estonian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-16 09:48+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-01-10 14:06+0000\n"
+"X-Generator: Launchpad (build 12161)\n"
 
 #: AccountGroups.php:9 index.php:1273
 msgid "Account Groups"
@@ -110,7 +109,8 @@ msgid "Record inserted"
 msgstr "Kirje sisestatud"
 
 #: AccountGroups.php:176
-msgid "An error occurred in retrieving the group information from chartmaster"
+msgid ""
+"An error occurred in retrieving the group information from chartmaster"
 msgstr "Grupi info otsimisel chartmaster'ist ilmnes viga"
 
 #: AccountGroups.php:181
@@ -177,7 +177,7 @@ msgstr "grupp on kustutatud"
 
 #: AccountGroups.php:223
 msgid "The sql that was used to retrieve the account group information was "
-msgstr "SQL, mida kontogrupi info otsimiseks kasutati, on"
+msgstr "SQL, mida kontogrupi info otsimiseks kasutati, on "
 
 #: AccountGroups.php:224
 msgid "Could not get account groups because"
@@ -390,9 +390,8 @@ msgid ""
 msgstr "SQL, mis kontogrupi otsimise protsessi käigus ebaõnnestus, on"
 
 #: AccountGroups.php:298
-#, fuzzy
 msgid "The account group name does not exist in the database"
-msgstr "Kontogrupi nimi juba eksisteerib andmebaasis"
+msgstr ""
 
 #: AccountGroups.php:314 GLAccounts.php:250 GLAccounts.php:299
 #: Z_ImportGLAccountGroups.php:28
@@ -505,9 +504,8 @@ msgid "Contacts for Customer: <b>"
 msgstr "Antud Kliendi kontaktid: <b>"
 
 #: AddCustomerContacts.php:29
-#, fuzzy
 msgid "Edit contact for <b>"
-msgstr "Antud Kliendi kontaktid: <b>"
+msgstr ""
 
 #: AddCustomerContacts.php:41
 msgid "The Contact must be an integer."
@@ -603,7 +601,7 @@ msgstr "Kontakti prioriteet peab olema täisarv"
 
 #: AddCustomerNotes.php:34 AddCustomerTypeNotes.php:34
 msgid "The contact's notes must be two hundred characters or less long"
-msgstr "Kontakti märkmed võivad olla kuni kakssada tähemärki pikad "
+msgstr "Kontakti märkmed võivad olla kuni kakssada tähemärki pikad"
 
 #: AddCustomerNotes.php:37 AddCustomerTypeNotes.php:37
 msgid "The contact's notes may not be empty"
@@ -615,12 +613,11 @@ msgstr "Kontakti märkmete kirje on lisatud"
 
 #: AddCustomerNotes.php:87
 msgid "The contact note record has been deleted"
-msgstr "Kontakti märkmete kirje on kustutatud "
+msgstr "Kontakti märkmete kirje on kustutatud"
 
 #: AddCustomerNotes.php:98
-#, fuzzy
 msgid "Notes for Customer"
-msgstr "Märkmed selle Kliendi kohta: <b>"
+msgstr ""
 
 #: AddCustomerNotes.php:106 AddCustomerNotes.php:189
 #: AddCustomerTypeNotes.php:104 AddCustomerTypeNotes.php:186
@@ -698,9 +695,8 @@ msgid "The contact group note record has been deleted"
 msgstr "Kontaktigrupi märkmete kirje on kustutatud"
 
 #: AddCustomerTypeNotes.php:95
-#, fuzzy
 msgid "Notes for Customer Type"
-msgstr "Antud klienditüübi märkmed:"
+msgstr ""
 
 #: AddCustomerTypeNotes.php:106
 msgid "href"
@@ -851,9 +847,8 @@ msgid "The SQL that failed was"
 msgstr "SQL, mis ebaõnnestus, oli"
 
 #: AgedDebtors.php:438
-#, fuzzy
 msgid "There are no customers meeting the criteria specified to list"
-msgstr "Ei ole kliente, keda vastavalt täpsustatud kriteeriumitele järjestada"
+msgstr ""
 
 #: AgedDebtors.php:464
 msgid "Aged Debtor Analysis"
@@ -1083,7 +1078,7 @@ msgstr "Kasutaja ID"
 
 #: AuditTrail.php:56
 msgid "Table "
-msgstr "Tabel"
+msgstr "Tabel "
 
 #: AuditTrail.php:68 MRPReport.php:789 PO_SelectPurchOrder.php:357
 #: SelectContract.php:196 SelectProduct.php:710
@@ -1193,7 +1188,8 @@ msgstr "Pangakontot ei saanud sisestada või muuta, kuna"
 
 #: BankAccounts.php:135
 msgid "The SQL used to insert/modify the bank account details was"
-msgstr "SQL, mida kasutati pangakonto detailide sisestamiseks/muutmiseks, oli"
+msgstr ""
+"SQL, mida kasutati pangakonto detailide sisestamiseks/muutmiseks, oli"
 
 #: BankAccounts.php:162
 msgid ""
@@ -1450,7 +1446,8 @@ msgid "after"
 msgstr "pärast"
 
 #: BankMatching.php:218
-msgid "The payments with the selected criteria could not be retrieved because"
+msgid ""
+"The payments with the selected criteria could not be retrieved because"
 msgstr "Valitud kriteeriumitega makseid ei leitud, kuna"
 
 #: BankMatching.php:221 ShipmentCosting.php:502 ShipmentCosting.php:573
@@ -1636,7 +1633,7 @@ msgstr "Kõigi väljamaksmata tšekkide kogusumma"
 
 #: BankReconciliation.php:249
 msgid "The uncleared deposits could not be retrieved by the SQL because"
-msgstr "SQL ei suutnud laekumata deposiite leida, kuna "
+msgstr "SQL ei suutnud laekumata deposiite leida, kuna"
 
 #: BankReconciliation.php:253
 msgid "Less deposits not cleared"
@@ -1663,7 +1660,7 @@ msgid ""
 "This will create a general ledger journal to write off the exchange "
 "difference in the current balance of the account. It is important that the "
 "exchange rate above reflects the current value of the bank account currency"
-msgstr "Sellega luuakse üldine raamatupidamise... "
+msgstr "Sellega luuakse üldine raamatupidamise..."
 
 #: BankReconciliation.php:311 CounterSales.php:741 Customers.php:1014
 #: SelectOrderItems.php:1374 Stocks.php:1029 WorkOrderCosting.php:512
@@ -1713,10 +1710,9 @@ msgid "Create of tempbom failed because"
 msgstr "Tempbom'i loomine ebaõnnestus, kuna"
 
 #: BOMExtendedQty.php:158
-#, fuzzy
 msgid ""
 "The Quantiy Extended BOM Listing could not be retrieved by the SQL because"
-msgstr "SQL ei suutnud materjalide loetelu leida, kuna"
+msgstr ""
 
 #: BOMExtendedQty.php:260 BOMIndented.php:235
 msgid "Print Indented BOM Listing Error"
@@ -1809,7 +1805,7 @@ msgstr "Prindi lihtsalt"
 
 #: BOMExtendedQty.php:322
 msgid "Extended Quantity BOM Listing For       "
-msgstr "Materjalide loetelu for"
+msgstr "Materjalide loetelu for       "
 
 #: BOMExtendedQty.php:324 BOMIndented.php:303 BOMIndentedReverse.php:291
 #: GLAccountReport.php:353 InventoryPlanningPrefSupplier.php:63
@@ -2268,7 +2264,8 @@ msgid "Bill of Materials Listing"
 msgstr "BOM nimekiri"
 
 #: BOMListing.php:50
-msgid "The Bill of Material listing could not be retrieved by the SQL because"
+msgid ""
+"The Bill of Material listing could not be retrieved by the SQL because"
 msgstr "SQL ei leidnud BOM nimekirja, kuna"
 
 #: BOMListing.php:61
@@ -2329,19 +2326,19 @@ msgstr "Pole saadaval"
 
 #: BOMs.php:225
 msgid ""
-"The effective after date field must be a date in the format dd/mm/yy or dd/"
-"mm/yyyy or ddmmyy or ddmmyyyy or dd-mm-yy or dd-mm-yyyy"
+"The effective after date field must be a date in the format dd/mm/yy or "
+"dd/mm/yyyy or ddmmyy or ddmmyyyy or dd-mm-yy or dd-mm-yyyy"
 msgstr ""
-"Jõus alates kuupäeva lahtris peab olema kuupäev formaadis pp/kk/aa või pp/kk/"
-"aaaa või ppkkaa või ppkkaaaa või pp-kk-aa või pp-kk-aaaa"
+"Jõus alates kuupäeva lahtris peab olema kuupäev formaadis pp/kk/aa või "
+"pp/kk/aaaa või ppkkaa või ppkkaaaa või pp-kk-aa või pp-kk-aaaa"
 
 #: BOMs.php:231
 msgid ""
-"The effective to date field must be a date in the format dd/mm/yy or dd/mm/"
-"yyyy or ddmmyy or ddmmyyyy or dd-mm-yy or dd-mm-yyyy"
+"The effective to date field must be a date in the format dd/mm/yy or "
+"dd/mm/yyyy or ddmmyy or ddmmyyyy or dd-mm-yy or dd-mm-yyyy"
 msgstr ""
-"Jõus kuni kuupäeva lahtris peab olema kuupäev formaadis pp/kk/aa või pp/kk/"
-"aaaa või ppkkaa või ppkkaaaa või pp-kk-aa või pp-kk-aaaa"
+"Jõus kuni kuupäeva lahtris peab olema kuupäev formaadis pp/kk/aa või "
+"pp/kk/aaaa või ppkkaa või ppkkaaaa või pp-kk-aa või pp-kk-aaaa"
 
 #: BOMs.php:237 StockAdjustments.php:83 StockTransfers.php:130
 #: WorkOrderEntry.php:262
@@ -2434,7 +2431,7 @@ msgstr "Komponent"
 
 #: BOMs.php:344
 msgid "is already recorded as a component of"
-msgstr "on juba salvestatud kui "
+msgstr "on juba salvestatud kui"
 
 #: BOMs.php:344
 msgid ""
@@ -2684,7 +2681,8 @@ msgstr ""
 
 #: CompanyPreferences.php:40 Customers.php:64
 msgid "The Line 1 of the address must be forty characters or less long"
-msgstr "Aadressi esimene rida peab olema nelikümmend või vähem tähemärki pikk"
+msgstr ""
+"Aadressi esimene rida peab olema nelikümmend või vähem tähemärki pikk"
 
 #: CompanyPreferences.php:46 Customers.php:69
 msgid "The Line 2 of the address must be forty characters or less long"
@@ -3621,7 +3619,8 @@ msgid "The following SQL to update the sales order detail record was used"
 msgstr ""
 
 #: ConfirmDispatch_Invoice.php:852 ConfirmDispatch_Invoice.php:881
-msgid "The order delivery differences log record could not be inserted because"
+msgid ""
+"The order delivery differences log record could not be inserted because"
 msgstr ""
 
 #: ConfirmDispatch_Invoice.php:853 ConfirmDispatch_Invoice.php:882
@@ -3672,7 +3671,8 @@ msgid "because"
 msgstr ""
 
 #: ConfirmDispatch_Invoice.php:975 CounterSales.php:1293
-msgid "Can not retrieve assembly components location stock quantities because "
+msgid ""
+"Can not retrieve assembly components location stock quantities because "
 msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1011 CounterSales.php:1329
@@ -3783,7 +3783,8 @@ msgstr ""
 #: StockLocTransferReceive.php:173 StockLocTransferReceive.php:286
 #: StockTransfers.php:261 StockTransfers.php:369 WorkOrderIssue.php:231
 #: WorkOrderIssue.php:286 WorkOrderReceive.php:508 WorkOrderReceive.php:579
-msgid "The following SQL to insert the serial stock movement records was used"
+msgid ""
+"The following SQL to insert the serial stock movement records was used"
 msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1206 CounterSales.php:1530
@@ -3853,14 +3854,12 @@ msgid "The sales discount GL posting could not be inserted because"
 msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1378
-#, fuzzy
 msgid "The asset disposal GL posting details could not be retrieved because"
-msgstr "BOM'i ei leitud, kuna"
+msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1379
-#, fuzzy
 msgid "The following SQL was used to get the asset posting details"
-msgstr "SQL, mida kasutati pangakonto detailide leidmiseks, oli"
+msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1404 ConfirmDispatch_Invoice.php:1426
 #: ConfirmDispatch_Invoice.php:1448 ConfirmDispatch_Invoice.php:1470
@@ -3874,37 +3873,33 @@ msgid ""
 msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1429
-#, fuzzy
 msgid ""
 "The reversal of asset cost on dispoal GL posting could not be inserted "
 "because"
-msgstr "SQL ei leidnud BOM nimekirja, kuna"
+msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1451
-#, fuzzy
 msgid "The disposal net book value GL posting could not be inserted because"
-msgstr "Pangakontot ei saanud sisestada või muuta, kuna"
+msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1473
-#, fuzzy
 msgid "The disposal proceeds GL posting could not be inserted because"
-msgstr "Ettevõtte eelistusi ei saadud otsida, kuna"
+msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1501
-#, fuzzy
 msgid "The fixed asset transaction could not be inserted because"
-msgstr "Pangakontot ei saanud sisestada või muuta, kuna"
+msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1502 GoodsReceived.php:596 ReverseGRN.php:176
 #: SupplierCredit.php:1190 SupplierCredit.php:1277 SupplierInvoice.php:1187
 #: SupplierInvoice.php:1271
-msgid "The following SQL to insert the fixed asset transaction record was used"
+msgid ""
+"The following SQL to insert the fixed asset transaction record was used"
 msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1509
-#, fuzzy
 msgid "The fixed asset record could not be updated for the disposal because"
-msgstr "Seda piirkonda ei õnnestunud lisada või uuendada, kuna"
+msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1510
 msgid "The following SQL to update the fixed asset record was used"
@@ -4007,9 +4002,8 @@ msgid "Process Invoice"
 msgstr ""
 
 #: ContractBOM.php:10
-#, fuzzy
 msgid "Contract Bill of Materials"
-msgstr "BOM nimekiri"
+msgstr ""
 
 #: ContractBOM.php:43 ContractOtherReqts.php:45
 msgid ""
@@ -4076,9 +4070,8 @@ msgid ""
 msgstr ""
 
 #: ContractBOM.php:200
-#, fuzzy
 msgid "The item details could not be retrieved"
-msgstr "SQL ei saanud kliendi detaile, kuna"
+msgstr ""
 
 #: ContractBOM.php:201 SelectCreditItems.php:602
 msgid "The SQL used to retrieve the item details but failed was"
@@ -4097,14 +4090,12 @@ msgid ""
 msgstr ""
 
 #: ContractBOM.php:232
-#, fuzzy
 msgid "Contract Bill of Material"
-msgstr "BOM nimekiri"
+msgstr ""
 
 #: ContractBOM.php:237 ContractOtherReqts.php:90
-#, fuzzy
 msgid "Contract Reference:"
-msgstr "Viide"
+msgstr ""
 
 #: ContractBOM.php:244 PO_Items.php:913 SupplierTenders.php:267
 #: includes/PDFTransPageHeader.inc:188
@@ -4117,9 +4108,8 @@ msgid "Sub-total"
 msgstr ""
 
 #: ContractBOM.php:278
-#, fuzzy
 msgid "Update Lines"
-msgstr "Uuenda sobivus"
+msgstr ""
 
 #: ContractBOM.php:279 ContractOtherReqts.php:128
 msgid "Back To Contract Header"
@@ -4204,9 +4194,8 @@ msgid "Add to Contract Bill Of Material"
 msgstr ""
 
 #: ContractCosting.php:8
-#, fuzzy
 msgid "Contract Costing"
-msgstr "Kontaktkood"
+msgstr ""
 
 #: ContractCosting.php:20
 msgid ""
@@ -4215,9 +4204,8 @@ msgid ""
 msgstr ""
 
 #: ContractCosting.php:42
-#, fuzzy
 msgid "Could not get the inventory issues for this contract because"
-msgstr "Ei leidnud emadetaili kirjeldust, kuna"
+msgstr ""
 
 #: ContractCosting.php:55 ContractCosting.php:63 Contracts.php:191
 #: Contracts.php:739 Contracts.php:811 EDIProcessOrders.php:376
@@ -4226,32 +4214,28 @@ msgid "Contract"
 msgstr ""
 
 #: ContractCosting.php:57
-#, fuzzy
 msgid "Closed"
-msgstr "Kood"
+msgstr ""
 
 #: ContractCosting.php:59
 msgid "Current Confirmed"
 msgstr ""
 
 #: ContractCosting.php:61
-#, fuzzy
 msgid "Quoted"
-msgstr "Märkmed"
+msgstr ""
 
 #: ContractCosting.php:67
 msgid "Original Costing"
 msgstr ""
 
 #: ContractCosting.php:68
-#, fuzzy
 msgid "Actual Costs"
-msgstr "Kogumaksumus"
+msgstr ""
 
 #: ContractCosting.php:70
-#, fuzzy
 msgid "Inventory Required"
-msgstr "kuni inventari detaili koodini"
+msgstr ""
 
 #: ContractCosting.php:75 ContractCosting.php:81 Contracts.php:921
 #: CounterSales.php:664 DeliveryDetails.php:786 DeliveryDetails.php:851
@@ -4269,19 +4253,16 @@ msgid "Actual usage"
 msgstr ""
 
 #: ContractCosting.php:120
-#, fuzzy
 msgid "Total Inventory Budgeted Cost"
-msgstr "kuni inventari detaili koodini"
+msgstr ""
 
 #: ContractCosting.php:122
-#, fuzzy
 msgid "Total Inventory Actual Cost"
-msgstr "kuni inventari detaili koodini"
+msgstr ""
 
 #: ContractCosting.php:125
-#, fuzzy
 msgid "Other Costs"
-msgstr "Ühiku maksumus"
+msgstr ""
 
 #: ContractCosting.php:130 ContractCosting.php:150 Contracts.php:943
 msgid "Requirement"
@@ -4310,9 +4291,8 @@ msgid "Anticipated"
 msgstr ""
 
 #: ContractCosting.php:167
-#, fuzzy
 msgid "Could not get the other charges to the contract because"
-msgstr "Ei leidnud emadetaili kirjeldust, kuna"
+msgstr ""
 
 #: ContractCosting.php:185
 msgid "Actual Other Costs"
@@ -4331,16 +4311,14 @@ msgid "Variance on contract"
 msgstr ""
 
 #: ContractCosting.php:224 ContractCosting.php:242
-#, fuzzy
 msgid ""
 "The gl entry of WIP for the variance on closing the contract could not be "
 "inserted because"
-msgstr "Valitud kriteeriumitega makseid ei leitud, kuna"
+msgstr ""
 
 #: ContractCosting.php:250
-#, fuzzy
 msgid "The status of the contract could not be updated to closed because"
-msgstr "Seda piirkonda ei õnnestunud lisada või uuendada, kuna"
+msgstr ""
 
 #: ContractCosting.php:251
 msgid "The following SQL to change the status of the contract was used"
@@ -4407,9 +4385,8 @@ msgid ""
 msgstr ""
 
 #: ContractCosting.php:412
-#, fuzzy
 msgid "Close Contract"
-msgstr "Klientide kontaktid"
+msgstr ""
 
 #: ContractCosting.php:412
 msgid ""
@@ -4429,9 +4406,8 @@ msgid ""
 msgstr ""
 
 #: ContractOtherReqts.php:61
-#, fuzzy
 msgid "The quantity of the new requirement is expected to be numeric"
-msgstr "Sisestatud hulk peab olema numbriline"
+msgstr ""
 
 #: ContractOtherReqts.php:65
 msgid "The cost per unit of the new requirement is expected to be numeric"
@@ -4450,9 +4426,8 @@ msgid "Enter New Requirements"
 msgstr ""
 
 #: ContractOtherReqts.php:141
-#, fuzzy
 msgid "Requirement Description"
-msgstr "Detaili kirjeldus"
+msgstr ""
 
 #: ContractOtherReqts.php:143 SelectWorkOrder.php:303 WhereUsedInquiry.php:68
 #: WorkOrderCosting.php:85
@@ -4464,18 +4439,16 @@ msgid "Cost Per Unit"
 msgstr ""
 
 #: ContractOtherReqts.php:147
-#, fuzzy
 msgid "Enter New Contract Requirement"
-msgstr "Sisesta tekstikatked"
+msgstr ""
 
 #: Contracts.php:10 Contracts.php:818
 msgid "Modify Contract"
 msgstr ""
 
 #: Contracts.php:12
-#, fuzzy
 msgid "Contract Entry"
-msgstr "Kontakti märkmed"
+msgstr ""
 
 #: Contracts.php:79
 msgid ""
@@ -4515,9 +4488,8 @@ msgid ""
 msgstr ""
 
 #: Contracts.php:103
-#, fuzzy
 msgid "Back to Contract Selection"
-msgstr "Tagasi Kliendi valimise juurde"
+msgstr ""
 
 #: Contracts.php:114 FixedAssetItems.php:37 SalesCategories.php:45
 #: Stocks.php:46 Z_MakeNewCompany.php:51
@@ -4561,29 +4533,24 @@ msgid ""
 msgstr ""
 
 #: Contracts.php:174
-#, fuzzy
 msgid "The contract bill of materials could not be deleted because"
-msgstr "BOM'i ei leitud, kuna"
+msgstr ""
 
 #: Contracts.php:177
-#, fuzzy
 msgid "The contract requirements could not be deleted because"
-msgstr "Ettevõtte eelistusi ei saanud uuendada, kuna"
+msgstr ""
 
 #: Contracts.php:180
-#, fuzzy
 msgid "The contract could not be deleted because"
-msgstr "Seda piirkonda ei õnnestunud lisada või uuendada, kuna"
+msgstr ""
 
 #: Contracts.php:185
-#, fuzzy
 msgid "The quotation line for the contract could not be deleted because"
-msgstr "Ettevõtte eelistusi ei saanud uuendada, kuna"
+msgstr ""
 
 #: Contracts.php:188
-#, fuzzy
 msgid "The quotation for the contract could not be deleted because"
-msgstr "Ettevõtte eelistusi ei saanud uuendada, kuna"
+msgstr ""
 
 #: Contracts.php:191
 msgid "has been cancelled"
@@ -4626,9 +4593,8 @@ msgid ""
 msgstr ""
 
 #: Contracts.php:275
-#, fuzzy
 msgid "Default for"
-msgstr "Detailid"
+msgstr ""
 
 #: Contracts.php:300
 msgid ""
@@ -4637,9 +4603,8 @@ msgid ""
 msgstr ""
 
 #: Contracts.php:313
-#, fuzzy
 msgid "Cannot update the contract because"
-msgstr "Ei saanud seda BOM komponenti uuendada, kuna"
+msgstr ""
 
 #: Contracts.php:317 Contracts.php:416
 msgid "Could not add a component to the contract bill of material"
@@ -4654,24 +4619,20 @@ msgid "The changes to the contract have been committed to the database"
 msgstr ""
 
 #: Contracts.php:365
-#, fuzzy
 msgid "The contract item could not be updated because"
-msgstr "Ettevõtte eelistusi ei saanud uuendada, kuna"
+msgstr ""
 
 #: Contracts.php:366
-#, fuzzy
 msgid "The SQL that was used to update the contract item failed was"
-msgstr "SQL, mida kasutati kontogrupi uuendamisel, on"
+msgstr ""
 
 #: Contracts.php:374
-#, fuzzy
 msgid "The contract quotation could not be updated because"
-msgstr "Ettevõtte eelistusi ei saanud uuendada, kuna"
+msgstr ""
 
 #: Contracts.php:375
-#, fuzzy
 msgid "The SQL that failed to update the quotation was"
-msgstr "SQL, mida kasutati kontogrupi uuendamisel, on"
+msgstr ""
 
 #: Contracts.php:377
 msgid ""
@@ -4684,34 +4645,28 @@ msgid "Go to Quotation"
 msgstr ""
 
 #: Contracts.php:412
-#, fuzzy
 msgid "The new contract could not be added because"
-msgstr "Seda piirkonda ei õnnestunud lisada või uuendada, kuna"
+msgstr ""
 
 #: Contracts.php:441
-#, fuzzy
 msgid "The new contract has been added to the database"
-msgstr "Kontakti kirje on lisatud"
+msgstr ""
 
 #: Contracts.php:464
-#, fuzzy
 msgid "The item could not be retrieved because"
-msgstr "ei saanud otsida, kuna"
+msgstr ""
 
 #: Contracts.php:465
-#, fuzzy
 msgid "The SQL that was used to find the item failed was"
-msgstr "SQL, mida antud informatsiooni otsimisel kasutati, on"
+msgstr ""
 
 #: Contracts.php:483
-#, fuzzy
 msgid "The new contract item could not be added because"
-msgstr "Seda piirkonda ei õnnestunud lisada või uuendada, kuna"
+msgstr ""
 
 #: Contracts.php:484
-#, fuzzy
 msgid "The SQL that was used to insert the contract item failed was"
-msgstr "SQL, mida kasutati selle kontogrupi sisestamiseks, on"
+msgstr ""
 
 #: Contracts.php:492 Stocks.php:420 Z_ImportStocks.php:247
 msgid "The locations for the item"
@@ -4734,20 +4689,17 @@ msgid "The SQL that was used to add the location records that failed was"
 msgstr ""
 
 #: Contracts.php:515
-#, fuzzy
 msgid "The customer and branch details could not be retrieved because"
-msgstr "SQL ei saanud kliendi detaile, kuna"
+msgstr ""
 
 #: Contracts.php:516
-#, fuzzy
 msgid ""
 "The SQL that was used to find the customer and branch details failed was"
-msgstr "SQL, mis kontogrupi otsimise protsessi käigus ebaõnnestus, on"
+msgstr ""
 
 #: Contracts.php:567
-#, fuzzy
 msgid "The quotation cannot be added because"
-msgstr "Seda piirkonda ei õnnestunud lisada või uuendada, kuna"
+msgstr ""
 
 #: Contracts.php:584
 msgid "Unable to add the quotation line"
@@ -4758,9 +4710,8 @@ msgid "Unable to update the contract status and order number because"
 msgstr ""
 
 #: Contracts.php:597
-#, fuzzy
 msgid "The contract has been made into quotation number"
-msgstr "Kontakti kirje on kustutatud"
+msgstr ""
 
 #: Contracts.php:598
 msgid "Go to quotation number:"
@@ -4802,9 +4753,8 @@ msgid "Note a Customer Branch Name may be different to the Customer Name"
 msgstr ""
 
 #: Contracts.php:704
-#, fuzzy
 msgid "The customer record selected"
-msgstr "Kontakti märkmete kirje on kustutatud "
+msgstr ""
 
 #: Contracts.php:705 CounterSales.php:112 CounterSales.php:147
 #: CounterSales.php:1979 CounterSales.php:2170 DeliveryDetails.php:148
@@ -4826,14 +4776,12 @@ msgid "The SQL used to retrieve the customer details and failed was"
 msgstr ""
 
 #: Contracts.php:710
-#, fuzzy
 msgid "The customer details were unable to be retrieved"
-msgstr "SQL ei saanud kliendi detaile, kuna"
+msgstr ""
 
 #: Contracts.php:712
-#, fuzzy
 msgid "The SQL used that failed to get the customer details was:"
-msgstr "SQL, mida kasutati pangakonto detailide leidmiseks, oli"
+msgstr ""
 
 #: Contracts.php:724 CounterSales.php:181 SalesAnalRepts.php:165
 #: SalesAnalRepts.php:229 SelectOrderItems.php:414 SelectOrderItems.php:500
@@ -4854,9 +4802,8 @@ msgid " their account is currently at or over their credit limit"
 msgstr ""
 
 #: Contracts.php:739
-#, fuzzy
 msgid "Contract: Select Customer"
-msgstr "Tagasi Kliendi valimise juurde"
+msgstr ""
 
 #: Contracts.php:745 SelectOrderItems.php:616
 msgid "Part of the Customer Branch Name"
@@ -4919,9 +4866,8 @@ msgstr ""
 
 #: Contracts.php:825 SelectContract.php:29 SelectContract.php:39
 #: SuppContractChgs.php:117
-#, fuzzy
 msgid "Contract Reference"
-msgstr "Viide"
+msgstr ""
 
 #: Contracts.php:834 InventoryQuantities.php:213 PDFPriceList.php:352
 #: PDFPrintLabel.php:95 PricesByCost.php:175 ReorderLevelLocation.php:189
@@ -4947,19 +4893,16 @@ msgid "Add or Modify Contract Categories"
 msgstr ""
 
 #: Contracts.php:852
-#, fuzzy
 msgid "The stock locations could not be retrieved because"
-msgstr "BOM'i ei leitud, kuna"
+msgstr ""
 
 #: Contracts.php:853
-#, fuzzy
 msgid "The SQL used to retrieve stock locations and failed was"
-msgstr "SQL, mida kasutati pangakonto detailide leidmiseks, oli"
+msgstr ""
 
 #: Contracts.php:867
-#, fuzzy
 msgid "Contract Description"
-msgstr "Detaili kirjeldus"
+msgstr ""
 
 #: Contracts.php:870
 msgid "Drawing File"
@@ -4995,9 +4938,8 @@ msgid "Exchange Rate"
 msgstr ""
 
 #: Contracts.php:891
-#, fuzzy
 msgid "Contract Status"
-msgstr "Kontaktnimi"
+msgstr ""
 
 #: Contracts.php:894 CustLoginSetup.php:22 index.php:22 SuppLoginSetup.php:21
 #: WWW_Users.php:23
@@ -5005,9 +4947,8 @@ msgid "Setup"
 msgstr ""
 
 #: Contracts.php:895
-#, fuzzy
 msgid "Quote"
-msgstr "Märkmed"
+msgstr ""
 
 #: Contracts.php:896 PO_Header.php:795 POReport.php:1487 SalesInquiry.php:1104
 #: SelectContract.php:52 SelectContract.php:58 SelectContract.php:64
@@ -5016,14 +4957,12 @@ msgid "Completed"
 msgstr ""
 
 #: Contracts.php:898
-#, fuzzy
 msgid "Contract Setup"
-msgstr "Kontaktkood"
+msgstr ""
 
 #: Contracts.php:900
-#, fuzzy
 msgid "Customer Quoted"
-msgstr "Märkmed Kliendi kohta"
+msgstr ""
 
 #: Contracts.php:902 SelectContract.php:51 SelectContract.php:57
 #: SelectContract.php:63 SelectContract.php:69 SelectContract.php:75
@@ -5035,18 +4974,16 @@ msgid "Quotation Reference/Sales Order No"
 msgstr ""
 
 #: Contracts.php:910
-#, fuzzy
 msgid "Contract Work Order Ref"
-msgstr "Kontaktkood"
+msgstr ""
 
 #: Contracts.php:915
 msgid "Stock Items Required"
 msgstr ""
 
 #: Contracts.php:934
-#, fuzzy
 msgid "Total stock cost"
-msgstr "Kogumaksumus"
+msgstr ""
 
 #: Contracts.php:936 Contracts.php:957
 msgid "None Entered"
@@ -5057,19 +4994,16 @@ msgid "Other Requirements"
 msgstr ""
 
 #: Contracts.php:955
-#, fuzzy
 msgid "Total other costs"
-msgstr "Kogumaksumus"
+msgstr ""
 
 #: Contracts.php:961
-#, fuzzy
 msgid "Total Contract Cost"
-msgstr "Kogumaksumus"
+msgstr ""
 
 #: Contracts.php:961
-#, fuzzy
 msgid "Contract Price"
-msgstr "Kontaktkood"
+msgstr ""
 
 #: Contracts.php:964
 msgid "Enter Items Required"
@@ -5084,9 +5018,8 @@ msgid "Commit Changes"
 msgstr ""
 
 #: Contracts.php:969
-#, fuzzy
 msgid "Update Quotation"
-msgstr "Uuenda sobivus"
+msgstr ""
 
 #: Contracts.php:972
 msgid "Create Quotation"
@@ -5179,9 +5112,8 @@ msgid "Counter Sale"
 msgstr ""
 
 #: CounterSales.php:214
-#, fuzzy
 msgid "all amounts in"
-msgstr "Ainult hoiusekontod"
+msgstr ""
 
 #: CounterSales.php:221
 msgid "Item description has been used in search"
@@ -5318,14 +5250,12 @@ msgid "Payment Type"
 msgstr ""
 
 #: CounterSales.php:801
-#, fuzzy
 msgid "Banked to"
-msgstr "Pank"
+msgstr ""
 
 #: CounterSales.php:814
-#, fuzzy
 msgid "Amount Paid"
-msgstr "Hulk"
+msgstr ""
 
 #: CounterSales.php:818 SelectOrderItems.php:1407
 msgid "Re-Calculate"
@@ -5360,11 +5290,10 @@ msgid ""
 msgstr ""
 
 #: CounterSales.php:917
-#, fuzzy
 msgid ""
 "The company information and preferences could not be retrieved. See your "
 "system administrator"
-msgstr "Ettevõtte eelistusi ei saadud otsida, kuna"
+msgstr ""
 
 #: CounterSales.php:963 DeliveryDetails.php:380
 #: RecurringSalesOrdersProcess.php:144
@@ -5463,11 +5392,10 @@ msgid "has been entered"
 msgstr ""
 
 #: CounterSales.php:1756
-#, fuzzy
 msgid ""
 "The SQL that failed to insert the GL transaction for the bank account debit "
 "was"
-msgstr "SQL, mida kasutati pangakonto detailide sisestamiseks/muutmiseks, oli"
+msgstr ""
 
 #: CounterSales.php:1757 CustomerReceipt.php:445
 msgid "Cannot insert a GL transaction for the bank account debit"
@@ -5500,7 +5428,8 @@ msgid "Cannot insert a receipt transaction against the customer because"
 msgstr ""
 
 #: CounterSales.php:1866 CustomerReceipt.php:413
-msgid "The SQL that failed to update the date of the last payment received was"
+msgid ""
+"The SQL that failed to update the date of the last payment received was"
 msgstr ""
 
 #: CounterSales.php:1867 CustomerReceipt.php:414
@@ -5510,21 +5439,15 @@ msgid ""
 msgstr ""
 
 #: CounterSales.php:1880
-#, fuzzy
 msgid ""
 "The SQL that failed to insert the allocation of the receipt to the invoice "
 "was"
 msgstr ""
-"SQL, mis ebaõnnestus vahetuskurssidest tuleneva erinevuse sisestamisel "
-"raamatupidamiskontole, oli"
 
 #: CounterSales.php:1881
-#, fuzzy
 msgid ""
 "Cannot insert the customer allocation of the receipt to the invoice because"
 msgstr ""
-"Ei saa raamatupidamiskontole vahetuskurssidest tuleneva erinevuse kohta "
-"sissekannet teha, kuna"
 
 #: CounterSales.php:1920 SelectCreditItems.php:912 SelectOrderItems.php:1416
 msgid "Yes Please"
@@ -5574,9 +5497,8 @@ msgid "Add to Sale"
 msgstr ""
 
 #: CounterSales.php:2063 CounterSales.php:2064
-#, fuzzy
 msgid "Search for Items"
-msgstr "Otsi kohe"
+msgstr ""
 
 #: CounterSales.php:2064 SelectOrderItems.php:1558
 msgid ""
@@ -5589,9 +5511,8 @@ msgid "Select a Stock Category"
 msgstr ""
 
 #: CounterSales.php:2090 SelectOrderItems.php:1583
-#, fuzzy
 msgid "Enter partial Description"
-msgstr "Detaili kirjeldus"
+msgstr ""
 
 #: CounterSales.php:2098 SelectOrderItems.php:1598
 msgid "Use Quick Entry"
@@ -5615,7 +5536,8 @@ msgid "Next"
 msgstr ""
 
 #: CounterSales.php:2265
-msgid "Use this form to add items quickly if the item codes are already known"
+msgid ""
+"Use this form to add items quickly if the item codes are already known"
 msgstr ""
 
 #: CounterSales.php:2291 SelectCreditItems.php:951 SelectCreditItems.php:1001
@@ -6306,9 +6228,8 @@ msgstr ""
 
 #: CustLoginSetup.php:18 SelectContract.php:11 SupplierCredit.php:244
 #: SupplierCredit.php:294 SupplierInvoice.php:212 SupplierInvoice.php:266
-#, fuzzy
 msgid "Contracts"
-msgstr "Kontaktkood"
+msgstr ""
 
 #: CustLoginSetup.php:19 index.php:19 SupplierCredit.php:232
 #: SupplierCredit.php:296 SupplierInvoice.php:204 SupplierInvoice.php:269
@@ -6920,9 +6841,8 @@ msgid ""
 msgstr ""
 
 #: CustomerBranches.php:539
-#, fuzzy
 msgid "Change Details for Branch"
-msgstr "Detailid"
+msgstr ""
 
 #: CustomerBranches.php:541
 msgid "Show all branches defined for"
@@ -7252,9 +7172,8 @@ msgid "Receipt Entry"
 msgstr ""
 
 #: CustomerReceipt.php:35
-#, fuzzy
 msgid "A bank account must be selected for this receipt"
-msgstr "Pangakontot ei saanud sisestada või muuta, kuna"
+msgstr ""
 
 #: CustomerReceipt.php:50 Payments.php:685
 msgid "The bank account name cannot be retrieved because"
@@ -7303,14 +7222,12 @@ msgid "Processing has been cancelled"
 msgstr ""
 
 #: CustomerReceipt.php:234
-#, fuzzy
 msgid "Summary of Receipt Batch"
-msgstr "Kokkuvõttev raport"
+msgstr ""
 
 #: CustomerReceipt.php:236
-#, fuzzy
 msgid "Batch Number"
-msgstr "Detaili number"
+msgstr ""
 
 #: CustomerReceipt.php:237 CustomerReceipt.php:754
 msgid "Date Banked"
@@ -7575,7 +7492,8 @@ msgid "The customer number already exists in the database"
 msgstr ""
 
 #: Customers.php:46
-msgid "The customer name must be entered and be forty characters or less long"
+msgid ""
+"The customer name must be entered and be forty characters or less long"
 msgstr ""
 
 #: Customers.php:51
@@ -7707,9 +7625,8 @@ msgstr ""
 #: MRPPlannedWorkOrders.php:15 MRPReschedules.php:18 MRPShortages.php:17
 #: OffersReceived.php:229 PO_Header.php:437 includes/ConnectDB_mysqli.inc:32
 #: includes/ConnectDB_mysql.inc:26
-#, fuzzy
 msgid "here"
-msgstr "On olemas"
+msgstr ""
 
 #: Customers.php:436
 msgid "to set up your price lists"
@@ -7937,11 +7854,13 @@ msgid "Add/edit/delete Customer Types"
 msgstr ""
 
 #: CustomerTypes.php:39
-msgid "The customer type name description must be 100 characters or less long"
+msgid ""
+"The customer type name description must be 100 characters or less long"
 msgstr ""
 
 #: CustomerTypes.php:47
-msgid "The customer type name description must contain at least one character"
+msgid ""
+"The customer type name description must contain at least one character"
 msgstr ""
 
 #: CustomerTypes.php:60
@@ -8030,9 +7949,8 @@ msgid "Customer How Paid Inquiry"
 msgstr ""
 
 #: CustWhereAlloc.php:14
-#, fuzzy
 msgid "Customer Where Allocated"
-msgstr "Kliendigrupi märkmed"
+msgstr ""
 
 #: CustWhereAlloc.php:36 PDFOrdersInvoiced.php:386 SalesInquiry.php:753
 #: SalesInquiry.php:759 SalesInquiry.php:936 SalesInquiry.php:1143
@@ -8090,14 +8008,12 @@ msgid "Transactions Dated"
 msgstr ""
 
 #: DailyBankTransactions.php:56
-#, fuzzy
 msgid "Show transactions"
-msgstr "Näita võrdlust"
+msgstr ""
 
 #: DailyBankTransactions.php:75
-#, fuzzy
 msgid "Account Transactions For"
-msgstr "Konto jaotised"
+msgstr ""
 
 #: DailyBankTransactions.php:75
 msgid "On"
@@ -8109,18 +8025,16 @@ msgid "Transaction type"
 msgstr ""
 
 #: DailyBankTransactions.php:81 DailyBankTransactions.php:83
-#, fuzzy
 msgid "Amount in"
-msgstr "Hulk"
+msgstr ""
 
 #: DailyBankTransactions.php:82 DailyBankTransactions.php:84
 msgid "Running Total"
 msgstr ""
 
 #: DailyBankTransactions.php:112
-#, fuzzy
 msgid "There are no transactions for this account on that day"
-msgstr "tehingud selle panga suunanumbriga"
+msgstr ""
 
 #: DailyBankTransactions.php:116
 msgid "Select Another Date"
@@ -8147,9 +8061,8 @@ msgid "Show Daily Sales For The Selected Month"
 msgstr ""
 
 #: DailySalesInquiry.php:92
-#, fuzzy
 msgid "The sales data could not be retrieved because"
-msgstr "BOM'i ei leitud, kuna"
+msgstr ""
 
 #: DailySalesInquiry.php:98 MRPCalendar.php:273
 msgid "Sunday"
@@ -8205,9 +8118,8 @@ msgid "Could not get the date of the last day in the period selected"
 msgstr ""
 
 #: DebtorsAtPeriodEnd.php:72
-#, fuzzy
 msgid "The customer details listing has no clients to report on"
-msgstr "BOM nimekirjas ei ole arveid, mida raporteerida"
+msgstr ""
 
 #: DebtorsAtPeriodEnd.php:116
 msgid "Total balances"
@@ -8393,19 +8305,16 @@ msgid "Thank you for your business"
 msgstr ""
 
 #: DeliveryDetails.php:616
-#, fuzzy
 msgid "Could not update the contract status"
-msgstr "Ei saanud valuutakursse uuendada"
+msgstr ""
 
 #: DeliveryDetails.php:617
-#, fuzzy
 msgid "The SQL that failed to update the contract status was"
-msgstr "SQL, mida kasutati kontogrupi uuendamisel, on"
+msgstr ""
 
 #: DeliveryDetails.php:621
-#, fuzzy
 msgid "Could not insert the contract bill of materials"
-msgstr "et näha costed BOM"
+msgstr ""
 
 #: DeliveryDetails.php:713
 msgid "The SQL that was used to update the order and failed was"
@@ -9073,7 +8982,8 @@ msgid "Payment will be effected by promissory note"
 msgstr ""
 
 #: EDIProcessOrders.php:314
-msgid "Payment will be effected by a bill drawn by the creditor on the debtor"
+msgid ""
+"Payment will be effected by a bill drawn by the creditor on the debtor"
 msgstr ""
 
 #: EDIProcessOrders.php:316
@@ -9436,9 +9346,8 @@ msgid "Factor Company Maintenance"
 msgstr ""
 
 #: Factors.php:26
-#, fuzzy
 msgid "Factor Companies"
-msgstr "Tagasi klientide juurde"
+msgstr ""
 
 #: Factors.php:38
 msgid ""
@@ -9491,9 +9400,8 @@ msgid "ID"
 msgstr ""
 
 #: Factors.php:162
-#, fuzzy
 msgid "Company Name"
-msgstr "Kontaktnimi"
+msgstr ""
 
 #: Factors.php:163 PurchData.php:316 SelectSupplier.php:252
 msgid "Address 1"
@@ -9512,14 +9420,12 @@ msgid "Address 4"
 msgstr ""
 
 #: Factors.php:167
-#, fuzzy
 msgid "Address 5"
-msgstr "Viies aadressirida"
+msgstr ""
 
 #: Factors.php:168
-#, fuzzy
 msgid "Address 6"
-msgstr "Kuues aadressirida"
+msgstr ""
 
 #: Factors.php:211
 msgid "Create New Factor"
@@ -9556,31 +9462,27 @@ msgid "Are you sure you wish to delete this factoring company?"
 msgstr ""
 
 #: FixedAssetCategories.php:8
-#, fuzzy
 msgid "Fixed Asset Category Maintenance"
-msgstr "Müügipiirkonna korrashoid"
+msgstr ""
 
 #: FixedAssetCategories.php:13
 msgid "Fixed Asset Categories"
 msgstr ""
 
 #: FixedAssetCategories.php:35
-#, fuzzy
 msgid "The Fixed Asset Category code must be six characters or less long"
-msgstr "Suunanumber võib olla kuni 3 tähemärki pikk"
+msgstr ""
 
 #: FixedAssetCategories.php:38
-#, fuzzy
 msgid ""
 "The Fixed Asset Category code must be at least 1 character but less than six "
 "characters long"
-msgstr "Suunanumber võib olla kuni 3 tähemärki pikk"
+msgstr ""
 
 #: FixedAssetCategories.php:41
-#, fuzzy
 msgid ""
 "The Fixed Asset Category description must be twenty characters or less long"
-msgstr "Piirkonna kirjeldus võib olla kuni kakskümmend viis tähemärki pikk"
+msgstr ""
 
 #: FixedAssetCategories.php:50
 msgid ""
@@ -9604,37 +9506,30 @@ msgid ""
 msgstr ""
 
 #: FixedAssetCategories.php:88
-#, fuzzy
 msgid "Could not update the fixed asset category"
-msgstr "Ei saanud valuutakursse uuendada"
+msgstr ""
 
 #: FixedAssetCategories.php:91
 msgid "Updated the fixed asset category record for"
 msgstr ""
 
 #: FixedAssetCategories.php:108
-#, fuzzy
 msgid "Could not insert the new fixed asset category"
-msgstr "Ei saanud sisestada BOM komponenti, kuna"
+msgstr ""
 
 #: FixedAssetCategories.php:110
-#, fuzzy
 msgid "A new fixed asset category record has been added for"
-msgstr "Kontakti märkmete kirje on lisatud"
+msgstr ""
 
 #: FixedAssetCategories.php:131
-#, fuzzy
 msgid ""
 "Cannot delete this fixed asset category because fixed assets have been "
 "created using this category"
 msgstr ""
-"Ei saa seda piirkonda kustutada, kuna seda on kasutatud kliendiharude "
-"loomisel"
 
 #: FixedAssetCategories.php:132
-#, fuzzy
 msgid "fixed assets referring to this category code"
-msgstr "müügianalüüsi kirjed, mis viitavad sellele suunakoodile"
+msgstr ""
 
 #: FixedAssetCategories.php:137
 msgid "The fixed asset category"
@@ -9712,9 +9607,8 @@ msgstr ""
 #: FixedAssetRegister.php:324 FixedAssetTransfer.php:124
 #: SuppFixedAssetChgs.php:75 SuppFixedAssetChgs.php:110 SupplierCredit.php:367
 #: SupplierInvoice.php:340
-#, fuzzy
 msgid "Asset ID"
-msgstr "Kasutaja ID"
+msgstr ""
 
 #: FixedAssetDepreciation.php:84 PricesByCost.php:94 SalesAnalReptCols.php:38
 #: SalesAnalReptCols.php:40 SelectProduct.php:173 SelectProduct.php:323
@@ -9732,14 +9626,12 @@ msgid "B/fwd Book Value"
 msgstr ""
 
 #: FixedAssetDepreciation.php:87
-#, fuzzy
 msgid "Depn Type"
-msgstr "Tüüp"
+msgstr ""
 
 #: FixedAssetDepreciation.php:88
-#, fuzzy
 msgid "Depn Rate"
-msgstr "Kuupäev"
+msgstr ""
 
 #: FixedAssetDepreciation.php:89
 msgid "New Depn"
@@ -9762,30 +9654,21 @@ msgid "DV"
 msgstr ""
 
 #: FixedAssetDepreciation.php:178
-#, fuzzy
 msgid "Cannot insert a depreciation GL entry for the depreciation because"
 msgstr ""
-"Ei saa raamatupidamiskontole vahetuskurssidest tuleneva erinevuse kohta "
-"sissekannet teha, kuna"
 
 #: FixedAssetDepreciation.php:179 GLJournal.php:82 GLJournal.php:105
 msgid "The SQL that failed to insert the GL Trans record was"
 msgstr ""
 
 #: FixedAssetDepreciation.php:214
-#, fuzzy
 msgid ""
 "Cannot insert a fixed asset transaction entry for the depreciation because"
 msgstr ""
-"Ei saa raamatupidamiskontole vahetuskurssidest tuleneva erinevuse kohta "
-"sissekannet teha, kuna"
 
 #: FixedAssetDepreciation.php:215
-#, fuzzy
 msgid "The SQL that failed to insert the fixed asset transaction record was"
 msgstr ""
-"SQL, mis ebaõnnestus vahetuskurssidest tuleneva erinevuse sisestamisel "
-"raamatupidamiskontole, oli"
 
 #: FixedAssetDepreciation.php:221
 msgid ""
@@ -9804,9 +9687,8 @@ msgid "GRAND Total"
 msgstr ""
 
 #: FixedAssetDepreciation.php:245 FixedAssetRegister.php:354
-#, fuzzy
 msgid "Depreciation"
-msgstr "Kirjeldus"
+msgstr ""
 
 #: FixedAssetDepreciation.php:245 GLJournal.php:115 Payments.php:575
 msgid "has been successfully entered"
@@ -9826,14 +9708,12 @@ msgstr ""
 
 #: FixedAssetItems.php:9 SupplierCredit.php:252 SupplierCredit.php:298
 #: SupplierInvoice.php:220 SupplierInvoice.php:271
-#, fuzzy
 msgid "Fixed Assets"
-msgstr "Komplektid"
+msgstr ""
 
 #: FixedAssetItems.php:13
-#, fuzzy
 msgid "Back to Select"
-msgstr "Tagasi Kliendi valimise juurde"
+msgstr ""
 
 #: FixedAssetItems.php:16
 msgid "Fixed Asset Items"
@@ -9877,51 +9757,39 @@ msgstr ""
 
 #: FixedAssetItems.php:147 FixedAssetItems.php:167 FixedAssetItems.php:187
 #: FixedAssetItems.php:207
-#, fuzzy
 msgid "change category"
-msgstr "Varude kategooria"
+msgstr ""
 
 #: FixedAssetItems.php:150 FixedAssetItems.php:170 FixedAssetItems.php:190
 #: FixedAssetItems.php:210
-#, fuzzy
 msgid "Cannot insert a GL entry for the change of asset category because"
 msgstr ""
-"Ei saa raamatupidamiskontole vahetuskurssidest tuleneva erinevuse kohta "
-"sissekannet teha, kuna"
 
 #: FixedAssetItems.php:151 FixedAssetItems.php:171 FixedAssetItems.php:191
 #: FixedAssetItems.php:211 FixedAssetItems.php:327 FixedAssetItems.php:347
-#, fuzzy
 msgid "The SQL that failed to insert the cost GL Trans record was"
 msgstr ""
-"SQL, mis ebaõnnestus vahetuskurssidest tuleneva erinevuse sisestamisel "
-"raamatupidamiskontole, oli"
 
 #: FixedAssetItems.php:226
-#, fuzzy
 msgid "The asset could not be updated because"
-msgstr "Seda piirkonda ei õnnestunud lisada või uuendada, kuna"
+msgstr ""
 
 #: FixedAssetItems.php:227
-#, fuzzy
 msgid "The SQL that was used to update the asset and failed was"
-msgstr "SQL, mida kasutati kontogrupi uuendamisel, on"
+msgstr ""
 
 #: FixedAssetItems.php:230 FixedAssetRegister.php:263
 #: FixedAssetRegister.php:347
-#, fuzzy
 msgid "Asset"
-msgstr "Koost"
+msgstr ""
 
 #: FixedAssetItems.php:252 Z_ImportFixedAssets.php:212
-#, fuzzy
 msgid "The asset could not be added because"
-msgstr "Seda piirkonda ei õnnestunud lisada või uuendada, kuna"
+msgstr ""
 
 #: FixedAssetItems.php:253
-#, fuzzy
 msgid "The SQL that was used to add the asset failed was"
-msgstr "SQL, mida kasutati kontogrupi uuendamisel, on"
+msgstr ""
 
 #: FixedAssetItems.php:258
 msgid "The new asset has been added to the database with an asset code of:"
@@ -9951,44 +9819,34 @@ msgid ""
 msgstr ""
 
 #: FixedAssetItems.php:323 FixedAssetItems.php:343
-#, fuzzy
 msgid "Delete asset"
-msgstr "Kustuta"
+msgstr ""
 
 #: FixedAssetItems.php:326
-#, fuzzy
 msgid "Cannot insert a GL entry for the deletion of the asset because"
 msgstr ""
-"Ei saa raamatupidamiskontole vahetuskurssidest tuleneva erinevuse kohta "
-"sissekannet teha, kuna"
 
 #: FixedAssetItems.php:346
-#, fuzzy
 msgid ""
 "Cannot insert a GL entry for the reversal of accumulated depreciation on "
 "deletion of the asset because"
 msgstr ""
-"Ei saa raamatupidamiskontole vahetuskurssidest tuleneva erinevuse kohta "
-"sissekannet teha, kuna"
 
 #: FixedAssetItems.php:354
-#, fuzzy
 msgid "Could not delete the asset record"
-msgstr "Ei saanud selle BOM'i komponente kustutada, kuna"
+msgstr ""
 
 #: FixedAssetItems.php:358
 msgid "Deleted the asset  record for asset number"
 msgstr ""
 
 #: FixedAssetItems.php:413 FixedAssetItems.php:417 SelectAsset.php:222
-#, fuzzy
 msgid "Asset Code"
-msgstr "Suunanumber"
+msgstr ""
 
 #: FixedAssetItems.php:426 FixedAssetItems.php:434
-#, fuzzy
 msgid "Asset Description"
-msgstr "Detaili kirjeldus"
+msgstr ""
 
 #: FixedAssetItems.php:426 Stocks.php:645
 msgid "short"
@@ -10003,39 +9861,33 @@ msgid "Image File (.jpg)"
 msgstr ""
 
 #: FixedAssetItems.php:465 FixedAssetRegister.php:237
-#, fuzzy
 msgid "Asset Category"
-msgstr "Varude kategooria"
+msgstr ""
 
 #: FixedAssetItems.php:468
-#, fuzzy
 msgid "The asset categories could not be retrieved because"
-msgstr "BOM'i ei leitud, kuna"
+msgstr ""
 
 #: FixedAssetItems.php:480
 msgid "Add or Modify Asset Categories"
 msgstr ""
 
 #: FixedAssetItems.php:486 SelectAsset.php:225
-#, fuzzy
 msgid "Date Purchased"
-msgstr "Ostetud"
+msgstr ""
 
 #: FixedAssetItems.php:490
-#, fuzzy
 msgid "The asset locations could not be retrieved because"
-msgstr "BOM'i ei leitud, kuna"
+msgstr ""
 
 #: FixedAssetItems.php:491
-#, fuzzy
 msgid "The SQL used to retrieve asset locations and failed was"
-msgstr "SQL, mida kasutati pangakonto detailide leidmiseks, oli"
+msgstr ""
 
 #: FixedAssetItems.php:494 FixedAssetRegister.php:250 SelectAsset.php:73
 #: SelectAsset.php:224
-#, fuzzy
 msgid "Asset Location"
-msgstr "Asukoht"
+msgstr ""
 
 #: FixedAssetItems.php:504 Stocks.php:900 includes/DefineLabelClass.php:50
 msgid "Bar Code"
@@ -10072,9 +9924,8 @@ msgid "Accumulated Costs"
 msgstr ""
 
 #: FixedAssetItems.php:531
-#, fuzzy
 msgid "Accumulated Depreciation"
-msgstr "Konto jaotised"
+msgstr ""
 
 #: FixedAssetItems.php:532 FixedAssetRegister.php:357
 msgid "Net Book Value"
@@ -10115,23 +9966,20 @@ msgid "Asset Type"
 msgstr ""
 
 #: FixedAssetList.php:29
-#, fuzzy
 msgid "Asset Reference"
-msgstr "Viide"
+msgstr ""
 
 #: FixedAssetList.php:31
-#, fuzzy
 msgid "Depreciation %"
-msgstr "Kirjeldus"
+msgstr ""
 
 #: FixedAssetLocations.php:6
 msgid "Fixed Asset Locations"
 msgstr ""
 
 #: FixedAssetLocations.php:14
-#, fuzzy
 msgid "You must enter at least one character in the location ID"
-msgstr "Kontogrupi nimi peab olema vähemalt ühe tähemärgi pikkune"
+msgstr ""
 
 #: FixedAssetLocations.php:18 FixedAssetLocations.php:48
 msgid "You must enter at least one character in the location description"
@@ -10146,24 +9994,20 @@ msgid "You have assets in this location location so it cannot be removed"
 msgstr ""
 
 #: FixedAssetLocations.php:81
-#, fuzzy
 msgid "The location has been deleted successfully"
-msgstr "jaotis on kustutatud"
+msgstr ""
 
 #: FixedAssetLocations.php:91 FixedAssetLocations.php:108
-#, fuzzy
 msgid "Location ID"
-msgstr "Asukoht"
+msgstr ""
 
 #: FixedAssetLocations.php:92 FixedAssetLocations.php:116
-#, fuzzy
 msgid "Location Description"
-msgstr "Jaotise kirjeldus"
+msgstr ""
 
 #: FixedAssetLocations.php:93 FixedAssetLocations.php:119
-#, fuzzy
 msgid "Parent Location"
-msgstr "Asukoht"
+msgstr ""
 
 #: FixedAssetLocations.php:146
 msgid "Delete This Location"
@@ -10186,9 +10030,8 @@ msgid "Depn B/fwd"
 msgstr ""
 
 #: FixedAssetRegister.php:84 FixedAssetRegister.php:353
-#, fuzzy
 msgid "Additions"
-msgstr "kirjeldusse"
+msgstr ""
 
 #: FixedAssetRegister.php:85
 msgid "Depn"
@@ -10232,34 +10075,28 @@ msgid "ALL"
 msgstr ""
 
 #: FixedAssetRegister.php:281
-#, fuzzy
 msgid " From Date"
-msgstr "lates kuupäevast"
+msgstr ""
 
 #: FixedAssetRegister.php:283
-#, fuzzy
 msgid "To Date "
-msgstr "kuni kuupäevani"
+msgstr ""
 
 #: FixedAssetRegister.php:287
-#, fuzzy
 msgid "Show Assets"
-msgstr "Näita valituid"
+msgstr ""
 
 #: FixedAssetRegister.php:322
-#, fuzzy
 msgid "Asset Category "
-msgstr "Varude kategooria"
+msgstr ""
 
 #: FixedAssetRegister.php:323
-#, fuzzy
 msgid "Asset Location "
-msgstr "Asukoht"
+msgstr ""
 
 #: FixedAssetRegister.php:349
-#, fuzzy
 msgid "Serial No."
-msgstr "Otsi kohe"
+msgstr ""
 
 #: FixedAssetRegister.php:351
 msgid "Cost B/Fwd"
@@ -10282,9 +10119,8 @@ msgid "Change Asset Location"
 msgstr ""
 
 #: FixedAssetTransfer.php:34 SelectAsset.php:46
-#, fuzzy
 msgid "In Asset Category"
-msgstr "Varude kategooria"
+msgstr ""
 
 #: FixedAssetTransfer.php:50 FixedAssetTransfer.php:61
 #: FixedAssetTransfer.php:72 MRPReport.php:556 MRPReport.php:563
@@ -10294,9 +10130,8 @@ msgid "Enter partial"
 msgstr ""
 
 #: FixedAssetTransfer.php:126
-#, fuzzy
 msgid "Serial number"
-msgstr "Jaotise number"
+msgstr ""
 
 #: FixedAssetTransfer.php:127 SpecialOrder.php:552
 msgid "Purchase Cost"
@@ -10307,9 +10142,8 @@ msgid "Total Depreciation"
 msgstr ""
 
 #: FixedAssetTransfer.php:129
-#, fuzzy
 msgid "Current Location"
-msgstr "Asukoht"
+msgstr ""
 
 #: FixedAssetTransfer.php:130
 msgid "Move To :"
@@ -10358,9 +10192,8 @@ msgid "Edit Form Layout"
 msgstr ""
 
 #: FormDesigner.php:159
-#, fuzzy
 msgid "Form Design"
-msgstr "lates kuupäevast"
+msgstr ""
 
 #: FormDesigner.php:160
 msgid "Enter the changes that you want in the form layout below."
@@ -10371,9 +10204,8 @@ msgid "All measurements are in millimetres"
 msgstr ""
 
 #: FormDesigner.php:166
-#, fuzzy
 msgid "Form Name"
-msgstr "Piirkonna nimi"
+msgstr ""
 
 #: FormDesigner.php:168
 msgid "Paper Size"
@@ -10424,9 +10256,8 @@ msgid "Freight Costs Set Up"
 msgstr ""
 
 #: FreightCosts.php:32
-#, fuzzy
 msgid "Freight Costs"
-msgstr "Ühiku maksumus"
+msgstr ""
 
 #: FreightCosts.php:43
 msgid "Select A Freight Company to set up costs for"
@@ -10868,9 +10699,8 @@ msgstr ""
 
 #: GLAccountCSV.php:8 GLAccountCSV.php:18 GLAccountReport.php:248
 #: GLAccountReport.php:252
-#, fuzzy
 msgid "General Ledger Account Report"
-msgstr "ja üldised raamatupidamiskontod, mida mõjutatakse"
+msgstr ""
 
 #: GLAccountCSV.php:18 GLAccountInquiry.php:8 GLAccountInquiry.php:24
 #: GLAccountReport.php:252
@@ -10882,9 +10712,8 @@ msgid "Use the keyboard Shift key to select multiple accounts and periods"
 msgstr ""
 
 #: GLAccountCSV.php:31 GLAccountReport.php:265
-#, fuzzy
 msgid "Selected Accounts"
-msgstr "Jaotis kontode all"
+msgstr ""
 
 #: GLAccountCSV.php:46 GLAccountInquiry.php:66 GLAccountReport.php:280
 msgid "For Period range"
@@ -10966,9 +10795,8 @@ msgid "Show Account Transactions"
 msgstr ""
 
 #: GLAccountInquiry.php:150
-#, fuzzy
 msgid "Transactions for account"
-msgstr "tehingud selle panga suunanumbriga"
+msgstr ""
 
 #: GLAccountInquiry.php:155 GLAccountReport.php:370 GLJournal.php:340
 #: GLJournal.php:361
@@ -11012,27 +10840,24 @@ msgid "A log of the account differences for the periods report shows below"
 msgstr ""
 
 #: GLAccountReport.php:32 GLAccountReport.php:33 GLAccountReport.php:351
-#, fuzzy
 msgid "GL Account Report"
-msgstr "GL suunanumber"
+msgstr ""
 
 #: GLAccountReport.php:102
 msgid "Listing for Period"
 msgstr ""
 
 #: GLAccountReport.php:318
-#, fuzzy
 msgid "Run Report"
-msgstr "Kokkuvõttev raport"
+msgstr ""
 
 #: GLAccounts.php:7
 msgid "Chart of Accounts Maintenance"
 msgstr ""
 
 #: GLAccounts.php:18
-#, fuzzy
 msgid "General Ledger Accounts"
-msgstr "ja üldised raamatupidamiskontod, mida mõjutatakse"
+msgstr ""
 
 #: GLAccounts.php:32
 msgid "The account code must be an integer"
@@ -11262,9 +11087,8 @@ msgid "There were no entries to print out for the selections specified"
 msgstr ""
 
 #: GLBalanceSheet.php:351
-#, fuzzy
 msgid "HTML View"
-msgstr "Vaata"
+msgstr ""
 
 #: GLBalanceSheet.php:354 includes/PDFBalanceSheetPageHeader.inc:20
 msgid "Balance Sheet as at"
@@ -11420,9 +11244,8 @@ msgid "The manual GL code entered does not exist in the database"
 msgstr ""
 
 #: GLJournal.php:193
-#, fuzzy
 msgid "You must select a GL account code"
-msgstr "Postita pearaamatu kontole"
+msgstr ""
 
 #: GLJournal.php:253
 msgid "Date to Process Journal"
@@ -11445,9 +11268,8 @@ msgid "GL Tag"
 msgstr ""
 
 #: GLJournal.php:319
-#, fuzzy
 msgid "Select a general ledger account code"
-msgstr "ja üldised raamatupidamiskontod, mida mõjutatakse"
+msgstr ""
 
 #: GLJournal.php:347 Payments.php:922 Payments.php:924
 msgid "GL Narrative"
@@ -12020,11 +11842,10 @@ msgid ""
 msgstr ""
 
 #: GoodsReceived.php:613 SupplierInvoice.php:1286
-#, fuzzy
 msgid ""
 "The following SQL was used to attempt the update of the cost and the date "
 "the asset was purchased"
-msgstr "SQL, mis ebaõnnestus BOM'i komponentide otsimisel, oli"
+msgstr ""
 
 #: GoodsReceived.php:642
 msgid "The purchase GL posting could not be inserted because"
@@ -12083,9 +11904,8 @@ msgid "Order Status"
 msgstr ""
 
 #: index.php:68
-#, fuzzy
 msgid "Supplier Tenders"
-msgstr "Tarnijakoodi"
+msgstr ""
 
 #: index.php:129
 msgid "Enter An Order or Quotation"
@@ -12096,9 +11916,8 @@ msgid "Enter Counter Sales"
 msgstr ""
 
 #: index.php:139 PDFPickingList.php:42
-#, fuzzy
 msgid "Print Picking Lists"
-msgstr "Hinnakiri"
+msgstr ""
 
 #: index.php:144
 msgid "Outstanding Sales Orders/Quotations"
@@ -12146,9 +11965,8 @@ msgid "Sales Order Detail Or Summary Inquiries"
 msgstr ""
 
 #: index.php:208
-#, fuzzy
 msgid "Top Sales Items Report"
-msgstr "Probleemist teavitamine"
+msgstr ""
 
 #: index.php:213
 msgid "Sales With Low Gross Profit Report"
@@ -12159,9 +11977,8 @@ msgid "Select Contract"
 msgstr ""
 
 #: index.php:236
-#, fuzzy
 msgid "Create Contract"
-msgstr "Klientide kontaktid"
+msgstr ""
 
 #: index.php:269
 msgid "Select Order to Invoice"
@@ -12589,9 +12406,8 @@ msgid "Form Layout Editor"
 msgstr ""
 
 #: index.php:1025
-#, fuzzy
 msgid "Label Templates Maintenance"
-msgstr "Müügipiirkonna korrashoid"
+msgstr ""
 
 #: index.php:1030
 msgid "SMTP Server Details"
@@ -12604,9 +12420,8 @@ msgstr ""
 #: index.php:1050 SupplierTypes.php:8 SupplierTypes.php:23
 #: SuppPaymentRun.php:237 SystemParameters.php:13 TaxAuthorities.php:10
 #: TaxAuthorityRates.php:17 TaxCategories.php:12 Tax.php:298
-#, fuzzy
 msgid "Supplier Types"
-msgstr "Tarnijakoodi"
+msgstr ""
 
 #: index.php:1065
 msgid "Set Purchase Order Authorisation levels"
@@ -12689,9 +12504,8 @@ msgid "Account Inquiry"
 msgstr ""
 
 #: index.php:1209
-#, fuzzy
 msgid "Account Listing"
-msgstr "Konto jaotised"
+msgstr ""
 
 #: index.php:1214
 msgid "Account Listing to CSV File"
@@ -12746,9 +12560,8 @@ msgid "Asset Register"
 msgstr ""
 
 #: index.php:1347
-#, fuzzy
 msgid "Asset Categories Maintenance"
-msgstr "Töökeskuse hooldamine"
+msgstr ""
 
 #: index.php:1352
 msgid "Add or Maintain Asset Locations"
@@ -12837,7 +12650,8 @@ msgid ""
 msgstr ""
 
 #: InventoryPlanning.php:292 InventoryPlanningPrefSupplier.php:403
-msgid "The purchase order quantities could not be retrieved by the SQL because"
+msgid ""
+"The purchase order quantities could not be retrieved by the SQL because"
 msgstr ""
 
 #: InventoryPlanning.php:332
@@ -13044,7 +12858,8 @@ msgid "Parts With Quantities"
 msgstr ""
 
 #: InventoryQuantities.php:85
-msgid "The Inventory Quantity report could not be retrieved by the SQL because"
+msgid ""
+"The Inventory Quantity report could not be retrieved by the SQL because"
 msgstr ""
 
 #: InventoryQuantities.php:94
@@ -13125,18 +12940,16 @@ msgid "Inventory Valuation Reporting"
 msgstr ""
 
 #: Labels.php:19
-#, fuzzy
 msgid "Label Templates Maintainance"
-msgstr "Müügipiirkonna korrashoid"
+msgstr ""
 
 #: Labels.php:50 Labels.php:61
 msgid "Correct data"
 msgstr ""
 
 #: Labels.php:70
-#, fuzzy
 msgid "New ID"
-msgstr "Märkme ID"
+msgstr ""
 
 #: Labels.php:71
 msgid "Edit data new label"
@@ -13245,14 +13058,12 @@ msgid "Do you really want to erase the label"
 msgstr ""
 
 #: Labels.php:546
-#, fuzzy
 msgid "Could not rename the previous file."
-msgstr "Ei saanud valuutakursse uuendada"
+msgstr ""
 
 #: Labels.php:549
-#, fuzzy
 msgid "Could not create the new XML file."
-msgstr "Ei saanud valuutakursse uuendada"
+msgstr ""
 
 #: Locations.php:10
 msgid "Location Maintenance"
@@ -13425,9 +13236,8 @@ msgid "Managed"
 msgstr ""
 
 #: Locations.php:403
-#, fuzzy
 msgid "Review Records"
-msgstr "Kontogruppide ülevaade"
+msgstr ""
 
 #: Locations.php:458
 msgid "Amend Location details"
@@ -13446,9 +13256,8 @@ msgid "Facsimile No"
 msgstr ""
 
 #: Locations.php:543
-#, fuzzy
 msgid "Default Counter Sales Customer"
-msgstr "Tagasi Kliendi valimise juurde"
+msgstr ""
 
 #: Logout.php:12
 msgid "Log Off"
@@ -13674,9 +13483,8 @@ msgid "Record already exists for part number/demand type/date"
 msgstr ""
 
 #: MRPDemands.php:197
-#, fuzzy
 msgid "The MRP demand record has been updated for"
-msgstr "Kontakti kirje on kustutatud"
+msgstr ""
 
 #: MRPDemands.php:210
 msgid "A new MRP demand record has been added to the database for"
@@ -13695,9 +13503,8 @@ msgid "All records for demand type"
 msgstr ""
 
 #: MRPDemands.php:250
-#, fuzzy
 msgid "have been deleted"
-msgstr "on kustutatud"
+msgstr ""
 
 #: MRPDemands.php:293 MRPDemands.php:382 MRPPlannedPurchaseOrders.php:321
 #: MRPPlannedWorkOrders.php:260 MRPPlannedWorkOrders.php:386 MRPReport.php:414
@@ -14055,23 +13862,20 @@ msgid "Consolidations"
 msgstr ""
 
 #: MRPPlannedWorkOrders.php:288
-#, fuzzy
 msgid "Convert"
-msgstr "Komponent"
+msgstr ""
 
 #: MRPPlannedWorkOrders.php:314
-#, fuzzy
 msgid "Total Extended Cost: "
-msgstr "Kogumaksumus"
+msgstr ""
 
 #: MRPPlannedWorkOrders.php:327
 msgid "MRP Planned Work Orders Reporting"
 msgstr ""
 
 #: MRPPlannedWorkOrders.php:344
-#, fuzzy
 msgid "Review"
-msgstr "Vaata"
+msgstr ""
 
 #: MRPReport.php:19 MRPReport.php:20 MRPReport.php:147 MRPReport.php:516
 #: MRPReport.php:825
@@ -14265,9 +14069,8 @@ msgid "MRP Reschedule Reporting"
 msgstr ""
 
 #: MRPReschedules.php:152 MRPShortages.php:249 Stocks.php:36
-#, fuzzy
 msgid "Stock"
-msgstr "inventari kood"
+msgstr ""
 
 #: MRPReschedules.php:162
 msgid "Work Orders Only"
@@ -14335,19 +14138,16 @@ msgid "Ext. Shortage"
 msgstr ""
 
 #: OffersReceived.php:6 OffersReceived.php:88
-#, fuzzy
 msgid "Supplier Offers"
-msgstr "Tarnijakoodi"
+msgstr ""
 
 #: OffersReceived.php:39
-#, fuzzy
 msgid "There are no offers outstanding that you are authorised to deal with"
-msgstr "Ei ole kliente, keda vastavalt täpsustatud kriteeriumitele järjestada"
+msgstr ""
 
 #: OffersReceived.php:91
-#, fuzzy
 msgid "Offer ID"
-msgstr "Kasutaja ID"
+msgstr ""
 
 #: OffersReceived.php:93 PurchData.php:305 Stocks.php:355
 #: includes/PDFStockTransListingPageHeader.inc:67
@@ -14363,9 +14163,8 @@ msgid "Reject"
 msgstr ""
 
 #: OffersReceived.php:102
-#, fuzzy
 msgid "Defer"
-msgstr "pärast"
+msgstr ""
 
 #: OffersReceived.php:152 OffersReceived.php:232
 msgid ""
@@ -14396,9 +14195,8 @@ msgid "Your offer to"
 msgstr ""
 
 #: OffersReceived.php:223
-#, fuzzy
 msgid "has been accepted"
-msgstr "on postitatud"
+msgstr ""
 
 #: OffersReceived.php:227
 msgid "The accepted offers from"
@@ -14417,9 +14215,8 @@ msgid "The following offers you made have been rejected"
 msgstr ""
 
 #: OffersReceived.php:251
-#, fuzzy
 msgid "has been rejected"
-msgstr "on kustutatud"
+msgstr ""
 
 #: OffersReceived.php:255
 msgid "The rejected offers from"
@@ -14520,9 +14317,8 @@ msgid "Page Security Levels"
 msgstr ""
 
 #: PageSecurity.php:16
-#, fuzzy
 msgid "Could not update the page security value for the script because"
-msgstr "Ei leidnud emadetaili kirjeldust, kuna"
+msgstr ""
 
 #: PageSecurity.php:54
 msgid "Update Security Levels"
@@ -14557,7 +14353,8 @@ msgid "Back to supplier inquiry"
 msgstr ""
 
 #: PaymentAllocations.php:67
-msgid "There may be a problem retrieving the information. No data is returned"
+msgid ""
+"There may be a problem retrieving the information. No data is returned"
 msgstr ""
 
 #: PaymentAllocations.php:68
@@ -14750,7 +14547,8 @@ msgid "Cannot insert a payment transaction against the supplier because"
 msgstr ""
 
 #: Payments.php:422
-msgid "Cannot insert a payment transaction against the supplier using the SQL"
+msgid ""
+"Cannot insert a payment transaction against the supplier using the SQL"
 msgstr ""
 
 #: Payments.php:433
@@ -14766,7 +14564,8 @@ msgid ""
 msgstr ""
 
 #: Payments.php:458
-msgid "Cannot insert a GL transaction for the creditors account debit because"
+msgid ""
+"Cannot insert a GL transaction for the creditors account debit because"
 msgstr ""
 
 #: Payments.php:459
@@ -14775,7 +14574,8 @@ msgid ""
 msgstr ""
 
 #: Payments.php:479
-msgid "Cannot insert a GL transaction for the payment discount credit because"
+msgid ""
+"Cannot insert a GL transaction for the payment discount credit because"
 msgstr ""
 
 #: Payments.php:480
@@ -14993,9 +14793,8 @@ msgid "The payment term definition record has been deleted"
 msgstr ""
 
 #: PaymentTerms.php:178
-#, fuzzy
 msgid "Payment Terms."
-msgstr "Maksed"
+msgstr ""
 
 #: PaymentTerms.php:179 PaymentTerms.php:250 PaymentTerms.php:263
 msgid "Term Code"
@@ -15029,9 +14828,8 @@ msgid "Update Payment Terms."
 msgstr ""
 
 #: PaymentTerms.php:262
-#, fuzzy
 msgid "New Payment Terms."
-msgstr "Maksed"
+msgstr ""
 
 #: PaymentTerms.php:268
 msgid "Terms Description"
@@ -15050,9 +14848,8 @@ msgid "Assignment of Cash to Petty Cash Tab"
 msgstr ""
 
 #: PcAssignCashToTab.php:48
-#, fuzzy
 msgid "The Amount must be inputed"
-msgstr "Kontakt peab olema täisarv"
+msgstr ""
 
 #: PcAssignCashToTab.php:61
 msgid ""
@@ -15065,9 +14862,8 @@ msgid "Assignment of cash to PC Tab "
 msgstr ""
 
 #: PcAssignCashToTab.php:116
-#, fuzzy
 msgid "The assignment of cash record could not be deleted because"
-msgstr "BOM'i ei leitud, kuna"
+msgstr ""
 
 #: PcAssignCashToTab.php:135
 msgid "Petty Cash Tab To Assign Cash"
@@ -15101,9 +14897,8 @@ msgid ""
 msgstr ""
 
 #: PcAssignCashToTab.php:280 PcClaimExpensesFromTab.php:271
-#, fuzzy
 msgid "Current balance"
-msgstr "Valuuta"
+msgstr ""
 
 #: PcAssignCashToTab.php:297
 msgid "Update Cash Assignment"
@@ -15134,9 +14929,8 @@ msgid "Authorized"
 msgstr ""
 
 #: PcAuthorizeExpenses.php:91 ReorderLevelLocation.php:64
-#, fuzzy
 msgid "update"
-msgstr "Kuupäev"
+msgstr ""
 
 #: PcAuthorizeExpenses.php:271
 msgid "Authorize expenses to Petty Cash Tab"
@@ -15147,18 +14941,16 @@ msgid "Claim Petty Cash Expenses From Tab"
 msgstr ""
 
 #: PcClaimExpensesFromTab.php:47
-#, fuzzy
 msgid "The Amount must be greater than 0"
-msgstr "Kontakt peab olema täisarv"
+msgstr ""
 
 #: PcClaimExpensesFromTab.php:61 PcClaimExpensesFromTab.php:88
 msgid "The Expense Claim on Tab"
 msgstr ""
 
 #: PcClaimExpensesFromTab.php:107
-#, fuzzy
 msgid "Petty Cash Expense record could not be deleted because"
-msgstr "Ettevõtte eelistusi ei saanud uuendada, kuna"
+msgstr ""
 
 #: PcClaimExpensesFromTab.php:109
 msgid "Petty cash Expense record"
@@ -15182,9 +14974,8 @@ msgid "Date Of Expense"
 msgstr ""
 
 #: PcClaimExpensesFromTab.php:192 PcReportTab.php:346
-#, fuzzy
 msgid "Expense Description"
-msgstr "Jaotise kirjeldus"
+msgstr ""
 
 #: PcClaimExpensesFromTab.php:312 PcExpenses.php:148 PcExpenses.php:220
 #: PcExpenses.php:230
@@ -15200,14 +14991,12 @@ msgid "The Expense type  code cannot be an empty string or spaces"
 msgstr ""
 
 #: PcExpenses.php:43
-#, fuzzy
 msgid "The Expense code must be twenty characters or less long"
-msgstr "Suunanumber võib olla kuni 3 tähemärki pikk"
+msgstr ""
 
 #: PcExpenses.php:48 PcTypeTabs.php:48
-#, fuzzy
 msgid "The tab code must be Fifty characters or less long"
-msgstr "Suunanumber võib olla kuni 3 tähemärki pikk"
+msgstr ""
 
 #: PcExpenses.php:60
 msgid "The Expenses type"
@@ -15222,37 +15011,30 @@ msgid "Expense "
 msgstr ""
 
 #: PcExpenses.php:114
-#, fuzzy
 msgid ""
 "The number of type of tabs using this expense code could not be retrieved"
-msgstr "Valitud kriteeriumitega makseid ei leitud, kuna"
+msgstr ""
 
 #: PcExpenses.php:119
-#, fuzzy
 msgid ""
 "Cannot delete this petty cash expense because it is used in some tab types"
 msgstr ""
-"Ei saa seda piirkonda kustutada, kuna eksisteerivad seda kasutavad "
-"müügianalüüsi kirjed"
 
 #: PcExpenses.php:119
-#, fuzzy
 msgid "tab types using this expense code"
-msgstr "harud, mis kasutavad seda suunakoodi"
+msgstr ""
 
 #: PcExpenses.php:125
-#, fuzzy
 msgid "The expense type record could not be deleted because"
-msgstr "Ettevõtte eelistusi ei saanud uuendada, kuna"
+msgstr ""
 
 #: PcExpenses.php:127
 msgid "Expense type"
 msgstr ""
 
 #: PcExpenses.php:151
-#, fuzzy
 msgid "Account Description"
-msgstr "Konto jaotised"
+msgstr ""
 
 #: PcExpenses.php:177
 #, php-format
@@ -15262,9 +15044,8 @@ msgid ""
 msgstr ""
 
 #: PcExpenses.php:193
-#, fuzzy
 msgid "Show All Petty Cash Expenses Defined"
-msgstr "Näita kõiki defineeritud pangakontosid"
+msgstr ""
 
 #: PcExpensesTypeTab.php:7
 msgid "Maintenance Of Petty Cash Expenses For a Type Tab"
@@ -15287,14 +15068,12 @@ msgid "for Type of Tab:"
 msgstr ""
 
 #: PcExpensesTypeTab.php:81 PcTypeTabs.php:132
-#, fuzzy
 msgid "The Tab Type record could not be deleted because"
-msgstr "Ettevõtte eelistusi ei saanud uuendada, kuna"
+msgstr ""
 
 #: PcExpensesTypeTab.php:83
-#, fuzzy
 msgid "Expense code"
-msgstr "Komponendi kood"
+msgstr ""
 
 #: PcExpensesTypeTab.php:83
 msgid "for type of tab"
@@ -15321,19 +15100,16 @@ msgid "Code Of Petty Cash Tab"
 msgstr ""
 
 #: PcReportTab.php:66
-#, fuzzy
 msgid "From Date :"
-msgstr "lates kuupäevast"
+msgstr ""
 
 #: PcReportTab.php:69
-#, fuzzy
 msgid "To Date:"
-msgstr "kuni kuupäevani"
+msgstr ""
 
 #: PcReportTab.php:72
-#, fuzzy
 msgid "Show HTML"
-msgstr "Näita"
+msgstr ""
 
 #: PcReportTab.php:81 PcReportTab.php:82
 msgid "Petty Cash Report Of Tab"
@@ -15369,14 +15145,12 @@ msgid "The SQL that returned no rows was"
 msgstr ""
 
 #: PcReportTab.php:118
-#, fuzzy
 msgid "No Petty Cash tabs were returned by the SQL because"
-msgstr "SQL ei saanud kliendi detaile, kuna"
+msgstr ""
 
 #: PcReportTab.php:136
-#, fuzzy
 msgid "Tab Code :"
-msgstr "Suunanumber"
+msgstr ""
 
 #: PcReportTab.php:137 PcReportTab.php:140 PcReportTab.php:145
 #: PcReportTab.php:148 PcReportTab.php:153 PcReportTab.php:158
@@ -15386,56 +15160,48 @@ msgid ": "
 msgstr ""
 
 #: PcReportTab.php:139
-#, fuzzy
 msgid "From "
-msgstr "lates kuupäevast"
+msgstr ""
 
 #: PcReportTab.php:144
-#, fuzzy
 msgid "User "
-msgstr "Kasutaja"
+msgstr ""
 
 #: PcReportTab.php:147
-#, fuzzy
 msgid "To "
-msgstr "kuni kuupäevani"
+msgstr ""
 
 #: PcReportTab.php:152
 msgid "Authorizer "
 msgstr ""
 
 #: PcReportTab.php:157
-#, fuzzy
 msgid "Currency "
-msgstr "Valuuta"
+msgstr ""
 
 #: PcReportTab.php:162 PcReportTab.php:307
-#, fuzzy
 msgid "Balance before "
-msgstr "Bilanss seisuga"
+msgstr ""
 
 #: PcReportTab.php:178
 msgid "Date Authorizer"
 msgstr ""
 
 #: PcReportTab.php:221
-#, fuzzy
 msgid "Balance at"
-msgstr "Bilanss seisuga"
+msgstr ""
 
 #: PcReportTab.php:232
 msgid "Print Report Tab Error"
 msgstr ""
 
 #: PcReportTab.php:270
-#, fuzzy
 msgid "No Petty Cash Tabs were returned by the SQL because"
-msgstr "SQL ei suutnud pangakonto bilanssi näidata, kuna"
+msgstr ""
 
 #: PcReportTab.php:277 PcTabs.php:144
-#, fuzzy
 msgid "Tab Code"
-msgstr "Suunanumber"
+msgstr ""
 
 #: PcReportTab.php:289 PcTabs.php:149 PcTabs.php:321
 msgid "Authorizer"
@@ -15446,37 +15212,32 @@ msgid "Total not authorized before "
 msgstr ""
 
 #: PcReportTab.php:340
-#, fuzzy
 msgid "No Petty Cash movements for this tab were returned by the SQL because"
-msgstr "SQL ei suutnud pangakontosid leida, kuna"
+msgstr ""
 
 #: PcReportTab.php:350
 msgid "Date Authorized"
 msgstr ""
 
 #: PcReportTab.php:420
-#, fuzzy
 msgid "Balance At"
-msgstr "Bilanss seisuga"
+msgstr ""
 
 #: PcReportTab.php:424
-#, fuzzy
 msgid "Select A Different Date"
-msgstr "Vali teine BOM"
+msgstr ""
 
 #: PcTabs.php:7
 msgid "Maintenance Of Petty Cash Tabs"
 msgstr ""
 
 #: PcTabs.php:38
-#, fuzzy
 msgid "The Tab code cannot be an empty string or spaces"
-msgstr "Suunanumbri lahtrit ei või tühjaks jätta"
+msgstr ""
 
 #: PcTabs.php:43
-#, fuzzy
 msgid "The Tab code must be twenty characters or less long"
-msgstr "Suunanumber võib olla kuni 3 tähemärki pikk"
+msgstr ""
 
 #: PcTabs.php:60
 msgid "The Tabs Of Code"
@@ -15491,14 +15252,12 @@ msgid "Tab with Code "
 msgstr ""
 
 #: PcTabs.php:122
-#, fuzzy
 msgid "The Tab record could not be deleted because"
-msgstr "Seda piirkonda ei õnnestunud lisada või uuendada, kuna"
+msgstr ""
 
 #: PcTabs.php:124 PcTypeTabs.php:134
-#, fuzzy
 msgid "Tab type"
-msgstr "Tüüp"
+msgstr ""
 
 #: PcTabs.php:145 PcTabs.php:256 PO_AuthorisationLevels.php:124
 #: SMTPServer.php:57 UserSettings.php:114
@@ -15518,9 +15277,8 @@ msgid "GL Account For Cash Assignment"
 msgstr ""
 
 #: PcTabs.php:151 PcTabs.php:364
-#, fuzzy
 msgid "GL Account Petty Cash Tab"
-msgstr "GL suunanumber"
+msgstr ""
 
 #: PcTabs.php:189 PcTypeTabs.php:172
 #, php-format
@@ -15530,23 +15288,20 @@ msgid ""
 msgstr ""
 
 #: PcTabs.php:209
-#, fuzzy
 msgid "Show All Tabs Defined"
-msgstr "Näita kõiki defineeritud pangakontosid"
+msgstr ""
 
 #: PcTabs.php:238 PcTabs.php:247
-#, fuzzy
 msgid "Tabcode"
-msgstr "Tabel"
+msgstr ""
 
 #: PcTabs.php:319
 msgid "Limit Of Tab"
 msgstr ""
 
 #: PcTabs.php:342
-#, fuzzy
 msgid "GL Account Cash Assignment"
-msgstr "GL suunanumber"
+msgstr ""
 
 #: PcTypeTabs.php:7
 msgid "Maintenance Of Petty Cash Type of Tabs"
@@ -15557,9 +15312,8 @@ msgid "The Tabs type code cannot be an empty string or spaces"
 msgstr ""
 
 #: PcTypeTabs.php:43
-#, fuzzy
 msgid "The tab code must be twenty characters or less long"
-msgstr "Suunanumber võib olla kuni 3 tähemärki pikk"
+msgstr ""
 
 #: PcTypeTabs.php:59
 msgid "The Tabs type"
@@ -15570,32 +15324,26 @@ msgid "The Tab type "
 msgstr ""
 
 #: PcTypeTabs.php:84
-#, fuzzy
 msgid "Tabs type"
-msgstr "Tüüp"
+msgstr ""
 
 #: PcTypeTabs.php:107 PcTypeTabs.php:116
-#, fuzzy
 msgid "The number of tabs using this Tab type could not be retrieved"
-msgstr "BOM'i ei leitud, kuna"
+msgstr ""
 
 #: PcTypeTabs.php:121
-#, fuzzy
 msgid ""
 "Cannot delete this tab type because tabs have been created using this tab "
 "type"
 msgstr ""
-"Ei saa seda piirkonda kustutada, kuna seda on kasutatud kliendiharude "
-"loomisel"
 
 #: PcTypeTabs.php:125
 msgid "Return to list of tab types"
 msgstr ""
 
 #: PcTypeTabs.php:186
-#, fuzzy
 msgid "Show All Types Tabs Defined"
-msgstr "Näita kõiki defineeritud pangakontosid"
+msgstr ""
 
 #: PcTypeTabs.php:210 PcTypeTabs.php:220
 msgid "Code Of Type Of Tab"
@@ -15821,15 +15569,13 @@ msgstr ""
 
 #: PDFCustTransListing.php:13 PDFStockTransListing.php:13
 #: PDFSuppTransListing.php:13
-#, fuzzy
 msgid "The date must be specified in the format"
-msgstr "Kirjet oodatakse formaadis"
+msgstr ""
 
 #: PDFCustTransListing.php:20 PDFCustTransListing.php:24
 #: PDFCustTransListing.php:93
-#, fuzzy
 msgid "Customer Transaction Listing"
-msgstr "Klientide kontaktid"
+msgstr ""
 
 #: PDFCustTransListing.php:34 PDFStockTransListing.php:34
 #: PDFSuppTransListing.php:34
@@ -15850,14 +15596,12 @@ msgid "Credit Notes"
 msgstr ""
 
 #: PDFCustTransListing.php:74 PDFStockTransListing.php:85
-#, fuzzy
 msgid "An error occurred getting the transactions"
-msgstr "Kontogrupi kustutamisel ilmnes viga"
+msgstr ""
 
 #: PDFCustTransListing.php:76
-#, fuzzy
 msgid "The SQL used to get the transaction information that failed was"
-msgstr "SQL, mida kasutati pangakonto detailide leidmiseks, oli"
+msgstr ""
 
 #: PDFCustTransListing.php:84 PDFStockTransListing.php:92
 #: PDFSuppTransListing.php:84
@@ -15870,9 +15614,8 @@ msgid "Please try again selecting a different date"
 msgstr ""
 
 #: PDFCustTransListing.php:94
-#, fuzzy
 msgid "Customer transaction listing from"
-msgstr "Ei leidnud ülekande informatsiooni"
+msgstr ""
 
 #: PDFDeliveryDifferences.php:24 PDFDeliveryDifferences.php:28
 msgid "Delivery Differences Report"
@@ -16131,9 +15874,8 @@ msgid "Create picking lists for all deliveries to be made on"
 msgstr ""
 
 #: PDFPickingList.php:36
-#, fuzzy
 msgid "From Warehouse"
-msgstr "lates kuupäevast"
+msgstr ""
 
 #: PDFPickingList.php:48
 msgid ""
@@ -16141,30 +15883,28 @@ msgid ""
 msgstr ""
 
 #: PDFPickingList.php:128 PDFPickingList.php:322
-#, fuzzy
 msgid "Print Picking List Error"
-msgstr "Viga liigendatud materjalide loetelu printimisel"
+msgstr ""
 
 #: PDFPickingList.php:131
 msgid "Unable to Locate any orders for this criteria "
 msgstr ""
 
 #: PDFPickingList.php:133
-#, fuzzy
 msgid "Enter Another Date"
-msgstr "Sisesta informatsioon"
+msgstr ""
 
 #: PDFPickingList.php:184 includes/PDFPickingListHeader.inc:12
-#, fuzzy
 msgid "Picking List"
-msgstr "Hinnakiri"
+msgstr ""
 
 #: PDFPickingList.php:185
 msgid "Laser Picking List"
 msgstr ""
 
 #: PDFPickingList.php:203
-msgid "There was a problem retrieving the order line details for Order Number"
+msgid ""
+"There was a problem retrieving the order line details for Order Number"
 msgstr ""
 
 #: PDFPriceList.php:16
@@ -16190,14 +15930,12 @@ msgstr ""
 
 #: PDFPriceList.php:30 PDFPriceList.php:38 PDFPriceList.php:135
 #: PDFRemittanceAdvice.php:40 PricesByCost.php:159 PricesByCost.php:163
-#, fuzzy
 msgid "Back"
-msgstr "Pank"
+msgstr ""
 
 #: PDFPriceList.php:37
-#, fuzzy
 msgid "The effective date must be entered in the format"
-msgstr "Jõus kuni kuupäev peab olema kuupäev pärast jõus alates kuupäeva"
+msgstr ""
 
 #: PDFPriceList.php:121
 msgid "Problem Report...."
@@ -16227,23 +15965,20 @@ msgstr ""
 
 #: PDFPriceList.php:172 PricesByCost.php:140 Prices_Customer.php:220
 #: Prices_Customer.php:274 Prices.php:215
-#, fuzzy
 msgid "No End Date"
-msgstr "kuni kuupäevani"
+msgstr ""
 
 #: PDFPriceList.php:240
-#, fuzzy
 msgid "Price_List"
-msgstr "Hinnakiri"
+msgstr ""
 
 #: PDFPriceList.php:247
 msgid "Price Listing"
 msgstr ""
 
 #: PDFPriceList.php:251
-#, fuzzy
 msgid "Print a price list"
-msgstr "Hinnakiri"
+msgstr ""
 
 #: PDFPriceList.php:279 Z_DataExport.php:542
 msgid "For Sales Type/Price List"
@@ -16270,14 +16005,12 @@ msgid "Default Sales Type Prices"
 msgstr ""
 
 #: PDFPriceList.php:296
-#, fuzzy
 msgid "Full Description"
-msgstr "Kirjeldus"
+msgstr ""
 
 #: PDFPriceList.php:299 PDFPriceList.php:336 PDFPriceList.php:338
-#, fuzzy
 msgid "Effective As At"
-msgstr "Jõus alates"
+msgstr ""
 
 #: PDFPriceList.php:336
 msgid "Prices for Categories"
@@ -16288,9 +16021,8 @@ msgid "Prices For Categories"
 msgstr ""
 
 #: PDFPriceList.php:353
-#, fuzzy
 msgid "Effective Date Range"
-msgstr "Jõus alates oli"
+msgstr ""
 
 #: PDFPriceList.php:362 includes/PDFLowGPPageHeader.inc:49
 #: includes/PDFLowGPPageHeader.inc:50
@@ -16342,18 +16074,16 @@ msgid "Update values"
 msgstr ""
 
 #: PDFPrintLabel.php:118
-#, fuzzy
 msgid "Print labels"
-msgstr "Prinditud"
+msgstr ""
 
 #: PDFPrintLabel.php:119
 msgid "Print labels with borders"
 msgstr ""
 
 #: PDFPrintLabel.php:230
-#, fuzzy
 msgid "Select a Category"
-msgstr "Varude kategooria"
+msgstr ""
 
 #: PDFPrintLabel.php:235
 msgid "This category has no items to show"
@@ -16364,9 +16094,8 @@ msgid "Unit not defined in scale operation! Correct the template"
 msgstr ""
 
 #: PDFPrintLabel.php:501
-#, fuzzy
 msgid "Couldnt get the currency data"
-msgstr "Ei saanud valuutakursse uuendada"
+msgstr ""
 
 #: PDFQuotation.php:13
 msgid "Select Quotation To Print"
@@ -16441,9 +16170,8 @@ msgid "Print Another Quotation"
 msgstr ""
 
 #: PDFReceipt.php:10
-#, fuzzy
 msgid "Sales Receipt"
-msgstr "Laekumised"
+msgstr ""
 
 #: PDFReceipt.php:31
 msgid "Customer Receipt Number "
@@ -16458,9 +16186,8 @@ msgid "The Sum Of"
 msgstr ""
 
 #: PDFReceipt.php:110
-#, fuzzy
 msgid "Details"
-msgstr "Detailid"
+msgstr ""
 
 #: PDFReceipt.php:114
 msgid "Signed On Behalf Of"
@@ -16495,44 +16222,37 @@ msgid "and Paid On"
 msgstr ""
 
 #: PDFRemittanceAdvice.php:81
-#, fuzzy
 msgid "Remittance Advice Problem Report"
-msgstr "Probleemist teavitamine"
+msgstr ""
 
 #: PDFRemittanceAdvice.php:83
-#, fuzzy
 msgid ""
 "The details of the payment to the supplier could not be retrieved because"
-msgstr "Valitud kriteeriumitega makseid ei leitud, kuna"
+msgstr ""
 
 #: PDFRemittanceAdvice.php:114
 msgid "Remittance_Advices"
 msgstr ""
 
 #: PDFRemittanceAdvice.php:149
-#, fuzzy
 msgid "Date Of Payment"
-msgstr "Maksed"
+msgstr ""
 
 #: PDFRemittanceAdvice.php:174
-#, fuzzy
 msgid "Total Payment:"
-msgstr "Maksed"
+msgstr ""
 
 #: PDFRemittanceAdvice.php:216
-#, fuzzy
 msgid "printed:"
-msgstr "Prinditud"
+msgstr ""
 
 #: PDFRemittanceAdvice.php:269
-#, fuzzy
 msgid "Our Code:"
-msgstr "Suunanumber"
+msgstr ""
 
 #: PDFRemittanceAdvice.php:311
-#, fuzzy
 msgid "This Payment"
-msgstr "Maksed"
+msgstr ""
 
 #: PDFStockCheckComparison.php:13
 msgid "Check Comparison Report"
@@ -16714,9 +16434,8 @@ msgid "An error occurred retrieving the negative quantities."
 msgstr ""
 
 #: PDFStockNegatives.php:20
-#, fuzzy
 msgid "The sql that failed to retrieve the negative quantities was"
-msgstr "SQL, mida informatsiooni otsimisel kasutati, on"
+msgstr ""
 
 #: PDFStockNegatives.php:37
 msgid "There are no negative stocks to list"
@@ -16727,19 +16446,16 @@ msgid "Stock Transfer Form"
 msgstr ""
 
 #: PDFStockTransfer.php:37
-#, fuzzy
 msgid "There are no decription for "
-msgstr "selle jaoks ei ole komponente defineeritud"
+msgstr ""
 
 #: PDFStockTransfer.php:50
-#, fuzzy
 msgid "There are no location From for "
-msgstr "selle jaoks ei ole komponente defineeritud"
+msgstr ""
 
 #: PDFStockTransfer.php:63
-#, fuzzy
 msgid "There are no location To for "
-msgstr "selle jaoks ei ole komponente defineeritud"
+msgstr ""
 
 #: PDFStockTransfer.php:77
 msgid "Date of transfer: "
@@ -16761,14 +16477,12 @@ msgid "Sales Credit Note"
 msgstr ""
 
 #: PDFStockTransListing.php:44
-#, fuzzy
 msgid "Location Transfer"
-msgstr "Asukoht"
+msgstr ""
 
 #: PDFStockTransListing.php:45
-#, fuzzy
 msgid "Stock Adjustment"
-msgstr "inventari kood"
+msgstr ""
 
 #: PDFStockTransListing.php:46
 msgid "Purchase Order Delivery"
@@ -16804,9 +16518,8 @@ msgid "Top Items Search Result"
 msgstr ""
 
 #: PDFTopItems.php:122
-#, fuzzy
 msgid "There were no records returned "
-msgstr "Veel ei ole ühtegi töökeskust rajatud"
+msgstr ""
 
 #: PeriodsInquiry.php:10
 msgid "Periods Inquiry"
@@ -16970,7 +16683,8 @@ msgid "You can only authorise up to"
 msgstr ""
 
 #: PO_Header.php:96 PO_Header.php:120 PO_Header.php:138
-msgid "If you think this is a mistake please contact the systems administrator"
+msgid ""
+"If you think this is a mistake please contact the systems administrator"
 msgstr ""
 
 #: PO_Header.php:106
@@ -17017,7 +16731,8 @@ msgid "Order set to pending status by"
 msgstr ""
 
 #: PO_Header.php:138
-msgid "You do not have permission to change the status of this purchase order"
+msgid ""
+"You do not have permission to change the status of this purchase order"
 msgstr ""
 
 #: PO_Header.php:155
@@ -17175,9 +16890,8 @@ msgid "Receive this order"
 msgstr ""
 
 #: PO_Header.php:776
-#, fuzzy
 msgid "New Purchase Order"
-msgstr "Ostetud"
+msgstr ""
 
 #: PO_Header.php:811
 msgid "Status Comment"
@@ -17513,9 +17227,8 @@ msgid "Not an Asset"
 msgstr ""
 
 #: PO_Items.php:1014
-#, fuzzy
 msgid "Not yet purchased"
-msgstr "Ostetud"
+msgstr ""
 
 #: PO_Items.php:1021 SuppFixedAssetChgs.php:111
 msgid "New Fixed Asset"
@@ -18145,7 +17858,8 @@ msgid ""
 msgstr ""
 
 #: PricesBasedOnMarkUp.php:196
-msgid "The date this new price is to start from is expected to be after today"
+msgid ""
+"The date this new price is to start from is expected to be after today"
 msgstr ""
 
 #: PricesBasedOnMarkUp.php:199
@@ -18269,9 +17983,8 @@ msgid "the"
 msgstr ""
 
 #: PricesByCost.php:79
-#, fuzzy
 msgid "category"
-msgstr "Varude kategooria"
+msgstr ""
 
 #: PricesByCost.php:81
 msgid "all Categories"
@@ -18286,14 +17999,12 @@ msgid "With Prices"
 msgstr ""
 
 #: PricesByCost.php:84
-#, fuzzy
 msgid "times"
-msgstr "Märkused"
+msgstr ""
 
 #: PricesByCost.php:84
-#, fuzzy
 msgid "Cost in Price List"
-msgstr "Hinnakiri"
+msgstr ""
 
 #: PricesByCost.php:92 Prices_Customer.php:360 Prices.php:201
 #: RecurringSalesOrders.php:414 WorkOrderEntry.php:475
@@ -18310,14 +18021,12 @@ msgid "Price Proposed"
 msgstr ""
 
 #: PricesByCost.php:97
-#, fuzzy
 msgid "List Price"
-msgstr "Piiratud"
+msgstr ""
 
 #: PricesByCost.php:162
-#, fuzzy
 msgid "There were no prices meeting the criteria specified to review"
-msgstr "Ei ole kliente, keda vastavalt täpsustatud kriteeriumitele järjestada"
+msgstr ""
 
 #: PricesByCost.php:166
 msgid "Use this report to display price list with the cost."
@@ -18469,29 +18178,24 @@ msgid "An item must first be selected before this page is called"
 msgstr ""
 
 #: Prices.php:119
-#, fuzzy
 msgid "Could not be update the existing prices"
-msgstr "Ei saanud valuutakursse uuendada"
+msgstr ""
 
 #: Prices.php:124
-#, fuzzy
 msgid "The price has been updated"
-msgstr "on uuendatud"
+msgstr ""
 
 #: Prices.php:142
-#, fuzzy
 msgid "The new price could not be added"
-msgstr "Kontakti kirje on lisatud"
+msgstr ""
 
 #: Prices.php:146
-#, fuzzy
 msgid "The new price has been inserted"
-msgstr "on sisestatud"
+msgstr ""
 
 #: Prices.php:162
-#, fuzzy
 msgid "Could not delete this price"
-msgstr "Ei saanud selle BOM'i komponente kustutada, kuna"
+msgstr ""
 
 #: Prices.php:164
 msgid "The selected price has been deleted"
@@ -18519,14 +18223,12 @@ msgid "Sales Type Price List"
 msgstr ""
 
 #: Prices.php:329
-#, fuzzy
 msgid "Price Effective From Date"
-msgstr "Jõus kuni kuupäev on"
+msgstr ""
 
 #: Prices.php:331
-#, fuzzy
 msgid "Price Effective To Date"
-msgstr "Jõus kuni"
+msgstr ""
 
 #: Prices.php:350
 msgid "Amend Price"
@@ -18932,9 +18634,8 @@ msgid ""
 msgstr ""
 
 #: PurchData.php:48
-#, fuzzy
 msgid "The price entered is zero"
-msgstr "Sisestatud hulk ei või olla null"
+msgstr ""
 
 #: PurchData.php:48
 msgid "Is this intentional?"
@@ -19012,9 +18713,8 @@ msgid "This purchasing data record has been successfully deleted"
 msgstr ""
 
 #: PurchData.php:141 PurchData.php:231 PurchData.php:250
-#, fuzzy
 msgid "For Stock Code"
-msgstr "inventari kood"
+msgstr ""
 
 #: PurchData.php:159
 msgid ""
@@ -19166,18 +18866,16 @@ msgid "Conversion Factor (to our UOM)"
 msgstr ""
 
 #: PurchData.php:455
-#, fuzzy
 msgid "Supplier Stock Code"
-msgstr "Tarnijakoodi"
+msgstr ""
 
 #: PurchData.php:457
 msgid "MinOrderQty"
 msgstr ""
 
 #: PurchData.php:459
-#, fuzzy
 msgid "Supplier Stock Description"
-msgstr "Jaotise kirjeldus"
+msgstr ""
 
 #: PurchData.php:464
 msgid "in days from date of order"
@@ -19259,7 +18957,8 @@ msgid ""
 msgstr ""
 
 #: RecurringSalesOrders.php:189
-msgid "The end date of this recurring order must be a valid date in the format"
+msgid ""
+"The end date of this recurring order must be a valid date in the format"
 msgstr ""
 
 #: RecurringSalesOrders.php:193
@@ -19470,9 +19169,8 @@ msgid "Inventory Reorder Level Location Report"
 msgstr ""
 
 #: ReorderLevelLocation.php:51
-#, fuzzy
 msgid "Location : "
-msgstr "Asukoht"
+msgstr ""
 
 #: ReorderLevelLocation.php:52
 msgid "Number Of Days Sales : "
@@ -19488,34 +19186,28 @@ msgid "Total Invoiced"
 msgstr ""
 
 #: ReorderLevelLocation.php:56 ReorderLevelLocation.php:58
-#, fuzzy
 msgid "At All Locations"
-msgstr "Asukoht"
+msgstr ""
 
 #: ReorderLevelLocation.php:57 ReorderLevelLocation.php:59
-#, fuzzy
 msgid "At Location"
-msgstr "Asukoht"
+msgstr ""
 
 #: ReorderLevelLocation.php:96
-#, fuzzy
 msgid "order"
-msgstr "Kood"
+msgstr ""
 
 #: ReorderLevelLocation.php:97
-#, fuzzy
 msgid "StockLocation"
-msgstr "Asukoht"
+msgstr ""
 
 #: ReorderLevelLocation.php:98
-#, fuzzy
 msgid "StockCat"
-msgstr "Varude kategooria"
+msgstr ""
 
 #: ReorderLevelLocation.php:99
-#, fuzzy
 msgid "NumberOfDays"
-msgstr "Number"
+msgstr ""
 
 #: ReorderLevelLocation.php:100
 msgid "id"
@@ -19651,24 +19343,21 @@ msgid "GRN Reversed for"
 msgstr ""
 
 #: ReverseGRN.php:138
-#, fuzzy
 msgid ""
 "The purchase order statusand status comment could not be changed because"
-msgstr "Ettevõtte eelistusi ei saanud uuendada, kuna"
+msgstr ""
 
 #: ReverseGRN.php:139
 msgid "The following SQL to update the purchase order header record was used"
 msgstr ""
 
 #: ReverseGRN.php:147
-#, fuzzy
 msgid "The GRN record could not be deleted because"
-msgstr "Seda piirkonda ei õnnestunud lisada või uuendada, kuna"
+msgstr ""
 
 #: ReverseGRN.php:148
-#, fuzzy
 msgid "The following SQL to delete the GRN record was used"
-msgstr "SQL, mida kasutati BOM'i kustutamiseks, oli"
+msgstr ""
 
 #: ReverseGRN.php:155
 msgid "The GRN record could not be updated"
@@ -19850,7 +19539,8 @@ msgid "The SQL used to delete this report column was"
 msgstr ""
 
 #: SalesAnalReptCols.php:242
-msgid "The column definitions could not be retrieved from the database because"
+msgid ""
+"The column definitions could not be retrieved from the database because"
 msgstr ""
 
 #: SalesAnalReptCols.php:243
@@ -20468,9 +20158,8 @@ msgid "Line Point Graph"
 msgstr ""
 
 #: SalesGraph.php:153
-#, fuzzy
 msgid "Area Graph"
-msgstr "Piirkonna nimi"
+msgstr ""
 
 #: SalesGraph.php:154
 msgid "Points Graph"
@@ -20627,9 +20316,8 @@ msgid "All Salesmen"
 msgstr ""
 
 #: SalesInquiry.php:1199
-#, fuzzy
 msgid "The SQL to create temporary stockmoves failed with the message"
-msgstr "SQL ei suutnud passbomi luua ja andis järgneva teate"
+msgstr ""
 
 #: SalesInquiry.php:1208
 msgid "The SQL to to update tempstockmoves failed with the message"
@@ -20652,7 +20340,8 @@ msgid "The salesperson name must be thirty characters or less long"
 msgstr ""
 
 #: SalesPeople.php:52 SalesPeople.php:56
-msgid "The salesperson telephone number must be twenty characters or less long"
+msgid ""
+"The salesperson telephone number must be twenty characters or less long"
 msgstr ""
 
 #: SalesPeople.php:60
@@ -20758,10 +20447,9 @@ msgid "The sales type (price list) code cannot be an empty string or spaces"
 msgstr ""
 
 #: SalesTypes.php:47
-#, fuzzy
 msgid ""
 "The sales type (price list) description must be forty characters or less long"
-msgstr "Piirkonna kirjeldus võib olla kuni kakskümmend viis tähemärki pikk"
+msgstr ""
 
 #: SalesTypes.php:52
 msgid ""
@@ -20871,9 +20559,8 @@ msgid "Any asset category"
 msgstr ""
 
 #: SelectAsset.php:67
-#, fuzzy
 msgid "Enter partial description"
-msgstr "Detaili kirjeldus"
+msgstr ""
 
 #: SelectAsset.php:78 SelectAsset.php:80
 msgid "Any asset location"
@@ -20884,16 +20571,14 @@ msgid "Enter partial asset code"
 msgstr ""
 
 #: SelectAsset.php:114
-#, fuzzy
 msgid ""
 "Asset description keywords have been used in preference to the asset code "
 "extract entered"
-msgstr "Inventari kirjelduse märksõnu on eelistatud inventari koodile"
+msgstr ""
 
 #: SelectAsset.php:171
-#, fuzzy
 msgid "No assets were returned by the SQL because"
-msgstr "SQL ei suutnud pangakonto bilanssi näidata, kuna"
+msgstr ""
 
 #: SelectAsset.php:175
 msgid ""
@@ -20950,9 +20635,8 @@ msgid "Sales Orders"
 msgstr ""
 
 #: SelectContract.php:11
-#, fuzzy
 msgid "Select A Contract"
-msgstr "Vali toodetud detail"
+msgstr ""
 
 #: SelectContract.php:49 SelectContract.php:55 SelectContract.php:61
 #: SelectContract.php:67 SelectContract.php:73
@@ -20966,19 +20650,16 @@ msgstr ""
 
 #: SelectContract.php:53 SelectContract.php:59 SelectContract.php:65
 #: SelectContract.php:71 SelectContract.php:77
-#, fuzzy
 msgid "All Contracts"
-msgstr "Klientide kontaktid"
+msgstr ""
 
 #: SelectContract.php:82
-#, fuzzy
 msgid "New Contract"
-msgstr "Klientide kontaktid"
+msgstr ""
 
 #: SelectContract.php:143
-#, fuzzy
 msgid "No contracts were returned by the SQL because"
-msgstr "SQL ei suutnud pangakonto bilanssi näidata, kuna"
+msgstr ""
 
 #: SelectContract.php:153
 msgid "Issue To WO"
@@ -21220,7 +20901,8 @@ msgid ""
 msgstr ""
 
 #: SelectCreditItems.php:1758 SelectCreditItems.php:1786
-msgid "The cost of the stock credited GL posting could not be inserted because"
+msgid ""
+"The cost of the stock credited GL posting could not be inserted because"
 msgstr ""
 
 #: SelectCreditItems.php:1811
@@ -21278,14 +20960,12 @@ msgid "Customer Inquiries"
 msgstr ""
 
 #: SelectCustomer.php:279 SelectCustomer.php:302
-#, fuzzy
 msgid "Customer Transactions"
-msgstr "Klientide kontaktid"
+msgstr ""
 
 #: SelectCustomer.php:284
-#, fuzzy
 msgid "View Customer Details"
-msgstr "Klientide kontaktid"
+msgstr ""
 
 #: SelectCustomer.php:285
 msgid "Print Customer Statement"
@@ -21332,9 +21012,8 @@ msgid "Enter a partial Phone Number"
 msgstr ""
 
 #: SelectCustomer.php:341
-#, fuzzy
 msgid "Enter part of the Address"
-msgstr "Sisesta katkend"
+msgstr ""
 
 #: SelectCustomer.php:349
 msgid "Choose a Type"
@@ -21353,9 +21032,8 @@ msgid "Choose an Area"
 msgstr ""
 
 #: SelectCustomer.php:399
-#, fuzzy
 msgid "No Sales Areas defined"
-msgstr "Ülevaade kindlaksmääratud piirkondadest"
+msgstr ""
 
 #: SelectCustomer.php:418
 msgid "Your account enables you to see only customers allocated to you"
@@ -21386,9 +21064,8 @@ msgid "Customer Data"
 msgstr ""
 
 #: SelectCustomer.php:581
-#, fuzzy
 msgid "No receipts from this customer."
-msgstr "Vaata üle kõik selle Kliendi märkmed"
+msgstr ""
 
 #: SelectCustomer.php:583
 msgid "Last Paid Date:"
@@ -21596,14 +21273,12 @@ msgid "This sales order has been cancelled as requested"
 msgstr ""
 
 #: SelectOrderItems.php:736
-#, fuzzy
 msgid "Quotation for customer"
-msgstr "Antud Kliendi kontaktid: <b>"
+msgstr ""
 
 #: SelectOrderItems.php:738
-#, fuzzy
 msgid "Order for customer"
-msgstr "Märkmed selle Kliendi kohta: <b>"
+msgstr ""
 
 #: SelectOrderItems.php:743
 msgid "Default Options (can be modified during order):"
@@ -21651,7 +21326,8 @@ msgid ""
 msgstr ""
 
 #: SelectOrderItems.php:1126
-msgid "The quantity delivered and invoiced cannot be modified retrospectively"
+msgid ""
+"The quantity delivered and invoiced cannot be modified retrospectively"
 msgstr ""
 
 #: SelectOrderItems.php:1149
@@ -21672,8 +21348,8 @@ msgstr ""
 #: SelectOrderItems.php:1295
 msgid ""
 "Quantity (required) - Enter the number of units ordered.  Price (required) - "
-"Enter the unit price.  Discount (optional) - Enter a percentage discount.  GP"
-"% (optional) - Enter a percentage Gross Profit (GP) to add to the unit "
+"Enter the unit price.  Discount (optional) - Enter a percentage discount.  "
+"GP% (optional) - Enter a percentage Gross Profit (GP) to add to the unit "
 "cost.  Due Date (optional) - Enter a date for delivery."
 msgstr ""
 
@@ -21735,9 +21411,8 @@ msgid "Search Inventory Items"
 msgstr ""
 
 #: SelectProduct.php:14 SelectRecurringSalesOrder.php:12
-#, fuzzy
 msgid "Inventory Items"
-msgstr "kuni inventari detaili koodini"
+msgstr ""
 
 #: SelectProduct.php:74
 msgid "Item Type:"
@@ -22030,9 +21705,8 @@ msgstr ""
 
 #: SelectSupplier.php:165 SuppPriceList.php:17 SuppPriceList.php:197
 #: SuppPriceList.php:199
-#, fuzzy
 msgid "Supplier Price List"
-msgstr "Hinnakiri"
+msgstr ""
 
 #: SelectSupplier.php:167
 msgid "Enter a Purchase Order for This Supplier"
@@ -22127,9 +21801,8 @@ msgid "No items were returned by the SQL because"
 msgstr ""
 
 #: SelectWorkOrder.php:109
-#, fuzzy
 msgid "For the item"
-msgstr "või tähemärki"
+msgstr ""
 
 #: SelectWorkOrder.php:111
 msgid "Work Order number"
@@ -22698,9 +22371,8 @@ msgid "True"
 msgstr ""
 
 #: SMTPServer.php:51 SMTPServer.php:54
-#, fuzzy
 msgid "False"
-msgstr "Tabel"
+msgstr ""
 
 #: SMTPServer.php:61
 msgid "Timeout (seconds)"
@@ -22771,7 +22443,8 @@ msgid ""
 msgstr ""
 
 #: SpecialOrder.php:183 SpecialOrder.php:255
-msgid "The person entering this order must be specified in the initiator field"
+msgid ""
+"The person entering this order must be specified in the initiator field"
 msgstr ""
 
 #: SpecialOrder.php:183 SpecialOrder.php:255
@@ -22837,7 +22510,8 @@ msgid ""
 msgstr ""
 
 #: SpecialOrder.php:423
-msgid "The SQL statement used to get the delivery details and that failed was"
+msgid ""
+"The SQL statement used to get the delivery details and that failed was"
 msgstr ""
 
 #: SpecialOrder.php:466
@@ -23315,16 +22989,16 @@ msgid ""
 msgstr ""
 
 #: StockCheck.php:14 StockCheck.php:15
-#, fuzzy
 msgid "Stock Count Sheets"
-msgstr "inventari kood"
+msgstr ""
 
 #: StockCheck.php:44 StockCheck.php:150
 msgid "Stock Count Sheets - Problem Report"
 msgstr ""
 
 #: StockCheck.php:46 StockCheck.php:97
-msgid "The inventory quantities could not be added to the freeze file because"
+msgid ""
+"The inventory quantities could not be added to the freeze file because"
 msgstr ""
 
 #: StockCheck.php:67
@@ -23332,9 +23006,8 @@ msgid "The old quantities could not be deleted from the freeze file because"
 msgstr ""
 
 #: StockCheck.php:95
-#, fuzzy
 msgid "Stock Freeze - Problem Report"
-msgstr "Probleemist teavitamine"
+msgstr ""
 
 #: StockCheck.php:105
 msgid "Stock Check Freeze Update"
@@ -23368,9 +23041,8 @@ msgid "Stock Check Sheets"
 msgstr ""
 
 #: StockCheck.php:265
-#, fuzzy
 msgid "print"
-msgstr "Prinditud"
+msgstr ""
 
 #: StockCheck.php:298
 msgid "Action for Stock Check Freeze"
@@ -23550,28 +23222,24 @@ msgid "Save Changes"
 msgstr ""
 
 #: StockDispatch.php:18 StockDispatch.php:218
-#, fuzzy
 msgid "Stock Dispatch Report"
-msgstr "Varude kategooria"
+msgstr ""
 
 #: StockDispatch.php:19
 msgid "Parts to dispatch to another location to cover reorder level"
 msgstr ""
 
 #: StockDispatch.php:38
-#, fuzzy
 msgid "Could not retrieve location name from the database"
-msgstr "Ei leidnud emadetaili kirjeldust, kuna"
+msgstr ""
 
 #: StockDispatch.php:90 StockDispatch.php:101
-#, fuzzy
 msgid "Stock Dispatch - Problem Report"
-msgstr "Probleemist teavitamine"
+msgstr ""
 
 #: StockDispatch.php:92
-#, fuzzy
 msgid "The Stock Dispatch report could not be retrieved by the SQL because"
-msgstr "SQL ei suutnud pangakontosid leida, kuna"
+msgstr ""
 
 #: StockDispatch.php:104
 msgid "The stock dispatch did not have any items to list"
@@ -23642,9 +23310,8 @@ msgid "Stock Dispatch "
 msgstr ""
 
 #: StockDispatch.php:334
-#, fuzzy
 msgid "From :"
-msgstr "lates kuupäevast"
+msgstr ""
 
 #: StockDispatch.php:340
 msgid "Transfer No."
@@ -23698,9 +23365,8 @@ msgid "Trans No"
 msgstr ""
 
 #: StockLocMovements.php:91
-#, fuzzy
 msgid "Quantity on Hand"
-msgstr "Saadavalolev hulk"
+msgstr ""
 
 #: StockLocStatus.php:8
 msgid "All Stock Status By Location/Category"
@@ -24232,7 +23898,8 @@ msgid "The economic order quantity must be a positive number"
 msgstr ""
 
 #: Stocks.php:162 Z_ImportStocks.php:166
-msgid "The item can only be serialised if there is lot control enabled already"
+msgid ""
+"The item can only be serialised if there is lot control enabled already"
 msgstr ""
 
 #: Stocks.php:162 Z_ImportStocks.php:166
@@ -24276,8 +23943,8 @@ msgstr ""
 
 #: Stocks.php:180
 msgid ""
-"Assemblies/Dummies/Phantom and Kitsets are not physical items and batch/"
-"serial control is therefore not appropriate"
+"Assemblies/Dummies/Phantom and Kitsets are not physical items and "
+"batch/serial control is therefore not appropriate"
 msgstr ""
 
 #: Stocks.php:186 Z_ImportStocks.php:180
@@ -24333,7 +24000,8 @@ msgid "The make or buy flag cannot be changed to"
 msgstr ""
 
 #: Stocks.php:265
-msgid "where there is a quantity outstanding to be received on purchase orders"
+msgid ""
+"where there is a quantity outstanding to be received on purchase orders"
 msgstr ""
 
 #: Stocks.php:265
@@ -24802,7 +24470,8 @@ msgid ""
 msgstr ""
 
 #: StockUsageGraph.php:61
-msgid "There are no movements of this item from the selected location to graph"
+msgid ""
+"There are no movements of this item from the selected location to graph"
 msgstr ""
 
 #: StockUsage.php:9
@@ -24865,9 +24534,8 @@ msgid "Contract charges on Invoice"
 msgstr ""
 
 #: SuppContractChgs.php:64
-#, fuzzy
 msgid "Contract credits on Credit Note"
-msgstr "Kontaktigrupi märkmed"
+msgstr ""
 
 #: SuppContractChgs.php:104 SuppFixedAssetChgs.php:21 SuppInvGRNs.php:152
 #: SuppShiptChgs.php:23 SuppTransGLAnalysis.php:131
@@ -24875,9 +24543,8 @@ msgid "Back to Invoice Entry"
 msgstr ""
 
 #: SuppContractChgs.php:119
-#, fuzzy
 msgid "Contract Selection"
-msgstr "Konto jaotised"
+msgstr ""
 
 #: SuppContractChgs.php:119 SuppShiptChgs.php:108 SuppTransGLAnalysis.php:150
 msgid "If you know the code enter it above"
@@ -24888,14 +24555,12 @@ msgid "otherwise select the contract from the list"
 msgstr ""
 
 #: SuppContractChgs.php:146
-#, fuzzy
 msgid "Aniticpated Cost"
-msgstr "Ühiku maksumus"
+msgstr ""
 
 #: SuppContractChgs.php:156
-#, fuzzy
 msgid "Enter Contract Charge"
-msgstr "Sisesta katkend"
+msgstr ""
 
 #: SuppCreditGRNs.php:15
 msgid "Enter Supplier Credit Note Against Goods Received"
@@ -25076,9 +24741,8 @@ msgid ""
 msgstr ""
 
 #: SuppFixedAssetChgs.php:112
-#, fuzzy
 msgid "Asset Selection"
-msgstr "Konto jaotised"
+msgstr ""
 
 #: SuppFixedAssetChgs.php:140
 msgid "Enter Fixed Asset"
@@ -25453,9 +25117,8 @@ msgid "Supplier Credit Note"
 msgstr ""
 
 #: SupplierCredit.php:48
-#, fuzzy
 msgid "Enter Supplier Credit Note:"
-msgstr "Tarnijakoodist"
+msgstr ""
 
 #: SupplierCredit.php:90 SupplierInvoice.php:74
 msgid "The supplier record selected"
@@ -25551,9 +25214,8 @@ msgid "Fixed Asset Credits"
 msgstr ""
 
 #: SupplierCredit.php:397 SupplierInvoice.php:371
-#, fuzzy
 msgid "Contract Charges"
-msgstr "Kontaktkood"
+msgstr ""
 
 #: SupplierCredit.php:431 SupplierInvoice.php:405
 msgid "General Ledger Analysis"
@@ -25640,7 +25302,8 @@ msgid ""
 msgstr ""
 
 #: SupplierCredit.php:615
-msgid "the general ledger entries (if any) and the charges for goods received"
+msgid ""
+"the general ledger entries (if any) and the charges for goods received"
 msgstr ""
 
 #: SupplierCredit.php:615
@@ -25680,20 +25343,18 @@ msgid "Asset Credit"
 msgstr ""
 
 #: SupplierCredit.php:737 SupplierInvoice.php:721
-#, fuzzy
 msgid ""
 "The general ledger transaction for the asset addition could not be added "
 "because"
-msgstr "Valitud kriteeriumitega makseid ei leitud, kuna"
+msgstr ""
 
 #: SupplierCredit.php:768 SupplierInvoice.php:751
 msgid "Contract charge against"
 msgstr ""
 
 #: SupplierCredit.php:771 SupplierInvoice.php:753
-#, fuzzy
 msgid "The general ledger transaction for the contract"
-msgstr "ja üldised raamatupidamiskontod, mida mõjutatakse"
+msgstr ""
 
 #: SupplierCredit.php:800 SupplierCredit.php:870
 msgid "GRN Credit Note"
@@ -25811,9 +25472,8 @@ msgid ""
 msgstr ""
 
 #: SupplierCredit.php:1245 SupplierInvoice.php:1240
-#, fuzzy
 msgid "The contract charge record for contract"
-msgstr "Kontakti märkmete kirje on lisatud"
+msgstr ""
 
 #: SupplierCredit.php:1246 SupplierInvoice.php:1241
 msgid "The following SQL to insert the contract charge record was used"
@@ -25826,9 +25486,8 @@ msgid ""
 msgstr ""
 
 #: SupplierCredit.php:1285 SupplierInvoice.php:1193
-#, fuzzy
 msgid "The following SQL was used to attempt the update of the asset cost:"
-msgstr "SQL, mida kasutati kontogrupi uuendamisel, on"
+msgstr ""
 
 #: SupplierCredit.php:1291
 msgid "Supplier credit note number"
@@ -26226,7 +25885,8 @@ msgid "The supplier number already exists in the database"
 msgstr ""
 
 #: Suppliers.php:333
-msgid "The supplier name must be entered and be forty characters or less long"
+msgid ""
+"The supplier name must be entered and be forty characters or less long"
 msgstr ""
 
 #: Suppliers.php:339
@@ -26312,9 +25972,8 @@ msgid "Supplier record for"
 msgstr ""
 
 #: Suppliers.php:665 Suppliers.php:815
-#, fuzzy
 msgid "Supplier Type"
-msgstr "Tarnijakoodi"
+msgstr ""
 
 #: Suppliers.php:673 Suppliers.php:826
 msgid "Supplier Since"
@@ -26380,9 +26039,8 @@ msgid "Review Contact Details"
 msgstr ""
 
 #: SupplierTenders.php:8
-#, fuzzy
 msgid "Supplier Tendering"
-msgstr "Tarnijakoodi"
+msgstr ""
 
 #: SupplierTenders.php:18
 msgid "This functionality can only be accessed via a supplier login."
@@ -26397,9 +26055,8 @@ msgid "Create or View Offers from"
 msgstr ""
 
 #: SupplierTenders.php:50
-#, fuzzy
 msgid "Select option for tendering"
-msgstr "Valik"
+msgstr ""
 
 #: SupplierTenders.php:52
 msgid "View or Amend outstanding offers from"
@@ -26410,15 +26067,13 @@ msgid "Create a new offer from"
 msgstr ""
 
 #: SupplierTenders.php:142
-#, fuzzy
 msgid "The suppliers offer could not be updated on the database because"
-msgstr "SQL ei suutnud tarnija detaile leida, kuna"
+msgstr ""
 
 #: SupplierTenders.php:143
-#, fuzzy
 msgid ""
 "The SQL statement used to update the suppliers offer record and failed was"
-msgstr "SQL, mida kasutati kontogrupi uuendamisel, on"
+msgstr ""
 
 #: SupplierTenders.php:146 SupplierTenders.php:150 SupplierTenders.php:204
 #: SupplierTenders.php:208
@@ -26426,41 +26081,33 @@ msgid "The offer for"
 msgstr ""
 
 #: SupplierTenders.php:146
-#, fuzzy
 msgid "has been updated in the database"
-msgstr "on uuendatud"
+msgstr ""
 
 #: SupplierTenders.php:147 SupplierTenders.php:205
 msgid "at a price of"
 msgstr ""
 
 #: SupplierTenders.php:150
-#, fuzzy
 msgid "could not be updated in the database"
-msgstr "Ei saanud valuutakursse uuendada"
+msgstr ""
 
 #: SupplierTenders.php:200
-#, fuzzy
 msgid "The suppliers offer could not be inserted into the database because"
-msgstr "SQL ei suutnud tarnija detaile leida, kuna"
+msgstr ""
 
 #: SupplierTenders.php:201
-#, fuzzy
 msgid ""
 "The SQL statement used to insert the suppliers offer record and failed was"
 msgstr ""
-"SQL, mis ebaõnnestus vahetuskurssidest tuleneva erinevuse sisestamisel "
-"raamatupidamiskontole, oli"
 
 #: SupplierTenders.php:204
-#, fuzzy
 msgid "has been inserted into the database"
-msgstr "on sisestatud"
+msgstr ""
 
 #: SupplierTenders.php:208
-#, fuzzy
 msgid "could not be inserted into the database"
-msgstr "ei saanud otsida, kuna"
+msgstr ""
 
 #: SupplierTenders.php:216
 msgid "Offer received from"
@@ -26487,9 +26134,8 @@ msgid "Stock ID"
 msgstr ""
 
 #: SupplierTenders.php:270
-#, fuzzy
 msgid "Expiry Date"
-msgstr "lates kuupäevast"
+msgstr ""
 
 #: SupplierTenders.php:375
 msgid "Select items to offer from"
@@ -26530,53 +26176,45 @@ msgid "Add/edit/delete Supplier Types"
 msgstr ""
 
 #: SupplierTypes.php:39
-#, fuzzy
-msgid "The supplier type name description must be 100 characters or less long"
-msgstr "Piirkonna kirjeldus võib olla kuni kakskümmend viis tähemärki pikk"
+msgid ""
+"The supplier type name description must be 100 characters or less long"
+msgstr ""
 
 #: SupplierTypes.php:46
-#, fuzzy
-msgid "The supplier type name description must contain at least one character"
-msgstr "Konto jaotise nimi peab sisaldama vähemalt ühe tähemärgi"
+msgid ""
+"The supplier type name description must contain at least one character"
+msgstr ""
 
 #: SupplierTypes.php:58
 msgid "You already have a supplier type called"
 msgstr ""
 
 #: SupplierTypes.php:69
-#, fuzzy
 msgid "The supplier type"
-msgstr "Tarnijakoodi"
+msgstr ""
 
 #: SupplierTypes.php:83
-#, fuzzy
 msgid "The supplier type "
-msgstr "Tarnijakoodi"
+msgstr ""
 
 #: SupplierTypes.php:93 SupplierTypes.php:153
-#, fuzzy
 msgid "Supplier type"
-msgstr "Tarnijakoodi"
+msgstr ""
 
 #: SupplierTypes.php:142
-#, fuzzy
 msgid ""
 "The number of suppliers using this Type record could not be retrieved because"
-msgstr "Ülesseatud pangakontosid ei leitud, kuna"
+msgstr ""
 
 #: SupplierTypes.php:146
-#, fuzzy
 msgid ""
 "Cannot delete this type because suppliers are currently set up to use this "
 "type"
 msgstr ""
-"Ei saa seda piirkonda kustutada, kuna eksisteerivad seda kasutavad "
-"müügianalüüsi kirjed"
 
 #: SupplierTypes.php:147
-#, fuzzy
 msgid "suppliers with this type code"
-msgstr "Kõik tarnijad bilanssidega"
+msgstr ""
 
 #: SupplierTypes.php:194
 #, php-format
@@ -26592,18 +26230,16 @@ msgid "and Due By"
 msgstr ""
 
 #: SuppPaymentRun.php:106
-#, fuzzy
 msgid "Payment Run - Problem Report"
-msgstr "Probleemist teavitamine"
+msgstr ""
 
 #: SuppPaymentRun.php:108
 msgid "The details of supplier invoices due could not be retrieved because"
 msgstr ""
 
 #: SuppPaymentRun.php:117
-#, fuzzy
 msgid "Payment Run -Problem Report"
-msgstr "Probleemist teavitamine"
+msgstr ""
 
 #: SuppPaymentRun.php:119
 msgid "There are no outstanding supplier invoices to pay"
@@ -26687,42 +26323,36 @@ msgid "All Price"
 msgstr ""
 
 #: SuppPriceList.php:49
-#, fuzzy
 msgid "Current Price"
-msgstr "Valuuta"
+msgstr ""
 
 #: SuppPriceList.php:199
-#, fuzzy
 msgid "Purchase"
-msgstr "Ostetud"
+msgstr ""
 
 #: SuppPriceList.php:200
 msgid "View the Price List from supplier"
 msgstr ""
 
 #: SuppPriceList.php:232
-#, fuzzy
 msgid "All Prices"
-msgstr "Kõik tasemed"
+msgstr ""
 
 #: SuppPriceList.php:233
 msgid "Only Current Price"
 msgstr ""
 
 #: SuppPriceList.php:261
-#, fuzzy
 msgid "Supplier Price List for"
-msgstr "Hinnakiri"
+msgstr ""
 
 #: SuppPriceList.php:284
-#, fuzzy
 msgid "Date Price"
-msgstr "Kuupäev/kellaaeg"
+msgstr ""
 
 #: SuppPriceList.php:285
-#, fuzzy
 msgid "Supp Code"
-msgstr "Tarnijakoodi"
+msgstr ""
 
 #: SuppShiptChgs.php:18
 msgid "Shipment Charges or Credits"
@@ -26895,7 +26525,8 @@ msgid "DefaultTaxCategory must be between 1 and 9"
 msgstr ""
 
 #: SystemParameters.php:78
-msgid "Default maximum number of records to display must be between 1 and 500"
+msgid ""
+"Default maximum number of records to display must be between 1 and 500"
 msgstr ""
 
 #: SystemParameters.php:82
@@ -28038,7 +27669,8 @@ msgid "customer branches referring to this tax group"
 msgstr ""
 
 #: TaxGroups.php:134
-msgid "Cannot delete this tax group because some suppliers are setup using it"
+msgid ""
+"Cannot delete this tax group because some suppliers are setup using it"
 msgstr ""
 
 #: TaxGroups.php:135
@@ -28139,7 +27771,8 @@ msgid "Total Outputs"
 msgstr ""
 
 #: Tax.php:176
-msgid "The accounts payable transaction details could not be retrieved because"
+msgid ""
+"The accounts payable transaction details could not be retrieved because"
 msgstr ""
 
 #: Tax.php:187 Tax.php:274
@@ -28175,9 +27808,8 @@ msgid ""
 msgstr ""
 
 #: Tax.php:285
-#, fuzzy
 msgid "There are no tax entries to list"
-msgstr "Veel ei ole ühtegi töökeskust rajatud"
+msgstr ""
 
 #: Tax.php:295
 msgid "Tax Reporting"
@@ -28325,32 +27957,28 @@ msgid "Top Sales Order Search"
 msgstr ""
 
 #: TopItems.php:16
-#, fuzzy
 msgid "Select Location"
-msgstr "Valik"
+msgstr ""
 
 #: TopItems.php:27
-#, fuzzy
 msgid "Select Customer Type"
-msgstr "Tagasi Kliendi valimise juurde"
+msgstr ""
 
 #: TopItems.php:39
 msgid "Select Order By "
 msgstr ""
 
 #: TopItems.php:42
-#, fuzzy
 msgid "Total Pieces"
-msgstr "Kogumaksumus"
+msgstr ""
 
 #: TopItems.php:43
 msgid "Value of Sales"
 msgstr ""
 
 #: TopItems.php:47 includes/PDFTopItemsHeader.inc:28
-#, fuzzy
 msgid "Number Of Days"
-msgstr "Number"
+msgstr ""
 
 #: TopItems.php:52
 msgid "Number Of Top Items"
@@ -28365,14 +27993,12 @@ msgid "#"
 msgstr ""
 
 #: TopItems.php:160 includes/PDFTopItemsHeader.inc:58
-#, fuzzy
 msgid "Value Sales"
-msgstr "Väärtus"
+msgstr ""
 
 #: TopItems.php:202
-#, fuzzy
 msgid "Print To PDF"
-msgstr "Prindi PDF"
+msgstr ""
 
 #: UnitsOfMeasure.php:8
 msgid "Units Of Measure"
@@ -28545,9 +28171,8 @@ msgid "Perform Database Upgrade"
 msgstr ""
 
 #: UpgradeDatabase.php:49
-#, fuzzy
 msgid "Backup"
-msgstr "Pank"
+msgstr ""
 
 #: UpgradeDatabase.php:57
 msgid "webERP backup file attached"
@@ -29671,9 +29296,8 @@ msgid "Eastern European Russian Japanese"
 msgstr ""
 
 #: WWW_Users.php:28
-#, fuzzy
 msgid "Korean"
-msgstr "Piirkond"
+msgstr ""
 
 #: WWW_Users.php:29
 msgid "Vietnamese"
@@ -29684,9 +29308,8 @@ msgid "Hebrew"
 msgstr ""
 
 #: WWW_Users.php:31
-#, fuzzy
 msgid "Arabic"
-msgstr "Piirkond"
+msgstr ""
 
 #: WWW_Users.php:32
 msgid "Thai"
@@ -29705,16 +29328,14 @@ msgid "Recalculate BOM costs"
 msgstr ""
 
 #: Z_BottomUpCosts.php:25
-#, fuzzy
 msgid "An error occurred selecting all bottom level components"
-msgstr "Kontogrupi kustutamisel ilmnes viga"
+msgstr ""
 
 #: Z_BottomUpCosts.php:26
-#, fuzzy
 msgid ""
 "The SQL that was used to select bottom level components and failed in the "
 "process was"
-msgstr "SQL, mis ebaõnnestus BOM'i komponentide otsimisel, oli"
+msgstr ""
 
 #: Z_BottomUpCosts.php:40
 msgid "Failed on item "
@@ -29771,7 +29392,8 @@ msgid "Inserting the new customer branches master record"
 msgstr ""
 
 #: Z_ChangeBranchCode.php:109
-msgid "The SQL to insert the new customer branch master record failed because"
+msgid ""
+"The SQL to insert the new customer branch master record failed because"
 msgstr ""
 
 #: Z_ChangeBranchCode.php:112
@@ -29877,7 +29499,8 @@ msgid "does not currently exist as a customer code in the system"
 msgstr ""
 
 #: Z_ChangeCustomerCode.php:22
-msgid "The new customer code to change the old code to must be entered as well"
+msgid ""
+"The new customer code to change the old code to must be entered as well"
 msgstr ""
 
 #: Z_ChangeCustomerCode.php:29
@@ -29976,9 +29599,8 @@ msgid "UTILITY PAGE Change A Stock Category"
 msgstr ""
 
 #: Z_ChangeStockCategory.php:17
-#, fuzzy
 msgid "The stock Category"
-msgstr "Varude kategooria"
+msgstr ""
 
 #: Z_ChangeStockCategory.php:17
 msgid "does not currently exist as a stock category in the system"
@@ -30063,14 +29685,12 @@ msgid "was successfully changed to"
 msgstr ""
 
 #: Z_ChangeStockCategory.php:95
-#, fuzzy
 msgid "Existing Inventory Category Code"
-msgstr "kuni inventari detaili koodini"
+msgstr ""
 
 #: Z_ChangeStockCategory.php:97
-#, fuzzy
 msgid "New Inventory Category Code"
-msgstr "kuni inventari detaili koodini"
+msgstr ""
 
 #: Z_ChangeStockCode.php:7
 msgid "UTILITY PAGE Change A Stock Code"
@@ -30393,7 +30013,8 @@ msgid "Create Chart Details Records"
 msgstr ""
 
 #: Z_CreateChartDetails.php:33 includes/GLPostings.inc:61
-msgid "Could not test to see that all chart detail records properly initiated"
+msgid ""
+"Could not test to see that all chart detail records properly initiated"
 msgstr ""
 
 #: Z_CreateChartDetails.php:46 includes/GLPostings.inc:74
@@ -30661,8 +30282,8 @@ msgstr ""
 
 #: Z_DeleteInvoice.php:16
 msgid ""
-"This page must be called with the InvoiceNo to delete Z_DeleteInvoice.php?"
-"InvoiceNo=XX"
+"This page must be called with the InvoiceNo to delete "
+"Z_DeleteInvoice.php?InvoiceNo=XX"
 msgstr ""
 
 #: Z_DeleteInvoice.php:16
@@ -30700,7 +30321,8 @@ msgid "The sales order records have been updated as not invoiced"
 msgstr ""
 
 #: Z_DeleteInvoice.php:105
-msgid "The SQL to reverse update to the location stock records failed because"
+msgid ""
+"The SQL to reverse update to the location stock records failed because"
 msgstr ""
 
 #: Z_DeleteInvoice.php:107
@@ -31009,23 +30631,20 @@ msgid "Row:"
 msgstr ""
 
 #: Z_ImportFixedAssets.php:125
-#, fuzzy
 msgid "Invalid Description:"
-msgstr "Detaili kirjeldus"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:129
-#, fuzzy
 msgid "The depreciation rate is expected to be numeric"
-msgstr "Sisestatud hulk peab olema numbriline"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:130 Z_ImportFixedAssets.php:134
 msgid "Invalid Depreciation Rate:"
 msgstr ""
 
 #: Z_ImportFixedAssets.php:138
-#, fuzzy
 msgid "The accumulated depreciation is expected to be numeric"
-msgstr "Sisestatud hulk peab olema numbriline"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:139 Z_ImportFixedAssets.php:143
 msgid "Invalid Accumulated Depreciation:"
@@ -31038,14 +30657,12 @@ msgid ""
 msgstr ""
 
 #: Z_ImportFixedAssets.php:147
-#, fuzzy
 msgid "The cost is expected to be numeric"
-msgstr "Sisestatud hulk peab olema numbriline"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:148 Z_ImportFixedAssets.php:152
-#, fuzzy
 msgid "Invalid Cost:"
-msgstr "Ühiku maksumus"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:151
 msgid "The cost is expected to be a positive number"
@@ -31080,29 +30697,25 @@ msgid "Invalid asset location code:"
 msgstr ""
 
 #: Z_ImportFixedAssets.php:174
-#, fuzzy
 msgid "The date purchased must be entered in the format:"
-msgstr "Kirjet oodatakse formaadis"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:175
 msgid "Invalid date format:"
 msgstr ""
 
 #: Z_ImportFixedAssets.php:213
-#, fuzzy
 msgid "The SQL that was used to add the asset and failed was"
-msgstr "SQL, mida kasutati kontogrupi uuendamisel, on"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:237 Z_ImportFixedAssets.php:258
-#, fuzzy
 msgid "The transaction for the cost of the asset could not be added because"
-msgstr "Ülesseatud pangakontosid ei leitud, kuna"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:238 Z_ImportFixedAssets.php:259
-#, fuzzy
 msgid ""
 "The SQL that was used to add the fixedasset trans record that failed was"
-msgstr "SQL, mis kontogrupi otsimise protsessi käigus ebaõnnestus, on"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:263
 msgid "Inserted the new asset:"
@@ -31614,8 +31227,8 @@ msgstr ""
 
 #: Z_poEditLangHeader.php:88
 msgid ""
-"Your existing translation file (messages.po) will be backed up as messages."
-"po.old"
+"Your existing translation file (messages.po) will be backed up as "
+"messages.po.old"
 msgstr ""
 
 #: Z_poEditLangHeader.php:89
@@ -32305,36 +31918,31 @@ msgid "Document.pdf"
 msgstr ""
 
 #: includes/Contract_Readin.php:29
-#, fuzzy
 msgid "The contract cannot be retrieved because"
-msgstr "ei saanud otsida, kuna"
+msgstr ""
 
 #: includes/Contract_Readin.php:30 includes/PO_ReadInOrder.inc:59
 msgid "The SQL statement that was used and failed was"
 msgstr ""
 
 #: includes/Contract_Readin.php:67
-#, fuzzy
 msgid "The bill of material cannot be retrieved because"
-msgstr "BOM'i ei leitud, kuna"
+msgstr ""
 
 #: includes/Contract_Readin.php:68
-#, fuzzy
 msgid ""
 "The SQL statement that was used to retrieve the contract bill of material was"
-msgstr "SQL, mida antud informatsiooni otsimisel kasutati, on"
+msgstr ""
 
 #: includes/Contract_Readin.php:90
-#, fuzzy
 msgid "The other contract requirementscannot be retrieved because"
-msgstr "Ettevõtte eelistusi ei saadud otsida, kuna"
+msgstr ""
 
 #: includes/Contract_Readin.php:91
-#, fuzzy
 msgid ""
 "The SQL statement that was used to retrieve the other contract requirments "
 "was"
-msgstr "SQL, mida antud informatsiooni otsimisel kasutati, on"
+msgstr ""
 
 #: includes/DefineCartClass.php:164
 msgid "The order line for"
@@ -32353,7 +31961,8 @@ msgid "could not be updated"
 msgstr ""
 
 #: includes/DefineCartClass.php:211
-msgid "No Line Number passed to remove_from_cart, so nothing has been removed."
+msgid ""
+"No Line Number passed to remove_from_cart, so nothing has been removed."
 msgstr ""
 
 #: includes/DefineCartClass.php:222
@@ -32445,19 +32054,16 @@ msgid "Data to display"
 msgstr ""
 
 #: includes/DefineLabelClass.php:44
-#, fuzzy
 msgid "Code item"
-msgstr "Kood"
+msgstr ""
 
 #: includes/DefineLabelClass.php:46
-#, fuzzy
 msgid "Description remainder"
-msgstr "Kirjeldus"
+msgstr ""
 
 #: includes/DefineLabelClass.php:47
-#, fuzzy
 msgid "Long description"
-msgstr "kirjeldusse"
+msgstr ""
 
 #: includes/DefineLabelClass.php:48
 msgid "Long description remainder"
@@ -32488,9 +32094,8 @@ msgid ""
 msgstr ""
 
 #: includes/GetConfig.php:9
-#, fuzzy
 msgid "Could not get the configuration parameters from the database because"
-msgstr "Ei leidnud emadetaili kirjeldust, kuna"
+msgstr ""
 
 #: includes/GetConfig.php:69
 msgid ""
@@ -32764,19 +32369,16 @@ msgid ""
 msgstr ""
 
 #: includes/PDFPaymentRun_PymtFooter.php:216
-#, fuzzy
 msgid "The SQL that failed was: "
-msgstr "SQL, mis ebaõnnestus, oli"
+msgstr ""
 
 #: includes/UserLogin.php:44
-#, fuzzy
 msgid "Could not retrieve user details on login because"
-msgstr "Ei suutnud BOM componente leida, kuna"
+msgstr ""
 
 #: includes/ConnectDB.inc:17
-#, fuzzy
 msgid "The company name entered ("
-msgstr "Komponent"
+msgstr ""
 
 #: includes/ConnectDB.inc:18
 msgid "Check the company name entered ("
@@ -32836,9 +32438,9 @@ msgstr ""
 
 #: includes/ConnectDB_postgres.inc:28
 msgid ""
-"The company name entered together with the configuration in the file config."
-"php for the database user name and password do not provide the information "
-"required to connect to the database."
+"The company name entered together with the configuration in the file "
+"config.php for the database user name and password do not provide the "
+"information required to connect to the database."
 msgstr ""
 
 #: includes/ConnectDB_postgres.inc:28
@@ -32868,7 +32470,8 @@ msgid "The report does not have any output columns"
 msgstr ""
 
 #: includes/ConstructSQLForUserDefinedSalesReport.inc:178
-msgid "You need to set up the data columns that you wish to show in the report"
+msgid ""
+"You need to set up the data columns that you wish to show in the report"
 msgstr ""
 
 #: includes/ConstructSQLForUserDefinedSalesReport.inc:178
@@ -32898,7 +32501,8 @@ msgstr ""
 
 #: includes/ConstructSQLForUserDefinedSalesReport.inc:267
 #: includes/ConstructSQLForUserDefinedSalesReport.inc:293
-msgid "Calculated fields must use columns defined in the report specification"
+msgid ""
+"Calculated fields must use columns defined in the report specification"
 msgstr ""
 
 #: includes/ConstructSQLForUserDefinedSalesReport.inc:267
@@ -33156,39 +32760,33 @@ msgstr ""
 
 #: includes/PDFCustTransListingPageHeader.inc:15
 #: includes/PDFStockTransListingPageHeader.inc:15
-#, fuzzy
 msgid "Customer Invoices"
-msgstr "Märkmed Kliendi kohta"
+msgstr ""
 
 #: includes/PDFCustTransListingPageHeader.inc:18
 #: includes/PDFStockTransListingPageHeader.inc:18
-#, fuzzy
 msgid "Customer Credit Notes"
-msgstr "Märkmed Kliendi kohta"
+msgstr ""
 
 #: includes/PDFCustTransListingPageHeader.inc:21
-#, fuzzy
 msgid "Customer Payments"
-msgstr "Märkmed Kliendi kohta"
+msgstr ""
 
 #: includes/PDFCustTransListingPageHeader.inc:28
 #: includes/PDFSuppTransListingPageHeader.inc:28
-#, fuzzy
 msgid "input on"
-msgstr "Printimise võimalus"
+msgstr ""
 
 #: includes/PDFCustTransListingPageHeader.inc:50
 #: includes/PDFStockTransListingPageHeader.inc:69
 #: includes/PDFSuppTransListingPageHeader.inc:50
-#, fuzzy
 msgid "Trans Date"
-msgstr "kuni kuupäevani"
+msgstr ""
 
 #: includes/PDFCustTransListingPageHeader.inc:51
 #: includes/PDFSuppTransListingPageHeader.inc:51
-#, fuzzy
 msgid "Net Amount"
-msgstr "Hulk"
+msgstr ""
 
 #: includes/PDFCustTransListingPageHeader.inc:52
 #: includes/PDFQuotationPageHeader.inc:106
@@ -33198,9 +32796,8 @@ msgstr ""
 
 #: includes/PDFCustTransListingPageHeader.inc:53
 #: includes/PDFSuppTransListingPageHeader.inc:53
-#, fuzzy
 msgid "Total Amount"
-msgstr "Kogumaksumus"
+msgstr ""
 
 #: includes/PDFDebtorBalsPageHeader.inc:17
 msgid "Customer Balances For Customers between"
@@ -33506,28 +33103,24 @@ msgid "Supplier Balances For Suppliers between"
 msgstr ""
 
 #: includes/PDFSuppTransListingPageHeader.inc:15
-#, fuzzy
 msgid "Suppier Invoices"
-msgstr "Tarnijakoodi"
+msgstr ""
 
 #: includes/PDFSuppTransListingPageHeader.inc:18
-#, fuzzy
 msgid "Suppier Credit Notes"
-msgstr "Tarnijakoodi"
+msgstr ""
 
 #: includes/PDFSuppTransListingPageHeader.inc:21
-#, fuzzy
 msgid "Suppier Payments"
-msgstr "Maksed"
+msgstr ""
 
 #: includes/PDFTagProfitAndLossPageHeader.inc:22
 msgid "Transactions for tag"
 msgstr ""
 
 #: includes/PDFTopItemsHeader.inc:26
-#, fuzzy
 msgid "Search On Location"
-msgstr "Asukoht"
+msgstr ""
 
 #: includes/PDFTopItemsHeader.inc:29
 msgid "Number Of Items"
@@ -33538,9 +33131,8 @@ msgid "Top Items Sales Search Result"
 msgstr ""
 
 #: includes/PDFTopItemsHeader.inc:56
-#, fuzzy
 msgid "Total Inv"
-msgstr "Kogumaksumus"
+msgstr ""
 
 #: includes/PDFTransPageHeader.inc:70
 msgid "CREDIT NOTE"
@@ -33602,9 +33194,8 @@ msgid "THIS IS NOT AN ORDER"
 msgstr ""
 
 #: includes/PO_PDFOrderPageHeader.inc:48
-#, fuzzy
 msgid "Requisition Number"
-msgstr "Jaotise number"
+msgstr ""
 
 #: includes/PO_PDFOrderPageHeader.inc:80
 msgid "Date Reqd"
@@ -33643,7 +33234,8 @@ msgid "Item Does Not Exist"
 msgstr ""
 
 #: includes/SelectOrderItems_IntoCart.inc:63
-msgid "could not be added to the order because it has been flagged as obsolete"
+msgid ""
+"could not be added to the order because it has been flagged as obsolete"
 msgstr ""
 
 #: includes/SelectOrderItems_IntoCart.inc:63
@@ -33689,9 +33281,8 @@ msgid "is not a valid user of the system"
 msgstr ""
 
 #: includes/session.inc:108
-#, fuzzy
 msgid "system maintenance"
-msgstr "Müügipiirkonna korrashoid"
+msgstr ""
 
 #: includes/session.inc:108
 msgid "webERP is not available right now"
@@ -33967,9 +33558,8 @@ msgid "Stock Code Does not Exist"
 msgstr ""
 
 #: api/api_errorcodes.php:214
-#, fuzzy
 msgid "Stock Category Does not Exist"
-msgstr "Varude kategooria"
+msgstr ""
 
 #: api/api_errorcodes.php:215
 msgid "Incorrect Stock Description Length"
@@ -34212,9 +33802,8 @@ msgid "GL account group already exists"
 msgstr ""
 
 #: api/api_errorcodes.php:275
-#, fuzzy
 msgid "GL account section does not exist"
-msgstr "Konto jaotis juba eksisteerib andmebaasis"
+msgstr ""
 
 #: api/api_errorcodes.php:276
 msgid "Invalid profit and loss flag"
@@ -34501,9 +34090,8 @@ msgid "The weberp password associated with this user name. "
 msgstr ""
 
 #: api/api_xml-rpc.php:22 api/api_xml-rpc.php:44
-#, fuzzy
 msgid "This function returns an integer. "
-msgstr "Kontakti prioriteet peab olema täisarv"
+msgstr ""
 
 #: api/api_xml-rpc.php:23 api/api_xml-rpc.php:45
 msgid "Zero means the function was successful. "
@@ -34738,7 +34326,8 @@ msgid "custbranch table. "
 msgstr ""
 
 #: api/api_xml-rpc.php:253
-msgid "All fields will be in the set regardless of whether the value was set."
+msgid ""
+"All fields will be in the set regardless of whether the value was set."
 msgstr ""
 
 #: api/api_xml-rpc.php:280 api/api_xml-rpc.php:313
@@ -34822,7 +34411,8 @@ msgid "Sales type abbreviation"
 msgstr ""
 
 #: api/api_xml-rpc.php:445
-msgid "A sales type abbreviation as returned by the GetSalesTypeList function."
+msgid ""
+"A sales type abbreviation as returned by the GetSalesTypeList function."
 msgstr ""
 
 #: api/api_xml-rpc.php:450
@@ -34853,9 +34443,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:539 api/api_xml-rpc.php:598
-#, fuzzy
 msgid "Hold reason code"
-msgstr "Suunanumber"
+msgstr ""
 
 #: api/api_xml-rpc.php:540
 msgid ""
@@ -34926,9 +34515,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:697 api/api_xml-rpc.php:928 api/api_xml-rpc.php:971
-#, fuzzy
 msgid "The StockID code to identify the item in the database."
-msgstr "Konto jaotis juba eksisteerib andmebaasis"
+msgstr ""
 
 #: api/api_xml-rpc.php:702
 msgid ""
@@ -34957,9 +34545,8 @@ msgid "Match Criteria"
 msgstr ""
 
 #: api/api_xml-rpc.php:732 api/api_xml-rpc.php:1895 api/api_xml-rpc.php:1928
-#, fuzzy
 msgid "The SQL search pattern to select items in the database."
-msgstr "Konto jaotis juba eksisteerib andmebaasis"
+msgstr ""
 
 #: api/api_xml-rpc.php:737
 msgid ""
@@ -35051,18 +34638,16 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:929 api/api_xml-rpc.php:972
-#, fuzzy
 msgid "Currency Code"
-msgstr "Valuuta"
+msgstr ""
 
 #: api/api_xml-rpc.php:930 api/api_xml-rpc.php:973
 msgid "The currency involved."
 msgstr ""
 
 #: api/api_xml-rpc.php:932
-#, fuzzy
 msgid "The sales type to identify the item in the database."
-msgstr "Konto jaotis juba eksisteerib andmebaasis"
+msgstr ""
 
 #: api/api_xml-rpc.php:934
 msgid "The price to apply to this item."
@@ -35079,9 +34664,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:975
-#, fuzzy
 msgid "The sales type of the item in the database."
-msgstr "Pangakonto suunanumber juba eksisteerib andmebaasis"
+msgstr ""
 
 #: api/api_xml-rpc.php:980
 msgid ""
@@ -35191,9 +34775,8 @@ msgid "The orderno and stkcode keys must be one of these values. "
 msgstr ""
 
 #: api/api_xml-rpc.php:1216
-#, fuzzy
 msgid "Account Details"
-msgstr "Konto jaotised"
+msgstr ""
 
 #: api/api_xml-rpc.php:1217
 msgid ""
@@ -35201,23 +34784,21 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1245
-#, fuzzy
 msgid "Account Section Details"
-msgstr "Konto jaotised"
+msgstr ""
 
 #: api/api_xml-rpc.php:1246
-msgid "An array of index/value items describing the account section to insert."
+msgid ""
+"An array of index/value items describing the account section to insert."
 msgstr ""
 
 #: api/api_xml-rpc.php:1274
-#, fuzzy
 msgid "Account Group Details"
-msgstr "Kontogrupid"
+msgstr ""
 
 #: api/api_xml-rpc.php:1275
-#, fuzzy
 msgid "An array of index/value items describing the account group to insert."
-msgstr "Kontogrupi info otsimisel ilmnes viga"
+msgstr ""
 
 #: api/api_xml-rpc.php:1303
 msgid "This function returns a list of stock location ids."
@@ -35234,9 +34815,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1331
-#, fuzzy
 msgid "Stock Location Code"
-msgstr "inventari kood"
+msgstr ""
 
 #: api/api_xml-rpc.php:1332
 msgid "A stock location code as returned by the GetLocationList function."
@@ -35285,9 +34865,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1449 api/api_xml-rpc.php:1568
-#, fuzzy
 msgid "Sales Area Code"
-msgstr "Suunanumber"
+msgstr ""
 
 #: api/api_xml-rpc.php:1450
 msgid "A sales area code as returned by the GetSalesAreasList function."
@@ -35304,18 +34883,16 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1480
-#, fuzzy
 msgid "Sales Area Description"
-msgstr "Detaili kirjeldus"
+msgstr ""
 
 #: api/api_xml-rpc.php:1481
 msgid "A sales area description of the sales area of interest."
 msgstr ""
 
 #: api/api_xml-rpc.php:1510
-#, fuzzy
 msgid "Sales Area Details"
-msgstr "Müügipiirkonna korrashoid"
+msgstr ""
 
 #: api/api_xml-rpc.php:1511
 msgid "An array of index/value items describing the sales area to insert."
@@ -35399,9 +34976,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1746
-#, fuzzy
 msgid "Customer Type ID"
-msgstr "Märkmed Kliendi kohta"
+msgstr ""
 
 #: api/api_xml-rpc.php:1747
 msgid "A customer type ID as returned by the GetCustomerTypeList function."
@@ -35416,11 +34992,13 @@ msgid "Category Details"
 msgstr ""
 
 #: api/api_xml-rpc.php:1777
-msgid "An array of index/value items describing the stock category to insert."
+msgid ""
+"An array of index/value items describing the stock category to insert."
 msgstr ""
 
 #: api/api_xml-rpc.php:1806
-msgid "An array of index/value items describing the stock category to modify."
+msgid ""
+"An array of index/value items describing the stock category to modify."
 msgstr ""
 
 #: api/api_xml-rpc.php:1833
@@ -35444,9 +35022,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1862
-#, fuzzy
 msgid "Stock Category ID"
-msgstr "Varude kategooria"
+msgstr ""
 
 #: api/api_xml-rpc.php:1863
 msgid "A Stock Category ID as returned by the *WHAT* function."
@@ -35457,9 +35034,8 @@ msgid "This function returns an array of stock category details."
 msgstr ""
 
 #: api/api_xml-rpc.php:1925
-#, fuzzy
 msgid "Label Name"
-msgstr "Välja nimi"
+msgstr ""
 
 #: api/api_xml-rpc.php:1926
 msgid "The category label to search on."
@@ -35480,16 +35056,13 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1987
-#, fuzzy
 msgid "General Ledger Account Code"
-msgstr "GL suunanumber"
+msgstr ""
 
 #: api/api_xml-rpc.php:1988
-#, fuzzy
 msgid ""
 "A general ledger account code as returned by the GetGLAccountList function."
 msgstr ""
-"üldiste raamatupidamiskontode grupid, mis viitavad sellele kontojaotisele"
 
 #: api/api_xml-rpc.php:1993 api/api_xml-rpc.php:2026
 msgid "This function returns an array of general ledger account details."
@@ -35506,9 +35079,8 @@ msgid "The stock ID of the item whose tax rate is desired."
 msgstr ""
 
 #: api/api_xml-rpc.php:2020
-#, fuzzy
 msgid "Tax Authority Code"
-msgstr "Kliendikoodi"
+msgstr ""
 
 #: api/api_xml-rpc.php:2021
 msgid "The code identifying the tax authority of interest."
@@ -35591,7 +35163,8 @@ msgid "Returns a two dimensional array of stock batch details. "
 msgstr ""
 
 #: api/api_xml-rpc.php:2204
-msgid "The fields returned are stockid, loccode, batchno, quantity, itemcost. "
+msgid ""
+"The fields returned are stockid, loccode, batchno, quantity, itemcost. "
 msgstr ""
 
 #: api/api_xml-rpc.php:2230
@@ -35724,9 +35297,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:2635
-#, fuzzy
 msgid "Property"
-msgstr "Prioriteet"
+msgstr ""
 
 #: api/api_xml-rpc.php:2636
 msgid "The name of the specific property to be returned."
@@ -35749,9 +35321,8 @@ msgid "Returns (possibly translated) error text from error codes"
 msgstr ""
 
 #: api/api_xml-rpc.php:2671
-#, fuzzy
 msgid "Error codes"
-msgstr "Suunanumber"
+msgstr ""
 
 #: api/api_xml-rpc.php:2672
 msgid "An array of error codes to change into text messages. "
@@ -35770,9 +35341,3 @@ msgstr ""
 #: api/api_xml-rpc.php:3027
 msgid "Return Value"
 msgstr ""
-
-#~ msgid "Extended Quantity BOM Listing"
-#~ msgstr "Materjalide loetelu"
-
-#~ msgid "Review Components"
-#~ msgstr "Vaata komponendid üle"

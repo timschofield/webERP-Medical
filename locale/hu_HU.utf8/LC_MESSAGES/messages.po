@@ -2,20 +2,20 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Csillag Peter <csp@i-work.hu>, 2006.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-04 22:11+1200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Csillag Peter <csp@i-work.hu>\n"
+"POT-Creation-Date: 2011-01-04 22:15+1200\n"
+"PO-Revision-Date: 2010-10-03 18:48+0000\n"
+"Last-Translator: Csillag Peter <Unknown>\n"
 "Language-Team: HUNGARIAN <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-16 09:48+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-01-10 14:09+0000\n"
+"X-Generator: Launchpad (build 12161)\n"
 
 #: AccountGroups.php:9 index.php:1273
 msgid "Account Groups"
@@ -110,7 +110,8 @@ msgid "Record inserted"
 msgstr "Rekord beillesztve"
 
 #: AccountGroups.php:176
-msgid "An error occurred in retrieving the group information from chartmaster"
+msgid ""
+"An error occurred in retrieving the group information from chartmaster"
 msgstr "Hiba a deviza rekord elérésénél"
 
 #: AccountGroups.php:181
@@ -178,7 +179,7 @@ msgstr "csoport törölve lett"
 
 #: AccountGroups.php:223
 msgid "The sql that was used to retrieve the account group information was "
-msgstr "Hiba az árazás adatok elérésénél (SQL)"
+msgstr "Hiba az árazás adatok elérésénél (SQL) "
 
 #: AccountGroups.php:224
 msgid "Could not get account groups because"
@@ -319,7 +320,6 @@ msgstr "Igen"
 msgid "No"
 msgstr "Nem"
 
-# 
 #: AccountGroups.php:265 AccountSections.php:197 AddCustomerContacts.php:131
 #: AddCustomerNotes.php:125 AddCustomerTypeNotes.php:123 Areas.php:165
 #: BankAccounts.php:226 BOMs.php:150 COGSGLPostings.php:113
@@ -345,7 +345,6 @@ msgstr "Nem"
 msgid "Edit"
 msgstr "Szerkeszt"
 
-# 
 #: AccountGroups.php:266 AccountSections.php:201 AddCustomerContacts.php:132
 #: AddCustomerNotes.php:126 AddCustomerTypeNotes.php:124 Areas.php:166
 #: BankAccounts.php:227 BOMs.php:152 COGSGLPostings.php:114
@@ -616,9 +615,8 @@ msgid "The contact note record has been deleted"
 msgstr "A kedvezmény mátrix rekord törölve"
 
 #: AddCustomerNotes.php:98
-#, fuzzy
 msgid "Notes for Customer"
-msgstr "és a vevő"
+msgstr ""
 
 #: AddCustomerNotes.php:106 AddCustomerNotes.php:189
 #: AddCustomerTypeNotes.php:104 AddCustomerTypeNotes.php:186
@@ -696,9 +694,8 @@ msgid "The contact group note record has been deleted"
 msgstr "A kedvezmény mátrix rekord törölve"
 
 #: AddCustomerTypeNotes.php:95
-#, fuzzy
 msgid "Notes for Customer Type"
-msgstr "és a vevő"
+msgstr ""
 
 #: AddCustomerTypeNotes.php:106
 msgid "href"
@@ -1078,7 +1075,7 @@ msgstr "Felhasználói azonosító"
 
 #: AuditTrail.php:56
 msgid "Table "
-msgstr "Engedélyezve"
+msgstr "Engedélyezve "
 
 #: AuditTrail.php:68 MRPReport.php:789 PO_SelectPurchOrder.php:357
 #: SelectContract.php:196 SelectProduct.php:710
@@ -1443,7 +1440,8 @@ msgid "after"
 msgstr "után"
 
 #: BankMatching.php:218
-msgid "The payments with the selected criteria could not be retrieved because"
+msgid ""
+"The payments with the selected criteria could not be retrieved because"
 msgstr "A megadott feltételeknek nincs megfelelő kifizetés, mert"
 
 #: BankMatching.php:221 ShipmentCosting.php:502 ShipmentCosting.php:573
@@ -1800,7 +1798,7 @@ msgstr "Sima nyomtatása"
 
 #: BOMExtendedQty.php:322
 msgid "Extended Quantity BOM Listing For       "
-msgstr "Kiterjesztett mennyiség BOM lista a"
+msgstr "Kiterjesztett mennyiség BOM lista a       "
 
 #: BOMExtendedQty.php:324 BOMIndented.php:303 BOMIndentedReverse.php:291
 #: GLAccountReport.php:353 InventoryPlanningPrefSupplier.php:63
@@ -1894,7 +1892,7 @@ msgstr "Oldal"
 
 #: BOMExtendedQty.php:327
 msgid "Build Quantity:  "
-msgstr "Mennyiség"
+msgstr "Mennyiség  "
 
 #: BOMExtendedQty.php:334
 msgid "Build"
@@ -2030,7 +2028,7 @@ msgstr "Összeszerelt"
 
 #: BOMIndented.php:329 BOMIndentedReverse.php:315
 msgid " 12345678901234567890"
-msgstr "12345678901234567890"
+msgstr " 12345678901234567890"
 
 #: BOMIndentedReverse.php:232
 msgid "Print Reverse Indented BOM Listing Error"
@@ -2155,7 +2153,8 @@ msgstr ""
 msgid ""
 "At least one stock description keyword or an extract of a stock code must be "
 "entered for the search"
-msgstr "Legalább egy kulcsszó, vagy a pontos termékkód szükséges a kereséshez"
+msgstr ""
+"Legalább egy kulcsszó, vagy a pontos termékkód szükséges a kereséshez"
 
 #: BOMInquiry.php:83 BOMs.php:785 MRPCalendar.php:212 MRPDemands.php:81
 #: MRPDemands.php:285 POReport.php:482 POReport.php:1172 SalesInquiry.php:734
@@ -2261,7 +2260,8 @@ msgid "Bill of Materials Listing"
 msgstr "Anyagszámla lista"
 
 #: BOMListing.php:50
-msgid "The Bill of Material listing could not be retrieved by the SQL because"
+msgid ""
+"The Bill of Material listing could not be retrieved by the SQL because"
 msgstr "Az anyagszámla lista nem elérhető (SQL), mert"
 
 #: BOMListing.php:61
@@ -2321,14 +2321,14 @@ msgstr "NINCS"
 
 #: BOMs.php:225
 msgid ""
-"The effective after date field must be a date in the format dd/mm/yy or dd/"
-"mm/yyyy or ddmmyy or ddmmyyyy or dd-mm-yy or dd-mm-yyyy"
+"The effective after date field must be a date in the format dd/mm/yy or "
+"dd/mm/yyyy or ddmmyy or ddmmyyyy or dd-mm-yy or dd-mm-yyyy"
 msgstr "A megadott dátum (tól) formátuma hibás"
 
 #: BOMs.php:231
 msgid ""
-"The effective to date field must be a date in the format dd/mm/yy or dd/mm/"
-"yyyy or ddmmyy or ddmmyyyy or dd-mm-yy or dd-mm-yyyy"
+"The effective to date field must be a date in the format dd/mm/yy or "
+"dd/mm/yyyy or ddmmyy or ddmmyyyy or dd-mm-yy or dd-mm-yyyy"
 msgstr "A megadott dátum (ig) formátuma hibás"
 
 #: BOMs.php:237 StockAdjustments.php:83 StockTransfers.php:130
@@ -2906,7 +2906,6 @@ msgstr ""
 msgid "Back to Confirmation of Dispatch"
 msgstr "Vissza a feldolgozás jóváhagyáshoz"
 
-# 
 #: ConfirmDispatchControlled_Invoice.php:57 CounterSales.php:1164
 #: DeliveryDetails.php:577 DeliveryDetails.php:752 EmailCustTrans.php:11
 #: PaymentAllocations.php:33 SelectSalesOrder.php:418 SelectSalesOrder.php:478
@@ -3067,13 +3066,11 @@ msgstr "Tétel leírás"
 msgid "Ordered"
 msgstr "Megrendelve"
 
-# 
 #: ConfirmDispatch_Invoice.php:265 FTP_RadioBeacon.php:84
 #, php-format
 msgid "Already"
 msgstr "Már"
 
-# 
 #: ConfirmDispatch_Invoice.php:265 FTP_RadioBeacon.php:84
 #, php-format
 msgid "Sent"
@@ -3115,7 +3112,6 @@ msgstr "Ár"
 msgid "Discount"
 msgstr "Kedvezmény"
 
-# 
 #: ConfirmDispatch_Invoice.php:269 ConfirmDispatch_Invoice.php:273
 #: CounterSales.php:670 CounterSales.php:756 Credit_Invoice.php:278
 #: Credit_Invoice.php:282 CustomerAllocations.php:333
@@ -3589,7 +3585,8 @@ msgstr "KRITIKUS HIBA"
 #: includes/SQL_CommonFunctions.inc:30 includes/SQL_CommonFunctions.inc:185
 #: includes/SQL_CommonFunctions.inc:204
 msgid "NOTE DOWN THIS ERROR AND SEEK ASSISTANCE"
-msgstr "JEGYEZZE FEL EZT A HIBAÜZENETET ÉS ÉRTESíTSE A RENDSZERADMINISZTRÁTORT"
+msgstr ""
+"JEGYEZZE FEL EZT A HIBAÜZENETET ÉS ÉRTESíTSE A RENDSZERADMINISZTRÁTORT"
 
 #: ConfirmDispatch_Invoice.php:738 CounterSales.php:1166
 #: RecurringSalesOrdersProcess.php:638
@@ -3639,7 +3636,8 @@ msgid "The following SQL to update the sales order detail record was used"
 msgstr "SQL üzenet"
 
 #: ConfirmDispatch_Invoice.php:852 ConfirmDispatch_Invoice.php:881
-msgid "The order delivery differences log record could not be inserted because"
+msgid ""
+"The order delivery differences log record could not be inserted because"
 msgstr "A megrendelés és szállítás különbség rekord nem rögzíthető, mert"
 
 #: ConfirmDispatch_Invoice.php:853 ConfirmDispatch_Invoice.php:882
@@ -3648,9 +3646,8 @@ msgid ""
 msgstr "SQL üzenet"
 
 #: ConfirmDispatch_Invoice.php:913
-#, fuzzy
 msgid "Cannot retrieve the mbflag"
-msgstr "Nem elérhető tételek"
+msgstr ""
 
 #: ConfirmDispatch_Invoice.php:927 CounterSales.php:1244
 #: FixedAssetItems.php:551 SalesAnalReptCols.php:319 Stocks.php:1028
@@ -3691,8 +3688,9 @@ msgid "because"
 msgstr "mert"
 
 #: ConfirmDispatch_Invoice.php:975 CounterSales.php:1293
-msgid "Can not retrieve assembly components location stock quantities because "
-msgstr "Nem elérhetők az összeépítés alkatrészei (mennyiség), mert"
+msgid ""
+"Can not retrieve assembly components location stock quantities because "
+msgstr "Nem elérhetők az összeépítés alkatrészei (mennyiség), mert "
 
 #: ConfirmDispatch_Invoice.php:1011 CounterSales.php:1329
 #: CustomerInquiry.php:195 CustomerTransInquiry.php:92 DeliveryDetails.php:583
@@ -3802,7 +3800,8 @@ msgstr "A készletmozgás rekord nem rögzíthető, mert"
 #: StockLocTransferReceive.php:173 StockLocTransferReceive.php:286
 #: StockTransfers.php:261 StockTransfers.php:369 WorkOrderIssue.php:231
 #: WorkOrderIssue.php:286 WorkOrderReceive.php:508 WorkOrderReceive.php:579
-msgid "The following SQL to insert the serial stock movement records was used"
+msgid ""
+"The following SQL to insert the serial stock movement records was used"
 msgstr "SQL üzenet"
 
 #: ConfirmDispatch_Invoice.php:1206 CounterSales.php:1530
@@ -3859,7 +3858,8 @@ msgstr "SQL üzenet"
 #: ConfirmDispatch_Invoice.php:1312 CounterSales.php:1635
 msgid ""
 "The stock side of the cost of sales GL posting could not be inserted because"
-msgstr "A készlet az eladás költségei főkönyvi feladáshoz nem rögzítheő, mert"
+msgstr ""
+"A készlet az eladás költségei főkönyvi feladáshoz nem rögzítheő, mert"
 
 #: ConfirmDispatch_Invoice.php:1339 CounterSales.php:1661
 #: RecurringSalesOrdersProcess.php:508
@@ -3872,67 +3872,56 @@ msgid "The sales discount GL posting could not be inserted because"
 msgstr "Az eladás kedvezménye főkönyvi feladás sikertelen, mert"
 
 #: ConfirmDispatch_Invoice.php:1378
-#, fuzzy
 msgid "The asset disposal GL posting details could not be retrieved because"
-msgstr "A készlet főkönyvi kód nem elérhető, mert"
+msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1379
-#, fuzzy
 msgid "The following SQL was used to get the asset posting details"
-msgstr "SQL üzenet"
+msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1404 ConfirmDispatch_Invoice.php:1426
 #: ConfirmDispatch_Invoice.php:1448 ConfirmDispatch_Invoice.php:1470
-#, fuzzy
 msgid "disposal"
-msgstr "Összesen"
+msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1407
-#, fuzzy
 msgid ""
 "The reversal of accumulated depreciation GL posting on disposal could not be "
 "inserted because"
-msgstr "Az eladás kedvezménye főkönyvi feladás sikertelen, mert"
+msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1429
-#, fuzzy
 msgid ""
 "The reversal of asset cost on dispoal GL posting could not be inserted "
 "because"
-msgstr "Eladás költségei főkönyvi feladás sikertelen, mert"
+msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1451
-#, fuzzy
 msgid "The disposal net book value GL posting could not be inserted because"
-msgstr "Eladás költségei főkönyvi feladás sikertelen, mert"
+msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1473
-#, fuzzy
 msgid "The disposal proceeds GL posting could not be inserted because"
-msgstr "Az eladás főkönyvi feladás nem rögzíthető, mert"
+msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1501
-#, fuzzy
 msgid "The fixed asset transaction could not be inserted because"
-msgstr "A vevő tranzakció rekordja nem rögzíthető, mert"
+msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1502 GoodsReceived.php:596 ReverseGRN.php:176
 #: SupplierCredit.php:1190 SupplierCredit.php:1277 SupplierInvoice.php:1187
 #: SupplierInvoice.php:1271
-#, fuzzy
-msgid "The following SQL to insert the fixed asset transaction record was used"
-msgstr "SQL üzenet"
+msgid ""
+"The following SQL to insert the fixed asset transaction record was used"
+msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1509
-#, fuzzy
 msgid "The fixed asset record could not be updated for the disposal because"
 msgstr ""
-"A soros állomány tétel eredménye nem lehet frissíteni az írjon le, mert"
 
 #: ConfirmDispatch_Invoice.php:1510
-#, fuzzy
 msgid "The following SQL to update the fixed asset record was used"
-msgstr "Az alábbi SQL frissíteni a készletnyilvántartási használták"
+msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1538 CounterSales.php:1709
 #: RecurringSalesOrdersProcess.php:602
@@ -4143,9 +4132,8 @@ msgid "Sub-total"
 msgstr "összesen"
 
 #: ContractBOM.php:278
-#, fuzzy
 msgid "Update Lines"
-msgstr "Megrendelés sor módosítás"
+msgstr ""
 
 #: ContractBOM.php:279 ContractOtherReqts.php:128
 msgid "Back To Contract Header"
@@ -4869,7 +4857,7 @@ msgstr "Nincs több megrendelést lehet helyezni a"
 
 #: Contracts.php:726 CounterSales.php:183 SelectOrderItems.php:502
 msgid " their account is currently at or over their credit limit"
-msgstr "a számláján jelenleg vagy felett hitelkeret"
+msgstr " a számláján jelenleg vagy felett hitelkeret"
 
 #: Contracts.php:739
 msgid "Contract: Select Customer"
@@ -4991,7 +4979,6 @@ msgstr "Száll. dátum"
 msgid "Customer Reference"
 msgstr "Vevői hivatkozás"
 
-# 
 #: Contracts.php:882 GLProfit_Loss.php:293 GLProfit_Loss.php:482
 #: GLProfit_Loss.php:786 GLProfit_Loss.php:1089 GLTagProfit_Loss.php:287
 #: GLTagProfit_Loss.php:425 GLTagProfit_Loss.php:657 GLTagProfit_Loss.php:879
@@ -5224,7 +5211,7 @@ msgstr "Nincs rendelkezésre álló termékek esetében teljesülnek a"
 
 #: CounterSales.php:410 SelectOrderItems.php:939 SelectOrderItems.php:1113
 msgid "An invalid date entry was made for "
-msgstr "Érvénytelen dátum"
+msgstr "Érvénytelen dátum "
 
 #: CounterSales.php:410 SelectOrderItems.php:939 SelectOrderItems.php:1113
 msgid "The date entry"
@@ -5246,12 +5233,13 @@ msgstr ""
 msgid ""
 "The sql that was used to determine if the part being ordered was a kitset or "
 "not was "
-msgstr "SQL sor"
+msgstr "SQL sor "
 
 #: CounterSales.php:425 SelectOrderItems.php:954
 msgid ""
 "could not be retrieved from the database and has not been added to the order"
-msgstr "nem sikerült letölteni az adatbázisból, és nem került bele a rendelési"
+msgstr ""
+"nem sikerült letölteni az adatbázisból, és nem került bele a rendelési"
 
 #: CounterSales.php:435 CounterSales.php:543 CounterSales.php:593
 #: SelectOrderItems.php:964 SelectOrderItems.php:1178
@@ -5423,8 +5411,8 @@ msgid ""
 "material set up ... you may wish to double check this"
 msgstr ""
 "elem ebben a vevői rendelés, ennek költsége tétel halmozott összege az "
-"összetevő költségek nulla. Ez azért lehet, mert nincs számla anyagi "
-"létre ... érdemes lehet kétszer ellenőrizze ezt a"
+"összetevő költségek nulla. Ez azért lehet, mert nincs számla anyagi létre "
+"... érdemes lehet kétszer ellenőrizze ezt a"
 
 #: CounterSales.php:1098 DeliveryDetails.php:515 DeliveryDetails.php:677
 #: WorkOrderEntry.php:240
@@ -5533,7 +5521,8 @@ msgid "Cannot insert a receipt transaction against the customer because"
 msgstr "Nem rögzíthető a bevétel a vevőhüz, mert"
 
 #: CounterSales.php:1866 CustomerReceipt.php:413
-msgid "The SQL that failed to update the date of the last payment received was"
+msgid ""
+"The SQL that failed to update the date of the last payment received was"
 msgstr "SQL üzenet"
 
 #: CounterSales.php:1867 CustomerReceipt.php:414
@@ -5648,7 +5637,8 @@ msgid "Next"
 msgstr "Következő"
 
 #: CounterSales.php:2265
-msgid "Use this form to add items quickly if the item codes are already known"
+msgid ""
+"Use this form to add items quickly if the item codes are already known"
 msgstr ""
 "Használja ezt az űrlapot hozzá elemeket gyorsan, ha az elem kódokat már "
 "ismert"
@@ -6382,7 +6372,7 @@ msgstr "Készpénzkassza"
 
 #: CustLoginSetup.php:35 SelectCustomer.php:275 SuppLoginSetup.php:25
 msgid " has been selected"
-msgstr "törölve"
+msgstr " törölve"
 
 #: CustLoginSetup.php:90 SuppLoginSetup.php:79 WWW_Users.php:69
 msgid "The user ID entered must be at least 4 characters long"
@@ -6705,7 +6695,6 @@ msgstr "Tranz"
 msgid "Yet to"
 msgstr "Még"
 
-# 
 #: CustomerAllocations.php:360 CustomerAllocations.php:477
 #: CustomerAllocations.php:515 CustomerReceipt.php:234 CustomerReceipt.php:532
 #: SupplierAllocations.php:467 SupplierAllocations.php:601
@@ -6718,7 +6707,6 @@ msgstr "Allokál"
 msgid "This"
 msgstr "Ez"
 
-# 
 #: CustomerAllocations.php:361 CustomerInquiry.php:328 CustomerInquiry.php:356
 #: CustomerInquiry.php:384 CustomerInquiry.php:405 SupplierAllocations.php:468
 #, php-format
@@ -6867,8 +6855,8 @@ msgid ""
 "</b>has been added, add another branch, or return to <a href=index.php>Main "
 "Menu</a>"
 msgstr ""
-"adtak, adjunk hozzá egy másik ága, vagy térjen vissza a <a href=index."
-"php>Főmenü</a>"
+"adtak, adjunk hozzá egy másik ága, vagy térjen vissza a <a "
+"href=index.php>Főmenü</a>"
 
 #: CustomerBranches.php:250
 msgid "The branch record could not be inserted or updated because"
@@ -6958,7 +6946,6 @@ msgstr "Adó típus"
 msgid "Enabled?"
 msgstr "Engedélyezve"
 
-# 
 #: CustomerBranches.php:409
 #, php-format
 msgid "Are you sure you wish to delete this branch?"
@@ -7261,7 +7248,7 @@ msgstr "További információ"
 
 #: CustomerInquiry.php:232
 msgid "Credit "
-msgstr "Jóváírás"
+msgstr "Jóváírás "
 
 #: CustomerInquiry.php:232
 msgid "Click to credit the invoice"
@@ -7269,9 +7256,8 @@ msgstr "Klikk a számla jóváíráshoz"
 
 #: CustomerInquiry.php:233 CustomerInquiry.php:236
 msgid "HTML "
-msgstr "HTML"
+msgstr "HTML "
 
-# 
 #: CustomerInquiry.php:233 CustomerTransInquiry.php:126
 #, php-format
 msgid "Click to preview the invoice"
@@ -7279,7 +7265,7 @@ msgstr "klikk a számla megtekintéshe"
 
 #: CustomerInquiry.php:234 CustomerInquiry.php:237
 msgid "PDF "
-msgstr "PDF"
+msgstr "PDF "
 
 #: CustomerInquiry.php:234 CustomerInquiry.php:237 SelectSalesOrder.php:479
 #: SelectSalesOrder.php:480
@@ -7289,7 +7275,7 @@ msgstr "Klikk vissza"
 
 #: CustomerInquiry.php:235
 msgid "Email "
-msgstr "Email"
+msgstr "Email "
 
 #: CustomerInquiry.php:235
 msgid "Click to email the invoice"
@@ -7314,7 +7300,6 @@ msgstr "Készlet szám"
 msgid "View the GL Entries"
 msgstr "Készlet szám"
 
-# 
 #: CustomerInquiry.php:328 CustomerInquiry.php:356 CustomerInquiry.php:384
 #: CustomerInquiry.php:405
 #, php-format
@@ -7326,9 +7311,8 @@ msgid "Receipt Entry"
 msgstr "Bevételek"
 
 #: CustomerReceipt.php:35
-#, fuzzy
 msgid "A bank account must be selected for this receipt"
-msgstr "majd egy elemet kell választani, mielőtt ez az oldal neve"
+msgstr ""
 
 #: CustomerReceipt.php:50 Payments.php:685
 msgid "The bank account name cannot be retrieved because"
@@ -7360,9 +7344,8 @@ msgstr ""
 "kiválasztott pénznemben lehet választani"
 
 #: CustomerReceipt.php:163 Payments.php:639
-#, fuzzy
 msgid "No General Ledger code has been chosen"
-msgstr "Nincs főkönyvi számla beállítva"
+msgstr ""
 
 #: CustomerReceipt.php:163 GLJournal.php:173 Payments.php:622 Payments.php:639
 msgid "so this GL analysis item could not be added"
@@ -7588,8 +7571,8 @@ msgid ""
 "entered - either the currency of the receipt needs to be changed or a "
 "different customer selected"
 msgstr ""
-"A kiválasztott ügyfél nem kereskedelmi pénznemében kézhezvételének, hogy be "
-"- vagy a valuta az átvételi meg kell változtatni, vagy egy másik felhasználó "
+"A kiválasztott ügyfél nem kereskedelmi pénznemében kézhezvételének, hogy be -"
+" vagy a valuta az átvételi meg kell változtatni, vagy egy másik felhasználó "
 "által kiválasztott"
 
 #: CustomerReceipt.php:939 GLAccountCSV.php:63 GLAccountInquiry.php:48
@@ -7661,7 +7644,8 @@ msgid "The customer number already exists in the database"
 msgstr "A megadott főkönyvi számla nem található az adatbázisban"
 
 #: Customers.php:46
-msgid "The customer name must be entered and be forty characters or less long"
+msgid ""
+"The customer name must be entered and be forty characters or less long"
 msgstr "Vevő név megadása kötelező, max 40 karakter"
 
 #: Customers.php:51
@@ -8012,7 +7996,6 @@ msgstr "Nincs a megadott szempontoknak megfelelő tranzakció"
 msgid "Ex Rate"
 msgstr "Árfolyam"
 
-# 
 #: CustomerTransInquiry.php:145
 #, php-format
 msgid "Click to preview the credit"
@@ -8035,11 +8018,13 @@ msgid "Add/edit/delete Customer Types"
 msgstr "Vevői telephelyek"
 
 #: CustomerTypes.php:39
-msgid "The customer type name description must be 100 characters or less long"
+msgid ""
+"The customer type name description must be 100 characters or less long"
 msgstr "A fizetési mód leírás max 40 karakter lehet"
 
 #: CustomerTypes.php:47
-msgid "The customer type name description must contain at least one character"
+msgid ""
+"The customer type name description must contain at least one character"
 msgstr "A számlaosztály neve nem tartalmazhat betüt"
 
 #: CustomerTypes.php:60
@@ -8052,12 +8037,12 @@ msgstr "Vevőkód (ig)"
 
 #: CustomerTypes.php:85
 msgid "The customer type "
-msgstr "Vevőkód (ig)"
+msgstr "Vevőkód (ig) "
 
 #: CustomerTypes.php:85 PcExpenses.php:74 PcTabs.php:74 PcTypeTabs.php:73
 #: SalesTypes.php:77 SupplierTypes.php:83
 msgid " already exist."
-msgstr "már eladva"
+msgstr " már eladva"
 
 #: CustomerTypes.php:95 CustomerTypes.php:166
 msgid "Customer type"
@@ -8710,7 +8695,6 @@ msgstr "A készletrekord módosítva lett kedvezmény kategória nélkül"
 msgid "Discount Category Code"
 msgstr "Kedvezmény kategória kód"
 
-# 
 #: DiscountCategories.php:90 DiscountCategories.php:231 PO_Header.php:848
 #: SalesCategories.php:262 SuppInvGRNs.php:276 SupplierTenders.php:57
 #, php-format
@@ -9178,7 +9162,8 @@ msgid "Payment will be effected by promissory note"
 msgstr "Fizetés hajtják végre saját váltó"
 
 #: EDIProcessOrders.php:314
-msgid "Payment will be effected by a bill drawn by the creditor on the debtor"
+msgid ""
+"Payment will be effected by a bill drawn by the creditor on the debtor"
 msgstr ""
 "Fizetés hajtják végre egy törvényjavaslatot készített a hitelező az adós"
 
@@ -9727,71 +9712,58 @@ msgid "Updated the fixed asset category record for"
 msgstr "Vevői allokálás rekord"
 
 #: FixedAssetCategories.php:108
-#, fuzzy
 msgid "Could not insert the new fixed asset category"
-msgstr "Nem rögzíthető az alkatrész, mert"
+msgstr ""
 
 #: FixedAssetCategories.php:110
-#, fuzzy
 msgid "A new fixed asset category record has been added for"
-msgstr "Az új hely rekord rögzítve"
+msgstr ""
 
 #: FixedAssetCategories.php:131
-#, fuzzy
 msgid ""
 "Cannot delete this fixed asset category because fixed assets have been "
 "created using this category"
-msgstr "Nem törölhető ez a hely, mert készletmozgások hivatkoznak rá"
+msgstr ""
 
 #: FixedAssetCategories.php:132
-#, fuzzy
 msgid "fixed assets referring to this category code"
-msgstr "tételek hivatkozva ennek az állománynak kategóriában kódot"
+msgstr ""
 
 #: FixedAssetCategories.php:137
-#, fuzzy
 msgid "The fixed asset category"
-msgstr "Kedvezmény kategória"
+msgstr ""
 
 #: FixedAssetCategories.php:159 StockCategories.php:217
 msgid "Cat Code"
 msgstr "Cat kód"
 
 #: FixedAssetCategories.php:161
-#, fuzzy
 msgid "Cost GL"
-msgstr "Költség"
+msgstr ""
 
 #: FixedAssetCategories.php:162
 msgid "P & L Depn GL"
 msgstr "P &amp; L Depn GL"
 
 #: FixedAssetCategories.php:163
-#, fuzzy
 msgid "Disposal GL"
-msgstr "Összesen"
+msgstr ""
 
 #: FixedAssetCategories.php:164
-#, fuzzy
 msgid "Accum Depn GL"
-msgstr "BS Depn GL"
+msgstr ""
 
-# 
 #: FixedAssetCategories.php:183
-#, fuzzy, php-format
+#, php-format
 msgid ""
 "Are you sure you wish to delete this fixed asset category? Additional checks "
 "will be performed before actual deletion to ensure data integrity is not "
 "compromised."
 msgstr ""
-"Biztosan törölni kívánt állomány kategóriát? További ellenőrzéseket kell "
-"végezni, mielőtt a tényleges törlés, hogy biztosítsa az adatok integritását "
-"nem kerül veszélybe."
 
 #: FixedAssetCategories.php:203
-#, fuzzy
 msgid "Show All Fixed Asset Categories"
-msgstr "Eladási kategóriák karbantartása"
+msgstr ""
 
 #: FixedAssetCategories.php:232 FixedAssetCategories.php:238
 #: StockCategories.php:311 StockCategories.php:317
@@ -9804,23 +9776,20 @@ msgid "Category Description"
 msgstr "Kategória Leírás"
 
 #: FixedAssetCategories.php:270
-#, fuzzy
 msgid "Fixed Asset Cost GL Code"
-msgstr "Állóeszköz GL kód"
+msgstr ""
 
 #: FixedAssetCategories.php:285
 msgid "Profit and Loss Depreciation GL Code"
 msgstr "Nyereség/Veszteség lista"
 
 #: FixedAssetCategories.php:299
-#, fuzzy
 msgid "Profit or Loss on Disposal GL Code:"
-msgstr "Nyereség/Veszteség lista"
+msgstr ""
 
 #: FixedAssetCategories.php:312
-#, fuzzy
 msgid "Balance Sheet Accumulated Depreciation GL Code"
-msgstr "Egyeneg kimutatás"
+msgstr ""
 
 #: FixedAssetDepreciation.php:9
 msgid "Depreciation Journal Entry"
@@ -9847,28 +9816,24 @@ msgid "Cost"
 msgstr "Költség"
 
 #: FixedAssetDepreciation.php:85
-#, fuzzy
 msgid "Accum Depn"
-msgstr "Elfogad"
+msgstr ""
 
 #: FixedAssetDepreciation.php:86
 msgid "B/fwd Book Value"
 msgstr ""
 
 #: FixedAssetDepreciation.php:87
-#, fuzzy
 msgid "Depn Type"
-msgstr "Eladás típus"
+msgstr ""
 
 #: FixedAssetDepreciation.php:88
-#, fuzzy
 msgid "Depn Rate"
-msgstr "Száll. dátum"
+msgstr ""
 
 #: FixedAssetDepreciation.php:89
-#, fuzzy
 msgid "New Depn"
-msgstr "Tartozás"
+msgstr ""
 
 #: FixedAssetDepreciation.php:104 FixedAssetDepreciation.php:226
 #: InventoryValuation.php:114 InventoryValuation.php:166
@@ -9887,24 +9852,21 @@ msgid "DV"
 msgstr ""
 
 #: FixedAssetDepreciation.php:178
-#, fuzzy
 msgid "Cannot insert a depreciation GL entry for the depreciation because"
-msgstr "Nem rögzíthető a bevétel főkönyvi feladás, mert"
+msgstr ""
 
 #: FixedAssetDepreciation.php:179 GLJournal.php:82 GLJournal.php:105
 msgid "The SQL that failed to insert the GL Trans record was"
 msgstr "Sikertelen főkönyvi rekord felvitel (SQL)"
 
 #: FixedAssetDepreciation.php:214
-#, fuzzy
 msgid ""
 "Cannot insert a fixed asset transaction entry for the depreciation because"
-msgstr "Nem rögzíthető a bevétel a vevőhüz, mert"
+msgstr ""
 
 #: FixedAssetDepreciation.php:215
-#, fuzzy
 msgid "The SQL that failed to insert the fixed asset transaction record was"
-msgstr "SQL üzenet"
+msgstr ""
 
 #: FixedAssetDepreciation.php:221
 msgid ""
@@ -9913,16 +9875,14 @@ msgid ""
 msgstr ""
 
 #: FixedAssetDepreciation.php:222
-#, fuzzy
 msgid ""
 "The following SQL was used to attempt the update the accumulated "
 "depreciation of the asset was:"
-msgstr "SQL üzenet"
+msgstr ""
 
 #: FixedAssetDepreciation.php:233
-#, fuzzy
 msgid "GRAND Total"
-msgstr "VÉGÖSSZEG"
+msgstr ""
 
 #: FixedAssetDepreciation.php:245 FixedAssetRegister.php:354
 msgid "Depreciation"
@@ -9937,20 +9897,17 @@ msgid "Return to main menu"
 msgstr "Visszatérés a főmenübe"
 
 #: FixedAssetDepreciation.php:256
-#, fuzzy
 msgid "Date to Process Depreciation"
-msgstr "Napló feldolgozás dátuma"
+msgstr ""
 
 #: FixedAssetDepreciation.php:259
-#, fuzzy
 msgid "Commit Depreciation"
-msgstr "Tétel leírás"
+msgstr ""
 
 #: FixedAssetItems.php:9 SupplierCredit.php:252 SupplierCredit.php:298
 #: SupplierInvoice.php:220 SupplierInvoice.php:271
-#, fuzzy
 msgid "Fixed Assets"
-msgstr "Készlet hely beállítás"
+msgstr ""
 
 #: FixedAssetItems.php:13
 msgid "Back to Select"
@@ -9965,38 +9922,30 @@ msgid "Something is wrong with uploading a file"
 msgstr "Valami gond van egy fájl feltöltésével"
 
 #: FixedAssetItems.php:80
-#, fuzzy
 msgid ""
 "The asset description must be entered and be fifty characters or less long. "
 "It cannot be a zero length string either, a description is required"
 msgstr ""
-"Az állomány tétel leírását kell feltüntetni, és ötven vagy ennél kevesebb "
-"karakter hosszú"
 
 #: FixedAssetItems.php:86
-#, fuzzy
 msgid ""
 "The asset long description cannot be a zero length string, a long "
 "description is required"
-msgstr "A készlet tétel leírását nem lehet nulla hosszúságú karakterlánc"
+msgstr ""
 
 #: FixedAssetItems.php:93 Stocks.php:120 Z_ImportStocks.php:134
 msgid "The barcode must be 20 characters or less long"
 msgstr "A vonalkód kell 20 karakter hosszú vagy annál kevesebb"
 
 #: FixedAssetItems.php:100
-#, fuzzy
 msgid ""
 "There are no asset categories defined. All assets must belong to a valid "
 "category,"
 msgstr ""
-"Nincs nyilvántartás meghatározott kategóriák. Minden leltári tételek "
-"tartoznia kell egy érvényes leltár kategória"
 
 #: FixedAssetItems.php:106 Z_ImportFixedAssets.php:133
-#, fuzzy
 msgid "The depreciation rate is expected to be a number between 0 and 100"
-msgstr "Pénzügyi időszakban évi számnak kell lennie 1 és 12 között"
+msgstr ""
 
 #: FixedAssetItems.php:111
 msgid ""
@@ -10006,52 +9955,43 @@ msgstr ""
 
 #: FixedAssetItems.php:147 FixedAssetItems.php:167 FixedAssetItems.php:187
 #: FixedAssetItems.php:207
-#, fuzzy
 msgid "change category"
-msgstr "Az értékesítési kategória"
+msgstr ""
 
 #: FixedAssetItems.php:150 FixedAssetItems.php:170 FixedAssetItems.php:190
 #: FixedAssetItems.php:210
-#, fuzzy
 msgid "Cannot insert a GL entry for the change of asset category because"
-msgstr "Nem rögzíthető a bevétel főkönyvi feladás, mert"
+msgstr ""
 
 #: FixedAssetItems.php:151 FixedAssetItems.php:171 FixedAssetItems.php:191
 #: FixedAssetItems.php:211 FixedAssetItems.php:327 FixedAssetItems.php:347
-#, fuzzy
 msgid "The SQL that failed to insert the cost GL Trans record was"
-msgstr "Sikertelen főkönyvi rekord felvitel (SQL)"
+msgstr ""
 
 #: FixedAssetItems.php:226
-#, fuzzy
 msgid "The asset could not be updated because"
-msgstr "A vevő adatok nem frissíthetők, mert"
+msgstr ""
 
 #: FixedAssetItems.php:227
-#, fuzzy
 msgid "The SQL that was used to update the asset and failed was"
-msgstr "Az SQL, hogy használták, hogy frissíti a felhasználói és nem volt"
+msgstr ""
 
 #: FixedAssetItems.php:230 FixedAssetRegister.php:263
 #: FixedAssetRegister.php:347
-#, fuzzy
 msgid "Asset"
-msgstr "Asset GL"
+msgstr ""
 
 #: FixedAssetItems.php:252 Z_ImportFixedAssets.php:212
-#, fuzzy
 msgid "The asset could not be added because"
-msgstr "A jelentést nem lehetett hozzá, mert"
+msgstr ""
 
 #: FixedAssetItems.php:253
-#, fuzzy
 msgid "The SQL that was used to add the asset failed was"
-msgstr "Az SQL, hogy használták, hogy az elem nem volt,"
+msgstr ""
 
 #: FixedAssetItems.php:258
-#, fuzzy
 msgid "The new asset has been added to the database with an asset code of:"
-msgstr "Új bankszámla rögzítve"
+msgstr ""
 
 #: FixedAssetItems.php:272 Stocks.php:455
 msgid "Validation failed, no updates or deletes took place"
@@ -10077,31 +10017,26 @@ msgid ""
 msgstr ""
 
 #: FixedAssetItems.php:323 FixedAssetItems.php:343
-#, fuzzy
 msgid "Delete asset"
-msgstr "Vevő törlés"
+msgstr ""
 
 #: FixedAssetItems.php:326
-#, fuzzy
 msgid "Cannot insert a GL entry for the deletion of the asset because"
-msgstr "Nem rögzíthető a bevétel főkönyvi feladás, mert"
+msgstr ""
 
 #: FixedAssetItems.php:346
-#, fuzzy
 msgid ""
 "Cannot insert a GL entry for the reversal of accumulated depreciation on "
 "deletion of the asset because"
-msgstr "A stornó sorhoz nem készíthető főkönyvi bejegyzés, mert"
+msgstr ""
 
 #: FixedAssetItems.php:354
-#, fuzzy
 msgid "Could not delete the asset record"
-msgstr "Nem sikerült törölni az elem rekordot"
+msgstr ""
 
 #: FixedAssetItems.php:358
-#, fuzzy
 msgid "Deleted the asset  record for asset number"
-msgstr "Törölt állomány master rekord"
+msgstr ""
 
 #: FixedAssetItems.php:413 FixedAssetItems.php:417 SelectAsset.php:222
 msgid "Asset Code"
@@ -10128,28 +10063,24 @@ msgid "Asset Category"
 msgstr "Termék kategória"
 
 #: FixedAssetItems.php:468
-#, fuzzy
 msgid "The asset categories could not be retrieved because"
-msgstr "Az állomány kategóriák nem sikerült letölteni, mert"
+msgstr ""
 
 #: FixedAssetItems.php:480
 msgid "Add or Modify Asset Categories"
 msgstr "Hozzáadása vagy módosítása eszközök köre"
 
 #: FixedAssetItems.php:486 SelectAsset.php:225
-#, fuzzy
 msgid "Date Purchased"
-msgstr "Vásárolt"
+msgstr ""
 
 #: FixedAssetItems.php:490
-#, fuzzy
 msgid "The asset locations could not be retrieved because"
-msgstr "A készlet főkönyvi kód nem elérhető, mert"
+msgstr ""
 
 #: FixedAssetItems.php:491
-#, fuzzy
 msgid "The SQL used to retrieve asset locations and failed was"
-msgstr "SQL üzenet"
+msgstr ""
 
 #: FixedAssetItems.php:494 FixedAssetRegister.php:250 SelectAsset.php:73
 #: SelectAsset.php:224
@@ -10179,55 +10110,46 @@ msgid "Diminishing Value"
 msgstr ""
 
 #: FixedAssetItems.php:524
-#, fuzzy
 msgid "Depreciation Rate"
-msgstr "Leírás"
+msgstr ""
 
 #: FixedAssetItems.php:528
-#, fuzzy
 msgid "Asset Financial Summary"
-msgstr "Előző év"
+msgstr ""
 
 #: FixedAssetItems.php:530 WorkOrderEntry.php:486
 msgid "Accumulated Costs"
 msgstr "Újraszámolt fuvarköltség"
 
 #: FixedAssetItems.php:531
-#, fuzzy
 msgid "Accumulated Depreciation"
-msgstr "Leírás"
+msgstr ""
 
 #: FixedAssetItems.php:532 FixedAssetRegister.php:357
-#, fuzzy
 msgid "Net Book Value"
-msgstr "Nettó érték"
+msgstr ""
 
 #: FixedAssetItems.php:537
-#, fuzzy
 msgid "Not Yet Run"
-msgstr "Még nem jegyzett"
+msgstr ""
 
 #: FixedAssetItems.php:541
-#, fuzzy
 msgid "Depreciation last run"
-msgstr "Leírás"
+msgstr ""
 
 #: FixedAssetItems.php:546
-#, fuzzy
 msgid "Insert New Fixed Asset"
-msgstr "Új vevő felvitel"
+msgstr ""
 
 #: FixedAssetItems.php:551
-#, fuzzy
 msgid ""
 "Only click the Delete button if you are sure you wish to delete the asset. "
 "Only assets with a zero book value can be deleted"
-msgstr "Csak kattintson a Törlés gombra, ha biztosan akarja törölni az elem!"
+msgstr ""
 
 #: FixedAssetItems.php:552
-#, fuzzy
 msgid "Delete This Asset"
-msgstr "Ez a jogcím törlése"
+msgstr ""
 
 #: FixedAssetItems.php:552
 msgid "Are You Sure? Only assets with a zero book value can be deleted."
@@ -10266,9 +10188,8 @@ msgid "This location has child locations so cannot be removed"
 msgstr "A készlet főkönyvi kód nem elérhető, mert"
 
 #: FixedAssetLocations.php:75
-#, fuzzy
 msgid "You have assets in this location location so it cannot be removed"
-msgstr "Van eszközök ezen a helyen helyet, így nem lehet eltávolítani"
+msgstr ""
 
 #: FixedAssetLocations.php:81
 msgid "The location has been deleted successfully"
@@ -10299,27 +10220,24 @@ msgid "Date Acquired"
 msgstr "Fogadva"
 
 #: FixedAssetRegister.php:82
-#, fuzzy
 msgid "Cost B/fwd"
-msgstr "Feladva"
+msgstr ""
 
 #: FixedAssetRegister.php:83
 msgid "Depn B/fwd"
 msgstr ""
 
 #: FixedAssetRegister.php:84 FixedAssetRegister.php:353
-#, fuzzy
 msgid "Additions"
-msgstr "Szakasz"
+msgstr ""
 
 #: FixedAssetRegister.php:85
 msgid "Depn"
 msgstr "Depn"
 
 #: FixedAssetRegister.php:86
-#, fuzzy
 msgid "Cost C/fwd"
-msgstr "Irányítószám"
+msgstr ""
 
 #: FixedAssetRegister.php:87
 msgid "Depn C/fwd"
@@ -10356,11 +10274,11 @@ msgstr "ALL"
 
 #: FixedAssetRegister.php:281
 msgid " From Date"
-msgstr "innen"
+msgstr " innen"
 
 #: FixedAssetRegister.php:283
 msgid "To Date "
-msgstr "Dátum"
+msgstr "Dátum "
 
 #: FixedAssetRegister.php:287
 msgid "Show Assets"
@@ -10368,34 +10286,31 @@ msgstr "Kiválasztottat mutat"
 
 #: FixedAssetRegister.php:322
 msgid "Asset Category "
-msgstr "Termék kategória"
+msgstr "Termék kategória "
 
 #: FixedAssetRegister.php:323
 msgid "Asset Location "
-msgstr "Minden helyen"
+msgstr "Minden helyen "
 
 #: FixedAssetRegister.php:349
 msgid "Serial No."
 msgstr "Szériaszám"
 
 #: FixedAssetRegister.php:351
-#, fuzzy
 msgid "Cost B/Fwd"
-msgstr "Feladva"
+msgstr ""
 
 #: FixedAssetRegister.php:352
 msgid "Depn B/Fwd"
 msgstr ""
 
 #: FixedAssetRegister.php:355
-#, fuzzy
 msgid "Cost C/Fwd"
-msgstr "Irányítószám"
+msgstr ""
 
 #: FixedAssetRegister.php:356
-#, fuzzy
 msgid "Depn C/Fwd"
-msgstr "Egyenleg"
+msgstr ""
 
 #: FixedAssetTransfer.php:7 index.php:1319
 msgid "Change Asset Location"
@@ -10456,7 +10371,7 @@ msgstr "Elküldve"
 
 #: FormDesigner.php:124
 msgid "The web server does not have write permissions on the file "
-msgstr "A web szerver nem rendelkezik írási engedéllyel a fájl"
+msgstr "A web szerver nem rendelkezik írási engedéllyel a fájl "
 
 #: FormDesigner.php:125
 msgid "Your changes cannot be saved"
@@ -10568,7 +10483,8 @@ msgstr "A tétel egyezik a vevőnél megadott szállítási várossal"
 msgid ""
 "The entries for Cubic Rate, KG Rate, Maximum Weight, Maximum Volume, Fixed "
 "Price and Minimum charge must be numeric"
-msgstr "A következő mezők numerikusak Térfogat, Súly, Max súly, Max tömeg, stb"
+msgstr ""
+"A következő mezők numerikusak Térfogat, Súly, Max súly, Max tömeg, stb"
 
 #: FreightCosts.php:130
 msgid "Freight cost record updated"
@@ -10658,7 +10574,6 @@ msgstr "Rádió kapcsolatot igényel"
 msgid "No orders were returned because"
 msgstr "Nincs letöltött adat, mert"
 
-# 
 #: FTP_RadioBeacon.php:50 PO_SelectOSPurchOrder.php:450
 #: PO_SelectOSPurchOrder.php:505 SelectContract.php:151 SelectContract.php:181
 #: SelectRecurringSalesOrder.php:78 SelectSalesOrder.php:417
@@ -10715,7 +10630,6 @@ msgstr "Rendelés össz."
 msgid "Last Send"
 msgstr "Utolsó küldés"
 
-# 
 #: FTP_RadioBeacon.php:105
 #, php-format
 msgid "Send"
@@ -10831,7 +10745,7 @@ msgstr "nem geokód."
 
 #: geocode.php:127
 msgid "Supplier Code: "
-msgstr "Szállítókód (ig)"
+msgstr "Szállítókód (ig) "
 
 #: geocode.php:135
 msgid "Go back to Geocode Setup"
@@ -10863,11 +10777,11 @@ msgstr "Telepítette a Geokódolás a vevők és szállítók"
 
 #: GeocodeSetup.php:136
 msgid "Get a google API key at "
-msgstr "Kap egy google API kulcs"
+msgstr "Kap egy google API kulcs "
 
 #: GeocodeSetup.php:138
 msgid "Find the lat/long for your map center point at "
-msgstr "Keresse meg a lat / hosszú a térkép középpontja a"
+msgstr "Keresse meg a lat / hosszú a térkép középpontja a "
 
 #: GeocodeSetup.php:140
 msgid ""
@@ -11008,7 +10922,8 @@ msgstr "Főkönyvi lekérdezések"
 
 #: GLAccountCSV.php:20 GLAccountReport.php:254
 msgid "Use the keyboard Shift key to select multiple accounts and periods"
-msgstr "Használja a billentyűzetet a Shift gombot több beszámoló és időszakok"
+msgstr ""
+"Használja a billentyűzetet a Shift gombot több beszámoló és időszakok"
 
 #: GLAccountCSV.php:31 GLAccountReport.php:265
 msgid "Selected Accounts"
@@ -11022,7 +10937,6 @@ msgstr "Időszak tartomáy"
 msgid "All tags"
 msgstr "Minden számla"
 
-# 
 #: GLAccountCSV.php:83 SalesAnalRepts.php:304
 #, php-format
 msgid "Make CSV File"
@@ -11217,7 +11131,8 @@ msgstr "Nem ellenőrizhető az alapértelmezett főkönyvi kód, mert"
 msgid ""
 "Cannot delete this account because it is used as one of the company default "
 "accounts"
-msgstr "Nem törölhető a számla, mert a cég alap számlái között be van állítva"
+msgstr ""
+"Nem törölhető a számla, mert a cég alap számlái között be van állítva"
 
 #: GLAccounts.php:139
 msgid "Could not test for tax authority GL codes because"
@@ -11260,7 +11175,8 @@ msgstr "Nem ellenőrizhető mint készlet főkönyvi számla, mert"
 msgid ""
 "Cannot delete this account because it is used by one of the stock GL posting "
 "interface records"
-msgstr "Nem törölhető számla, mert be van állítva mint készlet főkönyvi számla"
+msgstr ""
+"Nem törölhető számla, mert be van állítva mint készlet főkönyvi számla"
 
 #: GLAccounts.php:194
 msgid "Could not test for existing bank account GL codes because"
@@ -11308,7 +11224,6 @@ msgstr "A számlatükör nem elérhető, mert"
 msgid "P/L or B/S"
 msgstr "P / L vagy B / S"
 
-# 
 #: GLAccounts.php:320
 #, php-format
 msgid ""
@@ -11391,7 +11306,6 @@ msgstr "A görgetett nyereség átvezteés nem kalkulálható (SQL), mert"
 msgid "No general ledger accounts were returned by the SQL because"
 msgstr "Nincs elérhető főkönyvi számla (SQL), mert"
 
-# 
 #: GLBalanceSheet.php:286 GLBalanceSheet.php:645
 #, php-format
 msgid "Check Total"
@@ -11573,9 +11487,8 @@ msgid "The manual GL code entered does not exist in the database"
 msgstr "A megadott főkönyvi számla nem található az adatbázisban"
 
 #: GLJournal.php:193
-#, fuzzy
 msgid "You must select a GL account code"
-msgstr "Feladás főkönyvi számlára"
+msgstr ""
 
 #: GLJournal.php:253
 msgid "Date to Process Journal"
@@ -11598,9 +11511,8 @@ msgid "GL Tag"
 msgstr "Adó"
 
 #: GLJournal.php:319
-#, fuzzy
 msgid "Select a general ledger account code"
-msgstr "Főkönyv"
+msgstr ""
 
 #: GLJournal.php:347 Payments.php:922 Payments.php:924
 msgid "GL Narrative"
@@ -11708,20 +11620,17 @@ msgstr "Nyereség/Veszteség hiba nyomtatása"
 msgid "total"
 msgstr "összesen"
 
-# 
 #: GLProfit_Loss.php:316 GLProfit_Loss.php:818 GLProfit_Loss.php:1121
 #: GLTagProfit_Loss.php:298 GLTagProfit_Loss.php:673 GLTagProfit_Loss.php:899
 #, php-format
 msgid "Gross Profit Percent"
 msgstr "Nyereség százalék"
 
-# 
 #: GLProfit_Loss.php:495 GLProfit_Loss.php:1157 GLTagProfit_Loss.php:434
 #, php-format
 msgid "Profit"
 msgstr "Nyereség"
 
-# 
 #: GLProfit_Loss.php:495 GLProfit_Loss.php:1157 GLTagProfit_Loss.php:434
 #, php-format
 msgid "Loss"
@@ -11879,7 +11788,6 @@ msgstr "Próbamérleg indítás"
 msgid "Print Trial Balance Error"
 msgstr "Próbamérleg hiba nyomtatás"
 
-# 
 #: GLTrialBalance.php:365 GLTrialBalance.php:702
 #, php-format
 msgid "Check Totals"
@@ -11896,17 +11804,17 @@ msgstr "Próbamérleg"
 
 #: GLTrialBalance.php:438 includes/PDFTrialBalancePageHeader.inc:23
 msgid "Trial Balance for the month of "
-msgstr "Próbamérleg"
+msgstr "Próbamérleg "
 
 #: GLTrialBalance.php:439 includes/PDFTrialBalancePageHeader.inc:23
 msgid " and for the "
-msgstr "és"
+msgstr " és "
 
 #: GLTrialBalance.php:439 includes/PDFProfitAndLossPageHeader.inc:21
 #: includes/PDFTagProfitAndLossPageHeader.inc:21
 #: includes/PDFTrialBalancePageHeader.inc:23
 msgid " months to "
-msgstr "hónapok"
+msgstr " hónapok "
 
 #: GLTrialBalance.php:443 includes/PDFTrialBalancePageHeader.inc:30
 msgid "Month Actual"
@@ -11946,7 +11854,8 @@ msgstr "Vissza a Szállítói megrendelésekhez"
 #: GoodsReceivedControlled.php:43
 msgid ""
 "The line being received must be controlled as defined in the item definition"
-msgstr "A megadott tételsorban lévő terméket rögzíteni kell a termék törzsben"
+msgstr ""
+"A megadott tételsorban lévő terméket rögzíteni kell a termék törzsben"
 
 #: GoodsReceivedControlled.php:53
 msgid "Back To Purchase Order"
@@ -11965,13 +11874,10 @@ msgid "Back to Purchase Orders"
 msgstr "Vissza a Szállítói megrendelésekhez"
 
 #: GoodsReceived.php:26
-#, fuzzy
 msgid ""
 "This page can only be opened if a purchase order has been selected. Please "
 "select a purchase order first"
 msgstr ""
-"Az oldal csak megadott megrendeléssel és tételsorral működik. Válasszon "
-"előbb."
 
 #: GoodsReceived.php:54
 msgid ""
@@ -11986,7 +11892,6 @@ msgstr "Megrendelés szám"
 msgid "has a status of"
 msgstr "mennyisége"
 
-# 
 #: GoodsReceived.php:64 index.php:584 PO_SelectOSPurchOrder.php:452
 #: PO_SelectOSPurchOrder.php:470 PO_SelectOSPurchOrder.php:472
 #: SelectWorkOrder.php:299 SelectWorkOrder.php:334
@@ -12148,7 +12053,8 @@ msgstr "SQL sor"
 msgid ""
 "The purchase order detail record could not be updated with the quantity "
 "received because"
-msgstr "A megrendelés rekord nem módosítható a beszállított mennyiséggel, mert"
+msgstr ""
+"A megrendelés rekord nem módosítható a beszállított mennyiséggel, mert"
 
 #: GoodsReceived.php:408 ReverseGRN.php:128
 msgid "The following SQL to update the purchase order detail record was used"
@@ -12204,11 +12110,10 @@ msgid ""
 msgstr ""
 
 #: GoodsReceived.php:613 SupplierInvoice.php:1286
-#, fuzzy
 msgid ""
 "The following SQL was used to attempt the update of the cost and the date "
 "the asset was purchased"
-msgstr "SQL üzenet"
+msgstr ""
 
 #: GoodsReceived.php:642
 msgid "The purchase GL posting could not be inserted because"
@@ -12447,9 +12352,8 @@ msgid "Supplier Balances At A Prior Month End"
 msgstr "Tartozók egyenlege a hónap végéig"
 
 #: index.php:448
-#, fuzzy
 msgid "Supplier Transaction Inquiries"
-msgstr "Vevői tranzakció lekérdezések"
+msgstr ""
 
 #: index.php:462
 msgid "Add Supplier"
@@ -12525,9 +12429,8 @@ msgid "Serial Item Research Tool"
 msgstr "Soros pont Kutatási eszköz"
 
 #: index.php:618 PDFPrintLabel.php:76
-#, fuzzy
 msgid "Print Price Labels"
-msgstr "Árlista nyomtatás"
+msgstr ""
 
 #: index.php:623
 msgid "Inventory Item Movements"
@@ -12719,9 +12622,8 @@ msgid "Role Permissions"
 msgstr "Jogok"
 
 #: index.php:960
-#, fuzzy
 msgid "Page Security Settings"
-msgstr "SMTP kiszolgáló beállításai"
+msgstr ""
 
 #: index.php:965
 msgid "Bank Accounts"
@@ -12772,9 +12674,8 @@ msgid "Form Layout Editor"
 msgstr "Form Layout Editor"
 
 #: index.php:1025
-#, fuzzy
 msgid "Label Templates Maintenance"
-msgstr "Értékesítési Emberek Karbantartás"
+msgstr ""
 
 #: index.php:1030
 msgid "SMTP Server Details"
@@ -12911,14 +12812,12 @@ msgid "GL Tags"
 msgstr "GL címkék"
 
 #: index.php:1309
-#, fuzzy
 msgid "Add a new Asset"
-msgstr "Új vevő"
+msgstr ""
 
 #: index.php:1314 SelectAsset.php:6
-#, fuzzy
 msgid "Select an Asset"
-msgstr "Új vevő"
+msgstr ""
 
 #: index.php:1324
 msgid "Depreciation Journal"
@@ -13019,12 +12918,13 @@ msgid ""
 msgstr "A megrendelés mennyiségek összeszerelései nem elérhetők, mert"
 
 #: InventoryPlanning.php:292 InventoryPlanningPrefSupplier.php:403
-msgid "The purchase order quantities could not be retrieved by the SQL because"
+msgid ""
+"The purchase order quantities could not be retrieved by the SQL because"
 msgstr "A szállítói megrendelések nem elérhetők, mert"
 
 #: InventoryPlanning.php:332
 msgid "   "
-msgstr ""
+msgstr "   "
 
 #: InventoryPlanning.php:353 InventoryPlanningPrefSupplier.php:457
 msgid "Print Inventory Planning Report Empty"
@@ -13226,7 +13126,8 @@ msgid "Parts With Quantities"
 msgstr "Részek mennyisége"
 
 #: InventoryQuantities.php:85
-msgid "The Inventory Quantity report could not be retrieved by the SQL because"
+msgid ""
+"The Inventory Quantity report could not be retrieved by the SQL because"
 msgstr "A készlet mennyiségek nem elérhetők, mert"
 
 #: InventoryQuantities.php:94
@@ -13311,62 +13212,53 @@ msgid "Inventory Valuation Reporting"
 msgstr "Készlet értékelés kimutatás"
 
 #: Labels.php:19
-#, fuzzy
 msgid "Label Templates Maintainance"
-msgstr "Értékesítési Emberek Karbantartás"
+msgstr ""
 
 #: Labels.php:50 Labels.php:61
 msgid "Correct data"
 msgstr ""
 
 #: Labels.php:70
-#, fuzzy
 msgid "New ID"
-msgstr "Mejegyzés"
+msgstr ""
 
 #: Labels.php:71
 msgid "Edit data new label"
 msgstr ""
 
-# 
 #: Labels.php:79
-#, fuzzy
 msgid "Edit data label"
-msgstr "Edit Árak"
+msgstr ""
 
 #: Labels.php:92
 msgid "New label"
 msgstr ""
 
 #: Labels.php:106
-#, fuzzy
 msgid "There is no labels, create a new one"
-msgstr "Ez a segédprogram létrehoz egy új cég"
+msgstr ""
 
 #: Labels.php:144
-#, fuzzy
 msgid "Id required"
-msgstr "Szükséges"
+msgstr ""
 
 #: Labels.php:146
 msgid "This id exist in previous list"
 msgstr ""
 
 #: Labels.php:149
-#, fuzzy
 msgid "the description is required"
-msgstr "A leírás szükséges"
+msgstr ""
 
 #: Labels.php:159 Labels.php:161 Labels.php:165 Labels.php:174 Labels.php:180
 #: Labels.php:186 Labels.php:192 Labels.php:217 Labels.php:219 Labels.php:224
-#, fuzzy
 msgid "The value of"
-msgstr "Nincs semmi"
+msgstr ""
 
 #: Labels.php:159 Labels.php:217
-#, fuzzy
 msgid "would be numeric"
-msgstr "a numerikus"
+msgstr ""
 
 #: Labels.php:161 Labels.php:219
 msgid "requires a positive value"
@@ -13401,9 +13293,8 @@ msgid "The vert. pos. value would be positive"
 msgstr ""
 
 #: Labels.php:207
-#, fuzzy
 msgid "The value of the vert. pos. would be less than"
-msgstr "a megadott szám max 361 lehet"
+msgstr ""
 
 #: Labels.php:224
 msgid "in this position exceeds the label height"
@@ -13415,43 +13306,36 @@ msgid ""
 msgstr ""
 
 #: Labels.php:265
-#, fuzzy
 msgid "Save"
-msgstr "Eladó"
+msgstr ""
 
 #: Labels.php:413 includes/DefineLabelClass.php:8
-#, fuzzy
 msgid "Label id"
-msgstr "Körzet neve"
+msgstr ""
 
 #: Labels.php:413
-#, fuzzy
 msgid "Label array"
-msgstr "Körzet neve"
+msgstr ""
 
 #: Labels.php:414
-#, fuzzy
 msgid "New"
-msgstr "Nettó"
+msgstr ""
 
 #: Labels.php:414
-#, fuzzy
 msgid "Copy"
-msgstr "Cég"
+msgstr ""
 
 #: Labels.php:415
 msgid "Do you really want to erase the label"
 msgstr ""
 
 #: Labels.php:546
-#, fuzzy
 msgid "Could not rename the previous file."
-msgstr "Nem sikerült letölteni a kért elem"
+msgstr ""
 
 #: Labels.php:549
-#, fuzzy
 msgid "Could not create the new XML file."
-msgstr "Nem elérhető tételek"
+msgstr ""
 
 #: Locations.php:10
 msgid "Location Maintenance"
@@ -13463,7 +13347,7 @@ msgstr "A helyszín kód nem lehet üres"
 
 #: Locations.php:36
 msgid "The cash sale customers "
-msgstr "Vevőkód (ig)"
+msgstr "Vevőkód (ig) "
 
 #: Locations.php:52
 msgid ""
@@ -14139,7 +14023,7 @@ msgstr "Szállítói megrendelések"
 
 #: MRPPlannedPurchaseOrders.php:34 MRPPlannedWorkOrders.php:26
 msgid " Through  "
-msgstr "Keresztül"
+msgstr " Keresztül  "
 
 #: MRPPlannedPurchaseOrders.php:113
 msgid ""
@@ -14157,28 +14041,28 @@ msgstr "Nincs tétel a megadott tartományban"
 #: MRPPlannedPurchaseOrders.php:158 MRPPlannedPurchaseOrders.php:222
 #: MRPPlannedWorkOrders.php:166 MRPPlannedWorkOrders.php:218
 msgid "Unit Cost: "
-msgstr "Egységár"
+msgstr "Egységár "
 
 #: MRPPlannedPurchaseOrders.php:163 MRPPlannedPurchaseOrders.php:226
 #: MRPPlannedWorkOrders.php:171 MRPPlannedWorkOrders.php:222
 msgid "M/B: "
-msgstr "M / B:"
+msgstr "M / B: "
 
 #: MRPPlannedPurchaseOrders.php:172 MRPPlannedPurchaseOrders.php:235
 msgid "Last Purchase Date: "
-msgstr "Utolsó száll."
+msgstr "Utolsó száll. "
 
 #: MRPPlannedPurchaseOrders.php:174 MRPPlannedPurchaseOrders.php:237
 msgid "Supplier: "
-msgstr "Szállító"
+msgstr "Szállító "
 
 #: MRPPlannedPurchaseOrders.php:176 MRPPlannedPurchaseOrders.php:239
 msgid "Preferred Supplier: "
-msgstr "Szállító"
+msgstr "Szállító "
 
 #: MRPPlannedPurchaseOrders.php:250
 msgid "Number of Purchase Orders: "
-msgstr "Vissza a Szállítói megrendelésekhez"
+msgstr "Vissza a Szállítói megrendelésekhez "
 
 #: MRPPlannedPurchaseOrders.php:252 MRPPlannedWorkOrders.php:235
 msgid "Total Extended Cost:"
@@ -14248,7 +14132,7 @@ msgstr "Új megrendelés"
 
 #: MRPPlannedWorkOrders.php:233 MRPPlannedWorkOrders.php:312
 msgid "Number of Work Orders: "
-msgstr "Új megrendelés"
+msgstr "Új megrendelés "
 
 #: MRPPlannedWorkOrders.php:246
 msgid "Review/Convert MRP Planned Work Orders"
@@ -14264,7 +14148,7 @@ msgstr "Alkatrész"
 
 #: MRPPlannedWorkOrders.php:314
 msgid "Total Extended Cost: "
-msgstr "Össz ár"
+msgstr "Össz ár "
 
 #: MRPPlannedWorkOrders.php:327
 msgid "MRP Planned Work Orders Reporting"
@@ -14513,7 +14397,7 @@ msgstr "nem elérhető"
 
 #: MRPShortages.php:214
 msgid "Number of Parts: "
-msgstr "Több részből áll:"
+msgstr "Több részből áll: "
 
 #: MRPShortages.php:216
 msgid "Total Extended Shortage:"
@@ -14715,26 +14599,25 @@ msgstr "Folyamatban lévő szállítások értéke"
 msgid ""
 "The outstanding GRNs valuation details could not be retrieved by the SQL "
 "because"
-msgstr "A folyamatban lévő szállítások értéke SQL lekérdezés sikertelen, mert"
+msgstr ""
+"A folyamatban lévő szállítások értéke SQL lekérdezés sikertelen, mert"
 
 #: OutstandingGRNs.php:65
 msgid "No outstanding GRNs valuation details retrieved"
-msgstr "A folyamatban lévő szállítások értéke SQL lekérdezés sikertelen, mert"
+msgstr ""
+"A folyamatban lévő szállítások értéke SQL lekérdezés sikertelen, mert"
 
 #: PageSecurity.php:5 PageSecurity.php:9
-#, fuzzy
 msgid "Page Security Levels"
-msgstr "Napló Súlyossági szint"
+msgstr ""
 
 #: PageSecurity.php:16
-#, fuzzy
 msgid "Could not update the page security value for the script because"
-msgstr "Nem értelmezett ha a tétel"
+msgstr ""
 
 #: PageSecurity.php:54
-#, fuzzy
 msgid "Update Security Levels"
-msgstr "Ismétlődő megrendelés felvitel"
+msgstr ""
 
 #: PaymentAllocations.php:14
 msgid "Payment Allocations"
@@ -14755,7 +14638,7 @@ msgstr "Allokálás feldolgozás"
 
 #: PaymentAllocations.php:33
 msgid " and"
-msgstr "és"
+msgstr " és"
 
 #: PaymentAllocations.php:35
 msgid "This shows how the payment to the supplier was allocated"
@@ -14766,7 +14649,8 @@ msgid "Back to supplier inquiry"
 msgstr "Szállító választás"
 
 #: PaymentAllocations.php:67
-msgid "There may be a problem retrieving the information. No data is returned"
+msgid ""
+"There may be a problem retrieving the information. No data is returned"
 msgstr "A kiválasztott tranzakció nem elérhető"
 
 #: PaymentAllocations.php:68
@@ -14882,9 +14766,8 @@ msgid "Payment Cancelled since cheque was not printed"
 msgstr "Fizetés Törölt mivel ellenőrizni nem volt nyomtatva"
 
 #: Payments.php:34
-#, fuzzy
 msgid "A bank account must be selected to make this payment from"
-msgstr "Időszakot kell választani a listából"
+msgstr ""
 
 #: Payments.php:45
 msgid ""
@@ -14914,7 +14797,7 @@ msgstr ""
 
 #: Payments.php:98
 msgid " care of "
-msgstr "ellátása"
+msgstr " ellátása "
 
 #: Payments.php:115
 msgid "Could not get the currency of the bank account"
@@ -14950,7 +14833,7 @@ msgstr "Nem rögzíthető főkönyvi feladás a kifizetéshez (SQL)"
 
 #: Payments.php:379
 msgid "Act Transfer From "
-msgstr "Akt átutalás"
+msgstr "Akt átutalás "
 
 #: Payments.php:387 Payments.php:537 Payments.php:564
 #: PcAuthorizeExpenses.php:211
@@ -14966,7 +14849,8 @@ msgid "Cannot insert a payment transaction against the supplier because"
 msgstr "Nem rögzíthető a fizetési tranzakció a szállítóhoz, mert"
 
 #: Payments.php:422
-msgid "Cannot insert a payment transaction against the supplier using the SQL"
+msgid ""
+"Cannot insert a payment transaction against the supplier using the SQL"
 msgstr "Nem rögzíthető a fizetési tranzakció a szállítóhoz (SQL)"
 
 #: Payments.php:433
@@ -14982,7 +14866,8 @@ msgid ""
 msgstr "A szállító rekord nem frissíthető az utolsó fizetés dátumával (SQL)"
 
 #: Payments.php:458
-msgid "Cannot insert a GL transaction for the creditors account debit because"
+msgid ""
+"Cannot insert a GL transaction for the creditors account debit because"
 msgstr ""
 "Főkönyvi feladás tranzakció nem rögzíthető a szállítói kifizetésekhez, mert"
 
@@ -14993,7 +14878,8 @@ msgstr ""
 "Főkönyvi feladás tranzakció nem rögzíthető a szállítói kifizetésekhez (SQL)"
 
 #: Payments.php:479
-msgid "Cannot insert a GL transaction for the payment discount credit because"
+msgid ""
+"Cannot insert a GL transaction for the payment discount credit because"
 msgstr ""
 "Főkönyvi feladás tranzakció nem rögzíthető a szállítói kedvezményekhez, mert"
 
@@ -15201,7 +15087,8 @@ msgstr "A fizetési mód rekord rögzítve lett"
 msgid ""
 "Cannot delete this payment term because customer accounts have been created "
 "referring to this term"
-msgstr "Nem törölhető a fizetési mód rekord mert vevői számlák hivatkoznak rá"
+msgstr ""
+"Nem törölhető a fizetési mód rekord mert vevői számlák hivatkoznak rá"
 
 #: PaymentTerms.php:147
 msgid "customer accounts that refer to this payment term"
@@ -15242,7 +15129,6 @@ msgstr "Nap után"
 msgid "th"
 msgstr "."
 
-# 
 #: PaymentTerms.php:196 PrintCustStatements.php:366
 #: PrintCustStatements.php:367 PurchData.php:200 SelectCustomer.php:583
 #: SelectCustomer.php:586
@@ -15292,7 +15178,7 @@ msgstr ""
 
 #: PcAssignCashToTab.php:73 PcAssignCashToTab.php:97 PcAssignCashToTab.php:118
 msgid "Assignment of cash to PC Tab "
-msgstr "Kiosztása készpénz PC Tab"
+msgstr "Kiosztása készpénz PC Tab "
 
 #: PcAssignCashToTab.php:116
 msgid "The assignment of cash record could not be deleted because"
@@ -15304,11 +15190,11 @@ msgstr "Készpénz Tab hozzárendelése Cash"
 
 #: PcAssignCashToTab.php:167
 msgid "Details Of Petty Cash Tab "
-msgstr "Részletek Készpénz Tab"
+msgstr "Részletek Készpénz Tab "
 
 #: PcAssignCashToTab.php:206
 msgid "Detail Of PC Tab Movements For Last "
-msgstr "Részlet a PC-Tab mozgalmak az elmúlt"
+msgstr "Részlet a PC-Tab mozgalmak az elmúlt "
 
 #: PcAssignCashToTab.php:213 PcAuthorizeExpenses.php:82
 #: PcExpensesTypeTab.php:144
@@ -15351,11 +15237,11 @@ msgstr "Engedélyezéséről Készpénz költségek"
 
 #: PcAuthorizeExpenses.php:37 PcAuthorizeExpenses.php:40
 msgid "Authorization Of Petty Cash Expenses "
-msgstr "Engedélyezéséről Készpénz költségek"
+msgstr "Engedélyezéséről Készpénz költségek "
 
 #: PcAuthorizeExpenses.php:52
 msgid "Detail Of Movement For Last "
-msgstr "Részlet mozgásával Utolsó"
+msgstr "Részlet mozgásával Utolsó "
 
 #: PcAuthorizeExpenses.php:87 PcClaimExpensesFromTab.php:194
 msgid "Authorized"
@@ -15391,15 +15277,15 @@ msgstr "Pénztári ráfordítás eredménye"
 
 #: PcClaimExpensesFromTab.php:128
 msgid "Petty Cash Tabs for User "
-msgstr "Készpénz Tabs a felhasználó"
+msgstr "Készpénz Tabs a felhasználó "
 
 #: PcClaimExpensesFromTab.php:159
 msgid "Petty Cash Tab "
-msgstr "Készpénz Tab"
+msgstr "Készpénz Tab "
 
 #: PcClaimExpensesFromTab.php:164
 msgid "Detail Of Movements For Last "
-msgstr "Részlet a mozgás az elmúlt"
+msgstr "Részlet a mozgás az elmúlt "
 
 #: PcClaimExpensesFromTab.php:191 PcClaimExpensesFromTab.php:310
 #: PcReportTab.php:173 PcReportTab.php:345
@@ -15437,11 +15323,11 @@ msgstr "Vevőkód (ig)"
 
 #: PcExpenses.php:74
 msgid "The Expense type "
-msgstr "Vevőkód (ig)"
+msgstr "Vevőkód (ig) "
 
 #: PcExpenses.php:86
 msgid "Expense "
-msgstr "Költség"
+msgstr "Költség "
 
 #: PcExpenses.php:114
 msgid ""
@@ -15486,11 +15372,11 @@ msgstr "Karbantartása Készpénz költségek típusú Tab"
 
 #: PcExpensesTypeTab.php:47
 msgid "The Expense "
-msgstr "A ráfordítások"
+msgstr "A ráfordítások "
 
 #: PcExpensesTypeTab.php:47
 msgid " already exist in this Type of Tab."
-msgstr "A megadott főkönyvi számla nem található az adatbázisban"
+msgstr " A megadott főkönyvi számla nem található az adatbázisban"
 
 #: PcExpensesTypeTab.php:58
 msgid "Expense code:"
@@ -15518,7 +15404,7 @@ msgstr "Időszak (ig)"
 
 #: PcExpensesTypeTab.php:132
 msgid "Expense Codes for Type of Tab "
-msgstr "Költség kódjai típusa Tab"
+msgstr "Költség kódjai típusa Tab "
 
 #: PcExpensesTypeTab.php:182
 msgid "Select Expense Code"
@@ -15590,31 +15476,31 @@ msgstr "Telephely kód"
 #: PcReportTab.php:164 PcReportTab.php:223 SuppPriceList.php:267
 #: SuppPriceList.php:272 SuppPriceList.php:275
 msgid ": "
-msgstr ":"
+msgstr ": "
 
 #: PcReportTab.php:139
 msgid "From "
-msgstr "Tól"
+msgstr "Tól "
 
 #: PcReportTab.php:144
 msgid "User "
-msgstr "Lézer"
+msgstr "Lézer "
 
 #: PcReportTab.php:147
 msgid "To "
-msgstr "Ig"
+msgstr "Ig "
 
 #: PcReportTab.php:152
 msgid "Authorizer "
-msgstr "Adószám"
+msgstr "Adószám "
 
 #: PcReportTab.php:157
 msgid "Currency "
-msgstr "Deviza"
+msgstr "Deviza "
 
 #: PcReportTab.php:162 PcReportTab.php:307
 msgid "Balance before "
-msgstr "Egyenleg kimutatatás"
+msgstr "Egyenleg kimutatatás "
 
 #: PcReportTab.php:178
 msgid "Date Authorizer"
@@ -15642,7 +15528,7 @@ msgstr "Adószám"
 
 #: PcReportTab.php:323
 msgid "Total not authorized before "
-msgstr "Összesen előtt nem engedélyezettek"
+msgstr "Összesen előtt nem engedélyezettek "
 
 #: PcReportTab.php:340
 msgid "No Petty Cash movements for this tab were returned by the SQL because"
@@ -15678,11 +15564,11 @@ msgstr "A fülek a kód"
 
 #: PcTabs.php:74
 msgid "The Tab "
-msgstr "A változó"
+msgstr "A változó "
 
 #: PcTabs.php:97
 msgid "Tab with Code "
-msgstr "Fül-kód"
+msgstr "Fül-kód "
 
 #: PcTabs.php:122
 msgid "The Tab record could not be deleted because"
@@ -15754,7 +15640,7 @@ msgstr "Vevőkód (ig)"
 
 #: PcTypeTabs.php:73
 msgid "The Tab type "
-msgstr "Termékkód"
+msgstr "Termékkód "
 
 #: PcTypeTabs.php:84
 msgid "Tabs type"
@@ -16086,7 +15972,8 @@ msgstr "Szállítási különbségek Napló Jelentés hiba"
 
 #: PDFDeliveryDifferences.php:157
 msgid "An error occurred getting the variances between deliveries and orders"
-msgstr "Hiba történt szerzés közötti eltéréseket szállítások és megrendelések"
+msgstr ""
+"Hiba történt szerzés közötti eltéréseket szállítások és megrendelések"
 
 #: PDFDeliveryDifferences.php:159
 msgid ""
@@ -16189,11 +16076,11 @@ msgstr "Áruk vissza az üzletbe"
 
 #: PDFGrn.php:139
 msgid "Date of Receipt: "
-msgstr "Bevétel összege"
+msgstr "Bevétel összege "
 
 #: PDFGrn.php:141 PDFStockTransfer.php:79 PDFStockTransfer.php:80
 msgid "Signed for "
-msgstr "és"
+msgstr "és "
 
 #: PDFGrn.php:144
 msgid "GRN Error"
@@ -16239,11 +16126,10 @@ msgstr "formátumban"
 msgid "Sales Made To"
 msgstr "Értékesítési Made"
 
-# 
 #: PDFLowGP.php:164
-#, fuzzy, php-format
+#, php-format
 msgid "Show sales with GP % below"
-msgstr "Megjelenítés eladások GP%-kal alacsonyabb"
+msgstr ""
 
 #: PDFOrdersInvoiced.php:9 PDFOrdersInvoiced.php:37 PDFOrdersInvoiced.php:73
 msgid "Orders Invoiced Report"
@@ -16297,7 +16183,6 @@ msgstr "Összes megrendelések"
 msgid "Order Status Report - No Data"
 msgstr "Megrendelések állapotlista (Nyomtat)"
 
-# 
 #: PDFOrderStatus.php:273 PO_AuthoriseMyOrders.php:60 PO_Header.php:778
 #: PO_OrderDetails.php:123 PO_SelectOSPurchOrder.php:449
 #: PO_SelectPurchOrder.php:364 SelectWorkOrder.php:298 SelectWorkOrder.php:333
@@ -16346,7 +16231,7 @@ msgstr "Nyereség/Veszteség hiba nyomtatása"
 
 #: PDFPickingList.php:131
 msgid "Unable to Locate any orders for this criteria "
-msgstr "Válasszon megrendelőt a számlázáshoz"
+msgstr "Válasszon megrendelőt a számlázáshoz "
 
 #: PDFPickingList.php:133
 msgid "Enter Another Date"
@@ -16361,7 +16246,8 @@ msgid "Laser Picking List"
 msgstr "Vevő árszint"
 
 #: PDFPickingList.php:203
-msgid "There was a problem retrieving the order line details for Order Number"
+msgid ""
+"There was a problem retrieving the order line details for Order Number"
 msgstr "Hiba a rendelés fej letöltésénél. Megrendelés száma:"
 
 #: PDFPriceList.php:16
@@ -16497,19 +16383,16 @@ msgid "HERE"
 msgstr ""
 
 #: PDFPrintLabel.php:23
-#, fuzzy
 msgid "to set up a new one"
-msgstr "Ha be szeretné állítani a szállítás"
+msgstr ""
 
 #: PDFPrintLabel.php:32
-#, fuzzy
 msgid "You must specify the number of labels per item required"
-msgstr "Ki kell választania a csomaglistát a nyomtatáshoz"
+msgstr ""
 
 #: PDFPrintLabel.php:35
-#, fuzzy
 msgid "You must select the items to be printed"
-msgstr "Ki kell választania a csomaglistát a nyomtatáshoz"
+msgstr ""
 
 #: PDFPrintLabel.php:66
 msgid "There was an error. Consult your IT staff"
@@ -16520,52 +16403,44 @@ msgid "Label Sticker Printing"
 msgstr ""
 
 #: PDFPrintLabel.php:92
-#, fuzzy
 msgid "Select label type"
-msgstr "Új vevő"
+msgstr ""
 
 #: PDFPrintLabel.php:93
-#, fuzzy
 msgid "Number of labels per item"
-msgstr "Számú Top elemek"
+msgstr ""
 
 #: PDFPrintLabel.php:94 Z_PriceChanges.php:94
 msgid "Price list"
 msgstr "Árlista"
 
 #: PDFPrintLabel.php:95
-#, fuzzy
 msgid "Update values"
-msgstr "Frissítés Árak"
+msgstr ""
 
 #: PDFPrintLabel.php:118
-#, fuzzy
 msgid "Print labels"
-msgstr "Számla nyomtatás"
+msgstr ""
 
 #: PDFPrintLabel.php:119
-#, fuzzy
 msgid "Print labels with borders"
-msgstr "Nyomtatás vagy e-mail a Rend"
+msgstr ""
 
 #: PDFPrintLabel.php:230
-#, fuzzy
 msgid "Select a Category"
-msgstr "Termék kategória"
+msgstr ""
 
 #: PDFPrintLabel.php:235
-#, fuzzy
 msgid "This category has no items to show"
-msgstr "A kategória címke keresés."
+msgstr ""
 
 #: PDFPrintLabel.php:339
 msgid "Unit not defined in scale operation! Correct the template"
 msgstr ""
 
 #: PDFPrintLabel.php:501
-#, fuzzy
 msgid "Couldnt get the currency data"
-msgstr "Nem frissíthető a rekord mert"
+msgstr ""
 
 #: PDFQuotation.php:13
 msgid "Select Quotation To Print"
@@ -16645,7 +16520,7 @@ msgstr "Befizetés"
 
 #: PDFReceipt.php:31
 msgid "Customer Receipt Number "
-msgstr "Vevői bevétel"
+msgstr "Vevői bevétel "
 
 #: PDFReceipt.php:93
 msgid "Received From"
@@ -16924,19 +16799,19 @@ msgstr "Akt átutalás"
 
 #: PDFStockTransfer.php:37
 msgid "There are no decription for "
-msgstr "Nincs árazás beállítva"
+msgstr "Nincs árazás beállítva "
 
 #: PDFStockTransfer.php:50
 msgid "There are no location From for "
-msgstr "Nincs feldolgozott allokálás"
+msgstr "Nincs feldolgozott allokálás "
 
 #: PDFStockTransfer.php:63
 msgid "There are no location To for "
-msgstr "Nincs feldolgozott allokálás"
+msgstr "Nincs feldolgozott allokálás "
 
 #: PDFStockTransfer.php:77
 msgid "Date of transfer: "
-msgstr "Értéknap"
+msgstr "Értéknap "
 
 #: PDFStockTransListing.php:20 PDFStockTransListing.php:24
 #: PDFStockTransListing.php:101
@@ -16996,7 +16871,7 @@ msgstr "Top elemek Keresés eredménye"
 
 #: PDFTopItems.php:122
 msgid "There were no records returned "
-msgstr "Nincs fuvarozó beállítva"
+msgstr "Nincs fuvarozó beállítva "
 
 #: PeriodsInquiry.php:10
 msgid "Periods Inquiry"
@@ -17167,17 +17042,17 @@ msgid "You can only authorise up to"
 msgstr "Egyszerre csak engedélyezheti legfeljebb"
 
 #: PO_Header.php:96 PO_Header.php:120 PO_Header.php:138
-msgid "If you think this is a mistake please contact the systems administrator"
+msgid ""
+"If you think this is a mistake please contact the systems administrator"
 msgstr ""
 "Ha úgy gondolja, hogy ez tévedés, kérjük lépjen kapcsolatba a "
 "rendszergazdával"
 
 #: PO_Header.php:106
-#, fuzzy
 msgid ""
 "This order cannot be cancelled or rejected because some of it has already "
 "been received"
-msgstr "Ezt a sorrendet nem lehet törölni, mert néhány korábban már kapott"
+msgstr ""
 
 #: PO_Header.php:107
 msgid ""
@@ -17196,9 +17071,8 @@ msgid "and quantities cannot be reduced below the quantity already received"
 msgstr "és a mennyiség nem alá kell csökkenteni a mennyiséget már kapott"
 
 #: PO_Header.php:114 ReverseGRN.php:135
-#, fuzzy
 msgid "by"
-msgstr "y"
+msgstr ""
 
 #: PO_Header.php:117
 msgid "You do not have permission to reject this purchase order"
@@ -17220,7 +17094,8 @@ msgid "Order set to pending status by"
 msgstr ""
 
 #: PO_Header.php:138
-msgid "You do not have permission to change the status of this purchase order"
+msgid ""
+"You do not have permission to change the status of this purchase order"
 msgstr "Adjon meg egy beszállítást ehhez a megrendeléshez"
 
 #: PO_Header.php:155
@@ -17243,9 +17118,8 @@ msgstr ""
 "Ön automatikusan fel kell küldeni a belépési A megrendelés sorokat oldal"
 
 #: PO_Header.php:285
-#, fuzzy
 msgid "Supplier changed by"
-msgstr "Szállító Beszerzési adatok"
+msgstr ""
 
 #: PO_Header.php:288
 msgid ""
@@ -17288,19 +17162,16 @@ msgid "The SQL used to retrieve the supplier details and failed was"
 msgstr "Az SQL használt letölteni a szolgáltató adatait, és nem volt"
 
 #: PO_Header.php:437
-#, fuzzy
 msgid "You do not have the authority to raise Purchase Orders for"
-msgstr "Nem kell a hatóság emelni a beszerzési rendelések"
+msgstr ""
 
 #: PO_Header.php:437
-#, fuzzy
 msgid "Please Consult your system administrator for more information."
-msgstr "keresse meg a rendszeradministrátor"
+msgstr ""
 
 #: PO_Header.php:437
-#, fuzzy
 msgid "You can setup authorisations"
-msgstr "Beállíthatja engedélyek"
+msgstr ""
 
 #: PO_Header.php:508 PO_Header.php:579 PO_Items.php:230 PO_Items.php:381
 #: PO_Items.php:902 PO_Items.php:905 PO_OrderDetails.php:86
@@ -17337,7 +17208,7 @@ msgstr "cím"
 
 #: PO_Header.php:584
 msgid " Modify Purchase Order Number"
-msgstr "Vissza a Szállítói megrendelésekhez"
+msgstr " Vissza a Szállítói megrendelésekhez"
 
 #: PO_Header.php:589
 msgid "Purchase Item(s) with this code"
@@ -17388,9 +17259,8 @@ msgid "Receive this order"
 msgstr "Szállítás (bevételezés)"
 
 #: PO_Header.php:776
-#, fuzzy
 msgid "New Purchase Order"
-msgstr "Megrendelés"
+msgstr ""
 
 #: PO_Header.php:811
 msgid "Status Comment"
@@ -17485,9 +17355,8 @@ msgstr ""
 "szereplő ebben a sorrendben"
 
 #: PO_Items.php:103
-#, fuzzy
 msgid "Order Created by"
-msgstr "Rendezés dátum"
+msgstr ""
 
 #: PO_Items.php:174 SpecialOrder.php:309
 msgid ""
@@ -17505,7 +17374,8 @@ msgstr "Az SQL utasítás használt be a megrendelés fejlécet, és nem volt"
 msgid ""
 "One of the purchase order detail records could not be inserted into the "
 "database because"
-msgstr "Az egyik megrendelés rekordok nem lehet beszúrni az adatbázisba, mert"
+msgstr ""
+"Az egyik megrendelés rekordok nem lehet beszúrni az adatbázisba, mert"
 
 #: PO_Items.php:225 SpecialOrder.php:395
 msgid ""
@@ -17687,13 +17557,10 @@ msgid ""
 msgstr ""
 
 #: PO_Items.php:684
-#, fuzzy
 msgid ""
 "The description of the item being purchased is required where a non-stock "
 "item is being ordered"
 msgstr ""
-"A leírás az elem vásárlási van szükség, ha egy nem-állomány tétel alatt "
-"rendelhető"
 
 #: PO_Items.php:696 Stocks.php:785 includes/PO_ReadInOrder.inc:181
 msgid "each"
@@ -17718,11 +17585,12 @@ msgstr ""
 #: PO_Items.php:879
 msgid ""
 "does not exist in the database and therefore cannot be added to the order"
-msgstr "nem létezik az adatbázisban, és ezért nem lehet hozzáadni a sorrendben"
+msgstr ""
+"nem létezik az adatbázisban, és ezért nem lehet hozzáadni a sorrendben"
 
 #: PO_Items.php:907
 msgid " Order Summary"
-msgstr "Megrendelés összesen"
+msgstr " Megrendelés összesen"
 
 #: PO_Items.php:914 SelectProduct.php:110
 msgid "Weight"
@@ -17738,31 +17606,27 @@ msgstr "Szállítás ide"
 
 #: PO_Items.php:982
 msgid " excluding Tax"
-msgstr "Árajánlat összesen"
+msgstr " Árajánlat összesen"
 
 #: PO_Items.php:996
 msgid "General Ledger Code"
 msgstr "Főkönyv"
 
 #: PO_Items.php:1008
-#, fuzzy
 msgid "OR Asset ID"
-msgstr "Asset ID"
+msgstr ""
 
 #: PO_Items.php:1011
-#, fuzzy
 msgid "Not an Asset"
-msgstr "Új vevő"
+msgstr ""
 
 #: PO_Items.php:1014
-#, fuzzy
 msgid "Not yet purchased"
-msgstr "Még nem nyomtatott"
+msgstr ""
 
 #: PO_Items.php:1021 SuppFixedAssetChgs.php:111
-#, fuzzy
 msgid "New Fixed Asset"
-msgstr "Készlet hely beállítás"
+msgstr ""
 
 #: PO_Items.php:1022
 msgid "Quantity to purchase"
@@ -17798,7 +17662,8 @@ msgstr "Az SQL vissza a hiba"
 
 #: PO_OrderDetails.php:37
 msgid "This page must be called with a purchase order number to review"
-msgstr "Ez az oldal kell meghívni a megrendelés számát, hogy vizsgálják felül"
+msgstr ""
+"Ez az oldal kell meghívni a megrendelés számát, hogy vizsgálják felül"
 
 #: PO_OrderDetails.php:41 PO_PDFPurchOrder.php:14 PO_PDFPurchOrder.php:106
 msgid "Outstanding Purchase Orders"
@@ -18055,7 +17920,7 @@ msgstr "Dátum rögzítve"
 
 #: POReport.php:515 POReport.php:1204 SalesInquiry.php:774
 msgid " To "
-msgstr "Ig"
+msgstr " Ig "
 
 #: POReport.php:525 POReport.php:1214 POReport.php:1484 SalesInquiry.php:784
 #: SalesInquiry.php:1101
@@ -18104,7 +17969,7 @@ msgstr "Szám"
 #: POReport.php:1310 POReport.php:1395 SalesInquiry.php:888
 #: SalesInquiry.php:904 SalesInquiry.php:1016
 msgid "Lines - "
-msgstr "Vonalak -"
+msgstr "Vonalak - "
 
 #: POReport.php:603 POReport.php:1281 SuppCreditGRNs.php:152
 msgid "Delivered"
@@ -18211,15 +18076,13 @@ msgid "Into Stock Location"
 msgstr "Into Készlet helye"
 
 #: PO_SelectOSPurchOrder.php:154 PO_SelectPurchOrder.php:123
-#, fuzzy
 msgid "Order Status:"
-msgstr "Megrendelés státusz"
+msgstr ""
 
 #: PO_SelectOSPurchOrder.php:156 PO_SelectOSPurchOrder.php:158
 #: PO_SelectPurchOrder.php:125 PO_SelectPurchOrder.php:127
-#, fuzzy
 msgid "Pending and Authorised"
-msgstr "Adószám"
+msgstr ""
 
 #: PO_SelectOSPurchOrder.php:180 PO_SelectPurchOrder.php:5
 #: PO_SelectPurchOrder.php:149
@@ -18403,7 +18266,8 @@ msgstr ""
 "kezdési időpontját követően az ezen az áron"
 
 #: PricesBasedOnMarkUp.php:196
-msgid "The date this new price is to start from is expected to be after today"
+msgid ""
+"The date this new price is to start from is expected to be after today"
 msgstr "A mai napig ez az új ár kiindulási várhatóan után ma"
 
 #: PricesBasedOnMarkUp.php:199
@@ -18771,7 +18635,6 @@ msgstr "Árazás rész"
 msgid "Review Prices"
 msgstr "Felülvizsgálat Árak"
 
-# 
 #: Prices.php:228
 #, php-format
 msgid "Are you sure you wish to delete this price?"
@@ -18891,7 +18754,7 @@ msgstr "Kimutatások nyomtatás"
 
 #: PrintCustStatements.php:90
 msgid "There were no Customers matching your selection of "
-msgstr "Nem voltak vevők felelt meg a kiválasztott"
+msgstr "Nem voltak vevők felelt meg a kiválasztott "
 
 #: PrintCustStatements.php:100
 msgid "There was a problem retrieving the outstanding transactions for"
@@ -19215,11 +19078,10 @@ msgstr ""
 "készlet elemet a keresési oldalon"
 
 #: PurchData.php:45
-#, fuzzy
 msgid ""
 "The price entered was not numeric and a number is expected. No changes have "
 "been made to the database"
-msgstr "A mennyiségnek számnak kell lennie"
+msgstr ""
 
 #: PurchData.php:48
 msgid "The price entered is zero"
@@ -19230,13 +19092,10 @@ msgid "Is this intentional?"
 msgstr "Ez szándékos?"
 
 #: PurchData.php:53
-#, fuzzy
 msgid ""
 "The lead time entered was not numeric a number of days is expected no "
 "changes have been made to the database"
 msgstr ""
-"Az elkülönített összeg nem numerikus. Ez a szerződés díj nem adható hozzá a "
-"számla"
 
 #: PurchData.php:58
 msgid ""
@@ -19328,15 +19187,13 @@ msgid "Supplier Unit"
 msgstr "Szállító egység"
 
 #: PurchData.php:171 SelectProduct.php:327
-#, fuzzy
 msgid "Min Order Qty"
-msgstr "Rendelés dátum"
+msgstr ""
 
 #: PurchData.php:173
 msgid "Preferred"
 msgstr "Preferált"
 
-# 
 #: PurchData.php:203
 #, php-format
 msgid "Are you sure you wish to delete this suppliers price?"
@@ -19369,7 +19226,8 @@ msgstr "meg kell tennie egy beszállító csak a preferált szállító"
 #: PurchData.php:218
 msgid ""
 "The supplier details for the selected supplier could not be retrieved because"
-msgstr "A szállító adatai a kiválasztott szállító nem lehetett letölteni, mert"
+msgstr ""
+"A szállító adatai a kiválasztott szállító nem lehetett letölteni, mert"
 
 #: PurchData.php:226
 msgid "The supplier code"
@@ -19418,7 +19276,8 @@ msgstr ""
 #: PurchData.php:282
 msgid ""
 "The suppliers matching the criteria entered could not be retrieved because"
-msgstr "A szállítók felel meg a feltételeknek be nem lehetett letölteni, mert"
+msgstr ""
+"A szállítók felel meg a feltételeknek be nem lehetett letölteni, mert"
 
 #: PurchData.php:283
 msgid "The SQL to retrieve supplier details that failed was"
@@ -19479,9 +19338,8 @@ msgid "Supplier Stock Code"
 msgstr "Szállítókód (ig)"
 
 #: PurchData.php:457
-#, fuzzy
 msgid "MinOrderQty"
-msgstr "Rendelés dátum"
+msgstr ""
 
 #: PurchData.php:459
 msgid "Supplier Stock Description"
@@ -19495,7 +19353,6 @@ msgstr "A nap a megrendelés dátumától"
 msgid "Preferred Supplier"
 msgstr "Preferált Szállító"
 
-# 
 #: PurchData.php:479 Shipments.php:499 StockAdjustments.php:375
 #: TaxGroups.php:373 WOSerialNos.php:258 WWW_Access.php:228
 #, php-format
@@ -19573,7 +19430,8 @@ msgid ""
 msgstr "A vevő óta mező csak dátum lehet, ebben a formában"
 
 #: RecurringSalesOrders.php:189
-msgid "The end date of this recurring order must be a valid date in the format"
+msgid ""
+"The end date of this recurring order must be a valid date in the format"
 msgstr ""
 "A záró időpontja ennek visszatérő ahhoz kell egy érvényes dátum formátumban"
 
@@ -19801,15 +19659,15 @@ msgstr "Készletértékelés lista"
 
 #: ReorderLevelLocation.php:51
 msgid "Location : "
-msgstr "Hely"
+msgstr "Hely "
 
 #: ReorderLevelLocation.php:52
 msgid "Number Of Days Sales : "
-msgstr "Napok száma Értékesítés:"
+msgstr "Napok száma Értékesítés: "
 
 #: ReorderLevelLocation.php:52
 msgid " Days "
-msgstr "nap után"
+msgstr " nap után "
 
 #: ReorderLevelLocation.php:56 ReorderLevelLocation.php:57
 #: ReorderLevelLocation.php:202 TopItems.php:158
@@ -19934,7 +19792,8 @@ msgstr ""
 
 #: ReverseGRN.php:76
 msgid "Could not determine if the item was controlled or not because"
-msgstr "Nem tudta meghatározni, ha a tételt ellenőrzött, vagy nem azért, mert"
+msgstr ""
+"Nem tudta meghatározni, ha a tételt ellenőrzött, vagy nem azért, mert"
 
 #: ReverseGRN.php:89
 msgid ""
@@ -19981,30 +19840,25 @@ msgstr ""
 "mert fordított"
 
 #: ReverseGRN.php:135
-#, fuzzy
 msgid "GRN Reversed for"
-msgstr "GRN visszaírás a PO"
+msgstr ""
 
 #: ReverseGRN.php:138
-#, fuzzy
 msgid ""
 "The purchase order statusand status comment could not be changed because"
-msgstr "A megrendelés nem lehet frissíteni, mert"
+msgstr ""
 
 #: ReverseGRN.php:139
-#, fuzzy
 msgid "The following SQL to update the purchase order header record was used"
-msgstr "SQL sor"
+msgstr ""
 
 #: ReverseGRN.php:147
-#, fuzzy
 msgid "The GRN record could not be deleted because"
-msgstr "A megrendelés tételsor nem törölhető, mert"
+msgstr ""
 
 #: ReverseGRN.php:148
-#, fuzzy
 msgid "The following SQL to delete the GRN record was used"
-msgstr "SQL sor"
+msgstr ""
 
 #: ReverseGRN.php:155
 msgid "The GRN record could not be updated"
@@ -20021,10 +19875,9 @@ msgid ""
 msgstr ""
 
 #: ReverseGRN.php:183
-#, fuzzy
 msgid ""
 "The following SQL was used to attempt the reduce the cost of the asset was:"
-msgstr "SQL üzenet"
+msgstr ""
 
 #: ReverseGRN.php:191
 msgid "Could not determine if the item exists because"
@@ -20194,7 +20047,8 @@ msgid "The SQL used to delete this report column was"
 msgstr "Az SQL szolgál, hogy törölje ezt a jelentést oszlop"
 
 #: SalesAnalReptCols.php:242
-msgid "The column definitions could not be retrieved from the database because"
+msgid ""
+"The column definitions could not be retrieved from the database because"
 msgstr "Az oszlop meghatározások nem sikerült letölteni az adatbázist, mert"
 
 #: SalesAnalReptCols.php:243
@@ -20298,9 +20152,8 @@ msgid "Could not load periods table"
 msgstr "Nem értelems tartomány, mert"
 
 #: SalesAnalReptCols.php:425
-#, fuzzy
 msgid "ToPeriod"
-msgstr "Időszakra"
+msgstr ""
 
 #: SalesAnalReptCols.php:439
 msgid "Data to show"
@@ -20523,25 +20376,21 @@ msgstr "Számú jelentése"
 msgid "Report Title"
 msgstr "Jelentés címe"
 
-# 
 #: SalesAnalRepts.php:301
 #, php-format
 msgid "Design"
 msgstr "Design"
 
-# 
 #: SalesAnalRepts.php:302
 #, php-format
 msgid "Define Columns"
 msgstr "Adjuk oszlopok"
 
-# 
 #: SalesAnalRepts.php:303
 #, php-format
 msgid "Make PDF Report"
 msgstr "Készíts PDF-jelentés"
 
-# 
 #: SalesAnalRepts.php:305
 #, php-format
 msgid "Are you sure you wish to remove this report design?"
@@ -20734,7 +20583,6 @@ msgstr "Nincs több Inventory felvehető elemek."
 msgid "Inventory items in this category."
 msgstr "Leltár Ebben a kategóriában."
 
-# 
 #: SalesCategories.php:444 StockAdjustments.php:374 SupplierTenders.php:292
 #: TaxGroups.php:353 WWW_Access.php:215
 #, php-format
@@ -21035,7 +20883,8 @@ msgid "The salesperson name must be thirty characters or less long"
 msgstr "A számla név max 50 karakter lehet"
 
 #: SalesPeople.php:52 SalesPeople.php:56
-msgid "The salesperson telephone number must be twenty characters or less long"
+msgid ""
+"The salesperson telephone number must be twenty characters or less long"
 msgstr "Az eladó telefonszámot kell húsz vagy ennél kevesebb karakter hosszú"
 
 #: SalesPeople.php:60
@@ -21139,7 +20988,8 @@ msgstr ""
 
 #: SalesTypes.php:42
 msgid "The sales type (price list) code cannot be an empty string or spaces"
-msgstr "Az eladási típusa (árlista) kódot nem lehet üres sztring vagy szóközt"
+msgstr ""
+"Az eladási típusa (árlista) kódot nem lehet üres sztring vagy szóközt"
 
 #: SalesTypes.php:47
 msgid ""
@@ -21161,7 +21011,7 @@ msgstr "Az ügyfél / értékesítési / árlista típus"
 
 #: SalesTypes.php:77
 msgid "The customer/sales/pricelist type "
-msgstr "Az ügyfél / értékesítési / árlista típus"
+msgstr "Az ügyfél / értékesítési / árlista típus "
 
 #: SalesTypes.php:88
 msgid "Customer/sales/pricelist type"
@@ -21249,61 +21099,46 @@ msgid "Sales Type Name"
 msgstr "Értékesítési típus neve"
 
 #: SelectAsset.php:36
-#, fuzzy
 msgid ""
 "There are no asset categories currently defined please use the link below to "
 "set them up"
 msgstr ""
-"Nincs raktáron kategória jelenleg meghatározott kérjük használja az alábbi "
-"linket az azokat felállító"
 
 #: SelectAsset.php:37
-#, fuzzy
 msgid "Define Asset Categories"
-msgstr "Eladási kategóriák karbantartása"
+msgstr ""
 
 #: SelectAsset.php:53 SelectAsset.php:55
-#, fuzzy
 msgid "Any asset category"
-msgstr "Kedvezmény kategória"
+msgstr ""
 
 #: SelectAsset.php:67
-#, fuzzy
 msgid "Enter partial description"
-msgstr "Tétel leírás"
+msgstr ""
 
 #: SelectAsset.php:78 SelectAsset.php:80
-#, fuzzy
 msgid "Any asset location"
-msgstr "Minden helyen"
+msgstr ""
 
 #: SelectAsset.php:93
-#, fuzzy
 msgid "Enter partial asset code"
-msgstr "Adjon meg sorozatszámot"
+msgstr ""
 
 #: SelectAsset.php:114
-#, fuzzy
 msgid ""
 "Asset description keywords have been used in preference to the asset code "
 "extract entered"
 msgstr ""
-"A termék leírásban kulcsszavak használhatók a Termékkódot pontosan ismerni "
-"kell"
 
 #: SelectAsset.php:171
-#, fuzzy
 msgid "No assets were returned by the SQL because"
-msgstr "Nem szállítások által visszaadott SQL miatt"
+msgstr ""
 
 #: SelectAsset.php:175
-#, fuzzy
 msgid ""
 "No assets were returned by this search please re-enter alternative criteria "
 "to try again"
 msgstr ""
-"Nincs raktáron híradások által visszaadott keresési kérjük, adja meg újra "
-"alternatív kritériumokat, hogy próbálkozzon újra"
 
 #: SelectCompletedOrder.php:9
 msgid "Search All Sales Orders"
@@ -21388,7 +21223,6 @@ msgstr "Nincs eredménye a lekérdezésnek, mert"
 msgid "Issue To WO"
 msgstr "használva"
 
-# 
 #: SelectContract.php:154 SelectWorkOrder.php:301 SelectWorkOrder.php:336
 #: Shipt_Select.php:321 Shipt_Select.php:340
 #, php-format
@@ -21437,9 +21271,8 @@ msgid "The customer record of the customer selected"
 msgstr "Az ügyfél nyilván a felhasználó által kiválasztott"
 
 #: SelectCreditItems.php:204
-#, fuzzy
 msgid "Select Customer For Credit Note"
-msgstr "Vevő kód"
+msgstr ""
 
 #: SelectCreditItems.php:206
 msgid "Customer Selection"
@@ -21602,7 +21435,8 @@ msgstr ""
 
 #: SelectCreditItems.php:1313
 msgid "The new serial stock item record could not be inserted because"
-msgstr "Az új sorozat állomány tétel eredménye nem lehetett beilleszteni, mert"
+msgstr ""
+"Az új sorozat állomány tétel eredménye nem lehetett beilleszteni, mert"
 
 #: SelectCreditItems.php:1314
 msgid "The following SQL to insert the new serial stock item record was used"
@@ -21653,7 +21487,8 @@ msgid ""
 msgstr "Az alábbi SQL be a soros állomány mozgását írja le rekord használt"
 
 #: SelectCreditItems.php:1758 SelectCreditItems.php:1786
-msgid "The cost of the stock credited GL posting could not be inserted because"
+msgid ""
+"The cost of the stock credited GL posting could not be inserted because"
 msgstr ""
 "Az ára az állomány jóváírt GL kiküldetés nem lehetett beilleszteni, mert"
 
@@ -21878,7 +21713,7 @@ msgstr "Új vevő felvitel"
 
 #: SelectCustomer.php:676
 msgid "Customer Type (Group) Notes for:<b> "
-msgstr "Vevő adatok frissítve"
+msgstr "Vevő adatok frissítve "
 
 #: SelectCustomer.php:681
 msgid "file link / reference / URL"
@@ -22079,18 +21914,14 @@ msgid "Stock Code has been used in search"
 msgstr "Stock kód óta használják a keresési"
 
 #: SelectOrderItems.php:987
-#, fuzzy
 msgid ""
 "No asset was selected to dispose of. No assets have been added to this "
 "customer order"
 msgstr ""
-"Nem lehet törölni ezt a kategóriát, mert értékesítés készleten db kerültek "
-"ebbe a kategóriába"
 
 #: SelectOrderItems.php:1013
-#, fuzzy
 msgid "Asset Disposals"
-msgstr "Tétel leírás"
+msgstr ""
 
 #: SelectOrderItems.php:1120
 msgid ""
@@ -22117,7 +21948,8 @@ msgstr ""
 "Megpróbál, hogy a megrendelt mennyiség kisebb mennyiség már kiszámlázott"
 
 #: SelectOrderItems.php:1126
-msgid "The quantity delivered and invoiced cannot be modified retrospectively"
+msgid ""
+"The quantity delivered and invoiced cannot be modified retrospectively"
 msgstr "A leszállított mennyiség és a számlázott nem lehet módosítani utólag"
 
 #: SelectOrderItems.php:1149
@@ -22139,8 +21971,8 @@ msgstr "PO vonal"
 #: SelectOrderItems.php:1295
 msgid ""
 "Quantity (required) - Enter the number of units ordered.  Price (required) - "
-"Enter the unit price.  Discount (optional) - Enter a percentage discount.  GP"
-"% (optional) - Enter a percentage Gross Profit (GP) to add to the unit "
+"Enter the unit price.  Discount (optional) - Enter a percentage discount.  "
+"GP% (optional) - Enter a percentage Gross Profit (GP) to add to the unit "
 "cost.  Due Date (optional) - Enter a date for delivery."
 msgstr ""
 "Mennyiség (szükséges) - Írjuk be az egységek számát rendelhető. Ár "
@@ -22167,17 +21999,16 @@ msgid "Search for Order Items"
 msgstr "Rendelt tétel módosítás"
 
 #: SelectOrderItems.php:1605
-#, fuzzy
 msgid "Fixed Asset Disposal"
-msgstr "Készlet hely beállítás"
+msgstr ""
 
 #: SelectOrderItems.php:1755
 msgid "Use this screen for the "
-msgstr "Használja ezt a képernyőt a"
+msgstr "Használja ezt a képernyőt a "
 
 #: SelectOrderItems.php:1755
 msgid " of products to be ordered"
-msgstr "A termékek rendelhető"
+msgstr " A termékek rendelhető"
 
 #: SelectOrderItems.php:1786
 msgid "Use this screen to select an asset to dispose of to this customer"
@@ -22192,9 +22023,8 @@ msgid "Select Asset To Dispose of From the List Below"
 msgstr ""
 
 #: SelectOrderItems.php:1801
-#, fuzzy
 msgid "Add Asset To Order"
-msgstr "Vevői megrendelések"
+msgstr ""
 
 #: SelectOrderItems.php:1807
 msgid "Cancel Whole Order"
@@ -22352,9 +22182,8 @@ msgid "Purchase this Item from"
 msgstr "Vásárolt"
 
 #: SelectProduct.php:411
-#, fuzzy
 msgid "default"
-msgstr "Alapértelmezett csomagjegyzék"
+msgstr ""
 
 #: SelectProduct.php:418 SelectProduct.php:450
 msgid "Add Inventory Items"
@@ -22498,9 +22327,8 @@ msgid "View All Purchase Orders"
 msgstr "Nézd meg az összes beszerzési rendelések"
 
 #: SelectSupplier.php:163
-#, fuzzy
 msgid "List all open shipments for"
-msgstr "Nyílt szállítmányok esetében"
+msgstr ""
 
 #: SelectSupplier.php:164
 msgid "Search / Modify / Close Shipments"
@@ -22606,9 +22434,8 @@ msgid "No items were returned by the SQL because"
 msgstr "Nincs eredménye a lekérdezésnek, mert"
 
 #: SelectWorkOrder.php:109
-#, fuzzy
 msgid "For the item"
-msgstr "A termék"
+msgstr ""
 
 #: SelectWorkOrder.php:111
 msgid "Work Order number"
@@ -22646,7 +22473,6 @@ msgstr "Keresés"
 msgid "No works orders were returned by the SQL because"
 msgstr "Nincs eredménye a lekérdezésnek, mert"
 
-# 
 #: SelectWorkOrder.php:300 SelectWorkOrder.php:335
 #, php-format
 msgid "Issue To"
@@ -22689,9 +22515,8 @@ msgid "could not be located in the database"
 msgstr "nem található az adatbázisban"
 
 #: ShipmentCosting.php:52
-#, fuzzy
 msgid "Shipment Details"
-msgstr "Frissítés Szállítás Részletek"
+msgstr ""
 
 #: ShipmentCosting.php:59 Shipt_Select.php:286 ShiptsList.php:38
 msgid "Vessel"
@@ -22739,9 +22564,8 @@ msgstr ""
 "mennyiség kiszámlázásra. Ellenőrizze az elem"
 
 #: ShipmentCosting.php:137
-#, fuzzy
 msgid "Items on shipment"
-msgstr "Termék"
+msgstr ""
 
 #: ShipmentCosting.php:142 ShipmentCosting.php:143
 #: includes/PDFStatementPageHeader.inc:170
@@ -22921,7 +22745,8 @@ msgstr "Ha be szeretné állítani a szállítás"
 
 #: Shipments.php:22 SpecialOrder.php:26
 msgid "the supplier must first be selected from the Select Supplier page"
-msgstr "a szállító először be kell kiválasztani a kiválasztása Szállító oldal"
+msgstr ""
+"a szállító először be kell kiválasztani a kiválasztása Szállító oldal"
 
 #: Shipments.php:25
 msgid "Select the Supplier"
@@ -23140,7 +22965,6 @@ msgstr "Út"
 msgid "Expected Arrival"
 msgstr "Várható érkezés"
 
-# 
 #: Shipt_Select.php:323
 #, php-format
 msgid "Close"
@@ -23280,10 +23104,12 @@ msgstr "A hivatkozás ebben a sorrendben kevesebb, mint 3 karakter"
 #: SpecialOrder.php:180 SpecialOrder.php:252
 msgid ""
 "a reference more than 3 characters is required before the order can be added"
-msgstr "hivatkozni több, mint 3 karakter van szükség, mielőtt a megrendelés ki"
+msgstr ""
+"hivatkozni több, mint 3 karakter van szükség, mielőtt a megrendelés ki"
 
 #: SpecialOrder.php:183 SpecialOrder.php:255
-msgid "The person entering this order must be specified in the initiator field"
+msgid ""
+"The person entering this order must be specified in the initiator field"
 msgstr ""
 "Az, aki belép ezt a sorrendet meg kell határozni a kezdeményező területén"
 
@@ -23356,7 +23182,8 @@ msgstr ""
 "rendelésre"
 
 #: SpecialOrder.php:423
-msgid "The SQL statement used to get the delivery details and that failed was"
+msgid ""
+"The SQL statement used to get the delivery details and that failed was"
 msgstr ""
 "Az SQL utasítás használják, hogy a szállítási adatokat, és hogy nem volt"
 
@@ -23656,14 +23483,12 @@ msgid "Raw Materials"
 msgstr "Nyersanyagok"
 
 #: StockCategories.php:60
-#, fuzzy
 msgid "The minimum value is expected to be a numeric value"
-msgstr "A fuvarköltséget szám formában kell megadni"
+msgstr ""
 
 #: StockCategories.php:64
-#, fuzzy
 msgid "The maximum value is expected to be a numeric value"
-msgstr "A fuvarköltséget szám formában kell megadni"
+msgstr ""
 
 #: StockCategories.php:84
 msgid "Could not update the stock category"
@@ -23755,7 +23580,6 @@ msgstr "Használat Var GL"
 msgid "WIP GL"
 msgstr "WIP GL"
 
-# 
 #: StockCategories.php:245
 #, php-format
 msgid ""
@@ -23828,19 +23652,16 @@ msgid "Default Value"
 msgstr "Alapértelmezett csomagjegyzék"
 
 #: StockCategories.php:486
-#, fuzzy
 msgid "Numeric Value"
-msgstr "Nettó érték"
+msgstr ""
 
 #: StockCategories.php:487
-#, fuzzy
 msgid "Minimum Value"
-msgstr "Minimum költség"
+msgstr ""
 
 #: StockCategories.php:488
-#, fuzzy
 msgid "Maximum Value"
-msgstr "Alapértelmezett csomagjegyzék"
+msgstr ""
 
 #: StockCategories.php:489
 msgid "Require in SO"
@@ -23875,7 +23696,8 @@ msgid "Stock Count Sheets - Problem Report"
 msgstr "Görgetett szállítói számla elemzés - Problémás esetek"
 
 #: StockCheck.php:46 StockCheck.php:97
-msgid "The inventory quantities could not be added to the freeze file because"
+msgid ""
+"The inventory quantities could not be added to the freeze file because"
 msgstr ""
 "A leltár mennyiségeket nem lehetett hozzá a befagyasztására fájlt, mert"
 
@@ -24075,7 +23897,7 @@ msgstr "nem kerülhettek be, mert"
 
 #: StockCounts.php:77
 msgid " Stock Counts Entered"
-msgstr "Készlet szám"
+msgstr " Készlet szám"
 
 #: StockCounts.php:83
 msgid "Stock Check Counts at Location"
@@ -24115,9 +23937,8 @@ msgstr ""
 "Alkatrészek szállításához egy másik helyre, hogy fedezze átrendezheti szinten"
 
 #: StockDispatch.php:38
-#, fuzzy
 msgid "Could not retrieve location name from the database"
-msgstr "Nem elérhetők az összeépítés alkatrészei az adatbázisban"
+msgstr ""
 
 #: StockDispatch.php:90 StockDispatch.php:101
 msgid "Stock Dispatch - Problem Report"
@@ -24193,7 +24014,7 @@ msgstr "Méret"
 
 #: StockDispatch.php:333
 msgid "Stock Dispatch "
-msgstr "Kiszállítás"
+msgstr "Kiszállítás "
 
 #: StockDispatch.php:334
 msgid "From :"
@@ -24346,9 +24167,8 @@ msgid "Please correct this or remove the item"
 msgstr "Javítsd ki a hibát, vagy távolítsa el az elem"
 
 #: StockLocTransfer.php:55
-#, fuzzy
 msgid "does not have enough stock available for transfer."
-msgstr "nincs árukészlet átadása."
+msgstr ""
 
 #: StockLocTransfer.php:64
 msgid "You must enter at least 1 Stock Item to transfer"
@@ -24406,7 +24226,8 @@ msgstr "negatív"
 
 #: StockLocTransferReceive.php:40
 msgid "All quantities must be for positive numbers greater than zero"
-msgstr "Minden kifogott mennyiséget kell a pozitív számok nagyobb, mint nulla"
+msgstr ""
+"Minden kifogott mennyiséget kell a pozitív számok nagyobb, mint nulla"
 
 #: StockLocTransferReceive.php:44
 msgid ""
@@ -24453,7 +24274,8 @@ msgstr ""
 #: StockLocTransferReceive.php:218
 msgid ""
 "The stock movement record for the incoming stock cannot be added because"
-msgstr "A készletek alakulása rekordot a bejövő állomány nem lehet hozzá, mert"
+msgstr ""
+"A készletek alakulása rekordot a bejövő állomány nem lehet hozzá, mert"
 
 #: StockLocTransferReceive.php:254
 msgid ""
@@ -24809,7 +24631,8 @@ msgid "The economic order quantity must be a positive number"
 msgstr "A gazdasági rendelési mennyiség kell egy pozitív szám"
 
 #: Stocks.php:162 Z_ImportStocks.php:166
-msgid "The item can only be serialised if there is lot control enabled already"
+msgid ""
+"The item can only be serialised if there is lot control enabled already"
 msgstr ""
 "Az elem csak akkor lehet sorozatban, ha van sok ellenőrzés engedélyezve a már"
 
@@ -24860,8 +24683,8 @@ msgstr ""
 
 #: Stocks.php:180
 msgid ""
-"Assemblies/Dummies/Phantom and Kitsets are not physical items and batch/"
-"serial control is therefore not appropriate"
+"Assemblies/Dummies/Phantom and Kitsets are not physical items and "
+"batch/serial control is therefore not appropriate"
 msgstr ""
 "Részegységek / kezdőknek / Phantom és Kitsets nem fizikai elemeket és a "
 "batch / soros szabályozás ezért nem helyénvaló"
@@ -24924,7 +24747,8 @@ msgid "The make or buy flag cannot be changed to"
 msgstr "Az, hogy vagy vásárolni zászlót nem lehet változtatni"
 
 #: Stocks.php:265
-msgid "where there is a quantity outstanding to be received on purchase orders"
+msgid ""
+"where there is a quantity outstanding to be received on purchase orders"
 msgstr "ha van egy kiemelkedő mennyiséget kell kapott megrendeléseket"
 
 #: Stocks.php:265
@@ -25204,14 +25028,12 @@ msgid "Item Category Properties"
 msgstr "Jogcím Kategória tulajdonságai"
 
 #: Stocks.php:984
-#, fuzzy
 msgid "A number between"
-msgstr "Beszállítás szám"
+msgstr ""
 
 #: Stocks.php:984
-#, fuzzy
 msgid "is expected"
-msgstr "A szám várhatóan"
+msgstr ""
 
 #: Stocks.php:1018
 msgid "Insert New Item"
@@ -25433,7 +25255,8 @@ msgstr ""
 "mert"
 
 #: StockUsageGraph.php:61
-msgid "There are no movements of this item from the selected location to graph"
+msgid ""
+"There are no movements of this item from the selected location to graph"
 msgstr "Nincs mozgását ezt az elemet a kijelölt helyre grafikon"
 
 #: StockUsage.php:9
@@ -25674,18 +25497,14 @@ msgid "Add to Credit Note"
 msgstr "Add hozzá a Credit megjegyzés"
 
 #: SuppFixedAssetChgs.php:16
-#, fuzzy
 msgid "Fixed Asset Charges or Credits"
-msgstr "Szállítás díjak vagy névsora"
+msgstr ""
 
 #: SuppFixedAssetChgs.php:27
-#, fuzzy
 msgid ""
 "Fixed asset additions or credits are entered against supplier invoices or "
 "credit notes respectively"
 msgstr ""
-"Szállítás díjakat vagy hitelek terhére szállítói számla vagy jóváírás, "
-"illetve"
 
 #: SuppFixedAssetChgs.php:27 SuppShiptChgs.php:29
 msgid ""
@@ -25708,23 +25527,18 @@ msgid ""
 msgstr ""
 
 #: SuppFixedAssetChgs.php:49
-#, fuzzy
 msgid ""
 "The amount entered is not numeric. This fixed asset cannot be added to the "
 "invoice"
 msgstr ""
-"Az elkülönített összeg nem numerikus. Ez a szerződés díj nem adható hozzá a "
-"számla"
 
 #: SuppFixedAssetChgs.php:68
-#, fuzzy
 msgid "Fixed Assets on Invoice"
-msgstr "Állóeszköz GL kód"
+msgstr ""
 
 #: SuppFixedAssetChgs.php:70
-#, fuzzy
 msgid "Fixed Asset credits on Credit Note"
-msgstr "Szállítás hiteleket a hitel megjegyzés"
+msgstr ""
 
 #: SuppFixedAssetChgs.php:108
 msgid ""
@@ -25734,14 +25548,12 @@ msgid ""
 msgstr ""
 
 #: SuppFixedAssetChgs.php:112
-#, fuzzy
 msgid "Asset Selection"
-msgstr "Szakasz"
+msgstr ""
 
 #: SuppFixedAssetChgs.php:140
-#, fuzzy
 msgid "Enter Fixed Asset"
-msgstr "Szállító választás"
+msgstr ""
 
 #: SuppInvGRNs.php:14
 msgid "Enter Supplier Invoice Against Goods Received"
@@ -26112,7 +25924,6 @@ msgstr "Kapcsolatok meghatározott"
 msgid "Position"
 msgstr "Pozíció"
 
-# 
 #: SupplierContacts.php:157
 #, php-format
 msgid "Are you sure you wish to delete this contact?"
@@ -26189,18 +26000,16 @@ msgstr ""
 "oldalra"
 
 #: SupplierCredit.php:247
-#, fuzzy
 msgid ""
 "You should automatically be forwarded to the entry of supplier credit notes "
 "against contracts page"
-msgstr "Automatikusan a szállítói számla oldalra lesz továbbítva"
+msgstr ""
 
 #: SupplierCredit.php:255
-#, fuzzy
 msgid ""
 "You should automatically be forwarded to the entry of invoices against fixed "
 "assets page"
-msgstr "Automatikusan a szállítói számla oldalra lesz továbbítva"
+msgstr ""
 
 #: SupplierCredit.php:280
 msgid "Supplier Credit Note Reference"
@@ -26215,9 +26024,8 @@ msgid "in format"
 msgstr "formátumban"
 
 #: SupplierCredit.php:307
-#, fuzzy
 msgid "Purchase Order Credits"
-msgstr "Megrendelések"
+msgstr ""
 
 #: SupplierCredit.php:311
 msgid "Credited"
@@ -26232,28 +26040,24 @@ msgid "Total Value of Goods Credited"
 msgstr "Áruk összértéke jóváírása"
 
 #: SupplierCredit.php:339
-#, fuzzy
 msgid "Shipment Credits"
-msgstr "Szállítás hitel ellen"
+msgstr ""
 
 #: SupplierCredit.php:359
 msgid "Total Credited Against Shipments"
 msgstr "Összesen beszámítását szállítása"
 
 #: SupplierCredit.php:366
-#, fuzzy
 msgid "Fixed Asset Credits"
-msgstr "Eladási kategóriák karbantartása"
+msgstr ""
 
 #: SupplierCredit.php:397 SupplierInvoice.php:371
-#, fuzzy
 msgid "Contract Charges"
-msgstr "Készlet szám"
+msgstr ""
 
 #: SupplierCredit.php:431 SupplierInvoice.php:405
-#, fuzzy
 msgid "General Ledger Analysis"
-msgstr "Adja Főkönyv elemzése"
+msgstr ""
 
 #: SupplierCredit.php:478 SupplierCredit.php:481
 msgid "Credit Amount in Supplier Currency"
@@ -26318,7 +26122,8 @@ msgstr ""
 msgid ""
 "The credit note as entered cannot be processed because the date is after "
 "today"
-msgstr "A jóváírást bevezetett nem lehet feldolgozni, mert a dátum után a mai"
+msgstr ""
+"A jóváírást bevezetett nem lehet feldolgozni, mert a dátum után a mai"
 
 #: SupplierCredit.php:610
 msgid "Purchase credit notes are expected to have a date prior to or today"
@@ -26347,7 +26152,8 @@ msgstr ""
 "A jóváírást teljes bevezetett kisebb, mint az összege a szállítmány díjak"
 
 #: SupplierCredit.php:615
-msgid "the general ledger entries (if any) and the charges for goods received"
+msgid ""
+"the general ledger entries (if any) and the charges for goods received"
 msgstr "A főkönyvi tételek (ha van) és a díjakat az áruk kapott"
 
 #: SupplierCredit.php:615
@@ -26383,16 +26189,14 @@ msgid "The general ledger transaction for the shipment"
 msgstr "A főkönyvi tranzakció a szállításért"
 
 #: SupplierCredit.php:735
-#, fuzzy
 msgid "Asset Credit"
-msgstr "Kód"
+msgstr ""
 
 #: SupplierCredit.php:737 SupplierInvoice.php:721
-#, fuzzy
 msgid ""
 "The general ledger transaction for the asset addition could not be added "
 "because"
-msgstr "A főkönyvi tranzakció az adót nem lehetett hozzá, mert"
+msgstr ""
 
 #: SupplierCredit.php:768 SupplierInvoice.php:751
 msgid "Contract charge against"
@@ -26520,10 +26324,9 @@ msgid ""
 msgstr ""
 
 #: SupplierCredit.php:1197
-#, fuzzy
 msgid ""
 "The following SQL was used to attempt the update of the fixed asset cost:"
-msgstr "SQL üzenet"
+msgstr ""
 
 #: SupplierCredit.php:1245 SupplierInvoice.php:1240
 msgid "The contract charge record for contract"
@@ -26540,9 +26343,8 @@ msgid ""
 msgstr ""
 
 #: SupplierCredit.php:1285 SupplierInvoice.php:1193
-#, fuzzy
 msgid "The following SQL was used to attempt the update of the asset cost:"
-msgstr "SQL üzenet"
+msgstr ""
 
 #: SupplierCredit.php:1291
 msgid "Supplier credit note number"
@@ -26588,7 +26390,6 @@ msgstr "A Szállító tranzakciók nem lehetett frissíteni, mert"
 msgid "Supplier Ref"
 msgstr "Szállító"
 
-# 
 #: SupplierInquiry.php:243 SupplierInquiry.php:271 SupplierInquiry.php:347
 #, php-format
 msgid "View GL Postings"
@@ -26654,20 +26455,18 @@ msgid ""
 msgstr "Automatikusan a szállítói számla oldalra lesz továbbítva"
 
 #: SupplierInvoice.php:223
-#, fuzzy
 msgid ""
 "You should automatically be forwarded to the entry of invoice amounts "
 "against fixed assets page"
-msgstr "Automatikusan a szállítói számla oldalra lesz továbbítva"
+msgstr ""
 
 #: SupplierInvoice.php:249
 msgid "Supplier Invoice Reference"
 msgstr "Szállítói számla Referencia"
 
 #: SupplierInvoice.php:278
-#, fuzzy
 msgid "Purchase Order Charges"
-msgstr "Megrendelések"
+msgstr ""
 
 #: SupplierInvoice.php:279
 msgid "Seq"
@@ -26678,14 +26477,12 @@ msgid "Price in"
 msgstr "Ár"
 
 #: SupplierInvoice.php:310
-#, fuzzy
 msgid "Shipment Charges"
-msgstr "Összesen Szállítás díjak"
+msgstr ""
 
 #: SupplierInvoice.php:339
-#, fuzzy
 msgid "Fixed Asset Additions"
-msgstr "Készlet hely beállítás"
+msgstr ""
 
 #: SupplierInvoice.php:455
 msgid "Update Tax Calculation"
@@ -26705,32 +26502,24 @@ msgid "Enter Invoice"
 msgstr "Adja meg számla"
 
 #: SupplierInvoice.php:558
-#, fuzzy
 msgid ""
 "The invoice as entered cannot be processed because the total amount of the "
 "invoice is less than  0"
 msgstr ""
-"A számlán szereplő nem lehet feldolgozni, mert a teljes számla összege "
-"kevesebb, vagy egyenlő 0"
 
 #: SupplierInvoice.php:558
-#, fuzzy
 msgid "Invoices are expected to have a positive charge"
-msgstr "Számlák várhatóan díjat"
+msgstr ""
 
 #: SupplierInvoice.php:562
-#, fuzzy
 msgid ""
 "The invoice as entered will be processed but be warned the amount of the "
 "invoice is  zero!"
 msgstr ""
-"A számlán szereplő nem lehet feldolgozni, mert a teljes számla összege "
-"kevesebb, vagy egyenlő 0"
 
 #: SupplierInvoice.php:562
-#, fuzzy
 msgid "Invoices are normally expected to have a positive charge"
-msgstr "Számlák várhatóan díjat"
+msgstr ""
 
 #: SupplierInvoice.php:565
 msgid ""
@@ -26756,7 +26545,8 @@ msgstr ""
 msgid ""
 "The invoice as entered cannot be processed because the invoice date is after "
 "today"
-msgstr "A számlán szereplő nem lehet feldolgozni, mert a számla dátuma után ma"
+msgstr ""
+"A számlán szereplő nem lehet feldolgozni, mert a számla dátuma után ma"
 
 #: SupplierInvoice.php:573
 msgid "Purchase invoices are expected to have a date prior to or today"
@@ -26788,7 +26578,8 @@ msgstr ""
 
 #: SupplierInvoice.php:589
 msgid "The sql to check for the previous entry of the same invoice failed"
-msgstr "Az sql, hogy ellenőrizze az előző bejegyzés az ugyanazon a számlán nem"
+msgstr ""
+"Az sql, hogy ellenőrizze az előző bejegyzés az ugyanazon a számlán nem"
 
 #: SupplierInvoice.php:590
 msgid "The following SQL to start an SQL transaction was used"
@@ -26811,9 +26602,8 @@ msgid "Shipment charge against"
 msgstr "Szállítás díj ellen"
 
 #: SupplierInvoice.php:719
-#, fuzzy
 msgid "Asset Addition"
-msgstr "Minden helyen"
+msgstr ""
 
 #: SupplierInvoice.php:1014
 msgid "The total posted to the debit accounts is"
@@ -26873,7 +26663,8 @@ msgstr "NZ számlaszámok kell 16 numerikus karaktereket is"
 
 #: Suppliers.php:22
 msgid "NZ account numbers entered must use all numeric characters in it"
-msgstr "NZ számlaszámok be kell használnia az összes numerikus karaktereket is"
+msgstr ""
+"NZ számlaszámok be kell használnia az összes numerikus karaktereket is"
 
 #: Suppliers.php:30
 msgid "NZ Accounts codes with the United Bank are not verified"
@@ -26981,7 +26772,8 @@ msgid "The supplier number already exists in the database"
 msgstr "A megadott főkönyvi számla nem található az adatbázisban"
 
 #: Suppliers.php:333
-msgid "The supplier name must be entered and be forty characters or less long"
+msgid ""
+"The supplier name must be entered and be forty characters or less long"
 msgstr ""
 "A nyertes nevét kell beírni, és negyven vagy ennél kevesebb karakter hosszú"
 
@@ -27284,11 +27076,13 @@ msgid "Add/edit/delete Supplier Types"
 msgstr "Vevői telephelyek"
 
 #: SupplierTypes.php:39
-msgid "The supplier type name description must be 100 characters or less long"
+msgid ""
+"The supplier type name description must be 100 characters or less long"
 msgstr "A fizetési mód leírás max 40 karakter lehet"
 
 #: SupplierTypes.php:46
-msgid "The supplier type name description must contain at least one character"
+msgid ""
+"The supplier type name description must contain at least one character"
 msgstr "A számlaosztály neve nem tartalmazhat betüt"
 
 #: SupplierTypes.php:58
@@ -27301,7 +27095,7 @@ msgstr "Vevőkód (ig)"
 
 #: SupplierTypes.php:83
 msgid "The supplier type "
-msgstr "Vevőkód (ig)"
+msgstr "Vevőkód (ig) "
 
 #: SupplierTypes.php:93 SupplierTypes.php:153
 msgid "Supplier type"
@@ -27651,7 +27445,8 @@ msgid "DefaultTaxCategory must be between 1 and 9"
 msgstr "DefaultTaxCategory kell 1 és 9 között"
 
 #: SystemParameters.php:78
-msgid "Default maximum number of records to display must be between 1 and 500"
+msgid ""
+"Default maximum number of records to display must be between 1 and 500"
 msgstr ""
 "Alapértelmezett maximális számát rekordok megjelenítéséhez között kell "
 "lennie 1 és 500"
@@ -27849,7 +27644,8 @@ msgstr ""
 
 #: SystemParameters.php:403
 msgid "A picking note must be produced before an order can be delivered"
-msgstr "A szedés jegyzéket be kell mutatni, mielőtt az ahhoz teljesíteni lehet"
+msgstr ""
+"A szedés jegyzéket be kell mutatni, mielőtt az ahhoz teljesíteni lehet"
 
 #: SystemParameters.php:408
 msgid ""
@@ -28287,7 +28083,7 @@ msgid ""
 "ex: in CustomerInquiry.php "
 msgstr ""
 "Több hónap kell tüntetni a jelentésben meg lehet változtatni a paramétereket "
-"ex: az CustomerInquiry.php"
+"ex: az CustomerInquiry.php "
 
 #: SystemParameters.php:681
 msgid "The directory where images are stored"
@@ -28443,7 +28239,8 @@ msgstr "Extended Szállító Info mozgáskorlátozottak"
 #: SystemParameters.php:830
 msgid ""
 "This feature will give extended information in the Select Supplier screen."
-msgstr "Ez a funkció ad bővebb információt a Szállító kiválasztása képernyőn."
+msgstr ""
+"Ez a funkció ad bővebb információt a Szállító kiválasztása képernyőn."
 
 #: SystemParameters.php:832
 msgid "Prohibit GL Journals to Control Accounts"
@@ -28716,7 +28513,6 @@ msgstr "Bankról szóló törvény típus"
 msgid "Bank Swift"
 msgstr "Bank Swift"
 
-# 
 #: TaxAuthorities.php:175
 #, php-format
 msgid "Edit Rates"
@@ -28961,7 +28757,8 @@ msgid "customer branches referring to this tax group"
 msgstr "ügyfél ágak hivatkozva ez az adó csoportba"
 
 #: TaxGroups.php:134
-msgid "Cannot delete this tax group because some suppliers are setup using it"
+msgid ""
+"Cannot delete this tax group because some suppliers are setup using it"
 msgstr ""
 "Nem lehet törölni ezt az adót a csoportba, mert bizonyos szállítók beállítás "
 "használja"
@@ -29065,7 +28862,8 @@ msgid "Total Outputs"
 msgstr "Összes kimenetek"
 
 #: Tax.php:176
-msgid "The accounts payable transaction details could not be retrieved because"
+msgid ""
+"The accounts payable transaction details could not be retrieved because"
 msgstr "A vevő adatai nem elérhetők, mert"
 
 #: Tax.php:187 Tax.php:274
@@ -29272,7 +29070,7 @@ msgstr "Vevő választás"
 
 #: TopItems.php:39
 msgid "Select Order By "
-msgstr "Válasszon megrendelést számlázáshoz"
+msgstr "Válasszon megrendelést számlázáshoz "
 
 #: TopItems.php:42
 msgid "Total Pieces"
@@ -29403,23 +29201,18 @@ msgid "Unit of Measure"
 msgstr "Mértékegység"
 
 #: UpgradeDatabase.php:5
-#, fuzzy
 msgid "Upgrade webERP Database"
-msgstr "Frissítés webERP verzióra 3.10.5"
+msgstr ""
 
 #: UpgradeDatabase.php:10
-#, fuzzy
 msgid ""
 "This script will run perform any modifications to the database required to "
 "allow the additional functionality in later scripts"
 msgstr ""
-"Ez a szkript futni fog végezni módosításokat az adatbázis szükséges, hogy a "
-"további funkciókat a verzió 3,05 szkriptek"
 
 #: UpgradeDatabase.php:15 UpgradeDatabase.php:36
-#, fuzzy
 msgid "The webERP code is version"
-msgstr "Frissítés webERP verzióra 3.10.5"
+msgstr ""
 
 #: UpgradeDatabase.php:15
 msgid "and the database version is not actually recorded at this version"
@@ -29434,88 +29227,72 @@ msgid "Apply database changes manually"
 msgstr ""
 
 #: UpgradeDatabase.php:19
-#, fuzzy
 msgid "Version 3.00"
-msgstr "Verzió"
+msgstr ""
 
 #: UpgradeDatabase.php:20
-#, fuzzy
 msgid "Version 3.01"
-msgstr "Verzió"
+msgstr ""
 
 #: UpgradeDatabase.php:21
-#, fuzzy
 msgid "Version 3.02"
-msgstr "Verzió"
+msgstr ""
 
 #: UpgradeDatabase.php:22
-#, fuzzy
 msgid "Version 3.03"
-msgstr "Verzió"
+msgstr ""
 
 #: UpgradeDatabase.php:23
-#, fuzzy
 msgid "Version 3.04"
-msgstr "Verzió"
+msgstr ""
 
 #: UpgradeDatabase.php:24
-#, fuzzy
 msgid "Version 3.05"
-msgstr "Verzió"
+msgstr ""
 
 #: UpgradeDatabase.php:25
-#, fuzzy
 msgid "Version 3.06"
-msgstr "Verzió"
+msgstr ""
 
 #: UpgradeDatabase.php:26
-#, fuzzy
 msgid "Version 3.07"
-msgstr "Verzió"
+msgstr ""
 
 #: UpgradeDatabase.php:27
-#, fuzzy
 msgid "Version 3.08"
-msgstr "Verzió"
+msgstr ""
 
 #: UpgradeDatabase.php:28
-#, fuzzy
 msgid "Version 3.09"
-msgstr "Verzió"
+msgstr ""
 
 #: UpgradeDatabase.php:29
-#, fuzzy
 msgid "Version 3.10"
-msgstr "Verzió"
+msgstr ""
 
 #: UpgradeDatabase.php:30
-#, fuzzy
 msgid "Version 3.11"
-msgstr "Verzió"
+msgstr ""
 
 #: UpgradeDatabase.php:36
-#, fuzzy
 msgid "and the database version is"
-msgstr "Az adatbázisban"
+msgstr ""
 
 #: UpgradeDatabase.php:40
-#, fuzzy
 msgid "Perform Database Upgrade"
-msgstr "Végezze Upgrade"
+msgstr ""
 
 #: UpgradeDatabase.php:49
-#, fuzzy
 msgid "Backup"
-msgstr "Köteg"
+msgstr ""
 
 #: UpgradeDatabase.php:57
 msgid "webERP backup file attached"
 msgstr ""
 
 #: UpgradeDatabase.php:59
-#, fuzzy
 msgid "Database Backup"
-msgstr "Adatbázis hiba"
+msgstr ""
 
 #: UpgradeDatabase.php:63
 msgid "A backup of the database has been taken and emailed to you"
@@ -29528,11 +29305,10 @@ msgid ""
 msgstr ""
 
 #: UpgradeDatabase.php:70
-#, fuzzy
 msgid ""
 "If there are any failures then please check with your system administrator. "
 "Please read all notes carefully to ensure they are expected"
-msgstr "Ha vannak olyan hibák, akkor kérjük, kérdezze meg a rendszergazdát"
+msgstr ""
 
 #: UpgradeDatabase.php:103
 msgid ""
@@ -29581,9 +29357,8 @@ msgid "Primary key already exists"
 msgstr "már eladva"
 
 #: UpgradeDatabase.php:163
-#, fuzzy
 msgid "Index already dropped previously"
-msgstr "már eladva"
+msgstr ""
 
 #: UpgradeDatabase.php:166 Z_Upgrade_3.10-3.11.php:82
 #: Z_Upgrade_3.11-4.00.php:82
@@ -29604,9 +29379,8 @@ msgid "Latin Western Languages"
 msgstr "Latin-nyugati nyelvek"
 
 #: UserSettings.php:15
-#, fuzzy
 msgid "Eastern European Russian Japanese Korean Hebrew Arabic Thai"
-msgstr "Kelet-európai orosz japán"
+msgstr ""
 
 #: UserSettings.php:16 WWW_Users.php:27
 msgid "Chinese"
@@ -29871,7 +29645,8 @@ msgstr "A fuvarköltség főkönyvi feladás nem rögzíthető, mert"
 msgid ""
 "The GL posting for the WIP side of the work order variance posting could not "
 "be inserted because"
-msgstr "A készlet az eladás költségei főkönyvi feladáshoz nem rögzítheő, mert"
+msgstr ""
+"A készlet az eladás költségei főkönyvi feladáshoz nem rögzítheő, mert"
 
 #: WorkOrderCosting.php:411 WorkOrderCosting.php:430
 msgid "share of usage variance"
@@ -29900,7 +29675,8 @@ msgstr "A fuvarköltség főkönyvi feladás nem rögzíthető, mert"
 msgid ""
 "The GL posting for the WIP side of the cost variance posting could not be "
 "inserted because"
-msgstr "A készlet az eladás költségei főkönyvi feladáshoz nem rögzítheő, mert"
+msgstr ""
+"A készlet az eladás költségei főkönyvi feladáshoz nem rögzítheő, mert"
 
 #: WorkOrderCosting.php:490
 msgid "Could not delete the predefined work order serial numbers"
@@ -30008,7 +29784,8 @@ msgstr "A szükséges dátum beírt érvénytelen formátumú"
 msgid ""
 "The factory where this work order is made can only be updated if the "
 "quantity received on all output items is 0"
-msgstr "A megrendelés rekord nem módosítható a beszállított mennyiséggel, mert"
+msgstr ""
+"A megrendelés rekord nem módosítható a beszállított mennyiséggel, mert"
 
 #: WorkOrderEntry.php:330
 msgid "The work order could not be added/updated"
@@ -30076,7 +29853,6 @@ msgstr "S / Ns"
 msgid "Delete This Work Order"
 msgstr "Törlés E munka végzése"
 
-# 
 #: WorkOrderEntry.php:635 WorkOrderIssue.php:694
 #, php-format
 msgid "Add to Work Order"
@@ -30160,7 +29936,8 @@ msgstr "SQL sor"
 msgid ""
 "The issue of the item to the work order GL posting could not be inserted "
 "because"
-msgstr "A készlet az eladás költségei főkönyvi feladáshoz nem rögzítheő, mert"
+msgstr ""
+"A készlet az eladás költségei főkönyvi feladáshoz nem rögzítheő, mert"
 
 #: WorkOrderIssue.php:317
 msgid ""
@@ -30171,7 +29948,8 @@ msgstr "SQL sor"
 msgid ""
 "The stock account credit on the issue of items to a work order GL posting "
 "could not be inserted because"
-msgstr "A készlet az eladás költségei főkönyvi feladáshoz nem rögzítheő, mert"
+msgstr ""
+"A készlet az eladás költségei főkönyvi feladáshoz nem rögzítheő, mert"
 
 #: WorkOrderIssue.php:337
 msgid "The following SQL to insert the stock GLTrans record was used"
@@ -30378,7 +30156,8 @@ msgstr "SQL üzenet"
 #: WorkOrderReceive.php:378
 msgid ""
 "The WIP side of the work order issue GL posting could not be inserted because"
-msgstr "A készlet az eladás költségei főkönyvi feladáshoz nem rögzítheő, mert"
+msgstr ""
+"A készlet az eladás költségei főkönyvi feladáshoz nem rögzítheő, mert"
 
 #: WorkOrderReceive.php:379 WorkOrderReceive.php:398
 msgid "The following SQL to insert the WO issue GLTrans record was used"
@@ -30388,7 +30167,8 @@ msgstr "SQL üzenet"
 msgid ""
 "The stock side of the work order issue GL posting could not be inserted "
 "because"
-msgstr "A készlet az eladás költségei főkönyvi feladáshoz nem rögzítheő, mert"
+msgstr ""
+"A készlet az eladás költségei főkönyvi feladáshoz nem rögzítheő, mert"
 
 #: WorkOrderReceive.php:517
 msgid "The predefined serial number record could not be deleted because"
@@ -30742,7 +30522,7 @@ msgstr "SQL üzenet"
 
 #: Z_BottomUpCosts.php:40
 msgid "Failed on item "
-msgstr "Termékkód"
+msgstr "Termékkód "
 
 #: Z_BottomUpCosts.php:44
 msgid "All cost updates committed to the database."
@@ -30758,7 +30538,8 @@ msgstr "Jelentés"
 
 #: Z_ChangeBranchCode.php:7
 msgid "UTILITY PAGE To Changes A Customer Branch Code In All Tables"
-msgstr "UTILITY OLDAL A változtatások egy ügyfél Branch kód minden táblázatban"
+msgstr ""
+"UTILITY OLDAL A változtatások egy ügyfél Branch kód minden táblázatban"
 
 #: Z_ChangeBranchCode.php:19
 msgid "The customer branch code"
@@ -30796,7 +30577,8 @@ msgid "Inserting the new customer branches master record"
 msgstr "Behelyezése az új ügyfél fiókok törzsrekord"
 
 #: Z_ChangeBranchCode.php:109
-msgid "The SQL to insert the new customer branch master record failed because"
+msgid ""
+"The SQL to insert the new customer branch master record failed because"
 msgstr ""
 "Az SQL hogy helyezze be az új ügyfél fióktelep törzsrekord nem sikerült, mert"
 
@@ -30907,7 +30689,8 @@ msgid "does not currently exist as a customer code in the system"
 msgstr "jelenleg nem létezik, mint az ügyfél kódot a rendszer"
 
 #: Z_ChangeCustomerCode.php:22
-msgid "The new customer code to change the old code to must be entered as well"
+msgid ""
+"The new customer code to change the old code to must be entered as well"
 msgstr "Az új ügyfél kódot változtatni a régi kódot kell beírni, valamint"
 
 #: Z_ChangeCustomerCode.php:29
@@ -30957,7 +30740,8 @@ msgstr "Az SQL frissíteni Sales elemzés rekordok nem"
 
 #: Z_ChangeCustomerCode.php:172 Z_ChangeStockCode.php:163
 msgid "The SQL to update order delivery differences records failed"
-msgstr "Az SQL frissítése érdekében szállítási nyilvántartások különbségek nem"
+msgstr ""
+"Az SQL frissítése érdekében szállítási nyilvántartások különbségek nem"
 
 #: Z_ChangeCustomerCode.php:179 Z_ChangeStockCode.php:170
 msgid "The SQL to update the pricing records failed"
@@ -31217,7 +31001,8 @@ msgstr "Az SQL frissíteni Küldemény díjak rekordok nem"
 
 #: Z_ChangeStockCode.php:201
 msgid "Changing the stock check freeze file records"
-msgstr "Megváltoztatása az állomány ellenőrzése befagyasztásáról fájl rekordok"
+msgstr ""
+"Megváltoztatása az állomány ellenőrzése befagyasztásáról fájl rekordok"
 
 #: Z_ChangeStockCode.php:203
 msgid "The SQL to update stock check freeze records failed"
@@ -31414,7 +31199,7 @@ msgstr "Termékkód"
 
 #: Z_CopyBOM.php:125
 msgid " To New Stock ID"
-msgstr "Termékkód"
+msgstr " Termékkód"
 
 #: Z_CopyBOM.php:133
 msgid "To Existing Stock ID"
@@ -31425,7 +31210,8 @@ msgid "Create Chart Details Records"
 msgstr "Hozzon létre ábra Részletek Records"
 
 #: Z_CreateChartDetails.php:33 includes/GLPostings.inc:61
-msgid "Could not test to see that all chart detail records properly initiated"
+msgid ""
+"Could not test to see that all chart detail records properly initiated"
 msgstr "Nem ellenőrizhető a főkönyvi számlatükör beállítása"
 
 #: Z_CreateChartDetails.php:46 includes/GLPostings.inc:74
@@ -31714,8 +31500,8 @@ msgstr "Törlés számla"
 
 #: Z_DeleteInvoice.php:16
 msgid ""
-"This page must be called with the InvoiceNo to delete Z_DeleteInvoice.php?"
-"InvoiceNo=XX"
+"This page must be called with the InvoiceNo to delete "
+"Z_DeleteInvoice.php?InvoiceNo=XX"
 msgstr ""
 "Ez az oldal kell meghívni a InvoiceNo törölni Z_DeleteInvoice.php? InvoiceNo "
 "= XX"
@@ -31756,7 +31542,8 @@ msgid "The sales order records have been updated as not invoiced"
 msgstr "A vevői rendelés nyilvántartás naprakésszé tették a nem számlázott"
 
 #: Z_DeleteInvoice.php:105
-msgid "The SQL to reverse update to the location stock records failed because"
+msgid ""
+"The SQL to reverse update to the location stock records failed because"
 msgstr ""
 "Az SQL visszafordítani frissíteni a helyszínre készletnyilvántartás nem "
 "sikerült, mert"
@@ -31783,7 +31570,8 @@ msgstr ""
 
 #: Z_DeleteInvoice.php:129
 msgid "The SQL to delete the stock movement records failed because"
-msgstr "Az SQL törölni a készletek alakulása nyilvántartás nem sikerült, mert"
+msgstr ""
+"Az SQL törölni a készletek alakulása nyilvántartás nem sikerült, mert"
 
 #: Z_DeleteInvoice.php:131
 msgid ""
@@ -32009,12 +31797,12 @@ msgstr "Reset"
 #: Z_ImportChartOfAccounts.php:68 Z_ImportGLAccountGroups.php:63
 #: Z_ImportGLAccountSections.php:63 Z_ImportPartCodes.php:63
 msgid " records successfully imported"
-msgstr "sikeresen rögzítve"
+msgstr " sikeresen rögzítve"
 
 #: Z_ImportChartOfAccounts.php:69 Z_ImportGLAccountGroups.php:64
 #: Z_ImportGLAccountSections.php:64 Z_ImportPartCodes.php:64
 msgid " records failed to import"
-msgstr "nyilvántartások nem sikerült importálni"
+msgstr " nyilvántartások nem sikerült importálni"
 
 #: Z_ImportChartOfAccounts.php:73
 msgid ""
@@ -32022,12 +31810,12 @@ msgid ""
 "to import into webERP. "
 msgstr ""
 "Válasszon ki egy csv fájl, amely tartalmazza a részletes számla kódok kívánt "
-"behozni webERP."
+"behozni webERP. "
 
 #: Z_ImportChartOfAccounts.php:74 Z_ImportGLAccountGroups.php:69
 #: Z_ImportGLAccountSections.php:69 Z_ImportPartCodes.php:74
 msgid "The first line must contain the field names that you wish to import. "
-msgstr "Az első sor tartalmazza a mezőneveket, hogy az importálni kívánt."
+msgstr "Az első sor tartalmazza a mezőneveket, hogy az importálni kívánt. "
 
 #: Z_ImportChartOfAccounts.php:75 Z_ImportGLAccountGroups.php:70
 #: Z_ImportGLAccountSections.php:70 Z_ImportPartCodes.php:75
@@ -32040,19 +31828,16 @@ msgid "File to import"
 msgstr "Fájlt importálni"
 
 #: Z_ImportFixedAssets.php:7
-#, fuzzy
 msgid "Import Fixed Assets"
-msgstr "Készlet hely beállítás"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:49
-#, fuzzy
 msgid "File contains"
-msgstr "Fájl tartalmazza"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:49
-#, fuzzy
 msgid "columns, expected"
-msgstr "A szám várhatóan"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:49
 msgid "Study a downloaded template to see the format for the file"
@@ -32065,19 +31850,16 @@ msgid ""
 msgstr ""
 
 #: Z_ImportFixedAssets.php:59
-#, fuzzy
 msgid "The selected file contains fields in the incorrect order ("
-msgstr "Fájl tartalmazza a helytelen fejlécek ("
+msgstr ""
 
 #: Z_ImportFixedAssets.php:77
-#, fuzzy
 msgid "fields are required, but"
-msgstr "mező kitöltése kötelező,"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:77
-#, fuzzy
 msgid "fields were received"
-msgstr "Feltöltve"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:125 Z_ImportFixedAssets.php:130
 #: Z_ImportFixedAssets.php:134 Z_ImportFixedAssets.php:139
@@ -32089,51 +31871,42 @@ msgid "Row:"
 msgstr ""
 
 #: Z_ImportFixedAssets.php:125
-#, fuzzy
 msgid "Invalid Description:"
-msgstr "Elem és leírás"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:129
-#, fuzzy
 msgid "The depreciation rate is expected to be numeric"
-msgstr "A fuvarköltséget szám formában kell megadni"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:130 Z_ImportFixedAssets.php:134
-#, fuzzy
 msgid "Invalid Depreciation Rate:"
-msgstr "Tétel leírás"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:138
-#, fuzzy
 msgid "The accumulated depreciation is expected to be numeric"
-msgstr "A fuvarköltséget szám formában kell megadni"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:139 Z_ImportFixedAssets.php:143
-#, fuzzy
 msgid "Invalid Accumulated Depreciation:"
-msgstr "Tétel leírás"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:142
-#, fuzzy
 msgid ""
 "The accumulated depreciation is expected to be either zero or a positive "
 "number"
-msgstr "A kedvezmény értéke pozitív szám kell hogy legyen"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:147
-#, fuzzy
 msgid "The cost is expected to be numeric"
-msgstr "A fuvarköltséget szám formában kell megadni"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:148 Z_ImportFixedAssets.php:152
-#, fuzzy
 msgid "Invalid Cost:"
-msgstr "Egységár"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:151
-#, fuzzy
 msgid "The cost is expected to be a positive number"
-msgstr "A hitel limit csak pozitív szám lehet"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:156
 msgid ""
@@ -32142,87 +31915,73 @@ msgid ""
 msgstr ""
 
 #: Z_ImportFixedAssets.php:157
-#, fuzzy
 msgid "Invalid depreciation type:"
-msgstr "Érvénytelen a kereslet típus"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:163
-#, fuzzy
 msgid ""
 "The asset category code entered must be exist in the assetcategories table"
-msgstr "A rész-kód be nem létezik az adatbázisban"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:164
-#, fuzzy
 msgid "Invalid asset category:"
-msgstr "Érvénytelen kategória id"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:169
-#, fuzzy
 msgid ""
 "The asset location code entered must be exist in the asset locations table"
-msgstr "A rész-kód be nem létezik az adatbázisban"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:170
-#, fuzzy
 msgid "Invalid asset location code:"
-msgstr "Allokálás"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:174
-#, fuzzy
 msgid "The date purchased must be entered in the format:"
-msgstr "A szállítás dátumát a következő formában kell megadni"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:175
-#, fuzzy
 msgid "Invalid date format:"
-msgstr "Nem érvényes"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:213
-#, fuzzy
 msgid "The SQL that was used to add the asset and failed was"
-msgstr "Az SQL, hogy használták, hogy az elem nem volt,"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:237 Z_ImportFixedAssets.php:258
-#, fuzzy
 msgid "The transaction for the cost of the asset could not be added because"
 msgstr ""
-"A főkönyvi tranzakció védekezésre irányuló teljes nem lehetett hozzá, mert"
 
 #: Z_ImportFixedAssets.php:238 Z_ImportFixedAssets.php:259
-#, fuzzy
 msgid ""
 "The SQL that was used to add the fixedasset trans record that failed was"
-msgstr "Az SQL, amit használt hozzá a helyre rögzíti, hogy nem volt"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:263
-#, fuzzy
 msgid "Inserted the new asset:"
-msgstr "Nem rögzíthető az alkatrész, mert"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:271 Z_ImportStocks.php:274
 msgid "Failed on row "
-msgstr "Nem sikerült a sorban"
+msgstr "Nem sikerült a sorban "
 
 #: Z_ImportFixedAssets.php:275 Z_ImportStocks.php:278
 msgid "Batch Import of"
 msgstr "Tétel importja"
 
 #: Z_ImportFixedAssets.php:275
-#, fuzzy
 msgid ""
 "has been completed. All assets in the file have been committed to the "
 "database."
-msgstr "A vevői jóváírás nem rögzíthető, mert"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:297
 msgid "Select Date to Upload B/Fwd Assets To:"
 msgstr ""
 
 #: Z_ImportFixedAssets.php:304
-#, fuzzy
 msgid "Fixed Assets Upload file:"
-msgstr "Állóeszköz GL kód"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:305 Z_ImportStocks.php:300 Z_UploadForm.php:17
 msgid "Send File"
@@ -32234,7 +31993,7 @@ msgid ""
 "wish to import into webERP. "
 msgstr ""
 "Válasszon ki egy csv fájl, amely tartalmazza a részletes számla szakaszok "
-"szeretné behozni webERP."
+"szeretné behozni webERP. "
 
 #: Z_ImportGLAccountSections.php:28
 msgid "Account Section"
@@ -32255,7 +32014,8 @@ msgid ""
 "Select a csv file containing the details of the parts that you wish to "
 "import into webERP. "
 msgstr ""
-"Válasszon ki egy csv fájl részleteit tartalmazó részek kívánt behozni webERP."
+"Válasszon ki egy csv fájl részleteit tartalmazó részek kívánt behozni "
+"webERP. "
 
 #: Z_ImportStocks.php:7
 msgid "Import Items"
@@ -32263,11 +32023,11 @@ msgstr "Import tételek"
 
 #: Z_ImportStocks.php:48
 msgid "File has type "
-msgstr "Termékkód"
+msgstr "Termékkód "
 
 #: Z_ImportStocks.php:61
 msgid "File contains "
-msgstr "Fájl tartalmazza"
+msgstr "Fájl tartalmazza "
 
 #: Z_ImportStocks.php:71
 msgid "File contains incorrect headers ("
@@ -32275,7 +32035,7 @@ msgstr "Fájl tartalmazza a helytelen fejlécek ("
 
 #: Z_ImportStocks.php:89
 msgid " fields required, "
-msgstr "mező kitöltése kötelező,"
+msgstr " mező kitöltése kötelező, "
 
 #: Z_ImportStocks.php:107
 msgid "Stock item \""
@@ -32402,9 +32162,8 @@ msgid "Import Stock Items from .csv"
 msgstr "Import Stock Tételek. Csv"
 
 #: Z_index.php:27
-#, fuzzy
 msgid "Import Fixed Assets from .csv file"
-msgstr "Import Stock Tételek. Csv"
+msgstr ""
 
 #: Z_index.php:28
 msgid "Create new company template SQL file and submit to webERP"
@@ -32440,7 +32199,8 @@ msgstr "Törlés értékesítési tranzakciók"
 
 #: Z_index.php:37
 msgid "Reverse all supplier payments on a specified date"
-msgstr "Fordított az összes szállítói kifizetések egy meghatározott időpontban"
+msgstr ""
+"Fordított az összes szállítói kifizetések egy meghatározott időpontban"
 
 #: Z_index.php:38
 msgid "Re-calculate brought forward amounts in GL"
@@ -32455,8 +32215,8 @@ msgid ""
 "Show Debtors Control (Need to edit Z_CheckDebtorsControl.php for the period "
 "to show control totals for"
 msgstr ""
-"Megjelenítés Követelések Control (szerkeszteni kell Z_CheckDebtorsControl."
-"php időszakra vonatkozó mutatni ellenőrzés összegzett"
+"Megjelenítés Követelések Control (szerkeszteni kell "
+"Z_CheckDebtorsControl.php időszakra vonatkozó mutatni ellenőrzés összegzett"
 
 #: Z_MakeNewCompany.php:17
 msgid "Make New Company Database Utility"
@@ -32522,7 +32282,7 @@ msgstr ""
 
 #: Z_MakeNewCompany.php:190
 msgid "The new company database has been created for "
-msgstr "Új bankszámla rögzítve"
+msgstr "Új bankszámla rögzítve "
 
 #: Z_MakeNewCompany.php:192
 msgid "Set Up New Company Details"
@@ -32753,8 +32513,8 @@ msgstr ""
 
 #: Z_poEditLangHeader.php:88
 msgid ""
-"Your existing translation file (messages.po) will be backed up as messages."
-"po.old"
+"Your existing translation file (messages.po) will be backed up as "
+"messages.po.old"
 msgstr ""
 "A meglévő fordítási fájl (messages.po) segíti majd, mint messages.po.old"
 
@@ -32827,11 +32587,12 @@ msgstr "Rebuild"
 
 #: Z_poRebuildDefault.php:22
 msgid "Utility page to rebuild the system default language file"
-msgstr "Segédprogram oldal újjáépíteni a rendszer alapértelmezett nyelvi fájl"
+msgstr ""
+"Segédprogram oldal újjáépíteni a rendszer alapértelmezett nyelvi fájl"
 
 #: Z_poRebuildDefault.php:32
 msgid "Rebuilding the default language file "
-msgstr "Újjáépítése az alapértelmezett nyelvi fájl"
+msgstr "Újjáépítése az alapértelmezett nyelvi fájl "
 
 #: Z_poRebuildDefault.php:36
 msgid "You should now edit the default language file header"
@@ -33113,7 +32874,7 @@ msgstr "Ellenőrizze minden számla van egy GL bejegyzés"
 #: Z_SalesIntegrityCheck.php:28 Z_SalesIntegrityCheck.php:36
 #: Z_SalesIntegrityCheck.php:68
 msgid "Invoice "
-msgstr "Számla"
+msgstr "Számla "
 
 #: Z_SalesIntegrityCheck.php:29
 msgid "No Sales Order"
@@ -33133,11 +32894,11 @@ msgstr "Ellenőrizze a gazdátlan GL bejegyzések"
 
 #: Z_SalesIntegrityCheck.php:67
 msgid "GL Entry "
-msgstr "Elem típus"
+msgstr "Elem típus "
 
 #: Z_SalesIntegrityCheck.php:68
 msgid " could not be found"
-msgstr "nem frissíthető"
+msgstr " nem frissíthető"
 
 #: Z_SalesIntegrityCheck.php:72
 msgid "Check Receipt totals"
@@ -33395,18 +33156,14 @@ msgid "Adding confirmeddate to salesorders table"
 msgstr "Hozzátéve, hogy confirmeddate salesorders táblázat"
 
 #: Z_Upgrade_3.11-4.00.php:5
-#, fuzzy
 msgid "Upgrade webERP 3.11 - 4.00"
-msgstr "Upgrade webERP 3,01-3,02"
+msgstr ""
 
 #: Z_Upgrade_3.11-4.00.php:10
-#, fuzzy
 msgid ""
 "This script will run perform any modifications to the database since v 3.11 "
 "required to allow the additional functionality in version 4.00 scripts"
 msgstr ""
-"Ez a szkript futni fog végezni minden olyan módosítást, mivel az adatbázis v "
-"3,071 szükséges ahhoz, hogy a további funkciókat a verzió 3,08 szkriptek"
 
 #: Z_UploadForm.php:8 includes/InputSerialItems.php:78
 msgid "File Upload"
@@ -33540,7 +33297,8 @@ msgid "could not be updated"
 msgstr "nem frissíthető"
 
 #: includes/DefineCartClass.php:211
-msgid "No Line Number passed to remove_from_cart, so nothing has been removed."
+msgid ""
+"No Line Number passed to remove_from_cart, so nothing has been removed."
 msgstr "No Line száma át remove_from_cart, így nem törölték."
 
 #: includes/DefineCartClass.php:222
@@ -33561,7 +33319,7 @@ msgstr "A megrendelés tételsor nem törölhető, mert"
 
 #: includes/DefineCartClass.php:232
 msgid "Removed Remaining Quantity and set Line Number "
-msgstr "Eltávolított fennmaradó mennyiség és állítsa vonal száma"
+msgstr "Eltávolított fennmaradó mennyiség és állítsa vonal száma "
 
 #: includes/DefineCartClass.php:232
 msgid "as Completed for existing Order Number"
@@ -33580,47 +33338,40 @@ msgid "Cols per sheet"
 msgstr ""
 
 #: includes/DefineLabelClass.php:25
-#, fuzzy
 msgid "Sheet height"
-msgstr "Hitel Freight"
+msgstr ""
 
 #: includes/DefineLabelClass.php:26
 msgid "Sheet width"
 msgstr ""
 
 #: includes/DefineLabelClass.php:27
-#, fuzzy
 msgid "Label height"
-msgstr "Tételsor részletek"
+msgstr ""
 
 #: includes/DefineLabelClass.php:28
 msgid "Label width"
 msgstr ""
 
 #: includes/DefineLabelClass.php:29
-#, fuzzy
 msgid "Top margin"
-msgstr "Top tételek keresése"
+msgstr ""
 
 #: includes/DefineLabelClass.php:30
-#, fuzzy
 msgid "Left margin"
-msgstr "marad"
+msgstr ""
 
 #: includes/DefineLabelClass.php:31
-#, fuzzy
 msgid "Row height"
-msgstr "Össz súly"
+msgstr ""
 
 #: includes/DefineLabelClass.php:32
-#, fuzzy
 msgid "Column width"
-msgstr "Oszlop"
+msgstr ""
 
 #: includes/DefineLabelClass.php:38
-#, fuzzy
 msgid "Vert. pos."
-msgstr "Eladó száma"
+msgstr ""
 
 #: includes/DefineLabelClass.php:39
 msgid "Horiz. pos."
@@ -33631,44 +33382,36 @@ msgid "Max text<br>length"
 msgstr ""
 
 #: includes/DefineLabelClass.php:41
-#, fuzzy
 msgid "Font size"
-msgstr "Méret"
+msgstr ""
 
 #: includes/DefineLabelClass.php:42
-#, fuzzy
 msgid "Data to display"
-msgstr "Adatok azt mutatják,"
+msgstr ""
 
 #: includes/DefineLabelClass.php:44
-#, fuzzy
 msgid "Code item"
-msgstr "A termék"
+msgstr ""
 
 #: includes/DefineLabelClass.php:46
-#, fuzzy
 msgid "Description remainder"
-msgstr "Leírás"
+msgstr ""
 
 #: includes/DefineLabelClass.php:47
-#, fuzzy
 msgid "Long description"
-msgstr "leírás"
+msgstr ""
 
 #: includes/DefineLabelClass.php:48
-#, fuzzy
 msgid "Long description remainder"
-msgstr "hosszú leírás szükséges"
+msgstr ""
 
 #: includes/DefineLabelClass.php:68
-#, fuzzy
 msgid "Failed loading XML file"
-msgstr "Termékkód"
+msgstr ""
 
 #: includes/DefineLabelClass.php:73
-#, fuzzy
 msgid "Report this problem"
-msgstr "Jelentés címe"
+msgstr ""
 
 #: includes/DefineShiptClass.php:43
 msgid ""
@@ -33689,9 +33432,8 @@ msgstr ""
 "teljesíthető"
 
 #: includes/GetConfig.php:9
-#, fuzzy
 msgid "Could not get the configuration parameters from the database because"
-msgstr "Nem sikerült letölteni kitset alkatrészeket az adatbázisból, mert"
+msgstr ""
 
 #: includes/GetConfig.php:69
 msgid ""
@@ -33927,7 +33669,7 @@ msgstr "Üzenet"
 
 #: includes/MiscFunctions.php:227 includes/MiscFunctions.php:229
 msgid "Wiki "
-msgstr "Wiki"
+msgstr "Wiki "
 
 #: includes/PDFPaymentRun_PymtFooter.php:8
 msgid "Total Due For"
@@ -33976,12 +33718,11 @@ msgstr ""
 
 #: includes/PDFPaymentRun_PymtFooter.php:216
 msgid "The SQL that failed was: "
-msgstr "SQL hiba:"
+msgstr "SQL hiba: "
 
 #: includes/UserLogin.php:44
-#, fuzzy
 msgid "Could not retrieve user details on login because"
-msgstr "Nem értelems tartomány, mert"
+msgstr ""
 
 #: includes/ConnectDB.inc:17
 msgid "The company name entered ("
@@ -34051,16 +33792,16 @@ msgstr "A rendszer az adatbázis karbanatrtó rutinokat futtatja"
 
 #: includes/ConnectDB_postgres.inc:28
 msgid ""
-"The company name entered together with the configuration in the file config."
-"php for the database user name and password do not provide the information "
-"required to connect to the database."
+"The company name entered together with the configuration in the file "
+"config.php for the database user name and password do not provide the "
+"information required to connect to the database."
 msgstr ""
 "A config.php file-ban megadott login név és a cégnév nem egyezik az "
 "adatbázisban tárolt információkkal"
 
 #: includes/ConnectDB_postgres.inc:28
 msgid " Try logging in with an alternative company name."
-msgstr "Próbáljon másik cég nevében belépni"
+msgstr " Próbáljon másik cég nevében belépni"
 
 #: includes/ConnectDB_postgres.inc:57
 msgid "DB ERROR:"
@@ -34085,7 +33826,8 @@ msgid "The report does not have any output columns"
 msgstr "A kimutatásban nincs megadva érvényes oszlop"
 
 #: includes/ConstructSQLForUserDefinedSalesReport.inc:178
-msgid "You need to set up the data columns that you wish to show in the report"
+msgid ""
+"You need to set up the data columns that you wish to show in the report"
 msgstr ""
 "Be kell állítania az adat oszlopokat, melyeket a kimutatásban látni szeretne"
 
@@ -34116,7 +33858,8 @@ msgstr "Oszlopok karbatartás"
 
 #: includes/ConstructSQLForUserDefinedSalesReport.inc:267
 #: includes/ConstructSQLForUserDefinedSalesReport.inc:293
-msgid "Calculated fields must use columns defined in the report specification"
+msgid ""
+"Calculated fields must use columns defined in the report specification"
 msgstr "A kalkulált mezők csak beállított oszlopokkal működhetnek"
 
 #: includes/ConstructSQLForUserDefinedSalesReport.inc:267
@@ -34220,9 +33963,8 @@ msgid "Can not retrieve the cost of sales GL code because"
 msgstr "Az értékesítés költségei főkönyvi kód nem elérhető, mert"
 
 #: includes/GetSalesTransGLCodes.inc:13
-#, fuzzy
 msgid "SQL to get the cost of sales GL Code"
-msgstr "SQL sor"
+msgstr ""
 
 #: includes/GetSalesTransGLCodes.inc:114
 msgid ""
@@ -34466,11 +34208,11 @@ msgstr "Napok"
 
 #: includes/PDFGrnHeader.inc:35
 msgid "GRN number "
-msgstr "Beszállítás szám"
+msgstr "Beszállítás szám "
 
 #: includes/PDFGrnHeader.inc:36
 msgid "PO number "
-msgstr "Beszállítás szám"
+msgstr "Beszállítás szám "
 
 #: includes/PDFGrnHeader.inc:43 includes/PDFStockTransferHeader.inc:35
 msgid "Item Number"
@@ -34481,9 +34223,8 @@ msgid "Date Recd"
 msgstr "Fogadva"
 
 #: includes/PDFGrnHeader.inc:46
-#, fuzzy
 msgid "Qty in Suppliers UOM"
-msgstr "Szöveg Szállító"
+msgstr ""
 
 #: includes/PDFGrnHeader.inc:47
 msgid "Qty in Stock UOM"
@@ -34631,12 +34372,12 @@ msgstr "Egyenleg"
 #: includes/PDFProfitAndLossPageHeader.inc:21
 #: includes/PDFTagProfitAndLossPageHeader.inc:21
 msgid "Profit and loss for the "
-msgstr "Nyereség / Veszteség"
+msgstr "Nyereség / Veszteség "
 
 #: includes/PDFProfitAndLossPageHeader.inc:21
 #: includes/PDFTagProfitAndLossPageHeader.inc:21
 msgid "and including "
-msgstr "Csak árajánlat"
+msgstr "Csak árajánlat "
 
 #: includes/PDFQuotationPageHeader.inc:39
 msgid "Quotation For"
@@ -34700,7 +34441,7 @@ msgstr "Negatív készlet listázása"
 
 #: includes/PDFStockTransferHeader.inc:15
 msgid "Stock transfer number "
-msgstr "Megrendelés szám"
+msgstr "Megrendelés szám "
 
 #: includes/PDFStockTransferHeader.inc:38
 msgid "Transfer To"
@@ -34857,7 +34598,8 @@ msgid "Item Does Not Exist"
 msgstr "Nincs ilyen termék"
 
 #: includes/SelectOrderItems_IntoCart.inc:63
-msgid "could not be added to the order because it has been flagged as obsolete"
+msgid ""
+"could not be added to the order because it has been flagged as obsolete"
 msgstr "nem rögzíthető tétel, mert a termék megszüntnek lett jelölve"
 
 #: includes/SelectOrderItems_IntoCart.inc:63
@@ -34890,7 +34632,8 @@ msgstr "Számla hibajelentés"
 msgid ""
 "Your user role does not have any access defined for webERP. There is an "
 "error in the security setup for this user account"
-msgstr "A felhasználói jogok beállításánál nincs megadva érvényes jogosultság."
+msgstr ""
+"A felhasználói jogok beállításánál nincs megadva érvényes jogosultság."
 
 #: includes/session.inc:104
 msgid "incorrect password"
@@ -35643,7 +35386,7 @@ msgstr "Adatbázis hiba"
 
 #: api/api_xml-rpc.php:17
 msgid "The name of the database to use for the transactions to come. "
-msgstr "Az adatbázis művelet sikertelen"
+msgstr "Az adatbázis művelet sikertelen "
 
 #: api/api_xml-rpc.php:19 api/api_xml-rpc.php:601 api/api_xml-rpc.php:632
 #: api/api_xml-rpc.php:665 api/api_xml-rpc.php:699 api/api_xml-rpc.php:734
@@ -35720,23 +35463,23 @@ msgstr "jelszóval"
 #: api/api_xml-rpc.php:2522 api/api_xml-rpc.php:2551 api/api_xml-rpc.php:2580
 #: api/api_xml-rpc.php:2609 api/api_xml-rpc.php:2642
 msgid "The weberp password associated with this user name. "
-msgstr "A weberp tartozó jelszót a felhasználói nevet."
+msgstr "A weberp tartozó jelszót a felhasználói nevet. "
 
 #: api/api_xml-rpc.php:22 api/api_xml-rpc.php:44
 msgid "This function returns an integer. "
-msgstr "A számla kódnak egész számnak kell lennie"
+msgstr "A számla kódnak egész számnak kell lennie "
 
 #: api/api_xml-rpc.php:23 api/api_xml-rpc.php:45
 msgid "Zero means the function was successful. "
-msgstr "Zero: a funkció sikeres volt."
+msgstr "Zero: a funkció sikeres volt. "
 
 #: api/api_xml-rpc.php:24 api/api_xml-rpc.php:46
 msgid "Otherwise an error code is returned. "
-msgstr "Nincs fuvarozó beállítva"
+msgstr "Nincs fuvarozó beállítva "
 
 #: api/api_xml-rpc.php:42
 msgid "This function is used to logout from the API methods. "
-msgstr "Hiba az árazás adatok elérésénél (SQL)"
+msgstr "Hiba az árazás adatok elérésénél (SQL) "
 
 #: api/api_xml-rpc.php:43
 msgid "It terminates the user's session thus freeing the server resources."
@@ -35763,7 +35506,7 @@ msgid ""
 "field to be updated. "
 msgstr ""
 "Egy sor kulcs / érték párokat, ahol a legfontosabb azonosnak kell lennie a "
-"mező nevét, hogy frissíteni kell."
+"mező nevét, hogy frissíteni kell. "
 
 #: api/api_xml-rpc.php:64 api/api_xml-rpc.php:101 api/api_xml-rpc.php:137
 #: api/api_xml-rpc.php:174 api/api_xml-rpc.php:316 api/api_xml-rpc.php:477
@@ -35772,7 +35515,7 @@ msgstr ""
 #: api/api_xml-rpc.php:2091 api/api_xml-rpc.php:2365 api/api_xml-rpc.php:2401
 #: api/api_xml-rpc.php:2437
 msgid "The field names can be found "
-msgstr "nem elérhetők az adtabázisban"
+msgstr "nem elérhetők az adtabázisban "
 
 #: api/api_xml-rpc.php:64 api/api_xml-rpc.php:101 api/api_xml-rpc.php:137
 #: api/api_xml-rpc.php:174 api/api_xml-rpc.php:316 api/api_xml-rpc.php:477
@@ -35781,7 +35524,7 @@ msgstr "nem elérhetők az adtabázisban"
 #: api/api_xml-rpc.php:2091 api/api_xml-rpc.php:2365 api/api_xml-rpc.php:2401
 #: api/api_xml-rpc.php:2437
 msgid "here "
-msgstr "Ott van"
+msgstr "Ott van "
 
 #: api/api_xml-rpc.php:65 api/api_xml-rpc.php:102 api/api_xml-rpc.php:138
 #: api/api_xml-rpc.php:175 api/api_xml-rpc.php:317 api/api_xml-rpc.php:478
@@ -35790,7 +35533,7 @@ msgstr "Ott van"
 #: api/api_xml-rpc.php:2092 api/api_xml-rpc.php:2366 api/api_xml-rpc.php:2402
 #: api/api_xml-rpc.php:2438
 msgid "and are case sensitive. "
-msgstr "és nagybetűk."
+msgstr "és nagybetűk. "
 
 #: api/api_xml-rpc.php:65 api/api_xml-rpc.php:102 api/api_xml-rpc.php:138
 #: api/api_xml-rpc.php:175 api/api_xml-rpc.php:478 api/api_xml-rpc.php:1012
@@ -35802,7 +35545,7 @@ msgid ""
 "updating the database. "
 msgstr ""
 "Az értékek a megfelelő típusú, és az api ellenőrzi őket, mielőtt az "
-"adatbázis frissítését."
+"adatbázis frissítését. "
 
 #: api/api_xml-rpc.php:66 api/api_xml-rpc.php:103 api/api_xml-rpc.php:139
 #: api/api_xml-rpc.php:176 api/api_xml-rpc.php:479 api/api_xml-rpc.php:1016
@@ -35854,7 +35597,7 @@ msgstr ""
 #: api/api_xml-rpc.php:2099 api/api_xml-rpc.php:2372 api/api_xml-rpc.php:2408
 #: api/api_xml-rpc.php:2444
 msgid "This function returns an array of integers. "
-msgstr "Ez a függvény visszaadja egy tömbben egész számokat."
+msgstr "Ez a függvény visszaadja egy tömbben egész számokat. "
 
 #: api/api_xml-rpc.php:73 api/api_xml-rpc.php:109 api/api_xml-rpc.php:146
 #: api/api_xml-rpc.php:183 api/api_xml-rpc.php:325 api/api_xml-rpc.php:358
@@ -35862,7 +35605,7 @@ msgstr "Ez a függvény visszaadja egy tömbben egész számokat."
 #: api/api_xml-rpc.php:669 api/api_xml-rpc.php:2063 api/api_xml-rpc.php:2100
 #: api/api_xml-rpc.php:2373 api/api_xml-rpc.php:2409 api/api_xml-rpc.php:2445
 msgid "If the first element is zero then the function was successful. "
-msgstr "Ha az első elem nulla, akkor a függvény sikeres volt."
+msgstr "Ha az első elem nulla, akkor a függvény sikeres volt. "
 
 #: api/api_xml-rpc.php:74 api/api_xml-rpc.php:110 api/api_xml-rpc.php:184
 #: api/api_xml-rpc.php:326 api/api_xml-rpc.php:359 api/api_xml-rpc.php:420
@@ -35872,7 +35615,7 @@ msgstr "Ha az első elem nulla, akkor a függvény sikeres volt."
 msgid ""
 "Otherwise an array of error codes is returned and no insertion takes place. "
 msgstr ""
-"Ellenkező esetben egy sor hibakódok vissza, és nem beillesztés történik."
+"Ellenkező esetben egy sor hibakódok vissza, és nem beillesztés történik. "
 
 #: api/api_xml-rpc.php:98
 msgid ""
@@ -35901,7 +35644,7 @@ msgid ""
 "Otherwise an array of error codes is returned and no modification takes "
 "place. "
 msgstr ""
-"Ellenkező esetben egy sor hibakódok vissza, és nem módosítják történik."
+"Ellenkező esetben egy sor hibakódok vissza, és nem módosítják történik. "
 
 #: api/api_xml-rpc.php:171
 msgid ""
@@ -35939,7 +35682,7 @@ msgstr ""
 msgid ""
 "If successful this function returns an array of branch codes, which may be "
 "strings or integers. "
-msgstr "felhasználók akiknek ez az alapértelezett telephely"
+msgstr "felhasználók akiknek ez az alapértelezett telephely "
 
 #: api/api_xml-rpc.php:216
 msgid "If the first element is zero then the function was successful."
@@ -35951,7 +35694,7 @@ msgstr "Ha az első elem nulla, akkor a függvény sikeres volt."
 #: api/api_xml-rpc.php:2486 api/api_xml-rpc.php:2524 api/api_xml-rpc.php:2553
 #: api/api_xml-rpc.php:2582 api/api_xml-rpc.php:2611 api/api_xml-rpc.php:2644
 msgid "Otherwise an array of error codes is returned. "
-msgstr "Ellenkező esetben egy sor hibakódok vissza."
+msgstr "Ellenkező esetben egy sor hibakódok vissza. "
 
 #: api/api_xml-rpc.php:241
 msgid ""
@@ -35973,18 +35716,19 @@ msgid ""
 "details of this branch. "
 msgstr ""
 "Siker esetén ezt a függvény egy sor kulcs / érték párokat tartalmazó "
-"részleteit ágat."
+"részleteit ágat. "
 
 #: api/api_xml-rpc.php:251
 msgid "The key will be identical with field name from the "
-msgstr "A kulcs meg fog egyezni a mező nevét a"
+msgstr "A kulcs meg fog egyezni a mező nevét a "
 
 #: api/api_xml-rpc.php:252
 msgid "custbranch table. "
-msgstr "custbranch asztal."
+msgstr "custbranch asztal. "
 
 #: api/api_xml-rpc.php:253
-msgid "All fields will be in the set regardless of whether the value was set."
+msgid ""
+"All fields will be in the set regardless of whether the value was set."
 msgstr ""
 "Minden mező lesz a készletbe függetlenül attól, hogy az értéket hoztak."
 
@@ -36000,7 +35744,7 @@ msgid ""
 "details of this customer. "
 msgstr ""
 "Siker esetén ezt a függvény egy sor kulcs / érték párokat tartalmazó "
-"részleteit ezen ügyfél."
+"részleteit ezen ügyfél. "
 
 #: api/api_xml-rpc.php:288
 msgid ""
@@ -36012,7 +35756,7 @@ msgstr ""
 
 #: api/api_xml-rpc.php:315
 msgid "The name of a database field to search on. "
-msgstr "Az adatbázis neve mező keresés."
+msgstr "Az adatbázis neve mező keresés. "
 
 #: api/api_xml-rpc.php:318
 msgid "Search Criteria"
@@ -36028,7 +35772,7 @@ msgid ""
 "strings. "
 msgstr ""
 "Ez a függvény visszaadja egy tömbben az ügyfél-azonosítók, amelyek lehetnek "
-"egész vagy szálakat."
+"egész vagy szálakat. "
 
 #: api/api_xml-rpc.php:352
 msgid "This function returns a list of currency abbreviations."
@@ -36036,7 +35780,7 @@ msgstr "Ez a függvény egy listát a valuta rövidítések."
 
 #: api/api_xml-rpc.php:357
 msgid "This function returns an array of currency abbreviations. "
-msgstr "Ez a függvény visszaadja egy tömbben valuta rövidítések."
+msgstr "Ez a függvény visszaadja egy tömbben valuta rövidítések. "
 
 #: api/api_xml-rpc.php:382
 msgid ""
@@ -36062,7 +35806,8 @@ msgstr "Ez a függvény egy kiválasztott értékesítési típusú rövidítés
 
 #: api/api_xml-rpc.php:418
 msgid "This function returns an array of sales type abbreviations. "
-msgstr "Ez a függvény egy tömbbel tér vissza az eladások típusú rövidítések."
+msgstr ""
+"Ez a függvény egy tömbbel tér vissza az eladások típusú rövidítések. "
 
 #: api/api_xml-rpc.php:443
 msgid ""
@@ -36075,7 +35820,8 @@ msgid "Sales type abbreviation"
 msgstr "Deviza rövidítés"
 
 #: api/api_xml-rpc.php:445
-msgid "A sales type abbreviation as returned by the GetSalesTypeList function."
+msgid ""
+"A sales type abbreviation as returned by the GetSalesTypeList function."
 msgstr ""
 "Az értékesítési típusú rövidítése által visszaadott GetSalesTypeList "
 "funkciót."
@@ -36114,7 +35860,8 @@ msgstr "körzetkód"
 #: api/api_xml-rpc.php:540
 msgid ""
 "A hold reason abbreviation as returned by the GetHoldReasonList function."
-msgstr "A tartsa oka rövidítése által visszaadott GetHoldReasonList funkciót."
+msgstr ""
+"A tartsa oka rövidítése által visszaadott GetHoldReasonList funkciót."
 
 #: api/api_xml-rpc.php:545
 msgid "This function returns an array of hold reason details."
@@ -36126,7 +35873,8 @@ msgstr "Ez a függvény egy listát a fizetési feltételek rövidítések."
 
 #: api/api_xml-rpc.php:574
 msgid "This function returns an array of payment terms abbreviations."
-msgstr "Ez a függvény visszaadja egy tömbben fizetési feltételek rövidítések."
+msgstr ""
+"Ez a függvény visszaadja egy tömbben fizetési feltételek rövidítések."
 
 #: api/api_xml-rpc.php:597
 msgid ""
@@ -36199,7 +35947,7 @@ msgstr "A megadott főkönyvi számla nem található az adatbázisban"
 msgid ""
 "If successful this function returns a set of key/value pairs containing the "
 "details of this stock item. "
-msgstr "felhasználók akiknek ez az alapértelezett telephely"
+msgstr "felhasználók akiknek ez az alapértelezett telephely "
 
 #: api/api_xml-rpc.php:703
 msgid ""
@@ -36253,7 +36001,7 @@ msgid ""
 "stock item. "
 msgstr ""
 "Ez a függvény visszaadja egy tömbben állomány mennyiségek helyet ennek az "
-"állománynak tétel."
+"állománynak tétel. "
 
 #: api/api_xml-rpc.php:801
 msgid ""
@@ -36290,7 +36038,7 @@ msgid ""
 "error codes if not. "
 msgstr ""
 "Ez a függvény nulla, ha a tranzakció sikeres volt, vagy egy tömb a "
-"hibakódok, ha nem."
+"hibakódok, ha nem. "
 
 #: api/api_xml-rpc.php:864
 msgid ""
@@ -36310,7 +36058,7 @@ msgid ""
 "of error codes if not. "
 msgstr ""
 "Ez a függvény egy egész számot, a mennyiségnek, vagy egy tömb a hibakódok, "
-"ha nem."
+"ha nem. "
 
 #: api/api_xml-rpc.php:895
 msgid ""
@@ -36405,19 +36153,19 @@ msgid ""
 "will be ignored. "
 msgstr ""
 "A transno kulcs által generált e felhívás, és ha az érték megadva, akkor "
-"figyelmen kívül hagyja."
+"figyelmen kívül hagyja. "
 
 #: api/api_xml-rpc.php:1014
 msgid ""
 "Two additional fields are required. \"partcode\" needs to be a genuine part "
 "number, though it appears to serve no real purpose. "
-msgstr "Két további mezők kitöltése kötelező. \\"
+msgstr "Két további mezők kitöltése kötelező. \\ "
 
 #: api/api_xml-rpc.php:1015
 msgid ""
 "\"salesarea\" also is required, though again it appears to serve no useful "
 "purpose. "
-msgstr "\\"
+msgstr "\\ "
 
 #: api/api_xml-rpc.php:1022
 msgid ""
@@ -36425,7 +36173,7 @@ msgid ""
 "second element is the invoice number. "
 msgstr ""
 "Ha az első elem nulla, akkor a függvény sikeres volt, a második elem a "
-"számla számát."
+"számla számát. "
 
 #: api/api_xml-rpc.php:1047
 msgid ""
@@ -36454,7 +36202,7 @@ msgid ""
 "will be ignored. "
 msgstr ""
 "A orderno kulcs által generált e felhívás, és ha az érték megadva, akkor "
-"figyelmen kívül hagyja."
+"figyelmen kívül hagyja. "
 
 #: api/api_xml-rpc.php:1088
 msgid ""
@@ -36483,7 +36231,7 @@ msgstr "Vissza a megrendelésekhez"
 
 #: api/api_xml-rpc.php:1151
 msgid "The orderno key must be one of these values. "
-msgstr "A szállítás dátumát a következő formában kell megadni"
+msgstr "A szállítás dátumát a következő formában kell megadni "
 
 #: api/api_xml-rpc.php:1157 api/api_xml-rpc.php:1192
 msgid ""
@@ -36499,7 +36247,7 @@ msgstr "Megrendelés sor módosítás"
 
 #: api/api_xml-rpc.php:1186
 msgid "The orderno and stkcode keys must be one of these values. "
-msgstr "A orderno és stkcode kulcsok közül kell ezeket az értékeket."
+msgstr "A orderno és stkcode kulcsok közül kell ezeket az értékeket. "
 
 #: api/api_xml-rpc.php:1216
 msgid "Account Details"
@@ -36515,7 +36263,8 @@ msgid "Account Section Details"
 msgstr "Számlaosztályok"
 
 #: api/api_xml-rpc.php:1246
-msgid "An array of index/value items describing the account section to insert."
+msgid ""
+"An array of index/value items describing the account section to insert."
 msgstr "Tömb index / érték tételek leírja a számla részben beszúrni."
 
 #: api/api_xml-rpc.php:1274
@@ -36602,7 +36351,8 @@ msgstr ""
 
 #: api/api_xml-rpc.php:1455 api/api_xml-rpc.php:1486
 msgid "This function returns an array of sales area details."
-msgstr "Ez a függvény visszaadja egy tömbben értékesítési terület részleteket."
+msgstr ""
+"Ez a függvény visszaadja egy tömbben értékesítési terület részleteket."
 
 #: api/api_xml-rpc.php:1479
 msgid ""
@@ -36626,7 +36376,8 @@ msgstr "Eladási helyek"
 
 #: api/api_xml-rpc.php:1511
 msgid "An array of index/value items describing the sales area to insert."
-msgstr "Tömb index / érték tételek leírja az értékesítési területen beszúrni."
+msgstr ""
+"Tömb index / érték tételek leírja az értékesítési területen beszúrni."
 
 #: api/api_xml-rpc.php:1539
 msgid "This function returns a list of salesman codes."
@@ -36686,7 +36437,8 @@ msgstr "Adó típus"
 
 #: api/api_xml-rpc.php:1688
 msgid "A tax group ID as returned by the GetTaxgroupList function."
-msgstr "Egy adó csoportazonosító által visszaadott a GetTaxgroupList funkciót."
+msgstr ""
+"Egy adó csoportazonosító által visszaadott a GetTaxgroupList funkciót."
 
 #: api/api_xml-rpc.php:1693
 msgid "This function returns an array of tax group details."
@@ -36712,7 +36464,8 @@ msgstr "Vevő név"
 
 #: api/api_xml-rpc.php:1747
 msgid "A customer type ID as returned by the GetCustomerTypeList function."
-msgstr "Egy ügyfél ID típusú által visszaadott a GetCustomerTypeList funkciót."
+msgstr ""
+"Egy ügyfél ID típusú által visszaadott a GetCustomerTypeList funkciót."
 
 #: api/api_xml-rpc.php:1752
 msgid "This function returns an array of customer type details."
@@ -36723,30 +36476,29 @@ msgid "Category Details"
 msgstr "Vevő név"
 
 #: api/api_xml-rpc.php:1777
-msgid "An array of index/value items describing the stock category to insert."
-msgstr "Tömb index / érték tételeket leíró állomány kategóriába beilleszteni."
+msgid ""
+"An array of index/value items describing the stock category to insert."
+msgstr ""
+"Tömb index / érték tételeket leíró állomány kategóriába beilleszteni."
 
 #: api/api_xml-rpc.php:1806
-msgid "An array of index/value items describing the stock category to modify."
+msgid ""
+"An array of index/value items describing the stock category to modify."
 msgstr "Tömb index / érték tételeket leíró állomány kategóriában módosítani."
 
 #: api/api_xml-rpc.php:1833
-#, fuzzy
 msgid "This function returns a list of stock category abbreviations."
-msgstr "Ez a függvény egy kiválasztott értékesítési típusú rövidítések."
+msgstr ""
 
 #: api/api_xml-rpc.php:1838
-#, fuzzy
 msgid "If successful, this function returns an array of stock category ids. "
-msgstr "Siker esetén ezt a függvény egy tömböt szállító azonosítók."
+msgstr ""
 
 #: api/api_xml-rpc.php:1839
-#, fuzzy
 msgid ""
 "Otherwise an array of error codes is returned and no stock categories are "
 "returned. "
 msgstr ""
-"Ellenkező esetben egy sor hibakódok vissza, és nem beillesztés történik."
 
 #: api/api_xml-rpc.php:1861
 msgid ""
@@ -36868,7 +36620,7 @@ msgid ""
 "details of this supplier. "
 msgstr ""
 "Siker esetén ezt a függvény egy sor kulcs / érték párokat tartalmazó "
-"részleteit beszállító."
+"részleteit beszállító. "
 
 #: api/api_xml-rpc.php:2133
 msgid ""
@@ -36901,7 +36653,7 @@ msgstr ""
 
 #: api/api_xml-rpc.php:2167
 msgid "If successful this function returns an array of supplier ids. "
-msgstr "Siker esetén ezt a függvény egy tömböt szállító azonosítók."
+msgstr "Siker esetén ezt a függvény egy tömböt szállító azonosítók. "
 
 #: api/api_xml-rpc.php:2194
 msgid "This function is used to retrieve the details of stock batches."
@@ -36909,12 +36661,13 @@ msgstr "Hiba az árazás adatok elérésénél (SQL)"
 
 #: api/api_xml-rpc.php:2203
 msgid "Returns a two dimensional array of stock batch details. "
-msgstr "Visszaadja a két dimenziós tömb állomány tétel részleteket."
+msgstr "Visszaadja a két dimenziós tömb állomány tétel részleteket. "
 
 #: api/api_xml-rpc.php:2204
-msgid "The fields returned are stockid, loccode, batchno, quantity, itemcost. "
+msgid ""
+"The fields returned are stockid, loccode, batchno, quantity, itemcost. "
 msgstr ""
-"A visszaadott mezők vannak stockid, loccode, batchno, mennyiség, itemcost."
+"A visszaadott mezők vannak stockid, loccode, batchno, mennyiség, itemcost. "
 
 #: api/api_xml-rpc.php:2230
 msgid ""
@@ -36938,7 +36691,7 @@ msgstr "Tranzakciók"
 
 #: api/api_xml-rpc.php:2243 api/api_xml-rpc.php:2291 api/api_xml-rpc.php:2485
 msgid "If successful this function returns 0. "
-msgstr "Siker esetén ezt a függvény 0."
+msgstr "Siker esetén ezt a függvény 0. "
 
 #: api/api_xml-rpc.php:2274
 msgid "Issues stock to a given work order from the given location"
@@ -36982,7 +36735,7 @@ msgstr ""
 
 #: api/api_xml-rpc.php:2335
 msgid "If successful this function returns an array of work order numbers. "
-msgstr "Siker esetén ezt a függvény egy tömböt a munka megrendelési számot."
+msgstr "Siker esetén ezt a függvény egy tömböt a munka megrendelési számot. "
 
 #: api/api_xml-rpc.php:2362
 msgid ""
@@ -37026,7 +36779,7 @@ msgid ""
 "format. "
 msgstr ""
 "Siker esetén ezt a függvény egy karakterláncot tartalmazza az "
-"alapértelmezett dátumformátum."
+"alapértelmezett dátumformátum. "
 
 #: api/api_xml-rpc.php:2547
 msgid "Returns the webERP default location"
@@ -37035,7 +36788,7 @@ msgstr "Visszaadja a webERP alapértelmezett hely"
 #: api/api_xml-rpc.php:2552
 msgid ""
 "If successful this function returns a string contain the default location. "
-msgstr "felhasználók akiknek ez az alapértelezett telephely"
+msgstr "felhasználók akiknek ez az alapértelezett telephely "
 
 #: api/api_xml-rpc.php:2576
 msgid "Returns the webERP default price list"
@@ -37047,7 +36800,7 @@ msgid ""
 "code. "
 msgstr ""
 "Siker esetén ezt a függvény egy karakterláncot tartalmazza az "
-"alapértelmezett árlista kódot."
+"alapértelmezett árlista kódot. "
 
 #: api/api_xml-rpc.php:2605
 msgid "Returns the webERP currency code"
@@ -37059,7 +36812,7 @@ msgid ""
 "code. "
 msgstr ""
 "Siker esetén ezt a függvény egy karakterláncot tartalmazza az "
-"alapértelmezett pénznem kódját."
+"alapértelmezett pénznem kódját. "
 
 #: api/api_xml-rpc.php:2634
 msgid ""
@@ -37082,13 +36835,13 @@ msgid ""
 "The ID of the stock item for which the value of the above property is "
 "required. "
 msgstr ""
-"Az azonosító állomány elem, amelyre az értéke a fenti ingatlan van szükség."
+"Az azonosító állomány elem, amelyre az értéke a fenti ingatlan van szükség. "
 
 #: api/api_xml-rpc.php:2643
 msgid ""
 "If successful this function returns zero, and the value of the requested "
 "property. "
-msgstr "felhasználók akiknek ez az alapértelezett telephely"
+msgstr "felhasználók akiknek ez az alapértelezett telephely "
 
 #: api/api_xml-rpc.php:2670
 msgid "Returns (possibly translated) error text from error codes"
@@ -37100,7 +36853,7 @@ msgstr "Hiba"
 
 #: api/api_xml-rpc.php:2672
 msgid "An array of error codes to change into text messages. "
-msgstr "Tömb hibakódok megváltoztatni a szöveges üzenetek."
+msgstr "Tömb hibakódok megváltoztatni a szöveges üzenetek. "
 
 #: api/api_xml-rpc.php:2673
 msgid ""
@@ -37108,7 +36861,7 @@ msgid ""
 "error code in element 0 and the error string in element 1. "
 msgstr ""
 "Egy sor két elem tömb, egy egy hibakódot. A második tömb a hibakódok elem 0 "
-"és a hibás sztringet elem 1."
+"és a hibás sztringet elem 1. "
 
 #: api/api_xml-rpc.php:3022
 msgid "Parameters"
@@ -37118,32 +36871,14 @@ msgstr "Fizetési határidő"
 msgid "Return Value"
 msgstr "Alapértelmezett csomagjegyzék"
 
-#~ msgid "Reducing Balance"
-#~ msgstr "Próbamérleg"
+#~ msgid "Review Components"
+#~ msgstr "Alkatrészek megtekintése"
 
-#~ msgid "Annual Depreciation Percentage"
-#~ msgstr "Éves értékcsökkenési százalék"
+#~ msgid "The selected message line has been deleted"
+#~ msgstr "A kiválasztott sor törölve"
 
-#~ msgid "Sale of Asset account"
-#~ msgstr "Válasszon egy Főkönyvi számlát"
-
-#~ msgid "Fixed Asset Item Maintenance"
-#~ msgstr "Helyszínek karbantartás"
-
-#~ msgid "Manufactured or Purchased"
-#~ msgstr "Gyártott"
-
-#~ msgid "Depreciation Properties"
-#~ msgstr "Bevét típus"
-
-#~ msgid "Cannot update the asset manager for this amount because"
-#~ msgstr "Nem módosítható az alapértelmezett szállítás, mert"
-
-#~ msgid "The SQL that failed to update the asset manger record was"
-#~ msgstr "Sikertelen főkönyvi rekord felvitel (SQL)"
-
-#~ msgid "Update Journal"
-#~ msgstr "Vevő módosítás"
+#~ msgid "Could not add the chart details for the new account"
+#~ msgstr "A számlatükör információk nem rögzíthetők"
 
 #~ msgid "This page can only be opened if a purchase order has been selected"
 #~ msgstr "Csak kiválasztott szállitói megrendeléssel indítható az oldal"
@@ -37151,128 +36886,23 @@ msgstr "Alapértelmezett csomagjegyzék"
 #~ msgid "Please select a purchase order first"
 #~ msgstr "Előszőr válasszon szállítói megrendelést"
 
-#~ msgid "List Asset properties"
-#~ msgstr "gyártások kapcsolatban ezzel a telephellyel"
-
-#~ msgid "No GL receipts retrieved for batch number"
-#~ msgstr "Nem GL bevételeket le a gyártási tétel száma"
-
-#~ msgid ""
-#~ "The SQL used to get the GL receipt information that no any record "
-#~ "retrieved"
-#~ msgstr "SQL üzenet"
-
-#~ msgid "New Order"
-#~ msgstr "Új megrendelés"
-
-#~ msgid "You do not have permission to cancel this purchase order"
-#~ msgstr "Adjon meg egy beszállítást ehhez a megrendeléshez"
-
-#~ msgid "The creation of the new order has been cancelled"
-#~ msgstr "A kedvezmény mátrix rekord törölve"
-
-#~ msgid "Cancel and Delete Order"
-#~ msgstr "Mégsem törlése és Rend"
-
-#~ msgid "The price entered was not numeric"
-#~ msgstr "Az ár be nem numerikus"
-
-#~ msgid "no changes have been made to the database"
-#~ msgstr "nincs változások történtek az adatbázisba"
-
-#~ msgid "The lead time entered was not numeric"
-#~ msgstr "Az átfutási idő be nem numerikus"
-
-#~ msgid "View Periods"
-#~ msgstr "Nézd időszakok"
-
-#~ msgid "Search Asset Types"
-#~ msgstr "Bevét típus"
-
-#~ msgid "Enter Credit Against Goods Recd"
-#~ msgstr "Adja Credit áruk ellen Recd"
-
-#~ msgid "Enter Against Contracts"
-#~ msgstr "Készlet szám"
-
-#~ msgid "Enter Credit Against Shipment"
-#~ msgstr "Adja Credit ellen szállítás"
-
-#~ msgid "Enter Against Goods Received"
-#~ msgstr "Szállítói visszáru"
-
-#~ msgid "Enter Against Shipments"
-#~ msgstr "Szállítói visszáru"
-
-#~ msgid "The SQL COMMIT failed because"
-#~ msgstr "Az SQL hibát jelzett"
-
-#~ msgid "The SQL COMMIT failed"
-#~ msgstr "Az SQL hibát jelzett"
-
-#~ msgid "The shipment reference must be numeric"
-#~ msgstr "A szállítást hivatkozni kell numerikus"
-
-#~ msgid "Acquired After"
-#~ msgstr "Száll. dátum"
-
-#~ msgid "and Before"
-#~ msgstr "és"
-
-#~ msgid "Stock Details"
-#~ msgstr "Bank adatok"
-
-#~ msgid "Review Components"
-#~ msgstr "Alkatrészek megtekintése"
-
-#~ msgid "FreightCost"
-#~ msgstr "Fuvarköltség"
-
-#~ msgid "Demand Work Orders"
-#~ msgstr "Új megrendelés"
-
-#~ msgid "The selected message line has been deleted"
-#~ msgstr "A kiválasztott sor törölve"
-
-#~ msgid "Amend Factor"
-#~ msgstr "Küldés"
-
-#~ msgid "items referring to this asset category code"
-#~ msgstr "felhasználók hivatkoznak erre a telephelyre/vevőre"
-
-#~ msgid "Cannot delete this asset category because it is used by the sales"
-#~ msgstr "Nem törölhető ez a hely, mert üzemi adatok hivatkoznak rá"
-
-#~ msgid ""
-#~ "Cannot delete this asset category because it is used by the cost of sales"
-#~ msgstr "Nem törölhető ez a hely, mert gyártások hivatkoznak rá"
-
-#~ msgid "Asset Category Code"
-#~ msgstr "Kedvezmény kategória kód"
-
-#~ msgid "External Depreciation"
-#~ msgstr "Tétel leírás"
-
-#~ msgid "Could not add the chart details for the new account"
-#~ msgstr "A számlatükör információk nem rögzíthetők"
-
-#~ msgid "Return"
-#~ msgstr "Jelentés"
-
 #~ msgid "reportname"
 #~ msgstr "Jelentés neve"
 
-#~ msgid "status"
-#~ msgstr "Állapot"
+#~ msgid "Line Details"
+#~ msgstr "Tételsor részletek"
+
+#~ msgid "Enter a General Ledger Payment"
+#~ msgstr "Adjon meg egy főkönyvi kifizetési hivatkozást"
+
+#~ msgid "SQL to get the cost of sales GL Codes for sales and discounts"
+#~ msgstr "SQL sor"
 
 #~ msgid "The transaction was not emailed"
 #~ msgstr "A tranzakció elküldése sikertelen"
 
 #~ msgid "Enable Warehouse Management"
 #~ msgstr "Raktár kezelés engedélyezve"
-
-#~ msgid "There were no stock transfer details to print"
-#~ msgstr "Nincs készlet hely megadva"
 
 #~ msgid "Bank Account Deposits Matching"
 #~ msgstr "Bankszámla befizetések egyeztetés"
@@ -37285,9 +36915,6 @@ msgstr "Alapértelmezett csomagjegyzék"
 
 #~ msgid "Date Of Dispatch"
 #~ msgstr "Szállítás dátuma"
-
-#~ msgid "Preview "
-#~ msgstr "Előző"
 
 #~ msgid ""
 #~ "To enter an order select customer transactions, then sales order entry"
@@ -37306,35 +36933,11 @@ msgstr "Alapértelmezett csomagjegyzék"
 #~ msgid "box"
 #~ msgstr "csomag"
 
-#~ msgid "Create a Customers Delivery note"
-#~ msgstr "Jóváírás rögzítés"
-
-#~ msgid "Select a sales order to deliver"
-#~ msgstr "Válasszon megrendelőt a számlázáshoz"
-
-#~ msgid "Total Volume<br>"
-#~ msgstr "Össz térfogat"
-
-#~ msgid "Total for this Delivery"
-#~ msgstr "Ez a szállítás"
-
-#~ msgid "Recalculate"
-#~ msgstr "Allokált"
-
-#~ msgid "Print delivery note number "
-#~ msgstr "Jóváírás száma"
-
 #~ msgid "Show Balance Sheet"
 #~ msgstr "Egyenleg kimutatást készít"
 
-#~ msgid "Show Statement of Profit and Loss"
-#~ msgstr "Eredménykimutatás készítés"
-
 #~ msgid "Order Status Reports (Print)"
 #~ msgstr "Megrendelések állapotlista (Nyomtat)"
-
-#~ msgid "Add A Purchase Order"
-#~ msgstr "Vissza a Szállítói megrendelésekhez"
 
 #~ msgid "Bills Of Material Listing"
 #~ msgstr "Anyagszámlák listázás"
@@ -37353,124 +36956,11 @@ msgstr "Alapértelmezett csomagjegyzék"
 #~ msgid "Enter a Supplier Payment"
 #~ msgstr "Adjon meg egy Szállítói kifizetést"
 
-#~ msgid "Lookup Address"
-#~ msgstr "Bank cím"
-
-#~ msgid "Could not print the cheque"
-#~ msgstr "Nem frissíthető a rekord mert"
-
-#~ msgid "Select Delivery note To Print"
-#~ msgstr "Válasszon szállítást"
-
-#~ msgid ""
-#~ "There was a problem retrieving the delivery note header details for "
-#~ "delivery note"
-#~ msgstr "Hiba a rendelés fej letöltésénél. Megrendelés száma:"
-
-#~ msgid "Print Delivery Note Error"
-#~ msgstr "Készletértékelés hiba"
-
-#~ msgid "Delivery Note No"
-#~ msgstr "Szállítás"
-
-#~ msgid "Delivery Note for order"
-#~ msgstr "Szállítás (bevételezés)"
-
-#~ msgid ""
-#~ "There was a problem retrieving the delivery note details for Delivery Note"
-#~ msgstr "Hiba a tételsor elérésénél a következő megrendelésnél"
-
-#~ msgid "A delivery note cannot be printed"
-#~ msgstr "Csomagkisérő nyomtatás - előnyomott papírra"
-
-#~ msgid "Inovoiced"
-#~ msgstr "Számlázva"
-
-#~ msgid "Factor Comapny"
-#~ msgstr "Készlet helyen"
-
-#~ msgid "iso-8859-1"
-#~ msgstr "ISO-8859-2"
-
-#~ msgid "Search for Customers:"
-#~ msgstr "és a vevő"
-
-#~ msgid "Search for Suppliers:"
-#~ msgstr "Szállító választás"
-
-#~ msgid "Cash Flow Report"
-#~ msgstr "Felhasználói jelentések"
-
-#~ msgid "Transaction"
-#~ msgstr "Tranzakciók"
-
-#~ msgid "Transactions from"
-#~ msgstr "Tranzakciók"
-
 #~ msgid "Text in the"
 #~ msgstr "Szöveg a"
 
 #~ msgid "The commit database transaction failed"
 #~ msgstr "Adatbázis művelet sikertelen"
-
-#~ msgid "Inventory Issues"
-#~ msgstr "Új termék"
-
-#~ msgid "Stock Issue Form"
-#~ msgstr "Termék kategória"
-
-#~ msgid "Narrative: "
-#~ msgstr "Szöveg"
-
-#~ msgid "Date of Issue: "
-#~ msgstr "Dátum rögzítve"
-
-#~ msgid ""
-#~ "Customer name keywords have been used in preference to customer code or "
-#~ "phone  entered"
-#~ msgstr ""
-#~ "Inkább a vevő nevében használjon kulcsszavakat, a vevő kódot pontosan "
-#~ "kell megadni"
-
-#~ msgid ""
-#~ "Customer code has been used in preference to the customer phone entered"
-#~ msgstr ""
-#~ "Inkább a vevő nevében használjon kulcsszavakat, a vevő kódot pontosan "
-#~ "kell megadni"
-
-#~ msgid "Customer Branch selection"
-#~ msgstr "Vevői telephelyek"
-
-#~ msgid "Stock Issues"
-#~ msgstr "Termékkód"
-
-#~ msgid "Issued From Stock At Location"
-#~ msgstr "Készlet hely beállítás"
-
-#~ msgid "No Tags have been set up yet"
-#~ msgstr "Nincs főkönyvi számla beállítva"
-
-#~ msgid "payments cannot be analysed against a tag until the tag is set up"
-#~ msgstr ""
-#~ "a kifizetések főkönyvi könyvelése nem működik amíg nem állítja be "
-#~ "helyesen a főkönyvi számlát"
-
-#~ msgid "Enter Stock Issue"
-#~ msgstr "Készlet szám"
-
-#~ msgid "postings cannot be analysed against a tag until the ag is set up"
-#~ msgstr ""
-#~ "a kifizetések főkönyvi könyvelése nem működik amíg nem állítja be "
-#~ "helyesen a főkönyvi számlát"
-
-#~ msgid "Tag Reference"
-#~ msgstr "Adó"
-
-#~ msgid "INVOICE"
-#~ msgstr "NINCS SZÁMLA"
-
-#~ msgid "Cust. Order No"
-#~ msgstr "Vevő rendelés"
 
 #~ msgid "Current bank account balance as at"
 #~ msgstr "Megadott bankszámla egyenleg"
@@ -37482,30 +36972,9 @@ msgstr "Alapértelmezett csomagjegyzék"
 #~ msgstr "Rövidítés"
 
 #~ msgid ""
-#~ "The debtor receipt or credit note transaction could not be modified for "
-#~ "the new allocation and exchange difference because"
+#~ "The debtor receipt or credit note transaction could not be modified for the "
+#~ "new allocation and exchange difference because"
 #~ msgstr "A vevői pénzügyi teljesítés tranzakció nem módosítható, mert"
-
-#~ msgid "Could not update vtiger"
-#~ msgstr "Fizetési mód nem frissíthető"
-
-#~ msgid "The SQL that was used to update the vtiger CRM entity"
-#~ msgstr "SQL üzenet"
-
-#~ msgid "The new vtiger CRM entiry could not be added because"
-#~ msgstr "Vevő rekord nem rögzíthető, mer"
-
-#~ msgid "The SQL that was used to add the CRM entity"
-#~ msgstr "SQL üzenet"
-
-#~ msgid "could not be added"
-#~ msgstr "nem frissíthető"
-
-#~ msgid "The SQL that was used to add the CRM Sequence"
-#~ msgstr "SQL üzenet"
-
-#~ msgid "could not be added\t"
-#~ msgstr "nem frissíthető"
 
 #~ msgid "GL"
 #~ msgstr "Főkönyv"
@@ -37535,14 +37004,471 @@ msgstr "Alapértelmezett csomagjegyzék"
 #~ msgid ""
 #~ "The script must be called with a valid transaction type and transaction "
 #~ "number to review the general ledger postings for"
-#~ msgstr ""
-#~ "A lekérdezést érvényes tranzakció típussal és kóddal kell elindítani"
+#~ msgstr "A lekérdezést érvényes tranzakció típussal és kóddal kell elindítani"
 
 #~ msgid "The transaction number the script was called with is requesting a"
 #~ msgstr "A megadott tranzakció számhoz lekérdezés"
 
 #~ msgid "The transactions for"
 #~ msgstr "Tranzakció innen"
+
+#~ msgid "No general ledger transactions have been created for"
+#~ msgstr "Nincs elérhető főkönyvi tranzakció"
+
+#~ msgid "Creditor Balances At A Prior Month End"
+#~ msgstr "Követelők egyenlege a hónap végéig"
+
+#~ msgid "User Accounts"
+#~ msgstr "Felhasználók"
+
+#~ msgid "Bank Payments Matching"
+#~ msgstr "Bank kifizetés egyeztetés"
+
+#~ msgid "demo"
+#~ msgstr "demo"
+
+#~ msgid " Knowlege Base"
+#~ msgstr " Tudástár"
+
+#~ msgid "An error occurred in getting the first period number in the database"
+#~ msgstr "Hiba az első időszak szám elérésénél"
+
+#~ msgid ""
+#~ "An error occurred in inserting periods before the first period to accomodate "
+#~ "back dated transactions"
+#~ msgstr "Hiba az időszak rögzítésénél.Túl korai időszak"
+
+#~ msgid "Select a different sales order to invoice"
+#~ msgstr "Válasszon másik megrendelőt a számlázáshoz"
+
+#~ msgid "Disallow invoices"
+#~ msgstr "Számla visszavonás"
+
+#~ msgid "Custmomer"
+#~ msgstr "vevő"
+
+#~ msgid ""
+#~ "There are no sales types/price lists currently defined - go to the setup tab "
+#~ "of the main menu and set at least one up first"
+#~ msgstr ""
+#~ "Nincs eladási típus/árszint beálltva. A beállítások menüpont alatt végezze "
+#~ "el a beállítást"
+
+#~ msgid ""
+#~ "Be careful there is no second warning if you hit the DELETE button below"
+#~ msgstr "Óvatosan, nincs több figyelmeztetés, ha megnyomja a TÖRLÉS gombot"
+
+#~ msgid "Cost diff on"
+#~ msgstr "Különbség"
+
+#~ msgid "The standard cost difference GL posting could not be inserted because"
+#~ msgstr ""
+#~ "A megadott szállíási költség különbség főkönyvi feladás sikertelen, mert"
+
+#~ msgid "Modify/Add/Delete Customers/branches and Special pricing"
+#~ msgstr "Új/Módosítás/Törlés vevő/telephely és árszint"
+
+#~ msgid "Select Supplier For Transactions and Inquiries"
+#~ msgstr "Válasszon szállítót a tranzakciók lekérdezéshez"
+
+#~ msgid "Modify Or Delete A Inventory Item Or Item Pricing"
+#~ msgstr "Módosít/töröl egy terméket/ Árazás"
+
+#~ msgid "does not refer to a currently existing item of"
+#~ msgstr "nem eggyezik az aktuális tétellel"
+
+#~ msgid "Main  Menu"
+#~ msgstr "Főmenü"
+
+#~ msgid "Annual Depreciation Percentage"
+#~ msgstr "Éves értékcsökkenési százalék"
+
+#~ msgid "Asset GL"
+#~ msgstr "Asset GL"
+
+#~ msgid "BS Depn GL"
+#~ msgstr "BS Depn GL"
+
+#~ msgid "Fixed Asset GL Code"
+#~ msgstr "Állóeszköz GL kód"
+
+#~ msgid "You have assets in this location location so cannot be removed"
+#~ msgstr "Van eszközök ezen a helyen helyet, így nem lehet eltávolítani"
+
+#~ msgid "No GL receipts retrieved for batch number"
+#~ msgstr "Nem GL bevételeket le a gyártási tétel száma"
+
+#~ msgid ""
+#~ "This order cannot be cancelled because some of it has already been received"
+#~ msgstr "Ezt a sorrendet nem lehet törölni, mert néhány korábban már kapott"
+
+#~ msgid "You do not have the authority to raise Purchase Orders for "
+#~ msgstr "Nem kell a hatóság emelni a beszerzési rendelések "
+
+#~ msgid "You can setup authorisations "
+#~ msgstr "Beállíthatja engedélyek "
+
+#~ msgid "Cancel and Delete Order"
+#~ msgstr "Mégsem törlése és Rend"
+
+#~ msgid ""
+#~ "The description of the item being purchase is required where a non-stock "
+#~ "item is being ordered"
+#~ msgstr ""
+#~ "A leírás az elem vásárlási van szükség, ha egy nem-állomány tétel alatt "
+#~ "rendelhető"
+
+#~ msgid "The price entered was not numeric"
+#~ msgstr "Az ár be nem numerikus"
+
+#~ msgid "no changes have been made to the database"
+#~ msgstr "nincs változások történtek az adatbázisba"
+
+#~ msgid "The lead time entered was not numeric"
+#~ msgstr "Az átfutási idő be nem numerikus"
+
+#~ msgid "View Periods"
+#~ msgstr "Nézd időszakok"
+
+#~ msgid "To Period"
+#~ msgstr "Időszakra"
+
+#~ msgid "does not have stock available for transfer."
+#~ msgstr "nincs árukészlet átadása."
+
+#~ msgid "Enter Credit Against Goods Recd"
+#~ msgstr "Adja Credit áruk ellen Recd"
+
+#~ msgid "Enter General Ledger Analysis"
+#~ msgstr "Adja Főkönyv elemzése"
+
+#~ msgid "Enter Credit Against Shipment"
+#~ msgstr "Adja Credit ellen szállítás"
+
+#~ msgid ""
+#~ "The invoice as entered cannot be processed because the total amount of the "
+#~ "invoice is less than or equal to 0"
+#~ msgstr ""
+#~ "A számlán szereplő nem lehet feldolgozni, mert a teljes számla összege "
+#~ "kevesebb, vagy egyenlő 0"
+
+#~ msgid "Invoices are expected to have a charge"
+#~ msgstr "Számlák várhatóan díjat"
+
+#~ msgid "The shipment reference must be numeric"
+#~ msgstr "A szállítást hivatkozni kell numerikus"
+
+#~ msgid "Notes for Customer: <b>"
+#~ msgstr "és a vevő"
+
+#~ msgid "Notes for Customer Type: <b>"
+#~ msgstr "és a vevő"
+
+#~ msgid "Update Order Lines"
+#~ msgstr "Megrendelés sor módosítás"
+
+#~ msgid "Reducing Balance"
+#~ msgstr "Próbamérleg"
+
+#~ msgid "Sale of Asset account"
+#~ msgstr "Válasszon egy Főkönyvi számlát"
+
+#~ msgid "Balance Sheet Depreciation GL Code"
+#~ msgstr "Egyeneg kimutatás"
+
+#~ msgid "Fixed Asset Item Maintenance"
+#~ msgstr "Helyszínek karbantartás"
+
+#~ msgid "Manufactured or Purchased"
+#~ msgstr "Gyártott"
+
+#~ msgid "Depreciation Properties"
+#~ msgstr "Bevét típus"
+
+#~ msgid "Cannot update the asset manager for this amount because"
+#~ msgstr "Nem módosítható az alapértelmezett szállítás, mert"
+
+#~ msgid "The SQL that failed to update the asset manger record was"
+#~ msgstr "Sikertelen főkönyvi rekord felvitel (SQL)"
+
+#~ msgid "Update Journal"
+#~ msgstr "Vevő módosítás"
+
+#~ msgid "List Asset properties"
+#~ msgstr "gyártások kapcsolatban ezzel a telephellyel"
+
+#~ msgid "Add a new Asset Type"
+#~ msgstr "Új vevő"
+
+#~ msgid "Select an Asset Type"
+#~ msgstr "Új vevő"
+
+#~ msgid ""
+#~ "The SQL used to get the GL receipt information that no any record retrieved"
+#~ msgstr "SQL üzenet"
+
+#~ msgid "New Order"
+#~ msgstr "Új megrendelés"
+
+#~ msgid "You do not have permission to cancel this purchase order"
+#~ msgstr "Adjon meg egy beszállítást ehhez a megrendeléshez"
+
+#~ msgid "The creation of the new order has been cancelled"
+#~ msgstr "A kedvezmény mátrix rekord törölve"
+
+#~ msgid "Please Consult your system administrator for more information"
+#~ msgstr "keresse meg a rendszeradministrátor"
+
+#~ msgid "Search Asset Types"
+#~ msgstr "Bevét típus"
+
+#~ msgid "for the item"
+#~ msgstr "A termék"
+
+#~ msgid "Enter Against Contracts"
+#~ msgstr "Készlet szám"
+
+#~ msgid "Enter Against Goods Received"
+#~ msgstr "Szállítói visszáru"
+
+#~ msgid "Enter Against Shipments"
+#~ msgstr "Szállítói visszáru"
+
+#~ msgid "The SQL COMMIT failed because"
+#~ msgstr "Az SQL hibát jelzett"
+
+#~ msgid "The SQL COMMIT failed"
+#~ msgstr "Az SQL hibát jelzett"
+
+#~ msgid "Acquired After"
+#~ msgstr "Száll. dátum"
+
+#~ msgid "and Before"
+#~ msgstr "és"
+
+#~ msgid "Stock Details"
+#~ msgstr "Bank adatok"
+
+#~ msgid "FreightCost"
+#~ msgstr "Fuvarköltség"
+
+#~ msgid "Demand Work Orders"
+#~ msgstr "Új megrendelés"
+
+#~ msgid "Amend Factor"
+#~ msgstr "Küldés"
+
+#~ msgid "Could not insert the new asset category"
+#~ msgstr "Nem rögzíthető az alkatrész, mert"
+
+#~ msgid "A new asset category record has been added for"
+#~ msgstr "Az új hely rekord rögzítve"
+
+#~ msgid ""
+#~ "Cannot delete this asset category because stock items have been created "
+#~ "using this asset category"
+#~ msgstr "Nem törölhető ez a hely, mert készletmozgások hivatkoznak rá"
+
+#~ msgid "items referring to this asset category code"
+#~ msgstr "felhasználók hivatkoznak erre a telephelyre/vevőre"
+
+#~ msgid "Cannot delete this asset category because it is used by the sales"
+#~ msgstr "Nem törölhető ez a hely, mert üzemi adatok hivatkoznak rá"
+
+#~ msgid ""
+#~ "Cannot delete this asset category because it is used by the cost of sales"
+#~ msgstr "Nem törölhető ez a hely, mert gyártások hivatkoznak rá"
+
+#~ msgid "The asset category"
+#~ msgstr "Kedvezmény kategória"
+
+#~ msgid "Asset Category Code"
+#~ msgstr "Kedvezmény kategória kód"
+
+#~ msgid "External Depreciation"
+#~ msgstr "Tétel leírás"
+
+#~ msgid "Internal Depreciation"
+#~ msgstr "Tétel leírás"
+
+#~ msgid "Search for a Fixed Asset"
+#~ msgstr "Szállító választás"
+
+#~ msgid "Return"
+#~ msgstr "Jelentés"
+
+#~ msgid "status"
+#~ msgstr "Állapot"
+
+#~ msgid "There were no stock transfer details to print"
+#~ msgstr "Nincs készlet hely megadva"
+
+#~ msgid "Preview "
+#~ msgstr "Előző "
+
+#~ msgid "Create a Customers Delivery note"
+#~ msgstr "Jóváírás rögzítés"
+
+#~ msgid "Select a sales order to deliver"
+#~ msgstr "Válasszon megrendelőt a számlázáshoz"
+
+#~ msgid "Total Volume<br>"
+#~ msgstr "Össz térfogat"
+
+#~ msgid "Total for this Delivery"
+#~ msgstr "Ez a szállítás"
+
+#~ msgid "Recalculate"
+#~ msgstr "Allokált"
+
+#~ msgid "Print delivery note number "
+#~ msgstr "Jóváírás száma "
+
+#~ msgid "Show Statement of Profit and Loss"
+#~ msgstr "Eredménykimutatás készítés"
+
+#~ msgid "Add A Purchase Order"
+#~ msgstr "Vissza a Szállítói megrendelésekhez"
+
+#~ msgid "Lookup Address"
+#~ msgstr "Bank cím"
+
+#~ msgid "Add to Order"
+#~ msgstr "Vevői megrendelések"
+
+#~ msgid "Could not print the cheque"
+#~ msgstr "Nem frissíthető a rekord mert"
+
+#~ msgid "Select Delivery note To Print"
+#~ msgstr "Válasszon szállítást"
+
+#~ msgid ""
+#~ "There was a problem retrieving the delivery note header details for delivery "
+#~ "note"
+#~ msgstr "Hiba a rendelés fej letöltésénél. Megrendelés száma:"
+
+#~ msgid "Print Delivery Note Error"
+#~ msgstr "Készletértékelés hiba"
+
+#~ msgid "Delivery Note No"
+#~ msgstr "Szállítás"
+
+#~ msgid "Delivery Note for order"
+#~ msgstr "Szállítás (bevételezés)"
+
+#~ msgid ""
+#~ "There was a problem retrieving the delivery note details for Delivery Note"
+#~ msgstr "Hiba a tételsor elérésénél a következő megrendelésnél"
+
+#~ msgid "A delivery note cannot be printed"
+#~ msgstr "Csomagkisérő nyomtatás - előnyomott papírra"
+
+#~ msgid "Inovoiced"
+#~ msgstr "Számlázva"
+
+#~ msgid "Factor Comapny"
+#~ msgstr "Készlet helyen"
+
+#~ msgid "The following SQL was used to update the work ordeer"
+#~ msgstr "SQL üzenet"
+
+#~ msgid "iso-8859-1"
+#~ msgstr "ISO-8859-2"
+
+#~ msgid "Search for Customers:"
+#~ msgstr "és a vevő"
+
+#~ msgid "Search for Suppliers:"
+#~ msgstr "Szállító választás"
+
+#~ msgid "Cash Flow Report"
+#~ msgstr "Felhasználói jelentések"
+
+#~ msgid "Transaction"
+#~ msgstr "Tranzakciók"
+
+#~ msgid "Transactions from"
+#~ msgstr "Tranzakciók"
+
+#~ msgid "Inventory Issues"
+#~ msgstr "Új termék"
+
+#~ msgid "Stock Issue Form"
+#~ msgstr "Termék kategória"
+
+#~ msgid "Narrative: "
+#~ msgstr "Szöveg "
+
+#~ msgid "Date of Issue: "
+#~ msgstr "Dátum rögzítve "
+
+#~ msgid ""
+#~ "Customer name keywords have been used in preference to customer code or "
+#~ "phone  entered"
+#~ msgstr ""
+#~ "Inkább a vevő nevében használjon kulcsszavakat, a vevő kódot pontosan kell "
+#~ "megadni"
+
+#~ msgid ""
+#~ "Customer code has been used in preference to the customer phone entered"
+#~ msgstr ""
+#~ "Inkább a vevő nevében használjon kulcsszavakat, a vevő kódot pontosan kell "
+#~ "megadni"
+
+#~ msgid "Customer Branch selection"
+#~ msgstr "Vevői telephelyek"
+
+#~ msgid "Stock Issues"
+#~ msgstr "Termékkód"
+
+#~ msgid "Issued From Stock At Location"
+#~ msgstr "Készlet hely beállítás"
+
+#~ msgid "No Tags have been set up yet"
+#~ msgstr "Nincs főkönyvi számla beállítva"
+
+#~ msgid "payments cannot be analysed against a tag until the tag is set up"
+#~ msgstr ""
+#~ "a kifizetések főkönyvi könyvelése nem működik amíg nem állítja be helyesen a "
+#~ "főkönyvi számlát"
+
+#~ msgid "Enter Stock Issue"
+#~ msgstr "Készlet szám"
+
+#~ msgid "postings cannot be analysed against a tag until the ag is set up"
+#~ msgstr ""
+#~ "a kifizetések főkönyvi könyvelése nem működik amíg nem állítja be helyesen a "
+#~ "főkönyvi számlát"
+
+#~ msgid "Tag Reference"
+#~ msgstr "Adó"
+
+#~ msgid "INVOICE"
+#~ msgstr "NINCS SZÁMLA"
+
+#~ msgid "Cust. Order No"
+#~ msgstr "Vevő rendelés"
+
+#~ msgid "Could not update vtiger"
+#~ msgstr "Fizetési mód nem frissíthető"
+
+#~ msgid "The SQL that was used to update the vtiger CRM entity"
+#~ msgstr "SQL üzenet"
+
+#~ msgid "The new vtiger CRM entiry could not be added because"
+#~ msgstr "Vevő rekord nem rögzíthető, mer"
+
+#~ msgid "The SQL that was used to add the CRM entity"
+#~ msgstr "SQL üzenet"
+
+#~ msgid "could not be added"
+#~ msgstr "nem frissíthető"
+
+#~ msgid "The SQL that was used to add the CRM Sequence"
+#~ msgstr "SQL üzenet"
+
+#~ msgid "could not be added\t"
+#~ msgstr "nem frissíthető\t"
 
 #~ msgid "Connected to remote FTP server at"
 #~ msgstr "Kapcsolódva az FTP rádió szerverhez"
@@ -37562,71 +37488,5 @@ msgstr "Alapértelmezett csomagjegyzék"
 #~ msgid "The order line for the product id"
 #~ msgstr "Megrendelés sor"
 
-#~ msgid "Creditor Balances At A Prior Month End"
-#~ msgstr "Követelők egyenlege a hónap végéig"
-
-#~ msgid "User Accounts"
-#~ msgstr "Felhasználók"
-
-#~ msgid "Bank Payments Matching"
-#~ msgstr "Bank kifizetés egyeztetés"
-
 #~ msgid "No Price Set"
 #~ msgstr "Árlista"
-
-#~ msgid "demo"
-#~ msgstr "demo"
-
-#~ msgid " Knowlege Base"
-#~ msgstr "Tudástár"
-
-#~ msgid "An error occurred in getting the first period number in the database"
-#~ msgstr "Hiba az első időszak szám elérésénél"
-
-#~ msgid ""
-#~ "An error occurred in inserting periods before the first period to "
-#~ "accomodate back dated transactions"
-#~ msgstr "Hiba az időszak rögzítésénél.Túl korai időszak"
-
-#~ msgid "Select a different sales order to invoice"
-#~ msgstr "Válasszon másik megrendelőt a számlázáshoz"
-
-#~ msgid "Disallow invoices"
-#~ msgstr "Számla visszavonás"
-
-#~ msgid "Custmomer"
-#~ msgstr "vevő"
-
-#~ msgid ""
-#~ "There are no sales types/price lists currently defined - go to the setup "
-#~ "tab of the main menu and set at least one up first"
-#~ msgstr ""
-#~ "Nincs eladási típus/árszint beálltva. A beállítások menüpont alatt "
-#~ "végezze el a beállítást"
-
-#~ msgid ""
-#~ "Be careful there is no second warning if you hit the DELETE button below"
-#~ msgstr "Óvatosan, nincs több figyelmeztetés, ha megnyomja a TÖRLÉS gombot"
-
-#~ msgid "Cost diff on"
-#~ msgstr "Különbség"
-
-#~ msgid ""
-#~ "The standard cost difference GL posting could not be inserted because"
-#~ msgstr ""
-#~ "A megadott szállíási költség különbség főkönyvi feladás sikertelen, mert"
-
-#~ msgid "Modify/Add/Delete Customers/branches and Special pricing"
-#~ msgstr "Új/Módosítás/Törlés vevő/telephely és árszint"
-
-#~ msgid "Select Supplier For Transactions and Inquiries"
-#~ msgstr "Válasszon szállítót a tranzakciók lekérdezéshez"
-
-#~ msgid "Modify Or Delete A Inventory Item Or Item Pricing"
-#~ msgstr "Módosít/töröl egy terméket/ Árazás"
-
-#~ msgid "does not refer to a currently existing item of"
-#~ msgstr "nem eggyezik az aktuális tétellel"
-
-#~ msgid "Main  Menu"
-#~ msgstr "Főmenü"
