@@ -43,7 +43,7 @@ function set_error($message) {
 
 	if(isset($message) AND $message != '') {
 		// Copy values entered into session so user doesn't have to re-enter everything
-		if(isset($_POST['company_name'])) {
+		if(isset($_POST['company_name']) && isset($_POST['ba_url'])) {
 			$_SESSION['ba_url'] = $_POST['ba_url'];
 			if(!isset($_POST['operating_system'])) {
 				$_SESSION['operating_system'] = 'linux';
@@ -110,7 +110,10 @@ function default_dir_mode($temp_dir) {
 	return $default_dir_mode;
 }
 
-
+// if demo data checkbox is ticked and company name is not weberpdemo, reject the entry.
+if ((isset($_POST['DemoData'])== true) AND ($_POST['company_name'] != "weberpdemo")) {
+	 set_error('Company name must be weberpdemo if weberpdemo company check button is ticked. Else uncheck the button for new company');
+}
 
 if (isset($_POST['path_to_root'])) {
 	$path_to_root = $_POST['path_to_root'];
@@ -178,7 +181,7 @@ if (!isset($_POST['database_host']) || $_POST['database_host'] == '') {
 if (!isset($_POST['database_username']) || $_POST['database_username'] == '') {
 	set_error('Please enter a database username');
 }
-echo $_POST['database_username'];
+
 // Check if user has entered a database password
 if (!isset($_POST['database_password'])) {
 	set_error('Please enter a database password');
@@ -285,8 +288,8 @@ if($_POST['install_tables'] == true){
 		$SQLScriptFile[$i] = trim($SQLScriptFile[$i]);
 		//ignore lines that start with -- or USE or /*
 		if (substr($SQLScriptFile[$i], 0, 2) != '--'
-			AND strstr($SQLScriptFile[$i],'/*')==FALSE
-			AND strlen($SQLScriptFile[$i])>1){
+			OR strstr($SQLScriptFile[$i],'/*')==FALSE
+			OR strlen($SQLScriptFile[$i])>1){
 
 			$SQL .= ' ' . $SQLScriptFile[$i];
 

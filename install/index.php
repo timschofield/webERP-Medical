@@ -167,14 +167,8 @@ function change_data(type) {
 				$GuessedURL = 'http://'.$_SERVER["SERVER_NAME"].$_SERVER["SCRIPT_NAME"];
 				$GuessedURL = rtrim(dirname($GuessedURL), 'install');
 				?>
-				<input type="text" tabindex="30" name="ba_url" style="width: 99%;" value="
-						<?php 
-						if(isset($_SESSION['ba_url'])) { 
-							echo $_SESSION['ba_url']; 
-						} else { 
-							echo $GuessedURL; 
-						} 
-				?>" />
+				<input type="text" tabindex="30" name="ba_url" size="30" value="<?php if(isset($_SESSION['ba_url'])) echo $_SESSION['ba_url']; else echo $GuessedURL; ?>"/>
+	
 			</td>
 		</tr>
 		</table>
@@ -239,15 +233,7 @@ function change_data(type) {
 			<td width="7">&nbsp;</td>
 			<td width="70" style="color: #666666;">Username:</td>
 			<td>
-				<input type="text" tabindex="44" name="database_username" style="width: 98%;" value="
-				<?php 
-					if(isset($_SESSION['database_username'])) {
-						echo $_SESSION['database_username'];
-					 } else {
-						echo 'root';
-					 } 
-				 ?>
-				 " />
+				<input type="text" tabindex="44" name="database_username" size="10"  value="<?php if(isset($_SESSION['database_username'])) echo $_SESSION['database_username']; else echo "root";?>">
 			</td>
 		</tr>
 		<tr>
@@ -285,10 +271,11 @@ function change_data(type) {
 			</td>
 		</tr>
 		<tr>
-			<td width="170">
-				Install the test company :
+			<td style="color:red;" colspan="5">
+				Check the box below only if you want to install the demo company(weberpdemo) and not to set up new company
 			</td>
-
+		</tr>
+		<tr>
 			<td width="180">
 				<input type="checkbox" tabindex="51" name="DemoData" id="db_file_demo" value="demo"<?php if(!isset($_SESSION['db_file']) OR $_SESSION['db_file'] == 'demo') { echo ' checked'; } ?> />
 				<font style="cursor: pointer;" onclick="javascript: change_data('demo');">weberpdemo company</font>
