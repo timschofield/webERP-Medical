@@ -369,18 +369,28 @@ if (isset($_POST['submit'])) {
 
 	} //end if OK Delete Asset
 } /* end if delete asset */
+$result = DB_Txn_Commit($db);
 
 echo '<form name="AssetForm" enctype="multipart/form-data" method="post" action="' . $_SERVER['PHP_SELF'] . '?' .SID .
 	'"><table class=selection>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-
+$New=0;
 if (!isset($AssetID) or $AssetID=='') {
 
 /*If the page was called without $AssetID passed to page then assume a new asset is to be entered other wise the form showing the fields with the existing entries against the asset will show for editing with a hidden AssetID field. New is set to flag that the page may have called itself and still be entering a new asset, in which case the page needs to know not to go looking up details for an existing asset*/
 
 	$New = 1;
 	echo '<input type="hidden" name="New" value="">'. "\n";
+
+	$_POST['LongDescription'] = '';
+	$_POST['Description'] = '';
+	$_POST['AssetCategoryID']  = '';
+	$_POST['SerialNo']  = '';
+	$_POST['AssetLocation']  = '';
+	$_POST['DepnType']  = '';
+	$_POST['BarCode']  = '';
+	$_POST['DepnRate']  = 0;
 
 } elseif ($InputError!=1) { // Must be modifying an existing item and no changes made yet - need to lookup the details
 
@@ -394,7 +404,8 @@ if (!isset($AssetID) or $AssetID=='') {
 					depntype,
 					depnrate,
 					cost,
-					accumdepn
+					accumdepn,
+					barcode
 		FROM fixedassets
 		WHERE assetid ='" . $AssetID . "'";
 
@@ -482,7 +493,7 @@ if (!isset($_POST['AssetCategoryID'])) {
 	$_POST['AssetCategoryID']=$category;
 }
 
-if ($AssetRow['datepurchased']!='0000-00-00' AND $AssetRow['datepurchased']!=''){
+if (isset($AssetRow) AND ($AssetRow['datepurchased']!='0000-00-00' AND $AssetRow['datepurchased']!='')){
 	echo '<tr><td>' . _('Date Purchased') . ':</td><td>' . ConvertSQLDate($AssetRow['datepurchased']) . '</td></tr>';
 }
 
@@ -501,7 +512,7 @@ while ($myrow=DB_fetch_array($result)){
 }
 echo '</select></td></tr>';
 
-echo '<tr><td>' . _('Bar Code') . ':</td><td><input ' . (in_array('BarCode',$Errors) ?  'class="inputerror"' : '' ) .'  type="Text" name="BarCode" size=22 maxlength=20 value="' . $BarCode . '"></td></tr>';
+echo '<tr><td>' . _('Bar Code') . ':</td><td><input ' . (in_array('BarCode',$Errors) ?  'class="inputerror"' : '' ) .'  type="Text" name="BarCode" size=22 maxlength=20 value="' . $_POST['BarCode'] . '"></td></tr>';
 
 echo '<tr><td>' . _('Serial Number') . ':</td><td><input ' . (in_array('SerialNo',$Errors) ?  'class="inputerror"' : '' ) .'  type="Text" name="SerialNo" size=32 maxlength=30 value="' . $_POST['SerialNo'] . '"></td></tr>';
 
@@ -525,12 +536,17 @@ echo '<tr><td>' . _('Depreciation Rate') . ':</td><td><input ' . (in_array('Depn
 echo '</table>';
 
 /*Get the last period depreciation (depn is transtype =44) was posted for */
-echo '<table><tr><th colspan=2>' . _('Asset Financial Summary') . '</th></tr>';
+echo '<br /><table class="selection"><tr><th colspan=2>' . _('Asset Financial Summary') . '</th></tr>';
 
-echo '<tr><td>' . _('Accumulated Costs') . ':</td><td class="number">' . number_format($AssetRow['cost'],2) . '</td></tr>';
-echo '<tr><td>' . _('Accumulated Depreciation') . ':</td><td class="number">' . number_format($AssetRow['accumdepn'],2) . '</td></tr>';
-echo '<tr><td>' . _('Net Book Value') . ':</td><td class="number">' . number_format($AssetRow['cost']-$AssetRow['accumdepn'],2) . '</td></tr>';
-
+if (isset($AssetRow)) {
+	echo '<tr><td>' . _('Accumulated Costs') . ':</td><td class="number">' . number_format($AssetRow['cost'],2) . '</td></tr>';
+	echo '<tr><td>' . _('Accumulated Depreciation') . ':</td><td class="number">' . number_format($AssetRow['accumdepn'],2) . '</td></tr>';
+	echo '<tr><td>' . _('Net Book Value') . ':</td><td class="number">' . number_format($AssetRow['cost']-$AssetRow['accumdepn'],2) . '</td></tr>';
+} else {
+	echo '<tr><td>' . _('Accumulated Costs') . ':</td><td class="number">0.00</td></tr>';
+	echo '<tr><td>' . _('Accumulated Depreciation') . ':</td><td class="number">0.00</td></tr>';
+	echo '<tr><td>' . _('Net Book Value') . ':</td><td class="number">0.00</td></tr>';
+}
 $result = DB_query("SELECT periods.lastdate_in_period, max(fixedassettrans.periodno) FROM fixedassettrans INNER JOIN periods ON fixedassettrans.periodno=periods.periodno WHERE transtype=44 GROUP BY periods.lastdate_in_period",$db);
 $LastDepnRun = DB_fetch_row($result);
 if(DB_num_rows($result)==0){
@@ -547,9 +563,9 @@ if ($New==1) {
 
 } else {
 
-	echo '<br><div class=centre><input type="submit" name="submit" value="' . _('Update') . '"></div>';
+	echo '<br /><div class=centre><input type="submit" name="submit" value="' . _('Update') . '"></div><br />';
 	prnMsg( _('Only click the Delete button if you are sure you wish to delete the asset. Only assets with a zero book value can be deleted'), 'warn', _('WARNING'));
-	echo '<br><div class=centre><input type="Submit" name="delete" value="' . _('Delete This Asset') . '" onclick="return confirm(\'' . _('Are You Sure? Only assets with a zero book value can be deleted.') . '\');"></div>';
+	echo '<br /><div class=centre><input type="Submit" name="delete" value="' . _('Delete This Asset') . '" onclick="return confirm(\'' . _('Are You Sure? Only assets with a zero book value can be deleted.') . '\');"></div>';
 }
 
 echo '</form></div>';
