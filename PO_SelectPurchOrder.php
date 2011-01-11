@@ -30,11 +30,11 @@ if (isset($OrderNumber) && $OrderNumber != "") {
 		prnMsg(_('The Order Number entered') . ' <U>' . _('MUST') . '</U> ' . _('be numeric'), 'error');
 		unset($OrderNumber);
 	} else {
-		echo _('Order Number') . ' - ' . $OrderNumber;
+		$Intro = _('Order Number') . ' - ' . $OrderNumber;
 	}
 } else {
 	if (isset($SelectedSupplier)) {
-		echo _('For supplier') . ': ' . $SelectedSupplier . ' ' . _('and') . ' ';
+		$Intro = _('For supplier') . ': ' . $SelectedSupplier . ' ' . _('and') . ' ';
 		echo '<input type=hidden name="SelectedSupplier" value=' . $SelectedSupplier . '>';
 	}
 }
@@ -104,7 +104,7 @@ if (!isset($OrderNumber) or $OrderNumber == "") {
 	if (isset($SelectedStockItem)) {
 		echo _('For the part') . ':<b>' . $SelectedStockItem . '</b> ' . _('and') . ' <input type=hidden name="SelectedStockItem" value="' . $SelectedStockItem . '">';
 	}
-	echo _('Order Number') . ': <input type=text name="OrderNumber" maxlength=8 size=9> ' . _('Into Stock Location') . ':<select name="StockLocation"> ';
+	echo $Intro . _('Order Number') . ': <input type=text name="OrderNumber" maxlength=8 size=9> ' . _('Into Stock Location') . ':<select name="StockLocation"> ';
 	$sql = "SELECT loccode, locationname FROM locations";
 	$resultStkLocs = DB_query($sql, $db);
 	while ($myrow = DB_fetch_array($resultStkLocs)) {
@@ -206,7 +206,7 @@ if (isset($StockItemsResult)) {
 //end if stock search results to show
 else {
 	//figure out the SQL required from the inputs available
-	
+
 	if (!isset($_POST['Status']) OR $_POST['Status']=='Pending_Authorised'){
 		$StatusCriteria = " AND (purchorders.status='Pending' OR purchorders.status='Authorised' OR purchorders.status='Printed') ";
 	}elseif ($_POST['Status']=='Authorised'){
@@ -218,7 +218,7 @@ else {
 	}elseif ($_POST['Status']=='Cancelled'){
 		$StatusCriteria = " AND purchorders.status='Cancelled' ";
 	}
-	
+
 	if (isset($OrderNumber) && $OrderNumber != "") {
 		$SQL = "SELECT purchorders.orderno,
 										suppliers.suppname,
@@ -259,7 +259,7 @@ else {
 											AND purchorders.supplierno = suppliers.supplierid
 											AND  purchorderdetails.itemcode='" . $SelectedStockItem . "'
 											AND purchorders.supplierno='" . $SelectedSupplier . "'
-											AND purchorders.intostocklocation = '" . $_POST['StockLocation'] . "' 
+											AND purchorders.intostocklocation = '" . $_POST['StockLocation'] . "'
 											" . $StatusCriteria . "
 											GROUP BY purchorders.orderno,
 												suppliers.suppname,
@@ -284,7 +284,7 @@ else {
 											WHERE purchorders.orderno = purchorderdetails.orderno
 											AND purchorders.supplierno = suppliers.supplierid
 											AND purchorders.supplierno='" . $SelectedSupplier . "'
-											AND purchorders.intostocklocation = '" . $_POST['StockLocation'] . "' 
+											AND purchorders.intostocklocation = '" . $_POST['StockLocation'] . "'
 											" . $StatusCriteria . "
 											GROUP BY purchorders.orderno,
 												suppliers.suppname,
@@ -311,7 +311,7 @@ else {
 											WHERE purchorders.orderno = purchorderdetails.orderno
 											AND purchorders.supplierno = suppliers.supplierid
 											AND purchorderdetails.itemcode='" . $SelectedStockItem . "'
-											AND purchorders.intostocklocation = '" . $_POST['StockLocation'] . "' 
+											AND purchorders.intostocklocation = '" . $_POST['StockLocation'] . "'
 											" . $StatusCriteria . "
 											GROUP BY purchorders.orderno,
 												suppliers.suppname,
@@ -335,7 +335,7 @@ else {
 												suppliers
 											WHERE purchorders.orderno = purchorderdetails.orderno
 											AND purchorders.supplierno = suppliers.supplierid
-											AND purchorders.intostocklocation = '" . $_POST['StockLocation'] . "' 
+											AND purchorders.intostocklocation = '" . $_POST['StockLocation'] . "'
 											" . $StatusCriteria . "
 											GROUP BY purchorders.orderno,
 												suppliers.suppname,
@@ -350,7 +350,7 @@ else {
 	} //end not order number selected
 	$ErrMsg = _('No orders were returned by the SQL because');
 	$PurchOrdersResult = DB_query($SQL, $db, $ErrMsg);
-	
+
 	if (DB_num_rows($PurchOrdersResult) > 0) {
 		/*show a table of the orders returned by the SQL */
 		echo '<table cellpadding=2 colspan=7 width=90% class=selection>';
@@ -386,10 +386,10 @@ else {
 				<td>" . $FormatedOrderDate . "</td>
 				<td>" . $myrow['initiator'] . "</td>
 				<td class=number>" . $FormatedOrderValue . "</td>
-				<td>" . _($myrow['status']) .  "</td> 
+				<td>" . _($myrow['status']) .  "</td>
 				</tr>";
 				//$myrow['status'] is a string which has gettext translations from PO_Header.php script
-				
+
 			$j++;
 			if ($j == 12) {
 				$j = 1;
