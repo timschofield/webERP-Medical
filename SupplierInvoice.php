@@ -574,8 +574,7 @@ then do the updates and inserts to process the invoice entered */
 
 	}elseif ( $_SESSION['SuppTrans']->ExRate <= 0){
 		$InputError = True;
-		prnMsg( _('The invoice as entered cannot be processed because the exchange rate for the invoice has been entered as a negative or zero number') . '. ' . _('The exchange rate is expected to show how many of the suppliers currency there are in 1 of the local currency'),'error');
-
+		prnMsg( _('The invoice total as entered is less than the sum of the shipment charges, the general ledger entries (if any), the charges for goods received, contract charges and fixed asset charges. There must be a mistake somewhere, the invoice as entered will not be processed'),'error');
 	}elseif ( $_SESSION['SuppTrans']->OvAmount < round($TotalShiptValue + $TotalGLValue + $TotalContractsValue+ $TotalAssetValue+$TotalGRNValue,2)){
 		prnMsg( _('The invoice total as entered is less than the sum of the shipment charges, the general ledger entries (if any) and the charges for goods received') . '. ' . _('There must be a mistake somewhere, the invoice as entered will not be processed'),'error');
 		$InputError = True;
