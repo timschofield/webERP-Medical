@@ -137,18 +137,20 @@ If (isset($_POST['PrintPDF'])
 	echo '<tr><td>' . _('Balances As At') . ":</td>
 			<td><select Name='PeriodEnd'>";
 
-	$sql = "SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno DESC";
+	$sql = "SELECT periodno, lastdate_in_period,EXTRACT(YEAR_MONTH FROM lastdate_in_period) as YearMonth  FROM periods ORDER BY periodno DESC";
 
 	$ErrMsg = _('Could not retrieve period data because');
 	$Periods = DB_query($sql,$db,$ErrMsg);
 
 	while ($myrow = DB_fetch_array($Periods,$db)){
-
-		echo '<option VALUE=' . $myrow['lastdate_in_period'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']);
-
-	}
-
-
+		 if ($myrow['YearMonth'] == date("Ym")) {  // get the current month 
+		  
+		  echo '<option VALUE=' . $myrow['lastdate_in_period'] . ' selected="TRUE">' . MonthAndYearFromSQLDate($myrow['lastdate_in_period'],'M',-1);
+		 }
+		else { 
+		   echo '<option VALUE=' . $myrow['lastdate_in_period'] . '> '.$myrow['YearMonth'].' '.MonthAndYearFromSQLDate($myrow['lastdate_in_period']).'</option>';
+	    }
+	   }
 	echo '</select></td></tr>';
 
 
