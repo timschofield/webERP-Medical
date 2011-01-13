@@ -1006,12 +1006,12 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				 * based on the category of the asset under review at the moment - this may well change for any other assets sold subsequentely */
 
 				/*OK now we can insert the stock category for this asset */
-				$InsertAssetStockCatResult = DB_query('INSERT INTO stockcategory ( categoryid,
+				$InsertAssetStockCatResult = DB_query("INSERT INTO stockcategory ( categoryid,
 																															categorydescription,
 																															stockact)
-																						VALUES ("ASSETS",
-																										"' . _('Asset Disposals') . '",
-																										"' . $AssetRow['costact'] . '")',$db);
+																						VALUES ('ASSETS',
+																										'" . _('Asset Disposals') . "',
+																										'" . $AssetRow['costact'] . "')",$db);
 			}
 
 			/*First check to see that it doesn't exist already assets are of the format "ASSET-" . $AssetID
@@ -1033,7 +1033,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				$NBV = $AssetRow['nbv'];
 			}
 			/*OK now we can insert the item for this asset */
-			$InsertAssetAsStockItemResult = DB_query('INSERT INTO stockmaster ( stockid,
+			$InsertAssetAsStockItemResult = DB_query("INSERT INTO stockmaster ( stockid,
 																																				description,
 																																				longdescription,
 																																				categoryid,
@@ -1042,21 +1042,21 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 																																				serialised,
 																																				taxcatid,
 																																				materialcost)
-																										VALUES ("' . $AssetStockID . '",
-																														"' . $AssetRow['description'] . '",
-																														"' . $AssetRow['longdescription'] . '",
-																														"ASSETS",
-																														"D",
-																														"0",
-																														"0",
-																														"' . $_SESSION['DefaultTaxCategory'] . '",
-																														"'. $NBV . '")' , $db);
+																										VALUES ('" . $AssetStockID . "',
+																														'" . $AssetRow['description'] . "',
+																														'" . $AssetRow['longdescription'] . "',
+																														'ASSETS',
+																														'D',
+																														'0',
+																														'0',
+																														'" . $_SESSION['DefaultTaxCategory'] . "',
+																														'". $NBV . "')" , $db);
 			/*not forgetting the location records too */
-			$InsertStkLocRecsResult = DB_query('INSERT INTO locstock (loccode,
+			$InsertStkLocRecsResult = DB_query("INSERT INTO locstock (loccode,
 																															stockid)
 																									SELECT loccode,
-																												"' . $AssetStockID . '"
-																									FROM locations',$db);
+																												'" . $AssetStockID . "'
+																									FROM locations",$db);
 			/*Now the asset has been added to the stock master we can add it to the sales order */
 			$NewItemDue = date($_SESSION['DefaultDateFormat']);
 			if (isset($_POST['POLine'])){
