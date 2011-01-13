@@ -31,9 +31,9 @@ if (isset($_POST['RevPayts']) AND Is_Date($_POST['PaytDate'])==1){
 	while ($Payment = DB_fetch_array($Result)){
 		prnMsg(_('Deleting payment number') . ' ' . $Payment['transno'] . ' ' . _('to supplier code') . ' ' . $Payment['supplierno'] . ' ' . _('for an amount of') . ' ' . $Payment['ovamount'],'info');
 
-		$SQL = 'DELETE FROM supptrans
+		$SQL = "DELETE FROM supptrans
 			WHERE type=22
-			AND transno=' . $Payment['transno'] . "
+			AND transno='" . $Payment['transno'] . "'
 			AND trandate='" . $SQLTranDate . "'";
 
 		$DelResult = DB_query($SQL,$db);
