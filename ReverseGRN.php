@@ -146,7 +146,7 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 
 		$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The GRN record could not be deleted because');
 		$DbgMsg = _('The following SQL to delete the GRN record was used');
-		$result = DB_query('DELETE FROM grns WHERE grnno="' . $_GET['GRNNo'] . '"',$db,$ErrMsg,$DbgMsg,true);
+		$result = DB_query("DELETE FROM grns WHERE grnno='" . $_GET['GRNNo'] . "'",$db,$ErrMsg,$DbgMsg,true);
 	} else {
 		$SQL = "UPDATE grns
 						SET qtyrecd = qtyrecd - $QtyToReverse
