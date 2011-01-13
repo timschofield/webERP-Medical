@@ -23,7 +23,7 @@ if ($_POST['DoUpgrade'] == _('Perform Upgrade')){
     $result=DB_query($sql, $db);
     $myrow=DB_fetch_array($result);
     if ($myrow[0]==0) {
-        $sql='INSERT INTO `debtortype` ( `typeid` , `typename` ) VALUES (1, "Default")';
+        $sql="INSERT INTO `debtortype` ( `typeid` , `typename` ) VALUES (1, 'Default')";
         $result=DB_query($sql, $db);
         if (DB_error_no($db)==0) {
             echo '<td>' . _('Success') . '</td></tr>';
