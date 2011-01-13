@@ -11,14 +11,14 @@ include('includes/header.inc');
 
 echo '<br><br>' . _('This script makes stock location records for parts where they do not already exist');
 
-$sql = 'INSERT INTO locstock (stockid, loccode)
+$sql = "INSERT INTO locstock (stockid, loccode)
 		SELECT stockmaster.stockid,
 			locations.loccode
 		FROM stockmaster CROSS JOIN locations
 			LEFT JOIN locstock
 				ON stockmaster.stockid = locstock.stockid
 				AND locations.loccode = locstock.loccode
-                WHERE locstock.stockid IS NULL';
+                WHERE locstock.stockid IS NULL";
 
 $ErrMsg = _('The items/locations that need stock location records created cannot be retrieved because');
 $Result = DB_query($sql,$db,$ErrMsg);
