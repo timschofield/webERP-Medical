@@ -703,15 +703,15 @@ then do the updates and inserts to process the invoice entered */
 
 			foreach ($_SESSION['SuppTrans']->Assets as $AssetAddition){
 				/* only the GL entries if the creditors->GL integration is enabled */
-				$SQL = 'INSERT INTO gltrans (type,
+				$SQL = "INSERT INTO gltrans (type,
 																	typeno,
 																	trandate,
 																	periodno,
 																	account,
 																	narrative,
 																	amount)
-													VALUES (20, ' .
-																	$InvoiceNo . ",
+													VALUES (20, '" .
+																	$InvoiceNo . "',
 																	'" . $SQLInvoiceDate . "',
 																	'" . $PeriodNo . "',
 																	'". $AssetAddition->CostAct . "',
@@ -1201,14 +1201,14 @@ then do the updates and inserts to process the invoice entered */
 		/*Add shipment charges records as necessary */
  		foreach ($_SESSION['SuppTrans']->Shipts as $ShiptChg){
 
-			$SQL = 'INSERT INTO shipmentcharges (shiptref,
+			$SQL = "INSERT INTO shipmentcharges (shiptref,
 													transtype,
 													transno,
 													value)
-													VALUES (' . $ShiptChg->ShiptRef . ',
+													VALUES ('" . $ShiptChg->ShiptRef . "',
 																		20,
-																	' . $InvoiceNo . ',
-																	' . $ShiptChg->Amount/ $_SESSION['SuppTrans']->ExRate . ')';
+																	'" . $InvoiceNo . "',
+																	'" . $ShiptChg->Amount/ $_SESSION['SuppTrans']->ExRate . "')";
 
 			$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The shipment charge record for the shipment') .
 			' ' . $ShiptChg->ShiptRef . ' ' . _('could not be added because');
