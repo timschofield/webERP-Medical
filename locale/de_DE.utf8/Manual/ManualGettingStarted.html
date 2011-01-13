@@ -34,7 +34,7 @@ Wenn das System bei Ihrem Provider auf einer Rechnergruppe gehostet wird, muss d
 <li>
 Aus unklaren Gründen sind manche Server nicht in der Lage, über $rootpath = dirname($_SERVER['PHP_SELF']); automatisch das korrekte Verzeichnis zu ermitteln. Das äußert sich darin, dass das System nicht in der Lage ist, die Seiten-Links für die unterschiedlichen Systemfunktionen zu finden. Wenn das geschieht, kann die Variable $rootpath direkt auf den Pfad gesetzt werden, in dem die Skripte liegen.
 <br><br>
-Das System könnte mit vielen anderen Datenbankservern genutzt werden, aber es ist auf MySQL entwickelt und getestet worden. Eine ConnectDB.inc-Datei für Postgres ist mit beigefügt und es gibt eine Einstellung in der config.php ($dbtype), die es dem Systemadministrator erlaubt, eine Postrgres-Datenbank zu verwenden, wenn ihm diese lieber ist. Unabhängige Benchmarks zeigen, dass MySQL für die allgemeinsten Datenbankaufgaben eines der schnellsten Systeme ist. Es ist insbesondere schnell beim Aufbau der Verbindungen, und weil es in der Natur des Web liegt, dass für jede Seite eine neue Verbindung erstellt wird, macht das MySQL für Web-Anwendungen besonders tauglich. 
+Das System könnte mit vielen anderen Datenbankservern genutzt werden, aber es ist auf MySQL entwickelt und getestet worden. Eine ConnectDB.inc-Datei für Postgres ist mit beigefügt und es gibt eine Einstellung in der config.php ($dbtype), die es dem Systemadministrator erlaubt, eine Postrgres-Datenbank zu verwenden, wenn ihm diese lieber ist. Unabhängige Benchmarks zeigen, dass MySQL für die allgemeinsten Datenbankaufgaben eines der schnellsten Systeme ist. Es ist insbesondere schnell beim Aufbau der Verbindungen, und weil es in der Natur des Web liegt, dass für jede Seite eine neue Verbindung erstellt wird, macht das MySQL für Web-Anwendungen besonders tauglich.
 <br><br>
 Wenn die Integration mit einem Knowledge-Management-System gewünscht wird, ist die Installation von WackoWiki oder MediaWiki auf dem selben Webserver erforderlich. Dies ist völlig optional, wird aber als eine Möglichkeit, freizügig Informationen im Unternehmen auszutauschen, sehr empfohlen.  http://wackowiki.com/WackoDownload/InEnglish?v=xlv
 <br><br>
@@ -56,7 +56,7 @@ Einstellen der Systemparameter und</li>
 <li>
 Einstellen der Unternehmensangaben im System</li>
 </ul>
-<font size="+2"><b>Die PHP-Scripte kopieren</b></font> 
+<font size="+2"><b>Die PHP-Scripte kopieren</b></font>
 <br><br>
 Alle Dateien des Archives werden in ein Verzeichnis unterhalb des Dokumenten-Wurzelverzeichnisses des Webservers entpackt. Dieses kann je nach Installation variieren:
 <br><br>
@@ -67,7 +67,7 @@ ist das normale Apache-Rootverzeichnis  unter SuSE. Normalerweise ist das Apache
 Kopieren Sie das Archiv in dieses Verzeichnis und entpacken Sie dann das Archiv, das das weberp-Verzeichnis im Root-Verzeichnis anlegt und alle benötigten Dateien in diesem Verzeichnis ablegt.
 <br><br>
 <font size="+2"><b>Die Datenbank anlegen</b></font>
-<br><br> 
+<br><br>
 Diese Information unterstellt, dass Sie einen MySQL-Datenbankserver verwenden. Es ist zwar eine SQL-Dump-Datei für Postgres ebenso enthalten, diese Anleitung bezieht sich aber auf das für MySQL Nötige.
 <br><br>
 Sie müssen den Benutzernamen und das Passwort für den MySQL-Server kennen. Wenn Sie selbst noch keine vergeben haben, ist der Standard
@@ -82,7 +82,7 @@ Alle Anleitungen hier beziehen sich auf die Kommandozeilen-Eingabe, die mit MySQ
 <br><br>
 Aus dem MySQL-Handbuch (bearbeitet):
 <br><br>
-Der MySQL-root-Benutzer wird als Superuser angelegt, der alles tun darf. Verbindungen müssen vom lokalen Host aus gemacht werden. HINWEIS: Das anfängliche root-Passwort ist leer, daher kann sich jeder als root ohne Passwort verbinden und hat alle Berechtigungen. Weil Ihre Installation anfangs weit offen ist, sollten Sie als eins der ersten Dinge ein Passwort für den MySQL-root-Benutzer anlegen. Das können Sie wie folgt tun (beachten Sie, dass das Passwort mit der PASSWORD()-Funktion angegeben wird): 
+Der MySQL-root-Benutzer wird als Superuser angelegt, der alles tun darf. Verbindungen müssen vom lokalen Host aus gemacht werden. HINWEIS: Das anfängliche root-Passwort ist leer, daher kann sich jeder als root ohne Passwort verbinden und hat alle Berechtigungen. Weil Ihre Installation anfangs weit offen ist, sollten Sie als eins der ersten Dinge ein Passwort für den MySQL-root-Benutzer anlegen. Das können Sie wie folgt tun (beachten Sie, dass das Passwort mit der PASSWORD()-Funktion angegeben wird):
 <br><br>
 Ab MySQL-Version 3.22 können Sie das SET PASSWORD-Statement benutzen:
 <br><br>
@@ -127,7 +127,7 @@ oder
 shell > mysql --user=weberp --password='some_pass' < /path_to_the_sql_script/weberp-new.sql
 <br><br>
 wobei Sie den hier eingegebenen Benutzernamen weberp auf den Namen ändern, den Sie in MySQL angelegt haben und das Passwort, das hier mit 'ein_passwort' angegeben ist, durch das entsprechende Passwort für Ihren Benutzer ersetzen. Auch wird der pfad_zum_sql_skript durch etwas wie /usr/local/apache/htdocs/web-erp/sql/mysql/ ersetzt.
-<br><br> 
+<br><br>
 <font size="+2"><b>Die Datei config.php bearbeiten</b></font>
 <br><br>
 Die Datei config.php enthält eine Reihe von benutzerdefinierten Variablen, die festlegen, wie sich das System verhält. Kritisch ist, dass sie den Computernamen, Benutzernamen und Passwort der Datenbankverbindung enthält, die für die Verbindung mit dem Server erforderlich ist. Es gibt hier auch eine Option zu wählen, welche Art von Datenbankserver zu verwenden ist. Gegenwärtig gibt es hier nur die Optionen mysql und postgres. Es ist keine weitere Arbeit möglich, solange Sie nicht die Datei mit den Angaben versorgt haben.
@@ -141,7 +141,7 @@ beginning of config.php<br>
 <br>
 /* $Revision: 1.6 $<br>
 config.php<br>
-Web-ERP - http://web-erp.sourceforge.net<br>
+Web-ERP - http://weberp.sourceforge.net<br>
 by Logic Works Ltd<br>
 */<br>
 <br>

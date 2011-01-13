@@ -53,7 +53,7 @@ If (isset($PrintPDF)
 
 	$pdf = new Cpdf('P', 'pt', 'A4');
 	$pdf->addInfo('Author','webERP ' . $Version);
-	$pdf->addInfo('Creator','webERP http://www.weberp.org');
+	$pdf->addInfo('Creator','webERP http://www.web-erp.org');
 
 	if ($InvOrCredit=='Invoice'){
 		$pdf->addInfo('Title',_('Sales Invoice') . ' ' . $FromTransNo . ' to ' . $_POST['ToTransNo']);

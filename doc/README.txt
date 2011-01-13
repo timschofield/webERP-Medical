@@ -10,16 +10,16 @@ The user documentation contains a wealth of information and is installed under t
 
 SUPPORT
 
-The primary means of support queries is through the user mailing list. 
+The primary means of support queries is through the user mailing list.
 Please join the list at: http://lists.sourceforge.net/lists/listinfo/web-erp-users
-if you have queries. The archives of the mailing lists on sourceforge and the FAQ (see http://www.weberp.org/wikidocs/FrequentlyAskedQuestionsInstallation) contain the most common issues with respect to installation.
+if you have queries. The archives of the mailing lists on sourceforge and the FAQ (see http://www.web-erp.org/wikidocs/FrequentlyAskedQuestionsInstallation) contain the most common issues with respect to installation.
 
 Feedback, wants and gripes are encouraged in the interests of improving this applicaton.
 
-DEVELOPING 
+DEVELOPING
 
-All contributions of code are needed and encouraged. 
-Guidelines for contributing code are in the document at http://www.weberp.org/wikidocs/ContributingtowebERP developers should read this document carefully and follow the guidelines therein. Standards and conventions used in the code are rigorously applied in the interests of consistency and readability. Code submitted that does not conform to these standards will be changed so it does where possible.
+All contributions of code are needed and encouraged.
+Guidelines for contributing code are in the document at http://www.web-erp.org/wikidocs/ContributingtowebERP developers should read this document carefully and follow the guidelines therein. Standards and conventions used in the code are rigorously applied in the interests of consistency and readability. Code submitted that does not conform to these standards will be changed so it does where possible.
 
 TRANSLATIONS
 
@@ -27,7 +27,7 @@ Translations that have been contributed are distributed as separate language arc
 
 http://sourceforge.net/project/showfiles.php?group_id=70949
 
-Translators should read the document http://www.weberp.org/HowToTranslate which describes how to translate webERP.
+Translators should read the document http://www.web-erp.org/HowToTranslate which describes how to translate webERP.
 
 Translations must be installed under the webERP/locale directory and the locale must be available on the web-server.
 
@@ -42,4 +42,4 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
 A copy of the GNU General Public License is included in the doc directory along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-Copyright weberp.org 2010 - Contact: info@weberp.org
+Copyright web-erp.org 2010 - Contact: info@web-erp.org

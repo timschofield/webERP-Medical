@@ -8,7 +8,7 @@
 <font size="+2"><b>前提 (Prerequisites)</b></font><br>
 <br>
 <ul>
-<li>PHP 版本 4.2以上。 因为PHP跨平台的特性它可以在Windows(NT, 2000 or XP,Vista)操作系统下运行，可以设置PHP以CGI的方式和IIS一起工作或者Apache。系统在windows (NT and XP) 和 Linux都经过测试. 
+<li>PHP 版本 4.2以上。 因为PHP跨平台的特性它可以在Windows(NT, 2000 or XP,Vista)操作系统下运行，可以设置PHP以CGI的方式和IIS一起工作或者Apache。系统在windows (NT and XP) 和 Linux都经过测试.
 </li><li>MySQL 版本4.0以上，包括 Innodb 支持。
 </li><li>Web服务器. Apache 推荐，任何支持PHP都可以安装，比如MS IIS.
 </li><li>在Apache中安装openssl 和 mod-ssl 模块，它们支持数据加密传输，如果需要支持互联网访问。
@@ -18,7 +18,7 @@
 <br>
 <a href="http://www.linux-sottises.net/en_apache_install.php">http://www.linux-sottises.net/en_apache_install.php</a><br>
 <br>
-重要提示：php.ini 中需要设置 session.auto_start = 0. 
+重要提示：php.ini 中需要设置 session.auto_start = 0.
 系统会在需要的任何时候启动sessions，设置为0是安全的做法。
 <br>
 <br>
@@ -33,7 +33,7 @@
 dirname($_SERVER['PHP_SELF'])解决方法是在页面代码中直接设置$rootpath的地址。
 <br>
 <br>
-系统可以使用其它类型的数据库，但请注意，系统的开发和测试环境是MySQL。 
+系统可以使用其它类型的数据库，但请注意，系统的开发和测试环境是MySQL。
 针对Postgres，提供ConnectDB.inc。在config.php文件中的$dbtype设置允许系统管理员使用Postgres。
 Postgres 数据库 dumps 功能在安装当中也可以使用。
 独立的调查显示MySQL是反应最快速的数据库之一，对于通用型数据库处理任务而言，特别是在建立连接方面 – 连接在各个页面中都会使用到。基于以上特性MySQL对于web开发环境特别适用。
@@ -129,7 +129,7 @@ shell &gt; mysql --user=weberp --password='some_pass' &lt; /path_to_the_sql_scri
 config.php 包含一系列用户定义的变量和对系统的设置。 关键的信息比如主机名，数据库用户和密码，以及使用的数据库选项，目前可选MySQL和postgres。<br>
 <br>
 用文本编辑器（比如:Notepad,Notepad++等）编辑 config.php，将它保存在相应的目录下。
-随着系统开发的持续进行，config.php文件的不同版本将会有所不同。 
+随着系统开发的持续进行，config.php文件的不同版本将会有所不同。
 <br>
 <br>
 ============================================<br>
@@ -139,7 +139,7 @@ beginning of config.php<br>
 <br>
 /* $Revision: 1.8 $<br>
 config.php<br>
-Web-ERP - http://web-erp.sourceforge.net<br>
+Web-ERP - http://weberp.sourceforge.net<br>
 */<br>
 <br>
 // User configurable variables<br>
@@ -286,7 +286,7 @@ http://yourdomain/webERP/Z_MakeNewCompany.php
 <font size="+2"><b>设立用户帐号</b></font><br>
 <br>
 以'demo'用户登录。创建新的管理员用户，并且删除'demo'用户。
-从菜单上点击 'Setup' 选项然后点击'User Accounts'。关于创建用户的说明：用户名和密码长度应该分别大于5个字符。密码不能和用户名相同或者包含用户名。输入电话及其它详细信息并不是必须的。用户的权限设置则很重要，它决定了用户可以访问的页面。在商务活动中把员工的权限加以区分使得整个的流程操作不会被单个员工所操控，具有不言而喻的重要性。然而在一些相对小型的公司里也许却不适用这一原则。系统本身的灵活性可以确保可以适用于不同的情况，合理定义用户权限。参看安全信息部分。<br> 
+从菜单上点击 'Setup' 选项然后点击'User Accounts'。关于创建用户的说明：用户名和密码长度应该分别大于5个字符。密码不能和用户名相同或者包含用户名。输入电话及其它详细信息并不是必须的。用户的权限设置则很重要，它决定了用户可以访问的页面。在商务活动中把员工的权限加以区分使得整个的流程操作不会被单个员工所操控，具有不言而喻的重要性。然而在一些相对小型的公司里也许却不适用这一原则。系统本身的灵活性可以确保可以适用于不同的情况，合理定义用户权限。参看安全信息部分。<br>
 <br>
 除了接入的权限限制之外，系统也提供了灵活性，使得管理员可以禁用某些链接。在'User Accounts' 界面中系统管理员可以设置哪些选项对用户是可用的。<br>
 <br>

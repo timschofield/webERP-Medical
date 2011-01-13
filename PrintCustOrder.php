@@ -140,7 +140,7 @@ if (DB_num_rows($result)>0){
 //	$pdf = & new Cpdf($PageSize);
 	$pdf = new Cpdf('L', 'pt', 'LETTER');
 
-	$pdf->addInfo('Creator', 'webERP http://www.weberp.org');
+	$pdf->addInfo('Creator', 'webERP http://www.web-erp.org');
 	$pdf->addInfo('Author', 'webERP ' . $Version);
 	$pdf->addInfo('Title', _('Customer Packing Slip') );
 	$pdf->addInfo('Subject', _('Packing slip for order') . ' ' . $_GET['TransNo']);

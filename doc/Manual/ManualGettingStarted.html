@@ -8,7 +8,7 @@
 independent since PHP can be configured as a CGI module for use on MS
 IIS or as a module for Apache under either Windows (NT, 2000 or XP) or
 Unix/Linux. It has been tested under both Windows (NT and XP) and
-Linux. 
+Linux.
 </li><li>MySQL greater than version 4 with Innodb transactional
 tables support. Foreign key constraints are also required. These were
 added to Innodb in 2003. Innodb was introduced in 2001 to MySQL and has
@@ -49,7 +49,7 @@ it needs them. It is safe to set this to 0.<br>
 The main issues with installation of PHP appear to be:
 <ol>
 <li>Some Windows installations come with a setting for
-session.save_path= /tmp this is an inappropriate directory for Windows 
+session.save_path= /tmp this is an inappropriate directory for Windows
 and should be changed to session.save_path=C:\temp or something more
 appropriate.
 </li><li>When the system is hosted on a multi-homed web server farm,
@@ -97,7 +97,7 @@ An installation must first copy the scripts to a directory under the web-server'
 <li>The installer checks that all the pre-requistes are met for an installation. You will note from the screen shot above that this installation does not have sufficient privileges to install webERP because the web-server is unable to write to the webERP directory. It is first necessary to change the permissions on the directory where webERP is installed to ensure that the user that the web-server runs as  is able to write a new configuration file to the web space. Cpanel and Plesk have facilities to enable this change to the permissions. Any messages on this screen displayed in red need to be resolved before the installation can proceed. Do not attempt to run the installer while red messages persist.
 </li>
 <li>
-Many of the fields required will be populated correctly based. However, it is important to check the entries are correct. The installer will not be able to determine the host (computer) where the mysql database server is installed and this must be entered. 
+Many of the fields required will be populated correctly based. However, it is important to check the entries are correct. The installer will not be able to determine the host (computer) where the mysql database server is installed and this must be entered.
 </li>
 <li>The user name and the password to the mysql database server are also required.
 </li>
@@ -136,7 +136,7 @@ A manual installation consists of the following five steps:<br>
 <br>
 All files in the archive except the installation instructions
 in INSTALL.txt, weberp-demo.sql and weberp-new.sql should be copied
-to a directory under the web server DocumentRoot directory. This varies 
+to a directory under the web server DocumentRoot directory. This varies
 by distribution but:<br>
 <br>
 /srv/www/htdocs<br>
@@ -198,7 +198,7 @@ mysql&gt; GRANT ALL PRIVILEGES ON *.* TO weberp@localhost IDENTIFIED BY 'some_pa
 Where 'some_pass' is a password of your choice for the new user
 'weberp'. Note that this user 'weberp' can only connect from the local
 machine so if the web server is on a different machine then the MySQL
-server you need to give privileges to connect from other computers. 
+server you need to give privileges to connect from other computers.
 See the MySQL manual.<br>
 <br>
 Innodb tables must be enabled in the MySQL server. These
@@ -220,11 +220,11 @@ how the system works.
 </li><li>weberp-new.sql This script has only the basic data necessary
 to start a new company. If you wish to set up your company
 using the webERP software, then this is the script to use. This creates
-a webERP database and populates it with only the very basic starting data. 
+a webERP database and populates it with only the very basic starting data.
 </li></ol><br>
 <br>
 The files weberp-demo.sql and web-erp-new.sql should be in
-the directory with all the PHP scripts. Change to the  directory 
+the directory with all the PHP scripts. Change to the  directory
 where the scripts are held or use the full path and enter:<br>
 <br>
 shell &gt; mysql --user=weberp --password='some_pass' &lt; path_to_web_server/webERP/sql/mysql/weberp-demo.sql<br>
@@ -246,13 +246,13 @@ determine how the system behaves. Critically it contains the host
 (computer name), username and password of the database connection
 required to connect to the database server. There is also an option to
 chose which type of database server is to be used. Currently there are
-only options for mysql and mysqli. There is no going forward without 
+only options for mysql and mysqli. There is no going forward without
 this data.<br>
 <br>
 The default contents of the config.php file are as follows and
 must be edited in an editor of choice.  Then,
-save config.php in the web directory where the scripts are located. 
-Note, the system is continually evolving and may well have changed 
+save config.php in the web directory where the scripts are located.
+Note, the system is continually evolving and may well have changed
 since this was written.<br>
 <br>
 <br>
@@ -271,7 +271,7 @@ beginning of config.php<br>
 <br>
 /* $Revision: 1.8 $<br>
 config.php<br>
-Web-ERP - http://web-erp.sourceforge.net<br>
+Web-ERP - http://weberp.sourceforge.net<br>
 */<br>
 <br>
 // User configurable variables<br>
@@ -372,8 +372,8 @@ enter user name 'demo'<br>
 enter password 'weberp'<br>
 <br>
 The quotation marks are not required. To set up additional users go to
-Main Menu &gt; Setup &gt; User Accounts. Users can change there own 
-passwords at any time by clicking on their user name shown at the top 
+Main Menu &gt; Setup &gt; User Accounts. Users can change there own
+passwords at any time by clicking on their user name shown at the top
 left of the screen. For example: "webERP Demo: <i>administrator</i>".
 Be careful not to delete the demonstration user until a new System
 Administrator user has been set up. If there are no users defined the
@@ -399,7 +399,7 @@ This script allows you to set up any number of additional companies - a fresh da
 <br>
 <br>
 This script may not work because it requires that the web-server has write permission to the scripts directory, in which case you may need to fall back to the manual method described below.
-<br>In the default install above you created a database called weberp and there is a directory under webERP/companies also called weberp. To make another company you need to copy this directory and all the sub-directories under it to a new directory under webERP/companies/. The name of this directory needs to be identical to the name of the new database created on the same mysql server. 
+<br>In the default install above you created a database called weberp and there is a directory under webERP/companies also called weberp. To make another company you need to copy this directory and all the sub-directories under it to a new directory under webERP/companies/. The name of this directory needs to be identical to the name of the new database created on the same mysql server.
 <br>
 <br>
 <font size="+2"><b>Configuration Parameters</b></font><br>
@@ -430,7 +430,7 @@ themes defined in the distribution: 'silverwold', 'default', 'professional' and
 'fresh'.<br>
 <br>
 Each user can select their own preference from the user settings screen.
-This is revealed by clicking on their user name shown at the top left of 
+This is revealed by clicking on their user name shown at the top left of
 the screen. For example: "webERP Demo: <i>administrator</i>".<br>
 <br>
 To create a new theme copy the directory of one of the
@@ -459,7 +459,7 @@ where the employees are not also the owners it is advisable to split
 the functions between staff so that no user can complete an entire
 transaction. There are occasions in smaller businesses where this is
 impractical. However, the system has great flexibility to allow the
-user access to be finely defined. See the security schema section.<br> 
+user access to be finely defined. See the security schema section.<br>
 <br>
 As well as allowing the access to be restricted there is some
 flexibility about the links that are made available to a user. In the
@@ -501,7 +501,7 @@ PDFs are produced in utf-8 character set which has 4 bytes for each character. U
 <br>
 <br>
 If you are interested in contributing a language pack to webERP - which is always very much appreciated! There are instructions for how to proceed at
-http://www.weberp.org/HowToTranslate
+http://www.web-erp.org/HowToTranslate
 <br>
 <br>
 <!-- Help End: WWW_Users -->

@@ -156,7 +156,7 @@ switch ($PaperSize) {
 //	$pdf = new Cpdf($PageSize);
 $pdf = new Cpdf($DocumentOrientation, 'pt', $DocumentPaper);
 
-$pdf->addInfo('Creator', 'WebERP http://www.weberp.org');
+$pdf->addInfo('Creator', 'WebERP http://www.web-erp.org');
 $pdf->addInfo('Author', 'WebERP ' . $_SESSION['VersionNumber']);
 
 

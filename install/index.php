@@ -168,7 +168,7 @@ function change_data(type) {
 				$GuessedURL = rtrim(dirname($GuessedURL), 'install');
 				?>
 				<input type="text" tabindex="30" name="ba_url" size="30" value="<?php if(isset($_SESSION['ba_url'])) echo $_SESSION['ba_url']; else echo $GuessedURL; ?>"/>
-	
+
 			</td>
 		</tr>
 		</table>
@@ -182,24 +182,24 @@ function change_data(type) {
 			</td>
 			<td width="180">
 				<input type="radio" tabindex="40" name="operating_system" id="operating_system_linux" onclick="document.getElementById('file_perms_box').style.display = 'block';" value="linux"
-				<?php 
-					if(!isset($_SESSION['operating_system']) OR $_SESSION['operating_system'] == 'linux') { 
-						echo ' checked'; 
-					} ?> 
+				<?php
+					if(!isset($_SESSION['operating_system']) OR $_SESSION['operating_system'] == 'linux') {
+						echo ' checked';
+					} ?>
 				/>
 				<font style="cursor: pointer;" onclick="javascript: change_os('linux');">Linux/Unix based</font>
 				<br />
 				<input type="radio" tabindex="41" name="operating_system" id="operating_system_windows" onclick="document.getElementById('file_perms_box').style.display = 'none';" value="windows"
-				<?php 
-					if(isset($_SESSION['operating_system']) AND $_SESSION['operating_system'] == 'windows') { 
-						echo ' checked'; } 
-					?> 
+				<?php
+					if(isset($_SESSION['operating_system']) AND $_SESSION['operating_system'] == 'windows') {
+						echo ' checked'; }
+					?>
 				/>
 				<font style="cursor: pointer;" onclick="javascript: change_os('windows');">Windows</font>
 			</td>
 			<td>
-				<div name="file_perms_box" id="file_perms_box" style="margin: 0; padding: 0; display: 
-				<?php 
+				<div name="file_perms_box" id="file_perms_box" style="margin: 0; padding: 0; display:
+				<?php
 					if(isset($_SESSION['operating_system']) AND $_SESSION['operating_system'] == 'windows') {
 						echo 'none';
 					} else {
@@ -312,8 +312,8 @@ function change_data(type) {
 			<td style="color: #666666;">Username:</td>
 			<td>
 				admin
-				<!--<input type="text" tabindex="60" name="admin_username" style="width: 98%;" value="<?php if(isset($_SESSION['admin_username'])) { echo $_SESSION['admin_username']; 
-				} else { 
+				<!--<input type="text" tabindex="60" name="admin_username" style="width: 98%;" value="<?php if(isset($_SESSION['admin_username'])) { echo $_SESSION['admin_username'];
+				} else {
 					echo 'admin'; } ?>" />-->
 			</td>
 			<td>&nbsp;</td>
@@ -374,7 +374,7 @@ function change_data(type) {
 <tr>
 	<td align="center" style="font-size: 10px;">
 		<!-- Please note: the below reference to the GNU GPL should not be removed, as it provides a link for users to read about warranty, etc. -->
-		<a href="http://www.weberp.org/" style="color: #000000;" target="_blank">WebERP</a>
+		<a href="http://www.web-erp.org/" style="color: #000000;" target="_blank">WebERP</a>
 		is	released under the
 		<a href="http://www.gnu.org/licenses/gpl.html" style="color: #000000;" target="_blank">GNU General Public License</a>
 		<!-- Please note: the above reference to the GNU GPL should not be removed, as it provides a link for users to read about warranty, etc. -->

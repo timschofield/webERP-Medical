@@ -128,7 +128,7 @@ if (isset($_POST['PrintPDF'])){
 	$pdf = new Cpdf('L', 'pt', 'A4');
 
 	$pdf->addInfo('Author','webERP ' . $Version);
-	$pdf->addInfo('Creator','webERP http://www.weberp.org');
+	$pdf->addInfo('Creator','webERP http://www.web-erp.org');
 	$pdf->addInfo('Title',_('Inventory Planning Based On Lead Time Of Preferred Supplier') . ' ' . Date($_SESSION['DefaultDateFormat']));
 //	$PageNumber = 0;
 	$pdf->addInfo('Subject',_('Inventory Planning Based On Lead Time Of Preferred Supplier'));

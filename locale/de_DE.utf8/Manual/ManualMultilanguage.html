@@ -23,7 +23,7 @@ Es ist besonders wichtig, dass Sie die Zeichenkette "ISO-8859-1" (zum Zeitpunkt 
 <br><br>
 Es empfiehlt sich zum Übersetzen poedit einzusezten, weil es einige zeitsparende Funktionen für das Erstellen von Übersetzungsdateien besitzt.
 <br><br>
-Schicken Sie die Datei die Ihre Übersetzung enthält an submissions@weberp.org ein.
+Schicken Sie die Datei die Ihre Übersetzung enthält an submissions@web-erp.org ein.
 <br><br>
 Ein Archiv mit dem neuen Sprachverzeichnis und Anleitungen wird bei sourceforge eingestellt, so dass jeder  auf Ihre Übersetzung zugreifen kann.
 <br><br>
@@ -34,9 +34,9 @@ Technische Übersicht
 <B>
 Wie es gemacht wird</B>
 <br><br>
-webERP verwendet das GNU-gettext-Paket für die Sprachübersetzung. Damit die gettext-Bibliothek verwendet werden kann, muss sie auf Ihrem Webserver installiert sein. PHP muss mit den gettext-Funktionen kompiliert werden. Seit der Version 3.01 wird dank Brian Gomez und der Autoren von PHP-gettext Danilo Segan und Nico Kaiser deren PHP-Klasse zusammen mit webERP ausgeliefert, damit die Übersetzungen auch funktionieren (wielleicht etwas langsamer als mit den Funktionen der gettext-Bibliothek), wenn gettext nicht installiert ist. 
+webERP verwendet das GNU-gettext-Paket für die Sprachübersetzung. Damit die gettext-Bibliothek verwendet werden kann, muss sie auf Ihrem Webserver installiert sein. PHP muss mit den gettext-Funktionen kompiliert werden. Seit der Version 3.01 wird dank Brian Gomez und der Autoren von PHP-gettext Danilo Segan und Nico Kaiser deren PHP-Klasse zusammen mit webERP ausgeliefert, damit die Übersetzungen auch funktionieren (wielleicht etwas langsamer als mit den Funktionen der gettext-Bibliothek), wenn gettext nicht installiert ist.
 <br><br>
-Die gettext-Übersetzungsdateien werden im Locale-Verzeichnis abgelegt, in welchem Unterverzeichnisse für die einzelnen Sprachversionen vorhanden sind. Die Unterverzeichnisse werden durch einen fünf Zeichen langen Schlüssel gekennzeichnet, zwei kleinen Buchstaben für die Sprache, einem Unterstrich und zwei großen Buchstaben für das Land. Die englische Version für die USA heißt so en_US, die für die britische Version en_GB. en_GB ist die Sprachversion, in der webERP geschrieben ist. Die Sprachversion für diesen Schlüssel muss auf dem Webserver installiert sein. Die installierten Sprachversionen können Sie mit dem Kommando locale -a in der Konsole des Linux-Webservers prüfen. 
+Die gettext-Übersetzungsdateien werden im Locale-Verzeichnis abgelegt, in welchem Unterverzeichnisse für die einzelnen Sprachversionen vorhanden sind. Die Unterverzeichnisse werden durch einen fünf Zeichen langen Schlüssel gekennzeichnet, zwei kleinen Buchstaben für die Sprache, einem Unterstrich und zwei großen Buchstaben für das Land. Die englische Version für die USA heißt so en_US, die für die britische Version en_GB. en_GB ist die Sprachversion, in der webERP geschrieben ist. Die Sprachversion für diesen Schlüssel muss auf dem Webserver installiert sein. Die installierten Sprachversionen können Sie mit dem Kommando locale -a in der Konsole des Linux-Webservers prüfen.
 <br><br>
 Neue Verzeichnisse müssen erstellt werden, wenn ein Übersetzer eine lokale Sprachversion haben möchte. Unter dem Verzeichnis mit dem fünf Zeichen langen Schlüssel der Sprachversion gibt es ein weiteres Unterverzeichnis LC_MESSAGES, in diesem werden die Sprachendateien abgelegt. In jedem solchen Verzeichnis gibt es zwei Dateien:
 <BR><BR>
@@ -50,11 +50,11 @@ Für die Bearbeitung der .po-Datei kann jeder Texteditor verwendet werden. Es gib
 Die Datei messages.po verstehen
 </FONT></B>
 <BR><BR>
-Die Übersetzung wird vorgenommen, indem die Zeichenketten ind der Datei messages.po in die andere Sprache übersetzt werden. Es ist wichtig, diese Übersetzung mit der neuesten messages.po-Datei aus dem Verzeichnis locale/en_GB/LC_MESSAGES/ vorzunehmen. Sie haben auch die Möglichkeit, diese mit einer Email an info@weberp.org oder eine Nachricht im Übersetzungs-Board abzufordern.
+Die Übersetzung wird vorgenommen, indem die Zeichenketten ind der Datei messages.po in die andere Sprache übersetzt werden. Es ist wichtig, diese Übersetzung mit der neuesten messages.po-Datei aus dem Verzeichnis locale/en_GB/LC_MESSAGES/ vorzunehmen. Sie haben auch die Möglichkeit, diese mit einer Email an info@web-erp.org oder eine Nachricht im Übersetzungs-Board abzufordern.
 <!-- The translation is performed by tranlating the strings in the messages.po file into the other language. It is important to work on the most recent messages.po file from the locale/en_GB/LC_MESSAGES/ deirectory in the CVS.
 However, the most recent messages template file can be emailed on request to C or through a note to the translation list. -->
 <BR><BR>
-Die Datei messages.po besteht aus einzelnen Abschnitten, 
+Die Datei messages.po besteht aus einzelnen Abschnitten,
 <BR><BR>
 z. B. bei einer französischen Übersetzungsdatei:
 <BR><BR>
@@ -127,9 +127,9 @@ Setzen Sie dies auf 8bit.
 <B>
 Verwaltung</B>
 <BR><BR>
-Wenn diese Übung vollständig haben, muss die Datei an den Projektadministrator über die Email-Adresse submissions@webERP.org zum Erstellen der .mo-Datei zurückgeschickt werden. Das neue Verzeichnis wird in einer ZIP-Datei zum Entpacken in das webERP-Verzeichnis erstellt. Die Sprache wird dann auch für andere Nutzer von webERP zur Verfügung gestellt. 
+Wenn diese Übung vollständig haben, muss die Datei an den Projektadministrator über die Email-Adresse submissions@webERP.org zum Erstellen der .mo-Datei zurückgeschickt werden. Das neue Verzeichnis wird in einer ZIP-Datei zum Entpacken in das webERP-Verzeichnis erstellt. Die Sprache wird dann auch für andere Nutzer von webERP zur Verfügung gestellt.
 <BR><BR>
-Jedesmal wenn Sie sich am System anmelden, setzt das System die Sprache auf das was Sie im Benutzerstammsatz eingetragen haben. Der Benutzer kann einstellen, welche Sprache er möchte, indem er auf seinen Benutzernamen in der Menüzeile drückt, wodurch er in seine Benutzereinstellungen gelangt. Wenn Sie die Spracheinstellung ändern, wird dies aktiv, wenn sie diese Einstellung sichern. Nur Spracheinstellungen die im locale-Verzeichnis installiert sind, stehen den Benutzern für die Auswahl zur Verfügung. 
+Jedesmal wenn Sie sich am System anmelden, setzt das System die Sprache auf das was Sie im Benutzerstammsatz eingetragen haben. Der Benutzer kann einstellen, welche Sprache er möchte, indem er auf seinen Benutzernamen in der Menüzeile drückt, wodurch er in seine Benutzereinstellungen gelangt. Wenn Sie die Spracheinstellung ändern, wird dies aktiv, wenn sie diese Einstellung sichern. Nur Spracheinstellungen die im locale-Verzeichnis installiert sind, stehen den Benutzern für die Auswahl zur Verfügung.
 <BR><BR>
 <B>
 Weitere Ressourcen</B>
@@ -159,7 +159,7 @@ Eine neue Sprache zum System hinzufügen</li>
 Sprachdatei-Kopf bearbeiten</li>
 <li>
 Sprachdatei-Module bearbeiten</li>
-<br><br> 
+<br><br>
 Beachten Sie, dass die Erläuterungen darüber, was das System macht, für diejenigen bestimmt sind, die das System bedienen und die Dateien verwalten. Wenn Sie sich nur mit der Übersetzung beschäftigen, müssen Sie das nicht verstehen.
 <br><br>
 <font size="+2"><b>
@@ -196,7 +196,7 @@ Sprachdatei-Module bearbeiten
 </b></font>
 <br><br>
 Der Hauptteil der Übersetzungsarbeit wird mit diesem Werkzeug gemacht. Zuerst wählen Sie die Sprache, die Sie bearbeiten wollen und dann wählen Sie Sprachdatei-Module bearbeiten. Für eine vollständige Übersetzung des gesamten Systems müssen Sie alle diese Module übersetzen. Viele ziehen zuerst einmal die Module von index.php und includes/header.inc vor, damit das Hauptmenü in ihrer Sprache erscheint. Von da aus können zuerst die wichtigsten Module bearbeitet werden oder alles nacheinander. Ein Merksystem sollte verwendet werden, damit Sie wissen, welche Module in den nachfolgenden Schritten noch bearbeitet werden müssen.
-<br><br> 
+<br><br>
 Wenn Sie die Sprache und Module ausgewählt haben, klicken Sie auf Ausführen. Eine Oberfläche erscheint, in der die Zeichenketten des ausgewählten Moduls angezeigt werden und daneben ein Bereich, in den Sie die Übersetzung der Zeichenkette eintragen. Rechts davon ist eine Liste von Zeilennummern, wo die Zeichenkette innerhalb des Moduls vorkommt. Nachdem Sie die Übersetzungen eingetragen haben, klicken Sie Speichern, damit alle Änderungen gesichert werden.
 <br><br>
 Wenn Sie an Ihrer Version von webERP schon etwas Entwicklungsarbeit geleistet haben, ist es möglich, neue Zeichenketten, die von den Entwicklern erstellt wurden in die vorhandene Sprachdatei einzumischen und damit eine messages.po-Datei zu erstellen, die alle benötigten Zeichenketten enthält. Wenn einige Meldungen noch in Englisch erscheinen, aber beim Bearbeiten der Module für diesen Bildschirm sind keine nicht übersetzten Meldungen, dann wissen Sie, dass Sie die vorhandene messages.po-Datei mit vorhandenen neuen Meldungen mischen müssen. Damit alle Zeichenketten vom gettext-Werkzeug ermittelt werden, müssen Sie zuerst "Die System-Sprachdatei neu erstellen" aufrufen. Dann klicken Sie im Bild "Sprachdatei-Module bearbeiten" auf "Meldungen um neue Zeichenketten ergänzen", damit wird die neu erstellte Systemsprachdatei in die vorhandene Übersetzung hineingemischt.

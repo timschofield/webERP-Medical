@@ -202,7 +202,7 @@ if (isset($_POST['CreateTemplate'])){
 
            echo '<P><a href="' . $rootpath . '/companies/' . $_SESSION['DatabaseName'] . '/reports/' . $_POST['TemplateName'] .'.sql">' . _('Show the sql template file produced') . '</a>';
 		   include('includes/htmlMimeMail.php');
-		   $Recipients = array('"Submissions" <submissions@weberp.org>');
+		   $Recipients = array('"Submissions" <submissions@web-erp.org>');
 		   $mail = new htmlMimeMail();
 		   $attachment = $mail->getFile( $rootpath . '/companies/' . $_SESSION['DatabaseName'] . '/reports/' . $_POST['TemplateName'] .'.sql');
 		   $mail->setText('Please find company template ' . $_POST['TemplateName']);
