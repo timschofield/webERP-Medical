@@ -706,7 +706,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				$ErrMsg =_('The order detail lines could not be deleted because');
 				$DelResult=DB_query($SQL,$db,$ErrMsg);
 
-				$SQL = 'DELETE FROM salesorders WHERE salesorders.orderno=' . $_SESSION['ExistingOrder'];
+				$SQL = "DELETE FROM salesorders WHERE salesorders.orderno='" . $_SESSION['ExistingOrder'] . "'";
 				$ErrMsg = _('The order header could not be deleted because');
 				$DelResult=DB_query($SQL,$db,$ErrMsg);
 
