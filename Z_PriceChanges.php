@@ -102,7 +102,7 @@ if (isset($_POST['UpdatePrices']) AND isset($_POST['StkCat'])){
 
 		if ($_POST['WhichPrices'] == 'Only Non-customer special prices'){
 
-			$sql = 'UPDATE prices SET price=price*(1+' . $IncrementPercentage . ")
+			$sql = "UPDATE prices SET price=price*(1+" . $IncrementPercentage . ")
 							WHERE typeabbrev='" . $_POST['PriceList'] . "'
 							AND stockid='" . $myrow['stockid'] . "'
 							AND typeabbrev='" . $_POST['PriceList'] . "'
@@ -125,7 +125,7 @@ if (isset($_POST['UpdatePrices']) AND isset($_POST['StkCat'])){
 
 		} else if ($_POST['WhichPrices'] == 'Selected customer special prices only'){
 
-			$sql = 'UPDATE prices SET price=price*(1+' . $IncrementPercentage . ")
+			$sql = "UPDATE prices SET price=price*(1+" . $IncrementPercentage . ")
 							WHERE typeabbrev='" . $_POST['PriceList'] . "'
 							AND stockid='" . $myrow['stockid'] . "'
 							AND typeabbrev='" . $_POST['PriceList'] . "'
