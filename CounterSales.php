@@ -965,7 +965,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 		$ErrMsg = _('The order cannot be added because');
 		$InsertQryResult = DB_query($HeaderSQL,$db,$ErrMsg);
 
-		$StartOf_LineItemsSQL = 'INSERT INTO salesorderdetails (orderlineno,
+		$StartOf_LineItemsSQL = "INSERT INTO salesorderdetails (orderlineno,
 																orderno,
 																stkcode,
 																unitprice,
@@ -976,7 +976,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 																actualdispatchdate,
 																qtyinvoiced,
 																completed)
-															VALUES (';
+															VALUES (";
 
 		$DbgMsg = _('Trouble inserting a line of a sales order. The SQL that failed was');
 		foreach ($_SESSION['Items'.$identifier]->LineItems as $StockItem) {

@@ -62,12 +62,12 @@ if (isset($_POST['submit'])) {
 /*Maybe not required since these will be created from GLPostings.inc with correct B/fwd balances
 		$ErrMsg = _('Could not add the chart details for the new account');
 
-		$sql = 'INSERT INTO chartdetails (accountcode, period)
+		$sql = "INSERT INTO chartdetails (accountcode, period)
 				SELECT chartmaster.accountcode, periods.periodno
 					FROM chartmaster
 						CROSS  JOIN periods
 				WHERE ( chartmaster.accountcode, periods.periodno ) NOT
-					IN ( SELECT chartdetails.accountcode, chartdetails.period FROM chartdetails )';
+					IN ( SELECT chartdetails.accountcode, chartdetails.period FROM chartdetails )";
 
 		$result = DB_query($sql,$db,$ErrMsg);
 */
