@@ -50,11 +50,11 @@ if (isset($_POST['RevPayts']) AND Is_Date($_POST['PaytDate'])==1){
 		$AllocsResult = DB_query($SQL,$db);
 		while ($Alloc = DB_fetch_array($AllocsResult)){
 
-			$SQL= 'UPDATE supptrans SET settled=0,
-							alloc=alloc-' . $Alloc['amt'] . ',
-							diffonexch = diffonexch - ((' . $Alloc['Amt'] . '/rate ) - ' . $Alloc['amt']/$Payment['rate'] . ')
-				WHERE supptrans.type=' . $Alloc['type'] . '
-				AND transno=' . $Alloc['transno'];
+			$SQL= "UPDATE supptrans SET settled=0,
+										alloc=alloc-" . $Alloc['amt'] . ",
+										diffonexch = diffonexch - ((" . $Alloc['Amt'] . "/rate ) - " . $Alloc['amt']/$Payment['rate'] . ")
+									WHERE supptrans.type='" . $Alloc['type'] . "'
+										AND transno='" . $Alloc['transno'] . "'";
 
 			$ErrMsg =_('The update to the suppliers charges that were settled by the payment failed because');
 			$UpdResult = DB_query($SQL,$db,$ErrMsg);
@@ -62,11 +62,11 @@ if (isset($_POST['RevPayts']) AND Is_Date($_POST['PaytDate'])==1){
 		}
 
 		prnMsg(' ... ' . _('reversed the allocations'),'info');
-		$SQL= 'DELETE FROM suppallocs WHERE transid_allocfrom=' . $Payment['id'];
+		$SQL= "DELETE FROM suppallocs WHERE transid_allocfrom='" . $Payment['id'] . "'";
 		$DelResult = DB_query($SQL,$db);
 		prnMsg(' ... ' . _('deleted the SuppAllocs records'),'info');
 
-		$SQL= 'DELETE FROM gltrans WHERE typeno=' . $Payment['transno'] . ' AND type=22';
+		$SQL= "DELETE FROM gltrans WHERE typeno='" . $Payment['transno'] . "' AND type=22";
 		$DelResult = DB_query($SQL,$db);
 		prnMsg(' .... ' . _('the GLTrans records (if any)'),'info');
 
