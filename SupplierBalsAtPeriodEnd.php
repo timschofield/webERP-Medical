@@ -143,12 +143,12 @@ If (isset($_POST['PrintPDF'])
 	$Periods = DB_query($sql,$db,$ErrMsg);
 
 	while ($myrow = DB_fetch_array($Periods,$db)){
-		 if ($myrow['YearMonth'] == date("Ym")) {  // get the current month 
-		  
+		 if ($myrow['YearMonth'] == date("Ym")) {  // get the current month
+
 		  echo '<option VALUE=' . $myrow['lastdate_in_period'] . ' selected="TRUE">' . MonthAndYearFromSQLDate($myrow['lastdate_in_period'],'M',-1);
 		 }
-		else { 
-		   echo '<option VALUE=' . $myrow['lastdate_in_period'] . '> '.$myrow['YearMonth'].' '.MonthAndYearFromSQLDate($myrow['lastdate_in_period']).'</option>';
+		else {
+		   echo '<option VALUE=' . $myrow['lastdate_in_period'] . '> '.MonthAndYearFromSQLDate($myrow['lastdate_in_period']).'</option>';
 	    }
 	   }
 	echo '</select></td></tr>';
