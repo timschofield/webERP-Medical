@@ -8,7 +8,7 @@ include ('includes/session.inc');
 $title = _('Recalculation of GL Balances in Chart Details Table');
 include('includes/header.inc');
 
-echo "<form method='POST' action=" . $_SERVER['PHP_SELF'] . '?' . SID . '>';
+echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (!isset($_POST['FromPeriod'])){
@@ -39,16 +39,16 @@ if (!isset($_POST['FromPeriod'])){
 } else {  /*OK do the updates */
 
 	/* Make the posted flag on all GL entries including and after the period selected = 0 */
-	$sql = 'UPDATE gltrans SET posted=0 WHERE periodno >='. $_POST['FromPeriod'];
+	$sql = "UPDATE gltrans SET posted=0 WHERE periodno >='" . $_POST['FromPeriod'] . "'";
 	$UpdGLTransPostedFlag = DB_query($sql,$db);
 
 	/* Now make all the actuals 0 for all periods including and after the period from */
-	$sql = 'UPDATE chartdetails SET actual =0 WHERE period >= ' . $_POST['FromPeriod'];
+	$sql = "UPDATE chartdetails SET actual =0 WHERE period >= '" . $_POST['FromPeriod'] . "'";
 	$UpdActualChartDetails = DB_query($sql,$db);
 
 	$ChartDetailBFwdResult = DB_query("SELECT accountcode, bfwd FROM chartdetails WHERE period='" . $_POST['FromPeriod'] . "'",$db);
 	while ($ChartRow=DB_fetch_array($ChartDetailBFwdResult)){
-		$sql = 'UPDATE chartdetails SET bfwd =' . $ChartRow['bfwd'] . ' WHERE period > ' . $_POST['FromPeriod'] . ' AND accountcode=' . $ChartRow['accountcode'];
+		$sql = "UPDATE chartdetails SET bfwd ='" . $ChartRow['bfwd'] . "' WHERE period > '" . $_POST['FromPeriod'] . "' AND accountcode='" . $ChartRow['accountcode'] . "'";
 		$UpdActualChartDetails = DB_query($sql,$db);
 	}
 
