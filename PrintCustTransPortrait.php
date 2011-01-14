@@ -52,7 +52,7 @@ If (isset($PrintPDF)
     $Right_Margin=30;
 
 	$pdf = new Cpdf('P', 'pt', 'A4');
-	$pdf->addInfo('Author','webERP ' . $Version);
+	$pdf->addInfo('Author','webERP ' . $_SESSION['VersionNumber']);
 	$pdf->addInfo('Creator','webERP http://www.web-erp.org');
 
 	if ($InvOrCredit=='Invoice'){
