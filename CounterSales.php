@@ -80,7 +80,8 @@ if (!isset($_SESSION['Items'.$identifier])){
 		$myrow = DB_fetch_array($result); //get the only row returned
 
 		if ($myrow['cashsalecustomer']==''){
-			prnMsg(_('To use this script it is first necessary to define a cash sales customer for the location that is your default location. The default cash sale customer is defined under set up ->Inventory Locations Maintenance. The customer should be entered using the customer code a hypen then the branch code of the customer to use.'),'error');
+			prnMsg(_('To use this script it is first necessary to define a cash sales customer for the location that is your default location.').' '.
+			 _('This should be setup by modifying the appropriate Customer/Branch details.'),'error');
 			include('includes/footer.inc');
 			exit;
 		}
