@@ -960,9 +960,6 @@ if (!isset($_SESSION['Contract'.$identifier]->DebtorNo)
 	echo '<br />';
 	echo'<table class="selection"><tr><th>' . _('Total Contract Cost') . '</th><th class="number">' . number_format(($ContractBOMCost+$ContractReqtsCost),2) . '</th><th>' . _('Contract Price') . '</th><th class="number">' . number_format(($ContractBOMCost+$ContractReqtsCost)*((100+$_SESSION['Contract'.$identifier]->Margin)/100),2) . '</th></tr></table>';
 
-	echo $ContractBOMCost."\t\t\t".$ContractReqtsCost."\t\t\t".$_SESSION['Contract'.$identifier]->Margin."\t\t\t";
-
-
 	echo'<p></p>';
 	echo '<div class="centre"><input type="submit" name="EnterContractBOM" value="' . _('Enter Items Required') . '" />
 			<input type="submit" name="EnterContractRequirements" value="' . _('Enter Other Requirements') .'" />';
