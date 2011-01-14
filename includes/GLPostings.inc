@@ -69,7 +69,7 @@ if(DB_num_rows($ChartDetailsNotSetUpResult)>0){
 					LEFT JOIN chartdetails ON chartmaster.accountcode = chartdetails.accountcode
 					AND periods.periodno = chartdetails.period
 					WHERE (periods.periodno BETWEEN '"  . $CreateFrom . "' AND '" . $CreateTo . "')
-					AND chartdetails.accountcode IS NULL'";
+					AND chartdetails.accountcode IS NULL";
 
 		$ErrMsg = _('Inserting new chart details records required failed because');
 		$InsChartDetailsRecords = DB_query($sql,$db,$ErrMsg);
