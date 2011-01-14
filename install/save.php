@@ -240,6 +240,11 @@ if ($_POST['DemoData']==false){
 	$Result = mkdir($CompanyDir . '/EDI_Pending');
 	$Result = mkdir($CompanyDir . '/reportwriter');
 	$Result = mkdir($CompanyDir . '/pdf_append');
+	$Result = mkdir($CompanyDir . '/FormDesigns');
+	copy ($path_to_root . '/companies/weberpdemo/FormDesigns/GoodsReceived.xml', $CompanyDir . '/FormDesigns/GoodsReceived.xml');
+	copy ($path_to_root . '/companies/weberpdemo/FormDesigns/PickingList.xml', $CompanyDir . '/FormDesigns/PickingList.xml');
+	copy ($path_to_root . '/companies/weberpdemo/FormDesigns/PurchaseOrder.xml', $CompanyDir . '/FormDesigns/PurchaseOrder.xml');
+	copy ($path_to_root . '/companies/weberpdemo/FormDesigns/SalesInvoice.xml', $CompanyDir . '/FormDesigns/SalesInvoice.xml');
 
 	// Now have a destination to place the logo image.
 	if (isset($_FILES['LogoFile'])) {
@@ -323,7 +328,7 @@ $result = mysqli_query($db,$sql) or die (mysql_error());
 $myrow = mysqli_fetch_row($result);
 $VersionString = $myrow[0];
 
-if (!isset($VersionString) || $VersionString == "") {
+if (!isset($VersionString) or $VersionString == "") {
 	$VersionString = "4.00 RC2";
 }
 

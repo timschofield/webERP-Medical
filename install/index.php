@@ -105,11 +105,11 @@ function change_data(type) {
 		</tr>
 		<?php } ?>
 		<tr>
-			<td width="140" style="color: #666666;">PHP Version > 4.1.0</td>
+			<td width="140" style="color: #666666;">PHP Version > 5.1.0</td>
 			<td width="35">
 				<?php
 				$phpversion = substr(PHP_VERSION, 0, 6);
-				if($phpversion > 4.1) {
+				if($phpversion > 5.1) {
 					?><font class="good">Yes</font><?php
 				} else {
 					?><font class="bad">No</font><?php
@@ -165,7 +165,7 @@ function change_data(type) {
 				<?php
 				// Try to guess installation URL
 				$GuessedURL = 'http://'.$_SERVER["SERVER_NAME"].$_SERVER["SCRIPT_NAME"];
-				$GuessedURL = rtrim(dirname($GuessedURL), 'install');
+				$GuessedURL = trim(rtrim(dirname($GuessedURL), 'install'));
 				?>
 				<input type="text" tabindex="30" name="ba_url" size="30" value="<?php if(isset($_SESSION['ba_url'])) echo $_SESSION['ba_url']; else echo $GuessedURL; ?>"/>
 
