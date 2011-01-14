@@ -12,16 +12,15 @@ if (isset($_POST['Update'])) {
 	foreach ($_POST as $ScriptName => $PageSecurityValue) {
 		if ($ScriptName!='Update' and $ScriptName!='FormID') {
 			//$key=substr($key, 0, strlen($key)-4).'.php';
-			$sql="UPDATE scripts SET pagesecurity='".$PageSecurityValue."' WHERE script='".$ScriptName."'";
+			$sql="UPDATE pagesecurity SET security='".$PageSecurityValue."' WHERE script='".$ScriptName."'";
 			$UpdateResult=DB_query($sql, $db,_('Could not update the page security value for the script because'));
 		}
 	}
 }
 
 $sql="SELECT script,
-							pagesecurity,
-							description
-			FROM scripts";
+							security
+			FROM pagesecurity";
 
 $result=DB_query($sql, $db);
 
@@ -39,7 +38,7 @@ while ($myrow=DB_fetch_array($result)) {
 	echo '<tr><td>'.$myrow['script'].'</td>';
 	echo '<td><select name="'.$myrow['script'].'">';
 	while ($mytokenrow=DB_fetch_array($TokenResult)) {
-		if ($mytokenrow['tokenid']==$myrow['pagesecurity']) {
+		if ($mytokenrow['tokenid']==$myrow['security']) {
 			echo '<option selected="True" value="'.$mytokenrow['tokenid'].'">'.htmlentities($mytokenrow['tokenname']).'</option>';
 		} else {
 			echo '<option value="'.$mytokenrow['tokenid'].'">'.htmlentities($mytokenrow['tokenname']).'</option>';
