@@ -222,7 +222,7 @@ function UpdateField($Table, $Field, $NewValue, $Criteria, $db) {
 	} else {
 		$myrow[0]=0;
 	}
-	if ($myrow[0]!=0) {
+	if ($myrow[0]!=0 or DB_num_rows($result)>0) {
 		$sql="SELECT ".$Field." FROM ".$Table." WHERE ".$Criteria;
 		$result=DB_query($sql, $db);
 		$myrow=DB_fetch_row($result);
