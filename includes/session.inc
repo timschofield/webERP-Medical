@@ -270,10 +270,6 @@ if (count($_SESSION['AllowedPageSecurityTokens'])==1 and $_SESSION['AllowedPageS
 } else {
 	$SupplierLogin=0;
 }
-/* Nasty kludge to allow Supplier only logins as well as Customer logins  - .... hmmmmm some work to do here then! */
-if ($SupplierLogin==1) {
-	$_SESSION['AllowedPageSecurityTokens'][0]=9;
-}
 
 
 if (!isset($AllowAnyone)){
@@ -295,6 +291,10 @@ if (!isset($AllowAnyone)){
 		exit;
 	}
  }
+/* Nasty kludge to allow Supplier only logins as well as Customer logins  - .... hmmmmm some work to do here then! */
+if ($SupplierLogin==1) {
+	$_SESSION['AllowedPageSecurityTokens'][0]=9;
+}
 
 
 if (in_array(15, $_SESSION['AllowedPageSecurityTokens'])) { /*System administrator login */
