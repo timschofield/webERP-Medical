@@ -47,7 +47,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 		while ($myrow = DB_fetch_array($result)) {
 			//update database if update pressed
 			$SQLUpdate = "UPDATE prices
-								SET price = '" . $_POST['Price_' . $PriceCounter] . "'
+								SET enddate = '" . date("Y-m-d",mktime(0,0,0,date("m") ,date("d")-1,date("Y"))) . "'
 							WHERE `prices`.`stockid` = '" . $_POST['StockID_' . $PriceCounter] . "'
 							AND prices.typeabbrev ='" . $_POST['SalesType'] . "'
 							AND prices.currabrev ='" . $_POST['CurrCode'] . "'
@@ -56,6 +56,26 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 							AND prices.startdate ='" . $_POST['StartDate_' . $PriceCounter] . "'
 							AND prices.enddate ='" . $_POST['EndDate_' . $PriceCounter] . "'";
 			$ResultUpdate = DB_query($SQLUpdate, $db);
+			$SQLInsert = "INSERT INTO prices (
+							stockid,
+							price,
+							typeabbrev,
+							currabrev,
+							debtorno,
+							branchcode,
+							startdate,
+							enddate
+						) VALUES (
+							'" . $_POST['StockID_' . $PriceCounter] . "',
+							'" . $_POST['Price_' . $PriceCounter] . "',
+							'" . $_POST['SalesType'] . "',
+							'" . $_POST['CurrCode'] . "',
+							'" . $_POST['DebtorNo_' . $PriceCounter] . "',
+							'" . $_POST['BranchCode_' . $PriceCounter] . "',
+							'" . date('Y-m-d') . "',
+							'2030-12-31'
+						)";
+			$ResultInsert = DB_query($SQLInsert, $db);
 			$PriceCounter++;
 		}
 		DB_free_result($result); //clear the old result

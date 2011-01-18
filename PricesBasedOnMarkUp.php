@@ -238,7 +238,7 @@ if (isset($_POST['UpdatePrices'])){
 		if (Is_Date($_POST['PriceEndDate'])){
 			$SQLEndDate = FormatDateForSQL($_POST['PriceEndDate']);
 		} else {
-			$SQLEndDate = '0000-00-00';
+			$SQLEndDate = '2030-12-31';
 		}
 		$sql = "SELECT stockid,
 						materialcost+labourcost+overheadcost AS cost
@@ -322,7 +322,7 @@ if (isset($_POST['UpdatePrices'])){
 												AND startdate='" . FormatDateForSQL($_POST['PriceStartDate']) . "'
 												AND stockid='" . $myrow['stockid'] . "'",$db);
 				if (DB_num_rows($CurrentPriceResult)==1){
-					$sql = "UPDATE prices SET price='" . $RoundedPrice . "'
+					$UpdateSQL = "UPDATE prices SET enddate='" . date("Y-m-d",mktime(0,0,0,date("m") ,date("d")-1,date("Y"))) . "'
 							WHERE typeabbrev='" . $_POST['PriceList'] . "'
 							AND currabrev='" . $_POST['CurrCode'] . "'
 							AND debtorno=''
@@ -330,7 +330,20 @@ if (isset($_POST['UpdatePrices'])){
 							AND enddate ='" . $SQLEndDate . "'
 							AND stockid='" . $myrow['stockid'] . "'";
 					$ErrMsg =_('Error updating prices for') . ' ' . $myrow['stockid'] . ' ' . _('because');
-					$result = DB_query($sql,$db,$ErrMsg);
+					$result = DB_query($UpdateSQL,$db,$ErrMsg);
+					$InsertSQL = "INSERT INTO prices (stockid,
+												typeabbrev,
+												currabrev,
+												startdate,
+												enddate,
+												price)
+									VALUES ('" . $myrow['stockid'] . "',
+											'" . $_POST['PriceList'] . "',
+											'" . $_POST['CurrCode'] . "',
+											'" . FormatDateForSQL($_POST['PriceStartDate']) . "',
+											'" . $SQLEndDate . "',
+									 		'" . $RoundedPrice . "')";
+					$result = DB_query($InsertSQL,$db,$ErrMsg);
 					prnMsg(_('Updating price for') . ' ' . $myrow['stockid'] . ' ' . _('to') . ' ' . $RoundedPrice,'info');
 				} else {
 					$sql = "INSERT INTO prices (stockid,
