@@ -48,7 +48,7 @@ if (isset($_POST['submit']) or isset($_POST['pdf']) or isset($_POST['csv'])) {
 	$result = DB_query($sql, $db);
 	if (isset($_POST['pdf'])) {
 		$FontSize = 10;
-		$pdf->addinfo('Title', _('Fixed Asset Register'));
+		$pdf->addInfo('Title', _('Fixed Asset Register'));
 		$PageNumber = 1;
 		$line_height = 12;
 		if ($_POST['AssetCategory']=='%') {
