@@ -51,6 +51,7 @@ if (isset($_GET['NewContract']) AND isset($_GET['SelectedCustomer'])) {
 		$_SESSION['Contract'.$identifier] = new Contract;
 
 		$_POST['SelectedCustomer'] = $_GET['SelectedCustomer'];
+		$_POST['SelectedCustomer'] = $_GET['SelectedBranch'];
 
 		/*The customer is checked for credit and the Contract Object populated
 		 * using the usual logic of when a customer is selected
@@ -669,7 +670,8 @@ if (isset($_POST['SearchCustomers'])){
 
 		if (DB_num_rows($result_CustSelect)==1){
 			$myrow=DB_fetch_array($result_CustSelect);
-			$_POST['SelectedCustomer'] = $myrow['debtorno'] . '-' . $myrow['branchcode'];
+			$_POST['SelectedCustomer'] = $myrow['debtorno'];
+			$_POST['SelectedBranch'] = $myrow['branchcode'];
 		} elseif (DB_num_rows($result_CustSelect)==0){
 			prnMsg(_('No Customer Branch records contain the search criteria') . ' - ' . _('please try again') . ' - ' . _('Note a Customer Branch Name may be different to the Customer Name'),'info');
 		}
@@ -677,14 +679,21 @@ if (isset($_POST['SearchCustomers'])){
 } /*end of if search for customer codes/names */
 
 
-if (isset($_POST['SelectedCustomer'])) {
+if (isset($_POST['SelectedCustomer1'])) {
 
 /* will only be true if page called from customer selection form
  * or set because only one customer record returned from a search
  * so parse the $Select string into debtorno and branch code */
-	$CustomerBranchArray = explode('-',$_POST['SelectedCustomer']);
-	$_SESSION['Contract'.$identifier]->DebtorNo  = trim($CustomerBranchArray[0]);
-	$_SESSION['Contract'.$identifier]->BranchCode = trim($CustomerBranchArray[1]);
+	foreach ($_POST as $key => $value) {
+		if (substr($key, 0, 6)=='Submit') {
+			$Index=substr($key, 6, 1);
+			$_POST['SelectedCustomer']=$_POST['SelectedCustomer'.$Index];
+			$_POST['SelectedBranch']=$_POST['SelectedBranch'.$Index];
+		}
+	}
+//	$CustomerBranchArray = explode('-',$_POST['SelectedCustomer']);
+	$_SESSION['Contract'.$identifier]->DebtorNo  = $_POST['SelectedCustomer'];
+	$_SESSION['Contract'.$identifier]->BranchCode = $_POST['SelectedBranch'];
 
 	$sql = "SELECT debtorsmaster.name,
 								custbranch.brname,
@@ -785,8 +794,9 @@ if (!isset($_SESSION['Contract'.$identifier]->DebtorNo)
 			} else {
 				echo '<td></td>';
 			}
-			echo '<td><input tabindex="'.number_format($j+5).'" type="submit" name="Submit" value="'.htmlentities($myrow['brname']).'" /></td>
-					<input type="hidden" name="SelectedCustomer" value="'.$myrow['debtorno'].' - '.$myrow['branchcode'].'" />
+			echo '<td><input tabindex="'.number_format($j+5).'" type="submit" name="Submit'.$j.'" value="'.htmlentities($myrow['brname']).'" /></td>
+					<input type="hidden" name="SelectedCustomer'.$j.'" value="'.$myrow['debtorno'].'" />
+					<input type="hidden" name="SelectedBranch'.$j.'" value="'.$myrow['branchcode'].'" />
 					<td>'.htmlentities($myrow['contactname']).'</td>
 					<td>'.$myrow['phoneno'].'</td>
 					<td>'.$myrow['faxno'].'</td>
