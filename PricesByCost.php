@@ -73,7 +73,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 							'" . $_POST['DebtorNo_' . $PriceCounter] . "',
 							'" . $_POST['BranchCode_' . $PriceCounter] . "',
 							'" . date('Y-m-d') . "',
-							'2030-12-31'
+							'2030-01-01'
 						)";
 			$ResultInsert = DB_query($SQLInsert, $db);
 			$PriceCounter++;
