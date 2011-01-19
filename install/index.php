@@ -26,9 +26,9 @@ if(!isset($_GET['sessions_checked']) || $_GET['sessions_checked'] != 'true') {
 		$session_support = '<font class="bad">Disabled</font>';
 	}
 }
-$PathToRoot = '..';
+$PathToRoot = '..';  // providing full read and write access to the root directory is a security risk for hackers to exploit
 $CompanyPath = $PathToRoot. '/companies';
-
+$ConfigFile  = $PathToRoot.'config.php';
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -135,13 +135,13 @@ function change_data(type) {
 			<td colspan="8"><h1>Step 2</h1>Please check the following files/folders are writeable before continuing...</td>
 		</tr>
 		<tr>
-			<!-- <td style="color: #666666;">Configuration file</td>
-			<td><?php //if(is_writable($PathToRoot)) {
-						//echo '<font class="good">Writeable</font>';
-					 // } else {
-					//	echo '<font class="bad">Unwriteable</font>';
-					 // } ?>
-			</td> -->
+		  <td style="color: #666666;">Root folder <?php echo '('. $PathToRoot. ')' ?></td>
+			<td><?php  if(is_writable($PathToRoot)) {
+						 echo '<font class="good">Writeable</font>';
+					 } else {
+						echo '<font class="bad">Unwriteable</font>';
+				    } ?>
+			</td>
 			<td style="color: #666666;"><?php echo 'Company data dirs ('.  $CompanyPath. '/*)'; ?>
 			</td>
 			<td><?php if(is_writable($CompanyPath)) {
@@ -219,7 +219,7 @@ function change_data(type) {
 		</table>
 		<table cellpadding="5" cellspacing="0" width="100%" align="center">
 		<tr>
-			<td colspan="5">Please enter your MySQL databasedatabase server details below...</td>
+			<td colspan="5">Please enter your MySQL database server details below...</td>
 		</tr>
 		<tr>
 			<td width="120" style="color: #666666;">Host Name:</td>
@@ -352,8 +352,8 @@ function change_data(type) {
 				</table>
 			</td>
 			<?php //only show submit button if ready to go
-			if ($phpversion > 4.1 AND $_SESSION['session_support'] = '<font class="good">Enabled</font>'
-					AND is_writable($PathToRoot) AND is_writable($CompanyPath)){
+			if (($phpversion > 4.1 ) AND is_writable($CompanyPath)) {
+				// AND $_SESSION['session_support'] == 'Enabled' 
 				echo '<td colspan="1" align="right">
 						<input type="submit" tabindex="20" name="submit" value="Install WebERP" class="submit" />
 						</td>';
@@ -369,18 +369,6 @@ function change_data(type) {
 </table>
 
 </form>
-
-<table cellpadding="0" cellspacing="0" border="0" width="100%" style="padding: 10px 0px 10px 0px;">
-<tr>
-	<td align="center" style="font-size: 10px;">
-		<!-- Please note: the below reference to the GNU GPL should not be removed, as it provides a link for users to read about warranty, etc. -->
-		<a href="http://www.web-erp.org/" style="color: #000000;" target="_blank">WebERP</a>
-		is	released under the
-		<a href="http://www.gnu.org/licenses/gpl.html" style="color: #000000;" target="_blank">GNU General Public License</a>
-		<!-- Please note: the above reference to the GNU GPL should not be removed, as it provides a link for users to read about warranty, etc. -->
-	</td>
-</tr>
-</table>
 
 </body>
 </html>

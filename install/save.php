@@ -111,7 +111,7 @@ function default_dir_mode($temp_dir) {
 }
 
 // if demo data checkbox is ticked and company name is not weberpdemo, reject the entry.
-if ((isset($_POST['DemoData'])== true) AND ($_POST['company_name'] != "weberpdemo")) {
+if ($_POST['DemoData'] == "true" AND $_POST['company_name'] != "weberpdemo") {
 	 set_error('Company name must be weberpdemo if weberpdemo company check button is ticked. Else uncheck the button for new company');
 }
 
