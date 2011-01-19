@@ -525,7 +525,7 @@ if (isset($_POST['CommitBatch'])){
 	$ErrMsg = _('Cannot commit the changes');
 	$DbgMsg = _('The SQL that failed was');
 	$result = DB_Txn_Commit($db);
-
+	echo '<br />';
 	prnMsg( _('Receipt batch') . ' ' . $_SESSION['ReceiptBatch']->BatchNo . ' ' . _('has been successfully entered into the database'),'success');
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print') . '" alt="">' . ' ' . '<a href="' . $rootpath . '/PDFBankingSummary.php?BatchNo=' . $_SESSION['ReceiptBatch']->BatchNo . '">' . _('Print PDF Batch Summary') . '</a></p>';
@@ -1036,11 +1036,7 @@ if (((isset($_SESSION['CustomerRecord'])
 	echo '</tr></table>';
 	echo '<div class="centre"><br>';
 	echo '<input tabindex=11 type=submit name="Search" value="' . _('Search Now') . '">';
-	echo '<br/><br/><input tabindex=12 type=submit name="GLEntry" value="' . _('Enter A GL Receipt') . '"><br />';
-
-	if (count($_SESSION['ReceiptBatch']->Items) > 0){
-		echo '<br/><br/><input tabindex=13 type=submit name="CommitBatch" VALUE="' . _('Accept and Process Batch') . '"></div>';
-	}
+	echo '<br/><br/><input tabindex=12 type=submit name="GLEntry" value="' . _('Enter A GL Receipt') . '"><br /></div>';
 
 	if (isset($CustomerSearchResult)) {
 
@@ -1080,6 +1076,10 @@ if (((isset($_SESSION['CustomerRecord'])
 
 	}
 	//end if results to show
+}
+
+if (isset($_SESSION['ReceiptBatch']->Items) and count($_SESSION['ReceiptBatch']->Items) > 0){
+	echo '<div class="centre"><br/><input tabindex=13 type=submit name="CommitBatch" VALUE="' . _('Accept and Process Batch') . '"></div>';
 }
 
 echo '</form>';
