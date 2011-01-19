@@ -238,7 +238,7 @@ if (isset($_POST['UpdatePrices'])){
 		if (Is_Date($_POST['PriceEndDate'])){
 			$SQLEndDate = FormatDateForSQL($_POST['PriceEndDate']);
 		} else {
-			$SQLEndDate = '2030-12-31';
+			$SQLEndDate = '2030-01-01';
 		}
 		$sql = "SELECT stockid,
 						materialcost+labourcost+overheadcost AS cost
