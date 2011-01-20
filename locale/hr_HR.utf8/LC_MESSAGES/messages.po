@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 3.12\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-04 22:11+1200\n"
-"PO-Revision-Date: 2010-01-22 14:51+0100\n"
-"Last-Translator: Miroslav Mazurek <mmazurek@sfsb.hr>\n"
+"POT-Creation-Date: 2011-01-04 22:15+1200\n"
+"PO-Revision-Date: 2011-01-10 18:49+0000\n"
+"Last-Translator: MM <Unknown>\n"
 "Language-Team: Miroslav Mazurek <mmazurek@sfsb.hr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-10 14:10+0000\n"
-"X-Generator: Launchpad (build 12161)\n"
+"X-Launchpad-Export-Date: 2011-01-20 14:52+0000\n"
+"X-Generator: Launchpad (build 12214)\n"
 
 #: AccountGroups.php:9 index.php:1273
 msgid "Account Groups"
@@ -69,8 +69,8 @@ msgid ""
 "structure - select an alternative parent account group or make this group a "
 "top level account group"
 msgstr ""
-"Odabrana nadređena kontna skupina rezultira u rekurzivnoj kontnoj strukturi "
-"- odaberite drugu nadređenu kontnu skupinu ili promovirajte ovu skupinu u "
+"Odabrana nadređena kontna skupina rezultira u rekurzivnoj kontnoj strukturi -"
+" odaberite drugu nadređenu kontnu skupinu ili promovirajte ovu skupinu u "
 "vršnu skupinu"
 
 #: AccountGroups.php:95
@@ -82,14 +82,12 @@ msgid "The section in accounts must be an integer"
 msgstr "Kontni razred mora biti cjeli broj"
 
 #: AccountGroups.php:113
-#, fuzzy
 msgid "The sequence in the trial balance must be an integer"
-msgstr "Niz u probnoj bilanci mora biti cjelobrojan"
+msgstr ""
 
 #: AccountGroups.php:119
-#, fuzzy
 msgid "The sequence in the TB must be numeric and less than"
-msgstr "Niz u probnoj bilanci mora biti brojčani i manji od"
+msgstr ""
 
 #: AccountGroups.php:136
 msgid "An error occurred in updating the account group"
@@ -116,9 +114,9 @@ msgid "Record inserted"
 msgstr "Zapis dodan"
 
 #: AccountGroups.php:176
-#, fuzzy
-msgid "An error occurred in retrieving the group information from chartmaster"
-msgstr "Došlo je do greške pri dohvatu podataka o skupini od chartmastera"
+msgid ""
+"An error occurred in retrieving the group information from chartmaster"
+msgstr ""
 
 #: AccountGroups.php:181
 msgid ""
@@ -185,7 +183,7 @@ msgstr "skupina je obrisana"
 
 #: AccountGroups.php:223
 msgid "The sql that was used to retrieve the account group information was "
-msgstr "SQL naredba korištena za dohvat kontne skupine"
+msgstr "SQL naredba korištena za dohvat kontne skupine "
 
 #: AccountGroups.php:224
 msgid "Could not get account groups because"
@@ -242,9 +240,8 @@ msgid "Section"
 msgstr "Razred"
 
 #: AccountGroups.php:232 AccountGroups.php:396
-#, fuzzy
 msgid "Sequence In TB"
-msgstr "RB u probnoj bilanci"
+msgstr ""
 
 #: AccountGroups.php:233 AccountGroups.php:380 GLProfit_Loss.php:8
 #: GLProfit_Loss.php:105 GLProfit_Loss.php:106 GLProfit_Loss.php:157
@@ -396,12 +393,11 @@ msgstr "Došlo je do gređke pri dohvatu podataka o kontnoj skupini"
 msgid ""
 "The SQL that was used to retrieve the account group and that failed in the "
 "process was"
-msgstr "Nije izvršena SQL naredba korištena za dohvat kontne skupine "
+msgstr "Nije izvršena SQL naredba korištena za dohvat kontne skupine"
 
 #: AccountGroups.php:298
-#, fuzzy
 msgid "The account group name does not exist in the database"
-msgstr "Naziv skupine računa već postoji u bazi"
+msgstr ""
 
 #: AccountGroups.php:314 GLAccounts.php:250 GLAccounts.php:299
 #: Z_ImportGLAccountGroups.php:28
@@ -468,7 +464,8 @@ msgstr ""
 
 #: AccountSections.php:139
 msgid "general ledger accounts groups that refer to this account section"
-msgstr "kontne skupine u glavnoj knjizi koje se pozivaju na ovaj kontni razred"
+msgstr ""
+"kontne skupine u glavnoj knjizi koje se pozivaju na ovaj kontni razred"
 
 #: AccountSections.php:150
 msgid "section has been deleted"
@@ -513,9 +510,8 @@ msgid "Contacts for Customer: <b>"
 msgstr "Kontakti za kupca: <b>"
 
 #: AddCustomerContacts.php:29
-#, fuzzy
 msgid "Edit contact for <b>"
-msgstr "Kontakti za kupca: <b>"
+msgstr ""
 
 #: AddCustomerContacts.php:41
 msgid "The Contact must be an integer."
@@ -626,9 +622,8 @@ msgid "The contact note record has been deleted"
 msgstr "Obrisane zabilješke o kontaktu"
 
 #: AddCustomerNotes.php:98
-#, fuzzy
 msgid "Notes for Customer"
-msgstr "Zabilješke za kupca: <b>"
+msgstr ""
 
 #: AddCustomerNotes.php:106 AddCustomerNotes.php:189
 #: AddCustomerTypeNotes.php:104 AddCustomerTypeNotes.php:186
@@ -706,9 +701,8 @@ msgid "The contact group note record has been deleted"
 msgstr "Obrisan je zapis sa zabilješkom kontakt grupe"
 
 #: AddCustomerTypeNotes.php:95
-#, fuzzy
 msgid "Notes for Customer Type"
-msgstr "Zabilješke za kupca tipa: <b>"
+msgstr ""
 
 #: AddCustomerTypeNotes.php:106
 msgid "href"
@@ -1053,9 +1047,8 @@ msgid "Area Name"
 msgstr "Naziv pošte"
 
 #: Areas.php:167
-#, fuzzy
 msgid "View Customers from this Area"
-msgstr "Vidi detalje o kupcu"
+msgstr ""
 
 #: Areas.php:177
 msgid "Review Areas Defined"
@@ -1087,7 +1080,7 @@ msgstr "Šifra korisnika"
 
 #: AuditTrail.php:56
 msgid "Table "
-msgstr "Tablica"
+msgstr "Tablica "
 
 #: AuditTrail.php:68 MRPReport.php:789 PO_SelectPurchOrder.php:357
 #: SelectContract.php:196 SelectProduct.php:710
@@ -1445,7 +1438,8 @@ msgid "after"
 msgstr "nakon"
 
 #: BankMatching.php:218
-msgid "The payments with the selected criteria could not be retrieved because"
+msgid ""
+"The payments with the selected criteria could not be retrieved because"
 msgstr ""
 
 #: BankMatching.php:221 ShipmentCosting.php:502 ShipmentCosting.php:573
@@ -1470,9 +1464,8 @@ msgstr ""
 #: SuppTransGLAnalysis.php:174 Z_CheckAllocs.php:63
 #: includes/PDFBankingSummaryPageHeader.inc:55
 #: includes/PDFChequeListingPageHeader.inc:37
-#, fuzzy
 msgid "Amount"
-msgstr "Količina"
+msgstr ""
 
 #: BankMatching.php:225 BankReconciliation.php:189 BankReconciliation.php:261
 #: PDFOrdersInvoiced.php:348 PDFOrderStatus.php:316
@@ -2015,9 +2008,8 @@ msgid "WC"
 msgstr ""
 
 #: BOMIndented.php:324
-#, fuzzy
 msgid "Assembly:"
-msgstr "Sklop:"
+msgstr ""
 
 #: BOMIndented.php:329 BOMIndentedReverse.php:315
 msgid " 12345678901234567890"
@@ -2196,9 +2188,8 @@ msgid "there are no components defined for it"
 msgstr "nema komponenti definiranih za to"
 
 #: BOMInquiry.php:163
-#, fuzzy
 msgid "Return to Main Menu"
-msgstr "Glavni izbornik"
+msgstr ""
 
 #: BOMInquiry.php:168
 msgid "per"
@@ -2249,7 +2240,8 @@ msgid "Bill of Materials Listing"
 msgstr "Ispis sastavnica"
 
 #: BOMListing.php:50
-msgid "The Bill of Material listing could not be retrieved by the SQL because"
+msgid ""
+"The Bill of Material listing could not be retrieved by the SQL because"
 msgstr "SQL-om nije moguće doihvatiti ispis sastavnice zbog"
 
 #: BOMListing.php:61
@@ -2293,9 +2285,8 @@ msgid "The SQL used to retrieve the components was"
 msgstr ""
 
 #: BOMs.php:118
-#, fuzzy
 msgid "No lower levels"
-msgstr "Kreiranje ostalih razina"
+msgstr ""
 
 #: BOMs.php:121
 msgid "Drill Down"
@@ -2310,14 +2301,14 @@ msgstr ""
 
 #: BOMs.php:225
 msgid ""
-"The effective after date field must be a date in the format dd/mm/yy or dd/"
-"mm/yyyy or ddmmyy or ddmmyyyy or dd-mm-yy or dd-mm-yyyy"
+"The effective after date field must be a date in the format dd/mm/yy or "
+"dd/mm/yyyy or ddmmyy or ddmmyyyy or dd-mm-yy or dd-mm-yyyy"
 msgstr ""
 
 #: BOMs.php:231
 msgid ""
-"The effective to date field must be a date in the format dd/mm/yy or dd/mm/"
-"yyyy or ddmmyy or ddmmyyyy or dd-mm-yy or dd-mm-yyyy"
+"The effective to date field must be a date in the format dd/mm/yy or "
+"dd/mm/yyyy or ddmmyy or ddmmyyyy or dd-mm-yy or dd-mm-yyyy"
 msgstr ""
 
 #: BOMs.php:237 StockAdjustments.php:83 StockTransfers.php:130
@@ -3590,7 +3581,8 @@ msgid "The following SQL to update the sales order detail record was used"
 msgstr ""
 
 #: ConfirmDispatch_Invoice.php:852 ConfirmDispatch_Invoice.php:881
-msgid "The order delivery differences log record could not be inserted because"
+msgid ""
+"The order delivery differences log record could not be inserted because"
 msgstr ""
 
 #: ConfirmDispatch_Invoice.php:853 ConfirmDispatch_Invoice.php:882
@@ -3641,7 +3633,8 @@ msgid "because"
 msgstr ""
 
 #: ConfirmDispatch_Invoice.php:975 CounterSales.php:1293
-msgid "Can not retrieve assembly components location stock quantities because "
+msgid ""
+"Can not retrieve assembly components location stock quantities because "
 msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1011 CounterSales.php:1329
@@ -3752,7 +3745,8 @@ msgstr ""
 #: StockLocTransferReceive.php:173 StockLocTransferReceive.php:286
 #: StockTransfers.php:261 StockTransfers.php:369 WorkOrderIssue.php:231
 #: WorkOrderIssue.php:286 WorkOrderReceive.php:508 WorkOrderReceive.php:579
-msgid "The following SQL to insert the serial stock movement records was used"
+msgid ""
+"The following SQL to insert the serial stock movement records was used"
 msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1206 CounterSales.php:1530
@@ -3822,14 +3816,12 @@ msgid "The sales discount GL posting could not be inserted because"
 msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1378
-#, fuzzy
 msgid "The asset disposal GL posting details could not be retrieved because"
-msgstr "Podaci o prodaji nisu dohvaćeni zbog"
+msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1379
-#, fuzzy
 msgid "The following SQL was used to get the asset posting details"
-msgstr "SQL naredba korištena za dohvat podataka je"
+msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1404 ConfirmDispatch_Invoice.php:1426
 #: ConfirmDispatch_Invoice.php:1448 ConfirmDispatch_Invoice.php:1470
@@ -3843,37 +3835,33 @@ msgid ""
 msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1429
-#, fuzzy
 msgid ""
 "The reversal of asset cost on dispoal GL posting could not be inserted "
 "because"
-msgstr "Podaci o prodaji nisu dohvaćeni zbog"
+msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1451
-#, fuzzy
 msgid "The disposal net book value GL posting could not be inserted because"
-msgstr "Podaci o prodaji nisu dohvaćeni zbog"
+msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1473
-#, fuzzy
 msgid "The disposal proceeds GL posting could not be inserted because"
-msgstr "Podaci o prodaji nisu dohvaćeni zbog"
+msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1501
-#, fuzzy
 msgid "The fixed asset transaction could not be inserted because"
-msgstr "Nije moguće dohvatiti kontni plan zbog"
+msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1502 GoodsReceived.php:596 ReverseGRN.php:176
 #: SupplierCredit.php:1190 SupplierCredit.php:1277 SupplierInvoice.php:1187
 #: SupplierInvoice.php:1271
-msgid "The following SQL to insert the fixed asset transaction record was used"
+msgid ""
+"The following SQL to insert the fixed asset transaction record was used"
 msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1509
-#, fuzzy
 msgid "The fixed asset record could not be updated for the disposal because"
-msgstr "Postavke poduzeća nemogu se ažurirati zbog"
+msgstr ""
 
 #: ConfirmDispatch_Invoice.php:1510
 msgid "The following SQL to update the fixed asset record was used"
@@ -3976,9 +3964,8 @@ msgid "Process Invoice"
 msgstr "Obrada računa"
 
 #: ContractBOM.php:10
-#, fuzzy
 msgid "Contract Bill of Materials"
-msgstr "Prikaži sastavnicu"
+msgstr ""
 
 #: ContractBOM.php:43 ContractOtherReqts.php:45
 msgid ""
@@ -4045,9 +4032,8 @@ msgid ""
 msgstr ""
 
 #: ContractBOM.php:200
-#, fuzzy
 msgid "The item details could not be retrieved"
-msgstr "Podaci o prodaji nisu dohvaćeni zbog"
+msgstr ""
 
 #: ContractBOM.php:201 SelectCreditItems.php:602
 msgid "The SQL used to retrieve the item details but failed was"
@@ -4066,14 +4052,12 @@ msgid ""
 msgstr ""
 
 #: ContractBOM.php:232
-#, fuzzy
 msgid "Contract Bill of Material"
-msgstr "Prikaži sastavnicu"
+msgstr ""
 
 #: ContractBOM.php:237 ContractOtherReqts.php:90
-#, fuzzy
 msgid "Contract Reference:"
-msgstr "Porezna poveznica"
+msgstr ""
 
 #: ContractBOM.php:244 PO_Items.php:913 SupplierTenders.php:267
 #: includes/PDFTransPageHeader.inc:188
@@ -4086,9 +4070,8 @@ msgid "Sub-total"
 msgstr ""
 
 #: ContractBOM.php:278
-#, fuzzy
 msgid "Update Lines"
-msgstr "Ažuriraj cijene"
+msgstr ""
 
 #: ContractBOM.php:279 ContractOtherReqts.php:128
 msgid "Back To Contract Header"
@@ -4169,14 +4152,12 @@ msgid "Please restrict your search to only the parts required"
 msgstr ""
 
 #: ContractBOM.php:393
-#, fuzzy
 msgid "Add to Contract Bill Of Material"
-msgstr "Prikaži sastavnicu"
+msgstr ""
 
 #: ContractCosting.php:8
-#, fuzzy
 msgid "Contract Costing"
-msgstr "Šifra kontakta"
+msgstr ""
 
 #: ContractCosting.php:20
 msgid ""
@@ -4185,9 +4166,8 @@ msgid ""
 msgstr ""
 
 #: ContractCosting.php:42
-#, fuzzy
 msgid "Could not get the inventory issues for this contract because"
-msgstr "Nije moguće dohvatiti razred kontnih skupina zbog"
+msgstr ""
 
 #: ContractCosting.php:55 ContractCosting.php:63 Contracts.php:191
 #: Contracts.php:739 Contracts.php:811 EDIProcessOrders.php:376
@@ -4196,33 +4176,28 @@ msgid "Contract"
 msgstr ""
 
 #: ContractCosting.php:57
-#, fuzzy
 msgid "Closed"
-msgstr "Dopušteno"
+msgstr ""
 
 #: ContractCosting.php:59
-#, fuzzy
 msgid "Current Confirmed"
-msgstr "trenutna cijena"
+msgstr ""
 
 #: ContractCosting.php:61
-#, fuzzy
 msgid "Quoted"
-msgstr "Kvartal"
+msgstr ""
 
 #: ContractCosting.php:67
 msgid "Original Costing"
 msgstr ""
 
 #: ContractCosting.php:68
-#, fuzzy
 msgid "Actual Costs"
-msgstr "Ukupni trošak"
+msgstr ""
 
 #: ContractCosting.php:70
-#, fuzzy
 msgid "Inventory Required"
-msgstr "Postavke skladišta"
+msgstr ""
 
 #: ContractCosting.php:75 ContractCosting.php:81 Contracts.php:921
 #: CounterSales.php:664 DeliveryDetails.php:786 DeliveryDetails.php:851
@@ -4248,9 +4223,8 @@ msgid "Total Inventory Actual Cost"
 msgstr ""
 
 #: ContractCosting.php:125
-#, fuzzy
 msgid "Other Costs"
-msgstr "Jedinični trošak"
+msgstr ""
 
 #: ContractCosting.php:130 ContractCosting.php:150 Contracts.php:943
 msgid "Requirement"
@@ -4279,9 +4253,8 @@ msgid "Anticipated"
 msgstr ""
 
 #: ContractCosting.php:167
-#, fuzzy
 msgid "Could not get the other charges to the contract because"
-msgstr "Nije moguća provjera postojanja skupine zbog"
+msgstr ""
 
 #: ContractCosting.php:185
 msgid "Actual Other Costs"
@@ -4306,9 +4279,8 @@ msgid ""
 msgstr ""
 
 #: ContractCosting.php:250
-#, fuzzy
 msgid "The status of the contract could not be updated to closed because"
-msgstr "Postavke poduzeća nemogu se ažurirati zbog"
+msgstr ""
 
 #: ContractCosting.php:251
 msgid "The following SQL to change the status of the contract was used"
@@ -4375,9 +4347,8 @@ msgid ""
 msgstr ""
 
 #: ContractCosting.php:412
-#, fuzzy
 msgid "Close Contract"
-msgstr "Kupac Kontakti"
+msgstr ""
 
 #: ContractCosting.php:412
 msgid ""
@@ -4417,9 +4388,8 @@ msgid "Enter New Requirements"
 msgstr ""
 
 #: ContractOtherReqts.php:141
-#, fuzzy
 msgid "Requirement Description"
-msgstr "Opis razreda"
+msgstr ""
 
 #: ContractOtherReqts.php:143 SelectWorkOrder.php:303 WhereUsedInquiry.php:68
 #: WorkOrderCosting.php:85
@@ -4435,14 +4405,12 @@ msgid "Enter New Contract Requirement"
 msgstr ""
 
 #: Contracts.php:10 Contracts.php:818
-#, fuzzy
 msgid "Modify Contract"
-msgstr "Kontakt"
+msgstr ""
 
 #: Contracts.php:12
-#, fuzzy
 msgid "Contract Entry"
-msgstr "Zabilješka kontakta"
+msgstr ""
 
 #: Contracts.php:79
 msgid ""
@@ -4482,9 +4450,8 @@ msgid ""
 msgstr ""
 
 #: Contracts.php:103
-#, fuzzy
 msgid "Back to Contract Selection"
-msgstr "Natrag na izbor kupca"
+msgstr ""
 
 #: Contracts.php:114 FixedAssetItems.php:37 SalesCategories.php:45
 #: Stocks.php:46 Z_MakeNewCompany.php:51
@@ -4528,29 +4495,24 @@ msgid ""
 msgstr ""
 
 #: Contracts.php:174
-#, fuzzy
 msgid "The contract bill of materials could not be deleted because"
-msgstr "Nije moguće dohvatiti sastavnicu zbog"
+msgstr ""
 
 #: Contracts.php:177
-#, fuzzy
 msgid "The contract requirements could not be deleted because"
-msgstr "Postavke poduzeća nemogu se ažurirati zbog"
+msgstr ""
 
 #: Contracts.php:180
-#, fuzzy
 msgid "The contract could not be deleted because"
-msgstr "Nije moguće dohvatiti kontni plan zbog"
+msgstr ""
 
 #: Contracts.php:185
-#, fuzzy
 msgid "The quotation line for the contract could not be deleted because"
-msgstr "Postavke poduzeća nemogu se ažurirati zbog"
+msgstr ""
 
 #: Contracts.php:188
-#, fuzzy
 msgid "The quotation for the contract could not be deleted because"
-msgstr "Nije moguće dohvatiti kontni plan zbog"
+msgstr ""
 
 #: Contracts.php:191
 msgid "has been cancelled"
@@ -4581,11 +4543,10 @@ msgid ""
 msgstr ""
 
 #: Contracts.php:247
-#, fuzzy
 msgid ""
 "The date the contract is required to be completed by must be entered in the "
 "format"
-msgstr "Datum treba unijeti u obliku"
+msgstr ""
 
 #: Contracts.php:251
 msgid ""
@@ -4594,9 +4555,8 @@ msgid ""
 msgstr ""
 
 #: Contracts.php:275
-#, fuzzy
 msgid "Default for"
-msgstr "Početni tekst"
+msgstr ""
 
 #: Contracts.php:300
 msgid ""
@@ -4605,9 +4565,8 @@ msgid ""
 msgstr ""
 
 #: Contracts.php:313
-#, fuzzy
 msgid "Cannot update the contract because"
-msgstr "Nije moguće promijeniti tečajeve valuta"
+msgstr ""
 
 #: Contracts.php:317 Contracts.php:416
 msgid "Could not add a component to the contract bill of material"
@@ -4622,24 +4581,20 @@ msgid "The changes to the contract have been committed to the database"
 msgstr ""
 
 #: Contracts.php:365
-#, fuzzy
 msgid "The contract item could not be updated because"
-msgstr "Postavke poduzeća nemogu se ažurirati zbog"
+msgstr ""
 
 #: Contracts.php:366
-#, fuzzy
 msgid "The SQL that was used to update the contract item failed was"
-msgstr "SQL naredba za promjenu kontne skupine je"
+msgstr ""
 
 #: Contracts.php:374
-#, fuzzy
 msgid "The contract quotation could not be updated because"
-msgstr "Postavke poduzeća nemogu se ažurirati zbog"
+msgstr ""
 
 #: Contracts.php:375
-#, fuzzy
 msgid "The SQL that failed to update the quotation was"
-msgstr "SQL naredba za promjenu kontne skupine je"
+msgstr ""
 
 #: Contracts.php:377
 msgid ""
@@ -4648,39 +4603,32 @@ msgid ""
 msgstr ""
 
 #: Contracts.php:378
-#, fuzzy
 msgid "Go to Quotation"
-msgstr "Na lokaciji"
+msgstr ""
 
 #: Contracts.php:412
-#, fuzzy
 msgid "The new contract could not be added because"
-msgstr "Podaci o prodaji nisu dohvaćeni zbog"
+msgstr ""
 
 #: Contracts.php:441
-#, fuzzy
 msgid "The new contract has been added to the database"
-msgstr "Dodan je zapis o kontaktu"
+msgstr ""
 
 #: Contracts.php:464
-#, fuzzy
 msgid "The item could not be retrieved because"
-msgstr "nije ih moguće dohvatiti zbog"
+msgstr ""
 
 #: Contracts.php:465
-#, fuzzy
 msgid "The SQL that was used to find the item failed was"
-msgstr "SQL naredba korištena za dohvat podataka je"
+msgstr ""
 
 #: Contracts.php:483
-#, fuzzy
 msgid "The new contract item could not be added because"
-msgstr "Postavke poduzeća nemogu se ažurirati zbog"
+msgstr ""
 
 #: Contracts.php:484
-#, fuzzy
 msgid "The SQL that was used to insert the contract item failed was"
-msgstr "SQL naredba za dodavanje kontne skupine je"
+msgstr ""
 
 #: Contracts.php:492 Stocks.php:420 Z_ImportStocks.php:247
 msgid "The locations for the item"
@@ -4703,20 +4651,17 @@ msgid "The SQL that was used to add the location records that failed was"
 msgstr ""
 
 #: Contracts.php:515
-#, fuzzy
 msgid "The customer and branch details could not be retrieved because"
-msgstr "Detalji o kupcu nisu dohvaćeni SQL-om zbog"
+msgstr ""
 
 #: Contracts.php:516
-#, fuzzy
 msgid ""
 "The SQL that was used to find the customer and branch details failed was"
-msgstr "Nije izvršena SQL naredba korištena za dohvat kontne skupine "
+msgstr ""
 
 #: Contracts.php:567
-#, fuzzy
 msgid "The quotation cannot be added because"
-msgstr "Traženi naziv kupca nije moguće dohvatiti zbog"
+msgstr ""
 
 #: Contracts.php:584
 msgid "Unable to add the quotation line"
@@ -4727,9 +4672,8 @@ msgid "Unable to update the contract status and order number because"
 msgstr ""
 
 #: Contracts.php:597
-#, fuzzy
 msgid "The contract has been made into quotation number"
-msgstr "Obrisan je zapis o kontaktu"
+msgstr ""
 
 #: Contracts.php:598
 msgid "Go to quotation number:"
@@ -4771,9 +4715,8 @@ msgid "Note a Customer Branch Name may be different to the Customer Name"
 msgstr ""
 
 #: Contracts.php:704
-#, fuzzy
 msgid "The customer record selected"
-msgstr "Šifra kupca"
+msgstr ""
 
 #: Contracts.php:705 CounterSales.php:112 CounterSales.php:147
 #: CounterSales.php:1979 CounterSales.php:2170 DeliveryDetails.php:148
@@ -4795,14 +4738,12 @@ msgid "The SQL used to retrieve the customer details and failed was"
 msgstr ""
 
 #: Contracts.php:710
-#, fuzzy
 msgid "The customer details were unable to be retrieved"
-msgstr "Detalji o kupcu nisu dohvaćeni SQL-om zbog"
+msgstr ""
 
 #: Contracts.php:712
-#, fuzzy
 msgid "The SQL used that failed to get the customer details was:"
-msgstr "SQL naredba korištena za dohvat podataka je"
+msgstr ""
 
 #: Contracts.php:724 CounterSales.php:181 SalesAnalRepts.php:165
 #: SalesAnalRepts.php:229 SelectOrderItems.php:414 SelectOrderItems.php:500
@@ -4823,9 +4764,8 @@ msgid " their account is currently at or over their credit limit"
 msgstr ""
 
 #: Contracts.php:739
-#, fuzzy
 msgid "Contract: Select Customer"
-msgstr "Natrag na izbor kupca"
+msgstr ""
 
 #: Contracts.php:745 SelectOrderItems.php:616
 msgid "Part of the Customer Branch Name"
@@ -4888,9 +4828,8 @@ msgstr ""
 
 #: Contracts.php:825 SelectContract.php:29 SelectContract.php:39
 #: SuppContractChgs.php:117
-#, fuzzy
 msgid "Contract Reference"
-msgstr "Porezna poveznica"
+msgstr ""
 
 #: Contracts.php:834 InventoryQuantities.php:213 PDFPriceList.php:352
 #: PDFPrintLabel.php:95 PricesByCost.php:175 ReorderLevelLocation.php:189
@@ -4916,28 +4855,24 @@ msgid "Add or Modify Contract Categories"
 msgstr ""
 
 #: Contracts.php:852
-#, fuzzy
 msgid "The stock locations could not be retrieved because"
-msgstr "Nije moguće dohvatiti kontni plan zbog"
+msgstr ""
 
 #: Contracts.php:853
-#, fuzzy
 msgid "The SQL used to retrieve stock locations and failed was"
-msgstr "SQL naredba korištena za dohvat podataka je"
+msgstr ""
 
 #: Contracts.php:867
-#, fuzzy
 msgid "Contract Description"
-msgstr "Opis razreda"
+msgstr ""
 
 #: Contracts.php:870
 msgid "Drawing File"
 msgstr ""
 
 #: Contracts.php:870
-#, fuzzy
 msgid "format only"
-msgstr "Tip formata"
+msgstr ""
 
 #: Contracts.php:876 SelectContract.php:158 SelectWorkOrder.php:306
 msgid "Required Date"
@@ -4965,9 +4900,8 @@ msgid "Exchange Rate"
 msgstr "Tečaj"
 
 #: Contracts.php:891
-#, fuzzy
 msgid "Contract Status"
-msgstr "Kreditni status"
+msgstr ""
 
 #: Contracts.php:894 CustLoginSetup.php:22 index.php:22 SuppLoginSetup.php:21
 #: WWW_Users.php:23
@@ -4975,9 +4909,8 @@ msgid "Setup"
 msgstr "Postavke"
 
 #: Contracts.php:895
-#, fuzzy
 msgid "Quote"
-msgstr "Bilješka"
+msgstr ""
 
 #: Contracts.php:896 PO_Header.php:795 POReport.php:1487 SalesInquiry.php:1104
 #: SelectContract.php:52 SelectContract.php:58 SelectContract.php:64
@@ -4986,62 +4919,53 @@ msgid "Completed"
 msgstr "Završeno"
 
 #: Contracts.php:898
-#, fuzzy
 msgid "Contract Setup"
-msgstr "Šifra kontakta"
+msgstr ""
 
 #: Contracts.php:900
-#, fuzzy
 msgid "Customer Quoted"
-msgstr "Bilješke o kupcu"
+msgstr ""
 
 #: Contracts.php:902 SelectContract.php:51 SelectContract.php:57
 #: SelectContract.php:63 SelectContract.php:69 SelectContract.php:75
-#, fuzzy
 msgid "Order Placed"
-msgstr "Datum naloga"
+msgstr ""
 
 #: Contracts.php:907
 msgid "Quotation Reference/Sales Order No"
 msgstr ""
 
 #: Contracts.php:910
-#, fuzzy
 msgid "Contract Work Order Ref"
-msgstr "Šifra kontakta"
+msgstr ""
 
 #: Contracts.php:915
 msgid "Stock Items Required"
 msgstr ""
 
 #: Contracts.php:934
-#, fuzzy
 msgid "Total stock cost"
-msgstr "Ukupni trošak"
+msgstr ""
 
 #: Contracts.php:936 Contracts.php:957
 msgid "None Entered"
 msgstr ""
 
 #: Contracts.php:940
-#, fuzzy
 msgid "Other Requirements"
-msgstr "Pretraživanje naloga"
+msgstr ""
 
 #: Contracts.php:955
-#, fuzzy
 msgid "Total other costs"
-msgstr "Ukupni trošak"
+msgstr ""
 
 #: Contracts.php:961
-#, fuzzy
 msgid "Total Contract Cost"
-msgstr "Ukupni trošak"
+msgstr ""
 
 #: Contracts.php:961
-#, fuzzy
 msgid "Contract Price"
-msgstr "Ukupna cijena"
+msgstr ""
 
 #: Contracts.php:964
 msgid "Enter Items Required"
@@ -5052,28 +4976,24 @@ msgid "Enter Other Requirements"
 msgstr ""
 
 #: Contracts.php:967
-#, fuzzy
 msgid "Commit Changes"
-msgstr "Pohrani promjene"
+msgstr ""
 
 #: Contracts.php:969
-#, fuzzy
 msgid "Update Quotation"
-msgstr "Ažuriraj podatke"
+msgstr ""
 
 #: Contracts.php:972
-#, fuzzy
 msgid "Create Quotation"
-msgstr "Početna lokacija"
+msgstr ""
 
 #: Contracts.php:977
 msgid "Cancel and Delete Contract"
 msgstr ""
 
 #: CounterSales.php:11 CounterSales.php:212
-#, fuzzy
 msgid "Counter Sales"
-msgstr "Naziv kupca"
+msgstr ""
 
 #: CounterSales.php:75
 msgid ""
@@ -5141,9 +5061,8 @@ msgid ""
 msgstr ""
 
 #: CounterSales.php:205
-#, fuzzy
 msgid "This sale has been cancelled as requested"
-msgstr "Tablica razina je kreirana"
+msgstr ""
 
 #: CounterSales.php:206 CounterSales.php:1902
 msgid "Start a new Counter Sale"
@@ -5151,24 +5070,20 @@ msgstr ""
 
 #: CounterSales.php:214 CounterSales.php:955 CounterSales.php:1754
 #: CounterSales.php:1773 CounterSales.php:1819 CounterSales.php:1854
-#, fuzzy
 msgid "Counter Sale"
-msgstr "Naziv kupca"
+msgstr ""
 
 #: CounterSales.php:214
-#, fuzzy
 msgid "all amounts in"
-msgstr "Sva konta"
+msgstr ""
 
 #: CounterSales.php:221
-#, fuzzy
 msgid "Item description has been used in search"
-msgstr "Rezultat pretrage: Telefon kupca korišten u pretrazi"
+msgstr ""
 
 #: CounterSales.php:223
-#, fuzzy
 msgid "Item Code has been used in search"
-msgstr "Rezultat pretrage: Šifra kupca korištena u pretrazi"
+msgstr ""
 
 #: CounterSales.php:225 SelectOrderItems.php:757
 msgid "Stock Category has been used in search"
@@ -5297,23 +5212,20 @@ msgid "Payment Type"
 msgstr ""
 
 #: CounterSales.php:801
-#, fuzzy
 msgid "Banked to"
-msgstr "Pošalji"
+msgstr ""
 
 #: CounterSales.php:814
-#, fuzzy
 msgid "Amount Paid"
-msgstr "Količina"
+msgstr ""
 
 #: CounterSales.php:818 SelectOrderItems.php:1407
 msgid "Re-Calculate"
 msgstr ""
 
 #: CounterSales.php:819
-#, fuzzy
 msgid "Process The Sale"
-msgstr "Obradi ovaj nalog"
+msgstr ""
 
 #: CounterSales.php:831
 msgid "There are no lines on this sale. Please enter lines to invoice first"
@@ -5340,11 +5252,10 @@ msgid ""
 msgstr ""
 
 #: CounterSales.php:917
-#, fuzzy
 msgid ""
 "The company information and preferences could not be retrieved. See your "
 "system administrator"
-msgstr "Nemogu se dohvatiti postavke poduzeća"
+msgstr ""
 
 #: CounterSales.php:963 DeliveryDetails.php:380
 #: RecurringSalesOrdersProcess.php:144
@@ -5443,11 +5354,10 @@ msgid "has been entered"
 msgstr ""
 
 #: CounterSales.php:1756
-#, fuzzy
 msgid ""
 "The SQL that failed to insert the GL transaction for the bank account debit "
 "was"
-msgstr "SQL naredba za dodavanje kontne skupine je"
+msgstr ""
 
 #: CounterSales.php:1757 CustomerReceipt.php:445
 msgid "Cannot insert a GL transaction for the bank account debit"
@@ -5480,7 +5390,8 @@ msgid "Cannot insert a receipt transaction against the customer because"
 msgstr ""
 
 #: CounterSales.php:1866 CustomerReceipt.php:413
-msgid "The SQL that failed to update the date of the last payment received was"
+msgid ""
+"The SQL that failed to update the date of the last payment received was"
 msgstr ""
 
 #: CounterSales.php:1867 CustomerReceipt.php:414
@@ -5490,17 +5401,15 @@ msgid ""
 msgstr ""
 
 #: CounterSales.php:1880
-#, fuzzy
 msgid ""
 "The SQL that failed to insert the allocation of the receipt to the invoice "
 "was"
-msgstr "SQL naredba za dodavanje kontne skupine je"
+msgstr ""
 
 #: CounterSales.php:1881
-#, fuzzy
 msgid ""
 "Cannot insert the customer allocation of the receipt to the invoice because"
-msgstr " "
+msgstr ""
 
 #: CounterSales.php:1920 SelectCreditItems.php:912 SelectOrderItems.php:1416
 msgid "Yes Please"
@@ -5546,14 +5455,12 @@ msgid "The order details for this product cannot be retrieved because"
 msgstr ""
 
 #: CounterSales.php:2056 CounterSales.php:2120 CounterSales.php:2256
-#, fuzzy
 msgid "Add to Sale"
-msgstr "Dodaj ka"
+msgstr ""
 
 #: CounterSales.php:2063 CounterSales.php:2064
-#, fuzzy
 msgid "Search for Items"
-msgstr "Pretraživanje kupaca"
+msgstr ""
 
 #: CounterSales.php:2064 SelectOrderItems.php:1558
 msgid ""
@@ -5591,7 +5498,8 @@ msgid "Next"
 msgstr ""
 
 #: CounterSales.php:2265
-msgid "Use this form to add items quickly if the item codes are already known"
+msgid ""
+"Use this form to add items quickly if the item codes are already known"
 msgstr ""
 
 #: CounterSales.php:2291 SelectCreditItems.php:951 SelectCreditItems.php:1001
@@ -5605,9 +5513,8 @@ msgid "Search Parts"
 msgstr "Pretraživanje dijelova"
 
 #: CounterSales.php:2296
-#, fuzzy
 msgid "Cancel Sale"
-msgstr "Odustani"
+msgstr ""
 
 #: CounterSales.php:2296
 msgid "Are you sure you wish to cancel this sale?"
@@ -6283,9 +6190,8 @@ msgstr "Proizvodnja"
 
 #: CustLoginSetup.php:18 SelectContract.php:11 SupplierCredit.php:244
 #: SupplierCredit.php:294 SupplierInvoice.php:212 SupplierInvoice.php:266
-#, fuzzy
 msgid "Contracts"
-msgstr "Kontakt"
+msgstr ""
 
 #: CustLoginSetup.php:19 index.php:19 SupplierCredit.php:232
 #: SupplierCredit.php:296 SupplierInvoice.php:204 SupplierInvoice.php:269
@@ -6305,7 +6211,7 @@ msgstr ""
 
 #: CustLoginSetup.php:35 SelectCustomer.php:275 SuppLoginSetup.php:25
 msgid " has been selected"
-msgstr "je izabran"
+msgstr " je izabran"
 
 #: CustLoginSetup.php:90 SuppLoginSetup.php:79 WWW_Users.php:69
 msgid "The user ID entered must be at least 4 characters long"
@@ -6455,9 +6361,8 @@ msgid "Telephone No"
 msgstr "Telefon"
 
 #: CustLoginSetup.php:438 SuppLoginSetup.php:385 WWW_Users.php:446
-#, fuzzy
 msgid "Default Location"
-msgstr "Početna lokacija"
+msgstr ""
 
 #: CustLoginSetup.php:487 SuppLoginSetup.php:410 WWW_Users.php:507
 msgid "Reports Page Size"
@@ -7087,9 +6992,8 @@ msgid "Select a Customer to Inquire On"
 msgstr ""
 
 #: CustomerInquiry.php:32
-#, fuzzy
 msgid "The config value NumberOfMonthMustBeShown cannot be retrieved"
-msgstr "Traženi naziv kupca nije moguće dohvatiti zbog"
+msgstr ""
 
 #: CustomerInquiry.php:126 CustomerReceipt.php:900 SelectOrderItems.php:746
 #: SupplierCredit.php:265 SupplierInquiry.php:120 SupplierInvoice.php:233
@@ -7194,7 +7098,7 @@ msgstr "Klikni za PDF"
 
 #: CustomerInquiry.php:235
 msgid "Email "
-msgstr "E-mail"
+msgstr "E-mail "
 
 #: CustomerInquiry.php:235
 msgid "Click to email the invoice"
@@ -7550,7 +7454,8 @@ msgid "The customer number already exists in the database"
 msgstr ""
 
 #: Customers.php:46
-msgid "The customer name must be entered and be forty characters or less long"
+msgid ""
+"The customer name must be entered and be forty characters or less long"
 msgstr ""
 
 #: Customers.php:51
@@ -7911,11 +7816,13 @@ msgid "Add/edit/delete Customer Types"
 msgstr ""
 
 #: CustomerTypes.php:39
-msgid "The customer type name description must be 100 characters or less long"
+msgid ""
+"The customer type name description must be 100 characters or less long"
 msgstr ""
 
 #: CustomerTypes.php:47
-msgid "The customer type name description must contain at least one character"
+msgid ""
+"The customer type name description must contain at least one character"
 msgstr ""
 
 #: CustomerTypes.php:60
@@ -7928,12 +7835,12 @@ msgstr "Tip kupca"
 
 #: CustomerTypes.php:85
 msgid "The customer type "
-msgstr "Tip kupca"
+msgstr "Tip kupca "
 
 #: CustomerTypes.php:85 PcExpenses.php:74 PcTabs.php:74 PcTypeTabs.php:73
 #: SalesTypes.php:77 SupplierTypes.php:83
 msgid " already exist."
-msgstr "već postoji"
+msgstr " već postoji"
 
 #: CustomerTypes.php:95 CustomerTypes.php:166
 msgid "Customer type"
@@ -8004,9 +7911,8 @@ msgid "Customer How Paid Inquiry"
 msgstr ""
 
 #: CustWhereAlloc.php:14
-#, fuzzy
 msgid "Customer Where Allocated"
-msgstr "Zabilješke grupe kupaca"
+msgstr ""
 
 #: CustWhereAlloc.php:36 PDFOrdersInvoiced.php:386 SalesInquiry.php:753
 #: SalesInquiry.php:759 SalesInquiry.php:936 SalesInquiry.php:1143
@@ -8052,28 +7958,24 @@ msgid "Receipt"
 msgstr ""
 
 #: DailyBankTransactions.php:5
-#, fuzzy
 msgid "Daily Banking Inquiry"
-msgstr "Pregled dnevne prodaje"
+msgstr ""
 
 #: DailyBankTransactions.php:32 Payments.php:736 SuppPaymentRun.php:310
 msgid "Bank Accounts have not yet been defined. You must first"
 msgstr ""
 
 #: DailyBankTransactions.php:49
-#, fuzzy
 msgid "Transactions Dated"
-msgstr "Datum transakcije"
+msgstr ""
 
 #: DailyBankTransactions.php:56
-#, fuzzy
 msgid "Show transactions"
-msgstr "Prikaži transakcije"
+msgstr ""
 
 #: DailyBankTransactions.php:75
-#, fuzzy
 msgid "Account Transactions For"
-msgstr "Kontni razredi"
+msgstr ""
 
 #: DailyBankTransactions.php:75
 msgid "On"
@@ -8081,14 +7983,12 @@ msgstr ""
 
 #: DailyBankTransactions.php:78 PDFCustTransListing.php:38
 #: PDFStockTransListing.php:38 PDFSuppTransListing.php:38
-#, fuzzy
 msgid "Transaction type"
-msgstr "Datum transakcije"
+msgstr ""
 
 #: DailyBankTransactions.php:81 DailyBankTransactions.php:83
-#, fuzzy
 msgid "Amount in"
-msgstr "Količina"
+msgstr ""
 
 #: DailyBankTransactions.php:82 DailyBankTransactions.php:84
 msgid "Running Total"
@@ -8180,14 +8080,12 @@ msgid "Could not get the date of the last day in the period selected"
 msgstr ""
 
 #: DebtorsAtPeriodEnd.php:72
-#, fuzzy
 msgid "The customer details listing has no clients to report on"
-msgstr "Ispis sastavnice nema o čemu biti ispisan"
+msgstr ""
 
 #: DebtorsAtPeriodEnd.php:116
-#, fuzzy
 msgid "Total balances"
-msgstr "Ukupno zaračunato"
+msgstr ""
 
 #: DebtorsAtPeriodEnd.php:136
 msgid "Debtor Balances"
@@ -8266,9 +8164,8 @@ msgid "We have a problem"
 msgstr "Imamo problem"
 
 #: DeliveryDetails.php:245
-#, fuzzy
 msgid "there are no shippers defined"
-msgstr "nisu definirani otpremnici"
+msgstr ""
 
 #: DeliveryDetails.php:245
 msgid "Please use the link below to set up shipping or freight companies"
@@ -8362,23 +8259,20 @@ msgid "Print Quotation"
 msgstr ""
 
 #: DeliveryDetails.php:586
-#, fuzzy
 msgid "Add Another Sales Order"
-msgstr "Nema naloga za prodaju"
+msgstr ""
 
 #: DeliveryDetails.php:589
 msgid "Thank you for your business"
 msgstr ""
 
 #: DeliveryDetails.php:616
-#, fuzzy
 msgid "Could not update the contract status"
-msgstr "Nije moguće promijeniti tečajeve valuta"
+msgstr ""
 
 #: DeliveryDetails.php:617
-#, fuzzy
 msgid "The SQL that failed to update the contract status was"
-msgstr "SQL naredba za promjenu kontne skupine je"
+msgstr ""
 
 #: DeliveryDetails.php:621
 msgid "Could not insert the contract bill of materials"
@@ -9050,7 +8944,8 @@ msgid "Payment will be effected by promissory note"
 msgstr ""
 
 #: EDIProcessOrders.php:314
-msgid "Payment will be effected by a bill drawn by the creditor on the debtor"
+msgid ""
+"Payment will be effected by a bill drawn by the creditor on the debtor"
 msgstr ""
 
 #: EDIProcessOrders.php:316
@@ -9413,9 +9308,8 @@ msgid "Factor Company Maintenance"
 msgstr ""
 
 #: Factors.php:26
-#, fuzzy
 msgid "Factor Companies"
-msgstr "Natrag na kupce"
+msgstr ""
 
 #: Factors.php:38
 msgid ""
@@ -9468,9 +9362,8 @@ msgid "ID"
 msgstr ""
 
 #: Factors.php:162
-#, fuzzy
 msgid "Company Name"
-msgstr "Poduzeće"
+msgstr ""
 
 #: Factors.php:163 PurchData.php:316 SelectSupplier.php:252
 msgid "Address 1"
@@ -9489,14 +9382,12 @@ msgid "Address 4"
 msgstr "Adresa 4"
 
 #: Factors.php:167
-#, fuzzy
 msgid "Address 5"
-msgstr "Adresa 4"
+msgstr ""
 
 #: Factors.php:168
-#, fuzzy
 msgid "Address 6"
-msgstr "Adresa 4"
+msgstr ""
 
 #: Factors.php:211
 msgid "Create New Factor"
@@ -9537,9 +9428,8 @@ msgid "Fixed Asset Category Maintenance"
 msgstr ""
 
 #: FixedAssetCategories.php:13
-#, fuzzy
 msgid "Fixed Asset Categories"
-msgstr "Svojstva kategorije imovine"
+msgstr ""
 
 #: FixedAssetCategories.php:35
 msgid "The Fixed Asset Category code must be six characters or less long"
@@ -9590,27 +9480,22 @@ msgid "Could not insert the new fixed asset category"
 msgstr ""
 
 #: FixedAssetCategories.php:110
-#, fuzzy
 msgid "A new fixed asset category record has been added for"
-msgstr "Dodane zabilješke o kontaktu"
+msgstr ""
 
 #: FixedAssetCategories.php:131
-#, fuzzy
 msgid ""
 "Cannot delete this fixed asset category because fixed assets have been "
 "created using this category"
 msgstr ""
-"Nije moguće brisati kontnu skupinu jer su računi u glavnoj knjizi kreirani "
-"unutar te grupe"
 
 #: FixedAssetCategories.php:132
 msgid "fixed assets referring to this category code"
 msgstr ""
 
 #: FixedAssetCategories.php:137
-#, fuzzy
 msgid "The fixed asset category"
-msgstr "Kategorija prodaje"
+msgstr ""
 
 #: FixedAssetCategories.php:159 StockCategories.php:217
 msgid "Cat Code"
@@ -9641,9 +9526,8 @@ msgid ""
 msgstr ""
 
 #: FixedAssetCategories.php:203
-#, fuzzy
 msgid "Show All Fixed Asset Categories"
-msgstr "Sve kategorije skladišta"
+msgstr ""
 
 #: FixedAssetCategories.php:232 FixedAssetCategories.php:238
 #: StockCategories.php:311 StockCategories.php:317
@@ -9696,23 +9580,20 @@ msgid "Cost"
 msgstr ""
 
 #: FixedAssetDepreciation.php:85
-#, fuzzy
 msgid "Accum Depn"
-msgstr "Prihvati"
+msgstr ""
 
 #: FixedAssetDepreciation.php:86
 msgid "B/fwd Book Value"
 msgstr ""
 
 #: FixedAssetDepreciation.php:87
-#, fuzzy
 msgid "Depn Type"
-msgstr "Tip zahtjeva"
+msgstr ""
 
 #: FixedAssetDepreciation.php:88
-#, fuzzy
 msgid "Depn Rate"
-msgstr "Datum"
+msgstr ""
 
 #: FixedAssetDepreciation.php:89
 msgid "New Depn"
@@ -9735,24 +9616,21 @@ msgid "DV"
 msgstr ""
 
 #: FixedAssetDepreciation.php:178
-#, fuzzy
 msgid "Cannot insert a depreciation GL entry for the depreciation because"
-msgstr "Nije moguće dodati bankovnu transakciju zbog"
+msgstr ""
 
 #: FixedAssetDepreciation.php:179 GLJournal.php:82 GLJournal.php:105
 msgid "The SQL that failed to insert the GL Trans record was"
 msgstr ""
 
 #: FixedAssetDepreciation.php:214
-#, fuzzy
 msgid ""
 "Cannot insert a fixed asset transaction entry for the depreciation because"
-msgstr " "
+msgstr ""
 
 #: FixedAssetDepreciation.php:215
-#, fuzzy
 msgid "The SQL that failed to insert the fixed asset transaction record was"
-msgstr "SQL naredba za dodavanje kontne skupine je"
+msgstr ""
 
 #: FixedAssetDepreciation.php:221
 msgid ""
@@ -9787,20 +9665,17 @@ msgid "Date to Process Depreciation"
 msgstr ""
 
 #: FixedAssetDepreciation.php:259
-#, fuzzy
 msgid "Commit Depreciation"
-msgstr "Izlistaj odabrano"
+msgstr ""
 
 #: FixedAssetItems.php:9 SupplierCredit.php:252 SupplierCredit.php:298
 #: SupplierInvoice.php:220 SupplierInvoice.php:271
-#, fuzzy
 msgid "Fixed Assets"
-msgstr "Kompleti"
+msgstr ""
 
 #: FixedAssetItems.php:13
-#, fuzzy
 msgid "Back to Select"
-msgstr "Natrag na izbor kupca"
+msgstr ""
 
 #: FixedAssetItems.php:16
 msgid "Fixed Asset Items"
@@ -9844,47 +9719,39 @@ msgstr ""
 
 #: FixedAssetItems.php:147 FixedAssetItems.php:167 FixedAssetItems.php:187
 #: FixedAssetItems.php:207
-#, fuzzy
 msgid "change category"
-msgstr "Kategorija prodaje"
+msgstr ""
 
 #: FixedAssetItems.php:150 FixedAssetItems.php:170 FixedAssetItems.php:190
 #: FixedAssetItems.php:210
-#, fuzzy
 msgid "Cannot insert a GL entry for the change of asset category because"
-msgstr "Nije moguće dodati bankovnu transakciju zbog"
+msgstr ""
 
 #: FixedAssetItems.php:151 FixedAssetItems.php:171 FixedAssetItems.php:191
 #: FixedAssetItems.php:211 FixedAssetItems.php:327 FixedAssetItems.php:347
-#, fuzzy
 msgid "The SQL that failed to insert the cost GL Trans record was"
-msgstr "SQL naredba za dodavanje kontne skupine je"
+msgstr ""
 
 #: FixedAssetItems.php:226
-#, fuzzy
 msgid "The asset could not be updated because"
-msgstr "Postavke poduzeća nemogu se ažurirati zbog"
+msgstr ""
 
 #: FixedAssetItems.php:227
-#, fuzzy
 msgid "The SQL that was used to update the asset and failed was"
-msgstr "SQL naredba za promjenu kontne skupine je"
+msgstr ""
 
 #: FixedAssetItems.php:230 FixedAssetRegister.php:263
 #: FixedAssetRegister.php:347
-#, fuzzy
 msgid "Asset"
-msgstr "Šifra imovine"
+msgstr ""
 
 #: FixedAssetItems.php:252 Z_ImportFixedAssets.php:212
-#, fuzzy
 msgid "The asset could not be added because"
-msgstr "Podaci o prodaji nisu dohvaćeni zbog"
+msgstr ""
 
 #: FixedAssetItems.php:253
-#, fuzzy
 msgid "The SQL that was used to add the asset failed was"
-msgstr "SQL naredba za promjenu kontne skupine je"
+msgstr ""
 
 #: FixedAssetItems.php:258
 msgid "The new asset has been added to the database with an asset code of:"
@@ -9914,14 +9781,12 @@ msgid ""
 msgstr ""
 
 #: FixedAssetItems.php:323 FixedAssetItems.php:343
-#, fuzzy
 msgid "Delete asset"
-msgstr "Briši"
+msgstr ""
 
 #: FixedAssetItems.php:326
-#, fuzzy
 msgid "Cannot insert a GL entry for the deletion of the asset because"
-msgstr " "
+msgstr ""
 
 #: FixedAssetItems.php:346
 msgid ""
@@ -9930,9 +9795,8 @@ msgid ""
 msgstr ""
 
 #: FixedAssetItems.php:354
-#, fuzzy
 msgid "Could not delete the asset record"
-msgstr "Nije moguće promijeniti tečajeve valuta"
+msgstr ""
 
 #: FixedAssetItems.php:358
 msgid "Deleted the asset  record for asset number"
@@ -9963,34 +9827,29 @@ msgid "Asset Category"
 msgstr ""
 
 #: FixedAssetItems.php:468
-#, fuzzy
 msgid "The asset categories could not be retrieved because"
-msgstr "Podaci o prodaji nisu dohvaćeni zbog"
+msgstr ""
 
 #: FixedAssetItems.php:480
 msgid "Add or Modify Asset Categories"
 msgstr ""
 
 #: FixedAssetItems.php:486 SelectAsset.php:225
-#, fuzzy
 msgid "Date Purchased"
-msgstr "Kupovna roba"
+msgstr ""
 
 #: FixedAssetItems.php:490
-#, fuzzy
 msgid "The asset locations could not be retrieved because"
-msgstr "Nije moguće dohvatiti kontni plan zbog"
+msgstr ""
 
 #: FixedAssetItems.php:491
-#, fuzzy
 msgid "The SQL used to retrieve asset locations and failed was"
-msgstr "SQL naredba korištena za dohvat podataka je"
+msgstr ""
 
 #: FixedAssetItems.php:494 FixedAssetRegister.php:250 SelectAsset.php:73
 #: SelectAsset.php:224
-#, fuzzy
 msgid "Asset Location"
-msgstr "Na lokaciji"
+msgstr ""
 
 #: FixedAssetItems.php:504 Stocks.php:900 includes/DefineLabelClass.php:50
 msgid "Bar Code"
@@ -10015,28 +9874,24 @@ msgid "Diminishing Value"
 msgstr ""
 
 #: FixedAssetItems.php:524
-#, fuzzy
 msgid "Depreciation Rate"
-msgstr "Datum transakcije"
+msgstr ""
 
 #: FixedAssetItems.php:528
-#, fuzzy
 msgid "Asset Financial Summary"
-msgstr "Detaljno ili sažeto"
+msgstr ""
 
 #: FixedAssetItems.php:530 WorkOrderEntry.php:486
 msgid "Accumulated Costs"
 msgstr ""
 
 #: FixedAssetItems.php:531
-#, fuzzy
 msgid "Accumulated Depreciation"
-msgstr "Kontni razred"
+msgstr ""
 
 #: FixedAssetItems.php:532 FixedAssetRegister.php:357
-#, fuzzy
 msgid "Net Book Value"
-msgstr "Povratna vrijednost"
+msgstr ""
 
 #: FixedAssetItems.php:537
 msgid "Not Yet Run"
@@ -10047,9 +9902,8 @@ msgid "Depreciation last run"
 msgstr ""
 
 #: FixedAssetItems.php:546
-#, fuzzy
 msgid "Insert New Fixed Asset"
-msgstr "Doadaj novu stavku"
+msgstr ""
 
 #: FixedAssetItems.php:551
 msgid ""
@@ -10066,24 +9920,20 @@ msgid "Are You Sure? Only assets with a zero book value can be deleted."
 msgstr ""
 
 #: FixedAssetList.php:5
-#, fuzzy
 msgid "Fixed Asset Properties List"
-msgstr "Svojstva kategorije imovine"
+msgstr ""
 
 #: FixedAssetList.php:28
-#, fuzzy
 msgid "Asset Type"
-msgstr "Šifra imovine"
+msgstr ""
 
 #: FixedAssetList.php:29
-#, fuzzy
 msgid "Asset Reference"
-msgstr "Porezna poveznica"
+msgstr ""
 
 #: FixedAssetList.php:31
-#, fuzzy
 msgid "Depreciation %"
-msgstr "Opis"
+msgstr ""
 
 #: FixedAssetLocations.php:6
 msgid "Fixed Asset Locations"
@@ -10106,9 +9956,8 @@ msgid "You have assets in this location location so it cannot be removed"
 msgstr ""
 
 #: FixedAssetLocations.php:81
-#, fuzzy
 msgid "The location has been deleted successfully"
-msgstr "razred je obrisan"
+msgstr ""
 
 #: FixedAssetLocations.php:91 FixedAssetLocations.php:108
 msgid "Location ID"
@@ -10123,9 +9972,8 @@ msgid "Parent Location"
 msgstr ""
 
 #: FixedAssetLocations.php:146
-#, fuzzy
 msgid "Delete This Location"
-msgstr "Početna lokacija"
+msgstr ""
 
 #: FixedAssetRegister.php:4 FixedAssetRegister.php:50
 msgid "Fixed Asset Register"
@@ -10144,19 +9992,16 @@ msgid "Depn B/fwd"
 msgstr ""
 
 #: FixedAssetRegister.php:84 FixedAssetRegister.php:353
-#, fuzzy
 msgid "Additions"
-msgstr "Dodaj ka"
+msgstr ""
 
 #: FixedAssetRegister.php:85
-#, fuzzy
 msgid "Depn"
-msgstr "Dizajn"
+msgstr ""
 
 #: FixedAssetRegister.php:86
-#, fuzzy
 msgid "Cost C/fwd"
-msgstr "Poštanski broj"
+msgstr ""
 
 #: FixedAssetRegister.php:87
 msgid "Depn C/fwd"
@@ -10192,33 +10037,28 @@ msgid "ALL"
 msgstr "SVE"
 
 #: FixedAssetRegister.php:281
-#, fuzzy
 msgid " From Date"
-msgstr "Od datuma"
+msgstr ""
 
 #: FixedAssetRegister.php:283
-#, fuzzy
 msgid "To Date "
-msgstr "Do datuma"
+msgstr ""
 
 #: FixedAssetRegister.php:287
 msgid "Show Assets"
 msgstr ""
 
 #: FixedAssetRegister.php:322
-#, fuzzy
 msgid "Asset Category "
-msgstr "Svojstva kategorije imovine"
+msgstr ""
 
 #: FixedAssetRegister.php:323
-#, fuzzy
 msgid "Asset Location "
-msgstr "Na lokaciji"
+msgstr ""
 
 #: FixedAssetRegister.php:349
-#, fuzzy
 msgid "Serial No."
-msgstr "Traži"
+msgstr ""
 
 #: FixedAssetRegister.php:351
 msgid "Cost B/Fwd"
@@ -10229,9 +10069,8 @@ msgid "Depn B/Fwd"
 msgstr ""
 
 #: FixedAssetRegister.php:355
-#, fuzzy
 msgid "Cost C/Fwd"
-msgstr "Poštanski broj"
+msgstr ""
 
 #: FixedAssetRegister.php:356
 msgid "Depn C/Fwd"
@@ -10273,14 +10112,12 @@ msgid "Move To :"
 msgstr ""
 
 #: FormDesigner.php:5
-#, fuzzy
 msgid "Form Designer"
-msgstr "Dizajn"
+msgstr ""
 
 #: FormDesigner.php:16 FormDesigner.php:36 FormDesigner.php:58
-#, fuzzy
 msgid "Font Size"
-msgstr "Format izvješća"
+msgstr ""
 
 #: FormDesigner.php:26 FormDesigner.php:48 FormDesigner.php:70
 #: FormDesigner.php:189 FormDesigner.php:237 FormDesigner.php:247
@@ -10309,18 +10146,16 @@ msgid "See your system administrator to correct this problem"
 msgstr ""
 
 #: FormDesigner.php:136
-#, fuzzy
 msgid "Select the form to edit"
-msgstr "Izbor modula za uređivanje"
+msgstr ""
 
 #: FormDesigner.php:149
 msgid "Edit Form Layout"
 msgstr ""
 
 #: FormDesigner.php:159
-#, fuzzy
 msgid "Form Design"
-msgstr "Dizajn"
+msgstr ""
 
 #: FormDesigner.php:160
 msgid "Enter the changes that you want in the form layout below."
@@ -10331,42 +10166,36 @@ msgid "All measurements are in millimetres"
 msgstr ""
 
 #: FormDesigner.php:166
-#, fuzzy
 msgid "Form Name"
-msgstr "Naziv pošte"
+msgstr ""
 
 #: FormDesigner.php:168
-#, fuzzy
 msgid "Paper Size"
-msgstr "Format izvješća"
+msgstr ""
 
 #: FormDesigner.php:183
-#, fuzzy
 msgid "Line Height"
-msgstr "Linija teksta"
+msgstr ""
 
 #: FormDesigner.php:191 FormDesigner.php:239 FormDesigner.php:249
 msgid "Width"
 msgstr ""
 
 #: FormDesigner.php:192 FormDesigner.php:240 FormDesigner.php:250
-#, fuzzy
 msgid "Height"
-msgstr "Zaglavlje"
+msgstr ""
 
 #: FormDesigner.php:241
 msgid "Radius"
 msgstr ""
 
 #: FormDesigner.php:256
-#, fuzzy
 msgid "Start x co-ordinate"
-msgstr "Početni datum"
+msgstr ""
 
 #: FormDesigner.php:257
-#, fuzzy
 msgid "Start y co-ordinate"
-msgstr "Početni datum"
+msgstr ""
 
 #: FormDesigner.php:258
 msgid "End x co-ordinate"
@@ -10389,9 +10218,8 @@ msgid "Freight Costs Set Up"
 msgstr ""
 
 #: FreightCosts.php:32
-#, fuzzy
 msgid "Freight Costs"
-msgstr "Jedinični trošak"
+msgstr ""
 
 #: FreightCosts.php:43
 msgid "Select A Freight Company to set up costs for"
@@ -10835,9 +10663,8 @@ msgstr ""
 
 #: GLAccountCSV.php:8 GLAccountCSV.php:18 GLAccountReport.php:248
 #: GLAccountReport.php:252
-#, fuzzy
 msgid "General Ledger Account Report"
-msgstr "Glavna knjiga"
+msgstr ""
 
 #: GLAccountCSV.php:18 GLAccountInquiry.php:8 GLAccountInquiry.php:24
 #: GLAccountReport.php:252
@@ -10849,9 +10676,8 @@ msgid "Use the keyboard Shift key to select multiple accounts and periods"
 msgstr ""
 
 #: GLAccountCSV.php:31 GLAccountReport.php:265
-#, fuzzy
 msgid "Selected Accounts"
-msgstr "Kontni razred"
+msgstr ""
 
 #: GLAccountCSV.php:46 GLAccountInquiry.php:66 GLAccountReport.php:280
 msgid "For Period range"
@@ -10883,9 +10709,8 @@ msgid "The transactions for account"
 msgstr ""
 
 #: GLAccountCSV.php:172
-#, fuzzy
 msgid "for period"
-msgstr "za korisnika"
+msgstr ""
 
 #: GLAccountCSV.php:183 GLAccountCSV.php:212 GLAccountInquiry.php:175
 #: GLAccountInquiry.php:214 GLAccountReport.php:114 GLAccountReport.php:146
@@ -10934,9 +10759,8 @@ msgid "Show Account Transactions"
 msgstr ""
 
 #: GLAccountInquiry.php:150
-#, fuzzy
 msgid "Transactions for account"
-msgstr "Datum transakcije"
+msgstr ""
 
 #: GLAccountInquiry.php:155 GLAccountReport.php:370 GLJournal.php:340
 #: GLJournal.php:361
@@ -10980,27 +10804,24 @@ msgid "A log of the account differences for the periods report shows below"
 msgstr ""
 
 #: GLAccountReport.php:32 GLAccountReport.php:33 GLAccountReport.php:351
-#, fuzzy
 msgid "GL Account Report"
-msgstr "Kontni razred"
+msgstr ""
 
 #: GLAccountReport.php:102
 msgid "Listing for Period"
 msgstr ""
 
 #: GLAccountReport.php:318
-#, fuzzy
 msgid "Run Report"
-msgstr "Izvješće"
+msgstr ""
 
 #: GLAccounts.php:7
 msgid "Chart of Accounts Maintenance"
 msgstr ""
 
 #: GLAccounts.php:18
-#, fuzzy
 msgid "General Ledger Accounts"
-msgstr "Glavna knjiga"
+msgstr ""
 
 #: GLAccounts.php:32
 msgid "The account code must be an integer"
@@ -11419,9 +11240,8 @@ msgid "GL Narrative"
 msgstr ""
 
 #: GLJournal.php:357
-#, fuzzy
 msgid "Journal Summary"
-msgstr "Sažetaak"
+msgstr ""
 
 #: GLJournal.php:426
 msgid ""
@@ -11526,9 +11346,9 @@ msgid "Loss"
 msgstr ""
 
 #: GLProfit_Loss.php:516 GLProfit_Loss.php:1191
-#, fuzzy, php-format
+#, php-format
 msgid "Net Profit Percent"
-msgstr "% popusta za plaćanje"
+msgstr ""
 
 #: GLProfit_Loss.php:580
 msgid "General Ledger Profit Loss Inquiry"
@@ -11610,9 +11430,8 @@ msgid "Deficit"
 msgstr ""
 
 #: GLTags.php:6
-#, fuzzy
 msgid "Maintain General Ledger Tags"
-msgstr "Glavna knjiga"
+msgstr ""
 
 #: GLTags.php:46
 msgid "Insert"
@@ -11689,9 +11508,8 @@ msgid "The SQL that failed was:"
 msgstr ""
 
 #: GLTrialBalance.php:432
-#, fuzzy
 msgid "Trial Balance Report"
-msgstr "Bilanca stanja"
+msgstr ""
 
 #: GLTrialBalance.php:438 includes/PDFTrialBalancePageHeader.inc:23
 msgid "Trial Balance for the month of "
@@ -12050,23 +11868,20 @@ msgid "Order Status"
 msgstr "Status naloga"
 
 #: index.php:68
-#, fuzzy
 msgid "Supplier Tenders"
-msgstr "Dobavljači"
+msgstr ""
 
 #: index.php:129
 msgid "Enter An Order or Quotation"
 msgstr ""
 
 #: index.php:134
-#, fuzzy
 msgid "Enter Counter Sales"
-msgstr "Unesi ulogu"
+msgstr ""
 
 #: index.php:139 PDFPickingList.php:42
-#, fuzzy
 msgid "Print Picking Lists"
-msgstr "Ispis cjenika"
+msgstr ""
 
 #: index.php:144
 msgid "Outstanding Sales Orders/Quotations"
@@ -12122,14 +11937,12 @@ msgid "Sales With Low Gross Profit Report"
 msgstr ""
 
 #: index.php:231 SelectContract.php:8
-#, fuzzy
 msgid "Select Contract"
-msgstr "Izbor:"
+msgstr ""
 
 #: index.php:236
-#, fuzzy
 msgid "Create Contract"
-msgstr "Kupac Kontakti"
+msgstr ""
 
 #: index.php:269
 msgid "Select Order to Invoice"
@@ -12193,9 +12006,8 @@ msgid "Sales Graphs"
 msgstr ""
 
 #: index.php:355 index.php:443
-#, fuzzy
 msgid "List Daily Transactions"
-msgstr "Transakcije"
+msgstr ""
 
 #: index.php:369
 msgid "Add Customer"
@@ -12236,9 +12048,8 @@ msgid "Supplier Balances At A Prior Month End"
 msgstr ""
 
 #: index.php:448
-#, fuzzy
 msgid "Supplier Transaction Inquiries"
-msgstr "Pretraživanje transakcija"
+msgstr ""
 
 #: index.php:462
 msgid "Add Supplier"
@@ -12259,9 +12070,8 @@ msgid "Add Purchase Order"
 msgstr ""
 
 #: index.php:505
-#, fuzzy
 msgid "Process Tenders and Offers"
-msgstr "Obradi ovaj nalog"
+msgstr ""
 
 #: index.php:510
 msgid "Orders to Authorise"
@@ -12315,9 +12125,8 @@ msgid "Serial Item Research Tool"
 msgstr ""
 
 #: index.php:618 PDFPrintLabel.php:76
-#, fuzzy
 msgid "Print Price Labels"
-msgstr "Ispis cjenika"
+msgstr ""
 
 #: index.php:623
 msgid "Inventory Item Movements"
@@ -12389,9 +12198,8 @@ msgid "List Negative Stocks"
 msgstr ""
 
 #: index.php:709
-#, fuzzy
 msgid "Daily Stock Transaction Listing"
-msgstr "Prikaži transakcije"
+msgstr ""
 
 #: index.php:723
 msgid "Add A New Item"
@@ -12410,9 +12218,8 @@ msgid "Add or Update Prices Based On Costs"
 msgstr "Dodaj ili ažuriraj cijene bazirane na trošku"
 
 #: index.php:743
-#, fuzzy
 msgid "View or Update Prices Based On Costs"
-msgstr "Dodaj ili ažuriraj cijene bazirane na trošku"
+msgstr ""
 
 #: index.php:773 WorkOrderEntry.php:8
 msgid "Work Order Entry"
@@ -12511,9 +12318,8 @@ msgid "Role Permissions"
 msgstr "Dopuštenja za uloge"
 
 #: index.php:960
-#, fuzzy
 msgid "Page Security Settings"
-msgstr "Opće postavke"
+msgstr ""
 
 #: index.php:965
 msgid "Bank Accounts"
@@ -12560,19 +12366,16 @@ msgid "View System Check"
 msgstr "Pregledaj provjeru sustava"
 
 #: index.php:1020
-#, fuzzy
 msgid "Form Layout Editor"
-msgstr "za lokaciju"
+msgstr ""
 
 #: index.php:1025
-#, fuzzy
 msgid "Label Templates Maintenance"
-msgstr "Održavanje uvjeta plaćanja"
+msgstr ""
 
 #: index.php:1030
-#, fuzzy
 msgid "SMTP Server Details"
-msgstr "Izaberi detalje isporuke"
+msgstr ""
 
 #: index.php:1040 SalesTypes.php:7
 msgid "Sales Types"
@@ -12581,9 +12384,8 @@ msgstr ""
 #: index.php:1050 SupplierTypes.php:8 SupplierTypes.php:23
 #: SuppPaymentRun.php:237 SystemParameters.php:13 TaxAuthorities.php:10
 #: TaxAuthorityRates.php:17 TaxCategories.php:12 Tax.php:298
-#, fuzzy
 msgid "Supplier Types"
-msgstr "Dobavljači"
+msgstr ""
 
 #: index.php:1065
 msgid "Set Purchase Order Authorisation levels"
@@ -12666,9 +12468,8 @@ msgid "Account Inquiry"
 msgstr ""
 
 #: index.php:1209
-#, fuzzy
 msgid "Account Listing"
-msgstr "Kontni razred"
+msgstr ""
 
 #: index.php:1214
 msgid "Account Listing to CSV File"
@@ -12683,9 +12484,8 @@ msgid "Cheque Payments Listing"
 msgstr ""
 
 #: index.php:1229
-#, fuzzy
 msgid "Daily Bank Transactions"
-msgstr "Transakcije"
+msgstr ""
 
 #: index.php:1234
 msgid "Profit and Loss Statement"
@@ -12708,14 +12508,12 @@ msgid "GL Tags"
 msgstr ""
 
 #: index.php:1309
-#, fuzzy
 msgid "Add a new Asset"
-msgstr "Dodaj novog kupca"
+msgstr ""
 
 #: index.php:1314 SelectAsset.php:6
-#, fuzzy
 msgid "Select an Asset"
-msgstr "Odaberi sve"
+msgstr ""
 
 #: index.php:1324
 msgid "Depreciation Journal"
@@ -12742,9 +12540,8 @@ msgid "Claim Expenses From PC Tab"
 msgstr ""
 
 #: index.php:1389
-#, fuzzy
 msgid "Expenses Authorisation"
-msgstr "Autorizacija"
+msgstr ""
 
 #: index.php:1398
 msgid "PC Tab General Report"
@@ -12817,7 +12614,8 @@ msgid ""
 msgstr ""
 
 #: InventoryPlanning.php:292 InventoryPlanningPrefSupplier.php:403
-msgid "The purchase order quantities could not be retrieved by the SQL because"
+msgid ""
+"The purchase order quantities could not be retrieved by the SQL because"
 msgstr ""
 
 #: InventoryPlanning.php:332
@@ -13024,7 +12822,8 @@ msgid "Parts With Quantities"
 msgstr ""
 
 #: InventoryQuantities.php:85
-msgid "The Inventory Quantity report could not be retrieved by the SQL because"
+msgid ""
+"The Inventory Quantity report could not be retrieved by the SQL because"
 msgstr ""
 
 #: InventoryQuantities.php:94
@@ -13105,27 +12904,24 @@ msgid "Inventory Valuation Reporting"
 msgstr ""
 
 #: Labels.php:19
-#, fuzzy
 msgid "Label Templates Maintainance"
-msgstr "Održavanje uvjeta plaćanja"
+msgstr ""
 
 #: Labels.php:50 Labels.php:61
 msgid "Correct data"
 msgstr ""
 
 #: Labels.php:70
-#, fuzzy
 msgid "New ID"
-msgstr "Šifra zabilješke"
+msgstr ""
 
 #: Labels.php:71
 msgid "Edit data new label"
 msgstr ""
 
 #: Labels.php:79
-#, fuzzy
 msgid "Edit data label"
-msgstr "Uredi modul"
+msgstr ""
 
 #: Labels.php:92
 msgid "New label"
@@ -13149,14 +12945,12 @@ msgstr ""
 
 #: Labels.php:159 Labels.php:161 Labels.php:165 Labels.php:174 Labels.php:180
 #: Labels.php:186 Labels.php:192 Labels.php:217 Labels.php:219 Labels.php:224
-#, fuzzy
 msgid "The value of"
-msgstr "Varijabla"
+msgstr ""
 
 #: Labels.php:159 Labels.php:217
-#, fuzzy
 msgid "would be numeric"
-msgstr "nije brojčani"
+msgstr ""
 
 #: Labels.php:161 Labels.php:219
 msgid "requires a positive value"
@@ -13204,14 +12998,12 @@ msgid ""
 msgstr ""
 
 #: Labels.php:265
-#, fuzzy
 msgid "Save"
-msgstr "Prodaja"
+msgstr ""
 
 #: Labels.php:413 includes/DefineLabelClass.php:8
-#, fuzzy
 msgid "Label id"
-msgstr "Valjano"
+msgstr ""
 
 #: Labels.php:413
 msgid "Label array"
@@ -13222,23 +13014,20 @@ msgid "New"
 msgstr ""
 
 #: Labels.php:414
-#, fuzzy
 msgid "Copy"
-msgstr "Poduzeće"
+msgstr ""
 
 #: Labels.php:415
 msgid "Do you really want to erase the label"
 msgstr ""
 
 #: Labels.php:546
-#, fuzzy
 msgid "Could not rename the previous file."
-msgstr "ne može biti kreirana zbog"
+msgstr ""
 
 #: Labels.php:549
-#, fuzzy
 msgid "Could not create the new XML file."
-msgstr "Nije moguće promijeniti tečajeve valuta"
+msgstr ""
 
 #: Locations.php:10
 msgid "Location Maintenance"
@@ -13249,9 +13038,8 @@ msgid "The location code may not be empty"
 msgstr ""
 
 #: Locations.php:36
-#, fuzzy
 msgid "The cash sale customers "
-msgstr "Tip kupca"
+msgstr ""
 
 #: Locations.php:52
 msgid ""
@@ -13412,19 +13200,16 @@ msgid "Managed"
 msgstr ""
 
 #: Locations.php:403
-#, fuzzy
 msgid "Review Records"
-msgstr "Pregled kontnih skupina"
+msgstr ""
 
 #: Locations.php:458
-#, fuzzy
 msgid "Amend Location details"
-msgstr "Sve lokacije"
+msgstr ""
 
 #: Locations.php:465
-#, fuzzy
 msgid "New Location details"
-msgstr "Sve lokacije"
+msgstr ""
 
 #: Locations.php:510
 msgid "Contact for deliveries"
@@ -13435,9 +13220,8 @@ msgid "Facsimile No"
 msgstr ""
 
 #: Locations.php:543
-#, fuzzy
 msgid "Default Counter Sales Customer"
-msgstr "Briši kupca"
+msgstr ""
 
 #: Logout.php:12
 msgid "Log Off"
@@ -13663,9 +13447,8 @@ msgid "Record already exists for part number/demand type/date"
 msgstr ""
 
 #: MRPDemands.php:197
-#, fuzzy
 msgid "The MRP demand record has been updated for"
-msgstr "Obrisan je zapis o kontaktu"
+msgstr ""
 
 #: MRPDemands.php:210
 msgid "A new MRP demand record has been added to the database for"
@@ -13684,9 +13467,8 @@ msgid "All records for demand type"
 msgstr ""
 
 #: MRPDemands.php:250
-#, fuzzy
 msgid "have been deleted"
-msgstr "je obrisan"
+msgstr ""
 
 #: MRPDemands.php:293 MRPDemands.php:382 MRPPlannedPurchaseOrders.php:321
 #: MRPPlannedWorkOrders.php:260 MRPPlannedWorkOrders.php:386 MRPReport.php:414
@@ -13700,9 +13482,8 @@ msgid "Number of Records"
 msgstr "Broj zapisa"
 
 #: MRPDemands.php:334
-#, fuzzy
 msgid "List All Demands"
-msgstr "Izlistaj sve"
+msgstr ""
 
 #: MRPDemands.php:403
 msgid "List Selection"
@@ -13762,9 +13543,8 @@ msgid "Demand Type Description"
 msgstr ""
 
 #: MRP.php:8
-#, fuzzy
 msgid "Run MRP Calculation"
-msgstr "Kalkulacija"
+msgstr ""
 
 #: MRP.php:18
 msgid "Start time"
@@ -13855,9 +13635,8 @@ msgid "End time"
 msgstr ""
 
 #: MRP.php:546
-#, fuzzy
 msgid "Last Run Details"
-msgstr "Detalji o podružnici"
+msgstr ""
 
 #: MRP.php:548
 msgid "Last Run Time"
@@ -13884,9 +13663,8 @@ msgid "Use Shrinkage"
 msgstr ""
 
 #: MRP.php:561
-#, fuzzy
 msgid "This Run Details"
-msgstr "Prikaži detalje o poduzeću"
+msgstr ""
 
 #: MRP.php:580
 msgid "Use MRP Demands?"
@@ -13959,7 +13737,7 @@ msgstr ""
 
 #: MRPPlannedPurchaseOrders.php:174 MRPPlannedPurchaseOrders.php:237
 msgid "Supplier: "
-msgstr "Dobavljač:"
+msgstr "Dobavljač: "
 
 #: MRPPlannedPurchaseOrders.php:176 MRPPlannedPurchaseOrders.php:239
 msgid "Preferred Supplier: "
@@ -14044,28 +13822,24 @@ msgid "Review/Convert MRP Planned Work Orders"
 msgstr ""
 
 #: MRPPlannedWorkOrders.php:264
-#, fuzzy
 msgid "Consolidations"
-msgstr "Prijevod"
+msgstr ""
 
 #: MRPPlannedWorkOrders.php:288
-#, fuzzy
 msgid "Convert"
-msgstr "Komponenta"
+msgstr ""
 
 #: MRPPlannedWorkOrders.php:314
-#, fuzzy
 msgid "Total Extended Cost: "
-msgstr "Ukupni trošak"
+msgstr ""
 
 #: MRPPlannedWorkOrders.php:327
 msgid "MRP Planned Work Orders Reporting"
 msgstr ""
 
 #: MRPPlannedWorkOrders.php:344
-#, fuzzy
 msgid "Review"
-msgstr "Ukloni"
+msgstr ""
 
 #: MRPReport.php:19 MRPReport.php:20 MRPReport.php:147 MRPReport.php:516
 #: MRPReport.php:825
@@ -14328,19 +14102,16 @@ msgid "Ext. Shortage"
 msgstr ""
 
 #: OffersReceived.php:6 OffersReceived.php:88
-#, fuzzy
 msgid "Supplier Offers"
-msgstr "Dobavljači"
+msgstr ""
 
 #: OffersReceived.php:39
-#, fuzzy
 msgid "There are no offers outstanding that you are authorised to deal with"
-msgstr "Nema kupaca koji zadovoljavaju kriterij za izlistanje"
+msgstr ""
 
 #: OffersReceived.php:91
-#, fuzzy
 msgid "Offer ID"
-msgstr "Šifra korisnika"
+msgstr ""
 
 #: OffersReceived.php:93 PurchData.php:305 Stocks.php:355
 #: includes/PDFStockTransListingPageHeader.inc:67
@@ -14352,14 +14123,12 @@ msgid "Offer Expires"
 msgstr ""
 
 #: OffersReceived.php:101
-#, fuzzy
 msgid "Reject"
-msgstr "Poništi"
+msgstr ""
 
 #: OffersReceived.php:102
-#, fuzzy
 msgid "Defer"
-msgstr "prosinac"
+msgstr ""
 
 #: OffersReceived.php:152 OffersReceived.php:232
 msgid ""
@@ -14390,9 +14159,8 @@ msgid "Your offer to"
 msgstr ""
 
 #: OffersReceived.php:223
-#, fuzzy
 msgid "has been accepted"
-msgstr "je kreiran"
+msgstr ""
 
 #: OffersReceived.php:227
 msgid "The accepted offers from"
@@ -14411,9 +14179,8 @@ msgid "The following offers you made have been rejected"
 msgstr ""
 
 #: OffersReceived.php:251
-#, fuzzy
 msgid "has been rejected"
-msgstr "je izabran"
+msgstr ""
 
 #: OffersReceived.php:255
 msgid "The rejected offers from"
@@ -14448,9 +14215,8 @@ msgid "The SQL that failed to get the order header was"
 msgstr ""
 
 #: OrderDetails.php:59
-#, fuzzy
 msgid "Order Details"
-msgstr "Status naloga"
+msgstr ""
 
 #: OrderDetails.php:63
 msgid "Order Header Details For Order No"
@@ -14511,19 +14277,16 @@ msgid "No outstanding GRNs valuation details retrieved"
 msgstr ""
 
 #: PageSecurity.php:5 PageSecurity.php:9
-#, fuzzy
 msgid "Page Security Levels"
-msgstr "Sigurnosna uloga"
+msgstr ""
 
 #: PageSecurity.php:16
-#, fuzzy
 msgid "Could not update the page security value for the script because"
-msgstr "Nije moguće promijeniti tečajeve valuta"
+msgstr ""
 
 #: PageSecurity.php:54
-#, fuzzy
 msgid "Update Security Levels"
-msgstr "Ažuriraj cijene"
+msgstr ""
 
 #: PaymentAllocations.php:14
 msgid "Payment Allocations"
@@ -14554,7 +14317,8 @@ msgid "Back to supplier inquiry"
 msgstr ""
 
 #: PaymentAllocations.php:67
-msgid "There may be a problem retrieving the information. No data is returned"
+msgid ""
+"There may be a problem retrieving the information. No data is returned"
 msgstr ""
 
 #: PaymentAllocations.php:68
@@ -14722,9 +14486,8 @@ msgid "Yes / Continue"
 msgstr "Da / Nastavak"
 
 #: Payments.php:264
-#, fuzzy
 msgid "No / Cancel Payment"
-msgstr "Ne / Otkazana uplata"
+msgstr ""
 
 #: Payments.php:306
 msgid "Cannot insert a GL entry for the payment using the SQL"
@@ -14745,10 +14508,11 @@ msgstr "Nije moguće dodati bankovnu transakciju SQL-om"
 
 #: Payments.php:421
 msgid "Cannot insert a payment transaction against the supplier because"
-msgstr " "
+msgstr ""
 
 #: Payments.php:422
-msgid "Cannot insert a payment transaction against the supplier using the SQL"
+msgid ""
+"Cannot insert a payment transaction against the supplier using the SQL"
 msgstr ""
 
 #: Payments.php:433
@@ -14764,7 +14528,8 @@ msgid ""
 msgstr ""
 
 #: Payments.php:458
-msgid "Cannot insert a GL transaction for the creditors account debit because"
+msgid ""
+"Cannot insert a GL transaction for the creditors account debit because"
 msgstr ""
 
 #: Payments.php:459
@@ -14773,7 +14538,8 @@ msgid ""
 msgstr ""
 
 #: Payments.php:479
-msgid "Cannot insert a GL transaction for the payment discount credit because"
+msgid ""
+"Cannot insert a GL transaction for the payment discount credit because"
 msgstr ""
 
 #: Payments.php:480
@@ -14991,9 +14757,8 @@ msgid "The payment term definition record has been deleted"
 msgstr ""
 
 #: PaymentTerms.php:178
-#, fuzzy
 msgid "Payment Terms."
-msgstr "Uvjeti plaćanja"
+msgstr ""
 
 #: PaymentTerms.php:179 PaymentTerms.php:250 PaymentTerms.php:263
 msgid "Term Code"
@@ -15023,14 +14788,12 @@ msgid "Show all Payment Terms Definitions"
 msgstr "Prikaži definicije svih uvjeta plaćanja"
 
 #: PaymentTerms.php:249
-#, fuzzy
 msgid "Update Payment Terms."
-msgstr "Uvjeti plaćanja"
+msgstr ""
 
 #: PaymentTerms.php:262
-#, fuzzy
 msgid "New Payment Terms."
-msgstr "Uvjeti plaćanja"
+msgstr ""
 
 #: PaymentTerms.php:268
 msgid "Terms Description"
@@ -15049,9 +14812,8 @@ msgid "Assignment of Cash to Petty Cash Tab"
 msgstr ""
 
 #: PcAssignCashToTab.php:48
-#, fuzzy
 msgid "The Amount must be inputed"
-msgstr "Kontakt mora biti cjelobrojan"
+msgstr ""
 
 #: PcAssignCashToTab.php:61
 msgid ""
@@ -15064,9 +14826,8 @@ msgid "Assignment of cash to PC Tab "
 msgstr ""
 
 #: PcAssignCashToTab.php:116
-#, fuzzy
 msgid "The assignment of cash record could not be deleted because"
-msgstr "Nije moguće dohvatiti sastavnicu zbog"
+msgstr ""
 
 #: PcAssignCashToTab.php:135
 msgid "Petty Cash Tab To Assign Cash"
@@ -15082,9 +14843,8 @@ msgstr ""
 
 #: PcAssignCashToTab.php:213 PcAuthorizeExpenses.php:82
 #: PcExpensesTypeTab.php:144
-#, fuzzy
 msgid "Expense Code"
-msgstr "Šifra imovine"
+msgstr ""
 
 #: PcAssignCashToTab.php:215 PO_AuthoriseMyOrders.php:90 PO_Header.php:783
 #: PO_Header.php:788 PO_Header.php:800 PO_Header.php:804
@@ -15101,9 +14861,8 @@ msgid ""
 msgstr ""
 
 #: PcAssignCashToTab.php:280 PcClaimExpensesFromTab.php:271
-#, fuzzy
 msgid "Current balance"
-msgstr "trenutna cijena"
+msgstr ""
 
 #: PcAssignCashToTab.php:297
 msgid "Update Cash Assignment"
@@ -15114,9 +14873,8 @@ msgid "New Cash Assignment"
 msgstr ""
 
 #: PcAssignCashToTab.php:326
-#, fuzzy
 msgid "Cash Assignation Date"
-msgstr "Datum transakcije"
+msgstr ""
 
 #: PcAuthorizeExpenses.php:7
 msgid "Authorization of Petty Cash Expenses"
@@ -15131,9 +14889,8 @@ msgid "Detail Of Movement For Last "
 msgstr ""
 
 #: PcAuthorizeExpenses.php:87 PcClaimExpensesFromTab.php:194
-#, fuzzy
 msgid "Authorized"
-msgstr "Odobrio"
+msgstr ""
 
 #: PcAuthorizeExpenses.php:91 ReorderLevelLocation.php:64
 msgid "update"
@@ -15148,18 +14905,16 @@ msgid "Claim Petty Cash Expenses From Tab"
 msgstr ""
 
 #: PcClaimExpensesFromTab.php:47
-#, fuzzy
 msgid "The Amount must be greater than 0"
-msgstr "Kontakt mora biti cjelobrojan"
+msgstr ""
 
 #: PcClaimExpensesFromTab.php:61 PcClaimExpensesFromTab.php:88
 msgid "The Expense Claim on Tab"
 msgstr ""
 
 #: PcClaimExpensesFromTab.php:107
-#, fuzzy
 msgid "Petty Cash Expense record could not be deleted because"
-msgstr "Postavke poduzeća nemogu se ažurirati zbog"
+msgstr ""
 
 #: PcClaimExpensesFromTab.php:109
 msgid "Petty cash Expense record"
@@ -15179,14 +14934,12 @@ msgstr ""
 
 #: PcClaimExpensesFromTab.php:191 PcClaimExpensesFromTab.php:310
 #: PcReportTab.php:173 PcReportTab.php:345
-#, fuzzy
 msgid "Date Of Expense"
-msgstr "Datum računa"
+msgstr ""
 
 #: PcClaimExpensesFromTab.php:192 PcReportTab.php:346
-#, fuzzy
 msgid "Expense Description"
-msgstr "Opis imovine"
+msgstr ""
 
 #: PcClaimExpensesFromTab.php:312 PcExpenses.php:148 PcExpenses.php:220
 #: PcExpenses.php:230
@@ -15202,34 +14955,29 @@ msgid "The Expense type  code cannot be an empty string or spaces"
 msgstr ""
 
 #: PcExpenses.php:43
-#, fuzzy
 msgid "The Expense code must be twenty characters or less long"
-msgstr "Linija 5 adrese mora biti do 20 znakova duga"
+msgstr ""
 
 #: PcExpenses.php:48 PcTypeTabs.php:48
-#, fuzzy
 msgid "The tab code must be Fifty characters or less long"
-msgstr "Naziv kontakta mora biti do 40 znakova"
+msgstr ""
 
 #: PcExpenses.php:60
-#, fuzzy
 msgid "The Expenses type"
-msgstr "Tip kupca"
+msgstr ""
 
 #: PcExpenses.php:74
-#, fuzzy
 msgid "The Expense type "
-msgstr "Tip kupca"
+msgstr ""
 
 #: PcExpenses.php:86
 msgid "Expense "
 msgstr ""
 
 #: PcExpenses.php:114
-#, fuzzy
 msgid ""
 "The number of type of tabs using this expense code could not be retrieved"
-msgstr "Nemogu se dohvatiti postavke poduzeća"
+msgstr ""
 
 #: PcExpenses.php:119
 msgid ""
@@ -15241,19 +14989,16 @@ msgid "tab types using this expense code"
 msgstr ""
 
 #: PcExpenses.php:125
-#, fuzzy
 msgid "The expense type record could not be deleted because"
-msgstr "Postavke poduzeća nemogu se ažurirati zbog"
+msgstr ""
 
 #: PcExpenses.php:127
-#, fuzzy
 msgid "Expense type"
-msgstr "Tip prodaje"
+msgstr ""
 
 #: PcExpenses.php:151
-#, fuzzy
 msgid "Account Description"
-msgstr "Kontni razred"
+msgstr ""
 
 #: PcExpenses.php:177
 #, php-format
@@ -15275,37 +15020,32 @@ msgid "The Expense "
 msgstr ""
 
 #: PcExpensesTypeTab.php:47
-#, fuzzy
 msgid " already exist in this Type of Tab."
-msgstr "već postoji"
+msgstr ""
 
 #: PcExpensesTypeTab.php:58
-#, fuzzy
 msgid "Expense code:"
-msgstr "Šifra korisnika"
+msgstr ""
 
 #: PcExpensesTypeTab.php:58
 msgid "for Type of Tab:"
 msgstr ""
 
 #: PcExpensesTypeTab.php:81 PcTypeTabs.php:132
-#, fuzzy
 msgid "The Tab Type record could not be deleted because"
-msgstr "Postavke poduzeća nemogu se ažurirati zbog"
+msgstr ""
 
 #: PcExpensesTypeTab.php:83
-#, fuzzy
 msgid "Expense code"
-msgstr "Šifra korisnika"
+msgstr ""
 
 #: PcExpensesTypeTab.php:83
 msgid "for type of tab"
 msgstr ""
 
 #: PcExpensesTypeTab.php:100
-#, fuzzy
 msgid "Select Type of Tab"
-msgstr "Naziv tipa prodaje"
+msgstr ""
 
 #: PcExpensesTypeTab.php:132
 msgid "Expense Codes for Type of Tab "
@@ -15324,19 +15064,16 @@ msgid "Code Of Petty Cash Tab"
 msgstr ""
 
 #: PcReportTab.php:66
-#, fuzzy
 msgid "From Date :"
-msgstr "Od datuma"
+msgstr ""
 
 #: PcReportTab.php:69
-#, fuzzy
 msgid "To Date:"
-msgstr "Do datuma"
+msgstr ""
 
 #: PcReportTab.php:72
-#, fuzzy
 msgid "Show HTML"
-msgstr "Prikaži"
+msgstr ""
 
 #: PcReportTab.php:81 PcReportTab.php:82
 msgid "Petty Cash Report Of Tab"
@@ -15372,14 +15109,12 @@ msgid "The SQL that returned no rows was"
 msgstr ""
 
 #: PcReportTab.php:118
-#, fuzzy
 msgid "No Petty Cash tabs were returned by the SQL because"
-msgstr "Detalji o kupcu nisu dohvaćeni SQL-om zbog"
+msgstr ""
 
 #: PcReportTab.php:136
-#, fuzzy
 msgid "Tab Code :"
-msgstr "Bar kod"
+msgstr ""
 
 #: PcReportTab.php:137 PcReportTab.php:140 PcReportTab.php:145
 #: PcReportTab.php:148 PcReportTab.php:153 PcReportTab.php:158
@@ -15389,87 +15124,72 @@ msgid ": "
 msgstr ""
 
 #: PcReportTab.php:139
-#, fuzzy
 msgid "From "
-msgstr "Od datuma"
+msgstr ""
 
 #: PcReportTab.php:144
-#, fuzzy
 msgid "User "
-msgstr "Korisnik"
+msgstr ""
 
 #: PcReportTab.php:147
-#, fuzzy
 msgid "To "
-msgstr "Do datuma"
+msgstr ""
 
 #: PcReportTab.php:152
-#, fuzzy
 msgid "Authorizer "
-msgstr "Odobrio"
+msgstr ""
 
 #: PcReportTab.php:157
-#, fuzzy
 msgid "Currency "
-msgstr "Valuta"
+msgstr ""
 
 #: PcReportTab.php:162 PcReportTab.php:307
-#, fuzzy
 msgid "Balance before "
-msgstr "Bilanca stanja"
+msgstr ""
 
 #: PcReportTab.php:178
-#, fuzzy
 msgid "Date Authorizer"
-msgstr "Porezne ispostave"
+msgstr ""
 
 #: PcReportTab.php:221
-#, fuzzy
 msgid "Balance at"
-msgstr "Bilanca stanja"
+msgstr ""
 
 #: PcReportTab.php:232
 msgid "Print Report Tab Error"
 msgstr ""
 
 #: PcReportTab.php:270
-#, fuzzy
 msgid "No Petty Cash Tabs were returned by the SQL because"
-msgstr "Detalji o kupcu nisu dohvaćeni SQL-om zbog"
+msgstr ""
 
 #: PcReportTab.php:277 PcTabs.php:144
-#, fuzzy
 msgid "Tab Code"
-msgstr "Bar kod"
+msgstr ""
 
 #: PcReportTab.php:289 PcTabs.php:149 PcTabs.php:321
-#, fuzzy
 msgid "Authorizer"
-msgstr "Odobrio"
+msgstr ""
 
 #: PcReportTab.php:323
 msgid "Total not authorized before "
 msgstr ""
 
 #: PcReportTab.php:340
-#, fuzzy
 msgid "No Petty Cash movements for this tab were returned by the SQL because"
-msgstr "Detalji o kupcu nisu dohvaćeni SQL-om zbog"
+msgstr ""
 
 #: PcReportTab.php:350
-#, fuzzy
 msgid "Date Authorized"
-msgstr "Porezne ispostave"
+msgstr ""
 
 #: PcReportTab.php:420
-#, fuzzy
 msgid "Balance At"
-msgstr "Bilanca stanja"
+msgstr ""
 
 #: PcReportTab.php:424
-#, fuzzy
 msgid "Select A Different Date"
-msgstr "Izaberi drugu sastavnicu"
+msgstr ""
 
 #: PcTabs.php:7
 msgid "Maintenance Of Petty Cash Tabs"
@@ -15480,32 +15200,28 @@ msgid "The Tab code cannot be an empty string or spaces"
 msgstr ""
 
 #: PcTabs.php:43
-#, fuzzy
 msgid "The Tab code must be twenty characters or less long"
-msgstr "Linija 5 adrese mora biti do 20 znakova duga"
+msgstr ""
 
 #: PcTabs.php:60
 msgid "The Tabs Of Code"
 msgstr ""
 
 #: PcTabs.php:74
-#, fuzzy
 msgid "The Tab "
-msgstr "Varijabla"
+msgstr ""
 
 #: PcTabs.php:97
 msgid "Tab with Code "
 msgstr ""
 
 #: PcTabs.php:122
-#, fuzzy
 msgid "The Tab record could not be deleted because"
-msgstr "Podaci o prodaji nisu dohvaćeni zbog"
+msgstr ""
 
 #: PcTabs.php:124 PcTypeTabs.php:134
-#, fuzzy
 msgid "Tab type"
-msgstr "Tip"
+msgstr ""
 
 #: PcTabs.php:145 PcTabs.php:256 PO_AuthorisationLevels.php:124
 #: SMTPServer.php:57 UserSettings.php:114
@@ -15536,14 +15252,12 @@ msgid ""
 msgstr ""
 
 #: PcTabs.php:209
-#, fuzzy
 msgid "Show All Tabs Defined"
-msgstr "Pregled pošta"
+msgstr ""
 
 #: PcTabs.php:238 PcTabs.php:247
-#, fuzzy
 msgid "Tabcode"
-msgstr "Tablica"
+msgstr ""
 
 #: PcTabs.php:319
 msgid "Limit Of Tab"
@@ -15562,47 +15276,38 @@ msgid "The Tabs type code cannot be an empty string or spaces"
 msgstr ""
 
 #: PcTypeTabs.php:43
-#, fuzzy
 msgid "The tab code must be twenty characters or less long"
-msgstr "Linija 5 adrese mora biti do 20 znakova duga"
+msgstr ""
 
 #: PcTypeTabs.php:59
-#, fuzzy
 msgid "The Tabs type"
-msgstr "Tip kupca"
+msgstr ""
 
 #: PcTypeTabs.php:73
-#, fuzzy
 msgid "The Tab type "
-msgstr "Tip kupca"
+msgstr ""
 
 #: PcTypeTabs.php:84
-#, fuzzy
 msgid "Tabs type"
-msgstr "Tip prodaje"
+msgstr ""
 
 #: PcTypeTabs.php:107 PcTypeTabs.php:116
-#, fuzzy
 msgid "The number of tabs using this Tab type could not be retrieved"
-msgstr "Nije moguće dohvatiti sastavnicu zbog"
+msgstr ""
 
 #: PcTypeTabs.php:121
-#, fuzzy
 msgid ""
 "Cannot delete this tab type because tabs have been created using this tab "
 "type"
 msgstr ""
-"Nije moguće brisati kontnu skupinu jer su računi u glavnoj knjizi kreirani "
-"unutar te grupe"
 
 #: PcTypeTabs.php:125
 msgid "Return to list of tab types"
 msgstr ""
 
 #: PcTypeTabs.php:186
-#, fuzzy
 msgid "Show All Types Tabs Defined"
-msgstr "Prikaži definicije svih uvjeta plaćanja"
+msgstr ""
 
 #: PcTypeTabs.php:210 PcTypeTabs.php:220
 msgid "Code Of Type Of Tab"
@@ -15828,15 +15533,13 @@ msgstr ""
 
 #: PDFCustTransListing.php:13 PDFStockTransListing.php:13
 #: PDFSuppTransListing.php:13
-#, fuzzy
 msgid "The date must be specified in the format"
-msgstr "Datum treba unijeti u obliku"
+msgstr ""
 
 #: PDFCustTransListing.php:20 PDFCustTransListing.php:24
 #: PDFCustTransListing.php:93
-#, fuzzy
 msgid "Customer Transaction Listing"
-msgstr "Ispis salda kupaca sa neizvršenim obavezama"
+msgstr ""
 
 #: PDFCustTransListing.php:34 PDFStockTransListing.php:34
 #: PDFSuppTransListing.php:34
@@ -15857,14 +15560,12 @@ msgid "Credit Notes"
 msgstr ""
 
 #: PDFCustTransListing.php:74 PDFStockTransListing.php:85
-#, fuzzy
 msgid "An error occurred getting the transactions"
-msgstr "Došlo je do greške pri brisanju kontne skupine"
+msgstr ""
 
 #: PDFCustTransListing.php:76
-#, fuzzy
 msgid "The SQL used to get the transaction information that failed was"
-msgstr "SQL naredba korištena za dohvat podataka je"
+msgstr ""
 
 #: PDFCustTransListing.php:84 PDFStockTransListing.php:92
 #: PDFSuppTransListing.php:84
@@ -15877,9 +15578,8 @@ msgid "Please try again selecting a different date"
 msgstr ""
 
 #: PDFCustTransListing.php:94
-#, fuzzy
 msgid "Customer transaction listing from"
-msgstr "Ispis salda kupaca sa neizvršenim obavezama"
+msgstr ""
 
 #: PDFDeliveryDifferences.php:24 PDFDeliveryDifferences.php:28
 msgid "Delivery Differences Report"
@@ -15952,9 +15652,8 @@ msgid "Please find herewith delivery differences report from"
 msgstr ""
 
 #: PDFDIFOT.php:28
-#, fuzzy
 msgid "DIFOT Report"
-msgstr "Načini PDF izvješće"
+msgstr ""
 
 #: PDFDIFOT.php:39
 msgid ""
@@ -16131,18 +15830,16 @@ msgid ""
 msgstr ""
 
 #: PDFPickingList.php:24
-#, fuzzy
 msgid "Select Picking Lists"
-msgstr "Cjenik dobavljača"
+msgstr ""
 
 #: PDFPickingList.php:34
 msgid "Create picking lists for all deliveries to be made on"
 msgstr ""
 
 #: PDFPickingList.php:36
-#, fuzzy
 msgid "From Warehouse"
-msgstr "Od datuma"
+msgstr ""
 
 #: PDFPickingList.php:48
 msgid ""
@@ -16150,30 +15847,28 @@ msgid ""
 msgstr ""
 
 #: PDFPickingList.php:128 PDFPickingList.php:322
-#, fuzzy
 msgid "Print Picking List Error"
-msgstr "Ispis cjenika"
+msgstr ""
 
 #: PDFPickingList.php:131
 msgid "Unable to Locate any orders for this criteria "
 msgstr ""
 
 #: PDFPickingList.php:133
-#, fuzzy
 msgid "Enter Another Date"
-msgstr "Unos podataka"
+msgstr ""
 
 #: PDFPickingList.php:184 includes/PDFPickingListHeader.inc:12
-#, fuzzy
 msgid "Picking List"
-msgstr "Cjenik"
+msgstr ""
 
 #: PDFPickingList.php:185
 msgid "Laser Picking List"
 msgstr ""
 
 #: PDFPickingList.php:203
-msgid "There was a problem retrieving the order line details for Order Number"
+msgid ""
+"There was a problem retrieving the order line details for Order Number"
 msgstr ""
 
 #: PDFPriceList.php:16
@@ -16199,14 +15894,12 @@ msgstr ""
 
 #: PDFPriceList.php:30 PDFPriceList.php:38 PDFPriceList.php:135
 #: PDFRemittanceAdvice.php:40 PricesByCost.php:159 PricesByCost.php:163
-#, fuzzy
 msgid "Back"
-msgstr "Banka"
+msgstr ""
 
 #: PDFPriceList.php:37
-#, fuzzy
 msgid "The effective date must be entered in the format"
-msgstr "Datum treba unijeti u obliku"
+msgstr ""
 
 #: PDFPriceList.php:121
 msgid "Problem Report...."
@@ -16236,23 +15929,20 @@ msgstr ""
 
 #: PDFPriceList.php:172 PricesByCost.php:140 Prices_Customer.php:220
 #: Prices_Customer.php:274 Prices.php:215
-#, fuzzy
 msgid "No End Date"
-msgstr "Do datuma"
+msgstr ""
 
 #: PDFPriceList.php:240
-#, fuzzy
 msgid "Price_List"
-msgstr "Cjenik"
+msgstr ""
 
 #: PDFPriceList.php:247
 msgid "Price Listing"
 msgstr ""
 
 #: PDFPriceList.php:251
-#, fuzzy
 msgid "Print a price list"
-msgstr "Ispis cjenika"
+msgstr ""
 
 #: PDFPriceList.php:279 Z_DataExport.php:542
 msgid "For Sales Type/Price List"
@@ -16279,23 +15969,20 @@ msgid "Default Sales Type Prices"
 msgstr ""
 
 #: PDFPriceList.php:296
-#, fuzzy
 msgid "Full Description"
-msgstr "Opis"
+msgstr ""
 
 #: PDFPriceList.php:299 PDFPriceList.php:336 PDFPriceList.php:338
 msgid "Effective As At"
 msgstr ""
 
 #: PDFPriceList.php:336
-#, fuzzy
 msgid "Prices for Categories"
-msgstr "Kategorije"
+msgstr ""
 
 #: PDFPriceList.php:338
-#, fuzzy
 msgid "Prices For Categories"
-msgstr "Kategorije"
+msgstr ""
 
 #: PDFPriceList.php:353
 msgid "Effective Date Range"
@@ -16335,51 +16022,44 @@ msgid "Label Sticker Printing"
 msgstr ""
 
 #: PDFPrintLabel.php:92
-#, fuzzy
 msgid "Select label type"
-msgstr "Odaberi sve"
+msgstr ""
 
 #: PDFPrintLabel.php:93
-#, fuzzy
 msgid "Number of labels per item"
-msgstr "Broj artikala"
+msgstr ""
 
 #: PDFPrintLabel.php:94 Z_PriceChanges.php:94
 msgid "Price list"
 msgstr "Cjenik"
 
 #: PDFPrintLabel.php:95
-#, fuzzy
 msgid "Update values"
-msgstr "Ažuriraj stope"
+msgstr ""
 
 #: PDFPrintLabel.php:118
-#, fuzzy
 msgid "Print labels"
-msgstr "Štampano"
+msgstr ""
 
 #: PDFPrintLabel.php:119
 msgid "Print labels with borders"
 msgstr ""
 
 #: PDFPrintLabel.php:230
-#, fuzzy
 msgid "Select a Category"
-msgstr "Porezna kategorija"
+msgstr ""
 
 #: PDFPrintLabel.php:235
-#, fuzzy
 msgid "This category has no items to show"
-msgstr "Nema izvješća za prikaz!"
+msgstr ""
 
 #: PDFPrintLabel.php:339
 msgid "Unit not defined in scale operation! Correct the template"
 msgstr ""
 
 #: PDFPrintLabel.php:501
-#, fuzzy
 msgid "Couldnt get the currency data"
-msgstr "Nije moguće promijeniti tečajeve valuta"
+msgstr ""
 
 #: PDFQuotation.php:13
 msgid "Select Quotation To Print"
@@ -16506,44 +16186,37 @@ msgid "and Paid On"
 msgstr ""
 
 #: PDFRemittanceAdvice.php:81
-#, fuzzy
 msgid "Remittance Advice Problem Report"
-msgstr "Izvješće o problemima"
+msgstr ""
 
 #: PDFRemittanceAdvice.php:83
-#, fuzzy
 msgid ""
 "The details of the payment to the supplier could not be retrieved because"
-msgstr "Nije moguće dohvatiti sastavnicu zbog"
+msgstr ""
 
 #: PDFRemittanceAdvice.php:114
 msgid "Remittance_Advices"
 msgstr ""
 
 #: PDFRemittanceAdvice.php:149
-#, fuzzy
 msgid "Date Of Payment"
-msgstr "Plaćanja"
+msgstr ""
 
 #: PDFRemittanceAdvice.php:174
-#, fuzzy
 msgid "Total Payment:"
-msgstr "Ne / Otkazana uplata"
+msgstr ""
 
 #: PDFRemittanceAdvice.php:216
-#, fuzzy
 msgid "printed:"
-msgstr "Štampano"
+msgstr ""
 
 #: PDFRemittanceAdvice.php:269
-#, fuzzy
 msgid "Our Code:"
-msgstr "Bar kod"
+msgstr ""
 
 #: PDFRemittanceAdvice.php:311
-#, fuzzy
 msgid "This Payment"
-msgstr "Plaćanja"
+msgstr ""
 
 #: PDFStockCheckComparison.php:13
 msgid "Check Comparison Report"
@@ -16725,9 +16398,8 @@ msgid "An error occurred retrieving the negative quantities."
 msgstr ""
 
 #: PDFStockNegatives.php:20
-#, fuzzy
 msgid "The sql that failed to retrieve the negative quantities was"
-msgstr "SQL naredba korištena za dohvat podataka je"
+msgstr ""
 
 #: PDFStockNegatives.php:37
 msgid "There are no negative stocks to list"
@@ -16738,19 +16410,16 @@ msgid "Stock Transfer Form"
 msgstr ""
 
 #: PDFStockTransfer.php:37
-#, fuzzy
 msgid "There are no decription for "
-msgstr "nema komponenti definiranih za to"
+msgstr ""
 
 #: PDFStockTransfer.php:50
-#, fuzzy
 msgid "There are no location From for "
-msgstr "Nema izvješća za prikaz!"
+msgstr ""
 
 #: PDFStockTransfer.php:63
-#, fuzzy
 msgid "There are no location To for "
-msgstr "Nema izvješća za prikaz!"
+msgstr ""
 
 #: PDFStockTransfer.php:77
 msgid "Date of transfer: "
@@ -16758,9 +16427,8 @@ msgstr ""
 
 #: PDFStockTransListing.php:20 PDFStockTransListing.php:24
 #: PDFStockTransListing.php:101
-#, fuzzy
 msgid "Stock Transaction Listing"
-msgstr "Prikaži transakcije"
+msgstr ""
 
 #: PDFStockTransListing.php:42 PrintCustTrans.php:37
 #: PrintCustTransPortrait.php:59 SalesInquiry.php:1061
@@ -16773,33 +16441,28 @@ msgid "Sales Credit Note"
 msgstr ""
 
 #: PDFStockTransListing.php:44
-#, fuzzy
 msgid "Location Transfer"
-msgstr "Lokacija:"
+msgstr ""
 
 #: PDFStockTransListing.php:45
 msgid "Stock Adjustment"
 msgstr ""
 
 #: PDFStockTransListing.php:46
-#, fuzzy
 msgid "Purchase Order Delivery"
-msgstr "Samo nalozi za nabavu"
+msgstr ""
 
 #: PDFStockTransListing.php:47
-#, fuzzy
 msgid "Work Order Receipt"
-msgstr "Samo radni nalozi"
+msgstr ""
 
 #: PDFStockTransListing.php:48
-#, fuzzy
 msgid "Work Order Issue"
-msgstr "Samo radni nalozi"
+msgstr ""
 
 #: PDFStockTransListing.php:83 PDFStockTransListing.php:89
-#, fuzzy
 msgid "Transaction Listing"
-msgstr "Transakcije"
+msgstr ""
 
 #: PDFStockTransListing.php:102
 msgid "Stock transaction listing from"
@@ -16807,14 +16470,12 @@ msgstr ""
 
 #: PDFSuppTransListing.php:20 PDFSuppTransListing.php:24
 #: PDFSuppTransListing.php:93
-#, fuzzy
 msgid "Supplier Transaction Listing"
-msgstr "Transakcije s dobavljačima"
+msgstr ""
 
 #: PDFSuppTransListing.php:94
-#, fuzzy
 msgid "Supplier transaction listing from"
-msgstr "Transakcije s dobavljačima"
+msgstr ""
 
 #: PDFTopItems.php:8
 msgid "Top Items Search Result"
@@ -16881,9 +16542,8 @@ msgid "User can create orders"
 msgstr "Korisnik može kreirati naloge"
 
 #: PO_AuthorisationLevels.php:203
-#, fuzzy
 msgid "User can release invoices"
-msgstr "Korisnik može kreirati naloge"
+msgstr ""
 
 #: PO_AuthorisationLevels.php:210
 msgid "User can authorise orders up to :"
@@ -16987,7 +16647,8 @@ msgid "You can only authorise up to"
 msgstr ""
 
 #: PO_Header.php:96 PO_Header.php:120 PO_Header.php:138
-msgid "If you think this is a mistake please contact the systems administrator"
+msgid ""
+"If you think this is a mistake please contact the systems administrator"
 msgstr ""
 
 #: PO_Header.php:106
@@ -17034,7 +16695,8 @@ msgid "Order set to pending status by"
 msgstr ""
 
 #: PO_Header.php:138
-msgid "You do not have permission to change the status of this purchase order"
+msgid ""
+"You do not have permission to change the status of this purchase order"
 msgstr ""
 
 #: PO_Header.php:155
@@ -17056,9 +16718,8 @@ msgid ""
 msgstr ""
 
 #: PO_Header.php:285
-#, fuzzy
 msgid "Supplier changed by"
-msgstr "Cjenik dobavljača"
+msgstr ""
 
 #: PO_Header.php:288
 msgid ""
@@ -17193,14 +16854,12 @@ msgid "Receive this order"
 msgstr ""
 
 #: PO_Header.php:776
-#, fuzzy
 msgid "New Purchase Order"
-msgstr "Pregled svih naloga za nabavu"
+msgstr ""
 
 #: PO_Header.php:811
-#, fuzzy
 msgid "Status Comment"
-msgstr "Šifra statusa"
+msgstr ""
 
 #: PO_Header.php:816
 msgid "Status Update"
@@ -17283,9 +16942,8 @@ msgid ""
 msgstr ""
 
 #: PO_Items.php:103
-#, fuzzy
 msgid "Order Created by"
-msgstr "Datum naloga"
+msgstr ""
 
 #: PO_Items.php:174 SpecialOrder.php:309
 msgid ""
@@ -17529,14 +17187,12 @@ msgid "OR Asset ID"
 msgstr ""
 
 #: PO_Items.php:1011
-#, fuzzy
 msgid "Not an Asset"
-msgstr "Nije korišteno"
+msgstr ""
 
 #: PO_Items.php:1014
-#, fuzzy
 msgid "Not yet purchased"
-msgstr "Kupovna roba"
+msgstr ""
 
 #: PO_Items.php:1021 SuppFixedAssetChgs.php:111
 msgid "New Fixed Asset"
@@ -17607,9 +17263,8 @@ msgid "the SQL returned either several purchase orders"
 msgstr ""
 
 #: PO_OrderDetails.php:89 RecurringSalesOrders.php:368
-#, fuzzy
 msgid "Order Header Details"
-msgstr "Izaberi detalje isporuke"
+msgstr ""
 
 #: PO_OrderDetails.php:90 Suppliers.php:656 Suppliers.php:804
 #: SuppLoginSetup.php:241 SuppLoginSetup.php:407 WWW_Users.php:271
@@ -17818,9 +17473,8 @@ msgid "Month"
 msgstr ""
 
 #: POReport.php:512
-#, fuzzy
 msgid "Header Details"
-msgstr "Detalji"
+msgstr ""
 
 #: POReport.php:514 POReport.php:1203 POReport.php:1426 SalesInquiry.php:773
 #: SalesInquiry.php:1052
@@ -17898,9 +17552,8 @@ msgid "By"
 msgstr ""
 
 #: POReport.php:1403
-#, fuzzy
 msgid "The report has been exported as a csv file."
-msgstr "izvješće je promjenjeno"
+msgstr ""
 
 #: POReport.php:1420 SalesInquiry.php:1039 StockDispatch.php:296
 msgid "Report Type"
@@ -17991,9 +17644,8 @@ msgid "Into Stock Location"
 msgstr ""
 
 #: PO_SelectOSPurchOrder.php:154 PO_SelectPurchOrder.php:123
-#, fuzzy
 msgid "Order Status:"
-msgstr "Status naloga"
+msgstr ""
 
 #: PO_SelectOSPurchOrder.php:156 PO_SelectOSPurchOrder.php:158
 #: PO_SelectPurchOrder.php:125 PO_SelectPurchOrder.php:127
@@ -18154,16 +17806,14 @@ msgid ""
 msgstr ""
 
 #: PricesBasedOnMarkUp.php:184
-#, fuzzy
 msgid ""
 "The date the new price is to be in effect to must be entered in the format"
-msgstr "Datum treba unijeti u obliku"
+msgstr ""
 
 #: PricesBasedOnMarkUp.php:188 Prices_Customer.php:99 Prices.php:78
-#, fuzzy
 msgid ""
 "The date this price is to take effect from must be entered in the format"
-msgstr "Datum treba unijeti u obliku"
+msgstr ""
 
 #: PricesBasedOnMarkUp.php:192 Prices_Customer.php:107 Prices.php:88
 msgid ""
@@ -18172,7 +17822,8 @@ msgid ""
 msgstr ""
 
 #: PricesBasedOnMarkUp.php:196
-msgid "The date this new price is to start from is expected to be after today"
+msgid ""
+"The date this new price is to start from is expected to be after today"
 msgstr ""
 
 #: PricesBasedOnMarkUp.php:199
@@ -18272,9 +17923,8 @@ msgid "Error updating prices for"
 msgstr ""
 
 #: PricesBasedOnMarkUp.php:334
-#, fuzzy
 msgid "Updating price for"
-msgstr "Ažuriraj cijene"
+msgstr ""
 
 #: PricesBasedOnMarkUp.php:348
 msgid "Error inserting prices for"
@@ -18285,48 +17935,40 @@ msgid "Inserting new price for"
 msgstr ""
 
 #: PricesByCost.php:6
-#, fuzzy
 msgid "Update of Prices By Cost"
-msgstr "Ažuriraj cijene"
+msgstr ""
 
 #: PricesByCost.php:9
-#, fuzzy
 msgid "Update Price By Cost"
-msgstr "Ažuriraj cijene"
+msgstr ""
 
 #: PricesByCost.php:79
 msgid "the"
 msgstr ""
 
 #: PricesByCost.php:79
-#, fuzzy
 msgid "category"
-msgstr "Kategorija"
+msgstr ""
 
 #: PricesByCost.php:81
-#, fuzzy
 msgid "all Categories"
-msgstr "Kategorije"
+msgstr ""
 
 #: PricesByCost.php:84
-#, fuzzy
 msgid "Items in"
-msgstr "Artikli"
+msgstr ""
 
 #: PricesByCost.php:84
-#, fuzzy
 msgid "With Prices"
-msgstr "Ažuriraj cijene"
+msgstr ""
 
 #: PricesByCost.php:84
-#, fuzzy
 msgid "times"
-msgstr "Bilješke"
+msgstr ""
 
 #: PricesByCost.php:84
-#, fuzzy
 msgid "Cost in Price List"
-msgstr "Ispis cjenika"
+msgstr ""
 
 #: PricesByCost.php:92 Prices_Customer.php:360 Prices.php:201
 #: RecurringSalesOrders.php:414 WorkOrderEntry.php:475
@@ -18339,19 +17981,16 @@ msgid "End Date"
 msgstr ""
 
 #: PricesByCost.php:96
-#, fuzzy
 msgid "Price Proposed"
-msgstr "Cijena ažurirana"
+msgstr ""
 
 #: PricesByCost.php:97
-#, fuzzy
 msgid "List Price"
-msgstr "Ukupna cijena"
+msgstr ""
 
 #: PricesByCost.php:162
-#, fuzzy
 msgid "There were no prices meeting the criteria specified to review"
-msgstr "Nema kupaca koji zadovoljavaju kriterij za izlistanje"
+msgstr ""
 
 #: PricesByCost.php:166
 msgid "Use this report to display price list with the cost."
@@ -18428,9 +18067,8 @@ msgid "The branch code entered is not currently defined"
 msgstr ""
 
 #: Prices_Customer.php:103 Prices.php:84
-#, fuzzy
 msgid "The date this price is be in effect to must be entered in the format"
-msgstr "Datum treba unijeti u obliku"
+msgstr ""
 
 #: Prices_Customer.php:111 Prices.php:92
 msgid ""
@@ -18504,29 +18142,24 @@ msgid "An item must first be selected before this page is called"
 msgstr ""
 
 #: Prices.php:119
-#, fuzzy
 msgid "Could not be update the existing prices"
-msgstr "Nije moguće promijeniti tečajeve valuta"
+msgstr ""
 
 #: Prices.php:124
-#, fuzzy
 msgid "The price has been updated"
-msgstr "izvješće je promjenjeno"
+msgstr ""
 
 #: Prices.php:142
-#, fuzzy
 msgid "The new price could not be added"
-msgstr "Dodan je zapis o kontaktu"
+msgstr ""
 
 #: Prices.php:146
-#, fuzzy
 msgid "The new price has been inserted"
-msgstr "je dodan"
+msgstr ""
 
 #: Prices.php:162
-#, fuzzy
 msgid "Could not delete this price"
-msgstr "Nije moguće promijeniti tečajeve valuta"
+msgstr ""
 
 #: Prices.php:164
 msgid "The selected price has been deleted"
@@ -19044,9 +18677,8 @@ msgid "This purchasing data record has been successfully deleted"
 msgstr ""
 
 #: PurchData.php:141 PurchData.php:231 PurchData.php:250
-#, fuzzy
 msgid "For Stock Code"
-msgstr "Od šifre kupca"
+msgstr ""
 
 #: PurchData.php:159
 msgid ""
@@ -19063,9 +18695,8 @@ msgid "Supplier Unit"
 msgstr ""
 
 #: PurchData.php:171 SelectProduct.php:327
-#, fuzzy
 msgid "Min Order Qty"
-msgstr "Promjena stavki naloga"
+msgstr ""
 
 #: PurchData.php:173
 msgid "Preferred"
@@ -19199,18 +18830,16 @@ msgid "Conversion Factor (to our UOM)"
 msgstr ""
 
 #: PurchData.php:455
-#, fuzzy
 msgid "Supplier Stock Code"
-msgstr "Do šifre dobavljača"
+msgstr ""
 
 #: PurchData.php:457
 msgid "MinOrderQty"
 msgstr ""
 
 #: PurchData.php:459
-#, fuzzy
 msgid "Supplier Stock Description"
-msgstr "Opis razreda"
+msgstr ""
 
 #: PurchData.php:464
 msgid "in days from date of order"
@@ -19292,7 +18921,8 @@ msgid ""
 msgstr ""
 
 #: RecurringSalesOrders.php:189
-msgid "The end date of this recurring order must be a valid date in the format"
+msgid ""
+"The end date of this recurring order must be a valid date in the format"
 msgstr ""
 
 #: RecurringSalesOrders.php:193
@@ -19504,15 +19134,15 @@ msgstr ""
 
 #: ReorderLevelLocation.php:51
 msgid "Location : "
-msgstr "Lokacija:"
+msgstr "Lokacija: "
 
 #: ReorderLevelLocation.php:52
 msgid "Number Of Days Sales : "
-msgstr "Broj dana prodaje:"
+msgstr "Broj dana prodaje: "
 
 #: ReorderLevelLocation.php:52
 msgid " Days "
-msgstr "Dani"
+msgstr " Dani "
 
 #: ReorderLevelLocation.php:56 ReorderLevelLocation.php:57
 #: ReorderLevelLocation.php:202 TopItems.php:158
@@ -19677,19 +19307,17 @@ msgid "GRN Reversed for"
 msgstr ""
 
 #: ReverseGRN.php:138
-#, fuzzy
 msgid ""
 "The purchase order statusand status comment could not be changed because"
-msgstr "Nije moguće dohvatiti kontni plan zbog"
+msgstr ""
 
 #: ReverseGRN.php:139
 msgid "The following SQL to update the purchase order header record was used"
 msgstr ""
 
 #: ReverseGRN.php:147
-#, fuzzy
 msgid "The GRN record could not be deleted because"
-msgstr "Podaci o prodaji nisu dohvaćeni zbog"
+msgstr ""
 
 #: ReverseGRN.php:148
 msgid "The following SQL to delete the GRN record was used"
@@ -19875,7 +19503,8 @@ msgid "The SQL used to delete this report column was"
 msgstr ""
 
 #: SalesAnalReptCols.php:242
-msgid "The column definitions could not be retrieved from the database because"
+msgid ""
+"The column definitions could not be retrieved from the database because"
 msgstr ""
 
 #: SalesAnalReptCols.php:243
@@ -20473,41 +20102,36 @@ msgid "For Sales Person:"
 msgstr ""
 
 #: SalesGraph.php:147
-#, fuzzy
 msgid "Graph Type"
-msgstr "Graf"
+msgstr ""
 
 #: SalesGraph.php:149
-#, fuzzy
 msgid "Bar Graph"
-msgstr "Graf"
+msgstr ""
 
 #: SalesGraph.php:150
 msgid "Stacked Bar Graph"
 msgstr ""
 
 #: SalesGraph.php:151
-#, fuzzy
 msgid "Line Graph"
-msgstr "Graf"
+msgstr ""
 
 #: SalesGraph.php:152
 msgid "Line Point Graph"
 msgstr ""
 
 #: SalesGraph.php:153
-#, fuzzy
 msgid "Area Graph"
-msgstr "Graf"
+msgstr ""
 
 #: SalesGraph.php:154
 msgid "Points Graph"
 msgstr ""
 
 #: SalesGraph.php:155
-#, fuzzy
 msgid "Pie Graph"
-msgstr "Graf"
+msgstr ""
 
 #: SalesGraph.php:156
 msgid "Thin Bar Line Graph"
@@ -20680,7 +20304,8 @@ msgid "The salesperson name must be thirty characters or less long"
 msgstr ""
 
 #: SalesPeople.php:52 SalesPeople.php:56
-msgid "The salesperson telephone number must be twenty characters or less long"
+msgid ""
+"The salesperson telephone number must be twenty characters or less long"
 msgstr ""
 
 #: SalesPeople.php:60
@@ -20786,10 +20411,9 @@ msgid "The sales type (price list) code cannot be an empty string or spaces"
 msgstr ""
 
 #: SalesTypes.php:47
-#, fuzzy
 msgid ""
 "The sales type (price list) description must be forty characters or less long"
-msgstr "Linija 1 adrese mora biti do 40 znakova duga"
+msgstr ""
 
 #: SalesTypes.php:52
 msgid ""
@@ -20891,29 +20515,24 @@ msgid ""
 msgstr ""
 
 #: SelectAsset.php:37
-#, fuzzy
 msgid "Define Asset Categories"
-msgstr "Svojstva kategorije imovine"
+msgstr ""
 
 #: SelectAsset.php:53 SelectAsset.php:55
-#, fuzzy
 msgid "Any asset category"
-msgstr "Kategorija prodaje"
+msgstr ""
 
 #: SelectAsset.php:67
-#, fuzzy
 msgid "Enter partial description"
-msgstr "Unesi dio šifre"
+msgstr ""
 
 #: SelectAsset.php:78 SelectAsset.php:80
-#, fuzzy
 msgid "Any asset location"
-msgstr "Na lokaciji"
+msgstr ""
 
 #: SelectAsset.php:93
-#, fuzzy
 msgid "Enter partial asset code"
-msgstr "Unesi dio šifre"
+msgstr ""
 
 #: SelectAsset.php:114
 msgid ""
@@ -20922,9 +20541,8 @@ msgid ""
 msgstr ""
 
 #: SelectAsset.php:171
-#, fuzzy
 msgid "No assets were returned by the SQL because"
-msgstr "Detalji o kupcu nisu dohvaćeni SQL-om zbog"
+msgstr ""
 
 #: SelectAsset.php:175
 msgid ""
@@ -20996,19 +20614,16 @@ msgstr ""
 
 #: SelectContract.php:53 SelectContract.php:59 SelectContract.php:65
 #: SelectContract.php:71 SelectContract.php:77
-#, fuzzy
 msgid "All Contracts"
-msgstr "Kontakt"
+msgstr ""
 
 #: SelectContract.php:82
-#, fuzzy
 msgid "New Contract"
-msgstr "Kontakt"
+msgstr ""
 
 #: SelectContract.php:143
-#, fuzzy
 msgid "No contracts were returned by the SQL because"
-msgstr "Detalji o kupcu nisu dohvaćeni SQL-om zbog"
+msgstr ""
 
 #: SelectContract.php:153
 msgid "Issue To WO"
@@ -21058,9 +20673,8 @@ msgid "The customer record of the customer selected"
 msgstr ""
 
 #: SelectCreditItems.php:204
-#, fuzzy
 msgid "Select Customer For Credit Note"
-msgstr "Izbor modula za uređivanje"
+msgstr ""
 
 #: SelectCreditItems.php:206
 msgid "Customer Selection"
@@ -21251,7 +20865,8 @@ msgid ""
 msgstr ""
 
 #: SelectCreditItems.php:1758 SelectCreditItems.php:1786
-msgid "The cost of the stock credited GL posting could not be inserted because"
+msgid ""
+"The cost of the stock credited GL posting could not be inserted because"
 msgstr ""
 
 #: SelectCreditItems.php:1811
@@ -21309,9 +20924,8 @@ msgid "Customer Inquiries"
 msgstr "Pretraživanje kupaca"
 
 #: SelectCustomer.php:279 SelectCustomer.php:302
-#, fuzzy
 msgid "Customer Transactions"
-msgstr "Transakcije s dobavljačima"
+msgstr ""
 
 #: SelectCustomer.php:284
 msgid "View Customer Details"
@@ -21378,14 +20992,12 @@ msgid "Any"
 msgstr ""
 
 #: SelectCustomer.php:393
-#, fuzzy
 msgid "Choose an Area"
-msgstr "Izaberi tip kupca"
+msgstr ""
 
 #: SelectCustomer.php:399
-#, fuzzy
 msgid "No Sales Areas defined"
-msgstr "Nije definiran tip prodaje / cjenik"
+msgstr ""
 
 #: SelectCustomer.php:418
 msgid "Your account enables you to see only customers allocated to you"
@@ -21416,9 +21028,8 @@ msgid "Customer Data"
 msgstr ""
 
 #: SelectCustomer.php:581
-#, fuzzy
 msgid "No receipts from this customer."
-msgstr "Pregled svih bilješki o kupcu"
+msgstr ""
 
 #: SelectCustomer.php:583
 msgid "Last Paid Date:"
@@ -21656,9 +21267,8 @@ msgid ""
 msgstr ""
 
 #: SelectOrderItems.php:1013
-#, fuzzy
 msgid "Asset Disposals"
-msgstr "Opis imovine"
+msgstr ""
 
 #: SelectOrderItems.php:1120
 msgid ""
@@ -21680,7 +21290,8 @@ msgid ""
 msgstr ""
 
 #: SelectOrderItems.php:1126
-msgid "The quantity delivered and invoiced cannot be modified retrospectively"
+msgid ""
+"The quantity delivered and invoiced cannot be modified retrospectively"
 msgstr ""
 
 #: SelectOrderItems.php:1149
@@ -21701,8 +21312,8 @@ msgstr ""
 #: SelectOrderItems.php:1295
 msgid ""
 "Quantity (required) - Enter the number of units ordered.  Price (required) - "
-"Enter the unit price.  Discount (optional) - Enter a percentage discount.  GP"
-"% (optional) - Enter a percentage Gross Profit (GP) to add to the unit "
+"Enter the unit price.  Discount (optional) - Enter a percentage discount.  "
+"GP% (optional) - Enter a percentage Gross Profit (GP) to add to the unit "
 "cost.  Due Date (optional) - Enter a date for delivery."
 msgstr ""
 
@@ -21748,9 +21359,8 @@ msgid "Select Asset To Dispose of From the List Below"
 msgstr ""
 
 #: SelectOrderItems.php:1801
-#, fuzzy
 msgid "Add Asset To Order"
-msgstr "Šifra imovine"
+msgstr ""
 
 #: SelectOrderItems.php:1807
 msgid "Cancel Whole Order"
@@ -21765,9 +21375,8 @@ msgid "Search Inventory Items"
 msgstr ""
 
 #: SelectProduct.php:14 SelectRecurringSalesOrder.php:12
-#, fuzzy
 msgid "Inventory Items"
-msgstr "Skladišno"
+msgstr ""
 
 #: SelectProduct.php:74
 msgid "Item Type:"
@@ -21909,9 +21518,8 @@ msgid "Purchase this Item from"
 msgstr ""
 
 #: SelectProduct.php:411
-#, fuzzy
 msgid "default"
-msgstr "Početni tekst"
+msgstr ""
 
 #: SelectProduct.php:418 SelectProduct.php:450
 msgid "Add Inventory Items"
@@ -22101,9 +21709,8 @@ msgid "Set Up A New Shipment"
 msgstr ""
 
 #: SelectSupplier.php:179 SuppLoginSetup.php:8
-#, fuzzy
 msgid "Supplier Login Configuration"
-msgstr "EDI konfiguracija kupca"
+msgstr ""
 
 #: SelectSupplier.php:199
 msgid "Search for Suppliers"
@@ -22158,9 +21765,8 @@ msgid "No items were returned by the SQL because"
 msgstr ""
 
 #: SelectWorkOrder.php:109
-#, fuzzy
 msgid "For the item"
-msgstr "ili znak"
+msgstr ""
 
 #: SelectWorkOrder.php:111
 msgid "Work Order number"
@@ -22237,9 +21843,8 @@ msgid "could not be located in the database"
 msgstr ""
 
 #: ShipmentCosting.php:52
-#, fuzzy
 msgid "Shipment Details"
-msgstr "Detalji o dobavljaču"
+msgstr ""
 
 #: ShipmentCosting.php:59 Shipt_Select.php:286 ShiptsList.php:38
 msgid "Vessel"
@@ -22694,18 +22299,16 @@ msgid "ETA"
 msgstr ""
 
 #: SMTPServer.php:7
-#, fuzzy
 msgid "SMTP Server details"
-msgstr "Izaberi detalje isporuke"
+msgstr ""
 
 #: SMTPServer.php:12
 msgid "SMTP Server"
 msgstr ""
 
 #: SMTPServer.php:12
-#, fuzzy
 msgid "SMTP Server Settings"
-msgstr "Opće postavke"
+msgstr ""
 
 #: SMTPServer.php:23
 msgid "The settings for the SMTP server have been successfully updated"
@@ -22716,27 +22319,24 @@ msgid "Server Host Name"
 msgstr ""
 
 #: SMTPServer.php:43
-#, fuzzy
 msgid "SMTP port"
-msgstr "Sortiranje"
+msgstr ""
 
 #: SMTPServer.php:45
 msgid "Helo Command"
 msgstr ""
 
 #: SMTPServer.php:47
-#, fuzzy
 msgid "Authorisation Required"
-msgstr "Autorizacija"
+msgstr ""
 
 #: SMTPServer.php:50 SMTPServer.php:53
 msgid "True"
 msgstr ""
 
 #: SMTPServer.php:51 SMTPServer.php:54
-#, fuzzy
 msgid "False"
-msgstr "Pogreška"
+msgstr ""
 
 #: SMTPServer.php:61
 msgid "Timeout (seconds)"
@@ -22807,7 +22407,8 @@ msgid ""
 msgstr ""
 
 #: SpecialOrder.php:183 SpecialOrder.php:255
-msgid "The person entering this order must be specified in the initiator field"
+msgid ""
+"The person entering this order must be specified in the initiator field"
 msgstr ""
 
 #: SpecialOrder.php:183 SpecialOrder.php:255
@@ -22873,7 +22474,8 @@ msgid ""
 msgstr ""
 
 #: SpecialOrder.php:423
-msgid "The SQL statement used to get the delivery details and that failed was"
+msgid ""
+"The SQL statement used to get the delivery details and that failed was"
 msgstr ""
 
 #: SpecialOrder.php:466
@@ -23001,14 +22603,12 @@ msgstr ""
 
 #: StockAdjustments.php:50 StockCategories.php:13 StockCostUpdate.php:23
 #: StockCounts.php:16
-#, fuzzy
 msgid "Inventory Adjustment"
-msgstr "Postavke skladišta"
+msgstr ""
 
 #: StockAdjustments.php:55
-#, fuzzy
 msgid "Select Item to Adjust"
-msgstr "Izbor modula za uređivanje"
+msgstr ""
 
 #: StockAdjustments.php:62 StockTransfers.php:25
 msgid "The stock information cannot be retrieved because"
@@ -23023,9 +22623,8 @@ msgid "Stock Description"
 msgstr ""
 
 #: StockAdjustments.php:67
-#, fuzzy
 msgid "Adjust"
-msgstr "kolovoz"
+msgstr ""
 
 #: StockAdjustments.php:80 StockCostUpdate.php:43 StockCostUpdate.php:65
 #: StockTransfers.php:126 StockTransfers.php:214
@@ -23067,9 +22666,8 @@ msgid "for a quantity of"
 msgstr ""
 
 #: StockAdjustments.php:316
-#, fuzzy
 msgid "Adjustment Details"
-msgstr "Promijeni detalje o kupcu"
+msgstr ""
 
 #: StockAdjustments.php:326 StockTransfers.php:437
 msgid "Partial Description"
@@ -23321,9 +22919,8 @@ msgid "Default Value"
 msgstr ""
 
 #: StockCategories.php:486
-#, fuzzy
 msgid "Numeric Value"
-msgstr "Numerik"
+msgstr ""
 
 #: StockCategories.php:487
 msgid "Minimum Value"
@@ -23364,7 +22961,8 @@ msgid "Stock Count Sheets - Problem Report"
 msgstr ""
 
 #: StockCheck.php:46 StockCheck.php:97
-msgid "The inventory quantities could not be added to the freeze file because"
+msgid ""
+"The inventory quantities could not be added to the freeze file because"
 msgstr ""
 
 #: StockCheck.php:67
@@ -23372,9 +22970,8 @@ msgid "The old quantities could not be deleted from the freeze file because"
 msgstr ""
 
 #: StockCheck.php:95
-#, fuzzy
 msgid "Stock Freeze - Problem Report"
-msgstr "Izvješće o problemima"
+msgstr ""
 
 #: StockCheck.php:105
 msgid "Stock Check Freeze Update"
@@ -23408,9 +23005,8 @@ msgid "Stock Check Sheets"
 msgstr ""
 
 #: StockCheck.php:265
-#, fuzzy
 msgid "print"
-msgstr "Štampanje"
+msgstr ""
 
 #: StockCheck.php:298
 msgid "Action for Stock Check Freeze"
@@ -23602,9 +23198,8 @@ msgid "Could not retrieve location name from the database"
 msgstr ""
 
 #: StockDispatch.php:90 StockDispatch.php:101
-#, fuzzy
 msgid "Stock Dispatch - Problem Report"
-msgstr "Izvješće o problemima"
+msgstr ""
 
 #: StockDispatch.php:92
 msgid "The Stock Dispatch report could not be retrieved by the SQL because"
@@ -23734,9 +23329,8 @@ msgid "Trans No"
 msgstr ""
 
 #: StockLocMovements.php:91
-#, fuzzy
 msgid "Quantity on Hand"
-msgstr "Količina"
+msgstr ""
 
 #: StockLocStatus.php:8
 msgid "All Stock Status By Location/Category"
@@ -24268,7 +23862,8 @@ msgid "The economic order quantity must be a positive number"
 msgstr ""
 
 #: Stocks.php:162 Z_ImportStocks.php:166
-msgid "The item can only be serialised if there is lot control enabled already"
+msgid ""
+"The item can only be serialised if there is lot control enabled already"
 msgstr ""
 
 #: Stocks.php:162 Z_ImportStocks.php:166
@@ -24312,8 +23907,8 @@ msgstr ""
 
 #: Stocks.php:180
 msgid ""
-"Assemblies/Dummies/Phantom and Kitsets are not physical items and batch/"
-"serial control is therefore not appropriate"
+"Assemblies/Dummies/Phantom and Kitsets are not physical items and "
+"batch/serial control is therefore not appropriate"
 msgstr ""
 
 #: Stocks.php:186 Z_ImportStocks.php:180
@@ -24369,7 +23964,8 @@ msgid "The make or buy flag cannot be changed to"
 msgstr ""
 
 #: Stocks.php:265
-msgid "where there is a quantity outstanding to be received on purchase orders"
+msgid ""
+"where there is a quantity outstanding to be received on purchase orders"
 msgstr ""
 
 #: Stocks.php:265
@@ -24630,9 +24226,8 @@ msgid "A number between"
 msgstr ""
 
 #: Stocks.php:984
-#, fuzzy
 msgid "is expected"
-msgstr "Korisnik obrisan"
+msgstr ""
 
 #: Stocks.php:1018
 msgid "Insert New Item"
@@ -24746,9 +24341,8 @@ msgid "Stock Transfers"
 msgstr ""
 
 #: StockTransfers.php:18
-#, fuzzy
 msgid "Select Item to Transfer"
-msgstr "Izbor modula za uređivanje"
+msgstr ""
 
 #: StockTransfers.php:78
 msgid "Unable to locate Stock Code"
@@ -24840,7 +24434,8 @@ msgid ""
 msgstr ""
 
 #: StockUsageGraph.php:61
-msgid "There are no movements of this item from the selected location to graph"
+msgid ""
+"There are no movements of this item from the selected location to graph"
 msgstr ""
 
 #: StockUsage.php:9
@@ -24899,14 +24494,12 @@ msgid ""
 msgstr ""
 
 #: SuppContractChgs.php:62
-#, fuzzy
 msgid "Contract charges on Invoice"
-msgstr "Datum računa"
+msgstr ""
 
 #: SuppContractChgs.php:64
-#, fuzzy
 msgid "Contract credits on Credit Note"
-msgstr "Zabilješka za kontakt grupu"
+msgstr ""
 
 #: SuppContractChgs.php:104 SuppFixedAssetChgs.php:21 SuppInvGRNs.php:152
 #: SuppShiptChgs.php:23 SuppTransGLAnalysis.php:131
@@ -24914,9 +24507,8 @@ msgid "Back to Invoice Entry"
 msgstr ""
 
 #: SuppContractChgs.php:119
-#, fuzzy
 msgid "Contract Selection"
-msgstr "Izbor kupca"
+msgstr ""
 
 #: SuppContractChgs.php:119 SuppShiptChgs.php:108 SuppTransGLAnalysis.php:150
 msgid "If you know the code enter it above"
@@ -24927,14 +24519,12 @@ msgid "otherwise select the contract from the list"
 msgstr ""
 
 #: SuppContractChgs.php:146
-#, fuzzy
 msgid "Aniticpated Cost"
-msgstr "Jedinični trošak"
+msgstr ""
 
 #: SuppContractChgs.php:156
-#, fuzzy
 msgid "Enter Contract Charge"
-msgstr "Šifra kontakta"
+msgstr ""
 
 #: SuppCreditGRNs.php:15
 msgid "Enter Supplier Credit Note Against Goods Received"
@@ -25100,9 +24690,8 @@ msgid ""
 msgstr ""
 
 #: SuppFixedAssetChgs.php:68
-#, fuzzy
 msgid "Fixed Assets on Invoice"
-msgstr "Dodaj na račun"
+msgstr ""
 
 #: SuppFixedAssetChgs.php:70
 msgid "Fixed Asset credits on Credit Note"
@@ -25116,9 +24705,8 @@ msgid ""
 msgstr ""
 
 #: SuppFixedAssetChgs.php:112
-#, fuzzy
 msgid "Asset Selection"
-msgstr "Izlistaj odabrano"
+msgstr ""
 
 #: SuppFixedAssetChgs.php:140
 msgid "Enter Fixed Asset"
@@ -25412,9 +25000,8 @@ msgid "Supplier Balances - Problem Report"
 msgstr ""
 
 #: SupplierBalsAtPeriodEnd.php:67
-#, fuzzy
 msgid "There are no supplier balances to list"
-msgstr "Nema izvješća za prikaz!"
+msgstr ""
 
 #: SupplierBalsAtPeriodEnd.php:116
 msgid "Supplier Balances At A Period End"
@@ -25494,9 +25081,8 @@ msgid "Supplier Credit Note"
 msgstr ""
 
 #: SupplierCredit.php:48
-#, fuzzy
 msgid "Enter Supplier Credit Note:"
-msgstr "Od šifre dobavljača"
+msgstr ""
 
 #: SupplierCredit.php:90 SupplierInvoice.php:74
 msgid "The supplier record selected"
@@ -25564,9 +25150,8 @@ msgid "in format"
 msgstr ""
 
 #: SupplierCredit.php:307
-#, fuzzy
 msgid "Purchase Order Credits"
-msgstr "Samo nalozi za nabavu"
+msgstr ""
 
 #: SupplierCredit.php:311
 msgid "Credited"
@@ -25593,14 +25178,12 @@ msgid "Fixed Asset Credits"
 msgstr ""
 
 #: SupplierCredit.php:397 SupplierInvoice.php:371
-#, fuzzy
 msgid "Contract Charges"
-msgstr "Šifra kontakta"
+msgstr ""
 
 #: SupplierCredit.php:431 SupplierInvoice.php:405
-#, fuzzy
 msgid "General Ledger Analysis"
-msgstr "Glavna knjiga"
+msgstr ""
 
 #: SupplierCredit.php:478 SupplierCredit.php:481
 msgid "Credit Amount in Supplier Currency"
@@ -25683,7 +25266,8 @@ msgid ""
 msgstr ""
 
 #: SupplierCredit.php:615
-msgid "the general ledger entries (if any) and the charges for goods received"
+msgid ""
+"the general ledger entries (if any) and the charges for goods received"
 msgstr ""
 
 #: SupplierCredit.php:615
@@ -25719,9 +25303,8 @@ msgid "The general ledger transaction for the shipment"
 msgstr ""
 
 #: SupplierCredit.php:735
-#, fuzzy
 msgid "Asset Credit"
-msgstr "Šifra imovine"
+msgstr ""
 
 #: SupplierCredit.php:737 SupplierInvoice.php:721
 msgid ""
@@ -25734,9 +25317,8 @@ msgid "Contract charge against"
 msgstr ""
 
 #: SupplierCredit.php:771 SupplierInvoice.php:753
-#, fuzzy
 msgid "The general ledger transaction for the contract"
-msgstr "konta glavne knjige koja se pozivaju na ovu kontnu skupinu"
+msgstr ""
 
 #: SupplierCredit.php:800 SupplierCredit.php:870
 msgid "GRN Credit Note"
@@ -25854,9 +25436,8 @@ msgid ""
 msgstr ""
 
 #: SupplierCredit.php:1245 SupplierInvoice.php:1240
-#, fuzzy
 msgid "The contract charge record for contract"
-msgstr "Dodane zabilješke o kontaktu"
+msgstr ""
 
 #: SupplierCredit.php:1246 SupplierInvoice.php:1241
 msgid "The following SQL to insert the contract charge record was used"
@@ -25869,9 +25450,8 @@ msgid ""
 msgstr ""
 
 #: SupplierCredit.php:1285 SupplierInvoice.php:1193
-#, fuzzy
 msgid "The following SQL was used to attempt the update of the asset cost:"
-msgstr "SQL naredba za promjenu kontne skupine je"
+msgstr ""
 
 #: SupplierCredit.php:1291
 msgid "Supplier credit note number"
@@ -25987,9 +25567,8 @@ msgid "Supplier Invoice Reference"
 msgstr ""
 
 #: SupplierInvoice.php:278
-#, fuzzy
 msgid "Purchase Order Charges"
-msgstr "Samo nalozi za nabavu"
+msgstr ""
 
 #: SupplierInvoice.php:279
 msgid "Seq"
@@ -26000,9 +25579,8 @@ msgid "Price in"
 msgstr ""
 
 #: SupplierInvoice.php:310
-#, fuzzy
 msgid "Shipment Charges"
-msgstr "Pohrani promjene"
+msgstr ""
 
 #: SupplierInvoice.php:339
 msgid "Fixed Asset Additions"
@@ -26114,9 +25692,8 @@ msgid "Shipment charge against"
 msgstr ""
 
 #: SupplierInvoice.php:719
-#, fuzzy
 msgid "Asset Addition"
-msgstr "Opis imovine"
+msgstr ""
 
 #: SupplierInvoice.php:1014
 msgid "The total posted to the debit accounts is"
@@ -26272,7 +25849,8 @@ msgid "The supplier number already exists in the database"
 msgstr ""
 
 #: Suppliers.php:333
-msgid "The supplier name must be entered and be forty characters or less long"
+msgid ""
+"The supplier name must be entered and be forty characters or less long"
 msgstr ""
 
 #: Suppliers.php:339
@@ -26358,9 +25936,8 @@ msgid "Supplier record for"
 msgstr ""
 
 #: Suppliers.php:665 Suppliers.php:815
-#, fuzzy
 msgid "Supplier Type"
-msgstr "Dobavljač:"
+msgstr ""
 
 #: Suppliers.php:673 Suppliers.php:826
 msgid "Supplier Since"
@@ -26426,27 +26003,24 @@ msgid "Review Contact Details"
 msgstr ""
 
 #: SupplierTenders.php:8
-#, fuzzy
 msgid "Supplier Tendering"
-msgstr "Pretraživanje dobavljača"
+msgstr ""
 
 #: SupplierTenders.php:18
 msgid "This functionality can only be accessed via a supplier login."
 msgstr ""
 
 #: SupplierTenders.php:48 SupplierTenders.php:375
-#, fuzzy
 msgid "Tenders"
-msgstr "Uvjeti"
+msgstr ""
 
 #: SupplierTenders.php:48
 msgid "Create or View Offers from"
 msgstr ""
 
 #: SupplierTenders.php:50
-#, fuzzy
 msgid "Select option for tendering"
-msgstr "Odabir drugog naloga za račun"
+msgstr ""
 
 #: SupplierTenders.php:52
 msgid "View or Amend outstanding offers from"
@@ -26457,56 +26031,47 @@ msgid "Create a new offer from"
 msgstr ""
 
 #: SupplierTenders.php:142
-#, fuzzy
 msgid "The suppliers offer could not be updated on the database because"
-msgstr "Postavke poduzeća nemogu se ažurirati zbog"
+msgstr ""
 
 #: SupplierTenders.php:143
-#, fuzzy
 msgid ""
 "The SQL statement used to update the suppliers offer record and failed was"
-msgstr "SQL naredba za promjenu kontne skupine je"
+msgstr ""
 
 #: SupplierTenders.php:146 SupplierTenders.php:150 SupplierTenders.php:204
 #: SupplierTenders.php:208
-#, fuzzy
 msgid "The offer for"
-msgstr "Nalog"
+msgstr ""
 
 #: SupplierTenders.php:146
-#, fuzzy
 msgid "has been updated in the database"
-msgstr "promijenjeno je"
+msgstr ""
 
 #: SupplierTenders.php:147 SupplierTenders.php:205
 msgid "at a price of"
 msgstr ""
 
 #: SupplierTenders.php:150
-#, fuzzy
 msgid "could not be updated in the database"
-msgstr "ne može biti kreirana zbog"
+msgstr ""
 
 #: SupplierTenders.php:200
-#, fuzzy
 msgid "The suppliers offer could not be inserted into the database because"
-msgstr "Podaci o prodaji nisu dohvaćeni zbog"
+msgstr ""
 
 #: SupplierTenders.php:201
-#, fuzzy
 msgid ""
 "The SQL statement used to insert the suppliers offer record and failed was"
-msgstr "SQL naredba za dodavanje kontne skupine je"
+msgstr ""
 
 #: SupplierTenders.php:204
-#, fuzzy
 msgid "has been inserted into the database"
-msgstr "je dodan"
+msgstr ""
 
 #: SupplierTenders.php:208
-#, fuzzy
 msgid "could not be inserted into the database"
-msgstr "ne može biti kreirana zbog"
+msgstr ""
 
 #: SupplierTenders.php:216
 msgid "Offer received from"
@@ -26533,9 +26098,8 @@ msgid "Stock ID"
 msgstr ""
 
 #: SupplierTenders.php:270
-#, fuzzy
 msgid "Expiry Date"
-msgstr "Od datuma"
+msgstr ""
 
 #: SupplierTenders.php:375
 msgid "Select items to offer from"
@@ -26568,63 +26132,53 @@ msgid "The GL transactions for this AP transaction are out of balance by"
 msgstr ""
 
 #: SupplierTypes.php:24
-#, fuzzy
 msgid "Supplier Type Setup"
-msgstr "Cjenik dobavljača"
+msgstr ""
 
 #: SupplierTypes.php:25
-#, fuzzy
 msgid "Add/edit/delete Supplier Types"
-msgstr "Briši dobavljača"
+msgstr ""
 
 #: SupplierTypes.php:39
-#, fuzzy
-msgid "The supplier type name description must be 100 characters or less long"
-msgstr "Linija 1 adrese mora biti do 40 znakova duga"
+msgid ""
+"The supplier type name description must be 100 characters or less long"
+msgstr ""
 
 #: SupplierTypes.php:46
-#, fuzzy
-msgid "The supplier type name description must contain at least one character"
-msgstr "Naziv kontnog razreda mora sadržavati bar jedan znak"
+msgid ""
+"The supplier type name description must contain at least one character"
+msgstr ""
 
 #: SupplierTypes.php:58
 msgid "You already have a supplier type called"
 msgstr ""
 
 #: SupplierTypes.php:69
-#, fuzzy
 msgid "The supplier type"
-msgstr "Tip kupca"
+msgstr ""
 
 #: SupplierTypes.php:83
-#, fuzzy
 msgid "The supplier type "
-msgstr "Tip kupca"
+msgstr ""
 
 #: SupplierTypes.php:93 SupplierTypes.php:153
-#, fuzzy
 msgid "Supplier type"
-msgstr "Dobavljač:"
+msgstr ""
 
 #: SupplierTypes.php:142
-#, fuzzy
 msgid ""
 "The number of suppliers using this Type record could not be retrieved because"
-msgstr "Podaci o prodaji nisu dohvaćeni zbog"
+msgstr ""
 
 #: SupplierTypes.php:146
-#, fuzzy
 msgid ""
 "Cannot delete this type because suppliers are currently set up to use this "
 "type"
 msgstr ""
-"Nije moguće brisati kontnu skupinu jer su računi u glavnoj knjizi kreirani "
-"unutar te grupe"
 
 #: SupplierTypes.php:147
-#, fuzzy
 msgid "suppliers with this type code"
-msgstr "kupci s ovom šifrom tipa"
+msgstr ""
 
 #: SupplierTypes.php:194
 #, php-format
@@ -26640,18 +26194,16 @@ msgid "and Due By"
 msgstr ""
 
 #: SuppPaymentRun.php:106
-#, fuzzy
 msgid "Payment Run - Problem Report"
-msgstr "Izvješće o problemima"
+msgstr ""
 
 #: SuppPaymentRun.php:108
 msgid "The details of supplier invoices due could not be retrieved because"
 msgstr ""
 
 #: SuppPaymentRun.php:117
-#, fuzzy
 msgid "Payment Run -Problem Report"
-msgstr "Izvješće o problemima"
+msgstr ""
 
 #: SuppPaymentRun.php:119
 msgid "There are no outstanding supplier invoices to pay"
@@ -26937,7 +26489,8 @@ msgid "DefaultTaxCategory must be between 1 and 9"
 msgstr ""
 
 #: SystemParameters.php:78
-msgid "Default maximum number of records to display must be between 1 and 500"
+msgid ""
+"Default maximum number of records to display must be between 1 and 500"
 msgstr ""
 
 #: SystemParameters.php:82
@@ -27580,9 +27133,8 @@ msgstr ""
 "biti instaliran na istom serveru kao i webERP."
 
 #: SystemParameters.php:796
-#, fuzzy
 msgid "Geocode Customers and Suppliers"
-msgstr "Salda kupaca sa neizvršenim obavezama"
+msgstr ""
 
 #: SystemParameters.php:799 SystemParameters.php:803
 msgid "Geocode Integration Enabled"
@@ -27723,9 +27275,8 @@ msgstr ""
 
 #: SystemParameters.php:905 SystemParameters.php:911 SystemParameters.php:917
 #: SystemParameters.php:923 SystemParameters.php:929
-#, fuzzy
 msgid "Errors Only"
-msgstr "Samo radni nalozi"
+msgstr ""
 
 #: SystemParameters.php:906 SystemParameters.php:912 SystemParameters.php:918
 #: SystemParameters.php:924
@@ -28100,7 +27651,8 @@ msgid "customer branches referring to this tax group"
 msgstr ""
 
 #: TaxGroups.php:134
-msgid "Cannot delete this tax group because some suppliers are setup using it"
+msgid ""
+"Cannot delete this tax group because some suppliers are setup using it"
 msgstr ""
 
 #: TaxGroups.php:135
@@ -28201,7 +27753,8 @@ msgid "Total Outputs"
 msgstr ""
 
 #: Tax.php:176
-msgid "The accounts payable transaction details could not be retrieved because"
+msgid ""
+"The accounts payable transaction details could not be retrieved because"
 msgstr ""
 
 #: Tax.php:187 Tax.php:274
@@ -28237,9 +27790,8 @@ msgid ""
 msgstr ""
 
 #: Tax.php:285
-#, fuzzy
 msgid "There are no tax entries to list"
-msgstr "Nema izvješća za prikaz!"
+msgstr ""
 
 #: Tax.php:295
 msgid "Tax Reporting"
@@ -28519,9 +28071,8 @@ msgid "Unit of Measure"
 msgstr "Mjerna jedinica"
 
 #: UpgradeDatabase.php:5
-#, fuzzy
 msgid "Upgrade webERP Database"
-msgstr "Kreiraj bazu podataka?"
+msgstr ""
 
 #: UpgradeDatabase.php:10
 msgid ""
@@ -28598,23 +28149,20 @@ msgid "and the database version is"
 msgstr ""
 
 #: UpgradeDatabase.php:40
-#, fuzzy
 msgid "Perform Database Upgrade"
-msgstr "Izvrši nadogradnju"
+msgstr ""
 
 #: UpgradeDatabase.php:49
-#, fuzzy
 msgid "Backup"
-msgstr "Banka"
+msgstr ""
 
 #: UpgradeDatabase.php:57
 msgid "webERP backup file attached"
 msgstr ""
 
 #: UpgradeDatabase.php:59
-#, fuzzy
 msgid "Database Backup"
-msgstr "SQL pogreška na bazi podataka"
+msgstr ""
 
 #: UpgradeDatabase.php:63
 msgid "A backup of the database has been taken and emailed to you"
@@ -29734,14 +29282,12 @@ msgid "Korean"
 msgstr ""
 
 #: WWW_Users.php:29
-#, fuzzy
 msgid "Vietnamese"
-msgstr "Naziv polja"
+msgstr ""
 
 #: WWW_Users.php:30
-#, fuzzy
 msgid "Hebrew"
-msgstr "ovdje"
+msgstr ""
 
 #: WWW_Users.php:31
 msgid "Arabic"
@@ -29764,21 +29310,18 @@ msgid "Recalculate BOM costs"
 msgstr ""
 
 #: Z_BottomUpCosts.php:25
-#, fuzzy
 msgid "An error occurred selecting all bottom level components"
-msgstr "Došlo je do greške pri brisanju kontne skupine"
+msgstr ""
 
 #: Z_BottomUpCosts.php:26
-#, fuzzy
 msgid ""
 "The SQL that was used to select bottom level components and failed in the "
 "process was"
-msgstr "Nije izvršena SQL naredba korištena za dohvat kontne skupine "
+msgstr ""
 
 #: Z_BottomUpCosts.php:40
-#, fuzzy
 msgid "Failed on item "
-msgstr "Datoteka za uvoz"
+msgstr ""
 
 #: Z_BottomUpCosts.php:44
 msgid "All cost updates committed to the database."
@@ -29789,9 +29332,8 @@ msgid "Update costs for all items listed in a bill of materials"
 msgstr ""
 
 #: Z_BottomUpCosts.php:52
-#, fuzzy
 msgid "Run"
-msgstr "Povratak"
+msgstr ""
 
 #: Z_ChangeBranchCode.php:7
 msgid "UTILITY PAGE To Changes A Customer Branch Code In All Tables"
@@ -29832,7 +29374,8 @@ msgid "Inserting the new customer branches master record"
 msgstr ""
 
 #: Z_ChangeBranchCode.php:109
-msgid "The SQL to insert the new customer branch master record failed because"
+msgid ""
+"The SQL to insert the new customer branch master record failed because"
 msgstr ""
 
 #: Z_ChangeBranchCode.php:112
@@ -29938,7 +29481,8 @@ msgid "does not currently exist as a customer code in the system"
 msgstr ""
 
 #: Z_ChangeCustomerCode.php:22
-msgid "The new customer code to change the old code to must be entered as well"
+msgid ""
+"The new customer code to change the old code to must be entered as well"
 msgstr ""
 
 #: Z_ChangeCustomerCode.php:29
@@ -30037,9 +29581,8 @@ msgid "UTILITY PAGE Change A Stock Category"
 msgstr ""
 
 #: Z_ChangeStockCategory.php:17
-#, fuzzy
 msgid "The stock Category"
-msgstr "Kategorija prodaje"
+msgstr ""
 
 #: Z_ChangeStockCategory.php:17
 msgid "does not currently exist as a stock category in the system"
@@ -30056,9 +29599,8 @@ msgid "The new stock code to change the old code to must be entered as well"
 msgstr ""
 
 #: Z_ChangeStockCategory.php:39
-#, fuzzy
 msgid "The replacement stock category"
-msgstr "Kategorija prodaje"
+msgstr ""
 
 #: Z_ChangeStockCategory.php:39
 msgid "already exists as a stock category in the system"
@@ -30125,14 +29667,12 @@ msgid "was successfully changed to"
 msgstr ""
 
 #: Z_ChangeStockCategory.php:95
-#, fuzzy
 msgid "Existing Inventory Category Code"
-msgstr "Kategorija zaliha"
+msgstr ""
 
 #: Z_ChangeStockCategory.php:97
-#, fuzzy
 msgid "New Inventory Category Code"
-msgstr "Kategorija zaliha"
+msgstr ""
 
 #: Z_ChangeStockCode.php:7
 msgid "UTILITY PAGE Change A Stock Code"
@@ -30291,9 +29831,8 @@ msgid "The SQL to update the BOM records failed"
 msgstr ""
 
 #: Z_ChangeStockCode.php:235 Z_ChangeStockCode.php:253
-#, fuzzy
 msgid "parents"
-msgstr "nadređeni"
+msgstr ""
 
 #: Z_ChangeStockCode.php:237
 msgid "The SQL to update the BOM parent records failed"
@@ -30456,7 +29995,8 @@ msgid "Create Chart Details Records"
 msgstr ""
 
 #: Z_CreateChartDetails.php:33 includes/GLPostings.inc:61
-msgid "Could not test to see that all chart detail records properly initiated"
+msgid ""
+"Could not test to see that all chart detail records properly initiated"
 msgstr ""
 
 #: Z_CreateChartDetails.php:46 includes/GLPostings.inc:74
@@ -30724,8 +30264,8 @@ msgstr "Brisanje računa"
 
 #: Z_DeleteInvoice.php:16
 msgid ""
-"This page must be called with the InvoiceNo to delete Z_DeleteInvoice.php?"
-"InvoiceNo=XX"
+"This page must be called with the InvoiceNo to delete "
+"Z_DeleteInvoice.php?InvoiceNo=XX"
 msgstr ""
 
 #: Z_DeleteInvoice.php:16
@@ -30763,7 +30303,8 @@ msgid "The sales order records have been updated as not invoiced"
 msgstr ""
 
 #: Z_DeleteInvoice.php:105
-msgid "The SQL to reverse update to the location stock records failed because"
+msgid ""
+"The SQL to reverse update to the location stock records failed because"
 msgstr ""
 
 #: Z_DeleteInvoice.php:107
@@ -31000,12 +30541,12 @@ msgstr "Rezultat"
 #: Z_ImportChartOfAccounts.php:68 Z_ImportGLAccountGroups.php:63
 #: Z_ImportGLAccountSections.php:63 Z_ImportPartCodes.php:63
 msgid " records successfully imported"
-msgstr "zapisi uspješno uvezeni"
+msgstr " zapisi uspješno uvezeni"
 
 #: Z_ImportChartOfAccounts.php:69 Z_ImportGLAccountGroups.php:64
 #: Z_ImportGLAccountSections.php:64 Z_ImportPartCodes.php:64
 msgid " records failed to import"
-msgstr "zapisi nisu uvezeni"
+msgstr " zapisi nisu uvezeni"
 
 #: Z_ImportChartOfAccounts.php:73
 msgid ""
@@ -31037,9 +30578,8 @@ msgid "File contains"
 msgstr ""
 
 #: Z_ImportFixedAssets.php:49
-#, fuzzy
 msgid "columns, expected"
-msgstr "završeno"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:49
 msgid "Study a downloaded template to see the format for the file"
@@ -31060,9 +30600,8 @@ msgid "fields are required, but"
 msgstr ""
 
 #: Z_ImportFixedAssets.php:77
-#, fuzzy
 msgid "fields were received"
-msgstr "Već zaprimljeno"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:125 Z_ImportFixedAssets.php:130
 #: Z_ImportFixedAssets.php:134 Z_ImportFixedAssets.php:139
@@ -31074,18 +30613,16 @@ msgid "Row:"
 msgstr ""
 
 #: Z_ImportFixedAssets.php:125
-#, fuzzy
 msgid "Invalid Description:"
-msgstr "Neispravan popust"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:129
 msgid "The depreciation rate is expected to be numeric"
 msgstr ""
 
 #: Z_ImportFixedAssets.php:130 Z_ImportFixedAssets.php:134
-#, fuzzy
 msgid "Invalid Depreciation Rate:"
-msgstr "Nispravan datum od"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:138
 msgid "The accumulated depreciation is expected to be numeric"
@@ -31106,9 +30643,8 @@ msgid "The cost is expected to be numeric"
 msgstr ""
 
 #: Z_ImportFixedAssets.php:148 Z_ImportFixedAssets.php:152
-#, fuzzy
 msgid "Invalid Cost:"
-msgstr "Neispravan datum do"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:151
 msgid "The cost is expected to be a positive number"
@@ -31121,9 +30657,8 @@ msgid ""
 msgstr ""
 
 #: Z_ImportFixedAssets.php:157
-#, fuzzy
 msgid "Invalid depreciation type:"
-msgstr "Neispravan kreditni limit"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:163
 msgid ""
@@ -31131,9 +30666,8 @@ msgid ""
 msgstr ""
 
 #: Z_ImportFixedAssets.php:164
-#, fuzzy
 msgid "Invalid asset category:"
-msgstr "Kategorija zaliha"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:169
 msgid ""
@@ -31141,35 +30675,29 @@ msgid ""
 msgstr ""
 
 #: Z_ImportFixedAssets.php:170
-#, fuzzy
 msgid "Invalid asset location code:"
-msgstr "Neispravna šifra popusta"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:174
-#, fuzzy
 msgid "The date purchased must be entered in the format:"
-msgstr "Datum treba unijeti u obliku"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:175
-#, fuzzy
 msgid "Invalid date format:"
-msgstr "Neispravan kreditni limit"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:213
-#, fuzzy
 msgid "The SQL that was used to add the asset and failed was"
-msgstr "SQL naredba korištena za dohvat podataka je"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:237 Z_ImportFixedAssets.php:258
-#, fuzzy
 msgid "The transaction for the cost of the asset could not be added because"
-msgstr "Postavke poduzeća nemogu se ažurirati zbog"
+msgstr ""
 
 #: Z_ImportFixedAssets.php:238 Z_ImportFixedAssets.php:259
-#, fuzzy
 msgid ""
 "The SQL that was used to add the fixedasset trans record that failed was"
-msgstr "Nije izvršena SQL naredba korištena za dohvat kontne skupine "
+msgstr ""
 
 #: Z_ImportFixedAssets.php:263
 msgid "Inserted the new asset:"
@@ -31442,7 +30970,8 @@ msgstr "Pokušavam kreirati direktorij za novo poduzeće"
 msgid ""
 "This company cannot be added because either it already exists or no logo is "
 "being uploaded!"
-msgstr "Nije moguće dodati poduzeće jer već postoji ili nije postavljen logo!"
+msgstr ""
+"Nije moguće dodati poduzeće jer već postoji ili nije postavljen logo!"
 
 #: Z_MakeNewCompany.php:152
 msgid "is set ok"
@@ -31681,8 +31210,8 @@ msgstr ""
 
 #: Z_poEditLangHeader.php:88
 msgid ""
-"Your existing translation file (messages.po) will be backed up as messages."
-"po.old"
+"Your existing translation file (messages.po) will be backed up as "
+"messages.po.old"
 msgstr ""
 
 #: Z_poEditLangHeader.php:89
@@ -31758,7 +31287,7 @@ msgstr "Pomoćna stranica za preradu početne sustavne datoteke s prijevodom"
 
 #: Z_poRebuildDefault.php:32
 msgid "Rebuilding the default language file "
-msgstr "Prerada početne datoteke s prijevodom"
+msgstr "Prerada početne datoteke s prijevodom "
 
 #: Z_poRebuildDefault.php:36
 msgid "You should now edit the default language file header"
@@ -32029,16 +31558,15 @@ msgstr ""
 #: Z_SalesIntegrityCheck.php:28 Z_SalesIntegrityCheck.php:36
 #: Z_SalesIntegrityCheck.php:68
 msgid "Invoice "
-msgstr "Račun"
+msgstr "Račun "
 
 #: Z_SalesIntegrityCheck.php:29
 msgid "No Sales Order"
 msgstr "Nema naloga za prodaju"
 
 #: Z_SalesIntegrityCheck.php:37
-#, fuzzy
 msgid "Has no Tax Entry"
-msgstr "Nema poreznog zapisa"
+msgstr ""
 
 #: Z_SalesIntegrityCheck.php:48
 msgid "has no GL Entry"
@@ -32050,7 +31578,7 @@ msgstr "Provjeri nepovezane zapise u glavnoj knjizi"
 
 #: Z_SalesIntegrityCheck.php:67
 msgid "GL Entry "
-msgstr "Unos u glavnoj knjizi"
+msgstr "Unos u glavnoj knjizi "
 
 #: Z_SalesIntegrityCheck.php:68
 msgid " could not be found"
@@ -32379,41 +31907,35 @@ msgid "problems found. Please research and correct them"
 msgstr ""
 
 #: includes/class.pdf.php:201 includes/class.pdf.php:208
-#, fuzzy
 msgid "Document.pdf"
-msgstr "PDF privitak (.pdf)"
+msgstr ""
 
 #: includes/Contract_Readin.php:29
-#, fuzzy
 msgid "The contract cannot be retrieved because"
-msgstr "Nije moguće dohvatiti kontni plan zbog"
+msgstr ""
 
 #: includes/Contract_Readin.php:30 includes/PO_ReadInOrder.inc:59
 msgid "The SQL statement that was used and failed was"
 msgstr ""
 
 #: includes/Contract_Readin.php:67
-#, fuzzy
 msgid "The bill of material cannot be retrieved because"
-msgstr "Nije moguće dohvatiti sastavnicu zbog"
+msgstr ""
 
 #: includes/Contract_Readin.php:68
-#, fuzzy
 msgid ""
 "The SQL statement that was used to retrieve the contract bill of material was"
-msgstr "SQL naredba korištena za dohvat podataka je"
+msgstr ""
 
 #: includes/Contract_Readin.php:90
-#, fuzzy
 msgid "The other contract requirementscannot be retrieved because"
-msgstr "Traženi naziv kupca nije moguće dohvatiti zbog"
+msgstr ""
 
 #: includes/Contract_Readin.php:91
-#, fuzzy
 msgid ""
 "The SQL statement that was used to retrieve the other contract requirments "
 "was"
-msgstr "SQL naredba korištena za dohvat podataka je"
+msgstr ""
 
 #: includes/DefineCartClass.php:164
 msgid "The order line for"
@@ -32432,7 +31954,8 @@ msgid "could not be updated"
 msgstr ""
 
 #: includes/DefineCartClass.php:211
-msgid "No Line Number passed to remove_from_cart, so nothing has been removed."
+msgid ""
+"No Line Number passed to remove_from_cart, so nothing has been removed."
 msgstr ""
 
 #: includes/DefineCartClass.php:222
@@ -32516,9 +32039,8 @@ msgid "Max text<br>length"
 msgstr ""
 
 #: includes/DefineLabelClass.php:41
-#, fuzzy
 msgid "Font size"
-msgstr "Format izvješća"
+msgstr ""
 
 #: includes/DefineLabelClass.php:42
 msgid "Data to display"
@@ -32529,14 +32051,12 @@ msgid "Code item"
 msgstr ""
 
 #: includes/DefineLabelClass.php:46
-#, fuzzy
 msgid "Description remainder"
-msgstr "Opis"
+msgstr ""
 
 #: includes/DefineLabelClass.php:47
-#, fuzzy
 msgid "Long description"
-msgstr "Opis razreda"
+msgstr ""
 
 #: includes/DefineLabelClass.php:48
 msgid "Long description remainder"
@@ -32547,9 +32067,8 @@ msgid "Failed loading XML file"
 msgstr ""
 
 #: includes/DefineLabelClass.php:73
-#, fuzzy
 msgid "Report this problem"
-msgstr "Naziv izvješća"
+msgstr ""
 
 #: includes/DefineShiptClass.php:43
 msgid ""
@@ -32568,9 +32087,8 @@ msgid ""
 msgstr ""
 
 #: includes/GetConfig.php:9
-#, fuzzy
 msgid "Could not get the configuration parameters from the database because"
-msgstr "Nije moguće dohvatiti razred kontnih skupina zbog"
+msgstr ""
 
 #: includes/GetConfig.php:69
 msgid ""
@@ -32674,9 +32192,8 @@ msgid "records are invalid"
 msgstr "Zapisi su nevaljani"
 
 #: includes/InputSerialItemsFile.php:148
-#, fuzzy
 msgid "Validate File"
-msgstr "Provjera datoteke"
+msgstr ""
 
 #: includes/InputSerialItemsFile.php:153
 msgid "1st 10 Lines of File"
@@ -32719,9 +32236,8 @@ msgid "ISO-8859-1"
 msgstr "UTF-8"
 
 #: includes/Login.php:7
-#, fuzzy
 msgid "login as user"
-msgstr "prijava kao korisnik"
+msgstr ""
 
 #: includes/Login.php:7
 msgid "admin"
@@ -32808,9 +32324,8 @@ msgid "Wiki "
 msgstr ""
 
 #: includes/PDFPaymentRun_PymtFooter.php:8
-#, fuzzy
 msgid "Total Due For"
-msgstr "Ukupni dug za"
+msgstr ""
 
 #: includes/PDFPaymentRun_PymtFooter.php:56
 msgid "None of the payments will be processed because the payment record for"
@@ -32850,14 +32365,12 @@ msgid ""
 msgstr ""
 
 #: includes/PDFPaymentRun_PymtFooter.php:216
-#, fuzzy
 msgid "The SQL that failed was: "
-msgstr "Neizvršena SQL naredba je"
+msgstr ""
 
 #: includes/UserLogin.php:44
-#, fuzzy
 msgid "Could not retrieve user details on login because"
-msgstr "nije ih moguće dohvatiti zbog"
+msgstr ""
 
 #: includes/ConnectDB.inc:17
 msgid "The company name entered ("
@@ -32921,9 +32434,9 @@ msgstr ""
 
 #: includes/ConnectDB_postgres.inc:28
 msgid ""
-"The company name entered together with the configuration in the file config."
-"php for the database user name and password do not provide the information "
-"required to connect to the database."
+"The company name entered together with the configuration in the file "
+"config.php for the database user name and password do not provide the "
+"information required to connect to the database."
 msgstr ""
 
 #: includes/ConnectDB_postgres.inc:28
@@ -32953,7 +32466,8 @@ msgid "The report does not have any output columns"
 msgstr ""
 
 #: includes/ConstructSQLForUserDefinedSalesReport.inc:178
-msgid "You need to set up the data columns that you wish to show in the report"
+msgid ""
+"You need to set up the data columns that you wish to show in the report"
 msgstr ""
 
 #: includes/ConstructSQLForUserDefinedSalesReport.inc:178
@@ -32983,7 +32497,8 @@ msgstr ""
 
 #: includes/ConstructSQLForUserDefinedSalesReport.inc:267
 #: includes/ConstructSQLForUserDefinedSalesReport.inc:293
-msgid "Calculated fields must use columns defined in the report specification"
+msgid ""
+"Calculated fields must use columns defined in the report specification"
 msgstr ""
 
 #: includes/ConstructSQLForUserDefinedSalesReport.inc:267
@@ -33241,20 +32756,17 @@ msgstr ""
 
 #: includes/PDFCustTransListingPageHeader.inc:15
 #: includes/PDFStockTransListingPageHeader.inc:15
-#, fuzzy
 msgid "Customer Invoices"
-msgstr "Pretraživanje kupaca"
+msgstr ""
 
 #: includes/PDFCustTransListingPageHeader.inc:18
 #: includes/PDFStockTransListingPageHeader.inc:18
-#, fuzzy
 msgid "Customer Credit Notes"
-msgstr "Bilješke o kupcu"
+msgstr ""
 
 #: includes/PDFCustTransListingPageHeader.inc:21
-#, fuzzy
 msgid "Customer Payments"
-msgstr "Naziv kupca"
+msgstr ""
 
 #: includes/PDFCustTransListingPageHeader.inc:28
 #: includes/PDFSuppTransListingPageHeader.inc:28
@@ -33264,15 +32776,13 @@ msgstr ""
 #: includes/PDFCustTransListingPageHeader.inc:50
 #: includes/PDFStockTransListingPageHeader.inc:69
 #: includes/PDFSuppTransListingPageHeader.inc:50
-#, fuzzy
 msgid "Trans Date"
-msgstr "Datum transakcije"
+msgstr ""
 
 #: includes/PDFCustTransListingPageHeader.inc:51
 #: includes/PDFSuppTransListingPageHeader.inc:51
-#, fuzzy
 msgid "Net Amount"
-msgstr "Količina"
+msgstr ""
 
 #: includes/PDFCustTransListingPageHeader.inc:52
 #: includes/PDFQuotationPageHeader.inc:106
@@ -33282,9 +32792,8 @@ msgstr ""
 
 #: includes/PDFCustTransListingPageHeader.inc:53
 #: includes/PDFSuppTransListingPageHeader.inc:53
-#, fuzzy
 msgid "Total Amount"
-msgstr "Ukupni trošak"
+msgstr ""
 
 #: includes/PDFDebtorBalsPageHeader.inc:17
 msgid "Customer Balances For Customers between"
@@ -33349,9 +32858,8 @@ msgid "Date Recd"
 msgstr ""
 
 #: includes/PDFGrnHeader.inc:46
-#, fuzzy
 msgid "Qty in Suppliers UOM"
-msgstr "Dobavljači"
+msgstr ""
 
 #: includes/PDFGrnHeader.inc:47
 msgid "Qty in Stock UOM"
@@ -33461,9 +32969,8 @@ msgid "for delivery ex"
 msgstr ""
 
 #: includes/PDFOrderStatusPageHeader.inc:15
-#, fuzzy
 msgid "Order Status Listing"
-msgstr "Status naloga"
+msgstr ""
 
 #: includes/PDFOstdgGRNsPageHeader.inc:15
 msgid "Outstanding GRNs Valuation for Suppliers between"
@@ -33494,9 +33001,8 @@ msgid "Tel"
 msgstr ""
 
 #: includes/PDFPickingListHeader.inc:77
-#, fuzzy
 msgid "Actual Picked"
-msgstr "Ukupna cijena"
+msgstr ""
 
 #: includes/PDFProfitAndLossPageHeader.inc:21
 #: includes/PDFTagProfitAndLossPageHeader.inc:21
@@ -33577,43 +33083,36 @@ msgid "Transfer To"
 msgstr ""
 
 #: includes/PDFStockTransListingPageHeader.inc:27
-#, fuzzy
 msgid "Purchase Order Deliveries"
-msgstr "Samo nalozi za nabavu"
+msgstr ""
 
 #: includes/PDFStockTransListingPageHeader.inc:30
-#, fuzzy
 msgid "Work Order Receipts"
-msgstr "Samo radni nalozi"
+msgstr ""
 
 #: includes/PDFStockTransListingPageHeader.inc:33
-#, fuzzy
 msgid "Work Order Issues"
-msgstr "Samo radni nalozi"
+msgstr ""
 
 #: includes/PDFSupplierBalsPageHeader.inc:17
 msgid "Supplier Balances For Suppliers between"
 msgstr ""
 
 #: includes/PDFSuppTransListingPageHeader.inc:15
-#, fuzzy
 msgid "Suppier Invoices"
-msgstr "Pretraživanje dobavljača"
+msgstr ""
 
 #: includes/PDFSuppTransListingPageHeader.inc:18
-#, fuzzy
 msgid "Suppier Credit Notes"
-msgstr "Pretraživanje dobavljača"
+msgstr ""
 
 #: includes/PDFSuppTransListingPageHeader.inc:21
-#, fuzzy
 msgid "Suppier Payments"
-msgstr "Detalji o dobavljaču"
+msgstr ""
 
 #: includes/PDFTagProfitAndLossPageHeader.inc:22
-#, fuzzy
 msgid "Transactions for tag"
-msgstr "Transakcije"
+msgstr ""
 
 #: includes/PDFTopItemsHeader.inc:26
 msgid "Search On Location"
@@ -33691,9 +33190,8 @@ msgid "THIS IS NOT AN ORDER"
 msgstr ""
 
 #: includes/PO_PDFOrderPageHeader.inc:48
-#, fuzzy
 msgid "Requisition Number"
-msgstr "Broj razreda"
+msgstr ""
 
 #: includes/PO_PDFOrderPageHeader.inc:80
 msgid "Date Reqd"
@@ -33732,7 +33230,8 @@ msgid "Item Does Not Exist"
 msgstr ""
 
 #: includes/SelectOrderItems_IntoCart.inc:63
-msgid "could not be added to the order because it has been flagged as obsolete"
+msgid ""
+"could not be added to the order because it has been flagged as obsolete"
 msgstr ""
 
 #: includes/SelectOrderItems_IntoCart.inc:63
@@ -33778,9 +33277,8 @@ msgid "is not a valid user of the system"
 msgstr ""
 
 #: includes/session.inc:108
-#, fuzzy
 msgid "system maintenance"
-msgstr "Održavanje korisnika"
+msgstr ""
 
 #: includes/session.inc:108
 msgid "webERP is not available right now"
@@ -34505,9 +34003,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:16
-#, fuzzy
 msgid "Database Name"
-msgstr "SQL pogreška na bazi podataka"
+msgstr ""
 
 #: api/api_xml-rpc.php:17
 msgid "The name of the database to use for the transactions to come. "
@@ -34589,9 +34086,8 @@ msgid "The weberp password associated with this user name. "
 msgstr ""
 
 #: api/api_xml-rpc.php:22 api/api_xml-rpc.php:44
-#, fuzzy
 msgid "This function returns an integer. "
-msgstr "Prioritet kontakta mora biti cjelobrojan"
+msgstr ""
 
 #: api/api_xml-rpc.php:23 api/api_xml-rpc.php:45
 msgid "Zero means the function was successful. "
@@ -34635,7 +34131,7 @@ msgstr ""
 #: api/api_xml-rpc.php:2091 api/api_xml-rpc.php:2365 api/api_xml-rpc.php:2401
 #: api/api_xml-rpc.php:2437
 msgid "The field names can be found "
-msgstr "Nazivi polja mogu biti pronađeni"
+msgstr "Nazivi polja mogu biti pronađeni "
 
 #: api/api_xml-rpc.php:64 api/api_xml-rpc.php:101 api/api_xml-rpc.php:137
 #: api/api_xml-rpc.php:174 api/api_xml-rpc.php:316 api/api_xml-rpc.php:477
@@ -34644,7 +34140,7 @@ msgstr "Nazivi polja mogu biti pronađeni"
 #: api/api_xml-rpc.php:2091 api/api_xml-rpc.php:2365 api/api_xml-rpc.php:2401
 #: api/api_xml-rpc.php:2437
 msgid "here "
-msgstr "ovdje"
+msgstr "ovdje "
 
 #: api/api_xml-rpc.php:65 api/api_xml-rpc.php:102 api/api_xml-rpc.php:138
 #: api/api_xml-rpc.php:175 api/api_xml-rpc.php:317 api/api_xml-rpc.php:478
@@ -34653,7 +34149,7 @@ msgstr "ovdje"
 #: api/api_xml-rpc.php:2092 api/api_xml-rpc.php:2366 api/api_xml-rpc.php:2402
 #: api/api_xml-rpc.php:2438
 msgid "and are case sensitive. "
-msgstr "i osjetljivi su na velika/mala slova."
+msgstr "i osjetljivi su na velika/mala slova. "
 
 #: api/api_xml-rpc.php:65 api/api_xml-rpc.php:102 api/api_xml-rpc.php:138
 #: api/api_xml-rpc.php:175 api/api_xml-rpc.php:478 api/api_xml-rpc.php:1012
@@ -34826,7 +34322,8 @@ msgid "custbranch table. "
 msgstr ""
 
 #: api/api_xml-rpc.php:253
-msgid "All fields will be in the set regardless of whether the value was set."
+msgid ""
+"All fields will be in the set regardless of whether the value was set."
 msgstr ""
 
 #: api/api_xml-rpc.php:280 api/api_xml-rpc.php:313
@@ -34852,9 +34349,8 @@ msgid "The name of a database field to search on. "
 msgstr ""
 
 #: api/api_xml-rpc.php:318
-#, fuzzy
 msgid "Search Criteria"
-msgstr "Pretraživanje kupaca"
+msgstr ""
 
 #: api/api_xml-rpc.php:319
 msgid "A (partial) string to match in the above Field Name."
@@ -34881,9 +34377,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:383
-#, fuzzy
 msgid "Currency abbreviation"
-msgstr "Valuta skraćeno"
+msgstr ""
 
 #: api/api_xml-rpc.php:384
 msgid "A currency abbreviation as returned by the GetCurrencyList function."
@@ -34908,12 +34403,12 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:444
-#, fuzzy
 msgid "Sales type abbreviation"
-msgstr "Valuta skraćeno"
+msgstr ""
 
 #: api/api_xml-rpc.php:445
-msgid "A sales type abbreviation as returned by the GetSalesTypeList function."
+msgid ""
+"A sales type abbreviation as returned by the GetSalesTypeList function."
 msgstr ""
 
 #: api/api_xml-rpc.php:450
@@ -34926,9 +34421,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:475
-#, fuzzy
 msgid "Sales Type Details"
-msgstr "Naziv tipa prodaje"
+msgstr ""
 
 #: api/api_xml-rpc.php:510
 msgid "This function returns a list of hold reason codes."
@@ -34945,9 +34439,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:539 api/api_xml-rpc.php:598
-#, fuzzy
 msgid "Hold reason code"
-msgstr "Poštanski broj"
+msgstr ""
 
 #: api/api_xml-rpc.php:540
 msgid ""
@@ -34988,9 +34481,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:629 api/api_xml-rpc.php:662
-#, fuzzy
 msgid "Stock Item Details"
-msgstr "Prikaži detalje o poduzeću"
+msgstr ""
 
 #: api/api_xml-rpc.php:630
 msgid ""
@@ -35019,9 +34511,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:697 api/api_xml-rpc.php:928 api/api_xml-rpc.php:971
-#, fuzzy
 msgid "The StockID code to identify the item in the database."
-msgstr "Kontni razred već postoji u bazi"
+msgstr ""
 
 #: api/api_xml-rpc.php:702
 msgid ""
@@ -35042,19 +34533,16 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:730 api/api_xml-rpc.php:1893
-#, fuzzy
 msgid "The field name to search on."
-msgstr "Nazivi polja mogu biti pronađeni"
+msgstr ""
 
 #: api/api_xml-rpc.php:731 api/api_xml-rpc.php:1894 api/api_xml-rpc.php:1927
-#, fuzzy
 msgid "Match Criteria"
-msgstr "Kriterij"
+msgstr ""
 
 #: api/api_xml-rpc.php:732 api/api_xml-rpc.php:1895 api/api_xml-rpc.php:1928
-#, fuzzy
 msgid "The SQL search pattern to select items in the database."
-msgstr "Kontni razred već postoji u bazi"
+msgstr ""
 
 #: api/api_xml-rpc.php:737
 msgid ""
@@ -35146,18 +34634,16 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:929 api/api_xml-rpc.php:972
-#, fuzzy
 msgid "Currency Code"
-msgstr "Naziv valute"
+msgstr ""
 
 #: api/api_xml-rpc.php:930 api/api_xml-rpc.php:973
 msgid "The currency involved."
 msgstr ""
 
 #: api/api_xml-rpc.php:932
-#, fuzzy
 msgid "The sales type to identify the item in the database."
-msgstr "Kontni razred već postoji u bazi"
+msgstr ""
 
 #: api/api_xml-rpc.php:934
 msgid "The price to apply to this item."
@@ -35174,9 +34660,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:975
-#, fuzzy
 msgid "The sales type of the item in the database."
-msgstr "Kontni razred već postoji u bazi"
+msgstr ""
 
 #: api/api_xml-rpc.php:980
 msgid ""
@@ -35190,9 +34675,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1009
-#, fuzzy
 msgid "Invoice Details"
-msgstr "Tekst računa"
+msgstr ""
 
 #: api/api_xml-rpc.php:1010
 msgid "An array of index/value items describing the invoice."
@@ -35228,9 +34712,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1048
-#, fuzzy
 msgid "Credit Details"
-msgstr "Kreditni status"
+msgstr ""
 
 #: api/api_xml-rpc.php:1049
 msgid ""
@@ -35239,9 +34722,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1078
-#, fuzzy
 msgid "Insert Sales Order Header"
-msgstr "Pretraživanje naloga za prodaju"
+msgstr ""
 
 #: api/api_xml-rpc.php:1082
 msgid ""
@@ -35257,9 +34739,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1113
-#, fuzzy
 msgid "Modify Sales Order Header Details"
-msgstr "Promijeni detalje o kupcu"
+msgstr ""
 
 #: api/api_xml-rpc.php:1122
 msgid ""
@@ -35268,14 +34749,12 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1147
-#, fuzzy
 msgid "Insert Sales Order Line"
-msgstr "Pretraživanje naloga za prodaju"
+msgstr ""
 
 #: api/api_xml-rpc.php:1151
-#, fuzzy
 msgid "The orderno key must be one of these values. "
-msgstr "Datum treba unijeti u obliku"
+msgstr ""
 
 #: api/api_xml-rpc.php:1157 api/api_xml-rpc.php:1192
 msgid ""
@@ -35284,18 +34763,16 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1182
-#, fuzzy
 msgid "Modify Sales Order Line"
-msgstr "Nema naloga za prodaju"
+msgstr ""
 
 #: api/api_xml-rpc.php:1186
 msgid "The orderno and stkcode keys must be one of these values. "
 msgstr ""
 
 #: api/api_xml-rpc.php:1216
-#, fuzzy
 msgid "Account Details"
-msgstr "Kontni razredi"
+msgstr ""
 
 #: api/api_xml-rpc.php:1217
 msgid ""
@@ -35303,23 +34780,21 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1245
-#, fuzzy
 msgid "Account Section Details"
-msgstr "Kontni razredi"
+msgstr ""
 
 #: api/api_xml-rpc.php:1246
-msgid "An array of index/value items describing the account section to insert."
+msgid ""
+"An array of index/value items describing the account section to insert."
 msgstr ""
 
 #: api/api_xml-rpc.php:1274
-#, fuzzy
 msgid "Account Group Details"
-msgstr "Kontna skupina"
+msgstr ""
 
 #: api/api_xml-rpc.php:1275
-#, fuzzy
 msgid "An array of index/value items describing the account group to insert."
-msgstr "Došlo je do gređke pri dohvatu podataka o kontnoj skupini"
+msgstr ""
 
 #: api/api_xml-rpc.php:1303
 msgid "This function returns a list of stock location ids."
@@ -35336,9 +34811,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1331
-#, fuzzy
 msgid "Stock Location Code"
-msgstr "Na lokaciji"
+msgstr ""
 
 #: api/api_xml-rpc.php:1332
 msgid "A stock location code as returned by the GetLocationList function."
@@ -35387,9 +34861,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1449 api/api_xml-rpc.php:1568
-#, fuzzy
 msgid "Sales Area Code"
-msgstr "Poštanski broj"
+msgstr ""
 
 #: api/api_xml-rpc.php:1450
 msgid "A sales area code as returned by the GetSalesAreasList function."
@@ -35406,18 +34879,16 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1480
-#, fuzzy
 msgid "Sales Area Description"
-msgstr "Opis imovine"
+msgstr ""
 
 #: api/api_xml-rpc.php:1481
 msgid "A sales area description of the sales area of interest."
 msgstr ""
 
 #: api/api_xml-rpc.php:1510
-#, fuzzy
 msgid "Sales Area Details"
-msgstr "Detalji o dobavljaču"
+msgstr ""
 
 #: api/api_xml-rpc.php:1511
 msgid "An array of index/value items describing the sales area to insert."
@@ -35454,9 +34925,8 @@ msgid "The name of the salesman of interest."
 msgstr ""
 
 #: api/api_xml-rpc.php:1629
-#, fuzzy
 msgid "Salesman Details"
-msgstr "Detalji o dobavljaču"
+msgstr ""
 
 #: api/api_xml-rpc.php:1630
 msgid "An array of index/value items describing the salesman to insert."
@@ -35476,9 +34946,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1687
-#, fuzzy
 msgid "Tax Group ID"
-msgstr "Održavanje poreznih grupa"
+msgstr ""
 
 #: api/api_xml-rpc.php:1688
 msgid "A tax group ID as returned by the GetTaxgroupList function."
@@ -35503,9 +34972,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1746
-#, fuzzy
 msgid "Customer Type ID"
-msgstr "Tip kupca"
+msgstr ""
 
 #: api/api_xml-rpc.php:1747
 msgid "A customer type ID as returned by the GetCustomerTypeList function."
@@ -35516,16 +34984,17 @@ msgid "This function returns an array of customer type details."
 msgstr ""
 
 #: api/api_xml-rpc.php:1776 api/api_xml-rpc.php:1805
-#, fuzzy
 msgid "Category Details"
-msgstr "Kategorije"
+msgstr ""
 
 #: api/api_xml-rpc.php:1777
-msgid "An array of index/value items describing the stock category to insert."
+msgid ""
+"An array of index/value items describing the stock category to insert."
 msgstr ""
 
 #: api/api_xml-rpc.php:1806
-msgid "An array of index/value items describing the stock category to modify."
+msgid ""
+"An array of index/value items describing the stock category to modify."
 msgstr ""
 
 #: api/api_xml-rpc.php:1833
@@ -35549,9 +35018,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1862
-#, fuzzy
 msgid "Stock Category ID"
-msgstr "Sve kategorije skladišta"
+msgstr ""
 
 #: api/api_xml-rpc.php:1863
 msgid "A Stock Category ID as returned by the *WHAT* function."
@@ -35562,9 +35030,8 @@ msgid "This function returns an array of stock category details."
 msgstr ""
 
 #: api/api_xml-rpc.php:1925
-#, fuzzy
 msgid "Label Name"
-msgstr "Naziv polja"
+msgstr ""
 
 #: api/api_xml-rpc.php:1926
 msgid "The category label to search on."
@@ -35585,15 +35052,13 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:1987
-#, fuzzy
 msgid "General Ledger Account Code"
-msgstr "Glavna knjiga"
+msgstr ""
 
 #: api/api_xml-rpc.php:1988
-#, fuzzy
 msgid ""
 "A general ledger account code as returned by the GetGLAccountList function."
-msgstr "kontne skupine u glavnoj knjizi koje se pozivaju na ovaj kontni razred"
+msgstr ""
 
 #: api/api_xml-rpc.php:1993 api/api_xml-rpc.php:2026
 msgid "This function returns an array of general ledger account details."
@@ -35610,9 +35075,8 @@ msgid "The stock ID of the item whose tax rate is desired."
 msgstr ""
 
 #: api/api_xml-rpc.php:2020
-#, fuzzy
 msgid "Tax Authority Code"
-msgstr "Porezne ispostave"
+msgstr ""
 
 #: api/api_xml-rpc.php:2021
 msgid "The code identifying the tax authority of interest."
@@ -35695,7 +35159,8 @@ msgid "Returns a two dimensional array of stock batch details. "
 msgstr ""
 
 #: api/api_xml-rpc.php:2204
-msgid "The fields returned are stockid, loccode, batchno, quantity, itemcost. "
+msgid ""
+"The fields returned are stockid, loccode, batchno, quantity, itemcost. "
 msgstr ""
 
 #: api/api_xml-rpc.php:2230
@@ -35828,9 +35293,8 @@ msgid ""
 msgstr ""
 
 #: api/api_xml-rpc.php:2635
-#, fuzzy
 msgid "Property"
-msgstr "Prioritet"
+msgstr ""
 
 #: api/api_xml-rpc.php:2636
 msgid "The name of the specific property to be returned."
@@ -35853,9 +35317,8 @@ msgid "Returns (possibly translated) error text from error codes"
 msgstr ""
 
 #: api/api_xml-rpc.php:2671
-#, fuzzy
 msgid "Error codes"
-msgstr "Broj greške"
+msgstr ""
 
 #: api/api_xml-rpc.php:2672
 msgid "An array of error codes to change into text messages. "
@@ -35891,8 +35354,8 @@ msgstr "Povratna vrijednost"
 #~ "CSV data can be copied and used to import data into software such as a "
 #~ "spreadsheet."
 #~ msgstr ""
-#~ "CSV podatci mogu biti kopirani i korišteni za uvoz podataka u programe "
-#~ "kao što su tablični kalkulatori (Excel)."
+#~ "CSV podatci mogu biti kopirani i korišteni za uvoz podataka u programe kao "
+#~ "što su tablični kalkulatori (Excel)."
 
 #~ msgid "iso-8859-1"
 #~ msgstr "utf-8"

@@ -6,16 +6,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: web-erp\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-01-04 22:15+1200\n"
-"PO-Revision-Date: 2010-09-19 11:47+0000\n"
+"PO-Revision-Date: 2011-01-17 15:27+0000\n"
 "Last-Translator: Tim Schofield <Unknown>\n"
 "Language-Team: Swahili <sw@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-10 14:07+0000\n"
-"X-Generator: Launchpad (build 12161)\n"
+"X-Launchpad-Export-Date: 2011-01-20 14:46+0000\n"
+"X-Generator: Launchpad (build 12214)\n"
+"Language: sw\n"
 
 #: AccountGroups.php:9 index.php:1273
 msgid "Account Groups"
@@ -3687,7 +3688,7 @@ msgstr ""
 
 #: ConfirmDispatch_Invoice.php:815
 msgid "The asset number beind disposed of is:"
-msgstr ""
+msgstr "Numri i pasurisë beind hidhet është:"
 
 #: ConfirmDispatch_Invoice.php:829 ConfirmDispatch_Invoice.php:905
 #: RecurringSalesOrdersProcess.php:321
@@ -9972,6 +9973,9 @@ msgid ""
 "either of the debtors control account, creditors control account or GRN "
 "suspense accounts"
 msgstr ""
+"Llogaritë e zgjedhura tek postimi i kostos ose amortizimin e akumuluar të "
+"nuk mund të jetë ose të llogarisë së debitorëve të kontrollit, llogari të "
+"kreditorëve të kontrollit ose pezullim llogaritë GRN"
 
 #: FixedAssetCategories.php:67
 msgid ""
@@ -9979,6 +9983,9 @@ msgid ""
 "protected from having any other postings made to them. Select another "
 "balance sheet account for the asset cost"
 msgstr ""
+"Kostoja e pasurisë llogari të zgjedhur është një llogari bankare - llogaritë "
+"bankare janë të mbrojtur nga detyrimi për çdo Njoftimet e tjera të bëra ndaj "
+"tyre. Zgjidhni një tjetër llogarinë e bilancit për koston e aktivit"
 
 #: FixedAssetCategories.php:71
 msgid ""
@@ -9986,6 +9993,10 @@ msgid ""
 "accounts are protected from having any other postings made to them. Select "
 "another balance sheet account for the asset accumulated depreciation"
 msgstr ""
+"Amortizimin e akumuluar në llogarinë e zgjedhur është një llogari bankare - "
+"llogaritë bankare janë të mbrojtur nga detyrimi për çdo Njoftimet e tjera të "
+"bëra ndaj tyre. Zgjidhni një tjetër llogarinë e bilancit për aktivin "
+"amortizimin e akumuluar"
 
 #: FixedAssetCategories.php:88
 msgid "Could not update the fixed asset category"
@@ -10084,6 +10095,9 @@ msgid ""
 "No depreciation will be committed as the processing date is beyond the "
 "current date. The depreciation run can only be run for periods prior to today"
 msgstr ""
+"Nuk e amortizimit të jetë e angazhuar si data e përpunimit është përtej "
+"datën e tanishme. Afat të amortizimit mund të kandidojë për periudhat e "
+"mëparshme për sot"
 
 #: FixedAssetDepreciation.php:82 FixedAssetRegister.php:77
 #: FixedAssetRegister.php:324 FixedAssetTransfer.php:124
@@ -10101,11 +10115,11 @@ msgstr "Kosto"
 
 #: FixedAssetDepreciation.php:85
 msgid "Accum Depn"
-msgstr ""
+msgstr "Accum Depn"
 
 #: FixedAssetDepreciation.php:86
 msgid "B/fwd Book Value"
-msgstr ""
+msgstr "B / Vlera dergoni Libri"
 
 #: FixedAssetDepreciation.php:87
 msgid "Depn Type"
@@ -10129,11 +10143,11 @@ msgstr "Gjithsej për"
 
 #: FixedAssetDepreciation.php:120
 msgid "SL"
-msgstr ""
+msgstr "SL"
 
 #: FixedAssetDepreciation.php:126
 msgid "DV"
-msgstr ""
+msgstr "DV"
 
 #: FixedAssetDepreciation.php:178
 msgid "Cannot insert a depreciation GL entry for the depreciation because"
@@ -10157,6 +10171,8 @@ msgid ""
 "CRITICAL ERROR! NOTE DOWN THIS ERROR AND SEEK ASSISTANCE. The fixed asset "
 "accumulated depreciation could not be updated:"
 msgstr ""
+"KRITIK GABIM! Shënoj këtë gabim dhe të kërkojë ndihmë. Amortizimin e aseteve "
+"fikse të akumuluar nuk mund të azhornuara:"
 
 #: FixedAssetDepreciation.php:222
 msgid ""
@@ -10236,6 +10252,8 @@ msgid ""
 "Numbers less than 1 are interpreted as less than 1%. The depreciation rate "
 "should be entered as a number between 0 and 100"
 msgstr ""
+"Numrat më pak se 1 janë interpretuar si pak se 1%. Norma e amortizimit duhet "
+"të futet si një numër mes 0 dhe 100"
 
 #: FixedAssetItems.php:147 FixedAssetItems.php:167 FixedAssetItems.php:187
 #: FixedAssetItems.php:207
@@ -10286,6 +10304,8 @@ msgid ""
 "The asset still has a net book value - only assets with a zero net book "
 "value can be deleted"
 msgstr ""
+"Aktivi ende ka një vlerë neto në libra - aseteve vetëm me një vlerë zero "
+"libër neto mund të fshihet"
 
 #: FixedAssetItems.php:296
 msgid ""
@@ -10293,12 +10313,17 @@ msgid ""
 "when the fixed asset transactions are purged, otherwise the integrity of "
 "fixed asset reports may be compromised"
 msgstr ""
+"Aktivi ka transaksione që lidhen me të. E aktivit mund të fshihen kur "
+"transaksionet e aseteve fikse janë purged, ndryshe integritetin e raporteve "
+"të aseteve fikse mund të rrezikohet"
 
 #: FixedAssetItems.php:301
 msgid ""
 "There is a purchase order set up for this asset. The purchase order line "
 "must be deleted first"
 msgstr ""
+"Nuk është një qëllim blerjen e ngritur për këtë pasuri. Për blerjen e linjës "
+"duhet të fshihen e parë"
 
 #: FixedAssetItems.php:323 FixedAssetItems.php:343
 msgid "Delete asset"
@@ -10391,7 +10416,7 @@ msgstr "Drejt Line"
 
 #: FixedAssetItems.php:516 FixedAssetItems.php:519
 msgid "Diminishing Value"
-msgstr ""
+msgstr "Pakësuar Vlera"
 
 #: FixedAssetItems.php:524
 msgid "Depreciation Rate"
@@ -10438,6 +10463,7 @@ msgstr ""
 #: FixedAssetItems.php:552
 msgid "Are You Sure? Only assets with a zero book value can be deleted."
 msgstr ""
+"A jeni i sigurtë? aktiveve Vetëm me një vlerë zero libër mund të fshihet."
 
 #: FixedAssetList.php:5
 msgid "Fixed Asset Properties List"
@@ -10510,7 +10536,7 @@ msgstr ""
 
 #: FixedAssetRegister.php:83
 msgid "Depn B/fwd"
-msgstr ""
+msgstr "Depn B / dergoni"
 
 #: FixedAssetRegister.php:84 FixedAssetRegister.php:353
 msgid "Additions"
@@ -10526,7 +10552,7 @@ msgstr ""
 
 #: FixedAssetRegister.php:87
 msgid "Depn C/fwd"
-msgstr ""
+msgstr "Depn C / dergoni"
 
 #: FixedAssetRegister.php:88
 msgid "NBV"
@@ -10587,7 +10613,7 @@ msgstr ""
 
 #: FixedAssetRegister.php:352
 msgid "Depn B/Fwd"
-msgstr ""
+msgstr "Depn B / Fwd"
 
 #: FixedAssetRegister.php:355
 msgid "Cost C/Fwd"
@@ -12445,12 +12471,16 @@ msgid ""
 "CRITICAL ERROR! NOTE DOWN THIS ERROR AND SEEK ASSISTANCE The fixed asset "
 "transaction could not be inserted because"
 msgstr ""
+"KRITIK GABIM! Shënoj këtë gabim dhe të kërkojë ndihmë transaksion aseteve "
+"fikse nuk mund të futet, sepse"
 
 #: GoodsReceived.php:612 SupplierInvoice.php:1285
 msgid ""
 "CRITICAL ERROR! NOTE DOWN THIS ERROR AND SEEK ASSISTANCE. The fixed asset "
 "cost and date purchased was not able to be updated because:"
 msgstr ""
+"KRITIK GABIM! Shënoj këtë gabim dhe të kërkojë ndihmë. Koston e aseteve "
+"fikse dhe data e blerë nuk ishte në gjendje për të përditësuar për shkak se:"
 
 #: GoodsReceived.php:613 SupplierInvoice.php:1286
 msgid ""
@@ -13566,7 +13596,7 @@ msgstr ""
 
 #: Labels.php:50 Labels.php:61
 msgid "Correct data"
-msgstr ""
+msgstr "Saktë të dhënave"
 
 #: Labels.php:70
 msgid "New ID"
@@ -13574,7 +13604,7 @@ msgstr ""
 
 #: Labels.php:71
 msgid "Edit data new label"
-msgstr ""
+msgstr "Redaktoni të dhënat emërtim të ri"
 
 #: Labels.php:79
 msgid "Edit data label"
@@ -13582,7 +13612,7 @@ msgstr ""
 
 #: Labels.php:92
 msgid "New label"
-msgstr ""
+msgstr "emërtim i ri"
 
 #: Labels.php:106
 msgid "There is no labels, create a new one"
@@ -13594,7 +13624,7 @@ msgstr ""
 
 #: Labels.php:146
 msgid "This id exist in previous list"
-msgstr ""
+msgstr "Kjo id ekzistojnë në listën e mëparshme"
 
 #: Labels.php:149
 msgid "the description is required"
@@ -13611,35 +13641,39 @@ msgstr ""
 
 #: Labels.php:161 Labels.php:219
 msgid "requires a positive value"
-msgstr ""
+msgstr "kërkon një vlerë pozitive"
 
 #: Labels.php:165
 msgid "would be a positive integer"
-msgstr ""
+msgstr "do të jetë një numër i plotë pozitiv"
 
 #: Labels.php:174
 msgid "requires to be greater than the height of the labels"
-msgstr ""
+msgstr "kërkon të jetë më e madhe se lartësia e etiketave"
 
 #: Labels.php:180
 msgid ""
 "requires to be greater than the height of all the rows, including the top "
 "margin"
 msgstr ""
+"kërkon të jetë më e madhe se lartësia e të gjitha rreshtave, duke përfshirë "
+"kufirin e lartë"
 
 #: Labels.php:186
 msgid "requires to be greater than the width of the labels"
-msgstr ""
+msgstr "kërkon të jetë më e madhe se gjerësia e etiketave"
 
 #: Labels.php:192
 msgid ""
 "requires to be greater than the width of all the cols, including the left "
 "margin"
 msgstr ""
+"kërkon të jetë më e madhe se gjerësia e të gjitha cols, duke përfshirë "
+"kufirin e majtë"
 
 #: Labels.php:205
 msgid "The vert. pos. value would be positive"
-msgstr ""
+msgstr "Vert. pos. vlerë do të jetë pozitiv"
 
 #: Labels.php:207
 msgid "The value of the vert. pos. would be less than"
@@ -13647,16 +13681,16 @@ msgstr ""
 
 #: Labels.php:224
 msgid "in this position exceeds the label height"
-msgstr ""
+msgstr "në këtë pozicion tejkalon lartësinë etiketë"
 
 #: Labels.php:233
 msgid ""
 "The position and lenght of the string leads the text to get out of the label"
-msgstr ""
+msgstr "Pozicioni dhe gjatësia e vargut të çon tekst të marrë nga e etiketës"
 
 #: Labels.php:265
 msgid "Save"
-msgstr ""
+msgstr "Ruaj"
 
 #: Labels.php:413 includes/DefineLabelClass.php:8
 msgid "Label id"
@@ -13676,7 +13710,7 @@ msgstr ""
 
 #: Labels.php:415
 msgid "Do you really want to erase the label"
-msgstr ""
+msgstr "A jeni me të vërtetë duan që të fshihet e etiketës"
 
 #: Labels.php:546
 msgid "Could not rename the previous file."
@@ -15190,6 +15224,8 @@ msgstr "Kjo pagesë nuk ka sasi të hyrë dhe nuk do të përpunohen"
 #: Payments.php:229
 msgid "No bank account has been selected so this payment cannot be processed"
 msgstr ""
+"Nuk keni llogari bankare është zgjedhur kështu që kjo pagesë nuk mund të "
+"jenë të përpunuara"
 
 #: Payments.php:257
 msgid "Print Cheque using pre-printed stationery"
@@ -16806,11 +16842,11 @@ msgstr "GP"
 
 #: PDFPrintLabel.php:22
 msgid "There isn't any label template to select for printing. Click"
-msgstr ""
+msgstr "Nuk ka ndonjë template emërtim për të zgjedhur për printim. Kliko"
 
 #: PDFPrintLabel.php:23
 msgid "HERE"
-msgstr ""
+msgstr "KETU"
 
 #: PDFPrintLabel.php:23
 msgid "to set up a new one"
@@ -16826,11 +16862,11 @@ msgstr ""
 
 #: PDFPrintLabel.php:66
 msgid "There was an error. Consult your IT staff"
-msgstr ""
+msgstr "Nuk ishte një gabim. Konsultohuni me stafin tuaj IT"
 
 #: PDFPrintLabel.php:91
 msgid "Label Sticker Printing"
-msgstr ""
+msgstr "Shtypi Label Sticker"
 
 #: PDFPrintLabel.php:92
 msgid "Select label type"
@@ -16866,7 +16902,7 @@ msgstr ""
 
 #: PDFPrintLabel.php:339
 msgid "Unit not defined in scale operation! Correct the template"
-msgstr ""
+msgstr "Njësi nuk është përcaktuar në operacion në shkallë! Korrekt template"
 
 #: PDFPrintLabel.php:501
 msgid "Couldnt get the currency data"
@@ -17519,10 +17555,13 @@ msgid ""
 "it has already been received. Quantities received will need to be returned "
 "to change the order back to pending."
 msgstr ""
+"Kjo mënyrë nuk mund të ketë statusin e ndryshuar përsëri në pritje, sepse "
+"një pjesë e saj tashmë është marrë. Sasitë e marra do të duhet të kthehen "
+"për të ndryshuar radhitjen përsëri në pritje."
 
 #: PO_Header.php:134
 msgid "Order set to pending status by"
-msgstr ""
+msgstr "Mënyrë të vendosur për statusin e pritje nga"
 
 #: PO_Header.php:138
 msgid ""
@@ -18009,6 +18048,8 @@ msgid ""
 "An asset code was entered but it does not yet exist. Only pre-existing asset "
 "ids can be entered when ordering a fixed asset"
 msgstr ""
+"Një kod aktiv ishte futur, por kjo ende nuk ekziston. IDS Vetëm para-"
+"ekzistuese aktiv mund të futen kur urdhëron një pasuri fikse"
 
 #: PO_Items.php:684
 msgid ""
@@ -19595,6 +19636,8 @@ msgid ""
 "The minimum order quantity was not numeric and a number is expected no "
 "changes have been made to the database"
 msgstr ""
+"Sasia minimale që nuk ishte numerike dhe një numër pritet nuk ka ndryshime "
+"janë bërë në bazën e të dhënave"
 
 #: PurchData.php:63
 msgid "The conversion factor entered was not numeric"
@@ -20384,6 +20427,8 @@ msgid ""
 "CRITICAL ERROR! NOTE DOWN THIS ERROR AND SEEK ASSISTANCE. The fixed asset "
 "cost addition could not be reversed:"
 msgstr ""
+"KRITIK GABIM! Shënoj këtë gabim dhe të kërkojë ndihmë. Kostoja fikse aktiv "
+"kësaj nuk mund të përmbyset:"
 
 #: ReverseGRN.php:183
 msgid ""
@@ -22565,14 +22610,16 @@ msgstr " e produkteve që do të urdhërohet"
 #: SelectOrderItems.php:1786
 msgid "Use this screen to select an asset to dispose of to this customer"
 msgstr ""
+"Përdoreni këtë ekran për të zgjedhur një pasuri për të disponuar për këtë "
+"klient"
 
 #: SelectOrderItems.php:1793
 msgid "Asset to Dispose Of"
-msgstr ""
+msgstr "Aktiv për shkatërrimin e"
 
 #: SelectOrderItems.php:1796
 msgid "Select Asset To Dispose of From the List Below"
-msgstr ""
+msgstr "Zgjidh aktiv për shkatërrimin e nga lista e mëposhtme"
 
 #: SelectOrderItems.php:1801
 msgid "Add Asset To Order"
@@ -26114,6 +26161,8 @@ msgid ""
 "The asset ID entered manually is not a valid fixed asset. If you do not know "
 "the asset reference, select it from the list"
 msgstr ""
+"ID aktiv hyri me dorë nuk është një pasuri e vlefshme fikse. Nëse ju nuk e "
+"dini referimi aktiv, zgjidhni atë nga lista e"
 
 #: SuppFixedAssetChgs.php:49
 msgid ""
@@ -26135,6 +26184,9 @@ msgid ""
 "the asset from the list below. Only  assets with no cost will show in the "
 "list"
 msgstr ""
+"Nëse ju e dini kodin futeni në kutinë e input ID Pasurive, ndryshe zgjidhni "
+"pasuri nga lista më poshtë. Vetëm aktivet me pa kosto do të shfaqen në "
+"listën e"
 
 #: SuppFixedAssetChgs.php:112
 msgid "Asset Selection"
@@ -26942,6 +26994,8 @@ msgid ""
 "CRITICAL ERROR! NOTE DOWN THIS ERROR AND SEEK ASSISTANCE. The fixed asset "
 "cost was not able to be updated because:"
 msgstr ""
+"KRITIK GABIM! Shënoj këtë gabim dhe të kërkojë ndihmë. Kostoja e aseteve "
+"fikse nuk ishte në gjendje për të përditësuar për shkak se:"
 
 #: SupplierCredit.php:1197
 msgid ""
@@ -26962,6 +27016,8 @@ msgid ""
 "CRITICAL ERROR! NOTE DOWN THIS ERROR AND SEEK ASSISTANCE. The fixed asset "
 "cost  was not able to be updated because:"
 msgstr ""
+"KRITIK GABIM! Shënoj këtë gabim dhe të kërkojë ndihmë. Kostoja e aseteve "
+"fikse nuk ishte në gjendje për të përditësuar për shkak se:"
 
 #: SupplierCredit.php:1285 SupplierInvoice.php:1193
 msgid "The following SQL was used to attempt the update of the asset cost:"
@@ -27279,6 +27335,8 @@ msgid ""
 "CRITICAL ERROR! NOTE DOWN THIS ERROR AND SEEK ASSISTANCE. The fixed asset "
 "cost could not be updated because:"
 msgstr ""
+"KRITIK GABIM! Shënoj këtë gabim dhe të kërkojë ndihmë. Kostoja e aseteve "
+"fikse nuk mund të rifreskohet për shkak se:"
 
 #: SupplierInvoice.php:1292
 msgid "Supplier invoice number"
@@ -27931,6 +27989,8 @@ msgid ""
 "The shipment entered manually is not a valid shipment reference. If you do "
 "not know the shipment reference, select it from the list"
 msgstr ""
+"Dërgesë hyri me dorë nuk është një referencë e vlefshme dërgesës. Nëse ju "
+"nuk e dini referencë dërgesës, zgjidhni atë nga lista e"
 
 #: SuppShiptChgs.php:51 SuppTransGLAnalysis.php:52
 msgid "The amount entered is not numeric"
@@ -27991,6 +28051,7 @@ msgstr "Enter Line GL"
 #: SuppTransGLAnalysis.php:36
 msgid "You must select a general ledger code from the list below"
 msgstr ""
+"Ju duhet të zgjidhni një kod i përgjithshëm libër nga lista e mëposhtme"
 
 #: SuppTransGLAnalysis.php:46
 msgid "The account code entered is not a valid code"
@@ -29903,6 +29964,8 @@ msgstr ""
 #: UpgradeDatabase.php:15
 msgid "and the database version is not actually recorded at this version"
 msgstr ""
+"dhe versioni i bazës së të dhënave nuk është i regjistruar në të vërtetë në "
+"këtë version"
 
 #: UpgradeDatabase.php:16
 msgid "Select the version you are upgrading from:"
@@ -30004,7 +30067,7 @@ msgstr ""
 
 #: UpgradeDatabase.php:115
 msgid "Applying"
-msgstr ""
+msgstr "Aplikimi"
 
 #: UpgradeDatabase.php:142 Z_Upgrade_3.10-3.11.php:59 Z_Upgrade3.10.php:29
 #: Z_Upgrade3.10.php:34 Z_Upgrade3.10.php:46 Z_Upgrade3.10.php:51
@@ -30035,7 +30098,7 @@ msgstr "Hyrja tashmë është bërë"
 
 #: UpgradeDatabase.php:157
 msgid "SQL syntax error. The SQL error message is"
-msgstr ""
+msgstr "Gabim sintakse SQL. Mesazh gabimi SQL është"
 
 #: UpgradeDatabase.php:160 Z_Upgrade_3.10-3.11.php:79
 #: Z_Upgrade_3.11-4.00.php:79
@@ -32619,13 +32682,15 @@ msgstr ""
 
 #: Z_ImportFixedAssets.php:49
 msgid "Study a downloaded template to see the format for the file"
-msgstr ""
+msgstr "Studim një template shkarkuar për të parë format për file"
 
 #: Z_ImportFixedAssets.php:59
 msgid ""
 ". Download a template and ensuer that fields are in the same sequence as the "
 "template."
 msgstr ""
+". Shkarko një template dhe ensuer që fushat janë në të njëjtën sekuencë si "
+"template."
 
 #: Z_ImportFixedAssets.php:59
 msgid "The selected file contains fields in the incorrect order ("
@@ -32646,7 +32711,7 @@ msgstr ""
 #: Z_ImportFixedAssets.php:164 Z_ImportFixedAssets.php:170
 #: Z_ImportFixedAssets.php:175
 msgid "Row:"
-msgstr ""
+msgstr "Row:"
 
 #: Z_ImportFixedAssets.php:125
 msgid "Invalid Description:"
@@ -32690,7 +32755,7 @@ msgstr ""
 msgid ""
 "The depreciation type must be either \"SL\" - Straight Line or \"DV\" - "
 "Diminishing Value"
-msgstr ""
+msgstr "Lloji i amortizimit duhet të jetë ose \\"
 
 #: Z_ImportFixedAssets.php:157
 msgid "Invalid depreciation type:"
@@ -32755,7 +32820,7 @@ msgstr ""
 
 #: Z_ImportFixedAssets.php:297
 msgid "Select Date to Upload B/Fwd Assets To:"
-msgstr ""
+msgstr "Data Zgjidhni të Ngarko B / Mjetet AlbClub To:"
 
 #: Z_ImportFixedAssets.php:304
 msgid "Fixed Assets Upload file:"
@@ -34133,11 +34198,11 @@ msgstr ""
 
 #: includes/DefineLabelClass.php:23
 msgid "Rows per sheet"
-msgstr ""
+msgstr "Rreshtave për fletë"
 
 #: includes/DefineLabelClass.php:24
 msgid "Cols per sheet"
-msgstr ""
+msgstr "Cols për fletë"
 
 #: includes/DefineLabelClass.php:25
 msgid "Sheet height"
@@ -34145,7 +34210,7 @@ msgstr ""
 
 #: includes/DefineLabelClass.php:26
 msgid "Sheet width"
-msgstr ""
+msgstr "Gjerësia Sheet"
 
 #: includes/DefineLabelClass.php:27
 msgid "Label height"
@@ -34153,7 +34218,7 @@ msgstr ""
 
 #: includes/DefineLabelClass.php:28
 msgid "Label width"
-msgstr ""
+msgstr "Gjerësia Label"
 
 #: includes/DefineLabelClass.php:29
 msgid "Top margin"
@@ -34173,15 +34238,15 @@ msgstr ""
 
 #: includes/DefineLabelClass.php:38
 msgid "Vert. pos."
-msgstr ""
+msgstr "Vert. pos."
 
 #: includes/DefineLabelClass.php:39
 msgid "Horiz. pos."
-msgstr ""
+msgstr "Horiz. pos."
 
 #: includes/DefineLabelClass.php:40
 msgid "Max text<br>length"
-msgstr ""
+msgstr "text Max <br> gjatësi"
 
 #: includes/DefineLabelClass.php:41
 msgid "Font size"
@@ -35066,7 +35131,7 @@ msgstr ""
 
 #: includes/PDFGrnHeader.inc:47
 msgid "Qty in Stock UOM"
-msgstr ""
+msgstr "Qty në Stock UOM"
 
 #: includes/PDFInventoryPlanPageHeader.inc:20
 msgid "Inventory Planning for Categories Between"
@@ -35531,11 +35596,11 @@ msgstr "Sigurisë Permissions Problem"
 
 #: includes/session.inc:320
 msgid "Error in form verificationm"
-msgstr ""
+msgstr "Gabim në formë verificationm"
 
 #: includes/session.inc:322
 msgid "This form was not submitted with a correct ID"
-msgstr ""
+msgstr "Kjo formë nuk është dorëzuar me një ID saktë"
 
 #: includes/SQL_CommonFunctions.inc:23
 msgid ""
@@ -37980,3 +38045,16 @@ msgstr "Vlera e kthimit"
 
 #~ msgid "Stock Details"
 #~ msgstr "Stock Details"
+
+#~ msgid "You have database updates that are required."
+#~ msgstr "Ju keni database updates që janë të nevojshme."
+
+#~ msgid ""
+#~ "Please ensure that you have taken a backup of your current database before "
+#~ "continuing."
+#~ msgstr ""
+#~ "Ju lutem sigurohuni që ju keni marrë një kopje rezervë të të dhënave tuaja "
+#~ "aktuale para se të vazhdoni."
+
+#~ msgid "The primary key in"
+#~ msgstr "Kyç primar në"

@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-10 14:14+0000\n"
-"X-Generator: Launchpad (build 12161)\n"
+"X-Launchpad-Export-Date: 2011-01-20 14:52+0000\n"
+"X-Generator: Launchpad (build 12214)\n"
 "X-Poedit-Country: VIET NAM\n"
 "X-Poedit-Language: Vietnamese\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -35654,3 +35654,66 @@ msgstr "các tham số"
 #: api/api_xml-rpc.php:3027
 msgid "Return Value"
 msgstr "giá trị trả lại"
+
+#~ msgid "Notes for Customer: <b>"
+#~ msgstr "Ghi chú cho khách hàng"
+
+#~ msgid "Notes for Customer Type: <b>"
+#~ msgstr "những gi chú cho loại khách hàng này : <b>"
+
+#~ msgid "Update Order Lines"
+#~ msgstr "Cập nhật danh sách đặt hàng"
+
+#~ msgid "Annual Depreciation Percentage"
+#~ msgstr "Tỷ lệ khấu hao hàng năm"
+
+#~ msgid "Manufactured or Purchased"
+#~ msgstr "sản xuất  hoặc mua"
+
+#~ msgid "Depreciation Properties"
+#~ msgstr "khấu hao tài sản"
+
+#~ msgid "This page can only be opened if a purchase order has been selected"
+#~ msgstr "Chỉ mở được trang này khi đã chọn các đơn hàng thu mua"
+
+#~ msgid "Please select a purchase order first"
+#~ msgstr "Vui lòng chọn đơn hàng thu mua trước"
+
+#~ msgid "List Asset properties"
+#~ msgstr "Liệt kê tài sản bất động sản"
+
+#~ msgid "New Order"
+#~ msgstr "Đơn hàng mới"
+
+#~ msgid "The creation of the new order has been cancelled"
+#~ msgstr "Hủy bỏ tạo đơn hàng mới"
+
+#~ msgid "Cancel and Delete Order"
+#~ msgstr "Hủy và xóa đơn hàng"
+
+#~ msgid "Select an Asset Type"
+#~ msgstr "Lựa chọn một loại tài sản"
+
+#~ msgid "Acquired After"
+#~ msgstr "Sau khi mua lại"
+
+#~ msgid "and Before"
+#~ msgstr "Và trước"
+
+#~ msgid "in the street address"
+#~ msgstr "in the shipping address"
+
+#~ msgid "Stock Code for Item Ordered"
+#~ msgstr "Inventory Code for Item Ordered"
+
+#~ msgid ""
+#~ "If a stock code is entered above, its description will overide this entry"
+#~ msgstr ""
+#~ "If an inventory code is entered above, its description will overide this "
+#~ "entry"
+
+#~ msgid "Lines of the address  must not contain illegal characters"
+#~ msgstr "Lines of the address must not contain illegal characters"
+
+#~ msgid "Freight Charge"
+#~ msgstr "Shipping Charge"

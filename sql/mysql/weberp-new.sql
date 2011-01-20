@@ -110,6 +110,16 @@ CREATE TABLE `audittrail` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `audittrail`
+--
+
+LOCK TABLES `audittrail` WRITE;
+/*!40000 ALTER TABLE `audittrail` DISABLE KEYS */;
+INSERT INTO `audittrail` VALUES ('2011-01-20 17:11:08','admin','UPDATE config SET confvalue = \'4.0\' WHERE confname=\'VersionNumber\''),('2011-01-20 17:11:08','admin','UPDATE config SET confvalue=\'61\' WHERE confname=\'DBUpdateNumber\'');
+/*!40000 ALTER TABLE `audittrail` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `bankaccounts`
 --
 
@@ -408,7 +418,7 @@ CREATE TABLE `config` (
 
 LOCK TABLES `config` WRITE;
 /*!40000 ALTER TABLE `config` DISABLE KEYS */;
-INSERT INTO `config` VALUES ('AllowOrderLineItemNarrative','0'),('AllowSalesOfZeroCostItems','0'),('AutoCreateWOs','1'),('AutoDebtorNo','0'),('AutoIssue','1'),('CheckCreditLimits','1'),('Check_Price_Charged_vs_Order_Price','1'),('Check_Qty_Charged_vs_Del_Qty','1'),('CountryOfOperation','AUD'),('CreditingControlledItems_MustExist','0'),('DBUpdateNumber','60'),('DB_Maintenance','30'),('DB_Maintenance_LastRun','2011-01-15'),('DefaultBlindPackNote','1'),('DefaultCreditLimit','1000'),('DefaultCustomerType','1'),('DefaultDateFormat','d/m/Y'),('DefaultDisplayRecordsMax','50'),('DefaultFactoryLocation','MEL'),('DefaultPriceList','DE'),('DefaultSupplierType','1'),('DefaultTaxCategory','1'),('DefaultTheme','silverwolf'),('Default_Shipper','1'),('DefineControlledOnWOEntry','1'),('DispatchCutOffTime','14'),('DoFreightCalc','0'),('EDIHeaderMsgId','D:01B:UN:EAN010'),('EDIReference','WEBERP'),('EDI_Incoming_Orders','companies/weberp/EDI_Incoming_Orders'),('EDI_MsgPending','companies/weberp/EDI_MsgPending'),('EDI_MsgSent','companies/weberp/EDI_Sent'),('Extended_CustomerInfo','0'),('Extended_SupplierInfo','0'),('FactoryManagerEmail','phil@logicworks.co.nz'),('FreightChargeAppliesIfLessThan','1000'),('FreightTaxCategory','1'),('FrequentlyOrderedItems','0'),('geocode_integration','0'),('HTTPS_Only','0'),('InvoicePortraitFormat','0'),('LogPath',''),('LogSeverity','0'),('MaxImageSize','300'),('MonthsAuditTrail','1'),('NumberOfMonthMustBeShown','6'),('NumberOfPeriodsOfStockUsage','12'),('OverChargeProportion','30'),('OverReceiveProportion','20'),('PackNoteFormat','1'),('PageLength','48'),('part_pics_dir','companies/weberpdemo/part_pics'),('PastDueDays1','30'),('PastDueDays2','60'),('PO_AllowSameItemMultipleTimes','1'),('ProhibitJournalsToControlAccounts','1'),('ProhibitNegativeStock','1'),('ProhibitPostingsBefore','2009-03-31'),('PurchasingManagerEmail',''),('QuickEntries','10'),('RadioBeaconFileCounter','/home/RadioBeacon/FileCounter'),('RadioBeaconFTP_user_name','RadioBeacon ftp server user name'),('RadioBeaconHomeDir','/home/RadioBeacon'),('RadioBeaconStockLocation','BL'),('RadioBraconFTP_server','192.168.2.2'),('RadioBreaconFilePrefix','ORDXX'),('RadionBeaconFTP_user_pass','Radio Beacon remote ftp server password'),('reports_dir','companies/weberpdemo/reportwriter'),('RequirePickingNote','0'),('RomalpaClause','Ownership will not pass to the buyer until the goods have been paid for in full.'),('SalesOrder_FOI','0'),('ShowValueOnGRN','1'),('Show_Settled_LastMonth','1'),('SO_AllowSameItemMultipleTimes','1'),('TaxAuthorityReferenceName','Tax Ref'),('UpdateCurrencyRatesDaily','0'),('VersionNumber','4.00 RC3'),('WeightedAverageCosting','1'),('WikiApp','WackoWiki'),('WikiPath','wiki'),('YearEnd','3');
+INSERT INTO `config` VALUES ('AllowOrderLineItemNarrative','0'),('AllowSalesOfZeroCostItems','0'),('AutoCreateWOs','1'),('AutoDebtorNo','0'),('AutoIssue','1'),('CheckCreditLimits','1'),('Check_Price_Charged_vs_Order_Price','1'),('Check_Qty_Charged_vs_Del_Qty','1'),('CountryOfOperation','AUD'),('CreditingControlledItems_MustExist','0'),('DBUpdateNumber','61'),('DB_Maintenance','30'),('DB_Maintenance_LastRun','2011-01-15'),('DefaultBlindPackNote','1'),('DefaultCreditLimit','1000'),('DefaultCustomerType','1'),('DefaultDateFormat','d/m/Y'),('DefaultDisplayRecordsMax','50'),('DefaultFactoryLocation','MEL'),('DefaultPriceList','DE'),('DefaultSupplierType','1'),('DefaultTaxCategory','1'),('DefaultTheme','silverwolf'),('Default_Shipper','1'),('DefineControlledOnWOEntry','1'),('DispatchCutOffTime','14'),('DoFreightCalc','0'),('EDIHeaderMsgId','D:01B:UN:EAN010'),('EDIReference','WEBERP'),('EDI_Incoming_Orders','companies/weberp/EDI_Incoming_Orders'),('EDI_MsgPending','companies/weberp/EDI_MsgPending'),('EDI_MsgSent','companies/weberp/EDI_Sent'),('Extended_CustomerInfo','0'),('Extended_SupplierInfo','0'),('FactoryManagerEmail','phil@logicworks.co.nz'),('FreightChargeAppliesIfLessThan','1000'),('FreightTaxCategory','1'),('FrequentlyOrderedItems','0'),('geocode_integration','0'),('HTTPS_Only','0'),('InvoicePortraitFormat','0'),('LogPath',''),('LogSeverity','0'),('MaxImageSize','300'),('MonthsAuditTrail','1'),('NumberOfMonthMustBeShown','6'),('NumberOfPeriodsOfStockUsage','12'),('OverChargeProportion','30'),('OverReceiveProportion','20'),('PackNoteFormat','1'),('PageLength','48'),('part_pics_dir','companies/weberpdemo/part_pics'),('PastDueDays1','30'),('PastDueDays2','60'),('PO_AllowSameItemMultipleTimes','1'),('ProhibitJournalsToControlAccounts','1'),('ProhibitNegativeStock','1'),('ProhibitPostingsBefore','2009-03-31'),('PurchasingManagerEmail',''),('QuickEntries','10'),('RadioBeaconFileCounter','/home/RadioBeacon/FileCounter'),('RadioBeaconFTP_user_name','RadioBeacon ftp server user name'),('RadioBeaconHomeDir','/home/RadioBeacon'),('RadioBeaconStockLocation','BL'),('RadioBraconFTP_server','192.168.2.2'),('RadioBreaconFilePrefix','ORDXX'),('RadionBeaconFTP_user_pass','Radio Beacon remote ftp server password'),('reports_dir','companies/weberpdemo/reportwriter'),('RequirePickingNote','0'),('RomalpaClause','Ownership will not pass to the buyer until the goods have been paid for in full.'),('SalesOrder_FOI','0'),('ShowValueOnGRN','1'),('Show_Settled_LastMonth','1'),('SO_AllowSameItemMultipleTimes','1'),('TaxAuthorityReferenceName','Tax Ref'),('UpdateCurrencyRatesDaily','0'),('VersionNumber','4.0'),('WeightedAverageCosting','1'),('WikiApp','WackoWiki'),('WikiPath','wiki'),('YearEnd','3');
 /*!40000 ALTER TABLE `config` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4131,7 +4141,7 @@ CREATE TABLE `www_users` (
 
 LOCK TABLES `www_users` WRITE;
 /*!40000 ALTER TABLE `www_users` DISABLE KEYS */;
-INSERT INTO `www_users` VALUES ('admin','weberp','Demonstration user','','','','','','MEL',8,'2011-01-15 14:59:12','','A4','1,1,1,1,1,1,1,1,1,1,',0,50,'silverwolf','en_GB.utf8',0);
+INSERT INTO `www_users` VALUES ('admin','weberp','Demonstration user','','','','','','MEL',8,'2011-01-20 17:11:05','','A4','1,1,1,1,1,1,1,1,1,1,',0,50,'silverwolf','en_GB.utf8',0);
 /*!40000 ALTER TABLE `www_users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -4144,4 +4154,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-01-15 15:01:49
+-- Dump completed on 2011-01-20 17:11:50

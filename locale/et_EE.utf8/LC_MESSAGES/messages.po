@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-10 14:06+0000\n"
-"X-Generator: Launchpad (build 12161)\n"
+"X-Launchpad-Export-Date: 2011-01-20 14:43+0000\n"
+"X-Generator: Launchpad (build 12214)\n"
 
 #: AccountGroups.php:9 index.php:1273
 msgid "Account Groups"
@@ -35341,3 +35341,26 @@ msgstr ""
 #: api/api_xml-rpc.php:3027
 msgid "Return Value"
 msgstr ""
+
+#~ msgid "Notes for Customer: <b>"
+#~ msgstr "Märkmed selle Kliendi kohta: <b>"
+
+#~ msgid "Notes for Customer Type: <b>"
+#~ msgstr "Antud klienditüübi märkmed:"
+
+#~ msgid "The sql that was used to retrieve the information was"
+#~ msgstr "SQL, mida informatsiooni otsimisel kasutati, on"
+
+#~ msgid "There are no customers meeting the critiera specified to list"
+#~ msgstr ""
+#~ "Ei ole kliente, keda vastavalt täpsustatud kriteeriumitele järjestada"
+
+#~ msgid ""
+#~ "The Quantity Extended BOM Listing could not be retrieved by the SQL because"
+#~ msgstr "SQL ei suutnud materjalide loetelu leida, kuna"
+
+#~ msgid "Extended Quantity BOM Listing"
+#~ msgstr "Materjalide loetelu"
+
+#~ msgid "Review Components"
+#~ msgstr "Vaata komponendid üle"
