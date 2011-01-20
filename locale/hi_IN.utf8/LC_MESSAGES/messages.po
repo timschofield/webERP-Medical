@@ -6,16 +6,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: web-erp\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-01-04 22:15+1200\n"
-"PO-Revision-Date: 2010-09-20 18:03+0000\n"
+"PO-Revision-Date: 2011-01-17 17:01+0000\n"
 "Last-Translator: Tim Schofield <Unknown>\n"
 "Language-Team: Swahili <sw@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-10 14:09+0000\n"
-"X-Generator: Launchpad (build 12161)\n"
+"X-Launchpad-Export-Date: 2011-01-20 14:50+0000\n"
+"X-Generator: Launchpad (build 12214)\n"
+"Language: sw\n"
 
 #: AccountGroups.php:9 index.php:1273
 msgid "Account Groups"
@@ -623,7 +624,7 @@ msgstr "संपर्क नोट रिकॉर्ड हटा दिय�
 
 #: AddCustomerNotes.php:98
 msgid "Notes for Customer"
-msgstr ""
+msgstr "ग्राहक के लिए नोट्स"
 
 #: AddCustomerNotes.php:106 AddCustomerNotes.php:189
 #: AddCustomerTypeNotes.php:104 AddCustomerTypeNotes.php:186
@@ -702,7 +703,7 @@ msgstr "संपर्क समूह नोट रिकॉर्ड हट�
 
 #: AddCustomerTypeNotes.php:95
 msgid "Notes for Customer Type"
-msgstr ""
+msgstr "ग्राहक प्रकार के लिए नोट्स"
 
 #: AddCustomerTypeNotes.php:106
 msgid "href"
@@ -3658,7 +3659,7 @@ msgstr ""
 
 #: ConfirmDispatch_Invoice.php:815
 msgid "The asset number beind disposed of is:"
-msgstr ""
+msgstr "संपत्ति संख्या का निपटारा beind:"
 
 #: ConfirmDispatch_Invoice.php:829 ConfirmDispatch_Invoice.php:905
 #: RecurringSalesOrdersProcess.php:321
@@ -3686,7 +3687,7 @@ msgstr ""
 
 #: ConfirmDispatch_Invoice.php:913
 msgid "Cannot retrieve the mbflag"
-msgstr ""
+msgstr "mbflag पुनः प्राप्त नहीं कर सकते"
 
 #: ConfirmDispatch_Invoice.php:927 CounterSales.php:1244
 #: FixedAssetItems.php:551 SalesAnalReptCols.php:319 Stocks.php:1028
@@ -3931,40 +3932,46 @@ msgstr "बिक्री बट्टा पोस्टिंग जीएल
 
 #: ConfirmDispatch_Invoice.php:1378
 msgid "The asset disposal GL posting details could not be retrieved because"
-msgstr ""
+msgstr "संपत्ति निपटान विवरण पोस्टिंग जीएल वजह से पुनः प्राप्त नहीं कर सकता"
 
 #: ConfirmDispatch_Invoice.php:1379
 msgid "The following SQL was used to get the asset posting details"
 msgstr ""
+"निम्नलिखित एसक्यूएल को विवरण पोस्टिंग संपत्ति पाने के लिए इस्तेमाल किया गया "
+"था"
 
 #: ConfirmDispatch_Invoice.php:1404 ConfirmDispatch_Invoice.php:1426
 #: ConfirmDispatch_Invoice.php:1448 ConfirmDispatch_Invoice.php:1470
 msgid "disposal"
-msgstr ""
+msgstr "निपटान"
 
 #: ConfirmDispatch_Invoice.php:1407
 msgid ""
 "The reversal of accumulated depreciation GL posting on disposal could not be "
 "inserted because"
 msgstr ""
+"संचित मूल्यह्रास निपटान पर पोस्टिंग जीएल का उत्क्रमण वजह से हो सकता है नहीं "
+"डाला"
 
 #: ConfirmDispatch_Invoice.php:1429
 msgid ""
 "The reversal of asset cost on dispoal GL posting could not be inserted "
 "because"
 msgstr ""
+"dispoal पोस्टिंग जीएल पर संपत्ति की लागत का उत्क्रमण वजह से हो सकता है नहीं "
+"डाला"
 
 #: ConfirmDispatch_Invoice.php:1451
 msgid "The disposal net book value GL posting could not be inserted because"
-msgstr ""
+msgstr "निपटान नेट बही मूल्य पोस्टिंग जीएल वजह से हो सकता है नहीं डाला"
 
 #: ConfirmDispatch_Invoice.php:1473
 msgid "The disposal proceeds GL posting could not be inserted because"
-msgstr ""
+msgstr "निपटान आय जीएल नहीं डाला जा सका क्योंकि पोस्टिंग"
 
 #: ConfirmDispatch_Invoice.php:1501
 msgid "The fixed asset transaction could not be inserted because"
-msgstr ""
+msgstr "अचल संपत्ति लेनदेन के कारण हो सकता है नहीं डाला"
 
 #: ConfirmDispatch_Invoice.php:1502 GoodsReceived.php:596 ReverseGRN.php:176
 #: SupplierCredit.php:1190 SupplierCredit.php:1277 SupplierInvoice.php:1187
@@ -3972,14 +3979,19 @@ msgstr ""
 msgid ""
 "The following SQL to insert the fixed asset transaction record was used"
 msgstr ""
+"निम्नलिखित सम्मिलित करने के लिए SQL अचल संपत्ति लेनदेन रिकॉर्ड इस्तेमाल किया "
+"गया था"
 
 #: ConfirmDispatch_Invoice.php:1509
 msgid "The fixed asset record could not be updated for the disposal because"
 msgstr ""
+"अचल संपत्ति रिकॉर्ड निपटान क्योंकि के लिए अद्यतन नहीं किया जा सकता है"
 
 #: ConfirmDispatch_Invoice.php:1510
 msgid "The following SQL to update the fixed asset record was used"
 msgstr ""
+"निम्नलिखित एसक्यूएल अचल संपत्ति रिकॉर्ड इस्तेमाल किया गया था अद्यतन करने के "
+"लिए"
 
 #: ConfirmDispatch_Invoice.php:1538 CounterSales.php:1709
 #: RecurringSalesOrdersProcess.php:602
@@ -4195,7 +4207,7 @@ msgstr "उप कुल"
 
 #: ContractBOM.php:278
 msgid "Update Lines"
-msgstr ""
+msgstr "अद्यतन लाइन्स"
 
 #: ContractBOM.php:279 ContractOtherReqts.php:128
 msgid "Back To Contract Header"
@@ -7445,7 +7457,7 @@ msgstr "रसीद एंट्री"
 
 #: CustomerReceipt.php:35
 msgid "A bank account must be selected for this receipt"
-msgstr ""
+msgstr "एक बैंक खाते में इस रसीद के लिए चयनित होना चाहिए"
 
 #: CustomerReceipt.php:50 Payments.php:685
 msgid "The bank account name cannot be retrieved because"
@@ -7477,7 +7489,7 @@ msgstr ""
 
 #: CustomerReceipt.php:163 Payments.php:639
 msgid "No General Ledger code has been chosen"
-msgstr ""
+msgstr "कोई सामान्य खाता बही कोड चुना गया है"
 
 #: CustomerReceipt.php:163 GLJournal.php:173 Payments.php:622 Payments.php:639
 msgid "so this GL analysis item could not be added"
@@ -9851,6 +9863,8 @@ msgid ""
 "either of the debtors control account, creditors control account or GRN "
 "suspense accounts"
 msgstr ""
+"खातों के लिए लागत या संचित मूल्यह्रास पोस्ट किया देनदार खाता नियंत्रण की भी "
+"नहीं कर सकते हैं चुना है, लेनदारों नियंत्रण खाते या खातों GRN रहस्य"
 
 #: FixedAssetCategories.php:67
 msgid ""
@@ -9858,6 +9872,9 @@ msgid ""
 "protected from having any other postings made to them. Select another "
 "balance sheet account for the asset cost"
 msgstr ""
+"संपत्ति लागत चयनित खाते में एक बैंक खाता है - बैंक खातों किसी भी अन्य उन्हें "
+"बनाया पोस्टिंग होने से सुरक्षित हैं. संपत्ति लागत के लिए एक और बैलेंस शीट "
+"खाते का चयन करें"
 
 #: FixedAssetCategories.php:71
 msgid ""
@@ -9865,6 +9882,9 @@ msgid ""
 "accounts are protected from having any other postings made to them. Select "
 "another balance sheet account for the asset accumulated depreciation"
 msgstr ""
+"संचित मूल्यह्रास चयनित खाते में एक बैंक खाता है - बैंक खातों किसी भी अन्य "
+"उन्हें बनाया पोस्टिंग होने से सुरक्षित हैं. मूल्यह्रास संचित संपत्ति के लिए "
+"एक और बैलेंस शीट खाते का चयन करें"
 
 #: FixedAssetCategories.php:88
 msgid "Could not update the fixed asset category"
@@ -9876,25 +9896,27 @@ msgstr "अचल संपत्ति वर्ग रिकॉर्ड क�
 
 #: FixedAssetCategories.php:108
 msgid "Could not insert the new fixed asset category"
-msgstr ""
+msgstr "सम्मिलित नई अचल संपत्ति वर्ग नहीं कर सका"
 
 #: FixedAssetCategories.php:110
 msgid "A new fixed asset category record has been added for"
-msgstr ""
+msgstr "एक नया अचल संपत्ति वर्ग रिकॉर्ड के लिए जोड़ दिया गया है"
 
 #: FixedAssetCategories.php:131
 msgid ""
 "Cannot delete this fixed asset category because fixed assets have been "
 "created using this category"
 msgstr ""
+"यह तय परिसंपत्ति वर्ग हटाना क्योंकि अचल संपत्ति के इस वर्ग का उपयोग कर बनाया "
+"गया है नहीं कर सकते"
 
 #: FixedAssetCategories.php:132
 msgid "fixed assets referring to this category code"
-msgstr ""
+msgstr "अचल संपत्ति के इस वर्ग कोड का जिक्र"
 
 #: FixedAssetCategories.php:137
 msgid "The fixed asset category"
-msgstr ""
+msgstr "अचल संपत्ति वर्ग"
 
 #: FixedAssetCategories.php:159 StockCategories.php:217
 msgid "Cat Code"
@@ -9902,7 +9924,7 @@ msgstr "बिल्ली कोड"
 
 #: FixedAssetCategories.php:161
 msgid "Cost GL"
-msgstr ""
+msgstr "लागत जीएल"
 
 #: FixedAssetCategories.php:162
 msgid "P & L Depn GL"
@@ -9910,11 +9932,11 @@ msgstr "पी एंड एल Depn जीएल"
 
 #: FixedAssetCategories.php:163
 msgid "Disposal GL"
-msgstr ""
+msgstr "निपटान जीएल"
 
 #: FixedAssetCategories.php:164
 msgid "Accum Depn GL"
-msgstr ""
+msgstr "Accum Depn जीएल"
 
 #: FixedAssetCategories.php:183
 #, php-format
@@ -9923,10 +9945,13 @@ msgid ""
 "will be performed before actual deletion to ensure data integrity is not "
 "compromised."
 msgstr ""
+"क्या आप वाकई इस नियत परिसंपत्ति वर्ग को नष्ट करना चाहते हैं? अतिरिक्त चेक से "
+"पहले वास्तविक विलोपन सुनिश्चित करने के लिए डेटा अखंडता समझौता नहीं किया है "
+"किया जाएगा."
 
 #: FixedAssetCategories.php:203
 msgid "Show All Fixed Asset Categories"
-msgstr ""
+msgstr "सभी स्थायी संपत्ति चैनल दिखाएँ"
 
 #: FixedAssetCategories.php:232 FixedAssetCategories.php:238
 #: StockCategories.php:311 StockCategories.php:317
@@ -9940,7 +9965,7 @@ msgstr "श्रेणी विवरण"
 
 #: FixedAssetCategories.php:270
 msgid "Fixed Asset Cost GL Code"
-msgstr ""
+msgstr "फिक्स्ड आस्ति मूल्य जीएल कोड"
 
 #: FixedAssetCategories.php:285
 msgid "Profit and Loss Depreciation GL Code"
@@ -9948,11 +9973,11 @@ msgstr "लाभ और हानि मूल्यह्रास जीए�
 
 #: FixedAssetCategories.php:299
 msgid "Profit or Loss on Disposal GL Code:"
-msgstr ""
+msgstr "या निपटान जीएल कोड पर लाभ घाटाः"
 
 #: FixedAssetCategories.php:312
 msgid "Balance Sheet Accumulated Depreciation GL Code"
-msgstr ""
+msgstr "बैलेंस शीट मूल्यह्रास जीएल कोड संचित"
 
 #: FixedAssetDepreciation.php:9
 msgid "Depreciation Journal Entry"
@@ -9963,6 +9988,8 @@ msgid ""
 "No depreciation will be committed as the processing date is beyond the "
 "current date. The depreciation run can only be run for periods prior to today"
 msgstr ""
+"कोई मूल्यह्रास के रूप में प्रोसेसिंग दिनांक वर्तमान दिनांक से परे है "
+"प्रतिबद्ध किया जाएगा. मूल्यह्रास रन ही अवधि के लिए चला सकते हैं आज से पहले"
 
 #: FixedAssetDepreciation.php:82 FixedAssetRegister.php:77
 #: FixedAssetRegister.php:324 FixedAssetTransfer.php:124
@@ -9980,23 +10007,23 @@ msgstr "लागत"
 
 #: FixedAssetDepreciation.php:85
 msgid "Accum Depn"
-msgstr ""
+msgstr "Accum Depn"
 
 #: FixedAssetDepreciation.php:86
 msgid "B/fwd Book Value"
-msgstr ""
+msgstr "बी / अग्रेषित बुक वैल्यू"
 
 #: FixedAssetDepreciation.php:87
 msgid "Depn Type"
-msgstr ""
+msgstr "Depn लिखें"
 
 #: FixedAssetDepreciation.php:88
 msgid "Depn Rate"
-msgstr ""
+msgstr "Depn दर"
 
 #: FixedAssetDepreciation.php:89
 msgid "New Depn"
-msgstr ""
+msgstr "नई Depn"
 
 #: FixedAssetDepreciation.php:104 FixedAssetDepreciation.php:226
 #: InventoryValuation.php:114 InventoryValuation.php:166
@@ -10008,15 +10035,15 @@ msgstr "के लिए कुल"
 
 #: FixedAssetDepreciation.php:120
 msgid "SL"
-msgstr ""
+msgstr "SL"
 
 #: FixedAssetDepreciation.php:126
 msgid "DV"
-msgstr ""
+msgstr "डीवी"
 
 #: FixedAssetDepreciation.php:178
 msgid "Cannot insert a depreciation GL entry for the depreciation because"
-msgstr ""
+msgstr "सम्मिलित ह्रास क्योंकि के लिए एक मूल्यह्रास जीएल प्रवेश नहीं कर सकते"
 
 #: FixedAssetDepreciation.php:179 GLJournal.php:82 GLJournal.php:105
 msgid "The SQL that failed to insert the GL Trans record was"
@@ -10026,26 +10053,31 @@ msgstr "SQL कि सम्मिलित करने के लिए वि
 msgid ""
 "Cannot insert a fixed asset transaction entry for the depreciation because"
 msgstr ""
+"सम्मिलित ह्रास क्योंकि के लिए एक अचल संपत्ति लेनदेन प्रवेश नहीं कर सकते"
 
 #: FixedAssetDepreciation.php:215
 msgid "The SQL that failed to insert the fixed asset transaction record was"
-msgstr ""
+msgstr "SQL कि सम्मिलित करने के लिए विफल अचल संपत्ति लेनदेन रिकॉर्ड था"
 
 #: FixedAssetDepreciation.php:221
 msgid ""
 "CRITICAL ERROR! NOTE DOWN THIS ERROR AND SEEK ASSISTANCE. The fixed asset "
 "accumulated depreciation could not be updated:"
 msgstr ""
+"त्रुटि गंभीर! नीचे इस त्रुटि ध्यान दें और सहायता चाहते हैं. अचल संपत्ति "
+"संचित मूल्यह्रास अद्यतन नहीं किया जा सकता है:"
 
 #: FixedAssetDepreciation.php:222
 msgid ""
 "The following SQL was used to attempt the update the accumulated "
 "depreciation of the asset was:"
 msgstr ""
+"निम्नलिखित एसक्यूएल को अद्यतन संपत्ति का संचित मूल्यह्रास था का प्रयास किया "
+"गया था:"
 
 #: FixedAssetDepreciation.php:233
 msgid "GRAND Total"
-msgstr ""
+msgstr "कुल योग"
 
 #: FixedAssetDepreciation.php:245 FixedAssetRegister.php:354
 msgid "Depreciation"
@@ -10061,16 +10093,16 @@ msgstr "मुख्य मेनू पर लौटें"
 
 #: FixedAssetDepreciation.php:256
 msgid "Date to Process Depreciation"
-msgstr ""
+msgstr "तिथि ह्रास प्रक्रिया को"
 
 #: FixedAssetDepreciation.php:259
 msgid "Commit Depreciation"
-msgstr ""
+msgstr "कमेटी मूल्यह्रास"
 
 #: FixedAssetItems.php:9 SupplierCredit.php:252 SupplierCredit.php:298
 #: SupplierInvoice.php:220 SupplierInvoice.php:271
 msgid "Fixed Assets"
-msgstr ""
+msgstr "फिक्स्ड आस्तियों"
 
 #: FixedAssetItems.php:13
 msgid "Back to Select"
@@ -10089,12 +10121,16 @@ msgid ""
 "The asset description must be entered and be fifty characters or less long. "
 "It cannot be a zero length string either, a description is required"
 msgstr ""
+"संपत्ति विवरण में दर्ज किया जाना चाहिए और पचास अक्षर या उससे कम का होना. यह "
+"एक शून्य लंबाई स्ट्रिंग या तो नहीं जा सकता है, एक वर्णन की आवश्यकता है"
 
 #: FixedAssetItems.php:86
 msgid ""
 "The asset long description cannot be a zero length string, a long "
 "description is required"
 msgstr ""
+"संपत्ति लंबे वर्णन एक शून्य लंबाई स्ट्रिंग नहीं किया जा सकता है, एक लंबा "
+"विवरण आवश्यक है"
 
 #: FixedAssetItems.php:93 Stocks.php:120 Z_ImportStocks.php:134
 msgid "The barcode must be 20 characters or less long"
@@ -10105,56 +10141,61 @@ msgid ""
 "There are no asset categories defined. All assets must belong to a valid "
 "category,"
 msgstr ""
+"कोई संपत्ति परिभाषित श्रेणियां हैं. सभी परिसंपत्तियों एक वैध श्रेणी के हैं "
+"करना चाहिए,"
 
 #: FixedAssetItems.php:106 Z_ImportFixedAssets.php:133
 msgid "The depreciation rate is expected to be a number between 0 and 100"
-msgstr ""
+msgstr "मूल्यह्रास दर को 0 से 100 के बीच संख्या होने की उम्मीद है"
 
 #: FixedAssetItems.php:111
 msgid ""
 "Numbers less than 1 are interpreted as less than 1%. The depreciation rate "
 "should be entered as a number between 0 and 100"
 msgstr ""
+"कम से कम 1 संख्या 1% से कम के रूप में व्याख्या कर रहे हैं. मूल्यह्रास की दर "
+"0 से 100 के बीच एक संख्या के रूप में दर्ज किया जाना चाहिए"
 
 #: FixedAssetItems.php:147 FixedAssetItems.php:167 FixedAssetItems.php:187
 #: FixedAssetItems.php:207
 msgid "change category"
-msgstr ""
+msgstr "परिवर्तन श्रेणी"
 
 #: FixedAssetItems.php:150 FixedAssetItems.php:170 FixedAssetItems.php:190
 #: FixedAssetItems.php:210
 msgid "Cannot insert a GL entry for the change of asset category because"
 msgstr ""
+"सम्मिलित संपत्ति श्रेणी की वजह से बदलाव के लिए एक जीएल प्रवेश नहीं कर सकते"
 
 #: FixedAssetItems.php:151 FixedAssetItems.php:171 FixedAssetItems.php:191
 #: FixedAssetItems.php:211 FixedAssetItems.php:327 FixedAssetItems.php:347
 msgid "The SQL that failed to insert the cost GL Trans record was"
-msgstr ""
+msgstr "SQL कि सम्मिलित करने के लिए विफल लागत जीएल ट्रांस रिकॉर्ड था"
 
 #: FixedAssetItems.php:226
 msgid "The asset could not be updated because"
-msgstr ""
+msgstr "संपत्ति क्योंकि अद्यतन नहीं किया जा सकता है"
 
 #: FixedAssetItems.php:227
 msgid "The SQL that was used to update the asset and failed was"
-msgstr ""
+msgstr "SQL कि संपत्ति अद्यतन इस्तेमाल किया गया था और असफल था"
 
 #: FixedAssetItems.php:230 FixedAssetRegister.php:263
 #: FixedAssetRegister.php:347
 msgid "Asset"
-msgstr ""
+msgstr "संपत्ति"
 
 #: FixedAssetItems.php:252 Z_ImportFixedAssets.php:212
 msgid "The asset could not be added because"
-msgstr ""
+msgstr "संपत्ति क्योंकि जोड़ा नहीं जा सका"
 
 #: FixedAssetItems.php:253
 msgid "The SQL that was used to add the asset failed was"
-msgstr ""
+msgstr "SQL कि संपत्ति जोड़ने के लिए किया था विफल रहा था"
 
 #: FixedAssetItems.php:258
 msgid "The new asset has been added to the database with an asset code of:"
-msgstr ""
+msgstr "नई संपत्ति एक परिसंपत्ति का कोड के साथ डेटाबेस में जोड़ा गया है:"
 
 #: FixedAssetItems.php:272 Stocks.php:455
 msgid "Validation failed, no updates or deletes took place"
@@ -10165,6 +10206,8 @@ msgid ""
 "The asset still has a net book value - only assets with a zero net book "
 "value can be deleted"
 msgstr ""
+"संपत्ति अभी भी एक शुद्ध बही मूल्य है - एक शून्य शुद्ध बुक वैल्यू के साथ ही "
+"संपत्ति नष्ट किया जा सकता है"
 
 #: FixedAssetItems.php:296
 msgid ""
@@ -10172,34 +10215,42 @@ msgid ""
 "when the fixed asset transactions are purged, otherwise the integrity of "
 "fixed asset reports may be compromised"
 msgstr ""
+"संपत्ति लेनदेन के साथ जुड़े है. संपत्ति ही नष्ट कर दिया जब अचल संपत्ति "
+"लेनदेन purged कर रहे हैं किया जा सकता है, अन्यथा अचल संपत्ति की रिपोर्ट की "
+"अखंडता समझौता किया जा सकता"
 
 #: FixedAssetItems.php:301
 msgid ""
 "There is a purchase order set up for this asset. The purchase order line "
 "must be deleted first"
 msgstr ""
+"वहाँ एक खरीद इस संपत्ति के लिए स्थापित की व्यवस्था है. खरीद आदेश पंक्ति पहले "
+"हटा दिया जाना चाहिए"
 
 #: FixedAssetItems.php:323 FixedAssetItems.php:343
 msgid "Delete asset"
-msgstr ""
+msgstr "संपत्ति हटाना"
 
 #: FixedAssetItems.php:326
 msgid "Cannot insert a GL entry for the deletion of the asset because"
 msgstr ""
+"सम्मिलित संपत्ति की वजह से हटाए जाने के लिए एक जीएल प्रवेश नहीं कर सकते"
 
 #: FixedAssetItems.php:346
 msgid ""
 "Cannot insert a GL entry for the reversal of accumulated depreciation on "
 "deletion of the asset because"
 msgstr ""
+"सम्मिलित संचित मूल्यह्रास के उत्क्रमण के लिए एक परिसंपत्ति की वजह से हटाए "
+"जाने पर जीएल प्रवेश नहीं कर सकते"
 
 #: FixedAssetItems.php:354
 msgid "Could not delete the asset record"
-msgstr ""
+msgstr "संपत्ति रिकॉर्ड को नष्ट नहीं कर सका"
 
 #: FixedAssetItems.php:358
 msgid "Deleted the asset  record for asset number"
-msgstr ""
+msgstr "संपत्ति संख्या के लिए रिकॉर्ड संपत्ति नष्ट"
 
 #: FixedAssetItems.php:413 FixedAssetItems.php:417 SelectAsset.php:222
 msgid "Asset Code"
@@ -10227,7 +10278,7 @@ msgstr "संपत्ति श्रेणी"
 
 #: FixedAssetItems.php:468
 msgid "The asset categories could not be retrieved because"
-msgstr ""
+msgstr "संपत्ति श्रेणियों वजह से हो पुनः प्राप्त नहीं कर सकता"
 
 #: FixedAssetItems.php:480
 msgid "Add or Modify Asset Categories"
@@ -10235,15 +10286,15 @@ msgstr "जोड़ें या संशोधित करें एसे�
 
 #: FixedAssetItems.php:486 SelectAsset.php:225
 msgid "Date Purchased"
-msgstr ""
+msgstr "तिथि खरीदा"
 
 #: FixedAssetItems.php:490
 msgid "The asset locations could not be retrieved because"
-msgstr ""
+msgstr "संपत्ति स्थानों वजह से पुनः प्राप्त नहीं कर सकता"
 
 #: FixedAssetItems.php:491
 msgid "The SQL used to retrieve asset locations and failed was"
-msgstr ""
+msgstr "एसक्यूएल को संपत्ति स्थानों को पुनः प्राप्त करते थे और विफल रहा था"
 
 #: FixedAssetItems.php:494 FixedAssetRegister.php:250 SelectAsset.php:73
 #: SelectAsset.php:224
@@ -10270,15 +10321,15 @@ msgstr "सीधी रेखा"
 
 #: FixedAssetItems.php:516 FixedAssetItems.php:519
 msgid "Diminishing Value"
-msgstr ""
+msgstr "ह्रासमान मूल्य"
 
 #: FixedAssetItems.php:524
 msgid "Depreciation Rate"
-msgstr ""
+msgstr "मूल्यह्रास की दर"
 
 #: FixedAssetItems.php:528
 msgid "Asset Financial Summary"
-msgstr ""
+msgstr "परिसंपत्ति वित्तीय सारांश"
 
 #: FixedAssetItems.php:530 WorkOrderEntry.php:486
 msgid "Accumulated Costs"
@@ -10286,37 +10337,40 @@ msgstr "संचित लागत"
 
 #: FixedAssetItems.php:531
 msgid "Accumulated Depreciation"
-msgstr ""
+msgstr "संचित मूल्यह्रास"
 
 #: FixedAssetItems.php:532 FixedAssetRegister.php:357
 msgid "Net Book Value"
-msgstr ""
+msgstr "नेट बुक वैल्यू"
 
 #: FixedAssetItems.php:537
 msgid "Not Yet Run"
-msgstr ""
+msgstr "अभी तक नहीं चला"
 
 #: FixedAssetItems.php:541
 msgid "Depreciation last run"
-msgstr ""
+msgstr "मूल्यह्रास पिछले भाग"
 
 #: FixedAssetItems.php:546
 msgid "Insert New Fixed Asset"
-msgstr ""
+msgstr "सम्मिलित करें नई स्थायी संपत्ति"
 
 #: FixedAssetItems.php:551
 msgid ""
 "Only click the Delete button if you are sure you wish to delete the asset. "
 "Only assets with a zero book value can be deleted"
 msgstr ""
+"केवल हटाएँ बटन क्लिक करें यदि आप सुनिश्चित हैं कि आप संपत्ति नष्ट करना चाहते "
+"हैं. एक शून्य अंकित मूल्य के साथ ही संपत्ति नष्ट किया जा सकता"
 
 #: FixedAssetItems.php:552
 msgid "Delete This Asset"
-msgstr ""
+msgstr "हटाएँ इस आस्ति"
 
 #: FixedAssetItems.php:552
 msgid "Are You Sure? Only assets with a zero book value can be deleted."
 msgstr ""
+"तुम्हें यकीन है? एक शून्य अंकित मूल्य के साथ ही संपत्ति नष्ट किया जा सकता."
 
 #: FixedAssetList.php:5
 msgid "Fixed Asset Properties List"
@@ -10352,7 +10406,7 @@ msgstr "इस स्थान बच्चे स्थानों पर ह�
 
 #: FixedAssetLocations.php:75
 msgid "You have assets in this location location so it cannot be removed"
-msgstr ""
+msgstr "आप इस स्थान के स्थान में संपत्ति है तो यह हटाया नहीं जा सकता"
 
 #: FixedAssetLocations.php:81
 msgid "The location has been deleted successfully"
@@ -10384,15 +10438,15 @@ msgstr "तिथि का अधिग्रहण"
 
 #: FixedAssetRegister.php:82
 msgid "Cost B/fwd"
-msgstr ""
+msgstr "लागत बी / अग्रेषित"
 
 #: FixedAssetRegister.php:83
 msgid "Depn B/fwd"
-msgstr ""
+msgstr "Depn बी अग्रेषित /"
 
 #: FixedAssetRegister.php:84 FixedAssetRegister.php:353
 msgid "Additions"
-msgstr ""
+msgstr "परिवर्धन"
 
 #: FixedAssetRegister.php:85
 msgid "Depn"
@@ -10400,11 +10454,11 @@ msgstr "Depn"
 
 #: FixedAssetRegister.php:86
 msgid "Cost C/fwd"
-msgstr ""
+msgstr "लागत सी / अग्रेषित"
 
 #: FixedAssetRegister.php:87
 msgid "Depn C/fwd"
-msgstr ""
+msgstr "Depn सी अग्रेषित /"
 
 #: FixedAssetRegister.php:88
 msgid "NBV"
@@ -10461,19 +10515,19 @@ msgstr "धारावाहिक नहीं."
 
 #: FixedAssetRegister.php:351
 msgid "Cost B/Fwd"
-msgstr ""
+msgstr "लागत बी / अग्रेषित"
 
 #: FixedAssetRegister.php:352
 msgid "Depn B/Fwd"
-msgstr ""
+msgstr "Depn बी अग्रेषित /"
 
 #: FixedAssetRegister.php:355
 msgid "Cost C/Fwd"
-msgstr ""
+msgstr "लागत सी / अग्रेषित"
 
 #: FixedAssetRegister.php:356
 msgid "Depn C/Fwd"
-msgstr ""
+msgstr "Depn सी अग्रेषित /"
 
 #: FixedAssetTransfer.php:7 index.php:1319
 msgid "Change Asset Location"
@@ -11672,7 +11726,7 @@ msgstr "जीएल पुस्तिका प्रवेश कोड ड�
 
 #: GLJournal.php:193
 msgid "You must select a GL account code"
-msgstr ""
+msgstr "आप एक जीएल खाता कोड का चयन करना होगा"
 
 #: GLJournal.php:253
 msgid "Date to Process Journal"
@@ -11696,7 +11750,7 @@ msgstr "जीएल टैग"
 
 #: GLJournal.php:319
 msgid "Select a general ledger account code"
-msgstr ""
+msgstr "एक सामान्य खाता बही खाता कोड का चयन करें"
 
 #: GLJournal.php:347 Payments.php:922 Payments.php:924
 msgid "GL Narrative"
@@ -12065,6 +12119,8 @@ msgid ""
 "This page can only be opened if a purchase order has been selected. Please "
 "select a purchase order first"
 msgstr ""
+"इस पृष्ठ तभी एक खरीद आदेश चयनित किया गया है खोला जा सकता है. एक खरीद आदेश "
+"पहले का चयन करें"
 
 #: GoodsReceived.php:54
 msgid ""
@@ -12306,18 +12362,24 @@ msgid ""
 "CRITICAL ERROR! NOTE DOWN THIS ERROR AND SEEK ASSISTANCE The fixed asset "
 "transaction could not be inserted because"
 msgstr ""
+"त्रुटि गंभीर! नोट नीचे इस त्रुटि और ढूंढ़ना सहायता अचल संपत्ति लेनदेन के "
+"कारण हो सकता है नहीं डाला"
 
 #: GoodsReceived.php:612 SupplierInvoice.php:1285
 msgid ""
 "CRITICAL ERROR! NOTE DOWN THIS ERROR AND SEEK ASSISTANCE. The fixed asset "
 "cost and date purchased was not able to be updated because:"
 msgstr ""
+"त्रुटि गंभीर! नीचे इस त्रुटि ध्यान दें और सहायता चाहते हैं. अचल संपत्ति की "
+"लागत और खरीदी तारीख के लिए है क्योंकि अद्यतन किया जा करने में सक्षम नहीं था:"
 
 #: GoodsReceived.php:613 SupplierInvoice.php:1286
 msgid ""
 "The following SQL was used to attempt the update of the cost and the date "
 "the asset was purchased"
 msgstr ""
+"निम्नलिखित एसक्यूएल को लागत का अद्यतन करें और तिथि संपत्ति खरीदा गया था करने "
+"का प्रयास किया गया"
 
 #: GoodsReceived.php:642
 msgid "The purchase GL posting could not be inserted because"
@@ -12560,7 +12622,7 @@ msgstr "एक सप्लायर से पहले महीने के 
 
 #: index.php:448
 msgid "Supplier Transaction Inquiries"
-msgstr ""
+msgstr "आपूर्तिकर्ता लेनदेन जांच"
 
 #: index.php:462
 msgid "Add Supplier"
@@ -12637,7 +12699,7 @@ msgstr "धारावाहिक आइटम अनुसंधान उप
 
 #: index.php:618 PDFPrintLabel.php:76
 msgid "Print Price Labels"
-msgstr ""
+msgstr "प्रिंट मूल्य लेबल"
 
 #: index.php:623
 msgid "Inventory Item Movements"
@@ -12830,7 +12892,7 @@ msgstr "भूमिका अनुमतियाँ"
 
 #: index.php:960
 msgid "Page Security Settings"
-msgstr ""
+msgstr "पृष्ठ सुरक्षा सेटिंग्स"
 
 #: index.php:965
 msgid "Bank Accounts"
@@ -12882,7 +12944,7 @@ msgstr "प्रपत्र लेआउट संपादक"
 
 #: index.php:1025
 msgid "Label Templates Maintenance"
-msgstr ""
+msgstr "लेबल रखरखाव टेम्पलेट्स"
 
 #: index.php:1030
 msgid "SMTP Server Details"
@@ -13020,11 +13082,11 @@ msgstr "जीएल टैग"
 
 #: index.php:1309
 msgid "Add a new Asset"
-msgstr ""
+msgstr "एक नया संपत्ति जोड़ें"
 
 #: index.php:1314 SelectAsset.php:6
 msgid "Select an Asset"
-msgstr ""
+msgstr "एक परिसंपत्ति का चयन करें"
 
 #: index.php:1324
 msgid "Depreciation Journal"
@@ -13424,129 +13486,133 @@ msgstr "सूची मूल्यांकन रिपोर्ट"
 
 #: Labels.php:19
 msgid "Label Templates Maintainance"
-msgstr ""
+msgstr "लेबल रखरखाव टेम्पलेट्स"
 
 #: Labels.php:50 Labels.php:61
 msgid "Correct data"
-msgstr ""
+msgstr "डेटा सही"
 
 #: Labels.php:70
 msgid "New ID"
-msgstr ""
+msgstr "नई आईडी"
 
 #: Labels.php:71
 msgid "Edit data new label"
-msgstr ""
+msgstr "डेटा नया लेबल संपादित करें"
 
 #: Labels.php:79
 msgid "Edit data label"
-msgstr ""
+msgstr "डेटा लेबल संपादित करें"
 
 #: Labels.php:92
 msgid "New label"
-msgstr ""
+msgstr "नया लेबल"
 
 #: Labels.php:106
 msgid "There is no labels, create a new one"
-msgstr ""
+msgstr "वहाँ कोई लेबल, एक नया खाता बनाना"
 
 #: Labels.php:144
 msgid "Id required"
-msgstr ""
+msgstr "आईडी की आवश्यकता"
 
 #: Labels.php:146
 msgid "This id exist in previous list"
-msgstr ""
+msgstr "इस आईडी पिछली सूची में मौजूद हैं"
 
 #: Labels.php:149
 msgid "the description is required"
-msgstr ""
+msgstr "विवरण आवश्यक है"
 
 #: Labels.php:159 Labels.php:161 Labels.php:165 Labels.php:174 Labels.php:180
 #: Labels.php:186 Labels.php:192 Labels.php:217 Labels.php:219 Labels.php:224
 msgid "The value of"
-msgstr ""
+msgstr "मूल्य से"
 
 #: Labels.php:159 Labels.php:217
 msgid "would be numeric"
-msgstr ""
+msgstr "सांख्यिक होगा"
 
 #: Labels.php:161 Labels.php:219
 msgid "requires a positive value"
-msgstr ""
+msgstr "एक सकारात्मक मूल्य की आवश्यकता"
 
 #: Labels.php:165
 msgid "would be a positive integer"
-msgstr ""
+msgstr "एक सकारात्मक पूर्णांक किया जाएगा"
 
 #: Labels.php:174
 msgid "requires to be greater than the height of the labels"
-msgstr ""
+msgstr "करने के लिए लेबल की ऊँचाई से अधिक होना आवश्यक है"
 
 #: Labels.php:180
 msgid ""
 "requires to be greater than the height of all the rows, including the top "
 "margin"
 msgstr ""
+"करने के लिए सभी पंक्तियों की ऊंचाई ऊपरी हाशिया सहित, की तुलना में अधिक से "
+"अधिक होना आवश्यक है"
 
 #: Labels.php:186
 msgid "requires to be greater than the width of the labels"
-msgstr ""
+msgstr "करने के लिए लेबल की चौड़ाई से अधिक होना आवश्यक है"
 
 #: Labels.php:192
 msgid ""
 "requires to be greater than the width of all the cols, including the left "
 "margin"
 msgstr ""
+"करने के लिए सभी कर्नल की चौड़ाई बाएँ हाशिए सहित, की तुलना में अधिक से अधिक "
+"होना आवश्यक है"
 
 #: Labels.php:205
 msgid "The vert. pos. value would be positive"
-msgstr ""
+msgstr "हरा रंग. स्थिति. मूल्य सकारात्मक हो जाएगा"
 
 #: Labels.php:207
 msgid "The value of the vert. pos. would be less than"
-msgstr ""
+msgstr "हरा रंग का महत्व होता है. स्थिति. से कम होगा"
 
 #: Labels.php:224
 msgid "in this position exceeds the label height"
-msgstr ""
+msgstr "इस स्थिति में लेबल ऊंचाई से अधिक है"
 
 #: Labels.php:233
 msgid ""
 "The position and lenght of the string leads the text to get out of the label"
-msgstr ""
+msgstr "और स्ट्रिंग की लंबाई स्थिति पाठ के लिए जाता है लेबल से बाहर निकलना"
 
 #: Labels.php:265
 msgid "Save"
-msgstr ""
+msgstr "सहेजें"
 
 #: Labels.php:413 includes/DefineLabelClass.php:8
 msgid "Label id"
-msgstr ""
+msgstr "लेबल आईडी"
 
 #: Labels.php:413
 msgid "Label array"
-msgstr ""
+msgstr "लेबल सरणी"
 
 #: Labels.php:414
 msgid "New"
-msgstr ""
+msgstr "नया"
 
 #: Labels.php:414
 msgid "Copy"
-msgstr ""
+msgstr "प्रति"
 
 #: Labels.php:415
 msgid "Do you really want to erase the label"
-msgstr ""
+msgstr "क्या आप वास्तव में लेबल को मिटाना चाहते हैं"
 
 #: Labels.php:546
 msgid "Could not rename the previous file."
-msgstr ""
+msgstr "पिछले फ़ाइल नाम नहीं दे सका."
 
 #: Labels.php:549
 msgid "Could not create the new XML file."
-msgstr ""
+msgstr "नया XML फ़ाइल नहीं बना सका."
 
 #: Locations.php:10
 msgid "Location Maintenance"
@@ -14834,15 +14900,15 @@ msgstr "कोई बकाया GRNs मूल्यांकन विवर�
 
 #: PageSecurity.php:5 PageSecurity.php:9
 msgid "Page Security Levels"
-msgstr ""
+msgstr "पृष्ठ सुरक्षा स्तर"
 
 #: PageSecurity.php:16
 msgid "Could not update the page security value for the script because"
-msgstr ""
+msgstr "क्योंकि स्क्रिप्ट के लिए पृष्ठ सुरक्षा मान अद्यतन नहीं किया जा सका"
 
 #: PageSecurity.php:54
 msgid "Update Security Levels"
-msgstr ""
+msgstr "अद्यतन सुरक्षा स्तर"
 
 #: PaymentAllocations.php:14
 msgid "Payment Allocations"
@@ -14999,7 +15065,7 @@ msgstr "भुगतान के बाद से रद्द की जां
 
 #: Payments.php:34
 msgid "A bank account must be selected to make this payment from"
-msgstr ""
+msgstr "एक बैंक खाते में इस भुगतान करने से चुना जाना चाहिए"
 
 #: Payments.php:45
 msgid ""
@@ -15044,6 +15110,7 @@ msgstr "इस भुगतान किया गया है कोई रा
 #: Payments.php:229
 msgid "No bank account has been selected so this payment cannot be processed"
 msgstr ""
+"कोई बैंक खाता है तो यह भुगतान संसाधित नहीं किया जा सकता चयनित किया गया है"
 
 #: Payments.php:257
 msgid "Print Cheque using pre-printed stationery"
@@ -16620,39 +16687,39 @@ msgstr "जीपी"
 
 #: PDFPrintLabel.php:22
 msgid "There isn't any label template to select for printing. Click"
-msgstr ""
+msgstr "कोई लेबल करने के लिए मुद्रण के लिए चयन टेम्पलेट नहीं है. क्लिक करें"
 
 #: PDFPrintLabel.php:23
 msgid "HERE"
-msgstr ""
+msgstr "यहां"
 
 #: PDFPrintLabel.php:23
 msgid "to set up a new one"
-msgstr ""
+msgstr "ऊपर एक नया सेट करने के लिए"
 
 #: PDFPrintLabel.php:32
 msgid "You must specify the number of labels per item required"
-msgstr ""
+msgstr "आप आइटम प्रति लेबल की आवश्यकता की संख्या निर्दिष्ट करना होगा"
 
 #: PDFPrintLabel.php:35
 msgid "You must select the items to be printed"
-msgstr ""
+msgstr "आप आइटम्स मुद्रित करने का चयन करना होगा"
 
 #: PDFPrintLabel.php:66
 msgid "There was an error. Consult your IT staff"
-msgstr ""
+msgstr "वहाँ एक त्रुटि थी. से परामर्श अपने आईटी स्टाफ"
 
 #: PDFPrintLabel.php:91
 msgid "Label Sticker Printing"
-msgstr ""
+msgstr "लेबल स्टीकर मुद्रण"
 
 #: PDFPrintLabel.php:92
 msgid "Select label type"
-msgstr ""
+msgstr "लेबल प्रकार का चयन करें"
 
 #: PDFPrintLabel.php:93
 msgid "Number of labels per item"
-msgstr ""
+msgstr "आइटम प्रति लेबल की संख्या"
 
 #: PDFPrintLabel.php:94 Z_PriceChanges.php:94
 msgid "Price list"
@@ -16660,31 +16727,31 @@ msgstr "मूल्य सूची"
 
 #: PDFPrintLabel.php:95
 msgid "Update values"
-msgstr ""
+msgstr "अद्यतन मान"
 
 #: PDFPrintLabel.php:118
 msgid "Print labels"
-msgstr ""
+msgstr "प्रिंट लेबल"
 
 #: PDFPrintLabel.php:119
 msgid "Print labels with borders"
-msgstr ""
+msgstr "बॉर्डर के साथ मुद्रित लेबल्स"
 
 #: PDFPrintLabel.php:230
 msgid "Select a Category"
-msgstr ""
+msgstr "एक श्रेणी चुनें"
 
 #: PDFPrintLabel.php:235
 msgid "This category has no items to show"
-msgstr ""
+msgstr "इस श्रेणी में कोई आइटम नहीं है दिखाने के लिए"
 
 #: PDFPrintLabel.php:339
 msgid "Unit not defined in scale operation! Correct the template"
-msgstr ""
+msgstr "इकाई नहीं पैमाने पर आपरेशन में परिभाषित! टेम्पलेट सुधारें"
 
 #: PDFPrintLabel.php:501
 msgid "Couldnt get the currency data"
-msgstr ""
+msgstr "सके मुद्रा डेटा प्राप्त"
 
 #: PDFQuotation.php:13
 msgid "Select Quotation To Print"
@@ -17302,6 +17369,8 @@ msgid ""
 "This order cannot be cancelled or rejected because some of it has already "
 "been received"
 msgstr ""
+"इस आदेश या रद्द नहीं किया जा खारिज कर सकता है क्योंकि यह कुछ पहले से ही "
+"प्राप्त किया गया है"
 
 #: PO_Header.php:107
 msgid ""
@@ -17323,7 +17392,7 @@ msgstr ""
 
 #: PO_Header.php:114 ReverseGRN.php:135
 msgid "by"
-msgstr ""
+msgstr "द्वारा"
 
 #: PO_Header.php:117
 msgid "You do not have permission to reject this purchase order"
@@ -17339,10 +17408,13 @@ msgid ""
 "it has already been received. Quantities received will need to be returned "
 "to change the order back to pending."
 msgstr ""
+"इस आदेश के नहीं हो सकता स्थिति के लिए लंबित है क्योंकि यह कुछ पहले से ही "
+"प्राप्त किया गया है वापस बदल दिया है. मात्रा की जरूरत करने के लिए लंबित आदेश "
+"वापस बदल वापस आ जाएगा प्राप्त किया."
 
 #: PO_Header.php:134
 msgid "Order set to pending status by"
-msgstr ""
+msgstr "निम्न द्वारा क्रम लंबित स्थिति के लिए सेट"
 
 #: PO_Header.php:138
 msgid ""
@@ -17371,7 +17443,7 @@ msgstr ""
 
 #: PO_Header.php:285
 msgid "Supplier changed by"
-msgstr ""
+msgstr "आपूर्तिकर्ता द्वारा बदला"
 
 #: PO_Header.php:288
 msgid ""
@@ -17417,15 +17489,15 @@ msgstr ""
 
 #: PO_Header.php:437
 msgid "You do not have the authority to raise Purchase Orders for"
-msgstr ""
+msgstr "आप करने के लिए खरीद आदेश उठाने के लिए अधिकार नहीं है"
 
 #: PO_Header.php:437
 msgid "Please Consult your system administrator for more information."
-msgstr ""
+msgstr "अधिक जानकारी के लिए अपने सिस्टम व्यवस्थापक से परामर्श करें."
 
 #: PO_Header.php:437
 msgid "You can setup authorisations"
-msgstr ""
+msgstr "आप सेटअप प्राधिकरण कर सकते हैं"
 
 #: PO_Header.php:508 PO_Header.php:579 PO_Items.php:230 PO_Items.php:381
 #: PO_Items.php:902 PO_Items.php:905 PO_OrderDetails.php:86
@@ -17610,7 +17682,7 @@ msgstr ""
 
 #: PO_Items.php:103
 msgid "Order Created by"
-msgstr ""
+msgstr "आदेश के द्वारा बनाया गया"
 
 #: PO_Items.php:174 SpecialOrder.php:309
 msgid ""
@@ -17814,12 +17886,17 @@ msgid ""
 "An asset code was entered but it does not yet exist. Only pre-existing asset "
 "ids can be entered when ordering a fixed asset"
 msgstr ""
+"एक परिसंपत्ति कोड दर्ज किया गया था, लेकिन इसे अभी तक अस्तित्व में नहीं है. "
+"केवल पूर्व मौजूदा संपत्ति आईडी में प्रवेश किया जा सकता है जब एक निश्चित "
+"संपत्ति आदेश कर सकते हैं"
 
 #: PO_Items.php:684
 msgid ""
 "The description of the item being purchased is required where a non-stock "
 "item is being ordered"
 msgstr ""
+"आइटम का वर्णन है एक गैर स्टॉक मद है जहाँ का आदेश दिया जा रहा आवश्यक खरीदा जा "
+"रहा है"
 
 #: PO_Items.php:696 Stocks.php:785 includes/PO_ReadInOrder.inc:181
 msgid "each"
@@ -17870,19 +17947,19 @@ msgstr "सामान्य खाता बही कोड"
 
 #: PO_Items.php:1008
 msgid "OR Asset ID"
-msgstr ""
+msgstr "या संपत्ति आईडी"
 
 #: PO_Items.php:1011
 msgid "Not an Asset"
-msgstr ""
+msgstr "नहीं एक परिसंपत्ति"
 
 #: PO_Items.php:1014
 msgid "Not yet purchased"
-msgstr ""
+msgstr "अभी तक नहीं खरीदा"
 
 #: PO_Items.php:1021 SuppFixedAssetChgs.php:111
 msgid "New Fixed Asset"
-msgstr ""
+msgstr "नई स्थायी संपत्ति"
 
 #: PO_Items.php:1022
 msgid "Quantity to purchase"
@@ -18338,12 +18415,12 @@ msgstr "स्टॉक में स्थान"
 
 #: PO_SelectOSPurchOrder.php:154 PO_SelectPurchOrder.php:123
 msgid "Order Status:"
-msgstr ""
+msgstr "आदेश स्तर:"
 
 #: PO_SelectOSPurchOrder.php:156 PO_SelectOSPurchOrder.php:158
 #: PO_SelectPurchOrder.php:125 PO_SelectPurchOrder.php:127
 msgid "Pending and Authorised"
-msgstr ""
+msgstr "लंबित और प्राधिकृत"
 
 #: PO_SelectOSPurchOrder.php:180 PO_SelectPurchOrder.php:5
 #: PO_SelectPurchOrder.php:149
@@ -19359,6 +19436,8 @@ msgid ""
 "The price entered was not numeric and a number is expected. No changes have "
 "been made to the database"
 msgstr ""
+"मूल्य दर्ज सांख्यिक नहीं था और एक नंबर की उम्मीद है. कोई बदलाव नहीं डेटाबेस "
+"में बनाया गया है"
 
 #: PurchData.php:48
 msgid "The price entered is zero"
@@ -19373,12 +19452,16 @@ msgid ""
 "The lead time entered was not numeric a number of days is expected no "
 "changes have been made to the database"
 msgstr ""
+"नेतृत्व का समय दर्ज किया सांख्यिक दिनों की संख्या में कोई बदलाव नहीं डेटाबेस "
+"में बनाया गया है की संभावना है नहीं था"
 
 #: PurchData.php:58
 msgid ""
 "The minimum order quantity was not numeric and a number is expected no "
 "changes have been made to the database"
 msgstr ""
+"न्यूनतम आदेश मात्रा संख्यात्मक नहीं था और एक संख्या में कोई बदलाव नहीं "
+"डेटाबेस में बनाया गया है की उम्मीद है"
 
 #: PurchData.php:63
 msgid "The conversion factor entered was not numeric"
@@ -19465,7 +19548,7 @@ msgstr "आपूर्तिकर्ता यूनिट"
 
 #: PurchData.php:171 SelectProduct.php:327
 msgid "Min Order Qty"
-msgstr ""
+msgstr "न्यूनतम आदेश मात्रा"
 
 #: PurchData.php:173
 msgid "Preferred"
@@ -19616,7 +19699,7 @@ msgstr "आपूर्तिकर्ता स्टॉक कोड"
 
 #: PurchData.php:457
 msgid "MinOrderQty"
-msgstr ""
+msgstr "MinOrderQty"
 
 #: PurchData.php:459
 msgid "Supplier Stock Description"
@@ -20119,24 +20202,26 @@ msgstr ""
 
 #: ReverseGRN.php:135
 msgid "GRN Reversed for"
-msgstr ""
+msgstr "GRN के लिये सुरक्षित"
 
 #: ReverseGRN.php:138
 msgid ""
 "The purchase order statusand status comment could not be changed because"
-msgstr ""
+msgstr "खरीद आदेश statusand स्थिति टिप्पणी क्योंकि बदला नहीं जा सकता"
 
 #: ReverseGRN.php:139
 msgid "The following SQL to update the purchase order header record was used"
 msgstr ""
+"निम्नलिखित एसक्यूएल क्रय आदेश हैडर रिकॉर्ड इस्तेमाल किया गया था अद्यतन करने "
+"के लिए"
 
 #: ReverseGRN.php:147
 msgid "The GRN record could not be deleted because"
-msgstr ""
+msgstr "GRN रिकॉर्ड क्योंकि मिटाया नहीं जा सकता"
 
 #: ReverseGRN.php:148
 msgid "The following SQL to delete the GRN record was used"
-msgstr ""
+msgstr "निम्नलिखित एसक्यूएल GRN रिकॉर्ड किया गया नष्ट करने के लिए"
 
 #: ReverseGRN.php:155
 msgid "The GRN record could not be updated"
@@ -20151,11 +20236,14 @@ msgid ""
 "CRITICAL ERROR! NOTE DOWN THIS ERROR AND SEEK ASSISTANCE. The fixed asset "
 "cost addition could not be reversed:"
 msgstr ""
+"त्रुटि गंभीर! नीचे इस त्रुटि ध्यान दें और सहायता चाहते हैं. अचल संपत्ति लागत "
+"अलावा उलट नहीं किया जा सकता है:"
 
 #: ReverseGRN.php:183
 msgid ""
 "The following SQL was used to attempt the reduce the cost of the asset was:"
 msgstr ""
+"निम्नलिखित एसक्यूएल को संपत्ति की कीमत कम करने का प्रयास किया गया था:"
 
 #: ReverseGRN.php:191
 msgid "Could not determine if the item exists because"
@@ -20428,7 +20516,7 @@ msgstr "समय तालिका लोड नहीं कर सका"
 
 #: SalesAnalReptCols.php:425
 msgid "ToPeriod"
-msgstr ""
+msgstr "ToPeriod"
 
 #: SalesAnalReptCols.php:439
 msgid "Data to show"
@@ -21382,42 +21470,48 @@ msgid ""
 "There are no asset categories currently defined please use the link below to "
 "set them up"
 msgstr ""
+"कोई संपत्ति वर्तमान में उल्लिखित कृपया नीचे दिए गए लिंक का उपयोग करने के लिए "
+"उन्हें स्थापित श्रेणियां हैं"
 
 #: SelectAsset.php:37
 msgid "Define Asset Categories"
-msgstr ""
+msgstr "संपत्ति चैनल परिभाषित"
 
 #: SelectAsset.php:53 SelectAsset.php:55
 msgid "Any asset category"
-msgstr ""
+msgstr "किसी भी संपत्ति वर्ग"
 
 #: SelectAsset.php:67
 msgid "Enter partial description"
-msgstr ""
+msgstr "आंशिक विवरण दर्ज करें"
 
 #: SelectAsset.php:78 SelectAsset.php:80
 msgid "Any asset location"
-msgstr ""
+msgstr "किसी भी संपत्ति स्थान"
 
 #: SelectAsset.php:93
 msgid "Enter partial asset code"
-msgstr ""
+msgstr "आंशिक संपत्ति कोड दर्ज करें"
 
 #: SelectAsset.php:114
 msgid ""
 "Asset description keywords have been used in preference to the asset code "
 "extract entered"
 msgstr ""
+"संपत्ति विवरण खोजशब्दों संपत्ति कोड करने के लिए किया गया है वरीयता में "
+"इस्तेमाल किया निकालने में प्रवेश किया"
 
 #: SelectAsset.php:171
 msgid "No assets were returned by the SQL because"
-msgstr ""
+msgstr "कोई संपत्ति क्योंकि SQL से लौट रहे थे"
 
 #: SelectAsset.php:175
 msgid ""
 "No assets were returned by this search please re-enter alternative criteria "
 "to try again"
 msgstr ""
+"कोई संपत्ति इस खोज से लौट रहे थे कृपया फिर से वैकल्पिक मापदंड दर्ज करने के "
+"लिए फिर कोशिश"
 
 #: SelectCompletedOrder.php:9
 msgid "Search All Sales Orders"
@@ -21551,7 +21645,7 @@ msgstr "चयनित ग्राहकों के ग्राहक र�
 
 #: SelectCreditItems.php:204
 msgid "Select Customer For Credit Note"
-msgstr ""
+msgstr "क्रेडिट नोट के लिए चयन ग्राहक"
 
 #: SelectCreditItems.php:206
 msgid "Customer Selection"
@@ -22201,10 +22295,12 @@ msgid ""
 "No asset was selected to dispose of. No assets have been added to this "
 "customer order"
 msgstr ""
+"कोई संपत्ति के निपटान के लिए चुना गया था. कोई संपत्ति इस ग्राहक के क्रम में "
+"जोड़ा गया है"
 
 #: SelectOrderItems.php:1013
 msgid "Asset Disposals"
-msgstr ""
+msgstr "संपत्ति निपटान"
 
 #: SelectOrderItems.php:1120
 msgid ""
@@ -22283,7 +22379,7 @@ msgstr "आदेश आइटम के लिए खोजें"
 
 #: SelectOrderItems.php:1605
 msgid "Fixed Asset Disposal"
-msgstr ""
+msgstr "स्थायी संपत्ति निपटान"
 
 #: SelectOrderItems.php:1755
 msgid "Use this screen for the "
@@ -22296,18 +22392,20 @@ msgstr " उत्पादों के लिए आदेश दिया ज
 #: SelectOrderItems.php:1786
 msgid "Use this screen to select an asset to dispose of to this customer"
 msgstr ""
+"इस स्क्रीन का उपयोग करने के लिए एक संपत्ति को चुनने के लिए इस ग्राहक के "
+"निपटान के लिए"
 
 #: SelectOrderItems.php:1793
 msgid "Asset to Dispose Of"
-msgstr ""
+msgstr "संपत्ति के निपटान के लिए"
 
 #: SelectOrderItems.php:1796
 msgid "Select Asset To Dispose of From the List Below"
-msgstr ""
+msgstr "चयन एसेट की सूची नीचे से निपटाने के लिए"
 
 #: SelectOrderItems.php:1801
 msgid "Add Asset To Order"
-msgstr ""
+msgstr "संपत्ति जोड़ने के लिए आदेश"
 
 #: SelectOrderItems.php:1807
 msgid "Cancel Whole Order"
@@ -22467,7 +22565,7 @@ msgstr "खरीद इस मद से"
 
 #: SelectProduct.php:411
 msgid "default"
-msgstr ""
+msgstr "डिफ़ॉल्ट"
 
 #: SelectProduct.php:418 SelectProduct.php:450
 msgid "Add Inventory Items"
@@ -23943,7 +24041,7 @@ msgstr ""
 
 #: StockCategories.php:488
 msgid "Maximum Value"
-msgstr ""
+msgstr "अधिकतम मान"
 
 #: StockCategories.php:489
 msgid "Require in SO"
@@ -24217,7 +24315,7 @@ msgstr "भागों दूसरे स्थान पर भेजने �
 
 #: StockDispatch.php:38
 msgid "Could not retrieve location name from the database"
-msgstr ""
+msgstr "डेटाबेस से स्थान का नाम पुनः प्राप्त नहीं किया जा सका"
 
 #: StockDispatch.php:90 StockDispatch.php:101
 msgid "Stock Dispatch - Problem Report"
@@ -24449,7 +24547,7 @@ msgstr "यह सही करें या हटाने के मद"
 
 #: StockLocTransfer.php:55
 msgid "does not have enough stock available for transfer."
-msgstr ""
+msgstr "पर्याप्त हस्तांतरण के लिए उपलब्ध स्टॉक है नहीं करता है."
 
 #: StockLocTransfer.php:64
 msgid "You must enter at least 1 Stock Item to transfer"
@@ -25301,11 +25399,11 @@ msgstr "आइटम श्रेणी गुण"
 
 #: Stocks.php:984
 msgid "A number between"
-msgstr ""
+msgstr "एक संख्या के बीच"
 
 #: Stocks.php:984
 msgid "is expected"
-msgstr ""
+msgstr "उम्मीद है"
 
 #: Stocks.php:1018
 msgid "Insert New Item"
@@ -25773,13 +25871,15 @@ msgstr "क्रेडिट नोट में जोड़ें"
 
 #: SuppFixedAssetChgs.php:16
 msgid "Fixed Asset Charges or Credits"
-msgstr ""
+msgstr "फिक्स्ड आस्ति प्रभार या Credits"
 
 #: SuppFixedAssetChgs.php:27
 msgid ""
 "Fixed asset additions or credits are entered against supplier invoices or "
 "credit notes respectively"
 msgstr ""
+"स्थायी संपत्ति का जोड़ या क्रेडिट सप्लायर चालान या क्रेडिट नोट के खिलाफ "
+"क्रमश प्रवेश कर रहे हैं"
 
 #: SuppFixedAssetChgs.php:27 SuppShiptChgs.php:29
 msgid ""
@@ -25800,20 +25900,23 @@ msgid ""
 "The asset ID entered manually is not a valid fixed asset. If you do not know "
 "the asset reference, select it from the list"
 msgstr ""
+"संपत्ति आईडी दर्ज मैन्युअल रूप से एक वैध अचल संपत्ति नहीं है. यदि आप संपत्ति "
+"संदर्भ पता नहीं है, यह सूची से चयन"
 
 #: SuppFixedAssetChgs.php:49
 msgid ""
 "The amount entered is not numeric. This fixed asset cannot be added to the "
 "invoice"
 msgstr ""
+"प्रवेश राशि सांख्यिक नहीं है. यह तय परिसंपत्ति चालान जोड़ा नहीं जा सकता"
 
 #: SuppFixedAssetChgs.php:68
 msgid "Fixed Assets on Invoice"
-msgstr ""
+msgstr "चालान पर अचल संपत्ति"
 
 #: SuppFixedAssetChgs.php:70
 msgid "Fixed Asset credits on Credit Note"
-msgstr ""
+msgstr "क्रेडिट पर स्थायी संपत्ति क्रेडिट नोट"
 
 #: SuppFixedAssetChgs.php:108
 msgid ""
@@ -25821,14 +25924,17 @@ msgid ""
 "the asset from the list below. Only  assets with no cost will show in the "
 "list"
 msgstr ""
+"यदि आप जानते हैं कोड यह संपत्ति आईडी इनपुट बॉक्स में दर्ज करें, अन्यथा नीचे "
+"की सूची से संपत्ति का चयन करें. नहीं लागत के साथ ही संपत्ति सूची में दिखाई "
+"देगा"
 
 #: SuppFixedAssetChgs.php:112
 msgid "Asset Selection"
-msgstr ""
+msgstr "संपत्ति चयन"
 
 #: SuppFixedAssetChgs.php:140
 msgid "Enter Fixed Asset"
-msgstr ""
+msgstr "स्थायी संपत्ति दर्ज करें"
 
 #: SuppInvGRNs.php:14
 msgid "Enter Supplier Invoice Against Goods Received"
@@ -26295,12 +26401,16 @@ msgid ""
 "You should automatically be forwarded to the entry of supplier credit notes "
 "against contracts page"
 msgstr ""
+"आप स्वचालित रूप से ठेके के खिलाफ आपूर्तिकर्ता क्रेडिट नोटों की प्रविष्टि के "
+"लिए अग्रसारित किया जाना चाहिए पृष्ठ"
 
 #: SupplierCredit.php:255
 msgid ""
 "You should automatically be forwarded to the entry of invoices against fixed "
 "assets page"
 msgstr ""
+"आप स्वचालित रूप से अचल संपत्ति के खिलाफ चालान की प्रविष्टि के लिए अग्रसारित "
+"किया जाना चाहिए पृष्ठ"
 
 #: SupplierCredit.php:280
 msgid "Supplier Credit Note Reference"
@@ -26316,7 +26426,7 @@ msgstr "प्रारूप में"
 
 #: SupplierCredit.php:307
 msgid "Purchase Order Credits"
-msgstr ""
+msgstr "खरीद आदेश Credits"
 
 #: SupplierCredit.php:311
 msgid "Credited"
@@ -26332,7 +26442,7 @@ msgstr "माल का कुल मूल्य का श्रेय"
 
 #: SupplierCredit.php:339
 msgid "Shipment Credits"
-msgstr ""
+msgstr "लदान Credits"
 
 #: SupplierCredit.php:359
 msgid "Total Credited Against Shipments"
@@ -26340,15 +26450,15 @@ msgstr "कुल लदान के खिलाफ श्रेय"
 
 #: SupplierCredit.php:366
 msgid "Fixed Asset Credits"
-msgstr ""
+msgstr "Fixed Asset Credits"
 
 #: SupplierCredit.php:397 SupplierInvoice.php:371
 msgid "Contract Charges"
-msgstr ""
+msgstr "अनुबंध प्रभार"
 
 #: SupplierCredit.php:431 SupplierInvoice.php:405
 msgid "General Ledger Analysis"
-msgstr ""
+msgstr "सामान्य खाता बही विश्लेषण"
 
 #: SupplierCredit.php:478 SupplierCredit.php:481
 msgid "Credit Amount in Supplier Currency"
@@ -26484,13 +26594,14 @@ msgstr "लदान के लिए सामान्य खाता बह�
 
 #: SupplierCredit.php:735
 msgid "Asset Credit"
-msgstr ""
+msgstr "संपत्ति क्रडिट"
 
 #: SupplierCredit.php:737 SupplierInvoice.php:721
 msgid ""
 "The general ledger transaction for the asset addition could not be added "
 "because"
 msgstr ""
+"संपत्ति के लिए इसके अलावा सामान्य खाता बही लेनदेन क्योंकि जोड़ा नहीं जा सका"
 
 #: SupplierCredit.php:768 SupplierInvoice.php:751
 msgid "Contract charge against"
@@ -26621,11 +26732,15 @@ msgid ""
 "CRITICAL ERROR! NOTE DOWN THIS ERROR AND SEEK ASSISTANCE. The fixed asset "
 "cost was not able to be updated because:"
 msgstr ""
+"त्रुटि गंभीर! नीचे इस त्रुटि ध्यान दें और सहायता चाहते हैं. अचल संपत्ति लागत "
+"के लिए है क्योंकि अद्यतन किया जा करने में सक्षम नहीं था:"
 
 #: SupplierCredit.php:1197
 msgid ""
 "The following SQL was used to attempt the update of the fixed asset cost:"
 msgstr ""
+"निम्नलिखित एसक्यूएल को अचल संपत्ति की लागत का अद्यतन करने का प्रयास किया गया "
+"था:"
 
 #: SupplierCredit.php:1245 SupplierInvoice.php:1240
 msgid "The contract charge record for contract"
@@ -26641,10 +26756,13 @@ msgid ""
 "CRITICAL ERROR! NOTE DOWN THIS ERROR AND SEEK ASSISTANCE. The fixed asset "
 "cost  was not able to be updated because:"
 msgstr ""
+"त्रुटि गंभीर! नीचे इस त्रुटि ध्यान दें और सहायता चाहते हैं. अचल संपत्ति लागत "
+"के लिए है क्योंकि अद्यतन किया जा करने में सक्षम नहीं था:"
 
 #: SupplierCredit.php:1285 SupplierInvoice.php:1193
 msgid "The following SQL was used to attempt the update of the asset cost:"
 msgstr ""
+"निम्नलिखित एसक्यूएल को संपत्ति की लागत का अद्यतन करने का प्रयास किया गया था:"
 
 #: SupplierCredit.php:1291
 msgid "Supplier credit note number"
@@ -26764,6 +26882,8 @@ msgid ""
 "You should automatically be forwarded to the entry of invoice amounts "
 "against fixed assets page"
 msgstr ""
+"आप स्वचालित रूप से अचल संपत्ति के खिलाफ चालान मात्रा में प्रवेश के लिए "
+"अग्रसारित किया जाना चाहिए पृष्ठ"
 
 #: SupplierInvoice.php:249
 msgid "Supplier Invoice Reference"
@@ -26771,7 +26891,7 @@ msgstr "आपूर्तिकर्ता चालान संदर्भ"
 
 #: SupplierInvoice.php:278
 msgid "Purchase Order Charges"
-msgstr ""
+msgstr "खरीद आदेश प्रभार"
 
 #: SupplierInvoice.php:279
 msgid "Seq"
@@ -26783,11 +26903,11 @@ msgstr "में मूल्य"
 
 #: SupplierInvoice.php:310
 msgid "Shipment Charges"
-msgstr ""
+msgstr "लदान प्रभार"
 
 #: SupplierInvoice.php:339
 msgid "Fixed Asset Additions"
-msgstr ""
+msgstr "फिक्स्ड आस्ति परिवर्धन"
 
 #: SupplierInvoice.php:455
 msgid "Update Tax Calculation"
@@ -26811,20 +26931,24 @@ msgid ""
 "The invoice as entered cannot be processed because the total amount of the "
 "invoice is less than  0"
 msgstr ""
+"चालान के रूप में संसाधित नहीं किया जा सकता है में प्रवेश किया क्योंकि चालान "
+"की कुल राशि 0 से कम है"
 
 #: SupplierInvoice.php:558
 msgid "Invoices are expected to have a positive charge"
-msgstr ""
+msgstr "चालान के लिए एक सकारात्मक आरोप है की संभावना है"
 
 #: SupplierInvoice.php:562
 msgid ""
 "The invoice as entered will be processed but be warned the amount of the "
 "invoice is  zero!"
 msgstr ""
+"चालान के रूप में प्रवेश किया, लेकिन कार्रवाई की जाएगी चालान की राशि शून्य "
+"चेतावनी दी है!"
 
 #: SupplierInvoice.php:562
 msgid "Invoices are normally expected to have a positive charge"
-msgstr ""
+msgstr "चालान आम तौर पर एक सकारात्मक आरोप है की संभावना है"
 
 #: SupplierInvoice.php:565
 msgid ""
@@ -26908,7 +27032,7 @@ msgstr "लदान के खिलाफ आरोप"
 
 #: SupplierInvoice.php:719
 msgid "Asset Addition"
-msgstr ""
+msgstr "संपत्ति जुड़ाव"
 
 #: SupplierInvoice.php:1014
 msgid "The total posted to the debit accounts is"
@@ -26954,6 +27078,8 @@ msgid ""
 "CRITICAL ERROR! NOTE DOWN THIS ERROR AND SEEK ASSISTANCE. The fixed asset "
 "cost could not be updated because:"
 msgstr ""
+"त्रुटि गंभीर! नीचे इस त्रुटि ध्यान दें और सहायता चाहते हैं. अचल संपत्ति लागत "
+"क्योंकि अद्यतन नहीं किया जा सकता है:"
 
 #: SupplierInvoice.php:1292
 msgid "Supplier invoice number"
@@ -27595,6 +27721,8 @@ msgid ""
 "The shipment entered manually is not a valid shipment reference. If you do "
 "not know the shipment reference, select it from the list"
 msgstr ""
+"लदान में प्रवेश मैन्युअल रूप से एक वैध लदान संदर्भ नहीं है. यदि आप लदान "
+"संदर्भ पता नहीं है, यह सूची से चयन"
 
 #: SuppShiptChgs.php:51 SuppTransGLAnalysis.php:52
 msgid "The amount entered is not numeric"
@@ -27654,7 +27782,7 @@ msgstr "जीएल रेखा दर्ज करें"
 
 #: SuppTransGLAnalysis.php:36
 msgid "You must select a general ledger code from the list below"
-msgstr ""
+msgstr "आप नीचे दी गई सूची में से एक सामान्य खाता बही कोड का चयन करना होगा"
 
 #: SuppTransGLAnalysis.php:46
 msgid "The account code entered is not a valid code"
@@ -29520,21 +29648,23 @@ msgstr "माप की इकाई"
 
 #: UpgradeDatabase.php:5
 msgid "Upgrade webERP Database"
-msgstr ""
+msgstr "webERP डाटाबेस नवीनीकरण"
 
 #: UpgradeDatabase.php:10
 msgid ""
 "This script will run perform any modifications to the database required to "
 "allow the additional functionality in later scripts"
 msgstr ""
+"इस स्क्रिप्ट के लिए आवश्यक डेटाबेस में कोई भी संशोधन करने के लिए बाद में "
+"स्क्रिप्ट में अतिरिक्त कार्यक्षमता की अनुमति चलेंगे"
 
 #: UpgradeDatabase.php:15 UpgradeDatabase.php:36
 msgid "The webERP code is version"
-msgstr ""
+msgstr "WebERP कोड संस्करण है"
 
 #: UpgradeDatabase.php:15
 msgid "and the database version is not actually recorded at this version"
-msgstr ""
+msgstr "और डेटाबेस संस्करण वास्तव में इस संस्करण में नहीं दर्ज की गई है"
 
 #: UpgradeDatabase.php:16
 msgid "Select the version you are upgrading from:"
@@ -29594,11 +29724,11 @@ msgstr ""
 
 #: UpgradeDatabase.php:36
 msgid "and the database version is"
-msgstr ""
+msgstr "और डेटाबेस संस्करण है"
 
 #: UpgradeDatabase.php:40
 msgid "Perform Database Upgrade"
-msgstr ""
+msgstr "प्रदर्शन डाटाबेस नवीनीकरण"
 
 #: UpgradeDatabase.php:49
 msgid "Backup"
@@ -29636,7 +29766,7 @@ msgstr ""
 
 #: UpgradeDatabase.php:115
 msgid "Applying"
-msgstr ""
+msgstr "आवेदन"
 
 #: UpgradeDatabase.php:142 Z_Upgrade_3.10-3.11.php:59 Z_Upgrade3.10.php:29
 #: Z_Upgrade3.10.php:34 Z_Upgrade3.10.php:46 Z_Upgrade3.10.php:51
@@ -29667,7 +29797,7 @@ msgstr "प्रवेश पहले से ही किया जा चु
 
 #: UpgradeDatabase.php:157
 msgid "SQL syntax error. The SQL error message is"
-msgstr ""
+msgstr "SQL वाक्यविन्यास त्रुटि. SQL त्रुटि संदेश है"
 
 #: UpgradeDatabase.php:160 Z_Upgrade_3.10-3.11.php:79
 #: Z_Upgrade_3.11-4.00.php:79
@@ -29676,7 +29806,7 @@ msgstr "प्राथमिक कुंजी पहले से मौज�
 
 #: UpgradeDatabase.php:163
 msgid "Index already dropped previously"
-msgstr ""
+msgstr "अनुक्रमणिका पहले से ही पहले से गिरा"
 
 #: UpgradeDatabase.php:166 Z_Upgrade_3.10-3.11.php:82
 #: Z_Upgrade_3.11-4.00.php:82
@@ -29698,7 +29828,7 @@ msgstr "लैटिन पश्चिमी भाषाएँ"
 
 #: UserSettings.php:15
 msgid "Eastern European Russian Japanese Korean Hebrew Arabic Thai"
-msgstr ""
+msgstr "पूर्वी यूरोपीय रूसी जापानी कोरियाई अरबी हिब्रू थाई"
 
 #: UserSettings.php:16 WWW_Users.php:27
 msgid "Chinese"
@@ -30812,7 +30942,7 @@ msgstr "सुरक्षा भूमिका हटा दिया गय�
 
 #: WWW_Access.php:143
 msgid "Review Existing Roles"
-msgstr ""
+msgstr "समीक्षा मौजूदा भूमिकाओं"
 
 #: WWW_Access.php:155
 msgid "The selected role is no longer available."
@@ -32186,37 +32316,39 @@ msgstr "आयात के लिए फ़ाइल"
 
 #: Z_ImportFixedAssets.php:7
 msgid "Import Fixed Assets"
-msgstr ""
+msgstr "आयात फिक्स्ड आस्तियों"
 
 #: Z_ImportFixedAssets.php:49
 msgid "File contains"
-msgstr ""
+msgstr "फ़ाइल शामिल"
 
 #: Z_ImportFixedAssets.php:49
 msgid "columns, expected"
-msgstr ""
+msgstr "स्तंभ, उम्मीद"
 
 #: Z_ImportFixedAssets.php:49
 msgid "Study a downloaded template to see the format for the file"
-msgstr ""
+msgstr "एक डाउनलोड टेम्पलेट अध्ययन फाइल के लिए प्रारूप को देखने के लिए"
 
 #: Z_ImportFixedAssets.php:59
 msgid ""
 ". Download a template and ensuer that fields are in the same sequence as the "
 "template."
 msgstr ""
+". एक टेम्पलेट और ensuer कि क्षेत्र टेम्पलेट के रूप में उसी क्रम में हैं "
+"डाउनलोड करें."
 
 #: Z_ImportFixedAssets.php:59
 msgid "The selected file contains fields in the incorrect order ("
-msgstr ""
+msgstr "चयनित फ़ाइल गलत क्रम में फ़ील्ड्स हैं ("
 
 #: Z_ImportFixedAssets.php:77
 msgid "fields are required, but"
-msgstr ""
+msgstr "फ़ील्ड आवश्यक हैं, लेकिन"
 
 #: Z_ImportFixedAssets.php:77
 msgid "fields were received"
-msgstr ""
+msgstr "खेतों प्राप्त हुए थे"
 
 #: Z_ImportFixedAssets.php:125 Z_ImportFixedAssets.php:130
 #: Z_ImportFixedAssets.php:134 Z_ImportFixedAssets.php:139
@@ -32225,98 +32357,102 @@ msgstr ""
 #: Z_ImportFixedAssets.php:164 Z_ImportFixedAssets.php:170
 #: Z_ImportFixedAssets.php:175
 msgid "Row:"
-msgstr ""
+msgstr "पंक्ति:"
 
 #: Z_ImportFixedAssets.php:125
 msgid "Invalid Description:"
-msgstr ""
+msgstr "अवैध विवरण:"
 
 #: Z_ImportFixedAssets.php:129
 msgid "The depreciation rate is expected to be numeric"
-msgstr ""
+msgstr "मूल्यह्रास दर करने के लिए सांख्यिक होने की उम्मीद है"
 
 #: Z_ImportFixedAssets.php:130 Z_ImportFixedAssets.php:134
 msgid "Invalid Depreciation Rate:"
-msgstr ""
+msgstr "अवैध मूल्यह्रास दर:"
 
 #: Z_ImportFixedAssets.php:138
 msgid "The accumulated depreciation is expected to be numeric"
-msgstr ""
+msgstr "संचित मूल्यह्रास के लिए सांख्यिक होने की उम्मीद है"
 
 #: Z_ImportFixedAssets.php:139 Z_ImportFixedAssets.php:143
 msgid "Invalid Accumulated Depreciation:"
-msgstr ""
+msgstr "संचित मूल्यह्रास अवैध:"
 
 #: Z_ImportFixedAssets.php:142
 msgid ""
 "The accumulated depreciation is expected to be either zero or a positive "
 "number"
 msgstr ""
+"संचित मूल्यह्रास के लिए होने की उम्मीद है या को शून्य या एक सकारात्मक संख्या"
 
 #: Z_ImportFixedAssets.php:147
 msgid "The cost is expected to be numeric"
-msgstr ""
+msgstr "लागत के लिए सांख्यिक होने की उम्मीद है"
 
 #: Z_ImportFixedAssets.php:148 Z_ImportFixedAssets.php:152
 msgid "Invalid Cost:"
-msgstr ""
+msgstr "अवैध मूल्य:"
 
 #: Z_ImportFixedAssets.php:151
 msgid "The cost is expected to be a positive number"
-msgstr ""
+msgstr "लागत के लिए एक सकारात्मक संख्या होने की उम्मीद है"
 
 #: Z_ImportFixedAssets.php:156
 msgid ""
 "The depreciation type must be either \"SL\" - Straight Line or \"DV\" - "
 "Diminishing Value"
-msgstr ""
+msgstr "मूल्यह्रास प्रकार या तो किया जाना चाहिए \\"
 
 #: Z_ImportFixedAssets.php:157
 msgid "Invalid depreciation type:"
-msgstr ""
+msgstr "अवैध मूल्यह्रास के प्रकार:"
 
 #: Z_ImportFixedAssets.php:163
 msgid ""
 "The asset category code entered must be exist in the assetcategories table"
 msgstr ""
+"परिसंपत्ति वर्ग में प्रवेश कोड होना चाहिए assetcategories तालिका में मौजूद"
 
 #: Z_ImportFixedAssets.php:164
 msgid "Invalid asset category:"
-msgstr ""
+msgstr "अवैध संपत्ति श्रेणी:"
 
 #: Z_ImportFixedAssets.php:169
 msgid ""
 "The asset location code entered must be exist in the asset locations table"
 msgstr ""
+"संपत्ति स्थान में प्रवेश कोड होना चाहिए संपत्ति स्थानों तालिका में मौजूद"
 
 #: Z_ImportFixedAssets.php:170
 msgid "Invalid asset location code:"
-msgstr ""
+msgstr "अवैध संपत्ति स्थान कोड:"
 
 #: Z_ImportFixedAssets.php:174
 msgid "The date purchased must be entered in the format:"
-msgstr ""
+msgstr "प्रारूप में दर्ज होना चाहिए खरीदा दिनांक:"
 
 #: Z_ImportFixedAssets.php:175
 msgid "Invalid date format:"
-msgstr ""
+msgstr "अमान्य दिनांक स्वरूप:"
 
 #: Z_ImportFixedAssets.php:213
 msgid "The SQL that was used to add the asset and failed was"
-msgstr ""
+msgstr "SQL कि संपत्ति जोड़ने के लिए किया था और असफल था"
 
 #: Z_ImportFixedAssets.php:237 Z_ImportFixedAssets.php:258
 msgid "The transaction for the cost of the asset could not be added because"
-msgstr ""
+msgstr "संपत्ति की लागत के लिए लेन - देन क्योंकि जोड़ा नहीं जा सका"
 
 #: Z_ImportFixedAssets.php:238 Z_ImportFixedAssets.php:259
 msgid ""
 "The SQL that was used to add the fixedasset trans record that failed was"
 msgstr ""
+"SQL कि fixedasset ट्रांस रिकॉर्ड है कि विफल जोड़ने के लिए किया गया था"
 
 #: Z_ImportFixedAssets.php:263
 msgid "Inserted the new asset:"
-msgstr ""
+msgstr "नई संपत्ति डाला:"
 
 #: Z_ImportFixedAssets.php:271 Z_ImportStocks.php:274
 msgid "Failed on row "
@@ -32331,14 +32467,15 @@ msgid ""
 "has been completed. All assets in the file have been committed to the "
 "database."
 msgstr ""
+"पूरा हो गया है. फ़ाइल में सभी संपत्ति डेटाबेस के लिए प्रतिबद्ध किया गया है."
 
 #: Z_ImportFixedAssets.php:297
 msgid "Select Date to Upload B/Fwd Assets To:"
-msgstr ""
+msgstr "चयन / दिनांक अग्रेषित करने के लिए आस्तियों बी अपलोड करने के लिए:"
 
 #: Z_ImportFixedAssets.php:304
 msgid "Fixed Assets Upload file:"
-msgstr ""
+msgstr "फिक्स्ड आस्तियों फाईल अपलोड:"
 
 #: Z_ImportFixedAssets.php:305 Z_ImportStocks.php:300 Z_UploadForm.php:17
 msgid "Send File"
@@ -32519,7 +32656,7 @@ msgstr "आयात स्टॉक से आइटम. Csv"
 
 #: Z_index.php:27
 msgid "Import Fixed Assets from .csv file"
-msgstr ""
+msgstr "आयात से निश्चित csv फ़ाइल आस्तियों."
 
 #: Z_index.php:28
 msgid "Create new company template SQL file and submit to webERP"
@@ -33516,13 +33653,15 @@ msgstr "salesorders तालिका में confirmeddate जोड़न�
 
 #: Z_Upgrade_3.11-4.00.php:5
 msgid "Upgrade webERP 3.11 - 4.00"
-msgstr ""
+msgstr "3.11 webERP अपग्रेड - 4.00"
 
 #: Z_Upgrade_3.11-4.00.php:10
 msgid ""
 "This script will run perform any modifications to the database since v 3.11 "
 "required to allow the additional functionality in version 4.00 scripts"
 msgstr ""
+"इस स्क्रिप्ट के डेटाबेस के लिए 3.11 वी के संस्करण में 4.00 लिपियों अतिरिक्त "
+"कार्यक्षमता की अनुमति की आवश्यकता के बाद से कोई भी संशोधन करने चलेंगे"
 
 #: Z_UploadForm.php:8 includes/InputSerialItems.php:78
 msgid "File Upload"
@@ -33693,87 +33832,87 @@ msgstr ""
 
 #: includes/DefineLabelClass.php:23
 msgid "Rows per sheet"
-msgstr ""
+msgstr "प्रति पत्रक पंक्तियाँ"
 
 #: includes/DefineLabelClass.php:24
 msgid "Cols per sheet"
-msgstr ""
+msgstr "प्रति पत्रक कर्नल"
 
 #: includes/DefineLabelClass.php:25
 msgid "Sheet height"
-msgstr ""
+msgstr "पत्रक की ऊँचाई"
 
 #: includes/DefineLabelClass.php:26
 msgid "Sheet width"
-msgstr ""
+msgstr "पत्र चौड़ाई"
 
 #: includes/DefineLabelClass.php:27
 msgid "Label height"
-msgstr ""
+msgstr "लेबल ऊँचाई"
 
 #: includes/DefineLabelClass.php:28
 msgid "Label width"
-msgstr ""
+msgstr "लेबल चौड़ाई"
 
 #: includes/DefineLabelClass.php:29
 msgid "Top margin"
-msgstr ""
+msgstr "ऊपरी हाशिया"
 
 #: includes/DefineLabelClass.php:30
 msgid "Left margin"
-msgstr ""
+msgstr "बाएँ हाशिए"
 
 #: includes/DefineLabelClass.php:31
 msgid "Row height"
-msgstr ""
+msgstr "पंक्ति की ऊँचाई"
 
 #: includes/DefineLabelClass.php:32
 msgid "Column width"
-msgstr ""
+msgstr "स्तंभ चौड़ाई"
 
 #: includes/DefineLabelClass.php:38
 msgid "Vert. pos."
-msgstr ""
+msgstr "हरा रंग. स्थिति."
 
 #: includes/DefineLabelClass.php:39
 msgid "Horiz. pos."
-msgstr ""
+msgstr "_ आड़े. स्थिति."
 
 #: includes/DefineLabelClass.php:40
 msgid "Max text<br>length"
-msgstr ""
+msgstr "अधिकतम पाठ <br> लंबाई"
 
 #: includes/DefineLabelClass.php:41
 msgid "Font size"
-msgstr ""
+msgstr "फ़ॉन्ट का आकार"
 
 #: includes/DefineLabelClass.php:42
 msgid "Data to display"
-msgstr ""
+msgstr "डेटा प्रदर्शित करने के लिए"
 
 #: includes/DefineLabelClass.php:44
 msgid "Code item"
-msgstr ""
+msgstr "कोड मद"
 
 #: includes/DefineLabelClass.php:46
 msgid "Description remainder"
-msgstr ""
+msgstr "विवरण शेष"
 
 #: includes/DefineLabelClass.php:47
 msgid "Long description"
-msgstr ""
+msgstr "लंबा वर्णन"
 
 #: includes/DefineLabelClass.php:48
 msgid "Long description remainder"
-msgstr ""
+msgstr "लंबा वर्णन शेष"
 
 #: includes/DefineLabelClass.php:68
 msgid "Failed loading XML file"
-msgstr ""
+msgstr "लोड करने में असफ़ल XML फ़ाइल"
 
 #: includes/DefineLabelClass.php:73
 msgid "Report this problem"
-msgstr ""
+msgstr "रिपोर्ट इस समस्या"
 
 #: includes/DefineShiptClass.php:43
 msgid ""
@@ -33797,7 +33936,7 @@ msgstr ""
 
 #: includes/GetConfig.php:9
 msgid "Could not get the configuration parameters from the database because"
-msgstr ""
+msgstr "क्योंकि डेटाबेस से विन्यास पैरामीटर प्राप्त नहीं कर सका"
 
 #: includes/GetConfig.php:69
 msgid ""
@@ -34091,6 +34230,7 @@ msgstr "एसक्यूएल है कि विफल रही थी: "
 #: includes/UserLogin.php:44
 msgid "Could not retrieve user details on login because"
 msgstr ""
+"क्योंकि प्रवेश पर उपयोगकर्ता जानकारी को पुनः प्राप्त नहीं किया जा सका"
 
 #: includes/ConnectDB.inc:17
 msgid "The company name entered ("
@@ -34344,7 +34484,7 @@ msgstr "बिक्री जीएल कोड की वजह से ला
 
 #: includes/GetSalesTransGLCodes.inc:13
 msgid "SQL to get the cost of sales GL Code"
-msgstr ""
+msgstr "एसक्यूएल बिक्री जीएल संहिता की लागत प्राप्त करने के लिए"
 
 #: includes/GetSalesTransGLCodes.inc:114
 msgid ""
@@ -34513,7 +34653,7 @@ msgstr "ग्राहक चालान"
 #: includes/PDFCustTransListingPageHeader.inc:18
 #: includes/PDFStockTransListingPageHeader.inc:18
 msgid "Customer Credit Notes"
-msgstr ""
+msgstr "ग्राहक क्रेडिट नोट्स"
 
 #: includes/PDFCustTransListingPageHeader.inc:21
 msgid "Customer Payments"
@@ -34610,11 +34750,11 @@ msgstr "तिथि रिसी डी"
 
 #: includes/PDFGrnHeader.inc:46
 msgid "Qty in Suppliers UOM"
-msgstr ""
+msgstr "मात्रा में आपूर्तिकर्ता UOM"
 
 #: includes/PDFGrnHeader.inc:47
 msgid "Qty in Stock UOM"
-msgstr ""
+msgstr "स्टॉक में मात्रा UOM"
 
 #: includes/PDFInventoryPlanPageHeader.inc:20
 msgid "Inventory Planning for Categories Between"
@@ -34678,7 +34818,7 @@ msgstr "ग्राहक कॉपी"
 #: includes/PDFOrderPageHeader_generic.inc:19
 #: includes/PDFSalesOrder_generic.inc:20
 msgid "Office Copy"
-msgstr ""
+msgstr "कार्यालय कॉपी"
 
 #: includes/PDFOrderPageHeader_generic.inc:55
 #: includes/PDFPickingListHeader.inc:51 includes/PDFSalesOrder_generic.inc:57
@@ -35078,11 +35218,11 @@ msgstr "सुरक्षा अनुमतियाँ समस्या"
 
 #: includes/session.inc:320
 msgid "Error in form verificationm"
-msgstr ""
+msgstr "प्रपत्र verificationm में त्रुटि"
 
 #: includes/session.inc:322
 msgid "This form was not submitted with a correct ID"
-msgstr ""
+msgstr "यह फार्म एक सही पहचान पत्र के साथ प्रस्तुत नहीं किया गया"
 
 #: includes/SQL_CommonFunctions.inc:23
 msgid ""
@@ -36904,17 +37044,18 @@ msgstr ""
 
 #: api/api_xml-rpc.php:1833
 msgid "This function returns a list of stock category abbreviations."
-msgstr ""
+msgstr "इस समारोह में स्टॉक श्रेणी संक्षिप्ताक्षर की एक सूची देता है."
 
 #: api/api_xml-rpc.php:1838
 msgid "If successful, this function returns an array of stock category ids. "
-msgstr ""
+msgstr "यदि सफल, इस समारोह स्टॉक श्रेणी आईडी की एक सरणी देता है. "
 
 #: api/api_xml-rpc.php:1839
 msgid ""
 "Otherwise an array of error codes is returned and no stock categories are "
 "returned. "
 msgstr ""
+"अन्यथा त्रुटि कोड की एक सरणी लौटा है और कोई स्टॉक श्रेणियों लौट रहे हैं. "
 
 #: api/api_xml-rpc.php:1861
 msgid ""
@@ -37173,7 +37314,7 @@ msgstr "क्रय डेटा"
 #: api/api_xml-rpc.php:2398
 msgid ""
 "This function is used to modify purchasing data into the webERP database."
-msgstr ""
+msgstr "इस समारोह को webERP डेटाबेस में क्रय डेटा को संशोधित किया जाता है."
 
 #: api/api_xml-rpc.php:2434
 msgid ""
@@ -37470,3 +37611,16 @@ msgstr "वापसी का मूल्य"
 
 #~ msgid "Stock Details"
 #~ msgstr "स्टॉक विवरण"
+
+#~ msgid "You have database updates that are required."
+#~ msgstr "आप डेटाबेस अद्यतन है कि आवश्यक हैं."
+
+#~ msgid ""
+#~ "Please ensure that you have taken a backup of your current database before "
+#~ "continuing."
+#~ msgstr ""
+#~ "सुनिश्चित करें कि आप आगे बढ़ने से पहले अपने वर्तमान डेटाबेस के एक बैकअप ले "
+#~ "लिया है कृपया."
+
+#~ msgid "The primary key in"
+#~ msgstr "प्राथमिक कुंजी में"

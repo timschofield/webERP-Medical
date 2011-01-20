@@ -1,16 +1,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-01-04 22:15+1200\n"
-"PO-Revision-Date: 2010-07-25 08:57+0000\n"
+"PO-Revision-Date: 2011-01-20 00:21+0000\n"
 "Last-Translator: Tim Schofield <Unknown>\n"
 "Language-Team: Portugese (Portugal) <thiago.figueiredo@microskills.eu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-10 14:12+0000\n"
-"X-Generator: Launchpad (build 12161)\n"
+"X-Launchpad-Export-Date: 2011-01-20 14:44+0000\n"
+"X-Generator: Launchpad (build 12214)\n"
+"Language: \n"
 
 #: AccountGroups.php:9 index.php:1273
 msgid "Account Groups"
@@ -14235,7 +14236,7 @@ msgstr ""
 
 #: MRPPlannedPurchaseOrders.php:250
 msgid "Number of Purchase Orders: "
-msgstr ""
+msgstr "Número de pedidos de compra: "
 
 #: MRPPlannedPurchaseOrders.php:252 MRPPlannedWorkOrders.php:235
 msgid "Total Extended Cost:"
@@ -35292,7 +35293,7 @@ msgstr ""
 
 #: api/api_errorcodes.php:206
 msgid "Tax Group Id Not Setup"
-msgstr ""
+msgstr "Grupo Fiscal Não Id instalação"
 
 #: api/api_errorcodes.php:207
 msgid "Shipper Not Setup"

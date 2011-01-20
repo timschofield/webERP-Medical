@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-10 14:06+0000\n"
-"X-Generator: Launchpad (build 12161)\n"
+"X-Launchpad-Export-Date: 2011-01-20 14:43+0000\n"
+"X-Generator: Launchpad (build 12214)\n"
 
 #: AccountGroups.php:9 index.php:1273
 msgid "Account Groups"
@@ -35506,3 +35506,668 @@ msgstr "Maksājumu termiņi"
 #: api/api_xml-rpc.php:3027
 msgid "Return Value"
 msgstr "Rindas vērtība"
+
+#~ msgid "Notes for Customer: <b>"
+#~ msgstr "Piezīme par klientu:"
+
+#~ msgid "Notes for Customer Type: <b>"
+#~ msgstr "Klienta pārstāvis"
+
+#~ msgid "Annual Depreciation Percentage"
+#~ msgstr "Gada amortizācijs likme"
+
+#~ msgid "This page can only be opened if a purchase order has been selected"
+#~ msgstr "&#352;o lapu var atvērt, ja ir izvēlēts iegādes rīkojums"
+
+#~ msgid "Please select a purchase order first"
+#~ msgstr "Lūdzu izvēlaties iegādes rīkojumu vispirms"
+
+#~ msgid "New Order"
+#~ msgstr "Rīkojums"
+
+#~ msgid "You do not have permission to cancel this purchase order"
+#~ msgstr "Ievadīt piegādi pret iepirkuma rīkojumu"
+
+#~ msgid ""
+#~ "This order cannot be cancelled because some of it has already been received"
+#~ msgstr ""
+#~ "Šo iepirkuma rīkojumu nevar atcelt, jo daļa no pasūtijuma jau ir saņemta"
+
+#~ msgid "The creation of the new order has been cancelled"
+#~ msgstr "noliktavas uzstādījums tika labots"
+
+#~ msgid "Please Consult your system administrator for more information"
+#~ msgstr "jautājiet sistēmas administrātoram"
+
+#~ msgid "for the item"
+#~ msgstr "precei"
+
+#~ msgid "Enter Credit Against Goods Recd"
+#~ msgstr "Grāmatot kredītu pret sņemtām precēm"
+
+#~ msgid "Enter General Ledger Analysis"
+#~ msgstr "Pret virsgrāmatas kontu"
+
+#~ msgid "Enter Credit Against Shipment"
+#~ msgstr "Grāmatot kredītu pret piegādi"
+
+#~ msgid "Enter Against Goods Received"
+#~ msgstr "Ievadīt pret saņemtām precēm"
+
+#~ msgid "Loc"
+#~ msgstr "Noliktava"
+
+#~ msgid "Could not add the chart details for the new account"
+#~ msgstr "Nevar pievienot konta nosaukumu jaunajam kontam"
+
+#~ msgid "Enter another adjustment"
+#~ msgstr "Ievadiet nākamo labojumu"
+
+#~ msgid "Job"
+#~ msgstr "Darbs"
+
+#~ msgid "Fixed Assets Category Maintenance"
+#~ msgstr "Pardo&#353;anas kategorijas"
+
+#~ msgid "The Inventory Category code must be five characters or less long"
+#~ msgstr "Preču kategorijas kodam maksiālais garums ir se&#353;as rakstzīmes"
+
+#~ msgid ""
+#~ "The Fixed Asset category description must be twenty characters or less long"
+#~ msgstr ""
+#~ "Pārdo&#353;anas kategorijas apraksts nevar būt garāks par divdesmit "
+#~ "rakstzīmēm"
+
+#~ msgid "Could not update the fixed assets category"
+#~ msgstr "Nevar labot preču kategoriju"
+
+#~ msgid "Updated the fixed assets category record for"
+#~ msgstr "Labot preču kategorijas rekvizītus"
+
+#~ msgid "Could not insert the new fixed assets category"
+#~ msgstr "Nevar labot preču kategoriju"
+
+#~ msgid "The fixed assets category"
+#~ msgstr "Pārdo&#353;anas kategorija"
+
+#~ msgid "Sub category Code"
+#~ msgstr "Subkategorija"
+
+#~ msgid "Sub category Name"
+#~ msgstr "Kategorijas nosaukums"
+
+#~ msgid "Sub Category Code"
+#~ msgstr "Subkategorija"
+
+#~ msgid "Sub Category Name"
+#~ msgstr "Kategorijas nosaukums"
+
+#~ msgid "Enable Warehouse Management"
+#~ msgstr "Atļaut noliktavas uzskaiti"
+
+#~ msgid "UTF-8"
+#~ msgstr "UTF-8"
+
+#~ msgid "Print MRP Shortages Error"
+#~ msgstr "Drukāt Peļņas un Zaudējuma aprēķina kļūdas"
+
+#~ msgid "There were no stock transfer details to print"
+#~ msgstr "Nav pārskata ko drukāt"
+
+#~ msgid "There were no items below print out for the location specified"
+#~ msgstr "Izvēlētajos nosacījumos nav grāmatojumi"
+
+#~ msgid "Show Suppliers"
+#~ msgstr "Rādīt piegādātāju"
+
+#~ msgid "Select Product"
+#~ msgstr "Rādīt produktu"
+
+#~ msgid "Comma Separated Values (CSV) Search Result"
+#~ msgstr "CSV meklē&#353;anas rezultāti"
+
+#~ msgid ""
+#~ "CSV data can be copied and used to import data into software such as a "
+#~ "spreadsheet."
+#~ msgstr "CSV datus var kopēt, lai tos eksportētu - piemēram uz Exceli."
+
+#~ msgid "Credit Amount"
+#~ msgstr "Kredīta summa"
+
+#~ msgid "iso-8859-1"
+#~ msgstr "UTF-8"
+
+#~ msgid "The report name has been updated!"
+#~ msgstr "The shipping charge has been updated"
+
+#~ msgid "Either Report or Form type needs to be selected!"
+#~ msgstr "Lūdzu izvēlaties labojumu veidu"
+
+#~ msgid "Enter a name for this form."
+#~ msgstr "Ievadiet kolonnas atskaitei"
+
+#~ msgid "Enter a name for this report."
+#~ msgstr "Ievadiet kolonnas atskaitei"
+
+#~ msgid "Select a default report to import."
+#~ msgstr "Izvēlieties pārdo&#353;anas rikojumu, lai par to nosūtītu rēķinu"
+
+#~ msgid "Custom"
+#~ msgstr "Klients"
+
+#~ msgid "Filter"
+#~ msgstr "Faila ceļ&#353;"
+
+#~ msgid "Form"
+#~ msgstr "No"
+
+#~ msgid "Forms"
+#~ msgstr "No"
+
+#~ msgid "Font"
+#~ msgstr "uz"
+
+#~ msgid "Fourth"
+#~ msgstr "Četri mēne&#353;i"
+
+#~ msgid "Inactive"
+#~ msgstr "ir negatīvs"
+
+#~ msgid "Move"
+#~ msgstr "Dzēst"
+
+#~ msgid "Ordinate"
+#~ msgstr "Rīkojuma datums"
+
+#~ msgid "Range"
+#~ msgstr "Vadītājs"
+
+#~ msgid "Reports"
+#~ msgstr "Atskaite"
+
+#~ msgid "Right"
+#~ msgstr "Svars"
+
+#~ msgid "Second"
+#~ msgstr "SÅ«tÄ«t"
+
+#~ msgid "Select a table..."
+#~ msgstr "Izvēlēties preci"
+
+#~ msgid "Sixth"
+#~ msgstr "Sestais"
+
+#~ msgid "Standard Color"
+#~ msgstr "pēc standarta izmaksām"
+
+#~ msgid "Third"
+#~ msgstr "Šis"
+
+#~ msgid "Top"
+#~ msgstr "Līdz"
+
+#~ msgid "Truncate Long Descriptions"
+#~ msgstr "Sadaļas apraksts"
+
+#~ msgid "Report/Form: "
+#~ msgstr "Atskaites Nr "
+
+#~ msgid "Report and Form Builder - "
+#~ msgstr "Atskai&#353;u izveido&#353;ana "
+
+#~ msgid "Menu"
+#~ msgstr "Galvenā izvēlne"
+
+#~ msgid "Step 2"
+#~ msgstr "Solis 2"
+
+#~ msgid "Step 3"
+#~ msgstr "Solis 3"
+
+#~ msgid "Step 4"
+#~ msgstr "Solis 4"
+
+#~ msgid "Step 5"
+#~ msgstr "Solis 5"
+
+#~ msgid "Step 6"
+#~ msgstr "Solis 6"
+
+#~ msgid "Reports Menu"
+#~ msgstr "Atskai&#353;u izmērs"
+
+#~ msgid "Criteria Setup"
+#~ msgstr "kritēriju iestatījumi"
+
+#~ msgid "Save Report"
+#~ msgstr "PVN atskaites"
+
+#~ msgid "Report Page Setup"
+#~ msgstr "Atskaites lapas izmērs"
+
+#~ msgid "Go Back"
+#~ msgstr "Iet atpakaļ"
+
+#~ msgid "Copy To My Reports"
+#~ msgstr "Atskaitē nav ko parādīt"
+
+#~ msgid "Delete Report"
+#~ msgstr "Detalizēta atskaite"
+
+#~ msgid "Export CSV"
+#~ msgstr "Eksportēt"
+
+#~ msgid "Export PDF"
+#~ msgstr "Eksportēt"
+
+#~ msgid "Finish"
+#~ msgstr "Beigu datums"
+
+#~ msgid "Field Setup"
+#~ msgstr "Shipping-Method Name"
+
+#~ msgid "Import"
+#~ msgstr "Eksportēt"
+
+#~ msgid "Page Setup"
+#~ msgstr "Iestatījumi"
+
+#~ msgid "Replace"
+#~ msgstr "Aizvietot"
+
+#~ msgid "Report Filters: "
+#~ msgstr "Atskaites nosaukums "
+
+#~ msgid "Grouped by:"
+#~ msgstr "Grupa"
+
+#~ msgid "Sorted by:"
+#~ msgstr "Šķirot pēc"
+
+#~ msgid "Date Range:"
+#~ msgstr "Bankas valutācijas datums"
+
+#~ msgid "Filters:"
+#~ msgstr "Faila ceļ&#353;"
+
+#~ msgid "Report Date Information"
+#~ msgstr "Saglabāt"
+
+#~ msgid "Default Reports"
+#~ msgstr "Detalizēta atskaite"
+
+#~ msgid "End Position (mm)"
+#~ msgstr "Pozīcija"
+
+#~ msgid "Enter a New Field"
+#~ msgstr "Ievadīt jaunu speciālo rīkojumu"
+
+#~ msgid "Field List"
+#~ msgstr "Cenu liste"
+
+#~ msgid "Fill"
+#~ msgstr "Faila ceļ&#353;"
+
+#~ msgid "Form Selection"
+#~ msgstr "Klienta izvēle"
+
+#~ msgid "Grouping List"
+#~ msgstr "Nodokļu grupē&#353;ana"
+
+#~ msgid "Current Image"
+#~ msgstr "Teko&#353;ais"
+
+#~ msgid "Image Selection"
+#~ msgstr "Klienta izvēle"
+
+#~ msgid "Select Stored Image"
+#~ msgstr "Izvēlēties rīkojuma preci"
+
+#~ msgid "My Reports"
+#~ msgstr "PVN atskaites"
+
+#~ msgid "No Border"
+#~ msgstr "rīkojumam"
+
+#~ msgid "No Fill"
+#~ msgstr "vai visus"
+
+#~ msgid "Name to Display"
+#~ msgstr "Parādīt"
+
+#~ msgid "Report Filter Description"
+#~ msgstr "Preces apraksts"
+
+#~ msgid "Report Title 1"
+#~ msgstr "Atskaites nosaukums"
+
+#~ msgid "Report Title 2"
+#~ msgstr "Atskaites nosaukums"
+
+#~ msgid "Report Data"
+#~ msgstr "Atskaite izdzēsta"
+
+#~ msgid "Report Import"
+#~ msgstr "Atskaites Nr"
+
+#~ msgid "Sorting Information"
+#~ msgstr "Ievadīt informÄ�ciju"
+
+#~ msgid "Text Attributes"
+#~ msgstr "Nodokļu iestāde"
+
+#~ msgid "Text to Display"
+#~ msgstr "Parādīt"
+
+#~ msgid "Text Processing"
+#~ msgstr "Aptrāde apstādināta"
+
+#~ msgid "Report Totals"
+#~ msgstr "Atskaites nosaukums"
+
+#~ msgid "Financial Reports"
+#~ msgstr "Iepriek&#353;ejais finan&#353;u gads"
+
+#~ msgid "Labels - Customer"
+#~ msgstr "Izvēlēties klientu"
+
+#~ msgid "Data Line"
+#~ msgstr "Labor rindu"
+
+#~ msgid "Data Table"
+#~ msgstr "Tabula"
+
+#~ msgid "Data Total"
+#~ msgstr "Kopā"
+
+#~ msgid "Rectangle"
+#~ msgstr "Darbs ar klientiem"
+
+#~ msgid "Line"
+#~ msgstr "IR Rinda"
+
+#~ msgid "Page Number"
+#~ msgstr "Telefons"
+
+#~ msgid "Uppercase"
+#~ msgstr "jo"
+
+#~ msgid "Lowercase"
+#~ msgstr "jo"
+
+#~ msgid "Negate"
+#~ msgstr "Izveidot"
+
+#~ msgid "Round (2 decimal)"
+#~ msgstr "noapaļot (2 vienības aiz komata)"
+
+#~ msgid "Single Space"
+#~ msgstr "Viens tuk&#353;ums"
+
+#~ msgid "Double Space"
+#~ msgstr "Līdz datumam"
+
+#~ msgid "Comma-Space"
+#~ msgstr "kommats tuk&#353;ums"
+
+#~ msgid "Semicolon-space"
+#~ msgstr "Semikols tuk&#353;ums"
+
+#~ msgid "Orientation:"
+#~ msgstr "Drukāt piedāvājumu"
+
+#~ msgid "mm"
+#~ msgstr "mm"
+
+#~ msgid "A5"
+#~ msgstr "A5"
+
+#~ msgid "Courier"
+#~ msgstr "Courier"
+
+#~ msgid "Helvetica"
+#~ msgstr "Helvetica"
+
+#~ msgid "1"
+#~ msgstr "1"
+
+#~ msgid "2"
+#~ msgstr "2"
+
+#~ msgid "5"
+#~ msgstr "5"
+
+#~ msgid "6"
+#~ msgstr "6"
+
+#~ msgid "7"
+#~ msgstr "7"
+
+#~ msgid "8"
+#~ msgstr "8"
+
+#~ msgid "9"
+#~ msgstr "9"
+
+#~ msgid "10"
+#~ msgstr "10"
+
+#~ msgid "12"
+#~ msgstr "12"
+
+#~ msgid "14"
+#~ msgstr "14"
+
+#~ msgid "16"
+#~ msgstr "16"
+
+#~ msgid "18"
+#~ msgstr "18"
+
+#~ msgid "20"
+#~ msgstr "20"
+
+#~ msgid "24"
+#~ msgstr "24"
+
+#~ msgid "28"
+#~ msgstr "28"
+
+#~ msgid "32"
+#~ msgstr "32"
+
+#~ msgid "36"
+#~ msgstr "36"
+
+#~ msgid "40"
+#~ msgstr "40"
+
+#~ msgid "50"
+#~ msgstr "50"
+
+#~ msgid "Red"
+#~ msgstr "Reference"
+
+#~ msgid "Orange"
+#~ msgstr "Vadītājs"
+
+#~ msgid "Yellow"
+#~ msgstr "Atļaut"
+
+#~ msgid "Green"
+#~ msgstr "Zaļ&#353;"
+
+#~ msgid "White"
+#~ msgstr "Prece"
+
+#~ msgid "Today"
+#~ msgstr "datumam"
+
+#~ msgid "This Week"
+#~ msgstr "&#352;ī piegāde"
+
+#~ msgid "This Week To Date"
+#~ msgstr "&#352;ī nedēļa līdz datumam"
+
+#~ msgid "This Month"
+#~ msgstr "Trīs mēne&#353;i"
+
+#~ msgid "This Month To Date"
+#~ msgstr "&#352;īs mēnesis līdz datumam"
+
+#~ msgid "This Quarter"
+#~ msgstr "Reizi ceturksnī"
+
+#~ msgid "This Quarter To Date"
+#~ msgstr "Piedāvājuma datums"
+
+#~ msgid "This Year"
+#~ msgstr "Iepriek&#353;ējais gads"
+
+#~ msgid "This Year To Date"
+#~ msgstr "&#352;is gads līdz datumam"
+
+#~ msgid "The sql that was used to retrieve the information was"
+#~ msgstr "Iegūstot bankas kontu lietots SQL"
+
+#~ msgid "Show Balance Sheet"
+#~ msgstr "Parādīt bilanci"
+
+#~ msgid "Purchase order"
+#~ msgstr "Iepirkuma rīkojums"
+
+#~ msgid "order number"
+#~ msgstr "rīkojuma numurs"
+
+#~ msgid "Disp. Note"
+#~ msgstr "Pavadzīme"
+
+#~ msgid "Order Status Reports (Print)"
+#~ msgstr "Pasūtījumu statusu atskaite (PDF)"
+
+#~ msgid "Order for"
+#~ msgstr "Rīkojums par"
+
+#~ msgid "but after"
+#~ msgstr "pēc"
+
+#~ msgid "Back to Sales Orders"
+#~ msgstr "Atpakaļ uz pārdo&#353;anas rīkojumu"
+
+#~ msgid "Date Of Dispatch"
+#~ msgstr "Izsnieg&#353;anas datums"
+
+#~ msgid "Could not update vtiger"
+#~ msgstr "Nevar labot vtiger"
+
+#~ msgid "could not be added"
+#~ msgstr "nevar pievienot"
+
+#~ msgid "could not be added\t"
+#~ msgstr "nevar pievienot\t"
+
+#~ msgid "Preview "
+#~ msgstr "Parādīt "
+
+#~ msgid "Text in the"
+#~ msgstr "satur"
+
+#~ msgid "Box"
+#~ msgstr "Kaste"
+
+#~ msgid "You have entered the word"
+#~ msgstr "Jūs esat ievadīju&#353;i vārdu"
+
+#~ msgid "in the street address"
+#~ msgstr "piegādes adresē"
+
+#~ msgid "Items cannot be delivered to"
+#~ msgstr "Preci nevar piegādāt uz"
+
+#~ msgid "box"
+#~ msgstr "kaste"
+
+#~ msgid "addresses"
+#~ msgstr "adresi"
+
+#~ msgid "Creditor Balances At A Prior Month End"
+#~ msgstr "Kreditoru atlikumi iepriek&#353;ējā mēne&#353;a beigās"
+
+#~ msgid "Bank Payments Matching"
+#~ msgstr "Izejo&#353;o maksājumu saskaņo&#353;ana"
+
+#~ msgid "Enter a Supplier Payment"
+#~ msgstr "Ievadīt grāmatojumu pret piegādātāju"
+
+#~ msgid "Note: To enter a payment FROM "
+#~ msgstr "Piezīme: Lai ievadītu maksājumu no "
+
+#~ msgid " use a negative Payment amount."
+#~ msgstr " Lietot negatīvu maksājumu summu"
+
+#~ msgid "select GL Account"
+#~ msgstr "Izvēlēties virsgrāmatas kontu"
+
+#~ msgid "Receive Into"
+#~ msgstr "Saņemts"
+
+#~ msgid "Lookup Address"
+#~ msgstr "Iegūt adresi"
+
+#~ msgid "Originally Ordered"
+#~ msgstr "Sākotnēji pasūtījis"
+
+#~ msgid "Change supplier"
+#~ msgstr "Mainīt piegādātāju"
+
+#~ msgid "Print Order"
+#~ msgstr "DrukÄ�t iepirkuma rÄ«kojumu"
+
+#~ msgid "Re-Print Order"
+#~ msgstr "AtkÄ�rtoti drukÄ�t iepirkuma rÄ«kojumu"
+
+#~ msgid "Enter A New Purchase Order"
+#~ msgstr "IevadÄ«t jaunu iepirkuma rÄ«kojumu"
+
+#~ msgid "Select An Outstanding Purchase Order"
+#~ msgstr "IzvÄ�lÄ�ties neapstrÄ�dÄ�tos iepirkumu rÄ«kojumus"
+
+#~ msgid "the system will not allow the same item on the order more than once"
+#~ msgstr "sistÄ�ma neÄ¼auj vienu preci atkÄ�rtot divas reizes"
+
+#~ msgid "The stock details for"
+#~ msgstr "Preces apraksts par"
+
+#~ msgid "Either the part code"
+#~ msgstr "Ievadiet daÄ¼Ä�ju kodu"
+
+#~ msgid "Print Statments"
+#~ msgstr "Drukāt pārskatu"
+
+#~ msgid "No Price Set"
+#~ msgstr "Cena nav noteikta"
+
+#~ msgid "demo"
+#~ msgstr "demo"
+
+#~ msgid "No postings are allowed before"
+#~ msgstr "Ieraksti nav atļauti pirms datuma"
+
+#~ msgid ""
+#~ "This transaction will be posted in the period following as all previous "
+#~ "periods are closed"
+#~ msgstr ""
+#~ "Šis grāmatojums tiks ievadīts nāko&#353;ajā periodā, jo iepriek&#353;ējais "
+#~ "perids jau ir noslēgts"
+
+#~ msgid "An error occurred in getting the first period number in the database"
+#~ msgstr "Kļuda datubāzē nevar iegut pirmo perioda numuru"
+
+#~ msgid "INVOICE"
+#~ msgstr "RĒ&Auml;&para;INS"
+
+#~ msgid "Lines of the address  must not contain illegal characters"
+#~ msgstr "Lines of the address must not contain illegal characters"
+
+#~ msgid "Freight Charge"
+#~ msgstr "Shipping Charge"
