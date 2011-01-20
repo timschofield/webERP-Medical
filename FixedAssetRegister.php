@@ -304,11 +304,12 @@ function PDFPageHeader (){
 				$Page_Height,
 				$Page_Width,
 				$Top_Margin,
+				$Bottom_Margin,
 				$FontSize,
 				$Left_Margin,
 				$Right_Margin,
-				$line_height;
-				$AssetDescription;
+				$line_height,
+				$AssetDescription,
 				$AssetCategory;
 
 	if ($PageNumber>1){
