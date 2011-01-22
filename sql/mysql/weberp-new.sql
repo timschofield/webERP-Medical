@@ -3019,7 +3019,7 @@ CREATE TABLE `securitytokens` (
 
 LOCK TABLES `securitytokens` WRITE;
 /*!40000 ALTER TABLE `securitytokens` DISABLE KEYS */;
-INSERT INTO `securitytokens` VALUES (1,'Order Entry/Inquiries customer access only'),(2,'Basic Reports and Inquiries with selection options'),(3,'Credit notes and AR management'),(4,'Purchasing data/PO Entry/Reorder Levels'),(5,'Accounts Payable'),(6,'Prices security'),(7,'Bank Reconciliations'),(8,'General ledger reports/inquiries'),(9,'Supplier tendering'),(10,'General Ledger Maintenance, stock valuation & Configuration'),(11,'Inventory Management and Pricing'),(12,'Prices Security'),(13,'Unknown'),(14,'Unknown'),(15,'User Management and System Administration');
+INSERT INTO `securitytokens` VALUES (1,'Order Entry/Inquiries customer access only'),(2,'Basic Reports and Inquiries with selection options'),(3,'Credit notes and AR management'),(4,'Purchasing data/PO Entry/Reorder Levels'),(5,'Accounts Payable'),(6,'Petty Cash'),(7,'Bank Reconciliations'),(8,'General ledger reports/inquiries'),(9,'Supplier tendering'),(10,'General Ledger Maintenance, stock valuation & Configuration'),(11,'Inventory Management and Pricing'),(12,'Prices Security'),(13,'Unknown'),(14,'Unknown'),(15,'User Management and System Administration');
 /*!40000 ALTER TABLE `securitytokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
