@@ -801,16 +801,11 @@ INSERT INTO `scripts` (`script`, `pagesecurity`, `description`) VALUES
 ('Z_UploadResult.php', 15, 'Utility to upload a file to a remote server');
 
 INSERT INTO config (confname, confvalue) VALUES ('VersionNumber', '3.12.0');
-UPDATE config SET confvalue='3.12.1' WHERE confname='VersionNumber';
+UPDATE config SET confvalue='4.0' WHERE confname='VersionNumber';
 
 INSERT INTO `scripts` (`script`, `pagesecurity`, `description`) VALUES
 ('FormMaker.php', 1, 'Allows running user defined Forms'),
 ('ReportMaker.php', 1, 'Produces reports from the report writer templates created'),
 ('ReportCreator.php', 13, 'Report Writer and Form Creator script that creates templates for user defined reports and forms');
 UPDATE config SET confvalue='3.12.2' WHERE confname='VersionNumber';
-ALTER TABLE `purchorderdetails` CHANGE `nw` `netweight` VARCHAR( 50 )  DEFAULT '';
-ALTER TABLE `purchorderdetails` CHANGE `gw` `kgs` VARCHAR( 50 )  DEFAULT '';
-ALTER TABLE `purchorderdetails` ADD `conversionfactor` DOUBLE NOT NULL DEFAULT '1';
-UPDATE config SET confvalue='3.12.3' WHERE confname='VersionNumber';
-ALTER TABLE `purchorderdetails` CHANGE `uom` `suppliersunit` VARCHAR( 50 )
-UPDATE config SET confvalue='3.12.31' WHERE confname='VersionNumber';
+UPDATE prices SET enddate = '2030-01-01' WHERE enddate = '0000-00-00';
