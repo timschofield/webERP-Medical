@@ -1624,6 +1624,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 										   			<th>' . _('Available') . '</th>
 										   			<th>' . _('Quantity') . '</th></tr>';
 			echo $TableHeader;
+			$ImageSource = _('No Image');
 
 			$k=0; //row colour counter
 
@@ -1663,7 +1664,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				// Find the quantity on purchase orders
 				$sql = "SELECT SUM(purchorderdetails.quantityord-purchorderdetails.quantityrecd) AS dem
 							 FROM purchorderdetails INNER JOIN purchorders
-							 WHERE purchorderdetails.completed=0 
+							 WHERE purchorderdetails.completed=0
 							 AND purchorders.status<>'Cancelled'
 							 AND purchorders.status<>'Rejected'
 							AND purchorderdetails.itemcode='" . $myrow['stockid'] . "'";
