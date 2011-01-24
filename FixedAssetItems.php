@@ -442,7 +442,7 @@ if (isset($_POST['LongDescription'])) {
 echo '<tr><td>' . _('Asset Description') . ' (' . _('long') . '):</td><td><textarea ' . (in_array('LongDescription',$Errors) ?  'class="texterror"' : '' ) .'  name="LongDescription" cols=40 rows=4>' . stripslashes($LongDescription) . '</textarea></td></tr>'."\n";
 
 if (!isset($New) ) { //ie not new at all!
-	
+
 	echo '<tr><td>'. _('Image File (.jpg)') . ':</td><td><input type="file" id="ItemPicture" name="ItemPicture"></td>';
 
 	if (function_exists('imagecreatefromjpg')){
@@ -543,7 +543,14 @@ if (isset($AssetRow)) {
 	echo '<tr><td>' . _('Accumulated Depreciation') . ':</td><td class="number">0.00</td></tr>';
 	echo '<tr><td>' . _('Net Book Value') . ':</td><td class="number">0.00</td></tr>';
 }
-$result = DB_query("SELECT periods.lastdate_in_period, max(fixedassettrans.periodno) FROM fixedassettrans INNER JOIN periods ON fixedassettrans.periodno=periods.periodno WHERE transtype=44 GROUP BY periods.lastdate_in_period",$db);
+$result = DB_query("SELECT periods.lastdate_in_period,
+												max(fixedassettrans.periodno)
+									FROM fixedassettrans INNER JOIN periods
+									ON fixedassettrans.periodno=periods.periodno
+									WHERE transtype=44
+									GROUP BY periods.lastdate_in_period
+									ORDER BY periods.lastdate_in_period DESC",$db);
+
 $LastDepnRun = DB_fetch_row($result);
 if(DB_num_rows($result)==0){
 	$LastRunDate = _('Not Yet Run');
