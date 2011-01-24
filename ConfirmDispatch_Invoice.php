@@ -813,7 +813,7 @@ DB_Txn_Begin($db);
 				} else {
 					$AssetNumber =   intval(substr($OrderLine->StockID,6,strlen($OrderLine->StockID)-$HyphenOccursAt-1));
 				}
-				prnMsg (_('The asset number beind disposed of is:') . ' ' . $AssetNumber, 'info');
+				prnMsg (_('The asset number being disposed of is:') . ' ' . $AssetNumber, 'info');
 			} else {
 				$IsAsset = false;
 				$AssetNumber = 0;
