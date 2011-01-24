@@ -10,6 +10,9 @@
 define ('LIKE','LIKE');
 
 global $db;	// Make sure it IS global, regardless of our context
+if (!isset($mysqlport)){
+	$mysqlport = 3306;
+}
 $db = mysqli_connect($host , $dbuser, $dbpassword,$_SESSION['DatabaseName'], $mysqlport);
 
 //printf("tried making mysql-i Connection.\n");
