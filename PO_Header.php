@@ -90,7 +90,7 @@ if (isset($_POST['UpdateStatus']) AND $_POST['UpdateStatus']!='') {
 
 		if ($_POST['Status'] == 'Authorised') {
 			if ($AuthorityLevel > $OrderTotal) {
-				$_SESSION['PO'.$identifier]->StatusComments = date($_SESSION['DefaultDateFormat']) . ' - ' . _('Authorised by') . $UserChangedStatus . $_POST['StatusComments'] . '<br>' . html_entity_decode($_POST['StatusCommentsComplete']);
+				$_SESSION['PO'.$identifier]->StatComments = date($_SESSION['DefaultDateFormat']) . ' - ' . _('Authorised by') . $UserChangedStatus . $_POST['StatusComments'] . '<br>' . html_entity_decode($_POST['StatusCommentsComplete']);
 				$_SESSION['PO'.$identifier]->AllowPrintPO=1;
 			} else {
 				$OKToUpdateStatus=0;
@@ -115,7 +115,7 @@ if (isset($_POST['UpdateStatus']) AND $_POST['UpdateStatus']!='') {
 			}
 			if ($OKToUpdateStatus==1){ // none of the order has been received
 				if ($AuthorityLevel>$OrderTotal) {
-					$_SESSION['PO'.$identifier]->StatusComments = date($_SESSION['DefaultDateFormat']).' - ' . $_POST['Status'] . ' ' . _('by') . $UserChangedStatus  . $_POST['StatusComments'].'<br>' . $_POST['StatusCommentsComplete'];
+					$_SESSION['PO'.$identifier]->StatComments = date($_SESSION['DefaultDateFormat']).' - ' . $_POST['Status'] . ' ' . _('by') . $UserChangedStatus  . $_POST['StatusComments'].'<br>' . $_POST['StatusCommentsComplete'];
 				} else {
 					$OKToUpdateStatus=0;
 					prnMsg( _('You do not have permission to reject this purchase order').'.<br>'. _('This order is for').' '.
@@ -135,7 +135,7 @@ if (isset($_POST['UpdateStatus']) AND $_POST['UpdateStatus']!='') {
 
 			if (($AuthorityLevel>$OrderTotal OR $_SESSION['UserID']==$_SESSION['PO'.$identifier]->Initiator ) AND $OKToUpdateStatus==1) {
 
-				$_SESSION['PO'.$identifier]->StatusComments = date($_SESSION['DefaultDateFormat']).' - ' . _('Order set to pending status by') . $UserChangedStatus  . $_POST['StatusComments']. '<br>' .$_POST['StatusCommentsComplete'];
+				$_SESSION['PO'.$identifier]->StatComments = date($_SESSION['DefaultDateFormat']).' - ' . _('Order set to pending status by') . $UserChangedStatus  . $_POST['StatusComments']. '<br>' .$_POST['StatusCommentsComplete'];
 
 			} elseif ($AuthorityLevel<$OrderTotal AND $_SESSION['UserID']!=$_SESSION['PO'.$identifier]->Initiator) {
 				$OKToUpdateStatus=0;
