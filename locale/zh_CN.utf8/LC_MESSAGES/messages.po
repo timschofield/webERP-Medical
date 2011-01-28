@@ -17,6 +17,8 @@ msgstr ""
 "X-Poedit-Country: CHINA\n"
 "X-Poedit-Basepath: C:\\改过自新\\\n"
 "X-Poedit-SearchPath-0: webERPRC4\n"
+"X-Launchpad-Export-Date: 2011-01-05 16:37+0000\n"
+"X-Generator: Launchpad (build 12138)\n"
 
 #: AccountGroups.php:9
 #: index.php:1273
