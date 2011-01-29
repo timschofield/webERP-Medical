@@ -518,7 +518,7 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 							if (trim($Item->BundleRef) != ""){
 								if ($AlreadyExistsRow[0]>0){
 									if ($OrderLine->Serialised == 1) {
-										$SQL = "UPDATE stockserialitems SET quantity = '" . $Item->BundleQty . " ";
+										$SQL = "UPDATE stockserialitems SET quantity = '" . $Item->BundleQty*$OrderLine->ConversionFactor  . " ";
 									} else {
 										$SQL = "UPDATE stockserialitems SET quantity = quantity + '" . $Item->BundleQty . "'";
 									}
@@ -535,7 +535,7 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 																											'" . $_SESSION['PO']->Location . "',
 																											'" . $Item->BundleRef . "',
 																											'',
-																											'" . $Item->BundleQty . "')";
+																											'" . $Item->BundleQty*$OrderLine->ConversionFactor  . "')";
 								}
 
 								$ErrMsg =  _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The serial stock item record could not be inserted because');
@@ -553,7 +553,7 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 																									'" . $StkMoveNo . "',
 																									'" . $OrderLine->StockID . "',
 																									'" . $Item->BundleRef . "',
-																									'" . $Item->BundleQty . "'
+																									'" . $Item->BundleQty*$OrderLine->ConversionFactor  . "'
 																									)";
 							$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The serial stock movement record could not be inserted because');
 							$DbgMsg = _('The following SQL to insert the serial stock movement records was used');

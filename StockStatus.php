@@ -171,26 +171,23 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 
 	if ($Its_A_KitSet_Assembly_Or_Dummy == False){
 
-		$sql="SELECT SUM(purchorderdetails.quantityord*(CASE WHEN purchdata.conversionfactor IS NULL THEN 1 ELSE purchdata.conversionfactor END) -
-							purchorderdetails.quantityrecd*(CASE WHEN purchdata.conversionfactor IS NULL THEN 1 ELSE purchdata.conversionfactor END))
-									FROM purchorders
-									LEFT JOIN purchorderdetails
+		$QOOSQL="SELECT SUM((purchorderdetails.quantityord*purchorderdetails.conversionfactor) -
+									(purchorderdetails.quantityrecd*purchorderdetails.conversionfactor))
+								FROM purchorders
+								LEFT JOIN purchorderdetails
 									ON purchorders.orderno=purchorderdetails.orderno
-									LEFT JOIN purchdata
-									ON purchorders.supplierno=purchdata.supplierno
-										AND purchorderdetails.itemcode=purchdata.stockid
-									WHERE purchorderdetails.itemcode='" . $StockID . "'
+								WHERE purchorderdetails.itemcode='" . $StockID . "'
+									AND purchorderdetails.completed =0
 									AND purchorders.intostocklocation='" . $myrow['loccode'] . "'
-									AND (purchorders.status<>'Cancelled'
-									AND purchorders.status<>'Pending')";
-		$ErrMsg = _('The quantity on order for this product to be received into') . ' ' . $myrow['loccode'] . ' ' . _('cannot be retrieved because');
-		$QOOResult = DB_query($sql,$db,$ErrMsg, $DbgMsg);
-
-		if (DB_num_rows($QOOResult)==1){
-			$QOORow = DB_fetch_row($QOOResult);
-			$QOO =  $QOORow[0];
-		} else {
+									AND purchorders.status<>'Cancelled'
+									AND purchorders.status<>'Pending'
+									AND purchorders.status<>'Rejected'";
+		$QOOResult = DB_query($QOOSQL, $db);
+		if (DB_num_rows($QOOResult) == 0) {
 			$QOO = 0;
+		} else {
+			$QOORow = DB_fetch_row($QOOResult);
+			$QOO = $QOORow[0];
 		}
 
 		//Also the on work order quantities

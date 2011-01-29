@@ -152,7 +152,7 @@ if (isset($_POST['UpdateStatus']) AND $_POST['UpdateStatus']!='') {
 				$AllowPrint=0;
 			}
 			$SQL = "UPDATE purchorders SET status='" . $_POST['Status']. "',
-																		stat_comment='" . $_SESSION['PO'.$identifier]->StatusComments ."',
+																		stat_comment='" . $_SESSION['PO'.$identifier]->StatComments ."',
 																		allowprint='".$AllowPrint."'
 										WHERE purchorders.orderno ='" . $_SESSION['ExistingOrder'] ."'";
 
