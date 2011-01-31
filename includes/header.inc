@@ -49,26 +49,26 @@
 		echo '<td align="left" style="width:100%;" class="quick_menu_left">';
 // Use icons for company and user data, saves screen realestate, use ALT tag in case theme icon not avail.
 		echo '<img src="'.$rootpath.'/css/'.$theme.'/images/company.png" TITLE="' . _('Company') . '" ALT="' . _('Company') . '"></img>';
-		echo ' ' . stripslashes($_SESSION['CompanyRecord']['coyname']) . '  <a href="' .  $rootpath . '/UserSettings.php?' . SID . '"><img src="'.$rootpath.'/css/'.$theme.'/images/user.png" TITLE="User" ALT="' . _('User') . '"> </img>' . stripslashes($_SESSION['UsersRealName']) . '</a>';
+		echo ' ' . stripslashes($_SESSION['CompanyRecord']['coyname']) . '  <a href="' .  $rootpath . '/UserSettings.php?' . sid . '"><img src="'.$rootpath.'/css/'.$theme.'/images/user.png" TITLE="User" ALT="' . _('User') . '"> </img>' . stripslashes($_SESSION['UsersRealName']) . '</a>';
 // Make the title text a class, can be set to display:none is some themes
 		echo '<br /><font class="header_title"> ' . $title . '</font></td>';
 		echo '<td class="quick_menu_tabs">';
 		echo '<table cellpadding="0" cellspacing="0" class="quick_menu_tabs"><tr>';
-		echo '<td class="quick_menu_tab" align="center"><a accesskey="1" href="' .  $rootpath . '/index.php?' . SID . '"><span style="text-decoration:underline;">1</span> ' . _('Main Menu') . '</a></td>';
+		echo '<td class="quick_menu_tab" align="center"><a accesskey="1" href="' .  $rootpath . '/index.php?' . sid . '"><span style="text-decoration:underline;">1</span> ' . _('Main Menu') . '</a></td>';
 
 		if (count($_SESSION['AllowedPageSecurityTokens'])>1){
 
-			echo '<td class="quick_menu_tab" align="center"><a accesskey="2" href="' .  $rootpath . '/SelectCustomer.php?' . SID . '"><span style="text-decoration:underline;">2</span> ' . _('Customers') . '</a></td>';
+			echo '<td class="quick_menu_tab" align="center"><a accesskey="2" href="' .  $rootpath . '/SelectCustomer.php?' . sid . '"><span style="text-decoration:underline;">2</span> ' . _('Customers') . '</a></td>';
 
-			echo '<td class="quick_menu_tab" align="center"><a accesskey="3" href="' .  $rootpath . '/SelectProduct.php?' . SID . '"><span style="text-decoration:underline;">3</span> ' . _('Items') . '</a></td>';
+			echo '<td class="quick_menu_tab" align="center"><a accesskey="3" href="' .  $rootpath . '/SelectProduct.php?' . sid . '"><span style="text-decoration:underline;">3</span> ' . _('Items') . '</a></td>';
 
-			echo '<td class="quick_menu_tab" align="center"><a accesskey="4" href="' .  $rootpath . '/SelectSupplier.php?' . SID . '"><span style="text-decoration:underline;">4</span> ' . _('Suppliers') . '</a></td>';
+			echo '<td class="quick_menu_tab" align="center"><a accesskey="4" href="' .  $rootpath . '/SelectSupplier.php?' . sid . '"><span style="text-decoration:underline;">4</span> ' . _('Suppliers') . '</a></td>';
 
-			$DefaultManualLink = '<td class="quick_menu_tab" align="center"><a rel="external" accesskey="8" href="' .  $rootpath . '/doc/Manual/ManualContents.php?' . SID . '"><span style="text-decoration:underline;">8</span> ' . _('Manual') . '</a></td>';
+			$DefaultManualLink = '<td class="quick_menu_tab" align="center"><a rel="external" accesskey="8" href="' .  $rootpath . '/doc/Manual/ManualContents.php?' . sid . '"><span style="text-decoration:underline;">8</span> ' . _('Manual') . '</a></td>';
 
 			if (substr($_SESSION['Language'],0,2) !='en'){
 				if (file_exists('locale/' . $_SESSION['Language'] . '/Manual/ManualContents.php')){
-					echo '<td class="quick_menu_tab" align="center"><a target="_blank" accesskey="8" href="' .  $rootpath . '/locale/' . $_SESSION['Language'] . '/Manual/ManualContents.php' . SID . '"><span style="text-decoration:underline;">8</span> ' . _('Manual') . '</a></td>';
+					echo '<td class="quick_menu_tab" align="center"><a target="_blank" accesskey="8" href="' .  $rootpath . '/locale/' . $_SESSION['Language'] . '/Manual/ManualContents.php' . sid . '"><span style="text-decoration:underline;">8</span> ' . _('Manual') . '</a></td>';
 				} else {
 					echo $DefaultManualLink;
 				}
@@ -77,7 +77,7 @@
 			}
 		}
 
-		echo '<td class="quick_menu_tab" align="center"><a accesskey="0" href="' . $rootpath . '/Logout.php?' . SID . '" onclick="return confirm(\'' . _('Are you sure you wish to logout?') . '\');"><span style="text-decoration:underline;">0</span> '  . _('Logout') . '</a></td>';
+		echo '<td class="quick_menu_tab" align="center"><a accesskey="0" href="' . $rootpath . '/Logout.php?' . sid . '" onclick="return confirm(\'' . _('Are you sure you wish to logout?') . '\');"><span style="text-decoration:underline;">0</span> '  . _('Logout') . '</a></td>';
 
 		echo '</tr></table>';
 		echo '</td></tr></table>';
