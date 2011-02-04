@@ -1,8 +1,7 @@
 <?php
 
-/* $Id$*/
-
 //$PageSecurity = 1; now comes from DB scripts table
+
 
 include('includes/session.inc');
 $title=_('Main Menu');
