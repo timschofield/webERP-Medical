@@ -4,7 +4,7 @@
 
 //$PageSecurity = 9; /*viewing possible with inquiries but not mods */
 
-//$UpdateSecurity =10;
+$UpdateSecurity =10;
 
 include('includes/session.inc');
 $title = _('Stock Cost Update');
@@ -148,8 +148,8 @@ echo '<input type=hidden name=OldOverheadCost VALUE=' . $myrow['overheadcost'] .
 echo '<input type=hidden name="QOH" VALUE=' . $myrow['totalqoh'] .'>';
 
 echo '<tr><td>' . _('Last Cost') .':</td><td class=number>' . number_format($myrow['lastcost'],2) . '</td></tr>';
-if (! in_array($UpdateSecurity,$_SESSION['AllowedPageSecurityTokens']) OR !isset($UpdateSecurity)){
-	echo '<tr><td>' . _('Cost') . ':</td><td class=number>' . number_format($myrow['materialcost']+$myrow['labourcost']+$myrow['overheadcost'],2) . '</td></tr></table>';
+if (!isset($UpdateSecurity) or !in_array($UpdateSecurity,$_SESSION['AllowedPageSecurityTokens'])){
+	echo '<tr><td>' . _('Cost') . ':</td><td class=number>' . number_format($myrow['materialcost']+$myrow['labourcost']+$myrow['overheadcost'],2) . '</td></tr></table><br />';
 } else {
 
 	if ($myrow['mbflag']=='M'){
@@ -166,11 +166,11 @@ if (! in_array($UpdateSecurity,$_SESSION['AllowedPageSecurityTokens']) OR !isset
     echo '</table><br /><div class="centre"><input type="submit" name="UpdateData" VALUE="' . _('Update') . '"><br /><br />';
 }
 if ($myrow['mbflag']!='D'){
-	echo '<a href="' . $rootpath . '/StockStatus.php?' . SID . '&StockID=' . $StockID . '>' . _('Show Stock Status') . '</a>';
+	echo '<div class="centre"><a href="' . $rootpath . '/StockStatus.php?' . SID . '&StockID=' . $StockID . '>' . _('Show Stock Status') . '</a>';
 	echo '<br><a href="' . $rootpath . '/StockMovements.php?' . SID . '&StockID=' . $StockID . '">' . _('Show Stock Movements') . '</a>';
 	echo '<br><a href="' . $rootpath . '/StockUsage.php?' . SID . '&StockID=' . $StockID . '">' . _('Show Stock Usage')  .'</a>';
 	echo '<br><a href="' . $rootpath . '/SelectSalesOrder.php?' . SID . '&SelectedStockItem=' . $StockID . '">' . _('Search Outstanding Sales Orders') . '</a>';
-	echo '<br><a href="' . $rootpath . '/SelectCompletedOrder.php?' . SID . '&SelectedStockItem=' . $StockID . '">' . _('Search Completed Sales Orders') . '</a>';
+	echo '<br><a href="' . $rootpath . '/SelectCompletedOrder.php?' . SID . '&SelectedStockItem=' . $StockID . '">' . _('Search Completed Sales Orders') . '</a></div>';
 }
 echo '</form></div>';
 include('includes/footer.inc');
