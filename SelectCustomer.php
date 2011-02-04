@@ -97,16 +97,16 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 	if ($_POST['CustCode'] AND $_POST['CustPhone'] == "" AND isset($_POST['CustType']) AND $_POST['Keywords'] == "") {
 		$msg = _('Search Result: Customer Code has been used in search') . '<br>';
 	}
-	if (($_POST['CustPhone']) AND ($_POST['CustType'])) {
+	if (($_POST['CustPhone'])) {
 		$msg = _('Search Result: Customer Phone has been used in search') . '<br>';
 	}
-	if (($_POST['CustAdd']) AND ($_POST['CustType'])) {
+	if (($_POST['CustAdd'])) {
 		$msg = _('Search Result: Customer Address has been used in search') . '<br>';
 	}
 	if ($_POST['CustType'] AND $_POST['CustPhone'] == "" AND $_POST['CustCode'] == "" AND $_POST['Keywords'] == "" AND $_POST['CustAdd'] == "") {
 		$msg = _('Search Result: Customer Type has been used in search') . '<br>';
 	}
-	if (($_POST['Keywords'] == "") AND ($_POST['CustCode'] == "") AND ($_POST['CustPhone'] == "") AND ($_POST['CustType'] == "") AND ($_POST['Area'] == "")) {
+	if (($_POST['Keywords'] == "") AND ($_POST['CustCode'] == "") AND ($_POST['CustPhone'] == "") AND ($_POST['CustType'] == "") AND ($_POST['Area'] == "") AND ($_POST['CustAdd'] == "")) {
 		$SQL = "SELECT debtorsmaster.debtorno,
 				debtorsmaster.name,
 				debtorsmaster.address1,
@@ -195,7 +195,7 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 				custbranch.faxno
 			FROM debtorsmaster LEFT JOIN custbranch
 				ON debtorsmaster.debtorno = custbranch.debtorno, debtortype
-			WHERE debtorsmaster.address1 " . LIKE . " '%" . $_POST['CustAdd'] . "%'
+			WHERE CONCAT_WS(debtorsmaster.address1,debtorsmaster.address2,debtorsmaster.address3,debtorsmaster.address4) " . LIKE . " '%" . $_POST['CustAdd'] . "%'
 			AND debtorsmaster.typeid = debtortype.typeid";
 			// End added search feature. Gilles Deacur
 
@@ -311,7 +311,7 @@ if ($_POST['Select'] != "" or ($_SESSION['CustomerID'] != "" and !isset($_POST['
 }
 echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo "<b><div class='centre'>" . $msg . "</div></b>";
+prnMsg($msg, 'info');
 echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Search for Customers').'</p>';
 echo "<table cellpadding=3 colspan=4 class=selection>";
 echo "<tr><td colspan=2>" . _('Enter a partial Name') . ":</td><td>";
