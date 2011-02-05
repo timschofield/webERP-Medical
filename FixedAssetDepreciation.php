@@ -19,7 +19,7 @@ $result = DB_query("SELECT periods.lastdate_in_period,
 									ON fixedassettrans.periodno=periods.periodno
 									WHERE transtype=44
 									GROUP BY periods.lastdate_in_period
-									ORDER BY periods.lastdate_in_period DESC',$db);
+									ORDER BY periods.lastdate_in_period DESC",$db);
 
 $LastDepnRun = DB_fetch_row($result);
 
@@ -28,7 +28,7 @@ $LastDepnRun = DB_fetch_row($result);
 $AllowUserEnteredProcessDate = true;
 
 if (DB_num_rows($result)==0) { //then depn has never been run yet?
-	/*in this case default depreciation calc to the last day of last month - and allow user to select a period */
+	/* in this case default depreciation calc to the last day of last month - and allow user to select a period */
 	if (!isset($_POST['ProcessDate'])) {
 		$_POST['ProcessDate'] = Date($_SESSION['DefaultDateFormat'],mktime(0,0,0,date('m'),0,date('Y')));
 	} else { //ProcessDate is set - make sure it is on the last day of the month selected
@@ -42,7 +42,8 @@ if (DB_num_rows($result)==0) { //then depn has never been run yet?
 
 } else { //depn calc has been run previously
 	$AllowUserEnteredProcessDate = false;
-	prnMsg('LastDepnRun[0] = ' . $LastDepnRun[0] . '<br />ConvertSQLDate($LastDepnRun[0]) = ' . ConvertSQLDate($LastDepnRun[0]) . '<br />DateAdd(ConvertSQLDate($LastDepnRun[0]),d,28) = ' . DateAdd(ConvertSQLDate($LastDepnRun[0]),'d',28), 'info');
+	//prnMsg('LastDepnRun[0] = ' . $LastDepnRun[0] . '<br />ConvertSQLDate($LastDepnRun[0]) = ' . ConvertSQLDate($LastDepnRun[0]) . '<br />DateAdd(ConvertSQLDate($LastDepnRun[0]),d,28) = ' . DateAdd(ConvertSQLDate($LastDepnRun[0]),'d',28), 'info');
+	prnMsg('LastDepnRun = ' . ConvertSQLDate($LastDepnRun[0]), 'info');
 
 	$_POST['ProcessDate'] = LastDayOfMonth(DateAdd(ConvertSQLDate($LastDepnRun[0]),'d',28));
 }
