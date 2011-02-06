@@ -85,7 +85,7 @@ $pdf->line($XPos+210, $YPos,$XPos+210, $YPos+60);
 
 
 $pdf->addText(490, 790,$FontSize, _('Number'). ':');
-$pdf->addText(520, 790,$FontSize, $_GET['QuotationNo']);
+$pdf->addText(535, 790,$FontSize, $_GET['QuotationNo']);
 $pdf->addText(490, 790-15,$FontSize, _('Your Ref'). ':');
 $pdf->addText(520, 790-15,$FontSize, $myrow['customerref']);
 $pdf->addText(490, 790-30,$FontSize,  _('Date'). ':');
