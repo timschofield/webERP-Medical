@@ -15,6 +15,7 @@ echo '<a href="' . $rootpath . '/SelectAsset.php?' . SID . '">' . _('Back to Sel
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' .
 		_('Fixed Asset Items') . '" alt="" />' . ' ' . $title . '</p>';
 
+
 /* If this form is called with the AssetID then it is assumed that the asset is to be modified  */
 if (isset($_GET['AssetID'])){
 	$AssetID =$_GET['AssetID'];
@@ -24,6 +25,17 @@ if (isset($_GET['AssetID'])){
 	$AssetID =$_POST['Select'];
 } else {
 	$AssetID = '';
+}
+
+if (isset($AssetID)) {
+	$sql = "SELECT COUNT(assetid) FROM fixedassets WHERE assetid='".$AssetID."'";
+	$result = DB_query($sql,$db);
+	$myrow = DB_fetch_row($result);
+	if ($myrow[0]==0) {
+		$New=0;
+	} else {
+		$New=1;
+	}
 }
 
 if (isset($_FILES['ItemPicture']) AND $_FILES['ItemPicture']['name'] !='') {
@@ -372,12 +384,11 @@ echo '<form name="AssetForm" enctype="multipart/form-data" method="post" action=
 	'"><table class=selection>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-$New=0;
 if (!isset($AssetID) or $AssetID=='') {
 
 /*If the page was called without $AssetID passed to page then assume a new asset is to be entered other wise the form showing the fields with the existing entries against the asset will show for editing with a hidden AssetID field. New is set to flag that the page may have called itself and still be entering a new asset, in which case the page needs to know not to go looking up details for an existing asset*/
 
-	$New = 1;
+	$New = 0;
 	echo '<input type="hidden" name="New" value="">'. "\n";
 
 	$_POST['LongDescription'] = '';
@@ -559,9 +570,8 @@ if(DB_num_rows($result)==0){
 }
 echo '<tr><td>' . _('Depreciation last run') . ':</td><td>' . $LastRunDate . '</td></tr>
 			</table>';
-
-
-if (isset($New)) {
+			
+if ($New==0) {
 	echo '<div class=centre><br><input type="Submit" name="submit" value="' . _('Insert New Fixed Asset') . '">';
 
 } else {
