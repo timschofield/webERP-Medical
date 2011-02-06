@@ -23,13 +23,16 @@ If (isset($_POST['Language'])) {
 
 
 if (function_exists('gettext')){
-  
+
   //This maybe required in some stubborn installations
 	$Locale = setlocale (LC_ALL, $_SESSION['Language']);
-		
+
 	//$Locale = setlocale (LC_CTYPE, $_SESSION['Language']);
 	//$Locale = setlocale (LC_MESSAGES, $_SESSION['Language']);
 	$Locale = setlocale (LC_NUMERIC, 'en_US'); //currently need all decimal points etc to be as expected on webserver
+	if ($_SESSION['Language']=='tr_TR.utf8') {
+		$Locale = setlocale(LC_CTYPE, 'C');
+	}
 
 	// possibly even if locale fails the language will still switch by using Language instead of locale variable
 	putenv('LANG=' . $_SESSION['Language']);
@@ -37,9 +40,9 @@ if (function_exists('gettext')){
   //putenv('LANG=$Language_Country');
 	bindtextdomain ('messages', $PathPrefix . 'locale');
 	textdomain ('messages');
-    bind_textdomain_codeset('messages', _('ISO-8859-1')); 
+    bind_textdomain_codeset('messages', _('ISO-8859-1'));
 	$locale_info = localeconv();
-	
+
 } else {
 /*
 	PHPGettext integration by Braian Gomez
@@ -52,17 +55,17 @@ if (function_exists('gettext')){
 	} else {
 		$Locale = $DefaultLanguage;
 	}
-	
+
 	if (isset($PathPrefix)) {
 		$LangFile = $PathPrefix . 'locale/' . $Locale . '/LC_MESSAGES/messages.mo';
 	} else {
 		$LangFile = 'locale/' . $Locale . '/LC_MESSAGES/messages.mo';
 	}
-	
+
 	if (file_exists($LangFile)){
 		$input = new FileReader($LangFile);
 		$PhpGettext = new gettext_reader($input);
-		
+
 		if (!function_exists('_')){
 			function _($text) {
 				global $PhpGettext;
