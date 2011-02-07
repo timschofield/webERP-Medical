@@ -18,7 +18,11 @@ function assignComboToInput(c,i){
 	i.value=c.value;
 }
 function inArray(v,tA,m){
-	for (i=0;i<tA.length;i++) if (v==tA[i].value) return true;
+	for (i=0;i<tA.length;i++) {
+		if (v.value==tA[i].value) {
+			return true;
+		}
+	}
 	alert(m);
 	return false;
 }
