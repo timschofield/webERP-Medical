@@ -6,16 +6,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: web-erp\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-01-04 22:15+1200\n"
-"PO-Revision-Date: 2010-09-17 14:07+0000\n"
+"PO-Revision-Date: 2011-02-09 04:41+0000\n"
 "Last-Translator: Tim Schofield <Unknown>\n"
 "Language-Team: Swahili <sw@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-20 14:44+0000\n"
-"X-Generator: Launchpad (build 12214)\n"
+"X-Launchpad-Export-Date: 2011-02-10 13:56+0000\n"
+"X-Generator: Launchpad (build 12335)\n"
+"Language: sw\n"
 
 #: AccountGroups.php:9 index.php:1273
 msgid "Account Groups"
@@ -628,7 +629,7 @@ msgstr "Rekodi ya kuwasiliana na kumbuka imefutwa"
 
 #: AddCustomerNotes.php:98
 msgid "Notes for Customer"
-msgstr ""
+msgstr "Maelezo kwa Wateja"
 
 #: AddCustomerNotes.php:106 AddCustomerNotes.php:189
 #: AddCustomerTypeNotes.php:104 AddCustomerTypeNotes.php:186
@@ -707,7 +708,7 @@ msgstr "Kundi vya rekodi kumbuka imefutwa"
 
 #: AddCustomerTypeNotes.php:95
 msgid "Notes for Customer Type"
-msgstr ""
+msgstr "Maelezo ya Aina Wateja"
 
 #: AddCustomerTypeNotes.php:106
 msgid "href"
@@ -3666,7 +3667,7 @@ msgstr "SQL zifuatazo Insert ya manunuzi jukumu rekodi ya kodi ilitumika"
 
 #: ConfirmDispatch_Invoice.php:815
 msgid "The asset number beind disposed of is:"
-msgstr ""
+msgstr "Idadi ya mali beind hukusanywa ni:"
 
 #: ConfirmDispatch_Invoice.php:829 ConfirmDispatch_Invoice.php:905
 #: RecurringSalesOrdersProcess.php:321
@@ -3692,7 +3693,7 @@ msgstr ""
 
 #: ConfirmDispatch_Invoice.php:913
 msgid "Cannot retrieve the mbflag"
-msgstr ""
+msgstr "Hawezi Retrieve ya mbflag"
 
 #: ConfirmDispatch_Invoice.php:927 CounterSales.php:1244
 #: FixedAssetItems.php:551 SalesAnalReptCols.php:319 Stocks.php:1028
@@ -3928,55 +3929,62 @@ msgstr "GL mauzo ya discount posting inaweza kuwa kuingizwa kwa sababu"
 
 #: ConfirmDispatch_Invoice.php:1378
 msgid "The asset disposal GL posting details could not be retrieved because"
-msgstr ""
+msgstr "Ovyo mali ya GL posting maelezo inaweza kuwa retrieved sababu"
 
 #: ConfirmDispatch_Invoice.php:1379
 msgid "The following SQL was used to get the asset posting details"
-msgstr ""
+msgstr "SQL zifuatazo alikuwa kutumika kupata maelezo ya mali posting"
 
 #: ConfirmDispatch_Invoice.php:1404 ConfirmDispatch_Invoice.php:1426
 #: ConfirmDispatch_Invoice.php:1448 ConfirmDispatch_Invoice.php:1470
 msgid "disposal"
-msgstr ""
+msgstr "ovyo"
 
 #: ConfirmDispatch_Invoice.php:1407
 msgid ""
 "The reversal of accumulated depreciation GL posting on disposal could not be "
 "inserted because"
 msgstr ""
+"reversal ya GL kusanyiko uchakavu posting ovyo inaweza kuwa kuingizwa kwa "
+"sababu"
 
 #: ConfirmDispatch_Invoice.php:1429
 msgid ""
 "The reversal of asset cost on dispoal GL posting could not be inserted "
 "because"
 msgstr ""
+"reversal ya gharama ya mali ya GL dispoal posting inaweza kuwa kuingizwa kwa "
+"sababu"
 
 #: ConfirmDispatch_Invoice.php:1451
 msgid "The disposal net book value GL posting could not be inserted because"
 msgstr ""
+"Ovyo wavu kitabu GL thamani posting inaweza kuwa kuingizwa kwa sababu"
 
 #: ConfirmDispatch_Invoice.php:1473
 msgid "The disposal proceeds GL posting could not be inserted because"
-msgstr ""
+msgstr "kuendelea ovyo wa GL posting inaweza kuwa kuingizwa kwa sababu"
 
 #: ConfirmDispatch_Invoice.php:1501
 msgid "The fixed asset transaction could not be inserted because"
-msgstr ""
+msgstr "Wa upangaji wa shughuli mali inaweza kuwa kuingizwa kwa sababu"
 
 #: ConfirmDispatch_Invoice.php:1502 GoodsReceived.php:596 ReverseGRN.php:176
 #: SupplierCredit.php:1190 SupplierCredit.php:1277 SupplierInvoice.php:1187
 #: SupplierInvoice.php:1271
 msgid ""
 "The following SQL to insert the fixed asset transaction record was used"
-msgstr ""
+msgstr "SQL zifuatazo Insert ya fasta mali rekodi ya shughuli ilitumika"
 
 #: ConfirmDispatch_Invoice.php:1509
 msgid "The fixed asset record could not be updated for the disposal because"
 msgstr ""
+"Wa upangaji wa rekodi ya mali inaweza kuwa mwisho kwa ajili ya ovyo kwa "
+"sababu"
 
 #: ConfirmDispatch_Invoice.php:1510
 msgid "The following SQL to update the fixed asset record was used"
-msgstr ""
+msgstr "SQL zifuatazo update fasta rekodi ya mali ilikuwa kutumika"
 
 #: ConfirmDispatch_Invoice.php:1538 CounterSales.php:1709
 #: RecurringSalesOrdersProcess.php:602
@@ -4189,7 +4197,7 @@ msgstr "Jumla ndogo"
 
 #: ContractBOM.php:278
 msgid "Update Lines"
-msgstr ""
+msgstr "Mwisho Lines"
 
 #: ContractBOM.php:279 ContractOtherReqts.php:128
 msgid "Back To Contract Header"
@@ -7447,7 +7455,7 @@ msgstr "Risiti Entry"
 
 #: CustomerReceipt.php:35
 msgid "A bank account must be selected for this receipt"
-msgstr ""
+msgstr "akaunti ya benki lazima kuchaguliwa kwa ofisi hii"
 
 #: CustomerReceipt.php:50 Payments.php:685
 msgid "The bank account name cannot be retrieved because"
@@ -7480,7 +7488,7 @@ msgstr ""
 
 #: CustomerReceipt.php:163 Payments.php:639
 msgid "No General Ledger code has been chosen"
-msgstr ""
+msgstr "Hakuna kificho Mkuu Ledger amechaguliwa"
 
 #: CustomerReceipt.php:163 GLJournal.php:173 Payments.php:622 Payments.php:639
 msgid "so this GL analysis item could not be added"
@@ -9857,6 +9865,9 @@ msgid ""
 "either of the debtors control account, creditors control account or GRN "
 "suspense accounts"
 msgstr ""
+"Akaunti ya kuchaguliwa kwa post gharama au uchakavu kusanyiko hawezi kuwa "
+"aidha ya akaunti jukumu kudhibiti, kudhibiti wadai akaunti au akaunti GRN "
+"mashaka"
 
 #: FixedAssetCategories.php:67
 msgid ""
@@ -9864,6 +9875,9 @@ msgid ""
 "protected from having any other postings made to them. Select another "
 "balance sheet account for the asset cost"
 msgstr ""
+"Gharama mali akaunti ya kuchaguliwa ni akaunti ya benki - akaunti ya benki "
+"ni ya ulinzi kutokana na kuwa na matangazo yoyote mengine kwao. Kuchagua "
+"mwingine mizania akaunti kwa ajili ya gharama ya mali"
 
 #: FixedAssetCategories.php:71
 msgid ""
@@ -9871,6 +9885,9 @@ msgid ""
 "accounts are protected from having any other postings made to them. Select "
 "another balance sheet account for the asset accumulated depreciation"
 msgstr ""
+"Kusanyiko la uchakavu akaunti kuchaguliwa ni akaunti ya benki - akaunti ya "
+"benki ni ya ulinzi kutokana na kuwa na matangazo yoyote mengine kwao. "
+"Kuchagua mwingine mizania akaunti kwa ajili ya mali kusanyiko uchakavu"
 
 #: FixedAssetCategories.php:88
 msgid "Could not update the fixed asset category"
@@ -9882,25 +9899,27 @@ msgstr "Mwisho wa upangaji wa mali ya jamii rekodi kwa"
 
 #: FixedAssetCategories.php:108
 msgid "Could not insert the new fixed asset category"
-msgstr ""
+msgstr "Hakuweza Insert ya mwezi fasta mali jamii"
 
 #: FixedAssetCategories.php:110
 msgid "A new fixed asset category record has been added for"
-msgstr ""
+msgstr "A mpya fasta mali rekodi ya jamii imekuwa aliongeza kwa"
 
 #: FixedAssetCategories.php:131
 msgid ""
 "Cannot delete this fixed asset category because fixed assets have been "
 "created using this category"
 msgstr ""
+"Hawezi kufuta fasta mali jamii kwa sababu rasilimali za kudumu viliumbwa "
+"kutumia jamii"
 
 #: FixedAssetCategories.php:132
 msgid "fixed assets referring to this category code"
-msgstr ""
+msgstr "rasilimali za kudumu akimaanisha kanuni hii jamii"
 
 #: FixedAssetCategories.php:137
 msgid "The fixed asset category"
-msgstr ""
+msgstr "Wa upangaji wa mali jamii"
 
 #: FixedAssetCategories.php:159 StockCategories.php:217
 msgid "Cat Code"
@@ -9908,7 +9927,7 @@ msgstr "Cat Code"
 
 #: FixedAssetCategories.php:161
 msgid "Cost GL"
-msgstr ""
+msgstr "Gharama GL"
 
 #: FixedAssetCategories.php:162
 msgid "P & L Depn GL"
@@ -9916,11 +9935,11 @@ msgstr "P &amp; L GL Depn"
 
 #: FixedAssetCategories.php:163
 msgid "Disposal GL"
-msgstr ""
+msgstr "Ovyo GL"
 
 #: FixedAssetCategories.php:164
 msgid "Accum Depn GL"
-msgstr ""
+msgstr "Accum Depn GL"
 
 #: FixedAssetCategories.php:183
 #, php-format
@@ -9929,10 +9948,12 @@ msgid ""
 "will be performed before actual deletion to ensure data integrity is not "
 "compromised."
 msgstr ""
+"Una uhakika unataka kufuta fasta mali jamii? hundi ya ziada kuwa akifanya "
+"kabla deletion halisi ya kuhakikisha uadilifu data siyo kuathirika."
 
 #: FixedAssetCategories.php:203
 msgid "Show All Fixed Asset Categories"
-msgstr ""
+msgstr "Show zote Jamii Fixed Asset"
 
 #: FixedAssetCategories.php:232 FixedAssetCategories.php:238
 #: StockCategories.php:311 StockCategories.php:317
@@ -9946,7 +9967,7 @@ msgstr "Jamii Description"
 
 #: FixedAssetCategories.php:270
 msgid "Fixed Asset Cost GL Code"
-msgstr ""
+msgstr "Fasta Amana Gharama GL Code"
 
 #: FixedAssetCategories.php:285
 msgid "Profit and Loss Depreciation GL Code"
@@ -9954,11 +9975,11 @@ msgstr "Faida na hasara Uchakavu GL Code"
 
 #: FixedAssetCategories.php:299
 msgid "Profit or Loss on Disposal GL Code:"
-msgstr ""
+msgstr "Faida au hasara ya Kanuni Taka GL:"
 
 #: FixedAssetCategories.php:312
 msgid "Balance Sheet Accumulated Depreciation GL Code"
-msgstr ""
+msgstr "Mizania kusanyiko Uchakavu GL Code"
 
 #: FixedAssetDepreciation.php:9
 msgid "Depreciation Journal Entry"
@@ -9969,6 +9990,8 @@ msgid ""
 "No depreciation will be committed as the processing date is beyond the "
 "current date. The depreciation run can only be run for periods prior to today"
 msgstr ""
+"Hakuna uchakavu kuwa nia kama tarehe ya usindikaji ni zaidi ya tarehe ya "
+"sasa. Kukimbia ya uchakavu inaweza tu kukimbia kwa muda kabla ya leo"
 
 #: FixedAssetDepreciation.php:82 FixedAssetRegister.php:77
 #: FixedAssetRegister.php:324 FixedAssetTransfer.php:124
@@ -9986,23 +10009,23 @@ msgstr "Gharama"
 
 #: FixedAssetDepreciation.php:85
 msgid "Accum Depn"
-msgstr ""
+msgstr "Accum Depn"
 
 #: FixedAssetDepreciation.php:86
 msgid "B/fwd Book Value"
-msgstr ""
+msgstr "B / Fwd Kitabu Thamani"
 
 #: FixedAssetDepreciation.php:87
 msgid "Depn Type"
-msgstr ""
+msgstr "Aina Depn"
 
 #: FixedAssetDepreciation.php:88
 msgid "Depn Rate"
-msgstr ""
+msgstr "Depn Rate"
 
 #: FixedAssetDepreciation.php:89
 msgid "New Depn"
-msgstr ""
+msgstr "Mpya Depn"
 
 #: FixedAssetDepreciation.php:104 FixedAssetDepreciation.php:226
 #: InventoryValuation.php:114 InventoryValuation.php:166
@@ -10014,15 +10037,15 @@ msgstr "Jumla ya"
 
 #: FixedAssetDepreciation.php:120
 msgid "SL"
-msgstr ""
+msgstr "SL"
 
 #: FixedAssetDepreciation.php:126
 msgid "DV"
-msgstr ""
+msgstr "DV"
 
 #: FixedAssetDepreciation.php:178
 msgid "Cannot insert a depreciation GL entry for the depreciation because"
-msgstr ""
+msgstr "Hawezi Insert GL uchakavu kuingia kwa thamani kwa sababu"
 
 #: FixedAssetDepreciation.php:179 GLJournal.php:82 GLJournal.php:105
 msgid "The SQL that failed to insert the GL Trans record was"
@@ -10031,27 +10054,30 @@ msgstr "SQL kwamba alishindwa Insert GL Trans rekodi ilikuwa"
 #: FixedAssetDepreciation.php:214
 msgid ""
 "Cannot insert a fixed asset transaction entry for the depreciation because"
-msgstr ""
+msgstr "Hawezi Insert fasta mali shughuli kuingia kwa thamani kwa sababu"
 
 #: FixedAssetDepreciation.php:215
 msgid "The SQL that failed to insert the fixed asset transaction record was"
-msgstr ""
+msgstr "SQL kwamba alishindwa Insert fasta mali shughuli rekodi ilikuwa"
 
 #: FixedAssetDepreciation.php:221
 msgid ""
 "CRITICAL ERROR! NOTE DOWN THIS ERROR AND SEEK ASSISTANCE. The fixed asset "
 "accumulated depreciation could not be updated:"
 msgstr ""
+"Muhimu ERROR! NOTE CHINI kosa hili msaada huo. Wa upangaji wa mali uchakavu "
+"kusanyiko inaweza kuwa updated:"
 
 #: FixedAssetDepreciation.php:222
 msgid ""
 "The following SQL was used to attempt the update the accumulated "
 "depreciation of the asset was:"
 msgstr ""
+"SQL zifuatazo ilitumika jaribio la update ya uchakavu wa mali kusanyiko mara:"
 
 #: FixedAssetDepreciation.php:233
 msgid "GRAND Total"
-msgstr ""
+msgstr "Grand Total"
 
 #: FixedAssetDepreciation.php:245 FixedAssetRegister.php:354
 msgid "Depreciation"
@@ -10067,16 +10093,16 @@ msgstr "Kurudi orodha kuu"
 
 #: FixedAssetDepreciation.php:256
 msgid "Date to Process Depreciation"
-msgstr ""
+msgstr "Tarehe ya Mchakato Uchakavu"
 
 #: FixedAssetDepreciation.php:259
 msgid "Commit Depreciation"
-msgstr ""
+msgstr "Kufanya Uchakavu"
 
 #: FixedAssetItems.php:9 SupplierCredit.php:252 SupplierCredit.php:298
 #: SupplierInvoice.php:220 SupplierInvoice.php:271
 msgid "Fixed Assets"
-msgstr ""
+msgstr "Fasta Mali"
 
 #: FixedAssetItems.php:13
 msgid "Back to Select"
@@ -10095,12 +10121,16 @@ msgid ""
 "The asset description must be entered and be fifty characters or less long. "
 "It cannot be a zero length string either, a description is required"
 msgstr ""
+"maelezo ya mali iwekwe na hamsini wahusika au chini ya muda mrefu. Haiwezi "
+"kuwa ni sifuri urefu string aidha, maelezo anahitajika"
 
 #: FixedAssetItems.php:86
 msgid ""
 "The asset long description cannot be a zero length string, a long "
 "description is required"
 msgstr ""
+"Maelezo ya mali kwa muda mrefu hawezi kuwa sifuri urefu kamba, maelezo ya "
+"muda mrefu ni required"
 
 #: FixedAssetItems.php:93 Stocks.php:120 Z_ImportStocks.php:134
 msgid "The barcode must be 20 characters or less long"
@@ -10111,56 +10141,59 @@ msgid ""
 "There are no asset categories defined. All assets must belong to a valid "
 "category,"
 msgstr ""
+"Kuna makundi mali hakuna defined. Mali yote lazima ni wa jamii ya halali,"
 
 #: FixedAssetItems.php:106 Z_ImportFixedAssets.php:133
 msgid "The depreciation rate is expected to be a number between 0 and 100"
-msgstr ""
+msgstr "Kiwango cha uchakavu inatarajiwa kuwa idadi kati 0 na 100"
 
 #: FixedAssetItems.php:111
 msgid ""
 "Numbers less than 1 are interpreted as less than 1%. The depreciation rate "
 "should be entered as a number between 0 and 100"
 msgstr ""
+"Idadi ya chini ya 1 ni kufasiriwa kama chini ya 1%. Kiwango cha uchakavu "
+"wanapaswa kuwa aliingia kama idadi ya kati 0 na 100"
 
 #: FixedAssetItems.php:147 FixedAssetItems.php:167 FixedAssetItems.php:187
 #: FixedAssetItems.php:207
 msgid "change category"
-msgstr ""
+msgstr "mabadiliko ya jamii"
 
 #: FixedAssetItems.php:150 FixedAssetItems.php:170 FixedAssetItems.php:190
 #: FixedAssetItems.php:210
 msgid "Cannot insert a GL entry for the change of asset category because"
-msgstr ""
+msgstr "Hawezi kuingia Insert GL kwa mabadiliko ya mali jamii kwa sababu"
 
 #: FixedAssetItems.php:151 FixedAssetItems.php:171 FixedAssetItems.php:191
 #: FixedAssetItems.php:211 FixedAssetItems.php:327 FixedAssetItems.php:347
 msgid "The SQL that failed to insert the cost GL Trans record was"
-msgstr ""
+msgstr "SQL kwamba alishindwa kuingiza gharama GL Trans rekodi ilikuwa"
 
 #: FixedAssetItems.php:226
 msgid "The asset could not be updated because"
-msgstr ""
+msgstr "mali hiyo inaweza kuwa mwisho kwa sababu"
 
 #: FixedAssetItems.php:227
 msgid "The SQL that was used to update the asset and failed was"
-msgstr ""
+msgstr "SQL kuwa ilitumika kwa update mali na kushindwa mara"
 
 #: FixedAssetItems.php:230 FixedAssetRegister.php:263
 #: FixedAssetRegister.php:347
 msgid "Asset"
-msgstr ""
+msgstr "Mali"
 
 #: FixedAssetItems.php:252 Z_ImportFixedAssets.php:212
 msgid "The asset could not be added because"
-msgstr ""
+msgstr "mali hiyo inaweza kuwa aliongeza kwa sababu"
 
 #: FixedAssetItems.php:253
 msgid "The SQL that was used to add the asset failed was"
-msgstr ""
+msgstr "SQL kuwa ilitumika ya kuongeza mali alishindwa mara"
 
 #: FixedAssetItems.php:258
 msgid "The new asset has been added to the database with an asset code of:"
-msgstr ""
+msgstr "mali mpya imekuwa aliongeza na Mbegu kwa kodi ya mali ya:"
 
 #: FixedAssetItems.php:272 Stocks.php:455
 msgid "Validation failed, no updates or deletes took place"
@@ -10171,6 +10204,8 @@ msgid ""
 "The asset still has a net book value - only assets with a zero net book "
 "value can be deleted"
 msgstr ""
+"mali bado ina thamani halisi kitabu - mali tu na thamani ya sifuri halisi "
+"kitabu inaweza ilifutwa"
 
 #: FixedAssetItems.php:296
 msgid ""
@@ -10178,34 +10213,41 @@ msgid ""
 "when the fixed asset transactions are purged, otherwise the integrity of "
 "fixed asset reports may be compromised"
 msgstr ""
+"mali ina mashirikiano yanayohusiana na hayo. mali inaweza tu kufutwa wakati "
+"wa shughuli za mali fasta husafishwa, vinginevyo uadilifu wa taarifa fasta "
+"mali inaweza kuathirika"
 
 #: FixedAssetItems.php:301
 msgid ""
 "There is a purchase order set up for this asset. The purchase order line "
 "must be deleted first"
 msgstr ""
+"Kuna ili kununua kuanzisha kwa mali hii. Mstari ili kununua lazima kufutwa "
+"kwanza"
 
 #: FixedAssetItems.php:323 FixedAssetItems.php:343
 msgid "Delete asset"
-msgstr ""
+msgstr "Kufuta mali"
 
 #: FixedAssetItems.php:326
 msgid "Cannot insert a GL entry for the deletion of the asset because"
-msgstr ""
+msgstr "Hawezi kuingia Insert GL kwa ajili ya deletion ya mali kwa sababu"
 
 #: FixedAssetItems.php:346
 msgid ""
 "Cannot insert a GL entry for the reversal of accumulated depreciation on "
 "deletion of the asset because"
 msgstr ""
+"Hawezi kuingia Insert GL kwa ajili ya reversal ya uchakavu wa kusanyiko "
+"kwenye deletion ya mali kwa sababu"
 
 #: FixedAssetItems.php:354
 msgid "Could not delete the asset record"
-msgstr ""
+msgstr "Hakuweza kufuta rekodi ya mali"
 
 #: FixedAssetItems.php:358
 msgid "Deleted the asset  record for asset number"
-msgstr ""
+msgstr "Ilifutwa rekodi ya mali kwa idadi mali"
 
 #: FixedAssetItems.php:413 FixedAssetItems.php:417 SelectAsset.php:222
 msgid "Asset Code"
@@ -10233,7 +10275,7 @@ msgstr "Mali Jamii"
 
 #: FixedAssetItems.php:468
 msgid "The asset categories could not be retrieved because"
-msgstr ""
+msgstr "makundi ya mali inaweza kuwa retrieved sababu"
 
 #: FixedAssetItems.php:480
 msgid "Add or Modify Asset Categories"
@@ -10241,15 +10283,15 @@ msgstr "Kuongeza au Kurekebisha Jamii Amana"
 
 #: FixedAssetItems.php:486 SelectAsset.php:225
 msgid "Date Purchased"
-msgstr ""
+msgstr "Tarehe ya kununuliwa"
 
 #: FixedAssetItems.php:490
 msgid "The asset locations could not be retrieved because"
-msgstr ""
+msgstr "maeneo ya mali inaweza kuwa retrieved sababu"
 
 #: FixedAssetItems.php:491
 msgid "The SQL used to retrieve asset locations and failed was"
-msgstr ""
+msgstr "SQL kutumika Retrieve maeneo mali na kushindwa mara"
 
 #: FixedAssetItems.php:494 FixedAssetRegister.php:250 SelectAsset.php:73
 #: SelectAsset.php:224
@@ -10276,15 +10318,15 @@ msgstr "Sawa Line"
 
 #: FixedAssetItems.php:516 FixedAssetItems.php:519
 msgid "Diminishing Value"
-msgstr ""
+msgstr "Kushuka kwa thamani"
 
 #: FixedAssetItems.php:524
 msgid "Depreciation Rate"
-msgstr ""
+msgstr "Kiwango cha uchakavu"
 
 #: FixedAssetItems.php:528
 msgid "Asset Financial Summary"
-msgstr ""
+msgstr "Fedha mali Summary"
 
 #: FixedAssetItems.php:530 WorkOrderEntry.php:486
 msgid "Accumulated Costs"
@@ -10292,37 +10334,39 @@ msgstr "Gharama kusanyiko"
 
 #: FixedAssetItems.php:531
 msgid "Accumulated Depreciation"
-msgstr ""
+msgstr "Kusanyiko Uchakavu"
 
 #: FixedAssetItems.php:532 FixedAssetRegister.php:357
 msgid "Net Book Value"
-msgstr ""
+msgstr "Kitabu wavu Thamani"
 
 #: FixedAssetItems.php:537
 msgid "Not Yet Run"
-msgstr ""
+msgstr "Bado Run"
 
 #: FixedAssetItems.php:541
 msgid "Depreciation last run"
-msgstr ""
+msgstr "Uchakavu mwisho kukimbia"
 
 #: FixedAssetItems.php:546
 msgid "Insert New Fixed Asset"
-msgstr ""
+msgstr "Insert Mpya Fixed Asset"
 
 #: FixedAssetItems.php:551
 msgid ""
 "Only click the Delete button if you are sure you wish to delete the asset. "
 "Only assets with a zero book value can be deleted"
 msgstr ""
+"Tu bonyeza Futa kama wewe ni uhakika unataka kufuta mali. mali tu na thamani "
+"ya sifuri kitabu inaweza ilifutwa"
 
 #: FixedAssetItems.php:552
 msgid "Delete This Asset"
-msgstr ""
+msgstr "Kufuta huu Amana"
 
 #: FixedAssetItems.php:552
 msgid "Are You Sure? Only assets with a zero book value can be deleted."
-msgstr ""
+msgstr "Wewe ni haki? mali tu na thamani ya sifuri kitabu inaweza ilifutwa."
 
 #: FixedAssetList.php:5
 msgid "Fixed Asset Properties List"
@@ -10358,7 +10402,7 @@ msgstr "eneo hii ina maeneo mtoto hivyo hawezi kuondolewa"
 
 #: FixedAssetLocations.php:75
 msgid "You have assets in this location location so it cannot be removed"
-msgstr ""
+msgstr "Una mali katika eneo hili eneo hivyo hawezi kuondolewa"
 
 #: FixedAssetLocations.php:81
 msgid "The location has been deleted successfully"
@@ -10390,15 +10434,15 @@ msgstr "Ukosefu tarehe"
 
 #: FixedAssetRegister.php:82
 msgid "Cost B/fwd"
-msgstr ""
+msgstr "Gharama B / Fwd"
 
 #: FixedAssetRegister.php:83
 msgid "Depn B/fwd"
-msgstr ""
+msgstr "Depn B / Fwd"
 
 #: FixedAssetRegister.php:84 FixedAssetRegister.php:353
 msgid "Additions"
-msgstr ""
+msgstr "Nyongeza"
 
 #: FixedAssetRegister.php:85
 msgid "Depn"
@@ -10406,11 +10450,11 @@ msgstr "Depn"
 
 #: FixedAssetRegister.php:86
 msgid "Cost C/fwd"
-msgstr ""
+msgstr "Gharama C / Fwd"
 
 #: FixedAssetRegister.php:87
 msgid "Depn C/fwd"
-msgstr ""
+msgstr "Depn C / Fwd"
 
 #: FixedAssetRegister.php:88
 msgid "NBV"
@@ -10467,19 +10511,19 @@ msgstr "Serial No"
 
 #: FixedAssetRegister.php:351
 msgid "Cost B/Fwd"
-msgstr ""
+msgstr "Gharama B / Fwd"
 
 #: FixedAssetRegister.php:352
 msgid "Depn B/Fwd"
-msgstr ""
+msgstr "Depn B / Fwd"
 
 #: FixedAssetRegister.php:355
 msgid "Cost C/Fwd"
-msgstr ""
+msgstr "Gharama C / Fwd"
 
 #: FixedAssetRegister.php:356
 msgid "Depn C/Fwd"
-msgstr ""
+msgstr "Depn C / Fwd"
 
 #: FixedAssetTransfer.php:7 index.php:1319
 msgid "Change Asset Location"
@@ -11680,7 +11724,7 @@ msgstr "GL mwongozo wa kanuni aliingia haipo katika orodha ya"
 
 #: GLJournal.php:193
 msgid "You must select a GL account code"
-msgstr ""
+msgstr "Lazima kuchagua akaunti GL code"
 
 #: GLJournal.php:253
 msgid "Date to Process Journal"
@@ -11704,7 +11748,7 @@ msgstr "Tag GL"
 
 #: GLJournal.php:319
 msgid "Select a general ledger account code"
-msgstr ""
+msgstr "Kuchagua mkuu wa kitabu akaunti code"
 
 #: GLJournal.php:347 Payments.php:922 Payments.php:924
 msgid "GL Narrative"
@@ -12075,6 +12119,8 @@ msgid ""
 "This page can only be opened if a purchase order has been selected. Please "
 "select a purchase order first"
 msgstr ""
+"Ukarasa huu unaweza tu kufunguliwa kama ili kununua imekuwa kuchaguliwa. "
+"Tafadhali chagua ili kununua kwanza"
 
 #: GoodsReceived.php:54
 msgid ""
@@ -12308,18 +12354,24 @@ msgid ""
 "CRITICAL ERROR! NOTE DOWN THIS ERROR AND SEEK ASSISTANCE The fixed asset "
 "transaction could not be inserted because"
 msgstr ""
+"Muhimu ERROR! NOTE CHINI kosa hili kupata msaada wa fasta manunuzi ya mali "
+"inaweza kuwa kuingizwa kwa sababu"
 
 #: GoodsReceived.php:612 SupplierInvoice.php:1285
 msgid ""
 "CRITICAL ERROR! NOTE DOWN THIS ERROR AND SEEK ASSISTANCE. The fixed asset "
 "cost and date purchased was not able to be updated because:"
 msgstr ""
+"Muhimu ERROR! NOTE CHINI kosa hili msaada huo. Wa upangaji wa mali gharama "
+"na tarehe kununuliwa hakuwa na uwezo wa kuwa updated kwa sababu:"
 
 #: GoodsReceived.php:613 SupplierInvoice.php:1286
 msgid ""
 "The following SQL was used to attempt the update of the cost and the date "
 "the asset was purchased"
 msgstr ""
+"SQL zifuatazo ilitumika jaribio la update ya gharama na tarehe mali ya mara "
+"kununuliwa"
 
 #: GoodsReceived.php:642
 msgid "The purchase GL posting could not be inserted because"
@@ -12559,7 +12611,7 @@ msgstr "Wasambazaji Bakaa Katika Mwisho A Kabla ya Mwezi"
 
 #: index.php:448
 msgid "Supplier Transaction Inquiries"
-msgstr ""
+msgstr "Wasambazaji Transaction Maswali"
 
 #: index.php:462
 msgid "Add Supplier"
@@ -12636,7 +12688,7 @@ msgstr "Serial Item Utafiti Tool"
 
 #: index.php:618 PDFPrintLabel.php:76
 msgid "Print Price Labels"
-msgstr ""
+msgstr "Bei magazeti Labels"
 
 #: index.php:623
 msgid "Inventory Item Movements"
@@ -12829,7 +12881,7 @@ msgstr "Jukumu Permissions"
 
 #: index.php:960
 msgid "Page Security Settings"
-msgstr ""
+msgstr "Ukurasa wa Usalama Settings"
 
 #: index.php:965
 msgid "Bank Accounts"
@@ -12881,7 +12933,7 @@ msgstr "Layout fomu Mhariri"
 
 #: index.php:1025
 msgid "Label Templates Maintenance"
-msgstr ""
+msgstr "Matukio ya studio Maintenance"
 
 #: index.php:1030
 msgid "SMTP Server Details"
@@ -13019,11 +13071,11 @@ msgstr "GL Tags"
 
 #: index.php:1309
 msgid "Add a new Asset"
-msgstr ""
+msgstr "Kuongeza Amana mpya"
 
 #: index.php:1314 SelectAsset.php:6
 msgid "Select an Asset"
-msgstr ""
+msgstr "Kuchagua Amana"
 
 #: index.php:1324
 msgid "Depreciation Journal"
@@ -13132,7 +13184,7 @@ msgstr "Kwa wingi ili kununua inaweza kuwa retrieved na SQL sababu"
 
 #: InventoryPlanning.php:332
 msgid "   "
-msgstr ""
+msgstr "   "
 
 #: InventoryPlanning.php:353 InventoryPlanningPrefSupplier.php:457
 msgid "Print Inventory Planning Report Empty"
@@ -13423,129 +13475,133 @@ msgstr "Hesabu UTHAMINI Reporting"
 
 #: Labels.php:19
 msgid "Label Templates Maintainance"
-msgstr ""
+msgstr "Matukio ya studio Maintenance"
 
 #: Labels.php:50 Labels.php:61
 msgid "Correct data"
-msgstr ""
+msgstr "Sahihi data"
 
 #: Labels.php:70
 msgid "New ID"
-msgstr ""
+msgstr "New ID"
 
 #: Labels.php:71
 msgid "Edit data new label"
-msgstr ""
+msgstr "Hariri takwimu mpya studio"
 
 #: Labels.php:79
 msgid "Edit data label"
-msgstr ""
+msgstr "Hariri data studio"
 
 #: Labels.php:92
 msgid "New label"
-msgstr ""
+msgstr "Mpya studio"
 
 #: Labels.php:106
 msgid "There is no labels, create a new one"
-msgstr ""
+msgstr "Hakuna maandiko, kujenga mwezi mmoja"
 
 #: Labels.php:144
 msgid "Id required"
-msgstr ""
+msgstr "Id required"
 
 #: Labels.php:146
 msgid "This id exist in previous list"
-msgstr ""
+msgstr "id hii kuwepo katika orodha ya awali"
 
 #: Labels.php:149
 msgid "the description is required"
-msgstr ""
+msgstr "maelezo ni required"
 
 #: Labels.php:159 Labels.php:161 Labels.php:165 Labels.php:174 Labels.php:180
 #: Labels.php:186 Labels.php:192 Labels.php:217 Labels.php:219 Labels.php:224
 msgid "The value of"
-msgstr ""
+msgstr "Thamani ya"
 
 #: Labels.php:159 Labels.php:217
 msgid "would be numeric"
-msgstr ""
+msgstr "itakuwa numeric"
 
 #: Labels.php:161 Labels.php:219
 msgid "requires a positive value"
-msgstr ""
+msgstr "inahitaji thamani chanya"
 
 #: Labels.php:165
 msgid "would be a positive integer"
-msgstr ""
+msgstr "ingekuwa integer chanya"
 
 #: Labels.php:174
 msgid "requires to be greater than the height of the labels"
-msgstr ""
+msgstr "inahitaji kuwa kubwa kuliko urefu wa maandiko"
 
 #: Labels.php:180
 msgid ""
 "requires to be greater than the height of all the rows, including the top "
 "margin"
 msgstr ""
+"inahitaji kuwa kubwa kuliko urefu wa safu yote, ikiwa ni pamoja na kiasi ya "
+"juu"
 
 #: Labels.php:186
 msgid "requires to be greater than the width of the labels"
-msgstr ""
+msgstr "inahitaji kuwa kubwa kuliko ya upana wa maandiko"
 
 #: Labels.php:192
 msgid ""
 "requires to be greater than the width of all the cols, including the left "
 "margin"
 msgstr ""
+"inahitaji kuwa mkubwa zaidi ya upana wa cols wote, ikiwa ni pamoja na kiasi "
+"wa kushoto"
 
 #: Labels.php:205
 msgid "The vert. pos. value would be positive"
-msgstr ""
+msgstr "Ya vert. pos. thamani itakuwa chanya"
 
 #: Labels.php:207
 msgid "The value of the vert. pos. would be less than"
-msgstr ""
+msgstr "Thamani ya vert ya. pos. itakuwa chini ya"
 
 #: Labels.php:224
 msgid "in this position exceeds the label height"
-msgstr ""
+msgstr "katika nafasi hii kuzidi urefu studio"
 
 #: Labels.php:233
 msgid ""
 "The position and lenght of the string leads the text to get out of the label"
-msgstr ""
+msgstr "Nafasi na urefu wa kamba ya inaongoza Nakala ya kutoka nje ya studio"
 
 #: Labels.php:265
 msgid "Save"
-msgstr ""
+msgstr "Ila"
 
 #: Labels.php:413 includes/DefineLabelClass.php:8
 msgid "Label id"
-msgstr ""
+msgstr "Studio id"
 
 #: Labels.php:413
 msgid "Label array"
-msgstr ""
+msgstr "Studio safu"
 
 #: Labels.php:414
 msgid "New"
-msgstr ""
+msgstr "Mpya"
 
 #: Labels.php:414
 msgid "Copy"
-msgstr ""
+msgstr "Nakala"
 
 #: Labels.php:415
 msgid "Do you really want to erase the label"
-msgstr ""
+msgstr "Je, kweli unataka kufuta studio"
 
 #: Labels.php:546
 msgid "Could not rename the previous file."
-msgstr ""
+msgstr "Hakuweza rename faili uliopita."
 
 #: Labels.php:549
 msgid "Could not create the new XML file."
-msgstr ""
+msgstr "Hakuweza kujenga mpya XML file."
 
 #: Locations.php:10
 msgid "Location Maintenance"
@@ -14830,15 +14886,15 @@ msgstr "Hakuna bora GRNs hesabu maelezo retrieved"
 
 #: PageSecurity.php:5 PageSecurity.php:9
 msgid "Page Security Levels"
-msgstr ""
+msgstr "Ukurasa Usalama Ngazi"
 
 #: PageSecurity.php:16
 msgid "Could not update the page security value for the script because"
-msgstr ""
+msgstr "Hakuweza update ukurasa wa usalama wa thamani kwa sababu script"
 
 #: PageSecurity.php:54
 msgid "Update Security Levels"
-msgstr ""
+msgstr "Mwisho Usalama Ngazi"
 
 #: PaymentAllocations.php:14
 msgid "Payment Allocations"
@@ -14992,7 +15048,7 @@ msgstr "Malipo ya kufutwa tangu kuangalia si printed"
 
 #: Payments.php:34
 msgid "A bank account must be selected to make this payment from"
-msgstr ""
+msgstr "akaunti ya benki lazima kuchaguliwa kufanya hili malipo kutoka"
 
 #: Payments.php:45
 msgid ""
@@ -15037,6 +15093,8 @@ msgstr "Malipo haya hana kiasi aliingia na wala kusindika"
 #: Payments.php:229
 msgid "No bank account has been selected so this payment cannot be processed"
 msgstr ""
+"akaunti ya benki Hakuna imekuwa kuchaguliwa hivyo malipo hii inaweza kuwa "
+"processed"
 
 #: Payments.php:257
 msgid "Print Cheque using pre-printed stationery"
@@ -16624,39 +16682,39 @@ msgstr "GP"
 
 #: PDFPrintLabel.php:22
 msgid "There isn't any label template to select for printing. Click"
-msgstr ""
+msgstr "Kuna mtu yoyote template studio ya kuchagua kwa kuchapa. Click"
 
 #: PDFPrintLabel.php:23
 msgid "HERE"
-msgstr ""
+msgstr "HAPA"
 
 #: PDFPrintLabel.php:23
 msgid "to set up a new one"
-msgstr ""
+msgstr "kuanzisha mwezi mmoja"
 
 #: PDFPrintLabel.php:32
 msgid "You must specify the number of labels per item required"
-msgstr ""
+msgstr "Lazima kutaja idadi ya maandiko kwa bidhaa required"
 
 #: PDFPrintLabel.php:35
 msgid "You must select the items to be printed"
-msgstr ""
+msgstr "Lazima kuchagua vitu ya kuchapishwa"
 
 #: PDFPrintLabel.php:66
 msgid "There was an error. Consult your IT staff"
-msgstr ""
+msgstr "Kulikuwa na makosa. Wasiliana IT wafanyakazi"
 
 #: PDFPrintLabel.php:91
 msgid "Label Sticker Printing"
-msgstr ""
+msgstr "Sticker studio Printing"
 
 #: PDFPrintLabel.php:92
 msgid "Select label type"
-msgstr ""
+msgstr "Kuchagua aina ya studio"
 
 #: PDFPrintLabel.php:93
 msgid "Number of labels per item"
-msgstr ""
+msgstr "Idadi ya maandiko kwa bidhaa"
 
 #: PDFPrintLabel.php:94 Z_PriceChanges.php:94
 msgid "Price list"
@@ -16664,31 +16722,31 @@ msgstr "Orodha ya bei"
 
 #: PDFPrintLabel.php:95
 msgid "Update values"
-msgstr ""
+msgstr "Mwisho maadili"
 
 #: PDFPrintLabel.php:118
 msgid "Print labels"
-msgstr ""
+msgstr "Magazeti maandiko"
 
 #: PDFPrintLabel.php:119
 msgid "Print labels with borders"
-msgstr ""
+msgstr "Magazeti maandiko na mipaka"
 
 #: PDFPrintLabel.php:230
 msgid "Select a Category"
-msgstr ""
+msgstr "Kuchagua Jamii"
 
 #: PDFPrintLabel.php:235
 msgid "This category has no items to show"
-msgstr ""
+msgstr "Jamii hii ina vitu bila ya kuonyesha"
 
 #: PDFPrintLabel.php:339
 msgid "Unit not defined in scale operation! Correct the template"
-msgstr ""
+msgstr "Kitengo si defined katika operesheni wadogo! Sahihi ya template"
 
 #: PDFPrintLabel.php:501
 msgid "Couldnt get the currency data"
-msgstr ""
+msgstr "Couldnt kupata taarifa ya fedha"
 
 #: PDFQuotation.php:13
 msgid "Select Quotation To Print"
@@ -17298,6 +17356,8 @@ msgid ""
 "This order cannot be cancelled or rejected because some of it has already "
 "been received"
 msgstr ""
+"utaratibu huu unaweza kuwa kusitishwa au kukataliwa kwa sababu baadhi ya "
+"yake tayari kupokea"
 
 #: PO_Header.php:107
 msgid ""
@@ -17317,7 +17377,7 @@ msgstr "na kiasi haiwezi kupungua chini ya kiwango na tayari kupokea"
 
 #: PO_Header.php:114 ReverseGRN.php:135
 msgid "by"
-msgstr ""
+msgstr "na"
 
 #: PO_Header.php:117
 msgid "You do not have permission to reject this purchase order"
@@ -17333,10 +17393,13 @@ msgid ""
 "it has already been received. Quantities received will need to be returned "
 "to change the order back to pending."
 msgstr ""
+"Ili hii inaweza kuwa na hadhi ya iliyopita nyuma na inasubiri kwa sababu "
+"baadhi ya yake tayari kupokea. Kiasi kupokea unahitaji kuwa alirejea "
+"kubadilisha ili nyuma inasubiri."
 
 #: PO_Header.php:134
 msgid "Order set to pending status by"
-msgstr ""
+msgstr "Ili kuweka kwa sasa inasubiri kwa"
 
 #: PO_Header.php:138
 msgid ""
@@ -17365,7 +17428,7 @@ msgstr ""
 
 #: PO_Header.php:285
 msgid "Supplier changed by"
-msgstr ""
+msgstr "Wasambazaji iliyopita na"
 
 #: PO_Header.php:288
 msgid ""
@@ -17411,15 +17474,15 @@ msgstr "SQL kutumika Retrieve maelezo ya muuzaji na kushindwa mara"
 
 #: PO_Header.php:437
 msgid "You do not have the authority to raise Purchase Orders for"
-msgstr ""
+msgstr "Huna mamlaka ya kuongeza Daraja Ununuzi kwa"
 
 #: PO_Header.php:437
 msgid "Please Consult your system administrator for more information."
-msgstr ""
+msgstr "Tafadhali Wasiliana na msimamizi wa mfumo wako kwa habari zaidi."
 
 #: PO_Header.php:437
 msgid "You can setup authorisations"
-msgstr ""
+msgstr "Unaweza auktorisationer kuanzisha"
 
 #: PO_Header.php:508 PO_Header.php:579 PO_Items.php:230 PO_Items.php:381
 #: PO_Items.php:902 PO_Items.php:905 PO_OrderDetails.php:86
@@ -17508,7 +17571,7 @@ msgstr "Kupokea hii ili"
 
 #: PO_Header.php:776
 msgid "New Purchase Order"
-msgstr ""
+msgstr "Ununuzi mpya Order"
 
 #: PO_Header.php:811
 msgid "Status Comment"
@@ -17603,7 +17666,7 @@ msgstr ""
 
 #: PO_Items.php:103
 msgid "Order Created by"
-msgstr ""
+msgstr "Ili Imeundwa na"
 
 #: PO_Items.php:174 SpecialOrder.php:309
 msgid ""
@@ -17807,12 +17870,16 @@ msgid ""
 "An asset code was entered but it does not yet exist. Only pre-existing asset "
 "ids can be entered when ordering a fixed asset"
 msgstr ""
+"An code mali mara aliingia lakini haina bado zipo. Tu kabla zilizopo mali "
+"IDS inaweza kuwa aliingia wakati kuagiza mali fasta"
 
 #: PO_Items.php:684
 msgid ""
 "The description of the item being purchased is required where a non-stock "
 "item is being ordered"
 msgstr ""
+"maelezo ya bidhaa kuwa kununuliwa ni required ambapo bidhaa isiyo ya hisa ni "
+"kuwa aliamrisha"
 
 #: PO_Items.php:696 Stocks.php:785 includes/PO_ReadInOrder.inc:181
 msgid "each"
@@ -17864,19 +17931,19 @@ msgstr "Ujumla Ledger Code"
 
 #: PO_Items.php:1008
 msgid "OR Asset ID"
-msgstr ""
+msgstr "AU Amana ID"
 
 #: PO_Items.php:1011
 msgid "Not an Asset"
-msgstr ""
+msgstr "Si ya Amana"
 
 #: PO_Items.php:1014
 msgid "Not yet purchased"
-msgstr ""
+msgstr "Bado kununuliwa"
 
 #: PO_Items.php:1021 SuppFixedAssetChgs.php:111
 msgid "New Fixed Asset"
-msgstr ""
+msgstr "Mpya Fixed Asset"
 
 #: PO_Items.php:1022
 msgid "Quantity to purchase"
@@ -18328,12 +18395,12 @@ msgstr "Ndani Stock Location"
 
 #: PO_SelectOSPurchOrder.php:154 PO_SelectPurchOrder.php:123
 msgid "Order Status:"
-msgstr ""
+msgstr "Ili Status:"
 
 #: PO_SelectOSPurchOrder.php:156 PO_SelectOSPurchOrder.php:158
 #: PO_SelectPurchOrder.php:125 PO_SelectPurchOrder.php:127
 msgid "Pending and Authorised"
-msgstr ""
+msgstr "Inasubiri na zilizoidhinishwa"
 
 #: PO_SelectOSPurchOrder.php:180 PO_SelectPurchOrder.php:5
 #: PO_SelectPurchOrder.php:149
@@ -19346,6 +19413,8 @@ msgid ""
 "The price entered was not numeric and a number is expected. No changes have "
 "been made to the database"
 msgstr ""
+"Bei aliingia alikuwa numeric na idadi inatarajiwa. Hakuna mabadiliko "
+"yamefanywa na database"
 
 #: PurchData.php:48
 msgid "The price entered is zero"
@@ -19360,12 +19429,16 @@ msgid ""
 "The lead time entered was not numeric a number of days is expected no "
 "changes have been made to the database"
 msgstr ""
+"Mara ya kuongoza aliingia alikuwa numeric idadi ya siku inatarajiwa hakuna "
+"mabadiliko yamefanywa na database"
 
 #: PurchData.php:58
 msgid ""
 "The minimum order quantity was not numeric and a number is expected no "
 "changes have been made to the database"
 msgstr ""
+"Cha chini ili wingi hakuwa numeric na idadi inatarajiwa hakuna mabadiliko "
+"yamefanywa na database"
 
 #: PurchData.php:63
 msgid "The conversion factor entered was not numeric"
@@ -19454,7 +19527,7 @@ msgstr "Wasambazaji Unit"
 
 #: PurchData.php:171 SelectProduct.php:327
 msgid "Min Order Qty"
-msgstr ""
+msgstr "Order min Uchina"
 
 #: PurchData.php:173
 msgid "Preferred"
@@ -19604,7 +19677,7 @@ msgstr "Wasambazaji Stock Code"
 
 #: PurchData.php:457
 msgid "MinOrderQty"
-msgstr ""
+msgstr "MinOrderQty"
 
 #: PurchData.php:459
 msgid "Supplier Stock Description"
@@ -20116,24 +20189,24 @@ msgstr ""
 
 #: ReverseGRN.php:135
 msgid "GRN Reversed for"
-msgstr ""
+msgstr "GRN kuachwa kwa"
 
 #: ReverseGRN.php:138
 msgid ""
 "The purchase order statusand status comment could not be changed because"
-msgstr ""
+msgstr "Ili kununua statusand maoni sasa inaweza kuwa iliyopita kwa sababu"
 
 #: ReverseGRN.php:139
 msgid "The following SQL to update the purchase order header record was used"
-msgstr ""
+msgstr "SQL zifuatazo update ili kununua rekodi header ilitumika"
 
 #: ReverseGRN.php:147
 msgid "The GRN record could not be deleted because"
-msgstr ""
+msgstr "rekodi ya GRN inaweza kuwa ilifutwa kwa sababu"
 
 #: ReverseGRN.php:148
 msgid "The following SQL to delete the GRN record was used"
-msgstr ""
+msgstr "SQL zifuatazo kufuta rekodi ya GRN ilitumika"
 
 #: ReverseGRN.php:155
 msgid "The GRN record could not be updated"
@@ -20148,11 +20221,14 @@ msgid ""
 "CRITICAL ERROR! NOTE DOWN THIS ERROR AND SEEK ASSISTANCE. The fixed asset "
 "cost addition could not be reversed:"
 msgstr ""
+"Muhimu ERROR! NOTE CHINI kosa hili msaada huo. Aidha mali ya fasta gharama "
+"inaweza kuwa kuachwa:"
 
 #: ReverseGRN.php:183
 msgid ""
 "The following SQL was used to attempt the reduce the cost of the asset was:"
 msgstr ""
+"SQL zifuatazo ilitumika jaribio la kupunguza gharama ya mali ya mara:"
 
 #: ReverseGRN.php:191
 msgid "Could not determine if the item exists because"
@@ -20428,7 +20504,7 @@ msgstr "Inaweza si mzigo vipindi meza"
 
 #: SalesAnalReptCols.php:425
 msgid "ToPeriod"
-msgstr ""
+msgstr "ToPeriod"
 
 #: SalesAnalReptCols.php:439
 msgid "Data to show"
@@ -21379,42 +21455,48 @@ msgid ""
 "There are no asset categories currently defined please use the link below to "
 "set them up"
 msgstr ""
+"Kuna makundi mali hakuna sasa defined tafadhali kutumia kiungo chini kuweka "
+"yao juu"
 
 #: SelectAsset.php:37
 msgid "Define Asset Categories"
-msgstr ""
+msgstr "Define Jamii Amana"
 
 #: SelectAsset.php:53 SelectAsset.php:55
 msgid "Any asset category"
-msgstr ""
+msgstr "Aina yoyote ya mali"
 
 #: SelectAsset.php:67
 msgid "Enter partial description"
-msgstr ""
+msgstr "Kuingia maelezo ubaguzi"
 
 #: SelectAsset.php:78 SelectAsset.php:80
 msgid "Any asset location"
-msgstr ""
+msgstr "Hatiani yeyote mali"
 
 #: SelectAsset.php:93
 msgid "Enter partial asset code"
-msgstr ""
+msgstr "Kuingia sehemu ya mali code"
 
 #: SelectAsset.php:114
 msgid ""
 "Asset description keywords have been used in preference to the asset code "
 "extract entered"
 msgstr ""
+"maneno maelezo ya Amana zimetumika katika upendeleo kwa utaratibu wa mali "
+"dondoo aliingia"
 
 #: SelectAsset.php:171
 msgid "No assets were returned by the SQL because"
-msgstr ""
+msgstr "mali Hakuna kurudi kwa sababu SQL"
 
 #: SelectAsset.php:175
 msgid ""
 "No assets were returned by this search please re-enter alternative criteria "
 "to try again"
 msgstr ""
+"Hakuna mali akarudi na kutafuta hii tafadhali tena kuingia vigezo mbadala ya "
+"kujaribu tena"
 
 #: SelectCompletedOrder.php:9
 msgid "Search All Sales Orders"
@@ -21548,7 +21630,7 @@ msgstr "Rekodi ya wateja wa kuchaguliwa mteja"
 
 #: SelectCreditItems.php:204
 msgid "Select Customer For Credit Note"
-msgstr ""
+msgstr "Kuchagua Wateja Kwa Angalia Mikopo"
 
 #: SelectCreditItems.php:206
 msgid "Customer Selection"
@@ -22189,10 +22271,12 @@ msgid ""
 "No asset was selected to dispose of. No assets have been added to this "
 "customer order"
 msgstr ""
+"Hakuna mali ya kuchaguliwa kisheria. Hakuna mali wamekuwa aliongeza kwa "
+"utaratibu huu mteja"
 
 #: SelectOrderItems.php:1013
 msgid "Asset Disposals"
-msgstr ""
+msgstr "Mali Disposals"
 
 #: SelectOrderItems.php:1120
 msgid ""
@@ -22274,7 +22358,7 @@ msgstr "Kutafuta Items Order"
 
 #: SelectOrderItems.php:1605
 msgid "Fixed Asset Disposal"
-msgstr ""
+msgstr "Fasta Amana Taka"
 
 #: SelectOrderItems.php:1755
 msgid "Use this screen for the "
@@ -22286,19 +22370,19 @@ msgstr " wa mazao ya kuwa aliamrisha"
 
 #: SelectOrderItems.php:1786
 msgid "Use this screen to select an asset to dispose of to this customer"
-msgstr ""
+msgstr "Kutumia screen kuchagua ni mali ya kuondoa kwa wateja hii"
 
 #: SelectOrderItems.php:1793
 msgid "Asset to Dispose Of"
-msgstr ""
+msgstr "Mali ya kuondoa"
 
 #: SelectOrderItems.php:1796
 msgid "Select Asset To Dispose of From the List Below"
-msgstr ""
+msgstr "Kuchagua mali na Tupa Kutoka Orodha ya Chini"
 
 #: SelectOrderItems.php:1801
 msgid "Add Asset To Order"
-msgstr ""
+msgstr "Kuongeza mali na Order"
 
 #: SelectOrderItems.php:1807
 msgid "Cancel Whole Order"
@@ -22461,7 +22545,7 @@ msgstr "Kununua bidhaa kutoka"
 
 #: SelectProduct.php:411
 msgid "default"
-msgstr ""
+msgstr "default"
 
 #: SelectProduct.php:418 SelectProduct.php:450
 msgid "Add Inventory Items"
@@ -22605,7 +22689,7 @@ msgstr "Mtazamo Daraja Ununuzi zote"
 
 #: SelectSupplier.php:163
 msgid "List all open shipments for"
-msgstr ""
+msgstr "Orodha yote umeongezeka wazi kwa ajili ya"
 
 #: SelectSupplier.php:164
 msgid "Search / Modify / Close Shipments"
@@ -22711,7 +22795,7 @@ msgstr "Hakuna vitu akarudi na SQL sababu"
 
 #: SelectWorkOrder.php:109
 msgid "For the item"
-msgstr ""
+msgstr "Kwa ajili ya bidhaa"
 
 #: SelectWorkOrder.php:111
 msgid "Work Order number"
@@ -22792,7 +22876,7 @@ msgstr "inaweza kuwa ziko katika orodha ya"
 
 #: ShipmentCosting.php:52
 msgid "Shipment Details"
-msgstr ""
+msgstr "Transport Details"
 
 #: ShipmentCosting.php:59 Shipt_Select.php:286 ShiptsList.php:38
 msgid "Vessel"
@@ -22841,7 +22925,7 @@ msgstr ""
 
 #: ShipmentCosting.php:137
 msgid "Items on shipment"
-msgstr ""
+msgstr "Vitu kwenye transport"
 
 #: ShipmentCosting.php:142 ShipmentCosting.php:143
 #: includes/PDFStatementPageHeader.inc:170
@@ -23756,11 +23840,11 @@ msgstr "Malighafi"
 
 #: StockCategories.php:60
 msgid "The minimum value is expected to be a numeric value"
-msgstr ""
+msgstr "Thamani ya chini inatarajiwa kuwa na thamani ya nambari"
 
 #: StockCategories.php:64
 msgid "The maximum value is expected to be a numeric value"
-msgstr ""
+msgstr "thamani ya upeo unatarajiwa kuwa na thamani ya nambari"
 
 #: StockCategories.php:84
 msgid "Could not update the stock category"
@@ -23923,15 +24007,15 @@ msgstr "Default Thamani"
 
 #: StockCategories.php:486
 msgid "Numeric Value"
-msgstr ""
+msgstr "Numeric Thamani"
 
 #: StockCategories.php:487
 msgid "Minimum Value"
-msgstr ""
+msgstr "Thamani ya chini"
 
 #: StockCategories.php:488
 msgid "Maximum Value"
-msgstr ""
+msgstr "Upeo Thamani"
 
 #: StockCategories.php:489
 msgid "Require in SO"
@@ -24208,7 +24292,7 @@ msgstr "Sehemu ya kupeleka mahali pengine ili kufidia kiwango reorder"
 
 #: StockDispatch.php:38
 msgid "Could not retrieve location name from the database"
-msgstr ""
+msgstr "Hakuweza Retrieve eneo jina kutoka database"
 
 #: StockDispatch.php:90 StockDispatch.php:101
 msgid "Stock Dispatch - Problem Report"
@@ -24257,6 +24341,14 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t Use Bulk Inventory Transfer - Receive to process the "
 "batch"
 msgstr ""
+"Kujenga kundi la overstock kutoka sehemu moja ya kuhamisha kwenye eneo "
+"lingine ni chini ya kiwango upya ili.<br/>\n"
+"\t\t\t\t\t\t\t\t\t\t Wingi kwa meli ni msingi reorder ngazi minus wingi kwa "
+"upande katika eneo, kama kuna<br/>\n"
+"\t\t\t\t\t\t\t\t\t\t asilimia dispatch aliingia, kiasi hicho zinazohitajika "
+"ni umechangiwa na asilimia aliingia.<br/>\n"
+"\t\t\t\t\t\t\t\t\t\t Kutumia wingi hesabu kuhamisha - Kupokea na mchakato wa "
+"kundi"
 
 #: StockDispatch.php:239
 msgid "Dispatch Percent"
@@ -24440,7 +24532,7 @@ msgstr "Tafadhali sahihi hii au kuondoa kipengele"
 
 #: StockLocTransfer.php:55
 msgid "does not have enough stock available for transfer."
-msgstr ""
+msgstr "haina hisa kutosha inapatikana kwa ajili ya kuhamisha."
 
 #: StockLocTransfer.php:64
 msgid "You must enter at least 1 Stock Item to transfer"
@@ -25296,11 +25388,11 @@ msgstr "Bidhaa Jamii Mali"
 
 #: Stocks.php:984
 msgid "A number between"
-msgstr ""
+msgstr "Idadi kati"
 
 #: Stocks.php:984
 msgid "is expected"
-msgstr ""
+msgstr "inatarajiwa"
 
 #: Stocks.php:1018
 msgid "Insert New Item"
@@ -25764,13 +25856,15 @@ msgstr "Kuongeza Angalia Mikopo"
 
 #: SuppFixedAssetChgs.php:16
 msgid "Fixed Asset Charges or Credits"
-msgstr ""
+msgstr "Fasta Amana Mashtaka au Credits"
 
 #: SuppFixedAssetChgs.php:27
 msgid ""
 "Fixed asset additions or credits are entered against supplier invoices or "
 "credit notes respectively"
 msgstr ""
+"nyongeza ya mali zisizohamishika au mikopo ni aliingia dhidi ya ankara "
+"wasambazaji au maelezo ya mikopo kwa mtiririko"
 
 #: SuppFixedAssetChgs.php:27 SuppShiptChgs.php:29
 msgid ""
@@ -25791,20 +25885,23 @@ msgid ""
 "The asset ID entered manually is not a valid fixed asset. If you do not know "
 "the asset reference, select it from the list"
 msgstr ""
+"ID mali manuellt si halali fasta mali. Kama hamjui kumbukumbu mali, chagua "
+"kutoka kwenye orodha ya"
 
 #: SuppFixedAssetChgs.php:49
 msgid ""
 "The amount entered is not numeric. This fixed asset cannot be added to the "
 "invoice"
 msgstr ""
+"Kiasi aliingia si nambari. mali hii fasta hawezi kuwa aliongeza kwa invoice"
 
 #: SuppFixedAssetChgs.php:68
 msgid "Fixed Assets on Invoice"
-msgstr ""
+msgstr "Fasta mali ya ankara"
 
 #: SuppFixedAssetChgs.php:70
 msgid "Fixed Asset credits on Credit Note"
-msgstr ""
+msgstr "Fasta mikopo ya Amana juu ya Mikopo Kumbuka"
 
 #: SuppFixedAssetChgs.php:108
 msgid ""
@@ -25812,14 +25909,17 @@ msgid ""
 "the asset from the list below. Only  assets with no cost will show in the "
 "list"
 msgstr ""
+"Kama unajua utaratibu wa kuingia katika sanduku Amana ID pembejeo, "
+"vinginevyo mali kuchagua kutoka katika orodha ya chini. Tu mali na gharama "
+"hakuna katika orodha ya"
 
 #: SuppFixedAssetChgs.php:112
 msgid "Asset Selection"
-msgstr ""
+msgstr "Mali Uchaguzi"
 
 #: SuppFixedAssetChgs.php:140
 msgid "Enter Fixed Asset"
-msgstr ""
+msgstr "Fixed Asset kuingia"
 
 #: SuppInvGRNs.php:14
 msgid "Enter Supplier Invoice Against Goods Received"
@@ -26281,12 +26381,16 @@ msgid ""
 "You should automatically be forwarded to the entry of supplier credit notes "
 "against contracts page"
 msgstr ""
+"Unapaswa kuwa na kupelekwa moja kwa moja kuingia kwa maelezo mikopo "
+"wasambazaji dhidi ya mikataba ya ukurasa"
 
 #: SupplierCredit.php:255
 msgid ""
 "You should automatically be forwarded to the entry of invoices against fixed "
 "assets page"
 msgstr ""
+"Lazima moja kwa moja kuwa kupelekwa kwa kuingia wa ankara dhidi ya "
+"rasilimali za kudumu ukurasa"
 
 #: SupplierCredit.php:280
 msgid "Supplier Credit Note Reference"
@@ -26302,7 +26406,7 @@ msgstr "katika muundo"
 
 #: SupplierCredit.php:307
 msgid "Purchase Order Credits"
-msgstr ""
+msgstr "Kununua Order Credits"
 
 #: SupplierCredit.php:311
 msgid "Credited"
@@ -26318,7 +26422,7 @@ msgstr "Jumla ya thamani ya bidhaa credited"
 
 #: SupplierCredit.php:339
 msgid "Shipment Credits"
-msgstr ""
+msgstr "Credits transport"
 
 #: SupplierCredit.php:359
 msgid "Total Credited Against Shipments"
@@ -26326,15 +26430,15 @@ msgstr "Jumla ya sifa dhidi ya umeongezeka"
 
 #: SupplierCredit.php:366
 msgid "Fixed Asset Credits"
-msgstr ""
+msgstr "Fasta Amana Credits"
 
 #: SupplierCredit.php:397 SupplierInvoice.php:371
 msgid "Contract Charges"
-msgstr ""
+msgstr "Mkataba Mashtaka"
 
 #: SupplierCredit.php:431 SupplierInvoice.php:405
 msgid "General Ledger Analysis"
-msgstr ""
+msgstr "Ujumla Ledger Uchambuzi"
 
 #: SupplierCredit.php:478 SupplierCredit.php:481
 msgid "Credit Amount in Supplier Currency"
@@ -26470,13 +26574,15 @@ msgstr "Ya jumla ya shughuli kwa ajili ya kitabu transport"
 
 #: SupplierCredit.php:735
 msgid "Asset Credit"
-msgstr ""
+msgstr "Mali ya Mikopo"
 
 #: SupplierCredit.php:737 SupplierInvoice.php:721
 msgid ""
 "The general ledger transaction for the asset addition could not be added "
 "because"
 msgstr ""
+"Ya jumla ya shughuli kitabu kwa ajili ya kuongeza mali inaweza kuwa "
+"aliongeza kwa sababu"
 
 #: SupplierCredit.php:768 SupplierInvoice.php:751
 msgid "Contract charge against"
@@ -26606,11 +26712,13 @@ msgid ""
 "CRITICAL ERROR! NOTE DOWN THIS ERROR AND SEEK ASSISTANCE. The fixed asset "
 "cost was not able to be updated because:"
 msgstr ""
+"Muhimu ERROR! NOTE CHINI kosa hili msaada huo. Wa upangaji wa mali gharama "
+"hakuwa na uwezo wa kuwa updated kwa sababu:"
 
 #: SupplierCredit.php:1197
 msgid ""
 "The following SQL was used to attempt the update of the fixed asset cost:"
-msgstr ""
+msgstr "SQL zifuatazo ilitumika jaribio la update ya gharama ya fasta mali:"
 
 #: SupplierCredit.php:1245 SupplierInvoice.php:1240
 msgid "The contract charge record for contract"
@@ -26625,10 +26733,12 @@ msgid ""
 "CRITICAL ERROR! NOTE DOWN THIS ERROR AND SEEK ASSISTANCE. The fixed asset "
 "cost  was not able to be updated because:"
 msgstr ""
+"Muhimu ERROR! NOTE CHINI kosa hili msaada huo. Wa upangaji wa mali gharama "
+"hakuwa na uwezo wa kuwa updated kwa sababu:"
 
 #: SupplierCredit.php:1285 SupplierInvoice.php:1193
 msgid "The following SQL was used to attempt the update of the asset cost:"
-msgstr ""
+msgstr "SQL zifuatazo ilitumika jaribio la update ya gharama ya mali:"
 
 #: SupplierCredit.php:1291
 msgid "Supplier credit note number"
@@ -26750,6 +26860,8 @@ msgid ""
 "You should automatically be forwarded to the entry of invoice amounts "
 "against fixed assets page"
 msgstr ""
+"Unapaswa kuwa na kupelekwa moja kwa moja kuingia kwa kiasi invoice dhidi ya "
+"rasilimali za kudumu ukurasa"
 
 #: SupplierInvoice.php:249
 msgid "Supplier Invoice Reference"
@@ -26757,7 +26869,7 @@ msgstr "Wasambazaji ankara Reference"
 
 #: SupplierInvoice.php:278
 msgid "Purchase Order Charges"
-msgstr ""
+msgstr "Kununua Order Mashtaka"
 
 #: SupplierInvoice.php:279
 msgid "Seq"
@@ -26769,11 +26881,11 @@ msgstr "Bei katika"
 
 #: SupplierInvoice.php:310
 msgid "Shipment Charges"
-msgstr ""
+msgstr "Transport Mashtaka"
 
 #: SupplierInvoice.php:339
 msgid "Fixed Asset Additions"
-msgstr ""
+msgstr "Fasta Amana Additions"
 
 #: SupplierInvoice.php:455
 msgid "Update Tax Calculation"
@@ -26797,20 +26909,24 @@ msgid ""
 "The invoice as entered cannot be processed because the total amount of the "
 "invoice is less than  0"
 msgstr ""
+"invoice ya kama aliingia hawezi kuwa kusindika kwa sababu ya jumla ya ankara "
+"ni chini ya 0"
 
 #: SupplierInvoice.php:558
 msgid "Invoices are expected to have a positive charge"
-msgstr ""
+msgstr "Ankara wanatarajiwa kuwa na chaji chanya"
 
 #: SupplierInvoice.php:562
 msgid ""
 "The invoice as entered will be processed but be warned the amount of the "
 "invoice is  zero!"
 msgstr ""
+"Ankara kama aliingia itakuwa processed lakini alionya kiasi cha ankara ni "
+"sifuri!"
 
 #: SupplierInvoice.php:562
 msgid "Invoices are normally expected to have a positive charge"
-msgstr ""
+msgstr "Ankara ni kawaida unatarajiwa kuwa na chaji chanya"
 
 #: SupplierInvoice.php:565
 msgid ""
@@ -26895,7 +27011,7 @@ msgstr "Transport kosa"
 
 #: SupplierInvoice.php:719
 msgid "Asset Addition"
-msgstr ""
+msgstr "Aidha mali"
 
 #: SupplierInvoice.php:1014
 msgid "The total posted to the debit accounts is"
@@ -26942,6 +27058,8 @@ msgid ""
 "CRITICAL ERROR! NOTE DOWN THIS ERROR AND SEEK ASSISTANCE. The fixed asset "
 "cost could not be updated because:"
 msgstr ""
+"Muhimu ERROR! NOTE CHINI kosa hili msaada huo. Wa upangaji wa gharama mali "
+"inaweza kuwa mwisho kwa sababu:"
 
 #: SupplierInvoice.php:1292
 msgid "Supplier invoice number"
@@ -27578,6 +27696,8 @@ msgid ""
 "The shipment entered manually is not a valid shipment reference. If you do "
 "not know the shipment reference, select it from the list"
 msgstr ""
+"transport aliingia manually si halali transport rejea. Kama hamjui "
+"kumbukumbu transport, chagua kutoka kwenye orodha ya"
 
 #: SuppShiptChgs.php:51 SuppTransGLAnalysis.php:52
 msgid "The amount entered is not numeric"
@@ -27637,7 +27757,7 @@ msgstr "Kuingia Line GL"
 
 #: SuppTransGLAnalysis.php:36
 msgid "You must select a general ledger code from the list below"
-msgstr ""
+msgstr "Lazima kuchagua mkuu wa kitabu code kutoka kwenye orodha hapo chini"
 
 #: SuppTransGLAnalysis.php:46
 msgid "The account code entered is not a valid code"
@@ -29497,123 +29617,132 @@ msgstr "Kitengo cha kupima"
 
 #: UpgradeDatabase.php:5
 msgid "Upgrade webERP Database"
-msgstr ""
+msgstr "Kuboresha webERP Database"
 
 #: UpgradeDatabase.php:10
 msgid ""
 "This script will run perform any modifications to the database required to "
 "allow the additional functionality in later scripts"
 msgstr ""
+"Hii script inakwenda kufanya marekebisho yoyote ya database required "
+"kuruhusu kazi zaidi katika maandiko baadaye"
 
 #: UpgradeDatabase.php:15 UpgradeDatabase.php:36
 msgid "The webERP code is version"
-msgstr ""
+msgstr "Kanuni webERP ni toleo"
 
 #: UpgradeDatabase.php:15
 msgid "and the database version is not actually recorded at this version"
-msgstr ""
+msgstr "na toleo la Mbegu si kweli kumbukumbu katika toleo hili"
 
 #: UpgradeDatabase.php:16
 msgid "Select the version you are upgrading from:"
-msgstr ""
+msgstr "Kuchagua toleo wewe ni kuwaendeleza kutoka:"
 
 #: UpgradeDatabase.php:18
 msgid "Apply database changes manually"
-msgstr ""
+msgstr "Mbegu kuomba mabadiliko manually"
 
 #: UpgradeDatabase.php:19
 msgid "Version 3.00"
-msgstr ""
+msgstr "Toleo 3.00"
 
 #: UpgradeDatabase.php:20
 msgid "Version 3.01"
-msgstr ""
+msgstr "Toleo 3.01"
 
 #: UpgradeDatabase.php:21
 msgid "Version 3.02"
-msgstr ""
+msgstr "Toleo 3.02"
 
 #: UpgradeDatabase.php:22
 msgid "Version 3.03"
-msgstr ""
+msgstr "Toleo 3.03"
 
 #: UpgradeDatabase.php:23
 msgid "Version 3.04"
-msgstr ""
+msgstr "Toleo 3.04"
 
 #: UpgradeDatabase.php:24
 msgid "Version 3.05"
-msgstr ""
+msgstr "Toleo 3.05"
 
 #: UpgradeDatabase.php:25
 msgid "Version 3.06"
-msgstr ""
+msgstr "Toleo 3.06"
 
 #: UpgradeDatabase.php:26
 msgid "Version 3.07"
-msgstr ""
+msgstr "Toleo 3.07"
 
 #: UpgradeDatabase.php:27
 msgid "Version 3.08"
-msgstr ""
+msgstr "Toleo 3.08"
 
 #: UpgradeDatabase.php:28
 msgid "Version 3.09"
-msgstr ""
+msgstr "Toleo 3.09"
 
 #: UpgradeDatabase.php:29
 msgid "Version 3.10"
-msgstr ""
+msgstr "Toleo 3.10"
 
 #: UpgradeDatabase.php:30
 msgid "Version 3.11"
-msgstr ""
+msgstr "Toleo 3.11"
 
 #: UpgradeDatabase.php:36
 msgid "and the database version is"
-msgstr ""
+msgstr "na toleo database ni"
 
 #: UpgradeDatabase.php:40
 msgid "Perform Database Upgrade"
-msgstr ""
+msgstr "Kufanya Database Upgrade"
 
 #: UpgradeDatabase.php:49
 msgid "Backup"
-msgstr ""
+msgstr "Backup"
 
 #: UpgradeDatabase.php:57
 msgid "webERP backup file attached"
-msgstr ""
+msgstr "webERP Backup attached file"
 
 #: UpgradeDatabase.php:59
 msgid "Database Backup"
-msgstr ""
+msgstr "Mbegu Backup"
 
 #: UpgradeDatabase.php:63
 msgid "A backup of the database has been taken and emailed to you"
-msgstr ""
+msgstr "A Backup ya database imechukuliwa na Emailed wewe"
 
 #: UpgradeDatabase.php:67
 msgid ""
 "No datbase updates have been done as you selected to apply these manually - "
 "upgrade SQL scripts are under sql/mysql/ directory in the distribution"
 msgstr ""
+"updates Hakuna datbase zimefanyika kama wewe kuchaguliwa kwa kutumia haya "
+"manually - kuboresha SQL scripts ni chini ya sql / mysql / directory katika "
+"usambazaji"
 
 #: UpgradeDatabase.php:70
 msgid ""
 "If there are any failures then please check with your system administrator. "
 "Please read all notes carefully to ensure they are expected"
 msgstr ""
+"Kama kuna mapungufu basi tafadhali wasiliana na mtawala wa mfumo wako. "
+"Tafadhali soma maelezo yote kwa makini ili kuhakikisha wanatarajiwa"
 
 #: UpgradeDatabase.php:103
 msgid ""
 "Only mysql upgrades are performed seamlessly at this time. Your database "
 "will need to be manually updated"
 msgstr ""
+"Tu upgrades mysql ni kutumbuiza seamlessly kwa wakati huu. Mbegu yako haja "
+"ya kuwa na manually updated"
 
 #: UpgradeDatabase.php:115
 msgid "Applying"
-msgstr ""
+msgstr "Kutumia"
 
 #: UpgradeDatabase.php:142 Z_Upgrade_3.10-3.11.php:59 Z_Upgrade3.10.php:29
 #: Z_Upgrade3.10.php:34 Z_Upgrade3.10.php:46 Z_Upgrade3.10.php:51
@@ -29644,7 +29773,7 @@ msgstr "Kuingia tayari amefanya"
 
 #: UpgradeDatabase.php:157
 msgid "SQL syntax error. The SQL error message is"
-msgstr ""
+msgstr "SQL syntax kosa. Kosa SQL ujumbe"
 
 #: UpgradeDatabase.php:160 Z_Upgrade_3.10-3.11.php:79
 #: Z_Upgrade_3.11-4.00.php:79
@@ -29653,7 +29782,7 @@ msgstr "muhimu ya msingi ipo"
 
 #: UpgradeDatabase.php:163
 msgid "Index already dropped previously"
-msgstr ""
+msgstr "Index tayari imeshuka awali"
 
 #: UpgradeDatabase.php:166 Z_Upgrade_3.10-3.11.php:82
 #: Z_Upgrade_3.11-4.00.php:82
@@ -29675,7 +29804,7 @@ msgstr "Latin Magharibi Lugha"
 
 #: UserSettings.php:15
 msgid "Eastern European Russian Japanese Korean Hebrew Arabic Thai"
-msgstr ""
+msgstr "Ulaya ya Mashariki Kirusi Kijapani Kikorea Kiyahudi Kiarabu Thai"
 
 #: UserSettings.php:16 WWW_Users.php:27
 msgid "Chinese"
@@ -32151,37 +32280,39 @@ msgstr "Picha ya kuagiza"
 
 #: Z_ImportFixedAssets.php:7
 msgid "Import Fixed Assets"
-msgstr ""
+msgstr "Kuagiza Fixed Assets"
 
 #: Z_ImportFixedAssets.php:49
 msgid "File contains"
-msgstr ""
+msgstr "Faili ina"
 
 #: Z_ImportFixedAssets.php:49
 msgid "columns, expected"
-msgstr ""
+msgstr "nguzo, inatarajiwa"
 
 #: Z_ImportFixedAssets.php:49
 msgid "Study a downloaded template to see the format for the file"
-msgstr ""
+msgstr "Utafiti template kupakuliwa kuona muundo kwa ajili ya faili"
 
 #: Z_ImportFixedAssets.php:59
 msgid ""
 ". Download a template and ensuer that fields are in the same sequence as the "
 "template."
 msgstr ""
+". Shusha template na ensuer kwamba mashamba ni katika mlolongo huo kama "
+"kigezo."
 
 #: Z_ImportFixedAssets.php:59
 msgid "The selected file contains fields in the incorrect order ("
-msgstr ""
+msgstr "Faili ya kuchaguliwa ina mashamba katika mpangilio sahihi ("
 
 #: Z_ImportFixedAssets.php:77
 msgid "fields are required, but"
-msgstr ""
+msgstr "mashamba ni required, lakini"
 
 #: Z_ImportFixedAssets.php:77
 msgid "fields were received"
-msgstr ""
+msgstr "mashamba walikaribishwa"
 
 #: Z_ImportFixedAssets.php:125 Z_ImportFixedAssets.php:130
 #: Z_ImportFixedAssets.php:134 Z_ImportFixedAssets.php:139
@@ -32190,98 +32321,103 @@ msgstr ""
 #: Z_ImportFixedAssets.php:164 Z_ImportFixedAssets.php:170
 #: Z_ImportFixedAssets.php:175
 msgid "Row:"
-msgstr ""
+msgstr "Kunyongwa:"
 
 #: Z_ImportFixedAssets.php:125
 msgid "Invalid Description:"
-msgstr ""
+msgstr "Batili Description:"
 
 #: Z_ImportFixedAssets.php:129
 msgid "The depreciation rate is expected to be numeric"
-msgstr ""
+msgstr "Kiwango cha uchakavu inatarajiwa numeric"
 
 #: Z_ImportFixedAssets.php:130 Z_ImportFixedAssets.php:134
 msgid "Invalid Depreciation Rate:"
-msgstr ""
+msgstr "Uchakavu batili Rate:"
 
 #: Z_ImportFixedAssets.php:138
 msgid "The accumulated depreciation is expected to be numeric"
-msgstr ""
+msgstr "uchakavu wa kusanyiko inatarajiwa numeric"
 
 #: Z_ImportFixedAssets.php:139 Z_ImportFixedAssets.php:143
 msgid "Invalid Accumulated Depreciation:"
-msgstr ""
+msgstr "Uchakavu batili kusanyiko:"
 
 #: Z_ImportFixedAssets.php:142
 msgid ""
 "The accumulated depreciation is expected to be either zero or a positive "
 "number"
-msgstr ""
+msgstr "uchakavu wa kusanyiko inatarajiwa kuwa ama sifuri au idadi chanya"
 
 #: Z_ImportFixedAssets.php:147
 msgid "The cost is expected to be numeric"
-msgstr ""
+msgstr "Gharama ni inatarajiwa kuwa nambari"
 
 #: Z_ImportFixedAssets.php:148 Z_ImportFixedAssets.php:152
 msgid "Invalid Cost:"
-msgstr ""
+msgstr "Batili Gharama:"
 
 #: Z_ImportFixedAssets.php:151
 msgid "The cost is expected to be a positive number"
-msgstr ""
+msgstr "Gharama ni inatarajiwa kuwa idadi chanya"
 
 #: Z_ImportFixedAssets.php:156
 msgid ""
 "The depreciation type must be either \"SL\" - Straight Line or \"DV\" - "
 "Diminishing Value"
 msgstr ""
+"Aina ya uchakavu lazima aidha \"SL \" - Moja Line au \"DV \" - kushuka "
+"Thamani"
 
 #: Z_ImportFixedAssets.php:157
 msgid "Invalid depreciation type:"
-msgstr ""
+msgstr "Batili uchakavu aina:"
 
 #: Z_ImportFixedAssets.php:163
 msgid ""
 "The asset category code entered must be exist in the assetcategories table"
 msgstr ""
+"Ya jamii mali code aliingia lazima kuwepo katika meza ya assetcategories"
 
 #: Z_ImportFixedAssets.php:164
 msgid "Invalid asset category:"
-msgstr ""
+msgstr "Batili mali jamii:"
 
 #: Z_ImportFixedAssets.php:169
 msgid ""
 "The asset location code entered must be exist in the asset locations table"
-msgstr ""
+msgstr "Eneo mali code aliingia lazima kuwepo katika meza ya mali maeneo"
 
 #: Z_ImportFixedAssets.php:170
 msgid "Invalid asset location code:"
-msgstr ""
+msgstr "Batili mali eneo code:"
 
 #: Z_ImportFixedAssets.php:174
 msgid "The date purchased must be entered in the format:"
-msgstr ""
+msgstr "Tarehe ya kununuliwa iwekwe katika muundo wa:"
 
 #: Z_ImportFixedAssets.php:175
 msgid "Invalid date format:"
-msgstr ""
+msgstr "Batili tarehe format:"
 
 #: Z_ImportFixedAssets.php:213
 msgid "The SQL that was used to add the asset and failed was"
-msgstr ""
+msgstr "SQL kuwa ilitumika ya kuongeza mali na kushindwa mara"
 
 #: Z_ImportFixedAssets.php:237 Z_ImportFixedAssets.php:258
 msgid "The transaction for the cost of the asset could not be added because"
-msgstr ""
+msgstr "shughuli ya gharama ya mali hakuweza kuwa aliongeza kwa sababu"
 
 #: Z_ImportFixedAssets.php:238 Z_ImportFixedAssets.php:259
 msgid ""
 "The SQL that was used to add the fixedasset trans record that failed was"
 msgstr ""
+"SQL ya kwamba alikuwa kutumika kuongeza fixedasset trans rekodi kwamba "
+"alishindwa mara"
 
 #: Z_ImportFixedAssets.php:263
 msgid "Inserted the new asset:"
-msgstr ""
+msgstr "Kuingizwa ya mali mpya"
 
 #: Z_ImportFixedAssets.php:271 Z_ImportStocks.php:274
 msgid "Failed on row "
@@ -32295,15 +32431,15 @@ msgstr "Kundi Import ya"
 msgid ""
 "has been completed. All assets in the file have been committed to the "
 "database."
-msgstr ""
+msgstr "umekamilika. mali zote katika faili kuwa nia ya database."
 
 #: Z_ImportFixedAssets.php:297
 msgid "Select Date to Upload B/Fwd Assets To:"
-msgstr ""
+msgstr "Tarehe ya kuchagua Upload B / Fwd Mali To:"
 
 #: Z_ImportFixedAssets.php:304
 msgid "Fixed Assets Upload file:"
-msgstr ""
+msgstr "Fasta mali husika:"
 
 #: Z_ImportFixedAssets.php:305 Z_ImportStocks.php:300 Z_UploadForm.php:17
 msgid "Send File"
@@ -32360,7 +32496,7 @@ msgstr " mashamba required, "
 
 #: Z_ImportStocks.php:107
 msgid "Stock item \""
-msgstr "Hisa bidhaa \\"
+msgstr "Hisa bidhaa \""
 
 #: Z_ImportStocks.php:138
 msgid "Values in the Perishable field must be either 0 (No) or 1 (Yes)"
@@ -32480,7 +32616,7 @@ msgstr "Stock kuagiza vitu kutoka CSV."
 
 #: Z_index.php:27
 msgid "Import Fixed Assets from .csv file"
-msgstr ""
+msgstr "Fixed Assets kuagiza kutoka CSV file."
 
 #: Z_index.php:28
 msgid "Create new company template SQL file and submit to webERP"
@@ -33103,6 +33239,9 @@ msgid ""
 "selected period\n"
 "\t   .... this can take some time?"
 msgstr ""
+"Una uhakika unataka tena baada ya malipo yote kitabu ujumla tangu kipindi "
+"cha kuchaguliwa\n"
+"\t   .... hii inaweza kuchukua muda?"
 
 #: Z_RePostGLFromPeriod.php:59
 msgid "All general ledger postings have been reposted from period"
@@ -33472,13 +33611,15 @@ msgstr "Kuongeza confirmeddate ya meza salesorders"
 
 #: Z_Upgrade_3.11-4.00.php:5
 msgid "Upgrade webERP 3.11 - 4.00"
-msgstr ""
+msgstr "Kuboresha webERP 3.11-4.00"
 
 #: Z_Upgrade_3.11-4.00.php:10
 msgid ""
 "This script will run perform any modifications to the database since v 3.11 "
 "required to allow the additional functionality in version 4.00 scripts"
 msgstr ""
+"Hii script inakwenda kufanya marekebisho yoyote na database ya tangu v 3.11 "
+"required kuruhusu kazi zaidi katika toleo 4.00 scripts"
 
 #: Z_UploadForm.php:8 includes/InputSerialItems.php:78
 msgid "File Upload"
@@ -33649,87 +33790,87 @@ msgstr "Hawawezi kupata kodi ya jamii Freight ambayo lazima iwe defined"
 
 #: includes/DefineLabelClass.php:23
 msgid "Rows per sheet"
-msgstr ""
+msgstr "Safu kwa karatasi"
 
 #: includes/DefineLabelClass.php:24
 msgid "Cols per sheet"
-msgstr ""
+msgstr "Cols kwa karatasi"
 
 #: includes/DefineLabelClass.php:25
 msgid "Sheet height"
-msgstr ""
+msgstr "Karatasi urefu"
 
 #: includes/DefineLabelClass.php:26
 msgid "Sheet width"
-msgstr ""
+msgstr "Karatasi ya upana"
 
 #: includes/DefineLabelClass.php:27
 msgid "Label height"
-msgstr ""
+msgstr "Studio urefu"
 
 #: includes/DefineLabelClass.php:28
 msgid "Label width"
-msgstr ""
+msgstr "Studio upana"
 
 #: includes/DefineLabelClass.php:29
 msgid "Top margin"
-msgstr ""
+msgstr "Juu margin"
 
 #: includes/DefineLabelClass.php:30
 msgid "Left margin"
-msgstr ""
+msgstr "Kushoto margin"
 
 #: includes/DefineLabelClass.php:31
 msgid "Row height"
-msgstr ""
+msgstr "Mstari urefu"
 
 #: includes/DefineLabelClass.php:32
 msgid "Column width"
-msgstr ""
+msgstr "Upana safu"
 
 #: includes/DefineLabelClass.php:38
 msgid "Vert. pos."
-msgstr ""
+msgstr "Vert. pos."
 
 #: includes/DefineLabelClass.php:39
 msgid "Horiz. pos."
-msgstr ""
+msgstr "Horiz. pos."
 
 #: includes/DefineLabelClass.php:40
 msgid "Max text<br>length"
-msgstr ""
+msgstr "Max asilia <br> urefu"
 
 #: includes/DefineLabelClass.php:41
 msgid "Font size"
-msgstr ""
+msgstr "Font size"
 
 #: includes/DefineLabelClass.php:42
 msgid "Data to display"
-msgstr ""
+msgstr "Data ya kuonyesha"
 
 #: includes/DefineLabelClass.php:44
 msgid "Code item"
-msgstr ""
+msgstr "Item code"
 
 #: includes/DefineLabelClass.php:46
 msgid "Description remainder"
-msgstr ""
+msgstr "Maelezo salio"
 
 #: includes/DefineLabelClass.php:47
 msgid "Long description"
-msgstr ""
+msgstr "Muda mrefu maelezo"
 
 #: includes/DefineLabelClass.php:48
 msgid "Long description remainder"
-msgstr ""
+msgstr "Muda mrefu maelezo salio"
 
 #: includes/DefineLabelClass.php:68
 msgid "Failed loading XML file"
-msgstr ""
+msgstr "upakiaji Failed XML file"
 
 #: includes/DefineLabelClass.php:73
 msgid "Report this problem"
-msgstr ""
+msgstr "Ripoti ya tatizo hili"
 
 #: includes/DefineShiptClass.php:43
 msgid ""
@@ -33753,7 +33894,7 @@ msgstr ""
 
 #: includes/GetConfig.php:9
 msgid "Could not get the configuration parameters from the database because"
-msgstr ""
+msgstr "Hakuweza kupata vigezo Configuration kutoka database sababu"
 
 #: includes/GetConfig.php:69
 msgid ""
@@ -34046,7 +34187,7 @@ msgstr "SQL kwamba alishindwa mara: "
 
 #: includes/UserLogin.php:44
 msgid "Could not retrieve user details on login because"
-msgstr ""
+msgstr "Hakuweza Retrieve maelezo user login sababu"
 
 #: includes/ConnectDB.inc:17
 msgid "The company name entered ("
@@ -34069,6 +34210,8 @@ msgid ""
 "to try logging in\n"
 "again"
 msgstr ""
+"kujaribu kukata magogo katika\n"
+"tena"
 
 #: includes/ConnectDB_mysqli.inc:38 includes/ConnectDB_mysql.inc:23
 msgid ""
@@ -34303,7 +34446,7 @@ msgstr "Hawezi Retrieve gharama ya mauzo code GL sababu"
 
 #: includes/GetSalesTransGLCodes.inc:13
 msgid "SQL to get the cost of sales GL Code"
-msgstr ""
+msgstr "SQL kupata gharama za mauzo Kanuni GL"
 
 #: includes/GetSalesTransGLCodes.inc:114
 msgid ""
@@ -34567,11 +34710,11 @@ msgstr "Recd tarehe"
 
 #: includes/PDFGrnHeader.inc:46
 msgid "Qty in Suppliers UOM"
-msgstr ""
+msgstr "Uchina katika Suppliers UOM"
 
 #: includes/PDFGrnHeader.inc:47
 msgid "Qty in Stock UOM"
-msgstr ""
+msgstr "Uchina katika Stock UOM"
 
 #: includes/PDFInventoryPlanPageHeader.inc:20
 msgid "Inventory Planning for Categories Between"
@@ -35034,11 +35177,11 @@ msgstr "Tatizo usalama Permissions"
 
 #: includes/session.inc:320
 msgid "Error in form verificationm"
-msgstr ""
+msgstr "Makosa ya aina verificationm"
 
 #: includes/session.inc:322
 msgid "This form was not submitted with a correct ID"
-msgstr ""
+msgstr "Fomu hii si kuwasilishwa na kitambulisho sahihi"
 
 #: includes/SQL_CommonFunctions.inc:23
 msgid ""
@@ -36854,17 +36997,18 @@ msgstr ""
 
 #: api/api_xml-rpc.php:1833
 msgid "This function returns a list of stock category abbreviations."
-msgstr ""
+msgstr "Kazi hii anarudi orodha ya vifupisho jamii ya hisa."
 
 #: api/api_xml-rpc.php:1838
 msgid "If successful, this function returns an array of stock category ids. "
-msgstr ""
+msgstr "Kama mafanikio, kazi hii anarudi safu ya IDS jamii ya hisa. "
 
 #: api/api_xml-rpc.php:1839
 msgid ""
 "Otherwise an array of error codes is returned and no stock categories are "
 "returned. "
 msgstr ""
+"Vinginevyo ni safu ya codes kosa ni kurudi na makundi hakuna hisa ni kwa. "
 
 #: api/api_xml-rpc.php:1861
 msgid ""

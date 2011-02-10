@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: webERP 3.08\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-01-04 22:15+1200\n"
-"PO-Revision-Date: 2011-01-17 14:00+0000\n"
+"PO-Revision-Date: 2011-02-07 15:33+0000\n"
 "Last-Translator: Tim Schofield <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-28 01:44+0000\n"
-"X-Generator: Launchpad (build 12274)\n"
+"X-Launchpad-Export-Date: 2011-02-10 14:02+0000\n"
+"X-Generator: Launchpad (build 12335)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "Language: cs\n"
 "X-Poedit-Language: Czech\n"
@@ -4902,7 +4902,7 @@ msgstr "SQL používá, že se nepodařilo získat zákazníka detaily o:"
 #: SalesAnalRepts.php:229 SelectOrderItems.php:414 SelectOrderItems.php:500
 #: SelectOrderItems.php:509 SpecialOrder.php:89
 msgid "The"
-msgstr ""
+msgstr "Ta"
 
 #: Contracts.php:724 CounterSales.php:181 SelectOrderItems.php:500
 msgid "account is currently at or over their credit limit"
@@ -13532,13 +13532,15 @@ msgstr "Umístění kód nesmí být prázdný"
 
 #: Locations.php:36
 msgid "The cash sale customers "
-msgstr ""
+msgstr "Zákazníci prodej za hotové "
 
 #: Locations.php:52
 msgid ""
 "The cash sale customer for this location must be a valid customer code "
 "separated by \" - \" then a valid branch code for this customer"
 msgstr ""
+"prodej za hotové zákazníka pro tuto lokalitu musí být platný kód zákazníka "
+"oddělených \"-\", pak platí pobočka kód pro tohoto zákazníka"
 
 #: Locations.php:85
 msgid "An error occurred updating the"
@@ -13734,7 +13736,7 @@ msgstr "Faxové číslo"
 
 #: Locations.php:543
 msgid "Default Counter Sales Customer"
-msgstr ""
+msgstr "Výchozí čítače prodeje zákazníkovi"
 
 #: Logout.php:12
 msgid "Log Off"
@@ -17226,6 +17228,7 @@ msgstr "Vložit nákupní objednávku"
 msgid ""
 "This is a new order. It must be created before you can change the status"
 msgstr ""
+"Jedná se o novou objednávku. To musí být vytvořena před můžete změnit stav"
 
 #: PO_Header.php:93
 msgid "You do not have permission to authorise this purchase order"
@@ -17460,7 +17463,7 @@ msgstr "Přijmout tuto objednávku"
 
 #: PO_Header.php:776
 msgid "New Purchase Order"
-msgstr ""
+msgstr "Nové objednávky"
 
 #: PO_Header.php:811
 msgid "Status Comment"
@@ -18614,7 +18617,7 @@ msgstr "Cena aktualizace podle ceny"
 
 #: PricesByCost.php:79
 msgid "the"
-msgstr ""
+msgstr "ta"
 
 #: PricesByCost.php:79
 msgid "category"
@@ -24180,6 +24183,15 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t Use Bulk Inventory Transfer - Receive to process the "
 "batch"
 msgstr ""
+"Vytvořte šarže přecpat z jednoho místa na převod do jiného umístění, které "
+"je pod úrovní pořadí. <br/>\n"
+"\t [Tab] [Tab] [Tab] [Tab] [Tab] [Tab] [Tab] [Tab] [Tab] Množství loď je "
+"založena na pořadí úrovni minus množství na skladě u k umístění, pokud "
+"existuje je <br/>\n"
+"\t [Tab] [Tab] [Tab] [Tab] [Tab] [Tab] [Tab] [Tab] [Tab] odeslání procento "
+"vstoupil, že potřebné množství je nahuštěna o procento vstoupil. <br/>\n"
+"\t [Tab] [Tab] [Tab] [Tab] [Tab] [Tab] [Tab] [Tab] [Tab] Použití hromadné "
+"Zásoby Transfer - Přijmout ke zpracování dávky"
 
 #: StockDispatch.php:239
 msgid "Dispatch Percent"
@@ -29414,59 +29426,59 @@ msgstr "a databáze verze není vlastně zaznamenaný v této verzi"
 
 #: UpgradeDatabase.php:16
 msgid "Select the version you are upgrading from:"
-msgstr ""
+msgstr "Vyberte verzi, kterou je přechod z:"
 
 #: UpgradeDatabase.php:18
 msgid "Apply database changes manually"
-msgstr ""
+msgstr "Použít změny databáze ručně"
 
 #: UpgradeDatabase.php:19
 msgid "Version 3.00"
-msgstr ""
+msgstr "Verze 3.00"
 
 #: UpgradeDatabase.php:20
 msgid "Version 3.01"
-msgstr ""
+msgstr "Verze 3.01"
 
 #: UpgradeDatabase.php:21
 msgid "Version 3.02"
-msgstr ""
+msgstr "Verze 3.02"
 
 #: UpgradeDatabase.php:22
 msgid "Version 3.03"
-msgstr ""
+msgstr "Verze 3.03"
 
 #: UpgradeDatabase.php:23
 msgid "Version 3.04"
-msgstr ""
+msgstr "Verze 3.04"
 
 #: UpgradeDatabase.php:24
 msgid "Version 3.05"
-msgstr ""
+msgstr "Verze 3.05"
 
 #: UpgradeDatabase.php:25
 msgid "Version 3.06"
-msgstr ""
+msgstr "Verze 3.06"
 
 #: UpgradeDatabase.php:26
 msgid "Version 3.07"
-msgstr ""
+msgstr "Verze 3.07"
 
 #: UpgradeDatabase.php:27
 msgid "Version 3.08"
-msgstr ""
+msgstr "Verze 3.08"
 
 #: UpgradeDatabase.php:28
 msgid "Version 3.09"
-msgstr ""
+msgstr "Verze 3.09"
 
 #: UpgradeDatabase.php:29
 msgid "Version 3.10"
-msgstr ""
+msgstr "Verze 3.10"
 
 #: UpgradeDatabase.php:30
 msgid "Version 3.11"
-msgstr ""
+msgstr "Verze 3.11"
 
 #: UpgradeDatabase.php:36
 msgid "and the database version is"
@@ -29478,37 +29490,45 @@ msgstr "Provést upgrade databáze"
 
 #: UpgradeDatabase.php:49
 msgid "Backup"
-msgstr ""
+msgstr "Zálohovat"
 
 #: UpgradeDatabase.php:57
 msgid "webERP backup file attached"
-msgstr ""
+msgstr "webERP záložní přiložený soubor"
 
 #: UpgradeDatabase.php:59
 msgid "Database Backup"
-msgstr ""
+msgstr "Zálohování databáze"
 
 #: UpgradeDatabase.php:63
 msgid "A backup of the database has been taken and emailed to you"
-msgstr ""
+msgstr "zálohování databáze byla přijata a e-mailem na vás"
 
 #: UpgradeDatabase.php:67
 msgid ""
 "No datbase updates have been done as you selected to apply these manually - "
 "upgrade SQL scripts are under sql/mysql/ directory in the distribution"
 msgstr ""
+"Žádné aktualizace databáze byly provedeny jako jste vybrali pro použití "
+"těchto ručně - upgrade SQL skripty jsou pod sql / mysql / adresář v "
+"distribuci"
 
 #: UpgradeDatabase.php:70
 msgid ""
 "If there are any failures then please check with your system administrator. "
 "Please read all notes carefully to ensure they are expected"
 msgstr ""
+"Pokud se vyskytnou nějaké chyby, pak si prosím obraťte se na správce "
+"systému. Přečtěte si prosím pozorně všechny poznámky, aby bylo zajištěno, že "
+"se očekává, že"
 
 #: UpgradeDatabase.php:103
 msgid ""
 "Only mysql upgrades are performed seamlessly at this time. Your database "
 "will need to be manually updated"
 msgstr ""
+"Pouze mysql upgrady jsou prováděny plynule v této době. Databáze bude třeba "
+"ručně aktualizované"
 
 #: UpgradeDatabase.php:115
 msgid "Applying"
@@ -33002,6 +33022,9 @@ msgid ""
 "selected period\n"
 "\t   .... this can take some time?"
 msgstr ""
+"Jste si jisti, že chcete, aby znovu-post všechny obecné transakcí v účetních "
+"knihách, protože vybrané období\n"
+"\t .... To může trvat nějaký čas?"
 
 #: Z_RePostGLFromPeriod.php:59
 msgid "All general ledger postings have been reposted from period"
@@ -33968,6 +33991,8 @@ msgid ""
 "to try logging in\n"
 "again"
 msgstr ""
+"zkusit přihlásit\n"
+"opět"
 
 #: includes/ConnectDB_mysqli.inc:38 includes/ConnectDB_mysql.inc:23
 msgid ""
@@ -36688,13 +36713,14 @@ msgstr "Tato funkce vrátí seznam typů zákazníků."
 
 #: api/api_xml-rpc.php:1722
 msgid "This function returns an array of customer types."
-msgstr ""
+msgstr "Tato funkce vrací pole typy zákazníků."
 
 #: api/api_xml-rpc.php:1745
 msgid ""
 "This function takes a customer type ID and returns details of that customer "
 "type."
 msgstr ""
+"Tato funkce se typ zákazníka ID a vrací podrobnosti o tomto typu zákazníka."
 
 #: api/api_xml-rpc.php:1746
 msgid "Customer Type ID"

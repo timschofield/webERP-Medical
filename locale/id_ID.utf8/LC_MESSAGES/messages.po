@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: weberp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-01-04 22:15+1200\n"
-"PO-Revision-Date: 2011-01-18 18:49+0000\n"
+"PO-Revision-Date: 2011-02-05 16:44+0000\n"
 "Last-Translator: Tim Schofield <Unknown>\n"
 "Language-Team: www.baliboss.com <open@baliboss.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-20 14:45+0000\n"
-"X-Generator: Launchpad (build 12214)\n"
+"X-Launchpad-Export-Date: 2011-02-10 13:59+0000\n"
+"X-Generator: Launchpad (build 12335)\n"
 "X-Poedit-Country: INDONESIA\n"
 "Language: \n"
 "X-Poedit-Language: Indonesian\n"
@@ -10636,7 +10636,7 @@ msgstr "Ukuran Kertas"
 
 #: FormDesigner.php:183
 msgid "Line Height"
-msgstr "Line Tinggi"
+msgstr "Tinggi Garis"
 
 #: FormDesigner.php:191 FormDesigner.php:239 FormDesigner.php:249
 msgid "Width"
@@ -11291,7 +11291,7 @@ msgstr ""
 
 #: GLAccountReport.php:32 GLAccountReport.php:33 GLAccountReport.php:351
 msgid "GL Account Report"
-msgstr "GL Laporan Account"
+msgstr "GL akun laporan"
 
 #: GLAccountReport.php:102
 msgid "Listing for Period"
@@ -13495,7 +13495,7 @@ msgstr "Laporan Penilaian Inventori"
 
 #: Labels.php:19
 msgid "Label Templates Maintainance"
-msgstr "Label Template Pemeliharaan"
+msgstr "Template Label Pemeliharaan"
 
 #: Labels.php:50 Labels.php:61
 msgid "Correct data"
@@ -14808,19 +14808,20 @@ msgstr "Berikut ini menawarkan dibuat sudah ditolak"
 
 #: OffersReceived.php:251
 msgid "has been rejected"
-msgstr ""
+msgstr "telah ditolak"
 
 #: OffersReceived.php:255
 msgid "The rejected offers from"
-msgstr ""
+msgstr "Menolak tawaran dari"
 
 #: OffersReceived.php:255
 msgid "have been removed from the system and an email sent to"
-msgstr ""
+msgstr "telah dihapus dari sistem dan email dikirim ke"
 
 #: OffersReceived.php:258
 msgid "All offers have been processed, and emails sent where appropriate"
 msgstr ""
+"Semua menawarkan telah diproses, dan email yang dikirim bila diperlukan"
 
 #: OrderDetails.php:13
 msgid "Reviewing Sales Order Number"
@@ -14845,7 +14846,7 @@ msgstr "SQL yang gagal untuk mendapatkan header order adalah"
 
 #: OrderDetails.php:59
 msgid "Order Details"
-msgstr ""
+msgstr "Detail Pesanan"
 
 #: OrderDetails.php:63
 msgid "Order Header Details For Order No"
@@ -15433,7 +15434,7 @@ msgstr "Data definisi tempo pembayaran telah dihapus"
 
 #: PaymentTerms.php:178
 msgid "Payment Terms."
-msgstr ""
+msgstr "Syarat Pembayaran."
 
 #: PaymentTerms.php:179 PaymentTerms.php:250 PaymentTerms.php:263
 msgid "Term Code"
@@ -15449,7 +15450,7 @@ msgstr "Jatuh Temp Setelah (Hari)"
 
 #: PaymentTerms.php:190
 msgid "th"
-msgstr ""
+msgstr "th"
 
 #: PaymentTerms.php:196 PrintCustStatements.php:366
 #: PrintCustStatements.php:367 PurchData.php:200 SelectCustomer.php:583
@@ -15464,11 +15465,11 @@ msgstr "Tampilkan semua Definisi Tempo Pembayaran"
 
 #: PaymentTerms.php:249
 msgid "Update Payment Terms."
-msgstr ""
+msgstr "Update Pembayaran Persyaratan."
 
 #: PaymentTerms.php:262
 msgid "New Payment Terms."
-msgstr ""
+msgstr "Syarat Pembayaran Baru."
 
 #: PaymentTerms.php:268
 msgid "Terms Description"
@@ -15484,7 +15485,7 @@ msgstr "Jumlah Hari (Atau Hari di Bulan Berikut)"
 
 #: PcAssignCashToTab.php:7
 msgid "Assignment of Cash to Petty Cash Tab"
-msgstr ""
+msgstr "Pengalihan Kas ke Tab Petty Kas"
 
 #: PcAssignCashToTab.php:48
 msgid "The Amount must be inputed"
@@ -15544,27 +15545,27 @@ msgstr "Saat saldo"
 
 #: PcAssignCashToTab.php:297
 msgid "Update Cash Assignment"
-msgstr ""
+msgstr "Update Kas Penugasan"
 
 #: PcAssignCashToTab.php:299
 msgid "New Cash Assignment"
-msgstr ""
+msgstr "Baru Kas Penugasan"
 
 #: PcAssignCashToTab.php:326
 msgid "Cash Assignation Date"
-msgstr ""
+msgstr "Kas Penugasan Tanggal"
 
 #: PcAuthorizeExpenses.php:7
 msgid "Authorization of Petty Cash Expenses"
-msgstr ""
+msgstr "Otorisasi Beban Petty Kas"
 
 #: PcAuthorizeExpenses.php:37 PcAuthorizeExpenses.php:40
 msgid "Authorization Of Petty Cash Expenses "
-msgstr ""
+msgstr "Kuasa Dari Beban Kas Petty "
 
 #: PcAuthorizeExpenses.php:52
 msgid "Detail Of Movement For Last "
-msgstr ""
+msgstr "Detail Dari Gerakan Untuk Terakhir "
 
 #: PcAuthorizeExpenses.php:87 PcClaimExpensesFromTab.php:194
 msgid "Authorized"
@@ -15608,25 +15609,25 @@ msgstr "Kas Kecil Tab "
 
 #: PcClaimExpensesFromTab.php:164
 msgid "Detail Of Movements For Last "
-msgstr ""
+msgstr "Detail Dari Gerakan Untuk Terakhir "
 
 #: PcClaimExpensesFromTab.php:191 PcClaimExpensesFromTab.php:310
 #: PcReportTab.php:173 PcReportTab.php:345
 msgid "Date Of Expense"
-msgstr ""
+msgstr "Tanggal Beban"
 
 #: PcClaimExpensesFromTab.php:192 PcReportTab.php:346
 msgid "Expense Description"
-msgstr ""
+msgstr "Beban Deskripsi"
 
 #: PcClaimExpensesFromTab.php:312 PcExpenses.php:148 PcExpenses.php:220
 #: PcExpenses.php:230
 msgid "Code Of Expense"
-msgstr ""
+msgstr "Kode Dari Beban"
 
 #: PcExpenses.php:7
 msgid "Maintenance Of Petty Cash Of Expenses"
-msgstr ""
+msgstr "Pemeliharaan Dari Petty Kas Dari Beban"
 
 #: PcExpenses.php:38
 msgid "The Expense type  code cannot be an empty string or spaces"
@@ -15655,7 +15656,7 @@ msgstr "Beban "
 #: PcExpenses.php:114
 msgid ""
 "The number of type of tabs using this expense code could not be retrieved"
-msgstr "Jumlah jenis tab menggunakan kode ini beban tidak dapat diambil"
+msgstr "Jumlah Jenis tab menggunakan kode ini beban tidak dapat diambil"
 
 #: PcExpenses.php:119
 msgid ""
@@ -15674,11 +15675,11 @@ msgstr "Jenis catatan beban tidak dapat dihapus karena"
 
 #: PcExpenses.php:127
 msgid "Expense type"
-msgstr ""
+msgstr "Jenis Beban"
 
 #: PcExpenses.php:151
 msgid "Account Description"
-msgstr ""
+msgstr "Deskripsi Akun"
 
 #: PcExpenses.php:177
 #, php-format
@@ -15686,18 +15687,20 @@ msgid ""
 "Are you sure you wish to delete this expense code and all the details it may "
 "have set up?"
 msgstr ""
+"Apakah Anda yakin ingin menghapus kode biaya dan semua detil mungkin telah "
+"menyiapkan?"
 
 #: PcExpenses.php:193
 msgid "Show All Petty Cash Expenses Defined"
-msgstr ""
+msgstr "Tampilkan semua biaya kas kecil didefinisikan"
 
 #: PcExpensesTypeTab.php:7
 msgid "Maintenance Of Petty Cash Expenses For a Type Tab"
-msgstr ""
+msgstr "Beban Pemeliharaan Dari Kas Petty Untuk Tab Jenis"
 
 #: PcExpensesTypeTab.php:47
 msgid "The Expense "
-msgstr ""
+msgstr "Yang Beban "
 
 #: PcExpensesTypeTab.php:47
 msgid " already exist in this Type of Tab."
@@ -15741,23 +15744,23 @@ msgstr "Petty Cash Laporan Manajemen"
 
 #: PcReportTab.php:38
 msgid "Code Of Petty Cash Tab"
-msgstr ""
+msgstr "Kode Dari Tab Kas Petty"
 
 #: PcReportTab.php:66
 msgid "From Date :"
-msgstr ""
+msgstr "Dari Tanggal:"
 
 #: PcReportTab.php:69
 msgid "To Date:"
-msgstr ""
+msgstr "Untuk Tanggal:"
 
 #: PcReportTab.php:72
 msgid "Show HTML"
-msgstr ""
+msgstr "Tampilkan HTML"
 
 #: PcReportTab.php:81 PcReportTab.php:82
 msgid "Petty Cash Report Of Tab"
-msgstr ""
+msgstr "Petty Cash Laporan Dari Tab"
 
 #: PcReportTab.php:97 PDFOrdersInvoiced.php:263 PDFOrderStatus.php:241
 msgid "An error occurred getting the orders details"
@@ -15776,7 +15779,7 @@ msgstr "SQL yang digunakan untuk mengambil dan gagal adalah"
 
 #: PcReportTab.php:105
 msgid "There were no expenses found in the database within the period from"
-msgstr ""
+msgstr "Tidak ada biaya yang ditemukan di database dalam periode"
 
 #: PcReportTab.php:105 PDFDeliveryDifferences.php:166 PDFDIFOT.php:172
 #: PDFOrdersInvoiced.php:271 PDFOrderStatus.php:250
@@ -15833,23 +15836,23 @@ msgstr "Tanggal Kuasa"
 
 #: PcReportTab.php:221
 msgid "Balance at"
-msgstr ""
+msgstr "Saldo"
 
 #: PcReportTab.php:232
 msgid "Print Report Tab Error"
-msgstr ""
+msgstr "Cetak Laporan Tab Error"
 
 #: PcReportTab.php:270
 msgid "No Petty Cash Tabs were returned by the SQL because"
-msgstr ""
+msgstr "Tidak Petty Cash Tabs dikembalikan oleh SQL karena"
 
 #: PcReportTab.php:277 PcTabs.php:144
 msgid "Tab Code"
-msgstr ""
+msgstr "Kode tab"
 
 #: PcReportTab.php:289 PcTabs.php:149 PcTabs.php:321
 msgid "Authorizer"
-msgstr ""
+msgstr "Kuasa"
 
 #: PcReportTab.php:323
 msgid "Total not authorized before "
@@ -15894,15 +15897,15 @@ msgstr "Tab "
 
 #: PcTabs.php:97
 msgid "Tab with Code "
-msgstr ""
+msgstr "Tab dengan Kode "
 
 #: PcTabs.php:122
 msgid "The Tab record could not be deleted because"
-msgstr ""
+msgstr "Catatan Tab tidak dapat dihapus karena"
 
 #: PcTabs.php:124 PcTypeTabs.php:134
 msgid "Tab type"
-msgstr ""
+msgstr "Jenis tab"
 
 #: PcTabs.php:145 PcTabs.php:256 PO_AuthorisationLevels.php:124
 #: SMTPServer.php:57 UserSettings.php:114
@@ -15911,15 +15914,15 @@ msgstr "Nama User"
 
 #: PcTabs.php:146 PcTabs.php:276 PcTypeTabs.php:154
 msgid "Type Of Tab"
-msgstr ""
+msgstr "Jenis Tab"
 
 #: PcTabs.php:148
 msgid "Limit"
-msgstr ""
+msgstr "Batas"
 
 #: PcTabs.php:150
 msgid "GL Account For Cash Assignment"
-msgstr ""
+msgstr "GL Account Untuk Penugasan Kas"
 
 #: PcTabs.php:151 PcTabs.php:364
 msgid "GL Account Petty Cash Tab"
@@ -15968,29 +15971,31 @@ msgstr "Tab Jenis"
 
 #: PcTypeTabs.php:73
 msgid "The Tab type "
-msgstr ""
+msgstr "Tab Jenis "
 
 #: PcTypeTabs.php:84
 msgid "Tabs type"
-msgstr ""
+msgstr "Tab Jenis"
 
 #: PcTypeTabs.php:107 PcTypeTabs.php:116
 msgid "The number of tabs using this Tab type could not be retrieved"
-msgstr ""
+msgstr "Jumlah tab menggunakan jenis Tab tidak dapat diambil"
 
 #: PcTypeTabs.php:121
 msgid ""
 "Cannot delete this tab type because tabs have been created using this tab "
 "type"
 msgstr ""
+"Tidak dapat menghapus jenis tab tab karena telah diciptakan menggunakan "
+"jenis tab"
 
 #: PcTypeTabs.php:125
 msgid "Return to list of tab types"
-msgstr ""
+msgstr "Kembali ke daftar jenis tab"
 
 #: PcTypeTabs.php:186
 msgid "Show All Types Tabs Defined"
-msgstr ""
+msgstr "Tampilkan Semua Tab Jenis Ditetapkan"
 
 #: PcTypeTabs.php:210 PcTypeTabs.php:220
 msgid "Code Of Type Of Tab"
@@ -16266,16 +16271,16 @@ msgstr ""
 #: PDFCustTransListing.php:84 PDFStockTransListing.php:92
 #: PDFSuppTransListing.php:84
 msgid "There were no transactions found in the database for the date"
-msgstr ""
+msgstr "Tidak ada transaksi ditemukan dalam database untuk tanggal"
 
 #: PDFCustTransListing.php:84 PDFStockTransListing.php:92
 #: PDFSuppTransListing.php:84
 msgid "Please try again selecting a different date"
-msgstr ""
+msgstr "Silakan coba lagi memilih tanggal yang berbeda"
 
 #: PDFCustTransListing.php:94
 msgid "Customer transaction listing from"
-msgstr ""
+msgstr "Transaksi nasabah listing dari"
 
 #: PDFDeliveryDifferences.php:24 PDFDeliveryDifferences.php:28
 msgid "Delivery Differences Report"
@@ -16358,7 +16363,7 @@ msgstr "Silahkan melihat laporan perbedaan pengiriman dengan ini dari"
 
 #: PDFDIFOT.php:28
 msgid "DIFOT Report"
-msgstr ""
+msgstr "Laporan DIFOT"
 
 #: PDFDIFOT.php:39
 msgid ""
@@ -16418,7 +16423,7 @@ msgstr "Penerima "
 
 #: PDFGrn.php:144
 msgid "GRN Error"
-msgstr ""
+msgstr "GRN Kesalahan"
 
 #: PDFGrn.php:146
 msgid "There were no GRN to print"
@@ -16561,28 +16566,28 @@ msgstr "Ada masalah saat mengambil detail pesanan header dari database"
 
 #: PDFPickingList.php:128 PDFPickingList.php:322
 msgid "Print Picking List Error"
-msgstr ""
+msgstr "Cetak Kesalahan Picking Daftar"
 
 #: PDFPickingList.php:131
 msgid "Unable to Locate any orders for this criteria "
-msgstr ""
+msgstr "Tidak dapat Cari setiap pemesanan kriteria ini "
 
 #: PDFPickingList.php:133
 msgid "Enter Another Date"
-msgstr ""
+msgstr "Masukkan Tanggal lain"
 
 #: PDFPickingList.php:184 includes/PDFPickingListHeader.inc:12
 msgid "Picking List"
-msgstr ""
+msgstr "Picking Daftar"
 
 #: PDFPickingList.php:185
 msgid "Laser Picking List"
-msgstr ""
+msgstr "Laser Picking Daftar"
 
 #: PDFPickingList.php:203
 msgid ""
 "There was a problem retrieving the order line details for Order Number"
-msgstr ""
+msgstr "Ada masalah saat mengambil detail pesanan garis untuk Nomor Pesanan"
 
 #: PDFPriceList.php:16
 msgid "Price Listing Report"
@@ -16701,7 +16706,7 @@ msgstr "Harga Untuk Kategori"
 
 #: PDFPriceList.php:353
 msgid "Effective Date Range"
-msgstr ""
+msgstr "Rentang Tanggal Efektif"
 
 #: PDFPriceList.php:362 includes/PDFLowGPPageHeader.inc:49
 #: includes/PDFLowGPPageHeader.inc:50
@@ -16710,23 +16715,23 @@ msgstr "Laba Kotor"
 
 #: PDFPrintLabel.php:22
 msgid "There isn't any label template to select for printing. Click"
-msgstr ""
+msgstr "Tidak ada template label untuk memilih untuk pencetakan. Klik"
 
 #: PDFPrintLabel.php:23
 msgid "HERE"
-msgstr ""
+msgstr "DISINI"
 
 #: PDFPrintLabel.php:23
 msgid "to set up a new one"
-msgstr ""
+msgstr "untuk membuat yang baru"
 
 #: PDFPrintLabel.php:32
 msgid "You must specify the number of labels per item required"
-msgstr ""
+msgstr "Anda harus menentukan jumlah label per item diperlukan"
 
 #: PDFPrintLabel.php:35
 msgid "You must select the items to be printed"
-msgstr ""
+msgstr "Anda harus memilih item yang akan dicetak"
 
 #: PDFPrintLabel.php:66
 msgid "There was an error. Consult your IT staff"
@@ -16762,7 +16767,7 @@ msgstr "Cetak label dengan perbatasan"
 
 #: PDFPrintLabel.php:230
 msgid "Select a Category"
-msgstr "Pilih sebuah Kategori"
+msgstr "Pilih Kategori a"
 
 #: PDFPrintLabel.php:235
 msgid "This category has no items to show"
@@ -16774,7 +16779,7 @@ msgstr "Unit tidak didefinisikan dalam operasi skala! Benar template"
 
 #: PDFPrintLabel.php:501
 msgid "Couldnt get the currency data"
-msgstr ""
+msgstr "Tak bisa mendapatkan data mata uang"
 
 #: PDFQuotation.php:13
 msgid "Select Quotation To Print"
@@ -16851,19 +16856,19 @@ msgstr "Cetak Penawaran Lainnya"
 
 #: PDFReceipt.php:10
 msgid "Sales Receipt"
-msgstr ""
+msgstr "Penerimaan Penjualan"
 
 #: PDFReceipt.php:31
 msgid "Customer Receipt Number "
-msgstr ""
+msgstr "Penerimaan Pelanggan Nomor "
 
 #: PDFReceipt.php:93
 msgid "Received From"
-msgstr ""
+msgstr "Diterima Dari"
 
 #: PDFReceipt.php:105
 msgid "The Sum Of"
-msgstr ""
+msgstr "The Sum Of"
 
 #: PDFReceipt.php:110
 msgid "Details"
@@ -16922,19 +16927,19 @@ msgstr "Tanggal Pembayaran"
 
 #: PDFRemittanceAdvice.php:174
 msgid "Total Payment:"
-msgstr ""
+msgstr "Jumlah Pembayaran:"
 
 #: PDFRemittanceAdvice.php:216
 msgid "printed:"
-msgstr ""
+msgstr "dicetak:"
 
 #: PDFRemittanceAdvice.php:269
 msgid "Our Code:"
-msgstr ""
+msgstr "Kami Kode:"
 
 #: PDFRemittanceAdvice.php:311
 msgid "This Payment"
-msgstr ""
+msgstr "Pembayaran ini"
 
 #: PDFStockCheckComparison.php:13
 msgid "Check Comparison Report"
@@ -17010,7 +17015,7 @@ msgstr "SQL berikut digunakan untuk mengambil data Perbandingan Inventori"
 
 #: PDFStockCheckComparison.php:207
 msgid "Inventory Comparison Comparison Report"
-msgstr ""
+msgstr "Persediaan Perbandingan Perbandingan Laporan"
 
 #: PDFStockCheckComparison.php:210
 msgid "There is no inventory check data to report on"
@@ -17079,7 +17084,7 @@ msgstr "Kesalahan Surat Perpindahan Lokasi Stok"
 
 #: PDFStockLocTransfer.php:22
 msgid "Reprint transfer docket"
-msgstr ""
+msgstr "Mencetak ulang transfer map"
 
 #: PDFStockLocTransfer.php:25
 msgid "Transfer docket to reprint"
@@ -17183,28 +17188,28 @@ msgstr "Work Order Penerimaan"
 
 #: PDFStockTransListing.php:48
 msgid "Work Order Issue"
-msgstr ""
+msgstr "Work Order Isu"
 
 #: PDFStockTransListing.php:83 PDFStockTransListing.php:89
 msgid "Transaction Listing"
-msgstr ""
+msgstr "Daftar Transaksi"
 
 #: PDFStockTransListing.php:102
 msgid "Stock transaction listing from"
-msgstr ""
+msgstr "Transaksi saham listing dari"
 
 #: PDFSuppTransListing.php:20 PDFSuppTransListing.php:24
 #: PDFSuppTransListing.php:93
 msgid "Supplier Transaction Listing"
-msgstr ""
+msgstr "Supplier Daftar Transaksi"
 
 #: PDFSuppTransListing.php:94
 msgid "Supplier transaction listing from"
-msgstr ""
+msgstr "Supplier transaksi daftar dari"
 
 #: PDFTopItems.php:8
 msgid "Top Items Search Result"
-msgstr ""
+msgstr "Produk Top Search Result"
 
 #: PDFTopItems.php:122
 msgid "There were no records returned "
@@ -17513,10 +17518,11 @@ msgstr ""
 #: PO_Header.php:437
 msgid "Please Consult your system administrator for more information."
 msgstr ""
+"Silahkan Hubungi administrator sistem Anda untuk informasi lebih lanjut."
 
 #: PO_Header.php:437
 msgid "You can setup authorisations"
-msgstr ""
+msgstr "Anda dapat otorisasi setup"
 
 #: PO_Header.php:508 PO_Header.php:579 PO_Items.php:230 PO_Items.php:381
 #: PO_Items.php:902 PO_Items.php:905 PO_OrderDetails.php:86
@@ -17609,7 +17615,7 @@ msgstr ""
 
 #: PO_Header.php:811
 msgid "Status Comment"
-msgstr ""
+msgstr "Komentar Status"
 
 #: PO_Header.php:816
 msgid "Status Update"
@@ -17678,6 +17684,8 @@ msgid ""
 "The purchase order can not be committed to the database because there is no "
 "delivery street address specified"
 msgstr ""
+"Urutan pembelian tidak dapat berkomitmen untuk database karena tidak ada "
+"alamat jalan yang ditetapkan pengiriman"
 
 #: PO_Items.php:88
 msgid ""
@@ -17697,7 +17705,7 @@ msgstr ""
 
 #: PO_Items.php:103
 msgid "Order Created by"
-msgstr ""
+msgstr "Order Dibuat oleh"
 
 #: PO_Items.php:174 SpecialOrder.php:309
 msgid ""
@@ -18345,11 +18353,11 @@ msgstr "Ekspor sebagai file csv"
 
 #: POReport.php:1202
 msgid "By"
-msgstr ""
+msgstr "Dengan"
 
 #: POReport.php:1403
 msgid "The report has been exported as a csv file."
-msgstr ""
+msgstr "Laporan tersebut telah diekspor sebagai file csv."
 
 #: POReport.php:1420 SalesInquiry.php:1039 StockDispatch.php:296
 msgid "Report Type"
@@ -18441,12 +18449,12 @@ msgstr "Ke Lokasi Stok"
 
 #: PO_SelectOSPurchOrder.php:154 PO_SelectPurchOrder.php:123
 msgid "Order Status:"
-msgstr ""
+msgstr "Status Pesanan:"
 
 #: PO_SelectOSPurchOrder.php:156 PO_SelectOSPurchOrder.php:158
 #: PO_SelectPurchOrder.php:125 PO_SelectPurchOrder.php:127
 msgid "Pending and Authorised"
-msgstr ""
+msgstr "Menunggu dan Resmi"
 
 #: PO_SelectOSPurchOrder.php:180 PO_SelectPurchOrder.php:5
 #: PO_SelectPurchOrder.php:149
@@ -18517,6 +18525,13 @@ msgid ""
 "multiple of it. A rounding factor of 1000 would mean that prices would be a "
 "minimum of 1000 and other prices would be expressed as multiples of 1000."
 msgstr ""
+"Halaman ini menambahkan harga baru atau update yang telah ada harga untuk "
+"jenis penjualan tertentu (daftar harga) dan mata uang untuk kategori saham "
+"yang dipilih - berdasarkan persentase mark up dari harga perolehan atau dari "
+"pemasok data biaya pilihan. Faktor pembulatan memastikan bahwa harga "
+"setidaknya jumlah ini atau beberapa dari itu. Faktor pembulatan dari 1000 "
+"akan berarti bahwa harga akan menjadi minimal 1000 dan harga lainnya akan "
+"dinyatakan sebagai kelipatan dari 1000."
 
 #: PricesBasedOnMarkUp.php:25
 msgid "Select the Price List to update"
@@ -18574,7 +18589,7 @@ msgstr "Faktor Pembulatan"
 
 #: PricesBasedOnMarkUp.php:153
 msgid "New Price To Be Effective From"
-msgstr ""
+msgstr "Harga Baru To Be Efektif Dari"
 
 #: PricesBasedOnMarkUp.php:156
 msgid "New Price To Be Effective To (Blank = No End Date)"
@@ -18627,7 +18642,7 @@ msgid ""
 "the start date for this price"
 msgstr ""
 "Tanggal akhir diharapkan setelah tanggal mulai, masukkan tanggal berakhir "
-"setelah tanggal mulai harga ini"
+"setelah tanggal mulai untuk harga ini"
 
 #: PricesBasedOnMarkUp.php:196
 msgid ""
@@ -18766,23 +18781,23 @@ msgstr "Update Harga Dengan Biaya"
 
 #: PricesByCost.php:9
 msgid "Update Price By Cost"
-msgstr ""
+msgstr "Update Harga Dengan Biaya"
 
 #: PricesByCost.php:79
 msgid "the"
-msgstr ""
+msgstr "yang"
 
 #: PricesByCost.php:79
 msgid "category"
-msgstr ""
+msgstr "kategori"
 
 #: PricesByCost.php:81
 msgid "all Categories"
-msgstr ""
+msgstr "semua Kategori"
 
 #: PricesByCost.php:84
 msgid "Items in"
-msgstr ""
+msgstr "Produk dalam"
 
 #: PricesByCost.php:84
 msgid "With Prices"
@@ -18898,13 +18913,15 @@ msgstr "Kode cabang yang dimasukkan belum dibuat"
 
 #: Prices_Customer.php:103 Prices.php:84
 msgid "The date this price is be in effect to must be entered in the format"
-msgstr ""
+msgstr "Tanggal harga ini berlaku untuk harus dimasukkan dalam format"
 
 #: Prices_Customer.php:111 Prices.php:92
 msgid ""
 "The end date is expected to be after today. There is no point entering a new "
 "price where the effective date is before today!"
 msgstr ""
+"Tanggal akhir diharapkan akan setelah hari ini. Tidak ada titik memasuki "
+"harga baru dimana tanggal efektif adalah sebelum hari ini!"
 
 #: Prices_Customer.php:131 Prices_Customer.php:158
 msgid "Price Updated"
@@ -18973,19 +18990,19 @@ msgstr "Barang harus dipilih dulu sebelum halaman ini dipanggil"
 
 #: Prices.php:119
 msgid "Could not be update the existing prices"
-msgstr ""
+msgstr "Tidak bisa update harga yang ada"
 
 #: Prices.php:124
 msgid "The price has been updated"
-msgstr ""
+msgstr "Harga telah diperbarui"
 
 #: Prices.php:142
 msgid "The new price could not be added"
-msgstr ""
+msgstr "Harga baru tidak dapat ditambahkan"
 
 #: Prices.php:146
 msgid "The new price has been inserted"
-msgstr ""
+msgstr "Harga baru telah dimasukkan"
 
 #: Prices.php:162
 msgid "Could not delete this price"
@@ -19529,7 +19546,7 @@ msgstr "Data pembelian supplier ini telah ditambahkan ke database"
 
 #: PurchData.php:107
 msgid "The supplier purchasing details could not be update because"
-msgstr ""
+msgstr "Rincian pembelian pemasok tidak dapat update karena"
 
 #: PurchData.php:110
 msgid "Supplier purchasing data has been updated"
@@ -19545,7 +19562,7 @@ msgstr "Data pembelian ini telah berhasil dihapus"
 
 #: PurchData.php:141 PurchData.php:231 PurchData.php:250
 msgid "For Stock Code"
-msgstr ""
+msgstr "Untuk Kode Saham"
 
 #: PurchData.php:159
 msgid ""
@@ -19564,7 +19581,7 @@ msgstr "Satuan Supplier"
 
 #: PurchData.php:171 SelectProduct.php:327
 msgid "Min Order Qty"
-msgstr ""
+msgstr "Min Order Qty"
 
 #: PurchData.php:173
 msgid "Preferred"
@@ -19710,11 +19727,11 @@ msgstr "Faktor Konversi (ke Satuan Ukuran kita)"
 
 #: PurchData.php:455
 msgid "Supplier Stock Code"
-msgstr ""
+msgstr "Supplier Kode Saham"
 
 #: PurchData.php:457
 msgid "MinOrderQty"
-msgstr ""
+msgstr "MinOrderQty"
 
 #: PurchData.php:459
 msgid "Supplier Stock Description"
@@ -20065,19 +20082,19 @@ msgstr "pesanan"
 
 #: ReorderLevelLocation.php:97
 msgid "StockLocation"
-msgstr ""
+msgstr "StockLocation"
 
 #: ReorderLevelLocation.php:98
 msgid "StockCat"
-msgstr ""
+msgstr "StockCat"
 
 #: ReorderLevelLocation.php:99
 msgid "NumberOfDays"
-msgstr ""
+msgstr "NumberOfDays"
 
 #: ReorderLevelLocation.php:100
 msgid "id"
-msgstr ""
+msgstr "id"
 
 #: ReorderLevelLocation.php:163 ReorderLevel.php:174
 msgid ""
@@ -20089,11 +20106,11 @@ msgstr ""
 
 #: ReorderLevelLocation.php:198
 msgid "Number Of Days Sales"
-msgstr ""
+msgstr "Jumlah Penjualan Hari"
 
 #: ReorderLevelLocation.php:200 includes/PDFTopItemsHeader.inc:30
 msgid "Order By"
-msgstr ""
+msgstr "Order By"
 
 #: ReorderLevel.php:14 ReorderLevel.php:250
 msgid "Reorder Level Report"
@@ -21063,23 +21080,23 @@ msgstr "Untuk Staff Sales:"
 
 #: SalesGraph.php:147
 msgid "Graph Type"
-msgstr ""
+msgstr "Grafik Jenis"
 
 #: SalesGraph.php:149
 msgid "Bar Graph"
-msgstr ""
+msgstr "Grafik Batang"
 
 #: SalesGraph.php:150
 msgid "Stacked Bar Graph"
-msgstr ""
+msgstr "Grafik Stacked Bar"
 
 #: SalesGraph.php:151
 msgid "Line Graph"
-msgstr ""
+msgstr "Grafik Line"
 
 #: SalesGraph.php:152
 msgid "Line Point Graph"
-msgstr ""
+msgstr "Line Point Grafik"
 
 #: SalesGraph.php:153
 msgid "Area Graph"
@@ -21503,29 +21520,31 @@ msgstr ""
 
 #: SelectAsset.php:37
 msgid "Define Asset Categories"
-msgstr ""
+msgstr "Tentukan Kategori Aset"
 
 #: SelectAsset.php:53 SelectAsset.php:55
 msgid "Any asset category"
-msgstr ""
+msgstr "Setiap kategori aset"
 
 #: SelectAsset.php:67
 msgid "Enter partial description"
-msgstr ""
+msgstr "Masukkan deskripsi parsial"
 
 #: SelectAsset.php:78 SelectAsset.php:80
 msgid "Any asset location"
-msgstr ""
+msgstr "Setiap lokasi aktiva"
 
 #: SelectAsset.php:93
 msgid "Enter partial asset code"
-msgstr ""
+msgstr "Masukkan kode aset parsial"
 
 #: SelectAsset.php:114
 msgid ""
 "Asset description keywords have been used in preference to the asset code "
 "extract entered"
 msgstr ""
+"kata kunci deskripsi Aset telah digunakan dalam preferensi untuk kode aset "
+"ekstrak dimasukkan"
 
 #: SelectAsset.php:171
 msgid "No assets were returned by the SQL because"
@@ -21635,7 +21654,7 @@ msgstr "Ref Kontrak"
 #: SelectContract.php:183 SelectContract.php:188 SelectContract.php:193
 #: SelectContract.php:198
 msgid "n/a"
-msgstr "n / a"
+msgstr "t/a"
 
 #: SelectCreditItems.php:15
 msgid "Create Credit Note"
@@ -21671,7 +21690,7 @@ msgstr "Data customer dari customer yang dipilih"
 
 #: SelectCreditItems.php:204
 msgid "Select Customer For Credit Note"
-msgstr ""
+msgstr "Pilih Pelanggan Untuk Catatan Kredit"
 
 #: SelectCreditItems.php:206
 msgid "Customer Selection"
@@ -21928,7 +21947,7 @@ msgstr "Hasil Pencarian: Telepon Customer telah digunakan dalam pencarian"
 
 #: SelectCustomer.php:104
 msgid "Search Result: Customer Address has been used in search"
-msgstr ""
+msgstr "Search Result: Alamat Pelanggan telah digunakan dalam pencarian"
 
 #: SelectCustomer.php:107
 msgid "Search Result: Customer Type has been used in search"
@@ -21948,11 +21967,11 @@ msgstr "Informasi Customer"
 
 #: SelectCustomer.php:279 SelectCustomer.php:302
 msgid "Customer Transactions"
-msgstr ""
+msgstr "Transaksi Nasabah"
 
 #: SelectCustomer.php:284
 msgid "View Customer Details"
-msgstr ""
+msgstr "Lihat Rincian Pelanggan"
 
 #: SelectCustomer.php:285
 msgid "Print Customer Statement"
@@ -22000,7 +22019,7 @@ msgstr "Masukkan sebagian Nomor Telepon"
 
 #: SelectCustomer.php:341
 msgid "Enter part of the Address"
-msgstr ""
+msgstr "Masukkan bagian dari Alamat"
 
 #: SelectCustomer.php:349
 msgid "Choose a Type"
@@ -22402,7 +22421,7 @@ msgstr "Cari Barang Order"
 
 #: SelectOrderItems.php:1605
 msgid "Fixed Asset Disposal"
-msgstr ""
+msgstr "Fixed Asset Disposal"
 
 #: SelectOrderItems.php:1755
 msgid "Use this screen for the "
@@ -22414,19 +22433,19 @@ msgstr " produk yang ingin dipesan"
 
 #: SelectOrderItems.php:1786
 msgid "Use this screen to select an asset to dispose of to this customer"
-msgstr ""
+msgstr "Gunakan layar ini untuk memilih aset untuk membuang ke pelanggan ini"
 
 #: SelectOrderItems.php:1793
 msgid "Asset to Dispose Of"
-msgstr ""
+msgstr "Aset untuk Buang Tentu"
 
 #: SelectOrderItems.php:1796
 msgid "Select Asset To Dispose of From the List Below"
-msgstr ""
+msgstr "Aset Pilih Untuk Buang Dari Berikut Daftar"
 
 #: SelectOrderItems.php:1801
 msgid "Add Asset To Order"
-msgstr ""
+msgstr "Tambahkan Asset Untuk Order"
 
 #: SelectOrderItems.php:1807
 msgid "Cancel Whole Order"
@@ -22442,7 +22461,7 @@ msgstr "Cari Barang Inventori"
 
 #: SelectProduct.php:14 SelectRecurringSalesOrder.php:12
 msgid "Inventory Items"
-msgstr ""
+msgstr "Persediaan Produk"
 
 #: SelectProduct.php:74
 msgid "Item Type:"
@@ -23399,23 +23418,23 @@ msgstr "Server SMTP rincian"
 
 #: SMTPServer.php:12
 msgid "SMTP Server"
-msgstr ""
+msgstr "SMTP Server"
 
 #: SMTPServer.php:12
 msgid "SMTP Server Settings"
-msgstr ""
+msgstr "SMTP Server Settings"
 
 #: SMTPServer.php:23
 msgid "The settings for the SMTP server have been successfully updated"
-msgstr ""
+msgstr "Pengaturan untuk server SMTP telah berhasil diperbarui"
 
 #: SMTPServer.php:41
 msgid "Server Host Name"
-msgstr ""
+msgstr "Nama Host server"
 
 #: SMTPServer.php:43
 msgid "SMTP port"
-msgstr ""
+msgstr "SMTP port"
 
 #: SMTPServer.php:45
 msgid "Helo Command"
@@ -23882,7 +23901,7 @@ msgstr "Nilai minimum diharapkan dapat menjadi nilai numerik"
 
 #: StockCategories.php:64
 msgid "The maximum value is expected to be a numeric value"
-msgstr ""
+msgstr "Nilai maksimum diharapkan dapat menjadi nilai numerik"
 
 #: StockCategories.php:84
 msgid "Could not update the stock category"
@@ -24047,15 +24066,15 @@ msgstr "Nilai Standar"
 
 #: StockCategories.php:486
 msgid "Numeric Value"
-msgstr ""
+msgstr "Nilai Numeric"
 
 #: StockCategories.php:487
 msgid "Minimum Value"
-msgstr ""
+msgstr "Nilai minimum"
 
 #: StockCategories.php:488
 msgid "Maximum Value"
-msgstr ""
+msgstr "Nilai Maksimum"
 
 #: StockCategories.php:489
 msgid "Require in SO"
@@ -24083,11 +24102,11 @@ msgstr ""
 
 #: StockCheck.php:14 StockCheck.php:15
 msgid "Stock Count Sheets"
-msgstr ""
+msgstr "Lembar Saham Count"
 
 #: StockCheck.php:44 StockCheck.php:150
 msgid "Stock Count Sheets - Problem Report"
-msgstr ""
+msgstr "Lembar Saham Count - Laporkan Masalah"
 
 #: StockCheck.php:46 StockCheck.php:97
 msgid ""
@@ -24359,7 +24378,7 @@ msgstr "Tanda tangan"
 
 #: StockDispatch.php:197
 msgid "Received By :"
-msgstr ""
+msgstr "Diterima Oleh:"
 
 #: StockDispatch.php:220
 msgid "Inventory Stock Dispatch Report"
@@ -24376,6 +24395,14 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t Use Bulk Inventory Transfer - Receive to process the "
 "batch"
 msgstr ""
+"Buat batch terlalu banyak menimbun dari satu lokasi untuk memindahkan ke "
+"lokasi lain yang berada di bawah tingkat pemesanan.<br/>\n"
+"\t\t\t\t\t\t\t\t\t\t Kuantitas untuk kapal didasarkan pada tingkat pemesanan "
+"dikurangi kuantitas di tangan di Untuk lokasi, jika ada<br/>\n"
+"\t\t\t\t\t\t\t\t\t\t persentase pengiriman masuk, yang diperlukan adalah "
+"kuantitas meningkat dengan persentase yang masuk.<br/>\n"
+"\t\t\t\t\t\t\t\t\t\t Gunakan massal persediaan transfer - Menerima untuk "
+"proses batch"
 
 #: StockDispatch.php:239
 msgid "Dispatch Percent"
@@ -24395,11 +24422,11 @@ msgstr "Hanya Laporan"
 
 #: StockDispatch.php:303
 msgid "Template"
-msgstr ""
+msgstr "Template"
 
 #: StockDispatch.php:306
 msgid "Simple"
-msgstr ""
+msgstr "Sederhana"
 
 #: StockDispatch.php:333
 msgid "Stock Dispatch "
@@ -24407,7 +24434,7 @@ msgstr "Pengiriman Stok "
 
 #: StockDispatch.php:334
 msgid "From :"
-msgstr ""
+msgstr "Dari:"
 
 #: StockDispatch.php:340
 msgid "Transfer No."
@@ -25413,7 +25440,7 @@ msgstr "Sejumlah antara"
 
 #: Stocks.php:984
 msgid "is expected"
-msgstr ""
+msgstr "diharapkan"
 
 #: Stocks.php:1018
 msgid "Insert New Item"
@@ -25536,7 +25563,7 @@ msgstr "Transfer Stok"
 
 #: StockTransfers.php:18
 msgid "Select Item to Transfer"
-msgstr ""
+msgstr "Item Pilih untuk Transfer"
 
 #: StockTransfers.php:78
 msgid "Unable to locate Stock Code"
@@ -25669,7 +25696,7 @@ msgstr "Rata-rata Penggunaan per bulan adalah"
 
 #: SuppContractChgs.php:17
 msgid "Contract Charges or Credits"
-msgstr ""
+msgstr "Biaya kontrak atau Kredit"
 
 #: SuppContractChgs.php:22
 msgid ""
@@ -25678,6 +25705,10 @@ msgid ""
 "be selected from the supplier selection screen, then the link to enter a "
 "supplier invoice or credit note must be clicked on"
 msgstr ""
+"Kontrak biaya atau kredit yang dimasukkan terhadap faktur pemasok atau nota "
+"kredit masing-masing. Untuk memasukkan transaksi pemasok pemasok pertama "
+"harus dipilih dari layar pilihan pemasok, maka link untuk memasukkan faktur "
+"pemasok atau catatan kredit harus diklik"
 
 #: SuppContractChgs.php:23 SuppFixedAssetChgs.php:28 SuppShiptChgs.php:30
 #: SuppTransGLAnalysis.php:20
@@ -25689,12 +25720,16 @@ msgid ""
 "The contract reference entered does not exist as a customer ordered "
 "contract. This contract cannot be charged to"
 msgstr ""
+"Referensi kontrak masukkan tidak ada sebagai pelanggan diperintahkan "
+"kontrak. Kontrak ini tidak dapat dibebankan"
 
 #: SuppContractChgs.php:44
 msgid ""
 "The amount entered is not numeric. This contract charge cannot be added to "
 "the invoice"
 msgstr ""
+"Jumlah yang dimasukkan tidak numerik. Biaya kontrak ini tidak dapat "
+"ditambahkan ke faktur"
 
 #: SuppContractChgs.php:62
 msgid "Contract charges on Invoice"
@@ -25913,11 +25948,11 @@ msgstr ""
 
 #: SuppFixedAssetChgs.php:68
 msgid "Fixed Assets on Invoice"
-msgstr ""
+msgstr "Aktiva Tetap pada Faktur"
 
 #: SuppFixedAssetChgs.php:70
 msgid "Fixed Asset credits on Credit Note"
-msgstr ""
+msgstr "Aktiva Tetap kredit di Kredit Catatan"
 
 #: SuppFixedAssetChgs.php:108
 msgid ""
@@ -25925,14 +25960,17 @@ msgid ""
 "the asset from the list below. Only  assets with no cost will show in the "
 "list"
 msgstr ""
+"Jika Anda tahu kode masukkan dalam kotak masukan ID Aset, jika tidak, pilih "
+"aset dari daftar di bawah ini. aktiva Hanya dengan biaya tidak akan "
+"ditampilkan dalam daftar"
 
 #: SuppFixedAssetChgs.php:112
 msgid "Asset Selection"
-msgstr ""
+msgstr "Aset Seleksi"
 
 #: SuppFixedAssetChgs.php:140
 msgid "Enter Fixed Asset"
-msgstr ""
+msgstr "Masukkan Aktiva Tetap"
 
 #: SuppInvGRNs.php:14
 msgid "Enter Supplier Invoice Against Goods Received"
@@ -26449,11 +26487,11 @@ msgstr "Aktiva Tetap Kredit"
 
 #: SupplierCredit.php:397 SupplierInvoice.php:371
 msgid "Contract Charges"
-msgstr ""
+msgstr "Beban Kontrak"
 
 #: SupplierCredit.php:431 SupplierInvoice.php:405
 msgid "General Ledger Analysis"
-msgstr ""
+msgstr "General Ledger Analisis"
 
 #: SupplierCredit.php:478 SupplierCredit.php:481
 msgid "Credit Amount in Supplier Currency"
@@ -26587,21 +26625,23 @@ msgstr "Transaksi buku besar untuk pengiriman"
 
 #: SupplierCredit.php:735
 msgid "Asset Credit"
-msgstr ""
+msgstr "Aset Kredit"
 
 #: SupplierCredit.php:737 SupplierInvoice.php:721
 msgid ""
 "The general ledger transaction for the asset addition could not be added "
 "because"
 msgstr ""
+"Transaksi buku besar umum untuk penambahan aktiva tidak dapat ditambahkan "
+"karena"
 
 #: SupplierCredit.php:768 SupplierInvoice.php:751
 msgid "Contract charge against"
-msgstr ""
+msgstr "Kontrak biaya terhadap"
 
 #: SupplierCredit.php:771 SupplierInvoice.php:753
 msgid "The general ledger transaction for the contract"
-msgstr ""
+msgstr "Transaksi umum buku besar untuk kontrak"
 
 #: SupplierCredit.php:800 SupplierCredit.php:870
 msgid "GRN Credit Note"
@@ -26892,11 +26932,11 @@ msgstr "Harga dalam"
 
 #: SupplierInvoice.php:310
 msgid "Shipment Charges"
-msgstr ""
+msgstr "Biaya Pengiriman"
 
 #: SupplierInvoice.php:339
 msgid "Fixed Asset Additions"
-msgstr ""
+msgstr "Penambahan Aktiva Tetap"
 
 #: SupplierInvoice.php:455
 msgid "Update Tax Calculation"
@@ -26920,16 +26960,20 @@ msgid ""
 "The invoice as entered cannot be processed because the total amount of the "
 "invoice is less than  0"
 msgstr ""
+"faktur sebagaimana masukkan tidak dapat diproses karena jumlah tagihan "
+"kurang dari 0"
 
 #: SupplierInvoice.php:558
 msgid "Invoices are expected to have a positive charge"
-msgstr ""
+msgstr "Faktur diharapkan memiliki muatan positif"
 
 #: SupplierInvoice.php:562
 msgid ""
 "The invoice as entered will be processed but be warned the amount of the "
 "invoice is  zero!"
 msgstr ""
+"Faktur seperti yang dimasukkan akan diproses tetapi memperingatkan jumlah "
+"faktur adalah nol!"
 
 #: SupplierInvoice.php:562
 msgid "Invoices are normally expected to have a positive charge"
@@ -27371,29 +27415,31 @@ msgstr "Lihat atau menawarkan Melakukan perubahan yang luar biasa dari"
 
 #: SupplierTenders.php:53
 msgid "Create a new offer from"
-msgstr ""
+msgstr "Buat tawaran baru dari"
 
 #: SupplierTenders.php:142
 msgid "The suppliers offer could not be updated on the database because"
-msgstr ""
+msgstr "Tawaran pemasok tidak dapat diperbarui pada database karena"
 
 #: SupplierTenders.php:143
 msgid ""
 "The SQL statement used to update the suppliers offer record and failed was"
 msgstr ""
+"Pernyataan SQL digunakan untuk memperbarui pemasok menawarkan rekor dan "
+"gagal adalah"
 
 #: SupplierTenders.php:146 SupplierTenders.php:150 SupplierTenders.php:204
 #: SupplierTenders.php:208
 msgid "The offer for"
-msgstr ""
+msgstr "Tawaran untuk"
 
 #: SupplierTenders.php:146
 msgid "has been updated in the database"
-msgstr ""
+msgstr "telah diperbarui dalam database"
 
 #: SupplierTenders.php:147 SupplierTenders.php:205
 msgid "at a price of"
-msgstr ""
+msgstr "dengan harga"
 
 #: SupplierTenders.php:150
 msgid "could not be updated in the database"
@@ -27448,7 +27494,7 @@ msgstr "Tanggal Kadaluwarsa"
 
 #: SupplierTenders.php:375
 msgid "Select items to offer from"
-msgstr ""
+msgstr "Pilih item yang ditawarkan dari"
 
 #: SupplierTransInquiry.php:8
 msgid "Supplier Transactions Inquiry"
@@ -27479,25 +27525,26 @@ msgstr "Transaksi GL untuk transaksi Hutang ini tidak seimbang senilai"
 
 #: SupplierTypes.php:24
 msgid "Supplier Type Setup"
-msgstr ""
+msgstr "Supplier Jenis Setup"
 
 #: SupplierTypes.php:25
 msgid "Add/edit/delete Supplier Types"
-msgstr ""
+msgstr "Tambahkan / edit / hapus Supplier Jenis"
 
 #: SupplierTypes.php:39
 msgid ""
 "The supplier type name description must be 100 characters or less long"
-msgstr ""
+msgstr "Jenis deskripsi nama pemasok harus 100 karakter atau kurang panjang"
 
 #: SupplierTypes.php:46
 msgid ""
 "The supplier type name description must contain at least one character"
 msgstr ""
+"Jenis pemasok deskripsi nama harus mengandung setidaknya satu karakter"
 
 #: SupplierTypes.php:58
 msgid "You already have a supplier type called"
-msgstr ""
+msgstr "Anda sudah memiliki tipe pemasok yang disebut"
 
 #: SupplierTypes.php:69
 msgid "The supplier type"
@@ -27583,6 +27630,8 @@ msgid ""
 "None of the payments will be processed. Unfortunately, there was a problem "
 "committing the changes to the database because"
 msgstr ""
+"Tidak ada pembayaran akan diproses. Sayangnya, ada masalah melakukan "
+"perubahan terhadap database karena"
 
 #: SuppPaymentRun.php:223
 msgid "Grand Total Payments Due"
@@ -27633,19 +27682,19 @@ msgstr "Cetak dan Proses Pembayaran"
 
 #: SuppPriceList.php:18
 msgid "Price List of goods from a Supplier"
-msgstr ""
+msgstr "Daftar Harga barang dari Supplier"
 
 #: SuppPriceList.php:47
 msgid "All Price"
-msgstr ""
+msgstr "Semua Harga"
 
 #: SuppPriceList.php:49
 msgid "Current Price"
-msgstr ""
+msgstr "Harga Berlaku"
 
 #: SuppPriceList.php:199
 msgid "Purchase"
-msgstr ""
+msgstr "Pembelian"
 
 #: SuppPriceList.php:200
 msgid "View the Price List from supplier"
@@ -28065,6 +28114,8 @@ msgid ""
 "Select whether or not a picking note must be produced before an order can be "
 "delivered to a customer."
 msgstr ""
+"Pilih apakah atau tidak catatan harus memilih diproduksi sebelum pesanan "
+"dapat dikirim ke pelanggan."
 
 #: SystemParameters.php:412
 msgid "Auto Update Exchange Rates Daily"
@@ -28134,11 +28185,11 @@ msgstr ""
 
 #: SystemParameters.php:448
 msgid "Show order values on GRN"
-msgstr ""
+msgstr "Order Tampilkan nilai pada GRN"
 
 #: SystemParameters.php:453
 msgid "Should the value of the purchased stock be shown on the GRN screen"
-msgstr ""
+msgstr "Jika nilai saham yang dibeli akan ditampilkan pada layar GRN"
 
 #: SystemParameters.php:458
 msgid "Dispatch Cut-Off Time"
@@ -28480,17 +28531,19 @@ msgstr ""
 
 #: SystemParameters.php:670
 msgid "Could not load the Number Of Month Must be Shown"
-msgstr ""
+msgstr "Tidak dapat memuat Banyaknya Bulan Harus Tampil"
 
 #: SystemParameters.php:675
 msgid "Number Of Month Must Be Shown"
-msgstr ""
+msgstr "Jumlah Bulan Harus Tampil"
 
 #: SystemParameters.php:677
 msgid ""
 "Number of month must be shown on report can be changed with this parameters "
 "ex: in CustomerInquiry.php "
 msgstr ""
+"Jumlah bulan harus ditampilkan pada laporan dapat diubah dengan parameter "
+"ini ex: di CustomerInquiry.php "
 
 #: SystemParameters.php:681
 msgid "The directory where images are stored"
@@ -28851,13 +28904,15 @@ msgstr ""
 
 #: SystemParameters.php:983
 msgid "Purchasing Manager Email Address"
-msgstr ""
+msgstr "Purchasing Manager Alamat Email"
 
 #: SystemParameters.php:985
 msgid ""
 "The email address for the purchasing manager, used to receive notifications "
 "by the tendering system"
 msgstr ""
+"Alamat email untuk manajer pembelian, digunakan untuk menerima pemberitahuan "
+"oleh sistem pelelangan"
 
 #: TaxAuthorities.php:7 TaxAuthorityRates.php:127
 msgid "Tax Authorities"
@@ -29316,7 +29371,7 @@ msgstr ""
 
 #: Tax.php:285
 msgid "There are no tax entries to list"
-msgstr ""
+msgstr "Tidak ada masukan pajak ke daftar"
 
 #: Tax.php:295
 msgid "Tax Reporting"
@@ -29468,15 +29523,15 @@ msgstr "Ubah/Tinjau Kategori Pajak"
 
 #: TopItems.php:7
 msgid "Top Items Searching"
-msgstr ""
+msgstr "Top Produk Pencarian"
 
 #: TopItems.php:11 UnitsOfMeasure.php:12
 msgid "Top Sales Order Search"
-msgstr ""
+msgstr "Top Sales Order Pencarian"
 
 #: TopItems.php:16
 msgid "Select Location"
-msgstr ""
+msgstr "Pilih Lokasi"
 
 #: TopItems.php:27
 msgid "Select Customer Type"
@@ -29617,21 +29672,23 @@ msgstr "Satuan Ukuran"
 
 #: UpgradeDatabase.php:5
 msgid "Upgrade webERP Database"
-msgstr ""
+msgstr "Upgrade webERP Database"
 
 #: UpgradeDatabase.php:10
 msgid ""
 "This script will run perform any modifications to the database required to "
 "allow the additional functionality in later scripts"
 msgstr ""
+"Script ini akan berjalan melakukan modifikasi ke database yang diperlukan "
+"untuk memungkinkan fungsi tambahan pada script nanti"
 
 #: UpgradeDatabase.php:15 UpgradeDatabase.php:36
 msgid "The webERP code is version"
-msgstr ""
+msgstr "Kode webERP adalah versi"
 
 #: UpgradeDatabase.php:15
 msgid "and the database version is not actually recorded at this version"
-msgstr ""
+msgstr "dan versi database tidak benar-benar dicatat pada versi ini"
 
 #: UpgradeDatabase.php:16
 msgid "Select the version you are upgrading from:"
@@ -29691,7 +29748,7 @@ msgstr ""
 
 #: UpgradeDatabase.php:36
 msgid "and the database version is"
-msgstr ""
+msgstr "dan versi database"
 
 #: UpgradeDatabase.php:40
 msgid "Perform Database Upgrade"
@@ -30951,19 +31008,19 @@ msgstr "Korea"
 
 #: WWW_Users.php:29
 msgid "Vietnamese"
-msgstr ""
+msgstr "Vietnam"
 
 #: WWW_Users.php:30
 msgid "Hebrew"
-msgstr ""
+msgstr "Ibrani"
 
 #: WWW_Users.php:31
 msgid "Arabic"
-msgstr ""
+msgstr "Arab"
 
 #: WWW_Users.php:32
 msgid "Thai"
-msgstr ""
+msgstr "Thai"
 
 #: WWW_Users.php:484
 msgid "Restrict to Sales Person"
@@ -30975,11 +31032,11 @@ msgstr "Bukan hanya login staffsales"
 
 #: Z_BottomUpCosts.php:7
 msgid "Recalculate BOM costs"
-msgstr ""
+msgstr "Hitung Ulang Biaya BOM"
 
 #: Z_BottomUpCosts.php:25
 msgid "An error occurred selecting all bottom level components"
-msgstr ""
+msgstr "Terjadi kesalahan memilih semua komponen tingkat bawah"
 
 #: Z_BottomUpCosts.php:26
 msgid ""
@@ -31282,15 +31339,15 @@ msgstr "sudah ada sebagai kategori saham dalam sistem"
 
 #: Z_ChangeStockCategory.php:39
 msgid "a unique stock category must be entered for the new stock category"
-msgstr ""
+msgstr "kategori saham yang unik harus dimasukkan untuk kategori saham baru"
 
 #: Z_ChangeStockCategory.php:44
 msgid "Adding the new stock Category record"
-msgstr ""
+msgstr "Menambahkan catatan stok Kategori baru"
 
 #: Z_ChangeStockCategory.php:64
 msgid "The SQL to insert the new stock category record failed"
-msgstr ""
+msgstr "SQL untuk memasukkan catatan saham baru kategori gagal"
 
 #: Z_ChangeStockCategory.php:66 Z_ChangeStockCategory.php:71
 #: Z_ChangeStockCategory.php:76 Z_ChangeStockCategory.php:81
@@ -31314,11 +31371,11 @@ msgstr "selesai"
 
 #: Z_ChangeStockCategory.php:67
 msgid "Changing stock properties"
-msgstr ""
+msgstr "Mengubah sifat saham"
 
 #: Z_ChangeStockCategory.php:69
 msgid "The SQL to update stock properties records failed"
-msgstr ""
+msgstr "SQL untuk memperbarui saham properti catatan gagal"
 
 #: Z_ChangeStockCategory.php:72
 msgid "Changing stock master records"
@@ -31735,20 +31792,29 @@ msgid ""
 "of the sql file. The template file will be emailed automatically to the "
 "webERP project"
 msgstr ""
+"Menjalankan skrip membuat template perusahaan baru akan mengekspor semua "
+"kelompok akun, kode rekening dan pajak membuat tabel termasuk kelompok "
+"pajak, kantor pajak, pajak dll tarif Namun, tidak ada transaksi atau data "
+"pribadi akan diekspor. Ada kesempatan untuk mencegah buku besar khusus umum "
+"dari yang diekspor di mana ini dianggap pribadi - lagi tidak ada data "
+"transaksi atau saldo diekspor dan Anda dapat memeriksa isi dari file sql. "
+"File template akan dikirimkan melalui email secara otomatis ke proyek webERP"
 
 #: Z_CreateCompanyTemplateFile.php:221
 msgid "Enter the name of the template to be created"
-msgstr ""
+msgstr "Masukkan nama template yang akan dibuat"
 
 #: Z_CreateCompanyTemplateFile.php:223
 msgid ""
 "Warning: All selected accounts will be exported - please de-select the "
 "accounts you do not wish to export to the new template file"
 msgstr ""
+"Peringatan: Semua account yang dipilih akan diekspor - silahkan de-pilih "
+"account Anda tidak ingin untuk mengekspor ke file template baru"
 
 #: Z_CreateCompanyTemplateFile.php:243
 msgid "Create Template and Email"
-msgstr ""
+msgstr "Buat Template dan Email"
 
 #: Z_CurrencyDebtorsBalances.php:6 Z_CurrencySuppliersBalances.php:6
 msgid "Currency Debtor Balances"
@@ -32274,7 +32340,7 @@ msgstr "File untuk di-impor"
 
 #: Z_ImportFixedAssets.php:7
 msgid "Import Fixed Assets"
-msgstr ""
+msgstr "Impor Aktiva Tetap"
 
 #: Z_ImportFixedAssets.php:49
 msgid "File contains"
@@ -32327,29 +32393,29 @@ msgstr "Tingkat penyusutan diharapkan numerik"
 
 #: Z_ImportFixedAssets.php:130 Z_ImportFixedAssets.php:134
 msgid "Invalid Depreciation Rate:"
-msgstr ""
+msgstr "Valid Tarif Penyusutan"
 
 #: Z_ImportFixedAssets.php:138
 msgid "The accumulated depreciation is expected to be numeric"
-msgstr ""
+msgstr "Akumulasi penyusutan diharapkan numerik"
 
 #: Z_ImportFixedAssets.php:139 Z_ImportFixedAssets.php:143
 msgid "Invalid Accumulated Depreciation:"
-msgstr ""
+msgstr "Akumulasi Penyusutan tidak valid:"
 
 #: Z_ImportFixedAssets.php:142
 msgid ""
 "The accumulated depreciation is expected to be either zero or a positive "
 "number"
-msgstr ""
+msgstr "Akumulasi penyusutan diharapkan baik nol atau bilangan positif"
 
 #: Z_ImportFixedAssets.php:147
 msgid "The cost is expected to be numeric"
-msgstr ""
+msgstr "Biaya diharapkan numerik"
 
 #: Z_ImportFixedAssets.php:148 Z_ImportFixedAssets.php:152
 msgid "Invalid Cost:"
-msgstr ""
+msgstr "Biaya tidak valid:"
 
 #: Z_ImportFixedAssets.php:151
 msgid "The cost is expected to be a positive number"
@@ -32359,7 +32425,9 @@ msgstr "Biaya ini diharapkan menjadi angka positif"
 msgid ""
 "The depreciation type must be either \"SL\" - Straight Line or \"DV\" - "
 "Diminishing Value"
-msgstr "Jenis penyusutan harus baik \\"
+msgstr ""
+"Jenis penyusutan harus berupa \"SL \" - Straight Line atau \"DV \" - "
+"Berkurangnya Nilai"
 
 #: Z_ImportFixedAssets.php:157
 msgid "Invalid depreciation type:"
@@ -32398,16 +32466,18 @@ msgstr "SQL yang digunakan untuk menambah aset dan gagal adalah"
 
 #: Z_ImportFixedAssets.php:237 Z_ImportFixedAssets.php:258
 msgid "The transaction for the cost of the asset could not be added because"
-msgstr ""
+msgstr "Transaksi untuk biaya aset tidak dapat ditambahkan karena"
 
 #: Z_ImportFixedAssets.php:238 Z_ImportFixedAssets.php:259
 msgid ""
 "The SQL that was used to add the fixedasset trans record that failed was"
 msgstr ""
+"SQL yang digunakan untuk menambahkan catatan trans fixedasset yang gagal "
+"adalah"
 
 #: Z_ImportFixedAssets.php:263
 msgid "Inserted the new asset:"
-msgstr ""
+msgstr "Memasukkan aset baru:"
 
 #: Z_ImportFixedAssets.php:271 Z_ImportStocks.php:274
 msgid "Failed on row "
@@ -32422,14 +32492,15 @@ msgid ""
 "has been completed. All assets in the file have been committed to the "
 "database."
 msgstr ""
+"telah selesai. Semua aktiva dalam file telah berkomitmen untuk database."
 
 #: Z_ImportFixedAssets.php:297
 msgid "Select Date to Upload B/Fwd Assets To:"
-msgstr ""
+msgstr "Tanggal Pilih untuk Upload B / Aset Fwd To:"
 
 #: Z_ImportFixedAssets.php:304
 msgid "Fixed Assets Upload file:"
-msgstr ""
+msgstr "Aktiva Tetap Upload file:"
 
 #: Z_ImportFixedAssets.php:305 Z_ImportStocks.php:300 Z_UploadForm.php:17
 msgid "Send File"
@@ -32490,7 +32561,7 @@ msgstr "Barang stok \""
 
 #: Z_ImportStocks.php:138
 msgid "Values in the Perishable field must be either 0 (No) or 1 (Yes)"
-msgstr ""
+msgstr "Nilai di bidang tahan lama harus baik 0 (Tidak) atau 1 (Ya)"
 
 #: Z_ImportStocks.php:172
 msgid ""
@@ -32515,7 +32586,7 @@ msgstr ""
 
 #: Z_ImportStocks.php:184
 msgid "ItemPDF must contain either a filename, or the keyword `none`"
-msgstr ""
+msgstr "ItemPDF baik harus berisi nama file, atau kata kunci `none`"
 
 #: Z_ImportStocks.php:252
 msgid "has been added to the transaction"
@@ -32571,7 +32642,7 @@ msgstr "Ubah Borongan Harga Customer"
 
 #: Z_index.php:17
 msgid "Update costs for all BOM items, from the bottom up"
-msgstr ""
+msgstr "Update biaya untuk semua item BOM, dari bawah ke atas"
 
 #: Z_index.php:19
 msgid "Show Local Currency Total Debtor Balances"
@@ -32607,11 +32678,11 @@ msgstr "Impor Barang Stok dari .csv"
 
 #: Z_index.php:27
 msgid "Import Fixed Assets from .csv file"
-msgstr ""
+msgstr "Impor Aktiva Tetap dari file. Csv"
 
 #: Z_index.php:28
 msgid "Create new company template SQL file and submit to webERP"
-msgstr ""
+msgstr "Membuat template perusahaan baru SQL file dan tunduk kepada webERP"
 
 #: Z_index.php:31
 msgid "The stuff below is really quite dangerous!"
@@ -32699,7 +32770,7 @@ msgstr ""
 
 #: Z_MakeNewCompany.php:152
 msgid "is set ok"
-msgstr ""
+msgstr "diatur ok"
 
 #: Z_MakeNewCompany.php:154
 msgid "is not set"
@@ -32727,7 +32798,7 @@ msgstr ""
 
 #: Z_MakeNewCompany.php:190
 msgid "The new company database has been created for "
-msgstr ""
+msgstr "Database perusahaan baru telah diciptakan untuk "
 
 #: Z_MakeNewCompany.php:192
 msgid "Set Up New Company Details"
@@ -33097,6 +33168,9 @@ msgid ""
 "all historical prices as well as current prices - better to use new scripts "
 "under Inventory -> Maintenance"
 msgstr ""
+"Script ini tidak memperhitungkan tanggal mulai dan akhir harga dan update "
+"semua harga historis serta harga sekarang - lebih baik menggunakan script "
+"baru di bawah Inventori -&gt; Pemeliharaan"
 
 #: Z_PriceChanges.php:24
 msgid "Select the Price List to update the costs for"
@@ -33542,6 +33616,8 @@ msgid ""
 "This script will run perform any modifications to the database since v 3.09 "
 "required to allow the additional functionality in version 3.09 scripts"
 msgstr ""
+"Script ini akan berjalan melakukan modifikasi ke database sejak v 3,09 "
+"diperlukan untuk memungkinkan fungsi tambahan dalam versi script 3,09"
 
 #: Z_Upgrade_3.10-3.11.php:5
 msgid "Upgrade webERP 3.10 - 3.11"
@@ -33576,6 +33652,8 @@ msgid ""
 "This script will perform any modifications to the database since v 3.10 "
 "required to allow the additional functionality in version 3.10 scripts"
 msgstr ""
+"Script ini akan melakukan modifikasi ke database sejak v 3.10 diperlukan "
+"untuk memungkinkan fungsi tambahan di versi 3.10 script"
 
 #: Z_Upgrade3.10.php:19
 msgid "Inserting default Debtor type"
@@ -33600,13 +33678,15 @@ msgstr "Menambah confirmeddate ke tabel salesorders"
 
 #: Z_Upgrade_3.11-4.00.php:5
 msgid "Upgrade webERP 3.11 - 4.00"
-msgstr ""
+msgstr "Upgrade webERP 3,11-4,00"
 
 #: Z_Upgrade_3.11-4.00.php:10
 msgid ""
 "This script will run perform any modifications to the database since v 3.11 "
 "required to allow the additional functionality in version 4.00 scripts"
 msgstr ""
+"Script ini akan berjalan melakukan modifikasi ke database sejak v 3.11 "
+"diperlukan untuk memungkinkan fungsi tambahan di versi 4.00 script"
 
 #: Z_UploadForm.php:8 includes/InputSerialItems.php:78
 msgid "File Upload"
@@ -33698,11 +33778,11 @@ msgstr "masalah ditemukan. Silahkan cari dan betulkan"
 
 #: includes/class.pdf.php:201 includes/class.pdf.php:208
 msgid "Document.pdf"
-msgstr ""
+msgstr "Document.pdf"
 
 #: includes/Contract_Readin.php:29
 msgid "The contract cannot be retrieved because"
-msgstr ""
+msgstr "Kontrak tidak dapat diambil karena"
 
 #: includes/Contract_Readin.php:30 includes/PO_ReadInOrder.inc:59
 msgid "The SQL statement that was used and failed was"
@@ -33710,22 +33790,24 @@ msgstr "Perintah SQL yang telah digunakan dan gagal adalah"
 
 #: includes/Contract_Readin.php:67
 msgid "The bill of material cannot be retrieved because"
-msgstr ""
+msgstr "RUU material tidak dapat diambil karena"
 
 #: includes/Contract_Readin.php:68
 msgid ""
 "The SQL statement that was used to retrieve the contract bill of material was"
 msgstr ""
+"Pernyataan SQL yang digunakan untuk mengambil tagihan kontrak bahan adalah"
 
 #: includes/Contract_Readin.php:90
 msgid "The other contract requirementscannot be retrieved because"
-msgstr ""
+msgstr "Yang requirementscannot kontrak lainnya diambil karena"
 
 #: includes/Contract_Readin.php:91
 msgid ""
 "The SQL statement that was used to retrieve the other contract requirments "
 "was"
 msgstr ""
+"Pernyataan SQL yang digunakan untuk mengambil syarat-syarat kontrak lainnya"
 
 #: includes/DefineCartClass.php:164
 msgid "The order line for"
@@ -33780,87 +33862,87 @@ msgstr ""
 
 #: includes/DefineLabelClass.php:23
 msgid "Rows per sheet"
-msgstr ""
+msgstr "Baris per lembar"
 
 #: includes/DefineLabelClass.php:24
 msgid "Cols per sheet"
-msgstr ""
+msgstr "Cols per lembar"
 
 #: includes/DefineLabelClass.php:25
 msgid "Sheet height"
-msgstr ""
+msgstr "Lembar tinggi"
 
 #: includes/DefineLabelClass.php:26
 msgid "Sheet width"
-msgstr ""
+msgstr "Lembar Lebar"
 
 #: includes/DefineLabelClass.php:27
 msgid "Label height"
-msgstr ""
+msgstr "Label tinggi"
 
 #: includes/DefineLabelClass.php:28
 msgid "Label width"
-msgstr ""
+msgstr "Label lebar"
 
 #: includes/DefineLabelClass.php:29
 msgid "Top margin"
-msgstr ""
+msgstr "Top margin"
 
 #: includes/DefineLabelClass.php:30
 msgid "Left margin"
-msgstr ""
+msgstr "Waktu margin"
 
 #: includes/DefineLabelClass.php:31
 msgid "Row height"
-msgstr ""
+msgstr "Tinggi baris"
 
 #: includes/DefineLabelClass.php:32
 msgid "Column width"
-msgstr ""
+msgstr "Lebar kolom"
 
 #: includes/DefineLabelClass.php:38
 msgid "Vert. pos."
-msgstr ""
+msgstr "Vert. pos."
 
 #: includes/DefineLabelClass.php:39
 msgid "Horiz. pos."
-msgstr ""
+msgstr "Horiz. pos."
 
 #: includes/DefineLabelClass.php:40
 msgid "Max text<br>length"
-msgstr ""
+msgstr "Max teks <br> panjang"
 
 #: includes/DefineLabelClass.php:41
 msgid "Font size"
-msgstr ""
+msgstr "Ukuran font"
 
 #: includes/DefineLabelClass.php:42
 msgid "Data to display"
-msgstr ""
+msgstr "Data untuk menampilkan"
 
 #: includes/DefineLabelClass.php:44
 msgid "Code item"
-msgstr ""
+msgstr "Kode item"
 
 #: includes/DefineLabelClass.php:46
 msgid "Description remainder"
-msgstr ""
+msgstr "Deskripsi sisa"
 
 #: includes/DefineLabelClass.php:47
 msgid "Long description"
-msgstr ""
+msgstr "Panjang deskripsi"
 
 #: includes/DefineLabelClass.php:48
 msgid "Long description remainder"
-msgstr ""
+msgstr "Panjang deskripsi sisa"
 
 #: includes/DefineLabelClass.php:68
 msgid "Failed loading XML file"
-msgstr ""
+msgstr "Gagal memuat berkas XML"
 
 #: includes/DefineLabelClass.php:73
 msgid "Report this problem"
-msgstr ""
+msgstr "Laporkan masalah ini"
 
 #: includes/DefineShiptClass.php:43
 msgid ""
@@ -33884,7 +33966,7 @@ msgstr ""
 
 #: includes/GetConfig.php:9
 msgid "Could not get the configuration parameters from the database because"
-msgstr ""
+msgstr "Tak bisa mendapatkan parameter konfigurasi dari database karena"
 
 #: includes/GetConfig.php:69
 msgid ""
@@ -34173,19 +34255,19 @@ msgstr ""
 
 #: includes/PDFPaymentRun_PymtFooter.php:216
 msgid "The SQL that failed was: "
-msgstr ""
+msgstr "SQL yang gagal adalah: "
 
 #: includes/UserLogin.php:44
 msgid "Could not retrieve user details on login because"
-msgstr ""
+msgstr "Tak dapat menerima rincian pengguna pada login karena"
 
 #: includes/ConnectDB.inc:17
 msgid "The company name entered ("
-msgstr ""
+msgstr "Nama perusahaan dimasukkan ("
 
 #: includes/ConnectDB.inc:18
 msgid "Check the company name entered ("
-msgstr ""
+msgstr "Periksa nama perusahaan dimasukkan ("
 
 #: includes/ConnectDB.inc:19
 msgid ""
@@ -34200,6 +34282,8 @@ msgid ""
 "to try logging in\n"
 "again"
 msgstr ""
+"untuk mencoba log in\n"
+"lagi"
 
 #: includes/ConnectDB_mysqli.inc:38 includes/ConnectDB_mysql.inc:23
 msgid ""
@@ -34354,6 +34438,7 @@ msgid ""
 "There was a problem running the SQL to retrieve the sales analysis "
 "information"
 msgstr ""
+"Ada masalah menjalankan SQL untuk mengambil informasi penjualan analisis"
 
 #: includes/ConstructSQLForUserDefinedSalesReport.inc:332
 msgid ""
@@ -34434,7 +34519,7 @@ msgstr "Tidak dapat mengambil kode GL HPP karena"
 
 #: includes/GetSalesTransGLCodes.inc:13
 msgid "SQL to get the cost of sales GL Code"
-msgstr ""
+msgstr "SQL untuk mendapatkan harga pokok penjualan GL Kode"
 
 #: includes/GetSalesTransGLCodes.inc:114
 msgid ""
@@ -34597,32 +34682,32 @@ msgstr "Alamat Pengiriman Cabang"
 #: includes/PDFCustTransListingPageHeader.inc:15
 #: includes/PDFStockTransListingPageHeader.inc:15
 msgid "Customer Invoices"
-msgstr ""
+msgstr "Faktur Pelanggan"
 
 #: includes/PDFCustTransListingPageHeader.inc:18
 #: includes/PDFStockTransListingPageHeader.inc:18
 msgid "Customer Credit Notes"
-msgstr ""
+msgstr "Kredit Pelanggan Catatan"
 
 #: includes/PDFCustTransListingPageHeader.inc:21
 msgid "Customer Payments"
-msgstr ""
+msgstr "Pembayaran Pelanggan"
 
 #: includes/PDFCustTransListingPageHeader.inc:28
 #: includes/PDFSuppTransListingPageHeader.inc:28
 msgid "input on"
-msgstr ""
+msgstr "masukan tentang"
 
 #: includes/PDFCustTransListingPageHeader.inc:50
 #: includes/PDFStockTransListingPageHeader.inc:69
 #: includes/PDFSuppTransListingPageHeader.inc:50
 msgid "Trans Date"
-msgstr ""
+msgstr "Trans Tanggal"
 
 #: includes/PDFCustTransListingPageHeader.inc:51
 #: includes/PDFSuppTransListingPageHeader.inc:51
 msgid "Net Amount"
-msgstr ""
+msgstr "Jumlah Bersih"
 
 #: includes/PDFCustTransListingPageHeader.inc:52
 #: includes/PDFQuotationPageHeader.inc:106
@@ -34633,7 +34718,7 @@ msgstr "Jumlah Pajak"
 #: includes/PDFCustTransListingPageHeader.inc:53
 #: includes/PDFSuppTransListingPageHeader.inc:53
 msgid "Total Amount"
-msgstr ""
+msgstr "Total Jumlah"
 
 #: includes/PDFDebtorBalsPageHeader.inc:17
 msgid "Customer Balances For Customers between"
@@ -34699,11 +34784,11 @@ msgstr "Tanggal Diterima"
 
 #: includes/PDFGrnHeader.inc:46
 msgid "Qty in Suppliers UOM"
-msgstr ""
+msgstr "Qty di Pemasok UOM"
 
 #: includes/PDFGrnHeader.inc:47
 msgid "Qty in Stock UOM"
-msgstr ""
+msgstr "Qty Stok UOM"
 
 #: includes/PDFInventoryPlanPageHeader.inc:20
 msgid "Inventory Planning for Categories Between"
@@ -34711,7 +34796,7 @@ msgstr "Perencanaan Inventori untuk Kategori Antara"
 
 #: includes/PDFInventoryPlanPageHeader.inc:22
 msgid "Inventory Planning for Products Category"
-msgstr ""
+msgstr "Perencanaan persediaan untuk Produk Kategori"
 
 #: includes/PDFInventoryPlanPageHeader.inc:52
 #: includes/PDFInventoryPlanPageHeader.inc:53
@@ -34724,11 +34809,11 @@ msgstr "Qty"
 
 #: includes/PDFInventoryPlanPageHeader.inc:57
 msgid "MTD"
-msgstr ""
+msgstr "MTD"
 
 #: includes/PDFInventoryPlanPageHeader.inc:67
 msgid "ms stk"
-msgstr ""
+msgstr "ms STK"
 
 #: includes/PDFInventoryValnPageHeader.inc:15
 msgid "Inventory Valuation for Categories between"
@@ -34838,11 +34923,11 @@ msgstr "Selisih Kurs"
 
 #: includes/PDFPickingListHeader.inc:23 includes/PO_PDFOrderPageHeader.inc:27
 msgid "Tel"
-msgstr ""
+msgstr "Tel"
 
 #: includes/PDFPickingListHeader.inc:77
 msgid "Actual Picked"
-msgstr ""
+msgstr "Dipetik Aktual"
 
 #: includes/PDFProfitAndLossPageHeader.inc:21
 #: includes/PDFTagProfitAndLossPageHeader.inc:21
@@ -34924,15 +35009,15 @@ msgstr "Transfer Ke"
 
 #: includes/PDFStockTransListingPageHeader.inc:27
 msgid "Purchase Order Deliveries"
-msgstr ""
+msgstr "Pesanan Pembelian Pengiriman"
 
 #: includes/PDFStockTransListingPageHeader.inc:30
 msgid "Work Order Receipts"
-msgstr ""
+msgstr "Work Order Penerimaan"
 
 #: includes/PDFStockTransListingPageHeader.inc:33
 msgid "Work Order Issues"
-msgstr ""
+msgstr "Work Order Masalah"
 
 #: includes/PDFSupplierBalsPageHeader.inc:17
 msgid "Supplier Balances For Suppliers between"
@@ -34940,35 +35025,35 @@ msgstr "Saldo Supplier Untuk Supplier antara"
 
 #: includes/PDFSuppTransListingPageHeader.inc:15
 msgid "Suppier Invoices"
-msgstr ""
+msgstr "Suppier Faktur"
 
 #: includes/PDFSuppTransListingPageHeader.inc:18
 msgid "Suppier Credit Notes"
-msgstr ""
+msgstr "Kredit Suppier Catatan"
 
 #: includes/PDFSuppTransListingPageHeader.inc:21
 msgid "Suppier Payments"
-msgstr ""
+msgstr "Suppier Pembayaran"
 
 #: includes/PDFTagProfitAndLossPageHeader.inc:22
 msgid "Transactions for tag"
-msgstr ""
+msgstr "Transaksi untuk tag"
 
 #: includes/PDFTopItemsHeader.inc:26
 msgid "Search On Location"
-msgstr ""
+msgstr "Cari Pada Lokasi"
 
 #: includes/PDFTopItemsHeader.inc:29
 msgid "Number Of Items"
-msgstr ""
+msgstr "Jumlah Produk"
 
 #: includes/PDFTopItemsHeader.inc:38
 msgid "Top Items Sales Search Result"
-msgstr ""
+msgstr "Top Produk Penjualan Hasil Pencarian"
 
 #: includes/PDFTopItemsHeader.inc:56
 msgid "Total Inv"
-msgstr ""
+msgstr "Total Inv"
 
 #: includes/PDFTransPageHeader.inc:70
 msgid "CREDIT NOTE"
@@ -35031,7 +35116,7 @@ msgstr "INI BUKAN ORDER"
 
 #: includes/PO_PDFOrderPageHeader.inc:48
 msgid "Requisition Number"
-msgstr ""
+msgstr "Nomor permintaan"
 
 #: includes/PO_PDFOrderPageHeader.inc:80
 msgid "Date Reqd"
@@ -35129,15 +35214,15 @@ msgstr "bukan user berlaku di sistem"
 
 #: includes/session.inc:108
 msgid "system maintenance"
-msgstr ""
+msgstr "pemeliharaan sistem"
 
 #: includes/session.inc:108
 msgid "webERP is not available right now"
-msgstr ""
+msgstr "webERP tidak tersedia sekarang"
 
 #: includes/session.inc:108
 msgid "during maintenance of the system"
-msgstr ""
+msgstr "selama pemeliharaan sistem"
 
 #: includes/session.inc:142 api/api_login.php:122
 msgid "There was a problem deleting expired audit-trail history"
@@ -35167,11 +35252,11 @@ msgstr "Masalah Izin Keamanan"
 
 #: includes/session.inc:320
 msgid "Error in form verificationm"
-msgstr ""
+msgstr "Kesalahan dalam bentuk verificationm"
 
 #: includes/session.inc:322
 msgid "This form was not submitted with a correct ID"
-msgstr ""
+msgstr "Formulir ini tidak disampaikan dengan ID yang benar"
 
 #: includes/SQL_CommonFunctions.inc:23
 msgid ""
@@ -35329,7 +35414,7 @@ msgstr "Tidak Ada Nomor Debitur"
 
 #: api/api_errorcodes.php:193
 msgid "Debtor Does not Exist"
-msgstr ""
+msgstr "Debitur Tidak Exist"
 
 #: api/api_errorcodes.php:194
 msgid "Incorrect Branch Number Length"
@@ -35405,15 +35490,15 @@ msgstr "Kode Cabang Customer Tidak Berlaku"
 
 #: api/api_errorcodes.php:212
 msgid "Branch No Does not Exist"
-msgstr ""
+msgstr "Cabang Tidak Tidak Exist"
 
 #: api/api_errorcodes.php:213
 msgid "Stock Code Does not Exist"
-msgstr ""
+msgstr "Kode Saham Tidak Exist"
 
 #: api/api_errorcodes.php:214
 msgid "Stock Category Does not Exist"
-msgstr ""
+msgstr "Kategori Bursa Apakah tidak Exist"
 
 #: api/api_errorcodes.php:215
 msgid "Incorrect Stock Description Length"
@@ -35429,7 +35514,7 @@ msgstr "Flag MB Salah"
 
 #: api/api_errorcodes.php:218
 msgid "Invalid Current Cost Date"
-msgstr ""
+msgstr "Tanggal tidak valid Biaya Lancar"
 
 #: api/api_errorcodes.php:219
 msgid "Invalid Actual Cost"
@@ -35465,7 +35550,7 @@ msgstr "Kategori Diskon Salah"
 
 #: api/api_errorcodes.php:227
 msgid "Tax Category Does not Exist"
-msgstr ""
+msgstr "Kategori Pajak Tidak Exist"
 
 #: api/api_errorcodes.php:228
 msgid "Invalid Serialised"
@@ -35641,7 +35726,7 @@ msgstr "Jumlah nama kode rekening GL salah"
 
 #: api/api_errorcodes.php:271 api/api_errorcodes.php:278
 msgid "GL account group does not exist"
-msgstr ""
+msgstr "kelompok akun GL tidak ada"
 
 #: api/api_errorcodes.php:272
 msgid "GL account section already exists"
@@ -35657,7 +35742,7 @@ msgstr "Grup rekening GL sudah ada"
 
 #: api/api_errorcodes.php:275
 msgid "GL account section does not exist"
-msgstr ""
+msgstr "bagian account GL tidak ada"
 
 #: api/api_errorcodes.php:276
 msgid "Invalid profit and loss flag"
@@ -35709,7 +35794,7 @@ msgstr "Tipe stok tidak berlaku"
 
 #: api/api_errorcodes.php:289
 msgid "GL account code does not exist"
-msgstr ""
+msgstr "kode rekening GL tidak ada"
 
 #: api/api_errorcodes.php:290
 msgid "Stock category already exists"
@@ -35721,7 +35806,7 @@ msgstr "Kode supplier sudah ada"
 
 #: api/api_errorcodes.php:292
 msgid "Incorrect supplier name length, or supplier name does not exist"
-msgstr ""
+msgstr "Salah nama pemasok panjang, atau nama pemasok tidak ada"
 
 #: api/api_errorcodes.php:293
 msgid "Incorrect supplier since date"
@@ -35749,7 +35834,7 @@ msgstr "Perusahaan pengagih tidak di-set"
 
 #: api/api_errorcodes.php:299
 msgid "Supplier does not exist"
-msgstr ""
+msgstr "Supplier tidak ada"
 
 #: api/api_errorcodes.php:300
 msgid "Incorrect suppliers UOM"
@@ -35773,7 +35858,7 @@ msgstr "Flag Pilihan Salah"
 
 #: api/api_errorcodes.php:305
 msgid "StockID SupplierID line does not exist"
-msgstr ""
+msgstr "StockID garis SupplierID tidak ada"
 
 #: api/api_errorcodes.php:306
 msgid "Invalid Required By Date"
@@ -35805,7 +35890,7 @@ msgstr "Nomor Seri atau Referensi Lot Tidak Berlaku"
 
 #: api/api_errorcodes.php:313
 msgid "Work order number does not exist"
-msgstr ""
+msgstr "nomor order Kerja tidak ada"
 
 #: api/api_errorcodes.php:314
 msgid "Invalid issued quantity"
@@ -35829,7 +35914,7 @@ msgstr "Barang stok berseri"
 
 #: api/api_errorcodes.php:319
 msgid "Batch number does not exist"
-msgstr ""
+msgstr "nomor Batch tidak ada"
 
 #: api/api_errorcodes.php:320
 msgid "Batch is empty"
@@ -35845,13 +35930,15 @@ msgstr "Tidak ada sales tersebut"
 
 #: api/api_login.php:88
 msgid "** Error Code Not Defined **"
-msgstr ""
+msgstr "** Kesalahan Kode Tidak Ditetapkan **"
 
 #: api/api_xml-rpc.php:14
 msgid ""
 "This function is used to login into the API methods for the specified the "
 "database."
 msgstr ""
+"Fungsi ini digunakan untuk login ke metode API untuk database tertentu "
+"tersebut."
 
 #: api/api_xml-rpc.php:15
 msgid ""
@@ -35859,14 +35946,17 @@ msgid ""
 "the following functions are no longer required.  When calling those "
 "functions, leave the last two parameters off."
 msgstr ""
+"CATATAN: menggunakan fungsi ini berarti bahwa kolom User Name dan Password "
+"dalam fungsi-fungsi berikut ini tidak diperlukan lagi. Saat memanggil fungsi-"
+"fungsi, meninggalkan dua parameter terakhir dari."
 
 #: api/api_xml-rpc.php:16
 msgid "Database Name"
-msgstr ""
+msgstr "Nama Database"
 
 #: api/api_xml-rpc.php:17
 msgid "The name of the database to use for the transactions to come. "
-msgstr ""
+msgstr "Nama database yang digunakan untuk transaksi yang akan datang. "
 
 #: api/api_xml-rpc.php:19 api/api_xml-rpc.php:601 api/api_xml-rpc.php:632
 #: api/api_xml-rpc.php:665 api/api_xml-rpc.php:699 api/api_xml-rpc.php:734
@@ -35882,6 +35972,8 @@ msgstr ""
 msgid ""
 "A valid weberp username. This user should have security access to this data."
 msgstr ""
+"Sebuah nama pengguna yang sah weberp. Pengguna ini harus memiliki akses "
+"keamanan data ini."
 
 #: api/api_xml-rpc.php:20 api/api_xml-rpc.php:70 api/api_xml-rpc.php:106
 #: api/api_xml-rpc.php:143 api/api_xml-rpc.php:180 api/api_xml-rpc.php:213
@@ -35941,27 +36033,28 @@ msgstr "Kata sandi user"
 #: api/api_xml-rpc.php:2522 api/api_xml-rpc.php:2551 api/api_xml-rpc.php:2580
 #: api/api_xml-rpc.php:2609 api/api_xml-rpc.php:2642
 msgid "The weberp password associated with this user name. "
-msgstr ""
+msgstr "Password weberp terkait dengan nama pengguna. "
 
 #: api/api_xml-rpc.php:22 api/api_xml-rpc.php:44
 msgid "This function returns an integer. "
-msgstr ""
+msgstr "Fungsi ini mengembalikan sebuah integer. "
 
 #: api/api_xml-rpc.php:23 api/api_xml-rpc.php:45
 msgid "Zero means the function was successful. "
-msgstr ""
+msgstr "Nol berarti fungsi berhasil. "
 
 #: api/api_xml-rpc.php:24 api/api_xml-rpc.php:46
 msgid "Otherwise an error code is returned. "
-msgstr ""
+msgstr "Jika kode kesalahan dikembalikan. "
 
 #: api/api_xml-rpc.php:42
 msgid "This function is used to logout from the API methods. "
-msgstr ""
+msgstr "Fungsi ini digunakan untuk keluar dari metode API. "
 
 #: api/api_xml-rpc.php:43
 msgid "It terminates the user's session thus freeing the server resources."
 msgstr ""
+"Ini mengakhiri sesi pengguna sehingga membebaskan sumber daya server."
 
 #: api/api_xml-rpc.php:61
 msgid ""
@@ -36146,6 +36239,8 @@ msgid ""
 "This function is used to retrieve a list of the branch codes for the Debtor "
 "Number supplied."
 msgstr ""
+"Fungsi ini digunakan untuk mengambil daftar kode cabang untuk Nomor Debitur "
+"disediakan"
 
 #: api/api_xml-rpc.php:209 api/api_xml-rpc.php:242 api/api_xml-rpc.php:281
 msgid "Debtor number"
@@ -36164,10 +36259,12 @@ msgid ""
 "If successful this function returns an array of branch codes, which may be "
 "strings or integers. "
 msgstr ""
+"Jika berhasil fungsi ini mengembalikan array kode cabang, yang mungkin "
+"string atau integer. "
 
 #: api/api_xml-rpc.php:216
 msgid "If the first element is zero then the function was successful."
-msgstr ""
+msgstr "Jika elemen pertama adalah nol maka fungsi telah berhasil."
 
 #: api/api_xml-rpc.php:217 api/api_xml-rpc.php:254 api/api_xml-rpc.php:289
 #: api/api_xml-rpc.php:704 api/api_xml-rpc.php:2134 api/api_xml-rpc.php:2168
@@ -36203,16 +36300,16 @@ msgstr ""
 
 #: api/api_xml-rpc.php:251
 msgid "The key will be identical with field name from the "
-msgstr ""
+msgstr "Kuncinya akan sama dengan nama field dari "
 
 #: api/api_xml-rpc.php:252
 msgid "custbranch table. "
-msgstr ""
+msgstr "custbranch tabel. "
 
 #: api/api_xml-rpc.php:253
 msgid ""
 "All fields will be in the set regardless of whether the value was set."
-msgstr ""
+msgstr "Semua bidang akan di set terlepas dari apakah nilai ditetapkan."
 
 #: api/api_xml-rpc.php:280 api/api_xml-rpc.php:313
 msgid ""
@@ -36239,209 +36336,244 @@ msgstr ""
 
 #: api/api_xml-rpc.php:315
 msgid "The name of a database field to search on. "
-msgstr ""
+msgstr "Nama bidang database untuk pencarian di. "
 
 #: api/api_xml-rpc.php:318
 msgid "Search Criteria"
-msgstr ""
+msgstr "Kriteria Pencarian"
 
 #: api/api_xml-rpc.php:319
 msgid "A (partial) string to match in the above Field Name."
-msgstr ""
+msgstr "Sebuah string (parsial) untuk pertandingan di Nama Bidang di atas."
 
 #: api/api_xml-rpc.php:324
 msgid ""
 "This function returns an array of customer IDs, which may be integers or "
 "strings. "
 msgstr ""
+"Fungsi ini mengembalikan array ID pelanggan, yang mungkin berupa integer "
+"atau string. "
 
 #: api/api_xml-rpc.php:352
 msgid "This function returns a list of currency abbreviations."
-msgstr ""
+msgstr "Fungsi ini mengembalikan daftar singkatan mata uang."
 
 #: api/api_xml-rpc.php:357
 msgid "This function returns an array of currency abbreviations. "
-msgstr ""
+msgstr "Fungsi ini mengembalikan array singkatan mata uang. "
 
 #: api/api_xml-rpc.php:382
 msgid ""
 "This function takes a currency abbreviation and returns details of that "
 "currency."
 msgstr ""
+"Fungsi ini membutuhkan rincian mata uang singkatan dan mengembalikan uang "
+"itu."
 
 #: api/api_xml-rpc.php:383
 msgid "Currency abbreviation"
-msgstr ""
+msgstr "Singkatan Mata Uang"
 
 #: api/api_xml-rpc.php:384
 msgid "A currency abbreviation as returned by the GetCurrencyList function."
 msgstr ""
+"Sebuah singkatan mata uang sebagai dikembalikan oleh fungsi GetCurrencyList."
 
 #: api/api_xml-rpc.php:389
 msgid "This function returns an array of currency details."
-msgstr ""
+msgstr "Fungsi ini mengembalikan array detail mata uang."
 
 #: api/api_xml-rpc.php:413
 msgid "This function returns a list of sales type abbreviations."
-msgstr ""
+msgstr "Fungsi ini mengembalikan daftar singkatan jenis penjualan."
 
 #: api/api_xml-rpc.php:418
 msgid "This function returns an array of sales type abbreviations. "
-msgstr ""
+msgstr "Fungsi ini mengembalikan array tipe singkatan penjualan. "
 
 #: api/api_xml-rpc.php:443
 msgid ""
 "This function takes a sales type abbreviation and returns details of that "
 "sales type."
 msgstr ""
+"Fungsi ini mengambil singkatan jenis dan rincian penjualan kembali dari "
+"jenis penjualan."
 
 #: api/api_xml-rpc.php:444
 msgid "Sales type abbreviation"
-msgstr ""
+msgstr "Jenis Penjualan singkatan"
 
 #: api/api_xml-rpc.php:445
 msgid ""
 "A sales type abbreviation as returned by the GetSalesTypeList function."
 msgstr ""
+"Sebuah singkatan jenis penjualan yang dikembalikan oleh fungsi "
+"GetSalesTypeList."
 
 #: api/api_xml-rpc.php:450
 msgid "This function returns an array of sales type details."
-msgstr ""
+msgstr "Fungsi ini mengembalikan array tipe rincian penjualan."
 
 #: api/api_xml-rpc.php:474
 msgid ""
 "This function is used to insert sales type details into the webERP database."
 msgstr ""
+"Fungsi ini digunakan untuk memasukkan jenis rincian penjualan ke dalam "
+"database webERP."
 
 #: api/api_xml-rpc.php:475
 msgid "Sales Type Details"
-msgstr ""
+msgstr "Jenis Penjualan Detail"
 
 #: api/api_xml-rpc.php:510
 msgid "This function returns a list of hold reason codes."
-msgstr ""
+msgstr "Fungsi ini mengembalikan daftar kode alasan terus."
 
 #: api/api_xml-rpc.php:515
 msgid "This function returns an array of hold reason codes."
-msgstr ""
+msgstr "Fungsi ini mengembalikan array alasan kode terus."
 
 #: api/api_xml-rpc.php:538
 msgid ""
 "This function takes a hold reason code and returns details of that hold "
 "reason."
 msgstr ""
+"Fungsi ini memerlukan kode alasan terus dan rincian pengembalian dari alasan "
+"itu terus."
 
 #: api/api_xml-rpc.php:539 api/api_xml-rpc.php:598
 msgid "Hold reason code"
-msgstr ""
+msgstr "Tahan kode alasan"
 
 #: api/api_xml-rpc.php:540
 msgid ""
 "A hold reason abbreviation as returned by the GetHoldReasonList function."
 msgstr ""
+"Sebuah singkatan Alasan menjabat sebagai dikembalikan oleh fungsi "
+"GetHoldReasonList."
 
 #: api/api_xml-rpc.php:545
 msgid "This function returns an array of hold reason details."
-msgstr ""
+msgstr "Fungsi ini mengembalikan array detail alasan terus."
 
 #: api/api_xml-rpc.php:569
 msgid "This function returns a list of payment terms abbreviations."
-msgstr ""
+msgstr "Fungsi ini mengembalikan daftar singkatan istilah pembayaran."
 
 #: api/api_xml-rpc.php:574
 msgid "This function returns an array of payment terms abbreviations."
-msgstr ""
+msgstr "Fungsi ini mengembalikan array singkatan istilah pembayaran."
 
 #: api/api_xml-rpc.php:597
 msgid ""
 "This function takes a payment terms abbreviation and returns details of that "
 "payment terms type."
 msgstr ""
+"Fungsi ini membutuhkan rincian pembayaran istilah singkatan dan imbalan dari "
+"yang jenis pembayaran istilah."
 
 #: api/api_xml-rpc.php:599
 msgid ""
 "A payment terms abbreviation as returned by the GetPaymentTermsList function."
 msgstr ""
+"Sebuah pembayaran istilah singkatan seperti yang dikembalikan oleh fungsi "
+"GetPaymentTermsList."
 
 #: api/api_xml-rpc.php:604
 msgid "This function returns an array of payment terms details."
-msgstr ""
+msgstr "Fungsi ini mengembalikan array rincian pembayaran istilah."
 
 #: api/api_xml-rpc.php:628
 msgid ""
 "This function inserts a new stock item into webERP, including updating the "
 "locstock table."
 msgstr ""
+"Fungsi ini untuk menyisipkan item saham baru ke dalam webERP, termasuk "
+"memperbarui tabel locstock."
 
 #: api/api_xml-rpc.php:629 api/api_xml-rpc.php:662
 msgid "Stock Item Details"
-msgstr ""
+msgstr "Bursa Item Detail"
 
 #: api/api_xml-rpc.php:630
 msgid ""
 "Key/value pairs of data to insert. The key must be identical with the "
 "database field name."
 msgstr ""
+"Pasangan kunci / nilai data untuk menyisipkan. Kuncinya harus identik dengan "
+"nama field database."
 
 #: api/api_xml-rpc.php:661
 msgid "This function modifies a stock item that already exists in webERP."
-msgstr ""
+msgstr "Fungsi ini memodifikasi item saham yang sudah ada di webERP."
 
 #: api/api_xml-rpc.php:663
 msgid "Key/value pairs of data to modify."
-msgstr ""
+msgstr "pasangan kunci / nilai data untuk memodifikasi."
 
 #: api/api_xml-rpc.php:694
 msgid ""
 "This function takes a stock item code and returns an array of key/value "
 "pairs."
 msgstr ""
+"Fungsi ini memerlukan kode saham item dan mengembalikan array kunci / "
+"pasangan nilai."
 
 #: api/api_xml-rpc.php:695
 msgid ""
 "The keys represent the database field names, and the values are the value of "
 "that field."
 msgstr ""
+"Kunci merupakan nama database lapangan, dan nilai-nilai adalah nilai bidang "
+"tersebut."
 
 #: api/api_xml-rpc.php:697 api/api_xml-rpc.php:928 api/api_xml-rpc.php:971
 msgid "The StockID code to identify the item in the database."
-msgstr ""
+msgstr "Kode StockID untuk mengidentifikasi item dalam database."
 
 #: api/api_xml-rpc.php:702
 msgid ""
 "If successful this function returns a set of key/value pairs containing the "
 "details of this stock item. "
 msgstr ""
+"Jika berhasil fungsi ini mengembalikan satu set kunci / pasangan nilai "
+"berisi rincian dari item ini saham. "
 
 #: api/api_xml-rpc.php:703
 msgid ""
 "The key will be identical with field name from the stockmaster table. All "
 "fields will be in the set regardless of whether the value was set."
 msgstr ""
+"Kuncinya akan sama dengan nama field dari tabel stockmaster. Semua bidang "
+"akan di set terlepas dari apakah nilai ditetapkan."
 
 #: api/api_xml-rpc.php:728
 msgid ""
 "This function searches the stockmaster table and returns an array of stock "
 "items matching that criteria."
 msgstr ""
+"Fungsi ini mencari meja stockmaster dan mengembalikan array item stok "
+"pencocokan bahwa kriteria."
 
 #: api/api_xml-rpc.php:730 api/api_xml-rpc.php:1893
 msgid "The field name to search on."
-msgstr ""
+msgstr "Nama lapangan untuk pencarian di."
 
 #: api/api_xml-rpc.php:731 api/api_xml-rpc.php:1894 api/api_xml-rpc.php:1927
 msgid "Match Criteria"
-msgstr ""
+msgstr "Match Kriteria"
 
 #: api/api_xml-rpc.php:732 api/api_xml-rpc.php:1895 api/api_xml-rpc.php:1928
 msgid "The SQL search pattern to select items in the database."
-msgstr ""
+msgstr "Pola pencarian SQL untuk memilih item dalam database."
 
 #: api/api_xml-rpc.php:737
 msgid ""
 "Returns an array of stock codes matching the criteria send, or an array of "
 "error codes"
 msgstr ""
+"Mengembalikan array kode saham yang cocok kriteria mengirim, atau array kode "
+"kesalahan"
 
 #: api/api_xml-rpc.php:765 api/api_xml-rpc.php:796 api/api_xml-rpc.php:827
 #: api/api_xml-rpc.php:2196 api/api_xml-rpc.php:2232 api/api_xml-rpc.php:2278
@@ -36487,6 +36619,7 @@ msgid ""
 "A numeric field containing the reorder level for this stockid/location "
 "combination."
 msgstr ""
+"Bidang numerik yang berisi tingkat pemesanan ini stockid / kombinasi lokasi."
 
 #: api/api_xml-rpc.php:836
 msgid ""
@@ -36501,138 +36634,171 @@ msgid ""
 "This function returns the quantity allocated of the stock item id sent as a "
 "parameter."
 msgstr ""
+"Fungsi ini mengembalikan jumlah alokasi item stok id dikirim sebagai "
+"parameter."
 
 #: api/api_xml-rpc.php:866
 msgid "The StockID code to identify items ordered but not yet shipped."
 msgstr ""
+"Kode StockID untuk mengidentifikasi barang yang dipesan tetapi belum dikirim."
 
 #: api/api_xml-rpc.php:871
 msgid ""
 "This function returns an integer value of the quantity allocated or an array "
 "of error codes if not. "
 msgstr ""
+"Fungsi ini mengembalikan nilai integer dari kuantitas dialokasikan atau "
+"array kode kesalahan jika tidak. "
 
 #: api/api_xml-rpc.php:895
 msgid ""
 "This function takes a stock ID and returns the quantity of this stock that "
 "is currently on outstanding purchase orders."
 msgstr ""
+"Fungsi ini mengambil ID saham dan mengembalikan jumlah ini saham yang saat "
+"ini sedang pesanan pembelian."
 
 #: api/api_xml-rpc.php:897
 msgid ""
 "The StockID code to identify items in the database on order, but not yet "
 "received."
 msgstr ""
+"Kode StockID untuk mengidentifikasi item dalam database pada pesanan, tetapi "
+"belum diterima."
 
 #: api/api_xml-rpc.php:902
 msgid ""
 "This function returns an integer value of the quantity on order or an array "
 "of error codes if not."
 msgstr ""
+"Fungsi ini mengembalikan nilai integer kuantitas atas perintah atau array "
+"kode kesalahan jika tidak."
 
 #: api/api_xml-rpc.php:926
 msgid ""
 "This function sets the sales price for a stock ID in the sales type and "
 "currency passed to the function"
 msgstr ""
+"Fungsi ini menset nilai jual ID saham dalam penjualan jenis dan mata uang "
+"dikirimkan ke fungsi"
 
 #: api/api_xml-rpc.php:929 api/api_xml-rpc.php:972
 msgid "Currency Code"
-msgstr ""
+msgstr "Kode Mata Uang"
 
 #: api/api_xml-rpc.php:930 api/api_xml-rpc.php:973
 msgid "The currency involved."
-msgstr ""
+msgstr "Mata uang yang terlibat."
 
 #: api/api_xml-rpc.php:932
 msgid "The sales type to identify the item in the database."
-msgstr ""
+msgstr "Jenis penjualan untuk mengidentifikasi item dalam database."
 
 #: api/api_xml-rpc.php:934
 msgid "The price to apply to this item."
-msgstr ""
+msgstr "Harga berlaku untuk item ini."
 
 #: api/api_xml-rpc.php:939
 msgid "Returns a zero if successful or else an array of error codes"
-msgstr ""
+msgstr "Returns nol jika berhasil atau array kode kesalahan"
 
 #: api/api_xml-rpc.php:969
 msgid ""
 "This function gets the sales price for a stock ID in the sales type and "
 "currency passed to the function"
 msgstr ""
+"Fungsi ini mendapatkan harga penjualan untuk sebuah ID saham dalam penjualan "
+"jenis dan mata uang dikirimkan ke fungsi"
 
 #: api/api_xml-rpc.php:975
 msgid "The sales type of the item in the database."
-msgstr ""
+msgstr "Jenis penjualan dari item dalam database."
 
 #: api/api_xml-rpc.php:980
 msgid ""
 "Returns the sales price for he stock item whose ID is passed in the function"
 msgstr ""
+"Mengembalikan harga jual karena ia menyediakan item yang ID dilewatkan dalam "
+"fungsi"
 
 #: api/api_xml-rpc.php:1008
 msgid ""
 "Inserts a sales invoice into the debtortrans table and does the relevant GL "
 "entries"
 msgstr ""
+"Menyisipkan faktur penjualan ke dalam tabel debtortrans dan melakukan GL "
+"entri yang relevan"
 
 #: api/api_xml-rpc.php:1009
 msgid "Invoice Details"
-msgstr ""
+msgstr "Faktur Rincian"
 
 #: api/api_xml-rpc.php:1010
 msgid "An array of index/value items describing the invoice."
-msgstr ""
+msgstr "Sebuah array dari item index / nilai yang menjelaskan tagihan."
 
 #: api/api_xml-rpc.php:1013
 msgid ""
 "The transno key is generated by this call, and if a value is supplied, it "
 "will be ignored. "
 msgstr ""
+"Kunci transno dihasilkan oleh panggilan ini, dan jika nilai diberikan, maka "
+"akan diabaikan. "
 
 #: api/api_xml-rpc.php:1014
 msgid ""
 "Two additional fields are required. \"partcode\" needs to be a genuine part "
 "number, though it appears to serve no real purpose. "
 msgstr ""
+"Dua kolom tambahan sangat diperlukan. \"kode bagian \" perlu nomor bagian "
+"asli, meskipun muncul untuk melayani tujuan nyata. "
 
 #: api/api_xml-rpc.php:1015
 msgid ""
 "\"salesarea\" also is required, though again it appears to serve no useful "
 "purpose. "
 msgstr ""
+"\"penjualan daerah \" juga diperlukan, meskipun sekali lagi tampaknya tidak "
+"melayani tujuan yang bermanfaat. "
 
 #: api/api_xml-rpc.php:1022
 msgid ""
 "If the first element is zero then the function was successful, and the "
 "second element is the invoice number. "
 msgstr ""
+"Jika elemen pertama adalah nol maka fungsi berhasil, dan elemen kedua adalah "
+"nomor faktur. "
 
 #: api/api_xml-rpc.php:1047
 msgid ""
 "This function is used to insert a new Sales Credit to the webERP database."
 msgstr ""
+"Fungsi ini digunakan untuk menyisipkan Penjualan Kredit baru ke database "
+"webERP."
 
 #: api/api_xml-rpc.php:1048
 msgid "Credit Details"
-msgstr ""
+msgstr "Rincian Kredit"
 
 #: api/api_xml-rpc.php:1049
 msgid ""
 "An array of index/value items describing the credit.  All values must be "
 "negative."
 msgstr ""
+"Sebuah array dari item index / nilai yang menjelaskan kredit. Semua nilai "
+"harus negatif."
 
 #: api/api_xml-rpc.php:1078
 msgid "Insert Sales Order Header"
-msgstr ""
+msgstr "Masukkan Order Penjualan Header"
 
 #: api/api_xml-rpc.php:1082
 msgid ""
 "The orderno key is generated by this call, and if a value is supplied, it "
 "will be ignored. "
 msgstr ""
+"Kunci orderno dihasilkan oleh panggilan ini, dan jika nilai diberikan, maka "
+"akan diabaikan. "
 
 #: api/api_xml-rpc.php:1088
 msgid ""
@@ -36640,350 +36806,398 @@ msgid ""
 "is 0 for success or an error code, while the second element is the order "
 "number."
 msgstr ""
+"Jika berhasil fungsi ini mengembalikan elemen array dua, elemen pertama "
+"adalah 0 untuk sukses atau kode kesalahan, sedangkan elemen kedua adalah "
+"nomor pesanan."
 
 #: api/api_xml-rpc.php:1113
 msgid "Modify Sales Order Header Details"
-msgstr ""
+msgstr "Memodifikasi Header Detail Order Penjualan"
 
 #: api/api_xml-rpc.php:1122
 msgid ""
 "If successful this function returns a single element array with the value 0; "
 "otherwise, it contains all error codes encountered during the update."
 msgstr ""
+"Jika berhasil fungsi ini mengembalikan elemen array tunggal dengan nilai 0, "
+"jika tidak, mengandung semua kode kesalahan ditemui selama update."
 
 #: api/api_xml-rpc.php:1147
 msgid "Insert Sales Order Line"
-msgstr ""
+msgstr "Masukkan Penjualan Jalur Pemesanan"
 
 #: api/api_xml-rpc.php:1151
 msgid "The orderno key must be one of these values. "
-msgstr ""
+msgstr "Kunci orderno harus salah satu dari nilai-nilai ini. "
 
 #: api/api_xml-rpc.php:1157 api/api_xml-rpc.php:1192
 msgid ""
 "This function returns an array; the first element is 0 for success; "
 "otherwise the array contains a list of all errors encountered."
 msgstr ""
+"Fungsi ini mengembalikan array, elemen pertama adalah 0 untuk sukses, jika "
+"array berisi daftar semua kesalahan yang ditemui."
 
 #: api/api_xml-rpc.php:1182
 msgid "Modify Sales Order Line"
-msgstr ""
+msgstr "Ubah Penjualan Jalur Pemesanan"
 
 #: api/api_xml-rpc.php:1186
 msgid "The orderno and stkcode keys must be one of these values. "
-msgstr ""
+msgstr "Tombol orderno dan stkcode harus salah satu dari nilai-nilai ini. "
 
 #: api/api_xml-rpc.php:1216
 msgid "Account Details"
-msgstr ""
+msgstr "Account Details"
 
 #: api/api_xml-rpc.php:1217
 msgid ""
 "An array of index/value items describing the GL Account and fields to set."
 msgstr ""
+"Sebuah array dari item index / nilai yang menggambarkan GL Account dan "
+"ladang untuk mengatur."
 
 #: api/api_xml-rpc.php:1245
 msgid "Account Section Details"
-msgstr ""
+msgstr "Account Bagian Rincian"
 
 #: api/api_xml-rpc.php:1246
 msgid ""
 "An array of index/value items describing the account section to insert."
 msgstr ""
+"Sebuah array dari item index / nilai yang menjelaskan bagian account untuk "
+"menyisipkan."
 
 #: api/api_xml-rpc.php:1274
 msgid "Account Group Details"
-msgstr ""
+msgstr "Account Rincian Grup"
 
 #: api/api_xml-rpc.php:1275
 msgid "An array of index/value items describing the account group to insert."
 msgstr ""
+"Sebuah array dari item index / nilai yang menjelaskan kelompok akun untuk "
+"menyisipkan."
 
 #: api/api_xml-rpc.php:1303
 msgid "This function returns a list of stock location ids."
-msgstr ""
+msgstr "Fungsi ini mengembalikan daftar ID lokasi saham."
 
 #: api/api_xml-rpc.php:1308
 msgid "This function returns an array of stock location ids."
-msgstr ""
+msgstr "Fungsi ini mengembalikan array id lokasi saham."
 
 #: api/api_xml-rpc.php:1330
 msgid ""
 "This function takes a stock location id and returns details of that stock "
 "location."
 msgstr ""
+"Fungsi ini mengambil lokasi saham id dan rincian pengembalian dari lokasi "
+"saham."
 
 #: api/api_xml-rpc.php:1331
 msgid "Stock Location Code"
-msgstr ""
+msgstr "Kode Lokasi Saham"
 
 #: api/api_xml-rpc.php:1332
 msgid "A stock location code as returned by the GetLocationList function."
-msgstr ""
+msgstr "Kode lokasi saham sebagai dikembalikan oleh fungsi GetLocationList."
 
 #: api/api_xml-rpc.php:1337
 msgid "This function returns an array of stock location details."
-msgstr ""
+msgstr "Fungsi ini mengembalikan array detail lokasi saham."
 
 #: api/api_xml-rpc.php:1361
 msgid "This function returns a list of stock shipper ids."
-msgstr ""
+msgstr "Fungsi ini mengembalikan daftar ID shipper saham."
 
 #: api/api_xml-rpc.php:1366
 msgid "This function returns an array of stock shipper ids."
-msgstr ""
+msgstr "Fungsi ini mengembalikan array id shipper saham."
 
 #: api/api_xml-rpc.php:1389
 msgid ""
 "This function takes a stock shipper id and returns details of that shipper."
 msgstr ""
+"Fungsi ini mengambil pengirim saham id dan rincian pengembalian dari "
+"pengirim itu."
 
 #: api/api_xml-rpc.php:1390
 msgid "Stock Shipper ID"
-msgstr ""
+msgstr "Bursa Pengirim ID"
 
 #: api/api_xml-rpc.php:1391
 msgid "A stock shipper ID as returned by the GetShippersList function."
 msgstr ""
+"Sebuah ID pengirim saham sebagai dikembalikan oleh fungsi GetShippersList."
 
 #: api/api_xml-rpc.php:1396
 msgid "This function returns an array of stock shipper details."
-msgstr ""
+msgstr "Fungsi ini mengembalikan array rincian pengirim saham."
 
 #: api/api_xml-rpc.php:1420
 msgid "This function returns a list of sales area codes."
-msgstr ""
+msgstr "Fungsi ini mengembalikan daftar kode area penjualan."
 
 #: api/api_xml-rpc.php:1425
 msgid "This function returns an array of sales area codes."
-msgstr ""
+msgstr "Fungsi ini mengembalikan array kode area penjualan."
 
 #: api/api_xml-rpc.php:1448
 msgid ""
 "This function takes a sales area code and returns details of that sales area."
 msgstr ""
+"Fungsi ini memerlukan kode area dan rincian penjualan kembali dari wilayah "
+"penjualan."
 
 #: api/api_xml-rpc.php:1449 api/api_xml-rpc.php:1568
 msgid "Sales Area Code"
-msgstr ""
+msgstr "Penjualan Kode Area"
 
 #: api/api_xml-rpc.php:1450
 msgid "A sales area code as returned by the GetSalesAreasList function."
 msgstr ""
+"Sebuah kode area penjualan yang dikembalikan oleh fungsi GetSalesAreasList."
 
 #: api/api_xml-rpc.php:1455 api/api_xml-rpc.php:1486
 msgid "This function returns an array of sales area details."
-msgstr ""
+msgstr "Fungsi ini mengembalikan array rincian wilayah penjualan."
 
 #: api/api_xml-rpc.php:1479
 msgid ""
 "This function takes a sales area description and returns details of that "
 "sales area."
 msgstr ""
+"Fungsi ini membutuhkan deskripsi daerah dan rincian penjualan kembali dari "
+"wilayah penjualan."
 
 #: api/api_xml-rpc.php:1480
 msgid "Sales Area Description"
-msgstr ""
+msgstr "Deskripsi Wilayah Penjualan"
 
 #: api/api_xml-rpc.php:1481
 msgid "A sales area description of the sales area of interest."
-msgstr ""
+msgstr "Sebuah wilayah penjualan deskripsi area penjualan bunga."
 
 #: api/api_xml-rpc.php:1510
 msgid "Sales Area Details"
-msgstr ""
+msgstr "Daerah Penjualan Detail"
 
 #: api/api_xml-rpc.php:1511
 msgid "An array of index/value items describing the sales area to insert."
 msgstr ""
+"Sebuah array dari item index / nilai yang menggambarkan wilayah penjualan "
+"untuk menyisipkan."
 
 #: api/api_xml-rpc.php:1539
 msgid "This function returns a list of salesman codes."
-msgstr ""
+msgstr "Fungsi ini mengembalikan daftar kode salesman."
 
 #: api/api_xml-rpc.php:1544
 msgid "This function returns an array of salesman codes."
-msgstr ""
+msgstr "Fungsi ini mengembalikan array kode salesman."
 
 #: api/api_xml-rpc.php:1567
 msgid ""
 "This function takes a salesman code and returns details of that salesman."
 msgstr ""
+"Fungsi ini membutuhkan rincian dan mengembalikan kode salesman salesman itu."
 
 #: api/api_xml-rpc.php:1569
 msgid "A salesman code as returned by the GetSalesmanList function."
-msgstr ""
+msgstr "Kode salesman yang dikembalikan oleh fungsi GetSalesmanList."
 
 #: api/api_xml-rpc.php:1574 api/api_xml-rpc.php:1605
 msgid "This function returns an array of salesman details."
-msgstr ""
+msgstr "Fungsi ini mengembalikan array detail salesman."
 
 #: api/api_xml-rpc.php:1598
 msgid ""
 "This function takes a salesman's name and returns details of that salesman."
 msgstr ""
+"Fungsi ini mengambil nama seorang salesman dan rincian pengembalian salesman "
+"itu."
 
 #: api/api_xml-rpc.php:1600
 msgid "The name of the salesman of interest."
-msgstr ""
+msgstr "Nama salesman kepentingan."
 
 #: api/api_xml-rpc.php:1629
 msgid "Salesman Details"
-msgstr ""
+msgstr "Salesman Details"
 
 #: api/api_xml-rpc.php:1630
 msgid "An array of index/value items describing the salesman to insert."
 msgstr ""
+"Sebuah array dari item index / nilai yang menjelaskan penjual untuk "
+"menyisipkan."
 
 #: api/api_xml-rpc.php:1658
 msgid "This function returns a list of tax group IDs."
-msgstr ""
+msgstr "Fungsi ini mengembalikan daftar ID grup pajak."
 
 #: api/api_xml-rpc.php:1663
 msgid "This function returns an array of tax group IDs."
-msgstr ""
+msgstr "Fungsi ini mengembalikan array ID grup pajak."
 
 #: api/api_xml-rpc.php:1686
 msgid ""
 "This function takes a tax group ID and returns details of that tax group."
 msgstr ""
+"Fungsi ini membutuhkan ID pajak kelompok dan rincian pengembalian dari "
+"kelompok pajak."
 
 #: api/api_xml-rpc.php:1687
 msgid "Tax Group ID"
-msgstr ""
+msgstr "Grup Pajak ID"
 
 #: api/api_xml-rpc.php:1688
 msgid "A tax group ID as returned by the GetTaxgroupList function."
-msgstr ""
+msgstr "Sebuah ID grup pajak yang dikembalikan oleh fungsi GetTaxgroupList."
 
 #: api/api_xml-rpc.php:1693
 msgid "This function returns an array of tax group details."
-msgstr ""
+msgstr "Fungsi ini mengembalikan array rincian grup pajak."
 
 #: api/api_xml-rpc.php:1717
 msgid "This function returns a list of customer types."
-msgstr ""
+msgstr "Fungsi ini mengembalikan daftar jenis pelanggan."
 
 #: api/api_xml-rpc.php:1722
 msgid "This function returns an array of customer types."
-msgstr ""
+msgstr "Fungsi ini mengembalikan sebuah array tipe pelanggan."
 
 #: api/api_xml-rpc.php:1745
 msgid ""
 "This function takes a customer type ID and returns details of that customer "
 "type."
 msgstr ""
+"Fungsi ini membutuhkan rincian pelanggan tipe ID dan imbalan dari jenis "
+"pelanggan."
 
 #: api/api_xml-rpc.php:1746
 msgid "Customer Type ID"
-msgstr ""
+msgstr "Jenis Pelanggan ID"
 
 #: api/api_xml-rpc.php:1747
 msgid "A customer type ID as returned by the GetCustomerTypeList function."
 msgstr ""
+"Sebuah ID tipe pelanggan sebagai dikembalikan oleh fungsi "
+"GetCustomerTypeList."
 
 #: api/api_xml-rpc.php:1752
 msgid "This function returns an array of customer type details."
-msgstr ""
+msgstr "Fungsi ini mengembalikan array detail tipe pelanggan."
 
 #: api/api_xml-rpc.php:1776 api/api_xml-rpc.php:1805
 msgid "Category Details"
-msgstr ""
+msgstr "Kategori Details"
 
 #: api/api_xml-rpc.php:1777
 msgid ""
 "An array of index/value items describing the stock category to insert."
 msgstr ""
+"Sebuah array dari item index / nilai yang menggambarkan kategori saham untuk "
+"menyisipkan."
 
 #: api/api_xml-rpc.php:1806
 msgid ""
 "An array of index/value items describing the stock category to modify."
 msgstr ""
+"Sebuah array dari item index / nilai yang menggambarkan kategori saham untuk "
+"memodifikasi."
 
 #: api/api_xml-rpc.php:1833
 msgid "This function returns a list of stock category abbreviations."
-msgstr ""
+msgstr "Fungsi ini mengembalikan daftar singkatan kategori saham."
 
 #: api/api_xml-rpc.php:1838
 msgid "If successful, this function returns an array of stock category ids. "
-msgstr ""
+msgstr "Jika berhasil, fungsi ini mengembalikan array id kategori saham. "
 
 #: api/api_xml-rpc.php:1839
 msgid ""
 "Otherwise an array of error codes is returned and no stock categories are "
 "returned. "
 msgstr ""
+"Jika sebuah array dari kode kesalahan dikembalikan dan tidak ada kategori "
+"saham dikembalikan. "
 
 #: api/api_xml-rpc.php:1861
 msgid ""
 "This function takes a stock category ID and returns details of that stock "
 "category type."
 msgstr ""
+"Fungsi ini membutuhkan rincian saham kategori ID dan imbalan dari kategori "
+"jenis saham."
 
 #: api/api_xml-rpc.php:1862
 msgid "Stock Category ID"
-msgstr ""
+msgstr "Saham Kategori ID"
 
 #: api/api_xml-rpc.php:1863
 msgid "A Stock Category ID as returned by the *WHAT* function."
-msgstr ""
+msgstr "Sebuah Stock Kategori ID sebagai dikembalikan oleh * fungsi * APA."
 
 #: api/api_xml-rpc.php:1868
 msgid "This function returns an array of stock category details."
-msgstr ""
+msgstr "Fungsi ini mengembalikan array rincian kategori saham."
 
 #: api/api_xml-rpc.php:1925
 msgid "Label Name"
-msgstr ""
+msgstr "Nama Label"
 
 #: api/api_xml-rpc.php:1926
 msgid "The category label to search on."
-msgstr ""
+msgstr "Label kategori untuk pencarian di."
 
 #: api/api_xml-rpc.php:1958
 msgid "This function returns a list of general ledger account codes."
-msgstr ""
+msgstr "Fungsi ini mengembalikan daftar kode rekening buku besar."
 
 #: api/api_xml-rpc.php:1963
 msgid "This function returns an array of general ledger account codes."
-msgstr ""
+msgstr "Fungsi ini mengembalikan array kode rekening buku besar."
 
 #: api/api_xml-rpc.php:1986
 msgid ""
 "This function takes a general ledger account code and returns details of "
 "that account."
 msgstr ""
+"Fungsi ini memerlukan kode account buku besar dan rincian pengembalian dalam "
+"rekening tersebut."
 
 #: api/api_xml-rpc.php:1987
 msgid "General Ledger Account Code"
-msgstr ""
+msgstr "General Ledger Account Kode"
 
 #: api/api_xml-rpc.php:1988
 msgid ""
 "A general ledger account code as returned by the GetGLAccountList function."
-msgstr ""
+msgstr "Kode buku besar akun yang dikembalikan oleh fungsi GetGLAccountList."
 
 #: api/api_xml-rpc.php:1993 api/api_xml-rpc.php:2026
 msgid "This function returns an array of general ledger account details."
-msgstr ""
+msgstr "Fungsi ini mengembalikan array rincian rekening buku besar."
 
 #: api/api_xml-rpc.php:2017
 msgid ""
 "This function takes a stock code ID and a tax authority code and returns the "
 "relevant tax rate."
 msgstr ""
+"Fungsi ini memerlukan kode saham ID dan kode otoritas pajak dan "
+"mengembalikan tarif pajak yang relevan."
 
 #: api/api_xml-rpc.php:2019
 msgid "The stock ID of the item whose tax rate is desired."
-msgstr ""
+msgstr "ID stok dari item yang tarif pajak yang diinginkan."
 
 #: api/api_xml-rpc.php:2020
 msgid "Tax Authority Code"
-msgstr ""
+msgstr "Otoritas Pajak Kode"
 
 #: api/api_xml-rpc.php:2021
 msgid "The code identifying the tax authority of interest."
-msgstr ""
+msgstr "Kode mengidentifikasi otoritas pajak bunga."
 
 #: api/api_xml-rpc.php:2052
 msgid ""
@@ -37087,6 +37301,8 @@ msgid ""
 "Adjust the stock balance for the given stock code at the given location by "
 "the amount given."
 msgstr ""
+"Menyesuaikan keseimbangan saham untuk kode saham yang diberikan di lokasi "
+"tertentu dengan jumlah tertentu."
 
 #: api/api_xml-rpc.php:2236 api/api_xml-rpc.php:2282 api/api_xml-rpc.php:2478
 msgid ""
@@ -37194,6 +37410,8 @@ msgid ""
 "If successful this function returns a string contain the default date "
 "format. "
 msgstr ""
+"Jika berhasil fungsi ini mengembalikan sebuah string berisi format tanggal "
+"default. "
 
 #: api/api_xml-rpc.php:2547
 msgid "Returns the webERP default location"
@@ -37203,6 +37421,7 @@ msgstr "Mengembalikan lokasi standar webERP"
 msgid ""
 "If successful this function returns a string contain the default location. "
 msgstr ""
+"Jika berhasil fungsi ini mengembalikan sebuah string berisi lokasi default. "
 
 #: api/api_xml-rpc.php:2576
 msgid "Returns the webERP default price list"
@@ -37213,6 +37432,8 @@ msgid ""
 "If successful this function returns a string contain the default price list "
 "code. "
 msgstr ""
+"Jika berhasil fungsi ini mengembalikan string berisi kode default daftar "
+"harga. "
 
 #: api/api_xml-rpc.php:2605
 msgid "Returns the webERP currency code"
@@ -37223,50 +37444,57 @@ msgid ""
 "If successful this function returns a string contain the default currency "
 "code. "
 msgstr ""
+"Jika berhasil fungsi ini mengembalikan string berisi kode mata uang standar. "
 
 #: api/api_xml-rpc.php:2634
 msgid ""
 "Returns the value of the specified stock category property for the specified "
 "stock item category"
 msgstr ""
+"Mengembalikan nilai dari properti kategori saham yang ditetapkan untuk "
+"kategori item stok yang sudah ditetapkan"
 
 #: api/api_xml-rpc.php:2635
 msgid "Property"
-msgstr ""
+msgstr "Properti"
 
 #: api/api_xml-rpc.php:2636
 msgid "The name of the specific property to be returned."
-msgstr ""
+msgstr "Nama properti khusus untuk dikembalikan."
 
 #: api/api_xml-rpc.php:2638
 msgid ""
 "The ID of the stock item for which the value of the above property is "
 "required. "
-msgstr ""
+msgstr "ID dari item saham yang nilai dari properti di atas diperlukan. "
 
 #: api/api_xml-rpc.php:2643
 msgid ""
 "If successful this function returns zero, and the value of the requested "
 "property. "
 msgstr ""
+"Jika berhasil mengembalikan fungsi ini nol, dan nilai dari properti diminta. "
 
 #: api/api_xml-rpc.php:2670
 msgid "Returns (possibly translated) error text from error codes"
 msgstr ""
+"Pengembalian (mungkin diterjemahkan) kesalahan teks dari kode kesalahan"
 
 #: api/api_xml-rpc.php:2671
 msgid "Error codes"
-msgstr ""
+msgstr "Error kode"
 
 #: api/api_xml-rpc.php:2672
 msgid "An array of error codes to change into text messages. "
-msgstr ""
+msgstr "Array kode kesalahan untuk mengubah ke dalam pesan teks. "
 
 #: api/api_xml-rpc.php:2673
 msgid ""
 "An array of two element arrays, one per error code. The second array has the "
 "error code in element 0 and the error string in element 1. "
 msgstr ""
+"Sebuah array dari dua elemen array, satu per kode kesalahan. Array kedua "
+"memiliki kode kesalahan dalam elemen 0 dan string kesalahan dalam elemen 1. "
 
 #: api/api_xml-rpc.php:3022
 msgid "Parameters"
@@ -37707,3 +37935,16 @@ msgstr "Nilai Kembali"
 #~ msgstr ""
 #~ "Ini adalah nilai teks. Harus berupa kolom berlaku di tabel debtorsmaster. "
 #~ "Huruf besar atau kecil berpengaruh"
+
+#~ msgid "You have database updates that are required."
+#~ msgstr "Anda memiliki update database yang diperlukan."
+
+#~ msgid ""
+#~ "Please ensure that you have taken a backup of your current database before "
+#~ "continuing."
+#~ msgstr ""
+#~ "Mohon pastikan bahwa Anda telah mengambil cadangan dari database saat ini "
+#~ "Anda sebelum melanjutkan."
+
+#~ msgid "The primary key in"
+#~ msgstr "Kunci utama dalam"
