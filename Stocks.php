@@ -18,7 +18,7 @@ if (isset($_GET['StockID'])){
 	$StockID = '';
 }
 
-if (isset($StockID)) {
+if (isset($StockID) and !isset($_POST['UpdateCategories'])) {
 	$sql = "SELECT COUNT(stockid) FROM stockmaster WHERE stockid='".$StockID."'";
 	$result = DB_query($sql,$db);
 	$myrow = DB_fetch_row($result);
@@ -574,14 +574,18 @@ echo '<form name="ItemForm" enctype="multipart/form-data" method="post" action="
 	<tr><td>'. "\n"; // Nested table
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-if (!isset($StockID) or $StockID=='') {
+if (!isset($StockID) or $StockID=='' or isset($_POST['UpdateCategories'])) {
 
 /*If the page was called without $StockID passed to page then assume a new stock item is to be entered show a form with a part Code field other wise the form showing the fields with the existing entries against the part will show for editing with only a hidden StockID field. New is set to flag that the page may have called itself and still be entering a new part, in which case the page needs to know not to go looking up details for an existing part*/
 
 	$New = true;
 	echo '<input type="hidden" name="New" value="1">'. "\n";
-
-	echo '<tr><td>'. _('Item Code'). ':</td><td><input ' . (in_array('StockID',$Errors) ?  'class="inputerror"' : '' ) .'  type="text" name="StockID" size=21 maxlength=20></td></tr>'. "\n";
+	if (!isset($StockID)) {
+		echo '<tr><td>'. _('Item Code'). ':</td><td><input ' . (in_array('StockID',$Errors) ?  'class="inputerror"' : '' ) .'  type="text" name="StockID" size=21 maxlength=20 /></td></tr>'. "\n";
+	} else {
+		echo '<tr><td>'. _('Item Code'). ':</td><td><input ' . (in_array('StockID',$Errors) ?  'class="inputerror"' : '' ) .'  type="text" name="StockID" size=21 maxlength=20
+			value="'.$StockID.'" /></td></tr>'. "\n";
+	}
 
 } elseif (!isset($_POST['UpdateCategories']) and $InputError!=1) { // Must be modifying an existing item and no changes made yet
 
