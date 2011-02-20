@@ -341,6 +341,10 @@ Class Cart {
 		$ErrMsg = _('The taxes and rates for this item could not be retrieved because');
 		$GetTaxRatesResult = DB_query($SQL,$db,$ErrMsg);
 		unset($this->LineItems[$LineNumber]->Taxes);
+		if (DB_num_rows($GetTaxRatesResult)==0){
+			prnMsg(_('It appears that taxes are not defined correctly for this customer tax group') ,'error');
+		}
+		else {
 		while ($myrow = DB_fetch_array($GetTaxRatesResult)){
 
 			$this->LineItems[$LineNumber]->Taxes[$myrow['calculationorder']] = new Tax($myrow['calculationorder'],
@@ -350,6 +354,7 @@ Class Cart {
 													$myrow['taxontax'],
 													$myrow['taxglcode']);
 		}
+	  }
 	} //end method GetTaxes
 
 	function GetFreightTaxes () {
