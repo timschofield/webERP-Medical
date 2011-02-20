@@ -360,7 +360,7 @@ If (isset($PrintPDF)
 				}
 				$YPos -= ($FontSize*$lines);
 
-				$lines=explode('\r\n',$myrow2['narrative']);
+				$lines=explode('\r\n',htmlspecialchars_decode($myrow2['narrative']));
 				for ($i=0;$i<sizeOf($lines);$i++) {
 				while (strlen($lines[$i])>1){
 					if ($YPos-$line_height <= $Bottom_Margin){
