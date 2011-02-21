@@ -7,11 +7,7 @@ include ('includes/session.inc');
 $title = _('Top Items Searching');
 include ('includes/header.inc');
 //check if input already
-if (!(isset($_POST['Location'])
-		AND isset($_POST['NumberOfDays'])
-		AND isset($_POST['Customers'])
-		AND isset($_POST['NumberOfTopItems'])
-		AND isset($_POST['Sequence']))) {
+if (!isset($_POST['search'])) {
 
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Top Sales Order Search') . '" alt="" />' . ' ' . _('Top Sales Order Search') . '</p>';
 	echo "<form action=" . $_SERVER['PHP_SELF'] . '?' . SID . ' name="SelectCustomer" method=POST>';
@@ -43,7 +39,7 @@ if (!(isset($_POST['Location'])
 	//view order by list to display
 	echo '<tr>	<td width="150">' . _('Select Order By ') . ' </td>
 				<td>:</td>
-				<td><select name=order>';
+				<td><select name=Sequence>';
 	echo '	<option value=TotalInvoiced>' . _('Total Pieces') . '';
 	echo '	<option value=ValueSales>' . _('Value of Sales') . '';
 	echo '	</select></td>
@@ -62,7 +58,7 @@ if (!(isset($_POST['Location'])
 			<td></td>
 		</tr>
 	</form></table>';
-	echo '<br /><div class=centre><input tabindex=5 type=submit value="' . _('Search') . '"></div>';
+	echo '<br /><div class=centre><input tabindex=5 name="search" type=submit value="' . _('Search') . '"></div>';
 } else {
 	// everything below here to view NumberOfTopItems items sale on selected location
 	$FromDate = FormatDateForSQL(DateAdd(Date($_SESSION['DefaultDateFormat']),'d', -$_POST['NumberOfDays']));
