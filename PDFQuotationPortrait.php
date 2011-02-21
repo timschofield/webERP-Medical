@@ -195,8 +195,8 @@ if (DB_num_rows($result)>0){
 
 	} //end if need a new page headed up
 
-	$LeftOvers = $pdf->addTextWrap($XPos,$YPos-80,200,10,_('Notes:'));
-	$LeftOvers = $pdf->addText($XPos,$YPos-95,10,$myrow['comments']);
+	$LeftOvers = $pdf->addTextWrap($XPos+10,$YPos-80,200,10,_('Notes:'));
+	$LeftOvers = $pdf->addTextWrap($XPos+50,$YPos-80,200,10,$myrow['comments']);
 
 	if (strlen($LeftOvers)>1){
 		$YPos -= 10;
@@ -214,15 +214,15 @@ if (DB_num_rows($result)>0){
 			}
 		}
 	}
-	$YPos -= ($line_height);
-	$LeftOvers = $pdf->addTextWrap(40,$YPos,655,$FontSize,_('Total Tax'),'right');
-	$LeftOvers = $pdf->addTextWrap(700,$YPos,90,$FontSize,number_format($TaxTotal,2),'right');
+	// $YPos -= ($line_height);
+	$LeftOvers = $pdf->addTextWrap(80,$YPos-100,400,$FontSize,_('Total Tax'),'right');
+	$LeftOvers = $pdf->addTextWrap(100,$YPos-100,450,$FontSize,number_format($TaxTotal,2),'right');
 	$YPos -= 12;
-	$LeftOvers = $pdf->addTextWrap(40,$YPos,655,$FontSize,_('Quotation Excluding Tax'),'right');
-	$LeftOvers = $pdf->addTextWrap(700,$YPos,90,$FontSize,number_format($QuotationTotalEx,2),'right');
+	$LeftOvers = $pdf->addTextWrap(80,$YPos-100,400,$FontSize,_('Quotation Excluding Tax'),'right');
+	$LeftOvers = $pdf->addTextWrap(100,$YPos-100,450,$FontSize,number_format($QuotationTotalEx,2),'right');
 	$YPos -= 12;
-	$LeftOvers = $pdf->addTextWrap(40,$YPos,655,$FontSize,_('Quotation Including Tax'),'right');
-	$LeftOvers = $pdf->addTextWrap(700,$YPos,90,$FontSize,number_format($QuotationTotal,2),'right');
+	$LeftOvers = $pdf->addTextWrap(80,$YPos-100,400,$FontSize,_('Quotation Including Tax'),'right');
+	$LeftOvers = $pdf->addTextWrap(100,$YPos-100,450,$FontSize,number_format($QuotationTotal,2),'right');
 
 } /*end if there are line details to show on the quotation*/
 
