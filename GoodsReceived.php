@@ -530,11 +530,13 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 																											loccode,
 																											serialno,
 																											qualitytext,
+																											expirationdate,
 																											quantity)
 																										VALUES ('" . $OrderLine->StockID . "',
 																											'" . $_SESSION['PO']->Location . "',
 																											'" . $Item->BundleRef . "',
 																											'',
+																											'" . FormatDateForSQL($Item->ExpiryDate) . "',
 																											'" . $Item->BundleQty*$OrderLine->ConversionFactor  . "')";
 								}
 

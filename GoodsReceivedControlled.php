@@ -21,7 +21,7 @@ if (!isset($_SESSION['PO'])) {
 	exit;
 }
 
-if ($_GET['LineNo']>0){
+if (isset($_GET['LineNo']) and $_GET['LineNo']>0){
 	$LineNo = $_GET['LineNo'];
 } else if ($_POST['LineNo']>0){
 	$LineNo = $_POST['LineNo'];
