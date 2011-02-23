@@ -162,7 +162,7 @@ function ItemCostUpdateGL($db, $StockID, $NewCost, $OldCost, $QOH) {
 		if ($_SESSION['CompanyRecord']['gllink_stock']==1 AND $QOH!=0){
 
 			$CostUpdateNo = GetNextTransNo(35, $db);
-			$PeriodNo = GetPeriod($_SESSION['DefaultDateFormat'], $db);
+			$PeriodNo = GetPeriod(date($_SESSION['DefaultDateFormat']), $db);
 			$StockGLCode = GetStockGLCode($StockID,$db);
 
 			$ValueOfChange = $QOH * ($NewCost - $OldCost);
