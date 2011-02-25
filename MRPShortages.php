@@ -103,7 +103,14 @@ if (isset($_POST['PrintPDF'])) {
 			   extcost
 	  HAVING demand > supply
 	  ORDER BY '" . $_POST['Sort']."'";
-   	$sql = "SELECT stockmaster.stockid,
+	  
+	  if ($_POST['CategoryID'] == "All"){
+		$sqlcategory = " ";
+	  }else{
+		$sqlcategory = "WHERE stockmaster.categoryid = '" . $_POST['CategoryID'] . "'";
+	  }
+
+	  $sql = "SELECT stockmaster.stockid,
 		stockmaster.description,
 		stockmaster.mbflag,
 		stockmaster.actualcost,
@@ -117,8 +124,9 @@ if (isset($_POST['PrintPDF'])) {
 		stockmaster.overheadcost ) as extcost
 		   FROM stockmaster
 			 LEFT JOIN demandtotal ON stockmaster.stockid = demandtotal.part
-			 LEFT JOIN supplytotal ON stockmaster.stockid = supplytotal.part
-		   GROUP BY stockmaster.stockid,
+			 LEFT JOIN supplytotal ON stockmaster.stockid = supplytotal.part "
+			 . $sqlcategory .
+			 "GROUP BY stockmaster.stockid,
 			   stockmaster.description,
 			   stockmaster.mbflag,
 			   stockmaster.actualcost,
@@ -251,6 +259,17 @@ if (isset($_POST['PrintPDF'])) {
 	echo '<form action=' . $_SERVER['PHP_SELF'] . " method='post'>";
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo "<table class=selection>";
+	echo '</select></td></tr>';
+	echo '<tr><td>' . _('Inventory Category') . ':</td><td><select name="CategoryID">';
+	echo '<option selected value="All">' . _('All Stock Categories');
+	$sql = "SELECT categoryid,
+				   categorydescription
+			FROM stockcategory";
+	$result = DB_query($sql,$db);
+	while ($myrow = DB_fetch_array($result)) {
+		echo '<option value="';
+		echo $myrow['categoryid'] . '">' . $myrow['categoryid'] . ' - ' .$myrow['categorydescription'];
+	} //end while loop
 	echo '<tr><td>' . _('Sort') . ":</td><td><select name='Sort'>";
 	echo "<option selected value='extcost'>" . _('Extended Shortage Dollars')."</option>";
 	echo "<option value='stockid'>" . _('Part Number')."</option>";
