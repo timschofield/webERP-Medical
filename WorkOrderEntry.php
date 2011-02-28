@@ -252,9 +252,9 @@ if (isset($NewItem) AND isset($_POST['WO'])){
 
 if (isset($_POST['submit'])) { //The update button has been clicked
 
-	echo '<div class=centre><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '">' . _('Enter a new work order') . '</a>';
-	echo '<br><a href="' . $rootpath . '/SelectWorkOrder.php?' . SID . '">' . _('Select an existing work order') . '</a>';
-	echo '<br><a href="'. $rootpath . '/WorkOrderCosting.php?' . SID . '&WO=' .  $_REQUEST['WO'] . '">' . _('Go to Costing'). '</a></div>';
+	echo '<div class=centre><a href="' . $_SERVER['PHP_SELF'] .'">' . _('Enter a new work order') . '</a>';
+	echo '<br><a href="' . $rootpath . '/SelectWorkOrder.php">' . _('Select an existing work order') . '</a>';
+	echo '<br><a href="'. $rootpath . '/WorkOrderCosting.php&WO=' .  $_REQUEST['WO'] . '">' . _('Go to Costing'). '</a></div>';
 
 	$Input_Error = false; //hope for the best
 	 for ($i=1;$i<=$_POST['NumberOfOutputs'];$i++){
