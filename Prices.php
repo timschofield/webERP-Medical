@@ -21,6 +21,10 @@ if (isset($_GET['Item'])){
 	$Item = trim(strtoupper($_POST['Item']));
 }
 
+if (isset($_GET['Units'])){
+	$_POST['Units'] = $_GET['Units'];
+}
+
 if (!isset($_POST['TypeAbbrev']) OR $_POST['TypeAbbrev']==""){
 	$_POST['TypeAbbrev'] = $_SESSION['DefaultPriceList'];
 }
@@ -32,14 +36,16 @@ if (!isset($_POST['CurrAbrev'])){
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Search') .
 		'" alt="" />' . '</img>' . $title.'</p>';
 
-echo "<a href='" . $rootpath . '/SelectProduct.php?' . SID . "'>" . _('Back to Items') . '</a><br>';
+echo "<div class=centre><a href='" . $rootpath . '/SelectProduct.php?' . SID . "'>" . _('Back to Items') . '</a></div><br>';
 
 
 $result = DB_query("SELECT stockmaster.description,
-							stockmaster.mbflag
+							stockmaster.mbflag,
+							stockmaster.units
 					FROM stockmaster
 					WHERE stockmaster.stockid='".$Item."'",$db);
-$myrow = DB_fetch_row($result);
+$myrow = DB_fetch_array($result);
+$DefaultUOM=$myrow['units'];
 
 if (DB_num_rows($result)==0){
 	prnMsg( _('The part code entered does not exist in the database') . '. ' . _('Only valid parts can have prices entered against them'),'error');
@@ -107,6 +113,7 @@ if (isset($_POST['submit'])) {
 					typeabbrev='" . $_POST['TypeAbbrev'] . "',
 					currabrev='" . $_POST['CurrAbrev'] . "',
 					price='" . $_POST['Price'] . "',
+					units='" . $_POST['Units'] . "',
 					startdate='" . FormatDateForSQL($_POST['StartDate']) . "',
 					enddate='" . $SQLEndDate . "'
 				WHERE prices.stockid='".$Item."'
@@ -130,12 +137,14 @@ if (isset($_POST['submit'])) {
 		$sql = "INSERT INTO prices (stockid,
 									typeabbrev,
 									currabrev,
+									units,
 									startdate,
 									enddate,
 									price)
 							VALUES ('$Item',
 								'" . $_POST['TypeAbbrev'] . "',
 								'" . $_POST['CurrAbrev'] . "',
+								'" . $_POST['Units'] . "',
 								'" . FormatDateForSQL($_POST['StartDate']) . "',
 								'" . $SQLEndDate. "',
 								'" . $_POST['Price'] . "')";
@@ -169,6 +178,7 @@ if (isset($_POST['submit'])) {
 if ($InputError ==0){
 	$sql = "SELECT currencies.currency,
 	        	salestypes.sales_type,
+			prices.units,
 			prices.price,
 			prices.stockid,
 			prices.typeabbrev,
@@ -197,6 +207,7 @@ if ($InputError ==0){
 
 		echo '<tr><th>' . _('Currency') .
 			'</th><th>' . _('Sales Type') .
+			 '</th><th>' . _('UOM') .
 			 '</th><th>' . _('Price') .
 			 '</th><th>' . _('Start Date') . ' </th>
 			 <th>' . _('End Date') . '</th></tr>';
@@ -219,15 +230,18 @@ if ($InputError ==0){
 			/*Only allow access to modify prices if securiy token 5 is allowed */
 			if (in_array(5,$_SESSION['AllowedPageSecurityTokens'])) {
 
+				echo '<input type=hidden name="Units" value="' . $myrow['units'] . '">';
 				printf("<td>%s</td>
+						<td>%s</td>
 						<td>%s</td>
 						<td class=number>%0.2f</td>
 						<td>%s</td>
 						<td>%s</td>
-						<td><a href='%s?%s&Item=%s&TypeAbbrev=%s&CurrAbrev=%s&Price=%s&StartDate=%s&EndDate=%s&Edit=1'>" . _('Edit') . "</td>
+						<td><a href='%s?%s&Item=%s&TypeAbbrev=%s&CurrAbrev=%s&Price=%s&StartDate=%s&EndDate=%s&Units=%s&Edit=1'>" . _('Edit') . "</td>
 						<td><a href='%s?%s&Item=%s&TypeAbbrev=%s&CurrAbrev=%s&StartDate=%s&EndDate=%s&delete=yes' onclick=\"return confirm('" . _('Are you sure you wish to delete this price?') . "');\">" . _('Delete') . '</td></tr>',
 						$myrow['currency'],
 						$myrow['sales_type'],
+						$myrow['units'],
 						$myrow['price'],
 						ConvertSQLDate($myrow['startdate']),
 						$EndDateDisplay,
@@ -239,6 +253,7 @@ if ($InputError ==0){
 						$myrow['price'],
 						$myrow['startdate'],
 						$myrow['enddate'],
+						$myrow['units'],
 						$_SERVER['PHP_SELF'],
 						SID,
 						$myrow['stockid'],
@@ -330,6 +345,20 @@ if ($InputError ==0){
 				<td><input type="Text" class=date alt="'.$_SESSION['DefaultDateFormat'].'" name="StartDate" size=10 maxlength=10 value="' . $_POST['StartDate'] . '"></td></tr>';
 	echo '<tr><td>' . _('Price Effective To Date')  . ':</td>
 				<td><input type="Text" class=date alt="'.$_SESSION['DefaultDateFormat'].'" name="EndDate" size=10 maxlength=10 value="' . $_POST['EndDate'] . '"></td></tr>';
+    echo '<tr><td>' . _('Unit of Measure') . ':</td>';
+    echo '<td><select name="Units">';
+    $sql = "SELECT unitname FROM unitsofmeasure";
+    $result = DB_query($sql, $db);
+    while ($myrow = DB_fetch_array($result)) {
+        if ($_POST['Units'] == $myrow['unitname']) {
+            echo '<option selected value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
+        } else if ($DefaultUOM == $myrow['unitname'] and ($_POST['Units'] == $myrow['unitname'])) {
+            echo '<option selected value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
+        } else {
+            echo '<option value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
+        }
+    }
+    echo '</td></tr>';
 	echo '<input type=hidden name=Item value='.$Item.'>';
 	?>
 
