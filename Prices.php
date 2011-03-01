@@ -141,7 +141,7 @@ if (isset($_POST['submit'])) {
 									startdate,
 									enddate,
 									price)
-							VALUES ('$Item',
+							valueS ('$Item',
 								'" . $_POST['TypeAbbrev'] . "',
 								'" . $_POST['CurrAbrev'] . "',
 								'" . $_POST['Units'] . "',
@@ -177,7 +177,7 @@ if (isset($_POST['submit'])) {
 //Always do this stuff
 if ($InputError ==0){
 	$sql = "SELECT currencies.currency,
-	        	salestypes.sales_type,
+				salestypes.sales_type,
 			prices.units,
 			prices.price,
 			prices.stockid,
@@ -202,7 +202,7 @@ if ($InputError ==0){
 		echo '<table class=selection>';
 		echo '<tr><th colspan=7><form method="post" action=' . $_SERVER['PHP_SELF'] . '?' . SID . '>';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-		echo _('Pricing for part') . ':<input type=text name="Item" MAXSIZEe=22 VALUE="' . $Item . '" maxlength=20><input type=submit name=NewPart Value="' . _('Review Prices') . '">';
+		echo _('Pricing for part') . ':<input type=text name="Item" MAXSIZEe=22 value="' . $Item . '" maxlength=20><input type=submit name=NewPart Value="' . _('Review Prices') . '">';
 		echo '</th></tr></form>';
 
 		echo '<tr><th>' . _('Currency') .
@@ -285,10 +285,10 @@ if ($InputError ==0){
 	echo '<form method="post" action=' . $_SERVER['PHP_SELF'] . '?' . SID . '>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	if (isset($_GET['Edit'])){
-		echo '<input type=hidden name="OldTypeAbbrev" VALUE="' . $_GET['TypeAbbrev'] .'">';
-		echo '<input type=hidden name="OldCurrAbrev" VALUE="' . $_GET['CurrAbrev'] . '">';
-		echo '<input type=hidden name="OldStartDate" VALUE="' . $_GET['StartDate'] . '">';
-		echo '<input type=hidden name="OldEndDate" VALUE="' . $_GET['EndDate'] . '">';
+		echo '<input type=hidden name="OldTypeAbbrev" value="' . $_GET['TypeAbbrev'] .'">';
+		echo '<input type=hidden name="OldCurrAbrev" value="' . $_GET['CurrAbrev'] . '">';
+		echo '<input type=hidden name="OldStartDate" value="' . $_GET['StartDate'] . '">';
+		echo '<input type=hidden name="OldEndDate" value="' . $_GET['EndDate'] . '">';
 		$_POST['CurrAbrev'] = $_GET['CurrAbrev'];
 		$_POST['TypeAbbrev'] = $_GET['TypeAbbrev'];
 		$_POST['Price'] = $_GET['Price'];
@@ -308,9 +308,9 @@ if ($InputError ==0){
 	echo '<tr><td>' . _('Currency') . ':</td><td><select name="CurrAbrev">';
 	while ($myrow = DB_fetch_array($result)) {
 		if ($myrow['currabrev']==$_POST['CurrAbrev']) {
-			echo '<option selected VALUE="';
+			echo '<option selected value="';
 		} else {
-			echo '<option VALUE="';
+			echo '<option value="';
 		}
 		echo $myrow['currabrev'] . '">' . $myrow['currency'];
 	} //end while loop
@@ -324,9 +324,9 @@ if ($InputError ==0){
 
 	while ($myrow = DB_fetch_array($result)) {
 		if ($myrow['typeabbrev']==$_POST['TypeAbbrev']) {
-			echo '<option selected VALUE="';
+			echo '<option selected value="';
 		} else {
-			echo '<option VALUE="';
+			echo '<option value="';
 		}
 		echo $myrow['typeabbrev'] . '">' . $myrow['sales_type'];
 
@@ -345,20 +345,20 @@ if ($InputError ==0){
 				<td><input type="Text" class=date alt="'.$_SESSION['DefaultDateFormat'].'" name="StartDate" size=10 maxlength=10 value="' . $_POST['StartDate'] . '"></td></tr>';
 	echo '<tr><td>' . _('Price Effective To Date')  . ':</td>
 				<td><input type="Text" class=date alt="'.$_SESSION['DefaultDateFormat'].'" name="EndDate" size=10 maxlength=10 value="' . $_POST['EndDate'] . '"></td></tr>';
-    echo '<tr><td>' . _('Unit of Measure') . ':</td>';
-    echo '<td><select name="Units">';
-    $sql = "SELECT unitname FROM unitsofmeasure";
-    $result = DB_query($sql, $db);
-    while ($myrow = DB_fetch_array($result)) {
-        if ($_POST['Units'] == $myrow['unitname']) {
-            echo '<option selected value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
-        } else if ($DefaultUOM == $myrow['unitname'] and ($_POST['Units'] == $myrow['unitname'])) {
-            echo '<option selected value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
-        } else {
-            echo '<option value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
-        }
-    }
-    echo '</td></tr>';
+	echo '<tr><td>' . _('Unit of Measure') . ':</td>';
+	echo '<td><select name="Units">';
+	$sql = "SELECT unitname FROM unitsofmeasure";
+	$result = DB_query($sql, $db);
+	while ($myrow = DB_fetch_array($result)) {
+		if ($_POST['Units'] == $myrow['unitname']) {
+			echo '<option selected value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
+		} else if ($DefaultUOM == $myrow['unitname'] and ($_POST['Units'] == $myrow['unitname'])) {
+			echo '<option selected value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
+		} else {
+			echo '<option value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
+		}
+	}
+	echo '</td></tr>';
 	echo '<input type=hidden name=Item value='.$Item.'>';
 	?>
 
