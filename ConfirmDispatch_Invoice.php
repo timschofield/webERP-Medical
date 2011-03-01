@@ -220,6 +220,7 @@ set all the necessary session variables changed by the POST  */
 
 	foreach ($_SESSION['Items']->LineItems as $Itm) {
 		if (sizeOf($Itm->SerialItems) > 0) {
+			$_SESSION['Items']->LineItems[$Itm->LineNumber]->QtyDispatched = 0;
 			foreach ($Itm->SerialItems as $SerialItem) {
 				$_SESSION['Items']->LineItems[$Itm->LineNumber]->QtyDispatched += $SerialItem->BundleQty;
 			}
@@ -386,15 +387,15 @@ foreach ($_SESSION['Items']->LineItems as $LnItm) {
 	echo '<td class="number">'.$DisplayTaxAmount.'</td><td class="number">'.$DisplayGrossLineTotal.'</td>';
 
 	if ($LnItm->Controlled==1){
-
-		echo '<td><a href="' . $rootpath . '/ConfirmDispatchControlled_Invoice.php?' . SID . '&LineNo='. $LnItm->LineNumber.'">';
-
-		if ($LnItm->Serialised==1){
-			echo _("Enter Serial Numbers");
-		} else { /*Just batch/roll/lot control */
-			echo _('Enter Batch/Roll/Lot #');
+		if (!isset($_POST['ProcessInvoice'])) {
+			echo '<td><a href="' . $rootpath . '/ConfirmDispatchControlled_Invoice.php?' . SID . '&LineNo='. $LnItm->LineNumber.'">';
+			if ($LnItm->Serialised==1){
+				echo _("Enter Serial Numbers");
+			} else { /*Just batch/roll/lot control */
+				echo _('Enter Batch/Roll/Lot #');
+			}
+			echo '</a></td>';
 		}
-		echo '</a></td>';
 	}
 	echo '</tr>';
 	if (strlen($LnItm->Narrative)>1){
@@ -721,7 +722,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 
 /*Start an SQL transaction */
 
-DB_Txn_Begin($db);
+	DB_Txn_Begin($db);
 
 	if ($DefaultShipVia != $_SESSION['Items']->ShipVia){
 		$SQL = "UPDATE custbranch
