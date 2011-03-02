@@ -43,8 +43,8 @@ $result = DB_query("SELECT debtorsmaster.name,
 							debtorsmaster.debtorno='" . $_SESSION['CustomerID'] . "'",$db);
 $myrow = DB_fetch_row($result);
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') .
-		'" alt="" />' . _('Special Customer Prices').'</p><br />';
-echo '<font color=BLUE><b>' . $myrow[0] . ' ' . _('in') . ' ' . $myrow[1] . '<br>' . ' ' . _('for') . ' ';
+		'" alt="" />' . _('Special Customer Prices').'</p>';
+echo '<p class="page_title_text"><font color=BLUE><b>' . $myrow[0] . ' ' . _('in') . ' ' . $myrow[1] . '<br>' . ' ' . _('for') . ' ';
 
 $CurrCode = $myrow[1];
 $SalesType = $myrow[2];
@@ -118,6 +118,8 @@ if (isset($_POST['submit'])) {
 		$sql = "UPDATE prices SET typeabbrev='" . $SalesType . "',
 		                          currabrev='" . $CurrCode . "',
 								  price='" . $_POST['Price'] . "',
+								  units='" . $_POST['Units'] . "',
+								  conversionfactor='" . $_POST['ConversionFactor'] . "',
 								  branchcode='" . $_POST['Branch'] . "',
 								  startdate='" . FormatDateForSQL($_POST['StartDate']) . "',
 								  enddate='" . FormatDateForSQL($_POST['EndDate']) . "'
@@ -137,14 +139,18 @@ if (isset($_POST['submit'])) {
 									currabrev,
 									debtorno,
 									price,
+									units,
+									conversionfactor,
 									branchcode,
 									startdate,
 									enddate)
-							VALUES ('".$Item."',
+							valueS ('".$Item."',
 								'".$SalesType."',
 								'".$CurrCode."',
 								'" . $_SESSION['CustomerID'] . "',
 								'" . $_POST['Price'] . "',
+								'" . $_POST['Units'] . "',
+								'" . $_POST['ConversionFactor'] . "',
 								'" . $_POST['Branch'] . "',
 								'" . FormatDateForSQL($_POST['StartDate']) . "',
 								'" . FormatDateForSQL($_POST['EndDate']) . "'
@@ -165,6 +171,8 @@ if (isset($_POST['submit'])) {
 			unset($_POST['EndDate']);
 			unset($_POST['StartDate']);
 			unset($_POST['Price']);
+			unset($_POST['Units']);
+			unset($_POST['ConversionFactor']);
 		}
 	}
 
@@ -191,6 +199,8 @@ if (isset($_POST['submit'])) {
 //Show the normal prices in the currency of this customer
 
 $sql = "SELECT prices.price,
+				prices.units,
+				prices.conversionfactor,
 				prices.currabrev,
                prices.typeabbrev,
                prices.startdate,
@@ -212,35 +222,43 @@ echo '<table><tr><td valign=top>';
 echo '<table class=selection>';
 
 if (DB_num_rows($result) == 0) {
-	echo '<tr><td>' . _('There are no default prices set up for this part') . '</td></tr>';
+	echo '<tr><td>' . _('There are no default prices set up for this part in this currency') . '</td></tr>';
 } else {
-	echo '<tr><th>' . _('Normal Price') . '</th></tr>';
+	echo '<tr><th colspan=6><font color="navy" size="2">' . _('Normal Price') . '</font></th></tr>';
+	echo '<tr><th>' . _('Price') . '</th>
+		<th>'. _('UOM'). '</th>
+		<th>'. _('Conversion') . '<br />'.
+			_('Factor') . '</th>
+		<th>' . _('Start Date') . '</th>
+		<th>' . _('End Date') . '</th></tr>';
 	while ($myrow = DB_fetch_array($result)) {
 		if ($myrow['enddate']=='0000-00-00'){
 			$EndDateDisplay = _('No End Date');
 		} else {
 			$EndDateDisplay = ConvertSQLDate($myrow['enddate']);
 		}
-		printf('<tr class="EvenTableRows">
-						<td class=number>%0.2f</td>
-						<td class=date>%s</td>
-						<td class=date>%s</td></tr>',
-						$myrow['price'],
-						ConvertSQLDate($myrow['startdate']),
-						$EndDateDisplay);
+		echo '<tr class="EvenTableRows">
+						<td class=number>'.number_format($myrow['price'],2).'</td>
+						<td>'.$myrow['units'].'</td>
+						<td class=number>'.$myrow['conversionfactor'].'</td>
+						<td class=date>'.ConvertSQLDate($myrow['startdate']).'</td>
+						<td class=date>'.$EndDateDisplay.'</td></tr>';
 	}
 }
 
-echo '</table></td><td valign=top>';
+echo '</table></td><tr></tr></tr><tr><td valign=top>';
 
 //now get the prices for the customer selected
 
 $sql = "SELECT prices.price,
                prices.branchcode,
 			   custbranch.brname,
+			   prices.units,
+			   prices.conversionfactor,
 			   prices.startdate,
 			   prices.enddate
-		FROM prices LEFT JOIN custbranch ON prices.branchcode= custbranch.branchcode
+		FROM prices
+		LEFT JOIN custbranch ON prices.branchcode= custbranch.branchcode
 		WHERE prices.typeabbrev = '".$SalesType."'
 		AND prices.stockid='".$Item."'
 		AND prices.debtorno='" . $_SESSION['CustomerID'] . "'
@@ -255,132 +273,188 @@ $DbgMsg = _('The SQL used to retrieve these records was');
 $result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
 echo '<table class=selection>';
+echo '<tr><th colspan=8><font color="navy" size="2">' . _('Special Prices') . '</font></th></tr>';
 
 if (DB_num_rows($result) == 0) {
 	echo '<tr><td>' . _('There are no special prices set up for this part') . '</td></tr>';
 } else {
 /*THERE IS ALREADY A spl price setup */
 	echo '<tr><th>' . _('Special Price') .
-	     '</th><th>' . _('Branch') . '</th></tr>';
+		'</th><th>' . _('Branch') . '</th>
+		<th>'. _('UOM'). '</th>
+		<th>'. _('Conversion') . '<br />'.
+			_('Factor') . '</th>
+		<th>' . _('Start Date') . '</th>
+		<th>' . _('End Date') . '</th></tr>';
 
 	while ($myrow = DB_fetch_array($result)) {
 
-	if ($myrow['branchcode']==''){
-		$Branch = _('All Branches');
-	} else {
-		$Branch = $myrow['brname'];
-	}
-	if ($myrow['enddate']=='0000-00-00'){
-		$EndDateDisplay = _('No End Date');
-	} else {
-		$EndDateDisplay = ConvertSQLDate($myrow['enddate']);
-	}
-	printf("<tr bgcolor='#CCCCCC'>
-		<td class=number>%0.2f</td>
-		<td>%s</td>
-		<td>%s</td>
-		<td>%s</td>
- 		<td><a href='%s?Item=%s&Price=%s&Branch=%s&StartDate=%s&EndDate=%s&Edit=1'>" . _('Edit') . "</td>
-		<td><a href='%s?Item=%s&Branch=%s&StartDate=%s&EndDate=%s&delete=yes'>" . _('Delete') . "</td></tr>",
-		$myrow['price'],
-		$Branch,
-		ConvertSQLDate($myrow['startdate']),
-		$EndDateDisplay,
-		$_SERVER['PHP_SELF'],
-		$Item,
-		$myrow['price'],
-		$myrow['branchcode'],
-		$myrow['startdate'],
-		$myrow['enddate'],
-		$_SERVER['PHP_SELF'],
-		$Item,
-		$myrow['branchcode'],
-		$myrow['startdate'],
-		$myrow['enddate']);
+		if ($myrow['branchcode']==''){
+			$Branch = _('All Branches');
+		} else {
+			$Branch = $myrow['brname'];
+		}
+		if ($myrow['enddate']=='0000-00-00'){
+			$EndDateDisplay = _('No End Date');
+		} else {
+			$EndDateDisplay = ConvertSQLDate($myrow['enddate']);
+		}
+		echo "<tr bgcolor='#CCCCCC'>
+		<td class=number>".number_format($myrow['price'],2)."</td>
+		<td>".$Branch."</td>
+		<td>".$myrow['units']."</td>
+		<td class=number>".$myrow['conversionfactor']."</td>
+		<td>".ConvertSQLDate($myrow['startdate'])."</td>
+		<td>".$EndDateDisplay."</td>
+ 		<td><a href='".$_SERVER['PHP_SELF']."?Item=".$Item."&Price=".$myrow['price']."&Branch=".$myrow['branchcode'].
+			"&StartDate=".$myrow['startdate']."&EndDate=".$myrow['enddate']."&Edit=1'>" . _('Edit') . "</td>
+		<td><a href='".$_SERVER['PHP_SELF']."?Item=".$Item."&Branch=".$myrow['branchcode']."&StartDate=".$myrow['startdate'].
+			"&EndDate=".$myrow['enddate']."&delete=yes'>" . _('Delete') . "</td></tr>";
 	}
 //END WHILE LIST LOOP
 }
 
-?>
+echo '</table></tr></table><p>';
 
-</table></tr></table>
+echo '<form method="post" action=' . $_SERVER['PHP_SELF'] . '?' . SID . '>';
+echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
+echo '<input type=hidden name="Item" value="' . $Item . '">';
 
-<p>
+if (isset($_GET['Edit']) and $_GET['Edit']==1){
+	$sql = "SELECT currencies.currency,
+				salestypes.sales_type,
+				prices.debtorno,
+				prices.branchcode,
+				prices.units,
+				prices.price,
+				prices.conversionfactor,
+				prices.stockid,
+				prices.typeabbrev,
+				prices.currabrev,
+				prices.startdate,
+				prices.enddate
+			FROM prices,
+				salestypes,
+				currencies
+			WHERE prices.currabrev=currencies.currabrev
+				AND prices.typeabbrev = salestypes.typeabbrev
+				AND prices.stockid='".$Item."'
+				AND prices.debtorno='".$_SESSION['CustomerID']."'
+				AND prices.branchcode='".$_GET['Branch']."'
+				AND prices.startdate='". $_GET['StartDate'] . "'
+				AND prices.enddate='". $_GET['EndDate'] . "'
+			ORDER BY prices.currabrev,
+				prices.typeabbrev,
+				prices.startdate";
 
-<?php
-	echo '<form method="post" action=' . $_SERVER['PHP_SELF'] . '?' . SID . '>';
-	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<input type=hidden name="Item" VALUE="' . $Item . '">';
-
-	if (isset($_GET['Edit']) and $_GET['Edit']==1){
-		echo '<input type=hidden name="Editing" VALUE="Yes">';
-		echo '<input type=hidden name="OldStartDate" VALUE="' . $_GET['StartDate'] .'">';
-		echo '<input type=hidden name="OldEndDate" VALUE="' .  $_GET['EndDate'] . '">';
-		$_POST['Price']=$_GET['Price'];
-		$_POST['Branch']=$_GET['Branch'];
-		$_POST['StartDate'] = ConvertSQLDate($_GET['StartDate']);
-		if (Is_Date($_GET['EndDate'])){
-			$_POST['EndDate'] = ConvertSQLDate($_GET['EndDate']);
-		} else {
-			$_POST['EndDate']='';
-		}
+	$result = DB_query($sql,$db);
+	$myrow = DB_fetch_array($result);
+	echo '<input type=hidden name="Editing" value="Yes">';
+	echo '<input type=hidden name="OldTypeAbbrev" value="' . $myrow['typeabbrev'] .'">';
+	echo '<input type=hidden name="OldCurrAbrev" value="' . $myrow['currabrev'] . '">';
+	echo '<input type=hidden name="OldStartDate" value="' . $myrow['startdate'] . '">';
+	echo '<input type=hidden name="OldEndDate" value="' . $myrow['enddate'] . '">';
+	$_POST['Branch']=$myrow['branchcode'];
+	$_POST['CurrAbrev'] = $myrow['currabrev'];
+	$_POST['TypeAbbrev'] = $myrow['typeabbrev'];
+	$_POST['Price'] = $myrow['price'];
+	$_POST['Units'] = $myrow['units'];
+	$_POST['ConversionFactor'] = $myrow['conversionfactor'];
+	$_POST['StartDate'] = ConvertSQLDate($myrow['startdate']);
+	if ($_GET['EndDate']=='' OR $_GET['EndDate']=='0000-00-00'){
+		$_POST['EndDate'] = '';
+	} else {
+		$_POST['EndDate'] = ConvertSQLDate($myrow['enddate']);
 	}
-	if (!isset($_POST['Branch'])) {
-		$_POST['Branch']='';
-	}
-	if (!isset($_POST['Price'])) {
-		$_POST['Price']=0;
-	}
+}
+if (!isset($_POST['Branch'])) {
+	$_POST['Branch']='';
+}
+if (!isset($_POST['Price'])) {
+	$_POST['Price']=0;
+}
 
-	if (!isset($_POST['StartDate'])){
-		$_POST['StartDate'] = Date($_SESSION['DefaultDateFormat']);
-	}
+if (!isset($_POST['StartDate'])){
+	$_POST['StartDate'] = Date($_SESSION['DefaultDateFormat']);
+}
 
-	if (!isset($_POST['EndDate'])){
-		$_POST['EndDate'] = DateAdd(Date($_SESSION['DefaultDateFormat']), 'y', 1);
-	}
+if (!isset($_POST['EndDate'])){
+	$_POST['EndDate'] = DateAdd(Date($_SESSION['DefaultDateFormat']), 'y', 1);
+}
 
-	$sql = "SELECT
-				branchcode,
-				brname
-				FROM custbranch
-				WHERE debtorno='".$_SESSION['CustomerID'] ."'";
-	$result = DB_query($sql, $db);
-	echo '<table class=selection>';
-	echo '<tr><td>' . _('Branch') . ':</td>';
-	echo '<td><select name="Branch"';
-	while ($myrow=DB_fetch_array($result)) {
-		if ($myrow['branchcode']==$_POST['branch']) {
-			echo '<option selected value='.$myrow['branchcode'].'>'.$myrow['brname'].'</option>';
-		} else {
-			echo '<option value='.$myrow['branchcode'].'>'.$myrow['brname'].'</option>';
-		}
+$sql = "SELECT custbranch.branchcode,
+					custbranch.brname,
+					currencies.currency
+					FROM custbranch
+					LEFT JOIN debtorsmaster
+						ON custbranch.debtorno=debtorsmaster.debtorno
+					LEFT JOIN currencies
+						ON debtorsmaster.currcode=currencies.currabrev
+					WHERE custbranch.debtorno='" . $_SESSION['CustomerID'] . "'";
+
+$result = DB_query($sql, $db);
+echo '<table class=selection>';
+echo '<tr><td>' . _('Branch') . ':</td>';
+echo '<td><select name="Branch"';
+while ($myrow=DB_fetch_array($result)) {
+	$CustomerCurrency=$myrow['currency'];
+	if ($myrow['branchcode']==$_POST['branch']) {
+		echo '<option selected value='.$myrow['branchcode'].'>'.$myrow['brname'].'</option>';
+	} else {
+		echo '<option value='.$myrow['branchcode'].'>'.$myrow['brname'].'</option>';
 	}
-	echo '></td></tr>';
-	echo '<tr><td>' . _('Start Date') . ':</td>
+}
+echo '></td></tr>';
+echo '<tr><td>' . _('Currency') .':</td><td>' . $CustomerCurrency.'</td></tr>';
+echo '<tr><td>' . _('Price Effective From Date') . ':</td>
 	                         <td><input type="Text" name="StartDate" class=date alt='.$_SESSION['DefaultDateFormat'].
 	                         ' size=11 maxlength=10 value=' . $_POST['StartDate'] . '></td></tr>';
-	echo '<tr><td>' . _('End Date') . ':</td>
+echo '<tr><td>' . _('Price Effective To Date') . ':</td>
 	                         <td><input type="Text" name="EndDate" class=date alt='.$_SESSION['DefaultDateFormat'].
 	                         ' size=11 maxlength=10 value=' . $_POST['EndDate'] . '></td></tr>';
+echo '<tr><td>' . _('Unit of Measure') . ':</td>';
+echo '<td><select name="Units">';
+$sql = "SELECT unitname FROM unitsofmeasure";
+$result = DB_query($sql, $db);
+while ($myrow = DB_fetch_array($result)) {
+	if ($_POST['Units'] == $myrow['unitname']) {
+		echo '<option selected value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
+	} else if ($DefaultUOM == $myrow['unitname'] and ($_POST['Units'] != $myrow['unitname'])) {
+		echo '<option selected value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
+	} else {
+		echo '<option value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
+	}
+}
+echo '</td></tr>';
+echo '<input type=hidden name=Item value='.$Item.'>';
 
-	echo '<tr><td>' . _('Price') . ':</td>
+echo '</select></td></tr>';
+
+echo '<tr><td>'. _('Conversion Factor') . '<br />'._('to stock units').'</td>';
+echo '<td><input type="text" class=number name="ConversionFactor" size=8 maxlength=8 value="';
+if(isset($_POST['ConversionFactor'])) {
+	echo $_POST['ConversionFactor'];
+} else {
+	echo '1';
+}
+echo '">';
+
+echo '<tr><td>' . _('Price') . ':</td>
 	          <td><input type="Text" class=number name="Price" size=11 maxlength=10 value=' . $_POST['Price'] . '></td>
 				</tr></table>';
 
 
-	echo '<br><div class="centre"><input type="Submit" name="submit" VALUE="' . _('Enter Information') . '"></div>';
+echo '<br><div class="centre"><input type="Submit" name="submit" value="' . _('Enter Information') . '"></div>';
 
-	echo '</form>';
-	include('includes/footer.inc');
+echo '</form>';
+include('includes/footer.inc');
 
-	function ReSequenceEffectiveDates ($Item, $PriceList, $CurrAbbrev, $CustomerID, $db) {
+function ReSequenceEffectiveDates ($Item, $PriceList, $CurrAbbrev, $CustomerID, $db) {
 
-		/*This is quite complicated - the idea is that prices set up should be unique and there is no way two prices could be returned as valid - when getting a price in includes/GetPrice.inc the logic is to first look for a price of the salestype/currency within the effective start and end dates - then if not get the price with a start date prior but a blank end date (the default price). We would not want two prices where the effective dates fall between an existing price so it is necessary to update enddates of prices  - with me - I am just hanging on here myself
+	/*This is quite complicated - the idea is that prices set up should be unique and there is no way two prices could be returned as valid - when getting a price in includes/GetPrice.inc the logic is to first look for a price of the salestype/currency within the effective start and end dates - then if not get the price with a start date prior but a blank end date (the default price). We would not want two prices where the effective dates fall between an existing price so it is necessary to update enddates of prices  - with me - I am just hanging on here myself
+	 Prices with no end date are default prices and need to be ignored in this resquence*/
 
-		 Prices with no end date are default prices and need to be ignored in this resquence*/
-
-		$SQL = "SELECT branchcode,
+	$SQL = "SELECT branchcode,
 						startdate,
 						enddate
 						FROM prices
@@ -394,24 +468,24 @@ if (DB_num_rows($result) == 0) {
 						startdate,
 						enddate";
 
-		$result = DB_query($SQL,$db);
+	$result = DB_query($SQL,$db);
 
-		unset($BranchCode);
+	unset($BranchCode);
 
-		while ($myrow = DB_fetch_array($result)){
-			if (!isset($BranchCode)){
-				unset($NextDefaultStartDate); //a price with a blank end date
-				unset($NextStartDate);
-				unset($EndDate);
-				unset($StartDate);
-				$BranchCode = $myrow['branchcode'];
-			}
-			if (isset($NextStartDate)){
-				if (Date1GreaterThanDate2(ConvertSQLDate($myrow['startdate']),$NextStartDate)){
-					$NextStartDate = ConvertSQLDate($myrow['startdate']);
-					if (Date1GreaterThanDate2(ConvertSQLDate($EndDate),ConvertSQLDate($myrow['startdate']))) {
-						/*Need to make the end date the new start date less 1 day */
-						$SQL = "UPDATE prices SET enddate = '" . FormatDateForSQL(DateAdd($NextStartDate,'d',-1))  . "'
+	while ($myrow = DB_fetch_array($result)){
+		if (!isset($BranchCode)){
+			unset($NextDefaultStartDate); //a price with a blank end date
+			unset($NextStartDate);
+			unset($EndDate);
+			unset($StartDate);
+			$BranchCode = $myrow['branchcode'];
+		}
+		if (isset($NextStartDate)){
+			if (Date1GreaterThanDate2(ConvertSQLDate($myrow['startdate']),$NextStartDate)){
+				$NextStartDate = ConvertSQLDate($myrow['startdate']);
+				if (Date1GreaterThanDate2(ConvertSQLDate($EndDate),ConvertSQLDate($myrow['startdate']))) {
+					/*Need to make the end date the new start date less 1 day */
+					$SQL = "UPDATE prices SET enddate = '" . FormatDateForSQL(DateAdd($NextStartDate,'d',-1))  . "'
 										WHERE stockid ='" .$Item . "'
 										AND currabrev='" . $CurrAbbrev . "'
 										AND typeabbrev='" . $PriceList . "'
@@ -419,14 +493,14 @@ if (DB_num_rows($result) == 0) {
 										AND enddate = '" . $EndDate . "'
 										AND debtorno ='" . $CustomerID . "'";
 						$UpdateResult = DB_query($SQL,$db);
-					}
-				} //end of if startdate  after NextStartDate - we have a new NextStartDate
-			} //end of if set NextStartDate
-				else {
-					$NextStartDate = ConvertSQLDate($myrow['startdate']);
-			}
-			$StartDate = $myrow['startdate'];
-			$EndDate = $myrow['enddate'];
+				}
+			} //end of if startdate  after NextStartDate - we have a new NextStartDate
+		} //end of if set NextStartDate
+			else {
+				$NextStartDate = ConvertSQLDate($myrow['startdate']);
 		}
+		$StartDate = $myrow['startdate'];
+		$EndDate = $myrow['enddate'];
+	}
 }
 ?>
