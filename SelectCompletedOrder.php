@@ -65,6 +65,15 @@ if (isset($OrderNumber)) {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/sales.png" title="' . _('Sales Order') .
 		'" alt="" />' . ' ' . _('Order Number') . ' - ' . $OrderNumber . '</p>';
 } elseif (isset($CustomerRef)) {
+
+      If (count($_SESSION['AllowedPageSecurityTokens'])==1 and $SupplierLogin==0){
+		If($CustomerRef=='%') {
+			unset($CustomerRef);
+			prnMsg(_(' A illegal character is input, please enter Ref no. directly'),'warn');
+			exit(_(' A illegal character is input, please click Main Manual to return normal status'));
+		}
+	}
+
 	echo _('Customer Ref') . ' - ' . $CustomerRef;
 } else {
 	if (isset($SelectedCustomer)) {
@@ -246,6 +255,13 @@ if (isset($_POST['SearchParts']) and $_POST['SearchParts']!=''){
 					salesorders.deliverto
 				ORDER BY salesorders.orderno";
 	} elseif (isset($CustomerRef)) {
+	      if (count($_SESSION['AllowedPageSecurityTokens'])==1 and $SupplierLogin==0){
+		  If($CustomerRef=='%') {
+			unset($CustomerRef);
+			prnMsg(_(' A illegal character is input, please enter Ref no. directly'),'warn');
+			exit(_(' A illegal character is input, please click Main Manual to return normal status'));
+		}
+	}
 			$SQL = "SELECT salesorders.orderno,
 					debtorsmaster.name,
 					custbranch.brname,
