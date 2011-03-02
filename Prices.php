@@ -21,10 +21,6 @@ if (isset($_GET['Item'])){
 	$Item = trim(strtoupper($_POST['Item']));
 }
 
-if (isset($_GET['Units'])){
-	$_POST['Units'] = $_GET['Units'];
-}
-
 if (!isset($_POST['TypeAbbrev']) OR $_POST['TypeAbbrev']==""){
 	$_POST['TypeAbbrev'] = $_SESSION['DefaultPriceList'];
 }
@@ -114,6 +110,7 @@ if (isset($_POST['submit'])) {
 					currabrev='" . $_POST['CurrAbrev'] . "',
 					price='" . $_POST['Price'] . "',
 					units='" . $_POST['Units'] . "',
+					conversionfactor='" . $_POST['ConversionFactor'] . "',
 					startdate='" . FormatDateForSQL($_POST['StartDate']) . "',
 					enddate='" . $SQLEndDate . "'
 				WHERE prices.stockid='".$Item."'
@@ -138,6 +135,7 @@ if (isset($_POST['submit'])) {
 									typeabbrev,
 									currabrev,
 									units,
+									conversionfactor,
 									startdate,
 									enddate,
 									price)
@@ -145,6 +143,7 @@ if (isset($_POST['submit'])) {
 								'" . $_POST['TypeAbbrev'] . "',
 								'" . $_POST['CurrAbrev'] . "',
 								'" . $_POST['Units'] . "',
+								'" . $_POST['ConversionFactor'] . "',
 								'" . FormatDateForSQL($_POST['StartDate']) . "',
 								'" . $SQLEndDate. "',
 								'" . $_POST['Price'] . "')";
@@ -157,6 +156,8 @@ if (isset($_POST['submit'])) {
 	unset($_POST['Price']);
 	unset($_POST['StartDate']);
 	unset($_POST['EndDate']);
+	unset($_POST['Units']);
+	unset($_POST['ConversionFactor']);
 
 } elseif (isset($_GET['delete'])) {
 //the link to delete a selected record was clicked instead of the submit button
@@ -180,6 +181,7 @@ if ($InputError ==0){
 				salestypes.sales_type,
 			prices.units,
 			prices.price,
+			prices.conversionfactor,
 			prices.stockid,
 			prices.typeabbrev,
 			prices.currabrev,
@@ -208,6 +210,7 @@ if ($InputError ==0){
 		echo '<tr><th>' . _('Currency') .
 			'</th><th>' . _('Sales Type') .
 			 '</th><th>' . _('UOM') .
+			 '</th><th>' . _('Conversion') . '<br />' . _('Factor') .
 			 '</th><th>' . _('Price') .
 			 '</th><th>' . _('Start Date') . ' </th>
 			 <th>' . _('End Date') . '</th></tr>';
@@ -228,51 +231,30 @@ if ($InputError ==0){
 				$EndDateDisplay = ConvertSQLDate($myrow['enddate']);
 			}
 			/*Only allow access to modify prices if securiy token 5 is allowed */
-			if (in_array(5,$_SESSION['AllowedPageSecurityTokens'])) {
+			if (in_array(12,$_SESSION['AllowedPageSecurityTokens'])) {
 
 				echo '<input type=hidden name="Units" value="' . $myrow['units'] . '">';
-				printf("<td>%s</td>
-						<td>%s</td>
-						<td>%s</td>
-						<td class=number>%0.2f</td>
-						<td>%s</td>
-						<td>%s</td>
-						<td><a href='%s?%s&Item=%s&TypeAbbrev=%s&CurrAbrev=%s&Price=%s&StartDate=%s&EndDate=%s&Units=%s&Edit=1'>" . _('Edit') . "</td>
-						<td><a href='%s?%s&Item=%s&TypeAbbrev=%s&CurrAbrev=%s&StartDate=%s&EndDate=%s&delete=yes' onclick=\"return confirm('" . _('Are you sure you wish to delete this price?') . "');\">" . _('Delete') . '</td></tr>',
-						$myrow['currency'],
-						$myrow['sales_type'],
-						$myrow['units'],
-						$myrow['price'],
-						ConvertSQLDate($myrow['startdate']),
-						$EndDateDisplay,
-						$_SERVER['PHP_SELF'],
-						SID,
-						$myrow['stockid'],
-						$myrow['typeabbrev'],
-						$myrow['currabrev'],
-						$myrow['price'],
-						$myrow['startdate'],
-						$myrow['enddate'],
-						$myrow['units'],
-						$_SERVER['PHP_SELF'],
-						SID,
-						$myrow['stockid'],
-						$myrow['typeabbrev'],
-						$myrow['currabrev'],
-						$myrow['startdate'],
-						$myrow['enddate']);
+				echo "<td>".$myrow['currency']."</td>
+						<td>".$myrow['sales_type']."</td>
+						<td>".$myrow['units']."</td>
+						<td class=number>".$myrow['conversionfactor']."</td>
+						<td class=number>".number_format($myrow['price'],2)."</td>
+						<td>".ConvertSQLDate($myrow['startdate'])."</td>
+						<td>".$EndDateDisplay."</td>
+						<td><a href='".$_SERVER['PHP_SELF']."?".SID."&Item=".$myrow['stockid']."&TypeAbbrev=".$myrow['typeabbrev']."
+							&CurrAbrev=".$myrow['currabrev']."&StartDate=".$myrow['startdate']."&EndDate=".$myrow['enddate']."&Edit=1'>" . _('Edit') . "</td>
+						<td><a href='".$_SERVER['PHP_SELF']."?".SID."&Item=".$myrow['stockid']."&TypeAbbrev=".$myrow['typeabbrev'].
+							"&CurrAbrev=".$myrow['currabrev']."&StartDate=".$myrow['startdate']."&EndDate=".$myrow['enddate'].
+							"&delete=yes' onclick=\"return confirm('" . _('Are you sure you wish to delete this price?') . "');\">" . _('Delete') . '</td></tr>';
 			} else {
-				printf("<td>%s</td>
-						<td>%s</td>
-						<td class=number>%0.2f</td>
-						<td>%s</td>
-						<td>%s</td>
-						</tr>",
-						$myrow['currency'],
-						$myrow['sales_type'],
-						$myrow['price'],
-						ConvertSQLDate($myrow['startdate']),
-						$EndDateDisplay);
+				echo "<td>".$myrow['currency']."</td>
+						<td>".$myrow['sales_type']."</td>
+						<td>".$myrow['units']."</td>
+						<td class=number>".$myrow['conversionfactor']."</td>
+						<td class=number>".number_format($myrow['price'],2)."</td>
+						<td>".ConvertSQLDate($myrow['startdate'])."</td>
+						<td>".$EndDateDisplay."</td>
+						</tr>";
 			}
 
 		}
@@ -282,105 +264,143 @@ if ($InputError ==0){
 		prnMsg(_('There are no prices set up for this part'),'warn');
 	}
 
-	echo '<form method="post" action=' . $_SERVER['PHP_SELF'] . '?' . SID . '>';
-	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	if (isset($_GET['Edit'])){
-		echo '<input type=hidden name="OldTypeAbbrev" value="' . $_GET['TypeAbbrev'] .'">';
-		echo '<input type=hidden name="OldCurrAbrev" value="' . $_GET['CurrAbrev'] . '">';
-		echo '<input type=hidden name="OldStartDate" value="' . $_GET['StartDate'] . '">';
-		echo '<input type=hidden name="OldEndDate" value="' . $_GET['EndDate'] . '">';
-		$_POST['CurrAbrev'] = $_GET['CurrAbrev'];
-		$_POST['TypeAbbrev'] = $_GET['TypeAbbrev'];
-		$_POST['Price'] = $_GET['Price'];
-		$_POST['StartDate'] = ConvertSQLDate($_GET['StartDate']);
-		if ($_GET['EndDate']=='' OR $_GET['EndDate']=='0000-00-00'){
-			$_POST['EndDate'] = '';
-		} else {
-			$_POST['EndDate'] = ConvertSQLDate($_GET['EndDate']);
+	if (in_array(12,$_SESSION['AllowedPageSecurityTokens'])) {
+		echo '<form method="post" action=' . $_SERVER['PHP_SELF'] . '?' . SID . '>';
+		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
+		if (isset($_GET['Edit'])){
+			$sql = "SELECT currencies.currency,
+				salestypes.sales_type,
+				prices.units,
+				prices.price,
+				prices.conversionfactor,
+				prices.stockid,
+				prices.typeabbrev,
+				prices.currabrev,
+				prices.startdate,
+				prices.enddate
+			FROM prices,
+				salestypes,
+				currencies
+			WHERE prices.currabrev=currencies.currabrev
+				AND prices.typeabbrev = salestypes.typeabbrev
+				AND prices.stockid='".$Item."'
+				AND prices.debtorno=''
+				AND prices.typeabbrev='". $_GET['TypeAbbrev'] . "'
+				AND prices.currabrev='". $_GET['CurrAbrev'] . "'
+				AND prices.startdate='". $_GET['StartDate'] . "'
+				AND prices.enddate='". $_GET['EndDate'] . "'
+			ORDER BY prices.currabrev,
+				prices.typeabbrev,
+				prices.startdate";
+
+			$result = DB_query($sql,$db);
+			$myrow = DB_fetch_array($result);
+			echo '<input type=hidden name="OldTypeAbbrev" value="' . $myrow['typeabbrev'] .'">';
+			echo '<input type=hidden name="OldCurrAbrev" value="' . $myrow['currabrev'] . '">';
+			echo '<input type=hidden name="OldStartDate" value="' . $myrow['startdate'] . '">';
+			echo '<input type=hidden name="OldEndDate" value="' . $myrow['enddate'] . '">';
+			$_POST['CurrAbrev'] = $myrow['currabrev'];
+			$_POST['TypeAbbrev'] = $myrow['typeabbrev'];
+			$_POST['Price'] = $myrow['price'];
+			$_POST['Units'] = $myrow['units'];
+			$_POST['ConversionFactor'] = $myrow['conversionfactor'];
+			$_POST['StartDate'] = ConvertSQLDate($myrow['startdate']);
+			if ($_GET['EndDate']=='' OR $_GET['EndDate']=='0000-00-00'){
+				$_POST['EndDate'] = '';
+			} else {
+				$_POST['EndDate'] = ConvertSQLDate($myrow['enddate']);
+			}
 		}
-	}
 
-	$SQL = "SELECT currabrev, currency FROM currencies";
-	$result = DB_query($SQL,$db);
+		$SQL = "SELECT currabrev, currency FROM currencies";
+		$result = DB_query($SQL,$db);
 
-	echo '<br><table class=selection>';
-	echo '<tr><th colspan=5><font color=BLUE size=3><b>' . $Item . ' - ' . $PartDescription . '</b></font></th></tr>';
-	echo '<tr><td>' . _('Currency') . ':</td><td><select name="CurrAbrev">';
-	while ($myrow = DB_fetch_array($result)) {
-		if ($myrow['currabrev']==$_POST['CurrAbrev']) {
-			echo '<option selected value="';
-		} else {
-			echo '<option value="';
+		echo '<br><table class=selection>';
+		echo '<tr><th colspan=5><font color=BLUE size=3><b>' . $Item . ' - ' . $PartDescription . '</b></font></th></tr>';
+		echo '<tr><td>' . _('Currency') . ':</td><td><select name="CurrAbrev">';
+		while ($myrow = DB_fetch_array($result)) {
+			if ($myrow['currabrev']==$_POST['CurrAbrev']) {
+				echo '<option selected value="';
+			} else {
+				echo '<option value="';
+			}
+			echo $myrow['currabrev'] . '">' . $myrow['currency'];
+		} //end while loop
+
+		DB_free_result($result);
+
+		echo '</select>	</td></tr><tr><td>' . _('Sales Type Price List') . ':</td><td><select name="TypeAbbrev">';
+
+		$SQL = "SELECT typeabbrev, sales_type FROM salestypes";
+		$result = DB_query($SQL,$db);
+
+		while ($myrow = DB_fetch_array($result)) {
+			if ($myrow['typeabbrev']==$_POST['TypeAbbrev']) {
+				echo '<option selected value="';
+			} else {
+				echo '<option value="';
+			}
+			echo $myrow['typeabbrev'] . '">' . $myrow['sales_type'];
+
+		} //end while loop
+
+		DB_free_result($result);
+
+		if (!isset($_POST['StartDate'])){
+			$_POST['StartDate'] = Date($_SESSION['DefaultDateFormat']);
 		}
-		echo $myrow['currabrev'] . '">' . $myrow['currency'];
-	} //end while loop
 
-	DB_free_result($result);
-
-	echo '</select>	</td></tr><tr><td>' . _('Sales Type Price List') . ':</td><td><select name="TypeAbbrev">';
-
-	$SQL = "SELECT typeabbrev, sales_type FROM salestypes";
-	$result = DB_query($SQL,$db);
-
-	while ($myrow = DB_fetch_array($result)) {
-		if ($myrow['typeabbrev']==$_POST['TypeAbbrev']) {
-			echo '<option selected value="';
-		} else {
-			echo '<option value="';
+		if (!isset($_POST['EndDate'])){
+			$_POST['EndDate'] = DateAdd(date($_SESSION['DefaultDateFormat']),'y',3);
 		}
-		echo $myrow['typeabbrev'] . '">' . $myrow['sales_type'];
-
-	} //end while loop
-
-	DB_free_result($result);
-
-	if (!isset($_POST['StartDate'])){
-		$_POST['StartDate'] = Date($_SESSION['DefaultDateFormat']);
-	}
-
-	if (!isset($_POST['EndDate'])){
-		$_POST['EndDate'] = DateAdd(date($_SESSION['DefaultDateFormat']),'y',3);
-	}
-	echo '<tr><td>' . _('Price Effective From Date')  . ':</td>
+		echo '<tr><td>' . _('Price Effective From Date')  . ':</td>
 				<td><input type="Text" class=date alt="'.$_SESSION['DefaultDateFormat'].'" name="StartDate" size=10 maxlength=10 value="' . $_POST['StartDate'] . '"></td></tr>';
-	echo '<tr><td>' . _('Price Effective To Date')  . ':</td>
+		echo '<tr><td>' . _('Price Effective To Date')  . ':</td>
 				<td><input type="Text" class=date alt="'.$_SESSION['DefaultDateFormat'].'" name="EndDate" size=10 maxlength=10 value="' . $_POST['EndDate'] . '"></td></tr>';
-	echo '<tr><td>' . _('Unit of Measure') . ':</td>';
-	echo '<td><select name="Units">';
-	$sql = "SELECT unitname FROM unitsofmeasure";
-	$result = DB_query($sql, $db);
-	while ($myrow = DB_fetch_array($result)) {
-		if ($_POST['Units'] == $myrow['unitname']) {
-			echo '<option selected value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
-		} else if ($DefaultUOM == $myrow['unitname'] and ($_POST['Units'] == $myrow['unitname'])) {
-			echo '<option selected value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
-		} else {
-			echo '<option value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
+		echo '<tr><td>' . _('Unit of Measure') . ':</td>';
+		echo '<td><select name="Units">';
+		$sql = "SELECT unitname FROM unitsofmeasure";
+		$result = DB_query($sql, $db);
+		while ($myrow = DB_fetch_array($result)) {
+			if ($_POST['Units'] == $myrow['unitname']) {
+				echo '<option selected value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
+			} else if ($DefaultUOM == $myrow['unitname'] and ($_POST['Units'] != $myrow['unitname'])) {
+				echo '<option selected value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
+			} else {
+				echo '<option value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
+			}
 		}
-	}
-	echo '</td></tr>';
-	echo '<input type=hidden name=Item value='.$Item.'>';
-	?>
+		echo '</td></tr>';
+		echo '<input type=hidden name=Item value='.$Item.'>';
 
-	</select>
-	</td></tr>
+		echo '</select></td></tr>';
 
-	<tr><td><?php echo _('Price'); ?>:</td>
-	<td>
-	<input type="Text" class=number name="Price" size=12 maxlength=11 value=
-	<?php if(isset($_POST['Price'])) {
+		echo '<tr><td>'. _('Conversion Factor') . '<br />'._('to stock units').'</td>';
+		echo '<td><input type="text" class=number name="ConversionFactor" size=8 maxlength=8 value="';
+		if(isset($_POST['ConversionFactor'])) {
+			echo $_POST['ConversionFactor'];
+		} else {
+			echo '1';
+		}
+		echo '">';
+
+		echo '</td></tr>';
+
+		echo '<tr><td>'. _('Price') . ':</td>';
+		echo '<td><input type="text" class=number name="Price" size=12 maxlength=11 value="';
+		if(isset($_POST['Price'])) {
 			echo $_POST['Price'];
-		   }?>>
+		}
+		echo '">';
 
-	</td></tr>
+		echo '</td></tr>';
 
-	</table>
-	<br><div class="centre">
-	<input type="Submit" name="submit" value="<?php echo _('Enter') . '/' . _('Amend Price'); ?>">
-	</div>
-
-<?php
- }
+		echo '</table>';
+		echo '<br><div class="centre">';
+		echo '<input type="Submit" name="submit" value="'. _('Enter') . '/' . _('Amend Price') . '">';
+		echo '</div>';
+	}
+}
 
 echo '</form>';
 include('includes/footer.inc');
