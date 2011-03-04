@@ -270,9 +270,10 @@ if ($DebtorNo) { /* display recent pricing history for this debtor and this stoc
 	$MovtsResult = DB_query($sql, $db, $ErrMsg, $DbgMsg);
 
 	$k=1;
+	$LastPrice=0;
 	while ($myrow=DB_fetch_array($MovtsResult)) {
-	  if ($LastPrice != $myrow['price'] or $LastDiscount != $myrow['discount']) { /* consolidate price history for records with same price/discount */
-	    if ($qty) {
+	  if (($LastPrice != $myrow['price'] or $LastDiscount != $myrow['discount'])) { /* consolidate price history for records with same price/discount */
+	    if (isset($qty)) {
 	    	$DateRange=ConvertSQLDate($FromDate);
 	    	if ($FromDate != $ToDate) {
 	        	$DateRange .= ' - ' . ConvertSQLDate($ToDate);
@@ -280,11 +281,11 @@ if ($DebtorNo) { /* display recent pricing history for this debtor and this stoc
 	    	$PriceHistory[] = array($DateRange, $qty, $LastPrice, $LastDiscount);
 	    	$k++;
 	    	if ($k > 9) break; /* 10 price records is enough to display */
-	    	if ($myrow['trandate'] < FormatDateForSQL(time() - 366*86400))
+	    	if ($myrow['trandate'] < FormatDateForSQL(DateAdd(date($_SESSION['DefaultDateFormat']),'y', -1)))
 	    	  break; /* stop displaying pirce history more than a year old once we have at least one  to display */
 	    }
 		$LastPrice = $myrow['price'];
-		$LastDiscount = $myrow['discount'];
+		$LastDiscount = $myrow['discountpercent'];
 	    $ToDate = $myrow['trandate'];
 		$qty = 0;
 	  }
@@ -299,8 +300,8 @@ if ($DebtorNo) { /* display recent pricing history for this debtor and this stoc
 		$PriceHistory[] = array($DateRange, $qty, $LastPrice, $LastDiscount);
 	}
 	if (isset($PriceHistory)) {
-	  echo '<p>' . _('Pricing history for sales of') . ' ' . $StockID . ' ' . _('to') . ' ' . $DebtorNo;
-	  echo '<table cellpadding="2" class="selection">';
+	  echo '<br /><table cellpadding="4" class="selection">';
+	  echo '<tr><th colspan=4><font color=navy size=2>' . _('Pricing history for sales of') . ' ' . $StockID . ' ' . _('to') . ' ' . $DebtorNo . '</font></th></tr>';
 	  $tableheader = "<tr>
 			<th>" . _('Date Range') . "</th>
 			<th>" . _('Quantity') . "</th>
