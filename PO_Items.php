@@ -669,7 +669,7 @@ if (isset($_POST['EnterLine'])){ /*Inputs from the form directly without selecti
 		else {
 			$_POST['GLCode']=0;
 		}
-		if ($_POST['AssetID'] !='Not an Asset'){
+		if ($_POST['AssetID'] !=-1){
 			$ValidAssetResult = DB_query("SELECT assetid,
 																					description,
 																					costact
@@ -995,10 +995,11 @@ if (isset($_POST['NonStockOrder'])) {
 		echo '<option value="'.$myrow['accountcode'].'">'.$myrow['accountcode'].' - '.$myrow['accountname'].'</option>';
 	}
 	echo '</select></td></tr>';
+	echo '<input type="hidden" name="ConversionFactor" value="1">';
 	echo '<tr><td>'._('OR Asset ID'). '</td>
 						<td><select name="AssetID">';
 	$AssetsResult = DB_query("SELECT assetid, description, datepurchased FROM fixedassets ORDER BY assetid DESC",$db);
-	echo '<option selected value="Not an Asset">' . _('Not an Asset') . '</option>';
+	echo '<option selected value="-1">' . _('Not an Asset') . '</option>';
 	while ($AssetRow = DB_fetch_array($AssetsResult)){
 		if ($AssetRow['datepurchased']=='0000-00-00'){
 			$DatePurchased = _('Not yet purchased');
