@@ -227,6 +227,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 					$ErrMsg =_('One of the purchase order detail records could not be inserted into the database because');
 					$DbgMsg =_('The SQL statement used to insert the purchase order detail record and failed was');
 					$result =DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
+
 				}
 			} /* end of the loop round the detail line items on the order */
 			echo '<p>';
@@ -272,7 +273,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 
 			/*Now Update the purchase order detail records */
 			foreach ($_SESSION['PO'.$identifier]->LineItems as $POLine) {
-				$result=DB_query($sql,$db,'','',true);
+
 				if ($POLine->Deleted==true) {
 					if ($POLine->PODetailRec!='') {
 						$sql="DELETE FROM purchorderdetails WHERE podetailitem='" . $POLine->PODetailRec . "'";
@@ -315,7 +316,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 																							'" . $POLine->ShiptRef . "',
 																							'" . $POLine->JobRef . "',
 																							'" . $POLine->ItemNo . "',
-																							'" . $POLine->uom . "',
+																							'" . $POLine->UOM . "',
 																							'" . $POLine->ConversionFactor . "',
 																							'" . $POLine->Suppliers_PartNo . "',
 																							'" . $POLine->SubTotal_Amount . "',
@@ -377,6 +378,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 																								assetid='" . $POLine->AssetID . "'
 																	WHERE podetailitem='" . $POLine->PODetailRec . "'";
 					}
+
 				}
 
 				$ErrMsg = _('One of the purchase order detail records could not be updated because');
@@ -960,6 +962,7 @@ if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
 				<td><input type="text" class="number" name="Price' . $POLine->LineNo . '" size="11" value="' .$DisplayPrice.'"></td>
 				<td class="number">' . $DisplayLineTotal . '</td>
 				<td><input type="text" class="date" alt="' .$_SESSION['DefaultDateFormat'].'" name="ReqDelDate' . $POLine->LineNo.'" size="11" value="' .$POLine->ReqDelDate .'"></td>
+				<td>'.$POLine->PODetailRec.'</td>
 				<td><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . 'identifier='.$identifier. '&Delete=' . $POLine->LineNo . '">' . _('Delete') . '</a></td></tr>';
 			$_SESSION['PO'.$identifier]->Total = $_SESSION['PO'.$identifier]->Total + $LineTotal;
 		}
