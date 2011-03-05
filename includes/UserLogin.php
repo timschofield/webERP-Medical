@@ -36,11 +36,19 @@ function userLogin($Name, $Password, $db) {
 		if (!isset($Name) or $Name == '') {
 			return  UL_SHOWLOGIN;
 		}
+
+		/* Temporary fix for old unencrypted password */
+		$sql="UPDATE www_users
+				SET password='".CryptPass($Password)."'
+				WHERE password='weberp'";
+		$ErrMsg = _('Could not reset password');
+		$Result = DB_query($sql, $db,$ErrMsg);
+		/* End temporary fix */
+
 		$sql = "SELECT *
 						FROM www_users
 						WHERE www_users.userid='" . $Name . "'
-						AND (www_users.password='" . CryptPass($Password) . "'
-						OR  www_users.password='" . $Password . "')";
+						AND (www_users.password='" . CryptPass($Password) . "')";
 		$ErrMsg = _('Could not retrieve user details on login because');
 		$debug =1;
 		$Auth_Result = DB_query($sql, $db,$ErrMsg);

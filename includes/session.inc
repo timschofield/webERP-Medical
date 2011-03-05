@@ -303,14 +303,14 @@ if (in_array(15, $_SESSION['AllowedPageSecurityTokens'])) { /*System administrat
 	$debug = 0; //don't allow debug messages
 }
 function CryptPass( $Password ) {
-		global $CryptFunction;
-		if ( $CryptFunction == 'sha1' ) {
-			return sha1($Password);
-		} elseif ( $CryptFunction == 'md5' ) {
-			return md5($Password);
+	global $CryptFunction;
+	if ( $CryptFunction == 'sha1' ) {
+		return sha1($Password);
+	} elseif ( $CryptFunction == 'md5' ) {
+		return md5($Password);
 	} else {
-			return $Password;
-		}
+		return false;
+	}
  }
 
 
