@@ -80,7 +80,7 @@ if (isset($_POST['SearchCust']) AND $_SESSION['RequireCustomerSelection']==1){
 					custbranch.faxno,
 					custbranch.branchcode
 				FROM custbranch
-				WHERE custbranch.brname " . LIKE  ." ".$SearchString."
+				WHERE custbranch.brname " . LIKE  ." '".$SearchString."'
 				AND custbranch.disabletrans=0";
 
 		  } elseif (strlen($_POST['CustCode'])>0){
