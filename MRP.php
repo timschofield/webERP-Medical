@@ -444,7 +444,7 @@ if (isset($_POST['submit'])) {
 																				orderno int(11),
 																				mrpdate date,
 																				updateflag smallint(6),
-																				PRIMARY KEY (id))";
+																				PRIMARY KEY (id)) DEFAULT CHARSET=utf8";
 	$result = DB_query($sql,$db,_('Create of mrpplannedorders failed because'));
 
 	// Find the highest and lowest level number
