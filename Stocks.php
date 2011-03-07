@@ -1018,7 +1018,7 @@ while ($PropertyRow=DB_fetch_array($PropertiesResult)){
 echo '</table><br>';
 echo '<input type="hidden" name="PropertyCounter" value=' . $PropertyCounter . '>';
 
-if (isset($New)) {
+if (true) {
 	echo '<input type="Submit" name="submit" value="' . _('Insert New Item') . '">';
 	echo '<input type="submit" name="UpdateCategories" style="visibility:hidden;width:1px" value="' . _('Categories') . '">';
 

@@ -737,6 +737,11 @@ if (count($_SESSION['AllowedPageSecurityTokens'])==1 and $SupplierLogin==0){
 								<?php echo '<p>&bull; <a href="' . $rootpath . '/ReorderLevelLocation.php?' . sid . '">' . _('Reorder Level By Category/Location') . '</a></p>'; ?>
 							</td>
 							</tr>
+							<tr>
+							<td class="menu_group_item">
+								<?php echo '<p>&bull; <a href="' . $rootpath . '/Manufacturing.php?' . sid . '">' . _('Item Manufacturers') . '</a></p>'; ?>
+							</td>
+							</tr>
 						</table>
 					</td>
 					</tr>
