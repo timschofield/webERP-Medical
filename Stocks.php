@@ -991,7 +991,16 @@ while ($PropertyRow=DB_fetch_array($PropertiesResult)){
 			}
 	 		break;
 	 	case 1; //select box
-	 		$OptionValues = explode(',',$PropertyRow['defaultvalue']);
+			$OptionValues = array();
+			if ($PropertyRow['label']='Manufacturers') {
+				$sql="SELECT coyname from manufacturers";
+				$result=DB_query($sql, $db);
+				while ($myrow=DB_fetch_array($result)) {
+					$OptionValues[]=$myrow['coyname'];
+				}
+			} else {
+				$OptionValues = explode(',',$PropertyRow['defaultvalue']);
+			}
 			echo '<select name="PropValue' . $PropertyCounter . '">';
 			foreach ($OptionValues as $PropertyOptionValue){
 				if ($PropertyOptionValue == $PropertyValue){
