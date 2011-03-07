@@ -609,10 +609,10 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 		$sql="SELECT stockmaster.controlled,
 								stockmaster.serialised,
 								stockmaster.description,
-								stockmaster.units ,
+								stockmaster.units as stockunits,
 								stockmaster.decimalplaces,
 								purchdata.price,
-								purchdata.suppliersuom,
+								unitsofmeasure.unitname as supplierunits,
 								purchdata.suppliers_partno,
 								purchdata.conversionfactor,
 								stockcategory.stockact
@@ -620,11 +620,17 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 					ON stockmaster.categoryid=stockcategory.categoryid
 				LEFT JOIN purchdata
 					ON stockmaster.stockid = purchdata.stockid
+				LEFT JOIN unitsofmeasure
+					ON purchdata.suppliersuom=unitsofmeasure.unitid
 				WHERE stockmaster.stockid='".$Purch_Item. "'
 				AND purchdata.supplierno ='" . $_GET['SelectedSupplier'] . "'";
 		$result=DB_query($sql, $db);
 		$PurchItemRow=DB_fetch_array($result);
-
+		if ($PurchItemRow['supplierunits'] != '') {
+			$PurchItemRow['units'] = $PurchItemRow['supplierunits'];
+		} else {
+			$PurchItemRow['units'] = $PurchItemRow['stocksunits'];
+		}
 		if (!isset($PurchItemRow['conversionfactor'])) {
 			$PurchItemRow['conversionfactor']=1;
 		}
