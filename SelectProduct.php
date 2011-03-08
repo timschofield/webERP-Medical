@@ -175,6 +175,17 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 	echo '</table>'; //end of first nested table
 	// Item Category Property mod: display the item properties
 	echo '<table align="left">';
+	if (isset($_POST['UpdateProps'])) {
+		$PropertyCounter=0;
+		while (isset($_POST['PropValue' . $PropertyCounter])) {
+			$UpdateSql="UPDATE stockitemproperties
+				SET value='".$_POST['PropValue' . $PropertyCounter] . "'
+				WHERE stockid='" . $StockID . "'
+					AND stkcatpropid ='" . $_POST['CatPropID']."'";
+			$UpdateResult=DB_query($UpdateSql, $db);;
+			$PropertyCounter++;
+		}
+	}
 	$CatValResult = DB_query("SELECT categoryid
 														FROM stockmaster
 														WHERE stockid='" . $StockID . "'", $db);
@@ -191,17 +202,6 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 	$PropertiesResult = DB_query($sql, $db);
 	$PropertyCounter = 0;
 	$PropertyWidth = array();
-	if (isset($_POST['UpdateProps'])) {
-		$PropertyCounter=0;
-		while (isset($_POST['PropValue' . $PropertyCounter])) {
-			$UpdateSql="UPDATE stockitemproperties
-				SET value='".$_POST['PropValue' . $PropertyCounter] . "'
-				WHERE stockid='" . $StockID . "'
-					AND stkcatpropid ='" . $_POST['CatPropID']."'";
-			$UpdateResult=DB_query($UpdateSql, $db);;
-			$PropertyCounter++;
-		}
-	}
 	while ($PropertyRow = DB_fetch_array($PropertiesResult)) {
 		$PropValResult = DB_query("SELECT value
 																FROM stockitemproperties
