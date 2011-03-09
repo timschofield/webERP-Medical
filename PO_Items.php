@@ -41,6 +41,7 @@ if (isset($_POST['StockID2']) AND $_GET['Edit']=='') {
 								purchdata.suppliers_partno,
 								purchdata.conversionfactor,
 								purchdata.suppliersuom,
+								purchdata.minorderqty,
 								stockmaster.pkg_type,
 								stockmaster.units,
 								stockmaster.netweight,
@@ -65,6 +66,7 @@ if (isset($_POST['StockID2']) AND $_GET['Edit']=='') {
 	$_POST['nw'] = $myrow['netweight'];
 	$_POST['gw'] = $myrow['kgs'];
 	$_POST['CuFt'] = $myrow['volume'];
+	$_POST['MinimumOrderQty'] = $myrow['minorderqty'];
 } // end if (isset($_POST['StockID2']) && $_GET['Edit']=='')
 
 if (isset($_POST['UpdateLines']) OR isset($_POST['Commit'])) {
@@ -532,7 +534,8 @@ if(isset($_GET['Delete'])){
 if (isset($_POST['LookupPrice']) and isset($_POST['StockID2'])){
 	$sql = "SELECT purchdata.price,
 								purchdata.conversionfactor,
-								purchdata.supplierdescription
+								purchdata.supplierdescription,
+								purchdata.minorderqty
 					FROM purchdata
 					WHERE  purchdata.supplierno = '" . $_SESSION['PO'.$identifier]->SupplierID . "'
 					AND purchdata.stockid = '". strtoupper($_POST['StockID2']) . "'";
@@ -545,6 +548,7 @@ if (isset($_POST['LookupPrice']) and isset($_POST['StockID2'])){
 		$myrow = DB_fetch_array($LookupResult);
 		$_POST['Price'] = $myrow['price']/$myrow['conversionfactor'];
 		$_POST['ConversionFactor'] = $myrow['conversionfactor'];
+		$_POST['MinimumOrderQty'] = $myrow['minorderqty'];
 	} else {
 		prnMsg(_('Sorry') . ' ... ' . _('there is no purchasing data set up for this supplier') . '  - ' . $_SESSION['PO'.$identifier]->SupplierID . ' ' . _('and item') . ' ' . strtoupper($_POST['StockID']),'warn');
 	}
@@ -776,6 +780,7 @@ if (isset($_POST['NewItem'])){ /* NewItem is set from the part selection list as
 												purchdata.suppliersuom,
 												unitsofmeasure.unitname,
 												purchdata.suppliers_partno,
+												purchdata.minorderqty,
 												purchdata.leadtime
 									FROM stockcategory,
 										chartmaster,
@@ -783,8 +788,8 @@ if (isset($_POST['NewItem'])){ /* NewItem is set from the part selection list as
 									ON stockmaster.stockid = purchdata.stockid
 									LEFT JOIN unitsofmeasure
 									ON purchdata.suppliersuom=unitsofmeasure.unitid
-									AND purchdata.supplierno = '" . $_SESSION['PO'.$identifier]->SupplierID . "'
 									WHERE chartmaster.accountcode = stockcategory.stockact
+									AND purchdata.supplierno = '" . $_SESSION['PO'.$identifier]->SupplierID . "'
 										AND stockcategory.categoryid = stockmaster.categoryid
 										AND stockmaster.stockid = '". $ItemCode . "'
 										AND purchdata.effectivefrom =
@@ -814,8 +819,15 @@ if (isset($_POST['NewItem'])){ /* NewItem is set from the part selection list as
 				$result1 = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
 				if ($myrow = DB_fetch_array($result1)){
-					if (isset($myrow['price']) and is_numeric($myrow['price'])){
 
+					if (isset($myrow['price']) and is_numeric($myrow['price'])){
+						if ($Quantity < $myrow['minorderqty']) {
+							prnMsg( _('The quantity ordered is less than the minimum order quantity for this supplier.') .
+								'<br />' . _('Are you sure you wish to continue?'), 'warn');
+						} else if ($Quantity % $myrow['minorderqty']) {
+							prnMsg( _('The quantity ordered should be a multiple of the minimum order quantity for this supplier.') .
+								'<br />' . _('Are you sure you wish to continue?'), 'warn');
+						}
 						$_SESSION['PO'.$identifier]->add_to_order ($_SESSION['PO'.$identifier]->LinesOnOrder+1,
 																										$ItemCode,
 																										0, /*Serialised */
