@@ -160,10 +160,14 @@ if (isset($_POST['SelectedSupplier'])) {
 				WHERE supplierid='" . $_POST['SelectedSupplier'] . "'";
 	$result = DB_query($sql, $db);
 	$myrow = DB_fetch_array($result);
-	$_SESSION['tender']->add_supplier_to_tender(
+	if (strlen($myrow['email'])>0) {
+		$_SESSION['tender']->add_supplier_to_tender(
 				$_POST['SelectedSupplier'],
 				$myrow['suppname'],
 				$myrow['email']);
+	} else {
+		prnMsg( _('The supplier must have an email set up or they cannot be part of a tender'), 'warn');
+	}
 	$ShowTender = 1;
 }
 
