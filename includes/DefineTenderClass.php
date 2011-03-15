@@ -11,7 +11,7 @@ Class Tender {
 	var $CurrCode;
 	var $ExRate;
 	var $Initiator;
-	var $DeliveryDate;
+	var $RequiredByDate;
 	var $RequisitionNo;
 	var $DelAdd1;
 	var $DelAdd2;
@@ -53,7 +53,8 @@ Class Tender {
 									address4,
 									address5,
 									address6,
-									telephone)
+									telephone,
+									requiredbydate)
 								VALUES (
 									'" . $this->TenderId  . "',
 									'" . $this->Location  . "',
@@ -63,7 +64,8 @@ Class Tender {
 									'" . $this->DelAdd4  . "',
 									'" . $this->DelAdd5  . "',
 									'" . $this->DelAdd6  . "',
-									'" . $this->Telephone  . "')";
+									'" . $this->Telephone  . "',
+									'" . FormatDateForSQL($this->RequiredByDate) . "')";
 			foreach ($this->Suppliers as $Supplier) {
 				$SuppliersSQL[]="INSERT INTO tendersuppliers (
 									tenderid,
@@ -95,7 +97,8 @@ Class Tender {
 									address4='" . $this->DelAdd4  . "',
 									address5='" . $this->DelAdd5  . "',
 									address6='" . $this->DelAdd6  . "',
-									telephone='" . $this->Telephone  . "'
+									telephone='" . $this->Telephone  . "',
+									requiredbydate='" . FormatDateForSQL($this->RequiredByDate)  . "'
 								WHERE tenderid = '" . $this->TenderId  . "'";
 			foreach ($this->Suppliers as $Supplier) {
 				$sql="DELETE FROM tendersuppliers
