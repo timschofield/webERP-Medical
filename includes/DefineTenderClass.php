@@ -98,19 +98,10 @@ Class Tender {
 									telephone='" . $this->Telephone  . "'
 								WHERE tenderid = '" . $this->TenderId  . "'";
 			foreach ($this->Suppliers as $Supplier) {
-				$sql="SELECT count(tenderid)
-					FROM tendersuppliers
-					WHERE  tenderid='" . $this->TenderId . "'
-						AND supplierid='" . $Supplier->SupplierCode . "'";
+				$sql="DELETE FROM tendersuppliers
+					WHERE  tenderid='" . $this->TenderId . "'";
 				$result=DB_query($sql, $db);
-				$myrow=DB_fetch_row($result);
-				if ($myrow[0] > 0) {
-					$SuppliersSQL[]="UPDATE tendersuppliers
-									SET email='" . $Supplier->EmailAddress . "'
-									WHERE tenderid='" . $this->TenderId . "'
-										AND supplierid='" . $Supplier->SupplierCode . "'";
-				} else {
-					$SuppliersSQL[]="INSERT INTO tendersuppliers (
+				$SuppliersSQL[]="INSERT INTO tendersuppliers (
 									tenderid,
 									supplierid,
 									email)
@@ -118,23 +109,12 @@ Class Tender {
 									'" . $this->TenderId . "',
 									'" . $Supplier->SupplierCode . "',
 									'" . $Supplier->EmailAddress . "')";
-				}
 			}
 			foreach ($this->LineItems as $LineItem) {
-				$sql="SELECT count(tenderid)
-					FROM tenderitems
-					WHERE  tenderid='" . $this->TenderId . "'
-							AND stockid='" . $LineItem->StockID . "'";
+				$sql="DELETE FROM tenderitems
+					WHERE  tenderid='" . $this->TenderId . "'";
 				$result=DB_query($sql, $db);
-				$myrow=DB_fetch_row($result);
-				if ($myrow[0] > 0) {
-					$ItemsSQL[]="UPDATE tenderitems
-									SET quantity='" . $LineItem->Quantity . "',
-										units='" . $LineItem->Units . "'
-									WHERE tenderid='" . $this->TenderId . "'
-										AND stockid='" . $LineItem->StockID . "'";
-				} else {
-					$ItemsSQL[]="INSERT INTO tenderitems (
+				$ItemsSQL[]="INSERT INTO tenderitems (
 									tenderid,
 									stockid,
 									quantity,
@@ -144,7 +124,6 @@ Class Tender {
 									'" . $LineItem->StockID . "',
 									'" . $LineItem->Quantity . "',
 									'" . $LineItem->Units . "')";
-				}
 			}
 		}
 		DB_Txn_Begin($db);
