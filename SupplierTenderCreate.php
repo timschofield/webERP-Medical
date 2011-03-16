@@ -223,8 +223,7 @@ if (!isset($_SESSION['tender']) or isset($_POST['LookupDeliveryAddress']) or $Sh
 	$LocnResult = DB_query($sql,$db);
 
 	while ($LocnRow=DB_fetch_array($LocnResult)){
-		if (isset($_POST['StkLocation']) and ($_POST['StkLocation'] == $LocnRow['loccode'] OR
-				($_POST['StkLocation']=='' AND $LocnRow['loccode']==$_SESSION['UserStockLocation']))){
+		if ((isset($_SESSION['tender']->Location) and $_SESSION['tender']->Location == $LocnRow['loccode'])){
 			echo '<option selected value="' . $LocnRow['loccode'] . '">' . $LocnRow['locationname'] . '</option>';
 		} else {
 			echo '<option value="' . $LocnRow['loccode'] . '">' . $LocnRow['locationname'] . '</option>';
