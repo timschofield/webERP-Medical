@@ -51,7 +51,7 @@ if (isset($_POST['SupplierID']) and empty($_POST['TenderType']) and empty($_POST
 	echo '<td><select name=TenderType>';
 	echo '<option value=1>'._('View or Amend outstanding offers from').' '.$Supplier .'</option>';
 	echo '<option value=2>'._('Create a new offer from').' '.$Supplier .'</option>';
-//	echo '<option value=3>'._('View any open tenders without an offer from').' '.$Supplier .'</option>';
+	echo '<option value=3>'._('View any open tenders without an offer from').' '.$Supplier .'</option>';
 	echo '</select></td></tr>';
 	echo '<input type=hidden name=SupplierID value="'.$_POST['SupplierID'].'"';
 	echo '<tr><td colspan=2><div class=centre><input type="submit" name="submit" value="' . _('Select') . '"></div></td></tr>';
@@ -368,13 +368,106 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==2 and !isset($_POST['S
 	echo '</form>';
 }
 
+/*The supplier has chosen option 3
+ */
+if (isset($_POST['TenderType']) and $_POST['TenderType']==3 and !isset($_POST['Search']) or isset($_GET['Delete'])) {
+	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/supplier.png" title="' .
+		_('Tenders') . '" alt="" />' . ' ' . _('Tenders Waiting For Offers').'</p>';
+	$sql="SELECT DISTINCT tenderid,
+				suppliers.currcode
+			FROM tendersuppliers
+			LEFT JOIN suppliers
+			ON suppliers.supplierid=tendersuppliers.supplierid
+			WHERE tendersuppliers.supplierid='" . $_POST['SupplierID'] . "'
+			ORDER BY tenderid";
+	$result=DB_query($sql, $db);
+	echo '<table class="selection">';
+	echo '<tr><th colspan="13"><font size="3" color="navy">' . _('Outstanding Tenders Waiting For Offer') . '</font></th></tr>';
+	while ($myrow=DB_fetch_row($result)) {
+		$LocationSQL="SELECT tenderid,
+							locations.locationname,
+							address1,
+							address2,
+							address3,
+							address4,
+							address5,
+							address6,
+							telephone
+						FROM tenders
+						LEFT JOIN locations
+						ON tenders.location=locations.loccode
+						WHERE closed=0
+						AND tenderid='".$myrow[0]."'";
+		$LocationResult=DB_query($LocationSQL, $db);
+		$MyLocationRow=DB_fetch_row($LocationResult);
+		echo '<tr><td valign="top" style="background-color:#cccce5">' . _('Deliver To') . ':</td><td valign="top" style="background-color:#cccce5">';
+		for ($i=1; $i<8; $i++) {
+			if ($MyLocationRow[$i]!='') {
+				echo $MyLocationRow[$i] . '<br />';
+			}
+		}
+		echo '</td>';
+		echo '<th colspan="8" style="vertical-align:top"><font size="2" color="navy">' . _('Tender Number') . ': ' .$myrow[0] . '</font></th>';
+		echo '<th><input type="submit" value="' . _('Process') . "\n" . _('Tender') . '" name="" /></th></tr>';
+		$ItemSQL="SELECT tenderitems.tenderid,
+						tenderitems.stockid,
+						stockmaster.description,
+						stockmaster.decimalplaces,
+						purchdata.suppliers_partno,
+						tenderitems.quantity,
+						tenderitems.units,
+						tenders.requiredbydate,
+						purchdata.suppliersuom
+					FROM tenderitems
+					LEFT JOIN stockmaster
+					ON tenderitems.stockid=stockmaster.stockid
+					LEFT JOIN purchdata
+					ON tenderitems.stockid=purchdata.stockid
+					AND purchdata.supplierno='".$_POST['SupplierID']."'
+					LEFT JOIN tenders
+					ON tenders.tenderid=tenderitems.tenderid
+					WHERE tenderitems.tenderid='" . $myrow[0] . "'";
+		$ItemResult=DB_query($ItemSQL, $db);
+		echo '<tr><th>' . stripslashes($_SESSION['CompanyRecord']['coyname']) . '<br />' . _('Item Code') . '</th>';
+		echo '<th>' . _('Item Description') . '</th>';
+		echo '<th>' . $Supplier . '<br />' . _('Item Code') . '</th>';
+		echo '<th>' . _('Quantity') . '<br />' . _('Required') . '</th>';
+		echo '<th>' . stripslashes($_SESSION['CompanyRecord']['coyname']) . '<br />' . _('Units of Measure') . '</th>';
+		echo '<th>' . _('Required By') . '</th>';
+		echo '<th>' . _('Quantity') . '<br />' . _('Offered') . '</th>';
+		echo '<th>' . $Supplier . '<br />' . _('Units of Measure') . '</th>';
+		echo '<th>' . _('Currency') . '</th>';
+		echo '<th>' . $Supplier . '<br />' . _('Price') . '</th>';
+		echo '<th>' . _('Delivery By') . '</th>';
+		while ($MyItemRow=DB_fetch_array($ItemResult)) {
+			echo '<tr><td>' . $MyItemRow['stockid'] . '</td>';
+			echo '<td>' . $MyItemRow['description'] . '</td>';
+			echo '<td>' . $MyItemRow['suppliers_partno'] . '</td>';
+			echo '<td class="number">' . number_format($MyItemRow['quantity'], $MyItemRow['decimalplaces']) . '</td>';
+			echo '<td>' . $MyItemRow['units'] . '</td>';
+			echo '<td>' . ConvertSQLDate($MyItemRow['requiredbydate']) . '</td>';
+			if ($MyItemRow['suppliersuom']=='') {
+				$MyItemRow['suppliersuom']=$MyItemRow['units'];
+			}
+			echo '<td><input type="text" class="number" size="10" name="Quantity'. $MyItemRow['stockid'] . '" value="' .
+				number_format($MyItemRow['quantity'], $MyItemRow['decimalplaces']) . '" /></td>';
+			echo '<td>' . $MyItemRow['suppliersuom'] . '</td>';
+			echo '<td>' . $myrow[1] . '</td>';
+			echo '<td><input type="text" class="number" size="10" name="Quantity'. $MyItemRow['stockid'] . '" value="0.00" /></td>';
+			echo '<td><input type="text" class="date" alt="' .$_SESSION['DefaultDateFormat'] .'" name="RequiredByDate '. $MyItemRow['stockid'] . '" size="11" value="' .
+				ConvertSQLDate($MyItemRow['requiredbydate']) . '" /></td>';
+		}
+	}
+	echo '</table>';
+}
+
 if (isset($_POST['Search'])){  /*ie seach for stock items */
 	echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . "?" . SID . ">";
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/supplier.png" title="' .
 		_('Tenders') . '" alt="" />' . ' ' . _('Select items to offer from').' '.$Supplier .'</p>';
 
-	if ($_POST['Keywords'] AND $_POST['StockCode']) {
+	if ($_POST['Keywords'] and $_POST['StockCode']) {
 		prnMsg( _('Stock description keywords have been used in preference to the Stock code extract entered'), 'info' );
 	}
 	if ($_POST['Keywords']) {
