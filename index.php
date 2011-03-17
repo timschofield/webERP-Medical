@@ -64,7 +64,17 @@ if (count($_SESSION['AllowedPageSecurityTokens'])==1 and $SupplierLogin==0){
 		<table class="table_index">
 			<tr>
 			<td class="menu_group_item">
-				<?php echo '<p>&bull; <a href="' . $rootpath . '/SupplierTenders.php?' . sid . '">' . _('Supplier Tenders') . '</a></p>'; ?>
+				<?php echo '<p>&bull; <a href="' . $rootpath . '/SupplierTenders.php?' . sid . '&TenderType=1">' . _('View or Amend outstanding offers') . '</a></p>'; ?>
+			</td>
+			</tr>
+			<tr>
+			<td class="menu_group_item">
+				<?php echo '<p>&bull; <a href="' . $rootpath . '/SupplierTenders.php?' . sid . '&TenderType=2">' . _('Create a new offer') . '</a></p>'; ?>
+			</td>
+			</tr>
+			<tr>
+			<td class="menu_group_item">
+				<?php echo '<p>&bull; <a href="' . $rootpath . '/SupplierTenders.php?' . sid . '&TenderType=3">' . _('View any open tenders without an offer') . '</a></p>'; ?>
 			</td>
 			</tr>
 		</table>

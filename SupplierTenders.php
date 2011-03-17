@@ -10,6 +10,10 @@ include('includes/header.inc');
 
 $Maximum_Number_Of_Parts_To_Show=50;
 
+if (isset($_GET['TenderType'])) {
+	$_POST['TenderType']=$_GET['TenderType'];
+}
+
 if (!isset($_POST['SupplierID'])) {
 	$sql="SELECT supplierid FROM www_users WHERE userid='".$_SESSION['UserID']."'";
 	$result=DB_query($sql, $db);
@@ -373,17 +377,23 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==2 and !isset($_POST['S
 if (isset($_POST['TenderType']) and $_POST['TenderType']==3 and !isset($_POST['Search']) or isset($_GET['Delete'])) {
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/supplier.png" title="' .
 		_('Tenders') . '" alt="" />' . ' ' . _('Tenders Waiting For Offers').'</p>';
-	$sql="SELECT DISTINCT tenderid,
+	$sql="SELECT DISTINCT tendersuppliers.tenderid,
 				suppliers.currcode
 			FROM tendersuppliers
 			LEFT JOIN suppliers
 			ON suppliers.supplierid=tendersuppliers.supplierid
+			LEFT JOIN tenders
+			ON tenders.tenderid=tendersuppliers.tenderid
 			WHERE tendersuppliers.supplierid='" . $_POST['SupplierID'] . "'
-			ORDER BY tenderid";
+			AND tenders.closed=0
+			ORDER BY tendersuppliers.tenderid";
 	$result=DB_query($sql, $db);
 	echo '<table class="selection">';
 	echo '<tr><th colspan="13"><font size="3" color="navy">' . _('Outstanding Tenders Waiting For Offer') . '</font></th></tr>';
 	while ($myrow=DB_fetch_row($result)) {
+		echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
+		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
+		echo '<input type="hidden" name="TenderType" value="3" />';
 		$LocationSQL="SELECT tenderid,
 							locations.locationname,
 							address1,
@@ -408,7 +418,7 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==3 and !isset($_POST['S
 		}
 		echo '</td>';
 		echo '<th colspan="8" style="vertical-align:top"><font size="2" color="navy">' . _('Tender Number') . ': ' .$myrow[0] . '</font></th>';
-		echo '<th><input type="submit" value="' . _('Process') . "\n" . _('Tender') . '" name="" /></th></tr>';
+		echo '<th><input type="submit" value="' . _('Process') . "\n" . _('Tender') . '" name="Process'. $myrow[0] . '" /></th></tr>';
 		$ItemSQL="SELECT tenderitems.tenderid,
 						tenderitems.stockid,
 						stockmaster.description,
@@ -453,10 +463,11 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==3 and !isset($_POST['S
 				number_format($MyItemRow['quantity'], $MyItemRow['decimalplaces']) . '" /></td>';
 			echo '<td>' . $MyItemRow['suppliersuom'] . '</td>';
 			echo '<td>' . $myrow[1] . '</td>';
-			echo '<td><input type="text" class="number" size="10" name="Quantity'. $MyItemRow['stockid'] . '" value="0.00" /></td>';
+			echo '<td><input type="text" class="number" size="10" name="Price'. $MyItemRow['stockid'] . '" value="0.00" /></td>';
 			echo '<td><input type="text" class="date" alt="' .$_SESSION['DefaultDateFormat'] .'" name="RequiredByDate '. $MyItemRow['stockid'] . '" size="11" value="' .
 				ConvertSQLDate($MyItemRow['requiredbydate']) . '" /></td>';
 		}
+		echo '</form>';
 	}
 	echo '</table>';
 }
