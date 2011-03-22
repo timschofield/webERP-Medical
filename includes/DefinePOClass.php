@@ -61,6 +61,7 @@ Class PurchOrder {
 		$this->LineItems = array();
 		$this->total=0;
 		$this->LinesOnOrder=0;
+		$this->Version=1;
 	}
 
 	function add_to_order($LineNo,

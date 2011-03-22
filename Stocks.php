@@ -991,7 +991,16 @@ while ($PropertyRow=DB_fetch_array($PropertiesResult)){
 			}
 	 		break;
 	 	case 1; //select box
-	 		$OptionValues = explode(',',$PropertyRow['defaultvalue']);
+			$OptionValues = array();
+			if ($PropertyRow['label']='Manufacturers') {
+				$sql="SELECT coyname from manufacturers";
+				$result=DB_query($sql, $db);
+				while ($myrow=DB_fetch_array($result)) {
+					$OptionValues[]=$myrow['coyname'];
+				}
+			} else {
+				$OptionValues = explode(',',$PropertyRow['defaultvalue']);
+			}
 			echo '<select name="PropValue' . $PropertyCounter . '">';
 			foreach ($OptionValues as $PropertyOptionValue){
 				if ($PropertyOptionValue == $PropertyValue){
@@ -1018,7 +1027,7 @@ while ($PropertyRow=DB_fetch_array($PropertiesResult)){
 echo '</table><br>';
 echo '<input type="hidden" name="PropertyCounter" value=' . $PropertyCounter . '>';
 
-if (isset($New)) {
+if (true) {
 	echo '<input type="Submit" name="submit" value="' . _('Insert New Item') . '">';
 	echo '<input type="submit" name="UpdateCategories" style="visibility:hidden;width:1px" value="' . _('Categories') . '">';
 

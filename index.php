@@ -64,7 +64,17 @@ if (count($_SESSION['AllowedPageSecurityTokens'])==1 and $SupplierLogin==0){
 		<table class="table_index">
 			<tr>
 			<td class="menu_group_item">
-				<?php echo '<p>&bull; <a href="' . $rootpath . '/SupplierTenders.php?' . sid . '">' . _('Supplier Tenders') . '</a></p>'; ?>
+				<?php echo '<p>&bull; <a href="' . $rootpath . '/SupplierTenders.php?' . sid . '&TenderType=1">' . _('View or Amend outstanding offers') . '</a></p>'; ?>
+			</td>
+			</tr>
+			<tr>
+			<td class="menu_group_item">
+				<?php echo '<p>&bull; <a href="' . $rootpath . '/SupplierTenders.php?' . sid . '&TenderType=2">' . _('Create a new offer') . '</a></p>'; ?>
+			</td>
+			</tr>
+			<tr>
+			<td class="menu_group_item">
+				<?php echo '<p>&bull; <a href="' . $rootpath . '/SupplierTenders.php?' . sid . '&TenderType=3">' . _('View any open tenders without an offer') . '</a></p>'; ?>
 			</td>
 			</tr>
 		</table>
@@ -496,6 +506,16 @@ if (count($_SESSION['AllowedPageSecurityTokens'])==1 and $SupplierLogin==0){
 							</tr>
 							<tr>
 							<td class="menu_group_item">
+								<?php echo '<p>&bull; <a href="' . $rootpath . '/SupplierTenderCreate.php?&New=Yes' . sid . '">' . _('Create a New Tender') . '</a></p>'; ?>
+							</td>
+							</tr>
+							<tr>
+							<td class="menu_group_item">
+								<?php echo '<p>&bull; <a href="' . $rootpath . '/SupplierTenderCreate.php?&Edit=Yes' . sid . '">' . _('Edit Existing Tenders') . '</a></p>'; ?>
+							</td>
+							</tr>
+							<tr>
+							<td class="menu_group_item">
 								<?php echo '<p>&bull; <a href="' . $rootpath . '/OffersReceived.php?' . sid . '">' . _('Process Tenders and Offers') . '</a></p>'; ?>
 							</td>
 							</tr>
@@ -735,6 +755,11 @@ if (count($_SESSION['AllowedPageSecurityTokens'])==1 and $SupplierLogin==0){
 							<tr>
 							<td class="menu_group_item">
 								<?php echo '<p>&bull; <a href="' . $rootpath . '/ReorderLevelLocation.php?' . sid . '">' . _('Reorder Level By Category/Location') . '</a></p>'; ?>
+							</td>
+							</tr>
+							<tr>
+							<td class="menu_group_item">
+								<?php echo '<p>&bull; <a href="' . $rootpath . '/Manufacturers.php?' . sid . '">' . _('Item Manufacturers') . '</a></p>'; ?>
 							</td>
 							</tr>
 						</table>
