@@ -11,15 +11,29 @@ Class Offer {
 	var $CurrCode;
 	var $Location;
 	var $SupplierID;
+	var $SupplierName;
+	var $EmailAddress;
 	var $LinesOnOffer;
 	var $version;
 	var $OfferMailText;
 
-	function Offer(){
+	function Offer($Supplier){
 	/*Constructor function initialises a new purchase offer object */
+		global $db;
 		$this->LineItems = array();
 		$this->total=0;
 		$this->LinesOnOffer=0;
+		$this->SupplierID=$Supplier;
+		$sql="SELECT suppname,
+					email,
+					currcode
+				FROM suppliers
+				WHERE supplierid='" . $this->SupplierID . "'";
+		$result=DB_query($sql, $db);
+		$myrow=DB_fetch_row($result);
+		$this->SupplierName = $myrow[0];
+		$this->EmailAddress = $myrow[1];
+		$this->CurrCode = $myrow[2];
 	}
 
 	function add_to_offer(
@@ -48,48 +62,67 @@ Class Offer {
 		Return 0;
 	}
 
-	function GetSupplierEmail() {
-		global $db;
-		$sql="SELECT email
-			FROM suppliers
-			WHERE supplierid='" . $this->SupplierID . "'";
-		$result=DB_query($sql, $db);
-		$myrow=DB_fetch_row($result);
-		return $myrow[0];
+	function GetSupplierName() {
+		return $this->SupplierName;
 	}
 
-	function Save($db) {
-		$this->OfferMailText='';
-		foreach ($this->LineItems as $LineItems) {
-			if ($LineItems->Deleted==False) {
-				$sql="INSERT INTO offers (
-						supplierid,
-						tenderid,
-						stockid,
-						quantity,
-						uom,
-						price,
-						expirydate,
-						currcode)
-					VALUES (
-						'".$this->SupplierID."',
-						'".$this->TenderID."',
-						'".$LineItems->StockID."',
-						'".$LineItems->Quantity."',
-						'".$LineItems->Units."',
-						'".$LineItems->Price."',
-						'".FormatDateForSQL($LineItems->ExpiryDate)."',
-						'".$this->CurrCode."'
-					)";
-				$ErrMsg =  _('The suppliers offer could not be inserted into the database because');
-				$DbgMsg = _('The SQL statement used to insert the suppliers offer record and failed was');
+	function GetSupplierEmail() {
+		return $this->EmailAddress;
+	}
+
+	function Save($db, $Update='') {
+		if ($Update=='') {
+			foreach ($this->LineItems as $LineItems) {
+				if ($LineItems->Deleted==False) {
+					$sql="INSERT INTO offers (
+							supplierid,
+							tenderid,
+							stockid,
+							quantity,
+							uom,
+							price,
+							expirydate,
+							currcode)
+						VALUES (
+							'".$this->SupplierID."',
+							'".$this->TenderID."',
+							'".$LineItems->StockID."',
+							'".$LineItems->Quantity."',
+							'".$LineItems->Units."',
+							'".$LineItems->Price."',
+							'".FormatDateForSQL($LineItems->ExpiryDate)."',
+							'".$this->CurrCode."'
+						)";
+					$ErrMsg =  _('The suppliers offer could not be inserted into the database because');
+					$DbgMsg = _('The SQL statement used to insert the suppliers offer record and failed was');
+					$result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
+					if (DB_error_no($db)==0) {
+						prnMsg( _('The offer for').' '.$LineItems->StockID.' '._('has been inserted into the database'), 'success');
+						$this->OfferMailText .= $LineItems->Quantity. ' ' .$LineItems->Units.' '._('of').' '.$LineItems->StockID.' '._('at a price of').
+							' '.$this->CurrCode.number_format($LineItems->Price,2)."\n";
+					} else {
+						prnMsg( _('The offer for').' '.$LineItems->StockID.' '._('could not be inserted into the database'), 'error');
+						include('includes/footer.inc');
+						exit;
+					}
+				}
+			}
+		} else {
+			foreach ($_SESSION['offer']->LineItems as $LineItems) {
+				$sql="UPDATE offers SET
+						quantity='".$LineItems->Quantity."',
+						price='".$LineItems->Price."',
+						expirydate='".FormatDateForSQL($LineItems->ExpiryDate)."'
+					WHERE offerid='".$LineItems->LineNo . "'";
+				$ErrMsg =  _('The suppliers offer could not be updated on the database because');
+				$DbgMsg = _('The SQL statement used to update the suppliers offer record and failed was');
 				$result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 				if (DB_error_no($db)==0) {
-					prnMsg( _('The offer for').' '.$LineItems->StockID.' '._('has been inserted into the database'), 'success');
-					$this->OfferMailText .= $LineItems->Quantity.$LineItems->Units.' '._('of').' '.$LineItems->StockID.' '._('at a price of').
-						' '.$this->CurrCode.number_format($LineItems->Price,2)."\n";
+					prnMsg( _('The offer for').' '.$LineItems->StockID.' '._('has been updated in the database'), 'success');
+					$this->OfferMailText .= $LineItems->Quantity.' '.$LineItems->Units.' '._('of').' '.$LineItems->StockID.' '._('at a price of').
+						' '.$this->CurrCode.$LineItems->Price."\n";
 				} else {
-					prnMsg( _('The offer for').' '.$LineItems->StockID.' '._('could not be inserted into the database'), 'error');
+					prnMsg( _('The offer for').' '.$LineItems->StockID.' '._('could not be updated in the database'), 'error');
 					include('includes/footer.inc');
 					exit;
 				}
@@ -98,9 +131,9 @@ Class Offer {
 	}
 
 	function EmailOffer() {
-		$Subject=(_('Offer received from').' '.$this->SupplierID);
+		$Subject=(_('Offer received from').' '.$this->GetSupplierName());
 		$Message=(_('This email is automatically generated by webERP')."\n" .
-			_('You have received the following offer from').' '.$this->SupplierID."\n\n".$this->OfferMailText);
+			_('You have received the following offer from').' '.$this->GetSupplierName()."\n\n".$this->OfferMailText);
 		$Headers = 'From: '. $this->GetSupplierEmail() . "\r\n" . 'Reply-To: ' . $this->GetSupplierEmail() . "\r\n" . 'X-Mailer: PHP/' . phpversion();
 		$result = mail($_SESSION['PurchasingManagerEmail'], $Subject, $Message, $Headers);
 		return $result;

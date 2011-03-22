@@ -56,9 +56,8 @@ if (isset($_POST['Process'])) {
 	if (isset($_SESSION['offer'])) {
 		unset($_SESSION['offer']);
 	}
-	$_SESSION['offer']=new Offer;
+	$_SESSION['offer']=new Offer($_POST['SupplierID']);
 	$_SESSION['offer']->TenderID=$_POST['Tender'];
-	$_SESSION['offer']->SupplierID=$_POST['SupplierID'];
 	$_SESSION['offer']->CurrCode=$Currency;
 	$LineNo=0;
 	foreach ($_POST as $key=>$value) {
@@ -212,7 +211,6 @@ if (isset($_POST['Refresh']) and !isset($_POST['NewItem'])) {
 }
 
 if (isset($_POST['Update'])) {
-	$MailText='';
 	foreach ($_POST as $key => $value) {
 		if (substr($key,0,3)=='qty') {
 			$LineNo=substr($key,3);
@@ -233,25 +231,9 @@ if (isset($_POST['Update'])) {
 			unset($ExpiryDate);
 		}
 	}
-	foreach ($_SESSION['offer']->LineItems as $LineItems) {
-		$sql="UPDATE offers SET
-				quantity='".$LineItems->Quantity."',
-				price='".$LineItems->Price."',
-				expirydate='".FormatDateForSQL($LineItems->ExpiryDate)."'
-			WHERE offerid='".$LineItems->LineNo . "'";
-		$ErrMsg =  _('The suppliers offer could not be updated on the database because');
-		$DbgMsg = _('The SQL statement used to update the suppliers offer record and failed was');
-		$result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
-		if (DB_error_no($db)==0) {
-			prnMsg( _('The offer for').' '.$LineItems->StockID.' '._('has been updated in the database'), 'success');
-			$MailText .= $LineItems->Quantity.$LineItems->Units.' '._('of').' '.$LineItems->StockID.' '._('at a price of').
-				' '.$Currency.$LineItems->Price."\n";
-		} else {
-			prnMsg( _('The offer for').' '.$LineItems->StockID.' '._('could not be updated in the database'), 'error');
-			include('includes/footer.inc');
-			exit;
-		}
-	}
+	$_SESSION['offer']->Save($db, 'Yes');
+	$_SESSION['offer']->EmailOffer();
+	unset($_SESSION['offer']);
 	include('includes/footer.inc');
 	exit;
 }
@@ -279,6 +261,7 @@ if (isset($_POST['Save'])) {
 	}
 	$_SESSION['offer']->Save($db);
 	$_SESSION['offer']->EmailOffer();
+	unset($_SESSION['offer']);
 	include('includes/footer.inc');
 	exit;
 }
@@ -299,8 +282,7 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==1 and !isset($_POST['R
 				ON offers.stockid=stockmaster.stockid
 			WHERE offers.supplierid='".$_POST['SupplierID']."'";
 	$result=DB_query($sql, $db);
-	$_SESSION['offer']=new Offer();
-	$_SESSION['offer']->SupplierID=$_POST['SupplierID'];
+	$_SESSION['offer']=new Offer($_POST['SupplierID']);
 	$_SESSION['offer']->CurrCode=$Currency;
 	while ($myrow=DB_fetch_array($result)) {
 		$_SESSION['offer']->add_to_offer(
@@ -370,8 +352,7 @@ if ($_POST['TenderType']!=3 and isset($_SESSION['offer']) and $_SESSION['offer']
  */
 if (isset($_POST['TenderType']) and $_POST['TenderType']==2 and !isset($_POST['Search']) or isset($_GET['Delete'])) {
 	if (!isset($_SESSION['offer'])) {
-		$_SESSION['offer']=new Offer();
-		$_SESSION['offer']->SupplierID=$_POST['SupplierID'];
+		$_SESSION['offer']=new Offer($_POST['SupplierID']);
 	}
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
