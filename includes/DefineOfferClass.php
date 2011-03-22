@@ -7,47 +7,12 @@
 Class Offer {
 
 	var $LineItems; /*array of objects of class LineDetails using the product id as the pointer */
+	var $TenderID;
 	var $CurrCode;
-	var $ExRate;
-	var $Initiator;
-	var $deliverydate;
-	var $RequisitionNo;
-	var $DelAdd1;
-	var $DelAdd2;
-	var $DelAdd3;
-	var $DelAdd4;
-	var $DelAdd5;
-	var $DelAdd6;
-	var $tel;
-	var $suppDelAdd1;
-	var $suppDelAdd2;
-	var $suppDelAdd3;
-	var $suppDelAdd4;
-	var $suppDelAdd5;
-	var $suppDelAdd6;
-	var $SupplierContact;
-	var $supptel;
-	var $Comments;
 	var $Location;
-	var $Managed;
 	var $SupplierID;
-	var $SupplierName;
-	var $Orig_OrderDate;
-	var $OrderNo; /*Only used for modification of existing orders otherwise only established when order committed */
 	var $LinesOnOffer;
-	var $PrintedPurchaseOrder;
-	var $DatePurchaseOrderPrinted;
-	var $total;
-	var $GLLink; /*Is the GL link to stock activated only checked when order initiated or reading in for modification */
 	var $version;
-	var $Stat;
-	var $StatComments;
-	var $AllowPrintPO;
-	var $revised;
-	var $deliveryby;
-	var $paymentterms;
-	var $contact;
-	var $port;
 
 	function Offer(){
 	/*Constructor function initialises a new purchase offer object */
@@ -80,6 +45,45 @@ Class Offer {
 			Return 1;
 		}
 		Return 0;
+	}
+
+	function Save($db) {
+		$MailText='';
+		foreach ($this->LineItems as $LineItems) {
+			if ($LineItems->Deleted==False) {
+				$sql="INSERT INTO offers (
+						supplierid,
+						tenderid,
+						stockid,
+						quantity,
+						uom,
+						price,
+						expirydate,
+						currcode)
+					VALUES (
+						'".$this->SupplierID."',
+						'".$this->TenderID."',
+						'".$LineItems->StockID."',
+						'".$LineItems->Quantity."',
+						'".$LineItems->Units."',
+						'".$LineItems->Price."',
+						'".FormatDateForSQL($LineItems->ExpiryDate)."',
+						'".$this->CurrCode."'
+					)";
+				$ErrMsg =  _('The suppliers offer could not be inserted into the database because');
+				$DbgMsg = _('The SQL statement used to insert the suppliers offer record and failed was');
+				$result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
+				if (DB_error_no($db)==0) {
+					prnMsg( _('The offer for').' '.$LineItems->StockID.' '._('has been inserted into the database'), 'success');
+					$MailText .= $LineItems->Quantity.$LineItems->Units.' '._('of').' '.$LineItems->StockID.' '._('at a price of').
+						' '.$this->CurrCode.number_format($LineItems->Price,2)."\n";
+				} else {
+					prnMsg( _('The offer for').' '.$LineItems->StockID.' '._('could not be inserted into the database'), 'error');
+					include('includes/footer.inc');
+					exit;
+				}
+			}
+		}
 	}
 
 	function update_offer_item($LineNo,
