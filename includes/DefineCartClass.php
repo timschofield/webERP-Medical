@@ -75,7 +75,8 @@ Class Cart {
 							$Descr,
 							$Price,
 							$Disc=0,
-							$UOM,
+							$Units,
+							$ConversionFactor=1,
 							$Volume,
 							$Weight,
 							$QOHatLoc=0,
@@ -114,7 +115,8 @@ Class Cart {
 															$Qty,
 															$Price,
 															$Disc,
-															$UOM,
+															$Units,
+															$ConversionFactor,
 															$Volume,
 															$Weight,
 															$QOHatLoc,
@@ -150,17 +152,21 @@ Class Cart {
 																						stkcode,
 																						quantity,
 																						unitprice,
+																						units,
+																						conversionfactor,
 																						discountpercent,
 																						itemdue,
 																						poline)
-																					VALUES(" . $this->LineCounter . ",
-																						" . $_SESSION['ExistingOrder'] . ",
+																					VALUES('" . $this->LineCounter . "',
+																						'" . $_SESSION['ExistingOrder'] . "',
 																						'" . trim(strtoupper($StockID)) ."',
-																						" . $Qty . ",
-																						" . $Price . ",
-																						" . $Disc . ",'
-																						" . $ItemDue . "',
-																						" . $POLine . ")";
+																						'" . $Qty . "',
+																						'" . $Price . "',
+																						'" . $Units . "',
+																						'" . $ConversionFactor . "',
+																						'" . $Disc . "',
+																						'" . $ItemDue . "',
+																						'" . $POLine . "')";
 				$result = DB_query($sql,
 							$db ,
 							_('The order line for') . ' ' . strtoupper($StockID) . ' ' ._('could not be inserted'));
@@ -175,6 +181,8 @@ Class Cart {
 	function update_cart_item( $UpdateLineNumber,
 														$Qty,
 														$Price,
+														$Units,
+														$ConversionFactor=1,
 														$Disc,
 														$Narrative,
 														$UpdateDB='No',
@@ -186,6 +194,8 @@ Class Cart {
 			$this->LineItems[$UpdateLineNumber]->Quantity = $Qty;
 		}
 		$this->LineItems[$UpdateLineNumber]->Price = $Price;
+		$this->LineItems[$UpdateLineNumber]->Units = $Units;
+		$this->LineItems[$UpdateLineNumber]->ConversionFactor = $ConversionFactor;
 		$this->LineItems[$UpdateLineNumber]->DiscountPercent = $Disc;
 		$this->LineItems[$UpdateLineNumber]->Narrative = $Narrative;
 		$this->LineItems[$UpdateLineNumber]->ItemDue = $ItemDue;
@@ -193,14 +203,16 @@ Class Cart {
 		$this->LineItems[$UpdateLineNumber]->GPPercent = $GPPercent;
 		if ($UpdateDB=='Yes'){
 			global $db;
-			$result = DB_query("UPDATE salesorderdetails SET quantity=" . $Qty . ",
-																										unitprice=" . $Price . ",
-																										discountpercent=" . $Disc . ",
+			$result = DB_query("UPDATE salesorderdetails SET quantity='" . $Qty . "',
+																										unitprice='" . $Price . "',
+																										units='" . $Units . "',
+																										conversionfactor='" . $ConversionFactor . "',
+																										discountpercent='" . $Disc . "',
 																										narrative ='" . DB_escape_string($Narrative) . "',
 																										itemdue = '" . FormatDateForSQL($ItemDue) . "',
 																										poline = '" . DB_escape_string($POLine) . "'
-														WHERE orderno=" . $_SESSION['ExistingOrder'] . "
-														AND orderlineno=" . $UpdateLineNumber
+														WHERE orderno='" . $_SESSION['ExistingOrder'] . "'
+														AND orderlineno='" . $UpdateLineNumber . "'"
 													, $db
 				, _('The order line number') . ' ' . $UpdateLineNumber .  ' ' . _('could not be updated'));
 		}
@@ -413,6 +425,7 @@ Class LineDetails {
 	Var $Price;
 	Var $DiscountPercent;
 	Var $Units;
+	var $ConversionFactor;
 	Var $Volume;
 	Var $Weight;
 	Var $ActDispDate;
@@ -442,7 +455,8 @@ Class LineDetails {
 							$Qty,
 							$Prc,
 							$DiscPercent,
-							$UOM,
+							$Units,
+							$ConversionFactor,
 							$Volume,
 							$Weight,
 							$QOHatLoc,
@@ -469,7 +483,8 @@ Class LineDetails {
 		$this->Quantity = $Qty;
 		$this->Price = $Prc;
 		$this->DiscountPercent = $DiscPercent;
-		$this->Units = $UOM;
+		$this->Units = $Units;
+		$this->ConversionFactor = $ConversionFactor;
 		$this->Volume = $Volume;
 		$this->Weight = $Weight;
 		$this->ActDispDate = $ActDispatchDate;

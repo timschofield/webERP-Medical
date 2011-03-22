@@ -14,7 +14,7 @@ if (!isset($mysqlport)){
 	$mysqlport = 3306;
 }
 $db = mysqli_connect($host , $dbuser, $dbpassword,$_SESSION['DatabaseName'], $mysqlport);
-
+//$result=DB_query("SET sql_mode = ONLY_FULL_GROUP_BY", $db);
 //printf("tried making mysql-i Connection.\n");
 //$varabc =  mysqli_client_encoding($db);
 //printf("client encoding is %s\n", $varabc);

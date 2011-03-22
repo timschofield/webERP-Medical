@@ -24,13 +24,13 @@ if (count($_SESSION['Items'.$identifier]->LineItems)>0 AND $_SESSION['SO_AllowSa
 		if (strcasecmp($OrderItem->StockID, $NewItem)==0) {
 			$AlreadyOnThisOrder = 1;
 			prnMsg(_('The item') . ' ' . $NewItem . ' ' . _('is already on this order the system is set up to prevent the same item being on the order more than once. However you can change the quantity ordered of the existing line if necessary'));
-       		}
+	   		}
 	} /* end of the foreach loop to look for preexisting items of the same code */
 }
 
 if ($AlreadyOnThisOrder!=1){
 
-    $sql = "SELECT stockmaster.description,
+	$sql = "SELECT stockmaster.description,
 				stockmaster.stockid,
 				stockmaster.units,
 				stockmaster.volume,
@@ -50,16 +50,16 @@ if ($AlreadyOnThisOrder!=1){
 			WHERE locstock.loccode='" . $_SESSION['Items'.$identifier]->Location . "'
 			AND stockmaster.stockid = '". $NewItem . "'";
 
-    $ErrMsg = _('The details for') . ' ' . $NewItem . ' ' . _('could not be retrieved because');
-    $DbgMsg = _('The SQL used to retrieve the pricing details but failed was');
-    $result1 = DB_query($sql,$db,$ErrMsg,$DbgMsg);
+	$ErrMsg = _('The details for') . ' ' . $NewItem . ' ' . _('could not be retrieved because');
+	$DbgMsg = _('The SQL used to retrieve the pricing details but failed was');
+	$result1 = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
-    if (DB_num_rows($result1)==0){
+	if (DB_num_rows($result1)==0){
 		prnMsg(_('The item code') . ' ' . $NewItem  . ' '  . _('could not be found in the database') . ' - ' . _('it has not been added to the order'),'warn',_('Item Does Not Exist'));
 
-    } elseif ($myItemRow = DB_fetch_array($result1)){
+	} elseif ($myItemRow = DB_fetch_array($result1)){
 
-    	if ($myItemRow['discontinued']==1){
+		if ($myItemRow['discontinued']==1){
 			prnMsg(_('The item') . ' ' . $NewItem . ' ' . _('could not be added to the order because it has been flagged as obsolete'),'error',_('Obsolete Item'));
 
 		} elseif (($_SESSION['AllowSalesOfZeroCostItems'] == false
@@ -113,8 +113,8 @@ if ($AlreadyOnThisOrder!=1){
 
 			if (!isset($_SESSION['WarnOnce']) and $_SESSION['Items'.$identifier]->SpecialInstructions) {
 			  	prnMsg($_SESSION['Items'.$identifier]->SpecialInstructions,'warn');
-		       	$WarnOnce=1;
-            }
+			   	$WarnOnce=1;
+			}
 			if ($_SESSION['CheckCreditLimits'] > 0){  /*Check credit limits is 1 for warn
 											and 2 for prohibit sales */
 				$_SESSION['Items'.$identifier]->CreditAvailable -= round(($NewItemQty * $Price * (1- $Discount)),2);
@@ -158,9 +158,9 @@ if ($AlreadyOnThisOrder!=1){
 															$ExRate);
 
 			}
-         } else {
+		 } else {
 			prnMsg(_('The item code') . ' ' . $NewItem . ' ' . _('does not have a cost set up and order entry is set up to prohibit sales of items with no cost data entered'),'warn');
-	     }
+		 }
 	}
 } /* end of if not already on the order */
 ?>

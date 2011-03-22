@@ -763,26 +763,51 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			if ($_POST['StockCat']=='All'){
 				$SQL = "SELECT stockmaster.stockid,
 								stockmaster.description,
-								stockmaster.units
-						FROM stockmaster,
-								stockcategory
+								stockmaster.units as stockunits,
+								prices.units as customerunits,
+								prices.conversionfactor,
+								prices.price,
+								prices.currabrev
+						FROM stockmaster
+						LEFT JOIN prices
+							ON stockmaster.stockid=prices.stockid,
+							stockcategory
 						WHERE stockmaster.categoryid=stockcategory.categoryid
 						AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 						AND stockmaster.mbflag <>'G'
 						AND stockmaster.description " . LIKE . " '$SearchString'
 						AND stockmaster.discontinued=0
+						AND ((prices.debtorno='".$_SESSION['Items'.$identifier]->DebtorNo."')
+						OR (prices.debtorno='' AND (SELECT COUNT(stockid) from prices where debtorno='".$_SESSION['Items'.$identifier]->DebtorNo.
+							"' AND stockid=stockmaster.stockid)=0 AND prices.currabrev='".$_SESSION['Items'.$identifier]->DefaultCurrency."')
+						OR (prices.debtorno is NULL OR (prices.debtorno='' AND prices.currabrev<>'".$_SESSION['Items'.$identifier]->DefaultCurrency."')
+							AND (SELECT COUNT(stockid) from prices where debtorno='".$_SESSION['Items'.$identifier]->DebtorNo.
+							"' AND stockid=stockmaster.stockid)=0))
 						ORDER BY stockmaster.stockid";
 			} else {
 				$SQL = "SELECT stockmaster.stockid,
 								stockmaster.description,
-								stockmaster.units
-						FROM stockmaster, stockcategory
+								stockmaster.units as stockunits,
+								prices.units as customerunits,
+								prices.conversionfactor,
+								prices.price,
+								prices.currabrev
+						FROM stockmaster
+						LEFT JOIN prices
+							ON stockmaster.stockid=prices.stockid,
+							stockcategory
 						WHERE  stockmaster.categoryid=stockcategory.categoryid
 						AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 						AND stockmaster.mbflag <>'G'
 						AND stockmaster.discontinued=0
 						AND stockmaster.description " . LIKE . " '" . $SearchString . "'
 						AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
+						AND ((prices.debtorno='".$_SESSION['Items'.$identifier]->DebtorNo."')
+						OR (prices.debtorno='' AND (SELECT COUNT(stockid) from prices where debtorno='".$_SESSION['Items'.$identifier]->DebtorNo.
+							"' AND stockid=stockmaster.stockid)=0 AND prices.currabrev='".$_SESSION['Items'.$identifier]->DefaultCurrency."')
+						OR (prices.debtorno is NULL OR (prices.debtorno='' AND prices.currabrev<>'".$_SESSION['Items'.$identifier]->DefaultCurrency."')
+							AND (SELECT COUNT(stockid) from prices where debtorno='".$_SESSION['Items'.$identifier]->DebtorNo.
+							"' AND stockid=stockmaster.stockid)=0))
 						ORDER BY stockmaster.stockid";
 			}
 
@@ -794,25 +819,51 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			if ($_POST['StockCat']=='All'){
 				$SQL = "SELECT stockmaster.stockid,
 								stockmaster.description,
-								stockmaster.units
-						FROM stockmaster, stockcategory
+								stockmaster.units as stockunits,
+								prices.units as customerunits,
+								prices.conversionfactor,
+								prices.price,
+								prices.currabrev
+						FROM stockmaster
+						LEFT JOIN prices
+							ON stockmaster.stockid=prices.stockid,
+							stockcategory
 						WHERE stockmaster.categoryid=stockcategory.categoryid
 						AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 						AND stockmaster.stockid " . LIKE . " '" . $SearchString . "'
 						AND stockmaster.mbflag <>'G'
 						AND stockmaster.discontinued=0
+						AND ((prices.debtorno='".$_SESSION['Items'.$identifier]->DebtorNo."')
+						OR (prices.debtorno='' AND (SELECT COUNT(stockid) from prices where debtorno='".$_SESSION['Items'.$identifier]->DebtorNo.
+							"' AND stockid=stockmaster.stockid)=0 AND prices.currabrev='".$_SESSION['Items'.$identifier]->DefaultCurrency."')
+						OR (prices.debtorno is NULL OR (prices.debtorno='' AND prices.currabrev<>'".$_SESSION['Items'.$identifier]->DefaultCurrency."')
+							AND (SELECT COUNT(stockid) from prices where debtorno='".$_SESSION['Items'.$identifier]->DebtorNo.
+							"' AND stockid=stockmaster.stockid)=0))
 						ORDER BY stockmaster.stockid";
 			} else {
 				$SQL = "SELECT stockmaster.stockid,
 								stockmaster.description,
-								stockmaster.units
-						FROM stockmaster, stockcategory
+								stockmaster.units as stockunits,
+								prices.units as customerunits,
+								prices.conversionfactor,
+								prices.price,
+								prices.currabrev
+						FROM stockmaster
+						LEFT JOIN prices
+							ON stockmaster.stockid=prices.stockid,
+							stockcategory
 						WHERE stockmaster.categoryid=stockcategory.categoryid
 						AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 						AND stockmaster.stockid " . LIKE . " '" . $SearchString . "'
 						AND stockmaster.mbflag <>'G'
 						AND stockmaster.discontinued=0
 						AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
+						AND ((prices.debtorno='".$_SESSION['Items'.$identifier]->DebtorNo."')
+						OR (prices.debtorno='' AND (SELECT COUNT(stockid) from prices where debtorno='".$_SESSION['Items'.$identifier]->DebtorNo.
+							"' AND stockid=stockmaster.stockid)=0 AND prices.currabrev='".$_SESSION['Items'.$identifier]->DefaultCurrency."')
+						OR (prices.debtorno is NULL OR (prices.debtorno='' AND prices.currabrev<>'".$_SESSION['Items'.$identifier]->DefaultCurrency."')
+							AND (SELECT COUNT(stockid) from prices where debtorno='".$_SESSION['Items'.$identifier]->DebtorNo.
+							"' AND stockid=stockmaster.stockid)=0))
 						ORDER BY stockmaster.stockid";
 			}
 
@@ -820,23 +871,50 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			if ($_POST['StockCat']=='All'){
 				$SQL = "SELECT stockmaster.stockid,
 								stockmaster.description,
-								stockmaster.units
-						FROM stockmaster, stockcategory
+								stockmaster.units as stockunits,
+								prices.debtorno,
+								prices.units as customerunits,
+								prices.conversionfactor,
+								prices.price,
+								prices.currabrev
+						FROM stockmaster
+						LEFT JOIN prices
+							ON stockmaster.stockid=prices.stockid,
+							stockcategory
 						WHERE  stockmaster.categoryid=stockcategory.categoryid
 						AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 						AND stockmaster.mbflag <>'G'
 						AND stockmaster.discontinued=0
+						AND ((prices.debtorno='".$_SESSION['Items'.$identifier]->DebtorNo."')
+						OR (prices.debtorno='' AND (SELECT COUNT(stockid) from prices where debtorno='".$_SESSION['Items'.$identifier]->DebtorNo.
+							"' AND stockid=stockmaster.stockid)=0 AND prices.currabrev='".$_SESSION['Items'.$identifier]->DefaultCurrency."')
+						OR (prices.debtorno is NULL OR (prices.debtorno='' AND prices.currabrev<>'".$_SESSION['Items'.$identifier]->DefaultCurrency."')
+							AND (SELECT COUNT(stockid) from prices where debtorno='".$_SESSION['Items'.$identifier]->DebtorNo.
+							"' AND stockid=stockmaster.stockid)=0))
 						ORDER BY stockmaster.stockid";
 			} else {
 				$SQL = "SELECT stockmaster.stockid,
 								stockmaster.description,
-								stockmaster.units
-						FROM stockmaster, stockcategory
+								stockmaster.units as stockunits,
+								prices.units as customerunits,
+								prices.conversionfactor,
+								prices.price,
+								prices.currabrev
+						FROM stockmaster
+						LEFT JOIN prices
+							ON stockmaster.stockid=prices.stockid,
+							stockcategory
 						WHERE stockmaster.categoryid=stockcategory.categoryid
 						AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 						AND stockmaster.mbflag <>'G'
 						AND stockmaster.discontinued=0
 						AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
+						AND ((prices.debtorno='".$_SESSION['Items'.$identifier]->DebtorNo."')
+						OR (prices.debtorno='' AND (SELECT COUNT(stockid) from prices where debtorno='".$_SESSION['Items'.$identifier]->DebtorNo.
+							"' AND stockid=stockmaster.stockid)=0 AND prices.currabrev='".$_SESSION['Items'.$identifier]->DefaultCurrency."')
+						OR (prices.debtorno is NULL OR (prices.debtorno='' AND prices.currabrev<>'".$_SESSION['Items'.$identifier]->DefaultCurrency."')
+							AND (SELECT COUNT(stockid) from prices where debtorno='".$_SESSION['Items'.$identifier]->DebtorNo.
+							"' AND stockid=stockmaster.stockid)=0))
 						ORDER BY stockmaster.stockid";
 			  }
 		}
@@ -1438,7 +1516,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 								<th>' . _('On Demand') . '</th>
 								<th>' . _('On Order') . '</th>
 								<th>' . _('Available') . '</th>
-								<th>' . _('Quantity') . '</th></tr>';
+								<th>' . _('Quantity') . '</th>
+								<th>' . _('Price') . '</th></tr>';
 			echo $TableHeader;
 			$j = 1;
 			$k=0; //row colour counter
@@ -1447,15 +1526,20 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 // This code needs sorting out, but until then :
 				$ImageSource = _('No Image');
 // Find the quantity in stock at location
-				$QOHSQL = "SELECT sum(locstock.quantity) AS qoh,
-													stockmaster.decimalplaces
-									   FROM locstock INNER JOIN stockmaster
-									   ON locstock.stockid=stockmaster.stockid
+				$DecimalPlacesSQL="SELECT decimalplaces
+									FROM stockmaster
+									WHERE stockid='" .$myrow['stockid'] . "'";
+				$DecimalPlacesResult = DB_query($DecimalPlacesSQL, $db);
+				$DecimalPlacesRow = DB_fetch_array($DecimalPlacesResult);
+				$DecimalPlaces = $DecimalPlacesRow['decimalplaces'];
+
+				$QOHSQL = "SELECT sum(locstock.quantity) AS qoh
+									   FROM locstock
 									   WHERE locstock.stockid='" .$myrow['stockid'] . "' AND
 									   loccode = '" . $_SESSION['Items'.$identifier]->Location . "'";
 				$QOHResult =  DB_query($QOHSQL,$db);
 				$QOHRow = DB_fetch_array($QOHResult);
-				$QOH = $QOHRow['qoh'];
+				$QOH = $QOHRow['qoh']*$myrow['conversionfactor'];
 
 				// Find the quantity on outstanding sales orders
 				$sql = "SELECT SUM(salesorderdetails.quantity-salesorderdetails.qtyinvoiced) AS dem
@@ -1532,10 +1616,10 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 							$myrow['stockid'],
 							$myrow['description'],
 							$myrow['units'],
-							number_format($QOH, $QOHRow['decimalplaces']),
-							number_format($DemandQty, $QOHRow['decimalplaces']),
-							number_format($OnOrder, $QOHRow['decimalplaces']),
-							number_format($Available, $QOHRow['decimalplaces']),
+							number_format($QOH, $DecimalPlaces),
+							number_format($DemandQty, $DecimalPlaces),
+							number_format($OnOrder, $DecimalPlaces),
+							number_format($Available, $DecimalPlaces),
 							$ImageSource,
 							$rootpath,
 							SID,
@@ -1622,24 +1706,32 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 										   			<th>' . _('On Demand') . '</th>
 										   			<th>' . _('On Order') . '</th>
 										   			<th>' . _('Available') . '</th>
-										   			<th>' . _('Quantity') . '</th></tr>';
+										   			<th>' . _('Quantity') . '</th>
+										   			<th>' . _('Price') . '</th></tr>';
 			echo $TableHeader;
 			$ImageSource = _('No Image');
 
 			$k=0; //row colour counter
 
 			while ($myrow=DB_fetch_array($SearchResult)) {
-
+				if ($myrow['conversionfactor']=='') {
+					$myrow['conversionfactor']=1;
+				}
 				// Find the quantity in stock at location
-				$QOHSQL = "SELECT sum(quantity) AS qoh,
-													stockmaster.decimalplaces
-									   FROM locstock INNER JOIN stockmaster
-									   ON locstock.stockid = stockmaster.stockid
+				$DecimalPlacesSQL="SELECT decimalplaces
+									FROM stockmaster
+									WHERE stockid='" .$myrow['stockid'] . "'";
+				$DecimalPlacesResult = DB_query($DecimalPlacesSQL, $db);
+				$DecimalPlacesRow = DB_fetch_array($DecimalPlacesResult);
+				$DecimalPlaces = $DecimalPlacesRow['decimalplaces'];
+
+				$QOHSQL = "SELECT sum(locstock.quantity) AS qoh
+									   FROM locstock
 									   WHERE locstock.stockid='" .$myrow['stockid'] . "' AND
 									   loccode = '" . $_SESSION['Items'.$identifier]->Location . "'";
 				$QOHResult =  DB_query($QOHSQL,$db);
 				$QOHRow = DB_fetch_array($QOHResult);
-				$QOH = $QOHRow['qoh'];
+				$QOH = $QOHRow['qoh']*$myrow['conversionfactor'];
 
 				// Find the quantity on outstanding sales orders
 				$sql = "SELECT SUM(salesorderdetails.quantity-salesorderdetails.qtyinvoiced) AS dem
@@ -1663,7 +1755,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 				// Find the quantity on purchase orders
 				$sql = "SELECT SUM(purchorderdetails.quantityord-purchorderdetails.quantityrecd) AS dem
-							 FROM purchorderdetails INNER JOIN purchorders
+							 FROM purchorderdetails LEFT JOIN purchorders
+								ON purchorderdetails.orderno=purchorders.orderno
 							 WHERE purchorderdetails.completed=0
 							 AND purchorders.status<>'Cancelled'
 							 AND purchorders.status<>'Rejected'
@@ -1701,29 +1794,26 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 					$k=1;
 				}
 				$OnOrder = $PurchQty + $WoQty;
-				$Available = $QOH - $DemandQty + $OnOrder;
-
-				printf('<td>%s</font></td>
-							<td>%s</td>
-							<td>%s</td>
-							<td class="number">%s</td>
-							<td class="number">%s</td>
-							<td class="number">%s</td>
-							<td class="number">%s</td>
+				$Available = $QOH - $DemandQty + $OnOrder*$myrow['conversionfactor'];
+				if ($myrow['customerunits']=='') {
+					$myrow['units']=$myrow['stockunits'];
+				} else {
+					$myrow['units']=$myrow['customerunits'];
+				}
+				if ($myrow['currabrev']<>$_SESSION['Items'.$identifier]->DefaultCurrency) {
+					$myrow['price']=0;
+				}
+				echo '<td>'.$myrow['stockid'].'</font></td>
+							<td>'.$myrow['description'].'</td>
+							<td>'.$myrow['units'].'</td>
+							<td class="number">'.number_format($QOH,$DecimalPlaces).'</td>
+							<td class="number">'.number_format($DemandQty,$DecimalPlaces).'</td>
+							<td class="number">'.number_format($OnOrder*$myrow['conversionfactor'],$DecimalPlaces).'</td>
+							<td class="number">'.number_format($Available,$DecimalPlaces).'</td>
 							<td><font size=1><input class="number"  tabindex='.number_format($j+7).' type="textbox" size=6 name="itm'.$myrow['stockid'].'" value=0>
+							<td class="number">'.number_format($myrow['price'],2).'</td>
 							</td>
-							</tr>',
-							$myrow['stockid'],
-							$myrow['description'],
-							$myrow['units'],
-							number_format($QOH,$QOHRow['decimalplaces']),
-							number_format($DemandQty,$QOHRow['decimalplaces']),
-							number_format($OnOrder,$QOHRow['decimalplaces']),
-							number_format($Available,$QOHRow['decimalplaces']),
-							$ImageSource,
-							$rootpath,
-							SID,
-							$myrow['stockid']);
+							</tr>';
 				if ($j==1) {
 					$jsCall = '<script  type="text/javascript">if (document.SelectParts) {defaultControl(document.SelectParts.itm'.$myrow['stockid'].');}</script>';
 				}
