@@ -214,25 +214,6 @@ if (!isset($_SESSION['tender']) or isset($_POST['LookupDeliveryAddress']) or $Sh
 	echo '<tr><td>' . _('Delivery Must Be Made Before') . '</td>';
 	echo '<td><input type="text" class="date" alt="' .$_SESSION['DefaultDateFormat'] . '" name="RequiredByDate" size="11" value="' .
 		date($_SESSION['DefaultDateFormat']) . '" /></td></tr>';
-	echo '<tr><td>' . _('Warehouse') . ':</td>
-			<td><select name=StkLocation onChange="ReloadForm(form1.LookupDeliveryAddress)">';
-
-	$sql = "SELECT loccode,
-					locationname
-					FROM locations";
-	$LocnResult = DB_query($sql,$db);
-
-	while ($LocnRow=DB_fetch_array($LocnResult)){
-		if ((isset($_SESSION['tender']->Location) and $_SESSION['tender']->Location == $LocnRow['loccode'])){
-			echo '<option selected value="' . $LocnRow['loccode'] . '">' . $LocnRow['locationname'] . '</option>';
-		} else {
-			echo '<option value="' . $LocnRow['loccode'] . '">' . $LocnRow['locationname'] . '</option>';
-		}
-	}
-
-	echo '</select>
-		<input type="submit" name="LookupDeliveryAddress" value="' ._('Select') . '"></td>
-		</tr>';
 
 	if (!isset($_POST['StkLocation']) OR $_POST['StkLocation']==''){
 	/* If this is the first time
@@ -316,6 +297,25 @@ if (!isset($_SESSION['tender']) or isset($_POST['LookupDeliveryAddress']) or $Sh
 			$_SESSION['tender']->Contact = $_POST['Contact'];
 		}
 	}
+	echo '<tr><td>' . _('Warehouse') . ':</td>
+			<td><select name=StkLocation onChange="ReloadForm(form1.LookupDeliveryAddress)">';
+
+	$sql = "SELECT loccode,
+					locationname
+					FROM locations";
+	$LocnResult = DB_query($sql,$db);
+
+	while ($LocnRow=DB_fetch_array($LocnResult)){
+		if ((isset($_SESSION['tender']->Location) and $_SESSION['tender']->Location == $LocnRow['loccode'])){
+			echo '<option selected value="' . $LocnRow['loccode'] . '">' . $LocnRow['locationname'] . '</option>';
+		} else {
+			echo '<option value="' . $LocnRow['loccode'] . '">' . $LocnRow['locationname'] . '</option>';
+		}
+	}
+
+	echo '</select>
+		<input type="submit" name="LookupDeliveryAddress" value="' ._('Select') . '"></td>
+		</tr>';
 
 	/* Display the details of the delivery location
 	 */
