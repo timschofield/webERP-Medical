@@ -314,7 +314,6 @@ if ($_POST['Select'] != '' OR ($_SESSION['CustomerID'] != '' AND !isset($_POST['
 }
 echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-
 if (strlen($msg)>1){
    prnMsg($msg, 'info');
 }
