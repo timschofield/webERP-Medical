@@ -1,6 +1,8 @@
 <?php
-/* $Id:  $*/
-$PageSecurity = 15;
+/* $Id UpgradeDatabase.php 4183 2010-12-14 09:30:20Z daintree $ */
+
+$PageSecurity = 15; //hard coded in case database is old and PageSecurity stuff cannot be retrieved
+
 include('includes/session.inc');
 $title = _('Upgrade webERP Database');
 include('includes/header.inc');
@@ -27,10 +29,10 @@ if (!isset($_POST['DoUpgrade'])){
 		echo '<option value="3.08">' . _('Version 3.08') . '</option>';
 		echo '<option value="3.09">' . _('Version 3.09') . '</option>';
 		echo '<option value="3.10">' . _('Version 3.10') . '</option>';
-		echo '<option value="3.11">' . _('Version 3.11') . '</option>';
+		echo '<option value="3.11">' . _('Version 3.11 or 4.01 - 4.02') . '</option>';
 		echo '</select></td></tr></table>';
 	} else {
-		if ($_SESSION['VersionNumber']=='4.00-RC1'){
+		if ($_SESSION['VersionNumber']=='4.00RC1'){
 			$_SESSION['VersionNumber']='3.12';
 		}
 		prnMsg(_('The webERP code is version')  . ' ' . $Version . ' ' . _('and the database version is') . ' ' . $_SESSION['VersionNumber'],'info');
@@ -46,7 +48,7 @@ if (isset($_POST['DoUpgrade'])){
 	if ($dbType=='mysql' OR $dbType =='mysqli'){
 		
 		/* First do a backup */
-		$BackupFile = '.' . $PathPrefix . '/companies/' . $_SESSION['DatabaseName']  .'/' . _('Backup') . '_' . Date('Y-m-d-H-i-s') . '.gz';
+		$BackupFile =  $PathPrefix . './companies/' . $_SESSION['DatabaseName']  .'/' . _('Backup') . '_' . Date('Y-m-d-H-i-s') . '.sql.gz';
 		$Command = 'mysqldump --opt -h' . $host . ' -u' . $dbuser . ' -p' . $dbpassword  . '  ' . $_SESSION['DatabaseName'] . '| gzip > ' . $BackupFile;
 		system($Command);
 		
@@ -95,7 +97,7 @@ if (isset($_POST['DoUpgrade'])){
 					$SQLScripts[] = './sql/mysql/upgrade3.11.1-4.00.sql';
 					break;
 			} //end switch
-			if(isset($_SESSION['VersionNumber']) AND $_SESSION['VersionNumber']< '4.00') { /* VersionNumber is set to '4.00' when upgrade3.11.1-4.00.sql is run */
+			if(isset($_SESSION['VersionNumber']) AND strcmp($_SESSION['VersionNumber'],'4.04')<0) { /* VersionNumber is set to '4.04' when upgrade3.11.1-4.00.sql is run */
 				$SQLScripts[] = './sql/mysql/upgrade3.11.1-4.00.sql';
 			}
 		}	
@@ -144,6 +146,9 @@ if (isset($_POST['DoUpgrade'])){
 						case 1050:
 							echo '<td bgcolor="yellow">'._('Note').' - '. _('Table has already been created').'</td></tr>';
 							break;
+						case 1054:
+							echo '<td bgcolor="yellow">'._('Note').' - '. _('Column has already been changed').'</td></tr>';
+							break;
 						case 1060:
 							echo '<td bgcolor="yellow">'._('Note').' - '. _('Column has already been created').'</td></tr>';
 							break;
@@ -166,7 +171,7 @@ if (isset($_POST['DoUpgrade'])){
 							echo '<td bgcolor="red">'._('Failure').' - '. 	_('Error number').' - '.DB_error_no($db) .' ' . DB_error_msg($db) . '</td></tr>';
 							break;
 					}
-					unset($sql);
+					$sql='';
 				}
 			} //end if its a valid sql line not a comment
 		} //end of for loop around the lines of the sql script
