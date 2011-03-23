@@ -113,10 +113,10 @@ if (isset($_POST['submit'])) {
 		$Errors[$i] = 'AssetCategoryID';
 		$i++;
 	}
-	
-	  if (trim($_POST['AssetLocation'])==''){
+
+	if (trim($_POST['AssetLocation'])==''){
 			$InputError = 1;
-		    prnMsg(_('There are no asset locations defined. All assets must belong to a valid location,'),'error');
+			prnMsg(_('There are no asset locations defined. All assets must belong to a valid location,'),'error');
 			$Errors[$i] = 'AssetLocation';
 			$i++;
 	}
@@ -577,7 +577,7 @@ if(DB_num_rows($result)==0){
 }
 echo '<tr><td>' . _('Depreciation last run') . ':</td><td>' . $LastRunDate . '</td></tr>
 			</table>';
-			
+
 if ($New==0) {
 	echo '<div class=centre><br><input type="Submit" name="submit" value="' . _('Insert New Fixed Asset') . '">';
 
