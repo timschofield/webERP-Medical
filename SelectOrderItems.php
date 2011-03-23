@@ -1724,11 +1724,11 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			$k=0; //row colour counter
 
 			while ($myrow=DB_fetch_array($SearchResult)) {
-				if ($myrow['conversionfactor']=='') {
+				if ($myrow['conversionfactor']=='' or ($myrow['currabrev']<>$_SESSION['Items'.$identifier]->DefaultCurrency)) {
 					$myrow['conversionfactor']=1;
 				}
 				// Find the quantity in stock at location
-				if ($myrow['decimalplaces']=='') {
+				if ($myrow['decimalplaces']=='' or ($myrow['currabrev']<>$_SESSION['Items'.$identifier]->DefaultCurrency)) {
 					$DecimalPlacesSQL="SELECT decimalplaces
 										FROM stockmaster
 										WHERE stockid='" .$myrow['stockid'] . "'";
@@ -1809,7 +1809,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				}
 				$OnOrder = $PurchQty + $WoQty;
 				$Available = $QOH - $DemandQty + $OnOrder/$myrow['conversionfactor'];
-				if ($myrow['customerunits']=='') {
+				if ($myrow['customerunits']=='' or ($myrow['currabrev']<>$_SESSION['Items'.$identifier]->DefaultCurrency)) {
 					$myrow['units']=$myrow['stockunits'];
 				} else {
 					$myrow['units']=$myrow['customerunits'];
