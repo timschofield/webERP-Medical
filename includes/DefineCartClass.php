@@ -76,7 +76,6 @@ Class Cart {
 							$Price,
 							$Disc=0,
 							$Units,
-							$ConversionFactor=1,
 							$Volume,
 							$Weight,
 							$QOHatLoc=0,
@@ -97,7 +96,8 @@ Class Cart {
 							$StandardCost=0,
 							$EOQ=1,
 							$NextSerialNo=0,
-							$ExRate=1){
+							$ExRate=1,
+							$ConversionFactor=1){
 
 		if (isset($StockID) AND $StockID!="" AND $Qty>0 AND isset($Qty)){
 

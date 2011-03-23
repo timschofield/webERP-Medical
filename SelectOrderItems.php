@@ -1207,6 +1207,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 					$_SESSION['Items'.$identifier]->update_cart_item($OrderLine->LineNumber,
 										$Quantity,
 										$Price,
+										$_POST['Units_' . $OrderLine->LineNumber],
+										$_POST['ConversionFactor_' . $OrderLine->LineNumber],
 										($DiscountPercentage/100),
 										$Narrative,
 										'Yes', /*Update DB */
@@ -1419,6 +1421,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			echo '</td>
 					<td class="number">' . $OrderLine->QOHatLoc . '</td>
 					<td>' . $OrderLine->Units . '</td>';
+			echo '<input type="hidden" name="Units_'.$OrderLine->LineNumber.'" value="' . $OrderLine->Units . '" />';
+			echo '<input type="hidden" name="ConversionFactor_'.$OrderLine->LineNumber.'" value="' . $OrderLine->ConversionFactor . '" />';
 
 			if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 				/*OK to display with discount if it is an internal user with appropriate permissions */
@@ -1814,6 +1818,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 							<td class="number">'.number_format($myrow['price'],2).'</td>
 							</td>
 							</tr>';
+				echo '<input type="hidden" name="ConversionFactor'.$myrow['stockid'].'" value="' . $myrow['conversionfactor'] . '" />';
+				echo '<input type="hidden" name="Units'.$myrow['stockid'].'" value="' . $myrow['units'] . '" />';
 				if ($j==1) {
 					$jsCall = '<script  type="text/javascript">if (document.SelectParts) {defaultControl(document.SelectParts.itm'.$myrow['stockid'].');}</script>';
 				}

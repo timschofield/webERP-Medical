@@ -45,8 +45,9 @@ if ($AlreadyOnThisOrder!=1){
 				stockmaster.eoq,
 				stockmaster.nextserialno,
 				stockmaster.taxcatid
-			FROM stockmaster INNER JOIN locstock
-			ON stockmaster.stockid=locstock.stockid
+			FROM stockmaster
+			INNER JOIN locstock
+				ON stockmaster.stockid=locstock.stockid
 			WHERE locstock.loccode='" . $_SESSION['Items'.$identifier]->Location . "'
 			AND stockmaster.stockid = '". $NewItem . "'";
 
@@ -134,7 +135,7 @@ if ($AlreadyOnThisOrder!=1){
 															$myItemRow['description'],
 															$Price,
 															$Discount,
-															$myItemRow['units'],
+															$_POST['Units'.$NewItem],
 															$myItemRow['volume'],
 															$myItemRow['kgs'],
 															$myItemRow['quantity'],
@@ -155,7 +156,8 @@ if ($AlreadyOnThisOrder!=1){
 															$myItemRow['standardcost'],
 															$myItemRow['eoq'],
 															$myItemRow['nextserialno'],
-															$ExRate);
+															$ExRate,
+															$_POST['ConversionFactor'.$NewItem]);
 
 			}
 		 } else {
