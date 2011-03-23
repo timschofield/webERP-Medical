@@ -28,7 +28,7 @@ if(isset($ForceConfigReload) and $ForceConfigReload==TRUE OR !isset($_SESSION['C
 		$result=DB_query($sql, $db);
 
 		while ($myrow=DB_fetch_array($result)) {
-			$_SESSION['PageSecurity'][$myrow['script']]=$myrow['security'];
+			$_SESSION['PageSecurityArray'][$myrow['script']]=$myrow['security'];
 		}
 	} else {
 		header('Location: Z_UpgradeDatabase.php'); //divert to the db upgrade if the table doesn't exist

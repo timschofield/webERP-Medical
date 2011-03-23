@@ -115,11 +115,11 @@ if (!isset($AllowAnyone)){ /* only do security checks if AllowAnyone is not true
 /*User is logged in so get configuration parameters  - save in session*/
 include($PathPrefix . 'includes/GetConfig.php');
 
-if (isset($_SESSION['PageSecurity'][basename($_SERVER['SCRIPT_NAME'])])) {
+if (!isset($PageSecurity)) {
 	/*The page security variable is now retrieved from the database in GetConfig.php and stored in the $SESSION['PageSecurity'] array
 	 * the key for the array is the script name - the script name is retrieved from the basename ($_SERVER['SCRIPT_NAME'])
 	 */
-	$PageSecurity = $_SESSION['PageSecurity'][basename($_SERVER['SCRIPT_NAME'])];
+	$PageSecurity = $_SESSION['PageSecurityArray'][basename($_SERVER['SCRIPT_NAME'])];
 }
 
 /*If the Code $Version - held in ConnectDB.inc is > than the Database VersionNumber held in config table then do upgrades */
