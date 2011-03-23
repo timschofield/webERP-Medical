@@ -766,6 +766,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 								stockmaster.units as stockunits,
 								prices.units as customerunits,
 								prices.conversionfactor,
+								prices.decimalplaces,
 								prices.price,
 								prices.currabrev
 						FROM stockmaster
@@ -790,6 +791,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 								stockmaster.units as stockunits,
 								prices.units as customerunits,
 								prices.conversionfactor,
+								prices.decimalplaces,
 								prices.price,
 								prices.currabrev
 						FROM stockmaster
@@ -822,6 +824,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 								stockmaster.units as stockunits,
 								prices.units as customerunits,
 								prices.conversionfactor,
+								prices.decimalplaces,
 								prices.price,
 								prices.currabrev
 						FROM stockmaster
@@ -846,6 +849,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 								stockmaster.units as stockunits,
 								prices.units as customerunits,
 								prices.conversionfactor,
+								prices.decimalplaces,
 								prices.price,
 								prices.currabrev
 						FROM stockmaster
@@ -875,6 +879,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 								prices.debtorno,
 								prices.units as customerunits,
 								prices.conversionfactor,
+								prices.decimalplaces,
 								prices.price,
 								prices.currabrev
 						FROM stockmaster
@@ -898,6 +903,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 								stockmaster.units as stockunits,
 								prices.units as customerunits,
 								prices.conversionfactor,
+								prices.decimalplaces,
 								prices.price,
 								prices.currabrev
 						FROM stockmaster
@@ -1722,12 +1728,16 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 					$myrow['conversionfactor']=1;
 				}
 				// Find the quantity in stock at location
-				$DecimalPlacesSQL="SELECT decimalplaces
-									FROM stockmaster
-									WHERE stockid='" .$myrow['stockid'] . "'";
-				$DecimalPlacesResult = DB_query($DecimalPlacesSQL, $db);
-				$DecimalPlacesRow = DB_fetch_array($DecimalPlacesResult);
-				$DecimalPlaces = $DecimalPlacesRow['decimalplaces'];
+				if ($myrow['decimalplaces']=='') {
+					$DecimalPlacesSQL="SELECT decimalplaces
+										FROM stockmaster
+										WHERE stockid='" .$myrow['stockid'] . "'";
+					$DecimalPlacesResult = DB_query($DecimalPlacesSQL, $db);
+					$DecimalPlacesRow = DB_fetch_array($DecimalPlacesResult);
+					$DecimalPlaces = $DecimalPlacesRow['decimalplaces'];
+				} else {
+					$DecimalPlaces=$myrow['decimalplaces'];
+				}
 
 				$QOHSQL = "SELECT sum(locstock.quantity) AS qoh
 									   FROM locstock
@@ -1735,10 +1745,10 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 									   loccode = '" . $_SESSION['Items'.$identifier]->Location . "'";
 				$QOHResult =  DB_query($QOHSQL,$db);
 				$QOHRow = DB_fetch_array($QOHResult);
-				$QOH = $QOHRow['qoh']*$myrow['conversionfactor'];
+				$QOH = $QOHRow['qoh']/$myrow['conversionfactor'];
 
 				// Find the quantity on outstanding sales orders
-				$sql = "SELECT SUM(salesorderdetails.quantity-salesorderdetails.qtyinvoiced) AS dem
+				$sql = "SELECT SUM(salesorderdetails.quantity-salesorderdetails.qtyinvoiced)*salesorderdetails.conversionfactor AS dem
 									 FROM salesorderdetails,
 							  			salesorders
 								 WHERE salesorders.orderno = salesorderdetails.orderno AND
@@ -1752,7 +1762,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 				$DemandRow = DB_fetch_row($DemandResult);
 				if ($DemandRow[0] != null){
-				  $DemandQty =  $DemandRow[0];
+				  $DemandQty =  $DemandRow[0]/$myrow['conversionfactor'];
 				} else {
 				  $DemandQty = 0;
 				}
@@ -1798,7 +1808,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 					$k=1;
 				}
 				$OnOrder = $PurchQty + $WoQty;
-				$Available = $QOH - $DemandQty + $OnOrder*$myrow['conversionfactor'];
+				$Available = $QOH - $DemandQty + $OnOrder/$myrow['conversionfactor'];
 				if ($myrow['customerunits']=='') {
 					$myrow['units']=$myrow['stockunits'];
 				} else {
@@ -1812,7 +1822,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 							<td>'.$myrow['units'].'</td>
 							<td class="number">'.number_format($QOH,$DecimalPlaces).'</td>
 							<td class="number">'.number_format($DemandQty,$DecimalPlaces).'</td>
-							<td class="number">'.number_format($OnOrder*$myrow['conversionfactor'],$DecimalPlaces).'</td>
+							<td class="number">'.number_format($OnOrder/$myrow['conversionfactor'],$DecimalPlaces).'</td>
 							<td class="number">'.number_format($Available,$DecimalPlaces).'</td>
 							<td><font size=1><input class="number"  tabindex='.number_format($j+7).' type="textbox" size=6 name="itm'.$myrow['stockid'].'" value=0>
 							<td class="number">'.number_format($myrow['price'],2).'</td>
