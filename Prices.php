@@ -111,6 +111,7 @@ if (isset($_POST['submit'])) {
 					price='" . $_POST['Price'] . "',
 					units='" . $_POST['Units'] . "',
 					conversionfactor='" . $_POST['ConversionFactor'] . "',
+					decimalplaces='" . $_POST['DecimalPlaces'] . "',
 					startdate='" . FormatDateForSQL($_POST['StartDate']) . "',
 					enddate='" . $SQLEndDate . "'
 				WHERE prices.stockid='".$Item."'
@@ -136,6 +137,7 @@ if (isset($_POST['submit'])) {
 									currabrev,
 									units,
 									conversionfactor,
+									decimalplaces,
 									startdate,
 									enddate,
 									price)
@@ -144,6 +146,7 @@ if (isset($_POST['submit'])) {
 								'" . $_POST['CurrAbrev'] . "',
 								'" . $_POST['Units'] . "',
 								'" . $_POST['ConversionFactor'] . "',
+								'" . $_POST['DecimalPlaces'] . "',
 								'" . FormatDateForSQL($_POST['StartDate']) . "',
 								'" . $SQLEndDate. "',
 								'" . $_POST['Price'] . "')";
@@ -158,6 +161,7 @@ if (isset($_POST['submit'])) {
 	unset($_POST['EndDate']);
 	unset($_POST['Units']);
 	unset($_POST['ConversionFactor']);
+	unset($_POST['DecimalPlaces']);
 
 } elseif (isset($_GET['delete'])) {
 //the link to delete a selected record was clicked instead of the submit button
@@ -182,6 +186,7 @@ if ($InputError ==0){
 			prices.units,
 			prices.price,
 			prices.conversionfactor,
+			prices.decimalplaces,
 			prices.stockid,
 			prices.typeabbrev,
 			prices.currabrev,
@@ -202,7 +207,7 @@ if ($InputError ==0){
 
 	if (DB_num_rows($result) > 0) {
 		echo '<table class=selection>';
-		echo '<tr><th colspan=7><form method="post" action=' . $_SERVER['PHP_SELF'] . '?' . SID . '>';
+		echo '<tr><th colspan=8><form method="post" action=' . $_SERVER['PHP_SELF'] . '?' . SID . '>';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo _('Pricing for part') . ':<input type=text name="Item" MAXSIZEe=22 value="' . $Item . '" maxlength=20><input type=submit name=NewPart Value="' . _('Review Prices') . '">';
 		echo '</th></tr></form>';
@@ -211,6 +216,7 @@ if ($InputError ==0){
 			'</th><th>' . _('Sales Type') .
 			 '</th><th>' . _('UOM') .
 			 '</th><th>' . _('Conversion') . '<br />' . _('Factor') .
+			 '</th><th>' . _('Decimal') . '<br />' . _('Places') .
 			 '</th><th>' . _('Price') .
 			 '</th><th>' . _('Start Date') . ' </th>
 			 <th>' . _('End Date') . '</th></tr>';
@@ -238,6 +244,7 @@ if ($InputError ==0){
 						<td>".$myrow['sales_type']."</td>
 						<td>".$myrow['units']."</td>
 						<td class=number>".$myrow['conversionfactor']."</td>
+						<td class=number>".$myrow['decimalplaces']."</td>
 						<td class=number>".number_format($myrow['price'],2)."</td>
 						<td>".ConvertSQLDate($myrow['startdate'])."</td>
 						<td>".$EndDateDisplay."</td>
@@ -251,6 +258,7 @@ if ($InputError ==0){
 						<td>".$myrow['sales_type']."</td>
 						<td>".$myrow['units']."</td>
 						<td class=number>".$myrow['conversionfactor']."</td>
+						<td class=number>".$myrow['decimalplaces']."</td>
 						<td class=number>".number_format($myrow['price'],2)."</td>
 						<td>".ConvertSQLDate($myrow['startdate'])."</td>
 						<td>".$EndDateDisplay."</td>
@@ -273,6 +281,7 @@ if ($InputError ==0){
 				prices.units,
 				prices.price,
 				prices.conversionfactor,
+				prices.decimalplaces,
 				prices.stockid,
 				prices.typeabbrev,
 				prices.currabrev,
@@ -304,6 +313,7 @@ if ($InputError ==0){
 			$_POST['Price'] = $myrow['price'];
 			$_POST['Units'] = $myrow['units'];
 			$_POST['ConversionFactor'] = $myrow['conversionfactor'];
+			$_POST['DecimalPlaces'] = $myrow['decimalplaces'];
 			$_POST['StartDate'] = ConvertSQLDate($myrow['startdate']);
 			if ($_GET['EndDate']=='' OR $_GET['EndDate']=='0000-00-00'){
 				$_POST['EndDate'] = '';
@@ -316,7 +326,7 @@ if ($InputError ==0){
 		$result = DB_query($SQL,$db);
 
 		echo '<br><table class=selection>';
-		echo '<tr><th colspan=5><font color=BLUE size=3><b>' . $Item . ' - ' . $PartDescription . '</b></font></th></tr>';
+		echo '<tr><th colspan=5><font color="blue" size=3><b>' . $Item . ' - ' . $PartDescription . '</b></font></th></tr>';
 		echo '<tr><td>' . _('Currency') . ':</td><td><select name="CurrAbrev">';
 		while ($myrow = DB_fetch_array($result)) {
 			if ($myrow['currabrev']==$_POST['CurrAbrev']) {
@@ -375,6 +385,16 @@ if ($InputError ==0){
 
 		echo '</select></td></tr>';
 
+		echo '<tr><td>'. _('Decimal Places') . '<br />'._('to display').'</td>';
+		echo '<td><input type="text" class=number name="DecimalPlaces" size=8 maxlength=8 value="';
+		if(isset($_POST['DecimalPlaces'])) {
+			echo $_POST['DecimalPlaces'];
+		} else {
+			echo '0';
+		}
+		echo '">';
+
+		echo '</td></tr>';
 		echo '<tr><td>'. _('Conversion Factor') . '<br />'._('to stock units').'</td>';
 		echo '<td><input type="text" class=number name="ConversionFactor" size=8 maxlength=8 value="';
 		if(isset($_POST['ConversionFactor'])) {
@@ -383,6 +403,7 @@ if ($InputError ==0){
 			echo '1';
 		}
 		echo '">';
+
 
 		echo '</td></tr>';
 
