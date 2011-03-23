@@ -1492,12 +1492,12 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 		while ($myrow = DB_fetch_array($Result)) {
 
 			if ($_POST['Location']==$myrow['loccode']){
-				echo "<option selected VALUE='" . $myrow['loccode'] . "'>" . $myrow['locationname'];
+				echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			} else {
-				echo "<option VALUE='" . $myrow['loccode'] . "'>" . $myrow['locationname'];
+				echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			}
 		}
-		echo "</select></td></tr>";
+		echo '</select></td></tr>';
 		$j++;
 
 	} elseif($_POST['CreditType']=='WriteOff') { /* the goods are to be written off to somewhere */
@@ -1533,5 +1533,5 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 }
 
 echo '</form>';
-include("includes/footer.inc");
+include('includes/footer.inc');
 ?>
