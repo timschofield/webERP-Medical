@@ -24,6 +24,17 @@ if (isset($_GET['New']) and $_SESSION['CanCreateTender']==0) {
 	exit;
 }
 
+if (isset($_GET['Edit']) and $_SESSION['CanCreateTender']==0) {
+	$title = _('Authorisation Problem');
+	include('includes/header.inc');
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' .
+		$title . '" alt="">  '.$title . '</p>';
+	prnMsg( _('You do not have authority to amend supplier tenders for this company.') . '<br />' .
+			_('Please see your system administrator'), 'warn');
+	include('includes/footer.inc');
+	exit;
+}
+
 $ShowTender = 0;
 
 if (isset($_GET['ID'])) {
