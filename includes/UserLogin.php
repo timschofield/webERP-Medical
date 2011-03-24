@@ -63,6 +63,7 @@ function userLogin($Name, $Password, $db) {
 			$_SESSION['UserID'] = $myrow['userid'];
 			$_SESSION['AttemptsCounter'] = 0;
 			$_SESSION['AccessLevel'] = $myrow['fullaccess'];
+			$_SESSION['CanCreateTender'] = $myrow['cancreatetender'];
 			$_SESSION['CustomerID'] = $myrow['customerid'];
 			$_SESSION['UserBranch'] = $myrow['branchcode'];
 			$_SESSION['DefaultPageSize'] = $myrow['pagesize'];
