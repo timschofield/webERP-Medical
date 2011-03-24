@@ -183,7 +183,7 @@ Class Tender {
 				$SupplierName,
 				$Emailaddress){
 
-		if (isset($SupplierCode)){
+		if (!isset($this->Suppliers[$SupplierCode])){
 
 			$this->Suppliers[$SupplierCode] = new Supplier($SupplierCode, $SupplierName,
 				$Emailaddress);
