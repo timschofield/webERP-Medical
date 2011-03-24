@@ -39,9 +39,15 @@ class Cpdf extends TCPDF {
 			$UserPdfLang = $_SESSION['PDFLanguage'];
 
 			switch ($UserPdfLang) {
-				case 0: $UserPdfFont = 'times';     break;
-				case 1: $UserPdfFont = 'javierjp';  break;
-				case 2: $UserPdfFont = 'javiergb';  break;
+				case 0:
+					$UserPdfFont = 'times';
+					break;
+				case 1:
+					$UserPdfFont = 'javierjp';
+					break;
+				case 2:
+					$UserPdfFont = 'javiergb';
+					break;
 			}
 
 		} else {
