@@ -136,6 +136,7 @@ if (isset($_POST['submit'])) {
 						salesman='" . $_POST['Salesman'] . "',
 						pagesize='" . $_POST['PageSize'] . "',
 						fullaccess='" . $_POST['Access'] . "',
+						cancreatetender='" . $_POST['CanCreateTender'] . "',
 						theme='" . $_POST['Theme'] . "',
 						language ='" . $_POST['UserLanguage'] . "',
 						defaultlocation='" . $_POST['DefaultLocation'] ."',
@@ -158,6 +159,7 @@ if (isset($_POST['submit'])) {
 						email,
 						pagesize,
 						fullaccess,
+						cancreatetender,
 						defaultlocation,
 						modulesallowed,
 						displayrecordsmax,
@@ -175,11 +177,12 @@ if (isset($_POST['submit'])) {
 						'" . $_POST['Email'] ."',
 						'" . $_POST['PageSize'] ."',
 						'" . $_POST['Access'] . "',
+						'" . $_POST['CanCreateTender'] . "',
 						'" . $_POST['DefaultLocation'] ."',
 						'" . $ModulesAllowed . "',
 						'" . $_SESSION['DefaultDisplayRecordsMax'] . "',
 						'" . $_POST['Theme'] . "',
-						'". $_POST['UserLanguage'] ."',
+						'" . $_POST['UserLanguage'] ."',
 						'" . $_POST['PDFLanguage'] . "')";
 		prnMsg( _('A new user record has been inserted'), 'success' );
 	}
@@ -201,6 +204,7 @@ if (isset($_POST['submit'])) {
 		unset($_POST['Password']);
 		unset($_POST['PageSize']);
 		unset($_POST['Access']);
+		unset($_POST['CanCreateTender']);
 		unset($_POST['DefaultLocation']);
 		unset($_POST['ModulesAllowed']);
 		unset($_POST['Blocked']);
@@ -250,6 +254,7 @@ if (!isset($SelectedUser)) {
 			salesman,
 			lastvisitdate,
 			fullaccess,
+			cancreatetender,
 			pagesize,
 			theme,
 			language
@@ -267,6 +272,7 @@ if (!isset($SelectedUser)) {
 		<th>" . _('Salesperson') . "</th>
 		<th>" . _('Last Visit') . "</th>
 		<th>" . _('Security Role') ."</th>
+		<th>" . _('Can Create Tender') ."</th>
 		<th>" . _('Report Size') ."</th>
 		<th>" . _('Theme') ."</th>
 		<th>" . _('Language') ."</th>
@@ -274,7 +280,7 @@ if (!isset($SelectedUser)) {
 
 	$k=0; //row colour counter
 
-	while ($myrow = DB_fetch_row($result)) {
+	while ($myrow = DB_fetch_array($result)) {
 		if ($k==1){
 			echo '<tr class="EvenTableRows">';
 			$k=0;
@@ -290,8 +296,13 @@ if (!isset($SelectedUser)) {
 	}
 
 		/*The SecurityHeadings array is defined in config.php */
-
+		if ($myrow['cancreatetender']==0) {
+			$CanCreateTender=_('No');
+		} else {
+			$CanCreateTender=_('Yes');
+		}
 		printf("<td>%s</td>
+					<td>%s</td>
 					<td>%s</td>
 					<td>%s</td>
 					<td>%s</td>
@@ -307,23 +318,24 @@ if (!isset($SelectedUser)) {
 					<td><a href=\"%s&SelectedUser=%s\">" . _('Edit') . "</a></td>
 					<td><a href=\"%s&SelectedUser=%s&delete=1\">" . _('Delete') . "</a></td>
 					</tr>",
-					$myrow[0],
-					$myrow[1],
-					$myrow[2],
-					$myrow[3],
-					$myrow[4],
-					$myrow[5],
-					$myrow[6],
-					$myrow[7],
+					$myrow['userid'],
+					$myrow['realname'],
+					$myrow['phone'],
+					$myrow['email'],
+					$myrow['customerid'],
+					$myrow['branchcode'],
+					$myrow['supplierid'],
+					$myrow['salesman'],
 					$LastVisitDate,
-					$SecurityRoles[($myrow[9])],
-					$myrow[10],
-					$myrow[11],
-					$myrow[12],
+					$SecurityRoles[($myrow['fullaccess'])],
+					$CanCreateTender,
+					$myrow['pagesize'],
+					$myrow['theme'],
+					$myrow['language'],
 					$_SERVER['PHP_SELF']  . "?" . SID,
-					$myrow[0],
+					$myrow['userid'],
 					$_SERVER['PHP_SELF'] . "?" . SID,
-					$myrow[0]);
+					$myrow['userid']);
 
 	} //END WHILE LIST LOOP
 	echo '</table><br>';
@@ -351,6 +363,7 @@ if (isset($SelectedUser)) {
 			salesman,
 			pagesize,
 			fullaccess,
+			cancreatetender,
 			defaultlocation,
 			modulesallowed,
 			blocked,
@@ -373,6 +386,7 @@ if (isset($SelectedUser)) {
 	$_POST['Salesman'] = $myrow['salesman'];
 	$_POST['PageSize'] = $myrow['pagesize'];
 	$_POST['Access'] = $myrow['fullaccess'];
+	$_POST['CanCreateTender'] = $myrow['cancreatetender'];
 	$_POST['DefaultLocation'] = $myrow['defaultlocation'];
 	$_POST['ModulesAllowed'] = $myrow['modulesallowed'];
 	$_POST['Theme'] = $myrow['theme'];
@@ -435,6 +449,19 @@ foreach ($SecurityRoles as $SecKey => $SecVal) {
 		echo "<option value=" . $SecKey . ">" . $SecVal;
 	}
 }
+echo '</select></td></tr>';
+echo '<tr><td>' . _('User Can Create Tenders') . ':</td><td><select name="CanCreateTender">';
+
+if ($_POST['CanCreateTender']==0){
+	echo '<option selected value=0>' . _('No') . '</option>';
+	echo '<option value=1>' . _('Yes') . '</option>';
+} else {
+ 	echo '<option selected value=1>' . _('Yes') . '</option>';
+	echo '<option value=0>' . _('No') . '</option>';
+}
+echo '</select></td></tr>';
+
+
 echo '</select></td></tr>';
 echo '<input type="hidden" name="ID" value="'.$_SESSION['UserID'].'">';
 
