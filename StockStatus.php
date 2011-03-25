@@ -280,9 +280,12 @@ if ($DebtorNo) { /* display recent pricing history for this debtor and this stoc
 	     	}
 	    	$PriceHistory[] = array($DateRange, $qty, $LastPrice, $LastDiscount);
 	    	$k++;
-	    	if ($k > 9) break; /* 10 price records is enough to display */
-	    	if ($myrow['trandate'] < FormatDateForSQL(DateAdd(date($_SESSION['DefaultDateFormat']),'y', -1)))
-	    	  break; /* stop displaying pirce history more than a year old once we have at least one  to display */
+	    	if ($k > 9) {
+				break; /* 10 price records is enough to display */
+			}
+	    	if ($myrow['trandate'] < FormatDateForSQL(DateAdd(date($_SESSION['DefaultDateFormat']),'y', -1))) {
+				break; /* stop displaying pirce history more than a year old once we have at least one  to display */
+			}
 	    }
 		$LastPrice = $myrow['price'];
 		$LastDiscount = $myrow['discountpercent'];
