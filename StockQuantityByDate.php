@@ -23,16 +23,16 @@ echo '<table class=selection><tr>';
 echo '<td>' . _('For Stock Category') . ":</td>
 	<td><select name='StockCategory'> ";
 
-echo "<option VALUE='All'>All";
+echo '<option value="All">' . _('All') . '</option>';
 while ($myrow=DB_fetch_array($resultStkLocs)){
 	if (isset($_POST['StockCategory']) AND $_POST['StockCategory']!='All'){
 		if ($myrow['categoryid'] == $_POST['StockCategory']){
-		     echo "<option selected VALUE='" . $myrow['categoryid'] . "'>" . $myrow['categorydescription'];
+		     echo "<option selected VALUE='" . $myrow['categoryid'] . "'>" . $myrow['categorydescription'] . '</option>';
 		} else {
-		     echo "<option VALUE='" . $myrow['categoryid'] . "'>" . $myrow['categorydescription'];
+		     echo "<option VALUE='" . $myrow['categoryid'] . "'>" . $myrow['categorydescription'] . '</option>';
 		}
 	}else {
-		 echo "<option VALUE='" . $myrow['categoryid'] . "'>" . $myrow['categorydescription'];
+		 echo "<option VALUE='" . $myrow['categoryid'] . "'>" . $myrow['categorydescription'] . '</option>';
 	}
 }
 echo '</select></td>';
