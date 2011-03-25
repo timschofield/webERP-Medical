@@ -39,9 +39,9 @@ while ($myrow=DB_fetch_array($result)) {
 	echo '<td><select name="'.$myrow['script'].'">';
 	while ($mytokenrow=DB_fetch_array($TokenResult)) {
 		if ($mytokenrow['tokenid']==$myrow['security']) {
-			echo '<option selected="True" value="'.$mytokenrow['tokenid'].'">'.htmlentities($mytokenrow['tokenname']).'</option>';
+			echo '<option selected="True" value="'.$mytokenrow['tokenid'].'">'.htmlentities($mytokenrow['tokenname'], ENT_QUOTES,'UTF-8').'</option>';
 		} else {
-			echo '<option value="'.$mytokenrow['tokenid'].'">'.htmlentities($mytokenrow['tokenname']).'</option>';
+			echo '<option value="'.$mytokenrow['tokenid'].'">'.htmlentities($mytokenrow['tokenname'], ENT_QUOTES,'UTF-8').'</option>';
 		}
 	}
 	echo '</select></td></tr>';
