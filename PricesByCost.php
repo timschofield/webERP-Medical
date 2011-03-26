@@ -45,18 +45,29 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 			//Update Prices
 		$PriceCounter =0;
 		while ($myrow = DB_fetch_array($result)) {
-			//update database if update pressed
-			$SQLUpdate = "UPDATE prices
-								SET enddate = '" . date("Y-m-d",mktime(0,0,0,date("m") ,date("d")-1,date("Y"))) . "'
-							WHERE stockid = '" . $_POST['StockID_' . $PriceCounter] . "'
-							AND prices.typeabbrev ='" . $_POST['SalesType'] . "'
-							AND prices.currabrev ='" . $_POST['CurrCode'] . "'
-							AND prices.debtorno ='" . $_POST['DebtorNo_' . $PriceCounter] . "'
-							AND prices.branchcode ='" . $_POST['BranchCode_' . $PriceCounter] . "'
-							AND prices.startdate ='" . $_POST['StartDate_' . $PriceCounter] . "'
-							AND prices.enddate ='" . $_POST['EndDate_' . $PriceCounter] . "'";
-			$ResultUpdate = DB_query($SQLUpdate, $db);
-			$SQLInsert = "INSERT INTO prices (
+			$SQLTestExists = "SELECT price FROM prices
+										WHERE stockid = '" . $_POST['StockID_' . $PriceCounter] . "'
+									AND prices.typeabbrev ='" . $_POST['SalesType'] . "'
+									AND prices.currabrev ='" . $_POST['CurrCode'] . "'
+									AND prices.debtorno ='" . $_POST['DebtorNo_' . $PriceCounter] . "'
+									AND prices.branchcode ='" . $_POST['BranchCode_' . $PriceCounter] . "'
+									AND prices.startdate ='" . date('Y-m-d') . "'";
+			$TestExistsResult = DB_query($SQLTestExists,$db);
+			if (DB_num_rows($TestExistsResult)==1){
+			//then we are updating
+				$SQLUpdate = "UPDATE prices
+									SET price = '" . $_POST['Price_' . $PriceCounter] . "'
+								WHERE stockid = '" . $_POST['StockID_' . $PriceCounter] . "'
+									AND prices.typeabbrev ='" . $_POST['SalesType'] . "'
+									AND prices.currabrev ='" . $_POST['CurrCode'] . "'
+									AND prices.debtorno ='" . $_POST['DebtorNo_' . $PriceCounter] . "'
+									AND prices.branchcode ='" . $_POST['BranchCode_' . $PriceCounter] . "'
+									AND prices.startdate ='" . date('Y-m-d') . "'
+									AND prices.enddate ='" . $_POST['EndDate_' . $PriceCounter] . "'";
+				$ResultUpdate = DB_query($SQLUpdate, $db);
+			} else {
+				//we need to add a new price from today
+				$SQLInsert = "INSERT INTO prices (
 							stockid,
 							price,
 							typeabbrev,
