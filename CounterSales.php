@@ -79,7 +79,7 @@ if (!isset($_SESSION['Items'.$identifier])){
 	} else {
 		$myrow = DB_fetch_array($result); //get the only row returned
 
-		if ($myrow['cashsalecustomer']==''){
+		if ($myrow['cashsalecustomer']=='' or $myrow['cashsalebranch']==''){
 			prnMsg(_('To use this script it is first necessary to define a cash sales customer for the location that is your default location.').' '.
 			 _('This should be setup by modifying the appropriate Customer/Branch details.'),'error');
 			include('includes/footer.inc');
