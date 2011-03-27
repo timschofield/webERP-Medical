@@ -52,9 +52,9 @@ if (isset($_POST['submit'])) {
 
 	$_POST['BranchCode'] = strtoupper($_POST['BranchCode']);
 
-	if (strstr($_POST['BranchCode'],"'") OR strstr($_POST['BranchCode'],'"') OR strstr($_POST['BranchCode'],'&')) {
+	if (ContainsIllegalCharacters($_POST['BranchCode']) OR strstr($_POST['BranchCode'],' ')) {
 		$InputError = 1;
-		prnMsg(_('The Branch code cannot contain any of the following characters')." -  & \'",'error');
+		prnMsg(_('The Branch code cannot contain a space or any of the following characters')." + ' \ & or \"",'error');
 		$Errors[$i] = 'BranchCode';
 		$i++;
 	}
