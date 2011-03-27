@@ -247,11 +247,16 @@ if (isset($_POST['CommitBatch'])){
 
 	$PeriodNo = GetPeriod($_SESSION['PaymentDetail']->DatePaid,$db);
 
+	$sql="SELECT forpreprint
+			FROM paymentmethods
+			WHERE paymentname='" . $_SESSION['PaymentDetail']->Paymenttype ."'";
+	$result=DB_query($sql, $db);
+	$myrow=DB_fetch_row($result);
 
 	// first time through commit if supplier cheque then print it first
 	if ((!isset($_POST['ChequePrinted']))
 		AND (!isset($_POST['PaymentCancelled']))
-		AND ($_SESSION['PaymentDetail']->Paymenttype == 'Cheque')) {
+		AND ($myrow[0] == 1)) {
 	// it is a supplier payment by cheque and haven't printed yet so print cheque
 
 		echo '<br><a href="' . $rootpath . '/PrintCheque.php?' . SID . '&ChequeNum=' . $_POST['ChequeNum'] . '">' . _('Print Cheque using pre-printed stationery') . '</a><br><br>';
