@@ -77,13 +77,6 @@ if (isset($_POST['submit'])) {
 		$InputError = 1;
 		prnMsg(_('If you enter a Customer Code you must also enter a Branch Code valid for this Customer'),'error');
 	}
-	//comment out except for demo!  Do not want anyone modifying demo user.
-	/*
-	  elseif ($_POST['UserID'] == 'demo') {
-		prnMsg(_('The demonstration user called demo cannot be modified.'),'error');
-		$InputError = 1;
-	}
-	*/
 
 	if ((strlen($_POST['BranchCode'])>0) AND ($InputError !=1)) {
 		// check that the entered branch is valid for the customer code
@@ -217,12 +210,6 @@ if (isset($_POST['submit'])) {
 } elseif (isset($_GET['delete'])) {
 //the link to delete a selected record was clicked instead of the submit button
 
-	// comment out except for demo!  Do not want anyopne deleting demo user.
-	/*
-	if ($SelectedUser == 'demo') {
-		prnMsg(_('The demonstration user called demo cannot be deleted'),'error');
-	} else {
-	*/
 		$sql="SELECT userid FROM audittrail where userid='". $SelectedUser ."'";
 		$result=DB_query($sql, $db);
 		if (DB_num_rows($result)!=0) {
