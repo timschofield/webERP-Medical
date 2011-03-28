@@ -720,6 +720,11 @@ if (count($_SESSION['AllowedPageSecurityTokens'])==1 and $SupplierLogin==0){
 							</tr>
 							<tr>
 							<td class="menu_group_item">
+								<?php echo '<p>&bull; <a href="' . $rootpath . '/PDFPeriodStockTransListing.php?">' . _('Period Stock Transaction Listing') . '</a></p>'; ?>
+							</td>
+							</tr>
+							<tr>
+							<td class="menu_group_item">
 								 <?php echo '<p>&bull; <a href="' . $rootpath . '/PDFStockTransfer.php">' . _('Stock Transfer Note') . '</a></p>'; ?>
 							</td>
 							</tr>
