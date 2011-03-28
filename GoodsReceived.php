@@ -69,7 +69,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 
 if (!isset($_POST['ProcessGoodsReceived'])) {
 	if (!isset($_POST['DefaultReceivedDate'])){
-		$_POST['DefaultReceivedDate'] = Date($_SESSION['PO']->DeliveryDate);
+		$_POST['DefaultReceivedDate'] = Date($_SESSION['DefaultDateFormat']);
 	}
 
 	echo '<table class=selection><tr><td>'. _('Date Goods/Service Received'). ':</td><td><input type=text class=date alt="'.
