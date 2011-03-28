@@ -418,6 +418,7 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 /*Need to insert a GRN item */
 
 			$SQL = "INSERT INTO grns (grnbatch,
+															orderno,
 															podetailitem,
 															itemcode,
 															itemdescription,
@@ -426,6 +427,7 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 															supplierid,
 															stdcostunit)
 													VALUES ('" . $GRN . "',
+														'" . $_SESSION['PO']->OrderNo . "',
 														'" . $OrderLine->PODetailRec . "',
 														'" . $OrderLine->StockID . "',
 														'" . $OrderLine->ItemDescription . "',
