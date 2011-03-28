@@ -319,9 +319,9 @@ echo '<td><select name="GLCode" onChange="return assignComboToInput(this,'.'GLMa
 echo '<option value="">' . _('Select a general ledger account code') . '</option>';
 while ($myrow=DB_fetch_array($result)){
 	if (isset($_POST['tag']) and $_POST['tag']==$myrow['accountcode']){
-		echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'].' - ' .htmlentities($myrow['accountname'], ENT_QUOTES,'UTF-8'))."</option>";
+		echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'].' - ' .htmlentities($myrow['accountname'], ENT_QUOTES,'UTF-8')."</option>";
 	} else {
-		echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'].' - ' .htmlentities($myrow['accountname'], ENT_QUOTES,'UTF-8'))."</option>";
+		echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'].' - ' .htmlentities($myrow['accountname'], ENT_QUOTES,'UTF-8')."</option>";
 	}
 }
 echo '</select></td>';
