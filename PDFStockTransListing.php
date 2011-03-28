@@ -29,7 +29,7 @@ if (!isset($_POST['Date'])){
 
 	 echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . '>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	 echo '<table class=selection>
+	echo '<table class=selection>
 	 			<tr>
 				<td>' . _('Enter the date for which the transactions are to be listed') . ":</td>
 				<td><input type=text name='Date' maxlength=10 size=10 class=date alt='" . $_SESSION['DefaultDateFormat'] . "' value='" . Date($_SESSION['DefaultDateFormat']) . "'></td>
@@ -49,7 +49,30 @@ if (!isset($_POST['Date'])){
 
 	 echo '</select></td></tr>';
 
-	 echo "</select></td></tr></table><br><div class='centre'><input type=submit name='Go' value='" . _('Create PDF') . "'></div>";
+	$sql = "SELECT loccode, locationname FROM locations";
+	$resultStkLocs = DB_query($sql, $db);
+
+	echo '<tr><td>' . _('For Stock Location') . ":</td>
+		<td><select name='StockLocation'> ";
+	echo "<option VALUE='All'>" . _('All');
+	while ($myrow=DB_fetch_array($resultStkLocs)){
+		if (isset($_POST['StockLocation']) AND $_POST['StockLocation']!='All'){
+			if ($myrow['loccode'] == $_POST['StockLocation']){
+				echo "<option selected VALUE='" . $myrow['loccode'] . "'>" . $myrow['locationname'];
+			} else {
+				echo "<option VALUE='" . $myrow['loccode'] . "'>" . $myrow['locationname'];
+			}
+		} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
+			echo "<option selected VALUE='" . $myrow['loccode'] . "'>" . $myrow['locationname'];
+			$_POST['StockLocation']=$myrow['loccode'];
+		} else {
+			echo "<option VALUE='" . $myrow['loccode'] . "'>" . $myrow['locationname'];
+		}
+	}
+	echo '</select></td></tr>';
+
+
+	echo '</table><br><div class="centre"><input type=submit name="Go" value="' . _('Create PDF') . '"></div>';
 
 
 	 include('includes/footer.inc');
@@ -59,7 +82,8 @@ if (!isset($_POST['Date'])){
 	include('includes/ConnectDB.inc');
 }
 
-$sql= "SELECT stockmoves.type,
+if ($_POST['StockLocation']=='All') {
+	$sql= "SELECT stockmoves.type,
 		stockmoves.stockid,
 		stockmaster.description,
 		stockmaster.decimalplaces,
@@ -76,7 +100,26 @@ $sql= "SELECT stockmoves.type,
 	ON stockmoves.loccode=locations.loccode
 	WHERE type='" . $_POST['TransType'] . "'
 	AND date_format(trandate, '%Y-%m-%d')='".FormatDateForSQL($_POST['Date'])."'";
-
+} else {
+	$sql= "SELECT stockmoves.type,
+		stockmoves.stockid,
+		stockmaster.description,
+		stockmaster.decimalplaces,
+		stockmoves.transno,
+		stockmoves.trandate,
+		stockmoves.qty,
+		stockmoves.reference,
+		stockmoves.narrative,
+		locations.locationname
+	FROM stockmoves
+	LEFT JOIN stockmaster
+	ON stockmoves.stockid=stockmaster.stockid
+	LEFT JOIN locations
+	ON stockmoves.loccode=locations.loccode
+	WHERE type='" . $_POST['TransType'] . "'
+	AND date_format(trandate, '%Y-%m-%d')='".FormatDateForSQL($_POST['Date'])."'
+	AND stockmoves.loccode='" . $_POST['StockLocation'] . "'";
+}
 $result=DB_query($sql,$db,'','',false,false);
 
 if (DB_error_no($db)!=0){
