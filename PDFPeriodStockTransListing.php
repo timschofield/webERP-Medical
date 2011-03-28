@@ -136,7 +136,8 @@ if (DB_error_no($db)!=0){
 	$title = _('Transaction Listing');
 	include('includes/header.inc');
 	echo '<br>';
-  	prnMsg (_('There were no transactions found in the database for the date') . ' ' . $_POST['Date'] .'. '._('Please try again selecting a different date'), 'info');
+  	prnMsg (_('There were no transactions found in the database between the dates') . ' ' . $_POST['FromDate'] .
+		' ' . _('and') . ' '. $_POST['ToDate'] .'<br />' ._('Please try again selecting a different date'), 'info');
 	include('includes/footer.inc');
   	exit;
 }
