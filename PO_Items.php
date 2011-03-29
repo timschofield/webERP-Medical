@@ -63,7 +63,7 @@ if (isset($_POST['StockID2']) AND $_GET['Edit']=='') {
 	$_POST['ConversionFactor'] = $myrow['conversionfactor'];
 	$_POST['Package'] = $myrow['pkg_type'];
 	$_POST['uom'] = $myrow['suppliersuom'];
-	$_POST['nw'] = $myrow['netweight'];
+	$_POST['NetWeight'] = $myrow['netweight'];
 	$_POST['gw'] = $myrow['kgs'];
 	$_POST['CuFt'] = $myrow['volume'];
 	$_POST['MinimumOrderQty'] = $myrow['minorderqty'];
@@ -74,7 +74,7 @@ if (isset($_POST['UpdateLines']) OR isset($_POST['Commit'])) {
 		if ($POLine->Deleted==False) {
 			$_SESSION['PO'.$identifier]->LineItems[$POLine->LineNo]->Quantity=$_POST['Qty'.$POLine->LineNo];
 			$_SESSION['PO'.$identifier]->LineItems[$POLine->LineNo]->Price=$_POST['Price'.$POLine->LineNo];
-			$_SESSION['PO'.$identifier]->LineItems[$POLine->LineNo]->nw=$_POST['nw'.$POLine->LineNo];
+			$_SESSION['PO'.$identifier]->LineItems[$POLine->LineNo]->NetWeight=$_POST['NetWeight'.$POLine->LineNo];
 			$_SESSION['PO'.$identifier]->LineItems[$POLine->LineNo]->ReqDelDate=$_POST['ReqDelDate'.$POLine->LineNo];
 		}
 	}
@@ -197,7 +197,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 																							subtotal_amount,
 																							package,
 																							pcunit,
-																							nw,
+																							netweight,
 																							gw,
 																							cuft,
 																							total_quantity,
@@ -220,7 +220,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 																							'" . $POLine->SubTotal_Amount . "',
 																							'" . $POLine->Package . "',
 																							'" . $POLine->PcUnit . "',
-																							'" . $POLine->nw . "',
+																							'" . $POLine->NetWeight . "',
 																							'" . $POLine->gw . "',
 																							'" . $POLine->CuFt . "',
 																							'" . $POLine->Total_Quantity . "',
@@ -301,7 +301,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 																							subtotal_amount,
 																							package,
 																							pcunit,
-																							nw,
+																							netweight,
 																							gw,
 																							cuft,
 																							total_quantity,
@@ -324,7 +324,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 																							'" . $POLine->SubTotal_Amount . "',
 																							'" . $POLine->Package . "',
 																							'" . $POLine->PcUnit . "',
-																							'" . $POLine->nw . "',
+																							'" . $POLine->NetWeight . "',
 																							'" . $POLine->gw . "',
 																							'" . $POLine->CuFt . "',
 																							'" . $POLine->Total_Quantity . "',
@@ -348,7 +348,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 																							subtotal_amount='" . $POLine->SubTotal_Amount . "',
 																							package='" . $POLine->Package . "',
 																							pcunit='" . $POLine->PcUnit . "',
-																							nw='" . $POLine->nw . "',
+																							netweight='" . $POLine->NetWeight . "',
 																							gw='" . $POLine->gw . "',
 																							cuft='" . $POLine->CuFt . "',
 																							total_quantity='" . $POLine->Total_Quantity . "',
@@ -372,7 +372,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 																								subtotal_amount='" . $POLine->SubTotal_Amount . "',
 																								package='" . $POLine->Package . "',
 																								pcunit='" . $POLine->PcUnit . "',
-																								nw='" . $POLine->nw . "',
+																								netweight='" . $POLine->NetWeight . "',
 																								gw='" . $POLine->gw . "',
 																								cuft='" . $POLine->CuFt . "',
 																								total_quantity='" . $POLine->Total_Quantity . "',
@@ -608,7 +608,7 @@ if (isset($_POST['UpdateLine'])){
 																								$_POST['Qty']*$_POST['Price'],
 																								$_POST['Package'],
 																								$_POST['PcUnit'],
-																								$_POST['nw'],
+																								$_POST['NetWeight'],
 																								$_POST['gw'],
 																								$_POST['CuFt'],
 																								$_POST['Qty'],
@@ -724,7 +724,7 @@ if (isset($_POST['EnterLine'])){ /*Inputs from the form directly without selecti
 																							$_POST['SubTotal_Amount'],
 																							$_POST['Package'],
 																							$_POST['PcUnit'],
-																							$_POST['nw'],
+																							$_POST['NetWeight'],
 																							$_POST['gw'],
 																							$_POST['CuFt'],
 																							$_POST['Total_Quantity'],
@@ -970,7 +970,7 @@ if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
 				<td>' . $POLine->ItemDescription . '</td>
 				<td><input type="text" class="number" name="Qty' . $POLine->LineNo .'" size="11" value="' . $DisplayQuantity . '"></td>
 				<td>' . $Uom . '</td>
-				<td><input type="text" class="number" name="nw' . $POLine->LineNo . '" size="11" value="' . $POLine->nw . '"></td>
+				<td><input type="text" class="number" name="NetWeight' . $POLine->LineNo . '" size="11" value="' . $POLine->NetWeight . '"></td>
 				<td><input type="text" class="number" name="Price' . $POLine->LineNo . '" size="11" value="' .$DisplayPrice.'"></td>
 				<td class="number">' . $DisplayLineTotal . '</td>
 				<td><input type="text" class="date" alt="' .$_SESSION['DefaultDateFormat'].'" name="ReqDelDate' . $POLine->LineNo.'" size="11" value="' .$POLine->ReqDelDate .'"></td>

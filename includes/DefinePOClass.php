@@ -89,7 +89,7 @@ Class PurchOrder {
 											$SubTotal_Amount=0,
 											$Package=0,
 											$PcUnit=0,
-											$nw=0,
+											$NetWeight=0,
 											$gw=0,
 											$CuFt=0,
 											$Total_Quantity=0,
@@ -123,7 +123,7 @@ Class PurchOrder {
 																								$SubTotal_Amount,
 																								$Package,
 																								$PcUnit,
-																								$nw,
+																								$NetWeight,
 																								$gw,
 																								$CuFt,
 																								$Total_Quantity,
@@ -151,7 +151,7 @@ Class PurchOrder {
 														$SubTotal_Amount,
 														$Package,
 														$PcUnit,
-														$nw,
+														$NetWeight,
 														$gw,
 														$CuFt,
 														$Total_Quantity,
@@ -172,7 +172,7 @@ Class PurchOrder {
 			$this->LineItems[$LineNo]->Subtotal_Amount = $SubTotal_Amount;
 			$this->LineItems[$LineNo]->Package = $Package;
 			$this->LineItems[$LineNo]->PcUnit = $PcUnit;
-			$this->LineItems[$LineNo]->nw = $nw;
+			$this->LineItems[$LineNo]->NetWeight = $NetWeight;
 			$this->LineItems[$LineNo]->gw = $gw;
 			$this->LineItems[$LineNo]->CuFt = $CuFt;
 			$this->LineItems[$LineNo]->Total_Quantity = $Total_Quantity;
@@ -242,7 +242,7 @@ Class LineDetails {
 	Var $LeadTime;
 	Var $Package;
 	Var $PcUnit;
-	Var $nw;
+	Var $NetWeight;
 	Var $gw;
 	Var $CuFt;
 	Var $Total_Quantity;
@@ -279,7 +279,7 @@ Class LineDetails {
 											$LeadTime,
 											$Package,
 											$PcUnit,
-											$nw,
+											$NetWeight,
 											$gw,
 											$CuFt,
 											$Total_Quantity,
@@ -308,7 +308,7 @@ Class LineDetails {
 		$this->Subtotal_Amount = $SubTotal_Amount;
 		$this->LeadTime = $LeadTime;
 		$this->PcUnit = $PcUnit;
-		$this->nw = $nw;
+		$this->NetWeight = $NetWeight;
 		$this->gw = $gw;
 		$this->CuFt = $CuFt;
 		$this->Total_Quantity = $Total_Quantity;
