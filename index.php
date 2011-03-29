@@ -634,6 +634,11 @@ if (count($_SESSION['AllowedPageSecurityTokens'])==1 and $SupplierLogin==0){
 							</tr>
 							<tr>
 							<td class="menu_group_item">
+								<?php echo '<p>&bull; <a href="' . $rootpath . '/ReprintGRN.php?' . sid . '">' . _('Reprint GRN') . '</a></p>'; ?>
+							</td>
+							</tr>
+							<tr>
+							<td class="menu_group_item">
 								<?php echo '<p>&bull; <a href="' . $rootpath . "/StockMovements.php?" . sid . '">' . _('Inventory Item Movements') . '</a></p>'; ?>
 							</td>
 							</tr>
