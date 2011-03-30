@@ -37,7 +37,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 			AND   prices.price" . $Comparator . "(stockmaster.materialcost + stockmaster.labourcost + stockmaster.overheadcost) * '" . $_POST['Margin'] . "'
 			AND prices.typeabbrev ='" . $_POST['SalesType'] . "'
 			AND prices.currabrev ='" . $_POST['CurrCode'] . "'
-			AND (prices.enddate>='" . Date('Y-m-d') . "' OR prices.enddate='0000-00-00')";
+			AND (prices.enddate>='" . Date('Y-m-d') . "' OR prices.enddate='2030-01-01')";
 	$result = DB_query($sql, $db);
 	$numrow = DB_num_rows($result);
 
@@ -45,13 +45,18 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 			//Update Prices
 		$PriceCounter =0;
 		while ($myrow = DB_fetch_array($result)) {
+			if (!isset($_POST['DebtorNo_' . $PriceCounter])) {
+				$_POST['DebtorNo_' . $PriceCounter]='';
+				$_POST['BranchCode_' . $PriceCounter]='';
+			}
 			$SQLTestExists = "SELECT price FROM prices
 										WHERE stockid = '" . $_POST['StockID_' . $PriceCounter] . "'
 									AND prices.typeabbrev ='" . $_POST['SalesType'] . "'
 									AND prices.currabrev ='" . $_POST['CurrCode'] . "'
 									AND prices.debtorno ='" . $_POST['DebtorNo_' . $PriceCounter] . "'
 									AND prices.branchcode ='" . $_POST['BranchCode_' . $PriceCounter] . "'
-									AND prices.startdate ='" . date('Y-m-d') . "'";
+									AND prices.startdate<'" . date('Y-m-d') . "'
+									AND prices.enddate>'" . date('Y-m-d') . "'";
 			$TestExistsResult = DB_query($SQLTestExists,$db);
 			if (DB_num_rows($TestExistsResult)==1){
 			//then we are updating
@@ -62,9 +67,13 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 									AND prices.currabrev ='" . $_POST['CurrCode'] . "'
 									AND prices.debtorno ='" . $_POST['DebtorNo_' . $PriceCounter] . "'
 									AND prices.branchcode ='" . $_POST['BranchCode_' . $PriceCounter] . "'
-									AND prices.startdate ='" . date('Y-m-d') . "'
-									AND prices.enddate ='" . $_POST['EndDate_' . $PriceCounter] . "'";
+									AND prices.startdate<'" . date('Y-m-d') . "'
+									AND prices.enddate='" . $_POST['EndDate_' . $PriceCounter] . "'";
 				$ResultUpdate = DB_query($SQLUpdate, $db);
+				prnMsg( _('The price has been updated in the database'), 'success');
+				echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '">' . _('Back') . '<a/></div><p>';
+				include('includes/footer.inc');
+				exit;
 			} else {
 				//we need to add a new price from today
 				$SQLInsert = "INSERT INTO prices (
@@ -86,7 +95,12 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 							'" . date('Y-m-d') . "',
 							'2030-01-01'
 						)";
-			$ResultInsert = DB_query($SQLInsert, $db);
+				$ResultInsert = DB_query($SQLInsert, $db);
+				prnMsg( _('The price has been inserted in the database'), 'success');
+				echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '">' . _('Back') . '<a/></div><p>';
+				include('includes/footer.inc');
+				exit;
+			}
 			$PriceCounter++;
 		}
 		DB_free_result($result); //clear the old result
@@ -186,8 +200,8 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 			$PriceCounter++;
 		} //end of looping
 		echo '<tr>
-			<td style="text-align:right" colspan=4><input type=submit name=submit value=' . _('Update') . '></td>
-			<td style="text-align:left" colspan=3><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '"><input type=submit  value=' . _('Back') . '><a/></td>
+			<td colspan="10" style="text-align:center"><input type=submit name=submit value=' . _('Update') . '>
+			<a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '"><input type=submit  value=' . _('Back') . '><a/></td>
 			 </tr></form>';
 	} else {
 		prnMsg(_('There were no prices meeting the criteria specified to review'),'info');
