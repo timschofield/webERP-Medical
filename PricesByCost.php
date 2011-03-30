@@ -55,7 +55,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 									AND prices.currabrev ='" . $_POST['CurrCode'] . "'
 									AND prices.debtorno ='" . $_POST['DebtorNo_' . $PriceCounter] . "'
 									AND prices.branchcode ='" . $_POST['BranchCode_' . $PriceCounter] . "'
-									AND prices.startdate<'" . date('Y-m-d') . "'
+									AND prices.startdate<='" . date('Y-m-d') . "'
 									AND prices.enddate>'" . date('Y-m-d') . "'";
 			$TestExistsResult = DB_query($SQLTestExists,$db);
 			if (DB_num_rows($TestExistsResult)==1){
@@ -67,7 +67,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 									AND prices.currabrev ='" . $_POST['CurrCode'] . "'
 									AND prices.debtorno ='" . $_POST['DebtorNo_' . $PriceCounter] . "'
 									AND prices.branchcode ='" . $_POST['BranchCode_' . $PriceCounter] . "'
-									AND prices.startdate<'" . date('Y-m-d') . "'
+									AND prices.startdate<='" . date('Y-m-d') . "'
 									AND prices.enddate='" . $_POST['EndDate_' . $PriceCounter] . "'";
 				$ResultUpdate = DB_query($SQLUpdate, $db);
 				prnMsg( _('The price has been updated in the database'), 'success');
