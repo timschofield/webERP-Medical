@@ -47,7 +47,6 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 	if ($_POST['submit'] == 'Update') {
 			//Update Prices
 		$PriceCounter =0;
-		echo $_POST['Counter'].'x';
 		while ($PriceCounter < $_POST['Counter']) {
 			if (!isset($_POST['DebtorNo_' . $PriceCounter])) {
 				$_POST['DebtorNo_' . $PriceCounter]='';
@@ -75,7 +74,11 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 									AND prices.conversionfactor ='" . $_POST['ConversionFactor_' . $PriceCounter] . "'
 									AND prices.startdate<='" . date('Y-m-d') . "'";
 				$ResultUpdate = DB_query($SQLUpdate, $db);
-				prnMsg( _('The price for') . ' ' . $_POST['StockID_' . $PriceCounter] . ' ' . _('has been updated in the database'), 'success');
+				if (DB_error_no($db)==0) {
+					prnMsg( _('The price for') . ' ' . $_POST['StockID_' . $PriceCounter] . ' ' . _('has been updated in the database'), 'success');
+				} else {
+					prnMsg( _('The price for') . ' ' . $_POST['StockID_' . $PriceCounter] . ' ' . _('could not be updated'), 'error');
+				}
 				echo '<br />';
 			} else {
 				//we need to add a new price from today
@@ -103,7 +106,11 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 							'" . $_POST['ConversionFactor_' . $PriceCounter] . "'
 						)";
 				$ResultInsert = DB_query($SQLInsert, $db);
-				prnMsg( _('The price for') . ' ' . $_POST['StockID_' . $PriceCounter] . ' ' . _('has been inserted in the database'), 'success');
+				if (DB_error_no($db)==0) {
+					prnMsg( _('The price for') . ' ' . $_POST['StockID_' . $PriceCounter] . ' ' . _('has been inserted in the database'), 'success');
+				} else {
+					prnMsg( _('The price for') . ' ' . $_POST['StockID_' . $PriceCounter] . ' ' . _('could not be inserted'), 'error');
+				}
 				echo '<br />';
 			}
 			$PriceCounter++;

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ROOT_DIR=~/workbench/weberp-bzr/web-erp/trunk
+ROOT_DIR=$PWD
 cd $ROOT_DIR
 for f in `find . -name "*.php"`
 do
