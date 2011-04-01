@@ -147,7 +147,7 @@
 																subtotal_amount,
 																package,
 																pcunit,
-																netweight,
+																purchorderdetails.netweight,
 																gw,
 																cuft,
 																total_quantity,
