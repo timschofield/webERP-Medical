@@ -14,6 +14,8 @@ if (isset($_POST['SelectedType'])){
 	$SelectedType = strtoupper($_POST['SelectedType']);
 } elseif (isset($_GET['SelectedType'])){
 	$SelectedType = strtoupper($_GET['SelectedType']);
+} else {
+	$SelectedType='';
 }
 
 if (ContainsIllegalCharacters($SelectedType) OR strpos($SelectedType,' ')>0){
