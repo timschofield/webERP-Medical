@@ -191,8 +191,6 @@ if ($InputError != 1) {
 	FROM companies
 	WHERE coycode=1";
 
-
-
 	$ErrMsg =  _('The company preferences could not be retrieved because');
 	$result = DB_query($sql, $db,$ErrMsg);
 
@@ -281,9 +279,9 @@ echo '<tr><td>' . _('Home Currency') . ':</td><td><select tabindex="13" Name=Cur
 
 while ($myrow = DB_fetch_array($result)) {
 	if ($_POST['CurrencyDefault']==$myrow['currabrev']){
-		echo "<option selected VALUE='". $myrow['currabrev'] . "'>" . $myrow['currency'];
+		echo '<option selected VALUE="'. $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 	} else {
-		echo "<option VALUE='". $myrow['currabrev'] . "'>" . $myrow['currency'];
+		echo '<option VALUE="' . $myrow['currabrev'] . '">' . $myrow['currency']. '</option>';
 	}
 } //end while loop
 
@@ -299,13 +297,14 @@ $result=DB_query("SELECT accountcode,
 		AND accountgroups.pandl=0
 		ORDER BY chartmaster.accountcode",$db);
 
-echo '<tr><td>' . _('Debtors Control GL Account') . ':</td><td><select tabindex="14" Name=DebtorsAct>';
+echo '<tr><td>' . _('Debtors Control GL Account') . ':</td>
+			<td><select tabindex="14" name=DebtorsAct>';
 
 while ($myrow = DB_fetch_row($result)) {
 	if ($_POST['DebtorsAct']==$myrow[0]){
-		echo "<option selected VALUE='". $myrow[0] . "'>" . $myrow[1] . ' ('.$myrow[0].')';
+		echo '<option selected VALUE="'. $myrow[0] . '">' . $myrow[1] . ' ('.$myrow[0].')</option>';
 	} else {
-		echo "<option  VALUE='". $myrow[0] . "'>" . $myrow[1] . ' ('.$myrow[0].')';
+		echo '<option  VALUE="'. $myrow[0] . '">' . $myrow[1] . ' ('.$myrow[0].')</option>';
 	}
 } //end while loop
 
@@ -317,9 +316,9 @@ echo '<tr><td>' . _('Creditors Control GL Account') . ':</td><td><select tabinde
 
 while ($myrow = DB_fetch_row($result)) {
 	if ($_POST['CreditorsAct']==$myrow[0]){
-		echo "<option selected VALUE='". $myrow[0] . "'>" . $myrow[1] . ' ('.$myrow[0].')';
+		echo '<option selected VALUE="'. $myrow[0] . '">' . $myrow[1] . ' ('.$myrow[0].')</option>';
 	} else {
-		echo "<option  VALUE='". $myrow[0] . "'>" . $myrow[1] . ' ('.$myrow[0].')';
+		echo '<option  VALUE="'. $myrow[0] . '">' . $myrow[1] . ' ('.$myrow[0].')</option>';
 	}
 } //end while loop
 
@@ -331,9 +330,9 @@ echo '<tr><td>' . _('Payroll Net Pay Clearing GL Account') . ':</td><td><select 
 
 while ($myrow = DB_fetch_row($result)) {
 	if ($_POST['PayrollAct']==$myrow[0]){
-		echo "<option selected VALUE='". $myrow[0] . "'>" . $myrow[1] . ' ('.$myrow[0].')';
+		echo '<option selected VALUE="'. $myrow[0] . '">' . $myrow[1] . ' ('.$myrow[0].')</option>';
 	} else {
-		echo "<option  VALUE='". $myrow[0] . "'>" . $myrow[1] . ' ('.$myrow[0].')';
+		echo '<option  VALUE="'. $myrow[0] . '">' . $myrow[1] . ' ('.$myrow[0].')</option>';
 	}
 } //end while loop
 
@@ -345,22 +344,23 @@ echo '<tr><td>' . _('Goods Received Clearing GL Account') . ':</td><td><select t
 
 while ($myrow = DB_fetch_row($result)) {
 	if ($_POST['GRNAct']==$myrow[0]){
-		echo "<option selected VALUE='". $myrow[0] . "'>" . $myrow[1] . ' ('.$myrow[0].')';
+		echo '<option selected VALUE="'. $myrow[0] . '">' . $myrow[1] . ' ('.$myrow[0].')</option>';
 	} else {
-		echo "<option  VALUE='". $myrow[0] . "'>" . $myrow[1] . ' ('.$myrow[0].')';
+		echo '<option  VALUE="'. $myrow[0] . '">' . $myrow[1] . ' ('.$myrow[0].')</option>';
 	}
 } //end while loop
 
 DB_data_seek($result,0);
 echo '</select></td></tr>';
 
-echo '<tr><td>' . _('Retained Earning Clearing GL Account') . ':</td><td><select tabindex="18" Name=RetainedEarnings>';
+echo '<tr><td>' . _('Retained Earning Clearing GL Account') . ':</td>
+		<td><select tabindex="18" Name=RetainedEarnings>';
 
 while ($myrow = DB_fetch_row($result)) {
 	if ($_POST['RetainedEarnings']==$myrow[0]){
-		echo "<option selected VALUE='". $myrow[0] . "'>" . $myrow[1] . ' ('.$myrow[0].')';
+		echo '<option selected VALUE="'. $myrow[0] . '">' . $myrow[1] . ' ('.$myrow[0].')</option>';
 	} else {
-		echo "<option  VALUE='". $myrow[0] . "'>" . $myrow[1] . ' ('.$myrow[0].')';
+		echo '<option  VALUE="'. $myrow[0] . '">' . $myrow[1] . ' ('.$myrow[0].')</option>';
 	}
 } //end while loop
 
@@ -368,7 +368,8 @@ DB_free_result($result);
 
 echo '</select></td></tr>';
 
-echo '<tr><td>' . _('Freight Re-charged GL Account') . ':</td><td><select tabindex="19" Name=FreightAct>';
+echo '<tr><td>' . _('Freight Re-charged GL Account') . ':</td>
+		<td><select tabindex="19" Name=FreightAct>';
 
 $result=DB_query("SELECT accountcode,
 			accountname
@@ -380,9 +381,9 @@ $result=DB_query("SELECT accountcode,
 
 while ($myrow = DB_fetch_row($result)) {
 	if ($_POST['FreightAct']==$myrow[0]){
-		echo "<option selected VALUE='". $myrow[0] . "'>" . $myrow[1] . ' ('.$myrow[0].')';
+		echo '<option selected VALUE="'. $myrow[0] . '">' . $myrow[1] . ' ('.$myrow[0].')</option>';
 	} else {
-		echo "<option  VALUE='". $myrow[0] . "'>" . $myrow[1] . ' ('.$myrow[0].')';
+		echo '<option  VALUE="'. $myrow[0] . '">' . $myrow[1] . ' ('.$myrow[0].')</option>';
 	}
 } //end while loop
 
@@ -390,13 +391,14 @@ DB_data_seek($result,0);
 
 echo '</select></td></tr>';
 
-echo '<tr><td>' . _('Sales Exchange Variances GL Account') . ':</td><td><select tabindex="20" Name=ExchangeDiffAct>';
+echo '<tr><td>' . _('Sales Exchange Variances GL Account') . ':</td>
+			<td><select tabindex="20" Name=ExchangeDiffAct>';
 
 while ($myrow = DB_fetch_row($result)) {
 	if ($_POST['ExchangeDiffAct']==$myrow[0]){
-		echo "<option selected VALUE='". $myrow[0] . "'>" . $myrow[1] . ' ('.$myrow[0].')';
+		echo '<option selected VALUE="'. $myrow[0] . '">' . $myrow[1] . ' ('.$myrow[0].')</option>';
 	} else {
-		echo "<option  VALUE='". $myrow[0] . "'>" . $myrow[1] . ' ('.$myrow[0].')';
+		echo '<option VALUE="'. $myrow[0] . '">' . $myrow[1] . ' ('.$myrow[0].')</option>';
 	}
 } //end while loop
 
@@ -404,13 +406,14 @@ DB_data_seek($result,0);
 
 echo '</select></td></tr>';
 
-echo '<tr><td>' . _('Purchases Exchange Variances GL Account') . ':</td><td><select tabindex="21" Name=PurchasesExchangeDiffAct>';
+echo '<tr><td>' . _('Purchases Exchange Variances GL Account') . ':</td>
+			<td><select tabindex="21" Name=PurchasesExchangeDiffAct>';
 
 while ($myrow = DB_fetch_row($result)) {
 	if ($_POST['PurchasesExchangeDiffAct']==$myrow[0]){
-		echo "<option selected VALUE='". $myrow[0] . "'>" . $myrow[1] . ' ('.$myrow[0].')';
+		echo '<option selected VALUE="'. $myrow[0] . '">' . $myrow[1] . ' ('.$myrow[0].')</option>';
 	} else {
-		echo "<option  VALUE='". $myrow[0] . "'>" . $myrow[1] . ' ('.$myrow[0].')';
+		echo '<option  VALUE="'. $myrow[0] . '">' . $myrow[1] . ' ('.$myrow[0].')</option>';
 	}
 } //end while loop
 
@@ -418,13 +421,14 @@ DB_data_seek($result,0);
 
 echo '</select></td></tr>';
 
-echo '<tr><td>' . _('Payment Discount GL Account') . ':</td><td><select tabindex="22" Name=PytDiscountAct>';
+echo '<tr><td>' . _('Payment Discount GL Account') . ':</td>
+			<td><select tabindex="22" Name=PytDiscountAct>';
 
 while ($myrow = DB_fetch_row($result)) {
 	if ($_POST['PytDiscountAct']==$myrow[0]){
-		echo "<option selected VALUE='". $myrow[0] . "'>" . $myrow[1] . ' ('.$myrow[0].')';
+		echo '<option selected VALUE="'. $myrow[0] . '">' . $myrow[1] . ' ('.$myrow[0].')</option>';
 	} else {
-		echo "<option  VALUE='". $myrow[0] . "'>" . $myrow[1] . ' ('.$myrow[0].')';
+		echo '<option  VALUE="'. $myrow[0] . '">' . $myrow[1] . ' ('.$myrow[0].')</option>';
 	}
 } //end while loop
 
@@ -432,44 +436,47 @@ DB_data_seek($result,0);
 
 echo '</select></td></tr>';
 
-echo '<tr><td>' . _('Create GL entries for accounts receivable transactions') . ':</td><td><select tabindex="23" Name=GLLink_Debtors>';
+echo '<tr><td>' . _('Create GL entries for accounts receivable transactions') . ':</td>
+			<td><select tabindex="23" Name=GLLink_Debtors>';
 
 if ($_POST['GLLink_Debtors']==0){
-	echo '<option selected VALUE=0>' . _('No');
-	echo '<option VALUE=1>' . _('Yes');
+	echo '<option selected VALUE=0>' . _('No') . '</option>';
+	echo '<option VALUE=1>' . _('Yes') . '</option>';
 } else {
-	echo '<option selected VALUE=1>' . _('Yes');
-	echo '<option VALUE=0>' . _('No');
+	echo '<option selected VALUE=1>' . _('Yes') . '</option>';
+	echo '<option VALUE=0>' . _('No') . '</option>';
 }
 
 echo '</select></td></tr>';
 
-echo '<tr><td>' . _('Create GL entries for accounts payable transactions') . ':</td><td><select tabindex="24" Name=GLLink_Creditors>';
+echo '<tr><td>' . _('Create GL entries for accounts payable transactions') . ':</td>
+			<td><select tabindex="24" Name=GLLink_Creditors>';
 
 if ($_POST['GLLink_Creditors']==0){
-	echo '<option selected VALUE=0>' . _('No');
-	echo '<option VALUE=1>' . _('Yes');
+	echo '<option selected VALUE=0>' . _('No') . '</option>';
+	echo '<option VALUE=1>' . _('Yes') . '</option>';
 } else {
-	echo '<option selected VALUE=1>' . _('Yes');
-	echo '<option VALUE=0>' . _('No');
+	echo '<option selected VALUE=1>' . _('Yes') . '</option>';
+	echo '<option VALUE=0>' . _('No') . '</option>';
 }
 
 echo '</select></td></tr>';
 
-echo '<tr><td>' . _('Create GL entries for stock transactions') . ' :</td><td><select tabindex="25" Name=GLLink_Stock>';
+echo '<tr><td>' . _('Create GL entries for stock transactions') . ' :</td>
+			<td><select tabindex="25" Name=GLLink_Stock>';
 
 if ($_POST['GLLink_Stock']==0){
-	echo '<option selected VALUE=0>' . _('No');
-	echo '<option VALUE=1>' . _('Yes');
+	echo '<option selected VALUE=0>' . _('No') . '</option>';
+	echo '<option VALUE=1>' . _('Yes') . '</option>';
 } else {
-	echo '<option selected VALUE=1>' . _('Yes');
-	echo '<option VALUE=0>' . _('No');
+	echo '<option selected VALUE=1>' . _('Yes') . '</option>';
+	echo '<option VALUE=0>' . _('No') . '</option>';
 }
 
 echo '</select></td></tr>';
 
 
-echo '</table><br><div class="centre"><input tabindex="26" type="Submit" Name="submit" value="' . _('Update') . '"></div>';
+echo '</table><br /><div class="centre"><input tabindex="26" type="Submit" Name="submit" value="' . _('Update') . '"></div>';
 
 include('includes/footer.inc');
 ?>
