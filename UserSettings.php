@@ -123,23 +123,23 @@ echo '<tr>
 	<td>' . _('Language') . ":</td>
 	<td><select name='Language'>";
 
-	$LangDirHandle = dir('locale/');
+$Languages = scandir('locale/', 0);
 
 
-	while (false != ($LanguageEntry = $LangDirHandle->read())){
+foreach ($Languages as $LanguageEntry){
 
-		if (is_dir('locale/' . $LanguageEntry)
-				AND $LanguageEntry != '..'
-				AND $LanguageEntry != '.svn'
-				AND $LanguageEntry!='.'){
+	if (is_dir('locale/' . $LanguageEntry)
+			AND $LanguageEntry != '..'
+			AND $LanguageEntry != '.svn'
+			AND $LanguageEntry!='.'){
 
-			if ($_SESSION['Language'] == $LanguageEntry){
-				echo '<option selected value="' . $LanguageEntry . '">' . $LanguageEntry . '</option>';
-			} else {
-				echo '<option value="' . $LanguageEntry . '">' . $LanguageEntry . '</option>';
-			}
+		if ($_SESSION['Language'] == $LanguageEntry){
+			echo '<option selected value="' . $LanguageEntry . '">' . $LanguageEntry . '</option>';
+		} else {
+			echo '<option value="' . $LanguageEntry . '">' . $LanguageEntry . '</option>';
 		}
 	}
+}
 
 	echo '</select></td></tr>';
 
