@@ -68,7 +68,7 @@ if (isset($_POST['submit'])) {
 	}
 	if (ContainsIllegalCharacters($_POST['GroupName'])) {
 		$InputError = 1;
-		prnMsg( _('The account group name cannot contain the character') . " '&' " . _('or the character') ." '",'error');
+		prnMsg( _('The account group name cannot contain the character') . " '&' " . _('or the character') ."' '",'error');
 		$Errors[$i] = 'GroupName';
 		$i++;
 	}
@@ -353,9 +353,9 @@ if (! isset($_GET['delete'])) {
 	while ( $grouprow = DB_fetch_array($groupresult) ) {
 
 		if (isset($_POST['ParentGroupName']) and $_POST['ParentGroupName']==$grouprow['groupname']) {
-			echo '<option selected="selected" value="'.htmlentities($grouprow['groupname']).'">' .htmlentities($grouprow['groupname'], ENT_QUOTES,'UTF-8').'</option>';
+			echo '<option selected="selected" value="'.htmlentities($grouprow['groupname'], ENT_QUOTES,'UTF-8').'">' .htmlentities($grouprow['groupname'], ENT_QUOTES,'UTF-8').'</option>';
 		} else {
-			echo '<option value="'.htmlentities($grouprow['groupname']).'">' .htmlentities($grouprow['groupname'], ENT_QUOTES,'UTF-8').'</option>';
+			echo '<option value="'.htmlentities($grouprow['groupname'], ENT_QUOTES,'UTF-8').'">' .htmlentities($grouprow['groupname'], ENT_QUOTES,'UTF-8').'</option>';
 		}
 	}
 	echo '</select>';
