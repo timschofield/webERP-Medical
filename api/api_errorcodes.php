@@ -1,5 +1,5 @@
 <?php
-/* $Id$*/
+/* $Id: api_errorcodes.php 3237 2009-12-16 13:44:52Z tim_schofield $*/
 
 /* Define error codes that are returned by api functions*/
 	Define('NoAuthorisation', 1);

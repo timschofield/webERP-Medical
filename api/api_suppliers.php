@@ -1,5 +1,5 @@
 <?php
-/* $Id$*/
+/* $Id: api_suppliers.php 4521 2011-03-29 09:04:20Z daintree $*/
 
 /* Verify that the supplier number is valid, and doesn't already
    exist.*/
@@ -7,9 +7,9 @@
 		if ((strlen($SupplierNumber)<1) or (strlen($SupplierNumber)>10)) {
 			$Errors[$i] = IncorrectDebtorNumberLength;
 		}
-		$Searchsql = 'SELECT count(supplierid)
-				FROM suppliers
-				WHERE supplierid="'.$SupplierNumber.'"';
+		$Searchsql = "SELECT count(supplierid)
+  				      FROM suppliers
+				      WHERE supplierid='".$SupplierNumber."'";
 		$SearchResult=DB_query($Searchsql, $db);
 		$answer = DB_fetch_row($SearchResult);
 		if ($answer[0] != 0) {
@@ -24,9 +24,9 @@
 		if ((strlen($SupplierNumber)<1) or (strlen($SupplierNumber)>10)) {
 			$Errors[$i] = IncorrectDebtorNumberLength;
 		}
-		$Searchsql = 'SELECT count(supplierid)
-				FROM suppliers
-				WHERE supplierid="'.$SupplierNumber.'"';
+		$Searchsql = "SELECT count(supplierid)
+				      FROM suppliers
+				      WHERE supplierid='".$SupplierNumber."'";
 		$SearchResult=DB_query($Searchsql, $db);
 		$answer = DB_fetch_row($SearchResult);
 		if ($answer[0] == 0) {
@@ -47,7 +47,7 @@
  * must be in the same format as the date format specified in the
  * target webERP company */
 	function VerifySupplierSinceDate($suppliersincedate, $i, $Errors, $db) {
-		$sql='select confvalue from config where confname="'.DefaultDateFormat.'"';
+		$sql="SELECT confvalue FROM config where confname='DefaultDateFormat'";
 		$result=DB_query($sql, $db);
 		$myrow=DB_fetch_array($result);
 		$DateFormat=$myrow[0];
@@ -109,9 +109,9 @@
 
 /* Check that the factor company is set up in the weberp database */
 	function VerifyFactorCompany($factorco , $i, $Errors, $db) {
-		$Searchsql = 'SELECT COUNT(id)
+		$Searchsql = "SELECT COUNT(id)
 					 FROM factorcompanies
-					  WHERE id="'.$factorco.'"';
+					  WHERE id='".$factorco."'";
 		$SearchResult=DB_query($Searchsql, $db);
 		$answer = DB_fetch_row($SearchResult);
 		if ($answer[0] == 0) {
@@ -203,8 +203,8 @@
 			$FieldNames.=$key.', ';
 			$FieldValues.='"'.$value.'", ';
 		}
-		$sql = 'INSERT INTO suppliers ('.substr($FieldNames,0,-2).') '.
-		  'VALUES ('.substr($FieldValues,0,-2).') ';
+		$sql = "INSERT INTO suppliers (".substr($FieldNames,0,-2).") ".
+		  "VALUES (".substr($FieldValues,0,-2).") ";
 		if (sizeof($Errors)==0) {
 			$result = DB_Query($sql, $db);
 			if (DB_error_no($db) != 0) {
@@ -288,11 +288,11 @@
 		if (isset($CustomerDetails['taxref'])){
 			$Errors=VerifyTaxRef($CustomerDetails['taxref'], sizeof($Errors), $Errors);
 		}
-		$sql='UPDATE suppliers SET ';
+		$sql="UPDATE suppliers SET ";
 		foreach ($SupplierDetails as $key => $value) {
 			$sql .= $key.'="'.$value.'", ';
 		}
-		$sql = substr($sql,0,-2).' WHERE supplierid="'.$SupplierDetails['supplierid'].'"';
+		$sql = substr($sql,0,-2)." WHERE supplierid='".$SupplierDetails['supplierid']."'";
 		if (sizeof($Errors)==0) {
 			$result = DB_Query($sql, $db);
 			echo DB_error_no($db);
@@ -320,7 +320,7 @@
 		if (sizeof($Errors)!=0) {
 			return $Errors;
 		}
-		$sql='SELECT * FROM suppliers WHERE supplierid="'.$SupplierID.'"';
+		$sql="SELECT * FROM suppliers WHERE supplierid='".$SupplierID."'";
 		$result = DB_Query($sql, $db);
 		if (sizeof($Errors)==0) {
 			return DB_fetch_array($result);
@@ -339,9 +339,9 @@
 			$Errors[0]=NoAuthorisation;
 			return $Errors;
 		}
-		$sql='SELECT supplierid
+		$sql="SELECT supplierid
 			FROM suppliers
-			WHERE '.$Field.' LIKE "%'.$Criteria.'%" ORDER BY supplierid';
+			WHERE ".$Field." LIKE '%".$Criteria."%' ORDER BY supplierid";
 		$result = DB_Query($sql, $db);
 		$i=0;
 		$SupplierList = array();

@@ -1,5 +1,5 @@
 <?php
-/* $Id$*/
+/* $Id: api_session.inc 3352 2010-02-19 09:46:15Z lindsayh $*/
 
 if (!isset($PathPrefix)) {
 	$PathPrefix='';

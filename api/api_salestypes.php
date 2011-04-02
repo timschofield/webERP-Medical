@@ -1,5 +1,5 @@
 <?php
-/* $Id$*/
+/* $Id: api_salestypes.php 4521 2011-03-29 09:04:20Z daintree $*/
 
 /* This function returns a list of the sales type abbreviations
  * currently setup on webERP
@@ -12,7 +12,7 @@
 			$Errors[0]=NoAuthorisation;
 			return $Errors;
 		}
-		$sql = 'SELECT typeabbrev FROM salestypes';
+		$sql = "SELECT typeabbrev FROM salestypes";
 		$result = DB_query($sql, $db);
 		$i=0;
 		while ($myrow=DB_fetch_array($result)) {
@@ -38,7 +38,7 @@
 		}
 		$Errors = VerifySalesType($salestype, sizeof($Errors), $Errors, $db);
 		if (sizeof($Errors)==0) {
-			$sql = 'SELECT * FROM salestypes WHERE typeabbrev="'.$salestype.'"';
+			$sql = "SELECT * FROM salestypes WHERE typeabbrev='".$salestype."'";
 			$result = DB_query($sql, $db);
 			$Errors[0]=0;
 			$Errors[1]=DB_fetch_array($result);
@@ -66,8 +66,8 @@
 			$FieldNames.=$key.', ';
 			$FieldValues.='"'.$value.'", ';
 		}
-		$sql = 'INSERT INTO salestypes ('.substr($FieldNames,0,-2).') '.
-		  'VALUES ('.substr($FieldValues,0,-2).') ';
+		$sql = "INSERT INTO salestypes (".substr($FieldNames,0,-2).") ".
+		  "VALUES (".substr($FieldValues,0,-2).") ";
 		if (sizeof($Errors)==0) {
 			$result = DB_Query($sql, $db);
 			if (DB_error_no($db) != 0) {

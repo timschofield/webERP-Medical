@@ -1,5 +1,5 @@
 <?php
-/* $Id$*/
+/* $Id: api_webERPsettings.php 3237 2009-12-16 13:44:52Z tim_schofield $*/
 
 /* This function returns the default currency code in webERP.
  */

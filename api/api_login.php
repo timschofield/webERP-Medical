@@ -1,5 +1,5 @@
 <?php
-/* $Id$*/
+/* $Id: api_login.php 4095 2010-10-09 02:49:35Z daintree $*/
 //  Validates user and sets up $_SESSION environment for API users.
 function  LoginAPI($databasename, $user, $password) {
 	global  $PathPrefix;		// For included files
@@ -136,11 +136,11 @@ function  DoSetup()
 
 			    $CurrencyRates = GetECBCurrencyRates(); // gets rates from ECB see includes/MiscFunctions.php
 			    /*Loop around the defined currencies and get the rate from ECB */
-			    $CurrenciesResult = DB_query('SELECT currabrev FROM currencies',$db);
+			    $CurrenciesResult = DB_query("SELECT currabrev FROM currencies",$db);
 			    while ($CurrencyRow = DB_fetch_row($CurrenciesResult)){
 				    if ($CurrencyRow[0]!=$_SESSION['CompanyRecord']['currencydefault']){
-					    $UpdateCurrRateResult = DB_query('UPDATE currencies SET
-											    rate=' . GetCurrencyRate ($CurrencyRow[0],$CurrencyRates) . "
+					    $UpdateCurrRateResult = DB_query("UPDATE currencies SET
+											    rate='" . GetCurrencyRate ($CurrencyRow[0],$CurrencyRates) . "'
 											    WHERE currabrev='" . $CurrencyRow[0] . "'",$db);
 				    }
 			    }

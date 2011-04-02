@@ -1,8 +1,8 @@
 <?php
-/* $Id$*/
+/* $Id: api_paymentterms.php 3237 2009-12-16 13:44:52Z tim_schofield $*/
 
 /* This function returns a list of the payment terms abbreviations
- * currently setup on webERP 
+ * currently setup on webERP
  */
 
 	function GetPaymentTermsList($user, $password) {
@@ -12,7 +12,7 @@
 			$Errors[0]=NoAuthorisation;
 			return $Errors;
 		}
-		$sql = 'SELECT termsindicator FROM paymentterms';
+		$sql = "SELECT termsindicator FROM paymentterms";
 		$result = DB_query($sql, $db);
 		$i=0;
 		while ($myrow=DB_fetch_array($result)) {
@@ -21,12 +21,12 @@
 		}
 		return $PaymentTermsList;
 	}
-	
+
 /* This function takes as a parameter a payment terms code
- * and returns an array containing the details of the selected 
+ * and returns an array containing the details of the selected
  * payment terms.
  */
-	
+
 	function GetPaymentTermsDetails($paymentterms, $user, $password) {
 		$Errors = array();
 		if (!isset($db)) {

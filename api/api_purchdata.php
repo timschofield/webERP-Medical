@@ -1,5 +1,5 @@
 <?php
-/* $Id$*/
+/* $Id: api_purchdata.php 3237 2009-12-16 13:44:52Z tim_schofield $*/
 
 	function VerifyPurchDataLineExists($SupplierID, $StockID, $i, $Errors, $db) {
 		if (VerifyStockCodeExists($StockID, $i, $Errors, $db)!=0 and
@@ -83,8 +83,8 @@
 			$FieldValues.='"'.$value.'", ';
 		}
 		if (sizeof($Errors)==0) {
-			$sql = 'INSERT INTO purchdata ('.substr($FieldNames,0,-2).') '.
-		  		'VALUES ('.substr($FieldValues,0,-2).') ';
+			$sql = "INSERT INTO purchdata (".substr($FieldNames,0,-2).") ".
+		  		"VALUES (".substr($FieldValues,0,-2).") ";
 			DB_Txn_Begin($db);
 			$result = DB_Query($sql, $db);
 			DB_Txn_Commit($db);
@@ -128,12 +128,12 @@
 		if (isset($StockItemDetails['preferred'])){
 			$Errors=VerifyPreferredFlag($PurchDataDetails['preferred'], sizeof($Errors), $Errors);
 		}
-		$sql='UPDATE purchdata SET ';
+		$sql="UPDATE purchdata SET ";
 		foreach ($PurchDataDetails as $key => $value) {
 			$sql .= $key.'="'.$value.'", ';
 		}
-		$sql = substr($sql,0,-2).' WHERE stockid="'.$PurchDataDetails['stockid'].
-			'" AND supplierno="'.$PurchDataDetails['supplierno'].'"';
+		$sql = substr($sql,0,-2)." WHERE stockid='".$PurchDataDetails['stockid'].
+			"' AND supplierno='".$PurchDataDetails['supplierno']."'";
 		if (sizeof($Errors)==0) {
 			$result = DB_Query($sql, $db);
 			echo DB_error_no($db);

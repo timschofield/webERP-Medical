@@ -1,5 +1,5 @@
 <?php
-/* $Id$*/
+/* $Id: api_glgroups.php 3237 2009-12-16 13:44:52Z tim_schofield $*/
 
 /* Check that the account group doesn't already exist'*/
 	function VerifyAccountGroup($AccountGroup, $i, $Errors, $db) {
@@ -79,8 +79,8 @@
 			$FieldValues.='"'.$value.'", ';
 		}
 		if (sizeof($Errors)==0) {
-			$sql = 'INSERT INTO accountgroups ('.substr($FieldNames,0,-2).') '.
-		  		'VALUES ('.substr($FieldValues,0,-2).') ';
+			$sql = "INSERT INTO accountgroups (".substr($FieldNames,0,-2).") ".
+		  		"VALUES (".substr($FieldValues,0,-2).") ";
 			$result = DB_Query($sql, $db);
 			if (DB_error_no($db) != 0) {
 				$Errors[0] = DatabaseUpdateFailed;

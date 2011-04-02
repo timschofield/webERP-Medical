@@ -1,5 +1,5 @@
 <?php
-/* $Id$*/
+/* $Id: api_salesman.php 4521 2011-03-29 09:04:20Z daintree $*/
 
 /* This function returns a list of the stock salesman codes
  * currently setup on webERP
@@ -12,7 +12,7 @@
 			$Errors[0]=NoAuthorisation;
 			return $Errors;
 		}
-		$sql = 'SELECT salesmancode FROM salesman';
+		$sql = "SELECT salesmancode FROM salesman";
 		$result = DB_query($sql, $db);
 		$i=0;
 		while ($myrow=DB_fetch_array($result)) {
@@ -34,7 +34,7 @@
 			$Errors[0]=NoAuthorisation;
 			return $Errors;
 		}
-		$sql = 'SELECT * FROM salesman WHERE salesmancode="'.$salesman.'"';
+		$sql = "SELECT * FROM salesman WHERE salesmancode='".$salesman."'";
 		$result = DB_query($sql, $db);
 		if (DB_num_rows($result)==0) {
 			$Errors[0]=NoSuchSalesMan;
@@ -64,8 +64,8 @@
 			$FieldNames.=$key.', ';
 			$FieldValues.='"'.$value.'", ';
 		}
-		$sql = 'INSERT INTO salesman ('.substr($FieldNames,0,-2).') '.
-		  'VALUES ('.substr($FieldValues,0,-2).') ';
+		$sql = "INSERT INTO salesman (".substr($FieldNames,0,-2).") ".
+		  "VALUES (".substr($FieldValues,0,-2).") ";
 		if (sizeof($Errors)==0) {
 			$result = DB_Query($sql, $db);
 			if (DB_error_no($db) != 0) {
@@ -82,14 +82,14 @@
  * salesman.
  */
 
-	function GetSalesmanDetailsFromName($salesmanname, $user, $password) {
+	function GetSalesmanDetailsFromName($SalesmanName, $user, $password) {
 		$Errors = array();
 		$db = db($user, $password);
 		if (gettype($db)=='integer') {
 			$Errors[0]=NoAuthorisation;
 			return $Errors;
 		}
-		$sql = 'SELECT * FROM salesman WHERE salesmanname="'.$salesmanname.'"';
+		$sql = "SELECT * FROM salesman WHERE salesmanname='".$SalesmanName."'";
 		$result = DB_query($sql, $db);
 		if (DB_num_rows($result)==0) {
 			$Errors[0]=NoSuchSalesMan;

@@ -1,5 +1,5 @@
 <?php
-/* $Id$*/
+/* $Id: api_taxgroups.php 4521 2011-03-29 09:04:20Z daintree $*/
 
 /* This function returns a list of the tax group id's
  * currently setup on webERP
@@ -12,7 +12,7 @@
 			$Errors[0]=NoAuthorisation;
 			return $Errors;
 		}
-		$sql = 'SELECT taxgroupid FROM taxgroups';
+		$sql = "SELECT taxgroupid FROM taxgroups";
 		$result = DB_query($sql, $db);
 		$i=0;
 		while ($myrow=DB_fetch_array($result)) {
@@ -34,7 +34,7 @@
 			$Errors[0]=NoAuthorisation;
 			return $Errors;
 		}
-		$sql = 'SELECT * FROM taxgroups WHERE taxgroupid="'.$taxgroup.'"';
+		$sql = "SELECT * FROM taxgroups WHERE taxgroupid='".$taxgroup."'";
 		$result = DB_query($sql, $db);
 		return DB_fetch_array($result);
 	}

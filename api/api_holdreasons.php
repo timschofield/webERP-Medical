@@ -1,8 +1,8 @@
 <?php
-/* $Id$*/
+/* $Id: api_holdreasons.php 4521 2011-03-29 09:04:20Z daintree $*/
 
 /* This function returns a list of the hold reason codes
- * currently setup on webERP 
+ * currently setup on webERP
  */
 
 	function GetHoldReasonList($user, $password) {
@@ -12,7 +12,7 @@
 			$Errors[0]=NoAuthorisation;
 			return $Errors;
 		}
-		$sql = 'SELECT reasoncode FROM holdreasons';
+		$sql = "SELECT reasoncode FROM holdreasons";
 		$result = DB_query($sql, $db);
 		$i=0;
 		while ($myrow=DB_fetch_array($result)) {
@@ -21,12 +21,12 @@
 		}
 		return $HoldReasonList;
 	}
-	
+
 /* This function takes as a parameter a hold reason code
- * and returns an array containing the details of the selected 
+ * and returns an array containing the details of the selected
  * hold reason.
  */
-	
+
 	function GetHoldReasonDetails($holdreason, $user, $password) {
 		$Errors = array();
 		$db = db($user, $password);
@@ -34,7 +34,7 @@
 			$Errors[0]=NoAuthorisation;
 			return $Errors;
 		}
-		$sql = 'SELECT * FROM holdreasons WHERE reasoncode="'.$holdreason.'"';
+		$sql = "SELECT * FROM holdreasons WHERE reasoncode='".$holdreason."'";
 		$result = DB_query($sql, $db);
 		return DB_fetch_array($result);
 	}
