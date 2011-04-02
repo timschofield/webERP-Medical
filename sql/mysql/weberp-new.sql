@@ -110,16 +110,6 @@ CREATE TABLE `audittrail` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `audittrail`
---
-
-LOCK TABLES `audittrail` WRITE;
-/*!40000 ALTER TABLE `audittrail` DISABLE KEYS */;
-INSERT INTO `audittrail` VALUES ('2011-01-20 17:11:08','admin','UPDATE config SET confvalue = \'4.0\' WHERE confname=\'VersionNumber\''),('2011-01-20 17:11:08','admin','UPDATE config SET confvalue=\'61\' WHERE confname=\'DBUpdateNumber\'');
-/*!40000 ALTER TABLE `audittrail` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `bankaccounts`
 --
 

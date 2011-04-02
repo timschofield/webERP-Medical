@@ -111,16 +111,6 @@ CREATE TABLE `audittrail` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `audittrail`
---
-
-LOCK TABLES `audittrail` WRITE;
-/*!40000 ALTER TABLE `audittrail` DISABLE KEYS */;
-INSERT INTO `audittrail` VALUES ('2011-01-20 16:58:26','admin','UPDATE currencies SET\n							rate=\'0.6210704557167\'\n							WHERE currabrev=\'GBP\''),('2011-01-20 16:58:26','admin','UPDATE currencies SET\n							rate=\'0.7362143856291\'\n							WHERE currabrev=\'EUR\''),('2011-01-20 16:58:26','admin','UPDATE currencies SET\n							rate=\'0.94772877862033\'\n							WHERE currabrev=\'CHF\''),('2011-01-20 16:58:26','admin','UPDATE currencies SET\n							rate=\'0.99182802031952\'\n							WHERE currabrev=\'USD\''),('2011-01-20 16:58:26','admin','UPDATE config SET confvalue = \'2011-01-20\' WHERE confname=\'UpdateCurrencyRatesDaily\''),('2011-01-20 17:01:26','admin','UPDATE config SET confvalue=\'61\' WHERE confname=\'DBUpdateNumber\''),('2011-01-20 17:03:40','admin','UPDATE config SET confvalue=\'61\' WHERE confname=\'DBUpdateNumber\''),('2011-01-20 17:06:02','admin','UPDATE config SET confvalue = \'4.0\' WHERE confname=\'VersionNumber\''),('2011-01-20 17:06:02','admin','UPDATE config SET confvalue=\'61\' WHERE confname=\'DBUpdateNumber\'');
-/*!40000 ALTER TABLE `audittrail` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `bankaccounts`
 --
 
