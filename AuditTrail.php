@@ -157,7 +157,7 @@ if (isset($_POST['View'])) {
 			$RowColour = '#feff90';
 		}
 		if (Query_Type($myrow[2]) == 'DELETE') {
-			DeleteQueryInfo(str_replace('DELETE FROM','',$myrow[2]));
+			DeleteQueryInfo(str_replace("DELETE FROM",'',$myrow[2]));
 			$RowColour = '#fe90bf';
 		}
 
