@@ -124,7 +124,7 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 			$typeno = GetNextTransNo($type,$db);
 
 			//build narrative
-			$narrative= "PettyCash - ".$myrow['tabcode']." - ".$myrow['codeexpense']." - ".$myrow['notes']." - ".$myrow['receipt']."";
+			$narrative= "PettyCash - ".$myrow['tabcode']." - ".$myrow['codeexpense']." - ". DB_escape_string($myrow['notes'])." - ".$myrow['receipt']."";
 			//insert to gltrans
 			DB_Txn_Begin($db);
 
