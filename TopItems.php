@@ -8,16 +8,16 @@ $title = _('Top Items Searching');
 include ('includes/header.inc');
 //check if input already
 if (!(isset($_POST['Search']))) {
-			
+
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Top Sales Order Search') . '" alt="" />' . ' ' . _('Top Sales Order Search') . '</p>';
 	echo "<form action=" . $_SERVER['PHP_SELF'] . '?' . SID . ' name="SelectCustomer" method=POST>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table cellpadding=3 colspan=4 class=selection>';
 	//to view store location
 	echo '<tr><td width="150">' . _('Select Location') . '  </td><td>:</td><td><select name=Location>';
-	$sql = 'SELECT loccode,
+	$sql = "SELECT loccode,
 					locationname
-				FROM `locations`';
+				FROM `locations`";
 	$result = DB_query($sql, $db);
 	echo '<option value="All">' . _('All') . '</option>';
 	while ($myrow = DB_fetch_array($result)) {
@@ -26,9 +26,9 @@ if (!(isset($_POST['Search']))) {
 	echo '</select></td></tr>';
 	//to view list of customer
 	echo '<tr><td width="150">' . _('Select Customer Type') . '   </td><td>:</td><td><select name=Customers>';
-	$sql = 'SELECT typename,
+	$sql = "SELECT typename,
 					typeid
-				FROM debtortype';
+				FROM debtortype";
 	$result = DB_query($sql, $db);
 	echo "<option value='All'>" . _('All') . '</option>';
 	while ($myrow = DB_fetch_array($result)) {
@@ -66,7 +66,7 @@ if (!(isset($_POST['Search']))) {
 	$FromDate = FormatDateForSQL(DateAdd(Date($_SESSION['DefaultDateFormat']),'d', -$_POST['NumberOfDays']));
 	//the situation if the location and customer type selected "All"
 	if (($_POST['Location'] == 'All') and ($_POST['Customers'] == 'All')) {
-		
+
 		$SQL = "SELECT 	salesorderdetails.stkcode,
 						SUM(salesorderdetails.qtyinvoiced) TotalInvoiced,
 						SUM(salesorderdetails.qtyinvoiced * salesorderdetails.unitprice ) AS ValueSales,
@@ -80,7 +80,7 @@ if (!(isset($_POST['Search']))) {
 						AND salesorderdetails.stkcode = stockmaster.stockid
 						AND salesorders.debtorno = debtorsmaster.debtorno
 						AND debtorsmaster.currcode = currencies.currabrev
-						AND salesorderdetails.ActualDispatchDate >= '" . $FromDate . "' 
+						AND salesorderdetails.ActualDispatchDate >= '" . $FromDate . "'
 				GROUP BY salesorderdetails.stkcode
 				ORDER BY " . $_POST['Sequence'] . " DESC
 				LIMIT " . $_POST['NumberOfTopItems'] . "";
@@ -151,7 +151,7 @@ if (!(isset($_POST['Search']))) {
 		}
 	}
 	$result = DB_query($SQL, $db);
-	
+
 	echo '<p class="page_title_text" align="center"><strong>' . _('Top Sales Items List') . '</strong></p>';
 	echo '<form action="PDFTopItems.php"  method="GET"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -193,10 +193,10 @@ if (!(isset($_POST['Search']))) {
 						<td>%s</td>
 						<td class="number">%s</td>
 						<td class="number">%s</td>
-						</tr>', 
-						$i, 
-						$myrow['0'], 
-						$myrow['3'], 
+						</tr>',
+						$i,
+						$myrow['0'],
+						$myrow['3'],
 						$myrow['1'], //total invoice here
 						$myrow['4'], //unit
 						number_format($myrow['2']/$myrow['5'],2), //value sales here
