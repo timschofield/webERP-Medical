@@ -45,7 +45,7 @@ if (isset($_POST['Submit']) OR isset($_POST['EnterMoreItems'])){
 			if ($_POST['StockQTY' . $i] <= 0){
 				$InputError = True;
 				$ErrorMessage .= _('The quantity entered for').' '. $_POST['StockID' . $i] . ' ' . _('is less than or equal to 0') . '. ' . _('Please correct this or remove the item').'<br>';
-
+				$_POST['LinesCounter'] -= 10;
 			}
 			// Only if stock exist at this location
 			$result = DB_query("SELECT quantity FROM locstock WHERE stockid='" . $_POST['StockID' . $i] . "' and loccode='".$_POST['FromStockLocation']."'",$db);
