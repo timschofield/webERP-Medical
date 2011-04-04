@@ -23,22 +23,22 @@ if (isset($_POST['Previous'])) {
 }
 
 if (isset($_POST['update'])) {
-	prnMsg('Budget updated successfully', 'success');
+	prnMsg(_('Budget updated successfully'), 'success');
 }
 
 //If an account hasn't been selected then select one here.
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>';
-echo '<form action=' . $_SERVER['PHP_SELF'] . '?' . SID . ' method=post name="selectaccount">';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post" name="selectaccount">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo '<table>';
 
-echo '</br><tr><td>'.  _('Select GL Account').  ":</td><td><select name='SelectedAccount'
-		onChange='ReloadForm(selectaccount.Select)'>";
+echo '</br><tr><td>'.  _('Select GL Account').  ':</td><td><select name="SelectedAccount"
+		onChange="ReloadForm(selectaccount.Select)">';
 
 $SQL = "SELECT accountcode,
-						accountname
-					FROM chartmaster
-					ORDER BY accountcode";
+				accountname
+			FROM chartmaster
+			ORDER BY accountcode";
 
 $result=DB_query($SQL,$db);
 if (DB_num_rows($result)==0){
@@ -48,10 +48,10 @@ if (DB_num_rows($result)==0){
 	while ($myrow=DB_fetch_array($result)){
 		$account = $myrow['accountcode'] . ' - ' . $myrow['accountname'];
 		if (isset($SelectedAccount) and isset($LastCode) and $SelectedAccount==$myrow['accountcode']){
-			echo '<option selected value=' . $myrow['accountcode'] . '>' . $account;
+			echo '<option selected value=' . $myrow['accountcode'] . '>' . $account . '</option>';
 			$PrevCode=$LastCode;
 		} else {
-			echo '<option value=' . $myrow['accountcode'] . '>' . $account;
+			echo '<option value=' . $myrow['accountcode'] . '>' . $account . '</option>';
 			if (isset($SelectedAccount) and isset($LastCode) and $SelectedAccount == $LastCode) {
 				$NextCode=$myrow['accountcode'];
 			}
@@ -64,8 +64,8 @@ if (DB_num_rows($result)==0){
 if (!isset($PrevCode)) {$PrevCode='';}
 if (!isset($NextCode)) {$NextCode='';}
 
-echo '<input type="hidden" name="PrevAccount" value='.$PrevCode.'>';
-echo '<input type="hidden" name="NextAccount" value='.$NextCode.'>';
+echo '<input type="hidden" name="PrevAccount" value="'.$PrevCode.'">';
+echo '<input type="hidden" name="NextAccount" value="'.$NextCode.'">';
 echo '</table>';
 echo '<br /><table><tr><td><input type="submit" name="Previous" value="' . _('Prev Account') . '"></td>';
 echo '<td><input type="submit" name="Select" value="' . _('Select Account') . '"></td>';
@@ -148,7 +148,7 @@ if (isset($SelectedAccount) and $SelectedAccount != '') {
 
 // Table Headers
 
-	echo '<form name="form" action=' . $_SERVER['PHP_SELF'] . '?' . SID . ' method=post>';
+	echo '<form name="form" action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<br /><table class=selection>';
 	echo '<tr><th colspan=3>'. _('Last Financial Year') .'</th>';
@@ -156,7 +156,7 @@ if (isset($SelectedAccount) and $SelectedAccount != '') {
 	echo '<th colspan=3>'. _('Next Financial Year') .'</th></tr>';
 
 	echo '<tr><th colspan=3>'. _('Year ended').' - '.
-		Date($_SESSION['DefaultDateFormat'],YearEndDate($_SESSION['YearEnd'], -1)) .'</th>';
+		Date($_SESSION['DefaultDateFormat'],YearEndDate($_SESSION['YearEnd'],-1)) .'</th>';
 	echo '<th colspan=3>'. _('Year ended').' - '.
 		Date($_SESSION['DefaultDateFormat'],YearEndDate($_SESSION['YearEnd'],0)) .'</th>';
 	echo '<th colspan=3>'. _('Year ended').' - '.
@@ -169,7 +169,6 @@ if (isset($SelectedAccount) and $SelectedAccount != '') {
 				<th>'. _('Budget') . '</th>';
 	}
 	echo '</tr>';
-
 
 // Main Table
 
