@@ -283,7 +283,7 @@ if (isset($_POST['TaxAuthority']) AND
 		$title = _('Taxation Reporting Error');
 		include('includes/header.inc');
 		prnMsg (_('There are no tax entries to list'),'info');
-		echo '<br><a href="'$rootpath/index.php?.'">' . _('Back to the menu') . '</a>';
+		echo '<br><a href="' . $rootpath . '/index.php?">' . _('Back to the menu') . '</a>';
 		include('includes/footer.inc');
 		exit;
     } else {
