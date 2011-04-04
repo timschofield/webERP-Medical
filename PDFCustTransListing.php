@@ -27,17 +27,17 @@ if (!isset($_POST['Date'])){
 		prnMsg($msg,'error');
 	}
 
-	 echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . '>';
+	 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	 echo '<table class=selection>
 	 			<tr>
-				<td>' . _('Enter the date for which the transactions are to be listed') . ":</td>
-				<td><input type=text name='Date' maxlength=10 size=10 class=date alt='" . $_SESSION['DefaultDateFormat'] . "' value='" . Date($_SESSION['DefaultDateFormat']) . "'></td>
-			</tr>";
+				<td>' . _('Enter the date for which the transactions are to be listed') . ':</td>
+				<td><input type=text name="Date" maxlength=10 size=10 class=date alt="' . $_SESSION['DefaultDateFormat'] . '" value="' . Date($_SESSION['DefaultDateFormat']) . '"></td>
+			</tr>';
 
 	echo '<tr><td>' . _('Transaction type') . '</td><td>';
 
-	echo "<select name='TransType'>";
+	echo '<select name="TransType">';
 
 	echo '<option value=10>' . _('Invoices').'</option>';
 	echo '<option value=11>' . _('Credit Notes').'</option>';
@@ -45,7 +45,7 @@ if (!isset($_POST['Date'])){
 
 	 echo '</select></td></tr>';
 
-	 echo "</select></td></tr></table><br><div class='centre'><input type=submit name='Go' value='" . _('Create PDF') . "'></div>";
+	 echo '</table><br><div class="centre"><input type=submit name="Go" value="' . _('Create PDF') . '"></div>';
 
 
 	 include('includes/footer.inc');
@@ -126,18 +126,6 @@ $YPos-=$line_height;
 $LeftOvers = $pdf->addTextWrap($Left_Margin+452,$YPos,70,$FontSize,number_format(-$TotalCheques,2), 'right');
 $LeftOvers = $pdf->addTextWrap($Left_Margin+265,$YPos,300,$FontSize,_('Total') . '  ' . _('Transactions'), 'left');
 
-/* UldisN
-$pdfcode = $pdf->output();
-$len = strlen($pdfcode);
-header('Content-type: application/pdf');
-header('Content-Length: ' . $len);
-header('Content-Disposition: inline; filename=ChequeListing.pdf');
-header('Expires: 0');
-header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-header('Pragma: public');
-
-$pdf->stream();
-*/
 $ReportFileName = $_SESSION['DatabaseName'] . '_CustTransListing_' . date('Y-m-d').'.pdf';
 $pdf->OutputD($ReportFileName);//UldisN
 $pdf->__destruct(); //UldisN
