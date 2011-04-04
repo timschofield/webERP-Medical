@@ -86,7 +86,7 @@ if (isset($_POST['Search'])) {
 	} else {
 		$_POST['AssetID']='%';
 	}
-	
+
 	$sql= "SELECT fixedassets.assetid,
 								fixedassets.cost,
 								fixedassets.accumdepn,
@@ -137,11 +137,11 @@ if (isset($_POST['Search'])) {
 		}
 		DB_data_seek($LocationResult,0);
 		echo '</select></td>';
-		echo '<input type=hidden name=AssetCat value="' . $_POST['AssetCat'].'"';
-		echo '<input type=hidden name=Keywords value="' . $_POST['Keywords'].'"';
-		echo '<input type=hidden name=AssetID value="' . $_POST['AssetID'].'"';
-		echo '<input type=hidden name=Search value="' . $_POST['Search'].'"';
-		echo '<td><input type=submit name="Move'.$myrow['assetid'].'" value=Move></td>';
+		echo '<input type=hidden name=AssetCat value="' . $_POST['AssetCat'].'" />';
+		echo '<input type=hidden name=Keywords value="' . $_POST['Keywords'].'" />';
+		echo '<input type=hidden name=AssetID value="' . $_POST['AssetID'].'" />';
+		echo '<input type=hidden name=Search value="' . $_POST['Search'].'" />';
+		echo '<td><input type=submit name="Move'.$myrow['assetid'].'" value="Move" /></td>';
 		echo '</tr>';
 	}
 	echo '</table></form>';
