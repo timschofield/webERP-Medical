@@ -59,15 +59,15 @@ if (isset($_POST['SummaryType']) and $_POST['SummaryType'] == 'suppname') {
 
 if (isset($_POST['submit'])) {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') .
-		'" alt="" />' . ' ' . $title.'</p>';
+		'" alt="" />' . $title.'</p>';
 	submit($db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$SupplierName,$SupplierNameOp,$savesummarytype);
 } else if (isset($_POST['submitcsv'])) {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') .
-		'" alt="" />' . ' ' . $title.'</p>';
+		'" alt="" />' . $title.'</p>';
 	submitcsv($db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$SupplierName,$SupplierNameOp,$savesummarytype);
 } else {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') .
-		'" alt="" />' . '</img>' . $title.'</p>';
+		'" alt="" />' . $title.'</p>';
 	display($db);
 }
 
@@ -93,7 +93,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 		prnMsg(_('Invalid To Date'),'error');
 	}
 
-	# Add more to WHERE statement, if user entered something for the part number,supplierid, name
+	// Add more to WHERE statement, if user entered something for the part number,supplierid, name
 	$wherepart = ' ';
 	if (strlen($PartNumber) > 0 && $PartNumberOp == 'LIKE') {
 		$PartNumber = $PartNumber . '%';
@@ -131,15 +131,15 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 	}
 
 	if (strlen($_POST['OrderNo']) > 0) {
-		$whereorderno = ' AND purchorderdetails.orderno = ' . " '" . $_POST['OrderNo'] . "'  ";
+		$whereorderno = " AND purchorderdetails.orderno = " . " '" . $_POST['OrderNo'] . "'  ";
 	} else {
 		$whereorderno=' ';
 	}
 
 	$wherelinestatus = ' ';
-	# Had to use IF statement instead of comparing 'linestatus' to $_POST['LineStatus']
-	#in WHERE clause because the WHERE clause didn't recognize
-	# that had used the IF statement to create a field called linestatus
+	// Had to use IF statement instead of comparing 'linestatus' to $_POST['LineStatus']
+	//in WHERE clause because the WHERE clause didn't recognize
+	// that had used the IF statement to create a field called linestatus
 	if ($_POST['LineStatus'] != 'All') {
 		if ($_POST['DateType'] == 'Order') {
 			$wherelinestatus = " AND IF(purchorderdetails.quantityord = purchorderdetails.qtyinvoiced ||
@@ -179,7 +179,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 						LEFT JOIN purchorders ON purchorders.orderno=purchorderdetails.orderno
 						LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
 						LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
-						WHERE purchorders.orddate >='$fromdate'
+						WHERE purchorders.orddate >='" . $fromdate . "'
 						 AND purchorders.orddate <='$todate'
 						$wherepart
 						$wheresupplierid
@@ -827,9 +827,9 @@ function submitcsv(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Sup
 	}
 
 	$wherelinestatus = ' ';
-	# Had to use IF statement instead of comparing 'linestatus' to $_POST['LineStatus']
-	#in WHERE clause because the WHERE clause didn't recognize
-	# that had used the IF statement to create a field called linestatus
+	// Had to use IF statement instead of comparing 'linestatus' to $_POST['LineStatus']
+	//in WHERE clause because the WHERE clause didn't recognize
+	// that had used the IF statement to create a field called linestatus
 	if ($_POST['LineStatus'] != 'All') {
 		if ($_POST['DateType'] == 'Order') {
 			$wherelinestatus = " AND IF(purchorderdetails.quantityord = purchorderdetails.qtyinvoiced ||
@@ -1430,11 +1430,11 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 	echo '</select></td><td>&nbsp</td></tr>';
 
 	echo '<tr>
-		<td>' . _('Date Range') . ":</td>
-		<td><input type='Text' class=date alt='".$_SESSION['DefaultDateFormat']."' name='FromDate' size=10 maxlength=10 value=" . $_POST['FromDate'] .
-		'> ' . _('To') . ":&nbsp&nbsp
-		<input type='Text' class=date alt='".$_SESSION['DefaultDateFormat']."' name='ToDate' size=10 maxlength=10 value=" . $_POST['ToDate'] . "></td>
-	</tr>";
+		<td>' . _('Date Range') . ':</td>
+		<td><input type="Text" class=date alt="'.$_SESSION['DefaultDateFormat'].'" name="FromDate" size=10 maxlength=10 value="' . $_POST['FromDate'] .
+		'> ' . _('To') . ':&nbsp&nbsp
+		<input type="Text" class=date alt="'.$_SESSION['DefaultDateFormat'].'" name="ToDate" size=10 maxlength=10 value="' . $_POST['ToDate'] . '></td>
+	</tr>';
 
 	echo '<tr><td>' . _('Part Number') . ':</td>';
 	echo "<td><select name='PartNumberOp'>";
