@@ -283,7 +283,7 @@ if (isset($_POST['TaxAuthority']) AND
 		$title = _('Taxation Reporting Error');
 		include('includes/header.inc');
 		prnMsg (_('There are no tax entries to list'),'info');
-		echo "<br><a href='$rootpath/index.php?" . SID . "'>" . _('Back to the menu') . '</a>';
+		echo '<br><a href="'$rootpath/index.php?.'">' . _('Back to the menu') . '</a>';
 		include('includes/footer.inc');
 		exit;
     } else {
@@ -298,7 +298,7 @@ if (isset($_POST['TaxAuthority']) AND
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Supplier Types')
 	. '" alt="" />' . $title. '</p>';
 
-	echo '<form action=' . $_SERVER['PHP_SELF'] . " method='POST'><table class=selection>";
+	echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="POST"><table class=selection>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<tr><td>' . _('Tax Authority To Report On:') . ':</font></td>
@@ -318,8 +318,8 @@ if (isset($_POST['TaxAuthority']) AND
 			'</select></td></tr>';
 
 
-	echo '<tr><td>' . _('Return To') . ":</td>
-			<td><select Name='ToPeriod'>";
+	echo '<tr><td>' . _('Return To') . ':</td>
+			<td><select Name="ToPeriod">';
 
 
 	$DefaultPeriod = GetPeriod(Date($_SESSION['DefaultDateFormat'],Mktime(0,0,0,Date('m'),0,Date('Y'))),$db);
@@ -341,17 +341,17 @@ if (isset($_POST['TaxAuthority']) AND
 
 	echo '</select></td></tr>';
 
-	echo '<tr><td>' . _('Detail Or Summary Only') . ":</font></td>
-			<td><select name='DetailOrSummary'>
-			<option Value='Detail'>" . _('Detail and Summary') .
-			"<option selected Value='Summary'>" . _('Summary Only') .
-			"</select></td></tr>";
+	echo '<tr><td>' . _('Detail Or Summary Only') . ':</font></td>
+			<td><select name="DetailOrSummary">
+			<option Value="Detail">' . _('Detail and Summary') . '</option>
+			<option selected Value="Summary">' . _('Summary Only') . '</option>
+			</select></td></tr>';
 
 
-	echo "</table>
-		<br /><div class='centre'><input type=Submit Name='PrintPDF' Value='" . _('Print PDF') . "'>
+	echo '</table>
+		<br /><div class="centre"><input type=Submit Name="PrintPDF" Value="' . _('Print PDF') . '">
 		</div>
-		</form>";
+		</form>';
 
 	include('includes/footer.inc');
 } /*end of else not PrintPDF */

@@ -337,9 +337,9 @@ if (isset($_GET['AllocTrans'])) {
 
 	if (isset($_POST['AllocTrans'])) {
 		// Page called with trans number
-		echo "<form action='" . $_SERVER['PHP_SELF'] . '?' . SID . "' method=post>";
+		echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-		echo "<input type=hidden name='AllocTrans' value=" . $_POST['AllocTrans'] . '>';
+		echo '<input type=hidden name="AllocTrans" value="' . $_POST['AllocTrans'] . '">';
 
 		// Show trans already allocated and potential new allocations
 
@@ -391,26 +391,26 @@ if (isset($_GET['AllocTrans'])) {
 					$balance+=$YetToAlloc;
 					echo "<td>" . $curTrans ."</td><td class=number>" . number_format($balance,2) . "</td></tr>";
 			} else {
-					echo "<input type=hidden name='YetToAlloc" . $Counter . "' value=" . round($YetToAlloc,2) . '></td>';
-					echo "<td class=number><input tabindex=".$j." type='checkbox' name='All" .  $Counter . "'";
+					echo '<input type=hidden name="YetToAlloc"' . $Counter . '" value="' . round($YetToAlloc,2) . '"></td>';
+					echo '<td class=number>';
 
 					if (ABS($AllocnItem->AllocAmt-$YetToAlloc) < 0.01) {
-							echo ' value=' . True . '>';
+							echo '<input tabindex="'.$j.'" type="checkbox" name="All"' .  $Counter . '" value=' . True . '>';
 					} else {
-							echo '>';
+							echo '<input tabindex="'.$j.'" type="checkbox" name="All"' .  $Counter . '">';
 					}
 					$balance += $YetToAlloc-$AllocnItem->AllocAmt;
 					$j++;
-					echo "<input tabindex=".$j." type=text class=number name='Amt" . $Counter ."' maxlength=12 size=13 value=" . round($AllocnItem->AllocAmt,2) . ">
-						<input type=hidden name='AllocID" . $Counter . "' value=" . $AllocnItem->ID . '></td>
+					echo '<input tabindex="'.$j.'" type="text" class="number" name="Amt"' . $Counter .'" maxlength="12" size="13" value="' . round($AllocnItem->AllocAmt,2) . '">
+						<input type=hidden name="AllocID"' . $Counter . '" value="' . $AllocnItem->ID . '"></td>
 						<td class=number>' . number_format($balance,2) . '</td></tr>';
 			}
 			$TotalAllocated = $TotalAllocated + round($AllocnItem->AllocAmt,2);
 			$Counter++;
 		}
 
-		echo "<tr>
-				<td colspan=5 class=number><b>"._('Total Allocated').':</b></td>
+		echo '<tr>
+				<td colspan="5" class="number"><b>'._('Total Allocated').':</b></td>
 				<td class=number><b><u>' . number_format($TotalAllocated,2) . '</u></b></td>';
 		$j++;
 		echo '<td rowspan=2>
