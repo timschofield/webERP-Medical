@@ -7,7 +7,7 @@ $title = _('Search Outstanding Sales Orders');
 include('includes/header.inc');
 include('includes/SQL_CommonFunctions.inc');
 
-if (isset($_POST['PlacePO'])){ /*user hit button to place PO for selected orders */
+if (isset($_POST['PlacePO'])){ //user hit button to place PO for selected orders
 
 	/*Note the button would not have been displayed if the user had no authority to create purchase orders */
 	$OrdersToPlacePOFor = '';
@@ -257,7 +257,7 @@ if (isset($_POST['PlacePO'])){ /*user hit button to place PO for selected orders
 
 				$result =DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 				$Order_Value  += ($ItemRow['price']*$ItemRow['orderqty']);
-			} /* end of the loop round the items on the sales order  that we wish to place purchase orders for */
+			} // end of the loop round the items on the sales order  that we wish to place purchase orders for
 
 
 			/* The last line to be purchase ordered was reach so there will be an order which is not yet completed in progress now to completed it */
@@ -301,9 +301,9 @@ if (isset($_POST['PlacePO'])){ /*user hit button to place PO for selected orders
 				DB_Txn_Commit($db);
 			}
 			$result = DB_query("UPDATE salesorders SET poplaced=1 WHERE " . $OrdersToPlacePOFor,$db);
-		}/*There were items that had purchasing data set up to create POs for */
-	} /* there were sales orders checked to place POs for */
-}/*end of purchase order creation code */
+		}//There were items that had purchasing data set up to create POs for
+	} // there were sales orders checked to place POs for
+}//end of purchase order creation code
 /* ******************************************************************************************* */
 
 
@@ -335,10 +335,10 @@ if (isset($_REQUEST['OrderNumber']) AND $_REQUEST['OrderNumber']!='') {
 } else {
 	if (isset($_REQUEST['SelectedCustomer'])) {
 		echo _('For customer') . ': ' . $_REQUEST['SelectedCustomer'] . ' ' . _('and') . ' ';
-		echo "<input type=hidden name='SelectedCustomer' value=" . $_REQUEST['SelectedCustomer'] . '>';
+		echo '<input type=hidden name="SelectedCustomer" value="' . $_REQUEST['SelectedCustomer'] . '">';
 	}
 	if (isset($_REQUEST['SelectedStockItem'])) {
-		 echo _('for the part') . ': ' . $_REQUEST['SelectedStockItem'] . ' ' . _('and') . " <input type=hidden name='SelectedStockItem' value='" . $_REQUEST['SelectedStockItem'] . "'>";
+		 echo _('for the part') . ': ' . $_REQUEST['SelectedStockItem'] . ' ' . _('and') . ' <input type=hidden name="SelectedStockItem" value="' . $_REQUEST['SelectedStockItem'] . '">';
 	}
 }
 
@@ -409,10 +409,7 @@ if (isset($_POST['StockID'])){
 
 if (!isset($StockID)) {
 
-     /* Not appropriate really to restrict search by date since may miss older
-     ouststanding orders
-	$OrdersAfterDate = Date('d/m/Y',Mktime(0,0,0,Date('m')-2,Date('d'),Date('Y')));
-     */
+     /* Not appropriate really to restrict search by date since may miss older ouststanding orders */
 
 	if (!isset($_REQUEST['OrderNumber']) or $_REQUEST['OrderNumber']==''){
 
@@ -756,7 +753,7 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 			} else {
 				$tableheader .= '</tr>';
 			}
-		} else {  /* displaying only quotations */
+		} else {  // displaying only quotations
 			$tableheader = '<tr>
 						<th>' . _('Modify') . '</th>
 						<th>' . _('Print Quote') . '</th>
@@ -790,9 +787,9 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 			$ModifyPage = $rootpath . '/SelectOrderItems.php?ModifyOrderNumber=' . $myrow['orderno'];
 			$Confirm_Invoice = $rootpath . '/ConfirmDispatch_Invoice.php?OrderNumber=' .$myrow['orderno'];
 
-			if ($_SESSION['PackNoteFormat']==1){ /*Laser printed A4 default */
+			if ($_SESSION['PackNoteFormat']==1){ //Laser printed A4 default
 				$PrintDispatchNote = $rootpath . '/PrintCustOrder_generic.php?TransNo=' . $myrow['orderno'];
-			} else { /*pre-printed stationery default */
+			} else { //pre-printed stationery default
 				$PrintDispatchNote = $rootpath . '/PrintCustOrder.php?TransNo=' . $myrow['orderno'];
 			}
 			$PrintQuotation = $rootpath . '/PDFQuotation.php?QuotationNo=' . $myrow['orderno'];
@@ -810,9 +807,9 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 
 	                     /*Check authority to create POs if user has authority then show the check boxes to select sales orders to place POs for otherwise don't provide this option */
 	                        if ($AuthRow['cancreate']==0 AND $myrow['poplaced']==0){ //cancreate==0 if the user can create POs and not already placed
-	        			printf("<td><a href='%s'>%s</a></td>
-	        				<td><a href='%s'>" . _('Invoice') . "</a></td>
-	        				<td><a target='_blank' href='%s'>" . $PrintText . " <IMG SRC='" .$rootpath."/css/".$theme."/images/pdf.png' title='" . _('Click for PDF') . "'></a></td>
+	        			printf('<td><a href="%s">%s</a></td>
+	        				<td><a href="%s">' . _('Invoice') . '</a></td>
+	        				<td><a target="_blank" href="%s">' . $PrintText . ' <img src="' .$rootpath.'/css/'.$theme.'/images/pdf.png" title="' . _('Click for PDF') . '"></a></td>
 	        				<td>%s</td>
 	        				<td>%s</td>
 	        				<td>%s</td>
@@ -821,7 +818,7 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 	        				<td>%s</td>
 	        				<td class=number>%s</td>
 	        				<td><input type=checkbox name=PlacePO_%s value><input type=hidden name=OrderNo_PO_%s value=%s></td>
-	        				</tr>",
+	        				</tr>',
 	        				$ModifyPage,
 	        				$myrow['orderno'],
 	        				$Confirm_Invoice,
@@ -836,10 +833,10 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 	                                        $i,
 	                                        $i,
 	                                        $myrow['orderno']);
-	                        } else {  /*User is not authorised to create POs so don't even show the option */
-	                               	printf("<td><a href='%s'>%s</a></td>
-	        				<td><a href='%s'>" . _('Invoice') . "</a></td>
-	        				<td><a target='_blank' href='%s'>" . $PrintText . " <IMG SRC='" .$rootpath."/css/".$theme."/images/pdf.png' title='" . _('Click for PDF') . "'></a></td>
+	                        } else {  //User is not authorised to create POs so don't even show the option
+	                               	printf('<td><a href="%s">%s</a></td>
+	        				<td><a href="%s">' . _('Invoice') . '</a></td>
+	        				<td><a target="_blank" href="%s">' . $PrintText . ' <img src="' .$rootpath.'/css/'.$theme.'/images/pdf.png" title="' . _('Click for PDF') . '"></a></td>
 	        				<td>%s</td>
 	        				<td>%s</td>
 	        				<td>%s</td>
@@ -847,7 +844,7 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 	        				<td>%s</td>
 	        				<td>%s</td>
 	        				<td class=number>%s</td>
-	        				</tr>",
+	        				</tr>',
 	        				$ModifyPage,
 	        				$myrow['orderno'],
 	        				$Confirm_Invoice,
@@ -861,9 +858,9 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 	        				$FormatedOrderValue);
 	                        }
 
-			} else { /*must be quotes only */
-				printf("<td><a href='%s'>%s</a></td>
-					<td><a href='%s'>" . $PrintText . "</a></td>
+			} else { //must be quotes only
+				printf('<td><a href="%s">%s</a></td>
+					<td> <a href="%s" >' . $PrintText . '</a> </td>
 					<td>%s</td>
 					<td>%s</td>
 					<td>%s</td>
@@ -871,7 +868,7 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 					<td>%s</td>
 					<td>%s</td>
 					<td class=number>%s</td>
-					</tr>",
+					</tr>',
 					$ModifyPage,
 					$myrow['orderno'],
 					$PrintQuotation,
@@ -893,7 +890,7 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 		//end of page full new headings if
 		}//end while loop through orders to display
 		if ($_POST['Quotations']=='Orders_Only'  AND $AuthRow['cancreate']==0){ //cancreate==0 means can create POs
-			echo '<tr><td colspan="8"><td><td colspan="2" class="number"><input type="submit" name="PlacePO" value="' . _('Place') . "\n" . _('PO') . '" onclick="return confirm(\'' . _('This will create purchase orders for all the items on the checked sales orders above, based on the preferred supplier purchasing data held in the system. Are You Absolutely Sure?') . '\');"></td</tr>';
+			echo '<tr><td colspan="8"><td><td colspan="2" class="number"><input type="submit" name="PlacePO" value="' . _('Place') . "\n" . _('PO') . '" onclick="return confirm(\'' . _('This will create purchase orders for all the items on the checked sales orders above, based on the preferred supplier purchasing data held in the system. Are You Absolutely Sure?') . '\');"></td></tr>';
 		}
 		echo '<tr><td colspan="9" class="number">';
 		if ($_POST['Quotations']=='Orders_Only'){
