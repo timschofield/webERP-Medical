@@ -257,45 +257,45 @@ function display(&$db,&$ChangeDate)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPL
 	echo '<br><table class=selection>';
 
 	echo '<tr>
-		<td>' . _('From Date') . ":</td>
-		<td><input type='Text' class=date alt='".$_SESSION['DefaultDateFormat'] ."' name='FromDate' size=10 maxlength=10 value=" . $_POST['FromDate'] . '></td></tr>
-		<tr></tr><td>' . _('To Date') . ":</td>
-		<td><input type='Text' class=date alt='".$_SESSION['DefaultDateFormat'] ."' name='ToDate' size=10 maxlength=10 value=" . $_POST['ToDate'] . '></td>
+		<td>' . _('From Date') . ':</td>
+		<td><input type="Text" class=date alt="'.$_SESSION['DefaultDateFormat'] .'" name="FromDate" size=10 maxlength=10 value="' . $_POST['FromDate'] . '"></td></tr>
+		<tr></tr><td>' . _('To Date') . ':</td>
+		<td><input type="Text" class=date alt="'.$_SESSION['DefaultDateFormat'] .'" name="ToDate" size=10 maxlength=10 value="' . $_POST['ToDate'] . '></td>
 	</tr>
 	<tr><td></td></tr>
 	<tr><td></td></tr>
 	<tr><td>'._('Exclude The Following Days').'</td></tr>
 	 <tr>
-		<td>' . _('Saturday') . ":</td>
-		<td><input type='checkbox' name='Saturday' value='Saturday'></td>
+		<td>' . _('Saturday') . ':</td>
+		<td><input type="checkbox" name="Saturday" value="Saturday"></td>
 	</tr>
 	 <tr>
-		<td>" . _('Sunday') . ":</td>
-		<td><input type='checkbox' name='Sunday' value='Sunday'></td>
+		<td>' . _('Sunday') . ':</td>
+		<td><input type="checkbox" name="Sunday" value="Sunday"></td>
 	</tr>
 	 <tr>
-		<td>" . _('Monday') . ":</td>
-		<td><input type='checkbox' name='Monday' value='Monday'></td>
+		<td>' . _('Monday') . ':</td>
+		<td><input type="checkbox" name="Monday" value="Monday"></td>
 	</tr>
 	 <tr>
-		<td>" . _('Tuesday') . ":</td>
-		<td><input type='checkbox' name='Tuesday' value='Tuesday'></td>
+		<td>' . _('Tuesday') . ':</td>
+		<td><input type="checkbox" name="Tuesday" value="Tuesday"></td>
 	</tr>
 	 <tr>
-		<td>" . _('Wednesday') . ":</td>
-		<td><input type='checkbox' name='Wednesday' value='Wednesday'></td>
+		<td>' . _('Wednesday') . ':</td>
+		<td><input type="checkbox" name="Wednesday" value="Wednesday"></td>
 	</tr>
 	 <tr>
-		<td>" . _('Thursday') . ":</td>
-		<td><input type='checkbox' name='Thursday' value='Thursday'></td>
+		<td>' . _('Thursday') . ':</td>
+		<td><input type="checkbox" name="Thursday" value="Thursday"></td>
 	</tr>
 	 <tr>
-		<td>" . _('Friday') . ":</td>
-		<td><input type='checkbox' name='Friday' value='Friday'></td>
+		<td>' . _('Friday') . ':</td>
+		<td><input type="checkbox" name="Friday" value="Friday"></td>
 	</tr>
 	</table><br>
-	<div class=centre><input type='submit' name='submit' value='" . _('Create Calendar') . "'>
-	<input type='submit' name='listall' value='" . _('List Date Range') . "'></div>";
+	<div class=centre><input type="submit" name="submit" value="' . _('Create Calendar') . '">
+	<input type="submit" name="listall" value="' . _('List Date Range') . '"></div>';
 
 if (!isset($_POST['ChangeDate'])) {
 	$_POST['ChangeDate']=date($_SESSION['DefaultDateFormat']);
@@ -303,11 +303,11 @@ if (!isset($_POST['ChangeDate'])) {
 
 echo '<br><table class=selection>';
 echo '<tr>
-		<td>' . _('Change Date Status') . ":</td>
-		<td><input type='Text' name='ChangeDate' class=date alt='".$_SESSION['DefaultDateFormat'] .
-			"' size=12 maxlength=12 value=" . $_POST['ChangeDate'] . '></td>
+		<td>' . _('Change Date Status') . ':</td>
+		<td><input type="Text" name="ChangeDate" class=date alt="'.$_SESSION['DefaultDateFormat'] .
+			'" size=12 maxlength=12 value="' . $_POST['ChangeDate'] . '"></td>
 	  <td><input type="submit" name="update" value="' . _('Update') . '"></td></tr></table>';
-echo "</br></br><div class='centre'></div>";
+echo '</br></br><div class="centre"></div>';
 echo '</form>';
 
 } // End of function display()
