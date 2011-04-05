@@ -9,13 +9,9 @@ while the user is selecting the criteria the system is posting any unposted tran
 /*Needs to have FromPeriod and ToPeriod sent with URL
  * also need to work on authentication with username and password sent too*/
 
-//$PageSecurity = 8;
 $AllowAnyone =true;
-//$_POST['UserNameEntryField'] = $_GET['Identifier'];
-//$_POST['Password'] = $_GET['IdentifierCheck'];
 //Page must be called with GLTrialBalance_csv.php?CompanyName=XXXXX&FromPeriod=Y&ToPeriod=Z
 $_POST['CompanyNameField'] = $_GET['CompanyName'];
-//$_SERVER['PHP_SELF'] = dirname($_SERVER['PHP_SELF']) .'/GLTrialBalance_csv.php?ToPeriod=' . $_GET['ToPeriod'] . '&FromPeriod=' . $_GET['FromPeriod'];
 
 include ('includes/session.inc');
 include('includes/SQL_CommonFunctions.inc');
@@ -78,15 +74,7 @@ while ($myrow=DB_fetch_array($AccountsResult)) {
 function stripcomma($str) { //because we're using comma as a delimiter
 	return str_replace(",", "", $str);
 }
-/*
-$len = strlen($CSV_File);
-header('Content-type: application/csv');
-header('Content-Length: ' . $len );
-header('Content-Disposition: inline; filename=GLTrialBalance.csv');
-header('Expires: 0');
-header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-header('Pragma: public');
-*/
+
 echo $CSV_File;
 
 ?>
