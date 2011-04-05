@@ -348,7 +348,7 @@ if (isset($SuppliersResult)) {
 			echo '<tr class="OddTableRows">';
 			$k++;
 		}
-	   printf('<td><font size=1><input type=submit name='SupplierID' value='%s'</font></td>
+	   printf('<td><font size=1><input type=submit name="SupplierID" value="%s" /></font></td>
 				<td><font size=1>%s</font></td>
 				<td><font size=1>%s</font></td>
 				<td><font size=1>%s</font></td>
