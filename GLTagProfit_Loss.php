@@ -2,8 +2,6 @@
 
 /* $Id$*/
 
-//$PageSecurity = 8;
-
 include ('includes/session.inc');
 $title = _('Income and Expenditure by Tag');
 include('includes/SQL_CommonFunctions.inc');
@@ -18,7 +16,7 @@ if (isset($_POST['FromPeriod']) and ($_POST['FromPeriod'] > $_POST['ToPeriod']))
 if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POST['SelectADifferentPeriod'])){
 
 	include('includes/header.inc');
-	echo "<form method='POST' action=" . $_SERVER['PHP_SELF'] . '?' . SID . '>';
+	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="'
 		. _('Print') . '" alt="" />' . ' ' . $title . '</p>';
@@ -34,7 +32,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 	$period=GetPeriod($FromDate, $db);
 
 	/*Show a form to allow input of criteria for profit and loss to show */
-	echo '<table class=selection><tr><td>'._('Select Period From').":</td><td><select Name='FromPeriod'>";
+	echo '<table class=selection><tr><td>' . _('Select Period From') . ':</td><td><select Name="FromPeriod">';
 
 	$sql = "SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno DESC";
 	$Periods = DB_query($sql,$db);
@@ -43,23 +41,23 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 	while ($myrow=DB_fetch_array($Periods,$db)){
 		if(isset($_POST['FromPeriod']) AND $_POST['FromPeriod']!=''){
 			if( $_POST['FromPeriod']== $myrow['periodno']){
-				echo '<option selected VALUE=' . $myrow['periodno'] . '>' .MonthAndYearFromSQLDate($myrow['lastdate_in_period']);
+				echo '<option selected VALUE=' . $myrow['periodno'] . '>' .MonthAndYearFromSQLDate($myrow['lastdate_in_period']). '</option>';
 			} else {
-				echo '<option VALUE=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']);
+				echo '<option VALUE=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']). '</option>';
 			}
 		} else {
 			if($myrow['lastdate_in_period']==$DefaultFromDate){
-				echo '<option selected VALUE=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']);
+				echo '<option selected VALUE=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']). '</option>';
 			} else {
-				echo '<option VALUE=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']);
+				echo '<option VALUE=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']). '</option>';
 			}
 		}
 	}
 
 	echo '</select></td></tr>';
 	if (!isset($_POST['ToPeriod']) OR $_POST['ToPeriod']==''){
-		$lastDate = date("Y-m-d",mktime(0,0,0,Date('m')+1,0,Date('Y')));
-		$sql = "SELECT periodno FROM periods where lastdate_in_period = '$lastDate'";
+		$LastDate = date('Y-m-d',mktime(0,0,0,Date('m')+1,0,Date('Y')));
+		$sql = "SELECT periodno FROM periods where lastdate_in_period = '".$LastDate."'";
 		$MaxPrd = DB_query($sql,$db);
 		$MaxPrdrow = DB_fetch_row($MaxPrd);
 		$DefaultToPeriod = (int) ($MaxPrdrow[0]);
@@ -68,16 +66,16 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 		$DefaultToPeriod = $_POST['ToPeriod'];
 	}
 
-	echo '<tr><td>' . _('Select Period To') . ":</td><td><select Name='ToPeriod'>";
+	echo '<tr><td>' . _('Select Period To') . ':</td><td><select Name="ToPeriod">';
 
 	$RetResult = DB_data_seek($Periods,0);
 
 	while ($myrow=DB_fetch_array($Periods,$db)){
 
 		if($myrow['periodno']==$DefaultToPeriod){
-			echo '<option selected VALUE=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']);
+			echo '<option selected VALUE=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
 		} else {
-			echo '<option VALUE =' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']);
+			echo '<option VALUE =' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
 		}
 	}
 	echo '</select></td></tr>';
@@ -93,23 +91,23 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 	echo '<option value=0>0 - None';
 	while ($myrow=DB_fetch_array($result)){
     	if (isset($_POST['tag']) and $_POST['tag']==$myrow["tagref"]){
-			echo '<option selected value=' . $myrow['tagref'] . '>' . $myrow['tagref'].' - ' .$myrow['tagdescription'];
+			echo '<option selected value=' . $myrow['tagref'] . '>' . $myrow['tagref'].' - ' .$myrow['tagdescription'] . '</option>';
     	} else {
-			echo '<option value=' . $myrow['tagref'] . '>' . $myrow['tagref'].' - ' .$myrow['tagdescription'];
+			echo '<option value=' . $myrow['tagref'] . '>' . $myrow['tagref'].' - ' .$myrow['tagdescription'] . '</option>';
     	}
 	}
 	echo '</select></td>';
 // End select tag
 
-	echo '<tr><td>'._('Detail Or Summary').":</td><td><select Name='Detail'>";
-		echo "<option selected VALUE='Summary'>"._('Summary');
-		echo "<option selected VALUE='Detailed'>"._('All Accounts');
+	echo '<tr><td>'._('Detail Or Summary').':</td><td><select Name="Detail">';
+		echo '<option selected VALUE="Summary">'._('Summary') . '</option>';
+		echo '<option selected VALUE="Detailed">'._('All Accounts') . '</option>';
 	echo '</select></td></tr>';
 
-	echo '</table><br>';
+	echo '</table><br />';
 
-	echo "<div class='centre'><input type=submit Name='ShowPL' Value='"._('Show Statement of Income and Expenditure')."'><br>";
-	echo "<br><input type=submit Name='PrintPDF' Value='"._('PrintPDF')."'></div>";
+	echo '<div class="centre"><input type=submit Name="ShowPL" Value="'._('Show Statement of Income and Expenditure').'"><br />';
+	echo '<br><input type=submit Name="PrintPDF" Value="'._('PrintPDF').'"></div>';
 
 	/*Now do the posting while the user is thinking about the period to select */
 
@@ -174,9 +172,9 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 		$title = _('Income and Expenditure') . ' - ' . _('Problem Report') . '....';
 		include('includes/header.inc');
 		prnMsg( _('No general ledger accounts were returned by the SQL because') . ' - ' . DB_error_msg($db) );
-		echo '<br><a href="' .$rootpath .'/index.php?' . SID . '">'. _('Back to the menu'). '</a>';
+		echo '<br /><a href="' .$rootpath .'/index.php">'. _('Back to the menu'). '</a>';
 		if ($debug == 1){
-			echo '<br>'. $SQL;
+			echo '<br />'. $SQL;
 		}
 		include('includes/footer.inc');
 		exit;
@@ -184,9 +182,9 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 	if (DB_num_rows($AccountsResult)==0){
 		$title = _('Print Income and Expenditure Error');
 		include('includes/header.inc');
-		echo '<p>';
+		echo '<br />';
 		prnMsg( _('There were no entries to print out for the selections specified'),'info');
-		echo '<br><a href="'. $rootpath.'/index.php?' . SID . '">'. _('Back to the menu'). '</a>';
+		echo '<br /><a href="'. $rootpath.'/index.php?' . SID . '">'. _('Back to the menu'). '</a>';
 		include('includes/footer.inc');
 		exit;
 	}
@@ -444,9 +442,10 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 } else {
 
 	include('includes/header.inc');
-	echo "<form method='POST' action=" . $_SERVER['PHP_SELF'] . '?' . SID . '>';
+	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo "<input type=hidden name='FromPeriod' VALUE=" . $_POST['FromPeriod'] . "><input type=hidden name='ToPeriod' VALUE=" . $_POST['ToPeriod'] . '>';
+	echo '<input type="hidden" name="FromPeriod" VALUE="' . $_POST['FromPeriod'] . '" />
+			<input type=hidden name="ToPeriod" VALUE="' . $_POST['ToPeriod'] . '" />';
 
 	$NumberOfMonths = $_POST['ToPeriod'] - $_POST['FromPeriod'] + 1;
 
@@ -502,16 +501,16 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 			$myrow[0]._('during the'). ' ' . $NumberOfMonths . ' ' . _('months to'). ' ' . $PeriodToDate . '</b></font></div></th></tr>';
 
 	if ($_POST['Detail']=='Detailed'){
-		$TableHeader = "<tr>
-				<th>"._('Account')."</th>
-				<th>"._('Account Name')."</th>
-				<th colspan=2>"._('Period Actual')."</th>
-				</tr>";
+		$TableHeader = '<tr>
+				<th>'._('Account').'</th>
+				<th>'._('Account Name').'</th>
+				<th colspan=2>'._('Period Actual').'</th>
+				</tr>';
 	} else { /*summary */
-		$TableHeader = "<tr>
+		$TableHeader = '<tr>
 				<th colspan=2></th>
-				<th colspan=2>"._('Period Actual')."</th>
-				</tr>";
+				<th colspan=2>'._('Period Actual').'</th>
+				</tr>';
 	}
 
 
@@ -734,7 +733,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 				$k++;
 			}
 
-			$ActEnquiryURL = "<a href='$rootpath/GLAccountInquiry.php?" . SID . '&Period=' . $_POST['ToPeriod'] . '&Account=' . $myrow['account'] . "&Show=Yes'>" . $myrow['account'] . '<a>';
+			$ActEnquiryURL = '<a href="' . $rootpath . '/GLAccountInquiry.php?Period=' . $_POST['ToPeriod'] . '&Account=' . $myrow['account'] . '&Show=Yes">' . $myrow['account'] . '</a>';
 
 			if ($Section ==4){
 				 printf('<td>%s</td>
@@ -927,11 +926,11 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 		<td colspan=6><hr></td>
 		</tr>';
 
-	printf("<tr bgcolor='#ffffff'>
-		<td colspan=2><font size=4 color=BLUE><b>"._('Surplus').' - '._('Deficit')."</b></font></td>
+	printf('<tr bgcolor="#ffffff">
+		<td colspan=2><font size=4 color=BLUE><b>'._('Surplus').' - '._('Deficit').'</b></font></td>
 		<td></td>
 		<td class=number>%s</td>
-		</tr>",
+		</tr>',
 		number_format($PeriodProfitLoss)
 		);
 
@@ -941,7 +940,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 		</tr>';
 
 	echo '</table>';
-	echo "<div class='centre'><input type=submit Name='SelectADifferentPeriod' Value='"._('Select A Different Period')."'></div>";
+	echo '<div class="centre"><input type=submit Name="SelectADifferentPeriod" Value="'._('Select A Different Period').'"></div>';
 }
 echo '</form>';
 include('includes/footer.inc');
