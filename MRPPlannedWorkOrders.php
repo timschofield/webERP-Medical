@@ -1,29 +1,29 @@
 <?php
-/* $Revision: 1.6 $ */
+
 /* $Id$*/
 // MRPPlannedWorkOrders.php - Report of manufactured parts that MRP has determined should have
 // work orders created for them
-//$PageSecurity = 2;
+
 include('includes/session.inc');
-$sql='show tables where Tables_in_'.$_SESSION['DatabaseName'].'="mrprequirements"';
+$sql="SHOW TABLES WHERE Tables_in_".$_SESSION['DatabaseName']."='mrprequirements'";
 $result=DB_query($sql,$db);
 if (DB_num_rows($result)==0) {
-	$title='MRP error';
+	$title=_('MRP error');
 	include('includes/header.inc');
-	echo '<br>';
-	prnMsg( _('The MRP calculation must be run before you can run this report').'<br>'.
-			_('To run the MRP calculation click').' '.'<a href='.$rootpath .'/MRP.php?' . SID .'>'._('here').'</a>', 'error');
+	echo '<br />';
+	prnMsg( _('The MRP calculation must be run before you can run this report').'<br />'.
+			_('To run the MRP calculation click').' '.'<a href="' . $rootpath . '/MRP.php">'._('here').'</a>', 'error');
 	include('includes/footer.inc');
 	exit;
 }
 if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 
-	$wheredate = " ";
-	$reportdate = " ";
+	$WhereDate = " ";
+	$ReportDate = " ";
 	if (Is_Date($_POST['cutoffdate'])) {
-		$formatdate = FormatDateForSQL($_POST['cutoffdate']);
-		$wheredate = ' AND duedate <= "' . $formatdate . '" ';
-		$reportdate = _(' Through  ') . $_POST['cutoffdate'];
+		$FormatDate = FormatDateForSQL($_POST['cutoffdate']);
+		$WhereDate = " AND duedate <= '" . $FormatDate . "' ";
+		$ReportDate = _(' Through  ') . $_POST['cutoffdate'];
 	}
 
 	if ($_POST['Consolidation'] == 'None') {
@@ -36,7 +36,7 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 					  (stockmaster.materialcost + stockmaster.labourcost +
 					   stockmaster.overheadcost ) as computedcost
 				FROM mrpplannedorders, stockmaster
-				WHERE mrpplannedorders.part = stockmaster.stockid "  . $wheredate .
+				WHERE mrpplannedorders.part = stockmaster.stockid "  . $WhereDate .
 				  " AND stockmaster.mbflag = 'M'
 				ORDER BY mrpplannedorders.part,mrpplannedorders.duedate";
 	} elseif ($_POST['Consolidation'] == 'Weekly') {
@@ -54,7 +54,7 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 					  (stockmaster.materialcost + stockmaster.labourcost +
 					   stockmaster.overheadcost ) as computedcost
 				FROM mrpplannedorders, stockmaster
-				WHERE mrpplannedorders.part = stockmaster.stockid "  . $wheredate .
+				WHERE mrpplannedorders.part = stockmaster.stockid "  . $WhereDate .
 				  " AND stockmaster.mbflag = 'M'
 				GROUP BY mrpplannedorders.part,
 						 weekindex,
@@ -84,7 +84,7 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 					  (stockmaster.materialcost + stockmaster.labourcost +
 					   stockmaster.overheadcost ) as computedcost,
 				FROM mrpplannedorders, stockmaster
-				WHERE mrpplannedorders.part = stockmaster.stockid "  . $wheredate .
+				WHERE mrpplannedorders.part = stockmaster.stockid "  . $WhereDate .
 				  " AND stockmaster.mbflag = 'M'
 				GROUP BY mrpplannedorders.part,
 						 yearmonth,
@@ -102,13 +102,13 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 	$result = DB_query($sql,$db,'','',false,true);
 
 	if (DB_error_no($db) !=0) {
-	  $title = _('MRP Planned Work Orders') . ' - ' . _('Problem Report');
-	  include('includes/header.inc');
-	   prnMsg( _('The MRP planned work orders could not be retrieved by the SQL because') . ' '  . DB_error_msg($db),'error');
-	   echo "<br><a href='" .$rootpath .'/index.php?' . SID . "'>" . _('Back to the menu') . '</a>';
-	   if ($debug==1){
-		  echo "<br>$sql";
-	   }
+		$title = _('MRP Planned Work Orders') . ' - ' . _('Problem Report');
+		include('includes/header.inc');
+		prnMsg( _('The MRP planned work orders could not be retrieved by the SQL because') . ' '  . DB_error_msg($db),'error');
+		echo '<br /><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
+		if ($debug==1){
+			echo '<br />' . $sql;
+		}
 	   include('includes/footer.inc');
 	   exit;
 	}
@@ -116,12 +116,10 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 		$title = _('MRP Planned Work Orders');
 		include('includes/header.inc');
 		prnMsg(_('There were no items with demand greater than supply'),'info');
-		echo "<br><a href='$rootpath/index.php?" . SID . "'>" . _('Back to the menu') . '</a>';
+		echo '<br /><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
 		include('includes/footer.inc');
 		exit;
 	}
-
-
 
 	if (isset($_POST['PrintPDF'])) { // Print planned work orders
 
@@ -136,17 +134,17 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 		$Xpos = $Left_Margin+1;
 
 		PrintHeader($pdf,$YPos,$PageNumber,$Page_Height,$Top_Margin,$Left_Margin,
-					$Page_Width,$Right_Margin,$_POST['Consolidation'],$reportdate);
+					$Page_Width,$Right_Margin,$_POST['Consolidation'],$ReportDate);
 
 		$Total_EXTcost=0;
 		$Partctr = 0;
 		$fill = false;
 		$pdf->SetFillColor(224,235,255);  // Defines color to make alternating lines highlighted
 		$FontSize=8;
-		$holdpart = " ";
-		$holddescription = " ";
-		$holdmbflag = " ";
-		$holdcost = " ";
+		$holdpart = ' ';
+		$holddescription = ' ';
+		$holdmbflag = ' ';
+		$holdcost = ' ';
 		$holddecimalplaces = 0;
 		$totalpartqty = 0;
 		$totalpartcost = 0;
@@ -207,7 +205,7 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 
 				if ($YPos < $Bottom_Margin + $line_height){
 				   PrintHeader($pdf,$YPos,$PageNumber,$Page_Height,$Top_Margin,$Left_Margin,$Page_Width,
-							   $Right_Margin,$_POST['Consolidation'],$reportdate);
+							   $Right_Margin,$_POST['Consolidation'],$ReportDate);
 				  // include('includes/MRPPlannedWorkOrdersPageHeader.inc');
 				}
 
@@ -226,7 +224,7 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 
 		if ($YPos < $Bottom_Margin + $line_height){
 			   PrintHeader($pdf,$YPos,$PageNumber,$Page_Height,$Top_Margin,$Left_Margin,$Page_Width,
-						   $Right_Margin,$_POST['Consolidation'],$reportdate);
+						   $Right_Margin,$_POST['Consolidation'],$ReportDate);
 			  // include('includes/MRPPlannedWorkOrdersPageHeader.inc');
 		}
 		/*Print out the grand totals */
@@ -248,28 +246,28 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' .
 			_('Inventory') . '" alt="" />' . ' ' . $title . '</p>';
 
-		echo "<form action='MRPConvertWorkOrders.php' method='post'>";
+		echo '<form action="MRPConvertWorkOrders.php" method="post">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-		echo "<table class=selection>";
-		echo "<tr><th colspan=9><font size=3 color=blue>Consolidation: " . $_POST['Consolidation'] .
-			"&nbsp;&nbsp;&nbsp;&nbsp;Cutoff Date: " . $_POST['cutoffdate'] . "</font></th></tr>";
-		echo "<tr><th></th>
-				<th>" . _('Code') . "</th>
-				<th>" . _('Description') . "</th>
-				<th>" . _('MRP Date') . "</th>
-				<th>" . _('Due Date') . "</th>
-				<th>" . _('Quantity') . "</th>
-				<th>" . _('Unit Cost') . "</th>
-				<th>" . _('Ext. Cost') . "</th>
-				<th>" . _('Consolidations') . "</th>
-			</tr>";
+		echo '<table class=selection>';
+		echo '<tr><th colspan=9><font size=3 color=blue>Consolidation: ' . $_POST['Consolidation'] .
+			'&nbsp;&nbsp;&nbsp;&nbsp;Cutoff Date: ' . $_POST['cutoffdate'] . '</font></th></tr>';
+		echo '<tr><th></th>
+				<th>' . _('Code') . '</th>
+				<th>' . _('Description') . '</th>
+				<th>' . _('MRP Date') . '</th>
+				<th>' . _('Due Date') . '</th>
+				<th>' . _('Quantity') . '</th>
+				<th>' . _('Unit Cost') . '</th>
+				<th>' . _('Ext. Cost') . '</th>
+				<th>' . _('Consolidations') . '</th>
+			</tr>';
 
 		$totalpartqty = 0;
 		$totalpartcost = 0;
 		$Total_Extcost = 0;
 		$j=1; //row ID
 		$k=0; //row colour counter
-		While ($myrow = DB_fetch_array($result,$db)){
+		while ($myrow = DB_fetch_array($result,$db)){
 
 			// Alternate row color
 			if ($k==1){
@@ -280,24 +278,24 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 				$k++;
 			}
 
-			printf("\n <td><a href='%s/WorkOrderEntry.php?NewItem=%s&ReqQty=%s&ReqDate=%s'>%s</a></td>",
+			printf('\n <td><a href="%s/WorkOrderEntry.php?NewItem=%s&ReqQty=%s&ReqDate=%s">%s</a></td>',
 				$rootpath,
 				$myrow['part'],
 				$myrow['supplyquantity'],
 				ConvertSQLDate($myrow['duedate']),
 				_('Convert')
 			);
-			printf("\n <td>%s <input type='hidden' name='%s_part' value='%s' /></td>", $myrow['part'], $j, $myrow['part']);
-			printf("\n <td>%s</td>", $myrow['description']);
-			printf("\n <td>%s</td>", ConvertSQLDate($myrow['mrpdate']));
-			printf("\n <td>%s</td>", ConvertSQLDate($myrow['duedate']));
-			printf("\n <td class=number>%s</td>", number_format($myrow['supplyquantity'],$myrow['decimalplaces']));
-			printf("\n <td class=number>%.2f</td>", number_format($myrow['computedcost'],2));
-			printf("\n <td class=number>%.2f</td>", number_format($myrow['supplyquantity'] * $myrow['computedcost'],2));
+			printf("\n". '<td>%s <input type="hidden" name="%s_part" value="%s" /></td>', $myrow['part'], $j, $myrow['part']);
+			printf("\n". '<td>%s</td>', $myrow['description']);
+			printf("\n". '<td>%s</td>', ConvertSQLDate($myrow['mrpdate']));
+			printf("\n". '<td>%s</td>', ConvertSQLDate($myrow['duedate']));
+			printf("\n". '<td class=number>%s</td>', number_format($myrow['supplyquantity'],$myrow['decimalplaces']));
+			printf("\n". '<td class=number>%.2f</td>', number_format($myrow['computedcost'],2));
+			printf("\n". '<td class=number>%.2f</td>', number_format($myrow['supplyquantity'] * $myrow['computedcost'],2));
 			if ($_POST['Consolidation']!='None') {
-				printf("\n <td class=number>%s</td>", $myrow['consolidatedcount']);
+				printf("\n". '<td class=number>%s</td>', $myrow['consolidatedcount']);
 			}
-			echo "</tr>";
+			echo '</tr>';
 
 			$j++;
 			$Total_Extcost += ( $myrow['supplyquantity'] * $myrow['computedcost'] );
@@ -305,17 +303,17 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 		} // end while loop
 
 		// Print out the grand totals
-		printf("
-			<tr><td colspan='4' class='number'>%s %s</td>
-			<td colspan='4' class='number'>%s %s</td></tr></table>
-			",
+		printf('
+			<tr><td colspan="4" class="number">%s %s</td>
+			<td colspan="4" class="number">%s %s</td></tr></table>
+			',
 			_('Number of Work Orders: '),
 			$j-1,
 			_('Total Extended Cost: '),
 			number_format($Total_Extcost,2)
 		);
 
-		echo "<br /><a href='$rootpath/index.php?" . SID . "'>" . _('Back to the menu') . '</a>';
+		echo '<br /><a href="' . $rootpath . '/index.php">' . _('Back to the menu') . '</a>';
 		include('includes/footer.inc');
 
 	}
@@ -329,26 +327,26 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' .
 		_('Inventory') . '" alt="" />' . ' ' . $title . '</p>';
 
-	echo '</br></br><form action=' . $_SERVER['PHP_SELF'] . " method='post'><table class=selection>";
+	echo '<br /><br /><form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table class=selection>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<tr><td>' . _('Consolidation') . ":</td><td><select name='Consolidation'>";
-	echo "<option selected value='None'>" . _('None');
-	echo "<option value='Weekly'>" . _('Weekly');
-	echo "<option value='Monthly'>" . _('Monthly');
+	echo '<tr><td>' . _('Consolidation') . ':</td><td><select name="Consolidation">';
+	echo '<option selected value="None">' . _('None') . '</option>';
+	echo '<option value="Weekly">' . _('Weekly') . '</option>';
+	echo '<option value="Monthly">' . _('Monthly') . '</option>';
 	echo '</select></td></tr>';
-	echo '<tr><td>' . _('Print Option') . ":</td><td><select name='Fill'>";
-	echo "<option selected value='yes'>" . _('Print With Alternating Highlighted Lines');
-	echo "<option value='no'>" . _('Plain Print');
+	echo '<tr><td>' . _('Print Option') . ':</td><td><select name="Fill">';
+	echo '<option selected value="yes">' . _('Print With Alternating Highlighted Lines') . '</option>';
+	echo '<option value="no">' . _('Plain Print') . '</option>';
 	echo '</select></td></tr>';
-	echo '<tr><td>' . _('Cut Off Date') . ":</td><td><input type ='text' class=date alt='".$_SESSION['DefaultDateFormat'] ."' name='cutoffdate' size='10' value='".date($_SESSION['DefaultDateFormat'])."'></tr>";
-	echo "</table><p><div class='centre'><input type=submit name='Review' value='" . _('Review') . "'> <input type=submit name='PrintPDF' value='" . _('Print PDF') . "'></div>";
+	echo '<tr><td>' . _('Cut Off Date') . ':</td><td><input type ="text" class=date alt="'.$_SESSION['DefaultDateFormat'] .'" name="cutoffdate" size="10" value="'.date($_SESSION['DefaultDateFormat']).'"></tr>';
+	echo '</table><p><div class="centre"><input type=submit name="Review" value="' . _('Review') . '"> <input type=submit name="PrintPDF" value="' . _('Print PDF') . '"></div>';
 
 	include('includes/footer.inc');
 
 } /*end of else not PrintPDF */
 
 function PrintHeader(&$pdf,&$YPos,&$PageNumber,$Page_Height,$Top_Margin,$Left_Margin,
-					 $Page_Width,$Right_Margin,$consolidation,$reportdate) {
+					 $Page_Width,$Right_Margin,$consolidation,$ReportDate) {
 
 	/*PDF page header for MRP Planned Work Orders report */
 	if ($PageNumber>1){
@@ -363,7 +361,7 @@ function PrintHeader(&$pdf,&$YPos,&$PageNumber,$Page_Height,$Top_Margin,$Left_Ma
 	$YPos -=$line_height;
 
 	$pdf->addTextWrap($Left_Margin,$YPos,150,$FontSize,_('MRP Planned Work Orders Report'));
-	$pdf->addTextWrap(190,$YPos,100,$FontSize,$reportdate);
+	$pdf->addTextWrap(190,$YPos,100,$FontSize,$ReportDate);
 	$pdf->addTextWrap($Page_Width-$Right_Margin-150,$YPos,160,$FontSize,_('Printed') . ': ' .
 		 Date($_SESSION['DefaultDateFormat']) . '   ' . _('Page') . ' ' . $PageNumber,'left');
 	$YPos -= $line_height;
