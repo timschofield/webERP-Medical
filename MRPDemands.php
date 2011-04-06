@@ -1,12 +1,9 @@
 <?php
-/* $Revision: 1.5 $ */
 /* $Id$*/
 // Add, Edit, Delete, and List MRP demand records. Table is mrpdemands.
 // Have separate functions for each routine. Use pass-by-reference - (&$db,&$StockID) -
 // to pass values of $db and $StockID to functions. - when just used $db as variable,
 // got error: Catchable fatal error: Object of class mysqli could not be converted to string
-
-//$PageSecurity=9;
 
 include('includes/session.inc');
 $title = _('MRP Demands');
@@ -32,11 +29,11 @@ if (isset($_POST['Search'])) {
 } elseif (isset($_POST['submit'])) {
 	submit($db,$StockID,$DemandID);
 } elseif (isset($_GET['delete'])) {
-	delete($db,$DemandID,"",$StockID);
+	delete($db,$DemandID,'',$StockID);
 } elseif (isset($_POST['deletesome'])) {
-	delete($db,"",$_POST['MRPDemandtype'],$StockID);
+	delete($db,'',$_POST['MRPDemandtype'],$StockID);
 } elseif (isset($_GET['listall'])) {
-	listall($db,"","");
+	listall($db,'','');
 } elseif (isset($_POST['listsome'])) {
 	listall($db,$StockID,$_POST['MRPDemandtype']);
 } else {
@@ -85,12 +82,12 @@ function search(&$db,&$StockID) { //####SEARCH_SEARCH_SEARCH_SEARCH_SEARCH_SEARC
 
 	// If the SELECT found records, display them
 	if (DB_num_rows($result) > 0) {
-		echo "<form action=" . $_SERVER['PHP_SELF'] . "?" . SID ." method=post>";
+		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<table cellpadding=2 colspan=7 class=selection>';
 		$TableHeader = '<tr><th>' . _('Code') . '</th>
-						<th>' . _('Description') . '</th>
-				   </tr>';
+							<th>' . _('Description') . '</th>
+						</tr>';
 		echo $TableHeader;
 
 		$j = 1;
@@ -104,8 +101,8 @@ function search(&$db,&$StockID) { //####SEARCH_SEARCH_SEARCH_SEARCH_SEARCH_SEARC
 				$k++;
 			}
 			$tabindex=$j+4;
-			echo "<td><input tabindex='".$tabindex."' type=submit name='StockID' value='".$myrow['stockid']."'</td>
-				<td>".$myrow['description']."</td></tr>";
+			echo '<td><input tabindex="'.$tabindex.'" type=submit name="StockID" value="'.$myrow['stockid'].'" /></td>
+				<td>'.$myrow['description'].'</td></tr>';
 			$j++;
 	}  //end of while loop
 
@@ -149,7 +146,7 @@ function submit(&$db,&$StockID,&$DemandID)  //####SUBMIT_SUBMIT_SUBMIT_SUBMIT_SU
 		prnMsg(_('Invalid due date'),'error');
 	}
 	$sql = "SELECT * FROM mrpdemandtypes
-		WHERE mrpdemandtype='" . $_POST['MRPDemandtype'] . "'";
+				WHERE mrpdemandtype='" . $_POST['MRPDemandtype'] . "'";
 	$result = DB_query($sql, $db);
 
 	if (DB_num_rows($result) == 0){
@@ -158,8 +155,8 @@ function submit(&$db,&$StockID,&$DemandID)  //####SUBMIT_SUBMIT_SUBMIT_SUBMIT_SU
 	}
 // Check if valid part number - Had done a Select Count(*), but that returned a 1 in DB_num_rows
 // even if there was no record.
-	$sql = "SELECT * FROM stockmaster
-		WHERE stockid='" . $StockID . "'";
+	$sql = "SELECT stockid FROM stockmaster
+				WHERE stockid='" . $StockID . "'";
 	$result = DB_query($sql, $db);
 
 	if (DB_num_rows($result) == 0){
@@ -169,7 +166,7 @@ function submit(&$db,&$StockID,&$DemandID)  //####SUBMIT_SUBMIT_SUBMIT_SUBMIT_SU
 			unset($StockID);
 	}
 // Check if part number/demand type/due date combination already exists
-	$sql = "SELECT * FROM mrpdemands
+	$sql = "SELECT stockid FROM mrpdemands
 			WHERE stockid='" . $StockID . "'
 				AND mrpdemandtype='" . $_POST['MRPDemandtype'] . "'
 				AND duedate='" . $FormatedDuedate . "'
@@ -236,18 +233,18 @@ function delete(&$db,$DemandID,$demandtype,$StockID) { //####DELETE_DELETE_DELET
 // edit/delete or deletes all of a particular demand type if press Delete Demand Type button.
 	$where = " ";
 	if ($demandtype) {
-		$where = ' WHERE mrpdemandtype =' . "'"  .  $demandtype . "'";
+		$where = " WHERE mrpdemandtype =" . "'"  .  $demandtype . "'";
 	}
 	if ($DemandID) {
-		$where = ' WHERE demandid =' . "'"  .  $DemandID . "'";
+		$where = " WHERE demandid =" . "'"  .  $DemandID . "'";
 	}
 	$sql="DELETE FROM mrpdemands
 		   $where";
 	$result = DB_query($sql,$db);
 	if ($DemandID) {
-		prnMsg(_("The MRP demand record for") ." ". $StockID ." ". _("has been deleted"),'succes');
+		prnMsg(_('The MRP demand record for') .' '. $StockID .' '. _('has been deleted'),'succes');
 	} else {
-		prnMsg(_("All records for demand type") ." ". $demandtype ." " . _("have been deleted"),'succes');
+		prnMsg(_('All records for demand type') .' '. $demandtype .' ' . _('have been deleted'),'succes');
 	}
 	unset ($DemandID);
 	unset ($StockID);
@@ -262,14 +259,14 @@ function listall(&$db,$part,$demandtype)  {//####LISTALL_LISTALL_LISTALL_LISTALL
 // Lists some in hit List Selection submit button, and uses part number if it is entered or
 // demandtype
 
-	echo '<form action=' . $_SERVER['PHP_SELF'] . '?' . SID .' method=post>';
+	echo '<form action=' . $_SERVER['PHP_SELF'] . ' method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	$where = " ";
 	if ($demandtype) {
-		$where = ' WHERE mrpdemandtype =' . "'"  .  $demandtype . "'";
+		$where = " WHERE mrpdemandtype =" . "'"  .  $demandtype . "'";
 	}
 	if ($part) {
-		$where = ' WHERE mrpdemands.stockid =' . "'"  .  $part . "'";
+		$where = " WHERE mrpdemands.stockid =" . "'"  .  $part . "'";
 	}
 	// If part is entered, it overrides demandtype
 	$sql = "SELECT mrpdemands.demandid,
@@ -285,31 +282,31 @@ function listall(&$db,$part,$demandtype)  {//####LISTALL_LISTALL_LISTALL_LISTALL
 	$ErrMsg = _('The SQL to find the parts selected failed with the message');
 	$result = DB_query($sql,$db,$ErrMsg);
 
-	echo "<table class=selection>
-		<tr bgcolor =#800000><th>" . _('Part Number') . "</th>
-				<th>" . _('Description') . "</th>
-				<th>" . _('Demand Type') . "</th>
-				<th>" . _('Quantity') . "</th>
-				<th>" . _('Due Date') . "</th>
-		</tr>";
+	echo '<table class=selection>
+		<tr bgcolor =#800000><th>' . _('Part Number') . '</th>
+				<th>' . _('Description') . '</th>
+				<th>' . _('Demand Type') . '</th>
+				<th>' . _('Quantity') . '</th>
+				<th>' . _('Due Date') . '</th>
+		</tr>';
 	$ctr = 0;
 	while ($myrow = DB_fetch_row($result)) {
 		$displaydate = ConvertSQLDate($myrow[4]);
 		$ctr++;
-		echo "<tr><td>".$myrow[1]."</td>
-				<td>".$myrow[5]."</td>
-				<td>".$myrow[2]."</td>
-				<td>".$myrow[3]."</td>
-				<td>".$displaydate."</td>
-				<td><a href=\"".$_SERVER['PHP_SELF'] . '?' . SID."&DemandID=".$myrow[0]."&StockID=".$myrow[1]."\">" . _('Edit') . "</td>
-				<td><a href=\"".$_SERVER['PHP_SELF'] . '?' . SID."&DemandID=".$myrow[0]."&StockID=".$myrow[1]."&delete=yes\">" . _('Delete') ."</td>
-				</tr>";
+		echo '<tr><td>'.$myrow[1].'</td>
+				<td>'.$myrow[5].'</td>
+				<td>'.$myrow[2].'</td>
+				<td>'.$myrow[3].'</td>
+				<td>'.$displaydate.'</td>
+				<td><a href="'.$_SERVER['PHP_SELF'] . '?&DemandID='.$myrow[0].'&StockID='.$myrow[1].'">' . _('Edit') . '</td>
+				<td><a href="'.$_SERVER['PHP_SELF'] . '?&DemandID='.$myrow[0].'&StockID='.$myrow[1].'&delete=yes">' . _('Delete') .'</td>
+				</tr>';
 	}
 
 	//END WHILE LIST LOOP
-	echo '<tr><td>' . _('Number of Records') . "</td><td>".$ctr."</td></tr>";
+	echo '<tr><td>' . _('Number of Records') . '</td><td>'.$ctr.'</td></tr>';
 	echo '</table>';
-	echo '</form><br/><br/><br/><br/>';
+	echo '</form><br /><br /><br /><br />';
 	unset ($StockID);
 	display($db,$StockID,$DemandID);
 
@@ -378,33 +375,32 @@ function display(&$db,&$StockID,&$DemandID) { //####DISPLAY_DISPLAY_DISPLAY_DISP
 			$_POST['Duedate']=' ';
 		}
 
-		echo '<tr><td>' . _('Quantity') . ":</td><td><input type='Text' name='Quantity' class=number size=6
-			maxlength=6 value=" . $_POST['Quantity'] . '></td></tr><tr><td>' . _('Due Date') . ":</td>
-			<td><input type='Text' class=date alt='".$_SESSION['DefaultDateFormat']."' name='Duedate' size=12
-			maxlength=12 value=" . $_POST['Duedate'] . '></td></tr>';
+		echo '<tr><td>' . _('Quantity') . ':</td><td><input type="Text" name="Quantity" class=number size=6
+			maxlength=6 value="' . $_POST['Quantity'] . '"></td></tr><tr><td>' . _('Due Date') . ':</td>
+			<td><input type="Text" class=date alt="'.$_SESSION['DefaultDateFormat'].'" name="Duedate" size=12
+			maxlength=12 value="' . $_POST['Duedate'] . '"></td></tr>';
 		// Generate selections for Demand Type
-		echo '<tr><td>' . _('Demand Type') . "</td><td><select name='MRPDemandtype'>";
+		echo '<tr><td>' . _('Demand Type') . '</td><td><select name="MRPDemandtype">';
 		$sql = "SELECT mrpdemandtype,
 						description
 				FROM mrpdemandtypes";
 		$result = DB_query($sql,$db);
 		while ($myrow = DB_fetch_array($result)) {
 			if (isset($_POST['MRPDemandtype']) and $myrow['mrpdemandtype']==$_POST['MRPDemandtype']) {
-				echo '<option selected value="';
+				echo '<option selected value="' . $myrow['mrpdemandtype'] . '">' . $myrow['mrpdemandtype'] . ' - ' .$myrow['description'] . '</option>';
 			} else {
-				echo '<option value="';
+				echo '<option value="' . $myrow['mrpdemandtype'] . '">' . $myrow['mrpdemandtype'] . ' - ' .$myrow['description'] . '</option>';
 			}
-			echo $myrow['mrpdemandtype'] . '">' . $myrow['mrpdemandtype'] . ' - ' .$myrow['description'];
 		} //end while loop
 		echo '</select></td></tr>';
 
 		echo '</table>';
-		echo '<br><div class=centre><input type="submit" name="submit" value="' . _('Enter Information') . '">&nbsp&nbsp';
+		echo '<br /><div class=centre><input type="submit" name="submit" value="' . _('Enter Information') . '">&nbsp&nbsp';
 		echo '<input type="submit" name="listsome" value="' . _('List Selection') . '">&nbsp&nbsp';
 		echo '<input type="Submit" name="deletesome" value="' . _('Delete Demand Type') . '">';
 		// If mrpdemand record exists, display option to delete it
 		if ((isset($DemandID)) AND (DB_num_rows($result) > 0)) {
-			echo '<br/><br/><a href=" ' . $_SERVER['PHP_SELF'] . '?&delete=yes&StockID='.$StockID.'&DemandID=' . $DemandID . '">' . _('Or Delete Record') ;
+			echo '<br /><br /><a href=" ' . $_SERVER['PHP_SELF'] . '?&delete=yes&StockID='.$StockID.'&DemandID=' . $DemandID . '">' . _('Or Delete Record') ;
 		}
 	}
 	echo '</form>';
