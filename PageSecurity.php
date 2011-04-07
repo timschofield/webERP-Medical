@@ -1,5 +1,7 @@
 <?php
 
+/* $Id$ */
+
 include('includes/session.inc');
 
 $title = _('Page Security Levels');
@@ -19,12 +21,12 @@ if (isset($_POST['Update'])) {
 }
 
 $sql="SELECT script,
-							security
+			security
 			FROM pagesecurity";
 
 $result=DB_query($sql, $db);
 
-echo '<br /><form method="post" id="PageSecurity" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '">';
+echo '<br /><form method="post" id="PageSecurity" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<table class="selection">';
