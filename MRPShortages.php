@@ -7,12 +7,12 @@
 //$PageSecurity = 2;
 include('includes/session.inc');
 
-$sql='show tables where Tables_in_'.$_SESSION['DatabaseName'].'="mrprequirements"';
+$sql='SHOW TABLES WHERE Tables_in_'.$_SESSION['DatabaseName']."='mrprequirements'";
 $result=DB_query($sql,$db);
 if (DB_num_rows($result)==0) {
 	$title='MRP error';
 	include('includes/header.inc');
-	echo '<br>';
+	echo '<br />';
 	prnMsg( _('The MRP calculation must be run before you can run this report').'<br>'.
 			_('To run the MRP calculation click').' '.'<a href='.$rootpath .'/MRP.php?' . SID .'>'._('here').'</a>', 'error');
 	include('includes/footer.inc');
@@ -103,7 +103,7 @@ if (isset($_POST['PrintPDF'])) {
 			   extcost
 	  HAVING demand > supply
 	  ORDER BY '" . $_POST['Sort']."'";
-	  
+
 	  if ($_POST['CategoryID'] == "All"){
 		$sqlcategory = " ";
 	  }else{
@@ -157,9 +157,9 @@ if (isset($_POST['PrintPDF'])) {
 	  $title = _('MRP Shortages') . ' - ' . _('Problem Report');
 	  include('includes/header.inc');
 	   prnMsg( _('No MRP shortages retrieved'), 'warn');
-	   echo "</br><a href='" .$rootpath .'/index.php?' . SID . "'>" . _('Back to the menu') . '</a>';
+	   echo '<br /><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
 	   if ($debug==1){
-		  echo "</br>$sql";
+		  echo '<br />' . $sql;
 	   }
 	   include('includes/footer.inc');
 	   exit;
@@ -224,30 +224,8 @@ if (isset($_POST['PrintPDF'])) {
 	$pdf->addTextWrap(300,$YPos,180,$FontSize,_('Total Extended Shortage:'), 'right');
 	$DisplayTotalVal = number_format($Total_Shortage,2);
 	$pdf->addTextWrap(510,$YPos,60,$FontSize,$DisplayTotalVal, 'right');
-/* UldisN
-	$pdfcode = $pdf->output();
-	$len = strlen($pdfcode);
-
-	if ($len<=20){
-			$title = _('Print MRP Shortages Error');
-			include('includes/header.inc');
-			prnMsg(_('There were no items with demand greater than supply'),'error');
-			echo "</br><a href='$rootpath/index.php?" . SID . "'>" . _('Back to the menu') . '</a>';
-			include('includes/footer.inc');
-			exit;
-	} else {
-			header('Content-type: application/pdf');
-			header("Content-Length: " . $len);
-			header('Content-Disposition: inline; filename=MRPShortages.pdf');
-			header('Expires: 0');
-			header('Cache-Control: private, post-check=0, pre-check=0');
-			header('Pragma: public');
-
-			$pdf->Output('MRPShortages.pdf', 'I');
-	}
-*/
-	$pdf->OutputD($_SESSION['DatabaseName'] . '_MRPShortages_' . date('Y-m-d').'.pdf');//UldisN
-	$pdf->__destruct(); //UldisN
+	$pdf->OutputD($_SESSION['DatabaseName'] . '_MRPShortages_' . date('Y-m-d').'.pdf');
+	$pdf->__destruct();
 } else { /*The option to print PDF was not hit so display form */
 
 	$title=_('MRP Shortages Reporting');
@@ -256,9 +234,9 @@ if (isset($_POST['PrintPDF'])) {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="'
 		. _('Stock') . '" alt="" />' . ' ' . $title . '</p>';
 
-	echo '<form action=' . $_SERVER['PHP_SELF'] . " method='post'>";
+	echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo "<table class=selection>";
+	echo '<table class="selection">';
 	echo '</select></td></tr>';
 	echo '<tr><td>' . _('Inventory Category') . ':</td><td><select name="CategoryID">';
 	echo '<option selected value="All">' . _('All Stock Categories');
@@ -270,15 +248,15 @@ if (isset($_POST['PrintPDF'])) {
 		echo '<option value="';
 		echo $myrow['categoryid'] . '">' . $myrow['categoryid'] . ' - ' .$myrow['categorydescription'];
 	} //end while loop
-	echo '<tr><td>' . _('Sort') . ":</td><td><select name='Sort'>";
-	echo "<option selected value='extcost'>" . _('Extended Shortage Dollars')."</option>";
-	echo "<option value='stockid'>" . _('Part Number')."</option>";
+	echo '<tr><td>' . _('Sort') . ':</td><td><select name="Sort">';
+	echo '<option selected value="extcost">' . _('Extended Shortage Dollars').'</option>';
+	echo '<option value="stockid">' . _('Part Number').'</option>';
 	echo '</select></td></tr>';
-	echo '<tr><td>' . _('Print Option') . ":</td><td><select name='Fill'>";
-	echo "<option selected value='yes'>" . _('Print With Alternating Highlighted Lines')."</option>";
-	echo "<option value='no'>" . _('Plain Print')."</option>";
+	echo '<tr><td>' . _('Print Option') . ':</td><td><select name="Fill">';
+	echo '<option selected value="yes">' . _('Print With Alternating Highlighted Lines').'</option>';
+	echo '<option value="no">' . _('Plain Print').'</option>';
 	echo '</select></td></tr>';
-	echo "</table><br><div class='centre'><input type=submit name='PrintPDF' value='" . _('Print PDF') . "'></div>";
+	echo '</table><br /><div class="centre"><input type=submit name="PrintPDF" value="' . _('Print PDF') . '"></div>';
 
 	include('includes/footer.inc');
 
@@ -306,13 +284,6 @@ $pdf->addTextWrap($Page_Width-$Right_Margin-110,$YPos,160,$FontSize,_('Printed')
 	 Date($_SESSION['DefaultDateFormat']) . '   ' . _('Page') . ' ' . $PageNumber,'left');
 
 $YPos -=(2*$line_height);
-
-/*Draw a rectangle to put the headings in	 */
-
-//$pdf->line($Left_Margin, $YPos+$line_height,$Page_Width-$Right_Margin, $YPos+$line_height);
-//$pdf->line($Left_Margin, $YPos+$line_height,$Left_Margin, $YPos- $line_height);
-//$pdf->line($Left_Margin, $YPos- $line_height,$Page_Width-$Right_Margin, $YPos- $line_height);
-//$pdf->line($Page_Width-$Right_Margin, $YPos+$line_height,$Page_Width-$Right_Margin, $YPos- $line_height);
 
 /*set up the headings */
 $Xpos = $Left_Margin+1;
