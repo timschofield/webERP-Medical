@@ -2,9 +2,6 @@
 
 /* $Id$*/
 
-/* $Revision: 1.13 $ */
-
-//$PageSecurity = 3;
 include('includes/SQL_CommonFunctions.inc');
 include ('includes/session.inc');
 
@@ -27,9 +24,9 @@ if (!isset($_POST['Date'])){
 		prnMsg($msg,'error');
 	}
 
-	 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	 echo '<table class=selection>
+	echo '<table class=selection>
 	 			<tr>
 				<td>' . _('Enter the date for which the transactions are to be listed') . ':</td>
 				<td><input type=text name="Date" maxlength=10 size=10 class=date alt="' . $_SESSION['DefaultDateFormat'] . '" value="' . Date($_SESSION['DefaultDateFormat']) . '"></td>
@@ -43,13 +40,13 @@ if (!isset($_POST['Date'])){
 	echo '<option value=11>' . _('Credit Notes').'</option>';
 	echo '<option value=12>' . _('Receipts').'</option>';
 
-	 echo '</select></td></tr>';
+	echo '</select></td></tr>';
 
-	 echo '</table><br><div class="centre"><input type=submit name="Go" value="' . _('Create PDF') . '"></div>';
+	echo '</table><br /><div class="centre"><input type=submit name="Go" value="' . _('Create PDF') . '"></div>';
 
 
-	 include('includes/footer.inc');
-	 exit;
+	include('includes/footer.inc');
+	exit;
 } else {
 
 	include('includes/ConnectDB.inc');
@@ -73,14 +70,14 @@ if (DB_error_no($db)!=0){
 	include('includes/header.inc');
 	prnMsg(_('An error occurred getting the transactions'),'error');
 	if ($Debug==1){
-			prnMsg(_('The SQL used to get the transaction information that failed was') . ':<br>' . $SQL,'error');
+		prnMsg(_('The SQL used to get the transaction information that failed was') . ':<br />' . $SQL,'error');
 	}
 	include('includes/footer.inc');
 	exit;
 } elseif (DB_num_rows($result) == 0){
 	$title = _('Payment Listing');
 	include('includes/header.inc');
-	echo '<br>';
+	echo '<br />';
   	prnMsg (_('There were no transactions found in the database for the date') . ' ' . $_POST['Date'] .'. '._('Please try again selecting a different date'), 'info');
 	include('includes/footer.inc');
   	exit;
@@ -111,14 +108,14 @@ while ($myrow=DB_fetch_array($result)){
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+382,$YPos,70,$FontSize,number_format($myrow['ovgst'],2), 'right');
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+452,$YPos,70,$FontSize,number_format($myrow['ovamount']+$myrow['ovgst'],2), 'right');
 
-	  $YPos -= ($line_height);
-	  $TotalCheques = $TotalCheques - $myrow['ovamount'];
+	$YPos -= ($line_height);
+	$TotalCheques = $TotalCheques - $myrow['ovamount'];
 
-	  if ($YPos - (2 *$line_height) < $Bottom_Margin){
-		  /*Then set up a new page */
-			  $PageNumber++;
-		  include ('includes/PDFCustTransListingPageHeader.inc');
-	  } /*end of new page header  */
+	if ($YPos - (2 *$line_height) < $Bottom_Margin){
+		/*Then set up a new page */
+		$PageNumber++;
+		include ('includes/PDFCustTransListingPageHeader.inc');
+	} /*end of new page header  */
 } /* end of while there are customer receipts in the batch to print */
 
 
@@ -127,7 +124,7 @@ $LeftOvers = $pdf->addTextWrap($Left_Margin+452,$YPos,70,$FontSize,number_format
 $LeftOvers = $pdf->addTextWrap($Left_Margin+265,$YPos,300,$FontSize,_('Total') . '  ' . _('Transactions'), 'left');
 
 $ReportFileName = $_SESSION['DatabaseName'] . '_CustTransListing_' . date('Y-m-d').'.pdf';
-$pdf->OutputD($ReportFileName);//UldisN
-$pdf->__destruct(); //UldisN
+$pdf->OutputD($ReportFileName);
+$pdf->__destruct();
 
 ?>
