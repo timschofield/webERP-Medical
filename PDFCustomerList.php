@@ -1,9 +1,7 @@
 <?php
-/* $Revision: 1.13 $ */
 
 /* $Id$*/
 
-//$PageSecurity = 2;
 include('includes/session.inc');
 
 if (isset($_POST['PrintPDF'])){
@@ -19,7 +17,7 @@ if (isset($_POST['PrintPDF'])){
 		if (!is_numeric($_POST['ActivityAmount'])){
 			$title = _('Customer List') . ' - ' . _('Problem Report') . '....';
 			include('includes/header.inc');
-			echo '<p>';
+			echo '<br />';
 			prnMsg( _('The activity amount is not numeric and you elected to print customer relative to a certain amount of activity') . ' - ' . _('this level of activity must be specified in the local currency') .'.', 'error');
 			include('includes/footer.inc');
 			exit;
@@ -360,7 +358,7 @@ if (isset($_POST['PrintPDF'])){
 	} /*end while loop */
 
     $pdf->OutputD($_SESSION['DatabaseName'] . '_CustomerList_' . date('Y-m-d').'.pdf');//UldisN
-    $pdf->__destruct(); //UldisN
+    $pdf->__destruct();
 	exit;
 
 } else {
@@ -380,13 +378,13 @@ if (isset($_POST['PrintPDF'])){
 	echo '<option selected value="All">' . _('All Areas');
 
 	While ($myrow = DB_fetch_array($AreasResult)){
-		echo '<option value="' . $myrow['areacode'] . '">' . $myrow['areadescription'];
+		echo '<option value="' . $myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
 	}
 	echo '</select></td></tr>';
 
 	echo '<tr><td>' . _('For Sales folk'). ':</td><td><select name=SalesPeople[] multiple>';
 
-	echo '<option selected value="All">'. _('All sales folk');
+	echo '<option selected value="All">'. _('All sales folk') . '</option>';
 
 	$sql = "SELECT salesmancode, salesmanname FROM salesman";
 	$SalesFolkResult = DB_query($sql,$db);
@@ -398,9 +396,9 @@ if (isset($_POST['PrintPDF'])){
 
 	echo '<tr><td>' . _('Level Of Activity'). ':</td><td><select name="Activity">';
 
-	echo '<option selected value="All">'. _('All customers');
-	echo '<option value="GreaterThan">'. _('Sales Greater Than');
-	echo '<option value="LessThan">'. _('Sales Less Than');
+	echo '<option selected value="All">'. _('All customers') . '</option>';
+	echo '<option value="GreaterThan">'. _('Sales Greater Than') . '</option>';
+	echo '<option value="LessThan">'. _('Sales Less Than') . '</option>';
 	echo '</select></td><td>';
 
 	echo '<input type="text" class=number name="ActivityAmount" size=8 maxlength=8 value=0></td></tr>';
