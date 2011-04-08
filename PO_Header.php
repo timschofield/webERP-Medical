@@ -234,11 +234,11 @@ if (isset($_POST['EnterLines'])){
 		$_POST['RePrint'] = 0;
 	}
 
-	echo "<meta http-equiv='Refresh' content='0; url=" . $rootpath . '/PO_Items.php?' . SID . 'identifier='.$identifier. "'>";
+	echo '<meta http-equiv="Refresh" content="0; url="' . $rootpath . '/PO_Items.php?' . SID . 'identifier='.$identifier. '">';
 	echo '<p>';
 	prnMsg(_('You should automatically be forwarded to the entry of the purchase order line items page') . '. ' .
 		_('If this does not happen') . ' (' . _('if the browser does not support META Refresh') . ') ' .
-		"<a href='$rootpath/PO_Items.php?" . SID. 'identifier='.$identifier . "'>" . _('click here') . '</a> ' . _('to continue'),'info');
+		'<a href="$rootpath/PO_Items.php?identifier='.$identifier . '">' . _('click here') . '</a> ' . _('to continue'),'info');
 		include('includes/footer.inc');
 		exit;
 } /* end of if isset _POST'EnterLines' */

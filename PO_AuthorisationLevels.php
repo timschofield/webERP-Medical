@@ -2,8 +2,6 @@
 
 /* $Id$*/
 
-//$PageSecurity=15;
-
 include('includes/session.inc');
 
 $title = _('Purchase Order Authorisation Maintenance');
@@ -16,23 +14,23 @@ $CanCreate=1;
 $OffHold=1;
 $AuthLevel=0;
 if (isset($_POST['Submit'])) {
-	if (isset($_POST['cancreate']) and $_POST['cancreate']=='on') {
-		$cancreate=0;
+	if (isset($_POST['CanCreate']) and $_POST['CanCreate']=='on') {
+		$CanCreate=0;
 	} else {
-		$cancreate=1;
+		$CanCreate=1;
 	}
-	if (isset($_POST['offhold']) and $_POST['offhold']=='on') {
-		$offhold=0;
+	if (isset($_POST['OffHold']) and $_POST['OffHold']=='on') {
+		$OffHold=0;
 	} else {
-		$offhold=1;
+		$OffHold=1;
 	}
-	if ($_POST['authlevel']=='') {
-		$_POST['authlevel']=0;
+	if ($_POST['AuthLevel']=='') {
+		$_POST['AuthLevel']=0;
 	}
 	$sql="SELECT COUNT(*)
 			FROM purchorderauth
-			WHERE userid='".$_POST['userid']."'
-		AND currabrev='".$_POST['currabrev']."'";
+			WHERE userid='".$_POST['UserID']."'
+		AND currabrev='".$_POST['CurrCode']."'";
 	$result=DB_query($sql, $db);
 	$myrow=DB_fetch_array($result);
 	if ($myrow[0]==0) {
@@ -43,11 +41,11 @@ if (isset($_POST['Submit'])) {
 			offhold,
 			authlevel)
 			VALUES(
-			'".$_POST['userid']."',
-			'".$_POST['currabrev']."',
-			'".$cancreate."',
-			'".$offhold."',
-			'".$_POST['authlevel']."')";
+			'".$_POST['UserID']."',
+			'".$_POST['CurrCode']."',
+			'".$CanCreate."',
+			'".$OffHold."',
+			'".$_POST['AuthLevel']."')";
 		$ErrMsg = _('The authentication details cannot be inserted because');
 		$Result=DB_query($sql,$db,$ErrMsg);
 	} else {
@@ -57,22 +55,22 @@ if (isset($_POST['Submit'])) {
 }
 
 if (isset($_POST['Update'])) {
-	if (isset($_POST['cancreate']) and $_POST['cancreate']=='on') {
-		$cancreate=0;
+	if (isset($_POST['CanCreate']) and $_POST['CanCreate']=='on') {
+		$CanCreate=0;
 	} else {
-		$cancreate=1;
+		$CanCreate=1;
 	}
-	if (isset($_POST['offhold']) and $_POST['offhold']=='on') {
-		$offhold=0;
+	if (isset($_POST['OffHold']) and $_POST['OffHold']=='on') {
+		$OffHold=0;
 	} else {
-		$offhold=1;
+		$OffHold=1;
 	}
 	$sql="UPDATE purchorderauth SET
-			cancreate='".$cancreate."',
-			offhold='".$offhold."',
-			authlevel='".$_POST['authlevel']."'
-		WHERE userid='".$_POST['userid']."'
-		AND currabrev='".$_POST['currabrev']."'";
+			cancreate='".$CanCreate."',
+			offhold='".$OffHold."',
+			authlevel='".$_POST['AuthLevel']."'
+		WHERE userid='".$_POST['UserID']."'
+		AND currabrev='".$_POST['CurrCode']."'";
 
 	$ErrMsg = _('The authentication details cannot be updated because');
 	$Result=DB_query($sql,$db,$ErrMsg);
@@ -129,38 +127,38 @@ echo '<th>'._('Authority Level').'</th></tr>';
 
 while ($myrow=DB_fetch_array($Result)) {
 	if ($myrow['cancreate']==0) {
-		$cancreate=_('Yes');
+		$CanCreate=_('Yes');
 	} else {
-		$cancreate=_('No');
+		$CanCreate=_('No');
 	}
 	if ($myrow['offhold']==0) {
-		$offhold=_('Yes');
+		$OffHold=_('Yes');
 	} else {
-		$offhold=_('No');
+		$OffHold=_('No');
 	}
 	echo '<tr><td>'.$myrow['userid'].'</td>';
 	echo '<td>'.$myrow['realname'].'</td>';
 	echo '<td>'.$myrow['currency'].'</td>';
-	echo '<td>'.$cancreate.'</td>';
-	echo '<td>'.$offhold.'</td>';
+	echo '<td>'.$CanCreate.'</td>';
+	echo '<td>'.$OffHold.'</td>';
 	echo '<td class="number">'.number_format($myrow['authlevel'],2).'</td>';
-	echo '<td><a href="'.$rootpath.'/PO_AuthorisationLevels.php?' . SID . 'Edit=Yes&UserID=' . $myrow['userid'] .
+	echo '<td><a href="'.$rootpath.'/PO_AuthorisationLevels.php?Edit=Yes&UserID=' . $myrow['userid'] .
 	 '&Currency='.$myrow['currabrev'].'">'._('Edit').'</td>';
-	echo '<td><a href="'.$rootpath.'/PO_AuthorisationLevels.php?' . SID . 'Delete=Yes&UserID=' . $myrow['userid'] .
+	echo '<td><a href="'.$rootpath.'/PO_AuthorisationLevels.php?Delete=Yes&UserID=' . $myrow['userid'] .
 	 '&Currency='.$myrow['currabrev'].'">'._('Delete').'</td></tr>';
 }
 
 echo '</table><br><br>';
 
-echo "<form action='" . $_SERVER['PHP_SELF'] . '?' . SID . "' method=post name='form1'>";
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post" name="form1">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<table class=selection>';
+echo '<table class="selection">';
 
 if (isset($_GET['Edit'])) {
 	echo '<tr><td>'._('User ID').'</td><td>'.$UserID.'</td></tr>';
-	echo '<input type=hidden name=userid value="'.$UserID.'"';
+	echo '<input type="hidden" name="UserID" value="'.$UserID.'" />';
 } else {
-	echo '<tr><td>'._('User ID').'</td><td><select name=userid>';
+	echo '<tr><td>'._('User ID').'</td><td><select name="UserID">';
 	$usersql="SELECT userid FROM www_users";
 	$userresult=DB_query($usersql,$db);
 	while ($myrow=DB_fetch_array($userresult)) {
@@ -178,9 +176,9 @@ if (isset($_GET['Edit'])) {
 	$currencyresult=DB_query($currencysql,$db);
 	$myrow=DB_fetch_array($currencyresult);
 	echo '<tr><td>'._('Currency').'</td><td>'.$myrow['currency'].'</td></tr>';
-	echo '<input type=hidden name=currabrev value="'.$Currency.'"';
+	echo '<input type="hidden" name="CurrCode" value="'.$Currency.'">';
 } else {
-	echo '<tr><td>'._('Currency').'</td><td><select name=currabrev>';
+	echo '<tr><td>'._('Currency').'</td><td><select name="CurrCode">';
 	$currencysql="SELECT currabrev,currency FROM currencies";
 	$currencyresult=DB_query($currencysql,$db);
 	while ($myrow=DB_fetch_array($currencyresult)) {
@@ -195,26 +193,26 @@ if (isset($_GET['Edit'])) {
 
 echo '<tr><td>'._('User can create orders').'</td>';
 if ($CanCreate==1) {
-	echo '<td><input type=checkbox name=cancreate></td></tr>';
+	echo '<td><input type="checkbox" name="CanCreate"></td></tr>';
 } else {
-	echo '<td><input type=checkbox checked name=cancreate></td></tr>';
+	echo '<td><input type="checkbox" checked name="CanCreate"></td></tr>';
 }
 
 echo '<tr><td>'._('User can release invoices').'</td>';
 if ($OffHold==1) {
-	echo '<td><input type=checkbox name=offhold></td></tr>';
+	echo '<td><input type="checkbox" name="OffHold"></td></tr>';
 } else {
-	echo '<td><input type=checkbox checked name=offhold></td></tr>';
+	echo '<td><input type="checkbox" checked name="OffHold"></td></tr>';
 }
 
 echo '<tr><td>'._('User can authorise orders up to :').'</td>';
-echo '<td><input type=input name=authlevel size=11 class=number value='.$AuthLevel.'></td</tr>';
+echo '<td><input type="input" name="AuthLevel" size="11" class="number" value="'.$AuthLevel.'" /></td></tr>';
 echo '</table>';
 
 if (isset($_GET['Edit'])) {
-	echo '<br><div class="centre"><input type=submit name="Update" value="'._('Update Information').'"></div></form>';
+	echo '<br /><div class="centre"><input type="submit" name="Update" value="'._('Update Information').'"></div></form>';
 } else {
-	echo '<br><div class="centre"><input type=submit name="Submit" value="'._('Enter Information').'"></div></form>';
+	echo '<br /><div class="centre"><input type="submit" name="Submit" value="'._('Enter Information').'"></div></form>';
 }
 include('includes/footer.inc');
 ?>
