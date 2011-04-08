@@ -261,20 +261,20 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 	echo '<td>
 				<input type="text" class="number" name="Margin" MAXLENGTH =8 size=8 value=' .$_POST['Margin'] . '></td></tr>';
 	$result = DB_query("SELECT typeabbrev, sales_type FROM salestypes ", $db);
-	echo '<tr><td>' . _('Sales Type') . '/' . _('Price List') . ":</td>
-		<td><select name='SalesType'>";
+	echo '<tr><td>' . _('Sales Type') . '/' . _('Price List') . ':</td>
+		<td><select name="SalesType">';
 	while ($myrow = DB_fetch_array($result)) {
 		if ($_POST['SalesType'] == $myrow['typeabbrev']) {
-			echo "<option selected value='" . $myrow['typeabbrev'] . "'>" . $myrow['sales_type'] . '</option>';
+			echo '<option selected value="' . $myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
 		} else {
-			echo "<option value='" . $myrow['typeabbrev'] . "'>" . $myrow['sales_type'] . '</option>';
+			echo '<option value="' . $myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
 		}
 	} //end while loop
 	DB_data_seek($result, 0);
 	$result = DB_query("SELECT currency, currabrev FROM currencies", $db);
 	echo '</select></td></tr>
-		<tr><td>' . _('Currency') . ":</td>
-		<td><select name='CurrCode'>";
+		<tr><td>' . _('Currency') . ':</td>
+		<td><select name="CurrCode">';
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['CurrCode']) and $_POST['CurrCode'] == $myrow['currabrev']) {
 			echo '<option selected value=' . $myrow['currabrev'] . '>' . $myrow['currency'] . '</option>';
@@ -284,7 +284,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 	} //end while loop
 	DB_data_seek($result, 0);
 	echo '</select></td></tr>';
-	echo "</table></br><p><div class='centre'><input type=submit name='submit' value='" . _('Submit') . "'></div></p>";
+	echo '</table><br /><p><div class="centre"><input type=submit name="submit" value="' . _('Submit') . '"></div></p>';
 } /*end of else not submit */
 include ('includes/footer.inc');
 ?>
