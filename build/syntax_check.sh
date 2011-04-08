@@ -9,7 +9,7 @@ do
     newname=`echo $f | cut -c3-`
     filename="$ROOT_DIR/$newname"
 
-    output=`php5 -l $filename 2>/dev/null`
+    output=`php5 -l $filename`
     if [ $? != 0 ]
     then
 	echo $filename
@@ -24,7 +24,7 @@ do
     newname=`echo $f | cut -c3-`
     filename="$ROOT_DIR/$newname"
 
-    output=`php5 -l $filename 2>/dev/null`
+    output=`php5 -l $filename`
     if [ $? != 0 ]
     then
         echo $filename

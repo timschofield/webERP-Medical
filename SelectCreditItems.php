@@ -5,8 +5,6 @@
 /*The credit selection screen uses the Cart class used for the making up orders
 some of the variable names refer to order - please think credit when you read order */
 
-//$PageSecurity = 3;
-
 include('includes/DefineCartClass.php');
 include('includes/DefineSerialItems.php');
 /* Session started in session.inc for password checking and authorisation level check */
@@ -81,7 +79,7 @@ if (isset($_POST['SearchCust']) AND $_SESSION['RequireCustomerSelection']==1){
 					custbranch.branchcode
 				FROM custbranch
 				WHERE custbranch.brname " . LIKE  ." '".$SearchString."'
-				AND custbranch.disabletrans=0";
+				AND custbranch.disabletrans='0'";
 
 		  } elseif (strlen($_POST['CustCode'])>0){
 
@@ -94,7 +92,7 @@ if (isset($_POST['SearchCust']) AND $_SESSION['RequireCustomerSelection']==1){
 					custbranch.branchcode
 				FROM custbranch
 				WHERE custbranch.branchcode " . LIKE  . " '%" . $_POST['CustCode'] . "%'
-				AND custbranch.disabletrans=0";
+				AND custbranch.disabletrans='0'";
 		  }
 
 		  $ErrMsg = _('Customer branch records requested cannot be retrieved because');
@@ -219,12 +217,12 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		  echo '<br /><table cellpadding=2 colspan=7 class=selection>';
 
 		  $TableHeader = '<tr>
-		  	<th>' . _('Code') . '</th>
-				<th>' . _('Branch') . '</th>
-				<th>' . _('Contact') . '</th>
-				<th>' . _('Phone') . '</th>
-				<th>' . _('Fax') . '</th>
-				</tr>';
+							<th>' . _('Code') . '</th>
+							<th>' . _('Branch') . '</th>
+							<th>' . _('Contact') . '</th>
+							<th>' . _('Phone') . '</th>
+							<th>' . _('Fax') . '</th>
+						</tr>';
 
 		  echo $TableHeader;
 
@@ -241,18 +239,18 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				    $k=1;
 			   }
 
-			   printf("<td><font size=1><input type=submit name='Select' VALUE='%s - %s'</font></td>
-			   	<td><font size=1>%s</font></td>
-				<td><font size=1>%s</font></td>
-				<td><font size=1>%s</font></td>
-				<td><font size=1>%s</font></td>
-				</tr>",
-				$myrow['debtorno'],
-				$myrow['branchcode'],
-				$myrow['brname'],
-				$myrow['contactname'],
-				$myrow['phoneno'],
-				$myrow['faxno']);
+			   printf('<td><font size=1><input type=submit name="Select" VALUE="%s - %s" /></font></td>
+					<td><font size=1>%s</font></td>
+					<td><font size=1>%s</font></td>
+					<td><font size=1>%s</font></td>
+					<td><font size=1>%s</font></td>
+					</tr>',
+					$myrow['debtorno'],
+					$myrow['branchcode'],
+					$myrow['brname'],
+					$myrow['contactname'],
+					$myrow['phoneno'],
+					$myrow['faxno']);
 
 //end of page full new headings if
 		  }
@@ -289,7 +287,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 					FROM stockmaster, stockcategory
 					WHERE stockmaster.categoryid=stockcategory.categoryid
 					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
-					AND stockmaster.description " . LIKE . "'$SearchString'
+					AND stockmaster.description " . LIKE . "'" . $SearchString . "'
 					GROUP BY stockmaster.stockid,
 						stockmaster.description,
 						stockmaster.units
@@ -302,7 +300,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 						stockcategory
 					WHERE stockmaster.categoryid=stockcategory.categoryid
 					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
-					AND stockmaster.description " . LIKE . "'$SearchString'
+					AND stockmaster.description " . LIKE . "'" . $SearchString . "'
 					AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
 					GROUP BY stockmaster.stockid,
 						stockmaster.description,
@@ -387,7 +385,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 /*Always do the stuff below if not looking for a customerid
   Set up the form for the credit note display and  entry*/
 
-	 echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
+	echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 
@@ -452,8 +450,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 											$NewItemQty,
 											$myrow['description'],
 											GetPrice ($_POST['NewItem'],
-												$_SESSION['CreditItems']->DebtorNo,
-												$_SESSION['CreditItems']->Branch, $db),
+											$_SESSION['CreditItems']->DebtorNo,
+											$_SESSION['CreditItems']->Branch, $db),
 											0,
 											$myrow['units'],
 											$myrow['volume'],
@@ -645,8 +643,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 /* This is where the credit note as selected should be displayed  reflecting any deletions or insertions*/
 
-		  echo '
-		  <table cellpadding=2 colspan=7 class=selection>
+		  echo '<table cellpadding=2 colspan=7 class=selection>
 		  <tr>
 		  <th>' . _('Item Code') . '</th>
 		  <th>' . _('Item Description') . '</th>
@@ -811,12 +808,12 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 
 		echo '<tr>
-			<td colspan=7 class=number>' . _('Credit Totals') . "</td>
-			<td class=number><b>$DisplayTotal</b></td>
+			<td colspan=7 class=number>' . _('Credit Totals') . '</td>
+			<td class=number><b>' . $DisplayTotal . '</b></td>
 			<td colspan=2></td>
-			<td class=number><b>" . number_format($TaxTotal,2) . "</td>
-			<td class=number><b>" . number_format($TaxTotal+($_SESSION['CreditItems']->total + $_SESSION['CreditItems']->FreightCost),2) . "</b></td>
-		</tr></table>";
+			<td class=number><b>' . number_format($TaxTotal,2) . '</td>
+			<td class=number><b>' . number_format($TaxTotal+($_SESSION['CreditItems']->total + $_SESSION['CreditItems']->FreightCost),2) . '</b></td>
+		</tr></table>';
 
 
 /*Now show options for the credit note */
@@ -980,10 +977,10 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 					    $k++;
 				   }
 
-				   printf("<td><font size=1><input type=submit name='NewItem' VALUE='%s'></font></td>
+				   printf('<td><font size=1><input type=submit name="NewItem" VALUE="%s"></font></td>
                    				<td><font size=1>%s</font></td>
                    				<td><font size=1>%s</font></td>
-                   				<td>%s</td></tr>",
+                   				<td>%s</td></tr>',
                    				$myrow['stockid'],
                    				$myrow['description'],
                    				$myrow['units'],
@@ -1456,7 +1453,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess==true){
 				    /*end of its a return of stock */
 			   } elseif ($_POST['CreditType']=='WriteOff'){ /*its a stock write off */
 
-			   	    if ($CreditLine->MBflag=="B" OR $CreditLine->MBflag=="M"){
+			   	    if ($CreditLine->MBflag=='B' OR $CreditLine->MBflag=='M'){
 			   		/* Insert stock movements for the
 					item being written off - with unit cost */
 				    	$SQL = "INSERT INTO stockmoves (
@@ -1951,18 +1948,17 @@ then debit the expense account the stock is to written off to */
 		}
 	 } /*end of if Sales and GL integrated */
 
-	 $SQL='COMMIT';
-	 $Result = DB_query($SQL,$db);
+	DB_Txn_Commit($db);
 
 	 unset($_SESSION['CreditItems']->LineItems);
 	 unset($_SESSION['CreditItems']);
 
 	 echo _('Credit Note number') . ' ' . $CreditNo . ' ' . _('processed') . '<br>';
-	 echo '<a target="_blank" href="' . $rootpath . '/PrintCustTrans.php?' . SID . '&FromTransNo=' . $CreditNo . '&InvOrCredit=Credit">' . _('Show this Credit Note on screen') . '</a><br>';
+	 echo '<a target="_blank" href="' . $rootpath . '/PrintCustTrans.php?FromTransNo=' . $CreditNo . '&InvOrCredit=Credit">' . _('Show this Credit Note on screen') . '</a><br>';
 	if ($_SESSION['InvoicePortraitFormat']==0){
-	 	echo '<a href="' . $rootpath . '/PrintCustTrans.php?' . SID . '&FromTransNo=' . $CreditNo . '&InvOrCredit=Credit&PrintPDF=True">' . _('Print this Credit Note') . '</a>';
+	 	echo '<a href="' . $rootpath . '/PrintCustTrans.php?FromTransNo=' . $CreditNo . '&InvOrCredit=Credit&PrintPDF=True">' . _('Print this Credit Note') . '</a>';
 	} else {
-		echo '<a href="' . $rootpath . '/PrintCustTransPortrait.php?' . SID . '&FromTransNo=' . $CreditNo . '&InvOrCredit=Credit&PrintPDF=True">' . _('Print this Credit Note') . '</a>';
+		echo '<a href="' . $rootpath . '/PrintCustTransPortrait.php?FromTransNo=' . $CreditNo . '&InvOrCredit=Credit&PrintPDF=True">' . _('Print this Credit Note') . '</a>';
 	}
 	 echo '<p><a href="' . $rootpath . '/SelectCreditItems.php">' . _('Enter Another Credit Note') . '</a>';
 
