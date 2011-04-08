@@ -15,7 +15,7 @@ $title = _('Purchase Order Items');
 
 $identifier=$_GET['identifier'];
 
-/* If a purchase order header doesn't exist, then go to
+/* If a purchase order header doesnt exist, then go to
  * PO_Header.php to create one
  */
 
@@ -38,19 +38,19 @@ if (isset($_POST['StockID2']) AND $_GET['Edit']=='') {
  * exists for it then find that record.
  */
 	$sql = "SELECT stockmaster.description,
-								purchdata.suppliers_partno,
-								purchdata.conversionfactor,
-								purchdata.suppliersuom,
-								purchdata.minorderqty,
-								stockmaster.pkg_type,
-								stockmaster.units,
-								stockmaster.netweight,
-								stockmaster.kgs,
-								stockmaster.volume
-								FROM purchdata INNER JOIN stockmaster
-								ON purchdata.stockid=stockmaster.stockid
-								WHERE purchdata.stockid='" . $_POST['StockID2'] . "' AND
-								purchdata.supplierno='".$_SESSION['PO'.$identifier]->SupplierID."'";
+				purchdata.suppliers_partno,
+				purchdata.conversionfactor,
+				purchdata.suppliersuom,
+				purchdata.minorderqty,
+				stockmaster.pkg_type,
+				stockmaster.units,
+				stockmaster.netweight,
+				stockmaster.kgs,
+				stockmaster.volume
+			FROM purchdata INNER JOIN stockmaster
+			ON purchdata.stockid=stockmaster.stockid
+			WHERE purchdata.stockid='" . $_POST['StockID2'] . "' AND
+				purchdata.supplierno='".$_SESSION['PO'.$identifier]->SupplierID."'";
 
 	$ErrMsg = _('The stock record of the stock selected') . ': ' . $_POST['Stock'] . ' ' .
 		_('cannot be retrieved because');
@@ -113,64 +113,64 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 
 			/*Insert to purchase order header record */
 			$sql = "INSERT INTO purchorders (	orderno,
-																			supplierno,
-																			comments,
-																			orddate,
-																			rate,
-																			initiator,
-																			requisitionno,
-																			intostocklocation,
-																			deladd1,
-																			deladd2,
-																			deladd3,
-																			deladd4,
-																			deladd5,
-																			deladd6,
-																			tel,
-																			suppdeladdress1,
-																			suppdeladdress2,
-																			suppdeladdress3,
-																			suppdeladdress4,
-																			suppdeladdress5,
-																			suppdeladdress6,
-																			supptel,
-																			contact,
-																			version,
-																			revised,
-																			status,
-																			stat_comment,
-																			deliverydate,
-																			paymentterms)
-																		VALUES(	'" . $_SESSION['PO'.$identifier]->OrderNo . "',
-																				'" . $_SESSION['PO'.$identifier]->SupplierID . "',
-																				'" . $_SESSION['PO'.$identifier]->Comments . "',
-																				'" . Date('Y-m-d') . "',
-																				'" . $_SESSION['PO'.$identifier]->ExRate . "',
-																				'" . $_SESSION['PO'.$identifier]->Initiator . "',
-																				'" . $_SESSION['PO'.$identifier]->RequisitionNo . "',
-																				'" . $_SESSION['PO'.$identifier]->Location . "',
-																				'" . $_SESSION['PO'.$identifier]->DelAdd1 . "',
-																				'" . $_SESSION['PO'.$identifier]->DelAdd2 . "',
-																				'" . $_SESSION['PO'.$identifier]->DelAdd3 . "',
-																				'" . $_SESSION['PO'.$identifier]->DelAdd4 . "',
-																				'" . $_SESSION['PO'.$identifier]->DelAdd5 . "',
-																				'" . $_SESSION['PO'.$identifier]->DelAdd6 . "',
-																				'" . $_SESSION['PO'.$identifier]->Tel . "',
-																				'" . $_SESSION['PO'.$identifier]->SuppDelAdd1 . "',
-																				'" . $_SESSION['PO'.$identifier]->SuppDelAdd2 . "',
-																				'" . $_SESSION['PO'.$identifier]->SuppDelAdd3 . "',
-																				'" . $_SESSION['PO'.$identifier]->SuppDelAdd4 . "',
-																				'" . $_SESSION['PO'.$identifier]->SuppDelAdd5 . "',
-																				'" . $_SESSION['PO'.$identifier]->SuppDelAdd6 . "',
-																				'" . $_SESSION['PO'.$identifier]->SuppTel. "',
-																				'" . $_SESSION['PO'.$identifier]->Contact . "',
-																				'" . $_SESSION['PO'.$identifier]->Version . "',
-																				'" . Date('Y-m-d') . "',
-																				'Pending',
-																				'" . $StatusComment . "',
-																				'" . FormatDateForSQL($_SESSION['PO'.$identifier]->DeliveryDate) . "',
-																				'" . $_SESSION['PO'.$identifier]->PaymentTerms. "'
-																			)";
+												supplierno,
+												comments,
+												orddate,
+												rate,
+												initiator,
+												requisitionno,
+												intostocklocation,
+												deladd1,
+												deladd2,
+												deladd3,
+												deladd4,
+												deladd5,
+												deladd6,
+												tel,
+												suppdeladdress1,
+												suppdeladdress2,
+												suppdeladdress3,
+												suppdeladdress4,
+												suppdeladdress5,
+												suppdeladdress6,
+												supptel,
+												contact,
+												version,
+												revised,
+												status,
+												stat_comment,
+												deliverydate,
+												paymentterms)
+											VALUES(	'" . $_SESSION['PO'.$identifier]->OrderNo . "',
+												'" . $_SESSION['PO'.$identifier]->SupplierID . "',
+												'" . $_SESSION['PO'.$identifier]->Comments . "',
+												'" . Date('Y-m-d') . "',
+												'" . $_SESSION['PO'.$identifier]->ExRate . "',
+												'" . $_SESSION['PO'.$identifier]->Initiator . "',
+												'" . $_SESSION['PO'.$identifier]->RequisitionNo . "',
+												'" . $_SESSION['PO'.$identifier]->Location . "',
+												'" . $_SESSION['PO'.$identifier]->DelAdd1 . "',
+												'" . $_SESSION['PO'.$identifier]->DelAdd2 . "',
+												'" . $_SESSION['PO'.$identifier]->DelAdd3 . "',
+												'" . $_SESSION['PO'.$identifier]->DelAdd4 . "',
+												'" . $_SESSION['PO'.$identifier]->DelAdd5 . "',
+												'" . $_SESSION['PO'.$identifier]->DelAdd6 . "',
+												'" . $_SESSION['PO'.$identifier]->Tel . "',
+												'" . $_SESSION['PO'.$identifier]->SuppDelAdd1 . "',
+												'" . $_SESSION['PO'.$identifier]->SuppDelAdd2 . "',
+												'" . $_SESSION['PO'.$identifier]->SuppDelAdd3 . "',
+												'" . $_SESSION['PO'.$identifier]->SuppDelAdd4 . "',
+												'" . $_SESSION['PO'.$identifier]->SuppDelAdd5 . "',
+												'" . $_SESSION['PO'.$identifier]->SuppDelAdd6 . "',
+												'" . $_SESSION['PO'.$identifier]->SuppTel. "',
+												'" . $_SESSION['PO'.$identifier]->Contact . "',
+												'" . $_SESSION['PO'.$identifier]->Version . "',
+												'" . Date('Y-m-d') . "',
+												'Pending',
+												'" . $StatusComment . "',
+												'" . FormatDateForSQL($_SESSION['PO'.$identifier]->DeliveryDate) . "',
+												'" . $_SESSION['PO'.$identifier]->PaymentTerms. "'
+											)";
 
 			$ErrMsg =  _('The purchase order header record could not be inserted into the database because');
 			$DbgMsg = _('The SQL statement used to insert the purchase order header record and failed was');
@@ -180,50 +180,50 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 			foreach ($_SESSION['PO'.$identifier]->LineItems as $POLine) {
 				if ($POLine->Deleted==False) {
 					$sql = "INSERT INTO purchorderdetails ( orderno,
-																							itemcode,
-																							deliverydate,
-																							itemdescription,
-																							glcode,
-																							unitprice,
-																							quantityord,
-																							shiptref,
-																							jobref,
-																							itemno,
-																							uom,
-																							conversionfactor,
-																							suppliers_partno,
-																							subtotal_amount,
-																							package,
-																							pcunit,
-																							netweight,
-																							gw,
-																							cuft,
-																							total_quantity,
-																							total_amount,
-																							assetid )
-																					VALUES (
-																							'" . $_SESSION['PO'.$identifier]->OrderNo . "',
-																							'" . $POLine->StockID . "',
-																							'" . FormatDateForSQL($POLine->ReqDelDate) . "',
-																							'" . $POLine->ItemDescription . "',
-																							'" . $POLine->GLCode . "',
-																							'" . $POLine->Price . "',
-																							'" . $POLine->Quantity . "',
-																							'" . $POLine->ShiptRef . "',
-																							'" . $POLine->JobRef . "',
-																							'" . $POLine->ItemNo . "',
-																							'" . $POLine->SuppUOM . "',
-																							'" . $POLine->ConversionFactor . "',
-																							'" . $POLine->Suppliers_PartNo . "',
-																							'" . $POLine->SubTotal_Amount . "',
-																							'" . $POLine->Package . "',
-																							'" . $POLine->PcUnit . "',
-																							'" . $POLine->NetWeight . "',
-																							'" . $POLine->gw . "',
-																							'" . $POLine->CuFt . "',
-																							'" . $POLine->Total_Quantity . "',
-																							'" . $POLine->Total_Amount . "',
-																							'" . $POLine->AssetID . "')";
+															itemcode,
+															deliverydate,
+															itemdescription,
+															glcode,
+															unitprice,
+															quantityord,
+															shiptref,
+															jobref,
+															itemno,
+															uom,
+															conversionfactor,
+															suppliers_partno,
+															subtotal_amount,
+															package,
+															pcunit,
+															netweight,
+															gw,
+															cuft,
+															total_quantity,
+															total_amount,
+															assetid )
+														VALUES (
+															'" . $_SESSION['PO'.$identifier]->OrderNo . "',
+															'" . $POLine->StockID . "',
+															'" . FormatDateForSQL($POLine->ReqDelDate) . "',
+															'" . $POLine->ItemDescription . "',
+															'" . $POLine->GLCode . "',
+															'" . $POLine->Price . "',
+															'" . $POLine->Quantity . "',
+															'" . $POLine->ShiptRef . "',
+															'" . $POLine->JobRef . "',
+															'" . $POLine->ItemNo . "',
+															'" . $POLine->SuppUOM . "',
+															'" . $POLine->ConversionFactor . "',
+															'" . $POLine->Suppliers_PartNo . "',
+															'" . $POLine->SubTotal_Amount . "',
+															'" . $POLine->Package . "',
+															'" . $POLine->PcUnit . "',
+															'" . $POLine->NetWeight . "',
+															'" . $POLine->gw . "',
+															'" . $POLine->CuFt . "',
+															'" . $POLine->Total_Quantity . "',
+															'" . $POLine->Total_Amount . "',
+															'" . $POLine->AssetID . "')";
 					$ErrMsg =_('One of the purchase order detail records could not be inserted into the database because');
 					$DbgMsg =_('The SQL statement used to insert the purchase order detail record and failed was');
 					$result =DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
@@ -238,33 +238,33 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 		     /*Update the purchase order header with any changes */
 
 			$sql = "UPDATE purchorders SET supplierno = '" . $_SESSION['PO'.$identifier]->SupplierID . "' ,
-																		comments='" . $_SESSION['PO'.$identifier]->Comments . "',
-																		rate='" . $_SESSION['PO'.$identifier]->ExRate . "',
-																		initiator='" . $_SESSION['PO'.$identifier]->Initiator . "',
-																		requisitionno= '" . $_SESSION['PO'.$identifier]->RequisitionNo . "',
-																		version= '" .  $_SESSION['PO'.$identifier]->Version . "',
-																		deliverydate='" . FormatDateForSQL($_SESSION['PO'.$identifier]->DeliveryDate) . "',
-																		revised= '" . Date('Y-m-d') . "',
-																		intostocklocation='" . $_SESSION['PO'.$identifier]->Location . "',
-																		deladd1='" . $_SESSION['PO'.$identifier]->DelAdd1 . "',
-																		deladd2='" . $_SESSION['PO'.$identifier]->DelAdd2 . "',
-																		deladd3='" . $_SESSION['PO'.$identifier]->DelAdd3 . "',
-																		deladd4='" . $_SESSION['PO'.$identifier]->DelAdd4 . "',
-																		deladd5='" . $_SESSION['PO'.$identifier]->DelAdd5 . "',
-																		deladd6='" . $_SESSION['PO'.$identifier]->DelAdd6 . "',
-																		deladd6='" . $_SESSION['PO'.$identifier]->Tel . "',
-																		suppdeladdress1='" . $_SESSION['PO'.$identifier]->SuppDelAdd1 . "',
-																		suppdeladdress2='" . $_SESSION['PO'.$identifier]->SuppDelAdd2 . "',
-																		suppdeladdress3='" . $_SESSION['PO'.$identifier]->SuppDelAdd3 . "',
-																		suppdeladdress4='" . $_SESSION['PO'.$identifier]->SuppDelAdd4 . "',
-																		suppdeladdress5='" . $_SESSION['PO'.$identifier]->SuppDelAdd5 . "',
-																		suppdeladdress6='" . $_SESSION['PO'.$identifier]->SuppDelAdd6 . "',
-																		contact='" . $_SESSION['PO'.$identifier]->SupplierContact . "',
-																		supptel='" . $_SESSION['PO'.$identifier]->SuppTel . "',
-																		paymentterms='" . $_SESSION['PO'.$identifier]->PaymentTerms . "',
-																		allowprint='" . $_SESSION['PO'.$identifier]->AllowPrintPO . "',
-																		status = 'Pending'
-																		WHERE orderno = '" . $_SESSION['PO'.$identifier]->OrderNo ."'";
+											comments='" . $_SESSION['PO'.$identifier]->Comments . "',
+											rate='" . $_SESSION['PO'.$identifier]->ExRate . "',
+											initiator='" . $_SESSION['PO'.$identifier]->Initiator . "',
+											requisitionno= '" . $_SESSION['PO'.$identifier]->RequisitionNo . "',
+											version= '" .  $_SESSION['PO'.$identifier]->Version . "',
+											deliverydate='" . FormatDateForSQL($_SESSION['PO'.$identifier]->DeliveryDate) . "',
+											revised= '" . Date('Y-m-d') . "',
+											intostocklocation='" . $_SESSION['PO'.$identifier]->Location . "',
+											deladd1='" . $_SESSION['PO'.$identifier]->DelAdd1 . "',
+											deladd2='" . $_SESSION['PO'.$identifier]->DelAdd2 . "',
+											deladd3='" . $_SESSION['PO'.$identifier]->DelAdd3 . "',
+											deladd4='" . $_SESSION['PO'.$identifier]->DelAdd4 . "',
+											deladd5='" . $_SESSION['PO'.$identifier]->DelAdd5 . "',
+											deladd6='" . $_SESSION['PO'.$identifier]->DelAdd6 . "',
+											deladd6='" . $_SESSION['PO'.$identifier]->Tel . "',
+											suppdeladdress1='" . $_SESSION['PO'.$identifier]->SuppDelAdd1 . "',
+											suppdeladdress2='" . $_SESSION['PO'.$identifier]->SuppDelAdd2 . "',
+											suppdeladdress3='" . $_SESSION['PO'.$identifier]->SuppDelAdd3 . "',
+											suppdeladdress4='" . $_SESSION['PO'.$identifier]->SuppDelAdd4 . "',
+											suppdeladdress5='" . $_SESSION['PO'.$identifier]->SuppDelAdd5 . "',
+											suppdeladdress6='" . $_SESSION['PO'.$identifier]->SuppDelAdd6 . "',
+											contact='" . $_SESSION['PO'.$identifier]->SupplierContact . "',
+											supptel='" . $_SESSION['PO'.$identifier]->SuppTel . "',
+											paymentterms='" . $_SESSION['PO'.$identifier]->PaymentTerms . "',
+											allowprint='" . $_SESSION['PO'.$identifier]->AllowPrintPO . "',
+											status = 'Pending'
+										WHERE orderno = '" . $_SESSION['PO'.$identifier]->OrderNo ."'";
 
 			$ErrMsg =  _('The purchase order could not be updated because');
 			$DbgMsg = _('The SQL statement used to update the purchase order header record, that failed was');
@@ -283,99 +283,99 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 				} else if ($POLine->PODetailRec=='') {
 
 					$sql = "INSERT INTO purchorderdetails ( orderno,
-																							itemcode,
-																							deliverydate,
-																							itemdescription,
-																							glcode,
-																							unitprice,
-																							quantityord,
-																							shiptref,
-																							jobref,
-																							itemno,
-																							uom,
-																							conversionfactor,
-																							suppliers_partno,
-																							subtotal_amount,
-																							package,
-																							pcunit,
-																							netweight,
-																							gw,
-																							cuft,
-																							total_quantity,
-																							total_amount,
-																							assetid )
-																						VALUES (
-																							'" . $_SESSION['PO'.$identifier]->OrderNo . "',
-																							'" . $POLine->StockID . "',
-																							'" . FormatDateForSQL($POLine->ReqDelDate) . "',
-																							'" . $POLine->ItemDescription . "',
-																							'" . $POLine->GLCode . "',
-																							'" . $POLine->Price . "',
-																							'" . $POLine->Quantity . "',
-																							'" . $POLine->ShiptRef . "',
-																							'" . $POLine->JobRef . "',
-																							'" . $POLine->ItemNo . "',
-																							'" . $POLine->UOM . "',
-																							'" . $POLine->ConversionFactor . "',
-																							'" . $POLine->Suppliers_PartNo . "',
-																							'" . $POLine->SubTotal_Amount . "',
-																							'" . $POLine->Package . "',
-																							'" . $POLine->PcUnit . "',
-																							'" . $POLine->NetWeight . "',
-																							'" . $POLine->gw . "',
-																							'" . $POLine->CuFt . "',
-																							'" . $POLine->Total_Quantity . "',
-																							'" . $POLine->Total_Amount . "',
-																							'" . $POLine->AssetID . "')";
+															itemcode,
+															deliverydate,
+															itemdescription,
+															glcode,
+															unitprice,
+															quantityord,
+															shiptref,
+															jobref,
+															itemno,
+															uom,
+															conversionfactor,
+															suppliers_partno,
+															subtotal_amount,
+															package,
+															pcunit,
+															netweight,
+															gw,
+															cuft,
+															total_quantity,
+															total_amount,
+															assetid )
+														VALUES (
+															'" . $_SESSION['PO'.$identifier]->OrderNo . "',
+															'" . $POLine->StockID . "',
+															'" . FormatDateForSQL($POLine->ReqDelDate) . "',
+															'" . $POLine->ItemDescription . "',
+															'" . $POLine->GLCode . "',
+															'" . $POLine->Price . "',
+															'" . $POLine->Quantity . "',
+															'" . $POLine->ShiptRef . "',
+															'" . $POLine->JobRef . "',
+															'" . $POLine->ItemNo . "',
+															'" . $POLine->UOM . "',
+															'" . $POLine->ConversionFactor . "',
+															'" . $POLine->Suppliers_PartNo . "',
+															'" . $POLine->SubTotal_Amount . "',
+															'" . $POLine->Package . "',
+															'" . $POLine->PcUnit . "',
+															'" . $POLine->NetWeight . "',
+															'" . $POLine->gw . "',
+															'" . $POLine->CuFt . "',
+															'" . $POLine->Total_Quantity . "',
+															'" . $POLine->Total_Amount . "',
+															'" . $POLine->AssetID . "')";
 
 				} else {
 					if ($POLine->Quantity==$POLine->QtyReceived){
 						$sql = "UPDATE purchorderdetails SET itemcode='" . $POLine->StockID . "',
-																							deliverydate ='" . FormatDateForSQL($POLine->ReqDelDate) . "',
-																							itemdescription='" . $POLine->ItemDescription . "',
-																							glcode='" . $POLine->GLCode . "',
-																							unitprice='" . $POLine->Price . "',
-																							quantityord='" . $POLine->Quantity . "',
-																							shiptref='" . $POLine->ShiptRef . "',
-																							jobref='" . $POLine->JobRef . "',
-																							itemno='" . $POLine->ItemNo . "',
-																							uom='" . $POLine->UOM . "',
-																							conversionfactor='" . $POLine->ConversionFactor. "',
-																							suppliers_partno='" . $POLine->Suppliers_PartNo . "',
-																							subtotal_amount='" . $POLine->SubTotal_Amount . "',
-																							package='" . $POLine->Package . "',
-																							pcunit='" . $POLine->PcUnit . "',
-																							netweight='" . $POLine->NetWeight . "',
-																							gw='" . $POLine->gw . "',
-																							cuft='" . $POLine->CuFt . "',
-																							total_quantity='" . $POLine->Total_Quantity . "',
-																							total_amount='" . $POLine->Total_Amount . "',
-																							completed=1,
-																							assetid='" . $POLine->AssetID . "'
+															deliverydate ='" . FormatDateForSQL($POLine->ReqDelDate) . "',
+															itemdescription='" . $POLine->ItemDescription . "',
+															glcode='" . $POLine->GLCode . "',
+															unitprice='" . $POLine->Price . "',
+															quantityord='" . $POLine->Quantity . "',
+															shiptref='" . $POLine->ShiptRef . "',
+															jobref='" . $POLine->JobRef . "',
+															itemno='" . $POLine->ItemNo . "',
+															uom='" . $POLine->UOM . "',
+															conversionfactor='" . $POLine->ConversionFactor. "',
+															suppliers_partno='" . $POLine->Suppliers_PartNo . "',
+															subtotal_amount='" . $POLine->SubTotal_Amount . "',
+															package='" . $POLine->Package . "',
+															pcunit='" . $POLine->PcUnit . "',
+															netweight='" . $POLine->NetWeight . "',
+															gw='" . $POLine->gw . "',
+															cuft='" . $POLine->CuFt . "',
+															total_quantity='" . $POLine->Total_Quantity . "',
+															total_amount='" . $POLine->Total_Amount . "',
+															completed=1,
+															assetid='" . $POLine->AssetID . "'
 														WHERE podetailitem='" . $POLine->PODetailRec . "'";
 					} else {
 						$sql = "UPDATE purchorderdetails SET itemcode='" . $POLine->StockID . "',
-																								deliverydate ='" . FormatDateForSQL($POLine->ReqDelDate) . "',
-																								itemdescription='" . $POLine->ItemDescription . "',
-																								glcode='" . $POLine->GLCode . "',
-																								unitprice='" . $POLine->Price . "',
-																								quantityord='" . $POLine->Quantity . "',
-																								shiptref='" . $POLine->ShiptRef . "',
-																								jobref='" . $POLine->JobRef . "',
-																								itemno='" . $POLine->ItemNo . "',
-																								uom='" . $POLine->UOM. "',
-																								conversionfactor='" . $POLine->ConversionFactor . "',
-																								suppliers_partno='" . $POLine->Suppliers_PartNo . "',
-																								subtotal_amount='" . $POLine->SubTotal_Amount . "',
-																								package='" . $POLine->Package . "',
-																								pcunit='" . $POLine->PcUnit . "',
-																								netweight='" . $POLine->NetWeight . "',
-																								gw='" . $POLine->gw . "',
-																								cuft='" . $POLine->CuFt . "',
-																								total_quantity='" . $POLine->Total_Quantity . "',
-																								total_amount='" . $POLine->Total_Amount . "',
-																								assetid='" . $POLine->AssetID . "'
-																	WHERE podetailitem='" . $POLine->PODetailRec . "'";
+															deliverydate ='" . FormatDateForSQL($POLine->ReqDelDate) . "',
+															itemdescription='" . $POLine->ItemDescription . "',
+															glcode='" . $POLine->GLCode . "',
+															unitprice='" . $POLine->Price . "',
+															quantityord='" . $POLine->Quantity . "',
+															shiptref='" . $POLine->ShiptRef . "',
+															jobref='" . $POLine->JobRef . "',
+															itemno='" . $POLine->ItemNo . "',
+															uom='" . $POLine->UOM. "',
+															conversionfactor='" . $POLine->ConversionFactor . "',
+															suppliers_partno='" . $POLine->Suppliers_PartNo . "',
+															subtotal_amount='" . $POLine->SubTotal_Amount . "',
+															package='" . $POLine->Package . "',
+															pcunit='" . $POLine->PcUnit . "',
+															netweight='" . $POLine->NetWeight . "',
+															gw='" . $POLine->gw . "',
+															cuft='" . $POLine->CuFt . "',
+															total_quantity='" . $POLine->Total_Quantity . "',
+															total_amount='" . $POLine->Total_Amount . "',
+															assetid='" . $POLine->AssetID . "'
+														WHERE podetailitem='" . $POLine->PODetailRec . "'";
 					}
 
 				}
@@ -394,7 +394,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 
 		$Result = DB_Txn_Commit($db);
 		unset($_SESSION['PO'.$identifier]); /*Clear the PO data to allow a newy to be input*/
-		echo "<br><a href='".$rootpath."/PO_SelectOSPurchOrder.php?" . SID . "'>" . _('Return To PO List') . '</a>';
+		echo '<br><a href="'.$rootpath.'/PO_SelectOSPurchOrder.php?">' . _('Return To PO List') . '</a>';
 		include('includes/footer.inc');
 		exit;
 	} /*end if there were no input errors trapped */
@@ -896,7 +896,7 @@ if (isset($_POST['NewItem'])){ /* NewItem is set from the part selection list as
 				} else {
 					prnMsg (_('The item code') . ' ' . $ItemCode . ' ' . _('does not exist in the database and therefore cannot be added to the order'),'error');
 					if ($debug==1){
-						echo "<br>".$sql;
+						echo '<br>'.$sql;
 					}
 					include('includes/footer.inc');
 					exit;
@@ -908,7 +908,7 @@ if (isset($_POST['NewItem'])){ /* NewItem is set from the part selection list as
 
 /* This is where the order as selected should be displayed  reflecting any deletions or insertions*/
 
-echo "<form name=form1 action='" . $_SERVER['PHP_SELF'] . "?" . SID . "identifier=".$identifier. "' method=post>";
+echo '<form name=form1 action="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier. '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 //echo  _('Purchase Order') . ': <font color=BLUE size=4><b>' . $_SESSION['PO'.$identifier]->OrderNo . ' ' . $_SESSION['PO'.$identifier]->SupplierName . ' </b></font> - ' . _('All amounts stated in') . ' ' . $_SESSION['PO'.$identifier]->CurrCode . '<br>';
@@ -924,16 +924,16 @@ if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
 	}
 	echo '<br><b>'._(' Order Summary') . '</b>';
 	echo '<table cellpadding=2 colspan=7 class=selection>';
-	echo "<tr>
-		<th>" . _('Item Code') . "</th>
-		<th>" . _('Description') . "</th>
-		<th>" . _('Quantity') . "</th>
-		<th>" . _('UOM') ."</th>
-		<th>" . _('Weight') . "</th>
-		<th>" . _('Price') .' ('.$_SESSION['PO'.$identifier]->CurrCode.  ")</th>
-		<th>" . _('Subtotal') .' ('.$_SESSION['PO'.$identifier]->CurrCode.  ")</th>
-		<th>" . _('Deliver By') ."</th>
-		</tr>";
+	echo '<tr>
+		<th>' . _('Item Code') . '</th>
+		<th>' . _('Description') . '</th>
+		<th>' . _('Quantity') . '</th>
+		<th>' . _('UOM') .'</th>
+		<th>' . _('Weight') . '</th>
+		<th>' . _('Price') .' ('.$_SESSION['PO'.$identifier]->CurrCode.  ')</th>
+		<th>' . _('Subtotal') .' ('.$_SESSION['PO'.$identifier]->CurrCode.  ')</th>
+		<th>' . _('Deliver By') .'</th>
+		</tr>';
 
 	$_SESSION['PO'.$identifier]->Total = 0;
 	$k = 0;  //row colour counter
@@ -1067,20 +1067,20 @@ if (!isset($_GET['Edit'])) {
 	}
 
 	echo '</select></td>
-		<td>' . _('Enter text extracts in the description') . ":</td>
-		<td><input type='text' name='Keywords' size=20 maxlength=25 value='" . $_POST['Keywords'] . "'></td></tr>
+		<td>' . _('Enter text extracts in the description') . ':</td>
+		<td><input type="text" name="Keywords" size=20 maxlength=25 value="' . $_POST['Keywords'] . '"></td></tr>
 		<tr><td></td>
-		<td><font size=3><b>" . _('OR') . ' </b></font>' . _('Enter extract of the Stock Code') .
-			":</td>
-		<td><input type='text' name='StockCode' size=15 maxlength=18 value='" . $_POST['StockCode'] . "'></td>
+		<td><font size=3><b>' . _('OR') . ' </b></font>' . _('Enter extract of the Stock Code') .
+			':</td>
+		<td><input type="text" name="StockCode" size=15 maxlength=18 value="' . $_POST['StockCode'] . '"></td>
 		</tr>
 		<tr><td></td>
-		<td><font size=3><b>" . _('OR') . ' </b></font><a target="_blank" href="'.$rootpath.'/Stocks.php?"' . SID .
-			 '">' . _('Create a New Stock Item') . "</a></td></tr>
+		<td><font size=3><b>' . _('OR') . ' </b></font><a target="_blank" href="'.$rootpath.'/Stocks.php?"' . SID .
+			 '">' . _('Create a New Stock Item') . '</a></td></tr>
 		</table><br>
-		<div class='centre'><input type=submit name='Search' value='" . _('Search Now') . "'>
-		<input type=submit name='NonStockOrder' value='" . _('Order a non stock item') . "'>
-		</div><br>";
+		<div class="centre"><input type=submit name="Search" value="' . _('Search Now') . '">
+		<input type=submit name="NonStockOrder" value="' . _('Order a non stock item') . '">
+		</div><br>';
 
 
 	$PartsDisplayed =0;
@@ -1088,7 +1088,7 @@ if (!isset($_GET['Edit'])) {
 
 if (isset($SearchResult)) {
 
-	echo "<table cellpadding=1 colspan=7 class=selection>";
+	echo '<table cellpadding=1 colspan=7 class=selection>';
 
 	$TableHeader = '<tr>
 								<th>' . _('Code')  . '</th>
@@ -1141,13 +1141,13 @@ if (isset($SearchResult)) {
 			} else {
 				$Uom=$myrow['units'];
 			}
-			echo "<td>".$myrow['stockid']."</td>
-			<td>".$myrow['description']."</td>
-			<td>".$Uom."</td>
-			<td>".$ImageSource."</td>
-			<td><input class='number' type='text' size=6 value=0 name='qty".$myrow['stockid']."'></td>
-			<input type='hidden' size=6 value=".$Uom." name=uom>
-			</tr>";
+			echo '<td>'.$myrow['stockid'].'</td>
+			<td>'.$myrow['description'].'</td>
+			<td>'.$Uom.'</td>
+			<td>'.$ImageSource.'</td>
+			<td><input class="number" type="text" size=6 value=0 name="qty'.$myrow['stockid'].'"></td>
+			<input type="hidden" size=6 value="'.$Uom.'" name=uom>
+			</tr>';
 
 		$PartsDisplayed++;
 		if ($PartsDisplayed == $Maximum_Number_Of_Parts_To_Show){
