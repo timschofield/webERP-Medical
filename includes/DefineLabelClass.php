@@ -1,13 +1,13 @@
 <?php
 define('MAX_LINES_PER_LABEL', 5);
-define('LABELS_FILE', $_SESSION['reports_dir'] . "/labels.xml");
+define('LABELS_FILE', $_SESSION['reports_dir'] . '/labels.xml');
 
 /**
  *  These tags contains the more general data of the labels
  */
-$GlobalTags = array('id'=>array('desc'=> _('Label id'), 
-															'type'=>'t', 
-															'sz'=>8, 
+$GlobalTags = array('id'=>array('desc'=> _('Label id'),
+															'type'=>'t',
+															'sz'=>8,
 															'maxsz'=>12),  // text
 									'description'=>array('desc'=>_('Description'),
 																			'type'=>'t',
@@ -164,8 +164,10 @@ class LabelList extends SimpleXMLElement {
  *  @return nothing
  */
 function abortMsg($msg) {
-    global $rootpath, $DefaultClock, $Version;
+    global $rootpath, $DefaultClock, $Version, $theme;
+    $title=_('No label templates exist');
     include ('includes/header.inc');
+    echo '<br />';
     prnMsg( $msg, 'error');
     include ('includes/footer.inc');
     exit;

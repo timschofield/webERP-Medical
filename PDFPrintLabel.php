@@ -17,7 +17,6 @@ $pdf= null;
 
 // If there is no label templates, the user could select to set up a new one
 if ($AllLabels==null) {
-	echo '<br/><br/>';
 	abortMsg( _('There isn\'t any label template to select for printing. Click') .
 		' <a href="Labels.php"><b>' . _('HERE'). '</b></a> '. _('to set up a new one') );
 }
@@ -119,15 +118,15 @@ function showLabelOptions() {
 		<input type="submit" name="PDFTest" value="'. _('Print labels with borders') .'"></div>';
 	$iTxt=0;
 
-	echo '<script type="text/javascript">
+	echo "<script type=\"text/javascript\">
 	function setAll(all) {
-		var x=document.getElementById("form1");
+		var x=document.getElementById('form1');
 		for (var i=0;i<x.length;i++) {
-			if (x.elements[i].id==\'item\');
+			if (x.elements[i].id=='item');
 				x.elements[i].checked=all.checked;
 		}
 	}
-	</script>';
+	</script>";
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' .$txt[$iTxt++].'</p>';
 	echo '<form name ="form1" action="'.$_SERVER['PHP_SELF'].'" method="POST" id="form1">';
