@@ -600,7 +600,7 @@ if (count($_SESSION['AllowedPageSecurityTokens'])==1 and $SupplierLogin==0){
 							</tr>
 							<tr>
 							<td class="menu_group_item">
-								<?php echo '<p>&bull; <a href="' . $rootpath . '/StockTransfers.php?">' . _('Inventory Location Transfers') . '</a></p>'; ?>
+								<?php echo '<p>&bull; <a href="' . $rootpath . '/StockTransfers.php?New=Yes">' . _('Inventory Location Transfers') . '</a></p>'; ?>
 							</td>
 							</tr>
 							<tr>

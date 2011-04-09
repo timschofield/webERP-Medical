@@ -39,6 +39,7 @@ class LineItem {
 	Var $PartUnit;
 	var $Controlled;
 	var $Serialised;
+	var $Perishable;
 	Var $DecimalPlaces;
 	var $SerialItems; /*array to hold controlled items*/
 //Constructor
@@ -48,6 +49,7 @@ class LineItem {
 			$PartUnit,
 			$Controlled,
 			$Serialised,
+			$Perishable,
 			$DecimalPlaces){
 
 		$this->StockID = $StockID;
@@ -55,6 +57,7 @@ class LineItem {
 		$this->PartUnit = $PartUnit;
 		$this->Controlled = $Controlled;
 		$this->Serialised = $Serialised;
+		$this->Perishable = $Perishable;
 		$this->DecimalPlaces = $DecimalPlaces;
 		$this->ShipQty = $Quantity;
 		if ($this->Controlled==1){

@@ -114,7 +114,7 @@ echo '</table></td><td valign=top>';
 /*Start a new table for the Serial/Batch ref input  in one column (as a sub table
 then the multi select box for selection of existing bundle/serial nos for dispatch if applicable*/
 //echo '<TABLE><TR><TD valign=TOP>';
-
+$TransferQuantity=$TotalQuantity;
 /*in the first column add a table for the input of newies */
 echo '<table class=selection>';
 echo $tableheader;
@@ -161,12 +161,18 @@ if ($EditControlled){
 	}
 }
 
+if (isset($_SESSION['Transfer']->StockLocationFrom)) {
+	$Location=$_SESSION['Transfer']->StockLocationFrom;
+} else if (isset($_SESSION['Items']->Location)) {
+	$Location=$_SESSION['Items']->Location;
+}
+
 $sql="SELECT serialno,
 			quantity,
 			expirationdate
 		FROM stockserialitems
 		WHERE stockid='".$StockID."'
-			AND loccode='".$_SESSION['Items']->Location."'";
+			AND loccode='".$Location."'";
 $result=DB_query($sql, $db);
 
 $RowNumber=0;
