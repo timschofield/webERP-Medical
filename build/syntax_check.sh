@@ -4,8 +4,6 @@ ROOT_DIR=$PWD
 cd $ROOT_DIR
 for f in `find . -name "*.php"`
 do
-    #need to lop off leading './' from filename, but I havent worked out how to use
-    #cut yet
     newname=`echo $f | cut -c3-`
     filename="$ROOT_DIR/$newname"
 
@@ -19,8 +17,6 @@ done
 
 for f in `find . -name "*.inc"`
 do
-    #need to lop off leading './' from filename, but I havent worked out how to use
-    #cut yet
     newname=`echo $f | cut -c3-`
     filename="$ROOT_DIR/$newname"
 
