@@ -29,9 +29,9 @@ if (isset($_POST['StockCode'])) {
 }
 // Always show the search facilities
 $SQL = "SELECT categoryid,
-								categorydescription
-					FROM stockcategory
-					ORDER BY categorydescription";
+				categorydescription
+			FROM stockcategory
+			ORDER BY categorydescription";
 $result1 = DB_query($SQL, $db);
 if (DB_num_rows($result1) == 0) {
 	echo '<p><font size=4 color=red>' . _('Problem Report') . ':</font><br />' . _('There are no stock categories currently defined please use the link below to set them up').'</p>';
@@ -49,20 +49,21 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 		$StockID = $_SESSION['SelectedStockItem'];
 	}
 	$result = DB_query("SELECT stockmaster.description,
-														stockmaster.mbflag,
-														stockcategory.stocktype,
-														stockmaster.units,
-														stockmaster.decimalplaces,
-														stockmaster.controlled,
-														stockmaster.serialised,
-														stockmaster.materialcost+stockmaster.labourcost+stockmaster.overheadcost AS cost,
-														stockmaster.discontinued,
-														stockmaster.eoq,
-														stockmaster.volume,
-														stockmaster.kgs
-														FROM stockmaster INNER JOIN stockcategory
-														ON stockmaster.categoryid=stockcategory.categoryid
-											WHERE stockid='" . $StockID . "'", $db);
+								stockmaster.mbflag,
+								stockcategory.stocktype,
+								stockmaster.units,
+								stockmaster.decimalplaces,
+								stockmaster.controlled,
+								stockmaster.serialised,
+								stockmaster.materialcost+stockmaster.labourcost+stockmaster.overheadcost AS cost,
+								stockmaster.discontinued,
+								stockmaster.eoq,
+								stockmaster.volume,
+								stockmaster.kgs
+							FROM stockmaster
+							INNER JOIN stockcategory
+							ON stockmaster.categoryid=stockcategory.categoryid
+								WHERE stockid='" . $StockID . "'", $db);
 	$myrow = DB_fetch_array($result);
 	$Its_A_Kitset_Assembly_Or_Dummy = false;
 	$Its_A_Dummy = false;
@@ -192,21 +193,21 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 	$CatValRow = DB_fetch_row($CatValResult);
 	$CatValue = $CatValRow[0];
 	$sql = "SELECT stkcatpropid,
-								label,
-								controltype,
-								defaultvalue
-							FROM stockcatproperties
-							WHERE categoryid ='" . $CatValue . "'
-							AND reqatsalesorder =0
-							ORDER BY stkcatpropid";
+					label,
+					controltype,
+					defaultvalue
+				FROM stockcatproperties
+				WHERE categoryid ='" . $CatValue . "'
+				AND reqatsalesorder =0
+				ORDER BY stkcatpropid";
 	$PropertiesResult = DB_query($sql, $db);
 	$PropertyCounter = 0;
 	$PropertyWidth = array();
 	while ($PropertyRow = DB_fetch_array($PropertiesResult)) {
 		$PropValResult = DB_query("SELECT value
-																FROM stockitemproperties
-															WHERE stockid='" . $StockID . "'
-															AND stkcatpropid ='" . $PropertyRow['stkcatpropid']."'", $db);
+									FROM stockitemproperties
+									WHERE stockid='" . $StockID . "'
+									AND stkcatpropid ='" . $PropertyRow['stkcatpropid']."'", $db);
 		$PropValRow = DB_fetch_row($PropValResult);
 		$PropertyValue = $PropValRow[0];
 		echo '<form name="CatPropForm" enctype="multipart/form-data" method="post" action="' . $_SERVER['PHP_SELF'] . '?' .SID .'">';
@@ -354,18 +355,18 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
                            <th width="10%">' . _('Min Order Qty') . '</th>
 				<th width="5%">' . _('Prefer') . '</th></tr>';
 		$SuppResult = DB_query("SELECT  suppliers.suppname,
-																	suppliers.currcode,
-																	suppliers.supplierid,
-																	purchdata.price,
-																	purchdata.effectivefrom,
-																	purchdata.leadtime,
-																	purchdata.conversionfactor,
-																	purchdata.minorderqty,
-																	purchdata.preferred
-																FROM purchdata INNER JOIN suppliers
-																ON purchdata.supplierno=suppliers.supplierid
-																WHERE purchdata.stockid = '" . $StockID . "'
-														ORDER BY purchdata.preferred DESC, purchdata.effectivefrom DESC", $db);
+										suppliers.currcode,
+										suppliers.supplierid,
+										purchdata.price,
+										purchdata.effectivefrom,
+										purchdata.leadtime,
+										purchdata.conversionfactor,
+										purchdata.minorderqty,
+										purchdata.preferred
+									FROM purchdata INNER JOIN suppliers
+									ON purchdata.supplierno=suppliers.supplierid
+									WHERE purchdata.stockid = '" . $StockID . "'
+									ORDER BY purchdata.preferred DESC, purchdata.effectivefrom DESC", $db);
 		while ($SuppRow = DB_fetch_array($SuppResult)) {
 			echo '<tr><td class="select">' . $SuppRow['suppname'] . '</td>
 						<td class="select">' . number_format($SuppRow['price'] / $SuppRow['conversionfactor'], 2) . '</td>
@@ -591,23 +592,23 @@ if (isset($_POST['Search']) OR isset($_POST['Go']) OR isset($_POST['Next']) OR i
 		$_POST['StockCode'] = strtoupper($_POST['StockCode']);
 		if ($_POST['StockCat'] == 'All') {
 			$SQL = "SELECT stockmaster.stockid,
-											stockmaster.description,
-											stockmaster.mbflag,
-											SUM(locstock.quantity) AS qoh,
-											stockmaster.units,
-											stockmaster.decimalplaces
-										FROM stockmaster
-										INNER JOIN stockcategory
-										ON stockmaster.categoryid=stockcategory.categoryid,
-											locstock
-										WHERE stockmaster.stockid=locstock.stockid
-										AND stockmaster.stockid " . LIKE . " '%" . $_POST['StockCode'] . "%'
-										GROUP BY stockmaster.stockid,
-											stockmaster.description,
-											stockmaster.units,
-											stockmaster.mbflag,
-											stockmaster.decimalplaces
-										ORDER BY stockmaster.stockid";
+							stockmaster.description,
+							stockmaster.mbflag,
+							SUM(locstock.quantity) AS qoh,
+							stockmaster.units,
+							stockmaster.decimalplaces
+						FROM stockmaster
+						INNER JOIN stockcategory
+						ON stockmaster.categoryid=stockcategory.categoryid,
+							locstock
+						WHERE stockmaster.stockid=locstock.stockid
+							AND stockmaster.stockid " . LIKE . " '%" . $_POST['StockCode'] . "%'
+						GROUP BY stockmaster.stockid,
+								stockmaster.description,
+								stockmaster.units,
+								stockmaster.mbflag,
+								stockmaster.decimalplaces
+						ORDER BY stockmaster.stockid";
 		} else {
 			$SQL = "SELECT stockmaster.stockid,
 					stockmaster.description,
@@ -696,7 +697,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 			$_POST['PageOffset'] = $ListPageMax;
 		}
 		if ($ListPageMax > 1) {
-			echo "<div class='centre'><p>&nbsp;&nbsp;" . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
+			echo '<div class="centre"><p>&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
 			echo '<select name="PageOffset">';
 			$ListPage = 1;
 			while ($ListPage <= $ListPageMax) {
@@ -745,11 +746,11 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 			} else {
 				$qoh = number_format($myrow['qoh'], $myrow['decimalplaces']);
 			}
-			echo "<td><input type='submit' name='Select' value='".$myrow['stockid']."' /></td>
-				<td>".$myrow['description']."</td>
-				<td class='number'>".$qoh."</td>
-				<td>".$myrow['units']."</td>
-				<td><a target='_blank' href='" . $rootpath . '/StockStatus.php?StockID=' . $myrow['stockid']."'>" . _('View') . '</a></td>
+			echo '<td><input type="submit" name="Select" value="'.$myrow['stockid'].'" /></td>
+				<td>'.$myrow['description'].'</td>
+				<td class="number">'.$qoh.'</td>
+				<td>'.$myrow['units'].'</td>
+				<td><a target="_blank" href="' . $rootpath . '/StockStatus.php?StockID=' . $myrow['stockid'].'">' . _('View') . '</a></td>
 				</tr>';
 			$j++;
 			if ($j == 20 AND ($RowIndex + 1 != $_SESSION['DisplayRecordsMax'])) {
