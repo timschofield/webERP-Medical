@@ -46,7 +46,7 @@ Function GetStockGLCode ($StockID, &$db){
 						materialuseagevarac,
 						wipact
 					FROM stockmaster
-					LEFT JOIN stockcategory
+					INNER JOIN stockcategory
 					ON stockmaster.categoryid=stockcategory.categoryid
 					AND stockmaster.stockid = '" . $StockID . "'";
 
