@@ -32,8 +32,8 @@ if (!isset($_POST['FromPeriod'])){
              </tr>
              </table>';
 
-	echo "<div class='centre'><input type=submit Name='recalc' Value='" . _('Do the Recalculation') . "'
-	  onclick=\"return confirm('" . _('Are you sure you wish to re-post all general ledger transactions since the selected period
+	echo '<div class="centre"><input type=submit Name="recalc" Value="' . _('Do the Recalculation') . '"
+	  onclick="return confirm("' . _('Are you sure you wish to re-post all general ledger transactions since the selected period
 	   .... this can take some time?') . '\');"></div></form>';
 
 } else {  /*OK do the updates */

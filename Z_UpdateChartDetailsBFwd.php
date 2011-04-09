@@ -8,7 +8,7 @@ $title = _('Recalculation of Brought Forward Balances in Chart Details Table');
 include('includes/header.inc');
 
 
-echo "<form method='POST' action=" . $_SERVER['PHP_SELF'] . '?' . SID . '>';
+echo '<form method="POST" action=' . $_SERVER['PHP_SELF'] . '>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if ($_POST['FromPeriod'] > $_POST['ToPeriod']){

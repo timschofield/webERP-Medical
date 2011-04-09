@@ -128,7 +128,7 @@ if (isset($_POST['module'])) {
 		echo '<br>';
 		echo '<form method="post" action=' . $_SERVER['PHP_SELF'] . '?' . SID . '>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-		echo '</div';
+		echo '</div>';
 		echo '<table>';
 		echo '<tr><th ALIGN="center">' . _('Language File for') . ' "' . $_POST['language'] . '"</th></tr>';
 		echo '<tr><td ALIGN="center">' . _('Module') . ' "' . $_POST['module'] . '"</td></tr>';

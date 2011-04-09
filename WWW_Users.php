@@ -64,7 +64,7 @@ if (isset($_POST['submit'])) {
 		prnMsg(_('The user ID entered must be at least 4 characters long'),'error');
 	} elseif (ContainsIllegalCharacters($_POST['UserID'])) {
 		$InputError = 1;
-		prnMsg(_('User names cannot contain any of the following characters') . " - ' & + \" \\ " . _('or a space'),'error');
+		prnMsg(_('User names cannot contain any of the following characters') . " - \' & + \" \\ " . _('or a space'),'error');
 	} elseif (strlen($_POST['Password'])<5){
 		if (!$SelectedUser){
 			$InputError = 1;

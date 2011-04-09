@@ -19,7 +19,7 @@ echo '<a href="'. $rootpath . '/SelectWorkOrder.php?' . SID . '">' . _('Back to 
 echo '<a href="'. $rootpath . '/WorkOrderCosting.php?' . SID . '&WO=' .  $_POST['WO'] . '">' . _('Back to Costing'). '</a><br>';
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/group_add.png" title="' .
-	_('Search') . '" alt="" />' . ' ' . $title.'</p';
+	_('Search') . '" alt="" />' . ' ' . $title.'</p>';
 
 echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -548,9 +548,9 @@ if (!isset($_POST['IssueItem'])){
 
 	while ($LocRow = DB_fetch_array($LocResult)){
 		if ($_POST['FromLocation'] ==$LocRow['loccode']){
-			echo '<option selected value="' . $LocRow['loccode'] .'">' . $LocRow['locationname'];
+			echo '<option selected value="' . $LocRow['loccode'] .'">' . $LocRow['locationname'] . '</option>';
 		} else {
-			echo '<option value="' . $LocRow['loccode'] .'">' . $LocRow['locationname'];
+			echo '<option value="' . $LocRow['loccode'] .'">' . $LocRow['locationname'] . '</option>';
 		}
 	}
 	echo '</select>';
@@ -615,18 +615,18 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 	echo '<table class=selection><tr><td>' . _('Select a stock category') . ':<select name="StockCat">';
 
 	if (!isset($_POST['StockCat'])){
-		echo "<option selected VALUE='All'>" . _('All');
+		echo '<option selected VALUE="All">' . _('All') . '</option>';
 		$_POST['StockCat'] ='All';
 	} else {
-		echo "<option VALUE='All'>" . _('All');
+		echo '<option VALUE="All">' . _('All') . '</option>';
 	}
 
 	while ($myrow1 = DB_fetch_array($result1)) {
 
 		if ($_POST['StockCat']==$myrow1['categoryid']){
-			echo '<option selected VALUE=' . $myrow1['categoryid'] . '>' . $myrow1['categorydescription'];
+			echo '<option selected VALUE=' . $myrow1['categoryid'] . '>' . $myrow1['categorydescription'] . '</option>';
 		} else {
-			echo '<option VALUE='. $myrow1['categoryid'] . '>' . $myrow1['categorydescription'];
+			echo '<option VALUE='. $myrow1['categoryid'] . '>' . $myrow1['categorydescription'] . '</option>';
 		}
 	}
 	?>
@@ -686,11 +686,11 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 					}
 
 					$IssueLink = $_SERVER['PHP_SELF'] . '?' . SID . '&WO=' . $_POST['WO'] . '&StockID=' . $_POST['StockID'] . '&IssueItem=' . $myrow['stockid'] . '&FromLocation=' . $_POST['FromLocation'];
-					printf("<td><font size=1>%s</font></td>
+					printf('<td><font size=1>%s</font></td>
 							<td><font size=1>%s</font></td>
 							<td><font size=1>%s</font></td>
 							<td>%s</td>
-							<td><font size=1><a href='%s'>"
+							<td><font size=1><a href="%s">'
 							. _('Add to Work Order') . '</a></font></td>
 							</tr>',
 							$myrow['stockid'],

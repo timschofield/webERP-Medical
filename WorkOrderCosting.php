@@ -222,7 +222,7 @@ while ($RequirementsRow = DB_fetch_array($RequirementsResult)){
 }
 
 
-//Now need to run through the issues to the work order that weren't in the requirements
+//Now need to run through the issues to the work order that werent in the requirements
 
 $sql = "SELECT stockmoves.stockid,
 		stockmaster.description,

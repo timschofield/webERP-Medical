@@ -97,7 +97,7 @@ if (isset($_POST['Modify'])) {
 	}
 }
 
-echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . '?' . SID . '>';
+echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 If (!isset($_POST['DisplayRecordsMax']) OR $_POST['DisplayRecordsMax']=='') {
@@ -111,17 +111,17 @@ echo $_SESSION['UserID'] . '</td></tr>';
 
 echo '<tr><td>' . _('User Name') . ':</td><td>';
 echo $_SESSION['UsersRealName'] . '</td>
-		<input type="hidden" name="RealName" VALUE="'.$_SESSION['UsersRealName'].'"<td></tr>';
+		<input type="hidden" name="RealName" VALUE="'.$_SESSION['UsersRealName'].'" /><td></tr>';
 
 echo '<tr>
-	<td>' . _('Maximum Number of Records to Display') . ":</td>
-	<td><input type='Text' class='number' name='DisplayRecordsMax' size=3 maxlength=3 VALUE=" . $_POST['DisplayRecordsMax'] . " ></td>
-	</tr>";
+	<td>' . _('Maximum Number of Records to Display') . ':</td>
+	<td><input type="Text" class="number" name="DisplayRecordsMax" size=3 maxlength=3 VALUE="' . $_POST['DisplayRecordsMax'] . '" ></td>
+	</tr>';
 
 
 echo '<tr>
-	<td>' . _('Language') . ":</td>
-	<td><select name='Language'>";
+	<td>' . _('Language') . ':</td>
+	<td><select name="Language">';
 
 $Languages = scandir('locale/', 0);
 
@@ -145,8 +145,8 @@ foreach ($Languages as $LanguageEntry){
 
 
 echo '<tr>
-	<td>' . _('Theme') . ":</td>
-	<td><select name='Theme'>";
+	<td>' . _('Theme') . ':</td>
+	<td><select name="Theme">';
 
 $ThemeDirectory = dir('css/');
 
@@ -170,11 +170,11 @@ if (!isset($_POST['pass'])) {
 	$_POST['pass']='';
 }
 echo '</select></td></tr>
-	<tr><td>' . _('New Password') . ":</td>
-	<td><input type='password' name='pass' size=20 value='" .  $_POST['pass'] . "'></td></tr>
-	<tr><td>" . _('Confirm Password') . ":</td>
-	<td><input type='password' name='passcheck' size=20  value='" . $_POST['passcheck'] . "'></td></tr>
-	<tr><td colspan=2 align='center'><i>" . _('If you leave the password boxes empty your password will not change') . '</i></td></tr>
+	<tr><td>' . _('New Password') . ':</td>
+	<td><input type="password" name="pass" size=20 value="' .  $_POST['pass'] . '"></td></tr>
+	<tr><td>' . _('Confirm Password') . ':</td>
+	<td><input type="password" name="passcheck" size=20  value="' . $_POST['passcheck'] . '"></td></tr>
+	<tr><td colspan=2 align="center"><i>' . _('If you leave the password boxes empty your password will not change') . '</i></td></tr>
 	<tr><td>' . _('Email') . ':</td>';
 
 $sql = "SELECT email from www_users WHERE userid = '" . $_SESSION['UserID'] . "'";
@@ -184,7 +184,7 @@ if(!isset($_POST['email'])){
 	$_POST['email'] = $myrow['email'];
 }
 
-echo "<td><input type=text name='email' size=40 value='" . $_POST['email'] . "'></td></tr>";
+echo '<td><input type=text name="email" size=40 value="' . $_POST['email'] . '"></td></tr>';
 
 if (!isset($_POST['PDFLanguage'])){
 	$_POST['PDFLanguage']=$_SESSION['PDFLanguage'];
@@ -198,8 +198,8 @@ for($i=0;$i<count($PDFLanguages);$i++){
 		echo '<option value=' . $i .'>' . $PDFLanguages[$i]. '</option>';
 	}
 }
-echo "</select></td></tr></table>
-	<br /><div class='centre'><input type='Submit' name='Modify' value=" . _('Modify') . '></div>
+echo '</select></td></tr></table>
+	<br /><div class="centre"><input type="Submit" name="Modify" value="' . _('Modify') . '"></div>
 	</form>';
 
 include('includes/footer.inc');

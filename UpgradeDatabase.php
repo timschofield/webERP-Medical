@@ -8,11 +8,11 @@ $title = _('Upgrade webERP Database');
 include('includes/header.inc');
 
 if (!isset($_POST['DoUpgrade'])){
-	
-	prnMsg(_('This script will run perform any modifications to the database required to allow the additional functionality in later scripts'),'info');	
+
+	prnMsg(_('This script will run perform any modifications to the database required to allow the additional functionality in later scripts'),'info');
 	echo '<p><form method="post" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	
+
 	if (!isset($_SESSION['VersionNumber'])){
 		prnMsg(_('The webERP code is version')  . ' ' . $Version . ' ' . _('and the database version is not actually recorded at this version'),'info');
 		echo '<table><tr><td>' . _('Select the version you are upgrading from:') . '</td>
@@ -44,14 +44,14 @@ if (!isset($_POST['DoUpgrade'])){
 }
 
 if (isset($_POST['DoUpgrade'])){
-	
+
 	if ($dbType=='mysql' OR $dbType =='mysqli'){
-		
+
 		/* First do a backup */
 		$BackupFile =  $PathPrefix . './companies/' . $_SESSION['DatabaseName']  .'/' . _('Backup') . '_' . Date('Y-m-d-H-i-s') . '.sql.gz';
-		$Command = 'mysqldump --opt -h' . $host . ' -u' . $dbuser . ' -p' . $dbpassword  . '  ' . $_SESSION['DatabaseName'] . '| gzip > ' . $BackupFile;
+		$Command = 'mysqldump --opt -h' . $host . ' -u' . $dbuser . ' -p' . $dbpassword  . '  ' . $_SESSION['DatabaseName'] . "| gzip > " . $BackupFile;
 		system($Command);
-		
+
 		/*this could be a weighty file attachment!! */
 		include('includes/htmlMimeMail.php');
 		$mail = new htmlMimeMail();
@@ -61,16 +61,16 @@ if (isset($_POST['DoUpgrade'])){
 		$mail->setSubject(_('Database Backup'));
 		$mail->setFrom($_SESSION['CompanyRecord']['coyname'] . '<' . $_SESSION['CompanyRecord']['email'] . '>');
 		$result = $mail->send(array('"' . $_SESSION['UsersRealName'] . '" <' . $_SESSION['UserEmail'] . '>'));
-		
+
 		prnMsg(_('A backup of the database has been taken and emailed to you'), 'info');
 		unlink($BackupFile); // would be a security issue to leave it there for all to download/see
-		
+
 		if ($_POST['OldVersion']=='Manual') {
 			prnMsg(_('No datbase updates have been done as you selected to apply these manually - upgrade SQL scripts are under sql/mysql/ directory in the distribution'),'info');
 		} else { //we are into automatically applying database upgrades
-		
+
 			prnMsg(_('If there are any failures then please check with your system administrator. Please read all notes carefully to ensure they are expected'),'info');
-			switch ($_POST['OldVersion']) { 
+			switch ($_POST['OldVersion']) {
 				//since there are no "break" statements subsequent upgrade scripts will be added to the array
 				case '3.00':
 					$SQLScripts[] = './sql/mysql/upgrade3.00-3.01.sql';
@@ -100,15 +100,15 @@ if (isset($_POST['DoUpgrade'])){
 			if(isset($_SESSION['VersionNumber']) AND strcmp($_SESSION['VersionNumber'],'4.04')<0) { /* VersionNumber is set to '4.04' when upgrade3.11.1-4.00.sql is run */
 				$SQLScripts[] = './sql/mysql/upgrade3.11.1-4.00.sql';
 			}
-		}	
+		}
 	} else { //dbType is not mysql or mysqli
 		prnMsg(_('Only mysql upgrades are performed seamlessly at this time. Your database will need to be manually updated'),'info');
 	}
-	
+
 	$result = DB_IgnoreForeignKeys($db);
 
 	foreach ($SQLScripts AS $SQLScriptFile) {
-		
+
 		$SQLEntries = file($SQLScriptFile);
 		$ScriptFileEntries = sizeof($SQLEntries);
 		$sql ='';
@@ -117,16 +117,16 @@ if (isset($_POST['DoUpgrade'])){
 					<tr><th colspan=2>' . _('Applying') . ' ' . $SQLScriptFile . '</th></tr>';
 
 		for ($i=0; $i<=$ScriptFileEntries; $i++) {
-	
+
 			$SQLEntries[$i] = trim($SQLEntries[$i]);
 
 			if (substr($SQLEntries[$i], 0, 2) != '--'
 				AND substr($SQLEntries[$i], 0, 3) != 'USE'
 				AND strstr($SQLEntries[$i],'/*')==FALSE
 				AND strlen($SQLEntries[$i])>1){
-	
+
 				$sql .= ' ' . $SQLEntries[$i];
-	
+
 				//check if this line kicks off a function definition - pg chokes otherwise
 				if (substr($SQLEntries[$i],0,15) == 'CREATE FUNCTION'){
 					$InAFunction = true;
