@@ -225,7 +225,8 @@ if ( isset($_POST['EnterTransfer']) ){
 				if ($SerialItemExistsRow[0]==1){
 
 					$SQL = "UPDATE stockserialitems
-							SET quantity= quantity - '" . $Item->BundleQty . "'
+							SET quantity= quantity - '" . $Item->BundleQty . "',
+							expirationdate='" . FormatDateForSQL($Item->ExpiryDate) . "'
 							WHERE stockid='" . $_SESSION['Transfer']->TransferItem[0]->StockID . "'
 							AND loccode='" . $_SESSION['Transfer']->StockLocationFrom . "'
 							AND serialno='" . $Item->BundleRef . "'";
@@ -238,10 +239,12 @@ if ( isset($_POST['EnterTransfer']) ){
 					$SQL = "INSERT INTO stockserialitems (stockid,
 										loccode,
 										serialno,
+										expirationdate,
 										quantity)
 						VALUES ('" . $_SESSION['Transfer']->TransferItem[0]->StockID . "',
 						'" . $_SESSION['Transfer']->StockLocationFrom . "',
 						'" . $Item->BundleRef . "',
+						'" . FormatDateForSQL($Item->ExpiryDate) . "',
 						'" . -$Item->BundleQty . "')";
 
 					$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The serial stock item record could not be added because');
@@ -337,7 +340,8 @@ if ( isset($_POST['EnterTransfer']) ){
 				if ($SerialItemExistsRow[0]==1){
 
 					$SQL = "UPDATE stockserialitems
-							SET quantity= quantity + '" . $Item->BundleQty . "'
+							SET quantity= quantity + '" . $Item->BundleQty . "',
+							expirationdate='" . FormatDateForSQL($Item->ExpiryDate) . "'
 							WHERE stockid='" . $_SESSION['Transfer']->TransferItem[0]->StockID . "'
 							AND loccode='" . $_SESSION['Transfer']->StockLocationTo . "'
 							AND serialno='" . $Item->BundleRef . "'";
@@ -350,10 +354,12 @@ if ( isset($_POST['EnterTransfer']) ){
 					$SQL = "INSERT INTO stockserialitems (stockid,
 										loccode,
 										serialno,
+										expirationdate,
 										quantity)
 						VALUES ('" . $_SESSION['Transfer']->TransferItem[0]->StockID . "',
 						'" . $_SESSION['Transfer']->StockLocationTo . "',
 						'" . $Item->BundleRef . "',
+						'" . FormatDateForSQL($Item->ExpiryDate) . "',
 						'" . $Item->BundleQty . "')";
 
 					$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The serial stock item record could not be added because');

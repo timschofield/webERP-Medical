@@ -94,9 +94,8 @@ foreach ($LineItem->SerialItems as $Bundle){
 		echo '<td class=number>' . number_format($Bundle->BundleQty, $LineItem->DecimalPlaces) . '</td>';
 		echo '<td class=number>' . $Bundle->ExpiryDate . '</td>';
 	}
-
 	echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . 'Delete=' . $Bundle->BundleRef . '&StockID=' . $LineItem->StockID . '&LineNo=' . $LineNo .'">'. _('Delete'). '</a></td></tr>';
-
+	$LineItem->SerialItems[]=$Bundle;
 	$TotalQuantity += $Bundle->BundleQty;
 }
 
