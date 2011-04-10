@@ -144,7 +144,7 @@ if (($myrow['mbflag']=='D' AND $myrow['stocktype'] != 'L')
 
 echo '<input type=hidden name=OldMaterialCost VALUE=' . $myrow['materialcost'] .'>';
 echo '<input type=hidden name=OldLabourCost VALUE=' . $myrow['labourcost'] .'>';
-echo '<input type=hidden name=OldOverheadCost VALUE=' . $myrow['overheadcost'] .">";
+echo '<input type=hidden name=OldOverheadCost VALUE=' . $myrow['overheadcost'] .'>';
 echo '<input type=hidden name="QOH" VALUE=' . $myrow['totalqoh'] .'>';
 
 echo '<tr><td>' . _('Last Cost') .':</td><td class=number>' . number_format($myrow['lastcost'],2) . '</td></tr>';

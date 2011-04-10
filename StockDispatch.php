@@ -90,9 +90,9 @@ If (isset($_POST['PrintPDF'])) {
 	  $title = _('Stock Dispatch - Problem Report');
 	  include('includes/header.inc');
 	   prnMsg( _('The Stock Dispatch report could not be retrieved by the SQL because') . ' '  . DB_error_msg($db),'error');
-	   echo "<br><a href='" .$rootpath .'/index.php?' . SID . "'>" . _('Back to the menu') . '</a>';
+	   echo '<br><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
 	   if ($debug==1){
-		  echo "<br>$sql";
+		  echo '<br>' . $sql;
 	   }
 	   include('includes/footer.inc');
 	   exit;
@@ -102,7 +102,7 @@ If (isset($_POST['PrintPDF'])) {
 		include('includes/header.inc');
 		echo '<br />';
 		prnMsg( _('The stock dispatch did not have any items to list'),'warn');
-		echo "<br><a href='" .$rootpath .'/index.php?' . SID . "'>" . _('Back to the menu') . '</a>';
+		echo '<br /><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
 		include('includes/footer.inc');
 		exit;
 	}
@@ -227,7 +227,7 @@ If (isset($_POST['PrintPDF'])) {
 	$result = DB_query($sql, $db);
 	$myrow = DB_fetch_array($result);
 	$DefaultLocation = $myrow['defaultlocation'];
-	echo '<br/><form action=' . $_SERVER['PHP_SELF'] . " method='post'><table class=selection>";
+	echo '<br/><form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table class=selection>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	$sql = "SELECT loccode,
 			locationname
@@ -236,13 +236,13 @@ If (isset($_POST['PrintPDF'])) {
 	if (!isset($_POST['FromLocation'])) {
 		$_POST['FromLocation']=$DefaultLocation;
 	}
-	echo '<table class=selection><tr><td>' . _('Dispatch Percent') . ":</td><td><input type ='text' name='Percent' class=number size='8' value=0>";
+	echo '<table class=selection><tr><td>' . _('Dispatch Percent') . ':</td><td><input type ="text" name="Percent" class=number size="8" value=0>';
 	echo '<tr><td>' . _('From Stock Location') . ':</td><td><select name="FromLocation"> ';
 	while ($myrow=DB_fetch_array($resultStkLocs)){
 		if ($myrow['loccode'] == $_POST['FromLocation']){
-			 echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
+			 echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
-			 echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
+			 echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	}
 	echo '</select></td></tr>';
@@ -253,9 +253,9 @@ If (isset($_POST['PrintPDF'])) {
 	echo '<tr><td>' . _('To Stock Location') . ':</td><td><select name="ToLocation"> ';
 	while ($myrow=DB_fetch_array($resultStkLocs)){
 		if ($myrow['loccode'] == $_POST['ToLocation']){
-			 echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
+			 echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
-			 echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
+			 echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	}
 	echo '</select></td></tr>';
@@ -280,9 +280,9 @@ If (isset($_POST['PrintPDF'])) {
 		$_POST['StockCat']='All';
 	}
 	if ($_POST['StockCat']=='All'){
-		echo '<option selected value="All">' . _('All');
+		echo '<option selected value="All">' . _('All') . '</option>';
 	} else {
-		echo '<option value="All">' . _('All');
+		echo '<option value="All">' . _('All') . '</option>';
 	}
 	while ($myrow1 = DB_fetch_array($result1)) {
 		if ($myrow1['categoryid']==$_POST['StockCat']){
@@ -294,19 +294,19 @@ If (isset($_POST['PrintPDF'])) {
 	echo '</select></td></tr>';
 
 	echo '<tr></tr><tr></tr><tr><td>' . _('Report Type') . ':</td>';
-	echo "<td><select name='ReportType'>";
-	echo "<option selected value='Batch'>" . _('Create Batch');
-	echo "<option value='Report'>" . _('Report Only');
+	echo '<td><select name="ReportType">';
+	echo '<option selected value="Batch">' . _('Create Batch') . '</option>';
+	echo '<option value="Report">' . _('Report Only') . '</option>';
 	echo '</select></td><td>&nbsp</td></tr>';
 
 
 	echo '<tr><td>' . _('Template') . ':</td>';
-	echo "<td><select name='template'>";
-	echo "<option selected value='standard'>" . _('Standard');
-	echo "<option value='simple'>" . _('Simple');
+	echo '<td><select name="template">';
+	echo '<option selected value="standard">' . _('Standard') . '</option>';
+	echo '<option value="simple">' . _('Simple') . '</option>';
 	echo '</select></td><td>&nbsp</td></tr>';
 
-	echo "</table><br/><div class='centre'><input type=submit name='PrintPDF' value='" . _('Print PDF') . "'></div>";
+	echo '</table><br/><div class="centre"><input type=submit name="PrintPDF" value="' . _('Print PDF') . '"></div>';
 
 	include('includes/footer.inc');
 

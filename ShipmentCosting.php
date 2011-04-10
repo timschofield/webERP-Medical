@@ -244,7 +244,7 @@ if (db_num_rows($LineItemsResult) > 0) {
 
 
 				/*The cost adjustment is the price variance / the total quantity in stock
-				But that's only provided that the total quantity in stock is > the quantity charged on this invoice
+				But thats only provided that the total quantity in stock is greater than the quantity charged on this invoice
 								*/
 
 								$WriteOffToVariances =0;
@@ -268,19 +268,19 @@ if (db_num_rows($LineItemsResult) > 0) {
 									   if ($myrow['totqtyinvoiced'] > $TotalQuantityOnHand){
 
 											$sql = "INSERT INTO gltrans (type,
-							typeno,
-							trandate,
-							periodno,
-							account,
-							narrative,
-							amount)
-			  					VALUES (31,
-			   					'" . $_GET['SelectedShipment'] . "',
-								'" . Date('Y-m-d') . "',
-								'" . $PeriodNo . "',
-						 		'" . $StockGLCodes['purchpricevaract'] . "',
-							 	'" . $myrow['itemcode'] . ' ' . _('shipment cost') . ' ' .  number_format($ItemShipmentCost,2) . _('shipment quantity > stock held - variance write off') . "',
-														 " . $WriteOffToVariances . ")";
+																		typeno,
+																		trandate,
+																		periodno,
+																		account,
+																		narrative,
+																		amount)
+																	VALUES (31,
+																		'" . $_GET['SelectedShipment'] . "',
+																		'" . Date('Y-m-d') . "',
+																		'" . $PeriodNo . "',
+																		'" . $StockGLCodes['purchpricevaract'] . "',
+																		'" . $myrow['itemcode'] . ' ' . _('shipment cost') . ' ' .  number_format($ItemShipmentCost,2) . _('shipment quantity > stock held - variance write off') . "',
+																		" . $WriteOffToVariances . ")";
 
 											$ErrMsg =  _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The GL entry for the shipment variance posting for'). ' ' . $myrow['itemcode'] . ' '. _('could not be inserted into the database because');
 		   							$result = DB_query($sql,$db, $ErrMsg,'',TRUE);

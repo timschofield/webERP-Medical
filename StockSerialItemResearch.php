@@ -7,8 +7,7 @@ include('includes/session.inc');
 $title = _('Serial Item Research');
 include('includes/header.inc');
 
-echo '<p Class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') .
-'" alt="" /><b>' . $title. '</b></p>';
+echo '<p Class="page_title_text"> <img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') .'"  /> <b>' . $title. '</b> </p>';
 
 
 //validate the submission
@@ -31,9 +30,9 @@ echo  _('Serial Number') .': <input ID="serialno" name="serialno" size=21 maxlen
 <input type=submit name=submit></div><br />
 </form>';
 
-echo "<SCRIPT>
-document.getElementById('serialno').focus();
-</SCRIPT>";
+echo '<SCRIPT>
+document.getElementById("serialno").focus();
+</SCRIPT>';
 
 
 if ($SN!='') {

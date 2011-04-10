@@ -20,7 +20,7 @@ include('includes/header.inc');
 
 if (!isset($_SESSION['SuppTrans'])){
 	prnMsg(_('Contract charges or credits are entered against supplier invoices or credit notes respectively. To enter supplier transactions the supplier must first be selected from the supplier selection screen, then the link to enter a supplier invoice or credit note must be clicked on'),'info');
-	echo "<br><a href='$rootpath/SelectSupplier.php?" . SID ."'>" . _('Select A Supplier') . '</a>';
+	echo '<br><a href="' . $rootpath . '/SelectSupplier.php?">' . _('Select A Supplier') . '</a>';
 	exit;
 	/*It all stops here if there aint no supplier selected and invoice/credit initiated ie $_SESSION['SuppTrans'] started off*/
 }
@@ -127,11 +127,10 @@ $result = DB_query($sql, $db);
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['ContractSelection']) and $myrow['contractref']==$_POST['ContractSelection']) {
-		echo '<option selected VALUE="';
+		echo '<option selected VALUE="' . $myrow['contractref'] . '">' . $myrow['contractref'] . ' - ' . $myrow['name'] . '</option>';
 	} else {
-		echo '<option VALUE="';
+		echo '<option VALUE="' . $myrow['contractref'] . '">' . $myrow['contractref'] . ' - ' . $myrow['name'] . '</option>';
 	}
-	echo $myrow['contractref'] . '">' . $myrow['contractref'] . ' - ' . $myrow['name'] ;
 }
 
 echo '</select></td></tr>';

@@ -90,10 +90,10 @@ if (isset($_POST['UpdateDatabase']) OR isset($_POST['RefreshAllocTotal'])) {
 	recalc diff on exchange and add up total allocations */
 
 	if ($TotalAllocated + $_SESSION['Alloc']->TransAmt > 0.005){
-		echo '<br>';
+		echo '<br />';
 		prnMsg(_('These allocations cannot be processed because the amount allocated is more than the amount of the') .
-			  ' ' . $_SESSION['Alloc']->TransTypeName  . ' ' . _('being allocated') . '<br>' . _('Total allocated') . ' = ' . 			$TotalAllocated . ' ' . _('and the total amount of the Credit/payment was') . ' ' . -$_SESSION['Alloc']->TransAmt,'error');
-		echo '<br>';
+			  ' ' . $_SESSION['Alloc']->TransTypeName  . ' ' . _('being allocated') . '<br />' . _('Total allocated') . ' = ' . 			$TotalAllocated . ' ' . _('and the total amount of the Credit/payment was') . ' ' . -$_SESSION['Alloc']->TransAmt,'error');
+		echo '<br />';
 		$InputError = 1;
 	}
 
@@ -272,16 +272,16 @@ if (isset($_POST['UpdateDatabase'])){
 
 /*The main logic determines whether the page is called with a Supplier code
 a specific transaction or with no parameters ie else
-If with a supplier code show just that supplier's payments and credits for allocating
+If with a supplier code show just that suppliers payments and credits for allocating
 If with a specific payment or credit show the invoices and credits available
 for allocating to  */
 
-echo "<form action='" . $_SERVER['PHP_SELF'] . "?" . SID . "' method=post>";
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (isset($_POST['SupplierID'])){
  	$_GET['SupplierID'] = $_POST['SupplierID'];
-	echo "<input type='hidden' name='SupplierID' VALUE='" . $_POST["SupplierID"] . "'>";
+	echo '<input type="hidden" name="SupplierID" VALUE="' . $_POST['SupplierID'] . '">';
 }
 
 If (isset($_GET['AllocTrans'])){
@@ -329,7 +329,7 @@ If (isset($_GET['AllocTrans'])){
 	if (DB_num_rows($Result) != 1){
 	echo _('There was a problem retrieving the information relating the transaction selected') . '. ' . _('Allocations are unable to proceed');
 	if ($debug == 1){
-		echo '<br>' . _('The SQL that was used to retrieve the transaction information was') . " :<br>$SQL";
+		echo '<br />' . _('The SQL that was used to retrieve the transaction information was') . ' :<br />' . $SQL;
 	}
 	exit;
 	}
@@ -433,7 +433,7 @@ If (isset($_GET['AllocTrans'])){
 
 if (isset($_POST['AllocTrans'])){
 
-	echo "<input type='hidden' name='AllocTrans' VALUE='" . $_POST["AllocTrans"] . "'>";
+	echo '<input type="hidden" name="AllocTrans" VALUE="' . $_POST["AllocTrans"] . '">';
 
 	/*Show the transaction being allocated and the potential trans it could be allocated to
         and those where there is already an existing allocation */
@@ -446,26 +446,26 @@ if (isset($_POST['AllocTrans'])){
         		 $_SESSION['Alloc']->TransDate;
 
         if ($_SESSION['Alloc']->TransExRate != 1){
-	     	  echo '<br>' . _("Amount in supplier currency"). ' <b>' .
+	     	  echo '<br />' . _('Amount in supplier currency'). ' <b>' .
 	     	  		 number_format(-$_SESSION['Alloc']->TransAmt,2) . '</b><i> (' .
 	     	  		 _('converted into local currency at an exchange rate of') . ' ' .
 	     	  		 $_SESSION['Alloc']->TransExRate . ')</i><p>';
 
         } else {
 
-		     echo '<br>' . _('Transaction total') . ': <b>' . -$_SESSION['Alloc']->TransAmt . '</b></div>';
+		     echo '<br />' . _('Transaction total') . ': <b>' . -$_SESSION['Alloc']->TransAmt . '</b></div>';
         }
 
     /*Now display the potential and existing allocations put into the array above */
 
         echo '<table cellpadding=2 colspan=7 class=selection>';
-	  	  $TableHeader = "<tr><th>" . _('Type') . "</th>
-		 			<th>" . _('Trans') . '<br>' . _('Number') . "</th>
-					<th>" . _('Trans') .'<br>' . _('Date') . "</th>
-					<th>" . _('Supp') . '<br>' . _('Ref') . "</th>
-					<th>" . _('Total') . '<br>' . _('Amount') .	"</th>
-					<th>" . _('Yet to') . '<br>' . _('Allocate') . "</th>
-					<th>" . _('This') . '<br>' . _('Allocation') . '</th></tr>';
+	  	  $TableHeader = '<tr><th>' . _('Type') . '</th>
+		 			<th>' . _('Trans') . '<br />' . _('Number') . '</th>
+					<th>' . _('Trans') .'<br />' . _('Date') . '</th>
+					<th>' . _('Supp') . '<br />' . _('Ref') . '</th>
+					<th>' . _('Total') . '<br />' . _('Amount') .	'</th>
+					<th>' . _('Yet to') . '<br />' . _('Allocate') . '</th>
+					<th>' . _('This') . '<br />' . _('Allocation') . '</th></tr>';
         $k = 0;
 	$Counter = 0;
 	$RowCounter = 0;
@@ -496,24 +496,22 @@ if (isset($_POST['AllocTrans'])){
 
 	    $YetToAlloc = ($AllocnItem->TransAmount - $AllocnItem->PrevAlloc);
 
-	    echo "<td>$AllocnItem->TransType</td>
+	    echo '<td>$AllocnItem->TransType</td>
 	    		<td>$AllocnItem->TypeNo</td>
 			<td>$AllocnItem->TransDate</td>
 	    		<td>$AllocnItem->SuppRef</td>
-			<td class=number>" . number_format($AllocnItem->TransAmount,2) . '</td>
-	    		<td class=number>' . number_format($YetToAlloc,2) . "<input type=hidden name='YetToAlloc" .
-	    		 $Counter . "' VALUE=" . $YetToAlloc . '></td>';
-
-	    echo "<td class=number><input type='checkbox' name='All" .  $Counter . "'";
+			<td class=number>' . number_format($AllocnItem->TransAmount,2) . '</td>
+	    		<td class=number>' . number_format($YetToAlloc,2) . '<input type=hidden name="YetToAlloc"' .
+	    		 $Counter . '" VALUE="' . $YetToAlloc . '"></td>';
 
 	    if (ABS($AllocnItem->AllocAmt-$YetToAlloc) < 0.01){
-			echo ' VALUE=' . True . '>';
+			echo '<td class=number><input type="checkbox" name="All"' .  $Counter . '" VALUE="' . True . '">';
 	    } else {
-	    	echo '>';
+	    	echo '<td class=number><input type="checkbox" name="All"' .  $Counter . '" />';
 	    }
-       echo "<input type=text class='number' name='Amt" . $Counter ."' maxlength=12 size=13 VALUE=" .
-       		$AllocnItem->AllocAmt . "><input type=hidden name='AllocID" . $Counter .
-       		"' VALUE=" . $AllocnItem->ID . '></td></tr>';
+       echo '<input type=text class="number" name="Amt' . $Counter .'" maxlength=12 size=13 VALUE="' .
+       		$AllocnItem->AllocAmt . '"><input type=hidden name="AllocID' . $Counter .
+       		'" VALUE=' . $AllocnItem->ID . '></td></tr>';
 
 	    $TotalAllocated = $TotalAllocated + $AllocnItem->AllocAmt;
 
@@ -527,17 +525,17 @@ if (isset($_POST['AllocTrans'])){
    echo '<tr><td colspan=5 class=number><b>' . _('Left to allocate') . '</b></td><td class=number><b>' .
      		number_format(-$_SESSION['Alloc']->TransAmt - $TotalAllocated,2) . '</b></td></tr></table>';
 
-   echo "<div class='centre'><input type=hidden name='TotalNumberOfAllocs' VALUE=$Counter>";
+   echo '<div class="centre"><input type=hidden name="TotalNumberOfAllocs" VALUE="' . $Counter . '" />';
 
-   echo "<br /><input type=submit name='RefreshAllocTotal' VALUE='" . _('Recalculate Total To Allocate') . "'>";
-   echo "<input type=submit name=UpdateDatabase VALUE='" . _('Process Allocations') . "'></div>";
+   echo '<br /><input type=submit name="RefreshAllocTotal" VALUE="' . _('Recalculate Total To Allocate') . '">';
+   echo '<input type=submit name=UpdateDatabase VALUE="' . _('Process Allocations') . '"></div>';
 
 } elseif(isset($_GET['SupplierID'])){
 
   /*page called with a supplier code  so show the transactions to allocate
   specific to the supplier selected */
 
-  echo "<input type=hidden name=SupplierID VALUE='" . $_GET['SupplierID'] . "'>";
+  echo '<input type=hidden name=SupplierID VALUE="' . $_GET['SupplierID'] . '">';
 
   /*Clear any previous allocation records */
 
@@ -570,12 +568,12 @@ if (isset($_POST['AllocTrans'])){
   }
   echo '<table class=selection>';
 
-  $TableHeader = "<tr><th>" . _('Trans Type') .
-		"</th><th>" . _('Supplier') .
-		"</th><th>" . _('Number') .
-		"</th><th>" . _('Date') .
-		"</th><th>" . _('Total') .
-		"</th><th>" . _('To Alloc') . "</th></tr>\n";
+  $TableHeader = '<tr><th>' . _('Trans Type') .
+		'</th><th>' . _('Supplier') .
+		'</th><th>' . _('Number') .
+		'</th><th>' . _('Date') .
+		'</th><th>' . _('Total') .
+		'</th><th>' . _('To Alloc') . '</th></tr>'. "\n";
 
   echo $TableHeader;
 
@@ -592,13 +590,13 @@ if (isset($_POST['AllocTrans'])){
 		$k = 1;
 	}
 
-	printf("<td>%s</td>
+	printf('<td>%s</td>
 		<td>%s</td>
 		<td>%s</td>
 		<td>%s</td>
 		<td class=number>%0.2f</td>
 		<td class=number>%0.2f</td>
-		<td><a href='%sAllocTrans=%s'>" . _('Allocate') .'</td>
+		<td><a href="%sAllocTrans=%s">' . _('Allocate') .'</td>
 		</tr>',
 		$myrow['typename'],
 		$myrow['suppname'],
@@ -606,7 +604,7 @@ if (isset($_POST['AllocTrans'])){
 		ConvertSQLDate($myrow['trandate']),
 		$myrow['total'],
 		$myrow['total']-$myrow['alloc'],
-		$_SERVER['PHP_SELF'] . "?" . SID,
+		$_SERVER['PHP_SELF'] ,
 		$myrow['id']);
 
   }
@@ -640,13 +638,13 @@ if (isset($_POST['AllocTrans'])){
   $result = DB_query($sql, $db);
 
   echo '<table class=selection>';
-  $TableHeader = "<tr><th>" . _('Trans Type') . "</th>
-  		<th>" . _('Supplier') . "</th>
-  		<th>" . _('Number') . "</th>
-  		<th>" . _('Date') . "</th>
-  		<th>" . _('Total') . "</th>
-  		<th>" . _('To Alloc') . "</th>
-		<th>" . _('More Info') . "</th></tr>\n";
+  $TableHeader = '<tr><th>' . _('Trans Type') . '</th>
+  		<th>' . _('Supplier') . '</th>
+  		<th>' . _('Number') . '</th>
+  		<th>' . _('Date') . '</th>
+  		<th>' . _('Total') . '</th>
+  		<th>' . _('To Alloc') . '</th>
+		<th>' . _('More Info') . '</th></tr>';
 
   echo $TableHeader;
 
@@ -663,13 +661,13 @@ if (isset($_POST['AllocTrans'])){
 		$k = 1;
 	}
 
-	printf("<td>%s</td>
+	printf('<td>%s</td>
 		<td>%s</td>
 		<td>%s</td>
 		<td>%s</td>
 		<td class=number>%0.2f</td>
 		<td class=number>%0.2f</td>
-		<td><a href='%sAllocTrans=%s'>" . _('Allocate') . '</td>
+		<td><a href="%sAllocTrans=%s">' . _('Allocate') . '</td>
 		</tr>',
 		$myrow['typename'],
 		$myrow['suppname'],
@@ -677,13 +675,13 @@ if (isset($_POST['AllocTrans'])){
 		ConvertSQLDate($myrow['trandate']),
 		$myrow['total'],
 		$myrow['total']-$myrow['alloc'],
-		$_SERVER['PHP_SELF'] . "?" . SID,
+		$_SERVER['PHP_SELF'],
 		$myrow['id']);
 
 
   }  //END WHILE LIST LOOP
 
-  echo "</table>";
+  echo '</table>';
 
   if (DB_num_rows($result) == 0) {
 	prnMsg(_('There are no allocations to be done'),'info');

@@ -42,21 +42,21 @@ if (isset($_POST['AddGRNToTrans'])){
 
 	if ($InputError==False){
 		$_SESSION['SuppTrans']->Add_GRN_To_Trans($_POST['GRNNumber'],
-																						$_POST['PODetailItem'],
-																						$_POST['ItemCode'],
-																						$_POST['ItemDescription'],
-																						$_POST['QtyRecd'],
-																						$_POST['Prev_QuantityInv'],
-																						$_POST['This_QuantityCredited'],
-																						$_POST['OrderPrice'],
-																						$_POST['ChgPrice'],
-																						$Complete,
-																						$_POST['StdCostUnit'],
-																						$_POST['ShiptRef'],
-																						$_POST['JobRef'],
-																						$_POST['GLCode'],
-																						$_POST['PONo'],
-																						$_POST['AssetID']);
+												$_POST['PODetailItem'],
+												$_POST['ItemCode'],
+												$_POST['ItemDescription'],
+												$_POST['QtyRecd'],
+												$_POST['Prev_QuantityInv'],
+												$_POST['This_QuantityCredited'],
+												$_POST['OrderPrice'],
+												$_POST['ChgPrice'],
+												$Complete,
+												$_POST['StdCostUnit'],
+												$_POST['ShiptRef'],
+												$_POST['JobRef'],
+												$_POST['GLCode'],
+												$_POST['PONo'],
+												$_POST['AssetID']);
 	}
 }
 
@@ -141,7 +141,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 
 echo '<br /><table cellpadding=2 colspan=7 class=selection>';
 
-echo '<tr<th colspan=10><font size=3 color=navy>' . _('Show Goods Received Since') . ':&nbsp;</font>';
+echo '<tr><th colspan=10><font size=3 color=navy>' . _('Show Goods Received Since') . ':&nbsp;</font>';
 echo '<input type=Text name="Show_Since" maxlength=11 size=12 class=date alt='.$_SESSION['DefaultDateFormat'].' value="' . $_POST['Show_Since'] . '"><font size=3 color=navy> ';
 echo  _('From') . ' ' . $_SESSION['SuppTrans']->SupplierName . '</font></th></tr>';
 

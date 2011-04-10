@@ -16,11 +16,11 @@ if (isset($_GET['StockID'])){
 }
 
 if (isset($_POST['ShowGraphUsage'])) {
-	echo "<meta http-equiv='Refresh' content='0; url=" . $rootpath . "/SuppInvGRNs.php?" . SID . "'>";
-	echo "<meta http-equiv='Refresh' content='0; url=" . $rootpath . "/StockUsageGraph.php?" . SID . "&StockLocation=" . $_POST['StockLocation']  . "&StockID=" . $StockID . "'>";
+	echo '<meta http-equiv="Refresh" content="0; url=' . $rootpath . '/SuppInvGRNs.php">';
+	echo '<meta http-equiv="Refresh" content="0; url=' . $rootpath . '/StockUsageGraph.php?StockLocation=' . $_POST['StockLocation']  . '&StockID=' . $StockID . '">';
 	echo '<p>' . _('You should automatically be forwarded to the usage graph') .
 			'. ' . _('If this does not happen') .' (' . _('if the browser does not support META Refresh') . ') ' .
-			"<a href='" . $rootpath . "/StockUsageGraph.php?" . SID . '&StockLocation=' . $_POST['StockLocation'] .'&StockID=' . $StockID . '">' . _('click here') . '</a> ' . _('to continue') . '.<br>';
+			'<a href="' . $rootpath . '/StockUsageGraph.php?StockLocation="' . $_POST['StockLocation'] .'&StockID=' . $StockID . '">' . _('click here') . '</a> ' . _('to continue') . '.<br />';
 	exit;
 }
 
@@ -44,7 +44,7 @@ echo '<table class=selection>';
 $Its_A_KitSet_Assembly_Or_Dummy =False;
 if (($myrow[2]=='K') OR ($myrow[2]=='A') OR ($myrow[2]=='D')) {
 	$Its_A_KitSet_Assembly_Or_Dummy =True;
-	echo "<font color=navy size=3><b>$StockID - $myrow[0] </b></font>";
+	echo '<font color=navy size=3><b>' . $StockID - $myrow[0] . '</b></font>';
 
 	echo '<br>' . _('The selected item is a dummy or assembly or kit-set item and cannot have a stock holding') . '. ' . _('Please select a different item');
 
@@ -53,39 +53,39 @@ if (($myrow[2]=='K') OR ($myrow[2]=='A') OR ($myrow[2]=='D')) {
 	echo '<tr><th><font size=3 color=navy>' . _('Item') . ' :<b> ' . $StockID . ' - ' . $myrow[0] . ' </b>  (' . _('in units of') . ' :<b> ' . $myrow[1] . ')</b></font></th></tr>';
 }
 
-echo "<form action='" . $_SERVER['PHP_SELF'] . '?'. SID ."' method=post><tr><td>";
+echo '<form action="' . $_SERVER['PHP_SELF'] . ' method="post"><tr><td>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo _('Stock Code') . ":<input type=text name='StockID' size=21 maxlength=20 value='$StockID' >";
+echo _('Stock Code') . ':<input type=text name="StockID" size=21 maxlength=20 value="' . $StockID . '" />';
 
-echo _('From Stock Location') . ":<select name='StockLocation'>";
+echo _('From Stock Location') . ':<select name="StockLocation">';
 
 $sql = "SELECT loccode, locationname FROM locations";
 $resultStkLocs = DB_query($sql,$db);
 while ($myrow=DB_fetch_array($resultStkLocs)){
 	if (isset($_POST['StockLocation'])){
 		if ($myrow['loccode'] == $_POST['StockLocation']){
-		     echo "<option selected Value='" . $myrow['loccode'] . "'>" . $myrow['locationname'];
+		     echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
-		     echo "<option Value='" . $myrow['loccode'] . "'>" . $myrow['locationname'];
+		     echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
-		 echo "<option selected Value='" . $myrow['loccode'] . "'>" . $myrow['locationname'];
+		 echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		 $_POST['StockLocation']=$myrow['loccode'];
 	} else {
-		 echo "<option Value='" . $myrow['loccode'] . "'>" . $myrow['locationname'];
+		 echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 	}
 }
 if (isset($_POST['StockLocation'])){
 	if ('All'== $_POST['StockLocation']){
-	     echo "<option selected Value='All'>" . _('All Locations');
+	     echo '<option selected Value="All">' . _('All Locations') . '</option>';
 	} else {
-	     echo "<option Value='All'>" . _('All Locations');
+	     echo '<option Value="All">' . _('All Locations') . '</option>';
 	}
 }
 echo '</select>';
 
-echo " <input type=submit name='ShowUsage' VALUE='" . _('Show Stock Usage') . "'>";
-echo " <input type=submit name='ShowGraphUsage' VALUE='" . _('Show Graph Of Stock Usage') . "'></td></tr></table><br />";
+echo ' <input type=submit name="ShowUsage" VALUE="' . _('Show Stock Usage') . '">';
+echo ' <input type=submit name="ShowGraphUsage" VALUE="' . _('Show Graph Of Stock Usage') . '"></td></tr></table><br />';
 
 /* $_SESSION['NumberOfPeriodsOfStockUsage']  is defined in config.php as a user definable variable
 config.php is loaded by header.inc */
@@ -135,7 +135,7 @@ if (isset($_POST['ShowUsage'])){
 	}
 
 	echo '</div><table cellpadding=2 class=selection>';
-	$tableheader = "<tr><th>" . _('Month') . "</th><th>" . _('Usage') . '</th></tr>';
+	$tableheader = '<tr><th>' . _('Month') . '</th><th>' . _('Usage') . '</th></tr>';
 	echo $tableheader;
 
 	$j = 1;
@@ -165,18 +165,18 @@ if (isset($_POST['ShowUsage'])){
 	//end of while loop
 
 	if ($TotalUsage>0 && $PeriodsCounter>0){
-	echo '<tr<th colspan=2>' . _('Average Usage per month is') . ' ' . number_format($TotalUsage/$PeriodsCounter);
+	echo '<tr><th colspan=2>' . _('Average Usage per month is') . ' ' . number_format($TotalUsage/$PeriodsCounter);
 	echo '</th></tr>';
 	}
 	echo '</table>';
 } /* end if Show Usage is clicked */
 
 echo '<br /><div class="centre">';
-echo "<a href='$rootpath/StockStatus.php?". SID . "&StockID=$StockID'>" . _('Show Stock Status') .'</a>';
-echo "<br><a href='$rootpath/StockMovements.php?". SID . "&StockID=$StockID&StockLocation=" . $_POST['StockLocation'] . "'>" . _('Show Stock Movements') . '</a>';
-echo "<br><a href='$rootpath/SelectSalesOrder.php?". SID . "&SelectedStockItem=$StockID&StockLocation=" . $_POST['StockLocation'] . "'>" . _('Search Outstanding Sales Orders') . '</a>';
-echo "<br><a href='$rootpath/SelectCompletedOrder.php?". SID . "&SelectedStockItem=$StockID'>" . _('Search Completed Sales Orders') . '</a>';
-echo "<br><a href='$rootpath/PO_SelectOSPurchOrder.php?" .SID . "&SelectedStockItem=$StockID'>" . _('Search Outstanding Purchase Orders') . '</a>';
+echo '<a href="' . $rootpath . '/StockStatus.php?StockID=$StockID">' . _('Show Stock Status') .'</a>';
+echo '<br><a href="' . $rootpath . '/StockMovements.php?StockID=' . $StockID . '&StockLocation=' . $_POST['StockLocation'] . '">' . _('Show Stock Movements') . '</a>';
+echo '<br><a href="' . $rootpath . '/SelectSalesOrder.php?SelectedStockItem=$StockID&StockLocation=' . $_POST['StockLocation'] . '">' . _('Search Outstanding Sales Orders') . '</a>';
+echo '<br><a href="' . $rootpath . '/SelectCompletedOrder.php?SelectedStockItem=$StockID">' . _('Search Completed Sales Orders') . '</a>';
+echo '<br><a href="' . $rootpath . '/PO_SelectOSPurchOrder.php?SelectedStockItem=$StockID">' . _('Search Outstanding Purchase Orders') . '</a>';
 
 echo '</form></div>';
 include('includes/footer.inc');

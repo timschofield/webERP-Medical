@@ -385,11 +385,10 @@ if (! isset($_GET['delete'])) {
 	while ($myrow = DB_fetch_array($Result)){
 
 		if (isset($_POST['StockAct']) and $myrow['accountcode']==$_POST['StockAct']) {
-			echo '<option selected value=';
+			echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 		} else {
-			echo '<option value=';
+			echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 		}
-		echo $myrow['accountcode'] . '>' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')';
 	} //end while loop
 	DB_data_seek($PnLAccountsResult,0);
 	DB_data_seek($BSAccountsResult,0);
@@ -400,11 +399,10 @@ if (! isset($_GET['delete'])) {
 	while ($myrow = DB_fetch_array($BSAccountsResult)) {
 
 		if (isset($_POST['WIPAct']) and $myrow['accountcode']==$_POST['WIPAct']) {
-			echo '<option selected value=';
+			echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 		} else {
-			echo '<option value=';
+			echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 		}
-		echo $myrow['accountcode'] . '>' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')';
 
 	} //end while loop
 	echo '</select></td></tr>';
@@ -415,11 +413,10 @@ if (! isset($_GET['delete'])) {
 
 	while ($myrow = DB_fetch_array($PnLAccountsResult)) {
 		if (isset($_POST['AdjGLAct']) and $myrow['accountcode']==$_POST['AdjGLAct']) {
-			echo '<option selected value=';
+			echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 		} else {
-			echo '<option value=';
+			echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 		}
-		echo $myrow['accountcode'] . '>' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')';
 
 	} //end while loop
 	DB_data_seek($PnLAccountsResult,0);
@@ -430,11 +427,10 @@ if (! isset($_GET['delete'])) {
 
 	while ($myrow = DB_fetch_array($PnLAccountsResult)) {
 		if (isset($_POST['PurchPriceVarAct']) and $myrow['accountcode']==$_POST['PurchPriceVarAct']) {
-			echo '<option selected value=';
+			echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 		} else {
-			echo '<option value=';
+			echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 		}
-		echo $myrow['accountcode'] . '>' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')';
 
 	} //end while loop
 	DB_data_seek($PnLAccountsResult,0);
@@ -449,11 +445,10 @@ if (! isset($_GET['delete'])) {
 
 	while ($myrow = DB_fetch_array($PnLAccountsResult)) {
 		if (isset($_POST['MaterialUseageVarAc']) and $myrow['accountcode']==$_POST['MaterialUseageVarAc']) {
-			echo '<option selected value=';
+			echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 		} else {
-			echo '<option value=';
+			echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 		}
-		echo $myrow['accountcode'] . '>' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')';
 
 	} //end while loop
 	DB_free_result($PnLAccountsResult);

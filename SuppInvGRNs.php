@@ -250,23 +250,23 @@ if (isset($_GET['Modify'])){
 		echo "<input type=hidden name='ShiptRef' Value=''>";
 		echo "<p>Unfortunately, the shipment that this purchase order line item was allocated to has been closed - if you add this item to the transaction then no shipments will not be updated. If you wish to allocate the order line item to a different shipment the order must be modified first.";
 	} else {	*/
-		echo "<input type=hidden name='ShiptRef' Value='" . $GRNTmp->ShiptRef . "'>";
+		echo '<input type=hidden name="ShiptRef" Value="' . $GRNTmp->ShiptRef . '">';
 //	}
 
-	echo "<div class='centre'><p><input type=Submit Name='ModifyGRN' Value='" . _('Modify Line') . "'></div>";
+	echo '<div class="centre"><p><input type=Submit Name="ModifyGRN" Value="' . _('Modify Line') . '"></div>';
 
 
-	echo "<input type=hidden name='GRNNumber' VALUE=" . $GRNTmp->GRNNo . '>';
-	echo "<input type=hidden name='ItemCode' VALUE='" . $GRNTmp->ItemCode . "'>";
-	echo "<input type=hidden name='ItemDescription' VALUE='" . $GRNTmp->ItemDescription . "'>";
-	echo "<input type=hidden name='QtyRecd' VALUE=" . $GRNTmp->QtyRecd . ">";
-	echo "<input type=hidden name='Prev_QuantityInv' VALUE=" . $GRNTmp->Prev_QuantityInv . '>';
-	echo "<input type=hidden name='OrderPrice' VALUE=" . $GRNTmp->OrderPrice . '>';
-	echo "<input type=hidden name='StdCostUnit' VALUE=" . $GRNTmp->StdCostUnit . '>';
-	echo "<input type=hidden name='JobRef' Value='" . $GRNTmp->JobRef . "'>";
-	echo "<input type=hidden name='GLCode' Value='" . $GRNTmp->GLCode . "'>";
-	echo "<input type=hidden name='PODetailItem' Value='" . $GRNTmp->PODetailItem . "'>";
-	echo "<input type=hidden name='AssetID' Value='" . $GRNTmp->AssetID . "'>";
+	echo '<input type=hidden name="GRNNumber" VALUE="' . $GRNTmp->GRNNo . '">';
+	echo '<input type=hidden name="ItemCode" VALUE="' . $GRNTmp->ItemCode . '">';
+	echo '<input type=hidden name="ItemDescription" VALUE="' . $GRNTmp->ItemDescription . '">';
+	echo '<input type=hidden name="QtyRecd" VALUE="' . $GRNTmp->QtyRecd . '">';
+	echo '<input type=hidden name="Prev_QuantityInv" VALUE="' . $GRNTmp->Prev_QuantityInv . '">';
+	echo '<input type=hidden name="OrderPrice" VALUE="' . $GRNTmp->OrderPrice . '">';
+	echo '<input type=hidden name="StdCostUnit" VALUE=' . $GRNTmp->StdCostUnit . '">';
+	echo '<input type=hidden name="JobRef" Value="' . $GRNTmp->JobRef . '">';
+	echo '<input type=hidden name="GLCode" Value="' . $GRNTmp->GLCode . '">';
+	echo '<input type=hidden name="PODetailItem" Value="' . $GRNTmp->PODetailItem . '">';
+	echo '<input type=hidden name="AssetID" Value="' . $GRNTmp->AssetID . '">';
 }
 else {
 	if (count( $_SESSION['SuppTransTmp']->GRNs)>0){   /*if there are any outstanding GRNs then */

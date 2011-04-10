@@ -113,27 +113,27 @@ if (!isset($ShiptRef) or $ShiptRef==""){
 	while ($myrow=DB_fetch_array($resultStkLocs)){
 		if (isset($_POST['StockLocation'])){
 			if ($myrow['loccode'] == $_POST['StockLocation']){
-			echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
+			echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			} else {
-			echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
+			echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			}
 		} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
 			$_POST['StockLocation'] = $_SESSION['UserStockLocation'];
-			echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
+			echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
-			echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
+			echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	}
 
 	echo '</select>';
 	echo ' <select name="OpenOrClosed">';
 	if ($_POST['OpenOrClosed']==1){
-		echo '<option selected VALUE=1>'. _('Closed Shipments Only');
-		echo '<option VALUE=0>'. _('Open Shipments Only');
+		echo '<option selected VALUE=1>'. _('Closed Shipments Only') . '</option>';
+		echo '<option VALUE=0>'. _('Open Shipments Only') . '</option>';
 	} else {
 		$_POST['OpenOrClosed']=0;
-		echo '<option VALUE=1>'. _('Closed Shipments Only');
-		echo '<option selected VALUE=0>'. _('Open Shipments Only');
+		echo '<option VALUE=1>'. _('Closed Shipments Only') . '</option>';
+		echo '<option selected VALUE=0>'. _('Open Shipments Only') . '</option>';
 	}
 	echo '</select></td></tr></table>';
 
@@ -157,9 +157,9 @@ echo '<tr><th colspan=5><font size=3 color=navy>'._('To search for shipments for
 <?php
 while ($myrow1 = DB_fetch_array($result1)) {
 	if (isset($_POST['StockCat']) and $myrow1['categoryid']==$_POST['StockCat']){
-		echo '<option selected VALUE="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'];
+		echo '<option selected VALUE="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 	} else {
-		echo '<option VALUE="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'];
+		echo '<option VALUE="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 	}
 }
 ?>
@@ -178,7 +178,7 @@ echo '<input type=submit name="ResetPart" VALUE="'. _('Show All') .'"></div><br 
 
 if (isset($StockItemsResult)) {
 
-	echo "<table cellpadding=2 colspan=7 class=selection>";
+	echo '<table cellpadding=2 colspan=7 class=selection>';
 	$TableHeader = '<tr>
 			<th>'. _('Code').'</th>
 			<th>'. _('Description').'</th>
@@ -203,7 +203,7 @@ if (isset($StockItemsResult)) {
 		}
 /*
 Code	 Description	On Hand		 Orders Ostdg     Units		 Code	Description 	 On Hand     Orders Ostdg	Units	 */
-		printf('<td><input type=submit name="SelectedStockItem" VALUE="%s"</td>
+		printf('<td><input type=submit name="SelectedStockItem" VALUE="%s" /></td>
 			<td>%s</td>
 			<td class=number>%s</td>
 			<td class=number>%s</td>

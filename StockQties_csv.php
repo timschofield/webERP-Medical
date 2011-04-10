@@ -7,14 +7,13 @@ include ('includes/session.inc');
 $title = _('Produce Stock Quantities CSV');
 include ('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') .
-'" alt="" /><b>' . $title. '</b></p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') .'" alt="" /><b>' . $title. '</b></p>';
 
 function stripcomma($str) { //because we're using comma as a delimiter
 	return str_replace(",", "", $str);
 }
 
-echo '<div class=centre>' . _('Making a comma separated values file of the current stock quantities');
+echo '<div class=centre>' . _('Making a comma separated values file of the current stock quantities') . '</div>';
 
 $ErrMsg = _('The SQL to get the stock quantities failed with the message');
 
@@ -43,7 +42,7 @@ While ($myrow = DB_fetch_row($result)){
 
 fclose($fp);
 
-echo "<br /><a href='" . $rootpath . '/' . $_SESSION['reports_dir'] . "/StockQties.csv'>" . _('click here') . '</a> ' . _('to view the file') . '</div>';
+echo '<br /><a href="' . $rootpath . '/' . $_SESSION['reports_dir'] . '/StockQties.csv ">' . _('click here') . '</a> ' . _('to view the file') . '</div>';
 
 include('includes/footer.inc');
 

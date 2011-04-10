@@ -195,7 +195,7 @@ If (isset($_POST['PrintPDF'])
 	   			if ($debug==1){
 		  				echo '<br>' . $SQL;
 		   		}
-		   		echo '</body</html>';
+		   		echo '</body></html>';
 	   			exit;
 			}
 

@@ -51,7 +51,7 @@ if (isset($_FILES['ItemPicture']) AND $_FILES['ItemPicture']['name'] !='') {
 	} elseif ( $_FILES['ItemPicture']['size'] > ($_SESSION['MaxImageSize']*1024)) { //File Size Check
 		prnMsg(_('The file size is over the maximum allowed. The maximum size allowed in KB is') . ' ' . $_SESSION['MaxImageSize'],'warn');
 		$UploadTheFile ='No';
-	} elseif ( $_FILES['ItemPicture']['type'] == "text/plain" ) {  //File Type Check
+	} elseif ( $_FILES['ItemPicture']['type'] == 'text/plain' ) {  //File Type Check
 		prnMsg( _('Only graphics files can be uploaded'),'warn');
 		 	$UploadTheFile ='No';
 	} elseif (file_exists($filename)){
@@ -65,7 +65,7 @@ if (isset($_FILES['ItemPicture']) AND $_FILES['ItemPicture']['name'] !='') {
 
 	if ($UploadTheFile=='Yes'){
 		$result  =  move_uploaded_file($_FILES['ItemPicture']['tmp_name'], $filename);
-		$message = ($result)?_('File url') ."<a href='". $filename ."'>" .  $filename . '</a>' : _('Something is wrong with uploading a file');
+		$message = ($result)?_('File url') .'<a href="'. $filename .'">' .  $filename . '</a>' : _('Something is wrong with uploading a file');
 	}
  /* EOR Add Image upload for New Item  - by Ori */
 }
@@ -107,7 +107,7 @@ if (isset($_POST['submit'])) {
 	}
 	if (ContainsIllegalCharacters($StockID) OR strstr($StockID,'  ')) {
 		$InputError = 1;
-		prnMsg(_('The stock item code cannot contain any of the following characters') . " - ' & + \" \\ " . _('or a space'),'error');
+		prnMsg(_('The stock item code cannot contain any of the illegal characters') ,'error');
 		$Errors[$i] = 'StockID';
 		$i++;
 		$StockID='';
@@ -425,8 +425,8 @@ if (isset($_POST['submit'])) {
 					$InsResult = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
 					if (DB_error_no($db) ==0) {
-						prnMsg( _('New Item') .' ' . "<a
-							href='SelectProduct.php?StockID=$StockID'>$StockID</a>" . ' '. _('has been added to the database'),'success');						unset($_POST['LongDescription']);
+						prnMsg( _('New Item') .' ' . '<a
+							href="SelectProduct.php?StockID='.$StockID.'">'.$StockID.'</a>' . ' '. _('has been added to the database'),'success');						unset($_POST['LongDescription']);
 						echo '<br>';
 						unset($_POST['Description']);
 						unset($_POST['EOQ']);
@@ -660,7 +660,7 @@ if (isset($_POST['LongDescription'])) {
 } else {
 	$LongDescription ='';
 }
-echo '<tr><td>' . _('Part Description') . ' (' . _('long') . '):</td><td><textarea ' . (in_array('LongDescription',$Errors) ?  'class="texterror"' : '' ) .'  name="LongDescription" cols=40 rows=4>' . stripslashes($LongDescription) . '</textarea></td></tr>'."\n";
+echo '<tr><td>' . _('Part Description') . ' (' . _('long') . '):</td><td><textarea ' . (in_array('LongDescription',$Errors) ?  'class="texterror"' : '' ) .'  name="LongDescription" cols=40 rows=4>' . stripslashes($LongDescription) . '</textarea></td></tr>';
 
 // Generate selection drop down from pdf_append directory - by emdx,
 // developed with examples from http://au2.php.net/manual/en/function.opendir.php
@@ -671,7 +671,7 @@ function select_files($dir, $label = '', $select_name = 'ItemPDF', $curr_val = '
 		chmod($dir, 0777);
 	}
 	if ($handle = opendir($dir)) {
-		$mydir = "<select name=".$select_name.">\n";
+		$mydir = '<select name="'.$select_name.'">';
 		$mydir .= '<option value=0>none';
 		if (isset($_POST['ItemPDF'])) {
 			$curr_val = $_POST['ItemPDF'];
@@ -686,8 +686,11 @@ function select_files($dir, $label = '', $select_name = 'ItemPDF', $curr_val = '
 		sort($files);
 		foreach ($files as $val) {
 			if (is_file($dir.$val)) {
-				$mydir .= '<option value='.$val;
-				$mydir .= ($val == $curr_val) ? ' selected>' : '>';
+				if ($val == $curr_val) {
+					$mydir .='<option value='.$val.' selected>';
+				} else {
+					$mydir .='<option value='.$val.'>';
+				}
 				$mydir .= $val."\n";
 				$teller++;
 			}
@@ -699,7 +702,8 @@ function select_files($dir, $label = '', $select_name = 'ItemPDF', $curr_val = '
 if (!isset($_POST['ItemPDF'])) {
 	$_POST['ItemPDF'] = '';
 }
-echo '<tr><td>' . _('PDF attachment (.pdf)') . ':' . "\n</td><td>" . select_files('companies/' . $_SESSION['DatabaseName'] .'/pdf_append//','' , 'ItemPDF', $_POST['ItemPDF'], '60') . '</td></tr>'. "\n";
+echo '<tr><td>' . _('PDF attachment (.pdf)') . ':</td><td>' . select_files('companies/' . $_SESSION['DatabaseName'] .
+		"/pdf_append//",'' , 'ItemPDF', $_POST['ItemPDF'], '60') . '</td></tr>';
 
 // Add image upload for New Item  - by Ori
 echo '<tr><td>'. _('Image File (.jpg)') . ':</td><td><input type="file" id="ItemPicture" name="ItemPicture"></td>';
@@ -734,9 +738,9 @@ $result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
 while ($myrow=DB_fetch_array($result)){
 	if (!isset($_POST['CategoryID']) or $myrow['categoryid']==$_POST['CategoryID']){
-		echo '<option selected value="'. $myrow['categoryid'] . '">' . $myrow['categorydescription'];
+		echo '<option selected value="'. $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	} else {
-		echo '<option value="'. $myrow['categoryid'] . '">' . $myrow['categorydescription'];
+		echo '<option value="'. $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	}
 	$Category=$myrow['categoryid'];
 }
@@ -882,7 +886,7 @@ if ($_POST['Serialised']==1){
 echo '</select><i>' . _('Note') . ', ' . _('this has no effect if the item is not Controlled') . '</i></td></tr>';
 
 if ($_POST['Serialised']==1 AND $_POST['MBFlag']=='M'){
-	echo '<tr><td>' . _('Next Serial No (>0 for auto numbering)') . ':</td><td><input ' . (in_array('NextSerialNo',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="NextSerialNo" size=15 maxlength=15 value="' . $_POST['NextSerialNo'] . '"><td></tr>';
+	echo '<tr><td>' . _('Next Serial No (greater than 0 for auto numbering)') . ':</td><td><input ' . (in_array('NextSerialNo',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="NextSerialNo" size=15 maxlength=15 value="' . $_POST['NextSerialNo'] . '"><td></tr>';
 } else {
 	echo '<input type="hidden" name="NextSerialNo" value="0">';
 }

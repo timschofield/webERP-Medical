@@ -19,7 +19,7 @@ include('includes/header.inc');
 
 if (!isset($_SESSION['SuppTrans'])){
 	prnMsg(_('Fixed asset additions or credits are entered against supplier invoices or credit notes respectively') . '. ' . _('To enter supplier transactions the supplier must first be selected from the supplier selection screen') . ', ' . _('then the link to enter a supplier invoice or credit note must be clicked on'),'info');
-	echo '<br><a href="' . $rootpath . '/SelectSupplier.php?' . SID .'">' . _('Select A Supplier') . '</a>';
+	echo '<br><a href="' . $rootpath . '/SelectSupplier.php">' . _('Select A Supplier') . '</a>';
 	exit;
 	/*It all stops here if there aint no supplier selected and invoice/credit initiated ie $_SESSION['SuppTrans'] started off*/
 }
@@ -67,8 +67,8 @@ echo $_SESSION['SuppTrans']->SuppReference . ' ' ._('From') . ' ' . $_SESSION['S
 echo '</p></div>';
 echo '<table cellpadding=2 class=selection>';
 $TableHeader = '<tr><th>' . _('Asset ID') . '</th>
-										<th>' . _('Description') . '</th>
-										<th>' . _('Amount') . '</th></tr>';
+					<th>' . _('Description') . '</th>
+					<th>' . _('Amount') . '</th></tr>';
 echo $TableHeader;
 
 $TotalAssetValue = 0;
@@ -78,7 +78,7 @@ foreach ($_SESSION['SuppTrans']->Assets as $EnteredAsset){
 	echo '<tr><td>' . $EnteredAsset->AssetID . '</td>
 						<td>' . $EnteredAsset->Description . '</td>
 		<td class=number>' . number_format($EnteredAsset->Amount,2) . '</td>
-		<td><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '&Delete=' . $EnteredAsset->Counter . '">' . _('Delete') . '</a></td></tr>';
+		<td><a href="' . $_SERVER['PHP_SELF'] . '&Delete=' . $EnteredAsset->Counter . '">' . _('Delete') . '</a></td></tr>';
 
 	$TotalAssetValue +=  $EnteredAsset->Amount;
 
@@ -91,13 +91,13 @@ echo '<tr>
 </table><br />';
 
 if ($_SESSION['SuppTrans']->InvoiceOrCredit == 'Invoice'){
-	echo '<div class="centre"><a href="' . $rootpath . '/SupplierInvoice.php?' . SID . '">' . _('Back to Invoice Entry') . '</a></div>';
+	echo '<div class="centre"><a href="' . $rootpath . '/SupplierInvoice.php">' . _('Back to Invoice Entry') . '</a></div>';
 } else {
-	echo '<div class="centre"><a href="' . $rootpath . '/SupplierCredit.php?' . SID . '">' . _('Back to Credit Note Entry') . '</a></div>';
+	echo '<div class="centre"><a href="' . $rootpath . '/SupplierCredit.php">' . _('Back to Credit Note Entry') . '</a></div>';
 }
 
 /*Set up a form to allow input of new Shipment charges */
-echo '<br /><form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method="post">';
+echo '<br /><form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (!isset($_POST['AssetID'])) {
@@ -113,20 +113,19 @@ echo '<tr><td>' . _('Enter Asset ID') . ':</td>
 echo '<tr><td><b>' . _('OR') .' </b>'. _('Select from list') . ':</td><td><select name="AssetSelection">';
 
 $sql = "SELECT assetid,
-							description
-						FROM fixedassets
-						WHERE cost=0
-						ORDER BY assetid DESC";
+				description
+			FROM fixedassets
+			WHERE cost=0
+			ORDER BY assetid DESC";
 
 $result = DB_query($sql, $db);
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['AssetSelection']) AND $myrow['AssetID']==$_POST['AssetSelection']) {
-		echo '<option selected VALUE="';
+		echo '<option selected VALUE="' .  $myrow['assetid'] . '">' . $myrow['assetid'] . ' - ' . $myrow['description']  . '</option>';
 	} else {
-		echo '<option VALUE="';
+		echo '<option VALUE="' .  $myrow['assetid'] . '">' . $myrow['assetid'] . ' - ' . $myrow['description']  . '</option>';
 	}
-	echo $myrow['assetid'] . '">' . $myrow['assetid'] . ' - ' . $myrow['description']  . '</option>';
 }
 
 echo '</select></td></tr>';

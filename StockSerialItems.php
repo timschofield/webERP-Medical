@@ -7,8 +7,7 @@ include('includes/session.inc');
 $title = _('Stock Of Controlled Items');
 include('includes/header.inc');
 
-echo '<p Class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') .
-'" alt="" /><b>' . $title. '</b></p>';
+echo '<p Class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') .'" alt="" /><b>' . $title. '</b></p>';
 
 if (isset($_GET['StockID'])){
 	$StockID = trim(strtoupper($_GET['StockID']));
@@ -41,7 +40,8 @@ $Perishable = $myrow['perishable'];
 
 if ($myrow['mbflag']=='K' OR $myrow['mbflag']=='A' OR $myrow['mbflag']=='D'){
 
-	prnMsg(_('This item is either a kitset or assembly or a dummy part and cannot have a stock holding') . '. ' . _('This page cannot be displayed') . '. ' . _('Only serialised or controlled items can be displayed in this page'),'error');
+	prnMsg(_('This item is either a kitset or assembly or a dummy part and cannot have a stock holding') . '. ' .
+		_('This page cannot be displayed') . '. ' . _('Only serialised or controlled items can be displayed in this page'),'error');
 	include('includes/footer.inc');
 	exit;
 }
@@ -70,49 +70,49 @@ $LocStockResult = DB_query($sql, $db, $ErrMsg);
 echo '<table cellpadding=2 class=selection>';
 
 if ($Serialised==1){
-	echo '<tr<th colspan=5><font color=navy size=2>' . _('Serialised items in') . ' ';
+	echo '<tr><th colspan=5><font color=navy size=2>' . _('Serialised items in') . ' ';
 } else {
-	echo '<tr<th colspan=11><font color=navy size=2>' . _('Controlled items in') . ' ';
+	echo '<tr><th colspan=11><font color=navy size=2>' . _('Controlled items in') . ' ';
 }
 echo $myrow[0]. '</font></th></tr>';
 
-echo "<tr><th colspan=11><font color=navy size=2>".$StockID ."-". $Description ."</b>  (" . _('In units of') . ' ' . $UOM . ')</font></th></tr>';
+echo '<tr><th colspan=11><font color=navy size=2>'.$StockID .'-'. $Description .'</b>  (' . _('In units of') . ' ' . $UOM . ')</font></th></tr>';
 
 if ($Serialised == 1){
-	$tableheader = "<tr>
-			<th>" . _('Serial Number') . "</th>
+	$tableheader = '<tr>
+			<th>' . _('Serial Number') . '</th>
 			<th></th>
-			<th>" . _('Serial Number') . "</th>
+			<th>' . _('Serial Number') . '</th>
 			<th></th>
-			<th>" . _('Serial Number') . "</th>
-			</tr>";
+			<th>' . _('Serial Number') . '</th>
+			</tr>';
 } else if ($Serialised == 0 and $Perishable==0){
-	$tableheader = "<tr>
-			<th>" . _('Batch/Bundle Ref') . "</th>
-			<th>" . _('Quantity On Hand') . "</th>
+	$tableheader = '<tr>
+			<th>' . _('Batch/Bundle Ref') . '</th>
+			<th>' . _('Quantity On Hand') . '</th>
 			<th></th>
-			<th>" . _('Batch/Bundle Ref') . "</th>
-			<th>" . _('Quantity On Hand') . "</th>
+			<th>' . _('Batch/Bundle Ref') . '</th>
+			<th>' . _('Quantity On Hand') . '</th>
 			<th></th>
-   			<th>" . _('Batch/Bundle Ref') . "</th>
-			<th>" . _('Quantity On Hand') . "</th>
+   			<th>' . _('Batch/Bundle Ref') . '</th>
+			<th>' . _('Quantity On Hand') . '</th>
 
-   			</tr>";
+   			</tr>';
 } else if ($Serialised == 0 and $Perishable==1){
-	$tableheader = "<tr>
-			<th>" . _('Batch/Bundle Ref') . "</th>
-			<th>" . _('Quantity On Hand') . "</th>
-			<th>" . _('Expiry Date') . "</th>
+	$tableheader = '<tr>
+			<th>' . _('Batch/Bundle Ref') . '</th>
+			<th>' . _('Quantity On Hand') . '</th>
+			<th>' . _('Expiry Date') . '</th>
 			<th></th>
-			<th>" . _('Batch/Bundle Ref') . "</th>
-			<th>" . _('Quantity On Hand') . "</th>
-			<th>" . _('Expiry Date') . "</th>
+			<th>' . _('Batch/Bundle Ref') . '</th>
+			<th>' . _('Quantity On Hand') . '</th>
+			<th>' . _('Expiry Date') . '</th>
 			<th></th>
-   			<th>" . _('Batch/Bundle Ref') . "</th>
-			<th>" . _('Quantity On Hand') . "</th>
-			<th>" . _('Expiry Date') . "</th>
+   			<th>' . _('Batch/Bundle Ref') . '</th>
+			<th>' . _('Quantity On Hand') . '</th>
+			<th>' . _('Expiry Date') . '</th>
 
-   			</tr>";
+   			</tr>';
 }
 echo $tableheader;
 $TotalQuantity =0;
@@ -132,16 +132,16 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 	$TotalQuantity += $myrow['quantity'];
 
 	if ($Serialised == 1){
-		echo '<td>'.$myrow['serialno'].'/td>';
+		echo '<td>'.$myrow['serialno'].'</td>';
 		echo '<th></th>';
 	} else if ($Serialised == 0 and $Perishable==0) {
-		echo "<td>".$myrow['serialno']."</td>
-			<td class=number>".number_format($myrow['quantity'],$DecimalPlaces)."</td>";
+		echo '<td>'.$myrow['serialno'].'</td>
+			<td class=number>'.number_format($myrow['quantity'],$DecimalPlaces).'</td>';
 		echo '<th></th>';
 	} else if ($Serialised == 0 and $Perishable==1){
-		echo "<td>".$myrow['serialno']."</td>
-			<td class=number>".number_format($myrow['quantity'],$DecimalPlaces)."</td>
-			<td>".ConvertSQLDate($myrow['expirationdate'])."</td>";
+		echo '<td>'.$myrow['serialno'].'</td>
+			<td class=number>'.number_format($myrow['quantity'],$DecimalPlaces).'</td>
+			<td>'.ConvertSQLDate($myrow['expirationdate']).'</td>';
 		echo '<th></th>';
 	}
 	$j++;
