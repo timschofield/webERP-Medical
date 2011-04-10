@@ -119,11 +119,10 @@ $result = DB_query($sql, $db);
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['ShiptSelection']) and $myrow['shiptref']==$_POST['ShiptSelection']) {
-		echo '<option selected VALUE=';
+		echo '<option selected VALUE="' . $myrow['shiptref'] . '">' . $myrow['shiptref'] . ' - ' . $myrow['vessel'] . ' ' . _('ETA') . ' ' . ConvertSQLDate($myrow['eta']) . ' ' . _('from') . ' ' . $myrow['suppname']  . '</option>';;
 	} else {
-		echo '<option VALUE=';
+		echo '<option VALUE="' . $myrow['shiptref'] . '">' . $myrow['shiptref'] . ' - ' . $myrow['vessel'] . ' ' . _('ETA') . ' ' . ConvertSQLDate($myrow['eta']) . ' ' . _('from') . ' ' . $myrow['suppname']  . '</option>';;
 	}
-	echo $myrow['shiptref'] . '>' . $myrow['shiptref'] . ' - ' . $myrow['vessel'] . ' ' . _('ETA') . ' ' . ConvertSQLDate($myrow['eta']) . ' ' . _('from') . ' ' . $myrow['suppname']  . '</option>';
 }
 
 echo '</select></td></tr>';

@@ -204,7 +204,7 @@ if (isset($SelectedTaxAuthID)) {
  }
 
 
-echo "<p><form method='post' action=" . $_SERVER['PHP_SELF'] . '?' . SID .'>';
+echo '<p><form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (isset($SelectedTaxAuthID)) {
@@ -232,7 +232,7 @@ if (isset($SelectedTaxAuthID)) {
 	$_POST['BankSwift']	= $myrow['bankswift'];
 
 
-	echo "<input type=hidden name='SelectedTaxAuthID' VALUE=" . $SelectedTaxAuthID . '>';
+	echo '<input type=hidden name="SelectedTaxAuthID" VALUE="' . $SelectedTaxAuthID . '">';
 
 }  //end of if $SelectedTaxAuthID only do the else when a new record is being entered
 
@@ -259,11 +259,10 @@ echo '<tr><td>' . _('Input tax GL Account') . ':</td>
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['PurchTaxGLCode']) and $myrow['accountcode']==$_POST['PurchTaxGLCode']) {
-		echo '<option selected VALUE=';
+		echo '<option selected VALUE='. $myrow['accountcode'] . '>' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 	} else {
-		echo '<option VALUE=';
+		echo '<option VALUE=' . $myrow['accountcode'] . '>' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 	}
-	echo $myrow['accountcode'] . '>' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')';
 
 } //end while loop
 
@@ -277,11 +276,10 @@ echo '<tr><td>' . _('Output tax GL Account') . ':</td>
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['TaxGLCode']) and $myrow['accountcode']==$_POST['TaxGLCode']) {
-		echo "<option selected VALUE='";
+		echo '<option selected VALUE="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 	} else {
-		echo "<option VALUE='";
+		echo '<option VALUE="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 	}
-	echo $myrow['accountcode'] . "'>" . $myrow['accountname'] . ' ('.$myrow['accountcode'].')';
 
 } //end while loop
 

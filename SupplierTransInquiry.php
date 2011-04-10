@@ -11,26 +11,26 @@ include('includes/header.inc');
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Search') .
 	'" alt="" />' . ' ' . $title . '</p>';
 
-echo "<form action='" . $_SERVER['PHP_SELF'] . "' method=post>";
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<table cellpadding=2 class=selection><tr>';
 
-echo '<td>' . _('Type') . ":</td><td><select name='TransType'> ";
+echo '<td>' . _('Type') . ':</td><td><select name="TransType"> ';
 
 $sql = "SELECT typeid, typename FROM systypes WHERE typeid >= 20 AND typeid <= 23";
 $resultTypes = DB_query($sql,$db);
 
-echo "<option Value='All'> All";
+echo '<option Value="All"> All </option>';
 while ($myrow=DB_fetch_array($resultTypes)){
 	if (isset($_POST['TransType'])){
 		if ($myrow['typeid'] == $_POST['TransType']){
-		     echo "<option selected Value='" . $myrow['typeid'] . "'>" . $myrow['typename'];
+		     echo '<option selected Value="' . $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
 		} else {
-		     echo "<option Value='" . $myrow['typeid'] . "'>" . $myrow['typename'];
+		     echo '<option Value="' . $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
 		}
 	} else {
-		     echo "<option Value='" . $myrow['typeid'] . "'>" . $myrow['typename'];
+		     echo '<option Value="' . $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
 	}
 }
 echo '</select></td>';
@@ -41,10 +41,10 @@ if (!isset($_POST['FromDate'])){
 if (!isset($_POST['ToDate'])){
 	$_POST['ToDate'] = Date($_SESSION['DefaultDateFormat']);
 }
-echo '<td>' . _('From') . ":</td><td><input type=TEXT class='date' alt='".$_SESSION['DefaultDateFormat']. "' name='FromDate' maxlength=10 size=11 VALUE=" . $_POST['FromDate'] . '></td>';
-echo '<td>' . _('To') . ":</td><td><input type=TEXT class='date' alt='".$_SESSION['DefaultDateFormat']. "' name='ToDate' maxlength=10 size=11 VALUE=" . $_POST['ToDate'] . '></td>';
+echo '<td>' . _('From') . ':</td><td><input type=TEXT class="date" alt="'.$_SESSION['DefaultDateFormat']. '" name="FromDate" maxlength=10 size=11 VALUE="' . $_POST['FromDate'] . '"></td>';
+echo '<td>' . _('To') . ':</td><td><input type=TEXT class="date" alt="'.$_SESSION['DefaultDateFormat']. '" name="ToDate" maxlength=10 size=11 VALUE="' . $_POST['ToDate'] . '"></td>';
 
-echo "</tr></table><br /><div class='centre'><input type=submit name='ShowResults' VALUE='" . _('Show Transactions') . "'>";
+echo '</tr></table><br /><div class="centre"><input type=submit name="ShowResults" VALUE="' . _('Show Transactions') . '">';
 
 echo '</form></div><br />';
 
@@ -72,7 +72,7 @@ if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
 
    $sql = $sql . "trandate >='" . $SQL_FromDate . "' AND trandate <= '" . $SQL_ToDate . "'";
 	if  ($_POST['TransType']!='All')  {
-		$sql .= " AND type = " . $_POST['TransType'];
+		$sql .= " AND type = '" . $_POST['TransType'] . "'";
 	}
 	$sql .=  " ORDER BY id";
 
@@ -82,17 +82,17 @@ if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
 
    echo '<table cellpadding=2 class=selection>';
 
-   $tableheader = "<tr>
-			<th>" . _('Type') . "</th>
-			<th>" . _('Number') . "</th>
-			<th>" . _('Supp Ref') . "</th>
-			<th>" . _('Date') . "</th>
-			<th>" . _('Supplier') . "</th>
-			<th>" . _('Comments') . "</th>
-			<th>" . _('Due Date') . "</th>
-			<th>" . _('Ex Rate') . "</th>
-			<th>" . _('Amount') . "</th>
-			<th>" . _('Currency') . '</th></tr>';
+   $tableheader = '<tr>
+			<th>' . _('Type') . '</th>
+			<th>' . _('Number') . '</th>
+			<th>' . _('Supp Ref') . '</th>
+			<th>' . _('Date') . '</th>
+			<th>' . _('Supplier') . '</th>
+			<th>' . _('Comments') . '</th>
+			<th>' . _('Due Date') . '</th>
+			<th>' . _('Ex Rate') . '</th>
+			<th>' . _('Amount') . '</th>
+			<th>' . _('Currency') . '</th></tr>';
 	echo $tableheader;
 
 	$RowCounter = 1;
@@ -108,7 +108,7 @@ if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
 			$k++;
 		}
 
-		printf ("<td>%s</td>
+		printf ('<td>%s</td>
 			<td>%s</td>
 			<td>%s</td>
 			<td>%s</td>
@@ -117,7 +117,7 @@ if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
 			<td>%s</td>
 			<td class=number>%s</td>
 			<td class=number>%s</td>
-			<td>%s</td></tr>",
+			<td>%s</td></tr>',
 			$myrow['typename'],
 			$myrow['transno'],
 			$myrow['suppreference'],

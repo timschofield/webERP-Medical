@@ -141,7 +141,7 @@ if (isset($_POST['SupplierID']) and empty($_POST['TenderType']) and empty($_POST
 	if (isset($_SESSION['offer'])) {
 		unset($_SESSION['offer']);
 	}
-	echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . "?" . SID . ">";
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/supplier.png" title="' .
 		_('Tenders') . '" alt="" />' . ' ' . _('Create or View Offers from') . ' '.$Supplier.'</p>';
@@ -152,7 +152,7 @@ if (isset($_POST['SupplierID']) and empty($_POST['TenderType']) and empty($_POST
 	echo '<option value=2>'._('Create a new offer from').' '.$Supplier .'</option>';
 	echo '<option value=3>'._('View any open tenders without an offer from').' '.$Supplier .'</option>';
 	echo '</select></td></tr>';
-	echo '<input type=hidden name=SupplierID value="'.$_POST['SupplierID'].'"';
+	echo '<input type=hidden name=SupplierID value="'.$_POST['SupplierID'].'" />';
 	echo '<tr><td colspan=2><div class=centre><input type="submit" name="submit" value="' . _('Select') . '"></div></td></tr>';
 	echo '</table></form>';
 }

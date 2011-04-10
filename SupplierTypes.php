@@ -186,17 +186,17 @@ while ($myrow = DB_fetch_row($result)) {
 		$k=1;
 	}
 
-	printf("
+	printf('
 		<td>%s</td>
 		<td>%s</td>
-		<td><a href='%sSelectedType=%s'>" . _('Edit') . "</td>
-		<td><a href='%sSelectedType=%s&delete=yes' onclick=\"return confirm('" .
-			_('Are you sure you wish to delete this Supplier Type?') . "');\">" . _('Delete') . "</td>
-		</tr>",
+		<td><a href="%sSelectedType=%s">' . _('Edit') . '</td>
+		<td><a href="%sSelectedType=%s&delete=yes" onclick=\'return confirm("' .
+			_('Are you sure you wish to delete this Supplier Type?') . '");\'>' . _('Delete') . '</td>
+		</tr>',
 		$myrow[0],
 		$myrow[1],
-		$_SERVER['PHP_SELF'] . '?' . SID, $myrow[0],
-		$_SERVER['PHP_SELF'] . '?' . SID, $myrow[0]);
+		$_SERVER['PHP_SELF'] , $myrow[0],
+		$_SERVER['PHP_SELF'] , $myrow[0]);
 	}
 	//END WHILE LIST LOOP
 	echo '</table>';
@@ -209,7 +209,7 @@ if (isset($SelectedType)) {
 }
 if (! isset($_GET['delete'])) {
 
-	echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . '?' . SID . '>';
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<br /><table class=selection>'; //Main table
 	echo '<td>'; // First column
@@ -230,8 +230,8 @@ if (! isset($_GET['delete'])) {
 		$_POST['typeid'] = $myrow['typeid'];
 		$_POST['typename']  = $myrow['typename'];
 
-		echo "<input type=hidden name='SelectedType' VALUE=" . $SelectedType . ">";
-		echo "<input type=hidden name='typeid' VALUE=" . $_POST['typeid'] . ">";
+		echo '<input type=hidden name="SelectedType" VALUE="' . $SelectedType . '" />';
+		echo '<input type=hidden name="typeid" VALUE="' . $_POST['typeid'] . '" />';
 
 		// We dont allow the user to change an existing type code
 
@@ -242,7 +242,7 @@ if (! isset($_GET['delete'])) {
 	if (!isset($_POST['typename'])) {
 		$_POST['typename']='';
 	}
-	echo "<tr><td>" . _('Type Name') . ":</td><td><input type='Text' name='typename' value='" . $_POST['typename'] . "'></td></tr>";
+	echo '<tr><td>' . _('Type Name') . ':</td><td><input type="Text" name="typename2 value="' . $_POST['typename'] . '"></td></tr>';
 
 	echo '<tr><td colspan=2><p><div class="centre"><input type=submit name=submit VALUE="' . _('Accept') . '"></div>';
 

@@ -187,7 +187,7 @@ if (isset($_POST['PrintPDF'])) {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Purchase') . '" alt="" />' . ' ' . _('Supplier Price List') . '</p>';
 	echo '<div class="page_help_text">' . _('View the Price List from supplier') . '</div><br>';
 
-	echo '<br/><form action=' . $_SERVER['PHP_SELF'] . " method='post'><table>";
+	echo '<br/><form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	$sql = "SELECT supplierid,suppname FROM `suppliers`";

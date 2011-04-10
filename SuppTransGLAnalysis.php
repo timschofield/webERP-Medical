@@ -156,12 +156,10 @@ $result = DB_query($sql, $db);
 echo '<option value=""></option>';
 while ($myrow = DB_fetch_array($result)) {
 	if ($myrow['accountcode'] == $_POST['AcctSelection']) {
-		echo '<option selected VALUE=';
+		echo '<option selected VALUE="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
 	} else {
-		echo '<option VALUE=';
+		echo '<option VALUE="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
 	}
-	echo $myrow['accountcode'] . '>' . $myrow['accountcode'] . ' - ' . $myrow['accountname'];
-	echo '</option>';
 }
 
 echo '</select>
