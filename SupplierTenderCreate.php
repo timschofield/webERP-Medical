@@ -381,7 +381,7 @@ if (!isset($_SESSION['tender']) or isset($_POST['LookupDeliveryAddress']) or $Sh
 		echo '<tr><td>' . $Supplier->SupplierCode . '</td>';
 		echo '<td>' . $Supplier->SupplierName . '</td>';
 		echo '<td>' . $Supplier->EmailAddress . '</td>';
-		echo "<td><a href='" . $_SERVER['PHP_SELF'] . "?" . SID . "DeleteSupplier=" . $Supplier->SupplierCode . "'>" . _('Delete') . "</a></td></tr>";
+		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?DeleteSupplier=' . $Supplier->SupplierCode . '">' . _('Delete') . '</a></td></tr>';
 	}
 	echo '</table></td>';
 	/* Item Details
@@ -408,7 +408,7 @@ if (!isset($_SESSION['tender']) or isset($_POST['LookupDeliveryAddress']) or $Sh
 			echo '<td>'.$LineItems->ItemDescription.'</td>';
 			echo '<td class="number">' . number_format($LineItems->Quantity,$LineItems->DecimalPlaces).'</td>';
 			echo '<td>'.$LineItems->Units.'</td>';
-			echo "<td><a href='" . $_SERVER['PHP_SELF'] . "?" . SID . "DeleteItem=" . $LineItems->LineNo . "'>" . _('Delete') . "</a></td></tr>";
+			echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?DeleteItem=' . $LineItems->LineNo . '">' . _('Delete') . '</a></td></tr>';
 			echo '</tr>';
 		}
 	}
@@ -488,28 +488,28 @@ if (!isset($_POST['PageOffset'])) {
 }
 
 if (isset($_POST['Suppliers'])) {
-	echo "<form action='" . $_SERVER['PHP_SELF'] . '?' . SID . "' method=post>";
+	echo '<form action="' . $_SERVER['PHP_SELF'] . ' method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') .
 		'" alt="" />' . ' ' . _('Search for Suppliers') . '</p>
 		<table cellpadding=3 colspan=4 class=selection><tr><td>' . _('Enter a partial Name') . ':</font></td><td>';
 	if (isset($_POST['Keywords'])) {
-		echo "<input type='Text' name='Keywords' value='" . $_POST['Keywords'] . "' size=20 maxlength=25>";
+		echo '<input type="Text" name="Keywords" value="' . $_POST['Keywords'] . '" size=20 maxlength=25>';
 	} else {
-		echo "<input type='Text' name='Keywords' size=20 maxlength=25>";
+		echo '<input type="Text" name="Keywords" size=20 maxlength=25>';
 	}
 	echo '</td><td><b>' . _('OR') . '</b></font></td><td>' . _('Enter a partial Code') . ':</font></td><td>';
 	if (isset($_POST['SupplierCode'])) {
-		echo "<input type='Text' name='SupplierCode' value='" . $_POST['SupplierCode'] . "' size=15 maxlength=18>";
+		echo '<input type="text" name="SupplierCode" value="' . $_POST['SupplierCode'] . '" size=15 maxlength=18>';
 	} else {
-		echo "<input type='Text' name='SupplierCode' size=15 maxlength=18>";
+		echo '<input type="Text" name="SupplierCode" size=15 maxlength=18>';
 	}
-	echo "</td></tr></table><br><div class='centre'><input type=submit name='SearchSupplier' value='" . _('Search Now') . "'></div>";
+	echo '</td></tr></table><br><div class="centre"><input type=submit name="SearchSupplier" value="' . _('Search Now') . '"></div>';
 	echo '</form>';
 }
 
 if (isset($_POST['SearchSupplier'])) {
-	echo "<form action='" . $_SERVER['PHP_SELF'] . '?' . SID . "' method=post>";
+	echo '<form action="' . $_SERVER['PHP_SELF'] . ' method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	$ListCount = DB_num_rows($result);
 	$ListPageMax = ceil($ListCount / $_SESSION['DisplayRecordsMax']);
@@ -524,7 +524,7 @@ if (isset($_POST['SearchSupplier'])) {
 		}
 	}
 	if ($ListPageMax > 1) {
-		echo "<p>&nbsp;&nbsp;" . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
+		echo '<p>&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
 		echo '<select name="PageOffset">';
 		$ListPage = 1;
 		while ($ListPage <= $ListPageMax) {
@@ -541,18 +541,18 @@ if (isset($_POST['SearchSupplier'])) {
 			<input type=submit name="Next" value="' . _('Next') . '">';
 		echo '<p>';
 	}
-	echo "<input type=hidden name='Search' value='" . _('Search Now') . "'>";
+	echo '<input type=hidden name="Search" value="' . _('Search Now') . '">';
 	echo '<br><br>';
-	echo '<br><table cellpadding=2 colspan=7';
-	$tableheader = "<tr>
-  		<th>" . _('Code') . "</th>
-		<th>" . _('Supplier Name') . "</th>
-		<th>" . _('Currency') . "</th>
-		<th>" . _('Address 1') . "</th>
-		<th>" . _('Address 2') . "</th>
-		<th>" . _('Address 3') . "</th>
-		<th>" . _('Address 4') . "</th>
-		</tr>";
+	echo '<br><table cellpadding=2 colspan=7>';
+	$tableheader = '<tr>
+  		<th>' . _('Code') . '</th>
+		<th>' . _('Supplier Name') . '</th>
+		<th>' . _('Currency') . '</th>
+		<th>' . _('Address 1') . '</th>
+		<th>' . _('Address 2') . '</th>
+		<th>' . _('Address 3') . '</th>
+		<th>' . _('Address 4') . '</th>
+		</tr>';
 	echo $tableheader;
 	$j = 1;
 	$k = 0; //row counter to determine background colour
@@ -568,14 +568,14 @@ if (isset($_POST['SearchSupplier'])) {
 			echo '<tr class="OddTableRows">';
 			$k = 1;
 		}
-		echo "<td><input type=submit name='SelectedSupplier' value='".$myrow['supplierid']."'</td>
-			<td>".$myrow['suppname']."</td>
-			<td>".$myrow['currcode']."</td>
-			<td>".$myrow['address1']."</td>
-			<td>".$myrow['address2']."</td>
-			<td>".$myrow['address3']."</td>
-			<td>".$myrow['address4']."</td>
-			</tr>";
+		echo '<td><input type=submit name="SelectedSupplier" value="'.$myrow['supplierid'].'" /></td>
+			<td>'.$myrow['suppname'].'</td>
+			<td>'.$myrow['currcode'].'</td>
+			<td>'.$myrow['address1'].'</td>
+			<td>'.$myrow['address2'].'</td>
+			<td>'.$myrow['address3'].'</td>
+			<td>'.$myrow['address4'].'</td>
+			</tr>';
 		$RowIndex = $RowIndex + 1;
 		//end of page full new headings if
 	}
@@ -607,16 +607,16 @@ if (isset($_POST['Items'])) {
 	if (!isset($_POST['StockCat'])) {
 		$_POST['StockCat'] = "";
 	}
-	if ($_POST['StockCat'] == "All") {
-		echo '<option selected value="All">' . _('All');
+	if ($_POST['StockCat'] == 'All') {
+		echo '<option selected value="All">' . _('All') . '</option>';
 	} else {
-		echo '<option value="All">' . _('All');
+		echo '<option value="All">' . _('All') . '</option>';
 	}
 	while ($myrow1 = DB_fetch_array($result)) {
 		if ($myrow1['categoryid'] == $_POST['StockCat']) {
-			echo '<option selected VALUE="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'];
+			echo '<option selected VALUE="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 		} else {
-			echo '<option value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'];
+			echo '<option value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 		}
 	}
 	echo '</select>';
@@ -641,7 +641,7 @@ if (isset($_POST['Items'])) {
 }
 
 if (isset($_POST['Search'])){  /*ie seach for stock items */
-	echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . "?" . SID . ">";
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] .'">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/supplier.png" title="' .
 		_('Tenders') . '" alt="" />' . ' ' . _('Select items required on this tender').'</p>';
@@ -754,15 +754,15 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 
 	if (isset($SearchResult)) {
 
-		echo "<table cellpadding=1 colspan=7>";
+		echo '<table cellpadding=1 colspan=7>';
 
-		$tableheader = "<tr>
-			<th>" . _('Code')  . "</th>
-			<th>" . _('Description') . "</th>
-			<th>" . _('Units') . "</th>
-			<th>" . _('Image') . "</th>
-			<th>" . _('Quantity') . "</th>
-			</tr>";
+		$tableheader = '<tr>
+			<th>' . _('Code')  . '</th>
+			<th>' . _('Description') . '</th>
+			<th>' . _('Units') . '</th>
+			<th>' . _('Image') . '</th>
+			<th>' . _('Quantity') . '</th>
+			</tr>';
 		echo $tableheader;
 
 		$j = 1;
@@ -790,13 +790,13 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 
 			$uom=$myrow['units'];
 
-			echo "<td>".$myrow['stockid']."</td>
-					<td>".$myrow['description']."</td>
-					<td>".$uom."</td>
-					<td>".$ImageSource."</td>
-					<td><input class='number' type='text' size=6 value=0 name='qty".$myrow['stockid']."'></td>
-					<input type='hidden' size=6 value=".$uom." name='uom".$myrow['stockid']."'>
-					</tr>";
+			echo '<td>'.$myrow['stockid'].'</td>
+					<td>'.$myrow['description'].'</td>
+					<td>'.$uom.'</td>
+					<td>'.$ImageSource.'</td>
+					<td><input class="number" type="text" size=6 value=0 name="qty"'.$myrow['stockid'].'"></td>
+					<input type="hidden" size=6 value="'.$uom.'" name="uom"'.$myrow['stockid'].'">
+					</tr>';
 
 			$PartsDisplayed++;
 			if ($PartsDisplayed == $Maximum_Number_Of_Parts_To_Show){
