@@ -54,7 +54,6 @@ if ($_SESSION['geocode_integration'] == 1 AND $_SESSION['CustomerID'] != "") {
 	echo '<script src="http://maps.google.com/maps?file=api&v=2&key=' . $api_key . '"';
 	echo ' type="text/javascript"></script>';
 	echo ' <script type="text/javascript">';
-	echo '	//<![CDATA[ ';
 	echo 'function load() {
 		if (GBrowserIsCompatible()) {
 			var map = new GMap2(document.getElementById("map"));
@@ -69,7 +68,6 @@ if ($_SESSION['geocode_integration'] == 1 AND $_SESSION['CustomerID'] != "") {
 		marker.openInfoWindowHtml(WINDOW_HTML);
 		}
 		}
-		//]]>
 		</script>';
 	echo '<body onload="load()" onunload="GUnload()">';
 }
@@ -301,9 +299,9 @@ if ($_POST['Select'] != '' OR ($_SESSION['CustomerID'] != '' AND !isset($_POST['
 	echo '</td>';
 	echo '</tr></table><br />';
 } else {
-	echo "<table width=90%><tr><th width=33%>" . _('Customer Inquiries') . "</th>
-			<th width=33%>" . _('Customer Transactions') . "</th>
-			<th width=33%>" . _('Customer Maintenance') . "</th></tr>";
+	echo '<table width=90%><tr><th width=33%>' . _('Customer Inquiries') . '</th>
+			<th width=33%>' . _('Customer Transactions') . '</th>
+			<th width=33%>' . _('Customer Maintenance') . '</th></tr>';
 	echo '<tr><td class="select">';
 	echo '</td><td class="select">';
 	echo '</td><td class="select">';
@@ -318,8 +316,8 @@ if (strlen($msg)>1){
    prnMsg($msg, 'info');
 }
 echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Search for Customers').'</p>';
-echo "<table cellpadding=3 colspan=4 class=selection>";
-echo "<tr><td colspan=2>" . _('Enter a partial Name') . ":</td><td>";
+echo '<table cellpadding=3 colspan=4 class=selection>';
+echo '<tr><td colspan=2>' . _('Enter a partial Name') . ':</td><td>';
 if (isset($_POST['Keywords'])) {
 	echo '<input type="Text" name="Keywords" value="' . $_POST['Keywords'] . '" size=20 maxlength=25>';
 } else {
@@ -432,9 +430,9 @@ if (isset($result)) {
 				$_POST['PageOffset'] = $_POST['PageOffset'] - 1;
 			}
 		}
-		echo "<input type=\"hidden\" name=\"PageOffset\" value=\"" . $_POST['PageOffset'] . "\"/>";
+		echo '<input type="hidden" name="PageOffset" value="' . $_POST['PageOffset'] . '" />';
 		if ($ListPageMax > 1) {
-			echo "<p><div class=centre>&nbsp;&nbsp;" . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
+			echo '<p><div class=centre>&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
 			echo '<select name="PageOffset1">';
 			$ListPage = 1;
 			while ($ListPage <= $ListPageMax) {
@@ -487,13 +485,13 @@ if (isset($result)) {
 				echo '<tr class="OddTableRows">';
 				$k = 1;
 			}
-			echo "<td><font size=1><input type=submit name='Select' value='" . $myrow['debtorno'].' '.$myrow['branchcode'] . "'></font></td>
-				<td><font size=1>" . $myrow['name'] . "</font></td>
-				<td><font size=1>" . $myrow['brname'] . "</font></td>
-				<td><font size=1>" . $myrow['contactname'] . "</font></td>
-				<td><font size=1>" . $myrow['typename'] . "</font></td>
-				<td><font size=1>" . $myrow['phoneno'] . "</font></td>
-				<td><font size=1>" . $myrow['faxno'] . "</font></td></tr>";
+			echo '<td><font size=1><input type=submit name="Select" value="' . $myrow['debtorno'].' '.$myrow['branchcode'] . '"></font></td>
+				<td><font size=1>' . $myrow['name'] . '</font></td>
+				<td><font size=1>' . $myrow['brname'] . '</font></td>
+				<td><font size=1>' . $myrow['contactname'] . '</font></td>
+				<td><font size=1>' . $myrow['typename'] . '</font></td>
+				<td><font size=1>' . $myrow['phoneno'] . '</font></td>
+				<td><font size=1>' . $myrow['faxno'] . '</font></td></tr>';
 			$j++;
 			if ($j == 11 AND ($RowIndex + 1 != $_SESSION['DisplayRecordsMax'])) {
 				$j = 1;
@@ -538,11 +536,11 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 		} else {
 			echo '<tr><td colspan=2>';
 			echo '<table width=45% colspan=2 cellpadding=4>';
-			echo "<tr><th width=33%>" . _('Customer Mapping') . "</th></tr>";
+			echo '<tr><th width=33%>' . _('Customer Mapping') . '</th></tr>';
 			echo '</td><td valign=TOp>'; /* Mapping */
-			echo '<div class="centre"' . _('Mapping is enabled, Map will display below.') . '</div>';
+			echo '<div class="centre">' . _('Mapping is enabled, Map will display below.') . '</div>';
 			echo '<div align="center" id="map" style="width: ' . $map_width . 'px; height: ' . $map_height . 'px"></div><br />';
-			echo "</th></tr></table>";
+			echo '</th></tr></table>';
 		}
 	}
 	// Extended Customer Info only if selected in Configuration
@@ -569,12 +567,12 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 			$DataResult = DB_query($SQL, $db);
 			$myrow = DB_fetch_array($DataResult);
 			// Select some more data about the customer
-			$SQL = "select sum(ovamount+ovgst) as total from debtortrans where debtorno = '" . $_SESSION['CustomerID'] . "' and type !=12";
+			$SQL = "SELECT sum(ovamount+ovgst) AS total FROM debtortrans WHERE debtorno = '" . $_SESSION['CustomerID'] . "' AND type !=12";
 			$Total1Result = DB_query($SQL, $db);
 			$row = DB_fetch_array($Total1Result);
 			echo '<tr><td colspan=2>';
 			echo '<table width=45% colspan=2 cellpadding=4>';
-			echo "<tr><th width=33% colspan=3>" . _('Customer Data') . "</th></tr>";
+			echo '<tr><th width=33% colspan=3>' . _('Customer Data') . '</th></tr>';
 			echo '<tr><td valign=top class=select>'; /* Customer Data */
 			//echo _('Distance to this customer:') . '<b>TBA</b><br />';
 			if ($myrow['lastpaiddate'] == 0) {
@@ -702,12 +700,12 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 			} //END WHILE LIST LOOP
 			echo '</table>';
 		} else {
-			if ($_SESSION['CustomerID'] != "") {
+			if ($_SESSION['CustomerID'] != '') {
 				echo '<br /><div class="centre"><img src="' . $rootpath . '/css/' . $theme . '/images/folder_add.png" title="' . _('Customer Group Notes') . '" alt=""><a href="AddCustomerTypeNotes.php?DebtorNo=' . $_SESSION['CustomerID'] . '">' . ' ' . _('Add New Group Note') . '</a></div><br />';
 			}
 		}
 	}
 }
-echo "<script>defaultControl(document.forms[0].CustCode);</script>";
+echo '<script>defaultControl(document.forms[0].CustCode);</script>';
 include ('includes/footer.inc');
 ?>
