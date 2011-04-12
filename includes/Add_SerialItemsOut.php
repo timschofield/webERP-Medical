@@ -40,7 +40,6 @@ if (isset($_POST['AddBatches'])){
 //		}
 //	}
 
-
 } /*end if the user hit the enter button */
 
 if (isset($_GET['Delete'])){
