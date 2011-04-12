@@ -147,7 +147,7 @@ if (isset($_SESSION['SupplierID'])) {
 		<th width=33%>' . _('Supplier Maintenance') . '</th>
 	</tr>';
 	echo '<tr><td valign=top class="select">'; /* Inquiry Options */
-	echo '<a href=\'$rootpath/SupplierInquiry.php?SupplierID=' . $_SESSION['SupplierID'] . '\'>' . _('Supplier Account Inquiry') . '</a><br>';
+	echo '<a href="' . $rootpath . '/SupplierInquiry.php?SupplierID=' . $_SESSION['SupplierID'] . '">' . _('Supplier Account Inquiry') . '</a><br>';
 	echo '<br>';
 	echo '<br><a href="'.$rootpath.'/PO_SelectOSPurchOrder.php?SelectedSupplier=' . $_SESSION['SupplierID'] . '">' . _('Add / Receive / View Outstanding Purchase Orders') . '</a>';
 	echo '<br><a href="'.$rootpath.'/PO_SelectPurchOrder.php?SelectedSupplier=' . $_SESSION['SupplierID'] . '">' . _('View All Purchase Orders') . '</a><br>';
@@ -156,16 +156,16 @@ if (isset($_SESSION['SupplierID'])) {
 	echo '<br><a href="' . $rootpath . '/Shipt_Select.php?SelectedSupplier=' . $_SESSION['SupplierID'] . '">' . _('Search / Modify / Close Shipments') . '</a>';
 	echo '<br><a href="' . $rootpath . '/SuppPriceList.php?SelectedSupplier=' . $_SESSION['SupplierID'] . '">' . _('Supplier Price List') . '</a>';
 	echo '</td><td valign=top class="select">'; /* Supplier Transactions */
-	echo '<a href=\'$rootpath/PO_Header.php?NewOrder=Yes&SupplierID=' . $_SESSION['SupplierID'] . '\'>' . _('Enter a Purchase Order for This Supplier') . '</a><br>';
-	echo '<a href=\'$rootpath/SupplierInvoice.php?SupplierID=' . $_SESSION['SupplierID'] . '\'>' . _('Enter a Suppliers Invoice') . '</a><br>';
-	echo '<a href=\'$rootpath/SupplierCredit.php?New=true&SupplierID=' . $_SESSION['SupplierID'] . '\'>' . _('Enter a Suppliers Credit Note') . '</a><br>';
-	echo '<a href=\'$rootpath/Payments.php?SupplierID=' . $_SESSION['SupplierID'] . '\'>' . _('Enter a Payment to, or Receipt from the Supplier') . '</a><br>';
+	echo '<a href="' . $rootpath . '/PO_Header.php?NewOrder=Yes&SupplierID=' . $_SESSION['SupplierID'] . '">' . _('Enter a Purchase Order for This Supplier') . '</a><br>';
+	echo '<a href="' . $rootpath . '/SupplierInvoice.php?SupplierID=' . $_SESSION['SupplierID'] . '">' . _('Enter a Suppliers Invoice') . '</a><br>';
+	echo '<a href="' . $rootpath . '/SupplierCredit.php?New=true&SupplierID=' . $_SESSION['SupplierID'] . '">' . _('Enter a Suppliers Credit Note') . '</a><br>';
+	echo '<a href="' . $rootpath . '/Payments.php?SupplierID=' . $_SESSION['SupplierID'] . '">' . _('Enter a Payment to, or Receipt from the Supplier') . '</a><br>';
 	echo '<br>';
 	echo '<br><a href="'.$rootpath.'/ReverseGRN.php?&SupplierID=' . $_SESSION['SupplierID'] . '">' . _('Reverse an Outstanding Goods Received Note (GRN)') . '</a>';
 	echo '</td><td valign=top class="select">'; /* Supplier Maintenance */
 	echo '<a href="' . $rootpath . '/Suppliers.php?">' . _('Add a New Supplier') . '</a><br>';
-	echo '<a href=\'$rootpath/Suppliers.php?SupplierID=' . $_SESSION['SupplierID'] . '\'>' . _('Modify Or Delete Supplier Details') . '</a>';
-	echo '<br><a href=\'$rootpath/SupplierContacts.php?&SupplierID=' . $_SESSION['SupplierID'] . '\'>' . _('Add/Modify/Delete Supplier Contacts') . '</a>';
+	echo '<a href="' . $rootpath . '/Suppliers.php?SupplierID=' . $_SESSION['SupplierID'] . '">' . _('Modify Or Delete Supplier Details') . '</a>';
+	echo '<br><a href="' . $rootpath . '/SupplierContacts.php?&SupplierID=' . $_SESSION['SupplierID'] . '">' . _('Add/Modify/Delete Supplier Contacts') . '</a>';
 	echo '<br>';
 	echo '<br><a href="'.$rootpath.'/Shipments.php?NewShipment=Yes">' . _('Set Up A New Shipment') . '</a>';
 	echo '<br><a href="'.$rootpath.'/SuppLoginSetup.php">' . _('Supplier Login Configuration') . '</a>';
