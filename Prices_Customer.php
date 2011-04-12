@@ -29,7 +29,7 @@ if (!isset($Item) OR !isset($_SESSION['CustomerID']) OR $_SESSION['CustomerID']=
 	prnMsg( _('A customer must be selected from the customer selection screen') . ', '
 		. _('then an item must be selected before this page is called') . '. '
 			. _('The product selection page should call this page with a valid product code'),'info');
-	echo '<hr>';
+	echo '<br />';
 	include('includes/footer.inc');
 	exit;
 }
@@ -299,17 +299,17 @@ if (DB_num_rows($result) == 0) {
 		} else {
 			$EndDateDisplay = ConvertSQLDate($myrow['enddate']);
 		}
-		echo "<tr bgcolor='#CCCCCC'>
-		<td class=number>".number_format($myrow['price'],2)."</td>
-		<td>".$Branch."</td>
-		<td>".$myrow['units']."</td>
-		<td class=number>".$myrow['conversionfactor']."</td>
-		<td>".ConvertSQLDate($myrow['startdate'])."</td>
-		<td>".$EndDateDisplay."</td>
- 		<td><a href='".$_SERVER['PHP_SELF']."?Item=".$Item."&Price=".$myrow['price']."&Branch=".$myrow['branchcode'].
-			"&StartDate=".$myrow['startdate']."&EndDate=".$myrow['enddate']."&Edit=1'>" . _('Edit') . "</td>
-		<td><a href='".$_SERVER['PHP_SELF']."?Item=".$Item."&Branch=".$myrow['branchcode']."&StartDate=".$myrow['startdate'].
-			"&EndDate=".$myrow['enddate']."&delete=yes'>" . _('Delete') . "</td></tr>";
+		echo '<tr bgcolor="#CCCCCC">
+		<td class=number>'.number_format($myrow['price'],2).'</td>
+		<td>'.$Branch.'</td>
+		<td>'.$myrow['units'].'</td>
+		<td class=number>'.$myrow['conversionfactor'].'</td>
+		<td>'.ConvertSQLDate($myrow['startdate']).'</td>
+		<td>'.$EndDateDisplay.'</td>
+ 		<td><a href="'.$_SERVER['PHP_SELF'].'?Item='.$Item.'&Price='.$myrow['price'].'&Branch='.$myrow['branchcode'].
+			'&StartDate='.$myrow['startdate'].'&EndDate='.$myrow['enddate'].'&Edit=1">' . _('Edit') . '</td>
+		<td><a href="'.$_SERVER['PHP_SELF'].'?Item='.$Item.'&Branch='.$myrow['branchcode'].'&StartDate='.$myrow['startdate'].
+			'&EndDate='.$myrow['enddate'].'&delete=yes">' . _('Delete') . '</td></tr>';
 	}
 //END WHILE LIST LOOP
 }
@@ -395,7 +395,7 @@ $sql = "SELECT custbranch.branchcode,
 $result = DB_query($sql, $db);
 echo '<table class=selection>';
 echo '<tr><td>' . _('Branch') . ':</td>';
-echo '<td><select name="Branch"';
+echo '<td><select name="Branch">';
 while ($myrow=DB_fetch_array($result)) {
 	$CustomerCurrency=$myrow['currency'];
 	if ($myrow['branchcode']==$_POST['branch']) {
@@ -404,7 +404,7 @@ while ($myrow=DB_fetch_array($result)) {
 		echo '<option value='.$myrow['branchcode'].'>'.$myrow['brname'].'</option>';
 	}
 }
-echo '></td></tr>';
+echo '</td></tr>';
 echo '<tr><td>' . _('Currency') .':</td><td>' . $CustomerCurrency.'</td></tr>';
 echo '<tr><td>' . _('Price Effective From Date') . ':</td>
 	                         <td><input type="Text" name="StartDate" class=date alt='.$_SESSION['DefaultDateFormat'].

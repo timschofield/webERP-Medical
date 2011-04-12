@@ -263,7 +263,7 @@ if (isset($_POST['submit'])) {
 	$DbgMsg = _('The SQL used to delete the report headers was');
 	$result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
-	echo "<p>" . _('Report Deleted') . '<p>';
+	echo '<p>' . _('Report Deleted') . '<p>';
 	unset($SelectedReport);
 	include ('includes/footer.inc');
 	exit;

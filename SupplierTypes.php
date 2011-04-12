@@ -90,7 +90,7 @@ if (isset($_POST['submit'])) {
 					VALUES ('" . $_POST['typename'] . "')";
 
 
-			$msg = _('Supplier type') . ' ' . $_POST["typename"] .  ' ' . _('has been created');
+			$msg = _('Supplier type') . ' ' . $_POST['typename'] .  ' ' . _('has been created');
 			$checkSql = "SELECT count(typeid)
 			     FROM suppliertype";
 			$result = DB_query($checkSql, $db);
@@ -170,10 +170,10 @@ if (!isset($SelectedType)){
 	$result = DB_query($sql,$db);
 
 	echo '<table class=selection>';
-	echo "<tr>
-		<th>" . _('Type ID') . "</th>
-		<th>" . _('Type Name') . "</th>
-		</tr>";
+	echo '<tr>
+		<th>' . _('Type ID') . '</th>
+		<th>' . _('Type Name') . '</th>
+		</tr>';
 
 $k=0; //row colour counter
 
@@ -209,7 +209,7 @@ if (isset($SelectedType)) {
 }
 if (! isset($_GET['delete'])) {
 
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '>';
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<br /><table class=selection>'; //Main table
 	echo '<td>'; // First column

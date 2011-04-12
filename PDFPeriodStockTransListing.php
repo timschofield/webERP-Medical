@@ -27,21 +27,21 @@ if (!isset($_POST['FromDate'])){
 		prnMsg($msg,'error');
 	}
 
-	 echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . '>';
+	 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	 echo '<table class=selection>';
 	 echo '<tr>
-				<td>' . _('Enter the date from which the transactions are to be listed') . ":</td>
-				<td><input type=text name='FromDate' maxlength=10 size=10 class=date alt='" . $_SESSION['DefaultDateFormat'] . "' value='" . Date($_SESSION['DefaultDateFormat']) . "'></td>
-			</tr>";
+				<td>' . _('Enter the date from which the transactions are to be listed') . ':</td>
+				<td><input type=text name="FromDate" maxlength=10 size=10 class=date alt="' . $_SESSION['DefaultDateFormat'] . '" value="' . Date($_SESSION['DefaultDateFormat']) . '"></td>
+			</tr>';
 	 echo '<tr>
-				<td>' . _('Enter the date to which the transactions are to be listed') . ":</td>
-				<td><input type=text name='ToDate' maxlength=10 size=10 class=date alt='" . $_SESSION['DefaultDateFormat'] . "' value='" . Date($_SESSION['DefaultDateFormat']) . "'></td>
-			</tr>";
+				<td>' . _('Enter the date to which the transactions are to be listed') . ':</td>
+				<td><input type=text name="ToDate" maxlength=10 size=10 class=date alt="' . $_SESSION['DefaultDateFormat'] . '" value="' . Date($_SESSION['DefaultDateFormat']) . '"></td>
+			</tr>';
 
 	echo '<tr><td>' . _('Transaction type') . '</td><td>';
 
-	echo "<select name='TransType'>";
+	echo '<select name="TransType">';
 
 	echo '<option value=10>' . _('Sales Invoice').'</option>';
 	echo '<option value=11>' . _('Sales Credit Note').'</option>';
@@ -53,24 +53,24 @@ if (!isset($_POST['FromDate'])){
 
 	 echo '</select></td></tr>';
 
-	$sql = "SELECT loccode, locationname FROM locations";
+	$sql = 'SELECT loccode, locationname FROM locations';
 	$resultStkLocs = DB_query($sql, $db);
 
-	echo '<tr><td>' . _('For Stock Location') . ":</td>
-		<td><select name='StockLocation'> ";
-	echo "<option VALUE='All'>" . _('All');
+	echo '<tr><td>' . _('For Stock Location') . ':</td>
+		<td><select name="StockLocation"> ';
+	echo '<option VALUE="All">' . _('All') . '</option>';
 	while ($myrow=DB_fetch_array($resultStkLocs)){
 		if (isset($_POST['StockLocation']) AND $_POST['StockLocation']!='All'){
 			if ($myrow['loccode'] == $_POST['StockLocation']){
-				echo "<option selected VALUE='" . $myrow['loccode'] . "'>" . $myrow['locationname'];
+				echo '<option selected VALUE="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			} else {
-				echo "<option VALUE='" . $myrow['loccode'] . "'>" . $myrow['locationname'];
+				echo '<option VALUE="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			}
 		} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
-			echo "<option selected VALUE='" . $myrow['loccode'] . "'>" . $myrow['locationname'];
+			echo '<option selected VALUE="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			$_POST['StockLocation']=$myrow['loccode'];
 		} else {
-			echo "<option VALUE='" . $myrow['loccode'] . "'>" . $myrow['locationname'];
+			echo '<option VALUE="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	}
 	echo '</select></td></tr>';
@@ -174,18 +174,6 @@ while ($myrow=DB_fetch_array($result)){
 
 $YPos-=$line_height;
 
-/* UldisN
-$pdfcode = $pdf->output();
-$len = strlen($pdfcode);
-header('Content-type: application/pdf');
-header('Content-Length: ' . $len);
-header('Content-Disposition: inline; filename=ChequeListing.pdf');
-header('Expires: 0');
-header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-header('Pragma: public');
-
-$pdf->stream();
-*/
 $ReportFileName = $_SESSION['DatabaseName'] . '_StockTransListing_' . date('Y-m-d').'.pdf';
 $pdf->OutputD($ReportFileName);//UldisN
 $pdf->__destruct(); //UldisN

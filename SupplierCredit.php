@@ -277,7 +277,7 @@ echo '<tr><td><font color=blue><b>' . $_SESSION['SuppTrans']->SupplierID . ' - '
 	  </tr>
 	  </table>';
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . ' method="post" name=form1>';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post" name=form1>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<br /><table class=selection>';
