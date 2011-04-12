@@ -43,32 +43,14 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/c
 //- Only one entry in securitygroups AND the tokenid of this entry == 1
 
 //First get all available security role ID's'
-$query_roles = "SELECT secroleid FROM securityroles";
-$result_roles = DB_query($query_roles, $db);
-
-//Check for every security role if they have only one entry in securitygroups, if so check if the tokenid == 1, then store in selection box
-//Then they can be put in the $SecurityRoles array for the selection box;
-$SecurityRoles = array();
-while ($myroles = DB_fetch_array($result_roles)){
-
-	$sqltoken = "SELECT tokenid FROM securitygroups WHERE secroleid = '" . $myroles['secroleid'] ."'";
-	$result = DB_query($sqltoken,$db);
-	$Number_roles = DB_num_rows($result);
-	$myrow=DB_fetch_array($result);
-
-	if ($Number_roles == 1 && $myrow['tokenid']==1 ) {
-
-		$sql = "SELECT secroleid, secrolename FROM securityroles WHERE secroleid = '" . $myroles['secroleid'] ."'";
-		$Sec_Result = DB_query($sql, $db);
-		// Now load it into an aray using Key/Value pairs
-		while( $Sec_row = DB_fetch_row($Sec_Result) ) {
-		$SecurityRoles[$Sec_row[0]] = $Sec_row[1];
-		}
-		DB_free_result($Sec_Result);
-
-	}
-
+//First get all available security role ID's'
+$sql = "SELECT secroleid, secrolename FROM securityroles WHERE secrolename = 'Customer Log On Only'";
+$Sec_Result = DB_query($sql, $db);
+// Now load it into an aray using Key/Value pairs
+while( $Sec_row = DB_fetch_row($Sec_Result) ) {
+	$SecurityRoles[$Sec_row[0]] = $Sec_row[1];
 }
+DB_free_result($Sec_Result);
 
 if (isset($_GET['SelectedUser'])){
 	$SelectedUser = $_GET['SelectedUser'];

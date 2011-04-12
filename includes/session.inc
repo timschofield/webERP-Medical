@@ -13,7 +13,7 @@ if (!file_exists($PathPrefix . 'config.php')){
 	header('Location:' . $rootpath . '/install/index.php');
 }
 include($PathPrefix . 'config.php');
-$DBVersion=79;
+$DBVersion=80;
 if (isset($SessionSavePath)){
 	session_save_path($SessionSavePath);
 }
@@ -264,14 +264,11 @@ if (!is_array($_SESSION['AllowedPageSecurityTokens']) AND !isset($AllowAnyone)) 
 	exit;
 }
 
-/* Nasty kludge to allow Supplier only logins as well as Customer logins */
-if (count($_SESSION['AllowedPageSecurityTokens'])==1 and $_SESSION['AllowedPageSecurityTokens'][0]==9 and $PageSecurity==1){
-	$_SESSION['AllowedPageSecurityTokens'][0]=1;
+if (in_array(9,$_SESSION['AllowedPageSecurityTokens']) and $PageSecurity==0 and count($_SESSION['AllowedPageSecurityTokens'])==2){
 	$SupplierLogin=1;
 } else {
 	$SupplierLogin=0;
 }
-
 
 if (!isset($AllowAnyone)){
 	if ((!in_array($PageSecurity, $_SESSION['AllowedPageSecurityTokens']) OR !isset($PageSecurity))) {
@@ -292,10 +289,6 @@ if (!isset($AllowAnyone)){
 		exit;
 	}
  }
-/* Nasty kludge to allow Supplier only logins as well as Customer logins  - .... hmmmmm some work to do here then! */
-if ($SupplierLogin==1) {
-	$_SESSION['AllowedPageSecurityTokens'][0]=9;
-}
 
 
 if (in_array(15, $_SESSION['AllowedPageSecurityTokens'])) { /*System administrator login */
