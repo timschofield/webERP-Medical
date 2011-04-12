@@ -234,7 +234,7 @@ if (isset($_POST['EnterLines'])){
 		$_POST['RePrint'] = 0;
 	}
 
-	echo '<meta http-equiv="Refresh" content="0; url="' . $rootpath . '/PO_Items.php?' . SID . 'identifier='.$identifier. '">';
+	echo "<meta http-equiv='Refresh' content='0; url=" . $rootpath . '/PO_Items.php?' . SID . 'identifier='.$identifier. "'>";
 	echo '<p>';
 	prnMsg(_('You should automatically be forwarded to the entry of the purchase order line items page') . '. ' .
 		_('If this does not happen') . ' (' . _('if the browser does not support META Refresh') . ') ' .
@@ -513,7 +513,9 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 		_('Purchase Order') . '" alt="">' . ' ' . _('Purchase Order: Select Supplier') . '';
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier.'" method="post" name="choosesupplier">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<input type="hidden" name="SuppliersReturned" value="' . $SuppliersReturned .'" />';
+	if (isset($SuppliersReturned )) {
+		echo '<input type="hidden" name="SuppliersReturned" value="' . $SuppliersReturned .'" />';
+	}
 
 	echo '<table cellpadding=3 colspan=4 class=selection>
 	<tr>
@@ -667,7 +669,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 													$Qty,
 													$Qty*$PurchItemRow['price']);
 
-		echo '<meta http-equiv="Refresh" content=0; url="' . $rootpath . '/PO_Items.php?' . SID . 'identifier='.$identifier. '">';
+		echo '<meta http-equiv="Refresh" content=0; url="' . $rootpath . '/PO_Items.php?identifier='.$identifier. '">';
 	}
 
 	/*Set up form for entry of order header stuff */
@@ -834,7 +836,6 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	echo '<table width=80%>
 		<tr>
 		<th><font color=blue size=4><b>' . _('Warehouse Info') . '</b></font></th>
-			<th><font color=blue size=4><b>' . _('Delivery To') . '</b></font></th>
 			<th><font color=blue size=4><b>' . _('Supplier Info') . '</b></font></th>
 		</tr>
 		<tr><td valign=top>';
@@ -849,7 +850,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	$LocnResult = DB_query($sql,$db);
 
 	while ($LocnRow=DB_fetch_array($LocnResult)){
-		if (isset($_POST['StkLocation']) and ($_POST['StkLocation'] == $LocnRow['loccode'] OR
+		if (($_POST['StkLocation'] == $LocnRow['loccode'] OR
 				($_POST['StkLocation']=='' AND $LocnRow['loccode']==$_SESSION['UserStockLocation']))){
 			echo '<option selected value="' . $LocnRow['loccode'] . '">' . $LocnRow['locationname'] . '</option>';
 		} else {
@@ -978,7 +979,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 
 	while ($ShipperRow=DB_fetch_array($ShipperResult)){
 		if (isset($_POST['DeliveryBy']) and ($_POST['DeliveryBy'] == $ShipperRow['shipper_id'])) {
-			echo '<option selected value="' . $ShipperRow['shipper_id'] . "'>" . $ShipperRow['shippername'] . '</option>';
+			echo '<option selected value="' . $ShipperRow['shipper_id'] . '">' . $ShipperRow['shippername'] . '</option>';
 		} else {
 			echo '<option value="' . $ShipperRow['shipper_id'] . '">' . $ShipperRow['shippername'] . '</option>';
 		}
@@ -1002,7 +1003,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	}
 
 	echo '</select> ';
-	echo '<input type="submit" name="SearchSuppliers" value=' . _('Select Now') . '"></td></tr>';
+	echo '<input type="submit" name="SearchSuppliers" value="' . _('Select Now') . '"></td></tr>';
 
 	echo '</td></tr><tr><td>' . _('Supplier Contact') . ':</td><td>
 		<select name=SupplierContact>';

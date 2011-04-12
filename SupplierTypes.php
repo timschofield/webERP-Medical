@@ -195,8 +195,8 @@ while ($myrow = DB_fetch_row($result)) {
 		</tr>',
 		$myrow[0],
 		$myrow[1],
-		$_SERVER['PHP_SELF'] , $myrow[0],
-		$_SERVER['PHP_SELF'] , $myrow[0]);
+		$_SERVER['PHP_SELF'] .'?' , $myrow[0],
+		$_SERVER['PHP_SELF'] .'?' , $myrow[0]);
 	}
 	//END WHILE LIST LOOP
 	echo '</table>';
