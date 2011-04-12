@@ -26,7 +26,7 @@ if (isset($_GET['Application'])){ /*This is sent by this page (to itself) when t
 
 include('includes/header.inc');
 
-if (count($_SESSION['AllowedPageSecurityTokens'])==1 and $SupplierLogin==0){
+if (isset($SupplierLogin) and count($_SESSION['AllowedPageSecurityTokens'])==2 and $SupplierLogin==0){
 
 /* if there is only one security access and its 1 (it has to be 1 for this page came up at all)- it must be a customer log on
  * need to limit the menu to show only the customer accessible stuff this is what the page looks like for customers logging in
@@ -56,7 +56,7 @@ if (count($_SESSION['AllowedPageSecurityTokens'])==1 and $SupplierLogin==0){
 <?php
 	include('includes/footer.inc');
 	exit;
-} else if (count($_SESSION['AllowedPageSecurityTokens'])==1 and $SupplierLogin==1){
+} else if (isset($SupplierLogin) and count($_SESSION['AllowedPageSecurityTokens'])==2 and $SupplierLogin==1){
 ?>
 
 		<tr>

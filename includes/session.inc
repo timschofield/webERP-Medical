@@ -266,7 +266,7 @@ if (!is_array($_SESSION['AllowedPageSecurityTokens']) AND !isset($AllowAnyone)) 
 
 if (in_array(9,$_SESSION['AllowedPageSecurityTokens']) and $PageSecurity==0 and count($_SESSION['AllowedPageSecurityTokens'])==2){
 	$SupplierLogin=1;
-} else {
+} else if (in_array(1,$_SESSION['AllowedPageSecurityTokens']) and $PageSecurity==0 and count($_SESSION['AllowedPageSecurityTokens'])==2){
 	$SupplierLogin=0;
 }
 
