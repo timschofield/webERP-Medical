@@ -35,7 +35,7 @@ if ((! isset($_POST['FromDate']) AND ! isset($_POST['ToDate'])) OR isset($_POST[
 
 	/*Show a form to allow input of criteria for Tabs to show */
 	echo '<table class=selection>';
-	echo '<tr><td>' . _('Code Of Petty Cash Tab') . ":</td><td><select name='SelectedTabs'>";
+	echo '<tr><td>' . _('Code Of Petty Cash Tab') . ':</td><td><select name="SelectedTabs">';
 
 	if ($_SESSION['AccessLevel'] >= 15){ // superuser can supervise the supervisors
 		$SQL = "SELECT tabcode
@@ -51,11 +51,10 @@ if ((! isset($_POST['FromDate']) AND ! isset($_POST['ToDate'])) OR isset($_POST[
 
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['SelectTabs']) and $myrow['tabcode']==$_POST['SelectTabs']) {
-			echo "<option selected VALUE='";
+			echo '<option selected VALUE="' .$myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
 		} else {
-			echo "<option VALUE='";
+			echo '<option VALUE="' . $myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
 		}
-		echo $myrow['tabcode'] . "'>" . $myrow['tabcode'];
 
 	} //end while loop get type of tab
 
@@ -70,7 +69,7 @@ if ((! isset($_POST['FromDate']) AND ! isset($_POST['ToDate'])) OR isset($_POST[
 	echo '<input tabindex="3" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="TEXT" name="ToDate" maxlength="10" size="11" VALUE="' . $_POST['ToDate'] . '">';
 	echo '</td></tr></table><br>';
 	echo '<div class="centre"><input type=submit Name="ShowTB" Value="' . _('Show HTML') .'">';
-	echo "<input type=submit Name='PrintPDF' Value='"._('PrintPDF')."'></div>";
+	echo '<input type=submit Name="PrintPDF" Value="'._('PrintPDF').'"></div>';
 
 } else if (isset($_POST['PrintPDF'])) {
 
@@ -272,7 +271,7 @@ if (DB_error_no($db)!=0){
 
 	$Tabs=DB_fetch_array($TabResult);
 
-	echo "<br><table class=selection>";
+	echo '<br><table class=selection>';
 
 	echo '<tr><td>' . _('Tab Code') . '</td>
 				<td>:</td>
@@ -341,14 +340,14 @@ if (DB_error_no($db)!=0){
 				 _('The SQL that failed was:'));
 
 	echo '<br><table class=selection>';
-	echo "<tr>
-		<th>" . _('Date Of Expense') . "</th>
-		<th>" . _('Expense Description') . "</th>
-		<th>" . _('Amount') . "</th>
-		<th>" . _('Notes') . "</th>
-		<th>" . _('Receipt') . "</th>
-		<th>" . _('Date Authorized') . "</th>
-	</tr>";
+	echo '<tr>
+		<th>' . _('Date Of Expense') . '</th>
+		<th>' . _('Expense Description') . '</th>
+		<th>' . _('Amount') . '</th>
+		<th>' . _('Notes') . '</th>
+		<th>' . _('Receipt') . '</th>
+		<th>' . _('Date Authorized') . '</th>
+	</tr>';
 
 	$j = 1;
 	$k=0; //row colour counter
@@ -374,13 +373,13 @@ if (DB_error_no($db)!=0){
 	$Description['0']='ASSIGNCASH';
 	}
 	if ($myrow['5'] != '0000-00-00'){
-		printf("<td>%s</td>
+		printf('<td>%s</td>
 			<td>%s</td>
 			<td class=number>%s</td>
 			<td>%s</td>
 			<td>%s</td>
 			<td>%s</td>
-			</tr>",
+			</tr>',
 			ConvertSQLDate($myrow['2']),
 			$Description['0'],
 			number_format($myrow['4'],2),
@@ -388,13 +387,13 @@ if (DB_error_no($db)!=0){
 			$myrow['8'],
 			ConvertSQLDate($myrow['5']));
 	}else{
-		printf("<td>%s</td>
+		printf('<td>%s</td>
 			<td>%s</td>
 			<td class=number>%s</td>
 			<td>%s</td>
 			<td>%s</td>
 			<td>%s</td>
-			</tr>",
+			</tr>',
 			ConvertSQLDate($myrow['2']),
 			$Description['0'],
 			number_format($myrow['4'],2),

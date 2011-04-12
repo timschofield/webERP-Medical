@@ -45,7 +45,7 @@ if (isset($_POST['submit'])) {
 		$i++;
 	}elseif (ContainsIllegalCharacters($_POST['TypeTabCode']) OR strpos($_POST['TypeTabCode'],' ')>0) {
 		$InputError = 1;
-		prnMsg(_('The petty cash tab type code cannot contain any of the following characters " \' - & or a space'),'error');
+		prnMsg(_('The petty cash tab type code cannot contain any of the illegal characters'),'error');
 	}elseif (strlen($_POST['TypeTabDescription']) >50) {
 		$InputError = 1;
 		echo prnMsg(_('The tab code must be Fifty characters or less long'),'error');
@@ -123,7 +123,7 @@ if (isset($_POST['submit'])) {
 	if ($myrowPcTabExpenses[0]>0 or $myrowPcTabs[0]>0) {
 		prnMsg(_('Cannot delete this tab type because tabs have been created using this tab type'),'error');
 		echo '<br>';
-		echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . '>';
+		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<p><div class="centre"><input type=submit name=return VALUE="' . _('Return to list of tab types') . '"></div>';
 		echo '</form>';
@@ -169,11 +169,11 @@ while ($myrow = DB_fetch_row($result)) {
 		$k=1;
 	}
 
-	printf("<td>%s</td>
+	printf('<td>%s</td>
 		<td>%s</td>
-		<td><a href='%sSelectedTab=%s'>" . _('Edit') . "</td>
-		<td><a href='%sSelectedTab=%s&delete=yes' onclick=\"return confirm('" . _('Are you sure you wish to delete this code and all the description it may have set up?') . "');\">" . _('Delete') . "</td>
-		</tr>",
+		<td><a href="%sSelectedTab=%s">' . _('Edit') . '</td>
+		<td><a href="%sSelectedTab=%s&delete=yes" onclick=\'return confirm("' . _('Are you sure you wish to delete this code and all the description it may have set up?') . '");\'>' . _('Delete') . '</td>
+		</tr>',
 		$myrow['0'],
 		$myrow['1'],
 		$_SERVER['PHP_SELF']. '?', $myrow['0'],
@@ -190,7 +190,7 @@ if (isset($SelectedTab)) {
 }
 if (! isset($_GET['delete'])) {
 
-	echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . '>';
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<p><table class=selection>'; //Main table
 
@@ -208,9 +208,9 @@ if (! isset($_GET['delete'])) {
 		$_POST['TypeTabCode'] = $myrow['typetabcode'];
 		$_POST['TypeTabDescription']  = $myrow['typetabdescription'];
 
-		echo "<input type=hidden name='SelectedTab' VALUE=" . $SelectedTab . ">";
-		echo "<input type=hidden name='TypeTabCode' VALUE=" . $_POST['TypeTabCode']. ">";
-		echo "<table> <tr><td>" . _('Code Of Type Of Tab') . ":</td><td>";
+		echo '<input type=hidden name="SelectedTab" VALUE="' . $SelectedTab . '">';
+		echo '<input type=hidden name="TypeTabCode" VALUE="' . $_POST['TypeTabCode']. '">';
+		echo '<table> <tr><td>' . _('Code Of Type Of Tab') . ':</td><td>';
 
 		// We dont allow the user to change an existing type code
 
@@ -220,15 +220,15 @@ if (! isset($_GET['delete'])) {
 
 		// This is a new type so the user may volunteer a type code
 
-		echo "<table class=selection><tr><td>" . _('Code Of Type Of Tab') . ":</td><td><input type='Text'
-				" . (in_array('TypeTabCode',$Errors) ? 'class="inputerror"' : '' ) ." name='TypeTabCode'></td></tr>";
+		echo '<table class=selection><tr><td>' . _('Code Of Type Of Tab') . ':</td><td><input type="Text"
+				' . (in_array('TypeTabCode',$Errors) ? 'class="inputerror"' : '' ) .' name="TypeTabCode"></td></tr>';
 
 	}
 
 	if (!isset($_POST['TypeTabDescription'])) {
 		$_POST['TypeTabDescription']='';
 	}
-	echo "<tr><td>" . _('Description Of Type of Tab') . ":</td><td><input type='Text' name='TypeTabDescription' size=50 maxlength=49 value='" . $_POST['TypeTabDescription'] . "'></td></tr>";
+	echo '<tr><td>' . _('Description Of Type of Tab') . ':</td><td><input type="Text" name="TypeTabDescription" size=50 maxlength=49 value="' . $_POST['TypeTabDescription'] . '"></td></tr>';
 
 	echo '</td></tr></table>'; // close main table
 

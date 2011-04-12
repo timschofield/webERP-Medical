@@ -94,7 +94,7 @@ if (isset($_POST['submit'])) {
 					'" . $_POST['Notes'] . "',
 					'" . $_POST['Receipt'] . "'
 					)";
-		$msg = _('Assignment of cash to PC Tab ') . ' ' . $_POST["SelectedTabs"] .  ' ' . _('has been created');
+		$msg = _('Assignment of cash to PC Tab ') . ' ' . $_POST['SelectedTabs'] .  ' ' . _('has been created');
 	}
 
 	if ( $InputError !=1) {
@@ -128,11 +128,11 @@ if (!isset($SelectedTabs)){
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' .
 		_('Search') . '" alt="" />' . ' ' . $title. '</p>';
 
-	echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . '?' . SID . '>';
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<p><table class=selection>'; //Main table
 
-	echo '<tr><td>' . _('Petty Cash Tab To Assign Cash') . ":</td><td><select name='SelectedTabs'>";
+	echo '<tr><td>' . _('Petty Cash Tab To Assign Cash') . ':</td><td><select name="SelectedTabs">';
 
 	DB_free_result($result);
 	$SQL = "SELECT tabcode
@@ -144,11 +144,10 @@ if (!isset($SelectedTabs)){
 
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['SelectTabs']) and $myrow['tabcode']==$_POST['SelectTabs']) {
-			echo "<option selected value='";
+			echo '<option selected value="' . $myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
 		} else {
-			echo "<option value='";
+			echo '<option value="' . $myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
 		}
-		echo $myrow['tabcode'] . "'>" . $myrow['tabcode'];
 	}
 
 	echo '</select></td></tr>';
@@ -175,20 +174,6 @@ if (isset($_POST['process']) OR isset($SelectedTabs)) {
 			unset($_POST['Receipt']);
 		}
 
-/*		$sql = "SELECT pcashdetails.date,
-					pcashdetails.codeexpense,
-					pcexpenses.description
-					pcashdetails.amount,
-					pcashdetails.authorized,
-					pcashdetails.posted,
-					pcashdetails.notes,
-					pcashdetails.receipt
-				FROM pcashdetails, pcexpenses
-				WHERE pcashdetails.tabcode='$SelectedTabs'
-					AND pcashdetails.codeexpense = pcexpenses.codeexpense
-					AND pcashdetails.date >=DATE_SUB(CURDATE(), INTERVAL ".$Days." DAY)
-				ORDER BY pcashdetails.counterindex Asc";
-*/
 		if(!isset ($Days)){
 			$Days=30;
 		 }
@@ -201,21 +186,21 @@ if (isset($_POST['process']) OR isset($SelectedTabs)) {
 		$result = DB_query($sql,$db);
 
 		echo '<table class=selection>';
-		echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . '?' . SID . '>';
+		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-		echo "<tr><th colspan=8>" . _('Detail Of PC Tab Movements For Last ') .': ';
-		echo "<input type=hidden name='SelectedTabs' value=" . $SelectedTabs . ">";
-		echo "<input type=text class=number name='Days' value=" . $Days  . " maxlength =3 size=4> Days ";
+		echo '<tr><th colspan=8>' . _('Detail Of PC Tab Movements For Last ') .': ';
+		echo '<input type=hidden name="SelectedTabs" value="' . $SelectedTabs . '">';
+		echo '<input type=text class=number name="Days" value="' . $Days  . '" maxlength =3 size=4> Days ';
 		echo '<input type=submit name="Go" value="' . _('Go') . '">';
 		echo '</th></tr></form>';
-		echo "<tr>
-			<th>" . _('Date') . "</th>
-			<th>" . _('Expense Code') . "</th>
-			<th>" . _('Amount') . "</th>
-			<th>" . _('Authorised') . "</th>
-			<th>" . _('Notes') . "</th>
-			<th>" . _('Receipt') . "</th>
-		</tr>";
+		echo '<tr>
+			<th>' . _('Date') . '</th>
+			<th>' . _('Expense Code') . '</th>
+			<th>' . _('Amount') . '</th>
+			<th>' . _('Authorised') . '</th>
+			<th>' . _('Notes') . '</th>
+			<th>' . _('Receipt') . '</th>
+		</tr>';
 
 		$k=0; //row colour counter
 
@@ -239,29 +224,29 @@ if (isset($_POST['process']) OR isset($SelectedTabs)) {
 			$Description['0']='ASSIGNCASH';
 		}
 
-		if (($myrow['authorized'] == "0000-00-00") and ($Description['0'] == 'ASSIGNCASH')){
+		if (($myrow['authorized'] == '0000-00-00') and ($Description['0'] == 'ASSIGNCASH')){
 			// only cash assignations NOT authorized can be modified or deleted
-			echo "<td>".ConvertSQLDate($myrow['date'])."</td>
-				<td>".$Description['0']."</td>
-				<td class=number>".number_format($myrow['amount'],2)."</td>
-				<td>".ConvertSQLDate($myrow['authorized'])."</td>
-				<td>".$myrow['notes']."</td>
-				<td>".$myrow['receipt']."</td>
-				<td><a href='".$_SERVER['PHP_SELF'] . '?' . SID ."SelectedIndex=".$myrow['counterindex']."&SelectedTabs=" .
-					$SelectedTabs . "&Days=" . $Days . "&edit=yes'>" . _('Edit') . "</td>
-				<td><a href='".$_SERVER['PHP_SELF'] . '?' . SID ."SelectedIndex=".$myrow['counterindex']."&SelectedTabs=" .
-					$SelectedTabs . "&Days=" . $Days . "&delete=yes' onclick=\"return confirm('" .
-						_('Are you sure you wish to delete this code and the expense it may have set up?') . "');\">" .
-							_('Delete') . "</td>
-				</tr>";
+			echo '<td>'.ConvertSQLDate($myrow['date']).'</td>
+				<td>'.$Description['0'].'</td>
+				<td class=number>'.number_format($myrow['amount'],2).'</td>
+				<td>'.ConvertSQLDate($myrow['authorized']).'</td>
+				<td>'.$myrow['notes'].'</td>
+				<td>'.$myrow['receipt'].'</td>
+				<td><a href="'.$_SERVER['PHP_SELF'] . '?SelectedIndex='.$myrow['counterindex'].'&SelectedTabs=' .
+					$SelectedTabs . '&Days=' . $Days . '&edit=yes">' . _('Edit') . '</td>
+				<td><a href="'.$_SERVER['PHP_SELF'] . '?SelectedIndex='.$myrow['counterindex'].'&SelectedTabs=' .
+					$SelectedTabs . '&Days=' . $Days . '&delete=yes" onclick=\'return confirm("' .
+						_('Are you sure you wish to delete this code and the expense it may have set up?') . '");\'>' .
+							_('Delete') . '</td>
+				</tr>';
 		}else{
-			echo "<td>".ConvertSQLDate($myrow['date'])."</td>
-				<td>".$Description['0']."</td>
-				<td class=number>".number_format($myrow['amount'],2)."</td>
-				<td>".ConvertSQLDate($myrow['authorized'])."</td>
-				<td>".$myrow['notes']."</td>
-				<td>".$myrow['receipt']."</td>
-				</tr>";
+			echo '<td>'.ConvertSQLDate($myrow['date']).'</td>
+				<td>'.$Description['0'].'</td>
+				<td class=number>'.number_format($myrow['amount'],2).'</td>
+				<td>'.ConvertSQLDate($myrow['authorized']).'</td>
+				<td>'.$myrow['notes'].'</td>
+				<td>'.$myrow['receipt'].'</td>
+				</tr>';
 		}
 	}
 		//END WHILE LIST LOOP
@@ -290,13 +275,13 @@ if (isset($_POST['process']) OR isset($SelectedTabs)) {
 			$Amount['0']=0;
 		}
 
-		echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . '?' . SID . '>';
+		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<p><table class=selection>'; //Main table
 		if (isset($_GET['SelectedIndex'])) {
-			echo "<tr><th colspan=2><font color=blue size=3>"._('Update Cash Assignment')."</font></th></tr>";
+			echo '<tr><th colspan=2><font color=blue size=3>'._('Update Cash Assignment').'</font></th></tr>';
 		} else {
-			echo "<tr><th colspan=2><font color=blue size=3>"._('New Cash Assignment')."</font></th></tr>";
+			echo '<tr><th colspan=2><font color=blue size=3>'._('New Cash Assignment').'</font></th></tr>';
 		}
 		if ( isset($_GET['edit'])) {
 
@@ -312,18 +297,18 @@ if (isset($_POST['process']) OR isset($SelectedTabs)) {
 			$_POST['Notes']  = $myrow['notes'];
 			$_POST['Receipt']  = $myrow['receipt'];
 
-			echo "<input type=hidden name='SelectedTabs' value=" . $SelectedTabs . ">";
-			echo "<input type=hidden name='SelectedIndex' value=" . $SelectedIndex. ">";
-			echo "<input type=hidden name='CurrentAmount' value=" . $Amount[0]. ">";
-			echo "<input type=hidden name='Days' value=" .$Days. ">";
+			echo '<input type=hidden name="SelectedTabs" value="' . $SelectedTabs . '">';
+			echo '<input type=hidden name="SelectedIndex" value="' . $SelectedIndex. '">';
+			echo '<input type=hidden name="CurrentAmount" value="' . $Amount[0]. '">';
+			echo '<input type=hidden name="Days" value="' .$Days. '">';
 		}
 
 /* Ricard: needs revision of this date initialization */
 		if (!isset($_POST['Date'])) {
-			$_POST['Date']=Date("d/m/Y");
+			$_POST['Date']=Date('d/m/Y');
 		}
 
-		echo '<tr><td>' . _('Cash Assignation Date') . ":</td>";
+		echo '<tr><td>' . _('Cash Assignation Date') . ':</td>';
 
 		echo '<td><input type=text class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="Date" size=10 maxlength=10 value=' . $_POST['Date'] . '></td></tr>';
 
@@ -332,23 +317,23 @@ if (isset($_POST['process']) OR isset($SelectedTabs)) {
 			$_POST['Amount']=0;
 		}
 
-		echo "<tr><td>" . _('Amount') . ":</td><td><input type='Text' class='number' name='Amount' size='12' maxlength='11' value='" . $_POST['Amount'] . "'></td></tr>";
+		echo '<tr><td>' . _('Amount') . ':</td><td><input type="Text" class="number" name="Amount" size="12" maxlength="11" value="' . $_POST['Amount'] . '"></td></tr>';
 
 		if (!isset($_POST['Notes'])) {
 			$_POST['Notes']='';
 		}
 
-		echo "<tr><td>" . _('Notes') . ":</td><td><input type='Text' name='Notes' size=50 maxlength=49 value='" . $_POST['Notes'] . "'></td></tr>";
+		echo '<tr><td>' . _('Notes') . ':</td><td><input type="Text" name="Notes" size=50 maxlength=49 value="' . $_POST['Notes'] . '"></td></tr>';
 
 		if (!isset($_POST['Receipt'])) {
 			$_POST['Receipt']='';
 		}
 
-		echo "<tr><td>" . _('Receipt') . ":</td><td><input type='Text' name='Receipt' size=50 maxlength=49 value='" . $_POST['Receipt'] . "'></td></tr>";
+		echo '<tr><td>' . _('Receipt') . ':</td><td><input type="Text" name="Receipt" size=50 maxlength=49 value="' . $_POST['Receipt'] . '"></td></tr>';
 
-		echo "<input type=hidden name='CurrentAmount' value=" . $Amount['0']. ">";
-		echo "<input type=hidden name='SelectedTabs' value=" . $SelectedTabs . ">";
-		echo "<input type=hidden name='Days' value=" .$Days. ">";
+		echo '<input type=hidden name="CurrentAmount" value="' . $Amount['0']. '">';
+		echo '<input type=hidden name="SelectedTabs" value="' . $SelectedTabs . '">';
+		echo '<input type=hidden name="Days" value="' .$Days. '">';
 
 		echo '</td></tr></table>'; // close main table
 

@@ -110,11 +110,10 @@ or deletion of the records*/
 
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['SelectedTabs']) and $myrow['typetabcode']==$_POST['SelectedTabs']) {
-			echo '<option selected value="';
+			echo '<option selected value="' . $myrow['typetabcode'] . '">' . $myrow['typetabcode'] . ' - ' . $myrow['typetabdescription'] . '</option>';
 		} else {
-			echo '<option value="';
+			echo '<option value="' . $myrow['typetabcode'] . '">' . $myrow['typetabcode'] . ' - ' . $myrow['typetabdescription'] . '</option>';
 		}
-		echo $myrow['typetabcode'] . '">' . $myrow['typetabcode'] . ' - ' . $myrow['typetabdescription'] . '</option>';
 
 	} //end while loop
 
@@ -178,7 +177,7 @@ if (isset($_POST['process']) or isset($SelectedTabs)) {
 
 	if (!isset($_GET['delete'])) {
 
-		echo '<form method="post" action=' . $_SERVER['PHP_SELF'] . '?>';
+		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<br /><table  class=selection>'; //Main table
 
@@ -194,11 +193,10 @@ if (isset($_POST['process']) or isset($SelectedTabs)) {
 
 		while ($myrow = DB_fetch_array($result)) {
 			if (isset($_POST['SelectedExpense']) and $myrow['codeexpense']==$_POST['SelectedExpense']) {
-				echo '<option selected value="';
+				echo '<option selected value="' . $myrow['codeexpense'] . '">' . $myrow['codeexpense'] . ' - ' . $myrow['description'] . '</option>';
 			} else {
-				echo '<option value="';
+				echo '<option value="' . $myrow['codeexpense'] . '">' . $myrow['codeexpense'] . ' - ' . $myrow['description'] . '</option>';
 			}
-			echo $myrow['codeexpense'] . '">' . $myrow['codeexpense'] . ' - ' . $myrow['description'] . '</option>';
 
 		} //end while loop
 

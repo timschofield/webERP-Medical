@@ -33,23 +33,23 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate'])){
 	prnMsg($msg,'error');
 	 }
 
-	echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . '>';
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class=selection>
 	 			<tr>
-				<td>' . _('Enter the date from which cheques are to be listed') . ":</td>
-				<td><input type=text name='FromDate' maxlength=10 size=10 class=date alt='".$_SESSION['DefaultDateFormat']."'  VALUE='" . Date($_SESSION['DefaultDateFormat']) . "'></td>
-			</tr>";
-	 echo '<tr><td>' . _('Enter the date to which cheques are to be listed') . ":</td>
-	 		<td><input type=text name='ToDate' maxlength=10 size=10  class=date alt='".$_SESSION['DefaultDateFormat']."'  VALUE='" . Date($_SESSION['DefaultDateFormat']) . "'></td>
-	</tr>";
+				<td>' . _('Enter the date from which cheques are to be listed') . ':</td>
+				<td><input type=text name="FromDate" maxlength=10 size=10 class=date alt="'.$_SESSION['DefaultDateFormat'].'"  VALUE="' . Date($_SESSION['DefaultDateFormat']) . '"></td>
+			</tr>';
+	 echo '<tr><td>' . _('Enter the date to which cheques are to be listed') . ':</td>
+	 		<td><input type=text name="ToDate" maxlength=10 size=10  class=date alt="'.$_SESSION['DefaultDateFormat'].'"  VALUE="' . Date($_SESSION['DefaultDateFormat']) . '"></td>
+	</tr>';
 	 echo '<tr><td>' . _('Bank Account') . '</td><td>';
 
 	 $sql = "SELECT bankaccountname, accountcode FROM bankaccounts";
 	 $result = DB_query($sql,$db);
 
 
-	 echo "<select name='BankAccount'>";
+	 echo '<select name="BankAccount">';
 
 	 while ($myrow=DB_fetch_array($result)){
 	echo '<option VALUE=' . $myrow['accountcode'] . '>' . $myrow['bankaccountname'];
@@ -58,10 +58,10 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate'])){
 
 	 echo '</select></td></tr>';
 
-	 echo '<tr><td>' . _('Email the report off') . ":</td><td><select name='Email'>";
-	 echo "<option selected VALUE='No'>" . _('No');
-	 echo "<option VALUE='Yes'>" . _('Yes');
-	 echo "</select></td></tr></table><br><div class='centre'><input type=submit name='Go' VALUE='" . _('Create PDF') . "'></div>";
+	 echo '<tr><td>' . _('Email the report off') . ':</td><td><select name="Email">';
+	 echo '<option selected VALUE="No">' . _('No') . '</option>';
+	 echo '<option VALUE="Yes">' . _('Yes') . '</option>';
+	 echo '</select></td></tr></table><br><div class="centre"><input type=submit name="Go" VALUE="' . _('Create PDF') . '"></div>';
 
 
 	 include('includes/footer.inc');
@@ -175,18 +175,6 @@ $YPos-=$line_height;
 $LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,60,$FontSize,number_format($TotalCheques,2), 'right');
 $LeftOvers = $pdf->addTextWrap($Left_Margin+65,$YPos,300,$FontSize,_('TOTAL') . ' ' . $Currency . ' ' . _('CHEQUES'), 'left');
 
-/* UldisN
-$pdfcode = $pdf->output();
-$len = strlen($pdfcode);
-header('Content-type: application/pdf');
-header('Content-Length: ' . $len);
-header('Content-Disposition: inline; filename=ChequeListing.pdf');
-header('Expires: 0');
-header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-header('Pragma: public');
-
-$pdf->stream();
-*/
 $ReportFileName = $_SESSION['DatabaseName'] . '_ChequeListing_' . date('Y-m-d').'.pdf';
 $pdf->OutputD($ReportFileName);//UldisN
 $pdf->__destruct(); //UldisN
