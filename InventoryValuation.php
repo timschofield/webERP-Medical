@@ -141,8 +141,8 @@ if (isset($_POST['PrintPDF'])
 			$DisplayQtyOnHand = number_format($InventoryValn['qtyonhand'],0);
 			$DisplayItemTotal = number_format($InventoryValn['itemtotal'],2);
 
-			$LeftOvers = $pdf->addTextWrap(380,$YPos,60,$FontSize,$DisplayQtyOnHand,'right');
-			$LeftOvers = $pdf->addTextWrap(440,$YPos,60,$FontSize,$DisplayUnitCost, 'right');
+			$LeftOvers = $pdf->addTextWrap(360,$YPos,60,$FontSize,$DisplayQtyOnHand,'right');
+			$LeftOvers = $pdf->addTextWrap(420,$YPos,80,$FontSize,$DisplayUnitCost, 'left');
 			$LeftOvers = $pdf->addTextWrap(500,$YPos,60,$FontSize,$DisplayItemTotal, 'right');
 			$LeftOvers = $pdf->addTextWrap(400,$YPos,60,$FontSize,$InventoryValn['units'],'right');
 
@@ -166,7 +166,7 @@ if (isset($_POST['PrintPDF'])
 	$DisplayCatTotVal = number_format($CatTot_Val,2);
 	$LeftOvers = $pdf->addTextWrap(500,$YPos,60,$FontSize,$DisplayCatTotVal, 'right');
 	$DisplayCatTotQty = number_format($CatTot_Qty,0);
-	$LeftOvers = $pdf->addTextWrap(380,$YPos,60,$FontSize,$DisplayCatTotQty, 'right');
+	$LeftOvers = $pdf->addTextWrap(360,$YPos,60,$FontSize,$DisplayCatTotQty, 'right');
 
 	If ($_POST['DetailedReport']=='Yes'){
 		/*draw a line under the CATEGORY TOTAL*/
