@@ -36,9 +36,9 @@ if (isset($_POST['submit'])) {
 
 	//first off validate inputs sensible
 
-	if (strpos($_POST['MethodName'],'&')>0 OR strpos($_POST['MethodName'],"'")>0) {
+	if (ContainsIllegalCharacters($_POST['MethodName'])) {
 		$InputError = 1;
-		prnMsg( _('The payment method cannot contain the character') . " '&' " . _('or the character') ." '",'error');
+		prnMsg( _('The payment method cannot contain illegal characters'),'error');
 		$Errors[$i] = 'MethodName';
 		$i++;
 	}
@@ -186,13 +186,13 @@ if (isset($_POST['submit'])) {
 	$ErrMsg = _('Could not get payment methods because');
 	$result = DB_query($sql,$db,$ErrMsg);
 
-	echo "<table class=selection>
+	echo '<table class=selection>
 		<tr>
-		<th>" . _('Payment Method') . "</th>
-		<th>" . _('For Payments') . "</th>
-		<th>" . _('For Receipts') . "</th>
-		<th>" . _('Use Pre-printed') .'<br />' . _('Stationery') . "</th>
-		</tr>";
+		<th>' . _('Payment Method') . '</th>
+		<th>' . _('For Payments') . '</th>
+		<th>' . _('For Receipts') . '</th>
+		<th>' . _('Use Pre-printed') .'<br />' . _('Stationery') . '</th>
+		</tr>';
 
 	$k=0; //row colour counter
 	while ($myrow = DB_fetch_array($result)) {
@@ -226,7 +226,7 @@ echo '<p>';
 
 if (! isset($_GET['delete'])) {
 
-	echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . '?' . SID . '>';
+	echo '<form method="post action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (isset($SelectedPaymentID)) {
@@ -253,8 +253,8 @@ if (! isset($_GET['delete'])) {
 			$_POST['ForReceipt'] = $myrow['receipttype'];
 			$_POST['ForPreprint'] = $myrow['forpreprint'];
 
-			echo "<input type=hidden name='SelectedPaymentID' VALUE='" . $_POST['MethodID'] . "'>";
-			echo "<table class=selection>";
+			echo '<input type=hidden name="SelectedPaymentID" VALUE="' . $_POST['MethodID'] . '">';
+			echo '<table class=selection>';
 		}
 
 	}  else {
@@ -262,30 +262,30 @@ if (! isset($_GET['delete'])) {
 		$_POST['ForPayment'] = 1; // Default is use for payment
 		$_POST['ForReceipt'] = 1; // Default is use for receipts
 		$_POST['ForPreprint'] = 0; // Default is use for receipts
-		echo "<table class=selection>";
+		echo '<table class=selection>';
 	}
-	echo "<tr>
-		<td>" . _('Payment Method') . ':' . "</td>
-		<td><input type='Text' ". (in_array('MethodName',$Errors) ? 'class="inputerror"' : '' ) ." name='MethodName' size=30 maxlength=30 value='" . $_POST['MethodName'] . "'></td>
-		</tr>";
-	echo "<tr>
-		<td>" . _('Use For Payments') . ':' . "</td>
-		<td><select name='ForPayment'>";
-	echo "<option".($_POST['ForPayment'] ? ' selected' : '') ." VALUE='1'>" . _('Yes');
-	echo "<option".($_POST['ForPayment'] ? '' : ' selected') ." VALUE='0'>" . _('No');
-	echo "</select></td></tr>";
-	echo "<tr>
-		<td>" . _('Use For Receipts') . ':' . "</td>
-		<td><select name='ForReceipt'>";
-	echo "<option".($_POST['ForReceipt'] ? ' selected' : '') ." VALUE='1'>" . _('Yes');
-	echo "<option".($_POST['ForReceipt'] ? '' : ' selected') ." VALUE='0'>" . _('No');
-	echo "</select></td></tr>";
-	echo "<tr>
-		<td>" . _('Use Pre-printed Stationery') . ':' . "</td>
-		<td><select name='ForPreprint'>";
-	echo "<option".($_POST['ForPreprint'] ? ' selected' : '') ." VALUE='1'>" . _('Yes');
-	echo "<option".($_POST['ForPreprint'] ? '' : ' selected') ." VALUE='0'>" . _('No');
-	echo "</select></td></tr>";
+	echo '<tr>
+		<td>' . _('Payment Method') . ':' . '</td>
+		<td><input type="text" '. (in_array('MethodName',$Errors) ? 'class="inputerror"' : '' ) .' name="MethodName" size=30 maxlength=30 value="' . $_POST['MethodName'] . '"></td>
+		</tr>';
+	echo '<tr>
+		<td>' . _('Use For Payments') . ':' . '</td>
+		<td><select name="ForPayment">';
+	echo '<option'.($_POST['ForPayment'] ? ' selected' : '') .' VALUE="1">' . _('Yes') . '</option>';
+	echo '<option'.($_POST['ForPayment'] ? '' : ' selected') .' VALUE="0">' . _('No') . '</option>';
+	echo '</select></td></tr>';
+	echo '<tr>
+		<td>' . _('Use For Receipts') . ':' . '</td>
+		<td><select name="ForReceipt">';
+	echo '<option'.($_POST['ForReceipt'] ? ' selected' : '') .' VALUE="1">' . _('Yes') . '</option>';
+	echo '<option'.($_POST['ForReceipt'] ? '' : ' selected') .' VALUE="0">' . _('No') . '</option>';
+	echo '</select></td></tr>';
+	echo '<tr>
+		<td>' . _('Use Pre-printed Stationery') . ':' . '</td>
+		<td><select name="ForPreprint">';
+	echo '<option'.($_POST['ForPreprint'] ? ' selected' : '') .' VALUE="1">' . _('Yes') . '</option>';
+	echo '<option'.($_POST['ForPreprint'] ? '' : ' selected') .' VALUE="0">' . _('No') . '</option>';
+	echo '</select></td></tr>';
 
 	echo '</table>';
 

@@ -35,7 +35,7 @@ require_once("Numbers/Words.php");
 /**
  * Class for translating numbers into Spanish (Castellano).
  * It supports up to decallones (10^6).
- * It doesn't support spanish tonic accents (acentos).
+ * It does not support spanish tonic accents (acentos).
  *
  * @author Xavier Noguer
  * @package Numbers_Words
@@ -50,14 +50,14 @@ class Numbers_Words_es extends Numbers_Words
      * @access public
      */
     var $locale      = 'es';
-    
+
     /**
      * Language name in English
      * @var string
      * @access public
      */
     var $lang        = 'Spanish';
-    
+
     /**
      * Native language name
      * @var string

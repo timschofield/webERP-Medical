@@ -19,8 +19,8 @@
 // +----------------------------------------------------------------------+
 // $Id: lang.es_AR.php,v 1.1 2006/11/17 05:59:52 daintree Exp $
 //
-// Numbers_Words class extension to spell numbers in Argentinian Spanish 
-// 
+// Numbers_Words class extension to spell numbers in Argentinian Spanish
+//
 //
 
 /**
@@ -38,7 +38,7 @@ require_once("Numbers/Words.php");
 /**
  * Class for translating numbers into Argentinian Spanish.
  * It supports up to decallones (10^6).
- * It doesn't support spanish tonic accents (acentos).
+ * It does not support spanish tonic accents (acentos).
  *
  * @author Martin Marrese
  * @package Numbers_Words
@@ -53,14 +53,14 @@ class Numbers_Words_es_AR extends Numbers_Words
      * @access public
      */
     var $locale      = 'es_AR';
-    
+
     /**
      * Language name in English
      * @var string
      * @access public
      */
     var $lang        = 'Spanish';
-    
+
     /**
      * Native language name
      * @var string
@@ -109,7 +109,7 @@ class Numbers_Words_es_AR extends Numbers_Words
      * @access private
      */
     var $_sep = ' ';
-    
+
     /**
      * The currency names (based on the below links,
      * informations from central bank websites and on encyclopedias)
@@ -166,7 +166,7 @@ class Numbers_Words_es_AR extends Numbers_Words
      * @access public
      */
     var $def_currency = 'ARS'; // Argentinian Peso
-    
+
     // }}}
     // {{{ toWords()
     /**
@@ -405,7 +405,7 @@ class Numbers_Words_es_AR extends Numbers_Words
             $dec = $this->toWords(trim($dec));
             $ret.= ' con ' . trim ($dec);
         }
-        
+
         return $ret;
     }
     // }}}
@@ -446,7 +446,7 @@ class Numbers_Words_es_AR extends Numbers_Words
             $ret = $curr_names[0][0];
         }
         $ret .= $this->_sep . trim($this->toWords($decimal));
-      
+
         if ($fraction !== false) {
             if ($convert_fraction) {
                 $ret .= $this->_sep .'con'. $this->_sep . trim($this->toWords($fraction));
@@ -469,6 +469,6 @@ class Numbers_Words_es_AR extends Numbers_Words
     // }}}
 
 
-    
+
 }
 ?>

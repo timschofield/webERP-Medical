@@ -26,7 +26,7 @@ require_once("Numbers/Words.php");
 /**
  * Class for translating numbers into Bulgarian.
  *
- * @author Kouber Saparev <kouber@php.net> 
+ * @author Kouber Saparev <kouber@php.net>
  * @package Numbers_Words
  */
 class Numbers_Words_bg extends Numbers_Words
@@ -73,7 +73,7 @@ class Numbers_Words_bg extends Numbers_Words
 
     /**
      * The words for digits (except zero). Note that, there are three genders for them (neuter, masculine and feminine).
-     * The words for 3 to 9 (masculine) and for 2 to 9 (feminine) are the same as neuter, so they're filled
+     * The words for 3 to 9 (masculine) and for 2 to 9 (feminine) are the same as neuter, so they are filled
      * in the _initDigits() method, which is invoked from the constructor.
      * @var string
      * @access private
@@ -118,7 +118,7 @@ class Numbers_Words_bg extends Numbers_Words
      * @access private
      */
     var $_and = 'è';
-    
+
     /**
      * The word separator.
      * @var string
@@ -271,7 +271,7 @@ class Numbers_Words_bg extends Numbers_Words
 
     /**
      * Fills the _digits array for masculine and feminine genders with
-     * corresponding references to neuter words (when they're the same).
+     * corresponding references to neuter words (when they are the same).
      *
      * @return void
      *
@@ -353,12 +353,12 @@ class Numbers_Words_bg extends Numbers_Words
              the array may vary.
         */
         $ret = array();
-        
+
         // extract the value of each digit from the three-digit number
         $e = $num%10;                  // ones
         $d = ($num-$e)%100/10;         // tens
         $s = ($num-$d*10-$e)%1000/100; // hundreds
-        
+
         // process the "hundreds" digit.
         if ($s) {
             switch ($s) {
