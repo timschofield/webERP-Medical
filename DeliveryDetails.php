@@ -1013,18 +1013,17 @@ echo '<tr>
 
 	echo '<tr><td>' . _('Packlist Type') . ':</td><td><select name="DeliverBlind">';
 		for ($p = 1; $p <= 2; $p++) {
-			echo '<option value=' . $p;
 			if ($p == $_SESSION['Items'.$identifier]->DeliverBlind) {
-				echo ' selected>';
+				echo '<option value=' . $p . ' selected>';
 			} else {
-				echo '>';
+				echo '<option value=' . $p . '>';
 			}
 			switch ($p) {
 				case 2:
-					echo _('Hide Company Details/Logo');
+					echo _('Hide Company Details/Logo').'</option>';
 			break;
 				default:
-					echo _('Show Company Details/Logo');
+					echo _('Show Company Details/Logo').'</option>';
 			break;
 			}
 		}

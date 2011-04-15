@@ -184,7 +184,7 @@ if (count($_SESSION['PO']->LineItems)>0 and !isset($_POST['ProcessGoodsReceived'
 		}
 		echo '</tr>';
 	}//foreach(LineItem)
-	echo "<script>defaultControl(document.forms[0].RecvQty_$LnItm->LineNo);</script>";
+	echo '<script>defaultControl(document.forms[0].RecvQty_'.$LnItm->LineNo.');</script>';
 $DisplayTotal = number_format($_SESSION['PO']->Total,2);
 if ($_SESSION['ShowValueOnGRN']==1) {
 	echo '<tr><td colspan=7 class=number><b>' . _('Total value of goods received'). '</b></td>
@@ -267,7 +267,7 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 		exit;
 	}
 
-/*Now need to check that the order details are the same as they were when they were read into the Items array. If they've changed then someone else must have altered them */
+/*Now need to check that the order details are the same as they were when they were read into the Items array. If they have changed then someone else must have altered them */
 // Otherwise if you try to fullfill item quantities separately will give error.
 	$SQL = "SELECT itemcode,
 									glcode,
@@ -327,9 +327,9 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 					<td>' . $myrow['quantityrecd'] . '</td></tr>';
 				echo '</table>';
 			}
-			echo "<div class='centre'><a href='$rootpath/PO_SelectOSPurchOrder.php?" . SID . "'>".
+			echo '<div class="centre"><a href="'.$rootpath.'/PO_SelectOSPurchOrder.php">'.
 				_('Select a different purchase order for receiving goods against').'</a></div>';
-			echo "<div class='centre'><a href='$rootpath/GoodsReceived.php?" . SID . '&PONumber=' .
+			echo '<div class="centre"><a href="'.$rootpath.'/GoodsReceived.php?PONumber=' .
 				$_SESSION['PO']->OrderNumber . '">'. _('Re-read the updated purchase order for receiving goods against'). '</a></div>';
 			unset($_SESSION['PO']->LineItems);
 			unset($_SESSION['PO']);
@@ -357,7 +357,7 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 
 			$LocalCurrencyPrice = ($OrderLine->Price / $_SESSION['PO']->ExRate);
 
-			if ($OrderLine->StockID!='') { /*Its a stock item line */
+			if ($OrderLine->StockID!='') { //Its a stock item line
 				/*Need to get the current standard cost as it is now so we can process GL jorunals later*/
 				$SQL = "SELECT materialcost + labourcost + overheadcost as stdcost
 										FROM stockmaster
@@ -384,7 +384,7 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 				$_SESSION['PO']->LineItems[$OrderLine->LineNo]->StandardCost = $LocalCurrencyPrice;
 			}
 
-			if ($OrderLine->StockID=='') { /*Its a NOMINAL item line */
+			if ($OrderLine->StockID=='') { //Its a NOMINAL item line
 				$CurrentStandardCost = $_SESSION['PO']->LineItems[$OrderLine->LineNo]->StandardCost;
 			}
 

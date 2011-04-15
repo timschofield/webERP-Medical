@@ -67,7 +67,7 @@ if (isset($_POST['submit'])) {
 }
 
 if (isset($_POST['selectchoice'])) {
-	echo "<form name='update' method='post' action=" . $_SERVER['PHP_SELF'] . '?' . SID . '>';
+	echo '<form name="update" method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	$sql = "SELECT DISTINCT discountcategory FROM stockmaster WHERE discountcategory <>''";
@@ -79,9 +79,9 @@ if (isset($_POST['selectchoice'])) {
 
 		while ($myrow = DB_fetch_array($result)){
 			if ($myrow['discountcategory']==$_POST['DiscCat']){
-				echo "<option selected value='" . $myrow['discountcategory'] . "'>" . $myrow['discountcategory'];
+				echo '<option selected value="' . $myrow['discountcategory'] . '">' . $myrow['discountcategory']. '</option>';
 			} else {
-				echo "<option value='" . $myrow['discountcategory'] . "'>" . $myrow['discountcategory'];
+				echo '<option value="' . $myrow['discountcategory'] . '">' . $myrow['discountcategory']. '</option>';
 			}
 			echo '</option>';
 		}
@@ -90,7 +90,7 @@ if (isset($_POST['selectchoice'])) {
 		echo '<td><input type="submit" name="select" value="'._('Select').'"></td></tr></table><br>';
 	}
 
-	echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . '?' . SID . '>';
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<input type="hidden" name="chooseoption" value="'.$_POST['chooseoption'].'">';
 	echo '<input type="hidden" name="selectchoice" value="'.$_POST['selectchoice'].'">';
@@ -99,11 +99,11 @@ if (isset($_POST['selectchoice'])) {
 		echo '<table class=selection><tr><td>'. _('Discount Category Code') .':</td><td>';
 
 		if (isset($_POST['DiscCat'])) {
-			echo "<input type='text' name='DiscountCategory' maxlength=2 size=2 value='" . $_POST['DiscCat'] .
-				"'></td><td>"._('OR')."</td><td></td><td>"._('OR')."</td></tr>";
+			echo '<input type="text" name="DiscountCategory" maxlength=2 size=2 value="' . $_POST['DiscCat'] .
+				'"></td><td>'._('OR').'</td><td></td><td>'._('OR').'</td></tr>';
 		} else {
-			echo "<input type='text' name='DiscountCategory' maxlength=2 size=2></td><td>".
-				_('OR')."</td><td></td><td>"._('OR')."</td></tr>";
+			echo '<input type="text" name="DiscountCategory" maxlength=2 size=2></td><td>'.
+				_('OR').'</td><td></td><td>'._('OR').'</td></tr>';
 		}
 
 		if (!isset($_POST['StockID'])) {
@@ -115,15 +115,15 @@ if (isset($_POST['selectchoice'])) {
 		if (!isset($_POST['PartDesc'])) {
 			$_POST['PartDesc']='';
 		}
-		echo '<tr><td>'. _('Enter Stock Code') .":</td><td><input type='text' name='StockID' size=20 maxlength=20
-			value='".$_POST['StockID']."'></td>
-			<td>"._('Partial code').":</td><td><input type='text' name='PartID' size=10 maxlength=10 value='".$_POST['PartID']."'></td>
-			<td>"._('Partial description').":</td><td><input type='text' name='PartDesc' size=10 value='".$_POST['PartDesc']."' maxlength=10></td>
-			<td><input type='Submit' name='search' value='". _('Search') ."'></td></tr>";
+		echo '<tr><td>'. _('Enter Stock Code') .':</td><td><input type="text" name="StockID" size=20 maxlength=20
+			value="'.$_POST['StockID'].'"></td>
+			<td>'._('Partial code').':</td><td><input type="text" name="PartID" size=10 maxlength=10 value="'.$_POST['PartID'].'"></td>
+			<td>'._('Partial description').':</td><td><input type="text" name="PartDesc" size=10 value="'.$_POST['PartDesc'].'" maxlength=10></td>
+			<td><input type="Submit" name="search" value="'. _('Search') .'"></td></tr>';
 
 		echo '</table>';
 
-		echo "<br><div class='centre'><input type='Submit' name='submit' value='". _('Update Item') ."'></div>";
+		echo '<br><div class="centre"><input type="Submit" name="submit" value="'. _('Update Item') .'"></div>';
 
 		if (isset($_POST['search'])) {
 			if ($_POST['PartID']!='' and $_POST['PartDesc']=='')
@@ -154,7 +154,7 @@ if (isset($_POST['selectchoice'])) {
 			echo '<option value="'.$myrow['categoryid'].'">'.$myrow['categorydescription'].'</option>';
 		}
 		echo '</select></td></tr></table>';
-		echo "<br><div class='centre'><input type='Submit' name='submitcategory' value='". _('Update Items') ."'></div>";
+		echo '<br><div class="centre"><input type="Submit" name="submitcategory" value="'. _('Update Items') .'"></div>';
 	}
 	echo '</form>';
 
@@ -183,9 +183,9 @@ if (isset($_POST['selectchoice'])) {
 		$result = DB_query($sql,$db);
 
 		echo '<br><table class=selection>';
-		echo "<tr>
-			<th>". _('Discount Category') ."</th>
-			<th>". _('Item') .'</th></tr>';
+		echo '<tr>
+			<th>'. _('Discount Category') .'</th>
+			<th>'. _('Item') .'</th></tr>';
 
 		$k=0; //row colour counter
 
@@ -199,9 +199,9 @@ if (isset($_POST['selectchoice'])) {
 			}
 			$DeleteURL = $_SERVER['PHP_SELF'] . '?' . SID . '&Delete=yes&StockID=' . $myrow['stockid'] . '&DiscountCategory=' . $myrow['discountcategory'];
 
-			printf("<td>%s</td>
+			printf('<td>%s</td>
 				<td>%s - %s</td>
-				<td><a href='%s'>". _('Delete') .'</td>
+				<td><a href="%s">'. _('Delete') .'</td>
 				</tr>',
 				$myrow['discountcategory'],
 				$myrow['stockid'],
@@ -220,7 +220,7 @@ if (isset($_POST['selectchoice'])) {
 }
 
 if (!isset($_POST['selectchoice'])) {
-	echo "<form method='post' name='choose' action=" . $_SERVER['PHP_SELF'] . '?' . SID . '>';
+	echo '<form method="post" name="choose" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class=selection>';
 	echo '<tr><td>'._('Update discount category for').'</td>';
