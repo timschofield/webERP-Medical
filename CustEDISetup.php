@@ -27,13 +27,9 @@ if (isset($_POST['submit'])) {
 
 	//first off validate inputs sensible
 
-	if (strstr($_POST['EDIReference'],"'")
-		OR strstr($_POST['EDIReference'],'+')
-		OR strstr($_POST['EDIReference'],"\"")
-		OR strstr($_POST['EDIReference'],'&')
-		OR strstr($_POST['EDIReference'],' ')) {
+	if (ContainsIllegalCharacters($_POST['EDIReference'])) {
 		$InputError = 1;
-		prnMsg(_('The customers EDI reference code cannot contain any of the following characters') .' - \' & + \" ' . _('or a space'),'warn');
+		prnMsg(_('The customers EDI reference code cannot contain any of the illegal characters') ,'warn');
 	}
 	if (strlen($_POST['EDIReference'])<4 AND ($_POST['EDIInvoices']==1 OR $_POST['EDIOrders']==1)){
 		$InputError = 1;

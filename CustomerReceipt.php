@@ -232,8 +232,8 @@ if (isset($_POST['CommitBatch'])){
 
 	echo '<table class=selection><tr><th>'._('Batch Number').'</th>
 				<th>'._('Date Banked').'</th>
-				<th>'._('Customer Name').'</th
-				<th>'._('GL Code').'</th
+				<th>'._('Customer Name').'</th>
+				<th>'._('GL Code').'</th>
 				<th>'._('Amount of Receipt').'</th></tr>';
 
 	foreach ($_SESSION['ReceiptBatch']->Items as $ReceiptItem) {
@@ -1051,8 +1051,9 @@ if (((isset($_SESSION['CustomerRecord'])
 				$k=1;
 			}
 
-			printf("<td><font size=1><input tabindex=".number_format(12+$j)." type=submit name='Select' value='%s'</font></td>
-					<td>%s</td></tr>",
+			printf('<td><font size=1>
+					<input tabindex='.number_format(12+$j).' type=submit name="Select" value="%s"></font></td>
+					<td>%s</td></tr>',
 					$myrow['debtorno'],
 					$myrow['name']);
 

@@ -183,10 +183,10 @@ or deletion of the records*/
 	$result = DB_query($sql,$db);
 
 	echo '<br><table class=selection>';
-	echo "<tr>
-		<th>" . _('Type ID') . "</th>
-		<th>" . _('Type Name') . "</th>
-		</tr>";
+	echo '<tr>
+		<th>' . _('Type ID') . '</th>
+		<th>' . _('Type Name') . '</th>
+		</tr>';
 
 $k=0; //row colour counter
 
@@ -199,12 +199,12 @@ while ($myrow = DB_fetch_row($result)) {
 		$k=1;
 	}
 
-	printf("
+	printf('
 		<td>%s</td>
 		<td>%s</td>
-		<td><a href='%sSelectedType=%s'>" . _('Edit') . "</td>
-		<td><a href='%sSelectedType=%s&delete=yes' onclick=\"return confirm('" . _('Are you sure you wish to delete this Customer Type?') . "');\">" . _('Delete') . "</td>
-		</tr>",
+		<td><a href="%sSelectedType=%s">' . _('Edit') . '</td>
+		<td><a href="%sSelectedType=%s&delete=yes" onclick=\'return confirm("' . _('Are you sure you wish to delete this Customer Type?') . '");\'>' . _('Delete') . '</td>
+		</tr>',
 		$myrow[0],
 		$myrow[1],
 		$_SERVER['PHP_SELF'] . '?' . SID, $myrow[0],
@@ -217,11 +217,11 @@ while ($myrow = DB_fetch_row($result)) {
 //end of ifs and buts!
 if (isset($SelectedType)) {
 
-	echo '<div class="centre"><p><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '">' . _('Show All Types Defined') . '</a></div><p>';
+	echo '<div class="centre"><p><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Show All Types Defined') . '</a></div><p>';
 }
 if (! isset($_GET['delete'])) {
 
-	echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . '?' . SID . '>';
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<p><table class=selection>'; //Main table
 
@@ -241,9 +241,9 @@ if (! isset($_GET['delete'])) {
 		$_POST['typeid'] = $myrow['typeid'];
 		$_POST['typename']  = $myrow['typename'];
 
-		echo "<input type=hidden name='SelectedType' VALUE=" . $SelectedType . ">";
-		echo "<input type=hidden name='typeid' VALUE=" . $_POST['typeid'] . ">";
-		echo "<table class=selection> <tr><td>";
+		echo '<input type=hidden name="SelectedType" VALUE="' . $SelectedType . '">';
+		echo '<input type=hidden name="typeid" VALUE=' . $_POST['typeid'] . '">';
+		echo '<table class=selection> <tr><td>';
 
 		// We dont allow the user to change an existing type code
 
@@ -253,14 +253,14 @@ if (! isset($_GET['delete'])) {
 
 		// This is a new type so the user may volunteer a type code
 
-		echo "<table class=selection>";
+		echo '<table class=selection>';
 
 	}
 
 	if (!isset($_POST['typename'])) {
 		$_POST['typename']='';
 	}
-	echo "<tr><td>" . _('Type Name') . ":</td><td><input type='Text' name='typename' value='" . $_POST['typename'] . "'></td></tr>";
+	echo '<tr><td>' . _('Type Name') . ':</td><td><input type="Text" name="typename" value="' . $_POST['typename'] . '"></td></tr>';
 
    	echo '</td></tr></table>'; // close main table
 
