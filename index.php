@@ -980,6 +980,11 @@ if (isset($SupplierLogin) and count($_SESSION['AllowedPageSecurityTokens'])==2 a
 							</tr>
 							<tr>
 							<td class="menu_group_item">
+								<?php echo '<p>&bull; <a href="' . $rootpath . '/SecurityTokens.php?">' . _('Maintain Security Tokens') . '</a></p>'; ?>
+							</td>
+							</tr>
+							<tr>
+							<td class="menu_group_item">
 								<?php echo '<p>&bull; <a href="' . $rootpath . '/WWW_Access.php?">' . _('Role Permissions') . '</a></p>'; ?>
 							</td>
 							</tr>
