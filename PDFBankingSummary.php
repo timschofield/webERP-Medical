@@ -16,12 +16,12 @@ if (!isset($_POST['BatchNo'])){
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' .
 		 $title . '" alt="" />' . ' ' . $title . '</p>';
 
-	$sql='SELECT DISTINCT
+	$sql="SELECT DISTINCT
 			transno,
 			transdate
 		FROM banktrans
 		WHERE type=12
-		ORDER BY transno DESC';
+		ORDER BY transno DESC";
 	$result=DB_query($sql, $db);
 
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '"><table class=selection>';
@@ -75,8 +75,8 @@ if (isset($_POST['BatchNo']) and $_POST['BatchNo']!='') {
 	$BankActName = $myrow['bankaccountname'];
 	$BankActNumber = $myrow['bankaccountnumber'];
 	$BankingReference = $myrow['ref'];
-	
-	
+
+
 	$SQL = "SELECT debtorsmaster.name,
 					ovamount,
 					invtext,
@@ -85,7 +85,7 @@ if (isset($_POST['BatchNo']) and $_POST['BatchNo']!='') {
 				ON debtorsmaster.debtorno=debtortrans.debtorno
 				WHERE debtortrans.transno='" . $_POST['BatchNo'] . "'
 				AND debtortrans.type=12";
-	
+
 	$CustRecs=DB_query($SQL,$db,'','',false,false);
 	if (DB_error_no($db)!=0){
 		$title = _('Create PDF Print-out For A Batch Of Receipts');
@@ -104,7 +104,7 @@ if (isset($_POST['BatchNo']) and $_POST['BatchNo']!='') {
 				AND gltrans.type=12 and gltrans.amount <0
 				AND gltrans.account !='" . $myrow['bankact'] . "'
 				AND gltrans.account !='" . $_SESSION['CompanyRecord']['debtorsact'] . "'";
-	
+
 	$GLRecs=DB_query($SQL,$db,'','',false,false);
 	if (DB_error_no($db)!=0){
 		$title = _('Create PDF Print-out For A Batch Of Receipts');
@@ -116,57 +116,57 @@ if (isset($_POST['BatchNo']) and $_POST['BatchNo']!='') {
 		include('includes/footer.inc');
 		exit;
 	}
-	
-	
+
+
 	include('includes/PDFStarter.php');
-	
+
 	/*PDFStarter.php has all the variables for page size and width set up depending on the users default preferences for paper size */
-	
+
 	$pdf->addInfo('Title',_('Banking Summary'));
 	$pdf->addInfo('Subject',_('Banking Summary Number') . ' ' . $_POST['BatchNo']);
 	$line_height=12;
 	$PageNumber = 0;
 	$TotalBanked = 0;
-	
+
 	include ('includes/PDFBankingSummaryPageHeader.inc');
-	
+
 	while ($myrow=DB_fetch_array($CustRecs)){
-	
+
 		$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,60,$FontSize,number_format(-$myrow['ovamount'],2), 'right');
 		$LeftOvers = $pdf->addTextWrap($Left_Margin+65,$YPos,150,$FontSize,$myrow['name'], 'left');
 		$LeftOvers = $pdf->addTextWrap($Left_Margin+215,$YPos,100,$FontSize,$myrow['invtext'], 'left');
 		$LeftOvers = $pdf->addTextWrap($Left_Margin+315,$YPos,100,$FontSize,$myrow['reference'], 'left');
-	
+
 		$YPos -= ($line_height);
 		$TotalBanked -= $myrow['ovamount'];
-	
+
 		if ($YPos - (2 *$line_height) < $Bottom_Margin){
 			/*Then set up a new page */
 			include ('includes/PDFBankingSummaryPageHeader.inc');
 		} /*end of new page header  */
 	} /* end of while there are customer receipts in the batch to print */
-	
+
 	/* Right now print out the GL receipt entries in the batch */
 	while ($myrow=DB_fetch_array($GLRecs)){
-	
+
 		$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,60,$FontSize,number_format((-$myrow['amount']*$ExRate*$FunctionalExRate),2), 'right');
 		$LeftOvers = $pdf->addTextWrap($Left_Margin+65,$YPos,300,$FontSize,$myrow['narrative'], 'left');
 		$YPos -= ($line_height);
 		$TotalBanked +=  (-$myrow['amount']*$ExRate);
-	
+
 		if ($YPos - (2 *$line_height) < $Bottom_Margin){
 			/*Then set up a new page */
 			include ('includes/PDFBankingSummaryPageHeader.inc');
 		} /*end of new page header  */
 	} /* end of while there are GL receipts in the batch to print */
-	
-	
+
+
 	$YPos-=$line_height;
 	$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,60,$FontSize,number_format($TotalBanked,2), 'right');
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+65,$YPos,300,$FontSize,_('TOTAL') . ' ' . $Currency . ' ' . _('BANKED'), 'left');
-	
+
 	$pdf->OutputD($_SESSION['DatabaseName'] . '_BankingSummary_' . date('Y-m-d').'.pdf');//UldisN
-	$pdf->__destruct(); 
+	$pdf->__destruct();
 }
 
 ?>

@@ -53,7 +53,7 @@ if (!isset($_POST['FromDate'])){
 
 	 echo '</select></td></tr>';
 
-	$sql = 'SELECT loccode, locationname FROM locations';
+	$sql = "SELECT loccode, locationname FROM locations";
 	$resultStkLocs = DB_query($sql, $db);
 
 	echo '<tr><td>' . _('For Stock Location') . ':</td>
