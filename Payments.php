@@ -897,13 +897,45 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 			<td><input type=Text class="number" Name="GLManualCode" Maxlength=12 size=12 onChange="inArray(this, GLCode.options,'.
 		"'".'The account code '."'".'+ this.value+ '."'".' doesnt exist'."'".')"></td></tr>';
 	}
-	echo '<tr><td>' . _('Select GL Account') . ':</td>
-		<td><select name="GLCode" onChange="return assignComboToInput(this,'.'GLManualCode'.')">';
 
-	$SQL = "SELECT accountcode,
+	echo '<tr><td>' . _('Select GL Group') . ':</td>
+		<td><select name="GLGroup" onChange="return ReloadForm(UpdateCodes)">';
+
+	$SQL = "SELECT groupname
+			FROM accountgroups
+			ORDER BY sequenceintb";
+
+	$result=DB_query($SQL,$db);
+	if (DB_num_rows($result)==0){
+		echo '</select></td></tr>';
+		prnMsg(_('No General ledger account groups have been set up yet') . ' - ' . _('payments cannot be analysed against GL accounts until the GL accounts are set up'),'error');
+	} else {
+		echo '<option value=""></option>';
+		while ($myrow=DB_fetch_array($result)){
+			if (isset($_POST['GLGroup']) and ($_POST['GLGroup']==$myrow['groupname'])){
+				echo '<option selected value="' . $myrow['groupname'] . '">' . $myrow['groupname'] . '</option>';
+			} else {
+				echo '<option value="' . $myrow['groupname'] . '">' . $myrow['groupname'] . '</option>';
+			}
+		}
+		echo '</select><input type="submit" name="UpdateCodes" value="Select" /></td></tr>';
+	}
+
+	if (isset($_POST['GLGroup']) and $_POST['GLGroup']!='') {
+		$SQL = "SELECT accountcode,
+					accountname
+			FROM chartmaster
+			WHERE group_='".$_POST['GLGroup']."'
+			ORDER BY accountcode";
+	} else {
+		$SQL = "SELECT accountcode,
 					accountname
 			FROM chartmaster
 			ORDER BY accountcode";
+	}
+
+	echo '<tr><td>' . _('Select GL Account') . ':</td>
+		<td><select name="GLCode" onChange="return assignComboToInput(this,'.'GLManualCode'.')">';
 
 	$result=DB_query($SQL,$db);
 	if (DB_num_rows($result)==0){
