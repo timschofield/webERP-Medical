@@ -190,8 +190,8 @@ while ($myrow = DB_fetch_row($result)) {
 		<td>%s</td>
 		<td>%s</td>
 		<td><a href="%sSelectedType=%s">' . _('Edit') . '</td>
-		<td><a href="%sSelectedType=%s&delete=yes" onclick=\'return confirm("' .
-			_('Are you sure you wish to delete this Supplier Type?') . '");\'>' . _('Delete') . '</td>
+		<td><a href="%sSelectedType=%s&delete=yes" onclick=\'return confirm(
+			"' . _('Are you sure you wish to delete this Supplier Type?') . '");\'>' . _('Delete') . '</td>
 		</tr>',
 		$myrow[0],
 		$myrow[1],

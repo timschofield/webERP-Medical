@@ -111,7 +111,7 @@ include('includes/header.inc');
 			echo "<td>" . $curPeriod . "</td>
 					<td class=number>" . number_format($dtRow['bfwd'],2) . "</td>";
 
-			$SQL = "SELECT SUM((ovamount+ovgst)/rate) AS totinvnetcrds
+			$SQL = "SELECT SUM((ovamount+ovgst+ovdiscount)*rate) AS totinvnetcrds
 					FROM debtortrans
 					WHERE prd = " . $curPeriod . "
 					AND (type=10 OR type=11)";
@@ -123,7 +123,7 @@ include('includes/header.inc');
 
 			echo '<td class=number>' . number_format($invRow['totinvnetcrds'],2) . '</td>';
 
-			$SQL = "SELECT SUM((ovamount+ovgst)/rate) AS totreceipts
+			$SQL = "SELECT SUM((ovamount+ovgst+ovdiscount)*rate) AS totreceipts
 					FROM debtortrans
 					WHERE prd = " . $curPeriod . "
 					AND type=12";

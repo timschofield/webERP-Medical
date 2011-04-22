@@ -4,7 +4,7 @@
 include ('LanguageSetup.php');
 
 if ($allow_demo_mode == True and !isset($demo_text)) {
-	$demo_text = _('login as user') .': <i>' . _('admin') . '</i><BR>' ._('with password') . ': <i>' . _('weberp') . '</i>';
+	$demo_text = _('login as user') .': <i>' . _('admin') . '</i><br />' ._('with password') . ': <i>' . _('weberp') . '</i>';
 } elseif (!isset($demo_text)) {
 	$demo_text = _('Please login here');
 }
@@ -30,9 +30,9 @@ if (get_magic_quotes_gpc()){
 <div id="container">
 	<div id="login_logo"></div>
 	<div id="login_box">
-	<form action="<?php echo $_SERVER['PHP_SELF'];?>" name="loginform" method="post">
+	<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
 	<input type="hidden" name="FormID" value="<?php echo $_SESSION['FormID']; ?>" />
-	<label><?php echo _('Company'); ?>:</label>
+	<span><?php echo _('Company'); ?>:</span>
 	<?php
 		if ($AllowCompanySelectionBox == true){
 			echo '<select name="CompanyNameField">';
@@ -40,9 +40,9 @@ if (get_magic_quotes_gpc()){
 			while (false != ($CompanyEntry = $DirHandle->read())){
 				if (is_dir('companies/' . $CompanyEntry) AND $CompanyEntry != '..' AND $CompanyEntry != '' AND $CompanyEntry!='.svn' AND $CompanyEntry!='.'){
 					if ($CompanyEntry==$DefaultCompany) {
-						echo "<option selected value='$CompanyEntry'>$CompanyEntry</option>";
+						echo '<option selected value="'.$CompanyEntry.'">'.$CompanyEntry.'</option>';
 					} else {
-						echo "<option  value='$CompanyEntry'>$CompanyEntry</option>";
+						echo '<option value="'.$CompanyEntry.'">'.$CompanyEntry.'</option>';
 					}
 				}
 			}
@@ -52,21 +52,19 @@ if (get_magic_quotes_gpc()){
 		}
 	?>
 	<br />
-	<label><?php echo _('User name'); ?>:</label><br />
-	<input type="TEXT" name="UserNameEntryField"/><br />
-	<label><?php echo _('Password'); ?>:</label><br />
-	<input type="PASSWORD" name="Password"><br />
+	<span><?php echo _('User name'); ?>:</span><br />
+	<input type="text" name="UserNameEntryField" /><br />
+	<span><?php echo _('Password'); ?>:</span><br />
+	<input type="password" name="Password" /><br />
 	<div id="demo_text"><?php echo $demo_text;?></div>
 	<input class="button" type="submit" value="<?php echo _('Login'); ?>" name="SubmitUser" />
 	</form>
 	</div>
 </div>
-    <script language="JavaScript" type="text/javascript">
-    //<![CDATA[
+    <script type="text/javascript">
             <!--
                   document.loginform.UserNameEntryField.focus();
             //-->
-    //]]>
     </script>
 </body>
 </html>

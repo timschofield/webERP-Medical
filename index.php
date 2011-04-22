@@ -38,17 +38,17 @@ if (isset($SupplierLogin) and count($_SESSION['AllowedPageSecurityTokens'])==2 a
 		<table class="table_index">
 			<tr>
 			<td class="menu_group_item">
-				<?php echo '<p>&bull; <a href="' . $rootpath . '/CustomerInquiry.php?&CustomerID=' . $_SESSION['CustomerID'] . '">' . _('Account Status') . '</a></p>'; ?>
+				<?php echo '<p>&bull; <a href="' . $rootpath . '/CustomerInquiry.php?CustomerID=' . $_SESSION['CustomerID'] . '">' . _('Account Status') . '</a></p>'; ?>
 			</td>
 			</tr>
 			<tr>
 			<td class="menu_group_item">
-				<?php echo '<p>&bull; <a href="' . $rootpath . '/SelectOrderItems.php?&NewOrder=Yes">' . _('Place An Order') . '</a></p>'; ?>
+				<?php echo '<p>&bull; <a href="' . $rootpath . '/SelectOrderItems.php?NewOrder=Yes">' . _('Place An Order') . '</a></p>'; ?>
 			</td>
 			</tr>
 			<tr>
 			<td class="menu_group_item">
-				<?php echo '<p>&bull; <a href="' . $rootpath . '/SelectCompletedOrder.php?&SelectedCustomer=' . $_SESSION['CustomerID'] . '">' . _('Order Status') . '</a></p>'; ?>
+				<?php echo '<p>&bull; <a href="' . $rootpath . '/SelectCompletedOrder.php?SelectedCustomer=' . $_SESSION['CustomerID'] . '">' . _('Order Status') . '</a></p>'; ?>
 			</td>
 			</tr>
 		</table>
@@ -64,17 +64,17 @@ if (isset($SupplierLogin) and count($_SESSION['AllowedPageSecurityTokens'])==2 a
 		<table class="table_index">
 			<tr>
 			<td class="menu_group_item">
-				<?php echo '<p>&bull; <a href="' . $rootpath . '/SupplierTenders.php?&TenderType=1">' . _('View or Amend outstanding offers') . '</a></p>'; ?>
+				<?php echo '<p>&bull; <a href="' . $rootpath . '/SupplierTenders.php?TenderType=1">' . _('View or Amend outstanding offers') . '</a></p>'; ?>
 			</td>
 			</tr>
 			<tr>
 			<td class="menu_group_item">
-				<?php echo '<p>&bull; <a href="' . $rootpath . '/SupplierTenders.php?&TenderType=2">' . _('Create a new offer') . '</a></p>'; ?>
+				<?php echo '<p>&bull; <a href="' . $rootpath . '/SupplierTenders.php?TenderType=2">' . _('Create a new offer') . '</a></p>'; ?>
 			</td>
 			</tr>
 			<tr>
 			<td class="menu_group_item">
-				<?php echo '<p>&bull; <a href="' . $rootpath . '/SupplierTenders.php?&TenderType=3">' . _('View any open tenders without an offer') . '</a></p>'; ?>
+				<?php echo '<p>&bull; <a href="' . $rootpath . '/SupplierTenders.php?TenderType=3">' . _('View any open tenders without an offer') . '</a></p>'; ?>
 			</td>
 			</tr>
 		</table>
@@ -102,9 +102,9 @@ if (isset($SupplierLogin) and count($_SESSION['AllowedPageSecurityTokens'])==2 a
 				$_SESSION['Module']=$ModuleLink[$i];
 			}
 			if ($ModuleLink[$i] == $_SESSION['Module']){
-				echo '<tr><td class="main_menu_selected"><a href="' . $_SERVER['PHP_SELF'] . '?&Application='. $ModuleLink[$i] . '">' . $ModuleList[$i] . '</a></td></tr>';
+				echo '<tr><td class="main_menu_selected"><a href="' . $_SERVER['PHP_SELF'] . '?Application='. $ModuleLink[$i] . '">' . $ModuleList[$i] . '</a></td></tr>';
 			} else {
-				echo '<tr><td class="main_menu_unselected"><a href="' . $_SERVER['PHP_SELF'] . '?&Application='. $ModuleLink[$i] . '">' . $ModuleList[$i] . '</a></td></tr>';
+				echo '<tr><td class="main_menu_unselected"><a href="' . $_SERVER['PHP_SELF'] . '?Application='. $ModuleLink[$i] . '">' . $ModuleList[$i] . '</a></td></tr>';
 			}
 		}
 		$i++;
@@ -285,7 +285,7 @@ if (isset($SupplierLogin) and count($_SESSION['AllowedPageSecurityTokens'])==2 a
 							</tr>
 							<tr>
 							<td class="menu_group_item">
-								<?php echo '<p>&bull; <a href="' . $rootpath . '/CustomerReceipt.php?&NewReceipt=Yes&Type=Customer">' . _('Enter Receipts') . '</a></p>'; ?>
+								<?php echo '<p>&bull; <a href="' . $rootpath . '/CustomerReceipt.php?NewReceipt=Yes&Type=Customer">' . _('Enter Receipts') . '</a></p>'; ?>
 							</td>
 							</tr>
 							<tr>
@@ -501,17 +501,17 @@ if (isset($SupplierLogin) and count($_SESSION['AllowedPageSecurityTokens'])==2 a
 							</tr>
 							<tr>
 							<td class="menu_group_item">
-								<?php echo '<p>&bull; <a href="' . $rootpath . '/PO_Header.php?&NewOrder=Yes">' . _('Add Purchase Order') . '</a></p>'; ?>
+								<?php echo '<p>&bull; <a href="' . $rootpath . '/PO_Header.php?NewOrder=Yes">' . _('Add Purchase Order') . '</a></p>'; ?>
 							</td>
 							</tr>
 							<tr>
 							<td class="menu_group_item">
-								<?php echo '<p>&bull; <a href="' . $rootpath . '/SupplierTenderCreate.php?&New=Yes">' . _('Create a New Tender') . '</a></p>'; ?>
+								<?php echo '<p>&bull; <a href="' . $rootpath . '/SupplierTenderCreate.php?New=Yes">' . _('Create a New Tender') . '</a></p>'; ?>
 							</td>
 							</tr>
 							<tr>
 							<td class="menu_group_item">
-								<?php echo '<p>&bull; <a href="' . $rootpath . '/SupplierTenderCreate.php?&Edit=Yes">' . _('Edit Existing Tenders') . '</a></p>'; ?>
+								<?php echo '<p>&bull; <a href="' . $rootpath . '/SupplierTenderCreate.php?Edit=Yes">' . _('Edit Existing Tenders') . '</a></p>'; ?>
 							</td>
 							</tr>
 							<tr>
@@ -1205,7 +1205,7 @@ if (isset($SupplierLogin) and count($_SESSION['AllowedPageSecurityTokens'])==2 a
 							</tr>
 							<tr>
 							<td class="menu_group_item">
-								<?php echo '<p>&bull; <a href="' . $rootpath . '/CustomerReceipt.php?&NewReceipt=Yes&Type=GL">' . _('Bank Account Receipts Entry') . '</a></p>'; ?>
+								<?php echo '<p>&bull; <a href="' . $rootpath . '/CustomerReceipt.php?NewReceipt=Yes&Type=GL">' . _('Bank Account Receipts Entry') . '</a></p>'; ?>
 							</td>
 							</tr>
 							<tr>

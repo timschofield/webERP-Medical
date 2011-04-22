@@ -17,7 +17,7 @@ include('includes/header.inc');
 
 if (!isset($_SESSION['SuppTrans'])){
 	prnMsg(_('To enter a supplier invoice or credit note the supplier must first be selected from the supplier selection screen') . ', ' . _('then the link to enter a supplier invoice or supplier credit note must be clicked on'),'info');
-	echo "<br><a href='$rootpath/SelectSupplier.php?" . SID ."'>" . _('Select A Supplier') . '</a>';
+	echo '<br /><a href="' . $rootpath . '/SelectSupplier.php?">' . _('Select A Supplier') . '</a>';
 	include('includes/footer.inc');
 	exit;
 	/*It all stops here if there aint no supplier selected and transaction initiated ie $_SESSION['SuppTrans'] started off*/
@@ -107,8 +107,8 @@ foreach ( $_SESSION['SuppTrans']->GLCodes as $EnteredGLCode){
 		<td>' . $EnteredGLCode->GLCode . '</td>
 		<td>' . $EnteredGLCode->GLActName . '</td>
 		<td class=number>' . number_format($EnteredGLCode->Amount,2) . '</td>
-		<td>' . $EnteredGLCode->Narrative . "</td>
-		<td><a href='" . $_SERVER['PHP_SELF'] . "?" . SID . "Delete=" . $EnteredGLCode->Counter . "'>" . _('Delete') . '</a></td>
+		<td>' . $EnteredGLCode->Narrative . '</td>
+		<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $EnteredGLCode->Counter . '">' . _('Delete') . '</a></td>
 		</tr>';
 
 	$TotalGLValue += $EnteredGLCode->Amount;
@@ -128,9 +128,9 @@ echo '<tr>
 
 
 if ($_SESSION['SuppTrans']->InvoiceOrCredit == 'Invoice'){
-	echo '<br /><a href="' . $rootpath . '/SupplierInvoice.php?' . SID . '">' . _('Back to Invoice Entry') . '</a>';
+	echo '<br /><a href="' . $rootpath . '/SupplierInvoice.php">' . _('Back to Invoice Entry') . '</a>';
 } else {
-	echo '<br /><a href="' . $rootpath . '/SupplierCredit.php?' . SID . '">' . _('Back to Credit Note Entry') . '</a>';
+	echo '<br /><a href="' . $rootpath . '/SupplierCredit.php">' . _('Back to Credit Note Entry') . '</a>';
 }
 
 /*Set up a form to allow input of new GL entries */
