@@ -17,7 +17,7 @@ include('includes/header.inc');
 
 if(!isset($_GET['SupplierID']) AND !isset($_SESSION['SupplierID'])){
 	echo '<br>' . _('To display the enquiry a Supplier must first be selected from the Supplier selection screen') .
-		  "<br><div class='centre'>><a href='". $rootpath . "/SelectSupplier.php'>" . _('Select a Supplier to Inquire On') . '</a></div>';
+		  '<br><div class="centre"><a href="'. $rootpath . '/SelectSupplier.php">' . _('Select a Supplier to Inquire On') . '</a></div>';
 	exit;
 } else {
 	if (isset($_GET['SupplierID'])){
@@ -133,12 +133,12 @@ if (isset($_GET['HoldType']) AND isset($_GET['HoldTrans'])){
 
 }
 
-echo "<table width=90% class=selection><tr><th>" . _('Total Balance') .
-	  "</th><th>" . _('Current') .
-	  "</th><th>" . _('Now Due') .
-	  "</th><th>" . $_SESSION['PastDueDays1'] . '-' . $_SESSION['PastDueDays2'] .
+echo '<table width=90% class=selection><tr><th>' . _('Total Balance') .
+	  '</th><th>' . _('Current') .
+	  '</th><th>' . _('Now Due') .
+	  '</th><th>' . $_SESSION['PastDueDays1'] . '-' . $_SESSION['PastDueDays2'] .
 	  ' ' . _('Days Overdue') .
-	  "</th><th>" . _('Over') . ' ' . $_SESSION['PastDueDays2'] . ' ' . _('Days Overdue') . '</th></tr>';
+	  '</th><th>' . _('Over') . ' ' . $_SESSION['PastDueDays2'] . ' ' . _('Days Overdue') . '</th></tr>';
 
 echo '<tr><td class=number>' . number_format($SupplierRecord['balance'],2) .
 	  '</td><td class=number>' . number_format(($SupplierRecord['balance'] - $SupplierRecord['due']),2) .
@@ -146,10 +146,10 @@ echo '<tr><td class=number>' . number_format($SupplierRecord['balance'],2) .
 	  '</td><td class=number>' . number_format(($SupplierRecord['overdue1']-$SupplierRecord['overdue2']) ,2) .
 	  '</td><td class=number>' . number_format($SupplierRecord['overdue2'],2) . '</td></tr></table>';
 
-echo "<br><div class='centre'><form action='" . $_SERVER['PHP_SELF'] . "?" . SID . "' method=post>";
+echo '<br><div class="centre"><form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo _('Show all transactions after') . ': ' ."<input type=text class='date' alt='".$_SESSION['DefaultDateFormat']."' name='TransAfterDate' VALUE='" .
-	  $_POST['TransAfterDate'] . "' maxlength =10 size=10> <input type=submit name='Refresh Inquiry' VALUE='" . _('Refresh Inquiry') . "'></form><br>";
+echo _('Show all transactions after') . ': ' .'<input type=text class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="TransAfterDate" VALUE="' .
+	  $_POST['TransAfterDate'] . '" maxlength =10 size=10> <input type=submit name="Refresh Inquiry" VALUE="' . _('Refresh Inquiry') . '"></form><br>';
 echo '</div>';
 $DateAfterCriteria = FormatDateForSQL($_POST['TransAfterDate']);
 
@@ -189,16 +189,16 @@ if (DB_num_rows($TransResult) == 0){
 
 
 echo '<table width="90%" cellpadding="2" colspan="7" class=selection>';
-$TableHeader = "<tr BGCOLOR =#800000><th>" . _('Trans') . ' #' .
-		"</th><th>" . _('Type') .
-		"</th><th>" . _('Supplier Ref') .
-		"</th><th>" . _('Date') .
-		"</th><th>" . _('Total') .
-		"</th><th>" . _('Allocated') .
-		"</th><th>" . _('Balance') .
-		"</th><th>" . _('Comments') .
-		"</th><th>" . _('More Info') .
-		"</th><th>" . _('More Info') . '</td></tr>';
+$TableHeader = '<tr BGCOLOR =#800000><th>' . _('Trans') . ' #' .
+		'</th><th>' . _('Type') .
+		'</th><th>' . _('Supplier Ref') .
+		'</th><th>' . _('Date') .
+		'</th><th>' . _('Total') .
+		'</th><th>' . _('Allocated') .
+		'</th><th>' . _('Balance') .
+		'</th><th>' . _('Comments') .
+		'</th><th>' . _('More Info') .
+		'</th><th>' . _('More Info') . '</td></tr>';
 
 echo $TableHeader;
 
@@ -232,25 +232,25 @@ while ($myrow=DB_fetch_array($TransResult)) {
 
 			/*The trans is settled so don't show option to hold */
 
-				echo "<td>".$myrow['transno']."</td>";
-				echo "<td>".$myrow['typename']."</td>";
-				echo "<td>".$myrow['suppreference']."</td>";
-				echo "<td>".ConvertSQLDate($myrow['trandate'])."</td>";
-				echo "<td class=number>".number_format($myrow['totalamount'],2)."</td>";
-				echo "<td class=number>".number_format($myrow['allocated'],2)."</td>";
-				echo "<td class=number>".number_format($myrow['totalamount']-$myrow['allocated'],2)."</td>";
-				echo "<td align=left>".$myrow['transtext']."</td>";
-				echo "<td><a target='_blank' href='".$rootpath."/GLTransInquiry.php?".SID."&TypeID=".$myrow['type']."&TransNo=".$myrow['transno']."'>" . _('View GL Postings') . "</a></td>";
-				echo "<td><a href='".$rootpath."/PaymentAllocations.php?".SID."SuppID=".$myrow['supplierno']."&InvID=".$myrow['suppreference']."'>" . _('View Payments') . "</a></td></tr>";
+				echo '<td>'.$myrow['transno'].'</td>';
+				echo '<td>'.$myrow['typename'].'</td>';
+				echo '<td>'.$myrow['suppreference'].'</td>';
+				echo '<td>'.ConvertSQLDate($myrow['trandate']).'</td>';
+				echo '<td class=number>'.number_format($myrow['totalamount'],2).'</td>';
+				echo '<td class=number>'.number_format($myrow['allocated'],2).'</td>';
+				echo '<td class=number>'.number_format($myrow['totalamount']-$myrow['allocated'],2).'</td>';
+				echo '<td align=left>'.$myrow['transtext'].'</td>';
+				echo '<td><a target="_blank" href="'.$rootpath.'/GLTransInquiry.php?TypeID='.$myrow['type'].'&TransNo='.$myrow['transno'].'">' . _('View GL Postings') . '</a></td>';
+				echo '<td><a href="'.$rootpath.'/PaymentAllocations.php?SuppID='.$myrow['supplierno'].'&InvID='.$myrow['suppreference'].'">' . _('View Payments') . '</a></td></tr>';
 			} else {
-				echo "<td>".$myrow['transno']."</td>";
-				echo "<td>".$myrow['typename']."</td>";
-				echo "<td>".$myrow['suppreference']."</td>";
-				echo "<td>".ConvertSQLDate($myrow['trandate'])."</td>";
-				echo "<td class=number>".number_format($myrow['totalamount'],2)."</td>";
-				echo "<td class=number>".number_format($myrow['allocated'],2)."</td>";
-				echo "<td class=number>".number_format($myrow['totalamount'] - $myrow['allocated'],2)."</td>";
-				echo "<td align=left>".$myrow['transtext']."</td>";
+				echo '<td>'.$myrow['transno'].'</td>';
+				echo '<td>'.$myrow['typename'].'</td>';
+				echo '<td>'.$myrow['suppreference'].'</td>';
+				echo '<td>'.ConvertSQLDate($myrow['trandate']).'</td>';
+				echo '<td class=number>'.number_format($myrow['totalamount'],2).'</td>';
+				echo '<td class=number>'.number_format($myrow['allocated'],2).'</td>';
+				echo '<td class=number>'.number_format($myrow['totalamount'] - $myrow['allocated'],2).'</td>';
+				echo '<td align=left>'.$myrow['transtext'].'</td>';
 				$authsql="SELECT offhold
 					FROM purchorderauth
 					WHERE userid='".$_SESSION['UserID'] .
@@ -258,17 +258,15 @@ while ($myrow=DB_fetch_array($TransResult)) {
 				$authresult=DB_query($authsql, $db);
 				$authrow=DB_fetch_array($authresult);
 				if ($authrow[0]==0) {
-					echo "<td><a href='".$_SERVER['PHP_SELF']."?".SID."&HoldType=".$myrow['type']."&HoldTrans=".$myrow['transno'].
-						"&HoldStatus=".$HoldValue."&FromDate=".$_POST['TransAfterDate']."'>".$HoldValue."</a></td>";
+					echo '<td><a href="'.$_SERVER['PHP_SELF'].'?HoldType='.$myrow['type'].'&HoldTrans='.$myrow['transno'].'&HoldStatus='.$HoldValue.'&FromDate='.$_POST['TransAfterDate'].'">'.$HoldValue.'</a></td>';
 				} else {
 					if ($HoldValue==_('Release')) {
-						echo "<td>".$HoldValue."</a></td>";
+						echo '<td>'.$HoldValue.'</a></td>';
 					} else {
-						echo "<td><a href='".$_SERVER['PHP_SELF']."?".SID."&HoldType=".$myrow['type']."&HoldTrans=".$myrow['transno'].
-							"&HoldStatus=".$HoldValue."&FromDate=".$_POST['TransAfterDate']."'>".$HoldValue."</a></td>";
+						echo '<td><a href="'.$_SERVER['PHP_SELF'].'?HoldType='.$myrow['type'].'&HoldTrans='.$myrow['transno'].'&HoldStatus='.$HoldValue.'&FromDate='.$_POST['TransAfterDate'].'">'.$HoldValue.'</a></td>';
 					}
 				}
-				echo "<td><a target='_blank' href='".$rootpath."/GLTransInquiry.php?TypeID=".$myrow['type']."&TransNo=".$myrow['transno']."'>" ._('View GL Postings') . "</a></td></tr>";
+				echo '<td><a target="_blank" href="'.$rootpath.'/GLTransInquiry.php?TypeID='.$myrow['type'].'&TransNo='.$myrow['transno'].'">' ._('View GL Postings') . '</a></td></tr>';
 			}
 		} else {
 
@@ -276,7 +274,7 @@ while ($myrow=DB_fetch_array($TransResult)) {
 
 			/*The trans is settled so don't show option to hold */
 
-				printf("<td>%s</td>
+				printf('<td>%s</td>
 					<td>%s</td>
                                         <td>%s</td>
 					<td>%s</td>
@@ -284,7 +282,7 @@ while ($myrow=DB_fetch_array($TransResult)) {
 					<td class=number>%s</td>
 					<td class=number>%s</td>
 					<td align=left>%s</td>
-					</td></tr>",
+					</td></tr>',
 					$myrow['transno'],
 					$myrow['typename'],
 					$myrow['suppreference'],
@@ -296,7 +294,7 @@ while ($myrow=DB_fetch_array($TransResult)) {
 
 			} else {
 
-				printf("<td>%s</td>
+				printf('<td>%s</td>
 					<td>%s</td>
 					<td>%s</td>
 					<td>%s</td>
@@ -304,8 +302,8 @@ while ($myrow=DB_fetch_array($TransResult)) {
 					<td class=number>%s</td>
 					<td class=number>%s</td>
 					<td align=left>%s</td>
-					<td><a href='%s?%s&HoldType=%s&HoldTrans=%s&HoldStatus=%s&FromDate=%s'>%s</a></td>
-                                        <td><a href='%s/PaymentAllocations.php?%sSuppID=%s&InvID=%s'>" . _('View Payments') . "</a></tr>",
+					<td><a href="%s?%s&HoldType=%s&HoldTrans=%s&HoldStatus=%s&FromDate=%s">%s</a></td>
+					<td><a href="%s/PaymentAllocations.php?%sSuppID=%s&InvID=%s">' . _('View Payments') . '</a></tr>',
 					$myrow['transno'],
 					$myrow['typename'],
 					$myrow['suppreference'],
@@ -321,11 +319,10 @@ while ($myrow=DB_fetch_array($TransResult)) {
 					$HoldValue,
 					$_POST['TransAfterDate'],
 					$HoldValue,
-                                        $rootpath,
-                                        SID,
-                                        $myrow['supplierno'],
-                                        $myrow['suppreference']);
-
+					$rootpath,
+					SID,
+					$myrow['supplierno'],
+					$myrow['suppreference']);
 			}
 		}
 
@@ -333,7 +330,7 @@ while ($myrow=DB_fetch_array($TransResult)) {
 
 		if ($_SESSION['CompanyRecord']['gllink_creditors'] == True){
 
-			printf("<td>%s</td>
+			printf('<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
@@ -341,9 +338,9 @@ while ($myrow=DB_fetch_array($TransResult)) {
 				<td class=number>%s</td>
 				<td class=number>%s</td>
 				<td align=left>%s</td>
-				<td><a href='%s/SupplierAllocations.php?%sAllocTrans=%s'>" .
-					  _('View Allocations') . "</a></td>
-				<td><a TARGET='_blank' href='%s/GLTransInquiry.php?%sTypeID=%s&TransNo=%s'>" .
+				<td><a href="%s/SupplierAllocations.php?%sAllocTrans=%s">' .
+					  _('View Allocations') . '</a></td>
+				<td><a TARGET="_blank" href="%s/GLTransInquiry.php?%sTypeID=%s&TransNo=%s">' .
 					  _('View GL Postings') . '</a></td>
 				</tr>',
 				$myrow['transno'],
@@ -364,7 +361,7 @@ while ($myrow=DB_fetch_array($TransResult)) {
 
 		} else { /*Not linked to GL */
 
-			printf("<td>%s</td>
+			printf('<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
@@ -372,7 +369,7 @@ while ($myrow=DB_fetch_array($TransResult)) {
 				<td class=number>%s</td>
 				<td class=number>%s</td>
 				<td align=left>%s</td>
-				<td><a href='%s/SupplierAllocations.php?%sAllocTrans=%s'>" . _('View Allocations') . '</a></td>
+				<td><a href="%s/SupplierAllocations.php?%sAllocTrans=%s">' . _('View Allocations') . '</a></td>
 				</tr>',
 				$myrow['transno'],
 				$myrow['typename'],

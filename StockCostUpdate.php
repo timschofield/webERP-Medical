@@ -166,11 +166,11 @@ if (!isset($UpdateSecurity) or !in_array($UpdateSecurity,$_SESSION['AllowedPageS
     echo '</table><br /><div class="centre"><input type="submit" name="UpdateData" VALUE="' . _('Update') . '"><br /><br />';
 }
 if ($myrow['mbflag']!='D'){
-	echo '<div class="centre"><a href="' . $rootpath . '/StockStatus.php?' . SID . '&StockID=' . $StockID . '>' . _('Show Stock Status') . '</a>';
-	echo '<br><a href="' . $rootpath . '/StockMovements.php?' . SID . '&StockID=' . $StockID . '">' . _('Show Stock Movements') . '</a>';
-	echo '<br><a href="' . $rootpath . '/StockUsage.php?' . SID . '&StockID=' . $StockID . '">' . _('Show Stock Usage')  .'</a>';
-	echo '<br><a href="' . $rootpath . '/SelectSalesOrder.php?' . SID . '&SelectedStockItem=' . $StockID . '">' . _('Search Outstanding Sales Orders') . '</a>';
-	echo '<br><a href="' . $rootpath . '/SelectCompletedOrder.php?' . SID . '&SelectedStockItem=' . $StockID . '">' . _('Search Completed Sales Orders') . '</a></div>';
+	echo '<div class="centre"><a href="' . $rootpath . '/StockStatus.php?StockID=' . $StockID . '">' . _('Show Stock Status') . '</a>';
+	echo '<br><a href="' . $rootpath . '/StockMovements.php?StockID=' . $StockID . '">' . _('Show Stock Movements') . '</a>';
+	echo '<br><a href="' . $rootpath . '/StockUsage.php?StockID=' . $StockID . '">' . _('Show Stock Usage')  .'</a>';
+	echo '<br><a href="' . $rootpath . '/SelectSalesOrder.php?SelectedStockItem=' . $StockID . '">' . _('Search Outstanding Sales Orders') . '</a>';
+	echo '<br><a href="' . $rootpath . '/SelectCompletedOrder.php?SelectedStockItem=' . $StockID . '">' . _('Search Completed Sales Orders') . '</a></div>';
 }
 echo '</form></div>';
 include('includes/footer.inc');

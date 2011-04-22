@@ -161,8 +161,8 @@ if (!isset($SelectedGroup)) {
 		echo '</div>';
 	} else {
 		echo '<table class=selection>';
-		echo "<tr><th>" . _('Group No') . "</th>
-			<th>" . _('Tax Group') . "</th></tr>";
+		echo '<tr><th>' . _('Group No') . '</th>
+			<th>' . _('Tax Group') . '</th></tr>';
 
 		$k=0; //row colour counter
 		while ($myrow = DB_fetch_array($result)) {
@@ -174,16 +174,16 @@ if (!isset($SelectedGroup)) {
 				$k=1;
 			}
 
-			printf("<td>%s</td>
+			printf('<td>%s</td>
 				<td>%s</td>
-				<td><a href=\"%s&SelectedGroup=%s\">" . _('Edit') . "</a></td>
-				<td><a href=\"%s&SelectedGroup=%s&Delete=1&GroupID=%s\">" . _('Delete') . "</a></td>
-				</tr>",
+				<td><a href="%s?SelectedGroup=%s">' . _('Edit') . '</a></td>
+				<td><a href="%s?SelectedGroup=%s&Delete=1&GroupID=%s">' . _('Delete') . '</a></td>
+				</tr>',
 				$myrow['taxgroupid'],
 				$myrow['taxgroupdescription'],
-				$_SERVER['PHP_SELF']  . "?" . SID,
+				$_SERVER['PHP_SELF'],
 				$myrow['taxgroupid'],
-				$_SERVER['PHP_SELF'] . "?" . SID,
+				$_SERVER['PHP_SELF'],
 				$myrow['taxgroupid'],
 				urlencode($myrow['taxgroupdescription']));
 
@@ -194,7 +194,7 @@ if (!isset($SelectedGroup)) {
 
 
 if (isset($SelectedGroup)) {
-	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] ."?" . SID . '">' . _('Review Existing Groups') . '</a></div>';
+	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] .'">' . _('Review Existing Groups') . '</a></div>';
 }
 
 if (isset($SelectedGroup)) {
@@ -346,34 +346,34 @@ if (isset($SelectedGroup)) {
 				$TaxOnTax = _('No');
 			}
 
-			printf("<td>%s</td>
+			printf('<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
-				<td><a href=\"%s&SelectedGroup=%s&remove=1&TaxAuthority=%s\">" . _('Remove') . "</a></td>
+				<td><a href="%s?SelectedGroup=%s&remove=1&TaxAuthority=%s">' . _('Remove') . '</a></td>
 				<td>&nbsp;</td>
-				<td>&nbsp;</td>",
+				<td>&nbsp;</td>',
 				$AvailRow['taxid'],
 				$AvailRow['taxname'],
 				$TaxAuthRow[$TaxAuthUsedPointer]['calculationorder'],
 				$TaxOnTax,
-				$_SERVER['PHP_SELF']  . "?" . SID,
+				$_SERVER['PHP_SELF'],
 				$SelectedGroup,
 				$AvailRow['taxid']
 				);
 
 		} else {
-			printf("<td>&nbsp;</td>
+			printf('<td>&nbsp;</td>
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>
 				<td>%s</td>
 				<td>%s</td>
-				<td><a href=\"%s&SelectedGroup=%s&add=1&TaxAuthority=%s\">" . _('Add') . "</a></td>",
+				<td><a href="%s?SelectedGroup=%s&add=1&TaxAuthority=%s">' . _('Add') . '</a></td>',
 				$AvailRow['taxid'],
 				$AvailRow['taxname'],
-				$_SERVER['PHP_SELF']  . "?" . SID,
+				$_SERVER['PHP_SELF'],
 				$SelectedGroup,
 				$AvailRow['taxid']
 				);

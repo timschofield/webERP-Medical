@@ -23,15 +23,15 @@ $resultStkLocs = DB_query($sql,$db);
 while ($myrow=DB_fetch_array($resultStkLocs)){
 	if (isset($_POST['StockLocation']) AND $_POST['StockLocation']!='All'){
 		if ($myrow['loccode'] == $_POST['StockLocation']){
-		     echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
+		     echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
-		     echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
+		     echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
-		 echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
+		 echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		 $_POST['StockLocation']=$myrow['loccode'];
 	} else {
-		 echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
+		 echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 	}
 }
 
@@ -108,7 +108,7 @@ while ($myrow=DB_fetch_array($MovtsResult)) {
 	$DisplayTranDate = ConvertSQLDate($myrow['trandate']);
 
 
-		printf("<td><a target='_blank' href='StockStatus.php?" . SID . "&StockID=%s'>%s</td>
+		printf('<td><a target="_blank" href="StockStatus.php?StockID=%s">%s</td>
 			<td>%s</td>
 			<td>%s</td>
 			<td>%s</td>
@@ -118,7 +118,7 @@ while ($myrow=DB_fetch_array($MovtsResult)) {
 			<td class=number>%s</td>
 			<td class=number>%s</td>
 			<td class=number>%s</td>
-			</tr>",
+			</tr>',
 			strtoupper($myrow['stockid']),
 			strtoupper($myrow['stockid']),
 			$myrow['typename'],

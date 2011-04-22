@@ -49,7 +49,7 @@ $result1 = DB_query($SQL,$db);
 if (DB_num_rows($result1)==0){
 	echo '</table><p>';
 	prnMsg(_('There are no stock categories currently defined please use the link below to set them up'),'warn');
-	echo '<br><a href="' . $rootpath . '/StockCategories.php?' . SID .'">' . _('Define Stock Categories') . '</a>';
+	echo '<br><a href="' . $rootpath . '/StockCategories.php">' . _('Define Stock Categories') . '</a>';
 	include ('includes/footer.inc');
 	exit;
 }
@@ -251,13 +251,13 @@ if (isset($_POST['ShowStatus'])){
 					echo '<tr class="EvenTableRows">';
 					$k=1;
 				}
-				printf("<td><a target='_blank' href='StockStatus.php?StockID=%s'>%s</a></td>
+				printf('<td><a target="_blank" href="StockStatus.php?StockID=%s">%s</a></td>
 					<td>%s</td>
 					<td class=number>%s</td>
 					<td class=number>%s</td>
 					<td class=number>%s</td>
-					<td class=number><a target='_blank' href='SelectProduct.php?StockID=%s'>%s</a></td>
-					<td class=number>%s</td></tr>",
+					<td class=number><a target="_blank" href="SelectProduct.php?StockID=%s">%s</a></td>
+					<td class=number>%s</td></tr>',
 					strtoupper($myrow['stockid']),
 					strtoupper($myrow['stockid']),
 					$myrow['description'],
@@ -269,9 +269,9 @@ if (isset($_POST['ShowStatus'])){
 					number_format($QOO,$myrow['decimalplaces']));
 				if ($myrow['serialised'] ==1){ /*The line is a serialised item*/
 
-					echo '<td><a target="_blank" href="' . $rootpath . '/StockSerialItems.php?' . SID . '&Serialised=Yes&Location=' . $myrow['loccode'] . '&StockID=' . $StockID . '">' . _('Serial Numbers') . '</a></td></tr>';
+					echo '<td><a target="_blank" href="' . $rootpath . '/StockSerialItems.php?Serialised=Yes&Location=' . $myrow['loccode'] . '&StockID=' . $StockID . '">' . _('Serial Numbers') . '</a></td></tr>';
 				} elseif ($myrow['controlled']==1){
-					echo '<td><a target="_blank" href="' . $rootpath . '/StockSerialItems.php?' . SID . '&Location=' . $myrow['loccode'] . '&StockID=' . $StockID . '">' . _('Batches') . '</a></td></tr>';
+					echo '<td><a target="_blank" href="' . $rootpath . '/StockSerialItems.php?Location=' . $myrow['loccode'] . '&StockID=' . $StockID . '">' . _('Batches') . '</a></td></tr>';
 				}
 			} else if ($_POST['BelowReorderQuantity']!='NotZero') {
 				if ($k==1){
@@ -281,13 +281,13 @@ if (isset($_POST['ShowStatus'])){
 					echo '<tr class="EvenTableRows">';
 					$k=1;
 				}
-				printf("<td><a target='_blank' href='StockStatus.php?StockID=%s'>%s</a></td>
+				printf('<td><a target="_blank" href="StockStatus.php?StockID=%s">%s</a></td>
 					<td>%s</td>
 					<td class=number>%s</td>
 					<td class=number>%s</td>
 					<td class=number>%s</td>
-					<td class=number><a target='_blank' href='SelectProduct.php?StockID=%s'>%s</a></td>
-					<td class=number>%s</td>",
+					<td class=number><a target="_blank" href="SelectProduct.php?StockID=%s">%s</a></td>
+					<td class=number>%s</td>',
 					strtoupper($myrow['stockid']),
 					strtoupper($myrow['stockid']),
 					$myrow['description'],

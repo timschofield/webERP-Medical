@@ -25,19 +25,19 @@ $result = DB_query("SELECT description, units FROM stockmaster WHERE stockid='".
 $myrow = DB_fetch_row($result);
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') . '" alt="" /><b>' . ' ' . $StockID . ' - ' . $myrow['0'] . ' : ' . _('in units of') . ' : ' . $myrow[1] . '</b></p>';
 
-echo "<form action='". $_SERVER['PHP_SELF'] . "?" . SID . "' method=post>";
+echo '<form action="'. $_SERVER['PHP_SELF'] . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (!isset($_POST['BeforeDate']) OR !Is_Date($_POST['BeforeDate'])){
    $_POST['BeforeDate'] = Date($_SESSION['DefaultDateFormat']);
 }
 if (!isset($_POST['AfterDate']) OR !Is_Date($_POST['AfterDate'])){
-   $_POST['AfterDate'] = Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date("m")-3,Date("d"),Date("y")));
+   $_POST['AfterDate'] = Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m')-3,Date('d'),Date('y')));
 }
 echo '<br /><table cellpadding=2 class=selection>';
-echo '<tr><th colspan=10>' . _('Stock Code') . ":<input type=TEXT name='StockID' size=21 VALUE='$StockID' maxlength=20>";
+echo '<tr><th colspan=10>' . _('Stock Code') . ':<input type="text" name="StockID" size=21 VALUE="'.$StockID.'" maxlength=20>';
 
-echo '  ' . _('From Stock Location') . ":<select name='StockLocation'> ";
+echo '  ' . _('From Stock Location') . ':<select name="StockLocation"> ';
 
 $sql = "SELECT loccode, locationname FROM locations";
 $resultStkLocs = DB_query($sql,$db);
@@ -45,22 +45,22 @@ $resultStkLocs = DB_query($sql,$db);
 while ($myrow=DB_fetch_array($resultStkLocs)){
 	if (isset($_POST['StockLocation']) AND $_POST['StockLocation']!='All'){
 		if ($myrow['loccode'] == $_POST['StockLocation']){
-		     echo "<option selected VALUE='" . $myrow['loccode'] . "'>" . $myrow['locationname'];
+		     echo '<option selected VALUE="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
-		     echo "<option VALUE='" . $myrow['loccode'] . "'>" . $myrow['locationname'];
+		     echo '<option VALUE="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
-		 echo "<option selected VALUE='" . $myrow['loccode'] . "'>" . $myrow['locationname'];
+		 echo '<option selected VALUE="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		 $_POST['StockLocation']=$myrow['loccode'];
 	} else {
-		 echo "<option VALUE='" . $myrow['loccode'] . "'>" . $myrow['locationname'];
+		 echo '<option VALUE="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 	}
 }
 
 echo '</select></th></tr>';
 echo '<tr><th colspan=10>' . _('Show Movements before') . ': <input type=text name="BeforeDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="12" maxlength="12" VALUE="' . $_POST['BeforeDate'] . '">';
 echo ' ' . _('But after') . ': <input type=TEXT name="AfterDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="12" maxlength="12" VALUE="' . $_POST['AfterDate'] . '">';
-echo "     <input type=submit name='ShowMoves' VALUE='" . _('Show Stock Movements') . "'></th></tr>";
+echo '     <input type=submit name="ShowMoves" VALUE="' . _('Show Stock Movements') . '"></th></tr>';
 
 $SQLBeforeDate = FormatDateForSQL($_POST['BeforeDate']);
 $SQLAfterDate = FormatDateForSQL($_POST['AfterDate']);
@@ -93,13 +93,13 @@ $DbgMsg = _('The SQL that failed was') . ' ';
 
 $MovtsResult = DB_query($sql, $db, $ErrMsg, $DbgMsg);
 
-$tableheader = "<tr>
-		<th>" . _('Type') . "</th><th>" . _('Number') . "</th>
-		<th>" . _('Date') . "</th><th>" . _('Customer') . "</th>
-		<th>" . _('Branch') . "</th><th>" . _('Quantity') . "</th>
-		<th>" . _('Reference') . "</th><th>" . _('Price') . "</th>
-		<th>" . _('Discount') . "</th><th>" . _('New Qty') . "</th>
-		</tr>";
+$tableheader = '<tr>
+		<th>' . _('Type') . '</th><th>' . _('Number') . '</th>
+		<th>' . _('Date') . '</th><th>' . _('Customer') . '</th>
+		<th>' . _('Branch') . '</th><th>' . _('Quantity') . '</th>
+		<th>' . _('Reference') . '</th><th>' . _('Price') . '</th>
+		<th>' . _('Discount') . '</th><th>' . _('New Qty') . '</th>
+		</tr>';
 
 echo $tableheader;
 
@@ -120,7 +120,7 @@ while ($myrow=DB_fetch_array($MovtsResult)) {
 
 	if ($myrow['type']==10){ /*its a sales invoice allow link to show invoice it was sold on*/
 
-		printf("<td><a TARGET='_blank' href='%s/PrintCustTrans.php?%s&FromTransNo=%s&InvOrCredit=Invoice'>%s</td>
+		printf('<td><a TARGET="_blank" href="%s/PrintCustTrans.php?%s&FromTransNo=%s&InvOrCredit=Invoice">%s</td>
 		<td>%s</td>
 		<td>%s</td>
 		<td>%s</td>
@@ -130,7 +130,7 @@ while ($myrow=DB_fetch_array($MovtsResult)) {
 		<td class=number>%s</td>
 		<td class=number>%s%%</td>
 		<td class=number>%s</td>
-		</tr>",
+		</tr>',
 		$rootpath,
 		SID,
 		$myrow['transno'],
@@ -148,7 +148,7 @@ while ($myrow=DB_fetch_array($MovtsResult)) {
 
 	} elseif ($myrow['type']==11){
 
-		printf("<td><a TARGET='_blank' href='%s/PrintCustTrans.php?%s&FromTransNo=%s&InvOrCredit=Credit'>%s</td>
+		printf('<td><a TARGET="_blank" href="%s/PrintCustTrans.php?%s&FromTransNo=%s&InvOrCredit=Credit">%s</td>
 		<td>%s</td>
 		<td>%s</td>
 		<td>%s</td>
@@ -158,7 +158,7 @@ while ($myrow=DB_fetch_array($MovtsResult)) {
 		<td class=number>%s</td>
 		<td class=number>%s%%</td>
 		<td class=number>%s</td>
-		</tr>",
+		</tr>',
 		$rootpath,
 		SID,
 		$myrow['transno'],
@@ -174,7 +174,7 @@ while ($myrow=DB_fetch_array($MovtsResult)) {
 		number_format($myrow['newqoh'],$myrow['decimalplaces']));
 	} else {
 
-		printf("<td>%s</td>
+		printf('<td>%s</td>
 			<td>%s</td>
 			<td>%s</td>
 			<td>%s</td>
@@ -184,7 +184,7 @@ while ($myrow=DB_fetch_array($MovtsResult)) {
 			<td class=number>%s</td>
 			<td class=number>%s%%</td>
 			<td class=number>%s</td>
-			</tr>",
+			</tr>',
 			$myrow['typename'],
 			$myrow['transno'],
 			$DisplayTranDate,
@@ -201,10 +201,10 @@ while ($myrow=DB_fetch_array($MovtsResult)) {
 //end of while loop
 
 echo '</table>';
-echo "<div class=centre><br /><a href='$rootpath/StockStatus.php?" . SID . "&StockID=$StockID'>" . _('Show Stock Status') . '</a>';
-echo "<br><a href='$rootpath/StockUsage.php?" . SID . "&StockID=$StockID&StockLocation=" . $_POST['StockLocation'] . "'>" . _('Show Stock Usage') . '</a>';
-echo "<br><a href='$rootpath/SelectSalesOrder.php?" . SID . "&SelectedStockItem=$StockID&StockLocation=" . $_POST['StockLocation'] . "'>" . _('Search Outstanding Sales Orders') . '</a>';
-echo "<br><a href='$rootpath/SelectCompletedOrder.php?" . SID . "&SelectedStockItem=$StockID'>" . _('Search Completed Sales Orders') . '</a>';
+echo '<div class=centre><br /><a href="$rootpath/StockStatus.php?StockID=$StockID">' . _('Show Stock Status') . '</a>';
+echo '<br><a href="'.$rootpath.'/StockUsage.php?StockID=$StockID&StockLocation=' . $_POST['StockLocation'] . '">' . _('Show Stock Usage') . '</a>';
+echo '<br><a href="'.$rootpath.'/SelectSalesOrder.php?SelectedStockItem=$StockID&StockLocation=' . $_POST['StockLocation'] . '">' . _('Search Outstanding Sales Orders') . '</a>';
+echo '<br><a href="'.$rootpath.'/SelectCompletedOrder.php?SelectedStockItem=$StockID">' . _('Search Completed Sales Orders') . '</a>';
 
 echo '</form></div>';
 

@@ -340,6 +340,9 @@ if (isset($_POST['SearchSuppliers'])){
 		if (DB_num_rows($result_SuppSelect)==1){
 			$myrow=DB_fetch_array($result_SuppSelect);
 			$_POST['Select'] = $myrow['supplierid'];
+			if (isset($SuppliersReturned )) {
+				echo '<input type="hidden" name="SuppliersReturned" value="' . $SuppliersReturned .'" />';
+			}
 		} elseif (DB_num_rows($result_SuppSelect)==0){
 			prnMsg( _('No supplier records contain the selected text') . ' - ' .
 				_('please alter your search criteria and try again'),'info');
