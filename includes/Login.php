@@ -40,9 +40,9 @@ if (get_magic_quotes_gpc()){
 			while (false != ($CompanyEntry = $DirHandle->read())){
 				if (is_dir('companies/' . $CompanyEntry) AND $CompanyEntry != '..' AND $CompanyEntry != '' AND $CompanyEntry!='.svn' AND $CompanyEntry!='.'){
 					if ($CompanyEntry==$DefaultCompany) {
-						echo '<option selected value="'.$CompanyEntry.'">'.$CompanyEntry.'</option>';
+						echo '<option selected="selected" label="'.$CompanyEntry.'" value="'.$CompanyEntry.'">'.$CompanyEntry.'</option>';
 					} else {
-						echo '<option value="'.$CompanyEntry.'">'.$CompanyEntry.'</option>';
+						echo '<option label="'.$CompanyEntry.'" value="'.$CompanyEntry.'">'.$CompanyEntry.'</option>';
 					}
 				}
 			}

@@ -342,6 +342,7 @@ if (isset($_POST['SearchSuppliers'])){
 			$_POST['Select'] = $myrow['supplierid'];
 			if (isset($SuppliersReturned )) {
 				echo '<input type="hidden" name="SuppliersReturned" value="' . $SuppliersReturned .'" />';
+				echo '<input type="hidden" name="SupplierCode" value="' . $_POST['Select'] .'" />';
 			}
 		} elseif (DB_num_rows($result_SuppSelect)==0){
 			prnMsg( _('No supplier records contain the selected text') . ' - ' .
