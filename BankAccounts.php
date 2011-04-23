@@ -193,14 +193,14 @@ If (!isset($SelectedBankAccount)) {
 
 	echo '<table class="selection">';
 
-	echo "<tr><th>" . _('GL Account Code') . "</th>
-		<th>" . _('Bank Account Name') . "</th>
-		<th>" . _('Bank Account Code') . "</th>
-		<th>" . _('Bank Account Number') . "</th>
-		<th>" . _('Bank Address') . "</th>
-		<th>" . _('Currency') . "</th>
-		<th>" . _('Default for Invoices') . "</th>
-	</tr>";
+	echo '<tr><th>' . _('GL Account Code') . '</th>
+		<th>' . _('Bank Account Name') . '</th>
+		<th>' . _('Bank Account Code') . '</th>
+		<th>' . _('Bank Account Number') . '</th>
+		<th>' . _('Bank Address') . '</th>
+		<th>' . _('Currency') . '</th>
+		<th>' . _('Default for Invoices') . '</th>
+	</tr>';
 
 	$k=0; //row colour counter
 	while ($myrow = DB_fetch_row($result)) {
@@ -216,16 +216,16 @@ If (!isset($SelectedBankAccount)) {
 	} else {
 		$defacc=_('Yes');
 	}
-	printf("<td>%s<br><font size=2>%s</font></td>
+	printf('<td>%s<br><font size=2>%s</font></td>
 		<td>%s</td>
 		<td>%s</td>
 		<td>%s</td>
 		<td>%s</td>
 		<td>%s</td>
 		<td>%s</td>
-		<td><a href=\"%s?SelectedBankAccount=%s\">" . _('Edit') . "</td>
-		<td><a href=\"%s?SelectedBankAccount=%s&delete=1\">" . _('Delete') . "</td>
-		</tr>",
+		<td><a href="%s?SelectedBankAccount=%s">' . _('Edit') . '</td>
+		<td><a href="%s?SelectedBankAccount=%s&delete=1">' . _('Delete') . '</td>
+		</tr>',
 		$myrow[0],
 		$myrow[2],
 		$myrow[3],
@@ -247,12 +247,12 @@ If (!isset($SelectedBankAccount)) {
 }
 
 if (isset($SelectedBankAccount)) {
-	echo '<p>';
+	echo '<br />';
 	echo '<div class="centre"><p><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '">' . _('Show All Bank Accounts Defined') . '</a></div>';
-	echo '<p>';
+	echo '<br />';
 }
 
-echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . ">";
+echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (isset($SelectedBankAccount) AND !isset($_GET['delete'])) {
@@ -285,7 +285,7 @@ if (isset($SelectedBankAccount) AND !isset($_GET['delete'])) {
 	echo $_POST['AccountCode'] . '</td></tr>';
 } else { //end of if $Selectedbank account only do the else when a new record is being entered
 	echo '<table class=selection><tr><td>' . _('Bank Account GL Code') .
-		":</td><td><Select tabindex='1' " . (in_array('AccountCode',$Errors) ?  'class="selecterror"' : '' ) ." name='AccountCode'>";
+		':</td><td><Select tabindex="1" ' . (in_array('AccountCode',$Errors) ?  'class="selecterror"' : '' ) .' name="AccountCode">';
 
 	$sql = "SELECT accountcode,
 			accountname
@@ -298,11 +298,10 @@ if (isset($SelectedBankAccount) AND !isset($_GET['delete'])) {
 	$result = DB_query($sql,$db);
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['AccountCode']) and $myrow['accountcode']==$_POST['AccountCode']) {
-			echo '<option selected VALUE=';
+			echo '<option selected VALUE="'.$myrow['accountcode'] . '">' . $myrow['accountname'] . '</option>';
 		} else {
-			echo '<option VALUE=';
+			echo '<option VALUE="'.$myrow['accountcode'] . '">' . $myrow['accountname'] . '</option>';
 		}
-		echo $myrow['accountcode'] . '>' . $myrow['accountname'];
 
 	} //end while loop
 
@@ -339,11 +338,10 @@ if (!isset($_POST['CurrCode']) OR $_POST['CurrCode']==''){
 $result = DB_query("SELECT currabrev, currency FROM currencies",$db);
 while ($myrow = DB_fetch_array($result)) {
 	if ($myrow['currabrev']==$_POST['CurrCode']) {
-		echo '<option selected VALUE=';
+		echo '<option selected VALUE="'.$myrow['currabrev'] . '">' . $myrow['currabrev'] . '</option>';
 	} else {
-		echo '<option VALUE=';
+		echo '<option VALUE="'.$myrow['currabrev'] . '">' . $myrow['currabrev'] . '</option>';
 	}
-	echo $myrow['currabrev'] . '>' . $myrow['currabrev'];
 } //end while loop
 
 echo '</select></td>';

@@ -1,7 +1,7 @@
 <?php
 /* $Id: api_suppliers.php 4521 2011-03-29 09:04:20Z daintree $*/
 
-/* Verify that the supplier number is valid, and doesn't already
+/* Verify that the supplier number is valid, and does not already
    exist.*/
 	function VerifySupplierNo($SupplierNumber, $i, $Errors, $db) {
 		if ((strlen($SupplierNumber)<1) or (strlen($SupplierNumber)>10)) {
@@ -306,7 +306,7 @@
 	}
 
 /* This function takes a supplier id and returns an associative array containing
-   the database record for that supplier. If the supplier id doesn't exist
+   the database record for that supplier. If the supplier id does not exist
    then it returns an $Errors array.
 */
 	function GetSupplier($SupplierID, $user, $password) {

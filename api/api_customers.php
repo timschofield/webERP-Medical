@@ -1,7 +1,7 @@
 <?php
 /* $Id: api_customers.php 4521 2011-03-29 09:04:20Z daintree $*/
 
-/* Verify that the debtor number is valid, and doesn't already
+/* Verify that the debtor number is valid, and does not already
    exist.*/
 	function VerifyDebtorNo($DebtorNumber, $i, $Errors, $db) {
 		if ((strlen($DebtorNumber)<1) or (strlen($DebtorNumber)>10)) {
@@ -246,7 +246,7 @@
    names of the fields in the debtorsmaster table, and the values are the
    values to insert. The only mandatory fields are the debtorno, name,
    currency code, sales type, payment terms, and reason code
-   fields. If the other fields aren't set, then the database defaults
+   fields. If the other fields are not set, then the database defaults
    are used. The function returns an array called $Errors. The database
    is only updated if the $Errors is empty, else the function returns an
    array of one to many error codes.
@@ -498,7 +498,7 @@
 	}
 
 /* This function takes a debtorno and returns an associative array containing
-   the database record for that debtor. If the debtor number doesn't exist
+   the database record for that debtor. If the debtor number does not exist
    then it returns an $Errors array.
 */
 	function GetCustomer($DebtorNumber, $user, $password) {

@@ -14,7 +14,7 @@
 		return $Errors;
 	}
 
-/* Verify that the branch number is valid, and doesn't already
+/* Verify that the branch number is valid, and does not already
    exist.*/
 	function VerifyBranchNo($DebtorNumber, $BranchNumber, $i, $Errors, $db) {
 		if ((strlen($BranchNumber)<1) or (strlen($BranchNumber)>10)) {
@@ -510,7 +510,7 @@
 		return  $Errors;
  }
 /* This function takes a debtorno and branch code and returns an associative array containing
-   the database record for that branch. If the debtor/branch code doesn't exist
+   the database record for that branch. If the debtor/branch code does not exist
    then it returns an $Errors array.
 */
 	function GetCustomerBranch($DebtorNumber, $BranchCode, $user, $password) {

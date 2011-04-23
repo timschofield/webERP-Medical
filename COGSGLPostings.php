@@ -275,11 +275,10 @@ echo '<table class=selection>
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['Area']) and $myrow['areacode']==$_POST['Area']) {
-		echo '<option selected VALUE="';
+		echo '<option selected VALUE="'.$myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
 	} else {
-		echo '<option VALUE="';
+		echo '<option VALUE="'.$myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
 	}
-	echo $myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
 
 } //end while loop
 DB_free_result($result);
@@ -294,11 +293,10 @@ echo '</select></td></tr>
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['StkCat']) and $myrow["categoryid"]==$_POST['StkCat']) {
-		echo '<option selected VALUE="';
+		echo '<option selected VALUE="'.$myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	} else {
-		echo '<option VALUE="';
+		echo '<option VALUE="'.$myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	}
-	echo $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 
 } //end while loop
 
@@ -314,11 +312,10 @@ echo '</select></td></tr>
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['SalesType']) and $myrow['typeabbrev']==$_POST['SalesType']) {
-		echo '<option selected VALUE="';
+		echo '<option selected VALUE="'.$myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
 	} else {
-		echo '<option VALUE="';
+		echo '<option VALUE="'.$myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
 	}
-	echo $myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
 
 } //end while loop
 
@@ -340,11 +337,10 @@ $result = DB_query($sql,$db);
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['GLCode']) and $myrow['accountcode']==$_POST['GLCode']) {
-		echo '<option selected VALUE="';
+		echo '<option selected VALUE="'.$myrow['accountcode'] . '">' . $myrow['accountcode']  . ' - '  . $myrow['accountname'] . '</option>';
 	} else {
-		echo '<option VALUE="';
+		echo '<option VALUE="'.$myrow['accountcode'] . '">' . $myrow['accountcode']  . ' - '  . $myrow['accountname'] . '</option>';
 	}
-	echo $myrow['accountcode'] . '">' . $myrow['accountcode']  . ' - '  . $myrow['accountname'] . '</option>';
 
 } //end while loop
 

@@ -176,11 +176,11 @@ if (!isset($_GET['SelectedSectionID']) and !isset($_POST['SelectedSectionID'])) 
 	$result = DB_query($sql,$db,$ErrMsg);
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
 
-	echo "<table name='SectionList' class='selection'>
+	echo '<table name="SectionList" class="selection">
 		<tr>
-		<th>" . _('Section Number') . "</th>
-		<th>" . _('Section Description') . "</th>
-		</tr>";
+		<th>' . _('Section Number') . '</th>
+		<th>' . _('Section Description') . '</th>
+		</tr>';
 
 	$k=0; //row colour counter
 	while ($myrow = DB_fetch_row($result)) {
@@ -212,7 +212,7 @@ if (isset($_POST['SelectedSectionID']) or isset($_GET['SelectedSectionID'])) {
 
 if (! isset($_GET['delete'])) {
 
-	echo "<form method='post' name='AccountSections' action='" . $_SERVER['PHP_SELF'] . '?' . SID . "'>";
+	echo '<form method="post" name="AccountSections" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (isset($_GET['SelectedSectionID'])) {
@@ -233,10 +233,10 @@ if (! isset($_GET['delete'])) {
 			$_POST['SectionID'] = $myrow['sectionid'];
 			$_POST['SectionName']  = $myrow['sectionname'];
 
-			echo "<input type=hidden name='SelectedSectionID' value='" . $_POST['SectionID'] . "'>";
-			echo "<table class=selection>
-			<td>" . _('Section Number') . ':' . "</td>
-			<td>" . $_POST['SectionID'] . "</td>";
+			echo '<input type=hidden name="SelectedSectionID" value="' . $_POST['SectionID'] . '">';
+			echo '<table class=selection>
+			<td>' . _('Section Number') . ':' . '</td>
+			<td>' . $_POST['SectionID'] . '</td>';
 		}
 
 	}  else {

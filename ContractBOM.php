@@ -11,7 +11,7 @@ $title = _('Contract Bill of Materials');
 
 $identifier=$_GET['identifier'];
 
-/* If a contract header doesn't exist, then go to
+/* If a contract header does n0t exist, then go to
  * Contracts.php to create one
  */
 

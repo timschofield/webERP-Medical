@@ -382,10 +382,10 @@ foreach ($_SESSION['CreditItems']->LineItems as $LnItm) {
 		echo '</td>';
 
 		echo '<td class=number>' . $DisplayTaxAmount . '</td>
-			<td class=number>' . $DisplayGrossLineTotal . "</td>
-			<td><a href='". $_SERVER['PHP_SELF'] . "?" . SID . "&Delete=" . $LnItm->LineNumber . "'>" . _('Delete') . '</a></td></tr>';
+			<td class=number>' . $DisplayGrossLineTotal . '</td>
+			<td><a href="'. $_SERVER['PHP_SELF'] . '?Delete=' . $LnItm->LineNumber . '">' . _('Delete') . '</a></td></tr>';
 
-		echo '<tr'.$RowStarter . "><td colspan=12><TEXTAREA tabindex=".$j."  name='Narrative_" . $LnItm->LineNumber . "' cols=100% rows=1>" . $LnItm->Narrative . "</TEXTAREa><br><hr></td></tr>";
+		echo '<tr'.$RowStarter . '><td colspan=12><textarea tabindex="'.$j.'"  name="Narrative_' . $LnItm->LineNumber . '" cols=100% rows=1>' . $LnItm->Narrative . '</textarea><br><hr></td></tr>';
 		$j++;
 	}
 } /*end foreach loop displaying the invoice lines to credit */
@@ -399,8 +399,8 @@ if (!isset($_POST['ProcessCredit'])) {
 		<td colspan=3 class=number>' . _('Freight cost charged on invoice') . '</td>
 		<td class=number>' . number_format($_SESSION['Old_FreightCost'],2) . '</td>
 		<td></td>
-		<td colspan=2 class=number>' . _('Credit Freight Cost') . "</td>
-		<td><input tabindex=".$j." type=text class=number size=6 maxlength=6 name='ChargeFreightCost' value=" . $_SESSION['CreditItems']->FreightCost . "></td>";
+		<td colspan=2 class=number>' . _('Credit Freight Cost') . '</td>
+		<td><input tabindex="'.$j.'" type=text class=number size=6 maxlength=6 name="ChargeFreightCost" value="' . $_SESSION['CreditItems']->FreightCost . '"></td>';
 
 	echo '<td>';
 	echo '</td><td>';
@@ -816,7 +816,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 								true);
 						}
 					} /* end of assembly explosion and updates */
-					/*Update the cart with the recalculated standard cost from the explosion of the assembly's components*/
+					/*Update the cart with the recalculated standard cost from the explosion of the assemblys components*/
 					$_SESSION['CreditItems']->LineItems[$OrderLine->LineNumber]->StandardCost = $StandardCost;
 					$OrderLine->StandardCost = $StandardCost;
 				}
@@ -985,7 +985,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 					'" . $OrderLine->QtyDispatched . "',
 					'" . $OrderLine->DiscountPercent . "',
 					'" . $OrderLine->StandardCost . "',
-					'" . ($QtyOnHandPrior +$OrderLine->QtyDispatched)  . "'',
+					'" . ($QtyOnHandPrior +$OrderLine->QtyDispatched)  . "',
 					'" . $OrderLine->Narrative . "')";
 
 				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Stock movement records could not be inserted because');
@@ -1447,9 +1447,9 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 
 	echo '<div class="centre">'._('Credit Note number') . ' ' . $CreditNo . ' ' . _('has been processed');
 	if ($_SESSION['InvoicePortraitFormat']==0){
-		echo "<br/><a href='". $rootpath . "/PrintCustTrans.php?" . SID . "&FromTransNo=" . $CreditNo . "&InvOrCredit=Credit&PrintPDF=True'>" . _('Print this credit note') . '</a>';
+		echo '<br/><a href="'. $rootpath . '/PrintCustTrans.php?FromTransNo=' . $CreditNo . '&InvOrCredit=Credit&PrintPDF=True">' . _('Print this credit note') . '</a>';
 	} else {
-		echo "<br/><a href='". $rootpath . "/PrintCustTransPortrait.php?" . SID . "&FromTransNo=" . $CreditNo . "&InvOrCredit=Credit&PrintPDF=True'>" . _('Print this credit note') . '</a>';
+		echo '<br/><a href="'. $rootpath . '/PrintCustTransPortrait.php?FromTransNo=' . $CreditNo . '&InvOrCredit=Credit&PrintPDF=True">' . _('Print this credit note') . '</a>';
 	}
 	echo '</div>';
 /*end of process credit note */
@@ -1457,9 +1457,9 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 
 } else { /*Process Credit NOT set so allow inputs to set up the credit note */
 
-	echo "<br><table class=selection>";
+	echo '<br><table class=selection>';
 
-	echo '<tr><td>' . _('Credit Note Type') . "</td><td><select tabindex=".$j." name=CreditType>";
+	echo '<tr><td>' . _('Credit Note Type') . '</td><td><select tabindex="'.$j.'" name=CreditType>';
 
 	if (!isset($_POST['CreditType']) OR $_POST['CreditType']=="Return"){
 		echo '<option selected value="Return">' . _('Goods returned to store') . '</option>';

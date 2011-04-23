@@ -390,7 +390,7 @@ foreach ($_SESSION['Items']->LineItems as $LnItm) {
 		if (!isset($_POST['ProcessInvoice'])) {
 			echo '<td><a href="' . $rootpath . '/ConfirmDispatchControlled_Invoice.php?' . SID . '&LineNo='. $LnItm->LineNumber.'">';
 			if ($LnItm->Serialised==1){
-				echo _("Enter Serial Numbers");
+				echo _('Enter Serial Numbers');
 			} else { /*Just batch/roll/lot control */
 				echo _('Enter Batch/Roll/Lot #');
 			}
@@ -404,7 +404,7 @@ foreach ($_SESSION['Items']->LineItems as $LnItm) {
 	}
 }//end foreach ($line)
 
-/*Don't re-calculate freight if some of the order has already been delivered -
+/*Do not re-calculate freight if some of the order has already been delivered -
 depending on the business logic required this condition may not be required.
 It seems unfair to charge the customer twice for freight if the order
 was not fully delivered the first time ?? */
@@ -1657,7 +1657,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 	<input type=submit tabindex='.$j.' name=Update Value=' . _('Update'). '><br>';
 
 	$j++;
-	echo '<br><input type=submit tabindex='.$j.' name="ProcessInvoice" Value="'._('Process Invoice').'"</div>';
+	echo '<br><input type=submit tabindex='.$j.' name="ProcessInvoice" Value="'._('Process Invoice').'" /></div>';
 
 	echo '<input type=hidden name="ShipVia" VALUE="' . $_SESSION['Items']->ShipVia . '">';
 }

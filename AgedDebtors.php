@@ -267,9 +267,9 @@ if (isset($_POST['PrintPDF'])
 		$title = _('Aged Customer Account Analysis') . ' - ' . _('Problem Report') . '.... ';
 		include('includes/header.inc');
 		echo '<p>' . _('The customer details could not be retrieved by the SQL because') . ' ' . DB_error_msg($db);
-		echo "<br><a href='$rootpath/index.php?" . SID . "'>" . _('Back to the menu') . '</a>';
+		echo '<br><a href="'.$rootpath.'/index.php">' . _('Back to the menu') . '</a>';
 		if ($debug==1){
-			echo "<br>$SQL";
+			echo '<br>'.$SQL;
 		}
 		include('includes/footer.inc');
 		exit;
@@ -365,7 +365,7 @@ if (isset($_POST['PrintPDF'])
 			$title = _('Aged Customer Account Analysis') . ' - ' . _('Problem Report') . '....';
 			include('includes/header.inc');
 			echo '<br><br>' . _('The details of outstanding transactions for customer') . ' - ' . $AgedAnalysis['debtorno'] . ' ' . _('could not be retrieved because') . ' - ' . DB_error_msg($db);
-			echo "<br><a href='$rootpath/index.php'>" . _('Back to the menu') . '</a>';
+			echo '<br><a href="'.$rootpath.'/index.php">' . _('Back to the menu') . '</a>';
 			if ($debug==1){
 				echo '<br>' . _('The SQL that failed was') . '<p>' . $sql;
 			}
@@ -439,7 +439,7 @@ if (isset($_POST['PrintPDF'])
 		if ($debug==1){
 			prnMsg($SQL,'info');
 		}
-		echo "<br><a href='$rootpath/index.php'>" . _('Back to the menu') . '</a>';
+		echo '<br><a href="'.$rootpath.'/index.php">' . _('Back to the menu') . '</a>';
 		include('includes/footer.inc');
 		exit;
 	}
@@ -471,31 +471,31 @@ if (isset($_POST['PrintPDF'])
 
 	/*if $FromCriteria is not set then show a form to allow input	*/
 
-		echo '<form action=' . $_SERVER['PHP_SELF'] . " method='post'><table>";
+		echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table>';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-		echo '<tr><td>' . _('From Customer Code') . ':' . "</font></td><td><input tabindex='1' Type=text maxlength=6 size=7 name=FromCriteria value='0'></td></tr>";
-		echo '<tr><td>' . _('To Customer Code') . ':' . "</td><td><input tabindex='2' Type=text maxlength=6 size=7 name=ToCriteria value='zzzzzz'></td></tr>";
+		echo '<tr><td>' . _('From Customer Code') . ':' . '</font></td><td><input tabindex="1" Type=text maxlength=6 size=7 name=FromCriteria value="0"></td></tr>';
+		echo '<tr><td>' . _('To Customer Code') . ':' . '</td><td><input tabindex="2" Type=text maxlength=6 size=7 name=ToCriteria value="zzzzzz"></td></tr>';
 
-		echo '<tr><td>' . _('All balances or overdues only') . ':' . "</td><td><select tabindex='3' name='All_Or_Overdues'>";
-		echo "<option selected Value='All'>" . _('All customers with balances');
-		echo "<option Value='OverduesOnly'>" . _('Overdue accounts only');
-		echo "<option Value='HeldOnly'>" . _('Held accounts only');
+		echo '<tr><td>' . _('All balances or overdues only') . ':' . '</td><td><select tabindex="3" name="All_Or_Overdues">';
+		echo '<option selected Value="All">' . _('All customers with balances') . '</option>';
+		echo '<option Value="OverduesOnly">' . _('Overdue accounts only') . '</option>';
+		echo '<option Value="HeldOnly">' . _('Held accounts only') . '</option>';
 		echo '</select></td></tr>';
 
-		echo '<tr><td>' . _('Only Show Customers Of') . ':' . "</td><td><select tabindex='4' name='Salesman'>";
+		echo '<tr><td>' . _('Only Show Customers Of') . ':' . '</td><td><select tabindex="4" name="Salesman">';
 
 		$sql = "SELECT salesmancode, salesmanname FROM salesman";
 
 		$result=DB_query($sql,$db);
-		echo "<option value=''></option>";
+		echo '<option value=""></option>';
 		while ($myrow=DB_fetch_array($result)){
-				echo "<option value='" . $myrow['salesmancode'] . "'>" . $myrow['salesmanname'];
+				echo '<option value="' . $myrow['salesmancode'] . '">' . $myrow['salesmanname'] . '</option>';
 		}
 		echo '</select></td></tr>';
 
 
-		echo '<tr><td>' . _('Only show customers trading in') . ':' . "</td><td><select tabindex='5' name='Currency'>";
+		echo '<tr><td>' . _('Only show customers trading in') . ':' . '</td><td><select tabindex="5" name="Currency">';
 
 		$sql = "SELECT currency, currabrev FROM currencies";
 
@@ -504,17 +504,17 @@ if (isset($_POST['PrintPDF'])
 
 		while ($myrow=DB_fetch_array($result)){
 		      if ($myrow['currabrev'] == $_SESSION['CompanyRecord']['currencydefault']){
-				echo "<option selected value='" . $myrow['currabrev'] . "'>" . $myrow['currency'];
+				echo '<option selected value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 		      } else {
-			      echo "<option value='" . $myrow['currabrev'] . "'>" . $myrow['currency'];
+			      echo '<option value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 		      }
 		}
 		echo '</select></td></tr>';
 
-		echo '<tr><td>' . _('Summary or detailed report') . ':' . "</td>
-			<td><select tabindex='6' name='DetailedReport'>";
-		echo "<option selected value='No'>" . _('Summary Report');
-		echo "<option value='Yes'>" . _('Detailed Report');
+		echo '<tr><td>' . _('Summary or detailed report') . ':' . '</td>
+			<td><select tabindex="6" name="DetailedReport">';
+		echo '<option selected value="No">' . _('Summary Report');
+		echo '<option value="Yes">' . _('Detailed Report');
 		echo '</select></td></tr>';
 
 		echo '</table><br><div class="centre"><input tabindex="7" type=submit name="PrintPDF" value="' . _('Print PDF') , '"></div>';

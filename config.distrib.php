@@ -71,7 +71,7 @@ $DefaultClock = 12;
 
 /*The $rootpath is used in most scripts to tell the script the installation details of the files.
 
-NOTE: In some windows installation this command doesn't work and the administrator must set this to the path of the installation manually:
+NOTE: In some windows installation this command does not work and the administrator must set this to the path of the installation manually:
 eg. if the files are under the webserver root directory then rootpath =''; if they are under weberp then weberp is the rootpath - notice no additional slashes are necessary.
 */
 

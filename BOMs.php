@@ -137,7 +137,7 @@ function DisplayBOMItems($UltimateParent, $Parent, $Component,$Level, $db) {
 			} else {
 				$QuantityOnHand = number_format($myrow[10],$myrow[11]);
 			}
-			printf("<td>%s</td>
+			printf('<td>%s</td>
 				<td>%s</td>
 			    <td>%s</td>
 				<td>%s</td>
@@ -147,10 +147,10 @@ function DisplayBOMItems($UltimateParent, $Parent, $Component,$Level, $db) {
 				<td>%s</td>
 				<td>%s</td>
 				<td class=number>%s</td>
-				<td><a href=\"%s&Select=%s&SelectedComponent=%s\">" . _('Edit') . "</a></td>
-				<td>".$DrillText."</a></td>
-				 <td><a href=\"%s&Select=%s&SelectedComponent=%s&delete=1&ReSelect=%s\">" . _('Delete') . "</a></td>
-				 </tr>",
+				<td><a href="%s&Select=%s&SelectedComponent=%s">' . _('Edit') . '</a></td>
+				<td>'.$DrillText.'</a></td>
+				 <td><a href="%s&Select=%s&SelectedComponent=%s&delete=1&ReSelect=%s">' . _('Delete') . '</a></td>
+				 </tr>',
 				$Level1,
 				$myrow[0],
 				$myrow[1],
@@ -496,14 +496,14 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 		echo (($reqnl)?'<br>':'').'<tr><td><div class="centre">'._('Phantom').' : ';
 	 	$ix = 0;
 	 	while ($myrow = DB_fetch_array($result)){
-	 	   echo (($ix)?', ':'').'<a href="'.$_SERVER['PHP_SELF'] . '?' . SID . 'Select='.$myrow['parent'].'">'.
+	 	   echo (($ix)?', ':'').'<a href="'.$_SERVER['PHP_SELF'] . '?Select='.$myrow['parent'].'">'.
 			$myrow['description'].'&nbsp;('.$myrow['parent'].')</a>';
 			$ix++;
 	 	} //end while loop
 	 	echo '</div></td></tr>';
 	}
-	echo "</table><br><table class=selection>";
-	echo "<tr><th colspan=13><div class='centre'><font color=blue size=3><b>".$SelectedParent ." - " . $myrow[0] . ' ('. $MBdesc. ') </font></b></th></tr>';
+	echo '</table><br><table class=selection>';
+	echo '<tr><th colspan=13><div class="centre"><font color=blue size=3><b>'.$SelectedParent .' - ' . $myrow[0] . ' ('. $MBdesc. ') </font></b></th></tr>';
 
     // *** POPAD&T
 	$BOMTree = array();
@@ -547,7 +547,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 		}
 	}
 	// *** end POPAD&T
-	echo "</table><br>";
+	echo '</table><br>';
 
 	if (! isset($_GET['delete'])) {
 
@@ -578,21 +578,21 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 			$_POST['AutoIssue'] = $myrow['autoissue'];
 
 			prnMsg(_('Edit the details of the selected component in the fields below') . '. <br>' . _('Click on the Enter Information button to update the component details'),'info');
-			echo "<br><input type=hidden name='SelectedParent' VALUE='$SelectedParent'>";
-			echo "<input type=hidden name='SelectedComponent' VALUE='$SelectedComponent'>";
+			echo '<br><input type=hidden name="SelectedParent" VALUE="'.$SelectedParent.'">';
+			echo '<input type=hidden name="SelectedComponent" VALUE="'.$SelectedComponent.'">';
 			echo '<table class=selection>';
-			echo "<tr><th colspan=13><div class='centre'><font color=blue size=3><b>". ('Edit Component Details') .'</font></b></th></tr>';
+			echo '<tr><th colspan=13><div class="centre"><font color=blue size=3><b>'. ('Edit Component Details') .'</font></b></th></tr>';
 			echo '<tr><td>' . _('Component') . ':</td><td><b>' . $SelectedComponent . '</b></td></tr>';
 
 		} else { //end of if $SelectedComponent
 
-			echo "<input type=hidden name='SelectedParent' VALUE='$SelectedParent'>";
+			echo '<input type=hidden name="SelectedParent" VALUE="'.$SelectedParent.'">';
 			/* echo "Enter the details of a new component in the fields below. <br>Click on 'Enter Information' to add the new component, once all fields are completed.";
 			*/
 			echo '<table class=selection>';
-			echo "<tr><th colspan=13><div class='centre'><font color=blue size=3><b>". ('New Component Details') .'</font></b></th></tr>';
+			echo '<tr><th colspan=13><div class="centre"><font color=blue size=3><b>'. ('New Component Details') .'</font></b></th></tr>';
 			echo '<tr><td>' . _('Component code') . ':</td><td>';
-			echo "<select " . (in_array('ComponentCode',$Errors) ?  'class="selecterror"' : '' ) ." tabindex='1' name='Component'>";
+			echo '<select ' . (in_array('ComponentCode',$Errors) ?  'class="selecterror"' : '' ) .' tabindex="1" name="Component">';
 
 
 			if ($ParentMBflag=='A'){ /*Its an assembly */
@@ -627,13 +627,13 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 
 
 			while ($myrow = DB_fetch_array($result)) {
-				echo "<option VALUE=".$myrow['stockid'].'>' . str_pad($myrow['stockid'],21, '_', STR_PAD_RIGHT) . $myrow['description'];
+				echo '<option VALUE="'.$myrow['stockid'].'">' . str_pad($myrow['stockid'],21, '_', STR_PAD_RIGHT) . $myrow['description'] . '</option>';
 			} //end while loop
 
 			echo '</select></td></tr>';
 		}
 
-		echo "<tr><td>" . _('Location') . ": </td><td><select tabindex='2' name='LocCode'>";
+		echo '<tr><td>' . _('Location') . ': </td><td><select tabindex="2" name="LocCode">';
 
 		DB_free_result($result);
 		$sql = "SELECT locationname, loccode FROM locations";
@@ -641,50 +641,49 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 
 		while ($myrow = DB_fetch_array($result)) {
 			if (isset($_POST['LocCode']) and $myrow['loccode']==$_POST['LocCode']) {
-				echo "<option selected VALUE='";
+				echo '<option selected VALUE="'.$myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			} else {
-				echo "<option VALUE='";
+				echo '<option VALUE="'.$myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			}
-			echo $myrow['loccode'] . "'>" . $myrow['locationname'];
 
 		} //end while loop
 
 		DB_free_result($result);
 
-		echo "</select></td></tr><tr><td>" . _('Work Centre Added') . ": </td><td>";
-		echo "<select tabindex='3' name='WorkCentreAdded'>";
+		echo '</select></td></tr><tr><td>' . _('Work Centre Added') . ': </td><td>';
+		echo '<select tabindex="3" name="WorkCentreAdded">';
 
 		$sql = "SELECT code, description FROM workcentres";
 		$result = DB_query($sql,$db);
 
 		if (DB_num_rows($result)==0){
 			prnMsg( _('There are no work centres set up yet') . '. ' . _('Please use the link below to set up work centres'),'warn');
-			echo "<br><a href='$rootpath/WorkCentres.php?" . SID . "'>" . _('Work Centre Maintenance') . '</a>';
+			echo '<br /><a href="'.$rootpath.'/WorkCentres.php">' . _('Work Centre Maintenance') . '</a>';
 			include('includes/footer.inc');
 			exit;
 		}
 
 		while ($myrow = DB_fetch_array($result)) {
 			if (isset($_POST['WorkCentreAdded']) and $myrow['code']==$_POST['WorkCentreAdded']) {
-				echo "<option selected VALUE='";
+				echo '<option selected VALUE="'.$myrow['code'] . '">' . $myrow['description'] . '</option>';
 			} else {
-				echo "<option VALUE='";
+				echo '<option VALUE="'.$myrow['code'] . '">' . $myrow['description'] . '</option>';
 			}
-			echo $myrow['code'] . "'>" . $myrow['description'];
 		} //end while loop
 
 		DB_free_result($result);
 
-		echo "</select></td></tr><tr><td>" . _('Quantity') . ": </td><td>
-		    <input " . (in_array('Quantity',$Errors) ?  'class="inputerror"' : '' ) ."
-		     tabindex='4' type='Text' class=number name='Quantity' class=number size=10 maxlength=8 value=";
+		echo '</select></td></tr><tr><td>' . _('Quantity') . ': </td><td>';
+		    ;
 		if (isset($_POST['Quantity'])){
-			echo $_POST['Quantity'];
+			echo '<input ' . (in_array('Quantity',$Errors) ?  'class="inputerror"' : '' ) .'
+		     tabindex="4" type="Text" class=number name="Quantity" class=number size=10 maxlength=8 value="'.$_POST['Quantity'] . '" />';
 		} else {
-			echo 1;
+			echo '<input ' . (in_array('Quantity',$Errors) ?  'class="inputerror"' : '' ) .'
+		     tabindex="4" type="Text" class=number name="Quantity" class=number size=10 maxlength=8 value="1" />';
 		}
 
-		echo "></td></tr>";
+		echo '</td></tr>';
 
 		if (!isset($_POST['EffectiveTo']) OR $_POST['EffectiveTo']=='') {
 			$_POST['EffectiveTo'] = Date($_SESSION['DefaultDateFormat'],Mktime(0,0,0,Date('m'),Date('d'),(Date('y')+20)));
@@ -693,12 +692,12 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 			$_POST['EffectiveAfter'] = Date($_SESSION['DefaultDateFormat'],Mktime(0,0,0,Date('m'),Date('d')-1,Date('y')));
 		}
 
-		echo "<tr><td>" . _('Effective After') . " (" . $_SESSION['DefaultDateFormat'] . "):</td>
-		  <td><input " . (in_array('EffectiveAfter',$Errors) ?  'class="inputerror"' : '' ) .
-			" tabindex='5' type='Text' name='EffectiveAfter' class=date alt='".$_SESSION['DefaultDateFormat']."' size=11 maxlength=10 VALUE=" . $_POST['EffectiveAfter'] .">
-		  </td></tr><tr><td>" . _('Effective To') . " (" . $_SESSION['DefaultDateFormat'] . "):</td><td>
-		  <input  " . (in_array('EffectiveTo',$Errors) ?  'class="inputerror"' : '' ) .
-			" tabindex='6' type='Text' name='EffectiveTo' class=date alt='".$_SESSION['DefaultDateFormat']."' size=11 maxlength=10 VALUE=" . $_POST['EffectiveTo'] ."></td></tr>";
+		echo '<tr><td>' . _('Effective After') . ' (' . $_SESSION['DefaultDateFormat'] . '):</td>
+		  <td><input ' . (in_array('EffectiveAfter',$Errors) ?  'class="inputerror"' : '' ) .
+			' tabindex="5" type="Text" name="EffectiveAfter" class=date alt="'.$_SESSION['DefaultDateFormat'].'" size=11 maxlength=10 VALUE=' . $_POST['EffectiveAfter'] .'>
+		  </td></tr><tr><td>' . _('Effective To') . ' (' . $_SESSION['DefaultDateFormat'] . '):</td><td>
+		  <input  ' . (in_array('EffectiveTo',$Errors) ?  'class="inputerror"' : '' ) .
+			' tabindex="6" type="Text" name="EffectiveTo" class=date alt="'.$_SESSION['DefaultDateFormat'].'" size=11 maxlength=10 VALUE="' . $_POST['EffectiveTo'] .'"></td></tr>';
 
 		if ($ParentMBflag=='M' OR $ParentMBflag=='G'){
 			echo '<tr><td>' . _('Auto Issue this Component to Work Orders') . ':</td>
@@ -709,11 +708,11 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 				$_POST['AutoIssue'] = $_SESSION['AutoIssue'];
 			}
 			if ($_POST['AutoIssue']==0) {
-				echo '<option selected VALUE=0>' . _('No');
-				echo '<option VALUE=1>' . _('Yes');
+				echo '<option selected VALUE=0>' . _('No') . '</option>';
+				echo '<option VALUE=1>' . _('Yes') . '</option>';
 			} else {
-				echo '<option selected VALUE=1>' . _('Yes');
-				echo '<option VALUE=0>' . _('No');
+				echo '<option selected VALUE=1>' . _('Yes') . '</option>';
+				echo '<option VALUE=0>' . _('No') . '</option>';
 			}
 
 
@@ -722,7 +721,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 			echo '<input type=hidden name="AutoIssue" VALUE=0>';
 		}
 
-		echo "</table><br><div class='centre'><input tabindex='8' type='Submit' name='Submit' value='" . _('Enter Information') . "'></form></div>";
+		echo '</table><br><div class="centre"><input tabindex="8" type="Submit" name="Submit" value="' . _('Enter Information') . '"></form></div>';
 
 	} //end if record deleted no point displaying form to add record
 
@@ -791,16 +790,16 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 if (!isset($SelectedParent)) {
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="">' . ' ' . $title;
-	echo "<form action=" . $_SERVER['PHP_SELF'] . "?" . SID ." method=post>" .
-	'<div class="page_help_text">'. _('Select a manufactured part') . " (" . _('or Assembly or Kit part') . ") " .
-		 _('to maintain the bill of material for using the options below') . "." . "<br><font size=1>" .
-	 _('Parts must be defined in the stock item entry') . "/" . _('modification screen as manufactured') .
-     ", " . _('kits or assemblies to be available for construction of a bill of material') .'</div>'.
-     "</font><br><table class=selection cellpadding=3 colspan=4><tr><td><font size=1>" . _('Enter text extracts in the') .
-	 " <b>" . _('description') . "</b>:</font></td><td><input tabindex='1' type='Text' name='Keywords' size=20 maxlength=25></td>
-	 <td><font size=3><b>" . _('OR') . "</b></font></td><td><font size=1>" . _('Enter extract of the') .
-     " <b>" . _('Stock Code') . "</b>:</font></td><td><input tabindex='2' type='Text' name='StockCode' size=15 maxlength=18></td>
-	 </tr></table><br><div class='centre'><input tabindex='3' type=submit name='Search' VALUE=" . _('Search Now') . "></div>";
+	echo '<form action=' . $_SERVER['PHP_SELF'] . '" method=post>' .
+	'<div class="page_help_text">'. _('Select a manufactured part') . ' (' . _('or Assembly or Kit part') . ') ' .
+		 _('to maintain the bill of material for using the options below') . '.' . '<br><font size=1>' .
+	 _('Parts must be defined in the stock item entry') . '/' . _('modification screen as manufactured') .
+     ', ' . _('kits or assemblies to be available for construction of a bill of material') .'</div>'.
+     '</font><br><table class=selection cellpadding=3 colspan=4><tr><td><font size=1>' . _('Enter text extracts in the') .
+	 ' <b>' . _('description') . '</b>:</font></td><td><input tabindex="1" type="Text" name="Keywords" size=20 maxlength=25></td>
+	 <td><font size=3><b>' . _('OR') . '</b></font></td><td><font size=1>' . _('Enter extract of the') .
+     ' <b>' . _('Stock Code') . '</b>:</font></td><td><input tabindex="2" type="Text" name="StockCode" size=15 maxlength=18></td>
+	 </tr></table><br><div class="centre"><input tabindex="3" type=submit name="Search" value="' . _('Search Now') . '"></div>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (isset($_POST['Search']) and isset($result) AND !isset($SelectedParent)) {
@@ -830,10 +829,10 @@ if (isset($_POST['Search']) and isset($result) AND !isset($SelectedParent)) {
 			$StockOnHand = number_format($myrow['totalonhand'],2);
 		}
 		$tab = $j+3;
-		printf("<td><input tabindex='".$tab."' type=submit name='Select' VALUE='%s'</td>
+		printf('<td><input tabindex="'.$tab.'" type=submit name="Select" VALUE="%s" /></td>
 		        <td>%s</td>
 			<td class=number>%s</td>
-			<td>%s</td></tr>",
+			<td>%s</td></tr>',
 			$myrow['stockid'],
 			$myrow['description'],
 			$StockOnHand,
@@ -856,7 +855,7 @@ if (!isset($SelectedParent) or $SelectedParent=='') {
 	echo "<script>defaultControl(document.form.JournalProcessDate);</script>";
 }
 
-echo "</form>";
+echo '</form>';
 
 } //end StockID already selected
 

@@ -216,17 +216,17 @@ or deletion of the records*/
 		}
 
 		if ($myrow[1]!=$FunctionalCurrency){
-			printf("<td><img src=\"%s\"></td>
+			printf('<td><img src=\'%s\'></td>
 					<td>%s</td>
 					<td>%s</td>
 					<td>%s</td>
 					<td>%s</td>
 					<td class=number>%s</td>
 					<td class=number>%s</td>
-					<td><a href=\"%s&SelectedCurrency=%s\">%s</a></td>
-					<td><a href=\"%s&SelectedCurrency=%s&delete=1\">%s</a></td>
-					<td><a href=\"%s/ExchangeRateTrend.php?%s\">" . _('Graph') . "</a></td>
-					</tr>",
+					<td><a href="%s&SelectedCurrency=%s">%s</a></td>
+					<td><a href="%s&SelectedCurrency=%s&delete=1">%s</a></td>
+					<td><a href="%s/ExchangeRateTrend.php?%s">' . _('Graph') . '</a></td>
+					</tr>',
 					$ImageFile,
 					$myrow[1],
 					$myrow[0],
@@ -243,14 +243,14 @@ or deletion of the records*/
 					$rootpath,
 					SID . '&CurrencyToShow=' . $myrow[1]);
 		} else {
-			printf("<td><img src=\"%s\"></td>
+			printf('<td><img src="%s"></td>
 					<td>%s</td>
 					<td>%s</td>
 					<td>%s</td>
 					<td>%s</td>
 					<td class=number>%s</td>
 					<td colspan=4>%s</td>
-					</tr>",
+					</tr>',
 					$ImageFile,
 					$myrow[1],
 					$myrow[0],
@@ -273,7 +273,7 @@ echo '<br>';
 
 if (!isset($_GET['delete'])) {
 
-	echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . '?' . SID . '>';
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (isset($SelectedCurrency) AND $SelectedCurrency!='') {

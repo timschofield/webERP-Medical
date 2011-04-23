@@ -151,9 +151,9 @@ if (isset($_POST['PrintPDF'])) {
 	  $title = _('Indented BOM Listing') . ' - ' . _('Problem Report');
 	  include('includes/header.inc');
 	   prnMsg( _('The Indented BOM Listing could not be retrieved by the SQL because') . ' '  . DB_error_msg($db),'error');
-	   echo "<br><a href='" .$rootpath .'/index.php?' . SID . "'>" . _('Back to the menu') . '</a>';
+	   echo '<br><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
 	   if ($debug==1){
-	      echo "<br>$sql";
+	      echo '<br>'.$sql;
 	   }
 	   include('includes/footer.inc');
 	   exit;
@@ -237,7 +237,7 @@ if (isset($_POST['PrintPDF'])) {
 		$title = _('Print Indented BOM Listing Error');
 		include('includes/header.inc');
 		prnMsg(_('There were no items for the selected assembly'),'error');
-		echo "<br><a href='$rootpath/index.php?" . SID . "'>" . _('Back to the menu') . '</a>';
+		echo '<br><a href="'.$rootpath.'/index.php">' . _('Back to the menu') . '</a>';
 		include('includes/footer.inc');
 		exit;
 	} else {
@@ -253,21 +253,21 @@ if (isset($_POST['PrintPDF'])) {
         echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' .
 			_('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
 
-	echo '</br></br><form action=' . $_SERVER['PHP_SELF'] . " method='post'><table class=selection>";
+	echo '</br></br><form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table class=selection>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<tr><td>' . _('Part') . ":</td>";
-	echo "<td><input type ='text' name='Part' size='20'>";
+	echo '<tr><td>' . _('Part') . ':</td>';
+	echo '<td><input type ="text" name="Part" size="20">';
 
-	echo '<tr><td>' . _('Levels') . ":</td><td><select name='Levels'>";
-	echo "<option selected value='All'>" . _('All Levels');
-	echo "<option value='One'>" . _('One Level');
+	echo '<tr><td>' . _('Levels') . ':</td><td><select name="Levels">';
+	echo '<option selected value="All">' . _('All Levels') . '</option>';
+	echo '<option value="One">' . _('One Level') . '</option>';
 	echo '</select></td></tr>';
 
-	echo '<tr><td>' . _('Print Option') . ":</td><td><select name='Fill'>";
-	echo "<option selected value='yes'>" . _('Print With Alternating Highlighted Lines');
-	echo "<option value='no'>" . _('Plain Print');
+	echo '<tr><td>' . _('Print Option') . ':</td><td><select name="Fill">';
+	echo '<option selected value="yes">' . _('Print With Alternating Highlighted Lines') . '</option>';
+	echo '<option value="no">' . _('Plain Print') . '</option>';
 	echo '</select></td></tr>';
-	echo "</table><p><div class='centre'><input type=submit name='PrintPDF' value='" . _('Print PDF') . "'></div>";
+	echo '</table><p><div class="centre"><input type=submit name="PrintPDF" value="' . _('Print PDF') . '"></div>';
 
 	include('includes/footer.inc');
 

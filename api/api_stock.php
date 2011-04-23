@@ -268,7 +268,7 @@
    names of the fields in the stockmaster table, and the values are the
    values to insert. The only mandatory fields are the stockid, description,
    long description, category, and tax category
-   fields. If the other fields aren't set, then the database defaults
+   fields. If the other fields are not set, then the database defaults
    are used. The function returns an array called $Errors. The database
    is only updated if the $Errors is empty, else the function returns an
    array of one to many error codes.
@@ -386,7 +386,7 @@
    names of the fields in the stockmaster table, and the values are the
    values to update. The only mandatory fields are the stockid, description,
    long description, category, and tax category
-   fields. If the other fields aren't set, then the database defaults
+   fields. If the other fields are not set, then the database defaults
    are used. The function returns an array called $Errors. The database
    is only updated if the $Errors is empty, else the function returns an
    array of one to many error codes.
@@ -495,7 +495,7 @@
 	}
 
 /* This function takes a stock code and returns an associative array containing
-   the database record for that item. If the stock item number doesn't exist
+   the database record for that item. If the stock item number does not exist
    then it returns an $Errors array.
 */
 	function GetStockItem($StockID, $user, $password) {
