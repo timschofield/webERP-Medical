@@ -657,7 +657,7 @@ if (!isset($SupplierID)) {
 	echo '<tr><td>' . _('Supplier Name') . ':</td><td><input type="text" name="SuppName" size=42 maxlength=40></td></tr>';
 	echo '<tr><td>' . _('Address Line 1 (Street)') . ':</td><td><input type="text" name="Address1" size=42 maxlength=40></td></tr>';
 	echo '<tr><td>' . _('Address Line 2 (Suburb/City)') . ':</td><td><input type="text" name="Address2" size=42 maxlength=40></td></tr>';
-	echo '<tr><td>' . _('Address Line 3 (State/Province)') . ':</td><td><input type="text" name=2Address3" size=42 maxlength=40></td></tr>';
+	echo '<tr><td>' . _('Address Line 3 (State/Province)') . ':</td><td><input type="text" name="Address3" size=42 maxlength=40></td></tr>';
 	echo '<tr><td>' . _('Address Line 4 (Postal Code)') . ':</td><td><input type="text" name="Address4" size=42 maxlength=40></td></tr>';
 	echo '<tr><td>' . _('Telephone') . ':</td><td><input type="text" name="Phone" size=30 maxlength=40></td></tr>';
 	echo '<tr><td>' . _('Facsimile') . ':</td><td><input type="text" name="Fax" size=30 maxlength=40></td></tr>';
@@ -670,9 +670,9 @@ if (!isset($SupplierID)) {
 	echo '</select></td></tr>';
 
 	$DateString = Date($_SESSION['DefaultDateFormat']);
-	echo '<tr><td>' . _('Supplier Since') . ' (' . $_SESSION['DefaultDateFormat'] . '):</td><td><input type="text" class="date2 alt="'.
-		$_SESSION['DefaultDateFormat'].'" name="SupplierSince2 VALUE="' . $DateString . '" size=12 maxlength=10></td></tr>';
-	echo '<tr><td>' . _('Bank Particulars') . ':</td><td><input type="text" name=2BankPartics" size=13 maxlength=12></td></tr>';
+	echo '<tr><td>' . _('Supplier Since') . ' (' . $_SESSION['DefaultDateFormat'] . '):</td><td><input type="text" class="date" alt="'.
+		$_SESSION['DefaultDateFormat'].'" name="SupplierSince" VALUE="' . $DateString . '" size=12 maxlength=10></td></tr>';
+	echo '<tr><td>' . _('Bank Particulars') . ':</td><td><input type="text" name="BankPartics" size=13 maxlength=12></td></tr>';
 	echo '<tr><td>' . _('Bank reference') . ':</td><td><input type="text" name="BankRef" VALUE=0 size=13 maxlength=12></td></tr>';
 	echo '<tr><td>' . _('Bank Account No') . ':</td><td><input type="text" name="BankAct" size=31 maxlength=30></td></tr>';
 
@@ -699,7 +699,7 @@ if (!isset($SupplierID)) {
 	} //end while loop
 	DB_data_seek($result, 0);
 	echo '</select></td></tr>';
-	echo '<tr><td>' . _('Tax Reference') . ':</td><td><input type="text" name=2TaxRef" size=21 maxlength=20></td></tr>';
+	echo '<tr><td>' . _('Tax Reference') . ':</td><td><input type="text" name="TaxRef" size=21 maxlength=20></td></tr>';
 
 	$result=DB_query("SELECT currency, currabrev FROM currencies", $db);
 	if (!isset($_POST['CurrCode'])){
