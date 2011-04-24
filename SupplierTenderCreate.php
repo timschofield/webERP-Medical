@@ -794,8 +794,8 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 					<td>'.$myrow['description'].'</td>
 					<td>'.$uom.'</td>
 					<td>'.$ImageSource.'</td>
-					<td><input class="number" type="text" size=6 value=0 name="qty"'.$myrow['stockid'].'"></td>
-					<input type="hidden" size=6 value="'.$uom.'" name="uom"'.$myrow['stockid'].'">
+					<td><input class="number" type="text" size=6 value=0 name="qty'.$myrow['stockid'].'"></td>
+					<input type="hidden" size=6 value="'.$uom.'" name="uom'.$myrow['stockid'].'">
 					</tr>';
 
 			$PartsDisplayed++;
