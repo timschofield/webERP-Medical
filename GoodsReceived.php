@@ -329,8 +329,7 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 			}
 			echo '<div class="centre"><a href="'.$rootpath.'/PO_SelectOSPurchOrder.php">'.
 				_('Select a different purchase order for receiving goods against').'</a></div>';
-			echo '<div class="centre"><a href="'.$rootpath.'/GoodsReceived.php?PONumber=' .
-				$_SESSION['PO']->OrderNumber . '">'. _('Re-read the updated purchase order for receiving goods against'). '</a></div>';
+			echo '<div class="centre"><a href="'.$rootpath.'/GoodsReceived.php?PONumber=' . $_SESSION['PO']->OrderNumber . '">'. _('Re-read the updated purchase order for receiving goods against'). '</a></div>';
 			unset($_SESSION['PO']->LineItems);
 			unset($_SESSION['PO']);
 			unset($_POST['ProcessGoodsReceived']);

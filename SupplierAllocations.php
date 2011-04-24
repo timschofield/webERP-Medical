@@ -501,7 +501,7 @@ if (isset($_POST['AllocTrans'])){
 			<td>'.$AllocnItem->TransDate.'</td>
 	    		<td>'.$AllocnItem->SuppRef.'</td>
 			<td class=number>' . number_format($AllocnItem->TransAmount,2) . '</td>
-	    		<td class=number>' . number_format($YetToAlloc,2) . '<input type=hidden name="YetToAlloc"' .
+	    		<td class=number>' . number_format($YetToAlloc,2) . '<input type=hidden name="YetToAlloc' .
 	    		 $Counter . '" VALUE="' . $YetToAlloc . '"></td>';
 
 	    if (ABS($AllocnItem->AllocAmt-$YetToAlloc) < 0.01){

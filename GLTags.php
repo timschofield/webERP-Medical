@@ -58,8 +58,8 @@ $sql="SELECT tagref, tagdescription FROM tags order by tagref";
 $result= DB_query($sql,$db);
 
 while ($myrow = DB_fetch_array($result,$db)){
-	echo '<tr><td>'.$myrow[0].'</td><td>'.$myrow[1].'</td><td><a href="' .
-		$_SERVER['PHP_SELF'] . '?' . SID . '&SelectedTag=' . $myrow[0] . '&Action=edit">' . _('Edit') . '</a></td></tr>';
+	echo '<tr><td>'.$myrow[0].'</td><td>'.$myrow[1].'</td><td>
+		<a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '&SelectedTag=' . $myrow[0] . '&Action=edit">' . _('Edit') . '</a></td></tr>';
 }
 
 echo '</table><p></p>';

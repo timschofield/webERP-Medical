@@ -320,7 +320,7 @@ if (!isset($_POST['Debit'])) {
 	$_POST['Debit'] = '';
 }
 
-echo '</tr><tr><th>' . _('Debit') . "</th>".'<td><input type="text" class="number" Name = "Debit" ' .
+echo '</tr><tr><th>' . _('Debit') . '</th><td><input type="text" class="number" Name = "Debit" ' .
 			'onChange="eitherOr(this, '.'Credit'.')"'.
 			' Maxlength="12" size="10" value="' . $_POST['Debit'] . '" /></td>';
 echo '</tr><tr><th>' . _('Credit') . '</th><td><input type="text" class="number" Name = "Credit" ' .
@@ -332,18 +332,18 @@ echo '</tr><tr><th></th><th>' . _('GL Narrative') . '</th>';
 echo '<td><input type="text" name="GLNarrative" maxlength="100" size="100" value="' . $_POST['GLNarrative'] . '" /></td>';
 
 echo '</tr></table><br />'; /*Close the main table */
-echo "<div class='centre'><input type='submit' name='Process' value='" . _('Accept') . "' /></div><br /><br />";
+echo '<div class="centre"><input type="submit" name="Process" value="' . _('Accept') . '" /></div><br /><br />';
 
 
-echo "<table class='selection' width='85%'>";
+echo '<table class="selection" width='85%'>';
 
 echo '<tr><th colspan="6"><div class="centre"><font size="3" color="blue"><b>' . _('Journal Summary') . '</b></font></div></th></tr>';
-echo "<tr>
-		<th>"._('GL Tag')."</th>
-		<th>"._('GL Account')."</th>
-		<th>"._('Debit')."</th>
-		<th>"._('Credit')."</th>
-		<th>"._('Narrative').'</th></tr>';
+echo '<tr>
+		<th>'._('GL Tag').'</th>
+		<th>'._('GL Account').'</th>
+		<th>'._('Debit').'</th>
+		<th>'._('Credit').'</th>
+		<th>'._('Narrative').'</th></tr>';
 
 $debittotal=0;
 $credittotal=0;
@@ -367,20 +367,20 @@ foreach ($_SESSION['JournalDetail']->GLEntries as $JournalItem) {
 	} else {
 		$tagdescription=$myrow[0];
 	}
-	echo "<td>" . $JournalItem->tag . ' - ' . $tagdescription . "</td>";
-	echo "<td>" . $JournalItem->GLCode . ' - ' . $JournalItem->GLActName . "</td>";
+	echo '<td>' . $JournalItem->tag . ' - ' . $tagdescription . '</td>';
+	echo '<td>' . $JournalItem->GLCode . ' - ' . $JournalItem->GLActName . '</td>';
 	if($JournalItem->Amount>0) {
-		echo "<td class='number'>" . number_format($JournalItem->Amount,2) . '</td><td></td>';
+		echo '<td class="number">' . number_format($JournalItem->Amount,2) . '</td><td></td>';
 		$debittotal=$debittotal+$JournalItem->Amount;
 	} elseif($JournalItem->Amount<0) {
 		$credit=(-1 * $JournalItem->Amount);
-		echo "<td></td>
-			<td class='number'>" . number_format($credit,2) . '</td>';
+		echo '<td></td>
+			<td class="number">' . number_format($credit,2) . '</td>';
 		$credittotal=$credittotal+$credit;
 	}
 
-	echo '<td>' . $JournalItem->Narrative  . "</td>
-			<td><a href='" . $_SERVER['PHP_SELF'] . '?Delete=' . $JournalItem->ID . "'>"._('Delete').'</a></td>
+	echo '<td>' . $JournalItem->Narrative  . '</td>
+			<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $JournalItem->ID . '">'._('Delete').'</a></td>
 		</tr>';
 }
 
@@ -400,16 +400,16 @@ if ($debittotal>$credittotal) {
 echo '</table>';
 
 if (ABS($_SESSION['JournalDetail']->JournalTotal)<0.001 AND $_SESSION['JournalDetail']->GLItemCounter > 0){
-	echo "<br /><br /><div class='centre'><input type='submit' name='CommitBatch' value='"._('Accept and Process Journal')."' /></div>";
+	echo '<br /><br /><div class="centre"><input type="submit" name="CommitBatch" value="'._('Accept and Process Journal').'" /></div>';
 } elseif(count($_SESSION['JournalDetail']->GLEntries)>0) {
 	echo '<br /><br />';
 	prnMsg(_('The journal must balance ie debits equal to credits before it can be processed'),'warn');
 }
 
 if (!isset($_GET['NewJournal']) or $_GET['NewJournal']=='') {
-	echo "<script>defaultControl(document.form.GLManualCode);</script>";
+	echo '<script>defaultControl(document.form.GLManualCode);</script>';
 } else {
-	echo "<script>defaultControl(document.form.JournalProcessDate);</script>";
+	echo '<script>defaultControl(document.form.JournalProcessDate);</script>';
 }
 
 echo '</form>';

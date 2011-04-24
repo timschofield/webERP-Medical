@@ -259,7 +259,7 @@ function listall(&$db,$part,$demandtype)  {//####LISTALL_LISTALL_LISTALL_LISTALL
 // Lists some in hit List Selection submit button, and uses part number if it is entered or
 // demandtype
 
-	echo '<form action=' . $_SERVER['PHP_SELF'] . ' method=post>';
+	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	$where = " ";
 	if ($demandtype) {
