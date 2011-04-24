@@ -20,7 +20,7 @@ if (isset($_GET['SelectedSupplier'])) {
 } elseif (isset($_POST['SelectedSupplier'])) {
 	$SelectedSupplier = $_POST['SelectedSupplier'];
 }
-echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 if (isset($_POST['ResetPart'])) {
 	unset($SelectedStockItem);
@@ -379,15 +379,15 @@ else {
 			$FormatedOrderValue = number_format($myrow['ordervalue'], 2);
 			/*						  View					   Supplier					Currency			   Requisition			 Order Date				 Initiator				Order Total
 			ModifyPage, $myrow["orderno"],		  $myrow["suppname"],			$myrow["currcode"],		 $myrow["requisitionno"]		$FormatedOrderDate,			 $myrow["initiator"]			 $FormatedOrderValue 			Order Status*/
-			echo "<td><a href='" . $ViewPurchOrder . "'>" . $myrow['orderno'] . "</a></td>
-					<td>" . $myrow['suppname'] . "</td>
-				<td>" . $myrow['currcode'] . "</td>
-				<td>" . $myrow['requisitionno'] . "</td>
-				<td>" . $FormatedOrderDate . "</td>
-				<td>" . $myrow['initiator'] . "</td>
-				<td class=number>" . $FormatedOrderValue . "</td>
-				<td>" . _($myrow['status']) .  "</td>
-				</tr>";
+			echo '<td><a href="' . $ViewPurchOrder . '">' . $myrow['orderno'] . '</a></td>
+					<td>' . $myrow['suppname'] . '</td>
+					<td>' . $myrow['currcode'] . '</td>
+					<td>' . $myrow['requisitionno'] . '</td>
+					<td>' . $FormatedOrderDate . '</td>
+					<td>' . $myrow['initiator'] . '</td>
+					<td class=number>' . $FormatedOrderValue . '</td>
+					<td>' . _($myrow['status']) .  '</td>
+				</tr>';
 				//$myrow['status'] is a string which has gettext translations from PO_Header.php script
 
 			$j++;

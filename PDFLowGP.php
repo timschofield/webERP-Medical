@@ -72,7 +72,7 @@ if (isset($_POST['PrintPDF'])) {
 
 		include('includes/header.inc');
 		prnMsg(_('No low GP items retrieved'), 'warn');
-		echo '<br><a href="'  . $rootpath . '/index.php?"' . SID . '">' . _('Back to the menu') . '</a>';
+		echo '<br><a href="'  . $rootpath . '/index.php">' . _('Back to the menu') . '</a>';
 		if ($debug==1){
 		  echo '<br />'.$SQL;
 		}

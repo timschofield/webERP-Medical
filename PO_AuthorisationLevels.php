@@ -142,10 +142,8 @@ while ($myrow=DB_fetch_array($Result)) {
 	echo '<td>'.$CanCreate.'</td>';
 	echo '<td>'.$OffHold.'</td>';
 	echo '<td class="number">'.number_format($myrow['authlevel'],2).'</td>';
-	echo '<td><a href="'.$rootpath.'/PO_AuthorisationLevels.php?Edit=Yes&UserID=' . $myrow['userid'] .
-	 '&Currency='.$myrow['currabrev'].'">'._('Edit').'</td>';
-	echo '<td><a href="'.$rootpath.'/PO_AuthorisationLevels.php?Delete=Yes&UserID=' . $myrow['userid'] .
-	 '&Currency='.$myrow['currabrev'].'">'._('Delete').'</td></tr>';
+	echo '<td><a href="'.$rootpath.'/PO_AuthorisationLevels.php?Edit=Yes&UserID=' . $myrow['userid'] . '&Currency='.$myrow['currabrev'].'">'._('Edit').'</td>';
+	echo '<td><a href="'.$rootpath.'/PO_AuthorisationLevels.php?Delete=Yes&UserID=' . $myrow['userid'] . '&Currency='.$myrow['currabrev'].'">'._('Delete').'</td></tr>';
 }
 
 echo '</table><br><br>';

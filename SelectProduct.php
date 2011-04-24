@@ -210,7 +210,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 									AND stkcatpropid ='" . $PropertyRow['stkcatpropid']."'", $db);
 		$PropValRow = DB_fetch_row($PropValResult);
 		$PropertyValue = $PropValRow[0];
-		echo '<form name="CatPropForm" enctype="multipart/form-data" method="post" action="' . $_SERVER['PHP_SELF'] . '?' .SID .'">';
+		echo '<form name="CatPropForm" enctype="multipart/form-data" method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<tr><th align="right">' . $PropertyRow['label'] . ':</th>';
 		switch ($PropertyRow['controltype']) {
@@ -380,8 +380,8 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 			} else {
 				echo '<td class="select">' . _('No') . '</td>';
 			}
-			echo '<td class="select"><a href="' . $rootpath . '/PO_Header.php?&amp;NewOrder=Yes' . '&amp;SelectedSupplier=' .
-				$SuppRow['supplierid'] . '&amp;StockID=' . $StockID . '&amp;Quantity='.$SuppRow['minorderqty'].'">' . _('Order') . ' </a></td>';
+			echo '<td class="select">';
+			echo '<a href="' . $rootpath . '/PO_Header.php?&amp;NewOrder=Yes' . '&amp;SelectedSupplier=' . $SuppRow['supplierid'] . '&amp;StockID=' . $StockID . '&amp;Quantity='.$SuppRow['minorderqty'].'">' . _('Order') . ' </a></td>';
 			echo '</tr>';
 		}
 		echo '</table></td>';
@@ -450,8 +450,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 				} else {
 					$EOQ = $myrow['eoq'];
 				}
-				echo '<a href="' . $rootpath . '/PO_Header.php?&amp;NewOrder=Yes' . '&amp;SelectedSupplier=' . $SuppRow['supplierid'] .
-					'&amp;StockID=' . $StockID . '&amp;Quantity=' . $EOQ . '">' . _('Purchase this Item from') . ' ' . $SuppRow['suppname'] . ' (' . _('default') . ')</a><br />';
+				echo '<a href="' . $rootpath . '/PO_Header.php?&amp;NewOrder=Yes' . '&amp;SelectedSupplier=' . $SuppRow['supplierid'] . '&amp;StockID=' . $StockID . '&amp;Quantity=' . $EOQ . '">' . _('Purchase this Item from') . ' ' . $SuppRow['suppname'] . ' (' . _('default') . ')</a><br />';
 				/**/
 			} /* end of while */
 		} /* end of $myrow['mbflag'] == 'B' */

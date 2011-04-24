@@ -70,9 +70,9 @@ if (isset($_POST['submit'])) {
 			$i++;
 		}
 	}
-	if (strpos($_POST['SectionName'],'&')>0 OR strpos($_POST['SectionName'],"'")>0) {
+	if (ContainsIllegalCharacters($_POST['SectionName'])) {
 		$InputError = 1;
-		prnMsg( _('The account section name cannot contain the character') . " '&' " . _('or the character') ." '",'error');
+		prnMsg( _('The account section name cannot contain illegal characters') ,'error');
 		$Errors[$i] = 'SectionName';
 		$i++;
 	}
@@ -250,14 +250,14 @@ if (! isset($_GET['delete'])) {
 		if (!isset($_POST['SectionName'])) {
 			$_POST['SectionName']='';
 		}
-		echo "<table class='selection'>
+		echo '<table class="selection">
 			<tr>
-			<td>" . _('Section Number') . ':' . '</td>
-			<td><input tabindex="1" ' . (in_array('SectionID',$Errors) ?  'class="inputerror"' : '' ) ." type='text' name='SectionID' class='number' size='4' maxlength='4' value='" . $_POST['SectionID'] . "' /></td></tr>";
+			<td>' . _('Section Number') . ':' . '</td>
+			<td><input tabindex="1" ' . (in_array('SectionID',$Errors) ?  'class="inputerror"' : '' ) . ' type="text" name="SectionID" class="number" size="4" maxlength="4" value="' . $_POST['SectionID'] . '" /></td></tr>';
 	}
-	echo "<tr><td>" . _('Section Description') . ':' . '</td>
-		<td><input tabindex="2" ' . (in_array('SectionName',$Errors) ?  'class="inputerror"' : '' ) ." type='text' name='SectionName' size='30' maxlength='30' value='" . $_POST['SectionName'] . "' /></td>
-		</tr>";
+	echo '<tr><td>' . _('Section Description') . ':' . '</td>
+		<td><input tabindex="2" ' . (in_array('SectionName',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="SectionName" size="30" maxlength="30" value="' . $_POST['SectionName'] . '" /></td>
+		</tr>';
 
 	echo '<tr><td colspan="2"><div class="centre"><input tabindex="3" type="submit" name="submit" value="' . _('Enter Information') . '" /></div></td></tr>';
 	echo '</table><br />';

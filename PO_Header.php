@@ -780,8 +780,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 
 	echo '<td style="width:50%" valign="top"><table class="selection" width="100%">';
 	if($_SESSION['ExistingOrder'] != 0 and $_SESSION['PO'.$identifier]->Status == PurchOrder::STATUS_PRINTED){
-		echo '<tr><td><a href="' .$rootpath . '/GoodsReceived.php?&PONumber=' .
-			$_SESSION['PO'.$identifier]->OrderNo . '&identifier='.$identifier.'">'._('Receive this order').'</a></td></tr>';
+		echo '<tr><td><a href="' .$rootpath . '/GoodsReceived.php?&PONumber=' . $_SESSION['PO'.$identifier]->OrderNo . '&identifier='.$identifier.'">'._('Receive this order').'</a></td></tr>';
 	}
 
 	switch ($_SESSION['PO'.$identifier]->Status) {

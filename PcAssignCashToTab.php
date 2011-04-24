@@ -232,12 +232,8 @@ if (isset($_POST['process']) OR isset($SelectedTabs)) {
 				<td>'.ConvertSQLDate($myrow['authorized']).'</td>
 				<td>'.$myrow['notes'].'</td>
 				<td>'.$myrow['receipt'].'</td>
-				<td><a href="'.$_SERVER['PHP_SELF'] . '?SelectedIndex='.$myrow['counterindex'].'&SelectedTabs=' .
-					$SelectedTabs . '&Days=' . $Days . '&edit=yes">' . _('Edit') . '</td>
-				<td><a href="'.$_SERVER['PHP_SELF'] . '?SelectedIndex='.$myrow['counterindex'].'&SelectedTabs=' .
-					$SelectedTabs . '&Days=' . $Days . '&delete=yes" onclick=\'return confirm("' .
-						_('Are you sure you wish to delete this code and the expense it may have set up?') . '");\'>' .
-							_('Delete') . '</td>
+				<td><a href="'.$_SERVER['PHP_SELF'] . '?SelectedIndex='.$myrow['counterindex'].'&SelectedTabs=' . $SelectedTabs . '&Days=' . $Days . '&edit=yes">' . _('Edit') . '</td>
+				<td><a href="'.$_SERVER['PHP_SELF'] . '?SelectedIndex='.$myrow['counterindex'].'&SelectedTabs=' . $SelectedTabs . '&Days=' . $Days . '&delete=yes" onclick=\'return confirm("' . _('Are you sure you wish to delete this code and the expense it may have set up?') . '");\'>' . _('Delete') . '</td>
 				</tr>';
 		}else{
 			echo '<td>'.ConvertSQLDate($myrow['date']).'</td>

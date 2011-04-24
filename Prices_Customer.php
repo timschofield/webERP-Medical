@@ -306,10 +306,8 @@ if (DB_num_rows($result) == 0) {
 		<td class=number>'.$myrow['conversionfactor'].'</td>
 		<td>'.ConvertSQLDate($myrow['startdate']).'</td>
 		<td>'.$EndDateDisplay.'</td>
- 		<td><a href="'.$_SERVER['PHP_SELF'].'?Item='.$Item.'&Price='.$myrow['price'].'&Branch='.$myrow['branchcode'].
-			'&StartDate='.$myrow['startdate'].'&EndDate='.$myrow['enddate'].'&Edit=1">' . _('Edit') . '</td>
-		<td><a href="'.$_SERVER['PHP_SELF'].'?Item='.$Item.'&Branch='.$myrow['branchcode'].'&StartDate='.$myrow['startdate'].
-			'&EndDate='.$myrow['enddate'].'&delete=yes">' . _('Delete') . '</td></tr>';
+ 		<td><a href="'.$_SERVER['PHP_SELF'].'?Item='.$Item.'&Price='.$myrow['price'].'&Branch='.$myrow['branchcode'].'&StartDate='.$myrow['startdate'].'&EndDate='.$myrow['enddate'].'&Edit=1">' . _('Edit') . '</td>
+		<td><a href="'.$_SERVER['PHP_SELF'].'?Item='.$Item.'&Branch='.$myrow['branchcode'].'&StartDate='.$myrow['startdate'].'&EndDate='.$myrow['enddate'].'&delete=yes">' . _('Delete') . '</td></tr>';
 	}
 //END WHILE LIST LOOP
 }

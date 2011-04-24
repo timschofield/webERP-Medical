@@ -227,7 +227,7 @@ if (isset($_POST['process'])OR isset($SelectedTabs)) {
 					<td>%s</td>
 					<td>%s</td>
 					<td><a href="%sSelectedIndex=%s&SelectedTabs='.$SelectedTabs.'&Days='.$Days.'&edit=yes">' . _('Edit') . '</td>
-					<td><a href="%sSelectedIndex=%s&SelectedTabs='.$SelectedTabs.'&Days='.$Days.'&delete=yes" onclick="return confirm("' . _('Are you sure you wish to delete this code and the expense it may have set up?') . '");\'>' . _('Delete') . '</td>
+					<td><a href="%sSelectedIndex=%s&SelectedTabs='.$SelectedTabs.'&Days='.$Days.'&delete=yes" onclick="return confirm("' . _('Are you sure you wish to delete this code and the expense it may have set up?') . '");">' . _('Delete') . '</td>
 					</tr>',
 					ConvertSQLDate($myrow['2']),
 					$Description['0'],

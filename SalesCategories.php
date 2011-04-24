@@ -169,8 +169,7 @@ if (isset($_POST['submit'])  && $EditName == 1 ) { // Creating or updating a cat
 // ----------------------------------------------------------------------------------------
 // Calculate Path for navigation
 
-$CategoryPath = '<a href="'.$_SERVER['PHP_SELF'] . '?' . SID .
-			'&ParentCategory=NULL">' . _('Main') . '</a>' . "&nbsp;\\&nbsp;";
+$CategoryPath = '<a href="'.$_SERVER['PHP_SELF'] . '?ParentCategory=NULL">' . _('Main') . '</a>' . "&nbsp;\\&nbsp;";
 $TempPath = '';
 if (isset($ParentCategory)) {
 	$TmpParentID = $ParentCategory;
@@ -186,8 +185,7 @@ for($Buzy = (isset($TmpParentID) && ($TmpParentID <> ''));
 		if (DB_num_rows($result) > 0) {
 			$row = DB_fetch_array($result);
 			$LastParentName =  $row['salescatname'];
-			$TempPath = '<a href="'.$_SERVER['PHP_SELF'] . '?' . SID .
-				'&ParentCategory='.$TmpParentID.'">'.$LastParentName .
+			$TempPath = '<a href="'.$_SERVER['PHP_SELF'] . '?ParentCategory='.$TmpParentID.'">'.$LastParentName .
 				'</a>'."&nbsp;\\&nbsp;".$TempPath;
 			$TmpParentID = $row['parentcatid']; // Set For Next Round
 		} else {
@@ -439,14 +437,13 @@ if($result ) {
 
 			echo '<td>' . $myrow['stockid'] . '</td>';
 			echo '<td>' . $myrow['description'] . '</td>';
-			echo '<td><a href="'.$_SERVER['PHP_SELF'] . '?' . SID .
-					'&ParentCategory='.$ParentCategory.'&DelStockID='.$myrow['stockid'].'">'.
+			echo '<td><a href="'.$_SERVER['PHP_SELF'] . 'ParentCategory='.$ParentCategory.'&DelStockID='.$myrow['stockid'].'">'.
 					_('Remove').
 					'</a></td></tr>';
 		}
 		echo '</table>';
 	} else {
-		prnMsg(_("No Inventory items in this category."));
+		prnMsg(_('No Inventory items in this category.'));
 	}
 	DB_free_result($result);
 }

@@ -189,7 +189,7 @@ while ($myrow = DB_fetch_array($result)) {
 		<td>%s</td>
 		<td>%s</td>
 		<td><a href="%sSelectedTab=%s">' . _('Edit') . '</td>
-		<td><a href="%sSelectedTab=%s&delete=yes" onclick="return confirm("' . _('Are you sure you wish to delete this code and all the description it may have set up?') . '");>' . _('Delete') . '</td>
+		<td><a href="%sSelectedTab=%s&delete=yes" onclick="return confirm("' . _('Are you sure you wish to delete this code and all the description it may have set up?') . '");">' . _('Delete') . '</td>
 		</tr>',
 		$myrow['tabcode'],
 		$myrow['usercode'],

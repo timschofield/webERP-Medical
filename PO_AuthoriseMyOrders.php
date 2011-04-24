@@ -20,8 +20,7 @@ if (isset($_POST['updateall'])) {
 		if (substr($key,0,6)=='status') {
 			$orderno=substr($key,6);
 			$status=$_POST['status'.$orderno];
-			$comment=date($_SESSION['DefaultDateFormat']).' - '._('Authorised by').' '.'<a href="mailto:'.
-				$emailrow['email'].'">'.$_SESSION['UserID'].'</a><br>'.$_POST['comment'];
+			$comment=date($_SESSION['DefaultDateFormat']).' - '._('Authorised by').' '.'<a href="mailto:'. $emailrow['email'].'">'.$_SESSION['UserID'].'</a><br>'.$_POST['comment'];
 			$sql="UPDATE purchorders
 				SET status='".$status."',
 				stat_comment='".$comment."',

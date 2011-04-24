@@ -32,7 +32,7 @@ if (!isset($_POST['CurrAbrev'])){
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Search') .
 		'" alt="" />' . '</img>' . $title.'</p>';
 
-echo "<div class=centre><a href='" . $rootpath . '/SelectProduct.php?' . SID . "'>" . _('Back to Items') . '</a></div><br>';
+echo '<div class="centre"><a href="' . $rootpath . '/SelectProduct.php">' . _('Back to Items') . '</a></div><br>';
 
 
 $result = DB_query("SELECT stockmaster.description,
@@ -240,29 +240,26 @@ if ($InputError ==0){
 			if (in_array(12,$_SESSION['AllowedPageSecurityTokens'])) {
 
 				echo '<input type=hidden name="Units" value="' . $myrow['units'] . '">';
-				echo "<td>".$myrow['currency']."</td>
-						<td>".$myrow['sales_type']."</td>
-						<td>".$myrow['units']."</td>
-						<td class=number>".$myrow['conversionfactor']."</td>
-						<td class=number>".$myrow['decimalplaces']."</td>
-						<td class=number>".number_format($myrow['price'],2)."</td>
-						<td>".ConvertSQLDate($myrow['startdate'])."</td>
-						<td>".$EndDateDisplay."</td>
-						<td><a href='".$_SERVER['PHP_SELF']."?".SID."&Item=".$myrow['stockid']."&TypeAbbrev=".$myrow['typeabbrev']."
-							&CurrAbrev=".$myrow['currabrev']."&StartDate=".$myrow['startdate']."&EndDate=".$myrow['enddate']."&Edit=1'>" . _('Edit') . "</td>
-						<td><a href='".$_SERVER['PHP_SELF']."?".SID."&Item=".$myrow['stockid']."&TypeAbbrev=".$myrow['typeabbrev'].
-							"&CurrAbrev=".$myrow['currabrev']."&StartDate=".$myrow['startdate']."&EndDate=".$myrow['enddate'].
-							"&delete=yes' onclick=\"return confirm('" . _('Are you sure you wish to delete this price?') . "');\">" . _('Delete') . '</td></tr>';
+				echo '<td>'.$myrow['currency'].'</td>
+						<td>'.$myrow['sales_type'].'</td>
+						<td>'.$myrow['units'].'</td>
+						<td class=number>'.$myrow['conversionfactor'].'</td>
+						<td class=number>'.$myrow['decimalplaces'].'</td>
+						<td class=number>'.number_format($myrow['price'],2).'</td>
+						<td>'.ConvertSQLDate($myrow['startdate']).'</td>
+						<td>'.$EndDateDisplay.'</td>
+						<td><a href="'.$_SERVER['PHP_SELF'].'?'.SID.'&Item='.$myrow['stockid'].'&TypeAbbrev='.$myrow['typeabbrev'].'&CurrAbrev='.$myrow['currabrev'].'&StartDate='.$myrow['startdate'].'&EndDate='.$myrow['enddate'].'&Edit=1">' . _('Edit') . '</td>
+						<td><a href="'.$_SERVER['PHP_SELF'].'?'.SID.'&Item='.$myrow['stockid'].'&TypeAbbrev='.$myrow['typeabbrev'].'&CurrAbrev='.$myrow['currabrev'].'&StartDate='.$myrow['startdate'].'&EndDate='.$myrow['enddate'].'&delete=yes" onclick=\'return confirm("' . _('Are you sure you wish to delete this price?') . '");\'>' . _('Delete') . '</td></tr>';
 			} else {
-				echo "<td>".$myrow['currency']."</td>
-						<td>".$myrow['sales_type']."</td>
-						<td>".$myrow['units']."</td>
-						<td class=number>".$myrow['conversionfactor']."</td>
-						<td class=number>".$myrow['decimalplaces']."</td>
-						<td class=number>".number_format($myrow['price'],2)."</td>
-						<td>".ConvertSQLDate($myrow['startdate'])."</td>
-						<td>".$EndDateDisplay."</td>
-						</tr>";
+				echo '<td>'.$myrow['currency'].'</td>
+						<td>'.$myrow['sales_type'].'</td>
+						<td>'.$myrow['units'].'</td>
+						<td class=number>'.$myrow['conversionfactor'].'</td>
+						<td class=number>'.$myrow['decimalplaces'].'</td>
+						<td class=number>'.number_format($myrow['price'],2).'</td>
+						<td>'.ConvertSQLDate($myrow['startdate']).'</td>
+						<td>'.$EndDateDisplay.'</td>
+						</tr>';
 			}
 
 		}

@@ -204,7 +204,7 @@ while ($myrow = DB_fetch_row($result)) {
 	printf('<td>%s</td>
 		<td>%s</td>
 		<td><a href="%sSelectedType=%s">' . _('Edit') . '</td>
-		<td><a href="%sSelectedType=%s&delete=yes onclick=\'return confirm("' . _('Are you sure you wish to delete this price list and all the prices it may have set up?') . '");\'>' . _('Delete') . '</td>
+		<td><a href="%sSelectedType=%s&delete=yes" onclick=\'return confirm("' . _('Are you sure you wish to delete this price list and all the prices it may have set up?') . '");\'>' . _('Delete') . '</td>
 		</tr>',
 		$myrow[0],
 		$myrow[1],
