@@ -234,18 +234,18 @@ if (!Is_Date($_SESSION['JournalDetail']->JnlDate)){
 }
 
 echo '<table><tr>
-		<td colspan="5"><table class="selection"><tr><td>'._('Date to Process Journal').":</td>
-		<td><input type='text' class='date' alt='".$_SESSION['DefaultDateFormat']."' name='JournalProcessDate' maxlength='10' size='11' value='" .
-					 $_SESSION['JournalDetail']->JnlDate . "' /></td>";
+		<td colspan="5"><table class="selection"><tr><td>'._('Date to Process Journal').':</td>
+		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="JournalProcessDate" maxlength="10" size="11" value="' .
+					 $_SESSION['JournalDetail']->JnlDate . '" /></td>';
 echo '<td>' . _('Type') . ':</td>
 		<td><select name="JournalType">';
 
 if ($_POST['JournalType'] == 'Reversing'){
-	echo "<option selected='True' value = 'Reversing'>" . _('Reversing')."</option>";
-	echo "<option value = 'Normal'>" . _('Normal')."</option>";
+	echo '<option selected="True" value = "Reversing">' . _('Reversing').'</option>';
+	echo '<option value = "Normal">' . _('Normal').'</option>';
 } else {
-	echo "<option value = 'Reversing'>" . _('Reversing')."</option>";
-	echo "<option selected='True' value = 'Normal'>" . _('Normal')."</option>";
+	echo '<option value = "Reversing">' . _('Reversing').'</option>';
+	echo '<option selected="True" value = "Normal">' . _('Normal').'</option>';
 }
 
 echo '</select></td>
