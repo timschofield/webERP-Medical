@@ -604,7 +604,7 @@ if (isset($_POST['AllocTrans'])){
 		ConvertSQLDate($myrow['trandate']),
 		$myrow['total'],
 		$myrow['total']-$myrow['alloc'],
-		$_SERVER['PHP_SELF'] ,
+		$_SERVER['PHP_SELF'] .'?',
 		$myrow['id']);
 
   }
@@ -675,7 +675,7 @@ if (isset($_POST['AllocTrans'])){
 		ConvertSQLDate($myrow['trandate']),
 		$myrow['total'],
 		$myrow['total']-$myrow['alloc'],
-		$_SERVER['PHP_SELF'],
+		$_SERVER['PHP_SELF'] .'?',
 		$myrow['id']);
 
 
