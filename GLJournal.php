@@ -335,7 +335,7 @@ echo '</tr></table><br />'; /*Close the main table */
 echo '<div class="centre"><input type="submit" name="Process" value="' . _('Accept') . '" /></div><br /><br />';
 
 
-echo '<table class="selection" width='85%'>';
+echo '<table class="selection" width="85%">';
 
 echo '<tr><th colspan="6"><div class="centre"><font size="3" color="blue"><b>' . _('Journal Summary') . '</b></font></div></th></tr>';
 echo '<tr>
