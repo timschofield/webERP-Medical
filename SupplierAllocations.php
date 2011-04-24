@@ -496,10 +496,10 @@ if (isset($_POST['AllocTrans'])){
 
 	    $YetToAlloc = ($AllocnItem->TransAmount - $AllocnItem->PrevAlloc);
 
-	    echo '<td>$AllocnItem->TransType</td>
-	    		<td>$AllocnItem->TypeNo</td>
-			<td>$AllocnItem->TransDate</td>
-	    		<td>$AllocnItem->SuppRef</td>
+	    echo '<td>'.$AllocnItem->TransType.'</td>
+	    		<td>'.$AllocnItem->TypeNo.'</td>
+			<td>'.$AllocnItem->TransDate.'</td>
+	    		<td>'.$AllocnItem->SuppRef.'</td>
 			<td class=number>' . number_format($AllocnItem->TransAmount,2) . '</td>
 	    		<td class=number>' . number_format($YetToAlloc,2) . '<input type=hidden name="YetToAlloc"' .
 	    		 $Counter . '" VALUE="' . $YetToAlloc . '"></td>';
