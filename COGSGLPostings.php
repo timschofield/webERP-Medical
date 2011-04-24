@@ -106,12 +106,12 @@ if (!isset($SelectedCOGSPostingID)) {
 				$k=1;
 			}
 
-			printf("<td>%s</td>
+			printf('<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
-				<td><a href=\"%sSelectedCOGSPostingID=%s\">" . _('Edit') . "</td>
-				<td><a href=\"%sSelectedCOGSPostingID=%s&delete=yes\">". _('Delete') . "</td></tr>",
+				<td><a href="%sSelectedCOGSPostingID=%s">' . _('Edit') . '</td>
+				<td><a href="%sSelectedCOGSPostingID=%s&delete=yes">'. _('Delete') . '</td></tr>',
 				$myrow[1],
 				$myrow[2],
 				$myrow[3],
@@ -209,13 +209,13 @@ if (!isset($SelectedCOGSPostingID)) {
 				$k++;
 			}
 
-		printf("<td>%s</td>
+		printf('<td>%s</td>
 			<td>%s</td>
 			<td>%s</td>
 			<td>%s</td>
-			<td><a href=\"%sSelectedCOGSPostingID=%s\">" . _('Edit') . "</td>
-			<td><a href=\"%sSelectedCOGSPostingID=%s&delete=yes\">" . _('Delete') . "</td>
-			</tr>",
+			<td><a href="%sSelectedCOGSPostingID=%s">' . _('Edit') . '</td>
+			<td><a href="%sSelectedCOGSPostingID=%s&delete=yes">' . _('Delete') . '</td>
+			</tr>',
 			$myrow[1],
 			$myrow[2],
 			$myrow[3],

@@ -212,7 +212,7 @@ if (isset($_POST['NewItem'])){ /* NewItem is set from the part selection list as
 				} else {
 					prnMsg (_('The item code') . ' ' . $ItemCode . ' ' . _('does not exist in the database and therefore cannot be added to the contract BOM'),'error');
 					if ($debug==1){
-						echo "<br />".$sql;
+						echo '<br />'.$sql;
 					}
 					include('includes/footer.inc');
 					exit;
@@ -294,9 +294,9 @@ if (!isset($_GET['Edit'])) {
 		_('Print') . '" alt="" />' . ' ' . _('Search For Stock Items') . '</p>';
 	echo '<table class="selection"><tr>';
 
-	echo ":</tr><tr><td><select name='StockCat'>";
+	echo ':</tr><tr><td><select name="StockCat">';
 
-	echo "<option selected='True' value='All'>" . _('All').'</option>';
+	echo '<option selected="true" value="All">' . _('All').'</option>';
 	while ($myrow1 = DB_fetch_array($result1)) {
 		if (isset($_POST['StockCat']) and $_POST['StockCat']==$myrow1['categoryid']){
 			echo '<option selected value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'].'</option>';
@@ -325,8 +325,7 @@ if (!isset($_GET['Edit'])) {
 		<td><input type="text" name="StockCode" size="15" maxlength="18" value="' . $_POST['StockCode'] . '" /></td>
 		</tr>
 		<tr><td></td>
-		<td><font size="3"><b>' . _('OR') . ' </b></font><font size="2"><a target="_blank" href="'.$rootpath.'/Stocks.php?' . SID .
-			 '">' . _('Create a New Stock Item') . '</a></font></td></tr>
+		<td><font size="3"><b>' . _('OR') . ' </b></font><font size="2"><a target="_blank" href="'.$rootpath.'/Stocks.php?">' . _('Create a New Stock Item') . '</a></font></td></tr>
 		</table><br />
 		<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" />
 		</div><br />';

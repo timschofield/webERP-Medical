@@ -412,8 +412,7 @@ if (!isset($SelectedBranch)){
 				<td>%s</td>
 				<td>%s</td>
 				<td><a href="%s?DebtorNo=%s&SelectedBranch=%s">%s</td>
-				<td><a href="%s?DebtorNo=%s&SelectedBranch=%s&delete=yes" onclick=\'return confirm("' .
-						_('Are you sure you wish to delete this branch?') . '");\'>%s</td></tr>',
+				<td><a href="%s?DebtorNo=%s&SelectedBranch=%s&delete=yes" onclick=\'return confirm("' . _('Are you sure you wish to delete this branch?') . '");\'>%s</td></tr>',
 				$myrow[10],
 				$myrow[2],
 				$myrow[5],
@@ -597,7 +596,7 @@ if (!isset($_GET['delete'])) {
 	if (DB_num_rows($result)==0){
 		echo '</table>';
 		prnMsg(_('There are no sales people defined as yet') . ' - ' . _('customer branches must be allocated to a sales person') . '. ' . _('Please use the link below to define at least one sales person'),'error');
-		echo '<p align="center"><a href="' . $rootpath . '/SalesPeople.php?"' . SID . '">'._('Define Sales People') . '</a>';
+		echo '<p align="center"><a href="' . $rootpath . '/SalesPeople.php?">'._('Define Sales People') . '</a>';
 		include('includes/footer.inc');
 		exit;
 	}

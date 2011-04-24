@@ -169,11 +169,11 @@ or deletion of the records*/
 			$k=1;
 		}
 
-	printf("<td>%s</td>
+	printf('<td>%s</td>
 		<td>%s</td>
 		<td>%s</td>
-		<td><a href=\"%s?SelectedReason=%s\">" . _('Edit') . "</a></td>
-		<td><a href=\"%s?SelectedReason=%s&delete=1\">". _('Delete') .'</a></td>
+		<td><a href="%s?SelectedReason=%s">' . _('Edit') . '</a></td>
+		<td><a href="%s?SelectedReason=%s&delete=1">'. _('Delete') .'</a></td>
 		</tr>',
 		$myrow[0],
 		$myrow[1],
@@ -213,9 +213,9 @@ if (!isset($_GET['delete'])) {
 		$_POST['ReasonDescription']  = $myrow['reasondescription'];
 		$_POST['DisallowInvoices']  = $myrow['dissallowinvoices'];
 
-		echo "<input type=hidden name='SelectedReason' VALUE='" . $SelectedReason . "'>";
-		echo "<input type=hidden name='ReasonCode' VALUE='" . $_POST['ReasonCode'] . "'>";
-		echo "<table class=selection><tr><td>". _('Status Code') .':</td><td>';
+		echo '<input type=hidden name="SelectedReason" VALUE="' . $SelectedReason . '">';
+		echo '<input type=hidden name="ReasonCode" VALUE="' . $_POST['ReasonCode'] . '">';
+		echo '<table class=selection><tr><td>'. _('Status Code') .':</td><td>';
 		echo $_POST['ReasonCode'] . '</td></tr>';
 
 	} else { //end of if $SelectedReason only do the else when a new record is being entered
@@ -224,10 +224,10 @@ if (!isset($_GET['delete'])) {
 		}
 		echo '<br><table class=selection>
 			<tr>
-				<td>'. _('Status Code') .":</td>
-				<td><input " . (in_array('ReasonCode',$Errors) ? 'class="inputerror"' : '' ) .
-					" tabindex=1 type='Text' name='ReasonCode' VALUE='". $_POST['ReasonCode'] ."' size=3 maxlength=2></td>
-			</tr>";
+				<td>'. _('Status Code') .':</td>
+				<td><input ' . (in_array('ReasonCode',$Errors) ? 'class="inputerror"' : '' ) .
+					' tabindex=1 type="text" name="ReasonCode" VALUE="'. $_POST['ReasonCode'] .'" size=3 maxlength=2></td>
+			</tr>';
 	}
 
 	if (!isset($_POST['ReasonDescription'])) {

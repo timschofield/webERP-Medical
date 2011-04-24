@@ -130,13 +130,13 @@ if ($CustomerRecord['dissallowinvoices']!=0){
 	echo '<br><font color=RED size=4><b>' . _('ACCOUNT ON HOLD') . '</font></b><br>';
 }
 
-echo "<table class=selection width=70%>
+echo '<table class=selection width=70%>
 	<tr>
-		<th width=20%>" . _('Total Balance') . "</th>
-		<th width=20%>" . _('Current') . "</th>
-		<th width=20%>" . _('Now Due') . "</th>
-		<th width=20%>" . $_SESSION['PastDueDays1'] . "-" . $_SESSION['PastDueDays2'] . ' ' . _('Days Overdue') . "</th>
-		<th width=20%>" . _('Over') . ' ' . $_SESSION['PastDueDays2'] . ' ' . _('Days Overdue') . '</th></tr>';
+		<th width=20%>' . _('Total Balance') . '</th>
+		<th width=20%>' . _('Current') . '</th>
+		<th width=20%>' . _('Now Due') . '</th>
+		<th width=20%>' . $_SESSION['PastDueDays1'] . '-' . $_SESSION['PastDueDays2'] . ' ' . _('Days Overdue') . '</th>
+		<th width=20%>' . _('Over') . ' ' . $_SESSION['PastDueDays2'] . ' ' . _('Days Overdue') . '</th></tr>';
 
 echo '<tr><td class=number>' . number_format($CustomerRecord['balance'],2) . '</td>
 	<td class=number>' . number_format(($CustomerRecord['balance'] - $CustomerRecord['due']),2) . '</td>
@@ -146,10 +146,10 @@ echo '<tr><td class=number>' . number_format($CustomerRecord['balance'],2) . '</
 	</tr>
 	</table>';
 
-echo "<br><div class='centre'><form action='" . $_SERVER['PHP_SELF'] . "' method=post>";
+echo '<br><div class="centre"><form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo _('Show all transactions after') . ": <input tabindex=1 type=text class='date' alt='".$_SESSION['DefaultDateFormat']."' id='datepicker' name='TransAfterDate' Value='" . $_POST['TransAfterDate'] . "' MAXLENGTH =10 size=12>" .
-		"	<input tabindex=2 type=submit name='Refresh Inquiry' value='" . _('Refresh Inquiry') . "'></div></form><br>";
+echo _('Show all transactions after') . ': <input tabindex=1 type=text class="date" alt="'.$_SESSION['DefaultDateFormat'].'" id="datepicker" name="TransAfterDate" Value="' . $_POST['TransAfterDate'] . '" MAXLENGTH =10 size=12>' .
+		'	<input tabindex=2 type=submit name="Refresh Inquiry" value="' . _('Refresh Inquiry') . '"></div></form><br>';
 
 $DateAfterCriteria = FormatDateForSQL($_POST['TransAfterDate']);
 
@@ -351,8 +351,8 @@ while ($myrow=DB_fetch_array($TransResult)) {
 		if ($_SESSION['CompanyRecord']['gllink_debtors']== 1 AND in_array(8,$_SESSION['AllowedPageSecurityTokens'])){
 			printf($BaseFormatString .
 				$PreviewCreditFormatString .
-				"<td><a href='%s/CustomerAllocations.php?AllocTrans=%s'>" . _('Allocation') . "<IMG SRC='" .$rootpath."/css/".$theme."/images/allocation.png' title='" . _('Click to allocate funds') . "'></a></td>
-				<td><a href='%s/GLTransInquiry.php?%sTypeID=%s&TransNo=%s'>" . _('View GL Entries') . ' <a><IMG SRC="' .$rootpath.'/css/'.$theme.'/images/gl.png" title="' . _('View the GL Entries') . '"></a></td></tr>',
+				'<td><a href="%s/CustomerAllocations.php?AllocTrans=%s">' . _('Allocation') . '<img src="' .$rootpath.'/css/'.$theme.'/images/allocation.png" title="' . _('Click to allocate funds') . '"></a></td>
+				<td><a href="%s/GLTransInquiry.php?%sTypeID=%s&TransNo=%s">' . _('View GL Entries') . ' <a><img src="' .$rootpath.'/css/'.$theme.'/images/gl.png" title="' . _('View the GL Entries') . '"></a></td></tr>',
 				//$BaseFormatString parameters
 				$myrow['typename'],
 				$myrow['transno'],
@@ -385,8 +385,8 @@ while ($myrow=DB_fetch_array($TransResult)) {
 		} else {
 			printf($BaseFormatString .
 				$PreviewCreditFormatString .
-				"<td><a href='%s/CustomerAllocations.php?AllocTrans=%s'>" . _('Allocation') . "<IMG SRC='%s/allocation.png' title='" . _('Click to allocate funds') . "'></a></td>
-				</tr>",
+				'<td><a href="%s/CustomerAllocations.php?AllocTrans=%s">' . _('Allocation') . '<img src="%s/allocation.png" title="' . _('Click to allocate funds') . '"></a></td>
+				</tr>',
 				$myrow['typename'],
 				$myrow['transno'],
 				ConvertSQLDate($myrow['trandate']),
@@ -418,9 +418,9 @@ while ($myrow=DB_fetch_array($TransResult)) {
 		//If security token 8 in the allowed page security tokens then assumed ok for GL trans inquiries
 		if ($_SESSION['CompanyRecord']['gllink_debtors']== 1 AND in_array(8,$_SESSION['AllowedPageSecurityTokens'])){
 			printf($BaseFormatString .
-				"<td><a href='%s/CustomerAllocations.php?AllocTrans=%s'>" . _('Allocation') . "<IMG SRC='" .$rootpath."/css/".$theme."/images/allocation.png' title='" . _('Click to allocate funds') . "'></a></td>
-				<td><a href='%s/GLTransInquiry.php?%s&TypeID=%s&TransNo=%s'>" . _('View GL Entries') . " <IMG SRC='" .$rootpath."/css/".$theme."/images/gl.png' title='" . _('View the GL Entries') . "'></a></td>
-				</tr>",
+				'<td><a href="%s/CustomerAllocations.php?AllocTrans=%s">' . _('Allocation') . '<img src="' .$rootpath.'/css/'.$theme.'/images/allocation.png" title="' . _('Click to allocate funds') . '"></a></td>
+				<td><a href="%s/GLTransInquiry.php?%s&TypeID=%s&TransNo=%s">' . _('View GL Entries') . ' <img src="' .$rootpath.'/css/'.$theme.'/images/gl.png" title="' . _('View the GL Entries') . '"></a></td>
+				</tr>',
 				$myrow['typename'],
 				$myrow['transno'],
 				ConvertSQLDate($myrow['trandate']),
@@ -439,8 +439,8 @@ while ($myrow=DB_fetch_array($TransResult)) {
 				$myrow['transno']);
 		} else { //no permission for GLTrans Inquiries
 			printf($BaseFormatString .
-				"<td><a href='%s/CustomerAllocations.php?AllocTrans=%s'>" . _('Allocation') . "<IMG SRC='" .$rootpath."/css/".$theme."/images/allocation.png' title='" . _('Click to allocate funds') . "'></a></td>
-				</tr>",
+				'<td><a href="%s/CustomerAllocations.php?AllocTrans=%s">' . _('Allocation') . '<img src="' .$rootpath.'/css/'.$theme.'/images/allocation.png" title="' . _('Click to allocate funds') . '"></a></td>
+				</tr>',
 				$myrow['typename'],
 				$myrow['transno'],
 				ConvertSQLDate($myrow['trandate']),
