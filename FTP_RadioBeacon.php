@@ -65,10 +65,10 @@ $j = 1;
 $k=0; //row colour counter
 while ($myrow=DB_fetch_array($SalesOrdersResult)) {
 	if ($k==1){
-		echo "<tr bgcolor='#CCCCCC'>";
+		echo '<tr bgcolor="#CCCCCC">';
 		$k=0;
 	} else {
-		echo "<tr bgcolor='#EEEEEE'>";
+		echo '<tr bgcolor="#EEEEEE">';
 		$k=1;
 	}
 
@@ -80,8 +80,8 @@ while ($myrow=DB_fetch_array($SalesOrdersResult)) {
 	$ModifyPage = $rootpath . 'SelectOrderItems.php?' . SID . '&ModifyOrderNumber=' . $myrow['orderno'];
 
 	if ($myrow['printedpackingslip'] ==1){
-		printf("<td><font size=2><a href='%s'>%s</a></font></td>
-			<td><font color=RED size=2>" . _('Already') . '<br>' . _('Sent') . "</font></td>
+		printf('<td><font size=2><a href="%s">%s</a></font></td>
+			<td><font color=RED size=2>' . _('Already') . '<br>' . _('Sent') . '</font></td>
 			<td><font size=2>%s</font></td>
 			<td><font size=2>%s</font></td>
 			<td><font size=2>%s</font></td>
@@ -89,7 +89,7 @@ while ($myrow=DB_fetch_array($SalesOrdersResult)) {
 			<td><font size=2>%s</font></td>
 			<td><font size=2>%s</font></td>
 			<td class=number><font size=2>%s</font></td>
-			<td><font size=2>%s</font></td></tr>",
+			<td><font size=2>%s</font></td></tr>',
 			$ModifyPage,
 			$myrow['orderno'],
 			$myrow['name'],
@@ -101,8 +101,8 @@ while ($myrow=DB_fetch_array($SalesOrdersResult)) {
 			$FormatedOrderValue,
 			$FormatedDateLastSent);
 	} else {
-		printf("<td><font size=2><a href='%s'>%s</a></font></td>
-			<td><font size=2><a href='%s'>" . _('Send') . "</a></font></td>
+		printf('<td><font size=2><a href="%s">%s</a></font></td>
+			<td><font size=2><a href="%s">' . _('Send') . '</a></font></td>
 			<td><font size=2>%s</font></td>
 			<td><font size=2>%s</font></td>
 			<td><font size=2>%s</font></td>
@@ -110,7 +110,7 @@ while ($myrow=DB_fetch_array($SalesOrdersResult)) {
 			<td><font size=2>%s</font></td>
 			<td><font size=2>%s</font></td>
 			<td class=number><font size=2>%s</font></td>
-			<td><font size=2>%s</font></td></tr>",
+			<td><font size=2>%s</font></td></tr>',
 			$ModifyPage,
 			$myrow['orderno'],
 			$FTPDispatchNote,
@@ -184,8 +184,8 @@ if (isset($_GET['OrderNo'])){ /*An order has been selected for sending */
 		$myrow = DB_fetch_array($result);
 		if ($myrow['printedpackingslip']==1){
 			prnMsg(_('Order Number') . ' ' . $_GET['OrderNo'] . ' ' . _('has previously been sent to Radio Beacon') . '. ' . _('It was sent on') . ' ' . ConvertSQLDate($myrow['datepackingslipprinted']) . '<br>' . _('To re-send the order with the balance not previously dispatched and invoiced the order must be modified to allow a reprint (or re-send)') . '.<br>' . _('This check is there to ensure that duplication of dispatches to the customer are avoided'),'warn');
-			echo "<p><a href='$rootpath/SelectOrderItems.php?" . SID . "&ModifyOrderNumber=" . $_GET['OrderNo'] . "'>" . _('Modify the order to allow a re-send or reprint') . ' (' . _('Select Delivery Details') . ')' . '</a>';
-			echo "<p><a href='$rootpath/index.php'>" . _('Back to the menu') . '</a>';
+			echo '<p><a href="'.$rootpath.'/SelectOrderItems.php?ModifyOrderNumber=' . $_GET['OrderNo'] . '">' . _('Modify the order to allow a re-send or reprint') . ' (' . _('Select Delivery Details') . ')' . '</a>';
+			echo '<p><a href="'.$rootpath.'/index.php">' . _('Back to the menu') . '</a>';
 			include('includes/footer.inc');
 			exit;
 		 }
