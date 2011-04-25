@@ -214,6 +214,10 @@
 						$myrow2=DB_fetch_array($PurchDataResult);
 						$myrow2['conversionfactor']=1;
 					}
+					if ($StockID=='') {
+						$myrow2['unitname']='';
+						$myrow2['suppliers_partno']='';
+					}
 
 					$_SESSION['PO'.$identifier]->add_to_order($_SESSION['PO'.$identifier]->LinesOnOrder+1,
 															$StockID,

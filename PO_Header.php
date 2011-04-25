@@ -829,9 +829,9 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 
 	echo '<tr><td>' . _('Status Comment') . ':</td>
 						<td><input type=text name="StatusComments" size=50></td></tr>
-					<tr><td colspan=2><b>' . $_SESSION['PO'.$identifier]->StatComments .'</b></td></tr>';
+					<tr><td colspan=2><b>' . addslashes($_SESSION['PO'.$identifier]->StatComments) .'</b></td></tr>';
 	//need to use single quotes as double quotes inside the string of StatusComments
-	echo '<input type="hidden" name="StatusCommentsComplete" value="' . $_SESSION['PO'.$identifier]->StatComments .'">';
+	echo '<input type="hidden" name="StatusCommentsComplete" value=\'' . addslashes($_SESSION['PO'.$identifier]->StatComments) .'\' />';
 	echo '<tr><td><input type="submit" name="UpdateStatus" value="' . _('Status Update') .'"></td>';
 
 	echo '</tr></table></td>';

@@ -481,10 +481,11 @@ if ($_SESSION['SuppTrans']->GLLink_Creditors ==1){
 
 	echo '<table class=selection><tr><td><font color=red>' . _('Credit Amount in Supplier Currency') . ':</font></td>
 			<td colspan=2 class=number>' . number_format($_SESSION['SuppTrans']->OvAmount,2) . '</td></tr>';
+	echo '<input type=hidden name="OvAmount" VALUE="' . number_format($_SESSION['SuppTrans']->OvAmount,2) . '">';
 } else {
 	echo '<table class=selection><tr><td><font color=red>' . _('Credit Amount in Supplier Currency') .
 		  ':</font></td>
-		  	<td colspan=2 class=number><input type=TEXT size="12" maxlength="10" name="OvAmount" VALUE=' . number_format($_SESSION['SuppTrans']->OvAmount,2) . '></td></tr>';
+		  	<td colspan=2 class=number><input type=TEXT size="12" maxlength="10" name="OvAmount" VALUE="' . number_format($_SESSION['SuppTrans']->OvAmount,2) . '"></td></tr>';
 }
 
 echo '<tr><td colspan=2><input type=Submit name="ToggleTaxMethod" VALUE="' . _('Change Tax Calculation Method') .
@@ -809,7 +810,7 @@ then do the updates and inserts to process the credit note entered */
 
 						$DbgMsg = _('The following SQL to insert the GL transaction was used');
 
-						$Result = DB_query($SQL, $db, $ErrMsg, $Dbg, True);
+						$Result = DB_query($SQL, $db, $ErrMsg, $DbgMsg, True);
 
 					}
 
@@ -967,7 +968,7 @@ then do the updates and inserts to process the credit note entered */
 
 							$GLCode = $EnteredGRN->GLCode; //by default
 
-							if ($EnteredGRN->AssetID!=0) { //then it is an asset
+							if ($EnteredGRN->AssetID>0) { //then it is an asset
 
 								/*Need to get the asset details  for posting */
 								$result = DB_query("SELECT costact
