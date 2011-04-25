@@ -32,7 +32,7 @@ if (!isset($_POST['CurrAbrev'])){
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Search') .
 		'" alt="" />' . '</img>' . $title.'</p>';
 
-echo '<div class="centre"><a href="' . $rootpath . '/SelectProduct.php">' . _('Back to Items') . '</a></div><br>';
+echo '<div class="centre"><a href="' . $rootpath . '/SelectProduct.php">' . _('Back to Items') . '</a></div>';
 
 
 $result = DB_query("SELECT stockmaster.description,
@@ -71,7 +71,7 @@ if (isset($_POST['submit'])) {
 	//first off validate inputs sensible
 	// This gives some date in 1999?? $ZeroDate = Date($_SESSION['DefaultDateFormat'],Mktime(0,0,0,0,0,0));
 
-	if (!is_double((double) trim($_POST['Price'])) OR $_POST['Price']=="") {
+	if (!is_double((double) trim($_POST['Price'])) OR $_POST['Price']=='') {
 		$InputError = 1;
 		prnMsg( _('The price entered must be numeric'),'error');
 	}
@@ -99,6 +99,27 @@ if (isset($_POST['submit'])) {
 	} else {
 		$SQLEndDate = '2030-01-01';
 	}
+
+	$sql = "SELECT COUNT(typeabbrev)
+				FROM prices
+			WHERE prices.stockid='".$Item."'
+			AND startdate='" .FormatDateForSQL($_POST['StartDate']) . "'
+			AND enddate ='" . FormatDateForSQL($_POST['EndDate']) . "'
+			AND prices.typeabbrev='" . $_POST['TypeAbbrev'] . "'
+			AND prices.currabrev='" . $_POST['CurrAbrev'] . "'
+			AND prices.price='" . $_POST['Price'] . "'
+			";
+
+	$result = DB_query($sql, $db);
+	$myrow = DB_fetch_row($result);
+	echo $myrow[0];
+	if ($myrow[0]!=0) {
+		prnMsg( _('This price has already been entered. To change it you should edit it') , 'warn');
+		echo '<br><div class="centre"><a href="' . $rootpath . '/Prices.php?Item='.$Item.'">' . _('Back to Prices') . '</a></div>';
+		include('includes/footer.inc');
+		exit;
+	}
+
 	if (isset($_POST['OldTypeAbbrev']) AND isset($_POST['OldCurrAbrev']) AND strlen($Item)>1 AND $InputError !=1) {
 
 		/* Need to see if there is also a price entered that has an end date after the start date of this price and if so we will need to update it so there is no ambiguity as to which price will be used*/
@@ -141,7 +162,7 @@ if (isset($_POST['submit'])) {
 									startdate,
 									enddate,
 									price)
-							valueS ('$Item',
+							values ('".$Item."',
 								'" . $_POST['TypeAbbrev'] . "',
 								'" . $_POST['CurrAbrev'] . "',
 								'" . $_POST['Units'] . "',
