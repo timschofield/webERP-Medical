@@ -1432,8 +1432,8 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 	echo '<tr>
 		<td>' . _('Date Range') . ':</td>
 		<td><input type="Text" class=date alt="'.$_SESSION['DefaultDateFormat'].'" name="FromDate" size=10 maxlength=10 value="' . $_POST['FromDate'] .
-		'> ' . _('To') . ':&nbsp&nbsp
-		<input type="Text" class=date alt="'.$_SESSION['DefaultDateFormat'].'" name="ToDate" size=10 maxlength=10 value="' . $_POST['ToDate'] . '></td>
+		'"> ' . _('To') . ':&nbsp&nbsp
+		<input type="Text" class=date alt="'.$_SESSION['DefaultDateFormat'].'" name="ToDate" size=10 maxlength=10 value="' . $_POST['ToDate'] . '"></td>
 	</tr>';
 
 	echo '<tr><td>' . _('Part Number') . ':</td>';
@@ -1461,73 +1461,72 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 	}
 
 	echo '<tr><td>' . _('Supplier Name') . ':</td>';
-	echo "<td><select name='SupplierNameOp'>";
-	echo "<option selected value='LIKE'>" . _('Begins With');
-	echo "<option value='Equals'>" . _('Equals');
+	echo '<td><select name="SupplierNameOp">';
+	echo '<option selected value="LIKE">' . _('Begins With');
+	echo '<option value="Equals">' . _('Equals');
 	echo '</select>';
-	echo "&nbsp&nbsp<input type='Text' name='SupplierName' size=30 maxlength=30 value=";
+	echo '&nbsp&nbsp<input type="text" name="SupplierName" size=30 maxlength=30 value=';
 	if (isset($_POST['SupplierName'])) {
-		echo $_POST['SupplierName'] . "></td></tr>";
+		echo $_POST['SupplierName'] . '></td></tr>';
 	} else {
-		echo  "></td></tr>";
+		echo  '></td></tr>';
 	}
 
 	echo '<tr><td>' . _('Order Number') . ':</td>';
 	echo '<td>'._('Equals').':&nbsp&nbsp';
-	echo "<input type='Text' name='OrderNo' size=10 maxlength=10 value=";
+	echo '<input type="text" name="OrderNo" size=10 maxlength=10 value=';
 	if (isset($_POST['OrderNo'])) {
-		echo $_POST['OrderNo'] . "></td></tr>";
+		echo $_POST['OrderNo'] . '></td></tr>';
 	} else {
-		echo  "></td></tr>";
+		echo  '></td></tr>';
 	}
 
 	echo '<tr><td>' . _('Line Item Status') . ':</td>';
-	echo "<td><select name='LineStatus'>";
-	echo "<option selected value='All'>" . _('All');
-	echo "<option value='Completed'>" . _('Completed');
-	echo "<option value='Open'>" . _('Not Completed');
+	echo '<td><select name="LineStatus">';
+	echo '<option selected value="All">' . _('All') . '</option>';
+	echo '<option value="Completed">' . _('Completed') . '</option>';
+	echo '<option value="Open">' . _('Not Completed') . '</option>';
 	echo '</select></td><td>&nbsp</td></tr>';
 
-	echo '<tr><td>' . _('Stock Categories') . ":</td><td><select name='Category'>";
-	$sql="SELECT categoryid, categorydescription FROM stockcategory";
+	echo '<tr><td>' . _('Stock Categories') . ':</td><td> <select name="Category">';
+	$sql='SELECT categoryid, categorydescription FROM stockcategory';
 	$CategoryResult= DB_query($sql,$db);
-	echo '<option selected value="All">' . _('All Categories');
+	echo '<option selected value='All'>' . _('All Categories') . '</option>';
 	While ($myrow = DB_fetch_array($CategoryResult)){
-		echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'];
+		echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	}
 	echo '</select></td></tr>';
 
 	echo '<tr><td>&nbsp</td></tr>';
 	echo '<tr><td>' . _('Sort By') . ':</td>';
-	echo "<td><select name='SortBy'>";
-	echo "<option selected value='purchorderdetails.orderno'>" . _('Order Number');
-	echo "<option value='purchorderdetails.itemcode'>" . _('Part Number');
-	echo "<option value='suppliers.supplierid,purchorderdetails.orderno'>" . _('Supplier Number');
-	echo "<option value='suppliers.suppname,suppliers.supplierid,purchorderdetails.orderno'>" . _('Supplier Name');
+	echo '<td><select name="SortBy">';
+	echo '<option selected value="purchorderdetails.orderno">' . _('Order Number') . '</option>';
+	echo '<option value="purchorderdetails.itemcode">' . _('Part Number') . '</option>';
+	echo '<option value="suppliers.supplierid,purchorderdetails.orderno">' . _('Supplier Number') . '</option>';
+	echo '<option value="suppliers.suppname,suppliers.supplierid,purchorderdetails.orderno">' . _('Supplier Name') . '</option>';
 	echo '</select></td><td>&nbsp</td></tr>';
 
 	echo '<tr><td>&nbsp</td></tr>';
 	echo '<tr><td>' . _('Summary Type') . ':</td>';
-	echo "<td><select name='SummaryType'>";
-	echo "<option selected value='orderno'>" . _('Order Number');
-	echo "<option value='itemcode'>" . _('Part Number');
-	echo "<option value='extprice'>" . _('Extended Price');
-	echo "<option value='supplierno'>" . _('Supplier Number');
-	echo "<option value='suppname'>" . _('Supplier Name');
-	echo "<option value='month'>" . _('Month');
-	echo "<option value='categoryid'>" . _('Stock Category');
+	echo '<td><select name="SummaryType">';
+	echo '<option selected value="orderno">' . _('Order Number') . '</option>';
+	echo '<option value="itemcode">' . _('Part Number') . '</option>';
+	echo '<option value="extprice">' . _('Extended Price') . '</option>';
+	echo '<option value="supplierno">' . _('Supplier Number') . '</option>';
+	echo '<option value="suppname">' . _('Supplier Name') . '</option>';
+	echo '<option value="month">' . _('Month') . '</option>';
+	echo '<option value="categoryid">' . _('Stock Category') . '</option>';
 	echo '</select></td><td>&nbsp</td></tr>';
 
-	echo "
-	<tr><td>&nbsp</td></tr>
+	echo '<tr><td>&nbsp</td></tr>
 	<tr>
-		<td colspan=4><div class=centre><input type='submit' name='submit' value='" . _('Run Inquiry') . "'></div></td>
+		<td colspan=4><div class=centre><input type="submit" name="submit" value="' . _('Run Inquiry') . '"></div></td>
 	</tr>
 	<tr>
-		<td colspan=4><div class=centre><input type='submit' name='submitcsv' value='" . _('Export as csv file') . "'></div></td>
+		<td colspan=4><div class=centre><input type="submit" name="submitcsv" value="' . _('Export as csv file') . '"></div></td>
 	</tr>
 	</table>
-	<br/>";
+	<br/>';
    echo '</form>';
 
 } // End of function display()
