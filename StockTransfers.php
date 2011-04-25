@@ -16,6 +16,12 @@ if (isset($_GET['New'])) {
 	unset($_SESSION['Transfer']);
 }
 
+if (isset($_GET['From'])) {
+	$_POST['StockLocationFrom']=$_GET['From'];
+	$_POST['StockLocationTo']=$_GET['To'];
+	$_POST['Quantity']=$_GET['Quantity'];
+}
+
 if (isset($_POST['CheckCode'])) {
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Dispatch') .
@@ -31,7 +37,9 @@ if (isset($_POST['CheckCode'])) {
 	$result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 	echo '<table class=selection><tr><th>'._('Stock Code').'</th><th>'._('Stock Description').'</th></tr>';
 	while ($myrow = DB_fetch_row($result)) {
-		echo '<tr><td>'.$myrow[0].'</td><td>'.$myrow[1].'</td><td><a href="StockTransfers.php?StockID='.$myrow[0].'&Description='.$myrow[1].'&NewTransfer=Yes">Transfer</a></tr>';
+		echo '<tr><td>'.$myrow[0].'</td><td>'.$myrow[1].'</td><td>
+		<a href="StockTransfers.php?StockID='.$myrow[0].'&Description='.$myrow[1].'&NewTransfer=Yes&Quantity='.$_POST['Quantity'].'&From='.$_POST['StockLocationFrom'].'&To='.$_POST['StockLocationTo'].'">'
+				._('Transfer').'</a></tr>';
 	}
 	echo '</table>';
 	include('includes/footer.inc');
@@ -99,7 +107,7 @@ if ($NewTransfer){
 		if ($myrow[2]=='D' OR $myrow[2]=='A' OR $myrow[2]=='K'){
 			prnMsg(_('The part entered is either or a dummy part or an assembly or a kit-set part') . '. ' . _('These parts are not physical parts and no stock holding is maintained for them') . '. ' . _('Stock Transfers are therefore not possible'),'warn');
 			echo '.<hr>';
-			echo "<a href='" . $rootpath . '/StockTransfers.php?' . SID ."&NewTransfer=Yes'>" . _('Enter another Transfer') . '</a>';
+			echo '<a href="' . $rootpath . '/StockTransfers.php?NewTransfer=Yes">' . _('Enter another Transfer') . '</a>';
 			unset ($_SESSION['Transfer']);
 			include ('includes/footer.inc');
 			exit;
@@ -113,9 +121,9 @@ if (isset($_POST['Quantity']) and isset($_SESSION['Transfer']->TransferItem[0]->
 }
 if ( isset($_POST['StockLocationFrom']) && $_POST['StockLocationFrom']!= $_SESSION['Transfer']->StockLocationFrom ){
 	$_SESSION['Transfer']->StockLocationFrom = $_POST['StockLocationFrom'];
-	$_SESSION['Transfer']->TransferItem[0]->Quantity=0;
+	$_SESSION['Transfer']->StockLocationTo = $_POST['StockLocationTo'];
+	$_SESSION['Transfer']->TransferItem[0]->Quantity=$_POST['Quantity'];
 	$_SESSION['Transfer']->TransferItem[0]->SerialItems=array();
-	prnMsg( _('You have set or changed the From location') . '. ' . _('You must re-enter the quantity and any Controlled Items now') );
 }
 if ( isset($_POST['StockLocationTo']) ){
 	$_SESSION['Transfer']->StockLocationTo = $_POST['StockLocationTo'];
@@ -172,6 +180,12 @@ if ( isset($_POST['EnterTransfer']) ){
 		} else {
 			// There must actually be some error this should never happen
 			$QtyOnHandPrior = 0;
+		}
+
+		if ($_SESSION['ProhibitNegativeStock']==1 and $QtyOnHandPrior<$_SESSION['Transfer']->TransferItem[0]->Quantity) {
+			prnMsg( _('There is insufficient stock to make this transfer and webERP is setup to prevent negative stock'), 'warn');
+			include('includes/footer.inc');
+			exit;
 		}
 
 		// Insert the stock movement for the stock going out of the from location
