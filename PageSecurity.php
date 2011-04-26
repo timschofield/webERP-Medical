@@ -13,7 +13,7 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/s
 if (isset($_POST['Update'])) {
 	foreach ($_POST as $ScriptName => $PageSecurityValue) {
 		if ($ScriptName!='Update' and $ScriptName!='FormID') {
-			//$key=substr($key, 0, strlen($key)-4).'.php';
+			$ScriptName=substr($ScriptName, 0, strlen($ScriptName)-4).'.php';
 			$sql="UPDATE pagesecurity SET security='".$PageSecurityValue."' WHERE script='".$ScriptName."'";
 			$UpdateResult=DB_query($sql, $db,_('Could not update the page security value for the script because'));
 		}
@@ -41,9 +41,9 @@ while ($myrow=DB_fetch_array($result)) {
 	echo '<td><select name="'.$myrow['script'].'">';
 	while ($mytokenrow=DB_fetch_array($TokenResult)) {
 		if ($mytokenrow['tokenid']==$myrow['security']) {
-			echo '<option selected="True" value="'.$mytokenrow['tokenid'].'">'.htmlentities($mytokenrow['tokenname'], ENT_QUOTES,'UTF-8').'</option>';
+			echo '<option selected="True" value="'.$mytokenrow['tokenid'].'">'.$mytokenrow['tokenname'].'</option>';
 		} else {
-			echo '<option value="'.$mytokenrow['tokenid'].'">'.htmlentities($mytokenrow['tokenname'], ENT_QUOTES,'UTF-8').'</option>';
+			echo '<option value="'.$mytokenrow['tokenid'].'">'.$mytokenrow['tokenname'].'</option>';
 		}
 	}
 	echo '</select></td></tr>';
