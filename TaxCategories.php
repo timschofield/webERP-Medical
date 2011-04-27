@@ -228,7 +228,7 @@ if (! isset($_GET['delete'])) {
 	}
 	echo '<tr>
 		<td>' . _('Tax Category Name') . ':' . '</td>
-		<td><input type="Text" name="TaxCategoryName" size=30 maxlength=30 value="' . $_POST['TaxCategoryName'] . '></td>
+		<td><input type="Text" name="TaxCategoryName" size=30 maxlength=30 value="' . $_POST['TaxCategoryName'] . '"></td>
 		</tr>';
 	echo '</table>';
 
