@@ -15,6 +15,13 @@ if (isset($_POST['SelectedExpense'])){
 	$SelectedExpense = strtoupper($_GET['SelectedExpense']);
 }
 
+if (isset($_POST['Cancel'])) {
+	unset($SelectedExpense);
+	unset($_POST['codeexpense']);
+	unset($_POST['description']);
+	unset($_POST['glaccount']);
+}
+
 if (isset($Errors)) {
 	unset($Errors);
 }
@@ -35,36 +42,52 @@ if (isset($_POST['submit'])) {
 	if ($_POST['codeexpense']=='' OR $_POST['codeexpense']==' ' OR $_POST['codeexpense']=='  ') {
 		$InputError = 1;
 		prnMsg(_('The Expense type code cannot be an empty string or spaces'),'error');
+		echo '<br />';
 		$Errors[$i] = 'PcExpenses';
 		$i++;
 	} elseif (strlen($_POST['codeexpense']) >20) {
 		$InputError = 1;
 		prnMsg(_('The Expense code must be twenty characters or less long'),'error');
+		echo '<br />';
 		$Errors[$i] = 'PcExpenses';
 		$i++;
-	}elseif (ContainsIllegalCharacters($_POST['codeexpense'])){
+	} elseif (ContainsIllegalCharacters($_POST['codeexpense'])) {
 		$InputError = 1;
 		prnMsg(_('The Expense code cannot contain any of the following characters " \' - &'),'error');
+		echo '<br />';
 		$Errors[$i] = 'PcExpenses';
 		$i++;
-	} elseif (ContainsIllegalCharacters($_POST['description'])){
+	} elseif (ContainsIllegalCharacters($_POST['description'])) {
 		$InputError = 1;
 		prnMsg(_('The Expense description cannot contain any of the following characters " \' - &'),'error');
+		echo '<br />';
 		$Errors[$i] = 'TypeTabCode';
 		$i++;
-	}elseif (strlen($_POST['description']) >50) {
+	} elseif (strlen($_POST['description']) >50) {
 		$InputError = 1;
 		echo prnMsg(_('The tab code must be Fifty characters or less long'),'error');
+		echo '<br />';
 		$Errors[$i] = 'TypeTabCode';
 		$i++;
+	} elseif (strlen($_POST['description'])==0) {
+		$InputError = 1;
+		echo prnMsg(_('The tab code description must be entered'),'error');
+		echo '<br />';
+		$Errors[$i] = 'TypeTabCode';
+		$i++;
+	} elseif ($_POST['glaccount']=='') {
+		$InputError = 1;
+		echo prnMsg(_('A general ledger code must be selected for this expense'),'error');
+		echo '<br />';
+		$Errors[$i] = 'GLCode';
+		$i++;
 	}
-
 	if (isset($SelectedExpense) AND $InputError !=1) {
 
 		$sql = "UPDATE pcexpenses
 			SET description = '" . $_POST['description'] . "',
 			glaccount = '" . $_POST['glaccount'] . "'
-			WHERE codeexpense = '$SelectedExpense'";
+			WHERE codeexpense = '" . $SelectedExpense . "'";
 
 		$msg = _('The Expenses type') . ' ' . $SelectedExpense . ' ' .  _('has been updated');
 	} elseif ( $InputError !=1 ) {
@@ -72,8 +95,8 @@ if (isset($_POST['submit'])) {
 		// First check the type is not being duplicated
 
 		$checkSql = "SELECT count(*)
-			     FROM pcexpenses
-			     WHERE codeexpense = '" . $_POST['codeexpense'] . "'";
+				 FROM pcexpenses
+				 WHERE codeexpense = '" . $_POST['codeexpense'] . "'";
 
 		$checkresult = DB_query($checkSql,$db);
 		$checkrow = DB_fetch_row($checkresult);
@@ -105,7 +128,7 @@ if (isset($_POST['submit'])) {
 	//run the SQL from either of the above possibilites
 		$result = DB_query($sql,$db);
 		prnMsg($msg,'success');
-
+		echo '<br />';
 		unset($SelectedExpense);
 		unset($_POST['codeexpense']);
 		unset($_POST['description']);
@@ -117,8 +140,8 @@ if (isset($_POST['submit'])) {
 	// PREVENT DELETES IF DEPENDENT RECORDS IN 'PcTabExpenses'
 
 	$sql= "SELECT COUNT(*)
-	       FROM pctabexpenses
-	       WHERE codeexpense='$SelectedExpense'";
+		   FROM pctabexpenses
+		   WHERE codeexpense='$SelectedExpense'";
 
 	$ErrMsg = _('The number of type of tabs using this expense code could not be retrieved');
 	$result = DB_query($sql,$db,$ErrMsg);
@@ -134,6 +157,7 @@ if (isset($_POST['submit'])) {
 			$ErrMsg = _('The expense type record could not be deleted because');
 			$result = DB_query($sql,$db,$ErrMsg);
 			prnMsg(_('Expense type') .  ' ' . $SelectedExpense  . ' ' . _('has been deleted') ,'success');
+			echo '<br />';
 			unset ($SelectedExpense);
 			unset($_GET['delete']);
 
@@ -182,16 +206,16 @@ or deletion of the records*/
 			<td>%s</td>
 			<td class=number>%s</td>
 			<td>%s</td>
-			<td><a href="%sSelectedExpense=%s">' . _('Edit') . '</td>
-			<td><a href="%sSelectedExpense=%s&delete=yes" onclick="return confirm("' . _('Are you sure you wish to delete this expense code and all the details it may have set up?') .
+			<td><a href="%s?SelectedExpense=%s">' . _('Edit') . '</td>
+			<td><a href="%s?SelectedExpense=%s&delete=yes" onclick="return confirm("' . _('Are you sure you wish to delete this expense code and all the details it may have set up?') .
 				'");">' . _('Delete') . '</td>
 			</tr>',
 			$myrow[0],
 			$myrow[1],
 			$myrow[2],
 			$Description[0],
-			$_SERVER['PHP_SELF'] . '?' . SID, $myrow[0],
-		$_SERVER['PHP_SELF'] . '?' . SID, $myrow[0]);
+			$_SERVER['PHP_SELF'], htmlentities($myrow[0]),
+		$_SERVER['PHP_SELF'], $myrow[0]);
 	}
 	//END WHILE LIST LOOP
 	echo '</table>';
@@ -213,10 +237,10 @@ if (! isset($_GET['delete'])) {
 	{
 
 		$sql = "SELECT codeexpense,
-			       description,
+				   description,
 				   glaccount
-		        FROM pcexpenses
-		        WHERE codeexpense='$SelectedExpense'";
+				FROM pcexpenses
+				WHERE codeexpense='" . $SelectedExpense . "'";
 
 		$result = DB_query($sql, $db);
 		$myrow = DB_fetch_array($result);
@@ -236,10 +260,13 @@ if (! isset($_GET['delete'])) {
 	} else 	{
 
 		// This is a new type so the user may volunteer a type code
-
-		echo '<table class=selection><tr><td>' . _('Code Of Expense') . ':</td><td><input type="Text"
+		if (isset($_POST['codeexpense'])) {
+			echo '<table class=selection><tr><td>' . _('Code Of Expense') . ':</td><td><input type="Text" value="'.$_POST['codeexpense'].'"
 				' . (in_array('SalesType',$Errors) ? 'class="inputerror"' : '' ) .' name="codeexpense"></td></tr>';
-
+		} else {
+			echo '<table class=selection><tr><td>' . _('Code Of Expense') . ':</td><td><input type="Text"
+				' . (in_array('SalesType',$Errors) ? 'class="inputerror"' : '' ) .' name="codeexpense"></td></tr>';
+		}
 	}
 
 	if (!isset($_POST['description'])) {
@@ -256,6 +283,7 @@ if (! isset($_GET['delete'])) {
 			ORDER BY accountcode";
 	$result = DB_query($SQL,$db);
 
+	echo '<option value=""></option>';
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['glaccount']) and $myrow['accountcode']==$_POST['glaccount']) {
 			echo '<option selected VALUE="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
