@@ -18,7 +18,7 @@ if (isset($_POST['SelectedType'])){
 	$SelectedType='';
 }
 
-if (ContainsIllegalCharacters($SelectedType) OR strpos($SelectedType,' ')>0){
+if (!isset($_GET['delete']) and (ContainsIllegalCharacters($SelectedType) OR strpos($SelectedType,' ')>0)){
 	$InputError = 1;
 	prnMsg(_('The petty cash tab type contain any of the following characters " \' - & or a space'),'error');
 }
@@ -29,13 +29,38 @@ if (isset($_POST['SelectedTabs'])){
 	$SelectedTabs = strtoupper($_GET['SelectedTabs']);
 }
 
+if (isset($_POST['Cancel'])) {
+	unset($SelectedTabs);
+	unset($SelectedType);
+}
+
 if (isset($Errors)) {
 	unset($Errors);
 }
 
 $Errors = array();
 $InputError=0;
+$i=0;
+if (isset($_POST['process'])) {
+
+	if ($_POST['SelectedTabs']=='') {
+		$InputError=1;
+		echo prnMsg(_('You have not selected a tab to maintain the expenses on'),'error');
+		echo '<br />';
+		$Errors[$i] = 'TabName';
+		$i++;
+		unset($SelectedTabs);
+	}
+}
+
 if (isset($_POST['submit'])) {
+
+	if ($_POST['SelectedExpense']=='') {
+		$InputError=1;
+		echo prnMsg(_('You have not selected an expense to add to this tab'),'error');
+		$Errors[$i] = 'TabName';
+		$i++;
+	}
 
 	if ( $InputError !=1 ) {
 
@@ -108,8 +133,9 @@ or deletion of the records*/
 
 	$result = DB_query($SQL,$db);
 
+	echo '<option value=""></option>';
 	while ($myrow = DB_fetch_array($result)) {
-		if (isset($_POST['SelectedTabs']) and $myrow['typetabcode']==$_POST['SelectedTabs']) {
+		if (isset($SelectedTabs) and $myrow['typetabcode']==$SelectedTabs) {
 			echo '<option selected value="' . $myrow['typetabcode'] . '">' . $myrow['typetabcode'] . ' - ' . $myrow['typetabdescription'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow['typetabcode'] . '">' . $myrow['typetabcode'] . ' - ' . $myrow['typetabdescription'] . '</option>';
@@ -126,12 +152,9 @@ or deletion of the records*/
 
 	echo '</form>';
 
-}
+} else {
 
-//end of ifs and buts!
-if (isset($_POST['process']) or isset($SelectedTabs)) {
-
-	echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '">' . _('Expense Codes for Type of Tab ') . ' ' .$SelectedTabs. '</a></div><p>';
+	echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Select another type of tab') . '</a></div></p>';
 
 	$sql = "SELECT pctabexpenses.codeexpense, pcexpenses.description
 			FROM pctabexpenses,pcexpenses
@@ -141,7 +164,8 @@ if (isset($_POST['process']) or isset($SelectedTabs)) {
 
 	$result = DB_query($sql,$db);
 
-	echo '<table class=selection>';
+	echo '<br /><table class=selection>';
+	echo '<tr><th colspan="3"><font size="2" color="navy">' . _('Expense Codes for Type of Tab ') . ' ' .$SelectedTabs. '</font></th></tr>';
 	echo '<tr>
 		<th>' . _('Expense Code') . '</th>
 		<th>' . _('Description') . '</th>
@@ -191,6 +215,7 @@ if (isset($_POST['process']) or isset($SelectedTabs)) {
 
 		$result = DB_query($SQL,$db);
 
+		echo '<option value=""></option>';
 		while ($myrow = DB_fetch_array($result)) {
 			if (isset($_POST['SelectedExpense']) and $myrow['codeexpense']==$_POST['SelectedExpense']) {
 				echo '<option selected value="' . $myrow['codeexpense'] . '">' . $myrow['codeexpense'] . ' - ' . $myrow['description'] . '</option>';
