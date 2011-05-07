@@ -123,7 +123,7 @@ if (isset($_POST['submit'])) {
 
 // PREVENT DELETES IF DEPENDENT RECORDS IN 'fixedassets'
 
-	$sql= "SELECT COUNT(*) FROM fixedasset WHERE fixedassets.assetcategoryid='" . $SelectedCategory . "'";
+	$sql= "SELECT COUNT(*) FROM fixedassets WHERE fixedassets.assetcategoryid='" . $SelectedCategory . "'";
 	$result = DB_query($sql,$db);
 	$myrow = DB_fetch_row($result);
 	if ($myrow[0]>0) {
