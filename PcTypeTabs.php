@@ -93,7 +93,7 @@ if (isset($_POST['submit'])) {
 	//run the SQL from either of the above possibilites
 		$result = DB_query($sql,$db);
 		prnMsg($msg,'success');
-
+		echo '<br />';
 		unset($SelectedTab);
 		unset($_POST['TypeTabCode']);
 		unset($_POST['TypeTabDescription']);
@@ -210,7 +210,7 @@ if (! isset($_GET['delete'])) {
 
 		echo '<input type=hidden name="SelectedTab" VALUE="' . $SelectedTab . '">';
 		echo '<input type=hidden name="TypeTabCode" VALUE="' . $_POST['TypeTabCode']. '">';
-		echo '<table> <tr><td>' . _('Code Of Type Of Tab') . ':</td><td>';
+		echo '<table class=selection> <tr><td>' . _('Code Of Type Of Tab') . ':</td><td>';
 
 		// We dont allow the user to change an existing type code
 
