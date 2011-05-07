@@ -32,6 +32,32 @@ if (isset($Errors)) {
 
 $Errors = array();
 
+if (isset($_POST['process'])) {
+	//initialise no input errors assumed initially before we test
+	$InputError = 0;
+	$i=1;
+
+	if ($SelectedTabs=='') {
+		$InputError = 1;
+		prnMsg('<br>' . _('You Must First Select a Petty Cash Tab To Authorise'),'error');
+		$Errors[$i] = 'TabSelect';
+		$i++;
+		unset($SelectedTabs);
+	}
+}
+
+if (isset($_POST['Go'])) {
+	$InputError = 0;
+	$i=1;
+	if ($Days<=0) {
+		$InputError = 1;
+		prnMsg('<br>' . _('The number of days must be a positive number'),'error');
+		$Errors[$i] = 'Days';
+		$i++;
+		$Days=30;
+	}
+}
+
 if (isset($SelectedTabs)) {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Petty Cash') .
 		'" alt="" />' . _('Authorization Of Petty Cash Expenses ') . ''.$SelectedTabs.'</p>';
@@ -41,16 +67,17 @@ if (isset($SelectedTabs)) {
 }
 if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) OR isset ($_POST['GO'])) {
 
-	echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . '?' . SID . '>';
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if(!isset ($Days)){
 		$Days=30;
 	}
-	echo "<input type=hidden name='SelectedTabs' VALUE=" . $SelectedTabs . ">";
+	echo '<input type=hidden name="SelectedTabs" VALUE="' . $SelectedTabs . '">';
+	echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Select another tab') . '</a></div></p>';
 	echo '<br><table class=selection>';
-	echo "<tr><th colspan=7>" . _('Detail Of Movement For Last ') .': ';
-	echo "<input type=text class=number name='Days' VALUE=" . $Days . " MAXLENGTH =3 size=4> Days ";
+	echo '<tr><th colspan=7>' . _('Detail Of Movement For Last ') .': ';
+	echo '<input type=text class=number name="Days" VALUE="' . $Days . '" MAXLENGTH=3 size=4> Days ';
 	echo '<input type=submit name="Go" value="' . _('Go') . '"></tr></th>';
 	echo '</form>';
 
@@ -77,18 +104,18 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 
 	$result = DB_query($sql,$db);
 
-	echo "<tr>
-		<th>" . _('Date') . "</th>
-		<th>" . _('Expense Code') . "</th>
-		<th>" . _('Amount') . "</th>
-		<th>" . _('Posted') . "</th>
-		<th>" . _('Notes') . "</th>
-		<th>" . _('Receipt') . "</th>
-		<th>" . _('Authorized') . "</th>
-	</tr>";
+	echo '<tr>
+		<th>' . _('Date') . '</th>
+		<th>' . _('Expense Code') . '</th>
+		<th>' . _('Amount') . '</th>
+		<th>' . _('Posted') . '</th>
+		<th>' . _('Notes') . '</th>
+		<th>' . _('Receipt') . '</th>
+		<th>' . _('Authorized') . '</th>
+	</tr>';
 
 	$k=0; //row colour counter
-	echo'<form action="PcAuthorizeExpenses.php" method="POST" name="'._('update').'">';
+	echo '<form action="PcAuthorizeExpenses.php" method="POST" name="'._('update').'">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	while ($myrow=DB_fetch_array($result))	{
@@ -230,10 +257,16 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 			$k=1;
 		}
 
+		if ($myrow['posted']==0) {
+			$Posted=_('No');
+		} else {
+			$Posted=_('Yes');
+		}
+
 		echo'   <td>'.ConvertSQLDate($myrow['date']).'</td>
 			<td>'.$myrow['codeexpense'].'</td>
 			<td class="number">'.number_format($myrow['amount'],2).'</td>
-			<td>'.$myrow['posted'].'</td>
+			<td>'.$Posted.'</td>
 			<td>'.$myrow['notes'].'</td>
 			<td>'.$myrow['receipt'].'</td>';
 
@@ -248,10 +281,10 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 			}
 		}
 
-		echo "<input type=hidden name='SelectedIndex' VALUE=" . $myrow['counterindex']. ">";
-		echo "<input type=hidden name='SelectedTabs' VALUE=" . $SelectedTabs . ">";
-		echo "<input type=hidden name='Days' VALUE=" .$Days. ">";
-		echo'		</tr> ';
+		echo '<input type=hidden name="SelectedIndex" VALUE="' . $myrow['counterindex']. '">';
+		echo '<input type=hidden name="SelectedTabs" VALUE="' . $SelectedTabs . '">';
+		echo '<input type=hidden name="Days" VALUE="' .$Days. '">';
+		echo '</tr>';
 
 
 	} //end of looping
@@ -267,24 +300,24 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 		$Amount['0']=0;
 	}
 
-	echo "<tr><td colspan=4 style=text-align:right >" . _('Current balance') . ":</td>
-				<td colspan=2>".number_format($Amount['0'],2)."</td></tr>";
+	echo '<tr><td colspan=2 class="number">' . _('Current balance') . ':</td>
+				<td class=number>'.number_format($Amount['0'],2).'</td></tr>';
 
 
-	
+
 	// Do the postings
 	include ('includes/GLPostings.inc');
 
-	echo'<tr><td style="text-align:right" colspan=4><input type=submit name=submit value=' . _("Update") . '></td></tr></form>';
+	echo'</table><br /><div class="centre"><input type=submit name=submit value=' . _('Update') . '></div></form>';
 
 } else { /*The option to submit was not hit so display form */
 
 
-echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . '?' . SID . '>';
-echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<p><table class=selection>'; //Main table
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
+	echo '<p><table class=selection>'; //Main table
 
-echo '<tr><td>' . _('Authorize expenses to Petty Cash Tab') . ":</td><td><select name='SelectedTabs'>";
+	echo '<tr><td>' . _('Authorize expenses to Petty Cash Tab') . ':</td><td><select name="SelectedTabs">';
 
 	DB_free_result($result);
 	$SQL = "SELECT tabcode
@@ -293,14 +326,13 @@ echo '<tr><td>' . _('Authorize expenses to Petty Cash Tab') . ":</td><td><select
 
 	$result = DB_query($SQL,$db);
 
+	echo '<option value=""></option>';
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['SelectTabs']) and $myrow['tabcode']==$_POST['SelectTabs']) {
-			echo "<option selected VALUE='";
+			echo '<option selected value="' . $myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
 		} else {
-			echo "<option VALUE='";
+			echo '<option VALUE="' . $myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
 		}
-		echo $myrow['tabcode'] . "'>" . $myrow['tabcode'];
-
 	} //end while loop get type of tab
 
 	echo '</select></td></tr>';
