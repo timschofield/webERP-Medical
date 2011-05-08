@@ -50,7 +50,7 @@ if ((! isset($_POST['FromDate']) AND ! isset($_POST['ToDate'])) OR isset($_POST[
 	$result = DB_query($SQL,$db);
 
 	while ($myrow = DB_fetch_array($result)) {
-		if (isset($_POST['SelectTabs']) and $myrow['tabcode']==$_POST['SelectTabs']) {
+		if (isset($_POST['SelectedTabs']) and $myrow['tabcode']==$_POST['SelectedTabs']) {
 			echo '<option selected VALUE="' .$myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
 		} else {
 			echo '<option VALUE="' . $myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
@@ -224,28 +224,9 @@ if (DB_error_no($db)!=0){
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+240,$YPos,70,$FontSize,$Tabs['currency']);
 	$pdf->line($Page_Width-$Right_Margin, $YPos+$line_height,$Left_Margin, $YPos+$line_height);
 
-	$pdfcode = $pdf->output();
-	$len = strlen($pdfcode);
+	$pdf->OutputD($_SESSION['DatabaseName'] . '_PcReport_' . date('Y-m-d').'.pdf');//UldisN
+	$pdf->__destruct(); //UldisN
 
-	if ($len<=20){
-		$title = _('Print Report Tab Error');
-		include('includes/header.inc');
-		echo '<p>';
-		prnMsg( _('There were no entries to print out for the selections specified') );
-		echo '<br><a href="'. $rootpath.'/index.php?' . SID . '">'. _('Back to the menu'). '</a>';
-		include('includes/footer.inc');
-		exit;
-	} else {
-		header('Content-type: application/pdf');
-		header('Content-Length: ' . $len);
-		header('Content-Disposition: inline; filename=TabReports.pdf');
-		header('Expires: 0');
-		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-		header('Pragma: public');
-
-		$pdf->Output('PcReportTabs.pdf','I');
-
-	}
 	exit;
 } else {
 
