@@ -85,23 +85,6 @@ if (isset($_GET['Delete'])) {
 	$Result=DB_query($sql,$db,$ErrMsg);
 }
 
-if (isset($_GET['Edit'])) {
-	$sql="SELECT cancreate,
-				offhold,
-				authlevel
-			FROM purchorderauth
-		WHERE userid='".$_GET['UserID']."'
-		AND currabrev='".$_GET['Currency']."'";
-	$ErrMsg = _('The authentication details cannot be retrieved because');
-	$result=DB_query($sql,$db,$ErrMsg);
-	$myrow=DB_fetch_array($result);
-	$UserID=$_GET['UserID'];
-	$Currency=$_GET['Currency'];
-	$CanCreate=$myrow['cancreate'];
-	$OffHold=$myrow['offhold'];
-	$AuthLevel=$myrow['authlevel'];
-}
-
 $sql="SELECT
 	purchorderauth.userid,
 	www_users.realname,
@@ -127,14 +110,14 @@ echo '<th>'._('Authority Level').'</th></tr>';
 
 while ($myrow=DB_fetch_array($Result)) {
 	if ($myrow['cancreate']==0) {
-		$CanCreate=_('Yes');
+		$CanCreate='Yes';
 	} else {
-		$CanCreate=_('No');
+		$CanCreate='No';
 	}
 	if ($myrow['offhold']==0) {
-		$OffHold=_('Yes');
+		$OffHold='Yes';
 	} else {
-		$OffHold=_('No');
+		$OffHold='No';
 	}
 	echo '<tr><td>'.$myrow['userid'].'</td>';
 	echo '<td>'.$myrow['realname'].'</td>';
@@ -148,13 +131,21 @@ while ($myrow=DB_fetch_array($Result)) {
 
 echo '</table><br><br>';
 
+if (!isset($_GET['Edit'])) {
+	$UserID=$_SESSION['UserID'];
+	$Currency=$_SESSION['CompanyRecord']['currencydefault'];
+	$CanCreate='No';
+	$OffHold='No';
+	$AuthLevel=0;
+}
+
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post" name="form1">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo '<table class="selection">';
 
 if (isset($_GET['Edit'])) {
-	echo '<tr><td>'._('User ID').'</td><td>'.$UserID.'</td></tr>';
-	echo '<input type="hidden" name="UserID" value="'.$UserID.'" />';
+	echo '<tr><td>'._('User ID').'</td><td>'.$_GET['UserID'].'</td></tr>';
+	echo '<input type="hidden" name="UserID" value="'.$_GET['UserID'].'" />';
 } else {
 	echo '<tr><td>'._('User ID').'</td><td><select name="UserID">';
 	$usersql="SELECT userid FROM www_users";
@@ -170,6 +161,30 @@ if (isset($_GET['Edit'])) {
 }
 
 if (isset($_GET['Edit'])) {
+	$sql="SELECT cancreate,
+				offhold,
+				authlevel
+			FROM purchorderauth
+		WHERE userid='".$_GET['UserID']."'
+		AND currabrev='".$_GET['Currency']."'";
+	$ErrMsg = _('The authentication details cannot be retrieved because');
+	$result=DB_query($sql,$db,$ErrMsg);
+	$myrow=DB_fetch_array($result);
+	$UserID=$_GET['UserID'];
+	$Currency=$_GET['Currency'];
+	$CanCreate=$myrow['cancreate'];
+	$OffHold=$myrow['offhold'];
+	$AuthLevel=$myrow['authlevel'];
+	if ($myrow['cancreate']==0) {
+		$CanCreate='Yes';
+	} else {
+		$CanCreate='No';
+	}
+	if ($myrow['offhold']==0) {
+		$OffHold='Yes';
+	} else {
+		$OffHold='No';
+	}
 	$currencysql="SELECT currency FROM currencies WHERE currabrev='".$Currency."'";
 	$currencyresult=DB_query($currencysql,$db);
 	$myrow=DB_fetch_array($currencyresult);
@@ -190,17 +205,17 @@ if (isset($_GET['Edit'])) {
 }
 
 echo '<tr><td>'._('User can create orders').'</td>';
-if ($CanCreate==1) {
+if ($CanCreate=='No') {
 	echo '<td><input type="checkbox" name="CanCreate"></td></tr>';
 } else {
-	echo '<td><input type="checkbox" checked name="CanCreate"></td></tr>';
+	echo '<td><input type="checkbox" checked=true name="CanCreate"></td></tr>';
 }
 
 echo '<tr><td>'._('User can release invoices').'</td>';
-if ($OffHold==1) {
+if ($OffHold=='No') {
 	echo '<td><input type="checkbox" name="OffHold"></td></tr>';
 } else {
-	echo '<td><input type="checkbox" checked name="OffHold"></td></tr>';
+	echo '<td><input type="checkbox" checked=true name="OffHold"></td></tr>';
 }
 
 echo '<tr><td>'._('User can authorise orders up to :').'</td>';
