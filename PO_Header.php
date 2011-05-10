@@ -234,7 +234,7 @@ if (isset($_POST['EnterLines'])){
 		$_POST['RePrint'] = 0;
 	}
 
-	echo "<meta http-equiv='Refresh' content='0; url=" . $rootpath . '/PO_Items.php?' . SID . 'identifier='.$identifier. "'>";
+	echo '<meta http-equiv="Refresh" content="0; url=' . $rootpath . '/PO_Items.php?' . SID . 'identifier='.$identifier. '">';
 	echo '<p>';
 	prnMsg(_('You should automatically be forwarded to the entry of the purchase order line items page') . '. ' .
 		_('If this does not happen') . ' (' . _('if the browser does not support META Refresh') . ') ' .
@@ -673,7 +673,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 													$Qty,
 													$Qty*$PurchItemRow['price']);
 
-		echo '<meta http-equiv="Refresh" content=0; url="' . $rootpath . '/PO_Items.php?identifier='.$identifier. '">';
+		echo '<meta http-equiv="Refresh" content="0; url=' . $rootpath . '/PO_Items.php?identifier='.$identifier. '">';
 	}
 
 	/*Set up form for entry of order header stuff */
