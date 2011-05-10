@@ -184,7 +184,8 @@ or deletion of the records*/
 
 	$sql = "SELECT tabcode,
 					usercode,
-					typetabcode,
+					pctabs.typetabcode,
+					pctypetabs.typetabdescription,
 					currency,
 					tablimit,
 					assigner,
@@ -192,6 +193,8 @@ or deletion of the records*/
 					glaccountassignment,
 					glaccountpcash
 				FROM pctabs
+				LEFT JOIN pctypetabs
+				ON pctabs.typetabcode=pctypetabs.typetabcode
 				ORDER BY tabcode";
 	$result = DB_query($sql,$db);
 
@@ -248,7 +251,7 @@ while ($myrow = DB_fetch_array($result)) {
 		</tr>',
 		$myrow['tabcode'],
 		$myrow['usercode'],
-		$myrow['typetabcode'],
+		$myrow['typetabdescription'],
 		$myrow['currency'],
 		number_format($myrow['tablimit'],2),
 		$myrow['authorizer'],
