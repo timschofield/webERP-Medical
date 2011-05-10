@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
 		prnMsg( _('The unit of measure may not be empty'), 'error');
 	}
 
-	if ($_POST['SelectedMeasureID']!='' AND $InputError !=1) {
+	if (isset($_POST['SelectedMeasureID']) and $_POST['SelectedMeasureID']!='' AND $InputError !=1) {
 
 		/*SelectedMeasureID could also exist if submit had not been clicked this code would not run in this case cos submit is false of course  see the delete code below*/
 		// Check the name does not clash
@@ -62,9 +62,6 @@ if (isset($_POST['submit'])) {
 					SET unitname='" . $_POST['MeasureName'] . "'
 					WHERE unitname ".LIKE." '".$OldMeasureName."'";
 				$sql[] = "UPDATE stockmaster
-					SET units='" . $_POST['MeasureName'] . "'
-					WHERE units ".LIKE." '" . $OldMeasureName . "'";
-				$sql[] = "UPDATE contracts
 					SET units='" . $_POST['MeasureName'] . "'
 					WHERE units ".LIKE." '" . $OldMeasureName . "'";
 			} else {
@@ -171,10 +168,10 @@ if (isset($_POST['submit'])) {
 	$ErrMsg = _('Could not get unit of measures because');
 	$result = DB_query($sql,$db,$ErrMsg);
 
-	echo "<table class=selection>
+	echo '<br /><table class=selection>
 		<tr>
-		<th>" . _('Units of Measure') . "</th>
-		</tr>";
+		<th>' . _('Units of Measure') . '</th>
+		</tr>';
 
 	$k=0; //row colour counter
 	while ($myrow = DB_fetch_row($result)) {
@@ -188,8 +185,8 @@ if (isset($_POST['submit'])) {
 		}
 
 		echo '<td>' . $myrow[1] . '</td>';
-		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '&SelectedMeasureID=' . $myrow[0] . '">' . _('Edit') . '</a></td>';
-		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '&SelectedMeasureID=' . $myrow[0] . '&delete=1">' . _('Delete') .'</a></td>';
+		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?SelectedMeasureID=' . $myrow[0] . '">' . _('Edit') . '</a></td>';
+		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?SelectedMeasureID=' . $myrow[0] . '&delete=1">' . _('Delete') .'</a></td>';
 		echo '</tr>';
 
 	} //END WHILE LIST LOOP
@@ -198,7 +195,7 @@ if (isset($_POST['submit'])) {
 
 
 if (isset($SelectedMeasureID)) {
-	echo '<div class="centre"><a href=' . $_SERVER['PHP_SELF'] . '?' . SID .'>' . _('Review Units of Measure') . '</a></div>';
+	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Review Units of Measure') . '</a></div>';
 }
 
 echo '<p>';
@@ -226,21 +223,21 @@ if (! isset($_GET['delete'])) {
 			$_POST['MeasureID'] = $myrow['unitid'];
 			$_POST['MeasureName']  = $myrow['unitname'];
 
-			echo "<input type=hidden name='SelectedMeasureID' VALUE='" . $_POST['MeasureID'] . "'>";
-			echo "<table>";
+			echo '<input type=hidden name="SelectedMeasureID" VALUE="' . $_POST['MeasureID'] . '">';
+			echo '<table class="selection">';
 		}
 
 	}  else {
 		$_POST['MeasureName']='';
-		echo "<table>";
+		echo '<table class="selection">';
 	}
-	echo "<tr>
-		<td>" . _('Unit of Measure') . ':' . "</td>
-		<td><input type='Text' name='MeasureName' size=30 maxlength=30 value='" . $_POST['MeasureName'] . "'></td>
-		</tr>";
+	echo '<tr>
+		<td>' . _('Unit of Measure') . ':' . '</td>
+		<td><input type="Text" name="MeasureName" size="30" maxlength="30" value="' . $_POST['MeasureName'] . '"></td>
+		</tr>';
 	echo '</table>';
 
-	echo '<div class="centre"><input type=Submit name=submit value=' . _('Enter Information') . '></div>';
+	echo '<br /><div class="centre"><input type=Submit name=submit value=' . _('Enter Information') . '></div>';
 
 	echo '</form>';
 
