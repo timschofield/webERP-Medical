@@ -234,7 +234,7 @@ if (isset($SelectedCategory) and !isset($_POST['submit'])) {
 	if (!isset($_POST['CategoryID'])) {
 		$_POST['CategoryID'] = '';
 	}
-	echo '<table class=selection><tr><td>' . _('Category Code') . ':</td>
+	echo '<br /><table class=selection><tr><td>' . _('Category Code') . ':</td>
 				 <td><input type="Text" name="CategoryID" size=7 maxlength=6 value="' . $_POST['CategoryID'] . '"></td></tr>';
 }
 
