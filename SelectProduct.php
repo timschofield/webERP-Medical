@@ -381,7 +381,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 				echo '<td class="select">' . _('No') . '</td>';
 			}
 			echo '<td class="select">';
-			echo '<a href="' . $rootpath . '/PO_Header.php?&amp;NewOrder=Yes' . '&amp;SelectedSupplier=' . $SuppRow['supplierid'] . '&amp;StockID=' . $StockID . '&amp;Quantity='.$SuppRow['minorderqty'].'">' . _('Order') . ' </a></td>';
+			echo '<a href="' . $rootpath . '/PO_Header.php?&amp;NewOrder=Yes' . '&amp;SelectedSupplier=' . $SuppRow['supplierid'] . '&amp;StockID=' . $StockID . '&amp;Quantity='.$SuppRow['minorderqty'].'&amp;LeadTime='.$SuppRow['leadtime'].'">' . _('Order') . ' </a></td>';
 			echo '</tr>';
 		}
 		echo '</table></td>';

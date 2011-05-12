@@ -180,6 +180,9 @@ if (isset($_GET['NewOrder']) and isset($_GET['StockID']) and isset($_GET['Select
 		$_SESSION['PO'.$identifier]->SupplierID = $_GET['SelectedSupplier'];
 		$_SESSION['RequireSupplierSelection'] = 0;
 		$_POST['Select'] = $_GET['SelectedSupplier'];
+		$_SESSION['PO'.$identifier]->DeliveryDate = DateAdd(date($_SESSION['DefaultDateFormat']), 'd', $_GET['LeadTime']);
+		$_SESSION['PO'.$identifier]->Initiator = $_SESSION['UserID'];
+		$_SESSION['PO'.$identifier]->StatusMessage = '';
 
 		/*
 		* the item (its item code) that should be purchased
@@ -374,6 +377,7 @@ if((!isset($_POST['SearchSuppliers']) or $_POST['SearchSuppliers']=='' ) AND
 	$_POST['SuppDelAdd4']=$_SESSION['PO'.$identifier]->SuppDelAdd4;
 	$_POST['SuppDelAdd5']=$_SESSION['PO'.$identifier]->SuppDelAdd5;
 	$_POST['SuppDelAdd6']=$_SESSION['PO'.$identifier]->SuppDelAdd6;
+	$_POST['DeliveryDate']=$_SESSION['PO'.$identifier]->DeliveryDate;
 
 }
 
@@ -441,6 +445,7 @@ if (isset($_POST['Select'])) {
 		$_SESSION['PO'.$identifier]->SuppDelAdd6 = $_POST['SuppDelAdd6'];
 		$_SESSION['PO'.$identifier]->SuppTel = $_POST['SuppTel'];
 		$_SESSION['PO'.$identifier]->Port = $_POST['Port'];
+
 	} else {
 		prnMsg( _('You do not have the authority to raise Purchase Orders for') . ' ' . $myrow['suppname'] .'. ' . _('Please Consult your system administrator for more information.') . '<br />' . _('You can setup authorisations'). ' ' . '<a href="PO_AuthorisationLevels.php">' . _('here') . '</a>', 'warn');
 		include('includes/footer.inc');
@@ -489,7 +494,6 @@ if (isset($_POST['Select'])) {
 		$_POST['SuppDelAdd6'] = $myrow['address6'];
 		$_POST['SuppTel'] = $myrow['telephone'];
 		$_POST['Port'] = $myrow['port'];
-
 
 		$_SESSION['PO'.$identifier]->SupplierID = $_POST['Select'];
 		$_SESSION['RequireSupplierSelection'] = 0;
@@ -652,7 +656,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 													$PurchItemRow['price'],
 													$PurchItemRow['units'],
 													$PurchItemRow['stockact'],
-													date($_SESSION['DefaultDateFormat']),
+													$_SESSION['PO'.$identifier]->DeliveryDate,
 													0,
 													0,
 													'',
