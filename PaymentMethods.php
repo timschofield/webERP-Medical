@@ -109,7 +109,7 @@ if (isset($_POST['submit'])) {
 				VALUES (
 					'" . $_POST['MethodName'] ."',
 					'" . $_POST['ForPayment'] ."',
-					'" . $_POST['ForReceipt'] ."'
+					'" . $_POST['ForReceipt'] ."',
 					'" . $_POST['ForPreprint'] ."'
 					)";
 		}
