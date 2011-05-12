@@ -505,9 +505,9 @@ if (isset($_POST['AllocTrans'])){
 	    		 $Counter . '" VALUE="' . $YetToAlloc . '"></td>';
 
 	    if (ABS($AllocnItem->AllocAmt-$YetToAlloc) < 0.01){
-			echo '<td class=number><input type="checkbox" name="All"' .  $Counter . '" VALUE="' . True . '">';
+			echo '<td class=number><input type="checkbox" name="All' .  $Counter . '" VALUE="' . True . '">';
 	    } else {
-	    	echo '<td class=number><input type="checkbox" name="All"' .  $Counter . '" />';
+	    	echo '<td class=number><input type="checkbox" name="All' .  $Counter . '" />';
 	    }
        echo '<input type=text class="number" name="Amt' . $Counter .'" maxlength=12 size=13 VALUE="' .
        		$AllocnItem->AllocAmt . '"><input type=hidden name="AllocID' . $Counter .
