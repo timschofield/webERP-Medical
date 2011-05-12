@@ -18,7 +18,7 @@ if (isset($_GET['SelectedRole'])){
 	$SelectedRole = $_POST['SelectedRole'];
 }
 
-if (isset($_POST['submit']) || isset($_GET['remove']) || isset($_GET['add']) ) {
+if (isset($_POST['submit']) or isset($_GET['remove']) or isset($_GET['add']) ) {
 
 	//initialise no input errors assumed initially before we test
 	$InputError = 0;
@@ -215,7 +215,7 @@ if (isset($SelectedRole)) {
 				<td><a href="%s?SelectedRole=%s&remove=1&PageToken=%s">' . _('Remove') . '</a></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>',
 				$AvailRow['tokenid'],
 				$AvailRow['tokenname'],
-				$_SERVER['PHP_SELF']  . "?" . SID,
+				$_SERVER['PHP_SELF'] ,
 				$SelectedRole,
 				$AvailRow['tokenid']
 				);
