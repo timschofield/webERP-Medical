@@ -1,10 +1,8 @@
 <?php
-/* $Revision: 1.23 $ */
+
 /* $Id$*/
 
-//$PageSecurity = 7;
-
-include("includes/session.inc");
+include('includes/session.inc');
 $title = _('Bank Account Matching');
 include('includes/header.inc');
 
@@ -29,9 +27,16 @@ if ((isset($_GET['Type']) AND $_GET['Type']=='Receipts') OR
 	exit;
 }
 
+if (isset($_GET['Account'])) {
+	$_POST['BankAccount']=$_GET['Account'];
+	$_POST['ShowTransactions']=true;
+	$_POST['Ostg_or_All']='Ostg';
+	$_POST['First20_or_All']='All';
+}
+
 if (isset($_POST['Update']) AND $_POST['RowCounter']>1){
 	for ($Counter=1;$Counter <= $_POST['RowCounter']; $Counter++){
-		if (isset($_POST["Clear_" . $Counter]) and $_POST["Clear_" . $Counter]==True){
+		if (isset($_POST['Clear_' . $Counter]) and $_POST['Clear_' . $Counter]==True){
 			/*Get amount to be cleared */
 			$sql = "SELECT amount,
 						exrate
@@ -83,9 +88,9 @@ $sql = "SELECT accountcode, bankaccountname FROM bankaccounts";
 $resultBankActs = DB_query($sql,$db);
 while ($myrow=DB_fetch_array($resultBankActs)){
 	if (isset($_POST['BankAccount']) and $myrow['accountcode']==$_POST['BankAccount']){
-		echo "<option selected Value='" . $myrow['accountcode'] . "'>" . $myrow['bankaccountname'];
+		echo '<option selected Value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . '</option>';
 	} else {
-		echo "<option Value='" . $myrow['accountcode'] . "'>" . $myrow['bankaccountname'];
+		echo '<option Value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . '</option>';
 	}
 }
 
@@ -108,29 +113,33 @@ echo '<tr><td colspan=3>' . _('Choose outstanding') . ' ' . $TypeName . ' ' . _(
 	<td><select tabindex="4" name="Ostg_or_All">';
 
 if ($_POST['Ostg_or_All']=='All'){
-	echo '<option selected Value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range');
-	echo '<option Value="Ostdg">' . _('Show unmatched') . ' ' . $TypeName . ' ' . _('only');
+	echo '<option selected Value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range') . '</option>';
+	echo '<option Value="Ostdg">' . _('Show unmatched') . ' ' . $TypeName . ' ' . _('only') . '</option>';
 } else {
 	echo '<option Value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range');
-	echo '<option selected Value="Ostdg">' . _('Show unmatched') . ' ' . $TypeName . ' ' . _('only');
+	echo '<option selected Value="Ostdg">' . _('Show unmatched') . ' ' . $TypeName . ' ' . _('only') . '</option>';
 }
 echo '</select></td></tr>';
 
 echo '<tr><td colspan=3>' . _('Choose to display only the first 20 matching') . ' ' . $TypeName . ' ' .
 	_('or all') . ' ' . $TypeName . ' ' . _('meeting the criteria') . ':</td><td><select tabindex="5" name="First20_or_All">';
 if ($_POST['First20_or_All']=='All'){
-	echo '<option selected Value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range');
-	echo '<option Value="First20">' . _('Show only the first 20') . ' ' . $TypeName;
+	echo '<option selected Value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range') . '</option>';
+	echo '<option Value="First20">' . _('Show only the first 20') . ' ' . $TypeName . '</option>';
 } else {
-	echo '<option Value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range');
-	echo '<option selected Value="First20">' . _('Show only the first 20') . ' ' . $TypeName;
+	echo '<option Value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range') . '</option>';
+	echo '<option selected Value="First20">' . _('Show only the first 20') . ' ' . $TypeName . '</option>';
 }
 echo '</select></td></tr>';
 
 
 echo '</table><br><div class="centre"><input tabindex="6" type=submit name="ShowTransactions" VALUE="' . _('Show selected') . ' ' . $TypeName . '">';
-echo "<p><a href='$rootpath/BankReconciliation.php?" . SID . "'>" . _('Show reconciliation') . '</a></div>';
-echo '<hr>';
+
+if (isset($_POST['BankAccount'])) {
+	echo '<p><a href="'.$rootpath.'/BankReconciliation.php?Account='.$_POST['BankAccount'].'">' . _('Show reconciliation') . '</a></div>';
+} else {
+	echo '<p><a href="'.$rootpath.'/BankReconciliation.php">' . _('Show reconciliation') . '</a></div>';
+}
 
 $InputError=0;
 if (!Is_Date($_POST['BeforeDate'])){
@@ -151,10 +160,11 @@ if ($InputError !=1 AND isset($_POST['BankAccount']) AND $_POST['BankAccount']!=
 	$SQLBeforeDate = FormatDateForSQL($_POST['BeforeDate']);
 	$SQLAfterDate = FormatDateForSQL($_POST['AfterDate']);
 
-	if ($_POST["Ostg_or_All"]=='All'){
+	if ($_POST['Ostg_or_All']=='All'){
 		if ($Type=='Payments'){
 			$sql = "SELECT banktransid,
 							ref,
+							chequeno,
 							amountcleared,
 							transdate,
 							amount/exrate as amt,
@@ -169,6 +179,7 @@ if ($InputError !=1 AND isset($_POST['BankAccount']) AND $_POST['BankAccount']!=
 		} else { /* Type must == Receipts */
 			$sql = "SELECT banktransid,
 							ref,
+							chequeno,
 							amountcleared,
 							transdate,
 							amount/exrate as amt,
@@ -184,6 +195,7 @@ if ($InputError !=1 AND isset($_POST['BankAccount']) AND $_POST['BankAccount']!=
 		if ($Type=='Payments'){
 			$sql = "SELECT banktransid,
 							ref,
+							chequeno,
 							amountcleared,
 							transdate,
 							amount/exrate as amt,
@@ -198,6 +210,7 @@ if ($InputError !=1 AND isset($_POST['BankAccount']) AND $_POST['BankAccount']!=
 		} else { /* Type must == Receipts */
 			$sql = "SELECT banktransid,
 							ref,
+							chequeno,
 							amountcleared,
 							transdate,
 							amount/exrate as amt,
@@ -211,14 +224,15 @@ if ($InputError !=1 AND isset($_POST['BankAccount']) AND $_POST['BankAccount']!=
 						ORDER BY transdate";
 		}
 	}
-	if ($_POST["First20_or_All"]!='All'){
+	if ($_POST['First20_or_All']!='All'){
 		$sql = $sql . " LIMIT 20";
 	}
 
 	$ErrMsg = _('The payments with the selected criteria could not be retrieved because');
 	$PaymentsResult = DB_query($sql, $db, $ErrMsg);
 
-	$TableHeader = '<tr><th>'. _('Ref'). '</th>
+	$TableHeader = '<tr><th>'. _('Cheque No') . '</th>
+			<th>' . _('Ref') . '</th>
 			<th>' . $TypeName . '</th>
 			<th>' . _('Date') . '</th>
 			<th>' . _('Amount') . '</th>
@@ -238,15 +252,17 @@ if ($InputError !=1 AND isset($_POST['BankAccount']) AND $_POST['BankAccount']!=
 		$Outstanding = $myrow['amt']- $myrow['amountcleared'];
 		if (ABS($Outstanding)<0.009){ /*the payment is cleared dont show the check box*/
 
-			printf("<tr bgcolor='#CCCEEE'>
+			printf('<tr bgcolor="#CCCEEE">
+				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
 				<td class=number>%s</td>
 				<td class=number>%s</td>
 				<td colspan=2>%s</td>
-				<td><input type='checkbox' name='Unclear_%s'><input type=hidden name='BankTrans_%s' VALUE=%s></td>
-				</tr>",
+				<td><input type="checkbox" name="Unclear_%s"><input type=hidden name="BankTrans_%s" VALUE=%s></td>
+				</tr>',
+				$myrow['chequeno'],
 				$myrow['ref'],
 				$myrow['banktranstype'],
 				$DisplayTranDate,
@@ -266,14 +282,16 @@ if ($InputError !=1 AND isset($_POST['BankAccount']) AND $_POST['BankAccount']!=
 				$k=1;
 			}
 
-			printf("<td>%s</td>
+			printf('<td>%s</td>
+				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
 				<td class=number>%s</td>
 				<td class=number>%s</td>
-				<td><input type='checkbox' name='Clear_%s'><input type=hidden name='BankTrans_%s' VALUE=%s></td>
-				<td colspan=2><input type='text' maxlength=15 size=15 class=number name='AmtClear_%s'></td>
-				</tr>",
+				<td><input type="checkbox" name="Clear_%s"><input type=hidden name="BankTrans_%s" VALUE=%s></td>
+				<td colspan=2><input type="text" maxlength=15 size=15 class=number name="AmtClear_%s"></td>
+				</tr>',
+				$myrow['chequeno'],
 				$myrow['ref'],
 				$myrow['banktranstype'],
 				$DisplayTranDate,

@@ -1,9 +1,6 @@
 <?php
 
-/* $Revision: 1.15 $ */
 /* $Id$*/
-
-//$PageSecurity = 7;
 
 include ('includes/session.inc');
 
@@ -13,12 +10,18 @@ include('includes/header.inc');
 
 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
+
+if (isset($_GET['Account'])) {
+	$_POST['BankAccount']=$_GET['Account'];
+	$_POST['ShowRec']=true;
+}
 
 if (isset($_POST['PostExchangeDifference']) and is_numeric($_POST['DoExchangeDifference'])){
 
-	if (!is_numeric($_POST['BankStatmentBalance'])){
+	if (!is_numeric($_POST['BankStatementBalance'])){
 		prnMsg(_('The entry in the bank statement balance is not numeric. The balance on the bank statement should be entered. The exchange difference has not been calculated and no general ledger journal has been created'),'warn');
-		echo '<p>' . $_POST['BankStatmentBalance'];
+		echo '<p>' . $_POST['BankStatementBalance'];
 	} else {
 		/* Now need to get the currency of the account and the current table ex rate */
 		$SQL = "SELECT rate, bankaccountname
@@ -33,7 +36,7 @@ if (isset($_POST['PostExchangeDifference']) and is_numeric($_POST['DoExchangeDif
 		$BankAccountName = $CurrencyRow[1];
 		$CalculatedBalance = $_POST['DoExchangeDifference'];
 
-		$ExchangeDifference = ($CalculatedBalance - $_POST['BankStatmentBalance'])/$ExRate;
+		$ExchangeDifference = ($CalculatedBalance - $_POST['BankStatementBalance'])/$ExRate;
 
 		include ('includes/SQL_CommonFunctions.inc');
 		$ExDiffTransNo = GetNextTransNo(36,$db);
@@ -86,7 +89,7 @@ if (isset($_POST['PostExchangeDifference']) and is_numeric($_POST['DoExchangeDif
 
 
 
-echo '<table>';
+echo '<table class="selection">';
 
 $SQL = "SELECT bankaccountname, accountcode FROM bankaccounts";
 
@@ -97,7 +100,8 @@ $AccountsResults = DB_query($SQL,$db,$ErrMsg,$DbgMsg);
 echo '<tr><td>' . _('Bank Account') . ':</td><td><select tabindex="1" name="BankAccount">';
 
 if (DB_num_rows($AccountsResults)==0){
-	echo '</select></td></tr></table><p>' . _('Bank Accounts have not yet been defined') . '. ' . _('You must first') . "<a href='" . $rootpath . "/BankAccounts.php'>" . _('define the bank accounts') . '</a>' . ' ' . _('and general ledger accounts to be affected') . '.';
+	echo '</select></td></tr></table><p>' . _('Bank Accounts have not yet been defined') . '. ' . _('You must first') .
+		'<a href="' . $rootpath . '/BankAccounts.php">' . _('define the bank accounts') . '</a>' . ' ' . _('and general ledger accounts to be affected') . '.';
 	include('includes/footer.inc');
 	exit;
 } else {
@@ -163,6 +167,7 @@ if (isset($_POST['ShowRec']) OR isset($_POST['DoExchangeDifference'])){
 					amountcleared,
 					(amount/exrate)-amountcleared as outstanding,
 					ref,
+					chequeno,
 					transdate,
 					systypes.typename,
 					transno
@@ -185,6 +190,7 @@ if (isset($_POST['ShowRec']) OR isset($_POST['DoExchangeDifference'])){
 			<th>' . _('Type') . '</th>
 			<th>' . _('Number') . '</th>
 			<th>' . _('Reference') . '</th>
+			<th>' . _('Cheque No') . '</th>
 			<th>' . _('Orig Amount') . '</th>
 			<th>' . _('Outstanding') . '</th>
 			</tr>';
@@ -208,6 +214,7 @@ if (isset($_POST['ShowRec']) OR isset($_POST['DoExchangeDifference'])){
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
+				<td>%s</td>
 				<td class=number>%01.2f</td>
 				<td class=number>%01.2f</td>
 				</tr>',
@@ -215,6 +222,7 @@ if (isset($_POST['ShowRec']) OR isset($_POST['DoExchangeDifference'])){
 				$myrow['typename'],
 				$myrow['transno'],
 				$myrow['ref'],
+				$myrow['chequeno'],
 				$myrow['amt'],
 				$myrow['outstanding']);
 
@@ -234,6 +242,7 @@ if (isset($_POST['ShowRec']) OR isset($_POST['DoExchangeDifference'])){
 				amountcleared,
 				(amount/exrate)-amountcleared as outstanding,
 				ref,
+				chequeno,
 				transdate,
 				systypes.typename,
 				transno
@@ -257,6 +266,7 @@ if (isset($_POST['ShowRec']) OR isset($_POST['DoExchangeDifference'])){
 					<th>' . _('Type') . '</th>
 					<th>' . _('Number') . '</th>
 					<th>' . _('Reference') . '</th>
+					<th>' . _('Cheque No') . '</th>
 					<th>' . _('Orig Amount') . '</th>
 					<th>' . _('Outstanding') . '</th>
 					</tr>';
@@ -280,6 +290,7 @@ if (isset($_POST['ShowRec']) OR isset($_POST['DoExchangeDifference'])){
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
+				<td>%s</td>
 				<td class=number>%01.2f</td>
 				<td class=number>%01.2f</td>
 				</tr>',
@@ -287,6 +298,7 @@ if (isset($_POST['ShowRec']) OR isset($_POST['DoExchangeDifference'])){
 				$myrow['typename'],
 				$myrow['transno'],
 				$myrow['ref'],
+				$myrow['chequeno'],
 				$myrow['amt'],
 				$myrow['outstanding']
 			);
@@ -307,7 +319,7 @@ if (isset($_POST['ShowRec']) OR isset($_POST['DoExchangeDifference'])){
 	if (isset($_POST['DoExchangeDifference'])){
 		echo '<input type="hidden" name="DoExchangeDifference" value=' . $FXStatementBalance . '>';
 		echo '<tr><td colspan=6>' . _('Enter the actual bank statement balance') . ' (' . $BankCurrCode . ')</b></td>
-				<td class=number><input type="text" name="BankStatmentBalance" maxlength=15 size=15 value=' . $_POST['BankStatmentBalance'] . '><td></tr>';
+				<td class=number><input type="text" name="BankStatementBalance" maxlength=15 size=15 value=' . $_POST['BankStatementBalance'] . '><td></tr>';
 		echo '<tr><td colspan=7 align="center"><input type="submit" name="PostExchangeDifference" value="' . _('Calculate and Post Exchange Difference') . '" onclick="return confirm(\'' . _('This will create a general ledger journal to write off the exchange difference in the current balance of the account. It is important that the exchange rate above reflects the current value of the bank account currency') . ' - ' . _('Are You Sure?') . '\');"></td></tr>';
 
 	}
@@ -323,8 +335,13 @@ if (isset($_POST['ShowRec']) OR isset($_POST['DoExchangeDifference'])){
 	echo '</table>';
 }
 
-echo '<p><div class="centre"><a tabindex="4" href="' . $rootpath . '/BankMatching.php?' . SID . '&Type=Payments">' . _('Match off cleared payments') . '</a>';
-echo '<br><a tabindex="5" href="' . $rootpath . '/BankMatching.php?' . SID . '&Type=Receipts">' . _('Match off cleared deposits') . '</a></div>';
+if (isset($_POST['BankAccount'])) {
+	echo '<p><div class="centre"><a tabindex="4" href="' . $rootpath . '/BankMatching.php?Type=Payments&Account='.$_POST['BankAccount'].'">' . _('Match off cleared payments') . '</a>';
+	echo '<br><a tabindex="5" href="' . $rootpath . '/BankMatching.php?Type=Receipts&Account='.$_POST['BankAccount'].'">' . _('Match off cleared deposits') . '</a></div>';
+} else {
+	echo '<p><div class="centre"><a tabindex="4" href="' . $rootpath . '/BankMatching.php?Type=Payments">' . _('Match off cleared payments') . '</a>';
+	echo '<br><a tabindex="5" href="' . $rootpath . '/BankMatching.php?Type=Receipts">' . _('Match off cleared deposits') . '</a></div>';
+}
 echo '</form>';
 include('includes/footer.inc');
 ?>
