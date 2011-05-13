@@ -2,8 +2,6 @@
 
 /* $Id$ */
 
-//$PageSecurity=15;
-
 include('includes/session.inc');
 
 $title = _('Audit Trail');
@@ -25,12 +23,12 @@ if ((!(Is_Date($_POST['FromDate'])) OR (!Is_Date($_POST['ToDate']))) AND (isset(
 }
 
 // Get list of tables
-$tableresult = DB_show_tables($db);
+$TableResult = DB_show_tables($db);
 
 // Get list of users
-$userresult = DB_query("SELECT userid FROM www_users",$db);
+$UserResult = DB_query("SELECT userid FROM www_users",$db);
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo '<table class=selection>';
 
@@ -42,8 +40,8 @@ echo '<tr><td>'. _('To Date') . ' ' . $_SESSION['DefaultDateFormat'] .'</td>
 // Show user selections
 echo '<tr><td>'. _('User ID'). '</td>
 		<td><select tabindex="3" name="SelectedUser">';
-echo '<option value=ALL>ALL</option>';
-while ($users = DB_fetch_row($userresult)) {
+echo '<option value="ALL">' . _('ALL') . '</option>';
+while ($users = DB_fetch_row($UserResult)) {
 	if (isset($_POST['SelectedUser']) and $users[0]==$_POST['SelectedUser']) {
 		echo '<option selected value=' . $users[0] . '>' . $users[0] . '</option>';
 	} else {
@@ -54,8 +52,8 @@ echo '</select></td></tr>';
 
 // Show table selections
 echo '<tr><td>'. _('Table '). '</td><td><select tabindex="4" name="SelectedTable">';
-echo '<option value=ALL>ALL</option>';
-while ($tables = DB_fetch_row($tableresult)) {
+echo '<option value="ALL">' . _('ALL') . '</option>';
+while ($tables = DB_fetch_row($TableResult)) {
 	if (isset($_POST['SelectedTable']) and $tables[0]==$_POST['SelectedTable']) {
 		echo '<option selected value=' . $tables[0] . '>' . $tables[0] . '</option>';
 	} else {
@@ -178,7 +176,7 @@ if (isset($_POST['View'])) {
 				if (isset($_SESSION['SQLString']['values'][$i]) and (trim(str_replace("'","",$_SESSION['SQLString']['values'][$i])) != "") &
 				(trim($_SESSION['SQLString']['fields'][$i]) != 'password') &
 				(trim($_SESSION['SQLString']['fields'][$i]) != 'www_users.password')) {
-					echo '<tr bgcolor="'.$RowColour.'">';
+					echo '<tr bgcolor="' . $RowColour . '">';
 					echo '<td></td>
 						<td></td>
 						<td></td>
