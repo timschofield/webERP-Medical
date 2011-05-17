@@ -4,7 +4,8 @@ function GetPrice ($StockID, $DebtorNo, $BranchCode, $db){
 
 	$Price = 0;
 	/*Search by branch and customer for a date specified price */
-	$sql="SELECT prices.price
+	$sql="SELECT prices.price,
+				prices.conversionfactor
 			FROM prices,
 				debtorsmaster
 			WHERE debtorsmaster.salestype=prices.typeabbrev
@@ -21,7 +22,8 @@ function GetPrice ($StockID, $DebtorNo, $BranchCode, $db){
 	if (DB_num_rows($result)==0){
 		/*Need to try same specific search but for a default price with a zero end date */
 		$sql="SELECT prices.price,
-					prices.startdate
+					prices.startdate,
+					prices.conversionfactor
 				FROM prices,
 					debtorsmaster
 				WHERE debtorsmaster.salestype=prices.typeabbrev
@@ -39,7 +41,8 @@ function GetPrice ($StockID, $DebtorNo, $BranchCode, $db){
 		if (DB_num_rows($result)==0){
 	
 			/* No result returned for customer and branch search try for just a customer match */
-			$sql = "SELECT prices.price
+			$sql = "SELECT prices.price,
+							prices.conversionfactor
 					FROM prices,
 					debtorsmaster
 					WHERE debtorsmaster.salestype=prices.typeabbrev
@@ -56,7 +59,8 @@ function GetPrice ($StockID, $DebtorNo, $BranchCode, $db){
 			if (DB_num_rows($result)==0){
 				//if no specific price between the dates maybe there is a default price with no end date specified
 				$sql = "SELECT prices.price,
-							   prices.startdate
+							   prices.startdate,
+								prices.conversionfactor
 						FROM prices,
 							debtorsmaster
 						WHERE debtorsmaster.salestype=prices.typeabbrev
@@ -74,7 +78,8 @@ function GetPrice ($StockID, $DebtorNo, $BranchCode, $db){
 				if (DB_num_rows($result)==0){
 		
 					/*No special customer specific pricing use the customers normal price list but look for special limited time prices with specific end date*/
-					$sql = "SELECT prices.price
+					$sql = "SELECT prices.price,
+									prices.conversionfactor
 							FROM prices,
 							debtorsmaster
 							WHERE debtorsmaster.salestype=prices.typeabbrev
@@ -90,7 +95,8 @@ function GetPrice ($StockID, $DebtorNo, $BranchCode, $db){
 					if (DB_num_rows($result)==0){
 						/*No special customer specific pricing use the customers normal price list but look for default price with 0000-00-00 end date*/
 						$sql = "SELECT prices.price,
-									   prices.startdate
+									   prices.startdate,
+										prices.conversionfactor
 								FROM prices,
 									debtorsmaster
 								WHERE debtorsmaster.salestype=prices.typeabbrev
@@ -107,7 +113,8 @@ function GetPrice ($StockID, $DebtorNo, $BranchCode, $db){
 						if (DB_num_rows($result)==0){	
 								
 							/* Now use the default salestype/price list cos all else has failed */
-							$sql="SELECT prices.price
+							$sql="SELECT prices.price,
+										prices.conversionfactor
 									FROM prices,	
 										debtorsmaster
 									WHERE prices.stockid = '" . $StockID . "'
@@ -124,7 +131,8 @@ function GetPrice ($StockID, $DebtorNo, $BranchCode, $db){
 								
 								/* Now use the default salestype/price list cos all else has failed */
 								$sql="SELECT prices.price,
-											 prices.startdate
+											 prices.startdate,
+											prices.conversionfactor
 										FROM prices,
 											debtorsmaster
 										WHERE prices.stockid = '" . $StockID . "'
@@ -141,7 +149,9 @@ function GetPrice ($StockID, $DebtorNo, $BranchCode, $db){
 								if (DB_num_rows($result)==0){
 									/*Not even a price set up in the default price list so return 0 */
 									prnMsg(_('There are no prices set up for') . ' ' . $StockID,'warn');
-									Return 0;
+									$Prices[0]=0;
+									$Prices[1]=1;
+									return $Prices;
 								}
 							}
 						}
@@ -155,9 +165,11 @@ function GetPrice ($StockID, $DebtorNo, $BranchCode, $db){
 		/*There is a price from one of the above so return that */
 
 		$myrow=DB_fetch_row($result);
-		Return $myrow[0];
+		return $myrow;
 	} else {
-		Return 0;
+		$Prices[0]=0;
+		$Prices[1]=1;
+		return $Prices;
 	}
 
 }

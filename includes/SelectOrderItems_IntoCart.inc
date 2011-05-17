@@ -108,8 +108,9 @@ if ($AlreadyOnThisOrder!=1){
 				$Discount = 0;
 			}
 
-			$Price = GetPrice($NewItem, $_SESSION['Items'.$identifier]->DebtorNo,$_SESSION['Items'.$identifier]->Branch, $db);
-
+			$PriceArray = GetPrice($NewItem, $_SESSION['Items'.$identifier]->DebtorNo,$_SESSION['Items'.$identifier]->Branch, $db);
+			$Price=$PriceArray[0];
+			$ConversionFactor=$PriceArray[1];
 			$WithinCreditLimit = true;
 
 			if (!isset($_SESSION['WarnOnce']) and $_SESSION['Items'.$identifier]->SpecialInstructions) {
@@ -157,7 +158,7 @@ if ($AlreadyOnThisOrder!=1){
 															$myItemRow['eoq'],
 															$myItemRow['nextserialno'],
 															$ExRate,
-															$_POST['ConversionFactor'.$NewItem]);
+															$ConversionFactor);
 
 			}
 		 } else {

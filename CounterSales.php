@@ -22,11 +22,8 @@ if (empty($_GET['identifier'])) {
 }
 if (isset($_SESSION['Items'.$identifier])){
 	//update the Items object variable with the data posted from the form
-	$_SESSION['Items'.$identifier]->CustRef = $_POST['CustRef'];
-	$_SESSION['Items'.$identifier]->Comments = $_POST['Comments'];
-	$_SESSION['Items'.$identifier]->DeliverTo = $_POST['DeliverTo'];
-	$_SESSION['Items'.$identifier]->PhoneNo = $_POST['PhoneNo'];
-	$_SESSION['Items'.$identifier]->Email = $_POST['Email'];
+	$_SESSION['Items'.$identifier]->CustRef = _('Cash Sale');
+	$_SESSION['Items'.$identifier]->Comments = _('Cash Sale') . ' ' . DATE($_SESSION['DefaultDateFormat']);
 }
 
 if (isset($_POST['QuickEntry'])){
@@ -504,6 +501,8 @@ if ((isset($_SESSION['Items'.$identifier])) OR isset($NewItem)) {
 				$_SESSION['Items'.$identifier]->update_cart_item($OrderLine->LineNumber,
 									$Quantity,
 									$Price,
+									$OrderLine->Units,
+									$OrderLine->ConversionFactor,
 									($DiscountPercentage/100),
 									$Narrative,
 									'Yes', /*Update DB */
@@ -697,7 +696,7 @@ if (count($_SESSION['Items'.$identifier]->LineItems)>0 and !isset($_POST['Proces
 */
 
 	echo '<br />
-		<table width="90%" cellpadding="2" colspan="7">
+		<table width="90%" cellpadding="2" colspan="7" class="selection">
 		<tr bgcolor="#800000">';
 	echo '<th>' . _('Item Code') . '</th>
 			<th>' . _('Item Description') . '</th>
@@ -803,9 +802,9 @@ if (count($_SESSION['Items'.$identifier]->LineItems)>0 and !isset($_POST['Proces
 						</tr>
 		</table>';
 	echo '<input type="hidden" name="TaxTotal" value="'.$TaxTotal.'" />';
-	echo '<table><tr><td>';
+	echo '<br /><table><tr><td>';
 	//nested table
-	echo '<table><tr>
+	echo '<table class="selection"><tr>
 		<td>'. _('Picked Up By') .':</td>
 		<td><input type="text" size="25" maxlength="25" name="DeliverTo" value="' . stripslashes($_SESSION['Items'.$identifier]->DeliverTo) . '" /></td>
 	</tr>';
@@ -855,12 +854,12 @@ if (count($_SESSION['Items'.$identifier]->LineItems)>0 and !isset($_POST['Proces
 	if (!isset($_POST['AmountPaid'])){
 		$_POST['AmountPaid'] =0;
 	}
-	echo '<tr><td>' . _('Amount Paid') . ':</td><td><input type="text" class="number" name="AmountPaid" maxlength="12" size="12" value="' . $_POST['AmountPaid'] . '" /></td></tr>';
+	echo '<tr><td>' . _('Amount Paid') . ':</td><td><input type="text" class="number" name="AmountPaid" maxlength="12" size="12" value="' . ($_SESSION['Items'.$identifier]->total+$TaxTotal) . '" /></td></tr>';
 
 	echo '</table>'; //end the sub table in the second column of master table
 	echo '</th></tr></table>';	//end of column/row/master table
 	echo '<br /><div class="centre"><input type="submit" name="Recalculate" value="' . _('Re-Calculate') . '" />
-				<input type="submit" name="ProcessSale" value="' . _('Process The Sale') . '" /></div><hr />';
+				<input type="submit" name="ProcessSale" value="' . _('Process The Sale') . '" /></div><br />';
 
 } # end of if lines
 
@@ -1957,7 +1956,8 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
  * end of Invoice Processing
  * *****************************
 */
-
+// This code needs sorting out, but until then :
+$ImageSource = _('No Image');
 
 /* Now show the stock item selection search stuff below */
 if (!isset($_POST['ProcessSale'])){
@@ -2000,8 +2000,6 @@ if (!isset($_POST['ProcessSale'])){
 			$k=0; //row colour counter
 
 			while ($myrow=DB_fetch_array($result2)) {
-	// This code needs sorting out, but until then :
-				$ImageSource = _('No Image');
 	// Find the quantity in stock at location
 				$QohSql = "SELECT sum(quantity)
 									   FROM locstock
@@ -2094,6 +2092,9 @@ if (!isset($_POST['ProcessSale'])){
 						$rootpath,
 						SID,
 						$myrow['stockid']);
+						
+				echo '<input type="hidden" name="Units' . $myrow['stockid'] . '" value="' . $myrow['units'] . '" />';
+
 				if ($j==1) {
 					$jsCall = '<script  type="text/javascript">if (document.SelectParts) {defaultControl(document.SelectParts.itm'.$myrow['stockid'].');}</script>';
 				}
@@ -2251,7 +2252,7 @@ if (!isset($_POST['ProcessSale'])){
 				}
 				$OnOrder = $PurchQty + $WoQty;
 
-				$Available = $qoh - $DemandQty + $OnOrder;
+				$Available = $QOH - $DemandQty + $OnOrder;
 
 				printf('<td>%s</td>
 							<td>%s</td>
@@ -2274,6 +2275,9 @@ if (!isset($_POST['ProcessSale'])){
 							$rootpath,
 							SID,
 							$myrow['stockid']);
+						
+				echo '<input type="hidden" name="Units' . $myrow['stockid'] . '" value="' . $myrow['units'] . '" />';
+
 				if ($j==1) {
 					$jsCall = '<script  type="text/javascript">if (document.SelectParts) {defaultControl(document.SelectParts.itm'.$myrow['stockid'].');}</script>';
 				}
@@ -2298,7 +2302,7 @@ if (!isset($_POST['ProcessSale'])){
 		else { /* show the quick entry form variable */
 
 		echo '<div class="page_help_text"><b>' . _('Use this form to add items quickly if the item codes are already known') . '</b></div><br />
-		 			<table border="1">
+		 			<table class="selection">
 					<tr>';
 			/*do not display colum unless customer requires po line number by sales order line*/
 		echo '<th>' . _('Item Code') . '</th>
