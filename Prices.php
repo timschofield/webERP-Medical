@@ -112,8 +112,8 @@ if (isset($_POST['submit'])) {
 
 	$result = DB_query($sql, $db);
 	$myrow = DB_fetch_row($result);
-	echo $myrow[0];
-	if ($myrow[0]!=0) {
+
+	if ($myrow[0]!=0 and !isset($_POST['OldTypeAbbrev'])) {
 		prnMsg( _('This price has already been entered. To change it you should edit it') , 'warn');
 		echo '<br><div class="centre"><a href="' . $rootpath . '/Prices.php?Item='.$Item.'">' . _('Back to Prices') . '</a></div>';
 		include('includes/footer.inc');
@@ -148,6 +148,7 @@ if (isset($_POST['submit'])) {
 		ReSequenceEffectiveDates ($Item, $_POST['TypeAbbrev'], $_POST['CurrAbrev'], $db) ;
 
 		prnMsg(_('The price has been updated'),'success');
+		echo '<br />';
 
 	} elseif ($InputError !=1) {
 
@@ -176,6 +177,7 @@ if (isset($_POST['submit'])) {
 
 		ReSequenceEffectiveDates ($Item, $_POST['TypeAbbrev'], $_POST['CurrAbrev'], $db) ;
 		prnMsg(_('The new price has been inserted'),'success');
+		echo '<br />';
 	}
 	unset($_POST['Price']);
 	unset($_POST['StartDate']);
@@ -197,7 +199,7 @@ if (isset($_POST['submit'])) {
 	$ErrMsg = _('Could not delete this price');
 	$result = DB_query($sql,$db,$ErrMsg);
 	prnMsg( _('The selected price has been deleted'),'success');
-
+	echo '<br />';
 }
 
 //Always do this stuff
@@ -384,12 +386,10 @@ if ($InputError ==0){
 				<td><input type="Text" class=date alt="'.$_SESSION['DefaultDateFormat'].'" name="EndDate" size=10 maxlength=10 value="' . $_POST['EndDate'] . '"></td></tr>';
 		echo '<tr><td>' . _('Unit of Measure') . ':</td>';
 		echo '<td><select name="Units">';
-		$sql = "SELECT unitname FROM unitsofmeasure";
+		$sql = "SELECT unitname FROM unitsofmeasure order by unitname asc";
 		$result = DB_query($sql, $db);
 		while ($myrow = DB_fetch_array($result)) {
 			if ($_POST['Units'] == $myrow['unitname']) {
-				echo '<option selected value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
-			} else if ($DefaultUOM == $myrow['unitname'] and ($_POST['Units'] != $myrow['unitname'])) {
 				echo '<option selected value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
 			} else {
 				echo '<option value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
