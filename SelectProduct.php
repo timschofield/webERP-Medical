@@ -111,10 +111,12 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 			<th class="number">' . _('Weight') . ':</th><td class="select">' . number_format($myrow['kgs'], 3) . '</td>
 			<th class="number">' . _('EOQ') . ':</th><td class="select">' . number_format($myrow['eoq'], $myrow['decimalplaces']) . '</td></tr>';
 	if (in_array($PricesSecurity, $_SESSION['AllowedPageSecurityTokens']) OR !isset($PricesSecurity)) {
-		echo '<tr><th colspan="2">' . _('Sell Price') . ':</th><td class="select">';
-		$PriceResult = DB_query("SELECT typeabbrev, price FROM prices
+		echo '<tr><th>' . _('Sell Price') . ':</th><td class="select">';
+		$PriceResult = DB_query("SELECT sales_type as typeabbrev, price 
+													FROM prices
+													LEFT JOIN salestypes
+													ON prices.typeabbrev=salestypes.typeabbrev
 														WHERE currabrev ='" . $_SESSION['CompanyRecord']['currencydefault'] . "'
-														AND typeabbrev = '" . $_SESSION['DefaultPriceList'] . "'
 														AND debtorno=''
 														AND branchcode=''
 														AND stockid='" . $StockID . "'", $db);
@@ -147,7 +149,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 			echo $GP . '%' . '</td></tr>';
 			while ($PriceRow = DB_fetch_row($PriceResult)) {
 				$Price = $PriceRow[1];
-				echo '<tr><td></td><th>' . $PriceRow[0] . '</th><td class="select">' . number_format($Price, 2) . '</td>
+				echo '<tr><th></th><td class="select">' . $PriceRow[0] . '</td><td class="select">' . number_format($Price, 2) . '</td>
 				<th class="number">' . _('Gross Profit') . '</th><td class="select">';
 				if ($Price > 0) {
 					$GP = number_format(($Price - $Cost) * 100 / $Price, 2);
