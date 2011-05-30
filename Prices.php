@@ -105,6 +105,7 @@ if (isset($_POST['submit'])) {
 			WHERE prices.stockid='".$Item."'
 			AND startdate='" .FormatDateForSQL($_POST['StartDate']) . "'
 			AND enddate ='" . FormatDateForSQL($_POST['EndDate']) . "'
+			AND prices.units='" . $_POST['Units'] . "'
 			AND prices.typeabbrev='" . $_POST['TypeAbbrev'] . "'
 			AND prices.currabrev='" . $_POST['CurrAbrev'] . "'
 			AND prices.price='" . $_POST['Price'] . "'
@@ -122,7 +123,8 @@ if (isset($_POST['submit'])) {
 
 	if (isset($_POST['OldTypeAbbrev']) AND isset($_POST['OldCurrAbrev']) AND strlen($Item)>1 AND $InputError !=1) {
 
-		/* Need to see if there is also a price entered that has an end date after the start date of this price and if so we will need to update it so there is no ambiguity as to which price will be used*/
+		/* Need to see if there is also a price entered that has an end date after the start date of this price and if 
+		so we will need to update it so there is no ambiguity as to which price will be used*/
 
 
 		//editing an existing price
@@ -222,8 +224,8 @@ if ($InputError ==0){
 		AND prices.typeabbrev = salestypes.typeabbrev
 		AND prices.stockid='".$Item."'
 		AND prices.debtorno=''
-		ORDER BY prices.currabrev,
-			prices.typeabbrev,
+		ORDER BY prices.typeabbrev ASC,
+			prices.currabrev,
 			prices.startdate";
 
 	$result = DB_query($sql,$db);
@@ -235,14 +237,15 @@ if ($InputError ==0){
 		echo _('Pricing for part') . ':<input type=text name="Item" MAXSIZEe=22 value="' . $Item . '" maxlength=20><input type=submit name=NewPart Value="' . _('Review Prices') . '">';
 		echo '</th></tr></form>';
 
-		echo '<tr><th>' . _('Currency') .
-			'</th><th>' . _('Sales Type') .
-			 '</th><th>' . _('UOM') .
-			 '</th><th>' . _('Conversion') . '<br />' . _('Factor') .
-			 '</th><th>' . _('Decimal') . '<br />' . _('Places') .
-			 '</th><th>' . _('Price') .
-			 '</th><th>' . _('Start Date') . ' </th>
-			 <th>' . _('End Date') . '</th></tr>';
+		echo '<tr>
+				<th>' . _('Sales Type') . '</th>
+				<th>' . _('Currency') . '</th>
+				<th>' . _('UOM') . '</th>
+				<th>' . _('Conversion') . '<br />' . _('Factor') . '</th>
+				<th>' . _('Decimal') . '<br />' . _('Places') . '</th>
+				<th>' . _('Price') . '</th>
+				<th>' . _('Start Date') . ' </th>
+				<th>' . _('End Date') . '</th></tr>';
 
 		$k=0; //row colour counter
 
@@ -263,19 +266,18 @@ if ($InputError ==0){
 			if (in_array(12,$_SESSION['AllowedPageSecurityTokens'])) {
 
 				echo '<input type=hidden name="Units" value="' . $myrow['units'] . '">';
-				echo '<td>'.$myrow['currency'].'</td>
-						<td>'.$myrow['sales_type'].'</td>
+				echo '<td>'.$myrow['sales_type'].'</td>
+						<td>'.$myrow['currency'].'</td>				
 						<td>'.$myrow['units'].'</td>
 						<td class=number>'.$myrow['conversionfactor'].'</td>
 						<td class=number>'.$myrow['decimalplaces'].'</td>
 						<td class=number>'.number_format($myrow['price'],2).'</td>
 						<td>'.ConvertSQLDate($myrow['startdate']).'</td>
 						<td>'.$EndDateDisplay.'</td>
-						<td><a href="'.$_SERVER['PHP_SELF'].'?'.SID.'&Item='.$myrow['stockid'].'&TypeAbbrev='.$myrow['typeabbrev'].'&CurrAbrev='.$myrow['currabrev'].'&StartDate='.$myrow['startdate'].'&EndDate='.$myrow['enddate'].'&Edit=1">' . _('Edit') . '</td>
-						<td><a href="'.$_SERVER['PHP_SELF'].'?'.SID.'&Item='.$myrow['stockid'].'&TypeAbbrev='.$myrow['typeabbrev'].'&CurrAbrev='.$myrow['currabrev'].'&StartDate='.$myrow['startdate'].'&EndDate='.$myrow['enddate'].'&delete=yes" onclick=\'return confirm("' . _('Are you sure you wish to delete this price?') . '");\'>' . _('Delete') . '</td></tr>';
+						</tr>';
 			} else {
-				echo '<td>'.$myrow['currency'].'</td>
-						<td>'.$myrow['sales_type'].'</td>
+				echo '<td>'.$myrow['sales_type'].'</td>
+						<td>'.$myrow['currency'].'</td>
 						<td>'.$myrow['units'].'</td>
 						<td class=number>'.$myrow['conversionfactor'].'</td>
 						<td class=number>'.$myrow['decimalplaces'].'</td>
@@ -342,23 +344,10 @@ if ($InputError ==0){
 			}
 		}
 
-		$SQL = "SELECT currabrev, currency FROM currencies";
-		$result = DB_query($SQL,$db);
-
 		echo '<br><table class=selection>';
 		echo '<tr><th colspan=5><font color="blue" size=3><b>' . $Item . ' - ' . $PartDescription . '</b></font></th></tr>';
-		echo '<tr><td>' . _('Currency') . ':</td><td><select name="CurrAbrev">';
-		while ($myrow = DB_fetch_array($result)) {
-			if ($myrow['currabrev']==$_POST['CurrAbrev']) {
-				echo '<option selected value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
-			} else {
-				echo '<option value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
-			}
-		} //end while loop
 
-		DB_free_result($result);
-
-		echo '</select>	</td></tr><tr><td>' . _('Sales Type Price List') . ':</td><td><select name="TypeAbbrev">';
+		echo '<tr><td>' . _('Sales Type Price List') . ':</td><td><select name="TypeAbbrev">';
 
 		$SQL = "SELECT typeabbrev, sales_type FROM salestypes";
 		$result = DB_query($SQL,$db);
@@ -370,6 +359,21 @@ if ($InputError ==0){
 				echo '<option value="' . $myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
 			}
 		} //end while loop
+		echo '</select></td></tr>';
+		
+		DB_free_result($result);
+		
+		$SQL = "SELECT currabrev, currency FROM currencies";
+		$result = DB_query($SQL,$db);
+		echo '<tr><td>' . _('Currency') . ':</td><td><select name="CurrAbrev">';
+		while ($myrow = DB_fetch_array($result)) {
+			if ($myrow['currabrev']==$_POST['CurrAbrev']) {
+				echo '<option selected value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
+			} else {
+				echo '<option value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
+			}
+		} //end while loop
+		echo '</select></td></tr>';
 
 		DB_free_result($result);
 
