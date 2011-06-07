@@ -133,6 +133,7 @@ if (isset($_POST['submit'])) {
 						theme='" . $_POST['Theme'] . "',
 						language ='" . $_POST['UserLanguage'] . "',
 						defaultlocation='" . $_POST['DefaultLocation'] ."',
+						defaulttag='" . $_POST['DefaultTag'] ."',
 						modulesallowed='" . $ModulesAllowed . "',
 						blocked='" . $_POST['Blocked'] . "',
 						pdflanguage='" . $_POST['PDFLanguage'] . "'
@@ -154,6 +155,7 @@ if (isset($_POST['submit'])) {
 						fullaccess,
 						cancreatetender,
 						defaultlocation,
+						defaulttag,
 						modulesallowed,
 						displayrecordsmax,
 						theme,
@@ -172,6 +174,7 @@ if (isset($_POST['submit'])) {
 						'" . $_POST['Access'] . "',
 						'" . $_POST['CanCreateTender'] . "',
 						'" . $_POST['DefaultLocation'] ."',
+						'" . $_POST['DefaultTag'] ."',
 						'" . $ModulesAllowed . "',
 						'" . $_SESSION['DefaultDisplayRecordsMax'] . "',
 						'" . $_POST['Theme'] . "',
@@ -240,6 +243,7 @@ if (!isset($SelectedUser)) {
 			supplierid,
 			salesman,
 			lastvisitdate,
+			defaulttag,
 			fullaccess,
 			cancreatetender,
 			pagesize,
@@ -261,6 +265,7 @@ if (!isset($SelectedUser)) {
 		<th>" . _('Security Role') ."</th>
 		<th>" . _('Can Create Tender') ."</th>
 		<th>" . _('Report Size') ."</th>
+		<th>" . _('Default Tag') ."</th>
 		<th>" . _('Theme') ."</th>
 		<th>" . _('Language') ."</th>
 	</tr>";
@@ -302,6 +307,7 @@ if (!isset($SelectedUser)) {
 					<td>%s</td>
 					<td>%s</td>
 					<td>%s</td>
+					<td>%s</td>
 					<td><a href=\"%s&SelectedUser=%s\">" . _('Edit') . "</a></td>
 					<td><a href=\"%s&SelectedUser=%s&delete=1\">" . _('Delete') . "</a></td>
 					</tr>",
@@ -317,6 +323,7 @@ if (!isset($SelectedUser)) {
 					$SecurityRoles[($myrow['fullaccess'])],
 					$CanCreateTender,
 					$myrow['pagesize'],
+					$myrow['defaulttag'],
 					$myrow['theme'],
 					$myrow['language'],
 					$_SERVER['PHP_SELF']  . "?" . SID,
@@ -352,6 +359,7 @@ if (isset($SelectedUser)) {
 			fullaccess,
 			cancreatetender,
 			defaultlocation,
+			defaulttag,
 			modulesallowed,
 			blocked,
 			theme,
@@ -375,6 +383,7 @@ if (isset($SelectedUser)) {
 	$_POST['Access'] = $myrow['fullaccess'];
 	$_POST['CanCreateTender'] = $myrow['cancreatetender'];
 	$_POST['DefaultLocation'] = $myrow['defaultlocation'];
+	$_POST['DefaultTag'] = $myrow['defaulttag'];
 	$_POST['ModulesAllowed'] = $myrow['modulesallowed'];
 	$_POST['Theme'] = $myrow['theme'];
 	$_POST['UserLanguage'] = $myrow['language'];
@@ -466,6 +475,28 @@ while ($myrow=DB_fetch_array($result)){
 
 	} else {
 		echo "<option Value='" . $myrow['loccode'] . "'>" . $myrow['locationname'];
+
+	}
+
+}
+
+echo '</select></td></tr>';
+
+echo '<tr><td>' . _('Default Tag') . ':</td>
+	<td><select name="DefaultTag">';
+
+$myrow[0]='GSF';
+$myrow[1]='KCMC';
+$myrow[2]='KCRI';
+
+foreach ($myrow as $TagName){
+
+	if (isset($_POST['DefaultTag']) and $TagName == $_POST['DefaultTag']){
+
+		echo "<option selected value='" . $TagName . "'>" . $TagName;
+
+	} else {
+		echo "<option Value='" . $TagName . "'>" . $TagName;
 
 	}
 

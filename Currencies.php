@@ -193,7 +193,7 @@ or deletion of the records*/
 	$k=0; //row colour counter
 	/*Get published currency rates from Eurpoean Central Bank */
 	if ($_SESSION['UpdateCurrencyRatesDaily'] != '0') {
-		$CurrencyRatesArray = GetECBCurrencyRates();
+//		$CurrencyRatesArray = GetECBCurrencyRates();
 	} else {
 		$CurrencyRatesArray = array();
 	}
