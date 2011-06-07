@@ -211,6 +211,7 @@ if (isset($_POST['CloseContract']) AND $_SESSION['Contract'.$identifier]->Status
 															trandate,
 															periodno,
 															account,
+															defaulttag,
 															narrative,
 															amount)
 										VALUES ( 32,
@@ -218,6 +219,7 @@ if (isset($_POST['CloseContract']) AND $_SESSION['Contract'.$identifier]->Status
 														'" . Date('Y-m-d') . "',
 														'" . $PeriodNo . "',
 														'" . $GLCodes['wipact'] . "',
+														'" . $_SESSION['DefaultTag'] . "',
 														'" . _('Variance on contract') . ' ' . $_SESSION['Contract'.$identifier]->ContractRef . "',
 														'" . -$Variance . "')";
 
@@ -229,6 +231,7 @@ if (isset($_POST['CloseContract']) AND $_SESSION['Contract'.$identifier]->Status
 															trandate,
 															periodno,
 															account,
+															defaulttag,
 															narrative,
 															amount)
 										VALUES ( 32,
@@ -236,6 +239,7 @@ if (isset($_POST['CloseContract']) AND $_SESSION['Contract'.$identifier]->Status
 														'" . Date('Y-m-d') . "',
 														'" . $PeriodNo . "',
 														'" . $GLCodes['materialuseagevarac'] . "',
+														'" . $_SESSION['DefaultTag'] . "',
 														'" . _('Variance on contract') . ' ' . $_SESSION['Contract'.$identifier]->ContractRef . "',
 														'" . $Variance . "')";
 
@@ -350,6 +354,7 @@ if (isset($_POST['CloseContract']) AND $_SESSION['Contract'.$identifier]->Status
 																				trandate,
 																				periodno,
 																				account,
+																				defaulttag,
 																				narrative,
 																				amount)
 										VALUES (26,
@@ -357,6 +362,7 @@ if (isset($_POST['CloseContract']) AND $_SESSION['Contract'.$identifier]->Status
 														'" . Date('Y-m-d') . "',
 														'" . $PeriodNo . "',
 														'" . $GLCodes['stockact'] . "',
+														'" . $_SESSION['DefaultTag'] . "',
 														'" . $_SESSION['Contract'.$identifier]->WO . ' ' . $_SESSION['Contract'.$identifier]->ContractRef  . ' -  x 1 @ ' . number_format(($OtherReqtsBudget+$ContractBOMBudget),2) . "',
 														'" . ($OtherReqtsBudget+$ContractBOMBudget) . "')";
 
@@ -370,6 +376,7 @@ if (isset($_POST['CloseContract']) AND $_SESSION['Contract'.$identifier]->Status
 												trandate,
 												periodno,
 												account,
+												defaulttag,
 												narrative,
 												amount)
 										VALUES (26,
@@ -377,6 +384,7 @@ if (isset($_POST['CloseContract']) AND $_SESSION['Contract'.$identifier]->Status
 											'" . Date('Y-m-d') . "',
 											'" . $PeriodNo . "',
 											'" . $GLCodes['wipact'] . "',
+											'" . $_SESSION['DefaultTag'] . "',
 											'" . $_SESSION['Contract'.$identifier]->WO . ' ' . $_SESSION['Contract'.$identifier]->ContractRef  . ' -  x 1 @ ' . number_format(($OtherReqtsBudget+$ContractBOMBudget),2) . "',
 											'" . -($OtherReqtsBudget+$ContractBOMBudget) . "')";
 

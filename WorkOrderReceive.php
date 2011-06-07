@@ -227,6 +227,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 								trandate,
 								periodno,
 								account,
+								defaulttag,
 								narrative,
 								amount)
 							VALUES (35,
@@ -234,6 +235,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 								'" . Date('Y-m-d') . "',
 								'" . $PeriodNo . "',
 								'" . $StockGLCode['adjglact'] . "',
+								'" . $_SESSION['DefaultTag'] . "',
 								'" . _('Cost roll on release of WO') . ': ' . $_POST['WO'] . ' - ' . $_POST['StockID'] . ' ' . _('cost was') . ' ' . $ItemCostRow['cost'] . ' ' . _('changed to') . ' ' . $Cost . ' x ' . _('Quantity on hand of') . ' ' . $ItemCostRow['totalqoh'] . "',
 								'" . (-$ValueOfChange) . "')";
 
@@ -246,6 +248,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 								trandate,
 								periodno,
 								account,
+								defaulttag,
 								narrative,
 								amount)
 							VALUES (35,
@@ -253,6 +256,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 								'" . Date('Y-m-d') . "',
 								'" . $PeriodNo . "',
 								'" . $StockGLCode['stockact'] . "',
+								'" . $_SESSION['DefaultTag'] . "',
 								'" . _('Cost roll on release of WO') . ': ' . $_POST['WO'] . ' - ' . $_POST['StockID'] . ' ' . _('cost was') . ' ' . $ItemCostRow['cost'] . ' ' . _('changed to') . ' ' . $Cost . ' x ' . _('Quantity on hand of') . ' ' . $ItemCostRow['totalqoh'] . "',
 								'" . $ValueOfChange . "')";
 
@@ -365,6 +369,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 									trandate,
 									periodno,
 									account,
+									defaulttag,
 									narrative,
 									amount)
 							VALUES (28,
@@ -372,6 +377,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 								'" . Date('Y-m-d') . "',
 								'" . $PeriodNo . "',
 								'" . $StockGLCode['wipact'] . "',
+								'" . $_SESSION['DefaultTag'] . "',
 								'" . $_POST['WO'] . ' - ' . $_POST['StockID'] . ' ' . _('Component') . ': ' . $AutoIssueCompRow['stockid'] . ' - ' . $QuantityReceived . ' x ' . $AutoIssueCompRow['qtypu'] . ' @ ' . number_format($AutoIssueCompRow['cost'],2) . "',
 								'" . ($AutoIssueCompRow['qtypu'] * $QuantityReceived * $AutoIssueCompRow['cost']) . "')";
 
@@ -384,6 +390,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 									trandate,
 									periodno,
 									account,
+									defaulttag,
 									narrative,
 									amount)
 							VALUES (28,
@@ -391,6 +398,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 								'" . Date('Y-m-d') . "',
 								'" . $PeriodNo . "',
 								'" . $AutoIssueCompRow['stockact'] . "',
+								'" . $_SESSION['DefaultTag'] . "',
 								'" . $_POST['WO'] . ' - ' . $_POST['StockID'] . ' -> ' . $AutoIssueCompRow['stockid'] . ' - ' . $QuantityReceived . ' x ' . $AutoIssueCompRow['qtypu'] . ' @ ' . number_format($AutoIssueCompRow['cost'],2) . "',
 								'" . -($AutoIssueCompRow['qtypu'] * $QuantityReceived * $AutoIssueCompRow['cost']) . "')";
 
@@ -619,6 +627,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 									trandate,
 									periodno,
 									account,
+									defaulttag,
 									narrative,
 									amount)
 							VALUES (26,
@@ -626,6 +635,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 								'" . Date('Y-m-d') . "',
 								'" . $PeriodNo . "',
 								'" . $StockGLCode['stockact'] . "',
+								'" . $_SESSION['DefaultTag'] . "',
 								'" . $_POST['WO'] . " " . $_POST['StockID'] . " - " . $WORow['description'] . ' x ' . $QuantityReceived . " @ " . number_format($WORow['stdcost'],2) . "',
 								'" . ($WORow['stdcost'] * $QuantityReceived) . "')";
 
@@ -639,6 +649,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 									trandate,
 									periodno,
 									account,
+									defaulttag,
 									narrative,
 									amount)
 							VALUES (26,
@@ -646,6 +657,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 								'" . Date('Y-m-d') . "',
 								'" . $PeriodNo . "',
 								'" . $StockGLCode['wipact'] . "',
+								'" . $_SESSION['DefaultTag'] . "',
 								'" . $_POST['WO'] . " " . $_POST['StockID'] . " - " . $WORow['description'] . ' x ' . $QuantityReceived . " @ " . number_format($WORow['stdcost'],2) . "',
 								'" . -($WORow['stdcost'] * $QuantityReceived) . "')";
 

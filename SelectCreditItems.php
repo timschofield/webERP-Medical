@@ -1741,6 +1741,7 @@ at standard cost*/
 						trandate,
 						periodno,
 						account,
+						defaulttag,
 						narrative,
 						amount)
 					VALUES (
@@ -1749,6 +1750,7 @@ at standard cost*/
 						'" . $SQLCreditDate . "',
 						'" . $PeriodNo . "',
 						'" . $COGSAccount . "',
+						'" . $_SESSION['DefaultTag'] . "',
 						'" . $_SESSION['CreditItems']->DebtorNo . " - " . $CreditLine->StockID . " x " . $CreditLine->Quantity . " @ " . $CreditLine->StandardCost . "',
 						'" . ($CreditLine->StandardCost * -$CreditLine->Quantity) . "')";
 
@@ -1768,6 +1770,7 @@ then debit the expense account the stock is to written off to */
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount)
 						VALUES (
@@ -1776,6 +1779,7 @@ then debit the expense account the stock is to written off to */
 							'" . $SQLCreditDate . "',
 							'" . $PeriodNo . "',
 							'" . $_POST['WriteOffGLCode'] . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'" . $_SESSION['CreditItems']->DebtorNo . " - " . $CreditLine->StockID . " x " . $CreditLine->Quantity . " @ " . $CreditLine->StandardCost . "',
 							'" . ($CreditLine->StandardCost * $CreditLine->Quantity) . "'
 							)";
@@ -1793,6 +1797,7 @@ then debit the expense account the stock is to written off to */
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount)
 						VALUES (
@@ -1801,6 +1806,7 @@ then debit the expense account the stock is to written off to */
 							'" . $SQLCreditDate . "',
 							'" . $PeriodNo . "',
 							'" . $StockGLCode['stockact'] . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'" . $_SESSION['CreditItems']->DebtorNo . " - " . $CreditLine->StockID . " x " . $CreditLine->Quantity . " @ " . $CreditLine->StandardCost . "',
 							'" . ($CreditLine->StandardCost * $CreditLine->Quantity) . "'
 							)";
@@ -1826,6 +1832,7 @@ then debit the expense account the stock is to written off to */
 						trandate,
 						periodno,
 						account,
+						defaulttag,
 						narrative,
 						amount)
 					VALUES (
@@ -1834,6 +1841,7 @@ then debit the expense account the stock is to written off to */
 						'" . $SQLCreditDate . "',
 						'" . $PeriodNo . "',
 						'" . $SalesGLAccounts['salesglcode'] . "',
+						'" . $_SESSION['DefaultTag'] . "',
 						'" . $_SESSION['CreditItems']->DebtorNo . " - " . $CreditLine->StockID . " x " . $CreditLine->Quantity . " @ " . $CreditLine->Price . "',
 						'" . ($CreditLine->Price * $CreditLine->Quantity)/$_SESSION['CurrencyRate'] . "'
 						)";
@@ -1850,6 +1858,7 @@ then debit the expense account the stock is to written off to */
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount)
 						VALUES (
@@ -1858,6 +1867,7 @@ then debit the expense account the stock is to written off to */
 							'" . $SQLCreditDate . "',
 							'" . $PeriodNo . "',
 							'" . $SalesGLAccounts['discountglcode'] . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'" . $_SESSION['CreditItems']->DebtorNo . " - " . $CreditLine->StockID . " @ " . ($CreditLine->DiscountPercent * 100) . "%',
 							'" . -($CreditLine->Price * $CreditLine->Quantity * $CreditLine->DiscountPercent)/$_SESSION['CurrencyRate'] . "'
 							)";
@@ -1882,6 +1892,7 @@ then debit the expense account the stock is to written off to */
 					trandate,
 					periodno,
 					account,
+					defaulttag,
 					narrative,
 					amount)
 				VALUES (
@@ -1890,6 +1901,7 @@ then debit the expense account the stock is to written off to */
 					'" . $SQLCreditDate . "',
 					'" . $PeriodNo . "',
 					'" . $_SESSION['CompanyRecord']['debtorsact'] . "',
+					'" . $_SESSION['DefaultTag'] . "',
 					'" . $_SESSION['CreditItems']->DebtorNo . "',
 					'" . -($_SESSION['CreditItems']->total + $_SESSION['CreditItems']->FreightCost + $TaxTotal)/$_SESSION['CurrencyRate'] . "')";
 
@@ -1904,6 +1916,7 @@ then debit the expense account the stock is to written off to */
 					trandate,
 					periodno,
 					account,
+					defaulttag,
 					narrative,
 					amount)
 				VALUES (
@@ -1912,6 +1925,7 @@ then debit the expense account the stock is to written off to */
 					'" . $SQLCreditDate . "',
 					'" . $PeriodNo . "',
 					'" . $_SESSION['CompanyRecord']['freightact'] . "',
+					'" . $_SESSION['DefaultTag'] . "',
 					'" . $_SESSION['CreditItems']->DebtorNo . "',
 					'" . $_SESSION['CreditItems']->FreightCost/$_SESSION['CurrencyRate'] . "'
 				)";
@@ -1928,6 +1942,7 @@ then debit the expense account the stock is to written off to */
 						trandate,
 						periodno,
 						account,
+						defaulttag,
 						narrative,
 						amount
 						)
@@ -1937,6 +1952,7 @@ then debit the expense account the stock is to written off to */
 						'" . $SQLCreditDate . "',
 						'" . $PeriodNo . "',
 						'" . $TaxGLCodes[$TaxAuthID] . "',
+						'" . $_SESSION['DefaultTag'] . "',
 						'" . $_SESSION['CreditItems']->DebtorNo . "',
 						'" . ($TaxAmount/$_SESSION['CurrencyRate']) . "'
 					)";

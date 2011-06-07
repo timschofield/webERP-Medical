@@ -142,6 +142,7 @@ If (isset($_POST['PrintPDF']) AND isset($_POST['ReportOrClose'])){
 									trandate,
 									periodno,
 									account,
+									defaulttag,
 									amount,
 									narrative)
 							VALUES (17,
@@ -149,6 +150,7 @@ If (isset($_POST['PrintPDF']) AND isset($_POST['ReportOrClose'])){
 								'" . $SQLAdjustmentDate . "',
 								'" . $PeriodNo . "',
 								'" .  $StockGLCodes['adjglact'] . "',
+								'" . $_SESSION['DefaultTag'] . "',
 								'" . $myrow['standardcost'] * -($StockQtyDifference) . "',
 								'" . $myrow['stockid'] . " x " . $StockQtyDifference . " @ " . $myrow['standardcost'] . " - " . _('Inventory Check') . "')";
 					$Result = DB_query($SQL,$db, $ErrMsg, $DbgMsg, true);
@@ -161,6 +163,7 @@ If (isset($_POST['PrintPDF']) AND isset($_POST['ReportOrClose'])){
 									trandate,
 									periodno,
 									account,
+									defaulttag,
 									amount,
 									narrative)
 							VALUES (17,
@@ -168,6 +171,7 @@ If (isset($_POST['PrintPDF']) AND isset($_POST['ReportOrClose'])){
 								'" . $SQLAdjustmentDate . "',
 								'" . $PeriodNo . "',
 								'" .  $StockGLCodes['stockact'] . "',
+								'" . $_SESSION['DefaultTag'] . "',
 								'" . $myrow['standardcost'] * $StockQtyDifference . "', '" . $myrow['stockid'] . " x " . $StockQtyDifference . " @ " . $myrow['standardcost'] . " - " . _('Inventory Check') . "')";
 					$Result = DB_query($SQL,$db, $ErrMsg, $DbgMsg, true);
 

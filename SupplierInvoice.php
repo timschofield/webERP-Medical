@@ -645,6 +645,7 @@ then do the updates and inserts to process the invoice entered */
 								trandate,
 								periodno,
 								account,
+								defaulttag,
 								narrative,
 								amount,
 								jobref)
@@ -653,6 +654,7 @@ then do the updates and inserts to process the invoice entered */
 							'" . $SQLInvoiceDate . "',
 							'" . $PeriodNo . "',
 							'" . $EnteredGLCode->GLCode . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'" . $_SESSION['SuppTrans']->SupplierID . ' ' . $EnteredGLCode->Narrative . "',
 							'" . round($EnteredGLCode->Amount/ $_SESSION['SuppTrans']->ExRate,2) . "',
 							'" . $EnteredGLCode->JobRef . "')";
@@ -675,6 +677,7 @@ then do the updates and inserts to process the invoice entered */
 																		trandate,
 																		periodno,
 																		account,
+																		defaulttag,
 																		narrative,
 																		amount)
 							VALUES (20,
@@ -682,6 +685,7 @@ then do the updates and inserts to process the invoice entered */
 								'" . $SQLInvoiceDate . "',
 								'" . $PeriodNo . "',
 								'" . $_SESSION['SuppTrans']->GRNAct . "',
+								'" . $_SESSION['DefaultTag'] . "',
 								'" . $_SESSION['SuppTrans']->SupplierID . ' ' . _('Shipment charge against') . ' ' . $ShiptChg->ShiptRef . "',
 								'" . round($ShiptChg->Amount/ $_SESSION['SuppTrans']->ExRate,2) . "')";
 
@@ -703,6 +707,7 @@ then do the updates and inserts to process the invoice entered */
 																	trandate,
 																	periodno,
 																	account,
+																	defaulttag,
 																	narrative,
 																	amount)
 													VALUES (20, '" .
@@ -710,6 +715,7 @@ then do the updates and inserts to process the invoice entered */
 																	'" . $SQLInvoiceDate . "',
 																	'" . $PeriodNo . "',
 																	'". $AssetAddition->CostAct . "',
+																	'" . $_SESSION['DefaultTag'] . "',
 																	'" . $_SESSION['SuppTrans']->SupplierID . ' ' . _('Asset Addition') . ' ' . $AssetAddition->AssetID . ': '  . $AssetAddition->Description . "',
 																	'" . ($AssetAddition->Amount/ $_SESSION['SuppTrans']->ExRate) . "')";
 				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The general ledger transaction for the asset addition could not be added because');
@@ -735,6 +741,7 @@ then do the updates and inserts to process the invoice entered */
 																	trandate,
 																	periodno,
 																	account,
+																	defaulttag,
 																	narrative,
 																	amount)
 													VALUES (20, '" .
@@ -742,6 +749,7 @@ then do the updates and inserts to process the invoice entered */
 																	'" . $SQLInvoiceDate . "',
 																	'" . $PeriodNo . "',
 																	'". $WIPAccount . "',
+																	'" . $_SESSION['DefaultTag'] . "',
 																	'" . $_SESSION['SuppTrans']->SupplierID . ' ' . _('Contract charge against') . ' ' . $Contract->ContractRef . "',
 																	'" . ($Contract->Amount/ $_SESSION['SuppTrans']->ExRate) . "')";
 				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The general ledger transaction for the contract') . ' ' . $Contract->ContractRef . ' ' . _('could not be added because');
@@ -769,12 +777,14 @@ then do the updates and inserts to process the invoice entered */
 																			trandate,
 																			periodno,
 																			account,
+																			defaulttag,
 																			narrative,
 																			amount)
 								VALUES (20, '" . $InvoiceNo . "',
 									'" . $SQLInvoiceDate . "',
 									'" . $PeriodNo . "',
 									'" . $_SESSION['SuppTrans']->GRNAct . "',
+									'" . $_SESSION['DefaultTag'] . "',
 									'" . $_SESSION['SuppTrans']->SupplierID . ' - ' . _('GRN') . ' ' . $EnteredGRN->GRNNo . ' - ' . $EnteredGRN->ItemCode . ' x ' . $EnteredGRN->This_QuantityInv . ' @  ' .
 								 _('std cost of') . ' ' . $EnteredGRN->StdCostUnit  . "',
 								 	'" . round($EnteredGRN->StdCostUnit * $EnteredGRN->This_QuantityInv ,2) . "')";
@@ -840,6 +850,7 @@ then do the updates and inserts to process the invoice entered */
 																						trandate,
 																						periodno,
 																						account,
+																						defaulttag,
 																						narrative,
 																						amount)
 																				VALUES (20,
@@ -847,6 +858,7 @@ then do the updates and inserts to process the invoice entered */
 																					'" . $SQLInvoiceDate . "',
 																					'" . $PeriodNo . "',
 																					'" . $StockGLCode['purchpricevaract'] . "',
+																					'" . $_SESSION['DefaultTag'] . "',
 																					'" . $_SESSION['SuppTrans']->SupplierID . ' - ' . _('GRN') . ' ' . $EnteredGRN->GRNNo .
 																				 ' - ' . $EnteredGRN->ItemCode . ' x ' . ($EnteredGRN->This_QuantityInv -$TotalQuantityOnHand) . ' x  ' . _('price var of') . ' ' .
 																				 round(($EnteredGRN->ChgPrice / $_SESSION['SuppTrans']->ExRate) - $EnteredGRN->StdCostUnit,2)  . "',
@@ -865,6 +877,7 @@ then do the updates and inserts to process the invoice entered */
 																					trandate,
 																					periodno,
 																					account,
+																					defaulttag,
 																					narrative,
 																					amount)
 																			VALUES (20,
@@ -872,6 +885,7 @@ then do the updates and inserts to process the invoice entered */
 																			'" . $SQLInvoiceDate . "',
 																			'" . $PeriodNo . "',
 																			'" . $StockGLCode['stockact'] . "',
+																			'" . $_SESSION['DefaultTag'] . "',
 																			'" . $_SESSION['SuppTrans']->SupplierID . ' - ' . _('Average Cost Adj') .
 																			 ' - ' . $EnteredGRN->ItemCode . ' x ' . $TotalQuantityOnHand  . ' x ' .
 																			 round(($EnteredGRN->ChgPrice  / $_SESSION['SuppTrans']->ExRate) - $EnteredGRN->StdCostUnit,2)  . "',
@@ -913,6 +927,7 @@ then do the updates and inserts to process the invoice entered */
 																					trandate,
 																					periodno,
 																					account,
+																					defaulttag,
 																					narrative,
 																					amount)
 																			VALUES (20,
@@ -920,6 +935,7 @@ then do the updates and inserts to process the invoice entered */
 																				'" . $SQLInvoiceDate . "',
 																				'" . $PeriodNo . "',
 																				'" . $StockGLCode['purchpricevaract'] . "',
+																				'" . $_SESSION['DefaultTag'] . "',
 																				'" . $_SESSION['SuppTrans']->SupplierID . ' - ' . _('GRN') . ' ' . $EnteredGRN->GRNNo .
 																			 ' - ' . $EnteredGRN->ItemCode . ' x ' . $EnteredGRN->This_QuantityInv . ' x  ' . _('price var of') . ' ' .
 																			 round(($EnteredGRN->ChgPrice  / $_SESSION['SuppTrans']->ExRate) - $EnteredGRN->StdCostUnit,2)  .  "',
@@ -954,6 +970,7 @@ then do the updates and inserts to process the invoice entered */
 																				trandate,
 																				periodno,
 																				account,
+																				defaulttag,
 																				narrative,
 																				amount)
 									VALUES (20,
@@ -961,6 +978,7 @@ then do the updates and inserts to process the invoice entered */
 											'" . $SQLInvoiceDate . "',
 											'" . $PeriodNo . "',
 											'" . $GLCode . "',
+											'" . $_SESSION['DefaultTag'] . "',
 											'" . $_SESSION['SuppTrans']->SupplierID . ' - ' . _('GRN') . ' ' . $EnteredGRN->GRNNo . ' - ' .
 									 $EnteredGRN->ItemDescription . ' x ' . $EnteredGRN->This_QuantityInv . ' x  ' . _('price var') .
 									 ' ' . round(($EnteredGRN->ChgPrice  / $_SESSION['SuppTrans']->ExRate) - $EnteredGRN->StdCostUnit,2) . "',
@@ -981,6 +999,7 @@ then do the updates and inserts to process the invoice entered */
 																		trandate,
 																		periodno,
 																		account,
+																		defaulttag,
 																		narrative,
 																		amount)
 																VALUES (20,
@@ -988,6 +1007,7 @@ then do the updates and inserts to process the invoice entered */
 																	'" . $SQLInvoiceDate . "',
 																	'" . $PeriodNo . "',
 																	'" . $_SESSION['SuppTrans']->GRNAct . "',
+																	'" . $_SESSION['DefaultTag'] . "',
 																	'" . $_SESSION['SuppTrans']->SupplierID . ' - ' . _('GRN') . ' ' . $EnteredGRN->GRNNo . ' - ' .
 																 $EnteredGRN->ItemCode . ' x ' . $EnteredGRN->This_QuantityInv . ' @ ' .
 																 $_SESSION['SuppTrans']->CurrCode . ' ' . $EnteredGRN->ChgPrice . ' @ ' . _('a rate of') . ' ' .
@@ -1018,6 +1038,7 @@ then do the updates and inserts to process the invoice entered */
 																							trandate,
 																							periodno,
 																							account,
+																							defaulttag,
 																							narrative,
 																							amount)
 																					VALUES (20,
@@ -1025,6 +1046,7 @@ then do the updates and inserts to process the invoice entered */
 																							'" . $SQLInvoiceDate . "',
 																							'" . $PeriodNo . "',
 																							'" . $Tax->TaxGLCode . "',
+																							'" . $_SESSION['DefaultTag'] . "',
 																							'" . $_SESSION['SuppTrans']->SupplierID . ' - ' . _('Inv') . ' ' .
 																					 $_SESSION['SuppTrans']->SuppReference . ' ' . $Tax->TaxAuthDescription . ' ' . number_format($Tax->TaxRate*100,2) . '% ' . $_SESSION['SuppTrans']->CurrCode .
 																					 $Tax->TaxOvAmount  . ' @ ' . _('exch rate') . ' ' . $_SESSION['SuppTrans']->ExRate . "',
@@ -1045,6 +1067,7 @@ then do the updates and inserts to process the invoice entered */
 																trandate,
 																periodno,
 																account,
+																defaulttag,
 																narrative,
 																amount)
 														VALUES (20,
@@ -1052,6 +1075,7 @@ then do the updates and inserts to process the invoice entered */
 															'" . $SQLInvoiceDate . "',
 															'" . $PeriodNo . "',
 															'" . $_SESSION['SuppTrans']->CreditorsAct .  "',
+															'" . $_SESSION['DefaultTag'] . "',
 															'" . $_SESSION['SuppTrans']->SupplierID . ' - ' . _('Inv') . ' ' .
 														 $_SESSION['SuppTrans']->SuppReference . ' ' . $_SESSION['SuppTrans']->CurrCode .
 														 number_format( $_SESSION['SuppTrans']->OvAmount + $TaxTotal,2)  .

@@ -272,6 +272,7 @@ if (db_num_rows($LineItemsResult) > 0) {
 																		trandate,
 																		periodno,
 																		account,
+																		defaulttag,
 																		narrative,
 																		amount)
 																	VALUES (31,
@@ -279,6 +280,7 @@ if (db_num_rows($LineItemsResult) > 0) {
 																		'" . Date('Y-m-d') . "',
 																		'" . $PeriodNo . "',
 																		'" . $StockGLCodes['purchpricevaract'] . "',
+																		'" . $_SESSION['DefaultTag'] . "',
 																		'" . $myrow['itemcode'] . ' ' . _('shipment cost') . ' ' .  number_format($ItemShipmentCost,2) . _('shipment quantity > stock held - variance write off') . "',
 																		" . $WriteOffToVariances . ")";
 
@@ -292,6 +294,7 @@ if (db_num_rows($LineItemsResult) > 0) {
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount)
 							VALUES (31,
@@ -299,6 +302,7 @@ if (db_num_rows($LineItemsResult) > 0) {
 								'" . Date('Y-m-d') . "',
 								'" . $PeriodNo . "',
 						 		'" . $StockGLCodes['stockact'] . "',
+								'" . $_SESSION['DefaultTag'] . "',
 							 	'" . $myrow['itemcode'] . ' ' . _('shipment avg cost adjt') . "',
 								'" . ($myrow['totqtyinvoiced'] *($ItemShipmentCost - $StdCostUnit)
 																					- $WriteOffToVariances) . "')";
@@ -342,6 +346,7 @@ if (db_num_rows($LineItemsResult) > 0) {
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount)
 					VALUES (31,
@@ -349,6 +354,7 @@ if (db_num_rows($LineItemsResult) > 0) {
 						'" . Date('Y-m-d') . "',
 						'" . $PeriodNo . "',
 						'" . $StockGLCodes['purchpricevaract'] . "',
+						'" . $_SESSION['DefaultTag'] . "',
 						'" . $myrow['itemcode'] . ' ' . _('shipment cost') . ' ' .  number_format($ItemShipmentCost,2) . ' x ' . _('Qty recd') .' ' . $myrow['totqtyrecd'] . "', " . (-$Variance * $myrow['totqtyrecd']) . ")";
 							   $ErrMsg =  _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The Positive GL entry for the shipment variance posting for'). ' ' . $myrow['itemcode'] . ' '. _('could not be inserted into the database because');
 		   					   $result = DB_query($sql,$db, $ErrMsg,'',TRUE);
@@ -363,6 +369,7 @@ if (db_num_rows($LineItemsResult) > 0) {
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount)
 				VALUES (31,
@@ -370,6 +377,7 @@ if (db_num_rows($LineItemsResult) > 0) {
 					'" . Date('Y-m-d') . "',
 					'" . $PeriodNo . "',
 					'" . $_SESSION['CompanyRecord']['grnact'] . "',
+					'" . $_SESSION['DefaultTag'] . "',
 					'" . $myrow['itemcode'] . ' ' ._('shipment cost') . ' ' .  number_format($ItemShipmentCost,2) . ' x ' . _('Qty invoiced') . ' ' . $myrow['totqtyinvoiced'] . "',
 										" . ($Variance * $myrow['totqtyinvoiced']) . ")";
 
@@ -396,6 +404,7 @@ if (db_num_rows($LineItemsResult) > 0) {
 								trandate,
 								periodno,
 								account,
+								defaulttag,
 								narrative,
 								amount)
 						VALUES (35,
@@ -403,6 +412,7 @@ if (db_num_rows($LineItemsResult) > 0) {
 							'" . Date('Y-m-d') . "',
 							'" . $PeriodNo . "',
 							'" . $StockGLCodes['adjglact'] . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'" . _('Shipment of') . ' ' . $myrow['itemcode'] . " " . _('cost was') . ' ' . $StdCostUnit . ' ' . _('changed to') . ' ' . number_format($ItemShipmentCost,2) . ' x ' . _('QOH of') . ' ' . $QOH . "', " . (-$ValueOfChange) . ")";
 
 				   $ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The GL credit for the shipment stock cost adjustment posting could not be inserted because'). ' ' . DB_error_msg($db);
@@ -414,6 +424,7 @@ if (db_num_rows($LineItemsResult) > 0) {
 								trandate,
 								periodno,
 								account,
+								defaulttag,
 								narrative,
 								amount)
 						VALUES (35,
@@ -421,6 +432,7 @@ if (db_num_rows($LineItemsResult) > 0) {
 							'" . Date('Y-m-d') . "',
 							'" . $PeriodNo . "',
 							'" . $StockGLCodes['stockact'] . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'" . _('Shipment of') . ' ' . $myrow['itemcode'] .  ' ' . _('cost was') . ' ' . $StdCostUnit . ' ' . _('changed to') . ' ' . number_format($ItemShipmentCost,2) . ' x ' . _('QOH of') . ' ' . $QOH . "',
 														" . $ValueOfChange . ")";
 				   $ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The GL debit for stock cost adjustment posting could not be inserted because') .' '. DB_error_msg($db);

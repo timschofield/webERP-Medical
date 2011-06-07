@@ -1251,6 +1251,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount)
 					VALUES (11,
@@ -1258,6 +1259,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 						'" . $DefaultDispatchDate . "',
 						'" . $PeriodNo . "',
 						'" . $COGSAccount . "',
+						'" . $_SESSION['DefaultTag'] . "',
 						'" . $_SESSION['CreditItems']->DebtorNo . " - " . $OrderLine->StockID . " x " . $OrderLine->QtyDispatched . " @ " . $OrderLine->StandardCost . "',
 						'" . -round($OrderLine->StandardCost * $OrderLine->QtyDispatched,2) . "'
 						)";
@@ -1275,6 +1277,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 								trandate,
 								periodno,
 								account,
+								defaulttag,
 								narrative,
 								amount)
 						VALUES (11,
@@ -1282,6 +1285,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 							'" . $DefaultDispatchDate . "',
 							'" . $PeriodNo . "',
 							'" . $_POST['WriteOffGLCode'] . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'" . $_SESSION['CreditItems']->DebtorNo . " - " . $OrderLine->StockID . " x " . $OrderLine->QtyDispatched . " @ " . $OrderLine->StandardCost . "',
 							'" . round($OrderLine->StandardCost * $OrderLine->QtyDispatched,2) . "')";
 				} else {
@@ -1291,6 +1295,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 								trandate,
 								periodno,
 								account,
+								defaulttag,
 								narrative,
 								amount)
 						VALUES (11,
@@ -1298,6 +1303,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 							'" . $DefaultDispatchDate . "',
 							'" . $PeriodNo . "',
 							'" . $StockGLCode['stockact'] . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'" . $_SESSION['CreditItems']->DebtorNo . " - " . $OrderLine->StockID . " x " . $OrderLine->QtyDispatched . " @ " . $OrderLine->StandardCost . "',
 							'" . round($OrderLine->StandardCost * $OrderLine->QtyDispatched,2) . "')";
 				}
@@ -1318,6 +1324,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount)
 					VALUES (11,
@@ -1325,6 +1332,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 						'" . $DefaultDispatchDate . "',
 						'" . $PeriodNo . "',
 						'" . $SalesGLAccounts['salesglcode'] . "',
+						'" . $_SESSION['DefaultTag'] . "',
 						'" . $_SESSION['CreditItems']->DebtorNo . " - " . $OrderLine->StockID . " x " . $OrderLine->QtyDispatched . " @ " . $OrderLine->Price . "',
 						'" . round(($OrderLine->Price * $OrderLine->QtyDispatched)/$_SESSION['CurrencyRate'],2) . "'
 						)";
@@ -1340,6 +1348,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 								trandate,
 								periodno,
 								account,
+								defaulttag,
 								narrative,
 								amount)
 						VALUES (11,
@@ -1347,6 +1356,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 							'" . $DefaultDispatchDate . "',
 							'" . $PeriodNo . "',
 							'" . $SalesGLAccounts['discountglcode'] . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'" . $_SESSION['CreditItems']->DebtorNo . " - " . $OrderLine->StockID . " @ " . ($OrderLine->DiscountPercent * 100) . "%',
 							'" . -round(($OrderLine->Price * $OrderLine->QtyDispatched * $OrderLine->DiscountPercent)/$_SESSION['CurrencyRate'],2) . "'
 							)";
@@ -1368,6 +1378,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount)
 					VALUES (11,
@@ -1375,6 +1386,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 						'" . $DefaultDispatchDate . "',
 						'" . $PeriodNo . "',
 						'" . $_SESSION['CompanyRecord']['debtorsact'] . "',
+						'" . $_SESSION['DefaultTag'] . "',
 						'" . $_SESSION['CreditItems']->DebtorNo . "',
 						'" . -round(($_SESSION['CreditItems']->total + $_SESSION['CreditItems']->FreightCost + $TaxTotal)/$_SESSION['CurrencyRate'],2) . "'
 					)";
@@ -1394,6 +1406,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount)
 				VALUES (11,
@@ -1401,6 +1414,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 					'" . $DefaultDispatchDate . "',
 					'" . $PeriodNo . "',
 					'" . $_SESSION['CompanyRecord']['freightact'] . "',
+					'" . $_SESSION['DefaultTag'] . "',
 					'" . $_SESSION['CreditItems']->DebtorNo . "',
 					'" . round($_SESSION['CreditItems']->FreightCost/$_SESSION['CurrencyRate'],2) . "'
 					)";
@@ -1418,6 +1432,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 						trandate,
 						periodno,
 						account,
+						defaulttag,
 						narrative,
 						amount
 						)
@@ -1427,6 +1442,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 						'" . $DefaultDispatchDate . "',
 						'" . $PeriodNo . "',
 						'" . $TaxGLCodes[$TaxAuthID] . "',
+						'" . $_SESSION['DefaultTag'] . "',
 						'" . $_SESSION['CreditItems']->DebtorNo . "',
 						'" . ($TaxAmount/$_SESSION['CurrencyRate']) . "'
 					)";

@@ -163,6 +163,7 @@ if (isset($_POST['submit'])) {
 								trandate,
 								periodno,
 								account,
+								defaulttag,
 								narrative,
 								amount)
 						VALUES (42,
@@ -170,6 +171,7 @@ if (isset($_POST['submit'])) {
 							'" . Date('Y-m-d') . "',
 							'" . $PeriodNo . "',
 							'" . $OldDetails['costact'] . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'" . $AssetID . ' ' . _('change category') . ' ' . $OldDetails['assetcategoryid'] . ' - ' . $_POST['AssetCategoryID'] . "',
 							'" . -$OldDetails['cost']. "'
 							)";
@@ -183,6 +185,7 @@ if (isset($_POST['submit'])) {
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount)
 						VALUES (42,
@@ -190,6 +193,7 @@ if (isset($_POST['submit'])) {
 							'" . Date('Y-m-d') . "',
 							'" . $PeriodNo . "',
 							'" . $NewAccounts['costact'] . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'" . $AssetID . ' ' . _('change category') . ' ' . $OldDetails['assetcategoryid'] . ' - ' . $_POST['AssetCategoryID'] . "',
 							'" . $OldDetails['cost']. "'
 							)";
@@ -203,6 +207,7 @@ if (isset($_POST['submit'])) {
 									trandate,
 									periodno,
 									account,
+									defaulttag,
 									narrative,
 									amount)
 								VALUES (42,
@@ -210,6 +215,7 @@ if (isset($_POST['submit'])) {
 									'" . Date('Y-m-d') . "',
 									'" . $PeriodNo . "',
 									'" . $OldDetails['accumdepnact'] . "',
+									'" . $_SESSION['DefaultTag'] . "',
 									'" . $AssetID . ' ' . _('change category') . ' ' . $OldDetails['assetcategoryid'] . ' - ' . $_POST['AssetCategoryID'] . "',
 									'" . $OldDetails['accumdepn']. "'
 								)";
@@ -223,6 +229,7 @@ if (isset($_POST['submit'])) {
 									trandate,
 									periodno,
 									account,
+									defaulttag,
 									narrative,
 									amount)
 								VALUES (42,
@@ -230,6 +237,7 @@ if (isset($_POST['submit'])) {
 									'" . Date('Y-m-d') . "',
 									'" . $PeriodNo . "',
 									'" . $NewAccounts['accumdepnact'] . "',
+									'" . $_SESSION['DefaultTag'] . "',
 									'" . $AssetID . ' ' . _('change category') . ' ' . $OldDetails['assetcategoryid'] . ' - ' . $_POST['AssetCategoryID'] . "',
 									'" . $OldDetails['accumdepn']. "'
 								)";
@@ -338,6 +346,7 @@ if (isset($_POST['submit'])) {
 										trandate,
 										periodno,
 										account,
+										defaulttag,
 										narrative,
 										amount)
 									VALUES (43,
@@ -345,6 +354,7 @@ if (isset($_POST['submit'])) {
 										'" . Date('Y-m-d') . "',
 										'" . $PeriodNo . "',
 										'" . $AssetRow['costact'] . "',
+										'" . $_SESSION['DefaultTag'] . "',
 										'" . _('Delete asset') . ' ' . $AssetID . "',
 										'" . -$AssetRow['cost']. "'
 									)";
@@ -358,6 +368,7 @@ if (isset($_POST['submit'])) {
 										trandate,
 										periodno,
 										account,
+										defaulttag,
 										narrative,
 										amount)
 									VALUES (43,
@@ -365,6 +376,7 @@ if (isset($_POST['submit'])) {
 										'" . Date('Y-m-d') . "',
 										'" . $PeriodNo . "',
 										'" . $AssetRow['accumdepnact'] . "',
+										'" . $_SESSION['DefaultTag'] . "',
 										'" . _('Delete asset') . ' ' . $AssetID . "',
 										'" . $Asset['accumdepn']. "'
 									)";

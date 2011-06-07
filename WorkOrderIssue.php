@@ -301,6 +301,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order issues ente
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount)
 					VALUES (28,
@@ -308,6 +309,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order issues ente
 						'" . FormatDateForSQL($_POST['issuedate']) . "',
 						'" . $PeriodNo . "',
 						'" . $WORow['wipact'] . "',
+						'" . $_SESSION['DefaultTag'] . "',
 						'" . $_POST['WO'] . " " . $_POST['IssueItem'] . ' x ' . $QuantityIssued . " @ " . number_format($IssueItemRow['cost'],2) . "',
 						'" . ($IssueItemRow['cost'] * $QuantityIssued) . "')";
 
@@ -321,6 +323,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order issues ente
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount)
 					VALUES (28,
@@ -328,6 +331,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order issues ente
 						'" . FormatDateForSQL($_POST['issuedate']) . "',
 						'" . $PeriodNo . "',
 						'" . $StockGLCode['stockact'] . "',
+						'" . $_SESSION['DefaultTag'] . "',
 						'" . $_POST['WO'] . " " . $_POST['IssueItem'] . ' x ' . $QuantityIssued . " @ " . number_format($IssueItemRow['cost'],2) . "',
 						'" . -($IssueItemRow['cost'] * $QuantityIssued) . "')";
 

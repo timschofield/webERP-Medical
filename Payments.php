@@ -294,6 +294,7 @@ if (isset($_POST['CommitBatch'])){
 								trandate,
 								periodno,
 								account,
+								defaulttag,
 								narrative,
 								amount,
 								chequeno,
@@ -303,6 +304,7 @@ if (isset($_POST['CommitBatch'])){
 						'" . FormatDateForSQL($_SESSION['PaymentDetail']->DatePaid) . "',
 						'" . $PeriodNo . "',
 						'" . $PaymentItem->GLCode . "',
+						'" . $_SESSION['DefaultTag'] . "',
 						'" . $PaymentItem->Narrative . "',
 						'" . ($PaymentItem->Amount/$_SESSION['PaymentDetail']->ExRate/$_SESSION['PaymentDetail']->FunctionalExRate) . "',
 						'". $PaymentItem->cheque ."',
@@ -449,6 +451,7 @@ if (isset($_POST['CommitBatch'])){
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount) ";
 				$SQL=$SQL . "valueS (
@@ -457,6 +460,7 @@ if (isset($_POST['CommitBatch'])){
 						'" . FormatDateForSQL($_SESSION['PaymentDetail']->DatePaid) . "',
 						'" . $PeriodNo . "',
 						'" . $_SESSION['CompanyRecord']['creditorsact'] . "',
+						'" . $_SESSION['DefaultTag'] . "',
 						'" . $_SESSION['PaymentDetail']->Narrative . "',
 						'" . $CreditorTotal . "'
 					)";
@@ -471,6 +475,7 @@ if (isset($_POST['CommitBatch'])){
 								trandate,
 								periodno,
 								account,
+								defaulttag,
 								narrative,
 								amount) ";
 					$SQL=$SQL . "valueS (22,
@@ -478,6 +483,7 @@ if (isset($_POST['CommitBatch'])){
 						'" . FormatDateForSQL($_SESSION['PaymentDetail']->DatePaid) . "',
 						'" . $PeriodNo . "',
 						'" . $_SESSION['CompanyRecord']["pytdiscountact"] . "',
+						'" . $_SESSION['DefaultTag'] . "',
 						'" . $_SESSION['PaymentDetail']->Narrative . "',
 						'" . (-$_SESSION['PaymentDetail']->Discount/$_SESSION['PaymentDetail']->ExRate/$_SESSION['PaymentDetail']->FunctionalExRate) . "'
 					  )";
@@ -497,6 +503,7 @@ if (isset($_POST['CommitBatch'])){
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount) ";
 				$SQL = $SQL . "valueS ('" . $Transtype . "',
@@ -504,6 +511,7 @@ if (isset($_POST['CommitBatch'])){
 						'" . FormatDateForSQL($_SESSION['PaymentDetail']->DatePaid) . "',
 						'" . $PeriodNo . "',
 						'" . $_SESSION['PaymentDetail']->Account . "',
+						'" . $_SESSION['DefaultTag'] . "',
 						'" . $_SESSION['PaymentDetail']->Narrative . "',
 						'" . (-$_SESSION['PaymentDetail']->Amount/$_SESSION['PaymentDetail']->ExRate/$_SESSION['PaymentDetail']->FunctionalExRate) . "'
 					)";

@@ -672,6 +672,7 @@ then do the updates and inserts to process the credit note entered */
 																		trandate,
 																		periodno,
 																		account,
+																		defaulttag,
 																		narrative,
 																		amount,
 																		jobref)
@@ -680,6 +681,7 @@ then do the updates and inserts to process the credit note entered */
 													'" . $SQLCreditNoteDate . "',
 													'" . $PeriodNo . "',
 													'" . $EnteredGLCode->GLCode . "',
+													'" . $_SESSION['DefaultTag'] . "',
 													'" . $_SESSION['SuppTrans']->SupplierID . " " . $EnteredGLCode->Narrative . "',
 											 		'" . round(-$EnteredGLCode->Amount/$_SESSION['SuppTrans']->ExRate,2) ."',
 											 		'' )";
@@ -704,6 +706,7 @@ then do the updates and inserts to process the credit note entered */
 																		trandate,
 																		periodno,
 																		account,
+																		defaulttag,
 																		narrative,
 																		amount)
 								VALUES (21,
@@ -711,6 +714,7 @@ then do the updates and inserts to process the credit note entered */
 												'" . $SQLCreditNoteDate . "',
 												'" . $PeriodNo . "',
 												'" . $_SESSION['SuppTrans']->GRNAct . "',
+												'" . $_SESSION['DefaultTag'] . "',
 												'" . $_SESSION['SuppTrans']->SupplierID . ' ' .	 _('Shipment credit against') . ' ' . $ShiptChg->ShiptRef . "',
 												'" . round(-$ShiptChg->Amount/$_SESSION['SuppTrans']->ExRate,2) . "')";
 
@@ -730,6 +734,7 @@ then do the updates and inserts to process the credit note entered */
 																	trandate,
 																	periodno,
 																	account,
+																	defaulttag,
 																	narrative,
 																	amount)
 													VALUES (21, '" .
@@ -737,6 +742,7 @@ then do the updates and inserts to process the credit note entered */
 																	'" . $SQLCreditNoteDate . "',
 																	'" . $PeriodNo . "',
 																	'". $AssetAddition->CostAct . "',
+																	'" . $_SESSION['DefaultTag'] . "',
 																	'" . $_SESSION['SuppTrans']->SupplierID . ' ' . _('Asset Credit') . ' ' . $AssetAddition->AssetID . ': '  . $AssetAddition->Description . "',
 																	'" . (-$AssetAddition->Amount/ $_SESSION['SuppTrans']->ExRate) . "')";
 				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The general ledger transaction for the asset addition could not be added because');
@@ -763,6 +769,7 @@ then do the updates and inserts to process the credit note entered */
 								trandate,
 								periodno,
 								account,
+								defaulttag,
 								narrative,
 								amount)
 							VALUES (21,
@@ -770,6 +777,7 @@ then do the updates and inserts to process the credit note entered */
 								'" . $SQLCreditNoteDate. "',
 								'" . $PeriodNo . "',
 								'". $WIPAccount . "',
+								'" . $_SESSION['DefaultTag'] . "',
 								'" . $_SESSION['SuppTrans']->SupplierID . ' ' . _('Contract charge against') . ' ' . $Contract->ContractRef . "',
 								'" . (-$Contract->Amount/ $_SESSION['SuppTrans']->ExRate) . "')";
 
@@ -795,6 +803,7 @@ then do the updates and inserts to process the credit note entered */
 										trandate,
 										periodno,
 										account,
+										defaulttag,
 										narrative,
 										amount)
 								VALUES (21,
@@ -802,6 +811,7 @@ then do the updates and inserts to process the credit note entered */
 									'" . $SQLCreditNoteDate . "',
 									'" . $PeriodNo . "',
 									'" . $_SESSION['SuppTrans']->GRNAct . "',
+									'" . $_SESSION['DefaultTag'] . "',
 									'" . $_SESSION['SuppTrans']->SupplierID . ' - ' . _('GRN Credit Note') . ' ' . $EnteredGRN->GRNNo . ' - ' . $EnteredGRN->ItemCode . ' x ' . $EnteredGRN->This_QuantityInv . ' @  ' .
 								 _('std cost of') . ' ' . $EnteredGRN->StdCostUnit  . "',
 								 	'" . (-$EnteredGRN->StdCostUnit * $EnteredGRN->This_QuantityInv) . "')";
@@ -865,6 +875,7 @@ then do the updates and inserts to process the credit note entered */
 											trandate,
 											periodno,
 											account,
+											defaulttag,
 											narrative,
 											amount)
 									VALUES (21,
@@ -872,6 +883,7 @@ then do the updates and inserts to process the credit note entered */
 										'" . $SQLCreditNoteDate . "',
 										'" . $PeriodNo . "',
 										'" . $StockGLCode['purchpricevaract'] . "',
+										'" . $_SESSION['DefaultTag'] . "',
 										'" . $_SESSION['SuppTrans']->SupplierID . ' - ' . _('GRN Credit Note') . ' ' . $EnteredGRN->GRNNo .
 									 ' - ' . $EnteredGRN->ItemCode . ' x ' . ($EnteredGRN->This_QuantityInv-$TotalQuantityOnHand) . ' x  ' . _('price var of') . ' ' .
 									 number_format(($EnteredGRN->ChgPrice  / $_SESSION['SuppTrans']->ExRate) - $EnteredGRN->StdCostUnit,2)  .
@@ -890,6 +902,7 @@ then do the updates and inserts to process the credit note entered */
 															trandate,
 															periodno,
 															account,
+															defaulttag,
 															narrative,
 															amount)
 														VALUES (
@@ -898,6 +911,7 @@ then do the updates and inserts to process the credit note entered */
 															'" . $SQLCreditNoteDate . "',
 															'" . $PeriodNo . "',
 															'" . $StockGLCode['stockact'] . "',
+															'" . $_SESSION['DefaultTag'] . "',
 															'" . $_SESSION['SuppTrans']->SupplierID . ' - ' . _('Average Cost Adj') .
 																' - ' . $EnteredGRN->ItemCode . ' x ' . $TotalQuantityOnHand  . ' x ' .
 																number_format(($EnteredGRN->ChgPrice  / $_SESSION['SuppTrans']->ExRate) - $EnteredGRN->StdCostUnit,2)  . "',
@@ -941,6 +955,7 @@ then do the updates and inserts to process the credit note entered */
 															trandate,
 															periodno,
 															account,
+															defaulttag,
 															narrative,
 															amount)
 														VALUES (
@@ -949,6 +964,7 @@ then do the updates and inserts to process the credit note entered */
 															'" . $SQLCreditNoteDate . "',
 															'" . $PeriodNo . "',
 															'" . $StockGLCode['purchpricevaract'] . "',
+															'" . $_SESSION['DefaultTag'] . "',
 															'" . $_SESSION['SuppTrans']->SupplierID . ' - ' . _('GRN') . ' ' . $EnteredGRN->GRNNo .
 																' - ' . $EnteredGRN->ItemCode . ' x ' . $EnteredGRN->This_QuantityInv . ' x  ' . _('price var of') . ' ' .
 																number_format(($EnteredGRN->ChgPrice  / $_SESSION['SuppTrans']->ExRate) - $EnteredGRN->StdCostUnit,2)  . "',
@@ -984,6 +1000,7 @@ then do the updates and inserts to process the credit note entered */
 														trandate,
 														periodno,
 														account,
+														defaulttag,
 														narrative,
 														amount)
 													VALUES (
@@ -992,6 +1009,7 @@ then do the updates and inserts to process the credit note entered */
 														'" . $SQLCreditNoteDate . "',
 														'" . $PeriodNo . "',
 														'" . $GLCode . "',
+														'" . $_SESSION['DefaultTag'] . "',
 														'" . $_SESSION['SuppTrans']->SupplierID . ' - ' . _('GRN') . ' ' . $EnteredGRN->GRNNo . ' - ' .
 															$EnteredGRN->ItemDescription . ' x ' . $EnteredGRN->This_QuantityInv . ' x  ' . _('price var') .
 															' ' . number_format(($EnteredGRN->ChgPrice  / $_SESSION['SuppTrans']->ExRate) - $EnteredGRN->StdCostUnit,2) . "',
@@ -1012,6 +1030,7 @@ then do the updates and inserts to process the credit note entered */
 									trandate,
 									periodno,
 									account,
+									defaulttag,
 									narrative,
 									amount)
 								VALUES (
@@ -1020,6 +1039,7 @@ then do the updates and inserts to process the credit note entered */
 									'" . $SQLCreditNoteDate . "',
 									'" . $PeriodNo . "',
 									'" . $_SESSION['SuppTrans']->GRNAct . "',
+									'" . $_SESSION['DefaultTag'] . "',
 									'" . $_SESSION['SuppTrans']->SupplierID . ' - ' . _('GRN') .' ' . $EnteredGRN->GRNNo . ' - ' . $EnteredGRN->ItemCode . ' x ' .
 											$EnteredGRN->This_QuantityInv . ' @ ' . $_SESSION['SuppTrans']->CurrCode . $EnteredGRN->ChgPrice . ' @ ' . _('a rate of') . ' ' . $_SESSION['SuppTrans']->ExRate . "',
 									'" . round(-$EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv,2) / $_SESSION['SuppTrans']->ExRate . "'
@@ -1047,6 +1067,7 @@ then do the updates and inserts to process the credit note entered */
 									trandate,
 									periodno,
 									account,
+									defaulttag,
 									narrative,
 									amount)
 							VALUES (21,
@@ -1054,6 +1075,7 @@ then do the updates and inserts to process the credit note entered */
 								'" . $SQLCreditNoteDate . "',
 								'" . $PeriodNo . "',
 								'" . $Tax->TaxGLCode . "',
+								'" . $_SESSION['DefaultTag'] . "',
 								'" . $_SESSION['SuppTrans']->SupplierID . ' - ' . _('Credit note') . ' ' .
 							 $_SESSION['SuppTrans']->SuppReference . ' ' . $_SESSION['SuppTrans']->CurrCode .
 							 $Tax->TaxOvAmount  . ' @ ' . _('a rate of') . ' ' . $_SESSION['SuppTrans']->ExRate . "',
@@ -1073,6 +1095,7 @@ then do the updates and inserts to process the credit note entered */
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount)
 					 VALUES (21,
@@ -1080,6 +1103,7 @@ then do the updates and inserts to process the credit note entered */
 						'" . $SQLCreditNoteDate . "',
 						'" . $PeriodNo . "',
 						'" . $_SESSION['SuppTrans']->CreditorsAct . "',
+						'" . $_SESSION['DefaultTag'] . "',
 						'" . $_SESSION['SuppTrans']->SupplierID . ' - ' . _('Credit Note') . ' ' . $_SESSION['SuppTrans']->SuppReference . ' ' .  $_SESSION['SuppTrans']->CurrCode . number_format($_SESSION['SuppTrans']->OvAmount + $_SESSION['SuppTrans']->OvGST,2)  . ' @ ' . _('a rate of') . ' ' . $_SESSION['SuppTrans']->ExRate .  "',
 						'" . round($LocalTotal + ($TaxTotal / $_SESSION['SuppTrans']->ExRate),2) . "')";
 

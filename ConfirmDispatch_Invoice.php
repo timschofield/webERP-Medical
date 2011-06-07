@@ -1281,6 +1281,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 																		trandate,
 																		periodno,
 																		account,
+																		defaulttag,
 																		narrative,
 																		amount)
 																VALUES (
@@ -1289,6 +1290,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 																	'" . $DefaultDispatchDate . "',
 																	'" . $PeriodNo . "',
 																	'" . GetCOGSGLAccount($Area, $OrderLine->StockID, $_SESSION['Items']->DefaultSalesType, $db) . "',
+																	'" . $_SESSION['DefaultTag'] . "',
 																	'" . $_SESSION['Items']->DebtorNo . " - " . $OrderLine->StockID . " x " . $OrderLine->QtyDispatched . " @ " . $OrderLine->StandardCost . "',
 																	'" . $OrderLine->StandardCost * $OrderLine->QtyDispatched . "')";
 
@@ -1304,6 +1306,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 																		trandate,
 																		periodno,
 																		account,
+																		defaulttag,
 																		narrative,
 																		amount)
 																VALUES (
@@ -1312,6 +1315,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 																	'" . $DefaultDispatchDate . "',
 																	'" . $PeriodNo . "',
 																	'" . $StockGLCode['stockact'] . "',
+																	'" . $_SESSION['DefaultTag'] . "',
 																	'" . $_SESSION['Items']->DebtorNo . " - " . $OrderLine->StockID . " x " . $OrderLine->QtyDispatched . " @ " . $OrderLine->StandardCost . "',
 																	'" . (-$OrderLine->StandardCost * $OrderLine->QtyDispatched) . "')";
 
@@ -1331,6 +1335,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 																			trandate,
 																			periodno,
 																			account,
+																			defaulttag,
 																			narrative,
 																			amount )
 																	VALUES (
@@ -1339,6 +1344,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 																		'" . $DefaultDispatchDate . "',
 																		'" . $PeriodNo . "',
 																		'" . $SalesGLAccounts['salesglcode'] . "',
+																		'" . $_SESSION['DefaultTag'] . "',
 																		'" . $_SESSION['Items']->DebtorNo . " - " . $OrderLine->StockID . " x " . $OrderLine->QtyDispatched . " @ " . $OrderLine->Price . "',
 																		'" . (-$OrderLine->Price * $OrderLine->QtyDispatched/$_SESSION['CurrencyRate']) . "')";
 
@@ -1353,6 +1359,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 																				trandate,
 																				periodno,
 																				account,
+																				defaulttag,
 																				narrative,
 																				amount)
 																			VALUES (
@@ -1361,6 +1368,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 																				'" . $DefaultDispatchDate . "',
 																				'" . $PeriodNo . "',
 																				'" . $SalesGLAccounts['discountglcode'] . "',
+																				'" . $_SESSION['DefaultTag'] . "',
 																				'" . $_SESSION['Items']->DebtorNo . " - " . $OrderLine->StockID . " @ " . ($OrderLine->DiscountPercent * 100) . "%',
 																				'" . ($OrderLine->Price * $OrderLine->QtyDispatched * $OrderLine->DiscountPercent/$_SESSION['CurrencyRate']) . "')";
 
@@ -1399,6 +1407,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 																			trandate,
 																			periodno,
 																			account,
+																			defaulttag,
 																			narrative,
 																			amount)
 																	VALUES (
@@ -1407,6 +1416,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 																		'" . $DefaultDispatchDate . "',
 																		'" . $PeriodNo . "',
 																		'" . $DisposalRow['accumdepnact'] . "',
+																		'" . $_SESSION['DefaultTag'] . "',
 																		'" . $_SESSION['Items']->DebtorNo . ' - ' . $OrderLine->StockID . ' ' . _('disposal') . "',
 																		'" . -$DisposalRow['accumdpen'] . "')";
 
@@ -1421,6 +1431,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 																			trandate,
 																			periodno,
 																			account,
+																			defaulttag,
 																			narrative,
 																			amount)
 																	VALUES (
@@ -1429,6 +1440,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 																		'" . $DefaultDispatchDate . "',
 																		'" . $PeriodNo . "',
 																		'" . $DisposalRow['costact'] . "',
+																		'" . $_SESSION['DefaultTag'] . "',
 																		'" . $_SESSION['Items']->DebtorNo . " - " . $OrderLine->StockID . ' ' . _('disposal') . "',
 																		'" . -$DisposalRow['cost'] . "')";
 
@@ -1443,6 +1455,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 																			trandate,
 																			periodno,
 																			account,
+																			defaulttag,
 																			narrative,
 																			amount )
 																	VALUES (
@@ -1451,6 +1464,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 																		'" . $DefaultDispatchDate . "',
 																		'" . $PeriodNo . "',
 																		'" . $DisposalRow['disposalact'] . "',
+																		'" . $_SESSION['DefaultTag'] . "',
 																		'" . $_SESSION['Items']->DebtorNo . " - " . $OrderLine->StockID .  ' ' . _('disposal') . "',
 																		'" . ($DisposalRow['cost']-$DisposalRow['accumdepn']) . "')";
 
@@ -1465,6 +1479,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 																		trandate,
 																		periodno,
 																		account,
+																		defaulttag,
 																		narrative,
 																		amount )
 																VALUES (
@@ -1473,6 +1488,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 																	'" . $DefaultDispatchDate . "',
 																	'" . $PeriodNo . "',
 																	'" . $DisposalRow['disposalact'] . "',
+																	'" . $_SESSION['DefaultTag'] . "',
 																	'" . $_SESSION['Items']->DebtorNo . " - " . $OrderLine->StockID .  ' ' . _('disposal') . "',
 																	'" . (-$OrderLine->Price * $OrderLine->QtyDispatched* (1 - $OrderLine->DiscountPercent)/$_SESSION['CurrencyRate']) . "')";
 
@@ -1530,6 +1546,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 																	trandate,
 																	periodno,
 																	account,
+																	defaulttag,
 																	narrative,
 																	amount)
 																VALUES (
@@ -1538,6 +1555,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 																	'" . $DefaultDispatchDate . "',
 																	'" . $PeriodNo . "',
 																	'" . $_SESSION['CompanyRecord']['debtorsact'] . "',
+																	'" . $_SESSION['DefaultTag'] . "',
 																	'" . $_SESSION['Items']->DebtorNo . "',
 																	'" . (($_SESSION['Items']->total + $_SESSION['Items']->FreightCost + $TaxTotal)/$_SESSION['CurrencyRate']) . "')";
 
@@ -1555,6 +1573,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 						trandate,
 						periodno,
 						account,
+						defaulttag,
 						narrative,
 						amount	)
 				VALUES (
@@ -1563,6 +1582,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 					'" . $DefaultDispatchDate . "',
 					'" . $PeriodNo . "',
 					'" . $_SESSION['CompanyRecord']['freightact'] . "',
+					'" . $_SESSION['DefaultTag'] . "',
 					'" . $_SESSION['Items']->DebtorNo . "',
 					'" . (-($_SESSION['Items']->FreightCost)/$_SESSION['CurrencyRate']) . "')";
 
@@ -1578,6 +1598,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 						trandate,
 						periodno,
 						account,
+						defaulttag,
 						narrative,
 						amount)
 					VALUES (
@@ -1586,6 +1607,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 						'" . $DefaultDispatchDate . "',
 						'" . $PeriodNo . "',
 						'" . $TaxGLCodes[$TaxAuthID] . "',
+						'" . $_SESSION['DefaultTag'] . "',
 						'" . $_SESSION['Items']->DebtorNo . "',
 						'" . (-$TaxAmount/$_SESSION['CurrencyRate']) . "')";
 

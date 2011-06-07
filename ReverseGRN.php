@@ -287,6 +287,7 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 				trandate,
 				periodno,
 				account,
+				defaulttag,
 				narrative,
 				amount)
 			VALUES (
@@ -295,6 +296,7 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 				'" . $GRN['deliverydate'] . "',
 				'" . $PeriodNo . "',
 				'" . $GRN['glcode'] . "',
+				'" . $_SESSION['DefaultTag'] . "',
 				'" . _('GRN Reversal for PO') .": " . $GRN['orderno'] . " " . $_POST['SupplierID'] . " - " . $GRN['itemcode'] . "-" . $GRN['itemdescription'] . " x " . $QtyToReverse . " @ " . number_format($GRN['stdcostunit'],2) . "',
 				'" . -($GRN['stdcostunit'] * $QtyToReverse) . "'
 				)";
@@ -309,6 +311,7 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 																trandate,
 																periodno,
 																account,
+																defaulttag,
 																narrative,
 																amount)
 			VALUES (
@@ -316,8 +319,9 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 				'" . $_GET['GRNNo'] . "',
 				'" . $GRN['deliverydate'] . "',
 				'" . $PeriodNo . "',
-				'" . $_SESSION['CompanyRecord']['grnact'] . "', '"
-				. _('GRN Reversal PO') . ': ' . $GRN['orderno'] . " " . $_POST['SupplierID'] . " - " . $GRN['itemcode'] . "-" . $GRN['itemdescription'] . " x " . $QtyToReverse . " @ " . number_format($GRN['stdcostunit'],2) . "',
+				'" . $_SESSION['CompanyRecord']['grnact'] . "', 
+				'" . $_SESSION['DefaultTag'] . "',
+				'" . _('GRN Reversal PO') . ': ' . $GRN['orderno'] . " " . $_POST['SupplierID'] . " - " . $GRN['itemcode'] . "-" . $GRN['itemdescription'] . " x " . $QtyToReverse . " @ " . number_format($GRN['stdcostunit'],2) . "',
 				'" . $GRN['stdcostunit'] * $QtyToReverse . "'
 				)";
 

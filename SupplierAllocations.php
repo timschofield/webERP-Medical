@@ -207,6 +207,7 @@ if (isset($_POST['UpdateDatabase'])){
 																trandate,
 																periodno,
 																account,
+																defaulttag,
 																narrative,
 																amount)
 														VALUES ('" . $_SESSION['Alloc']->TransType . "',
@@ -214,6 +215,7 @@ if (isset($_POST['UpdateDatabase'])){
 															'" . $_SESSION['Alloc']->TransDate . "',
 															'" . $PeriodNo . "',
 															'" . $_SESSION['CompanyRecord']['purchasesexchangediffact'] . "',
+															'" . $_SESSION['DefaultTag'] . "',
 															'". _('Exch diff') . "',
 															'" . $MovtInDiffOnExch . "')";
 
@@ -229,6 +231,7 @@ if (isset($_POST['UpdateDatabase'])){
 																trandate,
 																periodno,
 																account,
+																defaulttag,
 																narrative,
 																amount)
 														VALUES ('" . $_SESSION['Alloc']->TransType . "',
@@ -236,6 +239,7 @@ if (isset($_POST['UpdateDatabase'])){
 															'" . $_SESSION['Alloc']->TransDate . "',
 															'" . $PeriodNo . "',
 															'" . $_SESSION['CompanyRecord']['creditorsact'] . "',
+															'" . $_SESSION['DefaultTag'] . "',
 															'" . _('Exch Diff') . "',
 															'" . -$MovtInDiffOnExch . "')";
 

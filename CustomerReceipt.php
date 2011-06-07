@@ -268,6 +268,7 @@ if (isset($_POST['CommitBatch'])){
 											trandate,
 											periodno,
 											account,
+											defaulttag,
 											narrative,
 											amount,
 											tag)
@@ -277,6 +278,7 @@ if (isset($_POST['CommitBatch'])){
 						'" . FormatDateForSQL($_SESSION['ReceiptBatch']->DateBanked) . "',
 						'" . $PeriodNo . "',
 						'" . $ReceiptItem->GLCode . "',
+						'" . $_SESSION['DefaultTag'] . "',
 						'" . $ReceiptItem->Narrative . "',
 						'" . -($ReceiptItem->Amount/$_SESSION['ReceiptBatch']->ExRate/$_SESSION['ReceiptBatch']->FunctionalExRate) . "',
 						'" . $ReceiptItem->tag . "'" . "
@@ -427,6 +429,7 @@ if (isset($_POST['CommitBatch'])){
 										trandate,
 										periodno,
 										account,
+										defaulttag,
 										narrative,
 										amount)
 				VALUES (
@@ -435,6 +438,7 @@ if (isset($_POST['CommitBatch'])){
 					'" . FormatDateForSQL($_SESSION['ReceiptBatch']->DateBanked) . "',
 					'" . $PeriodNo . "',
 					'" . $_SESSION['ReceiptBatch']->Account . "',
+					'" . $_SESSION['DefaultTag'] . "',
 					'" . $_SESSION['ReceiptBatch']->Narrative . "',
 					'" . $BatchReceiptsTotal . "'
 				)";
@@ -477,6 +481,7 @@ if (isset($_POST['CommitBatch'])){
 										trandate,
 										periodno,
 										account,
+										defaulttag,
 										narrative,
 										amount)
 						VALUES (
@@ -485,6 +490,7 @@ if (isset($_POST['CommitBatch'])){
 							'" . FormatDateForSQL($_SESSION['ReceiptBatch']->DateBanked) . "',
 							'" . $PeriodNo . "',
 							'". $_SESSION['CompanyRecord']['debtorsact'] . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'" . $_SESSION['ReceiptBatch']->Narrative . "',
 							'" . -$BatchDebtorTotal . "'
 							)";
@@ -501,6 +507,7 @@ if (isset($_POST['CommitBatch'])){
 										trandate,
 										periodno,
 										account,
+										defaulttag,
 										narrative,
 										amount)
 						VALUES (
@@ -509,6 +516,7 @@ if (isset($_POST['CommitBatch'])){
 								'" . FormatDateForSQL($_SESSION['ReceiptBatch']->DateBanked) . "',
 								'" . $PeriodNo . "',
 								'" . $_SESSION['CompanyRecord']['pytdiscountact'] . "',
+								'" . $_SESSION['DefaultTag'] . "',
 								'" . $_SESSION['ReceiptBatch']->Narrative . "',
 								'" . $BatchDiscount . "'
 							)";

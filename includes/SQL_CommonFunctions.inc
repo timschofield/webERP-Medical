@@ -172,6 +172,7 @@ function ItemCostUpdateGL($db, $StockID, $NewCost, $OldCost, $QOH) {
 										trandate,
 										periodno,
 										account,
+										defaulttag,
 										narrative,
 										amount)
 									VALUES (35,
@@ -179,6 +180,7 @@ function ItemCostUpdateGL($db, $StockID, $NewCost, $OldCost, $QOH) {
 										'" . Date('Y-m-d') . "',
 										'" . $PeriodNo . "',
 										'" . $StockGLCode['adjglact'] . "',
+										'" . $_SESSION['DefaultTag'] . "',
 										'" . $StockID . ' ' . _('cost was') . ' ' . $OldCost . ' ' . _('changed to') . ' ' . $NewCost . ' x ' . _('Quantity on hand of') . ' ' . $QOH . "',
 										'" . (-$ValueOfChange) . "')";
 
@@ -191,6 +193,7 @@ function ItemCostUpdateGL($db, $StockID, $NewCost, $OldCost, $QOH) {
 										trandate,
 										periodno,
 										account,
+										defaulttag,
 										narrative,
 										amount)
 									VALUES (35,
@@ -198,6 +201,7 @@ function ItemCostUpdateGL($db, $StockID, $NewCost, $OldCost, $QOH) {
 										'" . Date('Y-m-d') . "',
 										'" . $PeriodNo . "',
 										'" . $StockGLCode['stockact'] . "',
+										'" . $_SESSION['DefaultTag'] . "',
 										'" . $StockID . ' ' . _('cost was') . ' ' . $OldCost . ' ' . _('changed to') .' ' . $NewCost . ' x ' . _('Quantity on hand of') . ' ' . $QOH . "',
 										'" . $ValueOfChange . "'
 									)";

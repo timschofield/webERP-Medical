@@ -250,6 +250,7 @@ if (isset($_POST['EnterAdjustment']) && $_POST['EnterAdjustment']!= ''){
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							amount,
 							narrative,
 							tag)
@@ -258,6 +259,7 @@ if (isset($_POST['EnterAdjustment']) && $_POST['EnterAdjustment']!= ''){
 						'" . $SQLAdjustmentDate . "',
 						'" . $PeriodNo . "',
 						'" .  $StockGLCodes['adjglact'] . "',
+						'" . $_SESSION['DefaultTag'] . "',
 						'" . $_SESSION['Adjustment']->StandardCost * -($_SESSION['Adjustment']->Quantity) . "',
 						'" . $_SESSION['Adjustment']->StockID . " x " . $_SESSION['Adjustment']->Quantity . " @ " .
 							$_SESSION['Adjustment']->StandardCost . " " . $_SESSION['Adjustment']->Narrative . "',
@@ -273,6 +275,7 @@ if (isset($_POST['EnterAdjustment']) && $_POST['EnterAdjustment']!= ''){
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							amount,
 							narrative,
 							tag)
@@ -281,6 +284,7 @@ if (isset($_POST['EnterAdjustment']) && $_POST['EnterAdjustment']!= ''){
 						'" . $SQLAdjustmentDate . "',
 						'" . $PeriodNo . "',
 						'" .  $StockGLCodes['stockact'] . "',
+						'" . $_SESSION['DefaultTag'] . "',
 						'" . $_SESSION['Adjustment']->StandardCost * $_SESSION['Adjustment']->Quantity . "',
 						'" . $_SESSION['Adjustment']->StockID . " x " . $_SESSION['Adjustment']->Quantity . " @ " . $_SESSION['Adjustment']->StandardCost . " " . $_SESSION['Adjustment']->Narrative . "',
 						'" . $_SESSION['Adjustment']->tag . "'

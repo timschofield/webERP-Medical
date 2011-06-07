@@ -154,6 +154,7 @@ if (isset($_POST['UpdateDatabase'])) {
 								trandate,
 								periodno,
 								account,
+								defaulttag,
 								narrative,
 								amount
 							) VALUES (
@@ -162,6 +163,7 @@ if (isset($_POST['UpdateDatabase'])) {
 								'" . $_SESSION['Alloc']->TransDate . "',
 								'" . $PeriodNo . "',
 								'" . $_SESSION['CompanyRecord']['exchangediffact'] . "',
+								'" . $_SESSION['DefaultTag'] . "',
 								'',
 								'" . $MovtInDiffOnExch . "'
 							)";
@@ -175,6 +177,7 @@ if (isset($_POST['UpdateDatabase'])) {
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount
 		  				) VALUES (
@@ -183,6 +186,7 @@ if (isset($_POST['UpdateDatabase'])) {
 							'" . $_SESSION['Alloc']->TransDate . "',
 							'" . $PeriodNo . "',
 							'" . $_SESSION['CompanyRecord']['debtorsact'] . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'',
 							'" . -$MovtInDiffOnExch . "'
 						)";

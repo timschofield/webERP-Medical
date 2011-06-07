@@ -493,6 +493,7 @@ while ($RecurrOrderRow = DB_fetch_array($RecurrOrdersDueResult)){
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount
 						)
@@ -502,6 +503,7 @@ while ($RecurrOrderRow = DB_fetch_array($RecurrOrdersDueResult)){
 						'" . $DelDate . "',
 						'" . $PeriodNo . "',
 						'" . $SalesGLAccounts['salesglcode'] . "',
+						'" . $_SESSION['DefaultTag'] . "',
 						'" . $RecurrOrderRow['debtorno'] . " - " . $RecurrOrderLineRow['stkcode'] . " x " . $RecurrOrderLineRow['quantity'] . " @ " . $RecurrOrderLineRow['unitprice'] . "',
 						'" . (-$RecurrOrderLineRow['unitprice'] * $RecurrOrderLineRow['quantity']/$CurrencyRate) . "'
 					)";
@@ -520,6 +522,7 @@ while ($RecurrOrderRow = DB_fetch_array($RecurrOrdersDueResult)){
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount
 						)
@@ -529,6 +532,7 @@ while ($RecurrOrderRow = DB_fetch_array($RecurrOrdersDueResult)){
 							'" . $DelDate . "',
 							'" . $PeriodNo . "',
 							'" . $SalesGLAccounts['discountglcode'] . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'" . $RecurrOrderRow['debtorno'] . " - " . $RecurrOrderLineRow['stkcode'] . " @ " . ($RecurrOrderLineRow['discountpercent'] * 100) . "%',
 							'" . ($RecurrOrderLineRow['unitprice'] * $RecurrOrderLineRow['quantity'] * $RecurrOrderLineRow['discountpercent']/$CurrencyRate) . "'
 						)";
@@ -560,6 +564,7 @@ while ($RecurrOrderRow = DB_fetch_array($RecurrOrdersDueResult)){
 									trandate,
 									periodno,
 									account,
+									defaulttag,
 									narrative,
 									amount)
 								VALUES (
@@ -568,6 +573,7 @@ while ($RecurrOrderRow = DB_fetch_array($RecurrOrdersDueResult)){
 									'" . $DelDate. "',
 									'" . $PeriodNo . "',
 									'" . $Tax['GLCode'] . "',
+									'" . $_SESSION['DefaultTag'] . "',
 									'" . $RecurrOrderRow['debtorno'] . "-" . $Tax['TaxAuthDescription'] . "',
 									'" . (-$Tax['FXAmount']/$CurrencyRate) . "'
 								)";
@@ -586,6 +592,7 @@ while ($RecurrOrderRow = DB_fetch_array($RecurrOrdersDueResult)){
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount
 							)
@@ -595,6 +602,7 @@ while ($RecurrOrderRow = DB_fetch_array($RecurrOrdersDueResult)){
 							'" . $DelDate . "',
 							'" . $PeriodNo . "',
 							'" . $_SESSION['CompanyRecord']['debtorsact'] . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'" . $RecurrOrderRow['debtorno'] . "',
 							'" . $TotalInvLocalCurr . "'
 						)";
@@ -613,6 +621,7 @@ while ($RecurrOrderRow = DB_fetch_array($RecurrOrdersDueResult)){
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount)
 						VALUES (
@@ -621,6 +630,7 @@ while ($RecurrOrderRow = DB_fetch_array($RecurrOrdersDueResult)){
 							'" . $DelDate . "',
 							'" . $PeriodNo . "',
 							'" . $_SESSION['CompanyRecord']['freightact'] . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'" . $RecurrOrderRow['debtorno'] . "',
 							'" . (-($RecurrOrderRow['freightcost'])/$CurrencyRate) . "'
 						)";

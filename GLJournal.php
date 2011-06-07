@@ -64,6 +64,7 @@ if (isset($_POST['CommitBatch']) and $_POST['CommitBatch']==_('Accept and Proces
 						trandate,
 						periodno,
 						account,
+						defaulttag,
 						narrative,
 						amount,
 						tag)
@@ -72,6 +73,7 @@ if (isset($_POST['CommitBatch']) and $_POST['CommitBatch']==_('Accept and Proces
 						'" . FormatDateForSQL($_SESSION['JournalDetail']->JnlDate) . "',
 						'" . $PeriodNo . "',
 						'" . $JournalItem->GLCode . "',
+						'" . $_SESSION['DefaultTag'] . "',
 						'" . $JournalItem->Narrative . "',
 						'" . $JournalItem->Amount . "',
 						'" . $JournalItem->tag."'
@@ -86,6 +88,7 @@ if (isset($_POST['CommitBatch']) and $_POST['CommitBatch']==_('Accept and Proces
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount,
 							tag)
@@ -94,6 +97,7 @@ if (isset($_POST['CommitBatch']) and $_POST['CommitBatch']==_('Accept and Proces
 							'" . FormatDateForSQL($_SESSION['JournalDetail']->JnlDate) . "',
 							'" . ($PeriodNo + 1) . "',
 							'" . $JournalItem->GLCode . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'Reversal - " . $JournalItem->Narrative . "',
 							'" . -($JournalItem->Amount) ."',
 							'".$JournalItem->tag."'

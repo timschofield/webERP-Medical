@@ -134,6 +134,7 @@ if (isset($_POST['PrintPDFAndProcess'])){
 						trandate,
 						periodno,
 						account,
+						defaulttag,
 						narrative,
 						amount )
 				VALUES (22,
@@ -141,6 +142,7 @@ if (isset($_POST['PrintPDFAndProcess'])){
 					'" . FormatDateForSQL($_POST['AmountsDueBy']) . "',
 					'" . $PeriodNo . "',
 					'" . $_POST['BankAccount'] . "',
+					'" . $_SESSION['DefaultTag'] . "',
 					'" . $SupplierID . " - " . $SupplierName . ' ' . _('payment run on') . ' ' . Date($_SESSION['DefaultDateFormat']) . ' - ' . $PaytReference . "',
 					'" . (-$AccumBalance/ $_POST['ExRate']) . "')";
 
@@ -165,6 +167,7 @@ if (isset($_POST['PrintPDFAndProcess'])){
 						trandate,
 						periodno,
 						account,
+						defaulttag,
 						narrative,
 						amount )
 				VALUES (22,
@@ -172,6 +175,7 @@ if (isset($_POST['PrintPDFAndProcess'])){
 					'" . FormatDateForSQL($_POST['AmountsDueBy']) . "',
 					'" . $PeriodNo . "',
 					'" . $_SESSION['CompanyRecord']['creditorsact'] . "',
+					'" . $_SESSION['DefaultTag'] . "',
 					'" . $SupplierID . ' - ' . $SupplierName . ' ' . _('payment run on') . ' ' . Date($_SESSION['DefaultDateFormat']) . ' - ' . $PaytReference . "',
 					'" . ($AccumBalance/ $_POST['ExRate']  + $AccumDiffOnExch) . "')";
 
@@ -197,6 +201,7 @@ if (isset($_POST['PrintPDFAndProcess'])){
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount )
 						VALUES (22,
@@ -204,6 +209,7 @@ if (isset($_POST['PrintPDFAndProcess'])){
 							'" . FormatDateForSQL($_POST['AmountsDueBy']) . "',
 							'" . $PeriodNo . "',
 							'" . $_SESSION['CompanyRecord']['purchasesexchangediffact'] . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'" . $SupplierID . ' - ' . $SupplierName . ' ' . _('payment run on') . ' ' . Date($_SESSION['DefaultDateFormat']) . " - " . $PaytReference . "',
 							'" . (-$AccumDiffOnExch) . "')";
 

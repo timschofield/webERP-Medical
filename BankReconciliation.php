@@ -52,6 +52,7 @@ if (isset($_POST['PostExchangeDifference']) and is_numeric($_POST['DoExchangeDif
 									trandate,
 									periodno,
 									account,
+									defaulttag,
 									narrative,
 									amount)
 								  VALUES (36,
@@ -59,6 +60,7 @@ if (isset($_POST['PostExchangeDifference']) and is_numeric($_POST['DoExchangeDif
 									'" . FormatDateForSQL($PostingDate) . "',
 									'" . $PeriodNo . "',
 									'" . $_SESSION['CompanyRecord']['exchangediffact'] . "',
+									'" . $_SESSION['DefaultTag'] . "',
 									'" . $BankAccountName . ' ' . _('reconciliation on') . " " .
 										Date($_SESSION['DefaultDateFormat']) . "','" . $ExchangeDifference . "')";
 
@@ -70,6 +72,7 @@ if (isset($_POST['PostExchangeDifference']) and is_numeric($_POST['DoExchangeDif
 									trandate,
 									periodno,
 									account,
+									defaulttag,
 									narrative,
 									amount)
 								  VALUES (36,
@@ -77,6 +80,7 @@ if (isset($_POST['PostExchangeDifference']) and is_numeric($_POST['DoExchangeDif
 									'" . FormatDateForSQL($PostingDate) . "',
 									'" . $PeriodNo . "',
 									'" . $_POST['BankAccount'] . "',
+									'" . $_SESSION['DefaultTag'] . "',
 									'" . $BankAccountName . ' ' . _('reconciliation on') . ' ' . Date($_SESSION['DefaultDateFormat']) . "',
 									'" . (-$ExchangeDifference) . "')";
 

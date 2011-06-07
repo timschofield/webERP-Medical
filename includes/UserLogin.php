@@ -68,6 +68,7 @@ function userLogin($Name, $Password, $db) {
 			$_SESSION['UserBranch'] = $myrow['branchcode'];
 			$_SESSION['DefaultPageSize'] = $myrow['pagesize'];
 			$_SESSION['UserStockLocation'] = $myrow['defaultlocation'];
+			$_SESSION['DefaultTag'] = $myrow['defaulttag'];
 			$_SESSION['UserEmail'] = $myrow['email'];
 			$_SESSION['ModulesEnabled'] = explode(",", $myrow['modulesallowed']);
 			$_SESSION['UsersRealName'] = $myrow['realname'];

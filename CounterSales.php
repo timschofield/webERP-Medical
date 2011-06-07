@@ -1645,6 +1645,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 												trandate,
 												periodno,
 												account,
+												defaulttag,
 												narrative,
 												amount)
 										VALUES ( 10,
@@ -1652,6 +1653,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 												'" . $DefaultDispatchDate . "',
 												'" . $PeriodNo . "',
 												'" . GetCOGSGLAccount($Area, $OrderLine->StockID, $_SESSION['Items'.$identifier]->DefaultSalesType, $db) . "',
+												'" . $_SESSION['DefaultTag'] . "',
 												'" . $_SESSION['Items'.$identifier]->DebtorNo . " - " . $OrderLine->StockID . " x " . $OrderLine->Quantity . " @ " . $OrderLine->StandardCost . "',
 												'" . $OrderLine->StandardCost * $OrderLine->Quantity . "')";
 
@@ -1667,6 +1669,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 												trandate,
 												periodno,
 												account,
+												defaulttag,
 												narrative,
 												amount )
 										VALUES ( 10,
@@ -1674,6 +1677,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 											'" . $DefaultDispatchDate . "',
 											'" . $PeriodNo . "',
 											'" . $StockGLCode['stockact'] . "',
+											'" . $_SESSION['DefaultTag'] . "',
 											'" . $_SESSION['Items'.$identifier]->DebtorNo . " - " . $OrderLine->StockID . " x " . $OrderLine->Quantity . " @ " . $OrderLine->StandardCost . "',
 											'" . (-$OrderLine->StandardCost * $OrderLine->Quantity) . "')";
 
@@ -1692,6 +1696,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 												trandate,
 												periodno,
 												account,
+												defaulttag,
 												narrative,
 												amount
 											)
@@ -1700,6 +1705,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 											'" . $DefaultDispatchDate . "',
 											'" . $PeriodNo . "',
 											'" . $SalesGLAccounts['salesglcode'] . "',
+											'" . $_SESSION['DefaultTag'] . "',
 											'" . $_SESSION['Items'.$identifier]->DebtorNo . " - " . $OrderLine->StockID . " x " . $OrderLine->Quantity . " @ " . $OrderLine->Price . "',
 											'" . (-$OrderLine->Price * $OrderLine->Quantity/$ExRate) . "')";
 
@@ -1714,6 +1720,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 													trandate,
 													periodno,
 													account,
+													defaulttag,
 													narrative,
 													amount
 												)
@@ -1722,6 +1729,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 													'" . $DefaultDispatchDate . "',
 													'" . $PeriodNo . "',
 													'" . $SalesGLAccounts['discountglcode'] . "',
+													'" . $_SESSION['DefaultTag'] . "',
 													'" . $_SESSION['Items'.$identifier]->DebtorNo . " - " . $OrderLine->StockID . " @ " . ($OrderLine->DiscountPercent * 100) . "%',
 													'" . ($OrderLine->Price * $OrderLine->Quantity * $OrderLine->DiscountPercent/$ExRate) . "')";
 
@@ -1741,6 +1749,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 												trandate,
 												periodno,
 												account,
+												defaulttag,
 												narrative,
 												amount	)
 											VALUES ( 10,
@@ -1748,6 +1757,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 												'" . $DefaultDispatchDate . "',
 												'" . $PeriodNo . "',
 												'" . $_SESSION['CompanyRecord']['debtorsact'] . "',
+												'" . $_SESSION['DefaultTag'] . "',
 												'" . $_SESSION['Items'.$identifier]->DebtorNo . "',
 												'" . (($_SESSION['Items'.$identifier]->total + $_POST['TaxTotal'])/$ExRate) . "')";
 
@@ -1764,6 +1774,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 													trandate,
 													periodno,
 													account,
+													defaulttag,
 													narrative,
 													amount	)
 												VALUES ( 10,
@@ -1771,6 +1782,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 													'" . $DefaultDispatchDate . "',
 													'" . $PeriodNo . "',
 													'" . $_SESSION['Items'.$identifier]->TaxGLCodes[$TaxAuthID] . "',
+													'" . $_SESSION['DefaultTag'] . "',
 													'" . $_SESSION['Items'.$identifier]->DebtorNo . "',
 													'" . (-$TaxAmount/$ExRate) . "')";
 
@@ -1789,6 +1801,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 						trandate,
 						periodno,
 						account,
+						defaulttag,
 						narrative,
 						amount)
 					VALUES (12,
@@ -1796,6 +1809,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 						'" . $DefaultDispatchDate . "',
 						'" . $PeriodNo . "',
 						'" . $_POST['BankAccount'] . "',
+						'" . $_SESSION['DefaultTag'] . "',
 						'" . $_SESSION['Items'.$identifier]->LocationName . ' ' . _('Counter Sale') . ' ' . $InvoiceNo . "',
 						'" . ($_POST['AmountPaid']/$ExRate) . "')";
 				$DbgMsg = _('The SQL that failed to insert the GL transaction for the bank account debit was');
@@ -1808,6 +1822,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 						trandate,
 						periodno,
 						account,
+						defaulttag,
 						narrative,
 						amount)
 				VALUES (12,
@@ -1815,6 +1830,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 					'" . $DefaultDispatchDate . "',
 					'" . $PeriodNo . "',
 					'" . $_SESSION['CompanyRecord']['debtorsact'] . "',
+					'" . $_SESSION['DefaultTag'] . "',
 					'" . $_SESSION['Items'.$identifier]->LocationName . ' ' . _('Counter Sale') . ' ' . $InvoiceNo . "',
 					'" . -($_POST['AmountPaid']/$ExRate) . "')";
 				$DbgMsg = _('The SQL that failed to insert the GL transaction for the debtors account credit was');

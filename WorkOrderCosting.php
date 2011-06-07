@@ -324,6 +324,7 @@ If (isset($_POST['Close'])) {
 										trandate,
 										periodno,
 										account,
+										defaulttag,
 										narrative,
 										amount)
 									VALUES (29,
@@ -331,6 +332,7 @@ If (isset($_POST['Close'])) {
 										'" . Date('Y-m-d') . "',
 										'" . $PeriodNo . "',
 										'" . $WORow['materialuseagevarac'] . "',
+										'" . $_SESSION['DefaultTag'] . "',
 										'" . $_POST['WO'] . ' - ' . $WORow['stockid'] . ' ' . _('share of variance') . "',
 										'" . (-$TotalVariance*$ShareProportion*(1-$ProportionOnHand)) . "')";
 
@@ -345,6 +347,7 @@ If (isset($_POST['Close'])) {
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount)
 						VALUES (29,
@@ -352,6 +355,7 @@ If (isset($_POST['Close'])) {
 							'" . Date('Y-m-d') . "',
 							'" . $PeriodNo . "',
 							'" . $WORow['stockact'] . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'" . $_POST['WO'] . ' - ' . $WORow['stockid'] . ' ' . _('share of variance') . "',
 							'" . (-$TotalVariance*$ShareProportion*$ProportionOnHand) . "')";
 
@@ -364,6 +368,7 @@ If (isset($_POST['Close'])) {
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount)
 						VALUES (29,
@@ -371,6 +376,7 @@ If (isset($_POST['Close'])) {
 							'" . Date('Y-m-d') . "',
 							'" . $PeriodNo . "',
 							'" . $WORow['wipact'] . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'" . $_POST['WO'] . ' - ' . $WORow['stockid'] . ' ' . _('share of variance') . "',
 							'" . ($TotalVariance*$ShareProportion) . "')";
 
@@ -401,6 +407,7 @@ If (isset($_POST['Close'])) {
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount)
 						VALUES (29,
@@ -408,6 +415,7 @@ If (isset($_POST['Close'])) {
 							'" . Date('Y-m-d') . "',
 							'" . $PeriodNo . "',
 							'" . $WORow['materialuseagevarac'] . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'" . $_POST['WO'] . ' - ' . $WORow['stockid'] . ' ' . _('share of usage variance') . "',
 							'" . (-$TotalUsageVar*$ShareProportion) . "')";
 
@@ -420,6 +428,7 @@ If (isset($_POST['Close'])) {
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount)
 						VALUES (29,
@@ -427,6 +436,7 @@ If (isset($_POST['Close'])) {
 							'" . Date('Y-m-d') . "',
 							'" . $PeriodNo . "',
 							'" . $WORow['wipact'] . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'" . $_POST['WO'] . ' - ' . $WORow['stockid'] . ' ' . _('share of usage variance') . "',
 							'" . ($TotalUsageVar*$ShareProportion) . "')";
 
@@ -443,6 +453,7 @@ If (isset($_POST['Close'])) {
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount)
 						VALUES (29,
@@ -450,6 +461,7 @@ If (isset($_POST['Close'])) {
 							'" . Date('Y-m-d') . "',
 							'" . $PeriodNo . "',
 							'" . $WORow['purchpricevaract'] . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'" . $_POST['WO'] . ' - ' . $WORow['stockid'] . ' ' . _('share of cost variance') . "',
 							'" . (-$TotalCostVar*$ShareProportion) . "')";
 
@@ -462,6 +474,7 @@ If (isset($_POST['Close'])) {
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount)
 						VALUES (29,
@@ -469,6 +482,7 @@ If (isset($_POST['Close'])) {
 							'" . Date('Y-m-d') . "',
 							'" . $PeriodNo . "',
 							'" . $WORow['wipact'] . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'" . $_POST['WO'] . ' - ' . $WORow['stockid'] . ' ' . _('share of cost variance') . "',
 							'" . ($TotalCostVar*$ShareProportion) . "')";
 

@@ -628,6 +628,7 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 																	trandate,
 																	periodno,
 																	account,
+																	defaulttag,
 																	narrative,
 																	amount)
 															VALUES (
@@ -636,6 +637,7 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 																'" . $_POST['DefaultReceivedDate'] . "',
 																'" . $PeriodNo . "',
 																'" . $OrderLine->GLCode . "',
+																'" . $_SESSION['DefaultTag'] . "',
 																'PO: " . $_SESSION['PO']->OrderNo . " " . $_SESSION['PO']->SupplierID . " - " . $OrderLine->StockID
 																		. " - " . $OrderLine->ItemDescription . " x " . $OrderLine->ReceiveQty*$OrderLine->ConversionFactor . " @ " .
 																			number_format($CurrentStandardCost,2) . "',
@@ -654,6 +656,7 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 																	trandate,
 																	periodno,
 																	account,
+																	defaulttag,
 																	narrative,
 																	amount)
 															VALUES (25,
@@ -661,6 +664,7 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 																'" . $_POST['DefaultReceivedDate'] . "',
 																'" . $PeriodNo . "',
 																'" . $_SESSION['CompanyRecord']['grnact'] . "',
+																'" . $_SESSION['DefaultTag'] . "',
 																'" . _('PO') . ': ' . $_SESSION['PO']->OrderNo . ' ' . $_SESSION['PO']->SupplierID . ' - ' .
 																			$OrderLine->StockID . ' - ' . $OrderLine->ItemDescription . ' x ' .
 																				$OrderLine->ReceiveQty*$OrderLine->ConversionFactor . ' @ ' . number_format($UnitCost,2) . "',
