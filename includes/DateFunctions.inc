@@ -448,11 +448,11 @@ function FormatDateWithTimeForSQL ($datetime) {
 function LastDayOfMonth ( $DateEntry) {
 	/*Expects a date in DefaultDateFormat and
 	 * Returns the last day of the month in the entered date
-	 * in the DefaultDateFormat 
-	 * 
+	 * in the DefaultDateFormat
+	 *
 	 * mktime (0,0,0 month, day, year)
 	 */
-	
+
 	$DateEntry = trim($DateEntry);
 
 	if (strpos($DateEntry,'/')) {
@@ -491,8 +491,8 @@ function LastDayOfMonth ( $DateEntry) {
 			}
 		}
 		$DateStamp =  mktime(0,0,0, $Date_Array[1]+1, 0, $Date_Array[2]);
-		
-		
+
+
 	} elseif ($_SESSION['DefaultDateFormat']=='m/d/Y') {
 		if (strlen($Date_Array[2])==2) {
 			if ((int)$Date_Array[2] <=60) {
@@ -573,7 +573,7 @@ function Date1GreaterThanDate2 ($Date1, $Date2) {
 	}
 
 	/* The dates are equal, so return an error state */
-	return 1;
+	return 0;
 
 }
 
