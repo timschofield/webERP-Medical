@@ -1,7 +1,5 @@
 <?php
 
-$PageSecurity=1;
-
 include('includes/session.inc');
 $title = _('Billing Patient Admissions');
 include('includes/header.inc');
