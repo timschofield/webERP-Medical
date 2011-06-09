@@ -80,6 +80,8 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 	$PeriodNo = GetPeriod(Date($_SESSION['DefaultDateFormat']), $db);
 	if (isset($_POST['SubmitInsurance'])) {
 		$_POST['Received']=0;
+	} else {
+		$_POST['InsuranceRef']='';
 	}
 	$sql = "INSERT INTO debtortrans (
 				transno,
@@ -94,6 +96,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 				ovgst,
 				rate,
 				invtext,
+				reference,
 				shipvia,
 				alloc )
 			VALUES (
@@ -109,12 +112,48 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 				'0',
 				'1',
 				'" . _('Invoice for admission of Patient number').' '.$_POST['PatientNo'] . "',
+				'" . $_POST['InsuranceRef'] . "',
 				'1',
 				'" . $_POST['Received'] . "')";
 
 	$ErrMsg =_('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The debtor transaction record could not be inserted because');
 	$DbgMsg = _('The following SQL to insert the debtor transaction record was used');
- 	$Result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
+	$Result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
+
+	$SQL = "INSERT INTO stockmoves (
+						stockid,
+						type,
+						transno,
+						loccode,
+						trandate,
+						debtorno,
+						branchcode,
+						prd,
+						reference,
+						qty,
+						standardcost,
+						show_on_inv_crds,
+						newqoh
+					) VALUES (
+						'" . $_POST['StockID'] . "',
+						 10,
+						'" . $InvoiceNo . "',
+						'" . $_SESSION['UserStockLocation'] . "',
+						'" . date('Y-m-d H-i-s') . "',
+						'" . $_POST['PatientNo'] . "',
+						'" . $_POST['BranchNo'] . "',
+						'" . $PeriodNo . "',
+						'" . _('Invoice for admission of Patient number').' '.$_POST['PatientNo'] . "',
+						1,
+						'" . $_POST['Price'] . "',
+						0,
+						0
+					)";
+
+	$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Stock movement records for'). ' '. $_POST['StockID'] . ' ' .
+			_('could not be inserted because');
+	$DbgMsg = _('The following SQL to insert the stock movement records was used');
+	$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
 
 	$SalesGLAccounts = GetSalesGLAccount('AN', $_POST['StockID'], 'AN', $db);
 	$SQL = "INSERT INTO gltrans (	type,
@@ -260,6 +299,7 @@ if (isset($_POST['SubmitCash'])) {
 	$result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
 
 	DB_Txn_Commit($db);
+	echo '<meta http-equiv="Refresh" content="0; url='.$rootpath.'/PDFReceipt.php?FromTransNo='.$InvoiceNo.'&amp;InvOrCredit=Invoice&amp;PrintPDF=True">';
 	include('includes/footer.inc');
 	exit;
 } elseif (isset($_POST['SubmitInsurance'])) {
@@ -613,7 +653,7 @@ if (isset($_POST['Patient'])) {
 		echo '<div class="centre"><input type="submit" name="SubmitCash" value="Make Payment" /></div>';
 	} else {
 		echo '<tr><td>'._('Insurance Reference').'</td>';
-		echo '<td><input type="text" class="number" size="10" name="InsuranceRef" value="" /></td></tr>';
+		echo '<td><input type="text" size="10" name="InsuranceRef" value="" /></td></tr>';
 		echo '<tr><td>'._('Comments').'</td>';
 		echo '<td><input type="text" size="50" name="Comments" value="" /></td></tr>';
 		echo '</table><br />';
