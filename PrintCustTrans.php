@@ -637,6 +637,7 @@ if (($InvOrCredit == 'Invoice' or $InvOrCredit == 'Credit') and isset($PrintPDF)
 					AND stockmoves.transno='" . $FromTransNo . "'
 					AND stockmoves.show_on_inv_crds=1";
 				}
+
 				echo '<hr>';
 				echo '<div class="centre"><font size=2>' . _('All amounts stated in') . ' ' . $myrow['currcode'] . '</font></div>';
 				$result = DB_query($sql, $db);

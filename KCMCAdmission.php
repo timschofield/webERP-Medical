@@ -131,7 +131,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 						prd,
 						reference,
 						qty,
-						standardcost,
+						price,
 						show_on_inv_crds,
 						newqoh
 					) VALUES (
@@ -144,9 +144,9 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 						'" . $_POST['BranchNo'] . "',
 						'" . $PeriodNo . "',
 						'" . _('Invoice for admission of Patient number').' '.$_POST['PatientNo'] . "',
-						1,
+						-1,
 						'" . $_POST['Price'] . "',
-						0,
+						1,
 						0
 					)";
 
