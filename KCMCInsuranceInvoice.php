@@ -341,7 +341,8 @@ if (!isset($_POST['Submit'])) {
 			ON debtortrans.debtorno=debtorsmaster.debtorno
 			WHERE debtortrans.branchcode='".$_POST['Company']."'
 			AND debtortrans.prd='".$_POST['Month']."'
-			AND debtortrans.alloc=0";
+			AND debtortrans.alloc=0
+			AND debtortrans.debtorno<>'".$_POST['Company']."'";
 	$result=DB_query($sql, $db);
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
