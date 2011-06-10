@@ -15,6 +15,15 @@ if (isset($_POST['Process'])) {
 			}
 		}
 	}
+
+	if (!isset($InvoiceID)) {
+		echo '<br />';
+		prnMsg( _('There are no invoices for this company in this period'), 'info');
+		echo '<br /><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Return to selection screen') . '</a></div>';
+		include('includes/footer.inc');
+		exit;
+	}
+
 	$MainInvoiceNo = GetNextTransNo(10, $db);
 	DB_Txn_Begin($db);
 	$OrderNo = GetNextTransNo(30, $db);
@@ -49,8 +58,9 @@ if (isset($_POST['Process'])) {
 	$OrderLine=0;
 	foreach ($InvoiceID as $ID => $Post) {
 
-		// Credit original
-		$sql = "SELECT transno,
+		if ($Post=='on') {
+			// Credit original
+			$sql = "SELECT transno,
 					debtorno,
 					branchcode,
 					trandate,
@@ -60,12 +70,12 @@ if (isset($_POST['Process'])) {
 					reference
 				FROM debtortrans
 				WHERE id='".$ID."'";
-		$result=DB_query($sql, $db);
-		$myrow=DB_fetch_array($result);
+			$result=DB_query($sql, $db);
+			$myrow=DB_fetch_array($result);
 
-		$CreditNo = GetNextTransNo(11, $db);
-		$PeriodNo = GetPeriod(Date($_SESSION['DefaultDateFormat']), $db);
-		$sql = "INSERT INTO debtortrans (
+			$CreditNo = GetNextTransNo(11, $db);
+			$PeriodNo = GetPeriod(Date($_SESSION['DefaultDateFormat']), $db);
+			$sql = "INSERT INTO debtortrans (
 				transno,
 				type,
 				debtorno,
@@ -98,11 +108,11 @@ if (isset($_POST['Process'])) {
 				'1',
 				'" . -$myrow['ovamount'] . "')";
 
-		$ErrMsg =_('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The debtor transaction record could not be inserted because');
-		$DbgMsg = _('The following SQL to insert the debtor transaction record was used');
-		$Result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
+			$ErrMsg =_('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The debtor transaction record could not be inserted because');
+			$DbgMsg = _('The following SQL to insert the debtor transaction record was used');
+			$Result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 
-		$SQL = "INSERT INTO stockmoves (
+			$SQL = "INSERT INTO stockmoves (
 						stockid,
 						type,
 						transno,
@@ -132,19 +142,19 @@ if (isset($_POST['Process'])) {
 						0
 					)";
 
-		$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Stock movement records for'). ' '. $_POST['StockID'] . ' ' .
-			_('could not be inserted because');
-		$DbgMsg = _('The following SQL to insert the stock movement records was used');
-		$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+			$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Stock movement records for'). ' '. $_POST['StockID'] . ' ' .
+				_('could not be inserted because');
+			$DbgMsg = _('The following SQL to insert the stock movement records was used');
+			$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
 
-		$sql="UPDATE debtortrans
-				SET alloc='".$myrow['ovamount']."'
-				WHERE id='".$ID."'";
-		$Result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
+			$sql="UPDATE debtortrans
+					SET alloc='".$myrow['ovamount']."'
+					WHERE id='".$ID."'";
+			$Result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 
-		//Then add line to Company Invoice
+			//Then add line to Company Invoice
 
-		$LineItemSQL = "INSERT INTO salesorderdetails (orderlineno,
+			$LineItemSQL = "INSERT INTO salesorderdetails (orderlineno,
 													orderno,
 													stkcode,
 													unitprice,
@@ -168,55 +178,55 @@ if (isset($_POST['Process'])) {
 													'1',
 													1
 												)";
-		$DbgMsg = _('Trouble inserting a line of a sales order. The SQL that failed was');
-		$Ins_LineItemResult = DB_query($LineItemSQL,$db,$ErrMsg,$DbgMsg,true);
+			$DbgMsg = _('Trouble inserting a line of a sales order. The SQL that failed was');
+			$Ins_LineItemResult = DB_query($LineItemSQL,$db,$ErrMsg,$DbgMsg,true);
 
-		if ($OrderLine==0) {
-			$sql = "INSERT INTO debtortrans (
-				transno,
-				type,
-				debtorno,
-				branchcode,
-				trandate,
-				inputdate,
-				prd,
-				order_,
-				ovamount,
-				ovgst,
-				rate,
-				invtext,
-				reference,
-				shipvia,
-				alloc )
-			VALUES (
-				'". $MainInvoiceNo . "',
-				10,
-				'" . $myrow['branchcode'] . "',
-				'" . $myrow['branchcode'] . "',
-				'" . $myrow['trandate'] . "',
-				'" . date('Y-m-d H-i-s') . "',
-				'" . $PeriodNo . "',
-				'" . $OrderNo . "',
-				'" . $myrow['ovamount'] . "',
-				'0',
-				'1',
-				'" . _('Transfer Invoice number').' '.$myrow['transno'] . ' ' . _('to').' '.$myrow['branchcode']. "',
-				'" . $myrow['reference'] . "',
-				'1',
-				'0')";
-		} else {
-			$sql = "UPDATE debtortrans
-						set ovamount=ovamount+'".$myrow['ovamount']."'
-					WHERE transno='".  $MainInvoiceNo . "'
-					AND type=10";
-		}
+			if ($OrderLine==0) {
+				$sql = "INSERT INTO debtortrans (
+					transno,
+					type,
+					debtorno,
+					branchcode,
+					trandate,
+					inputdate,
+					prd,
+					order_,
+					ovamount,
+					ovgst,
+					rate,
+					invtext,
+					reference,
+					shipvia,
+					alloc )
+				VALUES (
+					'". $MainInvoiceNo . "',
+					10,
+					'" . $myrow['branchcode'] . "',
+					'" . $myrow['branchcode'] . "',
+					'" . $myrow['trandate'] . "',
+					'" . date('Y-m-d H-i-s') . "',
+					'" . $PeriodNo . "',
+					'" . $OrderNo . "',
+					'" . $myrow['ovamount'] . "',
+					'0',
+					'1',
+					'" . _('Transfer Invoice number').' '.$myrow['transno'] . ' ' . _('to').' '.$myrow['branchcode']. "',
+					'" . $myrow['reference'] . "',
+					'1',
+					'0')";
+				} else {
+					$sql = "UPDATE debtortrans
+								SET ovamount=ovamount+'".$myrow['ovamount']."'
+							WHERE transno='".  $MainInvoiceNo . "'
+							AND type=10";
+			}
 
-		$ErrMsg =_('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The debtor transaction record could not be inserted because');
-		$DbgMsg = _('The following SQL to insert the debtor transaction record was used');
-		$Result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
+			$ErrMsg =_('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The debtor transaction record could not be inserted because');
+			$DbgMsg = _('The following SQL to insert the debtor transaction record was used');
+			$Result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 
-		$OrderLine++;
-		$SQL = "INSERT INTO stockmoves (
+			$OrderLine++;
+			$SQL = "INSERT INTO stockmoves (
 						stockid,
 						type,
 						transno,
@@ -246,10 +256,11 @@ if (isset($_POST['Process'])) {
 						0
 					)";
 
-		$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Stock movement records for'). ' '. $_POST['StockID'] . ' ' .
-			_('could not be inserted because');
-		$DbgMsg = _('The following SQL to insert the stock movement records was used');
-		$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+			$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Stock movement records for'). ' '. $_POST['StockID'] . ' ' .
+				_('could not be inserted because');
+			$DbgMsg = _('The following SQL to insert the stock movement records was used');
+			$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+		}
 	}
 	DB_Txn_Commit($db);
 }
@@ -312,6 +323,15 @@ if (!isset($_POST['Submit'])) {
 	echo '<div class="centre"><input type="submit" name="Submit" value="' . _('Show Invoices').'" /></div>';
 	echo '</form>';
 } else {
+
+	if ($_POST['Company']=='') {
+		echo '<br />';
+		prnMsg( _('You must select a company from the drop down list'), 'info');
+		echo '<br /><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Return to selection screen') . '</a></div>';
+		include('includes/footer.inc');
+		exit;
+	}
+
 	$sql="SELECT debtorno
 			FROM debtorsmaster
 			WHERE debtorno='".$_POST['Company']."'";
@@ -375,7 +395,7 @@ if (!isset($_POST['Submit'])) {
 	}
 	echo '<input type="hidden" name="Company" value="'.$_POST['Company'].'" />';
 	echo '</table><br />';
-	echo '<div class="centre"><input type="submit" name="Process" value="Process Invoice" /></div>';
+	echo '<div class="centre"><input type="submit" name="Process" value="' . _('Process Invoice') . '" /></div>';
 	echo '</form>';
 }
 
