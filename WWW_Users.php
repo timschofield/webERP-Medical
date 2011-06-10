@@ -482,7 +482,7 @@ while ($myrow=DB_fetch_array($result)){
 
 echo '</select></td></tr>';
 
-echo '<tr><td>' . _('Default Tag') . ':</td>
+echo '<tr><td>' . _('Functional Unit') . ':</td>
 	<td><select name="DefaultTag">';
 
 $myrow[0]='GSF';
