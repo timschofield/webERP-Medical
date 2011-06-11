@@ -41,9 +41,9 @@ $DbgMsg = _('The SQL that failed was');
 
 $LocStockResult = DB_query($sql, $db, $ErrMsg, $DbgMsg);
 
-echo '<table cellpadding=2 class=selection>';
-echo '<tr><th colspan=3>'._('Stock Code') . ':<input type=TEXT name="StockID" size=21 VALUE="' . $StockID . '" maxlength=20>';
-echo '<input type=submit name="Show" VALUE="' . _('Show Re-Order Levels') . '"></th></tr>';
+echo '<table cellpadding="2" class="selection">';
+echo '<tr><th colspan="3">'._('Stock Code') . ':<input type="text" name="StockID" size="21" VALUE="' . $StockID . '" maxlength="20">';
+echo '<input type="submit" name="Show" value="' . _('Show Re-Order Levels') . '"></th></tr>';
 echo '<tr><th colspan=3><font color=BLUE size=3><b>' . $StockID . ' - ' . $myrow[0] . '</b>  (' . _('In Units of') . ' ' . $myrow[1] . ')</font></th></tr>';
 
 $TableHeader = '<tr>
@@ -80,7 +80,7 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 		<td class=number>%s</td>
 		<td><input type=text class="number" name=%s maxlength=10 size=10 VALUE=%s></td>',
 		$myrow['locationname'],
-		number_format($myrow['quantity'], $myrow['decimalplaces']),
+		number_format($myrow['quantity'],$myrow['decimalplaces']),
 		$myrow['loccode'],
 		$myrow['reorderlevel']);
 	$j++;
