@@ -511,7 +511,7 @@ echo '</select></td></tr>';
 			$_POST['tag'] . '</p>';
 
 	echo '<table cellpadding=2 class=selection>';
-	echo '<tr><th colspan=9><div class="centre"><font size=3 color=blue><b>' . _('Statement of Income and Expenditure for'). ' ' .
+	echo '<tr><th colspan=6><div class="centre"><font size=3 color=blue><b>' . _('Statement of Income and Expenditure for'). ' ' .
 			$_POST['tag']. ' '._('during the'). ' ' . $NumberOfMonths . ' ' . _('months to'). ' ' . $PeriodToDate . '</b></font></div></th></tr>';
 
 	if ($_POST['Detail']=='Detailed'){
@@ -533,6 +533,7 @@ echo '</select></td></tr>';
 	$j = 1;
 	$k=0; //row colour counter
 	$Section='';
+	$SectionThisPrdActual= 0;
 	$SectionPrdActual= 0;
 	$SectionPrdLY 	 = 0;
 	$SectionPrdBudget= 0;
@@ -547,6 +548,7 @@ echo '</select></td></tr>';
 	$ParentGroups = array();
 	$Level = 0;
 	$ParentGroups[$Level]='';
+	$GrpThisPrdActual = array(0);
 	$GrpPrdActual = array(0);
 	$GrpPrdLY = array(0);
 	$GrpPrdBudget = array(0);
@@ -561,7 +563,7 @@ echo '</select></td></tr>';
 					if ($_POST['Detail']=='Detailed'){
 						echo '<tr>
 							<td colspan=2></td>
-							<td colspan=6><hr></td>
+							<td colspan=4><hr></td>
 						</tr>';
 						$ActGrpLabel = str_repeat('___',$Level) . $ParentGroups[$Level] . ' ' . _('total');
 					} else {
@@ -570,27 +572,28 @@ echo '</select></td></tr>';
 
 				if ($Section ==3){ /*Income */
 						printf('<tr>
-							<td colspan=2><font size=2><I>%s </I></font></td>
+							<td colspan=2><font size=2><i>%s </i></font></td>
 							<td></td>
 							<td class=number colspan=2>%s</td>
 							<td class=number colspan=2>%s</td>
 							</tr>',
 							$ActGrpLabel,
-							number_format($GrpPrdActual[$Level]),
+							number_format($GrpThisPrdActual[$Level]),
 							number_format($GrpPrdActual[$Level]));
 					} else { /*Costs */
 						printf('<tr>
-							<td colspan=2><font size=2><I>%s </I></font></td>
+							<td colspan=2><font size=2><i>%s </i></font></td>
 							<td class=number colspan=2>%s</td>
 							<td class=number colspan=2>%s</td>
 							<td></td>
 							</tr>',
 							$ActGrpLabel,
-							number_format(-$GrpPrdActual[$Level]),
+							number_format(-$GrpThisPrdActual[$Level]),
 							number_format(-$GrpPrdActual[$Level]));
 					}
 					$GrpPrdLY[$Level] = 0;
 					$GrpPrdActual[$Level] = 0;
+					$GrpThisPrdActual[$Level] = 0;
 					$GrpPrdBudget[$Level] = 0;
 					$ParentGroups[$Level] ='';
 					$Level--;
@@ -599,7 +602,7 @@ echo '</select></td></tr>';
 				if ($_POST['Detail']=='Detailed'){
 						echo '<tr>
 							<td colspan=2></td>
-							<td colspan=6><hr></td>
+							<td colspan=4><hr></td>
 						</tr>';
 						$ActGrpLabel = str_repeat('___',$Level) . $ParentGroups[$Level] . ' ' . _('total');
 					} else {
@@ -608,26 +611,27 @@ echo '</select></td></tr>';
 
 				if ($Section ==4){ /*Income */
 					printf('<tr>
-						<td colspan=2><font size=2><I>%s </I></font></td>
+						<td colspan=2><font size=2><i>%s </i></font></td>
 						<td></td>
 						<td class=number colspan=2>%s</td>
 						<td class=number colspan=2>%s</td>
 						</tr>',
 						$ActGrpLabel,
-						number_format(-$GrpPrdActual[$Level]),
+						number_format(-$GrpThisPrdActual[$Level]),
 						number_format(-$GrpPrdActual[$Level]));
 				} else { /*Costs */
 					printf('<tr>
-						<td colspan=2><font size=2><I>%s </I></font></td>
+						<td colspan=2><font size=2><i>%s </i></font></td>
 						<td class=number colspan=2>%s</td>
 						<td class=number colspan=2>%s</td>
 						<td></td>
 						</tr>',
 						$ActGrpLabel,
-						number_format(-$GrpPrdActual[$Level]),
+						number_format(-$GrpThisPrdActual[$Level]),
 						number_format(-$GrpPrdActual[$Level]));
 				}
 				$GrpPrdActual[$Level] = 0;
+				$GrpThisPrdActual[$Level] = 0;
 				$ParentGroups[$Level] ='';
 			}
 			$j++;
@@ -640,47 +644,47 @@ echo '</select></td></tr>';
 
 					echo '<tr>
 						<td colspan=3></td>
-      						<td><hr></td>
-						<td></td>
-						<td><hr></td>
-						<td></td>
-						<td><hr></td>
+      						<td colspan=4><hr></td>
 					</tr>';
 
 					printf('<tr>
 					<td colspan=2><font size=4>%s</font></td>
 					<td></td>
+					<td class=number>%s</td>
+					<td class=number>%s</td>
 					</tr>',
 					$Sections[$Section],
+					number_format($SectionThisPrdActual),
 					number_format($SectionPrdActual));
 					$TotalIncome = -$SectionPrdActual;
 				} else {
 					echo '<tr>
 					<td colspan=2></td>
-      					<td><hr></td>
+      					<td colspan=4><hr></td>
 					<td></td>
-					<td><hr></td>
-					<td></td>
-					<td><hr></td>
 					</tr>';
 					printf('<tr>
 					<td colspan=2><font size=4>%s</font></td>
 					<td></td>
 					<td class=number>%s</td>
+					<td class=number>%s</td>
 					</tr>',
 					$Sections[$Section],
+					number_format($SectionThisPrdActual),
 					number_format($SectionPrdActual));
 				}
 				if ($Section==2){ /*Cost of Sales - need sub total for Gross Profit*/
 					echo '<tr>
 						<td colspan=2></td>
-						<td colspan=6><hr></td>
+						<td colspan=4><hr></td>
 					</tr>';
 					printf('<tr>
 						<td colspan=2><font size=4>'._('Gross Profit').'</font></td>
 						<td></td>
 						<td class=number>%s</td>
+						<td class=number>%s</td>
 						</tr>',
+					number_format($TotalIncome - $SectionThisPrdActual),
 					number_format($TotalIncome - $SectionPrdActual));
 
 					if ($TotalIncome !=0){
@@ -690,13 +694,15 @@ echo '</select></td></tr>';
 					}
 					echo '<tr>
 						<td colspan=2></td>
-						<td colspan=6><hr></td>
+						<td colspan=4><hr></td>
 					</tr>';
 					printf('<tr>
-						<td colspan=2><font size=2><I>'._('Gross Profit Percent').'</I></font></td>
+						<td colspan=2><font size=2><i>'._('Gross Profit Percent').'</i></font></td>
 						<td></td>
-						<td class=number><I>%s</I></td>
+						<td class=number><i>%s</i></td>
+						<td class=number><i>%s</i></td>
 						</tr><tr><td colspan=6> </td></tr>',
+						number_format($PrdGPPercent,1) . '%',
 						number_format($PrdGPPercent,1) . '%');
 					$j++;
 				}
@@ -707,7 +713,7 @@ echo '</select></td></tr>';
 
 			if ($_POST['Detail']=='Detailed'){
 				printf('<tr>
-					<td colspan=6><font size=4 color=BLUE><b>%s</b></font></td>
+					<td colspan=6><font size=4 color=blue><b>%s</b></font></td>
 					</tr>',
 					$Sections[$myrow['sectioninaccounts']]);
 			}
@@ -727,7 +733,7 @@ echo '</select></td></tr>';
 			$ActGrp = $myrow['groupname'];
 			if ($_POST['Detail']=='Detailed'){
 				printf('<tr>
-					<td colspan=6><font size=2 color=BLUE><b>%s</b></font></td>
+					<td colspan=6><font size=2 color=blue><b>%s</b></font></td>
 					</tr>',
 					$myrow['groupname']);
 					echo $TableHeader;
@@ -747,6 +753,7 @@ echo '</select></td></tr>';
 		for ($i=0;$i<=$Level;$i++){
 			if (!isset($GrpPrdActual[$i])) {$GrpPrdActual[$i]=0;}
 			$GrpPrdActual[$i] +=$AccountPeriodActual;
+			$GrpThisPrdActual[$i] +=$AccountThisPeriodActual;
 		}
 		$SectionPrdActual -=$AccountPeriodActual;
 
@@ -797,7 +804,7 @@ echo '</select></td></tr>';
 				if ($_POST['Detail']=='Detailed'){
 					echo '<tr>
 						<td colspan=2></td>
-						<td colspan=6><hr></td>
+						<td colspan=4><hr></td>
 					</tr>';
 					$ActGrpLabel = str_repeat('___',$Level) . $ParentGroups[$Level] . ' ' . _('total');
 				} else {
@@ -805,8 +812,7 @@ echo '</select></td></tr>';
 				}
 				if ($Section ==4){ /*Income */
 					printf('<tr>
-						<td colspan=2><font size=2><I>%s </I></font></td>
-						<td></td>
+						<td colspan=2><font size=2><i>%s </i></font></td>
 						<td class=number>%s</td>
 						<td></td>
 						<td class=number>%s</td>
@@ -814,14 +820,17 @@ echo '</select></td></tr>';
 						<td class=number>%s</td>
 						</tr>',
 						$ActGrpLabel,
+						number_format(-$GrpThisPrdActual[$Level]),
 						number_format(-$GrpPrdActual[$Level]));
 				} else { /*Costs */
 					printf('<tr>
-						<td colspan=2><font size=2><I>%s </I></font></td>
+						<td colspan=2><font size=2><i>%s </i></font></td>
+						<td class=number>%s</td>
 						<td class=number>%s</td>
 						<td></td>
 						</tr>',
 						$ActGrpLabel,
+						number_format($GrpThisPrdActual[$Level]),
 						number_format($GrpPrdActual[$Level]));
 				}
 				$GrpPrdActual[$Level] = 0;
@@ -832,7 +841,7 @@ echo '</select></td></tr>';
 			if ($_POST['Detail']=='Detailed'){
 					echo '<tr>
 						<td colspan=2></td>
-						<td colspan=6><hr></td>
+						<td colspan=4><hr></td>
 					</tr>';
 					$ActGrpLabel = str_repeat('___',$Level) . $ParentGroups[$Level] . ' ' . _('total');
 				} else {
@@ -841,19 +850,23 @@ echo '</select></td></tr>';
 
 			if ($Section ==4){ /*Income */
 				printf('<tr>
-					<td colspan=2><font size=2><I>%s </I></font></td>
+					<td colspan=2><font size=2><i>%s </i></font></td>
 					<td></td>
-					<td class=number>%s</td>
+					<td class=number colspan=2>%s</td>
+					<td class=number colspan=2>%s</td>
 					</tr>',
 					$ActGrpLabel,
+					number_format(-$GrpThisPrdActual[$Level]),
 					number_format(-$GrpPrdActual[$Level]));
 			} else { /*Costs */
 				printf('<tr>
-					<td colspan=2><font size=2><I>%s </I></font></td>
-					<td class=number>%s</td>
+					<td colspan=2><font size=2><i>%s </i></font></td>
+					<td class=number colspan=2>%s</td>
+					<td class=number colspan=2>%s</td>
 					<td></td>
 					</tr>',
 					$ActGrpLabel,
+					number_format($GrpPrdActual[$Level]),
 					number_format($GrpPrdActual[$Level]));
 			}
 			$GrpPrdActual[$Level] = 0;
@@ -868,11 +881,7 @@ echo '</select></td></tr>';
 
 			echo '<tr>
 				<td colspan=3></td>
-				<td><hr></td>
-				<td></td>
-				<td><hr></td>
-				<td></td>
-				<td><hr></td>
+				<td colspan=4><hr></td>
 			</tr>';
 
 			printf('<tr>
@@ -886,24 +895,22 @@ echo '</select></td></tr>';
 		} else {
 			echo '<tr>
 			<td colspan=2></td>
-			<td><hr></td>
-			<td></td>
-			<td><hr></td>
-			<td></td>
-			<td><hr></td>
+			<td colspan=4><hr></td>
 			</tr>';
 			printf('<tr>
 			<td colspan=2><font size=4>%s</font></td>
 			<td></td>
 			<td class=number>%s</td>
+			<td class=number>%s</td>
 			</tr>',
 			$Sections[$Section],
+			number_format(-$SectionThisPrdActual),
 			number_format(-$SectionPrdActual));
 		}
 		if ($Section==2){ /*Cost of Sales - need sub total for Gross Profit*/
 			echo '<tr>
 				<td colspan=2></td>
-				<td colspan=6><hr></td>
+				<td colspan=4><hr></td>
 			</tr>';
 			printf('<tr>
 				<td colspan=2><font size=4>'._('Gross Profit').'</font></td>
@@ -926,14 +933,14 @@ echo '</select></td></tr>';
 				<td colspan=6><hr></td>
 			</tr>';
 			printf('<tr>
-				<td colspan=2><font size=2><I>'._('Gross Profit Percent').'</I></font></td>
+				<td colspan=2><font size=2><i>'._('Gross Profit Percent').'</i></font></td>
 				<td></td>
-				<td class=number><I>%s</I></td>
+				<td class=number><i>%s</i></td>
 				<td></td>
-				<td class=number><I>%s</I></td>
+				<td class=number><i>%s</i></td>
 				<td></td>
-				<td class=number><I>%s</I></td>
-				</tr><tr><td colspan=6> </td></tr>',
+				<td class=number><i>%s</i></td>
+				</tr><tr><td colspan=4> </td></tr>',
 				number_format($PrdGPPercent,1) . '%');
 			$j++;
 		}
@@ -944,7 +951,7 @@ echo '</select></td></tr>';
 
 		if ($_POST['Detail']=='Detailed' and isset($Sections[$myrow['sectioninaccounts']])){
 			printf('<tr>
-				<td colspan=6><font size=4 color=BLUE><b>%s</b></font></td>
+				<td colspan=6><font size=4 color=blue><b>%s</b></font></td>
 				</tr>',
 				$Sections[$myrow['sectioninaccounts']]);
 		}
@@ -954,11 +961,11 @@ echo '</select></td></tr>';
 
 	echo '<tr>
 		<td colspan=2></td>
-		<td colspan=6><hr></td>
+		<td colspan=4><hr></td>
 		</tr>';
 
-	printf('<tr bgcolor="#ffffff">
-		<td colspan=2><font size=4 color=BLUE><b>'._('Surplus').' - '._('Deficit').'</b></font></td>
+	printf('<tr>
+		<td colspan=2><font size=4 color=blue><b>'._('Surplus').' - '._('Deficit').'</b></font></td>
 		<td></td>
 		<td class=number>%s</td>
 		<td class=number>%s</td>
@@ -969,7 +976,7 @@ echo '</select></td></tr>';
 
 	echo '<tr>
 		<td colspan=2></td>
-		<td colspan=6><hr></td>
+		<td colspan=4><hr></td>
 		</tr>';
 
 	echo '</table>';
