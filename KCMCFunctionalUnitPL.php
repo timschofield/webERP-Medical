@@ -3,7 +3,7 @@
 /* $Id$*/
 $PageSecurity=1;
 include ('includes/session.inc');
-$title = _('Income and Expenditure by Tag');
+$title = _('Income and Expenditure by Functional Unit');
 include('includes/SQL_CommonFunctions.inc');
 include('includes/AccountSectionsDef.inc'); // This loads the $Sections variable
 

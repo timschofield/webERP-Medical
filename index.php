@@ -1269,7 +1269,12 @@ if (isset($SupplierLogin) and count($_SESSION['AllowedPageSecurityTokens'])==2 a
 							</tr>
 							<tr>
 							<td class="menu_group_item">
-								<?php echo '<p>&bull; <a href="' . $rootpath . '/GLProfit_Loss.php?">' . _('Profit and Loss Statement') . '</a></p>'; ?>
+								<?php echo '<p>&bull; <a href="' . $rootpath . '/GLProfit_Loss.php?">' . _('Income And Expenditure Statement For Entire Organisation') . '</a></p>'; ?>
+							</td>
+							</tr>
+							<tr>
+							<td class="menu_group_item">
+								<?php echo '<p>&bull; <a href="' . $rootpath . '/KCMCFunctionalUnitPL.php?">' . _('Income And Expenditure by Functional Unit') . '</a></p>'; ?>
 							</td>
 							</tr>
 							<tr>
