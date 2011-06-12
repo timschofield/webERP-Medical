@@ -138,7 +138,7 @@ if (isset($SelectedDT) and !isset($_GET['delete'])) {
 	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Show all Demand Types') . '</a></div>';
 }
 
-echo '<p><form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+echo '<br /><form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (isset($SelectedDT) and !isset($_GET['delete'])) {

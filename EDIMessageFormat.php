@@ -100,7 +100,7 @@ if (isset($msg)) {
 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<p><table border=0 width=100%>
+echo '<br /><table border=0 width=100%>
 	<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') .
 		'" alt="" />' . ' ' . $title.'</p>';
 
@@ -159,7 +159,7 @@ or deletion of the records*/
 			$myrow[0]);
 
 	} //END WHILE LIST LOOP
-	echo '</table><p>';
+	echo '</table><br />';
 	if (DB_num_rows($result)==0){
 		echo '<div class="centre"><input tabindex=1 type=submit name="NewEDIInvMsg" value="' .
 			_('Create New EDI Invoice Message From Default Template') . '"></div><br />';

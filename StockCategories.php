@@ -265,13 +265,13 @@ or deletion of the records*/
 
 ?>
 
-<p>
+<br />
 <?php
 if (isset($SelectedCategory)) {  ?>
 	<div class='centre'><a href="<?php echo $_SERVER['PHP_SELF'] . '?' . SID;?>"><?php echo _('Show All Stock Categories'); ?></a></div>
 <?php } ?>
 
-<p>
+<br />
 
 <?php
 

@@ -207,7 +207,7 @@ if (empty($FactorID)) {
 		echo '<td>' . $myrow['email'].'</td>';
 		echo '<td><a href="'.$rootpath . '/Factors.php?' . SID . '&FactorID='.$myrow['id'].'">'._('Edit').'</a></td></tr>';
 	}
-	echo "</table><p><div class='centre'>";
+	echo "</table><br /><div class='centre'>";
 	echo "<br /><input tabindex=3 type='Submit' name='Create' value='" . _('Create New Factor') . "'>";
 	echo '</div></form>';
 	include('includes/footer.inc');
@@ -285,11 +285,12 @@ if (isset($_POST['amend']) or isset($_POST['Create'])) {
 
 
 if (isset($_POST['Create'])) {
-	echo "</table><p><div class='centre'><input tabindex=12 type='Submit' name='submit' value='" . _('Insert New Factor') . "'></div>";
+	echo "</table><br /><div class='centre'><input tabindex=12 type='Submit' name='submit' value='" . _('Insert New Factor') . "'></div>";
 } else if (isset($_POST['amend'])) {
-	echo "</table><p><div class='centre'><input tabindex=13 type='Submit' name='update' value='" . _('Update Factor') . "'><p>";
+	echo "</table><p><div class='centre'><input tabindex=13 type='Submit' name='update' value='" . _('Update Factor') . "'></p>";
 	prnMsg ( _('There is no second warning if you hit the delete button below') . '. ' . _('However checks will be made to ensure there are no suppliers are using this factor before the deletion is processed'), 'warn');
-	echo "<p><input tabindex=14 type='Submit' name='delete' value='" . _('Delete Factor') . "' onclick=\"return confirm('" . _('Are you sure you wish to delete this factoring company?') . "');\"></form></div>";
+	echo "<br /><input tabindex=14 type='Submit' name='delete' value='" . _('Delete Factor') .
+		"' onclick=\"return confirm('" . _('Are you sure you wish to delete this factoring company?') . "');\"></form></div>";
 }
 
 

@@ -104,7 +104,7 @@ if(isset($_POST['Submit']) AND $InputError==False){
 
 	prnMsg( _('The inventory transfer records have been created successfully'),'success');
 	echo '<p><a href="'.$rootpath.'/PDFStockLocTransfer.php?' . SID . 'TransferNo=' . $_POST['Trf_ID'] . '">'.
-		_('Print the Transfer Docket'). '</a>';
+		_('Print the Transfer Docket'). '</a></p>';
 	unset($_SESSION['DispatchingTransfer']);
 	unset($_SESSION['Transfer']);
 	include('includes/footer.inc');
@@ -174,7 +174,7 @@ if(isset($_POST['Submit']) AND $InputError==False){
 			echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
 		}
 	}
-	echo '</select></td></tr></table><p>';
+	echo '</select></td></tr></table><br />';
 
 	echo '<table class=selection>';
 

@@ -449,7 +449,7 @@ if (isset($_POST['AllocTrans'])){
 	     	  echo '<br />' . _('Amount in supplier currency'). ' <b>' .
 	     	  		 number_format(-$_SESSION['Alloc']->TransAmt,2) . '</b><i> (' .
 	     	  		 _('converted into local currency at an exchange rate of') . ' ' .
-	     	  		 $_SESSION['Alloc']->TransExRate . ')</i><p>';
+	     	  		 $_SESSION['Alloc']->TransExRate . ')</i><br />';
 
         } else {
 

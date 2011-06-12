@@ -280,12 +280,12 @@ Function Is_ValidAccount ($ActNo) {
 
 	if ($BankPrefix == '25' or $BankPrefix == '33') {
 		if ($CheckSum / 10 - (int)($CheckSum / 10) != 0) {
-			echo '<p>' . _('The account number entered does not meet the banking check sum requirement and cannot be a valid account number');
+			echo '<p>' . _('The account number entered does not meet the banking check sum requirement and cannot be a valid account number') . '</p>';
 			return False;
 		}
 	} else {
 		if ($CheckSum / 11 - (int)($CheckSum / 11) != 0) {
-			echo '<p>' . _('The account number entered does not meet the banking check sum requirement and cannot be a valid account number');
+			echo '<p>' . _('The account number entered does not meet the banking check sum requirement and cannot be a valid account number') . '</p>';
 			return False;
 		}
 	}
@@ -739,7 +739,7 @@ if (!isset($SupplierID)) {
 		}
 	} //end while loop
 
-	echo '</select></td></tr></table><p><div class="centre"><input type="Submit" name="submit" value="' . _('Insert New Supplier') . '">';
+	echo '</select></td></tr></table><br /><div class="centre"><input type="Submit" name="submit" value="' . _('Insert New Supplier') . '">';
 	echo '</div></form>';
 
 } else {
@@ -900,10 +900,10 @@ if (!isset($SupplierID)) {
 	echo '</select></td></tr></table>';
 
 	if (isset($_POST['New'])) {
-		echo '<p><div class="centre"><input type="Submit" name="submit" value="' . _('Add These New Supplier Details') . '"></form>';
+		echo '<br /><div class="centre"><input type="Submit" name="submit" value="' . _('Add These New Supplier Details') . '"></form>';
 	} else {
-		echo '<br /><p><div class="centre"><input type="Submit" name="submit" value="' . _('Update Supplier') . '"></div><br />';
-//		echo '<p><font color=red><b>' . _('WARNING') . ': ' . _('There is no second warning if you hit the delete button below') . '. ' . _('However checks will be made to ensure there are no outstanding purchase orders or existing accounts payable transactions before the deletion is processed') . '<br /></font></b>';
+		echo '<br /><div class="centre"><input type="Submit" name="submit" value="' . _('Update Supplier') . '"></div><br />';
+//		echo '<font color=red><b>' . _('WARNING') . ': ' . _('There is no second warning if you hit the delete button below') . '. ' . _('However checks will be made to ensure there are no outstanding purchase orders or existing accounts payable transactions before the deletion is processed') . '<br /></font></b>';
 		prnMsg(_('WARNING') . ': ' . _('There is no second warning if you hit the delete button below') . '. ' . _('However checks will be made to ensure there are no outstanding purchase orders or existing accounts payable transactions before the deletion is processed'), 'Warn');
 		echo '<br /><div class=centre><input type="submit" name="delete" value="' . _('Delete Supplier') . '" onclick=\"return confirm(\'' . _('Are you sure you wish to delete this supplier?') . '\');\"></form>';
 		echo '<br /><a href="' . $rootpath . '/SupplierContacts.php?SupplierID=' . $SupplierID . '">' . _('Review Contact Details') . '</a></div>';

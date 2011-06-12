@@ -238,7 +238,7 @@ if (isset($_POST['EnterLines'])){
 	}
 
 	echo '<meta http-equiv="Refresh" content="0; url=' . $rootpath . '/PO_Items.php?' . SID . 'identifier='.$identifier. '">';
-	echo '<p>';
+	echo '<br />';
 	prnMsg(_('You should automatically be forwarded to the entry of the purchase order line items page') . '. ' .
 		_('If this does not happen') . ' (' . _('if the browser does not support META Refresh') . ') ' .
 		'<a href="$rootpath/PO_Items.php?identifier='.$identifier . '">' . _('click here') . '</a> ' . _('to continue'),'info');
@@ -518,7 +518,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 		$_SESSION['PO'.$identifier]->SupplierID=='' ) {
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' .
-		_('Purchase Order') . '" alt="">' . ' ' . _('Purchase Order: Select Supplier') . '';
+		_('Purchase Order') . '" alt="">' . ' ' . _('Purchase Order: Select Supplier') . '</p>';
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier.'" method="post" name="choosesupplier">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	if (isset($SuppliersReturned )) {

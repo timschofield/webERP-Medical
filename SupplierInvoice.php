@@ -1049,7 +1049,7 @@ then do the updates and inserts to process the invoice entered */
 
 				echo '<p>' . _('The total posted to the debit accounts is') . ' ' .
 						$LocalTotal . ' ' . _('but the sum of OvAmount converted at ExRate') . ' = ' .
-						( $_SESSION['SuppTrans']->OvAmount / $_SESSION['SuppTrans']->ExRate);
+						( $_SESSION['SuppTrans']->OvAmount / $_SESSION['SuppTrans']->ExRate) . '</p>';
 			}
 
 			foreach ($_SESSION['SuppTrans']->Taxes as $Tax){

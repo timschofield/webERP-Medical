@@ -150,7 +150,7 @@ if (!$LineItem->SerialItemsValid && !$_SESSION['CurImportFile']['Processed']){
 			<input type=hidden name=StockID value="' . $StockID . '">
 			<input type=hidden name=EntryType value="FILE">
 			</form>
-			<p>'. _('1st 10 Lines of File'). '....
+			<p>'. _('1st 10 Lines of File'). '....</p>
 			<hr width=15%>
 		<pre>';
 

@@ -207,7 +207,7 @@ if (!isset($ManufacturerID)) {
 		echo '<td>' . $myrow['email'].'</td>';
 		echo '<td><a href="'.$rootpath . '/Manufacturers.php?' . SID . '&ManufacturerID='.$myrow['id'].'">'._('Edit').'</a></td></tr>';
 	}
-	echo "</table><p><div class='centre'>";
+	echo "</table><br /><div class='centre'>";
 	echo "<br /><input tabindex=3 type='Submit' name='Create' value='" . _('Create New Manufacturer') . "'>";
 	echo '</div></form>';
 	include('includes/footer.inc');
@@ -285,11 +285,11 @@ if (isset($_POST['amend']) or isset($_POST['Create'])) {
 
 
 if (isset($_POST['Create'])) {
-	echo "</table><p><div class='centre'><input tabindex=12 type='Submit' name='submit' value='" . _('Insert New Manufacturer') . "'></div>";
+	echo "</table><br /><div class='centre'><input tabindex=12 type='Submit' name='submit' value='" . _('Insert New Manufacturer') . "'></div>";
 } else if (isset($_POST['amend'])) {
-	echo "</table><p><div class='centre'><input tabindex=13 type='Submit' name='update' value='" . _('Update Manufacturer') . "'><p>";
+	echo "</table><br /><div class='centre'><input tabindex=13 type='Submit' name='update' value='" . _('Update Manufacturer') . "'><br />";
 	prnMsg ( _('There is no second warning if you hit the delete button below') . '. ' . _('However checks will be made to ensure there are no suppliers are using this manufacturer before the deletion is processed'), 'warn');
-	echo "<p><input tabindex=14 type='Submit' name='delete' value='" . _('Delete Manufacturer') . "' onclick=\"return confirm('" . _('Are you sure you wish to delete this manufacturer?') . "');\"></form></div>";
+	echo "<br /><input tabindex=14 type='Submit' name='delete' value='" . _('Delete Manufacturer') . "' onclick=\"return confirm('" . _('Are you sure you wish to delete this manufacturer?') . "');\"></form></div>";
 }
 
 

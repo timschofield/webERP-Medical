@@ -87,7 +87,7 @@ var iconRed = new GIcon();
 </p>
   </body>
 <?
-echo '<div class="centre"><a href="' . $rootpath . '/GeocodeSetup.php">' . _('Go to Geocode Setup') . '</a></div></p>';
+echo '<p><div class="centre"><a href="' . $rootpath . '/GeocodeSetup.php">' . _('Go to Geocode Setup') . '</a></div></p>';
 include ('includes/footer.inc');
 ?>
 </html>

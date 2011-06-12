@@ -142,8 +142,8 @@ echo '</table><br />';
 echo '<div class="centre">';
 if (isset($_GET['SelectedLocation'])) {
 	echo '<input type="Submit" name="update" value="' . _('Update Information') . '">';
-	echo '<p>';
-	echo '<p><center><input type="Submit" name="delete" value="' . _('Delete This Location') . '">';
+	echo '<br />';
+	echo '<br /><div class="centre"><input type="Submit" name="delete" value="' . _('Delete This Location') . '"></div>';
 } else {
 	echo '<input type="submit" name="submit" value="' . _('Enter Information') . '">';
 }

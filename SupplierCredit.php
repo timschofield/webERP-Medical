@@ -217,7 +217,7 @@ if (isset($_POST['GRNS']) and $_POST['GRNS'] == _('Purchase Orders')){
 	echo '<p>' . _('You should automatically be forwarded to the entry of credit notes against goods received page') . '. ' .
 						_('If this does not happen') . ' (' . _('if the browser does not support META Refresh') . ') ' .
 						'<a href="' . $rootpath . '/SuppCreditGRNs.php?">' .
-						_('click here') . '</a> ' . _('to continue') . '.<br />';
+						_('click here') . '</a> ' . _('to continue') . '.</p><br />';
 	include('includes/footer.inc');
 	exit;
 }
@@ -229,7 +229,7 @@ if (isset($_POST['Shipts'])){
 	echo '<p>' . _('You should automatically be forwarded to the entry of credit notes against shipments page') . '. ' .
 					_('If this does not happen') . ' (' . _('if the browser does not support META Refresh') . ') ' .
 						'<a href="' . $rootpath . '/SuppShiptChgs.php?">' .
-							_('click here') . '</a> ' . _('to continue') . '.<br />';
+							_('click here') . '</a> ' . _('to continue') . '.</p><br />';
 	include('includes/footer.inc');
 	exit;
 }
@@ -241,24 +241,24 @@ if (isset($_POST['GL']) and $_POST['GL'] == _('General Ledger')){
 	echo '<p>' . _('You should automatically be forwarded to the entry of credit notes against the general ledger page') . '. ' .
 						_('If this does not happen') . ' (' . _('if the browser does not support META Refresh') . ') ' .
 						'<a href="' . $rootpath . '/SuppTransGLAnalysis.php?">' .
-						_('click here') . '</a> ' . _('to continue') . '.<br />';
+						_('click here') . '</a> ' . _('to continue') . '.</p><br />';
 	include('includes/footer.inc');
 	exit;
 }
 if (isset($_POST['Contracts']) and $_POST['Contracts'] == _('Contracts')){
 		/*This ensures that any changes in the page are stored in the session before calling the shipments page */
 		echo '<meta http-equiv="refresh" content="0; url=' . $rootpath . '/SuppContractChgs.php?">';
-		echo '<DIV class="centre">' . _('You should automatically be forwarded to the entry of supplier credit notes against contracts page') .
+		echo '<div class="centre">' . _('You should automatically be forwarded to the entry of supplier credit notes against contracts page') .
 			'. ' . _('If this does not happen') . ' (' . _('if the browser does not support META Refresh'). ') ' .
-			'<a href="' . $rootpath . '/SuppContractChgs.php?">' . _('click here') . '</a> ' . _('to continue') . '.</DIV><br />';
+			'<a href="' . $rootpath . '/SuppContractChgs.php?">' . _('click here') . '</a> ' . _('to continue') . '.</div><br />';
 		exit;
 }
 if (isset($_POST['FixedAssets']) and $_POST['FixedAssets'] == _('Fixed Assets')){
 		/*This ensures that any changes in the page are stored in the session before calling the shipments page */
 		echo '<meta http-equiv="refresh" content="0; url=' . $rootpath . '/SuppFixedAssetChgs.php?">';
-		echo '<DIV class="centre">' . _('You should automatically be forwarded to the entry of invoices against fixed assets page') .
+		echo '<div class="centre">' . _('You should automatically be forwarded to the entry of invoices against fixed assets page') .
 			'. ' . _('If this does not happen') . ' (' . _('if the browser does not support META Refresh'). ') ' .
-			'<a href="' . $rootpath . '/SuppFixedAssetChgs.php?">' . _('click here') . '</a> ' . _('to continue') . '.</DIV><br />';
+			'<a href="' . $rootpath . '/SuppFixedAssetChgs.php?">' . _('click here') . '</a> ' . _('to continue') . '.</div><br />';
 		exit;
 }
 /* everything below here only do if a Supplier is selected
@@ -573,7 +573,7 @@ echo '<tr><td><font color=red>' . _('Credit Note Total') . '</font></td><td cols
 echo '<table class=selection><tr><td><font color=red>' . _('Comments') . '</font></td><td><textarea name=Comments cols=40 rows=2>' .
 	  $_SESSION['SuppTrans']->Comments . '</textarea></td></tr></table>';
 
-echo '<p><div class="centre"><input type=submit name="PostCreditNote" value="' . _('Enter Credit Note') . '"></div>';
+echo '<p><div class="centre"><input type=submit name="PostCreditNote" value="' . _('Enter Credit Note') . '"></div></p>';
 
 
 if (isset($_POST['PostCreditNote'])){

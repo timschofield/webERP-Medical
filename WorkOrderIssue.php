@@ -350,7 +350,8 @@ if (isset($_POST['Process'])){ //user hit the process the work order issues ente
 		$Result = DB_Txn_Commit($db);
 
 		prnMsg(_('The issue of') . ' ' . $QuantityIssued . ' ' . _('of')  . ' ' . $_POST['IssueItem'] . ' ' . _('against work order') . ' '. $_POST['WO'] . ' ' . _('has been processed'),'info');
-		echo '<p><ul><li><a href="' . $rootpath . '/WorkOrderIssue.php?WO=' . $_POST['WO'] . '&StockID=' . $_POST['StockID'] . '">' . _('Issue more components to this work order') . '</a></li>';
+		echo '<p><ul><li><a href="' . $rootpath . '/WorkOrderIssue.php?WO=' . $_POST['WO'] . '&StockID=' . $_POST['StockID'] . '">' .
+			_('Issue more components to this work order') . '</a></li></p>';
 		echo '<li><a href="' . $rootpath . '/SelectWorkOrder.php">' . _('Select a different work order for issuing materials and components against'). '</a></li></ul>';
 		unset($_POST['WO']);
 		unset($_POST['StockID']);

@@ -20,7 +20,7 @@ include('includes/header.inc');
 	echo '<table width=100%>
 			<td width=37% align=left><a href="'. $rootpath . '/index.php?&Application=AR'. SID .'">' . _('Back to Customers') . '</a></td>
 			<td align=left><font size=4 color=blue><u><b>' . _('Debtors Control Integrity') . '</b></u></font></td>
-	      </table><p>';
+	      </table><br />';
 
 	echo '<table border=1>'; //Main table
 	echo '<td><table>'; // First column
@@ -63,7 +63,7 @@ include('includes/header.inc');
 	echo '</table></td>'; // End Second column
 	echo '</table>'; //End the main table
 
-	echo "<p><input type=submit name='Show' value='"._('Accept')."'>";
+	echo '<br /><input type=submit name="Show" value="'._('Accept'). '">';
 	echo '<input type=submit action=reset value="' . _('Cancel') .'">';
 
 
@@ -72,7 +72,7 @@ include('includes/header.inc');
 		//
 		//========[ SHOW SYNOPSYS ]===========
 		//
-		echo '<p><table border=1>';
+		echo '<br /><table border=1>';
 		echo '<tr>
 				<th>' . _('Period') . '</th>
 				<th>' . _('Bal B/F in GL') . '</th>

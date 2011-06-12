@@ -14,7 +14,7 @@
 // | obtain it through the world-wide-web, please send a note to          |
 // | license@php.net so we can mail you a copy immediately.               |
 // +----------------------------------------------------------------------+
-// | Authors: Petr 'PePa' Pavel <petr.pavel@pepa.info>                    |
+// | Authors: Petr 'PePa' Pavel < petr.pavel@pepa.info>                    |
 // +----------------------------------------------------------------------+
 //
 // $Id: lang.cs.php,v 1.1 2006/11/17 05:59:52 daintree Exp $
@@ -161,7 +161,7 @@ class Numbers_Words_cs extends Numbers_Words
      * @return string  The corresponding word representation
      *
      * @access public
-     * @author Petr 'PePa' Pavel <petr.pavel@pepa.info>
+     * @author Petr 'PePa' Pavel < petr.pavel@pepa.info>
      * @since  PHP 4.2.3
      */
     function toWords($num, $power = 0, $powsuffix = '') {

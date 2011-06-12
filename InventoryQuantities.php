@@ -161,7 +161,7 @@ echo '<div class="page_help_text">' . _('Use this report to display the quantity
 	if (DB_num_rows($result1)==0){
 		echo '</table></td></tr>
 			</table>
-			<p>';
+			<br />';
 		prnMsg(_('There are no stock categories currently defined please use the link below to set them up'),'warn');
 		echo '<br /><a href="' . $rootpath . '/StockCategories.php?' . SID .'">' . _('Define Stock Categories') . '</a>';
 		include ('includes/footer.inc');
@@ -185,7 +185,7 @@ echo '<div class="page_help_text">' . _('Use this report to display the quantity
 		}
 	}
 	echo '</select></td></tr>';
-	echo '</table><p><div class="centre"><input type=submit name="PrintPDF" value="' . _('Print PDF') . '"></div>';
+	echo '</table><br /><div class="centre"><input type=submit name="PrintPDF" value="' . _('Print PDF') . '"></div>';
 
 	include('includes/footer.inc');
 

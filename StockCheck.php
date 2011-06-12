@@ -19,7 +19,7 @@ If (isset($_POST['PrintPDF'])
 
 /*First off do the stock check file stuff */
 	if ($_POST['MakeStkChkData']=='New'){
-		$sql = 'TRUNCATE TABLE stockcheckfreeze';
+		$sql = "TRUNCATE TABLE stockcheckfreeze";
 		$result = DB_query($sql,$db);
 		$sql = "INSERT INTO stockcheckfreeze (stockid,
 										  loccode,
@@ -104,7 +104,7 @@ If (isset($_POST['PrintPDF'])
 		} else {
 			$title = _('Stock Check Freeze Update');
 			include('includes/header.inc');
-			echo '<p><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '">' . _('Print Check Sheets') . '</a>';
+			echo '<p><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '">' . _('Print Check Sheets') . '</a></p>';
 			prnMsg( _('Added to the stock check file successfully'),'success');
 			include('includes/footer.inc');
 			exit;

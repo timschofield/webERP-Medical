@@ -137,20 +137,20 @@ if ( isset($_POST['EnterTransfer']) ){
 	$myrow = DB_fetch_row($result);
 	$InputError = false;
 	if (DB_num_rows($result)==0) {
-		echo '<p>';
+		echo '<br />';
 		prnMsg(_('The entered item code does not exist'), 'error');
 		$InputError = true;
 	} elseif (!is_numeric($_SESSION['Transfer']->TransferItem[0]->Quantity)){
-		echo '<p>';
+		echo '<br />';
 		prnMsg( _('The quantity entered must be numeric'), 'error' );
 		$InputError = true;
 	} elseif ($_SESSION['Transfer']->TransferItem[0]->Quantity<=0){
-		echo '<p>';
+		echo '<br />';
 		prnMsg( _('The quantity entered must be a positive number greater than zero'), 'error');
 		$InputError = true;
 	}
 	if ($_SESSION['Transfer']->StockLocationFrom==$_SESSION['Transfer']->StockLocationTo){
-		echo '<p>';
+		echo '<br />';
 		prnMsg( _('The locations to transfer from and to must be different'), 'error');
 		$InputError = true;
 	}

@@ -140,7 +140,7 @@ if (!isset($Id)) {
 if (isset($Id)) {  ?>
 	<div class="cantre"><a href="<?php echo $_SERVER['PHP_SELF'] . '?' . SID .'&DebtorType='.$DebtorType;?>"><?=_('Review all notes for this Customer Type')?></a></div>
 <?php } ?>
-<p>
+<br />
 
 <?php
 if (!isset($_GET['delete'])) {

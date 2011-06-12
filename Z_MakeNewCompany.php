@@ -194,9 +194,9 @@ if (isset($_POST['submit']) AND isset($_POST['NewCompany'])) {
 
 		prnMsg (_('The new company database has been created for' . ' ' . $_POST['NewCompany'] . '. ' . _('The company details and parameters should now be set up for the new company. NB: Only a single user "demo" is defined with the password "weberp" in the new company database. A new system administrator user should be defined for the new company and this account deleted immediately.')), 'info');
 
-		echo '<p><a href="' . $rootpath . '/CompanyPreferences.php?' . SID .'">' . _('Set Up New Company Details') . '</a>';
-		echo '<p><a href="' . $rootpath . '/SystemParameters.php?' . SID .'">' . _('Set Up Configuration Details') . '</a>';
-		echo '<p><a href="' . $rootpath . '/WWW_Users.php?' . SID .'">' . _('Set Up User Accounts') . '</a>';
+		echo '<p><a href="' . $rootpath . '/CompanyPreferences.php?' . SID .'">' . _('Set Up New Company Details') . '</a></p>';
+		echo '<p><a href="' . $rootpath . '/SystemParameters.php?' . SID .'">' . _('Set Up Configuration Details') . '</a></p>';
+		echo '<p><a href="' . $rootpath . '/WWW_Users.php?' . SID .'">' . _('Set Up User Accounts') . '</a></p>';
 
 		echo '</form>';
 		echo '</div>';

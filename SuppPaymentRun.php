@@ -307,7 +307,7 @@ If ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 	echo '<tr><td>' . _('Pay From Account') . ':</td><td><select name="BankAccount">';
 
 	if (DB_num_rows($AccountsResults)==0){
-		 echo '</select></td></tr></table><p>' . _('Bank Accounts have not yet been defined. You must first') . ' <a href="' . $rootpath . '/BankAccounts.php">' . _('define the bank accounts') . '</a> ' . _('and general ledger accounts to be affected') . '.';
+		 echo '</select></td></tr></table><br />' . _('Bank Accounts have not yet been defined. You must first') . ' <a href="' . $rootpath . '/BankAccounts.php">' . _('define the bank accounts') . '</a> ' . _('and general ledger accounts to be affected') . '.';
 		 include('includes/footer.inc');
 		 exit;
 	} else {

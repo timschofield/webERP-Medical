@@ -158,7 +158,8 @@ if (isset($_POST['PrintPDF'])) {
 
 	$title=_('Reorder Level Reporting');
 	include('includes/header.inc');
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') . '" alt="" />' . ' ' . _('Inventory Reorder Level Report') . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') . '" alt="" />' . ' ' .
+		_('Inventory Reorder Level Report') . '</p>';
 	echo '<div class="page_help_text">' . _('Use this report to display the reorder levels for Inventory items in different categories.') . '</div><br />';
 
 	echo '</br></br><form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table>';
@@ -190,7 +191,7 @@ if (isset($_POST['PrintPDF'])) {
 	if (DB_num_rows($result1)==0){
 		echo '</table></td></tr>
 			</table>
-			<p>';
+			<br />';
 		prnMsg(_('There are no stock categories currently defined please use the link below to set them up'),'warn');
 		echo '<br /><a href="' . $rootpath . '/StockCategories.php?' . SID .'">' . _('Define Stock Categories') . '</a>';
 		include ('includes/footer.inc');

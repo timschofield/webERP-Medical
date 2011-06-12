@@ -243,12 +243,12 @@ If (!isset($SelectedBankAccount)) {
 	//END WHILE LIST LOOP
 
 
-	echo '</table><p>';
+	echo '</table><br />';
 }
 
 if (isset($SelectedBankAccount)) {
 	echo '<br />';
-	echo '<div class="centre"><p><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '">' . _('Show All Bank Accounts Defined') . '</a></div>';
+	echo '<div class="centre"><p><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '">' . _('Show All Bank Accounts Defined') . '</a></p></div>';
 	echo '<br />';
 }
 

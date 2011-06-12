@@ -171,7 +171,7 @@ if (isset($_POST['DeleteRecurringOrder'])){
 
 	prnMsg(_('Successfully deleted recurring sales order template number') . ' ' . $_POST['ExistingRecurrOrderNo'],'success');
 
-	echo '<p><a href="'.$rootpath.'/SelectRecurringSalesOrder.php">'. _('Select A Recurring Sales Order Template') .'</a>';
+	echo '<p><a href="'.$rootpath.'/SelectRecurringSalesOrder.php">'. _('Select A Recurring Sales Order Template') .'</a></p>';
 
 	unset($_SESSION['Items'.$identifier]->LineItems);
 	unset($_SESSION['Items'.$identifier]);
@@ -294,9 +294,9 @@ If (isset($_POST['Process'])) {
 			prnmsg(_('The recurring order template has been updated'),'success');
 		}
 
-	echo '<p><a href="'.$rootpath.'/SelectOrderItems.php?NewOrder=Yes">'. _('Enter New Sales Order') .'</a>';
+	echo '<p><a href="'.$rootpath.'/SelectOrderItems.php?NewOrder=Yes">'. _('Enter New Sales Order') .'</a></p>';
 
-	echo '<p><a href="'.$rootpath.'/SelectRecurringSalesOrder.php">'. _('Select A Recurring Sales Order Template') .'</a>';
+	echo '<p><a href="'.$rootpath.'/SelectRecurringSalesOrder.php">'. _('Select A Recurring Sales Order Template') .'</a></p>';
 
 	unset($_SESSION['Items'.$identifier]->LineItems);
 	unset($_SESSION['Items'.$identifier]);

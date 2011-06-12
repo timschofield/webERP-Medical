@@ -148,7 +148,7 @@ if (!isset($Id)) {
 if (isset($Id)) {  ?>
 	<div class="centre"><a href="<?php echo $_SERVER['PHP_SELF'] . '?' . SID .'&DebtorNo='.$DebtorNo;?>"><?=_('Review all contacts for this Customer')?></a></div>
 <?php } ?>
-<p>
+<br />
 
 <?php
 if (!isset($_GET['delete'])) {

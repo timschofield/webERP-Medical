@@ -28,7 +28,7 @@ if (!isset($_POST['Show'])) {
 	echo '<tr><td>' . _('Bank Account') . ':</td><td><select name="BankAccount">';
 
 	if (DB_num_rows($AccountsResults)==0){
-		echo '</select></td></tr></table><p>';
+		echo '</select></td></tr></table><br />';
 		prnMsg( _('Bank Accounts have not yet been defined. You must first') . ' <a href="' . $rootpath . '/BankAccounts.php">' . _('define the bank accounts') . '</a> ' . _('and general ledger accounts to be affected'),'warn');
 		include('includes/footer.inc');
 		exit;

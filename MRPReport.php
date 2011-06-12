@@ -505,13 +505,14 @@ if (isset($_POST['PrintPDF']) AND $_POST['Part']!='') {
 	$result1 = DB_query($SQL, $db);
 	if (DB_num_rows($result1) == 0) {
 		echo '<p><font size=4 color=red>' . _('Problem Report') . ':</font><br />' . _('There are no stock categories currently defined please use the link below to set them up');
-		echo '<br /><a href="' . $rootpath . '/StockCategories.php">' . _('Define Stock Categories') . '</a>';
+		echo '<br /><a href="' . $rootpath . '/StockCategories.php">' . _('Define Stock Categories') . '</a></font></p>';
 		exit;
 	}
 
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Search for Inventory Items').'</p>';
+	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') .
+		'" alt="" />' . ' ' . _('Search for Inventory Items').'</p>';
 	echo '<table class="selection"><tr>';
 	echo '<td>' . _('In Stock Category') . ':';
 	echo '<select name="StockCat">';
@@ -711,7 +712,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 			$_POST['PageOffset'] = $ListPageMax;
 		}
 		if ($ListPageMax > 1) {
-			echo '<div class="centre"><p>&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
+			echo '<div class="centre"><br />&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
 			echo '<select name="PageOffset">';
 			$ListPage = 1;
 			while ($ListPage <= $ListPageMax) {
@@ -730,7 +731,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 			echo '<input type=hidden name=StockCat value="'.$_POST['StockCat'].'">';
 			echo '<input type=hidden name=StockCode value="'.$_POST['StockCode'].'">';
 //			echo '<input type=hidden name=Search value="Search">';
-			echo '<p></div>';
+			echo '<br /></div>';
 		}
 		echo '<table cellpadding=2 colspan=7>';
 		$tableheader = '<tr>

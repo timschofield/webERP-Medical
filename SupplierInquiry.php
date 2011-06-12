@@ -188,7 +188,7 @@ $DbgMsg = _('The SQL that failed was');
 $TransResult = DB_query($SQL, $db, $ErrMsg, $DbgMsg);
 
 if (DB_num_rows($TransResult) == 0){
-	echo '<p><div class="centre">' . _('There are no transactions to display since') . ' ' . $_POST['TransAfterDate'];
+	echo '<br /><div class="centre">' . _('There are no transactions to display since') . ' ' . $_POST['TransAfterDate'];
 	echo '</div>';
 	include('includes/footer.inc');
 	exit;

@@ -25,7 +25,7 @@ $Result = DB_query($sql,$db,$ErrMsg);
 
 
 
-echo '<p>';
+echo '<br />';
 prnMsg(_('Any stock items that may not have had stock location records have now been given new location stock records'),'info');
 
 include('includes/footer.inc');

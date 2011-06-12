@@ -487,13 +487,15 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 		} /* inserted line items into sales order details */
 
 		unset ($_SESSION['SPL']);
-		prnMsg(_('Sales Order Number') . ' ' . $SalesOrderNo . ' ' . _('has been entered') . '. <p>' . _('Orders created on a cash sales account may need the delivery details for the order to be modified') . '. <br /><br />' . _('A freight charge may also be applicable'),'success');
+		prnMsg(_('Sales Order Number') . ' ' . $SalesOrderNo . ' ' . _('has been entered') . '. <br />' .
+			_('Orders created on a cash sales account may need the delivery details for the order to be modified') . '. <br /><br />' .
+				_('A freight charge may also be applicable'),'success');
 
 		if (count($_SESSION['AllowedPageSecurityTokens'])>1){
 
 			/* Only allow print of packing slip for internal staff - customer logon's cannot go here */
-			echo '<p><a href="'.$rootpath.'/PrintCustOrder.php?TransNo=' . $SalesOrderNo . '">' . _('Print packing slip') . ' (' . _('Preprinted stationery') . ')</a>';
-			echo '<p><a href="'.$rootpath.'/PrintCustOrder_generic.php?TransNo=' . $SalesOrderNo . '">' . _('Print packing slip') . ' (' . _('Laser') . ')</a>';
+			echo '<p><a href="'.$rootpath.'/PrintCustOrder.php?TransNo=' . $SalesOrderNo . '">' . _('Print packing slip') . ' (' . _('Preprinted stationery') . ')</a></p>';
+			echo '<p><a href="'.$rootpath.'/PrintCustOrder_generic.php?TransNo=' . $SalesOrderNo . '">' . _('Print packing slip') . ' (' . _('Laser') . ')</a></p>';
 
 		}
 

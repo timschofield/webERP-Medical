@@ -131,7 +131,7 @@ if (isset($_POST['PlacePO'])){ //user hit button to place PO for selected orders
 					} //end of authorisation status settings
 
 					if ($SupplierID !=''){ //then we have just added a purchase order
-						echo '<p />';
+						echo '<br />';
 						prnMsg(_('Purchase Order') . ' ' . $PO_OrderNo . ' ' . _('on') . ' ' . $SupplierID . ' ' . _('has been created'),'success');
 						DB_Txn_Commit($db);
 					}
@@ -296,7 +296,7 @@ if (isset($_POST['PlacePO'])){ //user hit button to place PO for selected orders
 			} //end of authorisation status settings
 
 			if ($SupplierID !=''){ //then we have just added a purchase order irrespective of autoauthorise status
-				echo '<p>';
+				echo '<br />';
 				prnMsg(_('Purchase Order') . ' ' . $PO_OrderNo . ' ' . _('on') . ' ' . $SupplierID . ' ' . _('has been created'),'success');
 				DB_Txn_Commit($db);
 			}
@@ -320,7 +320,7 @@ if (isset($_POST['ResetPart'])){
      unset($_REQUEST['SelectedStockItem']);
 }
 
-echo '<p><div class="centre">';
+echo '<br /><div class="centre">';
 
 if (isset($_REQUEST['OrderNumber']) AND $_REQUEST['OrderNumber']!='') {
 	$_REQUEST['OrderNumber'] = trim($_REQUEST['OrderNumber']);

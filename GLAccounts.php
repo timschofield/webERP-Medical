@@ -335,13 +335,13 @@ or deletion of the records*/
 
 //end of ifs and buts!
 
-echo '<p>';
+echo '<br />';
 
 if (isset($SelectedAccount)) {
 	echo "<div class='centre'><a href='" . $_SERVER['PHP_SELF'] . '?' . SID ."'>" .  _('Show All Accounts') . '</a></div>';
 }
 
-echo '<p>';
+echo '<br />';
 
 include('includes/footer.inc');
 ?>

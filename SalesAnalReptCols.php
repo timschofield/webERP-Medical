@@ -314,7 +314,7 @@ if (DB_num_rows($result)!=0){
 	//END WHILE LIST LOOP
  }
 
-echo '</table><br /><div class="centre"><a href="' . $rootpath . '/SalesAnalRepts.php">' . _('Maintain Report Headers') . '</a></div><p>';
+echo '</table><br /><div class="centre"><a href="' . $rootpath . '/SalesAnalRepts.php">' . _('Maintain Report Headers') . '</a></div><br />';
 if (DB_num_rows($result)>10){
     prnMsg(_('WARNING') . ': ' . _('User defined reports can have up to 10 columns defined') . '. ' . _('The report will not be able to be run until some columns are deleted'),'warn');
 }

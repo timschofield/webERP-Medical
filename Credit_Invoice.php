@@ -1527,7 +1527,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 	}
 	$j++;
 	echo '<tr><td>' . _('Credit note text') . '</td><td><textarea tabindex='.$j.'  name=CreditText cols=31 rows=5>' . $_POST['CreditText'] . '</textarea></td></tr>';
-	echo '</table><br /><div class="centre"><input TABINDEX='.$j.' type=submit name=Update Value=' . _('Update') . '><p>';
+	echo '</table><br /><div class="centre"><input TABINDEX='.$j.' type=submit name=Update Value=' . _('Update') . '><br />';
 	$j++;
 	 echo '<input type="submit" tabindex='.$j++.' name="ProcessCredit" value="' . _('Process Credit') .'"></div>';
 }

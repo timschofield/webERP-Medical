@@ -59,14 +59,12 @@ if (isset($_GET['Delete'])){
 
 /*Show all the selected ContractRefs so far from the SESSION['SuppInv']->Contracts array */
 if ($_SESSION['SuppTrans']->InvoiceOrCredit=='Invoice'){
-		echo '<div class="centre"><p class="page_title_text">' . _('Contract charges on Invoice') . ' ';
+		echo '<div class="centre"><p class="page_title_text">' . _('Contract charges on Invoice') . ' ' . $_SESSION['SuppTrans']->SuppReference . ' ' .
+			_('From') . ' ' . $_SESSION['SuppTrans']->SupplierName . '</p></div>';
 } else {
-		echo '<div class="centre"><p class="page_title_text">' . _('Contract credits on Credit Note') . ' ';
+		echo '<div class="centre"><p class="page_title_text">' . _('Contract credits on Credit Note') . ' ' . $_SESSION['SuppTrans']->SuppReference . ' '
+			._('From') . ' ' . $_SESSION['SuppTrans']->SupplierName . '</p></div>';
 }
-
-echo  $_SESSION['SuppTrans']->SuppReference . ' ' ._('From') . ' ' . $_SESSION['SuppTrans']->SupplierName;
-
-echo '</p></div>';
 
 echo '<table cellpadding=2>';
 $TableHeader = '<tr><th>' . _('Contract') . '</th>

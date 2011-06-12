@@ -118,7 +118,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 		DB_free_result($result); //clear the old result
 		$result = DB_query($sql, $db); //re-run the query with the updated prices
 		$numrow = DB_num_rows($result); // get the new number - should be the same!!
-		echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '">' . _('Back') . '<a/></div><p>';
+		echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '">' . _('Back') . '<a/></div></p>';
 		include('includes/footer.inc');
 		exit;
 	}
@@ -227,7 +227,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 			 </tr></form>';
 	} else {
 		prnMsg(_('There were no prices meeting the criteria specified to review'),'info');
-		echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '">' . _('Back') . '<a/></div><p>';
+		echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '">' . _('Back') . '<a/></div></p>';
 	}
 } else { /*The option to submit was not hit so display form */
 	echo '<div class="page_help_text">' . _('Use this report to display price list with the cost.') . '</div><br />';

@@ -21,7 +21,8 @@ if (isset($_POST['Period'])){
 	$SelectedPeriod = $_GET['Period'];
 }
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('General Ledger Account Inquiry') . '" alt="" />' . ' ' . _('General Ledger Account Inquiry') . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' .
+	_('General Ledger Account Inquiry') . '" alt="" />' . ' ' . _('General Ledger Account Inquiry') . '</p>';
 
 echo '<div class="page_help_text">' . _('Use the keyboard Shift key to select multiple periods') . '</div><br />';
 
@@ -76,7 +77,7 @@ while ($myrow=DB_fetch_array($Periods,$db)){
 	}
 }
 echo '</select></td></tr><table>';
-echo '<p><div class="centre"><input type=submit name="Show" value="'._('Show Account Transactions').'"></div></form>';
+echo '<p><div class="centre"><input type=submit name="Show" value="'._('Show Account Transactions').'"></div></p></form>';
 
 /* End of the Form  rest of script is what happens if the show button is hit*/
 
@@ -313,7 +314,7 @@ if (isset($_POST['Show'])){
 if (isset($ShowIntegrityReport) and $ShowIntegrityReport==True){
 	if (!isset($IntegrityReport)) {$IntegrityReport='';}
 	prnMsg( _('There are differences between the sum of the transactions and the recorded movements in the ChartDetails table') . '. ' . _('A log of the account differences for the periods report shows below'),'warn');
-	echo '<p>'.$IntegrityReport;
+	echo '<br />'.$IntegrityReport;
 }
 include('includes/footer.inc');
 ?>

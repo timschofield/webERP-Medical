@@ -120,7 +120,7 @@ if (isset($_POST['submit'])) {
 	if ($InputError!=1){
 		$result = DB_query($sql,$db, $ErrMsg);
 		prnMsg($msg,'success');
-		echo '<p>';
+		echo '<br />';
 	}
 	unset ($SelectedPaymentID);
 	unset ($_POST['SelectedPaymentID']);
@@ -214,7 +214,7 @@ if (isset($_POST['submit'])) {
 		echo '</tr>';
 
 	} //END WHILE LIST LOOP
-	echo '</table><p>';
+	echo '</table><br />';
 } //end of ifs and buts!
 
 
@@ -222,7 +222,7 @@ if (isset($SelectedPaymentID)) {
 	echo '<div class="centre"><a href=' . $_SERVER['PHP_SELF'] . '?' . SID .'>' . _('Review Payment Methods') . '</a></div>';
 }
 
-echo '<p>';
+echo '<br />';
 
 if (! isset($_GET['delete'])) {
 

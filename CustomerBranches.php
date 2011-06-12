@@ -596,7 +596,7 @@ if (!isset($_GET['delete'])) {
 	if (DB_num_rows($result)==0){
 		echo '</table>';
 		prnMsg(_('There are no sales people defined as yet') . ' - ' . _('customer branches must be allocated to a sales person') . '. ' . _('Please use the link below to define at least one sales person'),'error');
-		echo '<p align="center"><a href="' . $rootpath . '/SalesPeople.php?">'._('Define Sales People') . '</a>';
+		echo '<p align="center"><a href="' . $rootpath . '/SalesPeople.php?">'._('Define Sales People') . '</a></p>';
 		include('includes/footer.inc');
 		exit;
 	}

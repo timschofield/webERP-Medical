@@ -23,7 +23,7 @@ if (isset($_GET['ProducePDF'])){
 		$pdf->__destruct();
 		$title = _('User Defined Sales Analysis Problem');
 		include('includes/header.inc');
-		echo '<p>' . _('The report did not have any none zero lines of information to show and so it has not been created');
+		echo '<br />' . _('The report did not have any none zero lines of information to show and so it has not been created');
 		echo '<br /><a href="' . $rootpath . '/SalesAnalRepts.php?' . SID . 'SelectedReport=' . $_GET['ReportID'] . '">' . _('Look at the design of this report') . '</a>';
 		echo '<br /><a href="' . $rootpath . '/index.php?' . SID . '">' . _('Back to the menu') . '</a>';
 		include('includes/footer.inc');
@@ -43,7 +43,8 @@ if ($_GET['ProduceCVSFile']==True){
 	 echo 'http://' . getenv(SERVER_NAME) . $rootpath . '/' . $_SESSION['reports_dir'] .  '/SalesAnalysis.csv';
 	 echo "<meta http-equiv='Refresh' content='0; url=" . $rootpath . "/" . $_SESSION['reports_dir'] .  "/SalesAnalysis.csv'>";
 
-	 echo '<p>' . _('You should automatically be forwarded to the CSV Sales Analysis file when it is ready') . '. ' . _('If this does not happen') . ' <a href="' . $rootpath . '/' . $_SESSION['reports_dir'] . '/SalesAnalysis.csv">' . _('click here') . '</a> ' . _('to continue') . '<br />';
+	 echo '<p>' . _('You should automatically be forwarded to the CSV Sales Analysis file when it is ready') . '. ' . _('If this does not happen') .
+		' <a href="' . $rootpath . '/' . $_SESSION['reports_dir'] . '/SalesAnalysis.csv">' . _('click here') . '</a> ' . _('to continue') . '<br /></p>';
 	 include('includes/footer.inc');
 }
 ?>

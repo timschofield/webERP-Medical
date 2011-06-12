@@ -206,9 +206,9 @@ If (isset($_POST['PrintPDF']) AND isset($_POST['ReportOrClose'])){
 	if (DB_num_rows($CheckedItems)==0){
 		$title= _('Inventory Comparison Comparison Report');
 		include('includes/header.inc');
-		echo '<p>';
+		echo '<br />';
 		prnMsg(_('There is no inventory check data to report on'), 'warn');
-		echo '<p>'. _('To start an inventory check first run the'). ' <a href="' . $rootpath . '/StockCheck.php?' . SID . '">'. _('inventory check sheets') . '</a> - '. _('and select the option to create new Inventory Comparison data file');
+		echo '<br />'. _('To start an inventory check first run the'). ' <a href="' . $rootpath . '/StockCheck.php?' . SID . '">'. _('inventory check sheets') . '</a> - '. _('and select the option to create new Inventory Comparison data file');
 		include('includes/footer.inc');
 		exit;
 	}
@@ -313,7 +313,7 @@ If (isset($_POST['PrintPDF']) AND isset($_POST['ReportOrClose'])){
       if ($len<=20){
 		$title = _('Print Stock check comparison Error');
 		include('includes/header.inc');
-		echo '<p>';
+		echo '<br />';
 		prnMsg( _('There were no Inventory Comparison sheets to print out'), 'error');
 		echo '<br /><a href="' . $rootpath . '/index.php?' . SID . '">' . _('Back to the menu') . '</a>';
 		include('includes/footer.inc');

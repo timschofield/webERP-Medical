@@ -50,7 +50,7 @@ if (DB_num_rows($result)==0){
 
 
 if (!isset($Item)){
-	echo '<p>';
+	echo '<br />';
 	prnMsg (_('An item must first be selected before this page is called') . '. ' . _('The product selection page should call this page with a valid product code'),'error');
 	include('includes/footer.inc');
 	exit;
@@ -289,7 +289,7 @@ if ($InputError ==0){
 
 		}
 		//END WHILE LIST LOOP
-		echo '</table><p>';
+		echo '</table><br />';
 	} else {
 		prnMsg(_('There are no prices set up for this part'),'warn');
 	}

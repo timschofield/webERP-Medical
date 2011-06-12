@@ -64,12 +64,12 @@ if (isset($_GET['Delete'])){
 
 /*Show all the selected ShiptRefs so far from the SESSION['SuppInv']->Shipts array */
 if ($_SESSION['SuppTrans']->InvoiceOrCredit=='Invoice'){
-	echo '<div class="centre"><p class="page_title_text">'. _('Fixed Assets on Invoice') . ' ';
+	echo '<div class="centre"><p class="page_title_text">'. _('Fixed Assets on Invoice') . ' </p></div>';
 } else {
-	echo '<div class="centre"><p class="page_title_text">' . _('Fixed Asset credits on Credit Note') . ' ';
+	echo '<div class="centre"><p class="page_title_text">' . _('Fixed Asset credits on Credit Note') . ' </p>';
 }
-echo $_SESSION['SuppTrans']->SuppReference . ' ' ._('From') . ' ' . $_SESSION['SuppTrans']->SupplierName;
-echo '</p></div>';
+echo'<div class="centre"><p class="page_title_text">' . $_SESSION['SuppTrans']->SuppReference . ' ' ._('From') . ' ' . $_SESSION['SuppTrans']->SupplierName . '</p></div>';
+
 echo '<table cellpadding=2 class=selection>';
 $TableHeader = '<tr><th>' . _('Asset ID') . '</th>
 					<th>' . _('Description') . '</th>

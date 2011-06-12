@@ -184,8 +184,9 @@ if (isset($_GET['OrderNo'])){ /*An order has been selected for sending */
 		$myrow = DB_fetch_array($result);
 		if ($myrow['printedpackingslip']==1){
 			prnMsg(_('Order Number') . ' ' . $_GET['OrderNo'] . ' ' . _('has previously been sent to Radio Beacon') . '. ' . _('It was sent on') . ' ' . ConvertSQLDate($myrow['datepackingslipprinted']) . '<br />' . _('To re-send the order with the balance not previously dispatched and invoiced the order must be modified to allow a reprint (or re-send)') . '.<br />' . _('This check is there to ensure that duplication of dispatches to the customer are avoided'),'warn');
-			echo '<p><a href="'.$rootpath.'/SelectOrderItems.php?ModifyOrderNumber=' . $_GET['OrderNo'] . '">' . _('Modify the order to allow a re-send or reprint') . ' (' . _('Select Delivery Details') . ')' . '</a>';
-			echo '<p><a href="'.$rootpath.'/index.php">' . _('Back to the menu') . '</a>';
+			echo '<p><a href="'.$rootpath.'/SelectOrderItems.php?ModifyOrderNumber=' . $_GET['OrderNo'] . '">' .
+				_('Modify the order to allow a re-send or reprint') . ' (' . _('Select Delivery Details') . ')' . '</a></p>';
+			echo '<p><a href="'.$rootpath.'/index.php">' . _('Back to the menu') . '</a></p>';
 			include('includes/footer.inc');
 			exit;
 		 }
@@ -262,7 +263,7 @@ if (isset($_GET['OrderNo'])){ /*An order has been selected for sending */
 			}
 			fclose($fp);
 
-			echo '<p>' . _('FTP Connection progress') . ' .....';
+			echo '<p>' . _('FTP Connection progress') . ' .....</p>';
 			// set up basic connection
 			$conn_id = ftp_connect($_SESSION['RadioBeaconFTP_server']); // login with username and password
 			$login_result = ftp_login($conn_id, $_SESSION['RadioBeaconFTP_user_name'], $_SESSION['RadioBeaconFTP_user_pass']); // check connection
@@ -286,11 +287,13 @@ if (isset($_GET['OrderNo'])){ /*An order has been selected for sending */
 			$sql = "UPDATE salesorders SET printedpackingslip=1, datepackingslipprinted='" . Date('Y-m-d') . "' WHERE salesorders.orderno=" . $_GET['OrderNo'];
 			$result = DB_query($sql,$db);
 
-			echo '<p>' . _('Order Number') . ' ' . $_GET['OrderNo'] . ' ' . _('has been sent via FTP to Radio Beacon a copy of the file that was sent is held on the server at') . '<br />' . $FileName;
+			echo '<p>' . _('Order Number') . ' ' . $_GET['OrderNo'] . ' ' .
+				_('has been sent via FTP to Radio Beacon a copy of the file that was sent is held on the server at') . '<br />' . $FileName . '</p>';
 
 		} else { /*perhaps several order headers returned or none (more likely) */
 
-			echo '<p>' . _('The order') . ' ' . $_GET['OrderNo'] . ' ' . _('for dispatch via Radio Beacon could not be retrieved') . '. ' . _('Perhaps it is set to be dispatched from a different stock location');
+			echo '<p>' . _('The order') . ' ' . $_GET['OrderNo'] . ' ' . _('for dispatch via Radio Beacon could not be retrieved') . '. ' .
+				_('Perhaps it is set to be dispatched from a different stock location') . '</p>';
 
 		}
 	} /*there are line items outstanding for dispatch */

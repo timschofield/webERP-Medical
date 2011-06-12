@@ -381,7 +381,7 @@ if (isset($_POST['submit'])) { //The update button has been clicked
 		prnMsg(_('The work order has been deleted'),'success');
 
 
-		echo "<p><a href='" . $rootpath . "/SelectWorkOrder.php?" . SID . "'>" . _('Select an existing outstanding work order') . "</a>";
+		echo '<p><a href="' . $rootpath . '/SelectWorkOrder.php">' . _('Select an existing outstanding work order') . '</a></p>';
 		unset($_POST['WO']);
 		for ($i=1;$i<=$_POST['NumberOfOutputs'];$i++){
 		  		 unset($_POST['OutputItem'.$i]);
@@ -488,7 +488,7 @@ if (isset($WOResult)){
 			  <td class=number>' . number_format($myrow['costissued'],2) . '</td></tr>';
 }
 echo '</table>
-		<p><table class=selection>';
+		<br /><table class=selection>';
 echo '<tr><th>' . _('Output Item') . '</th>
 		  <th>' . _('Qty Required') . '</th>
 		  <th>' . _('Qty Received') . '</th>
@@ -547,7 +547,7 @@ echo '</table>';
 
 echo '<div class="centre"><br /><input type=submit name="submit" value="' . _('Update') . '">';
 
-echo '<br /><p><input type=submit name="delete" value="' . _('Delete This Work Order') . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');">';
+echo '<br /><input type=submit name="delete" value="' . _('Delete This Work Order') . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');">';
 
 echo '<br /></div>';
 

@@ -696,7 +696,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 				$OK_to_delete=0;
 
-				prnMsg( _('There are lines on this order that have already been invoiced. Please delete only the lines on the order that are no longer required') . '<p>' . _('There is an option on confirming a dispatch/invoice to automatically cancel any balance on the order at the time of invoicing if you know the customer will not want the back order'),'warn');
+				prnMsg( _('There are lines on this order that have already been invoiced. Please delete only the lines on the order that are no longer required') . '<br />' . _('There is an option on confirming a dispatch/invoice to automatically cancel any balance on the order at the time of invoicing if you know the customer will not want the back order'),'warn');
 			}
 		}
 
@@ -1645,7 +1645,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			echo '<td style="text-align:center" colspan=8><input type="hidden" name="order_items" value=1><input tabindex='.number_format($j+8).' type="submit" value="'._('Add to Sales Order').'"></td>';
 			echo '</table>';
 		} //end of if Frequently Ordered Items > 0
-		echo '<p><div class="centre"><b><p>' . $msg . '</b></p>';
+		echo '<p><div class="centre"><b>' . $msg . '</b></div></p>';
 		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ';
 		echo _('Search for Order Items') . '</p>';
 		echo '<div class="page_help_text">' . _('Search for Order Items') . _(', Searches the database for items, you can narrow the results by selecting a stock category, or just enter a partial item description or partial item code') . '.</div><br />';

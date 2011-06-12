@@ -142,7 +142,7 @@ if (!isset($Id)) {
 if (isset($Id)) {
 	echo '<div class="centre"><a href="'.$_SERVER['PHP_SELF'] . '?' . SID .'&DebtorNo='.$DebtorNo.'"><?='._('Review all notes for this Customer').'</a></div>';
 }
-echo '<p>';
+echo '<br />';
 
 if (!isset($_GET['delete'])) {
 

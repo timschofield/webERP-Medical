@@ -130,7 +130,7 @@ $GRNResults = DB_query($SQL,$db);
 
 if (DB_num_rows($GRNResults)==0){
 	prnMsg(_('There are no goods received records for') . ' ' . $_SESSION['SuppTrans']->SupplierName . '<br /> ' . _('To enter a credit against goods received') . ', ' . _('the goods must first be received using the link below to select purchase orders to receive'),'info');
-	echo '<p><a href="' . $rootpath . '/PO_SelectOSPurchOrder.php?' . SID . 'SupplierID=' . $_SESSION['SuppTrans']->SupplierID . '">' . _('Select Purchase Orders to Receive') . '</a>';
+	echo '<p><a href="' . $rootpath . '/PO_SelectOSPurchOrder.php?' . SID . 'SupplierID=' . $_SESSION['SuppTrans']->SupplierID . '">' . _('Select Purchase Orders to Receive') . '</a></p>';
 	include('includes/footer.inc');
 	exit;
 }

@@ -59,7 +59,7 @@ function GrpByDataOptions($GroupByDataX) {
 
 /* end of function  */
 
-echo '<p>';
+echo '<br />';
 
 if (isset($_GET['SelectedReport'])) {
 	$SelectedReport = $_GET['SelectedReport'];
@@ -263,7 +263,7 @@ if (isset($_POST['submit'])) {
 	$DbgMsg = _('The SQL used to delete the report headers was');
 	$result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
-	echo '<p>' . _('Report Deleted') . '<p>';
+	echo '<p>' . _('Report Deleted') . '</p>';
 	unset($SelectedReport);
 	include ('includes/footer.inc');
 	exit;
@@ -319,7 +319,7 @@ while ($myrow = DB_fetch_array($result)) {
 
 	}
 	//END WHILE LIST LOOP
-	echo '</table><p>';
+	echo '</table><br />';
 }
 
 //end of ifs and buts!
@@ -330,7 +330,7 @@ if (isset($SelectedReport)) {
 	echo '<a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '">' . _('Show All Defined Reports') . '</a>';
 }
 
-echo '<p>';
+echo '<br />';
 
 
 if (!isset($_GET['delete'])) {

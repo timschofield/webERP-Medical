@@ -370,7 +370,7 @@ while ($myrow = DB_fetch_array($result)) {
 
 //end of ifs and buts!
 
-echo "<p>";
+echo '<br />';
 if (isset($SelectedLocation)) {
 	echo '<a href="' . $_SERVER['PHP_SELF'] . '">' . _('Review Records') . '</a>';
 }

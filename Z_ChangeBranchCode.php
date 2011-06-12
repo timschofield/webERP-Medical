@@ -198,7 +198,7 @@ if (isset($_POST['ProcessCustomerChange'])){
 echo "<form action='" . $_SERVER['PHP_SELF'] . "?=" . $SID . "' method=post>";
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<p><table>
+echo '<br /><table>
 <tr><td>' . _('Customer Code') . ":</td><td><input type=Text name='DebtorNo' size=20 maxlength=20></td></tr>
 <tr><td>" . _('Existing Branch Code') . ":</td><td><input type=Text name='OldBranchCode' size=20 maxlength=20></td></tr>
 <tr><td>" . _('New Branch Code') . ":</td><td><input type=Text name='NewBranchCode' size=20 maxlength=20></td></tr>

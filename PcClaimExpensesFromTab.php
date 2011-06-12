@@ -187,7 +187,7 @@ if (!isset($SelectedTabs)){
 	echo '</select></td></tr>';
    	echo '</td></tr></table>'; // close main table
 
-	echo '<p><div class="centre"><input type=submit name=process value="' . _('Accept') . '"><input type=submit name=Cancel value="' . _('Cancel') . '"></div>';
+	echo '<br /><div class="centre"><input type=submit name=process value="' . _('Accept') . '"><input type=submit name=Cancel value="' . _('Cancel') . '"></div>';
 
 	echo '</form>';
 
@@ -405,7 +405,7 @@ if (isset($SelectedTabs)) {
 		echo '<input type=hidden name="SelectedTabs" value="' . $SelectedTabs . '">';
 		echo '<input type=hidden name="Days" value="' .$Days. '">';
 		echo '</td></tr></table>'; // close main table
-		echo '<p><div class="centre"><input type=submit name=submit value="' . _('Accept') . '"><input type=submit name=Cancel value="' . _('Cancel') . '"></div>';
+		echo '<br /><div class="centre"><input type=submit name=submit value="' . _('Accept') . '"><input type=submit name=Cancel value="' . _('Cancel') . '"></div>';
 		echo '</form>';
 
 	} // end if user wish to delete

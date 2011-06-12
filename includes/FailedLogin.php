@@ -13,7 +13,7 @@
             <center><font size='4' color='red'><br /><br /><br /><b>
 
 		Too many failed login attempts<font>
-		<P>You will have to see an authorised person to obtain access to the system</b></p></center>
+		<p>You will have to see an authorised person to obtain access to the system</b></p></center>
             </td>
         </tr>
     </table>

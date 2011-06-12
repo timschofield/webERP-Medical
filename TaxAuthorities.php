@@ -194,7 +194,7 @@ if (!isset($SelectedTaxAuthID)) {
 
 	//end of ifs and buts!
 
-	echo '</table><p>';
+	echo '</table><br />';
 }
 
 
@@ -204,7 +204,7 @@ if (isset($SelectedTaxAuthID)) {
  }
 
 
-echo '<p><form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+echo '<br /><form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (isset($SelectedTaxAuthID)) {

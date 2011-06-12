@@ -47,7 +47,7 @@ echo '</select></td></tr>';
 $SQL="SELECT categoryid, categorydescription FROM stockcategory ORDER BY categorydescription";
 $result1 = DB_query($SQL,$db);
 if (DB_num_rows($result1)==0){
-	echo '</table><p>';
+	echo '</table><br />';
 	prnMsg(_('There are no stock categories currently defined please use the link below to set them up'),'warn');
 	echo '<br /><a href="' . $rootpath . '/StockCategories.php">' . _('Define Stock Categories') . '</a>';
 	include ('includes/footer.inc');

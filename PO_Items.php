@@ -230,7 +230,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 
 				}
 			} /* end of the loop round the detail line items on the order */
-			echo '<p>';
+			echo '<br />';
 			prnMsg(_('Purchase Order') . ' ' . $_SESSION['PO'.$identifier]->OrderNo . ' ' . _('on') . ' ' .
 		     	$_SESSION['PO'.$identifier]->SupplierName . ' ' . _('has been created'),'success');
 		} else { /*its an existing order need to update the old order info */
@@ -922,7 +922,7 @@ if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
 	if (isset($_SESSION['PO'.$identifier]->OrderNo)) {
 		echo  ' ' . _('Purchase Order') .' '. $_SESSION['PO'.$identifier]->OrderNo ;
 	}
-	echo '<br /><b>'._(' Order Summary') . '</b>';
+	echo '</p><br /><b>'._(' Order Summary') . '</b>';
 	echo '<table cellpadding=2 colspan=7 class=selection>';
 	echo '<tr>
 		<th>' . _('Item Code') . '</th>

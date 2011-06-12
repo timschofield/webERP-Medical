@@ -322,7 +322,7 @@ if (!isset($SelectedTabs)){
 
 		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-		echo '<p><table class=selection>'; //Main table
+		echo '<br /><table class=selection>'; //Main table
 		if (isset($_GET['SelectedIndex'])) {
 			echo '<tr><th colspan=2><font color=navy size=3>'._('Update Cash Assignment').'</font></th></tr>';
 		} else {
@@ -382,7 +382,7 @@ if (!isset($SelectedTabs)){
 
 		echo '</td></tr></table>'; // close main table
 
-		echo '<p><div class="centre"><input type=submit name=submit value="' . _('Accept') . '"><input type=submit name=Cancel value="' . _('Cancel') . '"></div>';
+		echo '<br /><div class="centre"><input type=submit name=submit value="' . _('Accept') . '"><input type=submit name=Cancel value="' . _('Cancel') . '"></div>';
 
 		echo '</form>';
 

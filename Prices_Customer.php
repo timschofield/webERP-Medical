@@ -312,7 +312,7 @@ if (DB_num_rows($result) == 0) {
 //END WHILE LIST LOOP
 }
 
-echo '</table></tr></table><p>';
+echo '</table></tr></table><br />';
 
 echo '<form method="post" action=' . $_SERVER['PHP_SELF'] . '?' . SID . '>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';

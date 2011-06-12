@@ -217,7 +217,7 @@ if (isset($_POST['Search'])) {
 		}
 	}
 	if ($ListPageMax > 1) {
-		echo '<p>&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
+		echo '<br />&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
 		echo '<select name="PageOffset">';
 		$ListPage = 1;
 		while ($ListPage <= $ListPageMax) {
@@ -232,7 +232,7 @@ if (isset($_POST['Search'])) {
 			<input type=submit name="Go" value="' . _('Go') . '">
 			<input type=submit name="Previous" value="' . _('Previous') . '">
 			<input type=submit name="Next" value="' . _('Next') . '">';
-		echo '<p>';
+		echo '<br />';
 	}
 	echo '<input type=hidden name="Search" value="' . _('Search Now') . '">';
 	echo '<br /><br />';
@@ -277,7 +277,7 @@ if (isset($_POST['Search'])) {
 }
 //end if results to show
 if (isset($ListPageMax) and $ListPageMax > 1) {
-	echo '<p>&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
+	echo '<br />&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
 	echo '<select name="PageOffset">';
 	$ListPage = 1;
 	while ($ListPage <= $ListPageMax) {
@@ -292,7 +292,7 @@ if (isset($ListPageMax) and $ListPageMax > 1) {
 		<input type=submit name="Go" value="' . _('Go') . '">
 		<input type=submit name="Previous" value="' . _('Previous') . '">
 		<input type=submit name="Next" value="' . _('Next') . '">';
-	echo '<p>';
+	echo '<br />';
 }
 echo '</form>';
 // Only display the geocode map if the integration is turned on, and there is a latitude/longitude to display

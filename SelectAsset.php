@@ -35,7 +35,7 @@ $SQL = "SELECT categoryid,
 $result = DB_query($SQL, $db);
 if (DB_num_rows($result) == 0) {
 	echo '<p><font size=4 color=red>' . _('Problem Report') . ':</font><br />' . _('There are no asset categories currently defined please use the link below to set them up');
-	echo '<br /><a href="' . $rootpath . '/FixedAssetCategories.php">' . _('Define Asset Categories') . '</a>';
+	echo '<br /><a href="' . $rootpath . '/FixedAssetCategories.php">' . _('Define Asset Categories') . '</a></font></p>';
 	exit;
 }
 // end of showing search facilities
@@ -218,7 +218,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 			$_POST['PageOffset'] = $ListPageMax;
 		}
 		if ($ListPageMax > 1) {
-			echo '<div class="centre"><p>&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
+			echo '<div class="centre"><br />&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
 			echo '<select name="PageOffset">';
 			$ListPage = 1;
 			while ($ListPage <= $ListPageMax) {
@@ -234,7 +234,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 				<input type=submit name="Previous" value="' . _('Previous') . '">
 				<input type=submit name="Next" value="' . _('Next') . '">';
 
-			echo '<p></div>';
+			echo '<br /></div>';
 		}
 		echo '<table cellpadding=2 colspan=7 class=selection>';
 		$tableheader = '<tr>

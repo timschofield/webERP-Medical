@@ -6,7 +6,7 @@ include ('includes/class.pdf.php');
 
 
 /* A4_Landscape */
-$DocumentPaper = 'A4'; 
+$DocumentPaper = 'A4';
 $DocumentOrientation ='L';
 $Page_Width=842;
 $Page_Height=595;
@@ -183,7 +183,7 @@ While ($myrow = DB_fetch_array($result)){
 					if ($Cols['calculation']==0){
 						$LeftOvers = $pdf->addTextWrap($Xpos, $Ypos,60,$FontSize, number_format($AccumLvl1[$Cols['colno']]),'right');
 					} else { /* its a calculation need to re-perform on the totals*/
-	
+
 						switch ($Cols['calcoperator']) {
 							Case '/':
 								if ($AccumLvl1[$Cols['coldenominator']]==0){
@@ -218,14 +218,14 @@ While ($myrow = DB_fetch_array($result)){
 					}/*end if its not a calculation */
 				} /* end loop around column defintions */
 				$Ypos -=(2*$line_height);
-	
+
 				/*reset the accumulators to 0 */
 				for ($i=0;$i<=10;$i++){
 					$AccumLvl1[$i]=0;
 				}
 			}/* end if counter>0 */
 		}
-	
+
 		$NewHeading =0;
 
 		if ($myrow['col1']!=$GrpData1){ /*Need a new heading for Level 1 */
@@ -544,7 +544,8 @@ if ($_GET['ProduceCVSFile']==True){
 	 echo 'http://' . getenv(SERVER_NAME) . $rootpath . '/' . $_SESSION['reports_dir'] .  '/SalesAnalysis.csv';
 	 echo "<meta http-equiv='Refresh' content='0; url=http://" . getenv(SERVER_NAME) . $rootpath . '/' . $_SESSION['reports_dir'] .  "/SalesAnalysis.csv'>";
 
-	 echo '<p>' . _('You should automatically be forwarded to the CSV Sales Analysis file when it is ready') . '. ' . _('If this does not happen') . ' <a href="' . $rootpath . '/' . $_SESSION['reports_dir'] . '/SalesAnalysis.csv">' . _('click here') . '</a> ' . _('to continue') .'<br />';
+	 echo '<p>' . _('You should automatically be forwarded to the CSV Sales Analysis file when it is ready') . '. ' . _('If this does not happen') .
+		' <a href="' . $rootpath . '/' . $_SESSION['reports_dir'] . '/SalesAnalysis.csv">' . _('click here') . '</a> ' . _('to continue') .'</p><br />';
 	 include('includes/footer.inc');
 }
 

@@ -17,7 +17,7 @@ $SQL = "SELECT MonthName(lastdate_in_period) AS mnth,
 		YEAR(lastdate_in_period) AS yr,
 		periodno
 	FROM periods";
-echo '<p><div class="centre">' . _('Select the Period to update the costs for') . ':<select name="PeriodNo">';
+echo '<br /><div class="centre">' . _('Select the Period to update the costs for') . ':<select name="PeriodNo">';
 $result = DB_query($SQL,$db);
 
 echo '<option selected value=0>' . _('No Period Selected');

@@ -23,7 +23,8 @@ $map_host = $row['map_host'];
 define("MAPS_HOST", $map_host);
 define("KEY", $api_key);
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Geocode Setup') . '" alt="" />' . ' ' . _('Geocoding of Customers and Suppliers') .'</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Geocode Setup') . '" alt="" />' .
+	' ' . _('Geocoding of Customers and Suppliers') .'</p>';
 
 // select all the customer branches
 $sql = "SELECT * FROM custbranch WHERE 1";
@@ -81,7 +82,7 @@ while ($row = @mysql_fetch_assoc($result)) {
       // failure to geocode
       $geocode_pending = false;
       echo '<p>' . _('Customer Branch Code:') . $id . ', Address: ' . $address . _('failed to geocode.');
-      echo 'Received status ' . $status . '<br />';
+      echo 'Received status ' . $status . '</p><br />';
     }
     usleep($delay);
   }
@@ -125,12 +126,12 @@ while ($row2 = @mysql_fetch_assoc($result2)) {
       // failure to geocode
       $geocode_pending = false;
       echo '<p>' . _('Supplier Code: ') . $id . ', Address: ' . $address . ' failed to geocode.';
-      echo 'Received status ' . $status . '<br />';
+      echo 'Received status ' . $status . '</p><br />';
     }
     usleep($delay);
   }
 }
-echo '</p>';
+echo '<br />';
 
 echo '<br /><div class="centre"><a href="' . $rootpath . '/GeocodeSetup.php">' . _('Go back to Geocode Setup') . '</a></div>';
 include ('includes/footer.inc');

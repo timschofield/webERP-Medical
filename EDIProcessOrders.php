@@ -526,7 +526,7 @@ $dirhandle = opendir($_SERVER['DOCUMENT_ROOT'] . '/' . $rootpath . '/' . $_SESSI
 			$Result = DB_query("SELECT realname, email FROM www_users WHERE fullaccess=7 AND email <>''",$db);
 			if (DB_num_rows($Result)==0){ /*There are no sysadmins with email address specified */
 
-				$Recipients = array("'phil' <phil@localhost>");
+				$Recipients = array("'tim' <tim@localhost>");
 
 			} else { /*Make an array of the sysadmin recipients */
 				$Recipients = array();
@@ -541,7 +541,7 @@ $dirhandle = opendir($_SERVER['DOCUMENT_ROOT'] . '/' . $rootpath . '/' . $_SESSI
 		} else {
 
 			$mail->setSubject(_('EDI Order Message') . ' ' . $Order->CustRef);
-			$EDICustServPerson ="'phil' <phil@localhost>";
+			$EDICustServPerson ="'tim' <tim@localhost>";
 			$Recipients = array($EDICustServPerson);
 		}
 

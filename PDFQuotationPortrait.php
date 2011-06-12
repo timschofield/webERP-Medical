@@ -232,7 +232,7 @@ if (DB_num_rows($result)>0){
 if ($ListCount == 0){
         $title = _('Print Quotation Error');
         include('includes/header.inc');
-        echo '<p>'. _('There were no items on the quotation') . '. ' . _('The quotation cannot be printed').
+        echo '<br />'. _('There were no items on the quotation') . '. ' . _('The quotation cannot be printed').
                 '<br /><a href="' . $rootpath . '/SelectSalesOrder.php?' . SID . '&Quotation=Quotes_only">'. _('Print Another Quotation').
                 '</a>' . '<br />'. '<a href="' . $rootpath . '/index.php?' . SID . '">' . _('Back to the menu') . '</a>';
         include('includes/footer.inc');

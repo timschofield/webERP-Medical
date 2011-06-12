@@ -114,7 +114,7 @@ if (isset($OrderNo) && $OrderNo != "" && $OrderNo > 0 && $OrderNo != 'Preview'){
 			if ($POHeader['allowprint']==0){
 				$title = _('Purchase Order Already Printed');
 				include('includes/header.inc');
-				echo '<p>';
+				echo '<br />';
 				prnMsg( _('Purchase Order Number').' ' . $OrderNo . ' '.
 					_('has previously been printed') . '. ' . _('It was printed on'). ' ' .
 				ConvertSQLDate($POHeader['dateprinted']) . '<br />'.
@@ -305,11 +305,11 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 		$result = $mail->send(array($_POST['EmailTo']));
 		if ($result==1){
 			$failed = false;
-			echo '<p>';
+			echo '<br />';
 			prnMsg( _('Purchase Order'). ' ' . $OrderNo.' ' . _('has been emailed to') .' ' . $_POST['EmailTo'] . ' ' . _('as directed'), 'success');
 		} else {
 			$failed = true;
-			echo '<p>';
+			echo '<br />';
 			prnMsg( _('Emailing Purchase order'). ' ' . $OrderNo.' ' . _('to') .' ' . $_POST['EmailTo'] . ' ' . _('failed'), 'error');
 		}
 	}

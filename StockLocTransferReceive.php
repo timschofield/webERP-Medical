@@ -517,7 +517,7 @@ if (isset($_SESSION['Transfer'])){
 			echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
 		}
 	}
-	echo '</select><input type=submit name="RefreshTransferList" value="' . _('Refresh Transfer List') . '"></td></tr></table><p>';
+	echo '</select><input type=submit name="RefreshTransferList" value="' . _('Refresh Transfer List') . '"></td></tr></table><br />';
 
 	$sql = "SELECT DISTINCT reference,
 				locations.locationname as trffromloc,

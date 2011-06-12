@@ -322,18 +322,19 @@ if (isset($_GET['AllocTrans'])) {
 }
 
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('Allocate Receipt') . '" alt="" />' . ' ' . _('Allocate Receipts') . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('Allocate Receipt') .
+		'" alt="" />' . ' ' . _('Allocate Receipts') . '</p>';
 
-	$TableHeader = "<tr>
-			 		<th>" . _('Trans Type') . "</th>
-			 		<th>" . _('Customer') . "</th>
-			 		<th>" . _('Cust No') . "</th>
-			 		<th>" . _('Number') . "</th>
-			 		<th>" . _('Date') . "</th>
-			 		<th>" . _('Total') . "</th>
-			 		<th>" . _('To Alloc') . "</th>
-			 		<th>" . _('Action') . "</th>
-			 	</tr>";
+	$TableHeader = '<tr>
+			 		<th>' . _('Trans Type') . '</th>
+			 		<th>' . _('Customer') . '</th>
+			 		<th>' . _('Cust No') . '</th>
+			 		<th>' . _('Number') . '</th>
+			 		<th>' . _('Date') . '</th>
+			 		<th>' . _('Total') . '</th>
+			 		<th>' . _('To Alloc') . '</th>
+			 		<th>' . _('Action') . '</th>
+			 	</tr>';
 
 	if (isset($_POST['AllocTrans'])) {
 		// Page called with trans number
@@ -343,7 +344,7 @@ if (isset($_GET['AllocTrans'])) {
 
 		// Show trans already allocated and potential new allocations
 
-		echo '<p><table class=selection>';
+		echo '<br /><table class=selection>';
 		echo '<tr><th colspan=7><div class="centre"><font color=blue><b>' . $_SESSION['Alloc']->DebtorNo . ' - ' . $_SESSION['Alloc']->CustomerName . '</b></div>';
 
 		if ($_SESSION['Alloc']->TransExRate != 1) {
@@ -352,15 +353,15 @@ if (isset($_GET['AllocTrans'])) {
 				'</b><i> ('._('converted into local currency at an exchange rate of'). ' '
 				. $_SESSION['Alloc']->TransExRate . ')</i>';
 		}
-		echo "</th></tr><tr>
-				<th>" . _('Trans') . '<br />' . _('Type') . "</th>
-				<th>" . _('Trans') . '<br />' . _('Number') . "</th>
-				<th>" . _('Trans') . '<br />' . _('Date') . "</th>
-				<th>" . _('Total') . '<br />' . _('Amount') . "</th>
-				<th>" . _('Yet to') . '<br />' . _('Allocate') . "</th>
-				<th>" . _('This') . '<br />' . _('Allocation') . "</th>
-				<th>" . _('Running') . '<br />' . _('Balance') . "</th>
-			</tr>";
+		echo '</th></tr><tr>
+				<th>' . _('Trans') . '<br />' . _('Type') . '</th>
+				<th>' . _('Trans') . '<br />' . _('Number') . '</th>
+				<th>' . _('Trans') . '<br />' . _('Date') . '</th>
+				<th>' . _('Total') . '<br />' . _('Amount') . '</th>
+				<th>' . _('Yet to') . '<br />' . _('Allocate') . '</th>
+				<th>' . _('This') . '<br />' . _('Allocation') . '</th>
+				<th>' . _('Running') . '<br />' . _('Balance') . '</th>
+			</tr>';
 
 		$Counter = 0;
 		$TotalAllocated = 0;
@@ -420,7 +421,7 @@ if (isset($_GET['AllocTrans'])) {
 				<td colspan=5 class=number><b>'._('Left to allocate').'</b></td>
 				<td class=number><b>' . number_format($remaining-$TotalAllocated,2).'</b></td>
 			</tr>';
-		echo '</table><p>';
+		echo '</table><br />';
 		echo "<input type=hidden name=TotalNumberOfAllocs value=" . $Counter . ">";
 		echo "<div class='centre'><input tabindex=".$j." type=submit name=UpdateDatabase value=" . _('Process Allocations') . ">";
 		echo "<input tabindex=".$j." type=submit name=Cancel value=" . _('Cancel') . "></div>";
@@ -477,7 +478,7 @@ if (isset($_GET['AllocTrans'])) {
 			echo '<td><a href=' . $_SERVER['PHP_SELF']. '?' . SID . '&AllocTrans=' . $myrow['id'] . '>' . _('Allocate') . '</a></td></tr>';
 		}
 		DB_free_result($result);
-		echo '</table><p>';
+		echo '</table><br />';
 	} else {
 		/* Page called with no parameters */
 		unset($_SESSION['Alloc']->Allocs);
@@ -548,13 +549,13 @@ if (isset($_GET['AllocTrans'])) {
 				$k++;
 			}
 
-			echo "<td>" . $myrow['typename'] ."</td>
-					<td>" . $myrow['name'] . "</td>
-					<td>" . $myrow['debtorno'] . "</td>
-					<td>" . $myrow['transno'] . "</td>
-					<td>" . ConvertSQLDate($myrow['trandate']) . "</td>
-					<td class=number>" . number_format($myrow['total'],2) . "</td>
-					<td class=number>" . number_format($myrow['total']-$myrow['alloc'],2) . "</td>";
+			echo '<td>' . $myrow['typename'] .'</td>
+					<td>' . $myrow['name'] . '</td>
+					<td>' . $myrow['debtorno'] . '</td>
+					<td>' . $myrow['transno'] . '</td>
+					<td>' . ConvertSQLDate($myrow['trandate']) . '</td>
+					<td class=number>' . number_format($myrow['total'],2) . '</td>
+					<td class=number>' . number_format($myrow['total']-$myrow['alloc'],2) . '</td>';
 			echo '<td>' . $allocate . '</td></tr>';
 
 			if ( $curTrans > $trans ) {
@@ -565,7 +566,7 @@ if (isset($_GET['AllocTrans'])) {
 			}
 		}
 		DB_free_result($result);
-		echo '</table><p>';
+		echo '</table><br />';
 
 		if ($trans == 0) {
 			prnMsg(_('There are no allocations to be done'),'info');

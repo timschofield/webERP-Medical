@@ -9,7 +9,7 @@ $FromCriteria ='1'; /*Category From */
 $ToCriteria ='zzzzzzzz'; /*Category To */
 $Location =  'All';  /* Location to report on */
 $DetailedReport = 'Yes';  /* Total by category or complete listing */
-$Recipients = array('"Postmaster" <postmaster@localhost>','"someone" <someone@localhost>');
+$Recipients = array('"Postmaster" < postmaster@localhost>','"someone" <someone@localhost>');
 
 
 $_POST['DetailedReport'] = $DetailedReport; /* so PDFInventoryValnPageHeader.inc works too */
@@ -210,7 +210,7 @@ If ($_POST['DetailedReport']=='Yes'){
 if ($ListCount == 0) {
 	$title = _('Print Inventory Valuation Error');
 	include('includes/header.inc');
-	echo '<p>' . _('There were no items with any value to print out for the location specified');
+	echo '<br />' . _('There were no items with any value to print out for the location specified');
 	echo '<br /><a href="' . $rootpath . '/index.php?' . SID . '">' . _('Back to the menu') . '</a>';
 	include('includes/footer.inc');
 	exit; // Javier: needs check

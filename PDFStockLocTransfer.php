@@ -35,7 +35,7 @@ $FontSize=10;
 $PageNumber=1;
 $line_height=30;
 
-$ErrMsg = _('An error occurred retrieving the items on the transfer'). '.' . '<p>'. _('This page must be called with a location transfer reference number').'.';
+$ErrMsg = _('An error occurred retrieving the items on the transfer'). '.' . '<br />'. _('This page must be called with a location transfer reference number').'.';
 $DbgMsg = _('The SQL that failed while retrieving the items on the transfer was');
 $sql = "SELECT loctransfers.reference,
 			   loctransfers.stockid,
@@ -91,7 +91,7 @@ $len = strlen($pdfcode);
 
 if ($len<=20){
 	include('includes/header.inc');
-	echo '<p>';
+	echo '<br />';
 	prnMsg( _('There was no stock location transfer to print out'), 'warn');
 	echo '<br /><a href="' . $rootpath. '/index.php?' . SID . '">'. _('Back to the menu'). '</a>';
 	include('includes/footer.inc');

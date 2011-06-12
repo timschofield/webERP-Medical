@@ -213,7 +213,7 @@ or deletion of the records*/
 		$myrow[0]);
 
 	} //END WHILE LIST LOOP
-	echo '</table><p>';
+	echo '</table><br />';
 } //end of ifs and buts!
 
 if (isset($SelectedTerms)) {

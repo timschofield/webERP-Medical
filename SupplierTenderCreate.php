@@ -524,7 +524,7 @@ if (isset($_POST['SearchSupplier'])) {
 		}
 	}
 	if ($ListPageMax > 1) {
-		echo '<p>&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
+		echo '<br />&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
 		echo '<select name="PageOffset">';
 		$ListPage = 1;
 		while ($ListPage <= $ListPageMax) {
@@ -539,7 +539,7 @@ if (isset($_POST['SearchSupplier'])) {
 			<input type=submit name="Go" value="' . _('Go') . '">
 			<input type=submit name="Previous" value="' . _('Previous') . '">
 			<input type=submit name="Next" value="' . _('Next') . '">';
-		echo '<p>';
+		echo '<br />';
 	}
 	echo '<input type=hidden name="Search" value="' . _('Search Now') . '">';
 	echo '<br /><br />';
@@ -596,7 +596,7 @@ if (isset($_POST['Items'])) {
 		ORDER BY categorydescription";
 	$result = DB_query($sql, $db);
 	if (DB_num_rows($result) == 0) {
-		echo '<p><font size=4 color=red>' . _('Problem Report') . ':</font><br />' .
+		echo '<br /><font size=4 color=red>' . _('Problem Report') . ':</font><br />' .
 			_('There are no stock categories currently defined please use the link below to set them up');
 		echo '<br /><a href="' . $rootpath . '/StockCategories.php?' . SID . '">' . _('Define Stock Categories') . '</a>';
 		exit;

@@ -178,7 +178,8 @@ $GRNResults = DB_query($SQL,$db);
 
 if (DB_num_rows($GRNResults)==0){
 	prnMsg(_('There are no outstanding goods received from') . ' ' . $_SESSION['SuppTrans']->SupplierName . ' ' . _('that have not been invoiced by them') . '<br />' . _('The goods must first be received using the link below to select purchase orders to receive'),'warn');
-	echo "<div class='centre'><p><a href='$rootpath/PO_SelectOSPurchOrder.php?" . SID . 'SupplierID=' . $_SESSION['SuppTrans']->SupplierID ."'>" . _('Select Purchase Orders to Receive') .'</a></div>';
+	echo "<div class='centre'><p><a href='$rootpath/PO_SelectOSPurchOrder.php?" . SID . 'SupplierID=' . $_SESSION['SuppTrans']->SupplierID ."'>" .
+		_('Select Purchase Orders to Receive') .'</a></p></div>';
 	include('includes/footer.inc');
 	exit;
 }
@@ -248,12 +249,12 @@ if (isset($_GET['Modify'])){
 
 /*	if ($myrow['closed']==1){ //Shipment is closed so pre-empt problems later by warning the user - need to modify the order first
 		echo "<input type=hidden name='ShiptRef' Value=''>";
-		echo "<p>Unfortunately, the shipment that this purchase order line item was allocated to has been closed - if you add this item to the transaction then no shipments will not be updated. If you wish to allocate the order line item to a different shipment the order must be modified first.";
+		echo "Unfortunately, the shipment that this purchase order line item was allocated to has been closed - if you add this item to the transaction then no shipments will not be updated. If you wish to allocate the order line item to a different shipment the order must be modified first.";
 	} else {	*/
 		echo '<input type=hidden name="ShiptRef" Value="' . $GRNTmp->ShiptRef . '">';
 //	}
 
-	echo '<div class="centre"><p><input type=Submit Name="ModifyGRN" Value="' . _('Modify Line') . '"></div>';
+	echo '<div class="centre"><p><input type=Submit Name="ModifyGRN" Value="' . _('Modify Line') . '"></p></div>';
 
 
 	echo '<input type=hidden name="GRNNumber" value="' . $GRNTmp->GRNNo . '">';
