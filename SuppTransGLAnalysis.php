@@ -143,7 +143,7 @@ if (!isset($_POST['GLCode'])) {
 }
 echo '<tr>
 	<td>' . _('Account Code') . ':</td>
-	<td><input type="text" name="GLCode" size=12 maxlength=11 VALUE="' .  $_POST['GLCode'] . '"></td>
+	<td><input type="text" name="GLCode" size=12 maxlength=11 value="' .  $_POST['GLCode'] . '"></td>
 	<input type="hidden" name="JobRef" value="">
 	</tr>';
 echo '<tr>
@@ -156,9 +156,9 @@ $result = DB_query($sql, $db);
 echo '<option value=""></option>';
 while ($myrow = DB_fetch_array($result)) {
 	if ($myrow['accountcode'] == $_POST['AcctSelection']) {
-		echo '<option selected VALUE="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
+		echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
 	} else {
-		echo '<option VALUE="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
+		echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
 	}
 }
 
@@ -170,7 +170,7 @@ if (!isset($_POST['Amount'])) {
 }
 echo '<tr>
 	<td>' . _('Amount') . ':</td>
-	<td><input type="text" class="number" name="Amount" size="12" maxlength="11" VALUE="' .  $_POST['Amount'] . '"></td>
+	<td><input type="text" class="number" name="Amount" size="12" maxlength="11" value="' .  $_POST['Amount'] . '"></td>
 	</tr>';
 
 if (!isset($_POST['Narrative'])) {
@@ -182,7 +182,7 @@ echo '<tr>
 	</tr>
 	</table><br />';
 
-echo '<input type="submit" name="AddGLCodeToTrans" VALUE="' . _('Enter GL Line') . '">';
+echo '<input type="submit" name="AddGLCodeToTrans" value="' . _('Enter GL Line') . '">';
 
 echo '</form>';
 include('includes/footer.inc');

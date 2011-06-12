@@ -154,9 +154,9 @@ echo '<tr>	<td class=number>' . number_format($SupplierRecord['balance'],2) . '<
 
 echo '<br /><div class="centre"><form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo _('Show all transactions after') . ': ' .'<input type=text class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="TransAfterDate" VALUE="' .
+echo _('Show all transactions after') . ': ' .'<input type=text class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="TransAfterDate" value="' .
 		$_POST['TransAfterDate'] . '" maxlength =10 size=10>
-	  <input type=submit name="Refresh Inquiry" VALUE="' . _('Refresh Inquiry') . '">
+	  <input type=submit name="Refresh Inquiry" value="' . _('Refresh Inquiry') . '">
 	  </form>
 	  <br />';
 echo '</div>';

@@ -504,9 +504,9 @@ $result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
 while ($myrow=DB_fetch_array($result)){
 	if (!isset($_POST['AssetCategoryID']) or $myrow['categoryid']==$_POST['AssetCategoryID']){
-		echo '<option selected VALUE="'. $myrow['categoryid'] . '">' . $myrow['categorydescription']. '</option>';
+		echo '<option selected value="'. $myrow['categoryid'] . '">' . $myrow['categorydescription']. '</option>';
 	} else {
-		echo '<option VALUE="'. $myrow['categoryid'] . '">' . $myrow['categorydescription']. '</option>';
+		echo '<option value="'. $myrow['categoryid'] . '">' . $myrow['categorydescription']. '</option>';
 	}
 	$category=$myrow['categoryid'];
 }

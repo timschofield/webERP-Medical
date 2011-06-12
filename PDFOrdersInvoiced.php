@@ -38,9 +38,9 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate']) OR $InputError==1){
 
 	echo "<form method='post' action='" . $_SERVER['PHP_SELF'] . '?' . sid . "'>";
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<table class=selection><tr><td>' . _('Enter the date from which orders are to be listed') . ":</td><td><input type=text class='date' alt='".$_SESSION['DefaultDateFormat']."' name='FromDate' maxlength=10 size=10 VALUE='" . Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m'),Date('d')-1,Date('y'))) . "'></td></tr>";
+	echo '<table class=selection><tr><td>' . _('Enter the date from which orders are to be listed') . ":</td><td><input type=text class='date' alt='".$_SESSION['DefaultDateFormat']."' name='FromDate' maxlength=10 size=10 value='" . Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m'),Date('d')-1,Date('y'))) . "'></td></tr>";
 	echo '<tr><td>' . _('Enter the date to which orders are to be listed') . ":</td>
-			<td><input type=text class='date' alt='".$_SESSION['DefaultDateFormat']."' name='ToDate' maxlength=10 size=10 VALUE='" . Date($_SESSION['DefaultDateFormat']) . "'></td></tr>";
+			<td><input type=text class='date' alt='".$_SESSION['DefaultDateFormat']."' name='ToDate' maxlength=10 size=10 value='" . Date($_SESSION['DefaultDateFormat']) . "'></td></tr>";
 	echo '<tr><td>' . _('Inventory Category') . '</td><td>';
 
 	$sql = "SELECT categorydescription, categoryid FROM stockcategory WHERE stocktype<>'D' AND stocktype<>'L'";
@@ -51,20 +51,20 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate']) OR $InputError==1){
 	echo "<option selected value='All'>" . _('Over All Categories');
 
 	while ($myrow=DB_fetch_array($result)){
-	echo '<option VALUE=' . $myrow['categoryid'] . '>' . $myrow['categorydescription'];
+	echo '<option value=' . $myrow['categoryid'] . '>' . $myrow['categorydescription'];
 	}
 	echo '</select></td></tr>';
 
 	echo '<tr><td>' . _('Inventory Location') . ":</td><td><select name='Location'>";
-	echo "<option selected VALUE='All'>" . _('All Locations');
+	echo "<option selected value='All'>" . _('All Locations');
 
 	$result= DB_query("SELECT loccode, locationname FROM locations",$db);
 	while ($myrow=DB_fetch_array($result)){
-	echo "<option VALUE='" . $myrow['loccode'] . "'>" . $myrow['locationname'];
+	echo "<option value='" . $myrow['loccode'] . "'>" . $myrow['locationname'];
 	}
 	echo '</select></td></tr>';
 
-	echo "</table><br><div class='centre'><input type=submit name='Go' VALUE='" . _('Create PDF') . "'></div>";
+	echo "</table><br><div class='centre'><input type=submit name='Go' value='" . _('Create PDF') . "'></div>";
 
 	include('includes/footer.inc');
 	exit;

@@ -229,7 +229,7 @@ if (isset($StockItemsResult)) {
 			$k=1;
 		}
 
-		printf("<td><input type=submit name='SelectedStockItem' VALUE='%s'</td>
+		printf("<td><input type=submit name='SelectedStockItem' value='%s'</td>
 				<td>%s</td>
 			<td class=number>%s</td>
 			<td class=number>%s</td>

@@ -342,13 +342,13 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 		$_POST['RecdAfterDate'] = Date($_SESSION['DefaultDateFormat'],Mktime(0,0,0,Date("m")-3,Date("d"),Date("Y")));
 	}
 	echo '<table class=selection><tr>';
-	echo '<input type=hidden name="SupplierID" VALUE="' . $_POST['SupplierID'] . '">';
-	echo '<input type=hidden name="SuppName" VALUE="' . $_POST['SuppName'] . '">';
+	echo '<input type=hidden name="SupplierID" value="' . $_POST['SupplierID'] . '">';
+	echo '<input type=hidden name="SuppName" value="' . $_POST['SuppName'] . '">';
 	echo '<td>'._('Show all goods received after') . ': </td><td><input type=text class=date alt="'.
 			$_SESSION['DefaultDateFormat'].'" name="RecdAfterDate" Value="' . $_POST['RecdAfterDate'] .
 			'" MAXLENGTH =10 size=10></td></tr>';;
 	echo '</table>';
-	echo '<br /><div class=centre><input type=submit name="ShowGRNS" VALUE=' . _('Show Outstanding Goods Received') . '></div>';
+	echo '<br /><div class=centre><input type=submit name="ShowGRNS" value=' . _('Show Outstanding Goods Received') . '></div>';
 	if (isset($_POST['ShowGRNS'])){
 
 		$sql = "SELECT grnno,

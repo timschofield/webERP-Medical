@@ -458,7 +458,7 @@ if (!isset($_POST['PostInvoice'])){
 		echo '<br /><table class=selection>
 					<tr>
 						<td>' . _('Amount in supplier currency') . ':</td>
-						<td colspan=2 class=number><input type="text" size="12" maxlength="10" name="OvAmount" value='  number_format( $_SESSION['SuppTrans']->OvAmount,2) . '></td>
+						<td colspan=2 class=number><input type="text" size="12" maxlength="10" name="OvAmount" value=' . number_format( $_SESSION['SuppTrans']->OvAmount,2) . '></td>
 					</tr>';
 	}
 

@@ -60,7 +60,7 @@ echo '<form action="' . $_SERVER['PHP_SELF'] . '?'. SID . '" method="post">';
 echo '<div class="centre"><input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo _('Stock Code') . ':<input type="text" name="StockID" size="21" value="' . $StockID . '" maxlength="20" />';
 
-echo ' <input type="submit" name="ShowStatus" VALUE="' . _('Show Stock Status') . '" /></div>';
+echo ' <input type="submit" name="ShowStatus" value="' . _('Show Stock Status') . '" /></div>';
 
 $sql = "SELECT locstock.loccode,
                locations.locationname,

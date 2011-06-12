@@ -440,7 +440,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 //	<tr>
 //	<td>'. _('Stock Code').':</td>
 //	<td><input type=text name="StockID" size=21 value="' . $_SESSION['Transfer']->TransferItem[0]->StockID . '" maxlength=20></td>
-//	<td><input type=submit name="CheckCode" VALUE="'._('Check Part').'"></td>
+//	<td><input type=submit name="CheckCode" value="'._('Check Part').'"></td>
 //	</tr>';
 if (!isset($_GET['Description'])) {
 	$_GET['Description']='';
@@ -458,7 +458,7 @@ if (isset($_POST['StockID'])) {
 } else {
 	echo '<input type=text name="StockCode" size=21 value="" maxlength=20>';
 }
-echo '</td><td><input type=submit name="CheckCode" VALUE="'._('Check Part').'"></td></tr>';
+echo '</td><td><input type=submit name="CheckCode" value="'._('Check Part').'"></td></tr>';
 
 if (isset($_SESSION['Transfer']->TransferItem[0]->ItemDescription) and strlen($_SESSION['Transfer']->TransferItem[0]->ItemDescription)>1){
 	echo '<tr><td colspan=3><font color=BLUE size=3>' . $_SESSION['Transfer']->TransferItem[0]->ItemDescription . ' ('._('In Units of').' ' . $_SESSION['Transfer']->TransferItem[0]->PartUnit . ' )</font></td></tr>';
@@ -517,7 +517,7 @@ if (isset($_SESSION['Transfer']->TransferItem[0]->Controlled) and $_SESSION['Tra
 	echo '<td><input type=text class="number" name="Quantity" size=12 maxlength=12 Value="0"></td></tr>';
 }
 
-echo '</table><div class="centre"><br><input type=submit name="EnterTransfer" VALUE="' . _('Enter Stock Transfer') . '"><br>';
+echo '</table><div class="centre"><br><input type=submit name="EnterTransfer" value="' . _('Enter Stock Transfer') . '"><br>';
 
 if (empty($_SESSION['Transfer']->TransferItem[0]->StockID) and isset($_POST['StockID'])) {
 	$StockID=$_POST['StockID'];

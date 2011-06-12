@@ -35,7 +35,7 @@ if (!isset($_POST['AfterDate']) OR !Is_Date($_POST['AfterDate'])){
    $_POST['AfterDate'] = Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m')-3,Date('d'),Date('y')));
 }
 echo '<br /><table cellpadding=2 class=selection>';
-echo '<tr><th colspan=10>' . _('Stock Code') . ':<input type="text" name="StockID" size=21 VALUE="'.$StockID.'" maxlength=20>';
+echo '<tr><th colspan=10>' . _('Stock Code') . ':<input type="text" name="StockID" size=21 value="'.$StockID.'" maxlength=20>';
 
 echo '  ' . _('From Stock Location') . ':<select name="StockLocation"> ';
 
@@ -45,22 +45,22 @@ $resultStkLocs = DB_query($sql,$db);
 while ($myrow=DB_fetch_array($resultStkLocs)){
 	if (isset($_POST['StockLocation']) AND $_POST['StockLocation']!='All'){
 		if ($myrow['loccode'] == $_POST['StockLocation']){
-		     echo '<option selected VALUE="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		     echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
-		     echo '<option VALUE="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		     echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
-		 echo '<option selected VALUE="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		 echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		 $_POST['StockLocation']=$myrow['loccode'];
 	} else {
-		 echo '<option VALUE="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		 echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 	}
 }
 
 echo '</select></th></tr>';
-echo '<tr><th colspan=10>' . _('Show Movements before') . ': <input type=text name="BeforeDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="12" maxlength="12" VALUE="' . $_POST['BeforeDate'] . '">';
-echo ' ' . _('But after') . ': <input type=TEXT name="AfterDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="12" maxlength="12" VALUE="' . $_POST['AfterDate'] . '">';
-echo '     <input type=submit name="ShowMoves" VALUE="' . _('Show Stock Movements') . '"></th></tr>';
+echo '<tr><th colspan=10>' . _('Show Movements before') . ': <input type=text name="BeforeDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="12" maxlength="12" value="' . $_POST['BeforeDate'] . '">';
+echo ' ' . _('But after') . ': <input type=TEXT name="AfterDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="12" maxlength="12" value="' . $_POST['AfterDate'] . '">';
+echo '     <input type=submit name="ShowMoves" value="' . _('Show Stock Movements') . '"></th></tr>';
 
 $SQLBeforeDate = FormatDateForSQL($_POST['BeforeDate']);
 $SQLAfterDate = FormatDateForSQL($_POST['AfterDate']);

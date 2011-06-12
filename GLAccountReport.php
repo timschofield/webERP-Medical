@@ -269,10 +269,10 @@ if (isset($_POST['RunReport'])){
 	$i=0;
 	while ($myrow=DB_fetch_array($AccountsResult,$db)){
 		if(isset($_POST['Account'][$i]) AND $myrow['accountcode'] == $_POST['Account'][$i]){
-			echo '<option selected VALUE=' . $myrow['accountcode'] . '>' . $myrow['accountcode'] . ' ' . $myrow['accountname'];
+			echo '<option selected value=' . $myrow['accountcode'] . '>' . $myrow['accountcode'] . ' ' . $myrow['accountname'];
 			$i++;
 		} else {
-			echo '<option VALUE=' . $myrow['accountcode'] . '>' . $myrow['accountcode'] . ' ' . $myrow['accountname'];
+			echo '<option value=' . $myrow['accountcode'] . '>' . $myrow['accountcode'] . ' ' . $myrow['accountname'];
 		}
 	}
 	echo '</select></td>';
@@ -285,10 +285,10 @@ if (isset($_POST['RunReport'])){
 
 	while ($myrow=DB_fetch_array($Periods,$db)){
 		if (isset($SelectedPeriod[$id]) and $myrow['periodno'] == $SelectedPeriod[$id]){
-			echo '<option selected VALUE=' . $myrow['periodno'] . '>' . _(MonthAndYearFromSQLDate($myrow['lastdate_in_period']));
+			echo '<option selected value=' . $myrow['periodno'] . '>' . _(MonthAndYearFromSQLDate($myrow['lastdate_in_period']));
 			$id++;
 		} else {
-			echo '<option VALUE=' . $myrow['periodno'] . '>' . _(MonthAndYearFromSQLDate($myrow['lastdate_in_period']));
+			echo '<option value=' . $myrow['periodno'] . '>' . _(MonthAndYearFromSQLDate($myrow['lastdate_in_period']));
 		}
 	}
 	echo '</select></td></tr>';
@@ -315,7 +315,7 @@ if (isset($_POST['RunReport'])){
 
 	echo '</table><p>
 		<div class="centre">
-			<input type=submit name="RunReport" VALUE="' ._('Run Report'). '"></div>
+			<input type=submit name="RunReport" value="' ._('Run Report'). '"></div>
 			</form>';
 
 	include ('includes/footer.inc');

@@ -55,7 +55,7 @@ while ($SalespersonRow = DB_fetch_array($SalespeopleResult)){
 }
 echo '</select></td>';
 
-echo '</tr></table><br /><div class="centre"><input tabindex=4 type=submit name="ShowResults" VALUE="' . _('Show Daily Sales For The Selected Month') . '">';
+echo '</tr></table><br /><div class="centre"><input tabindex=4 type=submit name="ShowResults" value="' . _('Show Daily Sales For The Selected Month') . '">';
 echo '</form></div>';
 echo '<br />';
 /*Now get and display the sales data returned */

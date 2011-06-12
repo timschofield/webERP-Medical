@@ -47,15 +47,15 @@ if ((! isset($_POST['FromPeriod']) OR ! isset($_POST['ToPeriod']))
 	while ($myrow=DB_fetch_array($Periods,$db)){
 		if(isset($_POST['FromPeriod']) AND $_POST['FromPeriod']!=''){
 			if( $_POST['FromPeriod']== $myrow['periodno']){
-				echo '<option selected VALUE="' . $myrow['periodno'] . '">' .MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
+				echo '<option selected value="' . $myrow['periodno'] . '">' .MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
 			} else {
-				echo '<option VALUE="' . $myrow['periodno'] . '">' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
+				echo '<option value="' . $myrow['periodno'] . '">' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
 			}
 		} else {
 			if($myrow['lastdate_in_period']==$DefaultFromDate){
-				echo '<option selected VALUE="' . $myrow['periodno'] . '">' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
+				echo '<option selected value="' . $myrow['periodno'] . '">' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
 			} else {
-				echo '<option VALUE="' . $myrow['periodno'] . '">' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
+				echo '<option value="' . $myrow['periodno'] . '">' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
 			}
 		}
 	}
@@ -74,7 +74,7 @@ if ((! isset($_POST['FromPeriod']) OR ! isset($_POST['ToPeriod']))
 	while ($myrow=DB_fetch_array($Periods,$db)){
 
 		if($myrow['periodno']==$DefaultToPeriod){
-			echo '<option selected VALUE="' . $myrow['periodno'] . '">' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
+			echo '<option selected value="' . $myrow['periodno'] . '">' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
 		} else {
 			echo '<option VALUE ="' . $myrow['periodno'] . '">' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
 		}
@@ -88,15 +88,15 @@ if ((! isset($_POST['FromPeriod']) OR ! isset($_POST['ToPeriod']))
 	}
 	echo '<tr><td>' . _('For Sales Area/Region:') .'</td><td><select Name="SalesArea">';
 	if($_POST['SalesArea']=='All'){
-		echo '<option selected VALUE="All">' . _('All') . '</option>';
+		echo '<option selected value="All">' . _('All') . '</option>';
 	} else {
-		echo '<option VALUE="All">' . _('All') . '</option>';
+		echo '<option value="All">' . _('All') . '</option>';
 	}
 	while ($myrow=DB_fetch_array($AreasResult)){
 		if($myrow['areacode']==$_POST['SalesArea']){
-			echo '<option selected VALUE="' . $myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
+			echo '<option selected value="' . $myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
 		} else {
-			echo '<option VALUE="' . $myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
+			echo '<option value="' . $myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
 		}
 	}
 	echo '</select></td></tr>';
@@ -108,15 +108,15 @@ if ((! isset($_POST['FromPeriod']) OR ! isset($_POST['ToPeriod']))
 	}
 	echo '<tr><td>' . _('For Stock Category:') .'</td><td><select Name="CategoryID">';
 	if($_POST['CategoryID']=='All'){
-		echo '<option selected VALUE="All">' . _('All') . '</option>';
+		echo '<option selected value="All">' . _('All') . '</option>';
 	} else {
-		echo '<option VALUE="All">' . _('All') . '</option>';
+		echo '<option value="All">' . _('All') . '</option>';
 	}
 	while ($myrow=DB_fetch_array($CategoriesResult)){
 		if($myrow['categoryid']==$_POST['CategoryID']){
-			echo '<option selected VALUE="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'];
+			echo '<option selected value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'];
 		} else {
-			echo '<option VALUE="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'];
+			echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'];
 		}
 	}
 	echo '</select></td></tr>';
@@ -131,15 +131,15 @@ if ((! isset($_POST['FromPeriod']) OR ! isset($_POST['ToPeriod']))
 	echo '<tr><td>' . _('For Sales Person:') .'</td><td><select Name="SalesmanCode">';
 
 	if($_POST['SalesmanCode']=='All'){
-		echo '<option selected VALUE="All">' . _('All') . '</option>';
+		echo '<option selected value="All">' . _('All') . '</option>';
 	} else {
-		echo '<option VALUE="All">' . _('All') . '</option>';
+		echo '<option value="All">' . _('All') . '</option>';
 	}
 	while ($myrow=DB_fetch_array($SalesFolkResult)){
 		if ($myrow['salesmancode']== $_POST['SalesmanCode']){
-			echo '<option selected VALUE="' . $myrow['salesmancode'] . '">' . $myrow['salesmanname'] . '</option>';
+			echo '<option selected value="' . $myrow['salesmancode'] . '">' . $myrow['salesmanname'] . '</option>';
 		} else {
-			echo '<option VALUE="' . $myrow['salesmancode'] . '">' . $myrow['salesmanname'] . '</option>';
+			echo '<option value="' . $myrow['salesmancode'] . '">' . $myrow['salesmanname'] . '</option>';
 		}
 	}
 	echo '</select></td><td>' . $_POST['SalesmanCode'] . '</td></tr>';
@@ -165,16 +165,16 @@ if ((! isset($_POST['FromPeriod']) OR ! isset($_POST['ToPeriod']))
 		$_POST['ValueTo']='';
 	}
 	echo '<tr><td>' . _('Graph On:') . '</td><td>
-			<input type="RADIO" name="GraphOn" VALUE="All" CHECKED>' . _('All') . '<br>
-			<input type="RADIO" name="GraphOn" VALUE="Customer">' . _('Customer') . '<br>
-			<input type="RADIO" name="GraphOn" VALUE="StockID">' . _('Item Code') . '</td></tr>';
-	echo '<tr><td>' . _('From:') . ' <input type=TEXT name="ValueFrom" VALUE=' . $_POST['ValueFrom'] . '></td>
-	 		<td>' . _('To:') . ' <input type=TEXT name="ValueTo" VALUE=' . $_POST['ValueTo'] . '></td></tr>';
+			<input type="RADIO" name="GraphOn" value="All" CHECKED>' . _('All') . '<br>
+			<input type="RADIO" name="GraphOn" value="Customer">' . _('Customer') . '<br>
+			<input type="RADIO" name="GraphOn" value="StockID">' . _('Item Code') . '</td></tr>';
+	echo '<tr><td>' . _('From:') . ' <input type=TEXT name="ValueFrom" value=' . $_POST['ValueFrom'] . '></td>
+	 		<td>' . _('To:') . ' <input type=TEXT name="ValueTo" value=' . $_POST['ValueTo'] . '></td></tr>';
 
 	echo '<tr><td>' . _('Graph Value:') . '</td><td>
-			<input type="RADIO" name="GraphValue" VALUE="Net" CHECKED>' . _('Net Sales Value') . '<br>
-			<input type="RADIO" name="GraphValue" VALUE="GP">' . _('Gross Profit') . '<br>
-			<input type="RADIO" name="GraphValue" VALUE="Quantity">' . _('Quantity') . '</td></tr>';
+			<input type="RADIO" name="GraphValue" value="Net" CHECKED>' . _('Net Sales Value') . '<br>
+			<input type="RADIO" name="GraphValue" value="GP">' . _('Gross Profit') . '<br>
+			<input type="RADIO" name="GraphValue" value="Quantity">' . _('Quantity') . '</td></tr>';
 
 	echo '</table>';
 

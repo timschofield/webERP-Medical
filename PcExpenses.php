@@ -249,8 +249,8 @@ if (! isset($_GET['delete'])) {
 		$_POST['description']  = $myrow['description'];
 		$_POST['glaccount']  = $myrow['glaccount'];
 
-		echo '<input type=hidden name="SelectedExpense" VALUE="' . $SelectedExpense . '">';
-		echo '<input type=hidden name="codeexpense" VALUE="' . $_POST['codeexpense']. '">';
+		echo '<input type=hidden name="SelectedExpense" value="' . $SelectedExpense . '">';
+		echo '<input type=hidden name="codeexpense" value="' . $_POST['codeexpense']. '">';
 		echo '<table class=selection> <tr><td>' . _('Code Of Expense') . ':</td><td>';
 
 		// We dont allow the user to change an existing type code
@@ -286,9 +286,9 @@ if (! isset($_GET['delete'])) {
 	echo '<option value=""></option>';
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['glaccount']) and $myrow['accountcode']==$_POST['glaccount']) {
-			echo '<option selected VALUE="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
+			echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
 		} else {
-			echo '<option VALUE="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
+			echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
 		}
 	} //end while loop
 
@@ -296,7 +296,7 @@ if (! isset($_GET['delete'])) {
 
    	echo '</td></tr></table>'; // close main table
 
-	echo '<p><div class="centre"><input type=submit name=submit VALUE="' . _('Accept') . '"><input type=submit name=Cancel VALUE="' . _('Cancel') . '"></div>';
+	echo '<p><div class="centre"><input type=submit name=submit value="' . _('Accept') . '"><input type=submit name=Cancel value="' . _('Cancel') . '"></div>';
 
 	echo '</form>';
 

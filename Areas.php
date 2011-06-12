@@ -196,8 +196,8 @@ if (!isset($_GET['delete'])) {
 		$_POST['AreaCode'] = $myrow['areacode'];
 		$_POST['AreaDescription']  = $myrow['areadescription'];
 
-		echo '<input type=hidden name=SelectedArea VALUE=' . $SelectedArea . '>';
-		echo '<input type=hidden name=AreaCode VALUE=' .$_POST['AreaCode'] . '>';
+		echo '<input type=hidden name=SelectedArea value=' . $SelectedArea . '>';
+		echo '<input type=hidden name=AreaCode value=' .$_POST['AreaCode'] . '>';
 		echo '<table class=selection><tr><td>' . _('Area Code') . ':</td><td>' . $_POST['AreaCode'] . '</td></tr>';
 
 	} else {

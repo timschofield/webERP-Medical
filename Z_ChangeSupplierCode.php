@@ -23,7 +23,7 @@ echo '
 	<td><input type=Text name="NewSupplierNo" size=20 maxlength=20></td>
 	</tr>
     </table>
-    <input type=submit name="ProcessSupplierChange" VALUE="' . _('Process') . '">
+    <input type=submit name="ProcessSupplierChange" value="' . _('Process') . '">
     <div>
     </form>';
 
@@ -42,7 +42,7 @@ function ProcessSupplier($oldCode, $newCode) {
         'suppliercontacts'=>'supplierid',
         'supptrans'=>'supplierno',
         'www_users'=>'supplierid');
-    
+
     // First check the Supplier code exists
     if (!checkSupplierExist($oldCode)) {
         prnMsg ('<br><br>' . _('The Supplier code') . ': ' . $oldCode . ' ' .

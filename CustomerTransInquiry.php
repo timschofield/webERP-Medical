@@ -43,10 +43,10 @@ if (!isset($_POST['FromDate'])){
 if (!isset($_POST['ToDate'])){
 	$_POST['ToDate'] = Date($_SESSION['DefaultDateFormat']);
 }
-echo '<td>' . _('From') . ':</td><td><input tabindex="2" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="TEXT" name="FromDate" maxlength="10" size="11" VALUE="' . $_POST['FromDate'] . '"></td>';
-echo '<td>' . _('To') . ':</td><td><input tabindex="3" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="TEXT" name="ToDate" maxlength="10" size="11" VALUE="' . $_POST['ToDate'] . '"></td>';
+echo '<td>' . _('From') . ':</td><td><input tabindex="2" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="TEXT" name="FromDate" maxlength="10" size="11" value="' . $_POST['FromDate'] . '"></td>';
+echo '<td>' . _('To') . ':</td><td><input tabindex="3" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="TEXT" name="ToDate" maxlength="10" size="11" value="' . $_POST['ToDate'] . '"></td>';
 
-echo "</tr></table><br><div class='centre'><input tabindex=4 type=submit name='ShowResults' VALUE='" . _('Show Transactions') . "'>";
+echo "</tr></table><br><div class='centre'><input tabindex=4 type=submit name='ShowResults' value='" . _('Show Transactions') . "'>";
 
 echo '</form></div>';
 

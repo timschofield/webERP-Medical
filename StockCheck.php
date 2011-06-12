@@ -282,7 +282,7 @@ If (isset($_POST['PrintPDF'])
 		DB_data_seek($CatResult,0);
 
 		While ($myrow = DB_fetch_array($CatResult)){
-			echo '<option VALUE="' . $myrow['categoryid'] . '">' . $myrow['categoryid'] . ' - ' . $myrow['categorydescription'];
+			echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categoryid'] . ' - ' . $myrow['categorydescription'];
 		}
 		echo '</select></td></tr>';
 
@@ -308,7 +308,7 @@ If (isset($_POST['PrintPDF'])
 		if ($_POST['MakeStkChkData'] =='AddUpdate'){
 			echo '<option selected value="AddUpdate">' . _('Add/update existing stock check file');
 		} else {
-			echo '<option VALUE="AddUpdate">' . _('Add/update existing stock check file');
+			echo '<option value="AddUpdate">' . _('Add/update existing stock check file');
 		}
 		if ($_POST['MakeStkChkData'] =='PrintOnly'){
 			echo '<option selected value="PrintOnly">' . _('Print Stock Check Sheets Only');
@@ -320,17 +320,17 @@ If (isset($_POST['PrintPDF'])
 		echo '<tr><td>' . _('Show system quantity on sheets') . ':</td><td>';
 
 		if (isset($_POST['ShowInfo']) and $_POST['ShowInfo'] == false){
-				echo '<input type=CHECKBOX name="ShowInfo" VALUE=FALSE>';
+				echo '<input type=CHECKBOX name="ShowInfo" value=FALSE>';
 		} else {
-				echo '<input type=CHECKBOX name="ShowInfo" VALUE=TRUE>';
+				echo '<input type=CHECKBOX name="ShowInfo" value=TRUE>';
 		}
 		echo '</td></tr>';
 
 		echo '<tr><td>' . _('Only print items with non zero quantities') . ':</td><td>';
 		if (isset($_POST['NonZerosOnly']) and $_POST['NonZerosOnly'] == false){
-				echo '<input type=CHECKBOX name="NonZerosOnly" VALUE=FALSE>';
+				echo '<input type=CHECKBOX name="NonZerosOnly" value=FALSE>';
 		} else {
-				echo '<input type=CHECKBOX name="NonZerosOnly" VALUE=TRUE>';
+				echo '<input type=CHECKBOX name="NonZerosOnly" value=TRUE>';
 		}
 
 			echo '</td></tr></table><br><div class="centre"><input type=Submit Name="PrintPDF" Value="' . _('Print and Process') . '"></div></form>';

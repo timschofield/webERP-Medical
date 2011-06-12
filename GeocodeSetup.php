@@ -220,8 +220,8 @@ if (!isset($_GET['delete'])) {
 		$_POST['map_width']  = $myrow['map_width'];
 		$_POST['map_host']  = $myrow['map_host'];
 
-		echo '<input type=hidden name="SelectedParam" VALUE="' . $SelectedParam . '">';
-		echo '<input type=hidden name="geocodeid" VALUE="' . $_POST['geocodeid'] . '">';
+		echo '<input type=hidden name="SelectedParam" value="' . $SelectedParam . '">';
+		echo '<input type=hidden name="geocodeid" value="' . $_POST['geocodeid'] . '">';
 		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Geocode Setup') . '" alt="">'. _('Setup configuration for Geocoding of Customers and Suppliers') .'</p>';
 		echo '<table><tr><td>'. _('Geocode Code') .':</td><td>';
 		echo $_POST['geocodeid'] . '</td></tr>';
@@ -239,22 +239,22 @@ if (!isset($_GET['delete'])) {
 	echo '<br><tr>
 		<td>'. _('Geocode Key') .':</td>
 		<td><input ' . (in_array('geocode_key',$Errors) ? 'class="inputerror"' : '' ) .
-		 ' tabindex=2 type="text" name="geocode_key" VALUE="'. $_POST['geocode_key'] .'" size=28 maxlength=300>
+		 ' tabindex=2 type="text" name="geocode_key" value="'. $_POST['geocode_key'] .'" size=28 maxlength=300>
 	</td></tr>
 	<tr><td>'. _('Geocode Center Long') . '</td>
-	<td><input tabindex=3 type="text" name="center_long" VALUE="'. $_POST['center_long'] .'" size=28 maxlength=300></td></tr>
+	<td><input tabindex=3 type="text" name="center_long" value="'. $_POST['center_long'] .'" size=28 maxlength=300></td></tr>
 
 <tr><td>'. _('Geocode Center Lat') . '</td>
-        <td><input tabindex=4 type="text" name="center_lat" VALUE="'. $_POST['center_lat'] .'" size=28 maxlength=300></td></tr>
+        <td><input tabindex=4 type="text" name="center_lat" value="'. $_POST['center_lat'] .'" size=28 maxlength=300></td></tr>
 
 <tr><td>'. _('Geocode Map Height') . '</td>
-        <td><input tabindex=5 type="text" name="map_height" VALUE="'. $_POST['map_height'] .'" size=28 maxlength=300></td></tr>
+        <td><input tabindex=5 type="text" name="map_height" value="'. $_POST['map_height'] .'" size=28 maxlength=300></td></tr>
 
 <tr><td>'. _('Geocode Map Width') . '</td>
-        <td><input tabindex=6 type="text" name="map_width" VALUE="'. $_POST['map_width'] .'" size=28 maxlength=300></td></tr>
+        <td><input tabindex=6 type="text" name="map_width" value="'. $_POST['map_width'] .'" size=28 maxlength=300></td></tr>
 
 <tr><td>'. _('Geocode Host') . '</td>
-        <td><input tabindex=7 type="text" name="map_host" VALUE="'. $_POST['map_host'] .'" size=20 maxlength=300></td></tr>
+        <td><input tabindex=7 type="text" name="map_host" value="'. $_POST['map_host'] .'" size=20 maxlength=300></td></tr>
 
 
 	</table>

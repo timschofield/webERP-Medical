@@ -256,13 +256,13 @@ if (isset($_GET['Modify'])){
 	echo '<div class="centre"><p><input type=Submit Name="ModifyGRN" Value="' . _('Modify Line') . '"></div>';
 
 
-	echo '<input type=hidden name="GRNNumber" VALUE="' . $GRNTmp->GRNNo . '">';
-	echo '<input type=hidden name="ItemCode" VALUE="' . $GRNTmp->ItemCode . '">';
-	echo '<input type=hidden name="ItemDescription" VALUE="' . $GRNTmp->ItemDescription . '">';
-	echo '<input type=hidden name="QtyRecd" VALUE="' . $GRNTmp->QtyRecd . '">';
-	echo '<input type=hidden name="Prev_QuantityInv" VALUE="' . $GRNTmp->Prev_QuantityInv . '">';
-	echo '<input type=hidden name="OrderPrice" VALUE="' . $GRNTmp->OrderPrice . '">';
-	echo '<input type=hidden name="StdCostUnit" VALUE=' . $GRNTmp->StdCostUnit . '">';
+	echo '<input type=hidden name="GRNNumber" value="' . $GRNTmp->GRNNo . '">';
+	echo '<input type=hidden name="ItemCode" value="' . $GRNTmp->ItemCode . '">';
+	echo '<input type=hidden name="ItemDescription" value="' . $GRNTmp->ItemDescription . '">';
+	echo '<input type=hidden name="QtyRecd" value="' . $GRNTmp->QtyRecd . '">';
+	echo '<input type=hidden name="Prev_QuantityInv" value="' . $GRNTmp->Prev_QuantityInv . '">';
+	echo '<input type=hidden name="OrderPrice" value="' . $GRNTmp->OrderPrice . '">';
+	echo '<input type=hidden name="StdCostUnit" value=' . $GRNTmp->StdCostUnit . '">';
 	echo '<input type=hidden name="JobRef" Value="' . $GRNTmp->JobRef . '">';
 	echo '<input type=hidden name="GLCode" Value="' . $GRNTmp->GLCode . '">';
 	echo '<input type=hidden name="PODetailItem" Value="' . $GRNTmp->PODetailItem . '">';

@@ -51,9 +51,9 @@ if ((! isset($_POST['FromDate']) AND ! isset($_POST['ToDate'])) OR isset($_POST[
 
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['SelectedTabs']) and $myrow['tabcode']==$_POST['SelectedTabs']) {
-			echo '<option selected VALUE="' .$myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
+			echo '<option selected value="' .$myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
 		} else {
-			echo '<option VALUE="' . $myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
+			echo '<option value="' . $myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
 		}
 
 	} //end while loop get type of tab
@@ -63,10 +63,10 @@ if ((! isset($_POST['FromDate']) AND ! isset($_POST['ToDate'])) OR isset($_POST[
 
 	echo '</select></td></tr>';
 	echo'<tr><td>' . _('From Date :') . '</td><td>';
-	echo '<input tabindex="2" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="TEXT" name="FromDate" maxlength="10" size="11" VALUE="' . $_POST['FromDate'] . '">';
+	echo '<input tabindex="2" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="TEXT" name="FromDate" maxlength="10" size="11" value="' . $_POST['FromDate'] . '">';
 	echo '</td></tr>';
 	echo '<tr><td>' . _('To Date:') .'</td><td>';
-	echo '<input tabindex="3" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="TEXT" name="ToDate" maxlength="10" size="11" VALUE="' . $_POST['ToDate'] . '">';
+	echo '<input tabindex="3" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="TEXT" name="ToDate" maxlength="10" size="11" value="' . $_POST['ToDate'] . '">';
 	echo '</td></tr></table><br>';
 	echo '<div class="centre"><input type=submit Name="ShowTB" Value="' . _('Show HTML') .'">';
 	echo '<input type=submit Name="PrintPDF" Value="'._('PrintPDF').'"></div>';
@@ -240,7 +240,7 @@ if (DB_error_no($db)!=0){
 
 	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<input type=hidden name="FromDate" VALUE="' . $_POST['FromDate'] . '"><input type=hidden name="ToDate" VALUE="' . $_POST['ToDate'] . '">';
+	echo '<input type=hidden name="FromDate" value="' . $_POST['FromDate'] . '"><input type=hidden name="ToDate" value="' . $_POST['ToDate'] . '">';
 
 	$SqlTabs = "SELECT * FROM pctabs
 			WHERE tabcode='".$SelectedTabs."'";

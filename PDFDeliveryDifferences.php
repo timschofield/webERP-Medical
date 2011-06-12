@@ -33,7 +33,7 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate']) OR $InputError==1){
 	 	":</td><td><input type=text class=date alt='".$_SESSION['DefaultDateFormat'].
 	 	"' name='FromDate' maxlength=10 size=10 value='" .
 	 	Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m')-1,0,Date('y'))) . "'></td></tr>";
-	 echo '<tr><td>' . _('Enter the date to which variances between orders and deliveries are to be listed') . ":</td><td><input type=text class=date alt='".$_SESSION['DefaultDateFormat']."'  name='ToDate' maxlength=10 size=10 VALUE='" . Date($_SESSION['DefaultDateFormat']) . "'></td></tr>";
+	 echo '<tr><td>' . _('Enter the date to which variances between orders and deliveries are to be listed') . ":</td><td><input type=text class=date alt='".$_SESSION['DefaultDateFormat']."'  name='ToDate' maxlength=10 size=10 value='" . Date($_SESSION['DefaultDateFormat']) . "'></td></tr>";
 	 echo '<tr><td>' . _('Inventory Category') . '</td><td>';
 
 	 $sql = "SELECT categorydescription, categoryid FROM stockcategory WHERE stocktype<>'D' AND stocktype<>'L'";
@@ -62,7 +62,7 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate']) OR $InputError==1){
 	 echo '<tr><td>' . _('Email the report off') . ":</td><td><select name='Email'>";
 	 echo "<option selected value='No'>" . _('No');
 	 echo "<option value='Yes'>" . _('Yes');
-	 echo "</select></td></tr></table><br><div class='centre'><input type=submit name='Go' VALUE='" . _('Create PDF') . "'></div>";
+	 echo "</select></td></tr></table><br><div class='centre'><input type=submit name='Go' value='" . _('Create PDF') . "'></div>";
 
 	 if ($InputError==1){
 	 	prnMsg($msg,'error');

@@ -466,9 +466,9 @@ if (isset($_SESSION['Transfer'])){
 		echo '<td class=number>' . number_format($TrfLine->PrevRecvQty, $TrfLine->DecimalPlaces) . '</td>';
 
 		if ($TrfLine->Controlled==1){
-			echo '<td class=number><input type=hidden name="Qty' . $i . '" VALUE="' . $Qty . '"><a href="' . $rootpath .'/StockTransferControlled.php?' . SID . '&TransferItem=' . $i . '">' . $Qty . '</a></td>';
+			echo '<td class=number><input type=hidden name="Qty' . $i . '" value="' . $Qty . '"><a href="' . $rootpath .'/StockTransferControlled.php?' . SID . '&TransferItem=' . $i . '">' . $Qty . '</a></td>';
 		} else {
-			echo '<td><input type=text class="number" name="Qty' . $i . '" maxlength=10 class="number" size=auto VALUE="' . $Qty . '"></td>';
+			echo '<td><input type=text class="number" name="Qty' . $i . '" maxlength=10 class="number" size=auto value="' . $Qty . '"></td>';
 		}
 
 		echo '<td>' . $TrfLine->PartUnit . '</td>';
@@ -490,7 +490,7 @@ if (isset($_SESSION['Transfer'])){
 	} /*end of foreach TransferItem */
 
 	echo '</table><br />
-		<div class="centre"><input type=submit name="ProcessTransfer" VALUE="'. _('Process Inventory Transfer'). '"><bR />
+		<div class="centre"><input type=submit name="ProcessTransfer" value="'. _('Process Inventory Transfer'). '"><bR />
 		</form></div>';
 	echo '<a href="'.$_SERVER['PHP_SELF']. '?' . SID . '&NewTransfer=true">'. _('Select A Different Transfer').'</a>';
 
@@ -517,7 +517,7 @@ if (isset($_SESSION['Transfer'])){
 			echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
 		}
 	}
-	echo '</select><input type=submit name="RefreshTransferList" VALUE="' . _('Refresh Transfer List') . '"></td></tr></table><p>';
+	echo '</select><input type=submit name="RefreshTransferList" value="' . _('Refresh Transfer List') . '"></td></tr></table><p>';
 
 	$sql = "SELECT DISTINCT reference,
 				locations.locationname as trffromloc,

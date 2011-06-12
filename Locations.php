@@ -424,8 +424,8 @@ if (!isset($_GET['delete'])) {
 		$_POST['Managed'] = $myrow['managed'];
 
 
-		echo '<input type=hidden name=SelectedLocation VALUE="' . $SelectedLocation . '>';
-		echo '<input type=hidden name=LocCode VALUE="' . $_POST['LocCode'] . '>';
+		echo '<input type=hidden name=SelectedLocation value="' . $SelectedLocation . '>';
+		echo '<input type=hidden name=LocCode value="' . $_POST['LocCode'] . '>';
 		echo '<table class=selection>';
 		echo '<tr><th colspan=2><font size=3 color=blue>'._('Amend Location details').'</font></th></tr>';
 		echo '<tr><td>' . _('Location Code') . ':</td><td>';

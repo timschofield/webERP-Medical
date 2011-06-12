@@ -33,10 +33,10 @@ $AccountsResult = DB_query($sql,$db);
 $i=0;
 while ($myrow=DB_fetch_array($AccountsResult,$db)){
 	if(isset($_POST['Account'][$i]) AND $myrow['accountcode'] == $_POST['Account'][$i]){
-		echo '<option selected VALUE=' . $myrow['accountcode'] . '>' . $myrow['accountcode'] . ' ' . $myrow['accountname'] . '</option>';
+		echo '<option selected value=' . $myrow['accountcode'] . '>' . $myrow['accountcode'] . ' ' . $myrow['accountname'] . '</option>';
 		$i++;
 	} else {
-		echo '<option VALUE=' . $myrow['accountcode'] . '>' . $myrow['accountcode'] . ' ' . $myrow['accountname'] . '</option>';
+		echo '<option value=' . $myrow['accountcode'] . '>' . $myrow['accountcode'] . ' ' . $myrow['accountname'] . '</option>';
 	}
 }
 echo '</select></td>';
@@ -49,10 +49,10 @@ $id=0;
 
 while ($myrow=DB_fetch_array($Periods,$db)){
 	if (isset($SelectedPeriod[$id]) and $myrow['periodno'] == $SelectedPeriod[$id]){
-		echo '<option selected VALUE=' . $myrow['periodno'] . '>' . _(MonthAndYearFromSQLDate($myrow['lastdate_in_period'])) . '</option>';
+		echo '<option selected value=' . $myrow['periodno'] . '>' . _(MonthAndYearFromSQLDate($myrow['lastdate_in_period'])) . '</option>';
 		$id++;
 	} else {
-		echo '<option VALUE=' . $myrow['periodno'] . '>' . _(MonthAndYearFromSQLDate($myrow['lastdate_in_period'])) . '</option>';
+		echo '<option value=' . $myrow['periodno'] . '>' . _(MonthAndYearFromSQLDate($myrow['lastdate_in_period'])) . '</option>';
 	}
 }
 echo '</select></td></tr>';
@@ -78,7 +78,7 @@ echo '</select></td></tr>';
 // End select tag
 
 echo "</table><p>
-<div class='centre'><input type=submit name='MakeCSV' VALUE='"._('Make CSV File')."'></div></form>";
+<div class='centre'><input type=submit name='MakeCSV' value='"._('Make CSV File')."'></div></form>";
 
 /* End of the Form  rest of script is what happens if the show button is hit*/
 

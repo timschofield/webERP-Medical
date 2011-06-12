@@ -48,8 +48,8 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 	echo '</select></td></tr>';
 
 	echo '<tr><td>'._('Detail Or Summary').':</td><td><select Name="Detail">';
-	echo '<option selected VALUE="Summary">'._('Summary') . '</option>';
-	echo '<option selected VALUE="Detailed">'._('All Accounts') . '</option>';
+	echo '<option selected value="Summary">'._('Summary') . '</option>';
+	echo '<option selected value="Detailed">'._('All Accounts') . '</option>';
 	echo '</select></td></tr>';
 
 	echo '</table>';
@@ -303,7 +303,7 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 	include('includes/header.inc');
 	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<input type=hidden name="BalancePeriodEnd" VALUE="' . $_POST['BalancePeriodEnd'] . '">';
+	echo '<input type=hidden name="BalancePeriodEnd" value="' . $_POST['BalancePeriodEnd'] . '">';
 
 	$RetainedEarningsAct = $_SESSION['CompanyRecord']['retainedearnings'];
 

@@ -390,7 +390,7 @@ if (isset($_POST['PrintPDF'])){
 	$SalesFolkResult = DB_query($sql,$db);
 
 	While ($myrow = DB_fetch_array($SalesFolkResult)){
-		echo '<option VALUE="' . $myrow['salesmancode'] . '">' . $myrow['salesmanname'];
+		echo '<option value="' . $myrow['salesmancode'] . '">' . $myrow['salesmanname'];
 	}
 	echo '</select></td></tr>';
 
@@ -405,7 +405,7 @@ if (isset($_POST['PrintPDF'])){
 
 	$DefaultActivitySince = Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m')-6,0,Date('y')));
 	echo '<tr><td>' . _('Activity Since'). ':</td><td><input type="text" class=date alt="'.$_SESSION['DefaultDateFormat'].'"  name="ActivitySince" size=10 maxlength=10
-		VALUE="' . $DefaultActivitySince . '"></td></tr>';
+		value="' . $DefaultActivitySince . '"></td></tr>';
 
 	echo '</table><br><div class="centre"><input type=Submit Name="PrintPDF" Value="'. _('Print PDF'). '"></div>';
 

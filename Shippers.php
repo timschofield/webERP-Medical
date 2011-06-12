@@ -177,8 +177,8 @@ if (!isset($_GET['delete'])) {
 		$_POST['Shipper_ID'] = $myrow['shipper_id'];
 		$_POST['ShipperName']	= $myrow['shippername'];
 
-		echo '<input type=hidden name="SelectedShipper" VALUE='. $SelectedShipper .'>';
-		echo '<input type=hidden name="Shipper_ID" VALUE=' . $_POST['Shipper_ID'] . '>';
+		echo '<input type=hidden name="SelectedShipper" value='. $SelectedShipper .'>';
+		echo '<input type=hidden name="Shipper_ID" value=' . $_POST['Shipper_ID'] . '>';
 		echo '<br /><table class=selection><tr><td>'. _('Shipper Code').':</td><td>' . $_POST['Shipper_ID'] . '</td></tr>';
 	} else {
 		echo "<br /><table class=selection>";

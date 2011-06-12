@@ -313,8 +313,8 @@ if (isset($_POST['TaxAuthority']) AND
 			<td><select name=NoOfPeriods>
 			<option Value=1>' . _('One Month') .
 			'<option selected Value=2>' ._('Two Months') .
-			'<option VALUE=3>' . _('Quarter') .
-			'<option VALUE=6>' . _('Six Months') .
+			'<option value=3>' . _('Quarter') .
+			'<option value=6>' . _('Six Months') .
 			'</select></td></tr>';
 
 
@@ -333,9 +333,9 @@ if (isset($_POST['TaxAuthority']) AND
 
 	while ($myrow = DB_fetch_array($Periods,$db)){
 		if ($myrow['periodno']==$DefaultPeriod){
-			echo '<option selected VALUE=' . $myrow['periodno'] . '>' . ConvertSQLDate($myrow['lastdate_in_period']);
+			echo '<option selected value=' . $myrow['periodno'] . '>' . ConvertSQLDate($myrow['lastdate_in_period']);
 		} else {
-			echo '<option VALUE=' . $myrow['periodno'] . '>' . ConvertSQLDate($myrow['lastdate_in_period']);
+			echo '<option value=' . $myrow['periodno'] . '>' . ConvertSQLDate($myrow['lastdate_in_period']);
 		}
 	}
 

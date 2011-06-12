@@ -204,7 +204,7 @@ echo '<p><table>
 <tr><td>" . _('New Branch Code') . ":</td><td><input type=Text name='NewBranchCode' size=20 maxlength=20></td></tr>
 </table>";
 
-echo "<input type=submit name='ProcessCustomerChange' VALUE='" . _('Process') . "'>";
+echo "<input type=submit name='ProcessCustomerChange' value='" . _('Process') . "'>";
 
 echo '</form>';
 

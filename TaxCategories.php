@@ -218,7 +218,7 @@ if (! isset($_GET['delete'])) {
 
 			$_POST['TaxCategoryName']  = $myrow['taxcatname'];
 
-			echo '<input type=hidden name="SelectedTaxCategory" VALUE="' . $myrow['taxcatid'] . '">';
+			echo '<input type=hidden name="SelectedTaxCategory" value="' . $myrow['taxcatid'] . '">';
 			echo '<table class=selection>';
 		}
 

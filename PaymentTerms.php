@@ -243,8 +243,8 @@ if (!isset($_GET['delete'])) {
 		$DaysBeforeDue  = $myrow['daysbeforedue'];
 		$DayInFollowingMonth  = $myrow['dayinfollowingmonth'];
 
-		echo '<input type=hidden name="SelectedTerms" VALUE="' . $SelectedTerms . '">';
-		echo '<input type=hidden name="TermsIndicator" VALUE="' . $_POST['TermsIndicator'] . '">';
+		echo '<input type=hidden name="SelectedTerms" value="' . $SelectedTerms . '">';
+		echo '<input type=hidden name="TermsIndicator" value="' . $_POST['TermsIndicator'] . '">';
 		echo '<br><table class=selection>';
 		echo '<tr><th colspan=6><font color=blue size=3>'._('Update Payment Terms.').'</font></th></tr>';
 		echo '<tr><td>' . _('Term Code') . ':</td><td>';
@@ -267,13 +267,13 @@ if (!isset($_GET['delete'])) {
 
 	echo '<tr><td>'. _('Terms Description'). ':</td>
 	<td>
-	<input type="text"' . (in_array('Terms',$Errors) ? 'class="inputerror"' : '' ) .' name="Terms" VALUE="'.$_POST['Terms']. '" size=35 maxlength=40>
+	<input type="text"' . (in_array('Terms',$Errors) ? 'class="inputerror"' : '' ) .' name="Terms" value="'.$_POST['Terms']. '" size=35 maxlength=40>
 	</td></tr>
 	<tr><td>'._('Due After A Given No. Of Days').':</td>
 	<td><input type="checkbox" name="DaysOrFoll"';
 	if ( isset($DayInFollowingMonth) && !$DayInFollowingMonth) { echo "checked"; }
 	echo ' ></td></tr><tr><td>'._('Days (Or Day In Following Month)').':</td><td>
-		<input type="Text"' . (in_array('DayNumber',$Errors) ? 'class="inputerror"' : '' ) .' name="DayNumber" class=number  size=4 maxlength=3 VALUE=';
+		<input type="Text"' . (in_array('DayNumber',$Errors) ? 'class="inputerror"' : '' ) .' name="DayNumber" class=number  size=4 maxlength=3 value=';
 	if ($DaysBeforeDue !=0) {
 			echo $DaysBeforeDue;
 			} else {

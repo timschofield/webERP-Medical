@@ -336,7 +336,7 @@ if (isset($StockID)) {
 } else {
 	echo '<input type=text name="StockCode" size=21 value="" maxlength=20>';
 }
-echo '</td><td><input type=submit name="CheckCode" VALUE="'._('Check Part').'"></td></tr>';
+echo '</td><td><input type=submit name="CheckCode" value="'._('Check Part').'"></td></tr>';
 if (isset($_SESSION['Adjustment']) and strlen($_SESSION['Adjustment']->ItemDescription)>1){
 	echo '<tr><td colspan=3><font color=BLUE size=3>' . $_SESSION['Adjustment']->ItemDescription . ' ('._('In Units of').' ' .
 		$_SESSION['Adjustment']->PartUnit . ' ) - ' . _('Unit Cost').' = ' .

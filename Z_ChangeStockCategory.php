@@ -96,7 +96,7 @@ echo '<p><table>
 	<td><input type=Text name='OldStockCategory' size=20 maxlength=20></td></tr>";
 echo '<tr><td>' . _('New Inventory Category Code') . ":</td><td><input type=Text name='NewStockCategory' size=20 maxlength=20></td></tr>";
 echo '</table>';
-echo "<div class='centre'><input type=submit name='ProcessStockChange' VALUE='" . _('Process') . "'></div>";
+echo "<div class='centre'><input type=submit name='ProcessStockChange' value='" . _('Process') . "'></div>";
 echo '</form>';
 include ('includes/footer.inc');
 ?>

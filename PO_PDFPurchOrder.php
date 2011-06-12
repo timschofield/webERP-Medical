@@ -341,21 +341,21 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	if ($ViewingOnly==1){
-		echo '<input type=hidden name="ViewingOnly" VALUE=1>';
+		echo '<input type=hidden name="ViewingOnly" value=1>';
 	}
 	echo '<br><br>';
-	echo '<input type=hidden name="OrderNo" VALUE="'. $OrderNo. '">';
+	echo '<input type=hidden name="OrderNo" value="'. $OrderNo. '">';
 	echo '<table><tr><td>'. _('Print or Email the Order'). '</td><td>
 		<select name="PrintOrEmail">';
 	if (!isset($_POST['PrintOrEmail'])){
 		$_POST['PrintOrEmail'] = 'Print';
 	}
 	if ($_POST['PrintOrEmail']=='Print'){
-		echo '<option selected VALUE="Print">'. _('Print');
-		echo '<option VALUE="Email">' . _('Email');
+		echo '<option selected value="Print">'. _('Print');
+		echo '<option value="Email">' . _('Email');
 	} else {
-		echo '<option VALUE="Print">'. _('Print');
-		echo '<option selected VALUE="Email">'. _('Email');
+		echo '<option value="Print">'. _('Print');
+		echo '<option selected value="Email">'. _('Email');
 	}
 	echo '</select></td></tr>';
 	echo '<tr><td>'. _('Show Amounts on the Order'). '</td><td>
@@ -364,11 +364,11 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 		$_POST['ShowAmounts'] = 'Yes';
 	}
 	if ($_POST['ShowAmounts']=='Yes'){
-		echo '<option selected VALUE="Yes">'. _('Yes');
-		echo '<option VALUE="No">' . _('No');
+		echo '<option selected value="Yes">'. _('Yes');
+		echo '<option value="No">' . _('No');
 	} else {
-		echo '<option VALUE="Yes">'. _('Yes');
-		echo '<option selected VALUE="No">'. _('No');
+		echo '<option value="Yes">'. _('Yes');
+		echo '<option selected value="No">'. _('No');
 	}
 	echo '</select></td></tr>';
 	if ($_POST['PrintOrEmail']=='Email'){
@@ -384,9 +384,9 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 			while ($ContactDetails = DB_fetch_array($ContactsResult)){
 				if (strlen($ContactDetails['email'])>2 AND strpos($ContactDetails['email'],'@')>0){
 					if ($_POST['EmailTo']==$ContactDetails['email']){
-						echo '<option selected VALUE="' . $ContactDetails['email'] . '">' . $ContactDetails['Contact'] . ' - ' . $ContactDetails['email'];
+						echo '<option selected value="' . $ContactDetails['email'] . '">' . $ContactDetails['Contact'] . ' - ' . $ContactDetails['email'];
 					} else {
-						echo '<option VALUE="' . $ContactDetails['email'] . '">' . $ContactDetails['contact'] . ' - ' . $ContactDetails['email'];
+						echo '<option value="' . $ContactDetails['email'] . '">' . $ContactDetails['contact'] . ' - ' . $ContactDetails['email'];
 					}
 				}
 			}
@@ -400,7 +400,7 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 	} else {
 		echo '</table>';
 	}
-	echo '<br><div class="centre"><input type=submit name="DoIt" VALUE="' . _('OK') . '"></div>';
+	echo '<br><div class="centre"><input type=submit name="DoIt" value="' . _('OK') . '"></div>';
 	echo '</form>';
 	include('includes/footer.inc');
 }

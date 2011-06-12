@@ -1045,10 +1045,10 @@ if (isset($_SESSION['PrintedPackingSlip']) and $_SESSION['PrintedPackingSlip']==
 }
 
 echo '<tr><td>'. _('Charge Freight Cost inc tax') .':</td>';
-echo '<td><input type=text class=number size=10 maxlength=12 name="FreightCost" VALUE=' . $_SESSION['Items'.$identifier]->FreightCost . '></td>';
+echo '<td><input type=text class=number size=10 maxlength=12 name="FreightCost" value=' . $_SESSION['Items'.$identifier]->FreightCost . '></td>';
 
 if ($_SESSION['DoFreightCalc']==true){
-	echo '<td><input type=submit name="Update" VALUE="' . _('Recalc Freight Cost') . '"></td></tr>';
+	echo '<td><input type=submit name="Update" value="' . _('Recalc Freight Cost') . '"></td></tr>';
 }
 
 if ((!isset($_POST['ShipVia']) OR $_POST['ShipVia']=='') AND isset($_SESSION['Items'.$identifier]->ShipVia)){
@@ -1077,8 +1077,8 @@ if ($_SESSION['Items'.$identifier]->Quotation==1){
 	echo '<option selected value=1>' . _('Yes');
 	echo '<option value=0>' . _('No');
 } else {
-	echo '<option VALUE=1>' . _('Yes');
-	echo '<option selected VALUE=0>' . _('No');
+	echo '<option value=1>' . _('Yes');
+	echo '<option selected value=0>' . _('No');
 }
 echo '</select></td></tr>';
 
@@ -1089,9 +1089,9 @@ echo '<br><div class="centre"><input type=submit name="BackToLineDetails" value=
 
 if ($_SESSION['ExistingOrder']==0){
 	echo '<br><br><input type=submit name="ProcessOrder" value="' . _('Place Order') . '">';
-	echo '<br><br><input type=submit name="MakeRecurringOrder" VALUE="' . _('Create Recurring Order') . '">';
+	echo '<br><br><input type=submit name="MakeRecurringOrder" value="' . _('Create Recurring Order') . '">';
 } else {
-	echo '<br><input type=submit name="ProcessOrder" VALUE="' . _('Commit Order Changes') . '">';
+	echo '<br><input type=submit name="ProcessOrder" value="' . _('Commit Order Changes') . '">';
 }
 
 echo '</div></form>';

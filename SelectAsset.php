@@ -58,7 +58,7 @@ if ($_POST['AssetCategory']=='ALL'){
 
 while ($myrow = DB_fetch_array($result)) {
 	if ($myrow['categoryid'] == $_POST['AssetCategory']) {
-		echo '<option selected VALUE="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
+		echo '<option selected value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	} else {
 		echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	}
@@ -84,7 +84,7 @@ $result = DB_query("SELECT locationid, locationdescription FROM fixedassetlocati
 
 while ($myrow = DB_fetch_array($result)) {
 	if ($myrow['locationid'] == $_POST['AssetLocation']) {
-		echo '<option selected VALUE="' . $myrow['locationid'] . '">' . $myrow['locationdescription'];
+		echo '<option selected value="' . $myrow['locationid'] . '">' . $myrow['locationdescription'];
 	} else {
 		echo '<option value="' . $myrow['locationid'] . '">' . $myrow['locationdescription'];
 	}

@@ -356,11 +356,11 @@ If (isset($_POST['PrintPDF']) AND isset($_POST['ReportOrClose'])){
 	echo '<tr><td>' . _('Choose Option'). ':</font></td><td><select name="ReportOrClose">';
 
 	if ($_POST['ReportOrClose']=='ReportAndClose'){
-		echo '<option selected VALUE="ReportAndClose">'. _('Report and Close the Inventory Comparison Processing Adjustments As Necessary') . '</option>';
-		echo '<option VALUE="ReportOnly">'. _('Report The Inventory Comparison Differences Only - No Adjustments') . '</option>';
+		echo '<option selected value="ReportAndClose">'. _('Report and Close the Inventory Comparison Processing Adjustments As Necessary') . '</option>';
+		echo '<option value="ReportOnly">'. _('Report The Inventory Comparison Differences Only - No Adjustments') . '</option>';
 	} else {
-		echo '<option selected VALUE="ReportOnly">' . _('Report The Inventory Comparison Differences Only - No Adjustments') . '</option>';
-		echo '<option VALUE="ReportAndClose">' . _('Report and Close the Inventory Comparison Processing Adjustments As Necessary') . '</option>';
+		echo '<option selected value="ReportOnly">' . _('Report The Inventory Comparison Differences Only - No Adjustments') . '</option>';
+		echo '<option value="ReportAndClose">' . _('Report and Close the Inventory Comparison Processing Adjustments As Necessary') . '</option>';
 	}
 
 	echo '</select></td></tr>';
@@ -369,11 +369,11 @@ If (isset($_POST['PrintPDF']) AND isset($_POST['ReportOrClose'])){
 	echo '<tr><td>'. _('Action for Zero Counts') . ':</td><td><select name="ZeroCounts">';
 
 	if ($_POST['ZeroCounts'] =='Adjust'){
-		echo '<option selected VALUE="Adjust">'. _('Adjust System stock to Nil') . '</option>';
-		echo '<option VALUE="Leave">' . _('Do not Adjust System stock to Nil') . '</option>';
+		echo '<option selected value="Adjust">'. _('Adjust System stock to Nil') . '</option>';
+		echo '<option value="Leave">' . _('Do not Adjust System stock to Nil') . '</option>';
 	} else {
-		echo '<option VALUE="Adjust">'. _('Adjust System stock to Nil') . '</option>';
-		echo '<option selected VALUE="Leave">' . _('Do not Adjust System stock to Nil') . '</option>';
+		echo '<option value="Adjust">'. _('Adjust System stock to Nil') . '</option>';
+		echo '<option selected value="Leave">' . _('Do not Adjust System stock to Nil') . '</option>';
 	}
 
 	echo '</table><br><div class="centre"><input type=Submit Name="PrintPDF" Value="' . _('Print PDF'). '"></div>';

@@ -233,8 +233,8 @@ if (!isset($_GET['delete'])) {
 		$_POST['AccountName']	= $myrow['accountname'];
 		$_POST['Group'] = $myrow['group_'];
 
-		echo "<input type=hidden name='SelectedAccount' VALUE=$SelectedAccount>";
-		echo "<input type=hidden name='AccountCode' VALUE=" . $_POST['AccountCode'] .">";
+		echo "<input type=hidden name='SelectedAccount' value=$SelectedAccount>";
+		echo "<input type=hidden name='AccountCode' value=" . $_POST['AccountCode'] .">";
 		echo "<table class=selection><tr><td>" . _('Account Code') . ":</td><td>" . $_POST['AccountCode'] . "</td></tr>";
 	} else {
 		echo "<table class=selection>";
@@ -251,9 +251,9 @@ if (!isset($_GET['delete'])) {
 
 	while ($myrow = DB_fetch_array($result)){
 		if (isset($_POST['Group']) and $myrow[0]==$_POST['Group']){
-			echo "<option selected VALUE='";
+			echo "<option selected value='";
 		} else {
-			echo "<option VALUE='";
+			echo "<option value='";
 		}
 		echo $myrow[0] . "'>" . $myrow[0];
 	}

@@ -21,7 +21,7 @@ if (!(isset($_POST['Search']))) {
 	$result = DB_query($sql, $db);
 	echo '<option value="All">' . _('All') . '</option>';
 	while ($myrow = DB_fetch_array($result)) {
-		echo '<option VALUE="' . $myrow['loccode'] . '">' . $myrow['loccode'] . ' - ' . $myrow['locationname'] . '</option>';
+		echo '<option value="' . $myrow['loccode'] . '">' . $myrow['loccode'] . ' - ' . $myrow['locationname'] . '</option>';
 	}
 	echo '</select></td></tr>';
 	//to view list of customer
@@ -32,7 +32,7 @@ if (!(isset($_POST['Search']))) {
 	$result = DB_query($sql, $db);
 	echo "<option value='All'>" . _('All') . '</option>';
 	while ($myrow = DB_fetch_array($result)) {
-		echo "<option VALUE='" . $myrow['typeid'] . "'>" . $myrow['typename'] . '</option>';
+		echo "<option value='" . $myrow['typeid'] . "'>" . $myrow['typename'] . '</option>';
 	}
 	echo '</select></td>
 			</tr>';

@@ -328,7 +328,7 @@ if (!isset($_GET['delete'])) {
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<input type="hidden" name="ReportHeading" value='.$ReportHeading.'>';
-	echo '<input type=hidden name="ReportID" VALUE=' . $ReportID . '>';
+	echo '<input type=hidden name="ReportID" value=' . $ReportID . '>';
 	if (isset($SelectedCol)) {
 		//editing an existing Column
 
@@ -373,7 +373,7 @@ if (!isset($_GET['delete'])) {
 		$_POST['BudgetOrActual']=$myrow['budgetoractual'];
 		$_POST['ValFormat']=$myrow['valformat'];
 
-		echo '<input type=hidden name="SelectedCol" VALUE=' . $SelectedCol . '>';
+		echo '<input type=hidden name="SelectedCol" value=' . $SelectedCol . '>';
 		echo '<table class=selection>';
 
 	} else {

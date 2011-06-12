@@ -578,15 +578,15 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 			$_POST['AutoIssue'] = $myrow['autoissue'];
 
 			prnMsg(_('Edit the details of the selected component in the fields below') . '. <br>' . _('Click on the Enter Information button to update the component details'),'info');
-			echo '<br><input type=hidden name="SelectedParent" VALUE="'.$SelectedParent.'">';
-			echo '<input type=hidden name="SelectedComponent" VALUE="'.$SelectedComponent.'">';
+			echo '<br><input type=hidden name="SelectedParent" value="'.$SelectedParent.'">';
+			echo '<input type=hidden name="SelectedComponent" value="'.$SelectedComponent.'">';
 			echo '<table class=selection>';
 			echo '<tr><th colspan=13><div class="centre"><font color=blue size=3><b>'. ('Edit Component Details') .'</font></b></th></tr>';
 			echo '<tr><td>' . _('Component') . ':</td><td><b>' . $SelectedComponent . '</b></td></tr>';
 
 		} else { //end of if $SelectedComponent
 
-			echo '<input type=hidden name="SelectedParent" VALUE="'.$SelectedParent.'">';
+			echo '<input type=hidden name="SelectedParent" value="'.$SelectedParent.'">';
 			/* echo "Enter the details of a new component in the fields below. <br>Click on 'Enter Information' to add the new component, once all fields are completed.";
 			*/
 			echo '<table class=selection>';
@@ -627,7 +627,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 
 
 			while ($myrow = DB_fetch_array($result)) {
-				echo '<option VALUE="'.$myrow['stockid'].'">' . str_pad($myrow['stockid'],21, '_', STR_PAD_RIGHT) . $myrow['description'] . '</option>';
+				echo '<option value="'.$myrow['stockid'].'">' . str_pad($myrow['stockid'],21, '_', STR_PAD_RIGHT) . $myrow['description'] . '</option>';
 			} //end while loop
 
 			echo '</select></td></tr>';
@@ -641,9 +641,9 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 
 		while ($myrow = DB_fetch_array($result)) {
 			if (isset($_POST['LocCode']) and $myrow['loccode']==$_POST['LocCode']) {
-				echo '<option selected VALUE="'.$myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+				echo '<option selected value="'.$myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			} else {
-				echo '<option VALUE="'.$myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+				echo '<option value="'.$myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			}
 
 		} //end while loop
@@ -665,9 +665,9 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 
 		while ($myrow = DB_fetch_array($result)) {
 			if (isset($_POST['WorkCentreAdded']) and $myrow['code']==$_POST['WorkCentreAdded']) {
-				echo '<option selected VALUE="'.$myrow['code'] . '">' . $myrow['description'] . '</option>';
+				echo '<option selected value="'.$myrow['code'] . '">' . $myrow['description'] . '</option>';
 			} else {
-				echo '<option VALUE="'.$myrow['code'] . '">' . $myrow['description'] . '</option>';
+				echo '<option value="'.$myrow['code'] . '">' . $myrow['description'] . '</option>';
 			}
 		} //end while loop
 
@@ -694,10 +694,10 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 
 		echo '<tr><td>' . _('Effective After') . ' (' . $_SESSION['DefaultDateFormat'] . '):</td>
 		  <td><input ' . (in_array('EffectiveAfter',$Errors) ?  'class="inputerror"' : '' ) .
-			' tabindex="5" type="Text" name="EffectiveAfter" class=date alt="'.$_SESSION['DefaultDateFormat'].'" size=11 maxlength=10 VALUE=' . $_POST['EffectiveAfter'] .'>
+			' tabindex="5" type="Text" name="EffectiveAfter" class=date alt="'.$_SESSION['DefaultDateFormat'].'" size=11 maxlength=10 value=' . $_POST['EffectiveAfter'] .'>
 		  </td></tr><tr><td>' . _('Effective To') . ' (' . $_SESSION['DefaultDateFormat'] . '):</td><td>
 		  <input  ' . (in_array('EffectiveTo',$Errors) ?  'class="inputerror"' : '' ) .
-			' tabindex="6" type="Text" name="EffectiveTo" class=date alt="'.$_SESSION['DefaultDateFormat'].'" size=11 maxlength=10 VALUE="' . $_POST['EffectiveTo'] .'"></td></tr>';
+			' tabindex="6" type="Text" name="EffectiveTo" class=date alt="'.$_SESSION['DefaultDateFormat'].'" size=11 maxlength=10 value="' . $_POST['EffectiveTo'] .'"></td></tr>';
 
 		if ($ParentMBflag=='M' OR $ParentMBflag=='G'){
 			echo '<tr><td>' . _('Auto Issue this Component to Work Orders') . ':</td>
@@ -708,17 +708,17 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 				$_POST['AutoIssue'] = $_SESSION['AutoIssue'];
 			}
 			if ($_POST['AutoIssue']==0) {
-				echo '<option selected VALUE=0>' . _('No') . '</option>';
-				echo '<option VALUE=1>' . _('Yes') . '</option>';
+				echo '<option selected value=0>' . _('No') . '</option>';
+				echo '<option value=1>' . _('Yes') . '</option>';
 			} else {
-				echo '<option selected VALUE=1>' . _('Yes') . '</option>';
-				echo '<option VALUE=0>' . _('No') . '</option>';
+				echo '<option selected value=1>' . _('Yes') . '</option>';
+				echo '<option value=0>' . _('No') . '</option>';
 			}
 
 
 			echo '</select></td></tr>';
 		} else {
-			echo '<input type=hidden name="AutoIssue" VALUE=0>';
+			echo '<input type=hidden name="AutoIssue" value=0>';
 		}
 
 		echo '</table><br><div class="centre"><input tabindex="8" type="Submit" name="Submit" value="' . _('Enter Information') . '"></form></div>';
@@ -829,7 +829,7 @@ if (isset($_POST['Search']) and isset($result) AND !isset($SelectedParent)) {
 			$StockOnHand = number_format($myrow['totalonhand'],2);
 		}
 		$tab = $j+3;
-		printf('<td><input tabindex="'.$tab.'" type=submit name="Select" VALUE="%s" /></td>
+		printf('<td><input tabindex="'.$tab.'" type=submit name="Select" value="%s" /></td>
 		        <td>%s</td>
 			<td class=number>%s</td>
 			<td>%s</td></tr>',

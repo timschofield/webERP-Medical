@@ -73,11 +73,11 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 	if(!isset ($Days)){
 		$Days=30;
 	}
-	echo '<input type=hidden name="SelectedTabs" VALUE="' . $SelectedTabs . '">';
+	echo '<input type=hidden name="SelectedTabs" value="' . $SelectedTabs . '">';
 	echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Select another tab') . '</a></div></p>';
 	echo '<br><table class=selection>';
 	echo '<tr><th colspan=7>' . _('Detail Of Movement For Last ') .': ';
-	echo '<input type=text class=number name="Days" VALUE="' . $Days . '" MAXLENGTH=3 size=4> Days ';
+	echo '<input type=text class=number name="Days" value="' . $Days . '" MAXLENGTH=3 size=4> Days ';
 	echo '<input type=submit name="Go" value="' . _('Go') . '"></tr></th>';
 	echo '</form>';
 
@@ -281,9 +281,9 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 			}
 		}
 
-		echo '<input type=hidden name="SelectedIndex" VALUE="' . $myrow['counterindex']. '">';
-		echo '<input type=hidden name="SelectedTabs" VALUE="' . $SelectedTabs . '">';
-		echo '<input type=hidden name="Days" VALUE="' .$Days. '">';
+		echo '<input type=hidden name="SelectedIndex" value="' . $myrow['counterindex']. '">';
+		echo '<input type=hidden name="SelectedTabs" value="' . $SelectedTabs . '">';
+		echo '<input type=hidden name="Days" value="' .$Days. '">';
 		echo '</tr>';
 
 
@@ -331,7 +331,7 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 		if (isset($_POST['SelectTabs']) and $myrow['tabcode']==$_POST['SelectTabs']) {
 			echo '<option selected value="' . $myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
 		} else {
-			echo '<option VALUE="' . $myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
+			echo '<option value="' . $myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
 		}
 	} //end while loop get type of tab
 
@@ -339,7 +339,7 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 
 	echo '</td></tr></table>'; // close main table
 
-	echo '<p><div class="centre"><input type=submit name=process VALUE="' . _('Accept') . '"><input type=submit name=Cancel VALUE="' . _('Cancel') . '"></div>';
+	echo '<p><div class="centre"><input type=submit name=process value="' . _('Accept') . '"><input type=submit name=Cancel value="' . _('Cancel') . '"></div>';
 
 	echo '</form>';
 } /*end of else not submit */

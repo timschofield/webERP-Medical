@@ -47,7 +47,7 @@ if ($_POST['EntryType'] == 'KEYED'){
                                if ( !array_key_exists($myrow['serialno'], $AllSerials)  ||
 					($myrow['quantity'] - $AllSerials[$myrow['serialno']] >= 0) ) {
 					$RecvQty = $myrow['quantity'] - $AllSerials[$myrow['serialno']];
-                                        echo '<OPTION VALUE="' . $myrow['serialno'] . '/|/'. $RecvQty .'">' .
+                                        echo '<OPTION value="' . $myrow['serialno'] . '/|/'. $RecvQty .'">' .
 						$myrow['serialno'].' - ' . _('Qty left'). ': ' . $RecvQty . '</OPTION>';
 					$ItemsAvailable += $RecvQty;
                                 }

@@ -253,7 +253,7 @@ if (! isset($_GET['delete'])) {
 			$_POST['ForReceipt'] = $myrow['receipttype'];
 			$_POST['ForPreprint'] = $myrow['forpreprint'];
 
-			echo '<input type=hidden name="SelectedPaymentID" VALUE="' . $_POST['MethodID'] . '">';
+			echo '<input type=hidden name="SelectedPaymentID" value="' . $_POST['MethodID'] . '">';
 			echo '<table class=selection>';
 		}
 
@@ -271,20 +271,20 @@ if (! isset($_GET['delete'])) {
 	echo '<tr>
 		<td>' . _('Use For Payments') . ':' . '</td>
 		<td><select name="ForPayment">';
-	echo '<option'.($_POST['ForPayment'] ? ' selected' : '') .' VALUE="1">' . _('Yes') . '</option>';
-	echo '<option'.($_POST['ForPayment'] ? '' : ' selected') .' VALUE="0">' . _('No') . '</option>';
+	echo '<option'.($_POST['ForPayment'] ? ' selected' : '') .' value="1">' . _('Yes') . '</option>';
+	echo '<option'.($_POST['ForPayment'] ? '' : ' selected') .' value="0">' . _('No') . '</option>';
 	echo '</select></td></tr>';
 	echo '<tr>
 		<td>' . _('Use For Receipts') . ':' . '</td>
 		<td><select name="ForReceipt">';
-	echo '<option'.($_POST['ForReceipt'] ? ' selected' : '') .' VALUE="1">' . _('Yes') . '</option>';
-	echo '<option'.($_POST['ForReceipt'] ? '' : ' selected') .' VALUE="0">' . _('No') . '</option>';
+	echo '<option'.($_POST['ForReceipt'] ? ' selected' : '') .' value="1">' . _('Yes') . '</option>';
+	echo '<option'.($_POST['ForReceipt'] ? '' : ' selected') .' value="0">' . _('No') . '</option>';
 	echo '</select></td></tr>';
 	echo '<tr>
 		<td>' . _('Use Pre-printed Stationery') . ':' . '</td>
 		<td><select name="ForPreprint">';
-	echo '<option'.($_POST['ForPreprint'] ? ' selected' : '') .' VALUE="1">' . _('Yes') . '</option>';
-	echo '<option'.($_POST['ForPreprint'] ? '' : ' selected') .' VALUE="0">' . _('No') . '</option>';
+	echo '<option'.($_POST['ForPreprint'] ? ' selected' : '') .' value="1">' . _('Yes') . '</option>';
+	echo '<option'.($_POST['ForPreprint'] ? '' : ' selected') .' value="0">' . _('No') . '</option>';
 	echo '</select></td></tr>';
 
 	echo '</table>';

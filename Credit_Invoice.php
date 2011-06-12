@@ -328,8 +328,8 @@ foreach ($_SESSION['CreditItems']->LineItems as $LnItm) {
 		$DisplayLineTotal = number_format($LineTotal,2);
 
 		$j++;
-		echo "<td><input tabindex=".$j." type=text class=number name='Price_" . $LnItm->LineNumber . "' maxlength=12 size=6 VALUE=" . $LnItm->Price . "></td>
-		<td><input tabindex=".$j." type=text class=number name='Discount_" . $LnItm->LineNumber . "' maxlength=3 size=3 VALUE=" . ($LnItm->DiscountPercent * 100) . "></td>
+		echo "<td><input tabindex=".$j." type=text class=number name='Price_" . $LnItm->LineNumber . "' maxlength=12 size=6 value=" . $LnItm->Price . "></td>
+		<td><input tabindex=".$j." type=text class=number name='Discount_" . $LnItm->LineNumber . "' maxlength=3 size=3 value=" . ($LnItm->DiscountPercent * 100) . "></td>
 		<td class=number>$DisplayLineTotal</td>";
 
 		/*Need to list the taxes applicable to this line */
@@ -423,7 +423,7 @@ foreach ($_SESSION['CreditItems']->FreightTaxes as $FreightTaxLine) {
 	}
 
 	if (!isset($_POST['ProcessCredit'])) {
-		echo  '<input type=text class=number name=FreightTaxRate' . $FreightTaxLine->TaxCalculationOrder . ' maxlength=4 size=4 VALUE=' . $FreightTaxLine->TaxRate * 100 . '>';
+		echo  '<input type=text class=number name=FreightTaxRate' . $FreightTaxLine->TaxCalculationOrder . ' maxlength=4 size=4 value=' . $FreightTaxLine->TaxRate * 100 . '>';
 	}
 	if ($FreightTaxLine->TaxOnTax ==1){
 		$TaxTotals[$FreightTaxLine->TaxAuthID] += ($FreightTaxLine->TaxRate * ($_SESSION['CreditItems']->FreightCost + $FreightTaxTotal));
@@ -1463,15 +1463,15 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 
 	if (!isset($_POST['CreditType']) OR $_POST['CreditType']=="Return"){
 		echo '<option selected value="Return">' . _('Goods returned to store') . '</option>';
-		echo '<option VALUE="WriteOff">' . _('Goods written off') . '</option>';
-		echo '<option VALUE="ReverseOverCharge">' . _('Reverse overcharge') . '</option>';
+		echo '<option value="WriteOff">' . _('Goods written off') . '</option>';
+		echo '<option value="ReverseOverCharge">' . _('Reverse overcharge') . '</option>';
 	} elseif($_POST['CreditType']=='WriteOff') {
 		echo '<option selected value="WriteOff">' . _('Goods written off') . '</option>';
-		echo '<option VALUE="Return">' . _('Goods returned to store') . '</option>';
-		echo '<option VALUE="ReverseOverCharge">' . _('Reverse overcharge') . '</option>';
+		echo '<option value="Return">' . _('Goods returned to store') . '</option>';
+		echo '<option value="ReverseOverCharge">' . _('Reverse overcharge') . '</option>';
 	} else {
-		echo '<option VALUE="WriteOff">' . _('Goods written off') . '</option>';
-		echo '<option VALUE="Return">' . _('Goods returned to store') . '</option>';
+		echo '<option value="WriteOff">' . _('Goods written off') . '</option>';
+		echo '<option value="Return">' . _('Goods returned to store') . '</option>';
 		echo '<option selected value="ReverseOverCharge">' . _('Reverse overcharge') . '</option>';
 	}
 	echo "</select></td></tr>";

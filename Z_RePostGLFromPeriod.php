@@ -16,8 +16,8 @@ if (!isset($_POST['FromPeriod'])){
 /*Show a form to allow input of criteria for TB to show */
 	echo '<table>
                              <tr>
-                                 <td>' . _('Select Period From') . ":</td>
-                                 <td><select Name='FromPeriod'>";
+                                 <td>' . _('Select Period From') . ':</td>
+                                 <td><select Name="FromPeriod">';
 
 	$sql = "SELECT periodno,
                        lastdate_in_period
@@ -25,7 +25,7 @@ if (!isset($_POST['FromPeriod'])){
 	$Periods = DB_query($sql,$db);
 
 	while ($myrow=DB_fetch_array($Periods,$db)){
-		echo '<option VALUE=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']);
+		echo '<option value=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']);
 	}
 
 	echo '</select></td>

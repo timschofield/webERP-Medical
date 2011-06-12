@@ -281,7 +281,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 
 if (isset($_POST['SupplierID'])){
  	$_GET['SupplierID'] = $_POST['SupplierID'];
-	echo '<input type="hidden" name="SupplierID" VALUE="' . $_POST['SupplierID'] . '">';
+	echo '<input type="hidden" name="SupplierID" value="' . $_POST['SupplierID'] . '">';
 }
 
 If (isset($_GET['AllocTrans'])){
@@ -433,7 +433,7 @@ If (isset($_GET['AllocTrans'])){
 
 if (isset($_POST['AllocTrans'])){
 
-	echo '<input type="hidden" name="AllocTrans" VALUE="' . $_POST["AllocTrans"] . '">';
+	echo '<input type="hidden" name="AllocTrans" value="' . $_POST["AllocTrans"] . '">';
 
 	/*Show the transaction being allocated and the potential trans it could be allocated to
         and those where there is already an existing allocation */
@@ -502,16 +502,16 @@ if (isset($_POST['AllocTrans'])){
 	    		<td>'.$AllocnItem->SuppRef.'</td>
 			<td class=number>' . number_format($AllocnItem->TransAmount,2) . '</td>
 	    		<td class=number>' . number_format($YetToAlloc,2) . '<input type=hidden name="YetToAlloc' .
-	    		 $Counter . '" VALUE="' . $YetToAlloc . '"></td>';
+	    		 $Counter . '" value="' . $YetToAlloc . '"></td>';
 
 	    if (ABS($AllocnItem->AllocAmt-$YetToAlloc) < 0.01){
-			echo '<td class=number><input type="checkbox" name="All' .  $Counter . '" VALUE="' . True . '">';
+			echo '<td class=number><input type="checkbox" name="All' .  $Counter . '" value="' . True . '">';
 	    } else {
 	    	echo '<td class=number><input type="checkbox" name="All' .  $Counter . '" />';
 	    }
-       echo '<input type=text class="number" name="Amt' . $Counter .'" maxlength=12 size=13 VALUE="' .
+       echo '<input type=text class="number" name="Amt' . $Counter .'" maxlength=12 size=13 value="' .
        		$AllocnItem->AllocAmt . '"><input type=hidden name="AllocID' . $Counter .
-       		'" VALUE=' . $AllocnItem->ID . '></td></tr>';
+       		'" value=' . $AllocnItem->ID . '></td></tr>';
 
 	    $TotalAllocated = $TotalAllocated + $AllocnItem->AllocAmt;
 
@@ -525,17 +525,17 @@ if (isset($_POST['AllocTrans'])){
    echo '<tr><td colspan=5 class=number><b>' . _('Left to allocate') . '</b></td><td class=number><b>' .
      		number_format(-$_SESSION['Alloc']->TransAmt - $TotalAllocated,2) . '</b></td></tr></table>';
 
-   echo '<div class="centre"><input type=hidden name="TotalNumberOfAllocs" VALUE="' . $Counter . '" />';
+   echo '<div class="centre"><input type=hidden name="TotalNumberOfAllocs" value="' . $Counter . '" />';
 
-   echo '<br /><input type=submit name="RefreshAllocTotal" VALUE="' . _('Recalculate Total To Allocate') . '">';
-   echo '<input type=submit name=UpdateDatabase VALUE="' . _('Process Allocations') . '"></div>';
+   echo '<br /><input type=submit name="RefreshAllocTotal" value="' . _('Recalculate Total To Allocate') . '">';
+   echo '<input type=submit name=UpdateDatabase value="' . _('Process Allocations') . '"></div>';
 
 } elseif(isset($_GET['SupplierID'])){
 
   /*page called with a supplier code  so show the transactions to allocate
   specific to the supplier selected */
 
-  echo '<input type=hidden name=SupplierID VALUE="' . $_GET['SupplierID'] . '">';
+  echo '<input type=hidden name=SupplierID value="' . $_GET['SupplierID'] . '">';
 
   /*Clear any previous allocation records */
 

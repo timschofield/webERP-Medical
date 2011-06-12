@@ -260,8 +260,8 @@ if (! isset($_GET['delete'])) {
 		$_POST['CommissionRate2']  = $myrow['commissionrate2'];
 
 
-		echo '<input type=hidden name="SelectedSaleperson" VALUE="' . $SelectedSaleperson . '">';
-		echo '<input type=hidden name="SalesmanCode" VALUE="' . $_POST['SalesmanCode'] . '">';
+		echo '<input type=hidden name="SelectedSaleperson" value="' . $SelectedSaleperson . '">';
+		echo '<input type=hidden name="SalesmanCode" value="' . $_POST['SalesmanCode'] . '">';
 		echo '<table class=selection> <tr><td>' . _('Salesperson code') . ':</td><td>';
 		echo $_POST['SalesmanCode'] . '</td></tr>';
 
@@ -290,12 +290,12 @@ if (! isset($_GET['delete'])) {
 	}
 
 
-	echo '<tr><td>' . _('Salesperson Name') . ':</td><td><input type="text" '. (in_array('SalesmanName',$Errors) ? 'class="inputerror"' : '' ) .' name="SalesmanName"  size=30 maxlength=30 VALUE="' . $_POST['SalesmanName'] . '"></td></tr>';
-	echo '<tr><td>' . _('Telephone No') . ':</td><td><input type="text" name="SManTel" size=20 maxlength=20 VALUE="' . $_POST['SManTel'] . '"></td></tr>';
-	echo '<tr><td>' . _('Facsimile No') . ':</td><td><input type="text" name="SManFax" size=20 maxlength=20 VALUE="' . $_POST['SManFax'] . '"></td></tr>';
-	echo '<tr><td>' . _('Commission Rate 1') . ':</td><td><input type="text" class=number name="CommissionRate1" size=5 maxlength=5 VALUE="' . $_POST['CommissionRate1'] . '"></td></tr>';
-	echo '<tr><td>' . _('Breakpoint') . ':</td><td><input type="text" class=number name="Breakpoint" size=6 maxlength=6 VALUE="' . $_POST['Breakpoint'] . '"></td></tr>';
-	echo '<tr><td>' . _('Commission Rate 2') . ':</td><td><input type="text" class=number name="CommissionRate2" size=5 maxlength=5 VALUE="' . $_POST['CommissionRate2']. '"></td></tr>';
+	echo '<tr><td>' . _('Salesperson Name') . ':</td><td><input type="text" '. (in_array('SalesmanName',$Errors) ? 'class="inputerror"' : '' ) .' name="SalesmanName"  size=30 maxlength=30 value="' . $_POST['SalesmanName'] . '"></td></tr>';
+	echo '<tr><td>' . _('Telephone No') . ':</td><td><input type="text" name="SManTel" size=20 maxlength=20 value="' . $_POST['SManTel'] . '"></td></tr>';
+	echo '<tr><td>' . _('Facsimile No') . ':</td><td><input type="text" name="SManFax" size=20 maxlength=20 value="' . $_POST['SManFax'] . '"></td></tr>';
+	echo '<tr><td>' . _('Commission Rate 1') . ':</td><td><input type="text" class=number name="CommissionRate1" size=5 maxlength=5 value="' . $_POST['CommissionRate1'] . '"></td></tr>';
+	echo '<tr><td>' . _('Breakpoint') . ':</td><td><input type="text" class=number name="Breakpoint" size=6 maxlength=6 value="' . $_POST['Breakpoint'] . '"></td></tr>';
+	echo '<tr><td>' . _('Commission Rate 2') . ':</td><td><input type="text" class=number name="CommissionRate2" size=5 maxlength=5 value="' . $_POST['CommissionRate2']. '"></td></tr>';
 
 	echo '</table>';
 

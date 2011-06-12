@@ -156,7 +156,7 @@ if (empty($FactorID)) {
 	echo "<form method='post' action='" . $_SERVER['PHP_SELF'] . "?" . SID . "'>";
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-	echo "<input type='hidden' name='New' VALUE='No'>";
+	echo "<input type='hidden' name='New' value='No'>";
 	echo '<table class=selection><tr>';
 	echo '<th>' . _('ID') . '</th>';
 	echo '<th>' . _('Company Name').'</th>';
@@ -278,18 +278,18 @@ if (isset($_POST['amend']) or isset($_POST['Create'])) {
 	echo '<tr><td>' . _('Address Line 6') . ":</td><td><input tabindex=7 type='text' name='Address6' size=42 maxlength=40 value='".$_POST['Address6']."'></td></tr>";
 	echo '<tr><td>' . _('Contact Name') . ":</td><td><input tabindex=8 type='text' name='ContactName' size=13 maxlength=25 value='".$_POST['ContactName']."'></td></tr>";
 	echo '<tr><td>' . _('Telephone') . ":</td><td><input tabindex=9 type='text' name='Telephone' size=13 maxlength=25 value='".$_POST['Telephone']."'></td></tr>";
-	echo '<tr><td>' . _('Fax') . ":</td><td><input tabindex=10 type='text' name='Fax' VALUE=0 size=13 maxlength=25 value='".$_POST['Fax']."'></td></tr>";
+	echo '<tr><td>' . _('Fax') . ":</td><td><input tabindex=10 type='text' name='Fax' value=0 size=13 maxlength=25 value='".$_POST['Fax']."'></td></tr>";
 	echo '<tr><td>' . _('Email') . ":</td><td><input tabindex=11 type='text' name='Email' size=55 maxlength=55 value='".$_POST['Email']."'></td></tr>";
 	echo '</form>';
 }
 
 
 if (isset($_POST['Create'])) {
-	echo "</table><p><div class='centre'><input tabindex=12 type='Submit' name='submit' VALUE='" . _('Insert New Factor') . "'></div>";
+	echo "</table><p><div class='centre'><input tabindex=12 type='Submit' name='submit' value='" . _('Insert New Factor') . "'></div>";
 } else if (isset($_POST['amend'])) {
-	echo "</table><p><div class='centre'><input tabindex=13 type='Submit' name='update' VALUE='" . _('Update Factor') . "'><p>";
+	echo "</table><p><div class='centre'><input tabindex=13 type='Submit' name='update' value='" . _('Update Factor') . "'><p>";
 	prnMsg ( _('There is no second warning if you hit the delete button below') . '. ' . _('However checks will be made to ensure there are no suppliers are using this factor before the deletion is processed'), 'warn');
-	echo "<p><input tabindex=14 type='Submit' name='delete' VALUE='" . _('Delete Factor') . "' onclick=\"return confirm('" . _('Are you sure you wish to delete this factoring company?') . "');\"></form></div>";
+	echo "<p><input tabindex=14 type='Submit' name='delete' value='" . _('Delete Factor') . "' onclick=\"return confirm('" . _('Are you sure you wish to delete this factoring company?') . "');\"></form></div>";
 }
 
 

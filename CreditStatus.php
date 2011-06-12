@@ -213,8 +213,8 @@ if (!isset($_GET['delete'])) {
 		$_POST['ReasonDescription']  = $myrow['reasondescription'];
 		$_POST['DisallowInvoices']  = $myrow['dissallowinvoices'];
 
-		echo '<input type=hidden name="SelectedReason" VALUE="' . $SelectedReason . '">';
-		echo '<input type=hidden name="ReasonCode" VALUE="' . $_POST['ReasonCode'] . '">';
+		echo '<input type=hidden name="SelectedReason" value="' . $SelectedReason . '">';
+		echo '<input type=hidden name="ReasonCode" value="' . $_POST['ReasonCode'] . '">';
 		echo '<table class=selection><tr><td>'. _('Status Code') .':</td><td>';
 		echo $_POST['ReasonCode'] . '</td></tr>';
 
@@ -226,7 +226,7 @@ if (!isset($_GET['delete'])) {
 			<tr>
 				<td>'. _('Status Code') .':</td>
 				<td><input ' . (in_array('ReasonCode',$Errors) ? 'class="inputerror"' : '' ) .
-					' tabindex=1 type="text" name="ReasonCode" VALUE="'. $_POST['ReasonCode'] .'" size=3 maxlength=2></td>
+					' tabindex=1 type="text" name="ReasonCode" value="'. $_POST['ReasonCode'] .'" size=3 maxlength=2></td>
 			</tr>';
 	}
 
@@ -236,7 +236,7 @@ if (!isset($_GET['delete'])) {
 	echo '<tr>
 		<td>'. _('Description') .':</td>
 		<td><input ' . (in_array('ReasonDescription',$Errors) ? 'class="inputerror"' : '' ) .
-		 ' tabindex=2 type="text" name="ReasonDescription" VALUE="'. $_POST['ReasonDescription'] .'" size="28" maxlength="30">
+		 ' tabindex=2 type="text" name="ReasonDescription" value="'. $_POST['ReasonDescription'] .'" size="28" maxlength="30">
 		</td></tr>
 		<tr><td>'. _('Disallow Invoices') . '</td>';
 	if (isset($_POST['DisallowInvoices']) and $_POST['DisallowInvoices']==1) {

@@ -38,10 +38,10 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate'])){
 	echo '<table class=selection>
 	 			<tr>
 				<td>' . _('Enter the date from which cheques are to be listed') . ':</td>
-				<td><input type=text name="FromDate" maxlength=10 size=10 class=date alt="'.$_SESSION['DefaultDateFormat'].'"  VALUE="' . Date($_SESSION['DefaultDateFormat']) . '"></td>
+				<td><input type=text name="FromDate" maxlength=10 size=10 class=date alt="'.$_SESSION['DefaultDateFormat'].'"  value="' . Date($_SESSION['DefaultDateFormat']) . '"></td>
 			</tr>';
 	 echo '<tr><td>' . _('Enter the date to which cheques are to be listed') . ':</td>
-	 		<td><input type=text name="ToDate" maxlength=10 size=10  class=date alt="'.$_SESSION['DefaultDateFormat'].'"  VALUE="' . Date($_SESSION['DefaultDateFormat']) . '"></td>
+	 		<td><input type=text name="ToDate" maxlength=10 size=10  class=date alt="'.$_SESSION['DefaultDateFormat'].'"  value="' . Date($_SESSION['DefaultDateFormat']) . '"></td>
 	</tr>';
 	 echo '<tr><td>' . _('Bank Account') . '</td><td>';
 
@@ -52,16 +52,16 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate'])){
 	 echo '<select name="BankAccount">';
 
 	 while ($myrow=DB_fetch_array($result)){
-	echo '<option VALUE=' . $myrow['accountcode'] . '>' . $myrow['bankaccountname'];
+	echo '<option value=' . $myrow['accountcode'] . '>' . $myrow['bankaccountname'];
 	 }
 
 
 	 echo '</select></td></tr>';
 
 	 echo '<tr><td>' . _('Email the report off') . ':</td><td><select name="Email">';
-	 echo '<option selected VALUE="No">' . _('No') . '</option>';
-	 echo '<option VALUE="Yes">' . _('Yes') . '</option>';
-	 echo '</select></td></tr></table><br><div class="centre"><input type=submit name="Go" VALUE="' . _('Create PDF') . '"></div>';
+	 echo '<option selected value="No">' . _('No') . '</option>';
+	 echo '<option value="Yes">' . _('Yes') . '</option>';
+	 echo '</select></td></tr></table><br><div class="centre"><input type=submit name="Go" value="' . _('Create PDF') . '"></div>';
 
 
 	 include('includes/footer.inc');

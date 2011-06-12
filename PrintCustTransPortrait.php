@@ -531,13 +531,13 @@ If (isset($PrintPDF)
 		echo '<tr><td>' . _('Print Invoices or Credit Notes') . '</td><td><select name=InvOrCredit>';
 		if ($InvOrCredit=='Invoice' OR !isset($InvOrCredit)){
 
-		   echo '<option selected VALUE="Invoice">' . _('Invoices') . '</option>';
-		   echo '<option VALUE="Credit">' . _('Credit Notes') . '</option>';
+		   echo '<option selected value="Invoice">' . _('Invoices') . '</option>';
+		   echo '<option value="Credit">' . _('Credit Notes') . '</option>';
 
 		} else {
 
-		   echo '<option selected VALUE="Credit">' . _('Credit Notes') . '</option>';
-		   echo '<option VALUE="Invoice">' . _('Invoices') . '</option>';
+		   echo '<option selected value="Credit">' . _('Credit Notes') . '</option>';
+		   echo '<option value="Invoice">' . _('Invoices') . '</option>';
 
 		}
 
@@ -546,13 +546,13 @@ If (isset($PrintPDF)
 		echo '<tr><td>' . _('Print EDI Transactions') . '</td><td><select name=PrintEDI>';
 		if ($InvOrCredit=='Invoice' OR !isset($InvOrCredit)){
 
-		   echo '<option selected VALUE="No">' . _('Do not Print PDF EDI Transactions') . '</option>';
-		   echo '<option VALUE="Yes">' . _('Print PDF EDI Transactions Too') . '</option>';
+		   echo '<option selected value="No">' . _('Do not Print PDF EDI Transactions') . '</option>';
+		   echo '<option value="Yes">' . _('Print PDF EDI Transactions Too') . '</option>';
 
 		} else {
 
-		   echo '<option VALUE="No">' . _('Do not Print PDF EDI Transactions') . '</option>';
-		   echo '<option selected VALUE="Yes">' . _('Print PDF EDI Transactions Too') . '</option>';
+		   echo '<option value="No">' . _('Do not Print PDF EDI Transactions') . '</option>';
+		   echo '<option selected value="Yes">' . _('Print PDF EDI Transactions Too') . '</option>';
 
 		}
 

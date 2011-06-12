@@ -113,7 +113,7 @@ if (!isset($AccountID)) {
 
 		while ($myrow=DB_fetch_array($result)) {
 
-			printf("<tr><td><font size=1><input type=submit name='Select' VALUE='%s'</font></td>
+			printf("<tr><td><font size=1><input type=submit name='Select' value='%s'</font></td>
                 <td><font size=1>%s</font></td>
                 <td><font size=1>%s</font></td>
                 <td><font size=1>%s</font></td>

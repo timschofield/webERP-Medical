@@ -70,7 +70,7 @@ if (isset($_GET['Delete'])){
 echo '<div class="centre">';
 
 if ($CreditLink == 'Credit_Invoice.php'){
-	echo '<input type=hidden name="CreditInvoice" VALUE="Yes">';
+	echo '<input type=hidden name="CreditInvoice" value="Yes">';
 }
 
 echo '<br><a href="' . $rootpath . '/' . $CreditLink . '?' . SID . '">'. _('Back to Credit Note Entry'). '</a>';

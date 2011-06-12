@@ -474,7 +474,7 @@ if ($_SESSION['Items']->Any_Already_Delivered()==1 and (!isset($_SESSION['Items'
 		echo '<td class=number>' . $_SESSION['Items']->FreightCost . '</td>';
 	} else {
 		echo '<td class=number><input tabindex='.$j.' type="text" class="number" size="10" maxlength="12"
-				name="ChargeFreightCost" VALUE="' . $_SESSION['Items']->FreightCost . '"></td>';
+				name="ChargeFreightCost" value="' . $_SESSION['Items']->FreightCost . '"></td>';
 	}
 	$_POST['ChargeFreightCost'] = $_SESSION['Items']->FreightCost;
 }
@@ -504,7 +504,7 @@ foreach ($_SESSION['Items']->FreightTaxes as $FreightTaxLine) {
 		echo   $FreightTaxLine->TaxRate * 100 ;
 	} else {
 		echo  '<input type="text" class="number" name="FreightTaxRate' . $FreightTaxLine->TaxCalculationOrder .
-			'" maxlength="4" size="4" VALUE="' . $FreightTaxLine->TaxRate * 100 . '">';
+			'" maxlength="4" size="4" value="' . $FreightTaxLine->TaxRate * 100 . '">';
 	}
 
 	if ($FreightTaxLine->TaxOnTax ==1){
@@ -1659,7 +1659,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 	$j++;
 	echo '<br><input type=submit tabindex='.$j.' name="ProcessInvoice" Value="'._('Process Invoice').'" /></div>';
 
-	echo '<input type=hidden name="ShipVia" VALUE="' . $_SESSION['Items']->ShipVia . '">';
+	echo '<input type=hidden name="ShipVia" value="' . $_SESSION['Items']->ShipVia . '">';
 }
 
 echo '</form>';

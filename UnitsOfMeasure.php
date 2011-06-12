@@ -223,7 +223,7 @@ if (! isset($_GET['delete'])) {
 			$_POST['MeasureID'] = $myrow['unitid'];
 			$_POST['MeasureName']  = $myrow['unitname'];
 
-			echo '<input type=hidden name="SelectedMeasureID" VALUE="' . $_POST['MeasureID'] . '">';
+			echo '<input type=hidden name="SelectedMeasureID" value="' . $_POST['MeasureID'] . '">';
 			echo '<table class="selection">';
 		}
 

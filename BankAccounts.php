@@ -279,8 +279,8 @@ if (isset($SelectedBankAccount) AND !isset($_GET['delete'])) {
 	$_POST['CurrCode'] = $myrow['currcode'];
 	$_POST['DefAccount'] = $myrow['invoice'];
 
-	echo '<input type=hidden name=SelectedBankAccount VALUE=' . $SelectedBankAccount . '>';
-	echo '<input type=hidden name=AccountCode VALUE=' . $_POST['AccountCode'] . '>';
+	echo '<input type=hidden name=SelectedBankAccount value=' . $SelectedBankAccount . '>';
+	echo '<input type=hidden name=AccountCode value=' . $_POST['AccountCode'] . '>';
 	echo '<table class=selection> <tr><td>' . _('Bank Account GL Code') . ':</td><td>';
 	echo $_POST['AccountCode'] . '</td></tr>';
 } else { //end of if $Selectedbank account only do the else when a new record is being entered
@@ -298,9 +298,9 @@ if (isset($SelectedBankAccount) AND !isset($_GET['delete'])) {
 	$result = DB_query($sql,$db);
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['AccountCode']) and $myrow['accountcode']==$_POST['AccountCode']) {
-			echo '<option selected VALUE="'.$myrow['accountcode'] . '">' . $myrow['accountname'] . '</option>';
+			echo '<option selected value="'.$myrow['accountcode'] . '">' . $myrow['accountname'] . '</option>';
 		} else {
-			echo '<option VALUE="'.$myrow['accountcode'] . '">' . $myrow['accountname'] . '</option>';
+			echo '<option value="'.$myrow['accountcode'] . '">' . $myrow['accountname'] . '</option>';
 		}
 
 	} //end while loop
@@ -338,9 +338,9 @@ if (!isset($_POST['CurrCode']) OR $_POST['CurrCode']==''){
 $result = DB_query("SELECT currabrev, currency FROM currencies",$db);
 while ($myrow = DB_fetch_array($result)) {
 	if ($myrow['currabrev']==$_POST['CurrCode']) {
-		echo '<option selected VALUE="'.$myrow['currabrev'] . '">' . $myrow['currabrev'] . '</option>';
+		echo '<option selected value="'.$myrow['currabrev'] . '">' . $myrow['currabrev'] . '</option>';
 	} else {
-		echo '<option VALUE="'.$myrow['currabrev'] . '">' . $myrow['currabrev'] . '</option>';
+		echo '<option value="'.$myrow['currabrev'] . '">' . $myrow['currabrev'] . '</option>';
 	}
 } //end while loop
 
@@ -356,13 +356,13 @@ if (isset($SelectedBankAccount)) {
 	$result = DB_query("SELECT invoice FROM bankaccounts where accountcode =" . $SelectedBankAccount ,$db);
 	while ($myrow = DB_fetch_array($result)) {
 		if ($myrow['invoice']== 1) {
-			echo '<option selected VALUE=1>'._('Yes').'</option><option value=0>'._('No').'</option>';
+			echo '<option selected value=1>'._('Yes').'</option><option value=0>'._('No').'</option>';
 		} else {
-			echo '<option selected VALUE=0>'._('No').'</option><option value=1>'._('Yes').'</option>';
+			echo '<option selected value=0>'._('No').'</option><option value=1>'._('Yes').'</option>';
 		}
 	}//end while loop
 } else {
-	echo '<option VALUE=1>'._('Yes').'</option><option value=0>'._('No').'</option>';
+	echo '<option value=1>'._('Yes').'</option><option value=0>'._('No').'</option>';
 }
 
 echo '</select></td>';

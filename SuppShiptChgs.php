@@ -104,7 +104,7 @@ if (!isset($_POST['ShiptRef'])) {
 }
 echo '<table class=selection>';
 echo '<tr><td>' . _('Shipment Reference') . ':</td>
-	<td><input type="text" name="ShiptRef" size="12" maxlength="11" VALUE="' .  $_POST['ShiptRef'] . '"></td></tr>';
+	<td><input type="text" name="ShiptRef" size="12" maxlength="11" value="' .  $_POST['ShiptRef'] . '"></td></tr>';
 echo '<tr><td>' . _('Shipment Selection') . ':<br> ' . _('If you know the code enter it above') . '<br>' . _('otherwise select the shipment from the list') . '</td><td><select name="ShiptSelection">';
 
 $sql = "SELECT shiptref,
@@ -119,9 +119,9 @@ $result = DB_query($sql, $db);
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['ShiptSelection']) and $myrow['shiptref']==$_POST['ShiptSelection']) {
-		echo '<option selected VALUE="' . $myrow['shiptref'] . '">' . $myrow['shiptref'] . ' - ' . $myrow['vessel'] . ' ' . _('ETA') . ' ' . ConvertSQLDate($myrow['eta']) . ' ' . _('from') . ' ' . $myrow['suppname']  . '</option>';;
+		echo '<option selected value="' . $myrow['shiptref'] . '">' . $myrow['shiptref'] . ' - ' . $myrow['vessel'] . ' ' . _('ETA') . ' ' . ConvertSQLDate($myrow['eta']) . ' ' . _('from') . ' ' . $myrow['suppname']  . '</option>';;
 	} else {
-		echo '<option VALUE="' . $myrow['shiptref'] . '">' . $myrow['shiptref'] . ' - ' . $myrow['vessel'] . ' ' . _('ETA') . ' ' . ConvertSQLDate($myrow['eta']) . ' ' . _('from') . ' ' . $myrow['suppname']  . '</option>';;
+		echo '<option value="' . $myrow['shiptref'] . '">' . $myrow['shiptref'] . ' - ' . $myrow['vessel'] . ' ' . _('ETA') . ' ' . ConvertSQLDate($myrow['eta']) . ' ' . _('from') . ' ' . $myrow['suppname']  . '</option>';;
 	}
 }
 
@@ -131,10 +131,10 @@ if (!isset($_POST['Amount'])) {
 	$_POST['Amount']=0;
 }
 echo '<tr><td>' . _('Amount') . ':</td>
-	<td><input type="text" name="Amount" size="12" maxlength="11" VALUE="' .  $_POST['Amount'] . '"></td></tr>';
+	<td><input type="text" name="Amount" size="12" maxlength="11" value="' .  $_POST['Amount'] . '"></td></tr>';
 echo '</table>';
 
-echo '<br /><div class=centre><input type="submit" name="AddShiptChgToInvoice" VALUE="' . _('Enter Shipment Charge') . '"></div>';
+echo '<br /><div class=centre><input type="submit" name="AddShiptChgToInvoice" value="' . _('Enter Shipment Charge') . '"></div>';
 
 echo '</form>';
 include('includes/footer.inc');

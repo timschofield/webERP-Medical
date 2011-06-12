@@ -614,7 +614,7 @@ if (isset($_POST['Items'])) {
 	}
 	while ($myrow1 = DB_fetch_array($result)) {
 		if ($myrow1['categoryid'] == $_POST['StockCat']) {
-			echo '<option selected VALUE="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
+			echo '<option selected value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 		}

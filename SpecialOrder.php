@@ -149,7 +149,7 @@ if (!isset($_SESSION['SPL']->BranchCode)){
 				$k++;
 			}
 
-			printf('<td><input type=submit name="SelectBranch" VALUE="%s" /></td><td>%s</td></tr>', $myrow['branchcode'], $myrow['brname']);
+			printf('<td><input type=submit name="SelectBranch" value="%s" /></td><td>%s</td></tr>', $myrow['branchcode'], $myrow['brname']);
 
 //end of page full new headings if
 		}
@@ -525,9 +525,9 @@ while ($LocnRow=DB_fetch_array($LocnResult)){
 }
 echo '</select></td>';
 
-echo '<td>' . _('Initiated By') . ': <input type=TEXT name="Initiator" size=11 maxlength=10 VALUE="' . $_SESSION['SPL']->Initiator . '"></td>';
-echo '<td>' . _('Special Ref') . ': <input type=TEXT name="QuotationRef" size=16 maxlength=15 VALUE="' . $_SESSION['SPL']->QuotationRef . '"></td>';
-echo '<td>' . _('Customer Ref') . ': <input type=TEXT name="CustRef" size=11 maxlength=10 VALUE="' . $_SESSION['SPL']->CustRef . '"></td></tr>';
+echo '<td>' . _('Initiated By') . ': <input type=TEXT name="Initiator" size=11 maxlength=10 value="' . $_SESSION['SPL']->Initiator . '"></td>';
+echo '<td>' . _('Special Ref') . ': <input type=TEXT name="QuotationRef" size=16 maxlength=15 value="' . $_SESSION['SPL']->QuotationRef . '"></td>';
+echo '<td>' . _('Customer Ref') . ': <input type=TEXT name="CustRef" size=11 maxlength=10 value="' . $_SESSION['SPL']->CustRef . '"></td></tr>';
 
 echo '<tr><td VALIGN=TOP colspan=2>' . _('Comments') . ':';
 echo '<textarea name="Comments" cols=70 rows=2>' . $_SESSION['SPL']->Comments . '</textarea></td></tr></table>';
@@ -608,7 +608,7 @@ echo '<table>';
 echo '<input type="hidden" name="LineNo" value="' . ($_SESSION['SPL']->LinesOnOrder + 1) .'">';
 
 if (!isset($_POST['ItemDescription'])) {$_POST['ItemDescription']='';}
-echo '<tr><td>' . _('Ordered item Description') . ':</td><td><input type=TEXT name="ItemDescription" size=40 maxlength=40 VALUE="' . $_POST['ItemDescription'] . '"></td></tr>';
+echo '<tr><td>' . _('Ordered item Description') . ':</td><td><input type=TEXT name="ItemDescription" size=40 maxlength=40 value="' . $_POST['ItemDescription'] . '"></td></tr>';
 
 
 echo '<tr><td>' . _('Category') . ':</td><td><select name=StkCat>';
@@ -620,9 +620,9 @@ $result = DB_query($sql,$db, $ErrMsg, $DbgMsg);
 
 while ($myrow=DB_fetch_array($result)){
 	if (isset($_POST['StkCat']) and $myrow['categoryid']==$_POST['StkCat']){
-		echo '<option selected VALUE="'. $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
+		echo '<option selected value="'. $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	} else {
-		echo '<option VALUE="'. $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
+		echo '<option value="'. $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	}
 }
 echo '</select></td></tr>';
@@ -651,10 +651,10 @@ echo '<tr><td>' . _('Required Delivery Date') . ':</td>
 
 echo '</table>'; /* end of main table */
 
-echo '<div class="centre"><input type=submit Name="EnterLine" VALUE="' . _('Add Item to Order') . '">';
+echo '<div class="centre"><input type=submit Name="EnterLine" value="' . _('Add Item to Order') . '">';
 
-echo '<br><br><input type=submit Name="Cancel" VALUE="' . _('Start Again') . '">';
-echo '<br><br><input type=submit Name="Commit" VALUE="' . _('Process This Order') . '">';
+echo '<br><br><input type=submit Name="Cancel" value="' . _('Start Again') . '">';
+echo '<br><br><input type=submit Name="Commit" value="' . _('Process This Order') . '">';
 
 echo '</div></form>';
 include('includes/footer.inc');

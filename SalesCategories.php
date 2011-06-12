@@ -303,8 +303,8 @@ if (isset($SelectedCategory)) {
 	$_POST['ParentCategory']  = $myrow['parentcatid'];
 	$_POST['SalesCatName']  = $myrow['salescatname'];
 
-	echo '<input type=hidden name="SelectedCategory" VALUE="' . $SelectedCategory . '">';
-	echo '<input type=hidden name="ParentCategory" VALUE="' .
+	echo '<input type=hidden name="SelectedCategory" value="' . $SelectedCategory . '">';
+	echo '<input type=hidden name="ParentCategory" value="' .
 		(isset($_POST['ParentCatId'])?($_POST['ParentCategory']):('0')) . '">';
 	$FormCaps = _('Edit Sub Category');
 
@@ -313,11 +313,11 @@ if (isset($SelectedCategory)) {
 	if (isset($ParentCategory)) {
 		$_POST['ParentCategory']  = $ParentCategory;
 	}
-	echo '<input type=hidden name="ParentCategory" VALUE="' .
+	echo '<input type=hidden name="ParentCategory" value="' .
 		(isset($_POST['ParentCategory'])?($_POST['ParentCategory']):('0')) . '">';
 	$FormCaps = _('New Sub Category');
 }
-echo '<input type=hidden name="EditName" VALUE="1">';
+echo '<input type=hidden name="EditName" value="1">';
 echo '<table class=selection>';
 echo '<tr><th colspan="2">' . $FormCaps . '</th></tr>';
 echo '<tr><td>' . _('Category Name') . ':</td>
@@ -373,9 +373,9 @@ if($result && DB_num_rows($result)) {
 	echo '<p><form ENCtype="MULTIPART/FORM-DATA" method="POST" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	if( isset($SelectedCategory) ) { // If we selected a category we need to keep it selected
-		echo '<input type=hidden name="SelectedCategory" VALUE="' . $SelectedCategory . '">';
+		echo '<input type=hidden name="SelectedCategory" value="' . $SelectedCategory . '">';
 	}
-	echo '<input type=hidden name="ParentCategory" VALUE="' .
+	echo '<input type=hidden name="ParentCategory" value="' .
 		(isset($_POST['ParentCategory'])?($_POST['ParentCategory']):('0')) . '">';
 
 	echo '';

@@ -176,7 +176,7 @@ echo '<p><table>
 	</tr>
 </table>';
 
-echo '<input type=submit name=ProcessDeletions VALUE="' . _('Process') . '"  onclick="return confirm(\'' . _('Are You Really REALLY Sure?') . '\');">';
+echo '<input type=submit name=ProcessDeletions value="' . _('Process') . '"  onclick="return confirm(\'' . _('Are You Really REALLY Sure?') . '\');">';
 
 echo '</form>';
 

@@ -212,9 +212,9 @@ echo '<tr><td>' . _('Work Centre Description') . ":</td>
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['Location']) and $myrow['loccode']==$_POST['Location']) {
-		echo "<option selected VALUE='";
+		echo "<option selected value='";
 	} else {
-		echo "<option VALUE='";
+		echo "<option value='";
 	}
 	echo $myrow['loccode'] . "'>" . $myrow['locationname'];
 
@@ -239,9 +239,9 @@ $result = DB_query($SQL,$db);
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['OverheadRecoveryAct']) and $myrow['accountcode']==$_POST['OverheadRecoveryAct']) {
-		echo '<option selected VALUE=';
+		echo '<option selected value=';
 	} else {
-		echo '<option VALUE=';
+		echo '<option value=';
 	}
 	echo $myrow['accountcode'] . '>' . $myrow['accountname'];
 
