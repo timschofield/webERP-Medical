@@ -147,12 +147,12 @@ if (isset($_POST['submit'])) {
 		$myrow = DB_fetch_row($result);
 		if ($myrow[0]>0) {
 			prnMsg( _('Cannot delete this payment method because bank transactions have been created using this payment method'),'warn');
-			echo '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('bank transactions that refer to this payment method') . '</font>';
+			echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('bank transactions that refer to this payment method') . '</font>';
 		} else {
 			$sql="DELETE FROM paymentmethods WHERE paymentname LIKE '" . $OldMeasureName . "'";
 			$result = DB_query($sql,$db);
 			prnMsg( $OldMeasureName . ' ' . _('payment method has been deleted') . '!','success');
-			echo '<br>';
+			echo '<br />';
 		} //end if not used
 	} //end if payment method exist
 	unset ($SelectedPaymentID);
@@ -289,7 +289,7 @@ if (! isset($_GET['delete'])) {
 
 	echo '</table>';
 
-	echo '<br><div class="centre"><input type=Submit name=submit value=' . _('Enter Information') . '></div>';
+	echo '<br /><div class="centre"><input type=Submit name=submit value=' . _('Enter Information') . '></div>';
 
 	echo '</form>';
 

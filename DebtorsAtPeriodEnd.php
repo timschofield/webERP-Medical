@@ -58,9 +58,9 @@ if (isset($_POST['PrintPDF'])
 		$title = _('Customer Balances') . ' - ' . _('Problem Report');
 		include('includes/header.inc');
 		prnMsg(_('The customer details could not be retrieved by the SQL because') . DB_error_msg($db),'error');
-		echo "<br><a href='$rootpath/index.php?" . SID . "'>" . _('Back to the menu') . '</a>';
+		echo "<br /><a href='$rootpath/index.php?" . SID . "'>" . _('Back to the menu') . '</a>';
 		if ($debug==1){
-			echo "<br>$SQL";
+			echo "<br />$SQL";
 		}
 		include('includes/footer.inc');
 		exit;
@@ -70,7 +70,7 @@ if (isset($_POST['PrintPDF'])
 		$title = _('Customer Balances') . ' - ' . _('Problem Report');
 		include('includes/header.inc');
 		prnMsg(_('The customer details listing has no clients to report on'),'warn');
-		echo "<br><a href='".$rootpath."'/index.php?.'" . SID . "'>" . _('Back to the menu') . "</a>";
+		echo "<br /><a href='".$rootpath."'/index.php?.'" . SID . "'>" . _('Back to the menu') . "</a>";
 		include('includes/footer.inc');
 		exit;
 	}
@@ -163,7 +163,7 @@ if (isset($_POST['PrintPDF'])
 	echo '</select></td></tr>';
 
 
-	echo "</table><br><div class='centre'><input tabindex=5 type=Submit Name='PrintPDF' Value='" . _('Print PDF') . "'></div>";
+	echo "</table><br /><div class='centre'><input tabindex=5 type=Submit Name='PrintPDF' Value='" . _('Print PDF') . "'></div>";
 
 	include('includes/footer.inc');
 } /*end of else not PrintPDF */

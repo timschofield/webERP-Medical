@@ -25,7 +25,7 @@ if (isset($_POST['StockUOM'])) {
 
 $NoPurchasingData=0;
 
-echo '<a href="' . $rootpath . '/SelectProduct.php">' . _('Back to Items') . '</a><br>';
+echo '<a href="' . $rootpath . '/SelectProduct.php">' . _('Back to Items') . '</a><br />';
 
 if (isset($_POST['SupplierDescription'])) {
 	$_POST['SupplierDescription'] = trim($_POST['SupplierDescription']);

@@ -123,7 +123,7 @@ if (isset($_POST['submit'])) {
 	$myrow = DB_fetch_row($result);
 	if ($myrow[0] > 0) {
 		prnMsg( _('Cannot delete this credit status code because customer accounts have been created referring to it'),'warn');
-		echo '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('customer accounts that refer to this credit status code');
+		echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('customer accounts that refer to this credit status code');
 	}  else {
 		//only delete if used in neither customer or supplier accounts
 
@@ -222,7 +222,7 @@ if (!isset($_GET['delete'])) {
 		if (!isset($_POST['ReasonCode'])) {
 			$_POST['ReasonCode'] = '';
 		}
-		echo '<br><table class=selection>
+		echo '<br /><table class=selection>
 			<tr>
 				<td>'. _('Status Code') .':</td>
 				<td><input ' . (in_array('ReasonCode',$Errors) ? 'class="inputerror"' : '' ) .
@@ -244,7 +244,7 @@ if (!isset($_GET['delete'])) {
 	} else {
 		echo '<td><input tabindex=3 type="checkbox" name="DisallowInvoices"></td></tr>';
 	}
-	echo '</table><br><div class="centre"><input tabindex=4 type="submit" name="submit" value="' . _('Enter Information') . '"></div></form>';
+	echo '</table><br /><div class="centre"><input tabindex=4 type="submit" name="submit" value="' . _('Enter Information') . '"></div></form>';
 } //end if record deleted no point displaying form to add record
 include('includes/footer.inc');
 ?>

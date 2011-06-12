@@ -46,7 +46,7 @@ if (($myrow[2]=='K') OR ($myrow[2]=='A') OR ($myrow[2]=='D')) {
 	$Its_A_KitSet_Assembly_Or_Dummy =True;
 	echo '<font color=navy size=3><b>' . $StockID - $myrow[0] . '</b></font>';
 
-	echo '<br>' . _('The selected item is a dummy or assembly or kit-set item and cannot have a stock holding') . '. ' . _('Please select a different item');
+	echo '<br />' . _('The selected item is a dummy or assembly or kit-set item and cannot have a stock holding') . '. ' . _('Please select a different item');
 
 	$StockID = '';
 } else {
@@ -129,7 +129,7 @@ if (isset($_POST['ShowUsage'])){
 	if (DB_error_no($db) !=0) {
 		echo _('The stock usage for the selected criteria could not be retrieved because') . ' - ' . DB_error_msg($db);
 		if ($debug==1){
-		echo '<br>' . _('The SQL that failed was') . $sql;
+		echo '<br />' . _('The SQL that failed was') . $sql;
 		}
 		exit;
 	}
@@ -173,10 +173,10 @@ if (isset($_POST['ShowUsage'])){
 
 echo '<br /><div class="centre">';
 echo '<a href="' . $rootpath . '/StockStatus.php?StockID=$StockID">' . _('Show Stock Status') .'</a>';
-echo '<br><a href="' . $rootpath . '/StockMovements.php?StockID=' . $StockID . '&StockLocation=' . $_POST['StockLocation'] . '">' . _('Show Stock Movements') . '</a>';
-echo '<br><a href="' . $rootpath . '/SelectSalesOrder.php?SelectedStockItem=$StockID&StockLocation=' . $_POST['StockLocation'] . '">' . _('Search Outstanding Sales Orders') . '</a>';
-echo '<br><a href="' . $rootpath . '/SelectCompletedOrder.php?SelectedStockItem=$StockID">' . _('Search Completed Sales Orders') . '</a>';
-echo '<br><a href="' . $rootpath . '/PO_SelectOSPurchOrder.php?SelectedStockItem=$StockID">' . _('Search Outstanding Purchase Orders') . '</a>';
+echo '<br /><a href="' . $rootpath . '/StockMovements.php?StockID=' . $StockID . '&StockLocation=' . $_POST['StockLocation'] . '">' . _('Show Stock Movements') . '</a>';
+echo '<br /><a href="' . $rootpath . '/SelectSalesOrder.php?SelectedStockItem=$StockID&StockLocation=' . $_POST['StockLocation'] . '">' . _('Search Outstanding Sales Orders') . '</a>';
+echo '<br /><a href="' . $rootpath . '/SelectCompletedOrder.php?SelectedStockItem=$StockID">' . _('Search Completed Sales Orders') . '</a>';
+echo '<br /><a href="' . $rootpath . '/PO_SelectOSPurchOrder.php?SelectedStockItem=$StockID">' . _('Search Outstanding Purchase Orders') . '</a>';
 
 echo '</form></div>';
 include('includes/footer.inc');

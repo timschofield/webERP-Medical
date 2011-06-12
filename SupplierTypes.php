@@ -22,7 +22,7 @@ $Errors = array();
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Supplier Types')
 	. '" alt="" />' . _('Supplier Type Setup') . '</p>';
-echo '<div class="page_help_text">' . _('Add/edit/delete Supplier Types') . '</div><br>';
+echo '<div class="page_help_text">' . _('Add/edit/delete Supplier Types') . '</div><br />';
 
 if (isset($_POST['submit'])) {
 
@@ -143,7 +143,7 @@ if (isset($_POST['submit'])) {
 	$result = DB_query($sql,$db,$ErrMsg);
 	$myrow = DB_fetch_row($result);
 	if ($myrow[0]>0) {
-		prnMsg (_('Cannot delete this type because suppliers are currently set up to use this type') . '<br>' .
+		prnMsg (_('Cannot delete this type because suppliers are currently set up to use this type') . '<br />' .
 			_('There are') . ' ' . $myrow[0] . ' ' . _('suppliers with this type code'));
 	} else {
 

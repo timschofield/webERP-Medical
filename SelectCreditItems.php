@@ -19,8 +19,8 @@ include('includes/GetPrice.inc');
 
 
 if (isset($_POST['ProcessCredit']) AND !isset($_SESSION['CreditItems'])){
-	prnMsg(_('This credit note has already been processed. Refreshing the page will not enter the credit note again') . '<br>' . _('Please use the navigation links provided rather than using the browser back button and then having to refresh'),'info');
-	echo '<br><a href="' . $rootpath . '/index.php?' . SID . '">' . _('Back to the menu') . '</a>';
+	prnMsg(_('This credit note has already been processed. Refreshing the page will not enter the credit note again') . '<br />' . _('Please use the navigation links provided rather than using the browser back button and then having to refresh'),'info');
+	echo '<br /><a href="' . $rootpath . '/index.php?' . SID . '">' . _('Back to the menu') . '</a>';
 	include('includes/footer.inc');
   exit;
 }
@@ -371,7 +371,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		if (DB_num_rows($SearchResult)==0){
 			   prnMsg(_('There are no products available that match the criteria specified'),'info');
 			   if ($debug==1){
-				    prnMsg(_('The SQL statement used was') . ':<br>' . $SQL,'info');
+				    prnMsg(_('The SQL statement used was') . ':<br />' . $SQL,'info');
 			   }
 		}
 		if (DB_num_rows($SearchResult)==1){
@@ -652,11 +652,11 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		  <th>' . _('Price') . '</th>
 		  <th>' . _('Gross') . '</th>
 		  <th>' . _('Discount') . '</th>
-		  <th>' . _('Total') . '<br>' . _('Excl Tax') . '</th>
+		  <th>' . _('Total') . '<br />' . _('Excl Tax') . '</th>
 		  <th>' . _('Tax Authority') . '</th>
-		  <th>' . _('Tax') . '<br>' . _('Rate') . '</th>
-		  <th>' . _('Tax') . '<br>' . _('Amount') . '</th>
-		  <th>' . _('Total') . '<br>' . _('Incl Tax') . '</th>
+		  <th>' . _('Tax') . '<br />' . _('Rate') . '</th>
+		  <th>' . _('Tax') . '<br />' . _('Amount') . '</th>
+		  <th>' . _('Total') . '<br />' . _('Incl Tax') . '</th>
 		  </tr>';
 
 		  $_SESSION['CreditItems']->total = 0;
@@ -703,7 +703,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			$i=0;
 			foreach ($_SESSION['CreditItems']->LineItems[$LineItem->LineNumber]->Taxes AS $Tax) {
 				if ($i>0){
-					echo '<br>';
+					echo '<br />';
 				}
 				echo $Tax->TaxAuthDescription;
 				$i++;
@@ -719,7 +719,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			}
 			foreach ($LineItem->Taxes AS $Tax) {
 				if ($i>0){
-					echo '<br>';
+					echo '<br />';
 				}
 				echo '<input type=text class="number" name="' . $LineItem->LineNumber . $Tax->TaxCalculationOrder . '_TaxRate" maxlength=4 size=4 value="' . $Tax->TaxRate*100 . '">';
 				$i++;
@@ -747,7 +747,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				</tr>';
 
 			echo $RowStarter;
-			echo '<td colspan=11><textarea  name="Narrative_' . $LineItem->LineNumber . '" cols=100% rows=1>' . $LineItem->Narrative . '</textarea><br></td></tr>';
+			echo '<td colspan=11><textarea  name="Narrative_' . $LineItem->LineNumber . '" cols=100% rows=1>' . $LineItem->Narrative . '</textarea><br /></td></tr>';
 
 
 			$_SESSION['CreditItems']->total = $_SESSION['CreditItems']->total + $LineTotal;
@@ -771,7 +771,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		$i=0; // initialise the number of taxes iterated through
 		foreach ($_SESSION['CreditItems']->FreightTaxes as $FreightTaxLine) {
 			if ($i>0){
-				echo '<br>';
+				echo '<br />';
 			}
 			echo  $FreightTaxLine->TaxAuthDescription;
 			$i++;
@@ -782,7 +782,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		$i=0;
 		foreach ($_SESSION['CreditItems']->FreightTaxes as $FreightTaxLine) {
 			if ($i>0){
-				echo '<br>';
+				echo '<br />';
 			}
 
 			echo  '<input type=TEXT class="number" name=FreightTaxRate' . $FreightTaxLine->TaxCalculationOrder . ' maxlength=4 size=4 value=' . $FreightTaxLine->TaxRate * 100 . '>';
@@ -818,7 +818,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 /*Now show options for the credit note */
 
-		echo '<br><table class=selection><tr><td>' . _('Credit Note Type') . ' :</td><td><select name=CreditType>';
+		echo '<br /><table class=selection><tr><td>' . _('Credit Note Type') . ' :</td><td><select name=CreditType>';
 		if (!isset($_POST['CreditType']) OR $_POST['CreditType']=='Return'){
 			   echo '<option selected value="Return">' . _('Goods returned to store');
 			   echo '<option value="WriteOff">' . _('Goods written off');
@@ -916,7 +916,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 		 $result1 = DB_query($SQL,$db);
 
-		 echo '<br><table class=selection>
+		 echo '<br /><table class=selection>
 		 	<tr><td>' . _('Select a stock category') . ':&nbsp;<select name="StockCat">';
 
 		 echo '<option selected value="All">' . _('All');
@@ -1023,8 +1023,8 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess==true){
 	 		FROM custbranch
 			WHERE custbranch.debtorno ='". $_SESSION['CreditItems']->DebtorNo . "'
 			AND custbranch.branchcode = '" . $_SESSION['CreditItems']->Branch . "'";
-	$ErrMsg = '<br>' . _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The area cannot be determined for this customer');
-	$DbgMsg = '<br>' . _('The following SQL to insert the customer credit note was used');
+	$ErrMsg = '<br />' . _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The area cannot be determined for this customer');
+	$DbgMsg = '<br />' . _('The following SQL to insert the customer credit note was used');
 	$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg);
 
 	 if ($myrow = DB_fetch_row($Result)){
@@ -1053,7 +1053,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess==true){
 /*Start an SQL transaction */
 
 	 $ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The database does not support transactions') . ' - ' . _('A RDBMS that supports database transactions is required');
-	 $DbgMsg = '<br>' . _('The following SQL to initiate a database transaction was used');
+	 $DbgMsg = '<br />' . _('The following SQL to initiate a database transaction was used');
 
 	 $Result = DB_query("BEGIN",$db,$ErrMsg,$DbgMsg);
 
@@ -1953,8 +1953,8 @@ then debit the expense account the stock is to written off to */
 	 unset($_SESSION['CreditItems']->LineItems);
 	 unset($_SESSION['CreditItems']);
 
-	 echo _('Credit Note number') . ' ' . $CreditNo . ' ' . _('processed') . '<br>';
-	 echo '<a target="_blank" href="' . $rootpath . '/PrintCustTrans.php?FromTransNo=' . $CreditNo . '&InvOrCredit=Credit">' . _('Show this Credit Note on screen') . '</a><br>';
+	 echo _('Credit Note number') . ' ' . $CreditNo . ' ' . _('processed') . '<br />';
+	 echo '<a target="_blank" href="' . $rootpath . '/PrintCustTrans.php?FromTransNo=' . $CreditNo . '&InvOrCredit=Credit">' . _('Show this Credit Note on screen') . '</a><br />';
 	if ($_SESSION['InvoicePortraitFormat']==0){
 	 	echo '<a href="' . $rootpath . '/PrintCustTrans.php?FromTransNo=' . $CreditNo . '&InvOrCredit=Credit&PrintPDF=True">' . _('Print this Credit Note') . '</a>';
 	} else {

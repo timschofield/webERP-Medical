@@ -61,7 +61,7 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate'])){
 	 echo '<tr><td>' . _('Email the report off') . ':</td><td><select name="Email">';
 	 echo '<option selected value="No">' . _('No') . '</option>';
 	 echo '<option value="Yes">' . _('Yes') . '</option>';
-	 echo '</select></td></tr></table><br><div class="centre"><input type=submit name="Go" value="' . _('Create PDF') . '"></div>';
+	 echo '</select></td></tr></table><br /><div class="centre"><input type=submit name="Go" value="' . _('Create PDF') . '"></div>';
 
 
 	 include('includes/footer.inc');
@@ -98,7 +98,7 @@ if (DB_error_no($db)!=0){
 	include('includes/header.inc');
 	prnMsg(_('An error occurred getting the payments'),'error');
 	if ($Debug==1){
-			prnMsg(_('The SQL used to get the receipt header information that failed was') . ':<br>' . $SQL,'error');
+			prnMsg(_('The SQL used to get the receipt header information that failed was') . ':<br />' . $SQL,'error');
 	}
 	include('includes/footer.inc');
   	exit;
@@ -142,7 +142,7 @@ while ($myrow=DB_fetch_array($Result)){
 		include('includes/header.inc');
    		prnMsg(_('An error occurred getting the GL transactions'),'error');
 		if ($debug==1){
-				prnMsg( _('The SQL used to get the receipt header information that failed was') . ':<br>' . $sql, 'error');
+				prnMsg( _('The SQL used to get the receipt header information that failed was') . ':<br />' . $sql, 'error');
 		}
 		include('includes/footer.inc');
   		exit;

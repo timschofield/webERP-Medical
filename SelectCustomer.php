@@ -89,20 +89,20 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 		$_POST['PageOffset'] = 1;
 	}
 	if ($_POST['Keywords'] AND (($_POST['CustCode']) OR ($_POST['CustPhone']) OR ($_POST['CustType']))) {
-		$msg = _('Search Result: Customer Name has been used in search') . '<br>';
+		$msg = _('Search Result: Customer Name has been used in search') . '<br />';
 		$_POST['Keywords'] = strtoupper($_POST['Keywords']);
 	}
 	if ($_POST['CustCode'] AND $_POST['CustPhone'] == "" AND isset($_POST['CustType']) AND $_POST['Keywords'] == "") {
-		$msg = _('Search Result: Customer Code has been used in search') . '<br>';
+		$msg = _('Search Result: Customer Code has been used in search') . '<br />';
 	}
 	if (($_POST['CustPhone'])) {
-		$msg = _('Search Result: Customer Phone has been used in search') . '<br>';
+		$msg = _('Search Result: Customer Phone has been used in search') . '<br />';
 	}
 	if (($_POST['CustAdd'])) {
-		$msg = _('Search Result: Customer Address has been used in search') . '<br>';
+		$msg = _('Search Result: Customer Address has been used in search') . '<br />';
 	}
 	if ($_POST['CustType'] AND $_POST['CustPhone'] == "" AND $_POST['CustCode'] == "" AND $_POST['Keywords'] == "" AND $_POST['CustAdd'] == "") {
-		$msg = _('Search Result: Customer Type has been used in search') . '<br>';
+		$msg = _('Search Result: Customer Type has been used in search') . '<br />';
 	}
 	if (($_POST['Keywords'] == "") AND ($_POST['CustCode'] == "") AND ($_POST['CustPhone'] == "") AND ($_POST['CustType'] == "") AND ($_POST['Area'] == "") AND ($_POST['CustAdd'] == "")) {
 		$SQL = "SELECT debtorsmaster.debtorno,
@@ -306,7 +306,7 @@ if ($_POST['Select'] != '' OR ($_SESSION['CustomerID'] != '' AND !isset($_POST['
 	echo '</td><td class="select">';
 	echo '</td><td class="select">';
 	if (!isset($_SESSION['SalesmanLogin']) or $_SESSION['SalesmanLogin'] == '') {
-		echo '<a href="' . $rootpath . '/Customers.php?">' . _('Add a New Customer') . '</a><br>';
+		echo '<a href="' . $rootpath . '/Customers.php?">' . _('Add a New Customer') . '</a><br />';
 	}
 	echo '</td></tr></table>';
 }

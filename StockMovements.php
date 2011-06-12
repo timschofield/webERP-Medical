@@ -19,7 +19,7 @@ if (isset($_GET['StockID'])){
 
 
 // This is already linked from this page
-//echo "<a href='" . $rootpath . '/SelectProduct.php?' . SID . "'>" .  _('Back to Items') . '</a><br>';
+//echo "<a href='" . $rootpath . '/SelectProduct.php?' . SID . "'>" .  _('Back to Items') . '</a><br />';
 
 $result = DB_query("SELECT description, units FROM stockmaster WHERE stockid='".$StockID."'",$db);
 $myrow = DB_fetch_row($result);
@@ -202,9 +202,9 @@ while ($myrow=DB_fetch_array($MovtsResult)) {
 
 echo '</table>';
 echo '<div class=centre><br /><a href="$rootpath/StockStatus.php?StockID=$StockID">' . _('Show Stock Status') . '</a>';
-echo '<br><a href="'.$rootpath.'/StockUsage.php?StockID=$StockID&StockLocation=' . $_POST['StockLocation'] . '">' . _('Show Stock Usage') . '</a>';
-echo '<br><a href="'.$rootpath.'/SelectSalesOrder.php?SelectedStockItem=$StockID&StockLocation=' . $_POST['StockLocation'] . '">' . _('Search Outstanding Sales Orders') . '</a>';
-echo '<br><a href="'.$rootpath.'/SelectCompletedOrder.php?SelectedStockItem=$StockID">' . _('Search Completed Sales Orders') . '</a>';
+echo '<br /><a href="'.$rootpath.'/StockUsage.php?StockID=$StockID&StockLocation=' . $_POST['StockLocation'] . '">' . _('Show Stock Usage') . '</a>';
+echo '<br /><a href="'.$rootpath.'/SelectSalesOrder.php?SelectedStockItem=$StockID&StockLocation=' . $_POST['StockLocation'] . '">' . _('Search Outstanding Sales Orders') . '</a>';
+echo '<br /><a href="'.$rootpath.'/SelectCompletedOrder.php?SelectedStockItem=$StockID">' . _('Search Completed Sales Orders') . '</a>';
 
 echo '</form></div>';
 

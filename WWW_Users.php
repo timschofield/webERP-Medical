@@ -325,12 +325,12 @@ if (!isset($SelectedUser)) {
 					$myrow['userid']);
 
 	} //END WHILE LIST LOOP
-	echo '</table><br>';
+	echo '</table><br />';
 } //end of ifs and buts!
 
 
 if (isset($SelectedUser)) {
-	echo "<div class='centre'><a href='" . $_SERVER['PHP_SELF'] ."?" . SID . "'>" . _('Review Existing Users') . '</a></div><br>';
+	echo "<div class='centre'><a href='" . $_SERVER['PHP_SELF'] ."?" . SID . "'>" . _('Review Existing Users') . '</a></div><br />';
 }
 
 echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . "?" . SID . ">";
@@ -648,7 +648,7 @@ if ($_POST['Blocked']==0){
 }
 echo '</select></td></tr>';
 
-echo '</table><br>
+echo '</table><br />
 	<div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '"></div>
 	</form>';
 

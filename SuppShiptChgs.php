@@ -27,7 +27,7 @@ if ($_SESSION['SuppTrans']->InvoiceOrCredit == 'Invoice'){
 
 if (!isset($_SESSION['SuppTrans'])){
 	prnMsg(_('Shipment charges or credits are entered against supplier invoices or credit notes respectively') . '. ' . _('To enter supplier transactions the supplier must first be selected from the supplier selection screen') . ', ' . _('then the link to enter a supplier invoice or credit note must be clicked on'),'info');
-	echo "<br><a href='$rootpath/SelectSupplier.php?" . SID ."'>" . _('Select A Supplier') . '</a>';
+	echo "<br /><a href='$rootpath/SelectSupplier.php?" . SID ."'>" . _('Select A Supplier') . '</a>';
 	exit;
 	/*It all stops here if there aint no supplier selected and invoice/credit initiated ie $_SESSION['SuppTrans'] started off*/
 }
@@ -105,7 +105,7 @@ if (!isset($_POST['ShiptRef'])) {
 echo '<table class=selection>';
 echo '<tr><td>' . _('Shipment Reference') . ':</td>
 	<td><input type="text" name="ShiptRef" size="12" maxlength="11" value="' .  $_POST['ShiptRef'] . '"></td></tr>';
-echo '<tr><td>' . _('Shipment Selection') . ':<br> ' . _('If you know the code enter it above') . '<br>' . _('otherwise select the shipment from the list') . '</td><td><select name="ShiptSelection">';
+echo '<tr><td>' . _('Shipment Selection') . ':<br /> ' . _('If you know the code enter it above') . '<br />' . _('otherwise select the shipment from the list') . '</td><td><select name="ShiptSelection">';
 
 $sql = "SELECT shiptref,
 							vessel,

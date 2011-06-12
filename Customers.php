@@ -308,7 +308,7 @@ if (isset($_POST['submit'])) {
 	if ($myrow[0]>0) {
 		$CancelDelete = 1;
 		prnMsg( _('This customer cannot be deleted because there are transactions that refer to it'),'warn');
-		echo '<br> ' . _('There are') . ' ' . $myrow[0] . ' ' . _('transactions against this customer');
+		echo '<br /> ' . _('There are') . ' ' . $myrow[0] . ' ' . _('transactions against this customer');
 
 	} else {
 		$sql= "SELECT COUNT(*) FROM salesorders WHERE debtorno='" . $_POST['DebtorNo'] . "'";

@@ -141,7 +141,7 @@ if (isset($_POST['submit'])) {
 	if ($myrow[0] > 0)
 	{
 		prnMsg(_('Cannot delete this currency because customer accounts have been created referring to this currency') .
-		 	'<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('customer accounts that refer to this currency'),'warn');
+		 	'<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('customer accounts that refer to this currency'),'warn');
 	} else {
 		$sql= "SELECT COUNT(*) FROM suppliers WHERE suppliers.currcode = '".$SelectedCurrency."'";
 		$result = DB_query($sql,$db);
@@ -149,14 +149,14 @@ if (isset($_POST['submit'])) {
 		if ($myrow[0] > 0)
 		{
 			prnMsg(_('Cannot delete this currency because supplier accounts have been created referring to this currency')
-			 . '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('supplier accounts that refer to this currency'),'warn');
+			 . '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('supplier accounts that refer to this currency'),'warn');
 		} else {
 			$sql= "SELECT COUNT(*) FROM banktrans WHERE banktrans.currcode = '" . $SelectedCurrency . "'";
 			$result = DB_query($sql,$db);
 			$myrow = DB_fetch_row($result);
 			if ($myrow[0] > 0){
 				prnMsg(_('Cannot delete this currency because there are bank transactions that use this currency') .
-				'<br>' . ' ' . _('There are') . ' ' . $myrow[0] . ' ' . _('bank transactions that refer to this currency'),'warn');
+				'<br />' . ' ' . _('There are') . ' ' . $myrow[0] . ' ' . _('bank transactions that refer to this currency'),'warn');
 			} elseif ($FunctionalCurrency==$SelectedCurrency){
 				prnMsg(_('Cannot delete this currency because it is the functional currency of the company'),'warn');
 			} else {
@@ -261,7 +261,7 @@ or deletion of the records*/
 		}
 
 	} //END WHILE LIST LOOP
-	echo '</table><br>';
+	echo '</table><br />';
 } //end of ifs and buts!
 
 
@@ -269,7 +269,7 @@ if (isset($SelectedCurrency)) {
 	echo '<div class="centre"><a href=' .$_SERVER['PHP_SELF']  . '?' . SID. '>'._('Show all currency definitions').'</a></div>';
 }
 
-echo '<br>';
+echo '<br />';
 
 if (!isset($_GET['delete'])) {
 
@@ -336,7 +336,7 @@ if (!isset($_GET['delete'])) {
 	echo '</td></tr>';
 	echo '</table>';
 
-	echo '<br><div class="centre"><input type="Submit" name="submit" value='._('Enter Information').'></div>';
+	echo '<br /><div class="centre"><input type="Submit" name="submit" value='._('Enter Information').'></div>';
 
 	echo '</form>';
 

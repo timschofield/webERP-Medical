@@ -15,7 +15,7 @@ include('includes/header.inc');
 
 if(!isset($_GET['CustomerID']) AND !isset($_SESSION['CustomerID'])){
 	prnMsg(_('To display the enquiry a customer must first be selected from the customer selection screen'),'info');
-	echo '<br><div class="centre"><a href="'. $rootpath . '/SelectCustomer.php?' . SID . '">' . _('Select a Customer to Inquire On') . '</a><br></div>';
+	echo '<br /><div class="centre"><a href="'. $rootpath . '/SelectCustomer.php?' . SID . '">' . _('Select a Customer to Inquire On') . '</a><br /></div>';
 	include('includes/footer.inc');
 	exit;
 } else {
@@ -123,11 +123,11 @@ if ($NIL_BALANCE==True){
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' .
 	_('Customer') . '" alt="" />' . ' ' . _('Customer') . ' : ' . $CustomerRecord['name'] . ' - (' . _('All amounts stated in') .
-	' ' . $CustomerRecord['currency'] . ')<br><br>' . _('Terms') . ' : ' . $CustomerRecord['terms'] . '<br>' . _('Credit Limit') .
+	' ' . $CustomerRecord['currency'] . ')<br /><br />' . _('Terms') . ' : ' . $CustomerRecord['terms'] . '<br />' . _('Credit Limit') .
 	': ' . number_format($CustomerRecord['creditlimit'],0) . ' ' . _('Credit Status') . ': ' . $CustomerRecord['reasondescription'] . '</p>';
 
 if ($CustomerRecord['dissallowinvoices']!=0){
-	echo '<br><font color=RED size=4><b>' . _('ACCOUNT ON HOLD') . '</font></b><br>';
+	echo '<br /><font color=RED size=4><b>' . _('ACCOUNT ON HOLD') . '</font></b><br />';
 }
 
 echo '<table class=selection width=70%>
@@ -146,10 +146,10 @@ echo '<tr><td class=number>' . number_format($CustomerRecord['balance'],2) . '</
 	</tr>
 	</table>';
 
-echo '<br><div class="centre"><form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+echo '<br /><div class="centre"><form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo _('Show all transactions after') . ': <input tabindex=1 type=text class="date" alt="'.$_SESSION['DefaultDateFormat'].'" id="datepicker" name="TransAfterDate" Value="' . $_POST['TransAfterDate'] . '" MAXLENGTH =10 size=12>' .
-		'	<input tabindex=2 type=submit name="Refresh Inquiry" value="' . _('Refresh Inquiry') . '"></div></form><br>';
+		'	<input tabindex=2 type=submit name="Refresh Inquiry" value="' . _('Refresh Inquiry') . '"></div></form><br />';
 
 $DateAfterCriteria = FormatDateForSQL($_POST['TransAfterDate']);
 

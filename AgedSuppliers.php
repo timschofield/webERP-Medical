@@ -105,9 +105,9 @@ If (isset($_POST['PrintPDF'])
 	  $title = _('Aged Supplier Account Analysis') . ' - ' . _('Problem Report') ;
 	  include("includes/header.inc");
 	  prnMsg(_('The Supplier details could not be retrieved by the SQL because') .  ' ' . DB_error_msg($db),'error');
-	   echo "<br><a href='$rootpath/index.php?" . SID . "'>" . _('Back to the menu') . '</a>';
+	   echo "<br /><a href='$rootpath/index.php?" . SID . "'>" . _('Back to the menu') . '</a>';
 	   if ($debug==1){
-		echo "<br>$SQL";
+		echo "<br />$SQL";
 	   }
 	   include('includes/footer.inc');
 	   exit;
@@ -186,10 +186,10 @@ If (isset($_POST['PrintPDF'])
 		    if (DB_error_no($db) !=0) {
 			$title = _('Aged Supplier Account Analysis - Problem Report');
 			include('includes/header.inc');
-			echo '<br>' . _('The details of outstanding transactions for Supplier') . ' - ' . $AgedAnalysis['supplierid'] . ' ' . _('could not be retrieved because') . ' - ' . DB_error_msg($db);
-			echo "<br><a href='$rootpath/index.php'>" . _('Back to the menu') . '</a>';
+			echo '<br />' . _('The details of outstanding transactions for Supplier') . ' - ' . $AgedAnalysis['supplierid'] . ' ' . _('could not be retrieved because') . ' - ' . DB_error_msg($db);
+			echo "<br /><a href='$rootpath/index.php'>" . _('Back to the menu') . '</a>';
 			if ($debug==1){
-			   echo '<br>' . _('The SQL that failed was') . '<br>' . $sql;
+			   echo '<br />' . _('The SQL that failed was') . '<br />' . $sql;
 			}
 			include('includes/footer.inc');
 			exit;
@@ -317,7 +317,7 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/m
 		echo "<option value='Yes'>" . _('Detailed Report');
 		echo '</select></td></tr>';
 
-		echo '</table><br><div class="centre"><input tabindex="6" type=submit name="PrintPDF" value="' . _('Print PDF') . '"></div>';
+		echo '</table><br /><div class="centre"><input tabindex="6" type=submit name="PrintPDF" value="' . _('Print PDF') . '"></div>';
 	}
 	include('includes/footer.inc');
 } /*end of else not PrintPDF */

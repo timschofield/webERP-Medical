@@ -124,7 +124,7 @@ if (isset($_POST['submit'])  && $EditName == 1 ) { // Creating or updating a cat
 	$myrow = DB_fetch_row($result);
 	if ($myrow[0]>0) {
 		prnMsg(_('Cannot delete this sales category because stock items have been added to this category') .
-			'<br> ' . _('There are') . ' ' . $myrow[0] . ' ' . _('items under to this category'),'warn');
+			'<br /> ' . _('There are') . ' ' . $myrow[0] . ' ' . _('items under to this category'),'warn');
 
 	} else {
 		$sql = "SELECT COUNT(*) FROM salescat WHERE parentcatid='".$SelectedCategory."'";
@@ -132,7 +132,7 @@ if (isset($_POST['submit'])  && $EditName == 1 ) { // Creating or updating a cat
 		$myrow = DB_fetch_row($result);
 		if ($myrow[0]>0) {
 		prnMsg(_('Cannot delete this sales category because sub categories have been added to this category') .
-			'<br> ' . _('There are') . ' ' . $myrow[0] . ' ' . _('sub categories'),'warn');
+			'<br /> ' . _('There are') . ' ' . $myrow[0] . ' ' . _('sub categories'),'warn');
 		} else {
 			$sql="DELETE FROM salescat WHERE salescatid='".$SelectedCategory."'";
 			$result = DB_query($sql,$db);

@@ -39,7 +39,7 @@ if (isset($_POST['process'])) {
 
 	if ($SelectedTabs=='') {
 		$InputError = 1;
-		prnMsg('<br>' . _('You Must First Select a Petty Cash Tab To Authorise'),'error');
+		prnMsg('<br />' . _('You Must First Select a Petty Cash Tab To Authorise'),'error');
 		$Errors[$i] = 'TabSelect';
 		$i++;
 		unset($SelectedTabs);
@@ -51,7 +51,7 @@ if (isset($_POST['Go'])) {
 	$i=1;
 	if ($Days<=0) {
 		$InputError = 1;
-		prnMsg('<br>' . _('The number of days must be a positive number'),'error');
+		prnMsg('<br />' . _('The number of days must be a positive number'),'error');
 		$Errors[$i] = 'Days';
 		$i++;
 		$Days=30;
@@ -75,7 +75,7 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 	}
 	echo '<input type=hidden name="SelectedTabs" value="' . $SelectedTabs . '">';
 	echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Select another tab') . '</a></div></p>';
-	echo '<br><table class=selection>';
+	echo '<br /><table class=selection>';
 	echo '<tr><th colspan=7>' . _('Detail Of Movement For Last ') .': ';
 	echo '<input type=text class=number name="Days" value="' . $Days . '" MAXLENGTH=3 size=4> Days ';
 	echo '<input type=submit name="Go" value="' . _('Go') . '"></tr></th>';

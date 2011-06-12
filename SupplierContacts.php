@@ -15,15 +15,15 @@ if (isset($_GET['SupplierID'])){
 	$SupplierID = $_POST['SupplierID'];
 }
 
-echo '<a href="' . $rootpath . '/SelectSupplier.php">' . _('Back to Suppliers') . '</a><br>';
+echo '<a href="' . $rootpath . '/SelectSupplier.php">' . _('Back to Suppliers') . '</a><br />';
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' .
 	_('Supplier Allocations') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (!isset($SupplierID)) {
 	echo '<br />';
-	prnMsg(_('This page must be called with the supplier code of the supplier for whom you wish to edit the contacts') . '<br>' . _('When the page is called from within the system this will always be the case') .
-			'<br>' . _('Select a supplier first, then select the link to add/edit/delete contacts'),'info');
+	prnMsg(_('This page must be called with the supplier code of the supplier for whom you wish to edit the contacts') . '<br />' . _('When the page is called from within the system this will always be the case') .
+			'<br />' . _('Select a supplier first, then select the link to add/edit/delete contacts'),'info');
 	include('includes/footer.inc');
 	exit;
 }
@@ -48,7 +48,7 @@ if (isset($_POST['submit'])) {
 	if (strlen($_POST['Contact']) == 0) {
 		$InputError = 1;
 		prnMsg(_('The contact name must be at least one character long'),'error');
-		echo '<br>';
+		echo '<br />';
 	}
 
 
@@ -114,7 +114,7 @@ if (isset($_POST['submit'])) {
 
 	$result = DB_query($sql,$db, $ErrMsg, $DbgMsg);
 
-	echo '<br>' . _('Supplier contact has been deleted') . '<p>';
+	echo '<br />' . _('Supplier contact has been deleted') . '<p>';
 
 }
 

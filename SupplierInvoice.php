@@ -17,7 +17,7 @@ include('includes/header.inc');
 include('includes/SQL_CommonFunctions.inc');
 
 //this is available from the menu on this page already
-//echo "<a href='" . $rootpath . '/SelectSupplier.php?' . SID . "'>" . _('Back to Suppliers') . '</a><br>';
+//echo "<a href='" . $rootpath . '/SelectSupplier.php?' . SID . "'>" . _('Back to Suppliers') . '</a><br />';
 
 if (!isset($_SESSION['SuppTrans']->SupplierName)) {
 	$sql="SELECT suppname FROM suppliers WHERE supplierid='".$_GET['SupplierID']."'";
@@ -115,7 +115,7 @@ if (isset($_GET['SupplierID']) and $_GET['SupplierID']!=''){
 } elseif (!isset( $_SESSION['SuppTrans'])){
 
 	prnMsg( _('To enter a supplier invoice the supplier must first be selected from the supplier selection screen'),'warn');
-	echo '<br><a href="' . $rootpath . '/SelectSupplier.php">' . _('Select A Supplier to Enter an Invoice For') . '</a>';
+	echo '<br /><a href="' . $rootpath . '/SelectSupplier.php">' . _('Select A Supplier to Enter an Invoice For') . '</a>';
 	include('includes/footer.inc');
 	exit;
 
@@ -202,7 +202,7 @@ if (!isset($_POST['PostInvoice'])){
 		echo '<meta http-equiv="Refresh" content="0; url=' . $rootpath . '/SuppTransGLAnalysis.php">';
 		echo '<div class="centre">' . _('You should automatically be forwarded to the entry of invoices against the general ledger page') .
 			'. ' . _('If this does not happen') . ' (' . _('if the browser does not support META Refresh'). ') ' .
-			'<a href="' . $rootpath . '/SuppTransGLAnalysis.php">' . _('click here') . '</a> ' . _('to continue') . '.</div><br>';
+			'<a href="' . $rootpath . '/SuppTransGLAnalysis.php">' . _('click here') . '</a> ' . _('to continue') . '.</div><br />';
 		exit;
 	}
 	if (isset($_POST['Contracts']) AND $_POST['Contracts'] == _('Contracts')){
@@ -255,7 +255,7 @@ if (!isset($_POST['PostInvoice'])){
 			<td><input type="text" class="number" size="11" maxlength="10" name="ExRate" value="' . $_SESSION['SuppTrans']->ExRate . '"></td></tr>';
 	echo '</table>';
 
-	echo '<br><div class="centre"><input type="submit" name="GRNS" value="' . _('Purchase Orders') . '"> ';
+	echo '<br /><div class="centre"><input type="submit" name="GRNS" value="' . _('Purchase Orders') . '"> ';
 
 	echo '<input type="submit" name="Shipts" value="' . _('Shipments') . '"> ';
 	echo '<input type="submit" name="Contracts" value="' . _('Contracts') . '"> ';

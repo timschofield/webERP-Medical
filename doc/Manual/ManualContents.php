@@ -7,7 +7,7 @@
      No style, inline style or style sheet on purpose.
      In this way the help can be easily broken into sections for online context-sensitive help.
 		 The only html used in them are:
-		 <br>
+		 <br />
 		 <div>
 		 <table>
 		 <font>
@@ -39,7 +39,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
 ?>
           <input type="submit" name="Submit" value="Display Checked">
 					Click on a link below to view.  Click checkboxes then Display Checked to format for printing.
-					<br><br><br>
+					<br /><br /><br />
 <?php
   }
 ?>
@@ -54,7 +54,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
   }
 ?>
           <font size="+3"><b>Table of Contents</b></font>
-          <br><br>
+          <br /><br />
           <UL>
             <LI>
 <?php
@@ -132,7 +132,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
   }
 ?>
             </LI>
-            <br><br>
+            <br /><br />
             <LI>
 <?php
   if (!isset($_POST['Submit'])) {

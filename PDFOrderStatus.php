@@ -65,7 +65,7 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate'])){
 	echo '<tr><td>' . _('Back Order Only') . ':</td><td><select name="BackOrders">' . '</option>';
 	echo '<option selected value="Yes">' . _('Only Show Back Orders') . '</option>';
 	echo '<option value="No">' . _('Show All Orders') . '</option>';
-	echo '</select></td></tr></table><br><div class="centre"><input type=submit name="Go" value="' . _('Create PDF') . '"></div>';
+	echo '</select></td></tr></table><br /><div class="centre"><input type=submit name="Go" value="' . _('Create PDF') . '"></div>';
 
 	include('includes/footer.inc');
 	exit;
@@ -239,9 +239,9 @@ $Result=DB_query($sql,$db,'','',false,false); //dont trap errors here
 
 if (DB_error_no($db)!=0){
 	include('includes/header.inc');
-	echo '<br>' . _('An error occurred getting the orders details');
+	echo '<br />' . _('An error occurred getting the orders details');
 	if ($debug==1){
-		echo '<br>' . _('The SQL used to get the orders that failed was') . '<br>' . $sql;
+		echo '<br />' . _('The SQL used to get the orders that failed was') . '<br />' . $sql;
 	}
 	include ('includes/footer.inc');
 	exit;

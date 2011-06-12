@@ -159,7 +159,7 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 //end of while loop
 
 echo '</table><br />';
-echo '<div class="centre"><br><b>' . _('Total quantity') . ': ' . number_format($TotalQuantity, $DecimalPlaces) . '<br></div>';
+echo '<div class="centre"><br /><b>' . _('Total quantity') . ': ' . number_format($TotalQuantity, $DecimalPlaces) . '<br /></div>';
 
 echo '</form>';
 include('includes/footer.inc');

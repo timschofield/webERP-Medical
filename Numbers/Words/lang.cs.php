@@ -44,7 +44,7 @@ class Numbers_Words_cs extends Numbers_Words
 {
 
     // {{{ properties
-    
+
     /**
      * Locale name
      * @var string
@@ -65,7 +65,7 @@ class Numbers_Words_cs extends Numbers_Words
      * @access public
      */
     var $lang_native = 'Czech';
-    
+
     /**
      * The word for the minus sign
      * @var string
@@ -165,24 +165,24 @@ class Numbers_Words_cs extends Numbers_Words
      * @since  PHP 4.2.3
      */
     function toWords($num, $power = 0, $powsuffix = '') {
-//    print "<br>$num,$power,$powsuffix<br>";
-      $ret = '';        
-        
+//    print "<br />$num,$power,$powsuffix<br />";
+      $ret = '';
+
       // add a minus sign
       if (substr($num, 0, 1) == '-') {
         $ret = $this->_sep . $this->_minus;
         $num = substr($num, 1);
       }
-        
+
       // strip excessive zero signs and spaces
       $num = trim($num);
       $num = preg_replace('/^0+/','',$num);
-        
+
       if (strlen($num) > 3) {
           $maxp = strlen($num)-1;
           $curp = $maxp;
           for ($p = $maxp; $p > 0; --$p) { // power
-            
+
             // check for highest power
             if (isset($this->_exponent[$p])) {
               // send substr from $curp to $p
@@ -205,9 +205,9 @@ class Numbers_Words_cs extends Numbers_Words
       } elseif ($num == 0 || $num == '') {
         return $this->_sep . $this->_digits[0];
       }
-    
+
       $h = $t = $d = 0;
-      
+
       switch(strlen($num)) {
         case 3:
           $h = (int)substr($num,-3,1);
@@ -225,7 +225,7 @@ class Numbers_Words_cs extends Numbers_Words
       }
 
       if ($h) {
-   
+
         // inflection of the word "hundred"
         if ($h == 1)
           $ret .= $this->_sep . $this->_hundreds[0];
@@ -251,49 +251,49 @@ class Numbers_Words_cs extends Numbers_Words
       case 4:
           $ret .= $this->_sep . $this->_digits[$t] . 'cet';
           break;
-    
+
       case 5:
           $ret .= $this->_sep . 'padesát';
           break;
-    
+
       case 6:
           $ret .= $this->_sep . '¹edesát';
           break;
-    
+
       case 7:
           $ret .= $this->_sep . 'sedmdesát';
           break;
-    
+
       case 8:
           $ret .= $this->_sep . 'osmdesát';
           break;
-    
+
       case 9:
           $ret .= $this->_sep . 'devadesát';
           break;
-    
+
       case 1:
           switch ($d) {
           case 0:
               $ret .= $this->_sep . 'deset';
               break;
-    
+
           case 1:
               $ret .= $this->_sep . 'jedenáct';
               break;
-    
+
           case 4:
               $ret .= $this->_sep . 'ètrnáct';
               break;
-    
+
           case 5:
               $ret .= $this->_sep . 'patnáct';
               break;
-    
+
           case 9:
               $ret .= $this->_sep . 'devatenáct';
               break;
-    
+
           case 2:
           case 3:
           case 6:
@@ -302,18 +302,18 @@ class Numbers_Words_cs extends Numbers_Words
               $ret .= $this->_sep . $this->_digits[$d] . 'náct';
               break;
           }
-          break; 
+          break;
       }
 
       if ($t != 1 && $d > 0 && ($power == 0 || $d > 1)) {
-      // 
+      //
         $ret .= $this->_sep . $this->_digits[$d];
       }
-  
+
       if ($power > 0) {
         if (isset($this->_exponent[$power]))
           $lev = $this->_exponent[$power];
-    
+
         if (!isset($lev) || !is_array($lev))
           return null;
 
@@ -327,10 +327,10 @@ class Numbers_Words_cs extends Numbers_Words
 
         $ret .= $this->_sep . $lev[$idx];
       }
-    
+
       if ($powsuffix != '')
         $ret .= $this->_sep . $powsuffix;
-    
+
       return $ret;
     }
     // }}}

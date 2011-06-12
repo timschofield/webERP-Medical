@@ -20,7 +20,7 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/m
 $Complete=false;
 if (!isset($_SESSION['SuppTrans'])){
 	prnMsg(_('To enter a supplier transactions the supplier must first be selected from the supplier selection screen') . ', ' . _('then the link to enter a supplier invoice must be clicked on'),'info');
-	echo '<br><a href="' . $rootpath . '/SelectSupplier.php?' . SID .'">' . _('Select A Supplier to Enter a Transaction For') . '</a>';
+	echo '<br /><a href="' . $rootpath . '/SelectSupplier.php?' . SID .'">' . _('Select A Supplier to Enter a Transaction For') . '</a>';
 	include('includes/footer.inc');
 	exit;
 	/*It all stops here if there aint no supplier selected and invoice initiated ie $_SESSION['SuppTrans'] started off*/
@@ -177,7 +177,7 @@ $SQL = "SELECT grnbatch,
 $GRNResults = DB_query($SQL,$db);
 
 if (DB_num_rows($GRNResults)==0){
-	prnMsg(_('There are no outstanding goods received from') . ' ' . $_SESSION['SuppTrans']->SupplierName . ' ' . _('that have not been invoiced by them') . '<br>' . _('The goods must first be received using the link below to select purchase orders to receive'),'warn');
+	prnMsg(_('There are no outstanding goods received from') . ' ' . $_SESSION['SuppTrans']->SupplierName . ' ' . _('that have not been invoiced by them') . '<br />' . _('The goods must first be received using the link below to select purchase orders to receive'),'warn');
 	echo "<div class='centre'><p><a href='$rootpath/PO_SelectOSPurchOrder.php?" . SID . 'SupplierID=' . $_SESSION['SuppTrans']->SupplierID ."'>" . _('Select Purchase Orders to Receive') .'</a></div>';
 	include('includes/footer.inc');
 	exit;
@@ -322,7 +322,7 @@ else {
 		echo '</table>';
 		echo "<br /><div class='centre'><input type=Submit Name='SelectAll' Value='" . _('Select All') . "'>";
 		echo "<input type=Submit Name='DeSelectAll' Value='" . _('Deselect All') . "'>";
-		echo "<br><input type=Submit Name='AddGRNToTrans' Value='" . _('Add to Invoice') . "'></div>";
+		echo "<br /><input type=Submit Name='AddGRNToTrans' Value='" . _('Add to Invoice') . "'></div>";
 	}
 }
 

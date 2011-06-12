@@ -190,7 +190,7 @@ if (!isset($_GET['InvoiceNumber']) AND !$_SESSION['ProcessingCredit']) {
 		} //end of checks on returned data set
 		DB_free_result($LineItemsResult);
 	} else {
-		prnMsg( _('This invoice can not be credited using the automatic facility') . '<br>' . _('CRITICAL ERROR') . ': ' . _('Please report that a duplicate DebtorTrans header record was found for invoice') . ' ' . $SESSION['ProcessingCredit'],'warn');
+		prnMsg( _('This invoice can not be credited using the automatic facility') . '<br />' . _('CRITICAL ERROR') . ': ' . _('Please report that a duplicate DebtorTrans header record was found for invoice') . ' ' . $SESSION['ProcessingCredit'],'warn');
 		include('includes/footer.inc');
 		exit;
 	} //valid invoice record returned from the entered invoice number
@@ -338,7 +338,7 @@ foreach ($_SESSION['CreditItems']->LineItems as $LnItm) {
 		if (is_array($_SESSION['CreditItems']->LineItems[$LnItm->LineNumber]->Taxes) ){
 			foreach ($_SESSION['CreditItems']->LineItems[$LnItm->LineNumber]->Taxes AS $Tax) {
 				if ($i>0){
-					echo '<br>';
+					echo '<br />';
 				}
 				echo $Tax->TaxAuthDescription;
 				$i++;
@@ -356,7 +356,7 @@ foreach ($_SESSION['CreditItems']->LineItems as $LnItm) {
 		}
 		foreach ($LnItm->Taxes as $Tax) {
 			if ($i>0){
-				echo '<br>';
+				echo '<br />';
 			}
 			if (!isset($_POST['ProcessCredit'])) {
 				echo '<input type=text class=number name="' . $LnItm->LineNumber . $Tax->TaxCalculationOrder .
@@ -385,7 +385,7 @@ foreach ($_SESSION['CreditItems']->LineItems as $LnItm) {
 			<td class=number>' . $DisplayGrossLineTotal . '</td>
 			<td><a href="'. $_SERVER['PHP_SELF'] . '?Delete=' . $LnItm->LineNumber . '">' . _('Delete') . '</a></td></tr>';
 
-		echo '<tr'.$RowStarter . '><td colspan=12><textarea tabindex="'.$j.'"  name="Narrative_' . $LnItm->LineNumber . '" cols=100% rows=1>' . $LnItm->Narrative . '</textarea><br><hr></td></tr>';
+		echo '<tr'.$RowStarter . '><td colspan=12><textarea tabindex="'.$j.'"  name="Narrative_' . $LnItm->LineNumber . '" cols=100% rows=1>' . $LnItm->Narrative . '</textarea><br /><hr></td></tr>';
 		$j++;
 	}
 } /*end foreach loop displaying the invoice lines to credit */
@@ -408,7 +408,7 @@ if (!isset($_POST['ProcessCredit'])) {
 	$i=0; // initialise the number of taxes iterated through
 	foreach ($_SESSION['CreditItems']->FreightTaxes as $FreightTaxLine) {
 		if ($i>0){
-			echo '<br>';
+			echo '<br />';
 		}
 		echo  $FreightTaxLine->TaxAuthDescription;
 		$i++;
@@ -419,7 +419,7 @@ $FreightTaxTotal =0; //initialise tax total
 $i=0;
 foreach ($_SESSION['CreditItems']->FreightTaxes as $FreightTaxLine) {
 	if ($i>0){
-		echo '<br>';
+		echo '<br />';
 	}
 
 	if (!isset($_POST['ProcessCredit'])) {
@@ -1457,7 +1457,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 
 } else { /*Process Credit NOT set so allow inputs to set up the credit note */
 
-	echo '<br><table class=selection>';
+	echo '<br /><table class=selection>';
 
 	echo '<tr><td>' . _('Credit Note Type') . '</td><td><select tabindex="'.$j.'" name=CreditType>';
 
@@ -1527,7 +1527,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 	}
 	$j++;
 	echo '<tr><td>' . _('Credit note text') . '</td><td><textarea tabindex='.$j.'  name=CreditText cols=31 rows=5>' . $_POST['CreditText'] . '</textarea></td></tr>';
-	echo '</table><br><div class="centre"><input TABINDEX='.$j.' type=submit name=Update Value=' . _('Update') . '><p>';
+	echo '</table><br /><div class="centre"><input TABINDEX='.$j.' type=submit name=Update Value=' . _('Update') . '><p>';
 	$j++;
 	 echo '<input type="submit" tabindex='.$j++.' name="ProcessCredit" value="' . _('Process Credit') .'"></div>';
 }

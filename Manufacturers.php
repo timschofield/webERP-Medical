@@ -133,14 +133,14 @@ if (isset($_POST['submit']) or isset($_POST['update']) or isset($_POST['delete']
 		if ($myrow[0] > 0) {
 			$CancelDelete = 1;
 			prnMsg(_('Cannot delete this manufacturer because there are suppliers using them'),'warn');
-			echo '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('suppliers using this manufacturer');
+			echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('suppliers using this manufacturer');
 		}
 
 		if ($CancelDelete == 0) {
 			$sql="DELETE FROM manufacturers WHERE id='".$ManufacturerID."'";
 			$result = DB_query($sql, $db);
 			prnMsg(_('Manufacturing company record record for') . ' ' . $_POST['ManufacturerName'] . ' ' . _('has been deleted'),'success');
-			echo '<br>';
+			echo '<br />';
 			unset($_SESSION['ManufacturerID']);
 		} //end if Delete
 	}
@@ -208,7 +208,7 @@ if (!isset($ManufacturerID)) {
 		echo '<td><a href="'.$rootpath . '/Manufacturers.php?' . SID . '&ManufacturerID='.$myrow['id'].'">'._('Edit').'</a></td></tr>';
 	}
 	echo "</table><p><div class='centre'>";
-	echo "<br><input tabindex=3 type='Submit' name='Create' value='" . _('Create New Manufacturer') . "'>";
+	echo "<br /><input tabindex=3 type='Submit' name='Create' value='" . _('Create New Manufacturer') . "'>";
 	echo '</div></form>';
 	include('includes/footer.inc');
 	exit;

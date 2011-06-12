@@ -54,7 +54,7 @@ if (!isset($LocationFrom) OR !isset($ShipperID)) {
 		echo '<option value=' . $myrow['loccode'] . '>' . $myrow['locationname'] . '</option>';
 	}
 
-	echo '</select></td></tr></table><br><div class="centre"><input type="submit" value="' . _('Accept') . '" name="Accept"></div></form>';
+	echo '</select></td></tr></table><br /><div class="centre"><input type="submit" value="' . _('Accept') . '" name="Accept"></div></form>';
 
 } else {
 
@@ -197,7 +197,7 @@ if (!isset($SelectedFreightCost) AND isset($LocationFrom) AND isset($ShipperID))
 
 	$result = DB_query($sql,$db);
 
-	echo '<br><table class=selection>';
+	echo '<br /><table class=selection>';
 	$TableHeader = '<tr>
 				<th>' . _('Destination') . '</th>
 				<th>' . _('Cubic Rate') . '</th>
@@ -315,7 +315,7 @@ if (isset($LocationFrom) AND isset($ShipperID)) {
 	if (!isset($_POST['MAXKGs'])) {$_POST['MAXKGs']='';}
 	if (!isset($_POST['MAXCub'])) {$_POST['MAXCub']='';}
 
-	echo '<br><table class=selection>';
+	echo '<br /><table class=selection>';
 	echo '<tr><th colspan=2><font size=4 color=blue>' . _('For Deliveries From') . ' ' . $LocationName . ' ' . _('using') . ' ' .
 		$ShipperName . '</font></th></tr>';
 	echo'<tr><td>' . _('Destination') . ':</td>
@@ -333,7 +333,7 @@ if (isset($LocationFrom) AND isset($ShipperID)) {
 	echo '<tr><td>' . _('Minimum Charge (0 is N/A)') . ':</a></td>
 		<td><input type="Text" name="MinimumChg" class="number" size="6" maxlength="5" value="' . $_POST['MinimumChg'] . '"></td></tr>';
 
-	echo '</table><br>';
+	echo '</table><br />';
 
 	echo '<div class="centre"><input type="Submit" name="submit" value="' . _('Enter Information') . '"></div>';
 

@@ -81,10 +81,10 @@ if ($_FILES['ImportFile']['name'] == '' && $_SESSION['CurImportFile'] == ''){
 }
 if ($_FILES['ImportFile']['error'] != '' && !isset($_SESSION['CurImportFile'])){
 		echo _('There was a problem with the uploaded file') . '. ' . _('We received').':<BR>'.
-				 _('Name').':'.$_FILES['ImportFile']['name'].'<br>'.
-				 _('Size').':'.number_format($_FILES['ImportFile']['size']/1024,2).'kb<br>'.
-				 _('Type').':'.$_FILES['ImportFile']['type'].'<br>';
-		echo '<br>'._('Error was').' '.$_FILES['ImportFile']['error'].'<br>';
+				 _('Name').':'.$_FILES['ImportFile']['name'].'<br />'.
+				 _('Size').':'.number_format($_FILES['ImportFile']['size']/1024,2).'kb<br />'.
+				 _('Type').':'.$_FILES['ImportFile']['type'].'<br />';
+		echo '<br />'._('Error was').' '.$_FILES['ImportFile']['error'].'<br />';
 		$LineItem->SerialItemsValid=false;
 		echo '</TD></TR></TABLE>';
 		include('includes/footer.inc');
@@ -106,12 +106,12 @@ if ($_FILES['ImportFile']['error'] != '' && !isset($_SESSION['CurImportFile'])){
 	}
 
 	if ($_FILES['ImportFile']['name']!=''){
-		echo _('Successfully received').':<br>';
+		echo _('Successfully received').':<br />';
 		$ShowFileInfo = true;
 	}
 } elseif (isset($_SESSION['CurImportFile']) && $_SESSION['CurImportFile']['Processed'] ) {
 	//file exists, some action performed...
-	echo _('Working with'). ':<br>';
+	echo _('Working with'). ':<br />';
 	$ShowFileInfo = true;
 } elseif ($LineItem->SerialItemsValid && $_SESSION['CurImportFile']['Processed']){
 	$ShowInfo = true;
@@ -128,7 +128,7 @@ if ($ShowFileInfo){
 	   <tr><td>'. _('Status') .':</td><td>' .
 	($LineItem->SerialItemsValid?getMsg(_('Valid'),'success'):getMsg(_('Invalid'),'error')) . '</td></tr>
 	   </TABLE>'.
-		$invalid_imports.' '. _('out of') .' '.$TotalLines.' '. _('records are invalid').'<br>';
+		$invalid_imports.' '. _('out of') .' '.$TotalLines.' '. _('records are invalid').'<br />';
 	$filename = $_SESSION['CurImportFile']['tmp_name'];
 }
 
@@ -143,7 +143,7 @@ if (!$LineItem->SerialItemsValid && !$_SESSION['CurImportFile']['Processed']){
 		}
 		fclose($handle);
 
-	echo '<br><form method=POST>';
+	echo '<br /><form method=POST>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<input type=submit name=ValidateFile value=' . _('Validate File') . '>
 			<input type=hidden name=LineNo value="' . $LineNo . '">
@@ -163,7 +163,7 @@ if (!$LineItem->SerialItemsValid && !$_SESSION['CurImportFile']['Processed']){
 	echo _('Below are the 1st 100 records as parsed');
 	echo '<hr width=20%>';
 	foreach($LineItem->SerialItems as $SItem){
-		echo $SItem->BundleRef.'<br>';
+		echo $SItem->BundleRef.'<br />';
 		$i++;
 		if ($i == 100) {
 			break;

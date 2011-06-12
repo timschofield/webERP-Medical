@@ -267,9 +267,9 @@ if (isset($_POST['PrintPDF'])
 		$title = _('Aged Customer Account Analysis') . ' - ' . _('Problem Report') . '.... ';
 		include('includes/header.inc');
 		echo '<p>' . _('The customer details could not be retrieved by the SQL because') . ' ' . DB_error_msg($db);
-		echo '<br><a href="'.$rootpath.'/index.php">' . _('Back to the menu') . '</a>';
+		echo '<br /><a href="'.$rootpath.'/index.php">' . _('Back to the menu') . '</a>';
 		if ($debug==1){
-			echo '<br>'.$SQL;
+			echo '<br />'.$SQL;
 		}
 		include('includes/footer.inc');
 		exit;
@@ -364,10 +364,10 @@ if (isset($_POST['PrintPDF'])
 		    if (DB_error_no($db) !=0) {
 			$title = _('Aged Customer Account Analysis') . ' - ' . _('Problem Report') . '....';
 			include('includes/header.inc');
-			echo '<br><br>' . _('The details of outstanding transactions for customer') . ' - ' . $AgedAnalysis['debtorno'] . ' ' . _('could not be retrieved because') . ' - ' . DB_error_msg($db);
-			echo '<br><a href="'.$rootpath.'/index.php">' . _('Back to the menu') . '</a>';
+			echo '<br /><br />' . _('The details of outstanding transactions for customer') . ' - ' . $AgedAnalysis['debtorno'] . ' ' . _('could not be retrieved because') . ' - ' . DB_error_msg($db);
+			echo '<br /><a href="'.$rootpath.'/index.php">' . _('Back to the menu') . '</a>';
 			if ($debug==1){
-				echo '<br>' . _('The SQL that failed was') . '<p>' . $sql;
+				echo '<br />' . _('The SQL that failed was') . '<p>' . $sql;
 			}
 			include('includes/footer.inc');
 			exit;
@@ -439,7 +439,7 @@ if (isset($_POST['PrintPDF'])
 		if ($debug==1){
 			prnMsg($SQL,'info');
 		}
-		echo '<br><a href="'.$rootpath.'/index.php">' . _('Back to the menu') . '</a>';
+		echo '<br /><a href="'.$rootpath.'/index.php">' . _('Back to the menu') . '</a>';
 		include('includes/footer.inc');
 		exit;
 	}
@@ -517,7 +517,7 @@ if (isset($_POST['PrintPDF'])
 		echo '<option value="Yes">' . _('Detailed Report');
 		echo '</select></td></tr>';
 
-		echo '</table><br><div class="centre"><input tabindex="7" type=submit name="PrintPDF" value="' . _('Print PDF') , '"></div>';
+		echo '</table><br /><div class="centre"><input tabindex="7" type=submit name="PrintPDF" value="' . _('Print PDF') , '"></div>';
 	}
 	include('includes/footer.inc');
 

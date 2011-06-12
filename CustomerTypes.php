@@ -43,7 +43,7 @@ if (isset($_POST['submit'])) {
 
 	if (strlen($_POST['typename'])==0) {
 		$InputError = 1;
-		echo '<br>';
+		echo '<br />';
 		prnMsg(_('The customer type name description must contain at least one character'),'error');
 		$Errors[$i] = 'CustomerType';
 		$i++;
@@ -56,7 +56,7 @@ if (isset($_POST['submit'])) {
 	$checkrow=DB_fetch_row($checkresult);
 	if ($checkrow[0]>0 and !isset($SelectedType)) {
 		$InputError = 1;
-		echo '<br>';
+		echo '<br />';
 		prnMsg(_('You already have a customer type called').' '.$_POST['typename'],'error');
 		$Errors[$i] = 'CustomerName';
 		$i++;
@@ -124,7 +124,7 @@ if (isset($_POST['submit'])) {
 			$result = DB_query($sql,$db);
 			$_SESSION['DefaultCustomerType'] = $_POST['typeid'];
 		}
-		echo '<br>';
+		echo '<br />';
 		prnMsg($msg,'success');
 
 		unset($SelectedType);
@@ -146,7 +146,7 @@ if (isset($_POST['submit'])) {
 
 	$myrow = DB_fetch_row($result);
 	if ($myrow[0]>0) {
-		prnMsg(_('Cannot delete this type because customer transactions have been created using this type') . '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('transactions using this type'),'error');
+		prnMsg(_('Cannot delete this type because customer transactions have been created using this type') . '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('transactions using this type'),'error');
 
 	} else {
 
@@ -156,13 +156,13 @@ if (isset($_POST['submit'])) {
 		$result = DB_query($sql,$db,$ErrMsg);
 		$myrow = DB_fetch_row($result);
 		if ($myrow[0]>0) {
-			prnMsg (_('Cannot delete this type because customers are currently set up to use this type') . '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('customers with this type code'));
+			prnMsg (_('Cannot delete this type because customers are currently set up to use this type') . '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('customers with this type code'));
 		} else {
 
 			$sql="DELETE FROM debtortype WHERE typeid='".$SelectedType."'";
 			$ErrMsg = _('The Type record could not be deleted because');
 			$result = DB_query($sql,$db,$ErrMsg);
-			echo '<br>';
+			echo '<br />';
 			prnMsg(_('Customer type') . $SelectedType  . ' ' . _('has been deleted') ,'success');
 
 			unset ($SelectedType);
@@ -182,7 +182,7 @@ or deletion of the records*/
 	$sql = "SELECT typeid, typename FROM debtortype";
 	$result = DB_query($sql,$db);
 
-	echo '<br><table class=selection>';
+	echo '<br /><table class=selection>';
 	echo '<tr>
 		<th>' . _('Type ID') . '</th>
 		<th>' . _('Type Name') . '</th>

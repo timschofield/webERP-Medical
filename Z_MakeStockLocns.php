@@ -9,7 +9,7 @@ $title = _('Make LocStock Records');
 include('includes/header.inc');
 
 
-echo '<br><br>' . _('This script makes stock location records for parts where they do not already exist');
+echo '<br /><br />' . _('This script makes stock location records for parts where they do not already exist');
 
 $sql = "INSERT INTO locstock (stockid, loccode)
 		SELECT stockmaster.stockid,

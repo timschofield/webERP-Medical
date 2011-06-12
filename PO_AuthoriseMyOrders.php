@@ -20,7 +20,7 @@ if (isset($_POST['updateall'])) {
 		if (substr($key,0,6)=='status') {
 			$orderno=substr($key,6);
 			$status=$_POST['status'.$orderno];
-			$comment=date($_SESSION['DefaultDateFormat']).' - '._('Authorised by').' '.'<a href="mailto:'. $emailrow['email'].'">'.$_SESSION['UserID'].'</a><br>'.$_POST['comment'];
+			$comment=date($_SESSION['DefaultDateFormat']).' - '._('Authorised by').' '.'<a href="mailto:'. $emailrow['email'].'">'.$_SESSION['UserID'].'</a><br />'.$_POST['comment'];
 			$sql="UPDATE purchorders
 				SET status='".$status."',
 				stat_comment='".$comment."',
@@ -121,7 +121,7 @@ while ($myrow=DB_fetch_array($result)) {
 	}
 } //end while header loop
 echo '</table>';
-echo '<br><div class="centre"><input type="submit" name="updateall" value="' . _('Update'). '"></form>';
+echo '<br /><div class="centre"><input type="submit" name="updateall" value="' . _('Update'). '"></form>';
 
 include('includes/footer.inc');
 ?>

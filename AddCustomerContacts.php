@@ -17,7 +17,7 @@ if (isset($_POST['DebtorNo'])){
 } elseif (isset($_GET['DebtorNo'])){
 	$DebtorNo = $_GET['DebtorNo'];
 }
-echo "<a href='" . $rootpath . '/Customers.php?' . SID .'&DebtorNo='.$DebtorNo."'>" . _('Back to Customers') . '</a><br>';
+echo "<a href='" . $rootpath . '/Customers.php?' . SID .'&DebtorNo='.$DebtorNo."'>" . _('Back to Customers') . '</a><br />';
 $SQLname="SELECT name from debtorsmaster where debtorno='".$DebtorNo."'";
 $Result = DB_query($SQLname,$db);
 $row = DB_fetch_array($Result);
@@ -72,11 +72,11 @@ if ( isset($_POST['submit']) ) {
 
 	if ($InputError !=1) {
 		$result = DB_query($sql,$db);
-				//echo '<br>'.$sql;
+				//echo '<br />'.$sql;
 
-		echo '<br>';
+		echo '<br />';
 		prnMsg($msg, 'success');
-		echo '<br>';
+		echo '<br />';
 		unset($Id);
 		unset($_POST['conName']);
 		unset($_POST['conRole']);
@@ -92,9 +92,9 @@ if ( isset($_POST['submit']) ) {
 	$sql="DELETE FROM custcontacts WHERE contid=".$Id."
 			and debtorno='".$DebtorNo."'";
 				$result = DB_query($sql,$db);
-						//echo '<br>'.$sql;
+						//echo '<br />'.$sql;
 
-				echo '<br>';
+				echo '<br />';
 				prnMsg( _('The contact record has been deleted'), 'success');
 				unset($Id);
 				unset($_GET['delete']);
@@ -105,7 +105,7 @@ if (!isset($Id)) {
 
 	$sql = "SELECT * FROM custcontacts where debtorno='".$DebtorNo."' ORDER BY contid";
 	$result = DB_query($sql,$db);
-			//echo '<br>'.$sql;
+			//echo '<br />'.$sql;
 
 	echo '<table class=selection>';
 	echo '<tr>
@@ -163,7 +163,7 @@ if (!isset($_GET['delete'])) {
 					and debtorno='".$DebtorNo."'";
 
 		$result = DB_query($sql, $db);
-				//echo '<br>'.$sql;
+				//echo '<br />'.$sql;
 
 		$myrow = DB_fetch_array($result);
 

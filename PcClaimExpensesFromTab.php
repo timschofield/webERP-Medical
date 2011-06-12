@@ -56,7 +56,7 @@ if (isset($_POST['Go'])) {
 	$i=1;
 	if ($Days<=0) {
 		$InputError = 1;
-		prnMsg('<br>' . _('The number of days must be a positive number'),'error');
+		prnMsg('<br />' . _('The number of days must be a positive number'),'error');
 		$Errors[$i] = 'Days';
 		$i++;
 		$Days=30;
@@ -83,7 +83,7 @@ if (isset($_POST['submit'])) {
 		$i++;
 	} elseif ($_POST['amount']==0) {
 		$InputError = 1;
-		prnMsg('<br>' . _('The Amount must be greater than 0'),'error');
+		prnMsg('<br />' . _('The Amount must be greater than 0'),'error');
 		$Errors[$i] = 'TabCode';
 		$i++;
 	}

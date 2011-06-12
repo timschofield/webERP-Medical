@@ -64,7 +64,7 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate']) OR $InputError==1){
 	}
 	echo '</select></td></tr>';
 
-	echo "</table><br><div class='centre'><input type=submit name='Go' value='" . _('Create PDF') . "'></div>";
+	echo "</table><br /><div class='centre'><input type=submit name='Go' value='" . _('Create PDF') . "'></div>";
 
 	include('includes/footer.inc');
 	exit;
@@ -262,7 +262,7 @@ if (DB_error_no($db)!=0){
 	include('includes/header.inc');
 	prnMsg(_('An error occurred getting the orders details'),'',_('Database Error'));
 	if ($debug==1){
-		prnMsg( _('The SQL used to get the orders that failed was') . '<br>' . $sql, '',_('Database Error'));
+		prnMsg( _('The SQL used to get the orders that failed was') . '<br />' . $sql, '',_('Database Error'));
 	}
 	include ('includes/footer.inc');
 	exit;
@@ -270,7 +270,7 @@ if (DB_error_no($db)!=0){
   	include('includes/header.inc');
 	prnMsg(_('There were no orders found in the database within the period from') . ' ' . $_POST['FromDate'] . ' ' . _('to') . ' '. $_POST['ToDate'] . '. ' . _('Please try again selecting a different date range'), 'warn');
 	if ($debug==1) {
-		prnMsg(_('The SQL that returned no rows was') . '<br>' . $sql,'',_('Database Error'));
+		prnMsg(_('The SQL that returned no rows was') . '<br />' . $sql,'',_('Database Error'));
 	}
 	include('includes/footer.inc');
 	exit;

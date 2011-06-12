@@ -21,7 +21,7 @@ $ModuleList = array(_('Orders'),
 					_('Petty Cash'),
 					_('Setup'));
 
-echo "<a href='" . $rootpath . '/SelectCustomer.php?' . SID . "'>" . _('Back to Customers') . '</a><br>';
+echo "<a href='" . $rootpath . '/SelectCustomer.php?' . SID . "'>" . _('Back to Customers') . '</a><br />';
 
 $sql="SELECT name
 		FROM debtorsmaster
@@ -34,7 +34,7 @@ $CustomerName=$myrow['name'];
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') .
 	'" alt="" />' . ' ' . _('Customer') . ' : ' . $_SESSION['CustomerID'] . ' - ' . $CustomerName. _(' has been selected') .
 		'</p><br />';//'</p>';
-//echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/group_add.png" title="' . _('Search') . '" alt="">' . ' ' . $title.'<br>';
+//echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/group_add.png" title="' . _('Search') . '" alt="">' . ' ' . $title.'<br />';
 
 
 //Make an array of the security roles where only one role is active and is ID 1
@@ -311,12 +311,12 @@ if (!isset($SelectedUser)) {
 			$myrow[0]);
 
 	} //END WHILE LIST LOOP
-	echo '</table><br>';
+	echo '</table><br />';
 } //end of ifs and buts!
 
 
 if (isset($SelectedUser)) {
-	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] .'">' . _('Review Existing Users') . '</a></div><br>';
+	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] .'">' . _('Review Existing Users') . '</a></div><br />';
 }
 
 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
@@ -589,7 +589,7 @@ if ($_POST['Blocked']==0){
 echo '</select></td></tr>';
 
 
-echo '</table><br>
+echo '</table><br />
 	<div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '"></div></form>';
 
 if (isset($_GET['SelectedUser'])) {

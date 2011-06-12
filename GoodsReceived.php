@@ -17,13 +17,13 @@ if (empty($identifier)) {
 $title = _('Receive Purchase Orders');
 include('includes/header.inc');
 
-echo '<a href="'. $rootpath . '/PO_SelectOSPurchOrder.php?' . SID . '">' . _('Back to Purchase Orders'). '</a><br>';
+echo '<a href="'. $rootpath . '/PO_SelectOSPurchOrder.php?' . SID . '">' . _('Back to Purchase Orders'). '</a><br />';
 
 if (isset($_GET['PONumber']) and $_GET['PONumber']<=0 and !isset($_SESSION['PO'])) {
 	/* This page can only be called with a purchase order number for invoicing*/
 	echo '<div class="centre"><a href= "' . $rootpath . '/PO_SelectOSPurchOrder.php?' . SID . '">'.
 		_('Select a purchase order to receive').'</a></div>';
-	echo '<br>'. _('This page can only be opened if a purchase order has been selected. Please select a purchase order first');
+	echo '<br />'. _('This page can only be opened if a purchase order has been selected. Please select a purchase order first');
 	include ('includes/footer.inc');
 	exit;
 } elseif (isset($_GET['PONumber']) AND !isset($_POST['Update'])) {
@@ -51,7 +51,7 @@ $StatusRow=DB_fetch_array($StatusResult);
 $Status=$StatusRow['status'];
 
 if ($Status != PurchOrder::STATUS_PRINTED) {
-	prnMsg( _('Purchase orders must have a status of Printed before they can be received').'.<br>'.
+	prnMsg( _('Purchase orders must have a status of Printed before they can be received').'.<br />'.
 		_('Order number') . ' ' . $_GET['PONumber'] . ' ' . _('has a status of') . ' ' . _($Status), 'warn');
 	include('includes/footer.inc');
 	exit;
@@ -75,18 +75,18 @@ if (!isset($_POST['ProcessGoodsReceived'])) {
 	echo '<table class=selection><tr><td>'. _('Date Goods/Service Received'). ':</td><td><input type=text class=date alt="'.
 		$_SESSION['DefaultDateFormat'] .'" maxlength=10 size=10 onChange="return isDate(this, this.value, '."'".
 			$_SESSION['DefaultDateFormat']."'".')" name=DefaultReceivedDate value="' . $_POST['DefaultReceivedDate'] .
-				'"></td></tr></table><br>';
+				'"></td></tr></table><br />';
 
 	echo '<table cellpadding=2 class=selection>
 					<tr><th>' . _('Item Code') . '</th>
 							<th>' . _('Description') . '</th>
-							<th>' . _('Quantity') . '<br>' . _('Ordered') . '</th>
+							<th>' . _('Quantity') . '<br />' . _('Ordered') . '</th>
 							<th>' . _('Units') . '</th>
 							<th>' . _('Already Received') . '</th>
-							<th>' . _('This Delivery') . '<br>' . _('Quantity') . '</th>';
+							<th>' . _('This Delivery') . '<br />' . _('Quantity') . '</th>';
 
 	if ($_SESSION['ShowValueOnGRN']==1) {
-		echo '<th>' . _('Price') . '</th><th>' . _('Total Value') . '<br>' . _('Received') . '</th>';
+		echo '<th>' . _('Price') . '</th><th>' . _('Total Value') . '<br />' . _('Received') . '</th>';
 	}
 
 	echo '<td>&nbsp;</td>
@@ -250,7 +250,7 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 }elseif ($DeliveryQuantityTooLarge==1 AND isset($_POST['ProcessGoodsReceived'])){
 
 	prnMsg(_('Entered quantities cannot be greater than the quantity entered on the purchase invoice including the allowed over-receive percentage'). ' ' . '(' . $_SESSION['OverReceiveProportion'] .'%)','error');
-	echo '<br>';
+	echo '<br />';
 	prnMsg(_('Modify the ordered items on the purchase invoice if you wish to increase the quantities'),'info');
 	echo '<div class="centre"><input type=submit name=Update Value=' . _('Update') . '>';
 
@@ -690,7 +690,7 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 		$myrow=DB_fetch_array($result);
 		$comment=$myrow['stat_comment'];
 		$date = date($_SESSION['DefaultDateFormat']);
-		$StatusComment=$date.' - Order Completed'.'<br>'.$comment;
+		$StatusComment=$date.' - Order Completed'.'<br />'.$comment;
 		$sql="UPDATE purchorders
 					SET status='" . PurchOrder::STATUS_COMPLITED . "',
 					stat_comment='" . $StatusComment . "'
@@ -705,8 +705,8 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 	unset($_SESSION['PO']);
 	unset($_POST['ProcessGoodsReceived']);
 
-	echo '<br><div class=centre>'. _('GRN number'). ' '. $GRN .' '. _('has been processed').'<br>';
-	echo '<br><a href=PDFGrn.php?GRNNo='.$GRN .'&PONo='.$PONo.'>'. _('Print this Goods Received Note (GRN)').'</a><br><br>';
+	echo '<br /><div class=centre>'. _('GRN number'). ' '. $GRN .' '. _('has been processed').'<br />';
+	echo '<br /><a href=PDFGrn.php?GRNNo='.$GRN .'&PONo='.$PONo.'>'. _('Print this Goods Received Note (GRN)').'</a><br /><br />';
 	echo '<a href="' . $rootpath . '/PO_SelectOSPurchOrder.php?' . SID . '">' .
 		_('Select a different purchase order for receiving goods against'). '</a></div>';
 /*end of process goods received entry */
@@ -715,9 +715,9 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 
 } else { /*Process Goods received not set so show a link to allow mod of line items on order and allow input of date goods received*/
 
-	echo '<br><div class="centre"><a href="' . $rootpath . '/PO_Items.php?=' . SID . '">' . _('Modify Order Items'). '</a></div>';
+	echo '<br /><div class="centre"><a href="' . $rootpath . '/PO_Items.php?=' . SID . '">' . _('Modify Order Items'). '</a></div>';
 
-	echo '<br><div class="centre"><input type=submit name=Update Value=' . _('Update') . '><p>';
+	echo '<br /><div class="centre"><input type=submit name=Update Value=' . _('Update') . '><p>';
 	echo '<input type=submit name="ProcessGoodsReceived" Value="' . _('Process Goods Received') . '"></div>';
 }
 

@@ -74,7 +74,7 @@ if (isset($_POST['Update']) AND $_POST['RowCounter']>1){
 	$_POST['ShowTransactions'] = True;
 }
 
-echo '<div class="page_help_text">' . _('Use this screen to match webERP Receipts and Payments to your Bank Statement.  Check your bank statement and click the check-box when you find the matching transaction.') . '</div><br>';
+echo '<div class="page_help_text">' . _('Use this screen to match webERP Receipts and Payments to your Bank Statement.  Check your bank statement and click the check-box when you find the matching transaction.') . '</div><br />';
 
 echo '<form action="'. $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -133,7 +133,7 @@ if ($_POST['First20_or_All']=='All'){
 echo '</select></td></tr>';
 
 
-echo '</table><br><div class="centre"><input tabindex="6" type=submit name="ShowTransactions" value="' . _('Show selected') . ' ' . $TypeName . '">';
+echo '</table><br /><div class="centre"><input tabindex="6" type=submit name="ShowTransactions" value="' . _('Show selected') . ' ' . $TypeName . '">';
 
 if (isset($_POST['BankAccount'])) {
 	echo '<p><a href="'.$rootpath.'/BankReconciliation.php?Account='.$_POST['BankAccount'].'">' . _('Show reconciliation') . '</a></div>';
@@ -314,7 +314,7 @@ if ($InputError !=1 AND isset($_POST['BankAccount']) AND $_POST['BankAccount']!=
 	}
 	//end of while loop
 
-	echo '</table><br><div class="centre"><input type=hidden name="RowCounter" value=' . $i . '><input type=submit name="Update" value="' . _('Update Matching') . '"></div>';
+	echo '</table><br /><div class="centre"><input type=hidden name="RowCounter" value=' . $i . '><input type=submit name="Update" value="' . _('Update Matching') . '"></div>';
 
 }
 

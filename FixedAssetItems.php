@@ -254,7 +254,7 @@ if (isset($_POST['submit'])) {
 			$result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
 			prnMsg( _('Asset') . ' ' . $AssetID . ' ' . _('has been updated'), 'success');
-			echo '<br>';
+			echo '<br />';
 		} else { //it is a NEW part
 			$sql = "INSERT INTO fixedassets (description,
 											longdescription,

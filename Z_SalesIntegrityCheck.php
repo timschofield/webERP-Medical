@@ -14,9 +14,9 @@ include('includes/header.inc');
 
 echo '<div class="centre"><font size=4 color=blue><U><b>' . _('Sales Integrity Check') . '</b></U></font></div>';
 
-echo '<br><br>'._('Check every Invoice has a Sales Order').'<br>';
-echo '<br><br>'._('Check every Invoice has a Tax Entry').'<br>';
-echo '<br><br>'._('Check every Invoice has a GL Entry').'<br>';
+echo '<br /><br />'._('Check every Invoice has a Sales Order').'<br />';
+echo '<br /><br />'._('Check every Invoice has a Tax Entry').'<br />';
+echo '<br /><br />'._('Check every Invoice has a GL Entry').'<br />';
 $SQL = "SELECT id, transno, order_, trandate FROM debtortrans WHERE type = 10";
 $Result = DB_query($SQL,$db);
 
@@ -25,7 +25,7 @@ while ($myrow = DB_fetch_array($Result)) {
 	$Result2 = DB_query($SQL2,$db);
 
 	if ( DB_num_rows($Result2) == 0) {
-		echo '<br>'._('Invoice '). ' '. $myrow['transno'] . ' : ';
+		echo '<br />'._('Invoice '). ' '. $myrow['transno'] . ' : ';
 		echo '<font color=RED>' . _('No Sales Order') . '</font>';
 	}
 
@@ -33,7 +33,7 @@ while ($myrow = DB_fetch_array($Result)) {
 	$Result3 = DB_query($SQL3,$db);
 
 	if ( DB_num_rows($Result3) == 0) {
-		echo '<br>'. _('Invoice '). ' ' . $myrow['transno'] . ' : ';
+		echo '<br />'. _('Invoice '). ' ' . $myrow['transno'] . ' : ';
 		echo '<font color=RED>' . _('Has no Tax Entry') . '</font>';
 	}
 
@@ -44,13 +44,13 @@ while ($myrow = DB_fetch_array($Result)) {
 	$Result4 = DB_query($SQL4,$db);
 
 	if ( DB_num_rows($Result4) == 0) {
-		echo '<br>' . _('Invoice') . ' ' . $myrow['transno'] . ' : ';
+		echo '<br />' . _('Invoice') . ' ' . $myrow['transno'] . ' : ';
 		echo '<font color=RED>' . _('has no GL Entry') . '</font>';
 	}
 }
 
 
-echo '<br><br>'._('Check for orphan GL Entries').'<br>';
+echo '<br /><br />'._('Check for orphan GL Entries').'<br />';
 $SQL = "SELECT DISTINCT typeno, counterindex FROM gltrans WHERE type = 10";
 $Result = DB_query($SQL,$db);
 
@@ -64,12 +64,12 @@ while ($myrow = DB_fetch_array($Result)) {
 	$Result2 = DB_query($SQL2,$db);
 
 	if ( DB_num_rows($Result2) == 0) {
-			echo "<br>"._('GL Entry ') . $myrow['counterindex'] . " : ";
+			echo "<br />"._('GL Entry ') . $myrow['counterindex'] . " : ";
 			echo ', <font color=RED>'._('Invoice ') . $myrow['typeno'] . _(' could not be found').'</font>';
 	}
 }
 
-echo '<br><br>'._('Check Receipt totals').'<br>';
+echo '<br /><br />'._('Check Receipt totals').'<br />';
 $SQL = "SELECT typeno,
 				amount
 		FROM gltrans
@@ -88,12 +88,12 @@ while ($myrow = DB_fetch_array($Result)) {
 	$myrow2 = DB_fetch_row($Result2);
 
 	if ( $myrow2[0] + $myrow['amount'] == 0 ) {
-			echo '<br>'._('Receipt') . ' ' . $myrow['typeno'] . " : ";
+			echo '<br />'._('Receipt') . ' ' . $myrow['typeno'] . " : ";
 			echo '<font color=RED>' . $myrow['amount']. ' ' . _('in GL but found'). ' ' . $myrow2[0] . ' ' . _('in debtorstrans').'</font>';
 	}
 }
 
-echo '<br><br>'._('Check for orphan Receipts')."<br>";
+echo '<br /><br />'._('Check for orphan Receipts')."<br />";
 $SQL = "SELECT transno FROM debtortrans WHERE type = 12";
 $Result = DB_query($SQL,$db);
 
@@ -103,13 +103,13 @@ while ($myrow = DB_fetch_array($Result)) {
 	$myrow2 = DB_fetch_row($Result2);
 
 	if ( !$myrow2[0] ) {
-		echo '<br>'._('Receipt') . ' ' . $myrow['transno'] . " : ";
+		echo '<br />'._('Receipt') . ' ' . $myrow['transno'] . " : ";
 		echo '<font color=RED>' . $myrow['transno'] . ' ' ._('not found in GL')."</font>";
 	}
 }
 
 
-echo '<br><br>'._('Check for orphan Sales Orders').'<br>';
+echo '<br /><br />'._('Check for orphan Sales Orders').'<br />';
 $SQL = "SELECT orderno, orddate FROM salesorders";
 $Result = DB_query($SQL,$db);
 
@@ -124,13 +124,13 @@ while ($myrow = DB_fetch_array($Result)) {
 	$Result2 = DB_query($SQL2,$db);
 
 	if ( DB_num_rows($Result2) == 0) {
-		echo '<br>'._('Sales Order') . ' ' . $myrow['orderno'] . ' : ';
+		echo '<br />'._('Sales Order') . ' ' . $myrow['orderno'] . ' : ';
 		echo '<font color=RED>'._('Has no Invoice').'</font>';
 	}
 }
 
-echo '<br><br>'._('Check for orphan Order Items').'<br>';
-echo '<br><br>'._('Check Order Item Amounts').'<br>';
+echo '<br /><br />'._('Check for orphan Order Items').'<br />';
+echo '<br /><br />'._('Check Order Item Amounts').'<br />';
 $SQL = "SELECT orderno FROM salesorderdetails";
 $Result = DB_query($SQL,$db);
 
@@ -139,7 +139,7 @@ while ($myrow = DB_fetch_array($Result)) {
 	$Result2 = DB_query($SQL2,$db);
 
 	if ( DB_num_rows($Result2) == 0) {
-			echo '<br>'._('Order Item') . ' ' . $myrow['orderno'] . ' : ';
+			echo '<br />'._('Order Item') . ' ' . $myrow['orderno'] . ' : ';
 			echo ', <font color=RED>'._('Has no Sales Order').'</font>';
 	}
 
@@ -164,7 +164,7 @@ while ($myrow = DB_fetch_array($Result)) {
 			if ( $invrow['type'] != 11 ) {
 					// Do an integrity check on sales order items
 					if ( $sumrow['InvoiceTotal'] != $invrow['ovamount'] ) {
-						echo '<br><font color=red>' . _('Debtors trans') . ' ' . $invrow['ovamount'] . ' ' . _('differ from salesorderdetails') . ' ' . $sumrow['InvoiceTotal'] . '</font>';
+						echo '<br /><font color=red>' . _('Debtors trans') . ' ' . $invrow['ovamount'] . ' ' . _('differ from salesorderdetails') . ' ' . $sumrow['InvoiceTotal'] . '</font>';
 					}
 			}
 		}
@@ -172,7 +172,7 @@ while ($myrow = DB_fetch_array($Result)) {
 }
 
 
-echo '<br><br>'._('Check for orphan Stock Moves').'<br>';
+echo '<br /><br />'._('Check for orphan Stock Moves').'<br />';
 $SQL = "SELECT stkmoveno, transno FROM stockmoves";
 $Result = DB_query($SQL,$db);
 
@@ -187,13 +187,13 @@ while ($myrow = DB_fetch_array($Result)) {
 	$Result2 = DB_query($SQL2,$db);
 
 	if ( DB_num_rows($Result2) == 0) {
-			echo '<br>'._('Stock Move') . ' ' . $myrow['stkmoveno'] . ' : ';
+			echo '<br />'._('Stock Move') . ' ' . $myrow['stkmoveno'] . ' : ';
 			echo ', <font color=RED>'._('Has no Invoice').'</font>';
 	}
 }
 
 
-echo '<br><br>'._('Check for orphan Tax Entries').'<br>';
+echo '<br /><br />'._('Check for orphan Tax Entries').'<br />';
 $SQL = "SELECT debtortransid FROM debtortranstaxes";
 $Result = DB_query($SQL,$db);
 
@@ -202,12 +202,12 @@ while ($myrow = DB_fetch_array($Result)) {
 	$Result2 = DB_query($SQL2,$db);
 
 	if ( DB_num_rows($Result2) == 0) {
-			echo '<br>'._('Tax Entry') . ' ' . $myrow['debtortransid'] . ' : ';
+			echo '<br />'._('Tax Entry') . ' ' . $myrow['debtortransid'] . ' : ';
 			echo ', <font color=RED>'._('Has no Invoice').'</font>';
 	}
 }
 
-echo '<br><br>'._('Sales Integrity Check completed.').'<br><br>';
+echo '<br /><br />'._('Sales Integrity Check completed.').'<br /><br />';
 
 prnMsg(_('Sales Integrity Check completed.'),'info');
 

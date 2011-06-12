@@ -137,7 +137,7 @@ Function Is_ValidAccount ($ActNo) {
 		break;
 
 	default:
-	echo _('The prefix') . ' - ' . $BankPrefix . ' ' . _('is not a valid New Zealand Bank') . '.<br>' .
+	echo _('The prefix') . ' - ' . $BankPrefix . ' ' . _('is not a valid New Zealand Bank') . '.<br />' .
 			_('If you are using webERP outside New Zealand error trapping relevant to your country should be used');
 	return False;
 	exit;
@@ -302,7 +302,7 @@ if (isset($_GET['SupplierID'])){
 }
 
 // This is aleady linked from this page
-//echo "<a href='" . $rootpath . '/SelectSupplier.php?' . SID . "'>" . _('Back to Suppliers') . '</a><br>';
+//echo "<a href='" . $rootpath . '/SelectSupplier.php?' . SID . "'>" . _('Back to Suppliers') . '</a><br />';
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Suppliers') . '</p>';
 
 $InputError = 0;
@@ -610,7 +610,7 @@ if (isset($_POST['submit'])) {
 	if ($myrow[0] > 0) {
 		$CancelDelete = 1;
 		prnMsg(_('Cannot delete this supplier because there are transactions that refer to this supplier'),'warn');
-		echo '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('transactions against this supplier');
+		echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('transactions against this supplier');
 
 	} else {
 		$sql= "SELECT COUNT(*) FROM purchorders WHERE supplierno='" . $SupplierID . "'";
@@ -619,7 +619,7 @@ if (isset($_POST['submit'])) {
 		if ($myrow[0] > 0) {
 			$CancelDelete = 1;
 			prnMsg(_('Cannot delete the supplier record because purchase orders have been created against this supplier'),'warn');
-			echo '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('orders against this supplier');
+			echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('orders against this supplier');
 		} else {
 			$sql= "SELECT COUNT(*) FROM suppliercontacts WHERE supplierid='" . $SupplierID . "'";
 			$result = DB_query($sql, $db);
@@ -627,7 +627,7 @@ if (isset($_POST['submit'])) {
 			if ($myrow[0] > 0) {
 				$CancelDelete = 1;
 				prnMsg(_('Cannot delete this supplier because there are supplier contacts set up against it') . ' - ' . _('delete these first'),'warn');
-				echo '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('supplier contacts relating to this supplier');
+				echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('supplier contacts relating to this supplier');
 
 			}
 		}
@@ -902,11 +902,11 @@ if (!isset($SupplierID)) {
 	if (isset($_POST['New'])) {
 		echo '<p><div class="centre"><input type="Submit" name="submit" value="' . _('Add These New Supplier Details') . '"></form>';
 	} else {
-		echo '<br><p><div class="centre"><input type="Submit" name="submit" value="' . _('Update Supplier') . '"></div><br>';
-//		echo '<p><font color=red><b>' . _('WARNING') . ': ' . _('There is no second warning if you hit the delete button below') . '. ' . _('However checks will be made to ensure there are no outstanding purchase orders or existing accounts payable transactions before the deletion is processed') . '<br></font></b>';
+		echo '<br /><p><div class="centre"><input type="Submit" name="submit" value="' . _('Update Supplier') . '"></div><br />';
+//		echo '<p><font color=red><b>' . _('WARNING') . ': ' . _('There is no second warning if you hit the delete button below') . '. ' . _('However checks will be made to ensure there are no outstanding purchase orders or existing accounts payable transactions before the deletion is processed') . '<br /></font></b>';
 		prnMsg(_('WARNING') . ': ' . _('There is no second warning if you hit the delete button below') . '. ' . _('However checks will be made to ensure there are no outstanding purchase orders or existing accounts payable transactions before the deletion is processed'), 'Warn');
-		echo '<br><div class=centre><input type="submit" name="delete" value="' . _('Delete Supplier') . '" onclick=\"return confirm(\'' . _('Are you sure you wish to delete this supplier?') . '\');\"></form>';
-		echo '<br><a href="' . $rootpath . '/SupplierContacts.php?SupplierID=' . $SupplierID . '">' . _('Review Contact Details') . '</a></div>';
+		echo '<br /><div class=centre><input type="submit" name="delete" value="' . _('Delete Supplier') . '" onclick=\"return confirm(\'' . _('Are you sure you wish to delete this supplier?') . '\');\"></form>';
+		echo '<br /><a href="' . $rootpath . '/SupplierContacts.php?SupplierID=' . $SupplierID . '">' . _('Review Contact Details') . '</a></div>';
 	}
 	echo '</div>';
 } // end of main ifs

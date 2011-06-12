@@ -21,7 +21,7 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/m
 
 if (!isset($_SESSION['SuppTrans'])){
 	prnMsg(_('To enter a supplier transactions the supplier must first be selected from the supplier selection screen') . ', ' . _('then the link to enter a supplier credit note must be clicked on'),'info');
-	echo '<br><a href="' . $rootpath . '/SelectSupplier.php?' . SID .'">' . _('Select A Supplier to Enter a Transaction For') . '</a>';
+	echo '<br /><a href="' . $rootpath . '/SelectSupplier.php?' . SID .'">' . _('Select A Supplier to Enter a Transaction For') . '</a>';
 	include('includes/footer.inc');
 	exit;
 	/*It all stops here if there aint no supplier selected and credit note initiated ie $_SESSION['SuppTrans'] started off*/
@@ -129,7 +129,7 @@ $SQL = "SELECT grnno,
 $GRNResults = DB_query($SQL,$db);
 
 if (DB_num_rows($GRNResults)==0){
-	prnMsg(_('There are no goods received records for') . ' ' . $_SESSION['SuppTrans']->SupplierName . '<br> ' . _('To enter a credit against goods received') . ', ' . _('the goods must first be received using the link below to select purchase orders to receive'),'info');
+	prnMsg(_('There are no goods received records for') . ' ' . $_SESSION['SuppTrans']->SupplierName . '<br /> ' . _('To enter a credit against goods received') . ', ' . _('the goods must first be received using the link below to select purchase orders to receive'),'info');
 	echo '<p><a href="' . $rootpath . '/PO_SelectOSPurchOrder.php?' . SID . 'SupplierID=' . $_SESSION['SuppTrans']->SupplierID . '">' . _('Select Purchase Orders to Receive') . '</a>';
 	include('includes/footer.inc');
 	exit;
@@ -150,11 +150,11 @@ $TableHeader = '<tr><th>' . _('GRN') . '</th>
                     <th>' . _('Item Code') . '</th>
                     <th>' . _('Description') . '</th>
                     <th>' . _('Delivered') . '</th>
-                    <th>' . _('Total Qty') . '<br>' . _('Received') . '</th>
-                    <th>' . _('Qty Already') . '<br>' . _('credit noted') . '</th>
-                    <th>' . _('Qty Yet') . '<br>' . _('To credit note') . '</th>
-                    <th>' . _('Order Price') . '<br>' . $_SESSION['SuppTrans']->CurrCode . '</th>
-                    <th>' . _('Line Value') . '<br>' . _('In') . ' ' . $_SESSION['SuppTrans']->CurrCode . '</th>
+                    <th>' . _('Total Qty') . '<br />' . _('Received') . '</th>
+                    <th>' . _('Qty Already') . '<br />' . _('credit noted') . '</th>
+                    <th>' . _('Qty Yet') . '<br />' . _('To credit note') . '</th>
+                    <th>' . _('Order Price') . '<br />' . $_SESSION['SuppTrans']->CurrCode . '</th>
+                    <th>' . _('Line Value') . '<br />' . _('In') . ' ' . $_SESSION['SuppTrans']->CurrCode . '</th>
                     </tr>';
 
 echo $TableHeader;
@@ -222,10 +222,10 @@ if (isset($_POST['GRNNo']) AND $_POST['GRNNo']!=''){
 	echo '<tr><th colspan=6><font size=3 color=navy>' . _('GRN Selected For Adding To A Suppliers Credit Note') . '</font></th></tr>';
 	echo '<tr><th>' . _('GRN') . '</th>
                    <th>' . _('Item') . '</th>
-                   <th>' . _('Quantity') . '<br>' . _('Outstanding') . '</th>
-                   <th>' . _('Quantity') . '<br>' . _('credited') . '</th>
-                   <th>' . _('Order') . '<br>' . _('Price') . ' ' . $_SESSION['SuppTrans']->CurrCode . '</th>
-                   <th>' . _('Credit') . '<br>' . _('Price') . ' ' . $_SESSION['SuppTrans']->CurrCode . '</th>
+                   <th>' . _('Quantity') . '<br />' . _('Outstanding') . '</th>
+                   <th>' . _('Quantity') . '<br />' . _('credited') . '</th>
+                   <th>' . _('Order') . '<br />' . _('Price') . ' ' . $_SESSION['SuppTrans']->CurrCode . '</th>
+                   <th>' . _('Credit') . '<br />' . _('Price') . ' ' . $_SESSION['SuppTrans']->CurrCode . '</th>
                    </tr>';
 
 	echo '<tr><td>' . $_POST['GRNNo'] . '</td>

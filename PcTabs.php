@@ -48,7 +48,7 @@ if (isset($_POST['submit'])) {
 
 	if ($_POST['tabcode']=='' OR $_POST['tabcode']==' ' OR $_POST['tabcode']=='  ') {
 		$InputError = 1;
-		prnMsg('<br>' . _('The Tab code cannot be an empty string or spaces'),'error');
+		prnMsg('<br />' . _('The Tab code cannot be an empty string or spaces'),'error');
 		$Errors[$i] = 'TabCode';
 		$i++;
 	} elseif (strlen($_POST['tabcode']) >20) {
@@ -198,7 +198,7 @@ or deletion of the records*/
 				ORDER BY tabcode";
 	$result = DB_query($sql,$db);
 
-	echo '<br><table class=selection>';
+	echo '<br /><table class=selection>';
 	echo '<tr>
 		<th>' . _('Tab Code') . '</th>
 		<th>' . _('User Name') . '</th>

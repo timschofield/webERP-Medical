@@ -44,9 +44,9 @@ If (isset($_POST['PrintPDF'])
 			$title = _('Stock Count Sheets - Problem Report');
 			include('includes/header.inc');
 			prnMsg(_('The inventory quantities could not be added to the freeze file because') . ' ' . DB_error_msg($db),'error');
-			echo '<br><a href="' . $rootpath . '/index.php?' . SID . '">' . _('Back to the menu') . '</a>';
+			echo '<br /><a href="' . $rootpath . '/index.php?' . SID . '">' . _('Back to the menu') . '</a>';
 			if ($debug==1){
-		  			echo '<br>' . $sql;
+		  			echo '<br />' . $sql;
 			}
 			include('includes/footer.inc');
 			exit;
@@ -65,9 +65,9 @@ If (isset($_POST['PrintPDF'])
 			$title = _('Stock Freeze') . ' - ' . _('Problem Report') . '.... ';
 			include('includes/header.inc');
 			prnMsg(_('The old quantities could not be deleted from the freeze file because') . ' ' . DB_error_msg($db),'error');
-			echo '<br><a href="' . $rootpath . '/index.php?' . SID . '">' . _('Back to the menu') . '</a>';
+			echo '<br /><a href="' . $rootpath . '/index.php?' . SID . '">' . _('Back to the menu') . '</a>';
 			if ($debug==1){
-		  			echo '<br>' . $sql;
+		  			echo '<br />' . $sql;
 			}
 			include('includes/footer.inc');
 			exit;
@@ -95,9 +95,9 @@ If (isset($_POST['PrintPDF'])
 			$title = _('Stock Freeze - Problem Report');
 			include('includes/header.inc');
 			prnMsg(_('The inventory quantities could not be added to the freeze file because') . ' ' . DB_error_msg($db),'error');
-			echo '<br><a href="' . $rootpath . '/index.php?' . SID . '">' . _('Back to the menu') . '</a>';
+			echo '<br /><a href="' . $rootpath . '/index.php?' . SID . '">' . _('Back to the menu') . '</a>';
 			if ($debug==1){
-		  			echo '<br>' . $sql;
+		  			echo '<br />' . $sql;
 			}
 			include('includes/footer.inc');
 			exit;
@@ -139,9 +139,9 @@ If (isset($_POST['PrintPDF'])
 		$title = _('Stock Sheets') . ' - ' . _('Problem Report') . '.... ';
 		include('includes/header.inc');
 		prnMsg( _('The inventory quantities could not be retrieved by the SQL because') . ' ' . DB_error_msg($db),'error');
-		echo '<br><a href="' . $rootpath . '/index.php?' . SID . '">' . _('Back to the menu') . '</a>';
+		echo '<br /><a href="' . $rootpath . '/index.php?' . SID . '">' . _('Back to the menu') . '</a>';
 		if ($debug==1){
-		  	echo '<br>' . $SQL;
+		  	echo '<br />' . $SQL;
 		}
 		include ('includes/footer.inc');
 		exit;
@@ -150,7 +150,7 @@ If (isset($_POST['PrintPDF'])
 		$title = _('Stock Count Sheets - Problem Report');
 		include('includes/header.inc');
 		prnMsg(_('Before stock count sheets can be printed, a copy of the stock quantities needs to be taken - the stock check freeze. Make a stock check data file first'),'error');
-		echo '<br><a href="' . $rootpath . '/index.php?' . SID . '">' . _('Back to the menu') . '</a>';
+		echo '<br /><a href="' . $rootpath . '/index.php?' . SID . '">' . _('Back to the menu') . '</a>';
 		include('includes/footer.inc');
 		exit;
 	}
@@ -191,9 +191,9 @@ If (isset($_POST['PrintPDF'])
 	 			$title = _('Stock Check Sheets - Problem Report');
 		  		include('includes/header.inc');
 		   		prnMsg( _('The sales order demand quantities could not be retrieved by the SQL because') . ' ' . DB_error_msg($db), 'error');
-	   			echo '<br><a href="' . $rootpath . '/index.php?' . SID . '">' . _('Back to the menu') . '</a>';
+	   			echo '<br /><a href="' . $rootpath . '/index.php?' . SID . '">' . _('Back to the menu') . '</a>';
 	   			if ($debug==1){
-		  				echo '<br>' . $SQL;
+		  				echo '<br />' . $SQL;
 		   		}
 		   		echo '</body></html>';
 	   			exit;
@@ -221,7 +221,7 @@ If (isset($_POST['PrintPDF'])
 			if (DB_error_no($db) !=0) {
 				prnMsg(_('The demand for this product from') . ' ' . $myrow['loccode'] . ' ' . _('cannot be retrieved because') . ' - ' . DB_error_msg($db),'error');
 				if ($debug==1){
-		   			echo '<br>' . _('The SQL that failed was') . ' ' . $sql;
+		   			echo '<br />' . _('The SQL that failed was') . ' ' . $sql;
 				}
 				exit;
 			}
@@ -333,7 +333,7 @@ If (isset($_POST['PrintPDF'])
 				echo '<input type=CHECKBOX name="NonZerosOnly" value=TRUE>';
 		}
 
-			echo '</td></tr></table><br><div class="centre"><input type=Submit Name="PrintPDF" Value="' . _('Print and Process') . '"></div></form>';
+			echo '</td></tr></table><br /><div class="centre"><input type=Submit Name="PrintPDF" Value="' . _('Print and Process') . '"></div></form>';
 	}
 	include('includes/footer.inc');
 

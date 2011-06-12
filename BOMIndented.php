@@ -151,9 +151,9 @@ if (isset($_POST['PrintPDF'])) {
 	  $title = _('Indented BOM Listing') . ' - ' . _('Problem Report');
 	  include('includes/header.inc');
 	   prnMsg( _('The Indented BOM Listing could not be retrieved by the SQL because') . ' '  . DB_error_msg($db),'error');
-	   echo '<br><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
+	   echo '<br /><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
 	   if ($debug==1){
-	      echo '<br>'.$sql;
+	      echo '<br />'.$sql;
 	   }
 	   include('includes/footer.inc');
 	   exit;
@@ -237,7 +237,7 @@ if (isset($_POST['PrintPDF'])) {
 		$title = _('Print Indented BOM Listing Error');
 		include('includes/header.inc');
 		prnMsg(_('There were no items for the selected assembly'),'error');
-		echo '<br><a href="'.$rootpath.'/index.php">' . _('Back to the menu') . '</a>';
+		echo '<br /><a href="'.$rootpath.'/index.php">' . _('Back to the menu') . '</a>';
 		include('includes/footer.inc');
 		exit;
 	} else {

@@ -43,7 +43,7 @@ if (isset($_POST['AddGLCodeToTrans']) and $_POST['AddGLCodeToTrans'] == _('Enter
 		WHERE accountcode='" . $_POST['GLCode'] . "'";
 	$result = DB_query($sql, $db);
 	if (DB_num_rows($result) == 0 and $_POST['GLCode'] != ''){
-		prnMsg(_('The account code entered is not a valid code') . '. ' . _('This line cannot be added to the transaction') . '.<br>' . _('You can use the selection box to select the account you want'),'error');
+		prnMsg(_('The account code entered is not a valid code') . '. ' . _('This line cannot be added to the transaction') . '.<br />' . _('You can use the selection box to select the account you want'),'error');
 		$InputError = True;
 	} else if ($_POST['GLCode'] != '') {
 		$myrow = DB_fetch_row($result);
@@ -94,7 +94,7 @@ echo '</p><table cellpadding=2 class=selection>';
 $TableHeader = '<tr>
 							<th>' . _('Account') . '</th>
 							<th>' . _('Name') . '</th>
-							<th>' . _('Amount') . '<br>' . _('in') . ' ' . $_SESSION['SuppTrans']->CurrCode . '</th>
+							<th>' . _('Amount') . '<br />' . _('in') . ' ' . $_SESSION['SuppTrans']->CurrCode . '</th>
 							<th>' . _('Narrative') . '</th>
 							</tr>';
 echo $TableHeader;
@@ -147,7 +147,7 @@ echo '<tr>
 	<input type="hidden" name="JobRef" value="">
 	</tr>';
 echo '<tr>
-	<td>' . _('Account Selection') . ':<br>(' . _('If you know the code enter it above') . '<br>' . _('otherwise select the account from the list') . ')</td>
+	<td>' . _('Account Selection') . ':<br />(' . _('If you know the code enter it above') . '<br />' . _('otherwise select the account from the list') . ')</td>
 	<td><select name="AcctSelection">';
 
 $sql = "SELECT accountcode, accountname FROM chartmaster ORDER BY accountcode";

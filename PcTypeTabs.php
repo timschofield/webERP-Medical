@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
 
 	if ($_POST['TypeTabCode']=='' OR $_POST['TypeTabCode']==' ' OR $_POST['TypeTabCode']=='  ') {
 		$InputError = 1;
-		prnMsg('<br>' . _('The Tabs type code cannot be an empty string or spaces'),'error');
+		prnMsg('<br />' . _('The Tabs type code cannot be an empty string or spaces'),'error');
 		$Errors[$i] = 'TypeTabCode';
 		$i++;
 	} elseif (strlen($_POST['TypeTabCode']) >20) {
@@ -122,7 +122,7 @@ if (isset($_POST['submit'])) {
 	$myrowPcTabs = DB_fetch_row($ResultPcTabs);
 	if ($myrowPcTabExpenses[0]>0 or $myrowPcTabs[0]>0) {
 		prnMsg(_('Cannot delete this tab type because tabs have been created using this tab type'),'error');
-		echo '<br>';
+		echo '<br />';
 		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<p><div class="centre"><input type=submit name=return value="' . _('Return to list of tab types') . '"></div>';

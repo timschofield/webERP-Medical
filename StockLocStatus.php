@@ -49,7 +49,7 @@ $result1 = DB_query($SQL,$db);
 if (DB_num_rows($result1)==0){
 	echo '</table><p>';
 	prnMsg(_('There are no stock categories currently defined please use the link below to set them up'),'warn');
-	echo '<br><a href="' . $rootpath . '/StockCategories.php">' . _('Define Stock Categories') . '</a>';
+	echo '<br /><a href="' . $rootpath . '/StockCategories.php">' . _('Define Stock Categories') . '</a>';
 	include ('includes/footer.inc');
 	exit;
 }
@@ -94,7 +94,7 @@ if ($_POST['BelowReorderQuantity']=='All'){
 
 echo '</td></tr></table>';
 
-echo '<br><div class="centre"><input type=submit name="ShowStatus" value="' . _('Show Stock Status') . '"></div>';
+echo '<br /><div class="centre"><input type=submit name="ShowStatus" value="' . _('Show Stock Status') . '"></div>';
 
 if (isset($_POST['ShowStatus'])){
 
@@ -142,7 +142,7 @@ if (isset($_POST['ShowStatus'])){
 	$DbgMsg = _('The SQL that failed was');
 	$LocStockResult = DB_query($sql, $db, $ErrMsg, $DbgMsg);
 
-	echo '<br><table cellpadding=5 cellspacing=4 class=selection>';
+	echo '<br /><table cellpadding=5 cellspacing=4 class=selection>';
 
 	$tableheader = '<tr>
 					<th>' . _('StockID') . '</th>

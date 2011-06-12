@@ -517,7 +517,7 @@ if (isset($_SESSION['Transfer']->TransferItem[0]->Controlled) and $_SESSION['Tra
 	echo '<td><input type=text class="number" name="Quantity" size=12 maxlength=12 Value="0"></td></tr>';
 }
 
-echo '</table><div class="centre"><br><input type=submit name="EnterTransfer" value="' . _('Enter Stock Transfer') . '"><br>';
+echo '</table><div class="centre"><br /><input type=submit name="EnterTransfer" value="' . _('Enter Stock Transfer') . '"><br />';
 
 if (empty($_SESSION['Transfer']->TransferItem[0]->StockID) and isset($_POST['StockID'])) {
 	$StockID=$_POST['StockID'];
@@ -528,11 +528,11 @@ if (empty($_SESSION['Transfer']->TransferItem[0]->StockID) and isset($_POST['Sto
 }
 
 if (isset($_SESSION['Transfer'])) {
-	echo '<br><a href="'.$rootpath.'/StockStatus.php?StockID=' . $StockID . '">'._('Show Stock Status').'</a>';
-	echo '<br><a href="'.$rootpath.'/StockMovements.php?StockID=' . $StockID . '">'._('Show Movements').'</a>';
-	echo '<br><a href="'.$rootpath.'/StockUsage.php?StockID=' . $StockID . '">' . _('Show Stock Usage') . '</a>';
-	echo '<br><a href="'.$rootpath.'/SelectSalesOrder.php?SelectedStockItem=' . $StockID . '&StockLocation=' . $_SESSION['Transfer']->StockLocationFrom . '">' . _('Search Outstanding Sales Orders') . '</a>';
-	echo '<br><a href="'.$rootpath.'/SelectCompletedOrder.php?SelectedStockItem=' . $StockID . '">'._('Search Completed Sales Orders').'</a>';
+	echo '<br /><a href="'.$rootpath.'/StockStatus.php?StockID=' . $StockID . '">'._('Show Stock Status').'</a>';
+	echo '<br /><a href="'.$rootpath.'/StockMovements.php?StockID=' . $StockID . '">'._('Show Movements').'</a>';
+	echo '<br /><a href="'.$rootpath.'/StockUsage.php?StockID=' . $StockID . '">' . _('Show Stock Usage') . '</a>';
+	echo '<br /><a href="'.$rootpath.'/SelectSalesOrder.php?SelectedStockItem=' . $StockID . '&StockLocation=' . $_SESSION['Transfer']->StockLocationFrom . '">' . _('Search Outstanding Sales Orders') . '</a>';
+	echo '<br /><a href="'.$rootpath.'/SelectCompletedOrder.php?SelectedStockItem=' . $StockID . '">'._('Search Completed Sales Orders').'</a>';
 }
 
 echo '</div></form>';

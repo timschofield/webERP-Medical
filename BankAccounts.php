@@ -11,7 +11,7 @@ $title = _('Bank Accounts Maintenance');
 include('includes/header.inc');
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Bank') . '" alt="" />' . ' ' . $title . '</p>';
-        echo '<div class="page_help_text">' . _('Update Bank Account details.  Account Code is for SWIFT or BSB type Bank Codes.  Set Default for Invoices to "yes" to print Account details on Invoices (only one account can be set to "yes").') . '.</div><br>';
+        echo '<div class="page_help_text">' . _('Update Bank Account details.  Account Code is for SWIFT or BSB type Bank Codes.  Set Default for Invoices to "yes" to print Account details on Invoices (only one account can be set to "yes").') . '.</div><br />';
 
 if (isset($_GET['SelectedBankAccount'])) {
 	$SelectedBankAccount=$_GET['SelectedBankAccount'];
@@ -93,7 +93,7 @@ if (isset($_POST['submit'])) {
 				invoice ='" . $_POST['DefAccount'] . "'
 			WHERE accountcode = '" . $SelectedBankAccount . "'";
 			prnMsg(_('Note that it is not possible to change the currency of the account once there are transactions against it'),'warn');
-	echo '<br>';
+	echo '<br />';
 		} else {
 			$sql = "UPDATE bankaccounts
 				SET bankaccountname='" . $_POST['BankAccountName'] . "',
@@ -136,7 +136,7 @@ if (isset($_POST['submit'])) {
 		$result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
 		prnMsg($msg,'success');
-		echo '<br>';
+		echo '<br />';
 		unset($_POST['AccountCode']);
 		unset($_POST['BankAccountName']);
 		unset($_POST['BankAccountNumber']);
@@ -160,7 +160,7 @@ if (isset($_POST['submit'])) {
 	if ($myrow[0]>0) {
 		$CancelDelete = 1;
 		prnMsg(_('Cannot delete this bank account because transactions have been created using this account'),'warn');
-		echo '<br> ' . _('There are') . ' ' . $myrow[0] . ' ' . _('transactions with this bank account code');
+		echo '<br /> ' . _('There are') . ' ' . $myrow[0] . ' ' . _('transactions with this bank account code');
 
 	}
 	if (!$CancelDelete) {
@@ -188,7 +188,7 @@ If (!isset($SelectedBankAccount)) {
 		WHERE bankaccounts.accountcode = chartmaster.accountcode";
 
 	$ErrMsg = _('The bank accounts set up could not be retrieved because');
-	$DbgMsg = _('The SQL used to retrieve the bank account details was') . '<br>' . $sql;
+	$DbgMsg = _('The SQL used to retrieve the bank account details was') . '<br />' . $sql;
 	$result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
 	echo '<table class="selection">';
@@ -216,7 +216,7 @@ If (!isset($SelectedBankAccount)) {
 	} else {
 		$defacc=_('Yes');
 	}
-	printf('<td>%s<br><font size=2>%s</font></td>
+	printf('<td>%s<br /><font size=2>%s</font></td>
 		<td>%s</td>
 		<td>%s</td>
 		<td>%s</td>
@@ -367,7 +367,7 @@ if (isset($SelectedBankAccount)) {
 
 echo '</select></td>';
 
-echo '</tr></table><br>
+echo '</tr></table><br />
 		<div class="centre"><input tabindex="7" type="Submit" name="submit" value="'. _('Enter Information') .'"></div>';
 
 echo '</form>';

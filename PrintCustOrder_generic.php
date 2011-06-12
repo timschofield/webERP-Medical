@@ -18,7 +18,7 @@ If (!isset($_GET['TransNo']) OR $_GET['TransNo']==""){
         echo '<br /><br /><br /><table class="table_index"><tr><td class="menu_group_item">
                 <li><a href="'. $rootpath . '/SelectSalesOrder.php?">' . _('Outstanding Sales Orders') . '</a></li>
                 <li><a href="'. $rootpath . '/SelectCompletedOrder.php?">' . _('Completed Sales Orders') . '</a></li>
-                </td></tr></table></div><br><br><br>';
+                </td></tr></table></div><br /><br /><br />';
         include('includes/footer.inc');
         exit();
 }
@@ -177,8 +177,8 @@ if ($ListCount == 0) {   //UldisN
         $title = _('Print Packing Slip Error');
         include('includes/header.inc');
         echo '<p>'. _('There were no outstanding items on the order to deliver') . '. ' . _('A packing slip cannot be printed').
-                '<br><a href="' . $rootpath . '/SelectSalesOrder.php?">'. _('Print Another Packing Slip/Order').
-                '</a>' . '<br>'. '<a href="' . $rootpath . '/index.php?">' . _('Back to the menu') . '</a>';
+                '<br /><a href="' . $rootpath . '/SelectSalesOrder.php?">'. _('Print Another Packing Slip/Order').
+                '</a>' . '<br />'. '<a href="' . $rootpath . '/index.php?">' . _('Back to the menu') . '</a>';
         include('includes/footer.inc');
 	exit;
 } else {

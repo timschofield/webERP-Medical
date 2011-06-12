@@ -8,7 +8,7 @@ include('includes/session.inc');
 $title = _('Customer EDI Set Up');
 include('includes/header.inc');
 
-echo "<a href='" . $rootpath . '/SelectCustomer.php?' . SID . "'>" . _('Back to Customers') . '</a><br>';
+echo "<a href='" . $rootpath . '/SelectCustomer.php?' . SID . "'>" . _('Back to Customers') . '</a><br />';
 
 if (isset($Errors)) {
 	unset($Errors);
@@ -73,7 +73,7 @@ if (isset($_POST['submit'])) {
 
 echo "<form method='post' action='" . $_SERVER['PHP_SELF'] . '?' . SID ."'>";
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<br><table class=selection>';
+echo '<br /><table class=selection>';
 
 $sql = "SELECT debtorno,
 		name,
@@ -153,7 +153,7 @@ if ($myrow['editransport']=='ftp'){
 			<td><input tabindex=7 type='Text' name='EDIServerPwd' size=20 maxlength=20 value='" . $myrow['ediserverpwd'] . "'></td></tr>";
 }
 
-echo "</table><br><div class='centre'><input tabindex=8 type='Submit' name='submit' value='"._('Update EDI Configuration')."'></div></form>";
+echo "</table><br /><div class='centre'><input tabindex=8 type='Submit' name='submit' value='"._('Update EDI Configuration')."'></div></form>";
 
 include('includes/footer.inc');
 ?>

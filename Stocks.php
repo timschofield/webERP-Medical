@@ -33,7 +33,7 @@ if (isset($_POST['New'])) {
 	$New=$_POST['New'];
 }
 
-echo '<a href="' . $rootpath . '/SelectProduct.php?' . SID . '">' . _('Back to Items') . '</a><br>' . "\n";
+echo '<a href="' . $rootpath . '/SelectProduct.php?' . SID . '">' . _('Back to Items') . '</a><br />' . "\n";
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="'
 		. _('Stock') . '" alt="" />' . ' ' . $title . '</p>';
@@ -356,7 +356,7 @@ if (isset($_POST['submit'])) {
 										$db);
 				} //end of loop around properties defined for the category
 				prnMsg( _('Stock Item') . ' ' . $StockID . ' ' . _('has been updated'), 'success');
-				echo '<br>';
+				echo '<br />';
 			}
 
 		} else { //it is a NEW part
@@ -427,7 +427,7 @@ if (isset($_POST['submit'])) {
 					if (DB_error_no($db) ==0) {
 						prnMsg( _('New Item') .' ' . '<a
 							href="SelectProduct.php?StockID='.$StockID.'">'.$StockID.'</a>' . ' '. _('has been added to the database'),'success');						unset($_POST['LongDescription']);
-						echo '<br>';
+						echo '<br />';
 						unset($_POST['Description']);
 						unset($_POST['EOQ']);
 // Leave Category ID set for ease of batch entry
@@ -455,7 +455,7 @@ if (isset($_POST['submit'])) {
 		$New=1;
 
 	} else {
-		echo '<br>'. "\n";
+		echo '<br />'. "\n";
 		prnMsg( _('Validation failed, no updates or deletes took place'), 'error');
 	}
 
@@ -472,7 +472,7 @@ if (isset($_POST['submit'])) {
 	if ($myrow[0]>0) {
 		$CancelDelete = 1;
 		prnMsg( _('Cannot delete this stock item because there are stock movements that refer to this item'),'warn');
-		echo '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('stock movements that refer to this item');
+		echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('stock movements that refer to this item');
 
 	} else {
 		$sql= "SELECT COUNT(*) FROM bom WHERE component='".$StockID."'";
@@ -481,7 +481,7 @@ if (isset($_POST['submit'])) {
 		if ($myrow[0]>0) {
 			$CancelDelete = 1;
 			prnMsg( _('Cannot delete this item record because there are bills of material that require this part as a component'),'warn');
-			echo '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('bills of material that require this part as a component');
+			echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('bills of material that require this part as a component');
 		} else {
 			$sql= "SELECT COUNT(*) FROM salesorderdetails WHERE stkcode='".$StockID."'";
 			$result = DB_query($sql,$db);
@@ -489,7 +489,7 @@ if (isset($_POST['submit'])) {
 			if ($myrow[0]>0) {
 				$CancelDelete = 1;
 				prnMsg( _('Cannot delete this item record because there are existing sales orders for this part'),'warn');
-				echo '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('sales order items against this part');
+				echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('sales order items against this part');
 			} else {
 				$sql= "SELECT COUNT(*) FROM salesanalysis WHERE stockid='".$StockID."'";
 				$result = DB_query($sql,$db);
@@ -497,7 +497,7 @@ if (isset($_POST['submit'])) {
 				if ($myrow[0]>0) {
 					$CancelDelete = 1;
 					prnMsg(_('Cannot delete this item because sales analysis records exist for it'),'warn');
-					echo '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('sales analysis records against this part');
+					echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('sales analysis records against this part');
 				} else {
 					$sql= "SELECT COUNT(*) FROM purchorderdetails WHERE itemcode='".$StockID."'";
 					$result = DB_query($sql,$db);
@@ -505,7 +505,7 @@ if (isset($_POST['submit'])) {
 					if ($myrow[0]>0) {
 						$CancelDelete = 1;
 						prnMsg(_('Cannot delete this item because there are existing purchase order items for it'),'warn');
-						echo '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('purchase order item record relating to this part');
+						echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('purchase order item record relating to this part');
 					} else {
 						$sql = "SELECT SUM(quantity) AS qoh FROM locstock WHERE stockid='".$StockID."'";
 						$result = DB_query($sql,$db);
@@ -513,7 +513,7 @@ if (isset($_POST['submit'])) {
 						if ($myrow[0]!=0) {
 							$CancelDelete = 1;
 							prnMsg( _('Cannot delete this item because there is currently some stock on hand'),'warn');
-							echo '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('on hand for this part');
+							echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('on hand for this part');
 						}
 					}
 				}
@@ -542,11 +542,11 @@ if (isset($_POST['submit'])) {
 		$result = DB_Txn_Commit($db);
 
 		prnMsg(_('Deleted the stock master record for') . ' ' . $StockID . '....' .
-		'<br>. . ' . _('and all the location stock records set up for the part') .
-		'<br>. . .' . _('and any bill of material that may have been set up for the part') .
-		'<br> . . . .' . _('and any purchasing data that may have been set up for the part') .
-		'<br> . . . . .' . _('and any prices that may have been set up for the part'),'success');
-		echo '<br>';
+		'<br />. . ' . _('and all the location stock records set up for the part') .
+		'<br />. . .' . _('and any bill of material that may have been set up for the part') .
+		'<br /> . . . .' . _('and any purchasing data that may have been set up for the part') .
+		'<br /> . . . . .' . _('and any prices that may have been set up for the part'),'success');
+		echo '<br />';
 		unset($_POST['LongDescription']);
 		unset($_POST['Description']);
 		unset($_POST['EOQ']);
@@ -724,7 +724,7 @@ echo '<tr><td>'. _('Image File (.jpg)') . ':</td><td><input type="file" id="Item
 }
 
 if ($StockImgLink!=_('No Image')) {
-	echo '</td><td>' . _('Image') . '<br>'.$StockImgLink . '</td></tr>';
+	echo '</td><td>' . _('Image') . '<br />'.$StockImgLink . '</td></tr>';
 }
 
 // EOR Add Image upload for New Item  - by Ori
@@ -970,7 +970,7 @@ $PropertiesResult = DB_query($sql,$db);
 $PropertyCounter = 0;
 $PropertyWidth = array();
 
-echo '<br><table class=selection>';
+echo '<br /><table class=selection>';
 if (DB_num_rows($PropertiesResult)>0) {
 	echo '<tr><th colspan="2">' . _('Item Category Properties') . '</th></tr>';
 }
@@ -1035,7 +1035,7 @@ while ($PropertyRow=DB_fetch_array($PropertiesResult)){
 	$PropertyCounter++;
 } //end loop round properties for the item category
 unset($StockID);
-echo '</table><br>';
+echo '</table><br />';
 echo '<input type="hidden" name="PropertyCounter" value=' . $PropertyCounter . '>';
 
 if ($New==1) {

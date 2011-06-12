@@ -526,7 +526,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 		echo '<tr><td>' . _('Stock Category') . '</td><td>' . $_POST['Category'] . '</tr></table>';
 
 		if ($_POST['ReportType'] == 'Detail') {
-			echo '<br><table class=selection width=98%>';
+			echo '<br /><table class=selection width=98%>';
 			if ($_POST['DateType'] == 'Order') {
 				printf("<tr><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%-s</th><th>%s",
 					 _('Order No'),
@@ -653,7 +653,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 			echo '</table>';
 		} else {
 		  // Print summary stuff
-			echo '<br><table class=selection width=98%>';
+			echo '<br /><table class=selection width=98%>';
 			$summarytype = $_POST['SummaryType'];
 			// For SummaryType 'suppname' had to add supplierid to it for the GROUP BY in the sql,
 			// but have to take it away for $myrow[$summarytype] to be valid
@@ -757,7 +757,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 		echo "<input type=hidden name='Category' value=".$_POST['Category'].">";
 		echo "<input type=hidden name='SortBy' value=".$_POST['SortBy'].">";
 		echo "<input type=hidden name='SummaryType' value=".$_POST['SummaryType'].">";
-		echo "<br><div class=centre><input type='submit' name='submitcsv' value='" . _('Export as csv file') . "'></div></td>";
+		echo "<br /><div class=centre><input type='submit' name='submitcsv' value='" . _('Export as csv file') . "'></div></td>";
 		echo "</form>";
 	} // End of if inputerror != 1
 } // End of function submit()

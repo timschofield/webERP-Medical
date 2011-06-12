@@ -70,7 +70,7 @@ if (isset($_POST['UpdateDatabase']) OR isset($_POST['RefreshAllocTotal'])) {
 
 	if ($TotalAllocated + $_SESSION['Alloc']->TransAmt > 0.008) {
 		prnMsg(_('Allocation could not be processed because the amount allocated is more than the').' ' .
-		$_SESSION['Alloc']->TransTypeName  . ' '._('being allocated') . '<br>' . _('Total allocated').' = ' .
+		$_SESSION['Alloc']->TransTypeName  . ' '._('being allocated') . '<br />' . _('Total allocated').' = ' .
 		$TotalAllocated . ' '._('and the total amount of the') .' ' . $_SESSION['Alloc']->TransTypeName  . ' '.
 		_('was').' ' . -$_SESSION['Alloc']->TransAmt,'error');
 		$InputError=1;
@@ -347,19 +347,19 @@ if (isset($_GET['AllocTrans'])) {
 		echo '<tr><th colspan=7><div class="centre"><font color=blue><b>' . $_SESSION['Alloc']->DebtorNo . ' - ' . $_SESSION['Alloc']->CustomerName . '</b></div>';
 
 		if ($_SESSION['Alloc']->TransExRate != 1) {
-				echo '<br>'._('Amount in customer currency').' <b>' .
+				echo '<br />'._('Amount in customer currency').' <b>' .
 				number_format(-$_SESSION['Alloc']->TransAmt,2) .
 				'</b><i> ('._('converted into local currency at an exchange rate of'). ' '
 				. $_SESSION['Alloc']->TransExRate . ')</i>';
 		}
 		echo "</th></tr><tr>
-				<th>" . _('Trans') . '<br>' . _('Type') . "</th>
-				<th>" . _('Trans') . '<br>' . _('Number') . "</th>
-				<th>" . _('Trans') . '<br>' . _('Date') . "</th>
-				<th>" . _('Total') . '<br>' . _('Amount') . "</th>
-				<th>" . _('Yet to') . '<br>' . _('Allocate') . "</th>
-				<th>" . _('This') . '<br>' . _('Allocation') . "</th>
-				<th>" . _('Running') . '<br>' . _('Balance') . "</th>
+				<th>" . _('Trans') . '<br />' . _('Type') . "</th>
+				<th>" . _('Trans') . '<br />' . _('Number') . "</th>
+				<th>" . _('Trans') . '<br />' . _('Date') . "</th>
+				<th>" . _('Total') . '<br />' . _('Amount') . "</th>
+				<th>" . _('Yet to') . '<br />' . _('Allocate') . "</th>
+				<th>" . _('This') . '<br />' . _('Allocation') . "</th>
+				<th>" . _('Running') . '<br />' . _('Balance') . "</th>
 			</tr>";
 
 		$Counter = 0;

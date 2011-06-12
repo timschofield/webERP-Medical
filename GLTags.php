@@ -19,13 +19,13 @@ if (isset($_GET['SelectedTag'])) {
 }
 
 if (isset($_POST['submit'])) {
-	$sql = "insert into tags values(NULL, '".$_POST['description']."')";
+	$sql = "INSERT INTO tags VALUES(NULL, '".$_POST['description']."')";
 	$result= DB_query($sql,$db);
 }
 
 if (isset($_POST['update'])) {
-	$sql = "update tags set tagdescription='".$_POST['description'].
-		"' where tagref='".$_POST['reference']."'";
+	$sql = "UPDATE tags SET tagdescription='".$_POST['description'].
+		"' WHERE tagref='".$_POST['reference']."'";
 	$result= DB_query($sql,$db);
 }
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' .
@@ -33,7 +33,7 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/m
 
 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '" name="form">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<br><table><tr>';
+echo '<br /><table><tr>';
 
 
 echo '<td>'. _('Description') . '</td>

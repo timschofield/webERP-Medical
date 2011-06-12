@@ -60,7 +60,7 @@ if (isset($_POST['PrintPDF'])) {
 
 	  include('includes/header.inc');
 		prnMsg(_('The low GP items could not be retrieved by the SQL because') . ' - ' . DB_error_msg($db),'error');
-		echo '<br><a href="' .$rootpath .'/index.php?">' . _('Back to the menu') . '</a>';
+		echo '<br /><a href="' .$rootpath .'/index.php?">' . _('Back to the menu') . '</a>';
 		if ($debug==1){
 		  echo '<br />'.$SQL;
 		}
@@ -72,7 +72,7 @@ if (isset($_POST['PrintPDF'])) {
 
 		include('includes/header.inc');
 		prnMsg(_('No low GP items retrieved'), 'warn');
-		echo '<br><a href="'  . $rootpath . '/index.php">' . _('Back to the menu') . '</a>';
+		echo '<br /><a href="'  . $rootpath . '/index.php">' . _('Back to the menu') . '</a>';
 		if ($debug==1){
 		  echo '<br />'.$SQL;
 		}
@@ -143,7 +143,7 @@ if (isset($_POST['PrintPDF'])) {
 								<td><input type=text class="number" name="GPMin" maxlength=3 size=3 value=' . $_POST['GPMin'] . '></td>
 						</tr>';
 
-		echo '</table><br><div class="centre"><input type=Submit Name="PrintPDF" Value="' . _('Print PDF') . '"></div>';
+		echo '</table><br /><div class="centre"><input type=Submit Name="PrintPDF" Value="' . _('Print PDF') . '"></div>';
 	}
 	include('includes/footer.inc');
 
