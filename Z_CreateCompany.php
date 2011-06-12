@@ -18,7 +18,7 @@ if ($myrow[0]==0){
 	$sql = "INSERT INTO companies (coycode, coyname) VALUES (1,'Enter company name')";
 	$Result = DB_query($sql,$db);
 } else {
-	echo '<p>' . _('An existing company record is set up already. No alterations have been made');
+	echo '<p>' . _('An existing company record is set up already. No alterations have been made') . '</p>';
 	exit;
 }
 
@@ -95,8 +95,8 @@ if ($myrow[0]==0){
 }
 
 
-echo '<p>' . _('Company record is now available for modification by clicking') . " <a href='" . $rootpath . "/CompanyPreferences.php'>" . _('this link') . "</a>";
+echo '<p>' . _('Company record is now available for modification by clicking') . ' <a href="' . $rootpath . '/CompanyPreferences.php">' . _('this link') . '</a></p>';
 
 
-include("includes/footer.inc");
+include('includes/footer.inc');
 ?>

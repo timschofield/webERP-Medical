@@ -36,9 +36,9 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate'])){
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class=selection><tr><td>' . _('Enter the date from which orders are to be listed') . ':</td><td><input type=text class="date" alt="'.
-		$_SESSION['DefaultDateFormat'].'" name="FromDate" maxlength=10 size=10 VALUE="' . Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m'),Date('d')-1,Date('y'))) . '"></td></tr>';
+		$_SESSION['DefaultDateFormat'].'" name="FromDate" maxlength=10 size=10 value="' . Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m'),Date('d')-1,Date('y'))) . '"></td></tr>';
 	echo '<tr><td>' . _('Enter the date to which orders are to be listed') . ':</td><td>';
-	echo '<input type=text class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="ToDate" maxlength=10 size=10 VALUE="' . Date($_SESSION['DefaultDateFormat']) . '"></td></tr>';
+	echo '<input type=text class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="ToDate" maxlength=10 size=10 value="' . Date($_SESSION['DefaultDateFormat']) . '"></td></tr>';
 	echo '<tr><td>' . _('Inventory Category') . '</td><td>';
 
 	$sql = "SELECT categorydescription, categoryid FROM stockcategory WHERE stocktype<>'D' AND stocktype<>'L'";
@@ -46,7 +46,7 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate'])){
 
 
 	echo '<select name="CategoryID">';
-	echo '<option selected VALUE="All">' . _('Over All Categories') . '</option>';
+	echo '<option selected value="All">' . _('Over All Categories') . '</option>';
 
 	while ($myrow=DB_fetch_array($result)){
 		echo '<option value=' . $myrow['categoryid'] . '>' . $myrow['categorydescription'] . '</option>';
@@ -58,14 +58,14 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate'])){
 
 	$result= DB_query("SELECT loccode, locationname FROM locations",$db);
 	while ($myrow=DB_fetch_array($result)){
-		echo '<option VALUE="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 	}
 	echo '</select></td></tr>';
 
 	echo '<tr><td>' . _('Back Order Only') . ':</td><td><select name="BackOrders">' . '</option>';
-	echo '<option selected VALUE="Yes">' . _('Only Show Back Orders') . '</option>';
-	echo '<option VALUE="No">' . _('Show All Orders') . '</option>';
-	echo '</select></td></tr></table><br><div class="centre"><input type=submit name="Go" value="' . _('Create PDF') . '"></div>';
+	echo '<option selected value="Yes">' . _('Only Show Back Orders') . '</option>';
+	echo '<option value="No">' . _('Show All Orders') . '</option>';
+	echo '</select></td></tr></table><br /><div class="centre"><input type=submit name="Go" value="' . _('Create PDF') . '"></div>';
 
 	include('includes/footer.inc');
 	exit;
@@ -239,9 +239,9 @@ $Result=DB_query($sql,$db,'','',false,false); //dont trap errors here
 
 if (DB_error_no($db)!=0){
 	include('includes/header.inc');
-	echo '<br>' . _('An error occurred getting the orders details');
+	echo '<br />' . _('An error occurred getting the orders details');
 	if ($debug==1){
-		echo '<br>' . _('The SQL used to get the orders that failed was') . '<br>' . $sql;
+		echo '<br />' . _('The SQL used to get the orders that failed was') . '<br />' . $sql;
 	}
 	include ('includes/footer.inc');
 	exit;

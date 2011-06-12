@@ -381,7 +381,7 @@ if (isset($_POST['submit'])) { //The update button has been clicked
 		prnMsg(_('The work order has been deleted'),'success');
 
 
-		echo "<p><a href='" . $rootpath . "/SelectWorkOrder.php?" . SID . "'>" . _('Select an existing outstanding work order') . "</a>";
+		echo '<p><a href="' . $rootpath . '/SelectWorkOrder.php">' . _('Select an existing outstanding work order') . '</a></p>';
 		unset($_POST['WO']);
 		for ($i=1;$i<=$_POST['NumberOfOutputs'];$i++){
 		  		 unset($_POST['OutputItem'.$i]);
@@ -488,7 +488,7 @@ if (isset($WOResult)){
 			  <td class=number>' . number_format($myrow['costissued'],2) . '</td></tr>';
 }
 echo '</table>
-		<p><table class=selection>';
+		<br /><table class=selection>';
 echo '<tr><th>' . _('Output Item') . '</th>
 		  <th>' . _('Qty Required') . '</th>
 		  <th>' . _('Qty Received') . '</th>
@@ -547,7 +547,7 @@ echo '</table>';
 
 echo '<div class="centre"><br /><input type=submit name="submit" value="' . _('Update') . '">';
 
-echo '<br /><p><input type=submit name="delete" VALUE="' . _('Delete This Work Order') . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');">';
+echo '<br /><input type=submit name="delete" value="' . _('Delete This Work Order') . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');">';
 
 echo '<br /></div>';
 
@@ -561,31 +561,31 @@ $SQL="SELECT categoryid,
 echo '<table class=selection><tr><td>' . _('Select a stock category') . ':<select name="StockCat">';
 
 if (!isset($_POST['StockCat'])){
-	echo '<option selected VALUE="All">' . _('All') . '</option>';
+	echo '<option selected value="All">' . _('All') . '</option>';
 	$_POST['StockCat'] ='All';
 } else {
-	echo '<option VALUE="All">' . _('All') . '</option>';
+	echo '<option value="All">' . _('All') . '</option>';
 }
 
 while ($myrow1 = DB_fetch_array($result1)) {
 
 	if ($_POST['StockCat']==$myrow1['categoryid']){
-		echo '<option selected VALUE=' . $myrow1['categoryid'] . '>' . $myrow1['categorydescription'] . '</option>';
+		echo '<option selected value=' . $myrow1['categoryid'] . '>' . $myrow1['categorydescription'] . '</option>';
 	} else {
-		echo '<option VALUE='. $myrow1['categoryid'] . '>' . $myrow1['categorydescription'] . '</option>';
+		echo '<option value='. $myrow1['categoryid'] . '>' . $myrow1['categorydescription'] . '</option>';
 	}
 }
 ?>
 
 </select>
 <td><?php echo _('Enter text extracts in the'); ?> <b><?php echo _('description'); ?></b>:</td>
-<td><input type="Text" name="Keywords" size=20 maxlength=25 VALUE="<?php if (isset($_POST['Keywords'])) echo $_POST['Keywords']; ?>"></td></tr>
+<td><input type="Text" name="Keywords" size=20 maxlength=25 value="<?php if (isset($_POST['Keywords'])) echo $_POST['Keywords']; ?>"></td></tr>
 <tr><td></td>
 		<td><font SIZE 3><b><?php echo _('OR'); ?> </b></font><?php echo _('Enter extract of the'); ?> <b><?php echo _('Stock Code'); ?></b>:</td>
-		<td><input type="Text" name="StockCode" size=15 maxlength=18 VALUE="<?php if (isset($_POST['StockCode'])) echo $_POST['StockCode']; ?>"></td>
+		<td><input type="Text" name="StockCode" size=15 maxlength=18 value="<?php if (isset($_POST['StockCode'])) echo $_POST['StockCode']; ?>"></td>
 		</tr>
 		</table>
-		<br /><div class="centre"><input type=submit name="Search" VALUE="<?php echo _('Search Now'); ?>">
+		<br /><div class="centre"><input type=submit name="Search" value="<?php echo _('Search Now'); ?>">
 
 <?php
 

@@ -102,7 +102,7 @@ while ($myrow=DB_fetch_array($result)) {
 	echo '<td><a href="'.$_SERVER['PHP_SELF'] . '?' . SID.'SelectedLocation='.$myrow['locationid'].'">' .  _('Edit') . '</td>';
 }
 
-echo '</table><br>';
+echo '</table><br />';
 echo '<form name="LocationForm" method="post" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '"><table class=selection>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo '<tr><th style="text-align:left">'._('Location ID').'</th>';
@@ -133,7 +133,7 @@ while ($row=DB_fetch_array($result)) {
 echo '</select>';
 
 echo '</td></tr>';
-echo '</table><br>';
+echo '</table><br />';
 
 
 //Batman: ParentLocationID checking the location ID
@@ -142,8 +142,8 @@ echo '</table><br>';
 echo '<div class="centre">';
 if (isset($_GET['SelectedLocation'])) {
 	echo '<input type="Submit" name="update" value="' . _('Update Information') . '">';
-	echo '<p>';
-	echo '<p><center><input type="Submit" name="delete" value="' . _('Delete This Location') . '">';
+	echo '<br />';
+	echo '<br /><div class="centre"><input type="Submit" name="delete" value="' . _('Delete This Location') . '"></div>';
 } else {
 	echo '<input type="submit" name="submit" value="' . _('Enter Information') . '">';
 }

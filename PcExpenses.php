@@ -148,7 +148,7 @@ if (isset($_POST['submit'])) {
 
 	$myrow = DB_fetch_row($result);
 	if ($myrow[0]>0) {
-		prnMsg(_('Cannot delete this petty cash expense because it is used in some tab types') . '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('tab types using this expense code'),'error');
+		prnMsg(_('Cannot delete this petty cash expense because it is used in some tab types') . '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('tab types using this expense code'),'error');
 
 	} else {
 
@@ -224,7 +224,7 @@ or deletion of the records*/
 //end of ifs and buts!
 if (isset($SelectedExpense)) {
 
-	echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Show All Petty Cash Expenses Defined') . '</a></div><p>';
+	echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Show All Petty Cash Expenses Defined') . '</a></div></p>';
 }
 if (! isset($_GET['delete'])) {
 
@@ -249,8 +249,8 @@ if (! isset($_GET['delete'])) {
 		$_POST['description']  = $myrow['description'];
 		$_POST['glaccount']  = $myrow['glaccount'];
 
-		echo '<input type=hidden name="SelectedExpense" VALUE="' . $SelectedExpense . '">';
-		echo '<input type=hidden name="codeexpense" VALUE="' . $_POST['codeexpense']. '">';
+		echo '<input type=hidden name="SelectedExpense" value="' . $SelectedExpense . '">';
+		echo '<input type=hidden name="codeexpense" value="' . $_POST['codeexpense']. '">';
 		echo '<table class=selection> <tr><td>' . _('Code Of Expense') . ':</td><td>';
 
 		// We dont allow the user to change an existing type code
@@ -286,9 +286,9 @@ if (! isset($_GET['delete'])) {
 	echo '<option value=""></option>';
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['glaccount']) and $myrow['accountcode']==$_POST['glaccount']) {
-			echo '<option selected VALUE="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
+			echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
 		} else {
-			echo '<option VALUE="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
+			echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
 		}
 	} //end while loop
 
@@ -296,7 +296,7 @@ if (! isset($_GET['delete'])) {
 
    	echo '</td></tr></table>'; // close main table
 
-	echo '<p><div class="centre"><input type=submit name=submit VALUE="' . _('Accept') . '"><input type=submit name=Cancel VALUE="' . _('Cancel') . '"></div>';
+	echo '<br /><div class="centre"><input type=submit name=submit value="' . _('Accept') . '"><input type=submit name=Cancel value="' . _('Cancel') . '"></div>';
 
 	echo '</form>';
 

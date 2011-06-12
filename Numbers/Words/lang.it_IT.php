@@ -23,7 +23,7 @@
 /**
  * Class for translating numbers into Italian.
  *
- * @author Filippo Beltramini <phil@esight.it>
+ * @author Filippo Beltramini < phil@esight.it>
  * @author Davide Caironi     <cairo@esight.it>
  * @package Numbers_Words
  */
@@ -37,7 +37,7 @@ require_once("Numbers/Words.php");
  * Class for translating numbers into Italian.
  * It supports up to quadrilions
  *
- * @author Filippo Beltramini <phil@esight.it>
+ * @author Filippo Beltramini < phil@esight.it>
  * @author Davide Caironi     <cairo@esight.it>
  * @package Numbers_Words
  */
@@ -51,14 +51,14 @@ class Numbers_Words_it_IT extends Numbers_Words
      * @access public
      */
     var $locale      = 'it_IT';
-    
+
     /**
      * Language name in English
      * @var string
      * @access public
      */
     var $lang        = 'Italian';
-    
+
     /**
      * Native language name
      * @var string
@@ -95,7 +95,7 @@ class Numbers_Words_it_IT extends Numbers_Words
       0 => 'zero', 'uno', 'due', 'tre', 'quattro',
        'cinque', 'sei', 'sette', 'otto', 'nove'
     );
-    
+
     /**
      * The word separator
      * @var string
@@ -280,15 +280,15 @@ class Numbers_Words_it_IT extends Numbers_Words
                     case 6:
                          $ret .= $this->_sep . 'sedici';
                         break;
-                        
+
                     case 7:
                          $ret .= $this->_sep . 'diciassette';
                         break;
-                        
+
                     case 8:
                         $ret .= $this->_sep . 'diciotto';
                         break;
-                        
+
                     case 9:
                      $ret .= $this->_sep . 'diciannove';
                         break;

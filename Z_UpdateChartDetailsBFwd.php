@@ -30,7 +30,7 @@ if (!isset($_POST['FromPeriod']) OR !isset($_POST['ToPeriod'])){
 
 	while ($myrow=DB_fetch_array($Periods,$db)){
 
-		echo '<option VALUE=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']);
+		echo '<option value=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']);
 
 	}
 
@@ -49,7 +49,7 @@ if (!isset($_POST['FromPeriod']) OR !isset($_POST['ToPeriod'])){
 	while ($myrow=DB_fetch_array($Periods,$db)){
 
 		if($myrow['periodno']==$DefaultToPeriod){
-			echo '<option selected VALUE=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']);
+			echo '<option selected value=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']);
 		} else {
 			echo '<option VALUE =' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']);
 		}
@@ -72,7 +72,7 @@ if (!isset($_POST['FromPeriod']) OR !isset($_POST['ToPeriod'])){
 			$CFwd = $myrow['bfwd'] + $myrow['actual'];
 			$CFwdBudget = $myrow['bfwdbudget'] + $myrow['budget'];
 
-			echo '<br>' . _('Account Code') . ': ' . $myrow['accountcode'] . ' ' . _('Period') .': ' . $myrow['period'];
+			echo '<br />' . _('Account Code') . ': ' . $myrow['accountcode'] . ' ' . _('Period') .': ' . $myrow['period'];
 
 			$sql = "UPDATE chartdetails SET bfwd='" . $CFwd . "', bfwdbudget='" . $CFwdBudget . "' WHERE period='" . ($myrow['period'] +1) . "' AND  accountcode = '" . $myrow['accountcode'] . "'";
 

@@ -84,7 +84,7 @@ if (isset($_POST['submit']) or isset($_GET['remove']) or isset($_GET['add']) ) {
 	$myrow = DB_fetch_row($result);
 	if ($myrow[0]>0) {
 		prnMsg( _('Cannot delete this role because user accounts are setup using it'),'warn');
-		echo '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('user accounts that have this security role setting') . '</font>';
+		echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('user accounts that have this security role setting') . '</font>';
 	} else {
 		$sql="DELETE FROM securitygroups WHERE secroleid='" . $_GET['SelectedRole'] . "'";
 		$result = DB_query($sql,$db);
@@ -159,18 +159,18 @@ if (isset($SelectedRole)) {
 		$_POST['SecRoleName'] = $myrow['secrolename'];
 	}
 }
-echo '<br>';
+echo '<br />';
 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 if( isset($_POST['SelectedRole'])) {
-	echo '<input type=hidden name="SelectedRole" VALUE="' . $_POST['SelectedRole'] . '">';
+	echo '<input type=hidden name="SelectedRole" value="' . $_POST['SelectedRole'] . '">';
 }
 echo '<table class=selection>';
 if (!isset($_POST['SecRoleName'])) {
 	$_POST['SecRoleName']='';
 }
 echo '<tr><td>' . _('Role') . ':</td>
-	<td><input type="text" name="SecRoleName" size=40 maxlength=40 VALUE="' . $_POST['SecRoleName'] . '"></tr>';
+	<td><input type="text" name="SecRoleName" size=40 maxlength=40 value="' . $_POST['SecRoleName'] . '"></tr>';
 echo '</table><br />
 	<div class="centre"><input type="Submit" name="submit" value="' . _('Enter Role') . '"></div></form>';
 

@@ -295,9 +295,9 @@ echo '<table class=selection><tr><td><b>'. _('Shipment').': </td><td><b>' . $_SE
 		<td><b>'. _('From'). ' ' . $_SESSION['Shipment']->SupplierName . '</b></td></tr>';
 
 echo '<tr><td>'. _('Vessel Name /Transport Agent'). ': </td>
-	<td colspan=3><input type=Text name="Vessel" maxlength=50 size=50 VALUE="' . $_SESSION['Shipment']->Vessel . '"></td>
+	<td colspan=3><input type=Text name="Vessel" maxlength=50 size=50 value="' . $_SESSION['Shipment']->Vessel . '"></td>
 	<td>'._('Voyage Ref / Consignment Note').': </td>
-	<td><input type=Text name="VoyageRef" maxlength=20 size=20 VALUE="' . $_SESSION['Shipment']->VoyageRef . '"></td>
+	<td><input type=Text name="VoyageRef" maxlength=20 size=20 value="' . $_SESSION['Shipment']->VoyageRef . '"></td>
 </tr>';
 
 if (isset($_SESSION['Shipment']->ETA)){
@@ -308,9 +308,9 @@ if (isset($_SESSION['Shipment']->ETA)){
 
 echo '<tr><td>'. _('Expected Arrival Date (ETA)'). ': </td>';
 if (isset($_SESSION['Shipment']->ETA)) {
-	echo '<td><input type=Text class="date" alt='.$_SESSION['DefaultDateFormat'].' name="ETA" maxlength=10 size=10 VALUE="' . $ETA . '"></td>';
+	echo '<td><input type=Text class="date" alt='.$_SESSION['DefaultDateFormat'].' name="ETA" maxlength=10 size=10 value="' . $ETA . '"></td>';
 } else {
-	echo '<td><input type=Text class="date" alt='.$_SESSION['DefaultDateFormat'].' name="ETA" maxlength=10 size=10 VALUE="' . Date($_SESSION['DefaultDateFormat']) . '"></td>';
+	echo '<td><input type=Text class="date" alt='.$_SESSION['DefaultDateFormat'].' name="ETA" maxlength=10 size=10 value="' . Date($_SESSION['DefaultDateFormat']) . '"></td>';
 }
 echo '<td>'. _('Into').' ';
 
@@ -383,12 +383,12 @@ if (count($_SESSION['Shipment']->LineItems)>0){
 	$TableHeader = '<tr>
 			<th>'. _('Order'). '</th>
 			<th>'. _('Item'). '</th>
-			<th>'. _('Quantity'). '<br>'. _('Ordered'). '</th>
+			<th>'. _('Quantity'). '<br />'. _('Ordered'). '</th>
 			<th>'. _('Units'). '</th>
-			<th>'. _('Quantity').'<br>'. _('Received'). '</th>
-			<th>'. _('Quantity').'<br>'. _('Invoiced'). '</th>
+			<th>'. _('Quantity').'<br />'. _('Received'). '</th>
+			<th>'. _('Quantity').'<br />'. _('Invoiced'). '</th>
 			<th>'. $_SESSION['Shipment']->CurrCode .' '. _('Price') . '</th>
-			<th>'. _('Current'). '<br>'. _('Std Cost'). '</th></tr>';
+			<th>'. _('Current'). '<br />'. _('Std Cost'). '</th></tr>';
 
 	echo  $TableHeader;
 
@@ -427,7 +427,7 @@ if (count($_SESSION['Shipment']->LineItems)>0){
 echo '</table>';
 }//there are lines on the shipment
 
-echo '<br><div class="centre"><input type=submit name="Update" Value="'. _('Update Shipment Details') . '"></div><p>';
+echo '<br /><div class="centre"><input type=submit name="Update" Value="'. _('Update Shipment Details') . '"></div><br />';
 
 if (!isset($_POST['StockLocation'])) {
 	$_POST['StockLocation'] =$_SESSION['Shipment']->StockLocation;
@@ -461,10 +461,10 @@ if (DB_num_rows($result)>0){
 	$TableHeader = '<tr>
 			<th>'. _('Order').'</th>
 			<th>'. _('Item').'</th>
-			<th>'. _('Quantity').'<br>'. _('Ordered').'</th>
+			<th>'. _('Quantity').'<br />'. _('Ordered').'</th>
 			<th>'. _('Units').'</th>
-			<th>'. _('Quantity').'<br>'. _('Received').'</th>
-			<th>'. _('Delivery').'<br>'. _('Date').'</th>
+			<th>'. _('Quantity').'<br />'. _('Received').'</th>
+			<th>'. _('Delivery').'<br />'. _('Date').'</th>
 			</tr>';
 
 	echo  $TableHeader;

@@ -47,7 +47,7 @@ if (isset($_POST['process'])) {
 
 	if ($SelectedTabs=='') {
 		$InputError = 1;
-		prnMsg('<br>' . _('You Must First Select a Petty Cash Tab To Assign Cash'),'error');
+		prnMsg('<br />' . _('You Must First Select a Petty Cash Tab To Assign Cash'),'error');
 		$Errors[$i] = 'TabSelect';
 		$i++;
 		unset($SelectedTabs);
@@ -59,7 +59,7 @@ if (isset($_POST['Go'])) {
 	$i=1;
 	if ($Days<=0) {
 		$InputError = 1;
-		prnMsg('<br>' . _('The number of days must be a positive number'),'error');
+		prnMsg('<br />' . _('The number of days must be a positive number'),'error');
 		$Errors[$i] = 'Days';
 		$i++;
 		$Days=30;
@@ -80,7 +80,7 @@ if (isset($_POST['submit'])) {
 
 	if ($_POST['Amount']==0) {
 		$InputError = 1;
-		prnMsg('<br>' . _('An Amount must be input'),'error');
+		prnMsg('<br />' . _('An Amount must be input'),'error');
 		$Errors[$i] = 'TabCode';
 		$i++;
 	}
@@ -93,7 +93,7 @@ if (isset($_POST['submit'])) {
 	$Limit=DB_fetch_array($ResultLimit);
 
 	if (($_POST['CurrentAmount']+$_POST['Amount'])>$Limit['tablimit']){
-		prnMsg('<br>' . _('The balance after this assignment would be greater than the specified limit for this PC tab'),'warning');
+		prnMsg('<br />' . _('The balance after this assignment would be greater than the specified limit for this PC tab'),'warning');
 	}
 
 	if ($InputError !=1 AND isset($SelectedIndex) ) {
@@ -193,7 +193,7 @@ if (!isset($SelectedTabs)){
 
 	echo '</select></td></tr>';
    	echo '</td></tr></table>'; // close main table
-	echo '<br /><div class="centre"><input type=submit name=process VALUE="' . _('Accept') . '"><input type=submit name=Cancel value="' . _('Cancel') . '"></div>';
+	echo '<br /><div class="centre"><input type=submit name=process value="' . _('Accept') . '"><input type=submit name=Cancel value="' . _('Cancel') . '"></div>';
 	echo '</form>';
 
 } elseif (isset($SelectedTabs)) {
@@ -322,7 +322,7 @@ if (!isset($SelectedTabs)){
 
 		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-		echo '<p><table class=selection>'; //Main table
+		echo '<br /><table class=selection>'; //Main table
 		if (isset($_GET['SelectedIndex'])) {
 			echo '<tr><th colspan=2><font color=navy size=3>'._('Update Cash Assignment').'</font></th></tr>';
 		} else {
@@ -382,7 +382,7 @@ if (!isset($SelectedTabs)){
 
 		echo '</td></tr></table>'; // close main table
 
-		echo '<p><div class="centre"><input type=submit name=submit value="' . _('Accept') . '"><input type=submit name=Cancel value="' . _('Cancel') . '"></div>';
+		echo '<br /><div class="centre"><input type=submit name=submit value="' . _('Accept') . '"><input type=submit name=Cancel value="' . _('Cancel') . '"></div>';
 
 		echo '</form>';
 

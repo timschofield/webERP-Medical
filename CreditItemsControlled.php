@@ -29,7 +29,7 @@ if (isset($_GET['LineNo'])){
 } elseif (isset($_POST['LineNo'])){
         $LineNo = $_POST['LineNo'];
 } else {
-	echo '<div class="centre"><a href="' . $rootpath . '/' . $CreditLink . '?' . SID . '">'. _('Select Credit Items'). '</a><br><br>';
+	echo '<div class="centre"><a href="' . $rootpath . '/' . $CreditLink . '?' . SID . '">'. _('Select Credit Items'). '</a><br /><br />';
 	prnMsg( _('This page can only be opened if a Line Item on a credit note has been selected.') . ' ' . _('Please do that first'), 'error');
 	echo '</div>';
 	include('includes/footer.inc');
@@ -40,7 +40,7 @@ if (isset($_GET['LineNo'])){
 
 if (!isset($_SESSION['CreditItems'])) {
 	/* This page can only be called with a credit note entry part entered */
-	echo '<div class="centre"><a href="' . $rootpath . '/' . $CreditLink . '?' . SID . '">'. _('Select Credit Items'). '</a><br><br>';
+	echo '<div class="centre"><a href="' . $rootpath . '/' . $CreditLink . '?' . SID . '">'. _('Select Credit Items'). '</a><br /><br />';
 	prnMsg( _('This page can only be opened if a controlled credit note line item has been selected.') . ' ' . _('Please do that first'),'error');
 	echo '</div>';
 	include('includes/footer.inc');
@@ -54,7 +54,7 @@ $LineItem = &$_SESSION['CreditItems']->LineItems[$LineNo];
 //Make sure this item is really controlled
 if ( $LineItem->Controlled != 1 ){
 	echo '<div class="centre"><a href="' . $rootpath . '/' . $CreditLink . '?' . SID . '">'. _('Back to Credit Note Entry').'</a></div>';
-	echo '<br>';
+	echo '<br />';
 	prnMsg( _('Notice') . ' - ' . _('The line item must be defined as controlled to require input of the batch numbers or serial numbers being credited'),'warn');
 	include('includes/footer.inc');
 	exit;
@@ -70,12 +70,12 @@ if (isset($_GET['Delete'])){
 echo '<div class="centre">';
 
 if ($CreditLink == 'Credit_Invoice.php'){
-	echo '<input type=hidden name="CreditInvoice" VALUE="Yes">';
+	echo '<input type=hidden name="CreditInvoice" value="Yes">';
 }
 
-echo '<br><a href="' . $rootpath . '/' . $CreditLink . '?' . SID . '">'. _('Back to Credit Note Entry'). '</a>';
+echo '<br /><a href="' . $rootpath . '/' . $CreditLink . '?' . SID . '">'. _('Back to Credit Note Entry'). '</a>';
 
-echo '<br><font size=2><b>'. _('Credit of Controlled Item'). ' ' . $LineItem->StockID  . ' - ' . $LineItem->ItemDescription . ' '. _('from') .' '. $_SESSION['CreditItems']->CustomerName . '</b></font></div>';
+echo '<br /><font size=2><b>'. _('Credit of Controlled Item'). ' ' . $LineItem->StockID  . ' - ' . $LineItem->ItemDescription . ' '. _('from') .' '. $_SESSION['CreditItems']->CustomerName . '</b></font></div>';
 
 /** vars needed by InputSerialItem : **/
 $LocationOut = $_SESSION['CreditItems']->Location;

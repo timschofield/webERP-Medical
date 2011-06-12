@@ -19,7 +19,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 	include('includes/header.inc');
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print') . '" alt="" />' . ' ' . _('Print Profit and Loss Report') . '</p>';
-echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also called an Income Statment, or Statement of Operations, this is the statement that indicates how the revenue (money received from the sale of products and services before expenses are taken out, also known as the "top line") is transformed into the net income (the result after all revenues and expenses have been accounted for, also known as the "bottom line").') . '<br>'
+echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also called an Income Statment, or Statement of Operations, this is the statement that indicates how the revenue (money received from the sale of products and services before expenses are taken out, also known as the "top line") is transformed into the net income (the result after all revenues and expenses have been accounted for, also known as the "bottom line").') . '<br />'
 . _('The purpose of the income statement is to show whether the company made or lost money during the period being reported.') . '<br />'
 . _('The P&L represents a period of time. This contrasts with the Balance Sheet, which represents a single moment in time.') . '<br />'
 . _('webERP is an "accrual" based system (not a "cash based" system).  Accrual systems include items when they are invoiced to the customer, and when expenses are owed based on the supplier invoice date.') . '</div>';
@@ -37,7 +37,7 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 	$period=GetPeriod($FromDate, $db);
 
 	/*Show a form to allow input of criteria for profit and loss to show */
-	echo '<p><table class="selection">
+	echo '<br /><table class="selection">
 			<tr><td>'._('Select Period From').
 				':</td><td><select Name="FromPeriod">';
 
@@ -48,15 +48,15 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 	while ($myrow=DB_fetch_array($Periods,$db)){
 		if(isset($_POST['FromPeriod']) AND $_POST['FromPeriod']!=''){
 			if( $_POST['FromPeriod']== $myrow['periodno']){
-				echo '<option selected VALUE=' . $myrow['periodno'] . '>' .MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
+				echo '<option selected value=' . $myrow['periodno'] . '>' .MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
 			} else {
-				echo '<option VALUE=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
+				echo '<option value=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
 			}
 		} else {
 			if($myrow['lastdate_in_period']==$DefaultFromDate){
-				echo '<option selected VALUE=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
+				echo '<option selected value=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
 			} else {
-				echo '<option VALUE=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
+				echo '<option value=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
 			}
 		}
 	}
@@ -80,7 +80,7 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 	while ($myrow=DB_fetch_array($Periods,$db)){
 
 		if($myrow['periodno']==$DefaultToPeriod){
-			echo '<option selected VALUE=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
+			echo '<option selected value=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
 		} else {
 			echo '<option VALUE =' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
 		}
@@ -88,8 +88,8 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 	echo '</select></td></tr>';
 
 	echo '<tr><td>'._('Detail Or Summary').':</td><td><select Name="Detail">';
-	echo '<option selected VALUE="Summary">'._('Summary') . '</option>';
-	echo '<option selected VALUE="Detailed">'._('All Accounts') . '</option>';
+	echo '<option selected value="Summary">'._('Summary') . '</option>';
+	echo '<option selected value="Detailed">'._('All Accounts') . '</option>';
 	echo '</select></td></tr>';
 
 	echo '</table>';
@@ -115,7 +115,7 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 
 	if ($NumberOfMonths > 12){
 		include('includes/header.inc');
-		echo '<p>';
+		echo '<br />';
 		prnMsg(_('A period up to 12 months in duration can be specified') . ' - ' . _('the system automatically shows a comparative for the same period from the previous year') . ' - ' . _('it cannot do this if a period of more than 12 months is specified') . '. ' . _('Please select an alternative period range'),'error');
 		include('includes/footer.inc');
 		exit;
@@ -533,8 +533,8 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 	include('includes/header.inc');
 	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<input type=hidden name="FromPeriod" VALUE="' . $_POST['FromPeriod'] . '">
-			<input type=hidden name="ToPeriod" VALUE="' . $_POST['ToPeriod'] . '">';
+	echo '<input type=hidden name="FromPeriod" value="' . $_POST['FromPeriod'] . '">
+			<input type=hidden name="ToPeriod" value="' . $_POST['ToPeriod'] . '">';
 
 	$NumberOfMonths = $_POST['ToPeriod'] - $_POST['FromPeriod'] + 1;
 
@@ -580,7 +580,9 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 
 	$AccountsResult = DB_query($SQL,$db,_('No general ledger accounts were returned by the SQL because'),_('The SQL that failed was'));
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('General Ledger Profit Loss Inquiry') . '" alt="" />' . ' ' . _('Statement of Profit and Loss for the') . ' ' . $NumberOfMonths . ' ' . _('months to') . ' and including ' . $PeriodToDate . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' .
+			_('General Ledger Profit Loss Inquiry') . '" alt="" />' . ' ' . _('Statement of Profit and Loss for the') . ' ' .
+				$NumberOfMonths . ' ' . _('months to') . ' and including ' . $PeriodToDate . '</p>';
 
 	/*show a table of the accounts info returned by the SQL
 	Account Code ,   Account Name , Month Actual, Month Budget, Period Actual, Period Budget */

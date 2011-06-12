@@ -3,11 +3,11 @@
 
 $DirectoryLevelsDeep = 1;
 $PathPrefix = '../';
-//$PageSecurity = 1; // set security level for webERP 
+//$PageSecurity = 1; // set security level for webERP
 require($PathPrefix . 'includes/session.inc');
 
 // TBD The followiung line needs to be replace when more translations are available
-$ReportLanguage = 'en_US';					// default language file 
+$ReportLanguage = 'en_US';					// default language file
 define('DBReports','reports');			// name of the databse holding the main report information (ReportID)
 define('DBRptFields','reportfields');	// name of the database holding the report fields
 //define('FPDF_FONTPATH','../fonts/');  FPDF path to fonts directory
@@ -47,7 +47,7 @@ switch ($_POST['todo']) {
 			$title=RPT_FORMSELECT;
 			$IncludePage = 'forms/FormsList.html';
 		} else {
-			$Prefs = FetchReportDetails($ReportID);  //fetch the defaults 
+			$Prefs = FetchReportDetails($ReportID);  //fetch the defaults
 			// Update with passed parameters if so
 			// NOTE: The max number of parameters to test is currrently set at the date and 10 form specific.
 			if (isset($_GET['cr0'])) $Prefs['DateListings']['params'] = $_GET['cr0'];
@@ -105,7 +105,7 @@ switch ($_POST['todo']) {
 		// if we are here, there's been an error, report it
 		$usrMsg[] = array('message'=>$success['message'], 'level'=>$success['level']);
 		if (isset($_POST['FormFilter'])) { // then return to the form filter page
-			$Prefs = FetchReportDetails($ReportID);  //fetch the defaults 
+			$Prefs = FetchReportDetails($ReportID);  //fetch the defaults
 			// Update with passed parameters if so
 			// NOTE: The max number of parameters to test is currrently set at the date and 10 form specific.
 			if (isset($_GET['cr0'])) $Prefs['DateListings']['params'] = $_GET['cr0'];
@@ -133,19 +133,19 @@ include ( $PathPrefix . 'includes/footer.inc');
 // Begin functions
 function BuildFormList($GroupID) {
 	global $db, $ReportGroups, $FormGroups;
-	
+
 	$OutputString = '';
 	if ($GroupID=='') { // then fetchthe complete form list for all groups
 		foreach ($ReportGroups as $key=>$GName) {
 			$OutputString .= '<tr bgcolor="#CCCCCC"><td colspan="3" align="center">'.$GName.'</td></tr>';
 			$OutputString .= '<tr><td colspan="3" width="250" valign="top">';
-			$sql= "SELECT id, 
-										groupname, 
-										reportname 
-							FROM ".DBReports." 
-							WHERE defaultreport='1' 
-							AND reporttype='frm' 
-							ORDER BY groupname, 
+			$sql= "SELECT id,
+										groupname,
+										reportname
+							FROM ".DBReports."
+							WHERE defaultreport='1'
+							AND reporttype='frm'
+							ORDER BY groupname,
 												reportname";
 			$Result=DB_query($sql,$db,'','',false,true);
 			$FormList = '';
@@ -156,8 +156,8 @@ function BuildFormList($GroupID) {
 					$WriteOnce = true;
 					foreach ($FormList as $Entry) {
 						if ($Entry['groupname']==$index) { // then it's part of this listing
-							if ($WriteOnce) { $OutputString .= $value.'<br>'; $WriteOnce=false; }
-							$OutputString .= '&nbsp;&nbsp;<input type="radio" name="ReportID" value="'.$Entry['id'].'">'.$Entry['reportname'].'<br>';
+							if ($WriteOnce) { $OutputString .= $value.'<br />'; $WriteOnce=false; }
+							$OutputString .= '&nbsp;&nbsp;<input type="radio" name="ReportID" value="'.$Entry['id'].'">'.$Entry['reportname'].'<br />';
 						}
 					}
 				}
@@ -165,15 +165,15 @@ function BuildFormList($GroupID) {
 			$OutputString .= '</td></tr>';
 		}
 	} else { // fetch the forms specific to a group GroupID
-		$sql= "SELECT id, 
-									reportname 
-						FROM ".DBReports." 
-						WHERE defaultreport='1' AND groupname='".$GroupID."' 
+		$sql= "SELECT id,
+									reportname
+						FROM ".DBReports."
+						WHERE defaultreport='1' AND groupname='".$GroupID."'
 						ORDER BY reportname";
 		$Result=DB_query($sql,$db,'','',false,true);
 		$OutputString .= '<tr><td colspan="3" width="250" valign="top">';
 		while ($Forms = DB_fetch_array($Result)) {
-			$OutputString .= '<input type="radio" name="ReportID" value="'.$Forms['id'].'">'.$Forms['reportname'].'<br>';
+			$OutputString .= '<input type="radio" name="ReportID" value="'.$Forms['id'].'">'.$Forms['reportname'].'<br />';
 		}
 		$OutputString .= '</td></tr>';
 	}
@@ -182,27 +182,27 @@ function BuildFormList($GroupID) {
 
 function FetchReportDetails($ReportID) {
 	global $db;
-	$sql= "SELECT reportname, 
-								reporttype, 
-								groupname, 
-								papersize, 
+	$sql= "SELECT reportname,
+								reporttype,
+								groupname,
+								papersize,
 								paperorientation,
-								margintop, 
-								marginbottom, 
-								marginleft, 
+								margintop,
+								marginbottom,
+								marginleft,
 								marginright,
-								table1, 
-								table2, 
-								table2criteria, 
-								table3, 
-								table3criteria, 
-								table4, 
+								table1,
+								table2,
+								table2criteria,
+								table3,
+								table3criteria,
+								table4,
 								table4criteria,
-								table5, 
-								table5criteria, 
-								table6, 
+								table5,
+								table5criteria,
+								table6,
 								table6criteria
-				FROM " . DBReports . " 
+				FROM " . DBReports . "
 				WHERE id = ".$ReportID.";";
 	$Result=DB_query($sql,$db,'','',false,true);
 	$myrow=DB_fetch_assoc($Result);
@@ -220,8 +220,8 @@ function FetchReportDetails($ReportID) {
 function RetrieveFields($ReportID, $EntryType) {
 	global $db;
 	$FieldListings = '';
-	$sql= "SELECT *	FROM ".DBRptFields." 
-					WHERE reportid = '".$ReportID."' 
+	$sql= "SELECT *	FROM ".DBRptFields."
+					WHERE reportid = '".$ReportID."'
 					AND entrytype = '".$EntryType."'
 					ORDER BY seqnum";
 	$Result=DB_query($sql,$db,'','',false,true);
@@ -247,9 +247,9 @@ function BuildCriteria($FieldListings) {
 	}
 	switch (array_shift($CritBlocks)) { // determine how many text boxes to build
 		default:
-		case 0: $EndString = '<td>&nbsp;</td><td>&nbsp;</td>'; 
+		case 0: $EndString = '<td>&nbsp;</td><td>&nbsp;</td>';
 			break;
-		case 1: $EndString = '<td><input name="fromvalue'.$SeqNum.'" type="text" 
+		case 1: $EndString = '<td><input name="fromvalue'.$SeqNum.'" type="text"
 				value="'.$Params[1].'" size="21" maxlength="20"></td><td>&nbsp;</td>';
 			break;
 		case 2: $EndString = '<td><input name="fromvalue'.$SeqNum.'" type="text" value="'.$Params[1].'" size="21" maxlength="20"></td>
@@ -258,7 +258,7 @@ function BuildCriteria($FieldListings) {
 	$CriteriaString .= '<td><select name="defcritsel'.$SeqNum.'">';
 	foreach ($CritBlocks as $value) {
 		if ($Params[0]==$value) {
-			$Selected = ' selected'; 
+			$Selected = ' selected';
 		} else {
 			$Selected = '';  // find the default
 		}

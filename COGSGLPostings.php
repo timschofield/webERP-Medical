@@ -235,7 +235,7 @@ if (isset($SelectedCOGSPostingID)) {
 	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] .'">' . _('Show all cost of sales posting records') . '</a></div>';
 }
 
-echo '<p />';
+echo '<br />';
 
 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -258,7 +258,7 @@ if (isset($SelectedCOGSPostingID)) {
 	$_POST['StkCat']  = $myrow['stkcat'];
 	$_POST['SalesType'] = $myrow['salestype'];
 
-	echo '<input type=hidden name="SelectedCOGSPostingID" VALUE="' . $SelectedCOGSPostingID . '">';
+	echo '<input type=hidden name="SelectedCOGSPostingID" value="' . $SelectedCOGSPostingID . '">';
 
 }  //end of if $SelectedCOGSPostingID only do the else when a new record is being entered
 
@@ -275,9 +275,9 @@ echo '<table class=selection>
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['Area']) and $myrow['areacode']==$_POST['Area']) {
-		echo '<option selected VALUE="'.$myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
+		echo '<option selected value="'.$myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
 	} else {
-		echo '<option VALUE="'.$myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
+		echo '<option value="'.$myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
 	}
 
 } //end while loop
@@ -289,13 +289,13 @@ $result = DB_query($sql,$db);
 echo '</select></td></tr>
 				<tr><td>' . _('Stock Category') . ':</td>
 					<td><select tabindex=2 name="StkCat">
-						<option VALUE="ANY">' . _('Any Other') . '</option>';
+						<option value="ANY">' . _('Any Other') . '</option>';
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['StkCat']) and $myrow["categoryid"]==$_POST['StkCat']) {
-		echo '<option selected VALUE="'.$myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
+		echo '<option selected value="'.$myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	} else {
-		echo '<option VALUE="'.$myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
+		echo '<option value="'.$myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	}
 
 } //end while loop
@@ -308,13 +308,13 @@ $result = DB_query($sql,$db);
 echo '</select></td></tr>
 				<tr><td>' . _('Sales Type') . ' / ' . _('Price List') . ':</td>
 				<td><select tabindex=3 name="SalesType">
-					<option VALUE="AN">' . _('Any Other') . '</option>';
+					<option value="AN">' . _('Any Other') . '</option>';
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['SalesType']) and $myrow['typeabbrev']==$_POST['SalesType']) {
-		echo '<option selected VALUE="'.$myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
+		echo '<option selected value="'.$myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
 	} else {
-		echo '<option VALUE="'.$myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
+		echo '<option value="'.$myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
 	}
 
 } //end while loop
@@ -337,9 +337,9 @@ $result = DB_query($sql,$db);
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['GLCode']) and $myrow['accountcode']==$_POST['GLCode']) {
-		echo '<option selected VALUE="'.$myrow['accountcode'] . '">' . $myrow['accountcode']  . ' - '  . $myrow['accountname'] . '</option>';
+		echo '<option selected value="'.$myrow['accountcode'] . '">' . $myrow['accountcode']  . ' - '  . $myrow['accountname'] . '</option>';
 	} else {
-		echo '<option VALUE="'.$myrow['accountcode'] . '">' . $myrow['accountcode']  . ' - '  . $myrow['accountname'] . '</option>';
+		echo '<option value="'.$myrow['accountcode'] . '">' . $myrow['accountcode']  . ' - '  . $myrow['accountname'] . '</option>';
 	}
 
 } //end while loop

@@ -130,7 +130,7 @@ if (isset($_POST['submit'])) {
 		$myrow = DB_fetch_row($result);
 		if ($myrow[0]>0) {
 			prnMsg( _('Cannot delete this tax category because inventory items have been created using this tax category'),'warn');
-			echo '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('inventory items that refer to this tax category') . '</font>';
+			echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('inventory items that refer to this tax category') . '</font>';
 		} else {
 			$sql = "DELETE FROM taxauthrates WHERE taxcatid  = '" . $SelectedTaxCategory . "'";
 			$result = DB_query($sql,$db);
@@ -186,7 +186,7 @@ if (isset($_POST['submit'])) {
 		echo '</tr>';
 
 	} //END WHILE LIST LOOP
-	echo '</table><p>';
+	echo '</table><br />';
 } //end of ifs and buts!
 
 
@@ -194,7 +194,7 @@ if (isset($SelectedTaxCategory)) {
 	echo '<div class="centre"><a href=' . $_SERVER['PHP_SELF'] . '?' . SID .'>' . _('Review Tax Categories') . '</a></div>';
 }
 
-echo '<p>';
+echo '<br />';
 
 if (! isset($_GET['delete'])) {
 
@@ -218,7 +218,7 @@ if (! isset($_GET['delete'])) {
 
 			$_POST['TaxCategoryName']  = $myrow['taxcatname'];
 
-			echo '<input type=hidden name="SelectedTaxCategory" VALUE="' . $myrow['taxcatid'] . '">';
+			echo '<input type=hidden name="SelectedTaxCategory" value="' . $myrow['taxcatid'] . '">';
 			echo '<table class=selection>';
 		}
 

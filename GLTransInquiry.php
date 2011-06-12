@@ -191,7 +191,7 @@ if ( !isset($_GET['TypeID']) OR !isset($_GET['TransNo']) )
 						<td class=number>' . number_format((-$CreditTotal),2) . '</td>
 						<td colspan=2>&nbsp</td>
 					</tr>';
-				echo '</table><p>';
+				echo '</table><br />';
 		}
 
 }

@@ -11,14 +11,16 @@ if ((isset($_GET['Type']) AND $_GET['Type']=='Receipts') OR
 
 	$Type = 'Receipts';
 	$TypeName =_('Receipts');
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Bank Matching') . '" alt="" />' . ' ' . _('Bank Account Matching - Receipts') . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Bank Matching') . '" alt="" />' .
+		' ' . _('Bank Account Matching - Receipts') . '</p>';
 
 } elseif ((isset($_GET['Type']) AND $_GET['Type']=='Payments') OR
 			(isset($_POST['Type']) and $_POST['Type']=='Payments')) {
 
 	$Type = 'Payments';
 	$TypeName =_('Payments');
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_delete.png" title="' . _('Bank Matching') . '" alt="" />' . ' ' . _('Bank Account Matching - Payments') . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_delete.png" title="' . _('Bank Matching') .
+		'" alt="" />' . ' ' . _('Bank Account Matching - Payments') . '</p>';
 
 } else {
 
@@ -74,7 +76,7 @@ if (isset($_POST['Update']) AND $_POST['RowCounter']>1){
 	$_POST['ShowTransactions'] = True;
 }
 
-echo '<div class="page_help_text">' . _('Use this screen to match webERP Receipts and Payments to your Bank Statement.  Check your bank statement and click the check-box when you find the matching transaction.') . '</div><br>';
+echo '<div class="page_help_text">' . _('Use this screen to match webERP Receipts and Payments to your Bank Statement.  Check your bank statement and click the check-box when you find the matching transaction.') . '</div><br />';
 
 echo '<form action="'. $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -133,12 +135,12 @@ if ($_POST['First20_or_All']=='All'){
 echo '</select></td></tr>';
 
 
-echo '</table><br><div class="centre"><input tabindex="6" type=submit name="ShowTransactions" VALUE="' . _('Show selected') . ' ' . $TypeName . '">';
+echo '</table><br /><div class="centre"><input tabindex="6" type=submit name="ShowTransactions" value="' . _('Show selected') . ' ' . $TypeName . '">';
 
 if (isset($_POST['BankAccount'])) {
-	echo '<p><a href="'.$rootpath.'/BankReconciliation.php?Account='.$_POST['BankAccount'].'">' . _('Show reconciliation') . '</a></div>';
+	echo '<p><a href="'.$rootpath.'/BankReconciliation.php?Account='.$_POST['BankAccount'].'">' . _('Show reconciliation') . '</a></p></div>';
 } else {
-	echo '<p><a href="'.$rootpath.'/BankReconciliation.php">' . _('Show reconciliation') . '</a></div>';
+	echo '<p><a href="'.$rootpath.'/BankReconciliation.php">' . _('Show reconciliation') . '</a></p></div>';
 }
 
 $InputError=0;
@@ -260,7 +262,7 @@ if ($InputError !=1 AND isset($_POST['BankAccount']) AND $_POST['BankAccount']!=
 				<td class=number>%s</td>
 				<td class=number>%s</td>
 				<td colspan=2>%s</td>
-				<td><input type="checkbox" name="Unclear_%s"><input type=hidden name="BankTrans_%s" VALUE=%s></td>
+				<td><input type="checkbox" name="Unclear_%s"><input type=hidden name="BankTrans_%s" value=%s></td>
 				</tr>',
 				$myrow['chequeno'],
 				$myrow['ref'],
@@ -288,7 +290,7 @@ if ($InputError !=1 AND isset($_POST['BankAccount']) AND $_POST['BankAccount']!=
 				<td>%s</td>
 				<td class=number>%s</td>
 				<td class=number>%s</td>
-				<td><input type="checkbox" name="Clear_%s"><input type=hidden name="BankTrans_%s" VALUE=%s></td>
+				<td><input type="checkbox" name="Clear_%s"><input type=hidden name="BankTrans_%s" value=%s></td>
 				<td colspan=2><input type="text" maxlength=15 size=15 class=number name="AmtClear_%s"></td>
 				</tr>',
 				$myrow['chequeno'],
@@ -314,7 +316,7 @@ if ($InputError !=1 AND isset($_POST['BankAccount']) AND $_POST['BankAccount']!=
 	}
 	//end of while loop
 
-	echo '</table><br><div class="centre"><input type=hidden name="RowCounter" value=' . $i . '><input type=submit name="Update" VALUE="' . _('Update Matching') . '"></div>';
+	echo '</table><br /><div class="centre"><input type=hidden name="RowCounter" value=' . $i . '><input type=submit name="Update" value="' . _('Update Matching') . '"></div>';
 
 }
 

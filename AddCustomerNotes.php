@@ -17,7 +17,7 @@ if (isset($_POST['DebtorNo'])){
 } elseif (isset($_GET['DebtorNo'])){
 	$DebtorNo = $_GET['DebtorNo'];
 }
-echo "<a href='" . $rootpath . '/SelectCustomer.php?' . SID .'&DebtorNo='.$DebtorNo."'>" . _('Back to Select Customer') . '</a><br>';
+echo "<a href='" . $rootpath . '/SelectCustomer.php?' . SID .'&DebtorNo='.$DebtorNo."'>" . _('Back to Select Customer') . '</a><br />';
 if ( isset($_POST['submit']) ) {
 
 	//initialise no input errors assumed initially before we test
@@ -62,9 +62,9 @@ if ( isset($_POST['submit']) ) {
 
 	if ($InputError !=1) {
 		$result = DB_query($sql,$db);
-				//echo '<br>'.$sql;
+				//echo '<br />'.$sql;
 
-		echo '<br>';
+		echo '<br />';
 		prnMsg($msg, 'success');
 		unset($Id);
 		unset($_POST['note']);
@@ -81,9 +81,9 @@ if ( isset($_POST['submit']) ) {
 	$sql="DELETE FROM custnotes WHERE noteid='".$Id."'
 			and debtorno='".$DebtorNo."'";
 				$result = DB_query($sql,$db);
-						//echo '<br>'.$sql;
+						//echo '<br />'.$sql;
 
-				echo '<br>';
+				echo '<br />';
 				prnMsg( _('The contact note record has been deleted'), 'success');
 				unset($Id);
 				unset($_GET['delete']);
@@ -99,7 +99,7 @@ if (!isset($Id)) {
 
 	$sql = "SELECT * FROM custnotes where debtorno='".$DebtorNo."' ORDER BY date DESC";
 	$result = DB_query($sql,$db);
-			//echo '<br>'.$sql;
+			//echo '<br />'.$sql;
 
 	echo '<table class=selection>';
 	echo '<tr>
@@ -142,7 +142,7 @@ if (!isset($Id)) {
 if (isset($Id)) {
 	echo '<div class="centre"><a href="'.$_SERVER['PHP_SELF'] . '?' . SID .'&DebtorNo='.$DebtorNo.'"><?='._('Review all notes for this Customer').'</a></div>';
 }
-echo '<p>';
+echo '<br />';
 
 if (!isset($_GET['delete'])) {
 
@@ -156,7 +156,7 @@ if (!isset($_GET['delete'])) {
 					and debtorno='".$DebtorNo."'";
 
 		$result = DB_query($sql, $db);
-				//echo '<br>'.$sql;
+				//echo '<br />'.$sql;
 
 		$myrow = DB_fetch_array($result);
 

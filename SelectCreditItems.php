@@ -19,8 +19,8 @@ include('includes/GetPrice.inc');
 
 
 if (isset($_POST['ProcessCredit']) AND !isset($_SESSION['CreditItems'])){
-	prnMsg(_('This credit note has already been processed. Refreshing the page will not enter the credit note again') . '<br>' . _('Please use the navigation links provided rather than using the browser back button and then having to refresh'),'info');
-	echo '<br><a href="' . $rootpath . '/index.php?' . SID . '">' . _('Back to the menu') . '</a>';
+	prnMsg(_('This credit note has already been processed. Refreshing the page will not enter the credit note again') . '<br />' . _('Please use the navigation links provided rather than using the browser back button and then having to refresh'),'info');
+	echo '<br /><a href="' . $rootpath . '/index.php?' . SID . '">' . _('Back to the menu') . '</a>';
 	include('includes/footer.inc');
   exit;
 }
@@ -210,7 +210,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 	echo '<td><input type="Text" name="CustCode" size=15	maxlength=18></td>';
 	echo '</tr>';
 	echo '</table>';
-	echo '<br /><div class="centre"><input type=submit name="SearchCust" VALUE="' . _('Search Now') . '"></div>';
+	echo '<br /><div class="centre"><input type=submit name="SearchCust" value="' . _('Search Now') . '"></div>';
 
 	if (isset($result_CustSelect)) {
 
@@ -239,7 +239,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				    $k=1;
 			   }
 
-			   printf('<td><font size=1><input type=submit name="Select" VALUE="%s - %s" /></font></td>
+			   printf('<td><font size=1><input type=submit name="Select" value="%s - %s" /></font></td>
 					<td><font size=1>%s</font></td>
 					<td><font size=1>%s</font></td>
 					<td><font size=1>%s</font></td>
@@ -371,7 +371,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		if (DB_num_rows($SearchResult)==0){
 			   prnMsg(_('There are no products available that match the criteria specified'),'info');
 			   if ($debug==1){
-				    prnMsg(_('The SQL statement used was') . ':<br>' . $SQL,'info');
+				    prnMsg(_('The SQL statement used was') . ':<br />' . $SQL,'info');
 			   }
 		}
 		if (DB_num_rows($SearchResult)==1){
@@ -652,11 +652,11 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		  <th>' . _('Price') . '</th>
 		  <th>' . _('Gross') . '</th>
 		  <th>' . _('Discount') . '</th>
-		  <th>' . _('Total') . '<br>' . _('Excl Tax') . '</th>
+		  <th>' . _('Total') . '<br />' . _('Excl Tax') . '</th>
 		  <th>' . _('Tax Authority') . '</th>
-		  <th>' . _('Tax') . '<br>' . _('Rate') . '</th>
-		  <th>' . _('Tax') . '<br>' . _('Amount') . '</th>
-		  <th>' . _('Total') . '<br>' . _('Incl Tax') . '</th>
+		  <th>' . _('Tax') . '<br />' . _('Rate') . '</th>
+		  <th>' . _('Tax') . '<br />' . _('Amount') . '</th>
+		  <th>' . _('Total') . '<br />' . _('Incl Tax') . '</th>
 		  </tr>';
 
 		  $_SESSION['CreditItems']->total = 0;
@@ -685,16 +685,16 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			   			<td>' . $LineItem->ItemDescription . '</td>';
 
 			   if ($LineItem->Controlled==0){
-			   	echo '<td><input type=TEXT class="number" name="Quantity_' . $LineItem->LineNumber . '" maxlength=6 size=6 VALUE=' . $LineItem->Quantity . '></td>';
+			   	echo '<td><input type=TEXT class="number" name="Quantity_' . $LineItem->LineNumber . '" maxlength=6 size=6 value=' . $LineItem->Quantity . '></td>';
 			   } else {
 				echo '<td class=number><a href="' . $rootpath . '/CreditItemsControlled.php?' . SID . '&LineNo=' . $LineItem->LineNumber . '">' . $LineItem->Quantity . '</a>
-              <input type=hidden name="Quantity_' . $LineItem->LineNumber . '" VALUE=' . $LineItem->Quantity . '></td>';
+              <input type=hidden name="Quantity_' . $LineItem->LineNumber . '" value=' . $LineItem->Quantity . '></td>';
 			   }
 
 			echo '<td>' . $LineItem->Units . '</td>
-			<td><input type=TEXT class="number" name="Price_' . $LineItem->LineNumber . '" size=10 maxlength=12 VALUE=' . $LineItem->Price . '></td>
-			<td><input type="CheckBox" name="Gross" VALUE=False></td>
-			<td><input type=TEXT class="number" name="Discount_' . $LineItem->LineNumber . '" size=3 maxlength=3 VALUE=' . ($LineItem->DiscountPercent * 100) . '>%</td>
+			<td><input type=TEXT class="number" name="Price_' . $LineItem->LineNumber . '" size=10 maxlength=12 value=' . $LineItem->Price . '></td>
+			<td><input type="CheckBox" name="Gross" value=False></td>
+			<td><input type=TEXT class="number" name="Discount_' . $LineItem->LineNumber . '" size=3 maxlength=3 value=' . ($LineItem->DiscountPercent * 100) . '>%</td>
 			<td class=number>' . $DisplayLineTotal . '</td>';
 
 
@@ -703,7 +703,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			$i=0;
 			foreach ($_SESSION['CreditItems']->LineItems[$LineItem->LineNumber]->Taxes AS $Tax) {
 				if ($i>0){
-					echo '<br>';
+					echo '<br />';
 				}
 				echo $Tax->TaxAuthDescription;
 				$i++;
@@ -719,7 +719,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			}
 			foreach ($LineItem->Taxes AS $Tax) {
 				if ($i>0){
-					echo '<br>';
+					echo '<br />';
 				}
 				echo '<input type=text class="number" name="' . $LineItem->LineNumber . $Tax->TaxCalculationOrder . '_TaxRate" maxlength=4 size=4 value="' . $Tax->TaxRate*100 . '">';
 				$i++;
@@ -747,7 +747,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				</tr>';
 
 			echo $RowStarter;
-			echo '<td colspan=11><textarea  name="Narrative_' . $LineItem->LineNumber . '" cols=100% rows=1>' . $LineItem->Narrative . '</textarea><br></td></tr>';
+			echo '<td colspan=11><textarea  name="Narrative_' . $LineItem->LineNumber . '" cols=100% rows=1>' . $LineItem->Narrative . '</textarea><br /></td></tr>';
 
 
 			$_SESSION['CreditItems']->total = $_SESSION['CreditItems']->total + $LineTotal;
@@ -762,7 +762,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 
 		echo '<td colspan=2 class=number>'. _('Credit Freight').'</td>
-			<td><input type=TEXT class="number" size=6 maxlength=6 name=ChargeFreightCost VALUE=' . $_SESSION['CreditItems']->FreightCost . '></td>';
+			<td><input type=TEXT class="number" size=6 maxlength=6 name=ChargeFreightCost value=' . $_SESSION['CreditItems']->FreightCost . '></td>';
 
 		$FreightTaxTotal =0; //initialise tax total
 
@@ -771,7 +771,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		$i=0; // initialise the number of taxes iterated through
 		foreach ($_SESSION['CreditItems']->FreightTaxes as $FreightTaxLine) {
 			if ($i>0){
-				echo '<br>';
+				echo '<br />';
 			}
 			echo  $FreightTaxLine->TaxAuthDescription;
 			$i++;
@@ -782,10 +782,10 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		$i=0;
 		foreach ($_SESSION['CreditItems']->FreightTaxes as $FreightTaxLine) {
 			if ($i>0){
-				echo '<br>';
+				echo '<br />';
 			}
 
-			echo  '<input type=TEXT class="number" name=FreightTaxRate' . $FreightTaxLine->TaxCalculationOrder . ' maxlength=4 size=4 VALUE=' . $FreightTaxLine->TaxRate * 100 . '>';
+			echo  '<input type=TEXT class="number" name=FreightTaxRate' . $FreightTaxLine->TaxCalculationOrder . ' maxlength=4 size=4 value=' . $FreightTaxLine->TaxRate * 100 . '>';
 
 			if ($FreightTaxLine->TaxOnTax ==1){
 				$TaxTotals[$FreightTaxLine->TaxAuthID] += ($FreightTaxLine->TaxRate * ($_SESSION['CreditItems']->FreightCost + $FreightTaxTotal));
@@ -818,19 +818,19 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 /*Now show options for the credit note */
 
-		echo '<br><table class=selection><tr><td>' . _('Credit Note Type') . ' :</td><td><select name=CreditType>';
+		echo '<br /><table class=selection><tr><td>' . _('Credit Note Type') . ' :</td><td><select name=CreditType>';
 		if (!isset($_POST['CreditType']) OR $_POST['CreditType']=='Return'){
-			   echo '<option selected VALUE="Return">' . _('Goods returned to store');
-			   echo '<option VALUE="WriteOff">' . _('Goods written off');
-			   echo '<option VALUE="ReverseOverCharge">' . _('Reverse an Overcharge');
+			   echo '<option selected value="Return">' . _('Goods returned to store');
+			   echo '<option value="WriteOff">' . _('Goods written off');
+			   echo '<option value="ReverseOverCharge">' . _('Reverse an Overcharge');
 		} elseif ($_POST['CreditType']=='WriteOff') {
-			   echo '<option selected VALUE="WriteOff">' . _('Goods written off');
-			   echo '<option VALUE="Return">' . _('Goods returned to store');
-			   echo '<option VALUE="ReverseOverCharge">' . _('Reverse an Overcharge');
+			   echo '<option selected value="WriteOff">' . _('Goods written off');
+			   echo '<option value="Return">' . _('Goods returned to store');
+			   echo '<option value="ReverseOverCharge">' . _('Reverse an Overcharge');
 		} elseif($_POST['CreditType']=='ReverseOverCharge'){
-		  	echo '<option selected VALUE="ReverseOverCharge">' . _('Reverse Overcharge Only');
-			echo '<option VALUE="Return">' . _('Goods Returned To Store');
-			echo '<option VALUE="WriteOff">' . _('Good written off');
+		  	echo '<option selected value="ReverseOverCharge">' . _('Reverse Overcharge Only');
+			echo '<option value="Return">' . _('Goods Returned To Store');
+			echo '<option value="WriteOff">' . _('Good written off');
 		}
 
 		echo '</select></td></tr>';
@@ -851,9 +851,9 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			while ($myrow = DB_fetch_array($Result)) {
 
 				if ($_POST['Location']==$myrow['loccode']){
-					echo '<option selected VALUE="' . $myrow['loccode'] . '">' . $myrow['locationname'];
+					echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
 				} else {
-					echo '<option VALUE="' . $myrow['loccode'] . '">' . $myrow['locationname'];
+					echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
 				}
 			}
 			echo '</select></td></tr>';
@@ -873,9 +873,9 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			while ($myrow = DB_fetch_array($Result)) {
 
 				if ($_POST['WriteOffGLCode']==$myrow['accountcode']){
-					echo '<option selected VALUE=' . $myrow['accountcode'] . '>' . $myrow['accountcode'] . ' - ' . $myrow['accountname'];
+					echo '<option selected value=' . $myrow['accountcode'] . '>' . $myrow['accountcode'] . ' - ' . $myrow['accountname'];
 				} else {
-					echo '<option VALUE=' . $myrow['accountcode'] . '>' . $myrow['accountcode'] . ' - ' . $myrow['accountname'];
+					echo '<option value=' . $myrow['accountcode'] . '>' . $myrow['accountcode'] . ' - ' . $myrow['accountname'];
 				}
 			}
 			   echo '</select></td></tr>';
@@ -894,10 +894,10 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			prnMsg (_('The GL code to write off the credit value to must be specified. Please select the appropriate GL code for the selection box'),'info');
 			$OKToProcess = false;
 		  }
-		  echo '<div class="centre"><input type=submit name="Update" VALUE="' . _('Update') . '">
-                  				<input type=submit name="CancelCredit" VALUE="' . _('Cancel') . '" onclick="return confirm(\'' . _('Are you sure you wish to cancel the whole of this credit note?') . '\');">';
+		  echo '<div class="centre"><input type=submit name="Update" value="' . _('Update') . '">
+                  				<input type=submit name="CancelCredit" value="' . _('Cancel') . '" onclick="return confirm(\'' . _('Are you sure you wish to cancel the whole of this credit note?') . '\');">';
 		  if (!isset($_POST['ProcessCredit']) AND $OKToProcess == true){
-			echo '<input type=submit name="ProcessCredit" VALUE="' . _('Process Credit Note') . '"></div><br />';
+			echo '<input type=submit name="ProcessCredit" value="' . _('Process Credit Note') . '"></div><br />';
 		  }
 	 } # end of if lines
 
@@ -916,15 +916,15 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 		 $result1 = DB_query($SQL,$db);
 
-		 echo '<br><table class=selection>
+		 echo '<br /><table class=selection>
 		 	<tr><td>' . _('Select a stock category') . ':&nbsp;<select name="StockCat">';
 
-		 echo '<option selected VALUE="All">' . _('All');
+		 echo '<option selected value="All">' . _('All');
 		 while ($myrow1 = DB_fetch_array($result1)) {
 			  if (isset($_POST['StockCat']) and $_POST['StockCat']==$myrow1['categoryid']){
-				   echo '<option selected VALUE=' . $myrow1['categoryid'] . '>' . $myrow1['categorydescription'];
+				   echo '<option selected value=' . $myrow1['categoryid'] . '>' . $myrow1['categorydescription'];
 			  } else {
-				   echo '<option VALUE=' . $myrow1['categoryid'] . '>' . $myrow1['categorydescription'];
+				   echo '<option value=' . $myrow1['categoryid'] . '>' . $myrow1['categorydescription'];
 			  }
 		 }
 
@@ -936,16 +936,16 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		 	$_POST['StockCode'] = '';
 		 }
 		 echo '<td>' . _('Enter text extracts in the description') . ':&nbsp;</td>';
-		 echo '<td><input type="Text" name="Keywords" size=20 maxlength=25 VALUE="' . $_POST['Keywords'] . '"></td></tr>';
+		 echo '<td><input type="Text" name="Keywords" size=20 maxlength=25 value="' . $_POST['Keywords'] . '"></td></tr>';
 		 echo '<tr><td></td>';
 		 echo '<td><font SIZE 3><b>' ._('OR') . '</b></font>&nbsp;&nbsp;' . _('Enter extract of the Stock Code') . ':&nbsp;</td>';
-		 echo '<td><input type="Text" name="StockCode" size=15 maxlength=18 VALUE="' . $_POST['StockCode'] . '"></td>';
+		 echo '<td><input type="Text" name="StockCode" size=15 maxlength=18 value="' . $_POST['StockCode'] . '"></td>';
 		 echo '</tr>';
 		 echo '</table><br /><div class="centre">';
 
-		 echo '<input type=submit name="Search" VALUE="' . _('Search Now') .'">';
-		 echo '<input type=submit Name="ChangeCustomer" VALUE="' . _('Change Customer') . '">';
-		 echo '<input type=submit Name="Quick" VALUE="' . _('Quick Entry') . '">';
+		 echo '<input type=submit name="Search" value="' . _('Search Now') .'">';
+		 echo '<input type=submit Name="ChangeCustomer" value="' . _('Change Customer') . '">';
+		 echo '<input type=submit Name="Quick" value="' . _('Quick Entry') . '">';
 		 echo '</div>';
 
 		 if (isset($SearchResult)) {
@@ -977,7 +977,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 					    $k++;
 				   }
 
-				   printf('<td><font size=1><input type=submit name="NewItem" VALUE="%s"></font></td>
+				   printf('<td><font size=1><input type=submit name="NewItem" value="%s"></font></td>
                    				<td><font size=1>%s</font></td>
                    				<td><font size=1>%s</font></td>
                    				<td>%s</td></tr>',
@@ -1023,8 +1023,8 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess==true){
 	 		FROM custbranch
 			WHERE custbranch.debtorno ='". $_SESSION['CreditItems']->DebtorNo . "'
 			AND custbranch.branchcode = '" . $_SESSION['CreditItems']->Branch . "'";
-	$ErrMsg = '<br>' . _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The area cannot be determined for this customer');
-	$DbgMsg = '<br>' . _('The following SQL to insert the customer credit note was used');
+	$ErrMsg = '<br />' . _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The area cannot be determined for this customer');
+	$DbgMsg = '<br />' . _('The following SQL to insert the customer credit note was used');
 	$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg);
 
 	 if ($myrow = DB_fetch_row($Result)){
@@ -1053,7 +1053,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess==true){
 /*Start an SQL transaction */
 
 	 $ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The database does not support transactions') . ' - ' . _('A RDBMS that supports database transactions is required');
-	 $DbgMsg = '<br>' . _('The following SQL to initiate a database transaction was used');
+	 $DbgMsg = '<br />' . _('The following SQL to initiate a database transaction was used');
 
 	 $Result = DB_query("BEGIN",$db,$ErrMsg,$DbgMsg);
 
@@ -1969,14 +1969,14 @@ then debit the expense account the stock is to written off to */
 	 unset($_SESSION['CreditItems']->LineItems);
 	 unset($_SESSION['CreditItems']);
 
-	 echo _('Credit Note number') . ' ' . $CreditNo . ' ' . _('processed') . '<br>';
-	 echo '<a target="_blank" href="' . $rootpath . '/PrintCustTrans.php?FromTransNo=' . $CreditNo . '&InvOrCredit=Credit">' . _('Show this Credit Note on screen') . '</a><br>';
+	 echo _('Credit Note number') . ' ' . $CreditNo . ' ' . _('processed') . '<br />';
+	 echo '<a target="_blank" href="' . $rootpath . '/PrintCustTrans.php?FromTransNo=' . $CreditNo . '&InvOrCredit=Credit">' . _('Show this Credit Note on screen') . '</a><br />';
 	if ($_SESSION['InvoicePortraitFormat']==0){
 	 	echo '<a href="' . $rootpath . '/PrintCustTrans.php?FromTransNo=' . $CreditNo . '&InvOrCredit=Credit&PrintPDF=True">' . _('Print this Credit Note') . '</a>';
 	} else {
 		echo '<a href="' . $rootpath . '/PrintCustTransPortrait.php?FromTransNo=' . $CreditNo . '&InvOrCredit=Credit&PrintPDF=True">' . _('Print this Credit Note') . '</a>';
 	}
-	 echo '<p><a href="' . $rootpath . '/SelectCreditItems.php">' . _('Enter Another Credit Note') . '</a>';
+	 echo '<p><a href="' . $rootpath . '/SelectCreditItems.php">' . _('Enter Another Credit Note') . '</a></p>';
 
 } /*end of process credit note */
 

@@ -226,7 +226,7 @@ if (isset($_POST['RunReport'])){
 			$title = _('Print GL Accounts Report Error');
 			include('includes/header.inc');
 			prnMsg (_('There were no accounts to print out'),'error');
-			echo "<br><a href='$rootpath/index.php?" . SID . "'>" . _('Back to the menu') . '</a>';
+			echo "<br /><a href='$rootpath/index.php?" . SID . "'>" . _('Back to the menu') . '</a>';
 			include('includes/footer.inc');
 			exit;
 	      } else {
@@ -249,9 +249,10 @@ if (isset($_POST['RunReport'])){
 	include('includes/header.inc');
 	include('includes/GLPostings.inc');
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('General Ledger Account Inquiry') . '" alt="" />' . ' ' . _('General Ledger Account Report') . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' .
+		_('General Ledger Account Inquiry') . '" alt="" />' . ' ' . _('General Ledger Account Report') . '</p>';
 
-	echo '<div class="page_help_text">' . _('Use the keyboard Shift key to select multiple accounts and periods') . '</div><br>';
+	echo '<div class="page_help_text">' . _('Use the keyboard Shift key to select multiple accounts and periods') . '</div><br />';
 
 	echo "<form method='POST' action=" . $_SERVER['PHP_SELF'] . '?'  . SID . '>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -269,10 +270,10 @@ if (isset($_POST['RunReport'])){
 	$i=0;
 	while ($myrow=DB_fetch_array($AccountsResult,$db)){
 		if(isset($_POST['Account'][$i]) AND $myrow['accountcode'] == $_POST['Account'][$i]){
-			echo '<option selected VALUE=' . $myrow['accountcode'] . '>' . $myrow['accountcode'] . ' ' . $myrow['accountname'];
+			echo '<option selected value=' . $myrow['accountcode'] . '>' . $myrow['accountcode'] . ' ' . $myrow['accountname'];
 			$i++;
 		} else {
-			echo '<option VALUE=' . $myrow['accountcode'] . '>' . $myrow['accountcode'] . ' ' . $myrow['accountname'];
+			echo '<option value=' . $myrow['accountcode'] . '>' . $myrow['accountcode'] . ' ' . $myrow['accountname'];
 		}
 	}
 	echo '</select></td>';
@@ -285,10 +286,10 @@ if (isset($_POST['RunReport'])){
 
 	while ($myrow=DB_fetch_array($Periods,$db)){
 		if (isset($SelectedPeriod[$id]) and $myrow['periodno'] == $SelectedPeriod[$id]){
-			echo '<option selected VALUE=' . $myrow['periodno'] . '>' . _(MonthAndYearFromSQLDate($myrow['lastdate_in_period']));
+			echo '<option selected value=' . $myrow['periodno'] . '>' . _(MonthAndYearFromSQLDate($myrow['lastdate_in_period']));
 			$id++;
 		} else {
-			echo '<option VALUE=' . $myrow['periodno'] . '>' . _(MonthAndYearFromSQLDate($myrow['lastdate_in_period']));
+			echo '<option value=' . $myrow['periodno'] . '>' . _(MonthAndYearFromSQLDate($myrow['lastdate_in_period']));
 		}
 	}
 	echo '</select></td></tr>';
@@ -313,9 +314,9 @@ if (isset($_POST['RunReport'])){
 	echo '</select></td></tr>';
 	// End select tag
 
-	echo '</table><p>
+	echo '</table><br />
 		<div class="centre">
-			<input type=submit name="RunReport" VALUE="' ._('Run Report'). '"></div>
+			<input type=submit name="RunReport" value="' ._('Run Report'). '"></div>
 			</form>';
 
 	include ('includes/footer.inc');

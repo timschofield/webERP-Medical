@@ -89,20 +89,20 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 		$_POST['PageOffset'] = 1;
 	}
 	if ($_POST['Keywords'] AND (($_POST['CustCode']) OR ($_POST['CustPhone']) OR ($_POST['CustType']))) {
-		$msg = _('Search Result: Customer Name has been used in search') . '<br>';
+		$msg = _('Search Result: Customer Name has been used in search') . '<br />';
 		$_POST['Keywords'] = strtoupper($_POST['Keywords']);
 	}
 	if ($_POST['CustCode'] AND $_POST['CustPhone'] == "" AND isset($_POST['CustType']) AND $_POST['Keywords'] == "") {
-		$msg = _('Search Result: Customer Code has been used in search') . '<br>';
+		$msg = _('Search Result: Customer Code has been used in search') . '<br />';
 	}
 	if (($_POST['CustPhone'])) {
-		$msg = _('Search Result: Customer Phone has been used in search') . '<br>';
+		$msg = _('Search Result: Customer Phone has been used in search') . '<br />';
 	}
 	if (($_POST['CustAdd'])) {
-		$msg = _('Search Result: Customer Address has been used in search') . '<br>';
+		$msg = _('Search Result: Customer Address has been used in search') . '<br />';
 	}
 	if ($_POST['CustType'] AND $_POST['CustPhone'] == "" AND $_POST['CustCode'] == "" AND $_POST['Keywords'] == "" AND $_POST['CustAdd'] == "") {
-		$msg = _('Search Result: Customer Type has been used in search') . '<br>';
+		$msg = _('Search Result: Customer Type has been used in search') . '<br />';
 	}
 	if (($_POST['Keywords'] == "") AND ($_POST['CustCode'] == "") AND ($_POST['CustPhone'] == "") AND ($_POST['CustType'] == "") AND ($_POST['Area'] == "") AND ($_POST['CustAdd'] == "")) {
 		$SQL = "SELECT debtorsmaster.debtorno,
@@ -273,7 +273,8 @@ if ($_POST['Select'] != '' OR ($_SESSION['CustomerID'] != '' AND !isset($_POST['
 	}
 	unset($result);
 	// Adding customer encoding. Not needed for general use. This is not a recommended upgrade submission. Gilles Deacur
-	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/customer.png" title="' . _('Customer') . '" alt="" />' . ' ' . _('Customer') . ' : ' . $_SESSION['CustomerID'] . ' - ' . $CustomerName . ' - ' . $phone . _(' has been selected') . '</p>';
+	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/customer.png" title="' . _('Customer') . '" alt="" />' . ' ' .
+		_('Customer') . ' : ' . $_SESSION['CustomerID'] . ' - ' . $CustomerName . ' - ' . $phone . _(' has been selected') . '</p>';
 	echo '<div class="page_help_text">' . _('Select a menu option to operate using this customer') . '.</div><br />';
 	$_POST['Select'] = NULL;
 	echo '<table cellpadding=4 width=90% class=selection><tr><th width=33%>' . _('Customer Inquiries') . '</th>
@@ -306,7 +307,7 @@ if ($_POST['Select'] != '' OR ($_SESSION['CustomerID'] != '' AND !isset($_POST['
 	echo '</td><td class="select">';
 	echo '</td><td class="select">';
 	if (!isset($_SESSION['SalesmanLogin']) or $_SESSION['SalesmanLogin'] == '') {
-		echo '<a href="' . $rootpath . '/Customers.php?">' . _('Add a New Customer') . '</a><br>';
+		echo '<a href="' . $rootpath . '/Customers.php?">' . _('Add a New Customer') . '</a><br />';
 	}
 	echo '</td></tr></table>';
 }
@@ -432,7 +433,7 @@ if (isset($result)) {
 		}
 		echo '<input type="hidden" name="PageOffset" value="' . $_POST['PageOffset'] . '" />';
 		if ($ListPageMax > 1) {
-			echo '<p><div class=centre>&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
+			echo '<br /><div class=centre>&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
 			echo '<select name="PageOffset1">';
 			$ListPage = 1;
 			while ($ListPage <= $ListPageMax) {
@@ -508,7 +509,7 @@ if (isset($result)) {
 //end if results to show
 if (!isset($_POST['CSV'])) {
 	if (isset($ListPageMax) and $ListPageMax > 1) {
-		echo "<p><div class=centre>&nbsp;&nbsp;" . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
+		echo "<br /><div class=centre>&nbsp;&nbsp;" . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
 		echo '<select name="PageOffset2">';
 		$ListPage = 1;
 		while ($ListPage <= $ListPageMax) {

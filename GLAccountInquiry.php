@@ -21,9 +21,10 @@ if (isset($_POST['Period'])){
 	$SelectedPeriod = $_GET['Period'];
 }
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('General Ledger Account Inquiry') . '" alt="" />' . ' ' . _('General Ledger Account Inquiry') . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' .
+	_('General Ledger Account Inquiry') . '" alt="" />' . ' ' . _('General Ledger Account Inquiry') . '</p>';
 
-echo '<div class="page_help_text">' . _('Use the keyboard Shift key to select multiple periods') . '</div><br>';
+echo '<div class="page_help_text">' . _('Use the keyboard Shift key to select multiple periods') . '</div><br />';
 
 echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -37,9 +38,9 @@ $sql = "SELECT accountcode, accountname FROM chartmaster ORDER BY accountcode";
 $Account = DB_query($sql,$db);
 while ($myrow=DB_fetch_array($Account,$db)){
 	if($myrow['accountcode'] == $SelectedAccount){
-		echo '<option selected VALUE=' . $myrow['accountcode'] . '>' . $myrow['accountcode'] . ' ' . $myrow['accountname'];
+		echo '<option selected value=' . $myrow['accountcode'] . '>' . $myrow['accountcode'] . ' ' . $myrow['accountname'];
 	} else {
-		echo '<option VALUE=' . $myrow['accountcode'] . '>' . $myrow['accountcode'] . ' ' . $myrow['accountname'];
+		echo '<option value=' . $myrow['accountcode'] . '>' . $myrow['accountcode'] . ' ' . $myrow['accountname'];
 	}
  }
 echo '</select></td></tr>';
@@ -76,7 +77,7 @@ while ($myrow=DB_fetch_array($Periods,$db)){
 	}
 }
 echo '</select></td></tr><table>';
-echo '<p><div class="centre"><input type=submit name="Show" value="'._('Show Account Transactions').'"></div></form>';
+echo '<p><div class="centre"><input type=submit name="Show" value="'._('Show Account Transactions').'"></div></p></form>';
 
 /* End of the Form  rest of script is what happens if the show button is hit*/
 
@@ -145,7 +146,7 @@ if (isset($_POST['Show'])){
 	$ErrMsg = _('The transactions for account') . ' ' . $SelectedAccount . ' ' . _('could not be retrieved because') ;
 	$TransResult = DB_query($sql,$db,$ErrMsg);
 
-	echo '<br><table class=selection>';
+	echo '<br /><table class=selection>';
 
 	echo '<tr><th colspan=8><b>' ._('Transactions for account').' '.$SelectedAccount. ' - '. $SelectedAccountName.'</b></th></tr>';
 	$TableHeader = '<tr>
@@ -233,7 +234,7 @@ if (isset($_POST['Show'])){
 						<td colspan=2></td>
 						</tr>';
 				}
-				$IntegrityReport .= '<br>' . _('Period') . ': ' . $PeriodNo  . _('Account movement per transaction') . ': '  . number_format($PeriodTotal,2) . ' ' . _('Movement per ChartDetails record') . ': ' . number_format($ChartDetailRow['actual'],2) . ' ' . _('Period difference') . ': ' . number_format($PeriodTotal -$ChartDetailRow['actual'],3);
+				$IntegrityReport .= '<br />' . _('Period') . ': ' . $PeriodNo  . _('Account movement per transaction') . ': '  . number_format($PeriodTotal,2) . ' ' . _('Movement per ChartDetails record') . ': ' . number_format($ChartDetailRow['actual'],2) . ' ' . _('Period difference') . ': ' . number_format($PeriodTotal -$ChartDetailRow['actual'],3);
 
 				if (ABS($PeriodTotal -$ChartDetailRow['actual'])>0.01){
 					$ShowIntegrityReport = True;
@@ -313,7 +314,7 @@ if (isset($_POST['Show'])){
 if (isset($ShowIntegrityReport) and $ShowIntegrityReport==True){
 	if (!isset($IntegrityReport)) {$IntegrityReport='';}
 	prnMsg( _('There are differences between the sum of the transactions and the recorded movements in the ChartDetails table') . '. ' . _('A log of the account differences for the periods report shows below'),'warn');
-	echo '<p>'.$IntegrityReport;
+	echo '<br />'.$IntegrityReport;
 }
 include('includes/footer.inc');
 ?>

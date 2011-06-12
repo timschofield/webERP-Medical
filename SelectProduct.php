@@ -112,7 +112,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 			<th class="number">' . _('EOQ') . ':</th><td class="select">' . number_format($myrow['eoq'], $myrow['decimalplaces']) . '</td></tr>';
 	if (in_array($PricesSecurity, $_SESSION['AllowedPageSecurityTokens']) OR !isset($PricesSecurity)) {
 		echo '<tr><th>' . _('Sell Price') . ':</th><td class="select">';
-		$PriceResult = DB_query("SELECT sales_type as typeabbrev, price 
+		$PriceResult = DB_query("SELECT sales_type as typeabbrev, price
 													FROM prices
 													LEFT JOIN salestypes
 													ON prices.typeabbrev=salestypes.typeabbrev
@@ -698,7 +698,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 			$_POST['PageOffset'] = $ListPageMax;
 		}
 		if ($ListPageMax > 1) {
-			echo '<div class="centre"><p>&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
+			echo '<div class="centre"><br />&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
 			echo '<select name="PageOffset">';
 			$ListPage = 1;
 			while ($ListPage <= $ListPageMax) {
@@ -717,7 +717,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 			echo '<input type="hidden" name=StockCat value="'.$_POST['StockCat'].'">';
 			echo '<input type="hidden" name=StockCode value="'.$_POST['StockCode'].'">';
 //			echo '<input type=hidden name=Search value="Search">';
-			echo '<p></div>';
+			echo '<br /></div>';
 		}
 		echo '<table cellpadding="2" colspan="7">';
 		$tableheader = '<tr>

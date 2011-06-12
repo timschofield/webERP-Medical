@@ -41,7 +41,7 @@ $response = $client->send($msg);
 $answer = php_xmlrpc_decode($response->value());
 
 for ($i=0; $i<sizeof($answer); $i++) {
-	echo '<p><table border=1 width=80%><tr><th colspan=3><h4>'._('Method name')._('  -  ').'<b>'.$answer[$i].'</b></h4></th></tr>';
+	echo '<br /><table border=1 width=80%><tr><th colspan=3><h4>'._('Method name')._('  -  ').'<b>'.$answer[$i].'</b></h4></th></tr>';
 	$method = php_xmlrpc_encode($answer[$i]);
 	$msg = new xmlrpcmsg("system.methodHelp", array($method));
 
@@ -50,7 +50,7 @@ for ($i=0; $i<sizeof($answer); $i++) {
 
 	$response = $client->send($msg);
 	$signature = php_xmlrpc_decode($response->value());
-	echo $signature.'<br>';
+	echo $signature.'<br />';
 }
 
 echo '</body>';

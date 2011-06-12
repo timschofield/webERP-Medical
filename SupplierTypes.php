@@ -22,7 +22,7 @@ $Errors = array();
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Supplier Types')
 	. '" alt="" />' . _('Supplier Type Setup') . '</p>';
-echo '<div class="page_help_text">' . _('Add/edit/delete Supplier Types') . '</div><br>';
+echo '<div class="page_help_text">' . _('Add/edit/delete Supplier Types') . '</div><br />';
 
 if (isset($_POST['submit'])) {
 
@@ -143,7 +143,7 @@ if (isset($_POST['submit'])) {
 	$result = DB_query($sql,$db,$ErrMsg);
 	$myrow = DB_fetch_row($result);
 	if ($myrow[0]>0) {
-		prnMsg (_('Cannot delete this type because suppliers are currently set up to use this type') . '<br>' .
+		prnMsg (_('Cannot delete this type because suppliers are currently set up to use this type') . '<br />' .
 			_('There are') . ' ' . $myrow[0] . ' ' . _('suppliers with this type code'));
 	} else {
 
@@ -205,7 +205,7 @@ while ($myrow = DB_fetch_row($result)) {
 //end of ifs and buts!
 if (isset($SelectedType)) {
 
-	echo '<div class="centre"><p><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '">' . _('Show All Types Defined') . '</a></div><p>';
+	echo '<div class="centre"><p><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Show All Types Defined') . '</a></div></p>';
 }
 if (! isset($_GET['delete'])) {
 
@@ -230,8 +230,8 @@ if (! isset($_GET['delete'])) {
 		$_POST['typeid'] = $myrow['typeid'];
 		$_POST['typename']  = $myrow['typename'];
 
-		echo '<input type=hidden name="SelectedType" VALUE="' . $SelectedType . '" />';
-		echo '<input type=hidden name="typeid" VALUE="' . $_POST['typeid'] . '" />';
+		echo '<input type=hidden name="SelectedType" value="' . $SelectedType . '" />';
+		echo '<input type=hidden name="typeid" value="' . $_POST['typeid'] . '" />';
 
 		// We dont allow the user to change an existing type code
 
@@ -244,7 +244,7 @@ if (! isset($_GET['delete'])) {
 	}
 	echo '<tr><td>' . _('Type Name') . ':</td><td><input type="Text" name="typename2 value="' . $_POST['typename'] . '"></td></tr>';
 
-	echo '<tr><td colspan=2><p><div class="centre"><input type=submit name=submit VALUE="' . _('Accept') . '"></div>';
+	echo '<tr><td colspan=2><p><div class="centre"><input type=submit name=submit value="' . _('Accept') . '"></div></p>';
 
    	echo '</td></tr></table>'; // close main table
 

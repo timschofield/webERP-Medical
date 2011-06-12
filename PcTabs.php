@@ -48,7 +48,7 @@ if (isset($_POST['submit'])) {
 
 	if ($_POST['tabcode']=='' OR $_POST['tabcode']==' ' OR $_POST['tabcode']=='  ') {
 		$InputError = 1;
-		prnMsg('<br>' . _('The Tab code cannot be an empty string or spaces'),'error');
+		prnMsg('<br />' . _('The Tab code cannot be an empty string or spaces'),'error');
 		$Errors[$i] = 'TabCode';
 		$i++;
 	} elseif (strlen($_POST['tabcode']) >20) {
@@ -198,7 +198,7 @@ or deletion of the records*/
 				ORDER BY tabcode";
 	$result = DB_query($sql,$db);
 
-	echo '<br><table class=selection>';
+	echo '<br /><table class=selection>';
 	echo '<tr>
 		<th>' . _('Tab Code') . '</th>
 		<th>' . _('User Name') . '</th>
@@ -268,13 +268,13 @@ while ($myrow = DB_fetch_array($result)) {
 //end of ifs and buts!
 if (isset($SelectedTab)) {
 
-	echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Show All Petty Cash Tabs Defined') . '</a></div><p>';
+	echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Show All Petty Cash Tabs Defined') . '</a></div></p>';
 }
 if (!isset($_GET['delete'])) {
 
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<p><table class=selection>'; //Main table
+	echo '<br /><table class=selection>'; //Main table
 
 
 	if ( isset($SelectedTab) AND $SelectedTab!='' ) {
@@ -296,8 +296,8 @@ if (!isset($_GET['delete'])) {
 		$_POST['glaccountpcashtab']  = $myrow['glaccountpcash'];
 
 
-		echo '<input type=hidden name="SelectedTab" VALUE="' . $SelectedTab . '">';
-		echo '<input type=hidden name="tabcode" VALUE="' . $_POST['tabcode']. '">';
+		echo '<input type=hidden name="SelectedTab" value="' . $SelectedTab . '">';
+		echo '<input type=hidden name="tabcode" value="' . $_POST['tabcode']. '">';
 		echo '<table class=selection> <tr><td>' . _('Tabcode') . ':</td><td>';
 
 		// We dont allow the user to change an existing tab code
@@ -350,9 +350,9 @@ if (!isset($_GET['delete'])) {
 	echo '<option value=""></option>';
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['SelectTabs']) and $myrow['typetabcode']==$_POST['SelectTabs']) {
-			echo '<option selected VALUE="'.$myrow['typetabcode'] . '">' . $myrow['typetabcode'].' - ' . $myrow['typetabdescription'] . '</option>';
+			echo '<option selected value="'.$myrow['typetabcode'] . '">' . $myrow['typetabcode'].' - ' . $myrow['typetabdescription'] . '</option>';
 		} else {
-			echo '<option VALUE="'.$myrow['typetabcode'] . '">' . $myrow['typetabcode'].' - ' . $myrow['typetabdescription'] . '</option>';
+			echo '<option value="'.$myrow['typetabcode'] . '">' . $myrow['typetabcode'].' - ' . $myrow['typetabdescription'] . '</option>';
 		}
 
 	} //end while loop get type of tab
@@ -370,9 +370,9 @@ if (!isset($_GET['delete'])) {
 	echo '<option value=""></option>';
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['SelectCurrency']) and $myrow['currabrev']==$_POST['SelectCurrency']) {
-			echo '<option selected VALUE="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
+			echo '<option selected value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 		} else if (!isset($_POST['SelectCurrency']) and ($_SESSION['CompanyRecord']['currencydefault']==$myrow['currabrev'])) {
-			echo '<option selected VALUE="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
+			echo '<option selected value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 		} else {
 			echo '<option value=' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 		}
@@ -409,9 +409,9 @@ if (!isset($_GET['delete'])) {
 	echo '<option value=""></option>';
 	while ($myrow = DB_fetch_array($UsersResult)) {
 		if (isset($_POST['SelectAuthorizer']) and $myrow['userid']==$_POST['SelectAuthorizer']) {
-			echo '<option selected VALUE="' . $myrow['userid'] . '">' . $myrow['userid'].' - '.$myrow['realname'] . '</option>';
+			echo '<option selected value="' . $myrow['userid'] . '">' . $myrow['userid'].' - '.$myrow['realname'] . '</option>';
 		} else {
-			echo '<option VALUE="' . $myrow['userid'] . '">' . $myrow['userid'].' - '.$myrow['realname'] . '</option>';
+			echo '<option value="' . $myrow['userid'] . '">' . $myrow['userid'].' - '.$myrow['realname'] . '</option>';
 		}
 
 	} //end while loop get authorizer
@@ -431,9 +431,9 @@ if (!isset($_GET['delete'])) {
 	echo '<option value=""></option>';
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['glaccountcash']) and $myrow['accountcode']==$_POST['glaccountcash']) {
-			echo '<option selected VALUE="'.$myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
+			echo '<option selected value="'.$myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
 		} else {
-			echo '<option VALUE="'.$myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
+			echo '<option value="'.$myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
 		}
 
 	} //end while loop
@@ -452,9 +452,9 @@ if (!isset($_GET['delete'])) {
 	echo '<option value=""></option>';
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['glaccountpcashtab']) and $myrow['accountcode']==$_POST['glaccountpcashtab']) {
-			echo '<option selected VALUE="'.$myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
+			echo '<option selected value="'.$myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
 		} else {
-			echo '<option VALUE="'.$myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
+			echo '<option value="'.$myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
 		}
 
 	} //end while loop
@@ -462,7 +462,7 @@ if (!isset($_GET['delete'])) {
 	echo '</select></td></tr>';
    	echo '</td></tr></table>'; // close main table
 
-	echo '<p><div class="centre"><input type=submit name=submit VALUE="' . _('Accept') . '"><input type=submit name=Cancel VALUE="' . _('Cancel') . '"></div>';
+	echo '<br /><div class="centre"><input type=submit name=submit value="' . _('Accept') . '"><input type=submit name=Cancel value="' . _('Cancel') . '"></div>';
 
 	echo '</form>';
 

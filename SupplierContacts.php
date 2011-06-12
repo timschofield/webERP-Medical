@@ -15,15 +15,15 @@ if (isset($_GET['SupplierID'])){
 	$SupplierID = $_POST['SupplierID'];
 }
 
-echo '<a href="' . $rootpath . '/SelectSupplier.php">' . _('Back to Suppliers') . '</a><br>';
+echo '<a href="' . $rootpath . '/SelectSupplier.php">' . _('Back to Suppliers') . '</a><br />';
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' .
 	_('Supplier Allocations') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (!isset($SupplierID)) {
 	echo '<br />';
-	prnMsg(_('This page must be called with the supplier code of the supplier for whom you wish to edit the contacts') . '<br>' . _('When the page is called from within the system this will always be the case') .
-			'<br>' . _('Select a supplier first, then select the link to add/edit/delete contacts'),'info');
+	prnMsg(_('This page must be called with the supplier code of the supplier for whom you wish to edit the contacts') . '<br />' . _('When the page is called from within the system this will always be the case') .
+			'<br />' . _('Select a supplier first, then select the link to add/edit/delete contacts'),'info');
 	include('includes/footer.inc');
 	exit;
 }
@@ -48,7 +48,7 @@ if (isset($_POST['submit'])) {
 	if (strlen($_POST['Contact']) == 0) {
 		$InputError = 1;
 		prnMsg(_('The contact name must be at least one character long'),'error');
-		echo '<br>';
+		echo '<br />';
 	}
 
 
@@ -114,7 +114,7 @@ if (isset($_POST['submit'])) {
 
 	$result = DB_query($sql,$db, $ErrMsg, $DbgMsg);
 
-	echo '<br>' . _('Supplier contact has been deleted') . '<p>';
+	echo '<br />' . _('Supplier contact has been deleted') . '<p>';
 
 }
 
@@ -216,7 +216,7 @@ if (! isset($_GET['delete'])) {
 			$_POST['Contact']='';
 		}
 		echo '<table class=selection><tr><td>' . _('Contact Name') . ':</td>
-				<td><input type="Text" name="Contact" size=41 maxlength=40 VALUE="' . $_POST['Contact'] . '"></td></tr>';
+				<td><input type="Text" name="Contact" size=41 maxlength=40 value="' . $_POST['Contact'] . '"></td></tr>';
 	}
 	if (!isset($_POST['Position'])) {
 		$_POST['Position']='';
@@ -234,20 +234,20 @@ if (! isset($_GET['delete'])) {
 		$_POST['Email'] = '';
 	}
 
-	echo '<input type=hidden name="SupplierID" VALUE="' . $SupplierID . '">
+	echo '<input type=hidden name="SupplierID" value="' . $SupplierID . '">
 		<tr><td>' . _('Position') . ':</td>
-		<td><input type=text name="Position" size=31 maxlength=30 VALUE="' . $_POST['Position'] . '"></td></tr>
+		<td><input type=text name="Position" size=31 maxlength=30 value="' . $_POST['Position'] . '"></td></tr>
 		<tr><td>' . _('Telephone No') . ':</td>
-		<td><input type=text name="Tel" size=31 maxlength=30 VALUE="' . $_POST['Tel'] . '"></td></tr>
+		<td><input type=text name="Tel" size=31 maxlength=30 value="' . $_POST['Tel'] . '"></td></tr>
 		<tr><td>' . _('Facsimile No') . ':</td>
-		<td><input type=text name="Fax" size=31 maxlength=30 VALUE="' . $_POST['Fax'] . '"></td></tr>
+		<td><input type=text name="Fax" size=31 maxlength=30 value="' . $_POST['Fax'] . '"></td></tr>
 		<tr><td>' . _('Mobile No') . ':</td>
-		<td><input type=text name="Mobile" size=31 maxlength=30 VALUE="' . $_POST['Mobile'] . '"></td></tr>
+		<td><input type=text name="Mobile" size=31 maxlength=30 value="' . $_POST['Mobile'] . '"></td></tr>
 		<tr><td><a href="Mailto:' . $_POST['Email'] . '">' . _('Email') . ':</a></td>
-		<td><input type=text name="Email" size=51 maxlength=50 VALUE="' . $_POST['Email'] . '"></td></tr>
+		<td><input type=text name="Email" size=51 maxlength=50 value="' . $_POST['Email'] . '"></td></tr>
 		</table><br />';
 
-	echo '<div class="centre"><input type="Submit" name="submit" VALUE="' . _('Enter Information') . '">';
+	echo '<div class="centre"><input type="Submit" name="submit" value="' . _('Enter Information') . '">';
 	echo '</div></form>';
 
 } //end if record deleted no point displaying form to add record

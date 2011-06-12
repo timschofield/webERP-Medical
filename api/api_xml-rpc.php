@@ -12,7 +12,7 @@
 	include '../xmlrpc/lib/xmlrpcs.inc';
 
 	$Description = _('This function is used to login into the API methods for the specified the database.')
-		.'<p><b>' . _('NOTE: using this function means that the User Name and Password fields in the following functions are no longer required.  When calling those functions, leave the last two parameters off.') . '</b>';
+		.'<p><b>' . _('NOTE: using this function means that the User Name and Password fields in the following functions are no longer required.  When calling those functions, leave the last two parameters off.') . '</b></p>';
 	$Parameter[0]['name'] = _('Database Name');
 	$Parameter[0]['description'] = _('The name of the database to use for the transactions to come. ');
 	$Parameter[1]['name'] = _('User name');
@@ -64,7 +64,7 @@
 			._('The field names can be found ').'<a href="../../Z_DescribeTable.php?table=debtorsmaster">'._('here ').'</a>'
 			._('and are case sensitive. ')._('The values should be of the correct type, and the api will check them before updating the database. ')
 			._('It is not necessary to include all the fields in this parameter, the database default value will be used if the field is not given.')
-			.'<p>'._('If the Create Debtor Codes Automatically flag is set, then anything sent in the debtorno field will be ignored, and the debtorno field will be set automatically.');
+			.'<p>'._('If the Create Debtor Codes Automatically flag is set, then anything sent in the debtorno field will be ignored, and the debtorno field will be set automatically.').'</p>';
 	$Parameter[1]['name'] = _('User name');
 	$Parameter[1]['description'] = _('A valid weberp username. This user should have security access  to this data.');
 	$Parameter[2]['name'] = _('User password');
@@ -137,7 +137,7 @@
 			._('The field names can be found ').'<a href="../../Z_DescribeTable.php?table=debtorsmaster">'._('here ').'</a>'
 			._('and are case sensitive. ')._('The values should be of the correct type, and the api will check them before updating the database. ')
 			._('It is not necessary to include all the fields in this parameter, the database default value will be used if the field is not given.')
-			.'<p>'._('The debtorno must already exist in the weberp database.');
+			.'<p>'._('The debtorno must already exist in the weberp database.') . '</p>';
 	$Parameter[1]['name'] = _('User name');
 	$Parameter[1]['description'] = _('A valid weberp username. This user should have security access  to this data.');
 	$Parameter[2]['name'] = _('User password');
@@ -174,7 +174,7 @@
 			._('The field names can be found ').'<a href="../../Z_DescribeTable.php?table=custbranch">'._('here ').'</a>'
 			._('and are case sensitive. ')._('The values should be of the correct type, and the api will check them before updating the database. ')
 			._('It is not necessary to include all the fields in this parameter, the database default value will be used if the field is not given.')
-			.'<p>'._('The branchcode/debtorno combination must already exist in the weberp database.');
+			.'<p>'._('The branchcode/debtorno combination must already exist in the weberp database.') . '</p>';
 	$Parameter[1]['name'] = _('User name');
 	$Parameter[1]['description'] = _('A valid weberp username. This user should have security access  to this data.');
 	$Parameter[2]['name'] = _('User password');
@@ -214,7 +214,7 @@
 	$Parameter[2]['description'] = _('The weberp password associated with this user name. ');
 	$ReturnValue[0] = _('If successful this function returns an array of branch codes, which may be strings or integers. ')
 			._('If the first element is zero then the function was successful.').'<p>'
-			._('Otherwise an array of error codes is returned. ');
+			._('Otherwise an array of error codes is returned. ') . '</p>';
 
 /*E*/	$GetCustomerBranchCodes_sig = array(array($xmlrpcStruct,$xmlrpcString),
 /*x*/					array($xmlrpcStruct,$xmlrpcString,$xmlrpcString,$xmlrpcString));
@@ -251,7 +251,7 @@
 			._('The key will be identical with field name from the ')
 			.'<a href="../../Z_DescribeTable.php?table=custbranch">'._('custbranch table. ').'</a>'
 			._('All fields will be in the set regardless of whether the value was set.').'<p>'
-			._('Otherwise an array of error codes is returned. ');
+			._('Otherwise an array of error codes is returned. ') . '</p>';
 
 /*E*/	$GetCustomerBranch_sig = array(array($xmlrpcStruct,$xmlrpcString,$xmlrpcString),
 /*x*/					array($xmlrpcStruct,$xmlrpcString,$xmlrpcString,$xmlrpcString,$xmlrpcString));
@@ -286,7 +286,7 @@
 	$Parameter[2]['description'] = _('The weberp password associated with this user name. ');
 	$ReturnValue[0] = _('If successful this function returns a set of key/value pairs containing the details of this customer. ')
 			._('The key will be identical with field name from the debtorsmaster table. All fields will be in the set regardless of whether the value was set.').'<p>'
-			._('Otherwise an array of error codes is returned. ');
+			._('Otherwise an array of error codes is returned. ') . '</p>';
 
 /*E*/	$GetCustomer_sig = array(array($xmlrpcStruct,$xmlrpcString),
 /*x*/					array($xmlrpcStruct,$xmlrpcString,$xmlrpcString,$xmlrpcString));
@@ -701,7 +701,7 @@
 	$Parameter[2]['description'] = _('The weberp password associated with this user name. ');
 	$ReturnValue[0] = _('If successful this function returns a set of key/value pairs containing the details of this stock item. ')
 			._('The key will be identical with field name from the stockmaster table. All fields will be in the set regardless of whether the value was set.').'<p>'
-			._('Otherwise an array of error codes is returned. ');
+			._('Otherwise an array of error codes is returned. ') . '</p>';
 
 /*E*/	$GetStockItem_sig = array(array($xmlrpcStruct,$xmlrpcString),
 /*x*/					array($xmlrpcStruct,$xmlrpcString,$xmlrpcString,$xmlrpcString));
@@ -2091,7 +2091,7 @@
 			._('The field names can be found ').'<a href="../../Z_DescribeTable.php?table=suppliers">'._('here ').'</a>'
 			._('and are case sensitive. ')._('The values should be of the correct type, and the api will check them before updating the database. ')
 			._('It is not necessary to include all the fields in this parameter, the database default value will be used if the field is not given.')
-			.'<p>'._('The supplierid must already exist in the weberp database.');
+			.'<p>'._('The supplierid must already exist in the weberp database.') . '</p>';
 	$Parameter[1]['name'] = _('User name');
 	$Parameter[1]['description'] = _('A valid weberp username. This user should have security access  to this data.');
 	$Parameter[2]['name'] = _('User password');
@@ -2131,7 +2131,7 @@
 	$Parameter[2]['description'] = _('The weberp password associated with this user name. ');
 	$ReturnValue[0] = _('If successful this function returns a set of key/value pairs containing the details of this supplier. ')
 			._('The key will be identical with field name from the suppliers table. All fields will be in the set regardless of whether the value was set.').'<p>'
-			._('Otherwise an array of error codes is returned. ');
+			._('Otherwise an array of error codes is returned. ') . '</p>';
 
 /*E*/	$GetSupplier_sig = array(array($xmlrpcStruct,$xmlrpcString),
 /*x*/					array($xmlrpcStruct,$xmlrpcString,$xmlrpcString,$xmlrpcString));

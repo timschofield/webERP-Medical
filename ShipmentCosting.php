@@ -20,7 +20,7 @@ if (isset($_GET['NewShipment']) and $_GET['NewShipment']=='Yes'){
 
 if (!isset($_GET['SelectedShipment'])){
 
-	echo '<br>';
+	echo '<br />';
 	prnMsg( _('This page is expected to be called with the shipment number to show the costing for'), 'error');
 	include ("includes/footer.inc");
 	exit;
@@ -40,14 +40,14 @@ $ShipmentHeaderSQL = "SELECT shipments.supplierid,
 $ErrMsg = _('Shipment').' '. $_GET['SelectedShipment'] . ' ' . _('cannot be retrieved because a database error occurred');
 $GetShiptHdrResult = DB_query($ShipmentHeaderSQL,$db, $ErrMsg);
 if (DB_num_rows($GetShiptHdrResult)==0) {
-	echo '<br>';
+	echo '<br />';
 	prnMsg( _('Shipment') . ' ' . $_GET['SelectedShipment'] . ' ' . _('could not be located in the database') , 'error');
 	include ("includes/footer.inc");
 	exit;
 }
 
 $HeaderData = DB_fetch_array($GetShiptHdrResult);
-echo '<br>';
+echo '<br />';
 echo '<table class=selection>';
 echo '<tr><th colspan=4><font size=3 color=navy>'._('Shipment Details').'</font></th></tr>';
 echo '<tr>
@@ -73,7 +73,7 @@ $sql = "SELECT SUM(value) FROM shipmentcharges WHERE stockid='' AND shiptref ='"
 $ErrMsg = _('Shipment') . ' ' . $_GET['SelectedShipment'] . ' ' . _('general costs cannot be retrieved from the database');
 $GetShiptCostsResult = DB_query($sql,$db, $ErrMsg);
 if (DB_num_rows($GetShiptCostsResult)==0) {
-	echo '<br>';
+	echo '<br />';
 	prnMsg ( _('No General Cost Records exist for Shipment') . ' ' . $_GET['SelectedShipment'] . ' ' . _('in the database'), 'error');
 	include ('includes/footer.inc');
 	exit;
@@ -90,7 +90,7 @@ $sql = "SELECT SUM(value) FROM shipmentcharges WHERE stockid<>'' AND shiptref ='
 $ErrMsg = _('Shipment') . ' ' . $_GET['SelectedShipment'] . ' ' . _('Item costs cannot be retrieved from the database');
 $GetShiptCostsResult = DB_query($sql,$db);
 if (DB_error_no($db) !=0 OR DB_num_rows($GetShiptCostsResult)==0) {
-	echo '<br>';
+	echo '<br />';
 	prnMsg ( _('No Item Cost Records exist for Shipment') . ' ' . $_GET['SelectedShipment'] . ' ' . _('in the database'), 'error');
 	include ('includes/footer.inc');
 	exit;
@@ -137,12 +137,12 @@ if (db_num_rows($LineItemsResult) > 0) {
 		echo '<tr><th colspan=9><font color=navy size=3>' . _('Items on shipment'). '</font></th></tr>';
 
 	$TableHeader = '<tr>	<th>'. _('Item'). '</th>
-				<th>'. _('Quantity'). '<br>'. _('Invoiced'). '</th>
-				<th>'. _('Quantity'). '<br>'. _('Received'). '</th>
-				<th>'. _('Invoiced'). '<br>'. _('Charges'). '</th>
-				<th>'. _('Shipment'). '<br>'. _('Charges'). '</th>
-				<th>'. _('Shipment'). '<br>'. _('Cost'). '</th>
-				<th>'. _('Standard'). '<br>'. _('Cost'). '</th>
+				<th>'. _('Quantity'). '<br />'. _('Invoiced'). '</th>
+				<th>'. _('Quantity'). '<br />'. _('Received'). '</th>
+				<th>'. _('Invoiced'). '<br />'. _('Charges'). '</th>
+				<th>'. _('Shipment'). '<br />'. _('Charges'). '</th>
+				<th>'. _('Shipment'). '<br />'. _('Cost'). '</th>
+				<th>'. _('Standard'). '<br />'. _('Cost'). '</th>
 				<th>'. _('Variance'). '</th>
 				<th>%</th></tr>';
 	echo  $TableHeader;
@@ -514,7 +514,7 @@ $TableHeader = '<tr>
 		<th>'. _('Ref'). '</th>
 		<th>'. _('Date'). '</th>
 		<th>'. _('Item'). '</th>
-		<th>'. _('Local Amount'). '<br>'. _('Charged'). '</th></tr>';
+		<th>'. _('Local Amount'). '<br />'. _('Charged'). '</th></tr>';
 
 echo  $TableHeader;
 
@@ -584,7 +584,7 @@ $TableHeader = '<tr>
 		<th>'. _('Type'). '</th>
 		<th>'. _('Ref'). '</th>
 		<th>'. _('Date'). '</th>
-		<th>'. _('Local Amount'). '<br>'. _('Charged'). '</th></tr>';
+		<th>'. _('Local Amount'). '<br />'. _('Charged'). '</th></tr>';
 
 echo  $TableHeader;
 
@@ -631,10 +631,10 @@ if ( isset($_GET['Close'])) { /* Only an opportunity to confirm user wishes to c
 		if ($_SESSION['WeightedAverageCosting']==0){
 		/* We are standard costing - so show the option to update costs - under W. Avg cost updates are implicit */
 			echo _('Update Standard Costs') .':<select name="UpdateCost">
-			<option selected VALUE="Yes">'. _('Yes') . '
-		<option VALUE="No">'. _('No').'</select>';
+			<option selected value="Yes">'. _('Yes') . '
+		<option value="No">'. _('No').'</select>';
 		}
-	echo '<br><br><input type=submit name="Close" VALUE="'. _('Confirm OK to Close'). '">';
+	echo '<br /><br /><input type=submit name="Close" value="'. _('Confirm OK to Close'). '">';
 	echo '</form></div>';
 }
 
@@ -663,14 +663,14 @@ if ( isset($_POST['Close']) ){ /* OK do the shipment close journals */
 	$result = DB_query("UPDATE shipments SET closed=1 WHERE shiptref='" .$_GET['SelectedShipment']. "'",$db,_('Could not update the shipment to closed'),'',TRUE);
 	$result = DB_Txn_Commit($db);
 
-	echo '<br><br>';
+	echo '<br /><br />';
 	prnMsg( _('Shipment'). ' ' . $_GET['SelectedShipment'] . ' ' . _('has been closed') );
 	if ($_SESSION['CompanyRecord']['gllink_stock']==1) {
-		echo '<br>';
+		echo '<br />';
 		prnMsg ( _('All variances were posted to the general ledger') );
 	}
 	If ($_POST['UpdateCost']=='Yes'){
-		echo '<br>';
+		echo '<br />';
 		prnMsg ( _('All shipment items have had their standard costs updated') );
 	}
 }

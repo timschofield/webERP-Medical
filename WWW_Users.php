@@ -332,12 +332,12 @@ if (!isset($SelectedUser)) {
 					$myrow['userid']);
 
 	} //END WHILE LIST LOOP
-	echo '</table><br>';
+	echo '</table><br />';
 } //end of ifs and buts!
 
 
 if (isset($SelectedUser)) {
-	echo "<div class='centre'><a href='" . $_SERVER['PHP_SELF'] ."?" . SID . "'>" . _('Review Existing Users') . '</a></div><br>';
+	echo "<div class='centre'><a href='" . $_SERVER['PHP_SELF'] ."?" . SID . "'>" . _('Review Existing Users') . '</a></div><br />';
 }
 
 echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . "?" . SID . ">";
@@ -516,10 +516,10 @@ echo '<tr><td>' . _('Customer Code') . ':</td>
 	<td><input type="text" name="Cust" size=10 maxlength=10 value="' . $_POST['Cust'] . '"></td></tr>';
 
 echo '<tr><td>' . _('Branch Code') . ':</td>
-	<td><input type="text" name="BranchCode" size=10 maxlength=10 VALUE="' . $_POST['BranchCode'] .'"></td></tr>';
+	<td><input type="text" name="BranchCode" size=10 maxlength=10 value="' . $_POST['BranchCode'] .'"></td></tr>';
 
 echo '<tr><td>' . _('Supplier Code') . ':</td>
-	<td><input type="text" name="SupplierID" size=10 maxlength=10 VALUE="' . $_POST['SupplierID'] .'"></td></tr>';
+	<td><input type="text" name="SupplierID" size=10 maxlength=10 value="' . $_POST['SupplierID'] .'"></td></tr>';
 
 echo '<tr><td>' . _('Restrict to Sales Person') . ':</td>
 	<td><select name="Salesman">';
@@ -679,7 +679,7 @@ if ($_POST['Blocked']==0){
 }
 echo '</select></td></tr>';
 
-echo '</table><br>
+echo '</table><br />
 	<div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '"></div>
 	</form>';
 

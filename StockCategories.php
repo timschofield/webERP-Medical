@@ -179,7 +179,7 @@ if (isset($_POST['submit'])) {
 	$myrow = DB_fetch_row($result);
 	if ($myrow[0]>0) {
 		prnMsg(_('Cannot delete this stock category because stock items have been created using this stock category') .
-			'<br> ' . _('There are') . ' ' . $myrow[0] . ' ' . _('items referring to this stock category code'),'warn');
+			'<br /> ' . _('There are') . ' ' . $myrow[0] . ' ' . _('items referring to this stock category code'),'warn');
 
 	} else {
 		$sql = "SELECT COUNT(*) FROM salesglpostings WHERE stkcat='$SelectedCategory'";
@@ -213,7 +213,7 @@ or deletion of the records*/
 	$sql = "SELECT * FROM stockcategory WHERE stocktype<>'".'A'."'";
 	$result = DB_query($sql,$db);
 
-	echo "<br><table class=selection>\n";
+	echo "<br /><table class=selection>\n";
 	echo '<tr><th>' . _('Cat Code') . '</th>
             <th>' . _('Description') . '</th>
             <th>' . _('Type') . '</th>
@@ -265,13 +265,13 @@ or deletion of the records*/
 
 ?>
 
-<p>
+<br />
 <?php
 if (isset($SelectedCategory)) {  ?>
 	<div class='centre'><a href="<?php echo $_SERVER['PHP_SELF'] . '?' . SID;?>"><?php echo _('Show All Stock Categories'); ?></a></div>
 <?php } ?>
 
-<p>
+<br />
 
 <?php
 
@@ -471,8 +471,8 @@ if (! isset($_GET['delete'])) {
 
 		$result = DB_query($sql, $db);
 
-/*		echo '<br>Number of rows returned by the sql = ' . DB_num_rows($result) .
-			'<br>The SQL was:<br>' . $sql;
+/*		echo '<br />Number of rows returned by the sql = ' . DB_num_rows($result) .
+			'<br />The SQL was:<br />' . $sql;
 */
 		echo '<br /><table class=selection>';
 		$TableHeader = '<tr><th>' . _('Property Label') . '</th>

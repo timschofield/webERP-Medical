@@ -20,7 +20,7 @@ if (isset($_POST['ShowGraphUsage'])) {
 	echo '<meta http-equiv="Refresh" content="0; url=' . $rootpath . '/StockUsageGraph.php?StockLocation=' . $_POST['StockLocation']  . '&StockID=' . $StockID . '">';
 	echo '<p>' . _('You should automatically be forwarded to the usage graph') .
 			'. ' . _('If this does not happen') .' (' . _('if the browser does not support META Refresh') . ') ' .
-			'<a href="' . $rootpath . '/StockUsageGraph.php?StockLocation=' . $_POST['StockLocation'] .'&StockID=' . $StockID . '">' . _('click here') . '</a> ' . _('to continue') . '.<br />';
+			'<a href="' . $rootpath . '/StockUsageGraph.php?StockLocation=' . $_POST['StockLocation'] .'&StockID=' . $StockID . '">' . _('click here') . '</a> ' . _('to continue') . '.</p><br />';
 	exit;
 }
 
@@ -46,7 +46,7 @@ if (($myrow[2]=='K') OR ($myrow[2]=='A') OR ($myrow[2]=='D')) {
 	$Its_A_KitSet_Assembly_Or_Dummy =True;
 	echo '<font color=navy size=3><b>' . $StockID - $myrow[0] . '</b></font>';
 
-	echo '<br>' . _('The selected item is a dummy or assembly or kit-set item and cannot have a stock holding') . '. ' . _('Please select a different item');
+	echo '<br />' . _('The selected item is a dummy or assembly or kit-set item and cannot have a stock holding') . '. ' . _('Please select a different item');
 
 	$StockID = '';
 } else {
@@ -84,8 +84,8 @@ if (isset($_POST['StockLocation'])){
 }
 echo '</select>';
 
-echo ' <input type=submit name="ShowUsage" VALUE="' . _('Show Stock Usage') . '">';
-echo ' <input type=submit name="ShowGraphUsage" VALUE="' . _('Show Graph Of Stock Usage') . '"></td></tr></table><br />';
+echo ' <input type=submit name="ShowUsage" value="' . _('Show Stock Usage') . '">';
+echo ' <input type=submit name="ShowGraphUsage" value="' . _('Show Graph Of Stock Usage') . '"></td></tr></table><br />';
 
 /* $_SESSION['NumberOfPeriodsOfStockUsage']  is defined in config.php as a user definable variable
 config.php is loaded by header.inc */
@@ -129,7 +129,7 @@ if (isset($_POST['ShowUsage'])){
 	if (DB_error_no($db) !=0) {
 		echo _('The stock usage for the selected criteria could not be retrieved because') . ' - ' . DB_error_msg($db);
 		if ($debug==1){
-		echo '<br>' . _('The SQL that failed was') . $sql;
+		echo '<br />' . _('The SQL that failed was') . $sql;
 		}
 		exit;
 	}
@@ -173,10 +173,10 @@ if (isset($_POST['ShowUsage'])){
 
 echo '<br /><div class="centre">';
 echo '<a href="' . $rootpath . '/StockStatus.php?StockID=$StockID">' . _('Show Stock Status') .'</a>';
-echo '<br><a href="' . $rootpath . '/StockMovements.php?StockID=' . $StockID . '&StockLocation=' . $_POST['StockLocation'] . '">' . _('Show Stock Movements') . '</a>';
-echo '<br><a href="' . $rootpath . '/SelectSalesOrder.php?SelectedStockItem=$StockID&StockLocation=' . $_POST['StockLocation'] . '">' . _('Search Outstanding Sales Orders') . '</a>';
-echo '<br><a href="' . $rootpath . '/SelectCompletedOrder.php?SelectedStockItem=$StockID">' . _('Search Completed Sales Orders') . '</a>';
-echo '<br><a href="' . $rootpath . '/PO_SelectOSPurchOrder.php?SelectedStockItem=$StockID">' . _('Search Outstanding Purchase Orders') . '</a>';
+echo '<br /><a href="' . $rootpath . '/StockMovements.php?StockID=' . $StockID . '&StockLocation=' . $_POST['StockLocation'] . '">' . _('Show Stock Movements') . '</a>';
+echo '<br /><a href="' . $rootpath . '/SelectSalesOrder.php?SelectedStockItem=$StockID&StockLocation=' . $_POST['StockLocation'] . '">' . _('Search Outstanding Sales Orders') . '</a>';
+echo '<br /><a href="' . $rootpath . '/SelectCompletedOrder.php?SelectedStockItem=$StockID">' . _('Search Completed Sales Orders') . '</a>';
+echo '<br /><a href="' . $rootpath . '/PO_SelectOSPurchOrder.php?SelectedStockItem=$StockID">' . _('Search Outstanding Purchase Orders') . '</a>';
 
 echo '</form></div>';
 include('includes/footer.inc');

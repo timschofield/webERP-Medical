@@ -58,7 +58,7 @@ if (isset($_POST['submit'])) {
 	$sql="UPDATE stockmaster SET discountcategory='' WHERE stockid='" . trim(strtoupper($_GET['StockID'])) ."'";
 	$result = DB_query($sql,$db);
 	prnMsg( _('The stock master record has been updated to no discount category'),'success');
-	echo '<br>';
+	echo '<br />';
 } elseif (isset($_POST['submitcategory'])) {
 	$sql="UPDATE stockmaster
 		SET discountcategory='".$_POST['DiscountCategory']."'
@@ -87,7 +87,7 @@ if (isset($_POST['selectchoice'])) {
 		}
 
 		echo '</select></td>';
-		echo '<td><input type="submit" name="select" value="'._('Select').'"></td></tr></table><br>';
+		echo '<td><input type="submit" name="select" value="'._('Select').'"></td></tr></table><br />';
 	}
 
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
@@ -123,7 +123,7 @@ if (isset($_POST['selectchoice'])) {
 
 		echo '</table>';
 
-		echo '<br><div class="centre"><input type="Submit" name="submit" value="'. _('Update Item') .'"></div>';
+		echo '<br /><div class="centre"><input type="Submit" name="submit" value="'. _('Update Item') .'"></div>';
 
 		if (isset($_POST['search'])) {
 			if ($_POST['PartID']!='' and $_POST['PartDesc']=='')
@@ -135,9 +135,9 @@ if (isset($_POST['selectchoice'])) {
 				 description LIKE '%".$_POST['PartDesc']."%'";
 			$result=DB_query($sql,$db);
 			if (!isset($_POST['stockID'])) {
-				echo _('Select a part code').':<br>';
+				echo _('Select a part code').':<br />';
 				while ($myrow=DB_fetch_array($result)) {
-					echo '<input type="submit" name="stockID" value="'.$myrow['stockid'].'"><br>';
+					echo '<input type="submit" name="stockID" value="'.$myrow['stockid'].'"><br />';
 				}
 			}
 		}
@@ -154,7 +154,7 @@ if (isset($_POST['selectchoice'])) {
 			echo '<option value="'.$myrow['categoryid'].'">'.$myrow['categorydescription'].'</option>';
 		}
 		echo '</select></td></tr></table>';
-		echo '<br><div class="centre"><input type="Submit" name="submitcategory" value="'. _('Update Items') .'"></div>';
+		echo '<br /><div class="centre"><input type="Submit" name="submitcategory" value="'. _('Update Items') .'"></div>';
 	}
 	echo '</form>';
 
@@ -182,7 +182,7 @@ if (isset($_POST['selectchoice'])) {
 
 		$result = DB_query($sql,$db);
 
-		echo '<br><table class=selection>';
+		echo '<br /><table class=selection>';
 		echo '<tr>
 			<th>'. _('Discount Category') .'</th>
 			<th>'. _('Item') .'</th></tr>';
@@ -214,7 +214,7 @@ if (isset($_POST['selectchoice'])) {
 
 	} else { /* $_POST['DiscCat'] ==0 */
 
-		echo '</div><br>';
+		echo '</div><br />';
 		prnMsg( _('There are currently no discount categories defined') . '. ' . _('Enter a two character abbreviation for the discount category and the stock code to which this category will apply to. Discount rules can then be applied to this discount category'),'info');
 	}
 }
@@ -227,7 +227,7 @@ if (!isset($_POST['selectchoice'])) {
 	echo '<td><select name="chooseoption" onChange="ReloadForm(choose.selectchoice)">';
 	echo '<option value="1">'._('a single stock item').'</option>';
 	echo '<option value="2">'._('a complete stock category').'</option>';
-	echo '</select></td></tr></table><br>';
+	echo '</select></td></tr></table><br />';
 	echo '<div class="centre"><input type="submit" name="selectchoice" value="'._('Select').'"></div>';
 }
 

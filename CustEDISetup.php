@@ -8,7 +8,7 @@ include('includes/session.inc');
 $title = _('Customer EDI Set Up');
 include('includes/header.inc');
 
-echo "<a href='" . $rootpath . '/SelectCustomer.php?' . SID . "'>" . _('Back to Customers') . '</a><br>';
+echo "<a href='" . $rootpath . '/SelectCustomer.php?' . SID . "'>" . _('Back to Customers') . '</a><br />';
 
 if (isset($Errors)) {
 	unset($Errors);
@@ -73,7 +73,7 @@ if (isset($_POST['submit'])) {
 
 echo "<form method='post' action='" . $_SERVER['PHP_SELF'] . '?' . SID ."'>";
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<br><table class=selection>';
+echo '<br /><table class=selection>';
 
 $sql = "SELECT debtorno,
 		name,
@@ -101,11 +101,11 @@ echo '<tr><td>'._('Enable Sending of EDI Invoices').':</td>
 
 if ($myrow['ediinvoices']==0){
 
-	echo '<option selected VALUE=0>'._('Disabled');
-	echo '<option VALUE=1>'._('Enabled');
+	echo '<option selected value=0>'._('Disabled');
+	echo '<option value=1>'._('Enabled');
 } else {
-	echo '<option VALUE=0>'._('Disabled');
-	echo '<option selected VALUE=1>'._('Enabled');
+	echo '<option value=0>'._('Disabled');
+	echo '<option selected value=1>'._('Enabled');
 }
 
 echo "</select><a href='$rootpath/EDIMessageFormat.php?" . SID . "&MessageType=INVOIC&PartnerCode=" . $_SESSION['CustomerID'] . "'>"._('Create') . '/' . _('Edit Invoice Message Format').'</a></td></tr>';
@@ -115,11 +115,11 @@ echo '<tr><td>'._('Enable Receiving of EDI Orders').":</td>
 
 if ($myrow['ediorders']==0){
 
-	echo '<option selected VALUE=0>'._('Disabled');
-	echo '<option VALUE=1>'._('Enabled');
+	echo '<option selected value=0>'._('Disabled');
+	echo '<option value=1>'._('Enabled');
 } else {
-	echo '<option VALUE=0>'._('Disabled');
-	echo '<option selected VALUE=1>'._('Enabled');
+	echo '<option value=0>'._('Disabled');
+	echo '<option selected value=1>'._('Enabled');
 }
 
 echo '</select></td></tr>';
@@ -153,7 +153,7 @@ if ($myrow['editransport']=='ftp'){
 			<td><input tabindex=7 type='Text' name='EDIServerPwd' size=20 maxlength=20 value='" . $myrow['ediserverpwd'] . "'></td></tr>";
 }
 
-echo "</table><br><div class='centre'><input tabindex=8 type='Submit' name='submit' value='"._('Update EDI Configuration')."'></div></form>";
+echo "</table><br /><div class='centre'><input tabindex=8 type='Submit' name='submit' value='"._('Update EDI Configuration')."'></div></form>";
 
 include('includes/footer.inc');
 ?>

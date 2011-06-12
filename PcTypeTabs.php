@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
 
 	if ($_POST['TypeTabCode']=='' OR $_POST['TypeTabCode']==' ' OR $_POST['TypeTabCode']=='  ') {
 		$InputError = 1;
-		prnMsg('<br>' . _('The Tabs type code cannot be an empty string or spaces'),'error');
+		prnMsg('<br />' . _('The Tabs type code cannot be an empty string or spaces'),'error');
 		$Errors[$i] = 'TypeTabCode';
 		$i++;
 	} elseif (strlen($_POST['TypeTabCode']) >20) {
@@ -122,10 +122,10 @@ if (isset($_POST['submit'])) {
 	$myrowPcTabs = DB_fetch_row($ResultPcTabs);
 	if ($myrowPcTabExpenses[0]>0 or $myrowPcTabs[0]>0) {
 		prnMsg(_('Cannot delete this tab type because tabs have been created using this tab type'),'error');
-		echo '<br>';
+		echo '<br />';
 		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-		echo '<p><div class="centre"><input type=submit name=return VALUE="' . _('Return to list of tab types') . '"></div>';
+		echo '<br /><div class="centre"><input type=submit name=return value="' . _('Return to list of tab types') . '"></div>';
 		echo '</form>';
 		include('includes/footer.inc');
 		exit;
@@ -186,13 +186,13 @@ while ($myrow = DB_fetch_row($result)) {
 //end of ifs and buts!
 if (isset($SelectedTab)) {
 
-	echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Show All Types Tabs Defined') . '</a></div><p>';
+	echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Show All Types Tabs Defined') . '</a></div></p>';
 }
 if (! isset($_GET['delete'])) {
 
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<p><table class=selection>'; //Main table
+	echo '<br /><table class=selection>'; //Main table
 
 	if ( isset($SelectedTab) AND $SelectedTab!='' )
 	{
@@ -208,8 +208,8 @@ if (! isset($_GET['delete'])) {
 		$_POST['TypeTabCode'] = $myrow['typetabcode'];
 		$_POST['TypeTabDescription']  = $myrow['typetabdescription'];
 
-		echo '<input type=hidden name="SelectedTab" VALUE="' . $SelectedTab . '">';
-		echo '<input type=hidden name="TypeTabCode" VALUE="' . $_POST['TypeTabCode']. '">';
+		echo '<input type=hidden name="SelectedTab" value="' . $SelectedTab . '">';
+		echo '<input type=hidden name="TypeTabCode" value="' . $_POST['TypeTabCode']. '">';
 		echo '<table class=selection> <tr><td>' . _('Code Of Type Of Tab') . ':</td><td>';
 
 		// We dont allow the user to change an existing type code
@@ -232,7 +232,7 @@ if (! isset($_GET['delete'])) {
 
 	echo '</td></tr></table>'; // close main table
 
-	echo '<p><div class="centre"><input type=submit name=submit VALUE="' . _('Accept') . '"><input type=submit name=Cancel VALUE="' . _('Cancel') . '"></div>';
+	echo '<br /><div class="centre"><input type=submit name=submit value="' . _('Accept') . '"><input type=submit name=Cancel value="' . _('Cancel') . '"></div>';
 
 	echo '</form>';
 

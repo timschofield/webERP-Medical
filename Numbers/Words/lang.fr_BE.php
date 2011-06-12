@@ -14,7 +14,7 @@
 // | license@php.net so we can mail you a copy immediately.               |
 // +----------------------------------------------------------------------+
 // | Authors: Kouber Saparev <kouber@php.net>                         |
-// |          Philippe Bajoit <phil@lebutch.org>                          |
+// |          Philippe Bajoit < phil@lebutch.org>                          |
 // +----------------------------------------------------------------------+
 //
 // $Id: lang.fr_BE.php,v 1.1 2006/11/17 05:59:52 daintree Exp $
@@ -27,7 +27,7 @@ require_once("Numbers/Words.php");
 /**
  * Class for translating numbers into French (Belgium).
  *
- * @author Kouber Saparev <kouber@php.net> 
+ * @author Kouber Saparev <kouber@php.net>
  * @package Numbers_Words
  */
 class Numbers_Words_fr_BE extends Numbers_Words
@@ -108,7 +108,7 @@ class Numbers_Words_fr_BE extends Numbers_Words
      * @access private
      */
     var $_and = 'et';
-    
+
     /**
      * The word separator.
      * @var string
@@ -300,12 +300,12 @@ class Numbers_Words_fr_BE extends Numbers_Words
     function _showDigitsGroup($num, $last = false)
     {
         $ret = '';
-        
+
         // extract the value of each digit from the three-digit number
         $e = $num%10;                  // ones
         $d = ($num-$e)%100/10;         // tens
         $s = ($num-$d*10-$e)%1000/100; // hundreds
-        
+
         // process the "hundreds" digit.
         if ($s) {
             if ($s>1) {

@@ -40,8 +40,8 @@ include ('includes/header.inc');
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<input type=hidden name="TransNo" VALUE="' . $_GET['FromTransNo'] . '">';
-echo '<input type=hidden name="InvOrCredit" VALUE="' . $_GET['InvOrCredit'] . '>';
+echo '<input type=hidden name="TransNo" value="' . $_GET['FromTransNo'] . '">';
+echo '<input type=hidden name="InvOrCredit" value="' . $_GET['InvOrCredit'] . '>';
 
 echo '<br /><table>';
 
@@ -63,10 +63,10 @@ if (DB_num_rows($ContactResult)>0){
 }
 
 echo '<tr><td>' . _('Email') . ' ' . $_GET['InvOrCredit'] . ' ' . _('number') . ' ' . $_GET['FromTransNo'] . ' ' . _('to') . ':</td>
-	<td><input type=TEXT name="EmailAddr" maxlength=60 size=60 VALUE="' . $EmailAddress . '"></td>
+	<td><input type=TEXT name="EmailAddr" maxlength=60 size=60 value="' . $EmailAddress . '"></td>
 	</table>';
 
-echo '<br><div class="centre"><input type=submit name="DoIt" VALUE="' . _('OK') . '">';
+echo '<br /><div class="centre"><input type=submit name="DoIt" value="' . _('OK') . '">';
 echo '</div></form>';
 include ('includes/footer.inc');
 ?>

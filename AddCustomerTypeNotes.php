@@ -17,7 +17,7 @@ if (isset($_POST['DebtorType'])){
 } elseif (isset($_GET['DebtorType'])){
 	$DebtorType = $_GET['DebtorType'];
 }
-echo "<a href='" . $rootpath . '/SelectCustomer.php?' . SID .'&DebtorType='.$DebtorType."'>" . _('Back to Select Customer') . '</a><br>';
+echo "<a href='" . $rootpath . '/SelectCustomer.php?' . SID .'&DebtorType='.$DebtorType."'>" . _('Back to Select Customer') . '</a><br />';
 if ( isset($_POST['submit']) ) {
 
 	//initialise no input errors assumed initially before we test
@@ -62,9 +62,9 @@ if ( isset($_POST['submit']) ) {
 
 	if ($InputError !=1) {
 		$result = DB_query($sql,$db);
-				//echo '<br>'.$sql;
+				//echo '<br />'.$sql;
 
-		echo '<br>';
+		echo '<br />';
 		prnMsg($msg, 'success');
 		unset($Id);
 		unset($_POST['note']);
@@ -78,9 +78,9 @@ if ( isset($_POST['submit']) ) {
 	$sql="DELETE FROM debtortypenotes WHERE noteid='".$Id."'
 			and typeid='".$DebtorType."'";
 				$result = DB_query($sql,$db);
-						//echo '<br>'.$sql;
+						//echo '<br />'.$sql;
 
-				echo '<br>';
+				echo '<br />';
 				prnMsg( _('The contact group note record has been deleted'), 'success');
 				unset($Id);
 				unset($_GET['delete']);
@@ -97,7 +97,7 @@ if (!isset($Id)) {
 
 	$sql = "SELECT * FROM debtortypenotes where typeid='".$DebtorType."' ORDER BY date DESC";
 	$result = DB_query($sql,$db);
-			//echo '<br>'.$sql;
+			//echo '<br />'.$sql;
 
 	echo '<table class=selection>';
 	echo '<tr>
@@ -140,7 +140,7 @@ if (!isset($Id)) {
 if (isset($Id)) {  ?>
 	<div class="cantre"><a href="<?php echo $_SERVER['PHP_SELF'] . '?' . SID .'&DebtorType='.$DebtorType;?>"><?=_('Review all notes for this Customer Type')?></a></div>
 <?php } ?>
-<p>
+<br />
 
 <?php
 if (!isset($_GET['delete'])) {
@@ -155,7 +155,7 @@ if (!isset($_GET['delete'])) {
 					and typeid='".$DebtorType."'";
 
 		$result = DB_query($sql, $db);
-				//echo '<br>'.$sql;
+				//echo '<br />'.$sql;
 
 		$myrow = DB_fetch_array($result);
 
@@ -189,7 +189,7 @@ if (!isset($_GET['delete'])) {
 	echo '<tr><td>'. _('Priority').':</td>';
 	echo '<td><input type="Text" name="priority" value="'. $_POST['priority'].'" size=1 maxlength=3></td></td>
 	</table>';
-	echo '<br><div class="centre"><input type="Submit" name="submit" value="'. _('Enter Information').'"></div>';
+	echo '<br /><div class="centre"><input type="Submit" name="submit" value="'. _('Enter Information').'"></div>';
 
 	echo '</form>';
 

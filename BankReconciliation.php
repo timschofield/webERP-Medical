@@ -21,7 +21,7 @@ if (isset($_POST['PostExchangeDifference']) and is_numeric($_POST['DoExchangeDif
 
 	if (!is_numeric($_POST['BankStatementBalance'])){
 		prnMsg(_('The entry in the bank statement balance is not numeric. The balance on the bank statement should be entered. The exchange difference has not been calculated and no general ledger journal has been created'),'warn');
-		echo '<p>' . $_POST['BankStatementBalance'];
+		echo '<br />' . $_POST['BankStatementBalance'];
 	} else {
 		/* Now need to get the currency of the account and the current table ex rate */
 		$SQL = "SELECT rate, bankaccountname
@@ -104,7 +104,7 @@ $AccountsResults = DB_query($SQL,$db,$ErrMsg,$DbgMsg);
 echo '<tr><td>' . _('Bank Account') . ':</td><td><select tabindex="1" name="BankAccount">';
 
 if (DB_num_rows($AccountsResults)==0){
-	echo '</select></td></tr></table><p>' . _('Bank Accounts have not yet been defined') . '. ' . _('You must first') .
+	echo '</select></td></tr></table><br />' . _('Bank Accounts have not yet been defined') . '. ' . _('You must first') .
 		'<a href="' . $rootpath . '/BankAccounts.php">' . _('define the bank accounts') . '</a>' . ' ' . _('and general ledger accounts to be affected') . '.';
 	include('includes/footer.inc');
 	exit;
@@ -124,7 +124,7 @@ if (DB_num_rows($AccountsResults)==0){
 
 include ('includes/GLPostings.inc');
 
-echo '</table><p><div class="centre"><input type=submit tabindex="2" name="ShowRec" value="' . _('Show bank reconciliation statement') . '"></div><br>';
+echo '</table><br /><div class="centre"><input type=submit tabindex="2" name="ShowRec" value="' . _('Show bank reconciliation statement') . '"></div><br />';
 
 
 if (isset($_POST['ShowRec']) OR isset($_POST['DoExchangeDifference'])){
@@ -340,11 +340,11 @@ if (isset($_POST['ShowRec']) OR isset($_POST['DoExchangeDifference'])){
 }
 
 if (isset($_POST['BankAccount'])) {
-	echo '<p><div class="centre"><a tabindex="4" href="' . $rootpath . '/BankMatching.php?Type=Payments&Account='.$_POST['BankAccount'].'">' . _('Match off cleared payments') . '</a>';
-	echo '<br><a tabindex="5" href="' . $rootpath . '/BankMatching.php?Type=Receipts&Account='.$_POST['BankAccount'].'">' . _('Match off cleared deposits') . '</a></div>';
+	echo '<br /><div class="centre"><a tabindex="4" href="' . $rootpath . '/BankMatching.php?Type=Payments&Account='.$_POST['BankAccount'].'">' . _('Match off cleared payments') . '</a>';
+	echo '<br /><a tabindex="5" href="' . $rootpath . '/BankMatching.php?Type=Receipts&Account='.$_POST['BankAccount'].'">' . _('Match off cleared deposits') . '</a></div>';
 } else {
-	echo '<p><div class="centre"><a tabindex="4" href="' . $rootpath . '/BankMatching.php?Type=Payments">' . _('Match off cleared payments') . '</a>';
-	echo '<br><a tabindex="5" href="' . $rootpath . '/BankMatching.php?Type=Receipts">' . _('Match off cleared deposits') . '</a></div>';
+	echo '<br /><div class="centre"><a tabindex="4" href="' . $rootpath . '/BankMatching.php?Type=Payments">' . _('Match off cleared payments') . '</a>';
+	echo '<br /><a tabindex="5" href="' . $rootpath . '/BankMatching.php?Type=Receipts">' . _('Match off cleared deposits') . '</a></div>';
 }
 echo '</form>';
 include('includes/footer.inc');

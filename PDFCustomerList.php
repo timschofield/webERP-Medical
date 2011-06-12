@@ -230,9 +230,9 @@ if (isset($_POST['PrintPDF'])){
 	  $title = _('Customer List') . ' - ' . _('Problem Report') . '....';
 	  include('includes/header.inc');
 	   prnMsg( _('The customer List could not be retrieved by the SQL because') . ' - ' . DB_error_msg($db) );
-	   echo '<br><a href="' .$rootpath .'/index.php?' . SID . '">'. _('Back to the menu'). '</a>';
+	   echo '<br /><a href="' .$rootpath .'/index.php?' . SID . '">'. _('Back to the menu'). '</a>';
 	   if ($debug==1){
-	      echo '<br>'. $SQL;
+	      echo '<br />'. $SQL;
 	   }
 	   include('includes/footer.inc');
 	   exit;
@@ -242,7 +242,7 @@ if (isset($_POST['PrintPDF'])){
 	  $title = _('Customer List') . ' - ' . _('Problem Report') . '....';
 	  include('includes/header.inc');
 	  prnMsg( _('This report has no output because there were no customers retrieved'), 'error' );
-	  echo '<br><a href="' .$rootpath .'/index.php?' . SID . '">'. _('Back to the menu'). '</a>';
+	  echo '<br /><a href="' .$rootpath .'/index.php?' . SID . '">'. _('Back to the menu'). '</a>';
 	  include('includes/footer.inc');
 	  exit;
 	}
@@ -390,7 +390,7 @@ if (isset($_POST['PrintPDF'])){
 	$SalesFolkResult = DB_query($sql,$db);
 
 	While ($myrow = DB_fetch_array($SalesFolkResult)){
-		echo '<option VALUE="' . $myrow['salesmancode'] . '">' . $myrow['salesmanname'];
+		echo '<option value="' . $myrow['salesmancode'] . '">' . $myrow['salesmanname'];
 	}
 	echo '</select></td></tr>';
 
@@ -405,9 +405,9 @@ if (isset($_POST['PrintPDF'])){
 
 	$DefaultActivitySince = Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m')-6,0,Date('y')));
 	echo '<tr><td>' . _('Activity Since'). ':</td><td><input type="text" class=date alt="'.$_SESSION['DefaultDateFormat'].'"  name="ActivitySince" size=10 maxlength=10
-		VALUE="' . $DefaultActivitySince . '"></td></tr>';
+		value="' . $DefaultActivitySince . '"></td></tr>';
 
-	echo '</table><br><div class="centre"><input type=Submit Name="PrintPDF" Value="'. _('Print PDF'). '"></div>';
+	echo '</table><br /><div class="centre"><input type=Submit Name="PrintPDF" Value="'. _('Print PDF'). '"></div>';
 
 	include('includes/footer.inc');
 

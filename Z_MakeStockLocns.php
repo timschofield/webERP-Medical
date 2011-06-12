@@ -9,7 +9,7 @@ $title = _('Make LocStock Records');
 include('includes/header.inc');
 
 
-echo '<br><br>' . _('This script makes stock location records for parts where they do not already exist');
+echo '<br /><br />' . _('This script makes stock location records for parts where they do not already exist');
 
 $sql = "INSERT INTO locstock (stockid, loccode)
 		SELECT stockmaster.stockid,
@@ -25,7 +25,7 @@ $Result = DB_query($sql,$db,$ErrMsg);
 
 
 
-echo '<p>';
+echo '<br />';
 prnMsg(_('Any stock items that may not have had stock location records have now been given new location stock records'),'info');
 
 include('includes/footer.inc');

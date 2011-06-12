@@ -339,10 +339,10 @@ if ($_POST['TenderType']!=3 and isset($_SESSION['offer']) and $_SESSION['offer']
 	echo '</table>';
 	echo '<input type=hidden name=TenderType value="'.$_POST['TenderType'].'">';
 	if ($_POST['TenderType']==1) {
-		echo '<br><div class="centre"><input type="submit" name="Update" value="Update offer">';
+		echo '<br /><div class="centre"><input type="submit" name="Update" value="Update offer">';
 		echo '<input type="submit" name="Refresh" value="Refresh screen"></div>';
 	} else if ($_POST['TenderType']==2) {
-		echo '<br><div class="centre"><input type="submit" name="Save" value="Save offer">';
+		echo '<br /><div class="centre"><input type="submit" name="Save" value="Save offer">';
 		echo '<input type="submit" name="Refresh" value="Refresh screen"></div>';
 	}
 	echo '</form>';
@@ -364,9 +364,9 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==2 and !isset($_POST['S
 		ORDER BY categorydescription";
 	$result = DB_query($sql, $db);
 	if (DB_num_rows($result) == 0) {
-		echo '<p><font size=4 color=red>' . _('Problem Report') . ':</font><br>' .
+		echo '<p><font size=4 color=red>' . _('Problem Report') . ':</font><br />' .
 			_('There are no stock categories currently defined please use the link below to set them up');
-		echo '<br><a href="' . $rootpath . '/StockCategories.php?' . SID . '">' . _('Define Stock Categories') . '</a>';
+		echo '<br /><a href="' . $rootpath . '/StockCategories.php">' . _('Define Stock Categories') . '</a></p>';
 		exit;
 	}
 	echo '<table class=selection><tr>';
@@ -382,7 +382,7 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==2 and !isset($_POST['S
 	}
 	while ($myrow1 = DB_fetch_array($result)) {
 		if ($myrow1['categoryid'] == $_POST['StockCat']) {
-			echo '<option selected VALUE="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'];
+			echo '<option selected value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'];
 		} else {
 			echo '<option value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'];
 		}
@@ -404,8 +404,8 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==2 and !isset($_POST['S
 	} else {
 		echo '<input type="text" name="StockCode" size=15 maxlength=18>';
 	}
-	echo '</td></tr></table><br>';
-	echo '<div class="centre"><input type=submit name="Search" value="' . _('Search Now') . '"></div><br></form>';
+	echo '</td></tr></table><br />';
+	echo '<div class="centre"><input type=submit name="Search" value="' . _('Search Now') . '"></div><br /></form>';
 	echo '<script  type="text/javascript">defaultControl(document.forms[0].StockCode);</script>';
 	echo '</form>';
 }
@@ -708,7 +708,7 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 			prnMsg( _('Only the first') . ' ' . $Maximum_Number_Of_Parts_To_Show . ' ' . _('can be displayed') . '. ' .
 				_('Please restrict your search to only the parts required'),'info');
 		}
-		echo '<a name="end"></a><br><div class="centre"><input type="submit" name="NewItem" value="Add to Offer"></div>';
+		echo '<a name="end"></a><br /><div class="centre"><input type="submit" name="NewItem" value="Add to Offer"></div>';
 	}#end if SearchResults to show
 	echo '<input type="hidden" name="TenderType" value='.$_POST['TenderType'].'>';
 	echo '<input type="hidden" name="SupplierID" value='.$_POST['SupplierID'].'>';

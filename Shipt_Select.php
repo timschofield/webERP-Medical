@@ -38,7 +38,7 @@ If (isset($_POST['ResetPart'])) {
 
 If (isset($ShiptRef) && $ShiptRef!="") {
 	if (!is_numeric($ShiptRef)){
-		  echo '<br>';
+		  echo '<br />';
 		  prnMsg( _('The Shipment Number entered MUST be numeric') );
 		  unset ($ShiptRef);
 	} else {
@@ -46,7 +46,7 @@ If (isset($ShiptRef) && $ShiptRef!="") {
 	}
 } else {
 	if (isset($SelectedSupplier)) {
-		echo '<br>' ._('For supplier'). ': '. $SelectedSupplier . ' ' . _('and'). ' ';
+		echo '<br />' ._('For supplier'). ': '. $SelectedSupplier . ' ' . _('and'). ' ';
 		echo '<input type=hidden name="SelectedSupplier" value="'. $SelectedSupplier. '">';
 	}
 	If (isset($SelectedStockItem)) {
@@ -58,7 +58,7 @@ If (isset($ShiptRef) && $ShiptRef!="") {
 if (isset($_POST['SearchParts'])) {
 
 	If ($_POST['Keywords'] AND $_POST['StockCode']) {
-		echo '<br>';
+		echo '<br />';
 		prnMsg( _('Stock description keywords have been used in preference to the Stock code extract entered'),'info');
 	}
 	$SQL = "SELECT stockmaster.stockid,
@@ -128,16 +128,16 @@ if (!isset($ShiptRef) or $ShiptRef==""){
 	echo '</select>';
 	echo ' <select name="OpenOrClosed">';
 	if ($_POST['OpenOrClosed']==1){
-		echo '<option selected VALUE=1>'. _('Closed Shipments Only') . '</option>';
-		echo '<option VALUE=0>'. _('Open Shipments Only') . '</option>';
+		echo '<option selected value=1>'. _('Closed Shipments Only') . '</option>';
+		echo '<option value=0>'. _('Open Shipments Only') . '</option>';
 	} else {
 		$_POST['OpenOrClosed']=0;
-		echo '<option VALUE=1>'. _('Closed Shipments Only') . '</option>';
-		echo '<option selected VALUE=0>'. _('Open Shipments Only') . '</option>';
+		echo '<option value=1>'. _('Closed Shipments Only') . '</option>';
+		echo '<option selected value=0>'. _('Open Shipments Only') . '</option>';
 	}
 	echo '</select></td></tr></table>';
 
-	echo '<br /><div class=centre><input type=submit name="SearchShipments" VALUE="'. _('Search Shipments'). '"></div></div><br />';
+	echo '<br /><div class=centre><input type=submit name="SearchShipments" value="'. _('Search Shipments'). '"></div></div><br />';
 }
 
 $SQL="SELECT categoryid,
@@ -157,9 +157,9 @@ echo '<tr><th colspan=5><font size=3 color=navy>'._('To search for shipments for
 <?php
 while ($myrow1 = DB_fetch_array($result1)) {
 	if (isset($_POST['StockCat']) and $myrow1['categoryid']==$_POST['StockCat']){
-		echo '<option selected VALUE="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
+		echo '<option selected value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 	} else {
-		echo '<option VALUE="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
+		echo '<option value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 	}
 }
 ?>
@@ -174,7 +174,7 @@ while ($myrow1 = DB_fetch_array($result1)) {
 
 <?php
 echo '<div class=centre><input type=submit name="SearchParts" value="'._('Search Parts Now').'">';
-echo '<input type=submit name="ResetPart" VALUE="'. _('Show All') .'"></div><br />';
+echo '<input type=submit name="ResetPart" value="'. _('Show All') .'"></div><br />';
 
 if (isset($StockItemsResult)) {
 
@@ -183,7 +183,7 @@ if (isset($StockItemsResult)) {
 			<th>'. _('Code').'</th>
 			<th>'. _('Description').'</th>
 			<th>'. _('On Hand').'</th>
-			<th>'. _('Orders') . '<br>' . _('Outstanding').'</th>
+			<th>'. _('Orders') . '<br />' . _('Outstanding').'</th>
 			<th>'. _('Units').'</th>
 			</tr>';
 
@@ -203,7 +203,7 @@ if (isset($StockItemsResult)) {
 		}
 /*
 Code	 Description	On Hand		 Orders Ostdg     Units		 Code	Description 	 On Hand     Orders Ostdg	Units	 */
-		printf('<td><input type=submit name="SelectedStockItem" VALUE="%s" /></td>
+		printf('<td><input type=submit name="SelectedStockItem" value="%s" /></td>
 			<td>%s</td>
 			<td class=number>%s</td>
 			<td class=number>%s</td>

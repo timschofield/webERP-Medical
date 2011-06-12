@@ -134,7 +134,7 @@ if (isset($_POST['submit'])) {
 		$myrow = DB_fetch_row($result);
 		if ($myrow[0]>0) {
 			prnMsg( _('Cannot delete this unit of measure because inventory items have been created using this unit of measure'),'warn');
-			echo '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('inventory items that refer to this unit of measure') . '</font>';
+			echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('inventory items that refer to this unit of measure') . '</font>';
 		} else {
 			$sql="DELETE FROM unitsofmeasure WHERE unitname ".LIKE."'" . $OldMeasureName . "'";
 			$result = DB_query($sql,$db);
@@ -190,7 +190,7 @@ if (isset($_POST['submit'])) {
 		echo '</tr>';
 
 	} //END WHILE LIST LOOP
-	echo '</table><p>';
+	echo '</table><br />';
 } //end of ifs and buts!
 
 
@@ -198,7 +198,7 @@ if (isset($SelectedMeasureID)) {
 	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Review Units of Measure') . '</a></div>';
 }
 
-echo '<p>';
+echo '<br />';
 
 if (! isset($_GET['delete'])) {
 
@@ -223,7 +223,7 @@ if (! isset($_GET['delete'])) {
 			$_POST['MeasureID'] = $myrow['unitid'];
 			$_POST['MeasureName']  = $myrow['unitname'];
 
-			echo '<input type=hidden name="SelectedMeasureID" VALUE="' . $_POST['MeasureID'] . '">';
+			echo '<input type=hidden name="SelectedMeasureID" value="' . $_POST['MeasureID'] . '">';
 			echo '<table class="selection">';
 		}
 

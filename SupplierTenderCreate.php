@@ -426,7 +426,7 @@ if (!isset($_SESSION['tender']) or isset($_POST['LookupDeliveryAddress']) or $Sh
 
 if (isset($_POST['SearchSupplier']) OR isset($_POST['Go']) OR isset($_POST['Next']) OR isset($_POST['Previous'])) {
 	if (strlen($_POST['Keywords']) > 0 AND strlen($_POST['SupplierCode']) > 0) {
-		prnMsg( '<br>' . _('Supplier name keywords have been used in preference to the Supplier code extract entered'), 'info' );
+		prnMsg( '<br />' . _('Supplier name keywords have been used in preference to the Supplier code extract entered'), 'info' );
 	}
 	if ($_POST['Keywords'] == '' AND $_POST['SupplierCode'] == '') {
 		$SQL = "SELECT supplierid,
@@ -504,7 +504,7 @@ if (isset($_POST['Suppliers'])) {
 	} else {
 		echo '<input type="Text" name="SupplierCode" size=15 maxlength=18>';
 	}
-	echo '</td></tr></table><br><div class="centre"><input type=submit name="SearchSupplier" value="' . _('Search Now') . '"></div>';
+	echo '</td></tr></table><br /><div class="centre"><input type=submit name="SearchSupplier" value="' . _('Search Now') . '"></div>';
 	echo '</form>';
 }
 
@@ -524,7 +524,7 @@ if (isset($_POST['SearchSupplier'])) {
 		}
 	}
 	if ($ListPageMax > 1) {
-		echo '<p>&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
+		echo '<br />&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
 		echo '<select name="PageOffset">';
 		$ListPage = 1;
 		while ($ListPage <= $ListPageMax) {
@@ -539,11 +539,11 @@ if (isset($_POST['SearchSupplier'])) {
 			<input type=submit name="Go" value="' . _('Go') . '">
 			<input type=submit name="Previous" value="' . _('Previous') . '">
 			<input type=submit name="Next" value="' . _('Next') . '">';
-		echo '<p>';
+		echo '<br />';
 	}
 	echo '<input type=hidden name="Search" value="' . _('Search Now') . '">';
-	echo '<br><br>';
-	echo '<br><table cellpadding=2 colspan=7>';
+	echo '<br /><br />';
+	echo '<br /><table cellpadding=2 colspan=7>';
 	$tableheader = '<tr>
   		<th>' . _('Code') . '</th>
 		<th>' . _('Supplier Name') . '</th>
@@ -596,9 +596,9 @@ if (isset($_POST['Items'])) {
 		ORDER BY categorydescription";
 	$result = DB_query($sql, $db);
 	if (DB_num_rows($result) == 0) {
-		echo '<p><font size=4 color=red>' . _('Problem Report') . ':</font><br>' .
+		echo '<br /><font size=4 color=red>' . _('Problem Report') . ':</font><br />' .
 			_('There are no stock categories currently defined please use the link below to set them up');
-		echo '<br><a href="' . $rootpath . '/StockCategories.php?' . SID . '">' . _('Define Stock Categories') . '</a>';
+		echo '<br /><a href="' . $rootpath . '/StockCategories.php?' . SID . '">' . _('Define Stock Categories') . '</a>';
 		exit;
 	}
 	echo '<table class=selection><tr>';
@@ -614,7 +614,7 @@ if (isset($_POST['Items'])) {
 	}
 	while ($myrow1 = DB_fetch_array($result)) {
 		if ($myrow1['categoryid'] == $_POST['StockCat']) {
-			echo '<option selected VALUE="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
+			echo '<option selected value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 		}
@@ -634,8 +634,8 @@ if (isset($_POST['Items'])) {
 	} else {
 		echo '<input type="text" name="StockCode" size=15 maxlength=18>';
 	}
-	echo '</td></tr></table><br>';
-	echo '<div class="centre"><input type=submit name="Search" value="' . _('Search Now') . '"></div><br></form>';
+	echo '</td></tr></table><br />';
+	echo '<div class="centre"><input type=submit name="Search" value="' . _('Search Now') . '"></div><br /></form>';
 	echo '<script  type="text/javascript">defaultControl(document.forms[0].StockCode);</script>';
 	echo '</form>';
 }
@@ -813,7 +813,7 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 			prnMsg( _('Only the first') . ' ' . $Maximum_Number_Of_Parts_To_Show . ' ' . _('can be displayed') . '. ' .
 				_('Please restrict your search to only the parts required'),'info');
 		}
-		echo '<a name="end"></a><br><div class="centre"><input type="submit" name="NewItem" value="Add to Tender"></div>';
+		echo '<a name="end"></a><br /><div class="centre"><input type="submit" name="NewItem" value="Add to Tender"></div>';
 	}#end if SearchResults to show
 
 	echo '</form>';

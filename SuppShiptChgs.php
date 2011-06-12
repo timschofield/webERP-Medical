@@ -27,7 +27,7 @@ if ($_SESSION['SuppTrans']->InvoiceOrCredit == 'Invoice'){
 
 if (!isset($_SESSION['SuppTrans'])){
 	prnMsg(_('Shipment charges or credits are entered against supplier invoices or credit notes respectively') . '. ' . _('To enter supplier transactions the supplier must first be selected from the supplier selection screen') . ', ' . _('then the link to enter a supplier invoice or credit note must be clicked on'),'info');
-	echo "<br><a href='$rootpath/SelectSupplier.php?" . SID ."'>" . _('Select A Supplier') . '</a>';
+	echo "<br /><a href='$rootpath/SelectSupplier.php?" . SID ."'>" . _('Select A Supplier') . '</a>';
 	exit;
 	/*It all stops here if there aint no supplier selected and invoice/credit initiated ie $_SESSION['SuppTrans'] started off*/
 }
@@ -66,12 +66,12 @@ if (isset($_GET['Delete'])){
 
 /*Show all the selected ShiptRefs so far from the SESSION['SuppInv']->Shipts array */
 if ($_SESSION['SuppTrans']->InvoiceOrCredit=='Invoice'){
-	echo '<p class="page_title_text">'. _('Shipment charges on Invoice') . ' ';
+	echo '<p class="page_title_text">'. _('Shipment charges on Invoice') . ' '.'</p>';
 } else {
-	echo '<p class="page_title_text">' . _('Shipment credits on Credit Note') . ' ';
+	echo '<p class="page_title_text">' . _('Shipment credits on Credit Note') . ' '.'</p>';
 }
-echo $_SESSION['SuppTrans']->SuppReference . ' ' ._('From') . ' ' . $_SESSION['SuppTrans']->SupplierName;
-echo '</p>';
+echo '<p>'.$_SESSION['SuppTrans']->SuppReference . ' ' ._('From') . ' ' . $_SESSION['SuppTrans']->SupplierName.'</p>';
+
 echo '<table cellpadding=2 class=selection>';
 $TableHeader = '<tr><th>' . _('Shipment') . '</th>
 		<th>' . _('Amount') . '</th></tr>';
@@ -104,8 +104,8 @@ if (!isset($_POST['ShiptRef'])) {
 }
 echo '<table class=selection>';
 echo '<tr><td>' . _('Shipment Reference') . ':</td>
-	<td><input type="text" name="ShiptRef" size="12" maxlength="11" VALUE="' .  $_POST['ShiptRef'] . '"></td></tr>';
-echo '<tr><td>' . _('Shipment Selection') . ':<br> ' . _('If you know the code enter it above') . '<br>' . _('otherwise select the shipment from the list') . '</td><td><select name="ShiptSelection">';
+	<td><input type="text" name="ShiptRef" size="12" maxlength="11" value="' .  $_POST['ShiptRef'] . '"></td></tr>';
+echo '<tr><td>' . _('Shipment Selection') . ':<br /> ' . _('If you know the code enter it above') . '<br />' . _('otherwise select the shipment from the list') . '</td><td><select name="ShiptSelection">';
 
 $sql = "SELECT shiptref,
 							vessel,
@@ -119,9 +119,9 @@ $result = DB_query($sql, $db);
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['ShiptSelection']) and $myrow['shiptref']==$_POST['ShiptSelection']) {
-		echo '<option selected VALUE="' . $myrow['shiptref'] . '">' . $myrow['shiptref'] . ' - ' . $myrow['vessel'] . ' ' . _('ETA') . ' ' . ConvertSQLDate($myrow['eta']) . ' ' . _('from') . ' ' . $myrow['suppname']  . '</option>';;
+		echo '<option selected value="' . $myrow['shiptref'] . '">' . $myrow['shiptref'] . ' - ' . $myrow['vessel'] . ' ' . _('ETA') . ' ' . ConvertSQLDate($myrow['eta']) . ' ' . _('from') . ' ' . $myrow['suppname']  . '</option>';;
 	} else {
-		echo '<option VALUE="' . $myrow['shiptref'] . '">' . $myrow['shiptref'] . ' - ' . $myrow['vessel'] . ' ' . _('ETA') . ' ' . ConvertSQLDate($myrow['eta']) . ' ' . _('from') . ' ' . $myrow['suppname']  . '</option>';;
+		echo '<option value="' . $myrow['shiptref'] . '">' . $myrow['shiptref'] . ' - ' . $myrow['vessel'] . ' ' . _('ETA') . ' ' . ConvertSQLDate($myrow['eta']) . ' ' . _('from') . ' ' . $myrow['suppname']  . '</option>';;
 	}
 }
 
@@ -131,10 +131,10 @@ if (!isset($_POST['Amount'])) {
 	$_POST['Amount']=0;
 }
 echo '<tr><td>' . _('Amount') . ':</td>
-	<td><input type="text" name="Amount" size="12" maxlength="11" VALUE="' .  $_POST['Amount'] . '"></td></tr>';
+	<td><input type="text" name="Amount" size="12" maxlength="11" value="' .  $_POST['Amount'] . '"></td></tr>';
 echo '</table>';
 
-echo '<br /><div class=centre><input type="submit" name="AddShiptChgToInvoice" VALUE="' . _('Enter Shipment Charge') . '"></div>';
+echo '<br /><div class=centre><input type="submit" name="AddShiptChgToInvoice" value="' . _('Enter Shipment Charge') . '"></div>';
 
 echo '</form>';
 include('includes/footer.inc');

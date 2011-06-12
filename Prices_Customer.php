@@ -44,7 +44,7 @@ $result = DB_query("SELECT debtorsmaster.name,
 $myrow = DB_fetch_row($result);
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') .
 		'" alt="" />' . _('Special Customer Prices').'</p>';
-echo '<p class="page_title_text"><font color=BLUE><b>' . $myrow[0] . ' ' . _('in') . ' ' . $myrow[1] . '<br>' . ' ' . _('for') . ' ';
+echo '<p class="page_title_text"><font color=BLUE><b>' . $myrow[0] . ' ' . _('in') . ' ' . $myrow[1] . '<br />' . ' ' . _('for') . ' ';
 
 $CurrCode = $myrow[1];
 $SalesType = $myrow[2];
@@ -312,7 +312,7 @@ if (DB_num_rows($result) == 0) {
 //END WHILE LIST LOOP
 }
 
-echo '</table></tr></table><p>';
+echo '</table></tr></table><br />';
 
 echo '<form method="post" action=' . $_SERVER['PHP_SELF'] . '?' . SID . '>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -442,7 +442,7 @@ echo '<tr><td>' . _('Price') . ':</td>
 				</tr></table>';
 
 
-echo '<br><div class="centre"><input type="Submit" name="submit" value="' . _('Enter Information') . '"></div>';
+echo '<br /><div class="centre"><input type="Submit" name="submit" value="' . _('Enter Information') . '"></div>';
 
 echo '</form>';
 include('includes/footer.inc');

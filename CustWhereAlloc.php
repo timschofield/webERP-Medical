@@ -36,11 +36,11 @@ if (!isset($_POST['TransNo'])) {$_POST['TransNo']='';}
 echo '<td>'._('Transaction Number') . ':</td>
 	<td><input tabindex=2 type=text name="TransNo" maxlength=10 size=10 value="'. $_POST['TransNo'] . '"></td>';
 
-echo '</tr></table><br>
+echo '</tr></table><br />
 	<div class="centre"><input tabindex=3 type=submit name="ShowResults" value="'._('Show How Allocated').'"></div>';
 
 if (isset($_POST['ShowResults']) AND  $_POST['TransNo']==''){
-	echo '<br>';
+	echo '<br />';
 	prnMsg(_('The transaction number to be queried must be entered first'),'warn');
 }
 
@@ -79,10 +79,10 @@ if (isset($_POST['ShowResults']) AND  $_POST['TransNo']!=''){
 	if (DB_num_rows($TransResult)==0){
 		prnMsg(_('There are no allocations made against this transaction'),'info');
 	} else {
-		echo '<br><table cellpadding=2 class=selection>';
+		echo '<br /><table cellpadding=2 class=selection>';
 
 		echo '<tr><th colspan=6><div class="centre"><font size=3 color=blue><b>'._('Allocations made against invoice number') . ' ' . $_POST['TransNo']
-			. '<br>'._('Transaction Total').': '. number_format($myrow['totamt'],2) . '</font></b></div></th></tr>';
+			. '<br />'._('Transaction Total').': '. number_format($myrow['totamt'],2) . '</font></b></div></th></tr>';
 
 		$tableheader = '<tr><th>'._('Type').'</th>
 					<th>'._('Number').'</th>

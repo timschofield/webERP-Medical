@@ -43,7 +43,7 @@ if (isset($_POST['AddGLCodeToTrans']) and $_POST['AddGLCodeToTrans'] == _('Enter
 		WHERE accountcode='" . $_POST['GLCode'] . "'";
 	$result = DB_query($sql, $db);
 	if (DB_num_rows($result) == 0 and $_POST['GLCode'] != ''){
-		prnMsg(_('The account code entered is not a valid code') . '. ' . _('This line cannot be added to the transaction') . '.<br>' . _('You can use the selection box to select the account you want'),'error');
+		prnMsg(_('The account code entered is not a valid code') . '. ' . _('This line cannot be added to the transaction') . '.<br />' . _('You can use the selection box to select the account you want'),'error');
 		$InputError = True;
 	} else if ($_POST['GLCode'] != '') {
 		$myrow = DB_fetch_row($result);
@@ -84,17 +84,17 @@ if (isset($_GET['Delete'])){
 /*Show all the selected GLCodes so far from the SESSION['SuppInv']->GLCodes array */
 if ($_SESSION['SuppTrans']->InvoiceOrCredit == 'Invoice'){
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('General Ledger') . '" alt="" />' . ' '
-	. _('General Ledger Analysis of Invoice From') . ' ' . $_SESSION['SuppTrans']->SupplierName;
+	. _('General Ledger Analysis of Invoice From') . ' ' . $_SESSION['SuppTrans']->SupplierName. '</p>';
 } else {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('General Ledger') . '" alt="" />' . ' '
-	. _('General Ledger Analysis of Credit Note From') . ' ' . $_SESSION['SuppTrans']->SupplierName;
+	. _('General Ledger Analysis of Credit Note From') . ' ' . $_SESSION['SuppTrans']->SupplierName. '</p>';
 }
-echo '</p><table cellpadding=2 class=selection>';
+echo '<table cellpadding=2 class=selection>';
 
 $TableHeader = '<tr>
 							<th>' . _('Account') . '</th>
 							<th>' . _('Name') . '</th>
-							<th>' . _('Amount') . '<br>' . _('in') . ' ' . $_SESSION['SuppTrans']->CurrCode . '</th>
+							<th>' . _('Amount') . '<br />' . _('in') . ' ' . $_SESSION['SuppTrans']->CurrCode . '</th>
 							<th>' . _('Narrative') . '</th>
 							</tr>';
 echo $TableHeader;
@@ -143,11 +143,11 @@ if (!isset($_POST['GLCode'])) {
 }
 echo '<tr>
 	<td>' . _('Account Code') . ':</td>
-	<td><input type="text" name="GLCode" size=12 maxlength=11 VALUE="' .  $_POST['GLCode'] . '"></td>
+	<td><input type="text" name="GLCode" size=12 maxlength=11 value="' .  $_POST['GLCode'] . '"></td>
 	<input type="hidden" name="JobRef" value="">
 	</tr>';
 echo '<tr>
-	<td>' . _('Account Selection') . ':<br>(' . _('If you know the code enter it above') . '<br>' . _('otherwise select the account from the list') . ')</td>
+	<td>' . _('Account Selection') . ':<br />(' . _('If you know the code enter it above') . '<br />' . _('otherwise select the account from the list') . ')</td>
 	<td><select name="AcctSelection">';
 
 $sql = "SELECT accountcode, accountname FROM chartmaster ORDER BY accountcode";
@@ -156,9 +156,9 @@ $result = DB_query($sql, $db);
 echo '<option value=""></option>';
 while ($myrow = DB_fetch_array($result)) {
 	if ($myrow['accountcode'] == $_POST['AcctSelection']) {
-		echo '<option selected VALUE="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
+		echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
 	} else {
-		echo '<option VALUE="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
+		echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
 	}
 }
 
@@ -170,7 +170,7 @@ if (!isset($_POST['Amount'])) {
 }
 echo '<tr>
 	<td>' . _('Amount') . ':</td>
-	<td><input type="text" class="number" name="Amount" size="12" maxlength="11" VALUE="' .  $_POST['Amount'] . '"></td>
+	<td><input type="text" class="number" name="Amount" size="12" maxlength="11" value="' .  $_POST['Amount'] . '"></td>
 	</tr>';
 
 if (!isset($_POST['Narrative'])) {
@@ -182,7 +182,7 @@ echo '<tr>
 	</tr>
 	</table><br />';
 
-echo '<input type="submit" name="AddGLCodeToTrans" VALUE="' . _('Enter GL Line') . '">';
+echo '<input type="submit" name="AddGLCodeToTrans" value="' . _('Enter GL Line') . '">';
 
 echo '</form>';
 include('includes/footer.inc');

@@ -125,14 +125,14 @@ if (isset($_POST['submit']) OR isset($_GET['remove']) OR isset($_GET['add']) ) {
 	$myrow = DB_fetch_row($result);
 	if ($myrow[0]>0) {
 		prnMsg( _('Cannot delete this tax group because some customer branches are setup using it'),'warn');
-		echo '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('customer branches referring to this tax group');
+		echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('customer branches referring to this tax group');
 	} else {
 		$sql= "SELECT COUNT(*) FROM suppliers WHERE taxgroupid='" . $_GET['SelectedGroup'] . "'";
 		$result = DB_query($sql,$db);
 		$myrow = DB_fetch_row($result);
 		if ($myrow[0]>0) {
 			prnMsg( _('Cannot delete this tax group because some suppliers are setup using it'),'warn');
-			echo '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('suppliers referring to this tax group');
+			echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('suppliers referring to this tax group');
 		} else {
 
 			$sql="DELETE FROM taxgrouptaxes WHERE taxgroupid='" . $_GET['SelectedGroup'] . "'";
@@ -213,7 +213,7 @@ if (isset($SelectedGroup)) {
 		$_POST['GroupName'] = $myrow['taxgroupdescription'];
 	}
 }
-echo '<br>';
+echo '<br />';
 echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . "?" . SID . ">";
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 if( isset($_POST['SelectedGroup'])) {
@@ -230,7 +230,7 @@ echo '<td><input type="submit" name="submit" value="' . _('Enter Group') . '"></
 
 
 if (isset($SelectedGroup)) {
-	echo '</table><br>';
+	echo '</table><br />';
 
 	$sql = "SELECT taxid,
 			description as taxname
@@ -299,13 +299,13 @@ if (isset($SelectedGroup)) {
 
 		}
 		echo '</table>';
-		echo '<br><div class="centre"><input type="submit" name="UpdateOrder" value="' . _('Update Order') . '"></div>';
+		echo '<br /><div class="centre"><input type="submit" name="UpdateOrder" value="' . _('Update Order') . '"></div>';
 	}
 
 	echo '</form>';
 
 	if (DB_num_rows($Result)>0 ) {
-		echo '<br>';
+		echo '<br />';
 		echo '<table class=selection><tr>';
 		echo "<th colspan=4>"._('Assigned Taxes')."</th>";
 		echo '<th></th>';
@@ -323,7 +323,7 @@ if (isset($SelectedGroup)) {
 		echo '</tr>';
 
 	} else {
-		echo '<br><div class="centre">' . _('There are no tax authorities defined to allocate to this tax group').'</div>';
+		echo '<br /><div class="centre">' . _('There are no tax authorities defined to allocate to this tax group').'</div>';
 	}
 
 	$k=0; //row colour counter

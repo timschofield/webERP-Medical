@@ -64,7 +64,7 @@ if (isset($_POST['submit'])) {
 
 		$result = DB_query($sql,$db);
 		prnMsg( _('The discount matrix record has been added'),'success');
-		echo '<br>';
+		echo '<br />';
 		unset($_POST['DiscountCategory']);
 		unset($_POST['SalesType']);
 		unset($_POST['QuantityBreak']);
@@ -80,7 +80,7 @@ if (isset($_POST['submit'])) {
 
 	$result = DB_query($sql,$db);
 	prnMsg( _('The discount matrix record has been deleted'),'success');
-	echo '<br>';
+	echo '<br />';
 }
 
 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
@@ -136,9 +136,9 @@ echo '<tr><td>' . _('Quantity Break') . ':</td><td><input class="number" tabinde
 echo '<tr><td>' . _('Discount Rate') . ' (%):</td><td><input class="number" tabindex=4 '
 	. (in_array('DiscountRate',$Errors) ? 'class="inputerror"' : '') .
 		'type="text" name="DiscountRate" size=11 maxlength=14></td></tr>';
-echo '</table><br>';
+echo '</table><br />';
 
-echo '<div class="centre"><input tabindex=5 type="submit" name="submit" value="' . _('Enter Information') . '"></div><br>';
+echo '<div class="centre"><input tabindex=5 type="submit" name="submit" value="' . _('Enter Information') . '"></div><br />';
 
 $sql = "SELECT sales_type,
 		salestype,

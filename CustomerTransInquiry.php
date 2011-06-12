@@ -11,7 +11,7 @@ include('includes/header.inc');
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' .
 	_('Transaction Inquiry') . '" alt="" />' . ' ' . _('Transaction Inquiry') . '</p>';
-echo '<div class="page_help_text">' . _('Choose which type of transaction to report on.') . '</div><br>';
+echo '<div class="page_help_text">' . _('Choose which type of transaction to report on.') . '</div><br />';
 
 echo "<form action='" . $_SERVER['PHP_SELF'] . "' method=post>";
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -43,10 +43,10 @@ if (!isset($_POST['FromDate'])){
 if (!isset($_POST['ToDate'])){
 	$_POST['ToDate'] = Date($_SESSION['DefaultDateFormat']);
 }
-echo '<td>' . _('From') . ':</td><td><input tabindex="2" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="TEXT" name="FromDate" maxlength="10" size="11" VALUE="' . $_POST['FromDate'] . '"></td>';
-echo '<td>' . _('To') . ':</td><td><input tabindex="3" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="TEXT" name="ToDate" maxlength="10" size="11" VALUE="' . $_POST['ToDate'] . '"></td>';
+echo '<td>' . _('From') . ':</td><td><input tabindex="2" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="TEXT" name="FromDate" maxlength="10" size="11" value="' . $_POST['FromDate'] . '"></td>';
+echo '<td>' . _('To') . ':</td><td><input tabindex="3" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="TEXT" name="ToDate" maxlength="10" size="11" value="' . $_POST['ToDate'] . '"></td>';
 
-echo "</tr></table><br><div class='centre'><input tabindex=4 type=submit name='ShowResults' VALUE='" . _('Show Transactions') . "'>";
+echo "</tr></table><br /><div class='centre'><input tabindex=4 type=submit name='ShowResults' value='" . _('Show Transactions') . "'>";
 
 echo '</form></div>';
 
@@ -79,7 +79,7 @@ if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
    $DbgMsg =  _('The SQL that failed was');
    $TransResult = DB_query($sql, $db,$ErrMsg,$DbgMsg);
 
-   echo '<br><table cellpadding=2 class=selection>';
+   echo '<br /><table cellpadding=2 class=selection>';
 
    $tableheader = "<tr>
 			<th>" . _('Type') . "</th>

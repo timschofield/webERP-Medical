@@ -20,13 +20,13 @@ $SQL = "SELECT sales_type, typeabbrev FROM salestypes";
 
 $PricesResult = DB_query($SQL,$db);
 
-echo '<p><table class=selection>
+echo '<br /><table class=selection>
              <tr>
           	   <td>' . _('Select the Price List to update') .':</td>
                <td><select name="PriceList">';
 
 if (!isset($_POST['PriceList']) OR $_POST['PriceList']=='0'){
-	echo '<option selected VALUE="0">' . _('No Price List Selected');
+	echo '<option selected value="0">' . _('No Price List Selected');
 }
 
 while ($PriceLists=DB_fetch_array($PricesResult)){
@@ -91,7 +91,7 @@ if (isset($_POST['CostType']) and $_POST['CostType']=='OtherPriceList'){
                             <td><select name="BasePriceList">';
 
 	if (!isset($_POST['BasePriceList']) OR $_POST['BasePriceList']=='0'){
-		echo '<option selected VALUE=0>' . _('No Price List Selected') . '</option>';
+		echo '<option selected value=0>' . _('No Price List Selected') . '</option>';
 	}
 	while ($PriceLists=DB_fetch_array($PricesResult)){
 		if (isset($_POST['BasePriceList']) and $_POST['BasePriceList']==$PriceLists['typeabbrev']){
@@ -161,10 +161,11 @@ if (!isset($_POST['IncreasePercent'])){
 }
 
 echo '<tr><td>' . _('Percentage Increase (positive) or decrease (negative)') . '</td>
-                <td><input type=text name="IncreasePercent" class=number size=4 maxlength=4 VALUE="' . $_POST['IncreasePercent'] . '"></td></tr></table>';
+                <td><input type=text name="IncreasePercent" class=number size=4 maxlength=4 value="' . $_POST['IncreasePercent'] . '"></td></tr></table>';
 
 
-echo '<p><div class="centre"><input type=submit name="UpdatePrices" VALUE="' . _('Update Prices') . '\'  onclick="return confirm(\'' . _('Are you sure you wish to update or add all the prices according to the criteria selected?') . '\');"></div>';
+echo '<p><div class="centre"><input type=submit name="UpdatePrices" value="' . _('Update Prices') . '\'  onclick="return confirm(\'' .
+	_('Are you sure you wish to update or add all the prices according to the criteria selected?') . '\');"></div></p>';
 
 echo '</form>';
 

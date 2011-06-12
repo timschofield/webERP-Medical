@@ -308,7 +308,7 @@ if (isset($_POST['submit'])) {
 	if ($myrow[0]>0) {
 		$CancelDelete = 1;
 		prnMsg( _('This customer cannot be deleted because there are transactions that refer to it'),'warn');
-		echo '<br> ' . _('There are') . ' ' . $myrow[0] . ' ' . _('transactions against this customer');
+		echo '<br /> ' . _('There are') . ' ' . $myrow[0] . ' ' . _('transactions against this customer');
 
 	} else {
 		$sql= "SELECT COUNT(*) FROM salesorders WHERE debtorno='" . $_POST['DebtorNo'] . "'";
@@ -588,14 +588,14 @@ if (!isset($DebtorNo)) {
 	echo '</select></td></tr>';
 
 	echo '<tr><td>' . _('Invoice Addressing') . ':</td><td><select tabindex="19" name="AddrInvBranch">';
-		echo '<option selected VALUE=0>' . _('Address to HO') . '</option>';
-		echo '<option VALUE=1>' . _('Address to Branch') . '</option>';
+		echo '<option selected value=0>' . _('Address to HO') . '</option>';
+		echo '<option value=1>' . _('Address to Branch') . '</option>';
 	echo '</select></td></tr>';
 
 	echo'</table></td></tr></table>';
 	if ($DataError ==0){
 		echo '<br /><div class="centre"><input tabindex=20 type="Submit" name="submit" value="' . _('Add New Customer') .
-			'">&nbsp;<input tabindex=21 type=submit action=RESET VALUE="' . _('Reset') . '"></div>';
+			'">&nbsp;<input tabindex=21 type=submit action=RESET value="' . _('Reset') . '"></div>';
 	}
 	echo '</form>';
 
@@ -749,9 +749,9 @@ if (!isset($DebtorNo)) {
 				<td><select name="typeid">';
 		while ($myrow = DB_fetch_array($result)) {
 				if ($_POST['typeid']==$myrow['typeid']){
-						echo '<option selected VALUE="'. $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
+						echo '<option selected value="'. $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
 				} else {
-						echo '<option VALUE="'. $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
+						echo '<option value="'. $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
 				}
 		} //end while loop
 		DB_data_seek($result,0);
@@ -791,9 +791,9 @@ if (!isset($DebtorNo)) {
 			<td><select name="PaymentTerms">';
 		while ($myrow = DB_fetch_array($result)) {
 			if ($_POST['PaymentTerms']==$myrow['termsindicator']){
-				echo '<option selected VALUE="'. $myrow['termsindicator'] . '">' . $myrow['terms'] . '</option>';
+				echo '<option selected value="'. $myrow['termsindicator'] . '">' . $myrow['terms'] . '</option>';
 			} else {
-				echo '<option VALUE='. $myrow['termsindicator'] . '">' . $myrow['terms'] . '</option>';
+				echo '<option value='. $myrow['termsindicator'] . '">' . $myrow['terms'] . '</option>';
 			}
 		} //end while loop
 		DB_data_seek($result,0);
@@ -810,9 +810,9 @@ if (!isset($DebtorNo)) {
 			<td><select name="HoldReason">';
 		while ($myrow = DB_fetch_array($result)) {
 			if ($_POST['HoldReason']==$myrow['reasoncode']){
-				echo '<option selected VALUE='. $myrow['reasoncode'] . '">' . $myrow['reasondescription'] . '</option>';
+				echo '<option selected value='. $myrow['reasoncode'] . '">' . $myrow['reasondescription'] . '</option>';
 			} else {
-				echo '<option VALUE='. $myrow['reasoncode'] . '">' . $myrow['reasondescription'] . '</option>';
+				echo '<option value='. $myrow['reasoncode'] . '">' . $myrow['reasondescription'] . '</option>';
 			}
 		} //end while loop
 		DB_data_seek($result,0);
@@ -867,11 +867,11 @@ if (!isset($DebtorNo)) {
 		echo '<tr><td>' . _('Invoice Addressing') . ':</td>
 			<td><select name="AddrInvBranch">';
 		if ($_POST['InvAddrBranch']==0){
-			echo '<option selected VALUE=0>' . _('Address to HO') . '</option>';
-			echo '<option VALUE=1>' . _('Address to Branch') . '</option>';
+			echo '<option selected value=0>' . _('Address to HO') . '</option>';
+			echo '<option value=1>' . _('Address to Branch') . '</option>';
 		} else {
-			echo '<option VALUE=0>' . _('Address to HO') . '</option>';
-			echo '<option selected VALUE=1>' . _('Address to Branch') . '</option>';
+			echo '<option value=0>' . _('Address to HO') . '</option>';
+			echo '<option selected value=1>' . _('Address to Branch') . '</option>';
 		}
 	}
 
@@ -895,7 +895,7 @@ if (!isset($DebtorNo)) {
 			<th>' . _('Phone Number') . '</th>
 			<th>' . _('Notes') . '</th>
 			<th>' . _('Edit') . '</th>
-			<th colspan=2><input type="Submit" name="addcontact" VALUE="Add Contact"></th></tr>';
+			<th colspan=2><input type="Submit" name="addcontact" value="Add Contact"></th></tr>';
 	}
 	$k=0; //row colour counter
 
@@ -941,7 +941,7 @@ if (!isset($DebtorNo)) {
 		}
 	}//END WHILE LIST LOOP
 	echo '</table>';
-		//	echo "<input type='Submit' name='addcontact' VALUE='" . _('ADD Contact') . "'>";
+		//	echo "<input type='Submit' name='addcontact' value='" . _('ADD Contact') . "'>";
 	echo '<form method="post" action=' . $_SERVER['PHP_SELF'] . '?DebtorNo="'.$DebtorNo.'"&ID='.$ID.'&Edit'.$Edit.'>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	if (isset($Edit) and $Edit!='') {
@@ -995,11 +995,11 @@ if (!isset($DebtorNo)) {
 	echo'</td></tr></table>';
 
 	if (isset($_POST['New']) and $_POST['New']) {
-		echo '<div class="centre"><input type="Submit" name="submit" VALUE="' . _('Add New Customer') .
-			'">&nbsp;<input type=submit name="reset" VALUE="' . _('Reset') . '"></div></form>';
+		echo '<div class="centre"><input type="Submit" name="submit" value="' . _('Add New Customer') .
+			'">&nbsp;<input type=submit name="reset" value="' . _('Reset') . '"></div></form>';
 	} else if (!isset($_GET['Modify'])){
-		echo '<br /><div class="centre"><input type="Submit" name="submit" VALUE="' . _('Update Customer') . '">';
-		echo '&nbsp;<input type="Submit" name="delete" VALUE="' . _('Delete Customer') . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');">';
+		echo '<br /><div class="centre"><input type="Submit" name="submit" value="' . _('Update Customer') . '">';
+		echo '&nbsp;<input type="Submit" name="delete" value="' . _('Delete Customer') . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');">';
 	}
 	if(isset($_POST['addcontact']) AND (isset($_POST['addcontact'])!=''))
 	{

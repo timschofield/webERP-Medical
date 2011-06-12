@@ -25,7 +25,7 @@ if (isset($_POST['StockUOM'])) {
 
 $NoPurchasingData=0;
 
-echo '<a href="' . $rootpath . '/SelectProduct.php">' . _('Back to Items') . '</a><br>';
+echo '<a href="' . $rootpath . '/SelectProduct.php">' . _('Back to Items') . '</a><br />';
 
 if (isset($_POST['SupplierDescription'])) {
 	$_POST['SupplierDescription'] = trim($_POST['SupplierDescription']);
@@ -136,7 +136,8 @@ if (isset($_GET['Delete'])) {
 }
 
 if (!isset($_GET['Edit'])) {
-	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . ' ' . _('For Stock Code') . ' - ' . $StockID . '</p><br />';
+	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' .
+		$title . ' ' . _('For Stock Code') . ' - ' . $StockID . '</p><br />';
 	$sql = "SELECT  purchdata.supplierno,
 								suppliers.suppname,
 								purchdata.price,
@@ -249,7 +250,8 @@ if (isset($SupplierID) AND $SupplierID != '' AND !isset($_POST['SearchSupplier']
 	}
 } else {
 	if ($NoPurchasingData=0) {
-		echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . ' ' . _('For Stock Code') . ' - ' . $StockID . '</p><br />';
+		echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' .
+			$title . ' ' . _('For Stock Code') . ' - ' . $StockID . '</p><br />';
 	}
 	if (!isset($_POST['SearchSupplier'])) {
 		echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post><table cellpadding=3 colspan=4 class=selection><tr>';
@@ -268,7 +270,8 @@ if (isset($SupplierID) AND $SupplierID != '' AND !isset($_POST['SearchSupplier']
 }
 
 if (isset($_GET['Edit'])) {
-	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . ' ' . _('For Stock Code') . ' - ' . $StockID . '</p><br />';
+	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' .
+		$title . ' ' . _('For Stock Code') . ' - ' . $StockID . '</p><br />';
 }
 
 if (isset($_POST['SearchSupplier'])) {
@@ -316,7 +319,8 @@ if (isset($SuppliersResult)) {
 		$StockUOM = $myrow[1];
 		if (DB_num_rows($result) == 1) {
 			if ($myrow[2] == 'D' OR $myrow[2] == 'A' OR $myrow[2] == 'K') {
-				prnMsg($StockID . ' - ' . $myrow[0] . '<p> ' . _('The item selected is a dummy part or an assembly or kit set part') . ' - ' . _('it is not purchased') . '. ' . _('Entry of purchasing information is therefore inappropriate'), 'warn');
+				prnMsg($StockID . ' - ' . $myrow[0] . '<br /> ' . _('The item selected is a dummy part or an assembly or kit set part') . ' - ' . _('it is not purchased') .
+					'. ' . _('Entry of purchasing information is therefore inappropriate'), 'warn');
 				include ('includes/footer.inc');
 				exit;
 			} else {

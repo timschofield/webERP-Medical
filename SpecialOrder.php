@@ -22,16 +22,16 @@ if (isset($_GET['NewSpecial']) and $_GET['NewSpecial']=='yes'){
 }
 
 if (!isset($_SESSION['SupplierID'])){
-	echo '<br><br>';
+	echo '<br /><br />';
 	prnMsg(_('To set up a special') . ', ' . _('the supplier must first be selected from the Select Supplier page'),'info');
-	echo '<br><a href="'.$rootpath.'/SelectSupplier.php">' . _('Select the supplier now') . '</a>';
+	echo '<br /><a href="'.$rootpath.'/SelectSupplier.php">' . _('Select the supplier now') . '</a>';
 	include('includes/footer.inc');
 	exit;
 }
 
 if (!isset($_SESSION['CustomerID']) OR $_SESSION['CustomerID']==""){
-	echo '<br><br>' . _('To set up a special') . ', ' . _('the customer must first be selected from the Select Customer page') .
-		'<br><a href="'.$rootpath.'/SelectCustomer.php">' . _('Select the customer now') . '</a>';
+	echo '<br /><br />' . _('To set up a special') . ', ' . _('the customer must first be selected from the Select Customer page') .
+		'<br /><a href="'.$rootpath.'/SelectCustomer.php">' . _('Select the customer now') . '</a>';
 	include('includes/footer.inc');
 	exit;
 }
@@ -111,9 +111,9 @@ if (isset($_POST['SelectBranch'])){
 }
 echo '<div class="centre">';
 if (!isset($_SESSION['SPL']->BranchCode)){
-	echo '<br><font size=4 color=BLUE>' . _('Purchase from') . ' ' . $_SESSION['SPL']->SupplierName . ' ' . _('in') . ' ' . $_SESSION['SPL']->SuppCurrCode . ' ' . _('for') . ' ' . $_SESSION['SPL']->CustomerName . ' (' . $_SESSION['SPL']->CustCurrCode . ')';
+	echo '<br /><font size=4 color=BLUE>' . _('Purchase from') . ' ' . $_SESSION['SPL']->SupplierName . ' ' . _('in') . ' ' . $_SESSION['SPL']->SuppCurrCode . ' ' . _('for') . ' ' . $_SESSION['SPL']->CustomerName . ' (' . $_SESSION['SPL']->CustCurrCode . ')';
 } else {
-	echo '<br><font size=4 color=BLUE>' . _('Purchase from') . ' ' . $_SESSION['SPL']->SupplierName . ' ' . _('in') . ' ' . $_SESSION['SPL']->SuppCurrCode . ' ' . _('for') . ' ' . $_SESSION['SPL']->CustomerName . ' (' . $_SESSION['SPL']->CustCurrCode . ') - ' . _('delivered to') . ' ' . $_SESSION['SPL']->BranchName . ' ' . _('branch');
+	echo '<br /><font size=4 color=BLUE>' . _('Purchase from') . ' ' . $_SESSION['SPL']->SupplierName . ' ' . _('in') . ' ' . $_SESSION['SPL']->SuppCurrCode . ' ' . _('for') . ' ' . $_SESSION['SPL']->CustomerName . ' (' . $_SESSION['SPL']->CustCurrCode . ') - ' . _('delivered to') . ' ' . $_SESSION['SPL']->BranchName . ' ' . _('branch');
 }
 echo '</div></font>';
 /*if the branch details and delivery details have not been entered then select them from the list */
@@ -128,9 +128,9 @@ if (!isset($_SESSION['SPL']->BranchCode)){
 	If (DB_num_rows($BranchResult)>0) {
 
 		echo '<div class="centre">';
-		echo '<br><br>' . _('Select the customer branch to deliver the special to from the list below');
+		echo '<br /><br />' . _('Select the customer branch to deliver the special to from the list below');
 
-		echo '</div><br><table cellpadding=3 colspan=2 BORDER=1>';
+		echo '</div><br /><table cellpadding=3 colspan=2 BORDER=1>';
 
 		$tableheader = '<tr><th>' ._('Code') . '</th>
 					<th>' . _('Branch Name') . '</th></tr>';
@@ -149,7 +149,7 @@ if (!isset($_SESSION['SPL']->BranchCode)){
 				$k++;
 			}
 
-			printf('<td><input type=submit name="SelectBranch" VALUE="%s" /></td><td>%s</td></tr>', $myrow['branchcode'], $myrow['brname']);
+			printf('<td><input type=submit name="SelectBranch" value="%s" /></td><td>%s</td></tr>', $myrow['branchcode'], $myrow['brname']);
 
 //end of page full new headings if
 		}
@@ -190,32 +190,32 @@ If(isset($_POST['EnterLine'])){
 
 	if (!is_numeric($_POST['Qty'])){
 		$AllowAdd = False;
-		prnMsg( _('Cannot Enter this order line') . '<br>' . _('The quantity of the order item must be numeric'),'warn');
+		prnMsg( _('Cannot Enter this order line') . '<br />' . _('The quantity of the order item must be numeric'),'warn');
 	}
 
 	if ($_POST['Qty']<0){
 		$AllowAdd = False;
-		prnMsg( _('Cannot Enter this order line') . '<br>' . _('The quantity of the ordered item entered must be a positive amount'),'warn');
+		prnMsg( _('Cannot Enter this order line') . '<br />' . _('The quantity of the ordered item entered must be a positive amount'),'warn');
 	}
 
 	if (!is_numeric($_POST['Price'])){
 		$AllowAdd = False;
-		prnMsg( _('Cannot Enter this order line') . '<br>' . _('The price entered must be numeric'),'warn');
+		prnMsg( _('Cannot Enter this order line') . '<br />' . _('The price entered must be numeric'),'warn');
 	}
 
 	if (!is_numeric($_POST['Cost'])){
 		$AllowAdd = False;
-		prnMsg( _('Cannot Enter this order line') . '<br>' . _('The cost entered must be numeric'),'warn');
+		prnMsg( _('Cannot Enter this order line') . '<br />' . _('The cost entered must be numeric'),'warn');
 	}
 
 	if ((($_POST['Price']/$_SESSION['SPL']->CustCurrExRate)-($_POST['Cost']/$_SESSION['SPL']->SuppCurrExRate))<0){
 		$AllowAdd = False;
-		prnMsg( _('Cannot Enter this order line') . '<br>' . _('The sale is at a lower price than the cost'),'warn');
+		prnMsg( _('Cannot Enter this order line') . '<br />' . _('The sale is at a lower price than the cost'),'warn');
 	}
 
 	if (!Is_Date($_POST['ReqDelDate'])){
 		$AllowAdd = False;
-		prnMsg( _('Cannot Enter this order line') . '<br>' . _('The date entered must be in the format') . ' ' . $_SESSION['DefaultDateFormat'],'warn');
+		prnMsg( _('Cannot Enter this order line') . '<br />' . _('The date entered must be in the format') . ' ' . $_SESSION['DefaultDateFormat'],'warn');
 	}
 	If ($AllowAdd == True){
 
@@ -308,7 +308,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 
 
 		$ErrMsg = _('The purchase order header record could not be inserted into the database because');
-		$DbgMsg = _('The SQL statement used to insert the purchase order header record and failed was') . "<br>$sql";
+		$DbgMsg = _('The SQL statement used to insert the purchase order header record and failed was') . "<br />$sql";
  		$result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 
 		/*Get the auto increment value of the order number created from the SQL above */
@@ -356,7 +356,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 
 
 			$ErrMsg = _('The item record for line') . " " . $SPLLine->LineNo . " " . _('could not be create because');
-			$DbgMsg = _('The SQL statement used to insert the item and failed was') . "<br>$sql";
+			$DbgMsg = _('The SQL statement used to insert the item and failed was') . "<br />$sql";
 
 			$result =DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 
@@ -398,8 +398,8 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 
 		} /* end of the loop round the detail line items on the order */
 
-		echo '<br><br>' . _('Purchase Order') . ' ' . $_SESSION['SPL']->PurchOrderNo . ' ' . _('on') . ' ' . $_SESSION['SPL']->SupplierName . ' ' . _('has been created');
-		echo '<br><a href="'.$rootpath.'/PO_PDFPurchOrder.php?OrderNo=' . $_SESSION['SPL']->PurchOrderNo . '">' . _('Print Purchase Order') . '</a>';
+		echo '<br /><br />' . _('Purchase Order') . ' ' . $_SESSION['SPL']->PurchOrderNo . ' ' . _('on') . ' ' . $_SESSION['SPL']->SupplierName . ' ' . _('has been created');
+		echo '<br /><a href="'.$rootpath.'/PO_PDFPurchOrder.php?OrderNo=' . $_SESSION['SPL']->PurchOrderNo . '">' . _('Print Purchase Order') . '</a>';
 
 /*Now insert the sales order too */
 
@@ -487,20 +487,22 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 		} /* inserted line items into sales order details */
 
 		unset ($_SESSION['SPL']);
-		prnMsg(_('Sales Order Number') . ' ' . $SalesOrderNo . ' ' . _('has been entered') . '. <p>' . _('Orders created on a cash sales account may need the delivery details for the order to be modified') . '. <br><br>' . _('A freight charge may also be applicable'),'success');
+		prnMsg(_('Sales Order Number') . ' ' . $SalesOrderNo . ' ' . _('has been entered') . '. <br />' .
+			_('Orders created on a cash sales account may need the delivery details for the order to be modified') . '. <br /><br />' .
+				_('A freight charge may also be applicable'),'success');
 
 		if (count($_SESSION['AllowedPageSecurityTokens'])>1){
 
 			/* Only allow print of packing slip for internal staff - customer logon's cannot go here */
-			echo '<p><a href="'.$rootpath.'/PrintCustOrder.php?TransNo=' . $SalesOrderNo . '">' . _('Print packing slip') . ' (' . _('Preprinted stationery') . ')</a>';
-			echo '<p><a href="'.$rootpath.'/PrintCustOrder_generic.php?TransNo=' . $SalesOrderNo . '">' . _('Print packing slip') . ' (' . _('Laser') . ')</a>';
+			echo '<p><a href="'.$rootpath.'/PrintCustOrder.php?TransNo=' . $SalesOrderNo . '">' . _('Print packing slip') . ' (' . _('Preprinted stationery') . ')</a></p>';
+			echo '<p><a href="'.$rootpath.'/PrintCustOrder_generic.php?TransNo=' . $SalesOrderNo . '">' . _('Print packing slip') . ' (' . _('Laser') . ')</a></p>';
 
 		}
 
 		 $Result = DB_Txn_Commit($db);
 
 		 unset($_SESSION['SPL']); /*Clear the PO data to allow a newy to be input*/
-		 echo '<br><br><a href="'.$rootpath.'/SpecialOrder.php">' . _('Enter A New Special Order') . '</a>';
+		 echo '<br /><br /><a href="'.$rootpath.'/SpecialOrder.php">' . _('Enter A New Special Order') . '</a>';
 		 exit;
 	} /*end if there were no input errors trapped */
 } /* end of the code to do transfer the SPL object to the database  - user hit the place Order*/
@@ -525,9 +527,9 @@ while ($LocnRow=DB_fetch_array($LocnResult)){
 }
 echo '</select></td>';
 
-echo '<td>' . _('Initiated By') . ': <input type=TEXT name="Initiator" size=11 maxlength=10 VALUE="' . $_SESSION['SPL']->Initiator . '"></td>';
-echo '<td>' . _('Special Ref') . ': <input type=TEXT name="QuotationRef" size=16 maxlength=15 VALUE="' . $_SESSION['SPL']->QuotationRef . '"></td>';
-echo '<td>' . _('Customer Ref') . ': <input type=TEXT name="CustRef" size=11 maxlength=10 VALUE="' . $_SESSION['SPL']->CustRef . '"></td></tr>';
+echo '<td>' . _('Initiated By') . ': <input type=TEXT name="Initiator" size=11 maxlength=10 value="' . $_SESSION['SPL']->Initiator . '"></td>';
+echo '<td>' . _('Special Ref') . ': <input type=TEXT name="QuotationRef" size=16 maxlength=15 value="' . $_SESSION['SPL']->QuotationRef . '"></td>';
+echo '<td>' . _('Customer Ref') . ': <input type=TEXT name="CustRef" size=11 maxlength=10 value="' . $_SESSION['SPL']->CustRef . '"></td></tr>';
 
 echo '<tr><td VALIGN=TOP colspan=2>' . _('Comments') . ':';
 echo '<textarea name="Comments" cols=70 rows=2>' . $_SESSION['SPL']->Comments . '</textarea></td></tr></table>';
@@ -550,12 +552,12 @@ if (count($_SESSION['SPL']->LineItems)>0){
 		<th>' . _('Item Description') . '</th>
 		<th>' . _('Delivery') . '</th>
 		<th>' . _('Quantity') . '</th>
-		<th>' . _('Purchase Cost') . '<br>' . $_SESSION['SPL']->SuppCurrCode . '</th>
-		<th>' . _('Sell Price') . '<br>' . $_SESSION['SPL']->CustCurrCode . '</th>
-		<th>' . _('Total Cost') . '<br>' . $_SESSION['SPL']->SuppCurrCode .  '</th>
-		<th>' . _('Total Price') . '<br>' . $_SESSION['SPL']->CustCurrCode .  '</th>
-		<th>' . _('Total Cost') . '<br>' . $DefaultCurrency .  '</th>
-		<th>' . _('Total Price') . '<br>' . $DefaultCurrency .  '</th>
+		<th>' . _('Purchase Cost') . '<br />' . $_SESSION['SPL']->SuppCurrCode . '</th>
+		<th>' . _('Sell Price') . '<br />' . $_SESSION['SPL']->CustCurrCode . '</th>
+		<th>' . _('Total Cost') . '<br />' . $_SESSION['SPL']->SuppCurrCode .  '</th>
+		<th>' . _('Total Price') . '<br />' . $_SESSION['SPL']->CustCurrCode .  '</th>
+		<th>' . _('Total Cost') . '<br />' . $DefaultCurrency .  '</th>
+		<th>' . _('Total Price') . '<br />' . $DefaultCurrency .  '</th>
 	</tr>';
 
 	$_SESSION['SPL']->total = 0;
@@ -608,7 +610,7 @@ echo '<table>';
 echo '<input type="hidden" name="LineNo" value="' . ($_SESSION['SPL']->LinesOnOrder + 1) .'">';
 
 if (!isset($_POST['ItemDescription'])) {$_POST['ItemDescription']='';}
-echo '<tr><td>' . _('Ordered item Description') . ':</td><td><input type=TEXT name="ItemDescription" size=40 maxlength=40 VALUE="' . $_POST['ItemDescription'] . '"></td></tr>';
+echo '<tr><td>' . _('Ordered item Description') . ':</td><td><input type=TEXT name="ItemDescription" size=40 maxlength=40 value="' . $_POST['ItemDescription'] . '"></td></tr>';
 
 
 echo '<tr><td>' . _('Category') . ':</td><td><select name=StkCat>';
@@ -620,9 +622,9 @@ $result = DB_query($sql,$db, $ErrMsg, $DbgMsg);
 
 while ($myrow=DB_fetch_array($result)){
 	if (isset($_POST['StkCat']) and $myrow['categoryid']==$_POST['StkCat']){
-		echo '<option selected VALUE="'. $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
+		echo '<option selected value="'. $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	} else {
-		echo '<option VALUE="'. $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
+		echo '<option value="'. $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	}
 }
 echo '</select></td></tr>';
@@ -651,10 +653,10 @@ echo '<tr><td>' . _('Required Delivery Date') . ':</td>
 
 echo '</table>'; /* end of main table */
 
-echo '<div class="centre"><input type=submit Name="EnterLine" VALUE="' . _('Add Item to Order') . '">';
+echo '<div class="centre"><input type=submit Name="EnterLine" value="' . _('Add Item to Order') . '">';
 
-echo '<br><br><input type=submit Name="Cancel" VALUE="' . _('Start Again') . '">';
-echo '<br><br><input type=submit Name="Commit" VALUE="' . _('Process This Order') . '">';
+echo '<br /><br /><input type=submit Name="Cancel" value="' . _('Start Again') . '">';
+echo '<br /><br /><input type=submit Name="Commit" value="' . _('Process This Order') . '">';
 
 echo '</div></form>';
 include('includes/footer.inc');

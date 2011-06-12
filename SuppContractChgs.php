@@ -20,7 +20,7 @@ include('includes/header.inc');
 
 if (!isset($_SESSION['SuppTrans'])){
 	prnMsg(_('Contract charges or credits are entered against supplier invoices or credit notes respectively. To enter supplier transactions the supplier must first be selected from the supplier selection screen, then the link to enter a supplier invoice or credit note must be clicked on'),'info');
-	echo '<br><a href="' . $rootpath . '/SelectSupplier.php?">' . _('Select A Supplier') . '</a>';
+	echo '<br /><a href="' . $rootpath . '/SelectSupplier.php?">' . _('Select A Supplier') . '</a>';
 	exit;
 	/*It all stops here if there aint no supplier selected and invoice/credit initiated ie $_SESSION['SuppTrans'] started off*/
 }
@@ -59,14 +59,12 @@ if (isset($_GET['Delete'])){
 
 /*Show all the selected ContractRefs so far from the SESSION['SuppInv']->Contracts array */
 if ($_SESSION['SuppTrans']->InvoiceOrCredit=='Invoice'){
-		echo '<div class="centre"><p class="page_title_text">' . _('Contract charges on Invoice') . ' ';
+		echo '<div class="centre"><p class="page_title_text">' . _('Contract charges on Invoice') . ' ' . $_SESSION['SuppTrans']->SuppReference . ' ' .
+			_('From') . ' ' . $_SESSION['SuppTrans']->SupplierName . '</p></div>';
 } else {
-		echo '<div class="centre"><p class="page_title_text">' . _('Contract credits on Credit Note') . ' ';
+		echo '<div class="centre"><p class="page_title_text">' . _('Contract credits on Credit Note') . ' ' . $_SESSION['SuppTrans']->SuppReference . ' '
+			._('From') . ' ' . $_SESSION['SuppTrans']->SupplierName . '</p></div>';
 }
-
-echo  $_SESSION['SuppTrans']->SuppReference . ' ' ._('From') . ' ' . $_SESSION['SuppTrans']->SupplierName;
-
-echo '</p></div>';
 
 echo '<table cellpadding=2>';
 $TableHeader = '<tr><th>' . _('Contract') . '</th>
@@ -101,9 +99,9 @@ echo '<tr>
 </table>';
 
 if ($_SESSION['SuppTrans']->InvoiceOrCredit == 'Invoice'){
-	echo '<br><a href="' . $rootpath . '/SupplierInvoice.php?' . SID . '">' . _('Back to Invoice Entry') . '</a><hr>';
+	echo '<br /><a href="' . $rootpath . '/SupplierInvoice.php?' . SID . '">' . _('Back to Invoice Entry') . '</a><hr>';
 } else {
-	echo '<br><a href="' . $rootpath . '/SupplierCredit.php?' . SID . '">' . _('Back to Credit Note Entry') . '</a><hr>';
+	echo '<br /><a href="' . $rootpath . '/SupplierCredit.php?' . SID . '">' . _('Back to Credit Note Entry') . '</a><hr>';
 }
 
 /*Set up a form to allow input of new Contract charges */
@@ -115,8 +113,8 @@ if (!isset($_POST['ContractRef'])) {
 }
 echo '<table>';
 echo '<tr><td>' . _('Contract Reference') . ':</td>
-	<td><input type="Text" name="ContractRef" size=22 maxlength=20 VALUE="' .  $_POST['ContractRef'] . '"></td></tr>';
-echo '<tr><td>' . _('Contract Selection') . ':<br><font size=1>' . _('If you know the code enter it above') . '<br>' . _('otherwise select the contract from the list') . '</font></td><td><select name="ContractSelection">';
+	<td><input type="Text" name="ContractRef" size=22 maxlength=20 value="' .  $_POST['ContractRef'] . '"></td></tr>';
+echo '<tr><td>' . _('Contract Selection') . ':<br /><font size=1>' . _('If you know the code enter it above') . '<br />' . _('otherwise select the contract from the list') . '</font></td><td><select name="ContractSelection">';
 
 $sql = "SELECT contractref, name
 						FROM contracts INNER JOIN debtorsmaster
@@ -127,9 +125,9 @@ $result = DB_query($sql, $db);
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['ContractSelection']) and $myrow['contractref']==$_POST['ContractSelection']) {
-		echo '<option selected VALUE="' . $myrow['contractref'] . '">' . $myrow['contractref'] . ' - ' . $myrow['name'] . '</option>';
+		echo '<option selected value="' . $myrow['contractref'] . '">' . $myrow['contractref'] . ' - ' . $myrow['name'] . '</option>';
 	} else {
-		echo '<option VALUE="' . $myrow['contractref'] . '">' . $myrow['contractref'] . ' - ' . $myrow['name'] . '</option>';
+		echo '<option value="' . $myrow['contractref'] . '">' . $myrow['contractref'] . ' - ' . $myrow['name'] . '</option>';
 	}
 }
 
@@ -139,9 +137,9 @@ if (!isset($_POST['Amount'])) {
 	$_POST['Amount']=0;
 }
 echo '<tr><td>' . _('Amount') . ':</td>
-	<td><input type="text" name="Amount" size=12 maxlength=11 VALUE="' .  $_POST['Amount'] . '"></td></tr>';
+	<td><input type="text" name="Amount" size=12 maxlength=11 value="' .  $_POST['Amount'] . '"></td></tr>';
 echo '<tr><td>' . _('Narrative') . ':</td>
-	<td><input type="text" name="Narrative" size=42 maxlength=40 VALUE="' .  $_POST['Narrative'] . '"></td></tr>';
+	<td><input type="text" name="Narrative" size=42 maxlength=40 value="' .  $_POST['Narrative'] . '"></td></tr>';
 echo '<tr><td>' . _('Aniticpated Cost') . ':</td>
 	<td>';
 if (isset($_POST['AnticipatedCost']) AND $_POST['AnticipatedCost']==1){
@@ -152,7 +150,7 @@ if (isset($_POST['AnticipatedCost']) AND $_POST['AnticipatedCost']==1){
 
 echo '</td></tr></table>';
 
-echo '<input type="Submit" name="AddContractChgToInvoice" VALUE="' . _('Enter Contract Charge') . '">';
+echo '<input type="Submit" name="AddContractChgToInvoice" value="' . _('Enter Contract Charge') . '">';
 
 echo '</form>';
 include('includes/footer.inc');

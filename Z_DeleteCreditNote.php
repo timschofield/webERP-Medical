@@ -100,7 +100,7 @@ $SQL = "DELETE FROM stockmoves
 $ErrMsg = _('SQL to delete the stock movement record failed with the message');
 $Result = DB_query($SQL, $db,$ErrMsg,$DbgMsg,true);
 prnMsg(_('Deleted the credit note stock movements').'info');
-echo '<br><br>';
+echo '<br /><br />';
 
 $result = DB_Txn_Commit($db);
 prnMsg(_('Credit note number') . ' ' . $_GET['CreditNoteNo'] . ' ' . _('has been completely deleted') . '. ' . _('To ensure the integrity of the general ledger transactions must be reposted from the period the credit note was created'),'info');

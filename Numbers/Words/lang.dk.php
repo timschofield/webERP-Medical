@@ -14,7 +14,7 @@
 // | obtain it through the world-wide-web, please send a note to          |
 // | license@php.net so we can mail you a copy immediately.               |
 // +----------------------------------------------------------------------+
-// | Authors: Jesper Veggerby <pear.nosey@veggerby.dk>                    |
+// | Authors: Jesper Veggerby < pear.nosey@veggerby.dk>                    |
 // +----------------------------------------------------------------------+
 //
 // $Id: lang.dk.php,v 1.1 2006/11/17 05:59:52 daintree Exp $
@@ -25,7 +25,7 @@
 /**
  * Class for translating numbers into Danish.
  *
- * @author Jesper Veggerby <pear.nosey@veggerby.dk>
+ * @author Jesper Veggerby < pear.nosey@veggerby.dk>
  * @package Numbers_Words
  */
 
@@ -37,7 +37,7 @@ require_once("Numbers/Words.php");
 /**
  * Class for translating numbers into Danish.
  *
- * @author Jesper Veggerby <pear.nosey@veggerby.dk>
+ * @author Jesper Veggerby < pear.nosey@veggerby.dk>
  * @package Numbers_Words
  */
 class Numbers_Words_dk extends Numbers_Words
@@ -165,7 +165,7 @@ class Numbers_Words_dk extends Numbers_Words
      * @return string  The corresponding word representation
      *
      * @access public
-     * @author Jesper Veggerby <pear.nosey@veggerby.dk>
+     * @author Jesper Veggerby < pear.nosey@veggerby.dk>
      * @since  PHP 4.2.3
      */
     function toWords($num, $power = 0, $powsuffix = '') {
@@ -364,7 +364,7 @@ class Numbers_Words_dk extends Numbers_Words
      * @return string  The corresponding word representation for the currency
      *
      * @access public
-     * @author Jesper Veggerby <pear.nosey@veggerby.dk>
+     * @author Jesper Veggerby < pear.nosey@veggerby.dk>
      * @since  Numbers_Words 0.4
      */
     function toCurrencyWords($int_curr, $decimal, $fraction = false, $convert_fraction = true) {

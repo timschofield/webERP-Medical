@@ -106,9 +106,9 @@ If ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 			$title = _('Payment Run - Problem Report');
 			include('includes/header.inc');
 			prnMsg(_('The details of supplier invoices due could not be retrieved because') . ' - ' . DB_error_msg($db),'error');
-			echo '<br><a href="' . $rootpath . '/index.php">' . _('Back to the menu') . '</a>';
+			echo '<br /><a href="' . $rootpath . '/index.php">' . _('Back to the menu') . '</a>';
 			if ($debug==1){
-				echo '<br>' . _('The SQL that failed was') . ' ' . $sql;
+				echo '<br />' . _('The SQL that failed was') . ' ' . $sql;
 			}
 			include('includes/footer.inc');
 			exit;
@@ -117,7 +117,7 @@ If ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 			$title = _('Payment Run -Problem Report');
 			include('includes/header.inc');
 			prnMsg(_('There are no outstanding supplier invoices to pay'),'info');
-			echo '<br><a href="' . $rootpath . '/index.php">' . _('Back to the menu') . '</a>';
+			echo '<br /><a href="' . $rootpath . '/index.php">' . _('Back to the menu') . '</a>';
 			include('includes/footer.inc');
 			exit;
 		}
@@ -181,9 +181,9 @@ If ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 					$title = _('Payment Processing - Problem Report') . '.... ';
 					include('includes/header.inc');
 					prnMsg(_('None of the payments will be processed since updates to the transaction records for') . ' ' .$SupplierName . ' ' . _('could not be processed because') . ' - ' . DB_error_msg($db),'error');
-					echo '<br><a href="' . $rootpath . '/index.php">' . _('Back to the menu') . '</a>';
+					echo '<br /><a href="' . $rootpath . '/index.php">' . _('Back to the menu') . '</a>';
 					if ($debug==1){
-						echo '<br>' . _('The SQL that failed was') . $SQL;
+						echo '<br />' . _('The SQL that failed was') . $SQL;
 					}
 					$ProcessResult = DB_Txn_Rollback($db);
 					include('includes/footer.inc');
@@ -211,9 +211,9 @@ If ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 			$title = _('Payment Processing - Problem Report') . '.... ';
 			include('includes/header.inc');
 			prnMsg(_('None of the payments will be processed. Unfortunately, there was a problem committing the changes to the database because') . ' - ' . DB_error_msg($db),'error');
-			echo '<br><a href="' . $rootpath . '/index.php">' . _('Back to the menu') . '</a>';
+			echo '<br /><a href="' . $rootpath . '/index.php">' . _('Back to the menu') . '</a>';
 			if ($debug==1){
-				prnMsg(_('The SQL that failed was') . '<br>' . $SQL,'error');
+				prnMsg(_('The SQL that failed was') . '<br />' . $SQL,'error');
 			}
 			$ProcessResult = DB_Txn_Rollback($db);
 			include('includes/footer.inc');
@@ -238,7 +238,7 @@ If ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 		. '" alt="" />' . $title . '</p>';
 
 	if (isset($_POST['Currency']) AND !is_numeric($_POST['ExRate'])){
-		echo '<br>' . _('To process payments for') . ' ' . $_POST['Currency'] . ' ' . _('a numeric exchange rate applicable for purchasing the currency to make the payment with must be entered') . '. ' . _('This rate is used to calculate the difference in exchange and make the necessary postings to the General ledger if linked') . '.';
+		echo '<br />' . _('To process payments for') . ' ' . $_POST['Currency'] . ' ' . _('a numeric exchange rate applicable for purchasing the currency to make the payment with must be entered') . '. ' . _('This rate is used to calculate the difference in exchange and make the necessary postings to the General ledger if linked') . '.';
 	}
 
 	/* show form to allow input	*/
@@ -281,7 +281,7 @@ If ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 		$DefaultExRate = $_POST['ExRate'];
 	}
 	echo '<tr><td>' . _('Exchange Rate') . ':</td>
-            <td><input type=text class="number" name="ExRate" maxlength=11 size=12 VALUE=' . $DefaultExRate . '></td></tr>';
+            <td><input type=text class="number" name="ExRate" maxlength=11 size=12 value=' . $DefaultExRate . '></td></tr>';
 
 	if (!isset($_POST['AmountsDueBy'])){
 		$DefaultDate = Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m')+1,0 ,Date('y')));
@@ -290,16 +290,16 @@ If ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 	}
 
 	echo '<tr><td>' . _('Payments Due To') . ':</td>
-            <td><input type=text class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="AmountsDueBy" maxlength=11 size=12 VALUE=' . $DefaultDate . '></td></tr>';
+            <td><input type=text class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="AmountsDueBy" maxlength=11 size=12 value=' . $DefaultDate . '></td></tr>';
 
 	$SQL = "SELECT bankaccountname, accountcode FROM bankaccounts";
 
 	$AccountsResults = DB_query($SQL,$db,'','',false,false);
 
 	if (DB_error_no($db) !=0) {
-		 echo '<br>' . _('The bank accounts could not be retrieved by the SQL because') . ' - ' . DB_error_msg($db);
+		 echo '<br />' . _('The bank accounts could not be retrieved by the SQL because') . ' - ' . DB_error_msg($db);
 		 if ($debug==1){
-			echo '<br>' . _('The SQL used to retrieve the bank accounts was') . ':<br>' . $SQL;
+			echo '<br />' . _('The SQL used to retrieve the bank accounts was') . ':<br />' . $SQL;
 		 }
 		 exit;
 	}
@@ -307,7 +307,7 @@ If ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 	echo '<tr><td>' . _('Pay From Account') . ':</td><td><select name="BankAccount">';
 
 	if (DB_num_rows($AccountsResults)==0){
-		 echo '</select></td></tr></table><p>' . _('Bank Accounts have not yet been defined. You must first') . ' <a href="' . $rootpath . '/BankAccounts.php">' . _('define the bank accounts') . '</a> ' . _('and general ledger accounts to be affected') . '.';
+		 echo '</select></td></tr></table><br />' . _('Bank Accounts have not yet been defined. You must first') . ' <a href="' . $rootpath . '/BankAccounts.php">' . _('define the bank accounts') . '</a> ' . _('and general ledger accounts to be affected') . '.';
 		 include('includes/footer.inc');
 		 exit;
 	} else {
@@ -315,9 +315,9 @@ If ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 		      /*list the bank account names */
 
 			if (isset($_POST['BankAccount']) and $_POST['BankAccount']==$myrow['accountcode']){
-				echo '<option selected VALUE="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'];
+				echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'];
 			} else {
-				echo '<option VALUE="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'];
+				echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'];
 			}
 		}
 		echo '</select></td></tr>';
@@ -348,7 +348,7 @@ Payment types can be modified by editing that file */
 	}
 
 	echo '<tr><td>' . _('Starting Reference no (eg chq no)') . ':</td>
-            <td><input type=text name="Ref" maxlength=11 size=12 VALUE=' . $_POST['Ref'] . '></td></tr>';
+            <td><input type=text name="Ref" maxlength=11 size=12 value=' . $_POST['Ref'] . '></td></tr>';
 
 	echo '</table><br /><div class="centre"><input type=Submit Name="PrintPDF" Value="' . _('Print PDF Only') . '">
                 <input type=Submit Name="PrintPDFAndProcess" Value="' . _('Print and Process Payments') . '"></div>';

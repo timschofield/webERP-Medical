@@ -246,7 +246,7 @@ $result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 if (DB_num_rows($result)!=0){
 
 	$myrow = DB_fetch_array($result);
-	echo '<div class="centre"><b>' . $myrow['reportheading'] . '</b><br></div><table class=selection>';
+	echo '<div class="centre"><b>' . $myrow['reportheading'] . '</b><br /></div><table class=selection>';
 	echo '<tr><th>' . _('Col') . ' #</th>
             <th>' . _('Heading 1') . '</th>
             <th>' . _('Heading 2') . '</th>';
@@ -254,10 +254,10 @@ if (DB_num_rows($result)!=0){
         <th>' . _('Prd From') . '</th>
         <th>' . _('Prd To') . '</th>';
 	echo '<th>' . _('Data') . '</th>
-        <th>' . _('Col') . ' #<br><font size=1>' . _('Numerator') . '</font></th>
-        <th>' . _('Col') . ' #<br><font size=1>' . _('Denominator') . '</font></th>';
+        <th>' . _('Col') . ' #<br /><font size=1>' . _('Numerator') . '</font></th>
+        <th>' . _('Col') . ' #<br /><font size=1>' . _('Denominator') . '</font></th>';
 	echo '<th>' . _('Operator') . '</th>
-        <th>' . _('Budget') . '<br>' . _('Or Actual') . '</th></tr>';
+        <th>' . _('Budget') . '<br />' . _('Or Actual') . '</th></tr>';
 	$k=0; //row colour counter
 
 	do {
@@ -314,7 +314,7 @@ if (DB_num_rows($result)!=0){
 	//END WHILE LIST LOOP
  }
 
-echo '</table><br><div class="centre"><a href="' . $rootpath . '/SalesAnalRepts.php">' . _('Maintain Report Headers') . '</a></div><p>';
+echo '</table><br /><div class="centre"><a href="' . $rootpath . '/SalesAnalRepts.php">' . _('Maintain Report Headers') . '</a></div><br />';
 if (DB_num_rows($result)>10){
     prnMsg(_('WARNING') . ': ' . _('User defined reports can have up to 10 columns defined') . '. ' . _('The report will not be able to be run until some columns are deleted'),'warn');
 }
@@ -328,7 +328,7 @@ if (!isset($_GET['delete'])) {
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<input type="hidden" name="ReportHeading" value='.$ReportHeading.'>';
-	echo '<input type=hidden name="ReportID" VALUE=' . $ReportID . '>';
+	echo '<input type=hidden name="ReportID" value=' . $ReportID . '>';
 	if (isset($SelectedCol)) {
 		//editing an existing Column
 
@@ -373,7 +373,7 @@ if (!isset($_GET['delete'])) {
 		$_POST['BudgetOrActual']=$myrow['budgetoractual'];
 		$_POST['ValFormat']=$myrow['valformat'];
 
-		echo '<input type=hidden name="SelectedCol" VALUE=' . $SelectedCol . '>';
+		echo '<input type=hidden name="SelectedCol" value=' . $SelectedCol . '>';
 		echo '<table class=selection>';
 
 	} else {

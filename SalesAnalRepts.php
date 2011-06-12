@@ -51,15 +51,15 @@ function GrpByDataOptions($GroupByDataX) {
     echo '<option Value="Sales Person">' . _('Sales Person') . '</option>';
  }
  if ($GroupByDataX=='Not Used' OR $GroupByDataX == '' OR ! isset($GroupByDataX) OR is_null($GroupByDataX)){
-     echo '<option selected VALUE="Not Used">' . _('Not Used') . '</option>';
+     echo '<option selected value="Not Used">' . _('Not Used') . '</option>';
  } else {
-    echo '<option VALUE="Not Used">' . _('Not Used') . '</option>';
+    echo '<option value="Not Used">' . _('Not Used') . '</option>';
  }
 }
 
 /* end of function  */
 
-echo '<p>';
+echo '<br />';
 
 if (isset($_GET['SelectedReport'])) {
 	$SelectedReport = $_GET['SelectedReport'];
@@ -263,7 +263,7 @@ if (isset($_POST['submit'])) {
 	$DbgMsg = _('The SQL used to delete the report headers was');
 	$result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
-	echo '<p>' . _('Report Deleted') . '<p>';
+	echo '<p>' . _('Report Deleted') . '</p>';
 	unset($SelectedReport);
 	include ('includes/footer.inc');
 	exit;
@@ -319,7 +319,7 @@ while ($myrow = DB_fetch_array($result)) {
 
 	}
 	//END WHILE LIST LOOP
-	echo '</table><p>';
+	echo '</table><br />';
 }
 
 //end of ifs and buts!
@@ -330,7 +330,7 @@ if (isset($SelectedReport)) {
 	echo '<a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '">' . _('Show All Defined Reports') . '</a>';
 }
 
-echo '<p>';
+echo '<br />';
 
 
 if (!isset($_GET['delete'])) {
@@ -418,8 +418,8 @@ if (!isset($_GET['delete'])) {
 	if (!isset($_POST['Upper1'])) {
 		$_POST['Upper1'] = '';
 	}
-	echo '<td>' . _('From') . ': <input type="text" name="Lower1" size=10 maxlength=10 VALUE="' . $_POST['Lower1'] . '"></td>';
-	echo '<td>' . _('To') . ': <input type="text" name="Upper1" size=10 maxlength=10 VALUE="' . $_POST['Upper1'] . '"></td></tr>';
+	echo '<td>' . _('From') . ': <input type="text" name="Lower1" size=10 maxlength=10 value="' . $_POST['Lower1'] . '"></td>';
+	echo '<td>' . _('To') . ': <input type="text" name="Upper1" size=10 maxlength=10 value="' . $_POST['Upper1'] . '"></td></tr>';
 
 	echo '<tr><td>' . _('Group By 2') . ': <select name=GroupByData2>';
 
@@ -444,8 +444,8 @@ if (!isset($_GET['delete'])) {
 	}
 
 	echo '</select></td>';
-	echo '<td>' . _('From') . ': <input type="text" name="Lower2" size=10 maxlength=10 VALUE="' . $_POST['Lower2'] . '"></td>';
-	echo '<td>' . _('To') . ': <input type="text" name="Upper2" size=10 maxlength=10 VALUE="' . $_POST['Upper2'] . '"></td></tr>';
+	echo '<td>' . _('From') . ': <input type="text" name="Lower2" size=10 maxlength=10 value="' . $_POST['Lower2'] . '"></td>';
+	echo '<td>' . _('To') . ': <input type="text" name="Upper2" size=10 maxlength=10 value="' . $_POST['Upper2'] . '"></td></tr>';
 
 	echo '<tr><td>' . _('Group By 3') . ': <select name=GroupByData3>';
 
@@ -471,8 +471,8 @@ if (!isset($_GET['delete'])) {
 		$_POST['Upper3'] = '';
 	}
 
-	echo '<td>' . _('From') . ': <input type="text" name="Lower3" size=10 maxlength=10 VALUE="' . $_POST['Lower3'] . '"></td>';
-	echo '<td>' . _('To') . ': <input type="text" name="Upper3" size=10 maxlength=10 VALUE="' . $_POST['Upper3'] . '"></td></tr>';
+	echo '<td>' . _('From') . ': <input type="text" name="Lower3" size=10 maxlength=10 value="' . $_POST['Lower3'] . '"></td>';
+	echo '<td>' . _('To') . ': <input type="text" name="Upper3" size=10 maxlength=10 value="' . $_POST['Upper3'] . '"></td></tr>';
 
 	echo '<tr><td>' . _('Group By 4') .': <select name=GroupByData4>';
 
@@ -488,8 +488,8 @@ if (!isset($_GET['delete'])) {
 		$_POST['Upper4'] = '';
 	}
 
-	echo '<td>' . _('From') .': <input type="text" name="Lower4" size=10 maxlength=10 VALUE="' . $_POST['Lower4'] . '"></td>';
-	echo '<td>' . _('To') . ': <input type="text" name="Upper4" size=10 maxlength=10 VALUE="' . $_POST['Upper4'] . '"></td></tr>';
+	echo '<td>' . _('From') .': <input type="text" name="Lower4" size=10 maxlength=10 value="' . $_POST['Lower4'] . '"></td>';
+	echo '<td>' . _('To') . ': <input type="text" name="Upper4" size=10 maxlength=10 value="' . $_POST['Upper4'] . '"></td></tr>';
 
 	echo '</table>';
 

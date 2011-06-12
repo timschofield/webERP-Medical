@@ -9,15 +9,15 @@ include('includes/header.inc');
 if (empty($_POST['DoUpgrade'])){
 	prnMsg(_('This script will run perform any modifications to the database since v 3.11 required to allow the additional functionality in version 4.00 scripts'),'info');
 
-	echo '<p><form method="post" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '">';
+	echo '<p><form method="post" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '"></p>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<div class="centre"><input type=submit name=DoUpgrade VALUE="' . _('Perform Upgrade') . '"></div>';
+	echo '<div class="centre"><input type=submit name=DoUpgrade value="' . _('Perform Upgrade') . '"></div>';
 	echo '</form>';
 }
 
 if ($_POST['DoUpgrade'] == _('Perform Upgrade')){
 
-	echo '<br>';
+	echo '<br />';
 	prnMsg(_('If there are any failures then please check with your system administrator').
 		'. '._('Please read all notes carefully to ensure they are expected'),'info');
 
@@ -27,7 +27,7 @@ if ($_POST['DoUpgrade'] == _('Perform Upgrade')){
 	$ErrMsg = _('The script to upgrade the database failed because');
 	$sql ='';
 	$InAFunction = false;
-	echo '<br><table>';
+	echo '<br /><table>';
 	for ($i=0; $i<=$ScriptFileEntries; $i++) {
 
 		$SQLScriptFile[$i] = trim($SQLScriptFile[$i]);

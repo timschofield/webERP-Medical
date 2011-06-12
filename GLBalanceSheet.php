@@ -20,13 +20,13 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 	echo '<div class="centre"><p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="'
 		. _('Print') . '" alt="" />' . ' ' . _('Balance Sheet') . '</p></div>';
 	echo '<div class="page_help_text">'
-	. _('Balance Sheet (or statement of financial position) is a summary  of balances. Assets, liabilities and ownership equity are listed as of a specific date, such as the end of its financial year. Of the four basic financial statements, the balance sheet is the only statement which applies to a single point in time.') . '<br>'
-	. _('The balance sheet has three parts: assets, liabilities and ownership equity. The main categories of assets are listed first and are followed by the liabilities. The difference between the assets and the liabilities is known as equity or the net assets or the net worth or capital of the company and according to the accounting equation, net worth must equal assets minus liabilities.') . '<br>'
+	. _('Balance Sheet (or statement of financial position) is a summary  of balances. Assets, liabilities and ownership equity are listed as of a specific date, such as the end of its financial year. Of the four basic financial statements, the balance sheet is the only statement which applies to a single point in time.') . '<br />'
+	. _('The balance sheet has three parts: assets, liabilities and ownership equity. The main categories of assets are listed first and are followed by the liabilities. The difference between the assets and the liabilities is known as equity or the net assets or the net worth or capital of the company and according to the accounting equation, net worth must equal assets minus liabilities.') . '<br />'
 	. _('webERP is an "accrual" based system (not a "cash based" system).  Accrual systems include items when they are invoiced to the customer, and when expenses are owed based on the supplier invoice date.') . '</div>';
 
 	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<p><table class="selection"><tr><td>'._('Select the balance date').':</td><td><select Name="BalancePeriodEnd">';
+	echo '<br /><table class="selection"><tr><td>'._('Select the balance date').':</td><td><select Name="BalancePeriodEnd">';
 
 	$periodno=GetPeriod(Date($_SESSION['DefaultDateFormat']), $db);
 	$sql = "SELECT lastdate_in_period FROM periods WHERE periodno='".$periodno . "'";
@@ -48,14 +48,14 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 	echo '</select></td></tr>';
 
 	echo '<tr><td>'._('Detail Or Summary').':</td><td><select Name="Detail">';
-	echo '<option selected VALUE="Summary">'._('Summary') . '</option>';
-	echo '<option selected VALUE="Detailed">'._('All Accounts') . '</option>';
+	echo '<option selected value="Summary">'._('Summary') . '</option>';
+	echo '<option selected value="Detailed">'._('All Accounts') . '</option>';
 	echo '</select></td></tr>';
 
 	echo '</table>';
 
-	echo '<br><div class="centre"><input type=submit Name="ShowBalanceSheet" Value="'._('Show on Screen (HTML)').'"></div>';
-	echo '<br><div class="centre"><input type=submit Name="PrintPDF" Value="'._('Produce PDF Report').'"></div>';
+	echo '<br /><div class="centre"><input type=submit Name="ShowBalanceSheet" Value="'._('Show on Screen (HTML)').'"></div>';
+	echo '<br /><div class="centre"><input type=submit Name="PrintPDF" Value="'._('Produce PDF Report').'"></div>';
 
 	/*Now do the posting while the user is thinking about the period to select */
 	include ('includes/GLPostings.inc');
@@ -90,9 +90,9 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 		$title = _('Balance Sheet') . ' - ' . _('Problem Report') . '....';
 		include('includes/header.inc');
 		prnMsg( _('The accumulated profits brought forward could not be calculated by the SQL because') . ' - ' . DB_error_msg($db) );
-		echo '<br><a href="' .$rootpath .'/index.php?' . SID . '">'. _('Back to the menu'). '</a>';
+		echo '<br /><a href="' .$rootpath .'/index.php?' . SID . '">'. _('Back to the menu'). '</a>';
 		if ($debug==1){
-			echo '<br>'. $SQL;
+			echo '<br />'. $SQL;
 		}
 		include('includes/footer.inc');
 		exit;
@@ -128,9 +128,9 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 		$title = _('Balance Sheet') . ' - ' . _('Problem Report') . '....';
 		include('includes/header.inc');
 		prnMsg( _('No general ledger accounts were returned by the SQL because') . ' - ' . DB_error_msg($db) );
-		echo '<br><a href="' .$rootpath .'/index.php?' . SID . '">'. _('Back to the menu'). '</a>';
+		echo '<br /><a href="' .$rootpath .'/index.php?' . SID . '">'. _('Back to the menu'). '</a>';
 		if ($debug==1){
-			echo '<br>'. $SQL;
+			echo '<br />'. $SQL;
 		}
 		include('includes/footer.inc');
 		exit;
@@ -291,7 +291,7 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 		$title = _('Print Balance Sheet Error');
 		include('includes/header.inc');
 		prnMsg( _('There were no entries to print out for the selections specified') );
-		echo '<br><a href="'. $rootpath.'/index.php?' . SID . '">'. _('Back to the menu'). '</a>';
+		echo '<br /><a href="'. $rootpath.'/index.php?' . SID . '">'. _('Back to the menu'). '</a>';
 		include('includes/footer.inc');
 		exit;
 	} else {
@@ -303,7 +303,7 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 	include('includes/header.inc');
 	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<input type=hidden name="BalancePeriodEnd" VALUE="' . $_POST['BalancePeriodEnd'] . '">';
+	echo '<input type=hidden name="BalancePeriodEnd" value="' . $_POST['BalancePeriodEnd'] . '">';
 
 	$RetainedEarningsAct = $_SESSION['CompanyRecord']['retainedearnings'];
 
@@ -658,7 +658,7 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 		</tr>';
 
 	echo '</table>';
-	echo '<br><div class="centre"><input type=submit Name="SelectADifferentPeriod" Value="'._('Select A Different Balance Date').'"></div>';
+	echo '<br /><div class="centre"><input type=submit Name="SelectADifferentPeriod" Value="'._('Select A Different Balance Date').'"></div>';
 }
 
 echo '</form>';

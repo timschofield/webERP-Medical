@@ -1011,7 +1011,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$DebtorNo,$DebtorNoOp,$DebtorName
 				number_format($totalextprice,2),
 				number_format($totalinvqty,2),
 				' ');
-			echo '</pre>';
+
 		} // End of if ($_POST['ReportType']
 
     } // End of if inputerror != 1

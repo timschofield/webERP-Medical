@@ -46,7 +46,7 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/m
 
 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '" name="form">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<br><table><tr>';
+echo '<br /><table><tr>';
 
 
 

@@ -322,7 +322,7 @@ if (!isset($_SESSION['Adjustment'])) {
 	$_SESSION['Adjustment']->PartUnit=$myrow['units'];
 	$_SESSION['Adjustment']->StandardCost=$myrow['materialcost']+$myrow['labourcost']+$myrow['overheadcost'];
 }
-echo '<br><table class=selection>';
+echo '<br /><table class=selection>';
 echo '<tr><th colspan=4><font color=blue size=3>'._('Adjustment Details').'</font></th></tr>';
 if (!isset($_GET['Description'])) {
 	$_GET['Description']='';
@@ -340,7 +340,7 @@ if (isset($StockID)) {
 } else {
 	echo '<input type=text name="StockCode" size=21 value="" maxlength=20>';
 }
-echo '</td><td><input type=submit name="CheckCode" VALUE="'._('Check Part').'"></td></tr>';
+echo '</td><td><input type=submit name="CheckCode" value="'._('Check Part').'"></td></tr>';
 if (isset($_SESSION['Adjustment']) and strlen($_SESSION['Adjustment']->ItemDescription)>1){
 	echo '<tr><td colspan=3><font color=BLUE size=3>' . $_SESSION['Adjustment']->ItemDescription . ' ('._('In Units of').' ' .
 		$_SESSION['Adjustment']->PartUnit . ' ) - ' . _('Unit Cost').' = ' .
@@ -409,17 +409,17 @@ while ($myrow=DB_fetch_array($result)){
 echo '</select></td>';
 // End select tag
 
-echo '</table><div class="centre"><br><input type=submit name="EnterAdjustment" value="'. _('Enter Stock Adjustment'). '"><br>';
+echo '</table><div class="centre"><br /><input type=submit name="EnterAdjustment" value="'. _('Enter Stock Adjustment'). '"><br />';
 
 if (!isset($_POST['StockLocation'])) {
 	$_POST['StockLocation']='';
 }
 
-echo '<br><a href="'. $rootpath. '/StockStatus.php?' . SID . '&StockID='. $StockID . '">'._('Show Stock Status').'</a>';
-echo '<br><a href="'.$rootpath.'/StockMovements.php?' . SID . '&StockID=' . $StockID . '">'._('Show Movements').'</a>';
-echo '<br><a href="'.$rootpath.'/StockUsage.php?' . SID . '&StockID=' . $StockID . '&StockLocation=' . $_POST['StockLocation'] . '">'._('Show Stock Usage').'</a>';
-echo '<br><a href="'.$rootpath.'/SelectSalesOrder.php?' . SID . '&SelectedStockItem='. $StockID .'&StockLocation=' . $_POST['StockLocation'] . '">'. _('Search Outstanding Sales Orders').'</a>';
-echo '<br><a href="'.$rootpath.'/SelectCompletedOrder.php?' . SID . '&SelectedStockItem=' . $StockID .'">'._('Search Completed Sales Orders').'</a>';
+echo '<br /><a href="'. $rootpath. '/StockStatus.php?' . SID . '&StockID='. $StockID . '">'._('Show Stock Status').'</a>';
+echo '<br /><a href="'.$rootpath.'/StockMovements.php?' . SID . '&StockID=' . $StockID . '">'._('Show Movements').'</a>';
+echo '<br /><a href="'.$rootpath.'/StockUsage.php?' . SID . '&StockID=' . $StockID . '&StockLocation=' . $_POST['StockLocation'] . '">'._('Show Stock Usage').'</a>';
+echo '<br /><a href="'.$rootpath.'/SelectSalesOrder.php?' . SID . '&SelectedStockItem='. $StockID .'&StockLocation=' . $_POST['StockLocation'] . '">'. _('Search Outstanding Sales Orders').'</a>';
+echo '<br /><a href="'.$rootpath.'/SelectCompletedOrder.php?' . SID . '&SelectedStockItem=' . $StockID .'">'._('Search Completed Sales Orders').'</a>';
 
 echo '</div></form>';
 include('includes/footer.inc');

@@ -84,7 +84,7 @@ if (isset($_POST['submit'])) {
 	$result = DB_query($sql,$db);
 	$myrow = DB_fetch_row($result);
 	if ($myrow[0]>0) {
-		prnMsg(_('Cannot delete this demand type because MRP Demand records exist for this type') . '<br>' . _('There are') . ' ' . $myrow[0] . ' ' ._('MRP Demands referring to this type'),'warn');
+		prnMsg(_('Cannot delete this demand type because MRP Demand records exist for this type') . '<br />' . _('There are') . ' ' . $myrow[0] . ' ' ._('MRP Demands referring to this type'),'warn');
     } else {
 			$sql="DELETE FROM mrpdemandtypes WHERE mrpdemandtype='" . $SelectedDT . "'";
 			$result = DB_query($sql,$db);
@@ -138,7 +138,7 @@ if (isset($SelectedDT) and !isset($_GET['delete'])) {
 	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Show all Demand Types') . '</a></div>';
 }
 
-echo '<p><form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+echo '<br /><form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (isset($SelectedDT) and !isset($_GET['delete'])) {

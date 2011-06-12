@@ -719,7 +719,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 // Note this is duplicated
 //echo '<div class="page_help_text">' . _('Note: To enter a payment FROM ') . $_SESSION['PaymentDetail']->SuppName . _(' use a negative Payment amount.');
 
-echo '<p><table class=selection>';
+echo '<br /><table class=selection>';
 
 echo '<tr><th colspan=4><font size=3 color=blue>' . _('Payment');
 
@@ -747,7 +747,7 @@ $AccountsResults = DB_query($SQL,$db,$ErrMsg,$DbgMsg);
 echo '<tr><td>' . _('Bank Account') . ':</td><td><select name="BankAccount" onChange="ReloadForm(UpdateHeader)">';
 
 if (DB_num_rows($AccountsResults)==0){
-	echo '</select></td></tr></table><p>';
+	echo '</select></td></tr></table><br />';
 	prnMsg( _('Bank Accounts have not yet been defined. You must first') . ' <a href="' . $rootpath . '/BankAccounts.php">' . _('define the bank accounts') . '</a> ' . _('and general ledger accounts to be affected'),'warn');
 	include('includes/footer.inc');
 	exit;

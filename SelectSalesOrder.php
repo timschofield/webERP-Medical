@@ -131,7 +131,7 @@ if (isset($_POST['PlacePO'])){ //user hit button to place PO for selected orders
 					} //end of authorisation status settings
 
 					if ($SupplierID !=''){ //then we have just added a purchase order
-						echo '<p />';
+						echo '<br />';
 						prnMsg(_('Purchase Order') . ' ' . $PO_OrderNo . ' ' . _('on') . ' ' . $SupplierID . ' ' . _('has been created'),'success');
 						DB_Txn_Commit($db);
 					}
@@ -296,7 +296,7 @@ if (isset($_POST['PlacePO'])){ //user hit button to place PO for selected orders
 			} //end of authorisation status settings
 
 			if ($SupplierID !=''){ //then we have just added a purchase order irrespective of autoauthorise status
-				echo '<p>';
+				echo '<br />';
 				prnMsg(_('Purchase Order') . ' ' . $PO_OrderNo . ' ' . _('on') . ' ' . $SupplierID . ' ' . _('has been created'),'success');
 				DB_Txn_Commit($db);
 			}
@@ -320,12 +320,12 @@ if (isset($_POST['ResetPart'])){
      unset($_REQUEST['SelectedStockItem']);
 }
 
-echo '<p><div class="centre">';
+echo '<br /><div class="centre">';
 
 if (isset($_REQUEST['OrderNumber']) AND $_REQUEST['OrderNumber']!='') {
 	$_REQUEST['OrderNumber'] = trim($_REQUEST['OrderNumber']);
 	if (!is_numeric($_REQUEST['OrderNumber'])){
-		echo '<br><b>' . _('The Order Number entered MUST be numeric') . '</b><br>';
+		echo '<br /><b>' . _('The Order Number entered MUST be numeric') . '</b><br />';
 		unset ($_REQUEST['OrderNumber']);
 		include('includes/footer.inc');
 		exit;
@@ -443,15 +443,15 @@ if (!isset($StockID)) {
 		}
 
 		if ($_POST['Quotations']=='Quotes_Only'){
-			echo '<option selected VALUE="Quotes_Only">' . _('Quotations Only');
-			echo '<option VALUE="Orders_Only">' . _('Orders Only');
+			echo '<option selected value="Quotes_Only">' . _('Quotations Only');
+			echo '<option value="Orders_Only">' . _('Orders Only');
 		} else {
-			echo '<option selected VALUE="Orders_Only">' . _('Orders Only');
-			echo '<option VALUE="Quotes_Only">' . _('Quotations Only');
+			echo '<option selected value="Orders_Only">' . _('Orders Only');
+			echo '<option value="Quotes_Only">' . _('Quotations Only');
 		}
 
 		echo '</select> </td><td>';
-		echo '<input type=submit name="SearchOrders" VALUE="' . _('Search') . '"></td>';
+		echo '<input type=submit name="SearchOrders" value="' . _('Search') . '"></td>';
     echo '&nbsp;&nbsp;<td><a href="' . $rootpath . '/SelectOrderItems.php?' . SID . '&NewOrder=Yes">' .
 		_('Add Sales Order') . '</a></td></tr></table>';
 	}
@@ -483,8 +483,8 @@ if (!isset($StockID)) {
       		<td><input type='Text' name='StockCode' size=15 maxlength=18></td>
       	</tr>
       </table>";
-	echo "<br /><input type=submit name='SearchParts' VALUE='" . _('Search Parts Now') .
-			"'><input type=submit name='ResetPart' VALUE='" . _('Show All') . "'></div><br />";
+	echo "<br /><input type=submit name='SearchParts' value='" . _('Search Parts Now') .
+			"'><input type=submit name='ResetPart' value='" . _('Show All') . "'></div><br />";
 
 if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 
@@ -510,7 +510,7 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 			$k++;
 		}
 
-		printf("<td><input type=submit name='SelectedStockItem' VALUE='%s'</td>
+		printf("<td><input type=submit name='SelectedStockItem' value='%s'</td>
 			<td>%s</td>
 			<td class=number>%s</td>
 			<td>%s</td>

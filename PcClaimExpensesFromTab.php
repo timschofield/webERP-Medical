@@ -56,7 +56,7 @@ if (isset($_POST['Go'])) {
 	$i=1;
 	if ($Days<=0) {
 		$InputError = 1;
-		prnMsg('<br>' . _('The number of days must be a positive number'),'error');
+		prnMsg('<br />' . _('The number of days must be a positive number'),'error');
 		$Errors[$i] = 'Days';
 		$i++;
 		$Days=30;
@@ -83,7 +83,7 @@ if (isset($_POST['submit'])) {
 		$i++;
 	} elseif ($_POST['amount']==0) {
 		$InputError = 1;
-		prnMsg('<br>' . _('The Amount must be greater than 0'),'error');
+		prnMsg('<br />' . _('The Amount must be greater than 0'),'error');
 		$Errors[$i] = 'TabCode';
 		$i++;
 	}
@@ -177,9 +177,9 @@ if (!isset($SelectedTabs)){
 	echo '<option value=""></option>';
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['SelectTabs']) and $myrow['tabcode']==$_POST['SelectTabs']) {
-			echo '<option selected VALUE="'.$myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
+			echo '<option selected value="'.$myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
 		} else {
-			echo '<option VALUE="'.$myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
+			echo '<option value="'.$myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
 		}
 
 	} //end while loop
@@ -187,7 +187,7 @@ if (!isset($SelectedTabs)){
 	echo '</select></td></tr>';
    	echo '</td></tr></table>'; // close main table
 
-	echo '<p><div class="centre"><input type=submit name=process VALUE="' . _('Accept') . '"><input type=submit name=Cancel VALUE="' . _('Cancel') . '"></div>';
+	echo '<br /><div class="centre"><input type=submit name=process value="' . _('Accept') . '"><input type=submit name=Cancel value="' . _('Cancel') . '"></div>';
 
 	echo '</form>';
 
@@ -212,8 +212,8 @@ if (isset($SelectedTabs)) {
 		if(!isset ($Days)){
 			$Days=30;
 		}
-		echo '<input type=hidden name="SelectedTabs" VALUE="' . $SelectedTabs . '">';
-		echo '<input type=text class=number name="Days" VALUE="' . $Days . '" MAXLENGTH =3 size=4> Days ';
+		echo '<input type=hidden name="SelectedTabs" value="' . $SelectedTabs . '">';
+		echo '<input type=text class=number name="Days" value="' . $Days . '" MAXLENGTH =3 size=4> Days ';
 		echo '<input type=submit name="Go" value="' . _('Go') . '">';
 		echo '</th></tr></form>';
 
@@ -347,9 +347,9 @@ if (isset($SelectedTabs)) {
 			$_POST['Notes']  = $myrow['notes'];
 			$_POST['Receipt']  = $myrow['receipt'];
 
-			echo '<input type=hidden name="SelectedTabs" VALUE=' . $SelectedTabs . '>';
-			echo '<input type=hidden name="SelectedIndex" VALUE=' . $SelectedIndex. '>';
-			echo '<input type=hidden name="Days" VALUE=' .$Days. '>';
+			echo '<input type=hidden name="SelectedTabs" value=' . $SelectedTabs . '>';
+			echo '<input type=hidden name="SelectedIndex" value=' . $SelectedIndex. '>';
+			echo '<input type=hidden name="Days" value=' .$Days. '>';
 
 		}//end of Get Edit
 
@@ -376,9 +376,9 @@ if (isset($SelectedTabs)) {
 		echo '<option value=""></option>';
 		while ($myrow = DB_fetch_array($result)) {
 			if (isset($_POST['SelectedExpense']) and $myrow['codeexpense']==$_POST['SelectedExpense']) {
-				echo '<option selected VALUE="' . $myrow['codeexpense'] . '">' . $myrow['codeexpense'] . ' - ' . $myrow['description'] . '</option>';
+				echo '<option selected value="' . $myrow['codeexpense'] . '">' . $myrow['codeexpense'] . ' - ' . $myrow['description'] . '</option>';
 			} else {
-				echo '<option VALUE="' . $myrow['codeexpense'] . '">' . $myrow['codeexpense'] . ' - ' . $myrow['description'] . '</option>';
+				echo '<option value="' . $myrow['codeexpense'] . '">' . $myrow['codeexpense'] . ' - ' . $myrow['description'] . '</option>';
 			}
 
 		} //end while loop
@@ -402,10 +402,10 @@ if (isset($SelectedTabs)) {
 		}
 
 		echo '<tr><td>' . _('Receipt') . ':</td><td><input type="Text" name="Receipt" size=50 maxlength=49 value="' . $_POST['Receipt'] . '"></td></tr>';
-		echo '<input type=hidden name="SelectedTabs" VALUE="' . $SelectedTabs . '">';
-		echo '<input type=hidden name="Days" VALUE="' .$Days. '">';
+		echo '<input type=hidden name="SelectedTabs" value="' . $SelectedTabs . '">';
+		echo '<input type=hidden name="Days" value="' .$Days. '">';
 		echo '</td></tr></table>'; // close main table
-		echo '<p><div class="centre"><input type=submit name=submit VALUE="' . _('Accept') . '"><input type=submit name=Cancel VALUE="' . _('Cancel') . '"></div>';
+		echo '<br /><div class="centre"><input type=submit name=submit value="' . _('Accept') . '"><input type=submit name=Cancel value="' . _('Cancel') . '"></div>';
 		echo '</form>';
 
 	} // end if user wish to delete

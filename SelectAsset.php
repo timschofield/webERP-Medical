@@ -34,8 +34,8 @@ $SQL = "SELECT categoryid,
 			ORDER BY categorydescription";
 $result = DB_query($SQL, $db);
 if (DB_num_rows($result) == 0) {
-	echo '<p><font size=4 color=red>' . _('Problem Report') . ':</font><br>' . _('There are no asset categories currently defined please use the link below to set them up');
-	echo '<br><a href="' . $rootpath . '/FixedAssetCategories.php">' . _('Define Asset Categories') . '</a>';
+	echo '<p><font size=4 color=red>' . _('Problem Report') . ':</font><br />' . _('There are no asset categories currently defined please use the link below to set them up');
+	echo '<br /><a href="' . $rootpath . '/FixedAssetCategories.php">' . _('Define Asset Categories') . '</a></font></p>';
 	exit;
 }
 // end of showing search facilities
@@ -58,7 +58,7 @@ if ($_POST['AssetCategory']=='ALL'){
 
 while ($myrow = DB_fetch_array($result)) {
 	if ($myrow['categoryid'] == $_POST['AssetCategory']) {
-		echo '<option selected VALUE="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
+		echo '<option selected value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	} else {
 		echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	}
@@ -84,7 +84,7 @@ $result = DB_query("SELECT locationid, locationdescription FROM fixedassetlocati
 
 while ($myrow = DB_fetch_array($result)) {
 	if ($myrow['locationid'] == $_POST['AssetLocation']) {
-		echo '<option selected VALUE="' . $myrow['locationid'] . '">' . $myrow['locationdescription'];
+		echo '<option selected value="' . $myrow['locationid'] . '">' . $myrow['locationdescription'];
 	} else {
 		echo '<option value="' . $myrow['locationid'] . '">' . $myrow['locationdescription'];
 	}
@@ -98,8 +98,8 @@ if (isset($_POST['AssetCode'])) {
 } else {
 	echo '<input type="text" name="AssetCode" size=15 maxlength=13>';
 }
-echo '</td></tr></table><br>';
-echo '<div class="centre"><input type=submit name="Search" value="' . _('Search Now') . '"></div><br></form>';
+echo '</td></tr></table><br />';
+echo '<div class="centre"><input type=submit name="Search" value="' . _('Search Now') . '"></div><br /></form>';
 echo '<script  type="text/javascript">defaultControl(document.forms[0].Keywords);</script>';
 echo '</form>';
 // query for list of record(s)
@@ -218,7 +218,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 			$_POST['PageOffset'] = $ListPageMax;
 		}
 		if ($ListPageMax > 1) {
-			echo '<div class="centre"><p>&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
+			echo '<div class="centre"><br />&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
 			echo '<select name="PageOffset">';
 			$ListPage = 1;
 			while ($ListPage <= $ListPageMax) {
@@ -234,7 +234,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 				<input type=submit name="Previous" value="' . _('Previous') . '">
 				<input type=submit name="Next" value="' . _('Next') . '">';
 
-			echo '<p></div>';
+			echo '<br /></div>';
 		}
 		echo '<table cellpadding=2 colspan=7 class=selection>';
 		$tableheader = '<tr>

@@ -22,11 +22,11 @@ $SN = $SN;
 
 
 echo '<div class="centre">
-<br>
+<br />
 <form name=SNRESEARCH method=post action="' . $_SERVER['PHP_SELF'] .'">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo  _('Serial Number') .': <input ID="serialno" name="serialno" size=21 maxlength=20 VALUE="'. $SN . '"> &nbsp;
+echo  _('Serial Number') .': <input ID="serialno" name="serialno" size=21 maxlength=20 value="'. $SN . '"> &nbsp;
 <input type=submit name=submit></div><br />
 </form>';
 
@@ -67,7 +67,7 @@ if ($SN!='') {
 	if (DB_num_rows($result) == 0){
 		prnMsg( _('No History found for Serial Number'). ': <b>'.$SN.'</b>' , 'warn');
 	} else {
-		echo '<h4>'. _('Details for Serial Item').': <b>'.$SN.'</b><br>'. _('Length').'='.strlen($SN).'</h4>';
+		echo '<h4>'. _('Details for Serial Item').': <b>'.$SN.'</b><br />'. _('Length').'='.strlen($SN).'</h4>';
 		echo '<table class=selection>';
 		echo "<tr><th>" . _('StockID') . "</th>
 			<th>" . _('CurInvQty') . "</th>
@@ -83,7 +83,7 @@ if ($SN!='') {
 			</tr>";
 		while ($myrow=DB_fetch_row($result)) {
 			printf("<tr>
-				<td>%s<br>%s</td>
+				<td>%s<br />%s</td>
 				<td class=number>%s</td>
 				<td class=number>%s</td>
 				<td>%s (%s)</td>

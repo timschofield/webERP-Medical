@@ -305,13 +305,13 @@ if (!isset($_GET['delete'])) {
 	echo '<br /><table class=selection>
 		<tr>
 		<td>' . _('Area') . ':</td>
-		<td><select name="Area"><option VALUE="AN">' . _('Any Other') . '</option>';
+		<td><select name="Area"><option value="AN">' . _('Any Other') . '</option>';
 
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['Area']) and $myrow['areacode']==$_POST['Area']) {
-			echo '<option selected VALUE="' . $myrow['areacode'] . "'>" . $myrow['areadescription'] . '</option>';
+			echo '<option selected value="' . $myrow['areacode'] . "'>" . $myrow['areadescription'] . '</option>';
 		} else {
-			echo '<option VALUE="' . $myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
+			echo '<option value="' . $myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
 		}
 
 	} //end while loop
@@ -325,14 +325,14 @@ if (!isset($_GET['delete'])) {
 
 
 	echo '<tr><td>' . _('Stock Category') . ':</td>
-		<td><select name="StkCat"><option VALUE="ANY">' . _('Any Other') . '</option>';
+		<td><select name="StkCat"><option value="ANY">' . _('Any Other') . '</option>';
 
 	while ($myrow = DB_fetch_array($result)) {
 
 		if (isset($_POST['StkCat']) and $myrow['categoryid']==$_POST['StkCat']) {
-			echo '<option selected VALUE="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
+			echo '<option selected value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 		} else {
-			echo '<option VALUE="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
+			echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 		}
 
 	} //end while loop
@@ -350,13 +350,13 @@ if (!isset($_GET['delete'])) {
 
 	echo '<tr><td>' . _('Sales Type') . ' / ' . _('Price List') . ':</td>
 		<td><select name="SalesType">';
-	echo '<option VALUE="AN">' . _('Any Other') . '</option>';
+	echo '<option value="AN">' . _('Any Other') . '</option>';
 
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['SalesType']) and $myrow['typeabbrev']==$_POST['SalesType']) {
-			echo '<option selected VALUE="' . $myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
+			echo '<option selected value="' . $myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
 		} else {
-			echo '<option VALUE="' . $myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
+			echo '<option value="' . $myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
 		}
 
 	} //end while loop
@@ -380,9 +380,9 @@ if (!isset($_GET['delete'])) {
 
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['SalesGLCode']) and $myrow['accountcode']==$_POST['SalesGLCode']) {
-			echo '<option selected VALUE="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
+			echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
 		} else {
-			echo '<option VALUE="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
+			echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
 		}
 
 	} //end while loop

@@ -120,7 +120,7 @@ if (isset($_POST['submit'])) {
 	if ($InputError!=1){
 		$result = DB_query($sql,$db, $ErrMsg);
 		prnMsg($msg,'success');
-		echo '<p>';
+		echo '<br />';
 	}
 	unset ($SelectedPaymentID);
 	unset ($_POST['SelectedPaymentID']);
@@ -147,12 +147,12 @@ if (isset($_POST['submit'])) {
 		$myrow = DB_fetch_row($result);
 		if ($myrow[0]>0) {
 			prnMsg( _('Cannot delete this payment method because bank transactions have been created using this payment method'),'warn');
-			echo '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('bank transactions that refer to this payment method') . '</font>';
+			echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('bank transactions that refer to this payment method') . '</font>';
 		} else {
 			$sql="DELETE FROM paymentmethods WHERE paymentname LIKE '" . $OldMeasureName . "'";
 			$result = DB_query($sql,$db);
 			prnMsg( $OldMeasureName . ' ' . _('payment method has been deleted') . '!','success');
-			echo '<br>';
+			echo '<br />';
 		} //end if not used
 	} //end if payment method exist
 	unset ($SelectedPaymentID);
@@ -214,7 +214,7 @@ if (isset($_POST['submit'])) {
 		echo '</tr>';
 
 	} //END WHILE LIST LOOP
-	echo '</table><p>';
+	echo '</table><br />';
 } //end of ifs and buts!
 
 
@@ -222,7 +222,7 @@ if (isset($SelectedPaymentID)) {
 	echo '<div class="centre"><a href=' . $_SERVER['PHP_SELF'] . '?' . SID .'>' . _('Review Payment Methods') . '</a></div>';
 }
 
-echo '<p>';
+echo '<br />';
 
 if (! isset($_GET['delete'])) {
 
@@ -253,7 +253,7 @@ if (! isset($_GET['delete'])) {
 			$_POST['ForReceipt'] = $myrow['receipttype'];
 			$_POST['ForPreprint'] = $myrow['forpreprint'];
 
-			echo '<input type=hidden name="SelectedPaymentID" VALUE="' . $_POST['MethodID'] . '">';
+			echo '<input type=hidden name="SelectedPaymentID" value="' . $_POST['MethodID'] . '">';
 			echo '<table class=selection>';
 		}
 
@@ -271,25 +271,25 @@ if (! isset($_GET['delete'])) {
 	echo '<tr>
 		<td>' . _('Use For Payments') . ':' . '</td>
 		<td><select name="ForPayment">';
-	echo '<option'.($_POST['ForPayment'] ? ' selected' : '') .' VALUE="1">' . _('Yes') . '</option>';
-	echo '<option'.($_POST['ForPayment'] ? '' : ' selected') .' VALUE="0">' . _('No') . '</option>';
+	echo '<option'.($_POST['ForPayment'] ? ' selected' : '') .' value="1">' . _('Yes') . '</option>';
+	echo '<option'.($_POST['ForPayment'] ? '' : ' selected') .' value="0">' . _('No') . '</option>';
 	echo '</select></td></tr>';
 	echo '<tr>
 		<td>' . _('Use For Receipts') . ':' . '</td>
 		<td><select name="ForReceipt">';
-	echo '<option'.($_POST['ForReceipt'] ? ' selected' : '') .' VALUE="1">' . _('Yes') . '</option>';
-	echo '<option'.($_POST['ForReceipt'] ? '' : ' selected') .' VALUE="0">' . _('No') . '</option>';
+	echo '<option'.($_POST['ForReceipt'] ? ' selected' : '') .' value="1">' . _('Yes') . '</option>';
+	echo '<option'.($_POST['ForReceipt'] ? '' : ' selected') .' value="0">' . _('No') . '</option>';
 	echo '</select></td></tr>';
 	echo '<tr>
 		<td>' . _('Use Pre-printed Stationery') . ':' . '</td>
 		<td><select name="ForPreprint">';
-	echo '<option'.($_POST['ForPreprint'] ? ' selected' : '') .' VALUE="1">' . _('Yes') . '</option>';
-	echo '<option'.($_POST['ForPreprint'] ? '' : ' selected') .' VALUE="0">' . _('No') . '</option>';
+	echo '<option'.($_POST['ForPreprint'] ? ' selected' : '') .' value="1">' . _('Yes') . '</option>';
+	echo '<option'.($_POST['ForPreprint'] ? '' : ' selected') .' value="0">' . _('No') . '</option>';
 	echo '</select></td></tr>';
 
 	echo '</table>';
 
-	echo '<br><div class="centre"><input type=Submit name=submit value=' . _('Enter Information') . '></div>';
+	echo '<br /><div class="centre"><input type=Submit name=submit value=' . _('Enter Information') . '></div>';
 
 	echo '</form>';
 

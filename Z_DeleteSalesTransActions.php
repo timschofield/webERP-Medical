@@ -134,10 +134,10 @@ if (isset($_POST['ProcessDeletions'])){
 	prnMsg(_('It is necessary to re-post the remaining general ledger transactions for the general ledger to get back in sync with the transactions that remain. This is an option from the Z_index.php page'),'warn');
 }
 
-echo "<form action='" . $_SERVER['PHP_SELF'] . '?=' . $SID . "' method=post>";
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<p><table>
+echo '<br /><table>
 	<tr><td>' . _('Delete All Sales Analysis') . '</td>
 		<td><input type=checkbox name=SalesAnalysis></td>
 	</tr>
@@ -176,7 +176,7 @@ echo '<p><table>
 	</tr>
 </table>';
 
-echo '<input type=submit name=ProcessDeletions VALUE="' . _('Process') . '"  onclick="return confirm(\'' . _('Are You Really REALLY Sure?') . '\');">';
+echo '<input type=submit name=ProcessDeletions value="' . _('Process') . '"  onclick="return confirm(\'' . _('Are You Really REALLY Sure?') . '\');">';
 
 echo '</form>';
 

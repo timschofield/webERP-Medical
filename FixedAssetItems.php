@@ -262,7 +262,7 @@ if (isset($_POST['submit'])) {
 			$result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
 			prnMsg( _('Asset') . ' ' . $AssetID . ' ' . _('has been updated'), 'success');
-			echo '<br>';
+			echo '<br />';
 		} else { //it is a NEW part
 			$sql = "INSERT INTO fixedassets (description,
 											longdescription,
@@ -516,9 +516,9 @@ $result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
 while ($myrow=DB_fetch_array($result)){
 	if (!isset($_POST['AssetCategoryID']) or $myrow['categoryid']==$_POST['AssetCategoryID']){
-		echo '<option selected VALUE="'. $myrow['categoryid'] . '">' . $myrow['categorydescription']. '</option>';
+		echo '<option selected value="'. $myrow['categoryid'] . '">' . $myrow['categorydescription']. '</option>';
 	} else {
-		echo '<option VALUE="'. $myrow['categoryid'] . '">' . $myrow['categorydescription']. '</option>';
+		echo '<option value="'. $myrow['categoryid'] . '">' . $myrow['categorydescription']. '</option>';
 	}
 	$category=$myrow['categoryid'];
 }

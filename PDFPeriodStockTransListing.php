@@ -58,24 +58,24 @@ if (!isset($_POST['FromDate'])){
 
 	echo '<tr><td>' . _('For Stock Location') . ':</td>
 		<td><select name="StockLocation"> ';
-	echo '<option VALUE="All">' . _('All') . '</option>';
+	echo '<option value="All">' . _('All') . '</option>';
 	while ($myrow=DB_fetch_array($resultStkLocs)){
 		if (isset($_POST['StockLocation']) AND $_POST['StockLocation']!='All'){
 			if ($myrow['loccode'] == $_POST['StockLocation']){
-				echo '<option selected VALUE="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+				echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			} else {
-				echo '<option VALUE="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+				echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			}
 		} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
-			echo '<option selected VALUE="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			$_POST['StockLocation']=$myrow['loccode'];
 		} else {
-			echo '<option VALUE="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	}
 	echo '</select></td></tr>';
 
-	echo '</table><br><div class="centre"><input type=submit name="Go" value="' . _('Create PDF') . '"></div>';
+	echo '</table><br /><div class="centre"><input type=submit name="Go" value="' . _('Create PDF') . '"></div>';
 
 	 include('includes/footer.inc');
 	 exit;
@@ -135,7 +135,7 @@ if (DB_error_no($db)!=0){
 } elseif (DB_num_rows($result) == 0){
 	$title = _('Transaction Listing');
 	include('includes/header.inc');
-	echo '<br>';
+	echo '<br />';
   	prnMsg (_('There were no transactions found in the database between the dates') . ' ' . $_POST['FromDate'] .
 		' ' . _('and') . ' '. $_POST['ToDate'] .'<br />' ._('Please try again selecting a different date'), 'info');
 	include('includes/footer.inc');

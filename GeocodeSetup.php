@@ -137,7 +137,7 @@ or deletion of the records*/
 		'<a href="http://code.google.com/apis/maps/signup.html" target="_blank"> http://code.google.com/apis/maps/signup.html</a></b>';
 	echo '<div class="centre"><p>'. _('Find the lat/long for your map center point at ') .
 			'<a href="http://www.batchgeocode.com/lookup/" target="_blank">http://www.batchgeocode.com/lookup/</a></b>';
-	echo '<p>'. _('Set the maps centre point using the Center Longitude and Center Latitude. Set the maps screen size using the height and width in pixels (px)').'</div><br>';
+	echo '<p>'. _('Set the maps centre point using the Center Longitude and Center Latitude. Set the maps screen size using the height and width in pixels (px)').'</div><br />';
 	echo '<table border=1>';
 	echo '<tr>
 		<th>'. _('Geocode ID') .'</th>
@@ -188,7 +188,7 @@ or deletion of the records*/
 } //end of ifs and buts!
 
 if (isset($SelectedParam)) {
-	echo '<div class="centre"><br><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Show Defined Geocode Param Codes') . '</a><br></div>';
+	echo '<div class="centre"><br /><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Show Defined Geocode Param Codes') . '</a><br /></div>';
 }
 
 if (!isset($_GET['delete'])) {
@@ -220,8 +220,8 @@ if (!isset($_GET['delete'])) {
 		$_POST['map_width']  = $myrow['map_width'];
 		$_POST['map_host']  = $myrow['map_host'];
 
-		echo '<input type=hidden name="SelectedParam" VALUE="' . $SelectedParam . '">';
-		echo '<input type=hidden name="geocodeid" VALUE="' . $_POST['geocodeid'] . '">';
+		echo '<input type=hidden name="SelectedParam" value="' . $SelectedParam . '">';
+		echo '<input type=hidden name="geocodeid" value="' . $_POST['geocodeid'] . '">';
 		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Geocode Setup') . '" alt="">'. _('Setup configuration for Geocoding of Customers and Suppliers') .'</p>';
 		echo '<table><tr><td>'. _('Geocode Code') .':</td><td>';
 		echo $_POST['geocodeid'] . '</td></tr>';
@@ -236,35 +236,35 @@ if (!isset($_GET['delete'])) {
 	if (!isset($_POST['geocode_key'])) {
 		$_POST['geocode_key'] = '';
 	}
-	echo '<br><tr>
+	echo '<br /><tr>
 		<td>'. _('Geocode Key') .':</td>
 		<td><input ' . (in_array('geocode_key',$Errors) ? 'class="inputerror"' : '' ) .
-		 ' tabindex=2 type="text" name="geocode_key" VALUE="'. $_POST['geocode_key'] .'" size=28 maxlength=300>
+		 ' tabindex=2 type="text" name="geocode_key" value="'. $_POST['geocode_key'] .'" size=28 maxlength=300>
 	</td></tr>
 	<tr><td>'. _('Geocode Center Long') . '</td>
-	<td><input tabindex=3 type="text" name="center_long" VALUE="'. $_POST['center_long'] .'" size=28 maxlength=300></td></tr>
+	<td><input tabindex=3 type="text" name="center_long" value="'. $_POST['center_long'] .'" size=28 maxlength=300></td></tr>
 
 <tr><td>'. _('Geocode Center Lat') . '</td>
-        <td><input tabindex=4 type="text" name="center_lat" VALUE="'. $_POST['center_lat'] .'" size=28 maxlength=300></td></tr>
+        <td><input tabindex=4 type="text" name="center_lat" value="'. $_POST['center_lat'] .'" size=28 maxlength=300></td></tr>
 
 <tr><td>'. _('Geocode Map Height') . '</td>
-        <td><input tabindex=5 type="text" name="map_height" VALUE="'. $_POST['map_height'] .'" size=28 maxlength=300></td></tr>
+        <td><input tabindex=5 type="text" name="map_height" value="'. $_POST['map_height'] .'" size=28 maxlength=300></td></tr>
 
 <tr><td>'. _('Geocode Map Width') . '</td>
-        <td><input tabindex=6 type="text" name="map_width" VALUE="'. $_POST['map_width'] .'" size=28 maxlength=300></td></tr>
+        <td><input tabindex=6 type="text" name="map_width" value="'. $_POST['map_width'] .'" size=28 maxlength=300></td></tr>
 
 <tr><td>'. _('Geocode Host') . '</td>
-        <td><input tabindex=7 type="text" name="map_host" VALUE="'. $_POST['map_host'] .'" size=20 maxlength=300></td></tr>
+        <td><input tabindex=7 type="text" name="map_host" value="'. $_POST['map_host'] .'" size=20 maxlength=300></td></tr>
 
 
 	</table>
-	<div class="centre"><input tabindex=4 type="Submit" name="submit" value="' . _('Enter Information') . '" /></div><br><br>
+	<div class="centre"><input tabindex=4 type="Submit" name="submit" value="' . _('Enter Information') . '" /></div><br /><br />
 	</form>';
 echo '<div class="page_help_text">' . _('When ready, click on the link below to run the GeoCode process. This will Geocode all Branches and Suppliers. This may take some time. Errors will be returned to the screen.') . '</p>';
-echo '<p>' . _('Suppliers and Customer Branches are geocoded when being entered/updated. You can rerun the geocode process from this screen at any time.') . '</p></div><br>';
+echo '<p>' . _('Suppliers and Customer Branches are geocoded when being entered/updated. You can rerun the geocode process from this screen at any time.') . '</p></div><br />';
 
-echo '<div class="centre"><a href="' . $rootpath . '/geocode.php">' . _('Run GeoCode process (may take a long time)') . '</a></p><br>';
-echo '<a href="' . $rootpath . '/geo_displaymap_customers.php">' . _('Display Map of Customer Branches') . '</a><br>';
+echo '<div class="centre"><a href="' . $rootpath . '/geocode.php">' . _('Run GeoCode process (may take a long time)') . '</a></p><br />';
+echo '<a href="' . $rootpath . '/geo_displaymap_customers.php">' . _('Display Map of Customer Branches') . '</a><br />';
 echo '<a href="' . $rootpath . '/geo_displaymap_suppliers.php">' . _('Display Map of Suppliers') . '</a></div>';
 } //end if record deleted no point displaying form to add record
 include('includes/footer.inc');

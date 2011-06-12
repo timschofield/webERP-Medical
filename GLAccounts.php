@@ -92,7 +92,7 @@ if (isset($_POST['submit'])) {
 	if ($myrow[0]>0) {
 		$CancelDelete = 1;
 		prnMsg(_('Cannot delete this account because chart details have been created using this account and at least one period has postings to it'),'warn');
-		echo '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('chart details that require this account code');
+		echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('chart details that require this account code');
 
 	} else {
 // PREVENT DELETES IF DEPENDENT RECORDS IN 'GLTrans'
@@ -106,7 +106,7 @@ if (isset($_POST['submit'])) {
 		if ($myrow[0]>0) {
 			$CancelDelete = 1;
 			prnMsg( _('Cannot delete this account because transactions have been created using this account'),'warn');
-			echo '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('transactions that require this account code');
+			echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('transactions that require this account code');
 
 		} else {
 			//PREVENT DELETES IF Company default accounts set up to this account
@@ -233,8 +233,8 @@ if (!isset($_GET['delete'])) {
 		$_POST['AccountName']	= $myrow['accountname'];
 		$_POST['Group'] = $myrow['group_'];
 
-		echo "<input type=hidden name='SelectedAccount' VALUE=$SelectedAccount>";
-		echo "<input type=hidden name='AccountCode' VALUE=" . $_POST['AccountCode'] .">";
+		echo "<input type=hidden name='SelectedAccount' value=$SelectedAccount>";
+		echo "<input type=hidden name='AccountCode' value=" . $_POST['AccountCode'] .">";
 		echo "<table class=selection><tr><td>" . _('Account Code') . ":</td><td>" . $_POST['AccountCode'] . "</td></tr>";
 	} else {
 		echo "<table class=selection>";
@@ -251,9 +251,9 @@ if (!isset($_GET['delete'])) {
 
 	while ($myrow = DB_fetch_array($result)){
 		if (isset($_POST['Group']) and $myrow[0]==$_POST['Group']){
-			echo "<option selected VALUE='";
+			echo "<option selected value='";
 		} else {
-			echo "<option VALUE='";
+			echo "<option value='";
 		}
 		echo $myrow[0] . "'>" . $myrow[0];
 	}
@@ -266,7 +266,7 @@ if (!isset($_GET['delete'])) {
 
 	echo '</select></td></tr></table>';
 
-	echo '<br><div class="centre"><input type="Submit" name="submit" value="'. _('Enter Information') . '"></div>';
+	echo '<br /><div class="centre"><input type="Submit" name="submit" value="'. _('Enter Information') . '"></div>';
 
 	echo '</form>';
 
@@ -292,7 +292,7 @@ or deletion of the records*/
 
 	$result = DB_query($sql,$db,$ErrMsg);
 
-	echo '<br><table class=selection>';
+	echo '<br /><table class=selection>';
 	echo "<tr>
 		<th>" . _('Account Code') . "</th>
 		<th>" . _('Account Name') . "</th>
@@ -335,13 +335,13 @@ or deletion of the records*/
 
 //end of ifs and buts!
 
-echo '<p>';
+echo '<br />';
 
 if (isset($SelectedAccount)) {
 	echo "<div class='centre'><a href='" . $_SERVER['PHP_SELF'] . '?' . SID ."'>" .  _('Show All Accounts') . '</a></div>';
 }
 
-echo '<p>';
+echo '<br />';
 
 include('includes/footer.inc');
 ?>

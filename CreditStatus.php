@@ -123,7 +123,7 @@ if (isset($_POST['submit'])) {
 	$myrow = DB_fetch_row($result);
 	if ($myrow[0] > 0) {
 		prnMsg( _('Cannot delete this credit status code because customer accounts have been created referring to it'),'warn');
-		echo '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('customer accounts that refer to this credit status code');
+		echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('customer accounts that refer to this credit status code');
 	}  else {
 		//only delete if used in neither customer or supplier accounts
 
@@ -213,8 +213,8 @@ if (!isset($_GET['delete'])) {
 		$_POST['ReasonDescription']  = $myrow['reasondescription'];
 		$_POST['DisallowInvoices']  = $myrow['dissallowinvoices'];
 
-		echo '<input type=hidden name="SelectedReason" VALUE="' . $SelectedReason . '">';
-		echo '<input type=hidden name="ReasonCode" VALUE="' . $_POST['ReasonCode'] . '">';
+		echo '<input type=hidden name="SelectedReason" value="' . $SelectedReason . '">';
+		echo '<input type=hidden name="ReasonCode" value="' . $_POST['ReasonCode'] . '">';
 		echo '<table class=selection><tr><td>'. _('Status Code') .':</td><td>';
 		echo $_POST['ReasonCode'] . '</td></tr>';
 
@@ -222,11 +222,11 @@ if (!isset($_GET['delete'])) {
 		if (!isset($_POST['ReasonCode'])) {
 			$_POST['ReasonCode'] = '';
 		}
-		echo '<br><table class=selection>
+		echo '<br /><table class=selection>
 			<tr>
 				<td>'. _('Status Code') .':</td>
 				<td><input ' . (in_array('ReasonCode',$Errors) ? 'class="inputerror"' : '' ) .
-					' tabindex=1 type="text" name="ReasonCode" VALUE="'. $_POST['ReasonCode'] .'" size=3 maxlength=2></td>
+					' tabindex=1 type="text" name="ReasonCode" value="'. $_POST['ReasonCode'] .'" size=3 maxlength=2></td>
 			</tr>';
 	}
 
@@ -236,7 +236,7 @@ if (!isset($_GET['delete'])) {
 	echo '<tr>
 		<td>'. _('Description') .':</td>
 		<td><input ' . (in_array('ReasonDescription',$Errors) ? 'class="inputerror"' : '' ) .
-		 ' tabindex=2 type="text" name="ReasonDescription" VALUE="'. $_POST['ReasonDescription'] .'" size="28" maxlength="30">
+		 ' tabindex=2 type="text" name="ReasonDescription" value="'. $_POST['ReasonDescription'] .'" size="28" maxlength="30">
 		</td></tr>
 		<tr><td>'. _('Disallow Invoices') . '</td>';
 	if (isset($_POST['DisallowInvoices']) and $_POST['DisallowInvoices']==1) {
@@ -244,7 +244,7 @@ if (!isset($_GET['delete'])) {
 	} else {
 		echo '<td><input tabindex=3 type="checkbox" name="DisallowInvoices"></td></tr>';
 	}
-	echo '</table><br><div class="centre"><input tabindex=4 type="submit" name="submit" value="' . _('Enter Information') . '"></div></form>';
+	echo '</table><br /><div class="centre"><input tabindex=4 type="submit" name="submit" value="' . _('Enter Information') . '"></div></form>';
 } //end if record deleted no point displaying form to add record
 include('includes/footer.inc');
 ?>

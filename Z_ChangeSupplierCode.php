@@ -23,7 +23,7 @@ echo '
 	<td><input type=Text name="NewSupplierNo" size=20 maxlength=20></td>
 	</tr>
     </table>
-    <input type=submit name="ProcessSupplierChange" VALUE="' . _('Process') . '">
+    <input type=submit name="ProcessSupplierChange" value="' . _('Process') . '">
     <div>
     </form>';
 
@@ -42,10 +42,10 @@ function ProcessSupplier($oldCode, $newCode) {
         'suppliercontacts'=>'supplierid',
         'supptrans'=>'supplierno',
         'www_users'=>'supplierid');
-    
+
     // First check the Supplier code exists
     if (!checkSupplierExist($oldCode)) {
-        prnMsg ('<br><br>' . _('The Supplier code') . ': ' . $oldCode . ' ' .
+        prnMsg ('<br /><br />' . _('The Supplier code') . ': ' . $oldCode . ' ' .
                 _('does not currently exist as a Supplier code in the system'),'error');
         return;
     }
@@ -111,7 +111,7 @@ function checkSupplierExist($codeSupplier) {
 function checkNewCode($code) {
     $tmp = str_replace(' ','',$code);
     if ($tmp != $code) {
-        prnMsg ('<br><br>' . _('The New supplier code') . ': ' . $code . ' ' .
+        prnMsg ('<br /><br />' . _('The New supplier code') . ': ' . $code . ' ' .
                 _('must be not empty nor with spaces'),'error');
         return false;
     }

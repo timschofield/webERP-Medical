@@ -10,7 +10,7 @@ include('includes/header.inc');
 if (!isset($_POST['DoUpgrade'])){
 
 	prnMsg(_('This script will run perform any modifications to the database required to allow the additional functionality in later scripts'),'info');
-	echo '<p><form method="post" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '">';
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (!isset($_SESSION['VersionNumber'])){
@@ -113,7 +113,7 @@ if (isset($_POST['DoUpgrade'])){
 		$ScriptFileEntries = sizeof($SQLEntries);
 		$sql ='';
 		$InAFunction = false;
-		echo '<br><table>
+		echo '<br /><table>
 					<tr><th colspan=2>' . _('Applying') . ' ' . $SQLScriptFile . '</th></tr>';
 
 		for ($i=0; $i<=$ScriptFileEntries; $i++) {

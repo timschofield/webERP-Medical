@@ -228,7 +228,8 @@ if (isset($_POST['CommitBatch'])){
 	$k=0; //Table row counter for row styles
 	$CustomerReceiptCounter=1; //Count lines of customer receipts in this batch
 
-	echo '<br /><p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Allocate') . '" alt="" />' . ' ' . _('Summary of Receipt Batch').'</p><br />';
+	echo '<br /><p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Allocate') .
+		'" alt="" />' . ' ' . _('Summary of Receipt Batch').'</p><br />';
 
 	echo '<table class=selection><tr><th>'._('Batch Number').'</th>
 				<th>'._('Date Banked').'</th>
@@ -533,8 +534,10 @@ if (isset($_POST['CommitBatch'])){
 	echo '<br />';
 	prnMsg( _('Receipt batch') . ' ' . $_SESSION['ReceiptBatch']->BatchNo . ' ' . _('has been successfully entered into the database'),'success');
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print') . '" alt="">' . ' ' . '<a href="' . $rootpath . '/PDFBankingSummary.php?BatchNo=' . $_SESSION['ReceiptBatch']->BatchNo . '">' . _('Print PDF Batch Summary') . '</a></p>';
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/allocation.png" title="' . _('Allocate') . '" alt="">' . ' ' . '<a href="' . $rootpath . '/CustomerAllocations.php">' . _('Allocate Receipts') . '</a></p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print') . '" alt="">' . ' ' .
+		'<a href="' . $rootpath . '/PDFBankingSummary.php?BatchNo=' . $_SESSION['ReceiptBatch']->BatchNo . '">' . _('Print PDF Batch Summary') . '</a></p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/allocation.png" title="' . _('Allocate') . '" alt="">' . ' ' .
+		'<a href="' . $rootpath . '/CustomerAllocations.php">' . _('Allocate Receipts') . '</a></p>';
 	unset($_SESSION['ReceiptBatch']);
 	include('includes/footer.inc');
 	exit;
@@ -579,7 +582,7 @@ if (isset($_POST['Search'])){
 		if (DB_error_no($db) !=0) {
 			prnMsg(_('The searched customer records requested cannot be retrieved because') . ' - ' . DB_error_msg($db),'error');
 			if ($debug==1){
-				prnMsg(_('SQL used to retrieve the customer details was') . '<br>' . $sql,'error');
+				prnMsg(_('SQL used to retrieve the customer details was') . '<br />' . $sql,'error');
 			}
 		} elseif (DB_num_rows($CustomerSearchResult)==1){
 			$myrow=DB_fetch_array($CustomerSearchResult);
@@ -726,16 +729,18 @@ $DbgMsg = _('The SQL used to retrieve the bank accounts was');
 $AccountsResults = DB_query($SQL,$db,$ErrMsg,$DbgMsg);
 
 if (isset($_POST['GLEntry'])) {
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('Enter Receipt') . '" alt="">' . ' ' . _('General Ledger Receipt Entry') . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('Enter Receipt') . '" alt="">' .
+		' ' . _('General Ledger Receipt Entry') . '</p>';
 } else {
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('Enter Receipt') . '" alt="">' . ' ' . _('Enter Customer Receipt') . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('Enter Receipt') .
+		'" alt="">' . ' ' . _('Enter Customer Receipt') . '</p>';
 	echo '<div class="page_help_text">' . _('To enter a payment TO a customer (ie. to pay out a credit note), enter a negative payment amount.') . '</div>';
 }
-echo '<br><table class=selection><tr><td>' . _('Bank Account') . ':</td>
+echo '<br /><table class=selection><tr><td>' . _('Bank Account') . ':</td>
 				 <td><select tabindex=1 name="BankAccount" onChange="ReloadForm(form1.BatchInput)">';
 
 if (DB_num_rows($AccountsResults)==0){
-	echo '</select></td></tr></table><p>';
+	echo '</select></td></tr></table><br />';
 	prnMsg(_('Bank Accounts have not yet been defined') . '. ' . _('You must first') . ' ' . '<a href="' . $rootpath . '/BankAccounts.php">' . _('define the bank accounts') . '</a>' . _('and general ledger accounts to be affected'),'info');
 	include('includes/footer.inc');
 	 exit;
@@ -900,10 +905,13 @@ if (isset($_SESSION['CustomerRecord'])
 		AND isset($_SESSION['ReceiptBatch'])){
 /*a customer is selected  */
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') . '" alt="">' . ' ' . $_SESSION['CustomerRecord']['name'] . ' - (' . _('All amounts stated in') . ' ' . $_SESSION['CustomerRecord']['currency'] . ')' . _('Terms') . ': ' . $_SESSION['CustomerRecord']['terms'] . '<br/>' . _('Credit Limit') . ': ' . number_format($_SESSION['CustomerRecord']['creditlimit'],0) . '  ' . _('Credit Status') . ': ' . $_SESSION['CustomerRecord']['reasondescription'];
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') . '" alt="">' . ' ' .
+		$_SESSION['CustomerRecord']['name'] . ' - (' . _('All amounts stated in') . ' ' . $_SESSION['CustomerRecord']['currency'] . ')' .
+		_('Terms') . ': ' . $_SESSION['CustomerRecord']['terms'] . '<br/>' . _('Credit Limit') . ': ' .
+		number_format($_SESSION['CustomerRecord']['creditlimit'],0) . '  ' . _('Credit Status') . ': ' . $_SESSION['CustomerRecord']['reasondescription'] . '</p>';
 
 	if ($_SESSION['CustomerRecord']['dissallowinvoices']!=0){
-	   echo '<br><font color=red size=4><b>' . _('ACCOUNT ON HOLD') . '</font></b><br/>';
+	   echo '<br /><font color=red size=4><b>' . _('ACCOUNT ON HOLD') . '</font></b><br/>';
 	}
 
 	echo '<table width="90%" class=selection>
@@ -922,7 +930,7 @@ if (isset($_SESSION['CustomerRecord'])
 		<td class=number>' . number_format(($_SESSION['CustomerRecord']['overdue1']-$_SESSION['CustomerRecord']['overdue2']) ,2) . '</td>
 		<td class=number>' . number_format($_SESSION['CustomerRecord']['overdue2'],2) . '</td>
 		</tr>
-		</table><br>';
+		</table><br />';
 
 	echo '<table  class=selection>';
 
@@ -1017,7 +1025,7 @@ if (((isset($_SESSION['CustomerRecord'])
 	echo '<td>' . _('Narrative') . ':</td>';
 	echo '<td><textarea name="Narrative"  cols=40 rows=1></textarea></td>';
 	echo '</table>';
-	echo '<br><div class="centre"><input tabindex=14 type="submit" name="Process" value="' . _('Accept') . '">';
+	echo '<br /><div class="centre"><input tabindex=14 type="submit" name="Process" value="' . _('Accept') . '">';
 	echo '<input tabindex=14 type="submit" name="Cancel" value="' . _('Cancel') . '"></div>';
 
 } elseif (isset($_SESSION['ReceiptBatch']) AND !isset($_POST['GLEntry'])){
@@ -1025,7 +1033,7 @@ if (((isset($_SESSION['CustomerRecord'])
 	/*Show the form to select a customer */
 	echo '<br />';
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') . '" alt="">' . ' ' . _('Select a Customer') . '</b>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') . '" alt="">' . ' ' . _('Select a Customer') . '</p>';
 	echo '<table cellpadding=3 colspan=4  class=selection>';
 	echo '<tr><td>' . _('Text in the Customer') . ' ' . '<b>' . _('name') . '</b>:</td>';
 	echo '<td><input tabindex=9 type="text" name="Keywords" size=15 maxlength=25></td>';
@@ -1036,7 +1044,7 @@ if (((isset($_SESSION['CustomerRecord'])
 	echo '<td>' . _('Customer invoice number') . ':</td>';
 	echo '<td><input tabindex=11 type="text" name="CustInvNo" size=8 maxlength=8></td>';
 	echo '</tr></table>';
-	echo '<div class="centre"><br>';
+	echo '<div class="centre"><br />';
 	echo '<input tabindex=11 type=submit name="Search" value="' . _('Search Now') . '">';
 	echo '<br/><br/><input tabindex=12 type=submit name="GLEntry" value="' . _('Enter A GL Receipt') . '"><br /></div>';
 
@@ -1082,7 +1090,7 @@ if (((isset($_SESSION['CustomerRecord'])
 }
 
 if (isset($_SESSION['ReceiptBatch']->Items) and count($_SESSION['ReceiptBatch']->Items) > 0){
-	echo '<div class="centre"><br/><input tabindex="13" type="submit" name="CommitBatch" VALUE="' . _('Accept and Process Batch') . '"></div>';
+	echo '<div class="centre"><br/><input tabindex="13" type="submit" name="CommitBatch" value="' . _('Accept and Process Batch') . '"></div>';
 }
 
 echo '</form>';

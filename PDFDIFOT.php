@@ -29,14 +29,14 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate']) OR $InputError==1){
 
 	 echo "<form method='post' action='" . $_SERVER['PHP_SELF'] . '?' . sid . "'>";
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	 echo '<table class=selection><tr><td>' . _('Enter the date from which variances between orders and deliveries are to be listed') . ":</td><td><input type=text class='date' alt='".$_SESSION['DefaultDateFormat']."' name='FromDate' maxlength=10 size=10 VALUE='" . Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m')-1,0,Date('y'))) . "'></td></tr>";
-	 echo '<tr><td>' . _('Enter the date to which variances between orders and deliveries are to be listed') . ":</td><td><input type=text class='date' alt='".$_SESSION['DefaultDateFormat']."' name='ToDate' maxlength=10 size=10 VALUE='" . Date($_SESSION['DefaultDateFormat']) . "'></td></tr>";
+	 echo '<table class=selection><tr><td>' . _('Enter the date from which variances between orders and deliveries are to be listed') . ":</td><td><input type=text class='date' alt='".$_SESSION['DefaultDateFormat']."' name='FromDate' maxlength=10 size=10 value='" . Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m')-1,0,Date('y'))) . "'></td></tr>";
+	 echo '<tr><td>' . _('Enter the date to which variances between orders and deliveries are to be listed') . ":</td><td><input type=text class='date' alt='".$_SESSION['DefaultDateFormat']."' name='ToDate' maxlength=10 size=10 value='" . Date($_SESSION['DefaultDateFormat']) . "'></td></tr>";
 
 	 if (!isset($_POST['DaysAcceptable'])){
 		$_POST['DaysAcceptable'] = 1;
 	 }
 
-	 echo '<tr><td>' . _('Enter the number of days considered acceptable between delivery requested date and invoice date(ie the date dispatched)') . ":</td><td><input type=text class=number name='DaysAcceptable' maxlength=2 size=2 VALUE=" . $_POST['DaysAcceptable'] . "></td></tr>";
+	 echo '<tr><td>' . _('Enter the number of days considered acceptable between delivery requested date and invoice date(ie the date dispatched)') . ":</td><td><input type=text class=number name='DaysAcceptable' maxlength=2 size=2 value=" . $_POST['DaysAcceptable'] . "></td></tr>";
 	 echo '<tr><td>' . _('Inventory Category') . '</td><td>';
 
 	 $sql = "SELECT categorydescription, categoryid FROM stockcategory WHERE stocktype<>'D' AND stocktype<>'L'";
@@ -65,7 +65,7 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate']) OR $InputError==1){
 	 echo '<tr><td>' . _('Email the report off') . ":</td><td><select name='Email'>";
 	 echo "<option selected value='No'>" . _('No');
 	 echo "<option value='Yes'>" . _('Yes');
-	 echo "</select></td></tr></table><br><div class='centre'><input type=submit name='Go' value='" . _('Create PDF') . "'></div>";
+	 echo "</select></td></tr></table><br /><div class='centre'><input type=submit name='Go' value='" . _('Create PDF') . "'></div>";
 
 	 if ($InputError==1){
 	 	prnMsg($msg,'error');
@@ -162,7 +162,7 @@ if (DB_error_no($db)!=0){
 	include('includes/header.inc');
 	prnMsg( _('An error occurred getting the days between delivery requested and actual invoice'),'error');
 	if ($debug==1){
-		prnMsg( _('The SQL used to get the days between requested delivery and actual invoice dates was') . "<br>$sql",'error');
+		prnMsg( _('The SQL used to get the days between requested delivery and actual invoice dates was') . "<br />$sql",'error');
 	}
 	include ('includes/footer.inc');
 	exit;
@@ -171,7 +171,7 @@ if (DB_error_no($db)!=0){
   	include('includes/header.inc');
 	prnMsg( _('There were no variances between deliveries and orders found in the database within the period from') . ' ' . $_POST['FromDate'] . ' ' . _('to') . ' ' . $_POST['ToDate'] . '. ' . _('Please try again selecting a different date range'), 'info');
 	if ($debug==1) {
-		prnMsg( _('The SQL that returned no rows was') . '<br>' . $sql,'error');
+		prnMsg( _('The SQL that returned no rows was') . '<br />' . $sql,'error');
 	}
 	include('includes/footer.inc');
 	exit;

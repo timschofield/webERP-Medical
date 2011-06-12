@@ -17,8 +17,8 @@ if (isset($_GET['LineNo'])){
         $LineNo = (int)$_POST['LineNo'];
 } else {
 	echo '<div class="centre"><a href="' . $rootpath . '/ConfirmDispatch_Invoice.php?' . SID . '">'.
-		_('Select a line item to invoice').'</a><br>';
-	echo '<br>';
+		_('Select a line item to invoice').'</a><br />';
+	echo '<br />';
 	prnMsg( _('This page can only be opened if a line item on a sales order to be invoiced has been selected') . '. ' . _('Please do that first'),'error');
 	echo '</div>';
 	include('includes/footer.inc');
@@ -28,7 +28,7 @@ if (isset($_GET['LineNo'])){
 if (!isset($_SESSION['Items']) OR !isset($_SESSION['ProcessingOrder'])) {
 	/* This page can only be called with a sales order number to invoice */
 	echo '<div class="centre"><a href="' . $rootpath . '/SelectSalesOrder.php?' . SID . '">'. _('Select a sales order to invoice').
-		'</a><br>';
+		'</a><br />';
 	prnMsg( _('This page can only be opened if a sales order and line item has been selected Please do that first'),'error');
 	echo '</div>';
 	include('includes/footer.inc');
@@ -43,7 +43,7 @@ $LineItem = &$_SESSION['Items']->LineItems[$LineNo];
 //Make sure this item is really controlled
 if ( $LineItem->Controlled != 1 ){
 	echo '<div class="centre"><a href="' . $rootpath . '/ConfirmDispatch_Invoice.php?' . SID . '">'. _('Back to the Sales Order'). '</a></div>';
-	echo '<br>';
+	echo '<br />';
 	prnMsg( _('The line item must be defined as controlled to require input of the batch numbers or serial numbers being sold'),'error');
 	include('includes/footer.inc');
 	exit;
@@ -54,9 +54,9 @@ if ( $LineItem->Controlled != 1 ){
 ********************************************/
 echo '<div class="centre">';
 
-echo '<br><a href="'. $rootpath. '/ConfirmDispatch_Invoice.php?' . SID . '">'. _('Back to Confirmation of Dispatch') . '/' . _('Invoice'). '</a>';
+echo '<br /><a href="'. $rootpath. '/ConfirmDispatch_Invoice.php?' . SID . '">'. _('Back to Confirmation of Dispatch') . '/' . _('Invoice'). '</a>';
 
-echo '<br><font size=2><b>'. _('Dispatch of up to').' '. number_format($LineItem->Quantity-$LineItem->QtyInv, $LineItem->DecimalPlaces). ' '. _('Controlled items').' ' . $LineItem->StockID  . ' - ' . $LineItem->ItemDescription . ' '. _('on order').' ' . $_SESSION['Items']->OrderNo . ' '. _('to'). ' ' . $_SESSION['Items']->CustomerName . '</b></font></div>';
+echo '<br /><font size=2><b>'. _('Dispatch of up to').' '. number_format($LineItem->Quantity-$LineItem->QtyInv, $LineItem->DecimalPlaces). ' '. _('Controlled items').' ' . $LineItem->StockID  . ' - ' . $LineItem->ItemDescription . ' '. _('on order').' ' . $_SESSION['Items']->OrderNo . ' '. _('to'). ' ' . $_SESSION['Items']->CustomerName . '</b></font></div>';
 
 /** vars needed by InputSerialItem : **/
 $StockID = $LineItem->StockID;

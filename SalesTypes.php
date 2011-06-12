@@ -39,7 +39,7 @@ if (isset($_POST['submit'])) {
 		$i++;
 	} elseif ($_POST['TypeAbbrev']=='' OR $_POST['TypeAbbrev']==' ' OR $_POST['TypeAbbrev']=='  ') {
 		$InputError = 1;
-		prnMsg('<br>' . _('The sales type (price list) code cannot be an empty string or spaces'),'error');
+		prnMsg('<br />' . _('The sales type (price list) code cannot be an empty string or spaces'),'error');
 		$Errors[$i] = 'SalesType';
 		$i++;
 	} elseif (strlen($_POST['Sales_Type']) >40) {
@@ -144,7 +144,7 @@ if (isset($_POST['submit'])) {
 
 	$myrow = DB_fetch_row($result);
 	if ($myrow[0]>0) {
-		prnMsg(_('Cannot delete this sale type because customer transactions have been created using this sales type') . '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('transactions using this sales type code'),'error');
+		prnMsg(_('Cannot delete this sale type because customer transactions have been created using this sales type') . '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('transactions using this sales type code'),'error');
 
 	} else {
 
@@ -154,7 +154,7 @@ if (isset($_POST['submit'])) {
 		$result = DB_query($sql,$db,$ErrMsg);
 		$myrow = DB_fetch_row($result);
 		if ($myrow[0]>0) {
-			prnMsg (_('Cannot delete this sale type because customers are currently set up to use this sales type') . '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('customers with this sales type code'));
+			prnMsg (_('Cannot delete this sale type because customers are currently set up to use this sales type') . '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('customers with this sales type code'));
 		} else {
 
 			$sql="DELETE FROM salestypes WHERE typeabbrev='".$SelectedType."'";
@@ -224,7 +224,7 @@ if (! isset($_GET['delete'])) {
 
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '" >';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<p><table class=selection>'; //Main table
+	echo '<br /><table class=selection>'; //Main table
 
 
 	// The user wish to EDIT an existing type
@@ -242,8 +242,8 @@ if (! isset($_GET['delete'])) {
 		$_POST['TypeAbbrev'] = $myrow['typeabbrev'];
 		$_POST['Sales_Type']  = $myrow['sales_type'];
 
-		echo '<input type=hidden name="SelectedType" VALUE="' . $SelectedType . '">';
-		echo '<input type=hidden name="TypeAbbrev" VALUE="' . $_POST['TypeAbbrev'] . '">';
+		echo '<input type=hidden name="SelectedType" value="' . $SelectedType . '">';
+		echo '<input type=hidden name="TypeAbbrev" value="' . $_POST['TypeAbbrev'] . '">';
 		echo '<table class=selection>';
 		echo '<tr><th colspan=4><font size=2 color=blue><b>' . _('Sales Type/Price List Setup') . '</b></font></th></tr>';
 		echo '<tr><td>' . _('Type Code') . ':</td><td>';
@@ -270,7 +270,7 @@ if (! isset($_GET['delete'])) {
 
    	echo '</td></tr></table>'; // close main table
 
-	echo '<p><div class="centre"><input type=submit name=submit VALUE="' . _('Accept') . '"><input type=submit name=Cancel VALUE="' . _('Cancel') . '"></div>';
+	echo '<br /><div class="centre"><input type=submit name=submit value="' . _('Accept') . '"><input type=submit name=Cancel value="' . _('Cancel') . '"></div>';
 
 	echo '</form>';
 

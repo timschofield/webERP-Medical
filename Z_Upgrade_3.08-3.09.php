@@ -8,9 +8,9 @@ include('includes/header.inc');
 
 prnMsg(_('This script will run perform any modifications to the database since v 3.08 required to allow the additional functionality in version 3.09 scripts'),'info');
 
-echo "<p><form method='post' action='" . $_SERVER['PHP_SELF'] . '?' . SID . "'>";
+echo '<p><form method="post" action="' . $_SERVER['PHP_SELF'] . '"></p>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<input type=submit name=DoUpgrade VALUE="' . _('Perform Upgrade') . '">';
+echo '<input type=submit name=DoUpgrade value="' . _('Perform Upgrade') . '">';
 echo '</form>';
 
 if ($_POST['DoUpgrade'] == _('Perform Upgrade')){

@@ -129,7 +129,7 @@ while ($myrow=DB_fetch_array($Result)) {
 	echo '<td><a href="'.$rootpath.'/PO_AuthorisationLevels.php?Delete=Yes&UserID=' . $myrow['userid'] . '&Currency='.$myrow['currabrev'].'">'._('Delete').'</td></tr>';
 }
 
-echo '</table><br><br>';
+echo '</table><br /><br />';
 
 if (!isset($_GET['Edit'])) {
 	$UserID=$_SESSION['UserID'];

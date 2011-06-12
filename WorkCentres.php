@@ -87,13 +87,13 @@ if (isset($_POST['submit'])) {
 	$result = DB_query($sql,$db);
 	$myrow = DB_fetch_row($result);
 	if ($myrow[0]>0) {
-		prnMsg(_('Cannot delete this work centre because bills of material have been created requiring components to be added at this work center') . '<br>' . _('There are') . ' ' . $myrow[0] . ' ' ._('BOM items referring to this work centre code'),'warn');
+		prnMsg(_('Cannot delete this work centre because bills of material have been created requiring components to be added at this work center') . '<br />' . _('There are') . ' ' . $myrow[0] . ' ' ._('BOM items referring to this work centre code'),'warn');
 	}  else {
 		$sql= "SELECT COUNT(*) FROM contractbom WHERE contractbom.workcentreadded='" . $SelectedWC . "'";
 		$result = DB_query($sql,$db);
 		$myrow = DB_fetch_row($result);
 		if ($myrow[0]>0) {
-			prnMsg(_('Cannot delete this work centre because contract bills of material have been created having components added at this work center') . '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('Contract BOM items referring to this work centre code'),'warn');
+			prnMsg(_('Cannot delete this work centre because contract bills of material have been created having components added at this work center') . '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('Contract BOM items referring to this work centre code'),'warn');
 		} else {
 			$sql="DELETE FROM workcentres WHERE code='" . $SelectedWC . "'";
 			$result = DB_query($sql,$db);
@@ -159,7 +159,7 @@ if (isset($SelectedWC)) {
 	echo "<div class='centre'><a href='" . $_SERVER['PHP_SELF'] . '?' . SID . "'>" . _('Show all Work Centres') . '</a></div>';
 }
 
-echo "<p><form method='post' action='" . $_SERVER['PHP_SELF'] . '?' . SID . "'>";
+echo "<br /><form method='post' action='" . $_SERVER['PHP_SELF'] . '?' . SID . "'>";
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (isset($SelectedWC)) {
@@ -212,9 +212,9 @@ echo '<tr><td>' . _('Work Centre Description') . ":</td>
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['Location']) and $myrow['loccode']==$_POST['Location']) {
-		echo "<option selected VALUE='";
+		echo "<option selected value='";
 	} else {
-		echo "<option VALUE='";
+		echo "<option value='";
 	}
 	echo $myrow['loccode'] . "'>" . $myrow['locationname'];
 
@@ -239,9 +239,9 @@ $result = DB_query($SQL,$db);
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['OverheadRecoveryAct']) and $myrow['accountcode']==$_POST['OverheadRecoveryAct']) {
-		echo '<option selected VALUE=';
+		echo '<option selected value=';
 	} else {
-		echo '<option VALUE=';
+		echo '<option value=';
 	}
 	echo $myrow['accountcode'] . '>' . $myrow['accountname'];
 
@@ -258,7 +258,7 @@ echo '<tr><td>' . _('Overhead Per Hour') . ':</td>
 
 echo '</td></tr></table>';
 
-echo '<br><div class="centre"><input type="Submit" name="submit" value="' . _('Enter Information') . '"></div>';
+echo '<br /><div class="centre"><input type="Submit" name="submit" value="' . _('Enter Information') . '"></div>';
 
 if (!isset($_GET['SelectedWC']) or $_GET['SelectedWC']=='') {
 	echo "<script>defaultControl(document.forms[0].Code);</script>";

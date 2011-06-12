@@ -51,9 +51,9 @@ If (isset($_POST['PrintPDF'])
 	  $title = _('Outstanding GRN Valuation') . ' - ' . _('Problem Report');
 	  include('includes/header.inc');
 	  prnMsg(_('The outstanding GRNs valuation details could not be retrieved by the SQL because') . ' - ' . DB_error_msg($db),'error');
-	   echo '<br><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
+	   echo '<br /><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
 	   if ($debug==1){
-		  echo '<br>'.$SQL;
+		  echo '<br />'.$SQL;
 	   }
 	   include('includes/footer.inc');
 	   exit;
@@ -63,9 +63,9 @@ If (isset($_POST['PrintPDF'])
 	  $title = _('Outstanding GRN Valuation') . ' - ' . _('Problem Report');
 	  include('includes/header.inc');
 	  prnMsg(_('No outstanding GRNs valuation details retrieved'), 'warn');
-	   echo '<br><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
+	   echo '<br /><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
 	   if ($debug==1){
-		  echo '<br>'.$SQL;
+		  echo '<br />'.$SQL;
 	   }
 	   include('includes/footer.inc');
 	   exit;
@@ -161,7 +161,7 @@ If (isset($_POST['PrintPDF'])
 	echo '<tr><td>' . _('To Supplier Code'). ':</td>
 		<td><input type=text name="ToCriteria" value="zzzzzzz"></td></tr>';
 
-	echo '</table><br><div class="centre"><input type=Submit Name="PrintPDF" Value="' . _('Print PDF') . '"></div>';
+	echo '</table><br /><div class="centre"><input type=Submit Name="PrintPDF" Value="' . _('Print PDF') . '"></div>';
 
 	include('includes/footer.inc');
 

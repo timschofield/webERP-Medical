@@ -26,12 +26,12 @@ echo '<option value="All">' . _('All') . '</option>';
 while ($myrow=DB_fetch_array($resultStkLocs)){
 	if (isset($_POST['StockCategory']) AND $_POST['StockCategory']!='All'){
 		if ($myrow['categoryid'] == $_POST['StockCategory']){
-		     echo '<option selected VALUE="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
+		     echo '<option selected value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 		} else {
-		     echo '<option VALUE="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
+		     echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 		}
 	}else {
-		 echo '<option VALUE="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
+		 echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	}
 }
 echo '</select></td>';
@@ -45,15 +45,15 @@ echo '<td>' . _('For Stock Location') . ':</td>
 while ($myrow=DB_fetch_array($resultStkLocs)){
 	if (isset($_POST['StockLocation']) AND $_POST['StockLocation']!='All'){
 		if ($myrow['loccode'] == $_POST['StockLocation']){
-		     echo '<option selected VALUE="' . $myrow['loccode'] . '">' . $myrow['locationname'];
+		     echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
 		} else {
-		     echo '<option VALUE="' . $myrow['loccode'] . '">' . $myrow['locationname'];
+		     echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
 		}
 	} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
-		 echo '<option selected VALUE="' . $myrow['loccode'] . '">' . $myrow['locationname'];
+		 echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
 		 $_POST['StockLocation']=$myrow['loccode'];
 	} else {
-		 echo '<option VALUE="' . $myrow['loccode'] . '">' . $myrow['locationname'];
+		 echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
 	}
 }
 echo '</select></td>';
@@ -63,8 +63,8 @@ if (!isset($_POST['OnHandDate'])){
 }
 
 echo '<td>' . _('On-Hand On Date') . ':</td>
-	<td><input type=TEXT class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="OnHandDate" size=12 maxlength=12 VALUE="' . $_POST['OnHandDate'] . '"></td></tr>';
-echo '<tr><td colspan=6><div class="centre"><input type=submit name="ShowStatus" VALUE="' . _('Show Stock Status') .'"></div></td></tr></table>';
+	<td><input type=TEXT class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="OnHandDate" size=12 maxlength=12 value="' . $_POST['OnHandDate'] . '"></td></tr>';
+echo '<tr><td colspan=6><div class="centre"><input type=submit name="ShowStatus" value="' . _('Show Stock Status') .'"></div></td></tr></table>';
 echo '</form>';
 
 $TotalQuantity = 0;

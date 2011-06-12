@@ -61,7 +61,7 @@ if ( isset($_POST['submit']) ) {
 	//run the SQL from either of the above possibilites
 	if ($InputError !=1) {
 		$result = DB_query($sql,$db);
-		echo '<br>';
+		echo '<br />';
 		prnMsg($msg, 'success');
 		unset($SelectedShipper);
 		unset($_POST['ShipperName']);
@@ -78,7 +78,7 @@ if ( isset($_POST['submit']) ) {
 	$myrow = DB_fetch_row($result);
 	if ($myrow[0]>0) {
 		$CancelDelete = 1;
-		echo '<br>';
+		echo '<br />';
 		prnMsg( _('Cannot delete this shipper because sales orders have been created using this shipper') . '. ' . _('There are'). ' '.
 			$myrow[0] . ' '. _('sales orders using this shipper code'), 'error');
 
@@ -90,7 +90,7 @@ if ( isset($_POST['submit']) ) {
 		$myrow = DB_fetch_row($result);
 		if ($myrow[0]>0) {
 			$CancelDelete = 1;
-			echo '<br>';
+			echo '<br />';
 			prnMsg( _('Cannot delete this shipper because invoices have been created using this shipping company') . '. ' . _('There are').  ' ' .
 				$myrow[0] . ' ' . _('invoices created using this shipping company'), 'error');
 		} else {
@@ -98,14 +98,14 @@ if ( isset($_POST['submit']) ) {
 			if ($_SESSION['Default_Shipper']==$SelectedShipper) {
 
 				$CancelDelete = 1;
-				echo '<br>';
+				echo '<br />';
 				prnMsg( _('Cannot delete this shipper because it is defined as the default shipping company in the configuration file'), 'error');
 
 			} else {
 
 				$sql="DELETE FROM shippers WHERE shipper_id='".$SelectedShipper."'";
 				$result = DB_query($sql,$db);
-				echo '<br>';
+				echo '<br />';
 				prnMsg( _('The shipper record has been deleted'), 'success');;
 			}
 		}
@@ -177,8 +177,8 @@ if (!isset($_GET['delete'])) {
 		$_POST['Shipper_ID'] = $myrow['shipper_id'];
 		$_POST['ShipperName']	= $myrow['shippername'];
 
-		echo '<input type=hidden name="SelectedShipper" VALUE='. $SelectedShipper .'>';
-		echo '<input type=hidden name="Shipper_ID" VALUE=' . $_POST['Shipper_ID'] . '>';
+		echo '<input type=hidden name="SelectedShipper" value='. $SelectedShipper .'>';
+		echo '<input type=hidden name="Shipper_ID" value=' . $_POST['Shipper_ID'] . '>';
 		echo '<br /><table class=selection><tr><td>'. _('Shipper Code').':</td><td>' . $_POST['Shipper_ID'] . '</td></tr>';
 	} else {
 		echo "<br /><table class=selection>";

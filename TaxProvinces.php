@@ -124,7 +124,7 @@ if (isset($_POST['submit'])) {
 		$myrow = DB_fetch_row($result);
 		if ($myrow[0]>0) {
 			prnMsg( _('Cannot delete this tax province because at least one stock location is defined to be inside this province'),'warn');
-			echo '<br>' . _('There are') . ' ' . $myrow[0] . ' ' . _('stock locations that refer to this tax province') . '</font>';
+			echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('stock locations that refer to this tax province') . '</font>';
 		} else {
 			$sql = "DELETE FROM taxauthrates WHERE dispatchtaxprovince = '" . $SelectedTaxProvince . "'";
 			$result = DB_query($sql,$db);
@@ -180,7 +180,7 @@ if (isset($_POST['submit'])) {
 		echo '</tr>';
 
 	} //END WHILE LIST LOOP
-	echo '</table><p>';
+	echo '</table><br />';
 } //end of ifs and buts!
 
 
@@ -188,7 +188,7 @@ if (isset($SelectedTaxProvince)) {
 	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Review Tax Provinces') . '</a></div>';
 }
 
-echo '<p>';
+echo '<br />';
 
 if (! isset($_GET['delete'])) {
 
@@ -212,7 +212,7 @@ if (! isset($_GET['delete'])) {
 
 			$_POST['TaxProvinceName']  = $myrow['taxprovincename'];
 
-			echo '<input type=hidden name="SelectedTaxProvince" VALUE="' . $myrow['taxprovinceid'] . '">';
+			echo '<input type=hidden name="SelectedTaxProvince" value="' . $myrow['taxprovinceid'] . '">';
 			echo '<table class=selection>';
 		}
 

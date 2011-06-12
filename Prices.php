@@ -50,7 +50,7 @@ if (DB_num_rows($result)==0){
 
 
 if (!isset($Item)){
-	echo '<p>';
+	echo '<br />';
 	prnMsg (_('An item must first be selected before this page is called') . '. ' . _('The product selection page should call this page with a valid product code'),'error');
 	include('includes/footer.inc');
 	exit;
@@ -116,14 +116,14 @@ if (isset($_POST['submit'])) {
 
 	if ($myrow[0]!=0 and !isset($_POST['OldTypeAbbrev'])) {
 		prnMsg( _('This price has already been entered. To change it you should edit it') , 'warn');
-		echo '<br><div class="centre"><a href="' . $rootpath . '/Prices.php?Item='.$Item.'">' . _('Back to Prices') . '</a></div>';
+		echo '<br /><div class="centre"><a href="' . $rootpath . '/Prices.php?Item='.$Item.'">' . _('Back to Prices') . '</a></div>';
 		include('includes/footer.inc');
 		exit;
 	}
 
 	if (isset($_POST['OldTypeAbbrev']) AND isset($_POST['OldCurrAbrev']) AND strlen($Item)>1 AND $InputError !=1) {
 
-		/* Need to see if there is also a price entered that has an end date after the start date of this price and if 
+		/* Need to see if there is also a price entered that has an end date after the start date of this price and if
 		so we will need to update it so there is no ambiguity as to which price will be used*/
 
 
@@ -267,7 +267,7 @@ if ($InputError ==0){
 
 				echo '<input type=hidden name="Units" value="' . $myrow['units'] . '">';
 				echo '<td>'.$myrow['sales_type'].'</td>
-						<td>'.$myrow['currency'].'</td>				
+						<td>'.$myrow['currency'].'</td>
 						<td>'.$myrow['units'].'</td>
 						<td class=number>'.$myrow['conversionfactor'].'</td>
 						<td class=number>'.$myrow['decimalplaces'].'</td>
@@ -289,7 +289,7 @@ if ($InputError ==0){
 
 		}
 		//END WHILE LIST LOOP
-		echo '</table><p>';
+		echo '</table><br />';
 	} else {
 		prnMsg(_('There are no prices set up for this part'),'warn');
 	}
@@ -344,7 +344,7 @@ if ($InputError ==0){
 			}
 		}
 
-		echo '<br><table class=selection>';
+		echo '<br /><table class=selection>';
 		echo '<tr><th colspan=5><font color="blue" size=3><b>' . $Item . ' - ' . $PartDescription . '</b></font></th></tr>';
 
 		echo '<tr><td>' . _('Sales Type Price List') . ':</td><td><select name="TypeAbbrev">';
@@ -360,9 +360,9 @@ if ($InputError ==0){
 			}
 		} //end while loop
 		echo '</select></td></tr>';
-		
+
 		DB_free_result($result);
-		
+
 		$SQL = "SELECT currabrev, currency FROM currencies";
 		$result = DB_query($SQL,$db);
 		echo '<tr><td>' . _('Currency') . ':</td><td><select name="CurrAbrev">';
@@ -436,7 +436,7 @@ if ($InputError ==0){
 		echo '</td></tr>';
 
 		echo '</table>';
-		echo '<br><div class="centre">';
+		echo '<br /><div class="centre">';
 		echo '<input type="Submit" name="submit" value="'. _('Enter') . '/' . _('Amend Price') . '">';
 		echo '</div>';
 	}

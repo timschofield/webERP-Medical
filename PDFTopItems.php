@@ -23,7 +23,7 @@ if (($_GET['Location'] == 'All') and ($_GET['Customers'] == 'All')) {
 			WHERE 	salesorderdetails.orderno = salesorders.orderno
 				AND salesorderdetails.stkcode = stockmaster.stockid
 				AND salesorders.debtorno = debtorsmaster.debtorno
-				AND salesorderdetails.actualdispatchdate >='" . $FromDate . "' 
+				AND salesorderdetails.actualdispatchdate >='" . $FromDate . "'
 			GROUP BY salesorderdetails.stkcode
 			ORDER BY '" . $_GET['Sequence'] . "' DESC
 			LIMIT " . $_GET['NumberOfTopItems'] ;
@@ -39,7 +39,7 @@ if (($_GET['Location'] == 'All') and ($_GET['Customers'] == 'All')) {
 						AND salesorderdetails.stkcode = stockmaster.stockid
 						AND salesorders.debtorno = debtorsmaster.debtorno
 						AND debtorsmaster.typeid = '" . $_GET['Customers'] . "'
-						AND salesorderdetails.ActualDispatchDate >= '" . $FromDate . "' 
+						AND salesorderdetails.ActualDispatchDate >= '" . $FromDate . "'
 				GROUP BY salesorderdetails.stkcode
 				ORDER BY '" . $_GET['Sequence'] . "' DESC
 				LIMIT " . $_GET['NumberOfTopItems'];
@@ -56,7 +56,7 @@ if (($_GET['Location'] == 'All') and ($_GET['Customers'] == 'All')) {
 						AND salesorderdetails.stkcode = stockmaster.stockid
 						AND salesorders.debtorno = debtorsmaster.debtorno
 						AND salesorders.fromstkloc = '" . $_GET['Location'] . "'
-						AND salesorderdetails.ActualDispatchDate >= '" . $FromDate . "' 
+						AND salesorderdetails.ActualDispatchDate >= '" . $FromDate . "'
 					GROUP BY salesorderdetails.stkcode
 					ORDER BY '" . $_GET['Sequence'] . "' DESC
 					LIMIT 0," . $_GET['NumberOfTopItems'];
@@ -73,7 +73,7 @@ if (($_GET['Location'] == 'All') and ($_GET['Customers'] == 'All')) {
 						AND salesorders.debtorno = debtorsmaster.debtorno
 						AND salesorders.fromstkloc = '" . $_GET['Location'] . "'
 						AND debtorsmaster.typeid = '" . $_GET['Customers'] . "'
-						AND salesorderdetails.actualdispatchdate >= '" . $FromDate . "' 
+						AND salesorderdetails.actualdispatchdate >= '" . $FromDate . "'
 					GROUP BY salesorderdetails.stkcode
 					ORDER BY '" . $_GET['Sequence'] . "' DESC
 					LIMIT " . $_GET['NumberOfTopItems'];
@@ -115,7 +115,7 @@ if (DB_num_rows($result) == 0) {
 	$title = _('Print Price List Error');
 	include ('includes/header.inc');
 	prnMsg(_('There were no records returned '), 'warn');
-	echo '<br><a href="' . $rootpath . '/index.php">' . _('Back to the menu') . '</a>';
+	echo '<br /><a href="' . $rootpath . '/index.php">' . _('Back to the menu') . '</a>';
 	include ('includes/footer.inc');
 	exit;
 } else {

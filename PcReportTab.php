@@ -51,9 +51,9 @@ if ((! isset($_POST['FromDate']) AND ! isset($_POST['ToDate'])) OR isset($_POST[
 
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['SelectedTabs']) and $myrow['tabcode']==$_POST['SelectedTabs']) {
-			echo '<option selected VALUE="' .$myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
+			echo '<option selected value="' .$myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
 		} else {
-			echo '<option VALUE="' . $myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
+			echo '<option value="' . $myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
 		}
 
 	} //end while loop get type of tab
@@ -63,11 +63,11 @@ if ((! isset($_POST['FromDate']) AND ! isset($_POST['ToDate'])) OR isset($_POST[
 
 	echo '</select></td></tr>';
 	echo'<tr><td>' . _('From Date :') . '</td><td>';
-	echo '<input tabindex="2" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="TEXT" name="FromDate" maxlength="10" size="11" VALUE="' . $_POST['FromDate'] . '">';
+	echo '<input tabindex="2" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="TEXT" name="FromDate" maxlength="10" size="11" value="' . $_POST['FromDate'] . '">';
 	echo '</td></tr>';
 	echo '<tr><td>' . _('To Date:') .'</td><td>';
-	echo '<input tabindex="3" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="TEXT" name="ToDate" maxlength="10" size="11" VALUE="' . $_POST['ToDate'] . '">';
-	echo '</td></tr></table><br>';
+	echo '<input tabindex="3" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="TEXT" name="ToDate" maxlength="10" size="11" value="' . $_POST['ToDate'] . '">';
+	echo '</td></tr></table><br />';
 	echo '<div class="centre"><input type=submit Name="ShowTB" Value="' . _('Show HTML') .'">';
 	echo '<input type=submit Name="PrintPDF" Value="'._('PrintPDF').'"></div>';
 
@@ -95,7 +95,7 @@ if (DB_error_no($db)!=0){
 	include('includes/header.inc');
 	prnMsg(_('An error occurred getting the orders details'),'',_('Database Error'));
 	if ($debug==1){
-		prnMsg( _('The SQL used to get the orders that failed was') . '<br>' . $SQL, '',_('Database Error'));
+		prnMsg( _('The SQL used to get the orders that failed was') . '<br />' . $SQL, '',_('Database Error'));
 	}
 	include ('includes/footer.inc');
 	exit;
@@ -103,7 +103,7 @@ if (DB_error_no($db)!=0){
   	include('includes/header.inc');
 	prnMsg(_('There were no expenses found in the database within the period from') . ' ' . $_POST['FromDate'] . ' ' . _('to') . ' '. $_POST['ToDate'] . '. ' . _('Please try again selecting a different date range'),'warn');
 	if ($debug==1) {
-		prnMsg(_('The SQL that returned no rows was') . '<br>' . $SQL,'',_('Database Error'));
+		prnMsg(_('The SQL that returned no rows was') . '<br />' . $SQL,'',_('Database Error'));
 	}
 	include('includes/footer.inc');
 	exit;
@@ -240,7 +240,7 @@ if (DB_error_no($db)!=0){
 
 	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<input type=hidden name="FromDate" VALUE="' . $_POST['FromDate'] . '"><input type=hidden name="ToDate" VALUE="' . $_POST['ToDate'] . '">';
+	echo '<input type=hidden name="FromDate" value="' . $_POST['FromDate'] . '"><input type=hidden name="ToDate" value="' . $_POST['ToDate'] . '">';
 
 	$SqlTabs = "SELECT * FROM pctabs
 			WHERE tabcode='".$SelectedTabs."'";
@@ -252,7 +252,7 @@ if (DB_error_no($db)!=0){
 
 	$Tabs=DB_fetch_array($TabResult);
 
-	echo '<br><table class=selection>';
+	echo '<br /><table class=selection>';
 
 	echo '<tr><td>' . _('Tab Code') . '</td>
 				<td>:</td>
@@ -320,7 +320,7 @@ if (DB_error_no($db)!=0){
 				 _('No Petty Cash movements for this tab were returned by the SQL because'),
 				 _('The SQL that failed was:'));
 
-	echo '<br><table class=selection>';
+	echo '<br /><table class=selection>';
 	echo '<tr>
 		<th>' . _('Date Of Expense') . '</th>
 		<th>' . _('Expense Description') . '</th>
@@ -401,7 +401,7 @@ if (DB_error_no($db)!=0){
 				<td>'.number_format($Amount[0],2).' </td><td>'.$Tabs['currency'].'</td></tr>';
 
 	echo '</table>';
-	echo '<br><div class="centre"><input type=submit Name="SelectDifferentDate" Value="' . _('Select A Different Date') . '"></div>';
+	echo '<br /><div class="centre"><input type=submit Name="SelectDifferentDate" Value="' . _('Select A Different Date') . '"></div>';
 }
 echo '</form>';
 include('includes/footer.inc');

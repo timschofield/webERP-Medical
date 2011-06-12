@@ -210,7 +210,7 @@ function submit(&$db,&$StockID,&$DemandID)  //####SUBMIT_SUBMIT_SUBMIT_SUBMIT_SU
 
 		$result = DB_query($sql,$db,_('The update/addition of the MRP demand record failed because'));
 		prnMsg($msg,'success');
-		echo '<br>';
+		echo '<br />';
 		unset ($_POST['MRPDemandtype']);
 		unset ($_POST['Quantity']);
 		unset ($_POST['StockID']);
