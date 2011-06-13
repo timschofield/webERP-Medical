@@ -332,7 +332,7 @@ if ($_POST['TenderType']!=3 and isset($_SESSION['offer']) and $_SESSION['offer']
 			echo '<td><input type=text class=number name="price'.$LineItems->LineNo.'" value='.number_format($LineItems->Price,2,'.','').'></td>';
 			echo '<td class=number>'.number_format($LineItems->Price*$LineItems->Quantity,2).'</td>';
 			echo '<td><input type=text size=11 class=date alt='.$_SESSION['DefaultDateFormat'].' name="expirydate'.$LineItems->LineNo.'" value='.$LineItems->ExpiryDate.'></td>';
-			echo "<td><a href='" . $_SERVER['PHP_SELF'] . "?" . SID . "Delete=" . $LineItems->LineNo . "&Type=" . $_POST['TenderType'] . "'>" . _('Remove') . "</a></td></tr>";
+			echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $LineItems->LineNo . '&Type=' . $_POST['TenderType'] . '">' . _('Remove') . '</a></td></tr>';
 			echo '</tr>';
 		}
 	}
@@ -629,16 +629,16 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 
 	if (isset($SearchResult)) {
 
-		echo "<table cellpadding=1 colspan=7>";
+		echo '<table cellpadding=1 colspan=7>';
 
-		$tableheader = "<tr>
-			<th>" . _('Code')  . "</th>
-			<th>" . _('Description') . "</th>
-			<th>" . _('Units') . "</th>
-			<th>" . _('Image') . "</th>
-			<th>" . _('Quantity') . "</th>
-			<th>" . _('Price') .' ('.$Currency.")</th>
-			</tr>";
+		$tableheader = '<tr>
+			<th>' . _('Code')  . '</th>
+			<th>' . _('Description') . '</th>
+			<th>' . _('Units') . '</th>
+			<th>' . _('Image') . '</th>
+			<th>' . _('Quantity') . '</th>
+			<th>' . _('Price') .' ('.$Currency.')</th>
+			</tr>';
 		echo $tableheader;
 
 		$j = 1;
@@ -684,14 +684,14 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 			} else {
 				$uom=$myrow['units'];
 			}
-			echo "<td>".$myrow['stockid']."</td>
-					<td>".$myrow['description']."</td>
-					<td>".$uom."</td>
-					<td>".$ImageSource."</td>
-					<td><input class='number' type='text' size=6 value=0 name='qty".$myrow['stockid']."'></td>
-					<td><input class='number' type='text' size=12 value=0 name='price".$myrow['stockid']."'></td>
-					<input type='hidden' size=6 value=".$uom." name='uom".$myrow['stockid']."'>
-					</tr>";
+			echo '<td>'.$myrow['stockid'].'</td>
+					<td>'.$myrow['description'].'</td>
+					<td>'.$uom.'</td>
+					<td>'.$ImageSource.'</td>
+					<td><input class="number" type="text" size=6 value=0 name="qty'.$myrow['stockid'].'"></td>
+					<td><input class="number" type="text" size=12 value=0 name="price'.$myrow['stockid'].'"></td>
+					<input type="hidden" size=6 value="'.$uom.'" name="uom'.$myrow['stockid'].'">
+					</tr>';
 
 			$PartsDisplayed++;
 			if ($PartsDisplayed == $Maximum_Number_Of_Parts_To_Show){
