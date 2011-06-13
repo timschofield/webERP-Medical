@@ -279,7 +279,7 @@ if ($_FILES['SelectedAssetFile']['name']) { //start file processing
 
 } elseif ( isset($_POST['gettemplate']) || isset($_GET['gettemplate']) ) { //download an import template
 
-	echo '<br /><br /><br />"'. implode('","',$FieldNames). '"<br /><br /><br />';
+	echo '<br /><br /><br />"'. implode('","',$FieldNames). '" <br /><br /><br />';
 
 } else { //show file upload form
 
