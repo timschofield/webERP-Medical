@@ -672,7 +672,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 		$Result = DB_Txn_Commit($db);
 
 		prnMsg(_('The receipt of') . ' ' . $QuantityReceived . ' ' . $WORow['units'] . ' ' . _('of')  . ' ' . $_POST['StockID'] . ' - ' . $WORow['description'] . ' ' . _('against work order') . ' '. $_POST['WO'] . ' ' . _('has been processed'),'info');
-		echo "<a href='$rootpath/SelectWorkOrder.php?" . SID . "'>" . _('Select a different work order for receiving finished stock against'). '</a>';
+		echo '<a href="'.$rootpath.'/SelectWorkOrder.php">' . _('Select a different work order for receiving finished stock against'). '</a>';
 		unset($_POST['WO']);
 		unset($_POST['StockID']);
 		unset($_POST['IntoLocation']);
