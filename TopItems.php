@@ -30,9 +30,9 @@ if (!(isset($_POST['Search']))) {
 					typeid
 				FROM debtortype";
 	$result = DB_query($sql, $db);
-	echo "<option value='All'>" . _('All') . '</option>';
+	echo '<option value="All">' . _('All') . '</option>';
 	while ($myrow = DB_fetch_array($result)) {
-		echo "<option value='" . $myrow['typeid'] . "'>" . $myrow['typename'] . '</option>';
+		echo '<option value="' . $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
 	}
 	echo '</select></td>
 			</tr>';
