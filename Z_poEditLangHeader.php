@@ -15,7 +15,7 @@ include('includes/header.inc');
 /* Your webserver user MUST have read/write access to here,
 	otherwise you'll be wasting your time */
 
-echo "<br />&nbsp;<a href='" . $rootpath . "/Z_poAdmin.php'>" . _('Back to the translation menu') . "</a>";
+echo '<br />&nbsp;<a href="' . $rootpath . '/Z_poAdmin.php">' . _('Back to the translation menu') . '</a>';
 echo '<br /><br />&nbsp;' . _('Utility to edit a language file header');
 echo '<br />&nbsp;' . _('Current language is') . ' ' . $_SESSION['Language'];
 
@@ -91,14 +91,14 @@ else
 	echo '<form method="post" action=' . $_SERVER['PHP_SELF'] . '?' . SID . '>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-	echo '<table><tr><th" colspan="2" ALIGN="center">'. _('Language File Header for') . ' "' . $_POST['language'] . '"</th></tr>';
+	echo '<table><tr><th" colspan="2" ALIGN="center">'. _('Language File Header for') . ' "' . $_POST['language'] . '" </th></tr>';
 	echo '<tr><td colspan="2"></td></tr>';
 
 	for ($i=1; $i<=17; $i++) {
 
 		echo '<tr>';
 		echo '<td>' . _('Header Line') . ' # ' . $i . '</td>';
-		echo '<td><input type="text" size="80" name="Header_' . $i . '" value="' . htmlentities($LanguageHeader[$i]) . '"></td>';
+		echo '<td><input type="text" size="80" name="Header_' . $i . '" value="' . htmlentities($LanguageHeader[$i]) . '" ></td>';
 		echo '</tr>';
 	}
 
