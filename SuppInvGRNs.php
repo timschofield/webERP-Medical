@@ -110,13 +110,13 @@ if (isset($_GET['Delete'])){
 echo '<table cellpadding=1 class=selection>';
 echo '<tr><th colspan=6><font size=3 color=navy>' . _('Invoiced Goods Received Selected') . '</font></th></tr>';
 
-$tableheader = "<tr bgcolor=#800000>
-			<th>" . _('Sequence') . " #</th>
-			<th>" . _('Item Code') . "</th>
-			<th>" . _('Description') . "</th>
-			<th>" . _('Quantity Charged') . "</th>
-			<th>" . _('Price Charge in') . ' ' . $_SESSION['SuppTrans']->CurrCode . "</th>
-			<th>" . _('Line Value in') . ' ' . $_SESSION['SuppTrans']->CurrCode . '</th></tr>';
+$tableheader = '<tr bgcolor=#800000>
+			<th>' . _('Sequence') . ' #</th>
+			<th>' . _('Item Code') . '</th>
+			<th>' . _('Description') . '</th>
+			<th>' . _('Quantity Charged') . '</th>
+			<th>' . _('Price Charge in') . ' ' . $_SESSION['SuppTrans']->CurrCode . '</th>
+			<th>' . _('Line Value in') . ' ' . $_SESSION['SuppTrans']->CurrCode . '</th></tr>';
 
 echo $tableheader;
 
@@ -178,7 +178,7 @@ $GRNResults = DB_query($SQL,$db);
 
 if (DB_num_rows($GRNResults)==0){
 	prnMsg(_('There are no outstanding goods received from') . ' ' . $_SESSION['SuppTrans']->SupplierName . ' ' . _('that have not been invoiced by them') . '<br />' . _('The goods must first be received using the link below to select purchase orders to receive'),'warn');
-	echo "<div class='centre'><p><a href='$rootpath/PO_SelectOSPurchOrder.php?" . SID . 'SupplierID=' . $_SESSION['SuppTrans']->SupplierID ."'>" .
+	echo '<div class="centre"><p><a href="'.$rootpath.'/PO_SelectOSPurchOrder.php?SupplierID=' . $_SESSION['SuppTrans']->SupplierID .'">' .
 		_('Select Purchase Orders to Receive') .'</a></p></div>';
 	include('includes/footer.inc');
 	exit;
@@ -242,13 +242,13 @@ if (isset($_GET['Modify'])){
 		<td>' . $GRNTmp->ItemCode . ' ' . $GRNTmp->ItemDescription . '</td>
 		<td class=number>' . number_format($GRNTmp->QtyRecd - $GRNTmp->Prev_QuantityInv,2) . '</td>
 		<td><input type="text" class="number" Name="This_QuantityInv" Value="' . $GRNTmp->This_QuantityInv . '" size=11 maxlength=10></td>
-		<td class=number>"' . $GRNTmp->OrderPrice . '"</td>
+		<td class=number>' . $GRNTmp->OrderPrice . '</td>
 		<td><input type="text" class="number" Name="ChgPrice" Value=' . $GRNTmp->ChgPrice . ' size="11" maxlength="10"></td>
 	</tr>';
 	echo '</table>';
 
 /*	if ($myrow['closed']==1){ //Shipment is closed so pre-empt problems later by warning the user - need to modify the order first
-		echo "<input type=hidden name='ShiptRef' Value=''>";
+		echo '<input type=hidden name='ShiptRef' Value=''>";
 		echo "Unfortunately, the shipment that this purchase order line item was allocated to has been closed - if you add this item to the transaction then no shipments will not be updated. If you wish to allocate the order line item to a different shipment the order must be modified first.";
 	} else {	*/
 		echo '<input type=hidden name="ShiptRef" Value="' . $GRNTmp->ShiptRef . '">';
@@ -294,18 +294,18 @@ else {
 
 		if (isset($POs[$GRNTmp->PONo]) and $POs[$GRNTmp->PONo] != $GRNTmp->PONo) {
 					$POs[$GRNTmp->PONo] = $GRNTmp->PONo;
-					echo "<tr><td><input type=Submit Name='AddPOToTrans' Value='" . $GRNTmp->PONo . "'></td><td colspan=3>" . _('Add Whole PO to Invoice') . '</td></tr>';
+					echo '<tr><td><input type=Submit Name="AddPOToTrans" Value="' . $GRNTmp->PONo . '"></td><td colspan=3>' . _('Add Whole PO to Invoice') . '</td></tr>';
 					$i = 0;
 			}
 			if ($i == 0){
 				echo $tableheader;
 		}
 		if (isset($_POST['SelectAll'])) {
-			echo "<tr><td><input type=checkbox checked name='GRNNo_" . $GRNTmp->GRNNo . "'></td>";
+			echo '<tr><td><input type=checkbox checked name="GRNNo_' . $GRNTmp->GRNNo . '"></td>';
 		} else {
-			echo "<tr><td><input type=checkbox name='GRNNo_" . $GRNTmp->GRNNo . "'></td>";
+			echo '<tr><td><input type=checkbox name="GRNNo_' . $GRNTmp->GRNNo . '"></td>';
 		}
-		echo "<td>" . $GRNTmp->GRNNo . '</td>
+		echo '<td>' . $GRNTmp->GRNNo . '</td>
 		<td>' . $GRNTmp->PONo . '</td>
 		<td>' . $GRNTmp->ItemCode . '</td>
 		<td>' . $GRNTmp->ItemDescription . '</td>
@@ -321,9 +321,9 @@ else {
 		}
 		}
 		echo '</table>';
-		echo "<br /><div class='centre'><input type=Submit Name='SelectAll' Value='" . _('Select All') . "'>";
-		echo "<input type=Submit Name='DeSelectAll' Value='" . _('Deselect All') . "'>";
-		echo "<br /><input type=Submit Name='AddGRNToTrans' Value='" . _('Add to Invoice') . "'></div>";
+		echo '<br /><div class="centre"><input type=Submit name="SelectAll" Value="' . _('Select All') . '">';
+		echo '<input type=Submit Name="DeSelectAll" value="' . _('Deselect All') . '">';
+		echo '<br /><input type=Submit Name="AddGRNToTrans" value="' . _('Add to Invoice') . '"></div>';
 	}
 }
 
