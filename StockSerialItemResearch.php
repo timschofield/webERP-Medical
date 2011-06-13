@@ -69,20 +69,20 @@ if ($SN!='') {
 	} else {
 		echo '<h4>'. _('Details for Serial Item').': <b>'.$SN.'</b><br />'. _('Length').'='.strlen($SN).'</h4>';
 		echo '<table class=selection>';
-		echo "<tr><th>" . _('StockID') . "</th>
-			<th>" . _('CurInvQty') . "</th>
-			<th>" . _('Move Qty') . "</th>
-			<th>" . _('Move Type') . "</th>
-			<th>" . _('Trans #') . "</th>
-			<th>" . _('Location') . "</th>
-			<th>" . _('Date') . "</th>
-			<th>" . _('DebtorNo') . "</th>
-			<th>" . _('Branch') . "</th>
-			<th>" . _('Move Ref') . "</th>
-			<th>" . _('Total Move Qty') . "</th>
-			</tr>";
+		echo '<tr><th>' . _('StockID') . '</th>
+			<th>' . _('CurInvQty') . '</th>
+			<th>' . _('Move Qty') . '</th>
+			<th>' . _('Move Type') . '</th>
+			<th>' . _('Trans #') . '</th>
+			<th>' . _('Location') . '</th>
+			<th>' . _('Date') . '</th>
+			<th>' . _('DebtorNo') . '</th>
+			<th>' . _('Branch') . '</th>
+			<th>' . _('Move Ref') . '</th>
+			<th>' . _('Total Move Qty') . '</th>
+			</tr>';
 		while ($myrow=DB_fetch_row($result)) {
-			printf("<tr>
+			printf('<tr>
 				<td>%s<br />%s</td>
 				<td class=number>%s</td>
 				<td class=number>%s</td>
@@ -94,7 +94,7 @@ if ($SN!='') {
 				<td>%s &nbsp;</td>
 				<td>%s &nbsp;</td>
 				<td class=number>%s</td>
-				</tr>",
+				</tr>',
 				$myrow[1],
 				$myrow[0],
 				$myrow[2],
