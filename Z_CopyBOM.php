@@ -120,34 +120,42 @@ if(isset($_POST['Submit'])) {
      echo '<form method="post" action="Z_CopyBOM.php">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-     $sql = "SELECT stockid, description FROM stockmaster WHERE stockid IN (SELECT DISTINCT parent FROM bom) AND  mbflag IN ('M', 'A', 'K');";
+     $sql = "SELECT stockid,
+					description
+				FROM stockmaster
+				WHERE stockid IN (SELECT DISTINCT parent FROM bom)
+				AND  mbflag IN ('M', 'A', 'K');";
      $result = DB_query($sql, $db);
 
-     echo "<br />"._("From Stock ID");
-     echo ": <select name=\"stkid\">";
+     echo '<br />'._('From Stock ID');
+     echo ': <select name="stkid">';
      while($row = DB_fetch_row($result))
        {
-	 echo "<option value=\"$row[0]\">".$row[0]." -- ".$row[1]."</option>";
+	 echo '<option value="'.$row[0].'">'.$row[0].' -- '.$row[1].'</option>';
        }
-     echo "</select><br/><input type=\"radio\" name=\"type\" value=\"N\" checked=\"\"/>"._(" To New Stock ID");
-     echo ": <input type=\"text\" maxlength=\"20\" name=\"tostkid\"/>";
+     echo '</select><br /><input type="radio" name="type" value="N" checked="" />'._(' To New Stock ID');
+     echo ': <input type="text" maxlength="20" name="tostkid" />';
 
-     $sql = "SELECT stockid, description FROM stockmaster WHERE stockid NOT IN (SELECT DISTINCT parent FROM bom) AND mbflag IN ('M', 'A', 'K');";
+     $sql = "SELECT stockid,
+					description
+				FROM stockmaster
+				WHERE stockid NOT IN (SELECT DISTINCT parent FROM bom)
+				AND mbflag IN ('M', 'A', 'K');";
      $result = DB_query($sql, $db);
 
      if(DB_num_rows($result) > 0)
        {
-	 echo "<br /><input type=\"radio\" name=\"type\" value=\"E\"/>"._("To Existing Stock ID");
-	 echo ": <select name=\"exstkid\">";
+	 echo '<br /><input type="radio" name="type" value="E"/>'._('To Existing Stock ID');
+	 echo ': <select name="exstkid">';
 	 while($row = DB_fetch_row($result))
 	   {
-	     echo "<option value=\"$row[0]\">".$row[0]." -- ".$row[1]."</option>";
+	     echo '<option value="'.$row[0].'">'.$row[0].' -- '.$row[1].'</option>';
 	   }
-	 echo "</select>";
+	 echo '</select>';
        }
-     echo "<br />";
-     echo "<input type=\"submit\" name=\"Submit\" value=\"Submit\"/><br />";
+     echo '<br />';
+     echo '<input type="submit" name="Submit" value="Submit" /><br />';
 
-     include("includes/footer.inc");
+     include('includes/footer.inc');
    }
 ?>
