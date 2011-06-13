@@ -19,7 +19,7 @@ if (isset($_GET['StockID'])){
 }
 
 // This is already linked from this page
-//echo "<a href='" . $rootpath . '/SelectProduct.php?' . SID . "'>" . _('Back to Items') . '</a><br />';
+//echo '<a href='" . $rootpath . '/SelectProduct.php?' . SID . "'>" . _('Back to Items') . '</a><br />';
 
 $result = DB_query("SELECT description,
                            units,
@@ -305,12 +305,12 @@ if ($DebtorNo) { /* display recent pricing history for this debtor and this stoc
 	if (isset($PriceHistory)) {
 	  echo '<br /><table cellpadding="4" class="selection">';
 	  echo '<tr><th colspan=4><font color=navy size=2>' . _('Pricing history for sales of') . ' ' . $StockID . ' ' . _('to') . ' ' . $DebtorNo . '</font></th></tr>';
-	  $tableheader = "<tr>
-			<th>" . _('Date Range') . "</th>
-			<th>" . _('Quantity') . "</th>
-			<th>" . _('Price') . "</th>
-			<th>" . _('Discount') . "</th>
-			</tr>";
+	  $tableheader = '<tr>
+			<th>' . _('Date Range') . '</th>
+			<th>' . _('Quantity') . '</th>
+			<th>' . _('Price') . '</th>
+			<th>' . _('Discount') . '</th>
+			</tr>';
 
 	  $j = 0;
 	  $k = 0; //row colour counter
