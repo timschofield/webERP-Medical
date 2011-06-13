@@ -55,13 +55,13 @@ while ($myrow = DB_fetch_array($result)){
 
 	echo '<table cellpadding=2 BORDER=2>';
 
-	$tableheader = "<tr>
-				<th>" . _('Type') . "</th>
-				<th>" . _('Number') . "</th>
-				<th>" . _('Reference') . "</th>
-				<th>" . _('Ex Rate') . "</th>
-				<th>" . _('Amount') . "</th>
-				<th>" . _('Alloc') . "</th></tr>";
+	$tableheader = '<tr>
+				<th>' . _('Type') . '</th>
+				<th>' . _('Number') . '</th>
+				<th>' . _('Reference') . '</th>
+				<th>' . _('Ex Rate') . '</th>
+				<th>' . _('Amount') . '</th>
+				<th>' . _('Alloc') . '</th></tr>';
 	echo $tableheader;
 
 	$RowCounter = 1;
@@ -83,13 +83,13 @@ while ($myrow = DB_fetch_array($result)){
 		} else {
 			$TransType = _('Receipt');
 		}
-		printf( "<td>%s</td>
+		printf( '<td>%s</td>
 			<td>%s</td>
 			<td>%s</td>
 			<td>%s</td>
 			<td class=number>%s</td>
 			<td class=number>%s</td>
-			</tr>",
+			</tr>',
 			$TransType,
 			$myrow1['transno'],
 			$myrow1['reference'],
@@ -106,7 +106,7 @@ while ($myrow = DB_fetch_array($result)){
 		$AllocsTotal +=$myrow1['amt'];
 	}
 	//end of while loop
-	echo "<tr><td colspan = 6 class=number>" . number_format($AllocsTotal,2) . '</td></tr>';
+	echo '<tr><td colspan = 6 class=number>' . number_format($AllocsTotal,2) . '</td></tr>';
 	echo '</table><hr>';
 }
 
