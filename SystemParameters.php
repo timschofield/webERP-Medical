@@ -332,9 +332,9 @@ $ThemeDirectory = dir('css/');
 while (false != ($ThemeName = $ThemeDirectory->read())){
 	if (is_dir("css/$ThemeName") AND $ThemeName != '.' AND $ThemeName != '..' AND $ThemeName != '.svn'){
 		if ($_SESSION['DefaultTheme'] == $ThemeName)
-			echo "<option selected value='$ThemeName'>$ThemeName";
+			echo '<option selected value="'.$ThemeName.'">'.$ThemeName . '</option>';
 		else
-			echo "<option value='$ThemeName'>$ThemeName";
+			echo '<option value="'.$ThemeName.'>'.$ThemeName . '</option>';
 	}
 }
 echo '</select></td>
