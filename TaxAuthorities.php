@@ -141,16 +141,16 @@ if (!isset($SelectedTaxAuthID)) {
 	$result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
 	echo '<table class=selection>';
-	echo "<tr>
-		<th>" . _('ID') . "</th>
-		<th>" . _('Description') . "</th>
-		<th>" . _('Input Tax') . '<br />' . _('GL Account') . "</th>
-		<th>" . _('Output Tax') . '<br />' . _('GL Account') . "</th>
-		<th>" . _('Bank') . "</th>
-		<th>" . _('Bank Account') . "</th>
-		<th>" . _('Bank Act Type') . "</th>
-		<th>" . _('Bank Swift') . "</th>
-		</tr></font>";
+	echo '<tr>
+		<th>' . _('ID') . '</th>
+		<th>' . _('Description') . '</th>
+		<th>' . _('Input Tax') . '<br />' . _('GL Account') . '</th>
+		<th>' . _('Output Tax') . '<br />' . _('GL Account') . '</th>
+		<th>' . _('Bank') . '</th>
+		<th>' . _('Bank Account') . '</th>
+		<th>' . _('Bank Act Type') . '</th>
+		<th>' . _('Bank Swift') . '</th>
+		</tr></font>';
 	$k=0;
 	while ($myrow = DB_fetch_row($result)) {
 
@@ -162,7 +162,7 @@ if (!isset($SelectedTaxAuthID)) {
 			$k++;
 		}
 
-		printf("<td>%s</td>
+		printf('<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
@@ -170,10 +170,10 @@ if (!isset($SelectedTaxAuthID)) {
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
-				<td><a href=\"%s&SelectedTaxAuthID=%s\">" . _('Edit') . "</a></td>
-				<td><a href=\"%s&SelectedTaxAuthID=%s&delete=yes\">" . _('Delete') . "</a></td>
-				<td><td><a href=\"%s&TaxAuthority=%s\">" . _('Edit Rates') . "</a></td>
-			</tr>",
+				<td><a href="%s&SelectedTaxAuthID=%s">' . _('Edit') . '</a></td>
+				<td><a href="%s&SelectedTaxAuthID=%s&delete=yes">' . _('Delete') . '</a></td>
+				<td><td><a href="%s&TaxAuthority=%s">' . _('Edit Rates') . '</a></td>
+			</tr>',
 			$myrow[0],
 			$myrow[1],
 			$myrow[3],
@@ -200,7 +200,7 @@ if (!isset($SelectedTaxAuthID)) {
 
 
 if (isset($SelectedTaxAuthID)) {
-	echo "<div class='centre'><a href='" .  $_SERVER['PHP_SELF'] . '?' . SID ."'>" . _('Review all defined tax authority records') . '</a></div>';
+	echo '<div class="centre"><a href="' .  $_SERVER['PHP_SELF'] . '">' . _('Review all defined tax authority records') . '</a></div>';
  }
 
 
@@ -250,8 +250,8 @@ if (!isset($_POST['Description'])) {
 	$_POST['Description']='';
 }
 echo '<table class=selection>
-<tr><td>' . _('Tax Type Description') . ":</td>
-<td><input type=Text name='Description' size=21 maxlength=20 value='" . $_POST['Description'] . "'></td></tr>";
+<tr><td>' . _('Tax Type Description') . ':</td>
+<td><input type=Text name="Description" size="21" maxlength="20" value="' . $_POST['Description'] . '"></td></tr>';
 
 
 echo '<tr><td>' . _('Input tax GL Account') . ':</td>
