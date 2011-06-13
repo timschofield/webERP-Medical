@@ -9,7 +9,7 @@ $title = _('Supplier Inquiry');
 include('includes/header.inc');
 
 // This is already linked from the menu
-////echo "<a href='" . $rootpath . '/SelectSupplier.php?' . SID . "'>" . _('Back to Suppliers') . '</a><br />';
+//echo '<a href='" . $rootpath . '/SelectSupplier.php?' . SID . "'>" . _('Back to Suppliers') . '</a><br />';
 
 // always figure out the SQL required from the inputs available
 
@@ -225,7 +225,7 @@ while ($myrow=DB_fetch_array($TransResult)) {
 		$HoldValue = _('Release');
 	}
 	if ($myrow['hold'] == 1){
-//		echo "<tr bgcolor='#DD99BB'>";
+//		echo '<tr bgcolor="#DD99BB">';
 	}elseif ($k == 1){
 		echo '<tr class="EvenTableRows">';
 		$k = 0;
