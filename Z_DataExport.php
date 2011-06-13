@@ -532,8 +532,8 @@ if ( isset($_POST['pricelist']) ) {
 
 	// SELECT EXPORT FOR PRICE LIST
 
-	echo "<br />";
-	echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . "?" . SID . ">";
+	echo '<br />';
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table>';
 	echo '<tr><th colspan=2>' . _('Price List Export') . '</th></tr>';
@@ -554,21 +554,23 @@ if ( isset($_POST['pricelist']) ) {
 	          echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
 	}
 	echo '</select></td></tr>';
-	echo "</table>";
-	echo "<div class='centre'><input type='Submit' name='pricelist' value='" . _('Export') . "'></div>";
-	echo "</form><br />";
+	echo '</table>';
+	echo '<div class="centre"><input type="submit" name="pricelist" value="' . _('Export') . '"></div>';
+	echo '</form><br />';
 
 	// SELECT EXPORT FOR CUSTOMER LIST
 
 
-	echo "<br />";
+	echo '<br />';
 	// Export Stock For Location
-	echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . "?" . SID . ">";
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table>';
 	echo '<tr><th colspan=2>' . _('Customer List Export') . '</th></tr>';
 
-	$sql = "SELECT loccode, locationname FROM locations";
+	$sql = "SELECT loccode,
+					locationname
+				FROM locations";
 	$SalesTypesResult=DB_query($sql,$db);
 	echo '<tr><td>' . _('For Location') . ':</td>';
 	echo '<td><select name="Location">';
@@ -576,66 +578,66 @@ if ( isset($_POST['pricelist']) ) {
 	          echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
 	}
 	echo '</select></td></tr>';
-	echo "</table>";
-	echo "<div class='centre'><input type='Submit' name='custlist' value='" . _('Export') . "'></div>";
-	echo "</form><br />";
+	echo '</table>';
+	echo '<div class="centre"><input type="submit" name="custlist" value="' . _('Export') . '"></div>';
+	echo '</form><br />';
 
 	// SELECT EXPORT FOR SALES MAN
 
-	echo "<br />";
+	echo '<br />';
 	// Export Stock For Location
-	echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . "?" . SID . ">";
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table>';
 	echo '<tr><th colspan=2>' . _('Salesman List Export') . '</th></tr>';
-	echo "</table>";
-	echo "<div class='centre'><div class='centre'><input type='Submit' name='salesmanlist' value='" . _('Export') . "'></div>";
-	echo "</form><br />";
+	echo '</table>';
+	echo '<div class="centre"><div class="centre"><input type="submit" name="salesmanlist" value="' . _('Export') . '"></div>';
+	echo '</form><br />';
 
 	// SELECT EXPORT FOR IMAGES
-	echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . "?" . SID . ">";
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table>';
 	echo '<tr><th colspan=2>' . _('Image List Export') . '</th></tr>';
-	echo "</table>";
-	echo "<div class='centre'><input type='Submit' name='imagelist' value='" . _('Export') . "'></div>";
-	echo "</form><br />";
+	echo '</table>';
+	echo '<div class="centre"><input type="submit" name="imagelist" value="' . _('Export') . '"></div>';
+	echo '</form><br />';
 
 	// SELECT EXPORT SECURITY TOKENS
-	echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . "?" . SID . ">";
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table>';
 	echo '<tr><th colspan=2>' . _('Security Token List Export') . '</th></tr>';
-	echo "</table>";
-	echo "<div class='centre'><input type='Submit' name='sectokenlist' value='" . _('Export') . "'></div>";
-	echo "</form><br />";
+	echo '</table>';
+	echo '<div class="centre"><input type="submit" name="sectokenlist" value="' . _('Export') . '"></div>';
+	echo '</form><br />';
 
 	// SELECT EXPORT SECURITY ROLES
-	echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . "?" . SID . ">";
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table>';
 	echo '<tr><th colspan=2>' . _('Security Role List Export') . '</th></tr>';
-	echo "</table>";
-	echo "<div class='centre'><input type='Submit' name='secrolelist' value='" . _('Export') . "'></div>";
-	echo "</form><br />";
+	echo '</table>';
+	echo '<div class="centre"><input type="submit" name="secrolelist" value="' . _('Export') . '"></div>';
+	echo '</form><br />';
 
 	// SELECT EXPORT SECURITY GROUPS
-	echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . "?" . SID . ">";
+	echo '<form method="post" action=' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table>';
 	echo '<tr><th colspan=2>' . _('Security Group List Export') . '</th></tr>';
-	echo "</table>";
-	echo "<div class='centre'><input type='Submit' name='secgrouplist' value='" . _('Export') . "'></div>";
-	echo "</form><br />";
+	echo '</table>';
+	echo '<div class="centre"><input type="submit" name="secgrouplist" value="' . _('Export') . '"></div>';
+	echo '</form><br />';
 
 	// SELECT EXPORT SECURITY USERS
-	echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . "?" . SID . ">";
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table>';
 	echo '<tr><th colspan=2>' . _('Security User List Export') . '</th></tr>';
-	echo "</table>";
-	echo "<div class='centre'><input type='Submit' name='secuserlist' value='" . _('Export') . "'></div>";
-	echo "</form><br />";
+	echo '</table>';
+	echo '<div class="centre"><input type="submit" name="secuserlist" value="' . _('Export') . '"></div>';
+	echo '</form><br />';
 
 
 	include('includes/footer.inc');
