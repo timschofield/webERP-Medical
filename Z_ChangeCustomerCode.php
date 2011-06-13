@@ -224,19 +224,19 @@ if (isset($_POST['ProcessCustomerChange'])){
 
 }
 
-echo "<form action='" . $_SERVER['PHP_SELF'] . "?=" . $SID . "' method=post>";
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<br /><table>
-	<tr><td>' . _('Existing Debtor Code') . ":</td>
-		<td><input type=Text name='OldDebtorNo' size=20 maxlength=20></td>
-	</tr>";
-echo '<tr><td> ' . _('New Debtor Code') . ":</td>
-	<td><input type=Text name='NewDebtorNo' size=20 maxlength=20></td>
+	<tr><td>' . _('Existing Debtor Code') . ':</td>
+		<td><input type=Text name="OldDebtorNo" size=20 maxlength=20></td>
+	</tr>';
+echo '<tr><td> ' . _('New Debtor Code') . ':</td>
+	<td><input type=Text name="NewDebtorNo" size=20 maxlength=20></td>
 	</tr>
-	</table>";
+	</table>';
 
-echo "<input type=submit name='ProcessCustomerChange' value='" . _('Process') . "'>";
+echo '<input type=submit name="ProcessCustomerChange" value="' . _('Process') . '">';
 
 echo '</form>';
 
