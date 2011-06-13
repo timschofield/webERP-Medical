@@ -20,7 +20,7 @@ include('includes/header.inc');
 $PathToLanguage		= './locale/' . $_SESSION['Language'] . '/LC_MESSAGES/messages.po';
 $PathToNewLanguage	= './locale/' . $_SESSION['Language'] . '/LC_MESSAGES/messages.po.new';
 
-echo "<br />&nbsp;<a href='" . $rootpath . "/Z_poAdmin.php'>" . _('Back to the translation menu') . "</a>";
+echo '<br />&nbsp;<a href="' . $rootpath . '/Z_poAdmin.php">' . _('Back to the translation menu') . '</a>';
 echo '<br /><br />&nbsp;' . _('Utility to edit a language file module');
 echo '<br />&nbsp;' . _('Current language is') . ' ' . $_SESSION['Language'];
 echo '<br /><br />&nbsp;' . _('To change language click on the user name at the top left, change to language desired and click Modify');
@@ -61,9 +61,9 @@ if (isset($_POST['module'])) {
 
 		echo '<br /><table><tr><td>';
 		echo '<form method="post" action=' . $_SERVER['PHP_SELF'] . '?' . SID . '>';
-	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
+		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-    /* write the new language file */
+		/* write the new language file */
 
 		prnMsg (_('Writing the language file') . '.....<br />', 'info', ' ');
 
@@ -121,17 +121,17 @@ if (isset($_POST['module'])) {
 
 /* stick it on the screen */
 
-    echo '<br />&nbsp;' . _('When finished modifying you must click on Modify at the bottom in order to save changes');
+		echo '<br />&nbsp;' . _('When finished modifying you must click on Modify at the bottom in order to save changes');
 		echo '<div class="centre">';
 		echo '<br />';
 		prnMsg (_('Your existing translation file (messages.po) will be saved as messages.po.old') . '<br />', 'info', _('PLEASE NOTE'));
 		echo '<br />';
-		echo '<form method="post" action=' . $_SERVER['PHP_SELF'] . '?' . SID . '>';
-	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
+		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '</div>';
 		echo '<table>';
-		echo '<tr><th ALIGN="center">' . _('Language File for') . ' "' . $_POST['language'] . '"</th></tr>';
-		echo '<tr><td ALIGN="center">' . _('Module') . ' "' . $_POST['module'] . '"</td></tr>';
+		echo '<tr><th ALIGN="center">' . _('Language File for') . ' "' . $_POST['language'] . '" </th></tr>';
+		echo '<tr><td ALIGN="center">' . _('Module') . ' "' . $_POST['module'] . '" </td></tr>';
 		echo '<tr><td></td></tr>';
 		echo '<tr><td>';
 
@@ -208,33 +208,31 @@ if (isset($_POST['module'])) {
 	sort($AvailableModules);
 	$NumberOfModules = sizeof($AvailableModules) - 1;
 
-if (!is_writable('./locale/' . $_SESSION['Language'])) {
-	prnMsg(_('You do not have write access to the required files please contact your system administrator'),'error');
-}
-else
-{
-	echo '<br /><table><tr><td>';
-	echo '<form method="post" action=' . $_SERVER['PHP_SELF'] . '?' . SID . '>';
-	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
+	if (!is_writable('./locale/' . $_SESSION['Language'])) {
+		prnMsg(_('You do not have write access to the required files please contact your system administrator'),'error');
+	} else {
+		echo '<br /><table><tr><td>';
+		echo '<form method="post" action=' . $_SERVER['PHP_SELF'] . '?' . SID . '>';
+		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-	echo '<table>';
+		echo '<table>';
 
-	echo '<tr><td>' . _('Select the module to edit') . '</td>';
-	echo '<td><select name="module">';
-	for ($i=0; $i<$NumberOfModules; $i++) {
+		echo '<tr><td>' . _('Select the module to edit') . '</td>';
+		echo '<td><select name="module">';
+		for ($i=0; $i<$NumberOfModules; $i++) {
 			echo '<option>' . $AvailableModules[$i] . '</option>';
-	}
-	echo '</select></td>';
+		}
+		echo '</select></td>';
 
-	echo '</tr></table>';
-	echo '<br />';
-	echo '<div class="centre">';
-	echo '<input type="Submit" name="proceed" value="' . _('Proceed') . '">&nbsp;&nbsp;';
-	echo '<br /><br /><input type="Submit" name="ReMergePO" value="' . _('Refresh messages with latest strings') . '">';
-	echo '</div>';
-	echo '</form>';
-	echo '</td></tr></table>';
-}
+		echo '</tr></table>';
+		echo '<br />';
+		echo '<div class="centre">';
+		echo '<input type="Submit" name="proceed" value="' . _('Proceed') . '">&nbsp;&nbsp;';
+		echo '<br /><br /><input type="Submit" name="ReMergePO" value="' . _('Refresh messages with latest strings') . '">';
+		echo '</div>';
+		echo '</form>';
+		echo '</td></tr></table>';
+	}
 }
 
 include('includes/footer.inc');
