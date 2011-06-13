@@ -117,9 +117,9 @@ if (isset($_POST['PrintPDF'])) {
 		$title = _('Price List') . ' - ' . _('Problem Report');
 		include('includes/header.inc');
 		prnMsg( _('The Price List could not be retrieved by the SQL because') . ' '  . DB_error_msg($db),'error');
-		echo "<br /><a href='" .$rootpath .'/index.php?' . SID . "'>" . _('Back to the menu') . '</a>';
+		echo '<br /><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
 		if ($debug==1){
-			echo "<br />$sql";
+			echo '<br />'.$sql;
 		}
 		include('includes/footer.inc');
 		exit;
@@ -222,7 +222,7 @@ if (isset($_POST['PrintPDF'])) {
 	echo '</select></td></tr>';
 
 
-	echo "</table><br/><div class='centre'><input type=submit name='PrintPDF' value='" . _('Print PDF') . "'></div>";
+	echo '</table><br/><div class="centre"><input type=submit name="PrintPDF" value="' . _('Print PDF') . '"></div>';
 
 	include('includes/footer.inc');
 
