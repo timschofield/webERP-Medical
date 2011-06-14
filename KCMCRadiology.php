@@ -1,7 +1,7 @@
 <?php
 $PageSecurity=1;
 include('includes/session.inc');
-$title = _('Billing Patient Admissions');
+$title = _('Billing and Payments For Radiology Tests');
 include('includes/header.inc');
 include('includes/SQL_CommonFunctions.inc');
 include('includes/GetSalesTransGLCodes.inc');
