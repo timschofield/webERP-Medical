@@ -20,7 +20,7 @@
 
 	echo '<tr>';
 	echo '<td class="footer">';
- 	echo '<img src="'. $rootpath . '/' . $_SESSION['LogoFile'] . '" width="120" alt="webERP" title="webERP ' . _('Copyright') . ' &copy; webrp.org - ' . date('Y') . '" />';
+ 	echo '<img src="'. $rootpath . '/' . $_SESSION['LogoFile'] . '" width="60" alt="webERP" title="webERP ' . _('Copyright') . ' &copy; webrp.org - ' . date('Y') . '" />';
  	echo '<br />';
 
 	echo '</td></tr>';
