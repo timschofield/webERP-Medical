@@ -54,6 +54,7 @@ if (isset($_POST['submit'])) {
 			AND $_POST['StockType'] !='F'
 			AND $_POST['StockType'] !='M'
 			AND $_POST['StockType'] !='R'
+			AND $_POST['StockType'] !='T'
 			AND $_POST['StockType'] !='X') {
 		$InputError = 1;
 		prnMsg(_('The stock type selected must be one of') . ' "D" - ' . _('Dummy item') . ', "L" - ' . _('Labour stock item') . ', "F" - ' . _('Finished product') . ' ' . _('or') . ' "M" - ' . _('Raw Materials'),'error');
@@ -383,6 +384,11 @@ if (! isset($_GET['delete'])) {
 			echo '<option selected value="X">' . _('Radiology');
 		} else {
 			echo '<option value="X">' . _('Radiology');
+		}
+		if (isset($_POST['StockType']) and $_POST['StockType']=='T') {
+			echo '<option selected value="T">' . _('Lab Tests');
+		} else {
+			echo '<option value="T">' . _('Lab Tests');
 		}
 
 	echo '</select></td></tr>';
