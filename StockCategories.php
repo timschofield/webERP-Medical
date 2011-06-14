@@ -49,7 +49,12 @@ if (isset($_POST['submit'])) {
 	} elseif (strlen($_POST['CategoryDescription']) >20) {
 		$InputError = 1;
 		prnMsg(_('The Sales category description must be twenty characters or less long'),'error');
-	} elseif ($_POST['StockType'] !='D' AND $_POST['StockType'] !='L' AND $_POST['StockType'] !='F' AND $_POST['StockType'] !='M') {
+	} elseif ($_POST['StockType'] !='D'
+			AND $_POST['StockType'] !='L'
+			AND $_POST['StockType'] !='F'
+			AND $_POST['StockType'] !='M'
+			AND $_POST['StockType'] !='R'
+			AND $_POST['StockType'] !='X') {
 		$InputError = 1;
 		prnMsg(_('The stock type selected must be one of') . ' "D" - ' . _('Dummy item') . ', "L" - ' . _('Labour stock item') . ', "F" - ' . _('Finished product') . ' ' . _('or') . ' "M" - ' . _('Raw Materials'),'error');
 	}
@@ -368,6 +373,16 @@ if (! isset($_GET['delete'])) {
 			echo '<option selected value="L">' . _('Labour');
 		} else {
 			echo '<option value="L">' . _('Labour');
+		}
+		if (isset($_POST['StockType']) and $_POST['StockType']=='R') {
+			echo '<option selected value="R">' . _('Registration');
+		} else {
+			echo '<option value="R">' . _('Registration');
+		}
+		if (isset($_POST['StockType']) and $_POST['StockType']=='X') {
+			echo '<option selected value="X">' . _('Radiology');
+		} else {
+			echo '<option value="X">' . _('Radiology');
 		}
 
 	echo '</select></td></tr>';
