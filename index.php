@@ -150,6 +150,11 @@ if (isset($SupplierLogin) and count($_SESSION['AllowedPageSecurityTokens'])==2 a
 							</tr>
 							<tr>
 							<td class="menu_group_item">
+								<?php echo '<p>&bull; <a href="' . $rootpath . '/KCMCRadiology.php?New=True">' . _('Radiology Test') . '</a></p>'; ?>
+							</td>
+							</tr>
+							<tr>
+							<td class="menu_group_item">
 								<?php echo '<p>&bull; <a href="' . $rootpath . '/KCMCInsuranceInvoice.php">' . _('Create Insurance Invoice') . '</a></p>'; ?>
 							</td>
 							</tr>
@@ -611,6 +616,11 @@ if (isset($SupplierLogin) and count($_SESSION['AllowedPageSecurityTokens'])==2 a
 							<tr>
 							<td class="menu_group_item">
 								<?php echo '<p>&bull; <a href="' . $rootpath . '/StockTransfers.php?New=Yes">' . _('Inventory Location Transfers') . '</a></p>'; ?>
+							</td>
+							</tr>
+							<tr>
+							<td class="menu_group_item">
+								<?php echo '<p>&bull; <a href="' . $rootpath . '/StockIssues.php?NewAdjustment=Yes">' . _('Inventory Issues') . '</a></p>'; ?>
 							</td>
 							</tr>
 							<tr>
