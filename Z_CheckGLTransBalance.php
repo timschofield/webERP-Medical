@@ -8,12 +8,12 @@ include('includes/header.inc');
 
 echo '<table>';
 
-$Header = "<tr>
-		<th>" . _('Type') . "</th>
-		<th>" . _('Number') . "</th>
-		<th>" . _('Period') . "</th>
-		<th>" . _('Difference') . "</th>
-		</tr>";
+$Header = '<tr>
+		<th>' . _('Type') . '</th>
+		<th>' . _('Number') . '</th>
+		<th>' . _('Period') . '</th>
+		<th>' . _('Difference') . '</th>
+		</tr>';
 
 echo $Header;
 
@@ -44,7 +44,9 @@ while ($OutOfWackRow = DB_fetch_array($OutOfWackResult)){
 	} else {
 		$RowCounter++;
 	}
-	echo "<tr><td><a href='" . $rootpath . "/GLTransInquiry.php?" . SID . "&TypeID=" . $OutOfWackRow['type'] . "&TransNo=" . $OutOfWackRow['typeno'] . "'>" . $OutOfWackRow['typename'] . '</a></td><td class=number>' . $OutOfWackRow['typeno'] . '</td><td class=number>' . $OutOfWackRow['periodno'] . '</td><td class=number>' . number_format($OutOfWackRow['nettot'],3) . '</td></tr>';
+	echo '<tr><td><a href="' . $rootpath . '/GLTransInquiry.php?TypeID=' . $OutOfWackRow['type'] . '&TransNo=' .
+		$OutOfWackRow['typeno'] . '">' . $OutOfWackRow['typename'] . '</a></td><td class=number>' . $OutOfWackRow['typeno'] .
+		'</td><td class=number>' . $OutOfWackRow['periodno'] . '</td><td class=number>' . number_format($OutOfWackRow['nettot'],3) . '</td></tr>';
 
 }
 echo '</table>';

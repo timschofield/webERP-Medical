@@ -20,7 +20,7 @@ include('includes/header.inc');
 $PathToLanguage		= './locale/' . $_SESSION['Language'] . '/LC_MESSAGES/messages.po';
 $PathToNewLanguage	= './locale/' . $_SESSION['Language'] . '/LC_MESSAGES/messages.po.new';
 
-echo "<br />&nbsp;<a href='" . $rootpath . "/Z_poAdmin.php'>" . _('Back to the translation menu') . "</a>";
+echo '<br />&nbsp;<a href="' . $rootpath . '/Z_poAdmin.php">' . _('Back to the translation menu') . '</a>';
 echo '<br /><br />&nbsp;' . _('Utility to edit a language file module');
 echo '<br />&nbsp;' . _('Current language is') . ' ' . $_SESSION['Language'];
 
@@ -97,21 +97,21 @@ echo '<br />&nbsp;' . _('Current language is') . ' ' . $_SESSION['Language'];
 
 /* stick it on the screen */
 
-    echo '<br />&nbsp;' . _('When finished modifying you must click on Modify at the bottom in order to save changes');
+		echo '<br />&nbsp;' . _('When finished modifying you must click on Modify at the bottom in order to save changes');
 		echo '<div class="centre">';
 		echo '<br />';
 		prnMsg (_('Your existing translation file (messages.po) will be saved as messages.po.old') . '<br />', 'info', _('PLEASE NOTE'));
 		echo '<br />';
 		echo '</div>';
 		echo '<form method="post" action=' . $_SERVER['PHP_SELF'] . '?' . SID . '>';
-	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
+		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 		echo '<table>';
-		echo '<tr><th ALIGN="center">' . _('Language File for') . ' "' . $_SESSION['Language'] . '"</th></tr>';
+		echo '<tr><th align="center">' . _('Language File for') . ' "' . $_SESSION['Language'] . '" </th></tr>';
 		echo '<tr><td></td></tr>';
 		echo '<tr><td>';
 
-		echo '<table WIDTH="100%">';
+		echo '<table width="100%">';
 		echo '<tr>';
 		echo '<th>' . _('Default text') . '</th>';
 		echo '<th>' . _('Translation') . '</th>';
@@ -121,9 +121,9 @@ echo '<br />&nbsp;' . _('Current language is') . ' ' . $_SESSION['Language'];
 		for ($i=1; $i<=$TotalLines; $i++) {
 			if ($ModuleText[$i] == "") {
 				echo '<tr>';
-				echo '<td VALIGN="top"><I>'. $DefaultText[$i] . '</I></td>';
-				echo '<td VALIGN="top"><input type="text" size="60" name="moduletext_' . $msgstr[$i] . '" value="' . $ModuleText[$i] . '"></td>';
-				echo '<td VALIGN="top">' . $AlsoIn[$i] . '<input type="hidden" name="msgstr_' . $msgstr[$i] . '" value="' . $msgstr[$i] . '"></td>';
+				echo '<td valign="top"><I>'. $DefaultText[$i] . '</I></td>';
+				echo '<td valign="top"><input type="text" size="60" name="moduletext_' . $msgstr[$i] . '" value="' . $ModuleText[$i] . '"></td>';
+				echo '<td valign="top">' . $AlsoIn[$i] . '<input type="hidden" name="msgstr_' . $msgstr[$i] . '" value="' . $msgstr[$i] . '"></td>';
 				echo '</tr>';
 				echo '<tr><th colspan="3"></th></tr>';
 			}
@@ -140,8 +140,6 @@ echo '<br />&nbsp;' . _('Current language is') . ' ' . $_SESSION['Language'];
 		echo '</form>';
 		echo '</div>';
 	}
-
-
 
 include('includes/footer.inc');
 

@@ -14,8 +14,8 @@ if (isset($_GET['StockID'])){
 	$StockID = trim(strtoupper($_POST['StockID']));
 }
 
-echo "<a href='" . $rootpath . '/SelectProduct.php?' . SID . "'>" . _('Back to Items') . '</a><br />';
- echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p>';
+echo '<a href="' . $rootpath . '/SelectProduct.php">' . _('Back to Items') . '</a><br />';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p>';
 if (isset($StockID)){
 	$result = DB_query("SELECT description,
 					units,
@@ -28,19 +28,19 @@ if (isset($StockID)){
 		include('includes/footer.inc');
 		exit;
 	}
-	echo "<br /><font color=navy size=3><b>$StockID - $myrow[0] </b>  (" . _('in units of') . ' ' . $myrow[1] . ')</font>';
+	echo '<br /><font color=navy size=3><b>'.$StockID - $myrow[0] .'</b>  (' . _('in units of') . ' ' . $myrow[1] . ')</font>';
 }
 
-echo "<form action='" . $_SERVER['PHP_SELF'] . '?'. SID ."' method=post><div class='centre'>";
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post><div class="centre">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (isset($StockID)) {
-	echo _('Enter an Item Code') . ": <input type=text name='StockID' size=21 maxlength=20 value='$StockID' >";
+	echo _('Enter an Item Code') . ': <input type=text name="StockID" size="21" maxlength="20" value="'.$StockID.'" />';
 } else {
-	echo _('Enter an Item Code') . ": <input type=text name='StockID' size=21 maxlength=20>";
+	echo _('Enter an Item Code') . ': <input type=text name="StockID" size="21" maxlength="20">';
 }
 
-echo "<input type=submit name='ShowWhereUsed' value='" . _('Show Where Used') . "'>";
+echo '<input type=submit name="ShowWhereUsed" value="' . _('Show Where Used') . '">';
 
 echo '</div><br />';
 
@@ -62,12 +62,12 @@ if (isset($StockID)) {
 
     		echo '<table width=97% class=selection>';
 
-    		$tableheader = "<tr><th>" . _('Used By') . "</th>
-					<th>" . _('Work Centre') . "</th>
-					<th>" . _('Location') . "</th>
-					<th>" . _('Quantity Required') . "</th>
-					<th>" . _('Effective After') . "</th>
-					<th>" . _('Effective To') . '</th></tr>';
+    		$tableheader = '<tr><th>' . _('Used By') . '</th>
+					<th>' . _('Work Centre') . '</th>
+					<th>' . _('Location') . '</th>
+					<th>' . _('Quantity Required') . '</th>
+					<th>' . _('Effective After') . '</th>
+					<th>' . _('Effective To') . '</th></tr>';
     		echo $tableheader;
 			$k=0;
     		while ($myrow=DB_fetch_array($result)) {
@@ -80,7 +80,8 @@ if (isset($StockID)) {
     				$k=1;
     			}
 
-    			echo "<td><a target='_blank' href='" . $rootpath . "/BOMInquiry.php?" . SID . "&StockID=" . $myrow['parent'] . "' alt='" . _('Show Bill Of Material') . "'>" . $myrow['parent']. ' - ' . $myrow['description']. '</a></td>';
+    			echo '<td><a target="_blank" href="' . $rootpath . '/BOMInquiry.php?StockID=' . $myrow['parent'] . '" alt="' . _('Show Bill Of Material') .
+						'">' . $myrow['parent']. ' - ' . $myrow['description']. '</a></td>';
     			echo '<td>' . $myrow['workcentreadded']. '</td>';
     			echo '<td>' . $myrow['loccode']. '</td>';
     			echo '<td>' . $myrow['quantity']. '</td>';
@@ -94,7 +95,7 @@ if (isset($StockID)) {
 	}
 } // StockID is set
 
-echo "<script>defaultControl(document.forms[0].StockID);</script>";
+echo '<script>defaultControl(document.forms[0].StockID);</script>';
 
 
 echo '</form>';

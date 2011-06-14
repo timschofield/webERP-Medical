@@ -116,7 +116,7 @@ if (DB_num_rows($TaxRatesResult)>0){
 	}
 //end of while loop
 echo '</table>';
-echo "<br /><div class='centre'><input type=submit name='UpdateRates' value='" . _('Update Rates') . "'>";
+echo '<br /><div class="centre"><input type=submit name="UpdateRates" value="' . _('Update Rates') . '">';
 } //end if tax taxcatid/rates to show
 	else {
 	prnMsg(_('There are no tax rates to show - perhaps the dispatch tax province records have not yet been created?'),'warn');

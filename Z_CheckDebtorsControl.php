@@ -108,8 +108,8 @@ include('includes/header.inc');
 				echo '<tr class="EvenTableRows">';
 				$j++;
 			}
-			echo "<td>" . $curPeriod . "</td>
-					<td class=number>" . number_format($dtRow['bfwd'],2) . "</td>";
+			echo '<td>' . $curPeriod . '</td>
+					<td class=number>' . number_format($dtRow['bfwd'],2) . '</td>';
 
 			$SQL = "SELECT SUM((ovamount+ovgst+ovdiscount)*rate) AS totinvnetcrds
 					FROM debtortrans

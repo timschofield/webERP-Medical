@@ -89,14 +89,14 @@ if (isset($_POST['ProcessStockChange'])) {
 	echo ' ... ' . _('completed');
 	echo '<p>' . _('Stock Code') . ': ' . $_POST['OldStockCategory'] . ' ' . _('was successfully changed to') . ' : ' . $_POST['NewStockCategory'] . '</p>';
 }
-echo "<form action='" . $_SERVER['PHP_SELF'] . "?=" . $SID . "' method=post>";
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo '<br /><table>
-	<tr><td>' . _('Existing Inventory Category Code') . ":</td>
-	<td><input type=Text name='OldStockCategory' size=20 maxlength=20></td></tr>";
-echo '<tr><td>' . _('New Inventory Category Code') . ":</td><td><input type=Text name='NewStockCategory' size=20 maxlength=20></td></tr>";
+	<tr><td>' . _('Existing Inventory Category Code') . ':</td>
+	<td><input type=Text name="OldStockCategory" size=20 maxlength=20></td></tr>';
+echo '<tr><td>' . _('New Inventory Category Code') . ':</td><td><input type=Text name="NewStockCategory" size=20 maxlength=20></td></tr>';
 echo '</table>';
-echo "<div class='centre'><input type=submit name='ProcessStockChange' value='" . _('Process') . "'></div>";
+echo '<div class="centre"><input type=submit name="ProcessStockChange" value="' . _('Process') . '"></div>';
 echo '</form>';
 include ('includes/footer.inc');
 ?>

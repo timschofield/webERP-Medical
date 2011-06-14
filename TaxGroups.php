@@ -214,18 +214,18 @@ if (isset($SelectedGroup)) {
 	}
 }
 echo '<br />';
-echo "<form method='post' action=" . $_SERVER['PHP_SELF'] . "?" . SID . ">";
+echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 if( isset($_POST['SelectedGroup'])) {
-	echo "<input type=hidden name='SelectedGroup' value='" . $_POST['SelectedGroup'] . "'>";
+	echo '<input type=hidden name="SelectedGroup" value="' . $_POST['SelectedGroup'] . '">';
 }
 echo '<table class=selection>';
 
 if (!isset($_POST['GroupName'])) {
 	$_POST['GroupName']='';
 }
-echo '<tr><td>' . _('Tax Group') . ":</td>
-		<td><input type='text' name='GroupName' size=40 maxlength=40 value='" . $_POST['GroupName'] . "'></td>";
+echo '<tr><td>' . _('Tax Group') . ':</td>
+		<td><input type="text" name="GroupName" size=40 maxlength=40 value="' . $_POST['GroupName'] . '"></td>';
 echo '<td><input type="submit" name="submit" value="' . _('Enter Group') . '"></td></tr></form>';
 
 
@@ -307,19 +307,19 @@ if (isset($SelectedGroup)) {
 	if (DB_num_rows($Result)>0 ) {
 		echo '<br />';
 		echo '<table class=selection><tr>';
-		echo "<th colspan=4>"._('Assigned Taxes')."</th>";
+		echo '<th colspan=4>'._('Assigned Taxes').'</th>';
 		echo '<th></th>';
-		echo "<th colspan=2>"._('Available Taxes')."</th>";
+		echo '<th colspan=2>'._('Available Taxes').'</th>';
 		echo '</tr>';
 
 		echo '<tr>';
-		echo "<th>" . _('Tax Auth ID') . '</th>';
-		echo "<th>" . _('Tax Authority Name') . '</th>';
-		echo "<th>" . _('Calculation Order') . '</th>';
-		echo "<th>" . _('Tax on Prior Tax(es)') . '</th>';
+		echo '<th>' . _('Tax Auth ID') . '</th>';
+		echo '<th>' . _('Tax Authority Name') . '</th>';
+		echo '<th>' . _('Calculation Order') . '</th>';
+		echo '<th>' . _('Tax on Prior Tax(es)') . '</th>';
 		echo '<th></th>';
-		echo "<th>" . _('Tax Auth ID') . '</th>';
-		echo "<th>" . _('Tax Authority Name') . '</th>';
+		echo '<th>' . _('Tax Auth ID') . '</th>';
+		echo '<th>' . _('Tax Authority Name') . '</th>';
 		echo '</tr>';
 
 	} else {

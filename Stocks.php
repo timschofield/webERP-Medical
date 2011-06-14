@@ -567,7 +567,7 @@ if (isset($_POST['submit'])) {
 		unset($_POST['ItemPDF']);
 		unset($_SESSION['SelectedStockItem']);
 		unset($StockID);
-		//echo "<meta http-equiv='Refresh' content='0; url=" . $rootpath . '/SelectProduct.php?' . SID  ."'>";
+		//echo '<meta http-equiv='Refresh' content='0; url=" . $rootpath . '/SelectProduct.php?' . SID  ."'>";
 
 		$New=1;
 	} //end if Delete Part
@@ -645,7 +645,7 @@ if (!isset($StockID) or $StockID=='' or isset($_POST['UpdateCategories'])) {
 
 } else { // some changes were made to the data so don't re-set form variables to DB ie the code above
 	echo '<tr><td>' . _('Item Code') . ':</td><td>'.$StockID.'</td></tr>';
-	echo "<input type='Hidden' name='StockID' value='$StockID'>";
+	echo '<input type="hidden" name="StockID" value="'.$StockID.'">';
 }
 
 if (isset($_POST['Description'])) {

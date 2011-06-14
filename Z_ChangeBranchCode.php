@@ -11,10 +11,10 @@ if (isset($_POST['ProcessCustomerChange'])){
 
 /*First check the customer code exists */
 	$result=DB_query("SELECT debtorno,
-													branchcode
-												FROM custbranch
-												WHERE debtorno='" . $_POST['DebtorNo'] . "'
-												AND branchcode='" . $_POST['OldBranchCode'] . "'",$db);
+							branchcode
+						FROM custbranch
+						WHERE debtorno='" . $_POST['DebtorNo'] . "'
+							AND branchcode='" . $_POST['OldBranchCode'] . "'",$db);
 	if (DB_num_rows($result)==0){
 		prnMsg (_('The customer branch code') . ': ' . $_POST['DebtorNo'] . ' - ' . $_POST['OldBranchCode'] . ' ' . _('does not currently exist as a customer branch code in the system'),'error');
 		include('includes/footer.inc');
@@ -195,18 +195,18 @@ if (isset($_POST['ProcessCustomerChange'])){
 
 }
 
-echo "<form action='" . $_SERVER['PHP_SELF'] . "?=" . $SID . "' method=post>";
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<br /><table>
-<tr><td>' . _('Customer Code') . ":</td><td><input type=Text name='DebtorNo' size=20 maxlength=20></td></tr>
-<tr><td>" . _('Existing Branch Code') . ":</td><td><input type=Text name='OldBranchCode' size=20 maxlength=20></td></tr>
-<tr><td>" . _('New Branch Code') . ":</td><td><input type=Text name='NewBranchCode' size=20 maxlength=20></td></tr>
-</table>";
+<tr><td>' . _('Customer Code') . ':</td><td><input type=Text name="DebtorNo" size=20 maxlength=20></td></tr>
+<tr><td>' . _('Existing Branch Code') . ':</td><td><input type=Text name="OldBranchCode" size=20 maxlength=20></td></tr>
+<tr><td>' . _('New Branch Code') . ':</td><td><input type=Text name="NewBranchCode" size=20 maxlength=20></td></tr>
+</table>';
 
-echo "<input type=submit name='ProcessCustomerChange' value='" . _('Process') . "'>";
+echo '<input type=submit name="ProcessCustomerChange" value="' . _('Process') . '">';
 
 echo '</form>';
 
-include("includes/footer.inc");
+include('includes/footer.inc');
 ?>

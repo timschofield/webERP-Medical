@@ -282,7 +282,7 @@ if ($_FILES['userfile']['name']) { //start file processing
 
 } elseif ( isset($_POST['gettemplate']) || isset($_GET['gettemplate']) ) { //download an import template
 
-	echo '<br /><br /><br />"'. implode('","',$headers). '"<br /><br /><br />';
+	echo '<br /><br /><br />"'. implode('","',$headers). '" <br /><br /><br />';
 
 } else { //show file upload form
 
@@ -292,14 +292,13 @@ if ($_FILES['userfile']['name']) { //start file processing
 		<br />
 		<br />
 	';
-	echo "<form ENCtype='multipart/form-data' action='Z_ImportStocks.php' method=post>";
+	echo '<form enctype="multipart/form-data" action="Z_ImportStocks.php" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '">';
 
-	echo "<input type='hidden' name='MAX_FILE_SIZE' value='1000000'>" .
-			_('Upload file') . ": <input name='userfile' type='file'>
-			<input type='submit' value='" . _('Send File') . "'>
-		</form>
-	";
+	echo '<input type="hidden" name="MAX_FILE_SIZE" value="1000000">' .
+			_('Upload file') . ': <input name="userfile" type="file">
+			<input type="submit" value="' . _('Send File') . '">
+		</form>';
 
 }
 
