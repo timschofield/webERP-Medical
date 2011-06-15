@@ -30,7 +30,7 @@ $LeftOvers = $pdf->addTextWrap(0,$YPos-($line_height*8),300,$FontSize,$_SESSION[
 $LeftOvers = $pdf->addTextWrap(0,$YPos-($line_height*9),300,$FontSize,$_SESSION['CompanyRecord']['regoffice6']);
 $LeftOvers = $pdf->addTextWrap(0,$YPos-($line_height*10),150,$FontSize, _('Customer Receipt Number ').'  : ' . $_GET['FromTransNo'] );
 //$LeftOvers = $pdf->addTextWrap(0,$YPos-($line_height*14),140,$FontSize, _('Printed').': ' . Date($_SESSION['DefaultDateFormat']) . '   '. _('Page'). ' ' . $PageNumber);
-
+$NameYPos=$YPos-($line_height*11);
 $sql="SELECT MIN(id) as start FROM debtortrans WHERE type=10 AND transno='".$_GET['FromTransNo']. "'";
 $result=DB_query($sql, $db);
 $myrow=DB_fetch_array($result);
@@ -110,10 +110,10 @@ $sql="SELECT  name,
 $result=DB_query($sql, $db);
 $myrow=DB_fetch_array($result);
 
-/*
-$LeftOvers = $pdf->addTextWrap(50,$YPos,300,$FontSize,_('Received From').' : ');
+$LeftOvers = $pdf->addTextWrap(0,$NameYPos,300,$FontSize,_('Received From').' : ');
 
-$LeftOvers = $pdf->addTextWrap(150,$YPos,300,$FontSize, htmlspecialchars_decode($myrow['name']));
+$LeftOvers = $pdf->addTextWrap(110,$NameYPos,300,$FontSize, htmlspecialchars_decode($myrow['name']));
+/*
 $LeftOvers = $pdf->addTextWrap(150,$YPos-($line_height*1),300,$FontSize, htmlspecialchars_decode($myrow['address1']));
 $LeftOvers = $pdf->addTextWrap(150,$YPos-($line_height*2),300,$FontSize, htmlspecialchars_decode($myrow['address2']));
 $LeftOvers = $pdf->addTextWrap(150,$YPos-($line_height*3),300,$FontSize, htmlspecialchars_decode($myrow['address3']));
