@@ -287,9 +287,9 @@ If (isset($_POST['PrintPDF'])) {
 	}
 	while ($myrow1 = DB_fetch_array($result1)) {
 		if ($myrow1['categoryid']==$_POST['StockCat']){
-			echo '<option selected value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'];
+			echo '<option selected value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 		} else {
-			echo '<option value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'];
+			echo '<option value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 		}
 	}
 	echo '</select></td></tr>';

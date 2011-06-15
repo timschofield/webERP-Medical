@@ -1419,14 +1419,14 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 
 	echo '<tr><td>' . _('Report Type') . ':</td>';
 	echo "<td><select name='ReportType'>";
-	echo "<option selected value='Detail'>" . _('Detail');
-	echo "<option value='Summary'>" . _('Summary');
+	echo "<option selected value='Detail'>" . _('Detail') . '</option>';
+	echo "<option value='Summary'>" . _('Summary') . '</option>';
 	echo '</select></td><td>&nbsp</td></tr>';
 
 	echo '<tr><td>' . _('Date Type') . ':</td>';
 	echo "<td><select name='DateType'>";
-	echo "<option selected value='Order'>" . _('Order Date');
-	echo "<option value='Delivery'>" . _('Delivery Date');
+	echo "<option selected value='Order'>" . _('Order Date') . '</option>';
+	echo "<option value='Delivery'>" . _('Delivery Date') . '</option>';
 	echo '</select></td><td>&nbsp</td></tr>';
 
 	echo '<tr>
@@ -1438,8 +1438,8 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 
 	echo '<tr><td>' . _('Part Number') . ':</td>';
 	echo "<td><select name='PartNumberOp'>";
-	echo "<option selected value='Equals'>" . _('Equals');
-	echo "<option value='LIKE'>" . _('Begins With');
+	echo "<option selected value='Equals'>" . _('Equals') . '</option>';
+	echo "<option value='LIKE'>" . _('Begins With') . '</option>';
 	echo '</select>';
 	echo "&nbsp&nbsp<input type='Text' name='PartNumber' size=20 maxlength=20 value=";
 	if (isset($_POST['PartNumber'])) {
@@ -1450,8 +1450,8 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 
 	echo '<tr><td>' . _('Supplier Number') . ':</td>';
 	echo "<td><select name='SupplierIdOp'>";
-	echo "<option selected value='Equals'>" . _('Equals');
-	echo "<option value='LIKE'>" . _('Begins With');
+	echo "<option selected value='Equals'>" . _('Equals') . '</option>';
+	echo "<option value='LIKE'>" . _('Begins With') . '</option>';
 	echo '</select>';
 	echo "&nbsp&nbsp<input type='Text' name='SupplierId' size=10 maxlength=10 value=";
 	if (isset($_POST['SupplierId'])) {
@@ -1462,8 +1462,8 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 
 	echo '<tr><td>' . _('Supplier Name') . ':</td>';
 	echo '<td><select name="SupplierNameOp">';
-	echo '<option selected value="LIKE">' . _('Begins With');
-	echo '<option value="Equals">' . _('Equals');
+	echo '<option selected value="LIKE">' . _('Begins With') . '</option>';
+	echo '<option value="Equals">' . _('Equals') . '</option>';
 	echo '</select>';
 	echo '&nbsp&nbsp<input type="text" name="SupplierName" size=30 maxlength=30 value=';
 	if (isset($_POST['SupplierName'])) {

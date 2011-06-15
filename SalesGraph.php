@@ -114,9 +114,9 @@ if ((! isset($_POST['FromPeriod']) OR ! isset($_POST['ToPeriod']))
 	}
 	while ($myrow=DB_fetch_array($CategoriesResult)){
 		if($myrow['categoryid']==$_POST['CategoryID']){
-			echo '<option selected value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'];
+			echo '<option selected value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 		} else {
-			echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'];
+			echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 		}
 	}
 	echo '</select></td></tr>';

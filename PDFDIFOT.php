@@ -44,27 +44,27 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate']) OR $InputError==1){
 
 
 	 echo "<select name='CategoryID'>";
-	 echo "<option selected value='All'>" . _('Over All Categories');
+	 echo "<option selected value='All'>" . _('Over All Categories') . '</option>';
 
 	 while ($myrow=DB_fetch_array($result)){
-	echo "<option value='" . $myrow['categoryid'] . "'>" . $myrow['categorydescription'];
+	echo "<option value='" . $myrow['categoryid'] . "'>" . $myrow['categorydescription'] . '</option>';
 	 }
 
 
 	 echo '</select></td></tr>';
 
 	 echo '<tr><td>' . _('Inventory Location') . ":</td><td><select name='Location'>";
-	 echo "<option selected value='All'>" . _('All Locations');
+	 echo "<option selected value='All'>" . _('All Locations') . '</option>';
 
 	 $result= DB_query("SELECT loccode, locationname FROM locations",$db);
 	 while ($myrow=DB_fetch_array($result)){
-	echo "<option value='" . $myrow['loccode'] . "'>" . $myrow['locationname'];
+	echo "<option value='" . $myrow['loccode'] . "'>" . $myrow['locationname'] . '</option>';
 	 }
 	 echo '</select></td></tr>';
 
 	 echo '<tr><td>' . _('Email the report off') . ":</td><td><select name='Email'>";
-	 echo "<option selected value='No'>" . _('No');
-	 echo "<option value='Yes'>" . _('Yes');
+	 echo "<option selected value='No'>" . _('No') . '</option>';
+	 echo "<option value='Yes'>" . _('Yes') . '</option>';
 	 echo "</select></td></tr></table><br /><div class='centre'><input type=submit name='Go' value='" . _('Create PDF') . "'></div>";
 
 	 if ($InputError==1){

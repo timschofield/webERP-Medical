@@ -1046,7 +1046,7 @@ if (!isset($_GET['Edit'])) {
 
 	echo ':</font></tr><tr><td><select name="StockCat">';
 
-	echo '<option selected value="All">' . _('All');
+	echo '<option selected value="All">' . _('All') . '</option>';
 	while ($myrow1 = DB_fetch_array($result1)) {
 		if (isset($_POST['StockCat']) and $_POST['StockCat']==$myrow1['categoryid']){
 			echo '<option selected value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';

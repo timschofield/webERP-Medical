@@ -173,15 +173,15 @@ echo '<div class="page_help_text">' . _('Use this report to display the quantity
 		$_POST['StockCat']='All';
 	}
 	if ($_POST['StockCat']=='All'){
-		echo '<option selected value="All">' . _('All');
+		echo '<option selected value="All">' . _('All') . '</option>';
 	} else {
-		echo '<option value="All">' . _('All');
+		echo '<option value="All">' . _('All') . '</option>';
 	}
 	while ($myrow1 = DB_fetch_array($result1)) {
 		if ($myrow1['categoryid']==$_POST['StockCat']){
-			echo '<option selected value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'];
+			echo '<option selected value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 		} else {
-			echo '<option value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'];
+			echo '<option value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 		}
 	}
 	echo '</select></td></tr>';

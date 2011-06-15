@@ -351,11 +351,11 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 		$_POST['PrintOrEmail'] = 'Print';
 	}
 	if ($_POST['PrintOrEmail']=='Print'){
-		echo '<option selected value="Print">'. _('Print');
-		echo '<option value="Email">' . _('Email');
+		echo '<option selected value="Print">'. _('Print') . '</option>';
+		echo '<option value="Email">' . _('Email') . '</option>';
 	} else {
-		echo '<option value="Print">'. _('Print');
-		echo '<option selected value="Email">'. _('Email');
+		echo '<option value="Print">'. _('Print') . '</option>';
+		echo '<option selected value="Email">'. _('Email') . '</option>';
 	}
 	echo '</select></td></tr>';
 	echo '<tr><td>'. _('Show Amounts on the Order'). '</td><td>
@@ -364,11 +364,11 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 		$_POST['ShowAmounts'] = 'Yes';
 	}
 	if ($_POST['ShowAmounts']=='Yes'){
-		echo '<option selected value="Yes">'. _('Yes');
-		echo '<option value="No">' . _('No');
+		echo '<option selected value="Yes">'. _('Yes') . '</option>';
+		echo '<option value="No">' . _('No') . '</option>';
 	} else {
-		echo '<option value="Yes">'. _('Yes');
-		echo '<option selected value="No">'. _('No');
+		echo '<option value="Yes">'. _('Yes') . '</option>';
+		echo '<option selected value="No">'. _('No') . '</option>';
 	}
 	echo '</select></td></tr>';
 	if ($_POST['PrintOrEmail']=='Email'){
@@ -384,9 +384,9 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 			while ($ContactDetails = DB_fetch_array($ContactsResult)){
 				if (strlen($ContactDetails['email'])>2 AND strpos($ContactDetails['email'],'@')>0){
 					if ($_POST['EmailTo']==$ContactDetails['email']){
-						echo '<option selected value="' . $ContactDetails['email'] . '">' . $ContactDetails['Contact'] . ' - ' . $ContactDetails['email'];
+						echo '<option selected value="' . $ContactDetails['email'] . '">' . $ContactDetails['Contact'] . ' - ' . $ContactDetails['email'] . '</option>';
 					} else {
-						echo '<option value="' . $ContactDetails['email'] . '">' . $ContactDetails['contact'] . ' - ' . $ContactDetails['email'];
+						echo '<option value="' . $ContactDetails['email'] . '">' . $ContactDetails['contact'] . ' - ' . $ContactDetails['email'] . '</option>';
 					}
 				}
 			}

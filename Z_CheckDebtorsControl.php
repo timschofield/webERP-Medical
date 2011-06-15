@@ -47,10 +47,10 @@ include('includes/header.inc');
 	while ( $perRow=DB_fetch_array($perResult) )
 	{
 		$fromSelected = ( $perRow['periodno'] == $DefaultFromPeriod ) ? 'selected' : '';
-		echo '<option ' . $fromSelected . ' value="' . $perRow['periodno'] . '">' .MonthAndYearFromSQLDate($perRow['lastdate_in_period']);
+		echo '<option ' . $fromSelected . ' value="' . $perRow['periodno'] . '">' .MonthAndYearFromSQLDate($perRow['lastdate_in_period']) . '</option>';
 
 		$toSelected = ( $perRow['periodno'] == $DefaultToPeriod ) ? 'selected' : '';
-		$toSelect .= '<option ' . $toSelected . ' value="' . $perRow['periodno'] . '">' . MonthAndYearFromSQLDate($perRow['lastdate_in_period']);
+		$toSelect .= '<option ' . $toSelected . ' value="' . $perRow['periodno'] . '">' . MonthAndYearFromSQLDate($perRow['lastdate_in_period']) . '</option>';
 	}
 	DB_free_result($perResult);
 	echo '</select></td></tr>';

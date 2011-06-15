@@ -375,7 +375,7 @@ if (isset($_POST['PrintPDF'])){
 	$sql="SELECT areacode, areadescription FROM areas";
 	$AreasResult= DB_query($sql,$db);
 
-	echo '<option selected value="All">' . _('All Areas');
+	echo '<option selected value="All">' . _('All Areas') . '</option>';
 
 	While ($myrow = DB_fetch_array($AreasResult)){
 		echo '<option value="' . $myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
@@ -390,7 +390,7 @@ if (isset($_POST['PrintPDF'])){
 	$SalesFolkResult = DB_query($sql,$db);
 
 	While ($myrow = DB_fetch_array($SalesFolkResult)){
-		echo '<option value="' . $myrow['salesmancode'] . '">' . $myrow['salesmanname'];
+		echo '<option value="' . $myrow['salesmancode'] . '">' . $myrow['salesmanname'] . '</option>';
 	}
 	echo '</select></td></tr>';
 

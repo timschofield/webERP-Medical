@@ -927,9 +927,9 @@ $StkLocsResult = DB_query("SELECT locationname,loccode
 
 while ($myrow=DB_fetch_row($StkLocsResult)){
 	if ($_SESSION['Items'.$identifier]->Location==$myrow[1]){
-		echo '<option selected value="'.$myrow[1].'">'.$myrow[0];
+		echo '<option selected value="'.$myrow[1].'">'.$myrow[0] . '</option>';
 	} else {
-		echo '<option value="'.$myrow[1].'">'.$myrow[0];
+		echo '<option value="'.$myrow[1].'">'.$myrow[0] . '</option>';
 	}
 }
 
@@ -1034,8 +1034,8 @@ if (isset($_SESSION['PrintedPackingSlip']) and $_SESSION['PrintedPackingSlip']==
 	echo '<tr>
 		<td>'. _('Reprint packing slip') .':</td>
 	<td><select name="ReprintPackingSlip">';
-	echo '<option value=0>' . _('Yes');
-	echo '<option selected value=1>' . _('No');
+	echo '<option value=0>' . _('Yes') . '</option>';
+	echo '<option selected value=1>' . _('No') . '</option>';
 	echo '</select>	'. _('Last printed') .': ' . ConvertSQLDate($_SESSION['DatePackingSlipPrinted']) . '</td></tr>';
 
 } else {
@@ -1063,9 +1063,9 @@ $sql = "SELECT shipper_id, shippername
 $ShipperResults = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 while ($myrow=DB_fetch_array($ShipperResults)){
 	if ($myrow['shipper_id']==$_POST['ShipVia']){
-			echo '<option selected value=' . $myrow['shipper_id'] . '>' . $myrow['shippername'];
+			echo '<option selected value=' . $myrow['shipper_id'] . '>' . $myrow['shippername'] . '</option>';
 	}else {
-		echo '<option value=' . $myrow['shipper_id'] . '>' . $myrow['shippername'];
+		echo '<option value=' . $myrow['shipper_id'] . '>' . $myrow['shippername'] . '</option>';
 	}
 }
 
@@ -1074,11 +1074,11 @@ echo '</select></td></tr>';
 
 echo '<tr><td>'. _('Quotation Only') .':</td><td><select name="Quotation">';
 if ($_SESSION['Items'.$identifier]->Quotation==1){
-	echo '<option selected value=1>' . _('Yes');
-	echo '<option value=0>' . _('No');
+	echo '<option selected value=1>' . _('Yes') . '</option>';
+	echo '<option value=0>' . _('No') . '</option>';
 } else {
-	echo '<option value=1>' . _('Yes');
-	echo '<option selected value=0>' . _('No');
+	echo '<option value=1>' . _('Yes') . '</option>';
+	echo '<option selected value=0>' . _('No') . '</option>';
 }
 echo '</select></td></tr>';
 

@@ -672,7 +672,7 @@ function select_files($dir, $label = '', $select_name = 'ItemPDF', $curr_val = '
 	}
 	if ($handle = opendir($dir)) {
 		$mydir = '<select name="'.$select_name.'">';
-		$mydir .= '<option value=0>none';
+		$mydir .= '<option value=0>none</option>';
 		if (isset($_POST['ItemPDF'])) {
 			$curr_val = $_POST['ItemPDF'];
 		} else {
@@ -687,9 +687,9 @@ function select_files($dir, $label = '', $select_name = 'ItemPDF', $curr_val = '
 		foreach ($files as $val) {
 			if (is_file($dir.$val)) {
 				if ($val == $curr_val) {
-					$mydir .='<option value='.$val.' selected>';
+					$mydir .='<option value='.$val.' selected></option>';
 				} else {
-					$mydir .='<option value='.$val.'>';
+					$mydir .='<option value='.$val.'></option>';
 				}
 				$mydir .= $val."\n";
 				$teller++;
@@ -874,7 +874,7 @@ echo '</select></td></tr>';
 echo '<tr><td>' . _('Serialised') . ':</td><td><select ' . (in_array('Serialised',$Errors) ?  'class="selecterror"' : '' ) .'  name="Serialised">';
 
 if ($_POST['Serialised']==0){
-		echo '<Option selected value=0>' . _('No'). '</option>';
+		echo '<option selected value=0>' . _('No'). '</option>';
 } else {
 		echo '<option value=0>' . _('No'). '</option>';
 }

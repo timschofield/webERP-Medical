@@ -252,8 +252,8 @@ if (isset($_POST['PrintPDF'])) {
 	echo '<tr><td>' . _('Part') . ":</td>";
 	echo "<td><input type ='text' name='Part' size='20'>";
 	echo '<tr><td>' . _('Print Option') . ":</td><td><select name='Fill'>";
-	echo "<option selected value='yes'>" . _('Print With Alternating Highlighted Lines');
-	echo "<option value='no'>" . _('Plain Print');
+	echo "<option selected value='yes'>" . _('Print With Alternating Highlighted Lines') . '</option>';
+	echo "<option value='no'>" . _('Plain Print') . '</option>';
 	echo '</select></td></tr>';
 	echo "</table><br /><div class='centre'><input type=submit name='PrintPDF' value='" . _('Print PDF') . "'></div>";
 

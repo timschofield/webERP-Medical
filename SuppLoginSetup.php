@@ -447,7 +447,7 @@ while (false != ($ThemeName = $ThemeDirectory->read())){
 	if (is_dir('css/' . $ThemeName ) AND $ThemeName != '.' AND $ThemeName != '..' AND $ThemeName != 'CVS'){
 
 		if (isset($_POST['Theme']) and $_POST['Theme'] == $ThemeName){
-			echo '<option selected value="' . $ThemeName . '">$ThemeName';
+			echo '<option selected value="' . $ThemeName . '">'.$ThemeName . '</option>';
 		} else if (!isset($_POST['Theme']) and ($_SESSION['DefaultTheme']==$ThemeName)) {
 			echo '<option selected value="' . $ThemeName . '">' . $ThemeName . '</option>';
 		} else {

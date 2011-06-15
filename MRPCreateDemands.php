@@ -192,7 +192,7 @@ prnMsg( $TotalRecords . ' ' . _('records have been created'),'success');
 	$result = DB_query($sql,$db);
 	while ($myrow = DB_fetch_array($result)) {
 		 echo '<option value="';
-		 echo $myrow['mrpdemandtype'] . '">' . $myrow['mrpdemandtype'] . ' - ' .$myrow['description'];
+		 echo $myrow['mrpdemandtype'] . '">' . $myrow['mrpdemandtype'] . ' - ' .$myrow['description'] . '</option>';
 	} //end while loop
 	echo '</select></td></tr>';
 	echo '<tr><td>' . _('Inventory Category') . ':</td><td><select name="CategoryID">';

@@ -52,7 +52,7 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate'])){
 	 echo '<select name="BankAccount">';
 
 	 while ($myrow=DB_fetch_array($result)){
-	echo '<option value=' . $myrow['accountcode'] . '>' . $myrow['bankaccountname'];
+	echo '<option value=' . $myrow['accountcode'] . '>' . $myrow['bankaccountname'] . '</option>';
 	 }
 
 

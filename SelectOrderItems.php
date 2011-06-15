@@ -1652,10 +1652,10 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		echo '<table class="selection"><tr><td><b>' . _('Select a Stock Category') . ': </b><select tabindex=1 name="StockCat">';
 
 		if (!isset($_POST['StockCat'])){
-			echo '<option selected value="All">' . _('All');
+			echo '<option selected value="All">' . _('All') . '</option>';
 			$_POST['StockCat'] ='All';
 		} else {
-			echo '<option value="All">' . _('All');
+			echo '<option value="All">' . _('All') . '</option>';
 		}
 		$SQL="SELECT categoryid,
 									categorydescription
@@ -1666,9 +1666,9 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		$result1 = DB_query($SQL,$db);
 		while ($myrow1 = DB_fetch_array($result1)) {
 			if ($_POST['StockCat']==$myrow1['categoryid']){
-				echo '<option selected value=' . $myrow1['categoryid'] . '>' . $myrow1['categorydescription'];
+				echo '<option selected value=' . $myrow1['categoryid'] . '>' . $myrow1['categorydescription'] . '</option>';
 			} else {
-				echo '<option value='. $myrow1['categoryid'] . '>' . $myrow1['categorydescription'];
+				echo '<option value='. $myrow1['categoryid'] . '>' . $myrow1['categorydescription'] . '</option>';
 			}
 		}
 

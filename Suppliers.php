@@ -689,12 +689,12 @@ if (!isset($SupplierID)) {
 	$result=DB_query("SELECT id, coyname FROM factorcompanies", $db);
 
 	echo '<tr><td>' . _('Factor Company') . ':</td><td><select name="FactorID">';
-	echo '<option value=0>' . _('None');
+	echo '<option value=0>' . _('None') . '</option>';
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['FactorID']) and $_POST['FactorID'] == $myrow['id']){
-		echo '<option selected value=' . $myrow['id'] . '>' . $myrow['coyname'];
+		echo '<option selected value=' . $myrow['id'] . '>' . $myrow['coyname'] . '</option>';
 		} else {
-		echo '<option value=' . $myrow['id'] . '>' . $myrow['coyname'];
+		echo '<option value=' . $myrow['id'] . '>' . $myrow['coyname'] . '</option>';
 		}
 	} //end while loop
 	DB_data_seek($result, 0);

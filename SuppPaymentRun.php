@@ -268,9 +268,9 @@ If ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 
 	while ($myrow=DB_fetch_array($result)){
 	if ($myrow['currabrev'] == $_SESSION['CompanyRecord']['currencydefault']){
-			echo '<option selected Value="' . $myrow['currabrev'] . '">' . $myrow['currency'];
+			echo '<option selected Value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 	} else {
-		echo '<option Value="' . $myrow['currabrev'] . '">' . $myrow['currency'];
+		echo '<option Value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 	}
 	}
 	echo '</select></td></tr>';
@@ -315,9 +315,9 @@ If ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 		      /*list the bank account names */
 
 			if (isset($_POST['BankAccount']) and $_POST['BankAccount']==$myrow['accountcode']){
-				echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'];
+				echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . '</option>';
 			} else {
-				echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'];
+				echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . '</option>';
 			}
 		}
 		echo '</select></td></tr>';
@@ -331,9 +331,9 @@ Payment types can be modified by editing that file */
 	foreach ($PaytTypes as $PaytType) {
 
 	     if (isset($_POST['PaytType']) and $_POST['PaytType']==$PaytType){
-		   echo '<option selected Value="' . $PaytType . '">' . $PaytType;
+		   echo '<option selected Value="' . $PaytType . '">' . $PaytType . '</option>';
 	     } else {
-		   echo '<option Value="' . $PaytType . '">' . $PaytType;
+		   echo '<option Value="' . $PaytType . '">' . $PaytType . '</option>';
 	     }
 	}
 	echo '</select></td></tr>';

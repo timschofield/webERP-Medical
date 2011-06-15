@@ -306,15 +306,15 @@ if (isset($_POST['TaxAuthority']) AND
 
 	$result = DB_query("SELECT taxid, description FROM taxauthorities",$db);
 	while ($myrow = DB_fetch_array($result)){
-		echo '<option Value=' . $myrow['taxid'] . '>' . $myrow['description'];
+		echo '<option Value=' . $myrow['taxid'] . '>' . $myrow['description'] . '</option>';
 	}
 	echo '</select></td></tr>';
 	echo '<tr><td>' . _('Return Covering') . ':</font></td>
 			<td><select name=NoOfPeriods>
-			<option Value=1>' . _('One Month') .
-			'<option selected Value=2>' ._('Two Months') .
-			'<option value=3>' . _('Quarter') .
-			'<option value=6>' . _('Six Months') .
+			<option Value=1>' . _('One Month') . '</option>' .
+			'<option selected Value=2>' ._('Two Months') . '</option>' .
+			'<option value=3>' . _('Quarter') . '</option>' .
+			'<option value=6>' . _('Six Months') . '</option>' .
 			'</select></td></tr>';
 
 
@@ -333,9 +333,9 @@ if (isset($_POST['TaxAuthority']) AND
 
 	while ($myrow = DB_fetch_array($Periods,$db)){
 		if ($myrow['periodno']==$DefaultPeriod){
-			echo '<option selected value=' . $myrow['periodno'] . '>' . ConvertSQLDate($myrow['lastdate_in_period']);
+			echo '<option selected value=' . $myrow['periodno'] . '>' . ConvertSQLDate($myrow['lastdate_in_period']) . '</option>';
 		} else {
-			echo '<option value=' . $myrow['periodno'] . '>' . ConvertSQLDate($myrow['lastdate_in_period']);
+			echo '<option value=' . $myrow['periodno'] . '>' . ConvertSQLDate($myrow['lastdate_in_period']) . '</option>';
 		}
 	}
 

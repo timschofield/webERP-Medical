@@ -482,10 +482,10 @@ if (isset($_POST['PrintPDF'])){
 	$sql = "SELECT loccode, locationname FROM locations";
 	$LocnResult=DB_query($sql,$db);
 
-	echo '<option Value="All">' . _('All Locations');
+	echo '<option Value="All">' . _('All Locations') . '</option>';
 
 	while ($myrow=DB_fetch_array($LocnResult)){
-			  echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
+			  echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 				}
 	echo '</select></td></tr>';
 
@@ -496,24 +496,24 @@ if (isset($_POST['PrintPDF'])){
 		$_POST['NumberMonthsHolding']=1;
 	}
 	if ($_POST['NumberMonthsHolding']==0.5){
-		echo '<option selected value="0.5">' . _('Two Weeks');
+		echo '<option selected value="0.5">' . _('Two Weeks') . '</option>';
 	} else {
-		echo '<option value="0.5">' . _('Two Weeks');
+		echo '<option value="0.5">' . _('Two Weeks') . '</option>';
 	}
 	if ($_POST['NumberMonthsHolding']==1){
-		echo '<option selected value="1">' . _('One Month');
+		echo '<option selected value="1">' . _('One Month') . '</option>';
 	} else {
-		echo '<option selected value="1">' . _('One Month');
+		echo '<option selected value="1">' . _('One Month') . '</option>';
 	}
 	if ($_POST['NumberMonthsHolding']==1.5){
-		echo '<option selected value="1.5">' . _('Six Weeks');
+		echo '<option selected value="1.5">' . _('Six Weeks') . '</option>';
 	} else {
-		echo '<option value="1.5">' . _('Six Weeks');
+		echo '<option value="1.5">' . _('Six Weeks') . '</option>';
 	}
 	if ($_POST['NumberMonthsHolding']==2){
-		echo '<option selected value="2">' . _('Two Months');
+		echo '<option selected value="2">' . _('Two Months') . '</option>';
 	} else {
-		echo '<option value="2">' . _('Two Months');
+		echo '<option value="2">' . _('Two Months') . '</option>';
 	}
 	echo '</select></td></tr>';
 

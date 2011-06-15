@@ -272,7 +272,7 @@ If (isset($_POST['PrintPDF'])
 		$sql="SELECT categoryid, categorydescription FROM stockcategory ORDER BY categoryid";
 		$CatResult= DB_query($sql,$db);
 		While ($myrow = DB_fetch_array($CatResult)){
-			echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categoryid'] . ' - ' . $myrow['categorydescription'];
+			echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categoryid'] . ' - ' . $myrow['categorydescription'] . '</option>';
 		}
 		echo '</select></td></tr>';
 
@@ -282,7 +282,7 @@ If (isset($_POST['PrintPDF'])
 		DB_data_seek($CatResult,0);
 
 		While ($myrow = DB_fetch_array($CatResult)){
-			echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categoryid'] . ' - ' . $myrow['categorydescription'];
+			echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categoryid'] . ' - ' . $myrow['categorydescription'] . '</option>';
 		}
 		echo '</select></td></tr>';
 
@@ -291,7 +291,7 @@ If (isset($_POST['PrintPDF'])
 		$LocnResult=DB_query($sql,$db);
 
 		while ($myrow=DB_fetch_array($LocnResult)){
-				  echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
+				  echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 	 		}
 		echo '</select></td></tr>';
 
@@ -301,36 +301,36 @@ If (isset($_POST['PrintPDF'])
 			$_POST['MakeStkChkData'] = 'PrintOnly';
 		}
 		if ($_POST['MakeStkChkData'] =='New'){
-			echo '<option selected value="New">' . _('Make new stock check data file');
+			echo '<option selected value="New">' . _('Make new stock check data file') . '</option>';
 		} else {
-			echo '<option value="New">' . _('Make new stock check data file');
+			echo '<option value="New">' . _('Make new stock check data file') . '</option>';
 		}
 		if ($_POST['MakeStkChkData'] =='AddUpdate'){
-			echo '<option selected value="AddUpdate">' . _('Add/update existing stock check file');
+			echo '<option selected value="AddUpdate">' . _('Add/update existing stock check file') . '</option>';
 		} else {
-			echo '<option value="AddUpdate">' . _('Add/update existing stock check file');
+			echo '<option value="AddUpdate">' . _('Add/update existing stock check file') . '</option>';
 		}
 		if ($_POST['MakeStkChkData'] =='PrintOnly'){
-			echo '<option selected value="PrintOnly">' . _('Print Stock Check Sheets Only');
+			echo '<option selected value="PrintOnly">' . _('Print Stock Check Sheets Only') . '</option>';
 		} else {
-			echo '<option value="PrintOnly">' . _('Print Stock Check Sheets Only');
+			echo '<option value="PrintOnly">' . _('Print Stock Check Sheets Only') . '</option>';
 		}
 		echo '</select></td></tr>';
 
 		echo '<tr><td>' . _('Show system quantity on sheets') . ':</td><td>';
 
 		if (isset($_POST['ShowInfo']) and $_POST['ShowInfo'] == false){
-				echo '<input type=CHECKBOX name="ShowInfo" value=FALSE>';
+				echo '<input type=checkbox name="ShowInfo" value=FALSE>';
 		} else {
-				echo '<input type=CHECKBOX name="ShowInfo" value=TRUE>';
+				echo '<input type=checkbox name="ShowInfo" value=TRUE>';
 		}
 		echo '</td></tr>';
 
 		echo '<tr><td>' . _('Only print items with non zero quantities') . ':</td><td>';
 		if (isset($_POST['NonZerosOnly']) and $_POST['NonZerosOnly'] == false){
-				echo '<input type=CHECKBOX name="NonZerosOnly" value=FALSE>';
+				echo '<input type=checkbox name="NonZerosOnly" value=FALSE>';
 		} else {
-				echo '<input type=CHECKBOX name="NonZerosOnly" value=TRUE>';
+				echo '<input type=checkbox name="NonZerosOnly" value=TRUE>';
 		}
 
 			echo '</td></tr></table><br /><div class="centre"><input type=Submit Name="PrintPDF" Value="' . _('Print and Process') . '"></div></form>';

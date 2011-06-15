@@ -1665,7 +1665,9 @@ invoices can have a zero amount but there must be a quantity to invoice */
 	$j++;
 	echo '<tr>
 		<td>'._('Action For Balance'). ':</td>
-		<td><select tabindex='.$j.' name=BOPolicy><option selected Value="BO">'._('Automatically put balance on back order').'<option Value="CAN">'._('Cancel any quantities not delivered').'</select></td>
+		<td><select tabindex='.$j.' name=BOPolicy>
+			<option selected Value="BO">'._('Automatically put balance on back order') . '</option>'.
+			'<option Value="CAN">'._('Cancel any quantities not delivered') . '</option>'.'</select></td>
 	</tr>';
 	$j++;
 	echo '<tr>

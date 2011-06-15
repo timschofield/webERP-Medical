@@ -118,7 +118,7 @@ if ($_POST['Ostg_or_All']=='All'){
 	echo '<option selected Value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range') . '</option>';
 	echo '<option Value="Ostdg">' . _('Show unmatched') . ' ' . $TypeName . ' ' . _('only') . '</option>';
 } else {
-	echo '<option Value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range');
+	echo '<option Value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range') . '</option>';
 	echo '<option selected Value="Ostdg">' . _('Show unmatched') . ' ' . $TypeName . ' ' . _('only') . '</option>';
 }
 echo '</select></td></tr>';

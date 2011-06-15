@@ -83,7 +83,6 @@ if (isset($_POST['selectchoice'])) {
 			} else {
 				echo '<option value="' . $myrow['discountcategory'] . '">' . $myrow['discountcategory']. '</option>';
 			}
-			echo '</option>';
 		}
 
 		echo '</select></td>';

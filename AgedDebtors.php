@@ -513,8 +513,8 @@ if (isset($_POST['PrintPDF'])
 
 		echo '<tr><td>' . _('Summary or detailed report') . ':' . '</td>
 			<td><select tabindex="6" name="DetailedReport">';
-		echo '<option selected value="No">' . _('Summary Report');
-		echo '<option value="Yes">' . _('Detailed Report');
+		echo '<option selected value="No">' . _('Summary Report') . '</option>';
+		echo '<option value="Yes">' . _('Detailed Report') . '</option>';
 		echo '</select></td></tr>';
 
 		echo '</table><br /><div class="centre"><input tabindex="7" type=submit name="PrintPDF" value="' . _('Print PDF') , '"></div>';

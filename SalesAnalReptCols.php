@@ -398,11 +398,11 @@ if (!isset($_GET['delete'])) {
 		$_POST['Calculation']=0;
 	}
 	if ($_POST['Calculation'] ==1){
-		echo '<option selected Value=1>' . _('Yes');
-		echo '<option Value=0>' . _('No');
+		echo '<option selected Value=1>' . _('Yes') . '</option>';
+		echo '<option Value=0>' . _('No') . '</option>';
 	} else {
-		echo '<option Value=1>' . _('Yes');
-		echo '<option selected Value=0>' . _('No');
+		echo '<option Value=1>' . _('Yes') . '</option>';
+		echo '<option selected Value=0>' . _('No') . '</option>';
 	}
 	echo '</select></td></tr>';
 
@@ -492,11 +492,11 @@ if (!isset($_GET['delete'])) {
 		echo '<tr><td>' . _('Constant') . ':</td><td><input type="TEXT" size=10 maxlength=10 name="Constant" value=' . $_POST['Constant'] . '></td></tr>';
 		echo '<tr><td>' . _('Format Type') . ':</td><td><select name="ValFormat">';
 		if ($_POST['ValFormat']=='N'){
-			  echo '<option selected Value="N">' . _('Numeric');
-			  echo '<option Value="P">' . _('Percentage');
+			  echo '<option selected Value="N">' . _('Numeric') . '</option>';
+			  echo '<option Value="P">' . _('Percentage') . '</option>';
 		} else {
-			  echo '<option Value="N">' . _('Numeric');
-		  	echo '<option selected Value="P">' . _('Percentage');
+			  echo '<option Value="N">' . _('Numeric') . '</option>';
+		  	echo '<option selected Value="P">' . _('Percentage') . '</option>';
 		}
 		echo '</select></td></tr><input type=hidden name="BudgetOrActual" Value=0>
                             <input type=hidden name="DataType" Value="">

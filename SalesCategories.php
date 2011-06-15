@@ -388,7 +388,7 @@ if($result && DB_num_rows($result)) {
 			// Only if the StockID is not already selected
 			echo '<option value="'.$myrow['stockid'].'">'.
 				$myrow['stockid'] . '&nbsp;-&nbsp;&quot;'.
-				$myrow['description'] . '&quot;';
+				$myrow['description'] . '&quot;' . '</option>';
 		}
 	}
 	echo '</select>';
