@@ -101,11 +101,11 @@ echo '<tr><td>'._('Enable Sending of EDI Invoices').':</td>
 
 if ($myrow['ediinvoices']==0){
 
-	echo '<option selected value=0>'._('Disabled');
-	echo '<option value=1>'._('Enabled');
+	echo '<option selected value=0>'._('Disabled') . '</option>';
+	echo '<option value=1>'._('Enabled') . '</option>';
 } else {
-	echo '<option value=0>'._('Disabled');
-	echo '<option selected value=1>'._('Enabled');
+	echo '<option value=0>'._('Disabled') . '</option>';
+	echo '<option selected value=1>'._('Enabled') . '</option>';
 }
 
 echo "</select><a href='$rootpath/EDIMessageFormat.php?" . SID . "&MessageType=INVOIC&PartnerCode=" . $_SESSION['CustomerID'] . "'>"._('Create') . '/' . _('Edit Invoice Message Format').'</a></td></tr>';
@@ -115,11 +115,11 @@ echo '<tr><td>'._('Enable Receiving of EDI Orders').":</td>
 
 if ($myrow['ediorders']==0){
 
-	echo '<option selected value=0>'._('Disabled');
-	echo '<option value=1>'._('Enabled');
+	echo '<option selected value=0>'._('Disabled') . '</option>';
+	echo '<option value=1>'._('Enabled') . '</option>';
 } else {
-	echo '<option value=0>'._('Disabled');
-	echo '<option selected value=1>'._('Enabled');
+	echo '<option value=0>'._('Disabled') . '</option>';
+	echo '<option selected value=1>'._('Enabled') . '</option>';
 }
 
 echo '</select></td></tr>';
@@ -132,11 +132,11 @@ echo '<tr><td>'._('EDI Communication Method').":</td>
 	<td><select tabindex=4 name='EDITransport'>";
 
 if ($myrow['editransport']=='email'){
-	echo "<option selected value='email'>"._('Email Attachments');
-	echo "<option value='ftp'>"._('File Transfer Protocol (FTP)');
+	echo "<option selected value='email'>"._('Email Attachments') . '</option>';
+	echo "<option value='ftp'>"._('File Transfer Protocol (FTP)') . '</option>';
 } else {
-	echo "<option value='email'>"._('Email Attachments');
-	echo "<option selected value='ftp'>"._('File Transfer Protocol (FTP)');
+	echo "<option value='email'>"._('Email Attachments') . '</option>';
+	echo "<option selected value='ftp'>"._('File Transfer Protocol (FTP)') . '</option>';
 }
 
 echo '</select></td></tr>';

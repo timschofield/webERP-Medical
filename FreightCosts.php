@@ -40,7 +40,7 @@ if (!isset($LocationFrom) OR !isset($ShipperID)) {
 			<td><select name="ShipperID">';
 
 	while ($myrow = DB_fetch_array($ShipperResults)){
-		echo '<option value=' . $myrow['shipper_id'] . '>' . $myrow['shippername'];
+		echo '<option value=' . $myrow['shipper_id'] . '>' . $myrow['shippername'] . '</option>';
 	}
 	echo '</select></td></tr>
 			<tr>

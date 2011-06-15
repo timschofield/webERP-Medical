@@ -122,7 +122,6 @@ if (DB_num_rows($result) > 0) {
 		} else {
 			echo '<option value="' . $myrow['discountcategory'] . '">' . $myrow['discountcategory'] . '</option>';
 		}
-		echo '</option>';
 	}
 	echo '</select></td>';
 } else {

@@ -12,8 +12,7 @@ do
     output_closing=`grep $ctag -c $filename`
     if [ $output_opening != $output_closing ]
     then
-	echo $filename
-#	echo $output
+	echo $newname' has '$[$output_opening-$output_closing]' problem lines'
     fi
 done
 
@@ -26,7 +25,6 @@ do
     output_closing=`grep $ctag -c $filename`
     if [ $output_opening != $output_closing ]
     then
-	echo $filename
-#	echo $output
+	echo $newname' has '$[$output_opening-$output_closing]' problem lines'
     fi
 done

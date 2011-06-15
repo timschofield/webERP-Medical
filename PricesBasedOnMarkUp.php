@@ -26,7 +26,7 @@ echo '<br /><table class=selection>
                <td><select name="PriceList">';
 
 if (!isset($_POST['PriceList']) OR $_POST['PriceList']=='0'){
-	echo '<option selected value="0">' . _('No Price List Selected');
+	echo '<option selected value="0">' . _('No Price List Selected') . '</option>';
 }
 
 while ($PriceLists=DB_fetch_array($PricesResult)){
@@ -48,7 +48,7 @@ echo '<tr>
                             <td><select name="CurrCode">';
 
 if (!isset($_POST['CurrCode'])){
-	echo '<option selected value=0>' . _('No Price List Currency Selected');
+	echo '<option selected value=0>' . _('No Price List Currency Selected') . '</option>';
 }
 
 while ($Currencies=DB_fetch_array($result)){

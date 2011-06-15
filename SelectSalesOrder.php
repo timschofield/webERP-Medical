@@ -443,11 +443,11 @@ if (!isset($StockID)) {
 		}
 
 		if ($_POST['Quotations']=='Quotes_Only'){
-			echo '<option selected value="Quotes_Only">' . _('Quotations Only');
-			echo '<option value="Orders_Only">' . _('Orders Only');
+			echo '<option selected value="Quotes_Only">' . _('Quotations Only') . '</option>';
+			echo '<option value="Orders_Only">' . _('Orders Only') . '</option>';
 		} else {
-			echo '<option selected value="Orders_Only">' . _('Orders Only');
-			echo '<option value="Quotes_Only">' . _('Quotations Only');
+			echo '<option selected value="Orders_Only">' . _('Orders Only') . '</option>';
+			echo '<option value="Quotes_Only">' . _('Quotations Only') . '</option>';
 		}
 
 		echo '</select> </td><td>';

@@ -350,24 +350,24 @@ if (! isset($_GET['delete'])) {
 	echo '<tr><td>' . _('Stock Type') . ':</td>
             <td><select name="StockType" onChange="ReloadForm(CategoryForm.UpdateTypes)" >';
 		if (isset($_POST['StockType']) and $_POST['StockType']=='F') {
-			echo '<option selected value="F">' . _('Finished Goods');
+			echo '<option selected value="F">' . _('Finished Goods') . '</option>';
 		} else {
-			echo '<option value="F">' . _('Finished Goods');
+			echo '<option value="F">' . _('Finished Goods') . '</option>';
 		}
 		if (isset($_POST['StockType']) and $_POST['StockType']=='M') {
-			echo '<option selected value="M">' . _('Raw Materials');
+			echo '<option selected value="M">' . _('Raw Materials') . '</option>';
 		} else {
-			echo '<option value="M">' . _('Raw Materials');
+			echo '<option value="M">' . _('Raw Materials') . '</option>';
 		}
 		if (isset($_POST['StockType']) and $_POST['StockType']=='D') {
-			echo '<option selected value="D">' . _('Dummy Item - (No Movements)');
+			echo '<option selected value="D">' . _('Dummy Item - (No Movements)') . '</option>';
 		} else {
-			echo '<option value="D">' . _('Dummy Item - (No Movements)');
+			echo '<option value="D">' . _('Dummy Item - (No Movements)') . '</option>';
 		}
 		if (isset($_POST['StockType']) and $_POST['StockType']=='L') {
-			echo '<option selected value="L">' . _('Labour');
+			echo '<option selected value="L">' . _('Labour') . '</option>';
 		} else {
-			echo '<option value="L">' . _('Labour');
+			echo '<option value="L">' . _('Labour') . '</option>';
 		}
 
 	echo '</select></td></tr>';

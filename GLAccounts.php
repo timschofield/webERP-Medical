@@ -251,11 +251,10 @@ if (!isset($_GET['delete'])) {
 
 	while ($myrow = DB_fetch_array($result)){
 		if (isset($_POST['Group']) and $myrow[0]==$_POST['Group']){
-			echo "<option selected value='";
+			echo "<option selected value='".$myrow[0] . "'>" . $myrow[0] . '</option>';
 		} else {
-			echo "<option value='";
+			echo "<option value='".$myrow[0] . "'>" . $myrow[0] . '</option>';
 		}
-		echo $myrow[0] . "'>" . $myrow[0];
 	}
 
 	if (!isset($_GET['SelectedAccount']) or $_GET['SelectedAccount']=='') {

@@ -542,7 +542,7 @@ if ( isset($_POST['pricelist']) ) {
 	echo '<tr><td>' . _('For Sales Type/Price List') . ':</td>';
 	echo '<td><select name="SalesType">';
 	while ($myrow=DB_fetch_array($SalesTypesResult)){
-	          echo '<option Value="' . $myrow['typeabbrev'] . '">' . $myrow['sales_type'];
+	          echo '<option Value="' . $myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
 	}
 	echo '</select></td></tr>';
 
@@ -551,7 +551,7 @@ if ( isset($_POST['pricelist']) ) {
 	echo '<tr><td>' . _('For Location') . ':</td>';
 	echo '<td><select name="Location">';
 	while ($myrow=DB_fetch_array($SalesTypesResult)){
-	          echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
+	          echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 	}
 	echo '</select></td></tr>';
 	echo '</table>';
@@ -575,7 +575,7 @@ if ( isset($_POST['pricelist']) ) {
 	echo '<tr><td>' . _('For Location') . ':</td>';
 	echo '<td><select name="Location">';
 	while ($myrow=DB_fetch_array($SalesTypesResult)){
-	          echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
+	          echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 	}
 	echo '</select></td></tr>';
 	echo '</table>';

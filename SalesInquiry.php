@@ -1119,9 +1119,9 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 	echo '<tr><td>' . _('For Sales Areas') . ':</td><td><select name="Area">';
 	$sql="SELECT areacode, areadescription FROM areas";
 	$AreasResult= DB_query($sql,$db);
-	echo '<option selected value="All">' . _('All Areas');
+	echo '<option selected value="All">' . _('All Areas') . '</option>';
 	While ($myrow = DB_fetch_array($AreasResult)){
-		echo '<option value="' . $myrow['areacode'] . '">' . $myrow['areadescription'];
+		echo '<option value="' . $myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
 	}
 	echo '</select></td></tr>';
 

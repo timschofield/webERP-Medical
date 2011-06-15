@@ -9,7 +9,7 @@ $title = _('Stock Check Sheets Entry');
 
 include('includes/header.inc');
 
-echo "<form action='" . $_SERVER['PHP_SELF'] . "' method=post>";
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' .
@@ -87,9 +87,9 @@ if ($_GET['Action'] == 'Enter'){
 	while ($myrow=DB_fetch_array($result)){
 
 		if (isset($_POST['Location']) and $myrow['loccode']==$_POST['Location']){
-			echo "<option selected value='" . $myrow['loccode'] . "'>" . $myrow['locationname'];
+			echo "<option selected value='" . $myrow['loccode'] . "'>" . $myrow['locationname'] . '</option>';
 		} else {
-			echo "<option value='" . $myrow['loccode'] . "'>" . $myrow['locationname'];
+			echo "<option value='" . $myrow['loccode'] . "'>" . $myrow['locationname'] . '</option>';
 		}
 	}
 	echo '</select></th></tr>';

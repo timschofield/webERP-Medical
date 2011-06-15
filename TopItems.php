@@ -40,8 +40,8 @@ if (!(isset($_POST['Search']))) {
 	echo '<tr>	<td width="150">' . _('Select Order By ') . ' </td>
 				<td>:</td>
 				<td><select name="Sequence">';
-	echo '	<option value="TotalInvoiced">' . _('Total Pieces') . '';
-	echo '	<option value="ValueSales">' . _('Value of Sales') . '';
+	echo '	<option value="TotalInvoiced">' . _('Total Pieces') . '' . '</option>';
+	echo '	<option value="ValueSales">' . _('Value of Sales') . '' . '</option>';
 	echo '	</select></td>
 				</tr>';
 	//View number of days

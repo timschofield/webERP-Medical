@@ -110,14 +110,14 @@ if (!isset($OrderNumber) or $OrderNumber == "") {
 	while ($myrow = DB_fetch_array($resultStkLocs)) {
 		if (isset($_POST['StockLocation'])) {
 			if ($myrow['loccode'] == $_POST['StockLocation']) {
-				echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
+				echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			} else {
-				echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
+				echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			}
 		} elseif ($myrow['loccode'] == $_SESSION['UserStockLocation']) {
-			echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
+			echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
-			echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'];
+			echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	}
 	echo '</select> ' . _('Order Status:') .' <select name="Status">';
@@ -155,9 +155,9 @@ echo '<font size=1>' . _('To search for purchase orders for a specific part use 
 echo '<tr><td><font size=1>' . _('Select a stock category') . ':</font><select name="StockCat">';
 while ($myrow1 = DB_fetch_array($result1)) {
 	if (isset($_POST['StockCat']) and $myrow1['categoryid'] == $_POST['StockCat']) {
-		echo "<option selected value='" . $myrow1['categoryid'] . "'>" . $myrow1['categorydescription'];
+		echo "<option selected value='" . $myrow1['categoryid'] . "'>" . $myrow1['categorydescription'] . '</option>';
 	} else {
-		echo "<option value='" . $myrow1['categoryid'] . "'>" . $myrow1['categorydescription'];
+		echo "<option value='" . $myrow1['categoryid'] . "'>" . $myrow1['categorydescription'] . '</option>';
 	}
 }
 echo '</select><td><font size=1>' . _('Enter text extracts in the') . ' <b>' . _('description') . '</b>:</font></td>';

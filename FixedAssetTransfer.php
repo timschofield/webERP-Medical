@@ -40,9 +40,9 @@ if (isset($_GET['AssetID'])) {
 
 	while ($myrow = DB_fetch_array($result)) {
 		if ($myrow['categoryid'] == $_POST['AssetCat']) {
-			echo '<option selected value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'];
+			echo '<option selected value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 		} else {
-			echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'];
+			echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 		}
 	}
 

@@ -239,14 +239,14 @@ if (isset($_POST['PrintPDF'])) {
 	echo '<table class="selection">';
 	echo '</select></td></tr>';
 	echo '<tr><td>' . _('Inventory Category') . ':</td><td><select name="CategoryID">';
-	echo '<option selected value="All">' . _('All Stock Categories');
+	echo '<option selected value="All">' . _('All Stock Categories') . '</option>';
 	$sql = "SELECT categoryid,
 				   categorydescription
 			FROM stockcategory";
 	$result = DB_query($sql,$db);
 	while ($myrow = DB_fetch_array($result)) {
 		echo '<option value="';
-		echo $myrow['categoryid'] . '">' . $myrow['categoryid'] . ' - ' .$myrow['categorydescription'];
+		echo $myrow['categoryid'] . '">' . $myrow['categoryid'] . ' - ' .$myrow['categorydescription'] . '</option>';
 	} //end while loop
 	echo '<tr><td>' . _('Sort') . ':</td><td><select name="Sort">';
 	echo '<option selected value="extcost">' . _('Extended Shortage Dollars').'</option>';

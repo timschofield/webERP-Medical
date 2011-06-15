@@ -241,15 +241,15 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 	echo '<tr>
 			<td>' . _('Category') . ':</td>
 			<td><select name="StockCat">';
-	echo '<option value="all">' . _('All Categories') . '';
+	echo '<option value="all">' . _('All Categories') . '' . '</option>';
 	while ($myrow1 = DB_fetch_array($result1)) {
-		echo '<option value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'];
+		echo '<option value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 	}
 	echo '</select></td></tr>';
 	echo '<tr><td>' . _('Price') . '
 				<select name="Comparator">';
-	echo '<option value="1">' . _('Less than or equal to') . '';
-	echo '<option value="2">' . _('Greater than or equal to') . '';
+	echo '<option value="1">' . _('Less than or equal to') . '' . '</option>';
+	echo '<option value="2">' . _('Greater than or equal to') . '' . '</option>';
 	if ($_SESSION['WeightedAverageCosting']==1) {
 		echo '</select>'.' '. _('Average Cost') . ' x </td>';
 	} else {

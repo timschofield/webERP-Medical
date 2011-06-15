@@ -272,8 +272,8 @@ if (isset($_POST['PrintPDF'])) {
 	echo '<option value="Monthly">' . _('Monthly') . '</option>';
 	echo '</select></td></tr>';
 	echo '<tr><td>' . _('Print Option') . ':</td><td><select name="Fill">';
-	echo '<option selected value="yes">' . _('Print With Alternating Highlighted Lines');
-	echo '<option value="no">' . _('Plain Print');
+	echo '<option selected value="yes">' . _('Print With Alternating Highlighted Lines') . '</option>';
+	echo '<option value="no">' . _('Plain Print') . '</option>';
 	echo '</select></td></tr>';
 	echo '<tr><td>' . _('Cut Off Date') . ':</td><td><input type ="text" class=date alt="'.$_SESSION['DefaultDateFormat'] .
 			'" name="cutoffdate" size="10" value="'.date($_SESSION['DefaultDateFormat']).'"></td></tr>';

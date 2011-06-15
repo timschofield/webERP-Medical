@@ -84,9 +84,9 @@ $result = DB_query("SELECT locationid, locationdescription FROM fixedassetlocati
 
 while ($myrow = DB_fetch_array($result)) {
 	if ($myrow['locationid'] == $_POST['AssetLocation']) {
-		echo '<option selected value="' . $myrow['locationid'] . '">' . $myrow['locationdescription'];
+		echo '<option selected value="' . $myrow['locationid'] . '">' . $myrow['locationdescription'] . '</option>';
 	} else {
-		echo '<option value="' . $myrow['locationid'] . '">' . $myrow['locationdescription'];
+		echo '<option value="' . $myrow['locationid'] . '">' . $myrow['locationdescription'] . '</option>';
 	}
 }
 echo '</select>';
