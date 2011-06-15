@@ -172,8 +172,7 @@ if (isset($_POST['EnterAdjustment']) && $_POST['EnterAdjustment']!= ''){
 				prd,
 				reference,
 				qty,
-				newqoh,
-				tagref)
+				newqoh)
 			VALUES (
 				'" . $_SESSION['Adjustment']->StockID . "',
 				14,
@@ -183,8 +182,7 @@ if (isset($_POST['EnterAdjustment']) && $_POST['EnterAdjustment']!= ''){
 				" . $PeriodNo . ",
 				'" . $_SESSION['Adjustment']->Narrative ."',
 				" . -$_SESSION['Adjustment']->Quantity . ",
-				" . ($QtyOnHandPrior - $_SESSION['Adjustment']->Quantity) . ",'
-				" . $_POST['tag']."'
+				" . ($QtyOnHandPrior - $_SESSION['Adjustment']->Quantity) . "
 			)";
 
 
@@ -281,6 +279,7 @@ if (isset($_POST['EnterAdjustment']) && $_POST['EnterAdjustment']!= ''){
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							amount,
 							narrative,
 							tag)
@@ -289,6 +288,7 @@ if (isset($_POST['EnterAdjustment']) && $_POST['EnterAdjustment']!= ''){
 						'" . FormatDateForSQL($_POST['issueddate']) . "',
 						" . $PeriodNo . ",
 						" .  $StockGLCodes['adjglact'] . ",
+						'" . $_SESSION['DefaultTag'] . "',
 						" . $_SESSION['Adjustment']->StandardCost * ($_SESSION['Adjustment']->Quantity) . ",
 						'" . $_SESSION['Adjustment']->StockID . " x " . $_SESSION['Adjustment']->Quantity . " @ " . $_SESSION['Adjustment']->StandardCost . " " . $_SESSION['Adjustment']->Narrative . "','" .
 							$_POST['tag'].	"')";
@@ -302,6 +302,7 @@ if (isset($_POST['EnterAdjustment']) && $_POST['EnterAdjustment']!= ''){
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							amount,
 							narrative)
 					VALUES (14,
@@ -309,6 +310,7 @@ if (isset($_POST['EnterAdjustment']) && $_POST['EnterAdjustment']!= ''){
 						'" . FormatDateForSQL($_POST['issueddate']) . "',
 						" . $PeriodNo . ",
 						" .  $StockGLCodes['stockact'] . ",
+						'" . $_SESSION['DefaultTag'] . "',
 						" . $_SESSION['Adjustment']->StandardCost * -$_SESSION['Adjustment']->Quantity . ",
 						'" . $_SESSION['Adjustment']->StockID . " x " . $_SESSION['Adjustment']->Quantity . " @ " . $_SESSION['Adjustment']->StandardCost . " " . $_SESSION['Adjustment']->Narrative . "')";
 
@@ -381,20 +383,16 @@ $SQL = 'SELECT tagref,
 		ORDER BY tagref';
 
 $result=DB_query($SQL,$db);
-if (DB_num_rows($result)==0){
-   echo '</select></td></tr>';
-   prnMsg(_('No Tags have been set up yet') . ' - ' . _('payments cannot be analysed against a tag until the tag is set up'),'error');
-} else {
-	echo '<option selected value=></option>';
-	while ($myrow=DB_fetch_array($result)){
-	    if ($_POST['tag']==$myrow["tagref"]){
+echo '<option selected value=></option>';
+while ($myrow=DB_fetch_array($result)){
+    if ($_POST['tag']==$myrow['tagref']){
 		echo '<option selected value=' . $myrow['tagref'] . '>' .$myrow['tagdescription'];
-	    } else {
+    } else {
 		echo '<option value=' . $myrow['tagref'] . '>' .$myrow['tagdescription'];
-	    }
-	}
-	echo '</select></td></tr>';
+    }
 }
+echo '</select></td></tr>';
+
 	// End select tag
 
 if (!isset($_SESSION['Adjustment']->Narrative)) {
