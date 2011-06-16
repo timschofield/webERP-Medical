@@ -111,6 +111,7 @@ if ($AlreadyOnThisOrder!=1){
 			$PriceArray = GetPrice($NewItem, $_SESSION['Items'.$identifier]->DebtorNo,$_SESSION['Items'.$identifier]->Branch, $db);
 			$Price=$PriceArray[0];
 			$ConversionFactor=$PriceArray[1];
+			$PriceDecimals=$PriceArray[2];
 			$WithinCreditLimit = true;
 
 			if (!isset($_SESSION['WarnOnce']) and $_SESSION['Items'.$identifier]->SpecialInstructions) {
@@ -147,6 +148,7 @@ if ($AlreadyOnThisOrder!=1){
 															0, /*Controlled - dont care */
 															$myItemRow['serialised'], /* need to know for autocreation wos */
 															$myItemRow['decimalplaces'],
+															$PriceDecimals,
 															'', /*Narrative - none yet */
 															$UpdateDB,
 															$NewLineNo,
