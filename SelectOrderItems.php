@@ -26,6 +26,7 @@ if (isset($_POST['order_items'])){
 	foreach ($_POST as $key => $value) {
 		if (strstr($key,'itm')) {
 			$NewItem_array[substr($key,3)] = trim($value);
+			$NewItem='Here';
 		}
 	}
 }
@@ -33,7 +34,6 @@ if (isset($_POST['order_items'])){
 if (isset($_GET['NewItem'])){
 	$NewItem = trim($_GET['NewItem']);
 }
-
 
 if (empty($_GET['identifier'])) {
 	/*unique session identifier to ensure that there is no conflict with other order entry sessions on the same machine  */
@@ -201,6 +201,7 @@ if (isset($_GET['ModifyOrderNumber'])
 									salesorderdetails.narrative,
 									salesorderdetails.itemdue,
 									salesorderdetails.poline,
+									salesorderdetails.pricedecimals,
 									locstock.quantity as qohatloc,
 									stockmaster.mbflag,
 									stockmaster.discountcategory,
@@ -236,6 +237,7 @@ if (isset($_GET['ModifyOrderNumber'])
 														0,	/*Controlled*/
 														$myrow['serialised'],
 														$myrow['decimalplaces'],
+														$myrow['pricedecimals'],
 														$myrow['narrative'],
 														'No', /* Update DB */
 														$myrow['orderlineno'],
@@ -1232,7 +1234,6 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		   '<a href="' . $rootpath . '/DeliveryDetails.php?' . SID .'identifier='.$identifier . '">' . _('click here') . '</a> ' . _('to continue'), 'info');
 	   	exit;
 	}
-
 
 	if (isset($NewItem)){
 /* get the item details from the database and hold them in the cart object make the quantity 1 by default then add it to the cart */

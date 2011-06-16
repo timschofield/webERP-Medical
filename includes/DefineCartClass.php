@@ -86,6 +86,7 @@ Class Cart {
 							$Controlled=0,
 							$Serialised=0,
 							$DecimalPlaces=0,
+							$PriceDecimals=2,
 							$Narrative='',
 							$UpdateDB='No',
 							$LineNumber=-1,
@@ -127,6 +128,7 @@ Class Cart {
 															$Controlled,
 															$Serialised,
 															$DecimalPlaces,
+															$PriceDecimals,
 															$Narrative,
 															$TaxCategory,
 															$ItemDue,
@@ -438,6 +440,7 @@ Class LineDetails {
 	Var $Controlled;
 	Var $Serialised;
 	Var $DecimalPlaces;
+	var $PriceDecimals;
 	Var $SerialItems;
 	Var $Narrative;
 	Var $TaxCategory;
@@ -467,6 +470,7 @@ Class LineDetails {
 							$Controlled,
 							$Serialised,
 							$DecimalPlaces,
+							$PriceDecimals,
 							$Narrative,
 							$TaxCategory,
 							$ItemDue,
@@ -500,6 +504,7 @@ Class LineDetails {
 		$this->Controlled = $Controlled;
 		$this->Serialised = $Serialised;
 		$this->DecimalPlaces = $DecimalPlaces;
+		$this->PriceDecimals = $PriceDecimals;
 		$this->SerialItems = array();
 		$this->Narrative = $Narrative;
 		$this->Taxes = array();

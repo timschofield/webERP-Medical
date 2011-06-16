@@ -99,7 +99,7 @@ if (isset($_POST['submit'])) {
 	} else {
 		$SQLEndDate = '2030-01-01';
 	}
-
+/*
 	$sql = "SELECT COUNT(typeabbrev)
 				FROM prices
 			WHERE prices.stockid='".$Item."'
@@ -120,7 +120,7 @@ if (isset($_POST['submit'])) {
 		include('includes/footer.inc');
 		exit;
 	}
-
+*/
 	if (isset($_POST['OldTypeAbbrev']) AND isset($_POST['OldCurrAbrev']) AND strlen($Item)>1 AND $InputError !=1) {
 
 		/* Need to see if there is also a price entered that has an end date after the start date of this price and if
@@ -155,6 +155,19 @@ if (isset($_POST['submit'])) {
 	} elseif ($InputError !=1) {
 
 	/*Selected price is null cos no item selected on first time round so must be adding a	record must be submitting new entries in the new price form */
+		$sql = "UPDATE prices SET
+					enddate='" . date('Y-m-d') . "'
+				WHERE prices.stockid='".$Item."'
+				AND startdate='" .FormatDateForSQL($_POST['StartDate']) . "'
+				AND enddate ='" . $SQLEndDate . "'
+				AND prices.typeabbrev='" . $_POST['TypeAbbrev'] . "'
+				AND prices.currabrev='" . $_POST['CurrAbrev'] . "'
+				AND prices.debtorno=''";
+
+		$ErrMsg = _('Could not be update the existing prices');
+		$result = DB_query($sql,$db,$ErrMsg);
+
+		ReSequenceEffectiveDates ($Item, $_POST['TypeAbbrev'], $_POST['CurrAbrev'], $db) ;
 
 		$sql = "INSERT INTO prices (stockid,
 									typeabbrev,
