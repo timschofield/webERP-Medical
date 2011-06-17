@@ -767,39 +767,21 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				$SQL = "SELECT stockmaster.stockid,
 								stockmaster.description,
 								stockmaster.units as stockunits,
-								prices.units as customerunits,
-								prices.conversionfactor,
-								prices.decimalplaces,
-								prices.price,
-								prices.currabrev
-						FROM stockmaster
-						LEFT JOIN prices
-							ON stockmaster.stockid=prices.stockid,
+								stockmaster.decimalplaces
+						FROM stockmaster,
 							stockcategory
 						WHERE stockmaster.categoryid=stockcategory.categoryid
 						AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 						AND stockmaster.mbflag <>'G'
 						AND stockmaster.description " . LIKE . " '$SearchString'
 						AND stockmaster.discontinued=0
-						AND ((prices.debtorno='".$_SESSION['Items'.$identifier]->DebtorNo."')
-						OR (prices.debtorno='' AND (SELECT COUNT(stockid) from prices where debtorno='".$_SESSION['Items'.$identifier]->DebtorNo.
-							"' AND stockid=stockmaster.stockid)=0 AND prices.currabrev='".$_SESSION['Items'.$identifier]->DefaultCurrency."')
-						OR (prices.debtorno is NULL OR (prices.debtorno='' AND prices.currabrev<>'".$_SESSION['Items'.$identifier]->DefaultCurrency."')
-							AND (SELECT COUNT(stockid) from prices where debtorno='".$_SESSION['Items'.$identifier]->DebtorNo.
-							"' AND stockid=stockmaster.stockid)=0))
 						ORDER BY stockmaster.stockid";
 			} else {
 				$SQL = "SELECT stockmaster.stockid,
 								stockmaster.description,
 								stockmaster.units as stockunits,
-								prices.units as customerunits,
-								prices.conversionfactor,
-								prices.decimalplaces,
-								prices.price,
-								prices.currabrev
-						FROM stockmaster
-						LEFT JOIN prices
-							ON stockmaster.stockid=prices.stockid,
+								stockmaster.decimalplaces
+						FROM stockmaster,
 							stockcategory
 						WHERE  stockmaster.categoryid=stockcategory.categoryid
 						AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
@@ -807,12 +789,6 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 						AND stockmaster.discontinued=0
 						AND stockmaster.description " . LIKE . " '" . $SearchString . "'
 						AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
-						AND ((prices.debtorno='".$_SESSION['Items'.$identifier]->DebtorNo."')
-						OR (prices.debtorno='' AND (SELECT COUNT(stockid) from prices where debtorno='".$_SESSION['Items'.$identifier]->DebtorNo.
-							"' AND stockid=stockmaster.stockid)=0 AND prices.currabrev='".$_SESSION['Items'.$identifier]->DefaultCurrency."')
-						OR (prices.debtorno is NULL OR (prices.debtorno='' AND prices.currabrev<>'".$_SESSION['Items'.$identifier]->DefaultCurrency."')
-							AND (SELECT COUNT(stockid) from prices where debtorno='".$_SESSION['Items'.$identifier]->DebtorNo.
-							"' AND stockid=stockmaster.stockid)=0))
 						ORDER BY stockmaster.stockid";
 			}
 
@@ -825,39 +801,21 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				$SQL = "SELECT stockmaster.stockid,
 								stockmaster.description,
 								stockmaster.units as stockunits,
-								prices.units as customerunits,
-								prices.conversionfactor,
-								prices.decimalplaces,
-								prices.price,
-								prices.currabrev
-						FROM stockmaster
-						LEFT JOIN prices
-							ON stockmaster.stockid=prices.stockid,
+								stockmaster.decimalplaces
+						FROM stockmaster,
 							stockcategory
 						WHERE stockmaster.categoryid=stockcategory.categoryid
 						AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 						AND stockmaster.stockid " . LIKE . " '" . $SearchString . "'
 						AND stockmaster.mbflag <>'G'
 						AND stockmaster.discontinued=0
-						AND ((prices.debtorno='".$_SESSION['Items'.$identifier]->DebtorNo."')
-						OR (prices.debtorno='' AND (SELECT COUNT(stockid) from prices where debtorno='".$_SESSION['Items'.$identifier]->DebtorNo.
-							"' AND stockid=stockmaster.stockid)=0 AND prices.currabrev='".$_SESSION['Items'.$identifier]->DefaultCurrency."')
-						OR (prices.debtorno is NULL OR (prices.debtorno='' AND prices.currabrev<>'".$_SESSION['Items'.$identifier]->DefaultCurrency."')
-							AND (SELECT COUNT(stockid) from prices where debtorno='".$_SESSION['Items'.$identifier]->DebtorNo.
-							"' AND stockid=stockmaster.stockid)=0))
 						ORDER BY stockmaster.stockid";
 			} else {
 				$SQL = "SELECT stockmaster.stockid,
 								stockmaster.description,
 								stockmaster.units as stockunits,
-								prices.units as customerunits,
-								prices.conversionfactor,
-								prices.decimalplaces,
-								prices.price,
-								prices.currabrev
-						FROM stockmaster
-						LEFT JOIN prices
-							ON stockmaster.stockid=prices.stockid,
+								stockmaster.decimalplaces
+						FROM stockmaster,
 							stockcategory
 						WHERE stockmaster.categoryid=stockcategory.categoryid
 						AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
@@ -865,12 +823,6 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 						AND stockmaster.mbflag <>'G'
 						AND stockmaster.discontinued=0
 						AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
-						AND ((prices.debtorno='".$_SESSION['Items'.$identifier]->DebtorNo."')
-						OR (prices.debtorno='' AND (SELECT COUNT(stockid) from prices where debtorno='".$_SESSION['Items'.$identifier]->DebtorNo.
-							"' AND stockid=stockmaster.stockid)=0 AND prices.currabrev='".$_SESSION['Items'.$identifier]->DefaultCurrency."')
-						OR (prices.debtorno is NULL OR (prices.debtorno='' AND prices.currabrev<>'".$_SESSION['Items'.$identifier]->DefaultCurrency."')
-							AND (SELECT COUNT(stockid) from prices where debtorno='".$_SESSION['Items'.$identifier]->DebtorNo.
-							"' AND stockid=stockmaster.stockid)=0))
 						ORDER BY stockmaster.stockid";
 			}
 
@@ -879,51 +831,26 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				$SQL = "SELECT stockmaster.stockid,
 								stockmaster.description,
 								stockmaster.units as stockunits,
-								prices.debtorno,
-								prices.units as customerunits,
-								prices.conversionfactor,
-								prices.decimalplaces,
-								prices.price,
-								prices.currabrev
-						FROM stockmaster
-						LEFT JOIN prices
-							ON stockmaster.stockid=prices.stockid,
+								stockmaster.decimalplaces
+						FROM stockmaster,
 							stockcategory
 						WHERE  stockmaster.categoryid=stockcategory.categoryid
 						AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 						AND stockmaster.mbflag <>'G'
 						AND stockmaster.discontinued=0
-						AND ((prices.debtorno='".$_SESSION['Items'.$identifier]->DebtorNo."')
-						OR (prices.debtorno='' AND (SELECT COUNT(stockid) from prices where debtorno='".$_SESSION['Items'.$identifier]->DebtorNo.
-							"' AND stockid=stockmaster.stockid)=0 AND prices.currabrev='".$_SESSION['Items'.$identifier]->DefaultCurrency."')
-						OR (prices.debtorno is NULL OR (prices.debtorno='' AND prices.currabrev<>'".$_SESSION['Items'.$identifier]->DefaultCurrency."')
-							AND (SELECT COUNT(stockid) from prices where debtorno='".$_SESSION['Items'.$identifier]->DebtorNo.
-							"' AND stockid=stockmaster.stockid)=0))
 						ORDER BY stockmaster.stockid";
 			} else {
 				$SQL = "SELECT stockmaster.stockid,
 								stockmaster.description,
 								stockmaster.units as stockunits,
-								prices.units as customerunits,
-								prices.conversionfactor,
-								prices.decimalplaces,
-								prices.price,
-								prices.currabrev
-						FROM stockmaster
-						LEFT JOIN prices
-							ON stockmaster.stockid=prices.stockid,
+								stockmaster.decimalplaces
+						FROM stockmaster,
 							stockcategory
 						WHERE stockmaster.categoryid=stockcategory.categoryid
 						AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 						AND stockmaster.mbflag <>'G'
 						AND stockmaster.discontinued=0
 						AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
-						AND ((prices.debtorno='".$_SESSION['Items'.$identifier]->DebtorNo."')
-						OR (prices.debtorno='' AND (SELECT COUNT(stockid) from prices where debtorno='".$_SESSION['Items'.$identifier]->DebtorNo.
-							"' AND stockid=stockmaster.stockid)=0 AND prices.currabrev='".$_SESSION['Items'.$identifier]->DefaultCurrency."')
-						OR (prices.debtorno is NULL OR (prices.debtorno='' AND prices.currabrev<>'".$_SESSION['Items'.$identifier]->DefaultCurrency."')
-							AND (SELECT COUNT(stockid) from prices where debtorno='".$_SESSION['Items'.$identifier]->DebtorNo.
-							"' AND stockid=stockmaster.stockid)=0))
 						ORDER BY stockmaster.stockid";
 			  }
 		}
@@ -1726,11 +1653,42 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			$k=0; //row colour counter
 
 			while ($myrow=DB_fetch_array($SearchResult)) {
-				if ($myrow['conversionfactor']=='' or ($myrow['currabrev']<>$_SESSION['Items'.$identifier]->DefaultCurrency)) {
-					$myrow['conversionfactor']=1;
+				$PriceSQL="SELECT currabrev,
+								price,
+								units as customerunits,
+								conversionfactor,
+								decimalplaces as pricedecimal
+							FROM prices
+							WHERE currabrev='".$_SESSION['Items'.$identifier]->DefaultCurrency."'
+								AND stockid='".$myrow['stockid']."'
+								AND debtorno='".$_SESSION['Items'.$identifier]->DebtorNo."'
+								AND '".date('Y-m-d')."' between startdate and enddate";
+				$PriceResult=DB_query($PriceSQL, $db);
+				if (DB_num_rows($PriceResult)==0) {
+					$PriceSQL="SELECT currabrev,
+									price,
+									units as customerunits,
+									conversionfactor,
+									decimalplaces as pricedecimal
+								FROM prices
+								WHERE currabrev='".$_SESSION['Items'.$identifier]->DefaultCurrency."'
+									AND stockid='".$myrow['stockid']."'
+									AND '".date('Y-m-d')."' between startdate and enddate";
+					$PriceResult=DB_query($PriceSQL, $db);
+				}
+				$PriceRow=DB_fetch_array($PriceResult);
+				if (DB_num_rows($PriceResult)==0) {
+					$PriceRow['currabrev']=$_SESSION['Items'.$identifier]->DefaultCurrency;
+					$PriceRow['price']=0;
+					$PriceRow['customerunits']=$myrow['stockunits'];
+					$PriceRow['conversionfactor']=1;
+					$PriceRow['pricedecimal']=2;
+				}
+				if ($PriceRow['conversionfactor']=='' or ($PriceRow['currabrev']<>$_SESSION['Items'.$identifier]->DefaultCurrency)) {
+					$PriceRow['conversionfactor']=1;
 				}
 				// Find the quantity in stock at location
-				if ($myrow['decimalplaces']=='' or ($myrow['currabrev']<>$_SESSION['Items'.$identifier]->DefaultCurrency)) {
+				if ($myrow['decimalplaces']=='' or ($PriceRow['currabrev']<>$_SESSION['Items'.$identifier]->DefaultCurrency)) {
 					$DecimalPlacesSQL="SELECT decimalplaces
 										FROM stockmaster
 										WHERE stockid='" .$myrow['stockid'] . "'";
@@ -1747,7 +1705,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 									   loccode = '" . $_SESSION['Items'.$identifier]->Location . "'";
 				$QOHResult =  DB_query($QOHSQL,$db);
 				$QOHRow = DB_fetch_array($QOHResult);
-				$QOH = $QOHRow['qoh']/$myrow['conversionfactor'];
+				$QOH = $QOHRow['qoh']/$PriceRow['conversionfactor'];
 
 				// Find the quantity on outstanding sales orders
 				$sql = "SELECT SUM(salesorderdetails.quantity-salesorderdetails.qtyinvoiced)*salesorderdetails.conversionfactor AS dem
@@ -1764,7 +1722,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 				$DemandRow = DB_fetch_row($DemandResult);
 				if ($DemandRow[0] != null){
-				  $DemandQty =  $DemandRow[0]/$myrow['conversionfactor'];
+				  $DemandQty =  $DemandRow[0]/$PriceRow['conversionfactor'];
 				} else {
 				  $DemandQty = 0;
 				}
@@ -1810,27 +1768,27 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 					$k=1;
 				}
 				$OnOrder = $PurchQty + $WoQty;
-				$Available = $QOH - $DemandQty + $OnOrder/$myrow['conversionfactor'];
-				if ($myrow['customerunits']=='' or ($myrow['currabrev']<>$_SESSION['Items'.$identifier]->DefaultCurrency)) {
+				$Available = $QOH - $DemandQty + $OnOrder/$PriceRow['conversionfactor'];
+				if ($PriceRow['customerunits']=='' or ($PriceRow['currabrev']<>$_SESSION['Items'.$identifier]->DefaultCurrency)) {
 					$myrow['units']=$myrow['stockunits'];
 				} else {
-					$myrow['units']=$myrow['customerunits'];
+					$myrow['units']=$PriceRow['customerunits'];
 				}
-				if ($myrow['currabrev']<>$_SESSION['Items'.$identifier]->DefaultCurrency) {
-					$myrow['price']=0;
+				if($PriceRow['currabrev']<>$_SESSION['Items'.$identifier]->DefaultCurrency) {
+					$PriceRow['price']=0;
 				}
 				echo '<td>'.$myrow['stockid'].'</font></td>
 							<td>'.$myrow['description'].'</td>
 							<td>'.$myrow['units'].'</td>
 							<td class="number">'.number_format($QOH,$DecimalPlaces).'</td>
 							<td class="number">'.number_format($DemandQty,$DecimalPlaces).'</td>
-							<td class="number">'.number_format($OnOrder/$myrow['conversionfactor'],$DecimalPlaces).'</td>
+							<td class="number">'.number_format($PriceRow['conversionfactor'],$DecimalPlaces).'</td>
 							<td class="number">'.number_format($Available,$DecimalPlaces).'</td>
 							<td><font size=1><input class="number"  tabindex='.number_format($j+7).' type="textbox" size=6 name="itm'.$myrow['stockid'].'" value=0>
-							<td class="number">'.number_format($myrow['price'],2).'</td>
+							<td class="number">'.number_format($PriceRow['price'],2).'</td>
 							</td>
 							</tr>';
-				echo '<input type="hidden" name="ConversionFactor'.$myrow['stockid'].'" value="' . $myrow['conversionfactor'] . '" />';
+				echo '<input type="hidden" name="ConversionFactor'.$myrow['stockid'].'" value="' . $PriceRow['conversionfactor'] . '" />';
 				echo '<input type="hidden" name="Units'.$myrow['stockid'].'" value="' . $myrow['units'] . '" />';
 				if ($j==1) {
 					$jsCall = '<script  type="text/javascript">if (document.SelectParts) {defaultControl(document.SelectParts.itm'.$myrow['stockid'].');}</script>';
