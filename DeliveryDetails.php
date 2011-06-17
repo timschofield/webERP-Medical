@@ -766,8 +766,8 @@ if (isset($_SESSION['Items'.$identifier]->SpecialInstructions) and strlen($_SESS
 	prnMsg($_SESSION['Items'.$identifier]->SpecialInstructions,'info');
 }
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Delivery') . '" alt="" />' . ' ' . _('Delivery Details') . '</p>';
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') . '" alt="" />' . ' ' . _('Customer Code') . ' :<b> ' . $_SESSION['Items'.$identifier]->DebtorNo . '</p>';
-echo '</b>&nbsp;' . _('Customer Name') . ' :<b> ' . $_SESSION['Items'.$identifier]->CustomerName;
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') . '" alt="" />' . ' ' . _('Customer Code') . ' :<b> ' . $_SESSION['Items'.$identifier]->DebtorNo . '<br />';
+echo '</b>&nbsp;' . _('Customer Name') . ' :<b> ' . $_SESSION['Items'.$identifier]->CustomerName . '</p>';
 //echo '<font size=4><b>'. _('Customer') .' : ' . $_SESSION['Items'.$identifier]->CustomerName . '</b></font>';
 echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID.'identifier='.$identifier  . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -776,24 +776,21 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 /*Display the order with or without discount depending on access level*/
 if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 
-	echo '<div class="centre"><b>';
-
+	echo '<table cellpading=2 class="selection">';
 	if ($_SESSION['Items'.$identifier]->Quotation==1){
-		echo _('Quotation Summary');
+		echo '<tr<th colspan=7><font size=2 color="navy">'._('Quotation Summary').'</font></th></tr>';
 	} else {
-		echo _('Order Summary');
+		echo '<tr<th colspan=7><font size=2 color="navy">'._('Order Summary').'</font></th></tr>';
 	}
-	echo '</b></div>
-	<table cellpading=2 colspan=7>
-	<tr>
-		<th>'. _('Item Code') .'</th>
-		<th>'. _('Item Description') .'</th>
-		<th>'. _('Quantity') .'</th>
-		<th>'. _('Unit') .'</th>
-		<th>'. _('Price') .'</th>
-		<th>'. _('Discount') .' %</th>
-		<th>'. _('Total') .'</th>
-	</tr>';
+	echo '<tr>
+			<th>'. _('Item Code') .'</th>
+			<th>'. _('Item Description') .'</th>
+			<th>'. _('Quantity') .'</th>
+			<th>'. _('Unit') .'</th>
+			<th>'. _('Price') .'</th>
+			<th>'. _('Discount') .' %</th>
+			<th>'. _('Total') .'</th>
+		</tr>';
 
 	$_SESSION['Items'.$identifier]->total = 0;
 	$_SESSION['Items'.$identifier]->totalVolume = 0;
@@ -835,15 +832,15 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 	echo '<tr class="EvenTableRows">
 		<td colspan=6 class=number><b>'. _('TOTAL Excl Tax/Freight') .'</b></td>
 		<td class=number>'.$DisplayTotal.'</td>
-	</tr></table>';
+	</tr>';
 
 	$DisplayVolume = number_format($_SESSION['Items'.$identifier]->totalVolume,2);
 	$DisplayWeight = number_format($_SESSION['Items'.$identifier]->totalWeight,2);
-	echo '<br /><table><tr class="EvenTableRows">
+	echo '<br /><tr class="EvenTableRows"><td colspan=3></td>
 		<td>'. _('Total Weight') .':</td>
-		<td>'.$DisplayWeight.'</td>
+		<td class="number">'.$DisplayWeight.'</td>
 		<td>'. _('Total Volume') .':</td>
-		<td>'.$DisplayVolume.'</td>
+		<td class="number">'.$DisplayVolume.'</td>
 	</tr></table>';
 
 } else {
@@ -909,10 +906,12 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 
 }
 
-echo '<br /><table  class=selection><tr>
-	<td>'. _('Deliver To') .':</td>
-	<td><input type=text size=42 maxlength=40 name="DeliverTo" value="' . $_SESSION['Items'.$identifier]->DeliverTo . '"></td>
-</tr>';
+echo '<br /><table  class=selection>';
+echo '<tr><th colspan=2><font color="navy" size=3>'._('Delivery Details').'</font></th></tr>';
+echo '<tr>
+		<td>'. _('Deliver To') .':</td>
+		<td><input type=text size=42 maxlength=40 name="DeliverTo" value="' . $_SESSION['Items'.$identifier]->DeliverTo . '"></td>
+	</tr>';
 
 echo '<tr>
 	<td>'. _('Deliver from the warehouse at') .':</td>
