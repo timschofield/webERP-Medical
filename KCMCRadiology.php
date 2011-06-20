@@ -67,7 +67,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 													'" . $_POST['Price'] . "',
 													'1',
 													'0',
-													'" . _('Sales order for patient admission transaction') . "',
+													'" . _('Sales order for radiology test transaction') . "',
 													'" . Date('Y-m-d') . "',
 													'" . Date('Y-m-d') . "',
 													'1',
@@ -111,7 +111,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 				'" . $_POST['Price'] . "',
 				'0',
 				'1',
-				'" . _('Invoice for admission of Patient number').' '.$_POST['PatientNo'] . "',
+				'" . _('Invoice for radiology test for patient number').' '.$_POST['PatientNo'] . "',
 				'" . $_POST['InsuranceRef'] . "',
 				'1',
 				'" . $_POST['Received'] . "')";
@@ -143,7 +143,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 						'" . $_POST['PatientNo'] . "',
 						'" . $_POST['BranchNo'] . "',
 						'" . $PeriodNo . "',
-						'" . _('Invoice for admission of Patient number').' '.$_POST['PatientNo'] . "',
+						'" . _('Invoice for radiology test for patient number').' '.$_POST['PatientNo'] . "',
 						-1,
 						'" . $_POST['Price'] . "',
 						1,
@@ -170,7 +170,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 									'" . $PeriodNo . "',
 									'" . $SalesGLAccounts['salesglcode'] . "',
 									'" . $_SESSION['DefaultTag'] . "',
-									'" . _('Invoice for admission of Patient number').' '.$_POST['PatientNo'] . "',
+									'" . _('Invoice for radiology test for patient number').' '.$_POST['PatientNo'] . "',
 									'" . -$_POST['Price'] . "')";
 
 	$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The cost of sales GL posting could not be inserted because');
@@ -191,7 +191,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 									'" . $PeriodNo . "',
 									'" . $_SESSION['CompanyRecord']['debtorsact'] . "',
 									'" . $_SESSION['DefaultTag'] . "',
-									'" . _('Invoice for admission of Patient number').' '.$_POST['PatientNo'] . "',
+									'" . _('Invoice for radiology test for patient number').' '.$_POST['PatientNo'] . "',
 									'" . $_POST['Price'] . "')";
 
 	$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The stock side of the cost of sales GL posting could not be inserted because');
@@ -216,7 +216,7 @@ if (isset($_POST['SubmitCash'])) {
 			'" . $PeriodNo . "',
 			'" . $_POST['BankAccount'] . "',
 			'" . $_SESSION['DefaultTag'] . "',
-			'" . _('Payment of invoice for admission of Patient number').' '.$_POST['PatientNo'] . "',
+			'" . _('Invoice for radiology test for patient number').' '.$_POST['PatientNo'] . "',
 			'" . ($_POST['Received']) . "')";
 	$DbgMsg = _('The SQL that failed to insert the GL transaction for the bank account debit was');
 	$ErrMsg = _('Cannot insert a GL transaction for the bank account debit');
@@ -237,7 +237,7 @@ if (isset($_POST['SubmitCash'])) {
 			'" . $PeriodNo . "',
 			'" . $_SESSION['CompanyRecord']['debtorsact'] . "',
 			'" . $_SESSION['DefaultTag'] . "',
-			'" . _('Payment of invoice for admission of Patient number').' '.$_POST['PatientNo'] . "',
+			'" . _('Invoice for radiology test for patient number').' '.$_POST['PatientNo'] . "',
 			'" . -($_POST['Received']) . "')";
 	$DbgMsg = _('The SQL that failed to insert the GL transaction for the debtors account credit was');
 	$ErrMsg = _('Cannot insert a GL transaction for the debtors account credit');
@@ -256,7 +256,7 @@ if (isset($_POST['SubmitCash'])) {
 		VALUES (12,
 			'" . $ReceiptNumber . "',
 			'" . $_POST['BankAccount'] . "',
-			'" . _('Payment of invoice for admission of Patient number').' '.$_POST['PatientNo'] . "',
+			'" . _('Invoice for radiology test for patient number').' '.$_POST['PatientNo'] . "',
 			'1',
 			'1',
 			'" . date('Y-m-d H-i-s') . "',
@@ -289,7 +289,7 @@ if (isset($_POST['SubmitCash'])) {
 			'1',
 			'" . -$_POST['Received'] . "',
 			'" . -$_POST['Received'] . "',
-			'" . _('Payment of invoice for admission of Patient number').' '.$_POST['PatientNo'] . "'
+			'" . _('Invoice for radiology test for patient number').' '.$_POST['PatientNo'] . "'
 		)";
 
 	prnMsg( _('The transaction has been successfully posted'), 'success');
@@ -568,8 +568,8 @@ if (isset($_POST['Patient'])) {
 	echo '<input type="hidden" name="BranchNo" value="'.$Patient[1].'" />';
 	echo '<table class="selection">';
 	echo '<tr><th colspan="2"><font size="3" color="navy">'._('Patient ID').' - '.$Patient[0].'</font></th></tr>';
-	echo '<tr><td>'._('Date of Admission').':</td>
-		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="AdmissionDate" maxlength="10" size="11" value="' .
+	echo '<tr><td>'._('Date of Test').':</td>
+		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="TestDate" maxlength="10" size="11" value="' .
 					 date($_SESSION['DefaultDateFormat']) . '" /></td></tr>';
 	echo '<tr><td>'._('Type of test').':</td>';
 	$sql="SELECT stockid,
