@@ -17,13 +17,14 @@ include('includes/GetSalesTransGLCodes.inc');
 
 if (empty($_GET['identifier'])) {
 	$identifier=date('U');
+	$_POST['PartSearch']=True;
 } else {
 	$identifier=$_GET['identifier'];
 }
 if (isset($_SESSION['Items'.$identifier])){
 	//update the Items object variable with the data posted from the form
 	$_SESSION['Items'.$identifier]->CustRef = _('Cash Sale');
-	$_SESSION['Items'.$identifier]->Comments = _('Cash Sale') . ' ' . DATE($_SESSION['DefaultDateFormat']);
+	$_SESSION['Items'.$identifier]->Comments = _('Cash sale on') . ' ' . date($_SESSION['DefaultDateFormat']);
 }
 
 if (isset($_POST['QuickEntry'])){
@@ -32,7 +33,36 @@ if (isset($_POST['QuickEntry'])){
 
 if (isset($_POST['OrderItems'])){
 	foreach ($_POST as $key => $value) {
-		if (strstr($key,'itm')) {
+		if (strstr($key,'itm') and strstr($key,'batch')) {
+			$key=str_replace('~', ' ', trim($key));
+			$sql="SELECT quantity
+						FROM stockserialitems
+						WHERE stockid='".substr($key,3, strpos($key, 'batch')-3)."'
+							AND serialno='".trim(substr($key, strpos($key, 'batch')+5))."'";
+			$BatchQuantityResult=DB_query($sql, $db);
+			$BatchQuantityRow=DB_fetch_array($BatchQuantityResult);
+			if (!isset($NewItemArray[substr($key,3, strpos($key, 'batch')-3)])) {
+				if ($BatchQuantityRow['quantity']<trim($value)) {
+					prnMsg( _('Batch number').' '.trim(substr($key, strpos($key, 'batch')+5)).' '.
+						_('of item number').' '.substr($key,3, strpos($key, 'batch')-3).' '.
+							_('has insufficient items remaining in it to complete this sale').$BatchQuantityRow['quantity'].'x'.$value, 'info');
+				} else {
+					$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Quantity'] = trim($value);
+					$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Batch']['Number'][] = trim(substr($key, strpos($key, 'batch')+5));
+					$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Batch']['Quantity'][] = trim($value);
+				}
+			} else {
+				if ($BatchQuantityRow['quantity']<trim($value)+$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Quantity']) {
+					prnMsg( _('Batch number').' '.trim(substr($key, strpos($key, 'batch')+5)).' '.
+						_('of item number').' '.substr($key,3, strpos($key, 'batch')-3).' '.
+							_('has insufficient items remaining in it to complete this sale'), 'info');
+				} else {
+					$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Quantity'] += trim($value);
+					$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Batch']['Number'][] = trim(substr($key, strpos($key, 'batch')+5));
+					$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Batch']['Quantity'][] = trim($value);
+				}
+			}
+		} elseif (strstr($key,'itm')) {
 			$NewItemArray[substr($key,3)] = trim($value);
 		}
 	}
@@ -115,6 +145,8 @@ if (!isset($_SESSION['Items'.$identifier])){
 		$result =DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
 		$myrow = DB_fetch_array($result);
+//		$SalesType=$myrow['salestype'];
+
 		if ($myrow['dissallowinvoices'] != 1){
 			if ($myrow['dissallowinvoices']==2){
 				prnMsg($myrow['name'] . ' ' . _('Although this account is defined as the cash sale account for the location.  The account is currently flagged as an account that needs to be watched. Please contact the credit control personnel to discuss'),'warn');
@@ -238,7 +270,6 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 					WHERE stockmaster.categoryid=stockcategory.categoryid
 					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 					AND stockmaster.mbflag <>'G'
-					AND stockmaster.controlled <> 1
 					AND stockmaster.description " . LIKE . " '" . $SearchString . "'
 					AND stockmaster.discontinued=0
 					ORDER BY stockmaster.stockid";
@@ -250,7 +281,6 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 					WHERE  stockmaster.categoryid=stockcategory.categoryid
 					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 					AND stockmaster.mbflag <>'G'
-					AND stockmaster.controlled <> 1
 					AND stockmaster.discontinued=0
 					AND stockmaster.description " . LIKE . " '" . $SearchString . "'
 					AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
@@ -265,25 +295,25 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 		if ($_POST['StockCat']=='All'){
 			$SQL = "SELECT stockmaster.stockid,
 							stockmaster.description,
-							stockmaster.units
+							stockmaster.units,
+							stockmaster.controlled
 					FROM stockmaster, stockcategory
 					WHERE stockmaster.categoryid=stockcategory.categoryid
 					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 					AND stockmaster.stockid " . LIKE . " '" . $SearchString . "'
 					AND stockmaster.mbflag <>'G'
-					AND stockmaster.controlled <> 1
 					AND stockmaster.discontinued=0
 					ORDER BY stockmaster.stockid";
 		} else {
 			$SQL = "SELECT stockmaster.stockid,
 							stockmaster.description,
-							stockmaster.units
+							stockmaster.units,
+							stockmaster.controlled
 					FROM stockmaster, stockcategory
 					WHERE stockmaster.categoryid=stockcategory.categoryid
 					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 					AND stockmaster.stockid " . LIKE . " '" . $SearchString . "'
 					AND stockmaster.mbflag <>'G'
-					AND stockmaster.controlled <> 1
 					AND stockmaster.discontinued=0
 					AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
 					ORDER BY stockmaster.stockid";
@@ -293,23 +323,22 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 		if ($_POST['StockCat']=='All'){
 			$SQL = "SELECT stockmaster.stockid,
 							stockmaster.description,
-							stockmaster.units
+							stockmaster.units,
+							stockmaster.controlled
 					FROM stockmaster, stockcategory
 					WHERE  stockmaster.categoryid=stockcategory.categoryid
 					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
-					AND stockmaster.mbflag <>'G'
-					AND stockmaster.controlled <> 1
 					AND stockmaster.discontinued=0
 					ORDER BY stockmaster.stockid";
 		} else {
 			$SQL = "SELECT stockmaster.stockid,
 							stockmaster.description,
-							stockmaster.units
+							stockmaster.units,
+							stockmaster.controlled
 					FROM stockmaster, stockcategory
 					WHERE stockmaster.categoryid=stockcategory.categoryid
 					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 					AND stockmaster.mbflag <>'G'
-					AND stockmaster.controlled <> 1
 					AND stockmaster.discontinued=0
 					AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
 					ORDER BY stockmaster.stockid";
@@ -335,9 +364,9 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 		prnMsg (_('There are no products available meeting the criteria specified'),'info');
 	}
 	if (DB_num_rows($SearchResult)==1){
-		$myrow=DB_fetch_array($SearchResult);
+/*		$myrow=DB_fetch_array($SearchResult);
 		$NewItem = $myrow['stockid'];
-		DB_data_seek($SearchResult,0);
+		DB_data_seek($SearchResult,0);*/
 	}
 	if (DB_num_rows($SearchResult)< $_SESSION['DisplayRecordsMax']){
 		$Offset=0;
@@ -445,8 +474,6 @@ if ($_SESSION['Items'.$identifier]->DefaultCurrency != $_SESSION['CompanyRecord'
 
 			} else if ($myrow['mbflag']=='G'){
 				prnMsg(_('Phantom assemblies cannot be sold, these items exist only as bills of materials used in other manufactured items. The following item has not been added to the order:') . ' ' . $NewItem, 'warn');
-			} else if ($myrow['controlled']==1){
-				prnMsg(_('The system does not currently cater for counter sales of lot controlled or serialised items'),'warn');
 			} else { /*Its not a kit set item*/
 				include('includes/SelectOrderItems_IntoCart.inc');
 			}
@@ -609,7 +636,8 @@ Now figure out if the item is a kit set - the field MBFlag='K'
 if (isset($NewItemArray) and isset($_POST['OrderItems'])){
 /* get the item details from the database and hold them in the cart object make the quantity 1 by default then add it to the cart */
 /*Now figure out if the item is a kit set - the field MBFlag='K'*/
-	foreach($NewItemArray as $NewItem => $NewItemQty) {
+	foreach($NewItemArray as $NewItem => $NewItemArray) {
+		$NewItemQty=$NewItemArray['Quantity'];
 		if($NewItemQty > 0)	{
 			$sql = "SELECT stockmaster.mbflag
 							FROM stockmaster
@@ -648,7 +676,13 @@ if (isset($NewItemArray) and isset($_POST['OrderItems'])){
 					$NewItemDue = date($_SESSION['DefaultDateFormat']);
 					$NewPOLine = 0;
 					include('includes/SelectOrderItems_IntoCart.inc');
-					$_SESSION['Items'.$identifier]->GetTaxes(($_SESSION['Items'.$identifier]->LineCounter - 1));
+					if ($_SESSION['Items'.$identifier]->LineCounter>0 and
+							$_SESSION['Items'.$identifier]->LineItems[$_SESSION['Items'.$identifier]->LineCounter - 1]->Controlled==1) {
+						$_SESSION['Items'.$identifier]->LineItems[$_SESSION['Items'.$identifier]->LineCounter - 1]->SerialItems=$NewItemArray['Batch'];
+					}
+					if ($_SESSION['Items'.$identifier]->LineCounter>0) {
+						$_SESSION['Items'.$identifier]->GetTaxes(($_SESSION['Items'.$identifier]->LineCounter - 1));
+					}
 				}
 			} /* end of if its a new item */
 		} /*end of if its a new item */
@@ -743,10 +777,10 @@ if (count($_SESSION['Items'.$identifier]->LineItems)>0 and !isset($_POST['Proces
 		echo '<td><a target="_blank" href="' . $rootpath . '/StockStatus.php?' . SID .'identifier='.$identifier . '&amp;StockID=' . $OrderLine->StockID . '&amp;DebtorNo=' . $_SESSION['Items'.$identifier]->DebtorNo . '">' . $OrderLine->StockID . '</a></td>
 			<td>' . $OrderLine->ItemDescription . '</td>';
 
-		echo '<td><input class="number" tabindex="2" type="text" name="Quantity_' . $OrderLine->LineNumber . '" size="6" maxlength="6" value="' . $OrderLine->Quantity . '" />';
+		echo '<td><input class="number" tabindex="2" type="text" name="Quantity_' . ($OrderLine->LineNumber) . '" size="6" maxlength="6" value="' . ($OrderLine->Quantity) . '" />';
 
 		echo '</td>
-				<td class="number">' . $OrderLine->QOHatLoc . '</td>
+				<td class="number">' . number_format($OrderLine->QOHatLoc/$OrderLine->ConversionFactor,0) . '</td>
 				<td>' . $OrderLine->Units . '</td>';
 
 		echo '<td><input class="number" type="text" name="Price_' . $OrderLine->LineNumber . '" size="16" maxlength="16" value="' . $OrderLine->Price . '" /></td>
@@ -829,9 +863,11 @@ if (count($_SESSION['Items'.$identifier]->LineItems)>0 and !isset($_POST['Proces
 	//now the payment stuff in this column
 	$PaymentMethodsResult = DB_query("SELECT paymentid, paymentname FROM paymentmethods",$db);
 
+	$_POST['PaymentMethod']='Cash';
+
 	echo '<tr><td>' . _('Payment Type') . ':</td><td><select name="PaymentMethod">';
 	while ($PaymentMethodRow = DB_fetch_array($PaymentMethodsResult)){
-		if (isset($_POST['PaymentMethod']) and $_POST['PaymentMethod']	== $PaymentMethodRow['paymentid']){
+		if (isset($_POST['PaymentMethod']) and $_POST['PaymentMethod']	== $PaymentMethodRow['paymentname']){
 			echo '<option selected="True" value="' . $PaymentMethodRow['paymentid'] . '">' . $PaymentMethodRow['paymentname'] . '</option>';
 		} else {
 			echo '<option value="' . $PaymentMethodRow['paymentid'] . '">' . $PaymentMethodRow['paymentname'] . '</option>';
@@ -851,10 +887,9 @@ if (count($_SESSION['Items'.$identifier]->LineItems)>0 and !isset($_POST['Proces
 	}
 	echo '</select></td></tr>';
 
-	if (!isset($_POST['AmountPaid'])){
-		$_POST['AmountPaid'] =0;
-	}
-	echo '<tr><td>' . _('Amount Paid') . ':</td><td><input type="text" class="number" name="AmountPaid" maxlength="12" size="12" value="' . ($_SESSION['Items'.$identifier]->total+$TaxTotal) . '" /></td></tr>';
+	$_POST['AmountPaid'] =($_SESSION['Items'.$identifier]->total+$TaxTotal);
+
+	echo '<tr><td>' . _('Amount Paid') . ':</td><td><input type="text" class="number" name="AmountPaid" maxlength="12" size="12" value="' . $_POST['AmountPaid'] . '" /></td></tr>';
 
 	echo '</table>'; //end the sub table in the second column of master table
 	echo '</th></tr></table>';	//end of column/row/master table
@@ -897,7 +932,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 			$Result = DB_query($SQL,$db,$ErrMsg);
 			$CheckNegRow = DB_fetch_array($Result);
 			if ($CheckNegRow['mbflag']=='B' OR $CheckNegRow['mbflag']=='M'){
-				if ($CheckNegRow['quantity'] < $OrderLine->Quantity){
+				if ($CheckNegRow['quantity'] < ($OrderLine->Quantity*$OrderLine->ConversionFactor)){
 					prnMsg( _('Invoicing the selected order would result in negative stock. The system parameters are set to prohibit negative stocks from occurring. This invoice cannot be created until the stock on hand is corrected.'),'error',$OrderLine->StockID . ' ' . $CheckNegRow['description'] . ' - ' . _('Negative Stock Prohibited'));
 					$NegativesFound = true;
 				}
@@ -1298,7 +1333,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 				}
 
 				$SQL = "UPDATE locstock
-							SET quantity = locstock.quantity - " . $OrderLine->Quantity . "
+							SET quantity = locstock.quantity - " . $OrderLine->Quantity*$OrderLine->ConversionFactor . "
 							WHERE locstock.stockid = '" . $OrderLine->StockID . "'
 							AND loccode = '" . $_SESSION['Items'.$identifier]->Location . "'";
 
@@ -1431,10 +1466,10 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 												'" . $LocalCurrencyPrice . "',
 												'" . $PeriodNo . "',
 												'" . $OrderNo . "',
-												'" . -$OrderLine->Quantity . "',
+												'" . -$OrderLine->Quantity*$OrderLine->ConversionFactor . "',
 												'" . $OrderLine->DiscountPercent . "',
 												'" . $OrderLine->StandardCost . "',
-												'" . ($QtyOnHandPrior - $OrderLine->Quantity) . "',
+												'" . ($QtyOnHandPrior - $OrderLine->Quantity)*$OrderLine->ConversionFactor . "',
 												'" . DB_escape_string($OrderLine->Narrative) . "' )";
 			} else {
 			// its an assembly or dummy and assemblies/dummies always have nil stock (by definition they are made up at the time of dispatch  so new qty on hand will be nil
@@ -1466,7 +1501,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 												'" . $LocalCurrencyPrice . "',
 												'" . $PeriodNo . "',
 												'" . $OrderNo . "',
-												'" . -$OrderLine->Quantity . "',
+												'" . -$OrderLine->Quantity*$OrderLine->ConversionFactor . "',
 												'" . $OrderLine->DiscountPercent . "',
 												'" . $OrderLine->StandardCost . "',
 												'" . DB_escape_string($OrderLine->Narrative) . "')";
@@ -1478,6 +1513,32 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 
 		/*Get the ID of the StockMove... */
 			$StkMoveNo = DB_Last_Insert_ID($db,'stockmoves','stkmoveno');
+
+			foreach ($OrderLine->SerialItems['Number'] as $i => $SerialItemNumber) {
+				$Batch[$SerialItemNumber]=$OrderLine->SerialItems['Quantity'][$i];
+				$SQL="UPDATE stockserialitems
+						SET quantity=quantity-".$OrderLine->SerialItems['Quantity'][$i]*$OrderLine->ConversionFactor."
+						WHERE stockid='".$OrderLine->StockID."'
+							AND serialno='".$SerialItemNumber."'";
+				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Batch numbers could not be updated');
+				$DbgMsg = _('The following SQL to update the stock batch record was used');
+				$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+
+				$SQL="INSERT INTO stockserialmoves
+									(stockmoveno,
+									stockid,
+									serialno,
+									moveqty)
+								VALUES (
+									'" . $StkMoveNo . "',
+									'" . $OrderLine->StockID . "',
+									'" . $SerialItemNumber . "',
+									'" . -$OrderLine->SerialItems['Quantity'][$i]*$OrderLine->ConversionFactor . "'
+								)";
+				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Batch numbers could not be updated');
+				$DbgMsg = _('The following SQL to insert the stock batch movement was used');
+				$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+			}
 
 		/*Insert the taxes that applied to this line */
 			foreach ($OrderLine->Taxes as $Tax) {
@@ -1956,7 +2017,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 		echo '<br /><div class="centre">';
 
 		if ($_SESSION['InvoicePortraitFormat']==0){
-			echo '<img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print') . '" alt="" />' . ' ' . '<a target="_blank" href="'.$rootpath.'/PrintCustTrans.php?' . SID . 'FromTransNo='.$InvoiceNo.'&amp;InvOrCredit=Invoice&amp;PrintPDF=True">'. _('Print this invoice'). ' (' . _('Landscape') . ')</a><br /><br />';
+			echo '<img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print') . '" alt="" />' . ' ' . '<a target="_blank" href="'.$rootpath.'/PDFReceipt.php?FromTransNo='.$InvoiceNo.'&amp;InvOrCredit=Invoice&amp;PrintPDF=True">'. _('Print this receipt'). '</a><br /><br />';
 		} else {
 			echo '<img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print') . '" alt="" />' . ' ' . '<a target="_blank" href="'.$rootpath.'/PrintCustTransPortrait.php?' . SID . 'FromTransNo='.$InvoiceNo.'&amp;InvOrCredit=Invoice&amp;PrintPDF=True">'. _('Print this invoice'). ' (' . _('Portrait') . ')</a><br /><br />';
 		}
@@ -1972,6 +2033,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
  * end of Invoice Processing
  * *****************************
 */
+
 // This code needs sorting out, but until then :
 $ImageSource = _('No Image');
 
@@ -1989,6 +2051,7 @@ if (!isset($_POST['ProcessSale'])){
 			$SQL="SELECT stockmaster.units,
 						stockmaster.description,
 						stockmaster.stockid,
+						stockmaster.controlled,
 						salesorderdetails.stkcode,
 						SUM(qtyinvoiced) Sales
 				  FROM salesorderdetails INNER JOIN stockmaster
@@ -2108,7 +2171,7 @@ if (!isset($_POST['ProcessSale'])){
 						$rootpath,
 						SID,
 						$myrow['stockid']);
-						
+
 				echo '<input type="hidden" name="Units' . $myrow['stockid'] . '" value="' . $myrow['units'] . '" />';
 
 				if ($j==1) {
@@ -2180,84 +2243,64 @@ if (!isset($_POST['ProcessSale'])){
 			$j = 1;
 			echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID .'identifier='.$identifier . '" method="post" name="orderform">';
 			echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-			echo '<table class="table1">';
-			echo '<tr><td><input type="hidden" name="previous" value="'.number_format($Offset-1).'" /><input tabindex="'.number_format($j+7).'" type="submit" name="Prev" value="'._('Prev').'" /></td>';
+			echo '<table class="selection">';
+			echo '<tr><td><input type="hidden" name="previous" value="'.number_format($Offset-1).'" />
+				<input tabindex="'.number_format($j+7).'" type="submit" name="Prev" value="'._('Prev').'" /></td>';
 			echo '<td style="text-align:center" colspan="6"><input type="hidden" name="OrderItems" value="1" /><input tabindex="'.number_format($j+8).'" type="submit" value="'._('Add to Sale').'" /></td>';
-			echo '<td><input type="hidden" name="NextList" value="'.number_format($Offset+1).'" /><input tabindex="'.number_format($j+9).'" type="submit" name="Next" value="'._('Next').'" /></td></tr>';
+			echo '<td><input type="hidden" name="NextList" value="'.number_format($Offset+1).'" />
+				<input tabindex="'.number_format($j+9).'" type="submit" name="Next" value="'._('Next').'" /></td></tr>';
 			$TableHeader = '<tr><th>' . _('Code') . '</th>
-					   			<th>' . _('Description') . '</th>
-					   			<th>' . _('Units') . '</th>
-					   			<th>' . _('On Hand') . '</th>
-					   			<th>' . _('On Demand') . '</th>
-					   			<th>' . _('On Order') . '</th>
-					   			<th>' . _('Available') . '</th>
-					   			<th>' . _('Quantity') . '</th></tr>';
+								<th>' . _('Description') . '</th>
+								<th>' . _('Units') . '</th>
+								<th>' . _('On Hand') . '</th>
+								<th>' . _('Quantity') . '</th>
+								<th>' . _('Batch No') . '</th>
+								<th>' . _('Batch Qty') . '</th>
+								<th>' . _('Expiry Date') . '</th>
+							</tr>';
 			echo $TableHeader;
 
 			$k=0; //row colour counter
 
 			while ($myrow=DB_fetch_array($SearchResult)) {
 
+				$PricesSQL="SELECT price,
+									units,
+									conversionfactor,
+									decimalplaces
+								FROM prices
+								WHERE stockid='".$myrow['stockid']."'
+									AND typeabbrev='".$_SESSION['Items'.$identifier]->DefaultSalesType."'
+									AND '".date('Y-m-d')."' BETWEEN startdate and enddate";
+				$PricesResult = DB_query($PricesSQL, $db);
+				if (DB_num_rows($PricesResult)>0) {
+					$PricesRow = DB_fetch_array($PricesResult);
+					$myrow['price']=$PricesRow['price'];
+					$myrow['units']=$PricesRow['units'];
+					$myrow['conversionfactor']=$PricesRow['conversionfactor'];
+				} else {
+					$myrow['conversionfactor']=1;
+				}
+
 				// Find the quantity in stock at location
 				$QOHSql = "SELECT sum(quantity) AS QOH,
 													stockmaster.decimalplaces
 										FROM locstock INNER JOIN stockmaster
+										 ON stockmaster.stockid=locstock.stockid
 										WHERE locstock.stockid='" .$myrow['stockid'] . "'
 										AND loccode = '" . $_SESSION['Items'.$identifier]->Location . "'";
 				$QOHResult =  DB_query($QOHSql,$db);
 				$QOHRow = DB_fetch_array($QOHResult);
-				$QOH = $QOHRow['QOH'];
+				$QOH = $QOHRow['QOH']/$myrow['conversionfactor'];
 
-				// Find the quantity on outstanding sales orders
-				$sql = "SELECT SUM(salesorderdetails.quantity-salesorderdetails.qtyinvoiced) AS dem
-								 FROM salesorderdetails INNER JOIN salesorders
-								 ON salesorders.orderno = salesorderdetails.orderno
-								 WHERE salesorders.fromstkloc='" . $_SESSION['Items'.$identifier]->Location . "'
-								 AND salesorderdetails.completed=0
-								 AND salesorders.quotation=0
-								 AND salesorderdetails.stkcode='" . $myrow['stockid'] . "'";
-
-				$ErrMsg = _('The demand for this product from') . ' ' . $_SESSION['Items'.$identifier]->Location . ' ' . _('cannot be retrieved because');
-				$DemandResult = DB_query($sql,$db,$ErrMsg);
-
-				$DemandRow = DB_fetch_row($DemandResult);
-				if ($DemandRow[0] != null){
-				  $DemandQty =  $DemandRow[0];
-				} else {
-				  $DemandQty = 0;
-				}
-
-				// Find the quantity on purchase orders
-				$sql = "SELECT SUM(purchorderdetails.quantityord-purchorderdetails.quantityrecd) AS QOO
-							 FROM purchorderdetails INNER JOIN purchorders
-							 WHERE purchorderdetails.completed=0
-							 AND purchorders.status <>'Cancelled'
-							 AND purchorders.status <>'Rejected'
-							AND purchorderdetails.itemcode='" . $myrow['stockid'] . "'";
-
-				$ErrMsg = _('The order details for this product cannot be retrieved because');
-				$PurchResult = db_query($sql,$db,$ErrMsg);
-
-				$PurchRow = db_fetch_row($PurchResult);
-				if ($PurchRow[0]!=null){
-					$PurchQty =  $PurchRow[0];
-				} else {
-					$PurchQty = 0;
-				}
-
-				// Find the quantity on works orders
-				$sql = "SELECT SUM(woitems.qtyreqd - woitems.qtyrecd) AS dedm
-							   FROM woitems
-							   WHERE stockid='" . $myrow['stockid'] ."'";
-				$ErrMsg = _('The order details for this product cannot be retrieved because');
-				$WoResult = db_query($sql,$db,$ErrMsg);
-
-				$WoRow = db_fetch_row($WoResult);
-				if ($WoRow[0]!=null){
-					$WoQty =  $WoRow[0];
-				} else {
-					$WoQty = 0;
-				}
+				$sql = "SELECT serialno,
+								expirationdate,
+								quantity
+							FROM stockserialitems
+							WHERE stockid='" . $myrow['stockid'] ."'
+							AND loccode='".$_SESSION['Items'.$identifier]->Location."'";
+				$ErrMsg = _('The batch details cannot be found');
+				$BatchResult = db_query($sql,$db,$ErrMsg);
 
 				if ($k==1){
 					echo '<tr class="EvenTableRows">';
@@ -2266,32 +2309,54 @@ if (!isset($_POST['ProcessSale'])){
 					echo '<tr class="OddTableRows">';
 					$k=1;
 				}
-				$OnOrder = $PurchQty + $WoQty;
 
-				$Available = $QOH - $DemandQty + $OnOrder;
-
-				printf('<td>%s</td>
+				if ($myrow['controlled']==0) {
+					printf('<td>%s</td>
 							<td>%s</td>
 							<td>%s</td>
 							<td class="number">%s</td>
-							<td class="number">%s</td>
-							<td class="number">%s</td>
-							<td class="number">%s</td>
-							<td><font size="1"><input class="number"  tabindex="'.number_format($j+7).'" type="textbox" size="6" name="itm'.$myrow['stockid'].'" value="0" />
+							<td><font size="1"><input class="number"  tabindex="'.number_format($j+7).'" type="textbox" size="15" name="itm'.$myrow['stockid'].'" value="0" />
 							</font></td>
 							</tr>',
 							$myrow['stockid'],
 							$myrow['description'],
 							$myrow['units'],
-							number_format($QOH, $QOHRow['decimalplaces']),
-							number_format($DemandQty, $QOHRow['decimalplaces']),
-							number_format($OnOrder, $QOHRow['decimalplaces']),
-							number_format($Available, $QOHRow['decimalplaces']),
-							$ImageSource,
-							$rootpath,
-							SID,
-							$myrow['stockid']);
-						
+							number_format($QOH, $QOHRow['decimalplaces']));
+				} else {
+					$LastStockID='';
+					while ($BatchRow=DB_fetch_array($BatchResult)) {
+						if ($LastStockID!=$myrow['stockid']) {
+							printf('<td>%s</td>
+								<td>%s</td>
+								<td>%s</td>
+								<td class="number">%s</td>',
+								$myrow['stockid'],
+								$myrow['description'],
+								$myrow['units'],
+								number_format($QOH, $QOHRow['decimalplaces']));
+						} else {
+							echo '<td colspan=4>';
+						}
+						$FilteredBatchRow['serialno']=str_replace(' ', '~', trim($BatchRow['serialno']));
+						printf('<td><font size="1"><input class="number"  tabindex="'.number_format($j+7).'" type="textbox" size="15"
+								name="itm'.$myrow['stockid'].'batch'.$FilteredBatchRow['serialno'].'" value="0" />
+								</font></td>
+								<td class="number">%s</td>
+								<td class="number">%s</td>
+								<td class="number">%s</td>
+								</tr>',
+								$BatchRow['serialno'],
+								number_format($BatchRow['quantity']/$myrow['conversionfactor'], $QOHRow['decimalplaces']),
+								ConvertSQLDate($BatchRow['expirationdate']));
+						$LastStockID=$myrow['stockid'];
+					}
+/*					if (!isset($_POST['itm'.$myrow['stockid']])) {
+						$_POST['itm'.$myrow['stockid']]=0;
+					}
+					echo '<td class="number"><input type="HIDDEN" name=="itm'.$myrow['stockid'].'"  value="'.$_POST['itm'.$myrow['stockid']].'"><a href="'.$rootpath.
+								'/ConfirmDispatchControlled_Counter.php?StockID='.$myrow['stockid'].'&Location='.$_SESSION['UserStockLocation'].'">'.
+							$_POST['itm'.$myrow['stockid']].'</a></td></tr>'; */
+				}
 				echo '<input type="hidden" name="Units' . $myrow['stockid'] . '" value="' . $myrow['units'] . '" />';
 
 				if ($j==1) {

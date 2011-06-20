@@ -193,12 +193,13 @@ if (isset($PrintPDF) or isset($_GET['PrintPDF']) and $PrintPDF and isset($FromTr
 			if ($InvOrCredit == 'Invoice') {
 				$sql = "SELECT stockmoves.stockid,
 						stockmaster.description,
-						-stockmoves.qty as quantity,
+						-stockmoves.qty*stockmoves.conversionfactor as quantity,
 						stockmoves.discountpercent,
 						((1 - stockmoves.discountpercent) * stockmoves.price * " . $ExchRate . "* -stockmoves.qty) AS fxnet,
 						(stockmoves.price * " . $ExchRate . ") AS fxprice,
 						stockmoves.narrative,
-						stockmaster.units,
+						stockmoves.units,
+						stockmoves.conversionfactor,
 						stockmaster.decimalplaces
 					FROM stockmoves,
 						stockmaster
@@ -210,12 +211,13 @@ if (isset($PrintPDF) or isset($_GET['PrintPDF']) and $PrintPDF and isset($FromTr
 				/* only credit notes to be retrieved */
 				$sql = "SELECT stockmoves.stockid,
 						stockmaster.description,
-						stockmoves.qty as quantity,
+						stockmoves.qty*stockmoves.conversionfactor as quantity,
 						stockmoves.discountpercent,
 						((1 - stockmoves.discountpercent) * stockmoves.price * " . $ExchRate . " * stockmoves.qty) AS fxnet,
 						(stockmoves.price * " . $ExchRate . ") AS fxprice,
 						stockmoves.narrative,
-						stockmaster.units,
+						stockmoves.units,
+						stockmoves.conversionfactor,
 						stockmaster.decimalplaces
 					FROM stockmoves,
 						stockmaster
@@ -599,12 +601,13 @@ if (($InvOrCredit == 'Invoice' or $InvOrCredit == 'Credit') and isset($PrintPDF)
 					</table>';
 					$sql = "SELECT stockmoves.stockid,
 				   		stockmaster.description,
-						-stockmoves.qty as quantity,
+						-stockmoves.qty*stockmoves.conversionfactor as quantity,
 						stockmoves.discountpercent,
 						((1 - stockmoves.discountpercent) * stockmoves.price * " . $ExchRate . "* -stockmoves.qty) AS fxnet,
 						(stockmoves.price * " . $ExchRate . ") AS fxprice,
 						stockmoves.narrative,
-						stockmaster.units
+						stockmoves.units,
+						stockmoves.conversionfactor
 					FROM stockmoves,
 						stockmaster
 					WHERE stockmoves.stockid = stockmaster.stockid
@@ -628,10 +631,11 @@ if (($InvOrCredit == 'Invoice' or $InvOrCredit == 'Credit') and isset($PrintPDF)
 					</tr></table>';
 					$sql = "SELECT stockmoves.stockid,
 				   		stockmaster.description,
-						stockmoves.qty as quantity,
+						stockmoves.qty*stockmoves.conversionfactor as quantity,
 						stockmoves.discountpercent, ((1 - stockmoves.discountpercent) * stockmoves.price * " . $ExchRate . " * stockmoves.qty) AS fxnet,
 						(stockmoves.price * " . $ExchRate . ") AS fxprice,
-						stockmaster.units
+						stockmoves.units,
+						stockmoves.conversionfactor
 					FROM stockmoves,
 						stockmaster
 					WHERE stockmoves.stockid = stockmaster.stockid

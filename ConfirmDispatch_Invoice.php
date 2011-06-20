@@ -125,7 +125,8 @@ if (!isset($_GET['OrderNumber']) && !isset($_SESSION['ProcessingOrder'])) {
 					stockmaster.serialised,
 					stockmaster.volume,
 					stockmaster.kgs,
-					stockmaster.units,
+					salesorderdetails.units,
+					salesorderdetails.conversionfactor,
 					stockmaster.decimalplaces,
 					stockmaster.mbflag,
 					stockmaster.taxcatid,
@@ -181,7 +182,11 @@ if (!isset($_GET['OrderNumber']) && !isset($_SESSION['ProcessingOrder'])) {
 																			'',
 																			$myrow['itemdue'],
 																			$myrow['poline'],
-																			$myrow['standardcost']);	/*NB NO Updates to DB */
+																			$myrow['standardcost'],
+																			1,
+																			0,
+																			1,
+																			$myrow['conversionfactor']);	/*NB NO Updates to DB */
 
 				/*Calculate the taxes applicable to this line item from the customer branch Tax Group and Item Tax Category */
 
@@ -943,7 +948,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 					$QtyOnHandPrior = 0;
 				}
 
-				$SQL = "UPDATE locstock	SET quantity = locstock.quantity - " . $OrderLine->QtyDispatched . "
+				$SQL = "UPDATE locstock	SET quantity = locstock.quantity - " . $OrderLine->QtyDispatched/$OrderLine->ConversionFactor . "
 					WHERE locstock.stockid = '" . $OrderLine->StockID . "'
 					AND loccode = '" . $_SESSION['Items']->Location . "'";
 
@@ -1050,71 +1055,80 @@ invoices can have a zero amount but there must be a quantity to invoice */
 				$OrderLine->StandardCost=0;
 			}
 			if ($MBFlag=='B' OR $MBFlag=='M'){
-            			$SQL = "INSERT INTO stockmoves (	stockid,
-																						type,
-																						transno,
-																						loccode,
-																						trandate,
-																						debtorno,
-																						branchcode,
-																						price,
-																						prd,
-																						reference,
-																						qty,
-																						discountpercent,
-																						standardcost,
-																						newqoh,
-																						narrative )
-																					VALUES ('" . $OrderLine->StockID . "',
-																						10,
-																						'" . $InvoiceNo . "',
-																						'" . $_SESSION['Items']->Location . "',
-																						'" . $DefaultDispatchDate . "',
-																						'" . $_SESSION['Items']->DebtorNo . "',
-																						'" . $_SESSION['Items']->Branch . "',
-																						'" . round($LocalCurrencyPrice,$OrderLine->PriceDecimals) . "',
-																						'" . $PeriodNo . "',
-																						'" . $_SESSION['ProcessingOrder'] . "',
-																						'" . -$OrderLine->QtyDispatched . "',
-																						'" . $OrderLine->DiscountPercent . "',
-																						'" . $OrderLine->StandardCost . "',
-																						'" . ($QtyOnHandPrior - $OrderLine->QtyDispatched) . "',
-																						'" . DB_escape_string($OrderLine->Narrative) . "' )";
+            			$SQL = "INSERT INTO stockmoves (stockid,
+														type,
+														transno,
+														loccode,
+														trandate,
+														debtorno,
+														branchcode,
+														price,
+														prd,
+														reference,
+														qty,
+														discountpercent,
+														standardcost,
+														newqoh,
+														narrative,
+														units,
+														conversionfactor )
+													VALUES ('" . $OrderLine->StockID . "',
+														10,
+														'" . $InvoiceNo . "',
+														'" . $_SESSION['Items']->Location . "',
+														'" . $DefaultDispatchDate . "',
+														'" . $_SESSION['Items']->DebtorNo . "',
+														'" . $_SESSION['Items']->Branch . "',
+														'" . round($LocalCurrencyPrice,$OrderLine->PriceDecimals) . "',
+														'" . $PeriodNo . "',
+														'" . $_SESSION['ProcessingOrder'] . "',
+														'" . -$OrderLine->QtyDispatched/$OrderLine->ConversionFactor . "',
+														'" . $OrderLine->DiscountPercent . "',
+														'" . $OrderLine->StandardCost . "',
+														'" . ($QtyOnHandPrior - $OrderLine->QtyDispatched/$OrderLine->ConversionFactor) . "',
+														'" . DB_escape_string($OrderLine->Narrative) . "',
+														'" . $OrderLine->Units . "',
+														'" . $OrderLine->ConversionFactor . "'
+													)";
 			} else {
             // its an assembly or dummy and assemblies/dummies always have nil stock (by definition they are made up at the time of dispatch  so new qty on hand will be nil
 				if (empty($OrderLine->StandardCost)) {
 					$OrderLine->StandardCost=0;
 				}
 				$SQL = "INSERT INTO stockmoves (	stockid,
-																				type,
-																				transno,
-																				loccode,
-																				trandate,
-																				debtorno,
-																				branchcode,
-																				price,
-																				prd,
-																				reference,
-																				qty,
-																				discountpercent,
-																				standardcost,
-																				narrative )
-																			VALUES ('" . $OrderLine->StockID . "',
-																				10,
-																				'" . $InvoiceNo . "',
-																				'" . $_SESSION['Items']->Location . "',
-																				'" . $DefaultDispatchDate . "',
-																				'" . $_SESSION['Items']->DebtorNo . "',
-																				'" . $_SESSION['Items']->Branch . "',
-																				'" . $LocalCurrencyPrice . "',
-																				'" . $PeriodNo . "',
-																				'" . $_SESSION['ProcessingOrder'] . "',
-																				'" . -$OrderLine->QtyDispatched . "',
-																				'" . $OrderLine->DiscountPercent . "',
-																				'" . $OrderLine->StandardCost . "',
-																				'" . DB_escape_string($OrderLine->Narrative) . "')";
+													type,
+													transno,
+													loccode,
+													trandate,
+													debtorno,
+													branchcode,
+													price,
+													prd,
+													reference,
+													qty,
+													discountpercent,
+													standardcost,
+													narrative,
+													units,
+													conversionfactor )
+												VALUES ('" . $OrderLine->StockID . "',
+													10,
+													'" . $InvoiceNo . "',
+													'" . $_SESSION['Items']->Location . "',
+													'" . $DefaultDispatchDate . "',
+													'" . $_SESSION['Items']->DebtorNo . "',
+													'" . $_SESSION['Items']->Branch . "',
+													'" . $LocalCurrencyPrice . "',
+													'" . $PeriodNo . "',
+													'" . $_SESSION['ProcessingOrder'] . "',
+													'" . -$OrderLine->QtyDispatched/$OrderLine->ConversionFactor . "',
+													'" . $OrderLine->DiscountPercent . "',
+													'" . $OrderLine->StandardCost . "',
+													'" . DB_escape_string($OrderLine->Narrative) . "'
+													'" . $OrderLine->Units . "',
+													'" . $OrderLine->ConversionFactor . "'
+												)";
 			}
-
 
 			$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Stock movement records could not be inserted because');
 			$DbgMsg = _('The following SQL to insert the stock movement records was used');

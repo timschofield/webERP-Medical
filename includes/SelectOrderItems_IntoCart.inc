@@ -41,6 +41,7 @@ if ($AlreadyOnThisOrder!=1){
 				stockmaster.discountcategory,
 				stockmaster.decimalplaces,
 				stockmaster.discontinued,
+				stockmaster.controlled,
 				stockmaster.serialised,
 				stockmaster.eoq,
 				stockmaster.nextserialno,
@@ -145,7 +146,7 @@ if ($AlreadyOnThisOrder!=1){
 															NULL, /*Actual Dispatch Date */
 															0, /*Qty Invoiced */
 															$myItemRow['discountcategory'],
-															0, /*Controlled - dont care */
+															$myItemRow['controlled'], /*Controlled - dont care */
 															$myItemRow['serialised'], /* need to know for autocreation wos */
 															$myItemRow['decimalplaces'],
 															$PriceDecimals,

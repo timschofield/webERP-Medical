@@ -125,7 +125,7 @@ if (DB_num_rows($GetOrdHdrResult)==1) {
 				stockmaster.kgs,
 				stockmaster.decimalplaces,
 				stockmaster.mbflag,
-				stockmaster.units,
+				salesorderdetails.units,
 				stockmaster.discountcategory,
 				stockmaster.controlled,
 				stockmaster.serialised,
