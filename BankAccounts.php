@@ -90,7 +90,8 @@ if (isset($_POST['submit'])) {
 				bankaccountcode='" . $_POST['BankAccountCode'] . "',
 				bankaccountnumber='" . $_POST['BankAccountNumber'] . "',
 				bankaddress='" . $_POST['BankAddress'] . "',
-				invoice ='" . $_POST['DefAccount'] . "'
+				invoice ='" . $_POST['DefAccount'] . "',
+				pettycash='" . $_POST['PettyCash'] . "'
 			WHERE accountcode = '" . $SelectedBankAccount . "'";
 			prnMsg(_('Note that it is not possible to change the currency of the account once there are transactions against it'),'warn');
 	echo '<br />';
@@ -101,7 +102,8 @@ if (isset($_POST['submit'])) {
 				bankaccountnumber='" . $_POST['BankAccountNumber'] . "',
 				bankaddress='" . $_POST['BankAddress'] . "',
 				currcode ='" . $_POST['CurrCode'] . "',
-				invoice ='" . $_POST['DefAccount'] . "'
+				invoice ='" . $_POST['DefAccount'] . "',
+				pettycash='" . $_POST['PettyCash'] . "'
 				WHERE accountcode = '" . $SelectedBankAccount . "'";
 		}
 
@@ -117,14 +119,16 @@ if (isset($_POST['submit'])) {
 						bankaccountnumber,
 						bankaddress,
 						currcode,
-						invoice)
+						invoice,
+						pettycash)
 				VALUES ('" . $_POST['AccountCode'] . "',
 					'" . $_POST['BankAccountName'] . "',
 					'" . $_POST['BankAccountCode'] . "',
 					'" . $_POST['BankAccountNumber'] . "',
 					'" . $_POST['BankAddress'] . "',
 					'" . $_POST['CurrCode'] . "',
-					'" . $_POST['DefAccount'] . "'
+					'" . $_POST['DefAccount'] . "',
+					'" . $_POST['PettyCash'] . "'
 					)";
 		$msg = _('The new bank account has been entered');
 	}
@@ -182,7 +186,8 @@ If (!isset($SelectedBankAccount)) {
 			bankaccountnumber,
 			bankaddress,
 			currcode,
-			invoice
+			invoice,
+			pettycash
 		FROM bankaccounts,
 			chartmaster
 		WHERE bankaccounts.accountcode = chartmaster.accountcode";
@@ -200,10 +205,11 @@ If (!isset($SelectedBankAccount)) {
 		<th>' . _('Bank Address') . '</th>
 		<th>' . _('Currency') . '</th>
 		<th>' . _('Default for Invoices') . '</th>
+		<th>' . _('Petty Cash') . '</th>
 	</tr>';
 
 	$k=0; //row colour counter
-	while ($myrow = DB_fetch_row($result)) {
+	while ($myrow = DB_fetch_array($result)) {
 	if ($k==1){
 		echo '<tr class="EvenTableRows">';
 		$k=0;
@@ -211,12 +217,18 @@ If (!isset($SelectedBankAccount)) {
 		echo '<tr class="OddTableRows">';
 		$k++;
 	}
-	if ($myrow[7]==0) {
+	if ($myrow['invoice']==0) {
 		$defacc=_('No');
 	} else {
 		$defacc=_('Yes');
 	}
-	printf('<td>%s<br /><font size=2>%s</font></td>
+	if ($myrow['pettycash']==0) {
+		$PettyCash=_('No');
+	} else {
+		$PettyCash=_('Yes');
+	}
+	printf('<td>%s - %s</td>
+		<td>%s</td>
 		<td>%s</td>
 		<td>%s</td>
 		<td>%s</td>
@@ -226,18 +238,19 @@ If (!isset($SelectedBankAccount)) {
 		<td><a href="%s?SelectedBankAccount=%s">' . _('Edit') . '</td>
 		<td><a href="%s?SelectedBankAccount=%s&delete=1">' . _('Delete') . '</td>
 		</tr>',
-		$myrow[0],
-		$myrow[2],
-		$myrow[3],
-		$myrow[1],
-		$myrow[4],
-		$myrow[5],
-		$myrow[6],
+		$myrow['accountcode'],
+		$myrow['accountname'],
+		$myrow['bankaccountname'],
+		$myrow['bankaccountcode'],
+		$myrow['bankaccountcode'],
+		$myrow['bankaddress'],
+		$myrow['currcode'],
 		$defacc,
+		$PettyCash,
 		$_SERVER['PHP_SELF'],
-		$myrow[0],
+		$myrow['accountcode'],
 		$_SERVER['PHP_SELF'],
-		$myrow[0]);
+		$myrow['accountcode']);
 
 	}
 	//END WHILE LIST LOOP
@@ -346,7 +359,7 @@ while ($myrow = DB_fetch_array($result)) {
 
 echo '</select></td>';
 
-echo		'<tr><td>' . _('Default for Invoices') . ': </td><td><select tabindex="6" name="DefAccount">';
+echo '<tr><td>' . _('Default for Invoices') . ': </td><td><select tabindex="6" name="DefAccount">';
 
 if (!isset($_POST['DefAccount']) OR $_POST['DefAccount']==''){
         $_POST['DefAccount'] = $_SESSION['CompanyRecord']['currencydefault'];
@@ -367,7 +380,31 @@ if (isset($SelectedBankAccount)) {
 
 echo '</select></td>';
 
-echo '</tr></table><br />
+echo '</tr>';
+
+echo '<tr><td>' . _('Petty Cash Account') . ': </td><td><select tabindex="6" name="PettyCash">';
+
+if (!isset($_POST['PettyCash']) OR $_POST['PettyCash']==''){
+        $_POST['PettyCash'] = 0;
+}
+
+if (isset($SelectedBankAccount)) {
+	$result = DB_query("SELECT pettycash FROM bankaccounts where accountcode ='" . $SelectedBankAccount . "'" ,$db);
+	while ($myrow = DB_fetch_array($result)) {
+		if ($myrow['pettycash']== 1) {
+			echo '<option selected value=1>'._('Yes').'</option><option value=0>'._('No').'</option>';
+		} else {
+			echo '<option selected value=0>'._('No').'</option><option value=1>'._('Yes').'</option>';
+		}
+	}//end while loop
+} else {
+	echo '<option value=1>'._('Yes').'</option><option selected value=0>'._('No').'</option>';
+}
+
+echo '</select></td>';
+
+echo '</tr>';
+echo '</table><br />
 		<div class="centre"><input tabindex="7" type="Submit" name="submit" value="'. _('Enter Information') .'"></div>';
 
 echo '</form>';
