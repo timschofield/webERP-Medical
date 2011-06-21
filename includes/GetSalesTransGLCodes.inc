@@ -269,8 +269,8 @@ Function GetSalesGLAccount ($Area, $StockID, $SalesType, &$db) {
 			$SQL = "INSERT INTO chartmaster VALUES (1, 'Default Sales and COGS', 'Sales')";
 			$Result = DB_query($SQL,$db);
 		}
-		return array(salesglcode=>1,
-				discountglcode=>1);
+		return array('salesglcode'=>1,
+				'discountglcode'=>1);
 	}
 	$myrow = DB_fetch_array($Result);
 	Return $myrow;
