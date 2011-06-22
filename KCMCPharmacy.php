@@ -349,6 +349,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 			DB_Txn_Commit($db);
 			echo '<meta http-equiv="Refresh" content="0; url='.$rootpath.'/PDFReceipt.php?FromTransNo='.$InvoiceNo.'&amp;InvOrCredit=Invoice&amp;PrintPDF=True">';
 			include('includes/footer.inc');
+			$_SESSION['DefaultCashPoint']=$_POST['BankAccount'];
 			exit;
 		} elseif (isset($_POST['SubmitInsurance'])) {
 			prnMsg( _('The transaction has been successfully posted'), 'success');
@@ -705,7 +706,7 @@ if (isset($_POST['Patient'])) {
 			echo '<option value=""></option>';
 			while ($myrow=DB_fetch_array($AccountsResults)){
 			/*list the bank account names */
-				if (isset($_POST['BankAccount']) and $_POST['BankAccount']==$myrow['accountcode']){
+				if (isset($_SESSION['DefaultCashPoint']) and $_SESSION['DefaultCashPoint']==$myrow['accountcode']){
 					echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . ' - ' . $myrow['currcode'] . '</option>';
 				} else {
 					echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . ' - ' . $myrow['currcode'] . '</option>';
