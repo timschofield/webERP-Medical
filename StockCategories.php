@@ -51,6 +51,7 @@ if (isset($_POST['submit'])) {
 		prnMsg(_('The Sales category description must be twenty characters or less long'),'error');
 	} elseif ($_POST['StockType'] !='S'
 			AND $_POST['StockType'] !='R'
+			AND $_POST['StockType'] !='P'
 			AND $_POST['StockType'] !='T'
 			AND $_POST['StockType'] !='X') {
 		$InputError = 1;
@@ -356,6 +357,11 @@ if (! isset($_GET['delete'])) {
 			echo '<option selected value="R">' . _('Registration');
 		} else {
 			echo '<option value="R">' . _('Registration');
+		}
+		if (isset($_POST['StockType']) and $_POST['StockType']=='P') {
+			echo '<option selected value="P">' . _('Pharmaceuticals');
+		} else {
+			echo '<option value="P">' . _('Pharmaceuticals');
 		}
 		if (isset($_POST['StockType']) and $_POST['StockType']=='X') {
 			echo '<option selected value="X">' . _('Radiology');
