@@ -6,7 +6,7 @@ include('includes/header.inc');
 include('includes/SQL_CommonFunctions.inc');
 include('includes/GetSalesTransGLCodes.inc');
 
-if (isset($_GET['New'])) {
+if (isset($_GET['New']) or isset($_POST['Cancel'])) {
 	unset($_POST['SubmitCash']);
 	unset($_POST['Patient']);
 	unset($_SESSION['Items']);
@@ -712,6 +712,7 @@ if (isset($_POST['Patient'])) {
 		echo '</table><br />';
 		echo '<div class="centre"><input type="submit" name="SubmitInsurance" value="Process Invoice" /></div>';
 	}
+	echo '<br /><div class="centre"><input type="submit" name="Cancel" value="Cancel This Payment" /></div>';
 
 	echo '</form>';
 }
