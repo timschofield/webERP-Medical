@@ -1,7 +1,7 @@
 <?php
 $PageSecurity=1;
 include('includes/session.inc');
-$title = _('Billing and Payments For Laboratory Tests');
+$title = _('Billing For Laboratory Tests');
 include('includes/header.inc');
 include('includes/SQL_CommonFunctions.inc');
 include('includes/GetSalesTransGLCodes.inc');
@@ -9,19 +9,58 @@ include('includes/GetSalesTransGLCodes.inc');
 if (isset($_GET['New'])) {
 	unset($_POST['SubmitCash']);
 	unset($_POST['Patient']);
+	unset($_SESSION['Items']);
+	$_SESSION['Items']['Lines']=0;
+	$_SESSION['Items']['Value']=0;
+}
+
+if (isset($_POST['ChangeItem'])) {
+	$sql="SELECT price
+				FROM prices
+				WHERE stockid='".$_POST['StockID']."'
+				AND typeabbrev='".$_POST['PriceList']."'
+				AND '".date('Y-m-d')."' between startdate and enddate";
+	$PriceResult=DB_query($sql,$db);
+	if (DB_num_rows($PriceResult)==0) {
+		$Price=0;
+	} else {
+		$myrow=DB_fetch_array($PriceResult);
+		$Price=$myrow['price'];
+	}
+	$_SESSION['Items'][$_SESSION['Items']['Lines']]['StockID']=$_POST['StockID'];
+	$_SESSION['Items'][$_SESSION['Items']['Lines']]['Quantity']=1;
+	$_SESSION['Items'][$_SESSION['Items']['Lines']]['Price']=$Price;
+	$_SESSION['Items']['Value']+=$Price;
+	$_SESSION['Items']['Lines']++;
 }
 
 if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 
 	$InputError=0;
 
-	DB_Txn_Begin($db);
-	/*First off create the sales order
-	 * entries in the database
-	 */
-	$OrderNo = GetNextTransNo(30, $db);
+	if (!isset($_POST['BankAccount']) or $_POST['BankAccount']=='') {
+		$InputError=1;
+		$msg[]=_('You must select a cash collection point');
+	}
 
-	$HeaderSQL = "INSERT INTO salesorders (	orderno,
+	if ($_SESSION['Items']['Lines']==0) {
+		$InputError=1;
+		$msg[]=_('You must select a test to bill');
+	}
+
+	if ($InputError==1) {
+		foreach($msg as $message) {
+			prnMsg( $message, 'info');
+		}
+	} else {
+
+		DB_Txn_Begin($db);
+		/*First off create the sales order
+		* entries in the database
+		*/
+		$OrderNo = GetNextTransNo(30, $db);
+
+		$HeaderSQL = "INSERT INTO salesorders (	orderno,
 											debtorno,
 											branchcode,
 											comments,
@@ -46,10 +85,11 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 											0
 										)";
 
-	$ErrMsg = _('The order cannot be added because');
-	$InsertQryResult = DB_query($HeaderSQL,$db,$ErrMsg);
+		$ErrMsg = _('The order cannot be added because');
+		$InsertQryResult = DB_query($HeaderSQL,$db,$ErrMsg);
 
-	$LineItemSQL = "INSERT INTO salesorderdetails (orderlineno,
+		for ($i=0; $i<$_SESSION['Items']['Lines']; $i++) {
+			$LineItemSQL = "INSERT INTO salesorderdetails (orderlineno,
 													orderno,
 													stkcode,
 													unitprice,
@@ -61,10 +101,10 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 													qtyinvoiced,
 													completed)
 												VALUES (
-													'0',
+													'" . $i . "',
 													'" . $OrderNo . "',
-													'" . $_POST['StockID'] . "',
-													'" . $_POST['Price'] . "',
+													'" . $_SESSION['Items'][$i]['StockID'] . "',
+													'" . $_SESSION['Items'][$i]['Price'] . "',
 													'1',
 													'0',
 													'" . _('Sales order for patient admission transaction') . "',
@@ -73,17 +113,17 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 													'1',
 													1
 												)";
-	$DbgMsg = _('Trouble inserting a line of a sales order. The SQL that failed was');
-	$Ins_LineItemResult = DB_query($LineItemSQL,$db,$ErrMsg,$DbgMsg,true);
-
-	$InvoiceNo = GetNextTransNo(10, $db);
-	$PeriodNo = GetPeriod(Date($_SESSION['DefaultDateFormat']), $db);
-	if (isset($_POST['SubmitInsurance'])) {
-		$_POST['Received']=0;
-	} else {
-		$_POST['InsuranceRef']='';
-	}
-	$sql = "INSERT INTO debtortrans (
+			$DbgMsg = _('Trouble inserting a line of a sales order. The SQL that failed was');
+			$Ins_LineItemResult = DB_query($LineItemSQL,$db,$ErrMsg,$DbgMsg,true);
+		}
+		$InvoiceNo = GetNextTransNo(10, $db);
+		$PeriodNo = GetPeriod(Date($_SESSION['DefaultDateFormat']), $db);
+		if (isset($_POST['SubmitInsurance'])) {
+			$_POST['Received']=0;
+		} else {
+			$_POST['InsuranceRef']='';
+		}
+		$sql = "INSERT INTO debtortrans (
 				transno,
 				type,
 				debtorno,
@@ -108,19 +148,20 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 				'" . date('Y-m-d H-i-s') . "',
 				'" . $PeriodNo . "',
 				'" . $OrderNo . "',
-				'" . $_POST['Price'] . "',
+				'" . $_SESSION['Items']['Value'] . "',
 				'0',
 				'1',
-				'" . _('Invoice for admission of Patient number').' '.$_POST['PatientNo'] . "',
+				'" . _('Invoice for Laboratory test of Patient number').' '.$_POST['PatientNo'] . "',
 				'" . $_POST['InsuranceRef'] . "',
 				'1',
-				'" . $_POST['Received'] . "')";
+				'" . $_SESSION['Items']['Value'] . "')";
 
-	$ErrMsg =_('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The debtor transaction record could not be inserted because');
-	$DbgMsg = _('The following SQL to insert the debtor transaction record was used');
-	$Result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
+		$ErrMsg =_('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The debtor transaction record could not be inserted because');
+		$DbgMsg = _('The following SQL to insert the debtor transaction record was used');
+		$Result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 
-	$SQL = "INSERT INTO stockmoves (
+		for ($i=0; $i<$_SESSION['Items']['Lines']; $i++) {
+			$SQL = "INSERT INTO stockmoves (
 						stockid,
 						type,
 						transno,
@@ -135,7 +176,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 						show_on_inv_crds,
 						newqoh
 					) VALUES (
-						'" . $_POST['StockID'] . "',
+						'" . $_SESSION['Items'][$i]['StockID'] . "',
 						 10,
 						'" . $InvoiceNo . "',
 						'" . $_SESSION['UserStockLocation'] . "',
@@ -143,20 +184,25 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 						'" . $_POST['PatientNo'] . "',
 						'" . $_POST['BranchNo'] . "',
 						'" . $PeriodNo . "',
-						'" . _('Invoice for admission of Patient number').' '.$_POST['PatientNo'] . "',
+						'" . _('Invoice for Laboratory test of Patient number').' '.$_POST['PatientNo'] . "',
 						-1,
-						'" . $_POST['Price'] . "',
+						'" . $_SESSION['Items'][$i]['Price'] . "',
 						1,
 						0
 					)";
 
-	$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Stock movement records for'). ' '. $_POST['StockID'] . ' ' .
-			_('could not be inserted because');
-	$DbgMsg = _('The following SQL to insert the stock movement records was used');
-	$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
-
-	$SalesGLAccounts = GetSalesGLAccount('AN', $_POST['StockID'], 'AN', $db);
-	$SQL = "INSERT INTO gltrans (	type,
+			$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Stock movement records for'). ' '. $_POST['StockID'] . ' ' .
+				_('could not be inserted because');
+			$DbgMsg = _('The following SQL to insert the stock movement records was used');
+			$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+		}
+		$SQL="SELECT salestype
+				FROM debtorsmaster
+				WHERE debtorno='".$_POST['PatientNo']."'";
+		$Result=DB_query($SQL, $db);
+		$myrow=DB_fetch_array($Result);
+		$SalesGLAccounts = GetSalesGLAccount('AN', $_SESSION['Items'][0]['StockID'], $myrow['salestype'], $db);
+		$SQL = "INSERT INTO gltrans (	type,
 									typeno,
 									trandate,
 									periodno,
@@ -170,14 +216,14 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 									'" . $PeriodNo . "',
 									'" . $SalesGLAccounts['salesglcode'] . "',
 									'" . $_SESSION['DefaultTag'] . "',
-									'" . _('Invoice for admission of Patient number').' '.$_POST['PatientNo'] . "',
-									'" . -$_POST['Price'] . "')";
+									'" . _('Invoice for Laboratory test of Patient number').' '.$_POST['PatientNo'] . "',
+									'" . -$_SESSION['Items']['Value'] . "')";
 
-	$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The cost of sales GL posting could not be inserted because');
-	$DbgMsg = _('The following SQL to insert the GLTrans record was used');
-	$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+		$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The cost of sales GL posting could not be inserted because');
+		$DbgMsg = _('The following SQL to insert the GLTrans record was used');
+		$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
 
-	$SQL = "INSERT INTO gltrans (	type,
+		$SQL = "INSERT INTO gltrans (	type,
 									typeno,
 									trandate,
 									periodno,
@@ -191,123 +237,124 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 									'" . $PeriodNo . "',
 									'" . $_SESSION['CompanyRecord']['debtorsact'] . "',
 									'" . $_SESSION['DefaultTag'] . "',
-									'" . _('Invoice for admission of Patient number').' '.$_POST['PatientNo'] . "',
-									'" . $_POST['Price'] . "')";
+									'" . _('Invoice for Laboratory test of Patient number').' '.$_POST['PatientNo'] . "',
+									'" . $_SESSION['Items']['Value'] . "')";
 
-	$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The stock side of the cost of sales GL posting could not be inserted because');
-	$DbgMsg = _('The following SQL to insert the GLTrans record was used');
-	$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+		$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The stock side of the cost of sales GL posting could not be inserted because');
+		$DbgMsg = _('The following SQL to insert the GLTrans record was used');
+		$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
 
-}
+		if (isset($_POST['SubmitCash'])) {
+			$ReceiptNumber = GetNextTransNo(12,$db);
+			$SQL="INSERT INTO gltrans (type,
+										typeno,
+										trandate,
+										periodno,
+										account,
+										defaulttag,
+										narrative,
+										amount)
+									VALUES (12,
+										'" . $ReceiptNumber . "',
+										'" . date('Y-m-d H-i-s') . "',
+										'" . $PeriodNo . "',
+										'" . $_POST['BankAccount'] . "',
+										'" . $_SESSION['DefaultTag'] . "',
+										'" . _('Payment of Laboratory test for Patient number').' '.$_POST['PatientNo'] . "',
+										'" . ($_SESSION['Items']['Value']) . "')";
+			$DbgMsg = _('The SQL that failed to insert the GL transaction for the bank account debit was');
+			$ErrMsg = _('Cannot insert a GL transaction for the bank account debit');
+			$result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
 
-if (isset($_POST['SubmitCash'])) {
-	$ReceiptNumber = GetNextTransNo(12,$db);
-	$SQL="INSERT INTO gltrans (type,
-			typeno,
-			trandate,
-			periodno,
-			account,
-			defaulttag,
-			narrative,
-			amount)
-		VALUES (12,
-			'" . $ReceiptNumber . "',
-			'" . date('Y-m-d H-i-s') . "',
-			'" . $PeriodNo . "',
-			'" . $_POST['BankAccount'] . "',
-			'" . $_SESSION['DefaultTag'] . "',
-			'" . _('Payment of invoice for admission of Patient number').' '.$_POST['PatientNo'] . "',
-			'" . ($_POST['Received']) . "')";
-	$DbgMsg = _('The SQL that failed to insert the GL transaction for the bank account debit was');
-	$ErrMsg = _('Cannot insert a GL transaction for the bank account debit');
-	$result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+			/* Now Credit Debtors account with receipt */
+			$SQL="INSERT INTO gltrans ( type,
+										typeno,
+										trandate,
+										periodno,
+										account,
+										defaulttag,
+										narrative,
+										amount)
+									VALUES (12,
+										'" . $ReceiptNumber . "',
+										'" . date('Y-m-d H-i-s') . "',
+										'" . $PeriodNo . "',
+										'" . $_SESSION['CompanyRecord']['debtorsact'] . "',
+										'" . $_SESSION['DefaultTag'] . "',
+										'" . _('Payment of Laboratory test for Patient number').' '.$_POST['PatientNo'] . "',
+										'" . -($_SESSION['Items']['Value']) . "'
+									)";
+			$DbgMsg = _('The SQL that failed to insert the GL transaction for the debtors account credit was');
+			$ErrMsg = _('Cannot insert a GL transaction for the debtors account credit');
+			$result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
 
-	/* Now Credit Debtors account with receipt */
-	$SQL="INSERT INTO gltrans ( type,
-			typeno,
-			trandate,
-			periodno,
-			account,
-			defaulttag,
-			narrative,
-			amount)
-		VALUES (12,
-			'" . $ReceiptNumber . "',
-			'" . date('Y-m-d H-i-s') . "',
-			'" . $PeriodNo . "',
-			'" . $_SESSION['CompanyRecord']['debtorsact'] . "',
-			'" . $_SESSION['DefaultTag'] . "',
-			'" . _('Payment of invoice for admission of Patient number').' '.$_POST['PatientNo'] . "',
-			'" . -($_POST['Received']) . "')";
-	$DbgMsg = _('The SQL that failed to insert the GL transaction for the debtors account credit was');
-	$ErrMsg = _('Cannot insert a GL transaction for the debtors account credit');
-	$result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
-
-	$SQL="INSERT INTO banktrans (type,
-			transno,
-			bankact,
-			ref,
-			exrate,
-			functionalexrate,
-			transdate,
-			banktranstype,
-			amount,
-			currcode)
-		VALUES (12,
-			'" . $ReceiptNumber . "',
-			'" . $_POST['BankAccount'] . "',
-			'" . _('Payment of invoice for admission of Patient number').' '.$_POST['PatientNo'] . "',
-			'1',
-			'1',
-			'" . date('Y-m-d H-i-s') . "',
-			'2',
-			'" . ($_POST['Received']) . "',
+			$SQL="INSERT INTO banktrans (type,
+									transno,
+									bankact,
+									ref,
+									exrate,
+									functionalexrate,
+									transdate,
+									banktranstype,
+									amount,
+									currcode)
+								VALUES (12,
+									'" . $ReceiptNumber . "',
+									'" . $_POST['BankAccount'] . "',
+									'" . _('Payment of Laboratory test for Patient number').' '.$_POST['PatientNo'] . "',
+									'1',
+									'1',
+									'" . date('Y-m-d H-i-s') . "',
+									'2',
+									'" . ($_SESSION['Items']['Value']) . "',
 			'" . $_SESSION['CompanyRecord']['currencydefault'] . "')";
 
-	$DbgMsg = _('The SQL that failed to insert the bank account transaction was');
-	$ErrMsg = _('Cannot insert a bank transaction');
-	$result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+			$DbgMsg = _('The SQL that failed to insert the bank account transaction was');
+			$ErrMsg = _('Cannot insert a bank transaction');
+			$result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
 
-	$SQL="INSERT INTO debtortrans (transno,
-			type,
-			debtorno,
-			trandate,
-			inputdate,
-			prd,
-			reference,
-			rate,
-			ovamount,
-			alloc,
-			invtext)
-		VALUES ('" . $ReceiptNumber . "',
-			12,
-			'" . $_POST['PatientNo'] . "',
-			'" . date('Y-m-d H-i-s') . "',
-			'" . date('Y-m-d H-i-s') . "',
-			'" . $PeriodNo . "',
-			'" . $InvoiceNo . "',
-			'1',
-			'" . -$_POST['Received'] . "',
-			'" . -$_POST['Received'] . "',
-			'" . _('Payment of invoice for admission of Patient number').' '.$_POST['PatientNo'] . "'
-		)";
+			$SQL="INSERT INTO debtortrans (transno,
+											type,
+											debtorno,
+											trandate,
+											inputdate,
+											prd,
+											reference,
+											rate,
+											ovamount,
+											alloc,
+											invtext)
+										VALUES ('" . $ReceiptNumber . "',
+											12,
+											'" . $_POST['PatientNo'] . "',
+											'" . date('Y-m-d H-i-s') . "',
+											'" . date('Y-m-d H-i-s') . "',
+											'" . $PeriodNo . "',
+											'" . $InvoiceNo . "',
+											'1',
+											'" . -$_SESSION['Items']['Value'] . "',
+											'" . -$_SESSION['Items']['Value'] . "',
+											'" . _('Payment of Laboratory test for Patient number').' '.$_POST['PatientNo'] . "'
+										)";
 
-	prnMsg( _('The transaction has been successfully posted'), 'success');
-	echo '<br /><div class="centre"><a href="'.$_SERVER['PHP_SELF'].'?New=True">'._('Enter another receipt').'</a>';
-	$DbgMsg = _('The SQL that failed to insert the customer receipt transaction was');
-	$ErrMsg = _('Cannot insert a receipt transaction against the customer because') ;
-	$result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+			prnMsg( _('The transaction has been successfully posted'), 'success');
+			echo '<br /><div class="centre"><a href="'.$_SERVER['PHP_SELF'].'?New=True">'._('Enter another receipt').'</a>';
+			$DbgMsg = _('The SQL that failed to insert the customer receipt transaction was');
+			$ErrMsg = _('Cannot insert a receipt transaction against the customer because') ;
+			$result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
 
-	DB_Txn_Commit($db);
-	echo '<meta http-equiv="Refresh" content="0; url='.$rootpath.'/PDFReceipt.php?FromTransNo='.$InvoiceNo.'&amp;InvOrCredit=Invoice&amp;PrintPDF=True">';
-	include('includes/footer.inc');
-	exit;
-} elseif (isset($_POST['SubmitInsurance'])) {
-	prnMsg( _('The transaction has been successfully posted'), 'success');
-	echo '<br /><div class="centre"><a href="'.$_SERVER['PHP_SELF'].'?New=True">'._('Enter another receipt').'</a>';
-	DB_Txn_Commit($db);
-	include('includes/footer.inc');
-	exit;
+			DB_Txn_Commit($db);
+			echo '<meta http-equiv="Refresh" content="0; url='.$rootpath.'/PDFReceipt.php?FromTransNo='.$InvoiceNo.'&amp;InvOrCredit=Invoice&amp;PrintPDF=True">';
+			include('includes/footer.inc');
+			exit;
+		} elseif (isset($_POST['SubmitInsurance'])) {
+			prnMsg( _('The transaction has been successfully posted'), 'success');
+			echo '<br /><div class="centre"><a href="'.$_SERVER['PHP_SELF'].'?New=True">'._('Enter another receipt').'</a>';
+			DB_Txn_Commit($db);
+			include('includes/footer.inc');
+			exit;
+		}
+	}
 }
 
 if (!isset($_POST['Patient'])) {
@@ -427,9 +474,9 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 			$SQL = "SELECT debtorsmaster.debtorno,
 				debtorsmaster.name,
 				debtorsmaster.address1,
-								debtorsmaster.address2,
-								debtorsmaster.address3,
-								debtorsmaster.address4,
+				debtorsmaster.address2,
+				debtorsmaster.address3,
+				debtorsmaster.address4,
 				custbranch.branchcode,
 				custbranch.brname,
 				custbranch.contactname,
@@ -446,9 +493,9 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 			$SQL = "SELECT debtorsmaster.debtorno,
 				debtorsmaster.name,
 				debtorsmaster.address1,
-								debtorsmaster.address2,
-								debtorsmaster.address3,
-								debtorsmaster.address4,
+				debtorsmaster.address2,
+				debtorsmaster.address3,
+				debtorsmaster.address4,
 				custbranch.branchcode,
 				custbranch.brname,
 				custbranch.contactname,
@@ -553,7 +600,8 @@ if (isset($result)) {
 if (isset($_POST['Patient'])) {
 	$Patient=explode(' ', $_POST['Patient']);
 	$sql="SELECT name,
-				clientsince
+				clientsince,
+				salestype
 				FROM debtorsmaster
 				WHERE debtorno='".$Patient[0]."'";
 	$result=DB_query($sql, $db);
@@ -563,6 +611,7 @@ if (isset($_POST['Patient'])) {
 
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
+	echo '<input type="hidden" name="PriceList" value="'.$mydebtorrow['salestype'].'" />';
 	echo '<input type="hidden" name="Patient" value="'.$_POST['Patient'].'" />';
 	echo '<input type="hidden" name="PatientNo" value="'.$Patient[0].'" />';
 	echo '<input type="hidden" name="BranchNo" value="'.$Patient[1].'" />';
@@ -571,50 +620,51 @@ if (isset($_POST['Patient'])) {
 	echo '<tr><td>'._('Date of Admission').':</td>
 		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="AdmissionDate" maxlength="10" size="11" value="' .
 					 date($_SESSION['DefaultDateFormat']) . '" /></td></tr>';
-	echo '<tr><td>'._('Type of test').':</td>';
+	echo '<tr><td>'._('Type of Laboratory test').':</td>';
 	$sql="SELECT stockid,
 				description
 			FROM stockmaster
 			LEFT JOIN stockcategory
 				ON stockmaster.categoryid=stockcategory.categoryid
-			WHERE stockcategory.stocktype='X'";
+			WHERE stockcategory.stocktype='T'";
 
 	$result=DB_query($sql, $db);
 	if (isset($_POST['StockID'])) {
 		$StockID=$_POST['StockID'];
-	} elseif (Date1GreaterThanDate2(date($_SESSION['DefaultDateFormat']), ConvertSQLDate($mydebtorrow['clientsince']))) {
-		$StockID='RETFILE';
 	} else {
-		$StockID='NEWFILE';
+		$StockID='';
+	}
+
+	for ($i=0; $i<$_SESSION['Items']['Lines']; $i++) {
+		echo '<td><select name="StockID" onChange="ReloadForm(ChangeItem)">';
+		echo '<option value=""></option>';
+		while ($myrow=DB_fetch_array($result)) {
+			if ($myrow['stockid']==$_SESSION['Items'][$i]['StockID']) {
+				echo '<option selected value="'.$myrow['stockid'].'">'.$myrow['stockid']. ' - ' . $myrow['description'].'</option>';
+			} else {
+				echo '<option value="'.$myrow['stockid'].'">'.$myrow['stockid']. ' - ' . $myrow['description'].'</option>';
+			}
+		}
+		echo '</select>&nbsp;@&nbsp;'.number_format($_SESSION['Items'][$i]['Price'],0).' '.$_SESSION['CompanyRecord']['currencydefault'].'</td></tr>';
+		DB_data_seek($result,0);
+		echo '<tr><td>';
 	}
 	echo '<td><select name="StockID" onChange="ReloadForm(ChangeItem)">';
+	echo '<option value=""></option>';
 	while ($myrow=DB_fetch_array($result)) {
-		if ($myrow['stockid']==$StockID) {
-			echo '<option selected value="'.$myrow['stockid'].'">'.$myrow['stockid']. ' - ' . $myrow['description'].'</option>';
-		} else {
-			echo '<option value="'.$myrow['stockid'].'">'.$myrow['stockid']. ' - ' . $myrow['description'].'</option>';
-		}
+		echo '<option value="'.$myrow['stockid'].'">'.$myrow['stockid']. ' - ' . $myrow['description'].'</option>';
 	}
 	echo '</select></td></tr>';
+	DB_data_seek($result,0);
+
 	echo '<input type="submit" name="ChangeItem" style="visibility: hidden" value=" " />';
-	$sql="SELECT price
-				FROM prices
-				WHERE stockid='".$StockID."'
-				AND '".date('Y-m-d')."' between startdate and enddate";
-	$result=DB_query($sql,$db);
-	if (DB_num_rows($result)==0) {
-		$Price=0;
-	} else {
-		$myrow=DB_fetch_array($result);
-		$Price=$myrow['price'];
-	}
 	echo '<tr><td>'._('Payment Fee').'</td>';
-	echo '<td>'.number_format($Price, 0).' '.$_SESSION['CompanyRecord']['currencydefault'].'</td></tr>';
-	echo '<input type="hidden" name="Price" value="'.$Price.'" />';
+	echo '<td>'.number_format($_SESSION['Items']['Value'], 0).' '.$_SESSION['CompanyRecord']['currencydefault'].'</td></tr>';
+	echo '<input type="hidden" name="Price" value="'.$_SESSION['Items']['Value'].'" />';
 
 	if ($Patient[1]=='CASH') {
 		if (!isset($Received)) {
-			$Received=$Price;
+			$Received=$_SESSION['Items']['Value'];
 		}
 		echo '<tr><td>'._('Amount Received').'</td>';
 		echo '<td><input type="text" class="number" size="10" name="Received" value="'.number_format($Received,0,'.','').'" /></td></tr>';
@@ -624,7 +674,8 @@ if (isset($_POST['Patient'])) {
 				bankaccounts.currcode
 			FROM bankaccounts,
 				chartmaster
-			WHERE bankaccounts.accountcode=chartmaster.accountcode";
+			WHERE bankaccounts.accountcode=chartmaster.accountcode
+				AND pettycash=1";
 
 		$ErrMsg = _('The bank accounts could not be retrieved because');
 		$DbgMsg = _('The SQL used to retrieve the bank accounts was');
