@@ -49,10 +49,7 @@ if (isset($_POST['submit'])) {
 	} elseif (strlen($_POST['CategoryDescription']) >20) {
 		$InputError = 1;
 		prnMsg(_('The Sales category description must be twenty characters or less long'),'error');
-	} elseif ($_POST['StockType'] !='D'
-			AND $_POST['StockType'] !='L'
-			AND $_POST['StockType'] !='F'
-			AND $_POST['StockType'] !='M'
+	} elseif ($_POST['StockType'] !='S'
 			AND $_POST['StockType'] !='R'
 			AND $_POST['StockType'] !='T'
 			AND $_POST['StockType'] !='X') {
@@ -355,26 +352,6 @@ if (! isset($_GET['delete'])) {
 
 	echo '<tr><td>' . _('Stock Type') . ':</td>
             <td><select name="StockType" onChange="ReloadForm(CategoryForm.UpdateTypes)" >';
-		if (isset($_POST['StockType']) and $_POST['StockType']=='F') {
-			echo '<option selected value="F">' . _('Finished Goods') . '</option>';
-		} else {
-			echo '<option value="F">' . _('Finished Goods') . '</option>';
-		}
-		if (isset($_POST['StockType']) and $_POST['StockType']=='M') {
-			echo '<option selected value="M">' . _('Raw Materials') . '</option>';
-		} else {
-			echo '<option value="M">' . _('Raw Materials') . '</option>';
-		}
-		if (isset($_POST['StockType']) and $_POST['StockType']=='D') {
-			echo '<option selected value="D">' . _('Dummy Item - (No Movements)') . '</option>';
-		} else {
-			echo '<option value="D">' . _('Dummy Item - (No Movements)') . '</option>';
-		}
-		if (isset($_POST['StockType']) and $_POST['StockType']=='L') {
-			echo '<option selected value="L">' . _('Labour') . '</option>';
-		} else {
-			echo '<option value="L">' . _('Labour') . '</option>';
-		}
 		if (isset($_POST['StockType']) and $_POST['StockType']=='R') {
 			echo '<option selected value="R">' . _('Registration');
 		} else {
@@ -389,6 +366,11 @@ if (! isset($_GET['delete'])) {
 			echo '<option selected value="T">' . _('Lab Tests');
 		} else {
 			echo '<option value="T">' . _('Lab Tests');
+		}
+		if (isset($_POST['StockType']) and $_POST['StockType']=='S') {
+			echo '<option selected value="S">' . _('Other Medical Services');
+		} else {
+			echo '<option value="S">' . _('Other Medical Services');
 		}
 
 	echo '</select></td></tr>';
