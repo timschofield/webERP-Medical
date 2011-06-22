@@ -107,7 +107,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 													'" . $_SESSION['Items'][$i]['Price'] . "',
 													'1',
 													'0',
-													'" . _('Sales order for patient admission transaction') . "',
+													'" . _('Sales order for radiology transaction') . "',
 													'" . Date('Y-m-d') . "',
 													'" . Date('Y-m-d') . "',
 													'1',
