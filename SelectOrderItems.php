@@ -1782,7 +1782,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 							<td>'.$myrow['units'].'</td>
 							<td class="number">'.number_format($QOH,$DecimalPlaces).'</td>
 							<td class="number">'.number_format($DemandQty,$DecimalPlaces).'</td>
-							<td class="number">'.number_format($PriceRow['conversionfactor'],$DecimalPlaces).'</td>
+							<td class="number">'.number_format($OnOrder/$PriceRow['conversionfactor'],$DecimalPlaces).'</td>
 							<td class="number">'.number_format($Available,$DecimalPlaces).'</td>
 							<td><font size=1><input class="number"  tabindex='.number_format($j+7).' type="textbox" size=6 name="itm'.$myrow['stockid'].'" value=0>
 							<td class="number">'.number_format($PriceRow['price'],2).'</td>
