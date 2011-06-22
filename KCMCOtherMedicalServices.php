@@ -38,7 +38,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 
 	$InputError=0;
 
-	if (!isset($_POST['BankAccount']) or $_POST['BankAccount']=='') {
+	if ((!isset($_POST['BankAccount']) or $_POST['BankAccount']=='') and !isset($_POST['SubmitInsurance'])) {
 		$InputError=1;
 		$msg[]=_('You must select a cash collection point');
 	}
