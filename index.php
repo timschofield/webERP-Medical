@@ -165,6 +165,11 @@ if (isset($SupplierLogin) and count($_SESSION['AllowedPageSecurityTokens'])==2 a
 							</tr>
 							<tr>
 							<td class="menu_group_item">
+								<?php echo '<p>&bull; <a href="' . $rootpath . '/KCMCPharmacy.php?New=True">' . _('Sales of Drugs') . '</a></p>'; ?>
+							</td>
+							</tr>
+							<tr>
+							<td class="menu_group_item">
 								<?php echo '<p>&bull; <a href="' . $rootpath . '/KCMCInsuranceInvoice.php">' . _('Create Insurance Invoice') . '</a></p>'; ?>
 							</td>
 							</tr>
