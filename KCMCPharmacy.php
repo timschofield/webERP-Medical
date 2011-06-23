@@ -33,6 +33,7 @@ if (isset($_POST['ChangeItem'])) {
 	$_SESSION['Items']['Value']+=$Price*$_POST['Quantity'];
 	$_SESSION['Items']['Lines']++;
 }
+$_SESSION['Items']['Dispensary']=$_POST['Dispensary'];
 
 if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 
@@ -78,8 +79,8 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 											'" . DB_escape_string($_POST['Comments']) ."',
 											'" . Date("Y-m-d") . "',
 											'1',
-											'" . $_SESSION['UserStockLocation'] . "',
-											'" . $_SESSION['UserStockLocation'] ."',
+											'" . $_SESSION['Items']['Dispensary'] . "',
+											'" . $_SESSION['Items']['Dispensary'] ."',
 											'" . Date('Y-m-d') . "',
 											'" . Date('Y-m-d') . "',
 											0
@@ -179,7 +180,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 						'" . $_SESSION['Items'][$i]['StockID'] . "',
 						 10,
 						'" . $InvoiceNo . "',
-						'" . $_SESSION['UserStockLocation'] . "',
+						'" . $_SESSION['Items']['Dispensary'] . "',
 						'" . date('Y-m-d H-i-s') . "',
 						'" . $_POST['PatientNo'] . "',
 						'" . $_POST['BranchNo'] . "',
@@ -350,6 +351,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 			echo '<meta http-equiv="Refresh" content="0; url='.$rootpath.'/PDFReceipt.php?FromTransNo='.$InvoiceNo.'&amp;InvOrCredit=Invoice&amp;PrintPDF=True">';
 			include('includes/footer.inc');
 			$_SESSION['DefaultCashPoint']=$_POST['BankAccount'];
+			$_SESSION['DefaultDispensary']=$_POST['Dispensary'];
 			exit;
 		} elseif (isset($_POST['SubmitInsurance'])) {
 			prnMsg( _('The transaction has been successfully posted'), 'success');
@@ -624,7 +626,7 @@ if (isset($_POST['Patient'])) {
 	echo '<tr><td>'._('Date of Admission').':</td>
 		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="AdmissionDate" maxlength="10" size="11" value="' .
 					 date($_SESSION['DefaultDateFormat']) . '" /></td></tr>';
-	echo '<tr><td>'._('Type of Service').':</td>';
+	echo '<tr><td>'._('Select a Drug').':</td>';
 	$sql="SELECT stockid,
 				description
 			FROM stockmaster
@@ -676,6 +678,34 @@ if (isset($_POST['Patient'])) {
 	echo '<td>'.number_format($_SESSION['Items']['Value'], 0).' '.$_SESSION['CompanyRecord']['currencydefault'].'</td></tr>';
 	echo '<input type="hidden" name="Price" value="'.$_SESSION['Items']['Value'].'" />';
 
+	$sql = "SELECT loccode,
+				locationname
+			FROM locations";
+
+	$ErrMsg = _('The locations could not be retrieved because');
+	$DbgMsg = _('The SQL used to retrieve the locations was');
+	$LocationResults = DB_query($sql,$db,$ErrMsg,$DbgMsg);
+
+	echo '<tr><td>' . _('Drugs issued from') . ':</td><td><select name="Dispensary">';
+
+	if (DB_num_rows($LocationResults)==0){
+		echo '</select></td></tr></table><p>';
+		prnMsg( _('Locations have not yet been defined. You must first') . ' <a href="' . $rootpath . '/Locations.php">' . _('define the locations') . '</a> ' ,'warn');
+		include('includes/footer.inc');
+		exit;
+	} else {
+		echo '<option value=""></option>';
+		while ($myrow=DB_fetch_array($LocationResults)){
+		/*list the bank account names */
+			if (isset($_SESSION['DefaultDispensary']) and $_SESSION['DefaultDispensary']==$myrow['loccode']){
+				echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			} else {
+				echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			}
+		}
+		echo '</select></td></tr>';
+	}
+
 	if ($Patient[1]=='CASH') {
 		if (!isset($Received)) {
 			$Received=$_SESSION['Items']['Value'];
@@ -714,6 +744,7 @@ if (isset($_POST['Patient'])) {
 			}
 			echo '</select></td></tr>';
 		}
+
 		echo '<tr><td>'._('Comments').'</td>';
 		echo '<td><input type="text" size="50" name="Comments" value="" /></td></tr>';
 		echo '</table><br />';
