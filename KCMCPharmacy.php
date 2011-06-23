@@ -351,7 +351,6 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 			echo '<meta http-equiv="Refresh" content="0; url='.$rootpath.'/PDFReceipt.php?FromTransNo='.$InvoiceNo.'&amp;InvOrCredit=Invoice&amp;PrintPDF=True">';
 			include('includes/footer.inc');
 			$_SESSION['DefaultCashPoint']=$_POST['BankAccount'];
-			$_SESSION['DefaultDispensary']=$_POST['Dispensary'];
 			exit;
 		} elseif (isset($_POST['SubmitInsurance'])) {
 			prnMsg( _('The transaction has been successfully posted'), 'success');
@@ -360,6 +359,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 			include('includes/footer.inc');
 			exit;
 		}
+		$_SESSION['DefaultDispensary']=$_POST['Dispensary'];
 	}
 }
 
