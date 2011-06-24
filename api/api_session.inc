@@ -40,7 +40,7 @@ if (!isset($_SESSION['AttemptsCounter'])){
 	$_SESSION['AttemptsCounter'] = 0;
 }
 
-if ($_SESSION['HTTPS_Only']==1){
+if (isset($_SESSION['HTTPS_Only']) and $_SESSION['HTTPS_Only']==1){
 	if ($_SERVER['HTTPS']!='on'){
 		prnMsg(_('webERP is configured to allow only secure socket connections. Pages must be called with https://') . ' .....','error');
 		exit;
@@ -52,7 +52,7 @@ if ($_SESSION['HTTPS_Only']==1){
 // arrays defining access for each group of users. These definitions can be modified by a system admin under setup
 
 
-if (!is_array($_SESSION['AllowedPageSecurityTokens']) AND !isset($AllowAnyone)) {
+if (isset($_SESSION['AllowedPageSecurityTokens']) and !is_array($_SESSION['AllowedPageSecurityTokens']) AND !isset($AllowAnyone)) {
 /*  NO HTML output - but may need an XMLRPC style error message here.
 	Lindsay: 12Jan10
 	$title = _('Account Error Report');
