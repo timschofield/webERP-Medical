@@ -157,13 +157,27 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 				'" . _('Invoice of Other Medical Services for Patient number').' '.$_POST['PatientNo'] . "',
 				'" . $_POST['InsuranceRef'] . "',
 				'1',
-				'" . $_POST['Receipt'] . "')";
+				'" . $_POST['Received'] . "')";
 
 		$ErrMsg =_('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The debtor transaction record could not be inserted because');
 		$DbgMsg = _('The following SQL to insert the debtor transaction record was used');
 		$Result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 
 		for ($i=0; $i<$_SESSION['Items']['Lines']; $i++) {
+		// Need to get the current location quantity will need it later for the stock movement
+			$SQL="SELECT locstock.quantity
+				FROM locstock
+				WHERE locstock.stockid='" . $_SESSION['Items'][$i]['StockID'] . "'
+				AND loccode= '" . $_SESSION['Items']['Dispensary'] . "'";
+			$Result = DB_query($SQL, $db);
+			if (DB_num_rows($Result)==1){
+				$LocQtyRow = DB_fetch_row($Result);
+				$QtyOnHandPrior = $LocQtyRow[0];
+			} else {
+				// There must actually be some error this should never happen
+				$QtyOnHandPrior = 0;
+			}
+
 			$SQL = "INSERT INTO stockmoves (
 						stockid,
 						type,
@@ -191,13 +205,17 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 						'" . -$_SESSION['Items'][$i]['Quantity'] . "',
 						'" . $_SESSION['Items'][$i]['Price'] . "',
 						1,
-						0
+						'" . ($QtyOnHandPrior-$_SESSION['Items'][$i]['Quantity']) . "'
 					)";
 
 			$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Stock movement records for'). ' '. $_POST['StockID'] . ' ' .
 				_('could not be inserted because');
 			$DbgMsg = _('The following SQL to insert the stock movement records was used');
 			$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+
+			$SQL = "UPDATE locstock SET quantity = quantity + '" . -$_SESSION['Items'][$i]['Quantity'] . "'
+					WHERE stockid='" . $_SESSION['Items'][$i]['StockID'] . "'
+					AND loccode='" . $_SESSION['Items']['Dispensary'] . "'";
 		}
 		$SQL="SELECT salestype
 				FROM debtorsmaster
@@ -339,7 +357,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 											'" . $InvoiceNo . "',
 											'1',
 											'" . -$_SESSION['Items']['Value'] . "',
-											'" . -$_POST['Receipt'] . "',
+											'" . -$_POST['Received'] . "',
 											'" . _('Payment of Other Medical Service for Patient number').' '.$_POST['PatientNo'] . "'
 										)";
 
