@@ -54,8 +54,8 @@ if (isset($_POST['submit'])) {
 			AND $_POST['StockType'] !='P'
 			AND $_POST['StockType'] !='T'
 			AND $_POST['StockType'] !='X') {
-		$InputError = 1;
-		prnMsg(_('The stock type selected must be one of') . ' "D" - ' . _('Dummy item') . ', "L" - ' . _('Labour stock item') . ', "F" - ' . _('Finished product') . ' ' . _('or') . ' "M" - ' . _('Raw Materials'),'error');
+//		$InputError = 1;
+//		prnMsg(_('The stock type selected must be one of') . ' "D" - ' . _('Dummy item') . ', "L" - ' . _('Labour stock item') . ', "F" - ' . _('Finished product') . ' ' . _('or') . ' "M" - ' . _('Raw Materials'),'error');
 	}
 	for ($i=0;$i<=$_POST['PropertyCounter'];$i++){
 		if (isset($_POST['PropNumeric' .$i]) and $_POST['PropNumeric' .$i] == true){
