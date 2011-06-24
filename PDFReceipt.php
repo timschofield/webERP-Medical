@@ -36,6 +36,14 @@ $result=DB_query($sql, $db);
 $myrow=DB_fetch_array($result);
 $StartReceiptNumber=$myrow['start'];
 
+if ($_GET['InvOrCredit']=='Invoice') {
+	$Type=10;
+} else if ($_GET['InvOrCredit']=='Credit') {
+	$Type=11;
+} else {
+	$Type=12;
+}
+
 $sql="SELECT 	debtortrans.debtorno,
 				debtortrans.ovamount,
 				debtortrans.invtext,
@@ -51,7 +59,7 @@ $sql="SELECT 	debtortrans.debtorno,
 				ON salesorderdetails.orderno=debtortrans.order_
 			LEFT JOIN stockmaster
 				ON stockmaster.stockid=salesorderdetails.stkcode
-			WHERE type=10
+			WHERE type='".$Type."'
 			AND transno='".$_GET['FromTransNo']."'";
 $MyOrderResult=DB_query($sql, $db);
 
@@ -59,14 +67,17 @@ $sql="SELECT 	debtortrans.debtorno,
 				debtortrans.ovamount,
 				debtortrans.invtext
 			FROM debtortrans
-			WHERE type=10
+			WHERE type='".$Type."'
 			AND transno='".$_GET['FromTransNo']."'";
 $result=DB_query($sql, $db);
 $myrow=DB_fetch_array($result);
 $DebtorNo=$myrow['debtorno'];
 $Amount=$myrow['ovamount'];
 $Narrative=$myrow['invtext'];
-$LeftOvers = $pdf->addTextWrap(0,$YPos-($line_height*14),140,$FontSize,$Narrative);
+
+if ($Type!=12) {
+	$LeftOvers = $pdf->addTextWrap(0,$YPos-($line_height*14),140,$FontSize,$Narrative);
+}
 
 $YPos -= 170;
 
@@ -123,21 +134,29 @@ $LeftOvers = $pdf->addTextWrap(150,$YPos-($line_height*6),300,$FontSize, htmlspe
 
 $YPos=$YPos-($line_height*8);
 */
-while ($mylines=DB_fetch_array($MyOrderResult)) {
-	$YPos=$YPos-($line_height);
-//	$LeftOvers = $pdf->addTextWrap(20,$YPos,300,$FontSize, htmlspecialchars_decode($mylines['stkcode']));
-	$LeftOvers = $pdf->addTextWrap(0,$YPos,300,$FontSize, htmlspecialchars_decode($mylines['description']));
-	$YPos=$YPos-($line_height);
-	$LeftOvers = $pdf->addTextWrap(20,$YPos,300,$FontSize, htmlspecialchars_decode($mylines['quantity']) . ' @ ' . $mylines['unitprice']);
-//	$LeftOvers = $pdf->addTextWrap(180,$YPos,300,$FontSize, htmlspecialchars_decode($mylines['unitprice']));
-	$LeftOvers = $pdf->addTextWrap(100,$YPos,300,$FontSize, number_format($mylines['quantity']*$mylines['unitprice'],0).' '.$myrow['currcode']);
-	$YPos=$YPos-($line_height);
+if ($Type!=12) {
+	while ($mylines=DB_fetch_array($MyOrderResult)) {
+		$YPos=$YPos-($line_height);
+//		$LeftOvers = $pdf->addTextWrap(20,$YPos,300,$FontSize, htmlspecialchars_decode($mylines['stkcode']));
+		$LeftOvers = $pdf->addTextWrap(0,$YPos,300,$FontSize, htmlspecialchars_decode($mylines['description']));
+		$YPos=$YPos-($line_height);
+		$LeftOvers = $pdf->addTextWrap(20,$YPos,300,$FontSize, htmlspecialchars_decode($mylines['quantity']) . ' @ ' . $mylines['unitprice']);
+//		$LeftOvers = $pdf->addTextWrap(180,$YPos,300,$FontSize, htmlspecialchars_decode($mylines['unitprice']));
+		$LeftOvers = $pdf->addTextWrap(100,$YPos,300,$FontSize, number_format($mylines['quantity']*$mylines['unitprice'],0).' '.$myrow['currcode']);
+		$YPos=$YPos-($line_height);
+	}
+} else {
+		$YPos=$YPos-($line_height);
+		$LeftOvers = $pdf->addTextWrap(0,$YPos,300,$FontSize, htmlspecialchars_decode(_('In Patient Deposit')));
 }
 
 $YPos=$YPos-($line_height*2);
 $LeftOvers = $pdf->addTextWrap(50,$YPos,300,$FontSize,_('Total received').' : ');
-$LeftOvers = $pdf->addTextWrap(150,$YPos,300,$FontSize,number_format($Amount,$DecimalPlaces).'  '.$myrow['currcode']);
-
+if ($Type!=12) {
+	$LeftOvers = $pdf->addTextWrap(150,$YPos,300,$FontSize,number_format($Amount,$DecimalPlaces).'  '.$myrow['currcode']);
+} else {
+	$LeftOvers = $pdf->addTextWrap(150,$YPos,300,$FontSize,number_format(-$Amount,$DecimalPlaces).'  '.$myrow['currcode']);
+}
 $YPos=$YPos-($line_height*2);
 
 $pdf->OutputD('Receipt-'.$_GET['FromTransNo'], 'I');

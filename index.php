@@ -150,6 +150,11 @@ if (isset($SupplierLogin) and count($_SESSION['AllowedPageSecurityTokens'])==2 a
 							</tr>
 							<tr>
 							<td class="menu_group_item">
+								<?php echo '<p>&bull; <a href="' . $rootpath . '/KCMCPatientDeposit.php?New=True">' . _('Deposit Received From Patient') . '</a></p>'; ?>
+							</td>
+							</tr>
+							<tr>
+							<td class="menu_group_item">
 								<?php echo '<p>&bull; <a href="' . $rootpath . '/KCMCRadiology.php?New=True">' . _('Radiology Test') . '</a></p>'; ?>
 							</td>
 							</tr>
