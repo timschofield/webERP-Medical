@@ -33,7 +33,9 @@ if (isset($_POST['ChangeItem'])) {
 	$_SESSION['Items']['Value']+=$Price*$_POST['Quantity'];
 	$_SESSION['Items']['Lines']++;
 }
-$_SESSION['Items']['Dispensary']=$_POST['Dispensary'];
+if (isset($_POST['Dispensary'])) {
+	$_SESSION['Items']['Dispensary']=$_POST['Dispensary'];
+}
 
 if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 
@@ -155,7 +157,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 				'" . _('Invoice of Other Medical Services for Patient number').' '.$_POST['PatientNo'] . "',
 				'" . $_POST['InsuranceRef'] . "',
 				'1',
-				'" . $_SESSION['Items']['Value'] . "')";
+				'" . $_POST['Receipt'] . "')";
 
 		$ErrMsg =_('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The debtor transaction record could not be inserted because');
 		$DbgMsg = _('The following SQL to insert the debtor transaction record was used');
@@ -337,7 +339,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 											'" . $InvoiceNo . "',
 											'1',
 											'" . -$_SESSION['Items']['Value'] . "',
-											'" . -$_SESSION['Items']['Value'] . "',
+											'" . -$_POST['Receipt'] . "',
 											'" . _('Payment of Other Medical Service for Patient number').' '.$_POST['PatientNo'] . "'
 										)";
 
