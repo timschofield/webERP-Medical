@@ -207,9 +207,9 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 		$SQL = "SELECT debtorsmaster.debtorno,
 				debtorsmaster.name,
 				debtorsmaster.address1,
-								debtorsmaster.address2,
-								debtorsmaster.address3,
-								debtorsmaster.address4,
+				debtorsmaster.address2,
+				debtorsmaster.address3,
+				debtorsmaster.address4,
 				custbranch.branchcode,
 				custbranch.brname,
 				custbranch.contactname,
@@ -218,7 +218,8 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 				custbranch.faxno
 			FROM debtorsmaster LEFT JOIN custbranch
 				ON debtorsmaster.debtorno = custbranch.debtorno, debtortype
-			WHERE debtorsmaster.typeid = debtortype.typeid";
+			WHERE debtorsmaster.typeid = debtortype.typeid
+				AND custbranch.branchcode='CASH'";
 	} else {
 		if (strlen($_POST['Keywords']) > 0) {
 			//using the customer name
@@ -240,7 +241,8 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 			FROM debtorsmaster LEFT JOIN custbranch
 				ON debtorsmaster.debtorno = custbranch.debtorno, debtortype
 			WHERE debtorsmaster.name " . LIKE . " '$SearchString'
-			AND debtorsmaster.typeid = debtortype.typeid";
+			AND debtorsmaster.typeid = debtortype.typeid
+			AND custbranch.branchcode='CASH'";
 		} elseif (strlen($_POST['CustCode']) > 0) {
 			$_POST['CustCode'] = strtoupper(trim($_POST['CustCode']));
 			$SQL = "SELECT debtorsmaster.debtorno,
@@ -258,7 +260,8 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 			FROM debtorsmaster LEFT JOIN custbranch
 				ON debtorsmaster.debtorno = custbranch.debtorno, debtortype
 			WHERE debtorsmaster.debtorno " . LIKE . " '%" . $_POST['CustCode'] . "%'
-			AND debtorsmaster.typeid = debtortype.typeid";
+			AND debtorsmaster.typeid = debtortype.typeid
+			AND custbranch.branchcode='CASH'";
 		} elseif (strlen($_POST['CustPhone']) > 0) {
 			$SQL = "SELECT debtorsmaster.debtorno,
 				debtorsmaster.name,
@@ -275,7 +278,8 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 			FROM debtorsmaster LEFT JOIN custbranch
 				ON debtorsmaster.debtorno = custbranch.debtorno, debtortype
 			WHERE custbranch.phoneno " . LIKE . " '%" . $_POST['CustPhone'] . "%'
-			AND debtorsmaster.typeid = debtortype.typeid";
+			AND debtorsmaster.typeid = debtortype.typeid
+			AND custbranch.branchcode='CASH'";
 			// Added an option to search by address. I tried having it search address1, address2, address3, and address4, but my knowledge of MYSQL is limited.  This will work okay if you select the CSV Format then you can search though the address1 field. I would like to extend this to all 4 address fields. Gilles Deacur
 
 		} elseif (strlen($_POST['CustAdd']) > 0) {
@@ -294,7 +298,8 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 			FROM debtorsmaster LEFT JOIN custbranch
 				ON debtorsmaster.debtorno = custbranch.debtorno, debtortype
 			WHERE CONCAT_WS(debtorsmaster.address1,debtorsmaster.address2,debtorsmaster.address3,debtorsmaster.address4) " . LIKE . " '%" . $_POST['CustAdd'] . "%'
-			AND debtorsmaster.typeid = debtortype.typeid";
+			AND debtorsmaster.typeid = debtortype.typeid
+			AND custbranch.branchcode='CASH'";
 			// End added search feature. Gilles Deacur
 
 		}
