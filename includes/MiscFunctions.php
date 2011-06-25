@@ -306,50 +306,35 @@ function http_file_exists($url)  {
 	return false;
 }
 
+function StockTypes() {
+	$StockTypes['R']=_('Registration');
+	$StockTypes['P']=_('Pharmaceuticals');
+	$StockTypes['P']=_('Pharmaceuticals');
+	$StockTypes['X']=_('Radiology');
+	$StockTypes['T']=_('LaboratoryTests');
+	$StockTypes['M']=_('Other Medical Consumables');
+	$StockTypes['C']=_('Non Medical Consumables');
+	$StockTypes['N']=_('Non Medical Services');
+	$StockTypes['S']=_('Other Medical Services');
+	return $StockTypes;
+}
+
+function GetStockType($Type) {
+	$StockTypes=StockTypes();
+	return $StockTypes($Type)
+}
+
 function ShowStockTypes($StockType) {
+	$StockTypes=StockTypes();
     echo '<td><select name="StockType" onChange="ReloadForm(UpdateItems)" >';
 	echo '<option value=""></option>';
-	if (isset($StockType) and $StockType=='R') {
-		echo '<option selected value="R">' . _('Registration') . '</option>';
-	} else {
-		echo '<option value="R">' . _('Registration') . '</option>';
+	foreach ($StockTypes as $Type=>$Name) {
+		if (isset($StockType) and $StockType==$Type) {
+			echo '<option selected value="'.$Type.'">' . $Name . '</option>';
+		} else {
+			echo '<option value="'.$Type.'">' . $Name . '</option>';
+		}
 	}
-	if (isset($StockType) and $StockType=='P') {
-		echo '<option selected value="P">' . _('Pharmaceuticals') . '</option>';
-	} else {
-		echo '<option value="P">' . _('Pharmaceuticals') . '</option>';
-	}
-	if (isset($StockType) and $StockType=='X') {
-		echo '<option selected value="X">' . _('Radiology') . '</option>';
-	} else {
-		echo '<option value="X">' . _('Radiology') . '</option>';
-	}
-	if (isset($StockType) and $StockType=='T') {
-		echo '<option selected value="T">' . _('Laboratory Tests') . '</option>';
-	} else {
-		echo '<option value="T">' . _('Laboratory Tests') . '</option>';
-	}
-	if (isset($StockType) and $StockType=='M') {
-		echo '<option selected value="M">' . _('Other Medical Consumables') . '</option>';
-	} else {
-		echo '<option value="M">' . _('Other Medical Consumables') . '</option>';
-	}
-	if (isset($StockType) and $StockType=='C') {
-		echo '<option selected value="C">' . _('Non Medical Consumables') . '</option>';
-	} else {
-		echo '<option value="C">' . _('Non Medical Consumables') . '</option>';
-	}
-	if (isset($StockType) and $StockType=='N') {
-		echo '<option selected value="N">' . _('Non Medical Services') . '</option>';
-	} else {
-		echo '<option value="N">' . _('Non Medical Services') . '</option>';
-	}
-	if (isset($StockType) and $StockType=='S') {
-		echo '<option selected value="S">' . _('Other Medical Services') . '</option>';
-	} else {
-		echo '<option value="S">' . _('Other Medical Services') . '</option>';
-	}
-
 	echo '</select>';
 }
 
