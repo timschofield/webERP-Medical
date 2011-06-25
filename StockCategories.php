@@ -351,50 +351,10 @@ if (! isset($_GET['delete'])) {
             <td><input type="Text" name="CategoryDescription" size=22 maxlength=20 value="' . $_POST['CategoryDescription'] . '"></td></tr>';
 
 
-	echo '<tr><td>' . _('Stock Type') . ':</td>
-            <td><select name="StockType" onChange="ReloadForm(CategoryForm.UpdateTypes)" >';
-		if (isset($_POST['StockType']) and $_POST['StockType']=='R') {
-			echo '<option selected value="R">' . _('Registration');
-		} else {
-			echo '<option value="R">' . _('Registration');
-		}
-		if (isset($_POST['StockType']) and $_POST['StockType']=='P') {
-			echo '<option selected value="P">' . _('Pharmaceuticals');
-		} else {
-			echo '<option value="P">' . _('Pharmaceuticals');
-		}
-		if (isset($_POST['StockType']) and $_POST['StockType']=='X') {
-			echo '<option selected value="X">' . _('Radiology');
-		} else {
-			echo '<option value="X">' . _('Radiology');
-		}
-		if (isset($_POST['StockType']) and $_POST['StockType']=='T') {
-			echo '<option selected value="T">' . _('Laboratory Tests');
-		} else {
-			echo '<option value="T">' . _('Laboratory Tests');
-		}
-		if (isset($_POST['StockType']) and $_POST['StockType']=='M') {
-			echo '<option selected value="M">' . _('Other Medical Consumables');
-		} else {
-			echo '<option value="M">' . _('Other Medical Consumables');
-		}
-		if (isset($_POST['StockType']) and $_POST['StockType']=='C') {
-			echo '<option selected value="C">' . _('Non Medical Consumables');
-		} else {
-			echo '<option value="C">' . _('Non Medical Consumables');
-		}
-		if (isset($_POST['StockType']) and $_POST['StockType']=='N') {
-			echo '<option selected value="N">' . _('Non Medical Services');
-		} else {
-			echo '<option value="N">' . _('Non Medical Services');
-		}
-		if (isset($_POST['StockType']) and $_POST['StockType']=='S') {
-			echo '<option selected value="S">' . _('Other Medical Services');
-		} else {
-			echo '<option value="S">' . _('Other Medical Services');
-		}
+	echo '<tr><td>' . _('Stock Type') . ':</td>';
+	ShowStockTypes($_POST['StockType']);
 
-	echo '</select></td></tr>';
+	echo '</tr>';
 
 	echo '<input type="submit" name="UpdateTypes" style="visibility:hidden;width:1px" value="Not Seen">';
 	if (isset($_POST['StockType']) and $_POST['StockType']=='L') {
