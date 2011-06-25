@@ -36,25 +36,10 @@ while ($PeriodRow = DB_fetch_array($PeriodsResult)){
 	}
 }
 echo '</select></td>';
-echo '<td>' . _('Salesperson') . ':</td><td><select tabindex=2 name="Salesperson">';
+echo '<td>' . _('Sales Type') . ':</td>';
 
-$SalespeopleResult = DB_query("SELECT salesmancode, salesmanname FROM salesman",$db);
-if (!isset($_POST['Salesperson'])){
-	$_POST['Salesperson'] = 'All';
-	echo '<option selected value="All">' . _('All') . '</option>';
-} else {
-	echo '<option value="All">' . _('All') . '</option>';
-}
-while ($SalespersonRow = DB_fetch_array($SalespeopleResult)){
-
-	if ($_POST['Salesperson']==$SalespersonRow['salesmancode']) {
-	     echo '<option selected value="' . $SalespersonRow['salesmancode'] . '">' . $SalespersonRow['salesmanname'] . '</option>';
-	} else {
-	     echo '<option Value="' . $SalespersonRow['salesmancode'] . '">' . $SalespersonRow['salesmanname'] . '</option>';
-	}
-}
-echo '</select></td>';
-
+ShowStockTypes($_POST['StockType']);
+echo '<input type="submit" name="UpdateItems" style="visibility:hidden" value="Not Seen">';
 echo '</tr></table><br /><div class="centre"><input tabindex=4 type=submit name="ShowResults" value="' . _('Show Daily Sales For The Selected Month') . '">';
 echo '</form></div>';
 echo '<br />';
@@ -77,15 +62,20 @@ $sql = "SELECT 	trandate,
 				SUM(price*(1-discountpercent)* (-qty)) as salesvalue,
 				SUM((standardcost * -qty)) as cost
 			FROM stockmoves
-				INNER JOIN custbranch ON stockmoves.debtorno=custbranch.debtorno
+				INNER JOIN custbranch
+				ON stockmoves.debtorno=custbranch.debtorno
 					AND stockmoves.branchcode=custbranch.branchcode
+				INNER JOIN stockmaster
+				ON stockmoves.stockid=stockmaster.stockid
+				INNER JOIN stockcategory
+				ON stockmaster.categoryid=stockcategory.categoryid
 			WHERE (stockmoves.type=10 or stockmoves.type=11)
 			AND show_on_inv_crds =1
 			AND trandate>='" . $StartDateSQL . "'
 			AND trandate<='" . $EndDateSQL . "'";
 
-if ($_POST['Salesperson']!='All') {
-	$sql .= " AND custbranch.salesman='" . $_POST['Salesperson'] . "'";
+if ($_POST['StockType']!='') {
+	$sql .= " AND stockcategory.stocktype='" . $_POST['StockType'] . "'";
 }
 
 $sql .= " GROUP BY stockmoves.trandate ORDER BY stockmoves.trandate";
@@ -93,15 +83,18 @@ $ErrMsg = _('The sales data could not be retrieved because') . ' - ' . DB_error_
 $SalesResult = DB_query($sql, $db,$ErrMsg);
 
 echo '<table cellpadding=2 class=selection>';
-
+echo '<tr><th colspan="7"><font color="navy" size="3">' . _('Sales For The Month Of') . ' ' .
+		MonthAndYearFromSQLDate($StartDateSQL) . '</font></th></tr>';
+echo '<tr><th colspan="7"><font color="navy" size="2">' . _('For sales of type') . ' ' .
+		GetStockType($_POST['StockType']) . '</font></th></tr>';
 echo'<tr>
-	<th>' . _('Sunday') . '</th>
-	<th>' . _('Monday') . '</th>
-	<th>' . _('Tuesday') . '</th>
-	<th>' . _('Wednesday') . '</th>
-	<th>' . _('Thursday') . '</th>
-	<th>' . _('Friday') . '</th>
-	<th>' . _('Saturday') . '</th></tr>';
+	<th width="14.285714286%">' . _('Sunday') . '</th>
+	<th width="14.285714286%">' . _('Monday') . '</th>
+	<th width="14.285714286%">' . _('Tuesday') . '</th>
+	<th width="14.285714286%">' . _('Wednesday') . '</th>
+	<th width="14.285714286%">' . _('Thursday') . '</th>
+	<th width="14.285714286%">' . _('Friday') . '</th>
+	<th width="14.285714286%">' . _('Saturday') . '</th></tr>';
 
 $CumulativeTotalSales = 0;
 $CumulativeTotalCost = 0;
