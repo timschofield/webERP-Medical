@@ -281,12 +281,12 @@ if (isset($SelectedCategory)) {  ?>
 
 if (! isset($_GET['delete'])) {
 
-	echo '<form name="CategoryForm" method="post" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '">';
+	echo '<form name="CategoryForm" method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (isset($SelectedCategory)) {
 		//editing an existing stock category
-		if (!isset($_POST['UpdateTypes'])) {
+		if (!isset($_POST['UpdateItems'])) {
 			$sql = "SELECT categoryid,
                    	stocktype,
                    	categorydescription,
@@ -356,7 +356,7 @@ if (! isset($_GET['delete'])) {
 
 	echo '</tr>';
 
-	echo '<input type="submit" name="UpdateTypes" style="visibility:hidden;width:1px" value="Not Seen">';
+	echo '<input type="submit" name="UpdateItems" style="visibility:hidden;width:1px" value="Not Seen">';
 	if (isset($_POST['StockType']) and $_POST['StockType']=='L') {
 		$Result = $PnLAccountsResult;
 		echo '<tr><td>' . _('Recovery GL Code');
