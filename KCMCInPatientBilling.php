@@ -428,9 +428,9 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 		$SQL = "SELECT debtorsmaster.debtorno,
 				debtorsmaster.name,
 				debtorsmaster.address1,
-								debtorsmaster.address2,
-								debtorsmaster.address3,
-								debtorsmaster.address4,
+				debtorsmaster.address2,
+				debtorsmaster.address3,
+				debtorsmaster.address4,
 				custbranch.branchcode,
 				custbranch.brname,
 				custbranch.contactname,
@@ -616,6 +616,12 @@ if (isset($_POST['Patient'])) {
 				WHERE debtorno='".$Patient[0]."'";
 	$result=DB_query($sql, $db);
 	$mydebtorrow=DB_fetch_array($result);
+	$sql="SELECT sum(ovamount+ovgst) as balance
+				FROM debtortrans
+				WHERE debtorno='".$Patient[0]."'";
+	$result=DB_query($sql, $db);
+	$mybalancerow=DB_fetch_array($result);
+	$Balance=$mybalancerow['balance'];
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/customer.png" title="'
 		. _('Search') . '" alt="" />' . ' ' . $mydebtorrow['name']. ' - '.$Patient[1].'</p>';
 
@@ -698,6 +704,8 @@ if (isset($_POST['Patient'])) {
 	DB_data_seek($result,0);
 
 	echo '<input type="submit" name="ChangeItem" style="visibility: hidden" value=" " />';
+	echo '<tr><td>'._('Balance on Account').'</td>';
+	echo '<td>'.number_format($Balance, 0).' '.$_SESSION['CompanyRecord']['currencydefault'].'</td></tr>';
 	echo '<tr><td>'._('Payment Fee').'</td>';
 	echo '<td>'.number_format($_SESSION['Items']['Value'], 0).' '.$_SESSION['CompanyRecord']['currencydefault'].'</td></tr>';
 	echo '<input type="hidden" name="Price" value="'.$_SESSION['Items']['Value'].'" />';
@@ -707,7 +715,7 @@ if (isset($_POST['Patient'])) {
 			$Received=$_SESSION['Items']['Value'];
 		}
 		echo '<tr><td>'._('Amount Received').'</td>';
-		echo '<td><input type="text" class="number" size="10" name="Received" value="'.number_format($Received,0,'.','').'" /></td></tr>';
+		echo '<td><input type="text" class="number" size="10" name="Received" value="'.number_format($Received+$Balance,0,'.','').'" /></td></tr>';
 
 		$sql = "SELECT bankaccountname,
 				bankaccounts.accountcode,
