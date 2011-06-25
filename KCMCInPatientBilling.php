@@ -341,7 +341,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 											'" . $PeriodNo . "',
 											'" . $InvoiceNo . "',
 											'1',
-											'" . -$_SESSION['Items']['Value'] . "',
+											'" . -$_POST['Received'] . "',
 											'" . -$_POST['Received'] . "',
 											'" . _('Payment of Inpatient Transactions for Patient number').' '.$_POST['PatientNo'] . "'
 										)";
