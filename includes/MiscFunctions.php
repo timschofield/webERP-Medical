@@ -321,7 +321,7 @@ function StockTypes() {
 
 function GetStockType($Type) {
 	$StockTypes=StockTypes();
-	return $StockTypes($Type)
+	return $StockTypes[$Type];
 }
 
 function ShowStockTypes($StockType) {
