@@ -272,8 +272,9 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 									)";
 			$DbgMsg = _('The SQL that failed to insert the GL transaction for the bank account debit was');
 			$ErrMsg = _('Cannot insert a GL transaction for the bank account debit');
-			$result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
-
+			if ($_POST['Received']!=0) {
+				$result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+			}
 			/* Now Credit Debtors account with receipt */
 			$SQL="INSERT INTO gltrans ( type,
 										typeno,
@@ -294,7 +295,9 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 									)";
 			$DbgMsg = _('The SQL that failed to insert the GL transaction for the debtors account credit was');
 			$ErrMsg = _('Cannot insert a GL transaction for the debtors account credit');
-			$result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+			if ($_POST['Received']!=0) {
+				$result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+			}
 
 			$SQL="INSERT INTO banktrans (type,
 									transno,
@@ -314,13 +317,15 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 									'1',
 									'" . date('Y-m-d H-i-s') . "',
 									'2',
-									'" . ($_SESSION['Items']['Value']) . "',
+									'" . $_POST['Received'] . "',
 									'" . $_SESSION['CompanyRecord']['currencydefault'] . "'
 								)";
 
 			$DbgMsg = _('The SQL that failed to insert the bank account transaction was');
 			$ErrMsg = _('Cannot insert a bank transaction');
-			$result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+			if ($_POST['Received']!=0) {
+				$result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+			}
 
 			$SQL="INSERT INTO debtortrans (transno,
 											type,
@@ -350,7 +355,9 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 			echo '<br /><div class="centre"><a href="'.$_SERVER['PHP_SELF'].'?New=True">'._('Enter another receipt').'</a>';
 			$DbgMsg = _('The SQL that failed to insert the customer receipt transaction was');
 			$ErrMsg = _('Cannot insert a receipt transaction against the customer because') ;
-			$result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+			if ($_POST['Received']!=0) {
+				$result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+			}
 
 			DB_Txn_Commit($db);
 			echo '<meta http-equiv="Refresh" content="0; url='.$rootpath.'/PDFReceipt.php?FromTransNo='.$InvoiceNo.'&amp;InvOrCredit=Invoice&amp;PrintPDF=True">';
