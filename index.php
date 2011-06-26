@@ -140,7 +140,7 @@ if (isset($SupplierLogin) and count($_SESSION['AllowedPageSecurityTokens'])==2 a
 							</tr>
 							<tr>
 							<td class="menu_group_item">
-								<?php echo '<p>&bull; <a href="' . $rootpath . '/CounterSales.php?' .sid . '">' . _('Enter Counter Sales') . '</a></p>'; ?>
+								<?php echo '<p>&bull; <a href="' . $rootpath . '/CounterSales.php?' .sid . '">' . _('Enter Shop Sales') . '</a></p>'; ?>
 							</td>
 							</tr>
 							<tr>
@@ -185,27 +185,7 @@ if (isset($SupplierLogin) and count($_SESSION['AllowedPageSecurityTokens'])==2 a
 							</tr>
 							<tr>
 							<td class="menu_group_item">
-								<?php echo '<p>&bull; <a href="' . $rootpath . '/PDFPickingList.php?' .sid . '">' . _('Print Picking Lists') . '</a></p>'; ?>
-							</td>
-							</tr>
-							<tr>
-							<td class="menu_group_item">
 								<?php echo '<p>&bull; <a href="' . $rootpath . '/SelectSalesOrder.php?">' . _('Outstanding Sales Orders/Quotations') . '</a></p>'; ?>
-							</td>
-							</tr>
-							<tr>
-							<td class="menu_group_item">
-								<?php echo '<p>&bull; <a href="' . $rootpath . '/SpecialOrder.php?' .sid . '&NewSpecial=Yes">' . _('Special Order') . '</a></p>'; ?>
-							</td>
-							</tr>
-							<tr>
-							<td class="menu_group_item">
-								<?php echo '<p>&bull; <a href="' . $rootpath . '/SelectRecurringSalesOrder.php?' .sid . '">' . _('Recurring Order Template') . '</a></p>'; ?>
-							</td>
-							</tr>
-							<tr>
-							<td class="menu_group_item">
-								<?php echo '<p>&bull; <a href="' . $rootpath . '/RecurringSalesOrdersProcess.php?' .sid . '">' . _('Process Recurring Orders') . '</a></p>'; ?>
 							</td>
 							</tr>
 						</table>
