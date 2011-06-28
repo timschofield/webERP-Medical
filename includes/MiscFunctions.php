@@ -309,7 +309,6 @@ function http_file_exists($url)  {
 function StockTypes() {
 	$StockTypes['R']=_('Registration');
 	$StockTypes['P']=_('Pharmaceuticals');
-	$StockTypes['P']=_('Pharmaceuticals');
 	$StockTypes['X']=_('Radiology');
 	$StockTypes['T']=_('LaboratoryTests');
 	$StockTypes['M']=_('Other Medical Consumables');

@@ -268,7 +268,7 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 					FROM stockmaster,
 							stockcategory
 					WHERE stockmaster.categoryid=stockcategory.categoryid
-					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
+					AND (stockcategory.stocktype='P' OR stockcategory.stocktype='M' OR stockcategory.stocktype='C')
 					AND stockmaster.mbflag <>'G'
 					AND stockmaster.description " . LIKE . " '" . $SearchString . "'
 					AND stockmaster.discontinued=0
@@ -279,7 +279,7 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 							stockmaster.units
 					FROM stockmaster, stockcategory
 					WHERE  stockmaster.categoryid=stockcategory.categoryid
-					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
+					AND (stockcategory.stocktype='P' OR stockcategory.stocktype='M' OR stockcategory.stocktype='C')
 					AND stockmaster.mbflag <>'G'
 					AND stockmaster.discontinued=0
 					AND stockmaster.description " . LIKE . " '" . $SearchString . "'
@@ -299,7 +299,7 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 							stockmaster.controlled
 					FROM stockmaster, stockcategory
 					WHERE stockmaster.categoryid=stockcategory.categoryid
-					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
+					AND (stockcategory.stocktype='P' OR stockcategory.stocktype='M' OR stockcategory.stocktype='C')
 					AND stockmaster.stockid " . LIKE . " '" . $SearchString . "'
 					AND stockmaster.mbflag <>'G'
 					AND stockmaster.discontinued=0
@@ -311,7 +311,7 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 							stockmaster.controlled
 					FROM stockmaster, stockcategory
 					WHERE stockmaster.categoryid=stockcategory.categoryid
-					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
+					AND (stockcategory.stocktype='P' OR stockcategory.stocktype='M' OR stockcategory.stocktype='C')
 					AND stockmaster.stockid " . LIKE . " '" . $SearchString . "'
 					AND stockmaster.mbflag <>'G'
 					AND stockmaster.discontinued=0
@@ -327,7 +327,7 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 							stockmaster.controlled
 					FROM stockmaster, stockcategory
 					WHERE  stockmaster.categoryid=stockcategory.categoryid
-					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
+					AND (stockcategory.stocktype='P' OR stockcategory.stocktype='M' OR stockcategory.stocktype='C')
 					AND stockmaster.discontinued=0
 					ORDER BY stockmaster.stockid";
 		} else {
@@ -337,7 +337,7 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 							stockmaster.controlled
 					FROM stockmaster, stockcategory
 					WHERE stockmaster.categoryid=stockcategory.categoryid
-					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
+					AND (stockcategory.stocktype='P' OR stockcategory.stocktype='M' OR stockcategory.stocktype='C')
 					AND stockmaster.mbflag <>'G'
 					AND stockmaster.discontinued=0
 					AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
@@ -2201,7 +2201,7 @@ if (!isset($_POST['ProcessSale'])){
 		$SQL="SELECT categoryid,
 				categorydescription
 			FROM stockcategory
-			WHERE stocktype='F' OR stocktype='D'
+			WHERE stocktype='P' OR stocktype='M' OR stocktype='C'
 			ORDER BY categorydescription";
 		$result1 = DB_query($SQL,$db);
 		while ($myrow1 = DB_fetch_array($result1)) {
