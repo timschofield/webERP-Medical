@@ -2,7 +2,6 @@
 
 /* $Id$*/
 
-//$PageSecurity=15;
 include('includes/session.inc');
 $title = _('Tax Authorities');
 include('includes/header.inc');
@@ -182,11 +181,11 @@ if (!isset($SelectedTaxAuthID)) {
 			$myrow[5],
 			$myrow[6],
 			$myrow[7],
-			$_SERVER['PHP_SELF'] . '?' . SID,
+			$_SERVER['PHP_SELF'] . '?',
 			$myrow[0],
-			$_SERVER['PHP_SELF'] . '?' . SID,
+			$_SERVER['PHP_SELF'] . '?',
 			$myrow[0],
-			$rootpath . '/TaxAuthorityRates.php?' . SID,
+			$rootpath . '/TaxAuthorityRates.php?',
 			$myrow[0]);
 
 	}
@@ -255,7 +254,7 @@ echo '<table class=selection>
 
 
 echo '<tr><td>' . _('Input tax GL Account') . ':</td>
-	<td><select name=PurchTaxGLCode>';
+	<td><select name="PurchTaxGLCode">';
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['PurchTaxGLCode']) and $myrow['accountcode']==$_POST['PurchTaxGLCode']) {
@@ -271,7 +270,7 @@ echo '</select></td></tr>';
 DB_data_seek($result,0);
 
 echo '<tr><td>' . _('Output tax GL Account') . ':</td>
-	<td><select name=TaxGLCode>';
+	<td><select name="TaxGLCode">';
 
 
 while ($myrow = DB_fetch_array($result)) {

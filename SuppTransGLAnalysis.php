@@ -6,8 +6,6 @@ an array of GLCodes objects - only used if the AP - GL link is effective */
 
 include('includes/DefineSuppTransClass.php');
 
-//$PageSecurity = 5;
-
 /* Session started in header.inc for password checking and authorisation level check */
 include('includes/session.inc');
 
@@ -17,7 +15,7 @@ include('includes/header.inc');
 
 if (!isset($_SESSION['SuppTrans'])){
 	prnMsg(_('To enter a supplier invoice or credit note the supplier must first be selected from the supplier selection screen') . ', ' . _('then the link to enter a supplier invoice or supplier credit note must be clicked on'),'info');
-	echo '<br /><a href="' . $rootpath . '/SelectSupplier.php?">' . _('Select A Supplier') . '</a>';
+	echo '<br /><a href="' . $rootpath . '/SelectSupplier.php">' . _('Select A Supplier') . '</a>';
 	include('includes/footer.inc');
 	exit;
 	/*It all stops here if there aint no supplier selected and transaction initiated ie $_SESSION['SuppTrans'] started off*/
@@ -63,10 +61,10 @@ if (isset($_POST['AddGLCodeToTrans']) and $_POST['AddGLCodeToTrans'] == _('Enter
 
 	if ($InputError == False){
 		$_SESSION['SuppTrans']->Add_GLCodes_To_Trans($_POST['GLCode'],
-								$GLActName,
-								$_POST['Amount'],
-								$_POST['JobRef'],
-								$_POST['Narrative']);
+													$GLActName,
+													$_POST['Amount'],
+													$_POST['JobRef'],
+													$_POST['Narrative']);
 		unset($_POST['GLCode']);
 		unset($_POST['Amount']);
 		unset($_POST['JobRef']);
@@ -76,9 +74,16 @@ if (isset($_POST['AddGLCodeToTrans']) and $_POST['AddGLCodeToTrans'] == _('Enter
 }
 
 if (isset($_GET['Delete'])){
-
 	$_SESSION['SuppTrans']->Remove_GLCodes_From_Trans($_GET['Delete']);
+}
 
+if (isset($_GET['Edit'])){
+	$_POST['GLCode'] = $_SESSION['SuppTrans']->GLCodes[$_GET['Edit']]->GLCode;
+	$_POST['AcctSelection']= $_SESSION['SuppTrans']->GLCodes[$_GET['Edit']]->GLCode;
+	$_POST['Amount'] = $_SESSION['SuppTrans']->GLCodes[$_GET['Edit']]->Amount;
+	$_POST['JobRef'] = $_SESSION['SuppTrans']->GLCodes[$_GET['Edit']]->JobRef;
+	$_POST['Narrative'] = $_SESSION['SuppTrans']->GLCodes[$_GET['Edit']]->Narrative;
+	$_SESSION['SuppTrans']->Remove_GLCodes_From_Trans($_GET['Edit']);
 }
 
 /*Show all the selected GLCodes so far from the SESSION['SuppInv']->GLCodes array */
@@ -89,14 +94,14 @@ if ($_SESSION['SuppTrans']->InvoiceOrCredit == 'Invoice'){
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('General Ledger') . '" alt="" />' . ' '
 	. _('General Ledger Analysis of Credit Note From') . ' ' . $_SESSION['SuppTrans']->SupplierName. '</p>';
 }
-echo '<table cellpadding=2 class=selection>';
+echo '<table cellpadding=2 class="selection">';
 
 $TableHeader = '<tr>
-							<th>' . _('Account') . '</th>
-							<th>' . _('Name') . '</th>
-							<th>' . _('Amount') . '<br />' . _('in') . ' ' . $_SESSION['SuppTrans']->CurrCode . '</th>
-							<th>' . _('Narrative') . '</th>
-							</tr>';
+				<th>' . _('Account') . '</th>
+				<th>' . _('Name') . '</th>
+				<th>' . _('Amount') . '<br />' . _('in') . ' ' . $_SESSION['SuppTrans']->CurrCode . '</th>
+				<th>' . _('Narrative') . '</th>
+				</tr>';
 echo $TableHeader;
 $TotalGLValue=0;
 $i=0;
@@ -106,8 +111,9 @@ foreach ( $_SESSION['SuppTrans']->GLCodes as $EnteredGLCode){
 	echo '<tr>
 		<td>' . $EnteredGLCode->GLCode . '</td>
 		<td>' . $EnteredGLCode->GLActName . '</td>
-		<td class=number>' . number_format($EnteredGLCode->Amount,2) . '</td>
+		<td class=number>' . number_format($EnteredGLCode->Amount,$_SESSION['SuppTrans']->CurrDecimalPlaces) . '</td>
 		<td>' . $EnteredGLCode->Narrative . '</td>
+		<td><a href="' . $_SERVER['PHP_SELF'] . '?Edit=' . $EnteredGLCode->Counter . '">' . _('Edit') . '</a></td>
 		<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $EnteredGLCode->Counter . '">' . _('Delete') . '</a></td>
 		</tr>';
 
@@ -121,20 +127,20 @@ foreach ( $_SESSION['SuppTrans']->GLCodes as $EnteredGLCode){
 }
 
 echo '<tr>
-	<td colspan=2 class=number><font size=4 color=BLUE>' . _('Total') . ':</font></td>
-	<td class=number><font size=2 color=navy><U>' . number_format($TotalGLValue,2) . '</U></font></td>
+	<td colspan=2 class=number><font size=4 color=blue>' . _('Total') . ':</font></td>
+	<td class=number><font size=2 color=navy><u>' . number_format($TotalGLValue,$_SESSION['SuppTrans']->CurrDecimalPlaces) . '</u></font></td>
 	</tr>
 	</table>';
 
 
 if ($_SESSION['SuppTrans']->InvoiceOrCredit == 'Invoice'){
-	echo '<br /><a href="' . $rootpath . '/SupplierInvoice.php">' . _('Back to Invoice Entry') . '</a>';
+	echo '<div class="centre"><br /><a href="' . $rootpath . '/SupplierInvoice.php">' . _('Back to Invoice Entry') . '</a></div>';
 } else {
-	echo '<br /><a href="' . $rootpath . '/SupplierCredit.php">' . _('Back to Credit Note Entry') . '</a>';
+	echo '<div class="centre"><br /><a href="' . $rootpath . '/SupplierCredit.php">' . _('Back to Credit Note Entry') . '</a></div>';
 }
 
 /*Set up a form to allow input of new GL entries */
-echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method="post">';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<br /><table class=selection>';
@@ -182,7 +188,7 @@ echo '<tr>
 	</tr>
 	</table><br />';
 
-echo '<input type="submit" name="AddGLCodeToTrans" value="' . _('Enter GL Line') . '">';
+echo '<div class="centre"><input type="submit" name="AddGLCodeToTrans" value="' . _('Enter GL Line') . '"></div>';
 
 echo '</form>';
 include('includes/footer.inc');

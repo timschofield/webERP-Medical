@@ -10,8 +10,6 @@ purchase price variance calculated when the shipment is closed */
 
 include('includes/DefineSuppTransClass.php');
 
-//$PageSecurity = 5;
-
 /* Session started here for password checking and authorisation level check */
 include('includes/session.inc');
 
@@ -20,14 +18,14 @@ $title = _('Shipment Charges or Credits');
 include('includes/header.inc');
 
 if ($_SESSION['SuppTrans']->InvoiceOrCredit == 'Invoice'){
-	echo '<a href="' . $rootpath . '/SupplierInvoice.php?' . SID . '">' . _('Back to Invoice Entry') . '</a>';
+	echo '<a href="' . $rootpath . '/SupplierInvoice.php">' . _('Back to Invoice Entry') . '</a>';
 } else {
-	echo '<a href="' . $rootpath . '/SupplierCredit.php?' . SID . '">' . _('Back to Credit Note Entry') . '</a>';
+	echo '<a href="' . $rootpath . '/SupplierCredit.php">' . _('Back to Credit Note Entry') . '</a>';
 }
 
 if (!isset($_SESSION['SuppTrans'])){
 	prnMsg(_('Shipment charges or credits are entered against supplier invoices or credit notes respectively') . '. ' . _('To enter supplier transactions the supplier must first be selected from the supplier selection screen') . ', ' . _('then the link to enter a supplier invoice or credit note must be clicked on'),'info');
-	echo '<br /><a href="'.$rootpath.'/SelectSupplier.php">' . _('Select A Supplier') . '</a>';
+	echo '<br /><a href="' . $rootpath . '/SelectSupplier.php">' . _('Select A Supplier') . '</a>';
 	exit;
 	/*It all stops here if there aint no supplier selected and invoice/credit initiated ie $_SESSION['SuppTrans'] started off*/
 }
@@ -37,8 +35,13 @@ if (!isset($_SESSION['SuppTrans'])){
 if (isset($_POST['AddShiptChgToInvoice'])){
 
 	$InputError = False;
-	if ($_POST['ShiptRef'] == ""){
-		$_POST['ShiptRef'] = $_POST['ShiptSelection'];
+	if ($_POST['ShiptRef'] == ''){
+		if ($_POST['ShiptSelection']==''){
+			prnMsg(_('Shipment charges must reference a shipment. It appears that no shipment has been entered'),'error');
+			$InputError = True;
+		} else {
+			$_POST['ShiptRef'] = $_POST['ShiptSelection'];
+		}
 	} else {
 		$result = DB_query("SELECT shiptref FROM shipments WHERE shiptref='". $_POST['ShiptRef'] . "'",$db);
 		if (DB_num_rows($result)==0) {
@@ -96,7 +99,7 @@ echo '<tr>
 </table><br />';
 
 /*Set up a form to allow input of new Shipment charges */
-echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method="post">';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (!isset($_POST['ShiptRef'])) {
@@ -108,12 +111,12 @@ echo '<tr><td>' . _('Shipment Reference') . ':</td>
 echo '<tr><td>' . _('Shipment Selection') . ':<br /> ' . _('If you know the code enter it above') . '<br />' . _('otherwise select the shipment from the list') . '</td><td><select name="ShiptSelection">';
 
 $sql = "SELECT shiptref,
-							vessel,
-							eta,
-							suppname
-						FROM shipments INNER JOIN suppliers
-							ON shipments.supplierid=suppliers.supplierid
-						WHERE closed=0";
+				vessel,
+				eta,
+				suppname
+			FROM shipments INNER JOIN suppliers
+				ON shipments.supplierid=suppliers.supplierid
+			WHERE closed='0'";
 
 $result = DB_query($sql, $db);
 
