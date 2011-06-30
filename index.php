@@ -145,7 +145,12 @@ if (isset($SupplierLogin) and count($_SESSION['AllowedPageSecurityTokens'])==2 a
 							</tr>
 							<tr>
 							<td class="menu_group_item">
-								<?php echo '<p>&bull; <a href="' . $rootpath . '/KCMCAdmission.php?New=True">' . _('Registration of Patient') . '</a></p>'; ?>
+								<?php echo '<p>&bull; <a href="' . $rootpath . '/KCMCRegister.php">' . _('Register a Patient') . '</a></p>'; ?>
+							</td>
+							</tr>
+							<tr>
+							<td class="menu_group_item">
+								<?php echo '<p>&bull; <a href="' . $rootpath . '/KCMCAdmission.php?New=True">' . _('Registration Payments') . '</a></p>'; ?>
 							</td>
 							</tr>
 							<tr>
