@@ -2,14 +2,13 @@
 
 /* $Id$*/
 
-//$PageSecurity=15;
-
 if (isset($_POST['UserID']) AND isset($_POST['ID'])){
 	if ($_POST['UserID'] == $_POST['ID']) {
 		$_POST['Language'] = $_POST['UserLanguage'];
 	}
 }
 include('includes/session.inc');
+include ('includes/LanguagesArray.php');
 
 $ModuleList = array(_('Orders'),
 					_('Receivables'),
@@ -99,7 +98,7 @@ if (isset($_POST['submit'])) {
 	$i=0;
 	$ModulesAllowed = '';
 	while ($i < count($ModuleList)){
-		$FormVbl = "Module_" . $i;
+		$FormVbl = 'Module_' . $i;
 		$ModulesAllowed .= $_POST[($FormVbl)] . ',';
 		$i++;
 	}
