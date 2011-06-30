@@ -159,26 +159,26 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 	/*If the GRN being reversed is an asset - reverse the fixedassettrans record */
 	if ($GRN['assetid']!='0'){
 		$SQL = "INSERT INTO fixedassettrans (assetid,
-																		transtype,
-																		transno,
-																		transdate,
-																		periodno,
-																		inputdate,
-																		cost)
-													VALUES ('" . $GRN['assetid'] . "',
-																	25,
-																	'" . $_GET['GRNNo'] . "',
-																	'" . $GRN['deliverydate'] . "',
-																	'" . $PeriodNo . "',
-																	'" . Date('Y-m-d') . "',
-																	'" . -$GRN['stdcostunit']  * $QtyToReverse . "')";
+											transtype,
+											transno,
+											transdate,
+											periodno,
+											inputdate,
+											cost)
+						VALUES ('" . $GRN['assetid'] . "',
+										25,
+										'" . $_GET['GRNNo'] . "',
+										'" . $GRN['deliverydate'] . "',
+										'" . $PeriodNo . "',
+										'" . Date('Y-m-d') . "',
+										'" . -$GRN['stdcostunit']  * $QtyToReverse . "')";
 		$ErrMsg = _('CRITICAL ERROR! NOTE DOWN THIS ERROR AND SEEK ASSISTANCE The fixed asset transaction could not be inserted because');
 		$DbgMsg = _('The following SQL to insert the fixed asset transaction record was used');
 		$Result = DB_query($SQL,$db,$ErrMsg, $DbgMsg, true);
 
 		/*now reverse the cost put to fixedassets */
 		$SQL = "UPDATE fixedassets SET cost = cost - " . ($GRN['stdcostunit'] * $QtyToReverse)  . "
-												WHERE assetid = '" . $GRN['assetid'] . "'";
+					WHERE assetid = '" . $GRN['assetid'] . "'";
 		$ErrMsg = _('CRITICAL ERROR! NOTE DOWN THIS ERROR AND SEEK ASSISTANCE. The fixed asset cost addition could not be reversed:');
 		$DbgMsg = _('The following SQL was used to attempt the reduce the cost of the asset was:');
 		$Result = DB_query($SQL,$db,$ErrMsg, $DbgMsg, true);
@@ -186,8 +186,8 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 	} //end of if it is an asset
 
 	$SQL = "SELECT stockmaster.controlled
-						FROM stockmaster
-						WHERE stockmaster.stockid = '" . $GRN['itemcode'] . "'";
+				FROM stockmaster
+				WHERE stockmaster.stockid = '" . $GRN['itemcode'] . "'";
 	$Result = DB_query($SQL, $db, _('Could not determine if the item exists because'),'<br />' . _('The SQL that failed was') . ' ',true);
 
 	if (DB_num_rows($Result)==1){ /* if the GRN is in fact a stock item being reversed */
@@ -222,28 +222,28 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 
 	/* If its a stock item .... Insert stock movements - with unit cost */
 
-		$SQL = "INSERT INTO stockmoves (		stockid,
-																			type,
-																			transno,
-																			loccode,
-																			trandate,
-																			prd,
-																			reference,
-																			qty,
-																			standardcost,
-																			newqoh)
-																		VALUES (
-																			'" . $GRN['itemcode'] . "',
-																			25,
-																			'" . $_GET['GRNNo'] . "',
-																			'" . $GRN['intostocklocation'] . "',
-																			'" . $GRN['deliverydate'] . "',
-																			'" . $PeriodNo . "',
-																			'" . _('Reversal') . ' - ' . $_POST['SupplierID'] . ' - ' . $GRN['orderno'] . "',
-																			'" . -$QtyToReverse . "',
-																			'" . $GRN['stdcostunit'] . "',
-																			'" . ($QtyOnHandPrior - $QtyToReverse) . "'
-																			)";
+		$SQL = "INSERT INTO stockmoves (stockid,
+										type,
+										transno,
+										loccode,
+										trandate,
+										prd,
+										reference,
+										qty,
+										standardcost,
+										newqoh)
+									VALUES (
+										'" . $GRN['itemcode'] . "',
+										25,
+										'" . $_GET['GRNNo'] . "',
+										'" . $GRN['intostocklocation'] . "',
+										'" . $GRN['deliverydate'] . "',
+										'" . $PeriodNo . "',
+										'" . _('Reversal') . ' - ' . $_POST['SupplierID'] . ' - ' . $GRN['orderno'] . "',
+										'" . -$QtyToReverse . "',
+										'" . $GRN['stdcostunit'] . "',
+										'" . ($QtyOnHandPrior - $QtyToReverse) . "'
+									)";
 
   		$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Stock movement records could not be inserted because');
 		$DbgMsg = _('The following SQL to insert the stock movement records was used');
@@ -304,22 +304,22 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 		$Result=DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
 
 /*now the GRN suspense entry*/
-		$SQL = "INSERT INTO gltrans (	type,
-																typeno,
-																trandate,
-																periodno,
-																account,
-																narrative,
-																amount)
-			VALUES (
-				25,
-				'" . $_GET['GRNNo'] . "',
-				'" . $GRN['deliverydate'] . "',
-				'" . $PeriodNo . "',
-				'" . $_SESSION['CompanyRecord']['grnact'] . "', '"
-				. _('GRN Reversal PO') . ': ' . $GRN['orderno'] . " " . $_POST['SupplierID'] . " - " . $GRN['itemcode'] . "-" . $GRN['itemdescription'] . " x " . $QtyToReverse . " @ " . number_format($GRN['stdcostunit'],2) . "',
-				'" . $GRN['stdcostunit'] * $QtyToReverse . "'
-				)";
+		$SQL = "INSERT INTO gltrans (type,
+									typeno,
+									trandate,
+									periodno,
+									account,
+									narrative,
+									amount)
+								VALUES (
+									25,
+									'" . $_GET['GRNNo'] . "',
+									'" . $GRN['deliverydate'] . "',
+									'" . $PeriodNo . "',
+									'" . $_SESSION['CompanyRecord']['grnact'] . "', '"
+										. _('GRN Reversal PO') . ': ' . $GRN['orderno'] . " " . $_POST['SupplierID'] . " - " . $GRN['itemcode'] . "-" . $GRN['itemdescription'] . " x " . $QtyToReverse . " @ " . number_format($GRN['stdcostunit'],2) . "',
+									'" . $GRN['stdcostunit'] * $QtyToReverse . "'
+								)";
 
 		$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The GRN suspense side of the GL posting could not be inserted because');
 		$DbgMsg = _('The following SQL to insert the GRN Suspense GLTrans record was used');
