@@ -1,6 +1,5 @@
 <?php
 /* $Id$*/
-//PageSecurity=15;
 
 include('includes/session.inc');
 
@@ -162,7 +161,7 @@ if (!isset($SelectedGroup)) {
 	} else {
 		echo '<table class=selection>';
 		echo '<tr><th>' . _('Group No') . '</th>
-			<th>' . _('Tax Group') . '</th></tr>';
+				<th>' . _('Tax Group') . '</th></tr>';
 
 		$k=0; //row colour counter
 		while ($myrow = DB_fetch_array($result)) {
@@ -176,14 +175,14 @@ if (!isset($SelectedGroup)) {
 
 			printf('<td>%s</td>
 				<td>%s</td>
-				<td><a href="%s?SelectedGroup=%s">' . _('Edit') . '</a></td>
-				<td><a href="%s?SelectedGroup=%s&Delete=1&GroupID=%s">' . _('Delete') . '</a></td>
+				<td><a href="%s&SelectedGroup=%s">' . _('Edit') . '</a></td>
+				<td><a href="%s&SelectedGroup=%s&Delete=1&GroupID=%s">' . _('Delete') . '</a></td>
 				</tr>',
 				$myrow['taxgroupid'],
 				$myrow['taxgroupdescription'],
-				$_SERVER['PHP_SELF'],
+				$_SERVER['PHP_SELF']  . '?',
 				$myrow['taxgroupid'],
-				$_SERVER['PHP_SELF'],
+				$_SERVER['PHP_SELF'] . '?',
 				$myrow['taxgroupid'],
 				urlencode($myrow['taxgroupdescription']));
 
@@ -194,7 +193,7 @@ if (!isset($SelectedGroup)) {
 
 
 if (isset($SelectedGroup)) {
-	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] .'">' . _('Review Existing Groups') . '</a></div>';
+	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Review Existing Groups') . '</a></div>';
 }
 
 if (isset($SelectedGroup)) {
@@ -217,9 +216,9 @@ echo '<br />';
 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 if( isset($_POST['SelectedGroup'])) {
-	echo '<input type=hidden name="SelectedGroup" value="' . $_POST['SelectedGroup'] . '">';
+	echo '<input type="hidden" name="SelectedGroup" value="' . $_POST['SelectedGroup'] . '">';
 }
-echo '<table class=selection>';
+echo '<table class="selection">';
 
 if (!isset($_POST['GroupName'])) {
 	$_POST['GroupName']='';
@@ -235,7 +234,7 @@ if (isset($SelectedGroup)) {
 	$sql = "SELECT taxid,
 			description as taxname
 			FROM taxauthorities
-		ORDER BY taxid";
+			ORDER BY taxid";
 
 	$sqlUsed = "SELECT taxauthid,
 				description AS taxname,
@@ -264,12 +263,14 @@ if (isset($SelectedGroup)) {
 		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?' . SID .'">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<input type=hidden name="SelectedGroup" value="' . $SelectedGroup .'">';
-		echo '<table class=selection>';
+		echo '<table class="selection">';
 		echo '<tr><th colspan=3><font size=3 color=navy>'._('Calculation Order').'</font></th></tr>';
 
-		echo '<tr><th>'._('Tax Authority').'</th>
-			<th>'._('Order').'</th>
-			<th>'._('Tax on Prior Taxes').'</th></tr>';
+		echo '<tr>
+				<th>'._('Tax Authority').'</th>
+				<th>'._('Order').'</th>
+				<th>'._('Tax on Prior Taxes').'</th>
+			</tr>';
 		$k=0; //row colour counter
 		for ($i=1;$i < count($TaxAuthRow)+1;$i++) {
 			if ($k==1){
@@ -306,21 +307,21 @@ if (isset($SelectedGroup)) {
 
 	if (DB_num_rows($Result)>0 ) {
 		echo '<br />';
-		echo '<table class=selection><tr>';
-		echo '<th colspan=4>'._('Assigned Taxes').'</th>';
-		echo '<th></th>';
-		echo '<th colspan=2>'._('Available Taxes').'</th>';
-		echo '</tr>';
-
-		echo '<tr>';
-		echo '<th>' . _('Tax Auth ID') . '</th>';
-		echo '<th>' . _('Tax Authority Name') . '</th>';
-		echo '<th>' . _('Calculation Order') . '</th>';
-		echo '<th>' . _('Tax on Prior Tax(es)') . '</th>';
-		echo '<th></th>';
-		echo '<th>' . _('Tax Auth ID') . '</th>';
-		echo '<th>' . _('Tax Authority Name') . '</th>';
-		echo '</tr>';
+		echo '<table class=selection>
+				<tr>
+					<th colspan=4>'._('Assigned Taxes') . '</th>
+					<th></th>
+					<th colspan=2>' . _('Available Taxes') . '</th>
+				</tr>';
+		echo '<tr>
+				<th>' . _('Tax Auth ID') . '</th>
+				<th>' . _('Tax Authority Name') . '</th>
+				<th>' . _('Calculation Order') . '</th>
+				<th>' . _('Tax on Prior Tax(es)') . '</th>
+				<th></th>
+				<th>' . _('Tax Auth ID') . '</th>
+				<th>' . _('Tax Authority Name') . '</th>
+			</tr>';
 
 	} else {
 		echo '<br /><div class="centre">' . _('There are no tax authorities defined to allocate to this tax group').'</div>';
@@ -350,14 +351,14 @@ if (isset($SelectedGroup)) {
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
-				<td><a href="%s?SelectedGroup=%s&remove=1&TaxAuthority=%s">' . _('Remove') . '</a></td>
+				<td><a href="%s&SelectedGroup=%s&remove=1&TaxAuthority=%s">' . _('Remove') . '</a></td>
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>',
 				$AvailRow['taxid'],
 				$AvailRow['taxname'],
 				$TaxAuthRow[$TaxAuthUsedPointer]['calculationorder'],
 				$TaxOnTax,
-				$_SERVER['PHP_SELF'],
+				$_SERVER['PHP_SELF']  . '?',
 				$SelectedGroup,
 				$AvailRow['taxid']
 				);
@@ -370,10 +371,10 @@ if (isset($SelectedGroup)) {
 				<td>&nbsp;</td>
 				<td>%s</td>
 				<td>%s</td>
-				<td><a href="%s?SelectedGroup=%s&add=1&TaxAuthority=%s">' . _('Add') . '</a></td>',
+				<td><a href="%s&SelectedGroup=%s&add=1&TaxAuthority=%s">' . _('Add') . '</a></td>',
 				$AvailRow['taxid'],
 				$AvailRow['taxname'],
-				$_SERVER['PHP_SELF'],
+				$_SERVER['PHP_SELF']  . '?',
 				$SelectedGroup,
 				$AvailRow['taxid']
 				);
