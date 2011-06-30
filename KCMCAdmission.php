@@ -1,7 +1,7 @@
 <?php
 
 include('includes/session.inc');
-$title = _('Billing Patient Admissions');
+$title = _('Billing Patient Registrations');
 include('includes/header.inc');
 include('includes/SQL_CommonFunctions.inc');
 include('includes/GetSalesTransGLCodes.inc');
@@ -592,7 +592,7 @@ if (isset($_POST['Patient'])) {
 	echo '<input type="hidden" name="BranchNo" value="'.$Patient[1].'" />';
 	echo '<table class="selection">';
 	echo '<tr><th colspan="2"><font size="3" color="navy">'._('Patient ID').' - '.$Patient[0].'</font></th></tr>';
-	echo '<tr><td>'._('Date of Admission').':</td>
+	echo '<tr><td>'._('Date of Registration').':</td>
 		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="AdmissionDate" maxlength="10" size="11" value="' .
 					 date($_SESSION['DefaultDateFormat']) . '" /></td></tr>';
 	echo '<tr><td>'._('Type of payment').':</td>';
