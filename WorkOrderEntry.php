@@ -2,8 +2,6 @@
 
 /* $Id$*/
 
-//$PageSecurity = 10;
-
 include('includes/session.inc');
 $title = _('Work Order Entry');
 include('includes/header.inc');
@@ -209,10 +207,10 @@ if (isset($NewItem) AND isset($_POST['WO'])){
 
 	  if ($InputError==false){
 		$CostResult = DB_query("SELECT SUM((materialcost+labourcost+overheadcost)*bom.quantity) AS cost
-														FROM stockmaster INNER JOIN bom
-														ON stockmaster.stockid=bom.component
-														WHERE bom.parent='" . $NewItem . "'
-														AND bom.loccode='" . $_POST['StockLocation'] . "'",
+									FROM stockmaster INNER JOIN bom
+									ON stockmaster.stockid=bom.component
+									WHERE bom.parent='" . $NewItem . "'
+									AND bom.loccode='" . $_POST['StockLocation'] . "'",
 							 $db);
 			$CostRow = DB_fetch_row($CostResult);
 		if (is_null($CostRow[0]) OR $CostRow[0]==0){
@@ -303,10 +301,10 @@ if (isset($_POST['submit'])) { //The update button has been clicked
 			if ($_POST['RecdQty'.$i]==0 AND (!isset($_POST['HasWOSerialNos'.$i]) or $_POST['HasWOSerialNos'.$i]==false)){
 				/* can only change location cost if QtyRecd=0 */
 				$CostResult = DB_query("SELECT SUM((materialcost+labourcost+overheadcost)*bom.quantity) AS cost
-														FROM stockmaster INNER JOIN bom
-														ON stockmaster.stockid=bom.component
-														WHERE bom.parent='" . $_POST['OutputItem'.$i] . "'
-														AND bom.loccode='" . $_POST['StockLocation'] . "'",
+											FROM stockmaster INNER JOIN bom
+											ON stockmaster.stockid=bom.component
+											WHERE bom.parent='" . $_POST['OutputItem'.$i] . "'
+											AND bom.loccode='" . $_POST['StockLocation'] . "'",
 									 $db);
 				$CostRow = DB_fetch_row($CostResult);
 				if (is_null($CostRow[0])){
@@ -354,7 +352,7 @@ if (isset($_POST['submit'])) { //The update button has been clicked
 	// can't delete it there are open work issues
 	$HasTransResult = DB_query("SELECT * FROM stockmoves
 									WHERE (stockmoves.type= 26 OR stockmoves.type=28)
-										  AND reference LIKE '%" . $_POST['WO'] . "%'",$db);
+									AND reference " . LIKE  . " '%" . $_POST['WO'] . "%'",$db);
 	if (DB_num_rows($HasTransResult)>0){
 		prnMsg(_('This work order cannot be deleted because it has issues or receipts related to it'),'error');
 		$CancelDelete=true;
@@ -398,7 +396,7 @@ if (isset($_POST['submit'])) { //The update button has been clicked
 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '" name="form">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<br /><table class=selection>';
+echo '<br /><table class="selection">';
 
 $sql="SELECT workorders.loccode,
 				 requiredby,
@@ -488,7 +486,7 @@ if (isset($WOResult)){
 			  <td class=number>' . number_format($myrow['costissued'],2) . '</td></tr>';
 }
 echo '</table>
-		<br /><table class=selection>';
+		<br /><table class="selection">';
 echo '<tr><th>' . _('Output Item') . '</th>
 		  <th>' . _('Qty Required') . '</th>
 		  <th>' . _('Qty Received') . '</th>
@@ -524,7 +522,7 @@ if (isset($NumberOfOutputs)){
 				} else {
 					$LotOrSN = _('Batches');
 				}
-				echo '<td><a href="' . $rootpath . '/WOSerialNos.php?' . SID . '&WO=' . $_POST['WO'] . '&StockID=' . $_POST['OutputItem' .$i] . '&Description=' . $_POST['OutputItemDesc' .$i] . '&Serialised=' . $_POST['Serialised' .$i] . '&NextSerialNo=' . $_POST['NextLotSNRef' .$i] . '">' . $LotOrSN . '</a></td>';
+				echo '<td><a href="' . $rootpath . '/WOSerialNos.php?WO=' . $_POST['WO'] . '&StockID=' . $_POST['OutputItem' .$i] . '&Description=' . $_POST['OutputItemDesc' .$i] . '&Serialised=' . $_POST['Serialised' .$i] . '&NextSerialNo=' . $_POST['NextLotSNRef' .$i] . '">' . $LotOrSN . '</a></td>';
 			}
 		}
 		echo '<td>';
@@ -639,7 +637,7 @@ if (isset($SearchResult)) {
 						$myrow['description'],
 						$myrow['units'],
 						$ImageSource,
-						$_SERVER['PHP_SELF'] . '?' . SID . 'WO=' . $_POST['WO'] . '&NewItem=' . $myrow['stockid'].'&Line='.$i);
+						$_SERVER['PHP_SELF'] . '?WO=' . $_POST['WO'] . '&NewItem=' . $myrow['stockid'].'&Line='.$i);
 
 				$j++;
 				If ($j == 25){
@@ -660,9 +658,6 @@ if (!isset($_GET['NewItem']) or $_GET['NewItem']=='') {
 	echo '<script>defaultControl(document.forms[0].OutputQty"'.$_GET['Line'].'");</script>';
 }
 
-
 echo '</form>';
-
 include('includes/footer.inc');
-
 ?>
