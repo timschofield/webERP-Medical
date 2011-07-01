@@ -29,7 +29,8 @@ $title = _('User Maintenance');
 include('includes/header.inc');
 include('includes/SQL_CommonFunctions.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/group_add.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/group_add.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>
+	<br />';
 
 // Make an array of the security roles
 $sql = "SELECT secroleid,
@@ -174,7 +175,7 @@ if (isset($_POST['submit'])) {
 						'" . $ModulesAllowed . "',
 						'" . $_SESSION['DefaultDisplayRecordsMax'] . "',
 						'" . $_POST['Theme'] . "',
-						'" . $_POST['UserLanguage'] ."',
+						'". $_POST['UserLanguage'] ."',
 						'" . $_POST['PDFLanguage'] . "')";
 		prnMsg( _('A new user record has been inserted'), 'success' );
 	}
@@ -229,40 +230,39 @@ if (!isset($SelectedUser)) {
 
 /* If its the first time the page has been displayed with no parameters then none of the above are true and the list of Users will be displayed with links to delete or edit each. These will call the same page again and allow update/input or deletion of the records*/
 
-	$sql = "SELECT
-			userid,
-			realname,
-			phone,
-			email,
-			customerid,
-			branchcode,
-			supplierid,
-			salesman,
-			lastvisitdate,
-			fullaccess,
-			cancreatetender,
-			pagesize,
-			theme,
-			language
-		FROM www_users";
+	$sql = "SELECT userid,
+					realname,
+					phone,
+					email,
+					customerid,
+					branchcode,
+					supplierid,
+					salesman,
+					lastvisitdate,
+					fullaccess,
+					cancreatetender,
+					pagesize,
+					theme,
+					language
+				FROM www_users";
 	$result = DB_query($sql,$db);
 
 	echo '<table class=selection>';
 	echo '<tr><th>' . _('User Login') . '</th>
-		<th>' . _('Full Name') . '</th>
-		<th>' . _('Telephone') . '</th>
-		<th>' . _('Email') . '</th>
-		<th>' . _('Customer Code') . '</th>
-		<th>' . _('Branch Code') . '</th>
-		<th>' . _('Supplier Code') . '</th>
-		<th>' . _('Salesperson') . '</th>
-		<th>' . _('Last Visit') . '</th>
-		<th>' . _('Security Role') .'</th>
-		<th>' . _('Can Create Tender') .'</th>
-		<th>' . _('Report Size') .'</th>
-		<th>' . _('Theme') .'</th>
-		<th>' . _('Language') .'</th>
-	</tr>';
+				<th>' . _('Full Name') . '</th>
+				<th>' . _('Telephone') . '</th>
+				<th>' . _('Email') . '</th>
+				<th>' . _('Customer Code') . '</th>
+				<th>' . _('Branch Code') . '</th>
+				<th>' . _('Supplier Code') . '</th>
+				<th>' . _('Salesperson') . '</th>
+				<th>' . _('Last Visit') . '</th>
+				<th>' . _('Security Role') .'</th>
+				<th>' . _('Can Create Tender') .'</th>
+				<th>' . _('Report Size') .'</th>
+				<th>' . _('Theme') .'</th>
+				<th>' . _('Language') .'</th>
+			</tr>';
 
 	$k=0; //row colour counter
 
@@ -317,10 +317,10 @@ if (!isset($SelectedUser)) {
 					$CanCreateTender,
 					$myrow['pagesize'],
 					$myrow['theme'],
-					$myrow['language'],
-					$_SERVER['PHP_SELF'],
+					$LanguagesArray[$myrow['language']],
+					$_SERVER['PHP_SELF']  . '?',
 					$myrow['userid'],
-					$_SERVER['PHP_SELF'],
+					$_SERVER['PHP_SELF'] . '?',
 					$myrow['userid']);
 
 	} //END WHILE LIST LOOP
@@ -329,7 +329,7 @@ if (!isset($SelectedUser)) {
 
 
 if (isset($SelectedUser)) {
-	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] .'">' . _('Review Existing Users') . '</a></div><br />';
+	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Review Existing Users') . '</a></div><br />';
 }
 
 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
@@ -389,7 +389,10 @@ if (isset($SelectedUser)) {
 
 } else { //end of if $SelectedUser only do the else when a new record is being entered
 
-	echo '<table class=selection><tr><td>' . _('User Login') . ':</td><td><input type="text" name="UserID" size="22" maxlength="20" ></td></tr>';
+	echo '<table class=selection>
+			<tr>
+				<td>' . _('User Login') . ':</td>
+				<td><input type="text" name="UserID" size="22" maxlength="20" /></td></tr>';
 
 	/*set the default modules to show to all
 	this had trapped a few people previously*/
@@ -421,7 +424,7 @@ if (!isset($_POST['Email'])) {
 echo '<tr><td>' . _('Password') . ':</td>
 	<td><input type="password" name="Password" size="22" maxlength="20" value="' . $_POST['Password'] . '"></tr>';
 echo '<tr><td>' . _('Full Name') . ':</td>
-	<td><input type="text" name="RealName" value="' . $_POST['RealName'] . '" size=36 maxlength=35></td></tr>';
+	<td><input type="text" name="RealName" value="' . $_POST['RealName'] . '" size="36" maxlength="35"></td></tr>';
 echo '<tr><td>' . _('Telephone No') . ':</td>
 	<td><input type="text" name="Phone" value="' . $_POST['Phone'] . '" size="32" maxlength="30"></td></tr>';
 echo '<tr><td>' . _('Email Address') .':</td>
@@ -492,7 +495,7 @@ echo '<tr><td>' . _('Supplier Code') . ':</td>
 echo '<tr><td>' . _('Restrict to Sales Person') . ':</td>
 	<td><select name="Salesman">';
 
-$sql = "SELECT salesmancode, salesmanname FROM salesman";
+$sql = "SELECT salesmancode, salesmanname FROM salesman WHERE current = 1";
 $result = DB_query($sql,$db);
 if ((isset($_POST['Salesman']) and $_POST['Salesman']=='') OR !isset($_POST['Salesman'])){
 	echo '<option selected value="">' .  _('Not a salesperson only login') . '</option>';
@@ -586,23 +589,15 @@ echo '<tr>
 	<td>' . _('Language') . ':</td>
 	<td><select name="UserLanguage">';
 
- $LangDirHandle = dir('locale/');
-
-
-while (false != ($LanguageEntry = $LangDirHandle->read())){
-
-	if (is_dir('locale/' . $LanguageEntry) AND $LanguageEntry != '..' AND $LanguageEntry != 'CVS' AND $LanguageEntry!='.'){
-
-		if (isset($_POST['UserLanguage']) and $_POST['UserLanguage'] == $LanguageEntry){
-			echo '<option selected value="'.$LanguageEntry.'">'.$LanguageEntry . '</option>';
-		} elseif (!isset($_POST['UserLanguage']) and $LanguageEntry == $DefaultLanguage) {
-			echo '<option selected value="'.$LanguageEntry.'">'.$LanguageEntry . '</option>';
-		} else {
-			echo '<option value="'.$LanguageEntry.'">'.$LanguageEntry . '</option>';
-		}
+foreach ($LanguagesArray as $LanguageEntry => $LanguageName){
+	if (isset($_POST['UserLanguage']) and $_POST['UserLanguage'] == $LanguageEntry){
+		echo '<option selected value="' . $LanguageEntry . '">' . $LanguageName .'</option>';
+	} elseif (!isset($_POST['UserLanguage']) and $LanguageEntry == $DefaultLanguage) {
+		echo '<option selected value="' . $LanguageEntry . '">' . $LanguageName .'</option>';
+	} else {
+		echo '<option value="' . $LanguageEntry . '">' . $LanguageName .'</option>';
 	}
 }
-
 echo '</select></td></tr>';
 
 
