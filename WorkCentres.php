@@ -1,8 +1,6 @@
 <?php
 /* $Id$*/
 
-//$PageSecurity=9;
-
 include('includes/session.inc');
 $title = _('Work Centres');
 include('includes/header.inc');
@@ -111,22 +109,22 @@ or deletion of the records*/
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p>';
 
 	$sql = "SELECT workcentres.code,
-			workcentres.description,
-			locations.locationname,
-			workcentres.overheadrecoveryact,
-			workcentres.overheadperhour
-		FROM workcentres,
-			locations
-		WHERE workcentres.location = locations.loccode";
+				workcentres.description,
+				locations.locationname,
+				workcentres.overheadrecoveryact,
+				workcentres.overheadperhour
+			FROM workcentres,
+				locations
+			WHERE workcentres.location = locations.loccode";
 
 	$result = DB_query($sql,$db);
-	echo '<table class=selection>
-		<tr bgcolor =#800000><th>' . _('WC Code') . '</th>
-				<th>' . _('Description') . '</th>
-				<th>' . _('Location') . '</th>
-				<th>' . _('Overhead GL Account') . '</th>
-				<th>' . _('Overhead Per Hour') . '</th>
-		</tr></font>';
+	echo '<table class="selection">
+			<tr bgcolor =#800000><th>' . _('WC Code') . '</th>
+					<th>' . _('Description') . '</th>
+					<th>' . _('Location') . '</th>
+					<th>' . _('Overhead GL Account') . '</th>
+					<th>' . _('Overhead Per Hour') . '</th>
+			</tr>';
 
 	while ($myrow = DB_fetch_row($result)) {
 
@@ -135,16 +133,17 @@ or deletion of the records*/
 				<td>%s</td>
 				<td>%s</td>
 				<td class=number>%s</td>
-				<td><a href=\'%s&SelectedWC=%s\'>' . _('Edit') . '</td>
-				<td><a href=\'%s&SelectedWC=%s&delete=yes\'>' . _('Delete') .'</td>
+				<td><a href="%s&SelectedWC=%s">' . _('Edit') . '</td>
+				<td><a href="%s&SelectedWC=%s&delete=yes">' . _('Delete') .'</td>
 				</tr>',
 				$myrow[0],
 				$myrow[1],
 				$myrow[2],
 				$myrow[3],
 				$myrow[4],
-				$_SERVER['PHP_SELF'] ,
-				$myrow[0], $_SERVER['PHP_SELF'],
+				$_SERVER['PHP_SELF'] . '?',
+				$myrow[0],
+				$_SERVER['PHP_SELF'] . '?',
 				$myrow[0]);
 	}
 
@@ -182,15 +181,15 @@ if (isset($SelectedWC)) {
 	$_POST['OverheadRecoveryAct']  = $myrow['overheadrecoveryact'];
 	$_POST['OverheadPerHour']  = $myrow['overheadperhour'];
 
-	echo '<input type=hidden name="SelectedWC" value=' . $SelectedWC . '>';
-	echo '<input type=hidden name="Code" value="' . $_POST['Code'] . '">';
-	echo '<table class=selection><tr><td>' ._('Work Centre Code') . ':</td><td>' . $_POST['Code'] . '</td></tr>';
+	echo '<input type="hidden" name="SelectedWC" value="' . $SelectedWC . '" />';
+	echo '<input type="hidden" name="Code" value="' . $_POST['Code'] . '" />';
+	echo '<table class="selection"><tr><td>' ._('Work Centre Code') . ':</td><td>' . $_POST['Code'] . '</td></tr>';
 
 } else { //end of if $SelectedWC only do the else when a new record is being entered
 	if (!isset($_POST['Code'])) {
 		$_POST['Code'] = '';
 	}
-	echo '<table class=selection><tr>
+	echo '<table class="selection"><tr>
 			<td>' . _('Work Centre Code') . ':</td>
 			<td><input type="text" name="Code" size="6" maxlength="5" value="' . $_POST['Code'] . '"></td>
 			</tr>';
@@ -205,7 +204,7 @@ if (!isset($_POST['Description'])) {
 	$_POST['Description'] = '';
 }
 echo '<tr><td>' . _('Work Centre Description') . ':</td>
-	<td><input type="text" name="Description" size=21 maxlength=20 value="' . $_POST['Description'] . '"></td>
+	<td><input type="text" name="Description" size="21" maxlength="20" value="' . $_POST['Description'] . '"></td>
 	</tr>
 	<tr><td>' . _('Location') . ':</td>
 		<td><select name="Location">';
@@ -228,11 +227,11 @@ echo '</select></td></tr>
 
 //SQL to poulate account selection boxes
 $SQL = "SELECT accountcode,
-		accountname
-	FROM chartmaster INNER JOIN accountgroups
-		ON chartmaster.group_=accountgroups.groupname
-	WHERE accountgroups.pandl!=0
-	ORDER BY accountcode";
+			accountname
+		FROM chartmaster INNER JOIN accountgroups
+			ON chartmaster.group_=accountgroups.groupname
+		WHERE accountgroups.pandl!=0
+		ORDER BY accountcode";
 
 $result = DB_query($SQL,$db);
 
