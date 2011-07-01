@@ -38,6 +38,14 @@ if(isset($ForceConfigReload) and $ForceConfigReload==TRUE OR !isset($_SESSION['C
 		$_SESSION['DBUpdateNumber']=-1;
 		header('Location: Z_UpgradeDatabase.php'); //divert to the db upgrade if the VersionNumber is not in the config table
 	}
+	/*
+	 check the decimalplaces field exists in currencies - this was added in 4.0 but is required in 4.04 as it is used everywhere as the default decimal places to show on all home currency amounts
+	*/
+	$result = DB_query("SELECT decimalplaces FROM currencies",$db,'','',false,false);
+	if (DB_error_no($db)!=0) { //then decimalplaces not already a field in currencies
+		$result = DB_query("ALTER TABLE `currencies`
+							ADD COLUMN `decimalplaces` tinyint(3) NOT NULL DEFAULT 2 AFTER `hundredsname`",$db);
+	}
 
 /* Also reads all the company data set up in the company record and returns an array */
 
@@ -64,9 +72,11 @@ if(isset($ForceConfigReload) and $ForceConfigReload==TRUE OR !isset($_SESSION['C
 					freightact,
 					gllink_debtors,
 					gllink_creditors,
-					gllink_stock
+					gllink_stock,
+					decimalplaces
 				FROM companies
-					WHERE coycode=1";
+				INNER JOIN currencies ON companies.currencydefault=currencies.currabrev
+				WHERE coycode=1";
 
 	$ErrMsg = _('An error occurred accessing the database to retrieve the company information');
 	$ReadCoyResult = DB_query($sql,$db,$ErrMsg);
