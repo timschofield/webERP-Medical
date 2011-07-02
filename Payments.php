@@ -246,7 +246,7 @@ if (isset($_POST['CommitBatch'])){
 
 	$PeriodNo = GetPeriod($_SESSION['PaymentDetail']->DatePaid,$db);
 
-	$sql="SELECT forpreprint
+	$sql="SELECT usepreprintedstationery
 			FROM paymentmethods
 			WHERE paymentname='" . $_SESSION['PaymentDetail']->Paymenttype ."'";
 	$result=DB_query($sql, $db);
