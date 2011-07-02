@@ -5,7 +5,6 @@
 // Script to do some Sales Integrity checks
 // No SQL updates or Inserts - so safe to run
 
-//$PageSecurity=15;
 
 include ('includes/session.inc');
 $title = _('Sales Integrity');
@@ -34,7 +33,7 @@ while ($myrow = DB_fetch_array($Result)) {
 
 	if ( DB_num_rows($Result2) == 0) {
 		echo '<br />'._('Invoice '). ' '. $myrow['transno'] . ' : ';
-		echo '<font color=RED>' . _('No Sales Order') . '</font>';
+		echo '<font color=red>' . _('No Sales Order') . '</font>';
 	}
 
 	$SQL3 = "SELECT debtortransid
@@ -44,7 +43,7 @@ while ($myrow = DB_fetch_array($Result)) {
 
 	if ( DB_num_rows($Result3) == 0) {
 		echo '<br />'. _('Invoice '). ' ' . $myrow['transno'] . ' : ';
-		echo '<font color=red>' . _('Has no Tax Entry') . '</font>';
+		echo '<font color=red>' . _('has no Tax Entry') . '</font>';
 	}
 
 	$SQL4 = "SELECT typeno
@@ -122,7 +121,7 @@ while ($myrow = DB_fetch_array($Result)) {
 
 	if ( !$myrow2[0] ) {
 		echo '<br />'._('Receipt') . ' ' . $myrow['transno'] . " : ";
-		echo '<font color=RED>' . $myrow['transno'] . ' ' ._('not found in GL').'</font>';
+		echo '<font color=red>' . $myrow['transno'] . ' ' ._('not found in GL').'</font>';
 	}
 }
 
@@ -145,7 +144,7 @@ while ($myrow = DB_fetch_array($Result)) {
 
 	if ( DB_num_rows($Result2) == 0) {
 		echo '<br />'._('Sales Order') . ' ' . $myrow['orderno'] . ' : ';
-		echo '<font color=RED>'._('Has no Invoice').'</font>';
+		echo '<font color=red>'._('Has no Invoice').'</font>';
 	}
 }
 
@@ -212,7 +211,7 @@ while ($myrow = DB_fetch_array($Result)) {
 
 	if ( DB_num_rows($Result2) == 0) {
 			echo '<br />'._('Stock Move') . ' ' . $myrow['stkmoveno'] . ' : ';
-			echo ', <font color=RED>'._('Has no Invoice').'</font>';
+			echo ', <font color=red>'._('has no Invoice').'</font>';
 	}
 }
 
@@ -232,7 +231,7 @@ while ($myrow = DB_fetch_array($Result)) {
 
 	if ( DB_num_rows($Result2) == 0) {
 			echo '<br />'._('Tax Entry') . ' ' . $myrow['debtortransid'] . ' : ';
-			echo ', <font color=RED>'._('Has no Invoice').'</font>';
+			echo ', <font color=red>'._('has no Invoice').'</font>';
 	}
 }
 
