@@ -83,8 +83,8 @@
 			$FieldValues.='"'.$value.'", ';
 		}
 		if (sizeof($Errors)==0) {
-			$sql = "INSERT INTO purchdata (".substr($FieldNames,0,-2).") ".
-		  		"VALUES (".substr($FieldValues,0,-2).") ";
+			$sql = "INSERT INTO purchdata (".substr($FieldNames,0,-2).")
+					VALUES ('" . substr($FieldValues,0,-2). "') ";
 			DB_Txn_Begin($db);
 			$result = DB_Query($sql, $db);
 			DB_Txn_Commit($db);
@@ -130,7 +130,7 @@
 		}
 		$sql="UPDATE purchdata SET ";
 		foreach ($PurchDataDetails as $key => $value) {
-			$sql .= $key.'="'.$value.'", ';
+			$sql .= $key."='" . $value."', ";
 		}
 		$sql = substr($sql,0,-2)." WHERE stockid='".$PurchDataDetails['stockid'].
 			"' AND supplierno='".$PurchDataDetails['supplierno']."'";
