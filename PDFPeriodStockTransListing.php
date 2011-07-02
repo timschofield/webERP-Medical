@@ -2,9 +2,6 @@
 
 /* $Id$*/
 
-/* $Revision: 1.13 $ */
-
-// $PageSecurity = 3;
 include('includes/SQL_CommonFunctions.inc');
 include ('includes/session.inc');
 
@@ -32,24 +29,23 @@ if (!isset($_POST['FromDate'])){
 	 echo '<table class=selection>';
 	 echo '<tr>
 				<td>' . _('Enter the date from which the transactions are to be listed') . ':</td>
-				<td><input type=text name="FromDate" maxlength=10 size=10 class=date alt="' . $_SESSION['DefaultDateFormat'] . '" value="' . Date($_SESSION['DefaultDateFormat']) . '"></td>
+				<td><input type="text" name="FromDate" maxlength="10" size="10" class="date" alt="' . $_SESSION['DefaultDateFormat'] . '" value="' . Date($_SESSION['DefaultDateFormat']) . '"></td>
 			</tr>';
 	 echo '<tr>
 				<td>' . _('Enter the date to which the transactions are to be listed') . ':</td>
-				<td><input type=text name="ToDate" maxlength=10 size=10 class=date alt="' . $_SESSION['DefaultDateFormat'] . '" value="' . Date($_SESSION['DefaultDateFormat']) . '"></td>
+				<td><input type="text" name="ToDate" maxlength="10" size="10" class="date" alt="' . $_SESSION['DefaultDateFormat'] . '" value="' . Date($_SESSION['DefaultDateFormat']) . '"></td>
 			</tr>';
 
 	echo '<tr><td>' . _('Transaction type') . '</td><td>';
 
 	echo '<select name="TransType">';
-
-	echo '<option value=10>' . _('Sales Invoice').'</option>';
-	echo '<option value=11>' . _('Sales Credit Note').'</option>';
-	echo '<option value=16>' . _('Location Transfer').'</option>';
-	echo '<option value=17>' . _('Stock Adjustment').'</option>';
-	echo '<option value=25>' . _('Purchase Order Delivery').'</option>';
-	echo '<option value=26>' . _('Work Order Receipt').'</option>';
-	echo '<option value=28>' . _('Work Order Issue').'</option>';
+	echo '<option value=10>' . _('Sales Invoice').'</option>
+			<option value=11>' . _('Sales Credit Note').'</option>
+			<option value=16>' . _('Location Transfer').'</option>
+			<option value=17>' . _('Stock Adjustment').'</option>
+			<option value=25>' . _('Purchase Order Delivery').'</option>
+			<option value=26>' . _('Work Order Receipt').'</option>
+			<option value=28>' . _('Work Order Issue').'</option>';
 
 	 echo '</select></td></tr>';
 
@@ -57,7 +53,7 @@ if (!isset($_POST['FromDate'])){
 	$resultStkLocs = DB_query($sql, $db);
 
 	echo '<tr><td>' . _('For Stock Location') . ':</td>
-		<td><select name="StockLocation"> ';
+		<td><select name="StockLocation">';
 	echo '<option value="All">' . _('All') . '</option>';
 	while ($myrow=DB_fetch_array($resultStkLocs)){
 		if (isset($_POST['StockLocation']) AND $_POST['StockLocation']!='All'){
@@ -151,6 +147,31 @@ $pdf->addInfo('Subject',_('Stock transaction listing from') . '  ' . $_POST['Fro
 $line_height=12;
 $PageNumber = 1;
 
+
+switch ($_POST['TransType']) {
+	case 10:
+		$TransType=_('Customer Invoices');
+		break;
+	case 11:
+		$TransType=_('Customer Credit Notes');
+		break;
+	case 16:
+		$TransType=_('Location Transfers');
+		break;
+	case 17:
+		$TransType=_('Stock Adjustments');
+		break;
+	case 25:
+		$TransType=_('Purchase Order Deliveries');
+		break;
+	case 26:
+		$TransType=_('Work Order Receipts');
+		break;
+	case 28:
+		$TransType=_('Work Order Issues');
+		break;
+}
+
 include ('includes/PDFPeriodStockTransListingPageHeader.inc');
 
 while ($myrow=DB_fetch_array($result)){
@@ -175,7 +196,7 @@ while ($myrow=DB_fetch_array($result)){
 $YPos-=$line_height;
 
 $ReportFileName = $_SESSION['DatabaseName'] . '_StockTransListing_' . date('Y-m-d').'.pdf';
-$pdf->OutputD($ReportFileName);//UldisN
-$pdf->__destruct(); //UldisN
+$pdf->OutputD($ReportFileName);
+$pdf->__destruct();
 
 ?>
