@@ -4,9 +4,12 @@
 
 /* Script to delete an invoice expects and invoice number to delete
 not included on any menu for obvious reasons
+*
+* STRONGLY RECOMMEND NOT USING THIS -CREDIT THE INVOICE AND RE INVOICE
+* *
+*
 This page must be called directly using path/Z_DeleteInvoice.php?InvoiceNo=?????    !! */
 
-//$PageSecurity=15;
 
 include ('includes/session.inc');
 $title = _('Delete Invoice');
@@ -20,8 +23,9 @@ if (!isset($_GET['InvoiceNo'])){
 /*Get the order number that was invoiced */
 
 $SQL = "SELECT order_
-               FROM debtortrans
-        WHERE debtortrans.type = 10	and transno = '" . $_GET['InvoiceNo'] . "'";
+			FROM debtortrans
+			WHERE debtortrans.type = 10
+			AND transno = '" . $_GET['InvoiceNo'] . "'";
 
 $Result = DB_query($SQL,$db);
 $myrow = DB_fetch_row($Result);
@@ -132,7 +136,7 @@ prnMsg(_('The stock movement records associated with the invoice have been delet
 echo '<br /><br />';
 
 /* Delete any GL Transaction records*/
-$SQL = "DELETE FROM gltrans WHERE gltrans.type=10 AND gltrans.transno='" . $_GET['InvoiceNo'] . "'";
+$SQL = "DELETE FROM gltrans WHERE gltrans.type=10 AND gltrans.typeno='" . $_GET['InvoiceNo'] . "'";
 $ErrMsg = _('The SQL to delete the general ledger journal records failed because');
 $Result = DB_query($SQL, $db,$ErrMsg,$DbgMsg,true);
 prnMsg(_('The GL journal records associated with the invoice have been deleted'),'info');
