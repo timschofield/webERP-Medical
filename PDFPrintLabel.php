@@ -119,14 +119,14 @@ function showLabelOptions() {
 	$iTxt=0;
 
 	echo "<script type=\"text/javascript\">
-	function setAll(all) {
-		var x=document.getElementById('form1');
-		for (var i=0;i<x.length;i++) {
-			if (x.elements[i].id=='item');
-				x.elements[i].checked=all.checked;
-		}
-	}
-	</script>";
+			function setAll(all) {
+				var x=document.getElementById('form1');
+				for (var i=0;i<x.length;i++) {
+					if (x.elements[i].id=='item');
+						x.elements[i].checked=all.checked;
+				}
+			}
+		</script>";
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' .$txt[$iTxt++].'</p>';
 	echo '<form name ="form1" action="'.$_SERVER['PHP_SELF'].'" method="POST" id="form1">';
@@ -299,14 +299,17 @@ function getStockItems($CategoryID, $CurrCode, $SalesType, $StockID=false) {
 	}
 
 	$sql="SELECT stockmaster.stockid,
-							stockmaster.description, stockmaster.longdescription, stockmaster.barcode, prices.price
-				FROM stockmaster LEFT JOIN prices ON stockmaster.stockid=prices.stockid
-				AND prices.currabrev = '" . $CurrCode . "'
-				AND prices.typeabbrev= '" . $SalesType . "'
-				AND prices.startdate <= '" . Date('Y-m-d') . "'
-				AND (prices.enddate >= '" . Date('Y-m-d') . "' OR prices.enddate='0000-00-00')
-				AND prices.debtorno=''
-				WHERE " . $WhereClause;
+				stockmaster.description,
+				stockmaster.longdescription,
+				stockmaster.barcode,
+				prices.price
+			FROM stockmaster LEFT JOIN prices ON stockmaster.stockid=prices.stockid
+			AND prices.currabrev = '" . $CurrCode . "'
+			AND prices.typeabbrev= '" . $SalesType . "'
+			AND prices.startdate <= '" . Date('Y-m-d') . "'
+			AND (prices.enddate >= '" . Date('Y-m-d') . "' OR prices.enddate='0000-00-00')
+			AND prices.debtorno=''
+			WHERE " . $WhereClause;
 
 // if current prices are those with enddate = 0000-00-00 the following line was wrong
 //			"AND ('$Today' BETWEEN pr.startdate AND prices.enddate) " .
