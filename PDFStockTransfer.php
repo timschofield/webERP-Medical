@@ -5,29 +5,29 @@
 include('includes/session.inc');
 
 if (!isset($_GET['TransferNo'])){
-       if (isset($_POST['TransferNo'])){
-               if (is_numeric($_POST['TransferNo'])){
-                       $_GET['TransferNo'] = $_POST['TransferNo'];
-               } else {
-                       prnMsg(_('The entered transfer reference is expected to be numeric'),'error');
-                       unset($_POST['TransferNo']);
-               }
-       }
-       if (!isset($_GET['TransferNo'])){ //still not set from a post then
-       //open a form for entering a transfer number
-               $title = _('Print Stock Transfer');
-               include('includes/header.inc');
-               echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print Transfer Note') . '" alt="" />' . ' ' . $title.'</p><br />';
-               echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post" name="form">';
-               echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-               echo '<table class="selection"><tr>';
-               echo '<td>'._('Print Stock Transfer Note').' : '.'</td>';
-               echo '<td><input type=text class="number"  name="TransferNo" maxlength=10 size=11 /></td></tr>';
-               echo '</table>';
-               echo '<br /><div class="centre"><input type="submit" name="Process" value="' . _('Print Transfer Note') . '"></div></form>';
-               include('includes/footer.inc');
-               exit();
-       }
+	if (isset($_POST['TransferNo'])){
+		if (is_numeric($_POST['TransferNo'])){
+			$_GET['TransferNo'] = $_POST['TransferNo'];
+		} else {
+			prnMsg(_('The entered transfer reference is expected to be numeric'),'error');
+			unset($_POST['TransferNo']);
+		}
+	}
+	if (!isset($_GET['TransferNo'])){ //still not set from a post then
+	//open a form for entering a transfer number
+		$title = _('Print Stock Transfer');
+		include('includes/header.inc');
+		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print Transfer Note') . '" alt="" />' . ' ' . $title.'</p><br />';
+		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post" name="form">';
+		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
+		echo '<table class="selection"><tr>';
+		echo '<td>'._('Print Stock Transfer Note').' : '.'</td>';
+		echo '<td><input type=text class="number"  name="TransferNo" maxlength=10 size=11 /></td></tr>';
+		echo '</table>';
+		echo '<br><div class="centre"><input type="submit" name="Process" value="' . _('Print Transfer Note') . '"></div></form>';
+		include('includes/footer.inc');
+		exit();
+	}
 }
 
 
@@ -43,19 +43,19 @@ $FontSize =10;
 /*Print out the category totals */
 
 $sql="SELECT stockmoves.stockid,
-                       description,
-                       transno,
-                       stockmoves.loccode,
-                       locationname,
-                       trandate,
-                       qty
-               FROM stockmoves
-               INNER JOIN stockmaster
-               ON stockmoves.stockid=stockmaster.stockid
-               INNER JOIN locations
-               ON stockmoves.loccode=locations.loccode
-               WHERE transno='".$_GET['TransferNo']."'
-               AND type=16";
+			description,
+			transno,
+			stockmoves.loccode,
+			locationname,
+			trandate,
+			qty
+		FROM stockmoves
+		INNER JOIN stockmaster
+		ON stockmoves.stockid=stockmaster.stockid
+		INNER JOIN locations
+		ON stockmoves.loccode=locations.loccode
+		WHERE transno='".$_GET['TransferNo']."'
+		AND type=16";
 $result=DB_query($sql, $db);
 
 if (DB_num_rows($result) == 0){
@@ -66,7 +66,7 @@ if (DB_num_rows($result) == 0){
 	include ('includes/footer.inc');
 	exit;
 }
-//get the first stock movement which will be the quantity taken from the initiating locati
+//get the first stock movement which will be the quantity taken from the initiating location
 $myrow=DB_fetch_array($result);
 $StockID=$myrow['stockid'];
 $FromCode=$myrow['loccode'];
@@ -90,8 +90,7 @@ $LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos-70,300-$Left_Margin,$FontSize,
 $LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos-120,300-$Left_Margin,$FontSize, _('Signed for ').$From.'______________________');
 $LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos-160,300-$Left_Margin,$FontSize, _('Signed for ').$To.'______________________');
 
-$pdf->OutputD($_SESSION['DatabaseName'] . '_StockTransfer_' . date('Y-m-d') . '.pdf');//UldisN
-$pdf->__destruct(); //UldisN
+$pdf->OutputD($_SESSION['DatabaseName'] . '_StockTransfer_' . date('Y-m-d') . '.pdf');
+$pdf->__destruct();
 
- /*end of else not PrintPDF */
 ?>
