@@ -146,7 +146,7 @@ if (!isset($Id)) {
 	echo '</table>';
 }
 if (isset($Id)) {  ?>
-	<div class="centre"><a href="<?php echo $_SERVER['PHP_SELF'] . 'DebtorNo='.$DebtorNo;?>"><?=_('Review all contacts for this Customer')?></a></div>
+	<div class="centre"><a href="<?php echo $_SERVER['PHP_SELF'] . '?DebtorNo='.$DebtorNo;?>"><?=_('Review all contacts for this Customer')?></a></div>
 <?php } ?>
 <br />
 
