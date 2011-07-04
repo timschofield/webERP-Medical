@@ -11,9 +11,9 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/m
 	. '" alt="" />' . ' ' . $title . '</p>';
 
 if (isset($_POST['SelectedType'])){
-	$SelectedType = strtoupper($_POST['SelectedType']);
+	$SelectedType = mb_strtoupper($_POST['SelectedType']);
 } elseif (isset($_GET['SelectedType'])){
-	$SelectedType = strtoupper($_GET['SelectedType']);
+	$SelectedType = mb_strtoupper($_GET['SelectedType']);
 } else {
 	$SelectedType='';
 }
@@ -24,9 +24,9 @@ if (!isset($_GET['delete']) and (ContainsIllegalCharacters($SelectedType) OR str
 }
 
 if (isset($_POST['SelectedTabs'])){
-	$SelectedTabs = strtoupper($_POST['SelectedTabs']);
+	$SelectedTabs = mb_strtoupper($_POST['SelectedTabs']);
 } elseif (isset($_GET['SelectedTabs'])){
-	$SelectedTabs = strtoupper($_GET['SelectedTabs']);
+	$SelectedTabs = mb_strtoupper($_GET['SelectedTabs']);
 }
 
 if (isset($_POST['Cancel'])) {

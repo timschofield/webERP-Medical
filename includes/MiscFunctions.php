@@ -98,7 +98,7 @@ function IsEmailAddress($Email){
 	//  Check for a DNS 'MX' or 'A' record.
 	//  Windows supported from PHP 5.3.0 on - so check.
 	$Ret = true;
-	if (version_compare(PHP_VERSION, '5.3.0') >= 0 OR strtoupper(substr(PHP_OS, 0, 3) !== 'WIN')) {
+	if (version_compare(PHP_VERSION, '5.3.0') >= 0 OR mb_strtoupper(substr(PHP_OS, 0, 3) !== 'WIN')) {
 //	    $Ret = checkdnsrr( $Domain, 'MX' ) OR checkdnsrr( $Domain, 'A' );
 	}
 

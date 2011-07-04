@@ -440,7 +440,7 @@ if (isset($_POST['SearchSupplier']) OR isset($_POST['Go']) OR isset($_POST['Next
 				ORDER BY suppname";
 	} else {
 		if (strlen($_POST['Keywords']) > 0) {
-			$_POST['Keywords'] = strtoupper($_POST['Keywords']);
+			$_POST['Keywords'] = mb_strtoupper($_POST['Keywords']);
 			//insert wildcard characters in spaces
 			$SearchString = '%' . str_replace(' ', '%', $_POST['Keywords']) . '%';
 			$SQL = "SELECT supplierid,
@@ -454,7 +454,7 @@ if (isset($_POST['SearchSupplier']) OR isset($_POST['Go']) OR isset($_POST['Next
 				WHERE suppname " . LIKE . " '$SearchString'
 				ORDER BY suppname";
 		} elseif (strlen($_POST['SupplierCode']) > 0) {
-			$_POST['SupplierCode'] = strtoupper($_POST['SupplierCode']);
+			$_POST['SupplierCode'] = mb_strtoupper($_POST['SupplierCode']);
 			$SQL = "SELECT supplierid,
 					suppname,
 					currcode,

@@ -119,8 +119,8 @@ while ($myrow=DB_fetch_array($MovtsResult)) {
 			<td class=number>%s</td>
 			<td class=number>%s</td>
 			</tr>',
-			strtoupper($myrow['stockid']),
-			strtoupper($myrow['stockid']),
+			mb_strtoupper($myrow['stockid']),
+			mb_strtoupper($myrow['stockid']),
 			$myrow['typename'],
 			$myrow['transno'],
 			$DisplayTranDate,

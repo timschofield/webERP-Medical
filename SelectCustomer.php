@@ -90,7 +90,7 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 	}
 	if ($_POST['Keywords'] AND (($_POST['CustCode']) OR ($_POST['CustPhone']) OR ($_POST['CustType']))) {
 		$msg = _('Search Result: Customer Name has been used in search') . '<br />';
-		$_POST['Keywords'] = strtoupper($_POST['Keywords']);
+		$_POST['Keywords'] = mb_strtoupper($_POST['Keywords']);
 	}
 	if ($_POST['CustCode'] AND $_POST['CustPhone'] == "" AND isset($_POST['CustType']) AND $_POST['Keywords'] == "") {
 		$msg = _('Search Result: Customer Code has been used in search') . '<br />';
@@ -123,7 +123,7 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 	} else {
 		if (strlen($_POST['Keywords']) > 0) {
 			//using the customer name
-			$_POST['Keywords'] = strtoupper(trim($_POST['Keywords']));
+			$_POST['Keywords'] = mb_strtoupper(trim($_POST['Keywords']));
 			//insert wildcard characters in spaces
 			$SearchString = '%' . str_replace(' ', '%', $_POST['Keywords']) . '%';
 			$SQL = "SELECT debtorsmaster.debtorno,
@@ -143,7 +143,7 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 			WHERE debtorsmaster.name " . LIKE . " '$SearchString'
 			AND debtorsmaster.typeid = debtortype.typeid";
 		} elseif (strlen($_POST['CustCode']) > 0) {
-			$_POST['CustCode'] = strtoupper(trim($_POST['CustCode']));
+			$_POST['CustCode'] = mb_strtoupper(trim($_POST['CustCode']));
 			$SQL = "SELECT debtorsmaster.debtorno,
 				debtorsmaster.name,
 				debtorsmaster.address1,

@@ -535,9 +535,9 @@ if (isset($_POST['LookupPrice']) and isset($_POST['StockID2'])){
 								purchdata.minorderqty
 					FROM purchdata
 					WHERE  purchdata.supplierno = '" . $_SESSION['PO'.$identifier]->SupplierID . "'
-					AND purchdata.stockid = '". strtoupper($_POST['StockID2']) . "'";
+					AND purchdata.stockid = '". mb_strtoupper($_POST['StockID2']) . "'";
 
-	$ErrMsg = _('The supplier pricing details for') . ' ' . strtoupper($_POST['StockID']) . ' ' . _('could not be retrieved because');
+	$ErrMsg = _('The supplier pricing details for') . ' ' . mb_strtoupper($_POST['StockID']) . ' ' . _('could not be retrieved because');
 	$DbgMsg = _('The SQL used to retrieve the pricing details but failed was');
 	$LookupResult = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
@@ -547,7 +547,7 @@ if (isset($_POST['LookupPrice']) and isset($_POST['StockID2'])){
 		$_POST['ConversionFactor'] = $myrow['conversionfactor'];
 		$_POST['MinimumOrderQty'] = $myrow['minorderqty'];
 	} else {
-		prnMsg(_('Sorry') . ' ... ' . _('there is no purchasing data set up for this supplier') . '  - ' . $_SESSION['PO'.$identifier]->SupplierID . ' ' . _('and item') . ' ' . strtoupper($_POST['StockID']),'warn');
+		prnMsg(_('Sorry') . ' ... ' . _('there is no purchasing data set up for this supplier') . '  - ' . $_SESSION['PO'.$identifier]->SupplierID . ' ' . _('and item') . ' ' . mb_strtoupper($_POST['StockID']),'warn');
 	}
 }
 

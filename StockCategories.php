@@ -13,9 +13,9 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/s
 	_('Inventory Adjustment') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (isset($_GET['SelectedCategory'])){
-	$SelectedCategory = strtoupper($_GET['SelectedCategory']);
+	$SelectedCategory = mb_strtoupper($_GET['SelectedCategory']);
 } else if (isset($_POST['SelectedCategory'])){
-	$SelectedCategory = strtoupper($_POST['SelectedCategory']);
+	$SelectedCategory = mb_strtoupper($_POST['SelectedCategory']);
 }
 
 if (isset($_GET['DeleteProperty'])){
@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
 
 	//first off validate inputs sensible
 
-	$_POST['CategoryID'] = strtoupper($_POST['CategoryID']);
+	$_POST['CategoryID'] = mb_strtoupper($_POST['CategoryID']);
 
 	if (strlen($_POST['CategoryID']) > 6) {
 		$InputError = 1;

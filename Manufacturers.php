@@ -9,10 +9,10 @@ $title = _('Manufacturing Company Maintenance');
 include('includes/header.inc');
 
 if (isset($_GET['ManufacturerID'])){
-	$ManufacturerID = strtoupper($_GET['ManufacturerID']);
+	$ManufacturerID = mb_strtoupper($_GET['ManufacturerID']);
 	$_POST['amend']=True;
 } elseif (isset($_POST['ManufacturerID'])){
-	$ManufacturerID = strtoupper($_POST['ManufacturerID']);
+	$ManufacturerID = mb_strtoupper($_POST['ManufacturerID']);
 } else {
 	unset($ManufacturerID);
 }

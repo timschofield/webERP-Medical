@@ -10,7 +10,7 @@ include('includes/SQL_CommonFunctions.inc');
 
 if (isset($_POST['ProcessStockChange'])){
 
-	$_POST['NewStockID'] = strtoupper($_POST['NewStockID']);
+	$_POST['NewStockID'] = mb_strtoupper($_POST['NewStockID']);
 
 /*First check the stock code exists */
 	$result=DB_query("SELECT stockid FROM stockmaster WHERE stockid='" . $_POST['OldStockID'] . "'",$db);

@@ -24,8 +24,8 @@ if (!isset($_SESSION['Adjustment'])){
 $NewAdjustment = false;
 
 if (isset($_GET['StockID'])){
-	$StockID = trim(strtoupper($_GET['StockID']));
-	$_SESSION['Adjustment']->StockID = trim(strtoupper($StockID));
+	$StockID = trim(mb_strtoupper($_GET['StockID']));
+	$_SESSION['Adjustment']->StockID = trim(mb_strtoupper($StockID));
 	$result = DB_query("SELECT description, controlled, serialised, decimalplaces FROM stockmaster WHERE stockid='" . $_SESSION['Adjustment']->StockID . "'",$db);
 	$myrow = DB_fetch_array($result);
 	$_SESSION['Adjustment']->ItemDescription = $myrow['description'];
@@ -40,8 +40,8 @@ if (isset($_GET['StockID'])){
 } elseif (isset($_POST['StockID'])){
 	if(isset($_POST['StockID']) and $_POST['StockID'] != $_SESSION['Adjustment']->StockID){
 		$NewAdjustment = true;
-		$_SESSION['Adjustment']->StockID = trim(strtoupper($_POST['StockID']));
-		$StockID = trim(strtoupper($_POST['StockID']));
+		$_SESSION['Adjustment']->StockID = trim(mb_strtoupper($_POST['StockID']));
+		$StockID = trim(mb_strtoupper($_POST['StockID']));
 	}
 	$_SESSION['Adjustment']->tag = $_POST['tag'];
 	$_SESSION['Adjustment']->Narrative = $_POST['Narrative'];
