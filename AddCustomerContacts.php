@@ -17,8 +17,8 @@ if (isset($_POST['DebtorNo'])){
 } elseif (isset($_GET['DebtorNo'])){
 	$DebtorNo = $_GET['DebtorNo'];
 }
-echo "<a href='" . $rootpath . '/Customers.php?' . SID .'&DebtorNo='.$DebtorNo."'>" . _('Back to Customers') . '</a><br />';
-$SQLname="SELECT name from debtorsmaster where debtorno='".$DebtorNo."'";
+echo '<a href="' . $rootpath . '/Customers.php?DebtorNo='.$DebtorNo.'">' . _('Back to Customers') . '</a><br />';
+$SQLname="SELECT name FROM debtorsmaster WHERE debtorno='".$DebtorNo."'";
 $Result = DB_query($SQLname,$db);
 $row = DB_fetch_array($Result);
 if (!isset($_GET['Id'])) {
@@ -38,13 +38,13 @@ if ( isset($_POST['submit']) ) {
 	//first off validate inputs sensible
 	if (isset($_POST['Con_ID']) and !is_long((integer)$_POST['Con_ID'])) {
 		$InputError = 1;
-		prnMsg( _('The Contact must be an integer.'), 'error');
+		prnMsg( _('The Contact ID must be an integer.'), 'error');
 	} elseif (strlen($_POST['conName']) >40) {
 		$InputError = 1;
-		prnMsg( _("The contact's name must be forty characters or less long"), 'error');
+		prnMsg( _('The contact name must be forty characters or less long'), 'error');
 	} elseif( trim($_POST['conName']) == '' ) {
 		$InputError = 1;
-		prnMsg( _("The contact's name may not be empty"), 'error');
+		prnMsg( _('The contact name may not be empty'), 'error');
 	}
 
 	if (isset($Id) and ($Id and $InputError !=1)) {
@@ -134,10 +134,10 @@ if (!isset($Id)) {
 				$myrow[3],
 				$myrow[4],
 				$myrow[5],
-				$_SERVER['PHP_SELF'] . "?" . SID,
+				$_SERVER['PHP_SELF'] . '?',
 				$myrow[0],
 				$myrow[1],
-				$_SERVER['PHP_SELF'] . "?" . SID,
+				$_SERVER['PHP_SELF'] . '?',
 				$myrow[0],
 				$myrow[1]);
 
@@ -146,14 +146,14 @@ if (!isset($Id)) {
 	echo '</table>';
 }
 if (isset($Id)) {  ?>
-	<div class="centre"><a href="<?php echo $_SERVER['PHP_SELF'] . '?' . SID .'&DebtorNo='.$DebtorNo;?>"><?=_('Review all contacts for this Customer')?></a></div>
+	<div class="centre"><a href="<?php echo $_SERVER['PHP_SELF'] . 'DebtorNo='.$DebtorNo;?>"><?=_('Review all contacts for this Customer')?></a></div>
 <?php } ?>
 <br />
 
 <?php
 if (!isset($_GET['delete'])) {
 
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '&DebtorNo='.$DebtorNo.'">';
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . 'DebtorNo='.$DebtorNo.'">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (isset($Id)) {

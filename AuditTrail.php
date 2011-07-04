@@ -30,7 +30,7 @@ $UserResult = DB_query("SELECT userid FROM www_users",$db);
 
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<table class=selection>';
+echo '<table class="selection">';
 
 echo '<tr><td>'. _('From Date') . ' ' . $_SESSION['DefaultDateFormat'] .'</td>
 	<td><input tabindex="1" type=text class=date alt="'.$_SESSION['DefaultDateFormat'].'" name="FromDate" size="11" maxlength="10" value="' .$_POST['FromDate'].'"></td></tr>';
@@ -43,15 +43,16 @@ echo '<tr><td>'. _('User ID'). '</td>
 echo '<option value="ALL">' . _('ALL') . '</option>';
 while ($users = DB_fetch_row($UserResult)) {
 	if (isset($_POST['SelectedUser']) and $users[0]==$_POST['SelectedUser']) {
-		echo '<option selected value=' . $users[0] . '>' . $users[0] . '</option>';
+		echo '<option selected value="' . $users[0] . '">' . $users[0] . '</option>';
 	} else {
-		echo '<option value=' . $users[0] . '>' . $users[0] . '</option>';
+		echo '<option value="' . $users[0] . '">' . $users[0] . '</option>';
 	}
 }
 echo '</select></td></tr>';
 
 // Show table selections
-echo '<tr><td>'. _('Table '). '</td><td><select tabindex="4" name="SelectedTable">';
+echo '<tr><td>'. _('Table '). '</td>
+		<td><select tabindex="4" name="SelectedTable">';
 echo '<option value="ALL">' . _('ALL') . '</option>';
 while ($tables = DB_fetch_row($TableResult)) {
 	if (isset($_POST['SelectedTable']) and $tables[0]==$_POST['SelectedTable']) {
@@ -63,7 +64,7 @@ while ($tables = DB_fetch_row($TableResult)) {
 echo '</select></td></tr>';
 
 echo '</table><br />';
-echo '<div class=centre><input tabindex="5" type=submit name=View value="' . _('View') . '"></div>';
+echo '<div class="centre"><input tabindex="5" type="submit" name="View" value="' . _('View') . '"></div>';
 echo '</form>';
 
 // View the audit trail
