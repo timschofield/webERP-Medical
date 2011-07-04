@@ -157,7 +157,6 @@ include('includes/header.inc');
 		echo '</table></form>';
 	}
 
-echo '</td></tr></table>'; // end Page Border
 include('includes/footer.inc');
 
 ?>
