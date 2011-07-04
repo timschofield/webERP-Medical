@@ -280,13 +280,13 @@ class Cpdf extends TCPDF {
 				$b2='LR';
 			} else {
 				$b2='';
-				if(is_int(strpos($border,'L'))) {
+				if(is_int(mb_strpos($border,'L'))) {
 					$b2.='L';
 				}
-				if(is_int(strpos($border,'R'))) {
+				if(is_int(mb_strpos($border,'R'))) {
 					$b2.='R';
 				}
-				$b=is_int(strpos($border,'T')) ? $b2.'T' : $b2;
+				$b=is_int(mb_strpos($border,'T')) ? $b2.'T' : $b2;
 			}
 		}
 		$sep=-1;

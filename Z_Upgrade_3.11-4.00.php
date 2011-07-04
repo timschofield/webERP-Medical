@@ -51,7 +51,7 @@ if ($_POST['DoUpgrade'] == _('Perform Upgrade')){
 			if (mb_substr($SQLScriptFile[$i],0,8) == 'LANGUAGE'){
 				$InAFunction = false;
 			}
-			if (strpos($SQLScriptFile[$i],';')>0 AND ! $InAFunction){
+			if (mb_strpos($SQLScriptFile[$i],';')>0 AND ! $InAFunction){
 				$sql = mb_substr($sql,0,strlen($sql)-1);
 				$result = DB_query($sql, $db, $ErrMsg, $DBMsg, false, false);
 				switch (DB_error_no($db)) {

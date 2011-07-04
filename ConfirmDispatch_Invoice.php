@@ -819,7 +819,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 		/*Test to see if the item being sold is an asset */
 		if (mb_substr($OrderLine->StockID,0,6)=='ASSET-'){
 				$IsAsset = true;
-				$HyphenOccursAt = strpos($OrderLine->StockID,'-',6);
+				$HyphenOccursAt = mb_strpos($OrderLine->StockID,'-',6);
 				if ($HyphenOccursAt == false){
 					$AssetNumber =   intval(mb_substr($OrderLine->StockID,6));
 				} else {

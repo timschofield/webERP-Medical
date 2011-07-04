@@ -1070,7 +1070,7 @@ class XhtmlValidator
     function removeDoctypeHeader($xhtml)
     {
         if (mb_substr($xhtml, 0, 9) == '<!DOCTYPE') {
-            $replacement = mb_substr($xhtml, 0, strpos($xhtml, '>'));
+            $replacement = mb_substr($xhtml, 0, mb_strpos($xhtml, '>'));
             $this->_startLine = count(mb_substr_count($replacement, "\n"));
         }
         return (isset($replacement)) ? mb_substr($xhtml, strlen($replacement)) : $xhtml;
