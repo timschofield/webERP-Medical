@@ -573,8 +573,8 @@ then do the updates and inserts to process the invoice entered */
 
 		$InputError = True;
 		prnMsg(_('The invoice as entered cannot be processed because the total amount of the invoice is less than  0') . '. ' . _('Invoices are expected to have a positive charge'),'error');
-		echo '<p> The tax total is : ' . $TaxTotal . '</p>';
-		echo '<p> The ovamount is : ' . $_SESSION['SuppTrans']->OvAmount . '</p>';
+		echo '<p>' . _('The tax total is') . ' : ' . $TaxTotal . '</p>';
+		echo '<p>' . _('The ovamount is') . ' : ' . $_SESSION['SuppTrans']->OvAmount . '</p>';
 
 	} elseif ( $TaxTotal + $_SESSION['SuppTrans']->OvAmount == 0){
 
