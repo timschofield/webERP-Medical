@@ -53,12 +53,12 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 											'" . $_POST['PatientNo'] . "',
 											'" . $_POST['BranchNo'] . "',
 											'" . DB_escape_string($_POST['Comments']) ."',
-											'" . Date("Y-m-d") . "',
+											'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 											'1',
 											'" . $_SESSION['UserStockLocation'] . "',
 											'" . $_SESSION['UserStockLocation'] ."',
-											'" . Date('Y-m-d') . "',
-											'" . Date('Y-m-d') . "',
+											'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
+											'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 											0
 										)";
 
@@ -84,8 +84,8 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 													'1',
 													'0',
 													'" . _('Sales order for patient admission transaction') . "',
-													'" . Date('Y-m-d') . "',
-													'" . Date('Y-m-d') . "',
+													'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
+													'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 													'1',
 													1
 												)";
@@ -93,7 +93,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 		$Ins_LineItemResult = DB_query($LineItemSQL,$db,$ErrMsg,$DbgMsg,true);
 
 		$InvoiceNo = GetNextTransNo(10, $db);
-		$PeriodNo = GetPeriod(Date($_SESSION['DefaultDateFormat']), $db);
+		$PeriodNo = GetPeriod($_POST['AdmissionDate']), $db);
 		if (isset($_POST['SubmitInsurance'])) {
 			$_POST['Received']=0;
 		} else {
@@ -120,8 +120,8 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 				10,
 				'" . $_POST['PatientNo'] . "',
 				'" . $_POST['BranchNo'] . "',
-				'" . date('Y-m-d H-i-s') . "',
-				'" . date('Y-m-d H-i-s') . "',
+				'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
+				'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 				'" . $PeriodNo . "',
 				'" . $OrderNo . "',
 				'" . $_POST['Price'] . "',
@@ -155,7 +155,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 						 10,
 						'" . $InvoiceNo . "',
 						'" . $_SESSION['UserStockLocation'] . "',
-						'" . date('Y-m-d H-i-s') . "',
+						'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 						'" . $_POST['PatientNo'] . "',
 						'" . $_POST['BranchNo'] . "',
 						'" . $PeriodNo . "',
@@ -187,7 +187,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 									amount)
 							VALUES ( 10,
 									'" . $InvoiceNo . "',
-									'" . date('Y-m-d') . "',
+									'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 									'" . $PeriodNo . "',
 									'" . $SalesGLAccounts['salesglcode'] . "',
 									'" . $_SESSION['DefaultTag'] . "',
@@ -208,7 +208,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 									amount )
 								VALUES ( 10,
 									'" . $InvoiceNo . "',
-									'" . date('Y-m-d') . "',
+									'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 									'" . $PeriodNo . "',
 									'" . $_SESSION['CompanyRecord']['debtorsact'] . "',
 									'" . $_SESSION['DefaultTag'] . "',
@@ -231,7 +231,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 										amount)
 									VALUES (12,
 										'" . $ReceiptNumber . "',
-										'" . date('Y-m-d H-i-s') . "',
+										'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 										'" . $PeriodNo . "',
 										'" . $_POST['BankAccount'] . "',
 										'" . $_SESSION['DefaultTag'] . "',
@@ -252,7 +252,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 										amount)
 									VALUES (12,
 										'" . $ReceiptNumber . "',
-										'" . date('Y-m-d H-i-s') . "',
+										'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 										'" . $PeriodNo . "',
 										'" . $_SESSION['CompanyRecord']['debtorsact'] . "',
 										'" . $_SESSION['DefaultTag'] . "',
@@ -279,7 +279,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 									'" . _('Payment of invoice for admission of Patient number').' '.$_POST['PatientNo'] . "',
 									'1',
 									'1',
-									'" . date('Y-m-d H-i-s') . "',
+									'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 									'2',
 									'" . ($_POST['Received']) . "',
 			'" . $_SESSION['CompanyRecord']['currencydefault'] . "')";
@@ -302,8 +302,8 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 										VALUES ('" . $ReceiptNumber . "',
 											12,
 											'" . $_POST['PatientNo'] . "',
-											'" . date('Y-m-d H-i-s') . "',
-											'" . date('Y-m-d H-i-s') . "',
+											'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
+											'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 											'" . $PeriodNo . "',
 											'" . $InvoiceNo . "',
 											'1',
@@ -394,9 +394,9 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 		$SQL = "SELECT debtorsmaster.debtorno,
 				debtorsmaster.name,
 				debtorsmaster.address1,
-								debtorsmaster.address2,
-								debtorsmaster.address3,
-								debtorsmaster.address4,
+				debtorsmaster.address2,
+				debtorsmaster.address3,
+				debtorsmaster.address4,
 				custbranch.branchcode,
 				custbranch.brname,
 				custbranch.contactname,
@@ -624,7 +624,7 @@ if (isset($_POST['Patient'])) {
 				FROM prices
 				WHERE stockid='".$StockID."'
 				AND typeabbrev='".$mydebtorrow['salestype']."'
-				AND '".date('Y-m-d')."' between startdate and enddate";
+				AND '".FormatDateForSQL($_POST['AdmissionDate'])."' between startdate and enddate";
 	$result=DB_query($sql,$db);
 	if (DB_num_rows($result)==0) {
 		$Price=0;

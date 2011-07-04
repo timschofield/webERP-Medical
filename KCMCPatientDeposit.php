@@ -32,7 +32,7 @@ if (isset($_POST['SubmitCash'])) {
 		*/
 
 		if (isset($_POST['SubmitCash'])) {
-			$PeriodNo = GetPeriod(Date($_SESSION['DefaultDateFormat']), $db);
+			$PeriodNo = GetPeriod($_POST['AdmissionDate']), $db);
 			$ReceiptNumber = GetNextTransNo(12,$db);
 			$SQL="INSERT INTO gltrans (type,
 										typeno,
@@ -44,7 +44,7 @@ if (isset($_POST['SubmitCash'])) {
 										amount)
 									VALUES (12,
 										'" . $ReceiptNumber . "',
-										'" . date('Y-m-d H-i-s') . "',
+										'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 										'" . $PeriodNo . "',
 										'" . $_POST['BankAccount'] . "',
 										'" . $_SESSION['DefaultTag'] . "',
@@ -65,7 +65,7 @@ if (isset($_POST['SubmitCash'])) {
 										amount)
 									VALUES (12,
 										'" . $ReceiptNumber . "',
-										'" . date('Y-m-d H-i-s') . "',
+										'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 										'" . $PeriodNo . "',
 										'" . $_SESSION['CompanyRecord']['debtorsact'] . "',
 										'" . $_SESSION['DefaultTag'] . "',
@@ -92,7 +92,7 @@ if (isset($_POST['SubmitCash'])) {
 									'" . _('Deposit for Patient number').' '.$_POST['PatientNo'] . "',
 									'1',
 									'1',
-									'" . date('Y-m-d H-i-s') . "',
+									'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 									'2',
 									'" . ($_POST['Received']) . "',
 									'" . $_SESSION['CompanyRecord']['currencydefault'] . "')";
@@ -115,8 +115,8 @@ if (isset($_POST['SubmitCash'])) {
 										VALUES ('" . $ReceiptNumber . "',
 											12,
 											'" . $_POST['PatientNo'] . "',
-											'" . date('Y-m-d H-i-s') . "',
-											'" . date('Y-m-d H-i-s') . "',
+											'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
+											'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 											'" . $PeriodNo . "',
 											'" . $ReceiptNumber . "',
 											'1',
