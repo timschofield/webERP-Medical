@@ -61,8 +61,8 @@ if (isset($_POST['Process'])) {
 	$_SESSION['offer']->CurrCode=$Currency;
 	$LineNo=0;
 	foreach ($_POST as $key=>$value) {
-		if (substr($key, 0, 8)=='Quantity') {
-			$ItemCode=substr($key, 8, strlen($key));
+		if (mb_substr($key, 0, 8)=='Quantity') {
+			$ItemCode=mb_substr($key, 8, strlen($key));
 			$Quantity=$value;
 			$Price=$_POST['Price'.$ItemCode];
 			$_SESSION['offer']->add_to_offer(
@@ -159,14 +159,14 @@ if (isset($_POST['SupplierID']) and empty($_POST['TenderType']) and empty($_POST
 
 if (isset($_POST['NewItem']) and !isset($_POST['Refresh'])) {
 	foreach ($_POST as $key => $value) {
-		if (substr($key,0,3)=='qty') {
-			$StockID=substr($key,3);
+		if (mb_substr($key,0,3)=='qty') {
+			$StockID=mb_substr($key,3);
 			$Quantity=$value;
 		}
-		if (substr($key,0,5)=='price') {
+		if (mb_substr($key,0,5)=='price') {
 			$Price=$value;
 		}
-		if (substr($key,0,3)=='uom') {
+		if (mb_substr($key,0,3)=='uom') {
 			$UOM=$value;
 		}
 		if (isset($UOM)) {
@@ -189,14 +189,14 @@ if (isset($_POST['NewItem']) and !isset($_POST['Refresh'])) {
 
 if (isset($_POST['Refresh']) and !isset($_POST['NewItem'])) {
 	foreach ($_POST as $key => $value) {
-		if (substr($key,0,3)=='qty') {
-			$LineNo=substr($key,3);
+		if (mb_substr($key,0,3)=='qty') {
+			$LineNo=mb_substr($key,3);
 			$Quantity=$value;
 		}
-		if (substr($key,0,5)=='price') {
+		if (mb_substr($key,0,5)=='price') {
 			$Price=$value;
 		}
-		if (substr($key,0,10)=='expirydate') {
+		if (mb_substr($key,0,10)=='expirydate') {
 			$ExpiryDate=$value;
 		}
 		if (isset($ExpiryDate)) {
@@ -212,14 +212,14 @@ if (isset($_POST['Refresh']) and !isset($_POST['NewItem'])) {
 
 if (isset($_POST['Update'])) {
 	foreach ($_POST as $key => $value) {
-		if (substr($key,0,3)=='qty') {
-			$LineNo=substr($key,3);
+		if (mb_substr($key,0,3)=='qty') {
+			$LineNo=mb_substr($key,3);
 			$Quantity=$value;
 		}
-		if (substr($key,0,5)=='price') {
+		if (mb_substr($key,0,5)=='price') {
 			$Price=$value;
 		}
-		if (substr($key,0,10)=='expirydate') {
+		if (mb_substr($key,0,10)=='expirydate') {
 			$ExpiryDate=$value;
 		}
 		if (isset($ExpiryDate)) {
@@ -240,14 +240,14 @@ if (isset($_POST['Update'])) {
 
 if (isset($_POST['Save'])) {
 	foreach ($_POST as $key => $value) {
-		if (substr($key,0,3)=='qty') {
-			$LineNo=substr($key,3);
+		if (mb_substr($key,0,3)=='qty') {
+			$LineNo=mb_substr($key,3);
 			$Quantity=$value;
 		}
-		if (substr($key,0,5)=='price') {
+		if (mb_substr($key,0,5)=='price') {
 			$Price=$value;
 		}
-		if (substr($key,0,10)=='expirydate') {
+		if (mb_substr($key,0,10)=='expirydate') {
 			$ExpiryDate=$value;
 		}
 		if (isset($ExpiryDate)) {

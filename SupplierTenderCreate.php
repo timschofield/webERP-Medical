@@ -197,14 +197,14 @@ if (isset($_POST['SelectedSupplier'])) {
 
 if (isset($_POST['NewItem']) and !isset($_POST['Refresh'])) {
 	foreach ($_POST as $key => $value) {
-		if (substr($key,0,3)=='qty') {
-			$StockID=substr($key,3);
+		if (mb_substr($key,0,3)=='qty') {
+			$StockID=mb_substr($key,3);
 			$Quantity=$value;
 		}
-		if (substr($key,0,5)=='price') {
+		if (mb_substr($key,0,5)=='price') {
 			$Price=$value;
 		}
-		if (substr($key,0,3)=='uom') {
+		if (mb_substr($key,0,3)=='uom') {
 			$UOM=$value;
 		}
 		if (isset($UOM)) {

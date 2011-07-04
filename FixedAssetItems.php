@@ -42,7 +42,7 @@ if (isset($_FILES['ItemPicture']) AND $_FILES['ItemPicture']['name'] !='') {
 	$filename = $_SESSION['part_pics_dir'] . '/ASSET_' . $AssetID . '.jpg';
 
 	 //But check for the worst
-	if (mb_strtoupper(substr(trim($_FILES['ItemPicture']['name']),strlen($_FILES['ItemPicture']['name'])-3))!='JPG'){
+	if (mb_strtoupper(mb_substr(trim($_FILES['ItemPicture']['name']),strlen($_FILES['ItemPicture']['name'])-3))!='JPG'){
 		prnMsg(_('Only jpg files are supported - a file extension of .jpg is expected'),'warn');
 		$UploadTheFile ='No';
 	} elseif ( $_FILES['ItemPicture']['size'] > ($_SESSION['MaxImageSize']*1024)) { //File Size Check

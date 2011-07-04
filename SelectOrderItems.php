@@ -25,7 +25,7 @@ if (isset($_POST['QuickEntry'])){
 if (isset($_POST['order_items'])){
 	foreach ($_POST as $key => $value) {
 		if (strstr($key,'itm')) {
-			$NewItem_array[substr($key,3)] = trim($value);
+			$NewItem_array[mb_substr($key,3)] = trim($value);
 			$NewItem='Here';
 		}
 	}
@@ -386,9 +386,9 @@ if (isset($_POST['SearchCust']) AND $_SESSION['RequireCustomerSelection']==1 AND
 // record returned from a search so parse the $Select string into customer code and branch code */
 if (isset($_POST['Select']) AND $_POST['Select']!='') {
 
-	$_SESSION['Items'.$identifier]->Branch = substr($_POST['Select'],strpos($_POST['Select'],' - ')+3);
+	$_SESSION['Items'.$identifier]->Branch = mb_substr($_POST['Select'],strpos($_POST['Select'],' - ')+3);
 
-	$_POST['Select'] = substr($_POST['Select'],0,strpos($_POST['Select'],' - '));
+	$_POST['Select'] = mb_substr($_POST['Select'],0,strpos($_POST['Select'],' - '));
 
 	// Now check to ensure this account is not on hold */
 	$sql = "SELECT debtorsmaster.name,

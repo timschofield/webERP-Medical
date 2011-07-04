@@ -111,7 +111,7 @@ if (isset($_FILES['Drawing']) AND $_FILES['Drawing']['name'] !='' AND $_SESSION[
 	$filename = $_SESSION['part_pics_dir'] . '/' . $_SESSION['Contract'.$identifier]->ContractRef . '.jpg';
 
 	 //But check for the worst
-	if (mb_strtoupper(substr(trim($_FILES['Drawing']['name']),strlen($_FILES['Drawing']['name'])-3))!='JPG'){
+	if (mb_strtoupper(mb_substr(trim($_FILES['Drawing']['name']),strlen($_FILES['Drawing']['name'])-3))!='JPG'){
 		prnMsg(_('Only jpg files are supported - a file extension of .jpg is expected'),'warn');
 		$UploadTheFile ='No';
 	} elseif ( $_FILES['Drawing']['size'] > ($_SESSION['MaxImageSize']*1024)) { //File Size Check
@@ -685,8 +685,8 @@ if (isset($_POST['SelectedCustomer1'])) {
  * or set because only one customer record returned from a search
  * so parse the $Select string into debtorno and branch code */
 	foreach ($_POST as $key => $value) {
-		if (substr($key, 0, 6)=='Submit') {
-			$Index=substr($key, 6, 1);
+		if (mb_substr($key, 0, 6)=='Submit') {
+			$Index=mb_substr($key, 6, 1);
 			$_POST['SelectedCustomer']=$_POST['SelectedCustomer'.$Index];
 			$_POST['SelectedBranch']=$_POST['SelectedBranch'.$Index];
 		}

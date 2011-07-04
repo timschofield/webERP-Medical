@@ -835,7 +835,7 @@
 								$this->debugmsg("\n+++INFLATED REQUEST+++[".strlen($data)." chars]+++\n" . $data . "\n+++END+++");
 							}
 						}
-						elseif($content_encoding == 'gzip' && $degzdata = @gzinflate(substr($data, 10)))
+						elseif($content_encoding == 'gzip' && $degzdata = @gzinflate(mb_substr($data, 10)))
 						{
 							$data = $degzdata;
 							if($this->debug > 1)

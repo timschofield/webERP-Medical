@@ -323,10 +323,10 @@ class Cpdf extends TCPDF {
 			}
 		}
 
-		$this->Cell($w,$h,substr($s,0,$sep),$b,2,$align,$fill);
+		$this->Cell($w,$h,mb_substr($s,0,$sep),$b,2,$align,$fill);
 		$this->x=$this->lMargin;
 
-		return substr($s,$sep);
+		return mb_substr($s,$sep);
 	}
 
 } // end of class

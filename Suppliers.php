@@ -23,8 +23,8 @@ Function Is_ValidAccount ($ActNo) {
 	return False;
 	}
 
-	$BankPrefix = substr($ActNo,0, 2);
-	$BranchNumber = (int) (substr($ActNo, 3, 4));
+	$BankPrefix = mb_substr($ActNo,0, 2);
+	$BranchNumber = (int) (mb_substr($ActNo, 3, 4));
 
 	if ($BankPrefix == '29') {
 		echo _('NZ Accounts codes with the United Bank are not verified') . ', ' . _('be careful to enter the correct account number');
@@ -146,7 +146,7 @@ Function Is_ValidAccount ($ActNo) {
 
 	for ($i=3; $i<=14; $i++) {
 
-	$DigitVal = (double)(substr($ActNo, $i, 1));
+	$DigitVal = (double)(mb_substr($ActNo, $i, 1));
 
 	switch ($i) {
 	case 3:
@@ -232,7 +232,7 @@ Function Is_ValidAccount ($ActNo) {
 			$CheckSum = $CheckSum + $DigitVal * 3;
 		} elseif ($BankPrefix == '09'){
 			if (($DigitVal * 4) > 9) {
-				$CheckSum = $CheckSum + (int) substr(($DigitVal * 4),0,1) + (int)Substr(($DigitVal * 4),strlen($DigitVal * 4)-1, 1);
+				$CheckSum = $CheckSum + (int) mb_substr(($DigitVal * 4),0,1) + (int)Substr(($DigitVal * 4),strlen($DigitVal * 4)-1, 1);
 			} else {
 				$CheckSum = $CheckSum + $DigitVal * 4;
 			}

@@ -1069,11 +1069,11 @@ class XhtmlValidator
 
     function removeDoctypeHeader($xhtml)
     {
-        if (substr($xhtml, 0, 9) == '<!DOCTYPE') {
-            $replacement = substr($xhtml, 0, strpos($xhtml, '>'));
-            $this->_startLine = count(substr_count($replacement, "\n"));
+        if (mb_substr($xhtml, 0, 9) == '<!DOCTYPE') {
+            $replacement = mb_substr($xhtml, 0, strpos($xhtml, '>'));
+            $this->_startLine = count(mb_substr_count($replacement, "\n"));
         }
-        return (isset($replacement)) ? substr($xhtml, strlen($replacement)) : $xhtml;
+        return (isset($replacement)) ? mb_substr($xhtml, strlen($replacement)) : $xhtml;
     }
 
     function removeCdata($xhtml)

@@ -37,33 +37,33 @@ if (isset($_POST['OrderItems'])){
 			$key=str_replace('~', ' ', trim($key));
 			$sql="SELECT quantity
 						FROM stockserialitems
-						WHERE stockid='".substr($key,3, strpos($key, 'batch')-3)."'
-							AND serialno='".trim(substr($key, strpos($key, 'batch')+5))."'";
+						WHERE stockid='".mb_substr($key,3, strpos($key, 'batch')-3)."'
+							AND serialno='".trim(mb_substr($key, strpos($key, 'batch')+5))."'";
 			$BatchQuantityResult=DB_query($sql, $db);
 			$BatchQuantityRow=DB_fetch_array($BatchQuantityResult);
-			if (!isset($NewItemArray[substr($key,3, strpos($key, 'batch')-3)])) {
+			if (!isset($NewItemArray[mb_substr($key,3, strpos($key, 'batch')-3)])) {
 				if ($BatchQuantityRow['quantity']<trim($value)) {
-					prnMsg( _('Batch number').' '.trim(substr($key, strpos($key, 'batch')+5)).' '.
-						_('of item number').' '.substr($key,3, strpos($key, 'batch')-3).' '.
+					prnMsg( _('Batch number').' '.trim(mb_substr($key, strpos($key, 'batch')+5)).' '.
+						_('of item number').' '.mb_substr($key,3, strpos($key, 'batch')-3).' '.
 							_('has insufficient items remaining in it to complete this sale').$BatchQuantityRow['quantity'].'x'.$value, 'info');
 				} else {
-					$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Quantity'] = trim($value);
-					$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Batch']['Number'][] = trim(substr($key, strpos($key, 'batch')+5));
-					$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Batch']['Quantity'][] = trim($value);
+					$NewItemArray[mb_substr($key,3, strpos($key, 'batch')-3)]['Quantity'] = trim($value);
+					$NewItemArray[mb_substr($key,3, strpos($key, 'batch')-3)]['Batch']['Number'][] = trim(mb_substr($key, strpos($key, 'batch')+5));
+					$NewItemArray[mb_substr($key,3, strpos($key, 'batch')-3)]['Batch']['Quantity'][] = trim($value);
 				}
 			} else {
-				if ($BatchQuantityRow['quantity']<trim($value)+$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Quantity']) {
-					prnMsg( _('Batch number').' '.trim(substr($key, strpos($key, 'batch')+5)).' '.
-						_('of item number').' '.substr($key,3, strpos($key, 'batch')-3).' '.
+				if ($BatchQuantityRow['quantity']<trim($value)+$NewItemArray[mb_substr($key,3, strpos($key, 'batch')-3)]['Quantity']) {
+					prnMsg( _('Batch number').' '.trim(mb_substr($key, strpos($key, 'batch')+5)).' '.
+						_('of item number').' '.mb_substr($key,3, strpos($key, 'batch')-3).' '.
 							_('has insufficient items remaining in it to complete this sale'), 'info');
 				} else {
-					$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Quantity'] += trim($value);
-					$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Batch']['Number'][] = trim(substr($key, strpos($key, 'batch')+5));
-					$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Batch']['Quantity'][] = trim($value);
+					$NewItemArray[mb_substr($key,3, strpos($key, 'batch')-3)]['Quantity'] += trim($value);
+					$NewItemArray[mb_substr($key,3, strpos($key, 'batch')-3)]['Batch']['Number'][] = trim(mb_substr($key, strpos($key, 'batch')+5));
+					$NewItemArray[mb_substr($key,3, strpos($key, 'batch')-3)]['Batch']['Quantity'][] = trim($value);
 				}
 			}
 		} elseif (strstr($key,'itm')) {
-			$NewItemArray[substr($key,3)] = trim($value);
+			$NewItemArray[mb_substr($key,3)] = trim($value);
 		}
 	}
 }
