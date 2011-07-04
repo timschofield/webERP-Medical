@@ -17,9 +17,9 @@ include ('includes/Add_SerialItemsOut.php');
 
 global $tableheader;
 /* Link to clear the list and start from scratch */
-$EditLink =  '<br /><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '&EditControlled=true&StockID=' . $LineItem->StockID .
+$EditLink =  '<br /><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '?EditControlled=true&StockID=' . $LineItem->StockID .
 	'&LineNo=' . $LineNo .'">'. _('Edit'). '</a> | ';
-$RemoveLink = '<a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '&DELETEALL=YES&StockID=' . $LineItem->StockID .
+$RemoveLink = '<a href="' . $_SERVER['PHP_SELF'] . '?DELETEALL=YES&StockID=' . $LineItem->StockID .
 	'&LineNo=' . $LineNo .'">'. _('Remove All'). '</a><br /></div>';
 $sql="SELECT perishable
 		FROM stockmaster
@@ -34,21 +34,21 @@ if ($LineItem->Serialised==1){
 	$listtableheader=$tableheader;
 } else if ($LineItem->Serialised==0 and $Perishable==1){
 	$tableheader = '<tr>
-			<th>'. _('Batch/Roll/Bundle'). ' #</th>
-			<th>'. _('Available'). '</th>
-			<th>'. _('Quantity'). '</th>
-			<th>'. _('Expiry Date'). '</th>
-		</tr>';
+				<th>'. _('Batch/Roll/Bundle'). ' #</th>
+				<th>'. _('Available'). '</th>
+				<th>'. _('Quantity'). '</th>
+				<th>'. _('Expiry Date'). '</th>
+				</tr>';
 	$listtableheader = '<tr>
-			<th>'. _('Batch/Roll/Bundle'). ' #</th>
-			<th>'. _('Quantity'). '</th>
-			<th>'. _('Expiry Date'). '</th>
-		</tr>';
+					<th>'. _('Batch/Roll/Bundle'). ' #</th>
+					<th>'. _('Quantity'). '</th>
+					<th>'. _('Expiry Date'). '</th>
+					</tr>';
 } else {
 	$tableheader = '<tr>
-			<th>'. _('Batch/Roll/Bundle'). ' #</th>
-			<th>'. _('Quantity'). '</th>
-		</tr>';
+				<th>'. _('Batch/Roll/Bundle'). ' #</th>
+				<th>'. _('Quantity'). '</th>
+				</tr>';
 	$listtableheader=$tableheader;
 }
 
@@ -94,8 +94,9 @@ foreach ($LineItem->SerialItems as $Bundle){
 		echo '<td class=number>' . number_format($Bundle->BundleQty, $LineItem->DecimalPlaces) . '</td>';
 		echo '<td class=number>' . $Bundle->ExpiryDate . '</td>';
 	}
-	echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . 'Delete=' . $Bundle->BundleRef . '&StockID=' . $LineItem->StockID . '&LineNo=' . $LineNo .'">'. _('Delete'). '</a></td></tr>';
-//	$LineItem->SerialItems[]=$Bundle;
+
+	echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $Bundle->BundleRef . '&StockID=' . $LineItem->StockID . '&LineNo=' . $LineNo .'">'. _('Delete'). '</a></td></tr>';
+
 	$TotalQuantity += $Bundle->BundleQty;
 }
 
@@ -171,7 +172,7 @@ $sql="SELECT serialno,
 			expirationdate
 		FROM stockserialitems
 		WHERE stockid='".$StockID."'
-			AND loccode='".$Location."'";
+		AND loccode='" . $Location . "'";
 $result=DB_query($sql, $db);
 
 $RowNumber=0;
