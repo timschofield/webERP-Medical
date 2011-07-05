@@ -41,7 +41,7 @@ if (isset($SelectedCategory) AND isset($_FILES['ItemPicture']) AND $_FILES['Item
 	$filename = $_SESSION['part_pics_dir'] . '/cat_' . $SelectedCategory . '.jpg';
 
 	 //But check for the worst
-	if (mb_strtoupper(mb_substr(trim($_FILES['ItemPicture']['name']),strlen($_FILES['ItemPicture']['name'])-3))!='JPG'){
+	if (mb_strtoupper(mb_substr(trim($_FILES['ItemPicture']['name']),mb_strlen($_FILES['ItemPicture']['name'])-3))!='JPG'){
 		prnMsg(_('Only jpg files are supported - a file extension of .jpg is expected'),'warn');
 		$UploadTheFile ='No';
 	} elseif ( $_FILES['ItemPicture']['size'] > ($_SESSION['MaxImageSize']*1024)) { //File Size Check
@@ -78,7 +78,7 @@ if (isset($_POST['submit'])  && $EditName == 1 ) { // Creating or updating a cat
 
 	//first off validate inputs sensible
 
-	if (strlen($_POST['SalesCatName']) >20 OR trim($_POST['SalesCatName'])=='') {
+	if (mb_strlen($_POST['SalesCatName']) >20 OR trim($_POST['SalesCatName'])=='') {
 		$InputError = 1;
 		prnMsg(_('The Sales category description must be twenty characters or less long'),'error');
 	}

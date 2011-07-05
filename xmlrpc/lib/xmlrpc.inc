@@ -289,7 +289,7 @@
 	$escaped_data = '';
 	// be kind to users creating string xmlrpcvals out of different php types
 	$data = (string) $data;
-	$ns = strlen ($data);
+	$ns = mb_strlen ($data);
 	for ($nn = 0; $nn < $ns; $nn++)
 	{
 		$ch = $data[$nn];
@@ -1352,7 +1352,7 @@
 				'Accept-Charset: ' . implode(',', $this->accepted_charset_encodings) . "\r\n" .
 				$cookieheader .
 				'Content-Type: ' . $msg->content_type . "\r\nContent-Length: " .
-				strlen($payload) . "\r\n\r\n" .
+				mb_strlen($payload) . "\r\n\r\n" .
 				$payload;
 
 			if($this->debug > 1)
@@ -1384,7 +1384,7 @@
 				return $r;
 			}
 
-			if(!fputs($fp, $op, strlen($op)))
+			if(!fputs($fp, $op, mb_strlen($op)))
 			{
 				fclose($fp);
 				$this->errstr='Write error';
@@ -2444,13 +2444,13 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 								{
 									$data = $degzdata;
 									if($this->debug)
-									print "<PRE>---INFLATED RESPONSE---[".strlen($data)." chars]---\n" . htmlentities($data) . "\n---END---</PRE>";
+									print "<PRE>---INFLATED RESPONSE---[".mb_strlen($data)." chars]---\n" . htmlentities($data) . "\n---END---</PRE>";
 								}
 								elseif($GLOBALS['_xh']['headers']['content-encoding'] == 'gzip' && $degzdata = @gzinflate(mb_substr($data, 10)))
 								{
 									$data = $degzdata;
 									if($this->debug)
-									print "<PRE>---INFLATED RESPONSE---[".strlen($data)." chars]---\n" . htmlentities($data) . "\n---END---</PRE>";
+									print "<PRE>---INFLATED RESPONSE---[".mb_strlen($data)." chars]---\n" . htmlentities($data) . "\n---END---</PRE>";
 								}
 								else
 								{
@@ -2524,7 +2524,7 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 				$start = mb_strpos($data, '<!-- SERVER DEBUG INFO (BASE64 ENCODED):');
 				if ($start)
 				{
-					$start += strlen('<!-- SERVER DEBUG INFO (BASE64 ENCODED):');
+					$start += mb_strlen('<!-- SERVER DEBUG INFO (BASE64 ENCODED):');
 					$end = mb_strpos($data, '-->', $start);
 					$comments = mb_substr($data, $start, $end-$start);
 					print "<PRE>---SERVER DEBUG INFO (DECODED) ---\n\t".htmlentities(str_replace("\n", "\n\t", base64_decode($comments)))."\n---END---\n</PRE>";
@@ -3622,7 +3622,7 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 				$chunk = mb_substr($buffer,$chunkstart);
 				// append chunk-data to entity-body
 				$new .= $chunk;
-				$length += strlen($chunk);
+				$length += mb_strlen($chunk);
 				break;
 			}
 
@@ -3631,7 +3631,7 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 			// append chunk-data to entity-body
 			$new .= $chunk;
 			// length := length + chunk-size
-			$length += strlen($chunk);
+			$length += mb_strlen($chunk);
 			// read chunk-size and crlf
 			$chunkstart = $chunkend + 2;
 

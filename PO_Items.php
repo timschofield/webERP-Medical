@@ -86,7 +86,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
  *Is the delivery information all entered
  */
 	$InputError=0; /*Start off assuming the best */
-	if ($_SESSION['PO'.$identifier]->DelAdd1=='' or strlen($_SESSION['PO'.$identifier]->DelAdd1)<3){
+	if ($_SESSION['PO'.$identifier]->DelAdd1=='' or mb_strlen($_SESSION['PO'.$identifier]->DelAdd1)<3){
 		prnMsg( _('The purchase order can not be committed to the database because there is no delivery street address specified'),'error');
 		$InputError=1;
 	} elseif ($_SESSION['PO'.$identifier]->Location=='' or ! isset($_SESSION['PO'.$identifier]->Location)){
@@ -689,7 +689,7 @@ if (isset($_POST['EnterLine'])){ /*Inputs from the form directly without selecti
 				}
 			}
 		} //end if an AssetID is entered
-		if (strlen($_POST['ItemDescription'])<=3){
+		if (mb_strlen($_POST['ItemDescription'])<=3){
 			$AllowUpdate = false;
 			prnMsg(_('Cannot enter this order line') . ':<br />' . _('The description of the item being purchased is required where a non-stock item is being ordered'),'warn');
 		}
@@ -738,7 +738,7 @@ if (isset($_POST['NewItem'])){ /* NewItem is set from the part selection list as
 /* take the form entries and enter the data from the form into the PurchOrder class variable */
 	foreach ($_POST as $key => $value) {
 		if (mb_substr($key, 0, 3)=='qty') {
-			$ItemCode=mb_substr($key, 3, strlen($key)-3);
+			$ItemCode=mb_substr($key, 3, mb_strlen($key)-3);
 			$Quantity=$value;
 			$AlreadyOnThisOrder =0;
 
@@ -1133,7 +1133,7 @@ if (isset($SearchResult)) {
 			$UomResult=DB_query($UomSQL, $db);
 			if (DB_num_rows($UomResult)>0) {
 				$UomRow=DB_fetch_array($UomResult);
-				if (strlen($UomRow['suppliersuom'])>0) {
+				if (mb_strlen($UomRow['suppliersuom'])>0) {
 					$Uom=$UomRow['unitname'];
 				} else {
 					$Uom=$myrow['units'];

@@ -33,7 +33,7 @@ $InputError = 0;
 
 if (isset($_POST['submit']) or isset($_POST['update']) or isset($_POST['delete'])) {
 
-	if (strlen($_POST['ManufacturerName']) > 40 or strlen($_POST['ManufacturerName']) == 0 or $_POST['ManufacturerName'] == '') {
+	if (mb_strlen($_POST['ManufacturerName']) > 40 or mb_strlen($_POST['ManufacturerName']) == 0 or $_POST['ManufacturerName'] == '') {
 		$InputError = 1;
 		prnMsg(_('The manufacturing company name must be entered and be forty characters or less long'),'error');
 	}

@@ -229,7 +229,7 @@ if (isset($_POST['PrintPDF'])) {
 	}
     /* UldisN
 	$pdfcode = $pdf->output();
-	$len = strlen($pdfcode);
+	$len = mb_strlen($pdfcode);
 
 	if ($len<=20){
     */

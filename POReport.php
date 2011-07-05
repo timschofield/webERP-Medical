@@ -95,12 +95,12 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 
 	// Add more to WHERE statement, if user entered something for the part number,supplierid, name
 	$wherepart = ' ';
-	if (strlen($PartNumber) > 0 && $PartNumberOp == 'LIKE') {
+	if (mb_strlen($PartNumber) > 0 && $PartNumberOp == 'LIKE') {
 		$PartNumber = $PartNumber . '%';
 	} else {
 		$PartNumberOp = '=';
 	}
-	if (strlen($PartNumber) > 0) {
+	if (mb_strlen($PartNumber) > 0) {
 		$wherepart = " AND purchorderdetails.itemcode " . $PartNumberOp . " '" . $PartNumber . "'  ";
 	} else {
 		$wherepart=' ';
@@ -112,25 +112,25 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 	} else {
 		$SupplierIdOp = '=';
 	}
-	if (strlen($SupplierId) > 0) {
+	if (mb_strlen($SupplierId) > 0) {
 		$wheresupplierid = " AND purchorders.supplierno " . $SupplierIdOp . " '" . $SupplierId . "'  ";
 	} else {
 		$wheresupplierid=' ';
 	}
 
 	$wheresuppliername = ' ';
-	if (strlen($SupplierName) > 0 && $SupplierNameOp == 'LIKE') {
+	if (mb_strlen($SupplierName) > 0 && $SupplierNameOp == 'LIKE') {
 		$SupplierName = $SupplierName . '%';
 	} else {
 		$SupplierNameOp = '=';
 	}
-	if (strlen($SupplierName) > 0) {
+	if (mb_strlen($SupplierName) > 0) {
 		$wheresuppliername = " AND suppliers.suppname " . $SupplierNameOp . " '" . $SupplierName . "'  ";
 	} else {
 		$wheresuppliername=' ';
 	}
 
-	if (strlen($_POST['OrderNo']) > 0) {
+	if (mb_strlen($_POST['OrderNo']) > 0) {
 		$whereorderno = " AND purchorderdetails.orderno = " . " '" . $_POST['OrderNo'] . "'  ";
 	} else {
 		$whereorderno=' ';
@@ -513,13 +513,13 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 		echo '<tr><td>' . _('Purchase Order Report') . '</td><td>' . $_POST['ReportType'] . ' By '.$sortby_display .'</td></tr>';
 		echo '<tr><td>' . _('Date Type') . '</td><td>' . $_POST['DateType'] . '</tr>';
 		echo '<tr><td>' . _('Date Range') . '</td><td>' . $_POST['FromDate'] . _(' To ') .  $_POST['ToDate'] . '</td></tr>';
-		if (strlen(trim($PartNumber)) > 0) {
+		if (mb_strlen(trim($PartNumber)) > 0) {
 			echo '<tr><td>' . _('Part Number') . '</td><td>' . $_POST['PartNumberOp'] . ' ' . $_POST['PartNumber'] . '</td></tr>';
 		}
-		if (strlen(trim($_POST['SupplierId'])) > 0) {
+		if (mb_strlen(trim($_POST['SupplierId'])) > 0) {
 			echo '<tr><td>' . _('Supplier Number') . '</td><td>' . $_POST['SupplierIdOp'] . ' ' . $_POST['SupplierId'] . '</td></tr>';
 		}
-		if (strlen(trim($_POST['SupplierName'])) > 0) {
+		if (mb_strlen(trim($_POST['SupplierName'])) > 0) {
 			echo '<tr><td>' . _('Supplier Name') . '</td><td>' . $_POST['SupplierNameOp'] . ' ' . $_POST['SupplierName'] . '</td></tr>';
 		}
 		echo '<tr><td>' . _('Line Item Status') . '</td><td>' . $_POST['LineStatus'] . '</tr>';
@@ -785,12 +785,12 @@ function submitcsv(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Sup
 
 	# Add more to WHERE statement, if user entered something for the part number,supplierid, name
 	$wherepart = ' ';
-	if (strlen($PartNumber) > 0 && $PartNumberOp == 'LIKE') {
+	if (mb_strlen($PartNumber) > 0 && $PartNumberOp == 'LIKE') {
 		$PartNumber = $PartNumber . '%';
 	} else {
 		$PartNumberOp = '=';
 	}
-	if (strlen($PartNumber) > 0) {
+	if (mb_strlen($PartNumber) > 0) {
 		$wherepart = " AND purchorderdetails.itemcode " . $PartNumberOp . " '" . $PartNumber . "'  ";
 	} else {
 		$wherepart=' ';
@@ -802,25 +802,25 @@ function submitcsv(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Sup
 	} else {
 		$SupplierIdOp = '=';
 	}
-	if (strlen($SupplierId) > 0) {
+	if (mb_strlen($SupplierId) > 0) {
 		$wheresupplierid = " AND purchorders.supplierno " . $SupplierIdOp . " '" . $SupplierId . "'  ";
 	} else {
 		$wheresupplierid=' ';
 	}
 
 	$wheresuppliername = ' ';
-	if (strlen($SupplierName) > 0 && $SupplierNameOp == 'LIKE') {
+	if (mb_strlen($SupplierName) > 0 && $SupplierNameOp == 'LIKE') {
 		$SupplierName = $SupplierName . '%';
 	} else {
 		$SupplierNameOp = '=';
 	}
-	if (strlen($SupplierName) > 0) {
+	if (mb_strlen($SupplierName) > 0) {
 		$wheresuppliername = " AND suppliers.suppname " . $SupplierNameOp . " '" . $SupplierName . "'  ";
 	} else {
 		$wheresuppliername=' ';
 	}
 
-	if (strlen($_POST['OrderNo']) > 0) {
+	if (mb_strlen($_POST['OrderNo']) > 0) {
 		$whereorderno = ' AND purchorderdetails.orderno = ' . " '" . $_POST['OrderNo'] . "'  ";
 	} else {
 		$whereorderno=' ';
@@ -1202,13 +1202,13 @@ function submitcsv(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Sup
 		fprintf($FileHandle, '"'. _('Purchase Order Report') . '","' . $_POST['ReportType'] . ' '._('By').' '.$sortby_display ."\n");
 		fprintf($FileHandle, '"'. _('Date Type') . '","' . $_POST['DateType'] . '"'. "\n");
 		fprintf($FileHandle, '"'. _('Date Range') . '","' . $_POST['FromDate'] . _(' To ') .  $_POST['ToDate'] . '"'."\n");
-		if (strlen(trim($PartNumber)) > 0) {
+		if (mb_strlen(trim($PartNumber)) > 0) {
 			fprintf($FileHandle, '"'. _('Part Number') . '","' . $_POST['PartNumberOp'] . ' ' . $_POST['PartNumber'] . '"'."\n");
 		}
-		if (strlen(trim($_POST['SupplierId'])) > 0) {
+		if (mb_strlen(trim($_POST['SupplierId'])) > 0) {
 			fprintf($FileHandle, '"'. _('Supplier Number') . '","' . $_POST['SupplierIdOp'] . ' ' . $_POST['SupplierId'] . '"'."\n");
 		}
-		if (strlen(trim($_POST['SupplierName'])) > 0) {
+		if (mb_strlen(trim($_POST['SupplierName'])) > 0) {
 			fprintf($FileHandle, '"'. _('Supplier Name') . '","' . $_POST['SupplierNameOp'] . ' ' . $_POST['SupplierName'] . '"'."\n");
 		}
 		fprintf($FileHandle, '"'._('Line Item Status') . '","' . $_POST['LineStatus'] . '"'."\n");

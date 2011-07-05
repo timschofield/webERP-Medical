@@ -184,7 +184,7 @@ if (isset($_POST['SelectedSupplier'])) {
 				WHERE supplierid='" . $_POST['SelectedSupplier'] . "'";
 	$result = DB_query($sql, $db);
 	$myrow = DB_fetch_array($result);
-	if (strlen($myrow['email'])>0) {
+	if (mb_strlen($myrow['email'])>0) {
 		$_SESSION['tender']->add_supplier_to_tender(
 				$_POST['SelectedSupplier'],
 				$myrow['suppname'],
@@ -425,7 +425,7 @@ if (!isset($_SESSION['tender']) or isset($_POST['LookupDeliveryAddress']) or $Sh
 }
 
 if (isset($_POST['SearchSupplier']) OR isset($_POST['Go']) OR isset($_POST['Next']) OR isset($_POST['Previous'])) {
-	if (strlen($_POST['Keywords']) > 0 AND strlen($_POST['SupplierCode']) > 0) {
+	if (mb_strlen($_POST['Keywords']) > 0 AND mb_strlen($_POST['SupplierCode']) > 0) {
 		prnMsg( '<br />' . _('Supplier name keywords have been used in preference to the Supplier code extract entered'), 'info' );
 	}
 	if ($_POST['Keywords'] == '' AND $_POST['SupplierCode'] == '') {
@@ -439,7 +439,7 @@ if (isset($_POST['SearchSupplier']) OR isset($_POST['Go']) OR isset($_POST['Next
 				FROM suppliers
 				ORDER BY suppname";
 	} else {
-		if (strlen($_POST['Keywords']) > 0) {
+		if (mb_strlen($_POST['Keywords']) > 0) {
 			$_POST['Keywords'] = mb_strtoupper($_POST['Keywords']);
 			//insert wildcard characters in spaces
 			$SearchString = '%' . str_replace(' ', '%', $_POST['Keywords']) . '%';
@@ -453,7 +453,7 @@ if (isset($_POST['SearchSupplier']) OR isset($_POST['Go']) OR isset($_POST['Next
 				FROM suppliers
 				WHERE suppname " . LIKE . " '$SearchString'
 				ORDER BY suppname";
-		} elseif (strlen($_POST['SupplierCode']) > 0) {
+		} elseif (mb_strlen($_POST['SupplierCode']) > 0) {
 			$_POST['SupplierCode'] = mb_strtoupper($_POST['SupplierCode']);
 			$SQL = "SELECT supplierid,
 					suppname,

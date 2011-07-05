@@ -284,7 +284,7 @@
 				foreach($docs as $doc)
 				{
 					$doc = trim($doc, " \r\t/*");
-					if(strlen($doc) && mb_strpos($doc, '@') !== 0 && !$i)
+					if(mb_strlen($doc) && mb_strpos($doc, '@') !== 0 && !$i)
 					{
 						if($desc)
 						{

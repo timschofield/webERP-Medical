@@ -62,7 +62,7 @@ if (isset($_POST['Process'])) {
 	$LineNo=0;
 	foreach ($_POST as $key=>$value) {
 		if (mb_substr($key, 0, 8)=='Quantity') {
-			$ItemCode=mb_substr($key, 8, strlen($key));
+			$ItemCode=mb_substr($key, 8, mb_strlen($key));
 			$Quantity=$value;
 			$Price=$_POST['Price'.$ItemCode];
 			$_SESSION['offer']->add_to_offer(
@@ -676,7 +676,7 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 			$uomresult=DB_query($uomsql, $db);
 			if (DB_num_rows($uomresult)>0) {
 				$uomrow=DB_fetch_array($uomresult);
-				if (strlen($uomrow['suppliersuom'])>0) {
+				if (mb_strlen($uomrow['suppliersuom'])>0) {
 					$uom=$uomrow['unitname'];
 				} else {
 					$uom=$myrow['units'];

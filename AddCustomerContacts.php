@@ -39,7 +39,7 @@ if ( isset($_POST['submit']) ) {
 	if (isset($_POST['Con_ID']) and !is_long((integer)$_POST['Con_ID'])) {
 		$InputError = 1;
 		prnMsg( _('The Contact ID must be an integer.'), 'error');
-	} elseif (strlen($_POST['conName']) >40) {
+	} elseif (mb_strlen($_POST['conName']) >40) {
 		$InputError = 1;
 		prnMsg( _('The contact name must be forty characters or less long'), 'error');
 	} elseif( trim($_POST['conName']) == '' ) {

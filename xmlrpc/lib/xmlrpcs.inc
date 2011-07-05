@@ -677,7 +677,7 @@
 				// it will mess up measurements
 				if($php_no_self_compress)
 				{
-					header('Content-Length: ' . (int)strlen($payload));
+					header('Content-Length: ' . (int)mb_strlen($payload));
 				}
 			}
 			else
@@ -820,7 +820,7 @@
 			}
 
 			// check if request body has been compressed and decompress it
-			if($content_encoding != '' && strlen($data))
+			if($content_encoding != '' && mb_strlen($data))
 			{
 				if($content_encoding == 'deflate' || $content_encoding == 'gzip')
 				{
@@ -832,14 +832,14 @@
 							$data = $degzdata;
 							if($this->debug > 1)
 							{
-								$this->debugmsg("\n+++INFLATED REQUEST+++[".strlen($data)." chars]+++\n" . $data . "\n+++END+++");
+								$this->debugmsg("\n+++INFLATED REQUEST+++[".mb_strlen($data)." chars]+++\n" . $data . "\n+++END+++");
 							}
 						}
 						elseif($content_encoding == 'gzip' && $degzdata = @gzinflate(mb_substr($data, 10)))
 						{
 							$data = $degzdata;
 							if($this->debug > 1)
-								$this->debugmsg("+++INFLATED REQUEST+++[".strlen($data)." chars]+++\n" . $data . "\n+++END+++");
+								$this->debugmsg("+++INFLATED REQUEST+++[".mb_strlen($data)." chars]+++\n" . $data . "\n+++END+++");
 						}
 						else
 						{

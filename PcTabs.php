@@ -51,7 +51,7 @@ if (isset($_POST['submit'])) {
 		prnMsg('<br />' . _('The Tab code cannot be an empty string or spaces'),'error');
 		$Errors[$i] = 'TabCode';
 		$i++;
-	} elseif (strlen($_POST['tabcode']) >20) {
+	} elseif (mb_strlen($_POST['tabcode']) >20) {
 		$InputError = 1;
 		echo prnMsg(_('The Tab code must be twenty characters or less long'),'error');
 		$Errors[$i] = 'TabCode';

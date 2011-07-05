@@ -79,7 +79,7 @@ if (isset($_POST['preview']) or isset($_POST['save'])) {
 	$FormDesign = simplexml_load_file($PathPrefix.'companies/'.$_SESSION['DatabaseName'].'/FormDesigns/'.$_POST['FormName']);
 	$FormDesign['name']=$_POST['formname'];
 	if (mb_substr($_POST['PaperSize'],-8)=='Portrait') {
-		$_POST['PaperSize']=mb_substr($_POST['PaperSize'],0,strlen($_POST['PaperSize'])-9);
+		$_POST['PaperSize']=mb_substr($_POST['PaperSize'],0,mb_strlen($_POST['PaperSize'])-9);
 	}
 	$FormDesign->PaperSize=$_POST['PaperSize'];
 	$FormDesign->LineHeight=$_POST['LineHeight'];
@@ -169,7 +169,7 @@ echo '<tr><th width=33%>'._('Form Name').'<input type="text" name="formname" val
 echo '<th width=33%>'._('Paper Size').'<select name="PaperSize">';
 foreach ($Papers as $Paper) {
 	if (mb_substr($Paper,-8)=='Portrait') {
-		$PaperValue=mb_substr($Paper,0,strlen($Paper)-9);
+		$PaperValue=mb_substr($Paper,0,mb_strlen($Paper)-9);
 	} else {
 		$PaperValue=$Paper;
 	}

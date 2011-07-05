@@ -405,7 +405,7 @@ foreach ($_SESSION['Items']->LineItems as $LnItm) {
 		}
 	}
 	echo '</tr>';
-	if (strlen($LnItm->Narrative)>1){
+	if (mb_strlen($LnItm->Narrative)>1){
 		$narrative=str_replace('\r\n','<br />', $LnItm->Narrative);
 		echo $RowStarter . '<td colspan=12>' . stripslashes($narrative) . '</td></tr>';
 	}
@@ -823,7 +823,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 				if ($HyphenOccursAt == false){
 					$AssetNumber =   intval(mb_substr($OrderLine->StockID,6));
 				} else {
-					$AssetNumber =   intval(mb_substr($OrderLine->StockID,6,strlen($OrderLine->StockID)-$HyphenOccursAt-1));
+					$AssetNumber =   intval(mb_substr($OrderLine->StockID,6,mb_strlen($OrderLine->StockID)-$HyphenOccursAt-1));
 				}
 				prnMsg (_('The asset number being disposed of is:') . ' ' . $AssetNumber, 'info');
 			} else {

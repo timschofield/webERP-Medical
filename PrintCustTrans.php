@@ -265,7 +265,7 @@ if (isset($PrintPDF) or isset($_GET['PrintPDF']) and $PrintPDF and isset($FromTr
 					$YPos-= ($line_height);
 					$lines = explode('\r\n', htmlspecialchars_decode($myrow2['narrative']));
 					for ($i = 0;$i < sizeOf($lines);$i++) {
-						while (strlen($lines[$i]) > 1) {
+						while (mb_strlen($lines[$i]) > 1) {
 							if ($YPos - $line_height <= $Bottom_Margin) {
 								/* head up a new invoice/credit note page */
 								/* draw the vertical column lines right to the bottom */
@@ -273,7 +273,7 @@ if (isset($PrintPDF) or isset($_GET['PrintPDF']) and $PrintPDF and isset($FromTr
 								include ('includes/PDFTransPageHeaderPortrait.inc');
 							} //end if need a new page headed up
 							/* increment a line down for the next line item */
-							if (strlen($lines[$i]) > 1) {
+							if (mb_strlen($lines[$i]) > 1) {
 								$lines[$i] = $pdf->addTextWrap($Left_Margin + 100, $YPos, 245, $FontSize, stripslashes($lines[$i]));
 							}
 							$YPos-= ($line_height);
@@ -344,7 +344,7 @@ if (isset($PrintPDF) or isset($_GET['PrintPDF']) and $PrintPDF and isset($FromTr
 				$pdf->addText($FormDesign->TotalCaption->x, $Page_Height - $FormDesign->TotalCaption->y, $FormDesign->TotalCaption->FontSize, _('TOTAL INVOICE'));
 				$YPos=$FormDesign->Romalpa->y;
 				$LeftOvers = $pdf->addTextWrap($FormDesign->Romalpa->x, $Page_Height - $YPos, $FormDesign->Romalpa->Length, $FormDesign->Romalpa->FontSize, $_SESSION['RomalpaClause']);
-				while (strlen($LeftOvers) > 0 AND ($Page_Height - $YPos) > $Bottom_Margin) {
+				while (mb_strlen($LeftOvers) > 0 AND ($Page_Height - $YPos) > $Bottom_Margin) {
 					$YPos+= $FormDesign->Romalpa->FontSize+1;
 					$LeftOvers = $pdf->addTextWrap($FormDesign->Romalpa->x, $Page_Height - $YPos, $FormDesign->Romalpa->Length, $FormDesign->Romalpa->FontSize, $LeftOvers);
 				}
@@ -689,7 +689,7 @@ if (($InvOrCredit == 'Invoice' or $InvOrCredit == 'Credit') and isset($PrintPDF)
 							<td class=number>%s</td>
 							<td class=number>%s</td>
 							</tr>', $myrow2['stockid'], $myrow2['description'], $DisplayQty, $myrow2['units'], $DisplayPrice, $DisplayDiscount, $DisplayNet);
-						if (strlen($myrow2['narrative']) > 1) {
+						if (mb_strlen($myrow2['narrative']) > 1) {
 							echo $RowStarter . '<td></td><td colspan=6>' . $myrow2['narrative'] . '</td></tr>';
 							$LineCounter++;
 						}
@@ -732,7 +732,7 @@ if (($InvOrCredit == 'Invoice' or $InvOrCredit == 'Credit') and isset($PrintPDF)
 					echo '</table>';
 				} /*end if there are stock movements to show on the invoice or credit note*/
 				/* check to see enough space left to print the totals/footer */
-				$LinesRequiredForText = floor(strlen($myrow['invtext']) / 140);
+				$LinesRequiredForText = floor(mb_strlen($myrow['invtext']) / 140);
 				if ($LineCounter >= ($_SESSION['PageLength'] - 8 - $LinesRequiredForText)) {
 					/* head up a new invoice/credit note page */
 					$PageNumber++;

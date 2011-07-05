@@ -33,7 +33,7 @@ $InputError = 0;
 
 if (isset($_POST['submit']) or isset($_POST['update']) or isset($_POST['delete'])) {
 
-	if (strlen($_POST['FactorName']) > 40 or strlen($_POST['FactorName']) == 0 or $_POST['FactorName'] == '') {
+	if (mb_strlen($_POST['FactorName']) > 40 or mb_strlen($_POST['FactorName']) == 0 or $_POST['FactorName'] == '') {
 		$InputError = 1;
 		prnMsg(_('The factoring company name must be entered and be forty characters or less long'),'error');
 	}

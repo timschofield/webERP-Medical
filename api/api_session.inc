@@ -66,23 +66,6 @@ if (isset($_SESSION['AllowedPageSecurityTokens']) and !is_array($_SESSION['Allow
 
 if (!isset($AllowAnyone)){
 	if ((!in_array($PageSecurity, $_SESSION['AllowedPageSecurityTokens']) OR !isset($PageSecurity))) {
-/* NO HTML output - but need to return an appropriate error message
-	Lindsay: 12Jan10
-		$title = _('Security Permissions Problem');
-		include($PathPrefix . 'includes/header.inc');
-		echo '<tr>
-			<td class="menu_group_items">
-				<table width="100%" class="table_index">
-					<tr><td class="menu_group_item">';
-		echo '<b><font style="size:+1; text-align:center;">' . _('The security settings on your account do not permit you to access this function') . '</font></b>';
-
-		echo '</td>
-		</tr>
-		</table>
-		</td>';
-
-		include($PathPrefix . 'includes/footer.inc');
- */
 		exit;
 	}
  }

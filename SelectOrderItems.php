@@ -304,7 +304,7 @@ if (isset($_POST['SearchCust']) AND $_SESSION['RequireCustomerSelection']==1 AND
 	if (($_POST['CustKeywords']=='') AND ($_POST['CustCode']=='')  AND ($_POST['CustPhone']=='')) {
 		prnMsg(_('At least one Customer Branch Name keyword OR an extract of a Customer Branch Code or Branch Phone Number must be entered for the search'), 'warn');
 	} else {
-		if (strlen($_POST['CustKeywords'])>0) {
+		if (mb_strlen($_POST['CustKeywords'])>0) {
 		//insert wildcard characters in spaces
 			$_POST['CustKeywords'] = mb_strtoupper(trim($_POST['CustKeywords']));
 			$SearchString = '%' . str_replace(' ', '%', $_POST['CustKeywords']) . '%';
@@ -327,7 +327,7 @@ if (isset($_POST['SearchCust']) AND $_SESSION['RequireCustomerSelection']==1 AND
 			$SQL .=	' AND custbranch.disabletrans=0
 						ORDER BY custbranch.debtorno, custbranch.branchcode';
 
-		} elseif (strlen($_POST['CustCode'])>0){
+		} elseif (mb_strlen($_POST['CustCode'])>0){
 
 			$_POST['CustCode'] = mb_strtoupper(trim($_POST['CustCode']));
 
@@ -348,7 +348,7 @@ if (isset($_POST['SearchCust']) AND $_SESSION['RequireCustomerSelection']==1 AND
 			}
 			$SQL .=	' AND custbranch.disabletrans=0
 						ORDER BY custbranch.debtorno';
-		} elseif (strlen($_POST['CustPhone'])>0){
+		} elseif (mb_strlen($_POST['CustPhone'])>0){
 			$SQL = "SELECT custbranch.brname,
 										custbranch.contactname,
 										custbranch.phoneno,
@@ -758,7 +758,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		} elseif ($_POST['Keywords']=='' AND $_POST['StockCode']=='') {
 			$msg='</b><div class="page_help_text">' . _('Stock Category has been used in search') . '.</div>';
 		}
-		if (isset($_POST['Keywords']) AND strlen($_POST['Keywords'])>0) {
+		if (isset($_POST['Keywords']) AND mb_strlen($_POST['Keywords'])>0) {
 			//insert wildcard characters in spaces
 			$_POST['Keywords'] = mb_strtoupper($_POST['Keywords']);
 			$SearchString = '%' . str_replace(' ', '%', $_POST['Keywords']) . '%';
@@ -792,7 +792,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 						ORDER BY stockmaster.stockid";
 			}
 
-		} elseif (strlen($_POST['StockCode'])>0){
+		} elseif (mb_strlen($_POST['StockCode'])>0){
 
 			$_POST['StockCode'] = mb_strtoupper($_POST['StockCode']);
 			$SearchString = '%' . $_POST['StockCode'] . '%';

@@ -170,7 +170,7 @@ if (isset($_POST['NewItem'])){ /* NewItem is set from the part selection list as
 /* take the form entries and enter the data from the form into the PurchOrder class variable */
 	foreach ($_POST as $key => $value) {
 		if (mb_substr($key, 0, 3)=='qty') {
-			$ItemCode=mb_substr($key, 3, strlen($key)-3);
+			$ItemCode=mb_substr($key, 3, mb_strlen($key)-3);
 			$Quantity=$value;
 			$AlreadyOnThisBOM = 0;
 

@@ -67,7 +67,7 @@ if (mb_strpos($EndDateSQL,'/')) {
 	$Date_Array = explode('.',$EndDateSQL);
 }
 
-if (strlen($Date_Array[2])>4) {
+if (mb_strlen($Date_Array[2])>4) {
 	$Date_Array[2]= mb_substr($Date_Array[2],0,2);
 }
 

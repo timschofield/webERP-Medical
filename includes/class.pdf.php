@@ -271,7 +271,7 @@ class Cpdf extends TCPDF {
 		$s=str_replace("\r",'',$txt);
 		$s=str_replace("\n",' ',$s);
 		$s = trim($s).' ';
-		$nb=strlen($s);
+		$nb=mb_strlen($s);
 		$b=0;
 		if ($border) {
 			if ($border==1) {

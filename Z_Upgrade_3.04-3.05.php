@@ -37,7 +37,7 @@ if ($_POST['DoUpgrade'] == _('Perform Upgrade')){
 		if (mb_substr($SQLScriptFile[$i], 0, 2) != '--'
 			AND mb_substr($SQLScriptFile[$i], 0, 3) != 'USE'
 			AND strstr($SQLScriptFile[$i],'/*')==FALSE
-			AND strlen($SQLScriptFile[$i])>1){
+			AND mb_strlen($SQLScriptFile[$i])>1){
 
 			$SQL .= ' ' . $SQLScriptFile[$i];
 
@@ -50,7 +50,7 @@ if ($_POST['DoUpgrade'] == _('Perform Upgrade')){
 				$InAFunction = false;
 			}
 			if (mb_strpos($SQLScriptFile[$i],';')>0 AND ! $InAFunction){
-				$SQL = mb_substr($SQL,0,strlen($SQL)-1);
+				$SQL = mb_substr($SQL,0,mb_strlen($SQL)-1);
 				$result = DB_query($SQL, $db, $ErrMsg);
 				$SQL='';
 			}

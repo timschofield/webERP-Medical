@@ -9,9 +9,9 @@ include('includes/session.inc');
 
 If (isset($_POST['PrintPDF'])
 	AND isset($_POST['FromCriteria'])
-	AND strlen($_POST['FromCriteria'])>=1
+	AND mb_strlen($_POST['FromCriteria'])>=1
 	AND isset($_POST['ToCriteria'])
-	AND strlen($_POST['ToCriteria'])>=1){
+	AND mb_strlen($_POST['ToCriteria'])>=1){
 
 
 	include('includes/PDFStarter.php');
@@ -252,7 +252,7 @@ If (isset($_POST['PrintPDF'])
 	$pdf->line($Page_Width-$Right_Margin, $YPos ,220, $YPos);
 /*  UldisN  : this doesn't work for TCPDF
 	$buf = $pdf->output();
-	$len = strlen($buf);
+	$len = mb_strlen($buf);
 	header('Content-type: application/pdf');
 	header("Content-Length: $len");
 	header('Content-Disposition: inline; filename=AgedSuppliers.pdf');
