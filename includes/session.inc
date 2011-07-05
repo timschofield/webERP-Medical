@@ -280,10 +280,7 @@ if (!isset($AllowAnyone)){
 					<tr><td class="menu_group_item">';
 		echo '<b><font style="size:+1; text-align:center;">' . _('The security settings on your account do not permit you to access this function') . '</font></b>';
 
-		echo '</td>
-					</tr>
-					</table>
-					</td>';
+		echo '</td></tr></table></td></tr>';
 
 		include($PathPrefix . 'includes/footer.inc');
 		exit;
