@@ -93,7 +93,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 		$Ins_LineItemResult = DB_query($LineItemSQL,$db,$ErrMsg,$DbgMsg,true);
 
 		$InvoiceNo = GetNextTransNo(10, $db);
-		$PeriodNo = GetPeriod($_POST['AdmissionDate']), $db);
+		$PeriodNo = GetPeriod($_POST['AdmissionDate'], $db);
 		if (isset($_POST['SubmitInsurance'])) {
 			$_POST['Received']=0;
 		} else {

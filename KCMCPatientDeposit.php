@@ -32,7 +32,7 @@ if (isset($_POST['SubmitCash'])) {
 		*/
 
 		if (isset($_POST['SubmitCash'])) {
-			$PeriodNo = GetPeriod($_POST['AdmissionDate']), $db);
+			$PeriodNo = GetPeriod($_POST['AdmissionDate'], $db);
 			$ReceiptNumber = GetNextTransNo(12,$db);
 			$SQL="INSERT INTO gltrans (type,
 										typeno,
