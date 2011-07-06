@@ -11,7 +11,7 @@ if (isset($_POST['UserID']) AND isset($_POST['ID'])){
 }
 include('includes/session.inc');
 
-$ModuleList = array(_('Orders'),
+$ModuleList = array(_('Income'),
 					_('Receivables'),
 					_('Payables'),
 					_('Purchasing'),

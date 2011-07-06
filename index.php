@@ -9,7 +9,7 @@ $title=_('Main Menu');
 /*The module link codes are hard coded in a switch statement below to determine the options to show for each tab */
 $ModuleLink = array('orders', 'AR', 'AP', 'PO', 'stock', 'manuf',  'GL', 'FA', 'PC', 'system');
 /*The headings showing on the tabs accross the main index used also in WWW_Users for defining what should be visible to the user */
-$ModuleList = array(_('Sales'),
+$ModuleList = array(_('Income'),
 					_('Receivables'),
 					_('Payables'),
 					_('Purchases'),
