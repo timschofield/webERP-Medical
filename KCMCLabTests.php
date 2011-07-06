@@ -28,9 +28,9 @@ if (isset($_POST['ChangeItem'])) {
 		$Price=$myrow['price'];
 	}
 	$_SESSION['Items'][$_SESSION['Items']['Lines']]['StockID']=$_POST['StockID'];
-	$_SESSION['Items'][$_SESSION['Items']['Lines']]['Quantity']=1;
+	$_SESSION['Items'][$_SESSION['Items']['Lines']]['Quantity']=$_POST['Quantity'];
 	$_SESSION['Items'][$_SESSION['Items']['Lines']]['Price']=$Price;
-	$_SESSION['Items']['Value']+=$Price;
+	$_SESSION['Items']['Value']+=$Price*$_POST['Quantity'];
 	$_SESSION['Items']['Lines']++;
 }
 
@@ -105,7 +105,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 													'" . $OrderNo . "',
 													'" . $_SESSION['Items'][$i]['StockID'] . "',
 													'" . $_SESSION['Items'][$i]['Price'] . "',
-													'1',
+													'" . $_SESSION['Items'][$i]['Quantity'] . "',
 													'0',
 													'" . _('Sales order for laboratory test transaction') . "',
 													'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
@@ -185,7 +185,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 						'" . $_POST['BranchNo'] . "',
 						'" . $PeriodNo . "',
 						'" . _('Invoice for Laboratory test of Patient number').' '.$_POST['PatientNo'] . "',
-						-1,
+						'" . -$_SESSION['Items'][$i]['Quantity'] . "',
 						'" . $_SESSION['Items'][$i]['Price'] . "',
 						1,
 						0
@@ -419,9 +419,9 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 		$SQL = "SELECT debtorsmaster.debtorno,
 				debtorsmaster.name,
 				debtorsmaster.address1,
-								debtorsmaster.address2,
-								debtorsmaster.address3,
-								debtorsmaster.address4,
+				debtorsmaster.address2,
+				debtorsmaster.address3,
+				debtorsmaster.address4,
 				custbranch.branchcode,
 				custbranch.brname,
 				custbranch.contactname,
@@ -646,17 +646,27 @@ if (isset($_POST['Patient'])) {
 				echo '<option value="'.$myrow['stockid'].'">'.$myrow['stockid']. ' - ' . $myrow['description'].'</option>';
 			}
 		}
-		echo '</select>&nbsp;@&nbsp;'.number_format($_SESSION['Items'][$i]['Price'],0).' '.$_SESSION['CompanyRecord']['currencydefault'].'</td></tr>';
+		echo '</select>&nbsp;' . _('Quantity') . ' - ';
+		echo '&nbsp;' . $_SESSION['Items'][$i]['Quantity'];
+		echo '&nbsp;@&nbsp;'.number_format($_SESSION['Items'][$i]['Price'],0).' '.$_SESSION['CompanyRecord']['currencydefault'].'</td></tr>';
 		DB_data_seek($result,0);
 		echo '<tr><td>';
 	}
-	echo '<td><select name="StockID" onChange="ReloadForm(ChangeItem)">';
+	echo '<td><select name="StockID"">';
 	echo '<option value=""></option>';
 	while ($myrow=DB_fetch_array($result)) {
 		echo '<option value="'.$myrow['stockid'].'">'.$myrow['stockid']. ' - ' . $myrow['description'].'</option>';
 	}
-	echo '</select></td></tr>';
+	echo '</select>';
 	DB_data_seek($result,0);
+
+	echo '&nbsp;' . _('Quantity') . ' - ';
+	echo '<select name="Quantity" onChange="ReloadForm(ChangeItem)">';
+	echo '<option value=""></option>';
+	for ($j=0; $j<100; $j++) {
+		echo '<option value="'.$j.'">'.$j.'</option>';
+	}
+	echo '</select></td></tr>';
 
 	echo '<input type="submit" name="ChangeItem" style="visibility: hidden" value=" " />';
 	echo '<tr><td>'._('Payment Fee').'</td>';
