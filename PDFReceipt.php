@@ -20,8 +20,11 @@ $YPos= $Page_Height-$Top_Margin;
 $XPos=0;
 $pdf->addJpegFromFile($_SESSION['LogoFile'] ,$XPos,$YPos,0,30);
 
+$sql="SELECT locationname, deladd1 FROM locations WHERE loccode='".$_SESSION['UserStockLocation']."'";
+$result=DB_query($sql, $db);
+$mylocationrow=DB_fetch_array($result);
 
-$LeftOvers = $pdf->addTextWrap(0,$YPos-($line_height*3),300,$FontSize,$_SESSION['CompanyRecord']['coyname']);
+$LeftOvers = $pdf->addTextWrap(0,$YPos-($line_height*3),300,$FontSize,$mylocationrow['deladd1']);
 $LeftOvers = $pdf->addTextWrap(0,$YPos-($line_height*4),300,$FontSize,$_SESSION['CompanyRecord']['regoffice1']);
 $LeftOvers = $pdf->addTextWrap(0,$YPos-($line_height*5),300,$FontSize,$_SESSION['CompanyRecord']['regoffice2']);
 $LeftOvers = $pdf->addTextWrap(0,$YPos-($line_height*6),300,$FontSize,$_SESSION['CompanyRecord']['regoffice3']);
@@ -63,14 +66,7 @@ $sql="SELECT 	debtortrans.debtorno,
 			AND transno='".$_GET['FromTransNo']."'";
 $MyOrderResult=DB_query($sql, $db);
 
-$sql="SELECT 	debtortrans.debtorno,
-				debtortrans.ovamount,
-				debtortrans.invtext
-			FROM debtortrans
-			WHERE type='".$Type."'
-			AND transno='".$_GET['FromTransNo']."'";
-$result=DB_query($sql, $db);
-$myrow=DB_fetch_array($result);
+$myrow=DB_fetch_array($MyOrderResult);
 $DebtorNo=$myrow['debtorno'];
 $Amount=$myrow['ovamount'];
 $Narrative=$myrow['invtext'];
