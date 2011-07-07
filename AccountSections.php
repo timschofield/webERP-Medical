@@ -76,7 +76,7 @@ if (isset($_POST['submit'])) {
 		$Errors[$i] = 'SectionName';
 		$i++;
 	}
-	if (strlen($_POST['SectionName'])==0) {
+	if (mb_strlen($_POST['SectionName'])==0) {
 		$InputError = 1;
 		prnMsg( _('The account section name must contain at least one character') ,'error');
 		$Errors[$i] = 'SectionName';
@@ -88,7 +88,7 @@ if (isset($_POST['submit'])) {
 		$Errors[$i] = 'SectionID';
 		$i++;
 	}
-	if (isset($_POST['SectionID']) and strpos($_POST['SectionID'],".")>0) {
+	if (isset($_POST['SectionID']) and mb_strpos($_POST['SectionID'],".")>0) {
 		$InputError = 1;
 		prnMsg( _('The section number must be an integer'),'error');
 		$Errors[$i] = 'SectionID';

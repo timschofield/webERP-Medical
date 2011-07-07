@@ -9,10 +9,10 @@ $title = _('Manufacturing Company Maintenance');
 include('includes/header.inc');
 
 if (isset($_GET['ManufacturerID'])){
-	$ManufacturerID = strtoupper($_GET['ManufacturerID']);
+	$ManufacturerID = mb_strtoupper($_GET['ManufacturerID']);
 	$_POST['amend']=True;
 } elseif (isset($_POST['ManufacturerID'])){
-	$ManufacturerID = strtoupper($_POST['ManufacturerID']);
+	$ManufacturerID = mb_strtoupper($_POST['ManufacturerID']);
 } else {
 	unset($ManufacturerID);
 }
@@ -33,7 +33,7 @@ $InputError = 0;
 
 if (isset($_POST['submit']) or isset($_POST['update']) or isset($_POST['delete'])) {
 
-	if (strlen($_POST['ManufacturerName']) > 40 or strlen($_POST['ManufacturerName']) == 0 or $_POST['ManufacturerName'] == '') {
+	if (mb_strlen($_POST['ManufacturerName']) > 40 or mb_strlen($_POST['ManufacturerName']) == 0 or $_POST['ManufacturerName'] == '') {
 		$InputError = 1;
 		prnMsg(_('The manufacturing company name must be entered and be forty characters or less long'),'error');
 	}

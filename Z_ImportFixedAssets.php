@@ -2,7 +2,7 @@
 /* $Id:  $*/
 /* Script to import fixed assets into a specified period*/
 
-//$PageSecurity = 15;
+
 include('includes/session.inc');
 $title = _('Import Fixed Assets');
 include('includes/header.inc');
@@ -55,8 +55,8 @@ if ($_FILES['SelectedAssetFile']['name']) { //start file processing
 	//test header row field name and sequence
 	$i = 0;
 	foreach ($HeaderRow as $FieldName) {
-		if ( strtoupper($FieldName) != strtoupper($FieldNames[$i]) ) {
-			prnMsg (_('The selected file contains fields in the incorrect order ('. strtoupper($FieldName). ' != '. strtoupper($FieldNames[$i]). _('. Download a template and ensuer that fields are in the same sequence as the template.')),'error');
+		if ( mb_strtoupper($FieldName) != mb_strtoupper($FieldNames[$i]) ) {
+			prnMsg (_('The selected file contains fields in the incorrect order ('. mb_strtoupper($FieldName). ' != '. mb_strtoupper($FieldNames[$i]). _('. Download a template and ensuer that fields are in the same sequence as the template.')),'error');
 			fclose($FileHandle);
 			include('includes/footer.inc');
 			exit;
@@ -109,7 +109,7 @@ if ($_FILES['SelectedAssetFile']['name']) { //start file processing
 					$AccumDepn = $myrow[$i];
 					break;
 				case 8:
-					$DepnType = strtoupper($myrow[$i]);
+					$DepnType = mb_strtoupper($myrow[$i]);
 					break;
 				case 9:
 					$DepnRate= $myrow[$i];
@@ -120,7 +120,7 @@ if ($_FILES['SelectedAssetFile']['name']) { //start file processing
 			} //end switch
 		} //end loop around fields from import
 
-		if (strlen($Description)==0 OR strlen($Description)>50){
+		if (mb_strlen($Description)==0 OR mb_strlen($Description)>50){
 			prnMsg('The description of the asset is expected to be more than 3 characters long and less than 50 characters long','error');
 			echo '<br />' . _('Row:') . $Row . ' - ' . _('Invalid Description:') . ' ' . $Description;
 			$InputError=true;
@@ -187,27 +187,27 @@ if ($_FILES['SelectedAssetFile']['name']) { //start file processing
 
 			//attempt to insert the stock item
 			$sql = "INSERT INTO fixedassets (description,
-																		longdescription,
-																		assetcategoryid,
-																		serialno,
-																		barcode,
-																		assetlocation,
-																		cost,
-																		accumdepn,
-																		depntype,
-																		depnrate,
-																		datepurchased)
-												VALUES ('" . $Description . "',
-																'" . $LongDescription . "',
-																'" . $AssetCategoryID . "',
-																'" . $SerialNo . "',
-																'" . $BarCode . "',
-																'" . $AssetLocationCode . "',
-																'" . $Cost . "',
-																'" . $AccumDepn . "',
-																'" . $DepnType . "',
-																'" . $DepnRate . "',
-																'" . FormatDateForSQL($DatePurchased) . "')";
+											longdescription,
+											assetcategoryid,
+											serialno,
+											barcode,
+											assetlocation,
+											cost,
+											accumdepn,
+											depntype,
+											depnrate,
+											datepurchased)
+							VALUES ('" . $Description . "',
+									'" . $LongDescription . "',
+									'" . $AssetCategoryID . "',
+									'" . $SerialNo . "',
+									'" . $BarCode . "',
+									'" . $AssetLocationCode . "',
+									'" . $Cost . "',
+									'" . $AccumDepn . "',
+									'" . $DepnType . "',
+									'" . $DepnRate . "',
+									'" . FormatDateForSQL($DatePurchased) . "')";
 
 			$ErrMsg =  _('The asset could not be added because');
 			$DbgMsg = _('The SQL that was used to add the asset and failed was');
@@ -218,22 +218,21 @@ if ($_FILES['SelectedAssetFile']['name']) { //start file processing
 
 				$AssetID = DB_Last_Insert_ID($db, 'fixedassets','assetid');
 				$sql = "INSERT INTO fixedassettrans ( assetid,
-																					transtype,
-																					transno,
-																					transdate,
-																					periodno,
-																					inputdate,
-																					fixedassettranstype,
-																					amount)
-											VALUES ( '" . $AssetID . "',
-															'49',
-															'" . $TransNo . "',
-															'" . $_POST['DateToEnter'] . "',
-															'" . $PeriodNo . "',
-															'" . Date('Y-m-d') . "',
-															'cost',
-															'" . $Cost . "')";
-
+													transtype,
+													transno,
+													transdate,
+													periodno,
+													inputdate,
+													fixedassettranstype,
+													amount)
+												VALUES ( '" . $AssetID . "',
+													'49',
+													'" . $TransNo . "',
+													'" . $_POST['DateToEnter'] . "',
+													'" . $PeriodNo . "',
+													'" . Date('Y-m-d') . "',
+													'cost',
+													'" . $Cost . "')";
 				$ErrMsg =  _('The transaction for the cost of the asset could not be added because');
 				$DbgMsg = _('The SQL that was used to add the fixedasset trans record that failed was');
 				$InsResult = DB_query($sql,$db,$ErrMsg,$DbgMsg);
@@ -285,7 +284,7 @@ if ($_FILES['SelectedAssetFile']['name']) { //start file processing
 
 	echo '
 		<br />
-		<a href="Z_ImportFixedAssets.php?gettemplate=1">Get Import Template</a>
+		<a href="Z_ImportFixedAssets.php?gettemplate=1">' . _('Get Import Template') . '</a>
 		<br />
 		<br />
 	';

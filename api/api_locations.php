@@ -9,12 +9,12 @@
    exist.*/
 
 	function VerifyLocationCode($LocationCode, $i, $Errors, $db) {
-		if ((strlen($LocationCode)<1) or (strlen($LocationCode)>5)) {
+		if ((mb_strlen($LocationCode)<1) or (mb_strlen($LocationCode)>5)) {
 			$Errors[$i] = IncorrectLocationCodeLength;
 		}
 		$Searchsql = "SELECT count(loccode)
-				FROM locations
-				WHERE loccode='".$LocationCode."'";
+						FROM locations
+						WHERE loccode='".$LocationCode."'";
 		$SearchResult=DB_query($Searchsql, $db);
 		$answer = DB_fetch_row($SearchResult);
 		if ($answer[0] != 0) {
@@ -26,8 +26,8 @@
 /* Check that the Location Code exists*/
 	function VerifyLocationExists($LocationCode, $i, $Errors, $db) {
 		$Searchsql = "SELECT count(loccode)
-				FROM locations
-				WHERE loccode='".$LocationCode."'";
+						FROM locations
+						WHERE loccode='".$LocationCode."'";
 		$SearchResult=DB_query($Searchsql, $db);
 		$answer = DB_fetch_array($SearchResult);
 		if ($answer[0]==0) {
@@ -38,7 +38,7 @@
 
 /* Check that the Location name is valid and is 50 characters or less long */
 	function VerifyLocationName($LocationName, $i, $Errors) {
-		if ((strlen($LocationName)<1) or (strlen($LocationName)>50)) {
+		if ((mb_strlen($LocationName)<1) or (mb_strlen($LocationName)>50)) {
 			$Errors[$i] = IncorrectLocationNameLength;
 		}
 		return $Errors;
@@ -47,8 +47,8 @@
 /* Check that the tax province id is set up in the weberp database */
 	function VerifyTaxProvinceId($TaxProvinceId , $i, $Errors, $db) {
 		$Searchsql = "SELECT COUNT(taxprovinceid)
-					FROM taxprovinces
-					WHERE taxprovinceid='".$TaxProvinceId."'";
+						FROM taxprovinces
+						WHERE taxprovinceid='".$TaxProvinceId."'";
 		$SearchResult=DB_query($Searchsql, $db);
 		$answer = DB_fetch_row($SearchResult);
 		if ($answer[0] == 0) {
@@ -149,8 +149,8 @@
 			$FieldValues.='"'.$value.'", ';
 		}
 		if (sizeof($Errors)==0) {
-			$sql = "INSERT INTO locations (".substr($FieldNames,0,-2).") ".
-		  		"VALUES (".substr($FieldValues,0,-2).") ";
+			$sql = "INSERT INTO locations ('" . mb_substr($FieldNames,0,-2) . "')
+						VALUES ('" . mb_substr($FieldValues,0,-2) . "') ";
 			$result = DB_Query($sql, $db);
 			if (DB_error_no($db) != 0) {
 				$Errors[0] = DatabaseUpdateFailed;
@@ -209,9 +209,9 @@
 		}
 		$sql="UPDATE locations SET ";
 		foreach ($Location as $key => $value) {
-			$sql .= $key.'="'.$value.'", ';
+			$sql .= $key."='" . $value."', ";
 		}
-		$sql = substr($sql,0,-2)." WHERE loccode='".$Location['loccode']."'";
+		$sql = mb_substr($sql,0,-2)." WHERE loccode='".$Location['loccode']."'";
 		if (sizeof($Errors)==0) {
 			$result = DB_Query($sql, $db);
 			if (DB_error_no($db) != 0) {

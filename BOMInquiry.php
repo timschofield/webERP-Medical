@@ -8,9 +8,9 @@ $title = _('Costed Bill Of Material');
 include('includes/header.inc');
 
 if (isset($_GET['StockID'])){
-	$StockID =trim(strtoupper($_GET['StockID']));
+	$StockID =trim(mb_strtoupper($_GET['StockID']));
 } elseif (isset($_POST['StockID'])){
-	$StockID =trim(strtoupper($_POST['StockID']));
+	$StockID =trim(mb_strtoupper($_POST['StockID']));
 }
 
 if (!isset($_POST['StockID'])) {
@@ -38,7 +38,7 @@ if (isset($_POST['Search'])){
 	if ($_POST['Keywords']=='' AND $_POST['StockCode']=='') {
 		prnMsg( _('At least one stock description keyword or an extract of a stock code must be entered for the search'), 'info' );
 	} else {
-		if (strlen($_POST['Keywords'])>0) {
+		if (mb_strlen($_POST['Keywords'])>0) {
 			//insert wildcard characters in spaces
 			$SearchString = '%' . str_replace(' ', '%', $_POST['Keywords']) . '%';
 
@@ -58,7 +58,7 @@ if (isset($_POST['Search'])){
 					stockmaster.mbflag
 				ORDER BY stockmaster.stockid";
 
-		} elseif (strlen($_POST['StockCode'])>0){
+		} elseif (mb_strlen($_POST['StockCode'])>0){
 			$sql = "SELECT stockmaster.stockid,
 					stockmaster.description,
 					stockmaster.units,

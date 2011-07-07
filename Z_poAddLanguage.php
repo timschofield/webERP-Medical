@@ -33,16 +33,16 @@ echo '<br />&nbsp;' . _('Current language is') . ' ' . $_SESSION['Language'];
 
 if (isset($_POST['submit']) AND isset($_POST['NewLanguage'])) {
 
-	if(strlen($_POST['NewLanguage'])<5
-		OR strlen($_POST['NewLanguage'])>5
-		OR substr($_POST['NewLanguage'],2,1)!='_'){
+	if(mb_strlen($_POST['NewLanguage'])<5
+		OR mb_strlen($_POST['NewLanguage'])>5
+		OR mb_substr($_POST['NewLanguage'],2,1)!='_'){
 
 		prnMsg(_('Languages must be in the format of a two character country code an underscore _ and a two character language code in upper case'),'error');
 	} else {
 
 		/*Make sure the language characters are in upper case*/
 
-		$_POST['NewLanguage'] = substr($_POST['NewLanguage'],0,3) . strtoupper(substr($_POST['NewLanguage'],3,2));
+		$_POST['NewLanguage'] = mb_substr($_POST['NewLanguage'],0,3) . mb_strtoupper(mb_substr($_POST['NewLanguage'],3,2));
 
 		echo '<div class="centre">';
 		echo '<br />';
@@ -56,23 +56,19 @@ if (isset($_POST['submit']) AND isset($_POST['NewLanguage'])) {
 			prnMsg (_('Attempting to create the new language file') . '.....<br />', 'info', ' ');
 			$Result = mkdir('./locale/' . $_POST['NewLanguage']);
 			$Result = mkdir('./locale/' . $_POST['NewLanguage'] . '/LC_MESSAGES');
+			$PathToNewLanguage = './locale/' . $_POST['NewLanguage'] . '/LC_MESSAGES/messages.po';
+			$Result = copy($PathToDefault, $PathToNewLanguage);
+
+			prnMsg (_('Done. You should now change to your newly created language from the user settings link above. Then you can edit the new language file header and use the language module editor to translate the system strings'), 'info');
+
 		} else {
 			prnMsg(_('This language cannot be added because it already exists!'),'error');
-  			echo '</form>';
-	  		echo '</div>';
-			include('includes/footer.inc');
-			exit;
 		}
-
-		$PathToNewLanguage = './locale/' . $_POST['NewLanguage'] . '/LC_MESSAGES/messages.po';
-		$Result = copy($PathToDefault, $PathToNewLanguage);
-
-		prnMsg (_('Done. You should now change to your newly created language from the user settings link above. Then you can edit the new language file header and use the language module editor to translate the system strings'), 'info');
-
 		echo '</form>';
 		echo '</div>';
 		include('includes/footer.inc');
 		exit;
+
 	}
 
 }

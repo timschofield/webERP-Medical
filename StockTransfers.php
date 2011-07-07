@@ -5,7 +5,6 @@
 include('includes/DefineSerialItems.php');
 include('includes/DefineStockTransfers.php');
 
-//$PageSecurity = 11;
 include('includes/session.inc');
 $title = _('Stock Transfers');
 
@@ -27,19 +26,24 @@ if (isset($_POST['CheckCode'])) {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Dispatch') .
 		'" alt="" />' . ' ' . _('Select Item to Transfer') . '</p>';
 
-	if (strlen($_POST['StockText'])>0) {
-		$sql="SELECT stockid, description from stockmaster where description like '%".$_POST['StockText']."%'";
+	if (mb_strlen($_POST['StockText'])>0) {
+		$sql="SELECT stockid, description from stockmaster where description " . LIKE . " '%" . $_POST['StockText'] . "%'";
 	} else {
-		$sql="SELECT stockid, description from stockmaster where stockid like '%".$_POST['StockCode']."%'";
+		$sql="SELECT stockid, description from stockmaster where stockid " . LIKE . " '%" . $_POST['StockCode']."%'";
 	}
 	$ErrMsg=_('The stock information cannot be retrieved because');
 	$DbgMsg=_('The SQL to get the stock description was');
 	$result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
-	echo '<table class=selection><tr><th>'._('Stock Code').'</th><th>'._('Stock Description').'</th></tr>';
-	while ($myrow = DB_fetch_row($result)) {
-		echo '<tr><td>'.$myrow[0].'</td><td>'.$myrow[1].'</td><td>
-		<a href="StockTransfers.php?StockID='.$myrow[0].'&Description='.$myrow[1].'&NewTransfer=Yes&Quantity='.$_POST['Quantity'].'&From='.$_POST['StockLocationFrom'].'&To='.$_POST['StockLocationTo'].'">'
-				._('Transfer').'</a></tr>';
+	echo '<table class=selection>
+			<tr><th>'._('Stock Code').'</th>
+				<th>'._('Stock Description').'</th>
+			</tr>';
+	while ($myrow = DB_fetch_array($result)) {
+		echo '<tr><td>'.$myrow['stockid'].'</td>
+				<td>'.$myrow['description'].'</td>
+				<td><a href="' . $rootpath . '/StockTransfers.php?StockID='.$myrow['stockid'].'&Description='.$myrow['description'].'&NewTransfer=Yes&Quantity='.$_POST['Quantity'].'&From='.$_POST['StockLocationFrom'].'&To='.$_POST['StockLocationTo'].'">'
+				._('Transfer').'</a></td>
+			</tr>';
 	}
 	echo '</table>';
 	include('includes/footer.inc');
@@ -57,7 +61,7 @@ if (isset($_GET['NewTransfer'])){
 
 if (isset($_GET['StockID'])){	/*carry the stockid through to the form for additional inputs */
 
-	$_POST['StockID'] = trim(strtoupper($_GET['StockID']));
+	$_POST['StockID'] = trim(mb_strtoupper($_GET['StockID']));
 
 } elseif (isset($_POST['StockID'])){	/* initiate a new transfer only if the StockID is different to the previous entry */
 
@@ -70,36 +74,35 @@ if (isset($_GET['StockID'])){	/*carry the stockid through to the form for additi
 if ($NewTransfer){
 
 	$_SESSION['Transfer']= new StockTransfer(0,
-						$_POST['StockLocationFrom'],
-						'',
-						$_POST['StockLocationTo'],
-						'',
-						Date($_SESSION['DefaultDateFormat'])
-						);
+										$_POST['StockLocationFrom'],
+										'',
+										$_POST['StockLocationTo'],
+										'',
+										Date($_SESSION['DefaultDateFormat'])
+										);
 	$result = DB_query("SELECT description,
-				units,
-				mbflag,
-				materialcost+labourcost+overheadcost as standardcost,
-				controlled,
-				serialised,
-				perishable,
-				decimalplaces
-			FROM stockmaster
-			WHERE stockid='" . trim(strtoupper($_POST['StockID'])) . "'",
-			$db);
+							units,
+							mbflag,
+							materialcost+labourcost+overheadcost AS standardcost,
+							controlled,
+							serialised,
+							perishable,
+							decimalplaces
+						FROM stockmaster
+						WHERE stockid='" . trim(mb_strtoupper($_POST['StockID'])) . "'",
+						$db);
 	if (DB_num_rows($result) == 0){
-		prnMsg( _('Unable to locate Stock Code').' '.strtoupper($_POST['StockID']), 'error' );
+		prnMsg( _('Unable to locate Stock Code').' '.mb_strtoupper($_POST['StockID']), 'error' );
 	} elseif (DB_num_rows($result)>0){
 		$myrow = DB_fetch_array($result);
-		$_SESSION['Transfer']->TransferItem[0] = new LineItem (
-									trim(strtoupper($_POST['StockID'])),
-									$myrow['description'],
-									$_POST['Quantity'],
-									$myrow['units'],
-									$myrow['controlled'],
-									$myrow['serialised'],
-									$myrow['perishable'],
-									$myrow['decimalplaces']);
+		$_SESSION['Transfer']->TransferItem[0] = new LineItem (	trim(mb_strtoupper($_POST['StockID'])),
+															$myrow['description'],
+															$_POST['Quantity'],
+															$myrow['units'],
+															$myrow['controlled'],
+															$myrow['serialised'],
+															$myrow['perishable'],
+															$myrow['decimalplaces']);
 
 
 		$_SESSION['Transfer']->TransferItem[0]->StandardCost = $myrow[3];
@@ -119,7 +122,7 @@ if ($NewTransfer){
 if (isset($_POST['Quantity']) and isset($_SESSION['Transfer']->TransferItem[0]->Controlled) and $_SESSION['Transfer']->TransferItem[0]->Controlled==0){
 	$_SESSION['Transfer']->TransferItem[0]->Quantity = $_POST['Quantity'];
 }
-if ( isset($_POST['StockLocationFrom']) && $_POST['StockLocationFrom']!= $_SESSION['Transfer']->StockLocationFrom ){
+if ( isset($_POST['StockLocationFrom']) and $_POST['StockLocationFrom']!= $_SESSION['Transfer']->StockLocationFrom ){
 	$_SESSION['Transfer']->StockLocationFrom = $_POST['StockLocationFrom'];
 	$_SESSION['Transfer']->StockLocationTo = $_POST['StockLocationTo'];
 	$_SESSION['Transfer']->TransferItem[0]->Quantity=$_POST['Quantity'];
@@ -144,7 +147,7 @@ if ( isset($_POST['EnterTransfer']) ){
 		echo '<br />';
 		prnMsg( _('The quantity entered must be numeric'), 'error' );
 		$InputError = true;
-	} elseif ($_SESSION['Transfer']->TransferItem[0]->Quantity<=0){
+	} elseif ($_SESSION['Transfer']->TransferItem[0]->Quantity <= 0){
 		echo '<br />';
 		prnMsg( _('The quantity entered must be a positive number greater than zero'), 'error');
 		$InputError = true;
@@ -166,9 +169,9 @@ if ( isset($_POST['EnterTransfer']) ){
 
 		// Need to get the current location quantity will need it later for the stock movement
 		$SQL="SELECT locstock.quantity
-			FROM locstock
-			WHERE locstock.stockid='" . $_SESSION['Transfer']->TransferItem[0]->StockID . "'
-			AND loccode= '" . $_SESSION['Transfer']->StockLocationFrom . "'";
+				FROM locstock
+				WHERE locstock.stockid='" . $_SESSION['Transfer']->TransferItem[0]->StockID . "'
+				AND loccode= '" . $_SESSION['Transfer']->StockLocationFrom . "'";
 
 		$ErrMsg =  _('Could not retrieve the QOH at the sending location because');
 		$DbgMsg =  _('The SQL that failed was');
@@ -187,7 +190,6 @@ if ( isset($_POST['EnterTransfer']) ){
 			include('includes/footer.inc');
 			exit;
 		}
-
 		// Insert the stock movement for the stock going out of the from location
 		$SQL = "INSERT INTO stockmoves (stockid,
 					type,
@@ -400,8 +402,7 @@ if ( isset($_POST['EnterTransfer']) ){
 		} /*end if the transfer item is a controlled item */
 
 
-		$SQL = "UPDATE locstock
-				SET quantity = quantity - '" . $_SESSION['Transfer']->TransferItem[0]->Quantity . "'
+		$SQL = "UPDATE locstock SET quantity = quantity - '" . $_SESSION['Transfer']->TransferItem[0]->Quantity . "'
 				WHERE stockid='" . $_SESSION['Transfer']->TransferItem[0]->StockID . "'
 				AND loccode='" . $_SESSION['Transfer']->StockLocationFrom . "'";
 
@@ -422,7 +423,7 @@ if ( isset($_POST['EnterTransfer']) ){
 		$Result = DB_Txn_Commit($db);
 
 		prnMsg(_('An inventory transfer of').' ' . $_SESSION['Transfer']->TransferItem[0]->StockID . ' - ' . $_SESSION['Transfer']->TransferItem[0]->ItemDescription . ' '. _('has been created from').' ' . $_SESSION['Transfer']->StockLocationFrom . ' '. _('to') . ' ' . $_SESSION['Transfer']->StockLocationTo . ' '._('for a quantity of').' ' . $_SESSION['Transfer']->TransferItem[0]->Quantity,'success');
-		echo '</br><a href="PDFStockTransfer.php?TransferNo='.$TransferNumber.'">Print Transfer Note</a>';
+		echo '</br><a href="PDFStockTransfer.php?TransferNo='.$TransferNumber.'">' . _('Print Transfer Note') . '</a>';
 		unset ($_SESSION['Transfer']);
 		include ('includes/footer.inc');
 		exit;
@@ -433,15 +434,10 @@ if ( isset($_POST['EnterTransfer']) ){
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Dispatch') .
 		'" alt="" />' . ' ' . $title . '</p>';
 
-echo '<form action="'. $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
+echo '<form action="'. $_SERVER['PHP_SELF'] . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-//echo '<table>
-//	<tr>
-//	<td>'. _('Stock Code').':</td>
-//	<td><input type=text name="StockID" size=21 value="' . $_SESSION['Transfer']->TransferItem[0]->StockID . '" maxlength=20></td>
-//	<td><input type=submit name="CheckCode" value="'._('Check Part').'"></td>
-//	</tr>';
+
 if (!isset($_GET['Description'])) {
 	$_GET['Description']='';
 }
@@ -460,7 +456,7 @@ if (isset($_POST['StockID'])) {
 }
 echo '</td><td><input type=submit name="CheckCode" value="'._('Check Part').'"></td></tr>';
 
-if (isset($_SESSION['Transfer']->TransferItem[0]->ItemDescription) and strlen($_SESSION['Transfer']->TransferItem[0]->ItemDescription)>1){
+if (isset($_SESSION['Transfer']->TransferItem[0]->ItemDescription) and mb_strlen($_SESSION['Transfer']->TransferItem[0]->ItemDescription)>1){
 	echo '<tr><td colspan=3><font color=BLUE size=3>' . $_SESSION['Transfer']->TransferItem[0]->ItemDescription . ' ('._('In Units of').' ' . $_SESSION['Transfer']->TransferItem[0]->PartUnit . ' )</font></td></tr>';
 }
 
@@ -471,15 +467,15 @@ $resultStkLocs = DB_query($sql,$db);
 while ($myrow=DB_fetch_array($resultStkLocs)){
 	if (isset($_SESSION['Transfer']->StockLocationFrom)){
 		if ($myrow['loccode'] == $_SESSION['Transfer']->StockLocationFrom){
-			 echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			 echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
-			 echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			 echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	} elseif ($myrow['loccode']==$_SESSION['UserStockLocation'] and isset($_SESSION['Transfer'])){
-		 echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		 echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		 $_SESSION['Transfer']->StockLocationFrom=$myrow['loccode'];
 	} else {
-		 echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		 echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 	}
 }
 
@@ -492,32 +488,34 @@ DB_data_seek($resultStkLocs,0);
 while ($myrow=DB_fetch_array($resultStkLocs)){
 	if (isset($_SESSION['Transfer']) and isset($_SESSION['Transfer']->StockLocationTo)){
 		if ($myrow['loccode'] == $_SESSION['Transfer']->StockLocationTo){
-			 echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			 echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
-			 echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			 echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	} elseif ($myrow['loccode']==$_SESSION['UserStockLocation'] and isset($_SESSION['Transfer'])){
-		 echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		 echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		 $_SESSION['Transfer']->StockLocationTo=$myrow['loccode'];
 	} else {
-		 echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		 echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 	}
 }
 
 echo '</select></td></tr>';
+
 
 echo '<tr><td>'._('Transfer Quantity').':</td>';
 
 if (isset($_SESSION['Transfer']->TransferItem[0]->Controlled) and $_SESSION['Transfer']->TransferItem[0]->Controlled==1){
 	echo '<td class=number><input type=hidden name="Quantity" value=' . $_SESSION['Transfer']->TransferItem[0]->Quantity .
 		'><a href="' . $rootpath .'/StockTransferControlled.php?StockLocationFrom='.$_SESSION['Transfer']->StockLocationFrom.'">' . $_SESSION['Transfer']->TransferItem[0]->Quantity . '</a></td></tr>';
-} else if (isset($_SESSION['Transfer']->TransferItem[0]->Controlled)){
-	echo '<td><input type=text class="number" name="Quantity" size=12 maxlength=12 Value=' . $_SESSION['Transfer']->TransferItem[0]->Quantity . '></td></tr>';
+} elseif (isset($_SESSION['Transfer']->TransferItem[0]->Controlled)){
+	echo '<td><input type=text class="number" name="Quantity" size=12 maxlength=12 value=' . $_SESSION['Transfer']->TransferItem[0]->Quantity . '></td></tr>';
 } else {
-	echo '<td><input type=text class="number" name="Quantity" size=12 maxlength=12 Value="0"></td></tr>';
+	echo '<td><input type=text class="number" name="Quantity" size=12 maxlength=12 value="0"></td></tr>';
 }
 
-echo '</table><div class="centre"><br /><input type=submit name="EnterTransfer" value="' . _('Enter Stock Transfer') . '"><br />';
+echo '</table><div class="centre"><br /><input type="submit" name="EnterTransfer" value="' . _('Enter Stock Transfer') . '"><br />';
+
 
 if (empty($_SESSION['Transfer']->TransferItem[0]->StockID) and isset($_POST['StockID'])) {
 	$StockID=$_POST['StockID'];
@@ -526,15 +524,13 @@ if (empty($_SESSION['Transfer']->TransferItem[0]->StockID) and isset($_POST['Sto
 } else {
 	$StockID='';
 }
-
 if (isset($_SESSION['Transfer'])) {
 	echo '<br /><a href="'.$rootpath.'/StockStatus.php?StockID=' . $StockID . '">'._('Show Stock Status').'</a>';
 	echo '<br /><a href="'.$rootpath.'/StockMovements.php?StockID=' . $StockID . '">'._('Show Movements').'</a>';
-	echo '<br /><a href="'.$rootpath.'/StockUsage.php?StockID=' . $StockID . '">' . _('Show Stock Usage') . '</a>';
+	echo '<br /><a href="'.$rootpath.'/StockUsage.php?StockID=' . $StockID . '&StockLocation=' . $_SESSION['Transfer']->StockLocationFrom . '">' . _('Show Stock Usage') . '</a>';
 	echo '<br /><a href="'.$rootpath.'/SelectSalesOrder.php?SelectedStockItem=' . $StockID . '&StockLocation=' . $_SESSION['Transfer']->StockLocationFrom . '">' . _('Search Outstanding Sales Orders') . '</a>';
 	echo '<br /><a href="'.$rootpath.'/SelectCompletedOrder.php?SelectedStockItem=' . $StockID . '">'._('Search Completed Sales Orders').'</a>';
 }
-
 echo '</div></form>';
 include('includes/footer.inc');
 ?>

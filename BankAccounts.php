@@ -47,7 +47,7 @@ if (isset($_POST['submit'])) {
 		$Errors[$i] = 'AccountCode';
 		$i++;
 	}
-	if (strlen($_POST['BankAccountName']) >50) {
+	if (mb_strlen($_POST['BankAccountName']) >50) {
 		$InputError = 1;
 		prnMsg(_('The bank account name must be fifty characters or less long'),'error');
 		$Errors[$i] = 'AccountName';
@@ -65,13 +65,13 @@ if (isset($_POST['submit'])) {
 		$Errors[$i] = 'AccountNumber';
 		$i++;
 	}
-	if (strlen($_POST['BankAccountNumber']) >50) {
+	if (mb_strlen($_POST['BankAccountNumber']) >50) {
 		$InputError = 1;
 		prnMsg(_('The bank account number must be fifty characters or less long'),'error');
 		$Errors[$i] = 'AccountNumber';
 		$i++;
 	}
-	if (strlen($_POST['BankAddress']) >50) {
+	if (mb_strlen($_POST['BankAddress']) >50) {
 		$InputError = 1;
 		prnMsg(_('The bank address must be fifty characters or less long'),'error');
 		$Errors[$i] = 'BankAddress';

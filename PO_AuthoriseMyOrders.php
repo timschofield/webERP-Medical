@@ -17,8 +17,8 @@ $emailrow=DB_fetch_array($emailresult);
 
 if (isset($_POST['updateall'])) {
 	foreach ($_POST as $key => $value) {
-		if (substr($key,0,6)=='status') {
-			$orderno=substr($key,6);
+		if (mb_substr($key,0,6)=='status') {
+			$orderno=mb_substr($key,6);
 			$status=$_POST['status'.$orderno];
 			$comment=date($_SESSION['DefaultDateFormat']).' - '._('Authorised by').' '.'<a href="mailto:'. $emailrow['email'].'">'.$_SESSION['UserID'].'</a><br />'.$_POST['comment'];
 			$sql="UPDATE purchorders

@@ -10,30 +10,6 @@ $pdf->addJpegFromFile($_SESSION['LogoFile'],$Left_Margin,$YPos,0,50);
 
 $FontSize=15;
 
-Switch ($_POST['TransType']) {
-	case 10:
-		$TransType=_('Customer Invoices');
-		break;
-	case 11:
-		$TransType=_('Customer Credit Notes');
-		break;
-	case 16:
-		$TransType=_('Location Transfers');
-		break;
-	case 17:
-		$TransType=_('Stock Adjustments');
-		break;
-	case 25:
-		$TransType=_('Purchase Order Deliveries');
-		break;
-	case 26:
-		$TransType=_('Work Order Receipts');
-		break;
-	case 28:
-		$TransType=_('Work Order Issues');
-		break;
-}
-
 $XPos = $Page_Width/2;
 $YPos += 30;
 $pdf->addText($XPos, $YPos,$FontSize, $_SESSION['CompanyRecord']['coyname']);

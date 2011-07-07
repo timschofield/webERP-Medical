@@ -13,7 +13,7 @@ $SOH_DateFields = array ('orddate',
 
 /* Check that the custmerref field is 50 characters or less long */
 	function VerifyCustomerRef($customerref, $i, $Errors) {
-		if (strlen($customerref)>50) {
+		if (mb_strlen($customerref)>50) {
 			$Errors[$i] = InvalidCustomerRef;
 		}
 		return $Errors;
@@ -21,7 +21,7 @@ $SOH_DateFields = array ('orddate',
 
 /* Check that the buyername field is 50 characters or less long */
 	function VerifyBuyerName($buyername, $i, $Errors) {
-		if (strlen($buyername)>50) {
+		if (mb_strlen($buyername)>50) {
 			$Errors[$i] = InvalidBuyerName;
 		}
 		return $Errors;
@@ -29,7 +29,7 @@ $SOH_DateFields = array ('orddate',
 
 /* Check that the comments field is 256 characters or less long */
 	function VerifyComments($comments, $i, $Errors) {
-		if (strlen($comments)>256) {
+		if (mb_strlen($comments)>256) {
 			$Errors[$i] = InvalidComments;
 		}
 		return $Errors;
@@ -86,7 +86,7 @@ $SOH_DateFields = array ('orddate',
 
 /* Check that the delivery name field is 40 characters or less long */
 	function VerifyDeliverTo($delverto, $i, $Errors) {
-		if (strlen($delverto)>40) {
+		if (mb_strlen($delverto)>40) {
 			$Errors[$i] = InvalidDeliverTo;
 		}
 		return $Errors;
@@ -209,7 +209,7 @@ $SOH_DateFields = array ('orddate',
 
 /* Check that the narrative field is 256 characters or less long */
 	function VerifyNarrative($narrative, $i, $Errors) {
-		if (strlen($narrative)>256) {
+		if (mb_strlen($narrative)>256) {
 			$Errors[$i] = InvalidNarrative;
 		}
 		return $Errors;
@@ -217,7 +217,7 @@ $SOH_DateFields = array ('orddate',
 
 /* Check that the poline field is 10 characters or less long */
 	function VerifyPOLine($poline, $i, $Errors) {
-		if (strlen($poline)>10) {
+		if (mb_strlen($poline)>10) {
 			$Errors[$i] = InvalidPOLine;
 		}
 		return $Errors;
@@ -344,8 +344,8 @@ $SOH_DateFields = array ('orddate',
 			    $value = FormatDateforSQL($value);	// Fix dates
 			$FieldValues.='"'.$value.'", ';
 		}
-		$sql = "INSERT INTO salesorders (".substr($FieldNames,0,-2).")
-					VALUES ('" . substr($FieldValues,0,-2). "')";
+		$sql = "INSERT INTO salesorders (".mb_substr($FieldNames,0,-2).")
+					VALUES ('" . mb_substr($FieldValues,0,-2). "')";
 		if (sizeof($Errors)==0) {
 			$result = api_DB_Query($sql, $db);
 			if (DB_error_no($db) != 0) {
@@ -440,7 +440,7 @@ $SOH_DateFields = array ('orddate',
 			    $value = FormatDateforSQL($value);	// Fix dates
 			$sql .= $key.'="'.$value.'", ';
 		}
-		$sql = substr($sql,0,-2). " WHERE orderno='" . $OrderHeader['orderno']. "'";
+		$sql = mb_substr($sql,0,-2). " WHERE orderno='" . $OrderHeader['orderno']. "'";
 		if (sizeof($Errors)==0) {
 			$result = api_DB_Query($sql, $db);
 			echo DB_error_no($db);
@@ -499,8 +499,8 @@ $SOH_DateFields = array ('orddate',
 			    $value = FormatDateForSQL($value);
 			$FieldValues.='"'.$value.'", ';
 		}
-		$sql = "INSERT INTO salesorderdetails (" . substr($FieldNames,0,-2) . ")
-			VALUES ('" . substr($FieldValues,0,-2) . "')";
+		$sql = "INSERT INTO salesorderdetails (" . mb_substr($FieldNames,0,-2) . ")
+			VALUES ('" . mb_substr($FieldValues,0,-2) . "')";
 		if (sizeof($Errors)==0) {
 			$result = api_DB_Query($sql, $db);
 			if (DB_error_no($db) != 0) {
@@ -556,9 +556,9 @@ $SOH_DateFields = array ('orddate',
 			    $value = FormatDateForSQL($value);
 			$sql .= $key.'="'.$value.'", ';
 		}
-		//$sql = substr($sql,0,-2).' WHERE orderno="'.$OrderLine['orderno'].'" and
+		//$sql = mb_substr($sql,0,-2).' WHERE orderno="'.$OrderLine['orderno'].'" and
 			//	" orderlineno='.$OrderLine['orderlineno'];
-		$sql = substr($sql,0,-2)." WHERE orderno='" . $OrderLine['orderno']."' AND stkcode='" . $OrderLine['stkcode']."'";
+		$sql = mb_substr($sql,0,-2)." WHERE orderno='" . $OrderLine['orderno']."' AND stkcode='" . $OrderLine['stkcode']."'";
 				//echo $sql;
 				//exit;
 		if (sizeof($Errors)==0) {

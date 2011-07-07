@@ -16,7 +16,7 @@ Also updates the transaction number
 
 */
 
-	DB_query('LOCK TABLES systypes WRITE',$db);
+	DB_query("LOCK TABLES systypes WRITE",$db);
 
 	$SQL = "SELECT typeno FROM systypes WHERE typeid = '" . $TransType . "'";
 

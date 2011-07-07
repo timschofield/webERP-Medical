@@ -11,9 +11,9 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/m
 	. '" alt="" />' . ' ' . $title . '</p>';
 
 if (isset($_POST['SelectedTab'])){
-	$SelectedTab = strtoupper($_POST['SelectedTab']);
+	$SelectedTab = mb_strtoupper($_POST['SelectedTab']);
 } elseif (isset($_GET['SelectedTab'])){
-	$SelectedTab = strtoupper($_GET['SelectedTab']);
+	$SelectedTab = mb_strtoupper($_GET['SelectedTab']);
 }
 
 if (isset($Errors)) {
@@ -38,15 +38,15 @@ if (isset($_POST['submit'])) {
 		prnMsg('<br />' . _('The Tabs type code cannot be an empty string or spaces'),'error');
 		$Errors[$i] = 'TypeTabCode';
 		$i++;
-	} elseif (strlen($_POST['TypeTabCode']) >20) {
+	} elseif (mb_strlen($_POST['TypeTabCode']) >20) {
 		$InputError = 1;
 		echo prnMsg(_('The tab code must be twenty characters or less long'),'error');
 		$Errors[$i] = 'TypeTabCode';
 		$i++;
-	}elseif (ContainsIllegalCharacters($_POST['TypeTabCode']) OR strpos($_POST['TypeTabCode'],' ')>0) {
+	}elseif (ContainsIllegalCharacters($_POST['TypeTabCode']) OR mb_strpos($_POST['TypeTabCode'],' ')>0) {
 		$InputError = 1;
 		prnMsg(_('The petty cash tab type code cannot contain any of the illegal characters'),'error');
-	}elseif (strlen($_POST['TypeTabDescription']) >50) {
+	}elseif (mb_strlen($_POST['TypeTabDescription']) >50) {
 		$InputError = 1;
 		echo prnMsg(_('The tab code must be Fifty characters or less long'),'error');
 		$Errors[$i] = 'TypeTabCode';

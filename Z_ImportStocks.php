@@ -67,8 +67,8 @@ if ($_FILES['userfile']['name']) { //start file processing
 	//test header row field name and sequence
 	$head = 0;
 	foreach ($headRow as $headField) {
-		if ( strtoupper($headField) != strtoupper($headers[$head]) ) {
-			prnMsg (_('File contains incorrect headers ('. strtoupper($headField). ' != '. strtoupper($header[$head]). '. Try downloading a new template.'),'error');
+		if ( mb_strtoupper($headField) != mb_strtoupper($headers[$head]) ) {
+			prnMsg (_('File contains incorrect headers ('. mb_strtoupper($headField). ' != '. mb_strtoupper($header[$head]). '. Try downloading a new template.'),'error');
 			fclose($handle);
 			include('includes/footer.inc');
 			exit;
@@ -93,7 +93,7 @@ if ($_FILES['userfile']['name']) { //start file processing
 		}
 
 		// cleanup the data (csv files often import with empty strings and such)
-		$StockID = strtoupper($myrow[0]);
+		$StockID = mb_strtoupper($myrow[0]);
 		foreach ($myrow as &$value) {
 			$value = trim($value);
 		}
@@ -108,15 +108,15 @@ if ($_FILES['userfile']['name']) { //start file processing
 		}
 
 		//next validate inputs are sensible
-		if (!$myrow[1] or strlen($myrow[1]) > 50 OR strlen($myrow[1])==0) {
+		if (!$myrow[1] or mb_strlen($myrow[1]) > 50 OR mb_strlen($myrow[1])==0) {
 			$InputError = 1;
 			prnMsg (_('The stock item description must be entered and be fifty characters or less long') . '. ' . _('It cannot be a zero length string either') . ' - ' . _('a description is required'). ' ("'. implode('","',$myrow). $stockid. '") ','error');
 		}
-		if (strlen($myrow[2])==0) {
+		if (mb_strlen($myrow[2])==0) {
 			$InputError = 1;
 			prnMsg (_('The stock item description cannot be a zero length string') . ' - ' . _('a long description is required'),'error');
 		}
-		if (strlen($StockID) ==0) {
+		if (mb_strlen($StockID) ==0) {
 			$InputError = 1;
 			prnMsg (_('The Stock Item code cannot be empty'),'error');
 		}
@@ -125,11 +125,11 @@ if ($_FILES['userfile']['name']) { //start file processing
 			prnMsg(_('The stock item code cannot contain any of the following characters') . " ' & + \" \\ " . _('or a space'). " (". $StockID. ")",'error');
 			$StockID='';
 		}
-		if (strlen($myrow[4]) >20) {
+		if (mb_strlen($myrow[4]) >20) {
 			$InputError = 1;
 			prnMsg(_('The unit of measure must be 20 characters or less long'),'error');
 		}
-		if (strlen($myrow[13]) >20) {
+		if (mb_strlen($myrow[13]) >20) {
 			$InputError = 1;
 			prnMsg(_('The barcode must be 20 characters or less long'),'error');
 		}

@@ -13,7 +13,7 @@ if (!file_exists($PathPrefix . 'config.php')){
 	header('Location:' . $rootpath . '/install/index.php');
 }
 include($PathPrefix . 'config.php');
-$DBVersion=89;
+$DBVersion=92;
 if (isset($SessionSavePath)){
 	session_save_path($SessionSavePath);
 }
@@ -280,10 +280,7 @@ if (!isset($AllowAnyone)){
 					<tr><td class="menu_group_item">';
 		echo '<b><font style="size:+1; text-align:center;">' . _('The security settings on your account do not permit you to access this function') . '</font></b>';
 
-		echo '</td>
-					</tr>
-					</table>
-					</td>';
+		echo '</td></tr></table></td></tr>';
 
 		include($PathPrefix . 'includes/footer.inc');
 		exit;

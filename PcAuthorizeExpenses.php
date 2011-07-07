@@ -1,17 +1,15 @@
 <?php
 /* $Revision: 1.0 $ */
 
-//$PageSecurity = 6;
-
 include('includes/session.inc');
 $title = _('Authorization of Petty Cash Expenses');
 include('includes/header.inc');
 include('includes/SQL_CommonFunctions.inc');
 
 if (isset($_POST['SelectedTabs'])){
-	$SelectedTabs = strtoupper($_POST['SelectedTabs']);
+	$SelectedTabs = mb_strtoupper($_POST['SelectedTabs']);
 } elseif (isset($_GET['SelectedTabs'])){
-	$SelectedTabs = strtoupper($_GET['SelectedTabs']);
+	$SelectedTabs = mb_strtoupper($_GET['SelectedTabs']);
 }
 
 if (isset($_POST['SelectedIndex'])){
@@ -73,12 +71,12 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 	if(!isset ($Days)){
 		$Days=30;
 	}
-	echo '<input type=hidden name="SelectedTabs" value="' . $SelectedTabs . '">';
+	echo '<input type="hidden" name="SelectedTabs" value="' . $SelectedTabs . '">';
 	echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Select another tab') . '</a></div></p>';
-	echo '<br /><table class=selection>';
-	echo '<tr><th colspan=7>' . _('Detail Of Movement For Last ') .': ';
-	echo '<input type=text class=number name="Days" value="' . $Days . '" MAXLENGTH=3 size=4> Days ';
-	echo '<input type=submit name="Go" value="' . _('Go') . '"></tr></th>';
+	echo '<br /><table class="selection">';
+	echo '<tr><th colspan="7">' . _('Detail Of Movement For Last ') .': ';
+	echo '<input type="text" class="number" name="Days" value="' . $Days . '" maxlength=3 size=4> Days ';
+	echo '<input type="submit" name="Go" value="' . _('Go') . '"></tr></th>';
 	echo '</form>';
 
 	$sql = "SELECT pcashdetails.counterindex,
@@ -105,14 +103,14 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 	$result = DB_query($sql,$db);
 
 	echo '<tr>
-		<th>' . _('Date') . '</th>
-		<th>' . _('Expense Code') . '</th>
-		<th>' . _('Amount') . '</th>
-		<th>' . _('Posted') . '</th>
-		<th>' . _('Notes') . '</th>
-		<th>' . _('Receipt') . '</th>
-		<th>' . _('Authorized') . '</th>
-	</tr>';
+			<th>' . _('Date') . '</th>
+			<th>' . _('Expense Code') . '</th>
+			<th>' . _('Amount') . '</th>
+			<th>' . _('Posted') . '</th>
+			<th>' . _('Notes') . '</th>
+			<th>' . _('Receipt') . '</th>
+			<th>' . _('Authorized') . '</th>
+		</tr>';
 
 	$k=0; //row colour counter
 	echo '<form action="PcAuthorizeExpenses.php" method="POST" name="'._('update').'">';
@@ -151,7 +149,7 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 			$typeno = GetNextTransNo($type,$db);
 
 			//build narrative
-			$narrative= "PettyCash - ".$myrow['tabcode']." - ".$myrow['codeexpense']." - ".$myrow['notes']." - ".$myrow['receipt']."";
+			$narrative= _('PettyCash') . ' - '.$myrow['tabcode'].' - '.$myrow['codeexpense'].' - '.$myrow['notes'].' - '.$myrow['receipt'];
 			//insert to gltrans
 			DB_Txn_Begin($db);
 
@@ -285,9 +283,9 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 			}
 		}
 
-		echo '<input type=hidden name="SelectedIndex" value="' . $myrow['counterindex']. '">';
-		echo '<input type=hidden name="SelectedTabs" value="' . $SelectedTabs . '">';
-		echo '<input type=hidden name="Days" value="' .$Days. '">';
+		echo '<input type="hidden" name="SelectedIndex" value="' . $myrow['counterindex']. '">';
+		echo '<input type="hidden" name="SelectedTabs" value="' . $SelectedTabs . '">';
+		echo '<input type="hidden" name="Days" value="' .$Days. '">';
 		echo '</tr>';
 
 
@@ -305,21 +303,21 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 	}
 
 	echo '<tr><td colspan=2 class="number">' . _('Current balance') . ':</td>
-				<td class=number>'.number_format($Amount['0'],2).'</td></tr>';
+				<td class="number">'.number_format($Amount['0'],2).'</td></tr>';
 
 
 
 	// Do the postings
 	include ('includes/GLPostings.inc');
 
-	echo'</table><br /><div class="centre"><input type=submit name=submit value=' . _('Update') . '></div></form>';
+	echo'</table><br /><div class="centre"><input type="submit" name=submit value=' . _('Update') . '></div></form>';
 
 } else { /*The option to submit was not hit so display form */
 
 
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<br /><table class=selection>'; //Main table
+	echo '<br /><table class="selection">'; //Main table
 
 	echo '<tr><td>' . _('Authorize expenses to Petty Cash Tab') . ':</td><td><select name="SelectedTabs">';
 
@@ -343,7 +341,7 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 
 	echo '</td></tr></table>'; // close main table
 
-	echo '<br /><div class="centre"><input type=submit name=process value="' . _('Accept') . '"><input type=submit name=Cancel value="' . _('Cancel') . '"></div>';
+	echo '<br /><div class="centre"><input type="submit" name=process value="' . _('Accept') . '"><input type="submit" name=Cancel value="' . _('Cancel') . '"></div>';
 
 	echo '</form>';
 } /*end of else not submit */

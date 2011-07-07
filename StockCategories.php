@@ -13,9 +13,9 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/s
 	_('Inventory Adjustment') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (isset($_GET['SelectedCategory'])){
-	$SelectedCategory = strtoupper($_GET['SelectedCategory']);
+	$SelectedCategory = mb_strtoupper($_GET['SelectedCategory']);
 } else if (isset($_POST['SelectedCategory'])){
-	$SelectedCategory = strtoupper($_POST['SelectedCategory']);
+	$SelectedCategory = mb_strtoupper($_POST['SelectedCategory']);
 }
 
 if (isset($_GET['DeleteProperty'])){
@@ -38,15 +38,15 @@ if (isset($_POST['submit'])) {
 
 	//first off validate inputs sensible
 
-	$_POST['CategoryID'] = strtoupper($_POST['CategoryID']);
+	$_POST['CategoryID'] = mb_strtoupper($_POST['CategoryID']);
 
-	if (strlen($_POST['CategoryID']) > 6) {
+	if (mb_strlen($_POST['CategoryID']) > 6) {
 		$InputError = 1;
 		prnMsg(_('The Inventory Category code must be six characters or less long'),'error');
-	} elseif (strlen($_POST['CategoryID'])==0) {
+	} elseif (mb_strlen($_POST['CategoryID'])==0) {
 		$InputError = 1;
 		prnMsg(_('The Inventory category code must be at least 1 character but less than six characters long'),'error');
-	} elseif (strlen($_POST['CategoryDescription']) >20) {
+	} elseif (mb_strlen($_POST['CategoryDescription']) >20) {
 		$InputError = 1;
 		prnMsg(_('The Sales category description must be twenty characters or less long'),'error');
 	} elseif ($_POST['StockType'] !='S'
@@ -100,7 +100,7 @@ if (isset($_POST['submit'])) {
         	} else {
         			$_POST['PropNumeric' .$i] =0;
         	}
-        	if ($_POST['PropID' .$i] =='NewProperty' AND strlen($_POST['PropLabel'.$i])>0){
+        	if ($_POST['PropID' .$i] =='NewProperty' AND mb_strlen($_POST['PropLabel'.$i])>0){
         		$sql = "INSERT INTO stockcatproperties (categoryid,
         												label,
         												controltype,

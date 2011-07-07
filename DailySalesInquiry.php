@@ -44,16 +44,16 @@ echo '</tr></table><br /><div class="centre"><input tabindex=4 type=submit name=
 echo '</form></div>';
 echo '<br />';
 /*Now get and display the sales data returned */
-if (strpos($EndDateSQL,'/')) {
+if (mb_strpos($EndDateSQL,'/')) {
 	$Date_Array = explode('/',$EndDateSQL);
-} elseif (strpos ($EndDateSQL,'-')) {
+} elseif (mb_strpos ($EndDateSQL,'-')) {
 	$Date_Array = explode('-',$EndDateSQL);
-} elseif (strpos ($EndDateSQL,'.')) {
+} elseif (mb_strpos ($EndDateSQL,'.')) {
 	$Date_Array = explode('.',$EndDateSQL);
 }
 
-if (strlen($Date_Array[2])>4) {
-	$Date_Array[2]= substr($Date_Array[2],0,2);
+if (mb_strlen($Date_Array[2])>4) {
+	$Date_Array[2]= mb_substr($Date_Array[2],0,2);
 }
 
 $StartDateSQL =  date('Y-m-d', mktime(0,0,0, (int)$Date_Array[1],1,(int)$Date_Array[0]));

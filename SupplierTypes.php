@@ -9,9 +9,9 @@ $title = _('Supplier Types') . ' / ' . _('Maintenance');
 include('includes/header.inc');
 
 if (isset($_POST['SelectedType'])){
-	$SelectedType = strtoupper($_POST['SelectedType']);
+	$SelectedType = mb_strtoupper($_POST['SelectedType']);
 } elseif (isset($_GET['SelectedType'])){
-	$SelectedType = strtoupper($_GET['SelectedType']);
+	$SelectedType = mb_strtoupper($_GET['SelectedType']);
 }
 
 if (isset($Errors)) {
@@ -34,14 +34,14 @@ if (isset($_POST['submit'])) {
 
 	//first off validate inputs sensible
 	$i=1;
-	if (strlen($_POST['typename']) >100) {
+	if (mb_strlen($_POST['typename']) >100) {
 		$InputError = 1;
 		echo prnMsg(_('The supplier type name description must be 100 characters or less long'),'error');
 		$Errors[$i] = 'SupplierType';
 		$i++;
 	}
 
-	if (strlen($_POST['typename'])==0) {
+	if (mb_strlen($_POST['typename'])==0) {
 		$InputError = 1;
 		echo prnMsg(_('The supplier type name description must contain at least one character'),'error');
 		$Errors[$i] = 'SupplierType';

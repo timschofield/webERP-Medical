@@ -354,7 +354,7 @@ class htmlMimeMail
 
 			for ($i=0; $i<count($html_images); $i++) {
 				if ($image = $this->getFile($images_dir.$html_images[$i])) {
-					$ext = substr($html_images[$i], strrpos($html_images[$i], '.') + 1);
+					$ext = mb_substr($html_images[$i], strrpos($html_images[$i], '.') + 1);
 					$content_type = $this->image_types[strtolower($ext)];
 					$this->addHtmlImage($image, basename($html_images[$i]), $content_type);
 				}
@@ -627,7 +627,7 @@ class htmlMimeMail
 	{
 		preg_match_all('/(\w*[\x80-\xFF]+\w*)/', $input, $matches);
 		foreach ($matches[1] as $value) {
-			$replacement = preg_replace('/([\x80-\xFF])/e', '"=" . strtoupper(dechex(ord("\1")))', $value);
+			$replacement = preg_replace('/([\x80-\xFF])/e', '"=" . mb_strtoupper(dechex(ord("\1")))', $value);
 			$input = str_replace($value, '=?' . $charset . '?Q?' . $replacement . '?=', $input);
 		}
 

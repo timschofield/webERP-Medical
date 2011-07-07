@@ -100,7 +100,7 @@ class TCPDFBarcode {
  	 * @return array
 	 */
 	public function setBarcode($code, $type) {
-		switch (strtoupper($type)) {
+		switch (mb_strtoupper($type)) {
 			case 'C39': { // CODE 39 - ANSI MH10.8M-1983 - USD-3 - 3 of 9.
 				$arrcode = $this->barcode_code39($code, false, false);
 				break;
@@ -280,7 +280,7 @@ class TCPDFBarcode {
 		$chr['%'] = '111212121';
 		$chr['*'] = '121121211';
 
-		$code = strtoupper($code);
+		$code = mb_strtoupper($code);
 		if ($extended) {
 			// extended mode
 			$code = $this->encode_code39_ext($code);
@@ -297,7 +297,7 @@ class TCPDFBarcode {
 
 		$bararray = array('code' => $code, 'maxw' => 0, 'maxh' => 1, 'bcode' => array());
 		$k = 0;
-		$clen = strlen($code);
+		$clen = mb_strlen($code);
 		for ($i = 0; $i < $clen; ++$i) {
 			$char = $code{$i};
 			if(!isset($chr[$char])) {
@@ -363,7 +363,7 @@ class TCPDFBarcode {
 			chr(120) => '+X', chr(121) => '+Y', chr(122) => '+Z', chr(123) => '%P',
 			chr(124) => '%Q', chr(125) => '%R', chr(126) => '%S', chr(127) => '%T');
 		$code_ext = '';
-		$clen = strlen($code);
+		$clen = mb_strlen($code);
 		for ($i = 0 ; $i < $clen; ++$i) {
 			if (ord($code{$i}) > 127) {
 				return false;
@@ -386,7 +386,7 @@ class TCPDFBarcode {
 			'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
 			'W', 'X', 'Y', 'Z', '-', '.', ' ', '$', '/', '+', '%');
 		$sum = 0;
-		$clen = strlen($code);
+		$clen = mb_strlen($code);
 		for ($i = 0 ; $i < $clen; ++$i) {
 			$k = array_keys($chars, $code{$i});
 			$sum += $k[0];
@@ -452,7 +452,7 @@ class TCPDFBarcode {
 		$chr[130] = '122211'; // (+)
 		$chr[131] = '312111'; // (%)
 		$chr['*'] = '111141';
-		$code = strtoupper($code);
+		$code = mb_strtoupper($code);
 		$encode = array(
 			chr(0) => chr(131).'U', chr(1) => chr(128).'A', chr(2) => chr(128).'B', chr(3) => chr(128).'C',
 			chr(4) => chr(128).'D', chr(5) => chr(128).'E', chr(6) => chr(128).'F', chr(7) => chr(128).'G',
@@ -487,7 +487,7 @@ class TCPDFBarcode {
 			chr(120) => chr(130).'X', chr(121) => chr(130).'Y', chr(122) => chr(130).'Z', chr(123) => chr(131).'P',
 			chr(124) => chr(131).'Q', chr(125) => chr(131).'R', chr(126) => chr(131).'S', chr(127) => chr(131).'T');
 		$code_ext = '';
-		$clen = strlen($code);
+		$clen = mb_strlen($code);
 		for ($i = 0 ; $i < $clen; ++$i) {
 			if (ord($code{$i}) > 127) {
 				return false;
@@ -500,7 +500,7 @@ class TCPDFBarcode {
 		$code = '*'.$code.'*';
 		$bararray = array('code' => $code, 'maxw' => 0, 'maxh' => 1, 'bcode' => array());
 		$k = 0;
-		$clen = strlen($code);
+		$clen = mb_strlen($code);
 		for ($i = 0; $i < $clen; ++$i) {
 			$char = $code{$i};
 			if(!isset($chr[$char])) {
@@ -539,7 +539,7 @@ class TCPDFBarcode {
 			'W', 'X', 'Y', 'Z', '-', '.', ' ', '$', '/', '+', '%');
 		// translate special characters
 		$code = strtr($code, chr(128).chr(129).chr(130).chr(131), '$/+%');
-		$len = strlen($code);
+		$len = mb_strlen($code);
 		// calculate check digit C
 		$p = 1;
 		$check = 0;
@@ -577,7 +577,7 @@ class TCPDFBarcode {
 	 * @access protected
 	 */
 	protected function checksum_s25($code) {
-		$len = strlen($code);
+		$len = mb_strlen($code);
 		$sum = 0;
 		for ($i = 0; $i < $len; $i+=2) {
 			$sum += $code{$i};
@@ -621,7 +621,7 @@ class TCPDFBarcode {
 		$chr['F'] = '110110110110';
 		if ($checksum) {
 			// add checksum
-			$clen = strlen($code);
+			$clen = mb_strlen($code);
 			$p = 2;
 			$check = 0;
 			for ($i = ($clen - 1); $i >= 0; --$i) {
@@ -638,7 +638,7 @@ class TCPDFBarcode {
 			$code .= $check;
 		}
 		$seq = '110'; // left guard
-		$clen = strlen($code);
+		$clen = mb_strlen($code);
 		for ($i = 0; $i < $clen; ++$i) {
 			$digit = $code{$i};
 			if (!isset($chr[$digit])) {
@@ -676,12 +676,12 @@ class TCPDFBarcode {
 			// add checksum
 			$code .= $this->checksum_s25($code);
 		}
-		if((strlen($code) % 2) != 0) {
+		if((mb_strlen($code) % 2) != 0) {
 			// add leading zero if code-length is odd
 			$code = '0'.$code;
 		}
 		$seq = '11011010';
-		$clen = strlen($code);
+		$clen = mb_strlen($code);
 		for ($i = 0; $i < $clen; ++$i) {
 			$digit = $code{$i};
 			if (!isset($chr[$digit])) {
@@ -703,7 +703,7 @@ class TCPDFBarcode {
 	 * @access protected
 	 */
 	protected function binseq_to_array($seq, $bararray) {
-		$len = strlen($seq);
+		$len = mb_strlen($seq);
 		$w = 0;
 		$k = 0;
 		for ($i = 0; $i < $len; ++$i) {
@@ -749,7 +749,7 @@ class TCPDFBarcode {
 			// add checksum
 			$code .= $this->checksum_s25($code);
 		}
-		if((strlen($code) % 2) != 0) {
+		if((mb_strlen($code) % 2) != 0) {
 			// add leading zero if code-length is odd
 			$code = '0'.$code;
 		}
@@ -758,7 +758,7 @@ class TCPDFBarcode {
 
 		$bararray = array('code' => $code, 'maxw' => 0, 'maxh' => 1, 'bcode' => array());
 		$k = 0;
-		$clen = strlen($code);
+		$clen = mb_strlen($code);
 		for ($i = 0; $i < $clen; $i = ($i + 2)) {
 			$char_bar = $code{$i};
 			$char_space = $code{$i+1};
@@ -768,11 +768,11 @@ class TCPDFBarcode {
 			}
 			// create a bar-space sequence
 			$seq = '';
-			$chrlen = strlen($chr[$char_bar]);
+			$chrlen = mb_strlen($chr[$char_bar]);
 			for ($s = 0; $s < $chrlen; $s++){
 				$seq .= $chr[$char_bar]{$s} . $chr[$char_space]{$s};
 			}
-			$seqlen = strlen($seq);
+			$seqlen = mb_strlen($seq);
 			for ($j = 0; $j < $seqlen; ++$j) {
 				if (($j % 2) == 0) {
 					$t = true; // bar
@@ -908,7 +908,7 @@ class TCPDFBarcode {
 			'200000'  /* END */
 		);
 		$keys = '';
-		switch(strtoupper($type)) {
+		switch(mb_strtoupper($type)) {
 			case 'A': {
 				$startid = 103;
 				$keys = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_';
@@ -925,7 +925,7 @@ class TCPDFBarcode {
 			case 'C': {
 				$startid = 105;
 				$keys = '';
-				if ((strlen($code) % 2) != 0) {
+				if ((mb_strlen($code) % 2) != 0) {
 					// The length of barcode value must be even ($code). You must pad the number with zeros
 					return false;
 				}
@@ -933,7 +933,7 @@ class TCPDFBarcode {
 					$keys .= chr($i);
 				}
 				$new_code = '';
-				$hclen = (strlen($code) / 2);
+				$hclen = (mb_strlen($code) / 2);
 				for ($i = 0; $i < $hclen; ++$i) {
 					$new_code .= chr(intval($code{(2 * $i)}.$code{(2 * $i + 1)}));
 				}
@@ -946,18 +946,18 @@ class TCPDFBarcode {
 		}
 		// calculate check character
 		$sum = $startid;
-		$clen = strlen($code);
+		$clen = mb_strlen($code);
 		for ($i = 0; $i < $clen; ++$i) {
-			$sum +=  (strpos($keys, $code{$i}) * ($i+1));
+			$sum +=  (mb_strpos($keys, $code{$i}) * ($i+1));
 		}
 		$check = ($sum % 103);
 		// add start, check and stop codes
 		$code = chr($startid).$code.chr($check).chr(106).chr(107);
 		$bararray = array('code' => $code, 'maxw' => 0, 'maxh' => 1, 'bcode' => array());
 		$k = 0;
-		$len = strlen($code);
+		$len = mb_strlen($code);
 		for ($i = 0; $i < $len; ++$i) {
-			$ck = strpos($keys, $code{$i});
+			$ck = mb_strpos($keys, $code{$i});
 			if (($i == 0) OR ($i > ($len-4))) {
 				$char_num = ord($code{$i});
 				$seq = $chr[$char_num];
@@ -1001,7 +1001,7 @@ class TCPDFBarcode {
 		$data_len = $len - 1;
 		//Padding
 		$code = str_pad($code, $data_len, '0', STR_PAD_LEFT);
-		$code_len = strlen($code);
+		$code_len = mb_strlen($code);
 		// calculate check digit
 		$sum_a = 0;
 		for ($i = 1; $i < $data_len; $i+=2) {
@@ -1035,23 +1035,23 @@ class TCPDFBarcode {
 		}
 		if ($upce) {
 			// convert UPC-A to UPC-E
-			$tmp = substr($code, 4, 3);
+			$tmp = mb_substr($code, 4, 3);
 			if (($tmp == '000') OR ($tmp == '100') OR ($tmp == '200')) {
 				// manufacturer code ends in 000, 100, or 200
-				$upce_code = substr($code, 2, 2).substr($code, 9, 3).substr($code, 4, 1);
+				$upce_code = mb_substr($code, 2, 2).mb_substr($code, 9, 3).mb_substr($code, 4, 1);
 			} else {
-				$tmp = substr($code, 5, 2);
+				$tmp = mb_substr($code, 5, 2);
 				if ($tmp == '00') {
 					// manufacturer code ends in 00
-					$upce_code = substr($code, 2, 3).substr($code, 10, 2).'3';
+					$upce_code = mb_substr($code, 2, 3).mb_substr($code, 10, 2).'3';
 				} else {
-					$tmp = substr($code, 6, 1);
+					$tmp = mb_substr($code, 6, 1);
 					if ($tmp == '0') {
 						// manufacturer code ends in 0
-						$upce_code = substr($code, 2, 4).substr($code, 11, 1).'4';
+						$upce_code = mb_substr($code, 2, 4).mb_substr($code, 11, 1).'4';
 					} else {
 						// manufacturer code does not end in zero
-						$upce_code = substr($code, 2, 5).substr($code, 11, 1);
+						$upce_code = mb_substr($code, 2, 5).mb_substr($code, 11, 1);
 					}
 				}
 			}
@@ -1157,7 +1157,7 @@ class TCPDFBarcode {
 			}
 			$seq .= '101'; // right guard bar
 		}
-		$clen = strlen($seq);
+		$clen = mb_strlen($seq);
 		$w = 0;
 		for ($i = 0; $i < $clen; ++$i) {
 			$w += 1;
@@ -1293,7 +1293,7 @@ class TCPDFBarcode {
 		$k = 0;
 		$code = str_replace('-', '', $code);
 		$code = str_replace(' ', '', $code);
-		$len = strlen($code);
+		$len = mb_strlen($code);
 		// calculate checksum
 		$sum = 0;
 		for ($i = 0; $i < $len; ++$i) {
@@ -1304,7 +1304,7 @@ class TCPDFBarcode {
 			$chkd = (10 - $chkd);
 		}
 		$code .= $chkd;
-		$len = strlen($code);
+		$len = mb_strlen($code);
 		// start bar
 		$bararray['bcode'][$k++] = array('t' => 1, 'w' => 1, 'h' => 2, 'p' => 0);
 		$bararray['bcode'][$k++] = array('t' => 0, 'w' => 1, 'h' => 2, 'p' => 0);
@@ -1378,8 +1378,8 @@ class TCPDFBarcode {
 			'Y' => array(2,1,4,3),
 			'Z' => array(2,2,3,3)
 		);
-		$code = strtoupper($code);
-		$len = strlen($code);
+		$code = mb_strtoupper($code);
+		$len = mb_strlen($code);
 		$bararray = array('code' => $code, 'maxw' => 0, 'maxh' => 3, 'bcode' => array());
 		if ($notkix) {
 			// table for checksum calculation (row,col)
@@ -1511,8 +1511,8 @@ class TCPDFBarcode {
 		$k = 0;
 		$w = 0;
 		$seq = '';
-		$code = 'A'.strtoupper($code).'A';
-		$len = strlen($code);
+		$code = 'A'.mb_strtoupper($code).'A';
+		$len = mb_strlen($code);
 		for ($i = 0; $i < $len; ++$i) {
 			if (!isset($chr[$code{$i}])) {
 				return false;
@@ -1560,7 +1560,7 @@ class TCPDFBarcode {
 		$k = 0;
 		$w = 0;
 		$seq = '';
-		$len = strlen($code);
+		$len = mb_strlen($code);
 		// calculate check digit C
 		$p = 1;
 		$check = 0;
@@ -1645,7 +1645,7 @@ class TCPDFBarcode {
 			}
 			$code /= 2;
 		}
-		$seq = substr($seq, 0, -2);
+		$seq = mb_substr($seq, 0, -2);
 		$seq = strrev($seq);
 		$bararray = array('code' => $code, 'maxw' => 0, 'maxh' => 1, 'bcode' => array());
 		return $this->binseq_to_array($seq, $bararray);
@@ -1683,7 +1683,7 @@ class TCPDFBarcode {
 		$seq = strrev($seq);
 		$k = 0;
 		$bararray = array('code' => $code, 'maxw' => 0, 'maxh' => 2, 'bcode' => array());
-		$len = strlen($seq);
+		$len = mb_strlen($seq);
 		for ($i = 0; $i < $len; ++$i) {
 			switch ($seq{$i}) {
 				case '1': {
@@ -1734,7 +1734,7 @@ class TCPDFBarcode {
 			$routing_code = '';
 		}
 		// Conversion of Routing Code
-		switch (strlen($routing_code)) {
+		switch (mb_strlen($routing_code)) {
 			case 0: {
 				$binary_code = 0;
 				break;
@@ -1760,20 +1760,20 @@ class TCPDFBarcode {
 		$binary_code = bcadd($binary_code, $tracking_number{0});
 		$binary_code = bcmul($binary_code, 5);
 		$binary_code = bcadd($binary_code, $tracking_number{1});
-		$binary_code .= substr($tracking_number, 2, 18);
+		$binary_code .= mb_substr($tracking_number, 2, 18);
 		// convert to hexadecimal
 		$binary_code = $this->dec_to_hex($binary_code);
 		// pad to get 13 bytes
 		$binary_code = str_pad($binary_code, 26, '0', STR_PAD_LEFT);
 		// convert string to array of bytes
 		$binary_code_arr = chunk_split($binary_code, 2, "\r");
-		$binary_code_arr = substr($binary_code_arr, 0, -1);
+		$binary_code_arr = mb_substr($binary_code_arr, 0, -1);
 		$binary_code_arr = explode("\r", $binary_code_arr);
 		// calculate frame check sequence
 		$fcs = $this->imb_crc11fcs($binary_code_arr);
 		// exclude first 2 bits from first byte
 		$first_byte = sprintf('%2s', dechex((hexdec($binary_code_arr[0]) << 2) >> 2));
-		$binary_code_102bit = $first_byte.substr($binary_code, 2);
+		$binary_code_102bit = $first_byte.mb_substr($binary_code, 2);
 		// convert binary data to codewords
 		$codewords = array();
 		$data = $this->hex_to_dec($binary_code_102bit);
@@ -1855,7 +1855,7 @@ class TCPDFBarcode {
 			if($number == 0) {
 				array_push($hex, '0');
 			} else {
-				array_push($hex, strtoupper(dechex(bcmod($number, '16'))));
+				array_push($hex, mb_strtoupper(dechex(bcmod($number, '16'))));
 				$number = bcdiv($number, '16', 0);
 			}
 		}
@@ -1872,7 +1872,7 @@ class TCPDFBarcode {
 	public function hex_to_dec($hex) {
 		$dec = 0;
 		$bitval = 1;
-		$len = strlen($hex);
+		$len = mb_strlen($hex);
 		for($pos = ($len - 1); $pos >= 0; --$pos) {
 			$dec = bcadd($dec, bcmul(hexdec($hex{$pos}), $bitval));
 			$bitval = bcmul($bitval, 16);

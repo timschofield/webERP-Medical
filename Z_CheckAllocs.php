@@ -2,8 +2,6 @@
 /* $Id$*/
 /*This page adds the total of allocation records and compares this to the recorded allocation total in DebtorTrans table */
 
-//$PageSecurity = 2;
-
 include('includes/session.inc');
 $title = _('Customer Allocations != DebtorTrans.Alloc');
 include('includes/header.inc');
@@ -53,7 +51,7 @@ while ($myrow = DB_fetch_array($result)){
 	$ErrMsg = _('The customer transactions for the selected criteria could not be retrieved because');
 	$TransResult = DB_query($sql,$db,$ErrMsg);
 
-	echo '<table cellpadding=2 BORDER=2>';
+	echo '<table class="selection">';
 
 	$tableheader = '<tr>
 				<th>' . _('Type') . '</th>
@@ -106,7 +104,7 @@ while ($myrow = DB_fetch_array($result)){
 		$AllocsTotal +=$myrow1['amt'];
 	}
 	//end of while loop
-	echo '<tr><td colspan = 6 class=number>' . number_format($AllocsTotal,2) . '</td></tr>';
+	echo '<tr><td colspan="6" class="number">' . number_format($AllocsTotal,2) . '</td></tr>';
 	echo '</table><hr>';
 }
 

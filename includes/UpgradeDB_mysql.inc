@@ -289,7 +289,7 @@ function InsertRecord($Table, $CheckFields, $CheckValues, $Fields, $Values, $db)
 		for ($i=0;$i<sizeOf($CheckFields);$i++) {
 			$sql = $sql.$CheckFields[$i]."='".$CheckValues[$i]."' AND ";
 		}
-		$sql=substr($sql, 0, strlen($sql)-5);
+		$sql=mb_substr($sql, 0, mb_strlen($sql)-5);
 		$result=DB_query($sql, $db);
 	}
 	if (DB_num_rows($result)==0 or isset($SQLFile)) {
@@ -297,11 +297,11 @@ function InsertRecord($Table, $CheckFields, $CheckValues, $Fields, $Values, $db)
 		for ($i=0;$i<sizeOf($Fields);$i++) {
 			$sql = $sql.$Fields[$i].",";
 		}
-		$sql=substr($sql, 0, strlen($sql)-1).") VALUES (";
+		$sql=mb_substr($sql, 0, mb_strlen($sql)-1).") VALUES (";
 		for ($i=0;$i<sizeOf($Values);$i++) {
 			$sql = $sql."'".$Values[$i]."',";
 		}
-		$sql=substr($sql, 0, strlen($sql)-1).")";
+		$sql=mb_substr($sql, 0, mb_strlen($sql)-1).")";
 		$response=executeSQL($sql, $db);
 		if ($response==0) {
 			OutputResult( _('The record has been inserted') , 'success');
@@ -370,16 +370,11 @@ function OutputResult($msg, $status) {
 	if ($status=='error') {
 		$_SESSION['Updates']['Errors']++;
 		$_SESSION['Updates']['Messages'][]=$msg;
-//		echo '<td style="background-color: #fddbdb;color: red;">';
 	} else if ($status=='success') {
 		$_SESSION['Updates']['Successes']++;
-//		echo '<td style="background-color: #b9ecb4;color: #006400;">';
 	} else {
 		$_SESSION['Updates']['Warnings']++;
-//		echo '<td style="background-color: #c7ccf6;color: navy;">';
 	}
-//	echo $msg;
-//	echo '</td>';
 }
 
 

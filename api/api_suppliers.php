@@ -4,7 +4,7 @@
 /* Verify that the supplier number is valid, and does not already
    exist.*/
 	function VerifySupplierNo($SupplierNumber, $i, $Errors, $db) {
-		if ((strlen($SupplierNumber)<1) or (strlen($SupplierNumber)>10)) {
+		if ((mb_strlen($SupplierNumber)<1) or (mb_strlen($SupplierNumber)>10)) {
 			$Errors[$i] = IncorrectDebtorNumberLength;
 		}
 		$Searchsql = "SELECT count(supplierid)
@@ -21,7 +21,7 @@
 /* Verify that the supplier number is valid, and already
    exists.*/
 	function VerifySupplierNoExists($SupplierNumber, $i, $Errors, $db) {
-		if ((strlen($SupplierNumber)<1) or (strlen($SupplierNumber)>10)) {
+		if ((mb_strlen($SupplierNumber)<1) or (mb_strlen($SupplierNumber)>10)) {
 			$Errors[$i] = IncorrectDebtorNumberLength;
 		}
 		$Searchsql = "SELECT count(supplierid)
@@ -37,7 +37,7 @@
 
 /* Check that the name exists and is 40 characters or less long */
 	function VerifySupplierName($SupplierName, $i, $Errors) {
-		if ((strlen($SupplierName)<1) or (strlen($SupplierName)>40)) {
+		if ((mb_strlen($SupplierName)<1) or (mb_strlen($SupplierName)>40)) {
 			$Errors[$i] = IncorrectSupplierNameLength;
 		}
 		return $Errors;
@@ -80,21 +80,21 @@
 	}
 
 	function VerifyBankAccount($BankAccount, $i, $Errors) {
-		if (strlen($BankAccount)>30) {
+		if (mb_strlen($BankAccount)>30) {
 			$Errors[$i] = InvalidBankAccount;
 		}
 		return $Errors;
 	}
 
 	function VerifyBankRef($BankRef, $i, $Errors) {
-		if (strlen($BankRef)>12) {
+		if (mb_strlen($BankRef)>12) {
 			$Errors[$i] = InvalidBankReference;
 		}
 		return $Errors;
 	}
 
 	function VerifyBankPartics($BankPartics, $i, $Errors) {
-		if (strlen($BankPartics)>12) {
+		if (mb_strlen($BankPartics)>12) {
 			$Errors[$i] = InvalidBankPartics;
 		}
 		return $Errors;
@@ -203,8 +203,8 @@
 			$FieldNames.=$key.', ';
 			$FieldValues.='"'.$value.'", ';
 		}
-		$sql = "INSERT INTO suppliers (".substr($FieldNames,0,-2).") ".
-		  "VALUES (".substr($FieldValues,0,-2).") ";
+		$sql = "INSERT INTO suppliers (".mb_substr($FieldNames,0,-2).") ".
+		  "VALUES (".mb_substr($FieldValues,0,-2).") ";
 		if (sizeof($Errors)==0) {
 			$result = DB_Query($sql, $db);
 			if (DB_error_no($db) != 0) {
@@ -292,7 +292,7 @@
 		foreach ($SupplierDetails as $key => $value) {
 			$sql .= $key.'="'.$value.'", ';
 		}
-		$sql = substr($sql,0,-2)." WHERE supplierid='".$SupplierDetails['supplierid']."'";
+		$sql = mb_substr($sql,0,-2)." WHERE supplierid='".$SupplierDetails['supplierid']."'";
 		if (sizeof($Errors)==0) {
 			$result = DB_Query($sql, $db);
 			echo DB_error_no($db);

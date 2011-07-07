@@ -2,8 +2,6 @@
 
 /* $Id$*/
 
-//$PageSecurity=15;
-
 include('includes/session.inc');
 $title=_('Apply Current Cost to Sales Analysis');
 include('includes/header.inc');
@@ -16,7 +14,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 $SQL = "SELECT MonthName(lastdate_in_period) AS mnth,
 		YEAR(lastdate_in_period) AS yr,
 		periodno
-	FROM periods";
+		FROM periods";
 echo '<br /><div class="centre">' . _('Select the Period to update the costs for') . ':<select name="PeriodNo">';
 $result = DB_query($SQL,$db);
 

@@ -19,26 +19,26 @@ if (!isset($_POST['ToDate'])){
 }
 
 if (isset($_POST['PartNumber'])){
-	$PartNumber = trim(strtoupper($_POST['PartNumber']));
+	$PartNumber = trim(mb_strtoupper($_POST['PartNumber']));
 } elseif (isset($_GET['PartNumber'])){
-	$PartNumber = trim(strtoupper($_GET['PartNumber']));
+	$PartNumber = trim(mb_strtoupper($_GET['PartNumber']));
 }
 
 # Part Number operator - either LIKE or =
 $PartNumberOp = $_POST['PartNumberOp'];
 
 if (isset($_POST['DebtorNo'])){
-	$DebtorNo = trim(strtoupper($_POST['DebtorNo']));
+	$DebtorNo = trim(mb_strtoupper($_POST['DebtorNo']));
 } elseif (isset($_GET['DebtorNo'])){
-	$DebtorNo = trim(strtoupper($_GET['DebtorNo']));
+	$DebtorNo = trim(mb_strtoupper($_GET['DebtorNo']));
 }
 
 $DebtorNoOp = $_POST['DebtorNoOp'];
 
 if (isset($_POST['DebtorName'])){
-	$DebtorName = trim(strtoupper($_POST['DebtorName']));
+	$DebtorName = trim(mb_strtoupper($_POST['DebtorName']));
 } elseif (isset($_GET['DebtorName'])){
-	$DebtorName = trim(strtoupper($_GET['DebtorName']));
+	$DebtorName = trim(mb_strtoupper($_GET['DebtorName']));
 }
 
 $DebtorNameOp = $_POST['DebtorNameOp'];
@@ -99,12 +99,12 @@ function submit(&$db,$PartNumber,$PartNumberOp,$DebtorNo,$DebtorNoOp,$DebtorName
 	# Add more to WHERE statement, if user entered something for the part number,debtorno, name
 	// Variables that end with Op - meaning operator - are either = or LIKE
 	$wherepart = ' ';
-	if (strlen($PartNumber) > 0 && $PartNumberOp == 'LIKE') {
+	if (mb_strlen($PartNumber) > 0 && $PartNumberOp == 'LIKE') {
 	    $PartNumber = $PartNumber . '%';
 	} else {
 	    $PartNumberOp = '=';
 	}
-	if (strlen($PartNumber) > 0) {
+	if (mb_strlen($PartNumber) > 0) {
 	    $wherepart = " AND salesorderdetails.stkcode " . $PartNumberOp . " '" . $PartNumber . "'  ";
 	}
 
@@ -114,20 +114,20 @@ function submit(&$db,$PartNumber,$PartNumberOp,$DebtorNo,$DebtorNoOp,$DebtorName
 	} else {
 	    $DebtorNoOp = '=';
 	}
-	if (strlen($DebtorNo) > 0) {
+	if (mb_strlen($DebtorNo) > 0) {
 	    $wheredebtorno = " AND salesorders.debtorno " . $DebtorNoOp . " '" . $DebtorNo . "'  ";
 	}
 
 	$wheredebtorname = ' ';
-	if (strlen($DebtorName) > 0 && $DebtorNameOp == 'LIKE') {
+	if (mb_strlen($DebtorName) > 0 && $DebtorNameOp == 'LIKE') {
 	    $DebtorName = $DebtorName . '%';
 	} else {
 	    $DebtorNameOp = '=';
 	}
-	if (strlen($DebtorName) > 0) {
+	if (mb_strlen($DebtorName) > 0) {
 	    $wheredebtorname = " AND debtorsmaster.name " . $DebtorNameOp . " '" . $DebtorName . "'  ";
 	}
-	if (strlen($_POST['OrderNo']) > 0) {
+	if (mb_strlen($_POST['OrderNo']) > 0) {
 	    $whereorderno = " AND salesorderdetails.orderno = " . " '" . $_POST['OrderNo'] . "'  ";
 	}
 
@@ -764,13 +764,13 @@ function submit(&$db,$PartNumber,$PartNumberOp,$DebtorNo,$DebtorNoOp,$DebtorName
 		}
 		echo '  ' . _('Date Type') . ' - ' . $_POST['DateType'] . '<br/>';
 		echo '  ' . _('Date Range') . ' - ' . $_POST['FromDate'] . _(' To ') .  $_POST['ToDate'] . '<br/>';
-		if (strlen(trim($PartNumber)) > 0) {
+		if (mb_strlen(trim($PartNumber)) > 0) {
 			echo '  ' . _('Part Number') . ' - ' . $_POST['PartNumberOp'] . ' ' . $_POST['PartNumber'] . '<br/>';
 		}
-		if (strlen(trim($_POST['DebtorNo'])) > 0) {
+		if (mb_strlen(trim($_POST['DebtorNo'])) > 0) {
 			echo '  ' . _('Customer Number') . ' - ' . $_POST['DebtorNoOp'] . ' ' . $_POST['DebtorNo'] . '<br/>';
 		}
-		if (strlen(trim($_POST['DebtorName'])) > 0) {
+		if (mb_strlen(trim($_POST['DebtorName'])) > 0) {
 			echo '  ' . _('Customer Name') . ' - ' . $_POST['DebtorNameOp'] . ' ' . $_POST['DebtorName'] . '<br/>';
 		}
 		echo '  ' . _('Line Item Status') . '  - ' . $_POST['LineStatus'] . '<br/>';

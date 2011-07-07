@@ -229,7 +229,7 @@ if (isset($_POST['PrintPDF'])) {
 	}
     /* UldisN
 	$pdfcode = $pdf->output();
-	$len = strlen($pdfcode);
+	$len = mb_strlen($pdfcode);
 
 	if ($len<=20){
     */
@@ -314,7 +314,7 @@ function PrintHeader(&$pdf,&$YPos,&$PageNumber,$Page_Height,$Top_Margin,$Left_Ma
 	$YPos =$YPos - (2*$line_height);
 
 	$pdf->addTextWrap($Left_Margin+1,$YPos,40,$FontSize,_('Assembly:'),'',0);
-	$pdf->addTextWrap(85,$YPos,100,$FontSize,strtoupper($_POST['Part']),'',0);
+	$pdf->addTextWrap(85,$YPos,100,$FontSize,mb_strtoupper($_POST['Part']),'',0);
 	$pdf->addTextWrap(185,$YPos,150,$FontSize,$assemblydesc,'',0);
 	$YPos -=(2*$line_height);
 	$Xpos = $Left_Margin+5;

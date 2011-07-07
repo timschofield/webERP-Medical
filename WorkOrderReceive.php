@@ -1,25 +1,23 @@
 <?php
 /* $Id$*/
 
-//$PageSecurity = 11;
-
 include('includes/session.inc');
 $title = _('Receive Work Order');
 include('includes/header.inc');
 include('includes/SQL_CommonFunctions.inc');
 
-echo '<a href="'. $rootpath . '/SelectWorkOrder.php?' . SID . '">' . _('Back to Work Orders'). '</a><br />';
-echo '<a href="'. $rootpath . '/WorkOrderCosting.php?' . SID . '&WO=' .  $_REQUEST['WO'] . '">' . _('Back to Costing'). '</a><br />';
+echo '<a href="'. $rootpath . '/SelectWorkOrder.php">' . _('Back to Work Orders'). '</a><br />';
+echo '<a href="'. $rootpath . '/WorkOrderCosting.php?WO=' .  $_REQUEST['WO'] . '">' . _('Back to Costing'). '</a><br />';
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/group_add.png" title="' .
 	_('Search') . '" alt="" />' . ' ' . $title.'</p>';
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (!isset($_REQUEST['WO']) OR !isset($_REQUEST['StockID'])) {
 	/* This page can only be called with a purchase order number for invoicing*/
-	echo '<div class="centre"><a href="' . $rootpath . '/SelectWorkOrder.php?' . SID . '">'.
+	echo '<div class="centre"><a href="' . $rootpath . '/SelectWorkOrder.php">'.
 		_('Select a work order to receive').'</a></div>';
 	prnMsg(_('This page can only be opened if a work order has been selected. Please select a work order to receive first'),'info');
 	include ('includes/footer.inc');
@@ -80,14 +78,14 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 						$QuantityReceived ++;
 					}
 				} else { //not predefined serial numbers
-					if (strlen($_POST['SerialNo' . $i])>0){
+					if (mb_strlen($_POST['SerialNo' . $i])>0){
 						$QuantityReceived ++;
 					}
 				}
 			}
 		} else { //controlled but not serialised - just lot/batch control
 			for ($i=0;$i<15;$i++){
-				if (strlen($_POST['BatchRef' . $i])>0){
+				if (mb_strlen($_POST['BatchRef' . $i])>0){
 					$QuantityReceived += $_POST['Qty' .$i];
 				}
 			}
@@ -303,10 +301,10 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 			if ($AutoIssueCompRow['stocktype']!='L'){
 				//Need to get the previous locstock quantity for the component at the location where the WO manuafactured
 				$CompQOHResult = DB_query("SELECT locstock.quantity
-										FROM locstock
-										WHERE locstock.stockid='" . $AutoIssueCompRow['stockid'] . "'
-										AND loccode= '" . $WORow['loccode'] . "'",
-										$db);
+											FROM locstock
+											WHERE locstock.stockid='" . $AutoIssueCompRow['stockid'] . "'
+											AND loccode= '" . $WORow['loccode'] . "'",
+											$db);
 				if (DB_num_rows($CompQOHResult)==1){
 							$LocQtyRow = DB_fetch_row($CompQOHResult);
 							$NewQtyOnHand = $LocQtyRow[0] - ($AutoIssueCompRow['qtypu'] * $QuantityReceived);
@@ -726,7 +724,7 @@ $WOResult = DB_query("SELECT workorders.loccode,
 					ON workorders.wo=woitems.wo
 					INNER JOIN stockmaster
 					ON woitems.stockid=stockmaster.stockid
-					WHERE woitems.stockid='" . $_POST['StockID'] . "' and workorders.wo='".$_POST['WO'] . "'",
+					WHERE woitems.stockid='" . $_POST['StockID'] . "' AND workorders.wo='".$_POST['WO'] . "'",
 					$db,
 					$ErrMsg);
 
@@ -781,20 +779,20 @@ echo '</select></td></tr>
 	</table><br />';
 
 //Now Setup the form for entering quantities received
-echo '<table class=selection>';
+echo '<table class="selection">';
 
 if($WORow['controlled']==1){ //controlled
-	$LotSNRefLength =strlen($WORow['nextlotsnref']);
+	$LotSNRefLength =mb_strlen($WORow['nextlotsnref']);
 	$EndOfTextPartPointer = 0;
 	if (is_numeric($WORow['nextlotsnref'])){
 		$LotSNRefNumeric =$WORow['nextlotsnref'];
 		$StringBitOfLotSNRef ='';
 	} else { //try to determine if the serial ref is an amalgamation of a text part and a numerical part and increment the numerical part only
-		while (is_numeric(substr($WORow['nextlotsnref'],$LotSNRefLength-$EndOfTextPartPointer-1)) AND
-			substr($WORow['nextlotsnref'],$LotSNRefLength-$EndOfTextPartPointer-1,1)!='-'){
+		while (is_numeric(mb_substr($WORow['nextlotsnref'],$LotSNRefLength-$EndOfTextPartPointer-1)) AND
+			mb_substr($WORow['nextlotsnref'],$LotSNRefLength-$EndOfTextPartPointer-1,1)!='-'){
 			$EndOfTextPartPointer++;
-			$LotSNRefNumeric = substr($WORow['nextlotsnref'],$LotSNRefLength-$EndOfTextPartPointer);
-			$StringBitOfLotSNRef = substr($WORow['nextlotsnref'],0,$LotSNRefLength-$EndOfTextPartPointer);
+			$LotSNRefNumeric = mb_substr($WORow['nextlotsnref'],$LotSNRefLength-$EndOfTextPartPointer);
+			$StringBitOfLotSNRef = mb_substr($WORow['nextlotsnref'],0,$LotSNRefLength-$EndOfTextPartPointer);
 		}
 	}
 

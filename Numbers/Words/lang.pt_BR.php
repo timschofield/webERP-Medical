@@ -219,16 +219,16 @@ class Numbers_Words_pt_BR extends Numbers_Words
 
         $num = trim($num);
 
-        if (substr($num, 0, 1) == '-') {
+        if (mb_substr($num, 0, 1) == '-') {
             $ret = $this->_sep . $this->_minus;
-            $num = substr($num, 1);
+            $num = mb_substr($num, 1);
         }
 
         // strip excessive zero signs and spaces
         $num = trim($num);
         $num = preg_replace('/^0+/','',$num);
 
-        while (strlen($num) % 3 != 0) {
+        while (mb_strlen($num) % 3 != 0) {
             $num = "0" . $num;
         }
 
@@ -279,7 +279,7 @@ class Numbers_Words_pt_BR extends Numbers_Words
      * @since  Numbers_Words 0.10.1
      */
     function toCurrencyWords($int_curr, $decimal, $fraction = false, $convert_fraction = true) {
-        $int_curr = strtoupper($int_curr);
+        $int_curr = mb_strtoupper($int_curr);
         if (!isset($this->_currency_name[$int_curr])){
             $int_curr = $this->def_currency;
         }

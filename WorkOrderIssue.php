@@ -82,7 +82,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order issues ente
 		$QuantityIssued = $_POST['Qty'];
 	} else { //it must be a batch/lot controlled item
 		for ($i=0;$i<15;$i++){
-			if (strlen($_POST['Qty'.$i])>0){
+			if (mb_strlen($_POST['Qty'.$i])>0){
 				if (!is_numeric($_POST['Qty'.$i])){
 					$InputError=1;
 				} else {
@@ -382,9 +382,9 @@ if (isset($_POST['Search'])){
 	If ($_POST['Keywords'] AND $_POST['StockCode']) {
 		prnMsg(_('Stock description keywords have been used in preference to the Stock code extract entered'),'warn');
 	}
-	If (strlen($_POST['Keywords'])>0) {
+	If (mb_strlen($_POST['Keywords'])>0) {
 			//insert wildcard characters in spaces
-		$_POST['Keywords'] = strtoupper($_POST['Keywords']);
+		$_POST['Keywords'] = mb_strtoupper($_POST['Keywords']);
 		$SearchString = '%' . str_replace(' ', '%', $_POST['Keywords']) . '%';
 
 		if ($_POST['StockCat']=='All'){
@@ -413,9 +413,9 @@ if (isset($_POST['Search'])){
 					ORDER BY stockmaster.stockid";
 		}
 
-	} elseif (strlen($_POST['StockCode'])>0){
+	} elseif (mb_strlen($_POST['StockCode'])>0){
 
-		$_POST['StockCode'] = strtoupper($_POST['StockCode']);
+		$_POST['StockCode'] = mb_strtoupper($_POST['StockCode']);
 		$SearchString = '%' . $_POST['StockCode'] . '%';
 
 		if ($_POST['StockCat']=='All'){
@@ -467,7 +467,7 @@ if (isset($_POST['Search'])){
 		  }
 	}
 
-	$SQL = $SQL . ' LIMIT ' . $_SESSION['DisplayRecordsMax'];
+	$SQL = $SQL . " LIMIT " . $_SESSION['DisplayRecordsMax'];
 
 	$ErrMsg = _('There is a problem selecting the part records to display because');
 	$DbgMsg = _('The SQL used to get the part selection was');

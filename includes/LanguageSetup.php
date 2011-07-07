@@ -1,6 +1,8 @@
 <?php
 
 /* $Id$ */
+/* Set internal character encoding to UTF-8 */
+mb_internal_encoding('UTF-8');
 
 /* This file is included in session.inc or PDFStarter.php or a report script that does not use PDFStarter.php
 to check for the existance of gettext function and setup the necessary enviroment to allow for automatic translation
@@ -77,7 +79,7 @@ if (function_exists('gettext')){
 			return $text;
 		}
 	}
-	//if (substr($_SESSION['Language'],0,2) == 'en'){
+	//if (mb_substr($_SESSION['Language'],0,2) == 'en'){
 		$locale_info['thousands_sep'] = ',';
 		$locale_info['decimal_point'] = '.';
 	/*

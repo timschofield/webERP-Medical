@@ -153,12 +153,12 @@ if (isset($_POST['ExRate'])){
 	$_SESSION['SuppTrans']->Comments = $_POST['Comments'];
 	$_SESSION['SuppTrans']->TranDate = $_POST['TranDate'];
 
-	if (substr( $_SESSION['SuppTrans']->Terms,0,1)=='1') { /*Its a day in the following month when due */
-		$DayInFollowingMonth = (int) substr( $_SESSION['SuppTrans']->Terms,1);
+	if (mb_substr( $_SESSION['SuppTrans']->Terms,0,1)=='1') { /*Its a day in the following month when due */
+		$DayInFollowingMonth = (int) mb_substr( $_SESSION['SuppTrans']->Terms,1);
 		$DaysBeforeDue = 0;
 	} else { /*Use the Days Before Due to add to the invoice date */
 		$DayInFollowingMonth = 0;
-		$DaysBeforeDue = (int) substr( $_SESSION['SuppTrans']->Terms,1);
+		$DaysBeforeDue = (int) mb_substr( $_SESSION['SuppTrans']->Terms,1);
 	}
 
 	$_SESSION['SuppTrans']->DueDate = CalcDueDate($_SESSION['SuppTrans']->TranDate, $DayInFollowingMonth, $DaysBeforeDue);
@@ -622,7 +622,7 @@ then do the updates and inserts to process the credit note entered */
 	if ( $TaxTotal + $_SESSION['SuppTrans']->OvAmount <= 0){
 		$InputError = True;
 		prnMsg(_('The credit note as entered cannot be processed because the total amount of the credit note is less than or equal to 0') . '. ' . 	_('Credit notes are expected to be entered as positive amounts to credit'),'warn');
-	} elseif (strlen($_SESSION['SuppTrans']->SuppReference) < 1){
+	} elseif (mb_strlen($_SESSION['SuppTrans']->SuppReference) < 1){
 		$InputError = True;
 		prnMsg(_('The credit note as entered cannot be processed because the there is no suppliers credit note number or reference entered') . '. ' . _('The supplier credit note number must be entered'),'error');
 	} elseif (!Is_Date($_SESSION['SuppTrans']->TranDate)){
@@ -815,7 +815,7 @@ then do the updates and inserts to process the credit note entered */
 
 			foreach ($_SESSION['SuppTrans']->GRNs as $EnteredGRN){
 
-				if (strlen($EnteredGRN->ShiptRef)==0 OR $EnteredGRN->ShiptRef=="" OR $EnteredGRN->ShiptRef==0){ /*so its not a shipment item */
+				if (mb_strlen($EnteredGRN->ShiptRef)==0 OR $EnteredGRN->ShiptRef=="" OR $EnteredGRN->ShiptRef==0){ /*so its not a shipment item */
 				/*so its not a shipment item
 				  enter the GL entry to reverse the GRN suspense entry created on delivery at standard cost used on delivery */
 
@@ -852,7 +852,7 @@ then do the updates and inserts to process the credit note entered */
 					if its a nominal purchase order item with no stock item then  post it to the account specified in the purchase order detail record */
 
 					if ($PurchPriceVar !=0){ /* don't bother with this lot if there is no difference ! */
-						if (strlen($EnteredGRN->ItemCode)>0 OR $EnteredGRN->ItemCode != ''){ /*so it is a stock item */
+						if (mb_strlen($EnteredGRN->ItemCode)>0 OR $EnteredGRN->ItemCode != ''){ /*so it is a stock item */
 
 							/*need to get the stock category record for this stock item - this is function in SQL_CommonFunctions.inc */
 							$StockGLCode = GetStockGLCode($EnteredGRN->ItemCode,$db);
@@ -1222,7 +1222,7 @@ then do the updates and inserts to process the credit note entered */
 			the total value credited against shipments is apportioned between all the items on the shipment
 			later when the shipment is closed*/
 
-			if (strlen($EnteredGRN->ShiptRef)>0 AND $EnteredGRN->ShiptRef!=0){
+			if (mb_strlen($EnteredGRN->ShiptRef)>0 AND $EnteredGRN->ShiptRef!=0){
 
 				/* and insert the shipment charge records */
 				$SQL = "INSERT INTO shipmentcharges (

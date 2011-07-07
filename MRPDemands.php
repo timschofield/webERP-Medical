@@ -16,9 +16,9 @@ if (isset($_POST['DemandID'])){
 }
 
 if (isset($_POST['StockID'])){
-	$StockID =trim(strtoupper($_POST['StockID']));
+	$StockID =trim(mb_strtoupper($_POST['StockID']));
 } elseif (isset($_GET['StockID'])){
-	$StockID =trim(strtoupper($_GET['StockID']));
+	$StockID =trim(mb_strtoupper($_GET['StockID']));
 }
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' .
@@ -56,7 +56,7 @@ function search(&$db,&$StockID) { //####SEARCH_SEARCH_SEARCH_SEARCH_SEARCH_SEARC
 	if ($_POST['Keywords']=='' AND $_POST['StockCode']=='') {
 		$msg=_('At least one stock description keyword or an extract of a stock code must be entered for the search');
 	} else {
-		if (strlen($_POST['Keywords'])>0) {
+		if (mb_strlen($_POST['Keywords'])>0) {
 			//insert wildcard characters in spaces
 			$SearchString = '%' . str_replace(' ', '%', $_POST['Keywords']) . '%';
 
@@ -66,7 +66,7 @@ function search(&$db,&$StockID) { //####SEARCH_SEARCH_SEARCH_SEARCH_SEARCH_SEARC
 				WHERE  stockmaster.description " . LIKE . " '" . $SearchString ."'
 				ORDER BY stockmaster.stockid";
 
-		} elseif (strlen($_POST['StockCode'])>0){
+		} elseif (mb_strlen($_POST['StockCode'])>0){
 			$sql = "SELECT stockmaster.stockid,
 					stockmaster.description
 				FROM stockmaster
@@ -188,7 +188,7 @@ function submit(&$db,&$StockID,&$DemandID)  //####SUBMIT_SUBMIT_SUBMIT_SUBMIT_SU
 		if ($myrow[0]>0) {
 			//If $myrow[0] > 0, it means this is an edit, so do an update
 			$sql = "UPDATE mrpdemands SET quantity = '" . $_POST['Quantity'] . "',
-							mrpdemandtype = '" . trim(strtoupper($_POST['MRPDemandtype'])) . "',
+							mrpdemandtype = '" . trim(mb_strtoupper($_POST['MRPDemandtype'])) . "',
 							duedate = '" . $FormatedDuedate . "'
 					WHERE demandid = '" . $DemandID . "'";
 			$msg = _("The MRP demand record has been updated for").' '.$StockID;
@@ -200,7 +200,7 @@ function submit(&$db,&$StockID,&$DemandID)  //####SUBMIT_SUBMIT_SUBMIT_SUBMIT_SU
 							quantity,
 							duedate)
 						VALUES ('" . $StockID . "',
-							'" . trim(strtoupper($_POST['MRPDemandtype'])) . "',
+							'" . trim(mb_strtoupper($_POST['MRPDemandtype'])) . "',
 							'" . $_POST['Quantity'] . "',
 							'" . $FormatedDuedate . "'
 						)";

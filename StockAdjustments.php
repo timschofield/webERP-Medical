@@ -24,8 +24,8 @@ if (!isset($_SESSION['Adjustment'])){
 $NewAdjustment = false;
 
 if (isset($_GET['StockID'])){
-	$StockID = trim(strtoupper($_GET['StockID']));
-	$_SESSION['Adjustment']->StockID = trim(strtoupper($StockID));
+	$StockID = trim(mb_strtoupper($_GET['StockID']));
+	$_SESSION['Adjustment']->StockID = trim(mb_strtoupper($StockID));
 	$result = DB_query("SELECT description, controlled, serialised, decimalplaces FROM stockmaster WHERE stockid='" . $_SESSION['Adjustment']->StockID . "'",$db);
 	$myrow = DB_fetch_array($result);
 	$_SESSION['Adjustment']->ItemDescription = $myrow['description'];
@@ -40,8 +40,8 @@ if (isset($_GET['StockID'])){
 } elseif (isset($_POST['StockID'])){
 	if(isset($_POST['StockID']) and $_POST['StockID'] != $_SESSION['Adjustment']->StockID){
 		$NewAdjustment = true;
-		$_SESSION['Adjustment']->StockID = trim(strtoupper($_POST['StockID']));
-		$StockID = trim(strtoupper($_POST['StockID']));
+		$_SESSION['Adjustment']->StockID = trim(mb_strtoupper($_POST['StockID']));
+		$StockID = trim(mb_strtoupper($_POST['StockID']));
 	}
 	$_SESSION['Adjustment']->tag = $_POST['tag'];
 	$_SESSION['Adjustment']->Narrative = $_POST['Narrative'];
@@ -60,7 +60,7 @@ if (isset($_POST['CheckCode'])) {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Dispatch') .
 		'" alt="" />' . ' ' . _('Select Item to Adjust') . '</p>';
 
-	if (strlen($_POST['StockText'])>0) {
+	if (mb_strlen($_POST['StockText'])>0) {
 		$sql="SELECT stockid, description from stockmaster where description like '%".$_POST['StockText']."%'";
 	} else {
 		$sql="SELECT stockid, description from stockmaster where stockid like '%".$_POST['StockCode']."%'";
@@ -341,7 +341,7 @@ if (isset($StockID)) {
 	echo '<input type=text name="StockCode" size=21 value="" maxlength=20>';
 }
 echo '</td><td><input type=submit name="CheckCode" value="'._('Check Part').'"></td></tr>';
-if (isset($_SESSION['Adjustment']) and strlen($_SESSION['Adjustment']->ItemDescription)>1){
+if (isset($_SESSION['Adjustment']) and mb_strlen($_SESSION['Adjustment']->ItemDescription)>1){
 	echo '<tr><td colspan=3><font color=BLUE size=3>' . $_SESSION['Adjustment']->ItemDescription . ' ('._('In Units of').' ' .
 		$_SESSION['Adjustment']->PartUnit . ' ) - ' . _('Unit Cost').' = ' .
 			number_format($_SESSION['Adjustment']->StandardCost,4) . '</font></td></tr>';

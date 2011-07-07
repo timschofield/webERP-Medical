@@ -8,7 +8,7 @@ include ('includes/session.inc');
 $title = _('Recalculation of GL Balances in Chart Details Table');
 include('includes/header.inc');
 
-echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '">';
+echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (!isset($_POST['FromPeriod'])){
@@ -32,7 +32,7 @@ if (!isset($_POST['FromPeriod'])){
              </tr>
              </table>';
 
-	echo '<div class="centre"><input type=submit Name="recalc" Value="' . _('Do the Recalculation') . '"
+	echo '<div class="centre"><input type=submit Name="recalc" value="' . _('Do the Recalculation') . '"
 	  onclick="return confirm("' . _('Are you sure you wish to re-post all general ledger transactions since the selected period
 	   .... this can take some time?') . '\');"></div></form>';
 

@@ -67,10 +67,10 @@ function IsEmailAddress($Email){
 	    return  false;	// > 1 consecutive dot is not allowed.
 	}
 	//  Check component length limits
-	$Domain = substr ($Email, $AtIndex+1);
-	$Local= substr ($Email, 0, $AtIndex);
-	$LocalLen = strlen ($Local);
-	$DomainLen = strlen ($Domain);
+	$Domain = mb_substr ($Email, $AtIndex+1);
+	$Local= mb_substr ($Email, 0, $AtIndex);
+	$LocalLen = mb_strlen ($Local);
+	$DomainLen = mb_strlen ($Domain);
 	if ($LocalLen < 1 || $LocalLen > 64){
 	    // local part length exceeded
 	    return  false;
@@ -98,7 +98,7 @@ function IsEmailAddress($Email){
 	//  Check for a DNS 'MX' or 'A' record.
 	//  Windows supported from PHP 5.3.0 on - so check.
 	$Ret = true;
-	if (version_compare(PHP_VERSION, '5.3.0') >= 0 OR strtoupper(substr(PHP_OS, 0, 3) !== 'WIN')) {
+	if (version_compare(PHP_VERSION, '5.3.0') >= 0 OR mb_strtoupper(mb_substr(PHP_OS, 0, 3) !== 'WIN')) {
 //	    $Ret = checkdnsrr( $Domain, 'MX' ) OR checkdnsrr( $Domain, 'A' );
 	}
 

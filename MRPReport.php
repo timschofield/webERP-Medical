@@ -422,7 +422,7 @@ if (isset($_POST['PrintPDF']) AND $_POST['Part']!='') {
 
 	// Details for Demand/Supply Sections
 	$i = 0;
-	while ((isset($Supplies[$i]) and strlen($Supplies[$i]['part'])) > 1 or (isset($Requirements[$i]) and strlen($Requirements[$i]['part']) > 1)){
+	while ((isset($Supplies[$i]) and mb_strlen($Supplies[$i]['part'])) > 1 or (isset($Requirements[$i]) and mb_strlen($Requirements[$i]['part']) > 1)){
 
 		$YPos -=$line_height;
 		$FontSize=7;
@@ -436,7 +436,7 @@ if (isset($_POST['PrintPDF']) AND $_POST['Part']!='') {
 		// 1) X position 2) Y position 3) Width
 		// 4) Height 5) Text To Display  6) Alignment 7) Border 8) Fill - True to use SetFillColor
 		// and False to set for transparent
-		if (isset($Requirements[$i]['part']) and strlen($Requirements[$i]['part']) > 1) {
+		if (isset($Requirements[$i]['part']) and mb_strlen($Requirements[$i]['part']) > 1) {
 			$FormatedReqDueDate = ConvertSQLDate($Requirements[$i]['daterequired']);
 			$pdf->addTextWrap($Left_Margin,$YPos,55,$FontSize,$Requirements[$i]['mrpdemandtype'],'');
 			$pdf->addTextWrap(80,$YPos,90,$FontSize,$Requirements[$i]['whererequired'],'');
@@ -445,7 +445,7 @@ if (isset($_POST['PrintPDF']) AND $_POST['Part']!='') {
 																$myrow['decimalplaces']),'right');
 			$pdf->addTextWrap(240,$YPos,50,$FontSize,$FormatedReqDueDate,'right');
 		}
-		if (strlen($Supplies[$i]['part']) > 1) {
+		if (mb_strlen($Supplies[$i]['part']) > 1) {
 			$suptype = $Supplies[$i]['ordertype'];
 			// If ordertype is not QOH,PO,or WO, it is an MRP generated planned order and the
 			// ordertype is actually the demandtype that caused the planned order
@@ -569,7 +569,7 @@ if (isset($_POST['Search']) OR isset($_POST['Go']) OR isset($_POST['Next']) OR i
 	}
 	if ($_POST['Keywords']) {
 		//insert wildcard characters in spaces
-		$_POST['Keywords'] = strtoupper($_POST['Keywords']);
+		$_POST['Keywords'] = mb_strtoupper($_POST['Keywords']);
 		$SearchString = '%' . str_replace(' ', '%', $_POST['Keywords']) . '%';
 		if ($_POST['StockCat'] == 'All') {
 			$SQL = "SELECT stockmaster.stockid,
@@ -608,7 +608,7 @@ if (isset($_POST['Search']) OR isset($_POST['Go']) OR isset($_POST['Next']) OR i
 				ORDER BY stockmaster.stockid";
 		}
 	} elseif (isset($_POST['StockCode'])) {
-		$_POST['StockCode'] = strtoupper($_POST['StockCode']);
+		$_POST['StockCode'] = mb_strtoupper($_POST['StockCode']);
 		if ($_POST['StockCat'] == 'All') {
 			$SQL = "SELECT stockmaster.stockid,
 					stockmaster.description,
