@@ -34,6 +34,9 @@ if (isset($_POST['ChangeItem'])) {
 	$_SESSION['Items']['Lines']++;
 	unset($_POST['StockType']);
 }
+if (isset($_POST['Dispensary'])) {
+	$_SESSION['Items']['Dispensary']=$_POST['Dispensary'];
+}
 
 if (isset($_POST['UpdateItems'])) {
 	$_SESSION['Items'][$_SESSION['Items']['Lines']]['StockType']=$_POST['StockType'];
@@ -83,8 +86,8 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 											'" . DB_escape_string($_POST['Comments']) ."',
 											'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 											'1',
-											'" . $_SESSION['UserStockLocation'] . "',
-											'" . $_SESSION['UserStockLocation'] ."',
+											'" . $_POST['Dispensary'] . "',
+											'" . $_POST['Dispensary'] ."',
 											'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 											'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 											0
@@ -185,7 +188,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 						'" . $_SESSION['Items'][$i]['StockID'] . "',
 						 10,
 						'" . $InvoiceNo . "',
-						'" . $_SESSION['UserStockLocation'] . "',
+						'" . $_POST['Dispensary'] . "',
 						'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 						'" . $_POST['PatientNo'] . "',
 						'" . $_POST['BranchNo'] . "',
@@ -643,6 +646,33 @@ if (isset($_POST['Patient'])) {
 	echo '<tr><td>'._('Date of Admission').':</td>
 		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="AdmissionDate" maxlength="10" size="11" value="' .
 					 date($_SESSION['DefaultDateFormat']) . '" /></td></tr>';
+	$sql = "SELECT loccode,
+				locationname
+			FROM locations";
+
+	$ErrMsg = _('The locations could not be retrieved because');
+	$DbgMsg = _('The SQL used to retrieve the locations was');
+	$LocationResults = DB_query($sql,$db,$ErrMsg,$DbgMsg);
+
+	echo '<tr><td>' . _('Drugs issued from') . ':</td><td><select name="Dispensary">';
+
+	if (DB_num_rows($LocationResults)==0){
+		echo '</select></td></tr></table><p>';
+		prnMsg( _('Locations have not yet been defined. You must first') . ' <a href="' . $rootpath . '/Locations.php">' . _('define the locations') . '</a> ' ,'warn');
+		include('includes/footer.inc');
+		exit;
+	} else {
+		echo '<option value=""></option>';
+		while ($myrow=DB_fetch_array($LocationResults)){
+		/*list the bank account names */
+			if (isset($_POST['Dispensary']) and $_POST['Dispensary']==$myrow['loccode']){
+				echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			} else {
+				echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			}
+		}
+		echo '</select></td></tr>';
+	}
 
 	echo '<tr><td>' ._('Type of Item'). ':</td>';
 	echo '<input type="submit" name="UpdateItems" style="visibility: hidden" value=" " />';
