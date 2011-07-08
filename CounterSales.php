@@ -33,37 +33,43 @@ if (isset($_POST['QuickEntry'])){
 
 if (isset($_POST['OrderItems'])){
 	foreach ($_POST as $key => $value) {
-		if (strstr($key,'itm') and strstr($key,'batch')) {
-			$key=str_replace('~', ' ', trim($key));
-			$sql="SELECT quantity
+		if (strstr($key,'StockID')) {
+			$Index=substr($key,7);
+			$StockID=$value;
+			$Quantity=$_POST['Quantity'.$Index];
+			$_POST['Units'.$StockID]=$_POST['Units'.$Index];
+			if (isset($_POST['Batch'.$Index])) {
+				$Batch=$_POST['Batch'.$Index];
+				$sql="SELECT quantity
 						FROM stockserialitems
-						WHERE stockid='".substr($key,3, strpos($key, 'batch')-3)."'
-							AND serialno='".trim(substr($key, strpos($key, 'batch')+5))."'";
-			$BatchQuantityResult=DB_query($sql, $db);
-			$BatchQuantityRow=DB_fetch_array($BatchQuantityResult);
-			if (!isset($NewItemArray[substr($key,3, strpos($key, 'batch')-3)])) {
-				if ($BatchQuantityRow['quantity']<trim($value)) {
-					prnMsg( _('Batch number').' '.trim(substr($key, strpos($key, 'batch')+5)).' '.
-						_('of item number').' '.substr($key,3, strpos($key, 'batch')-3).' '.
-							_('has insufficient items remaining in it to complete this sale').$BatchQuantityRow['quantity'].'x'.$value, 'info');
+						WHERE stockid='".$StockID."'
+							AND serialno='".$Batch."'";
+				$BatchQuantityResult=DB_query($sql, $db);
+				$BatchQuantityRow=DB_fetch_array($BatchQuantityResult);
+				if (!isset($NewItemArray[$StockID])) {
+					if ($BatchQuantityRow['quantity']<$Quantity) {
+						prnMsg( _('Batch number').' '.$Batch.' '.
+							_('of item number').' '.$StockID.' '.
+								_('has insufficient items remaining in it to complete this sale') , 'info');
+					} else {
+						$NewItemArray[$StockID]['Quantity'] = $Quantity;
+						$NewItemArray[$StockID]['Batch']['Number'][] = $Batch;
+						$NewItemArray[$StockID]['Batch']['Quantity'][] = $Quantity;
+					}
 				} else {
-					$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Quantity'] = trim($value);
-					$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Batch']['Number'][] = trim(substr($key, strpos($key, 'batch')+5));
-					$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Batch']['Quantity'][] = trim($value);
+					if ($BatchQuantityRow['quantity']<$Quantity+$NewItemArray[$StockID]['Quantity']) {
+						prnMsg( _('Batch number').' '.$Batch.' '.
+							_('of item number').' '.$StockID.' '.
+								_('has insufficient items remaining in it to complete this sale'), 'info');
+					} else {
+						$NewItemArray[$StockID]['Quantity'] += $Quantity;
+						$NewItemArray[$StockID]['Batch']['Number'][] = $Batch;
+						$NewItemArray[$StockID]['Batch']['Quantity'][] = $Quantity;
+					}
 				}
 			} else {
-				if ($BatchQuantityRow['quantity']<trim($value)+$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Quantity']) {
-					prnMsg( _('Batch number').' '.trim(substr($key, strpos($key, 'batch')+5)).' '.
-						_('of item number').' '.substr($key,3, strpos($key, 'batch')-3).' '.
-							_('has insufficient items remaining in it to complete this sale'), 'info');
-				} else {
-					$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Quantity'] += trim($value);
-					$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Batch']['Number'][] = trim(substr($key, strpos($key, 'batch')+5));
-					$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Batch']['Quantity'][] = trim($value);
-				}
+				$NewItemArray[$StockID]['Quantity'] = $Quantity;
 			}
-		} elseif (strstr($key,'itm')) {
-			$NewItemArray[substr($key,3)] = trim($value);
 		}
 	}
 }
@@ -74,7 +80,7 @@ if (isset($_GET['NewItem'])){
 
 if (isset($_GET['NewOrder'])){
 	/*New order entry - clear any existing order details from the Items object and initiate a newy*/
-	 if (isset($_SESSION['Items'.$identifier])){
+	if (isset($_SESSION['Items'.$identifier])){
 		unset ($_SESSION['Items'.$identifier]->LineItems);
 		$_SESSION['Items'.$identifier]->ItemsOrdered=0;
 		unset ($_SESSION['Items'.$identifier]);
@@ -268,7 +274,7 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 					FROM stockmaster,
 							stockcategory
 					WHERE stockmaster.categoryid=stockcategory.categoryid
-					AND (stockcategory.stocktype='P' OR stockcategory.stocktype='M' OR stockcategory.stocktype='C')
+					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 					AND stockmaster.mbflag <>'G'
 					AND stockmaster.description " . LIKE . " '" . $SearchString . "'
 					AND stockmaster.discontinued=0
@@ -279,7 +285,7 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 							stockmaster.units
 					FROM stockmaster, stockcategory
 					WHERE  stockmaster.categoryid=stockcategory.categoryid
-					AND (stockcategory.stocktype='P' OR stockcategory.stocktype='M' OR stockcategory.stocktype='C')
+					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 					AND stockmaster.mbflag <>'G'
 					AND stockmaster.discontinued=0
 					AND stockmaster.description " . LIKE . " '" . $SearchString . "'
@@ -299,7 +305,7 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 							stockmaster.controlled
 					FROM stockmaster, stockcategory
 					WHERE stockmaster.categoryid=stockcategory.categoryid
-					AND (stockcategory.stocktype='P' OR stockcategory.stocktype='M' OR stockcategory.stocktype='C')
+					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 					AND stockmaster.stockid " . LIKE . " '" . $SearchString . "'
 					AND stockmaster.mbflag <>'G'
 					AND stockmaster.discontinued=0
@@ -311,7 +317,7 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 							stockmaster.controlled
 					FROM stockmaster, stockcategory
 					WHERE stockmaster.categoryid=stockcategory.categoryid
-					AND (stockcategory.stocktype='P' OR stockcategory.stocktype='M' OR stockcategory.stocktype='C')
+					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 					AND stockmaster.stockid " . LIKE . " '" . $SearchString . "'
 					AND stockmaster.mbflag <>'G'
 					AND stockmaster.discontinued=0
@@ -327,7 +333,7 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 							stockmaster.controlled
 					FROM stockmaster, stockcategory
 					WHERE  stockmaster.categoryid=stockcategory.categoryid
-					AND (stockcategory.stocktype='P' OR stockcategory.stocktype='M' OR stockcategory.stocktype='C')
+					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 					AND stockmaster.discontinued=0
 					ORDER BY stockmaster.stockid";
 		} else {
@@ -337,7 +343,7 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 							stockmaster.controlled
 					FROM stockmaster, stockcategory
 					WHERE stockmaster.categoryid=stockcategory.categoryid
-					AND (stockcategory.stocktype='P' OR stockcategory.stocktype='M' OR stockcategory.stocktype='C')
+					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 					AND stockmaster.mbflag <>'G'
 					AND stockmaster.discontinued=0
 					AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
@@ -1706,7 +1712,6 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 												trandate,
 												periodno,
 												account,
-												defaulttag,
 												narrative,
 												amount)
 										VALUES ( 10,
@@ -1714,7 +1719,6 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 												'" . $DefaultDispatchDate . "',
 												'" . $PeriodNo . "',
 												'" . GetCOGSGLAccount($Area, $OrderLine->StockID, $_SESSION['Items'.$identifier]->DefaultSalesType, $db) . "',
-												'" . $_SESSION['DefaultTag'] . "',
 												'" . $_SESSION['Items'.$identifier]->DebtorNo . " - " . $OrderLine->StockID . " x " . $OrderLine->Quantity . " @ " . $OrderLine->StandardCost . "',
 												'" . $OrderLine->StandardCost * $OrderLine->Quantity . "')";
 
@@ -1730,7 +1734,6 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 												trandate,
 												periodno,
 												account,
-												defaulttag,
 												narrative,
 												amount )
 										VALUES ( 10,
@@ -1738,7 +1741,6 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 											'" . $DefaultDispatchDate . "',
 											'" . $PeriodNo . "',
 											'" . $StockGLCode['stockact'] . "',
-											'" . $_SESSION['DefaultTag'] . "',
 											'" . $_SESSION['Items'.$identifier]->DebtorNo . " - " . $OrderLine->StockID . " x " . $OrderLine->Quantity . " @ " . $OrderLine->StandardCost . "',
 											'" . (-$OrderLine->StandardCost * $OrderLine->Quantity) . "')";
 
@@ -1757,7 +1759,6 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 												trandate,
 												periodno,
 												account,
-												defaulttag,
 												narrative,
 												amount
 											)
@@ -1766,7 +1767,6 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 											'" . $DefaultDispatchDate . "',
 											'" . $PeriodNo . "',
 											'" . $SalesGLAccounts['salesglcode'] . "',
-											'" . $_SESSION['DefaultTag'] . "',
 											'" . $_SESSION['Items'.$identifier]->DebtorNo . " - " . $OrderLine->StockID . " x " . $OrderLine->Quantity . " @ " . $OrderLine->Price . "',
 											'" . (-$OrderLine->Price * $OrderLine->Quantity/$ExRate) . "')";
 
@@ -1781,7 +1781,6 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 													trandate,
 													periodno,
 													account,
-													defaulttag,
 													narrative,
 													amount
 												)
@@ -1790,7 +1789,6 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 													'" . $DefaultDispatchDate . "',
 													'" . $PeriodNo . "',
 													'" . $SalesGLAccounts['discountglcode'] . "',
-													'" . $_SESSION['DefaultTag'] . "',
 													'" . $_SESSION['Items'.$identifier]->DebtorNo . " - " . $OrderLine->StockID . " @ " . ($OrderLine->DiscountPercent * 100) . "%',
 													'" . ($OrderLine->Price * $OrderLine->Quantity * $OrderLine->DiscountPercent/$ExRate) . "')";
 
@@ -1810,7 +1808,6 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 												trandate,
 												periodno,
 												account,
-												defaulttag,
 												narrative,
 												amount	)
 											VALUES ( 10,
@@ -1818,7 +1815,6 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 												'" . $DefaultDispatchDate . "',
 												'" . $PeriodNo . "',
 												'" . $_SESSION['CompanyRecord']['debtorsact'] . "',
-												'" . $_SESSION['DefaultTag'] . "',
 												'" . $_SESSION['Items'.$identifier]->DebtorNo . "',
 												'" . (($_SESSION['Items'.$identifier]->total + $_POST['TaxTotal'])/$ExRate) . "')";
 
@@ -1835,7 +1831,6 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 													trandate,
 													periodno,
 													account,
-													defaulttag,
 													narrative,
 													amount	)
 												VALUES ( 10,
@@ -1843,7 +1838,6 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 													'" . $DefaultDispatchDate . "',
 													'" . $PeriodNo . "',
 													'" . $_SESSION['Items'.$identifier]->TaxGLCodes[$TaxAuthID] . "',
-													'" . $_SESSION['DefaultTag'] . "',
 													'" . $_SESSION['Items'.$identifier]->DebtorNo . "',
 													'" . (-$TaxAmount/$ExRate) . "')";
 
@@ -1862,7 +1856,6 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 						trandate,
 						periodno,
 						account,
-						defaulttag,
 						narrative,
 						amount)
 					VALUES (12,
@@ -1870,7 +1863,6 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 						'" . $DefaultDispatchDate . "',
 						'" . $PeriodNo . "',
 						'" . $_POST['BankAccount'] . "',
-						'" . $_SESSION['DefaultTag'] . "',
 						'" . $_SESSION['Items'.$identifier]->LocationName . ' ' . _('Counter Sale') . ' ' . $InvoiceNo . "',
 						'" . ($_POST['AmountPaid']/$ExRate) . "')";
 				$DbgMsg = _('The SQL that failed to insert the GL transaction for the bank account debit was');
@@ -1883,7 +1875,6 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 						trandate,
 						periodno,
 						account,
-						defaulttag,
 						narrative,
 						amount)
 				VALUES (12,
@@ -1891,7 +1882,6 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 					'" . $DefaultDispatchDate . "',
 					'" . $PeriodNo . "',
 					'" . $_SESSION['CompanyRecord']['debtorsact'] . "',
-					'" . $_SESSION['DefaultTag'] . "',
 					'" . $_SESSION['Items'.$identifier]->LocationName . ' ' . _('Counter Sale') . ' ' . $InvoiceNo . "',
 					'" . -($_POST['AmountPaid']/$ExRate) . "')";
 				$DbgMsg = _('The SQL that failed to insert the GL transaction for the debtors account credit was');
@@ -2201,7 +2191,7 @@ if (!isset($_POST['ProcessSale'])){
 		$SQL="SELECT categoryid,
 				categorydescription
 			FROM stockcategory
-			WHERE stocktype='P' OR stocktype='M' OR stocktype='C'
+			WHERE stocktype='F' OR stocktype='D'
 			ORDER BY categorydescription";
 		$result1 = DB_query($SQL,$db);
 		while ($myrow1 = DB_fetch_array($result1)) {
@@ -2261,6 +2251,7 @@ if (!isset($_POST['ProcessSale'])){
 			echo $TableHeader;
 
 			$k=0; //row colour counter
+			$i=0;
 
 			while ($myrow=DB_fetch_array($SearchResult)) {
 
@@ -2284,7 +2275,7 @@ if (!isset($_POST['ProcessSale'])){
 
 				// Find the quantity in stock at location
 				$QOHSql = "SELECT sum(quantity) AS QOH,
-													stockmaster.decimalplaces
+											stockmaster.decimalplaces
 										FROM locstock INNER JOIN stockmaster
 										 ON stockmaster.stockid=locstock.stockid
 										WHERE locstock.stockid='" .$myrow['stockid'] . "'
@@ -2309,19 +2300,21 @@ if (!isset($_POST['ProcessSale'])){
 					echo '<tr class="OddTableRows">';
 					$k=1;
 				}
-
 				if ($myrow['controlled']==0) {
+					echo '<input type="hidden" name="StockID'.$i.'" value="'.$myrow['stockid'].'" />';
 					printf('<td>%s</td>
 							<td>%s</td>
 							<td>%s</td>
 							<td class="number">%s</td>
-							<td><font size="1"><input class="number"  tabindex="'.number_format($j+7).'" type="textbox" size="15" name="itm'.$myrow['stockid'].'" value="0" />
+							<td><font size="1"><input class="number"  tabindex="'.number_format($j+7).'" type="textbox" size="15" name="Quantity'.$i.'" value="0" />
 							</font></td>
 							</tr>',
 							$myrow['stockid'],
 							$myrow['description'],
 							$myrow['units'],
 							number_format($QOH, $QOHRow['decimalplaces']));
+					echo '<input type="hidden" name="Units' . $i . '" value="' . $myrow['units'] . '" />';
+					$i++;
 				} else {
 					$LastStockID='';
 					while ($BatchRow=DB_fetch_array($BatchResult)) {
@@ -2337,9 +2330,10 @@ if (!isset($_POST['ProcessSale'])){
 						} else {
 							echo '<td colspan=4>';
 						}
-						$FilteredBatchRow['serialno']=str_replace(' ', '~', trim($BatchRow['serialno']));
+						echo '<input type="hidden" name="Batch'.$i.'" value="'.$BatchRow['serialno'].'" />';
+						echo '<input type="hidden" name="StockID'.$i.'" value="'.$myrow['stockid'].'" />';
 						printf('<td><font size="1"><input class="number"  tabindex="'.number_format($j+7).'" type="textbox" size="15"
-								name="itm'.$myrow['stockid'].'batch'.$FilteredBatchRow['serialno'].'" value="0" />
+								name="Quantity'.$i.'" value="0" />
 								</font></td>
 								<td class="number">%s</td>
 								<td class="number">%s</td>
@@ -2349,6 +2343,8 @@ if (!isset($_POST['ProcessSale'])){
 								number_format($BatchRow['quantity']/$myrow['conversionfactor'], $QOHRow['decimalplaces']),
 								ConvertSQLDate($BatchRow['expirationdate']));
 						$LastStockID=$myrow['stockid'];
+						echo '<input type="hidden" name="Units' . $i . '" value="' . $myrow['units'] . '" />';
+						$i++;
 					}
 /*					if (!isset($_POST['itm'.$myrow['stockid']])) {
 						$_POST['itm'.$myrow['stockid']]=0;
@@ -2357,7 +2353,6 @@ if (!isset($_POST['ProcessSale'])){
 								'/ConfirmDispatchControlled_Counter.php?StockID='.$myrow['stockid'].'&Location='.$_SESSION['UserStockLocation'].'">'.
 							$_POST['itm'.$myrow['stockid']].'</a></td></tr>'; */
 				}
-				echo '<input type="hidden" name="Units' . $myrow['stockid'] . '" value="' . $myrow['units'] . '" />';
 
 				if ($j==1) {
 					$jsCall = '<script  type="text/javascript">if (document.SelectParts) {defaultControl(document.SelectParts.itm'.$myrow['stockid'].');}</script>';
