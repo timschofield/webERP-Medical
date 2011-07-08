@@ -220,7 +220,7 @@ if (isset($_POST['RunReport'])){
 
 	/*
 		$pdfcode = $pdf->output();
-		$len = mb_strlen($pdfcode);
+		$len = strlen($pdfcode);
 
 	      if ($len<=20){
 			$title = _('Print GL Accounts Report Error');

@@ -4,7 +4,7 @@ $url=$RootPath.'index.php';
 $fields=array();
 include('GetURL.php');
 
-$FormID=mb_substr(strstr($result, 'FormID" value="', false),15,40);
+$FormID=substr(strstr($result, 'FormID" value="', false),15,40);
 
 $fields['FormID']=$FormID;
 $fields['CompanyNameField']=$CompanyName;

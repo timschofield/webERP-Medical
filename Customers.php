@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
 
 	//first off validate inputs sensible
 
-	$_POST['DebtorNo'] = mb_strtoupper($_POST['DebtorNo']);
+	$_POST['DebtorNo'] = strtoupper($_POST['DebtorNo']);
 
 	$sql="SELECT COUNT(debtorno) FROM debtorsmaster WHERE debtorno='".$_POST['DebtorNo']."'";
 	$result=DB_query($sql,$db);
@@ -38,71 +38,71 @@ if (isset($_POST['submit'])) {
 		prnMsg( _('The customer number already exists in the database'),'error');
 		$Errors[$i] = 'DebtorNo';
 		$i++;
-	} elseif (mb_strlen($_POST['CustName']) > 40 OR mb_strlen($_POST['CustName'])==0) {
+	} elseif (strlen($_POST['CustName']) > 40 OR strlen($_POST['CustName'])==0) {
 		$InputError = 1;
 		prnMsg( _('The customer name must be entered and be forty characters or less long'),'error');
 		$Errors[$i] = 'CustName';
 		$i++;
-	} elseif ($_SESSION['AutoDebtorNo']==0 AND mb_strlen($_POST['DebtorNo']) ==0) {
+	} elseif ($_SESSION['AutoDebtorNo']==0 AND strlen($_POST['DebtorNo']) ==0) {
 		$InputError = 1;
 		prnMsg( _('The debtor code cannot be empty'),'error');
 		$Errors[$i] = 'DebtorNo';
 		$i++;
-	} elseif ($_SESSION['AutoDebtorNo']==0 AND (ContainsIllegalCharacters($_POST['DebtorNo']) OR mb_strpos($_POST['DebtorNo'], ' '))) {
+	} elseif ($_SESSION['AutoDebtorNo']==0 AND (ContainsIllegalCharacters($_POST['DebtorNo']) OR strpos($_POST['DebtorNo'], ' '))) {
 		$InputError = 1;
 		prnMsg( _('The customer code cannot contain any of the illefal characters') ,'error');
 		$Errors[$i] = 'DebtorNo';
 		$i++;
-	} elseif (mb_strlen($_POST['Address1']) >40) {
+	} elseif (strlen($_POST['Address1']) >40) {
 		$InputError = 1;
 		prnMsg( _('The Line 1 of the address must be forty characters or less long'),'error');
 		$Errors[$i] = 'Address1';
 		$i++;
-	} elseif (mb_strlen($_POST['Address2']) >40) {
+	} elseif (strlen($_POST['Address2']) >40) {
 		$InputError = 1;
 		prnMsg( _('The Line 2 of the address must be forty characters or less long'),'error');
 		$Errors[$i] = 'Address2';
 		$i++;
-	} elseif (mb_strlen($_POST['Address3']) >40) {
+	} elseif (strlen($_POST['Address3']) >40) {
 		$InputError = 1;
 		prnMsg( _('The Line 3 of the address must be forty characters or less long'),'error');
 		$Errors[$i] = 'Address3';
 		$i++;
-	} elseif (mb_strlen($_POST['Address4']) >50) {
+	} elseif (strlen($_POST['Address4']) >50) {
 		$InputError = 1;
 		prnMsg( _('The Line 4 of the address must be fifty characters or less long'),'error');
 		$Errors[$i] = 'Address4';
 		$i++;
-	} elseif (mb_strlen($_POST['Address5']) >20) {
+	} elseif (strlen($_POST['Address5']) >20) {
 		$InputError = 1;
 		prnMsg( _('The Line 5 of the address must be twenty characters or less long'),'error');
 		$Errors[$i] = 'Address5';
 		$i++;
-	} elseif (mb_strlen($_POST['Address6']) >15) {
+	} elseif (strlen($_POST['Address6']) >15) {
 		$InputError = 1;
 		prnMsg( _('The Line 6 of the address must be fifteen characters or less long'),'error');
 		$Errors[$i] = 'Address6';
 		$i++;
 	}
-	elseif (mb_strlen($_POST['Phone']) >25) {
+	elseif (strlen($_POST['Phone']) >25) {
 		$InputError = 1;
 		prnMsg(_('The telephone number must be 25 characters or less long'),'error');
 		$Errors[$i] = 'Telephone';
 		$i++;
 	}
-	elseif (mb_strlen($_POST['Fax']) >25) {
+	elseif (strlen($_POST['Fax']) >25) {
 		$InputError = 1;
 		prnMsg(_('The fax number must be 25 characters or less long'),'error');
 		$Errors[$i] = 'Fax';
 		$i++;
 	}
-	elseif (mb_strlen($_POST['Email']) >55) {
+	elseif (strlen($_POST['Email']) >55) {
 		$InputError = 1;
 		prnMsg(_('The email address must be 55 characters or less long'),'error');
 		$Errors[$i] = 'Email';
 		$i++;
 	}
-	elseif (mb_strlen($_POST['Email'])>0 and !IsEmailAddress($_POST['Email'])) {
+	elseif (strlen($_POST['Email'])>0 and !IsEmailAddress($_POST['Email'])) {
 		$InputError = 1;
 		prnMsg(_('The email address is not correctly formed'),'error');
 		$Errors[$i] = 'Email';
@@ -279,7 +279,7 @@ if (isset($_POST['submit'])) {
 			$ErrMsg = _('This customer could not be added because');
 			$result = DB_query($sql,$db,$ErrMsg);
 
-			$BranchCode = mb_substr($_POST['DebtorNo'],0,4);
+			$BranchCode = substr($_POST['DebtorNo'],0,4);
 
 			echo "<meta http-equiv='Refresh' content='0; url=" . $rootpath ."/CustomerBranches.php?" . SID . "&DebtorNo=" . $_POST['DebtorNo'] . "'>";
 

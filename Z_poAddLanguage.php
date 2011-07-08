@@ -33,16 +33,16 @@ echo '<br />&nbsp;' . _('Current language is') . ' ' . $_SESSION['Language'];
 
 if (isset($_POST['submit']) AND isset($_POST['NewLanguage'])) {
 
-	if(mb_strlen($_POST['NewLanguage'])<5
-		OR mb_strlen($_POST['NewLanguage'])>5
-		OR mb_substr($_POST['NewLanguage'],2,1)!='_'){
+	if(strlen($_POST['NewLanguage'])<5
+		OR strlen($_POST['NewLanguage'])>5
+		OR substr($_POST['NewLanguage'],2,1)!='_'){
 
 		prnMsg(_('Languages must be in the format of a two character country code an underscore _ and a two character language code in upper case'),'error');
 	} else {
 
 		/*Make sure the language characters are in upper case*/
 
-		$_POST['NewLanguage'] = mb_substr($_POST['NewLanguage'],0,3) . mb_strtoupper(mb_substr($_POST['NewLanguage'],3,2));
+		$_POST['NewLanguage'] = substr($_POST['NewLanguage'],0,3) . strtoupper(substr($_POST['NewLanguage'],3,2));
 
 		echo '<div class="centre">';
 		echo '<br />';

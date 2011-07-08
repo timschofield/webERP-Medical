@@ -8,9 +8,9 @@ include('includes/session.inc');
 
 if (isset($_POST['PrintPDF'])
 	AND isset($_POST['FromCriteria'])
-	AND mb_strlen($_POST['FromCriteria'])>=1
+	AND strlen($_POST['FromCriteria'])>=1
 	AND isset($_POST['ToCriteria'])
-	AND mb_strlen($_POST['ToCriteria'])>=1){
+	AND strlen($_POST['ToCriteria'])>=1){
 
 	include('includes/PDFStarter.php');
 	$pdf->addInfo('Title',_('Customer Balance Listing'));
@@ -117,7 +117,7 @@ if (isset($_POST['PrintPDF'])
 	$LeftOvers = $pdf->addTextWrap(220,$YPos,60,$FontSize,$DisplayTotBalance,'right');
 	/* UldisN
 	$buf = $pdf->output();
-	$len = mb_strlen($buf);
+	$len = strlen($buf);
 
 	header('Content-type: application/pdf');
 	header("Content-Length: ".$len);

@@ -8,9 +8,9 @@ $title = _('Sales Types') . ' / ' . _('Price List Maintenance');
 include('includes/header.inc');
 
 if (isset($_POST['SelectedType'])){
-	$SelectedType = mb_strtoupper($_POST['SelectedType']);
+	$SelectedType = strtoupper($_POST['SelectedType']);
 } elseif (isset($_GET['SelectedType'])){
-	$SelectedType = mb_strtoupper($_GET['SelectedType']);
+	$SelectedType = strtoupper($_GET['SelectedType']);
 }
 
 if (isset($Errors)) {
@@ -32,7 +32,7 @@ if (isset($_POST['submit'])) {
 	//first off validate inputs sensible
 	$i=1;
 
-	if (mb_strlen($_POST['TypeAbbrev']) > 2) {
+	if (strlen($_POST['TypeAbbrev']) > 2) {
 		$InputError = 1;
 		prnMsg(_('The sales type (price list) code must be two characters or less long'),'error');
 		$Errors[$i] = 'SalesType';
@@ -42,7 +42,7 @@ if (isset($_POST['submit'])) {
 		prnMsg('<br />' . _('The sales type (price list) code cannot be an empty string or spaces'),'error');
 		$Errors[$i] = 'SalesType';
 		$i++;
-	} elseif (mb_strlen($_POST['Sales_Type']) >40) {
+	} elseif (strlen($_POST['Sales_Type']) >40) {
 		$InputError = 1;
 		echo prnMsg(_('The sales type (price list) description must be forty characters or less long'),'error');
 		$Errors[$i] = 'SalesType';

@@ -73,7 +73,7 @@ if (isset($_POST['Select'])) { /*User has hit the button selecting a supplier */
 	unset($_POST['Previous']);
 }
 if (isset($_POST['Search']) OR isset($_POST['Go']) OR isset($_POST['Next']) OR isset($_POST['Previous'])) {
-	if (mb_strlen($_POST['Keywords']) > 0 AND mb_strlen($_POST['SupplierCode']) > 0) {
+	if (strlen($_POST['Keywords']) > 0 AND strlen($_POST['SupplierCode']) > 0) {
 		prnMsg( '<br />' . _('Supplier name keywords have been used in preference to the Supplier code extract entered'), 'info' );
 	}
 	if ($_POST['Keywords'] == '' AND $_POST['SupplierCode'] == '') {
@@ -87,8 +87,8 @@ if (isset($_POST['Search']) OR isset($_POST['Go']) OR isset($_POST['Next']) OR i
 				FROM suppliers
 				ORDER BY suppname";
 	} else {
-		if (mb_strlen($_POST['Keywords']) > 0) {
-			$_POST['Keywords'] = mb_strtoupper($_POST['Keywords']);
+		if (strlen($_POST['Keywords']) > 0) {
+			$_POST['Keywords'] = strtoupper($_POST['Keywords']);
 			//insert wildcard characters in spaces
 			$SearchString = '%' . str_replace(' ', '%', $_POST['Keywords']) . '%';
 			$SQL = "SELECT supplierid,
@@ -101,8 +101,8 @@ if (isset($_POST['Search']) OR isset($_POST['Go']) OR isset($_POST['Next']) OR i
 				FROM suppliers
 				WHERE suppname " . LIKE . " '$SearchString'
 				ORDER BY suppname";
-		} elseif (mb_strlen($_POST['SupplierCode']) > 0) {
-			$_POST['SupplierCode'] = mb_strtoupper($_POST['SupplierCode']);
+		} elseif (strlen($_POST['SupplierCode']) > 0) {
+			$_POST['SupplierCode'] = strtoupper($_POST['SupplierCode']);
 			$SQL = "SELECT supplierid,
 					suppname,
 					currcode,

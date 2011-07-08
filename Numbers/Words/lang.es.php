@@ -129,17 +129,17 @@ class Numbers_Words_es extends Numbers_Words
         $ret = '';
 
         // add a the word for the minus sign if necessary
-        if (mb_substr($num, 0, 1) == '-')
+        if (substr($num, 0, 1) == '-')
         {
             $ret = $this->_sep . $this->_minus;
-            $num = mb_substr($num, 1);
+            $num = substr($num, 1);
         }
 
 
         // strip excessive zero signs
         $num = preg_replace('/^0+/','',$num);
 
-        if (mb_strlen($num) > 6)
+        if (strlen($num) > 6)
         {
             $current_power = 6;
             // check for highest power
@@ -147,23 +147,23 @@ class Numbers_Words_es extends Numbers_Words
             {
                 // convert the number above the first 6 digits
                 // with it's corresponding $power.
-                $snum = mb_substr($num, 0, -6);
+                $snum = substr($num, 0, -6);
                 $snum = preg_replace('/^0+/','',$snum);
                 if ($snum !== '') {
                     $ret .= $this->toWords($snum, $power + 6);
                 }
             }
-            $num = mb_substr($num, -6);
+            $num = substr($num, -6);
             if ($num == 0) {
                 return $ret;
             }
         }
         elseif ($num == 0 || $num == '') {
             return(' '.$this->_digits[0]);
-            $current_power = mb_strlen($num);
+            $current_power = strlen($num);
         }
         else {
-            $current_power = mb_strlen($num);
+            $current_power = strlen($num);
         }
 
         // See if we need "thousands"

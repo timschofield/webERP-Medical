@@ -26,7 +26,7 @@ if (isset($_POST['CheckCode'])) {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Dispatch') .
 		'" alt="" />' . ' ' . _('Select Item to Transfer') . '</p>';
 
-	if (mb_strlen($_POST['StockText'])>0) {
+	if (strlen($_POST['StockText'])>0) {
 		$sql="SELECT stockid, description from stockmaster where description " . LIKE . " '%" . $_POST['StockText'] . "%'";
 	} else {
 		$sql="SELECT stockid, description from stockmaster where stockid " . LIKE . " '%" . $_POST['StockCode']."%'";
@@ -61,7 +61,7 @@ if (isset($_GET['NewTransfer'])){
 
 if (isset($_GET['StockID'])){	/*carry the stockid through to the form for additional inputs */
 
-	$_POST['StockID'] = trim(mb_strtoupper($_GET['StockID']));
+	$_POST['StockID'] = trim(strtoupper($_GET['StockID']));
 
 } elseif (isset($_POST['StockID'])){	/* initiate a new transfer only if the StockID is different to the previous entry */
 
@@ -89,13 +89,13 @@ if ($NewTransfer){
 							perishable,
 							decimalplaces
 						FROM stockmaster
-						WHERE stockid='" . trim(mb_strtoupper($_POST['StockID'])) . "'",
+						WHERE stockid='" . trim(strtoupper($_POST['StockID'])) . "'",
 						$db);
 	if (DB_num_rows($result) == 0){
-		prnMsg( _('Unable to locate Stock Code').' '.mb_strtoupper($_POST['StockID']), 'error' );
+		prnMsg( _('Unable to locate Stock Code').' '.strtoupper($_POST['StockID']), 'error' );
 	} elseif (DB_num_rows($result)>0){
 		$myrow = DB_fetch_array($result);
-		$_SESSION['Transfer']->TransferItem[0] = new LineItem (	trim(mb_strtoupper($_POST['StockID'])),
+		$_SESSION['Transfer']->TransferItem[0] = new LineItem (	trim(strtoupper($_POST['StockID'])),
 															$myrow['description'],
 															$_POST['Quantity'],
 															$myrow['units'],
@@ -456,7 +456,7 @@ if (isset($_POST['StockID'])) {
 }
 echo '</td><td><input type=submit name="CheckCode" value="'._('Check Part').'"></td></tr>';
 
-if (isset($_SESSION['Transfer']->TransferItem[0]->ItemDescription) and mb_strlen($_SESSION['Transfer']->TransferItem[0]->ItemDescription)>1){
+if (isset($_SESSION['Transfer']->TransferItem[0]->ItemDescription) and strlen($_SESSION['Transfer']->TransferItem[0]->ItemDescription)>1){
 	echo '<tr><td colspan=3><font color=BLUE size=3>' . $_SESSION['Transfer']->TransferItem[0]->ItemDescription . ' ('._('In Units of').' ' . $_SESSION['Transfer']->TransferItem[0]->PartUnit . ' )</font></td></tr>';
 }
 

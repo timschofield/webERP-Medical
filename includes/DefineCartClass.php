@@ -161,7 +161,7 @@ Class Cart {
 																						poline)
 																					VALUES('" . $this->LineCounter . "',
 																						'" . $_SESSION['ExistingOrder'] . "',
-																						'" . trim(mb_strtoupper($StockID)) ."',
+																						'" . trim(strtoupper($StockID)) ."',
 																						'" . $Qty . "',
 																						'" . $Price . "',
 																						'" . $Units . "',
@@ -171,7 +171,7 @@ Class Cart {
 																						'" . $POLine . "')";
 				$result = DB_query($sql,
 							$db ,
-							_('The order line for') . ' ' . mb_strtoupper($StockID) . ' ' ._('could not be inserted'));
+							_('The order line for') . ' ' . strtoupper($StockID) . ' ' ._('could not be inserted'));
 			}
 
 			$this->LineCounter = $LineNumber + 1;
@@ -262,7 +262,7 @@ Class Cart {
 			$StockID_List .= ",'" . $StockItem->StockID . "'";
 		}
 
-		return mb_substr($StockID_List, 1);
+		return substr($StockID_List, 1);
 
 	}
 

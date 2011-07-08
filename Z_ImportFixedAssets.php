@@ -55,8 +55,8 @@ if ($_FILES['SelectedAssetFile']['name']) { //start file processing
 	//test header row field name and sequence
 	$i = 0;
 	foreach ($HeaderRow as $FieldName) {
-		if ( mb_strtoupper($FieldName) != mb_strtoupper($FieldNames[$i]) ) {
-			prnMsg (_('The selected file contains fields in the incorrect order ('. mb_strtoupper($FieldName). ' != '. mb_strtoupper($FieldNames[$i]). _('. Download a template and ensuer that fields are in the same sequence as the template.')),'error');
+		if ( strtoupper($FieldName) != strtoupper($FieldNames[$i]) ) {
+			prnMsg (_('The selected file contains fields in the incorrect order ('. strtoupper($FieldName). ' != '. strtoupper($FieldNames[$i]). _('. Download a template and ensuer that fields are in the same sequence as the template.')),'error');
 			fclose($FileHandle);
 			include('includes/footer.inc');
 			exit;
@@ -109,7 +109,7 @@ if ($_FILES['SelectedAssetFile']['name']) { //start file processing
 					$AccumDepn = $myrow[$i];
 					break;
 				case 8:
-					$DepnType = mb_strtoupper($myrow[$i]);
+					$DepnType = strtoupper($myrow[$i]);
 					break;
 				case 9:
 					$DepnRate= $myrow[$i];
@@ -120,7 +120,7 @@ if ($_FILES['SelectedAssetFile']['name']) { //start file processing
 			} //end switch
 		} //end loop around fields from import
 
-		if (mb_strlen($Description)==0 OR mb_strlen($Description)>50){
+		if (strlen($Description)==0 OR strlen($Description)>50){
 			prnMsg('The description of the asset is expected to be more than 3 characters long and less than 50 characters long','error');
 			echo '<br />' . _('Row:') . $Row . ' - ' . _('Invalid Description:') . ' ' . $Description;
 			$InputError=true;

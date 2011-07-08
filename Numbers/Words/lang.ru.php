@@ -463,19 +463,19 @@ class Numbers_Words_ru extends Numbers_Words
       $num = trim($num);
 
       $sign = "";
-      if (mb_substr($num, 0, 1) == '-') {
+      if (substr($num, 0, 1) == '-') {
         $sign = $this->_minus . $this->_sep;
-        $num = mb_substr($num, 1);
+        $num = substr($num, 1);
       }
 
-      while (mb_strlen($num) % 3) $num = '0' . $num;
+      while (strlen($num) % 3) $num = '0' . $num;
       if ($num == 0 || $num == '') {
         $ret .= $this->_digits[$gender][0];
       }
 
       else {
         $power = 0;
-        while ($power < mb_strlen($num)) {
+        while ($power < strlen($num)) {
             if (!$power) {
                 $groupgender = $gender;
             } elseif ($power == 3) {
@@ -483,7 +483,7 @@ class Numbers_Words_ru extends Numbers_Words
             } else {
                 $groupgender = 1;
             }
-            $group = $this->_groupToWords(mb_substr($num,-$power-3,3),$groupgender,$_case);
+            $group = $this->_groupToWords(substr($num,-$power-3,3),$groupgender,$_case);
             if (!$power) {
                 $case = $_case;
             }
@@ -547,7 +547,7 @@ class Numbers_Words_ru extends Numbers_Words
           $hundreds = (int)$num{0};
           if ($hundreds) {
               $ret = $this->_hundreds[$hundreds];
-              if (mb_substr($num,1) != '00') {
+              if (substr($num,1) != '00') {
                   $ret .= $this->_sep;
               }
               $case = 3;
@@ -599,7 +599,7 @@ class Numbers_Words_ru extends Numbers_Words
      */
     function toCurrencyWords($int_curr, $decimal, $fraction = false, $convert_fraction = true)
     {
-        $int_curr = mb_strtoupper($int_curr);
+        $int_curr = strtoupper($int_curr);
         if (!isset($this->_currency_names[$int_curr])) {
             $int_curr = $this->def_currency;
         }

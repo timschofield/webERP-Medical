@@ -10,7 +10,7 @@ include('includes/header.inc');
 echo '<p Class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') .'" alt="" /><b>' . $title. '</b></p>';
 
 if (isset($_GET['StockID'])){
-	$StockID = trim(mb_strtoupper($_GET['StockID']));
+	$StockID = trim(strtoupper($_GET['StockID']));
 } else {
 	prnMsg( _('This page must be called with parameters specifying the item to show the serial references and quantities') . '. ' . _('It cannot be displayed without the proper parameters being passed'),'error');
 	include('includes/footer.inc');

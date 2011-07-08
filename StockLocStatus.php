@@ -10,9 +10,9 @@ $title = _('All Stock Status By Location/Category');
 include('includes/header.inc');
 
 if (isset($_GET['StockID'])){
-	$StockID = trim(mb_strtoupper($_GET['StockID']));
+	$StockID = trim(strtoupper($_GET['StockID']));
 } elseif (isset($_POST['StockID'])){
-	$StockID = trim(mb_strtoupper($_POST['StockID']));
+	$StockID = trim(strtoupper($_POST['StockID']));
 }
 
 
@@ -258,13 +258,13 @@ if (isset($_POST['ShowStatus'])){
 					<td class=number>%s</td>
 					<td class=number><a target="_blank" href="SelectProduct.php?StockID=%s">%s</a></td>
 					<td class=number>%s</td></tr>',
-					mb_strtoupper($myrow['stockid']),
-					mb_strtoupper($myrow['stockid']),
+					strtoupper($myrow['stockid']),
+					strtoupper($myrow['stockid']),
 					$myrow['description'],
 					number_format($myrow['quantity'],$myrow['decimalplaces']),
 					number_format($myrow['reorderlevel'],$myrow['decimalplaces']),
 					number_format($DemandQty,$myrow['decimalplaces']),
-                    mb_strtoupper($myrow['stockid']),
+                    strtoupper($myrow['stockid']),
 					number_format($myrow['quantity'] - $DemandQty,$myrow['decimalplaces']),
 					number_format($QOO,$myrow['decimalplaces']));
 				if ($myrow['serialised'] ==1){ /*The line is a serialised item*/
@@ -288,13 +288,13 @@ if (isset($_POST['ShowStatus'])){
 					<td class=number>%s</td>
 					<td class=number><a target="_blank" href="SelectProduct.php?StockID=%s">%s</a></td>
 					<td class=number>%s</td>',
-					mb_strtoupper($myrow['stockid']),
-					mb_strtoupper($myrow['stockid']),
+					strtoupper($myrow['stockid']),
+					strtoupper($myrow['stockid']),
 					$myrow['description'],
 					number_format($myrow['quantity'],$myrow['decimalplaces']),
 					number_format($myrow['reorderlevel'],$myrow['decimalplaces']),
 					number_format($DemandQty,$myrow['decimalplaces']),
-					mb_strtoupper($myrow['stockid']),
+					strtoupper($myrow['stockid']),
 					number_format($myrow['quantity'] - $DemandQty,$myrow['decimalplaces']),
 					number_format($QOO,$myrow['decimalplaces']));
 				if ($myrow['serialised'] ==1){ /*The line is a serialised item*/

@@ -20,7 +20,7 @@ if (isset($_POST['PlacePO'])){ //user hit button to place PO for selected orders
 			}
 		}
 	}
-	if (mb_strlen($OrdersToPlacePOFor)==''){
+	if (strlen($OrdersToPlacePOFor)==''){
 		prnMsg(_('There were no sales orders checked to place purchase orders for. No purchase orders will be created.'),'info');
 	} else {
    /*  Now build SQL of items to purchase with purchasing data and preferred suppliers - sorted by preferred supplier */
@@ -402,9 +402,9 @@ if (isset($_POST['SearchParts'])){
 }
 
 if (isset($_POST['StockID'])){
-	$StockID = trim(mb_strtoupper($_POST['StockID']));
+	$StockID = trim(strtoupper($_POST['StockID']));
 } elseif (isset($_GET['StockID'])){
-	$StockID = trim(mb_strtoupper($_GET['StockID']));
+	$StockID = trim(strtoupper($_GET['StockID']));
 }
 
 if (!isset($StockID)) {

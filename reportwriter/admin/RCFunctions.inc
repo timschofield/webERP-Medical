@@ -428,7 +428,7 @@ function ValidateField($ReportID, $FieldName, $Description) {
 	// This function checks the fieldname and field reference and validates that it is good.
 	// first check if a form (fieldname is not provided unless it's the form page break field)
 	if ($Type=='frm' AND $Description<>'TestField') { // then check for non-zero description unless a fieldname is present
-		if (mb_strlen($Description)<1) return false; else return true;
+		if (strlen($Description)<1) return false; else return true;
 	}
 	// fetch the table values to build sql
 	$sql = "SELECT table1,
@@ -441,7 +441,7 @@ function ValidateField($ReportID, $FieldName, $Description) {
 	$Result=DB_query($sql,$db,'','',false,true);
 	$Prefs = DB_fetch_assoc($Result);
 	// Check for a non-blank entry in the field description or fieldname
-	if (mb_strlen($FieldName)<1 OR mb_strlen($Description)<1) return false;
+	if (strlen($FieldName)<1 OR strlen($Description)<1) return false;
 	// Build the table to search, then test inputs to see if they are valid
 	$strTable = $Prefs['table1'];
 	if ($Prefs['table2']) $strTable .= ' INNER JOIN '.$Prefs['table2']. ' ON '.$Prefs['table2criteria'];
@@ -464,11 +464,11 @@ function ReadDefReports() {
 		if ($pinfo['extension']=='txt') { // then it's a report file read name and type
 			$FileLines = file(DefRptPath.$DefRpt);
 			foreach ($FileLines as $OneLine) { // find the main reports sql statement, language and execute it
-				if (mb_strpos($OneLine,'ReportData:')===0) { // then it's the line we'er after with reportname and groupname
-					$GrpPos = mb_strpos($OneLine,"groupname='")+11;
-					$GrpName = mb_substr($OneLine, $GrpPos, mb_strpos($OneLine, "',", $GrpPos)-$GrpPos);
-					$RptPos = mb_strpos($OneLine,"reportname='")+12;
-					$RptName = mb_substr($OneLine, $RptPos, mb_strpos($OneLine, "',", $RptPos)-$RptPos);
+				if (strpos($OneLine,'ReportData:')===0) { // then it's the line we'er after with reportname and groupname
+					$GrpPos = strpos($OneLine,"groupname='")+11;
+					$GrpName = substr($OneLine, $GrpPos, strpos($OneLine, "',", $GrpPos)-$GrpPos);
+					$RptPos = strpos($OneLine,"reportname='")+12;
+					$RptName = substr($OneLine, $RptPos, strpos($OneLine, "',", $RptPos)-$RptPos);
 					$ReportList[$i]['GrpName'] = $GrpName;
 					$ReportList[$i]['RptName'] = $RptName;
 					$ReportList[$i]['FileName'] = $pinfo[basename];
@@ -503,7 +503,7 @@ function ReadImages($Default) {
 	$dh = opendir(DefRptPath);
 	while ($DefRpt = readdir($dh)) {
 		$pinfo = pathinfo(DefRptPath.$DefRpt);
-		$Ext = mb_strtoupper($pinfo['extension']);
+		$Ext = strtoupper($pinfo['extension']);
 		if ($Ext=='JPG' OR $Ext=='JPEG' OR $Ext=='PNG') {
 			if ($Default==$pinfo['basename']) $checked=' selected'; else $checked = '';
 			$OptionList .= '<option value="'.$pinfo['basename'].'"'.$checked.'> '.$pinfo['basename'].'</option>';
@@ -532,7 +532,7 @@ function ImportImage() {
 		}
 	} elseif (!is_uploaded_file($_FILES['imagefile']['tmp_name'])) { // file uploaded
 		$Rtn['message'] = RPT_IMP_ERMSG10;
-	} elseif (mb_strpos($_FILES['imagefile']['type'],'image')===false) { // not an imsge file extension
+	} elseif (strpos($_FILES['imagefile']['type'],'image')===false) { // not an imsge file extension
 		$Rtn['message'] = RPT_IMP_ERMSG6;
 	} elseif ($_FILES['imagefile']['size']==0) { // report contains no data, error
 		$Rtn['message'] = RPT_IMP_ERMSG7;
@@ -584,7 +584,7 @@ function ExportReport($ReportID) {
 		foreach ($FieldRows as $key=>$value) {
 			if ($key<>'id' AND $key<>'reportid') $sql .= $key."='".DB_escape_string($value)."', ";
 		}
-		$sql = mb_substr($sql,0,-2).";"; // Strip the last comma and space and add a semicolon
+		$sql = substr($sql,0,-2).";"; // Strip the last comma and space and add a semicolon
 		$FieldData[$i] = $sql;
 		$i++;
 	}
@@ -594,14 +594,14 @@ function ExportReport($ReportID) {
 	// Build the report sql string
 	$RptData = 'ReportData:';
 	foreach ($myrow as $key=>$value) if ($key<>'id') $RptData .= $key."='".DB_escape_string($value)."', ";
-	$RptData = mb_substr($RptData,0,-2).";"; // Strip the last comma and space and add a semicolon
+	$RptData = substr($RptData,0,-2).";"; // Strip the last comma and space and add a semicolon
 	$CSVOutput .= $RptData.$crlf.$crlf;
 	$CSVOutput .= '/* SQL field data. */'.$crlf;
 	for ($i=0; $i<count($FieldData); $i++) $CSVOutput .= $FieldData[$i].$crlf;
 	$CSVOutput .= $crlf;
 	$CSVOutput .= '/* End of Export File */'.$crlf;
 	// export the file
-	$FileSize = mb_strlen($CSVOutput);
+	$FileSize = strlen($CSVOutput);
 	header("Content-type: application/txt");
 	header("Content-disposition: attachment; filename=".preg_replace('/ /','',$ReportName).".rpt.txt; size=".$FileSize);
 	// These next two lines are needed for MSIE
@@ -627,7 +627,7 @@ function ImportReport($RptName) {
 			}
 		} elseif (!is_uploaded_file($_FILES['reportfile']['tmp_name'])) { // file uploaded
 			$Rtn['message'] = RPT_IMP_ERMSG10;
-		} elseif (mb_strpos($_FILES['reportfile']['type'],'text') === false)  { // not a text file, error
+		} elseif (strpos($_FILES['reportfile']['type'],'text') === false)  { // not a text file, error
 			$Rtn['message'] = RPT_IMP_ERMSG6;
 		} elseif ($_FILES['reportfile']['size']==0) { // report contains no data, error
 			$Rtn['message'] = RPT_IMP_ERMSG7;
@@ -641,9 +641,9 @@ function ImportReport($RptName) {
 	$Title1Desc = ''; // Initialize to null, not used for forms
 	$Title2Desc = '';
 	foreach ($arrSQL as $sql) { // find the report translated reportname and title information
-		if (mb_strpos($sql,'ReportName:')===0) $ReportName = mb_substr(trim($sql),12,-1);
-		if (mb_strpos($sql,'Title1Desc:')===0) $Title1Desc = mb_substr(trim($sql),12,-1);
-		if (mb_strpos($sql,'Title2Desc:')===0) $Title2Desc = mb_substr(trim($sql),12,-1);
+		if (strpos($sql,'ReportName:')===0) $ReportName = substr(trim($sql),12,-1);
+		if (strpos($sql,'Title1Desc:')===0) $Title1Desc = substr(trim($sql),12,-1);
+		if (strpos($sql,'Title2Desc:')===0) $Title2Desc = substr(trim($sql),12,-1);
 	}
 	// check for valid file, duplicate report name
 	if ($RptName=='') $RptName = $ReportName; // then no report was entered use reportname from file
@@ -657,8 +657,8 @@ function ImportReport($RptName) {
 	// Find the line with the table reports element, needs to be written first
 	$ValidReportSQL = false;
 	foreach ($arrSQL as $sql) { // find the main reports sql statement, language and execute it
-		if (mb_strpos($sql,'ReportData:')===0) {
-			$sql="INSERT INTO ".DBReports." SET ".mb_substr(trim($sql),11);
+		if (strpos($sql,'ReportData:')===0) {
+			$sql="INSERT INTO ".DBReports." SET ".substr(trim($sql),11);
 			$Result=DB_query($sql,$db,'','',false,true);
 			$ValidReportSQL = true;
 		}
@@ -678,17 +678,17 @@ function ImportReport($RptName) {
 		WHERE id = ".$ReportID.";";
 	$Result=DB_query($sql,$db,'','',false,true);
 	foreach ($arrSQL as $sql) { // fetch the translations for the field descriptions
-		if (mb_strpos($sql,'FieldDesc')===0) { // then it's a field description, find the index and save
+		if (strpos($sql,'FieldDesc')===0) { // then it's a field description, find the index and save
 			$sql = trim($sql);
-			$FldIndex = mb_substr($sql,9,mb_strpos($sql,':')-9);
-			$Language[$FldIndex] = mb_substr($sql,mb_strpos($sql,':')+2,-1);
+			$FldIndex = substr($sql,9,strpos($sql,':')-9);
+			$Language[$FldIndex] = substr($sql,strpos($sql,':')+2,-1);
 		}
 	}
 	foreach ($arrSQL as $sql) {
-		if (mb_strpos($sql,'FieldData')===0) { // a valid field, write it
+		if (strpos($sql,'FieldData')===0) { // a valid field, write it
 			$sql = trim($sql);
-			$FldIndex = mb_substr($sql,9,mb_strpos($sql,':')-9);
-			$sql="INSERT INTO ".DBRptFields." SET ".mb_substr($sql,mb_strpos($sql,':')+1);
+			$FldIndex = substr($sql,9,strpos($sql,':')-9);
+			$sql="INSERT INTO ".DBRptFields." SET ".substr($sql,strpos($sql,':')+1);
 			$Result=DB_query($sql,$db,'','',false,true);
 			$FieldID = DB_Last_Insert_ID($db,DBRptFields, 'id');
 			if ($FieldID<>0) { // A field was successfully written update the report id

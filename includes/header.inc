@@ -66,7 +66,7 @@
 
 			$DefaultManualLink = '<td class="quick_menu_tab" align="center"><a rel="external" accesskey="8" href="' .  $rootpath . '/doc/Manual/ManualContents.php?' . sid . '"><span style="text-decoration:underline;">8</span> ' . _('Manual') . '</a></td>';
 
-			if (mb_substr($_SESSION['Language'],0,2) !='en'){
+			if (substr($_SESSION['Language'],0,2) !='en'){
 				if (file_exists('locale/' . $_SESSION['Language'] . '/Manual/ManualContents.php')){
 					echo '<td class="quick_menu_tab" align="center"><a target="_blank" accesskey="8" href="' .  $rootpath . '/locale/' . $_SESSION['Language'] . '/Manual/ManualContents.php' . sid . '"><span style="text-decoration:underline;">8</span> ' . _('Manual') . '</a></td>';
 				} else {

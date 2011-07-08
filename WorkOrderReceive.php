@@ -78,14 +78,14 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 						$QuantityReceived ++;
 					}
 				} else { //not predefined serial numbers
-					if (mb_strlen($_POST['SerialNo' . $i])>0){
+					if (strlen($_POST['SerialNo' . $i])>0){
 						$QuantityReceived ++;
 					}
 				}
 			}
 		} else { //controlled but not serialised - just lot/batch control
 			for ($i=0;$i<15;$i++){
-				if (mb_strlen($_POST['BatchRef' . $i])>0){
+				if (strlen($_POST['BatchRef' . $i])>0){
 					$QuantityReceived += $_POST['Qty' .$i];
 				}
 			}
@@ -782,17 +782,17 @@ echo '</select></td></tr>
 echo '<table class="selection">';
 
 if($WORow['controlled']==1){ //controlled
-	$LotSNRefLength =mb_strlen($WORow['nextlotsnref']);
+	$LotSNRefLength =strlen($WORow['nextlotsnref']);
 	$EndOfTextPartPointer = 0;
 	if (is_numeric($WORow['nextlotsnref'])){
 		$LotSNRefNumeric =$WORow['nextlotsnref'];
 		$StringBitOfLotSNRef ='';
 	} else { //try to determine if the serial ref is an amalgamation of a text part and a numerical part and increment the numerical part only
-		while (is_numeric(mb_substr($WORow['nextlotsnref'],$LotSNRefLength-$EndOfTextPartPointer-1)) AND
-			mb_substr($WORow['nextlotsnref'],$LotSNRefLength-$EndOfTextPartPointer-1,1)!='-'){
+		while (is_numeric(substr($WORow['nextlotsnref'],$LotSNRefLength-$EndOfTextPartPointer-1)) AND
+			substr($WORow['nextlotsnref'],$LotSNRefLength-$EndOfTextPartPointer-1,1)!='-'){
 			$EndOfTextPartPointer++;
-			$LotSNRefNumeric = mb_substr($WORow['nextlotsnref'],$LotSNRefLength-$EndOfTextPartPointer);
-			$StringBitOfLotSNRef = mb_substr($WORow['nextlotsnref'],0,$LotSNRefLength-$EndOfTextPartPointer);
+			$LotSNRefNumeric = substr($WORow['nextlotsnref'],$LotSNRefLength-$EndOfTextPartPointer);
+			$StringBitOfLotSNRef = substr($WORow['nextlotsnref'],0,$LotSNRefLength-$EndOfTextPartPointer);
 		}
 	}
 

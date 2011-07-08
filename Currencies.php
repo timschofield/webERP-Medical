@@ -50,7 +50,7 @@ if (isset($_POST['submit'])) {
 		$Errors[$i] = 'Abbreviation';
 		$i++;
 	}
-	if (mb_strlen($_POST['Abbreviation']) > 3) {
+	if (strlen($_POST['Abbreviation']) > 3) {
 		$InputError = 1;
 		prnMsg(_('The currency abbreviation must be 3 characters or less long and for automated currency updates to work correctly be one of the ISO4217 currency codes'),'error');
 		$Errors[$i] = 'Abbreviation';
@@ -62,19 +62,19 @@ if (isset($_POST['submit'])) {
 		$Errors[$i] = 'ExchangeRate';
 		$i++;
 	}
-	if (mb_strlen($_POST['CurrencyName']) > 20) {
+	if (strlen($_POST['CurrencyName']) > 20) {
 		$InputError = 1;
 		prnMsg(_('The currency name must be 20 characters or less long'),'error');
 		$Errors[$i] = 'CurrencyName';
 		$i++;
 	}
-	if (mb_strlen($_POST['Country']) > 50) {
+	if (strlen($_POST['Country']) > 50) {
 		$InputError = 1;
 		prnMsg(_('The currency country must be 50 characters or less long'),'error');
 		$Errors[$i] = 'Country';
 		$i++;
 	}
-	if (mb_strlen($_POST['HundredsName']) > 15) {
+	if (strlen($_POST['HundredsName']) > 15) {
 		$InputError = 1;
 		prnMsg(_('The hundredths name must be 15 characters or less long'),'error');
 		$Errors[$i] = 'HundredsName';
@@ -209,7 +209,7 @@ or deletion of the records*/
 			$k++;
 		}
 		// Lets show the country flag
-		$ImageFile = 'flags/' . mb_strtoupper($myrow[1]) . '.gif';
+		$ImageFile = 'flags/' . strtoupper($myrow[1]) . '.gif';
 
 		if(!file_exists($ImageFile)){
 			$ImageFile =  'flags/blank.gif';

@@ -11,9 +11,9 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/m
 	. '" alt="" />' . ' ' . $title . '</p>';
 
 if (isset($_POST['SelectedTab'])){
-	$SelectedTab = mb_strtoupper($_POST['SelectedTab']);
+	$SelectedTab = strtoupper($_POST['SelectedTab']);
 } elseif (isset($_GET['SelectedTab'])){
-	$SelectedTab = mb_strtoupper($_GET['SelectedTab']);
+	$SelectedTab = strtoupper($_GET['SelectedTab']);
 }
 
 if (isset($_POST['Cancel'])) {
@@ -51,7 +51,7 @@ if (isset($_POST['submit'])) {
 		prnMsg('<br />' . _('The Tab code cannot be an empty string or spaces'),'error');
 		$Errors[$i] = 'TabCode';
 		$i++;
-	} elseif (mb_strlen($_POST['tabcode']) >20) {
+	} elseif (strlen($_POST['tabcode']) >20) {
 		$InputError = 1;
 		echo prnMsg(_('The Tab code must be twenty characters or less long'),'error');
 		$Errors[$i] = 'TabCode';

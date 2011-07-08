@@ -6,14 +6,14 @@ $result=DB_query($sql, $db);
 
 while ($myrow=DB_fetch_array($result)) {
 	$NewModulesAllowed='';
-	if (mb_strlen($myrow['modulesallowed'])==16) {
-		$SysConfig=mb_substr($myrow['modulesallowed'],14,2);
-		$NewModulesAllowed=mb_substr($myrow['modulesallowed'],0,14).'1,1,'.$SysConfig;
-	} else if (mb_strlen($myrow['modulesallowed'])==18) {
-		$SysConfig=mb_substr($myrow['modulesallowed'],16,2);
-		$NewModulesAllowed=mb_substr($myrow['modulesallowed'],0,16).'1,'.$SysConfig;
+	if (strlen($myrow['modulesallowed'])==16) {
+		$SysConfig=substr($myrow['modulesallowed'],14,2);
+		$NewModulesAllowed=substr($myrow['modulesallowed'],0,14).'1,1,'.$SysConfig;
+	} else if (strlen($myrow['modulesallowed'])==18) {
+		$SysConfig=substr($myrow['modulesallowed'],16,2);
+		$NewModulesAllowed=substr($myrow['modulesallowed'],0,16).'1,'.$SysConfig;
 	}
-	if (mb_strlen($NewModulesAllowed)>0) {
+	if (strlen($NewModulesAllowed)>0) {
 		$response=executeSQL("UPDATE www_users SET modulesallowed='".$NewModulesAllowed."' WHERE userid='".$myrow['userid']."'", $db, False);
 		if ($response==0) {
 			OutputResult( _('The modules allowed field has been updated for the latest modules') , 'success');

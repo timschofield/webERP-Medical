@@ -12,9 +12,9 @@ echo '<div class="centre"><p class="page_title_text"><img src="'.$rootpath.'/css
 		_('Fixed Asset Categories') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (isset($_GET['SelectedCategory'])){
-	$SelectedCategory = mb_strtoupper($_GET['SelectedCategory']);
+	$SelectedCategory = strtoupper($_GET['SelectedCategory']);
 } else if (isset($_POST['SelectedCategory'])){
-	$SelectedCategory = mb_strtoupper($_POST['SelectedCategory']);
+	$SelectedCategory = strtoupper($_POST['SelectedCategory']);
 }
 
 if (isset($_POST['submit'])) {
@@ -27,15 +27,15 @@ if (isset($_POST['submit'])) {
 
 	//first off validate inputs sensible
 
-	$_POST['CategoryID'] = mb_strtoupper($_POST['CategoryID']);
+	$_POST['CategoryID'] = strtoupper($_POST['CategoryID']);
 
-	if (mb_strlen($_POST['CategoryID']) > 6) {
+	if (strlen($_POST['CategoryID']) > 6) {
 		$InputError = 1;
 		prnMsg(_('The Fixed Asset Category code must be six characters or less long'),'error');
-	} elseif (mb_strlen($_POST['CategoryID'])==0) {
+	} elseif (strlen($_POST['CategoryID'])==0) {
 		$InputError = 1;
 		prnMsg(_('The Fixed Asset Category code must be at least 1 character but less than six characters long'),'error');
-	} elseif (mb_strlen($_POST['CategoryDescription']) >20) {
+	} elseif (strlen($_POST['CategoryDescription']) >20) {
 		$InputError = 1;
 		prnMsg(_('The Fixed Asset Category description must be twenty characters or less long'),'error');
 	}

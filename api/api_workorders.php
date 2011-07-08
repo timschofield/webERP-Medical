@@ -138,7 +138,7 @@
 	}
 
 	function VerifyLotSerialNumber($nextlotsnref, $i, $Errors) {
-		if (mb_strlen($nextlotsnref)>20) {
+		if (strlen($nextlotsnref)>20) {
 			$Errors[$i] = IncorrectSerialNumber;
 		}
 		return $Errors;
@@ -238,10 +238,10 @@
 			$ItemFieldValues.='"'.$value.'", ';
 		}
 		if (sizeof($Errors)==0) {
-			$wosql = "INSERT INTO workorders (".mb_substr($WOFieldNames,0,-2).") ".
-				"VALUES (".mb_substr($WOFieldValues,0,-2).") ";
-			$itemsql = "INSERT INTO woitems (".mb_substr($ItemFieldNames,0,-2).") ".
-				"VALUES (".mb_substr($ItemFieldValues,0,-2).") ";
+			$wosql = "INSERT INTO workorders (".substr($WOFieldNames,0,-2).") ".
+				"VALUES (".substr($WOFieldValues,0,-2).") ";
+			$itemsql = "INSERT INTO woitems (".substr($ItemFieldNames,0,-2).") ".
+				"VALUES (".substr($ItemFieldValues,0,-2).") ";
 			$systypessql = "UPDATE systypes set typeno=".GetNextTransactionNo(40, $db)." where typeid=40";
 			DB_Txn_Begin($db);
 			$woresult = DB_Query($wosql, $db);

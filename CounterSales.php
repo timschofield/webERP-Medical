@@ -37,33 +37,33 @@ if (isset($_POST['OrderItems'])){
 			$key=str_replace('~', ' ', trim($key));
 			$sql="SELECT quantity
 						FROM stockserialitems
-						WHERE stockid='".mb_substr($key,3, mb_strpos($key, 'batch')-3)."'
-							AND serialno='".trim(mb_substr($key, mb_strpos($key, 'batch')+5))."'";
+						WHERE stockid='".substr($key,3, strpos($key, 'batch')-3)."'
+							AND serialno='".trim(substr($key, strpos($key, 'batch')+5))."'";
 			$BatchQuantityResult=DB_query($sql, $db);
 			$BatchQuantityRow=DB_fetch_array($BatchQuantityResult);
-			if (!isset($NewItemArray[mb_substr($key,3, mb_strpos($key, 'batch')-3)])) {
+			if (!isset($NewItemArray[substr($key,3, strpos($key, 'batch')-3)])) {
 				if ($BatchQuantityRow['quantity']<trim($value)) {
-					prnMsg( _('Batch number').' '.trim(mb_substr($key, mb_strpos($key, 'batch')+5)).' '.
-						_('of item number').' '.mb_substr($key,3, mb_strpos($key, 'batch')-3).' '.
+					prnMsg( _('Batch number').' '.trim(substr($key, strpos($key, 'batch')+5)).' '.
+						_('of item number').' '.substr($key,3, strpos($key, 'batch')-3).' '.
 							_('has insufficient items remaining in it to complete this sale').$BatchQuantityRow['quantity'].'x'.$value, 'info');
 				} else {
-					$NewItemArray[mb_substr($key,3, mb_strpos($key, 'batch')-3)]['Quantity'] = trim($value);
-					$NewItemArray[mb_substr($key,3, mb_strpos($key, 'batch')-3)]['Batch']['Number'][] = trim(mb_substr($key, mb_strpos($key, 'batch')+5));
-					$NewItemArray[mb_substr($key,3, mb_strpos($key, 'batch')-3)]['Batch']['Quantity'][] = trim($value);
+					$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Quantity'] = trim($value);
+					$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Batch']['Number'][] = trim(substr($key, strpos($key, 'batch')+5));
+					$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Batch']['Quantity'][] = trim($value);
 				}
 			} else {
-				if ($BatchQuantityRow['quantity']<trim($value)+$NewItemArray[mb_substr($key,3, mb_strpos($key, 'batch')-3)]['Quantity']) {
-					prnMsg( _('Batch number').' '.trim(mb_substr($key, mb_strpos($key, 'batch')+5)).' '.
-						_('of item number').' '.mb_substr($key,3, mb_strpos($key, 'batch')-3).' '.
+				if ($BatchQuantityRow['quantity']<trim($value)+$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Quantity']) {
+					prnMsg( _('Batch number').' '.trim(substr($key, strpos($key, 'batch')+5)).' '.
+						_('of item number').' '.substr($key,3, strpos($key, 'batch')-3).' '.
 							_('has insufficient items remaining in it to complete this sale'), 'info');
 				} else {
-					$NewItemArray[mb_substr($key,3, mb_strpos($key, 'batch')-3)]['Quantity'] += trim($value);
-					$NewItemArray[mb_substr($key,3, mb_strpos($key, 'batch')-3)]['Batch']['Number'][] = trim(mb_substr($key, mb_strpos($key, 'batch')+5));
-					$NewItemArray[mb_substr($key,3, mb_strpos($key, 'batch')-3)]['Batch']['Quantity'][] = trim($value);
+					$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Quantity'] += trim($value);
+					$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Batch']['Number'][] = trim(substr($key, strpos($key, 'batch')+5));
+					$NewItemArray[substr($key,3, strpos($key, 'batch')-3)]['Batch']['Quantity'][] = trim($value);
 				}
 			}
 		} elseif (strstr($key,'itm')) {
-			$NewItemArray[mb_substr($key,3)] = trim($value);
+			$NewItemArray[substr($key,3)] = trim($value);
 		}
 	}
 }
@@ -256,9 +256,9 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 	} else if ($_POST['Keywords']=='' AND $_POST['StockCode']=='') {
 		$msg='<div class="page_help_text">' . _('Stock Category has been used in search') . '.</div>';
 	}
-	if (isset($_POST['Keywords']) AND mb_strlen($_POST['Keywords'])>0) {
+	if (isset($_POST['Keywords']) AND strlen($_POST['Keywords'])>0) {
 		//insert wildcard characters in spaces
-		$_POST['Keywords'] = mb_strtoupper($_POST['Keywords']);
+		$_POST['Keywords'] = strtoupper($_POST['Keywords']);
 		$SearchString = '%' . str_replace(' ', '%', $_POST['Keywords']) . '%';
 
 		if ($_POST['StockCat']=='All'){
@@ -287,9 +287,9 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 					ORDER BY stockmaster.stockid";
 		}
 
-	} else if (mb_strlen($_POST['StockCode'])>0){
+	} else if (strlen($_POST['StockCode'])>0){
 
-		$_POST['StockCode'] = mb_strtoupper($_POST['StockCode']);
+		$_POST['StockCode'] = strtoupper($_POST['StockCode']);
 		$SearchString = '%' . $_POST['StockCode'] . '%';
 
 		if ($_POST['StockCat']=='All'){
@@ -414,7 +414,7 @@ if ($_SESSION['Items'.$identifier]->DefaultCurrency != $_SESSION['CompanyRecord'
 		$i++;
 
 		if (isset($_POST[$QuickEntryCode])) {
-			$NewItem = mb_strtoupper($_POST[$QuickEntryCode]);
+			$NewItem = strtoupper($_POST[$QuickEntryCode]);
 		}
 		if (isset($_POST[$QuickEntryQty])) {
 			$NewItemQty = $_POST[$QuickEntryQty];

@@ -64,11 +64,11 @@ class Numbers_Words
 //Phil mods to ensure correct translation used.		
 		if (!file_exists('Numbers/Words/lang.' . $locale . '.php')){
         	//try to drop off the .utf8 suffix then recheck
-        	if (mb_strpos($locale,'.utf8')){
-				$locale = mb_substr($locale, 0,mb_strpos($locale,'.utf8'));
+        	if (strpos($locale,'.utf8')){
+				$locale = substr($locale, 0,strpos($locale,'.utf8'));
 			}
 			if (!file_exists('Numbers/Words/lang.' . $locale . '.php')){
-				$locale = mb_substr($locale,0,2);
+				$locale = substr($locale,0,2);
 			}
 			if (!file_exists('Numbers/Words/lang.' . $locale . '.php')){
 				$locale = 'en_US';
@@ -132,13 +132,13 @@ class Numbers_Words
 
         @$obj =& new $classname;
 
-        if (mb_strpos($num, '.') === false)
+        if (strpos($num, '.') === false)
         {
           $ret      = trim($obj->toCurrencyWords($int_curr, $num));
         } else {
             $currency = explode('.', $num, 2);
             /* add leading zero */
-            if (mb_strlen($currency[1]) == 1) {
+            if (strlen($currency[1]) == 1) {
                 $currency[1] .= '0';
             }
             $ret      = trim($obj->toCurrencyWords($int_curr, $currency[0], $currency[1]));

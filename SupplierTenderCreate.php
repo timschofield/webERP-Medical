@@ -184,7 +184,7 @@ if (isset($_POST['SelectedSupplier'])) {
 				WHERE supplierid='" . $_POST['SelectedSupplier'] . "'";
 	$result = DB_query($sql, $db);
 	$myrow = DB_fetch_array($result);
-	if (mb_strlen($myrow['email'])>0) {
+	if (strlen($myrow['email'])>0) {
 		$_SESSION['tender']->add_supplier_to_tender(
 				$_POST['SelectedSupplier'],
 				$myrow['suppname'],
@@ -197,14 +197,14 @@ if (isset($_POST['SelectedSupplier'])) {
 
 if (isset($_POST['NewItem']) and !isset($_POST['Refresh'])) {
 	foreach ($_POST as $key => $value) {
-		if (mb_substr($key,0,3)=='qty') {
-			$StockID=mb_substr($key,3);
+		if (substr($key,0,3)=='qty') {
+			$StockID=substr($key,3);
 			$Quantity=$value;
 		}
-		if (mb_substr($key,0,5)=='price') {
+		if (substr($key,0,5)=='price') {
 			$Price=$value;
 		}
-		if (mb_substr($key,0,3)=='uom') {
+		if (substr($key,0,3)=='uom') {
 			$UOM=$value;
 		}
 		if (isset($UOM)) {
@@ -425,7 +425,7 @@ if (!isset($_SESSION['tender']) or isset($_POST['LookupDeliveryAddress']) or $Sh
 }
 
 if (isset($_POST['SearchSupplier']) OR isset($_POST['Go']) OR isset($_POST['Next']) OR isset($_POST['Previous'])) {
-	if (mb_strlen($_POST['Keywords']) > 0 AND mb_strlen($_POST['SupplierCode']) > 0) {
+	if (strlen($_POST['Keywords']) > 0 AND strlen($_POST['SupplierCode']) > 0) {
 		prnMsg( '<br />' . _('Supplier name keywords have been used in preference to the Supplier code extract entered'), 'info' );
 	}
 	if ($_POST['Keywords'] == '' AND $_POST['SupplierCode'] == '') {
@@ -439,8 +439,8 @@ if (isset($_POST['SearchSupplier']) OR isset($_POST['Go']) OR isset($_POST['Next
 				FROM suppliers
 				ORDER BY suppname";
 	} else {
-		if (mb_strlen($_POST['Keywords']) > 0) {
-			$_POST['Keywords'] = mb_strtoupper($_POST['Keywords']);
+		if (strlen($_POST['Keywords']) > 0) {
+			$_POST['Keywords'] = strtoupper($_POST['Keywords']);
 			//insert wildcard characters in spaces
 			$SearchString = '%' . str_replace(' ', '%', $_POST['Keywords']) . '%';
 			$SQL = "SELECT supplierid,
@@ -453,8 +453,8 @@ if (isset($_POST['SearchSupplier']) OR isset($_POST['Go']) OR isset($_POST['Next
 				FROM suppliers
 				WHERE suppname " . LIKE . " '$SearchString'
 				ORDER BY suppname";
-		} elseif (mb_strlen($_POST['SupplierCode']) > 0) {
-			$_POST['SupplierCode'] = mb_strtoupper($_POST['SupplierCode']);
+		} elseif (strlen($_POST['SupplierCode']) > 0) {
+			$_POST['SupplierCode'] = strtoupper($_POST['SupplierCode']);
 			$SQL = "SELECT supplierid,
 					suppname,
 					currcode,

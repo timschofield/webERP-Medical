@@ -39,7 +39,7 @@
 	{
 		// For PHP 4 onward, XML functionality is always compiled-in on windows:
 		// no more need to dl-open it. It might have been compiled out on *nix...
-		if(mb_strtoupper(mb_substr(PHP_OS, 0, 3) != 'WIN'))
+		if(strtoupper(substr(PHP_OS, 0, 3) != 'WIN'))
 		{
 			dl('xml.so');
 		}
@@ -262,7 +262,7 @@
 			$src_encoding = $GLOBALS['xmlrpc_internalencoding'];
 		}
 
-		switch(mb_strtoupper($src_encoding.'_'.$dest_encoding))
+		switch(strtoupper($src_encoding.'_'.$dest_encoding))
 		{
 			case 'ISO-8859-1_':
 			case 'ISO-8859-1_US-ASCII':
@@ -289,7 +289,7 @@
 	$escaped_data = '';
 	// be kind to users creating string xmlrpcvals out of different php types
 	$data = (string) $data;
-	$ns = mb_strlen ($data);
+	$ns = strlen ($data);
 	for ($nn = 0; $nn < $ns; $nn++)
 	{
 		$ch = $data[$nn];
@@ -788,7 +788,7 @@
 		// skip processing if xml fault already detected
 		if ($GLOBALS['_xh']['isf'] < 2)
 		{
-			if(mb_substr($data, 0, 1) == '&' && mb_substr($data, -1, 1) == ';')
+			if(substr($data, 0, 1) == '&' && substr($data, -1, 1) == ';')
 			{
 				// G. Giunta 2006-08-25: useless change of 'lv' from 1 to 2
 				//if($GLOBALS['_xh']['lv']==1)
@@ -926,7 +926,7 @@
 			// if ZLIB is enabled, let the client by default accept compressed responses
 			if(function_exists('gzinflate') || (
 				function_exists('curl_init') && (($info = curl_version()) &&
-				((is_string($info) && mb_strpos($info, 'zlib') !== null) || isset($info['libz_version'])))
+				((is_string($info) && strpos($info, 'zlib') !== null) || isset($info['libz_version'])))
 			))
 			{
 				$this->accepted_compression = array('gzip', 'deflate');
@@ -1339,7 +1339,7 @@
 						$cookieheader .= ' ' . $name . '=' . $cookie['value'] . ";";
 					}
 				}
-				$cookieheader = 'Cookie:' . $version . mb_substr($cookieheader, 0, -1) . "\r\n";
+				$cookieheader = 'Cookie:' . $version . substr($cookieheader, 0, -1) . "\r\n";
 			}
 
 			$op= 'POST ' . $uri. " HTTP/1.0\r\n" .
@@ -1352,7 +1352,7 @@
 				'Accept-Charset: ' . implode(',', $this->accepted_charset_encodings) . "\r\n" .
 				$cookieheader .
 				'Content-Type: ' . $msg->content_type . "\r\nContent-Length: " .
-				mb_strlen($payload) . "\r\n\r\n" .
+				strlen($payload) . "\r\n\r\n" .
 				$payload;
 
 			if($this->debug > 1)
@@ -1384,7 +1384,7 @@
 				return $r;
 			}
 
-			if(!fputs($fp, $op, mb_strlen($op)))
+			if(!fputs($fp, $op, strlen($op)))
 			{
 				fclose($fp);
 				$this->errstr='Write error';
@@ -1445,7 +1445,7 @@
 			if($method == 'https')
 			{
 				if(($info = curl_version()) &&
-					((is_string($info) && mb_strpos($info, 'OpenSSL') === null) || (is_array($info) && !isset($info['ssl_version']))))
+					((is_string($info) && strpos($info, 'OpenSSL') === null) || (is_array($info) && !isset($info['ssl_version']))))
 				{
 					$this->errstr='SSL unavailable on this install';
 					$r=new xmlrpcresp(0, $GLOBALS['xmlrpcerr']['no_ssl'], $GLOBALS['xmlrpcstr']['no_ssl']);
@@ -1653,7 +1653,7 @@
 				{
 					$cookieheader .= $name . '=' . $cookie['value'] . '; ';
 				}
-				curl_setopt($curl, CURLOPT_COOKIE, mb_substr($cookieheader, 0, -2));
+				curl_setopt($curl, CURLOPT_COOKIE, substr($cookieheader, 0, -2));
 			}
 
 			foreach ($this->extracurlopts as $opt => $val)
@@ -2252,14 +2252,14 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 				{
 					// Look for CR/LF or simple LF as line separator,
 					// (even though it is not valid http)
-					$pos = mb_strpos($data,"\r\n\r\n");
+					$pos = strpos($data,"\r\n\r\n");
 					if($pos || is_int($pos))
 					{
 						$bd = $pos+4;
 					}
 					else
 					{
-						$pos = mb_strpos($data,"\n\n");
+						$pos = strpos($data,"\n\n");
 						if($pos || is_int($pos))
 						{
 							$bd = $pos+2;
@@ -2274,7 +2274,7 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 					{
 						// this filters out all http headers from proxy.
 						// maybe we could take them into account, too?
-						$data = mb_substr($data, $bd);
+						$data = substr($data, $bd);
 					}
 					else
 					{
@@ -2287,18 +2287,18 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 				// Strip HTTP 1.1 100 Continue header if present
 				while(preg_match('/^HTTP\/1\.1 1[0-9]{2} /', $data))
 				{
-					$pos = mb_strpos($data, 'HTTP', 12);
+					$pos = strpos($data, 'HTTP', 12);
 					// server sent a Continue header without any (valid) content following...
 					// give the client a chance to know it
 					if(!$pos && !is_int($pos)) // works fine in php 3, 4 and 5
 					{
 						break;
 					}
-					$data = mb_substr($data, $pos);
+					$data = substr($data, $pos);
 				}
 				if(!preg_match('/^HTTP\/[0-9.]+ 200 /', $data))
 				{
-					$errstr= mb_substr($data, 0, mb_strpos($data, "\n")-1);
+					$errstr= substr($data, 0, strpos($data, "\n")-1);
 					error_log('XML-RPC: '.__METHOD__.': HTTP error, got response: ' .$errstr);
 					$r=new xmlrpcresp(0, $GLOBALS['xmlrpcerr']['http_error'], $GLOBALS['xmlrpcstr']['http_error']. ' (' . $errstr . ')');
 					return $r;
@@ -2309,14 +2309,14 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 
 				// be tolerant to usage of \n instead of \r\n to separate headers and data
 				// (even though it is not valid http)
-				$pos = mb_strpos($data,"\r\n\r\n");
+				$pos = strpos($data,"\r\n\r\n");
 				if($pos || is_int($pos))
 				{
 					$bd = $pos+4;
 				}
 				else
 				{
-					$pos = mb_strpos($data,"\n\n");
+					$pos = strpos($data,"\n\n");
 					if($pos || is_int($pos))
 					{
 						$bd = $pos+2;
@@ -2329,7 +2329,7 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 					}
 				}
 				// be tolerant to line endings, and extra empty lines
-				$ar = preg_split("/\r?\n/", trim(mb_substr($data, 0, $pos)));
+				$ar = preg_split("/\r?\n/", trim(substr($data, 0, $pos)));
 				while(list(,$line) = @each($ar))
 				{
 					// take care of multi-line headers and cookies
@@ -2399,7 +2399,7 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 					}
 				}
 
-				$data = mb_substr($data, $bd);
+				$data = substr($data, $bd);
 
 				if($this->debug && count($GLOBALS['_xh']['headers']))
 				{
@@ -2444,13 +2444,13 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 								{
 									$data = $degzdata;
 									if($this->debug)
-									print "<PRE>---INFLATED RESPONSE---[".mb_strlen($data)." chars]---\n" . htmlentities($data) . "\n---END---</PRE>";
+									print "<PRE>---INFLATED RESPONSE---[".strlen($data)." chars]---\n" . htmlentities($data) . "\n---END---</PRE>";
 								}
-								elseif($GLOBALS['_xh']['headers']['content-encoding'] == 'gzip' && $degzdata = @gzinflate(mb_substr($data, 10)))
+								elseif($GLOBALS['_xh']['headers']['content-encoding'] == 'gzip' && $degzdata = @gzinflate(substr($data, 10)))
 								{
 									$data = $degzdata;
 									if($this->debug)
-									print "<PRE>---INFLATED RESPONSE---[".mb_strlen($data)." chars]---\n" . htmlentities($data) . "\n---END---</PRE>";
+									print "<PRE>---INFLATED RESPONSE---[".strlen($data)." chars]---\n" . htmlentities($data) . "\n---END---</PRE>";
 								}
 								else
 								{
@@ -2502,7 +2502,7 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 
 			$raw_data = $data;
 			// parse the HTTP headers of the response, if present, and separate them from data
-			if(mb_substr($data, 0, 4) == 'HTTP')
+			if(substr($data, 0, 4) == 'HTTP')
 			{
 				$r =& $this->parseResponseHeaders($data, $headers_processed);
 				if ($r)
@@ -2521,12 +2521,12 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 
 			if($this->debug)
 			{
-				$start = mb_strpos($data, '<!-- SERVER DEBUG INFO (BASE64 ENCODED):');
+				$start = strpos($data, '<!-- SERVER DEBUG INFO (BASE64 ENCODED):');
 				if ($start)
 				{
-					$start += mb_strlen('<!-- SERVER DEBUG INFO (BASE64 ENCODED):');
-					$end = mb_strpos($data, '-->', $start);
-					$comments = mb_substr($data, $start, $end-$start);
+					$start += strlen('<!-- SERVER DEBUG INFO (BASE64 ENCODED):');
+					$end = strpos($data, '-->', $start);
+					$comments = substr($data, $start, $end-$start);
 					print "<PRE>---SERVER DEBUG INFO (DECODED) ---\n\t".htmlentities(str_replace("\n", "\n\t", base64_decode($comments)))."\n---END---\n</PRE>";
 				}
 			}
@@ -2541,7 +2541,7 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 			$pos = strrpos($data, '</methodResponse>');
 			if($pos !== false)
 			{
-				$data = mb_substr($data, 0, $pos+17);
+				$data = substr($data, 0, $pos+17);
 			}
 
 			// if user wants back raw xml, give it to him
@@ -3608,39 +3608,39 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 
 		// read chunk-size, chunk-extension (if any) and crlf
 		// get the position of the linebreak
-		$chunkend = mb_strpos($buffer,"\r\n") + 2;
-		$temp = mb_substr($buffer,0,$chunkend);
+		$chunkend = strpos($buffer,"\r\n") + 2;
+		$temp = substr($buffer,0,$chunkend);
 		$chunk_size = hexdec( trim($temp) );
 		$chunkstart = $chunkend;
 		while($chunk_size > 0)
 		{
-			$chunkend = mb_strpos($buffer, "\r\n", $chunkstart + $chunk_size);
+			$chunkend = strpos($buffer, "\r\n", $chunkstart + $chunk_size);
 
 			// just in case we got a broken connection
 			if($chunkend == false)
 			{
-				$chunk = mb_substr($buffer,$chunkstart);
+				$chunk = substr($buffer,$chunkstart);
 				// append chunk-data to entity-body
 				$new .= $chunk;
-				$length += mb_strlen($chunk);
+				$length += strlen($chunk);
 				break;
 			}
 
 			// read chunk-data and crlf
-			$chunk = mb_substr($buffer,$chunkstart,$chunkend-$chunkstart);
+			$chunk = substr($buffer,$chunkstart,$chunkend-$chunkstart);
 			// append chunk-data to entity-body
 			$new .= $chunk;
 			// length := length + chunk-size
-			$length += mb_strlen($chunk);
+			$length += strlen($chunk);
 			// read chunk-size and crlf
 			$chunkstart = $chunkend + 2;
 
-			$chunkend = mb_strpos($buffer,"\r\n",$chunkstart)+2;
+			$chunkend = strpos($buffer,"\r\n",$chunkstart)+2;
 			if($chunkend == false)
 			{
 				break; //just in case we got a broken connection
 			}
-			$temp = mb_substr($buffer,$chunkstart,$chunkend-$chunkstart);
+			$temp = substr($buffer,$chunkstart,$chunkend-$chunkstart);
 			$chunk_size = hexdec( trim($temp) );
 			$chunkstart = $chunkend;
 		}
@@ -3680,7 +3680,7 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 		$matches = array();
 		if(preg_match('/;\s*charset\s*=([^;]+)/i', $httpheader, $matches))
 		{
-			return mb_strtoupper(trim($matches[1], " \t\""));
+			return strtoupper(trim($matches[1], " \t\""));
 		}
 
 		// 2 - scan the first bytes of the data for a UTF-16 (or other) BOM pattern
@@ -3711,7 +3711,7 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 			'\s+encoding\s*=\s*' . "((?:\"[A-Za-z][A-Za-z0-9._-]*\")|(?:'[A-Za-z][A-Za-z0-9._-]*'))/",
 			$xmlchunk, $matches))
 		{
-			return mb_strtoupper(mb_substr($matches[2], 1, -1));
+			return strtoupper(substr($matches[2], 1, -1));
 		}
 
 		// 4 - if mbstring is available, let it do the guesswork
@@ -3761,7 +3761,7 @@ xmlrpc_encode_entitites($this->errstr, $GLOBALS['xmlrpc_internalencoding'], $cha
 		);
 		if (is_string($validlist))
 			$validlist = explode(',', $validlist);
-		if (@in_array(mb_strtoupper($encoding), $validlist))
+		if (@in_array(strtoupper($encoding), $validlist))
 			return true;
 		else
 		{

@@ -303,11 +303,11 @@ class Mail_mimePart {
 
         while(list(, $line) = each($lines)){
 
-            $linlen     = mb_strlen($line);
+            $linlen     = strlen($line);
             $newline = '';
 
             for ($i = 0; $i < $linlen; $i++) {
-                $char = mb_substr($line, $i, 1);
+                $char = substr($line, $i, 1);
                 $dec  = ord($char);
 
                 if (($dec == 32) AND ($i == ($linlen - 1))){    // convert space at eol only
@@ -316,10 +316,10 @@ class Mail_mimePart {
                 } elseif($dec == 9) {
                     ; // Do nothing if a tab.
                 } elseif(($dec == 61) OR ($dec < 32 ) OR ($dec > 126)) {
-                    $char = $escape . mb_strtoupper(sprintf('%02s', dechex($dec)));
+                    $char = $escape . strtoupper(sprintf('%02s', dechex($dec)));
                 }
 
-                if ((mb_strlen($newline) + mb_strlen($char)) >= $line_max) {        // MAIL_MIMEPART_CRLF is not counted
+                if ((strlen($newline) + strlen($char)) >= $line_max) {        // MAIL_MIMEPART_CRLF is not counted
                     $output  .= $newline . $escape . $eol;                    // soft line break; " =\r\n" is okay
                     $newline  = '';
                 }
@@ -327,7 +327,7 @@ class Mail_mimePart {
             } // end of for
             $output .= $newline . $eol;
         }
-        $output = mb_substr($output, 0, -1 * mb_strlen($eol)); // Don't want last crlf
+        $output = substr($output, 0, -1 * strlen($eol)); // Don't want last crlf
         return $output;
     }
 } // End of class

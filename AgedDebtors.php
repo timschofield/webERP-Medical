@@ -9,9 +9,9 @@ include('includes/session.inc');
 
 if (isset($_POST['PrintPDF'])
 	and isset($_POST['FromCriteria'])
-	and mb_strlen($_POST['FromCriteria'])>=1
+	and strlen($_POST['FromCriteria'])>=1
 	and isset($_POST['ToCriteria'])
-	and mb_strlen($_POST['ToCriteria'])>=1) {
+	and strlen($_POST['ToCriteria'])>=1) {
 
 	include('includes/PDFStarter.php');
 	$pdf->addInfo('Title',_('Aged Customer Balance Listing'));
@@ -428,7 +428,7 @@ if (isset($_POST['PrintPDF'])
 
 /* Javier: This actually would produce the output
 	$buf = $pdf->output();
-	$len = mb_strlen($buf);
+	$len = strlen($buf);
 */
 
 //	if ($len < 1000) {

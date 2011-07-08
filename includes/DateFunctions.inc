@@ -15,26 +15,28 @@ or d.m.Y  for Germany ;) Juergen Ruemmler heinrich@ruemmler.net
 
 */
 
+$DayNames=array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
+
 function Is_date($DateEntry) {
 
 	$DateEntry =Trim($DateEntry);
 
 	//echo '<BR>The date entered is ' . $DateEntry;
 
-	if (mb_strpos($DateEntry,'/')) {
+	if (strpos($DateEntry,'/')) {
 		$Date_Array = explode('/',$DateEntry);
-	} elseif (mb_strpos ($DateEntry,'-')) {
+	} elseif (strpos ($DateEntry,'-')) {
 		$Date_Array = explode('-',$DateEntry);
-	} elseif (mb_strpos ($DateEntry,'.')) {
+	} elseif (strpos ($DateEntry,'.')) {
 		$Date_Array = explode('.',$DateEntry);
-	} elseif (mb_strlen($DateEntry)==6) {
-		$Date_Array[0]= mb_substr($DateEntry,0,2);
-		$Date_Array[1]= mb_substr($DateEntry,2,2);
-		$Date_Array[2]= mb_substr($DateEntry,4,2);
-	} elseif (mb_strlen($DateEntry)==8) {
-		$Date_Array[0]= mb_substr($DateEntry,0,2);
-		$Date_Array[1]= mb_substr($DateEntry,2,2);
-		$Date_Array[2]= mb_substr($DateEntry,4,4);
+	} elseif (strlen($DateEntry)==6) {
+		$Date_Array[0]= substr($DateEntry,0,2);
+		$Date_Array[1]= substr($DateEntry,2,2);
+		$Date_Array[2]= substr($DateEntry,4,2);
+	} elseif (strlen($DateEntry)==8) {
+		$Date_Array[0]= substr($DateEntry,0,2);
+		$Date_Array[1]= substr($DateEntry,2,2);
+		$Date_Array[2]= substr($DateEntry,4,4);
 	}
 
 	if (!isset($Date_Array) or sizeof($Date_Array)<3) {
@@ -83,16 +85,16 @@ function Is_date($DateEntry) {
 function MonthAndYearFromSQLDate($DateEntry) {
 
 
-	if (mb_strpos($DateEntry,'/')) {
+	if (strpos($DateEntry,'/')) {
 		$Date_Array = explode('/',$DateEntry);
-	} elseif (mb_strpos ($DateEntry,'-')) {
+	} elseif (strpos ($DateEntry,'-')) {
 		$Date_Array = explode('-',$DateEntry);
-	} elseif (mb_strpos ($DateEntry,'.')) {
+	} elseif (strpos ($DateEntry,'.')) {
 		$Date_Array = explode('.',$DateEntry);
 	}
 
-	if (mb_strlen($Date_Array[2])>4) {
-		$Date_Array[2]= mb_substr($Date_Array[2],0,2);
+	if (strlen($Date_Array[2])>4) {
+		$Date_Array[2]= substr($Date_Array[2],0,2);
 	}
 
 	return ucfirst(strftime('%B %Y', mktime(0,0,0, (int)$Date_Array[1],(int)$Date_Array[2],(int)$Date_Array[0])));
@@ -101,16 +103,16 @@ function MonthAndYearFromSQLDate($DateEntry) {
 
 function DayOfWeekFromSQLDate($DateEntry) {
 
-	if (mb_strpos($DateEntry,'/')) {
+	if (strpos($DateEntry,'/')) {
 		$Date_Array = explode('/',$DateEntry);
-	} elseif (mb_strpos ($DateEntry,'-')) {
+	} elseif (strpos ($DateEntry,'-')) {
 		$Date_Array = explode('-',$DateEntry);
-	} elseif (mb_strpos ($DateEntry,'.')) {
+	} elseif (strpos ($DateEntry,'.')) {
 		$Date_Array = explode('.',$DateEntry);
 	}
 
-	if (mb_strlen($Date_Array[2])>4) {
-		$Date_Array[2]= mb_substr($Date_Array[2],0,2);
+	if (strlen($Date_Array[2])>4) {
+		$Date_Array[2]= substr($Date_Array[2],0,2);
 	}
 
 	return date( 'w', mktime(0,0,0, (int)$Date_Array[1],(int)$Date_Array[2],(int)$Date_Array[0]));
@@ -119,16 +121,16 @@ function DayOfWeekFromSQLDate($DateEntry) {
 
 function DayOfMonthFromSQLDate($DateEntry) {
 
-	if (mb_strpos($DateEntry,'/')) {
+	if (strpos($DateEntry,'/')) {
 		$Date_Array = explode('/',$DateEntry);
-	} elseif (mb_strpos ($DateEntry,'-')) {
+	} elseif (strpos ($DateEntry,'-')) {
 		$Date_Array = explode('-',$DateEntry);
-	} elseif (mb_strpos ($DateEntry,'.')) {
+	} elseif (strpos ($DateEntry,'.')) {
 		$Date_Array = explode('.',$DateEntry);
 	}
 
-	if (mb_strlen($Date_Array[2])>4) {
-		$Date_Array[2]= mb_substr($Date_Array[2],0,2);
+	if (strlen($Date_Array[2])>4) {
+		$Date_Array[2]= substr($Date_Array[2],0,2);
 	}
 
 	return date( 'j', mktime(0,0,0, (int)$Date_Array[1],(int)$Date_Array[2],(int)$Date_Array[0]));
@@ -154,11 +156,11 @@ function ConvertSQLDate($DateEntry) {
 //for MySQL dates are in the format YYYY-mm-dd
 
 
-	if (mb_strpos($DateEntry,'/')) {
+	if (strpos($DateEntry,'/')) {
 		$Date_Array = explode('/',$DateEntry);
-	} elseif (mb_strpos ($DateEntry,'-')) {
+	} elseif (strpos ($DateEntry,'-')) {
 		$Date_Array = explode('-',$DateEntry);
-	} elseif (mb_strpos ($DateEntry,'.')) {
+	} elseif (strpos ($DateEntry,'.')) {
 		$Date_Array = explode('.',$DateEntry);
 	} else {
 		prnMsg(_('The date does not appear to be in a valid format. The date being converted from SQL format was:') . ' ' . $DateEntry,'error');
@@ -178,8 +180,8 @@ function ConvertSQLDate($DateEntry) {
 		}
 	}
 
-	if (mb_strlen($Date_Array[2])>4) {  /*chop off the time stuff */
-		$Date_Array[2]= mb_substr($Date_Array[2],0,2);
+	if (strlen($Date_Array[2])>4) {  /*chop off the time stuff */
+		$Date_Array[2]= substr($Date_Array[2],0,2);
 	}
 
 	if ($_SESSION['DefaultDateFormat']=='d/m/Y'){
@@ -199,16 +201,16 @@ function SQLDateToEDI($DateEntry) {
 //for MySQL dates are in the format YYYY-mm-dd
 //EDI format 102 dates are in the format CCYYMMDD - just need to lose the seperator
 
-	if (mb_strpos($DateEntry,'/')) {
+	if (strpos($DateEntry,'/')) {
 		$Date_Array = explode('/',$DateEntry);
-	} elseif (mb_strpos ($DateEntry,'-')) {
+	} elseif (strpos ($DateEntry,'-')) {
 		$Date_Array = explode('-',$DateEntry);
-	} elseif (mb_strpos ($DateEntry,'.')) {
+	} elseif (strpos ($DateEntry,'.')) {
 		$Date_Array = explode('.',$DateEntry);
 	}
 
-	if (mb_strlen($Date_Array[2])>4) {  /*chop off the time stuff */
-		$Date_Array[2]= mb_substr($Date_Array[2],0,2);
+	if (strlen($Date_Array[2])>4) {  /*chop off the time stuff */
+		$Date_Array[2]= substr($Date_Array[2],0,2);
 	}
 
 	return $Date_Array[0].$Date_Array[1].$Date_Array[2];
@@ -223,20 +225,20 @@ and converts to a yyyymmdd - EANCOM format 102*/
 
 	$DateEntry = trim($DateEntry);
 
-	if (mb_strpos($DateEntry,'/')) {
+	if (strpos($DateEntry,'/')) {
 		$Date_Array = explode('/',$DateEntry);
-	} elseif (mb_strpos ($DateEntry,'-')) {
+	} elseif (strpos ($DateEntry,'-')) {
 		$Date_Array = explode('-',$DateEntry);
-	} elseif (mb_strpos ($DateEntry,'.')) {
+	} elseif (strpos ($DateEntry,'.')) {
 		$Date_Array = explode('.',$DateEntry);
-	} elseif (mb_strlen($DateEntry)==6) {
-		$Date_Array[0]= mb_substr($DateEntry,0,2);
-		$Date_Array[1]= mb_substr($DateEntry,2,2);
-		$Date_Array[2]= mb_substr($DateEntry,4,2);
-	} elseif (mb_strlen($DateEntry)==8) {
-		$Date_Array[0]= mb_substr($DateEntry,0,2);
-		$Date_Array[1]= mb_substr($DateEntry,2,2);
-		$Date_Array[2]= mb_substr($DateEntry,4,4);
+	} elseif (strlen($DateEntry)==6) {
+		$Date_Array[0]= substr($DateEntry,0,2);
+		$Date_Array[1]= substr($DateEntry,2,2);
+		$Date_Array[2]= substr($DateEntry,4,2);
+	} elseif (strlen($DateEntry)==8) {
+		$Date_Array[0]= substr($DateEntry,0,2);
+		$Date_Array[1]= substr($DateEntry,2,2);
+		$Date_Array[2]= substr($DateEntry,4,4);
 	}
 
 
@@ -276,47 +278,47 @@ function ConvertEDIDate($DateEntry, $EDIFormatCode) {
 	switch ($EDIFormatCode) {
 	case 102:
 		if ($_SESSION['DefaultDateFormat']=='d/m/Y'){
-			return mb_substr($DateEntry,6,2).'/'.mb_substr($DateEntry,4,2).'/'.mb_substr($DateEntry,0,4);
+			return substr($DateEntry,6,2).'/'.substr($DateEntry,4,2).'/'.substr($DateEntry,0,4);
 
 		} elseif ($_SESSION['DefaultDateFormat']=='d.m.Y') {
-						return mb_substr($DateEntry,6,2).'.'.mb_substr($DateEntry,4,2).'.'.mb_substr($DateEntry,0,4);
+						return substr($DateEntry,6,2).'.'.substr($DateEntry,4,2).'.'.substr($DateEntry,0,4);
 
 		} elseif ($_SESSION['DefaultDateFormat']=='m/d/Y') {
-						return mb_substr($DateEntry,4,2).'/'.mb_substr($DateEntry,6,2).'/'.mb_substr($DateEntry,0,4);
+						return substr($DateEntry,4,2).'/'.substr($DateEntry,6,2).'/'.substr($DateEntry,0,4);
 
 		} elseif ($_SESSION['DefaultDateFormat']=='Y/m/d') {
-						return mb_substr($DateEntry,0,4).'/'.mb_substr($DateEntry,4,2).'/'.mb_substr($DateEntry,6,2);
+						return substr($DateEntry,0,4).'/'.substr($DateEntry,4,2).'/'.substr($DateEntry,6,2);
 
 		}
 		break;
 	case 203:
 		if ($_SESSION['DefaultDateFormat']=='d/m/Y') {
-			return mb_substr($DateEntry,6,2).'/'.mb_substr($DateEntry,4,2).'/'.mb_substr($DateEntry,0,4).' ' . mb_substr($DateEntry,6,2).':' . mb_substr($DateEntry,8,2);
+			return substr($DateEntry,6,2).'/'.substr($DateEntry,4,2).'/'.substr($DateEntry,0,4).' ' . substr($DateEntry,6,2).':' . substr($DateEntry,8,2);
 
 		} elseif ($_SESSION['DefaultDateFormat']=='d.m.Y') {
-						return mb_substr($DateEntry,6,2).'.'.mb_substr($DateEntry,4,2).'.'.mb_substr($DateEntry,0,4).' ' . mb_substr($DateEntry,6,2).':' . mb_substr($DateEntry,8,2);
+						return substr($DateEntry,6,2).'.'.substr($DateEntry,4,2).'.'.substr($DateEntry,0,4).' ' . substr($DateEntry,6,2).':' . substr($DateEntry,8,2);
 
 		} elseif ($_SESSION['DefaultDateFormat']=='m/d/Y') {
-						return mb_substr($DateEntry,4,2).'/'.mb_substr($DateEntry,6,2).'/'.mb_substr($DateEntry,0,4).' ' . mb_substr($DateEntry,6,2).':' . mb_substr($DateEntry,8,2);
+						return substr($DateEntry,4,2).'/'.substr($DateEntry,6,2).'/'.substr($DateEntry,0,4).' ' . substr($DateEntry,6,2).':' . substr($DateEntry,8,2);
 
 		} elseif ($_SESSION['DefaultDateFormat']=='Y/m/d') {
-						return mb_substr($DateEntry,0,4).'/'.mb_substr($DateEntry,4,2).'/'.mb_substr($DateEntry,6,2).' ' . mb_substr($DateEntry,6,2).':' . mb_substr($DateEntry,8,2);
+						return substr($DateEntry,0,4).'/'.substr($DateEntry,4,2).'/'.substr($DateEntry,6,2).' ' . substr($DateEntry,6,2).':' . substr($DateEntry,8,2);
 
 		}
 		break;
 	case 616:
 		/*multiply the week number by 7 and add to the 1/1/CCYY */
-		return date($_SESSION['DefaultDateFormat'], mktime(0,0,0, 1,1+(7*(int)mb_substr($DateEntry,4,2)),mb_substr($DateEntry,0,4)));
+		return date($_SESSION['DefaultDateFormat'], mktime(0,0,0, 1,1+(7*(int)substr($DateEntry,4,2)),substr($DateEntry,0,4)));
 		break;
 	case 718:
 		if ($_SESSION['DefaultDateFormat']=='d/m/Y'){
-			return mb_substr($DateEntry,6,2).'/'.mb_substr($DateEntry,4,2).'/'.mb_substr($DateEntry,0,4) . ' - '. mb_substr($DateEntry,15,2).'/'.mb_substr($DateEntry,13,2).'/'.mb_substr($DateEntry,9,4);
+			return substr($DateEntry,6,2).'/'.substr($DateEntry,4,2).'/'.substr($DateEntry,0,4) . ' - '. substr($DateEntry,15,2).'/'.substr($DateEntry,13,2).'/'.substr($DateEntry,9,4);
 		} elseif ($_SESSION['DefaultDateFormat']=='d.m.Y') {
-						return mb_substr($DateEntry,6,2).'.'.mb_substr($DateEntry,4,2).'.'.mb_substr($DateEntry,0,4) . ' - '. mb_substr($DateEntry,15,2).'.'.mb_substr($DateEntry,13,2).'.'.mb_substr($DateEntry,9,4);
+						return substr($DateEntry,6,2).'.'.substr($DateEntry,4,2).'.'.substr($DateEntry,0,4) . ' - '. substr($DateEntry,15,2).'.'.substr($DateEntry,13,2).'.'.substr($DateEntry,9,4);
 		} elseif ($_SESSION['DefaultDateFormat']=='m/d/Y') {
-						return mb_substr($DateEntry,4,2).'/'.mb_substr($DateEntry,6,2).'/'.mb_substr($DateEntry,0,4).' - '. mb_substr($DateEntry,13,2).'/'.mb_substr($DateEntry,15,2).'/'.mb_substr($DateEntry,9,4);
+						return substr($DateEntry,4,2).'/'.substr($DateEntry,6,2).'/'.substr($DateEntry,0,4).' - '. substr($DateEntry,13,2).'/'.substr($DateEntry,15,2).'/'.substr($DateEntry,9,4);
 		} elseif ($_SESSION['DefaultDateFormat']=='Y/m/d') {
-						return mb_substr($DateEntry,0,4).'/'.mb_substr($DateEntry,4,2).'/'.mb_substr($DateEntry,6,2).' - '. mb_substr($DateEntry,13,2).'/'.mb_substr($DateEntry,15,2).'/'.mb_substr($DateEntry,9,4);
+						return substr($DateEntry,0,4).'/'.substr($DateEntry,4,2).'/'.substr($DateEntry,6,2).' - '. substr($DateEntry,13,2).'/'.substr($DateEntry,15,2).'/'.substr($DateEntry,9,4);
 
 		}
 
@@ -332,20 +334,20 @@ function Format_Date($DateEntry) {
 
 	$DateEntry =trim($DateEntry);
 
-	if (mb_strpos($DateEntry,'/')) {
+	if (strpos($DateEntry,'/')) {
 		$Date_Array = explode('/',$DateEntry);
-	} elseif (mb_strpos ($DateEntry,'-')) {
+	} elseif (strpos ($DateEntry,'-')) {
 		$Date_Array = explode('-',$DateEntry);
-	} elseif (mb_strpos ($DateEntry,'.')) {
+	} elseif (strpos ($DateEntry,'.')) {
 		$Date_Array = explode('.',$DateEntry);
-	} elseif (mb_strlen($DateEntry)==6) {
-		$Date_Array[0]= mb_substr($DateEntry,0,2);
-		$Date_Array[1]= mb_substr($DateEntry,2,2);
-		$Date_Array[2]= mb_substr($DateEntry,4,2);
-	} elseif (mb_strlen($DateEntry)==8) {
-		$Date_Array[0]= mb_substr($DateEntry,0,2);
-		$Date_Array[1]= mb_substr($DateEntry,2,2);
-		$Date_Array[2]= mb_substr($DateEntry,4,4);
+	} elseif (strlen($DateEntry)==6) {
+		$Date_Array[0]= substr($DateEntry,0,2);
+		$Date_Array[1]= substr($DateEntry,2,2);
+		$Date_Array[2]= substr($DateEntry,4,2);
+	} elseif (strlen($DateEntry)==8) {
+		$Date_Array[0]= substr($DateEntry,0,2);
+		$Date_Array[1]= substr($DateEntry,2,2);
+		$Date_Array[2]= substr($DateEntry,4,4);
 	}
 
 //to modify assumption in 2030
@@ -388,24 +390,24 @@ and converts to a yyyy/mm/dd format */
 
 	$DateEntry = trim($DateEntry);
 
-	if (mb_strpos($DateEntry,'/')) {
+	if (strpos($DateEntry,'/')) {
 		$Date_Array = explode('/',$DateEntry);
-	} elseif (mb_strpos ($DateEntry,'-')) {
+	} elseif (strpos ($DateEntry,'-')) {
 		$Date_Array = explode('-',$DateEntry);
-	} elseif (mb_strpos ($DateEntry,'.')) {
+	} elseif (strpos ($DateEntry,'.')) {
 		$Date_Array = explode('.',$DateEntry);
-	} elseif (mb_strlen($DateEntry)==6) {
-		$Date_Array[0]= mb_substr($DateEntry,0,2);
-		$Date_Array[1]= mb_substr($DateEntry,2,2);
-		$Date_Array[2]= mb_substr($DateEntry,4,2);
-	} elseif (mb_strlen($DateEntry)==8) {
-		$Date_Array[0]= mb_substr($DateEntry,0,4);
-		$Date_Array[1]= mb_substr($DateEntry,4,2);
-		$Date_Array[2]= mb_substr($DateEntry,6,2);
+	} elseif (strlen($DateEntry)==6) {
+		$Date_Array[0]= substr($DateEntry,0,2);
+		$Date_Array[1]= substr($DateEntry,2,2);
+		$Date_Array[2]= substr($DateEntry,4,2);
+	} elseif (strlen($DateEntry)==8) {
+		$Date_Array[0]= substr($DateEntry,0,4);
+		$Date_Array[1]= substr($DateEntry,4,2);
+		$Date_Array[2]= substr($DateEntry,6,2);
 	}
 
 	if ($_SESSION['DefaultDateFormat']=='Y/m/d') {
-		if (mb_strlen($Date_Array[0])==2) {
+		if (strlen($Date_Array[0])==2) {
 			if ((int)$Date_Array[0] <=60) {
 				$Date_Array[0] = '20'.$Date_Array[2];
 			} elseif ((int)$Date_Array[0] >60 AND (int)$Date_Array[2] <100) {
@@ -415,7 +417,7 @@ and converts to a yyyy/mm/dd format */
 		return $Date_Array[0].'-'.$Date_Array[1].'-'.$Date_Array[2];
 
 	}elseif (($_SESSION['DefaultDateFormat']=='d/m/Y') OR $_SESSION['DefaultDateFormat']=='d.m.Y'){
-		if (mb_strlen($Date_Array[2])==2) {
+		if (strlen($Date_Array[2])==2) {
 			if ((int)$Date_Array[2] <=60) {
 				$Date_Array[2] = '20'.$Date_Array[2];
 			} elseif ((int)$Date_Array[2] >60 AND (int)$Date_Array[2] <100) {
@@ -426,7 +428,7 @@ and converts to a yyyy/mm/dd format */
 		return $Date_Array[2].'-'.$Date_Array[1].'-'.$Date_Array[0];
 
 	} elseif ($_SESSION['DefaultDateFormat']=='m/d/Y') {
-		if (mb_strlen($Date_Array[2])==2) {
+		if (strlen($Date_Array[2])==2) {
 			if ((int)$Date_Array[2] <=60) {
 				$Date_Array[2] = '20'.$Date_Array[2];
 			} elseif ((int)$Date_Array[2] >60 AND (int)$Date_Array[2] <100) {
@@ -455,24 +457,24 @@ function LastDayOfMonth ( $DateEntry) {
 
 	$DateEntry = trim($DateEntry);
 
-	if (mb_strpos($DateEntry,'/')) {
+	if (strpos($DateEntry,'/')) {
 		$Date_Array = explode('/',$DateEntry);
-	} elseif (mb_strpos ($DateEntry,'-')) {
+	} elseif (strpos ($DateEntry,'-')) {
 		$Date_Array = explode('-',$DateEntry);
-	} elseif (mb_strpos ($DateEntry,'.')) {
+	} elseif (strpos ($DateEntry,'.')) {
 		$Date_Array = explode('.',$DateEntry);
-	} elseif (mb_strlen($DateEntry)==6) {
-		$Date_Array[0]= mb_substr($DateEntry,0,2);
-		$Date_Array[1]= mb_substr($DateEntry,2,2);
-		$Date_Array[2]= mb_substr($DateEntry,4,2);
-	} elseif (mb_strlen($DateEntry)==8) {
-		$Date_Array[0]= mb_substr($DateEntry,0,4);
-		$Date_Array[1]= mb_substr($DateEntry,4,2);
-		$Date_Array[2]= mb_substr($DateEntry,6,2);
+	} elseif (strlen($DateEntry)==6) {
+		$Date_Array[0]= substr($DateEntry,0,2);
+		$Date_Array[1]= substr($DateEntry,2,2);
+		$Date_Array[2]= substr($DateEntry,4,2);
+	} elseif (strlen($DateEntry)==8) {
+		$Date_Array[0]= substr($DateEntry,0,4);
+		$Date_Array[1]= substr($DateEntry,4,2);
+		$Date_Array[2]= substr($DateEntry,6,2);
 	}
 
 	if ($_SESSION['DefaultDateFormat']=='Y/m/d') {
-		if (mb_strlen($Date_Array[0])==2) {
+		if (strlen($Date_Array[0])==2) {
 			if ((int)$Date_Array[0] <=60) {
 				$Date_Array[0] = '20'.$Date_Array[2];
 			} elseif ((int)$Date_Array[0] >60 AND (int)$Date_Array[2] <100) {
@@ -483,7 +485,7 @@ function LastDayOfMonth ( $DateEntry) {
 		$DateStamp =  mktime(0,0,0, $Date_Array[1]+1, 0, $Date_Array[0]);
 
 	}elseif (($_SESSION['DefaultDateFormat']=='d/m/Y') OR $_SESSION['DefaultDateFormat']=='d.m.Y'){
-		if (mb_strlen($Date_Array[2])==2) {
+		if (strlen($Date_Array[2])==2) {
 			if ((int)$Date_Array[2] <=60) {
 				$Date_Array[2] = '20'.$Date_Array[2];
 			} elseif ((int)$Date_Array[2] >60 AND (int)$Date_Array[2] <100) {
@@ -494,7 +496,7 @@ function LastDayOfMonth ( $DateEntry) {
 
 
 	} elseif ($_SESSION['DefaultDateFormat']=='m/d/Y') {
-		if (mb_strlen($Date_Array[2])==2) {
+		if (strlen($Date_Array[2])==2) {
 			if ((int)$Date_Array[2] <=60) {
 				$Date_Array[2] = '20'.$Date_Array[2];
 			} elseif ((int)$Date_Array[2] >60 AND (int)$Date_Array[2] <100) {
@@ -536,14 +538,14 @@ function Date1GreaterThanDate2 ($Date1, $Date2) {
 	 *  a date >50 to be 1900's and less than to be 2000's
 	 */
 
-	if (mb_strlen($Year1)>2 AND mb_strlen($Year2)==2){
+	if (strlen($Year1)>2 AND strlen($Year2)==2){
 		if ($Year2>50) {
 			$Year2=1900+$Year2;
 		} else {
 			$Year2=2000+$Year2;
 		}
 	}
-	if (mb_strlen($Year2)>2 AND mb_strlen($Year1)==2){
+	if (strlen($Year2)>2 AND strlen($Year1)==2){
 		if ($Year1>50) {
 			$Year1=1900+$Year1;
 		} else {
@@ -581,11 +583,11 @@ function CalcDueDate($TranDate, $DayInFollowingMonth, $DaysBeforeDue){
 
 	$TranDate = trim($TranDate);
 
-	if (mb_strpos($TranDate,'/')) {
+	if (strpos($TranDate,'/')) {
 		$Date_Array = explode('/',$TranDate);
-	} elseif (mb_strpos ($TranDate,'-')) {
+	} elseif (strpos ($TranDate,'-')) {
 		$Date_Array = explode('-',$TranDate);
-	} elseif (mb_strpos ($TranDate,'.')) {
+	} elseif (strpos ($TranDate,'.')) {
 		$Date_Array = explode('.',$TranDate);
   }
 
@@ -648,11 +650,11 @@ function DateAdd ($DateToAddTo,$PeriodString,$NumberPeriods){
 
   $DateToAddTo = trim($DateToAddTo);
 
-	if (mb_strpos($DateToAddTo,'/')) {
+	if (strpos($DateToAddTo,'/')) {
 		$Date_Array = explode('/',$DateToAddTo);
-	} elseif (mb_strpos ($DateToAddTo,'-')) {
+	} elseif (strpos ($DateToAddTo,'-')) {
 		$Date_Array = explode('-',$DateToAddTo);
-	} elseif (mb_strpos ($DateToAddTo,'.')) {
+	} elseif (strpos ($DateToAddTo,'.')) {
 		$Date_Array = explode('.',$DateToAddTo);
   }
 
@@ -723,18 +725,18 @@ provided that both dates are after 1970. Also only works for dates up to the yea
 	$Date1 = trim($Date1);
 	$Date2 = trim($Date2);
 
-	if (mb_strpos($Date1,'/')) {
+	if (strpos($Date1,'/')) {
 		$Date1_array = explode('/',$Date1);
-	} elseif (mb_strpos ($Date1,'-')) {
+	} elseif (strpos ($Date1,'-')) {
 		$Date1_array = explode('-',$Date1);
-	} elseif (mb_strpos ($Date1,'.')) {
+	} elseif (strpos ($Date1,'.')) {
 		$Date1_array = explode('.',$Date1);
   }
-	if (mb_strpos($Date2,'/')) {
+	if (strpos($Date2,'/')) {
 		$Date2_array = explode('/',$Date2);
-	} elseif (mb_strpos ($Date2,'-')) {
+	} elseif (strpos ($Date2,'-')) {
 		$Date2_array = explode('-',$Date2);
-	} elseif (mb_strpos ($Date2,'.')) {
+	} elseif (strpos ($Date2,'.')) {
 		$Date2_array = explode('.',$Date2);
   }
 
@@ -848,11 +850,11 @@ function GetPeriod ($TransDate, &$db, $UseProhibit=true) {
 
 	/* Convert the transaction date into a unix time stamp.*/
 
-	if (mb_strpos($TransDate,'/')) {
+	if (strpos($TransDate,'/')) {
 		$Date_Array = explode('/',$TransDate);
-	} elseif (mb_strpos ($TransDate,'-')) {
+	} elseif (strpos ($TransDate,'-')) {
 		$Date_Array = explode('-',$TransDate);
-	} elseif (mb_strpos ($TransDate,'.')) {
+	} elseif (strpos ($TransDate,'.')) {
 		$Date_Array = explode('.',$TransDate);
 	}
 	if (($_SESSION['DefaultDateFormat']=='d/m/Y') or ($_SESSION['DefaultDateFormat']=='d.m.Y')){

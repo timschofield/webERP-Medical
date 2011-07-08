@@ -289,7 +289,7 @@ function InsertRecord($Table, $CheckFields, $CheckValues, $Fields, $Values, $db)
 		for ($i=0;$i<sizeOf($CheckFields);$i++) {
 			$sql = $sql.$CheckFields[$i]."='".$CheckValues[$i]."' AND ";
 		}
-		$sql=mb_substr($sql, 0, mb_strlen($sql)-5);
+		$sql=substr($sql, 0, strlen($sql)-5);
 		$result=DB_query($sql, $db);
 	}
 	if (DB_num_rows($result)==0 or isset($SQLFile)) {
@@ -297,11 +297,11 @@ function InsertRecord($Table, $CheckFields, $CheckValues, $Fields, $Values, $db)
 		for ($i=0;$i<sizeOf($Fields);$i++) {
 			$sql = $sql.$Fields[$i].",";
 		}
-		$sql=mb_substr($sql, 0, mb_strlen($sql)-1).") VALUES (";
+		$sql=substr($sql, 0, strlen($sql)-1).") VALUES (";
 		for ($i=0;$i<sizeOf($Values);$i++) {
 			$sql = $sql."'".$Values[$i]."',";
 		}
-		$sql=mb_substr($sql, 0, mb_strlen($sql)-1).")";
+		$sql=substr($sql, 0, strlen($sql)-1).")";
 		$response=executeSQL($sql, $db);
 		if ($response==0) {
 			OutputResult( _('The record has been inserted') , 'success');

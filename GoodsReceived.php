@@ -140,7 +140,7 @@ if (count($_SESSION['PO']->LineItems)>0 and !isset($_POST['ProcessGoodsReceived'
 		$SupplierUOMResult=DB_query($SupplierUomSQL, $db);
 		if (DB_num_rows($SupplierUOMResult)>0) {
 			$SupplierUOMRow=DB_fetch_array($SupplierUOMResult);
-			if (mb_strlen($SupplierUOMRow['unitname'])>0) {
+			if (strlen($SupplierUOMRow['unitname'])>0) {
 				$Uom=$SupplierUOMRow['unitname'];
 			} else {
 				$Uom=$LnItm->Units;

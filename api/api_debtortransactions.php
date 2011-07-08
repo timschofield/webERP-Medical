@@ -20,16 +20,16 @@ function ConvertToSQLDate($DateEntry) {
 //for MySQL dates are in the format YYYY-mm-dd
 
 
-	if (mb_strpos($DateEntry,'/')) {
+	if (strpos($DateEntry,'/')) {
 		$Date_Array = explode('/',$DateEntry);
-	} elseif (mb_strpos ($DateEntry,'-')) {
+	} elseif (strpos ($DateEntry,'-')) {
 		$Date_Array = explode('-',$DateEntry);
-	} elseif (mb_strpos ($DateEntry,'.')) {
+	} elseif (strpos ($DateEntry,'.')) {
 		$Date_Array = explode('.',$DateEntry);
 	}
 
-	if (mb_strlen($Date_Array[2])>4) {  /*chop off the time stuff */
-		$Date_Array[2]= mb_substr($Date_Array[2],0,2);
+	if (strlen($Date_Array[2])>4) {  /*chop off the time stuff */
+		$Date_Array[2]= substr($Date_Array[2],0,2);
 	}
 
 
@@ -53,9 +53,9 @@ function ConvertToSQLDate($DateEntry) {
 		$result=DB_query($sql, $db);
 		$myrow=DB_fetch_array($result);
 		$DateFormat=$myrow[0];
-		if (mb_strpos($TranDate,'/')>0) {
+		if (strpos($TranDate,'/')>0) {
 			$DateArray = explode('/',$TranDate);
-		} elseif (mb_strpos($TranDate,'.')>0) {
+		} elseif (strpos($TranDate,'.')>0) {
 			$DateArray = explode('.',$TranDate);
 		}
 		if ($DateFormat=='d/m/Y') {
@@ -131,7 +131,7 @@ function ConvertToSQLDate($DateEntry) {
 /* Check that the transaction reference is 20 characters
  *  or less long */
 	function VerifyReference($reference, $i, $Errors) {
-		if (mb_strlen($reference)>20) {
+		if (strlen($reference)>20) {
 			$Errors[$i] = IncorrectReference;
 		}
 		return $Errors;
@@ -139,7 +139,7 @@ function ConvertToSQLDate($DateEntry) {
 
 /* Check that the tpe field is 2 characters or less long */
 	function VerifyTpe($tpe, $i, $Errors) {
-		if (mb_strlen($tpe)>2) {
+		if (strlen($tpe)>2) {
 			$Errors[$i] = IncorrectTpe;
 		}
 		return $Errors;
@@ -211,7 +211,7 @@ function ConvertToSQLDate($DateEntry) {
 
 /* Check that the invoice text is 256 characters or less long */
 	function VerifyInvoiceText($invtext, $i, $Errors) {
-		if (mb_strlen($invtext)>256) {
+		if (strlen($invtext)>256) {
 			$Errors[$i] = IncorrectInvoiceText;
 		}
 		return $Errors;
@@ -219,7 +219,7 @@ function ConvertToSQLDate($DateEntry) {
 
 /* Check that the ship via field is 10 characters or less long */
 	function VerifyShipVia($shipvia, $i, $Errors) {
-		if (mb_strlen($shipvia)>10) {
+		if (strlen($shipvia)>10) {
 			$Errors[$i] = InvalidShipVia;
 		}
 		return $Errors;
@@ -235,7 +235,7 @@ function ConvertToSQLDate($DateEntry) {
 
 /* Check that the consignment field is 15 characters or less long */
 	function VerifyConsignment($consignment, $i, $Errors) {
-		if (mb_strlen($consignment)>15) {
+		if (strlen($consignment)>15) {
 			$Errors[$i] = InvalidConsignment;
 		}
 		return $Errors;
@@ -347,8 +347,8 @@ function ConvertToSQLDate($DateEntry) {
 		}
 		if (sizeof($Errors)==0) {
 			$result = DB_Txn_Begin($db);
-			$sql = "INSERT INTO debtortrans (" . mb_substr($FieldNames,0,-2) .")
-									VALUES ('" . mb_substr($FieldValues,0,-2) ."') ";
+			$sql = "INSERT INTO debtortrans (" . substr($FieldNames,0,-2) .")
+									VALUES ('" . substr($FieldValues,0,-2) ."') ";
 			$result = DB_Query($sql, $db);
 			$sql = "UPDATE systypes SET typeno='" . GetNextTransactionNo(10, $db) . "' WHERE typeid=10";
 			$result = DB_Query($sql, $db);
@@ -470,8 +470,8 @@ function ConvertToSQLDate($DateEntry) {
 		}
 		if (sizeof($Errors)==0) {
 			$result = DB_Txn_Begin($db);
-			$sql = "INSERT INTO debtortrans (".mb_substr($FieldNames,0,-2).") ".
-		  		"VALUES (".mb_substr($FieldValues,0,-2).") ";
+			$sql = "INSERT INTO debtortrans (".substr($FieldNames,0,-2).") ".
+		  		"VALUES (".substr($FieldValues,0,-2).") ";
 			$result = DB_Query($sql, $db);
 			$sql = "UPDATE systypes SET typeno='".GetNextTransactionNo(11, $db)."' WHERE typeid=10";
 			$result = DB_Query($sql, $db);

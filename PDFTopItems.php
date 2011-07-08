@@ -96,7 +96,7 @@ while ($myrow = DB_fetch_array($result)) {
 	$LeftOvers = $pdf->addTextWrap($Left_Margin + 370, $YPos, 300 - $Left_Margin, $FontSize, $myrow['units'], 'left');
 	$LeftOvers = $pdf->addTextWrap($Left_Margin + 400, $YPos, 70, $FontSize, number_format($myrow['valuesales'], 2), 'right');
 	$LeftOvers = $pdf->addTextWrap($Left_Margin + 490, $YPos, 30, $FontSize, $ohRow[0], 'right');
-	if (mb_strlen($LeftOvers) > 1) {
+	if (strlen($LeftOvers) > 1) {
 		$LeftOvers = $pdf->addTextWrap($Left_Margin + 1 + 94, $YPos - $line_height, 270, $FontSize, $LeftOvers, 'left');
 		$YPos-= $line_height;
 	}
@@ -110,7 +110,7 @@ while ($myrow = DB_fetch_array($result)) {
 	$YPos-= $line_height;
 }
 $pdfcode = $pdf->output();
-$len = mb_strlen($pdfcode);
+$len = strlen($pdfcode);
 if (DB_num_rows($result) == 0) {
 	$title = _('Print Price List Error');
 	include ('includes/header.inc');

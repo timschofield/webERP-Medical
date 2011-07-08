@@ -29,7 +29,7 @@
 
 /* Check that the name is 50 characters or less long */
 	function VerifyAccountName($AccountName, $i, $Errors) {
-		if (mb_strlen($AccountName)>50) {
+		if (strlen($AccountName)>50) {
 			$Errors[$i] = IncorrectAccountNameLength;
 		}
 		return $Errors;
@@ -70,8 +70,8 @@
 			$FieldValues.='"'.$value.'", ';
 		}
 		if (sizeof($Errors)==0) {
-			$sql = "INSERT INTO chartmaster (".mb_substr($FieldNames,0,-2).") ".
-		  		"VALUES ('".mb_substr($FieldValues,0,-2)."') ";
+			$sql = "INSERT INTO chartmaster (".substr($FieldNames,0,-2).") ".
+		  		"VALUES ('".substr($FieldValues,0,-2)."') ";
 			$result = DB_Query($sql, $db);
 			$sql="INSERT INTO chartdetails (accountcode,
 							period)

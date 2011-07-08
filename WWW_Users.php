@@ -59,13 +59,13 @@ if (isset($_POST['submit'])) {
 	ie the page has called itself with some user input */
 
 	//first off validate inputs sensible
-	if (mb_strlen($_POST['UserID'])<3){
+	if (strlen($_POST['UserID'])<3){
 		$InputError = 1;
 		prnMsg(_('The user ID entered must be at least 4 characters long'),'error');
 	} elseif (ContainsIllegalCharacters($_POST['UserID'])) {
 		$InputError = 1;
 		prnMsg(_('User names cannot contain any of the following characters') . " - \' & + \" \\ " . _('or a space'),'error');
-	} elseif (mb_strlen($_POST['Password'])<5){
+	} elseif (strlen($_POST['Password'])<5){
 		if (!$SelectedUser){
 			$InputError = 1;
 			prnMsg(_('The password entered must be at least 5 characters long'),'error');
@@ -73,12 +73,12 @@ if (isset($_POST['submit'])) {
 	} elseif (strstr($_POST['Password'],$_POST['UserID'])!= False){
 		$InputError = 1;
 		prnMsg(_('The password cannot contain the user id'),'error');
-	} elseif ((mb_strlen($_POST['Cust'])>0) AND (mb_strlen($_POST['BranchCode'])==0)) {
+	} elseif ((strlen($_POST['Cust'])>0) AND (strlen($_POST['BranchCode'])==0)) {
 		$InputError = 1;
 		prnMsg(_('If you enter a Customer Code you must also enter a Branch Code valid for this Customer'),'error');
 	}
 
-	if ((mb_strlen($_POST['BranchCode'])>0) AND ($InputError !=1)) {
+	if ((strlen($_POST['BranchCode'])>0) AND ($InputError !=1)) {
 		// check that the entered branch is valid for the customer code
 		$sql = "SELECT custbranch.debtorno
 				FROM custbranch

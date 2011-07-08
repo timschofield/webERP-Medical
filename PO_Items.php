@@ -86,7 +86,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
  *Is the delivery information all entered
  */
 	$InputError=0; /*Start off assuming the best */
-	if ($_SESSION['PO'.$identifier]->DelAdd1=='' or mb_strlen($_SESSION['PO'.$identifier]->DelAdd1)<3){
+	if ($_SESSION['PO'.$identifier]->DelAdd1=='' or strlen($_SESSION['PO'.$identifier]->DelAdd1)<3){
 		prnMsg( _('The purchase order can not be committed to the database because there is no delivery street address specified'),'error');
 		$InputError=1;
 	} elseif ($_SESSION['PO'.$identifier]->Location=='' or ! isset($_SESSION['PO'.$identifier]->Location)){
@@ -535,9 +535,9 @@ if (isset($_POST['LookupPrice']) and isset($_POST['StockID2'])){
 								purchdata.minorderqty
 					FROM purchdata
 					WHERE  purchdata.supplierno = '" . $_SESSION['PO'.$identifier]->SupplierID . "'
-					AND purchdata.stockid = '". mb_strtoupper($_POST['StockID2']) . "'";
+					AND purchdata.stockid = '". strtoupper($_POST['StockID2']) . "'";
 
-	$ErrMsg = _('The supplier pricing details for') . ' ' . mb_strtoupper($_POST['StockID']) . ' ' . _('could not be retrieved because');
+	$ErrMsg = _('The supplier pricing details for') . ' ' . strtoupper($_POST['StockID']) . ' ' . _('could not be retrieved because');
 	$DbgMsg = _('The SQL used to retrieve the pricing details but failed was');
 	$LookupResult = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
@@ -547,7 +547,7 @@ if (isset($_POST['LookupPrice']) and isset($_POST['StockID2'])){
 		$_POST['ConversionFactor'] = $myrow['conversionfactor'];
 		$_POST['MinimumOrderQty'] = $myrow['minorderqty'];
 	} else {
-		prnMsg(_('Sorry') . ' ... ' . _('there is no purchasing data set up for this supplier') . '  - ' . $_SESSION['PO'.$identifier]->SupplierID . ' ' . _('and item') . ' ' . mb_strtoupper($_POST['StockID']),'warn');
+		prnMsg(_('Sorry') . ' ... ' . _('there is no purchasing data set up for this supplier') . '  - ' . $_SESSION['PO'.$identifier]->SupplierID . ' ' . _('and item') . ' ' . strtoupper($_POST['StockID']),'warn');
 	}
 }
 
@@ -689,7 +689,7 @@ if (isset($_POST['EnterLine'])){ /*Inputs from the form directly without selecti
 				}
 			}
 		} //end if an AssetID is entered
-		if (mb_strlen($_POST['ItemDescription'])<=3){
+		if (strlen($_POST['ItemDescription'])<=3){
 			$AllowUpdate = false;
 			prnMsg(_('Cannot enter this order line') . ':<br />' . _('The description of the item being purchased is required where a non-stock item is being ordered'),'warn');
 		}
@@ -737,8 +737,8 @@ if (isset($_POST['EnterLine'])){ /*Inputs from the form directly without selecti
 if (isset($_POST['NewItem'])){ /* NewItem is set from the part selection list as the part code selected */
 /* take the form entries and enter the data from the form into the PurchOrder class variable */
 	foreach ($_POST as $key => $value) {
-		if (mb_substr($key, 0, 3)=='qty') {
-			$ItemCode=mb_substr($key, 3, mb_strlen($key)-3);
+		if (substr($key, 0, 3)=='qty') {
+			$ItemCode=substr($key, 3, strlen($key)-3);
 			$Quantity=$value;
 			$AlreadyOnThisOrder =0;
 
@@ -1133,7 +1133,7 @@ if (isset($SearchResult)) {
 			$UomResult=DB_query($UomSQL, $db);
 			if (DB_num_rows($UomResult)>0) {
 				$UomRow=DB_fetch_array($UomResult);
-				if (mb_strlen($UomRow['suppliersuom'])>0) {
+				if (strlen($UomRow['suppliersuom'])>0) {
 					$Uom=$UomRow['unitname'];
 				} else {
 					$Uom=$myrow['units'];

@@ -10,9 +10,9 @@ $title = _('Customer Branches');
 include('includes/header.inc');
 
 if (isset($_GET['DebtorNo'])) {
-	$DebtorNo = mb_strtoupper($_GET['DebtorNo']);
+	$DebtorNo = strtoupper($_GET['DebtorNo']);
 } else if (isset($_POST['DebtorNo'])){
-	$DebtorNo = mb_strtoupper($_POST['DebtorNo']);
+	$DebtorNo = strtoupper($_POST['DebtorNo']);
 }
 
 if (!isset($DebtorNo)) {
@@ -25,9 +25,9 @@ if (!isset($DebtorNo)) {
 
 
 if (isset($_GET['SelectedBranch'])){
-	$SelectedBranch = mb_strtoupper($_GET['SelectedBranch']);
+	$SelectedBranch = strtoupper($_GET['SelectedBranch']);
 } else if (isset($_POST['SelectedBranch'])){
-	$SelectedBranch = mb_strtoupper($_POST['SelectedBranch']);
+	$SelectedBranch = strtoupper($_POST['SelectedBranch']);
 }
 
 // This link is already available on the menu on this page
@@ -50,7 +50,7 @@ if (isset($_POST['submit'])) {
 
 	//first off validate inputs sensible
 
-	$_POST['BranchCode'] = mb_strtoupper($_POST['BranchCode']);
+	$_POST['BranchCode'] = strtoupper($_POST['BranchCode']);
 
 	if (ContainsIllegalCharacters($_POST['BranchCode']) OR strstr($_POST['BranchCode'],' ')) {
 		$InputError = 1;
@@ -58,7 +58,7 @@ if (isset($_POST['submit'])) {
 		$Errors[$i] = 'BranchCode';
 		$i++;
 	}
-	if (mb_strlen($_POST['BranchCode'])==0) {
+	if (strlen($_POST['BranchCode'])==0) {
 		$InputError = 1;
 		prnMsg(_('The Branch code must be at least one character long'),'error');
 		$Errors[$i] = 'BranchCode';
@@ -455,7 +455,7 @@ if (!isset($SelectedBranch)){
 		$result = DB_query($sql,$db);
 		$myrow = DB_fetch_row($result);
 		echo '<div class="page_help_text">'._('No Branches are defined for').' - '.$myrow[0]. '. ' . _('You must have a minimum of one branch for each Customer. Please add a branch now.') .'</div>';
-		$_POST['BranchCode'] = mb_substr($DebtorNo,0,10);
+		$_POST['BranchCode'] = substr($DebtorNo,0,10);
 		$_POST['BrName'] = $myrow[0];
 		$_POST['BrAddress1'] = $myrow[1];
 		$_POST['BrAddress2'] = $myrow[2];

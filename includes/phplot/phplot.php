@@ -724,7 +724,7 @@ class PHPlot {
             $t++;
         }
         // Remove trailing comma and add closing parenthesis
-        $this->default_dashed_style = mb_substr($this->default_dashed_style, 0, -1);
+        $this->default_dashed_style = substr($this->default_dashed_style, 0, -1);
         $this->default_dashed_style .= ')';
 
         return TRUE;
@@ -1072,7 +1072,7 @@ class PHPlot {
         $longest = 0;
         foreach (explode("\n", $text) as $each_line) {
             $lines[] = $line = trim($each_line);
-            $line_lens[] = $line_len = mb_strlen($line);
+            $line_lens[] = $line_len = strlen($line);
             if ($line_len > $longest) $longest = $line_len;
         }
         $n_lines = count($lines);
@@ -1850,7 +1850,7 @@ class PHPlot {
         $asked = strtolower(trim($which_opt));
 
         # Look for the supplied value in a comma/space separated list.
-        if (mb_strpos(", $which_acc,", ", $asked,") !== False)
+        if (strpos(", $which_acc,", ", $asked,") !== False)
             return $asked;
 
         $this->PrintError("$which_func(): '$which_opt' not in available choices: '$which_acc'.");
@@ -1889,7 +1889,7 @@ class PHPlot {
      */
     protected function CheckDataType($valid_types)
     {
-        if (mb_strpos(", $valid_types,", ", $this->data_type,") !== False)
+        if (strpos(", $valid_types,", ", $this->data_type,") !== False)
             return TRUE;
 
         $this->PrintError("Data type '$this->data_type' is not valid for '$this->plot_type' plots."

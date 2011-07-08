@@ -112,7 +112,7 @@
 		{
 			$methName=$m;
 		}
-		if(mb_strpos($methName, "system.") === 0)
+		if(strpos($methName, "system.") === 0)
 		{
 			$dmap=$GLOBALS['_xmlrpcs_dmap']; $sysCall=1;
 		}
@@ -165,7 +165,7 @@
 		{
 			$methName=$m;
 		}
-		if(mb_strpos($methName, "system.") === 0)
+		if(strpos($methName, "system.") === 0)
 		{
 			$dmap=$GLOBALS['_xmlrpcs_dmap']; $sysCall=1;
 		}
@@ -659,13 +659,13 @@
 				if($this->compress_response && function_exists('gzencode') && $resp_encoding != ''
 					&& $php_no_self_compress)
 				{
-					if(mb_strpos($resp_encoding, 'gzip') !== false)
+					if(strpos($resp_encoding, 'gzip') !== false)
 					{
 						$payload = gzencode($payload);
 						header("Content-Encoding: gzip");
 						header("Vary: Accept-Encoding");
 					}
-					elseif (mb_strpos($resp_encoding, 'deflate') !== false)
+					elseif (strpos($resp_encoding, 'deflate') !== false)
 					{
 						$payload = gzcompress($payload);
 						header("Content-Encoding: deflate");
@@ -677,7 +677,7 @@
 				// it will mess up measurements
 				if($php_no_self_compress)
 				{
-					header('Content-Length: ' . (int)mb_strlen($payload));
+					header('Content-Length: ' . (int)strlen($payload));
 				}
 			}
 			else
@@ -820,7 +820,7 @@
 			}
 
 			// check if request body has been compressed and decompress it
-			if($content_encoding != '' && mb_strlen($data))
+			if($content_encoding != '' && strlen($data))
 			{
 				if($content_encoding == 'deflate' || $content_encoding == 'gzip')
 				{
@@ -832,14 +832,14 @@
 							$data = $degzdata;
 							if($this->debug > 1)
 							{
-								$this->debugmsg("\n+++INFLATED REQUEST+++[".mb_strlen($data)." chars]+++\n" . $data . "\n+++END+++");
+								$this->debugmsg("\n+++INFLATED REQUEST+++[".strlen($data)." chars]+++\n" . $data . "\n+++END+++");
 							}
 						}
-						elseif($content_encoding == 'gzip' && $degzdata = @gzinflate(mb_substr($data, 10)))
+						elseif($content_encoding == 'gzip' && $degzdata = @gzinflate(substr($data, 10)))
 						{
 							$data = $degzdata;
 							if($this->debug > 1)
-								$this->debugmsg("+++INFLATED REQUEST+++[".mb_strlen($data)." chars]+++\n" . $data . "\n+++END+++");
+								$this->debugmsg("+++INFLATED REQUEST+++[".strlen($data)." chars]+++\n" . $data . "\n+++END+++");
 						}
 						else
 						{
@@ -866,13 +866,13 @@
 					// here we should check if we can match the client-requested encoding
 					// with the encodings we know we can generate.
 					/// @todo we should parse q=0.x preferences instead of getting first charset specified...
-					$client_accepted_charsets = explode(',', mb_strtoupper($_SERVER['HTTP_ACCEPT_CHARSET']));
+					$client_accepted_charsets = explode(',', strtoupper($_SERVER['HTTP_ACCEPT_CHARSET']));
 					// Give preference to internal encoding
 					$known_charsets = array($GLOBALS['xmlrpc_internalencoding'], 'UTF-8', 'ISO-8859-1', 'US-ASCII');
 					foreach ($known_charsets as $charset)
 					{
 						foreach ($client_accepted_charsets as $accepted)
-							if (mb_strpos($accepted, $charset) === 0)
+							if (strpos($accepted, $charset) === 0)
 							{
 								$resp_encoding = $charset;
 								break;
@@ -1048,7 +1048,7 @@
 			{
 				$methName = $m;
 			}
-			$sysCall = $this->allow_system_funcs && (mb_strpos($methName, "system.") === 0);
+			$sysCall = $this->allow_system_funcs && (strpos($methName, "system.") === 0);
 			$dmap = $sysCall ? $GLOBALS['_xmlrpcs_dmap'] : $this->dmap;
 
 			if(!isset($dmap[$methName]['function']))
@@ -1084,7 +1084,7 @@
 
 			$func = $dmap[$methName]['function'];
 			// let the 'class::function' syntax be accepted in dispatch maps
-			if(is_string($func) && mb_strpos($func, '::'))
+			if(is_string($func) && strpos($func, '::'))
 			{
 				$func = explode('::', $func);
 			}

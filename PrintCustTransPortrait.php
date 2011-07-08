@@ -365,7 +365,7 @@ If (isset($PrintPDF)
 
 				$lines=explode('\r\n',htmlspecialchars_decode($myrow2['narrative']));
 				for ($i=0;$i<sizeOf($lines);$i++) {
-				while (mb_strlen($lines[$i])>1){
+				while (strlen($lines[$i])>1){
 					if ($YPos-$line_height <= $Bottom_Margin){
 						/* head up a new invoice/credit note page */
 						/*draw the vertical column lines right to the bottom */
@@ -373,7 +373,7 @@ If (isset($PrintPDF)
 	   		        	include ('includes/PDFTransPageHeaderPortrait.inc');
 			   		} //end if need a new page headed up
 			   		/*increment a line down for the next line item */
-			   		if (mb_strlen($lines[$i])>1){
+			   		if (strlen($lines[$i])>1){
 						$lines[$i] = $pdf->addTextWrap($Left_Margin+85,$YPos,181,$FontSize,stripslashes($lines[$i]));
 					}
 					$YPos -= ($line_height);
@@ -466,7 +466,7 @@ If (isset($PrintPDF)
 			$pdf->addText($Page_Width-$Right_Margin-220, ($YPos+12) - ($line_height*3)-6,$FontSize, _('TOTAL INVOICE'));
 			$FontSize=8;
 			$LeftOvers = $pdf->addTextWrap($Left_Margin+5,$YPos-18,280,$FontSize,$_SESSION['RomalpaClause']);
-			while (mb_strlen($LeftOvers)>0 AND $YPos > $Bottom_Margin){
+			while (strlen($LeftOvers)>0 AND $YPos > $Bottom_Margin){
 				$YPos -=10;
 				$LeftOvers = $pdf->addTextWrap($Left_Margin+5,$YPos-18,280,$FontSize,$LeftOvers);
 			}
@@ -910,7 +910,7 @@ If (isset($PrintPDF)
 							$DisplayDiscount,
 							$DisplayNet);
 
-					      if (mb_strlen($myrow2['narrative'])>1){
+					      if (strlen($myrow2['narrative'])>1){
 					      		echo $RowStarter . '<td></td><td colspan=6>' . $myrow2['narrative'] . '</td></tr>';
 							$LineCounter++;
 					      }
@@ -960,7 +960,7 @@ If (isset($PrintPDF)
 				} /*end if there are stock movements to show on the invoice or credit note*/
 
 				/* check to see enough space left to print the totals/footer */
-				$LinesRequiredForText = floor(mb_strlen($myrow['invtext'])/140);
+				$LinesRequiredForText = floor(strlen($myrow['invtext'])/140);
 
 				if ($LineCounter >= ($_SESSION['PageLength'] - 8 - $LinesRequiredForText)){
 

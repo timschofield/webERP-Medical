@@ -9,22 +9,22 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/m
 	. '" alt="" />' . ' ' . $title . '</p>';
 
 if (isset($_POST['SelectedType'])){
-	$SelectedType = mb_strtoupper($_POST['SelectedType']);
+	$SelectedType = strtoupper($_POST['SelectedType']);
 } elseif (isset($_GET['SelectedType'])){
-	$SelectedType = mb_strtoupper($_GET['SelectedType']);
+	$SelectedType = strtoupper($_GET['SelectedType']);
 } else {
 	$SelectedType='';
 }
 
-if (!isset($_GET['delete']) and (ContainsIllegalCharacters($SelectedType) OR mb_strpos($SelectedType,' ')>0)){
+if (!isset($_GET['delete']) and (ContainsIllegalCharacters($SelectedType) OR strpos($SelectedType,' ')>0)){
 	$InputError = 1;
 	prnMsg(_('The petty cash tab type contain any of the following characters " \' - & or a space'),'error');
 }
 
 if (isset($_POST['SelectedTab'])){
-	$SelectedTab = mb_strtoupper($_POST['SelectedTab']);
+	$SelectedTab = strtoupper($_POST['SelectedTab']);
 } elseif (isset($_GET['SelectedTab'])){
-	$SelectedTab = mb_strtoupper($_GET['SelectedTab']);
+	$SelectedTab = strtoupper($_GET['SelectedTab']);
 }
 
 if (isset($_POST['Cancel'])) {

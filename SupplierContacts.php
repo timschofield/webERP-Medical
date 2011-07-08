@@ -45,7 +45,7 @@ if (isset($_POST['submit'])) {
 
 	//first off validate inputs sensible
 
-	if (mb_strlen($_POST['Contact']) == 0) {
+	if (strlen($_POST['Contact']) == 0) {
 		$InputError = 1;
 		prnMsg(_('The contact name must be at least one character long'),'error');
 		echo '<br />';

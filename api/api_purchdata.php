@@ -9,7 +9,7 @@
 	}
 
 	function VerifySuppliersUOM($suppliersuom, $i, $Errors) {
-		if (mb_strlen($suppliersuom)>50) {
+		if (strlen($suppliersuom)>50) {
 			$Errors[$i] = InvalidSuppliersUOM;
 		}
 		return $Errors;
@@ -24,7 +24,7 @@
 	}
 
 	function VerifySupplierDescription($supplierdescription, $i, $Errors) {
-		if (mb_strlen($supplierdescription)>50) {
+		if (strlen($supplierdescription)>50) {
 			$Errors[$i] = InvalidSupplierDescription;
 		}
 		return $Errors;
@@ -83,8 +83,8 @@
 			$FieldValues.='"'.$value.'", ';
 		}
 		if (sizeof($Errors)==0) {
-			$sql = "INSERT INTO purchdata (".mb_substr($FieldNames,0,-2).")
-					VALUES ('" . mb_substr($FieldValues,0,-2). "') ";
+			$sql = "INSERT INTO purchdata (".substr($FieldNames,0,-2).")
+					VALUES ('" . substr($FieldValues,0,-2). "') ";
 			DB_Txn_Begin($db);
 			$result = DB_Query($sql, $db);
 			DB_Txn_Commit($db);
@@ -132,7 +132,7 @@
 		foreach ($PurchDataDetails as $key => $value) {
 			$sql .= $key."='" . $value."', ";
 		}
-		$sql = mb_substr($sql,0,-2)." WHERE stockid='".$PurchDataDetails['stockid'].
+		$sql = substr($sql,0,-2)." WHERE stockid='".$PurchDataDetails['stockid'].
 			"' AND supplierno='".$PurchDataDetails['supplierno']."'";
 		if (sizeof($Errors)==0) {
 			$result = DB_Query($sql, $db);

@@ -11,9 +11,9 @@ include('includes/header.inc');
 
 
 if (isset($_GET['SelectedArea'])){
-	$SelectedArea = mb_strtoupper($_GET['SelectedArea']);
+	$SelectedArea = strtoupper($_GET['SelectedArea']);
 } elseif (isset($_POST['SelectedArea'])){
-	$SelectedArea = mb_strtoupper($_POST['SelectedArea']);
+	$SelectedArea = strtoupper($_POST['SelectedArea']);
 }
 
 if (isset($Errors)) {
@@ -31,12 +31,12 @@ if (isset($_POST['submit'])) {
 	ie the page has called itself with some user input */
 
 	//first off validate inputs sensible
-	$_POST['AreaCode'] = mb_strtoupper($_POST['AreaCode']);
+	$_POST['AreaCode'] = strtoupper($_POST['AreaCode']);
 	$sql = "SELECT count(areacode) from areas WHERE areacode='".$_POST['AreaCode']."'";
 	$result = DB_query($sql, $db);
 	$myrow = DB_fetch_row($result);
 	// mod to handle 3 char area codes
-	if (mb_strlen($_POST['AreaCode']) > 3) {
+	if (strlen($_POST['AreaCode']) > 3) {
 		$InputError = 1;
 		prnMsg(_('The area code must be three characters or less long'),'error');
 		$Errors[$i] = 'AreaCode';
@@ -46,7 +46,7 @@ if (isset($_POST['submit'])) {
 		prnMsg(_('The area code entered already exists'),'error');
 		$Errors[$i] = 'AreaCode';
 		$i++;
-	} elseif (mb_strlen($_POST['AreaDescription']) >25) {
+	} elseif (strlen($_POST['AreaDescription']) >25) {
 		$InputError = 1;
 		prnMsg(_('The area description must be twenty five characters or less long'),'error');
 		$Errors[$i] = 'AreaDescription';

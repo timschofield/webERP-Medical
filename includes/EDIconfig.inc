@@ -58,23 +58,23 @@ while ($LineDetails = DB_fetch_array($MessageLinesResult)){
 	$PoistionPointer = 0;
 	$NewLineText ='';
 	/* now get each occurence of [ in the line */
-	while (mb_strpos ($LineDetails['linetext'],'[',$PoistionPointer)!=False){
+	while (strpos ($LineDetails['linetext'],'[',$PoistionPointer)!=False){
 		$LastPositionPointer = $PoistionPointer;
-		$PositionPointer = mb_strpos ($LineDetails['linetext'],'[',$PoistionPointer);
+		$PositionPointer = strpos ($LineDetails['linetext'],'[',$PoistionPointer);
 
-		$NewLineText = $NewLineText .  mb_substr($LineDetails['linetext'],$LastPositionPointer,$PoistionPointer-$LastPositionPointer);
+		$NewLineText = $NewLineText .  substr($LineDetails['linetext'],$LastPositionPointer,$PoistionPointer-$LastPositionPointer);
 
 		$LastPositionPointer = $PoistionPointer;
-		$PositionPointer = mb_strpos ($LineDetails['linetext'],']',$PoistionPointer);
+		$PositionPointer = strpos ($LineDetails['linetext'],']',$PoistionPointer);
 
-		$VariableName = mb_substr($LineDetails['linetext'],$LastPositionPointer,$PoistionPointer-$LastPositionPointer);
+		$VariableName = substr($LineDetails['linetext'],$LastPositionPointer,$PoistionPointer-$LastPositionPointer);
 
 		$NewLineText = $NewLineText . $$VariableName;
 
 	}
 	/* now add the text from the last ] to the end of the line */
 	$LastPositionPointer = $PoistionPointer;
-	$NewLineText = $NewLineText .  mb_substr($LineDetails['linetext'],$LastPositionPointer);
+	$NewLineText = $NewLineText .  substr($LineDetails['linetext'],$LastPositionPointer);
 
 	echo "<BR>$NewLineText";
 

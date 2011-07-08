@@ -84,11 +84,11 @@ if ($_POST['Excludeamt'] < 1) {
 
 // Create array of dates based on DistDate and adding either weeks or months
 $FormatedDistdate = FormatDateForSQL($_POST['DistDate']);
-if (mb_strpos($FormatedDistdate,"/")) {
+if (strpos($FormatedDistdate,"/")) {
 	list($yyyy,$mm,$dd) = explode("/",$FormatedDistdate);
-} else if (mb_strpos($FormatedDistdate,"-")) {
+} else if (strpos($FormatedDistdate,"-")) {
 	list($yyyy,$mm,$dd) = explode("-",$FormatedDistdate);
-} else if (mb_strpos($FormatedDistdate,".")) {
+} else if (strpos($FormatedDistdate,".")) {
 	list($yyyy,$mm,$dd) = explode(".",$FormatedDistdate);
 }
 

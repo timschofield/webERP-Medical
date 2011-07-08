@@ -6,9 +6,9 @@ $title = _('Sales People Maintenance');
 include('includes/header.inc');
 
 if (isset($_GET['SelectedSaleperson'])){
-	$SelectedSaleperson =mb_strtoupper($_GET['SelectedSaleperson']);
+	$SelectedSaleperson =strtoupper($_GET['SelectedSaleperson']);
 } elseif(isset($_POST['SelectedSaleperson'])){
-	$SelectedSaleperson =mb_strtoupper($_POST['SelectedSaleperson']);
+	$SelectedSaleperson =strtoupper($_POST['SelectedSaleperson']);
 }
 
 if (isset($Errors)) {
@@ -30,26 +30,26 @@ if (isset($_POST['submit'])) {
 
 	//first off validate inputs sensible
 
-	if (mb_strlen($_POST['SalesmanCode']) > 3) {
+	if (strlen($_POST['SalesmanCode']) > 3) {
 		$InputError = 1;
 		prnMsg(_('The salesperson code must be three characters or less long'),'error');
 		$Errors[$i] = 'SalesmanCode';
 		$i++;
-	} elseif (mb_strlen($_POST['SalesmanCode'])==0 OR $_POST['SalesmanCode']=='') {
+	} elseif (strlen($_POST['SalesmanCode'])==0 OR $_POST['SalesmanCode']=='') {
 		$InputError = 1;
 		prnMsg(_('The salesperson code cannot be empty'),'error');
 		$Errors[$i] = 'SalesmanCode';
 		$i++;
-	} elseif (mb_strlen($_POST['SalesmanName']) > 30) {
+	} elseif (strlen($_POST['SalesmanName']) > 30) {
 		$InputError = 1;
 		prnMsg(_('The salesperson name must be thirty characters or less long'),'error');
 		$Errors[$i] = 'SalesmanName';
 		$i++;
-	} elseif (mb_strlen($_POST['SManTel']) > 20) {
+	} elseif (strlen($_POST['SManTel']) > 20) {
 		$InputError = 1;
 		prnMsg(_('The salesperson telephone number must be twenty characters or less long'),'error');
 
-	} elseif (mb_strlen($_POST['SManFax']) > 20) {
+	} elseif (strlen($_POST['SManFax']) > 20) {
 		$InputError = 1;
 		prnMsg(_('The salesperson telephone number must be twenty characters or less long'),'error');
 

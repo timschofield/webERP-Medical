@@ -158,7 +158,7 @@
 		}
 
         $exists = false;
-	    if (is_string($funcname) && mb_strpos($funcname, '::') !== false)
+	    if (is_string($funcname) && strpos($funcname, '::') !== false)
 	    {
 	        $funcname = explode('::', $funcname);
 	    }
@@ -284,7 +284,7 @@
 				foreach($docs as $doc)
 				{
 					$doc = trim($doc, " \r\t/*");
-					if(mb_strlen($doc) && mb_strpos($doc, '@') !== 0 && !$i)
+					if(strlen($doc) && strpos($doc, '@') !== 0 && !$i)
 					{
 						if($desc)
 						{
@@ -292,12 +292,12 @@
 						}
 						$desc .= $doc;
 					}
-					elseif(mb_strpos($doc, '@param') === 0)
+					elseif(strpos($doc, '@param') === 0)
 					{
 						// syntax: @param type [$name] desc
 						if(preg_match('/@param\s+(\S+)(\s+\$\S+)?\s+(.+)/', $doc, $matches))
 						{
-							if(mb_strpos($matches[1], '|'))
+							if(strpos($matches[1], '|'))
 							{
 								//$paramDocs[$i]['type'] = explode('|', $matches[1]);
 								$paramDocs[$i]['type'] = 'mixed';
@@ -311,7 +311,7 @@
 						}
 						$i++;
 					}
-					elseif(mb_strpos($doc, '@return') === 0)
+					elseif(strpos($doc, '@return') === 0)
 					{
 						// syntax: @return type desc
 						//$returns = preg_split('/\s+/', $doc);
@@ -896,7 +896,7 @@
 		$innercode .= "\$res =& \${$this_}client->send(\$msg, $timeout, '$protocol');\n";
 		if ($decode_fault)
 		{
-			if (is_string($fault_response) && ((mb_strpos($fault_response, '%faultCode%') !== false) || (mb_strpos($fault_response, '%faultString%') !== false)))
+			if (is_string($fault_response) && ((strpos($fault_response, '%faultCode%') !== false) || (strpos($fault_response, '%faultString%') !== false)))
 			{
 				$respcode = "str_replace(array('%faultCode%', '%faultString%'), array(\$res->faultCode(), \$res->faultString()), '".str_replace("'", "''", $fault_response)."')";
 			}

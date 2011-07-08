@@ -208,7 +208,7 @@ if (isset($_POST['SearchParts']) and $_POST['SearchParts']!=''){
 
 	}
 
-	if (mb_strlen($SQL)<2){
+	if (strlen($SQL)<2){
 		prnMsg(_('No selections have been made to search for parts') . ' - ' . _('choose a stock category or enter some characters of the code or description then try again'),'warn');
 	} else {
 

@@ -13,24 +13,24 @@ include('includes/header.inc');
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (isset($_GET['SelectedCategory'])){
-	$SelectedCategory = mb_strtoupper($_GET['SelectedCategory']);
+	$SelectedCategory = strtoupper($_GET['SelectedCategory']);
 } else if (isset($_POST['SelectedCategory'])){
-	$SelectedCategory = mb_strtoupper($_POST['SelectedCategory']);
+	$SelectedCategory = strtoupper($_POST['SelectedCategory']);
 }
 
 if (isset($_GET['ParentCategory'])){
-	$ParentCategory = mb_strtoupper($_GET['ParentCategory']);
+	$ParentCategory = strtoupper($_GET['ParentCategory']);
 } else if (isset($_POST['ParentCategory'])){
-	$ParentCategory = mb_strtoupper($_POST['ParentCategory']);
+	$ParentCategory = strtoupper($_POST['ParentCategory']);
 }
 if( isset($ParentCategory) && $ParentCategory == 0 ) {
 	unset($ParentCategory);
 }
 
 if (isset($_GET['EditName'])){
-	$EditName = mb_strtoupper($_GET['EditName']);
+	$EditName = strtoupper($_GET['EditName']);
 } else if (isset($_POST['EditName'])){
-	$EditName = mb_strtoupper($_POST['EditName']);
+	$EditName = strtoupper($_POST['EditName']);
 }
 
 if (isset($SelectedCategory) AND isset($_FILES['ItemPicture']) AND $_FILES['ItemPicture']['name'] !='') {
@@ -41,7 +41,7 @@ if (isset($SelectedCategory) AND isset($_FILES['ItemPicture']) AND $_FILES['Item
 	$filename = $_SESSION['part_pics_dir'] . '/cat_' . $SelectedCategory . '.jpg';
 
 	 //But check for the worst
-	if (mb_strtoupper(mb_substr(trim($_FILES['ItemPicture']['name']),mb_strlen($_FILES['ItemPicture']['name'])-3))!='JPG'){
+	if (strtoupper(substr(trim($_FILES['ItemPicture']['name']),strlen($_FILES['ItemPicture']['name'])-3))!='JPG'){
 		prnMsg(_('Only jpg files are supported - a file extension of .jpg is expected'),'warn');
 		$UploadTheFile ='No';
 	} elseif ( $_FILES['ItemPicture']['size'] > ($_SESSION['MaxImageSize']*1024)) { //File Size Check
@@ -78,7 +78,7 @@ if (isset($_POST['submit'])  && $EditName == 1 ) { // Creating or updating a cat
 
 	//first off validate inputs sensible
 
-	if (mb_strlen($_POST['SalesCatName']) >20 OR trim($_POST['SalesCatName'])=='') {
+	if (strlen($_POST['SalesCatName']) >20 OR trim($_POST['SalesCatName'])=='') {
 		$InputError = 1;
 		prnMsg(_('The Sales category description must be twenty characters or less long'),'error');
 	}

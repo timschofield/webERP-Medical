@@ -66,7 +66,7 @@ if (isset($_POST['SearchCust']) AND $_SESSION['RequireCustomerSelection']==1){
 	 if ($_POST['Keywords']=='' AND $_POST['CustCode']=='') {
 		  prnMsg( _('At least one Customer Name keyword OR an extract of a Customer Code must be entered for the search'), 'info' );
 	 } else {
-		  If (mb_strlen($_POST['Keywords'])>0) {
+		  If (strlen($_POST['Keywords'])>0) {
 		  //insert wildcard characters in spaces
 			$SearchString = '%' . str_replace(' ', '%', $_POST['Keywords']) . '%';
 
@@ -81,7 +81,7 @@ if (isset($_POST['SearchCust']) AND $_SESSION['RequireCustomerSelection']==1){
 				WHERE custbranch.brname " . LIKE  ." '".$SearchString."'
 				AND custbranch.disabletrans='0'";
 
-		  } elseif (mb_strlen($_POST['CustCode'])>0){
+		  } elseif (strlen($_POST['CustCode'])>0){
 
 			   $SQL = "SELECT
 			   		custbranch.debtorno,
@@ -116,8 +116,8 @@ if (isset($_POST['Select']) AND $_POST['Select']!='') {
 /*will only be true if page called from customer selection form
 parse the $Select string into customer code and branch code */
 
-	 $_SESSION['CreditItems']->Branch = mb_substr($_POST['Select'],mb_strpos($_POST['Select'],' - ')+3);
-	 $_POST['Select'] = mb_substr($_POST['Select'],0,mb_strpos($_POST['Select'],' - '));
+	 $_SESSION['CreditItems']->Branch = substr($_POST['Select'],strpos($_POST['Select'],' - ')+3);
+	 $_POST['Select'] = substr($_POST['Select'],0,strpos($_POST['Select'],' - '));
 
 /*Now retrieve customer information - name, salestype, currency, terms etc */
 
@@ -399,12 +399,12 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			  $QuickEntryCode = 'part_' . $i;
 			  $QuickEntryQty = 'qty_' . $i;
 			  $i++;
-		   } while (!is_numeric($_POST[$QuickEntryQty]) AND $_POST[$QuickEntryQty] <=0 AND mb_strlen($_POST[$QuickEntryCode])!=0 AND $i<=$QuickEntires);
+		   } while (!is_numeric($_POST[$QuickEntryQty]) AND $_POST[$QuickEntryQty] <=0 AND strlen($_POST[$QuickEntryCode])!=0 AND $i<=$QuickEntires);
 
 		   $_POST['NewItem'] = trim($_POST[$QuickEntryCode]);
 		   $NewItemQty = trim($_POST[$QuickEntryQty]);
 
-		   if (mb_strlen($_POST['NewItem'])==0){
+		   if (strlen($_POST['NewItem'])==0){
 			     break;	 /* break out of the loop if nothing in the quick entry fields*/
 		   }
 

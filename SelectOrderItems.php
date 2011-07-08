@@ -25,7 +25,7 @@ if (isset($_POST['QuickEntry'])){
 if (isset($_POST['order_items'])){
 	foreach ($_POST as $key => $value) {
 		if (strstr($key,'itm')) {
-			$NewItem_array[mb_substr($key,3)] = trim($value);
+			$NewItem_array[substr($key,3)] = trim($value);
 			$NewItem='Here';
 		}
 	}
@@ -304,9 +304,9 @@ if (isset($_POST['SearchCust']) AND $_SESSION['RequireCustomerSelection']==1 AND
 	if (($_POST['CustKeywords']=='') AND ($_POST['CustCode']=='')  AND ($_POST['CustPhone']=='')) {
 		prnMsg(_('At least one Customer Branch Name keyword OR an extract of a Customer Branch Code or Branch Phone Number must be entered for the search'), 'warn');
 	} else {
-		if (mb_strlen($_POST['CustKeywords'])>0) {
+		if (strlen($_POST['CustKeywords'])>0) {
 		//insert wildcard characters in spaces
-			$_POST['CustKeywords'] = mb_strtoupper(trim($_POST['CustKeywords']));
+			$_POST['CustKeywords'] = strtoupper(trim($_POST['CustKeywords']));
 			$SearchString = '%' . str_replace(' ', '%', $_POST['CustKeywords']) . '%';
 
 			$SQL = "SELECT custbranch.brname,
@@ -327,9 +327,9 @@ if (isset($_POST['SearchCust']) AND $_SESSION['RequireCustomerSelection']==1 AND
 			$SQL .=	' AND custbranch.disabletrans=0
 						ORDER BY custbranch.debtorno, custbranch.branchcode';
 
-		} elseif (mb_strlen($_POST['CustCode'])>0){
+		} elseif (strlen($_POST['CustCode'])>0){
 
-			$_POST['CustCode'] = mb_strtoupper(trim($_POST['CustCode']));
+			$_POST['CustCode'] = strtoupper(trim($_POST['CustCode']));
 
 			$SQL = "SELECT custbranch.brname,
 										custbranch.contactname,
@@ -348,7 +348,7 @@ if (isset($_POST['SearchCust']) AND $_SESSION['RequireCustomerSelection']==1 AND
 			}
 			$SQL .=	' AND custbranch.disabletrans=0
 						ORDER BY custbranch.debtorno';
-		} elseif (mb_strlen($_POST['CustPhone'])>0){
+		} elseif (strlen($_POST['CustPhone'])>0){
 			$SQL = "SELECT custbranch.brname,
 										custbranch.contactname,
 										custbranch.phoneno,
@@ -386,9 +386,9 @@ if (isset($_POST['SearchCust']) AND $_SESSION['RequireCustomerSelection']==1 AND
 // record returned from a search so parse the $Select string into customer code and branch code */
 if (isset($_POST['Select']) AND $_POST['Select']!='') {
 
-	$_SESSION['Items'.$identifier]->Branch = mb_substr($_POST['Select'],mb_strpos($_POST['Select'],' - ')+3);
+	$_SESSION['Items'.$identifier]->Branch = substr($_POST['Select'],strpos($_POST['Select'],' - ')+3);
 
-	$_POST['Select'] = mb_substr($_POST['Select'],0,mb_strpos($_POST['Select'],' - '));
+	$_POST['Select'] = substr($_POST['Select'],0,strpos($_POST['Select'],' - '));
 
 	// Now check to ensure this account is not on hold */
 	$sql = "SELECT debtorsmaster.name,
@@ -758,9 +758,9 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		} elseif ($_POST['Keywords']=='' AND $_POST['StockCode']=='') {
 			$msg='</b><div class="page_help_text">' . _('Stock Category has been used in search') . '.</div>';
 		}
-		if (isset($_POST['Keywords']) AND mb_strlen($_POST['Keywords'])>0) {
+		if (isset($_POST['Keywords']) AND strlen($_POST['Keywords'])>0) {
 			//insert wildcard characters in spaces
-			$_POST['Keywords'] = mb_strtoupper($_POST['Keywords']);
+			$_POST['Keywords'] = strtoupper($_POST['Keywords']);
 			$SearchString = '%' . str_replace(' ', '%', $_POST['Keywords']) . '%';
 
 			if ($_POST['StockCat']=='All'){
@@ -792,9 +792,9 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 						ORDER BY stockmaster.stockid";
 			}
 
-		} elseif (mb_strlen($_POST['StockCode'])>0){
+		} elseif (strlen($_POST['StockCode'])>0){
 
-			$_POST['StockCode'] = mb_strtoupper($_POST['StockCode']);
+			$_POST['StockCode'] = strtoupper($_POST['StockCode']);
 			$SearchString = '%' . $_POST['StockCode'] . '%';
 
 			if ($_POST['StockCat']=='All'){
@@ -923,7 +923,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			$i++;
 
 			if (isset($_POST[$QuickEntryCode])) {
-				$NewItem = mb_strtoupper($_POST[$QuickEntryCode]);
+				$NewItem = strtoupper($_POST[$QuickEntryCode]);
 			}
 			if (isset($_POST[$QuickEntryQty])) {
 				$NewItemQty = $_POST[$QuickEntryQty];

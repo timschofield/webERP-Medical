@@ -2,7 +2,7 @@
 /* $Id: api_stockcategories.php 4521 2011-03-29 09:04:20Z daintree $*/
 
 	function VerifyCategoryID($CategoryID, $i, $Errors) {
-		if (mb_strlen($CategoryID)>6 or $CategoryID=='') {
+		if (strlen($CategoryID)>6 or $CategoryID=='') {
 			$Errors[$i] = InvalidCategoryID;
 		}
 		return $Errors;
@@ -22,14 +22,14 @@
 	}
 
 	function VerifyCategoryDescription($CategoryDescription, $i, $Errors) {
-		if (mb_strlen($CategoryDescription)>20 or $CategoryDescription=='') {
+		if (strlen($CategoryDescription)>20 or $CategoryDescription=='') {
 			$Errors[$i] = InvalidCategoryDescription;
 		}
 		return $Errors;
 	}
 
 	function VerifyStockType($StockType, $i, $Errors) {
-		if (mb_strlen($StockType)>1 or $StockType=='') {
+		if (strlen($StockType)>1 or $StockType=='') {
 			$Errors[$i] = InvalidStockType;
 		}
 		if ($StockType!='F' and $StockType!='M' and $StockType!='D' and $StockType!='L') {
@@ -63,8 +63,8 @@
 			$FieldNames.=$key.', ';
 			$FieldValues.='"'.$value.'", ';
 		}
-		$sql = "INSERT INTO stockcategory ('" . mb_substr($FieldNames,0,-2) . "')
-				VALUES ('" . mb_substr($FieldValues,0,-2) . "') ";
+		$sql = "INSERT INTO stockcategory ('" . substr($FieldNames,0,-2) . "')
+				VALUES ('" . substr($FieldValues,0,-2) . "') ";
 		if (sizeof($Errors)==0) {
 			$result = DB_Query($sql, $db);
 			if (DB_error_no($db) != 0) {
@@ -105,7 +105,7 @@
 		foreach ($CategoryDetails as $key => $value) {
 			$sql .= $key . "='" .$value. "', ";
 		}
-		$sql = mb_substr($sql,0,-2)." WHERE categoryid='" . $CategoryDetails['categoryid'] . "'";
+		$sql = substr($sql,0,-2)." WHERE categoryid='" . $CategoryDetails['categoryid'] . "'";
 		if (sizeof($Errors)==0) {
 			$result = DB_Query($sql, $db);
 			echo DB_error_no($db);

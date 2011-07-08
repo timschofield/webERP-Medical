@@ -8,15 +8,15 @@ $title = _('Supplier Purchasing Data');
 include ('includes/header.inc');
 
 if (isset($_GET['SupplierID'])) {
-	$SupplierID = trim(mb_strtoupper($_GET['SupplierID']));
+	$SupplierID = trim(strtoupper($_GET['SupplierID']));
 } elseif (isset($_POST['SupplierID'])) {
-	$SupplierID = trim(mb_strtoupper($_POST['SupplierID']));
+	$SupplierID = trim(strtoupper($_POST['SupplierID']));
 }
 
 if (isset($_GET['StockID'])) {
-	$StockID = trim(mb_strtoupper($_GET['StockID']));
+	$StockID = trim(strtoupper($_GET['StockID']));
 } elseif (isset($_POST['StockID'])) {
-	$StockID = trim(mb_strtoupper($_POST['StockID']));
+	$StockID = trim(strtoupper($_POST['StockID']));
 }
 
 if (isset($_POST['StockUOM'])) {
@@ -282,7 +282,7 @@ if (isset($_POST['SearchSupplier'])) {
 	if ($_POST['Keywords'] == '' AND $_POST['SupplierCode'] == '') {
 		$_POST['Keywords'] = ' ';
 	}
-	if (mb_strlen($_POST['Keywords']) > 0) {
+	if (strlen($_POST['Keywords']) > 0) {
 		//insert wildcard characters in spaces
 		$SearchString = '%' . str_replace(' ', '%', $_POST['Keywords']) . '%';
 
@@ -293,7 +293,7 @@ if (isset($_POST['SearchSupplier'])) {
 					suppliers.address2,
 					suppliers.address3
 					FROM suppliers WHERE suppliers.suppname " . LIKE  . " '".$SearchString."'";
-	} elseif (mb_strlen($_POST['SupplierCode']) > 0) {
+	} elseif (strlen($_POST['SupplierCode']) > 0) {
 		$SQL = "SELECT suppliers.supplierid,
 				suppliers.suppname,
 				suppliers.currcode,
@@ -508,7 +508,7 @@ if (!isset($SuppliersResult)) {
 	}
 	echo '</div>';
 	echo '<div class="centre">';
-	if (isset($StockLocation) and isset($StockID) AND mb_strlen($StockID) != 0) {
+	if (isset($StockLocation) and isset($StockID) AND strlen($StockID) != 0) {
 		echo '<br /><a href="' . $rootpath . '/StockStatus.php?' . SID . '&StockID=' . $StockID . '">' . _('Show Stock Status') . '</a>';
 		echo '<br /><a href="' . $rootpath . '/StockMovements.php?' . SID . '&StockID=' . $StockID . '&StockLocation=' . $StockLocation . '">' . _('Show Stock Movements') . '</a>';
 		echo '<br /><a href="' . $rootpath . '/SelectSalesOrder.php?' . SID . '&SelectedStockItem=' . $StockID . '&StockLocation=' . $StockLocation . '">' . _('Search Outstanding Sales Orders') . '</a>';

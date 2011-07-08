@@ -48,7 +48,7 @@ if (isset($_POST['PrintPDF']) OR isset($_POST['PDFTest']) ) {
 			$DocumentPaper='LETTER';
 			$DocumentOrientation='P';   // Correccion para la version trunk :(
 			include('includes/PDFStarter.php');
-			if (mb_substr($_SESSION['VersionNumber'],0,1)>=4) {
+			if (substr($_SESSION['VersionNumber'],0,1)>=4) {
 				$pdf->setPageFormat($formatPage);
 			}
 			$ok = printLabels(
@@ -412,12 +412,12 @@ function printLabels($dimensions, $lines, $qtyByItem, $Currency, $salesType, $St
 		$pdf->newpage();  */
 
 	// now, emit the PDF file (if not errors!)
-	if (mb_substr($_SESSION['VersionNumber'],0,1)>=4) {
+	if (substr($_SESSION['VersionNumber'],0,1)>=4) {
 		$pdf->OutputD($_SESSION['DatabaseName'] . '_Labels_' . date('Y-m-d') . '.pdf');//UldisN
 		$pdf->__destruct(); //UldisN
 	} else {
 		$pdfcode = $pdf->output();
-		$len = mb_strlen($pdfcode);
+		$len = strlen($pdfcode);
 
 		if ($len<=20){
 			return false;

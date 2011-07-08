@@ -271,7 +271,7 @@ class Cpdf extends TCPDF {
 		$s=str_replace("\r",'',$txt);
 		$s=str_replace("\n",' ',$s);
 		$s = trim($s).' ';
-		$nb=mb_strlen($s);
+		$nb=strlen($s);
 		$b=0;
 		if ($border) {
 			if ($border==1) {
@@ -280,13 +280,13 @@ class Cpdf extends TCPDF {
 				$b2='LR';
 			} else {
 				$b2='';
-				if(is_int(mb_strpos($border,'L'))) {
+				if(is_int(strpos($border,'L'))) {
 					$b2.='L';
 				}
-				if(is_int(mb_strpos($border,'R'))) {
+				if(is_int(strpos($border,'R'))) {
 					$b2.='R';
 				}
-				$b=is_int(mb_strpos($border,'T')) ? $b2.'T' : $b2;
+				$b=is_int(strpos($border,'T')) ? $b2.'T' : $b2;
 			}
 		}
 		$sep=-1;
@@ -323,10 +323,10 @@ class Cpdf extends TCPDF {
 			}
 		}
 
-		$this->Cell($w,$h,mb_substr($s,0,$sep),$b,2,$align,$fill);
+		$this->Cell($w,$h,substr($s,0,$sep),$b,2,$align,$fill);
 		$this->x=$this->lMargin;
 
-		return mb_substr($s,$sep);
+		return substr($s,$sep);
 	}
 
 } // end of class
