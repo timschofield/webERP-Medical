@@ -325,9 +325,9 @@ if (!isset($SelectedUser)) {
 					$myrow['defaulttag'],
 					$myrow['theme'],
 					$LanguagesArray[$myrow['language']],
-					$_SERVER['PHP_SELF']  . '?',
+					$_SERVER['PHP_SELF'],
 					$myrow['userid'],
-					$_SERVER['PHP_SELF'] . '?',
+					$_SERVER['PHP_SELF'],
 					$myrow['userid']);
 
 	} //END WHILE LIST LOOP
