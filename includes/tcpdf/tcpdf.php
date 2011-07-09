@@ -7786,7 +7786,7 @@ if (!class_exists('TCPDF', false)) {
 		 * @since 4.6.028 (2009-08-25)
 		 */
 		protected function _datestring() {
-			$current_time = mb_substr_replace(date('YmdHisO'), '\'', (0 - 2), 0).'\'';
+			$current_time = substr_replace(date('YmdHisO'), '\'', (0 - 2), 0).'\'';
 			return $this->_datastring('D:'.$current_time);
 		}
 
