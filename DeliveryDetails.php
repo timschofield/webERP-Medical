@@ -767,7 +767,7 @@ if (isset($_SESSION['Items'.$identifier]->SpecialInstructions) and mb_strlen($_S
 }
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Delivery') . '" alt="" />' . ' ' . _('Delivery Details') . '</p>';
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') . '" alt="" />' . ' ' . _('Customer Code') . ' :<b> ' . $_SESSION['Items'.$identifier]->DebtorNo . '<br />';
-echo '</b>&nbsp;' . _('Customer Name') . ' :<b> ' . $_SESSION['Items'.$identifier]->CustomerName . '</p>';
+echo '</b>&nbsp;' . _('Customer Name') . ' :<b> ' . $_SESSION['Items'.$identifier]->CustomerName . '</b></p>';
 //echo '<font size=4><b>'. _('Customer') .' : ' . $_SESSION['Items'.$identifier]->CustomerName . '</b></font>';
 echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID.'identifier='.$identifier  . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -778,9 +778,9 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 
 	echo '<table cellpading=2 class="selection">';
 	if ($_SESSION['Items'.$identifier]->Quotation==1){
-		echo '<tr<th colspan=7><font size=2 color="navy">'._('Quotation Summary').'</font></th></tr>';
+		echo '<tr><th colspan=7><font size=2 color="navy">'._('Quotation Summary').'</font></th></tr>';
 	} else {
-		echo '<tr<th colspan=7><font size=2 color="navy">'._('Order Summary').'</font></th></tr>';
+		echo '<tr><th colspan=7><font size=2 color="navy">'._('Order Summary').'</font></th></tr>';
 	}
 	echo '<tr>
 			<th>'. _('Item Code') .'</th>
