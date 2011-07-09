@@ -33,7 +33,7 @@ if (!isset($_POST['Commit'])) {
 }
 
 // add new request here 08-09-26
-if (isset($_POST['StockID2']) AND $_GET['Edit']=='') {
+if (isset($_POST['StockID2']) AND !isset($_GET['Edit'])) {
 /* If a stock item is selected and a purchdata record
  * exists for it then find that record.
  */
@@ -42,7 +42,6 @@ if (isset($_POST['StockID2']) AND $_GET['Edit']=='') {
 				purchdata.conversionfactor,
 				purchdata.suppliersuom,
 				purchdata.minorderqty,
-				stockmaster.pkg_type,
 				stockmaster.units,
 				stockmaster.netweight,
 				stockmaster.kgs,
@@ -52,7 +51,7 @@ if (isset($_POST['StockID2']) AND $_GET['Edit']=='') {
 			WHERE purchdata.stockid='" . $_POST['StockID2'] . "' AND
 				purchdata.supplierno='".$_SESSION['PO'.$identifier]->SupplierID."'";
 
-	$ErrMsg = _('The stock record of the stock selected') . ': ' . $_POST['Stock'] . ' ' .
+	$ErrMsg = _('The stock record of the stock selected') . ': ' . $_POST['StockID2'] . ' ' .
 		_('cannot be retrieved because');
 	$DbgMsg = _('The SQL used to retrieve the supplier details and failed was');
 	$result =DB_query($sql,$db,$ErrMsg,$DbgMsg);
@@ -61,7 +60,6 @@ if (isset($_POST['StockID2']) AND $_GET['Edit']=='') {
 	$_POST['ItemDescription'] = $myrow['description'];
 	$_POST['Suppliers_PartNo'] = $myrow['suppliers_partno'];
 	$_POST['ConversionFactor'] = $myrow['conversionfactor'];
-	$_POST['Package'] = $myrow['pkg_type'];
 	$_POST['uom'] = $myrow['suppliersuom'];
 	$_POST['NetWeight'] = $myrow['netweight'];
 	$_POST['gw'] = $myrow['kgs'];
@@ -737,9 +735,10 @@ if (isset($_POST['EnterLine'])){ /*Inputs from the form directly without selecti
 if (isset($_POST['NewItem'])){ /* NewItem is set from the part selection list as the part code selected */
 /* take the form entries and enter the data from the form into the PurchOrder class variable */
 	foreach ($_POST as $key => $value) {
-		if (mb_substr($key, 0, 3)=='qty') {
-			$ItemCode=mb_substr($key, 3, mb_strlen($key)-3);
-			$Quantity=$value;
+		if (mb_substr($key, 0, 7)=='StockID') {
+			$Index=mb_substr($key,7);
+			$ItemCode=$value;
+			$Quantity=$_POST['Quantity'.$Index];;
 			$AlreadyOnThisOrder =0;
 
 			if ($_SESSION['PO_AllowSameItemMultipleTimes'] ==false){
@@ -922,7 +921,7 @@ if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
 	if (isset($_SESSION['PO'.$identifier]->OrderNo)) {
 		echo  ' ' . _('Purchase Order') .' '. $_SESSION['PO'.$identifier]->OrderNo ;
 	}
-	echo '</p><br /><b>'._(' Order Summary') . '</b>';
+	echo '<br /><b>'._(' Order Summary') . '</b></p>';
 	echo '<table cellpadding=2 colspan=7 class=selection>';
 	echo '<tr>
 		<th>' . _('Item Code') . '</th>
@@ -1098,7 +1097,7 @@ if (isset($SearchResult)) {
 								</tr>';
 	echo $TableHeader;
 
-	$j = 1;
+	$i=0;
 	$k=0; //row colour counter
 
 	while ($myrow=DB_fetch_array($SearchResult)) {
@@ -1121,38 +1120,40 @@ if (isset($SearchResult)) {
 			$ImageSource = '<i>'._('No Image').'</i>';
 		}
 
-			$UomSQL="SELECT conversionfactor,
-												suppliersuom,
-												unitsofmeasure.unitname
-									FROM purchdata
-									LEFT JOIN unitsofmeasure
-									ON purchdata.suppliersuom=unitsofmeasure.unitid
-									WHERE supplierno='".$_SESSION['PO'.$identifier]->SupplierID."'
-									AND stockid='".$myrow['stockid']."'";
+		$UomSQL="SELECT conversionfactor,
+						suppliersuom,
+						unitsofmeasure.unitname
+					FROM purchdata
+					LEFT JOIN unitsofmeasure
+						ON purchdata.suppliersuom=unitsofmeasure.unitid
+					WHERE supplierno='".$_SESSION['PO'.$identifier]->SupplierID."'
+						AND stockid='".$myrow['stockid']."'";
 
-			$UomResult=DB_query($UomSQL, $db);
-			if (DB_num_rows($UomResult)>0) {
-				$UomRow=DB_fetch_array($UomResult);
-				if (mb_strlen($UomRow['suppliersuom'])>0) {
-					$Uom=$UomRow['unitname'];
-				} else {
-					$Uom=$myrow['units'];
-				}
+		$UomResult=DB_query($UomSQL, $db);
+		if (DB_num_rows($UomResult)>0) {
+			$UomRow=DB_fetch_array($UomResult);
+			if (mb_strlen($UomRow['suppliersuom'])>0) {
+				$Uom=$UomRow['unitname'];
 			} else {
 				$Uom=$myrow['units'];
 			}
-			echo '<td>'.$myrow['stockid'].'</td>
-			<td>'.$myrow['description'].'</td>
-			<td>'.$Uom.'</td>
-			<td>'.$ImageSource.'</td>
-			<td><input class="number" type="text" size=6 value=0 name="qty'.$myrow['stockid'].'"></td>
-			<input type="hidden" size=6 value="'.$Uom.'" name=uom>
-			</tr>';
+		} else {
+			$Uom=$myrow['units'];
+		}
+		echo '<td>'.$myrow['stockid'].'</td>
+		<td>'.$myrow['description'].'</td>
+		<td>'.$Uom.'</td>
+		<td>'.$ImageSource.'</td>
+		<td><input class="number" type="text" size=6 value=0 name="Quantity'.$i.'" /></td>
+		<input type="hidden" value="'.$myrow['stockid'].'" name="StockID'.$i.'" /></td>
+		<input type="hidden" value="'.$Uom.'" name="uom'.$i.'" />
+		</tr>';
 
 		$PartsDisplayed++;
 		if ($PartsDisplayed == $Maximum_Number_Of_Parts_To_Show){
 			break;
 		}
+		$i++;
 #end of page full new headings if
 	}
 #end of while loop
