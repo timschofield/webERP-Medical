@@ -272,7 +272,7 @@ if ($DebtorNo) { /* display recent pricing history for this debtor and this stoc
 	$k=1;
 	$LastPrice=0;
 	while ($myrow=DB_fetch_array($MovtsResult)) {
-	  if (($LastPrice != $myrow['price'] or $LastDiscount != $myrow['discount'])) { /* consolidate price history for records with same price/discount */
+	  if (($LastPrice != $myrow['price'] or $LastDiscount != $myrow['discountpercent'])) { /* consolidate price history for records with same price/discount */
 	    if (isset($qty)) {
 	    	$DateRange=ConvertSQLDate($FromDate);
 	    	if ($FromDate != $ToDate) {
