@@ -201,7 +201,7 @@ while ($myrow=DB_fetch_array($MovtsResult)) {
 //end of while loop
 
 echo '</table>';
-echo '<div class=centre><br /><a href="$rootpath/StockStatus.php?StockID='.$StockID.'">' . _('Show Stock Status') . '</a>';
+echo '<div class=centre><br /><a href="'.$rootpath.'/StockStatus.php?StockID='.$StockID.'">' . _('Show Stock Status') . '</a>';
 echo '<br /><a href="'.$rootpath.'/StockUsage.php?StockID='.$StockID.'&StockLocation=' . $_POST['StockLocation'] . '">' . _('Show Stock Usage') . '</a>';
 echo '<br /><a href="'.$rootpath.'/SelectSalesOrder.php?SelectedStockItem='.$StockID.'&StockLocation=' . $_POST['StockLocation'] . '">' . _('Search Outstanding Sales Orders') . '</a>';
 echo '<br /><a href="'.$rootpath.'/SelectCompletedOrder.php?SelectedStockItem='.$StockID.'">' . _('Search Completed Sales Orders') . '</a>';
