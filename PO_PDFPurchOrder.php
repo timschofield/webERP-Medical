@@ -11,14 +11,14 @@ if(!isset($_GET['OrderNo']) && !isset($_POST['OrderNo'])){
 	prnMsg( _('Select a Purchase Order Number to Print before calling this page') , 'error');
 	echo '<br /><br /><br /><table class="table_index">
 		<tr><td class="menu_group_item">
-		<li><a href="'. $rootpath . '/PO_SelectOSPurchOrder.php?'.SID .'">' . _('Outstanding Purchase Orders') . '</a></li>
-		<li><a href="'. $rootpath . '/PO_SelectPurchOrder.php?'. SID .'">' . _('Purchase Order Inquiry') . '</a></li>
+		<li><a href="'. $rootpath . '/PO_SelectOSPurchOrder.php">' . _('Outstanding Purchase Orders') . '</a></li>
+		<li><a href="'. $rootpath . '/PO_SelectPurchOrder.php">' . _('Purchase Order Inquiry') . '</a></li>
 		</td></tr></table></div><br /><br /><br />';
 	include('includes/footer.inc');
 	exit();
 
 	echo '<div class="centre"><br /><br /><br />' . _('This page must be called with a purchase order number to print');
-	echo '<br /><a href="'. $rootpath . '/index.php?' . SID . '">' . _('Back to the menu') . '</a></div>';
+	echo '<br /><a href="'. $rootpath . '/index.php">' . _('Back to the menu') . '</a></div>';
 	exit;
 }
 if (isset($_GET['OrderNo'])){
@@ -103,8 +103,8 @@ if (isset($OrderNo) && $OrderNo != "" && $OrderNo > 0 && $OrderNo != 'Preview'){
 		prnMsg( _('Unable to Locate Purchase Order Number') . ' : ' . $OrderNo . ' ', 'error');
 		echo '<br /><br /><br /><table class="table_index">
 			<tr><td class="menu_group_item">
-					<li><a href="'. $rootpath . '/PO_SelectOSPurchOrder.php?'.SID .'">' . _('Outstanding Purchase Orders') . '</a></li>
-					<li><a href="'. $rootpath . '/PO_SelectPurchOrder.php?'. SID .'">' . _('Purchase Order Inquiry') . '</a></li>
+					<li><a href="'. $rootpath . '/PO_SelectOSPurchOrder.php">' . _('Outstanding Purchase Orders') . '</a></li>
+					<li><a href="'. $rootpath . '/PO_SelectPurchOrder.php">' . _('Purchase Order Inquiry') . '</a></li>
 					</td></tr></table></div><br /><br /><br />';
 		include('includes/footer.inc');
 		exit();
@@ -122,13 +122,13 @@ if (isset($OrderNo) && $OrderNo != "" && $OrderNo > 0 && $OrderNo != 'Preview'){
 					_('This check is there to ensure that duplicate purchase orders are not sent to the supplier resulting in several deliveries of the same supplies'), 'warn');
 				echo '<br /><table class="table_index">
 					<tr><td class="menu_group_item">
- 					<li><a href="' . $rootpath . '/PO_PDFPurchOrder.php?' . SID . 'OrderNo=' . $OrderNo . '&ViewingOnly=1">'.
+ 					<li><a href="' . $rootpath . '/PO_PDFPurchOrder.php?OrderNo=' . $OrderNo . '&ViewingOnly=1">'.
 				_('Print This Order as a Copy'). '</a>
- 				<li><a href="' . $rootpath . '/PO_Header.php?' . SID . 'ModifyOrderNumber=' . $OrderNo . '">'.
+ 				<li><a href="' . $rootpath . '/PO_Header.php?ModifyOrderNumber=' . $OrderNo . '">'.
 				_('Modify the order to allow a real reprint'). '</a>' .
-				'<li><a href="'. $rootpath .'/PO_SelectPurchOrder.php?' . SID . '">'.
+				'<li><a href="'. $rootpath .'/PO_SelectPurchOrder.php">'.
 				_('Select another order'). '</a>'.
-				'<li><a href="' . $rootpath . '/index.php?' . SID . '">'. _('Back to the menu').'</a>';
+				'<li><a href="' . $rootpath . '/index.php">'. _('Back to the menu').'</a>';
 				include('includes/footer.inc');
 				exit;
 			}//AllowedToPrint
@@ -182,7 +182,7 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 					deliverydate,
 				itemdescription,
 				unitprice,
-				unitname as units,
+				uom as units,
 				quantityord,
 				decimalplaces
 			FROM purchorderdetails LEFT JOIN stockmaster
@@ -338,14 +338,17 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 } /* There was enough info to either print or email the purchase order */
  else { /*the user has just gone into the page need to ask the question whether to print the order or email it to the supplier */
 	include ('includes/header.inc');
+
+	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/printer.png" title="' . _('Search') . '" alt="" />' . ' ' .
+		$title . '</p><br />';
+
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	if ($ViewingOnly==1){
 		echo '<input type=hidden name="ViewingOnly" value=1>';
 	}
-	echo '<br /><br />';
 	echo '<input type=hidden name="OrderNo" value="'. $OrderNo. '">';
-	echo '<table><tr><td>'. _('Print or Email the Order'). '</td><td>
+	echo '<table class="selection"><tr><td>'. _('Print or Email the Order'). '</td><td>
 		<select name="PrintOrEmail">';
 	if (!isset($_POST['PrintOrEmail'])){
 		$_POST['PrintOrEmail'] = 'Print';
