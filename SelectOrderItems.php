@@ -204,8 +204,9 @@ if (isset($_GET['ModifyOrderNumber'])
 									salesorderdetails.narrative,
 									salesorderdetails.itemdue,
 									salesorderdetails.poline,
+									salesorderdetails.conversionfactor,
 									salesorderdetails.pricedecimals,
-									locstock.quantity as qohatloc,
+									locstock.quantity/salesorderdetails.conversionfactor as qohatloc,
 									stockmaster.mbflag,
 									stockmaster.discountcategory,
 									stockmaster.decimalplaces,
@@ -244,15 +245,14 @@ if (isset($_GET['ModifyOrderNumber'])
 														$myrow['narrative'],
 														'No', /* Update DB */
 														$myrow['orderlineno'],
-						//								ConvertSQLDate($myrow['itemdue']),
 														0,
-														'',
 														ConvertSQLDate($myrow['itemdue']),
 														$myrow['poline'],
 														$myrow['standardcost'],
 														$myrow['eoq'],
 														$myrow['nextserialno'],
-														$ExRate );
+														$ExRate,
+														$myrow['conversionfactor'] );
 
 				/*Just populating with existing order - no DBUpdates */
 					}
@@ -1349,7 +1349,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				echo '<input type="hidden" name="POLine_' .	 $OrderLine->LineNumber . '" value="">';
 			}
 
-			echo '<td><a target="_blank" href="' . $rootpath . '/StockStatus.php?' . SID .'identifier='.$identifier . '&StockID=' . $OrderLine->StockID . '&DebtorNo=' . $_SESSION['Items'.$identifier]->DebtorNo . '">' . $OrderLine->StockID . '</a></td>
+			echo '<td><a target="_blank" href="' . $rootpath . '/StockStatus.php?identifier='.$identifier . '&StockID=' . $OrderLine->StockID . '&DebtorNo=' . $_SESSION['Items'.$identifier]->DebtorNo . '">' . $OrderLine->StockID . '</a></td>
 				<td>' . $OrderLine->ItemDescription . '</td>';
 
 			echo '<td><input class="number" tabindex=2 type=tect name="Quantity_' . $OrderLine->LineNumber . '" size=6 maxlength=6 value=' . $OrderLine->Quantity . '>';
@@ -1484,7 +1484,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				$QOH = $QOHRow['qoh']*$myrow['conversionfactor'];
 
 				// Find the quantity on outstanding sales orders
-				$sql = "SELECT SUM(salesorderdetails.quantity-salesorderdetails.qtyinvoiced) AS dem
+				$sql = "SELECT SUM(salesorderdetails.quantity-salesorderdetails.qtyinvoiced)*salesorderdetails.conversionfactor AS dem
 								FROM salesorderdetails,
 									 salesorders
 								WHERE salesorders.orderno = salesorderdetails.orderno AND
@@ -1731,7 +1731,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				}
 
 				// Find the quantity on purchase orders
-				$sql = "SELECT SUM(purchorderdetails.quantityord-purchorderdetails.quantityrecd) AS dem
+				$sql = "SELECT SUM(purchorderdetails.quantityord-purchorderdetails.quantityrecd)*purchorderdetails.conversionfactor AS dem
 							 FROM purchorderdetails LEFT JOIN purchorders
 								ON purchorderdetails.orderno=purchorders.orderno
 							 WHERE purchorderdetails.completed=0
@@ -1744,7 +1744,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 				$PurchRow = db_fetch_row($PurchResult);
 				if ($PurchRow[0]!=null){
-				  $PurchQty =  $PurchRow[0];
+				  $PurchQty =  $PurchRow[0]/$PriceRow['conversionfactor'];
 				} else {
 				  $PurchQty = 0;
 				}
@@ -1771,7 +1771,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 					$k=1;
 				}
 				$OnOrder = $PurchQty + $WoQty;
-				$Available = $QOH - $DemandQty + $OnOrder/$PriceRow['conversionfactor'];
+				$Available = $QOH - $DemandQty + $OnOrder;
 				if ($PriceRow['customerunits']=='' or ($PriceRow['currabrev']<>$_SESSION['Items'.$identifier]->DefaultCurrency)) {
 					$myrow['units']=$myrow['stockunits'];
 				} else {
@@ -1784,7 +1784,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 							<td>'.$myrow['description'].'</td>
 							<td>'.$myrow['units'].'</td>
 							<td class="number">'.number_format($QOH,$DecimalPlaces).'</td>
-							<td class="number">'.number_format($DemandQty/$PriceRow['conversionfactor'],$DecimalPlaces).'</td>
+							<td class="number">'.number_format($DemandQty,$DecimalPlaces).'</td>
 							<td class="number">'.number_format($OnOrder, $DecimalPlaces).'</td>
 							<td class="number">'.number_format($Available,$DecimalPlaces).'</td>
 							<td><font size=1><input class="number"  tabindex='.number_format($j+7).' type="textbox" size=6 name="Quantity'.$i.'" value=0>
