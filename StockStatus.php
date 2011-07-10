@@ -108,7 +108,7 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 		$k=1;
 	}
 
-	$sql = "SELECT SUM(salesorderdetails.quantity-salesorderdetails.qtyinvoiced) AS dem
+	$sql = "SELECT SUM(salesorderdetails.quantity-salesorderdetails.qtyinvoiced)*salesorderdetails.conversionfactor AS dem
                  FROM salesorderdetails,
                       salesorders
                  WHERE salesorders.orderno = salesorderdetails.orderno AND
