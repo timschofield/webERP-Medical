@@ -53,7 +53,6 @@ Class Cart {
 	Var $CreditAvailable; //in customer currency
 	Var $TaxGroup;
 	Var $DispatchTaxProvince;
-	VAR $vtigerProductID;
 	Var $DefaultPOLine;
 	Var $DeliveryDays;
 	var $TaxTotals;
@@ -91,7 +90,6 @@ Class Cart {
 							$UpdateDB='No',
 							$LineNumber=-1,
 							$TaxCategory=0,
-							$vtigerProductID='',
 							$ItemDue = '',
 							$POLine='',
 							$StandardCost=0,
