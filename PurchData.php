@@ -138,28 +138,36 @@ if (isset($_GET['Delete'])) {
 if (!isset($_GET['Edit'])) {
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' .
 		$title . ' ' . _('For Stock Code') . ' - ' . $StockID . '</p><br />';
-	$sql = "SELECT  purchdata.supplierno,
-								suppliers.suppname,
-								purchdata.price,
-								suppliers.currcode,
-								purchdata.effectivefrom,
-								unitsofmeasure.unitname,
-								purchdata.supplierdescription,
-								purchdata.leadtime,
-								purchdata.suppliers_partno,
-								purchdata.minorderqty,
-								purchdata.preferred,
-								purchdata.conversionfactor
-						FROM purchdata INNER JOIN suppliers
-							ON purchdata.supplierno=suppliers.supplierid
-						LEFT JOIN unitsofmeasure
-							ON purchdata.suppliersuom=unitsofmeasure.unitid
-						WHERE purchdata.stockid = '" . $StockID . "'
-						ORDER BY purchdata.effectivefrom DESC";
+	$sql = "SELECT purchdata.supplierno,
+					suppliers.suppname,
+					purchdata.price,
+					suppliers.currcode,
+					purchdata.effectivefrom,
+					unitsofmeasure.unitname,
+					purchdata.supplierdescription,
+					purchdata.leadtime,
+					purchdata.suppliers_partno,
+					purchdata.minorderqty,
+					purchdata.preferred,
+					purchdata.conversionfactor,
+					purchdata.uomdecimalplaces
+				FROM purchdata
+				INNER JOIN suppliers
+					ON purchdata.supplierno=suppliers.supplierid
+				LEFT JOIN unitsofmeasure
+					ON purchdata.suppliersuom=unitsofmeasure.unitid
+				WHERE purchdata.stockid = '" . $StockID . "'
+				ORDER BY purchdata.effectivefrom DESC";
 	$ErrMsg = _('The supplier purchasing details for the selected part could not be retrieved because');
 	$PurchDataResult = DB_query($sql, $db, $ErrMsg);
 	if (DB_num_rows($PurchDataResult) == 0 and $StockID != '') {
 		prnMsg(_('There is no purchasing data set up for the part selected'), 'info');
+		$sql="SELECT stockmaster.decimalplaces
+				FROM stockmaster
+				WHERE stockmaster.stockid = '" . $StockID . "'";
+		$DecimalPlacesResult=DB_query($sql, $db);
+		$DecimalPlacesRow=DB_fetch_array($DecimalPlacesResult);
+		$StockDecimalPlaces=$DecimalPlacesRow['decimalplaces'];
 		$NoPurchasingData=1;
 	} else if ($StockID != '') {
 		echo '<table cellpadding=2 class=selection>';
@@ -458,7 +466,7 @@ if (!isset($SuppliersResult)) {
 	echo '<tr><td>' . _('Currency') . ':</td>
 	<td><input type=hidden name="CurrCode" . value="' . $CurrCode . '">' . $CurrCode . '</td></tr>';
 	echo '<tr><td>' . _('Price') . ' (' . _('in Supplier Currency') . '):</td>
-	<td><input type="text" class="number" name="Price" maxlength=12 size=12 value=' . number_format($_POST['Price'], $myrow['decimalplaces'] ,'.','') . '></td></tr>';
+	<td><input type="text" class="number" name="Price" maxlength=12 size=12 value=' . number_format($_POST['Price'], $_SESSION['Currencies'][$CurrCode]['DecimalPlaces'] ,'.','') . '></td></tr>';
 	echo '<tr><td>' . _('Date Updated') . ':</td>
 	<td><input type="text" class="date" alt="' . $_SESSION['DefaultDateFormat'] . '" name="EffectiveFrom" maxlength=10 size=11 value="' . $_POST['EffectiveFrom'] . '"></td></tr>';
 	echo '<tr><td>' . _('Our Unit of Measure') . ':</td>';
