@@ -24,8 +24,11 @@ if (isset($_POST['QuickEntry'])){
 
 if (isset($_POST['order_items'])){
 	foreach ($_POST as $key => $value) {
-		if (strstr($key,'itm')) {
-			$NewItem_array[mb_substr($key,3)] = trim($value);
+		if (strstr($key,'StockID')) {
+			$Index=mb_substr($key, 7);
+			$StockID=$value;
+			$NewItem_array[$StockID] = $_POST['Quantity'.$Index];
+			$_POST['Units'.$StockID]=$_POST['Units'.$Index];
 			$NewItem='Here';
 		}
 	}
@@ -1636,8 +1639,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 			echo '<table class="table1">';
 			echo '<tr><td colspan=><input type="hidden" name="previous" value='.number_format($Offset-1).'><input tabindex='.number_format($j+8).' type="submit" name="Prev" value="'._('Prev').'"></td>';
-			echo '<td style="text-align:center" colspan=6><input type="hidden" name="order_items" value=1><input tabindex='.number_format($j+9).' type="submit" value="'._('Add to Sales Order').'"></td>';
-			echo '<td colspan=><input type="hidden" name="nextlist" value='.number_format($Offset+1).'><input tabindex='.number_format($j+10).' type="submit" name="Next" value="'._('Next').'"></td></tr>';
+			echo '<td style="text-align:center" colspan="7"><input type="hidden" name="order_items" value=1><input tabindex='.number_format($j+9).' type="submit" value="'._('Add to Sales Order').'"></td>';
+			echo '<td><input type="hidden" name="nextlist" value='.number_format($Offset+1).'><input tabindex='.number_format($j+10).' type="submit" name="Next" value="'._('Next').'"></td></tr>';
 			$TableHeader = '<tr><th>' . _('Code') . '</th>
 										   			<th>' . _('Description') . '</th>
 										   			<th>' . _('Units') . '</th>
@@ -1651,7 +1654,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			$ImageSource = _('No Image');
 
 			$k=0; //row colour counter
-
+			$i=0;
 			while ($myrow=DB_fetch_array($SearchResult)) {
 				$PriceSQL="SELECT currabrev,
 								price,
@@ -1781,24 +1784,25 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 							<td>'.$myrow['description'].'</td>
 							<td>'.$myrow['units'].'</td>
 							<td class="number">'.number_format($QOH,$DecimalPlaces).'</td>
-							<td class="number">'.number_format($DemandQty,$DecimalPlaces).'</td>
-							<td class="number">'.number_format($PriceRow['conversionfactor'],$DecimalPlaces).'</td>
+							<td class="number">'.number_format($DemandQty/$PriceRow['conversionfactor'],$DecimalPlaces).'</td>
+							<td class="number">'.number_format($OnOrder, $DecimalPlaces).'</td>
 							<td class="number">'.number_format($Available,$DecimalPlaces).'</td>
-							<td><font size=1><input class="number"  tabindex='.number_format($j+7).' type="textbox" size=6 name="itm'.$myrow['stockid'].'" value=0>
+							<td><font size=1><input class="number"  tabindex='.number_format($j+7).' type="textbox" size=6 name="Quantity'.$i.'" value=0>
+							<input type="hidden" name="StockID'.$i.'" value="'.$myrow['stockid'].'" />
 							<td class="number">'.number_format($PriceRow['price'],2).'</td>
 							</td>
 							</tr>';
-				echo '<input type="hidden" name="ConversionFactor'.$myrow['stockid'].'" value="' . $PriceRow['conversionfactor'] . '" />';
-				echo '<input type="hidden" name="Units'.$myrow['stockid'].'" value="' . $myrow['units'] . '" />';
+				echo '<input type="hidden" name="ConversionFactor'.$i.'" value="' . $PriceRow['conversionfactor'] . '" />';
+				echo '<input type="hidden" name="Units'.$i.'" value="' . $myrow['units'] . '" />';
 				if ($j==1) {
 					$jsCall = '<script  type="text/javascript">if (document.SelectParts) {defaultControl(document.SelectParts.itm'.$myrow['stockid'].');}</script>';
 				}
-				$j++;
+				$i++;
 	#end of page full new headings if
 			}
 	#end of while loop
 			echo '<tr><td><input type="hidden" name="previous" value='.number_format($Offset-1).'><input tabindex='.number_format($j+7).' type="submit" name="Prev" value="'._('Prev').'"></td>';
-			echo '<td style="text-align:center" colspan=6><input type="hidden" name="order_items" value=1><input tabindex='.number_format($j+8).' type="submit" value="'._('Add to Sales Order').'"></td>';
+			echo '<td style="text-align:center" colspan="7"><input type="hidden" name="order_items" value=1><input tabindex='.number_format($j+8).' type="submit" value="'._('Add to Sales Order').'"></td>';
 			echo '<td><input type="hidden" name="nextlist" value='.number_format($Offset+1).'><input tabindex='.number_format($j+9).' type="submit" name="Next" value="'._('Next').'"></td></tr>';
 			echo '</table></form>';
 			echo $jsCall;
