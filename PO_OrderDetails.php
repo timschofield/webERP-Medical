@@ -3,8 +3,6 @@
 /* $Id$*/
 /* $Revision: 1.15 $ */
 
-//$PageSecurity = 2;
-
 include('includes/session.inc');
 
 if (isset($_GET['OrderNo'])) {
