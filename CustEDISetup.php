@@ -2,8 +2,6 @@
 /* $Revision: 1.11 $ */
 /* $Id$*/
 
-//$PageSecurity = 11;
-
 include('includes/session.inc');
 $title = _('Customer EDI Set Up');
 include('includes/header.inc');
