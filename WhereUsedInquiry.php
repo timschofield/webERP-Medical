@@ -2,8 +2,6 @@
 
 /* $Id$*/
 
-//$PageSecurity = 2;
-
 include('includes/session.inc');
 $title = _('Where Used Inquiry');
 include('includes/header.inc');
