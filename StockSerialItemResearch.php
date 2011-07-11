@@ -1,8 +1,6 @@
 <?php
 /* $Id$*/
 
-//$PageSecurity = 3;
-
 include('includes/session.inc');
 $title = _('Serial Item Research');
 include('includes/header.inc');
