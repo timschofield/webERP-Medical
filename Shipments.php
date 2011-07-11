@@ -21,7 +21,7 @@ if (!isset($_SESSION['SupplierID']) AND !isset($_SESSION['Shipment'])){
 	prnMsg( _('To set up a shipment') . ', ' . _('the supplier must first be selected from the Select Supplier page'), 'error');
         echo '<table class="selection">
                 <tr><td class="menu_group_item">
-                <li><a href="'. $rootpath . '/SelectSupplier.php?'.SID .'">' . _('Select the Supplier') . '</a></li>
+                <li><a href="'. $rootpath . '/SelectSupplier.php">' . _('Select the Supplier') . '</a></li>
                 </td></tr></table></div>';
         include('includes/footer.inc');
         exit;
@@ -285,9 +285,7 @@ if (isset($_GET['Delete']) AND $_SESSION['Shipment']->Closed==0){ //shipment is 
 	$_SESSION['Shipment']->remove_from_shipment($_GET['Delete'],$db);
 }
 
-
-
-echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method="POST">';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="POST">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<table class=selection><tr><td><b>'. _('Shipment').': </td><td><b>' . $_SESSION['Shipment']->ShiptRef . '</b></td>
@@ -420,7 +418,7 @@ if (count($_SESSION['Shipment']->LineItems)>0){
 			<td class=number>' . number_format($LnItm->QtyInvoiced,2) . '</td>
 			<td class=number>' . number_format($LnItm->UnitPrice,2) . '</td>
 			<td class=number>' . number_format($LnItm->StdCostUnit,2) . '</td>
-			<td><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . 'Delete=' . $LnItm->PODetailItem . '">'. _('Delete'). '</a></td>
+			<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $LnItm->PODetailItem . '">'. _('Delete'). '</a></td>
 			</tr>';
 	}//for each line on the shipment
 echo '</table>';
@@ -495,7 +493,7 @@ if (DB_num_rows($result)>0){
 			<td>' . $myrow['units'] . '</td>
 			<td class=number>' . number_format($myrow['quantityrecd'],2) . '</td>
 			<td class=number>' . ConvertSQLDate($myrow['deliverydate']) . '</td>
-			<td><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '&Add=' . $myrow['podetailitem'] . '">'. _('Add').'</a></td>
+			<td><a href="' . $_SERVER['PHP_SELF'] . '?Add=' . $myrow['podetailitem'] . '">'. _('Add').'</a></td>
 			</tr>';
 
 	}
