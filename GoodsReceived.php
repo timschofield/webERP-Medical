@@ -4,8 +4,6 @@
 
 /* $Revision: 1.44 $ */
 
-//$PageSecurity = 11;
-
 /* Session started in header.inc for password checking and authorisation level check */
 include('includes/DefinePOClass.php');
 include('includes/DefineSerialItems.php');
