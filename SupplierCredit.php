@@ -31,7 +31,7 @@ include('includes/header.inc');
 include('includes/SQL_CommonFunctions.inc');
 
 //this is available from the menu on this page already
-//echo '<a href='" . $rootpath . '/SelectSupplier.php?' . SID . "'>" . _('Back to Suppliers') . '</a><br />';
+//echo '<a href='" . $rootpath . '/SelectSupplier.php'>" . _('Back to Suppliers') . '</a><br />';
 
 if (isset($_GET['New'])) {
 	unset($_SESSION['SuppTrans']);
@@ -137,7 +137,7 @@ if (isset($_GET['SupplierID']) and $_GET['SupplierID']!=''){
 } elseif (!isset($_SESSION['SuppTrans'])){
 
 	prnMsg(_('To enter a supplier credit note the supplier must first be selected from the supplier selection screen'),'warn');
-	echo '<br /><a href="' . $rootpath . '/SelectSupplier.php?' . SID .'">' . _('Select A Supplier to Enter an Credit Note For') . '</a>';
+	echo '<br /><a href="' . $rootpath . '/SelectSupplier.php">' . _('Select A Supplier to Enter an Credit Note For') . '</a>';
 	include('includes/footer.inc');
 	exit;
 
