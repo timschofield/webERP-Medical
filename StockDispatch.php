@@ -4,8 +4,6 @@
 // to another location to cover shortage based on reorder level. Creates loctransfer records
 // that can be processed using Bulk Inventory Transfer - Receive.
 
-
-//$PageSecurity = 2;
 include('includes/session.inc');
 include('includes/SQL_CommonFunctions.inc');
 If (isset($_POST['PrintPDF'])) {
