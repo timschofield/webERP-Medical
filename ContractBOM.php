@@ -2,8 +2,6 @@
 
 /* $Id: $ */
 
-//$PageSecurity = 6;
-
 include('includes/DefineContractClass.php');
 
 include('includes/session.inc');
