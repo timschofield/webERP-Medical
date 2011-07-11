@@ -4,8 +4,6 @@
 
 /* $Revision: 1.5 $ */
 
-//$PageSecurity = 5;
-
 include('includes/DefinePaymentClass.php');
 include('includes/session.inc');
 include('Numbers/Words.php');
