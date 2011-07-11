@@ -211,7 +211,7 @@ or deletion of the records*/
 	$sql = "SELECT * FROM stockcategory WHERE stocktype<>'".'A'."'";
 	$result = DB_query($sql,$db);
 
-	echo "<br /><table class=selection>\n";
+	echo '<br /><table class=selection>';
 	echo '<tr><th>' . _('Cat Code') . '</th>
             <th>' . _('Description') . '</th>
             <th>' . _('Type') . '</th>
@@ -231,7 +231,7 @@ or deletion of the records*/
 			echo '<tr class="OddTableRows">';
 			$k=1;
 		}
-		printf("<td>%s</td>
+		printf('<td>%s</td>
             		<td>%s</td>
             		<td>%s</td>
             		<td class=number>%s</td>
@@ -239,9 +239,9 @@ or deletion of the records*/
             		<td class=number>%s</td>
             		<td class=number>%s</td>
             		<td class=number>%s</td>
-            		<td><a href=\"%sSelectedCategory=%s\">" . _('Edit') . "</td>
-            		<td><a href=\"%sSelectedCategory=%s&delete=yes\" onclick=\"return confirm('" . _('Are you sure you wish to delete this stock category? Additional checks will be performed before actual deletion to ensure data integrity is not compromised.') . "');\">" . _('Delete') . "</td>
-            		</tr>",
+            		<td><a href="%sSelectedCategory=%s">' . _('Edit') . '</td>
+            		<td><a href="%sSelectedCategory=%s&delete=yes" onclick="return confirm("' . _('Are you sure you wish to delete this stock category? Additional checks will be performed before actual deletion to ensure data integrity is not compromised.') . '");">' . _('Delete') . '</td>
+            		</tr>',
             		$myrow[0],
             		$myrow[1],
             		$myrow[2],
@@ -250,9 +250,9 @@ or deletion of the records*/
             		$myrow[5],
             		$myrow[6],
             		$myrow[7],
-            		$_SERVER['PHP_SELF'] . '?' . SID,
+            		$_SERVER['PHP_SELF'] . '?',
             		$myrow[0],
-            		$_SERVER['PHP_SELF'] . '?' . SID,
+            		$_SERVER['PHP_SELF'] . '?',
             		$myrow[0]);
 	}
 	//END WHILE LIST LOOP
@@ -266,7 +266,7 @@ or deletion of the records*/
 <br />
 <?php
 if (isset($SelectedCategory)) {  ?>
-	<div class='centre'><a href="<?php echo $_SERVER['PHP_SELF'] . '?' . SID;?>"><?php echo _('Show All Stock Categories'); ?></a></div>
+	<div class='centre'><a href="<?php echo $_SERVER['PHP_SELF'];?>"><?php echo _('Show All Stock Categories'); ?></a></div>
 <?php } ?>
 
 <br />
@@ -275,7 +275,7 @@ if (isset($SelectedCategory)) {  ?>
 
 if (! isset($_GET['delete'])) {
 
-	echo '<form name="CategoryForm" method="post" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '">';
+	echo '<form name="CategoryForm" method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (isset($SelectedCategory)) {
@@ -529,7 +529,7 @@ if (! isset($_GET['delete'])) {
 			}
 
 			echo '></td>
-					<td><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '&DeleteProperty=' . $myrow['stkcatpropid'] .'&SelectedCategory=' . $SelectedCategory . '" onclick=\'return confirm("' . _('Are you sure you wish to delete this property? All properties of this type set up for stock items will also be deleted.') . '");\'>' . _('Delete') . '</td></tr>';
+					<td><a href="' . $_SERVER['PHP_SELF'] . '?DeleteProperty=' . $myrow['stkcatpropid'] .'&SelectedCategory=' . $SelectedCategory . '" onclick=\'return confirm("' . _('Are you sure you wish to delete this property? All properties of this type set up for stock items will also be deleted.') . '");\'>' . _('Delete') . '</td></tr>';
 
 			$PropertyCounter++;
 		} //end loop around defined properties for this category
