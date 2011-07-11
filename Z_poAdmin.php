@@ -3,8 +3,6 @@
 /* Steve Kitchen */
 /* Up front menu for language file maintenance */
 
-//$PageSecurity = 15;
-
 include ('includes/session.inc');
 
 $title = _('UTILITY PAGE') . ' ' . _('that helps maintain language files');
