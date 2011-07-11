@@ -18,7 +18,7 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/m
 $Complete=false;
 if (!isset($_SESSION['SuppTrans'])){
 	prnMsg(_('To enter a supplier transactions the supplier must first be selected from the supplier selection screen') . ', ' . _('then the link to enter a supplier invoice must be clicked on'),'info');
-	echo '<br /><a href="' . $rootpath . '/SelectSupplier.php?' . SID .'">' . _('Select A Supplier to Enter a Transaction For') . '</a>';
+	echo '<br /><a href="' . $rootpath . '/SelectSupplier.php">' . _('Select A Supplier to Enter a Transaction For') . '</a>';
 	include('includes/footer.inc');
 	exit;
 	/*It all stops here if there aint no supplier selected and invoice initiated ie $_SESSION['SuppTrans'] started off*/
@@ -129,8 +129,8 @@ foreach ($_SESSION['SuppTrans']->GRNs as $EnteredGRN){
 		<td class=number>' . number_format($EnteredGRN->This_QuantityInv,2) . '</td>
 		<td class=number>' . number_format($EnteredGRN->ChgPrice,2) . '</td>
 		<td class=number>' . number_format($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv,2) . '</td>
-		<td><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '&Modify=' . $EnteredGRN->GRNNo . '">'. _('Modify') . '</a></td>
-		<td><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '&Delete=' . $EnteredGRN->GRNNo . '">' . _('Delete') . '</a></td>
+		<td><a href="' . $_SERVER['PHP_SELF'] . '?Modify=' . $EnteredGRN->GRNNo . '">'. _('Modify') . '</a></td>
+		<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $EnteredGRN->GRNNo . '">' . _('Delete') . '</a></td>
 	</tr>';
 
 	$TotalValueCharged = $TotalValueCharged + ($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv);
@@ -147,7 +147,7 @@ echo '<tr>
 	<td class="number"><font size="2" color="navy">' . number_format($TotalValueCharged,2) . '</font></td>
 </tr>';
 echo '</table>';
-echo '<br /><div class="centre"><a href="' . $rootpath . '/SupplierInvoice.php?' . SID .'">' . _('Back to Invoice Entry') . '</a></div><br />';
+echo '<br /><div class="centre"><a href="' . $rootpath . '/SupplierInvoice.php">' . _('Back to Invoice Entry') . '</a></div><br />';
 
 
 /* Now get all the outstanding GRNs for this supplier from the database*/
@@ -183,7 +183,7 @@ if (DB_num_rows($GRNResults)==0){
 }
 
 /*Set up a table to show the GRNs outstanding for selection */
-echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (!isset( $_SESSION['SuppTransTmp'])){
