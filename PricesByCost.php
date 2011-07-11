@@ -1,7 +1,6 @@
 <?php
 /* $Id$ */
 
-//$PageSecurity = 11; Now from DB
 include ('includes/session.inc');
 $title = _('Update of Prices By A Multiple Of Cost');
 include ('includes/header.inc');
