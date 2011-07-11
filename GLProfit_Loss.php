@@ -2,8 +2,6 @@
 
 /* $Id$*/
 
-//$PageSecurity = 8;
-
 include ('includes/session.inc');
 $title = _('Profit and Loss');
 include('includes/SQL_CommonFunctions.inc');
