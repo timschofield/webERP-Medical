@@ -2,8 +2,6 @@
 
 /* $Id$*/
 
-//$PageSecurity = 11;
-
 include('includes/session.inc');
 $title = _('Search Shipments');
 include('includes/header.inc');
