@@ -26,7 +26,7 @@ if (isset($_GET['SelectedSupplier'])){
 	$SelectedSupplier=$_POST['SelectedSupplier'];
 }
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 
@@ -301,8 +301,8 @@ Code	 Description	On Hand		 Orders Ostdg     Units		 Code	Description 	 On Hand 
 				$k++;
 			}
 
-			$URL_Modify_Shipment = $rootpath . '/Shipments.php?' . SID . 'SelectedShipment=' . $myrow['shiptref'];
-			$URL_View_Shipment = $rootpath . '/ShipmentCosting.php?' . SID . 'SelectedShipment=' . $myrow['shiptref'];
+			$URL_Modify_Shipment = $rootpath . '/Shipments.php?SelectedShipment=' . $myrow['shiptref'];
+			$URL_View_Shipment = $rootpath . '/ShipmentCosting.php?SelectedShipment=' . $myrow['shiptref'];
 
 			$FormatedETA = ConvertSQLDate($myrow['eta']);
 			/* ShiptRef   Supplier  Vessel  Voyage  ETA */
