@@ -21,13 +21,13 @@ if (!is_writable('./locale/' . $_SESSION['Language'])) {
 }
 else
 {
-	echo '<p><a href="' . $rootpath . '/Z_poRebuildDefault.php?' . SID . '">'.  _('Rebuild the System Default Language File') . '</a></p>';
-	echo '<p><a href="' . $rootpath . '/Z_poAddLanguage.php?' . SID . '">' . _('Add a New Language to the System') .'</a></p>';
-	echo '<p><a href="' . $rootpath . '/Z_poEditLangHeader.php?' . SID . '">'. _('Edit a Language File Header') . '</a></p>';
-	echo '<p><a href="' . $rootpath . '/Z_poEditLangModule.php?' . SID . '">'. _('Edit a Language File Module') . '</a></p>';
-	echo '<p><a href="' . $rootpath . '/Z_poEditLangRemaining.php?' . SID . '">'. _('Edit Remaining Strings For This Language') . '</a></p>';
-	echo '<p><a href="' . $rootpath . '/locale/'.$_SESSION['Language'].'/LC_MESSAGES/messages.po' . SID . '">'. _('Download messages.po file') . '</a></p>';
-	echo '<p><a href="' . $rootpath . '/locale/'.$_SESSION['Language'].'/LC_MESSAGES/messages.mo' . SID . '">'. _('Download messages.mo file') . '</a></p>';
+	echo '<p><a href="' . $rootpath . '/Z_poRebuildDefault.php">'.  _('Rebuild the System Default Language File') . '</a></p>';
+	echo '<p><a href="' . $rootpath . '/Z_poAddLanguage.php">' . _('Add a New Language to the System') .'</a></p>';
+	echo '<p><a href="' . $rootpath . '/Z_poEditLangHeader.php">'. _('Edit a Language File Header') . '</a></p>';
+	echo '<p><a href="' . $rootpath . '/Z_poEditLangModule.php">'. _('Edit a Language File Module') . '</a></p>';
+	echo '<p><a href="' . $rootpath . '/Z_poEditLangRemaining.php">'. _('Edit Remaining Strings For This Language') . '</a></p>';
+	echo '<p><a href="' . $rootpath . '/locale/'.$_SESSION['Language'].'/LC_MESSAGES/messages.po">'. _('Download messages.po file') . '</a></p>';
+	echo '<p><a href="' . $rootpath . '/locale/'.$_SESSION['Language'].'/LC_MESSAGES/messages.mo">'. _('Download messages.mo file') . '</a></p>';
 }
 
 include('includes/footer.inc');
