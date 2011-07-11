@@ -3,8 +3,6 @@
 /* $Id$*/
 /* $Revision: 1.16 $ */
 
-//$PageSecurity = 8;
-
 include ('includes/session.inc');
 $title = _('General Ledger Transaction Inquiry');
 include('includes/header.inc');
