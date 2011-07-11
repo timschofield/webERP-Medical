@@ -3,8 +3,6 @@
 /* $Revision: 1.20 $ */
 /* $Id$*/
 
-//$PageSecurity =11;
-
 include ('includes/session.inc');
 
 $title = _('Process EDI Orders');
