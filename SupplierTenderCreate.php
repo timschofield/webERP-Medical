@@ -139,7 +139,7 @@ if (isset($_GET['Edit'])) {
 		echo '<td>' . $myrow['address5'] . '</td>';
 		echo '<td>' . $myrow['address6'] . '</td>';
 		echo '<td>' . $myrow['telephone'] . '</td>';
-		echo '<td><a href="'.$_SERVER['PHP_SELF'] . '?' . SID . '&ID='.$myrow['tenderid'].'">'. _('Edit') .'</a></td>';
+		echo '<td><a href="'.$_SERVER['PHP_SELF'] . '?ID='.$myrow['tenderid'].'">'. _('Edit') .'</a></td>';
 	}
 	echo '</table>';
 	include('includes/footer.inc');
@@ -596,7 +596,7 @@ if (isset($_POST['Items'])) {
 	if (DB_num_rows($result) == 0) {
 		echo '<br /><font size=4 color=red>' . _('Problem Report') . ':</font><br />' .
 			_('There are no stock categories currently defined please use the link below to set them up');
-		echo '<br /><a href="' . $rootpath . '/StockCategories.php?' . SID . '">' . _('Define Stock Categories') . '</a>';
+		echo '<br /><a href="' . $rootpath . '/StockCategories.php">' . _('Define Stock Categories') . '</a>';
 		exit;
 	}
 	echo '<table class=selection><tr>';
