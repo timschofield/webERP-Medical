@@ -4,7 +4,6 @@
 
 include('includes/DefineJournalClass.php');
 
-//$PageSecurity = 10;
 include('includes/session.inc');
 $title = _('Depreciation Journal Entry');
 
