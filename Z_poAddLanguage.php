@@ -3,8 +3,6 @@
 
 /* Steve Kitchen/Kaill */
 
-//$PageSecurity = 15;
-
 include ('includes/session.inc');
 
 /* Was the Cancel button pressed the last time through ? */
