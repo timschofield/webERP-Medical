@@ -3,8 +3,6 @@
 /* $Revision: 1.18 $ */
 /* $Id$*/
 
-//$PageSecurity =10;
-
 include('includes/session.inc');
 
 $title = _('Company Preferences');
