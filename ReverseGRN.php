@@ -2,8 +2,6 @@
 
 /* $Id$*/
 
-//$PageSecurity = 11;
-
 /* Session started in header.inc for password checking and authorisation level check */
 
 include('includes/DefineSerialItems.php');
