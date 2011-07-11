@@ -1,8 +1,6 @@
 <?php
 /* $Id$*/
 
-//$PageSecurity =15;
-
 include ('includes/session.inc');
 $title = _('Create Database Template File');
 include ('includes/header.inc');
