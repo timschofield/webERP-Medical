@@ -3,8 +3,6 @@
 /* $Id$*/
 /* $Revision: 1.8 $ */
 
-//$PageSecurity = 2;
-
 include ('includes/session.inc');
 
 $title = _('Periods Inquiry');
