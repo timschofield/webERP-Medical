@@ -5,7 +5,6 @@
 
 /* $Revision: 1.8 $ */
 
-//$PageSecurity =1;
 include('includes/session.inc');
 
 include('includes/PDFStarter.php');
