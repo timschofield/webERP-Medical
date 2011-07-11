@@ -324,7 +324,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 								VALUES (12,
 									'" . $ReceiptNumber . "',
 									'" . $_POST['BankAccount'] . "',
-									'" . _('Payment of Other Medical Service for Patient number').' '.$_POST['PatientNo'] . "',
+									'" . _('Pharmacy Payment for Patient').' '.$_POST['PatientNo'] . "',
 									'1',
 									'1',
 									'" . FormatDateForSQL($_POST['AdmissionDate']) . "',

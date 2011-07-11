@@ -89,7 +89,7 @@ if (isset($_POST['SubmitCash'])) {
 								VALUES (12,
 									'" . $ReceiptNumber . "',
 									'" . $_POST['BankAccount'] . "',
-									'" . _('Deposit for Patient number').' '.$_POST['PatientNo'] . "',
+									'" . _('Deposit for Patient').' '.$_POST['PatientNo'] . "',
 									'1',
 									'1',
 									'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
