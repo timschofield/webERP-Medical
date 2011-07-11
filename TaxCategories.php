@@ -179,8 +179,8 @@ if (isset($_POST['submit'])) {
 		}
 
 		echo '<td>' . $myrow[1] . '</td>';
-		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '&SelectedTaxCategory=' . $myrow[0] . '">' . _('Edit') . '</a></td>';
-		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '&SelectedTaxCategory=' . $myrow[0] . '&delete=1">' . _('Delete') .'</a></td>';
+		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?SelectedTaxCategory=' . $myrow[0] . '">' . _('Edit') . '</a></td>';
+		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?SelectedTaxCategory=' . $myrow[0] . '&delete=1">' . _('Delete') .'</a></td>';
 		echo '</tr>';
 
 	} //END WHILE LIST LOOP
@@ -189,7 +189,7 @@ if (isset($_POST['submit'])) {
 
 
 if (isset($SelectedTaxCategory)) {
-	echo '<div class="centre"><a href=' . $_SERVER['PHP_SELF'] . '?' . SID .'>' . _('Review Tax Categories') . '</a></div>';
+	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Review Tax Categories') . '</a></div>';
 }
 
 echo '<br />';
