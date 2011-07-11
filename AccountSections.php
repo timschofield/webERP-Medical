@@ -2,8 +2,6 @@
 /* $Revision: 1.7 $ */
 /* $Id$*/
 
-//$PageSecurity = 10;
-
 include('includes/session.inc');
 
 $title = _('Account Sections');
