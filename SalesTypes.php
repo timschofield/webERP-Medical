@@ -206,8 +206,10 @@ while ($myrow = DB_fetch_row($result)) {
 		</tr>',
 		$myrow[0],
 		$myrow[1],
-		$_SERVER['PHP_SELF'] . '?' . SID, $myrow[0],
-		$_SERVER['PHP_SELF'] . '?' . SID, $myrow[0]);
+		$_SERVER['PHP_SELF'] . '?',
+		$myrow[0],
+		$_SERVER['PHP_SELF'] . '?',
+		$myrow[0]);
 	}
 	//END WHILE LIST LOOP
 	echo '</table>';
@@ -216,7 +218,7 @@ while ($myrow = DB_fetch_row($result)) {
 //end of ifs and buts!
 if (isset($SelectedType)) {
 
-	echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '">' . _('Show All Sales Types Defined') . '</a></div></p>';
+	echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Show All Sales Types Defined') . '</a></div></p>';
 }
 if (! isset($_GET['delete'])) {
 
