@@ -260,7 +260,7 @@ if (isset($SelectedGroup)) {
 
 	/* the order and tax on tax will only be an issue if more than one tax authority in the group */
 	if (count($TaxAuthsUsed)>0) {
-		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?' . SID .'">';
+		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<input type=hidden name="SelectedGroup" value="' . $SelectedGroup .'">';
 		echo '<table class="selection">';
