@@ -1,8 +1,6 @@
 <?php
 /* $Id$*/
 
-//$PageSecurity=5;
-
 include('includes/session.inc');
 
 $title = _('Supplier Contacts');
