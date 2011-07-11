@@ -1,7 +1,5 @@
 <?php
 
-//$PageSecurity = 11;
-
 include('includes/session.inc');
 $title = _('Fixed Asset Locations');
 include('includes/header.inc');
