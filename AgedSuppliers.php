@@ -4,7 +4,6 @@
 
 /* $Revision: 1.13 $ */
 
-//$PageSecurity = 2;
 include('includes/session.inc');
 
 If (isset($_POST['PrintPDF'])
