@@ -3,7 +3,6 @@
 /* $Id: $*/
 /* $Revision: 1.00 $ */
 
-//$PageSecurity = 8;
 include ('includes/session.inc');
 
 if (isset($_POST['Period'])){
