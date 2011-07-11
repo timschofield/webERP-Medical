@@ -1,8 +1,6 @@
 <?php
 /* $Id$ */
 
-//$PageSecurity = 15;
-
 include('includes/session.inc');
 $title = _('Maintenance Of Petty Cash Tabs');
 include('includes/header.inc');
