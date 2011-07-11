@@ -3,7 +3,7 @@
 /* $Id$*/
 include('includes/DefineCartClass.php');
 include('includes/DefineSerialItems.php');
-//$PageSecurity = 3;
+
 include('includes/session.inc');
 
 $title = _('Specify Credited Controlled Items');
