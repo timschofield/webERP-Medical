@@ -227,9 +227,9 @@ or deletion of the records*/
 		$myrow[5],
 		$myrow[6],
 		$ActiveText,
-		$_SERVER['PHP_SELF'] . '?' . SID . '&',
+		$_SERVER['PHP_SELF'] . '?',
 		$myrow[0],
-		$_SERVER['PHP_SELF'] . '?' . SID . '&',
+		$_SERVER['PHP_SELF'] . '?',
 		$myrow[0]);
 
 	} //END WHILE LIST LOOP
