@@ -1,8 +1,6 @@
 <?php
 /* $Revision: 1.0 $ */
 
-//$PageSecurity = 6;
-
 include('includes/session.inc');
 $title = _('Claim Petty Cash Expenses From Tab');
 include('includes/header.inc');
