@@ -6,9 +6,6 @@
 	This page is called from SupplierInquiry.php when the 'view payments' button is selected
 */
 
-
-//$PageSecurity = 5;
-
 include('includes/session.inc');
 
 $title = _('Payment Allocations');
