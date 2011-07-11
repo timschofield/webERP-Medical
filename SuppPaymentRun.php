@@ -241,7 +241,7 @@ If ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 
 	/* show form to allow input	*/
 
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method="POST"><table class=selection>';
+	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="POST"><table class=selection>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (!isset($_POST['FromCriteria']) or mb_strlen($_POST['FromCriteria'])<1){
