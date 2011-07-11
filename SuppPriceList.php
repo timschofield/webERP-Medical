@@ -2,7 +2,6 @@
 
 /* $Id$*/
 
-//$PageSecurity = 2;
 include('includes/session.inc');
 
 if (isset($_GET['SelectedSupplier'])) {
