@@ -2,8 +2,6 @@
 
 /* $Id$*/
 
-//$PageSecurity = 2;
-
 include('includes/session.inc');
 
 $title = _('Sales Analysis Reports Maintenance');
