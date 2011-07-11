@@ -3,8 +3,6 @@
 
 /* Steve Kitchen */
 
-//$PageSecurity = 15;
-
 include ('includes/session.inc');
 
 $title = _('Rebuild');
