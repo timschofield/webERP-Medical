@@ -1,8 +1,6 @@
 <?php
 /* $Revision: 1.9 $ */
 /* $Id$*/
-//$PageSecurity=11;
-
 
 include('includes/session.inc');
 $title=_('Update Pricing');
