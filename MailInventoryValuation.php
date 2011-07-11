@@ -2,7 +2,6 @@
 
 /* $Id$ */
 
-//$PageSecurity = 1;
 $AllowAnyone = true;
 
 $FromCriteria ='1'; /*Category From */
