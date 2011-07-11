@@ -1,8 +1,6 @@
 <?php
 /* $Id$*/
 
-//$PageSecurity = 9;
-
 include('includes/DefineOfferClass.php');
 include('includes/session.inc');
 $title = _('Supplier Tendering');
