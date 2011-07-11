@@ -2,8 +2,6 @@
 
 /* $Id$ */
 
-//$PageSecurity = 11;
-
 include('includes/session.inc');
 $title = _('Item Maintenance');
 include('includes/header.inc');
