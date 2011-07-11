@@ -1,7 +1,6 @@
 <?php
 /* $Id$*/
 
-//$PageSecurity = 15;
 include('includes/session.inc');
 $title = _('Create trac item for bugs');
 
