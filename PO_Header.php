@@ -2,8 +2,6 @@
 
 /* $Id PO_Header.php 4183 2010-12-14 09:30:20Z daintree $ */
 
-//$PageSecurity = 4; now read in from from DB into $_SESSION['PageSecurity'] array and retrieved into a $PageSecuirity variable for the script by session.inc
-
 include('includes/DefinePOClass.php');
 include('includes/session.inc');
 
