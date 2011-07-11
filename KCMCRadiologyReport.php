@@ -60,11 +60,11 @@ echo '<tr>
 	</tr>';
 
 while($myrow=DB_fetch_array($result)) {
-	if (ConvertSQLDate($myrow['trandate']) < $_POST['ReportDate'] and $Days<=7) {
+	if (ConvertSQLDate($myrow['trandate']) < $_POST['ReportDate'] and $Days<6) {
 		if ($myrow['trandate'] != $LastDate) {
 			echo '<tr><th colspan="5"></th></tr>';
 			echo '<tr><td colspan="2"></td>';
-			echo '<td>' . _('Total For') . ' ' . $DayNames[DayOfWeekFromSQLDate($myrow['trandate'])].'</td>';
+			echo '<td>' . _('Total For') . ' ' . $DayNames[DayOfWeekFromSQLDate($myrow['trandate'])].' '.DateAdd(ConvertSQLDate($myrow['trandate']),'d',1).'</td>';
 			echo '<td class="number">' . $SubTotalQuantity . '</td>';
 			echo '<td class="number">' . number_format($SubTotalValue, $_SESSION['CompanyRecord']['decimalplaces']) . '</td></tr>';
 			$TotalQuantity+=$SubTotalQuantity;
@@ -89,7 +89,7 @@ while($myrow=DB_fetch_array($result)) {
 echo '<tr><th colspan="5"></th></tr>';
 echo '<tr><th colspan="5"></th></tr>';
 echo '<tr><td colspan="2"></td>';
-echo '<td>' . _('Total For') . ' ' . $DayNames[DayOfWeekFromSQLDate(DateAdd($LastDate, 'd', -1))].'</td>';
+echo '<td>' . _('Total For') . ' ' . $DayNames[DayOfWeekFromSQLDate(DateAdd($LastDate, 'd', -1))].' '.DateAdd(ConvertSQLDate($LastDate),'d',0).'</td>';
 echo '<td class="number">' . $SubTotalQuantity . '</td>';
 echo '<td class="number">' . number_format($SubTotalValue, $_SESSION['CompanyRecord']['decimalplaces']) . '</td></tr>';
 echo '<tr><th colspan="5"></th></tr>';
