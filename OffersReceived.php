@@ -1,7 +1,5 @@
 <?php
 
-//$PageSecurity = 4;
-
 include('includes/session.inc');
 $title = _('Supplier Offers');
 include('includes/header.inc');
