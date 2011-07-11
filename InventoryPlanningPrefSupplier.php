@@ -101,8 +101,6 @@ function NewPageHeader () {
 	$FontSize=8;
 }
 
-
-//$PageSecurity = 2;
 include('includes/session.inc');
 
 if (isset($_POST['PrintPDF'])){
