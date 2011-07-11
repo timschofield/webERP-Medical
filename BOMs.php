@@ -2,8 +2,6 @@
 /* $Revision: 1.37 $ */
 /* $Id$*/
 
-//$PageSecurity = 9;
-
 include('includes/session.inc');
 
 $title = _('Multi-Level Bill Of Materials Maintenance');
