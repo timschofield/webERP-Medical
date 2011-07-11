@@ -15,7 +15,7 @@ if (isset($_GET['StockID'])){
 	$StockID =trim(mb_strtoupper($_POST['StockID']));
 }
 
-echo '<a href="' . $rootpath . '/SelectProduct.php?' . SID . '">' . _('Back to Items') . '</a><br />';
+echo '<a href="' . $rootpath . '/SelectProduct.php">' . _('Back to Items') . '</a><br />';
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' .
 	_('Inventory Adjustment') . '" alt="" />' . ' ' . $title . '</p>';
@@ -115,7 +115,7 @@ $result = DB_query("SELECT description,
 
 $myrow = DB_fetch_array($result);
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '?'. SID .'" method=post>';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<table cellpadding=2 class=selection>';
