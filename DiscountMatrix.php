@@ -2,7 +2,6 @@
 /* $Revision: 1.9 $ */
 /* $Id$*/
 
-//$PageSecurity = 11;
 include('includes/session.inc');
 $title = _('Discount Matrix Maintenance');
 include('includes/header.inc');
