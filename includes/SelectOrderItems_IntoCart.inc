@@ -141,7 +141,7 @@ if ($AlreadyOnThisOrder!=1){
 															$_POST['Units'.$NewItem],
 															$myItemRow['volume'],
 															$myItemRow['kgs'],
-															$myItemRow['quantity'],
+															$myItemRow['quantity']/$ConversionFactor,
 															$myItemRow['mbflag'],
 															NULL, /*Actual Dispatch Date */
 															0, /*Qty Invoiced */
@@ -154,7 +154,6 @@ if ($AlreadyOnThisOrder!=1){
 															$UpdateDB,
 															$NewLineNo,
 															$myItemRow['taxcatid'],
-															'',
 															$NewItemDue,
 															$NewPOLine,
 															$myItemRow['standardcost'],

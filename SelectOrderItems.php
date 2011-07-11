@@ -24,8 +24,11 @@ if (isset($_POST['QuickEntry'])){
 
 if (isset($_POST['order_items'])){
 	foreach ($_POST as $key => $value) {
-		if (strstr($key,'itm')) {
-			$NewItem_array[substr($key,3)] = trim($value);
+		if (strstr($key,'StockID')) {
+			$Index=mb_substr($key, 7);
+			$StockID=$value;
+			$NewItem_array[$StockID] = $_POST['Quantity'.$Index];
+			$_POST['Units'.$StockID]=$_POST['Units'.$Index];
 			$NewItem='Here';
 		}
 	}
@@ -201,8 +204,9 @@ if (isset($_GET['ModifyOrderNumber'])
 									salesorderdetails.narrative,
 									salesorderdetails.itemdue,
 									salesorderdetails.poline,
+									salesorderdetails.conversionfactor,
 									salesorderdetails.pricedecimals,
-									locstock.quantity as qohatloc,
+									locstock.quantity/salesorderdetails.conversionfactor as qohatloc,
 									stockmaster.mbflag,
 									stockmaster.discountcategory,
 									stockmaster.decimalplaces,
@@ -241,15 +245,14 @@ if (isset($_GET['ModifyOrderNumber'])
 														$myrow['narrative'],
 														'No', /* Update DB */
 														$myrow['orderlineno'],
-						//								ConvertSQLDate($myrow['itemdue']),
 														0,
-														'',
 														ConvertSQLDate($myrow['itemdue']),
 														$myrow['poline'],
 														$myrow['standardcost'],
 														$myrow['eoq'],
 														$myrow['nextserialno'],
-														$ExRate );
+														$ExRate,
+														$myrow['conversionfactor'] );
 
 				/*Just populating with existing order - no DBUpdates */
 					}
@@ -1346,7 +1349,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				echo '<input type="hidden" name="POLine_' .	 $OrderLine->LineNumber . '" value="">';
 			}
 
-			echo '<td><a target="_blank" href="' . $rootpath . '/StockStatus.php?' . SID .'identifier='.$identifier . '&StockID=' . $OrderLine->StockID . '&DebtorNo=' . $_SESSION['Items'.$identifier]->DebtorNo . '">' . $OrderLine->StockID . '</a></td>
+			echo '<td><a target="_blank" href="' . $rootpath . '/StockStatus.php?identifier='.$identifier . '&StockID=' . $OrderLine->StockID . '&DebtorNo=' . $_SESSION['Items'.$identifier]->DebtorNo . '">' . $OrderLine->StockID . '</a></td>
 				<td>' . $OrderLine->ItemDescription . '</td>';
 
 			echo '<td><input class="number" tabindex=2 type=tect name="Quantity_' . $OrderLine->LineNumber . '" size=6 maxlength=6 value=' . $OrderLine->Quantity . '>';
@@ -1481,7 +1484,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				$QOH = $QOHRow['qoh']*$myrow['conversionfactor'];
 
 				// Find the quantity on outstanding sales orders
-				$sql = "SELECT SUM(salesorderdetails.quantity-salesorderdetails.qtyinvoiced) AS dem
+				$sql = "SELECT SUM(salesorderdetails.quantity-salesorderdetails.qtyinvoiced)*salesorderdetails.conversionfactor AS dem
 								FROM salesorderdetails,
 									 salesorders
 								WHERE salesorders.orderno = salesorderdetails.orderno AND
@@ -1636,8 +1639,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 			echo '<table class="table1">';
 			echo '<tr><td colspan=><input type="hidden" name="previous" value='.number_format($Offset-1).'><input tabindex='.number_format($j+8).' type="submit" name="Prev" value="'._('Prev').'"></td>';
-			echo '<td style="text-align:center" colspan=6><input type="hidden" name="order_items" value=1><input tabindex='.number_format($j+9).' type="submit" value="'._('Add to Sales Order').'"></td>';
-			echo '<td colspan=><input type="hidden" name="nextlist" value='.number_format($Offset+1).'><input tabindex='.number_format($j+10).' type="submit" name="Next" value="'._('Next').'"></td></tr>';
+			echo '<td style="text-align:center" colspan="7"><input type="hidden" name="order_items" value=1><input tabindex='.number_format($j+9).' type="submit" value="'._('Add to Sales Order').'"></td>';
+			echo '<td><input type="hidden" name="nextlist" value='.number_format($Offset+1).'><input tabindex='.number_format($j+10).' type="submit" name="Next" value="'._('Next').'"></td></tr>';
 			$TableHeader = '<tr><th>' . _('Code') . '</th>
 										   			<th>' . _('Description') . '</th>
 										   			<th>' . _('Units') . '</th>
@@ -1651,7 +1654,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			$ImageSource = _('No Image');
 
 			$k=0; //row colour counter
-
+			$i=0;
 			while ($myrow=DB_fetch_array($SearchResult)) {
 				$PriceSQL="SELECT currabrev,
 								price,
@@ -1728,7 +1731,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				}
 
 				// Find the quantity on purchase orders
-				$sql = "SELECT SUM(purchorderdetails.quantityord-purchorderdetails.quantityrecd) AS dem
+				$sql = "SELECT SUM(purchorderdetails.quantityord-purchorderdetails.quantityrecd)*purchorderdetails.conversionfactor AS dem
 							 FROM purchorderdetails LEFT JOIN purchorders
 								ON purchorderdetails.orderno=purchorders.orderno
 							 WHERE purchorderdetails.completed=0
@@ -1741,7 +1744,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 				$PurchRow = db_fetch_row($PurchResult);
 				if ($PurchRow[0]!=null){
-				  $PurchQty =  $PurchRow[0];
+				  $PurchQty =  $PurchRow[0]/$PriceRow['conversionfactor'];
 				} else {
 				  $PurchQty = 0;
 				}
@@ -1768,7 +1771,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 					$k=1;
 				}
 				$OnOrder = $PurchQty + $WoQty;
-				$Available = $QOH - $DemandQty + $OnOrder/$PriceRow['conversionfactor'];
+				$Available = $QOH - $DemandQty + $OnOrder;
 				if ($PriceRow['customerunits']=='' or ($PriceRow['currabrev']<>$_SESSION['Items'.$identifier]->DefaultCurrency)) {
 					$myrow['units']=$myrow['stockunits'];
 				} else {
@@ -1784,21 +1787,22 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 							<td class="number">'.number_format($DemandQty,$DecimalPlaces).'</td>
 							<td class="number">'.number_format($OnOrder/$PriceRow['conversionfactor'],$DecimalPlaces).'</td>
 							<td class="number">'.number_format($Available,$DecimalPlaces).'</td>
-							<td><font size=1><input class="number"  tabindex='.number_format($j+7).' type="textbox" size=6 name="itm'.$myrow['stockid'].'" value=0>
+							<td><font size=1><input class="number"  tabindex='.number_format($j+7).' type="textbox" size=6 name="Quantity'.$i.'" value=0>
+							<input type="hidden" name="StockID'.$i.'" value="'.$myrow['stockid'].'" />
 							<td class="number">'.number_format($PriceRow['price'],2).'</td>
 							</td>
 							</tr>';
-				echo '<input type="hidden" name="ConversionFactor'.$myrow['stockid'].'" value="' . $PriceRow['conversionfactor'] . '" />';
-				echo '<input type="hidden" name="Units'.$myrow['stockid'].'" value="' . $myrow['units'] . '" />';
+				echo '<input type="hidden" name="ConversionFactor'.$i.'" value="' . $PriceRow['conversionfactor'] . '" />';
+				echo '<input type="hidden" name="Units'.$i.'" value="' . $myrow['units'] . '" />';
 				if ($j==1) {
 					$jsCall = '<script  type="text/javascript">if (document.SelectParts) {defaultControl(document.SelectParts.itm'.$myrow['stockid'].');}</script>';
 				}
-				$j++;
+				$i++;
 	#end of page full new headings if
 			}
 	#end of while loop
 			echo '<tr><td><input type="hidden" name="previous" value='.number_format($Offset-1).'><input tabindex='.number_format($j+7).' type="submit" name="Prev" value="'._('Prev').'"></td>';
-			echo '<td style="text-align:center" colspan=6><input type="hidden" name="order_items" value=1><input tabindex='.number_format($j+8).' type="submit" value="'._('Add to Sales Order').'"></td>';
+			echo '<td style="text-align:center" colspan="7"><input type="hidden" name="order_items" value=1><input tabindex='.number_format($j+8).' type="submit" value="'._('Add to Sales Order').'"></td>';
 			echo '<td><input type="hidden" name="nextlist" value='.number_format($Offset+1).'><input tabindex='.number_format($j+9).' type="submit" name="Next" value="'._('Next').'"></td></tr>';
 			echo '</table></form>';
 			echo $jsCall;

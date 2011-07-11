@@ -62,6 +62,12 @@ if (isset($_POST['submit'])) {
 		$Errors[$i] = 'ExchangeRate';
 		$i++;
 	}
+	if (!is_numeric($_POST['DecimalPlaces'])){
+		$InputError = 1;
+	   prnMsg(_('The decimal places must be numeric'),'error');
+		$Errors[$i] = 'DecimalPlaces';
+		$i++;
+	}
 	if (strlen($_POST['CurrencyName']) > 20) {
 		$InputError = 1;
 		prnMsg(_('The currency name must be 20 characters or less long'),'error');
@@ -98,6 +104,7 @@ if (isset($_POST['submit'])) {
 					currency='" . $_POST['CurrencyName'] . "',
 					country='". $_POST['Country']. "',
 					hundredsname='" . $_POST['HundredsName'] . "',
+					decimalplaces='" . $_POST['DecimalPlaces'] . "',
 					rate='" .$_POST['ExchangeRate'] . "'
 					WHERE currabrev = '" . $SelectedCurrency . "'";
 
@@ -109,11 +116,13 @@ if (isset($_POST['submit'])) {
 						currabrev,
 						country,
 						hundredsname,
+						decimalplaces,
 						rate)
 				VALUES ('" . $_POST['CurrencyName'] . "',
 					'" . $_POST['Abbreviation'] . "',
 					'" . $_POST['Country'] . "',
 					'" . $_POST['HundredsName'] .  "',
+					'" . $_POST['DecimalPlaces'] .  "',
 					'" . $_POST['ExchangeRate'] . "')";
 
 		$msg = _('The currency definition record has been added');
@@ -128,6 +137,7 @@ if (isset($_POST['submit'])) {
 	unset($_POST['Country']);
 	unset($_POST['HundredsName']);
 	unset($_POST['ExchangeRate']);
+	unset($_POST['DecimalPlaces']);
 	unset($_POST['Abbreviation']);
 
 } elseif (isset($_GET['delete'])) {
@@ -177,7 +187,13 @@ then none of the above are true and the list of payment termss will be displayed
 links to delete or edit each. These will call the same page again and allow update/input
 or deletion of the records*/
 
-	$sql = "SELECT currency, currabrev, country, hundredsname, rate FROM currencies";
+	$sql = "SELECT currency,
+					currabrev,
+					country,
+					hundredsname,
+					decimalplaces,
+					rate
+				FROM currencies";
 	$result = DB_query($sql, $db);
 
 	echo '<table class=selection>';
@@ -186,6 +202,7 @@ or deletion of the records*/
 			<th>' . _('Currency Name') . '</th>
 			<th>' . _('Country') . '</th>
 			<th>' . _('Hundredths Name') . '</th>
+			<th>' . _('Decimal Places') . '</th>
 			<th>' . _('Exchange Rate') . '</th>
 			<th>' . _('Ex Rate - ECB') .'</th>
 			</tr>';
@@ -198,7 +215,7 @@ or deletion of the records*/
 		$CurrencyRatesArray = array();
 	}
 
-	while ($myrow = DB_fetch_row($result)) {
+	while ($myrow = DB_fetch_array($result)) {
 		if ($myrow[1]==$FunctionalCurrency){
 			echo '<tr bgcolor=#FFbbbb>';
 		} elseif ($k==1){
@@ -223,25 +240,27 @@ or deletion of the records*/
 					<td>%s</td>
 					<td class=number>%s</td>
 					<td class=number>%s</td>
+					<td class=number>%s</td>
 					<td><a href="%s&SelectedCurrency=%s">%s</a></td>
-					<td><a href="%s&SelectedCurrency=%s&delete=1">%s</a></td>
+					<td><a href="%s&SelectedCurrency=%sdelete=1">%s</a></td>
 					<td><a href="%s/ExchangeRateTrend.php?%s">' . _('Graph') . '</a></td>
 					</tr>',
 					$ImageFile,
-					$myrow[1],
-					$myrow[0],
-					$myrow[2],
-					$myrow[3],
-					number_format($myrow[4],5),
-					number_format(GetCurrencyRate($myrow[1],$CurrencyRatesArray),5),
-					$_SERVER['PHP_SELF'] . '?' . SID,
-					$myrow[1],
+					$myrow['currabrev'],
+					$myrow['currency'],
+					$myrow['country'],
+					$myrow['hundredsname'],
+					number_format($myrow['decimalplaces'],0),
+					number_format($myrow['rate'],5),
+					number_format(GetCurrencyRate($myrow['currabrev'],$CurrencyRatesArray),5),
+					$_SERVER['PHP_SELF'] . '?',
+					$myrow['currabrev'],
 					_('Edit'),
-					$_SERVER['PHP_SELF'] . '?' . SID,
-					$myrow[1],
+					$_SERVER['PHP_SELF'] . '?',
+					$myrow['currabrev'],
 					_('Delete'),
 					$rootpath,
-					SID . '&CurrencyToShow=' . $myrow[1]);
+					'CurrencyToShow=' . $myrow['currabrev']);
 		} else {
 			printf('<td><img src="%s"></td>
 					<td>%s</td>
@@ -249,13 +268,15 @@ or deletion of the records*/
 					<td>%s</td>
 					<td>%s</td>
 					<td class=number>%s</td>
+					<td class=number>%s</td>
 					<td colspan=4>%s</td>
 					</tr>',
 					$ImageFile,
-					$myrow[1],
-					$myrow[0],
-					$myrow[2],
-					$myrow[3],
+					$myrow['currabrev'],
+					$myrow['currency'],
+					$myrow['country'],
+					$myrow['hundredsname'],
+					$myrow['decimalplaces'],
 					1,
 					_('Functional Currency'));
 		}
@@ -283,6 +304,7 @@ if (!isset($_GET['delete'])) {
 				currabrev,
 				country,
 				hundredsname,
+				decimalplaces,
 				rate
 				FROM currencies
 				WHERE currabrev='" . $SelectedCurrency . "'";
@@ -296,6 +318,7 @@ if (!isset($_GET['delete'])) {
 		$_POST['CurrencyName']  = $myrow['currency'];
 		$_POST['Country']  = $myrow['country'];
 		$_POST['HundredsName']  = $myrow['hundredsname'];
+		$_POST['DecimalPlaces']  = $myrow['decimalplaces'];
 		$_POST['ExchangeRate']  = $myrow['rate'];
 
 
@@ -333,6 +356,11 @@ if (!isset($_GET['delete'])) {
 	echo '<td>';
 	if (!isset($_POST['ExchangeRate'])) {$_POST['ExchangeRate']='';}
 	echo '<input ' . (in_array('ExchangeRate',$Errors) ?  'class="inputerror"' : '' ) .' type="text" class=number name="ExchangeRate" size=10 maxlength=9 value='. $_POST['ExchangeRate'].'>';
+	echo '</td></tr>';
+	echo '<tr><td>'._('Decimal Places to Show').':</td>';
+	echo '<td>';
+	if (!isset($_POST['DecimalPlaces'])) {$_POST['DecimalPlaces']=2;}
+	echo '<input ' . (in_array('DecimalPlaces',$Errors) ?  'class="inputerror"' : '' ) .' type="text" class=number name="DecimalPlaces" size=10 maxlength=9 value='. $_POST['DecimalPlaces'].'>';
 	echo '</td></tr>';
 	echo '</table>';
 

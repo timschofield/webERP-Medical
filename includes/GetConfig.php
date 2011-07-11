@@ -72,14 +72,20 @@ if(isset($ForceConfigReload) and $ForceConfigReload==TRUE OR !isset($_SESSION['C
 					freightact,
 					gllink_debtors,
 					gllink_creditors,
-					gllink_stock,
-					decimalplaces
+					gllink_stock
 				FROM companies
-				INNER JOIN currencies ON companies.currencydefault=currencies.currabrev
 				WHERE coycode=1";
 
 	$ErrMsg = _('An error occurred accessing the database to retrieve the company information');
 	$ReadCoyResult = DB_query($sql,$db,$ErrMsg);
+
+	$sql="SELECT currabrev,
+				decimalplaces
+			FROM currencies";
+	$CurrenciesResult=DB_query($sql, $db);
+	while ($CurrenciesRow=DB_fetch_array($CurrenciesResult)) {
+		$_SESSION['Currencies'][$CurrenciesRow['currabrev']]['DecimalPlaces']=$CurrenciesRow['decimalplaces'];
+	}
 
 	if (DB_num_rows($ReadCoyResult)==0) {
       		echo '<br /><b>';
