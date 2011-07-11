@@ -2,8 +2,6 @@
 
 /* $Id$ */
 
-//$PageSecurity = 2;
-
 include('includes/session.inc');
 include('includes/class.pdf.php');
 include('includes/SQL_CommonFunctions.inc');
