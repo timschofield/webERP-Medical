@@ -2,8 +2,6 @@
 /* $Revision: 1.8 $ */
 /* $Id$*/
 
-//$PageSecurity = 2;
-
 include ('includes/session.inc');
 include ('includes/SQL_CommonFunctions.inc');
 
