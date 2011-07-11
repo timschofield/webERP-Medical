@@ -10,8 +10,6 @@
  * Need to allow adding serial numbers/batches and deleting batches/serial numbers
  */
 
-//$PageSecurity = 10;
-
 include('includes/session.inc');
 if ($_REQUEST['Serialised']==1){
 	$title = _('Work Order Serial Numbers in Progress');
