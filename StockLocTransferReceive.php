@@ -412,14 +412,14 @@ if (isset($_SESSION['Transfer'])){
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Dispatch') .
 		'" alt="" />' . ' ' . $title . '</p>';
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '?'. SID . '" method=post>';
+	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	prnMsg(_('Please Verify Shipment Quantities Received'),'info');
 
 	$i = 0; //Line Item Array pointer
 
-	echo "<br /><table class=selection>";
+	echo '<br /><table class=selection>';
 	echo '<tr><th colspan=7><font size=3 color=blue>' . _('Location Transfer Reference'). ' #' . $_SESSION['Transfer']->TrfID .
 			' '. _('from').' ' . $_SESSION['Transfer']->StockLocationFromName . ' '. _('to'). ' ' .
 				$_SESSION['Transfer']->StockLocationToName . '</font></th></tr>';
@@ -464,7 +464,7 @@ if (isset($_SESSION['Transfer'])){
 		echo '<td class=number>' . number_format($TrfLine->PrevRecvQty, $TrfLine->DecimalPlaces) . '</td>';
 
 		if ($TrfLine->Controlled==1){
-			echo '<td class=number><input type=hidden name="Qty' . $i . '" value="' . $Qty . '"><a href="' . $rootpath .'/StockTransferControlled.php?' . SID . '&TransferItem=' . $i . '">' . $Qty . '</a></td>';
+			echo '<td class=number><input type=hidden name="Qty' . $i . '" value="' . $Qty . '"><a href="' . $rootpath .'/StockTransferControlled.php?TransferItem=' . $i . '">' . $Qty . '</a></td>';
 		} else {
 			echo '<td><input type=text class="number" name="Qty' . $i . '" maxlength=10 class="number" size=auto value="' . $Qty . '"></td>';
 		}
@@ -476,9 +476,9 @@ if (isset($_SESSION['Transfer'])){
 
 		if ($TrfLine->Controlled==1){
 			if ($TrfLine->Serialised==1){
-				echo '<td><a href="' . $rootpath .'/StockTransferControlled.php?' . SID . '&TransferItem=' . $i . '">' . _('Enter Serial Numbers') . '</a></td>';
+				echo '<td><a href="' . $rootpath .'/StockTransferControlled.php?TransferItem=' . $i . '">' . _('Enter Serial Numbers') . '</a></td>';
 			} else {
-				echo '<td><a href="' . $rootpath .'/StockTransferControlled.php?' . SID . '&TransferItem=' . $i . '">' . _('Enter Batch Refs') . '</a></td>';
+				echo '<td><a href="' . $rootpath .'/StockTransferControlled.php?TransferItem=' . $i . '">' . _('Enter Batch Refs') . '</a></td>';
 			}
 		}
 
@@ -490,14 +490,14 @@ if (isset($_SESSION['Transfer'])){
 	echo '</table><br />
 		<div class="centre"><input type=submit name="ProcessTransfer" value="'. _('Process Inventory Transfer'). '"><bR />
 		</form></div>';
-	echo '<a href="'.$_SERVER['PHP_SELF']. '?' . SID . '&NewTransfer=true">'. _('Select A Different Transfer').'</a>';
+	echo '<a href="'.$_SERVER['PHP_SELF']. '?NewTransfer=true">'. _('Select A Different Transfer').'</a>';
 
 } else { /*Not $_SESSION['Transfer'] set */
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Dispatch') .
 		'" alt="" />' . ' ' . $title . '</p>';
 
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '?'. SID . '" method=post name=form1>';
+	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post name=form1>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	$LocResult = DB_query("SELECT locationname, loccode FROM locations",$db);
@@ -549,7 +549,7 @@ if (isset($_SESSION['Transfer'])){
 			echo '<td class=number>' . $myrow['reference'] . '</td>
 				<td>' . $myrow['trffromloc'] . '</td>
 				<td>' . ConvertSQLDate($myrow['shipdate']) . '</td>
-				<td><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '&Trf_ID=' . $myrow['reference'] . '">'. _('Receive'). '</a></td></tr>';
+				<td><a href="' . $_SERVER['PHP_SELF'] . '?Trf_ID=' . $myrow['reference'] . '">'. _('Receive'). '</a></td></tr>';
 
 		}
 
