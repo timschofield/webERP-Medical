@@ -2,8 +2,6 @@
 /* $Revision: 1.10 $ */
 /* $Id$*/
 
-//$PageSecurity = 11;
-
 include('includes/session.inc');
 
 $title = _('Discount Categories Maintenance');
