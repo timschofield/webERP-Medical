@@ -22,7 +22,7 @@ echo '<br /><br />&nbsp;' . _('Utility page to rebuild the system default langua
 if (isset($_POST['submit'])) {
 
 	echo '<br /><table><tr><td>';
-	echo '<form method="post" action=' . $_SERVER['PHP_SELF'] . '?' . SID . '>';
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 /* Run xgettext to recreate the default message.po language file */
