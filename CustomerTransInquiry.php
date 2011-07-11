@@ -3,8 +3,6 @@
 /* $Revision: 1.17 $ */
 /* $Id$*/
 
-//$PageSecurity = 2;
-
 include('includes/session.inc');
 $title = _('Customer Transactions Inquiry');
 include('includes/header.inc');
