@@ -17,7 +17,7 @@ if (isset($_GET['StockID'])){
 
 
 // This is already linked from this page
-//echo "<a href='" . $rootpath . '/SelectProduct.php?' . SID . "'>" .  _('Back to Items') . '</a><br />';
+//echo "<a href='" . $rootpath . '/SelectProduct.php'>" .  _('Back to Items') . '</a><br />';
 
 $result = DB_query("SELECT description, units FROM stockmaster WHERE stockid='".$StockID."'",$db);
 $myrow = DB_fetch_row($result);
@@ -118,7 +118,7 @@ while ($myrow=DB_fetch_array($MovtsResult)) {
 
 	if ($myrow['type']==10){ /*its a sales invoice allow link to show invoice it was sold on*/
 
-		printf('<td><a TARGET="_blank" href="%s/PrintCustTrans.php?%s&FromTransNo=%s&InvOrCredit=Invoice">%s</td>
+		printf('<td><a TARGET="_blank" href="%s/PrintCustTrans.php?FromTransNo=%s&InvOrCredit=Invoice">%s</td>
 		<td>%s</td>
 		<td>%s</td>
 		<td>%s</td>
@@ -130,7 +130,6 @@ while ($myrow=DB_fetch_array($MovtsResult)) {
 		<td class=number>%s</td>
 		</tr>',
 		$rootpath,
-		SID,
 		$myrow['transno'],
 		$myrow['typename'],
 		$myrow['transno'],
@@ -146,7 +145,7 @@ while ($myrow=DB_fetch_array($MovtsResult)) {
 
 	} elseif ($myrow['type']==11){
 
-		printf('<td><a TARGET="_blank" href="%s/PrintCustTrans.php?%s&FromTransNo=%s&InvOrCredit=Credit">%s</td>
+		printf('<td><a TARGET="_blank" href="%s/PrintCustTrans.php?FromTransNo=%s&InvOrCredit=Credit">%s</td>
 		<td>%s</td>
 		<td>%s</td>
 		<td>%s</td>
@@ -158,7 +157,6 @@ while ($myrow=DB_fetch_array($MovtsResult)) {
 		<td class=number>%s</td>
 		</tr>',
 		$rootpath,
-		SID,
 		$myrow['transno'],
 		$myrow['typename'],
 		$myrow['transno'],
