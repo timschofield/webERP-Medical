@@ -1,8 +1,6 @@
 <?php
 /* $Id$*/
 
-//$PageSecurity = 9;
-
 include('includes/DefineTenderClass.php');
 include('includes/SQL_CommonFunctions.inc');
 include('includes/session.inc');
