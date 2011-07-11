@@ -4,7 +4,6 @@
 
 /* $Revision: 1.21 $ */
 
-//$PageSecurity = 2;
 $PricesSecurity = 12;
 
 include('includes/session.inc');
