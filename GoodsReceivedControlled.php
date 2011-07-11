@@ -4,8 +4,6 @@
 include('includes/DefinePOClass.php');
 include('includes/DefineSerialItems.php');
 
-//$PageSecurity = 11;
-
 include('includes/session.inc');
 
 $title = _('Receive Controlled Items');
