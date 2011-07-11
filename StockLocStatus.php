@@ -1,8 +1,6 @@
 <?php
 /* $Id$*/
 
-//$PageSecurity = 2;
-
 include('includes/session.inc');
 
 $title = _('All Stock Status By Location/Category');
