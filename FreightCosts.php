@@ -3,7 +3,6 @@
 /* $Id$*/
 /* $Revision: 1.14 $ */
 
-//$PageSecurity = 11;
 include('includes/session.inc');
 $title = _('Freight Costs Set Up');
 include('includes/header.inc');
