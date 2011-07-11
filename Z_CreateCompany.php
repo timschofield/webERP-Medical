@@ -3,12 +3,11 @@
 /*Script to insert a dummy sales order if one is not already set up - at least one order is needed for the sales order pages to work.
 Also inserts a blank company record if one is not already set up */
 
-//$PageSecurity=15;
-include ("includes/session.inc");
+include ('includes/session.inc');
 
 $title = _('UTILITY PAGE That sets up a new blank company record if not already existing');
 
-include("includes/header.inc");
+include('includes/header.inc');
 
 $sql = "SELECT COUNT(coycode) FROM companies";
 $Result = DB_query($sql,$db);
