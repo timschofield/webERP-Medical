@@ -9,7 +9,7 @@ $title = _('Supplier Inquiry');
 include('includes/header.inc');
 
 // This is already linked from the menu
-//echo '<a href='" . $rootpath . '/SelectSupplier.php?' . SID . "'>" . _('Back to Suppliers') . '</a><br />';
+//echo '<a href='" . $rootpath . '/SelectSupplier.php'>" . _('Back to Suppliers') . '</a><br />';
 
 // always figure out the SQL required from the inputs available
 
