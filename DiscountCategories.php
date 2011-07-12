@@ -194,7 +194,7 @@ if (isset($_POST['selectchoice'])) {
 				echo '<tr class="OddTableRows">';
 				$k=1;
 			}
-			$DeleteURL = $_SERVER['PHP_SELF'] . '?' . SID . '&Delete=yes&StockID=' . $myrow['stockid'] . '&DiscountCategory=' . $myrow['discountcategory'];
+			$DeleteURL = $_SERVER['PHP_SELF'] . '?Delete=yes&StockID=' . $myrow['stockid'] . '&DiscountCategory=' . $myrow['discountcategory'];
 
 			printf('<td>%s</td>
 				<td>%s - %s</td>
