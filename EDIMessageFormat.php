@@ -147,15 +147,15 @@ or deletion of the records*/
 		printf('<td>%s</td>
 			<td class=number>%s</td>
 			<td>%s</td>
-			<td><a href="%s&SelectedMessageLine=%s">' . _('Edit') . '</a></td>
-			<td><a href="%s&delete=%s">' . _('Delete') . '</a></td>
+			<td><a href="%sSelectedMessageLine=%s">' . _('Edit') . '</a></td>
+			<td><a href="%sdelete=%s">' . _('Delete') . '</a></td>
 			</tr>',
 			$myrow[1],
 			$myrow[2],
 			$myrow[3],
-			$_SERVER['PHP_SELF'] . '?' . SID,
+			$_SERVER['PHP_SELF'] . '?',
 			$myrow[0],
-			$_SERVER['PHP_SELF'] . '?' . SID,
+			$_SERVER['PHP_SELF'] . '?',
 			$myrow[0]);
 
 	} //END WHILE LIST LOOP
