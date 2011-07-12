@@ -238,7 +238,7 @@ if (DB_num_rows($result) == 0) {
 		}
 
 		if (function_exists('imagecreatefrompng')){
-			$CatImgLink = '<img src="GetStockImage.php?SID&automake=1&textcolor=FFFFFF&bgcolor=CCCCCC'.
+			$CatImgLink = '<img src="GetStockImage.php?automake=1&textcolor=FFFFFF&bgcolor=CCCCCC'.
 				'&stockid='.urlencode('cat_'.$myrow['salescatid'].'.jpg').
 				'&text='.
 				'&width=32'.
@@ -254,19 +254,19 @@ if (DB_num_rows($result) == 0) {
 
 		}
 
-		printf("<td>%s</td>
-            		<td><a href=\"%sParentCategory=%s\">" . _('Select') . "</td>
-            		<td><a href=\"%sSelectedCategory=%s&ParentCategory=%s\">" . _('Edit') . "</td>
-            		<td><a href=\"%sSelectedCategory=%s&delete=yes&EditName=1&ParentCategory=%s\">" . _('Delete') . "</td>
+		printf('<td>%s</td>
+            		<td><a href="%sParentCategory=%s">' . _('Select') . '</td>
+            		<td><a href="%sSelectedCategory=%s&ParentCategory=%s">' . _('Edit') . '</td>
+            		<td><a href="%sSelectedCategory=%s&delete=yes&EditName=1&ParentCategory=%s">' . _('Delete') . '</td>
 					<td>%s</td>
-            		</tr>",
+            		</tr>',
             		$myrow['salescatname'],
-            		$_SERVER['PHP_SELF'] . '?' . SID,
+            		$_SERVER['PHP_SELF'] . '?',
             		$myrow['salescatid'],
-            		$_SERVER['PHP_SELF'] . '?' . SID,
+            		$_SERVER['PHP_SELF'] . '?',
             		$myrow['salescatid'],
             		$ParentCategory,
-            		$_SERVER['PHP_SELF'] . '?' . SID,
+            		$_SERVER['PHP_SELF'] . '?',
             		$myrow['salescatid'],
             		$ParentCategory,
             		$CatImgLink);
@@ -284,7 +284,7 @@ echo '</p>';
 // ----------------------------------------------------------------------------------------
 // Show New or Edit Category
 
-echo '<p><form ENCtype="MULTIPART/FORM-DATA" method="POST" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '">';
+echo '<p><form ENCtype="MULTIPART/FORM-DATA" method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 // This array will contain the stockids in use for this category
@@ -368,7 +368,7 @@ $sql = "SELECT stockid, description FROM stockmaster ORDER BY stockid";
 $result = DB_query($sql,$db);
 if($result && DB_num_rows($result)) {
 	// continue id stock id in the stockid array
-	echo '<p><form ENCtype="MULTIPART/FORM-DATA" method="POST" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '">';
+	echo '<p><form ENCtype="MULTIPART/FORM-DATA" method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	if( isset($SelectedCategory) ) { // If we selected a category we need to keep it selected
 		echo '<input type=hidden name="SelectedCategory" value="' . $SelectedCategory . '">';
@@ -395,9 +395,9 @@ if($result && DB_num_rows($result)) {
 	echo '';
 	echo '</form></p>';
 } else {
-	echo "<p>";
-	echo prnMsg( _("No more Inventory items to add.") );
-	echo "</p>";
+	echo '<p>';
+	echo prnMsg( _('No more Inventory items to add.') );
+	echo '</p>';
 }
 if( $result ) {
 	DB_free_result($result);
