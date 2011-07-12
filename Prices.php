@@ -243,7 +243,7 @@ if ($InputError ==0){
 
 	if (DB_num_rows($result) > 0) {
 		echo '<table class=selection>';
-		echo '<tr><th colspan=8><form method="post" action=' . $_SERVER['PHP_SELF'] . '?' . SID . '>';
+		echo '<tr><th colspan=8><form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo _('Pricing for part') . ':<input type=text name="Item" MAXSIZEe=22 value="' . $Item . '" maxlength=20><input type=submit name=NewPart Value="' . _('Review Prices') . '">';
 		echo '</th></tr></form>';
@@ -306,7 +306,7 @@ if ($InputError ==0){
 	}
 
 	if (in_array(12,$_SESSION['AllowedPageSecurityTokens'])) {
-		echo '<form method="post" action=' . $_SERVER['PHP_SELF'] . '?' . SID . '>';
+		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		if (isset($_GET['Edit'])){
 			$sql = "SELECT currencies.currency,
