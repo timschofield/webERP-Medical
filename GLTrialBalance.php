@@ -23,7 +23,7 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 	include  ('includes/header.inc');
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' .
 		_('Trial Balance') . '" alt="" />' . ' ' . $title . '</p>';
-	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '">';
+	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (Date('m') > $_SESSION['YearEnd']){
@@ -38,7 +38,7 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 
 	/*Show a form to allow input of criteria for TB to show */
 	echo '<table class=selection><tr><td>' . _('Select Period From:') . '</td><td><select Name="FromPeriod">';
-	$nextYear = date("Y-m-d",strtotime("+1 Year"));
+	$nextYear = date('Y-m-d',strtotime('+1 Year'));
 	$sql = "SELECT periodno,
 					lastdate_in_period
 				FROM periods
@@ -148,7 +148,7 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 		$title = _('Trial Balance') . ' - ' . _('Problem Report') . '....';
 		include('includes/header.inc');
 		prnMsg( _('No general ledger accounts were returned by the SQL because') . ' - ' . DB_error_msg($db) );
-		echo '<br /><a href="' .$rootpath .'/index.php?' . SID . '">'. _('Back to the menu'). '</a>';
+		echo '<br /><a href="' .$rootpath .'/index.php">'. _('Back to the menu'). '</a>';
 		if ($debug==1){
 			echo '<br />'. $SQL;
 		}
@@ -160,7 +160,7 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 		include('includes/header.inc');
 		echo '<br />';
 		prnMsg( _('There were no entries to print out for the selections specified') );
-		echo '<br /><a href="'. $rootpath.'/index.php?' . SID . '">'. _('Back to the menu'). '</a>';
+		echo '<br /><a href="'. $rootpath.'/index.php">'. _('Back to the menu'). '</a>';
 		include('includes/footer.inc');
 		exit;
 	}
@@ -380,7 +380,7 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 } else {
 
 	include('includes/header.inc');
-	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '">';
+	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<input type=hidden name="FromPeriod" value="' . $_POST['FromPeriod'] . '"><input type=hidden name="ToPeriod" value="' . $_POST['ToPeriod'] . '">';
 
@@ -599,7 +599,7 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 		$CheckPeriodActual += $AccountPeriodActual;
 		$CheckPeriodBudget += $AccountPeriodBudget;
 
-		$ActEnquiryURL = '<a href="'. $rootpath . '/GLAccountInquiry.php?' . SID . 'Period=' . $_POST['ToPeriod'] . '&Account=' . $myrow['accountcode'] . '&Show=Yes">' . $myrow['accountcode'] . '<a>';
+		$ActEnquiryURL = '<a href="'. $rootpath . '/GLAccountInquiry.php?Period=' . $_POST['ToPeriod'] . '&Account=' . $myrow['accountcode'] . '&Show=Yes">' . $myrow['accountcode'] . '<a>';
 
 		printf('<td>%s</td>
 			<td>%s</td>
