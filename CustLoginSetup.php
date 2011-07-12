@@ -19,7 +19,7 @@ $ModuleList = array(_('Orders'),
 					_('Petty Cash'),
 					_('Setup'));
 
-echo "<a href='" . $rootpath . '/SelectCustomer.php?' . SID . "'>" . _('Back to Customers') . '</a><br />';
+echo '<a href="' . $rootpath . '/SelectCustomer.php">' . _('Back to Customers') . '</a><br />';
 
 $sql="SELECT name
 		FROM debtorsmaster
@@ -31,7 +31,7 @@ $CustomerName=$myrow['name'];
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') .
 	'" alt="" />' . ' ' . _('Customer') . ' : ' . $_SESSION['CustomerID'] . ' - ' . $CustomerName. _(' has been selected') .
-		'</p><br />';//'</p>';
+		'</p><br />';
 //echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/group_add.png" title="' . _('Search') . '" alt="">' . ' ' . $title.'</p><br />';
 
 
@@ -289,8 +289,8 @@ if (!isset($SelectedUser)) {
 			<td>%s</td>
 			<td>%s</td>
 			<td>%s</td>
-			<td><a href="%s&SelectedUser=%s">' . _('Edit') . '</a></td>
-			<td><a href="%s&SelectedUser=%s&delete=1">' . _('Delete') . '</a></td>
+			<td><a href="%sSelectedUser=%s">' . _('Edit') . '</a></td>
+			<td><a href="%sSelectedUser=%s&delete=1">' . _('Delete') . '</a></td>
 			</tr>',
 			$myrow[0],
 			$myrow[1],
@@ -303,9 +303,9 @@ if (!isset($SelectedUser)) {
 			$myrow[8],
 			$myrow[9],
 			$myrow[10],
-			$_SERVER['PHP_SELF']  . "?" . SID,
+			$_SERVER['PHP_SELF'] . '?',
 			$myrow[0],
-			$_SERVER['PHP_SELF'] . "?" . SID,
+			$_SERVER['PHP_SELF'] . '?',
 			$myrow[0]);
 
 	} //END WHILE LIST LOOP
