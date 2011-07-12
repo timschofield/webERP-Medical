@@ -181,7 +181,7 @@ if (!isset($_GET['InvoiceNumber']) AND !$_SESSION['ProcessingCredit']) {
 
 		} else { /* there are no stock movement records created for that invoice */
 
-			echo '<div class="centre"><a href="' . $rootpath . '/index.php?' . SID . '">' . _('Back to the menu') . '</a></div>';
+			echo '<div class="centre"><a href="' . $rootpath . '/index.php">' . _('Back to the menu') . '</a></div>';
 			prnMsg( _('There are no line items that were retrieved for this invoice') . '. ' . _('The automatic credit program can not create a credit note from this invoice'),'warn');
 			include('includes/footer.inc');
 			exit;
@@ -315,7 +315,7 @@ foreach ($_SESSION['CreditItems']->LineItems as $LnItm) {
 
 		if ($LnItm->Controlled==1){
 
-			echo "<td><input type=hidden name='Quantity_" . $LnItm->LineNumber ."'  value=" . $LnItm->QtyDispatched . "><a href='$rootpath/CreditItemsControlled.php?" . SID . "&LineNo=" . $LnItm->LineNumber . "&CreditInvoice=Yes'>" . $LnItm->QtyDispatched . "</a></td>";
+			echo '<td><input type=hidden name="Quantity_' . $LnItm->LineNumber .'"  value="' . $LnItm->QtyDispatched . '"><a href="'.$rootpath.'/CreditItemsControlled.php?LineNo=' . $LnItm->LineNumber . '&CreditInvoice=Yes>' . $LnItm->QtyDispatched . '</a></td>';
 
 		} else {
 
