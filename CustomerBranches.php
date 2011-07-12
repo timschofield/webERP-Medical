@@ -29,7 +29,7 @@ if (isset($_GET['SelectedBranch'])){
 }
 
 // This link is already available on the menu on this page
-//echo "<a href='" . $rootpath . '/SelectCustomer.php?' . SID . "'>" . _('Back to Customers') . '</a><br />';
+//echo "<a href='" . $rootpath . '/SelectCustomer.php'>" . _('Back to Customers') . '</a><br />';
 
 if (isset($Errors)) {
 	unset($Errors);
