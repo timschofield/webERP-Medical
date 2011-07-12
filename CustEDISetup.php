@@ -6,7 +6,7 @@ include('includes/session.inc');
 $title = _('Customer EDI Set Up');
 include('includes/header.inc');
 
-echo "<a href='" . $rootpath . '/SelectCustomer.php?' . SID . "'>" . _('Back to Customers') . '</a><br />';
+echo '<a href="' . $rootpath . '/SelectCustomer.php">' . _('Back to Customers') . '</a><br />';
 
 if (isset($Errors)) {
 	unset($Errors);
@@ -69,7 +69,7 @@ if (isset($_POST['submit'])) {
 	}
 }
 
-echo "<form method='post' action='" . $_SERVER['PHP_SELF'] . '?' . SID ."'>";
+echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo '<br /><table class=selection>';
 
@@ -106,10 +106,10 @@ if ($myrow['ediinvoices']==0){
 	echo '<option selected value=1>'._('Enabled') . '</option>';
 }
 
-echo "</select><a href='$rootpath/EDIMessageFormat.php?" . SID . "&MessageType=INVOIC&PartnerCode=" . $_SESSION['CustomerID'] . "'>"._('Create') . '/' . _('Edit Invoice Message Format').'</a></td></tr>';
+echo '</select><a href="'.$rootpath.'/EDIMessageFormat.php?MessageType=INVOIC&PartnerCode=' . $_SESSION['CustomerID'] . '">'._('Create') . '/' . _('Edit Invoice Message Format').'</a></td></tr>';
 
-echo '<tr><td>'._('Enable Receiving of EDI Orders').":</td>
-	<td><select tabindex=2 name='EDIOrders'>";
+echo '<tr><td>'._('Enable Receiving of EDI Orders').':</td>
+	<td><select tabindex=2 name="EDIOrders">';
 
 if ($myrow['ediorders']==0){
 
