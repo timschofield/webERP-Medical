@@ -13,7 +13,7 @@ If (!isset($_GET['QuotationNo']) || $_GET['QuotationNo']==""){
         echo '<div class="centre"><br /><br /><br />';
         prnMsg( _('Select a Quotation to Print before calling this page') , 'error');
         echo '<br /><br /><br /><table class="table_index"><tr><td class="menu_group_item">
-                <li><a href="'. $rootpath . '/SelectSalesOrder.php?'. SID .'&Quotations=Quotes_Only">' . _('Quotations') . '</a></li>
+                <li><a href="'. $rootpath . '/SelectSalesOrder.php?Quotations=Quotes_Only">' . _('Quotations') . '</a></li>
                 </td></tr></table></div><br /><br /><br />';
         include('includes/footer.inc');
         exit();
@@ -64,7 +64,7 @@ if (DB_num_rows($result)==0){
          echo '<div class="centre"><br /><br /><br />';
         prnMsg( _('Unable to Locate Quotation Number') . ' : ' . $_GET['QuotationNo'] . ' ', 'error');
         echo '<br /><br /><br /><table class="table_index"><tr><td class="menu_group_item">
-                <li><a href="'. $rootpath . '/SelectSalesOrder.php?'. SID .'&Quotations=Quotes_Only">' . _('Outstanding Quotations') . '</a></li>
+                <li><a href="'. $rootpath . '/SelectSalesOrder.php?Quotations=Quotes_Only">' . _('Outstanding Quotations') . '</a></li>
                 </td></tr></table></div><br /><br /><br />';
         include('includes/footer.inc');
         exit;
@@ -231,8 +231,8 @@ if ($ListCount == 0){
         $title = _('Print Quotation Error');
         include('includes/header.inc');
         echo '<br />'. _('There were no items on the quotation') . '. ' . _('The quotation cannot be printed').
-                '<br /><a href="' . $rootpath . '/SelectSalesOrder.php?' . SID . '&Quotation=Quotes_only">'. _('Print Another Quotation').
-                '</a>' . '<br />'. '<a href="' . $rootpath . '/index.php?' . SID . '">' . _('Back to the menu') . '</a>';
+                '<br /><a href="' . $rootpath . '/SelectSalesOrder.php?Quotation=Quotes_only">'. _('Print Another Quotation').
+                '</a>' . '<br />'. '<a href="' . $rootpath . '/index.php">' . _('Back to the menu') . '</a>';
         include('includes/footer.inc');
 	exit;
 } else {
