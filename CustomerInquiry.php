@@ -13,7 +13,7 @@ include('includes/header.inc');
 
 if(!isset($_GET['CustomerID']) AND !isset($_SESSION['CustomerID'])){
 	prnMsg(_('To display the enquiry a customer must first be selected from the customer selection screen'),'info');
-	echo '<br /><div class="centre"><a href="'. $rootpath . '/SelectCustomer.php?' . SID . '">' . _('Select a Customer to Inquire On') . '</a><br /></div>';
+	echo '<br /><div class="centre"><a href="'. $rootpath . '/SelectCustomer.php">' . _('Select a Customer to Inquire On') . '</a><br /></div>';
 	include('includes/footer.inc');
 	exit;
 } else {
@@ -253,7 +253,7 @@ while ($myrow=DB_fetch_array($TransResult)) {
 			/* format string with GL inquiry options and for invoice to be credited */
 
 			printf($BaseFormatString . $CreditInvoiceFormatString . $PreviewInvoiceFormatString .
-				'<td><a href="%s/GLTransInquiry.php?%s&TypeID=%s&TransNo=%s">' . _('View GL Entries') . ' <IMG SRC="' .$rootpath. '/css/'.$theme.'/images/gl.png" title="' . _('View the GL Entries') . '"></a></td>
+				'<td><a href="%s/GLTransInquiry.php?TypeID=%s&TransNo=%s">' . _('View GL Entries') . ' <IMG SRC="' .$rootpath. '/css/'.$theme.'/images/gl.png" title="' . _('View the GL Entries') . '"></a></td>
 				</tr>',
 				//$BaseFormatString parameters
 				$myrow['typename'],
@@ -283,7 +283,6 @@ while ($myrow=DB_fetch_array($TransResult)) {
 				$rootpath.'/css/'.$theme.'/images',
 				//Parameter for string for GL Trans Inquiries
 				$rootpath,
-				SID,
 				$myrow['type'],
 				$myrow['transno']);
 		} else { //user does not have privileges to see GL inquiry stuff
@@ -350,7 +349,7 @@ while ($myrow=DB_fetch_array($TransResult)) {
 			printf($BaseFormatString .
 				$PreviewCreditFormatString .
 				'<td><a href="%s/CustomerAllocations.php?AllocTrans=%s">' . _('Allocation') . '<img src="' .$rootpath.'/css/'.$theme.'/images/allocation.png" title="' . _('Click to allocate funds') . '"></a></td>
-				<td><a href="%s/GLTransInquiry.php?%sTypeID=%s&TransNo=%s">' . _('View GL Entries') . ' <a><img src="' .$rootpath.'/css/'.$theme.'/images/gl.png" title="' . _('View the GL Entries') . '"></a></td></tr>',
+				<td><a href="%s/GLTransInquiry.php?TypeID=%s&TransNo=%s">' . _('View GL Entries') . ' <a><img src="' .$rootpath.'/css/'.$theme.'/images/gl.png" title="' . _('View the GL Entries') . '"></a></td></tr>',
 				//$BaseFormatString parameters
 				$myrow['typename'],
 				$myrow['transno'],
@@ -377,7 +376,6 @@ while ($myrow=DB_fetch_array($TransResult)) {
 				$rootpath,
 				$myrow['id'],
 				$rootpath,
-				SID,
 				$myrow['type'],
 				$myrow['transno']);
 		} else {
@@ -417,7 +415,7 @@ while ($myrow=DB_fetch_array($TransResult)) {
 		if ($_SESSION['CompanyRecord']['gllink_debtors']== 1 AND in_array(8,$_SESSION['AllowedPageSecurityTokens'])){
 			printf($BaseFormatString .
 				'<td><a href="%s/CustomerAllocations.php?AllocTrans=%s">' . _('Allocation') . '<img src="' .$rootpath.'/css/'.$theme.'/images/allocation.png" title="' . _('Click to allocate funds') . '"></a></td>
-				<td><a href="%s/GLTransInquiry.php?%s&TypeID=%s&TransNo=%s">' . _('View GL Entries') . ' <img src="' .$rootpath.'/css/'.$theme.'/images/gl.png" title="' . _('View the GL Entries') . '"></a></td>
+				<td><a href="%s/GLTransInquiry.php?TypeID=%s&TransNo=%s">' . _('View GL Entries') . ' <img src="' .$rootpath.'/css/'.$theme.'/images/gl.png" title="' . _('View the GL Entries') . '"></a></td>
 				</tr>',
 				$myrow['typename'],
 				$myrow['transno'],
@@ -432,7 +430,6 @@ while ($myrow=DB_fetch_array($TransResult)) {
 				$rootpath,
 				$myrow['id'],
 				$rootpath,
-				SID,
 				$myrow['type'],
 				$myrow['transno']);
 		} else { //no permission for GLTrans Inquiries
@@ -457,7 +454,7 @@ while ($myrow=DB_fetch_array($TransResult)) {
 		//If security token 8 in the allowed page security tokens then assumed ok for GL trans inquiries
 		if ($_SESSION['CompanyRecord']['gllink_debtors']== 1 AND in_array(8,$_SESSION['AllowedPageSecurityTokens'])){
 			printf($BaseFormatString .
-				'<td><a href="%s/GLTransInquiry.php?%s&TypeID=%s&TransNo=%s">' . _('View GL Entries') . ' <a></td></tr>',
+				'<td><a href="%s/GLTransInquiry.php?TypeID=%s&TransNo=%s">' . _('View GL Entries') . ' <a></td></tr>',
 				$myrow['typename'],
 				$myrow['transno'],
 				ConvertSQLDate($myrow['trandate']),
@@ -469,7 +466,6 @@ while ($myrow=DB_fetch_array($TransResult)) {
 				number_format($myrow['allocated'],2),
 				number_format($myrow['totalamount']-$myrow['allocated'],2),
 				$rootpath,
-				SID,
 				$myrow['type'],
 				$myrow['transno']);
 		} else { //no permission for GLTrans Inquiries
@@ -489,7 +485,7 @@ while ($myrow=DB_fetch_array($TransResult)) {
 		//If security token 8 in the allowed page security tokens then assumed ok for GL trans inquiries
 		if ($_SESSION['CompanyRecord']['gllink_debtors']== 1 AND in_array(8,$_SESSION['AllowedPageSecurityTokens'])){
 			printf($BaseFormatString .
-				'<td><a href="%s/GLTransInquiry.php?%s&TypeID=%s&TransNo=%s">' . _('View GL Entries') . ' <a></td></tr>',
+				'<td><a href="%s/GLTransInquiry.php?TypeID=%s&TransNo=%s">' . _('View GL Entries') . ' <a></td></tr>',
 				$myrow['typename'],
 				$myrow['transno'],
 				ConvertSQLDate($myrow['trandate']),
@@ -501,7 +497,6 @@ while ($myrow=DB_fetch_array($TransResult)) {
 				number_format($myrow['allocated'],2),
 				number_format($myrow['totalamount']-$myrow['allocated'],2),
 				$rootpath,
-				SID,
 				$myrow['type'],
 				$myrow['transno']);
 		} else {
