@@ -457,7 +457,7 @@ if (isset($_POST['PrintPDF'])){
 		$title = _('Print Inventory Planning Report Empty');
 		include('includes/header.inc');
 		prnMsg( _('There were no items in the range and location specified'),'error');
-		echo '<br /><a href="'.$rootpath/.'index.php">' . _('Back to the menu') . '</a>';
+		echo '<br /><a href="'.$rootpath.'/index.php">' . _('Back to the menu') . '</a>';
 		include('includes/footer.inc');
 		exit;
 	} else {

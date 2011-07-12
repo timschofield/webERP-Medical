@@ -15,11 +15,11 @@ if (empty($identifier)) {
 $title = _('Receive Purchase Orders');
 include('includes/header.inc');
 
-echo '<a href="'. $rootpath . '/PO_SelectOSPurchOrder.php?' . SID . '">' . _('Back to Purchase Orders'). '</a><br />';
+echo '<a href="'. $rootpath . '/PO_SelectOSPurchOrder.php">' . _('Back to Purchase Orders'). '</a><br />';
 
 if (isset($_GET['PONumber']) and $_GET['PONumber']<=0 and !isset($_SESSION['PO'])) {
 	/* This page can only be called with a purchase order number for invoicing*/
-	echo '<div class="centre"><a href= "' . $rootpath . '/PO_SelectOSPurchOrder.php?' . SID . '">'.
+	echo '<div class="centre"><a href= "' . $rootpath . '/PO_SelectOSPurchOrder.php">'.
 		_('Select a purchase order to receive').'</a></div>';
 	echo '<br />'. _('This page can only be opened if a purchase order has been selected. Please select a purchase order first');
 	include ('includes/footer.inc');
@@ -62,7 +62,7 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/s
 	_('Receive') . '" alt="" />' . ' ' . _('Receive Purchase Order') . '';
 
 echo ' : '. $_SESSION['PO']->OrderNo .' '. _('from'). ' ' . $_SESSION['PO']->SupplierName . '</p>';
-echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (!isset($_POST['ProcessGoodsReceived'])) {
@@ -159,7 +159,7 @@ if (count($_SESSION['PO']->LineItems)>0 and !isset($_POST['ProcessGoodsReceived'
 
 		if ($LnItm->Controlled == 1) {
 
-			echo '<input type=hidden name="RecvQty_' . $LnItm->LineNo . '" value="' . $LnItm->ReceiveQty . '"><a href="GoodsReceivedControlled.php?' . SID . '&LineNo=' . $LnItm->LineNo . '">' . number_format($LnItm->ReceiveQty,$LnItm->DecimalPlaces) . '</a></td>';
+			echo '<input type=hidden name="RecvQty_' . $LnItm->LineNo . '" value="' . $LnItm->ReceiveQty . '"><a href="GoodsReceivedControlled.php?LineNo=' . $LnItm->LineNo . '">' . number_format($LnItm->ReceiveQty,$LnItm->DecimalPlaces) . '</a></td>';
 
 		} else {
 			echo '<input type=text class=number name="RecvQty_' . $LnItm->LineNo . '" maxlength=10 size=10 value="' . $LnItm->ReceiveQty . '"></td>';
@@ -173,10 +173,10 @@ if (count($_SESSION['PO']->LineItems)>0 and !isset($_POST['ProcessGoodsReceived'
 
 		if ($LnItm->Controlled == 1) {
 			if ($LnItm->Serialised==1){
-				echo '<td><a href="GoodsReceivedControlled.php?' . SID . '&LineNo=' . $LnItm->LineNo . '">'.
+				echo '<td><a href="GoodsReceivedControlled.php?LineNo=' . $LnItm->LineNo . '">'.
 					_('Enter Serial Nos'). '</a></td>';
 			} else {
-				echo '<td><a href="GoodsReceivedControlled.php?' . SID . '&LineNo=' . $LnItm->LineNo . '">'.
+				echo '<td><a href="GoodsReceivedControlled.php?LineNo=' . $LnItm->LineNo . '">'.
 					_('Enter Batches'). '</a></td>';
 			}
 		}
@@ -705,7 +705,7 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 
 	echo '<br /><div class=centre>'. _('GRN number'). ' '. $GRN .' '. _('has been processed').'<br />';
 	echo '<br /><a href=PDFGrn.php?GRNNo='.$GRN .'&PONo='.$PONo.'>'. _('Print this Goods Received Note (GRN)').'</a><br /><br />';
-	echo '<a href="' . $rootpath . '/PO_SelectOSPurchOrder.php?' . SID . '">' .
+	echo '<a href="' . $rootpath . '/PO_SelectOSPurchOrder.php">' .
 		_('Select a different purchase order for receiving goods against'). '</a></div>';
 /*end of process goods received entry */
 	include('includes/footer.inc');
@@ -713,7 +713,7 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 
 } else { /*Process Goods received not set so show a link to allow mod of line items on order and allow input of date goods received*/
 
-	echo '<br /><div class="centre"><a href="' . $rootpath . '/PO_Items.php?=' . SID . '">' . _('Modify Order Items'). '</a></div>';
+	echo '<br /><div class="centre"><a href="' . $rootpath . '/PO_Items.php">' . _('Modify Order Items'). '</a></div>';
 
 	echo '<br /><div class="centre"><input type=submit name=Update Value=' . _('Update') . '></div><br />';
 	echo '<div class="centre"><input type=submit name="ProcessGoodsReceived" Value="' . _('Process Goods Received') . '"></div>';
