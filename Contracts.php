@@ -2,7 +2,6 @@
 
 /* $Id: Contracts.php 3692 2010-08-15 09:22:08Z daintree $ */
 
-//$PageSecurity = 6;
 include('includes/DefineContractClass.php');
 include('includes/session.inc');
 
@@ -82,26 +81,26 @@ if(isset($_SESSION['Contract'.$identifier]) AND
 	}
 
 	if (isset($_POST['EnterContractBOM']) AND !$InputError){
-		echo "<meta http-equiv='Refresh' content='0; url=" . $rootpath . '/ContractBOM.php?' . SID . 'identifier='.$identifier. "' />";
+		echo "<meta http-equiv='Refresh' content='0; url=" . $rootpath . '/ContractBOM.php?identifier='.$identifier. "' />";
 		echo '<br />';
 		prnMsg(_('You should automatically be forwarded to the entry of the Contract line items page') . '. ' .
 		_('If this does not happen') . ' (' . _('if the browser does not support META Refresh') . ') ' .
-		"<a href='$rootpath/ContractBOM.php?" . SID. 'identifier='.$identifier . "'>" . _('click here') . '</a> ' . _('to continue'),'info');
+		'<a href="'.$rootpath.'/ContractBOM.php?identifier='.$identifier . '">' . _('click here') . '</a> ' . _('to continue'),'info');
 		include('includes/footer.inc');
 		exit;
 	}
 	if (isset($_POST['EnterContractRequirements']) AND !$InputError){
-		echo "<meta http-equiv='Refresh' content='0; url=" . $rootpath . '/ContractOtherReqts.php?' . SID . 'identifier='.$identifier. "' />";
+		echo "<meta http-equiv='Refresh' content='0; url=" . $rootpath . '/ContractOtherReqts.php?identifier='.$identifier. "' />";
 		echo '<br />';
 		prnMsg(_('You should automatically be forwarded to the entry of the Contract requirements page') . '. ' .
 		_('If this does not happen') . ' (' . _('if the browser does not support META Refresh') . ') ' .
-		"<a href='$rootpath/ContractOtherReqts.php?" . SID. 'identifier='.$identifier . "'>" . _('click here') . '</a> ' . _('to continue'),'info');
+		'<a href="'.$rootpath.'/ContractOtherReqts.php?identifier='.$identifier . '">' . _('click here') . '</a> ' . _('to continue'),'info');
 		include('includes/footer.inc');
 		exit;
 	}
 } /* end of if going to contract BOM or contract requriements */
 
-echo '<a href="'. $rootpath . '/SelectContract.php?' . SID .'">'. _('Back to Contract Selection'). '</a><br />';
+echo '<a href="'. $rootpath . '/SelectContract.php">'. _('Back to Contract Selection'). '</a><br />';
 
 //attempting to upload the drawing image file
 if (isset($_FILES['Drawing']) AND $_FILES['Drawing']['name'] !='' AND $_SESSION['Contract'.$identifier]->ContractRef!='') {
@@ -131,7 +130,7 @@ if (isset($_FILES['Drawing']) AND $_FILES['Drawing']['name'] !='' AND $_SESSION[
 
 	if ($UploadTheFile=='Yes'){
 		$result  =  move_uploaded_file($_FILES['Drawing']['tmp_name'], $filename);
-		$message = ($result)?_('File url') ."<a href='". $filename ."'>" .  $filename . '</a>' : _('Something is wrong with uploading the file');
+		$message = ($result)?_('File url') .'<a href="'. $filename .'">' .  $filename . '</a>' : _('Something is wrong with uploading the file');
 	}
  /* EOR Add Image upload for New Item  - by Ori */
 }
@@ -746,7 +745,7 @@ if (!isset($_SESSION['Contract'.$identifier]->DebtorNo)
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/contract.png" title="' .
 		_('Contract') . '" alt="" />' . ' ' . _('Contract: Select Customer') . '</p>';
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '?' .SID .'&amp;identifier=' . $identifier .'" name="CustomerSelection" method="post">';
+	echo '<form action="' . $_SERVER['PHP_SELF'] . '?identifier=' . $identifier .'" name="CustomerSelection" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<table cellpadding="3" colspan="4" class="selection">
@@ -814,7 +813,7 @@ if (!isset($_SESSION['Contract'.$identifier]->DebtorNo)
 //end if RequireCustomerSelection
 } else { /*A customer is already selected so get into the contract setup proper */
 
-	echo '<form name="ContractEntry" enctype="multipart/form-data" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '&amp;identifier=' . $identifier . '" method="post">';
+	echo '<form name="ContractEntry" enctype="multipart/form-data" action="' . $_SERVER['PHP_SELF'] . '?identifier=' . $identifier . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<p class="page_title_text">
@@ -856,7 +855,7 @@ if (!isset($_SESSION['Contract'.$identifier]->DebtorNo)
 		}
 	}
 
-	echo '</select><a target="_blank" href="'. $rootpath . '/StockCategories.php?' . SID . '">' . _('Add or Modify Contract Categories') . '</a></td></tr>';
+	echo '</select><a target="_blank" href="'. $rootpath . '/StockCategories.php">' . _('Add or Modify Contract Categories') . '</a></td></tr>';
 
 	$sql = "SELECT loccode, locationname FROM locations";
 	$ErrMsg = _('The stock locations could not be retrieved because');

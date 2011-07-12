@@ -9,10 +9,11 @@ include('includes/header.inc');
 echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' .
 		_('Top Sales Order Search') . '" alt="" />' . ' ' . $title . '</p>';
 
-if ( isset($_GET['SelectedMeasureID']) )
+if ( isset($_GET['SelectedMeasureID']) ) {
 	$SelectedMeasureID = $_GET['SelectedMeasureID'];
-elseif (isset($_POST['SelectedMeasureID']))
+} elseif (isset($_POST['SelectedMeasureID'])) {
 	$SelectedMeasureID = $_POST['SelectedMeasureID'];
+}
 
 if (isset($_POST['submit'])) {
 
@@ -168,7 +169,7 @@ if (isset($_POST['submit'])) {
 	$ErrMsg = _('Could not get unit of measures because');
 	$result = DB_query($sql,$db,$ErrMsg);
 
-	echo '<br /><table class=selection>
+	echo '<br /><table class="selection">
 		<tr>
 		<th>' . _('Units of Measure') . '</th>
 		</tr>';

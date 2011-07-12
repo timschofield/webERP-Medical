@@ -1,8 +1,6 @@
 <?php
 /* $Revision: 1.0 $ */
 
-//$PageSecurity = 6;
-
 include('includes/session.inc');
 $title = _('Claim Petty Cash Expenses From Tab');
 include('includes/header.inc');
@@ -286,16 +284,18 @@ if (isset($SelectedTabs)) {
 					$AuthorisedDate,
 					$myrow['7'],
 					$myrow['8'],
-					$_SERVER['PHP_SELF'] . '?' . SID, $myrow['0'],
-					$_SERVER['PHP_SELF'] . '?' . SID, $myrow['0']);
+					$_SERVER['PHP_SELF'] . '?',
+					$myrow['0'],
+					$_SERVER['PHP_SELF'] . '?',
+					$myrow['0']);
 			} else {
-				printf("<td>%s</td>
+				printf('<td>%s</td>
 					<td>%s</td>
 					<td class=number>%s</td>
 					<td>%s</td>
 					<td>%s</td>
 					<td>%s</td>
-					</tr>",
+					</tr>',
 					ConvertSQLDate($myrow['2']),
 					$Description['0'],
 					number_format($myrow['4'],2),

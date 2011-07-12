@@ -8,8 +8,6 @@ Asset additions are posted to the debit of fixed asset category cost account if 
 
 include('includes/DefineSuppTransClass.php');
 
-//$PageSecurity = 5;
-
 /* Session started here for password checking and authorisation level check */
 include('includes/session.inc');
 

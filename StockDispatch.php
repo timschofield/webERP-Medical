@@ -4,8 +4,6 @@
 // to another location to cover shortage based on reorder level. Creates loctransfer records
 // that can be processed using Bulk Inventory Transfer - Receive.
 
-
-//$PageSecurity = 2;
 include('includes/session.inc');
 include('includes/SQL_CommonFunctions.inc');
 If (isset($_POST['PrintPDF'])) {
@@ -268,7 +266,7 @@ If (isset($_POST['PrintPDF'])) {
 			</table>
 			<br />';
 		prnMsg(_('There are no stock categories currently defined please use the link below to set them up'),'warn');
-		echo '<br /><a href="' . $rootpath . '/StockCategories.php?' . SID .'">' . _('Define Stock Categories') . '</a>';
+		echo '<br /><a href="' . $rootpath . '/StockCategories.php">' . _('Define Stock Categories') . '</a>';
 		include ('includes/footer.inc');
 		exit;
 	}

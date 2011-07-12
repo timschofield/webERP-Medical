@@ -2,8 +2,6 @@
 
 /* $Id$*/
 
-//$PageSecurity = 11;
-
 /* Session started in header.inc for password checking and authorisation level check */
 
 include('includes/DefineSerialItems.php');
@@ -19,7 +17,7 @@ if ((isset($_SESSION['SupplierID']) and $_SESSION['SupplierID']!="") or (!isset(
 }
 if (!isset($_POST['SupplierID']) OR $_POST['SupplierID']==""){
 	echo '<br />' . _('This page is expected to be called after a supplier has been selected');
-	echo "<meta http-equiv='Refresh' content='0; url=" . $rootpath . '/SelectSupplier.php?' . SID . "'>";
+	echo '<meta http-equiv="Refresh" content="0; url=' . $rootpath . '/SelectSupplier.php">';
 	exit;
 } elseif (!isset($_POST['SuppName']) or $_POST['SuppName']=="") {
 	$sql = "SELECT suppname FROM suppliers WHERE supplierid='" . $_SESSION['SupplierID'] . "'";
@@ -335,11 +333,11 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 
 	echo '<br />' . _('GRN number') . ' ' . $_GET['GRNNo'] . ' ' . _('for') . ' ' . $QtyToReverse . ' x ' . $GRN['itemcode'] . ' - ' . $GRN['itemdescription'] . ' ' . _('has been reversed') . '<br />';
 	unset($_GET['GRNNo']);  // to ensure it cant be done again!!
-	echo '<a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '">' . _('Select another GRN to Reverse') . '</a>';
+	echo '<a href="' . $_SERVER['PHP_SELF'] . '">' . _('Select another GRN to Reverse') . '</a>';
 /*end of Process Goods Received Reversal entry */
 
 } else {
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
+	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (!isset($_POST['RecdAfterDate']) OR !Is_Date($_POST['RecdAfterDate'])) {
@@ -403,9 +401,9 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 				$DisplayQtyInv = number_format($myrow['quantityinv'],2);
 				$DisplayQtyRev = number_format($myrow['qtytoreverse'],2);
 				$DisplayDateDel = ConvertSQLDate($myrow['deliverydate']);
-				$LinkToRevGRN = '<a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '&GRNNo=' . $myrow['grnno'] . '">' . _('Reverse') . '</a>';
+				$LinkToRevGRN = '<a href="' . $_SERVER['PHP_SELF'] . '?GRNNo=' . $myrow['grnno'] . '">' . _('Reverse') . '</a>';
 
-				printf("<td>%s</td>
+				printf('<td>%s</td>
 					<td>%s</td>
 					<td>%s</td>
 					<td>%s</td>
@@ -413,7 +411,7 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 					<td class=number>%s</td>
 					<td class=number>%s</td>
 					<td>%s</td>
-					</tr>",
+					</tr>',
 					$myrow['grnno'],
 					$myrow['itemcode'],
 					$myrow['itemdescription'],

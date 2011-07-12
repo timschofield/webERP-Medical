@@ -1,7 +1,5 @@
 <?php
 
-//$PageSecurity = 11;
-
 include('includes/session.inc');
 $title = _('Fixed Asset Locations');
 include('includes/header.inc');
@@ -99,11 +97,11 @@ while ($myrow=DB_fetch_array($result)) {
 	$parentresult=DB_query($parentsql, $db);
 	$parentrow=DB_fetch_array($parentresult);
 	echo '<td>'.$parentrow['locationdescription'].'</td>';
-	echo '<td><a href="'.$_SERVER['PHP_SELF'] . '?' . SID.'SelectedLocation='.$myrow['locationid'].'">' .  _('Edit') . '</td>';
+	echo '<td><a href="'.$_SERVER['PHP_SELF'] . '?SelectedLocation='.$myrow['locationid'].'">' .  _('Edit') . '</td>';
 }
 
 echo '</table><br />';
-echo '<form name="LocationForm" method="post" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '"><table class=selection>';
+echo '<form name="LocationForm" method="post" action="' . $_SERVER['PHP_SELF'] . '"><table class=selection>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo '<tr><th style="text-align:left">'._('Location ID').'</th>';
 if (isset($_GET['SelectedLocation'])) {

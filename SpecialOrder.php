@@ -2,8 +2,6 @@
 
 /* $Id$ */
 
-//$PageSecurity = 4;
-
 include('includes/DefineSpecialOrderClass.php');
 /* Session started in header.inc for password checking and authorisation level check */
 include('includes/session.inc');

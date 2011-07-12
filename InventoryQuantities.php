@@ -6,7 +6,7 @@
 
 // InventoryQuantities.php - Report of parts with quantity. Sorts by part and shows
 // all locations where there are quantities of the part
-//$PageSecurity = 2;
+
 include('includes/session.inc');
 If (isset($_POST['PrintPDF'])) {
 
@@ -83,7 +83,7 @@ If (isset($_POST['PrintPDF'])) {
 	  $title = _('Inventory Quantities') . ' - ' . _('Problem Report');
 	  include('includes/header.inc');
 	   prnMsg( _('The Inventory Quantity report could not be retrieved by the SQL because') . ' '  . DB_error_msg($db),'error');
-	   echo '<br /><a href="' .$rootpath .'/index.php?' . SID . '">' . _('Back to the menu') . '</a>';
+	   echo '<br /><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
 	   if ($debug==1){
 	      echo '<br />' . $sql;
 	   }
@@ -163,7 +163,7 @@ echo '<div class="page_help_text">' . _('Use this report to display the quantity
 			</table>
 			<br />';
 		prnMsg(_('There are no stock categories currently defined please use the link below to set them up'),'warn');
-		echo '<br /><a href="' . $rootpath . '/StockCategories.php?' . SID .'">' . _('Define Stock Categories') . '</a>';
+		echo '<br /><a href="' . $rootpath . '/StockCategories.php">' . _('Define Stock Categories') . '</a>';
 		include ('includes/footer.inc');
 		exit;
 	}

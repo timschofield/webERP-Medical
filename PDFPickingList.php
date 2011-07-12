@@ -130,7 +130,7 @@ if (isset($_POST['TransDate'])
 		echo '<br />';
 		prnMsg( _('Unable to Locate any orders for this criteria '), 'info');
 		echo '<br /><table class="selection"><tr><td>
-				<a href="'. $rootpath . '/PDFPickingList.php?'. SID .'">' . _('Enter Another Date') . '</a>
+				<a href="'. $rootpath . '/PDFPickingList.php">' . _('Enter Another Date') . '</a>
 				</td></tr></table><br />';
 		include('includes/footer.inc');
 		exit();

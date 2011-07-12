@@ -12,7 +12,6 @@
 /* $Revision= 1.1; $ */
 $Version_adds= 1.1;
 
-//$PageSecurity=15;
 /** Error reporting */
 
 include('includes/session.inc');

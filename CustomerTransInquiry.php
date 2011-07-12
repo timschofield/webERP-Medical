@@ -3,8 +3,6 @@
 /* $Revision: 1.17 $ */
 /* $Id$*/
 
-//$PageSecurity = 2;
-
 include('includes/session.inc');
 $title = _('Customer Transactions Inquiry');
 include('includes/header.inc');
@@ -123,7 +121,7 @@ if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
 		if ($_POST['TransType']==10){ /* invoices */
 
 			printf("$format_base
-				<td><a target='_blank' href='%s/PrintCustTrans.php?%&FromTransNo=%s&InvOrCredit=Invoice'><IMG SRC='%s' title='" . _('Click to preview the invoice') . "'></a></td>
+				<td><a target='_blank' href='%s/PrintCustTrans.php?FromTransNo=%s&InvOrCredit=Invoice'><IMG SRC='%s' title='" . _('Click to preview the invoice') . "'></a></td>
 				</tr>",
 				$myrow['typename'],
 				$myrow['transno'],
@@ -137,12 +135,11 @@ if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
 				number_format($myrow['totalamt'],2),
 				$myrow['currcode'],
 				$rootpath,
-				SID,
 				$myrow['transno'],
 				$rootpath.'/css/'.$theme.'/images/preview.gif');
 		} elseif ($_POST['TransType']==11){ /* credit notes */
 			printf("$format_base
-				<td><a target='_blank' href='%s/PrintCustTrans.php?%s&FromTransNo=%s&InvOrCredit=Credit'><IMG SRC='%s' title='" . _('Click to preview the credit') . "'></a></td>
+				<td><a target='_blank' href='%s/PrintCustTrans.php?FromTransNo=%s&InvOrCredit=Credit'><IMG SRC='%s' title='" . _('Click to preview the credit') . "'></a></td>
 				</tr>",
 				$myrow['typename'],
 				$myrow['transno'],
@@ -156,7 +153,6 @@ if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
 				number_format($myrow['totalamt'],2),
 				$myrow['currcode'],
 				$rootpath,
-				SID,
 				$myrow['transno'],
 				$rootpath.'/css/'.$theme.'/images/preview.gif');
 		} else {  /* otherwise */

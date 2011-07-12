@@ -4,7 +4,6 @@
 
 /* $Revision: 1.21 $ */
 
-//$PageSecurity = 2;
 $PricesSecurity = 12;
 
 include('includes/session.inc');
@@ -32,7 +31,7 @@ if (isset($_GET['SelectedSupplier'])){
 	$SelectedSupplier=trim($_POST['SelectedSupplier']);
 }
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 
@@ -132,7 +131,7 @@ if (isset($_POST['SearchParts'])) {
 */
 
 if (!isset($OrderNumber) or $OrderNumber=='' ){
-	echo '<a href="' . $rootpath . '/PO_Header.php?' .SID . '&NewOrder=Yes">' . _('Add Purchase Order') . '</a>';
+	echo '<a href="' . $rootpath . '/PO_Header.php?NewOrder=Yes">' . _('Add Purchase Order') . '</a>';
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="">' . ' ' . $title.'</p>';
 	echo '<table class=selection><tr><td>'._('Order Number') . ': <input type=text name="OrderNumber" MAXLENGTH =8 size=9>  ' . _('Into Stock Location') . ':<select name="StockLocation"> ';
 	$sql = "SELECT loccode, locationname FROM locations";
@@ -183,28 +182,28 @@ if (!isset($OrderNumber) or $OrderNumber=='' ){
 $SQL="SELECT categoryid, categorydescription FROM stockcategory ORDER BY categorydescription";
 $result1 = DB_query($SQL,$db);
 
-echo "<br /><font size=1><div class='page_help_text'>" ._('To search for purchase orders for a specific part use the part selection facilities below')
-		."</div> </font>";
-echo "<br /><table class=selection><tr>";
+echo '<br /><font size=1><div class="page_help_text">' ._('To search for purchase orders for a specific part use the part selection facilities below')
+		.'</div> </font>';
+echo '<br /><table class=selection><tr>';
 
-echo "<td><font size=1>" . _('Select a stock category') . ":</font><select name='StockCat'>";
+echo '<td><font size=1>' . _('Select a stock category') . ':</font><select name="StockCat">';
 
 while ($myrow1 = DB_fetch_array($result1)) {
 	if (isset($_POST['StockCat']) and $myrow1['categoryid']==$_POST['StockCat']){
-		echo "<option selected value='". $myrow1['categoryid'] . "'>" . $myrow1['categorydescription'] . '</option>';
+		echo '<option selected value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 	} else {
-		echo "<option value='". $myrow1['categoryid'] . "'>" . $myrow1['categorydescription'] . '</option>';
+		echo '<option value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 	}
 }
-echo "</select>";
-echo "<td><font size=1>" . _('Enter text extracts in the') . "<b>" . _('description') . "</b>:</font></td>";
-echo '<td><input type="Text" name="Keywords" size=20 maxlength=25></td></tr><tr><td></td>';
-echo "<td><font size<b>" . _('OR') . "</b></font><font size=1>" .  _('Enter extract of the') .  "<b>" .  _('Stock Code') . "</b>:</font></td>";
-echo '<td><input type="Text" name="StockCode" size=15 maxlength=18></td></tr></table><br />';
+echo '</select>';
+echo '<td><font size=1>' . _('Enter text extracts in the') . '<b>' . _('description') . '</b>:</font></td>';
+echo '<td><input type="text" name="Keywords" size=20 maxlength=25></td></tr><tr><td></td>';
+echo '<td><font size<b>' . _('OR') . '</b></font><font size=1>' .  _('Enter extract of the') .  '<b>' .  _('Stock Code') . '</b>:</font></td>';
+echo '<td><input type="text" name="StockCode" size=15 maxlength=18></td></tr></table><br />';
 echo '<table><tr><td><input type=submit name="SearchParts" value="' . _('Search Parts Now') . '">';
 echo '<input type=submit name="ResetPart" value="' . _('Show All') . '"></td></tr></table>';
 
-echo "<br />";
+echo '<br />';
 
 if (isset($StockItemsResult)) {
 
@@ -229,11 +228,11 @@ if (isset($StockItemsResult)) {
 			$k=1;
 		}
 
-		printf("<td><input type=submit name='SelectedStockItem' value='%s'</td>
+		printf('<td><input type=submit name="SelectedStockItem" value="%s"</td>
 				<td>%s</td>
 			<td class=number>%s</td>
 			<td class=number>%s</td>
-			<td>%s</td></tr>",
+			<td>%s</td></tr>',
 			$myrow['stockid'],
 			$myrow['description'],
 			$myrow['qoh'],
@@ -464,31 +463,31 @@ else {
 			$k++;
 		}
 
-		$ModifyPage = $rootpath . '/PO_Header.php?' . SID . '&ModifyOrderNumber=' . $myrow['orderno'];
+		$ModifyPage = $rootpath . '/PO_Header.php?ModifyOrderNumber=' . $myrow['orderno'];
 		if ($myrow['status'] == 'Printed') {
-			$ReceiveOrder = '<a href="'.$rootpath . '/GoodsReceived.php?' . SID . '&PONumber=' . $myrow['orderno'].'">'.
+			$ReceiveOrder = '<a href="'.$rootpath . '/GoodsReceived.php?PONumber=' . $myrow['orderno'].'">'.
 				_('Receive').'</a>';
 		} else {
 			$ReceiveOrder = _('Receive');
 		}
 		if ($myrow['allowprint'] == 1){
-			$PrintPurchOrder = '<a target="_blank" href="' . $rootpath . '/PO_PDFPurchOrder.php?' . SID . '&OrderNo=' . $myrow['orderno'] . '">' . _('Print Now') . '</a>';
+			$PrintPurchOrder = '<a target="_blank" href="' . $rootpath . '/PO_PDFPurchOrder.php?OrderNo=' . $myrow['orderno'] . '">' . _('Print Now') . '</a>';
 		} else {
 // not open yet
 //			$PrintPurchOrder = '<font color=GREY>' . _('Printed') . '</font>';
 
 		}
 		if ($myrow['status']=='Authorised') {
-			$PrintPurchOrder = '<a target="_blank" href="' . $rootpath . '/PO_PDFPurchOrder.php?' . SID . '&OrderNo=' . $myrow['orderno'] . '&realorderno=' . $myrow['realorderno'] . '&ViewingOnly=2">
+			$PrintPurchOrder = '<a target="_blank" href="' . $rootpath . '/PO_PDFPurchOrder.php?OrderNo=' . $myrow['orderno'] . '&realorderno=' . $myrow['realorderno'] . '&ViewingOnly=2">
 				' . _('Print') . '
 				</a>';
 		} else {
 			$PrintPurchOrder = _('Printed');
 		}
 
-		$PrintPurchOrder2 = '<a target="_blank" href="' . $rootpath . '/PO_PDFPurchOrder.php?' . SID . '&OrderNo=' . $myrow['orderno'] . '&realorderno=' . $myrow['realorderno'] . '&ViewingOnly=1">' . _('Show') . '</a>';
+		$PrintPurchOrder2 = '<a target="_blank" href="' . $rootpath . '/PO_PDFPurchOrder.php?OrderNo=' . $myrow['orderno'] . '&realorderno=' . $myrow['realorderno'] . '&ViewingOnly=1">' . _('Show') . '</a>';
 
-		$s2 = '<a target="_blank" href="' . $rootpath . '/PO_PDFPurchOrder.php?' . SID . '&OrderNo=' . $myrow['orderno'] . '&realorderno=' . $myrow['realorderno'] . '&ViewingOnly=1">' . $myrow['realorderno']. '</a>';
+		$s2 = '<a target="_blank" href="' . $rootpath . '/PO_PDFPurchOrder.php?OrderNo=' . $myrow['orderno'] . '&realorderno=' . $myrow['realorderno'] . '&ViewingOnly=1">' . $myrow['realorderno']. '</a>';
 
 		$FormatedOrderDate = ConvertSQLDate($myrow['orddate']);
 		$FormatedOrderValue = number_format($myrow['ordervalue'],2);
@@ -499,7 +498,7 @@ else {
 					<td>' . $myrow['suppname'] . '</td>
 					<td>' . $myrow['currcode'] . '</td>';
 		if (in_array($PricesSecurity, $_SESSION['AllowedPageSecurityTokens']) OR !isset($PricesSecurity)) {
-			echo "<td class=number>".$FormatedOrderValue."</td>";
+			echo '<td class=number>'.$FormatedOrderValue.'</td>';
 		}
 			echo '<td>'._($myrow['status']).'</td>
 						<td><a href="'.$ModifyPage.'">' . _('Modify') . '</a></td>

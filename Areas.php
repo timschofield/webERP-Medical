@@ -1,7 +1,6 @@
 <?php
 /* $Revision: 1.22 $ */
 /* $Id$*/
-//$PageSecurity = 3;
 
 include('includes/session.inc');
 
@@ -173,13 +172,13 @@ if (!isset($SelectedArea)) {
 //end of ifs and buts!
 
 if (isset($SelectedArea)) {
-	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '">' . _('Review Areas Defined') . '</a></div>';
+	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Review Areas Defined') . '</a></div>';
 }
 
 
 if (!isset($_GET['delete'])) {
 
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '"><br />';
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '"><br />';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (isset($SelectedArea)) {

@@ -3,8 +3,6 @@
 /* $Id$*/
 /* $Revision: 1.15 $ */
 
-//$PageSecurity = 2;
-
 include('includes/session.inc');
 
 if (isset($_GET['OrderNo'])) {
@@ -38,7 +36,7 @@ if (!isset($_GET['OrderNo'])) {
 
 	echo '<table class="table_index">
 		<tr><td class="menu_group_item">
-                <li><a href="'. $rootpath . '/PO_SelectPurchOrder.php?'. SID .'">' . _('Outstanding Purchase Orders') . '</a></li>
+                <li><a href="'. $rootpath . '/PO_SelectPurchOrder.php">' . _('Outstanding Purchase Orders') . '</a></li>
 		</td></tr></table>';
 	include('includes/footer.inc');
 	exit;
@@ -71,7 +69,7 @@ if (DB_num_rows($GetOrdHdrResult)!=1) {
 	}
         echo '<table class="table_index">
                 <tr><td class="menu_group_item">
-                <li><a href="'. $rootpath . '/PO_SelectPurchOrder.php?'. SID .'">' . _('Outstanding Sales Orders') . '</a></li>
+                <li><a href="'. $rootpath . '/PO_SelectPurchOrder.php">' . _('Outstanding Sales Orders') . '</a></li>
                 </td></tr></table>';
 
 	include('includes/footer.inc');

@@ -1,8 +1,6 @@
 <?php
 /* $Id$*/
 
-//$PageSecurity = 11;
-
 include('includes/session.inc');
 $title = _('Work Order Costing');
 include('includes/header.inc');
@@ -13,7 +11,7 @@ echo '<a href="'. $rootpath . '/SelectWorkOrder.php" >' . _('Back to Work Orders
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' .
 	_('Search') . '" alt="" />' . ' ' . $title . '</p>';
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (!isset($_REQUEST['WO'])) {

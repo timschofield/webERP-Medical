@@ -6,7 +6,6 @@
 // Inquiry on Purchase Orders
 // If Date Type is Order, the main file is purchorderdetails
 // If Date Type is Delivery, the main file is grns
-//$PageSecurity=2;
 
 include('includes/session.inc');
 $title = _('Purchase Order Report');
@@ -40,9 +39,9 @@ if (isset($_POST['submit']) or isset($_POST['submitcsv'])) {
 
 	$SupplierNameOp = $_POST['SupplierNameOp'];
 
-	// Save $_POST['SummaryType'] in $savesummarytype because change $_POST['SummaryType'] when
+	// Save $_POST['SummaryType'] in $SaveSummaryType because change $_POST['SummaryType'] when
 	// create $sql
-	$savesummarytype = $_POST['SummaryType'];
+	$SaveSummaryType = $_POST['SummaryType'];
 }
 
 if (isset($_POST['SupplierName'])){
@@ -60,11 +59,11 @@ if (isset($_POST['SummaryType']) and $_POST['SummaryType'] == 'suppname') {
 if (isset($_POST['submit'])) {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') .
 		'" alt="" />' . $title.'</p>';
-	submit($db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$SupplierName,$SupplierNameOp,$savesummarytype);
+	submit($db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$SupplierName,$SupplierNameOp,$SaveSummaryType);
 } else if (isset($_POST['submitcsv'])) {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') .
 		'" alt="" />' . $title.'</p>';
-	submitcsv($db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$SupplierName,$SupplierNameOp,$savesummarytype);
+	submitcsv($db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$SupplierName,$SupplierNameOp,$SaveSummaryType);
 } else {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') .
 		'" alt="" />' . $title.'</p>';
@@ -73,7 +72,7 @@ if (isset($_POST['submit'])) {
 
 
 //####_SUBMIT_SUBMIT_SUBMIT_SUBMIT_SUBMIT_SUBMIT_SUBMIT_SUBMIT_SUBMIT_SUBMIT_SUBMIT_SUBMIT####
-function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$SupplierName,$SupplierNameOp,$savesummarytype)
+function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$SupplierName,$SupplierNameOp,$SaveSummaryType)
 {
 
 	//initialize no input errors
@@ -94,71 +93,71 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 	}
 
 	// Add more to WHERE statement, if user entered something for the part number,supplierid, name
-	$wherepart = ' ';
+	$WherePart = ' ';
 	if (strlen($PartNumber) > 0 && $PartNumberOp == 'LIKE') {
 		$PartNumber = $PartNumber . '%';
 	} else {
 		$PartNumberOp = '=';
 	}
 	if (strlen($PartNumber) > 0) {
-		$wherepart = " AND purchorderdetails.itemcode " . $PartNumberOp . " '" . $PartNumber . "'  ";
+		$WherePart = " AND purchorderdetails.itemcode " . $PartNumberOp . " '" . $PartNumber . "'  ";
 	} else {
-		$wherepart=' ';
+		$WherePart=' ';
 	}
 
-	$wheresupplierid = ' ';
+	$WhereSupplierID = ' ';
 	if ($SupplierIdOp == 'LIKE') {
 		$SupplierId = $SupplierId . '%';
 	} else {
 		$SupplierIdOp = '=';
 	}
 	if (strlen($SupplierId) > 0) {
-		$wheresupplierid = " AND purchorders.supplierno " . $SupplierIdOp . " '" . $SupplierId . "'  ";
+		$WhereSupplierID = " AND purchorders.supplierno " . $SupplierIdOp . " '" . $SupplierId . "'  ";
 	} else {
-		$wheresupplierid=' ';
+		$WhereSupplierID=' ';
 	}
 
-	$wheresuppliername = ' ';
+	$WhereSupplierName = ' ';
 	if (strlen($SupplierName) > 0 && $SupplierNameOp == 'LIKE') {
 		$SupplierName = $SupplierName . '%';
 	} else {
 		$SupplierNameOp = '=';
 	}
 	if (strlen($SupplierName) > 0) {
-		$wheresuppliername = " AND suppliers.suppname " . $SupplierNameOp . " '" . $SupplierName . "'  ";
+		$WhereSupplierName = " AND suppliers.suppname " . $SupplierNameOp . " '" . $SupplierName . "'  ";
 	} else {
-		$wheresuppliername=' ';
+		$WhereSupplierName=' ';
 	}
 
 	if (strlen($_POST['OrderNo']) > 0) {
-		$whereorderno = " AND purchorderdetails.orderno = " . " '" . $_POST['OrderNo'] . "'  ";
+		$WhereOrderNo = " AND purchorderdetails.orderno = " . " '" . $_POST['OrderNo'] . "'  ";
 	} else {
-		$whereorderno=' ';
+		$WhereOrderNo=' ';
 	}
 
-	$wherelinestatus = ' ';
+	$WhereLineStatus = ' ';
 	// Had to use IF statement instead of comparing 'linestatus' to $_POST['LineStatus']
 	//in WHERE clause because the WHERE clause didn't recognize
 	// that had used the IF statement to create a field called linestatus
 	if ($_POST['LineStatus'] != 'All') {
 		if ($_POST['DateType'] == 'Order') {
-			$wherelinestatus = " AND IF(purchorderdetails.quantityord = purchorderdetails.qtyinvoiced ||
+			$WhereLineStatus = " AND IF(purchorderdetails.quantityord = purchorderdetails.qtyinvoiced ||
 			  purchorderdetails.completed = 1,'Completed','Open') = '" . $_POST['LineStatus'] . "'";
 		 } else {
-			$wherelinestatus = " AND IF(grns.qtyrecd - grns.quantityinv <> 0,'Open','Completed') = '"
+			$WhereLineStatus = " AND IF(grns.qtyrecd - grns.quantityinv <> 0,'Open','Completed') = '"
 			. $_POST['LineStatus'] . "'";
 		 }
 	}
 
 
-	$wherecategory = ' ';
+	$WhereCategory = ' ';
 	if ($_POST['Category'] != 'All') {
-		$wherecategory = " AND stockmaster.categoryid = '" . $_POST['Category'] . "'";
+		$WhereCategory = " AND stockmaster.categoryid = '" . $_POST['Category'] . "'";
 	}
 
 	if ($InputError !=1) {
-		$fromdate = FormatDateForSQL($_POST['FromDate']);
-		$todate = FormatDateForSQL($_POST['ToDate']);
+		$FromDate = FormatDateForSQL($_POST['FromDate']);
+		$ToDate = FormatDateForSQL($_POST['ToDate']);
 		if ($_POST['ReportType'] == 'Detail') {
 			if ($_POST['DateType'] == 'Order') {
 				$sql = "SELECT purchorderdetails.orderno,
@@ -179,14 +178,14 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 						LEFT JOIN purchorders ON purchorders.orderno=purchorderdetails.orderno
 						LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
 						LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
-						WHERE purchorders.orddate >='" . $fromdate . "'
-						 AND purchorders.orddate <='$todate'
-						$wherepart
-						$wheresupplierid
-						$wheresuppliername
-						$whereorderno
-						$wherelinestatus
-						$wherecategory
+						WHERE purchorders.orddate >='" . $FromDate . "'
+						 AND purchorders.orddate <='$ToDate'
+						$WherePart
+						$WhereSupplierID
+						$WhereSupplierName
+						$WhereOrderNo
+						$WhereLineStatus
+						$WhereCategory
 						ORDER BY " . $_POST['SortBy'];
 			} else {
 				// Selects by delivery date from grns
@@ -208,14 +207,14 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 						LEFT JOIN purchorders ON purchorders.orderno=purchorderdetails.orderno
 						LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
 						LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
-						WHERE grns.deliverydate >='$fromdate'
-						 AND grns.deliverydate <='$todate'
-						$wherepart
-						$wheresupplierid
-						$wheresuppliername
-						$whereorderno
-						$wherelinestatus
-						$wherecategory
+						WHERE grns.deliverydate >='$FromDate'
+						 AND grns.deliverydate <='$ToDate'
+						$WherePart
+						$WhereSupplierID
+						$WhereSupplierName
+						$WhereOrderNo
+						$WhereLineStatus
+						$WhereCategory
 						ORDER BY " . $_POST['SortBy'];
 			}
 		} else {
@@ -242,14 +241,14 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
 							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
 							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE purchorders.orddate >='$fromdate'
-							 AND purchorders.orddate <='$todate'
-							$wherepart
-							$wheresupplierid
-							$wheresuppliername
-							$whereorderno
-							$wherelinestatus
-							$wherecategory
+							WHERE purchorders.orddate >='$FromDate'
+							 AND purchorders.orddate <='$ToDate'
+							$WherePart
+							$WhereSupplierID
+							$WhereSupplierName
+							$WhereOrderNo
+							$WhereLineStatus
+							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
 							',stockmaster.decimalplaces,
 							  stockmaster.description
@@ -267,14 +266,14 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
 							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
 							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE purchorders.orddate >='$fromdate'
-							 AND purchorders.orddate <='$todate'
-							$wherepart
-							$wheresupplierid
-							$wheresuppliername
-							$whereorderno
-							$wherelinestatus
-							$wherecategory
+							WHERE purchorders.orddate >='$FromDate'
+							 AND purchorders.orddate <='$ToDate'
+							$WherePart
+							$WhereSupplierID
+							$WhereSupplierName
+							$WhereOrderNo
+							$WhereLineStatus
+							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
 							',purchorders.supplierno,
 							  suppliers.suppname
@@ -291,14 +290,14 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
 							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
 							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE purchorders.orddate >='$fromdate'
-							 AND purchorders.orddate <='$todate'
-							$wherepart
-							$wheresupplierid
-							$wheresuppliername
-							$whereorderno
-							$wherelinestatus
-							$wherecategory
+							WHERE purchorders.orddate >='$FromDate'
+							 AND purchorders.orddate <='$ToDate'
+							$WherePart
+							$WhereSupplierID
+							$WhereSupplierName
+							$WhereOrderNo
+							$WhereLineStatus
+							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
 							',purchorders.supplierno,
 							  suppliers.suppname
@@ -315,14 +314,14 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
 							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
 							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE purchorders.orddate >='$fromdate'
-							 AND purchorders.orddate <='$todate'
-							$wherepart
-							$wheresupplierid
-							$wheresuppliername
-							$whereorderno
-							$wherelinestatus
-							$wherecategory
+							WHERE purchorders.orddate >='$FromDate'
+							 AND purchorders.orddate <='$ToDate'
+							$WherePart
+							$WhereSupplierID
+							$WhereSupplierName
+							$WhereOrderNo
+							$WhereLineStatus
+							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
 							', monthname
 							ORDER BY ' . $orderby;
@@ -338,14 +337,14 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
 							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
 							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE purchorders.orddate >='$fromdate'
-							 AND purchorders.orddate <='$todate'
-							$wherepart
-							$wheresupplierid
-							$wheresuppliername
-							$whereorderno
-							$wherelinestatus
-							$wherecategory
+							WHERE purchorders.orddate >='$FromDate'
+							 AND purchorders.orddate <='$ToDate'
+							$WherePart
+							$WhereSupplierID
+							$WhereSupplierName
+							$WhereOrderNo
+							$WhereLineStatus
+							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
 							', categorydescription
 							ORDER BY ' . $orderby;
@@ -365,14 +364,14 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
 							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
 							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE grns.deliverydate >='$fromdate'
-							 AND grns.deliverydate <='$todate'
-							$wherepart
-							$wheresupplierid
-							$wheresuppliername
-							$whereorderno
-							$wherelinestatus
-							$wherecategory
+							WHERE grns.deliverydate >='$FromDate'
+							 AND grns.deliverydate <='$ToDate'
+							$WherePart
+							$WhereSupplierID
+							$WhereSupplierName
+							$WhereOrderNo
+							$WhereLineStatus
+							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
 							', stockmaster.description
 							ORDER BY ' . $orderby;
@@ -390,14 +389,14 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
 							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
 							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE grns.deliverydate >='$fromdate'
-							 AND grns.deliverydate <='$todate'
-							$wherepart
-							$wheresupplierid
-							$wheresuppliername
-							$whereorderno
-							$wherelinestatus
-							$wherecategory
+							WHERE grns.deliverydate >='$FromDate'
+							 AND grns.deliverydate <='$ToDate'
+							$WherePart
+							$WhereSupplierID
+							$WhereSupplierName
+							$WhereOrderNo
+							$WhereLineStatus
+							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
 							', purchorders.supplierno,
 							   suppliers.suppname
@@ -415,14 +414,14 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
 							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
 							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE grns.deliverydate >='$fromdate'
-							 AND grns.deliverydate <='$todate'
-							$wherepart
-							$wheresupplierid
-							$wheresuppliername
-							$whereorderno
-							$wherelinestatus
-							$wherecategory
+							WHERE grns.deliverydate >='$FromDate'
+							 AND grns.deliverydate <='$ToDate'
+							$WherePart
+							$WhereSupplierID
+							$WhereSupplierName
+							$WhereOrderNo
+							$WhereLineStatus
+							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
 							', purchorders.supplierno,
 							   suppliers.suppname
@@ -440,14 +439,14 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
 							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
 							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE grns.deliverydate >='$fromdate'
-							 AND grns.deliverydate <='$todate'
-							$wherepart
-							$wheresupplierid
-							$wheresuppliername
-							$whereorderno
-							$wherelinestatus
-							$wherecategory
+							WHERE grns.deliverydate >='$FromDate'
+							 AND grns.deliverydate <='$ToDate'
+							$WherePart
+							$WhereSupplierID
+							$WhereSupplierName
+							$WhereOrderNo
+							$WhereLineStatus
+							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
 							',monthname
 							ORDER BY ' . $orderby;
@@ -464,14 +463,14 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
 							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
 							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE grns.deliverydate >='$fromdate'
-							 AND grns.deliverydate <='$todate'
-							$wherepart
-							$wheresupplierid
-							$wheresuppliername
-							$whereorderno
-							$wherelinestatus
-							$wherecategory
+							WHERE grns.deliverydate >='$FromDate'
+							 AND grns.deliverydate <='$ToDate'
+							$WherePart
+							$WhereSupplierID
+							$WhereSupplierName
+							$WhereOrderNo
+							$WhereLineStatus
+							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
 							',categorydescription
 							ORDER BY ' . $orderby;
@@ -482,35 +481,35 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 		$ErrMsg = _('The SQL to find the parts selected failed with the message');
 		$result = DB_query($sql,$db,$ErrMsg);
 		$ctr = 0;
-		$totalqty = 0;
-		$totalextcost = 0;
-		$totalextprice = 0;
-		$totalinvqty = 0;
+		$TotalQty = 0;
+		$TotalExtCost = 0;
+		$TotalExtPrice = 0;
+		$TotalInvQty = 0;
 
-		// Create array for summary type to display in header. Access it with $savesummarytype
-		$summary_array["orderno"] =  _('Order Number');
-		$summary_array["itemcode"] =  _('Part Number');
-		$summary_array["extprice"] =  _('Extended Price');
-		$summary_array["supplierno"] =  _('Customer Number');
-		$summary_array["suppname"] =  _('Customer Name');
-		$summary_array["month"] =  _('Month');
-		$summary_array["categoryid"] =  _('Stock Category');
+		// Create array for summary type to display in header. Access it with $SaveSummaryType
+		$Summary_Array["orderno"] =  _('Order Number');
+		$Summary_Array["itemcode"] =  _('Part Number');
+		$Summary_Array["extprice"] =  _('Extended Price');
+		$Summary_Array["supplierno"] =  _('Customer Number');
+		$Summary_Array["suppname"] =  _('Customer Name');
+		$Summary_Array["month"] =  _('Month');
+		$Summary_Array["categoryid"] =  _('Stock Category');
 
 		// Create array for sort for detail report to display in header
-		$detail_array['purchorderdetails.orderno'] = _('Order Number');
-		$detail_array['purchorderdetails.itemcode'] = _('Part Number');
-		$detail_array['suppliers.supplierid,purchorderdetails.orderno'] = _('Supplier Number');
-		$detail_array['suppliers.suppname,suppliers.supplierid,purchorderdetails.orderno'] = _('Supplier Name');
+		$Detail_Array['purchorderdetails.orderno'] = _('Order Number');
+		$Detail_Array['purchorderdetails.itemcode'] = _('Part Number');
+		$Detail_Array['suppliers.supplierid,purchorderdetails.orderno'] = _('Supplier Number');
+		$Detail_Array['suppliers.suppname,suppliers.supplierid,purchorderdetails.orderno'] = _('Supplier Name');
 
 		// Display Header info
 		echo '<table class=selection>';
 		if ($_POST['ReportType'] == 'Summary') {
-			$sortby_display = $summary_array[$savesummarytype];
+			$SortBy_Display = $Summary_Array[$SaveSummaryType];
 		} else {
-			$sortby_display = $detail_array[$_POST['SortBy']];
+			$SortBy_Display = $Detail_Array[$_POST['SortBy']];
 		}
 		echo '<tr><th colspan=2><font size=3 color=navy>'._('Header Details').'</font></th></tr>';
-		echo '<tr><td>' . _('Purchase Order Report') . '</td><td>' . $_POST['ReportType'] . ' By '.$sortby_display .'</td></tr>';
+		echo '<tr><td>' . _('Purchase Order Report') . '</td><td>' . $_POST['ReportType'] . ' By '.$SortBy_Display .'</td></tr>';
 		echo '<tr><td>' . _('Date Type') . '</td><td>' . $_POST['DateType'] . '</tr>';
 		echo '<tr><td>' . _('Date Range') . '</td><td>' . $_POST['FromDate'] . _(' To ') .  $_POST['ToDate'] . '</td></tr>';
 		if (strlen(trim($PartNumber)) > 0) {
@@ -528,7 +527,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 		if ($_POST['ReportType'] == 'Detail') {
 			echo '<br /><table class=selection width=98%>';
 			if ($_POST['DateType'] == 'Order') {
-				printf("<tr><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%-s</th><th>%s",
+				printf('<tr><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%-s</th><th>%s',
 					 _('Order No'),
 					 _('Part Number'),
 					 _('Order Date'),
@@ -553,8 +552,8 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 					}
 					$linectr++;
 				   // Detail for both DateType of Order
-					printf("<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td class=number>%s</td>
-						<td class=number>%s</td><td class=number>%s</td><td class=number>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
+					printf('<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td class=number>%s</td>
+						<td class=number>%s</td><td class=number>%s</td><td class=number>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>',
 					$myrow['orderno'],
 					$myrow['itemcode'],
 					ConvertSQLDate($myrow['orddate']),
@@ -567,29 +566,29 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 					$myrow['linestatus'],
 					ConvertSQLDate($myrow['deliverydate']),
 					$myrow['description']);
-					$lastdecimalplaces = $myrow['decimalplaces'];
-					$totalqty += $myrow['quantityord'];
-					$totalextcost += $myrow['extcost'];
-					$totalextprice += $myrow['extprice'];
-					$totalinvqty += $myrow['qtyinvoiced'];
+					$LastDecimalPlaces = $myrow['decimalplaces'];
+					$TotalQty += $myrow['quantityord'];
+					$TotalExtCost += $myrow['extcost'];
+					$TotalExtPrice += $myrow['extprice'];
+					$TotalInvQty += $myrow['qtyinvoiced'];
 				} //END WHILE LIST LOOP
 				// Print totals
-					printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td class=number>%s</td><td class=number>%s</td>
-						<td class=number>%s</td><td class=number>%s</td><td>%s</td><td>%s</td></tr>",
+					printf('<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td class=number>%s</td><td class=number>%s</td>
+						<td class=number>%s</td><td class=number>%s</td><td>%s</td><td>%s</td></tr>',
 					'Totals',
 					_('Lines - ') . $linectr,
 					' ',
 					' ',
 					' ',
-					number_format($totalqty,2),
-					number_format($totalextcost,2),
-					number_format($totalextprice,2),
-					number_format($totalinvqty,2),
+					number_format($TotalQty,2),
+					number_format($TotalExtCost,2),
+					number_format($TotalExtPrice,2),
+					number_format($TotalInvQty,2),
 					' ',
 					' ');
 			} else {
 			  // Header for Date Type of Delivery Date
-				printf("<tr><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th></tr>",
+				printf('<tr><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th></tr>',
 					 _('Order No'),
 					 _('Part Number'),
 					 _('Order Date'),
@@ -615,8 +614,8 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 					$linectr++;
 				   // Detail for both DateType of Ship
 				   // In sql, had to alias grns.qtyrecd as quantityord so could use same name here
-					printf("<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td class=number>%s</td><td class=number>
-						%s</td><td class=number>%s</td><td class=number>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
+					printf('<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td class=number>%s</td><td class=number>
+						%s</td><td class=number>%s</td><td class=number>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>',
 						$myrow['orderno'],
 						$myrow['itemcode'],
 						ConvertSQLDate($myrow['orddate']),
@@ -629,24 +628,24 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 						$myrow['linestatus'],
 						ConvertSQLDate($myrow['deliverydate']),
 						$myrow['description']);
-						$lastdecimalplaces = $myrow['decimalplaces'];
-						$totalqty += $myrow['quantityord'];
-						$totalextcost += $myrow['extcost'];
-						$totalextprice += $myrow['extprice'];
-						$totalinvqty += $myrow['qtyinvoiced'];
+						$LastDecimalPlaces = $myrow['decimalplaces'];
+						$TotalQty += $myrow['quantityord'];
+						$TotalExtCost += $myrow['extcost'];
+						$TotalExtPrice += $myrow['extprice'];
+						$TotalInvQty += $myrow['qtyinvoiced'];
 				} //END WHILE LIST LOOP
 				// Print totals
-					printf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td class=number>%s</td><td class=number>
-						%s</td><td class=number>%s</td><td class=number>%s</td><td>%s</td><td>%s</td></tr>",
+					printf('<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td class=number>%s</td><td class=number>
+						%s</td><td class=number>%s</td><td class=number>%s</td><td>%s</td><td>%s</td></tr>',
 					'Totals',
 					_('Lines - ') . $linectr,
 					' ',
 					' ',
 					' ',
-					number_format($totalqty,$lastdecimalplaces),
-					number_format($totalextcost,2),
-					number_format($totalextprice,2),
-					number_format($totalinvqty,$lastdecimalplaces),
+					number_format($TotalQty,$LastDecimalPlaces),
+					number_format($TotalExtCost,2),
+					number_format($TotalExtPrice,2),
+					number_format($TotalInvQty,$LastDecimalPlaces),
 					' ',
 					' ');
 			}
@@ -693,7 +692,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 				$summaryheader = _('Month');
 				$descriptionheader = _('Month');
 			}
-			printf("<tr><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th></tr>",
+			printf('<tr><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th></tr>',
 				 _($summaryheader),
 				 _($descriptionheader),
 				 _('Quantity'),
@@ -716,7 +715,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 						echo '<tr class="OddTableRows">';
 						$k++;
 					}
-				printf("<td>%s</td><td>%s</td><td class=number>%s</td><td class=number>%s</td><td class=number>%s</td><td class=number>%s</td></tr>",
+				printf('<td>%s</td><td>%s</td><td class=number>%s</td><td class=number>%s</td><td class=number>%s</td><td class=number>%s</td></tr>',
 				$myrow[$summarytype],
 				$myrow[$description],
 				$myrow['quantityord'],
@@ -724,47 +723,53 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 				number_format($myrow['extprice'],2),
 				$myrow['qtyinvoiced'],
 				$suppname);
-				$totalqty += $myrow['quantityord'];
-				$totalextcost += $myrow['extcost'];
-				$totalextprice += $myrow['extprice'];
-				$totalinvqty += $myrow['qtyinvoiced'];
+				$TotalQty += $myrow['quantityord'];
+				$TotalExtCost += $myrow['extcost'];
+				$TotalExtPrice += $myrow['extprice'];
+				$TotalInvQty += $myrow['qtyinvoiced'];
 			} //END WHILE LIST LOOP
 			// Print totals
-				printf("<tr><td>%s</td><td>%s</td><td class=number>%s</td><td class=number>%s</td><td class=number>%s</td><td class=number>%s</td></tr>",
+				printf('<tr><td>%s</td><td>%s</td><td class=number>%s</td><td class=number>%s</td><td class=number>%s</td><td class=number>%s</td></tr>',
 				'Totals',
 				_('Lines - ') . $linectr,
-				$totalqty,
-				number_format($totalextcost,2),
-				number_format($totalextprice,2),
-				$totalinvqty,
+				$TotalQty,
+				number_format($TotalExtCost,2),
+				number_format($TotalExtPrice,2),
+				$TotalInvQty,
 				' ');
 		} // End of if ($_POST['ReportType']
 		echo '</table>';
-		echo "<form action=" . $_SERVER['PHP_SELF'] . "?" . SID ." method=post>";
+		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-		echo "<input type=hidden name='ReportType' value=".$_POST['ReportType'].">";
-		echo "<input type=hidden name='DateType' value=".$_POST['DateType'].">";
-		echo "<input type=hidden name='FromDate' value=".$_POST['FromDate'].">";
-		echo "<input type=hidden name='ToDate' value=".$_POST['ToDate'].">";
-		echo "<input type=hidden name='PartNumberOp' value=".$_POST['PartNumberOp'].">";
-		echo "<input type=hidden name='PartNumber' value=".$_POST['PartNumber'].">";
-		echo "<input type=hidden name='SupplierIdOp' value=".$_POST['SupplierIdOp'].">";
-		echo "<input type=hidden name='SupplierId' value=".$_POST['SupplierId'].">";
-		echo "<input type=hidden name='SupplierNameOp' value=".$_POST['SupplierNameOp'].">";
-		echo "<input type=hidden name='SupplierName' value=".$_POST['SupplierName'].">";
-		echo "<input type=hidden name='OrderNo' value=".$_POST['OrderNo'].">";
-		echo "<input type=hidden name='LineStatus' value=".$_POST['LineStatus'].">";
-		echo "<input type=hidden name='Category' value=".$_POST['Category'].">";
-		echo "<input type=hidden name='SortBy' value=".$_POST['SortBy'].">";
-		echo "<input type=hidden name='SummaryType' value=".$_POST['SummaryType'].">";
-		echo "<br /><div class=centre><input type='submit' name='submitcsv' value='" . _('Export as csv file') . "'></div></td>";
-		echo "</form>";
+		echo '<input type="hidden" name="ReportType" value="'.$_POST['ReportType'].'">';
+		echo '<input type="hidden" name="DateType" value="'.$_POST['DateType'].'">';
+		echo '<input type="hidden" name="FromDate" value="'.$_POST['FromDate'].'">';
+		echo '<input type="hidden" name="ToDate" value="'.$_POST['ToDate'].'">';
+		echo '<input type="hidden" name="PartNumberOp" value="'.$_POST['PartNumberOp'].'">';
+		echo '<input type="hidden" name="PartNumber" value="'.$_POST['PartNumber'].'">';
+		echo '<input type="hidden" name="SupplierIdOp" value="'.$_POST['SupplierIdOp'].'">';
+		echo '<input type="hidden" name="SupplierId" value="'.$_POST['SupplierId'].'">';
+		echo '<input type="hidden" name="SupplierNameOp" value="'.$_POST['SupplierNameOp'].'">';
+		echo '<input type="hidden" name="SupplierName" value="'.$_POST['SupplierName'].'">';
+		echo '<input type="hidden" name="OrderNo" value="'.$_POST['OrderNo'].'">';
+		echo '<input type="hidden" name="LineStatus" value="'.$_POST['LineStatus'].'">';
+		echo '<input type="hidden" name="Category" value="'.$_POST['Category'].'">';
+		echo '<input type="hidden" name="SortBy" value="'.$_POST['SortBy'].'">';
+		echo '<input type="hidden" name="SummaryType" value="'.$_POST['SummaryType'].'">';
+		echo '<br /><div class=centre><input type="submit" name="submitcsv" value="' . _('Export as csv file') . '"></div></td>';
+		echo '</form>';
 	} // End of if inputerror != 1
 } // End of function submit()
 
 //####_SUBMIT_SUBMIT_SUBMIT_SUBMIT_SUBMIT_SUBMIT_SUBMIT_SUBMIT_SUBMIT_SUBMIT_SUBMIT_SUBMIT####
-function submitcsv(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$SupplierName,$SupplierNameOp,$savesummarytype)
-{
+function submitcsv(&$db,
+					$PartNumber,
+					$PartNumberOp,
+					$SupplierId,
+					$SupplierIdOp,
+					$SupplierName,
+					$SupplierNameOp,
+					$SaveSummaryType) {
 
 	//initialize no input errors
 	$InputError = 0;
@@ -784,71 +789,71 @@ function submitcsv(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Sup
 	}
 
 	# Add more to WHERE statement, if user entered something for the part number,supplierid, name
-	$wherepart = ' ';
+	$WherePart = ' ';
 	if (strlen($PartNumber) > 0 && $PartNumberOp == 'LIKE') {
 		$PartNumber = $PartNumber . '%';
 	} else {
 		$PartNumberOp = '=';
 	}
 	if (strlen($PartNumber) > 0) {
-		$wherepart = " AND purchorderdetails.itemcode " . $PartNumberOp . " '" . $PartNumber . "'  ";
+		$WherePart = " AND purchorderdetails.itemcode " . $PartNumberOp . " '" . $PartNumber . "'  ";
 	} else {
-		$wherepart=' ';
+		$WherePart=' ';
 	}
 
-	$wheresupplierid = ' ';
+	$WhereSupplierID = ' ';
 	if ($SupplierIdOp == 'LIKE') {
 		$SupplierId = $SupplierId . '%';
 	} else {
 		$SupplierIdOp = '=';
 	}
 	if (strlen($SupplierId) > 0) {
-		$wheresupplierid = " AND purchorders.supplierno " . $SupplierIdOp . " '" . $SupplierId . "'  ";
+		$WhereSupplierID = " AND purchorders.supplierno " . $SupplierIdOp . " '" . $SupplierId . "'  ";
 	} else {
-		$wheresupplierid=' ';
+		$WhereSupplierID=' ';
 	}
 
-	$wheresuppliername = ' ';
+	$WhereSupplierName = ' ';
 	if (strlen($SupplierName) > 0 && $SupplierNameOp == 'LIKE') {
 		$SupplierName = $SupplierName . '%';
 	} else {
 		$SupplierNameOp = '=';
 	}
 	if (strlen($SupplierName) > 0) {
-		$wheresuppliername = " AND suppliers.suppname " . $SupplierNameOp . " '" . $SupplierName . "'  ";
+		$WhereSupplierName = " AND suppliers.suppname " . $SupplierNameOp . " '" . $SupplierName . "'  ";
 	} else {
-		$wheresuppliername=' ';
+		$WhereSupplierName=' ';
 	}
 
 	if (strlen($_POST['OrderNo']) > 0) {
-		$whereorderno = ' AND purchorderdetails.orderno = ' . " '" . $_POST['OrderNo'] . "'  ";
+		$WhereOrderNo = ' AND purchorderdetails.orderno = ' . " '" . $_POST['OrderNo'] . "'  ";
 	} else {
-		$whereorderno=' ';
+		$WhereOrderNo=' ';
 	}
 
-	$wherelinestatus = ' ';
+	$WhereLineStatus = ' ';
 	// Had to use IF statement instead of comparing 'linestatus' to $_POST['LineStatus']
 	//in WHERE clause because the WHERE clause didn't recognize
 	// that had used the IF statement to create a field called linestatus
 	if ($_POST['LineStatus'] != 'All') {
 		if ($_POST['DateType'] == 'Order') {
-			$wherelinestatus = " AND IF(purchorderdetails.quantityord = purchorderdetails.qtyinvoiced ||
+			$WhereLineStatus = " AND IF(purchorderdetails.quantityord = purchorderdetails.qtyinvoiced ||
 			  purchorderdetails.completed = 1,'Completed','Open') = '" . $_POST['LineStatus'] . "'";
 		 } else {
-			$wherelinestatus = " AND IF(grns.qtyrecd - grns.quantityinv <> 0,'Open','Completed') = '"
+			$WhereLineStatus = " AND IF(grns.qtyrecd - grns.quantityinv <> 0,'Open','Completed') = '"
 			. $_POST['LineStatus'] . "'";
 		 }
 	}
 
 
-	$wherecategory = ' ';
+	$WhereCategory = ' ';
 	if ($_POST['Category'] != 'All') {
-		$wherecategory = " AND stockmaster.categoryid = '" . $_POST['Category'] . "'";
+		$WhereCategory = " AND stockmaster.categoryid = '" . $_POST['Category'] . "'";
 	}
 
 	if ($InputError !=1) {
-		$fromdate = FormatDateForSQL($_POST['FromDate']);
-		$todate = FormatDateForSQL($_POST['ToDate']);
+		$FromDate = FormatDateForSQL($_POST['FromDate']);
+		$ToDate = FormatDateForSQL($_POST['ToDate']);
 		if ($_POST['ReportType'] == 'Detail') {
 			if ($_POST['DateType'] == 'Order') {
 				$sql = "SELECT purchorderdetails.orderno,
@@ -869,14 +874,14 @@ function submitcsv(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Sup
 						LEFT JOIN purchorders ON purchorders.orderno=purchorderdetails.orderno
 						LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
 						LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
-						WHERE purchorders.orddate >='$fromdate'
-						 AND purchorders.orddate <='$todate'
-						$wherepart
-						$wheresupplierid
-						$wheresuppliername
-						$whereorderno
-						$wherelinestatus
-						$wherecategory
+						WHERE purchorders.orddate >='$FromDate'
+						 AND purchorders.orddate <='$ToDate'
+						$WherePart
+						$WhereSupplierID
+						$WhereSupplierName
+						$WhereOrderNo
+						$WhereLineStatus
+						$WhereCategory
 						ORDER BY " . $_POST['SortBy'];
 			} else {
 				// Selects by delivery date from grns
@@ -898,14 +903,14 @@ function submitcsv(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Sup
 						LEFT JOIN purchorders ON purchorders.orderno=purchorderdetails.orderno
 						LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
 						LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
-						WHERE grns.deliverydate >='$fromdate'
-						 AND grns.deliverydate <='$todate'
-						$wherepart
-						$wheresupplierid
-						$wheresuppliername
-						$whereorderno
-						$wherelinestatus
-						$wherecategory
+						WHERE grns.deliverydate >='$FromDate'
+						 AND grns.deliverydate <='$ToDate'
+						$WherePart
+						$WhereSupplierID
+						$WhereSupplierName
+						$WhereOrderNo
+						$WhereLineStatus
+						$WhereCategory
 						ORDER BY " . $_POST['SortBy'];
 		   }
 		} else {
@@ -932,14 +937,14 @@ function submitcsv(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Sup
 							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
 							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
 							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE purchorders.orddate >='$fromdate'
-							 AND purchorders.orddate <='$todate'
-							$wherepart
-							$wheresupplierid
-							$wheresuppliername
-							$whereorderno
-							$wherelinestatus
-							$wherecategory
+							WHERE purchorders.orddate >='$FromDate'
+							 AND purchorders.orddate <='$ToDate'
+							$WherePart
+							$WhereSupplierID
+							$WhereSupplierName
+							$WhereOrderNo
+							$WhereLineStatus
+							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
 							',stockmaster.decimalplaces,
 							  stockmaster.description
@@ -957,14 +962,14 @@ function submitcsv(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Sup
 							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
 							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
 							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE purchorders.orddate >='$fromdate'
-							 AND purchorders.orddate <='$todate'
-							$wherepart
-							$wheresupplierid
-							$wheresuppliername
-							$whereorderno
-							$wherelinestatus
-							$wherecategory
+							WHERE purchorders.orddate >='$FromDate'
+							 AND purchorders.orddate <='$ToDate'
+							$WherePart
+							$WhereSupplierID
+							$WhereSupplierName
+							$WhereOrderNo
+							$WhereLineStatus
+							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
 							',purchorders.supplierno,
 							  suppliers.suppname
@@ -981,14 +986,14 @@ function submitcsv(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Sup
 							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
 							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
 							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE purchorders.orddate >='$fromdate'
-							 AND purchorders.orddate <='$todate'
-							$wherepart
-							$wheresupplierid
-							$wheresuppliername
-							$whereorderno
-							$wherelinestatus
-							$wherecategory
+							WHERE purchorders.orddate >='$FromDate'
+							 AND purchorders.orddate <='$ToDate'
+							$WherePart
+							$WhereSupplierID
+							$WhereSupplierName
+							$WhereOrderNo
+							$WhereLineStatus
+							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
 							',purchorders.supplierno,
 							  suppliers.suppname
@@ -1005,14 +1010,14 @@ function submitcsv(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Sup
 							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
 							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
 							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE purchorders.orddate >='$fromdate'
-							 AND purchorders.orddate <='$todate'
-							$wherepart
-							$wheresupplierid
-							$wheresuppliername
-							$whereorderno
-							$wherelinestatus
-							$wherecategory
+							WHERE purchorders.orddate >='$FromDate'
+							 AND purchorders.orddate <='$ToDate'
+							$WherePart
+							$WhereSupplierID
+							$WhereSupplierName
+							$WhereOrderNo
+							$WhereLineStatus
+							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
 							', monthname
 							ORDER BY ' . $orderby;
@@ -1028,14 +1033,14 @@ function submitcsv(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Sup
 							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
 							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
 							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE purchorders.orddate >='$fromdate'
-							 AND purchorders.orddate <='$todate'
-							$wherepart
-							$wheresupplierid
-							$wheresuppliername
-							$whereorderno
-							$wherelinestatus
-							$wherecategory
+							WHERE purchorders.orddate >='$FromDate'
+							 AND purchorders.orddate <='$ToDate'
+							$WherePart
+							$WhereSupplierID
+							$WhereSupplierName
+							$WhereOrderNo
+							$WhereLineStatus
+							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
 							', categorydescription
 							ORDER BY ' . $orderby;
@@ -1055,14 +1060,14 @@ function submitcsv(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Sup
 							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
 							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
 							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE grns.deliverydate >='$fromdate'
-							 AND grns.deliverydate <='$todate'
-							$wherepart
-							$wheresupplierid
-							$wheresuppliername
-							$whereorderno
-							$wherelinestatus
-							$wherecategory
+							WHERE grns.deliverydate >='$FromDate'
+							 AND grns.deliverydate <='$ToDate'
+							$WherePart
+							$WhereSupplierID
+							$WhereSupplierName
+							$WhereOrderNo
+							$WhereLineStatus
+							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
 							', stockmaster.description
 							ORDER BY ' . $orderby;
@@ -1080,14 +1085,14 @@ function submitcsv(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Sup
 							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
 							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
 							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE grns.deliverydate >='$fromdate'
-							 AND grns.deliverydate <='$todate'
-							$wherepart
-							$wheresupplierid
-							$wheresuppliername
-							$whereorderno
-							$wherelinestatus
-							$wherecategory
+							WHERE grns.deliverydate >='$FromDate'
+							 AND grns.deliverydate <='$ToDate'
+							$WherePart
+							$WhereSupplierID
+							$WhereSupplierName
+							$WhereOrderNo
+							$WhereLineStatus
+							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
 							', purchorders.supplierno,
 							   suppliers.suppname
@@ -1105,14 +1110,14 @@ function submitcsv(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Sup
 							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
 							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
 							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE grns.deliverydate >='$fromdate'
-							 AND grns.deliverydate <='$todate'
-							$wherepart
-							$wheresupplierid
-							$wheresuppliername
-							$whereorderno
-							$wherelinestatus
-							$wherecategory
+							WHERE grns.deliverydate >='$FromDate'
+							 AND grns.deliverydate <='$ToDate'
+							$WherePart
+							$WhereSupplierID
+							$WhereSupplierName
+							$WhereOrderNo
+							$WhereLineStatus
+							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
 							', purchorders.supplierno,
 							   suppliers.suppname
@@ -1130,14 +1135,14 @@ function submitcsv(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Sup
 							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
 							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
 							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE grns.deliverydate >='$fromdate'
-							 AND grns.deliverydate <='$todate'
-							$wherepart
-							$wheresupplierid
-							$wheresuppliername
-							$whereorderno
-							$wherelinestatus
-							$wherecategory
+							WHERE grns.deliverydate >='$FromDate'
+							 AND grns.deliverydate <='$ToDate'
+							$WherePart
+							$WhereSupplierID
+							$WhereSupplierName
+							$WhereOrderNo
+							$WhereLineStatus
+							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
 							',monthname
 							ORDER BY ' . $orderby;
@@ -1154,14 +1159,14 @@ function submitcsv(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Sup
 							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
 							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
 							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE grns.deliverydate >='$fromdate'
-							 AND grns.deliverydate <='$todate'
-							$wherepart
-							$wheresupplierid
-							$wheresuppliername
-							$whereorderno
-							$wherelinestatus
-							$wherecategory
+							WHERE grns.deliverydate >='$FromDate'
+							 AND grns.deliverydate <='$ToDate'
+							$WherePart
+							$WhereSupplierID
+							$WhereSupplierName
+							$WhereOrderNo
+							$WhereLineStatus
+							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
 							',categorydescription
 							ORDER BY ' . $orderby;
@@ -1172,34 +1177,34 @@ function submitcsv(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Sup
 		$ErrMsg = _('The SQL to find the parts selected failed with the message');
 		$result = DB_query($sql,$db,$ErrMsg);
 		$ctr = 0;
-		$totalqty = 0;
-		$totalextcost = 0;
-		$totalextprice = 0;
-		$totalinvqty = 0;
+		$TotalQty = 0;
+		$TotalExtCost = 0;
+		$TotalExtPrice = 0;
+		$TotalInvQty = 0;
 		$FileName = $_SESSION['reports_dir'] .'/POReport.csv';
 		$FileHandle = fopen($FileName, 'w');
-		// Create array for summary type to display in header. Access it with $savesummarytype
-		$summary_array["orderno"] =  _('Order Number');
-		$summary_array["itemcode"] =  _('Part Number');
-		$summary_array["extprice"] =  _('Extended Price');
-		$summary_array["supplierno"] =  _('Customer Number');
-		$summary_array["suppname"] =  _('Customer Name');
-		$summary_array["month"] =  _('Month');
-		$summary_array["categoryid"] =  _('Stock Category');
+		// Create array for summary type to display in header. Access it with $SaveSummaryType
+		$Summary_Array['orderno'] =  _('Order Number');
+		$Summary_Array['itemcode'] =  _('Part Number');
+		$Summary_Array['extprice'] =  _('Extended Price');
+		$Summary_Array['supplierno'] =  _('Customer Number');
+		$Summary_Array['suppname'] =  _('Customer Name');
+		$Summary_Array['month'] =  _('Month');
+		$Summary_Array['categoryid'] =  _('Stock Category');
 
 		// Create array for sort for detail report to display in header
-		$detail_array['purchorderdetails.orderno'] = _('Order Number');
-		$detail_array['purchorderdetails.itemcode'] = _('Part Number');
-		$detail_array['suppliers.supplierid,purchorderdetails.orderno'] = _('Supplier Number');
-		$detail_array['suppliers.suppname,suppliers.supplierid,purchorderdetails.orderno'] = _('Supplier Name');
+		$Detail_Array['purchorderdetails.orderno'] = _('Order Number');
+		$Detail_Array['purchorderdetails.itemcode'] = _('Part Number');
+		$Detail_Array['suppliers.supplierid,purchorderdetails.orderno'] = _('Supplier Number');
+		$Detail_Array['suppliers.suppname,suppliers.supplierid,purchorderdetails.orderno'] = _('Supplier Name');
 
 		// Display Header info
 		if ($_POST['ReportType'] == 'Summary') {
-			$sortby_display = $summary_array[$savesummarytype];
+			$SortBy_Display = $Summary_Array[$SaveSummaryType];
 		} else {
-			$sortby_display = $detail_array[$_POST['SortBy']];
+			$SortBy_Display = $Detail_Array[$_POST['SortBy']];
 		}
-		fprintf($FileHandle, '"'. _('Purchase Order Report') . '","' . $_POST['ReportType'] . ' '._('By').' '.$sortby_display ."\n");
+		fprintf($FileHandle, '"'. _('Purchase Order Report') . '","' . $_POST['ReportType'] . ' '._('By').' '.$SortBy_Display ."\n");
 		fprintf($FileHandle, '"'. _('Date Type') . '","' . $_POST['DateType'] . '"'. "\n");
 		fprintf($FileHandle, '"'. _('Date Range') . '","' . $_POST['FromDate'] . _(' To ') .  $_POST['ToDate'] . '"'."\n");
 		if (strlen(trim($PartNumber)) > 0) {
@@ -1246,11 +1251,11 @@ function submitcsv(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Sup
 					$myrow['linestatus'],
 					ConvertSQLDate($myrow['deliverydate']),
 					$myrow['description']);
-					$lastdecimalplaces = $myrow['decimalplaces'];
-					$totalqty += $myrow['quantityord'];
-					$totalextcost += $myrow['extcost'];
-					$totalextprice += $myrow['extprice'];
-					$totalinvqty += $myrow['qtyinvoiced'];
+					$LastDecimalPlaces = $myrow['decimalplaces'];
+					$TotalQty += $myrow['quantityord'];
+					$TotalExtCost += $myrow['extcost'];
+					$TotalExtPrice += $myrow['extprice'];
+					$TotalInvQty += $myrow['qtyinvoiced'];
 				} //END WHILE LIST LOOP
 				// Print totals
 					fprintf($FileHandle, '"%s","%s","%s","%s","%s",%s,%s,%s,%s,"%s","%s"'."\n",
@@ -1259,10 +1264,10 @@ function submitcsv(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Sup
 					' ',
 					' ',
 					' ',
-					number_format($totalqty,2),
-					number_format($totalextcost,2),
-					number_format($totalextprice,2),
-					number_format($totalinvqty,2),
+					number_format($TotalQty,2),
+					number_format($TotalExtCost,2),
+					number_format($TotalExtPrice,2),
+					number_format($TotalInvQty,2),
 					' ',
 					' ');
 			} else {
@@ -1298,11 +1303,11 @@ function submitcsv(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Sup
 					$myrow['linestatus'],
 					ConvertSQLDate($myrow['deliverydate']),
 					$myrow['description']);
-					$lastdecimalplaces = $myrow['decimalplaces'];
-					$totalqty += $myrow['quantityord'];
-					$totalextcost += $myrow['extcost'];
-					$totalextprice += $myrow['extprice'];
-					$totalinvqty += $myrow['qtyinvoiced'];
+					$LastDecimalPlaces = $myrow['decimalplaces'];
+					$TotalQty += $myrow['quantityord'];
+					$TotalExtCost += $myrow['extcost'];
+					$TotalExtPrice += $myrow['extprice'];
+					$TotalInvQty += $myrow['qtyinvoiced'];
 				} //END WHILE LIST LOOP
 				// Print totals
 					fprintf($FileHandle, '"%s","%s","%s","%s","%s",%s,%s,%s,%s,"%s","%s"'."\n",
@@ -1311,10 +1316,10 @@ function submitcsv(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Sup
 					' ',
 					' ',
 					' ',
-					number_format($totalqty,$lastdecimalplaces),
-					number_format($totalextcost,2),
-					number_format($totalextprice,2),
-					number_format($totalinvqty,$lastdecimalplaces),
+					number_format($TotalQty,$LastDecimalPlaces),
+					number_format($TotalExtCost,2),
+					number_format($TotalExtPrice,2),
+					number_format($TotalInvQty,$LastDecimalPlaces),
 					" ",
 					" ");
 			}
@@ -1383,20 +1388,20 @@ function submitcsv(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Sup
 				number_format($myrow['qtyinvoiced'],$myrow['decimalplaces']),
 				$suppname);
 				print '<br/>';
-				$lastdecimalplaces = $myrow['decimalplaces'];
-				$totalqty += $myrow['quantityord'];
-				$totalextcost += $myrow['extcost'];
-				$totalextprice += $myrow['extprice'];
-				$totalinvqty += $myrow['qtyinvoiced'];
+				$LastDecimalPlaces = $myrow['decimalplaces'];
+				$TotalQty += $myrow['quantityord'];
+				$TotalExtCost += $myrow['extcost'];
+				$TotalExtPrice += $myrow['extprice'];
+				$TotalInvQty += $myrow['qtyinvoiced'];
 			} //END WHILE LIST LOOP
 			// Print totals
 				fprintf($FileHandle, '"%s","%s",%s,%s,%s,%s,"%s"'."\n",
 				'Totals',
 				_('Lines - ') . $linectr,
-				number_format($totalqty,$lastdecimalplaces),
-				number_format($totalextcost,2),
-				number_format($totalextprice,2),
-				number_format($totalinvqty,$lastdecimalplaces),
+				number_format($TotalQty,$LastDecimalPlaces),
+				number_format($TotalExtCost,2),
+				number_format($TotalExtPrice,2),
+				number_format($TotalInvQty,$LastDecimalPlaces),
 				' ');
 		} // End of if ($_POST['ReportType']
 		fclose($FileHandle);
@@ -1412,21 +1417,21 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 // Display form fields. This function is called the first time
 // the page is called.
 
-	echo "<form action=" . $_SERVER['PHP_SELF'] . "?" . SID ." method=post>";
+	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<table class=selection>';
 
 	echo '<tr><td>' . _('Report Type') . ':</td>';
-	echo "<td><select name='ReportType'>";
-	echo "<option selected value='Detail'>" . _('Detail') . '</option>';
-	echo "<option value='Summary'>" . _('Summary') . '</option>';
+	echo '<td><select name="ReportType">';
+	echo '<option selected value="Detail">' . _('Detail') . '</option>';
+	echo '<option value="Summary">' . _('Summary') . '</option>';
 	echo '</select></td><td>&nbsp</td></tr>';
 
 	echo '<tr><td>' . _('Date Type') . ':</td>';
-	echo "<td><select name='DateType'>";
-	echo "<option selected value='Order'>" . _('Order Date') . '</option>';
-	echo "<option value='Delivery'>" . _('Delivery Date') . '</option>';
+	echo '<td><select name="DateType">';
+	echo '<option selected value="Order">' . _('Order Date') . '</option>';
+	echo '<option value="Delivery">' . _('Delivery Date') . '</option>';
 	echo '</select></td><td>&nbsp</td></tr>';
 
 	echo '<tr>
@@ -1437,27 +1442,27 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 	</tr>';
 
 	echo '<tr><td>' . _('Part Number') . ':</td>';
-	echo "<td><select name='PartNumberOp'>";
-	echo "<option selected value='Equals'>" . _('Equals') . '</option>';
-	echo "<option value='LIKE'>" . _('Begins With') . '</option>';
+	echo '<td><select name="PartNumberOp">';
+	echo '<option selected value="Equals">' . _('Equals') . '</option>';
+	echo '<option value="LIKE">' . _('Begins With') . '</option>';
 	echo '</select>';
-	echo "&nbsp&nbsp<input type='Text' name='PartNumber' size=20 maxlength=20 value=";
+	echo '&nbsp&nbsp<input type="text" name="PartNumber" size=20 maxlength=20 value=';
 	if (isset($_POST['PartNumber'])) {
-		echo $_POST['PartNumber'] . "></td></tr>";
+		echo $_POST['PartNumber'] . '></td></tr>';
 	} else {
-		echo "></td></tr>";
+		echo '></td></tr>';
 	}
 
 	echo '<tr><td>' . _('Supplier Number') . ':</td>';
-	echo "<td><select name='SupplierIdOp'>";
-	echo "<option selected value='Equals'>" . _('Equals') . '</option>';
-	echo "<option value='LIKE'>" . _('Begins With') . '</option>';
+	echo '<td><select name="SupplierIdOp">';
+	echo '<option selected value="Equals">' . _('Equals') . '</option>';
+	echo '<option value="LIKE">' . _('Begins With') . '</option>';
 	echo '</select>';
-	echo "&nbsp&nbsp<input type='Text' name='SupplierId' size=10 maxlength=10 value=";
+	echo '&nbsp&nbsp<input type="text" name="SupplierId" size=10 maxlength=10 value=';
 	if (isset($_POST['SupplierId'])) {
-		echo $_POST['SupplierId'] . "></td></tr>";
+		echo $_POST['SupplierId'] . '></td></tr>';
 	} else {
-		echo  "></td></tr>";
+		echo  '></td></tr>';
 	}
 
 	echo '<tr><td>' . _('Supplier Name') . ':</td>';

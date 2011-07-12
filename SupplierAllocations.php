@@ -20,8 +20,6 @@
 
 include('includes/DefineSuppAllocsClass.php');
 
-//$PageSecurity = 5;
-
 include('includes/session.inc');
 
 $title = _('Supplier Payment') . '/' . _('Credit Note Allocations');

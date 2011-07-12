@@ -1,6 +1,6 @@
 <?php
 /* $Id$*/
-//$PageSecurity = 2;
+
 include ('includes/session.inc');
 $title = _('Search Purchase Orders');
 include ('includes/header.inc');
@@ -186,12 +186,12 @@ if (isset($StockItemsResult)) {
 			echo '<tr bgcolor="#EEEEEE">';
 			$k = 1;
 		}
-		echo "<td><input type=submit name='SelectedStockItem' value='" . $myrow['stockid'] . "'</td>
-				<td>" . $myrow['description'] . "</td>
-			<td class=number>" . $myrow['qoh'] . "</td>
-			<td class=number>" . $myrow['qord'] . "</td>
-			<td>" . $myrow['units'] . "</td>
-			</tr>";
+		echo '<td><input type=submit name="SelectedStockItem" value="' . $myrow['stockid'] . '"</td>
+				<td>' . $myrow['description'] . '</td>
+			<td class=number>' . $myrow['qoh'] . '</td>
+			<td class=number>' . $myrow['qord'] . '</td>
+			<td>' . $myrow['units'] . '</td>
+			</tr>';
 		$j++;
 		if ($j == 12) {
 			$j = 1;
@@ -374,7 +374,7 @@ else {
 				echo '<tr bgcolor="#EEEEEE">';
 				$k++;
 			}
-			$ViewPurchOrder = $rootpath . '/PO_OrderDetails.php?' . SID . 'OrderNo=' . $myrow['orderno'];
+			$ViewPurchOrder = $rootpath . '/PO_OrderDetails.php?OrderNo=' . $myrow['orderno'];
 			$FormatedOrderDate = ConvertSQLDate($myrow['orddate']);
 			$FormatedOrderValue = number_format($myrow['ordervalue'], 2);
 			/*						  View					   Supplier					Currency			   Requisition			 Order Date				 Initiator				Order Total

@@ -2,8 +2,6 @@
 
 /* $Id$*/
 
-//$PageSecurity = 2;
-
 include('includes/session.inc');
 
 $title = _('Sales Analysis Report Columns');
@@ -280,7 +278,7 @@ if (DB_num_rows($result)!=0){
 		$BudOrAct = _('N/A');
 	}
 
-	printf('<td><a href=\'%sReportID=%s&SelectedCol=%s\'>%s</a></td>
+	printf('<td><a href="%sReportID=%s&SelectedCol=%s">%s</a></td>
           	<td>%s</td>
           	<td>%s</td>
           	<td>%s</td>
@@ -292,7 +290,7 @@ if (DB_num_rows($result)!=0){
           	<td>%s</td>
           	<td>%s</td>
           	<td><a href="%sReportID=%s&SelectedCol=%s&delete=1">' . _('Delete') . '</td></tr>',
-          	$_SERVER['PHP_SELF'] . "?" . SID,
+          	$_SERVER['PHP_SELF'] . '?',
           	$ReportID,
           	$myrow[1],
           	$myrow[1],
@@ -306,7 +304,7 @@ if (DB_num_rows($result)!=0){
           	$myrow[9],
           	$myrow[10],
           	$BudOrAct,
-          	$_SERVER['PHP_SELF'] . "?" . SID,
+          	$_SERVER['PHP_SELF'] . '?',
           	$ReportID,
           	$myrow[1]);
 

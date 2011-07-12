@@ -230,7 +230,7 @@ if (isset($_POST['PrintPDF'])){
 	  $title = _('Customer List') . ' - ' . _('Problem Report') . '....';
 	  include('includes/header.inc');
 	   prnMsg( _('The customer List could not be retrieved by the SQL because') . ' - ' . DB_error_msg($db) );
-	   echo '<br /><a href="' .$rootpath .'/index.php?' . SID . '">'. _('Back to the menu'). '</a>';
+	   echo '<br /><a href="' .$rootpath .'/index.php">'. _('Back to the menu'). '</a>';
 	   if ($debug==1){
 	      echo '<br />'. $SQL;
 	   }
@@ -242,7 +242,7 @@ if (isset($_POST['PrintPDF'])){
 	  $title = _('Customer List') . ' - ' . _('Problem Report') . '....';
 	  include('includes/header.inc');
 	  prnMsg( _('This report has no output because there were no customers retrieved'), 'error' );
-	  echo '<br /><a href="' .$rootpath .'/index.php?' . SID . '">'. _('Back to the menu'). '</a>';
+	  echo '<br /><a href="' .$rootpath .'/index.php">'. _('Back to the menu'). '</a>';
 	  include('includes/footer.inc');
 	  exit;
 	}

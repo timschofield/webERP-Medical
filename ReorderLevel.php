@@ -57,7 +57,7 @@ if (isset($_POST['PrintPDF'])) {
 	  $title = _('Reorder Level') . ' - ' . _('Problem Report');
 	  include('includes/header.inc');
 	   prnMsg( _('The Reorder Level report could not be retrieved by the SQL because') . ' '  . DB_error_msg($db),'error');
-	   echo '<br /><a href="' .$rootpath .'/index.php?' . SID . '">' . _('Back to the menu') . '</a>';
+	   echo '<br /><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
 	   if ($debug==1){
 	      echo '<br />' . $sql;
 	   }
@@ -72,7 +72,7 @@ if (isset($_POST['PrintPDF'])) {
 
     $ListCount = 0; // UldisN
 
-	While ($myrow = DB_fetch_array($result,$db)){
+	while ($myrow = DB_fetch_array($result,$db)){
 			$YPos -=(2 * $line_height);
 
             $ListCount ++;
@@ -193,7 +193,7 @@ if (isset($_POST['PrintPDF'])) {
 			</table>
 			<br />';
 		prnMsg(_('There are no stock categories currently defined please use the link below to set them up'),'warn');
-		echo '<br /><a href="' . $rootpath . '/StockCategories.php?' . SID .'">' . _('Define Stock Categories') . '</a>';
+		echo '<br /><a href="' . $rootpath . '/StockCategories.php">' . _('Define Stock Categories') . '</a>';
 		include ('includes/footer.inc');
 		exit;
 	}

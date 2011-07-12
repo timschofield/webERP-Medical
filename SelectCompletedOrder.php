@@ -2,8 +2,6 @@
 
 /* $Id$*/
 
-//$PageSecurity = 1;
-
 include('includes/session.inc');
 
 $title = _('Search All Sales Orders');
@@ -553,7 +551,7 @@ If (isset($SalesOrdersResult)) {
 			$k=1;
 		}
 
-		$ViewPage = $rootpath . '/OrderDetails.php?' .SID . '&OrderNumber=' . $myrow['orderno'];
+		$ViewPage = $rootpath . '/OrderDetails.php?OrderNumber=' . $myrow['orderno'];
 		$FormatedDelDate = ConvertSQLDate($myrow['deliverydate']);
 		$FormatedOrderDate = ConvertSQLDate($myrow['orddate']);
 		$FormatedOrderValue = number_format($myrow['ordervalue'],2);

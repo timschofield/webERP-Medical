@@ -1,6 +1,5 @@
 <?php
 
-//$PageSecurity = 8; now from Database Scripts table
 include ('includes/session.inc');
 $title = _('Bank Transactions Inquiry');
 include('includes/header.inc');

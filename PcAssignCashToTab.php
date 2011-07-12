@@ -1,8 +1,6 @@
 <?php
 /* $Revision: 1.0 $ */
 
-//$PageSecurity = 6;
-
 include('includes/session.inc');
 $title = _('Assignment of Cash to Petty Cash Tab');
 include('includes/header.inc');

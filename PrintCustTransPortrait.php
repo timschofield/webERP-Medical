@@ -2,8 +2,6 @@
 
 /* $Id$ */
 
-//$PageSecurity = 1;
-
 include('includes/session.inc');
 
 if (isset($_GET['FromTransNo'])) {

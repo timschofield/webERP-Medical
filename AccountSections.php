@@ -2,8 +2,6 @@
 /* $Revision: 1.7 $ */
 /* $Id$*/
 
-//$PageSecurity = 10;
-
 include('includes/session.inc');
 
 $title = _('Account Sections');
@@ -194,11 +192,11 @@ if (!isset($_GET['SelectedSectionID']) and !isset($_POST['SelectedSectionID'])) 
 		}
 
 		echo '<td>' . $myrow[0] . '</td><td>' . $myrow[1] . '</td>';
-		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '&amp;SelectedSectionID=' . $myrow[0] . '">' . _('Edit') . '</a></td>';
+		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?SelectedSectionID=' . $myrow[0] . '">' . _('Edit') . '</a></td>';
 		if ( $myrow[0] == '1' || $myrow[0] == '2' ) {
 			echo '<td><b>'._('Restricted').'</b></td>';
 		} else {
-			echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '&amp;SelectedSectionID=' . $myrow[0] . '&amp;delete=1">' . _('Delete') .'</a></td>';
+			echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?SelectedSectionID=' . $myrow[0] . '&amp;delete=1">' . _('Delete') .'</a></td>';
 		}
 		echo '</tr>';
 	} //END WHILE LIST LOOP
@@ -207,7 +205,7 @@ if (!isset($_GET['SelectedSectionID']) and !isset($_POST['SelectedSectionID'])) 
 
 
 if (isset($_POST['SelectedSectionID']) or isset($_GET['SelectedSectionID'])) {
-	echo '<div class="centre"><a href=' . $_SERVER['PHP_SELF'] . '?' . SID .'>' . _('Review Account Sections') . '</a></div>';
+	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Review Account Sections') . '</a></div>';
 }
 
 if (! isset($_GET['delete'])) {

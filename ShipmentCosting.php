@@ -2,8 +2,6 @@
 
 /* $Id$*/
 
-//$PageSecurity = 11;
-
 include('includes/session.inc');
 $title = _('Shipment Costing');
 /* Session started in header.inc for password checking and authorisation level check */

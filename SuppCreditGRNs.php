@@ -6,8 +6,6 @@
 the SuppTrans class contains an array of GRNs objects - containing details of GRNs for invoicing and also
 an array of GLCodes objects - only used if the AP - GL link is effective */
 
-//$PageSecurity = 5;
-
 include('includes/DefineSuppTransClass.php');
 /* Session started in header.inc for password checking and authorisation level check */
 include('includes/session.inc');
@@ -90,7 +88,7 @@ foreach ($_SESSION['SuppTrans']->GRNs as $EnteredGRN){
 			<td class=number>' . number_format($EnteredGRN->This_QuantityInv,2) . '</td>
 			<td class=number>' . number_format($EnteredGRN->ChgPrice,2) . '</td>
 			<td class=number>' . number_format($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv,2) . '</td>
-			<td><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . 'Delete=' . $EnteredGRN->GRNNo . '">' . _('Delete') . '</a></td></tr>';
+			<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $EnteredGRN->GRNNo . '">' . _('Delete') . '</a></td></tr>';
 
 	$TotalValueCharged = $TotalValueCharged + ($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv);
 
@@ -103,7 +101,7 @@ foreach ($_SESSION['SuppTrans']->GRNs as $EnteredGRN){
 
 echo '<tr><td colspan=5 class=number><font size=2 color=navy>' . _('Total Value Credited Against Goods') . ':</font></td>
 		  <td class=number><font size=2 color=navy><U>' . number_format($TotalValueCharged,2) . '</U></font></td></tr>';
-echo '</table><br /><div class=centre><a href="' . $rootpath . '/SupplierCredit.php?' . SID . '">' . _('Back to Credit Note Entry') . '</a></div>';
+echo '</table><br /><div class=centre><a href="' . $rootpath . '/SupplierCredit.php">' . _('Back to Credit Note Entry') . '</a></div>';
 
 /* Now get all the GRNs for this supplier from the database
 after the date entered */
@@ -130,13 +128,13 @@ $GRNResults = DB_query($SQL,$db);
 
 if (DB_num_rows($GRNResults)==0){
 	prnMsg(_('There are no goods received records for') . ' ' . $_SESSION['SuppTrans']->SupplierName . '<br /> ' . _('To enter a credit against goods received') . ', ' . _('the goods must first be received using the link below to select purchase orders to receive'),'info');
-	echo '<p><a href="' . $rootpath . '/PO_SelectOSPurchOrder.php?' . SID . 'SupplierID=' . $_SESSION['SuppTrans']->SupplierID . '">' . _('Select Purchase Orders to Receive') . '</a></p>';
+	echo '<p><a href="' . $rootpath . '/PO_SelectOSPurchOrder.php?SupplierID=' . $_SESSION['SuppTrans']->SupplierID . '">' . _('Select Purchase Orders to Receive') . '</a></p>';
 	include('includes/footer.inc');
 	exit;
 }
 
 /*Set up a table to show the GRNs outstanding for selection */
-echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<br /><table cellpadding=2 colspan=7 class=selection>';

@@ -1,7 +1,7 @@
 <?php
 /* $Revision: 1.3 $ */
 /* $Id$*/
-//$PageSecurity = 3;
+
 include('includes/session.inc');
 $title = _('Customer Type (Group) Notes');
 include('includes/header.inc');
@@ -17,7 +17,7 @@ if (isset($_POST['DebtorType'])){
 } elseif (isset($_GET['DebtorType'])){
 	$DebtorType = $_GET['DebtorType'];
 }
-echo "<a href='" . $rootpath . '/SelectCustomer.php?' . SID .'&DebtorType='.$DebtorType."'>" . _('Back to Select Customer') . '</a><br />';
+echo '<a href="' . $rootpath . '/SelectCustomer.php?DebtorType='.$DebtorType.'">' . _('Back to Select Customer') . '</a><br />';
 if ( isset($_POST['submit']) ) {
 
 	//initialise no input errors assumed initially before we test
@@ -126,10 +126,10 @@ if (!isset($Id)) {
 				$myrow[3],
 				$myrow[2],
 				$myrow[5],
-				$_SERVER['PHP_SELF'] . "?" . SID,
+				$_SERVER['PHP_SELF'] . '?',
 				$myrow[0],
 				$myrow[1],
-				$_SERVER['PHP_SELF'] . "?" . SID,
+				$_SERVER['PHP_SELF'] . '?',
 				$myrow[0],
 				$myrow[1]);
 
@@ -138,14 +138,14 @@ if (!isset($Id)) {
 	echo '</table>';
 }
 if (isset($Id)) {  ?>
-	<div class="cantre"><a href="<?php echo $_SERVER['PHP_SELF'] . '?' . SID .'&DebtorType='.$DebtorType;?>"><?=_('Review all notes for this Customer Type')?></a></div>
+	<div class="cantre"><a href="<?php echo $_SERVER['PHP_SELF'] . '?DebtorType='.$DebtorType;?>"><?=_('Review all notes for this Customer Type')?></a></div>
 <?php } ?>
 <br />
 
 <?php
 if (!isset($_GET['delete'])) {
 
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '&DebtorType='.$DebtorType.'">';
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?DebtorType='.$DebtorType.'">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (isset($Id)) {

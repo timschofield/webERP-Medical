@@ -1,7 +1,6 @@
 <?php
 /* $Revision: 1.20 $ */
 /* $Id$*/
-//$PageSecurity = 9;
 
 include('includes/session.inc');
 $title = _('Currencies Maintenance');
@@ -287,7 +286,7 @@ or deletion of the records*/
 
 
 if (isset($SelectedCurrency)) {
-	echo '<div class="centre"><a href=' .$_SERVER['PHP_SELF']  . '?' . SID. '>'._('Show all currency definitions').'</a></div>';
+	echo '<div class="centre"><a href="' .$_SERVER['PHP_SELF']  . '">'._('Show all currency definitions').'</a></div>';
 }
 
 echo '<br />';

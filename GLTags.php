@@ -1,7 +1,7 @@
 <?php
 
 /* $Id$*/
-//$PageSecurity = 10;
+
 include('includes/session.inc');
 $title = _('Maintain General Ledger Tags');
 
@@ -59,7 +59,7 @@ $result= DB_query($sql,$db);
 
 while ($myrow = DB_fetch_array($result,$db)){
 	echo '<tr><td>'.$myrow[0].'</td><td>'.$myrow[1].'</td><td>
-		<a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '&SelectedTag=' . $myrow[0] . '&Action=edit">' . _('Edit') . '</a></td></tr>';
+		<a href="' . $_SERVER['PHP_SELF'] . '?SelectedTag=' . $myrow[0] . '&Action=edit">' . _('Edit') . '</a></td></tr>';
 }
 
 echo '</table><p></p>';

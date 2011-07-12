@@ -2,8 +2,6 @@
 /* $Revision: 1.6 $ */
 /* $Id$*/
 
-//$PageSecurity = 15;
-
 include('includes/session.inc');
 $title = _('Customer Types') . ' / ' . _('Maintenance');
 include('includes/header.inc');
@@ -207,8 +205,10 @@ while ($myrow = DB_fetch_row($result)) {
 		</tr>',
 		$myrow[0],
 		$myrow[1],
-		$_SERVER['PHP_SELF'] . '?' . SID, $myrow[0],
-		$_SERVER['PHP_SELF'] . '?' . SID, $myrow[0]);
+		$_SERVER['PHP_SELF'] . '?',
+		$myrow[0],
+		$_SERVER['PHP_SELF'] . '?',
+		$myrow[0]);
 	}
 	//END WHILE LIST LOOP
 	echo '</table>';

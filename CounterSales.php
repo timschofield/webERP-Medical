@@ -2,7 +2,7 @@
 /* $Id: CounterSales.php 4469 2011-01-15 02:28:37Z daintree $*/
 
 include('includes/DefineCartClass.php');
-//$PageSecurity = 1;
+
 /* Session started in session.inc for password checking and authorisation level check
 config.php is in turn included in session.inc $PageSecurity now comes from session.inc (and gets read in by GetConfig.php*/
 
@@ -383,7 +383,7 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 
 /* Always do the stuff below */
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID .'identifier='.$identifier . '" name="SelectParts" method="post">';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier . '" name="SelectParts" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 //Get The exchange rate used for GPPercent calculations on adding or amending items
@@ -780,7 +780,7 @@ if (count($_SESSION['Items'.$identifier]->LineItems)>0 and !isset($_POST['Proces
 		echo '<input type="hidden" name="POLine_' .	 $OrderLine->LineNumber . '" value="" />';
 		echo '<input type="hidden" name="ItemDue_' .	 $OrderLine->LineNumber . '" value="'.$OrderLine->ItemDue.'" />';
 
-		echo '<td><a target="_blank" href="' . $rootpath . '/StockStatus.php?' . SID .'identifier='.$identifier . '&amp;StockID=' . $OrderLine->StockID . '&amp;DebtorNo=' . $_SESSION['Items'.$identifier]->DebtorNo . '">' . $OrderLine->StockID . '</a></td>
+		echo '<td><a target="_blank" href="' . $rootpath . '/StockStatus.php?identifier='.$identifier . '&amp;StockID=' . $OrderLine->StockID . '&amp;DebtorNo=' . $_SESSION['Items'.$identifier]->DebtorNo . '">' . $OrderLine->StockID . '</a></td>
 			<td>' . $OrderLine->ItemDescription . '</td>';
 
 		echo '<td><input class="number" tabindex="2" type="text" name="Quantity_' . ($OrderLine->LineNumber) . '" size="6" maxlength="6" value="' . ($OrderLine->Quantity) . '" />';
@@ -820,7 +820,7 @@ if (count($_SESSION['Items'.$identifier]->LineItems)>0 and !isset($_POST['Proces
 		$_SESSION['Items'.$identifier]->TaxGLCodes=$TaxGLCodes;
 		echo '<td class="number">' . number_format($TaxLineTotal ,2) . '</td>';
 		echo '<td class="number">' . number_format($SubTotal + $TaxLineTotal ,2) . '</td>';
-		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?' . SID .'&amp;identifier='.$identifier . '&amp;Delete=' . $OrderLine->LineNumber . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');">' . _('Delete') . '</a></td></tr>';
+		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier . '&amp;Delete=' . $OrderLine->LineNumber . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');">' . _('Delete') . '</a></td></tr>';
 
 		if ($_SESSION['AllowOrderLineItemNarrative'] == 1){
 			echo $RowStarter;
@@ -2156,11 +2156,7 @@ if (!isset($_POST['ProcessSale'])){
 						$QOH,
 						$DemandQty,
 						$OnOrder,
-						$Available,
-						$ImageSource,
-						$rootpath,
-						SID,
-						$myrow['stockid']);
+						$Available);
 
 				echo '<input type="hidden" name="Units' . $myrow['stockid'] . '" value="' . $myrow['units'] . '" />';
 
@@ -2231,7 +2227,7 @@ if (!isset($_POST['ProcessSale'])){
 
 		if (isset($SearchResult)) {
 			$j = 1;
-			echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID .'identifier='.$identifier . '" method="post" name="orderform">';
+			echo '<form action="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier . '" method="post" name="orderform">';
 			echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 			echo '<table class="selection">';
 			echo '<tr><td><input type="hidden" name="previous" value="'.number_format($Offset-1).'" />

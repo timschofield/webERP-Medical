@@ -4,8 +4,6 @@
 
 /* $Revision: 1.12 $ */
 
-//$PageSecurity =1;
-
 $title = _('Stock Location Transfer Docket Error');
 include('includes/session.inc');
 
@@ -20,7 +18,7 @@ if (!isset($_GET['TransferNo'])){
 	include ('includes/header.inc');
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') .
 		'" alt="" />' . ' ' . _('Reprint transfer docket').'</p><br />';
-	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '">';
+	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '?">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table><tr><td>'._('Transfer docket to reprint').'</td>';
 	echo '<td><input type=text class=number size=10 name="TransferNo"></td></tr></table>';
@@ -93,7 +91,7 @@ if ($len<=20){
 	include('includes/header.inc');
 	echo '<br />';
 	prnMsg( _('There was no stock location transfer to print out'), 'warn');
-	echo '<br /><a href="' . $rootpath. '/index.php?' . SID . '">'. _('Back to the menu'). '</a>';
+	echo '<br /><a href="' . $rootpath. '/index.php">'. _('Back to the menu'). '</a>';
 	include('includes/footer.inc');
 	exit;
 } else {

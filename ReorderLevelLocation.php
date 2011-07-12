@@ -3,7 +3,6 @@
 /* $Id$*/
 
 // ReorderLevelLocation.php - Report of reorder level by category
-//$PageSecurity = 2; now comes from DB
 
 include('includes/session.inc');
 

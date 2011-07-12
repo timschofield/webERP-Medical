@@ -1,8 +1,6 @@
 <?php
 /* $Id$ */
 
-//$PageSecurity = 15;
-
 include('includes/session.inc');
 $title = _('Maintenance Of Petty Cash Tabs');
 include('includes/header.inc');
@@ -258,8 +256,10 @@ while ($myrow = DB_fetch_array($result)) {
 		$myrow[6],
 		$myrow['glaccountassignment'].' - '.$Description[0],
 		$myrow['glaccountpcash'].' - '.$DescriptionName[0],
-		$_SERVER['PHP_SELF'] . '?' . SID, $myrow['tabcode'],
-		$_SERVER['PHP_SELF'] . '?' . SID, $myrow['tabcode']);
+		$_SERVER['PHP_SELF'] . '?',
+		$myrow['tabcode'],
+		$_SERVER['PHP_SELF'] . '?',
+		$myrow['tabcode']);
 	}
 	//END WHILE LIST LOOP
 	echo '</table>';

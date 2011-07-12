@@ -1,8 +1,6 @@
 <?php
 /* $Id$*/
 
-//$PageSecurity = 11; // only allow accountant access
-
 if (isset($_POST['TaxAuthority'])){
 	$TaxAuthority = $_POST['TaxAuthority'];
 }
@@ -55,7 +53,7 @@ if (isset($_POST['UpdateRates'])){
 $TaxAuthDetail = DB_query("SELECT description FROM taxauthorities WHERE taxid='" . $TaxAuthority . "'",$db);
 $myrow = DB_fetch_row($TaxAuthDetail);
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID .'" method=post>';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<input type=hidden name="TaxAuthority" value=' . $TaxAuthority . '>';
@@ -124,10 +122,10 @@ echo '<br /><div class="centre"><input type=submit name="UpdateRates" value="' .
 
 echo '</form>';
 
-echo '<br /><br /><a href="' . $rootpath . '/TaxAuthorities.php?' . SID . '">' . _('Tax Authorities') .  '</a>';
-echo '<br /><a href="' . $rootpath . '/TaxGroups.php?' . SID . '">' . _('Tax Groupings') .  '</a>';
-echo '<br /><a href="' . $rootpath . '/TaxCategories.php?' . SID . '">' . _('Tax Categories') .  '</a>';
-echo '<br /><a href="' . $rootpath . '/TaxProvinces.php?' . SID . '">' . _('Dispatch Tax Provinces') .  '</a>';
+echo '<br /><br /><a href="' . $rootpath . '/TaxAuthorities.php">' . _('Tax Authorities') .  '</a>';
+echo '<br /><a href="' . $rootpath . '/TaxGroups.php">' . _('Tax Groupings') .  '</a>';
+echo '<br /><a href="' . $rootpath . '/TaxCategories.php">' . _('Tax Categories') .  '</a>';
+echo '<br /><a href="' . $rootpath . '/TaxProvinces.php">' . _('Dispatch Tax Provinces') .  '</a>';
 echo '</div>';
 
 include( 'includes/footer.inc' );

@@ -2,8 +2,6 @@
 /* $Revision: 1.23 $ */
 /* $Id$*/
 
-//$PageSecurity = 10;
-
 include('includes/session.inc');
 
 $title = _('Account Groups');
@@ -262,8 +260,8 @@ or deletion of the records*/
 			<td>' . $myrow[2] . '</td>
 			<td>' . $PandLText . '</td>
 			<td>' . $myrow[4] . '</td>';
-		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '&amp;SelectedAccountGroup=' . htmlentities($myrow[0], ENT_QUOTES,'UTF-8') . '">' . _('Edit') . '</a></td>';
-		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '&amp;SelectedAccountGroup=' . htmlentities($myrow[0], ENT_QUOTES,'UTF-8') . '&amp;delete=1">' . _('Delete') .'</a></td></tr>';
+		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?SelectedAccountGroup=' . htmlentities($myrow[0], ENT_QUOTES,'UTF-8') . '">' . _('Edit') . '</a></td>';
+		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?SelectedAccountGroup=' . htmlentities($myrow[0], ENT_QUOTES,'UTF-8') . '&amp;delete=1">' . _('Delete') .'</a></td></tr>';
 
 	} //END WHILE LIST LOOP
 	echo '</table>';
@@ -271,12 +269,12 @@ or deletion of the records*/
 
 
 if (isset($_POST['SelectedAccountGroup']) OR isset($_GET['SelectedAccountGroup'])) {
-	echo '<br /><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '?' . SID .'">' . _('Review Account Groups') . '</a></div>';
+	echo '<br /><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Review Account Groups') . '</a></div>';
 }
 
 if (! isset($_GET['delete'])) {
 
-	echo '<br /><form method="post" id="AccountGroups" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '">';
+	echo '<br /><form method="post" id="AccountGroups" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 

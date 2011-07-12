@@ -39,7 +39,7 @@ if ($dbType='mysql' or $dbType='mysqli') {
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>';
 
 if (!isset($_POST['continue']) and !isset($_POST['CreateSQLFile'])) {
-	echo '<form method="post" id="AccountGroups" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '">';
+	echo '<form method="post" id="AccountGroups" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<div class="page_help_text">' . _('You have database updates that are required.').'<br />'.

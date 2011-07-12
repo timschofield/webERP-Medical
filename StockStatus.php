@@ -2,8 +2,6 @@
 
 /* $Id$*/
 
-//$PageSecurity = 2;
-
 include('includes/session.inc');
 
 $title = _('Stock Status');
@@ -19,7 +17,7 @@ if (isset($_GET['StockID'])){
 }
 
 // This is already linked from this page
-//echo '<a href='" . $rootpath . '/SelectProduct.php?' . SID . "'>" . _('Back to Items') . '</a><br />';
+//echo '<a href='" . $rootpath . '/SelectProduct.php'>" . _('Back to Items') . '</a><br />';
 
 $result = DB_query("SELECT description,
                            units,
@@ -56,7 +54,7 @@ if ($myrow[2]=='K'){
 	prnMsg( _('This is an dummy part and cannot have a stock holding') . ', ' . _('only the total quantity on outstanding sales orders is shown'),'info');
 }
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '?'. SID . '" method="post">';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<div class="centre"><input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo _('Stock Code') . ':<input type="text" name="StockID" size="21" value="' . $StockID . '" maxlength="20" />';
 
@@ -221,9 +219,9 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 
 		if ($Serialised ==1){ /*The line is a serialised item*/
 
-			echo '<td><a target="_blank" href="' . $rootpath . '/StockSerialItems.php?' . SID . '&Serialised=Yes&Location=' . $myrow['loccode'] . '&StockID=' .$StockID . '">' . _('Serial Numbers') . '</a></td></tr>';
+			echo '<td><a target="_blank" href="' . $rootpath . '/StockSerialItems.php?Serialised=Yes&Location=' . $myrow['loccode'] . '&StockID=' .$StockID . '">' . _('Serial Numbers') . '</a></td></tr>';
 		} elseif ($Controlled==1){
-			echo '<td><a target="_blank" href="' . $rootpath . '/StockSerialItems.php?' . SID . '&Location=' . $myrow['loccode'] . '&StockID=' .$StockID . '">' . _('Batches') . '</a></td></tr>';
+			echo '<td><a target="_blank" href="' . $rootpath . '/StockSerialItems.php?Location=' . $myrow['loccode'] . '&StockID=' .$StockID . '">' . _('Batches') . '</a></td></tr>';
 		}
 
 	} else {
@@ -350,12 +348,12 @@ if ($DebtorNo) { /* display recent pricing history for this debtor and this stoc
 }
 //end of displaying price history for a debtor
 echo '<div class="centre">';
-echo '<br /><a href="' . $rootpath . '/StockMovements.php?' . SID . '&amp;StockID=' . $StockID . '">' . _('Show Movements') . '</a>';
-echo '<br /><a href="' . $rootpath . '/StockUsage.php?' . SID . '&amp;StockID=' . $StockID . '">' . _('Show Usage') . '</a>';
-echo '<br /><a href="' . $rootpath . '/SelectSalesOrder.php?' . SID . '&amp;SelectedStockItem=' . $StockID . '">' . _('Search Outstanding Sales Orders') . '</a>';
-echo '<br /><a href="' . $rootpath . '/SelectCompletedOrder.php?' . SID . '&amp;SelectedStockItem=' . $StockID . '">' . _('Search Completed Sales Orders') . '</a>';
+echo '<br /><a href="' . $rootpath . '/StockMovements.php?StockID=' . $StockID . '">' . _('Show Movements') . '</a>';
+echo '<br /><a href="' . $rootpath . '/StockUsage.php?StockID=' . $StockID . '">' . _('Show Usage') . '</a>';
+echo '<br /><a href="' . $rootpath . '/SelectSalesOrder.php?SelectedStockItem=' . $StockID . '">' . _('Search Outstanding Sales Orders') . '</a>';
+echo '<br /><a href="' . $rootpath . '/SelectCompletedOrder.php?SelectedStockItem=' . $StockID . '">' . _('Search Completed Sales Orders') . '</a>';
 if ($Its_A_KitSet_Assembly_Or_Dummy ==False){
-	echo '<br /><a href="' . $rootpath . '/PO_SelectOSPurchOrder.php?' .SID . '&amp;SelectedStockItem=' . $StockID . '">' . _('Search Outstanding Purchase Orders') . '</a>';
+	echo '<br /><a href="' . $rootpath . '/PO_SelectOSPurchOrder.php?SelectedStockItem=' . $StockID . '">' . _('Search Outstanding Purchase Orders') . '</a>';
 }
 
 echo '</div></form>';

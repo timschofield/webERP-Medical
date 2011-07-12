@@ -2,8 +2,6 @@
 
 /* $Id$ */
 
-//$PageSecurity = 11;
-
 include('includes/session.inc');
 $title = _('Item Maintenance');
 include('includes/header.inc');
@@ -33,7 +31,7 @@ if (isset($_POST['New'])) {
 	$New=$_POST['New'];
 }
 
-echo '<a href="' . $rootpath . '/SelectProduct.php?' . SID . '">' . _('Back to Items') . '</a><br />' . "\n";
+echo '<a href="' . $rootpath . '/SelectProduct.php">' . _('Back to Items') . '</a><br />' . "\n";
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="'
 		. _('Stock') . '" alt="" />' . ' ' . $title . '</p>';
@@ -567,14 +565,14 @@ if (isset($_POST['submit'])) {
 		unset($_POST['ItemPDF']);
 		unset($_SESSION['SelectedStockItem']);
 		unset($StockID);
-		//echo '<meta http-equiv='Refresh' content='0; url=" . $rootpath . '/SelectProduct.php?' . SID  ."'>";
+		//echo '<meta http-equiv='Refresh' content='0; url=" . $rootpath . '/SelectProduct.php'>";
 
 		$New=1;
 	} //end if Delete Part
 }
 
 
-echo '<form name="ItemForm" enctype="multipart/form-data" method="post" action="' . $_SERVER['PHP_SELF'] . '?' .SID .'"><table class=selection>
+echo '<form name="ItemForm" enctype="multipart/form-data" method="post" action="' . $_SERVER['PHP_SELF'] . '"><table class=selection>
 	<tr><td>'. "\n"; // Nested table
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
@@ -709,7 +707,7 @@ echo '<tr><td>' . _('PDF attachment (.pdf)') . ':</td><td>' . select_files('comp
 echo '<tr><td>'. _('Image File (.jpg)') . ':</td><td><input type="file" id="ItemPicture" name="ItemPicture"></td>';
 
  if (function_exists('imagecreatefromjpg')){
-	$StockImgLink = '<img src="GetStockImage.php?SID&automake=1&textcolor=FFFFFF&bgcolor=CCCCCC'.
+	$StockImgLink = '<img src="GetStockImage.php?automake=1&textcolor=FFFFFF&bgcolor=CCCCCC'.
 		'&StockID='.urlencode($StockID).
 		'&text='.
 		'&width=64'.
@@ -749,7 +747,7 @@ if (!isset($_POST['CategoryID'])) {
 	$_POST['CategoryID']=$Category;
 }
 
-echo '</select><a target="_blank" href="'. $rootpath . '/StockCategories.php?' . SID . '">' . _('Add or Modify Stock Categories') . '</a></td></tr>';
+echo '</select><a target="_blank" href="'. $rootpath . '/StockCategories.php">' . _('Add or Modify Stock Categories') . '</a></td></tr>';
 
 if (!isset($_POST['EOQ']) or $_POST['EOQ']==''){
 	$_POST['EOQ']=0;

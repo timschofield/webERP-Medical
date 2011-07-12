@@ -1,7 +1,6 @@
 <?php
 /* $Id$*/
 
-//$PageSecurity = 2;
 include('includes/session.inc');
 $PaperSize='T1_portrait';
 include('includes/PDFStarter.php');

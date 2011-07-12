@@ -3,7 +3,6 @@
 /* $Id$*/
 /* $Revision: 1.28 $ */
 
-//$PageSecurity = 8;
 include ('includes/session.inc');
 $title = _('General Ledger Account Inquiry');
 include('includes/header.inc');
@@ -263,7 +262,7 @@ if (isset($_POST['Show'])){
 		}
 
 		$FormatedTranDate = ConvertSQLDate($myrow['trandate']);
-		$URL_to_TransDetail = $rootpath . '/GLTransInquiry.php?' . SID . '&TypeID=' . $myrow['type'] . '&TransNo=' . $myrow['typeno'];
+		$URL_to_TransDetail = $rootpath . '/GLTransInquiry.php?TypeID=' . $myrow['type'] . '&TransNo=' . $myrow['typeno'];
 
 		$tagsql="SELECT tagdescription FROM tags WHERE tagref='".$myrow['tag'] . "'";
 		$tagresult=DB_query($tagsql,$db);

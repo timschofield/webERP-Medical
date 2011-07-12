@@ -1,8 +1,6 @@
 <?php
 /* $Id$*/
 
-//$PageSecurity = 15;
-
 include ('includes/session.inc');
 include ('includes/SQL_CommonFunctions.inc');
 
@@ -10,7 +8,7 @@ include ('includes/SQL_CommonFunctions.inc');
 
 if (isset($_POST['EnterCompanyDetails'])) {
 
-	header ('Location:' . $rootpath . '/CompanyPreferences.php?' . SID);
+	header ('Location:' . $rootpath . '/CompanyPreferences.php');
 	exit;
 }
 
@@ -36,7 +34,7 @@ if (isset($_POST['submit']) AND isset($_POST['NewCompany'])) {
 
 		$_POST['NewCompany'] = strtolower($_POST['NewCompany']);
 		echo '<div class="centre">';
-		echo '<form method="post" action=' . $_SERVER['PHP_SELF'] . '?' . SID . '>';
+		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		/* check for directory existence */
 		if (!file_exists('./companies/' . $_POST['NewCompany'])
@@ -194,9 +192,9 @@ if (isset($_POST['submit']) AND isset($_POST['NewCompany'])) {
 
 		prnMsg (_('The new company database has been created for' . ' ' . $_POST['NewCompany'] . '. ' . _('The company details and parameters should now be set up for the new company. NB: Only a single user "demo" is defined with the password "weberp" in the new company database. A new system administrator user should be defined for the new company and this account deleted immediately.')), 'info');
 
-		echo '<p><a href="' . $rootpath . '/CompanyPreferences.php?' . SID .'">' . _('Set Up New Company Details') . '</a></p>';
-		echo '<p><a href="' . $rootpath . '/SystemParameters.php?' . SID .'">' . _('Set Up Configuration Details') . '</a></p>';
-		echo '<p><a href="' . $rootpath . '/WWW_Users.php?' . SID .'">' . _('Set Up User Accounts') . '</a></p>';
+		echo '<p><a href="' . $rootpath . '/CompanyPreferences.php">' . _('Set Up New Company Details') . '</a></p>';
+		echo '<p><a href="' . $rootpath . '/SystemParameters.php">' . _('Set Up Configuration Details') . '</a></p>';
+		echo '<p><a href="' . $rootpath . '/WWW_Users.php">' . _('Set Up User Accounts') . '</a></p>';
 
 		echo '</form>';
 		echo '</div>';
@@ -212,7 +210,7 @@ echo '<br />';
 prnMsg (_('This utility will create a new company') . '<br /><br />' .
 		_('If the company name already exists then you cannot recreate it'), 'info', _('PLEASE NOTE'));
 echo '<br />';
-echo '<form method="post" action=' . $_SERVER['PHP_SELF'] . '?' . SID . ' enctype="multipart/form-data">';
+echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '" enctype="multipart/form-data">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<table><tr>';

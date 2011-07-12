@@ -281,7 +281,7 @@ if (isset($_POST['submit'])) {
 
 			$BranchCode = substr($_POST['DebtorNo'],0,4);
 
-			echo "<meta http-equiv='Refresh' content='0; url=" . $rootpath ."/CustomerBranches.php?" . SID . "&DebtorNo=" . $_POST['DebtorNo'] . "'>";
+			echo '<meta http-equiv="Refresh" content="0; url=' . $rootpath .'/CustomerBranches.php?DebtorNo=' . $_POST['DebtorNo'] . '">';
 
 			echo '<div class="centre">' . _('You should automatically be forwarded to the entry of a new Customer Branch page') .
 			'. ' . _('If this does not happen') .' (' . _('if the browser does not support META Refresh') . ') ' .
@@ -935,7 +935,7 @@ if (!isset($DebtorNo)) {
 				$myrow[5],
 				$myrow[0],
 				$myrow[1],
-				$_SERVER['PHP_SELF'] . "?" . SID,
+				$_SERVER['PHP_SELF'] . '?',
 				$myrow[0],
 				$myrow[1]);
 		}
@@ -979,14 +979,14 @@ if (!isset($DebtorNo)) {
 						and contid='".$Edit."'";
 		$resultupcc = DB_query($SQLupdatecc,$db);
 		echo '<br />'.$SQLupdatecc;
-		echo '<meta http-equiv="Refresh" content="0; url="' . $_SERVER['PHP_SELF'] . '?'.SID.'&DebtorNo='.$DebtorNo.'&ID='.$ID.'">';
+		echo '<meta http-equiv="Refresh" content="0; url="' . $_SERVER['PHP_SELF'] . '?DebtorNo='.$DebtorNo.'&ID='.$ID.'">';
 	}
 	if (isset($_GET['delete'])) {
 		$SQl="DELETE FROM custcontacts where debtorno='".$DebtorNo."'
 				and contid='".$ID."'";
 		$resultupcc = DB_query($SQl,$db);
 
-		echo '<meta http-equiv="Refresh" content="0; url=' . $_SERVER['PHP_SELF'] . '?'.SID.'&DebtorNo='.$DebtorNo.'">';
+		echo '<meta http-equiv="Refresh" content="0; url=' . $_SERVER['PHP_SELF'] . '?DebtorNo='.$DebtorNo.'">';
 		echo '<br />'.$SQl;
 		prnmsg('Contact Deleted','success');
 	}

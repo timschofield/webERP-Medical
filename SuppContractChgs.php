@@ -9,8 +9,6 @@ This is cleared against the cost of the contract as originally costed - when the
 
 include('includes/DefineSuppTransClass.php');
 
-//$PageSecurity = 5;
-
 /* Session started here for password checking and authorisation level check */
 include('includes/session.inc');
 
@@ -86,7 +84,7 @@ foreach ($_SESSION['SuppTrans']->Contracts as $EnteredContract){
 		<td class=number>' . number_format($EnteredContract->Amount,2) . '</td>
 		<td>' . $EnteredContract->Narrative . '</td>
 		<td>' . $AnticipatedCost . '</td>
-		<td><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '&Delete=' . $EnteredContract->Counter . '">' . _('Delete') . '</a></td></tr>';
+		<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $EnteredContract->Counter . '">' . _('Delete') . '</a></td></tr>';
 
 	$TotalContractsValue += $EnteredContract->Amount;
 
@@ -99,13 +97,13 @@ echo '<tr>
 </table>';
 
 if ($_SESSION['SuppTrans']->InvoiceOrCredit == 'Invoice'){
-	echo '<br /><a href="' . $rootpath . '/SupplierInvoice.php?' . SID . '">' . _('Back to Invoice Entry') . '</a><hr>';
+	echo '<br /><a href="' . $rootpath . '/SupplierInvoice.php">' . _('Back to Invoice Entry') . '</a><hr>';
 } else {
-	echo '<br /><a href="' . $rootpath . '/SupplierCredit.php?' . SID . '">' . _('Back to Credit Note Entry') . '</a><hr>';
+	echo '<br /><a href="' . $rootpath . '/SupplierCredit.php">' . _('Back to Credit Note Entry') . '</a><hr>';
 }
 
 /*Set up a form to allow input of new Contract charges */
-echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (!isset($_POST['ContractRef'])) {

@@ -414,8 +414,8 @@ if (!isset($StockID)) {
 	if (!isset($_REQUEST['OrderNumber']) or $_REQUEST['OrderNumber']==''){
 
 		echo '<table class=selection>';
-		echo '<tr><td>' . _('Order number') . ": </td><td><input type=text name='OrderNumber' maxlength=8 size=9></td><td>" .
-				_('From Stock Location') . ":</td><td><select name='StockLocation'> ";
+		echo '<tr><td>' . _('Order number') . ': </td><td><input type=text name="OrderNumber" maxlength=8 size=9></td><td>' .
+				_('From Stock Location') . ':</td><td><select name="StockLocation">';
 
 		$sql = "SELECT loccode, locationname FROM locations";
 
@@ -452,7 +452,7 @@ if (!isset($StockID)) {
 
 		echo '</select> </td><td>';
 		echo '<input type=submit name="SearchOrders" value="' . _('Search') . '"></td>';
-    echo '&nbsp;&nbsp;<td><a href="' . $rootpath . '/SelectOrderItems.php?' . SID . '&NewOrder=Yes">' .
+    echo '&nbsp;&nbsp;<td><a href="' . $rootpath . '/SelectOrderItems.php?NewOrder=Yes">' .
 		_('Add Sales Order') . '</a></td></tr></table>';
 	}
 
@@ -475,16 +475,16 @@ if (!isset($StockID)) {
 	}
 
       echo '</select>
-      		<td><font size=1>' . _('Enter text extract(s) in the description') . ":</font></td>
-      		<td><input type='Text' name='Keywords' size=20 maxlength=25></td>
+      		<td><font size=1>' . _('Enter text extract(s) in the description') . ':</font></td>
+      		<td><input type="text" name="Keywords" size=20 maxlength=25></td>
 	</tr>
       	<tr><td></td>
-      		<td><font size 3><b>" . _('OR') . ' </b></font><font size=1>' . _('Enter extract of the Stock Code') . "</b>:</font></td>
-      		<td><input type='Text' name='StockCode' size=15 maxlength=18></td>
+      		<td><font size="3"><b>' . _('OR') . ' </b></font><font size=1>' . _('Enter extract of the Stock Code') . '</b>:</font></td>
+      		<td><input type="text" name="StockCode" size=15 maxlength=18></td>
       	</tr>
-      </table>";
-	echo "<br /><input type=submit name='SearchParts' value='" . _('Search Parts Now') .
-			"'><input type=submit name='ResetPart' value='" . _('Show All') . "'></div><br />";
+      </table>';
+	echo '<br /><input type=submit name="SearchParts" value="' . _('Search Parts Now') .
+			'"><input type=submit name="ResetPart" value="' . _('Show All') . '"></div><br />';
 
 if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 
@@ -510,11 +510,11 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 			$k++;
 		}
 
-		printf("<td><input type=submit name='SelectedStockItem' value='%s'</td>
+		printf('<td><input type=submit name="SelectedStockItem" value="%s"</td>
 			<td>%s</td>
 			<td class=number>%s</td>
 			<td>%s</td>
-			</tr>",
+			</tr>',
 			$myrow['stockid'],
 			$myrow['description'],
 			$myrow['qoh'],

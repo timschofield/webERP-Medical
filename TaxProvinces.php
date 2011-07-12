@@ -1,8 +1,6 @@
 <?php
 /* $Id$*/
 
-//$PageSecurity = 15;
-
 include('includes/session.inc');
 
 $title = _('Dispatch Tax Provinces');
@@ -158,7 +156,7 @@ if (isset($_POST['submit'])) {
 	$ErrMsg = _('Could not get tax categories because');
 	$result = DB_query($sql,$db,$ErrMsg);
 
-	echo '<table class=selection>
+	echo '<table class="selection">
 		<tr>
 		<th>' . _('Tax Provinces') . '</th>
 		</tr>';
@@ -175,8 +173,8 @@ if (isset($_POST['submit'])) {
 		}
 
 		echo '<td>' . $myrow[1] . '</td>';
-		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '&SelectedTaxProvince=' . $myrow[0] . '">' . _('Edit') . '</a></td>';
-		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '&SelectedTaxProvince=' . $myrow[0] . '&delete=1">' . _('Delete') .'</a></td>';
+		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?SelectedTaxProvince=' . $myrow[0] . '">' . _('Edit') . '</a></td>';
+		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?SelectedTaxProvince=' . $myrow[0] . '&delete=1">' . _('Delete') .'</a></td>';
 		echo '</tr>';
 
 	} //END WHILE LIST LOOP
@@ -213,12 +211,12 @@ if (! isset($_GET['delete'])) {
 			$_POST['TaxProvinceName']  = $myrow['taxprovincename'];
 
 			echo '<input type=hidden name="SelectedTaxProvince" value="' . $myrow['taxprovinceid'] . '">';
-			echo '<table class=selection>';
+			echo '<table class="selection">';
 		}
 
 	}  else {
 		$_POST['TaxProvinceName']='';
-		echo '<table class=selection>';
+		echo '<table class="selection">';
 	}
 	echo '<tr>
 		<td>' . _('Tax Province Name') . ':' . '</td>

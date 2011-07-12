@@ -93,10 +93,10 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 //end of while loop
 
 echo '</table><br /><div class="centre"><input type=submit name="UpdateData" value="' . _('Update') . '"><br /><br />';
-echo '<a href="' . $rootpath . '/StockMovements.php?' . SID . '&StockID=$StockID">' . _('Show Stock Movements') . '</a>';
-echo '<br /><a href="' . $rootpath . '/StockUsage.php?' . SID . '&StockID=$StockID">' . _('Show Stock Usage') . '</a>';
-echo '<br /><a href="' . $rootpath . '/SelectSalesOrder.php?' . SID . '&SelectedStockItem=$StockID">' . _('Search Outstanding Sales Orders') . '</a>';
-echo '<br /><a href="' . $rootpath . '/SelectCompletedOrder.php?' . SID . '&SelectedStockItem=$StockID">' . _('Search Completed Sales Orders') . '</a>';
+echo '<a href="' . $rootpath . '/StockMovements.php?StockID=$StockID">' . _('Show Stock Movements') . '</a>';
+echo '<br /><a href="' . $rootpath . '/StockUsage.php?StockID=$StockID">' . _('Show Stock Usage') . '</a>';
+echo '<br /><a href="' . $rootpath . '/SelectSalesOrder.php?SelectedStockItem=$StockID">' . _('Search Outstanding Sales Orders') . '</a>';
+echo '<br /><a href="' . $rootpath . '/SelectCompletedOrder.php?SelectedStockItem=$StockID">' . _('Search Completed Sales Orders') . '</a>';
 
 echo '</div></form>';
 include('includes/footer.inc');

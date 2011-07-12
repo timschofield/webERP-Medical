@@ -2,8 +2,6 @@
 
 /* $Id$*/
 
-//$PageSecurity = 8;
-
 include ('includes/session.inc');
 $title = _('Profit and Loss');
 include('includes/SQL_CommonFunctions.inc');
@@ -159,7 +157,7 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 		$title = _('Profit and Loss') . ' - ' . _('Problem Report') . '....';
 		include('includes/header.inc');
 		prnMsg( _('No general ledger accounts were returned by the SQL because') . ' - ' . DB_error_msg($db) );
-		echo '<br /><a href="' .$rootpath .'/index.php?' . SID . '">'. _('Back to the menu'). '</a>';
+		echo '<br /><a href="' .$rootpath .'/index.php">'. _('Back to the menu'). '</a>';
 		if ($debug == 1){
 			echo '<br />'. $SQL;
 		}
@@ -171,7 +169,7 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 		include('includes/header.inc');
 		echo '<br />';
 		prnMsg( _('There were no entries to print out for the selections specified'),'warn' );
-		echo '<br /><a href="'. $rootpath.'/index.php?' . SID . '">'. _('Back to the menu'). '</a>';
+		echo '<br /><a href="'. $rootpath.'/index.php">'. _('Back to the menu'). '</a>';
 		include('includes/footer.inc');
 		exit;
 	}

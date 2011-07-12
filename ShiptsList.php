@@ -2,7 +2,6 @@
 
 /* $Id$*/
 
-//$PageSecurity = 2;
 include ('includes/session.inc');
 $title = _('Shipments Open Inquiry');
 include('includes/header.inc');
@@ -50,7 +49,7 @@ while ($myrow=DB_fetch_array($ShiptsResult)) {
               $k=1;
        }
 
-       echo '<td><a href="'.$rootpath.'/Shipments.php?' . SID . 'SelectedShipment='.$myrow['shiptref'].'">'.$myrow['shiptref'].'</a></td>
+       echo '<td><a href="'.$rootpath.'/Shipments.php?SelectedShipment='.$myrow['shiptref'].'">'.$myrow['shiptref'].'</a></td>
        		<td>'.$myrow['vessel'].'</td>
 		<td>'.ConvertSQLDate($myrow['eta']).'</td>
 		</tr>';

@@ -1,7 +1,6 @@
 <?php
 /* $Id$*/
 
-//$PageSecurity = 15;
 include('includes/session.inc');
 $title = _('Upgrade webERP 3.04 - 3.05');
 include('includes/header.inc');
@@ -9,7 +8,7 @@ include('includes/header.inc');
 
 prnMsg(_('This script will run perform any modifications to the database required to allow the additional functionality in version 3.05 scripts'),'info');
 
-echo '<p><form method="post" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '">';
+echo '<p><form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo '<input type=submit name=DoUpgrade value="' . _('Perform Upgrade') . '">';
 echo '</form></p>';

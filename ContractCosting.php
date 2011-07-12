@@ -2,7 +2,6 @@
 
 /* $Id: ContractCosting.php 3692 2010-08-15 09:22:08Z daintree $*/
 
-//$PageSecurity = 6;
 include('includes/DefineContractClass.php');
 include('includes/session.inc');
 $title = _('Contract Costing');
@@ -415,7 +414,7 @@ if (isset($_POST['CloseContract']) AND $_SESSION['Contract'.$identifier]->Status
 
 if ($_SESSION['Contract'.$identifier]->Status ==2){//the contract is an order being processed now
 
-	echo '<form  method="post" action="' . $_SERVER['PHP_SELF'] . '?' .SID .'&amp;SelectedContract=' . $_SESSION['Contract'.$identifier]->ContractRef . '&amp;identifier=' . $identifier . '">';
+	echo '<form  method="post" action="' . $_SERVER['PHP_SELF'] . '?SelectedContract=' . $_SESSION['Contract'.$identifier]->ContractRef . '&amp;identifier=' . $identifier . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<br /><div class="centre"><input type="submit" name="CloseContract" value="' . _('Close Contract') .  '" onclick="return confirm(\'' . _('Closing the contract will prevent further stock being issued to it and charges being made against it. Variances will be taken to the profit and loss account. Are You Sure?') . '\');" /></div>';
 	echo '</form>';

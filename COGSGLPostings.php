@@ -2,8 +2,6 @@
 /* $Revision: 1.15 $ */
 /* $Id$*/
 
-//$PageSecurity = 10;
-
 include('includes/session.inc');
 
 $title = _('Cost Of Sales GL Postings Set Up');

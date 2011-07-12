@@ -2,8 +2,6 @@
 
 /* $Revision: 1.0 $ */
 
-//$PageSecurity = 6;
-
 include ('includes/session.inc');
 include ('includes/SQL_CommonFunctions.inc');
 
@@ -22,7 +20,7 @@ if ((! isset($_POST['FromDate']) AND ! isset($_POST['ToDate'])) OR isset($_POST[
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Payment Entry')
 	. '" alt="" />' . ' ' . $title . '</p>';
 
-	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '">';
+	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (!isset($_POST['FromDate'])){
@@ -238,7 +236,7 @@ if (DB_error_no($db)!=0){
 	$SQL_FromDate = FormatDateForSQL($_POST['FromDate']);
 	$SQL_ToDate = FormatDateForSQL($_POST['ToDate']);
 
-	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '">';
+	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<input type=hidden name="FromDate" value="' . $_POST['FromDate'] . '"><input type=hidden name="ToDate" value="' . $_POST['ToDate'] . '">';
 

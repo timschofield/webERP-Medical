@@ -1,8 +1,6 @@
 <?php
 /* $Id$*/
 
-//$PageSecurity = 2;
-
 include('includes/session.inc');
 
 If ((isset($_POST['PrintPDF']))
@@ -37,7 +35,7 @@ If ((isset($_POST['PrintPDF']))
 		$title = _('Print Remittance Advices Error');
 		include('includes/header.inc');
 		prnMsg(_('There were no remittance advices to print out for the supplier range and payment date specified'),'warn');
-		echo '<br /><a href="'.$_SERVER['PHP_SELF'] .'?' . SID . '">'. _('Back').'</a>';
+		echo '<br /><a href="'.$_SERVER['PHP_SELF'] .'">'. _('Back').'</a>';
 		include('includes/footer.inc');
 		exit;
 	}
@@ -122,7 +120,7 @@ If ((isset($_POST['PrintPDF']))
 
 	/* show form to allow input	*/
 
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method="POST"><table>';
+	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="POST"><table>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (!isset($_POST['FromCriteria']) or strlen($_POST['FromCriteria'])<1){

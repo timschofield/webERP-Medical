@@ -3,9 +3,6 @@
 /* $Id$ */
 /* Contributed by Chris Bice - gettext by Kitch*/
 
-
-//$PageSecurity = 2;
-
 include('includes/session.inc');
 $title = _('Stock On Hand By Date');
 include('includes/header.inc');

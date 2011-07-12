@@ -3,7 +3,7 @@
 
 $DirectoryLevelsDeep = 1;
 $PathPrefix = '../';
-//$PageSecurity = 1; // set security level for webERP
+
 require($PathPrefix . 'includes/session.inc');
 
 // TBD The followiung line needs to be replace when more translations are available

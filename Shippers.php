@@ -1,8 +1,6 @@
 <?php
 /* $Id$*/
 
-//$PageSecurity = 15;
-
 include('includes/session.inc');
 $title = _('Shipping Company Maintenance');
 include('includes/header.inc');
@@ -145,9 +143,9 @@ or deletion of the records*/
 			<td><a href="%sSelectedShipper=%s&delete=1">'. _('Delete'). '</td></tr>',
 			$myrow[0],
 			$myrow[1],
-			$_SERVER['PHP_SELF'] . "?" . SID,
+			$_SERVER['PHP_SELF'] . '?',
 			$myrow[0],
-			$_SERVER['PHP_SELF'] . "?" . SID,
+			$_SERVER['PHP_SELF'] . '?',
 			$myrow[0]);
 	}
 	//END WHILE LIST LOOP
@@ -158,12 +156,12 @@ or deletion of the records*/
 if (isset($SelectedShipper)) {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Search') .
 		'" alt="" />' . ' ' . $title . '</p>';
-	echo '<div class="centre"><a href="'.$_SERVER['PHP_SELF'] . '?' . SID.'">'._('REVIEW RECORDS').'</a></div>';
+	echo '<div class="centre"><a href="'.$_SERVER['PHP_SELF'] . '">'._('REVIEW RECORDS').'</a></div>';
 }
 
 if (!isset($_GET['delete'])) {
 
-	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '">';
+	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (isset($SelectedShipper)) {
@@ -181,7 +179,7 @@ if (!isset($_GET['delete'])) {
 		echo '<input type=hidden name="Shipper_ID" value=' . $_POST['Shipper_ID'] . '>';
 		echo '<br /><table class=selection><tr><td>'. _('Shipper Code').':</td><td>' . $_POST['Shipper_ID'] . '</td></tr>';
 	} else {
-		echo "<br /><table class=selection>";
+		echo '<br /><table class=selection>';
 	}
 	if (!isset($_POST['ShipperName'])) {
 		$_POST['ShipperName']='';

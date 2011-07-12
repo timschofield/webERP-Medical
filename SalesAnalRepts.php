@@ -2,8 +2,6 @@
 
 /* $Id$*/
 
-//$PageSecurity = 2;
-
 include('includes/session.inc');
 
 $title = _('Sales Analysis Reports Maintenance');
@@ -306,7 +304,7 @@ while ($myrow = DB_fetch_array($result)) {
 		</tr>',
 		$myrow[0],
 		$myrow[1],
-		$_SERVER['PHP_SELF'] . '?' . SID,
+		$_SERVER['PHP_SELF'] . '?',
 		$myrow[0],
 		$rootpath,
 		$myrow[0],
@@ -314,7 +312,7 @@ while ($myrow = DB_fetch_array($result)) {
 		$myrow[0],
 		$rootpath,
 		$myrow[0],
-		$_SERVER['PHP_SELF'] . '?' . SID,
+		$_SERVER['PHP_SELF'] . '?',
 		$myrow[0]);
 
 	}
@@ -327,14 +325,14 @@ while ($myrow = DB_fetch_array($result)) {
 
 
 if (isset($SelectedReport)) {
-	echo '<a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '">' . _('Show All Defined Reports') . '</a>';
+	echo '<a href="' . $_SERVER['PHP_SELF'] . '">' . _('Show All Defined Reports') . '</a>';
 }
 
 echo '<br />';
 
 
 if (!isset($_GET['delete'])) {
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '">';
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (isset($SelectedReport)) {

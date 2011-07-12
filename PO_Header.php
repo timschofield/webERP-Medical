@@ -2,8 +2,6 @@
 
 /* $Id PO_Header.php 4183 2010-12-14 09:30:20Z daintree $ */
 
-//$PageSecurity = 4; now read in from from DB into $_SESSION['PageSecurity'] array and retrieved into a $PageSecuirity variable for the script by session.inc
-
 include('includes/DefinePOClass.php');
 include('includes/session.inc');
 
@@ -237,7 +235,7 @@ if (isset($_POST['EnterLines'])){
 		$_POST['RePrint'] = 0;
 	}
 
-	echo '<meta http-equiv="Refresh" content="0; url=' . $rootpath . '/PO_Items.php?' . SID . 'identifier='.$identifier. '">';
+	echo '<meta http-equiv="Refresh" content="0; url=' . $rootpath . '/PO_Items.php?identifier='.$identifier. '">';
 	echo '<br />';
 	prnMsg(_('You should automatically be forwarded to the entry of the purchase order line items page') . '. ' .
 		_('If this does not happen') . ' (' . _('if the browser does not support META Refresh') . ') ' .
@@ -588,7 +586,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 } else {
 /* everything below here only do if a supplier is selected */
 
-	echo '<form name="form1" action="' . $_SERVER['PHP_SELF'] . '?' . SID . 'identifier=' . $identifier . '" method=post>';
+	echo '<form name="form1" action="' . $_SERVER['PHP_SELF'] . '?identifier=' . $identifier . '" method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<p class="page_title_text">
@@ -608,7 +606,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 		echo '<br /><table class="table_index"><tr><td class="menu_group_item">';
 
 		/* the link */
-		echo '<li><a href="'.$rootpath.'/PO_Items.php?' . SID . 'NewItem=' . $Purch_Item . '&identifier=' . $identifier . '">' . 	_('Enter Line Item to this purchase order') . '</a></li>';
+		echo '<li><a href="'.$rootpath.'/PO_Items.php?NewItem=' . $Purch_Item . '&identifier=' . $identifier . '">' . 	_('Enter Line Item to this purchase order') . '</a></li>';
 
 		echo '</td></tr></table></div><br />';
 
@@ -777,7 +775,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 									</select></td>';
 		echo '<td><input type=submit name="AllowRePrint" value="Update"></td></tr>';
 	} elseif ($Printed) {
-		echo '<tr><td colspan=2><a target="_blank"  href="' . $rootpath . '/PO_PDFPurchOrder.php?' . SID . 'OrderNo=' . $_SESSION['ExistingOrder'] . '&identifier='.$identifier. '">' . _('Reprint Now') . '</a></td></tr>';
+		echo '<tr><td colspan=2><a target="_blank"  href="' . $rootpath . '/PO_PDFPurchOrder.php?OrderNo=' . $_SESSION['ExistingOrder'] . '&identifier='.$identifier. '">' . _('Reprint Now') . '</a></td></tr>';
 	}
 
 	echo '</table>';

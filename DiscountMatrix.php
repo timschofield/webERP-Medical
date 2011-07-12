@@ -2,7 +2,6 @@
 /* $Revision: 1.9 $ */
 /* $Id$*/
 
-//$PageSecurity = 11;
 include('includes/session.inc');
 $title = _('Discount Matrix Maintenance');
 include('includes/header.inc');
@@ -168,7 +167,7 @@ while ($myrow = DB_fetch_array($result)) {
 		echo '<tr class="OddTableRows">';
 		$k=1;
 	}
-	$DeleteURL = $_SERVER['PHP_SELF'] . '?' . SID . '&Delete=yes&SalesType=' . $myrow['salestype'] . '&DiscountCategory=' . $myrow['discountcategory'] . '&QuantityBreak=' . $myrow['quantitybreak'];
+	$DeleteURL = $_SERVER['PHP_SELF'] . '?Delete=yes&SalesType=' . $myrow['salestype'] . '&DiscountCategory=' . $myrow['discountcategory'] . '&QuantityBreak=' . $myrow['quantitybreak'];
 
 	printf('<td>%s</td>
 		<td>%s</td>
