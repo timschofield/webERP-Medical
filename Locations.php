@@ -356,9 +356,9 @@ while ($myrow = DB_fetch_array($result)) {
 		$myrow['locationname'],
 		$myrow['description'],
 		$myrow['managed'],
-		$_SERVER['PHP_SELF'] . '?' . SID . '&',
+		$_SERVER['PHP_SELF'] . '?',
 		$myrow['loccode'],
-		$_SERVER['PHP_SELF'] . '?' . SID . '&',
+		$_SERVER['PHP_SELF'] . '?',
 		$myrow['loccode']);
 
 	}
