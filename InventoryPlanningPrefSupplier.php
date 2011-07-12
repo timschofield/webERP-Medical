@@ -206,9 +206,9 @@ if (isset($_POST['PrintPDF'])){
 	  $title = _('Inventory Planning') . ' - ' . _('Problem Report') . '....';
 	  include('includes/header.inc');
 	   prnMsg(_('The inventory quantities could not be retrieved by the SQL because') . ' - ' . DB_error_msg($db),'error');
-	   echo "<br /><a href='" .$rootpath .'/index.php?' . SID . "'>" . _('Back to the menu') . '</a>';
+	   echo '<br /><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
 	   if ($debug==1){
-	      echo "<br />$SQL";
+	      echo '<br />' . $SQL;
 	   }
 	   include('includes/footer.inc');
 	   exit;
@@ -274,9 +274,9 @@ if (isset($_POST['PrintPDF'])){
 	 		 $title = _('Inventory Planning') . ' - ' . _('Problem Report') . '....';
 	  		include('includes/header.inc');
 	   		prnMsg( _('The sales quantities could not be retrieved by the SQL because') . ' - ' . DB_error_msg($db),'error');
-	   		echo "<br /><a href='" .$rootpath .'/index.php?' . SID . "'>" . _('Back to the menu') . '</a>';
+	   		echo '<br /><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
 	   		if ($debug==1){
-	      			echo "<br />$SQL";
+	      			echo '<br />' . $SQL;
 	   		}
 	   		include('includes/footer.inc');
 	   		exit;
@@ -308,9 +308,9 @@ if (isset($_POST['PrintPDF'])){
 	 		 $title = _('Inventory Planning') . ' - ' . _('Problem Report') . '....';
 	  		include('includes/header.inc');
 	   		prnMsg( _('The sales order demand quantities could not be retrieved by the SQL because') . ' - ' . DB_error_msg($db),'error');
-	   		echo "<br /><a href='" .$rootpath ."/index.php?" . SID . "'>" . _('Back to the menu') . '</a>';
+	   		echo '<br /><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
 	   		if ($debug==1){
-	      			echo "<br />$SQL";
+	      			echo '<br />' . $SQL;
 	   		}
 	   		include('includes/footer.inc');
 	   		exit;
@@ -353,9 +353,9 @@ if (isset($_POST['PrintPDF'])){
 	 		$title = _('Inventory Planning') . ' - ' . _('Problem Report') . '....';
 	  		include('includes/header.inc');
 	   		prnMsg( _('The sales order demand quantities from parent assemblies could not be retrieved by the SQL because') . ' - ' . DB_error_msg($db),'error');
-	   		echo "<br /><a href='" .$rootpath ."/index.php?" . SID . "'>" . _('Back to the menu') . '</a>';
+	   		echo '<br /><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
 	   		if ($debug==1){
-	      			echo "<br />$SQL";
+	      			echo '<br />' . $SQL;
 	   		}
 	   		include('includes/footer.inc');
 	   		exit;
@@ -401,9 +401,9 @@ if (isset($_POST['PrintPDF'])){
 	 		 $title = _('Inventory Planning') . ' - ' . _('Problem Report') . '....';
 	  		include('includes/header.inc');
 	   		prnMsg( _('The purchase order quantities could not be retrieved by the SQL because') . ' - ' . DB_error_msg($db),'error');
-	   		echo "<br /><a href='" .$rootpath ."/index.php?" . SID . "'>" . _('Back to the menu') . '</a>';
+	   		echo '<br /><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
 	   		if ($debug==1){
-	      			echo "<br />$SQL";
+	      			echo '<br />' . $SQL;
 	   		}
 	   		include('includes/footer.inc');
 	   		exit;
@@ -457,7 +457,7 @@ if (isset($_POST['PrintPDF'])){
 		$title = _('Print Inventory Planning Report Empty');
 		include('includes/header.inc');
 		prnMsg( _('There were no items in the range and location specified'),'error');
-		echo "<br /><a href='$rootpath/index.php?" . SID . "'>" . _('Back to the menu') . '</a>';
+		echo '<br /><a href="'.$rootpath/.'index.php">' . _('Back to the menu') . '</a>';
 		include('includes/footer.inc');
 		exit;
 	} else {
@@ -473,7 +473,7 @@ if (isset($_POST['PrintPDF'])){
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
 
-	echo "<form action='" . $_SERVER['PHP_SELF'] . '?' . SID . "' method='POST'><table class=selection>";
+	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="POST"><table class=selection>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<tr><td>' . _('For Inventory in Location') . ':</td><td><select name="Location">';
