@@ -246,7 +246,7 @@ If (!isset($SelectedBankAccount)) {
 
 if (isset($SelectedBankAccount)) {
 	echo '<br />';
-	echo '<div class="centre"><p><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . '">' . _('Show All Bank Accounts Defined') . '</a></p></div>';
+	echo '<div class="centre"><p><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Show All Bank Accounts Defined') . '</a></p></div>';
 	echo '<br />';
 }
 
