@@ -338,7 +338,7 @@ if (isset($_GET['AllocTrans'])) {
 
 	if (isset($_POST['AllocTrans'])) {
 		// Page called with trans number
-		echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
+		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<input type=hidden name="AllocTrans" value="' . $_POST['AllocTrans'] . '">';
 
@@ -468,14 +468,14 @@ if (isset($_GET['AllocTrans'])) {
 				echo  '<tr class="OddTableRows">';;
 				$k++;
 			}
-			echo "<td>" . $myrow['typename'] ."</td>
-					<td>" . $myrow['name'] . "</td>
-					<td>" . $myrow['debtorno'] . "</td>
-					<td>" . $myrow['transno'] . "</td>
-					<td>" . ConvertSQLDate($myrow['trandate']) . "</td>
-					<td class=number>" . number_format($myrow['total'],2) . "</td>
-					<td class=number>" . number_format($myrow['total']-$myrow['alloc'],2) . "</td>";
-			echo '<td><a href=' . $_SERVER['PHP_SELF']. '?' . SID . '&AllocTrans=' . $myrow['id'] . '>' . _('Allocate') . '</a></td></tr>';
+			echo '<td>' . $myrow['typename'] .'</td>
+					<td>' . $myrow['name'] . '</td>
+					<td>' . $myrow['debtorno'] . '</td>
+					<td>' . $myrow['transno'] . '</td>
+					<td>' . ConvertSQLDate($myrow['trandate']) . '</td>
+					<td class=number>' . number_format($myrow['total'],2) . '</td>
+					<td class=number>' . number_format($myrow['total']-$myrow['alloc'],2) . '</td>';
+			echo '<td><a href=' . $_SERVER['PHP_SELF']. '?AllocTrans=' . $myrow['id'] . '>' . _('Allocate') . '</a></td></tr>';
 		}
 		DB_free_result($result);
 		echo '</table><br />';
@@ -513,7 +513,7 @@ if (isset($_GET['AllocTrans'])) {
 
 		$k=0;
 		while ($myrow = DB_fetch_array($result)) {
-			$allocate = '<a href=' . $_SERVER['PHP_SELF']. '?' . SID . '&AllocTrans=' . $myrow['id'] . '>' . _('Allocate') . '</a>';
+			$allocate = '<a href=' . $_SERVER['PHP_SELF']. '?AllocTrans=' . $myrow['id'] . '>' . _('Allocate') . '</a>';
 
 			if ( $curDebtor != $myrow['debtorno'] ) {
 				if ( $curTrans > 1 ) {
