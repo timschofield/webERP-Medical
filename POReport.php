@@ -729,7 +729,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 				$totalinvqty += $myrow['qtyinvoiced'];
 			} //END WHILE LIST LOOP
 			// Print totals
-				printf("<tr><td>%s</td><td>%s</td><td class=number>%s</td><td class=number>%s</td><td class=number>%s</td><td class=number>%s</td></tr>",
+				printf('<tr><td>%s</td><td>%s</td><td class=number>%s</td><td class=number>%s</td><td class=number>%s</td><td class=number>%s</td></tr>',
 				'Totals',
 				_('Lines - ') . $linectr,
 				$totalqty,
@@ -1411,21 +1411,21 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 // Display form fields. This function is called the first time
 // the page is called.
 
-	echo "<form action=" . $_SERVER['PHP_SELF'] . "?" . SID ." method=post>";
+	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<table class=selection>';
 
 	echo '<tr><td>' . _('Report Type') . ':</td>';
-	echo "<td><select name='ReportType'>";
-	echo "<option selected value='Detail'>" . _('Detail') . '</option>';
-	echo "<option value='Summary'>" . _('Summary') . '</option>';
+	echo '<td><select name="ReportType">';
+	echo '<option selected value="Detail">' . _('Detail') . '</option>';
+	echo '<option value="Summary">' . _('Summary') . '</option>';
 	echo '</select></td><td>&nbsp</td></tr>';
 
 	echo '<tr><td>' . _('Date Type') . ':</td>';
-	echo "<td><select name='DateType'>";
-	echo "<option selected value='Order'>" . _('Order Date') . '</option>';
-	echo "<option value='Delivery'>" . _('Delivery Date') . '</option>';
+	echo '<td><select name="DateType">';
+	echo '<option selected value="Order">' . _('Order Date') . '</option>';
+	echo '<option value="Delivery">' . _('Delivery Date') . '</option>';
 	echo '</select></td><td>&nbsp</td></tr>';
 
 	echo '<tr>
@@ -1436,27 +1436,27 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 	</tr>';
 
 	echo '<tr><td>' . _('Part Number') . ':</td>';
-	echo "<td><select name='PartNumberOp'>";
-	echo "<option selected value='Equals'>" . _('Equals') . '</option>';
-	echo "<option value='LIKE'>" . _('Begins With') . '</option>';
+	echo '<td><select name="PartNumberOp">';
+	echo '<option selected value="Equals">' . _('Equals') . '</option>';
+	echo '<option value="LIKE">' . _('Begins With') . '</option>';
 	echo '</select>';
-	echo "&nbsp&nbsp<input type='Text' name='PartNumber' size=20 maxlength=20 value=";
+	echo '&nbsp&nbsp<input type="text" name="PartNumber" size=20 maxlength=20 value=';
 	if (isset($_POST['PartNumber'])) {
-		echo $_POST['PartNumber'] . "></td></tr>";
+		echo $_POST['PartNumber'] . '></td></tr>';
 	} else {
-		echo "></td></tr>";
+		echo '></td></tr>';
 	}
 
 	echo '<tr><td>' . _('Supplier Number') . ':</td>';
-	echo "<td><select name='SupplierIdOp'>";
-	echo "<option selected value='Equals'>" . _('Equals') . '</option>';
-	echo "<option value='LIKE'>" . _('Begins With') . '</option>';
+	echo '<td><select name="SupplierIdOp">';
+	echo '<option selected value="Equals">' . _('Equals') . '</option>';
+	echo '<option value="LIKE">' . _('Begins With') . '</option>';
 	echo '</select>';
-	echo "&nbsp&nbsp<input type='Text' name='SupplierId' size=10 maxlength=10 value=";
+	echo '&nbsp&nbsp<input type="text" name="SupplierId" size=10 maxlength=10 value=';
 	if (isset($_POST['SupplierId'])) {
-		echo $_POST['SupplierId'] . "></td></tr>";
+		echo $_POST['SupplierId'] . '></td></tr>';
 	} else {
-		echo  "></td></tr>";
+		echo  '></td></tr>';
 	}
 
 	echo '<tr><td>' . _('Supplier Name') . ':</td>';
