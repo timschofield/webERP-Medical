@@ -18,7 +18,7 @@ $identifier=$_GET['identifier'];
  */
 
 if (!isset($_SESSION['PO'.$identifier])){
-	header('Location:' . $rootpath . '/PO_Header.php?' . SID);
+	header('Location:' . $rootpath . '/PO_Header.php');
 	exit;
 } //end if (!isset($_SESSION['PO'.$identifier]))
 
@@ -27,7 +27,7 @@ include('includes/header.inc');
 $Maximum_Number_Of_Parts_To_Show=50;
 
 if (!isset($_POST['Commit'])) {
-	echo '<a href="'.$rootpath.'/PO_Header.php?' . SID . 'identifier=' . $identifier. '">' ._('Back To Purchase Order Header') . '</a><br />';
+	echo '<a href="'.$rootpath.'/PO_Header.php?identifier=' . $identifier. '">' ._('Back To Purchase Order Header') . '</a><br />';
 }
 
 // add new request here 08-09-26
@@ -383,7 +383,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 			echo '<br /><br />';
 			prnMsg(_('Purchase Order') . ' ' . $_SESSION['PO'.$identifier]->OrderNo . ' ' . _('has been updated'),'success');
 			if ($_SESSION['PO'.$identifier]->AllowPrintPO==1){
-		 //    echo '<br /><a target="_blank" href="'.$rootpath.'/PO_PDFPurchOrder.php?' . SID . '&OrderNo=' . $_SESSION['PO'.$identifier]->OrderNo . '">' . _('Print Purchase Order') . '</a>';
+		 //    echo '<br /><a target="_blank" href="'.$rootpath.'/PO_PDFPurchOrder.php?OrderNo=' . $_SESSION['PO'.$identifier]->OrderNo . '">' . _('Print Purchase Order') . '</a>';
 			}
 		} /*end of if its a new order or an existing one */
 
@@ -969,7 +969,7 @@ if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
 				<td class="number">' . $DisplayLineTotal . '</td>
 				<td><input type="text" class="date" alt="' .$_SESSION['DefaultDateFormat'].'" name="ReqDelDate' . $POLine->LineNo.'" size="11" value="' .$POLine->ReqDelDate .'"></td>
 				<td>'.$POLine->PODetailRec.'</td>
-				<td><a href="' . $_SERVER['PHP_SELF'] . '?' . SID . 'identifier='.$identifier. '&Delete=' . $POLine->LineNo . '">' . _('Delete') . '</a></td></tr>';
+				<td><a href="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier. '&Delete=' . $POLine->LineNo . '">' . _('Delete') . '</a></td></tr>';
 			$_SESSION['PO'.$identifier]->Total = $_SESSION['PO'.$identifier]->Total + $LineTotal;
 		}
 	}
@@ -1072,8 +1072,7 @@ if (!isset($_GET['Edit'])) {
 		<td><input type="text" name="StockCode" size=15 maxlength=18 value="' . $_POST['StockCode'] . '"></td>
 		</tr>
 		<tr><td></td>
-		<td><font size=3><b>' . _('OR') . ' </b></font><a target="_blank" href="'.$rootpath.'/Stocks.php?"' . SID .
-			 '">' . _('Create a New Stock Item') . '</a></td></tr>
+		<td><font size=3><b>' . _('OR') . ' </b></font><a target="_blank" href="'.$rootpath.'/Stocks.php">' . _('Create a New Stock Item') . '</a></td></tr>
 		</table><br />
 		<div class="centre"><input type=submit name="Search" value="' . _('Search Now') . '">
 		<input type=submit name="NonStockOrder" value="' . _('Order a non stock item') . '">
