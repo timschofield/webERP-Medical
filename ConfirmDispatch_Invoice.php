@@ -17,7 +17,7 @@ include('includes/GetSalesTransGLCodes.inc');
 
 if (!isset($_GET['OrderNumber']) && !isset($_SESSION['ProcessingOrder'])) {
 	/* This page can only be called with an order number for invoicing*/
-	echo '<div class="centre"><a href="' . $rootpath . '/SelectSalesOrder.php?' . SID . '">' . _('Select a sales order to invoice'). '</a></div>';
+	echo '<div class="centre"><a href="' . $rootpath . '/SelectSalesOrder.php">' . _('Select a sales order to invoice'). '</a></div>';
 	echo '<br /><br />';
 	prnMsg( _('This page can only be opened if an order has been selected Please select an order first from the delivery details screen click on Confirm for invoicing'), 'error' );
 	include ('includes/footer.inc');
@@ -262,7 +262,7 @@ echo '<table class="selection">
 			</table>
 			<br />';
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 /***************************************************************
@@ -324,8 +324,7 @@ foreach ($_SESSION['Items']->LineItems as $LnItm) {
 			echo '<td class="number">' . $LnItm->QtyDispatched . '</td>';
 		} else {
 			echo '<td class="number"><input type=hidden name="' . $LnItm->LineNumber . '_QtyDispatched"  value="' .
-				$LnItm->QtyDispatched . '"><a href="' . $rootpath .'/ConfirmDispatchControlled_Invoice.php?' . SID .
-					'&LineNo='. $LnItm->LineNumber.'">' .$LnItm->QtyDispatched . '</a></td>';
+				$LnItm->QtyDispatched . '"><a href="' . $rootpath .'/ConfirmDispatchControlled_Invoice.php?LineNo='. $LnItm->LineNumber.'">' .$LnItm->QtyDispatched . '</a></td>';
 		}
 	} else {
 		if (isset($_POST['ProcessInvoice'])) {
@@ -394,7 +393,7 @@ foreach ($_SESSION['Items']->LineItems as $LnItm) {
 
 	if ($LnItm->Controlled==1){
 		if (!isset($_POST['ProcessInvoice'])) {
-			echo '<td><a href="' . $rootpath . '/ConfirmDispatchControlled_Invoice.php?' . SID . '&LineNo='. $LnItm->LineNumber.'">';
+			echo '<td><a href="' . $rootpath . '/ConfirmDispatchControlled_Invoice.php?LineNo='. $LnItm->LineNumber.'">';
 			if ($LnItm->Serialised==1){
 				echo _('Enter Serial Numbers');
 			} else { /*Just batch/roll/lot control */
@@ -705,7 +704,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 	                prnMsg( _('This order has been changed or invoiced since this delivery was started to be confirmed') . ' ' . _('Processing halted.') . ' ' . _('To enter and confirm this dispatch, it must be re-selected and re-read again to update the changes made by the other user'), 'error');
         	        echo '<br />';
 
-                	echo '<div class="centre"><a href="'. $rootpath . '/SelectSalesOrder.php?' . SID . '">'. _('Select a sales order for confirming deliveries and invoicing'). '</a></div>';
+                	echo '<div class="centre"><a href="'. $rootpath . '/SelectSalesOrder.php?">'. _('Select a sales order for confirming deliveries and invoicing'). '</a></div>';
 
 	                unset($_SESSION['Items']->LineItems);
         	        unset($_SESSION['Items']);
@@ -1623,12 +1622,12 @@ invoices can have a zero amount but there must be a quantity to invoice */
 	echo '<br /><div class="centre">';
 
 	if ($_SESSION['InvoicePortraitFormat']==0){
-		echo '<img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print') . '" alt="">' . ' ' . '<a target="_blank" href="'.$rootpath.'/PrintCustTrans.php?' . SID . 'FromTransNo='.$InvoiceNo.'&InvOrCredit=Invoice&PrintPDF=True">'. _('Print this invoice'). ' (' . _('Landscape') . ')</a><br /><br />';
+		echo '<img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print') . '" alt="">' . ' ' . '<a target="_blank" href="'.$rootpath.'/PrintCustTrans.php?FromTransNo='.$InvoiceNo.'&InvOrCredit=Invoice&PrintPDF=True">'. _('Print this invoice'). ' (' . _('Landscape') . ')</a><br /><br />';
 	} else {
-		echo '<img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print') . '" alt="">' . ' ' . '<a target="_blank" href="'.$rootpath.'/PrintCustTransPortrait.php?' . SID . 'FromTransNo='.$InvoiceNo.'&InvOrCredit=Invoice&PrintPDF=True">'. _('Print this invoice'). ' (' . _('Portrait') . ')</a><br /><br />';
+		echo '<img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print') . '" alt="">' . ' ' . '<a target="_blank" href="'.$rootpath.'/PrintCustTransPortrait.php?FromTransNo='.$InvoiceNo.'&InvOrCredit=Invoice&PrintPDF=True">'. _('Print this invoice'). ' (' . _('Portrait') . ')</a><br /><br />';
 	}
-	echo '<a href="'.$rootpath.'/SelectSalesOrder.php?' . SID . '">'. _('Select another order for invoicing'). '</a><br /><br />';
-	echo '<a href="'.$rootpath.'/SelectOrderItems.php?' . SID . 'NewOrder=Yes">'._('Sales Order Entry').'</a></div><br />';
+	echo '<a href="'.$rootpath.'/SelectSalesOrder.php">'. _('Select another order for invoicing'). '</a><br /><br />';
+	echo '<a href="'.$rootpath.'/SelectOrderItems.php?NewOrder=Yes">'._('Sales Order Entry').'</a></div><br />';
 /*end of process invoice */
 
 
