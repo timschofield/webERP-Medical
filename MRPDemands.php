@@ -318,7 +318,7 @@ function display(&$db,&$StockID,&$DemandID) { //####DISPLAY_DISPLAY_DISPLAY_DISP
 // Display Seach fields at top and Entry form below that. This function is called the first time
 // the page is called, and is also invoked at the end of all of the other functions.
 // echo "<br/>DISPLAY - DemandID = $DemandID<br/>";
-	echo '<form action=' . $_SERVER['PHP_SELF'] . '?' . SID . ' method="post">';
+	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	if (!isset($StockID)) {
 		echo'</font><table cellpadding=3 colspan=4 class=selection><tr>
