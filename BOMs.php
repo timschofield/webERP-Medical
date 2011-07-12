@@ -117,7 +117,7 @@ function DisplayBOMItems($UltimateParent, $Parent, $Component,$Level, $db) {
 				$DrillID='';
 			} else {
 				$DrillText = '<a href="%s&Select=%s">' . _('Drill Down');
-				$DrillLink = $_SERVER['PHP_SELF'] . '?' . SID;
+				$DrillLink = $_SERVER['PHP_SELF'] . '?';
 				$DrillID=$myrow[0];
 			}
 			if ($ParentMBflag!='M' AND $ParentMBflag!='G'){
@@ -145,9 +145,9 @@ function DisplayBOMItems($UltimateParent, $Parent, $Component,$Level, $db) {
 				<td>%s</td>
 				<td>%s</td>
 				<td class=number>%s</td>
-				<td><a href="%s&Select=%s&SelectedComponent=%s">' . _('Edit') . '</a></td>
+				<td><a href="%sSelect=%s&SelectedComponent=%s">' . _('Edit') . '</a></td>
 				<td>'.$DrillText.'</a></td>
-				 <td><a href="%s&Select=%s&SelectedComponent=%s&delete=1&ReSelect=%s">' . _('Delete') . '</a></td>
+				 <td><a href="%sSelect=%s&SelectedComponent=%s&delete=1&ReSelect=%s">' . _('Delete') . '</a></td>
 				 </tr>',
 				$Level1,
 				$myrow[0],
@@ -159,12 +159,12 @@ function DisplayBOMItems($UltimateParent, $Parent, $Component,$Level, $db) {
 				ConvertSQLDate($myrow[6]),
 				$AutoIssue,
 				$QuantityOnHand,
-				$_SERVER['PHP_SELF'] . '?' . SID,
+				$_SERVER['PHP_SELF'] . '?',
 				$Parent,
 				$myrow[0],
 				$DrillLink,
 				$DrillID,
-				$_SERVER['PHP_SELF'] . '?' . SID,
+				$_SERVER['PHP_SELF'] . '?',
 				$Parent,
 				$myrow[0],
 				$UltimateParent);
@@ -414,7 +414,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 			break;
 	}
 
-	echo '<br /><div class=centre><a href=' . $_SERVER['PHP_SELF'] . '?' . SID . '>' . _('Select a Different BOM') . '</a></div><br />';
+	echo '<br /><div class=centre><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Select a Different BOM') . '</a></div><br />';
 	echo '<table class=selection>';
 	// Display Manufatured Parent Items
 	$sql = "SELECT bom.parent,
@@ -433,7 +433,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 	if( DB_num_rows($result) > 0 ) {
 	 echo '<tr><td><div class="centre">'._('Manufactured parent items').' : ';
 	 while ($myrow = DB_fetch_array($result)){
-	 	   echo (($ix)?', ':'').'<a href="'.$_SERVER['PHP_SELF'] . '?' . SID . 'Select='.$myrow['parent'].'">'.
+	 	   echo (($ix)?', ':'').'<a href="'.$_SERVER['PHP_SELF'] . '?Select='.$myrow['parent'].'">'.
 			$myrow['description'].'&nbsp;('.$myrow['parent'].')</a>';
 			$ix++;
 	 } //end while loop
@@ -454,7 +454,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 		echo (($reqnl)?'<br />':'').'<tr><td><div class="centre">'._('Assembly parent items').' : ';
 	 	$ix = 0;
 	 	while ($myrow = DB_fetch_array($result)){
-	 	   echo (($ix)?', ':'').'<a href="'.$_SERVER['PHP_SELF'] . '?' . SID . 'Select='.$myrow['parent'].'">'.
+	 	   echo (($ix)?', ':'').'<a href="'.$_SERVER['PHP_SELF'] . '?Select='.$myrow['parent'].'">'.
 			$myrow['description'].'&nbsp;('.$myrow['parent'].')</a>';
 			$ix++;
 	 	} //end while loop
@@ -474,7 +474,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 		echo (($reqnl)?'<br />':'').'<tr><td><div class="centre">'._('Kit sets').' : ';
 	 	$ix = 0;
 	 	while ($myrow = DB_fetch_array($result)){
-	 	   echo (($ix)?', ':'').'<a href="'.$_SERVER['PHP_SELF'] . '?' . SID . 'Select='.$myrow['parent'].'">'.
+	 	   echo (($ix)?', ':'').'<a href="'.$_SERVER['PHP_SELF'] . '?Select='.$myrow['parent'].'">'.
 			$myrow['description'].'&nbsp;('.$myrow['parent'].')</a>';
 			$ix++;
 	 	} //end while loop
@@ -549,7 +549,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 
 	if (! isset($_GET['delete'])) {
 
-		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?' . SID . '&Select=' . $SelectedParent .'">';
+		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?Select=' . $SelectedParent .'">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 		if (isset($_GET['SelectedComponent']) and $InputError !=1) {
