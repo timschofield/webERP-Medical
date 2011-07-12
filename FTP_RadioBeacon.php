@@ -71,12 +71,12 @@ while ($myrow=DB_fetch_array($SalesOrdersResult)) {
 		$k=1;
 	}
 
-	$FTPDispatchNote = $_SERVER['PHP_SELF'] . '?' . SID . '&OrderNo=' . $myrow['orderno'];
+	$FTPDispatchNote = $_SERVER['PHP_SELF'] . '?OrderNo=' . $myrow['orderno'];
 	$FormatedDelDate = ConvertSQLDate($myrow['deliverydate']);
 	$FormatedOrderDate = ConvertSQLDate($myrow['orddate']);
 	$FormatedOrderValue = number_format($myrow['ordervalue'],2);
 	$FormatedDateLastSent = ConvertSQLDate($myrow['datepackingslipprinted']);
-	$ModifyPage = $rootpath . 'SelectOrderItems.php?' . SID . '&ModifyOrderNumber=' . $myrow['orderno'];
+	$ModifyPage = $rootpath . 'SelectOrderItems.php?&ModifyOrderNumber=' . $myrow['orderno'];
 
 	if ($myrow['printedpackingslip'] ==1){
 		printf('<td><font size=2><a href="%s">%s</a></font></td>
