@@ -8,7 +8,7 @@ $title = _('General Ledger Transaction Inquiry');
 include('includes/header.inc');
 
 // Page Border
-$menuUrl = '<a href="'. $rootpath . '/index.php?&Application=GL'. SID .'">' . _('General Ledger Menu') . '</a></div>';
+$menuUrl = '<a href="'. $rootpath . '/index.php?Application=GL">' . _('General Ledger Menu') . '</a></div>';
 
 if ( !isset($_GET['TypeID']) OR !isset($_GET['TransNo']) )
 {
@@ -86,7 +86,7 @@ if ( !isset($_GET['TypeID']) OR !isset($_GET['TransNo']) )
 					}
 
 					if ( $TransRow['account'] == $_SESSION['CompanyRecord']['debtorsact'] )	{
-							$URL = $rootpath . '/CustomerInquiry.php?' . SID . '&CustomerID=';
+							$URL = $rootpath . '/CustomerInquiry.php?CustomerID=';
 							$date = '&TransAfterDate=' . $TranDate;
 
 							$DetailSQL = "SELECT debtortrans.debtorno,
@@ -101,7 +101,7 @@ if ( !isset($_GET['TypeID']) OR !isset($_GET['TransNo']) )
 											AND debtortrans.transno = '" . $_GET['TransNo']. "'";
 							$DetailResult = DB_query($DetailSQL,$db);
 					} elseif ( $TransRow['account'] == $_SESSION['CompanyRecord']['creditorsact'] )	{
-							$URL = $rootpath . '/SupplierInquiry.php?' . SID . '&SupplierID=';
+							$URL = $rootpath . '/SupplierInquiry.php?SupplierID=';
 							$date = '&FromDate=' . $TranDate;
 
 							$DetailSQL = "SELECT supptrans.supplierno,
@@ -116,7 +116,7 @@ if ( !isset($_GET['TypeID']) OR !isset($_GET['TransNo']) )
 											AND supptrans.transno = '" . $_GET['TransNo'] . "'";
 							$DetailResult = DB_query($DetailSQL,$db);
 					} else {
-							$URL = $rootpath . '/GLAccountInquiry.php?' . SID . '&Account=' . $TransRow['account'];
+							$URL = $rootpath . '/GLAccountInquiry.php?Account=' . $TransRow['account'];
 
 							if( mb_strlen($TransRow['narrative'])==0 ) {
 								$TransRow['narrative'] = '&nbsp';
