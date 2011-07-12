@@ -209,8 +209,8 @@ if (!isset($_GET['Edit'])) {
 					<td class="number">%s</td>
 					<td class=number>%s ' . _('days') . '</td>
 					<td>%s</td>
-					<td><a href="%s?%s&StockID=%s&SupplierID=%s&Edit=1&EffectiveFrom=%s">' . _('Edit') . '</a></td>
-					<td><a href="%s?%s&StockID=%s&SupplierID=%s&Delete=1&EffectiveFrom=%s" onclick="return confirm(\'' . _('Are you sure you wish to delete this suppliers price?') . '\');">' . _('Delete') . '</a></td>
+					<td><a href="%s?StockID=%s&SupplierID=%s&Edit=1&EffectiveFrom=%s">' . _('Edit') . '</a></td>
+					<td><a href="%s?StockID=%s&SupplierID=%s&Delete=1&EffectiveFrom=%s" onclick="return confirm(\'' . _('Are you sure you wish to delete this suppliers price?') . '\');">' . _('Delete') . '</a></td>
 					</tr>',
 					$myrow['suppname'],
 					number_format($myrow['price'], 3),
@@ -222,12 +222,10 @@ if (!isset($_GET['Edit'])) {
 					$myrow['leadtime'],
 					$DisplayPreferred,
 					$_SERVER['PHP_SELF'],
-					SID,
 					$StockID,
 					$myrow['supplierno'],
 					$myrow['effectivefrom'],
 					$_SERVER['PHP_SELF'],
-					SID,
 					$StockID,
 					$myrow['supplierno'],
 					$myrow['effectivefrom']
@@ -262,7 +260,7 @@ if (isset($SupplierID) AND $SupplierID != '' AND !isset($_POST['SearchSupplier']
 			$title . ' ' . _('For Stock Code') . ' - ' . $StockID . '</p><br />';
 	}
 	if (!isset($_POST['SearchSupplier'])) {
-		echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post><table cellpadding=3 colspan=4 class=selection><tr>';
+		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post><table cellpadding=3 colspan=4 class=selection><tr>';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<input type="hidden" name="StockID" value="' . $StockID . '">';
 		echo '<td>' . _('Text in the Supplier') . ' <b>' . _('NAME') . '</b>:</font></td>';
@@ -526,10 +524,10 @@ if (!isset($SuppliersResult)) {
 	echo '</div>';
 	echo '<div class="centre">';
 	if (isset($StockLocation) and isset($StockID) AND mb_strlen($StockID) != 0) {
-		echo '<br /><a href="' . $rootpath . '/StockStatus.php?' . SID . '&StockID=' . $StockID . '">' . _('Show Stock Status') . '</a>';
-		echo '<br /><a href="' . $rootpath . '/StockMovements.php?' . SID . '&StockID=' . $StockID . '&StockLocation=' . $StockLocation . '">' . _('Show Stock Movements') . '</a>';
-		echo '<br /><a href="' . $rootpath . '/SelectSalesOrder.php?' . SID . '&SelectedStockItem=' . $StockID . '&StockLocation=' . $StockLocation . '">' . _('Search Outstanding Sales Orders') . '</a>';
-		echo '<br /><a href="' . $rootpath . '/SelectCompletedOrder.php?' . SID . '&SelectedStockItem=' . $StockID . '">' . _('Search Completed Sales Orders') . '</a>';
+		echo '<br /><a href="' . $rootpath . '/StockStatus.php?StockID=' . $StockID . '">' . _('Show Stock Status') . '</a>';
+		echo '<br /><a href="' . $rootpath . '/StockMovements.php?StockID=' . $StockID . '&StockLocation=' . $StockLocation . '">' . _('Show Stock Movements') . '</a>';
+		echo '<br /><a href="' . $rootpath . '/SelectSalesOrder.php?SelectedStockItem=' . $StockID . '&StockLocation=' . $StockLocation . '">' . _('Search Outstanding Sales Orders') . '</a>';
+		echo '<br /><a href="' . $rootpath . '/SelectCompletedOrder.php?SelectedStockItem=' . $StockID . '">' . _('Search Completed Sales Orders') . '</a>';
 	}
 	echo '</form></div>';
 }
