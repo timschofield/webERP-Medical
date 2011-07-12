@@ -104,9 +104,9 @@ If (isset($_POST['PrintPDF'])
 	  $title = _('Aged Supplier Account Analysis') . ' - ' . _('Problem Report') ;
 	  include("includes/header.inc");
 	  prnMsg(_('The Supplier details could not be retrieved by the SQL because') .  ' ' . DB_error_msg($db),'error');
-	   echo "<br /><a href='$rootpath/index.php?" . SID . "'>" . _('Back to the menu') . '</a>';
+	   echo '<br /><a href="'.$rootpath.'/index.php">' . _('Back to the menu') . '</a>';
 	   if ($debug==1){
-		echo "<br />$SQL";
+		echo '<br />'.$SQL;
 	   }
 	   include('includes/footer.inc');
 	   exit;
@@ -279,7 +279,7 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/m
 
 	/*if $FromCriteria is not set then show a form to allow input	*/
 
-		echo "<form sction='" . $_SERVER['PHP_SELF'] . '?' . SID . "' method='POST'><table>";
+		echo '<form sction="' . $_SERVER['PHP_SELF'] . '" method="POST"><table>';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 		echo '<tr><td>' . _('From Supplier Code') . ":</font></td>
