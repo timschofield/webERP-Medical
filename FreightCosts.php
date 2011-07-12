@@ -235,8 +235,8 @@ if (!isset($SelectedFreightCost) AND isset($LocationFrom) AND isset($ShipperID))
 			<td class=number>%s</td>
 			<td class=number>%s</td>
 			<td class=number>%s</td>
-			<td><a href="%s&SelectedFreightCost=%s&LocationFrom=%s&ShipperID=%s">' . _('Edit') . '</td>
-			<td><a href="%s&SelectedFreightCost=%s&LocationFrom=%s&ShipperID=%s&delete=yes">' . _('Delete') . '</td></tr>',
+			<td><a href="%sSelectedFreightCost=%s&LocationFrom=%s&ShipperID=%s">' . _('Edit') . '</td>
+			<td><a href="%sSelectedFreightCost=%s&LocationFrom=%s&ShipperID=%s&delete=yes">' . _('Delete') . '</td></tr>',
 			$myrow[1],
 			$myrow[2],
 			$myrow[3],
@@ -244,11 +244,11 @@ if (!isset($SelectedFreightCost) AND isset($LocationFrom) AND isset($ShipperID))
 			$myrow[5],
 			$myrow[6],
 			$myrow[7],
-			$_SERVER['PHP_SELF'] . '?' . SID,
+			$_SERVER['PHP_SELF'] . '?',
 			$myrow[0],
 			$LocationFrom,
 			$ShipperID,
-			$_SERVER['PHP_SELF'] . '?' . SID,
+			$_SERVER['PHP_SELF'] . '?',
 			$myrow[0],
 			$LocationFrom,
 			$ShipperID);
