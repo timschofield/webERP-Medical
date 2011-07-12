@@ -194,20 +194,20 @@ or deletion of the records*/
 			$DueAfterText = $myrow[2] . ' ' . _('days');
 		}
 
-	printf("<tr><td>%s</td>
+	printf('<tr><td>%s</td>
 	        <td>%s</td>
 		<td>%s</td>
 		<td>%s</td>
-		<td><a href=\"%s&SelectedTerms=%s\">" . _('Edit') . "</a></td>
-		<td><a href=\"%s&SelectedTerms=%s&delete=1\">" . _('Delete') . "</a></td>
-		</tr>",
+		<td><a href="%s&SelectedTerms=%s">' . _('Edit') . '</a></td>
+		<td><a href="%s&SelectedTerms=%s&delete=1">' . _('Delete') . '</a></td>
+		</tr>',
 		$myrow[0],
 		$myrow[1],
 		$FollMthText,
 		$DueAfterText,
-		$_SERVER['PHP_SELF'] . '?' . SID,
+		$_SERVER['PHP_SELF'] . '?',
 		$myrow[0],
-		$_SERVER['PHP_SELF']. '?' . SID,
+		$_SERVER['PHP_SELF']. '?',
 		$myrow[0]);
 
 	} //END WHILE LIST LOOP
@@ -215,12 +215,12 @@ or deletion of the records*/
 } //end of ifs and buts!
 
 if (isset($SelectedTerms)) {
-	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '?' . SID  .'">' . _('Show all Payment Terms Definitions') . '</a></div>';
+	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Show all Payment Terms Definitions') . '</a></div>';
 }
 
 if (!isset($_GET['delete'])) {
 
-	echo '<form method="post" action=' . $_SERVER['PHP_SELF'] . '?' . SID . '>';
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (isset($SelectedTerms)) {
