@@ -313,7 +313,7 @@ if (DB_num_rows($result) == 0) {
 
 echo '</table></tr></table><br />';
 
-echo '<form method="post" action=' . $_SERVER['PHP_SELF'] . '?' . SID . '>';
+echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo '<input type=hidden name="Item" value="' . $Item . '">';
 
