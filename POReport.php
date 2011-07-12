@@ -739,25 +739,25 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 				' ');
 		} // End of if ($_POST['ReportType']
 		echo '</table>';
-		echo "<form action=" . $_SERVER['PHP_SELF'] . "?" . SID ." method=post>";
+		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-		echo "<input type=hidden name='ReportType' value=".$_POST['ReportType'].">";
-		echo "<input type=hidden name='DateType' value=".$_POST['DateType'].">";
-		echo "<input type=hidden name='FromDate' value=".$_POST['FromDate'].">";
-		echo "<input type=hidden name='ToDate' value=".$_POST['ToDate'].">";
-		echo "<input type=hidden name='PartNumberOp' value=".$_POST['PartNumberOp'].">";
-		echo "<input type=hidden name='PartNumber' value=".$_POST['PartNumber'].">";
-		echo "<input type=hidden name='SupplierIdOp' value=".$_POST['SupplierIdOp'].">";
-		echo "<input type=hidden name='SupplierId' value=".$_POST['SupplierId'].">";
-		echo "<input type=hidden name='SupplierNameOp' value=".$_POST['SupplierNameOp'].">";
-		echo "<input type=hidden name='SupplierName' value=".$_POST['SupplierName'].">";
-		echo "<input type=hidden name='OrderNo' value=".$_POST['OrderNo'].">";
-		echo "<input type=hidden name='LineStatus' value=".$_POST['LineStatus'].">";
-		echo "<input type=hidden name='Category' value=".$_POST['Category'].">";
-		echo "<input type=hidden name='SortBy' value=".$_POST['SortBy'].">";
-		echo "<input type=hidden name='SummaryType' value=".$_POST['SummaryType'].">";
-		echo "<br /><div class=centre><input type='submit' name='submitcsv' value='" . _('Export as csv file') . "'></div></td>";
-		echo "</form>";
+		echo '<input type="hidden" name="ReportType" value="'.$_POST['ReportType'].'">';
+		echo '<input type="hidden" name="DateType" value="'.$_POST['DateType'].'">';
+		echo '<input type="hidden" name="FromDate" value="'.$_POST['FromDate'].'">';
+		echo '<input type="hidden" name="ToDate" value="'.$_POST['ToDate'].'">';
+		echo '<input type="hidden" name="PartNumberOp" value="'.$_POST['PartNumberOp'].'">';
+		echo '<input type="hidden" name="PartNumber" value="'.$_POST['PartNumber'].'">';
+		echo '<input type="hidden" name="SupplierIdOp" value="'.$_POST['SupplierIdOp'].'">';
+		echo '<input type="hidden" name="SupplierId" value="'.$_POST['SupplierId'].'">';
+		echo '<input type="hidden" name="SupplierNameOp" value="'.$_POST['SupplierNameOp'].'">';
+		echo '<input type="hidden" name="SupplierName" value="'.$_POST['SupplierName'].'">';
+		echo '<input type="hidden" name="OrderNo" value="'.$_POST['OrderNo'].'">';
+		echo '<input type="hidden" name="LineStatus" value="'.$_POST['LineStatus'].'">';
+		echo '<input type="hidden" name="Category" value="'.$_POST['Category'].'">';
+		echo '<input type="hidden" name="SortBy" value="'.$_POST['SortBy'].'">';
+		echo '<input type="hidden" name="SummaryType" value="'.$_POST['SummaryType'].'">';
+		echo '<br /><div class=centre><input type="submit" name="submitcsv" value="' . _('Export as csv file') . '"></div></td>';
+		echo '</form>';
 	} // End of if inputerror != 1
 } // End of function submit()
 
