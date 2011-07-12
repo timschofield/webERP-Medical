@@ -408,5 +408,5 @@ session_destroy();
 
 header('Location: ' . $path_to_root . '/index.php');
 ini_set('max_execution_time', '60');
-echo "<META HTTP-EQUIV='Refresh' CONTENT='0; URL=" . $path_to_root . '/index.php?' . SID . "'>";
+echo '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=' . $path_to_root . '/index.php">';
 ?>
