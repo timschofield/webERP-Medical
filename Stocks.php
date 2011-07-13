@@ -612,7 +612,9 @@ if (!isset($StockID) or $StockID=='' or isset($_POST['UpdateCategories'])) {
 					taxcatid,
 					decimalplaces,
 					appendfile,
-					nextserialno
+					nextserialno,
+					pansize,
+					shrinkfactor
 		FROM stockmaster
 		WHERE stockid = '".$StockID."'";
 
@@ -637,6 +639,8 @@ if (!isset($StockID) or $StockID=='' or isset($_POST['UpdateCategories'])) {
 	$_POST['DecimalPlaces'] = $myrow['decimalplaces'];
 	$_POST['ItemPDF']  = $myrow['appendfile'];
 	$_POST['NextSerialNo'] = $myrow['nextserialno'];
+	$_POST['Pansize']  = $myrow['pansize'];
+	$_POST['ShrinkFactor'] = $myrow['shrinkfactor'];
 
 	echo '<tr><td>' . _('Item Code') . ':</td><td>'.$StockID.'</td></tr>'. "\n";
 	echo '<input type="Hidden" name="StockID" value='.$StockID.'>'. "\n";
