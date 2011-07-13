@@ -36,6 +36,8 @@ if (isset($_POST['ChangeItem'])) {
 }
 if (isset($_POST['Dispensary'])) {
 	$_SESSION['Items']['Dispensary']=$_POST['Dispensary'];
+} else {
+	$_SESSION['Items']['Dispensary']=$_SESSION['UserStockLocation'];
 }
 
 if (isset($_POST['UpdateItems'])) {
@@ -86,8 +88,8 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 											'" . DB_escape_string($_POST['Comments']) ."',
 											'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 											'1',
-											'" . $_POST['Dispensary'] . "',
-											'" . $_POST['Dispensary'] ."',
+											'" . $_SESSION['Items']['Dispensary'] . "',
+											'" . $_SESSION['Items']['Dispensary'] ."',
 											'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 											'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 											0
@@ -188,7 +190,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 						'" . $_SESSION['Items'][$i]['StockID'] . "',
 						 10,
 						'" . $InvoiceNo . "',
-						'" . $_POST['Dispensary'] . "',
+						'" . $_SESSION['Items']['Dispensary'] . "',
 						'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 						'" . $_POST['PatientNo'] . "',
 						'" . $_POST['BranchNo'] . "',
