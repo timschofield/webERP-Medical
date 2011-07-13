@@ -12,8 +12,8 @@ if (isset($_POST['submit'])) {
 	}
 
 	// MRP - Create levels table based on bom
-	echo '</br>'  ._('Start time') . ': ' . date('h:i:s') . '</br>';
-	echo '</br>' . _('Initialising tables .....') . '</br>';
+	echo '<br />'  ._('Start time') . ': ' . date('h:i:s') . '<br />';
+	echo '<br />' . _('Initialising tables .....') . '<br />';
 	flush();
 	$result = DB_query("DROP TABLE IF EXISTS tempbom",$db);
 	$result = DB_query("DROP TABLE IF EXISTS passbom",$db);
@@ -57,7 +57,7 @@ if (isset($_POST['submit'])) {
 					 FROM bom LEFT JOIN bom as bom2 ON bom.parent = bom2.component
 			  WHERE bom2.component IS NULL";
 	$result = DB_query($sql,$db);
-	//echo "</br>sql is $sql</br>";
+	//echo "<br />sql is $sql<br />";
 	// This while routine finds the other levels as long as $compctr - the
 	// component counter - finds there are more components that are used as
 	// assemblies at lower levels
@@ -460,14 +460,14 @@ if (isset($_POST['submit'])) {
 	for ($level = $maxlevel; $level >= $minlevel; $level--) {
 		$sql = "SELECT * FROM levels WHERE level = '" . $level ."' LIMIT 50000"; //should cover most eventualities!! ... yes indeed :-)
 
-		prnMsg('</br>------ ' . _('Processing level') .' ' . $level . ' ------','info');
+		prnMsg('<br />------ ' . _('Processing level') .' ' . $level . ' ------','info');
 		flush();
 		$result = DB_query($sql,$db);
 		while ($myrow=DB_fetch_array($result)) {
 				LevelNetting($db,$myrow['part'],$myrow['eoq'],$myrow['pansize'],$myrow['shrinkfactor']);
 		}  //end of while loop
 	} // end of for
-	echo '</br>' . _('End time') . ': ' . date('h:i:s') . '</br>';
+	echo '<br />' . _('End time') . ': ' . date('h:i:s') . '<br />';
 
 	// Create mrpparameters table
 	$sql = "DROP TABLE IF EXISTS mrpparameters";
@@ -581,7 +581,7 @@ if (isset($_POST['submit'])) {
 	echo '<td><input type="checkbox" name="pansizeflag" value="y" checked></td></tr>';
 	echo '<tr><td>' ._('Use Shrinkage?') . ':</td>';
 	echo '<td><input type="checkbox" name="shrinkageflag" value="y" checked></td></tr>';
-	echo '</table></td></tr></table><div class="centre"></br></br><input type="submit" name="submit" value="' . _('Run MRP') . '"></div>';
+	echo '</table></td></tr></table><div class="centre"><br /><br /><input type="submit" name="submit" value="' . _('Run MRP') . '"></div>';
 	echo '</form>';
 }  // End of Main program logic -------------------------------------------------------
 
@@ -591,7 +591,7 @@ function LevelNetting(&$db,$part,$eoq,$PanSize,$ShrinkFactor) {
 // Create an array of mrprequirements and an array of mrpsupplies, then read through
 // them seeing if all requirements are covered by supplies. Create a planned order
 // for any unmet requirements. Change dates if necessary for the supplies.
-	//echo '</br>Part is ' . "$part" . '</br>';
+	//echo '<br />Part is ' . "$part" . '<br />';
 
 	// Get decimal places from stockmaster for rounding of shrinkage factor
 	$sql = "SELECT decimalplaces FROM stockmaster WHERE stockid = '" . $part . "'";
