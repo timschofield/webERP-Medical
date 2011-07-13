@@ -32,7 +32,7 @@ if ((! isset($_POST['FromDate']) AND ! isset($_POST['ToDate'])) OR isset($_POST[
 	}
 
 	/*Show a form to allow input of criteria for Tabs to show */
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	echo '<tr><td>' . _('Code Of Petty Cash Tab') . ':</td><td><select name="SelectedTabs">';
 
 	if ($_SESSION['AccessLevel'] >= 15){ // superuser can supervise the supervisors
@@ -61,13 +61,13 @@ if ((! isset($_POST['FromDate']) AND ! isset($_POST['ToDate'])) OR isset($_POST[
 
 	echo '</select></td></tr>';
 	echo'<tr><td>' . _('From Date :') . '</td><td>';
-	echo '<input tabindex="2" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="TEXT" name="FromDate" maxlength="10" size="11" value="' . $_POST['FromDate'] . '">';
+	echo '<input tabindex="2" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="text" name="FromDate" maxlength="10" size="11" value="' . $_POST['FromDate'] . '" />';
 	echo '</td></tr>';
 	echo '<tr><td>' . _('To Date:') .'</td><td>';
-	echo '<input tabindex="3" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="TEXT" name="ToDate" maxlength="10" size="11" value="' . $_POST['ToDate'] . '">';
+	echo '<input tabindex="3" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="text" name="ToDate" maxlength="10" size="11" value="' . $_POST['ToDate'] . '" />';
 	echo '</td></tr></table><br />';
-	echo '<div class="centre"><input type=submit Name="ShowTB" Value="' . _('Show HTML') .'">';
-	echo '<input type=submit Name="PrintPDF" Value="'._('PrintPDF').'"></div>';
+	echo '<div class="centre"><input type="submit" name="ShowTB" value="' . _('Show HTML') .'" />';
+	echo '<input type="submit" name="PrintPDF" value="'._('PrintPDF').'" /></div>';
 
 } else if (isset($_POST['PrintPDF'])) {
 
@@ -236,9 +236,10 @@ if (DB_error_no($db)!=0){
 	$SQL_FromDate = FormatDateForSQL($_POST['FromDate']);
 	$SQL_ToDate = FormatDateForSQL($_POST['ToDate']);
 
-	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<input type=hidden name="FromDate" value="' . $_POST['FromDate'] . '"><input type=hidden name="ToDate" value="' . $_POST['ToDate'] . '">';
+	echo '<input type="hidden" name="FromDate" value="' . $_POST['FromDate'] . '" />
+		<input type="hidden" name="ToDate" value="' . $_POST['ToDate'] . '" />';
 
 	$SqlTabs = "SELECT * FROM pctabs
 			WHERE tabcode='".$SelectedTabs."'";
@@ -250,24 +251,32 @@ if (DB_error_no($db)!=0){
 
 	$Tabs=DB_fetch_array($TabResult);
 
-	echo '<br /><table class=selection>';
+	echo '<br /><table class="selection">';
 
 	echo '<tr><td>' . _('Tab Code') . '</td>
 				<td>:</td>
-				<td width=200>' . ''.$SelectedTabs.'</td>'  .
-				'<td>' . _('From') . '</td><td>:</td><td>' .
-			''.$_POST['FromDate'].'</td></tr>';
+				<td width=200>' . ''.$SelectedTabs.'</td>
+				<td>' . _('From') . '</td>
+				<td>:</td>
+				<td>' .''.$_POST['FromDate'].'</td>
+			</tr>';
 
 	echo '<tr><td>' . _('User') . '</td>
 				<td>:</td>
-				<td>' . ''.$Tabs['usercode'].'</td>'.
-				'<td>' . _('To') . '</td><td>:</td><td>' .
-			''.$_POST['ToDate'].'</td></tr>';
+				<td>' . ''.$Tabs['usercode'].'</td>
+				<td>' . _('To') . '</td>
+				<td>:</td>
+				<td>' .''.$_POST['ToDate'].'</td>
+			</tr>';
 
-	echo '<tr><td>' . _('Authorizer') . '</td><td>:</td><td>' . ''.$Tabs['authorizer'].'</td>
+	echo '<tr><td>' . _('Authorizer') . '</td>
+				<td>:</td>
+				<td>' . ''.$Tabs['authorizer'].'</td>
 			</tr>';
-	echo '<tr><td>' . _('Currency') . '</td><td>:</td><td>' . ''.$Tabs['currency'].'</td>
-			</tr>';
+	echo '<tr><td>' . _('Currency') . '</td>
+			<td>:</td>
+			<td>' . ''.$Tabs['currency'].'</td>
+		</tr>';
 
 	$SqlBalance = "SELECT SUM(amount)
 			FROM pcashdetails
@@ -282,7 +291,10 @@ if (DB_error_no($db)!=0){
 		$Balance['0']=0;
 	}
 
-	echo '<tr><td>' . _('Balance before ') . ''.$_POST['FromDate'].'</td><td>:</td><td>' . ''.$Balance['0'].' '.$Tabs['currency'].'</td></tr>';
+	echo '<tr><td>' . _('Balance before ') . ''.$_POST['FromDate'].'</td>
+				<td>:</td>
+				<td>' . ''.$Balance['0'].' '.$Tabs['currency'].'</td>
+			</tr>';
 
 	$SqlBalanceNotAut = "SELECT SUM(amount)
 			FROM pcashdetails
@@ -298,7 +310,10 @@ if (DB_error_no($db)!=0){
 		$BalanceNotAut['0']=0;
 	}
 
-	echo '<tr><td>' . _('Total not authorized before ') . ''.$_POST['FromDate'].'</td><td>:</td><td>' . ''.$BalanceNotAut['0'].' '.$Tabs['currency'].'</td></tr>';
+	echo '<tr><td>' . _('Total not authorized before ') . ''.$_POST['FromDate'].'</td>
+			<td>:</td>
+			<td>' . ''.$BalanceNotAut['0'].' '.$Tabs['currency'].'</td>
+		</tr>';
 
 
 	echo '</table>';
@@ -318,15 +333,15 @@ if (DB_error_no($db)!=0){
 				 _('No Petty Cash movements for this tab were returned by the SQL because'),
 				 _('The SQL that failed was:'));
 
-	echo '<br /><table class=selection>';
+	echo '<br /><table class="selection">';
 	echo '<tr>
-		<th>' . _('Date Of Expense') . '</th>
-		<th>' . _('Expense Description') . '</th>
-		<th>' . _('Amount') . '</th>
-		<th>' . _('Notes') . '</th>
-		<th>' . _('Receipt') . '</th>
-		<th>' . _('Date Authorized') . '</th>
-	</tr>';
+			<th>' . _('Date Of Expense') . '</th>
+			<th>' . _('Expense Description') . '</th>
+			<th>' . _('Amount') . '</th>
+			<th>' . _('Notes') . '</th>
+			<th>' . _('Receipt') . '</th>
+			<th>' . _('Date Authorized') . '</th>
+		</tr>';
 
 	$j = 1;
 	$k=0; //row colour counter
@@ -353,32 +368,32 @@ if (DB_error_no($db)!=0){
 	}
 	if ($myrow['5'] != '0000-00-00'){
 		printf('<td>%s</td>
-			<td>%s</td>
-			<td class=number>%s</td>
-			<td>%s</td>
-			<td>%s</td>
-			<td>%s</td>
+				<td>%s</td>
+				<td class="number">%s</td>
+				<td>%s</td>
+				<td>%s</td>
+				<td>%s</td>
 			</tr>',
-			ConvertSQLDate($myrow['2']),
-			$Description['0'],
-			number_format($myrow['4'],2),
-			$myrow['7'],
-			$myrow['8'],
-			ConvertSQLDate($myrow['5']));
+				ConvertSQLDate($myrow['2']),
+				$Description['0'],
+				number_format($myrow['4'],2),
+				$myrow['7'],
+				$myrow['8'],
+				ConvertSQLDate($myrow['5']));
 	}else{
 		printf('<td>%s</td>
-			<td>%s</td>
-			<td class=number>%s</td>
-			<td>%s</td>
-			<td>%s</td>
-			<td>%s</td>
+				<td>%s</td>
+				<td class="number">%s</td>
+				<td>%s</td>
+				<td>%s</td>
+				<td>%s</td>
 			</tr>',
-			ConvertSQLDate($myrow['2']),
-			$Description['0'],
-			number_format($myrow['4'],2),
-			$myrow['7'],
-			$myrow['8'],
-			'          ');
+				ConvertSQLDate($myrow['2']),
+				$Description['0'],
+				number_format($myrow['4'],2),
+				$myrow['7'],
+				$myrow['8'],
+				'          ');
 	}
 
 	}
@@ -395,11 +410,13 @@ if (DB_error_no($db)!=0){
 		$Amount[0]=0;
 	}
 
-	echo '<tr><td colspan=2 style=text-align:right >' . _('Balance At') . ' '.$_POST['ToDate'].':</td>
-				<td>'.number_format($Amount[0],2).' </td><td>'.$Tabs['currency'].'</td></tr>';
+	echo '<tr><td colspan="2" style="text-align:right">' . _('Balance At') . ' '.$_POST['ToDate'].':</td>
+				<td>'.number_format($Amount[0],2).' </td>
+				<td>'.$Tabs['currency'].'</td>
+			</tr>';
 
 	echo '</table>';
-	echo '<br /><div class="centre"><input type=submit Name="SelectDifferentDate" Value="' . _('Select A Different Date') . '"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="SelectDifferentDate" value="' . _('Select A Different Date') . '"></div>';
 }
 echo '</form>';
 include('includes/footer.inc');
