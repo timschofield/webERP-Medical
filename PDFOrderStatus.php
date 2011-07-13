@@ -9,18 +9,18 @@ include('includes/SQL_CommonFunctions.inc');
 
 $InputError=0;
 
-if (isset($_POST['FromDate']) AND !Is_Date($_POST['FromDate'])){
+if (isset($_POST['FromDate']) and !Is_Date($_POST['FromDate'])){
 	$msg = _('The date from must be specified in the format') . ' ' . $_SESSION['DefaultDateFormat'];
 	$InputError=1;
 	unset($_POST['FromDate']);
 }
-if (isset($_POST['ToDate']) AND !Is_Date($_POST['ToDate'])){
+if (isset($_POST['ToDate']) and !Is_Date($_POST['ToDate'])){
 	$msg = _('The date to must be specified in the format') . ' ' . $_SESSION['DefaultDateFormat'];
 	$InputError=1;
 	unset($_POST['ToDate']);
 }
 
-if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate'])){
+if (!isset($_POST['FromDate']) or !isset($_POST['ToDate'])){
 
 	$title = _('Order Status Report');
 	include ('includes/header.inc');
@@ -34,10 +34,10 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate'])){
 
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<table class=selection><tr><td>' . _('Enter the date from which orders are to be listed') . ':</td><td><input type=text class="date" alt="'.
-		$_SESSION['DefaultDateFormat'].'" name="FromDate" maxlength=10 size=10 value="' . Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m'),Date('d')-1,Date('y'))) . '"></td></tr>';
+	echo '<table class="selection"><tr><td>' . _('Enter the date from which orders are to be listed') . ':</td><td><input type="text" class="date" alt="'.
+		$_SESSION['DefaultDateFormat'].'" name="FromDate" maxlength="10" size="10" value="' . Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m'),Date('d')-1,Date('y'))) . '" /></td></tr>';
 	echo '<tr><td>' . _('Enter the date to which orders are to be listed') . ':</td><td>';
-	echo '<input type=text class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="ToDate" maxlength=10 size=10 value="' . Date($_SESSION['DefaultDateFormat']) . '"></td></tr>';
+	echo '<input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="ToDate" maxlength="10" size="10" value="' . Date($_SESSION['DefaultDateFormat']) . '" /></td></tr>';
 	echo '<tr><td>' . _('Inventory Category') . '</td><td>';
 
 	$sql = "SELECT categorydescription, categoryid FROM stockcategory WHERE stocktype<>'D' AND stocktype<>'L'";
@@ -48,7 +48,7 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate'])){
 	echo '<option selected value="All">' . _('Over All Categories') . '</option>';
 
 	while ($myrow=DB_fetch_array($result)){
-		echo '<option value=' . $myrow['categoryid'] . '>' . $myrow['categorydescription'] . '</option>';
+		echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	}
 	echo '</select></td></tr>';
 
@@ -64,7 +64,7 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate'])){
 	echo '<tr><td>' . _('Back Order Only') . ':</td><td><select name="BackOrders">';
 	echo '<option selected value="Yes">' . _('Only Show Back Orders') . '</option>';
 	echo '<option value="No">' . _('Show All Orders') . '</option>';
-	echo '</select></td></tr></table><br /><div class="centre"><input type=submit name="Go" value="' . _('Create PDF') . '"></div>';
+	echo '</select></td></tr></table><br /><div class="centre"><input type="submit" name="Go" value="' . _('Create PDF') . '" /></div>';
 
 	include('includes/footer.inc');
 	exit;
