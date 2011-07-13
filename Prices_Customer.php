@@ -43,7 +43,7 @@ $result = DB_query("SELECT debtorsmaster.name,
 $myrow = DB_fetch_row($result);
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') .
 		'" alt="" />' . _('Special Customer Prices').'</p>';
-echo '<p class="page_title_text"><font color=BLUE><b>' . $myrow[0] . ' ' . _('in') . ' ' . $myrow[1] . '<br />' . ' ' . _('for') . ' ';
+echo '<p class="page_title_text"><font color="blue"><b>' . $myrow[0] . ' ' . _('in') . ' ' . $myrow[1] . '<br />' . ' ' . _('for') . ' ';
 
 $CurrCode = $myrow[1];
 $SalesType = $myrow[2];
@@ -115,13 +115,14 @@ if (isset($_POST['submit'])) {
 		//editing an existing price
 
 		$sql = "UPDATE prices SET typeabbrev='" . $SalesType . "',
-		                          currabrev='" . $CurrCode . "',
-								  price='" . $_POST['Price'] . "',
-								  units='" . $_POST['Units'] . "',
-								  conversionfactor='" . $_POST['ConversionFactor'] . "',
-								  branchcode='" . $_POST['Branch'] . "',
-								  startdate='" . FormatDateForSQL($_POST['StartDate']) . "',
-								  enddate='" . FormatDateForSQL($_POST['EndDate']) . "'
+		                        currabrev='" . $CurrCode . "',
+								price='" . $_POST['Price'] . "',
+								units='" . $_POST['Units'] . "',
+								conversionfactor='" . $_POST['ConversionFactor'] . "',
+								decimalplaces='" . $_POST['DecimalPlaces'] . "',
+								branchcode='" . $_POST['Branch'] . "',
+								startdate='" . FormatDateForSQL($_POST['StartDate']) . "',
+								enddate='" . FormatDateForSQL($_POST['EndDate']) . "'
 				WHERE prices.stockid='" . $Item . "'
 				AND prices.typeabbrev='" . $SalesType . "'
 				AND prices.currabrev='" . $CurrCode . "'
@@ -140,6 +141,7 @@ if (isset($_POST['submit'])) {
 									price,
 									units,
 									conversionfactor,
+									decimalplaces,
 									branchcode,
 									startdate,
 									enddate)
@@ -150,6 +152,7 @@ if (isset($_POST['submit'])) {
 								'" . $_POST['Price'] . "',
 								'" . $_POST['Units'] . "',
 								'" . $_POST['ConversionFactor'] . "',
+								'" . $_POST['DecimalPlaces'] . "',
 								'" . $_POST['Branch'] . "',
 								'" . FormatDateForSQL($_POST['StartDate']) . "',
 								'" . FormatDateForSQL($_POST['EndDate']) . "'
@@ -172,6 +175,7 @@ if (isset($_POST['submit'])) {
 			unset($_POST['Price']);
 			unset($_POST['Units']);
 			unset($_POST['ConversionFactor']);
+			unset($_POST['DecimalPlaces']);
 		}
 	}
 
@@ -200,10 +204,11 @@ if (isset($_POST['submit'])) {
 $sql = "SELECT prices.price,
 				prices.units,
 				prices.conversionfactor,
+				prices.decimalplaces,
 				prices.currabrev,
-               prices.typeabbrev,
-               prices.startdate,
-               prices.enddate
+				prices.typeabbrev,
+				prices.startdate,
+				prices.enddate
 		FROM prices
 		WHERE  prices.stockid='" . $Item . "'
 		AND prices.typeabbrev='". $SalesType ."'
@@ -223,13 +228,14 @@ echo '<table class=selection>';
 if (DB_num_rows($result) == 0) {
 	echo '<tr><td>' . _('There are no default prices set up for this part in this currency') . '</td></tr>';
 } else {
-	echo '<tr><th colspan=6><font color="navy" size="2">' . _('Normal Price') . '</font></th></tr>';
+	echo '<tr><th colspan="6"><font color="navy" size="2">' . _('Normal Price') . '</font></th></tr>';
 	echo '<tr><th>' . _('Price') . '</th>
-		<th>'. _('UOM'). '</th>
-		<th>'. _('Conversion') . '<br />'.
-			_('Factor') . '</th>
-		<th>' . _('Start Date') . '</th>
-		<th>' . _('End Date') . '</th></tr>';
+				<th>' . _('UOM'). '</th>
+				<th>' . _('Conversion') . '<br />'._('Factor') . '</th>
+				<th>' . _('Decimal') . '<br />' . _('Places') . '</th>
+				<th>' . _('Start Date') . '</th>
+				<th>' . _('End Date') . '</th>
+			</tr>';
 	while ($myrow = DB_fetch_array($result)) {
 		if ($myrow['enddate']=='0000-00-00'){
 			$EndDateDisplay = _('No End Date');
@@ -237,15 +243,17 @@ if (DB_num_rows($result) == 0) {
 			$EndDateDisplay = ConvertSQLDate($myrow['enddate']);
 		}
 		echo '<tr class="EvenTableRows">
-						<td class=number>'.number_format($myrow['price'],2).'</td>
-						<td>'.$myrow['units'].'</td>
-						<td class=number>'.$myrow['conversionfactor'].'</td>
-						<td class=date>'.ConvertSQLDate($myrow['startdate']).'</td>
-						<td class=date>'.$EndDateDisplay.'</td></tr>';
+				<td class="number">'.number_format($myrow['price'],2).'</td>
+				<td>'.$myrow['units'].'</td>
+				<td class="number">'.$myrow['conversionfactor'].'</td>
+				<td class="number">'.$myrow['decimalplaces'].'</td>
+				<td class="date">'.ConvertSQLDate($myrow['startdate']).'</td>
+				<td class="date">'.$EndDateDisplay.'</td>
+			</tr>';
 	}
 }
 
-echo '</table></td><tr></tr></tr><tr><td valign=top>';
+echo '</table></td><tr></tr></tr><tr><td valign="top">';
 
 //now get the prices for the customer selected
 
@@ -254,6 +262,7 @@ $sql = "SELECT prices.price,
 			   custbranch.brname,
 			   prices.units,
 			   prices.conversionfactor,
+			   prices.decimalplaces,
 			   prices.startdate,
 			   prices.enddate
 		FROM prices
@@ -271,20 +280,22 @@ $ErrMsg = _('Could not retrieve the special prices set up because');
 $DbgMsg = _('The SQL used to retrieve these records was');
 $result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
-echo '<table class=selection>';
-echo '<tr><th colspan=8><font color="navy" size="2">' . _('Special Prices') . '</font></th></tr>';
+echo '<table class="selection">';
+echo '<tr><th colspan="9"><font color="navy" size="2">' . _('Special Prices') . '</font></th></tr>';
 
 if (DB_num_rows($result) == 0) {
 	echo '<tr><td>' . _('There are no special prices set up for this part') . '</td></tr>';
 } else {
 /*THERE IS ALREADY A spl price setup */
-	echo '<tr><th>' . _('Special Price') .
-		'</th><th>' . _('Branch') . '</th>
-		<th>'. _('UOM'). '</th>
-		<th>'. _('Conversion') . '<br />'.
-			_('Factor') . '</th>
-		<th>' . _('Start Date') . '</th>
-		<th>' . _('End Date') . '</th></tr>';
+	echo '<tr>
+			<th>' . _('Special Price') . '</th>
+			<th>' . _('Branch') . '</th>
+			<th>' . _('UOM'). '</th>
+			<th>' . _('Conversion') . '<br />'._('Factor') . '</th>
+			<th>' . _('Decimal') . '<br />'._('Places') . '</th>
+			<th>' . _('Start Date') . '</th>
+			<th>' . _('End Date') . '</th>
+		</tr>';
 
 	while ($myrow = DB_fetch_array($result)) {
 
@@ -299,10 +310,11 @@ if (DB_num_rows($result) == 0) {
 			$EndDateDisplay = ConvertSQLDate($myrow['enddate']);
 		}
 		echo '<tr bgcolor="#CCCCCC">
-		<td class=number>'.number_format($myrow['price'],2).'</td>
+		<td class="number">'.number_format($myrow['price'],2).'</td>
 		<td>'.$Branch.'</td>
 		<td>'.$myrow['units'].'</td>
-		<td class=number>'.$myrow['conversionfactor'].'</td>
+		<td class="number">'.$myrow['conversionfactor'].'</td>
+		<td class="number">'.$myrow['decimalplaces'].'</td>
 		<td>'.ConvertSQLDate($myrow['startdate']).'</td>
 		<td>'.$EndDateDisplay.'</td>
  		<td><a href="'.$_SERVER['PHP_SELF'].'?Item='.$Item.'&Price='.$myrow['price'].'&Branch='.$myrow['branchcode'].'&StartDate='.$myrow['startdate'].'&EndDate='.$myrow['enddate'].'&Edit=1">' . _('Edit') . '</td>
@@ -315,7 +327,7 @@ echo '</table></tr></table><br />';
 
 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<input type=hidden name="Item" value="' . $Item . '">';
+echo '<input type="hidden" name="Item" value="' . $Item . '" />';
 
 if (isset($_GET['Edit']) and $_GET['Edit']==1){
 	$sql = "SELECT currencies.currency,
@@ -325,6 +337,7 @@ if (isset($_GET['Edit']) and $_GET['Edit']==1){
 				prices.units,
 				prices.price,
 				prices.conversionfactor,
+				prices.decimalplaces,
 				prices.stockid,
 				prices.typeabbrev,
 				prices.currabrev,
@@ -346,17 +359,18 @@ if (isset($_GET['Edit']) and $_GET['Edit']==1){
 
 	$result = DB_query($sql,$db);
 	$myrow = DB_fetch_array($result);
-	echo '<input type=hidden name="Editing" value="Yes">';
-	echo '<input type=hidden name="OldTypeAbbrev" value="' . $myrow['typeabbrev'] .'">';
-	echo '<input type=hidden name="OldCurrAbrev" value="' . $myrow['currabrev'] . '">';
-	echo '<input type=hidden name="OldStartDate" value="' . $myrow['startdate'] . '">';
-	echo '<input type=hidden name="OldEndDate" value="' . $myrow['enddate'] . '">';
+	echo '<input type="hidden" name="Editing" value="Yes" />';
+	echo '<input type="hidden" name="OldTypeAbbrev" value="' . $myrow['typeabbrev'] .'" />';
+	echo '<input type="hidden" name="OldCurrAbrev" value="' . $myrow['currabrev'] . '" />';
+	echo '<input type="hidden" name="OldStartDate" value="' . $myrow['startdate'] . '" />';
+	echo '<input type="hidden" name="OldEndDate" value="' . $myrow['enddate'] . '" />';
 	$_POST['Branch']=$myrow['branchcode'];
 	$_POST['CurrAbrev'] = $myrow['currabrev'];
 	$_POST['TypeAbbrev'] = $myrow['typeabbrev'];
 	$_POST['Price'] = $myrow['price'];
 	$_POST['Units'] = $myrow['units'];
 	$_POST['ConversionFactor'] = $myrow['conversionfactor'];
+	$_POST['DecimalPlaces'] = $myrow['decimalplaces'];
 	$_POST['StartDate'] = ConvertSQLDate($myrow['startdate']);
 	if ($_GET['EndDate']=='' OR $_GET['EndDate']=='0000-00-00'){
 		$_POST['EndDate'] = '';
@@ -390,25 +404,25 @@ $sql = "SELECT custbranch.branchcode,
 					WHERE custbranch.debtorno='" . $_SESSION['CustomerID'] . "'";
 
 $result = DB_query($sql, $db);
-echo '<table class=selection>';
+echo '<table class="selection">';
 echo '<tr><td>' . _('Branch') . ':</td>';
 echo '<td><select name="Branch">';
 while ($myrow=DB_fetch_array($result)) {
 	$CustomerCurrency=$myrow['currency'];
 	if ($myrow['branchcode']==$_POST['branch']) {
-		echo '<option selected value='.$myrow['branchcode'].'>'.$myrow['brname'].'</option>';
+		echo '<option selected value="'.$myrow['branchcode'].'">'.$myrow['brname'].'</option>';
 	} else {
-		echo '<option value='.$myrow['branchcode'].'>'.$myrow['brname'].'</option>';
+		echo '<option value="'.$myrow['branchcode'].'">'.$myrow['brname'].'</option>';
 	}
 }
 echo '</td></tr>';
 echo '<tr><td>' . _('Currency') .':</td><td>' . $CustomerCurrency.'</td></tr>';
 echo '<tr><td>' . _('Price Effective From Date') . ':</td>
-	                         <td><input type="Text" name="StartDate" class=date alt='.$_SESSION['DefaultDateFormat'].
-	                         ' size=11 maxlength=10 value=' . $_POST['StartDate'] . '></td></tr>';
+	                         <td><input type="text" name="StartDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].
+	                         '" size="11" maxlength="10" value="' . $_POST['StartDate'] . '" /></td></tr>';
 echo '<tr><td>' . _('Price Effective To Date') . ':</td>
-	                         <td><input type="Text" name="EndDate" class=date alt='.$_SESSION['DefaultDateFormat'].
-	                         ' size=11 maxlength=10 value=' . $_POST['EndDate'] . '></td></tr>';
+	                         <td><input type="text" name="EndDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].
+	                         '" size="11" maxlength="10" value="' . $_POST['EndDate'] . '" /></td></tr>';
 echo '<tr><td>' . _('Unit of Measure') . ':</td>';
 echo '<td><select name="Units">';
 $sql = "SELECT unitname FROM unitsofmeasure";
@@ -423,12 +437,21 @@ while ($myrow = DB_fetch_array($result)) {
 	}
 }
 echo '</td></tr>';
-echo '<input type=hidden name=Item value='.$Item.'>';
+echo '<input type="hidden" name="Item" value="'.$Item.'" />';
 
 echo '</select></td></tr>';
 
+echo '<tr><td>'. _('Decimal Places') . '<br />'._('to display').'</td>';
+echo '<td><input type="text" class="number" name="DecimalPlaces" size="8" maxlength="8" value="';
+if(isset($_POST['DecimalPlaces'])) {
+	echo $_POST['DecimalPlaces'];
+} else {
+	echo '0';
+}
+echo '">';
+
 echo '<tr><td>'. _('Conversion Factor') . '<br />'._('to stock units').'</td>';
-echo '<td><input type="text" class=number name="ConversionFactor" size=8 maxlength=8 value="';
+echo '<td><input type="text" class="number" name="ConversionFactor" size="8" maxlength="8" value="';
 if(isset($_POST['ConversionFactor'])) {
 	echo $_POST['ConversionFactor'];
 } else {
@@ -437,11 +460,11 @@ if(isset($_POST['ConversionFactor'])) {
 echo '">';
 
 echo '<tr><td>' . _('Price') . ':</td>
-	          <td><input type="Text" class=number name="Price" size=11 maxlength=10 value=' . $_POST['Price'] . '></td>
+	          <td><input type="text" class=number name="Price" size="11" maxlength="10" value="' . $_POST['Price'] . '" /></td>
 				</tr></table>';
 
 
-echo '<br /><div class="centre"><input type="Submit" name="submit" value="' . _('Enter Information') . '"></div>';
+echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div>';
 
 echo '</form>';
 include('includes/footer.inc');
