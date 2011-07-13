@@ -250,9 +250,9 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 							$WhereLineStatus
 							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
-							',stockmaster.decimalplaces,
+							",stockmaster.decimalplaces,
 							  stockmaster.description
-							ORDER BY ' . $orderby;
+							ORDER BY " . $orderby;
 				} elseif ($_POST['SummaryType'] == 'orderno') {
 					$sql = "SELECT purchorderdetails.orderno,
 								   purchorders.supplierno,
@@ -275,9 +275,9 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 							$WhereLineStatus
 							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
-							',purchorders.supplierno,
+							",purchorders.supplierno,
 							  suppliers.suppname
-							ORDER BY ' . $orderby;
+							ORDER BY " . $orderby;
 				} elseif ($_POST['SummaryType'] == 'supplierno' || $_POST['SummaryType'] == 'suppname,suppliers.supplierid') {
 					$sql = "SELECT purchorders.supplierno,
 								   SUM(purchorderdetails.quantityord) as quantityord,
@@ -299,9 +299,9 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 							$WhereLineStatus
 							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
-							',purchorders.supplierno,
+							",purchorders.supplierno,
 							  suppliers.suppname
-							ORDER BY ' . $orderby;
+							ORDER BY " . $orderby;
 				} elseif ($_POST['SummaryType'] == 'month') {
 					$sql = "SELECT EXTRACT(YEAR_MONTH from purchorders.orddate) as month,
 								   CONCAT(MONTHNAME(purchorders.orddate),' ',YEAR(purchorders.orddate)) as monthname,
@@ -323,8 +323,8 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 							$WhereLineStatus
 							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
-							', monthname
-							ORDER BY ' . $orderby;
+							", monthname
+							ORDER BY " . $orderby;
 				} elseif ($_POST['SummaryType'] == 'categoryid') {
 					$sql = "SELECT SUM(purchorderdetails.quantityord) as quantityord,
 								   SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
@@ -346,8 +346,8 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 							$WhereLineStatus
 							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
-							', categorydescription
-							ORDER BY ' . $orderby;
+							", categorydescription
+							ORDER BY " . $orderby;
 				}
 			} else {
 					// Selects by delivery date from grns
@@ -373,8 +373,8 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 							$WhereLineStatus
 							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
-							', stockmaster.description
-							ORDER BY ' . $orderby;
+							", stockmaster.description
+							ORDER BY " . $orderby;
 				} elseif ($_POST['SummaryType'] == 'orderno') {
 					$sql = "SELECT purchorderdetails.orderno,
 								   purchorders.supplierno,
@@ -398,9 +398,9 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 							$WhereLineStatus
 							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
-							', purchorders.supplierno,
+							", purchorders.supplierno,
 							   suppliers.suppname
-							ORDER BY ' . $orderby;
+							ORDER BY " . $orderby;
 				} elseif ($_POST['SummaryType'] == 'supplierno' || $_POST['SummaryType'] == 'suppname,suppliers.supplierid') {
 					$sql = "SELECT purchorders.supplierno,
 								   SUM(grns.qtyrecd) as quantityord,
@@ -423,9 +423,9 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 							$WhereLineStatus
 							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
-							', purchorders.supplierno,
+							", purchorders.supplierno,
 							   suppliers.suppname
-							ORDER BY ' . $orderby;
+							ORDER BY " . $orderby;
 				} elseif ($_POST['SummaryType'] == 'month') {
 					$sql = "SELECT EXTRACT(YEAR_MONTH from purchorders.orddate) as month,
 								   CONCAT(MONTHNAME(purchorders.orddate),' ',YEAR(purchorders.orddate)) as monthname,
@@ -448,8 +448,8 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 							$WhereLineStatus
 							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
-							',monthname
-							ORDER BY ' . $orderby;
+							",monthname
+							ORDER BY " . $orderby;
 				} elseif ($_POST['SummaryType'] == 'categoryid') {
 					$sql = "SELECT stockmaster.categoryid,
 								   stockcategory.categorydescription,
@@ -472,8 +472,8 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 							$WhereLineStatus
 							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
-							',categorydescription
-							ORDER BY ' . $orderby;
+							",categorydescription
+							ORDER BY " . $orderby;
 				}
 			}
 		} // End of if ($_POST['ReportType']
@@ -487,13 +487,13 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 		$TotalInvQty = 0;
 
 		// Create array for summary type to display in header. Access it with $SaveSummaryType
-		$Summary_Array["orderno"] =  _('Order Number');
-		$Summary_Array["itemcode"] =  _('Part Number');
-		$Summary_Array["extprice"] =  _('Extended Price');
-		$Summary_Array["supplierno"] =  _('Customer Number');
-		$Summary_Array["suppname"] =  _('Customer Name');
-		$Summary_Array["month"] =  _('Month');
-		$Summary_Array["categoryid"] =  _('Stock Category');
+		$Summary_Array['orderno'] =  _('Order Number');
+		$Summary_Array['itemcode'] =  _('Part Number');
+		$Summary_Array['extprice'] =  _('Extended Price');
+		$Summary_Array['supplierno'] =  _('Customer Number');
+		$Summary_Array['suppname'] =  _('Customer Name');
+		$Summary_Array['month'] =  _('Month');
+		$Summary_Array['categoryid'] =  _('Stock Category');
 
 		// Create array for sort for detail report to display in header
 		$Detail_Array['purchorderdetails.orderno'] = _('Order Number');
@@ -946,9 +946,9 @@ function submitcsv(&$db,
 							$WhereLineStatus
 							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
-							',stockmaster.decimalplaces,
+							",stockmaster.decimalplaces,
 							  stockmaster.description
-							ORDER BY ' . $orderby;
+							ORDER BY " . $orderby;
 			   } elseif ($_POST['SummaryType'] == 'orderno') {
 					$sql = "SELECT purchorderdetails.orderno,
 								   purchorders.supplierno,
@@ -971,9 +971,9 @@ function submitcsv(&$db,
 							$WhereLineStatus
 							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
-							',purchorders.supplierno,
+							",purchorders.supplierno,
 							  suppliers.suppname
-							ORDER BY ' . $orderby;
+							ORDER BY " . $orderby;
 			} elseif ($_POST['SummaryType'] == 'supplierno' || $_POST['SummaryType'] == 'suppname,suppliers.supplierid') {
 					$sql = "SELECT purchorders.supplierno,
 								   SUM(purchorderdetails.quantityord) as quantityord,
@@ -995,9 +995,9 @@ function submitcsv(&$db,
 							$WhereLineStatus
 							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
-							',purchorders.supplierno,
+							",purchorders.supplierno,
 							  suppliers.suppname
-							ORDER BY ' . $orderby;
+							ORDER BY " . $orderby;
 			} elseif ($_POST['SummaryType'] == 'month') {
 					$sql = "SELECT EXTRACT(YEAR_MONTH from purchorders.orddate) as month,
 								   CONCAT(MONTHNAME(purchorders.orddate),' ',YEAR(purchorders.orddate)) as monthname,
@@ -1019,8 +1019,8 @@ function submitcsv(&$db,
 							$WhereLineStatus
 							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
-							', monthname
-							ORDER BY ' . $orderby;
+							", monthname
+							ORDER BY " . $orderby;
 			} elseif ($_POST['SummaryType'] == 'categoryid') {
 					$sql = "SELECT SUM(purchorderdetails.quantityord) as quantityord,
 								   SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
@@ -1042,8 +1042,8 @@ function submitcsv(&$db,
 							$WhereLineStatus
 							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
-							', categorydescription
-							ORDER BY ' . $orderby;
+							", categorydescription
+							ORDER BY " . $orderby;
 			}
 		} else {
 					// Selects by delivery date from grns
@@ -1069,8 +1069,8 @@ function submitcsv(&$db,
 							$WhereLineStatus
 							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
-							', stockmaster.description
-							ORDER BY ' . $orderby;
+							", stockmaster.description
+							ORDER BY " . $orderby;
 				} elseif ($_POST['SummaryType'] == 'orderno') {
 					$sql = "SELECT purchorderdetails.orderno,
 								   purchorders.supplierno,
@@ -1094,9 +1094,9 @@ function submitcsv(&$db,
 							$WhereLineStatus
 							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
-							', purchorders.supplierno,
+							", purchorders.supplierno,
 							   suppliers.suppname
-							ORDER BY ' . $orderby;
+							ORDER BY " . $orderby;
 			} elseif ($_POST['SummaryType'] == 'supplierno' || $_POST['SummaryType'] == 'suppname,suppliers.supplierid') {
 					$sql = "SELECT purchorders.supplierno,
 								   SUM(grns.qtyrecd) as quantityord,
@@ -1119,9 +1119,9 @@ function submitcsv(&$db,
 							$WhereLineStatus
 							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
-							', purchorders.supplierno,
+							", purchorders.supplierno,
 							   suppliers.suppname
-							ORDER BY ' . $orderby;
+							ORDER BY " . $orderby;
 				} elseif ($_POST['SummaryType'] == 'month') {
 					$sql = "SELECT EXTRACT(YEAR_MONTH from purchorders.orddate) as month,
 								   CONCAT(MONTHNAME(purchorders.orddate),' ',YEAR(purchorders.orddate)) as monthname,
@@ -1144,8 +1144,8 @@ function submitcsv(&$db,
 							$WhereLineStatus
 							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
-							',monthname
-							ORDER BY ' . $orderby;
+							",monthname
+							ORDER BY " . $orderby;
 				} elseif ($_POST['SummaryType'] == 'categoryid') {
 					$sql = "SELECT stockmaster.categoryid,
 								   stockcategory.categorydescription,
@@ -1168,8 +1168,8 @@ function submitcsv(&$db,
 							$WhereLineStatus
 							$WhereCategory
 							GROUP BY " . $_POST['SummaryType'] .
-							',categorydescription
-							ORDER BY ' . $orderby;
+							",categorydescription
+							ORDER BY " . $orderby;
 				}
 			}
 		} // End of if ($_POST['ReportType']
@@ -1405,7 +1405,7 @@ function submitcsv(&$db,
 				' ');
 		} // End of if ($_POST['ReportType']
 		fclose($FileHandle);
-		echo '<div class=centre><p>'._('The report has been exported as a csv file.').'</p>';
+		echo '<div class="centre"><p>'._('The report has been exported as a csv file.').'</p>';
 		echo '<p><a href="' .  $FileName . '">' . _('click here') . '</a> ' . _('to view the file') . '</div></p>';
 
 	} // End of if inputerror != 1
@@ -1420,7 +1420,7 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 
 	echo '<tr><td>' . _('Report Type') . ':</td>';
 	echo '<td><select name="ReportType">';
@@ -1436,9 +1436,9 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 
 	echo '<tr>
 		<td>' . _('Date Range') . ':</td>
-		<td><input type="Text" class=date alt="'.$_SESSION['DefaultDateFormat'].'" name="FromDate" size=10 maxlength=10 value="' . $_POST['FromDate'] .
+		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="FromDate" size="10" maxlength="10" value="' . $_POST['FromDate'] .
 		'"> ' . _('To') . ':&nbsp&nbsp
-		<input type="Text" class=date alt="'.$_SESSION['DefaultDateFormat'].'" name="ToDate" size=10 maxlength=10 value="' . $_POST['ToDate'] . '"></td>
+		<input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="ToDate" size="10" maxlength="10" value="' . $_POST['ToDate'] . '"></td>
 	</tr>';
 
 	echo '<tr><td>' . _('Part Number') . ':</td>';
@@ -1446,11 +1446,11 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 	echo '<option selected value="Equals">' . _('Equals') . '</option>';
 	echo '<option value="LIKE">' . _('Begins With') . '</option>';
 	echo '</select>';
-	echo '&nbsp&nbsp<input type="text" name="PartNumber" size=20 maxlength=20 value=';
+	echo '&nbsp&nbsp<input type="text" name="PartNumber" size="20" maxlength="20" value="';
 	if (isset($_POST['PartNumber'])) {
-		echo $_POST['PartNumber'] . '></td></tr>';
+		echo $_POST['PartNumber'] . '"></td></tr>';
 	} else {
-		echo '></td></tr>';
+		echo '"></td></tr>';
 	}
 
 	echo '<tr><td>' . _('Supplier Number') . ':</td>';
@@ -1458,11 +1458,11 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 	echo '<option selected value="Equals">' . _('Equals') . '</option>';
 	echo '<option value="LIKE">' . _('Begins With') . '</option>';
 	echo '</select>';
-	echo '&nbsp&nbsp<input type="text" name="SupplierId" size=10 maxlength=10 value=';
+	echo '&nbsp&nbsp<input type="text" name="SupplierId" size="10" maxlength="10" value="';
 	if (isset($_POST['SupplierId'])) {
-		echo $_POST['SupplierId'] . '></td></tr>';
+		echo $_POST['SupplierId'] . '"></td></tr>';
 	} else {
-		echo  '></td></tr>';
+		echo  '"></td></tr>';
 	}
 
 	echo '<tr><td>' . _('Supplier Name') . ':</td>';
@@ -1470,20 +1470,20 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 	echo '<option selected value="LIKE">' . _('Begins With') . '</option>';
 	echo '<option value="Equals">' . _('Equals') . '</option>';
 	echo '</select>';
-	echo '&nbsp&nbsp<input type="text" name="SupplierName" size=30 maxlength=30 value=';
+	echo '&nbsp&nbsp<input type="text" name="SupplierName" size="30" maxlength="30" value="';
 	if (isset($_POST['SupplierName'])) {
-		echo $_POST['SupplierName'] . '></td></tr>';
+		echo $_POST['SupplierName'] . '"></td></tr>';
 	} else {
-		echo  '></td></tr>';
+		echo  '"></td></tr>';
 	}
 
 	echo '<tr><td>' . _('Order Number') . ':</td>';
 	echo '<td>'._('Equals').':&nbsp&nbsp';
-	echo '<input type="text" name="OrderNo" size=10 maxlength=10 value=';
+	echo '<input type="text" name="OrderNo" size="10" maxlength="10" value="';
 	if (isset($_POST['OrderNo'])) {
-		echo $_POST['OrderNo'] . '></td></tr>';
+		echo $_POST['OrderNo'] . '"></td></tr>';
 	} else {
-		echo  '></td></tr>';
+		echo  '"></td></tr>';
 	}
 
 	echo '<tr><td>' . _('Line Item Status') . ':</td>';
@@ -1525,10 +1525,10 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 
 	echo '<tr><td>&nbsp</td></tr>
 	<tr>
-		<td colspan=4><div class=centre><input type="submit" name="submit" value="' . _('Run Inquiry') . '"></div></td>
+		<td colspan=4><div class=centre><input type="submit" name="submit" value="' . _('Run Inquiry') . '" /></div></td>
 	</tr>
 	<tr>
-		<td colspan=4><div class=centre><input type="submit" name="submitcsv" value="' . _('Export as csv file') . '"></div></td>
+		<td colspan=4><div class=centre><input type="submit" name="submitcsv" value="' . _('Export as csv file') . '" /></div></td>
 	</tr>
 	</table>
 	<br/>';
