@@ -349,7 +349,7 @@ if (!isset($SelectedTabs)){
 
 /* Ricard: needs revision of this date initialization */
 		if (!isset($_POST['Date'])) {
-			$_POST['Date']=Date('d/m/Y');
+			$_POST['Date']=Date($_SESSION['DefaultDateFormat']);
 		}
 
 		echo '<tr><td>' . _('Cash Assignation Date') . ':</td>';
