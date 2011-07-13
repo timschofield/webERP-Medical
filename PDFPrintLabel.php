@@ -114,8 +114,8 @@ function showLabelOptions() {
 
 	$TableItems = tableItems($_POST['Category'], $okItems);
 
-	$SendButton = '<br /><div class=centre><input type="submit" name="PrintPDF" value="'. _('Print labels') .'">&nbsp;&nbsp;&nbsp;
-		<input type="submit" name="PDFTest" value="'. _('Print labels with borders') .'"></div>';
+	$SendButton = '<br /><div class="centre"><input type="submit" name="PrintPDF" value="'. _('Print labels') .'" />&nbsp;&nbsp;&nbsp;
+		<input type="submit" name="PDFTest" value="'. _('Print labels with borders') .'" /></div>';
 	$iTxt=0;
 
 	echo "<script type=\"text/javascript\">
@@ -131,7 +131,7 @@ function showLabelOptions() {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' .$txt[$iTxt++].'</p>';
 	echo '<form name ="form1" action="'.$_SERVER['PHP_SELF'].'" method="POST" id="form1">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	echo '<tbody>';
 	echo '<tr>
 				<td class="number">'.$txt[$iTxt++].':</td>
@@ -141,7 +141,7 @@ function showLabelOptions() {
 		</tr>';
 	echo '<tr>
 				<td class="number">'.$txt[$iTxt++].':</td>
-				<td><input type="text" class=number name="QtyByItem" value="'.$_POST['QtyByItem'].'" size="2"
+				<td><input type="text" class="number" name="QtyByItem" value="'.$_POST['QtyByItem'].'" size="2"
 					maxlength="4"></td>
 		</tr>';
 	echo '<tr>
@@ -257,20 +257,18 @@ function tableItems($CategoryID, &$ok) {
 	$odd=true;
 	while ($myrow=DB_fetch_array($result)) {
 		$price = number_format($myrow['price'],$DecimalPlaces);
-		$oddEven=$odd?"Odd":"Even";
+		$oddEven=$odd?'Odd':'Even';
 		$odd = !$odd;
-		$html .= <<<ZZZ
-			<tr class="{$oddEven}TableRows">
-				<td>{$myrow['stockid']}</td>
-				<td>{$myrow['description']}</td>
-				<td class="number">{$price}</td>
+		$html .= '<tr class="'.$oddEven.'TableRows">
+				<td>'.$myrow['stockid'].'</td>
+				<td>'.$myrow['description'].'</td>
+				<td class="number">'.$price.'</td>
 				<td><div class="centre">
-					<INPUT type="checkbox" checked name="StockID[{$myrow['stockid']}]" id="item">
+					<input type="checkbox" checked name="StockID['.$myrow['stockid'].']" id="item" />
 					</div>
 				</td>
 				<td>&nbsp;&nbsp;&nbsp;</td>
-			</tr>
-ZZZ;
+			</tr>';
 	}
 	return $html . '
 		</tbody>
@@ -281,7 +279,7 @@ ZZZ;
 function noneButton($msg) {
 	return '
 		<div class="centre">
-			<INPUT type="button" disabled name="None" value="'. $msg . '">
+			<input type="button" disabled name="None" value="'. $msg . '" />
 		</div>';
 }
 
@@ -497,7 +495,7 @@ function printStockid($itemData, $labelDim, $dataParams, $Currency, $row, $col) 
 
 function getDecimalPlaces($Currency) {
 	global $db;
-	$sql="SELECT decimalplaces FROM currencies WHERE currabrev='$Currency'";
+	$sql="SELECT decimalplaces FROM currencies WHERE currabrev='".$Currency."'";
 	$result = DB_query($sql, $db);
 	if (!DB_num_rows($result))
 		abortMsg(_('Couldnt get the currency data'));
