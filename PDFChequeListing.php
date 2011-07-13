@@ -22,49 +22,49 @@ if (isset($_POST['ToDate']) and !Is_Date($_POST['ToDate'])){
 if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate'])){
 
 
-	 $title = _('Payment Listing');
-	 include ('includes/header.inc');
+	$title = _('Payment Listing');
+	include ('includes/header.inc');
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' .
 		 $title . '" alt="" />' . ' ' . $title . '</p>';
 
-	 if ($InputError==1){
-	prnMsg($msg,'error');
-	 }
+	if ($InputError==1){
+		prnMsg($msg,'error');
+	}
 
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<table class=selection>
+	echo '<table class="selection">
 	 			<tr>
 				<td>' . _('Enter the date from which cheques are to be listed') . ':</td>
 				<td><input type=text name="FromDate" maxlength=10 size=10 class=date alt="'.$_SESSION['DefaultDateFormat'].'"  value="' . Date($_SESSION['DefaultDateFormat']) . '"></td>
 			</tr>';
-	 echo '<tr><td>' . _('Enter the date to which cheques are to be listed') . ':</td>
-	 		<td><input type=text name="ToDate" maxlength=10 size=10  class=date alt="'.$_SESSION['DefaultDateFormat'].'"  value="' . Date($_SESSION['DefaultDateFormat']) . '"></td>
-	</tr>';
-	 echo '<tr><td>' . _('Bank Account') . '</td><td>';
+	echo '<tr><td>' . _('Enter the date to which cheques are to be listed') . ':</td>
+				<td><input type=text name="ToDate" maxlength=10 size=10  class=date alt="'.$_SESSION['DefaultDateFormat'].'"  value="' . Date($_SESSION['DefaultDateFormat']) . '"></td>
+			</tr>';
+	echo '<tr><td>' . _('Bank Account') . '</td><td>';
 
-	 $sql = "SELECT bankaccountname, accountcode FROM bankaccounts";
-	 $result = DB_query($sql,$db);
-
-
-	 echo '<select name="BankAccount">';
-
-	 while ($myrow=DB_fetch_array($result)){
-	echo '<option value=' . $myrow['accountcode'] . '>' . $myrow['bankaccountname'] . '</option>';
-	 }
+	$sql = "SELECT bankaccountname, accountcode FROM bankaccounts";
+	$result = DB_query($sql,$db);
 
 
-	 echo '</select></td></tr>';
+	echo '<select name="BankAccount">';
 
-	 echo '<tr><td>' . _('Email the report off') . ':</td><td><select name="Email">';
-	 echo '<option selected value="No">' . _('No') . '</option>';
-	 echo '<option value="Yes">' . _('Yes') . '</option>';
-	 echo '</select></td></tr></table><br /><div class="centre"><input type=submit name="Go" value="' . _('Create PDF') . '"></div>';
+	while ($myrow=DB_fetch_array($result)){
+		echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . '</option>';
+	}
 
 
-	 include('includes/footer.inc');
-	 exit;
+	echo '</select></td></tr>';
+
+	echo '<tr><td>' . _('Email the report off') . ':</td><td><select name="Email">';
+	echo '<option selected value="No">' . _('No') . '</option>';
+	echo '<option value="Yes">' . _('Yes') . '</option>';
+	echo '</select></td></tr></table><br /><div class="centre"><input type="submit" name="Go" value="' . _('Create PDF') . '" /></div>';
+
+
+	include('includes/footer.inc');
+	exit;
 } else {
 
 	include('includes/ConnectDB.inc');
