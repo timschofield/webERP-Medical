@@ -71,12 +71,12 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 	if(!isset ($Days)){
 		$Days=30;
 	}
-	echo '<input type="hidden" name="SelectedTabs" value="' . $SelectedTabs . '">';
+	echo '<input type="hidden" name="SelectedTabs" value="' . $SelectedTabs . '" />';
 	echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Select another tab') . '</a></div></p>';
 	echo '<br /><table class="selection">';
 	echo '<tr><th colspan="7">' . _('Detail Of Movement For Last ') .': ';
-	echo '<input type="text" class="number" name="Days" value="' . $Days . '" maxlength=3 size=4> Days ';
-	echo '<input type="submit" name="Go" value="' . _('Go') . '"></tr></th>';
+	echo '<input type="text" class="number" name="Days" value="' . $Days . '" maxlength="3" size="4" /> Days ';
+	echo '<input type="submit" name="Go" value="' . _('Go') . '" /></tr></th>';
 	echo '</form>';
 
 	$sql = "SELECT pcashdetails.counterindex,
@@ -113,7 +113,7 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 		</tr>';
 
 	$k=0; //row colour counter
-	echo '<form action="PcAuthorizeExpenses.php" method="POST" name="'._('update').'">';
+	echo '<form action="PcAuthorizeExpenses.php" method="post" name="'._('update').'">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	while ($myrow=DB_fetch_array($result))	{
@@ -261,7 +261,7 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 			$Posted=_('Yes');
 		}
 
-		echo'   <td>'.ConvertSQLDate($myrow['date']).'</td>
+		echo '<td>'.ConvertSQLDate($myrow['date']).'</td>
 			<td>'.$myrow['codeexpense'].'</td>
 			<td class="number">'.number_format($myrow['amount'],2).'</td>
 			<td>'.$Posted.'</td>
@@ -275,13 +275,13 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 			if(($Authorizer!='00/00/0000')){
 				echo'<td>'.ConvertSQLDate($myrow['authorized']).'</td>';
 			}else{
-				echo '<td align=right><input type="checkbox" name="'.$myrow['counterindex'].'">';
+				echo '<td align="right"><input type="checkbox" name="'.$myrow['counterindex'].'" />';
 			}
 		}
 
-		echo '<input type="hidden" name="SelectedIndex" value="' . $myrow['counterindex']. '">';
-		echo '<input type="hidden" name="SelectedTabs" value="' . $SelectedTabs . '">';
-		echo '<input type="hidden" name="Days" value="' .$Days. '">';
+		echo '<input type="hidden" name="SelectedIndex" value="' . $myrow['counterindex']. '" />';
+		echo '<input type="hidden" name="SelectedTabs" value="' . $SelectedTabs . '" />';
+		echo '<input type="hidden" name="Days" value="' .$Days. '" />';
 		echo '</tr>';
 
 
@@ -298,7 +298,7 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 		$Amount['0']=0;
 	}
 
-	echo '<tr><td colspan=2 class="number">' . _('Current balance') . ':</td>
+	echo '<tr><td colspan="2" class="number">' . _('Current balance') . ':</td>
 				<td class="number">'.number_format($Amount['0'],2).'</td></tr>';
 
 
@@ -306,7 +306,7 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 	// Do the postings
 	include ('includes/GLPostings.inc');
 
-	echo'</table><br /><div class="centre"><input type="submit" name=submit value=' . _('Update') . '></div></form>';
+	echo'</table><br /><div class="centre"><input type="submit" name="submit" value="' . _('Update') . '" /></div></form>';
 
 } else { /*The option to submit was not hit so display form */
 
@@ -337,7 +337,8 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 
 	echo '</td></tr></table>'; // close main table
 
-	echo '<br /><div class="centre"><input type="submit" name=process value="' . _('Accept') . '"><input type="submit" name=Cancel value="' . _('Cancel') . '"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="process" value="' . _('Accept') . '" />
+			<input type="submit" name="Cancel" value="' . _('Cancel') . '" /></div>';
 
 	echo '</form>';
 } /*end of else not submit */
