@@ -37,7 +37,7 @@ If (isset($_POST['PrintPDF']) AND isset($_POST['ReportOrClose'])){
 			prnMsg( _('The inventory check file could not be retrieved because'). ' - ' . DB_error_msg($db),'error');
 			echo '<br /><a href="' .$rootpath .'/index.php">'. _('Back to the menu').'</a>';
 			if ($debug==1){
-	      			echo '<br />' . $sql;
+				echo '<br />' . $sql;
 			}
 			include('includes/footer.inc');
 			exit;
@@ -305,30 +305,7 @@ If (isset($_POST['PrintPDF']) AND isset($_POST['ReportOrClose'])){
 	} /*end STOCK comparison while loop */
 
 	$YPos -= (2*$line_height);
-/*
- 	$pdfcode = $pdf->output();
-	$len = mb_strlen($pdfcode);
 
-      if ($len<=20){
-		$title = _('Print Stock check comparison Error');
-		include('includes/header.inc');
-		echo '<br />';
-		prnMsg( _('There were no Inventory Comparison sheets to print out'), 'error');
-		echo '<br /><a href="' . $rootpath . '/index.php">' . _('Back to the menu') . '</a>';
-		include('includes/footer.inc');
-		exit;
-      } else {
-		header('Content-type: application/pdf');
-		header('Content-Length: ' . $len);
-		header('Content-Disposition: inline; filename=StockComparison.pdf');
-		header('Expires: 0');
-		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-		header('Pragma: public');
-
-		$pdf->Output('StockCheckComparison.pdf', 'I');
-
-	}
-*/
     $pdf->OutputD($_SESSION['DatabaseName'] . '_StockComparison_' . date('Y-m-d') . '.pdf');//UldisN
     $pdf->__destruct(); //UldisN
 
@@ -349,7 +326,7 @@ If (isset($_POST['PrintPDF']) AND isset($_POST['ReportOrClose'])){
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . $title . '" alt="" />' . ' '
 		. $title . '</p>';
 
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="POST"><table class=selection>';
+	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<tr><td>' . _('Choose Option'). ':</font></td><td><select name="ReportOrClose">';
@@ -375,7 +352,7 @@ If (isset($_POST['PrintPDF']) AND isset($_POST['ReportOrClose'])){
 		echo '<option selected value="Leave">' . _('Do not Adjust System stock to Nil') . '</option>';
 	}
 
-	echo '</table><br /><div class="centre"><input type=Submit Name="PrintPDF" Value="' . _('Print PDF'). '"></div>';
+	echo '</table><br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF'). '"></div>';
 
 	include('includes/footer.inc');
 
