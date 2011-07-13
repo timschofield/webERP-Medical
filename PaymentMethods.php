@@ -177,12 +177,12 @@ if (isset($_POST['submit'])) {
 	$result = DB_query($sql,$db,$ErrMsg);
 
 	echo '<table class=selection>
-		<tr>
-		<th>' . _('Payment Method') . '</th>
-		<th>' . _('For Payments') . '</th>
-		<th>' . _('For Receipts') . '</th>
-		<th>' . _('Use Pre-printed') .'<br />' . _('Stationery') . '</th>
-		</tr>';
+			<tr>
+				<th>' . _('Payment Method') . '</th>
+				<th>' . _('For Payments') . '</th>
+				<th>' . _('For Receipts') . '</th>
+				<th>' . _('Use Pre-printed') .'<br />' . _('Stationery') . '</th>
+			</tr>';
 
 	$k=0; //row colour counter
 	while ($myrow = DB_fetch_array($result)) {
@@ -243,7 +243,7 @@ if (! isset($_GET['delete'])) {
 			$_POST['ForReceipt'] = $myrow['receipttype'];
 			$_POST['UsePrePrintedStationery'] = $myrow['usepreprintedstationery'];
 
-			echo '<input type="hidden" name="SelectedPaymentID" value="' . $_POST['MethodID'] . '">';
+			echo '<input type="hidden" name="SelectedPaymentID" value="' . $_POST['MethodID'] . '" />';
 			echo '<table class="selection">';
 		}
 
@@ -255,8 +255,8 @@ if (! isset($_GET['delete'])) {
 		echo '<table class=selection>';
 	}
 	echo '<tr>
-		<td>' . _('Payment Method') . ':' . '</td>
-		<td><input type="text" '. (in_array('MethodName',$Errors) ? 'class="inputerror"' : '' ) .' name="MethodName" size="30" maxlength="30" value="' . $_POST['MethodName'] . '"></td>
+			<td>' . _('Payment Method') . ':' . '</td>
+			<td><input type="text" '. (in_array('MethodName',$Errors) ? 'class="inputerror"' : '' ) .' name="MethodName" size="30" maxlength="30" value="' . $_POST['MethodName'] . '"></td>
 		</tr>';
 	echo '<tr>
 		<td>' . _('Use For Payments') . ':' . '</td>
