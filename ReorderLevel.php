@@ -162,13 +162,13 @@ if (isset($_POST['PrintPDF'])) {
 		_('Inventory Reorder Level Report') . '</p>';
 	echo '<div class="page_help_text">' . _('Use this report to display the reorder levels for Inventory items in different categories.') . '</div><br />';
 
-	echo '<br /><br /><form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table>';
+	echo '<br /><br /><form action="' . $_SERVER['PHP_SELF'] . '" method="post"><table>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	$sql = "SELECT loccode,
 			locationname
 		FROM locations";
 	$resultStkLocs = DB_query($sql,$db);
-	echo '<table class=selection><tr><td>' . _('From Stock Location') . ':</td><td><select name="StockLocation"> ';
+	echo '<table class="selection"><tr><td>' . _('From Stock Location') . ':</td><td><select name="StockLocation"> ';
 	if (!isset($_POST['StockLocation'])){
 		$_POST['StockLocation']='All';
 	}
@@ -179,9 +179,9 @@ if (isset($_POST['PrintPDF'])) {
 	}
 	while ($myrow=DB_fetch_array($resultStkLocs)){
 		if ($myrow['loccode'] == $_POST['StockLocation']){
-			 echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			 echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
-			 echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			 echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	}
 	echo '</select></td></tr>';
@@ -215,7 +215,7 @@ if (isset($_POST['PrintPDF'])) {
 		}
 	}
 	echo '</select></td></tr>';
-	echo '</table><br /><div class="centre"><input type=submit name="PrintPDF" value="' . _('Print PDF') . '"></div>';
+	echo '</table><br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '"></div>';
 
 	include('includes/footer.inc');
 
