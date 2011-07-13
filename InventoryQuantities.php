@@ -144,8 +144,8 @@ If (isset($_POST['PrintPDF'])) {
 
 	$title=_('Inventory Quantities Reporting');
 	include('includes/header.inc');
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') . '" alt="" />' . ' ' . _('Inventory Quantities Report') . '</p>';
-echo '<div class="page_help_text">' . _('Use this report to display the quantity of Inventory items in different categories.') . '</div><br />';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') . '" alt="" />' . ' ' . _('Inventory Quantities Report') . '</p>';
+	echo '<div class="page_help_text">' . _('Use this report to display the quantity of Inventory items in different categories.') . '</div><br />';
 
 
 	echo '<br /><br /><form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table>';
