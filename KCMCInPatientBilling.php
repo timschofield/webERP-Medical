@@ -13,7 +13,7 @@ if (isset($_GET['New']) or isset($_POST['Cancel'])) {
 	$_SESSION['Items']['Lines']=0;
 	$_SESSION['Items']['Value']=0;
 }
-
+echo $_SESSION['UserStockLocation'];
 if (isset($_POST['ChangeItem'])) {
 	$sql="SELECT price
 				FROM prices
@@ -34,7 +34,7 @@ if (isset($_POST['ChangeItem'])) {
 	$_SESSION['Items']['Lines']++;
 	unset($_POST['StockType']);
 }
-if (isset($_POST['Dispensary'])) {
+if ($_POST['Dispensary']!='') {
 	$_SESSION['Items']['Dispensary']=$_POST['Dispensary'];
 } else {
 	$_SESSION['Items']['Dispensary']=$_SESSION['UserStockLocation'];
