@@ -149,7 +149,7 @@ if (isset($SelectedAccount) and $SelectedAccount != '') {
 
 	echo '<form name="form" action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<br /><table class=selection>';
+	echo '<br /><table class="selection">';
 	echo '<tr><th colspan=3>'. _('Last Financial Year') .'</th>';
 	echo '<th colspan=3>'. _('This Financial Year') .'</th>';
 	echo '<th colspan=3>'. _('Next Financial Year') .'</th></tr>';
