@@ -48,7 +48,7 @@ if (DB_num_rows($WOResult)==0){
 $WorkOrderRow = DB_fetch_array($WOResult);
 
 
-echo '<table cellpadding=2 class=selection>
+echo '<table cellpadding=2 class="selection">
 	<tr><td class="label">' . _('Work order') . ':</td>
 		<td>' . $_POST['WO'] .'</td>
 	 	<td class="label">' . _('Manufactured at') . ':</td>
@@ -78,7 +78,7 @@ $WOItemsResult = DB_query("SELECT woitems.stockid,
 							$db,
 							$ErrMsg);
 
-echo  '<table class=selection><tr><th>' . _('Item') . '</th>
+echo  '<table class="selection"><tr><th>' . _('Item') . '</th>
 		<th>' . _('Description') . '</th>
 		<th>' . _('Quantity Required') . '</th>
 		<th>' . _('Units') . '</th>
@@ -105,7 +105,7 @@ while ($WORow = DB_fetch_array($WOItemsResult)){
 }
 echo '</table>
 	<br />
-	<table class=selection>';
+	<table class="selection">';
 
 
 echo '<tr><th>' . _('Item') . '</th>
