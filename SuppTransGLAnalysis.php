@@ -143,7 +143,7 @@ if ($_SESSION['SuppTrans']->InvoiceOrCredit == 'Invoice'){
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<br /><table class=selection>';
+echo '<br /><table class="selection">';
 if (!isset($_POST['GLCode'])) {
 	$_POST['GLCode']='';
 }
