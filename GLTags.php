@@ -50,7 +50,7 @@ echo '</td></tr></table><p></p>';
 
 echo '</form>';
 
-echo '<table class=selection>';
+echo '<table class="selection">';
 echo '<tr><th>'. _('Tag ID') .'</th>';
 echo '<th>'. _('Description'). '</th>';
 
