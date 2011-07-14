@@ -17,6 +17,11 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/c
 if (isset($Errors)) {
 	unset($Errors);
 }
+
+if (isset($_GET['Debtor'])) {
+	$_POST['DebtorNo']=$_GET['Debtor'];
+}
+
 $Errors = array();
 
 if (isset($_POST['submit'])) {
@@ -400,6 +405,53 @@ if ($SetupErrors>0) {
 	include('includes/footer.inc');
 	exit;
 }
+
+$sql="SELECT debtorno,
+			name,
+			address1,
+			address2,
+			address3,
+			address4,
+			address5,
+			address6,
+			currencies.currency
+			FROM debtorsmaster
+			LEFT JOIN debtortype
+				ON debtorsmaster.typeid=debtortype.typeid
+			LEFT JOIN currencies
+				ON debtorsmaster.currcode=currencies.currabrev
+			WHERE debtortype.typename='Insurance'";
+$result=DB_query($sql, $db);
+
+echo '<table class="selection">
+		<tr>
+			<th>' . _('Company No') . '</th>
+			<th>' . _('Name') . '</th>
+			<th>' . _('Address1') . '</th>
+			<th>' . _('Address2') . '</th>
+			<th>' . _('Address3') . '</th>
+			<th>' . _('Address4') . '</th>
+			<th>' . _('Address5') . '</th>
+			<th>' . _('Address6') . '</th>
+			<th>' . _('Currency') . '</th>
+		</tr>';
+
+while ($myrow=DB_fetch_array($result)) {
+	echo '<tr>
+			<td>' . $myrow['debtorno'] . '</td>
+			<td>' . $myrow['name'] . '</td>
+			<td>' . $myrow['address1'] . '</td>
+			<td>' . $myrow['address2'] . '</td>
+			<td>' . $myrow['address3'] . '</td>
+			<td>' . $myrow['address4'] . '</td>
+			<td>' . $myrow['address5'] . '</td>
+			<td>' . $myrow['address6'] . '</td>
+			<td>' . $myrow['currency'] . '</td>
+			<td><a href="' . $_SERVER['PHP_SELF'] . '?Debtor='.$myrow['debtorno'].'&Edit=True">' . _('Edit') . '</a></td>
+			<td><a href="' . $_SERVER['PHP_SELF'] . '?Debtor='.$myrow['debtorno'].'&Delete=True">' . _('Delete') . '</a></td>
+		</tr>';
+}
+echo '</table><br />';
 
 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
