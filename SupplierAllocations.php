@@ -456,7 +456,7 @@ if (isset($_POST['AllocTrans'])){
 
     /*Now display the potential and existing allocations put into the array above */
 
-        echo '<table cellpadding=2 colspan=7 class=selection>';
+        echo '<table cellpadding=2 colspan=7 class="selection">';
 	  	  $TableHeader = '<tr><th>' . _('Type') . '</th>
 		 			<th>' . _('Trans') . '<br />' . _('Number') . '</th>
 					<th>' . _('Trans') .'<br />' . _('Date') . '</th>
@@ -564,7 +564,7 @@ if (isset($_POST['AllocTrans'])){
 	include('includes/footer.inc');
 	exit;
   }
-  echo '<table class=selection>';
+  echo '<table class="selection">';
 
   $TableHeader = '<tr><th>' . _('Trans Type') .
 		'</th><th>' . _('Supplier') .
@@ -635,7 +635,7 @@ if (isset($_POST['AllocTrans'])){
 
   $result = DB_query($sql, $db);
 
-  echo '<table class=selection>';
+  echo '<table class="selection">';
   $TableHeader = '<tr><th>' . _('Trans Type') . '</th>
   		<th>' . _('Supplier') . '</th>
   		<th>' . _('Number') . '</th>
