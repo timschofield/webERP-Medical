@@ -170,7 +170,7 @@ if (!isset($_GET['Edit'])) {
 		$StockDecimalPlaces=$DecimalPlacesRow['decimalplaces'];
 		$NoPurchasingData=1;
 	} else if ($StockID != '') {
-		echo '<table cellpadding=2 class=selection>';
+		echo '<table cellpadding=2 class="selection">';
 		$TableHeader = '<tr><th>' . _('Supplier') . '</th>
 						<th>' . _('Price') . '</th>
 						<th>' . _('Currency') . '</th>
@@ -260,7 +260,7 @@ if (isset($SupplierID) AND $SupplierID != '' AND !isset($_POST['SearchSupplier']
 			$title . ' ' . _('For Stock Code') . ' - ' . $StockID . '</p><br />';
 	}
 	if (!isset($_POST['SearchSupplier'])) {
-		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post><table cellpadding=3 colspan=4 class=selection><tr>';
+		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post><table cellpadding=3 colspan=4 class="selection"><tr>';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<input type="hidden" name="StockID" value="' . $StockID . '">';
 		echo '<td>' . _('Text in the Supplier') . ' <b>' . _('NAME') . '</b>:</font></td>';
@@ -342,7 +342,7 @@ if (isset($SuppliersResult)) {
 		$StockUOM = 'each';
 	}
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">
-			<table cellpadding=2 colspan=7 class=selection>';
+			<table cellpadding=2 colspan=7 class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	$TableHeader = '<tr><th>' . _('Code') . '</th>
 						<th>' . _('Supplier Name') . '</th>
@@ -418,7 +418,7 @@ if (!isset($SuppliersResult)) {
 		$_POST['DecimalPlaces'] = $myrow['uomdecimalplaces'];
 		$StockUOM=$myrow['units'];
 	}
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post"><table class=selection>';
+	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	if (!isset($SupplierID)) {
 		$SupplierID = '';
