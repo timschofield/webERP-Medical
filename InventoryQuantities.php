@@ -150,7 +150,7 @@ If (isset($_POST['PrintPDF'])) {
 
 	echo '<br /><br /><form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<table class=selection><tr><td>';
+	echo '<table class="selection"><tr><td>';
 	echo '<tr><td>' . _('Selection') . ':</td><td><select name="Selection">';
 	echo '<option selected value="All">' . _('All') . '</option>';
 	echo '<option value="Multiple">' . _('Only Parts With Multiple Locations') . '</option>';
