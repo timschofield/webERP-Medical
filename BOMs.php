@@ -415,7 +415,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 	}
 
 	echo '<br /><div class=centre><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Select a Different BOM') . '</a></div><br />';
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	// Display Manufatured Parent Items
 	$sql = "SELECT bom.parent,
 			stockmaster.description,
@@ -500,7 +500,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 	 	} //end while loop
 	 	echo '</div></td></tr>';
 	}
-	echo '</table><br /><table class=selection>';
+	echo '</table><br /><table class="selection">';
 	echo '<tr><th colspan=13><div class="centre"><font color=blue size=3><b>'.$SelectedParent .' - ' . $myrow[0] . ' ('. $MBdesc. ') </font></b></th></tr>';
 
     // *** POPAD&T
@@ -578,7 +578,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 			prnMsg(_('Edit the details of the selected component in the fields below') . '. <br />' . _('Click on the Enter Information button to update the component details'),'info');
 			echo '<br /><input type=hidden name="SelectedParent" value="'.$SelectedParent.'">';
 			echo '<input type=hidden name="SelectedComponent" value="'.$SelectedComponent.'">';
-			echo '<table class=selection>';
+			echo '<table class="selection">';
 			echo '<tr><th colspan=13><div class="centre"><font color=blue size=3><b>'. ('Edit Component Details') .'</font></b></th></tr>';
 			echo '<tr><td>' . _('Component') . ':</td><td><b>' . $SelectedComponent . '</b></td></tr>';
 
@@ -587,7 +587,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 			echo '<input type=hidden name="SelectedParent" value="'.$SelectedParent.'">';
 			/* echo "Enter the details of a new component in the fields below. <br />Click on 'Enter Information' to add the new component, once all fields are completed.";
 			*/
-			echo '<table class=selection>';
+			echo '<table class="selection">';
 			echo '<tr><th colspan=13><div class="centre"><font color=blue size=3><b>'. ('New Component Details') .'</font></b></th></tr>';
 			echo '<tr><td>' . _('Component code') . ':</td><td>';
 			echo '<select ' . (in_array('ComponentCode',$Errors) ?  'class="selecterror"' : '' ) .' tabindex="1" name="Component">';
@@ -793,7 +793,7 @@ if (!isset($SelectedParent)) {
 		 _('to maintain the bill of material for using the options below') . '.' . '<br /><font size=1>' .
 	 _('Parts must be defined in the stock item entry') . '/' . _('modification screen as manufactured') .
      ', ' . _('kits or assemblies to be available for construction of a bill of material') .'</div>'.
-     '</font><br /><table class=selection cellpadding=3 colspan=4><tr><td><font size=1>' . _('Enter text extracts in the') .
+     '</font><br /><table class="selection" cellpadding=3 colspan=4><tr><td><font size=1>' . _('Enter text extracts in the') .
 	 ' <b>' . _('description') . '</b>:</font></td><td><input tabindex="1" type="Text" name="Keywords" size=20 maxlength=25></td>
 	 <td><font size=3><b>' . _('OR') . '</b></font></td><td><font size=1>' . _('Enter extract of the') .
      ' <b>' . _('Stock Code') . '</b>:</font></td><td><input tabindex="2" type="Text" name="StockCode" size=15 maxlength=18></td>
@@ -802,7 +802,7 @@ if (!isset($SelectedParent)) {
 
 if (isset($_POST['Search']) and isset($result) AND !isset($SelectedParent)) {
 
-	echo '<br /><table cellpadding=2 colspan=7 class=selection>';
+	echo '<br /><table cellpadding=2 colspan=7 class="selection">';
 	$TableHeader = '<tr><th>' . _('Code') . '</th>
 				<th>' . _('Description') . '</th>
 				<th>' . _('On Hand') . '</th>
