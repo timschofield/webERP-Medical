@@ -52,7 +52,7 @@ echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '" enctype="multipa
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo '<input type=hidden name="LineNo" value="' . $LineNo . '">';
 echo '<input type=hidden name="StockID" value="'. $StockID. '">';
-echo '<table class=selection><tr><td>';
+echo '<table class="selection"><tr><td>';
 echo '<input type=radio name=EntryType onClick="submit();" ';
 if ($_POST['EntryType']=='KEYED') {
 	echo ' checked ';
