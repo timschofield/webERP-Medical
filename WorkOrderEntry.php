@@ -556,7 +556,7 @@ $SQL="SELECT categoryid,
 		ORDER BY categorydescription";
 	$result1 = DB_query($SQL,$db);
 
-echo '<table class=selection><tr><td>' . _('Select a stock category') . ':<select name="StockCat">';
+echo '<table class="selection"><tr><td>' . _('Select a stock category') . ':<select name="StockCat">';
 
 if (!isset($_POST['StockCat'])){
 	echo '<option selected value="All">' . _('All') . '</option>';
@@ -593,7 +593,7 @@ if (isset($SearchResult)) {
 
 	if (DB_num_rows($SearchResult)>1){
 
-		echo '<table cellpadding=2 colspan=7 class=selection>';
+		echo '<table cellpadding=2 colspan=7 class="selection">';
 		$TableHeader = '<tr><th>' . _('Code') . '</th>
 				   			<th>' . _('Description') . '</th>
 				   			<th>' . _('Units') . '</th></tr>';
