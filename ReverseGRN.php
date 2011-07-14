@@ -339,7 +339,7 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 	if (!isset($_POST['RecdAfterDate']) OR !Is_Date($_POST['RecdAfterDate'])) {
 		$_POST['RecdAfterDate'] = Date($_SESSION['DefaultDateFormat'],Mktime(0,0,0,Date("m")-3,Date("d"),Date("Y")));
 	}
-	echo '<table class=selection><tr>';
+	echo '<table class="selection"><tr>';
 	echo '<input type=hidden name="SupplierID" value="' . $_POST['SupplierID'] . '">';
 	echo '<input type=hidden name="SuppName" value="' . $_POST['SuppName'] . '">';
 	echo '<td>'._('Show all goods received after') . ': </td><td><input type=text class=date alt="'.
@@ -368,7 +368,7 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 			prnMsg(_('There are no outstanding goods received yet to be invoiced for') . ' ' . $_POST['SuppName'] . '.<br />' . _('To reverse a GRN that has been invoiced first it must be credited'),'warn');
 		} else { //there are GRNs to show
 
-			echo '<br /><table cellpadding=2 colspan=7 class=selection>';
+			echo '<br /><table cellpadding=2 colspan=7 class="selection">';
 			$TableHeader = '<tr>
 					<th>' . _('GRN') . ' #</th>
 					<th>' . _('Item Code') . '</th>
