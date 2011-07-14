@@ -75,7 +75,7 @@ if ($_SESSION['SuppTrans']->InvoiceOrCredit=='Invoice'){
 }
 echo '<p>'.$_SESSION['SuppTrans']->SuppReference . ' ' ._('From') . ' ' . $_SESSION['SuppTrans']->SupplierName.'</p>';
 
-echo '<table cellpadding=2 class=selection>';
+echo '<table cellpadding=2 class="selection">';
 $TableHeader = '<tr><th>' . _('Shipment') . '</th>
 		<th>' . _('Amount') . '</th></tr>';
 echo $TableHeader;
@@ -105,7 +105,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 if (!isset($_POST['ShiptRef'])) {
 	$_POST['ShiptRef']='';
 }
-echo '<table class=selection>';
+echo '<table class="selection">';
 echo '<tr><td>' . _('Shipment Reference') . ':</td>
 	<td><input type="text" name="ShiptRef" size="12" maxlength="11" value="' .  $_POST['ShiptRef'] . '"></td></tr>';
 echo '<tr><td>' . _('Shipment Selection') . ':<br /> ' . _('If you know the code enter it above') . '<br />' . _('otherwise select the shipment from the list') . '</td><td><select name="ShiptSelection">';
