@@ -221,11 +221,11 @@ if (!isset($_GET['delete'])) {
 
 		echo '<input type="hidden" name="SelectedAccount" value="' . $SelectedAccount . '">';
 		echo '<input type="hidden" name="AccountCode" value="' . $_POST['AccountCode'] .'">';
-		echo '<table class=selection>
+		echo '<table class="selection">
 				<tr><td>' . _('Account Code') . ':</td>
 					<td>' . $_POST['AccountCode'] . '</td></tr>';
 	} else {
-		echo '<table class=selection>';
+		echo '<table class="selection">';
 		echo '<tr><td>' . _('Account Code') . ':</td>
 				<td><input type="text" name="AccountCode" size=11 class=number maxlength=10></td></tr>';
 	}
@@ -282,7 +282,7 @@ or deletion of the records*/
 
 	$result = DB_query($sql,$db,$ErrMsg);
 
-	echo '<br /><table class=selection>';
+	echo '<br /><table class="selection">';
 	echo '<tr>
 		<th>' . _('Account Code') . '</th>
 		<th>' . _('Account Name') . '</th>
