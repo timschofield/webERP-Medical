@@ -200,7 +200,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' .
 		_('Search') . '" alt="" />' . ' ' . _('Select Customer For Credit Note').'</p>';
-	echo '<table cellpadding=3 colspan=4 class=selection>';
+	echo '<table cellpadding=3 colspan=4 class="selection">';
 	echo '<tr><th colspan=5><font size=3 color=navy><b> ' . _('Customer Selection') . '</b></font></th></tr>';
 	echo '<tr>';
 	echo '<td><font size=1>' . _('Enter text in the customer name') . ':</font></td>';
@@ -214,7 +214,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 	if (isset($result_CustSelect)) {
 
-		  echo '<br /><table cellpadding=2 colspan=7 class=selection>';
+		  echo '<br /><table cellpadding=2 colspan=7 class="selection">';
 
 		  $TableHeader = '<tr>
 							<th>' . _('Code') . '</th>
@@ -643,7 +643,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 /* This is where the credit note as selected should be displayed  reflecting any deletions or insertions*/
 
-		  echo '<table cellpadding=2 colspan=7 class=selection>
+		  echo '<table cellpadding=2 colspan=7 class="selection">
 		  <tr>
 		  <th>' . _('Item Code') . '</th>
 		  <th>' . _('Item Description') . '</th>
@@ -818,7 +818,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 /*Now show options for the credit note */
 
-		echo '<br /><table class=selection><tr><td>' . _('Credit Note Type') . ' :</td><td><select name=CreditType>';
+		echo '<br /><table class="selection"><tr><td>' . _('Credit Note Type') . ' :</td><td><select name=CreditType>';
 		if (!isset($_POST['CreditType']) OR $_POST['CreditType']=='Return'){
 			   echo '<option selected value="Return">' . _('Goods returned to store') . '</option>';
 			   echo '<option value="WriteOff">' . _('Goods written off') . '</option>';
@@ -916,7 +916,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 		 $result1 = DB_query($SQL,$db);
 
-		 echo '<br /><table class=selection>
+		 echo '<br /><table class="selection">
 		 	<tr><td>' . _('Select a stock category') . ':&nbsp;<select name="StockCat">';
 
 		 echo '<option selected value="All">' . _('All') . '</option>';
@@ -950,7 +950,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 		 if (isset($SearchResult)) {
 
-			  echo '<table cellpadding=2 colspan=7 class=selection>';
+			  echo '<table cellpadding=2 colspan=7 class="selection">';
 			  $TableHeader = '<tr><th>' . _('Code') . '</th>
 			  			<th>' . _('Description') . '</th>
 						<th>' . _('Units') .'</th></tr>';
@@ -994,7 +994,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 	} /*end if part searching required */ elseif(!isset($_POST['ProcessCredit'])) { /*quick entry form */
 
 /*FORM VARIABLES TO POST TO THE CREDIT NOTE 10 AT A TIME WITH PART CODE AND QUANTITY */
-	     echo '<table class=selection>';
+	     echo '<table class="selection">';
 	     echo '<tr><th colspan=2><font size=3 color=navy><b>' . _('Quick Entry') . '</th></tr>';
 	     echo '<tr>
              	<th>' . _('Part Code') . '</th>
