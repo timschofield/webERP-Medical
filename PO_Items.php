@@ -920,7 +920,7 @@ if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
 		echo  ' ' . _('Purchase Order') .' '. $_SESSION['PO'.$identifier]->OrderNo ;
 	}
 	echo '<br /><b>'._(' Order Summary') . '</b></p>';
-	echo '<table cellpadding=2 colspan=7 class=selection>';
+	echo '<table cellpadding=2 colspan=7 class="selection">';
 	echo '<tr>
 		<th>' . _('Item Code') . '</th>
 		<th>' . _('Description') . '</th>
@@ -987,7 +987,7 @@ if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
 
 if (isset($_POST['NonStockOrder'])) {
 
-	echo '<br /><table class=selection><tr><td>'._('Item Description').'</td>';
+	echo '<br /><table class="selection"><tr><td>'._('Item Description').'</td>';
 	echo '<td><input type=text name=ItemDescription size=40></td></tr>';
 	echo '<tr><td>'._('General Ledger Code').'</td>';
 	echo '<td><select name="GLCode">';
@@ -1039,7 +1039,7 @@ if (!isset($_GET['Edit'])) {
 	$DbgMsg = _('The SQL used to retrieve the category details but failed was');
 	$result1 = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
-	echo '<table class=selection><tr><th colspan=3><font size=3 color=blue>'. _('Search For Stock Items') . '</th>';
+	echo '<table class="selection"><tr><th colspan=3><font size=3 color=blue>'. _('Search For Stock Items') . '</th>';
 
 	echo ':</font></tr><tr><td><select name="StockCat">';
 
@@ -1084,7 +1084,7 @@ if (!isset($_GET['Edit'])) {
 
 if (isset($SearchResult)) {
 
-	echo '<table cellpadding=1 colspan=7 class=selection>';
+	echo '<table cellpadding=1 colspan=7 class="selection">';
 
 	$TableHeader = '<tr>
 								<th>' . _('Code')  . '</th>
