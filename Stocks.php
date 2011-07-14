@@ -572,7 +572,7 @@ if (isset($_POST['submit'])) {
 }
 
 
-echo '<form name="ItemForm" enctype="multipart/form-data" method="post" action="' . $_SERVER['PHP_SELF'] . '"><table class=selection>
+echo '<form name="ItemForm" enctype="multipart/form-data" method="post" action="' . $_SERVER['PHP_SELF'] . '"><table class="selection">
 	<tr><td>'. "\n"; // Nested table
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
@@ -972,7 +972,7 @@ $PropertiesResult = DB_query($sql,$db);
 $PropertyCounter = 0;
 $PropertyWidth = array();
 
-echo '<br /><table class=selection>';
+echo '<br /><table class="selection">';
 if (DB_num_rows($PropertiesResult)>0) {
 	echo '<tr><th colspan="2">' . _('Item Category Properties') . '</th></tr>';
 }
