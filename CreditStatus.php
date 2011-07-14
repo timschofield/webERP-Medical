@@ -146,7 +146,7 @@ or deletion of the records*/
 	$sql = "SELECT reasoncode, reasondescription, dissallowinvoices FROM holdreasons";
 	$result = DB_query($sql, $db);
 
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	echo '<tr>
 		<th>'. _('Status Code') .'</th>
 		<th>'. _('Description') .'</th>
@@ -214,14 +214,14 @@ if (!isset($_GET['delete'])) {
 
 		echo '<input type=hidden name="SelectedReason" value="' . $SelectedReason . '">';
 		echo '<input type=hidden name="ReasonCode" value="' . $_POST['ReasonCode'] . '">';
-		echo '<table class=selection><tr><td>'. _('Status Code') .':</td><td>';
+		echo '<table class="selection"><tr><td>'. _('Status Code') .':</td><td>';
 		echo $_POST['ReasonCode'] . '</td></tr>';
 
 	} else { //end of if $SelectedReason only do the else when a new record is being entered
 		if (!isset($_POST['ReasonCode'])) {
 			$_POST['ReasonCode'] = '';
 		}
-		echo '<br /><table class=selection>
+		echo '<br /><table class="selection">
 			<tr>
 				<td>'. _('Status Code') .':</td>
 				<td><input ' . (in_array('ReasonCode',$Errors) ? 'class="inputerror"' : '' ) .
