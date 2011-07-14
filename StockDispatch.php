@@ -226,7 +226,7 @@ If (isset($_POST['PrintPDF'])) {
 	$result = DB_query($sql, $db);
 	$myrow = DB_fetch_array($result);
 	$DefaultLocation = $myrow['defaultlocation'];
-	echo '<br/><form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table class=selection>';
+	echo '<br/><form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	$sql = "SELECT loccode,
 			locationname
@@ -235,7 +235,7 @@ If (isset($_POST['PrintPDF'])) {
 	if (!isset($_POST['FromLocation'])) {
 		$_POST['FromLocation']=$DefaultLocation;
 	}
-	echo '<table class=selection><tr><td>' . _('Dispatch Percent') . ':</td><td><input type ="text" name="Percent" class=number size="8" value=0>';
+	echo '<table class="selection"><tr><td>' . _('Dispatch Percent') . ':</td><td><input type ="text" name="Percent" class=number size="8" value=0>';
 	echo '<tr><td>' . _('From Stock Location') . ':</td><td><select name="FromLocation"> ';
 	while ($myrow=DB_fetch_array($resultStkLocs)){
 		if ($myrow['loccode'] == $_POST['FromLocation']){
