@@ -176,7 +176,7 @@ or deletion of the records*/
 			FROM pcexpenses";
 	$result = DB_query($sql,$db);
 
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	echo '<tr>
 		<th>' . _('Code Of Expense') . '</th>
 		<th>' . _('Description') . '</th>
@@ -230,7 +230,7 @@ if (! isset($_GET['delete'])) {
 
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<br /><table class=selection>'; //Main table
+	echo '<br /><table class="selection">'; //Main table
 
 	// The user wish to EDIT an existing type
 	if ( isset($SelectedExpense) AND $SelectedExpense!='' )
@@ -251,7 +251,7 @@ if (! isset($_GET['delete'])) {
 
 		echo '<input type=hidden name="SelectedExpense" value="' . $SelectedExpense . '">';
 		echo '<input type=hidden name="codeexpense" value="' . $_POST['codeexpense']. '">';
-		echo '<table class=selection> <tr><td>' . _('Code Of Expense') . ':</td><td>';
+		echo '<table class="selection"> <tr><td>' . _('Code Of Expense') . ':</td><td>';
 
 		// We dont allow the user to change an existing type code
 
@@ -261,10 +261,10 @@ if (! isset($_GET['delete'])) {
 
 		// This is a new type so the user may volunteer a type code
 		if (isset($_POST['codeexpense'])) {
-			echo '<table class=selection><tr><td>' . _('Code Of Expense') . ':</td><td><input type="Text" value="'.$_POST['codeexpense'].'"
+			echo '<table class="selection"><tr><td>' . _('Code Of Expense') . ':</td><td><input type="Text" value="'.$_POST['codeexpense'].'"
 				' . (in_array('SalesType',$Errors) ? 'class="inputerror"' : '' ) .' name="codeexpense"></td></tr>';
 		} else {
-			echo '<table class=selection><tr><td>' . _('Code Of Expense') . ':</td><td><input type="Text"
+			echo '<table class="selection"><tr><td>' . _('Code Of Expense') . ':</td><td><input type="Text"
 				' . (in_array('SalesType',$Errors) ? 'class="inputerror"' : '' ) .' name="codeexpense"></td></tr>';
 		}
 	}
