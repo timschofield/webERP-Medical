@@ -232,7 +232,7 @@ if (! isset($_GET['delete'])) {
 			$_POST['SectionName']  = $myrow['sectionname'];
 
 			echo '<input type=hidden name="SelectedSectionID" value="' . $_POST['SectionID'] . '">';
-			echo '<table class=selection>
+			echo '<table class="selection">
 			<td>' . _('Section Number') . ':' . '</td>
 			<td>' . $_POST['SectionID'] . '</td>';
 		}
