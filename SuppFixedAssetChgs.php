@@ -68,7 +68,7 @@ if ($_SESSION['SuppTrans']->InvoiceOrCredit=='Invoice'){
 }
 echo'<div class="centre"><p class="page_title_text">' . $_SESSION['SuppTrans']->SuppReference . ' ' ._('From') . ' ' . $_SESSION['SuppTrans']->SupplierName . '</p></div>';
 
-echo '<table cellpadding=2 class=selection>';
+echo '<table cellpadding=2 class="selection">';
 $TableHeader = '<tr><th>' . _('Asset ID') . '</th>
 					<th>' . _('Description') . '</th>
 					<th>' . _('Amount') . '</th></tr>';
@@ -109,7 +109,7 @@ if (!isset($_POST['AssetID'])) {
 
 prnMsg(_('If you know the code enter it in the Asset ID input box, otherwise select the asset from the list below. Only  assets with no cost will show in the list'),'info');
 
-echo '<br /><table class=selection>';
+echo '<br /><table class="selection">';
 
 echo '<tr><td>' . _('Enter Asset ID') . ':</td>
 	<td><input type="text" name="AssetID" size="5" maxlength="6" value="' .  $_POST['AssetID'] . '"> <a href="FixedAssetItems.php" target=_blank>'. _('New Fixed Asset') . '</a></td></tr>';
