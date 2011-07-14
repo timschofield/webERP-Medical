@@ -46,7 +46,7 @@ if (DB_num_rows($GetShiptHdrResult)==0) {
 
 $HeaderData = DB_fetch_array($GetShiptHdrResult);
 echo '<br />';
-echo '<table class=selection>';
+echo '<table class="selection">';
 echo '<tr><th colspan=4><font size=3 color=navy>'._('Shipment Details').'</font></th></tr>';
 echo '<tr>
 		<td><b>'. _('Shipment') .': </td>
@@ -131,7 +131,7 @@ if (db_num_rows($LineItemsResult) > 0) {
 		$PeriodNo = GetPeriod(Date($_SESSION['DefaultDateFormat']), $db);
 	}
 
-	echo '<br /><table cellpadding=2 colspan=7 class=selection>';
+	echo '<br /><table cellpadding=2 colspan=7 class="selection">';
 	echo '<tr><th colspan=9><font color=navy size=3>' . _('Items on shipment'). '</font></th></tr>';
 
 	$TableHeader = '<tr>	<th>'. _('Item'). '</th>
@@ -498,7 +498,7 @@ $sql = "SELECT suppliers.suppname,
 
 $ChargesResult = DB_query($sql,$db);
 
-echo '<table cellpadding=2 colspan=6 class=selection>';
+echo '<table cellpadding=2 colspan=6 class="selection">';
 echo '<tr><th colspan=6><font color=navy size=3>' . _('Shipment Charges Against Products'). '</font></th></tr>';
 
 $TableHeader = '<tr>
@@ -570,7 +570,7 @@ $sql = "SELECT suppliers.suppname,
 
 $ChargesResult = DB_query($sql,$db);
 
-echo '<table cellpadding=2 colspan=5 class=selection>';
+echo '<table cellpadding=2 colspan=5 class="selection">';
 echo '<tr><th colspan=6><font color=navy size=3>'._('General Shipment Charges').'</font></th></tr>';
 
 $TableHeader = '<tr>
