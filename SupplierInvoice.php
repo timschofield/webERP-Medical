@@ -224,7 +224,7 @@ if (!isset($_POST['PostInvoice'])){
 	/* everything below here only do if a Supplier is selected
 	fisrt add a header to show who we are making an invoice for */
 
-	echo '<br /><table class=selection colspan=4><tr><th>' . _('Supplier') . '</th>
+	echo '<br /><table class="selection" colspan=4><tr><th>' . _('Supplier') . '</th>
 													<th>' . _('Currency') .  '</th>
 													<th>' . _('Terms') .		'</th>
 													<th>' . _('Tax Authority') . '</th></tr>';
@@ -240,7 +240,7 @@ if (!isset($_POST['PostInvoice'])){
 	echo '<br /><form action="' . $_SERVER['PHP_SELF'] . '" method="post" name="form1">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-	echo '<br /><table class=selection>';
+	echo '<br /><table class="selection">';
 
 	echo '<tr><td>' . _('Supplier Invoice Reference') . ':</td>
 			<td><input type="text" size="20" maxlength="20" name="SuppReference" value="' . $_SESSION['SuppTrans']->SuppReference . '"></td>';
@@ -270,7 +270,7 @@ if (!isset($_POST['PostInvoice'])){
 	if (count( $_SESSION['SuppTrans']->GRNs)>0){   /*if there are any GRNs selected for invoicing then */
 		/*Show all the selected GRNs so far from the SESSION['SuppInv']->GRNs array */
 
-		echo '<br /><table cellpadding=2 class=selection>
+		echo '<br /><table cellpadding=2 class="selection">
 			<tr><th colspan="6">' . _('Purchase Order Charges') . '</th></tr>';
 		$tableheader = '<tr bgcolor=#800000>
 							<th>' . _('Seq') . ' #</th>
@@ -305,7 +305,7 @@ if (!isset($_POST['PostInvoice'])){
 
 	if (count( $_SESSION['SuppTrans']->Shipts) > 0){   /*if there are any Shipment charges on the invoice*/
 
-		echo '<br /><table cellpadding=2 class=selection>
+		echo '<br /><table cellpadding=2 class="selection">
 					<tr>
 						<th colspan="2">' . _('Shipment Charges') . '</th>
 					</tr>';
@@ -337,7 +337,7 @@ if (!isset($_POST['PostInvoice'])){
 
 	if (count( $_SESSION['SuppTrans']->Assets) > 0){   /*if there are any fixed assets on the invoice*/
 
-		echo '<br /><table cellpadding=2 class=selection>
+		echo '<br /><table cellpadding=2 class="selection">
 					<tr>
 						<th colspan=3>' . _('Fixed Asset Additions') . '</th>
 					</tr>';
@@ -375,7 +375,7 @@ if (!isset($_POST['PostInvoice'])){
 
 	if (count( $_SESSION['SuppTrans']->Contracts) > 0){   /*if there are any contract charges on the invoice*/
 
-		echo '<br /><table cellpadding="2" class=selection>
+		echo '<br /><table cellpadding="2" class="selection">
 					<tr>
 						<th colspan="3">' . _('Contract Charges') . '</th>
 					</tr>';
@@ -415,7 +415,7 @@ if (!isset($_POST['PostInvoice'])){
 	if ( $_SESSION['SuppTrans']->GLLink_Creditors == 1){
 
 		if (count($_SESSION['SuppTrans']->GLCodes) > 0){
-			echo '<br /><table cellpadding=2 class=selection>
+			echo '<br /><table cellpadding=2 class="selection">
 							<tr>
 								<th colspan="5">' . _('General Ledger Analysis') . '</th>
 							</tr>';
@@ -449,13 +449,13 @@ if (!isset($_POST['PostInvoice'])){
 
 		$_SESSION['SuppTrans']->OvAmount = ($TotalGRNValue + $TotalGLValue + $TotalAssetValue + $TotalShiptValue + $TotalContractsValue);
 
-		echo '<br /><table class=selection>
+		echo '<br /><table class="selection">
 					<tr>
 						<td>' . _('Amount in supplier currency') . ':</td>
 						<td colspan=2 class=number>' . number_format( $_SESSION['SuppTrans']->OvAmount,2) . '</td>
 					</tr>';
 	} else {
-		echo '<br /><table class=selection>
+		echo '<br /><table class="selection">
 					<tr>
 						<td>' . _('Amount in supplier currency') . ':</td>
 						<td colspan=2 class=number><input type="text" size="12" maxlength="10" name="OvAmount" value=' . number_format( $_SESSION['SuppTrans']->OvAmount,2) . '></td>
@@ -532,7 +532,7 @@ if (!isset($_POST['PostInvoice'])){
 			<td colspan=2 class=number><b>' . $DisplayTotal . '</b></td>
 		</tr></table>';
 
-	echo '<br /><table class=selection>
+	echo '<br /><table class="selection">
 				<tr>
 					<td>' . _('Comments') . '</td><td><textarea name=Comments cols=40 rows=2>' . $_SESSION['SuppTrans']->Comments . '</textarea></td>
 				</tr></table>';
