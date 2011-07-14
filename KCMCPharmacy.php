@@ -332,7 +332,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 									'2',
 									'" . ($_SESSION['Items']['Value']) . "',
 									'" . $_SESSION['CompanyRecord']['currencydefault'] . "',
-									'" . $_SESSION['UserID']) . "'
+									'" . $_SESSION['UserID'] . "'
 								)";
 
 			$DbgMsg = _('The SQL that failed to insert the bank account transaction was');
