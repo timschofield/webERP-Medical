@@ -163,9 +163,9 @@ if (isset($StockID) and $StockID!=""){
 		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' .
 			_('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
 
-		echo "<table class="selection" cellpadding=2>";
-		echo "<tr><th colspan=5><div class='centre'><font size=4><b>" . $myrow[0] . ' : ' . _('per') . ' ' . $myrow[1] .
-			"</b></font></div></th></tr>";
+		echo '<table class="selection" cellpadding="2">';
+		echo '<tr><th colspan="5"><div class="centre"><font size="4"><b>' . $myrow[0] . ' : ' . _('per') . ' ' . $myrow[1] .
+			'</b></font></div></th></tr>';
 		$TableHeader = '<tr>
 				<th>' . _('Component') . '</th>
 				<th>' . _('Description') . '</th>
