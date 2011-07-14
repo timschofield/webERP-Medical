@@ -249,7 +249,7 @@ if (!isset($SelectedUser)) {
 		FROM www_users WHERE customerid = '" . $_SESSION['CustomerID'] . "'";
 	$result = DB_query($sql,$db);
 
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	echo '<tr><th>' . _('User Login') . '</th>
 		<th>' . _('Full Name') . '</th>
 		<th>' . _('Telephone') . '</th>
@@ -361,12 +361,12 @@ if (isset($SelectedUser)) {
 	echo '<input type="hidden" name="UserID" value="' . $_POST['UserID'] . '">';
 	echo '<input type="hidden" name="ModulesAllowed" value="' . $_POST['ModulesAllowed'] . '">';
 
-	echo '<table class=selection> <tr><td>' . _('User code') . ':</td><td>';
+	echo '<table class="selection"> <tr><td>' . _('User code') . ':</td><td>';
 	echo $_POST['UserID'] . '</td></tr>';
 
 } else { //end of if $SelectedUser only do the else when a new record is being entered
 
-	echo '<table class=selection><tr><td>' . _('User Login') . ':</td><td><input type="text" name="UserID" size=22 maxlength=20 ></td></tr>';
+	echo '<table class="selection"><tr><td>' . _('User Login') . ':</td><td><input type="text" name="UserID" size=22 maxlength=20 ></td></tr>';
 
 	/*set the default modules to show to all
 	this had trapped a few people previously*/
