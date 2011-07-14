@@ -781,7 +781,7 @@ if (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 && $_SESSION['ExistingOrder']=
 
 	prnMsg(_('Order Number') .' ' . $_SESSION['ExistingOrder'] . ' ' . _('has been updated'),'success');
 
-	echo '<br /><table class=selection><tr><td><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print') . '" alt=""></td><td><a href="' . $rootpath . '/PrintCustOrder.php?identifier='.$identifier  . '&TransNo=' . $_SESSION['ExistingOrder'] . '">'. _('Print packing slip - pre-printed stationery') .'</a></td></tr>';
+	echo '<br /><table class="selection"><tr><td><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print') . '" alt=""></td><td><a href="' . $rootpath . '/PrintCustOrder.php?identifier='.$identifier  . '&TransNo=' . $_SESSION['ExistingOrder'] . '">'. _('Print packing slip - pre-printed stationery') .'</a></td></tr>';
 	echo '<tr><td><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print') . '" alt=""></td><td><a  target="_blank" href="' . $rootpath . '/PrintCustOrder_generic.php?identifier='.$identifier  . '&TransNo=' . $_SESSION['ExistingOrder'] . '">'. _('Print packing slip') . ' (' . _('Laser') . ')' .'</a></td></tr>';
 	echo '<tr><td><img src="'.$rootpath.'/css/'.$theme.'/images/reports.png" title="' . _('Invoice') . '" alt=""></td><td><a href="' . $rootpath .'/ConfirmDispatch_Invoice.php?identifier='.$identifier  . '&OrderNumber=' . $_SESSION['ExistingOrder'] . '">'. _('Confirm Order Delivery Quantities and Produce Invoice') .'</a></td></tr>';
 	echo '<tr><td><img src="'.$rootpath.'/css/'.$theme.'/images/sales.png" title="' . _('Order') . '" alt=""></td><td><a href="' . $rootpath .'/SelectSalesOrder.php?identifier='.$identifier   . '">'. _('Select A Different Order') .'</a></td></tr></table>';
@@ -916,7 +916,7 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 	}
 
 	$DisplayTotal = number_format($_SESSION['Items'.$identifier]->total,2);
-	echo '<table class=selection><tr>
+	echo '<table class="selection"><tr>
 		<td>'. _('Total Weight') .':</td>
 		<td>'.$DisplayWeight .'</td>
 		<td>'. _('Total Volume') .':</td>
@@ -925,7 +925,7 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 
 	$DisplayVolume = number_format($_SESSION['Items'.$identifier]->totalVolume,2);
 	$DisplayWeight = number_format($_SESSION['Items'.$identifier]->totalWeight,2);
-	echo '<table class=selection><tr>
+	echo '<table class="selection"><tr>
 		<td>'. _('Total Weight') .':</td>
 		<td>'. $DisplayWeight .'</td>
 		<td>'. _('Total Volume') .':</td>
@@ -934,7 +934,7 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 
 }
 
-echo '<br /><table  class=selection>';
+echo '<br /><table  class="selection">';
 echo '<tr><th colspan=2><font color="navy" size=3>'._('Delivery Details').'</font></th></tr>';
 echo '<tr>
 		<td>'. _('Deliver To') .':</td>
