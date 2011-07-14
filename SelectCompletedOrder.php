@@ -422,7 +422,7 @@ if (isset($_POST['SearchParts']) and $_POST['SearchParts']!=''){
 if (!isset($_POST['OrdersAfterDate']) OR $_POST['OrdersAfterDate'] == '' OR ! Is_Date($_POST['OrdersAfterDate'])){
 	$_POST['OrdersAfterDate'] = Date($_SESSION['DefaultDateFormat'],Mktime(0,0,0,Date('m')-2,Date('d'),Date('Y')));
 }
-echo '<table class=selection>';
+echo '<table class="selection">';
 
 if (isset($PartString)) {
 	echo '<tr><td>'.$PartString.'</td>';
@@ -445,7 +445,7 @@ if (!isset($SelectedStockItem)) {
 
    echo '<br />';
    echo '<div class="page_help_text"><font size=1>' . _('To search for sales orders for a specific part use the part selection facilities below') . '   </font></div>';
-   echo '<br /><table class=selection>';
+   echo '<br /><table class="selection">';
    echo '<tr><td><font size=1>' . _('Select a stock category') . ':</font>';
    echo '<select name="StockCat">';
 
@@ -475,7 +475,7 @@ if (!isset($SelectedStockItem)) {
 
 If (isset($StockItemsResult)) {
 
-	echo '<br /><table cellpadding=2 colspan=7 class=selection>';
+	echo '<br /><table cellpadding=2 colspan=7 class="selection">';
 
 	$TableHeadings = '<tr><th>' . _('Code') . '</th>' .
 				'<th>' . _('Description') . '</th>' .
@@ -525,7 +525,7 @@ If (isset($SalesOrdersResult)) {
 
 /*show a table of the orders returned by the SQL */
 
-	echo '<br /><table cellpadding=2 colspan=6 width=90% class=selection>';
+	echo '<br /><table cellpadding=2 colspan=6 width=90% class="selection">';
 
 	$tableheader = '<tr><th>' . _('Order') . ' #</th>
 			<th>' . _('Customer') . '</th>
