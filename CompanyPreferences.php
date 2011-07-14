@@ -158,7 +158,7 @@ if (isset($_POST['submit'])) {
 
 echo '<form method="post" action=' . $_SERVER['PHP_SELF'] . '>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<table class=selection>';
+echo '<table class="selection">';
 
 if ($InputError != 1) {
 	$sql = "SELECT coyname,
