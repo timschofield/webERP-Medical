@@ -199,7 +199,7 @@ if (isset($_POST['PrintPDF'])
 		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' .
 			_('Inventory') . '" alt="" />' . ' ' . $title . '</p>';
 
-		echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="POST"><table class=selection>';
+		echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="POST"><table class="selection">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 		echo '<tr><td>' . _('From Inventory Category Code') . ':</font></td><td><select name=FromCriteria>';
