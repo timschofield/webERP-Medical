@@ -34,7 +34,7 @@ if (isset($_POST['CheckCode'])) {
 	$ErrMsg=_('The stock information cannot be retrieved because');
 	$DbgMsg=_('The SQL to get the stock description was');
 	$result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
-	echo '<table class=selection>
+	echo '<table class="selection">
 			<tr><th>'._('Stock Code').'</th>
 				<th>'._('Stock Description').'</th>
 			</tr>';
@@ -441,7 +441,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 if (!isset($_GET['Description'])) {
 	$_GET['Description']='';
 }
-echo '<table class=selection><tr><td>'. _('Stock Code'). ':</td><td>';
+echo '<table class="selection"><tr><td>'. _('Stock Code'). ':</td><td>';
 if (isset($_POST['StockID'])) {
 	echo '<input type=text name="StockID" size=21 value="' . $_POST['StockID'] . '" maxlength=20></td></tr>';
 } else {
