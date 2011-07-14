@@ -31,7 +31,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 $DefaultPeriodDate = Date ('Y-m-d', Mktime(0,0,0,Date('m'),0,Date('Y')));
 
 /*Show a form to allow input of criteria for TB to show */
-echo '<table class=selection><tr><td>'._('Account').':</td><td><select Name="Account">';
+echo '<table class="selection"><tr><td>'._('Account').':</td><td><select Name="Account">';
 $sql = "SELECT accountcode, accountname FROM chartmaster ORDER BY accountcode";
 $Account = DB_query($sql,$db);
 while ($myrow=DB_fetch_array($Account,$db)){
@@ -144,7 +144,7 @@ if (isset($_POST['Show'])){
 	$ErrMsg = _('The transactions for account') . ' ' . $SelectedAccount . ' ' . _('could not be retrieved because') ;
 	$TransResult = DB_query($sql,$db,$ErrMsg);
 
-	echo '<br /><table class=selection>';
+	echo '<br /><table class="selection">';
 
 	echo '<tr><th colspan=8><b>' ._('Transactions for account').' '.$SelectedAccount. ' - '. $SelectedAccountName.'</b></th></tr>';
 	$TableHeader = '<tr>
