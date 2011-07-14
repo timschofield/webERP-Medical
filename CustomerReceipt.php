@@ -231,7 +231,7 @@ if (isset($_POST['CommitBatch'])){
 	echo '<br /><p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Allocate') .
 		'" alt="" />' . ' ' . _('Summary of Receipt Batch').'</p><br />';
 
-	echo '<table class=selection><tr><th>'._('Batch Number').'</th>
+	echo '<table class="selection"><tr><th>'._('Batch Number').'</th>
 				<th>'._('Date Banked').'</th>
 				<th>'._('Customer Name').'</th>
 				<th>'._('GL Code').'</th>
@@ -728,7 +728,7 @@ if (isset($_POST['GLEntry'])) {
 		'" alt="">' . ' ' . _('Enter Customer Receipt') . '</p>';
 	echo '<div class="page_help_text">' . _('To enter a payment TO a customer (ie. to pay out a credit note), enter a negative payment amount.') . '</div>';
 }
-echo '<br /><table class=selection><tr><td>' . _('Bank Account') . ':</td>
+echo '<br /><table class="selection"><tr><td>' . _('Bank Account') . ':</td>
 				 <td><select tabindex=1 name="BankAccount" onChange="ReloadForm(form1.BatchInput)">';
 
 if (DB_num_rows($AccountsResults)==0){
@@ -843,7 +843,7 @@ if (isset($_SESSION['ReceiptBatch'])){
 				$_SESSION['ReceiptBatch']->BankAccountName . ' ' . _('on') . ' ' . $_SESSION['ReceiptBatch']->DateBanked . '</p>';
 	}
 
-	echo '<table width="90%" class=selection><tr>
+	echo '<table width="90%" class="selection"><tr>
 			<th>' . _('Amount') . ' ' . _('Received') . '</th>
 			<th>' . _('Discount') . '</th>
 			<th>' . _('Customer') . '</th>
@@ -906,7 +906,7 @@ if (isset($_SESSION['CustomerRecord'])
 	   echo '<br /><font color=red size=4><b>' . _('ACCOUNT ON HOLD') . '</font></b><br/>';
 	}
 
-	echo '<table width="90%" class=selection>
+	echo '<table width="90%" class="selection">
 			<tr>
 				<th width=20%>' . _('Total Balance') . '</th>
 				<th width=20%>' . _('Current') . '</th>
@@ -924,7 +924,7 @@ if (isset($_SESSION['CustomerRecord'])
 		</tr>
 		</table><br />';
 
-	echo '<table  class=selection>';
+	echo '<table  class="selection">';
 
 	$DisplayDiscountPercent = number_format($_SESSION['CustomerRecord']['pymtdiscount']*100,2) . "%";
 
@@ -935,7 +935,7 @@ if (isset($_SESSION['CustomerRecord'])
 
 if (isset($_POST['GLEntry']) AND isset($_SESSION['ReceiptBatch'])){
 /* Set up a heading for the transaction entry for a GL Receipt */
-	echo '<br /><table class=selection>';
+	echo '<br /><table class="selection">';
 	echo '<th colspan=2><font size=2 color=navy>' . _('General Ledger Receipt Entry') . '</font></th>';
 
 	//Select the tag
@@ -1026,7 +1026,7 @@ if (((isset($_SESSION['CustomerRecord'])
 	echo '<br />';
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') . '" alt="">' . ' ' . _('Select a Customer') . '</p>';
-	echo '<table cellpadding=3 colspan=4  class=selection>';
+	echo '<table cellpadding=3 colspan=4  class="selection">';
 	echo '<tr><td>' . _('Text in the Customer') . ' ' . '<b>' . _('name') . '</b>:</td>';
 	echo '<td><input tabindex=9 type="text" name="Keywords" size=15 maxlength=25></td>';
 	echo '<td><font size=3><b>' . _('OR') . '</b></font></td>';
@@ -1042,7 +1042,7 @@ if (((isset($_SESSION['CustomerRecord'])
 
 	if (isset($CustomerSearchResult)) {
 
-		echo '<table cellpadding=2 colspan=7  class=selection>';
+		echo '<table cellpadding=2 colspan=7  class="selection">';
 		$TableHeader = '<tr><th>' . _('Code') . '</th>
 							<th>' . _('Customer Name') . '</th></tr>';
 		echo $TableHeader;
