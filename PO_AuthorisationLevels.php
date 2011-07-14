@@ -100,7 +100,7 @@ $sql="SELECT
 $ErrMsg = _('The authentication details cannot be retrieved because');
 $Result=DB_query($sql,$db,$ErrMsg);
 
-echo '<table class=selection><tr>';
+echo '<table class="selection"><tr>';
 echo '<th>'._('User ID').'</th>';
 echo '<th>'._('User Name').'</th>';
 echo '<th>'._('Currency').'</th>';
