@@ -223,7 +223,7 @@ echo '<p>';
 if (DB_num_rows($result) == 0) {
 	prnMsg(_('There are no categories defined at this level.'));
 } else {
-	echo "<table class="selection">\n";
+	echo '<table class="selection">';
 	echo '<tr><th>' . _('Sub Category') . '</th></tr>';
 
 	$k=0; //row colour counter
