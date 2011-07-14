@@ -732,7 +732,7 @@ if ($WORow['closed']==1){
 if (!isset($_POST['ReceivedDate'])){
 	$_POST['ReceivedDate'] = Date($_SESSION['DefaultDateFormat']);
 }
-echo '<table cellpadding=2 class=selection>
+echo '<table cellpadding=2 class="selection">
 		<tr><td>' . _('Receive work order') . ':</td>
 			<td>' . $_POST['WO'] .'</td><td>' . _('Item') . ':</td>
 			<td>' . $_POST['StockID'] . ' - ' . $WORow['description'] . '</td></tr>
