@@ -11,7 +11,7 @@ if (!isset($_POST['Show'])) {
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 
 	$SQL = "SELECT bankaccountname,
 				bankaccounts.accountcode,
@@ -88,7 +88,7 @@ if (!isset($_POST['Show'])) {
 		prnMsg(_('There are no transactions for this account in the date range selected'), 'info');
 	} else {
 		$BankDetailRow = DB_fetch_array($BankResult);
-		echo '<table class=selection>
+		echo '<table class="selection">
 						<tr>
 							<th colspan=7><font size=3 color=blue>' . _('Account Transactions For').' '.$BankDetailRow['bankaccountname'].' '._('Between').' '.$_POST['FromTransDate'] . ' ' . _('and') . ' ' . $_POST['ToTransDate'] . '</font></th>
 						</tr>';
