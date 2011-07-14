@@ -155,7 +155,7 @@ or deletion of the records*/
 
 	$result = DB_query($sql,$db);
 
-	echo '<br /><table class=selection>';
+	echo '<br /><table class="selection">';
 	echo '<tr><th colspan="3"><font size="2" color="navy">' . _('Expense Codes for Type of Tab ') . ' ' .$SelectedTab. '</font></th></tr>';
 	echo '<tr>
 		<th>' . _('Expense Code') . '</th>
@@ -194,7 +194,7 @@ or deletion of the records*/
 
 		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-		echo '<br /><table  class=selection>'; //Main table
+		echo '<br /><table  class="selection">'; //Main table
 
 
 
