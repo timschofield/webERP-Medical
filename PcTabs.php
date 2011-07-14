@@ -196,7 +196,7 @@ or deletion of the records*/
 				ORDER BY tabcode";
 	$result = DB_query($sql,$db);
 
-	echo '<br /><table class=selection>';
+	echo '<br /><table class="selection">';
 	echo '<tr>
 		<th>' . _('Tab Code') . '</th>
 		<th>' . _('User Name') . '</th>
@@ -274,7 +274,7 @@ if (!isset($_GET['delete'])) {
 
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<br /><table class=selection>'; //Main table
+	echo '<br /><table class="selection">'; //Main table
 
 
 	if ( isset($SelectedTab) AND $SelectedTab!='' ) {
@@ -298,7 +298,7 @@ if (!isset($_GET['delete'])) {
 
 		echo '<input type=hidden name="SelectedTab" value="' . $SelectedTab . '">';
 		echo '<input type=hidden name="tabcode" value="' . $_POST['tabcode']. '">';
-		echo '<table class=selection> <tr><td>' . _('Tabcode') . ':</td><td>';
+		echo '<table class="selection"> <tr><td>' . _('Tabcode') . ':</td><td>';
 
 		// We dont allow the user to change an existing tab code
 
@@ -308,10 +308,10 @@ if (!isset($_GET['delete'])) {
 
 		// This is a new tab so the user may volunteer a tab code
 		if (isset($_POST['tabcode'])) {
-			echo '<table class=selection><tr><td>' . _('Tabcode') . ':</td><td><input type="text" value="'.$_POST['tabcode'].'"
+			echo '<table class="selection"><tr><td>' . _('Tabcode') . ':</td><td><input type="text" value="'.$_POST['tabcode'].'"
 				' . (in_array('TypeTabCode',$Errors) ? 'class="inputerror"' : '' ) .' name="tabcode"></td></tr>';
 		} else {
-			echo '<table class=selection><tr><td>' . _('Tabcode') . ':</td><td><input type="text"
+			echo '<table class="selection"><tr><td>' . _('Tabcode') . ':</td><td><input type="text"
 				' . (in_array('TypeTabCode',$Errors) ? 'class="inputerror"' : '' ) .' name="tabcode"></td></tr>';
 		}
 	}
