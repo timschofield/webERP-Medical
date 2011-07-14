@@ -159,7 +159,7 @@ if (!isset($SelectedGroup)) {
 		prnMsg(_('There are no tax groups configured.'),'info');
 		echo '</div>';
 	} else {
-		echo '<table class=selection>';
+		echo '<table class="selection">';
 		echo '<tr><th>' . _('Group No') . '</th>
 				<th>' . _('Tax Group') . '</th></tr>';
 
@@ -307,7 +307,7 @@ if (isset($SelectedGroup)) {
 
 	if (DB_num_rows($Result)>0 ) {
 		echo '<br />';
-		echo '<table class=selection>
+		echo '<table class="selection">
 				<tr>
 					<th colspan=4>'._('Assigned Taxes') . '</th>
 					<th></th>
