@@ -268,7 +268,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 /***************************************************************
 	Line Item Display
 ***************************************************************/
-echo '<table width="90%" cellpadding="2" colspan="7" class=selection>
+echo '<table width="90%" cellpadding="2" colspan="7" class="selection">
 	<tr>
 		<th>' . _('Item Code') . '</th>
 		<th>' . _('Item Description' ) . '</th>
@@ -1641,7 +1641,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 		$_POST['InvoiceText']='';
 	}
 	$j++;
-	echo '<table class=selection><tr>
+	echo '<table class="selection"><tr>
 		<td>' ._('Date On Invoice'). ':</td>
 	<td><input tabindex='.$j.' type="text" maxlength="10" size="15"
 	name="DispatchDate" value="'.$DefaultDispatchDate.'" id="datepicker"
