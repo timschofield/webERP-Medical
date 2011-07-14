@@ -72,6 +72,7 @@ if (!isset($_POST['Show'])) {
 								banktrans.banktranstype,
 								banktrans.transdate,
 								banktrans.ref,
+								banktrans.userid,
 								bankaccounts.bankaccountname,
 								systypes.typename,
 								systypes.typeid
@@ -95,6 +96,7 @@ if (!isset($_POST['Show'])) {
 						</tr>';
 		echo '<tr>
 						<th>' . ('Date') . '</th>
+						<th>' . ('Input By') . '</th>
 						<th>'._('Transaction type').'</th>
 						<th>'._('Type').'</th>
 						<th>'._('Reference').'</th>
@@ -114,6 +116,7 @@ if (!isset($_POST['Show'])) {
 
 			echo '<tr>
 							<td>'. ConvertSQLDate($myrow['transdate']) . '</td>
+							<td>'. $myrow['userid'] . '</td>
 							<td>'.$myrow['typename'].'</td>
 							<td>'.$myrow['banktranstype'].'</td>
 							<td>'.$myrow['ref'].'</td>
