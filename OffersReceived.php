@@ -40,7 +40,7 @@ if (!isset($_POST['supplierid'])) {
 			_('Select Supplier') . '" alt="" />' . ' ' . _('Select Supplier') . '</p>';
 		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] .'">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-		echo '<table class=selection>';
+		echo '<table class="selection">';
 		echo '<tr><td>'._('Select Supplier').'</td>';
 		echo '<td><select name=supplierid>';
 		while ($myrow=DB_fetch_array($result)) {
@@ -85,7 +85,7 @@ if (!isset($_POST['submit']) and isset($_POST['supplierid'])) {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' .
 		_('Supplier Offers') . '" alt="" />' . ' ' . _('Supplier Offers') . '</p>';
 
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	echo '<tr><th>'._('Offer ID').'</th>';
 	echo '<th>'._('Supplier').'</th>';
 	echo '<th>'._('Stock Item').'</th>';
