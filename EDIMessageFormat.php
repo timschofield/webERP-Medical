@@ -123,7 +123,7 @@ or deletion of the records*/
 
 	$result = DB_query($sql,$db);
 
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	echo '<tr><th colspan=5><font size=3>' . _('Definition of') . ' ' . $MessageType . ' ' . _('for') . ' ' . $PartnerCode.'</font></th></tr>';
 	$TableHeader = '<tr>
 			<th>' . _('Section') . '</th>
@@ -198,7 +198,7 @@ if (isset($SelectedMessageLine)) {
 	echo '<input type=hidden name="PartnerCode" value="' . $PartnerCode . '">';
 }
 
-echo '<table class=selection>';
+echo '<table class="selection">';
 
 if ($myrow['messagetype']!='') {
 	echo '<tr><th colspan=2><font size=3>' . _('Definition of') . ' ' . $myrow['messagetype'] . ' ' . _('for') . ' ' . $myrow['partnercode'].'</font></th></tr>';
