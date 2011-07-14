@@ -172,7 +172,7 @@ or deletion of the records*/
 	$sql = "SELECT termsindicator, terms, daysbeforedue, dayinfollowingmonth FROM paymentterms";
 	$result = DB_query($sql, $db);
 
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	echo '<tr><th colspan=6><font color=blue size=3>'._('Payment Terms.').'</font></th></tr>';
 	echo '<tr><th>' . _('Term Code') . '</th>
 		<th>' . _('Description') . '</th>
@@ -243,7 +243,7 @@ if (!isset($_GET['delete'])) {
 
 		echo '<input type=hidden name="SelectedTerms" value="' . $SelectedTerms . '">';
 		echo '<input type=hidden name="TermsIndicator" value="' . $_POST['TermsIndicator'] . '">';
-		echo '<br /><table class=selection>';
+		echo '<br /><table class="selection">';
 		echo '<tr><th colspan=6><font color=blue size=3>'._('Update Payment Terms.').'</font></th></tr>';
 		echo '<tr><td>' . _('Term Code') . ':</td><td>';
 		echo $_POST['TermsIndicator'] . '</td></tr>';
@@ -256,7 +256,7 @@ if (!isset($_GET['delete'])) {
 		unset($DayInFollowingMonth); // Rather unset for a new record
 		if (!isset($_POST['Terms'])) $_POST['Terms']='';
 
-		echo '<table class=selection>';
+		echo '<table class="selection">';
 		echo '<tr><th colspan=6><font color=blue size=3>'._('New Payment Terms.').'</font></th></tr>';
 		echo '<tr><td>' . _('Term Code') . ':</td><td><input type="Text" name="TermsIndicator"
 		 ' . (in_array('TermsIndicator',$Errors) ? 'class="inputerror"' : '' ) .' value="' . $_POST['TermsIndicator'] .
