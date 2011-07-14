@@ -162,7 +162,7 @@ if (isset($_POST['submit'])) {
 	$ErrMsg = _('Could not get tax categories because');
 	$result = DB_query($sql,$db,$ErrMsg);
 
-	echo '<table class=selection>
+	echo '<table class="selection">
 		<tr>
 		<th>' . _('Tax Categories') . '</th>
 		</tr>';
@@ -217,12 +217,12 @@ if (! isset($_GET['delete'])) {
 			$_POST['TaxCategoryName']  = $myrow['taxcatname'];
 
 			echo '<input type=hidden name="SelectedTaxCategory" value="' . $myrow['taxcatid'] . '">';
-			echo '<table class=selection>';
+			echo '<table class="selection">';
 		}
 
 	}  else {
 		$_POST['TaxCategoryName']='';
-		echo '<table class=selection>';
+		echo '<table class="selection">';
 	}
 	echo '<tr>
 		<td>' . _('Tax Category Name') . ':' . '</td>
