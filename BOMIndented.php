@@ -253,7 +253,7 @@ if (isset($_POST['PrintPDF'])) {
         echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' .
 			_('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
 
-	echo '<br /><br /><form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table class=selection>';
+	echo '<br /><br /><form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<tr><td>' . _('Part') . ':</td>';
 	echo '<td><input type ="text" name="Part" size="20">';
