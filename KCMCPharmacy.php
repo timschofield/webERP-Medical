@@ -320,7 +320,8 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 									transdate,
 									banktranstype,
 									amount,
-									currcode)
+									currcode,
+									userid)
 								VALUES (12,
 									'" . $ReceiptNumber . "',
 									'" . $_POST['BankAccount'] . "',
@@ -330,7 +331,8 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 									'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 									'2',
 									'" . ($_SESSION['Items']['Value']) . "',
-									'" . $_SESSION['CompanyRecord']['currencydefault'] . "'
+									'" . $_SESSION['CompanyRecord']['currencydefault'] . "',
+									'" . $_SESSION['UserID']) . "'
 								)";
 
 			$DbgMsg = _('The SQL that failed to insert the bank account transaction was');
