@@ -502,7 +502,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 		$Detail_Array['suppliers.suppname,suppliers.supplierid,purchorderdetails.orderno'] = _('Supplier Name');
 
 		// Display Header info
-		echo '<table class=selection>';
+		echo '<table class="selection">';
 		if ($_POST['ReportType'] == 'Summary') {
 			$SortBy_Display = $Summary_Array[$SaveSummaryType];
 		} else {
@@ -525,7 +525,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 		echo '<tr><td>' . _('Stock Category') . '</td><td>' . $_POST['Category'] . '</tr></table>';
 
 		if ($_POST['ReportType'] == 'Detail') {
-			echo '<br /><table class=selection width=98%>';
+			echo '<br /><table class="selection" width=98%>';
 			if ($_POST['DateType'] == 'Order') {
 				printf('<tr><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%-s</th><th>%s',
 					 _('Order No'),
@@ -652,7 +652,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 			echo '</table>';
 		} else {
 		  // Print summary stuff
-			echo '<br /><table class=selection width=98%>';
+			echo '<br /><table class="selection" width=98%>';
 			$summarytype = $_POST['SummaryType'];
 			// For SummaryType 'suppname' had to add supplierid to it for the GROUP BY in the sql,
 			// but have to take it away for $myrow[$summarytype] to be valid
