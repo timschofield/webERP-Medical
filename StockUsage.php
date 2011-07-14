@@ -39,7 +39,7 @@ $myrow = DB_fetch_row($result);
 
 $DecimalPlaces = $myrow[3];
 
-echo '<table class=selection>';
+echo '<table class="selection">';
 
 $Its_A_KitSet_Assembly_Or_Dummy =False;
 if (($myrow[2]=='K') OR ($myrow[2]=='A') OR ($myrow[2]=='D')) {
@@ -134,7 +134,7 @@ if (isset($_POST['ShowUsage'])){
 		exit;
 	}
 
-	echo '</div><table cellpadding=2 class=selection>';
+	echo '</div><table cellpadding=2 class="selection">';
 	$tableheader = '<tr><th>' . _('Month') . '</th><th>' . _('Usage') . '</th></tr>';
 	echo $tableheader;
 
