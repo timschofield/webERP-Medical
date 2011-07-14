@@ -118,7 +118,7 @@ $myrow = DB_fetch_array($result);
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<table cellpadding=2 class=selection>';
+echo '<table cellpadding=2 class="selection">';
 echo '<tr><th colspan=2>' . _('Item Code') . ':<input type="text" name="StockID" value="' . $StockID . '" 1 maxlength=20>';
 echo '<input type="submit" name="Show" value="' . _('Show Cost Details') . '"></th></tr>';
 echo '<tr><th colspan=2><font color=navy size=2>' . $StockID . ' - ' . $myrow['description'] . '</font></th></tr>';
