@@ -18,7 +18,7 @@ $SQL = "SELECT sales_type, typeabbrev FROM salestypes";
 
 $PricesResult = DB_query($SQL,$db);
 
-echo '<br /><table class=selection>
+echo '<br /><table class="selection">
              <tr>
           	   <td>' . _('Select the Price List to update') .':</td>
                <td><select name="PriceList">';
