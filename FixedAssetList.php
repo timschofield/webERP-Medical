@@ -22,7 +22,7 @@ $sql="SELECT stockmaster.stockid,
 		ORDER BY assetmanager.serialno,stockmaster.stockid";
 
 $result=DB_query($sql, $db);
-echo '<table class=selection>';
+echo '<table class="selection">';
 echo '<tr>';
 echo '<th>'._('Asset Type').'</th>';
 echo '<th>'._('Asset Reference').'</th>';
