@@ -134,7 +134,7 @@ if (!isset($SelectedContact)){
 	$result = DB_query($sql, $db);
 
 	if (DB_num_rows($result)>0){
-		echo '<table class=selection><tr><th colspan=7><font size=3 color=navy>' . _('Contacts Defined for') . ' - ' . $myrow['suppname'] . '</font></th></tr>';
+		echo '<table class="selection"><tr><th colspan=7><font size=3 color=navy>' . _('Contacts Defined for') . ' - ' . $myrow['suppname'] . '</font></th></tr>';
 
 		echo '<tr><th>' . _('Name') . '</th>
 							<th>' . _('Position') . '</th>
@@ -213,7 +213,7 @@ if (! isset($_GET['delete'])) {
 		if (!isset($_POST['Contact'])) {
 			$_POST['Contact']='';
 		}
-		echo '<table class=selection><tr><td>' . _('Contact Name') . ':</td>
+		echo '<table class="selection"><tr><td>' . _('Contact Name') . ':</td>
 				<td><input type="Text" name="Contact" size=41 maxlength=40 value="' . $_POST['Contact'] . '"></td></tr>';
 	}
 	if (!isset($_POST['Position'])) {
