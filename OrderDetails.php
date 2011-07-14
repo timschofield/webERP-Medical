@@ -57,7 +57,7 @@ if (DB_num_rows($GetOrdHdrResult)==1) {
 		_('Order Details') . '" alt="" />' . ' ' . $title . '</p>';
 
 	$myrow = DB_fetch_array($GetOrdHdrResult);
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	echo '<tr><th colspan=4><font color=blue>'._('Order Header Details For Order No').' '.$_GET['OrderNumber'].'</font></th></tr>';
 	echo '<tr>
 		<th style="text-align: left">' . _('Customer Code') . ':</th>
@@ -145,7 +145,7 @@ if (DB_num_rows($GetOrdHdrResult)==1) {
 		$OrderTotalVolume = 0;
 		$OrderTotalWeight = 0;
 
-		echo '<br /><table cellpadding=2 colspan=9 class=selection>';
+		echo '<br /><table cellpadding=2 colspan=9 class="selection">';
 		echo '<tr><th colspan=9><font color=blue>'._('Order Line Details For Order No').' '.$_GET['OrderNumber'].'</font></th></tr>';
 		echo '<tr>
 			<th>' . _('Item Code') . '</th>
@@ -201,7 +201,7 @@ if (DB_num_rows($GetOrdHdrResult)==1) {
 			</tr>
 		</table>';
 
-		echo '<br /><table class=selection>
+		echo '<br /><table class="selection">
 			<tr>
 				<td>' . _('Total Weight') . ':</td>
 				<td>' . $DisplayWeight . '</td>

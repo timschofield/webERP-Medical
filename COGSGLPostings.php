@@ -87,7 +87,7 @@ if (!isset($SelectedCOGSPostingID)) {
 	if (DB_num_rows($result)>0){
 		$ShowLivePostingRecords = false;
 		prnMsg (_('The following cost of sales posting records that do not have valid general ledger code specified - these records must be amended.'),'error');
-		echo '<table class=selection>';
+		echo '<table class="selection">';
 		echo '<tr><th>' . _('Area') . '</th>
 				<th>' . _('Stock Category') . '</th>
 				<th>' . _('Sales Type') . '</th>
@@ -191,7 +191,7 @@ if (!isset($SelectedCOGSPostingID)) {
 
 		$result = DB_query($sql,$db);
 
-		echo '<table class=selection>';
+		echo '<table class="selection">';
 		echo '<tr><th>' . _('Area') . '</th>
 				<th>' . _('Stock Category') . '</th>
 				<th>' . _('Sales Type') . '</th>
@@ -266,7 +266,7 @@ $sql = "SELECT areacode,
 	FROM areas";
 $result = DB_query($sql,$db);
 
-echo '<table class=selection>
+echo '<table class="selection">
 			<tr><td>' . _('Area') . ':</td>
 				<td><select tabindex=1 name="Area">
 					<option value="AN">' . _('Any Other') . '</option>';

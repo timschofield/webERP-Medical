@@ -215,7 +215,7 @@ or deletion of the records*/
 	$sql = "SELECT * FROM stockcategory WHERE stocktype<>'".'A'."'";
 	$result = DB_query($sql,$db);
 
-	echo '<br /><table class=selection>';
+	echo '<br /><table class="selection">';
 	echo '<tr><th>' . _('Cat Code') . '</th>
             <th>' . _('Description') . '</th>
             <th>' . _('Type') . '</th>
@@ -310,13 +310,13 @@ if (! isset($_GET['delete'])) {
 		}
 		echo '<input type=hidden name="SelectedCategory" value="' . $SelectedCategory . '">';
 		echo '<input type=hidden name="CategoryID" value="' . $_POST['CategoryID'] . '">';
-		echo '<table class=selection><tr><td>' . _('Category Code') . ':</td><td>' . $_POST['CategoryID'] . '</td></tr>';
+		echo '<table class="selection"><tr><td>' . _('Category Code') . ':</td><td>' . $_POST['CategoryID'] . '</td></tr>';
 
 	} else { //end of if $SelectedCategory only do the else when a new record is being entered
 		if (!isset($_POST['CategoryID'])) {
 			$_POST['CategoryID'] = '';
 		}
-		echo '<table class=selection><tr><td>' . _('Category Code') . ':</td>
+		echo '<table class="selection"><tr><td>' . _('Category Code') . ':</td>
                              <td><input type="Text" name="CategoryID" size=7 maxlength=6 value="' . $_POST['CategoryID'] . '"></td></tr>';
 	}
 
@@ -456,7 +456,7 @@ if (! isset($_GET['delete'])) {
 /*		echo '<br />Number of rows returned by the sql = ' . DB_num_rows($result) .
 			'<br />The SQL was:<br />' . $sql;
 */
-		echo '<br /><table class=selection>';
+		echo '<br /><table class="selection">';
 		$TableHeader = '<tr><th>' . _('Property Label') . '</th>
 						<th>' . _('Control Type') . '</th>
 						<th>' . _('Default Value') . '</th>

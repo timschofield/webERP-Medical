@@ -43,7 +43,7 @@ if (DB_num_rows($result) == 0) {
 echo '<form action="SelectAsset.php" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>';
-echo '<table class=selection><tr>';
+echo '<table class="selection"><tr>';
 echo '<td>' . _('In Asset Category') . ':</td><td>';
 echo '<select name="AssetCategory">';
 
@@ -236,7 +236,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 
 			echo '<br /></div>';
 		}
-		echo '<table cellpadding=2 colspan=7 class=selection>';
+		echo '<table cellpadding=2 colspan=7 class="selection">';
 		$tableheader = '<tr>
 					<th>' . _('Asset Code') . '</th>
 					<th>' . _('Description') . '</th>

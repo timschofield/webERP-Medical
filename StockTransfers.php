@@ -34,7 +34,7 @@ if (isset($_POST['CheckCode'])) {
 	$ErrMsg=_('The stock information cannot be retrieved because');
 	$DbgMsg=_('The SQL to get the stock description was');
 	$result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
-	echo '<table class=selection>
+	echo '<table class="selection">
 			<tr><th>'._('Stock Code').'</th>
 				<th>'._('Stock Description').'</th>
 			</tr>';
@@ -423,7 +423,7 @@ if ( isset($_POST['EnterTransfer']) ){
 		$Result = DB_Txn_Commit($db);
 
 		prnMsg(_('An inventory transfer of').' ' . $_SESSION['Transfer']->TransferItem[0]->StockID . ' - ' . $_SESSION['Transfer']->TransferItem[0]->ItemDescription . ' '. _('has been created from').' ' . $_SESSION['Transfer']->StockLocationFrom . ' '. _('to') . ' ' . $_SESSION['Transfer']->StockLocationTo . ' '._('for a quantity of').' ' . $_SESSION['Transfer']->TransferItem[0]->Quantity,'success');
-		echo '</br><a href="PDFStockTransfer.php?TransferNo='.$TransferNumber.'">' . _('Print Transfer Note') . '</a>';
+		echo '<br /><a href="PDFStockTransfer.php?TransferNo='.$TransferNumber.'">' . _('Print Transfer Note') . '</a>';
 		unset ($_SESSION['Transfer']);
 		include ('includes/footer.inc');
 		exit;
@@ -441,7 +441,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 if (!isset($_GET['Description'])) {
 	$_GET['Description']='';
 }
-echo '<table class=selection><tr><td>'. _('Stock Code'). ':</td><td>';
+echo '<table class="selection"><tr><td>'. _('Stock Code'). ':</td><td>';
 if (isset($_POST['StockID'])) {
 	echo '<input type=text name="StockID" size=21 value="' . $_POST['StockID'] . '" maxlength=20></td></tr>';
 } else {

@@ -450,7 +450,7 @@ if (!isset($DebtorNo)) {
 
 	$DataError =0;
 
-	echo '<table class=selection cellspacing=4><tr><td valign=top><table class=selection>';
+	echo '<table class="selection" cellspacing=4><tr><td valign=top><table class="selection">';
 
 	/* if $AutoDebtorNo in config.php has not been set or if it has been set to a number less than one,
 	then provide an input box for the DebtorNo to manually assigned */
@@ -479,7 +479,7 @@ if (!isset($DebtorNo)) {
 	echo '<tr><td>' . _('Address Line 6') . ':</td>
 		<td><input tabindex=8 type="Text" name="Address6" size=17 maxlength=15></td></tr>';
 
-  echo '</table></td><td><table class=selection>';
+  echo '</table></td><td><table class="selection">';
 
 // Show Sales Type drop down list
 	$result=DB_query("SELECT typeabbrev, sales_type FROM salestypes",$db);
@@ -605,7 +605,7 @@ if (!isset($DebtorNo)) {
 
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<table class=selection cellspacing=4><tr><td valign=top><table class=selection>';
+	echo '<table class="selection" cellspacing=4><tr><td valign=top><table class="selection">';
 
 	if (!isset($_POST['New'])) {
 		$sql = "SELECT debtorsmaster.debtorno,
@@ -695,7 +695,7 @@ if (!isset($DebtorNo)) {
 		echo '<tr><td>' . _('Address Line 4 (Postal Code)') . ':</td><td>' . $_POST['Address4'] . '</td></tr>';
 		echo '<tr><td>' . _('Address Line 5') . ':</td><td>' . $_POST['Address5'] . '</td></tr>';
 		echo '<tr><td>' . _('Address Line 6') . ':</td><td>' . $_POST['Address6'] . '</td></tr>';
-		echo '</table></td><td><table class=selection>';
+		echo '</table></td><td><table class="selection">';
 	} else {
 		echo '<tr><td>' . _('Customer Name') . ':</td>
 			<td><input ' . (in_array('CustName',$Errors) ?  'class="inputerror"' : '' ) .' type="Text" name="CustName" value="' . $_POST['CustName'] . '" size=42 maxlength=40></td></tr>';
@@ -717,7 +717,7 @@ if (!isset($DebtorNo)) {
 			<td><input ' . (in_array('Address5',$Errors) ?  'class="inputerror"' : '' ) .' type="Text" name="Address5" size=42 maxlength=40 value="' . $_POST['Address5'] . '"></td></tr>';
 		echo '<tr><td>' . _('Address Line 6') . ':</td>
 			<td><input ' . (in_array('Address6',$Errors) ?  'class="inputerror"' : '' ) .' type="Text" name="Address6" size=42 maxlength=40 value="' . $_POST['Address6'] . '"></td></tr>';
-		echo '</table></td><td><table class=selection>';
+		echo '</table></td><td><table class="selection">';
 	}
 // Select sales types for drop down list
 	if (isset($_GET['Modify'])) {
@@ -881,7 +881,7 @@ if (!isset($DebtorNo)) {
   	$sql = "SELECT * FROM custcontacts where debtorno='".$DebtorNo."' ORDER BY contid";
 	$result = DB_query($sql,$db);
 
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	if (isset($_GET['Modify'])) {
 		echo '<tr>
 			<th>' . _('Name') . '</th>
@@ -954,7 +954,7 @@ if (!isset($DebtorNo)) {
 		$_POST['role']=$myrowcc['role'];
 		$_POST['phoneno']=$myrowcc['phoneno'];
 		$_POST['notes']=$myrowcc['notes'];
-		echo '<table class=selection>';
+		echo '<table class="selection">';
 		echo '<tr>
 				<td>' . _('Name') . '</td><td><input type=text name="custname" value="'.$_POST['custname'].'"></td></tr><tr>
 				<td>' . _('Role') . '</td><td><input type=text name="role" value="'.$_POST['role'].'"></td></tr><tr>

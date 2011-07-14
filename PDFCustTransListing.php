@@ -26,8 +26,8 @@ if (!isset($_POST['Date'])){
 
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<table class=selection>
-	 			<tr>
+	echo '<table class="selection">
+	 		<tr>
 				<td>' . _('Enter the date for which the transactions are to be listed') . ':</td>
 				<td><input type=text name="Date" maxlength=10 size=10 class=date alt="' . $_SESSION['DefaultDateFormat'] . '" value="' . Date($_SESSION['DefaultDateFormat']) . '"></td>
 			</tr>';
@@ -36,13 +36,13 @@ if (!isset($_POST['Date'])){
 
 	echo '<select name="TransType">';
 
-	echo '<option value=10>' . _('Invoices').'</option>';
-	echo '<option value=11>' . _('Credit Notes').'</option>';
-	echo '<option value=12>' . _('Receipts').'</option>';
+	echo '<option value="10">' . _('Invoices').'</option>';
+	echo '<option value="11">' . _('Credit Notes').'</option>';
+	echo '<option value="12">' . _('Receipts').'</option>';
 
 	echo '</select></td></tr>';
 
-	echo '</table><br /><div class="centre"><input type=submit name="Go" value="' . _('Create PDF') . '"></div>';
+	echo '</table><br /><div class="centre"><input type="submit" name="Go" value="' . _('Create PDF') . '"></div>';
 
 
 	include('includes/footer.inc');

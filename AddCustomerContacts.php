@@ -107,7 +107,7 @@ if (!isset($Id)) {
 	$result = DB_query($sql,$db);
 			//echo '<br />'.$sql;
 
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	echo '<tr>
 			<th>' . _('Name') . '</th>
 			<th>' . _('Role') . '</th>
@@ -176,9 +176,9 @@ if (!isset($_GET['delete'])) {
 		echo '<input type=hidden name="Id" value='. $Id .'>';
 		echo '<input type=hidden name="Con_ID" value=' . $_POST['Con_ID'] . '>';
 		echo '<input type=hidden name="DebtorNo" value=' . $_POST['debtorno'] . '>';
-		echo '<table class=selection><tr><td>'. _('Contact Code').':</td><td>' . $_POST['Con_ID'] . '</td></tr>';
+		echo '<table class="selection"><tr><td>'. _('Contact Code').':</td><td>' . $_POST['Con_ID'] . '</td></tr>';
 	} else {
-		echo '<table class=selection>';
+		echo '<table class="selection">';
 	}
 
 	echo '<tr><td>'. _('Contact Name') . '</td>';

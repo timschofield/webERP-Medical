@@ -23,26 +23,26 @@ If (isset($_POST['PrintPDF'])
 	  /*Now figure out the data to report for the criteria under review */
 
 	$SQL = "SELECT grnno,
-									orderno,
-									grns.supplierid,
-									suppliers.suppname,
-									grns.itemcode,
-									grns.itemdescription,
-									qtyrecd,
-									quantityinv,
-									grns.stdcostunit,
-									actprice,
-									unitprice
-								FROM grns,
-									purchorderdetails,
-									suppliers
-								WHERE grns.supplierid=suppliers.supplierid
-								AND grns.podetailitem = purchorderdetails.podetailitem
-								AND qtyrecd-quantityinv>0
-								AND grns.supplierid >='" . $_POST['FromCriteria'] . "'
-								AND grns.supplierid <='" . $_POST['ToCriteria'] . "'
-								ORDER BY supplierid,
-									grnno";
+					orderno,
+					grns.supplierid,
+					suppliers.suppname,
+					grns.itemcode,
+					grns.itemdescription,
+					qtyrecd,
+					quantityinv,
+					grns.stdcostunit,
+					actprice,
+					unitprice
+				FROM grns,
+					purchorderdetails,
+					suppliers
+				WHERE grns.supplierid=suppliers.supplierid
+					AND grns.podetailitem = purchorderdetails.podetailitem
+					AND qtyrecd-quantityinv>0
+					AND grns.supplierid >='" . $_POST['FromCriteria'] . "'
+					AND grns.supplierid <='" . $_POST['ToCriteria'] . "'
+				ORDER BY supplierid,
+						grnno";
 
 	$GRNsResult = DB_query($SQL,$db,'','',false,false);
 
@@ -152,15 +152,15 @@ If (isset($_POST['PrintPDF'])
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') .
 		'" alt="" />' . ' ' . $title . '</p>';
 
-	echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="POST"><table class=selection>';
+	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<tr><td>' . _('From Supplier Code') . ':</td>
-		<td><input type=text name="FromCriteria" value="0"></td></tr>';
+		<td><input type="text" name="FromCriteria" value="0"></td></tr>';
 	echo '<tr><td>' . _('To Supplier Code'). ':</td>
-		<td><input type=text name="ToCriteria" value="zzzzzzz"></td></tr>';
+		<td><input type="text" name="ToCriteria" value="zzzzzzz"></td></tr>';
 
-	echo '</table><br /><div class="centre"><input type=Submit Name="PrintPDF" Value="' . _('Print PDF') . '"></div>';
+	echo '</table><br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '"></div>';
 
 	include('includes/footer.inc');
 

@@ -25,7 +25,7 @@ $resultStkLocs = DB_query($sql,$db);
 echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') .
 	'" alt="" />' . ' ' . $title.'</p>';
 
-echo '<table class=selection><tr><td>' . _('From Stock Location') . ':</td><td><select name="StockLocation"> ';
+echo '<table class="selection"><tr><td>' . _('From Stock Location') . ':</td><td><select name="StockLocation"> ';
 while ($myrow=DB_fetch_array($resultStkLocs)){
 	if (isset($_POST['StockLocation']) AND $_POST['StockLocation']!='All'){
 		if ($myrow['loccode'] == $_POST['StockLocation']){
@@ -140,7 +140,7 @@ if (isset($_POST['ShowStatus'])){
 	$DbgMsg = _('The SQL that failed was');
 	$LocStockResult = DB_query($sql, $db, $ErrMsg, $DbgMsg);
 
-	echo '<br /><table cellpadding=5 cellspacing=4 class=selection>';
+	echo '<br /><table cellpadding=5 cellspacing=4 class="selection">';
 
 	$tableheader = '<tr>
 					<th>' . _('StockID') . '</th>

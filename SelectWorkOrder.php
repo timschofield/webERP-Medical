@@ -102,7 +102,7 @@ if (!isset($StockID)) {
 	 */
 
 	if (!isset($_REQUEST['WO']) or ($_REQUEST['WO']=='')){
-		echo '<table class=selection><tr><td>';
+		echo '<table class="selection"><tr><td>';
 		if (isset($_REQUEST['SelectedStockItem'])) {
 			echo _('For the item') . ': ' . $_REQUEST['SelectedStockItem'] . ' ' . _('and') . ' <input type=hidden name="SelectedStockItem" value="' . $_REQUEST['SelectedStockItem'] . '">';
 		}
@@ -153,7 +153,7 @@ if (!isset($StockID)) {
 
 	$result1 = DB_query($SQL,$db);
 
-	echo '<table class=selection>
+	echo '<table class="selection">
 		<tr><th colspan=6><font size=3 color=navy>' . _('To search for work orders for a specific item use the item selection facilities below') . '</font></th></tr>
 	  	<tr>
 	  		<td><font size=1>' . _('Select a stock category') . ':</font>
@@ -178,7 +178,7 @@ if (!isset($StockID)) {
 
 if (isset($StockItemsResult)) {
 
-	echo '<br /><table cellpadding=2 colspan=7 class=selection>';
+	echo '<br /><table cellpadding=2 colspan=7 class="selection">';
 	$TableHeader = '<tr>
 				<th>' . _('Code') . '</th>
 				<th>' . _('Description') . '</th>
@@ -289,7 +289,7 @@ if (isset($StockItemsResult)) {
 
 	/*show a table of the orders returned by the SQL */
 	if (DB_num_rows($WorkOrdersResult)>0) {
-		echo '<br /><table cellpadding=2 colspan=7 width=95% class=selection>';
+		echo '<br /><table cellpadding=2 colspan=7 width=95% class="selection">';
 
 
 		$tableheader = '<tr>

@@ -248,7 +248,7 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 
 		echo '<form action="MRPConvertWorkOrders.php" method="post">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-		echo '<table class=selection>';
+		echo '<table class="selection">';
 		echo '<tr><th colspan=9><font size=3 color=blue>Consolidation: ' . $_POST['Consolidation'] .
 			'&nbsp;&nbsp;&nbsp;&nbsp;Cutoff Date: ' . $_POST['cutoffdate'] . '</font></th></tr>';
 		echo '<tr><th></th>
@@ -327,7 +327,7 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' .
 		_('Inventory') . '" alt="" />' . ' ' . $title . '</p>';
 
-	echo '<br /><br /><form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table class=selection>';
+	echo '<br /><br /><form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<tr><td>' . _('Consolidation') . ':</td><td><select name="Consolidation">';
 	echo '<option selected value="None">' . _('None') . '</option>';

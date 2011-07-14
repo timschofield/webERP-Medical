@@ -180,7 +180,7 @@ or deletion of the records*/
 	$sql = "SELECT typeid, typename FROM debtortype";
 	$result = DB_query($sql,$db);
 
-	echo '<br /><table class=selection>';
+	echo '<br /><table class="selection">';
 	echo '<tr>
 		<th>' . _('Type ID') . '</th>
 		<th>' . _('Type Name') . '</th>
@@ -223,7 +223,7 @@ if (! isset($_GET['delete'])) {
 
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<br /><table class=selection>'; //Main table
+	echo '<br /><table class="selection">'; //Main table
 
 
 	// The user wish to EDIT an existing type
@@ -243,7 +243,7 @@ if (! isset($_GET['delete'])) {
 
 		echo '<input type=hidden name="SelectedType" value="' . $SelectedType . '">';
 		echo '<input type=hidden name="typeid" value=' . $_POST['typeid'] . '">';
-		echo '<table class=selection> <tr><td>';
+		echo '<table class="selection"> <tr><td>';
 
 		// We dont allow the user to change an existing type code
 
@@ -253,7 +253,7 @@ if (! isset($_GET['delete'])) {
 
 		// This is a new type so the user may volunteer a type code
 
-		echo '<table class=selection>';
+		echo '<table class="selection">';
 
 	}
 

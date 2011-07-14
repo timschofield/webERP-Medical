@@ -230,7 +230,7 @@ if (!isset($_SESSION['tender']) or isset($_POST['LookupDeliveryAddress']) or $Sh
 	}
 	echo '<form name="form1" action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	echo '<tr><th colspan="4"><font size="3" color="navy">' . _('Tender header details') . '</font></th></tr>';
 	echo '<tr><td>' . _('Delivery Must Be Made Before') . '</td>';
 	echo '<td><input type="text" class="date" alt="' .$_SESSION['DefaultDateFormat'] . '" name="RequiredByDate" size="11" value="' .
@@ -490,7 +490,7 @@ if (isset($_POST['Suppliers'])) {
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') .
 		'" alt="" />' . ' ' . _('Search for Suppliers') . '</p>
-		<table cellpadding=3 colspan=4 class=selection><tr><td>' . _('Enter a partial Name') . ':</font></td><td>';
+		<table cellpadding=3 colspan=4 class="selection"><tr><td>' . _('Enter a partial Name') . ':</font></td><td>';
 	if (isset($_POST['Keywords'])) {
 		echo '<input type="Text" name="Keywords" value="' . $_POST['Keywords'] . '" size=20 maxlength=25>';
 	} else {
@@ -599,7 +599,7 @@ if (isset($_POST['Items'])) {
 		echo '<br /><a href="' . $rootpath . '/StockCategories.php">' . _('Define Stock Categories') . '</a>';
 		exit;
 	}
-	echo '<table class=selection><tr>';
+	echo '<table class="selection"><tr>';
 	echo '<td>' . _('In Stock Category') . ':';
 	echo '<select name="StockCat">';
 	if (!isset($_POST['StockCat'])) {

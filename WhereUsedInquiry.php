@@ -58,7 +58,7 @@ if (isset($StockID)) {
 		prnMsg(_('The selected item') . ' ' . $StockID . ' ' . _('is not used as a component of any other parts'),'error');
 	} else {
 
-    		echo '<table width=97% class=selection>';
+    		echo '<table width=97% class="selection">';
 
     		$tableheader = '<tr><th>' . _('Used By') . '</th>
 					<th>' . _('Work Centre') . '</th>

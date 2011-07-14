@@ -37,7 +37,7 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 	$period=GetPeriod($FromDate, $db);
 
 	/*Show a form to allow input of criteria for TB to show */
-	echo '<table class=selection><tr><td>' . _('Select Period From:') . '</td><td><select Name="FromPeriod">';
+	echo '<table class="selection"><tr><td>' . _('Select Period From:') . '</td><td><select Name="FromPeriod">';
 	$nextYear = date('Y-m-d',strtotime('+1 Year'));
 	$sql = "SELECT periodno,
 					lastdate_in_period
@@ -431,7 +431,7 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 	/*show a table of the accounts info returned by the SQL
 	Account Code ,   Account Name , Month Actual, Month Budget, Period Actual, Period Budget */
 
-	echo '<table cellpadding=2 class=selection>';
+	echo '<table cellpadding=2 class="selection">';
 	echo '<tr><th colspan=6><font size=3 color=blue><b>'. _('Trial Balance for the month of ') . $PeriodToDate .
 		_(' and for the ') . $NumberOfMonths . _(' months to ') . $PeriodToDate .'</b></font></th></tr>';
 	$TableHeader = '<tr>

@@ -311,7 +311,7 @@ if (isset($_POST['submit'])) {
 
 echo '<form method="post" action=' . $_SERVER['PHP_SELF'] . '>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<table cellpadding=2 class=selection width=98%>';
+echo '<table cellpadding=2 class="selection" width=98%>';
 
 $TableHeader = '<tr>
 				<th>' . _('System Variable Name') . '</th>

@@ -139,7 +139,7 @@ if (!isset($SelectedTaxAuthID)) {
 	$DbgMsg = _('The following SQL to retrieve the tax authorities was used');
 	$result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	echo '<tr>
 		<th>' . _('ID') . '</th>
 		<th>' . _('Description') . '</th>
@@ -248,7 +248,7 @@ $result = DB_query($SQL,$db);
 if (!isset($_POST['Description'])) {
 	$_POST['Description']='';
 }
-echo '<table class=selection>
+echo '<table class="selection">
 <tr><td>' . _('Tax Type Description') . ':</td>
 <td><input type=Text name="Description" size="21" maxlength="20" value="' . $_POST['Description'] . '"></td></tr>';
 

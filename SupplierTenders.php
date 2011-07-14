@@ -143,7 +143,7 @@ if (isset($_POST['SupplierID']) and empty($_POST['TenderType']) and empty($_POST
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/supplier.png" title="' .
 		_('Tenders') . '" alt="" />' . ' ' . _('Create or View Offers from') . ' '.$Supplier.'</p>';
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	echo'<tr><td>'._('Select option for tendering').'</td>';
 	echo '<td><select name=TenderType>';
 	echo '<option value=1>'._('View or Amend outstanding offers from').' '.$Supplier .'</option>';
@@ -367,7 +367,7 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==2 and !isset($_POST['S
 		echo '<br /><a href="' . $rootpath . '/StockCategories.php">' . _('Define Stock Categories') . '</a></p>';
 		exit;
 	}
-	echo '<table class=selection><tr>';
+	echo '<table class="selection"><tr>';
 	echo '<td>' . _('In Stock Category') . ':';
 	echo '<select name="StockCat">';
 	if (!isset($_POST['StockCat'])) {

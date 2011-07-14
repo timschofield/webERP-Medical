@@ -231,7 +231,7 @@ function listall(&$db)  //####LISTALL_LISTALL_LISTALL_LISTALL_LISTALL_LISTALL_LI
 	} //END WHILE LIST LOOP
 
 	echo '</table>';
-	echo '</br></br>';
+	echo '<br /><br />';
 	unset ($ChangeDate);
 	display($db,$ChangeDate);
 

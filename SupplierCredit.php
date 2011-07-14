@@ -262,7 +262,7 @@ if (isset($_POST['FixedAssets']) and $_POST['FixedAssets'] == _('Fixed Assets'))
 /* everything below here only do if a Supplier is selected
    fisrt add a header to show who we are making an credit note for */
 
-echo '<table class=selection colspan=4>
+echo '<table class="selection" colspan=4>
 			<tr><th>' . _('Supplier') . '</th>
 				<th>' . _('Currency') . '</th>
 				<th>' . _('Terms') . '</th>
@@ -280,7 +280,7 @@ echo '<tr><td><font color=blue><b>' . $_SESSION['SuppTrans']->SupplierID . ' - '
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post" name=form1>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<br /><table class=selection>';
+echo '<br /><table class="selection">';
 echo '<tr><td><font color=red>' . _('Supplier Credit Note Reference') . ':</font></td>
 	<td><font size=2><input type=text size=20 maxlength=20 name=SuppReference value="' . $_SESSION['SuppTrans']->SuppReference . '"></td>';
 
@@ -307,7 +307,7 @@ if (count($_SESSION['SuppTrans']->GRNs)>0){   /*if there are some GRNs selected 
 	/*Show all the selected GRNs so far from the SESSION['SuppInv']->GRNs array
 	Note that the class for carrying GRNs refers to quantity invoiced read credited in this context*/
 
-	echo '<table cellpadding=2 class=selection>
+	echo '<table cellpadding=2 class="selection">
 		<tr><th colspan="6">' . _('Purchase Order Credits') . '</th></tr>';
 	$TableHeader = '<tr><th>' . _('GRN') . '</th>
 						<th>' . _('Item Code') . '</th>
@@ -340,7 +340,7 @@ if (count($_SESSION['SuppTrans']->GRNs)>0){   /*if there are some GRNs selected 
 
 if (count($_SESSION['SuppTrans']->Shipts)>0){   /*if there are any Shipment charges on the credit note*/
 
-		echo '<table cellpadding=2 class=selection>
+		echo '<table cellpadding=2 class="selection">
 				<tr><th colspan="2">' . _('Shipment Credits') . '</th></tr>';
 		$TableHeader = '<tr><th>' . _('Shipment') . '</th>
 							<th>' . _('Amount') . '</th>
@@ -371,7 +371,7 @@ if (count($_SESSION['SuppTrans']->Shipts)>0){   /*if there are any Shipment char
 
 if (count( $_SESSION['SuppTrans']->Assets) > 0){   /*if there are any fixed assets on the invoice*/
 
-	echo '<br /><table cellpadding=2 class=selection>
+	echo '<br /><table cellpadding=2 class="selection">
 					<tr><th colspan=3>' . _('Fixed Asset Credits') . '</th></tr>';
 	$TableHeader = '<tr><th>' . _('Asset ID') . '</th>
 						<th>' . _('Description') . '</th>
@@ -405,7 +405,7 @@ if (count( $_SESSION['SuppTrans']->Assets) > 0){   /*if there are any fixed asse
 
 if (count( $_SESSION['SuppTrans']->Contracts) > 0){   /*if there are any contract charges on the invoice*/
 
-	echo '<table cellpadding="2" class=selection>
+	echo '<table cellpadding="2" class="selection">
 			<tr>
 				<th colspan="3">' . _('Contract Charges') . '</th>
 			</tr>';
@@ -443,7 +443,7 @@ if (count( $_SESSION['SuppTrans']->Contracts) > 0){   /*if there are any contrac
 if ($_SESSION['SuppTrans']->GLLink_Creditors ==1){
 
 	if (count($_SESSION['SuppTrans']->GLCodes)>0){
-		echo '<table cellpadding=2 class=selection>
+		echo '<table cellpadding=2 class="selection">
 			<tr><th colspan="3">' . _('General Ledger Analysis') . '</th></tr>';
 		$TableHeader = '<tr><th>' . _('Account') . '</th>
 							<th>' . _('Name') . '</th>
@@ -493,11 +493,11 @@ if ($_SESSION['SuppTrans']->GLLink_Creditors ==1){
 	}
 	$_SESSION['SuppTrans']->OvAmount = round($TotalGRNValue + $TotalGLValue + $TotalAssetValue + $TotalShiptValue + $TotalContractsValue,2);
 
-	echo '<table class=selection><tr><td><font color=red>' . _('Credit Amount in Supplier Currency') . ':</font></td>
+	echo '<table class="selection"><tr><td><font color=red>' . _('Credit Amount in Supplier Currency') . ':</font></td>
 			<td colspan=2 class=number>' . number_format($_SESSION['SuppTrans']->OvAmount,2) . '</td></tr>';
 	echo '<input type=hidden name="OvAmount" value="' . number_format($_SESSION['SuppTrans']->OvAmount,2) . '">';
 } else {
-	echo '<table class=selection><tr><td><font color=red>' . _('Credit Amount in Supplier Currency') .
+	echo '<table class="selection"><tr><td><font color=red>' . _('Credit Amount in Supplier Currency') .
 		  ':</font></td>
 		  	<td colspan=2 class=number><input type=TEXT size="12" maxlength="10" name="OvAmount" value="' . number_format($_SESSION['SuppTrans']->OvAmount,2) . '"></td></tr>';
 }
@@ -568,7 +568,7 @@ $DisplayTotal = number_format($_SESSION['SuppTrans']->OvAmount + $TaxTotal,2);
 echo '<tr><td><font color=red>' . _('Credit Note Total') . '</font></td><td colspan=2 class=number><b>' .
 	  $DisplayTotal. '</b></td></tr></table> <br />';
 
-echo '<table class=selection><tr><td><font color=red>' . _('Comments') . '</font></td><td><textarea name=Comments cols=40 rows=2>' .
+echo '<table class="selection"><tr><td><font color=red>' . _('Comments') . '</font></td><td><textarea name=Comments cols=40 rows=2>' .
 	  $_SESSION['SuppTrans']->Comments . '</textarea></td></tr></table>';
 
 echo '<p><div class="centre"><input type=submit name="PostCreditNote" value="' . _('Enter Credit Note') . '"></div></p>';

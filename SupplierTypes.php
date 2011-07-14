@@ -167,7 +167,7 @@ if (!isset($SelectedType)){
 	$sql = "SELECT typeid, typename FROM suppliertype";
 	$result = DB_query($sql,$db);
 
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	echo '<tr>
 		<th>' . _('Type ID') . '</th>
 		<th>' . _('Type Name') . '</th>
@@ -209,7 +209,7 @@ if (! isset($_GET['delete'])) {
 
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<br /><table class=selection>'; //Main table
+	echo '<br /><table class="selection">'; //Main table
 	echo '<td>'; // First column
 
 

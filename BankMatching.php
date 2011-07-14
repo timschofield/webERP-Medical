@@ -83,7 +83,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 
 echo '<input type="hidden" name="Type" Value="' . $Type . '">';
 
-echo '<table class=selection><tr>';
+echo '<table class="selection"><tr>';
 echo '<td align=left>' . _('Bank Account') . ':</td><td colspan=3><select tabindex="1" name="BankAccount">';
 
 $sql = "SELECT accountcode, bankaccountname FROM bankaccounts";
@@ -241,7 +241,7 @@ if ($InputError !=1 AND isset($_POST['BankAccount']) AND $_POST['BankAccount']!=
 			<th>' . _('Outstanding') . '</th>
 			<th colspan=3>' . _('Clear') . ' / ' . _('Unclear') . '</th>
 		</tr>';
-	echo '<table cellpadding=2 class=selection>' . $TableHeader;
+	echo '<table cellpadding=2 class="selection">' . $TableHeader;
 
 
 	$j = 1;  //page length counter

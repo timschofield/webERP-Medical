@@ -71,7 +71,7 @@ if (isset($_POST['submit'])) {
 
 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<br /><table class=selection>';
+echo '<br /><table class="selection">';
 
 $sql = "SELECT debtorno,
 		name,

@@ -33,7 +33,7 @@ if (!isset($LocationFrom) OR !isset($ShipperID)) {
 	$sql = "SELECT shippername, shipper_id FROM shippers";
 	$ShipperResults = DB_query($sql,$db);
 
-	echo '<table class=selection>
+	echo '<table class="selection">
 		<tr>
 			<td>' . _('Select A Freight Company to set up costs for') . '</td>
 			<td><select name="ShipperID">';
@@ -196,7 +196,7 @@ if (!isset($SelectedFreightCost) AND isset($LocationFrom) AND isset($ShipperID))
 
 	$result = DB_query($sql,$db);
 
-	echo '<br /><table class=selection>';
+	echo '<br /><table class="selection">';
 	$TableHeader = '<tr>
 				<th>' . _('Destination') . '</th>
 				<th>' . _('Cubic Rate') . '</th>
@@ -314,7 +314,7 @@ if (isset($LocationFrom) AND isset($ShipperID)) {
 	if (!isset($_POST['MAXKGs'])) {$_POST['MAXKGs']='';}
 	if (!isset($_POST['MAXCub'])) {$_POST['MAXCub']='';}
 
-	echo '<br /><table class=selection>';
+	echo '<br /><table class="selection">';
 	echo '<tr><th colspan=2><font size=4 color=blue>' . _('For Deliveries From') . ' ' . $LocationName . ' ' . _('using') . ' ' .
 		$ShipperName . '</font></th></tr>';
 	echo'<tr><td>' . _('Destination') . ':</td>

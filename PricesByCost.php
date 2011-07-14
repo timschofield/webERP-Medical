@@ -143,7 +143,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 	echo '<div class="page_help_text">' . _('Items in') . ' ' . $CategoryText . ' ' . _('With Prices') . ' ' . $Comparator . '' . $_POST['Margin'] . ' ' . _('times') . ' ' . _('Cost in Price List') . ' ' . $SalesTypeRow['sales_type'] . '</div><br /><br />';
 
 	if ($numrow > 0) { //the number of prices returned from the main prices query is
-		echo '<table class=selection>';
+		echo '<table class="selection">';
 		echo '<tr><th>' . _('Code') . '</th>
 						<th>' . _('Description') . '</th>
 						<th>' . _('Customer') . '</th>
@@ -230,7 +230,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 	}
 } else { /*The option to submit was not hit so display form */
 	echo '<div class="page_help_text">' . _('Use this report to display price list with the cost.') . '</div><br />';
-	echo '</br></br><form action="' . $_SERVER['PHP_SELF'] . '" method="post"><table class=selection>';
+	echo '<br /><br /><form action="' . $_SERVER['PHP_SELF'] . '" method="post"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	$SQL = "SELECT categoryid, categorydescription

@@ -266,7 +266,7 @@ if (isset($_POST['CommitDepreciation']) AND $InputError==false){
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post name="form">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<p></p>';
-	echo '<table class=selection width=30%><tr></tr><tr>';
+	echo '<table class="selection" width=30%><tr></tr><tr>';
 	if ($AllowUserEnteredProcessDate){
 		echo '<td>'._('Date to Process Depreciation'). ':</td>
 					<td><input type="text" class="date" alt="' .$_SESSION['DefaultDateFormat']. '" name="ProcessDate" maxlength=10 size=11 value="' . $_POST['ProcessDate'] . '"></td>';

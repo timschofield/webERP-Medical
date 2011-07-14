@@ -617,7 +617,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 ?>
 	<b><?php echo '<p>' . $msg; ?></p>
-	<table cellpadding=3 colspan=4 class=selection>
+	<table cellpadding=3 colspan=4 class="selection">
 	<tr>
 	<td><h5><?php echo _('Part of the Customer Branch Name'); ?>:</h5></td>
 	<td><input tabindex=1 type="Text" name="CustKeywords" size=20	maxlength=25></td>

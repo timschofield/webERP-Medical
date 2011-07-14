@@ -32,7 +32,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 	$period=GetPeriod($FromDate, $db);
 
 	/*Show a form to allow input of criteria for profit and loss to show */
-	echo '<table class=selection><tr><td>' . _('Select Period From') . ':</td><td><select Name="FromPeriod">';
+	echo '<table class="selection"><tr><td>' . _('Select Period From') . ':</td><td><select Name="FromPeriod">';
 
 	$sql = "SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno DESC";
 	$Periods = DB_query($sql,$db);
@@ -496,7 +496,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="'
 		. _('Print') . '" alt="" />' . ' ' . $title . '</p>';
 
-	echo '<table cellpadding=2 class=selection>';
+	echo '<table cellpadding=2 class="selection">';
 	echo '<tr><th colspan=9><div class="centre"><font size=3 color=blue><b>' . _('Statement of Income and Expenditure for Tag'). ' ' .
 			$myrow[0]._('during the'). ' ' . $NumberOfMonths . ' ' . _('months to'). ' ' . $PeriodToDate . '</b></font></div></th></tr>';
 

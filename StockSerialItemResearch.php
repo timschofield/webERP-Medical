@@ -65,8 +65,9 @@ if ($SN!='') {
 	if (DB_num_rows($result) == 0){
 		prnMsg( _('No History found for Serial Number'). ': <b>'.$SN.'</b>' , 'warn');
 	} else {
+
 		echo '<h4>'. _('Details for Serial Item').': <b>'.$SN.'</b><br />'. _('Length').'='.strlen($SN).'</h4>';
-		echo '<table class=selection>';
+		echo '<table class="selection">';
 		echo '<tr><th>' . _('StockID') . '</th>
 			<th>' . _('CurInvQty') . '</th>
 			<th>' . _('Move Qty') . '</th>

@@ -67,7 +67,7 @@ if (isset($_POST['CheckCode'])) {
 	$ErrMsg=_('The stock information cannot be retrieved because');
 	$DbgMsg=_('The SQL to get the stock description was');
 	$result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
-	echo '<table class=selection><tr><th>'._('Stock Code').'</th><th>'._('Stock Description').'</th></tr>';
+	echo '<table class="selection"><tr><th>'._('Stock Code').'</th><th>'._('Stock Description').'</th></tr>';
 	while ($myrow = DB_fetch_row($result)) {
 		echo '<tr><td>'.$myrow[0].'</td><td>'.$myrow[1].'</td><td><a href="StockAdjustments.php?StockID='.$myrow[0].'&Description='.$myrow[1].'">'._('Adjust').'</a></tr>';
 	}
@@ -321,7 +321,7 @@ if (!isset($_SESSION['Adjustment'])) {
 	$_SESSION['Adjustment']->PartUnit=$myrow['units'];
 	$_SESSION['Adjustment']->StandardCost=$myrow['materialcost']+$myrow['labourcost']+$myrow['overheadcost'];
 }
-echo '<br /><table class=selection>';
+echo '<br /><table class="selection">';
 echo '<tr><th colspan=4><font color=blue size=3>'._('Adjustment Details').'</font></th></tr>';
 if (!isset($_GET['Description'])) {
 	$_GET['Description']='';

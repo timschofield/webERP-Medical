@@ -15,7 +15,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 $sql = "SELECT categoryid, categorydescription FROM stockcategory";
 $resultStkLocs = DB_query($sql, $db);
 
-echo '<table class=selection><tr>';
+echo '<table class="selection"><tr>';
 echo '<td>' . _('For Stock Category') . ':</td>
 	<td><select name="StockCategory"> ';
 
@@ -89,7 +89,7 @@ if(isset($_POST['ShowStatus']) AND Is_Date($_POST['OnHandDate'])) {
 
 	$SQLOnHandDate = FormatDateForSQL($_POST['OnHandDate']);
 
-	echo '<br /><table cellpadding=5 cellspacing=1 class=selection>';
+	echo '<br /><table cellpadding=5 cellspacing=1 class="selection">';
 
 	$tableheader = '<tr>
 				<th>' . _('Item Code') . '</th>

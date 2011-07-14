@@ -572,7 +572,7 @@ if (isset($_POST['submit'])) {
 }
 
 
-echo '<form name="ItemForm" enctype="multipart/form-data" method="post" action="' . $_SERVER['PHP_SELF'] . '"><table class=selection>
+echo '<form name="ItemForm" enctype="multipart/form-data" method="post" action="' . $_SERVER['PHP_SELF'] . '"><table class="selection">
 	<tr><td>'. "\n"; // Nested table
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
@@ -612,7 +612,9 @@ if (!isset($StockID) or $StockID=='' or isset($_POST['UpdateCategories'])) {
 					taxcatid,
 					decimalplaces,
 					appendfile,
-					nextserialno
+					nextserialno,
+					pansize,
+					shrinkfactor
 		FROM stockmaster
 		WHERE stockid = '".$StockID."'";
 
@@ -637,6 +639,8 @@ if (!isset($StockID) or $StockID=='' or isset($_POST['UpdateCategories'])) {
 	$_POST['DecimalPlaces'] = $myrow['decimalplaces'];
 	$_POST['ItemPDF']  = $myrow['appendfile'];
 	$_POST['NextSerialNo'] = $myrow['nextserialno'];
+	$_POST['Pansize']  = $myrow['pansize'];
+	$_POST['ShrinkFactor'] = $myrow['shrinkfactor'];
 
 	echo '<tr><td>' . _('Item Code') . ':</td><td>'.$StockID.'</td></tr>'. "\n";
 	echo '<input type="Hidden" name="StockID" value='.$StockID.'>'. "\n";
@@ -968,7 +972,7 @@ $PropertiesResult = DB_query($sql,$db);
 $PropertyCounter = 0;
 $PropertyWidth = array();
 
-echo '<br /><table class=selection>';
+echo '<br /><table class="selection">';
 if (DB_num_rows($PropertiesResult)>0) {
 	echo '<tr><th colspan="2">' . _('Item Category Properties') . '</th></tr>';
 }

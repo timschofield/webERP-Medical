@@ -413,7 +413,7 @@ if (!isset($StockID)) {
 
 	if (!isset($_REQUEST['OrderNumber']) or $_REQUEST['OrderNumber']==''){
 
-		echo '<table class=selection>';
+		echo '<table class="selection">';
 		echo '<tr><td>' . _('Order number') . ': </td><td><input type=text name="OrderNumber" maxlength=8 size=9></td><td>' .
 				_('From Stock Location') . ':</td><td><select name="StockLocation">';
 
@@ -488,7 +488,7 @@ if (!isset($StockID)) {
 
 if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 
-	echo '<table cellpadding=2 colspan=7 class=selection>';
+	echo '<table cellpadding=2 colspan=7 class="selection">';
 	$TableHeader = '<tr>
 				<th>' . _('Code') . '</th>
 				<th>' . _('Description') . '</th>
@@ -734,7 +734,7 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 		$AuthResult=DB_query($AuthSQL,$db);
 		$AuthRow=DB_fetch_array($AuthResult);
 
-                echo '<table cellpadding=2 colspan=7 width=95% class=selection>';
+                echo '<table cellpadding=2 colspan=7 width=95% class="selection">';
 
 		if (isset($_POST['Quotations']) AND $_POST['Quotations']=='Orders_Only'){
 			$tableheader = '<tr>

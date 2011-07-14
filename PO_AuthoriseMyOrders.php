@@ -48,7 +48,7 @@ $result=DB_query($sql, $db);
 
 echo '<form method=post action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<table class=selection><tr>';
+echo '<table class="selection"><tr>';
 
 /* Create the table for the purchase order header */
 echo '<th>'._('Order Number').'</th>';
@@ -100,7 +100,7 @@ while ($myrow=DB_fetch_array($result)) {
 			WHERE orderno='".$myrow['orderno'] . "'";
 		$lineresult=DB_query($linesql, $db);
 
-		echo '<tr><td></td><td colspan=5 align=left><table class=selection align=left>';
+		echo '<tr><td></td><td colspan=5 align=left><table class="selection" align=left>';
 		echo '<th>'._('Product').'</th>';
 		echo '<th>'._('Quantity Ordered').'</th>';
 		echo '<th>'._('Currency').'</th>';

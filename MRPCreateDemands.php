@@ -62,7 +62,7 @@ $sql= "SELECT salesorderdetails.stkcode,
 			   "' $WhereLocation
 			   $WhereCategory "
 			   . "  GROUP BY salesorderdetails.stkcode";
-//echo "</br>$sql</br>";
+//echo "<br />$sql<br />";
 $result = DB_query($sql,$db);
 // To get the quantity per period, get the whole number amount of the total quantity divided
 // by the number of periods and also get the remainder from that calculation. Put the whole
@@ -184,7 +184,7 @@ prnMsg( $TotalRecords . ' ' . _('records have been created'),'success');
 		_('Inventory') . '" alt="" />' . ' ' . $title . '</p>';
 	echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="post"><b><br /></b>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	echo '<tr><td>' . _('Demand Type') . ':</td><td><select name="MRPDemandtype">';
 	$sql = "SELECT mrpdemandtype,
 					description

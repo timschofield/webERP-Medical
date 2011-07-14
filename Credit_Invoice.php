@@ -1471,7 +1471,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 
 } else { /*Process Credit NOT set so allow inputs to set up the credit note */
 
-	echo '<br /><table class=selection>';
+	echo '<br /><table class="selection">';
 
 	echo '<tr><td>' . _('Credit Note Type') . '</td><td><select tabindex="'.$j.'" name=CreditType>';
 

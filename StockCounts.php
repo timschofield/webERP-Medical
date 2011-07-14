@@ -24,7 +24,7 @@ if ($_GET['Action']!='View' and $_GET['Action']!='Enter'){
 	$_GET['Action'] = 'Enter';
 }
 
-echo '<table class=selection><tr>';
+echo '<table class="selection"><tr>';
 if ($_GET['Action']=='View'){
 	echo '<td><a href="' . $rootpath . '/StockCounts.php?Action=Enter">' . _('Resuming Entering Counts') . '</a> </td><td>' . _('Viewing Entered Counts') . '</td>';
 } else {
@@ -77,7 +77,7 @@ if ($_GET['Action'] == 'Enter'){
 	} // end of if enter counts button hit
 
 
-	echo '<table cellpadding=2 class=selection>';
+	echo '<table cellpadding=2 class="selection">';
 	echo '<tr><th colspan=3>'._('Stock Check Counts at Location') . ":<select name='Location'>";
 	$sql = "SELECT loccode, locationname FROM locations";
 	$result = DB_query($sql,$db);
@@ -125,7 +125,7 @@ if ($_GET['Action'] == 'Enter'){
 	$SQL = "select * from stockcounts";
 	$result = DB_query($SQL, $db);
 	echo '<input type=hidden name=Action Value="View">';
-	echo '<table cellpadding=2 class=selection>';
+	echo '<table cellpadding=2 class="selection">';
 	echo "<tr>
 		<th>" . _('Stock Code') . "</th>
 		<th>" . _('Location') . "</th>

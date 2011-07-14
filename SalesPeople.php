@@ -186,7 +186,7 @@ or deletion of the records*/
 		FROM salesman";
 	$result = DB_query($sql,$db);
 
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	echo '<tr><th>' . _('Code') . '</th>
 		<th>' . _('Name') . '</th>
 		<th>' . _('Telephone') . '</th>
@@ -274,12 +274,12 @@ if (! isset($_GET['delete'])) {
 
 		echo '<input type=hidden name="SelectedSaleperson" value="' . $SelectedSaleperson . '">';
 		echo '<input type=hidden name="SalesmanCode" value="' . $_POST['SalesmanCode'] . '">';
-		echo '<table class=selection> <tr><td>' . _('Salesperson code') . ':</td><td>';
+		echo '<table class="selection"> <tr><td>' . _('Salesperson code') . ':</td><td>';
 		echo $_POST['SalesmanCode'] . '</td></tr>';
 
 	} else { //end of if $SelectedSaleperson only do the else when a new record is being entered
 
-		echo '<table class=selection><tr><td>' . _('Salesperson code') . ':</td>
+		echo '<table class="selection"><tr><td>' . _('Salesperson code') . ':</td>
 			<td><input type="text" '. (in_array('SalesmanCode',$Errors) ? 'class="inputerror"' : '' ) .' name="SalesmanCode" size=3 maxlength=3></td></tr>';
 	}
 	if (!isset($_POST['SalesmanName'])){

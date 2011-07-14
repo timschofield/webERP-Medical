@@ -106,7 +106,7 @@ If (!isset($_POST['DisplayRecordsMax']) OR $_POST['DisplayRecordsMax']=='') {
 
 }
 
-echo '<table class=selection><tr><td>' . _('User ID') . ':</td><td>';
+echo '<table class="selection"><tr><td>' . _('User ID') . ':</td><td>';
 echo $_SESSION['UserID'] . '</td></tr>';
 
 echo '<tr><td>' . _('User Name') . ':</td><td>';

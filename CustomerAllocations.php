@@ -348,7 +348,7 @@ if (isset($_GET['AllocTrans'])) {
 
 		// Show trans already allocated and potential new allocations
 
-		echo '<br /><table class=selection>';
+		echo '<br /><table class="selection">';
 		echo '<tr><th colspan=7><div class="centre"><font color=blue><b>' . $_SESSION['Alloc']->DebtorNo . ' - ' . $_SESSION['Alloc']->CustomerName . '</b></div>';
 
 		if ($_SESSION['Alloc']->TransExRate != 1) {
@@ -461,7 +461,7 @@ if (isset($_GET['AllocTrans'])) {
 			include('includes/footer.inc');
 			exit;
 		}
-		 echo '<table class=selection>';
+		 echo '<table class="selection">';
 		echo $TableHeader;
 		$k=0;
 		while ($myrow = DB_fetch_array($result)) {
@@ -512,7 +512,7 @@ if (isset($_GET['AllocTrans'])) {
 		$result = DB_query($SQL,$db);
 		$trans = DB_num_rows($result);
 		$curTrans = 1;
-		echo '<table class=selection>';
+		echo '<table class="selection">';
 		echo $TableHeader;
 
 		$k=0;

@@ -292,10 +292,10 @@ if (isset($SelectedBankAccount) AND !isset($_GET['delete'])) {
 
 	echo '<input type=hidden name=SelectedBankAccount value=' . $SelectedBankAccount . '>';
 	echo '<input type=hidden name=AccountCode value=' . $_POST['AccountCode'] . '>';
-	echo '<table class=selection> <tr><td>' . _('Bank Account GL Code') . ':</td><td>';
+	echo '<table class="selection"> <tr><td>' . _('Bank Account GL Code') . ':</td><td>';
 	echo $_POST['AccountCode'] . '</td></tr>';
 } else { //end of if $Selectedbank account only do the else when a new record is being entered
-	echo '<table class=selection><tr><td>' . _('Bank Account GL Code') .
+	echo '<table class="selection"><tr><td>' . _('Bank Account GL Code') .
 		':</td><td><Select tabindex="1" ' . (in_array('AccountCode',$Errors) ?  'class="selecterror"' : '' ) .' name="AccountCode">';
 
 	$sql = "SELECT accountcode,

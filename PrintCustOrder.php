@@ -10,7 +10,7 @@ include('includes/SQL_CommonFunctions.inc');
 If (!isset($_GET['TransNo']) || $_GET['TransNo']==""){
 	$title = _('Select Order To Print');
 	include('includes/header.inc');
-	echo '<div class=centre><br /><br /><br />';
+	echo '<div class="centre">';
 	prnMsg( _('Select an Order Number to Print before calling this page') , 'error');
 	echo '<br /><br /><br /><table class="table_index"><tr><td class="menu_group_item">
 		<li><a href="'. $rootpath . '/SelectSalesOrder.php">' . _('Outstanding Sales Orders') . '</a></li>
@@ -63,11 +63,11 @@ if (DB_num_rows($result)==0){
 
 	$title = _('Print Packing Slip Error');
         include('includes/header.inc');
-        echo '<div class=centre><br /><br /><br />';
+        echo '<div class="centre"><br /><br /><br />';
 	prnMsg( _('Unable to Locate Order Number') . ' : ' . $_GET['TransNo'] . ' ', 'error');
         echo '<br /><br /><br /><table class="table_index"><tr><td class="menu_group_item">
-                <LI><a href="'. $rootpath . '/SelectSalesOrder.php">' . _('Outstanding Sales Orders') . '</a></LI>
-                <LI><a href="'. $rootpath . '/SelectCompletedOrder.php">' . _('Completed Sales Orders') . '</a></LI>
+                <li><a href="'. $rootpath . '/SelectSalesOrder.php">' . _('Outstanding Sales Orders') . '</a></li>
+                <li><a href="'. $rootpath . '/SelectCompletedOrder.php">' . _('Completed Sales Orders') . '</a></li>
                 </td></tr></table></div><br /><br /><br />';
         include('includes/footer.inc');
         exit();

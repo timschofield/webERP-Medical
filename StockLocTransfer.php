@@ -134,7 +134,7 @@ if(isset($_POST['Submit']) AND $InputError==False){
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	echo '<tr><th colspan=4><input type=hidden name="Trf_ID" value="' . $Trf_ID . '"><font size=3 color=blue>'.
 			_('Inventory Location Transfer Shipment Reference').' # '. $Trf_ID. '</font></th></tr>';
 
@@ -175,7 +175,7 @@ if(isset($_POST['Submit']) AND $InputError==False){
 	}
 	echo '</select></td></tr></table><br />';
 
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 
 	$tableheader = '<tr><th>'. _('Item Code'). '</th><th>'. _('Quantity'). '</th></tr>';
 	echo $tableheader;

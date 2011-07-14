@@ -71,7 +71,7 @@ if (isset($_POST['selectchoice'])) {
 	$sql = "SELECT DISTINCT discountcategory FROM stockmaster WHERE discountcategory <>''";
 	$result = DB_query($sql, $db);
 	if (DB_num_rows($result) > 0) {
-		echo '<table class=selection><tr><td>'. _('Discount Category Code') .': </td>';
+		echo '<table class="selection"><tr><td>'. _('Discount Category Code') .': </td>';
 
 		echo '<td><select name="DiscCat" onChange="ReloadForm(update.select)">';
 
@@ -93,7 +93,7 @@ if (isset($_POST['selectchoice'])) {
 	echo '<input type="hidden" name="selectchoice" value="'.$_POST['selectchoice'].'">';
 
 	if (isset($_POST['chooseoption']) and $_POST['chooseoption']==1) {
-		echo '<table class=selection><tr><td>'. _('Discount Category Code') .':</td><td>';
+		echo '<table class="selection"><tr><td>'. _('Discount Category Code') .':</td><td>';
 
 		if (isset($_POST['DiscCat'])) {
 			echo '<input type="text" name="DiscountCategory" maxlength=2 size=2 value="' . $_POST['DiscCat'] .
@@ -139,7 +139,7 @@ if (isset($_POST['selectchoice'])) {
 			}
 		}
 	} else {
-		echo '<table class=selection><tr><td>'._('Assign discount category').'</td>';
+		echo '<table class="selection"><tr><td>'._('Assign discount category').'</td>';
 		echo '<td><input type="text" name="DiscountCategory" maxlength=2 size=2></td>';
 		echo '<td>'._('to all items in stock category').'</td>';
 		$sql = "SELECT categoryid,
@@ -179,7 +179,7 @@ if (isset($_POST['selectchoice'])) {
 
 		$result = DB_query($sql,$db);
 
-		echo '<br /><table class=selection>';
+		echo '<br /><table class="selection">';
 		echo '<tr>
 			<th>'. _('Discount Category') .'</th>
 			<th>'. _('Item') .'</th></tr>';
@@ -219,7 +219,7 @@ if (isset($_POST['selectchoice'])) {
 if (!isset($_POST['selectchoice'])) {
 	echo '<form method="post" name="choose" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	echo '<tr><td>'._('Update discount category for').'</td>';
 	echo '<td><select name="chooseoption" onChange="ReloadForm(choose.selectchoice)">';
 	echo '<option value="1">'._('a single stock item').'</option>';

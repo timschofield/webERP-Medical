@@ -377,7 +377,7 @@ if (!isset($SelectedBranch)){
 	if ($myrow) {
 		echo '<p Class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') .
 			'" alt="" />' . ' ' . _('Branches defined for'). ' '. $DebtorNo . ' - ' . $myrow[0] . '</p>';
-		echo '<table class=selection>';
+		echo '<table class="selection">';
 		echo '<tr><th>'._('Code').'</th>
 			<th>'._('Name').'</th>
 			<th>'._('Branch Contact').'</th>
@@ -435,7 +435,7 @@ if (!isset($SelectedBranch)){
 
 		} while ($myrow = DB_fetch_row($result));
 		//END WHILE LIST LOOP
-		echo '</table><br /><table class=selection><tr><td><div class="centre">';
+		echo '</table><br /><table class="selection"><tr><td><div class="centre">';
 		echo '<b>'.$TotalEnable.'</b> ' . _('Branches are enabled.') . '<br />';
 		echo '<b>'.$TotalDisable.'</b> ' . _('Branches are disabled.') . '<br />';
 		echo '<b>'.($TotalEnable+$TotalDisable). '</b> ' . _('Total Branches') . '</div></td></tr></table>';
@@ -544,7 +544,7 @@ if (!isset($_GET['delete'])) {
 		if (isset($SelectedBranch)) {
 			echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '?DebtorNo=' . $DebtorNo. '">' . _('Show all branches defined for'). ' '. $DebtorNo . '</a></div>';
 		}
-		echo '<br /><table class=selection>';
+		echo '<br /><table class="selection">';
 		echo '<tr><th colspan=2><div class="centre"><b>'._('Change Branch').'</b></th></tr>';
 		echo '<tr><td>'._('Branch Code').':</td><td>';
 		echo $_POST['BranchCode'] . '</td></tr>';
@@ -580,7 +580,7 @@ if (!isset($_GET['delete'])) {
 			$_POST['BranchCode']='';
 		}
 		echo '<p Class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') . '" alt="">' . ' ' . _('Add a Branch').'</p>';
-		echo '<table class=selection><tr><td>'._('Branch Code'). ':</td>
+		echo '<table class="selection"><tr><td>'._('Branch Code'). ':</td>
 			<td><input ' .(in_array('BranchCode',$Errors) ?  'class="inputerror"' : '' ) .
 				' tabindex=1 type="Text" name="BranchCode" size=12 maxlength=10 value="' . $_POST['BranchCode'] . '"></td></tr>';
 		$_POST['DeliverBlind'] = $_SESSION['DefaultBlindPackNote'];

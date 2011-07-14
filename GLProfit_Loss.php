@@ -585,7 +585,7 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 	/*show a table of the accounts info returned by the SQL
 	Account Code ,   Account Name , Month Actual, Month Budget, Period Actual, Period Budget */
 
-	echo '<table cellpadding=2 class=selection>';
+	echo '<table cellpadding=2 class="selection">';
 
 	if ($_POST['Detail']=='Detailed'){
 		$TableHeader = '<tr>

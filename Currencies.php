@@ -195,7 +195,7 @@ or deletion of the records*/
 				FROM currencies";
 	$result = DB_query($sql, $db);
 
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	echo '<tr><td></td>
 			<th>' . _('ISO4217 Code') . '</th>
 			<th>' . _('Currency Name') . '</th>
@@ -324,14 +324,14 @@ if (!isset($_GET['delete'])) {
 
 		echo '<input type="hidden" name="SelectedCurrency" value="' . $SelectedCurrency . '">';
 		echo '<input type="hidden" name="Abbreviation" value="' . $_POST['Abbreviation'] . '">';
-		echo '<table class=selection><tr>
+		echo '<table class="selection"><tr>
 			<td>' . _('ISO 4217 Currency Code').':</td>
 			<td>';
 		echo $_POST['Abbreviation'] . '</td></tr>';
 
 	} else { //end of if $SelectedCurrency only do the else when a new record is being entered
 		if (!isset($_POST['Abbreviation'])) {$_POST['Abbreviation']='';}
-		echo '<table class=selection><tr>
+		echo '<table class="selection"><tr>
 			<td>' ._('Currency Abbreviation') . ':</td>
 			<td><input ' . (in_array('Abbreviation',$Errors) ?  'class="inputerror"' : '' ) .' type="Text" name="Abbreviation" value="' . $_POST['Abbreviation'] . '" size=4 maxlength=3></td></tr>';
 	}

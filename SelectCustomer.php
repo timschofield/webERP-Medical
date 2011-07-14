@@ -277,7 +277,7 @@ if ($_POST['Select'] != '' OR ($_SESSION['CustomerID'] != '' AND !isset($_POST['
 		_('Customer') . ' : ' . $_SESSION['CustomerID'] . ' - ' . $CustomerName . ' - ' . $phone . _(' has been selected') . '</p>';
 	echo '<div class="page_help_text">' . _('Select a menu option to operate using this customer') . '.</div><br />';
 	$_POST['Select'] = NULL;
-	echo '<table cellpadding=4 width=90% class=selection><tr><th width=33%>' . _('Customer Inquiries') . '</th>
+	echo '<table cellpadding=4 width=90% class="selection"><tr><th width=33%>' . _('Customer Inquiries') . '</th>
 			<th width=33%>' . _('Customer Transactions') . '</th>
 			<th width=33%>' . _('Customer Maintenance') . '</th></tr>';
 	echo '<tr><td valign=top class="select">';
@@ -317,7 +317,7 @@ if (strlen($msg)>1){
    prnMsg($msg, 'info');
 }
 echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Search for Customers').'</p>';
-echo '<table cellpadding=3 colspan=4 class=selection>';
+echo '<table cellpadding=3 colspan=4 class="selection">';
 echo '<tr><td colspan=2>' . _('Enter a partial Name') . ':</td><td>';
 if (isset($_POST['Keywords'])) {
 	echo '<input type="Text" name="Keywords" value="' . $_POST['Keywords'] . '" size=20 maxlength=25>';
@@ -450,7 +450,7 @@ if (isset($result)) {
 				<input type=submit name="Next" value="' . _('Next') . '">';
 			echo '</div>';
 		}
-		echo '<br /><table cellpadding=2 colspan=7 class=selection>';
+		echo '<br /><table cellpadding=2 colspan=7 class="selection">';
 		$TableHeader = '<tr>
 				<th>' . _('Code') . '</th>
 				<th>' . _('Customer Name') . '</th>

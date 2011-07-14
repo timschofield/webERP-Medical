@@ -86,7 +86,7 @@ echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 
-echo '<table class=selection>';
+echo '<table class="selection">';
 
 $sql = "SELECT typeabbrev,
 		sales_type
@@ -151,7 +151,7 @@ $sql = "SELECT sales_type,
 
 $result = DB_query($sql,$db);
 
-echo '<table class=selection>';
+echo '<table class="selection">';
 echo '<tr><th>' . _('Sales Type') . '</th>
 	<th>' . _('Discount Category') . '</th>
 	<th>' . _('Quantity Break') . '</th>

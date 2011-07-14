@@ -650,7 +650,7 @@ if (!isset($SupplierID)) {
 
 	echo '<input type="hidden" name="New" value="Yes">';
 
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	echo '<tr><td>' . _('Supplier Code') . ':</td><td><input type="text" name="SupplierID" size=11 maxlength=10></td></tr>';
 	echo '<tr><td>' . _('Supplier Name') . ':</td><td><input type="text" name="SuppName" size=42 maxlength=40></td></tr>';
 	echo '<tr><td>' . _('Address Line 1 (Street)') . ':</td><td><input type="text" name="Address1" size=42 maxlength=40></td></tr>';
@@ -746,7 +746,7 @@ if (!isset($SupplierID)) {
 
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 
 	if (!isset($_POST['New'])) {
 		$sql = "SELECT supplierid,

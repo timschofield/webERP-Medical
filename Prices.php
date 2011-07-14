@@ -97,29 +97,9 @@ if (isset($_POST['submit'])) {
 	} else {
 		$SQLEndDate = '2030-01-01';
 	}
-/*
-	$sql = "SELECT COUNT(typeabbrev)
-				FROM prices
-			WHERE prices.stockid='".$Item."'
-			AND startdate='" .FormatDateForSQL($_POST['StartDate']) . "'
-			AND enddate ='" . FormatDateForSQL($_POST['EndDate']) . "'
-			AND prices.units='" . $_POST['Units'] . "'
-			AND prices.typeabbrev='" . $_POST['TypeAbbrev'] . "'
-			AND prices.currabrev='" . $_POST['CurrAbrev'] . "'
-			AND prices.price='" . $_POST['Price'] . "'
-			";
 
-	$result = DB_query($sql, $db);
-	$myrow = DB_fetch_row($result);
-
-	if ($myrow[0]!=0 and !isset($_POST['OldTypeAbbrev'])) {
-		prnMsg( _('This price has already been entered. To change it you should edit it') , 'warn');
-		echo '<br /><div class="centre"><a href="' . $rootpath . '/Prices.php?Item='.$Item.'">' . _('Back to Prices') . '</a></div>';
-		include('includes/footer.inc');
-		exit;
-	}
-*/
 	if (isset($_POST['OldTypeAbbrev']) AND isset($_POST['OldCurrAbrev']) AND strlen($Item)>1 AND $InputError !=1) {
+
 
 		/* Need to see if there is also a price entered that has an end date after the start date of this price and if
 		so we will need to update it so there is no ambiguity as to which price will be used*/
@@ -242,10 +222,11 @@ if ($InputError ==0){
 	$result = DB_query($sql,$db);
 
 	if (DB_num_rows($result) > 0) {
-		echo '<table class=selection>';
+		echo '<table class="selection">';
 		echo '<tr><th colspan=8><form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-		echo _('Pricing for part') . ':<input type=text name="Item" MAXSIZEe=22 value="' . $Item . '" maxlength=20><input type=submit name=NewPart Value="' . _('Review Prices') . '">';
+		echo _('Pricing for part') . ':<input type="text" name="Item" maxsize="22" value="' . $Item . '" maxlength="20" />
+				<input type="submit" name="NewPart" value="' . _('Review Prices') . '" />';
 		echo '</th></tr></form>';
 
 		echo '<tr>
@@ -276,13 +257,13 @@ if ($InputError ==0){
 			/*Only allow access to modify prices if securiy token 5 is allowed */
 			if (in_array(12,$_SESSION['AllowedPageSecurityTokens'])) {
 
-				echo '<input type=hidden name="Units" value="' . $myrow['units'] . '">';
+				echo '<input type="hidden" name="Units" value="' . $myrow['units'] . '" />';
 				echo '<td>'.$myrow['sales_type'].'</td>
 						<td>'.$myrow['currency'].'</td>
 						<td>'.$myrow['units'].'</td>
-						<td class=number>'.$myrow['conversionfactor'].'</td>
-						<td class=number>'.$myrow['decimalplaces'].'</td>
-						<td class=number>'.number_format($myrow['price'],2).'</td>
+						<td class="number">'.$myrow['conversionfactor'].'</td>
+						<td class="number">'.$myrow['decimalplaces'].'</td>
+						<td class="number">'.number_format($myrow['price'],2).'</td>
 						<td>'.ConvertSQLDate($myrow['startdate']).'</td>
 						<td>'.$EndDateDisplay.'</td>
 						</tr>';
@@ -290,9 +271,9 @@ if ($InputError ==0){
 				echo '<td>'.$myrow['sales_type'].'</td>
 						<td>'.$myrow['currency'].'</td>
 						<td>'.$myrow['units'].'</td>
-						<td class=number>'.$myrow['conversionfactor'].'</td>
-						<td class=number>'.$myrow['decimalplaces'].'</td>
-						<td class=number>'.number_format($myrow['price'],2).'</td>
+						<td class="number">'.$myrow['conversionfactor'].'</td>
+						<td class="number">'.$myrow['decimalplaces'].'</td>
+						<td class="number">'.number_format($myrow['price'],2).'</td>
 						<td>'.ConvertSQLDate($myrow['startdate']).'</td>
 						<td>'.$EndDateDisplay.'</td>
 						</tr>';
@@ -337,10 +318,10 @@ if ($InputError ==0){
 
 			$result = DB_query($sql,$db);
 			$myrow = DB_fetch_array($result);
-			echo '<input type=hidden name="OldTypeAbbrev" value="' . $myrow['typeabbrev'] .'">';
-			echo '<input type=hidden name="OldCurrAbrev" value="' . $myrow['currabrev'] . '">';
-			echo '<input type=hidden name="OldStartDate" value="' . $myrow['startdate'] . '">';
-			echo '<input type=hidden name="OldEndDate" value="' . $myrow['enddate'] . '">';
+			echo '<input type="hidden" name="OldTypeAbbrev" value="' . $myrow['typeabbrev'] .'" />';
+			echo '<input type="hidden" name="OldCurrAbrev" value="' . $myrow['currabrev'] . '" />';
+			echo '<input type="hidden" name="OldStartDate" value="' . $myrow['startdate'] . '" />';
+			echo '<input type="hidden" name="OldEndDate" value="' . $myrow['enddate'] . '" />';
 			$_POST['CurrAbrev'] = $myrow['currabrev'];
 			$_POST['TypeAbbrev'] = $myrow['typeabbrev'];
 			$_POST['Price'] = $myrow['price'];
@@ -355,8 +336,8 @@ if ($InputError ==0){
 			}
 		}
 
-		echo '<br /><table class=selection>';
-		echo '<tr><th colspan=5><font color="blue" size=3><b>' . $Item . ' - ' . $PartDescription . '</b></font></th></tr>';
+		echo '<br /><table class="selection">';
+		echo '<tr><th colspan="5"><font color="blue" size="3"><b>' . $Item . ' - ' . $PartDescription . '</b></font></th></tr>';
 
 		echo '<tr><td>' . _('Sales Type Price List') . ':</td><td><select name="TypeAbbrev">';
 
@@ -396,9 +377,9 @@ if ($InputError ==0){
 			$_POST['EndDate'] = DateAdd(date($_SESSION['DefaultDateFormat']),'y',3);
 		}
 		echo '<tr><td>' . _('Price Effective From Date')  . ':</td>
-				<td><input type="Text" class=date alt="'.$_SESSION['DefaultDateFormat'].'" name="StartDate" size=10 maxlength=10 value="' . $_POST['StartDate'] . '"></td></tr>';
+				<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="StartDate" size="10" maxlength="10" value="' . $_POST['StartDate'] . '" /></td></tr>';
 		echo '<tr><td>' . _('Price Effective To Date')  . ':</td>
-				<td><input type="Text" class=date alt="'.$_SESSION['DefaultDateFormat'].'" name="EndDate" size=10 maxlength=10 value="' . $_POST['EndDate'] . '"></td></tr>';
+				<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="EndDate" size="10" maxlength="10" value="' . $_POST['EndDate'] . '" /></td></tr>';
 		echo '<tr><td>' . _('Unit of Measure') . ':</td>';
 		echo '<td><select name="Units">';
 		$sql = "SELECT unitname FROM unitsofmeasure order by unitname asc";
@@ -411,7 +392,7 @@ if ($InputError ==0){
 			}
 		}
 		echo '</td></tr>';
-		echo '<input type=hidden name=Item value='.$Item.'>';
+		echo '<input type="hidden" name="Item" value="'.$Item.'" />';
 
 		echo '</select></td></tr>';
 
@@ -426,7 +407,7 @@ if ($InputError ==0){
 
 		echo '</td></tr>';
 		echo '<tr><td>'. _('Conversion Factor') . '<br />'._('to stock units').'</td>';
-		echo '<td><input type="text" class=number name="ConversionFactor" size=8 maxlength=8 value="';
+		echo '<td><input type="text" class="number" name="ConversionFactor" size="8" maxlength="8" value="';
 		if(isset($_POST['ConversionFactor'])) {
 			echo $_POST['ConversionFactor'];
 		} else {
@@ -438,7 +419,7 @@ if ($InputError ==0){
 		echo '</td></tr>';
 
 		echo '<tr><td>'. _('Price') . ':</td>';
-		echo '<td><input type="text" class=number name="Price" size=12 maxlength=11 value="';
+		echo '<td><input type="text" class=number name="Price" size="12" maxlength="11" value="';
 		if(isset($_POST['Price'])) {
 			echo $_POST['Price'];
 		}
@@ -448,7 +429,7 @@ if ($InputError ==0){
 
 		echo '</table>';
 		echo '<br /><div class="centre">';
-		echo '<input type="Submit" name="submit" value="'. _('Enter') . '/' . _('Amend Price') . '">';
+		echo '<input type="submit" name="submit" value="'. _('Enter') . '/' . _('Amend Price') . '" />';
 		echo '</div>';
 	}
 }

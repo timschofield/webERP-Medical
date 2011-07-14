@@ -159,7 +159,7 @@ if (isset($_POST['ShowRec']) OR isset($_POST['DoExchangeDifference'])){
 	$BankCurrCode = $CurrencyRow[1];
 	$BankAccountName = $CurrencyRow[2];
 
-	echo '<table class=selection>
+	echo '<table class="selection">
 			<tr class=EvenTableRows><td colspan=6><b>' . $BankAccountName . ' ' . _('Balance as at') . ' ' . Date($_SESSION['DefaultDateFormat']);
 	if ($_SESSION['CompanyRecord']['currencydefault']!=$BankCurrCode){
 		echo  ' (' . $BankCurrCode . ' @ ' . $ExRate .')';

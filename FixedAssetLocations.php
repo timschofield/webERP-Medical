@@ -85,7 +85,7 @@ $sql="SELECT * FROM fixedassetlocations";
 $result=DB_query($sql, $db);
 
 if (DB_num_rows($result) > 0) {
-	echo '<table class=selection><tr>';
+	echo '<table class="selection"><tr>';
 	echo '<th>'._('Location ID').'</th>
 				<th>'._('Location Description').'</th>
 				<th>'._('Parent Location').'</th></tr>';
@@ -101,7 +101,7 @@ while ($myrow=DB_fetch_array($result)) {
 }
 
 echo '</table><br />';
-echo '<form name="LocationForm" method="post" action="' . $_SERVER['PHP_SELF'] . '"><table class=selection>';
+echo '<form name="LocationForm" method="post" action="' . $_SERVER['PHP_SELF'] . '"><table class="selection">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo '<tr><th style="text-align:left">'._('Location ID').'</th>';
 if (isset($_GET['SelectedLocation'])) {

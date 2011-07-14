@@ -223,7 +223,7 @@ echo '<p>';
 if (DB_num_rows($result) == 0) {
 	prnMsg(_('There are no categories defined at this level.'));
 } else {
-	echo "<table class=selection>\n";
+	echo '<table class="selection">';
 	echo '<tr><th>' . _('Sub Category') . '</th></tr>';
 
 	$k=0; //row colour counter
@@ -316,7 +316,7 @@ if (isset($SelectedCategory)) {
 	$FormCaps = _('New Sub Category');
 }
 echo '<input type=hidden name="EditName" value="1">';
-echo '<table class=selection>';
+echo '<table class="selection">';
 echo '<tr><th colspan="2">' . $FormCaps . '</th></tr>';
 echo '<tr><td>' . _('Category Name') . ':</td>
             <td><input type="Text" name="SalesCatName" size=20 maxlength=20 value="' .
@@ -377,7 +377,7 @@ if($result && DB_num_rows($result)) {
 		(isset($_POST['ParentCategory'])?($_POST['ParentCategory']):('0')) . '">';
 
 	echo '';
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	echo '<tr><th colspan="2">'._('Add Inventory to this category.').'</th></tr>';
 	echo '<tr><td>' . _('Select Inv. Item') . ':</td><td>';
 	echo '<select name="AddStockID">';
@@ -417,7 +417,7 @@ $sql = "SELECT scp.stockid, sm.description FROM salescatprod scp
 $result = DB_query($sql,$db);
 if($result ) {
 	if( DB_num_rows($result)) {
-		echo '<table class=selection>';
+		echo '<table class="selection">';
 		echo '<tr><th colspan="3">'._('Inventory items in this category.').'</th></tr>';
 		echo '<tr><th>' . _('Stock Code') . '</th>';
 		echo '<th>' . _('Description') . '</th></tr>';

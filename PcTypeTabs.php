@@ -150,7 +150,7 @@ or deletion of the records*/
 	$sql = "SELECT * FROM pctypetabs";
 	$result = DB_query($sql,$db);
 
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	echo '<tr>
 		<th>' . _('Type Of Tab') . '</th>
 		<th>' . _('Description') . '</th>
@@ -190,7 +190,7 @@ if (! isset($_GET['delete'])) {
 
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<br /><table class=selection>'; //Main table
+	echo '<br /><table class="selection">'; //Main table
 
 	if ( isset($SelectedTab) AND $SelectedTab!='' )
 	{
@@ -208,7 +208,7 @@ if (! isset($_GET['delete'])) {
 
 		echo '<input type=hidden name="SelectedTab" value="' . $SelectedTab . '">';
 		echo '<input type=hidden name="TypeTabCode" value="' . $_POST['TypeTabCode']. '">';
-		echo '<table class=selection> <tr><td>' . _('Code Of Type Of Tab') . ':</td><td>';
+		echo '<table class="selection"> <tr><td>' . _('Code Of Type Of Tab') . ':</td><td>';
 
 		// We dont allow the user to change an existing type code
 
@@ -218,7 +218,7 @@ if (! isset($_GET['delete'])) {
 
 		// This is a new type so the user may volunteer a type code
 
-		echo '<table class=selection><tr><td>' . _('Code Of Type Of Tab') . ':</td><td><input type="Text"
+		echo '<table class="selection"><tr><td>' . _('Code Of Type Of Tab') . ':</td><td><input type="Text"
 				' . (in_array('TypeTabCode',$Errors) ? 'class="inputerror"' : '' ) .' name="TypeTabCode"></td></tr>';
 
 	}

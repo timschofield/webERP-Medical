@@ -433,7 +433,7 @@ function showLabelsList($list) {
 		<input type="hidden" name="labelID" id="labelID" value="">
 	</form>
 	<div class="centre">
-	<table class=selection>
+	<table class="selection">
 		<thead>
 			<tr>
 				<th>'.$txt[0].'</th>

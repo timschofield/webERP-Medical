@@ -100,7 +100,7 @@ if (isset($_POST['SearchParts'])) {
 * $OrdersAfterDate = Date("d/m/Y",Mktime(0,0,0,Date("m")-2,Date("d"),Date("Y")));
 */
 if (!isset($OrderNumber) or $OrderNumber == "") {
-	echo '<table class=selection><tr><td>';
+	echo '<table class="selection"><tr><td>';
 	if (isset($SelectedStockItem)) {
 		echo _('For the part') . ':<b>' . $SelectedStockItem . '</b> ' . _('and') . ' <input type=hidden name="SelectedStockItem" value="' . $SelectedStockItem . '">';
 	}
@@ -150,7 +150,7 @@ if (!isset($OrderNumber) or $OrderNumber == "") {
 }
 $SQL = "SELECT categoryid, categorydescription FROM stockcategory ORDER BY categorydescription";
 $result1 = DB_query($SQL, $db);
-echo '<br /><br /><table class=selection><tr><td>';
+echo '<br /><br /><table class="selection"><tr><td>';
 echo '<font size=1>' . _('To search for purchase orders for a specific part use the part selection facilities below') . '</font>';
 echo '<tr><td><font size=1>' . _('Select a stock category') . ':</font><select name="StockCat">';
 while ($myrow1 = DB_fetch_array($result1)) {
@@ -168,7 +168,7 @@ echo '<tr><td colspan=3><div class=centre><input type=submit name="SearchParts" 
 echo '<input type=submit name="ResetPart" value="' . _('Show All') . '"></div></td></tr>';
 echo '</table><br /><br />';
 if (isset($StockItemsResult)) {
-	echo '<table cellpadding=2 colspan=7 class=selection>';
+	echo '<table cellpadding=2 colspan=7 class="selection">';
 	$TableHeader = '<tr><td class="tableheader">' . _('Code') . '</td>
 				<td class="tableheader">' . _('Description') . '</td>
 				<td class="tableheader">' . _('On Hand') . '</td>
@@ -353,7 +353,7 @@ else {
 
 	if (DB_num_rows($PurchOrdersResult) > 0) {
 		/*show a table of the orders returned by the SQL */
-		echo '<table cellpadding=2 colspan=7 width=90% class=selection>';
+		echo '<table cellpadding=2 colspan=7 width=90% class="selection">';
 		$TableHeader = '<tr><th>' . _('View') . '</th>
 				<th>' . _('Supplier') . '</th>
 				<th>' . _('Currency') . '</th>

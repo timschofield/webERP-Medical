@@ -419,7 +419,7 @@ if (isset($_SESSION['Transfer'])){
 
 	$i = 0; //Line Item Array pointer
 
-	echo '<br /><table class=selection>';
+	echo '<br /><table class="selection">';
 	echo '<tr><th colspan=7><font size=3 color=blue>' . _('Location Transfer Reference'). ' #' . $_SESSION['Transfer']->TrfID .
 			' '. _('from').' ' . $_SESSION['Transfer']->StockLocationFromName . ' '. _('to'). ' ' .
 				$_SESSION['Transfer']->StockLocationToName . '</font></th></tr>';
@@ -502,7 +502,7 @@ if (isset($_SESSION['Transfer'])){
 
 	$LocResult = DB_query("SELECT locationname, loccode FROM locations",$db);
 
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	echo '<tr><td>'. _('Select Location Receiving Into'). ':</td><td>';
 	echo '<select NAME = "RecLocation" onChange=ReloadForm(form1.RefreshTransferList)>';
 	if (!isset($_POST['RecLocation'])){
@@ -530,7 +530,7 @@ if (isset($_SESSION['Transfer'])){
 		$LocSql = "SELECT locationname FROM locations WHERE loccode='" . $_POST['RecLocation'] . "'";
 		$LocResult = DB_query($LocSql,$db);
 		$LocRow = DB_fetch_array($LocResult);
-		echo '<table class=selection>';
+		echo '<table class="selection">';
 		echo '<tr><th colspan=4><font size=3 color=blue>'._('Pending Transfers Into').' '.$LocRow['locationname'].'</font></th></tr>';
 		echo '<tr>
 			<th>'. _('Transfer Ref'). '</th>

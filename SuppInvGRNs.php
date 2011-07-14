@@ -105,7 +105,7 @@ if (isset($_GET['Delete'])){
 
 /*Show all the selected GRNs so far from the SESSION['SuppTrans']->GRNs array */
 
-echo '<table cellpadding=1 class=selection>';
+echo '<table cellpadding=1 class="selection">';
 echo '<tr><th colspan=6><font size=3 color=navy>' . _('Invoiced Goods Received Selected') . '</font></th></tr>';
 
 $tableheader = '<tr bgcolor=#800000>
@@ -224,7 +224,7 @@ if (isset($_GET['Modify'])){
 	$GRNNo = $_GET['Modify'];
 	$GRNTmp = $_SESSION['SuppTrans']->GRNs[$GRNNo];
 
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	echo '<tr><th colspan=10><font size=3 color=navy>' . _('GRN Selected For Adding To A Purchase Invoice') . '</font></th></tr>';
 	echo '<tr bgcolor=#800000>
 			<th>' . _('Sequence') . ' #</th>

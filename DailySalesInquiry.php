@@ -14,7 +14,7 @@ echo '<div class="page_help_text">' . _('Select the month to show daily sales fo
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<table cellpadding=2 class=selection><tr>';
+echo '<table cellpadding=2 class="selection"><tr>';
 
 echo '<td>' . _('Month to Show') . ':</td><td><select tabindex=1 name="MonthToShow">';
 
@@ -80,11 +80,12 @@ $sql .= " GROUP BY stockmoves.trandate ORDER BY stockmoves.trandate";
 $ErrMsg = _('The sales data could not be retrieved because') . ' - ' . DB_error_msg($db);
 $SalesResult = DB_query($sql, $db,$ErrMsg);
 
-echo '<table cellpadding=2 class=selection>';
+echo '<table cellpadding=2 class="selection">';
 echo '<tr><th colspan="7"><font color="navy" size="3">' . _('Sales For The Month Of') . ' ' .
 		MonthAndYearFromSQLDate($StartDateSQL) . '</font></th></tr>';
 echo '<tr><th colspan="7"><font color="navy" size="2">' . _('For sales of type') . ' ' .
 		GetStockType($_POST['StockType']) . '</font></th></tr>';
+
 echo'<tr>
 	<th width="14.285714286%">' . _('Sunday') . '</th>
 	<th width="14.285714286%">' . _('Monday') . '</th>

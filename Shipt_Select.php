@@ -103,7 +103,7 @@ if (isset($_POST['SearchParts'])) {
 
 
 if (!isset($ShiptRef) or $ShiptRef==""){
-	echo '<table class=selection><tr><td>';
+	echo '<table class="selection"><tr><td>';
 	echo _('Shipment Number'). ': <input type=text name="ShiptRef" MAXLENGTH =10 size=10> '.
 		_('Into Stock Location').' :<select name="StockLocation"> ';
 	$sql = "SELECT loccode, locationname FROM locations";
@@ -146,7 +146,7 @@ $SQL="SELECT categoryid,
 $result1 = DB_query($SQL,$db);
 
 
-echo '<table class=selection>';
+echo '<table class="selection">';
 echo '<tr><th colspan=5><font size=3 color=navy>'._('To search for shipments for a specific part use the part selection facilities below') . '</font></th></tr>';
 ?>
 <tr>
@@ -176,7 +176,7 @@ echo '<input type=submit name="ResetPart" value="'. _('Show All') .'"></div><br 
 
 if (isset($StockItemsResult)) {
 
-	echo '<table cellpadding=2 colspan=7 class=selection>';
+	echo '<table cellpadding=2 colspan=7 class="selection">';
 	$TableHeader = '<tr>
 			<th>'. _('Code').'</th>
 			<th>'. _('Description').'</th>
@@ -277,7 +277,7 @@ Code	 Description	On Hand		 Orders Ostdg     Units		 Code	Description 	 On Hand 
 	if (DB_num_rows($ShipmentsResult)>0){
 		/*show a table of the shipments returned by the SQL */
 
-		echo '<table cellpadding=2 colspan=7 width=95% class=selection>';
+		echo '<table cellpadding=2 colspan=7 width=95% class="selection">';
 		$TableHeader = '<tr>
 				<th>'. _('Shipment'). '</th>
 				<th>'. _('Supplier'). '</th>

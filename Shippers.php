@@ -124,7 +124,7 @@ or deletion of the records*/
 	$sql = "SELECT * FROM shippers ORDER BY shipper_id";
 	$result = DB_query($sql,$db);
 
-	echo '<table class=selection>
+	echo '<table class="selection">
 		<tr><th>'. _('Shipper ID'). '</th><th>'. _('Shipper Name'). '</th></tr>';
 
 	$k=0; //row colour counter
@@ -177,9 +177,9 @@ if (!isset($_GET['delete'])) {
 
 		echo '<input type=hidden name="SelectedShipper" value='. $SelectedShipper .'>';
 		echo '<input type=hidden name="Shipper_ID" value=' . $_POST['Shipper_ID'] . '>';
-		echo '<br /><table class=selection><tr><td>'. _('Shipper Code').':</td><td>' . $_POST['Shipper_ID'] . '</td></tr>';
+		echo '<br /><table class="selection"><tr><td>'. _('Shipper Code').':</td><td>' . $_POST['Shipper_ID'] . '</td></tr>';
 	} else {
-		echo '<br /><table class=selection>';
+		echo '<br /><table class="selection">';
 	}
 	if (!isset($_POST['ShipperName'])) {
 		$_POST['ShipperName']='';

@@ -128,7 +128,7 @@ if ($CustomerRecord['dissallowinvoices']!=0){
 	echo '<br /><font color=RED size=4><b>' . _('ACCOUNT ON HOLD') . '</font></b><br />';
 }
 
-echo '<table class=selection width=70%>
+echo '<table class="selection" width=70%>
 	<tr>
 		<th width=20%>' . _('Total Balance') . '</th>
 		<th width=20%>' . _('Current') . '</th>

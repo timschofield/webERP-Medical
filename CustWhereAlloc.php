@@ -12,7 +12,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' .
 	_('Customer Where Allocated'). '" alt="" />' . $title . '</p>';
 
-echo '<table class=selection cellpadding=2><tr>';
+echo '<table class="selection" cellpadding=2><tr>';
 
 echo '<td>' . _('Type') . ':</td><td><select tabindex=1 name="TransType"> ';
 
@@ -78,7 +78,7 @@ if (isset($_POST['ShowResults']) AND  $_POST['TransNo']!=''){
 	if (DB_num_rows($TransResult)==0){
 		prnMsg(_('There are no allocations made against this transaction'),'info');
 	} else {
-		echo '<br /><table cellpadding=2 class=selection>';
+		echo '<br /><table cellpadding=2 class="selection">';
 
 		echo '<tr><th colspan=6><div class="centre"><font size=3 color=blue><b>'._('Allocations made against invoice number') . ' ' . $_POST['TransNo']
 			. '<br />'._('Transaction Total').': '. number_format($myrow['totamt'],2) . '</font></b></div></th></tr>';

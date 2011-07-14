@@ -33,7 +33,7 @@ if ((! isset($_POST['FromPeriod']) OR ! isset($_POST['ToPeriod']))
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>';
 /*Show a form to allow input of criteria for TB to show */
-	echo '<table class=selection><tr><td>' . _('Select Period From:') . '</td><td><select Name="FromPeriod">';
+	echo '<table class="selection"><tr><td>' . _('Select Period From:') . '</td><td><select Name="FromPeriod">';
 
 	if (Date('m') > $_SESSION['YearEnd']){
 		/*Dates in SQL format */
@@ -297,7 +297,7 @@ if ((! isset($_POST['FromPeriod']) OR ! isset($_POST['ToPeriod']))
 
 	//Draw it
 	$graph->DrawGraph();
-	echo '<table class=selection><tr><td>';
+	echo '<table class="selection"><tr><td>';
 	echo '<p><img src="companies/' .$_SESSION['DatabaseName'] .  '/reports/salesgraph.png" alt="Sales Report Graph"></img></p>';
 	echo '</td></tr></table>';
 	include('includes/footer.inc');
