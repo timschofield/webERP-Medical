@@ -73,6 +73,7 @@ if (isset($_POST['Create'])) {
 	}
 
 } else {
+
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
@@ -96,6 +97,7 @@ if (isset($_POST['Create'])) {
 	} else {
 		echo '<tr><td>' . _('Price List') . ':</td>
 				<td><select tabindex=9 name="SalesType">';
+		echo '<option value=""></option>';
 
 		while ($myrow = DB_fetch_array($result)) {
 			echo '<option value="'. $myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
@@ -103,10 +105,21 @@ if (isset($_POST['Create'])) {
 		DB_data_seek($result,0);
 		echo '</select></td></tr>';
 	}
+	$sql="SELECT debtorno,
+				name
+				FROM debtorsmaster
+				LEFT JOIN debtortype
+				ON debtorsmaster.typeid=debtortype.typeid
+				WHERE debtortype.typename='Insurance'";
+	$result=DB_query($sql, $db);
 
-	echo '<tr><td>'._('Insurance Company Code').':</td>';
-	echo '<td><input type="text" size="10" maxlength="4" name="Insurance" value="" /></td></tr>';
-
+	echo '<tr><td>'._('Insurance Company').':</td>';
+	echo '<td><select name="Insurance">';
+	echo '<option value=""></option>';
+	while ($myrow=DB_fetch_array($result)) {
+		echo '<option value="'.$myrow['debtorno'].'">'.$myrow['name'].'</option>';
+	}
+	echo '</select></td></tr>';
 	echo '</table>';
 	echo '<br /><div class="centre"><input type="submit" name="Create" value="Register the patient" /></div>';
 	echo '</form>';

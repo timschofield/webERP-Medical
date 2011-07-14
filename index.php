@@ -267,6 +267,11 @@ if (isset($SupplierLogin) and count($_SESSION['AllowedPageSecurityTokens'])==2 a
 								<?php echo '<p>&bull; <a href="' . $rootpath . '/Contracts.php?">' . _('Create Contract') . '</a></p>'; ?>
 							</td>
 							</tr>
+							<tr>
+							<td class="menu_group_item">
+								<?php echo '<p>&bull; <a href="' . $rootpath . '/KCMCInsuranceCompanyDetails.php?">' . _('Create or Modify an Insurance Company') . '</a></p>'; ?>
+							</td>
+							</tr>
 						</table>
 					</td>
 					</tr>
