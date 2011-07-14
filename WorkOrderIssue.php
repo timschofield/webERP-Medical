@@ -525,7 +525,7 @@ if ($WORow['closed']==1){
 if (!isset($_POST['IssuedDate'])){
 	$_POST['IssuedDate'] = Date($_SESSION['DefaultDateFormat']);
 }
-echo '<table cellpadding=2 class=selection>
+echo '<table cellpadding=2 class="selection">
 	<tr><td class="label">' . _('Issue to work order') . ':</td>
 		<td>' . $_POST['WO'] .'</td><td class="label">' . _('Item') . ':</td>
 		<td>' . $_POST['StockID'] . ' - ' . $WORow['description'] . '</td>
@@ -574,7 +574,7 @@ if (!isset($_POST['IssueItem'])){
 }
 echo '</td></tr>
 	</table><br />
-	<table class=selection>';
+	<table class="selection">';
 
 
 if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
@@ -621,7 +621,7 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 			ORDER BY categorydescription";
 		$result1 = DB_query($SQL,$db);
 
-	echo '<table class=selection><tr><td>' . _('Select a stock category') . ':<select name="StockCat">';
+	echo '<table class="selection"><tr><td>' . _('Select a stock category') . ':<select name="StockCat">';
 
 	if (!isset($_POST['StockCat'])){
 		echo '<option selected value="All">' . _('All') . '</option>';
@@ -664,7 +664,7 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 
 		if (DB_num_rows($SearchResult)>1){
 
-			echo '<br /><table cellpadding=2 colspan=7 class=selection>';
+			echo '<br /><table cellpadding=2 colspan=7 class="selection">';
 			$TableHeader = '<tr><th>' . _('Code') . '</th>
 						<th>' . _('Description') . '</th>
 						<th>' . _('Units') . '</th></tr>';
@@ -732,13 +732,13 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 	$IssueItemResult = DB_query($sql,$db,$ErrMsg);
 	$IssueItemRow = DB_fetch_array($IssueItemResult);
 
-	echo '<table class=selection>
+	echo '<table class="selection">
 		<tr><td class="label">' . _('Issuing') . ':</td>
 			<td>' . $_POST['IssueItem'] . ' - ' . $IssueItemRow['description'] .'</td>
 			<td class="label">' . _('Units') . ':</td><td>' . $IssueItemRow['units'] .'</td></tr>
 		</table>';
 
-	echo '<br /><table class=selection>';
+	echo '<br /><table class="selection">';
 
 	//Now Setup the form for entering quantities of the item to be issued to the WO
 	if ($IssueItemRow['controlled']==1){ //controlled
