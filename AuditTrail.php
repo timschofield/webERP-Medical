@@ -140,7 +140,7 @@ if (isset($_POST['View'])) {
 	}
 	$result = DB_query($sql,$db);
 
-	echo '<table border=0 width="98%" class=selection>';
+	echo '<table border=0 width="98%" class="selection">';
 	echo '<tr><th>' . _('Date/Time') . '</th>
 				<th>' . _('User') . '</th>
 				<th>' . _('Type') . '</th>
