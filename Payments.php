@@ -866,7 +866,7 @@ echo '</table><br />';
 if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDetail']->SupplierID==''){
 /* Set upthe form for the transaction entry for a GL Payment Analysis item */
 
-	echo '<br /><table class=selection>';
+	echo '<br /><table class="selection">';
 	echo '<tr><th colspan=2><font size=3 color=blue>' . _('General Ledger Payment Analysis Entry') . '</font></th></tr>';
 
 	//Select the tag
@@ -978,7 +978,7 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 
 	if (sizeOf($_SESSION['PaymentDetail']->GLItems)>0) {
 		echo '<br />
-			<table class=selection>
+			<table class="selection">
 			<tr>
 				<th>' . _('Cheque No').'</th>
 				<th>' . _('Amount') . ' (' . $_SESSION['PaymentDetail']->Currency . ')</th>
@@ -1015,7 +1015,7 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 /*a supplier is selected or the GL link is not active then set out
 the fields for entry of receipt amt and disc */
 
-	echo '<table class=selection><tr><td>' . _('Amount of Payment') . ' ' . $_SESSION['PaymentDetail']->Currency . ':</td>
+	echo '<table class="selection"><tr><td>' . _('Amount of Payment') . ' ' . $_SESSION['PaymentDetail']->Currency . ':</td>
 				<td><input class=number type="text" name="Amount" maxlength=12 size=13 value=' . $_SESSION['PaymentDetail']->Amount . '></td></tr>';
 
 	if (isset($_SESSION['PaymentDetail']->SupplierID)){ /*So it is a supplier payment so show the discount entry item */
