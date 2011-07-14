@@ -322,7 +322,7 @@ or deletion of the records*/
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' .
 			_('Inventory') . '" alt="" />' . ' ' . $title . '</p>';
 
-	echo '<table class=selection>';
+	echo '<table class="selection">';
 	echo '<tr><th>' . _('Location Code') . '</th>
 			<th>' . _('Location Name') . '</th>
 			<th>' . _('Tax Province') . '</th>
@@ -424,7 +424,7 @@ if (!isset($_GET['delete'])) {
 
 		echo '<input type=hidden name=SelectedLocation value="' . $SelectedLocation . '>';
 		echo '<input type=hidden name=LocCode value="' . $_POST['LocCode'] . '>';
-		echo '<table class=selection>';
+		echo '<table class="selection">';
 		echo '<tr><th colspan=2><font size=3 color=blue>'._('Amend Location details').'</font></th></tr>';
 		echo '<tr><td>' . _('Location Code') . ':</td><td>';
 		echo $_POST['LocCode'] . '</td></tr>';
@@ -432,7 +432,7 @@ if (!isset($_GET['delete'])) {
 		if (!isset($_POST['LocCode'])) {
 			$_POST['LocCode'] = '';
 		}
-		echo '<table class=selection><tr><th colspan=2><font size=3 color=blue>'._('New Location details').'</font></th></tr>';
+		echo '<table class="selection"><tr><th colspan=2><font size=3 color=blue>'._('New Location details').'</font></th></tr>';
 		echo '<tr><td>' . _('Location Code') . ':</td><td><input type="Text" name="LocCode" value="' . $_POST['LocCode'] . '" size=5 maxlength=5></td></tr>';
 	}
 	if (!isset($_POST['LocationName'])) {
