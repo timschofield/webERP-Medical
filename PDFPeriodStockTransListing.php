@@ -26,7 +26,7 @@ if (!isset($_POST['FromDate'])){
 
 	 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	 echo '<table class=selection>';
+	 echo '<table class="selection">';
 	 echo '<tr>
 				<td>' . _('Enter the date from which the transactions are to be listed') . ':</td>
 				<td><input type="text" name="FromDate" maxlength="10" size="10" class="date" alt="' . $_SESSION['DefaultDateFormat'] . '" value="' . Date($_SESSION['DefaultDateFormat']) . '"></td>
