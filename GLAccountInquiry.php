@@ -181,13 +181,13 @@ if (isset($_POST['Show'])){
 			echo '<tr bgcolor="#FDFEEF">
 				<td colspan=3><b>' . _('Brought Forward Balance') . '</b><td>
 				</td></td>
-				<td class=number><b>' . number_format(-$RunningTotal,2) . '</b></td>
+				<td class="number"><b>' . number_format(-$RunningTotal,2) . '</b></td>
 				<td></td>
 				</tr>';
 		} else { //its a debit balance b/fwd
 			echo '<tr bgcolor="#FDFEEF">
 				<td colspan=3><b>' . _('Brought Forward Balance') . '</b></td>
-				<td class=number><b>' . number_format($RunningTotal,2) . '</b></td>
+				<td class="number"><b>' . number_format($RunningTotal,2) . '</b></td>
 				<td colspan=2></td>
 				</tr>';
 		}
@@ -221,14 +221,14 @@ if (isset($_POST['Show'])){
 						$RunningTotal = 0;
 					}
 					echo '<td></td>
-						<td class=number><b>' . number_format(-$PeriodTotal,2) . '</b></td>
+						<td class="number"><b>' . number_format(-$PeriodTotal,2) . '</b></td>
 						<td></td>
 						</tr>';
 				} else { //its a debit balance b/fwd
 					if ($PandLAccount==True) {
 						$RunningTotal = 0;
 					}
-					echo '<td class=number><b>' . number_format($PeriodTotal,2) . '</b></td>
+					echo '<td class="number"><b>' . number_format($PeriodTotal,2) . '</b></td>
 						<td colspan=2></td>
 						</tr>';
 				}
@@ -271,12 +271,12 @@ if (isset($_POST['Show'])){
 			$tagrow['tagdescription']=_('None');
 		}
 		printf('<td>%s</td>
-			<td class=number><a href="%s">%s</a></td>
+			<td class="number"><a href="%s">%s</a></td>
 			<td>%s</td>
-			<td class=number>%s</td>
-			<td class=number>%s</td>
+			<td class="number">%s</td>
+			<td class="number">%s</td>
 			<td>%s</td>
-			<td class=number><b>%s</b></td>
+			<td class="number"><b>%s</b></td>
 			<td>%s</td>
 			</tr>',
 			$myrow['typename'],
@@ -300,9 +300,9 @@ if (isset($_POST['Show'])){
 	echo '</b></td>';
 
 	if ($RunningTotal >0){
-		echo '<td class=number><b>' . number_format(($RunningTotal),2) . '</b></td><td colspan=2></td></tr>';
+		echo '<td class="number"><b>' . number_format(($RunningTotal),2) . '</b></td><td colspan=2></td></tr>';
 	}else {
-		echo '<td></td><td class=number><b>' . number_format((-$RunningTotal),2) . '</b></td><td colspan=2></td></tr>';
+		echo '<td></td><td class="number"><b>' . number_format((-$RunningTotal),2) . '</b></td><td colspan=2></td></tr>';
 	}
 	echo '</table>';
 } /* end of if Show button hit */
