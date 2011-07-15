@@ -988,7 +988,7 @@ if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
 if (isset($_POST['NonStockOrder'])) {
 
 	echo '<br /><table class="selection"><tr><td>'._('Item Description').'</td>';
-	echo '<td><input type=text name=ItemDescription size=40></td></tr>';
+	echo '<td><input type="text" name=ItemDescription size=40></td></tr>';
 	echo '<tr><td>'._('General Ledger Code').'</td>';
 	echo '<td><select name="GLCode">';
 	$sql="SELECT accountcode,
