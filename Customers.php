@@ -956,8 +956,8 @@ if (!isset($DebtorNo)) {
 		$_POST['notes']=$myrowcc['notes'];
 		echo '<table class="selection">';
 		echo '<tr>
-				<td>' . _('Name') . '</td><td><input type=text name="custname" value="'.$_POST['custname'].'"></td></tr><tr>
-				<td>' . _('Role') . '</td><td><input type=text name="role" value="'.$_POST['role'].'"></td></tr><tr>
+				<td>' . _('Name') . '</td><td><input type="text" name="custname" value="'.$_POST['custname'].'"></td></tr><tr>
+				<td>' . _('Role') . '</td><td><input type="text" name="role" value="'.$_POST['role'].'"></td></tr><tr>
 				<td>' . _('Phone no') . '</td><td><input type="text" name="phoneno" value="'.$_POST['phoneno'].'"></td></tr><tr>
 				<td>' . _('Notes') . '</td><td><textarea name="notes">'.$_POST['notes'].'</textarea></td></tr>
 				<tr><td colspan=2><input type=submit name=update value=update></td></tr></table>
