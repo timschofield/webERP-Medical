@@ -1650,7 +1650,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 	$j++;
 	echo '<tr>
 		<td>' . _('Consignment Note Ref'). ':</td>
-		<td><input tabindex='.$j.' type=text maxlength=15 size=15 name=Consignment value="' . $_POST['Consignment'] . '"></td>
+		<td><input tabindex='.$j.' type="text" maxlength=15 size=15 name=Consignment value="' . $_POST['Consignment'] . '"></td>
 	</tr>';
 	$j++;
 	echo '<tr>
