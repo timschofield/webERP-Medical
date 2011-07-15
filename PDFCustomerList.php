@@ -404,7 +404,7 @@ if (isset($_POST['PrintPDF'])){
 	echo '<input type="text" class="number" name="ActivityAmount" size=8 maxlength=8 value=0></td></tr>';
 
 	$DefaultActivitySince = Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m')-6,0,Date('y')));
-	echo '<tr><td>' . _('Activity Since'). ':</td><td><input type="text" class=date alt="'.$_SESSION['DefaultDateFormat'].'"  name="ActivitySince" size=10 maxlength=10
+	echo '<tr><td>' . _('Activity Since'). ':</td><td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'"  name="ActivitySince" size=10 maxlength=10
 		value="' . $DefaultActivitySince . '"></td></tr>';
 
 	echo '</table><br /><div class="centre"><input type=Submit Name="PrintPDF" Value="'. _('Print PDF'). '"></div>';
