@@ -556,14 +556,14 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 						printf('<tr>
 							<td colspan=2><font size=2><I>%s </I></font></td>
 							<td></td>
-							<td class=number>%s</td>
+							<td class="number">%s</td>
 							</tr>',
 							$ActGrpLabel,
 							number_format($GrpPrdActual[$Level]));
 					} else { /*Costs */
 						printf('<tr>
 							<td colspan=2><font size=2><I>%s </I></font></td>
-							<td class=number>%s</td>
+							<td class="number">%s</td>
 							<td></td>
 							</tr>',
 							$ActGrpLabel,
@@ -590,14 +590,14 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 					printf('<tr>
 						<td colspan=2><font size=2><I>%s </I></font></td>
 						<td></td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
 						</tr>',
 						$ActGrpLabel,
 						number_format(-$GrpPrdActual[$Level]));
 				} else { /*Costs */
 					printf('<tr>
 						<td colspan=2><font size=2><I>%s </I></font></td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
 						<td></td>
 						</tr>',
 						$ActGrpLabel,
@@ -642,7 +642,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 					printf('<tr>
 					<td colspan=2><font size=4>%s</font></td>
 					<td></td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					</tr>',
 					$Sections[$Section],
 					number_format($SectionPrdActual));
@@ -655,7 +655,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 					printf('<tr>
 						<td colspan=2><font size=4>'._('Gross Profit').'</font></td>
 						<td></td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
 						</tr>',
 					number_format($TotalIncome - $SectionPrdActual));
 
@@ -671,7 +671,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 					printf('<tr>
 						<td colspan=2><font size=2><I>'._('Gross Profit Percent').'</I></font></td>
 						<td></td>
-						<td class=number><I>%s</I></td>
+						<td class="number"><I>%s</I></td>
 						</tr><tr><td colspan=6> </td></tr>',
 						number_format($PrdGPPercent,1) . '%');
 					$j++;
@@ -739,7 +739,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 				 printf('<td>%s</td>
 					<td>%s</td>
 					<td></td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					</tr>',
 					$ActEnquiryURL,
 					$myrow['accountname'],
@@ -747,7 +747,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 			} else {
 				printf('<td>%s</td>
 					<td>%s</td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					</tr>',
 					$ActEnquiryURL,
 					$myrow['accountname'],
@@ -776,18 +776,18 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 					printf('<tr>
 						<td colspan=2><font size=2><I>%s </I></font></td>
 						<td></td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
 						<td></td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
 						<td></td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
 						</tr>',
 						$ActGrpLabel,
 						number_format(-$GrpPrdActual[$Level]));
 				} else { /*Costs */
 					printf('<tr>
 						<td colspan=2><font size=2><I>%s </I></font></td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
 						<td></td>
 						</tr>',
 						$ActGrpLabel,
@@ -812,14 +812,14 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 				printf('<tr>
 					<td colspan=2><font size=2><I>%s </I></font></td>
 					<td></td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					</tr>',
 					$ActGrpLabel,
 					number_format(-$GrpPrdActual[$Level]));
 			} else { /*Costs */
 				printf('<tr>
 					<td colspan=2><font size=2><I>%s </I></font></td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					<td></td>
 					</tr>',
 					$ActGrpLabel,
@@ -847,7 +847,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 			printf('<tr>
 			<td colspan=2><font size=4>%s</font></td>
 			<td></td>
-			<td class=number>%s</td>
+			<td class="number">%s</td>
 			</tr>',
 			$Sections[$Section],
 			number_format($SectionPrdActual));
@@ -864,7 +864,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 			printf('<tr>
 			<td colspan=2><font size=4>%s</font></td>
 			<td></td>
-			<td class=number>%s</td>
+			<td class="number">%s</td>
 			</tr>',
 			$Sections[$Section],
 			number_format(-$SectionPrdActual));
@@ -877,11 +877,11 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 			printf('<tr>
 				<td colspan=2><font size=4>'._('Gross Profit').'</font></td>
 				<td></td>
-				<td class=number>%s</td>
+				<td class="number">%s</td>
 				<td></td>
-				<td class=number>%s</td>
+				<td class="number">%s</td>
 				<td></td>
-				<td class=number>%s</td>
+				<td class="number">%s</td>
 				</tr>',
 			number_format($TotalIncome - $SectionPrdActual));
 
@@ -897,11 +897,11 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 			printf('<tr>
 				<td colspan=2><font size=2><I>'._('Gross Profit Percent').'</I></font></td>
 				<td></td>
-				<td class=number><I>%s</I></td>
+				<td class="number"><I>%s</I></td>
 				<td></td>
-				<td class=number><I>%s</I></td>
+				<td class="number"><I>%s</I></td>
 				<td></td>
-				<td class=number><I>%s</I></td>
+				<td class="number"><I>%s</I></td>
 				</tr><tr><td colspan=6> </td></tr>',
 				number_format($PrdGPPercent,1) . '%');
 			$j++;
@@ -929,7 +929,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 	printf('<tr bgcolor="#ffffff">
 		<td colspan=2><font size=4 color=BLUE><b>'._('Surplus').' - '._('Deficit').'</b></font></td>
 		<td></td>
-		<td class=number>%s</td>
+		<td class="number">%s</td>
 		</tr>',
 		number_format($PeriodProfitLoss)
 		);
