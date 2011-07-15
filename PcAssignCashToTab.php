@@ -272,7 +272,7 @@ if (!isset($SelectedTabs)){
 				}
 				echo '<td>'.ConvertSQLDate($myrow['date']).'</td>
 					<td>'.$Description['0'].'</td>
-					<td class=number>'.number_format($myrow['amount'],2).'</td>
+					<td class="number">'.number_format($myrow['amount'],2).'</td>
 					<td>'.$AuthorisedDate.'</td>
 					<td>'.$myrow['notes'].'</td>
 					<td>'.$myrow['receipt'].'</td>
