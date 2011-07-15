@@ -287,17 +287,17 @@ if (!isset($_POST['PostInvoice'])){
 			echo '<tr>
 					<td>' . $EnteredGRN->GRNNo . '</td><td>' . $EnteredGRN->ItemCode .'</td>
 					<td>' . $EnteredGRN->ItemDescription . '</td>
-					<td class=number>' .number_format($EnteredGRN->This_QuantityInv,2) . '</td>
-					<td class=number>' .number_format($EnteredGRN->ChgPrice,2) . '</td>
-					<td class=number>' .number_format($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv,2) . '</td>
+					<td class="number">' .number_format($EnteredGRN->This_QuantityInv,2) . '</td>
+					<td class="number">' .number_format($EnteredGRN->ChgPrice,2) . '</td>
+					<td class="number">' .number_format($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv,2) . '</td>
 				</tr>';
 
 			$TotalGRNValue = $TotalGRNValue + ($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv);
 
 		}
 
-		echo '<tr><td colspan=5 class=number><font color=blue>' . _('Total Value of Goods Charged') . ':</font></td>
-			<td class=number><font color=blue><U>' . number_format($TotalGRNValue,2) . '</U></font></td></tr>';
+		echo '<tr><td colspan=5 class="number"><font color=blue>' . _('Total Value of Goods Charged') . ':</font></td>
+			<td class="number"><font color=blue><U>' . number_format($TotalGRNValue,2) . '</U></font></td></tr>';
 		echo '</table>';
 	}
 
@@ -317,7 +317,7 @@ if (!isset($_POST['PostInvoice'])){
 
 		foreach ($_SESSION['SuppTrans']->Shipts as $EnteredShiptRef){
 
-			echo '<tr><td>' . $EnteredShiptRef->ShiptRef . '</td><td class=number>' .
+			echo '<tr><td>' . $EnteredShiptRef->ShiptRef . '</td><td class="number">' .
 				number_format($EnteredShiptRef->Amount,2) . '</td></tr>';
 
 			$TotalShiptValue = $TotalShiptValue + $EnteredShiptRef->Amount;
@@ -329,8 +329,8 @@ if (!isset($_POST['PostInvoice'])){
 			}
 		}
 
-		echo '<tr><td colspan=2 class=number><font size=4 color=blue>' . _('Total') . ':</font></td>
-			<td class=number><font size=4 color=BLUE><U>' .  number_format($TotalShiptValue,2) . '</U></font></td></tr></table>';
+		echo '<tr><td colspan=2 class="number"><font size=4 color=blue>' . _('Total') . ':</font></td>
+			<td class="number"><font size=4 color=BLUE><U>' .  number_format($TotalShiptValue,2) . '</U></font></td></tr></table>';
 	}
 
 	$TotalAssetValue = 0;
@@ -353,7 +353,7 @@ if (!isset($_POST['PostInvoice'])){
 			echo '<tr>
 					<td>' . $EnteredAsset->AssetID . '</td>
 					<td>' . $EnteredAsset->Description . '</td>
-					<td class=number>' .	number_format($EnteredAsset->Amount,2) . '</td>
+					<td class="number">' .	number_format($EnteredAsset->Amount,2) . '</td>
 				</tr>';
 
 			$TotalAssetValue += $EnteredAsset->Amount;
@@ -366,8 +366,8 @@ if (!isset($_POST['PostInvoice'])){
 		}
 
 		echo '<tr>
-				<td colspan=2 class=number><font size=4 color=blue>' . _('Total') . ':</font></td>
-				<td class=number><font size=4 color=blue><u>' .  number_format($TotalAssetValue,2) . '</u></font></td>
+				<td colspan=2 class="number"><font size=4 color=blue>' . _('Total') . ':</font></td>
+				<td class="number"><font size=4 color=blue><u>' .  number_format($TotalAssetValue,2) . '</u></font></td>
 			</tr></table>';
 	} //end loop around assets added to invocie
 
@@ -391,7 +391,7 @@ if (!isset($_POST['PostInvoice'])){
 
 			echo '<tr>
 					<td>' . $Contract->ContractRef . '</td>
-					<td class=number>' . number_format($Contract->Amount,2) . '</td>
+					<td class="number">' . number_format($Contract->Amount,2) . '</td>
 					<td>' . $Contract->Narrative . '</td>
 				</tr>';
 
@@ -433,7 +433,7 @@ if (!isset($_POST['PostInvoice'])){
 				echo '<tr>
 						<td>' . $EnteredGLCode->GLCode . '</td>
 						<td>' . $EnteredGLCode->GLActName . '</td>
-						<td class=number>' . number_format($EnteredGLCode->Amount,2) .  '</td>
+						<td class="number">' . number_format($EnteredGLCode->Amount,2) .  '</td>
 						<td>' . $EnteredGLCode->Narrative . '</td>
 					</tr>';
 
@@ -443,7 +443,7 @@ if (!isset($_POST['PostInvoice'])){
 
 			echo '<tr>
 					<td colspan=2 class="number">' . _('Total') .  ':</td>
-					<td class=number>' .  number_format($TotalGLValue,2) . '</td>
+					<td class="number">' .  number_format($TotalGLValue,2) . '</td>
 				</tr></table>';
 		}
 
@@ -452,13 +452,13 @@ if (!isset($_POST['PostInvoice'])){
 		echo '<br /><table class="selection">
 					<tr>
 						<td>' . _('Amount in supplier currency') . ':</td>
-						<td colspan=2 class=number>' . number_format( $_SESSION['SuppTrans']->OvAmount,2) . '</td>
+						<td colspan=2 class="number">' . number_format( $_SESSION['SuppTrans']->OvAmount,2) . '</td>
 					</tr>';
 	} else {
 		echo '<br /><table class="selection">
 					<tr>
 						<td>' . _('Amount in supplier currency') . ':</td>
-						<td colspan=2 class=number><input type="text" size="12" maxlength="10" name="OvAmount" value=' . number_format( $_SESSION['SuppTrans']->OvAmount,2) . '></td>
+						<td colspan=2 class="number"><input type="text" size="12" maxlength="10" name="OvAmount" value=' . number_format( $_SESSION['SuppTrans']->OvAmount,2) . '></td>
 					</tr>';
 	}
 
@@ -506,7 +506,7 @@ if (!isset($_POST['PostInvoice'])){
 
 			echo '<input type=hidden name="TaxAmount'  . $Tax->TaxCalculationOrder . '"  value=' . round($_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount,2) . '>';
 
-			echo '</td><td class=number>' . number_format($_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount,2);
+			echo '</td><td class="number">' . number_format($_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount,2);
 
 		} else { /*Tax being entered manually accept the taxamount entered as is*/
 //			if (!isset($_POST['TaxAmount'  . $Tax->TaxCalculationOrder])) {
@@ -529,7 +529,7 @@ if (!isset($_POST['PostInvoice'])){
 
 	echo '<tr>
 			<td>' . _('Invoice Total') . ':</td>
-			<td colspan=2 class=number><b>' . $DisplayTotal . '</b></td>
+			<td colspan=2 class="number"><b>' . $DisplayTotal . '</b></td>
 		</tr></table>';
 
 	echo '<br /><table class="selection">
