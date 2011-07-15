@@ -556,8 +556,8 @@ If (isset($PrintPDF)
 		}
 
 		echo '</select></td></tr>';
-		echo '<tr><td>' . _('Start invoice/credit note number to print') . '</td><td><input class=number type=text max=6 size=7 name=FromTransNo></td></tr>';
-		echo '<tr><td>' . _('End invoice/credit note number to print') . '</td><td><input class=number type=text max=6 size=7 name="ToTransNo"></td></tr></table>';
+		echo '<tr><td>' . _('Start invoice/credit note number to print') . '</td><td><input class="number" type=text max=6 size=7 name=FromTransNo></td></tr>';
+		echo '<tr><td>' . _('End invoice/credit note number to print') . '</td><td><input class="number" type=text max=6 size=7 name="ToTransNo"></td></tr></table>';
 		echo '<div class="centre"><br /><input type=Submit Name="Print" Value="' . _('Print Preview') . '"><br />';
 		echo '<input type=Submit Name="PrintPDF" Value="' . _('Print PDF') . '"></div>';
 
@@ -726,7 +726,7 @@ If (isset($PrintPDF)
 				echo _('Facsimile') . ': ' . $_SESSION['CompanyRecord']['fax'] . '<br />';
 				echo _('Email') . ': ' . $_SESSION['CompanyRecord']['email'] . '<br />';
 
-				echo '</td><td width=50% class=number>';
+				echo '</td><td width=50% class="number">';
 
 	/*Now the customer charged to details in a sub table within a cell of the main table*/
 
@@ -894,11 +894,11 @@ If (isset($PrintPDF)
 
 					      printf ('<td>%s</td>
 					      		<td>%s</td>
-							<td class=number>%s</td>
-							<td class=number>%s</td>
-							<td class=number>%s</td>
-							<td class=number>%s</td>
-							<td class=number>%s</td>
+							<td class="number">%s</td>
+							<td class="number">%s</td>
+							<td class="number">%s</td>
+							<td class="number">%s</td>
+							<td class="number">%s</td>
 							</tr>',
 							$myrow2['stockid'],
 							$myrow2['description'],
@@ -940,7 +940,7 @@ If (isset($PrintPDF)
 						    echo _('Telephone') . ': ' . $_SESSION['CompanyRecord']['telephone'] . '<br />';
 						    echo _('Facsimile') . ': ' . $_SESSION['CompanyRecord']['fax'] . '<br />';
 						    echo _('Email') . ': ' . $_SESSION['CompanyRecord']['email'] . '<br />';
-						    echo '</td><td class=number>' . _('Page') . ': ' . $PageNumber . '</td></tr></table>';
+						    echo '</td><td class="number">' . _('Page') . ': ' . $PageNumber . '</td></tr></table>';
 						    echo '<table class="table1"><tr>
 						    	<th>' . _('Item Code') . '</th>
 							<th>' . _('Item Description') . '</th>
@@ -984,7 +984,7 @@ If (isset($PrintPDF)
 					echo _('Telephone') . ': ' . $_SESSION['CompanyRecord']['telephone'] . '<br />';
 					echo _('Facsimile') . ': ' . $_SESSION['CompanyRecord']['fax'] . '<br />';
 					echo _('Email') . ': ' . $_SESSION['CompanyRecord']['email'] . '<br />';
-					echo '</td><td class=number>' . _('Page') . ': ' . $PageNumber . '</td></tr></table>';
+					echo '</td><td class="number">' . _('Page') . ': ' . $PageNumber . '</td></tr></table>';
 					echo '<table class="table1"><tr>
 						<th>' . _('Item Code') . '</th>
 						<th>' . _('Item Description') . '</th>
@@ -1023,18 +1023,18 @@ If (isset($PrintPDF)
 				}
 	/*Print out the invoice text entered */
 				echo '<table class="table1"><tr>
-					<td class=number>' . _('Sub Total') . '</td>
-					<td class=number bgcolor="#EEEEEE" WIDTH="15%">' . $DisplaySubTot . '</td></tr>';
-				echo '<tr><td class=number>' . _('Freight') . '</td>
-					<td class=number bgcolor="#EEEEEE">' . $DisplayFreight . '</td></tr>';
-				echo '<tr><td class=number>' . _('Tax') . '</td>
-					<td class=number bgcolor="#EEEEEE">' . $DisplayTax . '</td></tr>';
+					<td class="number">' . _('Sub Total') . '</td>
+					<td class="number" bgcolor="#EEEEEE" WIDTH="15%">' . $DisplaySubTot . '</td></tr>';
+				echo '<tr><td class="number">' . _('Freight') . '</td>
+					<td class="number" bgcolor="#EEEEEE">' . $DisplayFreight . '</td></tr>';
+				echo '<tr><td class="number">' . _('Tax') . '</td>
+					<td class="number" bgcolor="#EEEEEE">' . $DisplayTax . '</td></tr>';
 				if ($InvOrCredit=='Invoice'){
-				     echo '<tr><td class=number><b>' . _('TOTAL INVOICE') . '</b></td>
-				     	<td class=number bgcolor="#EEEEEE"><u><b>' . $DisplayTotal . '</b></u></td></tr>';
+				     echo '<tr><td class="number"><b>' . _('TOTAL INVOICE') . '</b></td>
+				     	<td class="number" bgcolor="#EEEEEE"><u><b>' . $DisplayTotal . '</b></u></td></tr>';
 				} else {
-				     echo '<tr><td class=number><font color=RED><b>' . _('TOTAL CREDIT') . '</b></font></td>
-				     		<td class=number bgcolor="#EEEEEE"><font color=RED><u><b>' . $DisplayTotal . '</b></u></font></td></tr>';
+				     echo '<tr><td class="number"><font color=RED><b>' . _('TOTAL CREDIT') . '</b></font></td>
+				     		<td class="number" bgcolor="#EEEEEE"><font color=RED><u><b>' . $DisplayTotal . '</b></u></font></td></tr>';
 				}
 				echo '</table>';
 			} /* end of check to see that there was an invoice record to print */
