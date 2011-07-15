@@ -844,11 +844,11 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 
 		echo '<td>'.$StockItem->StockID.'</td>
 			<td>'.$StockItem->ItemDescription.'</td>
-			<td class=number>'.$DisplayQuantity.'</td>
+			<td class="number">'.$DisplayQuantity.'</td>
 			<td>'.$StockItem->Units.'</td>
-			<td class=number>'.$DisplayPrice.'</td>
-			<td class=number>'.$DisplayDiscount.'</td>
-			<td class=number>'.$DisplayLineTotal.'</td>
+			<td class="number">'.$DisplayPrice.'</td>
+			<td class="number">'.$DisplayDiscount.'</td>
+			<td class="number">'.$DisplayLineTotal.'</td>
 		</tr>';
 
 		$_SESSION['Items'.$identifier]->total = $_SESSION['Items'.$identifier]->total + $LineTotal;
@@ -858,8 +858,8 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 
 	$DisplayTotal = number_format($_SESSION['Items'.$identifier]->total,2);
 	echo '<tr class="EvenTableRows">
-		<td colspan=6 class=number><b>'. _('TOTAL Excl Tax/Freight') .'</b></td>
-		<td class=number>'.$DisplayTotal.'</td>
+		<td colspan=6 class="number"><b>'. _('TOTAL Excl Tax/Freight') .'</b></td>
+		<td class="number">'.$DisplayTotal.'</td>
 	</tr>';
 
 	$DisplayVolume = number_format($_SESSION['Items'.$identifier]->totalVolume,2);
@@ -903,10 +903,10 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 			$k=1;
 		}
 		echo '<td>'.$StockItem->ItemDescription.'</td>
-			<td class=number>'. $DisplayQuantity.'</td>
+			<td class="number">'. $DisplayQuantity.'</td>
 			<td>'.$StockItem->Units.'</td>
-			<td class=number>'. $DisplayPrice.'</td>
-			<td class=number>'. $DisplayLineTotal .'</font></td>
+			<td class="number">'. $DisplayPrice.'</td>
+			<td class="number">'. $DisplayLineTotal .'</font></td>
 		</tr>';
 
 		$_SESSION['Items'.$identifier]->total = $_SESSION['Items'.$identifier]->total + $LineTotal;
@@ -1074,7 +1074,7 @@ if (isset($_SESSION['PrintedPackingSlip']) and $_SESSION['PrintedPackingSlip']==
 }
 
 echo '<tr><td>'. _('Charge Freight Cost inc tax') .':</td>';
-echo '<td><input type=text class=number size=10 maxlength=12 name="FreightCost" value=' . $_SESSION['Items'.$identifier]->FreightCost . '></td>';
+echo '<td><input type=text class="number" size=10 maxlength=12 name="FreightCost" value=' . $_SESSION['Items'.$identifier]->FreightCost . '></td>';
 
 if ($_SESSION['DoFreightCalc']==true){
 	echo '<td><input type=submit name="Update" value="' . _('Recalc Freight Cost') . '"></td></tr>';
