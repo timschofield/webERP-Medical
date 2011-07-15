@@ -687,7 +687,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			   if ($LineItem->Controlled==0){
 			   	echo '<td><input type=text class="number" name="Quantity_' . $LineItem->LineNumber . '" maxlength=6 size=6 value=' . $LineItem->Quantity . '></td>';
 			   } else {
-				echo '<td class=number><a href="' . $rootpath . '/CreditItemsControlled.php?LineNo=' . $LineItem->LineNumber . '">' . $LineItem->Quantity . '</a>
+				echo '<td class="number"><a href="' . $rootpath . '/CreditItemsControlled.php?LineNo=' . $LineItem->LineNumber . '">' . $LineItem->Quantity . '</a>
               <input type=hidden name="Quantity_' . $LineItem->LineNumber . '" value=' . $LineItem->Quantity . '></td>';
 			   }
 
@@ -695,7 +695,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			<td><input type=text class="number" name="Price_' . $LineItem->LineNumber . '" size=10 maxlength=12 value=' . $LineItem->Price . '></td>
 			<td><input type="checkbox" name="Gross" value=False></td>
 			<td><input type=text class="number" name="Discount_' . $LineItem->LineNumber . '" size=3 maxlength=3 value=' . ($LineItem->DiscountPercent * 100) . '>%</td>
-			<td class=number>' . $DisplayLineTotal . '</td>';
+			<td class="number">' . $DisplayLineTotal . '</td>';
 
 
 			/*Need to list the taxes applicable to this line */
@@ -739,8 +739,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			$DisplayTaxAmount = number_format($TaxLineTotal ,2);
 			$DisplayGrossLineTotal = number_format($LineTotal+ $TaxLineTotal,2);
 
-			echo '<td class=number>' . $DisplayTaxAmount . '</td>
-				<td class=number>' . $DisplayGrossLineTotal . '</td>
+			echo '<td class="number">' . $DisplayTaxAmount . '</td>
+				<td class="number">' . $DisplayGrossLineTotal . '</td>
 				<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $LineItem->LineNumber . '" onclick="return confirm(\'' . _('Are you sure you wish to delete this line item from the credit note?') . '\');">' . _('Delete') . '</a></td>
 
 
@@ -761,7 +761,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			<td colspan=5></td>';
 
 
-		echo '<td colspan=2 class=number>'. _('Credit Freight').'</td>
+		echo '<td colspan=2 class="number">'. _('Credit Freight').'</td>
 			<td><input type=TEXT class="number" size=6 maxlength=6 name=ChargeFreightCost value=' . $_SESSION['CreditItems']->FreightCost . '></td>';
 
 		$FreightTaxTotal =0; //initialise tax total
@@ -799,8 +799,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		}
 		echo '</td>';
 
-		echo '<td class=number>' . number_format($FreightTaxTotal,2) . '</td>
-			<td class=number>' . number_format($FreightTaxTotal+ $_SESSION['CreditItems']->FreightCost,2) . '</td>
+		echo '<td class="number">' . number_format($FreightTaxTotal,2) . '</td>
+			<td class="number">' . number_format($FreightTaxTotal+ $_SESSION['CreditItems']->FreightCost,2) . '</td>
 			</tr>';
 
 		$TaxTotal += $FreightTaxTotal;
@@ -808,11 +808,11 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 
 		echo '<tr>
-			<td colspan=7 class=number>' . _('Credit Totals') . '</td>
-			<td class=number><b>' . $DisplayTotal . '</b></td>
+			<td colspan=7 class="number">' . _('Credit Totals') . '</td>
+			<td class="number"><b>' . $DisplayTotal . '</b></td>
 			<td colspan=2></td>
-			<td class=number><b>' . number_format($TaxTotal,2) . '</td>
-			<td class=number><b>' . number_format($TaxTotal+($_SESSION['CreditItems']->total + $_SESSION['CreditItems']->FreightCost),2) . '</b></td>
+			<td class="number"><b>' . number_format($TaxTotal,2) . '</td>
+			<td class="number"><b>' . number_format($TaxTotal+($_SESSION['CreditItems']->total + $_SESSION['CreditItems']->FreightCost),2) . '</b></td>
 		</tr></table>';
 
 
