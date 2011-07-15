@@ -35,7 +35,7 @@ while ($myrow=DB_fetch_array($result)) {
 		echo '<td>'.$myrow['description'].'</td>
 			<td>'.$myrow['serialno'].'</td>
 			<td>'.$myrow['label'].'</td>
-			<td class=number>'.$myrow['value'].'%</td>';
+			<td class="number">'.$myrow['value'].'%</td>';
 		echo '</tr>';
 	}
 }
