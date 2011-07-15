@@ -81,7 +81,7 @@ foreach ($_SESSION['SuppTrans']->Contracts as $EnteredContract){
 		$AnticipatedCost = _('No');
 	}
 	echo '<tr><td>' . $EnteredContract->ContractRef . '</td>
-		<td class=number>' . number_format($EnteredContract->Amount,2) . '</td>
+		<td class="number">' . number_format($EnteredContract->Amount,2) . '</td>
 		<td>' . $EnteredContract->Narrative . '</td>
 		<td>' . $AnticipatedCost . '</td>
 		<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $EnteredContract->Counter . '">' . _('Delete') . '</a></td></tr>';
@@ -91,8 +91,8 @@ foreach ($_SESSION['SuppTrans']->Contracts as $EnteredContract){
 }
 
 echo '<tr>
-	<td  class=number>' . _('Total') . ':</font></td>
-	<td class=number>' . number_format($TotalContractsValue,2) . '</td>
+	<td  class="number">' . _('Total') . ':</font></td>
+	<td class="number">' . number_format($TotalContractsValue,2) . '</td>
 </tr>
 </table>';
 
