@@ -226,11 +226,11 @@ prnMsg( $TotalRecords . ' ' . _('records have been created'),'success');
 		$_POST['DistDate']=date($_SESSION['DefaultDateFormat']);
 	}
 	echo '<tr><td>' . _('From Sales Date') .
-	  ':</td><td><input type ="text" class=date alt="'.$_SESSION['DefaultDateFormat'].'" name="FromDate" size="10" value="' . $_POST['FromDate'] . '">';
+	  ':</td><td><input type ="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="FromDate" size="10" value="' . $_POST['FromDate'] . '">';
 	echo '&nbsp;&nbsp;&nbsp;'. _('To Sales Date') .
-	  ':<input type ="text" class=date alt="'.$_SESSION['DefaultDateFormat'].'" name="ToDate" size="10" value="' . $_POST['ToDate'] . '"></tr>';
+	  ':<input type ="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="ToDate" size="10" value="' . $_POST['ToDate'] . '"></tr>';
 	echo '<tr><td>' . _('Start Date For Distribution') .
-		 ':</td><td><input type ="text" class=date alt="'.$_SESSION['DefaultDateFormat'].'" name="DistDate" size="10" value="' . $_POST['DistDate'] . '"></tr>';
+		 ':</td><td><input type ="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="DistDate" size="10" value="' . $_POST['DistDate'] . '"></tr>';
 	echo '<tr><td>' . _('Distribution Period') . ':</td><td><select name="Period">';
 	echo '<option selected value="weekly">' . _('Weekly') . '</option>';
 	echo '<option value="monthly">' . _('Monthly') . '</option>';
