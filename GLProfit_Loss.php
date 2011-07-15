@@ -648,11 +648,11 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 						printf('<tr>
 							<td colspan=2><font size=2><I>%s </I></font></td>
 							<td></td>
-							<td class=number>%s</td>
+							<td class="number">%s</td>
 							<td></td>
-							<td class=number>%s</td>
+							<td class="number">%s</td>
 							<td></td>
-							<td class=number>%s</td>
+							<td class="number">%s</td>
 							</tr>',
 							$ActGrpLabel,
 							number_format(-$GrpPrdActual[$Level]),
@@ -661,11 +661,11 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 					} else { /*Costs */
 						printf('<tr>
 							<td colspan=2><font size=2><I>%s </I></font></td>
-							<td class=number>%s</td>
+							<td class="number">%s</td>
 							<td></td>
-							<td class=number>%s</td>
+							<td class="number">%s</td>
 							<td></td>
-							<td class=number>%s</td>
+							<td class="number">%s</td>
 							<td></td>
 							</tr>',
 							$ActGrpLabel,
@@ -694,11 +694,11 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 					printf('<tr>
 						<td colspan=2><font size=2><I>%s </I></font></td>
 						<td></td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
 						<td></td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
 						<td></td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
 						</tr>',
 						$ActGrpLabel,
 						number_format(-$GrpPrdActual[$Level]),
@@ -707,11 +707,11 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 				} else { /*Costs */
 					printf('<tr>
 						<td colspan=2><font size=2><I>%s </I></font></td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
 						<td></td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
 						<td></td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
 						<td></td>
 						</tr>',
 						$ActGrpLabel,
@@ -744,11 +744,11 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 					printf('<tr>
 					<td colspan=2><font size=4>%s</font></td>
 					<td></td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					<td></td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					<td></td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					</tr>',
 					$Sections[$Section],
 					number_format(-$SectionPrdActual),
@@ -769,11 +769,11 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 					printf('<tr>
 					<td colspan=2><font size=4>%s</font></td>
 					<td></td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					<td></td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					<td></td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					</tr>',
 					$Sections[$Section],
 					number_format($SectionPrdActual),
@@ -788,11 +788,11 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 					printf('<tr>
 						<td colspan=2><font size=4>'._('Gross Profit').'</font></td>
 						<td></td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
 						<td></td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
 						<td></td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
 						</tr>',
 					number_format($TotalIncome - $SectionPrdActual),
 					number_format($TotalBudgetIncome - $SectionPrdBudget),
@@ -820,11 +820,11 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 					printf('<tr>
 						<td colspan=2><font size=2><I>'._('Gross Profit Percent').'</I></font></td>
 						<td></td>
-						<td class=number><I>%s</I></td>
+						<td class="number"><I>%s</I></td>
 						<td></td>
-						<td class=number><I>%s</I></td>
+						<td class="number"><I>%s</I></td>
 						<td></td>
-						<td class=number><I>%s</I></td>
+						<td class="number"><I>%s</I></td>
 						</tr><tr><td colspan=6> </td></tr>',
 						number_format($PrdGPPercent,1) . '%',
 						number_format($BudgetGPPercent,1) . '%',
@@ -902,11 +902,11 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 				 printf('<td>%s</td>
 					<td>%s</td>
 					<td></td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					<td></td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					<td></td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					</tr>',
 					$ActEnquiryURL,
 					$myrow['accountname'],
@@ -916,11 +916,11 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 			} else {
 				printf('<td>%s</td>
 					<td>%s</td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					<td></td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					<td></td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					<td></td>
 					</tr>',
 					$ActEnquiryURL,
@@ -952,11 +952,11 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 					printf('<tr>
 						<td colspan=2><font size=2><I>%s </I></font></td>
 						<td></td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
 						<td></td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
 						<td></td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
 						</tr>',
 						$ActGrpLabel,
 						number_format(-$GrpPrdActual[$Level]),
@@ -965,11 +965,11 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 				} else { /*Costs */
 					printf('<tr>
 						<td colspan=2><font size=2><I>%s </I></font></td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
 						<td></td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
 						<td></td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
 						<td></td>
 						</tr>',
 						$ActGrpLabel,
@@ -998,11 +998,11 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 				printf('<tr>
 					<td colspan=2><font size=2><I>%s </I></font></td>
 					<td></td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					<td></td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					<td></td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					</tr>',
 					$ActGrpLabel,
 					number_format(-$GrpPrdActual[$Level]),
@@ -1011,11 +1011,11 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 			} else { /*Costs */
 				printf('<tr>
 					<td colspan=2><font size=2><I>%s </I></font></td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					<td></td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					<td></td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					<td></td>
 					</tr>',
 					$ActGrpLabel,
@@ -1047,11 +1047,11 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 			printf('<tr>
 			<td colspan=2><font size=4>%s</font></td>
 			<td></td>
-			<td class=number>%s</td>
+			<td class="number">%s</td>
 			<td></td>
-			<td class=number>%s</td>
+			<td class="number">%s</td>
 			<td></td>
-			<td class=number>%s</td>
+			<td class="number">%s</td>
 			</tr>',
 			$Sections[$Section],
 			number_format(-$SectionPrdActual),
@@ -1072,11 +1072,11 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 			printf('<tr>
 			<td colspan=2><font size=4>%s</font></td>
 			<td></td>
-			<td class=number>%s</td>
+			<td class="number">%s</td>
 			<td></td>
-			<td class=number>%s</td>
+			<td class="number">%s</td>
 			<td></td>
-			<td class=number>%s</td>
+			<td class="number">%s</td>
 			</tr>',
 			$Sections[$Section],
 			number_format($SectionPrdActual),
@@ -1091,11 +1091,11 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 			printf('<tr>
 				<td colspan=2><font size=4>'._('Gross Profit').'</font></td>
 				<td></td>
-				<td class=number>%s</td>
+				<td class="number">%s</td>
 				<td></td>
-				<td class=number>%s</td>
+				<td class="number">%s</td>
 				<td></td>
-				<td class=number>%s</td>
+				<td class="number">%s</td>
 				</tr>',
 			number_format($TotalIncome - $SectionPrdActual),
 			number_format($TotalBudgetIncome - $SectionPrdBudget),
@@ -1123,11 +1123,11 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 			printf('<tr>
 				<td colspan=2><font size=2><I>'._('Gross Profit Percent').'</I></font></td>
 				<td></td>
-				<td class=number><I>%s</I></td>
+				<td class="number"><I>%s</I></td>
 				<td></td>
-				<td class=number><I>%s</I></td>
+				<td class="number"><I>%s</I></td>
 				<td></td>
-				<td class=number><I>%s</I></td>
+				<td class="number"><I>%s</I></td>
 				</tr><tr><td colspan=6> </td></tr>',
 				number_format($PrdGPPercent,1) . '%',
 				number_format($BudgetGPPercent,1) . '%',
@@ -1159,11 +1159,11 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 	printf('<tr bgcolor="#ffffff">
 		<td colspan=2><font size=4 color=BLUE><b>'._('Profit').' - '._('Loss').'</b></font></td>
 		<td></td>
-		<td class=number>%s</td>
+		<td class="number">%s</td>
 		<td></td>
-		<td class=number>%s</td>
+		<td class="number">%s</td>
 		<td></td>
-		<td class=number>%s</td>
+		<td class="number">%s</td>
 		</tr>',
 		number_format(-$PeriodProfitLoss),
 		number_format(-$PeriodBudgetProfitLoss),
@@ -1193,11 +1193,11 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 		printf('<tr>
 			<td colspan=2><font size=2><I>'._('Net Profit Percent').'</I></font></td>
 			<td></td>
-			<td class=number><I>%s</I></td>
+			<td class="number"><I>%s</I></td>
 			<td></td>
-			<td class=number><I>%s</I></td>
+			<td class="number"><I>%s</I></td>
 			<td></td>
-			<td class=number><I>%s</I></td>
+			<td class="number"><I>%s</I></td>
 			</tr><tr><td colspan=6> </td></tr>',
 			number_format($PrdNPPercent,1) . '%',
 			number_format($BudgetNPPercent,1) . '%',
