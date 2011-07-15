@@ -20,31 +20,33 @@ if (isset($_POST['ToDate']) AND !Is_Date($_POST['ToDate'])){
 
 if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate']) OR $InputError==1){
 
-	 $title = _('Delivery Differences Report');
-	 include ('includes/header.inc');
+	$title = _('Delivery Differences Report');
+	include ('includes/header.inc');
 
 	echo '<div class="centre"><p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . $title . '" alt="" />' . ' '
 		. _('Delivery Differences Report') . '</p>';
 
-	 echo "<form method='post' action='" . $_SERVER['PHP_SELF'] . '?' . sid . "'>";
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	 echo '<table class="selection"><tr><td>' . _('Enter the date from which variances between orders and deliveries are to be listed') .
-	 	":</td><td><input type=text class=date alt='".$_SESSION['DefaultDateFormat'].
-	 	"' name='FromDate' maxlength=10 size=10 value='" .
-	 	Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m')-1,0,Date('y'))) . "'></td></tr>";
-	 echo '<tr><td>' . _('Enter the date to which variances between orders and deliveries are to be listed') . ":</td><td><input type=text class=date alt='".$_SESSION['DefaultDateFormat']."'  name='ToDate' maxlength=10 size=10 value='" . Date($_SESSION['DefaultDateFormat']) . "'></td></tr>";
-	 echo '<tr><td>' . _('Inventory Category') . '</td><td>';
+	echo '<table class="selection"><tr><td>' . _('Enter the date from which variances between orders and deliveries are to be listed') .
+		':</td><td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].
+		'" name="FromDate" maxlength="10" size="10" value="' .
+		Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m')-1,0,Date('y'))) . '"></td></tr>';
+	echo '<tr><td>' . _('Enter the date to which variances between orders and deliveries are to be listed') .
+		':</td><td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'"  name="ToDate" maxlength="10" size="10"
+			value="' . Date($_SESSION['DefaultDateFormat']) . '"></td></tr>';
+	echo '<tr><td>' . _('Inventory Category') . '</td><td>';
 
-	 $sql = "SELECT categorydescription, categoryid FROM stockcategory WHERE stocktype<>'D' AND stocktype<>'L'";
-	 $result = DB_query($sql,$db);
+	$sql = "SELECT categorydescription, categoryid FROM stockcategory WHERE stocktype<>'D' AND stocktype<>'L'";
+	$result = DB_query($sql,$db);
 
 
-	 echo "<select name='CategoryID'>";
-	 echo "<option selected value='All'>" . _('Over All Categories') . '</option>';
+	echo '<select name="CategoryID">';
+	echo '<option selected value="All">' . _('Over All Categories') . '</option>';
 
-	 while ($myrow=DB_fetch_array($result)){
-	echo "<option value='" . $myrow['categoryid'] . "'>" . $myrow['categorydescription'] . '</option>';
-	 }
+	while ($myrow=DB_fetch_array($result)){
+		echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
+	}
 
 
 	 echo '</select></td></tr>';
