@@ -129,9 +129,9 @@ If (isset($_POST['PrintPDF'])
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<tr><td>' . _('From Supplier Code') . ':</font></td>
-			<td><input Type=text maxlength=6 size=7 name=FromCriteria value="'.$_POST['FromCriteria'].'"></td></tr>';
+			<td><input type="text" maxlength=6 size=7 name=FromCriteria value="'.$_POST['FromCriteria'].'"></td></tr>';
 	echo '<tr><td>' . _('To Supplier Code') . ':</td>
-			<td><input Type=text maxlength=6 size=7 name=ToCriteria value="'.$_POST['ToCriteria'].'"></td></tr>';
+			<td><input type="text" maxlength=6 size=7 name=ToCriteria value="'.$_POST['ToCriteria'].'"></td></tr>';
 
 	echo '<tr><td>' . _('Balances As At') . ':</td>
 			<td><select Name="PeriodEnd">';
