@@ -152,22 +152,22 @@ if (count($_SESSION['PO']->LineItems)>0 and !isset($_POST['ProcessGoodsReceived'
 		//Now Display LineItem
 		echo '<td>' . $LnItm->StockID . '</td>';
 		echo '<td>' . $LnItm->ItemDescription . '</td>';
-		echo '<td class=number>' . $DisplayQtyOrd . '</td>';
+		echo '<td class="number">' . $DisplayQtyOrd . '</td>';
 		echo '<td>' . $LnItm->SuppUOM . '</td>';
-		echo '<td class=number>' . $DisplayQtyRec . '</td>';
-		echo '<td class=number>';
+		echo '<td class="number">' . $DisplayQtyRec . '</td>';
+		echo '<td class="number">';
 
 		if ($LnItm->Controlled == 1) {
 
 			echo '<input type=hidden name="RecvQty_' . $LnItm->LineNo . '" value="' . $LnItm->ReceiveQty . '"><a href="GoodsReceivedControlled.php?LineNo=' . $LnItm->LineNo . '">' . number_format($LnItm->ReceiveQty,$LnItm->DecimalPlaces) . '</a></td>';
 
 		} else {
-			echo '<input type=text class=number name="RecvQty_' . $LnItm->LineNo . '" maxlength=10 size=10 value="' . $LnItm->ReceiveQty . '"></td>';
+			echo '<input type=text class="number" name="RecvQty_' . $LnItm->LineNo . '" maxlength=10 size=10 value="' . $LnItm->ReceiveQty . '"></td>';
 		}
 
 		if ($_SESSION['ShowValueOnGRN']==1) {
-			echo '<td class=number>' . $DisplayPrice . '</td>';
-			echo '<td class=number>' . $DisplayLineTotal . '</td>';
+			echo '<td class="number">' . $DisplayPrice . '</td>';
+			echo '<td class="number">' . $DisplayLineTotal . '</td>';
 		}
 
 
@@ -185,8 +185,8 @@ if (count($_SESSION['PO']->LineItems)>0 and !isset($_POST['ProcessGoodsReceived'
 	echo '<script>defaultControl(document.forms[0].RecvQty_'.$LnItm->LineNo.');</script>';
 $DisplayTotal = number_format($_SESSION['PO']->Total,2);
 if ($_SESSION['ShowValueOnGRN']==1) {
-	echo '<tr><td colspan=7 class=number><b>' . _('Total value of goods received'). '</b></td>
-						<td class=number><b>'. $DisplayTotal. '</b></td>
+	echo '<tr><td colspan=7 class="number"><b>' . _('Total value of goods received'). '</b></td>
+						<td class="number"><b>'. $DisplayTotal. '</b></td>
 				</tr></table>';
 } else {
 	echo '</table>';
