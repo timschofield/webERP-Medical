@@ -319,16 +319,16 @@ foreach ($_SESSION['CreditItems']->LineItems as $LnItm) {
 
 		} else {
 
-			echo "<td><input tabindex=".$j." type=text class="number" name='Quantity_" . $LnItm->LineNumber ."' maxlength=6 size=6 value=" . $LnItm->QtyDispatched . "></td>";
+			echo '<td><input tabindex="'.$j.'" type="text" class="number" name="Quantity_' . $LnItm->LineNumber .'" maxlength="6" size="6" value="' . $LnItm->QtyDispatched . '"></td>';
 
 		}
 
 		$DisplayLineTotal = number_format($LineTotal,2);
 
 		$j++;
-		echo "<td><input tabindex=".$j." type=text class="number" name='Price_" . $LnItm->LineNumber . "' maxlength=12 size=6 value=" . $LnItm->Price . "></td>
-		<td><input tabindex=".$j." type=text class="number" name='Discount_" . $LnItm->LineNumber . "' maxlength=3 size=3 value=" . ($LnItm->DiscountPercent * 100) . "></td>
-		<td class="number">$DisplayLineTotal</td>";
+		echo '<td><input tabindex="'.$j.'" type="text" class="number" name="Price_' . $LnItm->LineNumber . '" maxlength="12" size="6" value="' . $LnItm->Price . '"></td>
+		<td><input tabindex="'.$j.'" type="text" class="number" name="Discount_' . $LnItm->LineNumber . '" maxlength="3" size="3" value="' . ($LnItm->DiscountPercent * 100) . '"></td>
+		<td class="number">'.$DisplayLineTotal.'</td>';
 
 		/*Need to list the taxes applicable to this line */
 		echo '<td>';
