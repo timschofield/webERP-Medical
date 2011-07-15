@@ -136,11 +136,11 @@ echo '<table class="selection" width=70%>
 		<th width=20%>' . $_SESSION['PastDueDays1'] . '-' . $_SESSION['PastDueDays2'] . ' ' . _('Days Overdue') . '</th>
 		<th width=20%>' . _('Over') . ' ' . $_SESSION['PastDueDays2'] . ' ' . _('Days Overdue') . '</th></tr>';
 
-echo '<tr><td class=number>' . number_format($CustomerRecord['balance'],2) . '</td>
-	<td class=number>' . number_format(($CustomerRecord['balance'] - $CustomerRecord['due']),2) . '</td>
-	<td class=number>' . number_format(($CustomerRecord['due']-$CustomerRecord['overdue1']),2) . '</td>
-	<td class=number>' . number_format(($CustomerRecord['overdue1']-$CustomerRecord['overdue2']) ,2) . '</td>
-	<td class=number>' . number_format($CustomerRecord['overdue2'],2) . '</td>
+echo '<tr><td class="number">' . number_format($CustomerRecord['balance'],2) . '</td>
+	<td class="number">' . number_format(($CustomerRecord['balance'] - $CustomerRecord['due']),2) . '</td>
+	<td class="number">' . number_format(($CustomerRecord['due']-$CustomerRecord['overdue1']),2) . '</td>
+	<td class="number">' . number_format(($CustomerRecord['overdue1']-$CustomerRecord['overdue2']) ,2) . '</td>
+	<td class="number">' . number_format($CustomerRecord['overdue2'],2) . '</td>
 	</tr>
 	</table>';
 
@@ -229,9 +229,9 @@ while ($myrow=DB_fetch_array($TransResult)) {
 										<td>%s</td>
 										<td width="200">%s</td>
 										<td>%s</td>
-										<td class=number>%s</td>
-										<td class=number>%s</td>
-										<td class=number>%s</td>';
+										<td class="number">%s</td>
+										<td class="number">%s</td>
+										<td class="number">%s</td>';
 
 	$CreditInvoiceFormatString = '<td><a href="%s/Credit_Invoice.php?InvoiceNumber=%s">' . _('Credit ') .'<IMG SRC="%s/credit.gif" title="' . _('Click to credit the invoice') . '"></a></td>';
 
