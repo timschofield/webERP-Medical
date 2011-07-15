@@ -168,8 +168,8 @@ if ((! isset($_POST['FromPeriod']) OR ! isset($_POST['ToPeriod']))
 			<input type="RADIO" name="GraphOn" value="All" CHECKED>' . _('All') . '<br />
 			<input type="RADIO" name="GraphOn" value="Customer">' . _('Customer') . '<br />
 			<input type="RADIO" name="GraphOn" value="StockID">' . _('Item Code') . '</td></tr>';
-	echo '<tr><td>' . _('From:') . ' <input type=TEXT name="ValueFrom" value=' . $_POST['ValueFrom'] . '></td>
-	 		<td>' . _('To:') . ' <input type=TEXT name="ValueTo" value=' . $_POST['ValueTo'] . '></td></tr>';
+	echo '<tr><td>' . _('From:') . ' <input type="text" name="ValueFrom" value=' . $_POST['ValueFrom'] . '></td>
+	 		<td>' . _('To:') . ' <input type="text" name="ValueTo" value=' . $_POST['ValueTo'] . '></td></tr>';
 
 	echo '<tr><td>' . _('Graph Value:') . '</td><td>
 			<input type="RADIO" name="GraphValue" value="Net" CHECKED>' . _('Net Sales Value') . '<br />
