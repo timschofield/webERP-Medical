@@ -479,10 +479,10 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 				} elseif ($ParentGroups[$Level]==$myrow['parentgroupname']) {
 					printf('<tr>
 						<td colspan=2><font size=2><I>%s ' . _('Total') . ' </I></font></td>
-						<td class=number><I>%s</I></td>
-						<td class=number><I>%s</I></td>
-						<td class=number><I>%s</I></td>
-						<td class=number><I>%s</I></td>
+						<td class="number"><I>%s</I></td>
+						<td class="number"><I>%s</I></td>
+						<td class="number"><I>%s</I></td>
+						<td class="number"><I>%s</I></td>
 						</tr>',
 						$ParentGroups[$Level],
 						number_format($GrpActual[$Level],2),
@@ -499,10 +499,10 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 					do {
 						printf('<tr>
 							<td colspan=2><font size=2><I>%s ' . _('Total') . ' </I></font></td>
-							<td class=number><I>%s</I></td>
-							<td class=number><I>%s</I></td>
-							<td class=number><I>%s</I></td>
-							<td class=number><I>%s</I></td>
+							<td class="number"><I>%s</I></td>
+							<td class="number"><I>%s</I></td>
+							<td class="number"><I>%s</I></td>
+							<td class="number"><I>%s</I></td>
 							</tr>',
 							$ParentGroups[$Level],
 							number_format($GrpActual[$Level],2),
@@ -523,10 +523,10 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 					if ($Level>0){
 						printf('<tr>
 						<td colspan=2><font size=2><I>%s ' . _('Total') . ' </I></font></td>
-						<td class=number><I>%s</I></td>
-						<td class=number><I>%s</I></td>
-						<td class=number><I>%s</I></td>
-						<td class=number><I>%s</I></td>
+						<td class="number"><I>%s</I></td>
+						<td class="number"><I>%s</I></td>
+						<td class="number"><I>%s</I></td>
+						<td class="number"><I>%s</I></td>
 						</tr>',
 						$ParentGroups[$Level],
 						number_format($GrpActual[$Level],2),
@@ -603,10 +603,10 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 
 		printf('<td>%s</td>
 			<td>%s</td>
-			<td class=number>%s</td>
-			<td class=number>%s</td>
-			<td class=number>%s</td>
-			<td class=number>%s</td>
+			<td class="number">%s</td>
+			<td class="number">%s</td>
+			<td class="number">%s</td>
+			<td class="number">%s</td>
 			</tr>',
 			$ActEnquiryURL,
 			$myrow['accountname'],
@@ -627,10 +627,10 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 		} elseif ($ParentGroups[$Level]==$myrow['parentgroupname']) {
 			printf('<tr>
 				<td colspan=2><font size=2><I>%s ' . _('Total') . ' </I></font></td>
-				<td class=number><I>%s</I></td>
-				<td class=number><I>%s</I></td>
-				<td class=number><I>%s</I></td>
-				<td class=number><I>%s</I></td>
+				<td class="number"><I>%s</I></td>
+				<td class="number"><I>%s</I></td>
+				<td class="number"><I>%s</I></td>
+				<td class="number"><I>%s</I></td>
 				</tr>',
 				$ParentGroups[$Level],
 				number_format($GrpActual[$Level],2),
@@ -647,10 +647,10 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 			do {
 				printf('<tr>
 					<td colspan=2><font size=2><I>%s ' . _('Total') . ' </I></font></td>
-					<td class=number><I>%s</I></td>
-					<td class=number><I>%s</I></td>
-					<td class=number><I>%s</I></td>
-					<td class=number><I>%s</I></td>
+					<td class="number"><I>%s</I></td>
+					<td class="number"><I>%s</I></td>
+					<td class="number"><I>%s</I></td>
+					<td class="number"><I>%s</I></td>
 					</tr>',
 					$ParentGroups[$Level],
 					number_format($GrpActual[$Level],2),
@@ -671,10 +671,10 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 			if ($Level >0){
 				printf('<tr>
 				<td colspan=2><font size=2><I>%s ' . _('Total') . ' </I></font></td>
-				<td class=number><I>%s</I></td>
-				<td class=number><I>%s</I></td>
-				<td class=number><I>%s</I></td>
-				<td class=number><I>%s</I></td>
+				<td class="number"><I>%s</I></td>
+				<td class="number"><I>%s</I></td>
+				<td class="number"><I>%s</I></td>
+				<td class="number"><I>%s</I></td>
 				</tr>',
 				$ParentGroups[$Level],
 				number_format($GrpActual[$Level],2),
@@ -697,10 +697,10 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 
 	printf('<tr bgcolor="#ffffff">
 			<td colspan=2><font color=BLUE><b>' . _('Check Totals') . '</b></font></td>
-			<td class=number>%s</td>
-			<td class=number>%s</td>
-			<td class=number>%s</td>
-			<td class=number>%s</td>
+			<td class="number">%s</td>
+			<td class="number">%s</td>
+			<td class="number">%s</td>
+			<td class="number">%s</td>
 		</tr>',
 		number_format($CheckMonth,2),
 		number_format($CheckBudgetMonth,2),
