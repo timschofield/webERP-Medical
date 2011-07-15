@@ -140,11 +140,11 @@ function DisplayBOMItems($UltimateParent, $Parent, $Component,$Level, $db) {
 			    <td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
-				<td class=number>%s</td>
+				<td class="number">%s</td>
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
-				<td class=number>%s</td>
+				<td class="number">%s</td>
 				<td><a href="%sSelect=%s&SelectedComponent=%s">' . _('Edit') . '</a></td>
 				<td>'.$DrillText.'</a></td>
 				 <td><a href="%sSelect=%s&SelectedComponent=%s&delete=1&ReSelect=%s">' . _('Delete') . '</a></td>
@@ -675,10 +675,10 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 		    ;
 		if (isset($_POST['Quantity'])){
 			echo '<input ' . (in_array('Quantity',$Errors) ?  'class="inputerror"' : '' ) .'
-		     tabindex="4" type="Text" class=number name="Quantity" class=number size=10 maxlength=8 value="'.$_POST['Quantity'] . '" />';
+		     tabindex="4" type="Text" class="number" name="Quantity" class="number" size=10 maxlength=8 value="'.$_POST['Quantity'] . '" />';
 		} else {
 			echo '<input ' . (in_array('Quantity',$Errors) ?  'class="inputerror"' : '' ) .'
-		     tabindex="4" type="Text" class=number name="Quantity" class=number size=10 maxlength=8 value="1" />';
+		     tabindex="4" type="Text" class="number" name="Quantity" class="number" size=10 maxlength=8 value="1" />';
 		}
 
 		echo '</td></tr>';
@@ -829,7 +829,7 @@ if (isset($_POST['Search']) and isset($result) AND !isset($SelectedParent)) {
 		$tab = $j+3;
 		printf('<td><input tabindex="'.$tab.'" type=submit name="Select" value="%s" /></td>
 		        <td>%s</td>
-			<td class=number>%s</td>
+			<td class="number">%s</td>
 			<td>%s</td></tr>',
 			$myrow['stockid'],
 			$myrow['description'],
