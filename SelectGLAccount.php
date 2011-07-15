@@ -89,7 +89,7 @@ if (!isset($AccountID)) {
 		<td><input type="text" name="Keywords" size=20 maxlength=25></td>
 		<td><font size=3><b>' .  _('OR') . '</b></font></td>
 		<td><font size=1>' . _('Enter Account No. to search from') . ':</font></td>
-		<td><input type="text" name="GLCode" size=15 maxlength=18 class=number ></td>
+		<td><input type="text" name="GLCode" size=15 maxlength=18 class="number" ></td>
 		</tr>
 		</table><br />';
 
