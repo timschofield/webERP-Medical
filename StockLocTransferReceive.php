@@ -448,7 +448,7 @@ if (isset($_SESSION['Transfer'])){
 		echo '<td>' . $TrfLine->StockID . '</td>
 			<td>' . $TrfLine->ItemDescription . '</td>';
 
-		echo '<td class=number>' . number_format($TrfLine->ShipQty, $TrfLine->DecimalPlaces) . '</td>';
+		echo '<td class="number">' . number_format($TrfLine->ShipQty, $TrfLine->DecimalPlaces) . '</td>';
 		if (isset($_POST['Qty' . $i]) and is_numeric($_POST['Qty' . $i])){
 			$_SESSION['Transfer']->TransferItem[$i]->Quantity= $_POST['Qty' . $i];
 			$Qty = $_POST['Qty' . $i];
@@ -461,10 +461,10 @@ if (isset($_SESSION['Transfer'])){
 		} else {
 			$Qty = $TrfLine->Quantity;
 		}
-		echo '<td class=number>' . number_format($TrfLine->PrevRecvQty, $TrfLine->DecimalPlaces) . '</td>';
+		echo '<td class="number">' . number_format($TrfLine->PrevRecvQty, $TrfLine->DecimalPlaces) . '</td>';
 
 		if ($TrfLine->Controlled==1){
-			echo '<td class=number><input type=hidden name="Qty' . $i . '" value="' . $Qty . '"><a href="' . $rootpath .'/StockTransferControlled.php?TransferItem=' . $i . '">' . $Qty . '</a></td>';
+			echo '<td class="number"><input type=hidden name="Qty' . $i . '" value="' . $Qty . '"><a href="' . $rootpath .'/StockTransferControlled.php?TransferItem=' . $i . '">' . $Qty . '</a></td>';
 		} else {
 			echo '<td><input type=text class="number" name="Qty' . $i . '" maxlength=10 class="number" size=auto value="' . $Qty . '"></td>';
 		}
@@ -546,7 +546,7 @@ if (isset($_SESSION['Transfer'])){
 				echo '<tr class="OddTableRows">';
 				$k++;
 			}
-			echo '<td class=number>' . $myrow['reference'] . '</td>
+			echo '<td class="number">' . $myrow['reference'] . '</td>
 				<td>' . $myrow['trffromloc'] . '</td>
 				<td>' . ConvertSQLDate($myrow['shipdate']) . '</td>
 				<td><a href="' . $_SERVER['PHP_SELF'] . '?Trf_ID=' . $myrow['reference'] . '">'. _('Receive'). '</a></td></tr>';
