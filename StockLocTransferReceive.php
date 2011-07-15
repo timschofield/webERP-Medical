@@ -466,7 +466,7 @@ if (isset($_SESSION['Transfer'])){
 		if ($TrfLine->Controlled==1){
 			echo '<td class="number"><input type=hidden name="Qty' . $i . '" value="' . $Qty . '"><a href="' . $rootpath .'/StockTransferControlled.php?TransferItem=' . $i . '">' . $Qty . '</a></td>';
 		} else {
-			echo '<td><input type=text class="number" name="Qty' . $i . '" maxlength=10 class="number" size=auto value="' . $Qty . '"></td>';
+			echo '<td><input type="text" class="number" name="Qty' . $i . '" maxlength=10 class="number" size=auto value="' . $Qty . '"></td>';
 		}
 
 		echo '<td>' . $TrfLine->PartUnit . '</td>';
