@@ -236,13 +236,13 @@ prnMsg( $TotalRecords . ' ' . _('records have been created'),'success');
 	echo '<option value="monthly">' . _('Monthly') . '</option>';
 	echo '</select></td></tr>';
 	echo '<tr><td>' . _('Number of Periods') .
-		 ':</td><td><input type ="text" class=number name="PeriodNumber" size="4" value="1">';
+		 ':</td><td><input type ="text" class="number" name="PeriodNumber" size="4" value="1">';
 	echo '<tr><td>' . _('Exclude Total Quantity Less Than') .
-		 ':</td><td><input type ="text" class=number name="Excludeqty" size="4" value="1">';
+		 ':</td><td><input type ="text" class="number" name="Excludeqty" size="4" value="1">';
 	echo '<tr><td>' . _('Exclude Total Dollars Less Than') .
-		 ':</td><td><input type ="text" class=number name="Excludeamt" size="8" value="0">';
+		 ':</td><td><input type ="text" class="number" name="Excludeamt" size="8" value="0">';
 	echo '<tr><td>' . _('Multiplier') .
-		 ':</td><td><input type ="text" class=number name="Multiplier" size="2" value=1><tr><td></td></tr></table>';
+		 ':</td><td><input type ="text" class="number" name="Multiplier" size="2" value=1><tr><td></td></tr></table>';
 	echo '<br /><div class=centre><input type=submit name="submit" value="' . _('Submit') .  '" /></div>';
 
 include('includes/footer.inc');
