@@ -631,10 +631,10 @@ if (!isset($_GET['delete'])) {
 	echo '<td><input tabindex=10 type="Text" name="specialinstructions" size=56 value="'. $_POST['specialinstructions'].'"></td></tr>';
 	echo '<tr><td>'._('Default days to deliver').':</td>';
 	if (!isset($_POST['EstDeliveryDays'])) {$_POST['EstDeliveryDays']=0;}
-	echo '<td><input ' .(in_array('EstDeliveryDays',$Errors) ?  'class="inputerror"' : '' ) .' tabindex=11 type="Text" class=number name="EstDeliveryDays" size=4 maxlength=2 value='. $_POST['EstDeliveryDays'].'></td></tr>';
+	echo '<td><input ' .(in_array('EstDeliveryDays',$Errors) ?  'class="inputerror"' : '' ) .' tabindex=11 type="Text" class="number" name="EstDeliveryDays" size=4 maxlength=2 value='. $_POST['EstDeliveryDays'].'></td></tr>';
 	echo '<tr><td>'._('Forward Date After (day in month)').':</td>';
 	if (!isset($_POST['FwdDate'])) {$_POST['FwdDate']=0;}
-	echo '<td><input ' .(in_array('FwdDate',$Errors) ?  'class="inputerror"' : '' ) .' tabindex=12 type="Text" class=number name="FwdDate" size=4 maxlength=2 value='. $_POST['FwdDate'].'></td></tr>';
+	echo '<td><input ' .(in_array('FwdDate',$Errors) ?  'class="inputerror"' : '' ) .' tabindex=12 type="Text" class="number" name="FwdDate" size=4 maxlength=2 value='. $_POST['FwdDate'].'></td></tr>';
 
 	echo '<tr><td>'._('Salesperson').':</td>';
 	echo '<td><select tabindex=13 name="Salesman">';
