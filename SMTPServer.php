@@ -39,7 +39,7 @@ echo '<table class="selection">';
 echo '<tr><td>'._('Server Host Name').'</td>
 		<td><input type=text name=host value='.$myrow['host'].'></td></tr>';
 echo '<tr><td>'._('SMTP port').'</td>
-		<td><input type=text name=port size=4 class=number value='.$myrow['port'].'></td></tr>';
+		<td><input type=text name=port size=4 class="number" value='.$myrow['port'].'></td></tr>';
 echo '<tr><td>'._('Helo Command').'</td>
 		<td><input type=text name=heloaddress value='.$myrow['heloaddress'].'></td></tr>';
 echo '<tr><td>'._('Authorisation Required').'</td><td>';
@@ -57,7 +57,7 @@ echo '<tr><td>'._('User Name').'</td>
 echo '<tr><td>'._('Password').'</td>
 	<td><input type=password name=password value='.$myrow['password'].'></td></tr>';
 echo '<tr><td>'._('Timeout (seconds)').'</td>
-	<td><input type=text size=5 name=timeout class=number value='.$myrow['timeout'].'></td></tr>';
+	<td><input type=text size=5 name=timeout class="number" value='.$myrow['timeout'].'></td></tr>';
 echo '<tr><td colspan=2><div class=centre><input type="submit" name="submit" value="' . _('Update') . '"></div></td></tr>';
 echo '</table></form>';
 
