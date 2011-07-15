@@ -473,8 +473,8 @@ if (isset($_POST['PrintPDF'])
 		echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table>';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-		echo '<tr><td>' . _('From Customer Code') . ':' . '</font></td><td><input tabindex="1" Type=text maxlength=6 size=7 name=FromCriteria value="0"></td></tr>';
-		echo '<tr><td>' . _('To Customer Code') . ':' . '</td><td><input tabindex="2" Type=text maxlength=6 size=7 name=ToCriteria value="zzzzzz"></td></tr>';
+		echo '<tr><td>' . _('From Customer Code') . ':' . '</font></td><td><input tabindex="1" type="text" maxlength=6 size=7 name=FromCriteria value="0"></td></tr>';
+		echo '<tr><td>' . _('To Customer Code') . ':' . '</td><td><input tabindex="2" type="text" maxlength=6 size=7 name=ToCriteria value="zzzzzz"></td></tr>';
 
 		echo '<tr><td>' . _('All balances or overdues only') . ':' . '</td><td><select tabindex="3" name="All_Or_Overdues">';
 		echo '<option selected Value="All">' . _('All customers with balances') . '</option>';
