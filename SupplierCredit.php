@@ -282,7 +282,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 
 echo '<br /><table class="selection">';
 echo '<tr><td><font color=red>' . _('Supplier Credit Note Reference') . ':</font></td>
-	<td><font size=2><input type=text size=20 maxlength=20 name=SuppReference value="' . $_SESSION['SuppTrans']->SuppReference . '"></td>';
+	<td><font size=2><input type="text" size=20 maxlength=20 name=SuppReference value="' . $_SESSION['SuppTrans']->SuppReference . '"></td>';
 
 if (!isset($_SESSION['SuppTrans']->TranDate)){
 	$_SESSION['SuppTrans']->TranDate= Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m'),Date('d')-1,Date('y')));
@@ -290,7 +290,7 @@ if (!isset($_SESSION['SuppTrans']->TranDate)){
 echo '<td><font color=red>' . _('Credit Note Date') . ' (' . _('in format') . ' ' . $_SESSION['DefaultDateFormat'] . ') :</font></td>
 		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat']. '" size=11 maxlength=10 name="TranDate" value="' . $_SESSION['SuppTrans']->TranDate . '"></td>';
 echo '<td><font color=red>' . _('Exchange Rate') . ':</font></td>
-		<td><input type=text class="number" size=11 maxlength=10 name="ExRate" value="' . $_SESSION['SuppTrans']->ExRate . '"></td></tr>';
+		<td><input type="text" class="number" size=11 maxlength=10 name="ExRate" value="' . $_SESSION['SuppTrans']->ExRate . '"></td></tr>';
 echo '</table>';
 
 echo '<br /><div class="centre"><input type="submit" name="GRNS" value="' . _('Purchase Orders') . '"> ';
@@ -499,7 +499,7 @@ if ($_SESSION['SuppTrans']->GLLink_Creditors ==1){
 } else {
 	echo '<table class="selection"><tr><td><font color=red>' . _('Credit Amount in Supplier Currency') .
 		  ':</font></td>
-		  	<td colspan=2 class="number"><input type=TEXT size="12" maxlength="10" name="OvAmount" value="' . number_format($_SESSION['SuppTrans']->OvAmount,2) . '"></td></tr>';
+		  	<td colspan=2 class="number"><input type="text" size="12" maxlength="10" name="OvAmount" value="' . number_format($_SESSION['SuppTrans']->OvAmount,2) . '"></td></tr>';
 }
 
 echo '<tr><td colspan=2><input type=Submit name="ToggleTaxMethod" value="' . _('Change Tax Calculation Method') .
@@ -529,7 +529,7 @@ foreach ($_SESSION['SuppTrans']->Taxes as $Tax) {
 
 	if (!isset($_POST['OverRideTax']) or $_POST['OverRideTax']=='Auto'){
 
-		echo  ' <input type=TEXT class="number" name=TaxRate' . $Tax->TaxCalculationOrder . ' maxlength=4 size=4 value=' . $_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxRate * 100 . '>%';
+		echo  ' <input type="text" class="number" name=TaxRate' . $Tax->TaxCalculationOrder . ' maxlength=4 size=4 value=' . $_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxRate * 100 . '>%';
 
 		/*Now recaluclate the tax depending on the method */
 		if ($Tax->TaxOnTax ==1){
@@ -553,7 +553,7 @@ foreach ($_SESSION['SuppTrans']->Taxes as $Tax) {
 		echo  ' <input type=hidden name=TaxRate' . $Tax->TaxCalculationOrder . ' value=' . $_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxRate * 100 . '>';
 
 
-		echo '</td><td><input type=TEXT class="number" size=12 maxlength=12 name="TaxAmount'  . $Tax->TaxCalculationOrder . '"  value=' . round($_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount,2) . '>';
+		echo '</td><td><input type="text" class="number" size=12 maxlength=12 name="TaxAmount'  . $Tax->TaxCalculationOrder . '"  value=' . round($_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount,2) . '>';
 
 	}
 
