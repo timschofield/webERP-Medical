@@ -401,7 +401,7 @@ if (isset($_POST['PrintPDF'])){
 	echo '<option value="LessThan">'. _('Sales Less Than') . '</option>';
 	echo '</select></td><td>';
 
-	echo '<input type="text" class=number name="ActivityAmount" size=8 maxlength=8 value=0></td></tr>';
+	echo '<input type="text" class="number" name="ActivityAmount" size=8 maxlength=8 value=0></td></tr>';
 
 	$DefaultActivitySince = Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m')-6,0,Date('y')));
 	echo '<tr><td>' . _('Activity Since'). ':</td><td><input type="text" class=date alt="'.$_SESSION['DefaultDateFormat'].'"  name="ActivitySince" size=10 maxlength=10
