@@ -255,7 +255,7 @@ if (isset($_POST['CommitBatch'])){
 				<td>'.$_SESSION['ReceiptBatch']->DateBanked.'</td>
 				<td>'.$ReceiptItem->CustomerName.'</td>
 				<td>'.$ReceiptItem->GLCode.' - '.$myrow['accountname'].'</td>
-				<td class=number>'.number_format($ReceiptItem->Amount/$_SESSION['ReceiptBatch']->ExRate/$_SESSION['ReceiptBatch']->FunctionalExRate,2) .'</td>';
+				<td class="number">'.number_format($ReceiptItem->Amount/$_SESSION['ReceiptBatch']->ExRate/$_SESSION['ReceiptBatch']->FunctionalExRate,2) .'</td>';
 
 		if ($ReceiptItem->GLCode ==''){
 			echo '<td><a target="_blank"  href="' . $rootpath . '/PDFReceipt.php?BatchNumber=' . $_SESSION['ReceiptBatch']->BatchNo. '&ReceiptNumber='.$CustomerReceiptCounter.'">'._('Print a Customer Receipt').'</a></td></tr>';
@@ -797,7 +797,7 @@ if ($_SESSION['ReceiptBatch']->AccountCurrency!=$_SESSION['ReceiptBatch']->Curre
 		$_SESSION['ReceiptBatch']->ExRate = $SuggestedExRate;
 	}
 	echo '<tr><td>' . _('Receipt Exchange Rate') . ':</td>
-			<td><input tabindex=4 type="text" name="ExRate" maxlength=10 size=12 class=number value="' . $_SESSION['ReceiptBatch']->ExRate . '"></td>
+			<td><input tabindex=4 type="text" name="ExRate" maxlength=10 size=12 class="number" value="' . $_SESSION['ReceiptBatch']->ExRate . '"></td>
 			<td>' . $SuggestedExRateText . ' <i>' . _('The exchange rate between the currency of the bank account currency and the currency of the receipt') . '. 1 ' . $_SESSION['ReceiptBatch']->AccountCurrency . ' = ? ' . $_SESSION['ReceiptBatch']->Currency . '</i></td></tr>';
 }
 
@@ -811,7 +811,7 @@ if ($_SESSION['ReceiptBatch']->AccountCurrency!=$_SESSION['CompanyRecord']['curr
 	if ($_SESSION['ReceiptBatch']->FunctionalExRate==1 AND isset($SuggestedFunctionalExRate)){
 		$_SESSION['ReceiptBatch']->FunctionalExRate = $SuggestedFunctionalExRate;
 	}
-	echo '<tr><td>' . _('Functional Exchange Rate') . ':</td><td><input tabindex=5 type="text" name="FunctionalExRate" class=number maxlength=10 size=12 value="' . $_SESSION['ReceiptBatch']->FunctionalExRate . '"></td>
+	echo '<tr><td>' . _('Functional Exchange Rate') . ':</td><td><input tabindex=5 type="text" name="FunctionalExRate" class="number" maxlength=10 size=12 value="' . $_SESSION['ReceiptBatch']->FunctionalExRate . '"></td>
 			<td>' . ' ' . $SuggestedFunctionalExRateText . ' <i>' . _('The exchange rate between the currency of the business (the functional currency) and the currency of the bank account') .  '. 1 ' . $_SESSION['CompanyRecord']['currencydefault'] . ' = ? ' . $_SESSION['ReceiptBatch']->AccountCurrency . '</i></td></tr>';
 }
 
@@ -860,8 +860,8 @@ if (isset($_SESSION['ReceiptBatch'])){
 		$myrow=DB_fetch_array($Result);
 
 		echo '<tr>
-				<td class=number>' . number_format($ReceiptItem->Amount,2) . '</td>
-				<td class=number>' . number_format($ReceiptItem->Discount,2) . '</td>
+				<td class="number">' . number_format($ReceiptItem->Amount,2) . '</td>
+				<td class="number">' . number_format($ReceiptItem->Discount,2) . '</td>
 				<td>' . stripslashes($ReceiptItem->CustomerName) . '</td>
 				<td>'.$ReceiptItem->GLCode.' - '.$myrow['accountname'].'</td>
 				<td>'.$ReceiptItem->Narrative . '</td>
@@ -870,7 +870,7 @@ if (isset($_SESSION['ReceiptBatch'])){
 		$BatchTotal= $BatchTotal + $ReceiptItem->Amount;
 	}
 
-	echo '<tr><td class=number><b>' . number_format($BatchTotal,2) . '</b></td></tr></table>';
+	echo '<tr><td class="number"><b>' . number_format($BatchTotal,2) . '</b></td></tr></table>';
 }
 
 /*this next block of ifs deals with what information to display for input into the form
@@ -916,11 +916,11 @@ if (isset($_SESSION['CustomerRecord'])
 			</tr>';
 
 	echo '<tr>
-		<td class=number>' . number_format($_SESSION['CustomerRecord']['balance'],2) . '</td>
-		<td class=number>' . number_format(($_SESSION['CustomerRecord']['balance'] - $_SESSION['CustomerRecord']['due']),2) . '</td>
-		<td class=number>' . number_format(($_SESSION['CustomerRecord']['due']-$_SESSION['CustomerRecord']['overdue1']),2) . '</td>
-		<td class=number>' . number_format(($_SESSION['CustomerRecord']['overdue1']-$_SESSION['CustomerRecord']['overdue2']) ,2) . '</td>
-		<td class=number>' . number_format($_SESSION['CustomerRecord']['overdue2'],2) . '</td>
+		<td class="number">' . number_format($_SESSION['CustomerRecord']['balance'],2) . '</td>
+		<td class="number">' . number_format(($_SESSION['CustomerRecord']['balance'] - $_SESSION['CustomerRecord']['due']),2) . '</td>
+		<td class="number">' . number_format(($_SESSION['CustomerRecord']['due']-$_SESSION['CustomerRecord']['overdue1']),2) . '</td>
+		<td class="number">' . number_format(($_SESSION['CustomerRecord']['overdue1']-$_SESSION['CustomerRecord']['overdue2']) ,2) . '</td>
+		<td class="number">' . number_format($_SESSION['CustomerRecord']['overdue2'],2) . '</td>
 		</tr>
 		</table><br />';
 
@@ -1000,12 +1000,12 @@ if (((isset($_SESSION['CustomerRecord'])
 		$_POST['Narrative']='';
 	}
 	echo '<tr><td>' . _('Amount of Receipt') . ':</td>
-		<td><input tabindex=9 type="text" name="Amount" maxlength=12 size=13 class=number value="' . $_POST['Amount'] . '"></td>
+		<td><input tabindex=9 type="text" name="Amount" maxlength=12 size=13 class="number" value="' . $_POST['Amount'] . '"></td>
 	</tr>';
 
 	if (!isset($_POST['GLEntry'])){
 		echo '<tr><td>' . _('Amount of Discount') . ':</td>
-			<td><input tabindex=10 type="text" name="Discount" maxlength=12 size=13 class=number value="' . $_POST['Discount'] . '"> ' . _('agreed prompt payment discount is') . ' ' . $DisplayDiscountPercent . '</td></tr>';
+			<td><input tabindex=10 type="text" name="Discount" maxlength=12 size=13 class="number" value="' . $_POST['Discount'] . '"> ' . _('agreed prompt payment discount is') . ' ' . $DisplayDiscountPercent . '</td></tr>';
 	} else {
 		echo '<input tabindex=11 type="hidden" name="Discount" Value=0>';
 	}
