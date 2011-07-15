@@ -114,7 +114,7 @@ if (isset($_POST['Search']) and isset($result) AND !isset($SelectedParent)) {
 		$tabindex=$j+4;
 		printf("<td><input tabindex='".$tabindex."' type=submit name='StockID' value='%s'</td>
 		        <td>%s</td>
-			<td class=number>%s</td>
+			<td class="number">%s</td>
 			<td>%s</td></tr>",
 			$myrow['stockid'],
 			$myrow['description'],
@@ -196,9 +196,9 @@ if (isset($StockID) and $StockID!=""){
 			/* Component Code  Description                 Quantity            Std Cost*                Total Cost */
 			printf('<td>%s</td>
 				<td>%s</td>
-				<td class=number>%s</td>
-				<td class=number>%.2f</td>
-				<td class=number>%.2f</td>
+				<td class="number">%s</td>
+				<td class="number">%.2f</td>
+				<td class="number">%.2f</td>
 				</tr>',
 				$ComponentLink,
 				$myrow['description'],
@@ -214,16 +214,16 @@ if (isset($StockID) and $StockID!=""){
 		/*CCF modification */
 		$TotalCost += $ParentLabourCost;
 		echo '<tr>
-			<td colspan=4 class=number><b>' . _('Labour Cost') . '</b></td>
-			<td class=number><b>' . number_format($ParentLabourCost,2) . '</b></td> </tr>';
+			<td colspan=4 class="number"><b>' . _('Labour Cost') . '</b></td>
+			<td class="number"><b>' . number_format($ParentLabourCost,2) . '</b></td> </tr>';
 		$TotalCost += $ParentOverheadCost;
-		echo '<tr><td colspan=4 class=number><b>' . _('Overhead Cost') . '</b></td>
-			<td class=number><b>' . number_format($ParentOverheadCost,2) . '</b></td></tr>';
+		echo '<tr><td colspan=4 class="number"><b>' . _('Overhead Cost') . '</b></td>
+			<td class="number"><b>' . number_format($ParentOverheadCost,2) . '</b></td></tr>';
 		/*CCF end modification */
 
 		echo '<tr>
-			<td colspan=4 class=number><b>' . _('Total Cost') . '</b></td>
-			<td class=number><b>' . number_format($TotalCost,2) . '</b></td>
+			<td colspan=4 class="number"><b>' . _('Total Cost') . '</b></td>
+			<td class="number"><b>' . number_format($TotalCost,2) . '</b></td>
 		</tr>';
 
 		echo '</table>';
