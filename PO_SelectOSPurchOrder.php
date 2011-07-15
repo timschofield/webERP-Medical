@@ -230,8 +230,8 @@ if (isset($StockItemsResult)) {
 
 		printf('<td><input type=submit name="SelectedStockItem" value="%s"</td>
 				<td>%s</td>
-			<td class=number>%s</td>
-			<td class=number>%s</td>
+			<td class="number">%s</td>
+			<td class="number">%s</td>
 			<td>%s</td></tr>',
 			$myrow['stockid'],
 			$myrow['description'],
@@ -498,7 +498,7 @@ else {
 					<td>' . $myrow['suppname'] . '</td>
 					<td>' . $myrow['currcode'] . '</td>';
 		if (in_array($PricesSecurity, $_SESSION['AllowedPageSecurityTokens']) OR !isset($PricesSecurity)) {
-			echo '<td class=number>'.$FormatedOrderValue.'</td>';
+			echo '<td class="number">'.$FormatedOrderValue.'</td>';
 		}
 			echo '<td>'._($myrow['status']).'</td>
 						<td><a href="'.$ModifyPage.'">' . _('Modify') . '</a></td>
