@@ -310,7 +310,7 @@ foreach ($_SESSION['CreditItems']->LineItems as $LnItm) {
 
 		echo '<tr '.$RowStarter.'><td>' . $LnItm->StockID . '</td>
 			<td>' . $LnItm->ItemDescription . '</td>
-			<td class=number>' . number_format($LnItm->Quantity,$LnItm->DecimalPlaces) . '</td>
+			<td class="number">' . number_format($LnItm->Quantity,$LnItm->DecimalPlaces) . '</td>
 			<td>' . $LnItm->Units . '</td>';
 
 		if ($LnItm->Controlled==1){
@@ -319,16 +319,16 @@ foreach ($_SESSION['CreditItems']->LineItems as $LnItm) {
 
 		} else {
 
-			echo "<td><input tabindex=".$j." type=text class=number name='Quantity_" . $LnItm->LineNumber ."' maxlength=6 size=6 value=" . $LnItm->QtyDispatched . "></td>";
+			echo "<td><input tabindex=".$j." type=text class="number" name='Quantity_" . $LnItm->LineNumber ."' maxlength=6 size=6 value=" . $LnItm->QtyDispatched . "></td>";
 
 		}
 
 		$DisplayLineTotal = number_format($LineTotal,2);
 
 		$j++;
-		echo "<td><input tabindex=".$j." type=text class=number name='Price_" . $LnItm->LineNumber . "' maxlength=12 size=6 value=" . $LnItm->Price . "></td>
-		<td><input tabindex=".$j." type=text class=number name='Discount_" . $LnItm->LineNumber . "' maxlength=3 size=3 value=" . ($LnItm->DiscountPercent * 100) . "></td>
-		<td class=number>$DisplayLineTotal</td>";
+		echo "<td><input tabindex=".$j." type=text class="number" name='Price_" . $LnItm->LineNumber . "' maxlength=12 size=6 value=" . $LnItm->Price . "></td>
+		<td><input tabindex=".$j." type=text class="number" name='Discount_" . $LnItm->LineNumber . "' maxlength=3 size=3 value=" . ($LnItm->DiscountPercent * 100) . "></td>
+		<td class="number">$DisplayLineTotal</td>";
 
 		/*Need to list the taxes applicable to this line */
 		echo '<td>';
@@ -343,7 +343,7 @@ foreach ($_SESSION['CreditItems']->LineItems as $LnItm) {
 			}
 		}
 		echo '</td>';
-		echo '<td class=number>';
+		echo '<td class="number">';
 
 	}
 	$i=0; // initialise the number of taxes iterated through
@@ -357,7 +357,7 @@ foreach ($_SESSION['CreditItems']->LineItems as $LnItm) {
 				echo '<br />';
 			}
 			if (!isset($_POST['ProcessCredit'])) {
-				echo '<input type=text class=number name="' . $LnItm->LineNumber . $Tax->TaxCalculationOrder .
+				echo '<input type=text class="number" name="' . $LnItm->LineNumber . $Tax->TaxCalculationOrder .
 					'_TaxRate" maxlength=4 size=4 value="' . $Tax->TaxRate*100 . '">';
 			}
 			$i++;
@@ -379,8 +379,8 @@ foreach ($_SESSION['CreditItems']->LineItems as $LnItm) {
 	if (!isset($_POST['ProcessCredit'])) {
 		echo '</td>';
 
-		echo '<td class=number>' . $DisplayTaxAmount . '</td>
-			<td class=number>' . $DisplayGrossLineTotal . '</td>
+		echo '<td class="number">' . $DisplayTaxAmount . '</td>
+			<td class="number">' . $DisplayGrossLineTotal . '</td>
 			<td><a href="'. $_SERVER['PHP_SELF'] . '?Delete=' . $LnItm->LineNumber . '">' . _('Delete') . '</a></td></tr>';
 
 		echo '<tr'.$RowStarter . '><td colspan=12><textarea tabindex="'.$j.'"  name="Narrative_' . $LnItm->LineNumber . '" cols=100% rows=1>' . $LnItm->Narrative . '</textarea><br /><hr></td></tr>';
@@ -394,11 +394,11 @@ if (!isset($_POST['ChargeFreightCost']) AND !isset($_SESSION['CreditItems']->Fre
 
 if (!isset($_POST['ProcessCredit'])) {
 	echo '<tr>
-		<td colspan=3 class=number>' . _('Freight cost charged on invoice') . '</td>
-		<td class=number>' . number_format($_SESSION['Old_FreightCost'],2) . '</td>
+		<td colspan=3 class="number">' . _('Freight cost charged on invoice') . '</td>
+		<td class="number">' . number_format($_SESSION['Old_FreightCost'],2) . '</td>
 		<td></td>
-		<td colspan=2 class=number>' . _('Credit Freight Cost') . '</td>
-		<td><input tabindex="'.$j.'" type=text class=number size=6 maxlength=6 name="ChargeFreightCost" value="' . $_SESSION['CreditItems']->FreightCost . '"></td>';
+		<td colspan=2 class="number">' . _('Credit Freight Cost') . '</td>
+		<td><input tabindex="'.$j.'" type=text class="number" size=6 maxlength=6 name="ChargeFreightCost" value="' . $_SESSION['CreditItems']->FreightCost . '"></td>';
 
 	echo '<td>';
 	echo '</td><td>';
@@ -421,7 +421,7 @@ foreach ($_SESSION['CreditItems']->FreightTaxes as $FreightTaxLine) {
 	}
 
 	if (!isset($_POST['ProcessCredit'])) {
-		echo  '<input type=text class=number name=FreightTaxRate' . $FreightTaxLine->TaxCalculationOrder . ' maxlength=4 size=4 value=' . $FreightTaxLine->TaxRate * 100 . '>';
+		echo  '<input type=text class="number" name=FreightTaxRate' . $FreightTaxLine->TaxCalculationOrder . ' maxlength=4 size=4 value=' . $FreightTaxLine->TaxRate * 100 . '>';
 	}
 	if ($FreightTaxLine->TaxOnTax ==1){
 		$TaxTotals[$FreightTaxLine->TaxAuthID] += ($FreightTaxLine->TaxRate * ($_SESSION['CreditItems']->FreightCost + $FreightTaxTotal));
@@ -436,8 +436,8 @@ foreach ($_SESSION['CreditItems']->FreightTaxes as $FreightTaxLine) {
 if (!isset($_POST['ProcessCredit'])) {
 	echo '</td>';
 
-	echo '<td class=number>' . number_format($FreightTaxTotal,2) . '</td>
-		<td class=number>' . number_format($FreightTaxTotal+ $_SESSION['CreditItems']->FreightCost,2) . '</td>
+	echo '<td class="number">' . number_format($FreightTaxTotal,2) . '</td>
+		<td class="number">' . number_format($FreightTaxTotal+ $_SESSION['CreditItems']->FreightCost,2) . '</td>
 		</tr>';
 }
 
@@ -446,11 +446,11 @@ $DisplayTotal = number_format($_SESSION['CreditItems']->total + $_SESSION['Credi
 
 if (!isset($_POST['ProcessCredit'])) {
 	echo '<tr>
-		<td colspan=7 class=number>' . _('Credit Totals') . "</td>
-		<td class=number><hr><b>$DisplayTotal</b><hr></td>
+		<td colspan=7 class="number">' . _('Credit Totals') . "</td>
+		<td class="number"><hr><b>$DisplayTotal</b><hr></td>
 		<td colspan=2></td>
-		<td class=number><hr><b>" . number_format($TaxTotal,2) . "<hr></td>
-		<td class=number><hr><b>" . number_format($TaxTotal+($_SESSION['CreditItems']->total + $_SESSION['CreditItems']->FreightCost),2) . "</b><hr></td>
+		<td class="number"><hr><b>" . number_format($TaxTotal,2) . "<hr></td>
+		<td class="number"><hr><b>" . number_format($TaxTotal+($_SESSION['CreditItems']->total + $_SESSION['CreditItems']->FreightCost),2) . "</b><hr></td>
 		</tr></table>";
 }
 $DefaultDispatchDate = Date($_SESSION['DefaultDateFormat']);
