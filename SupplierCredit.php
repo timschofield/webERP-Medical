@@ -324,17 +324,17 @@ if (count($_SESSION['SuppTrans']->GRNs)>0){   /*if there are some GRNs selected 
 		echo '	<tr><td>' . $EnteredGRN->GRNNo . '</td>
 					<td>' . $EnteredGRN->ItemCode . '</td>
 					<td>' . $EnteredGRN->ItemDescription . '</td>
-					<td class=number>' . number_format($EnteredGRN->This_QuantityInv,2) . '</td>
-					<td class=number>' . number_format($EnteredGRN->ChgPrice,2) . '</td>
-					<td class=number>' . number_format($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv,2) . '</td>
+					<td class="number">' . number_format($EnteredGRN->This_QuantityInv,2) . '</td>
+					<td class="number">' . number_format($EnteredGRN->ChgPrice,2) . '</td>
+					<td class="number">' . number_format($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv,2) . '</td>
 				</tr>';
 
 		$TotalGRNValue = $TotalGRNValue + ($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv);
 
 	}
 
-	echo '<tr><td colspan=5 class=number><font color=red>' . _('Total Value of Goods Credited') . ':</font></td>
-		<td class=number><font color=red><U>' . number_format($TotalGRNValue,2) . '</U></font></td></tr>';
+	echo '<tr><td colspan=5 class="number"><font color=red>' . _('Total Value of Goods Credited') . ':</font></td>
+		<td class="number"><font color=red><U>' . number_format($TotalGRNValue,2) . '</U></font></td></tr>';
 	echo '</table><br />';
 }
 
@@ -355,7 +355,7 @@ if (count($_SESSION['SuppTrans']->Shipts)>0){   /*if there are any Shipment char
 
 		echo '<tr>
 				<td>' . $EnteredShiptRef->ShiptRef . '</td>
-				<td class=number>' . number_format($EnteredShiptRef->Amount,2) . '</td>
+				<td class="number">' . number_format($EnteredShiptRef->Amount,2) . '</td>
 			</tr>';
 
 		$TotalShiptValue +=  $EnteredShiptRef->Amount;
@@ -363,8 +363,8 @@ if (count($_SESSION['SuppTrans']->Shipts)>0){   /*if there are any Shipment char
 	}
 
 	echo '<tr>
-			<td class=number><font color=red>' . _('Total Credited Against Shipments') .  ':</font></td>
-			<td class=number><fontcolor=red><U>' . number_format($TotalShiptValue,2) .  '</U></font></td>
+			<td class="number"><font color=red>' . _('Total Credited Against Shipments') .  ':</font></td>
+			<td class="number"><fontcolor=red><U>' . number_format($TotalShiptValue,2) .  '</U></font></td>
 		</tr>
 		</table><br />';
 }
@@ -386,7 +386,7 @@ if (count( $_SESSION['SuppTrans']->Assets) > 0){   /*if there are any fixed asse
 		echo '<tr>
 				<td>' . $EnteredAsset->AssetID . '</td>
 				<td>' . $EnteredAsset->Description . '</td>
-				<td class=number>' .	number_format($EnteredAsset->Amount,2) . '</td>
+				<td class="number">' .	number_format($EnteredAsset->Amount,2) . '</td>
 			</tr>';
 
 		$TotalAssetValue += $EnteredAsset->Amount;
@@ -398,8 +398,8 @@ if (count( $_SESSION['SuppTrans']->Assets) > 0){   /*if there are any fixed asse
 		}
 	}
 
-	echo '<tr><td colspan=2 class=number><font size=4 color=blue>' . _('Total') . ':</font></td>
-		<td class=number><font size=4 color=BLUE><U>' .  number_format($TotalAssetValue,2) . '</U></font></td></tr></table>';
+	echo '<tr><td colspan=2 class="number"><font size=4 color=blue>' . _('Total') . ':</font></td>
+		<td class="number"><font size=4 color=BLUE><U>' .  number_format($TotalAssetValue,2) . '</U></font></td></tr></table>';
 } //end loop around fixed assets
 
 
@@ -421,7 +421,7 @@ if (count( $_SESSION['SuppTrans']->Contracts) > 0){   /*if there are any contrac
 
 		echo '<tr>
 				<td>' . $Contract->ContractRef . '</td>
-				<td class=number>' . 	number_format($Contract->Amount,2) . '</td>
+				<td class="number">' . 	number_format($Contract->Amount,2) . '</td>
 				<td>' . $Contract->Narrative . '</td>
 			</tr>';
 
@@ -458,7 +458,7 @@ if ($_SESSION['SuppTrans']->GLLink_Creditors ==1){
 
 			echo '	<tr><td>' . $EnteredGLCode->GLCode . '</td>
 						<td>' . $EnteredGLCode->GLActName . '</td>
-						<td class=number>' . number_format($EnteredGLCode->Amount,2) . '</td>
+						<td class="number">' . number_format($EnteredGLCode->Amount,2) . '</td>
 						<td>' . $EnteredGLCode->Narrative . '</td>
 					</tr>';
 
@@ -471,8 +471,8 @@ if ($_SESSION['SuppTrans']->GLLink_Creditors ==1){
 			}
 		}
 
-		echo '<tr>	<td colspan=2 class=number><font size=4 color=red>' . _('Total') . ':</font></td>
-					<td class=number><font size=4 color=red><u>' . number_format($TotalGLValue,2) . '</u></font></td>
+		echo '<tr>	<td colspan=2 class="number"><font size=4 color=red>' . _('Total') . ':</font></td>
+					<td class="number"><font size=4 color=red><u>' . number_format($TotalGLValue,2) . '</u></font></td>
 			</tr></table><br />';
 	}
 
@@ -494,12 +494,12 @@ if ($_SESSION['SuppTrans']->GLLink_Creditors ==1){
 	$_SESSION['SuppTrans']->OvAmount = round($TotalGRNValue + $TotalGLValue + $TotalAssetValue + $TotalShiptValue + $TotalContractsValue,2);
 
 	echo '<table class="selection"><tr><td><font color=red>' . _('Credit Amount in Supplier Currency') . ':</font></td>
-			<td colspan=2 class=number>' . number_format($_SESSION['SuppTrans']->OvAmount,2) . '</td></tr>';
+			<td colspan=2 class="number">' . number_format($_SESSION['SuppTrans']->OvAmount,2) . '</td></tr>';
 	echo '<input type=hidden name="OvAmount" value="' . number_format($_SESSION['SuppTrans']->OvAmount,2) . '">';
 } else {
 	echo '<table class="selection"><tr><td><font color=red>' . _('Credit Amount in Supplier Currency') .
 		  ':</font></td>
-		  	<td colspan=2 class=number><input type=TEXT size="12" maxlength="10" name="OvAmount" value="' . number_format($_SESSION['SuppTrans']->OvAmount,2) . '"></td></tr>';
+		  	<td colspan=2 class="number"><input type=TEXT size="12" maxlength="10" name="OvAmount" value="' . number_format($_SESSION['SuppTrans']->OvAmount,2) . '"></td></tr>';
 }
 
 echo '<tr><td colspan=2><input type=Submit name="ToggleTaxMethod" value="' . _('Change Tax Calculation Method') .
@@ -545,7 +545,7 @@ foreach ($_SESSION['SuppTrans']->Taxes as $Tax) {
 
 		echo '<input type=hidden name="TaxAmount'  . $Tax->TaxCalculationOrder . '"  value=' . round($_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount,2) . '>';
 
-		echo '</td><td class=number>' . number_format($_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount,2);
+		echo '</td><td class="number">' . number_format($_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount,2);
 
 	} else { /*Tax being entered manually accept the taxamount entered as is*/
 		$_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount = $_POST['TaxAmount'  . $Tax->TaxCalculationOrder];
@@ -565,7 +565,7 @@ foreach ($_SESSION['SuppTrans']->Taxes as $Tax) {
 
 $DisplayTotal = number_format($_SESSION['SuppTrans']->OvAmount + $TaxTotal,2);
 
-echo '<tr><td><font color=red>' . _('Credit Note Total') . '</font></td><td colspan=2 class=number><b>' .
+echo '<tr><td><font color=red>' . _('Credit Note Total') . '</font></td><td colspan=2 class="number"><b>' .
 	  $DisplayTotal. '</b></td></tr></table> <br />';
 
 echo '<table class="selection"><tr><td><font color=red>' . _('Comments') . '</font></td><td><textarea name=Comments cols=40 rows=2>' .
