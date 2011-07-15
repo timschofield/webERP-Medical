@@ -140,7 +140,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 echo '<br /><table cellpadding=2 colspan=7 class="selection">';
 
 echo '<tr><th colspan=10><font size=3 color=navy>' . _('Show Goods Received Since') . ':&nbsp;</font>';
-echo '<input type=Text name="Show_Since" maxlength=11 size=12 class="date" alt='.$_SESSION['DefaultDateFormat'].' value="' . $_POST['Show_Since'] . '"><font size=3 color=navy> ';
+echo '<input type="text" name="Show_Since" maxlength=11 size=12 class="date" alt='.$_SESSION['DefaultDateFormat'].' value="' . $_POST['Show_Since'] . '"><font size=3 color=navy> ';
 echo  _('From') . ' ' . $_SESSION['SuppTrans']->SupplierName . '</font></th></tr>';
 
 $TableHeader = '<tr><th>' . _('GRN') . '</th>
@@ -229,9 +229,9 @@ if (isset($_POST['GRNNo']) AND $_POST['GRNNo']!=''){
 	echo '<tr><td>' . $_POST['GRNNo'] . '</td>
 				<td>' . $myrow['itemcode'] . ' ' . $myrow['itemdescription'] . '</td>
 				<td class="number">' . number_format($myrow['qtyostdg'],2) . '</td>
-				<td><input type=Text Name="This_QuantityCredited" Value=' . $myrow['qtyostdg'] . ' size=11 maxlength=10></td>
+				<td><input type="text" Name="This_QuantityCredited" Value=' . $myrow['qtyostdg'] . ' size=11 maxlength=10></td>
 				<td class="number">' . $myrow['unitprice'] . '</td>
-				<td><input type=Text Name="ChgPrice" Value=' . $myrow['unitprice'] . ' size=11 maxlength=10></td>
+				<td><input type="text" Name="ChgPrice" Value=' . $myrow['unitprice'] . ' size=11 maxlength=10></td>
 			</tr>';
 	echo '</table>';
 
