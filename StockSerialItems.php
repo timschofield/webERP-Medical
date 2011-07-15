@@ -134,11 +134,11 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 		echo '<th></th>';
 	} else if ($Serialised == 0 and $Perishable==0) {
 		echo '<td>'.$myrow['serialno'].'</td>
-			<td class=number>'.number_format($myrow['quantity'],$DecimalPlaces).'</td>';
+			<td class="number">'.number_format($myrow['quantity'],$DecimalPlaces).'</td>';
 		echo '<th></th>';
 	} else if ($Serialised == 0 and $Perishable==1){
 		echo '<td>'.$myrow['serialno'].'</td>
-			<td class=number>'.number_format($myrow['quantity'],$DecimalPlaces).'</td>
+			<td class="number">'.number_format($myrow['quantity'],$DecimalPlaces).'</td>
 			<td>'.ConvertSQLDate($myrow['expirationdate']).'</td>';
 		echo '<th></th>';
 	}
