@@ -975,7 +975,7 @@ if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
 	}
 
 	$DisplayTotal = number_format($_SESSION['PO'.$identifier]->Total,2);
-	echo '<tr><td colspan=6 class=number>' . _('TOTAL') . _(' excluding Tax') . '</td><td class=number><b>' . $DisplayTotal . '</b></td></tr></table>';
+	echo '<tr><td colspan=6 class="number">' . _('TOTAL') . _(' excluding Tax') . '</td><td class="number"><b>' . $DisplayTotal . '</b></td></tr></table>';
 	echo '<br /><div class="centre"><input type="submit" name="UpdateLines" value="Update Order Lines">';
 	echo '&nbsp;<input type="submit" name="Commit" value="Process Order"></div>';
 	if (!isset($_POST['NewItem']) and isset($_GET['Edit'])) {
