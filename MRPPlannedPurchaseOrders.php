@@ -275,7 +275,7 @@ if (isset($_POST['PrintPDF'])) {
 	echo '<option selected value="yes">' . _('Print With Alternating Highlighted Lines') . '</option>';
 	echo '<option value="no">' . _('Plain Print') . '</option>';
 	echo '</select></td></tr>';
-	echo '<tr><td>' . _('Cut Off Date') . ':</td><td><input type ="text" class=date alt="'.$_SESSION['DefaultDateFormat'] .
+	echo '<tr><td>' . _('Cut Off Date') . ':</td><td><input type ="text" class="date" alt="'.$_SESSION['DefaultDateFormat'] .
 			'" name="cutoffdate" size="10" value="'.date($_SESSION['DefaultDateFormat']).'"></td></tr>';
 	echo '</table><br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '"></div></form>';
 
