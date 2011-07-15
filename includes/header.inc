@@ -58,7 +58,7 @@
 
 		if (count($_SESSION['AllowedPageSecurityTokens'])>1){
 
-			echo '<td class="quick_menu_tab" align="center"><a accesskey="2" href="' .  $rootpath . '/SelectCustomer.php?' . sid . '"><span style="text-decoration:underline;">2</span> ' . _('Customers') . '</a></td>';
+			echo '<td class="quick_menu_tab" align="center"><a accesskey="2" href="' .  $rootpath . '/SelectCustomer.php?' . sid . '"><span style="text-decoration:underline;">2</span> ' . _('Patients') . '</a></td>';
 
 			echo '<td class="quick_menu_tab" align="center"><a accesskey="3" href="' .  $rootpath . '/SelectProduct.php?' . sid . '"><span style="text-decoration:underline;">3</span> ' . _('Items') . '</a></td>';
 

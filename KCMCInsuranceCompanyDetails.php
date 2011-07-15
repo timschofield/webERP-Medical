@@ -456,44 +456,71 @@ echo '</table><br />';
 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<input type="Hidden" name="New" value="Yes">';
-
-$DataError =0;
-
 echo '<table class="selection" cellspacing="4"><tr><td valign="top"><table class="selection">';
-
 
 if (!isset($DebtorNo)) {
 	echo '<tr><td>' . _('Company Code') . ':</td><td><input tabindex="1" type="text" name="DebtorNo" size="11" maxlength="10"></td></tr>';
 } else {
-	echo '<tr><td>' . _('Company Code') . ':</td>
-			<td><input ' . (in_array('DebtorNo',$Errors) ?  'class="inputerror"' : '' ) .' type="Text" name="DebtorNo" value="' . $DebtorNo . '" size=12 maxlength=10></td></tr>';
+	echo '<tr><td>' . _('Company Code') . ':</td><td>' . $DebtorNo . '</td></tr>';
+	$sql = "SELECT debtorsmaster.debtorno,
+					name,
+					address1,
+					address2,
+					address3,
+					address4,
+					address5,
+					address6,
+					currencies.currency,
+					custbranch.phoneno,
+					custbranch.faxno,
+					custbranch.email,
+					taxref
+				FROM debtorsmaster
+				LEFT JOIN custbranch
+					ON debtorsmaster.debtorno=custbranch.debtorno
+				LEFT JOIN currencies
+					ON debtorsmaster.currcode=currencies.currabrev
+				WHERE debtorsmaster.debtorno='".$DebtorNo."'";
+	$result = DB_query($sql, $db);
+	$myrow = DB_fetch_array($result);
+
+	$_POST['CustName'] = $myrow['name'];
+	$_POST['Phone'] = $myrow['phoneno'];
+	$_POST['Facsimile'] = $myrow['faxno'];
+	$_POST['Address1'] = $myrow['address1'];
+	$_POST['Address2'] = $myrow['address2'];
+	$_POST['Address3'] = $myrow['address3'];
+	$_POST['Address4'] = $myrow['address4'];
+	$_POST['Address5'] = $myrow['address5'];
+	$_POST['Address6'] = $myrow['address6'];
+	$_POST['Email'] = $myrow['email'];
+	$_POST['TaxRef'] = $myrow['taxref'];
 }
 
 echo '<tr><td>' . _('Company Name') . ':</td>
-	<td><input tabindex=2 type="Text" name="CustName" size=42 maxlength=40></td></tr>';
+	<td><input tabindex=2 type="Text" name="CustName" size=42 maxlength=40 value="'.$_POST['CustName'].'"></td></tr>';
 echo '<tr><td>' . _('Telephone') . ':</td>
-	<td><input tabindex=2 type="Text" name="Phone" size=30 maxlength=40></td></tr>';
+	<td><input tabindex=2 type="Text" name="Phone" size=30 maxlength=40 value="'.$_POST['Phone'].'"></td></tr>';
 echo '<tr><td>' . _('Facsimile') . ':</td>
-	<td><input tabindex=2 type="Text" name="Fax" size=30 maxlength=40></td></tr>';
+	<td><input tabindex=2 type="Text" name="Fax" size=30 maxlength=40 value="'.$_POST['Facsimile'].'"></td></tr>';
 echo '<tr><td>' . _('Email Address') . ':</td>
-	<td><input tabindex=2 type="Text" name="Email" size=30 maxlength=40></td></tr>';
+	<td><input tabindex=2 type="Text" name="Email" size=30 maxlength=40 value="'.$_POST['Email'].'"></td></tr>';
 echo '<tr><td>' . _('Address Line 1') . ':</td>
-	<td><input tabindex=3 type="Text" name="Address1" size=42 maxlength=40></td></tr>';
+	<td><input tabindex=3 type="Text" name="Address1" size=42 maxlength=40 value="'.$_POST['Address1'].'"></td></tr>';
 echo '<tr><td>' . _('Address Line 2') . ':</td>
-	<td><input tabindex=4 type="Text" name="Address2" size=42 maxlength=40></td></tr>';
+	<td><input tabindex=4 type="Text" name="Address2" size=42 maxlength=40 value="'.$_POST['Address2'].'"></td></tr>';
 echo '<tr><td>' . _('Address Line 3') . ':</td>
-	<td><input tabindex=5 type="Text" name="Address3" size=42 maxlength=40></td></tr>';
+	<td><input tabindex=5 type="Text" name="Address3" size=42 maxlength=40 value="'.$_POST['Address3'].'"></td></tr>';
 echo '<tr><td>' . _('Address Line 4') . ':</td>
-	<td><input tabindex=6 type="Text" name="Address4" size=42 maxlength=40></td></tr>';
+	<td><input tabindex=6 type="Text" name="Address4" size=42 maxlength=40 value="'.$_POST['Address4'].'"></td></tr>';
 echo '<tr><td>' . _('Address Line 5') . ':</td>
-	<td><input tabindex=7 type="Text" name="Address5" size=22 maxlength=20></td></tr>';
+	<td><input tabindex=7 type="Text" name="Address5" size=22 maxlength=20 value="'.$_POST['Address5'].'"></td></tr>';
 echo '<tr><td>' . _('Address Line 6') . ':</td>
-	<td><input tabindex=8 type="Text" name="Address6" size=17 maxlength=15></td></tr>';
+	<td><input tabindex=8 type="Text" name="Address6" size=17 maxlength=15 value="'.$_POST['Address6'].'"></td></tr>';
 echo '</table></td><td valign="top"><table class="selection">';
 
 echo '<tr><td>' . _('Tax Reference') . ':</td>
-	<td><input tabindex=15 type="Text" name="TaxRef" size=22 maxlength=20></td></tr>';
+	<td><input tabindex=15 type="Text" name="TaxRef" size=22 maxlength=20 value="'.$_POST['TaxRef'].'"></td></tr>';
 
 $result=DB_query("SELECT terms, termsindicator FROM paymentterms",$db);
 if (DB_num_rows($result)==0){
@@ -677,8 +704,7 @@ if (isset($DebtorNo)) {
 				<td>' . _('Role') . '</td><td><input type=text name="role" value="'.$_POST['role'].'"></td></tr><tr>
 				<td>' . _('Phone no') . '</td><td><input type="text" name="phoneno" value="'.$_POST['phoneno'].'"></td></tr><tr>
 				<td>' . _('Notes') . '</td><td><textarea name="notes">'.$_POST['notes'].'</textarea></td></tr>
-				<tr><td colspan=2><input type=submit name=update value=update></td></tr></table>
-				';
+				<tr><td colspan=2><input type=submit name=update value=update></td></tr></table>';
 
 	}
 	if (isset($_POST['update'])) {
