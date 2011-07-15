@@ -116,10 +116,10 @@ if (!isset($_POST['Show'])) {
 							<td>'.$myrow['typename'].'</td>
 							<td>'.$myrow['banktranstype'].'</td>
 							<td>'.$myrow['ref'].'</td>
-							<td class=number>'.number_format($myrow['amount'],2).'</td>
-							<td class=number>'.number_format($AccountCurrTotal,2).'</td>
-							<td class=number>'.number_format($myrow['amount']/$myrow['functionalexrate']/$myrow['exrate'],2).'</td>
-							<td class=number>'.number_format($LocalCurrTotal,2).'</td>
+							<td class="number">'.number_format($myrow['amount'],2).'</td>
+							<td class="number">'.number_format($AccountCurrTotal,2).'</td>
+							<td class="number">'.number_format($myrow['amount']/$myrow['functionalexrate']/$myrow['exrate'],2).'</td>
+							<td class="number">'.number_format($LocalCurrTotal,2).'</td>
 						</tr>';
 		}
 		echo '</table>';
