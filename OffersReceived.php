@@ -111,10 +111,10 @@ if (!isset($_POST['submit']) and isset($_POST['supplierid'])) {
 		echo '<td>'.$myrow['offerid'].'</td>';
 		echo '<td>'.$myrow['suppname'].'</td>';
 		echo '<td>'.$myrow['description'].'</td>';
-		echo '<td class=number>'.number_format($myrow['quantity'],$myrow['decimalplaces']).'</td>';
+		echo '<td class="number">'.number_format($myrow['quantity'],$myrow['decimalplaces']).'</td>';
 		echo '<td>'.$myrow['uom'].'</td>';
-		echo '<td class=number>'.number_format($myrow['price'],2).'</td>';
-		echo '<td class=number>'.number_format($myrow['price']*$myrow['quantity'],2).'</td>';
+		echo '<td class="number">'.number_format($myrow['price'],2).'</td>';
+		echo '<td class="number">'.number_format($myrow['price']*$myrow['quantity'],2).'</td>';
 		echo '<td>'.$myrow['currcode'].'</td>';
 		echo '<td>'.$myrow['expirydate'].'</td>';
 		echo '<td><input type="radio" name="action'.$myrow['offerid'].'" value="1"></td>';
