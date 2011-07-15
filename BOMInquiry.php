@@ -112,10 +112,10 @@ if (isset($_POST['Search']) and isset($result) AND !isset($SelectedParent)) {
 			$StockOnHand = number_format($myrow['totalonhand'],2);
 		}
 		$tabindex=$j+4;
-		printf("<td><input tabindex='".$tabindex."' type=submit name='StockID' value='%s'</td>
+		printf('<td><input tabindex="'.$tabindex.'" type=submit name="StockID" value="%s"</td>
 		        <td>%s</td>
 			<td class="number">%s</td>
-			<td>%s</td></tr>",
+			<td>%s</td></tr>',
 			$myrow['stockid'],
 			$myrow['description'],
 			$StockOnHand,

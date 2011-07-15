@@ -446,12 +446,12 @@ $DisplayTotal = number_format($_SESSION['CreditItems']->total + $_SESSION['Credi
 
 if (!isset($_POST['ProcessCredit'])) {
 	echo '<tr>
-		<td colspan=7 class="number">' . _('Credit Totals') . "</td>
+		<td colspan=7 class="number">' . _('Credit Totals') . '</td>
 		<td class="number"><hr><b>$DisplayTotal</b><hr></td>
 		<td colspan=2></td>
-		<td class="number"><hr><b>" . number_format($TaxTotal,2) . "<hr></td>
-		<td class="number"><hr><b>" . number_format($TaxTotal+($_SESSION['CreditItems']->total + $_SESSION['CreditItems']->FreightCost),2) . "</b><hr></td>
-		</tr></table>";
+		<td class="number"><hr><b>' . number_format($TaxTotal,2) . '<hr></td>
+		<td class="number"><hr><b>' . number_format($TaxTotal+($_SESSION['CreditItems']->total + $_SESSION['CreditItems']->FreightCost),2) . '</b><hr></td>
+		</tr></table>';
 }
 $DefaultDispatchDate = Date($_SESSION['DefaultDateFormat']);
 
