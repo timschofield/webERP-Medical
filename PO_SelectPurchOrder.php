@@ -188,8 +188,8 @@ if (isset($StockItemsResult)) {
 		}
 		echo '<td><input type=submit name="SelectedStockItem" value="' . $myrow['stockid'] . '"</td>
 				<td>' . $myrow['description'] . '</td>
-			<td class=number>' . $myrow['qoh'] . '</td>
-			<td class=number>' . $myrow['qord'] . '</td>
+			<td class="number">' . $myrow['qoh'] . '</td>
+			<td class="number">' . $myrow['qord'] . '</td>
 			<td>' . $myrow['units'] . '</td>
 			</tr>';
 		$j++;
@@ -385,7 +385,7 @@ else {
 					<td>' . $myrow['requisitionno'] . '</td>
 					<td>' . $FormatedOrderDate . '</td>
 					<td>' . $myrow['initiator'] . '</td>
-					<td class=number>' . $FormatedOrderValue . '</td>
+					<td class="number">' . $FormatedOrderValue . '</td>
 					<td>' . _($myrow['status']) .  '</td>
 				</tr>';
 				//$myrow['status'] is a string which has gettext translations from PO_Header.php script
