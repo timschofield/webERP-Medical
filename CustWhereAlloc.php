@@ -33,7 +33,7 @@ echo '</select></td>';
 
 if (!isset($_POST['TransNo'])) {$_POST['TransNo']='';}
 echo '<td>'._('Transaction Number') . ':</td>
-	<td><input tabindex=2 type=text name="TransNo" maxlength=10 size=10 value="'. $_POST['TransNo'] . '"></td>';
+	<td><input tabindex=2 type="text" name="TransNo" maxlength=10 size=10 value="'. $_POST['TransNo'] . '"></td>';
 
 echo '</tr></table><br />
 	<div class="centre"><input tabindex=3 type=submit name="ShowResults" value="'._('Show How Allocated').'"></div>';
