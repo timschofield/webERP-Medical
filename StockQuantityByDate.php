@@ -129,7 +129,7 @@ if(isset($_POST['ShowStatus']) AND Is_Date($_POST['OnHandDate'])) {
 			if($NumRows == 0){
 				printf('<td><a TARGET="_blank" href="StockStatus.php?%s">%s</td>
 					<td>%s</td>
-					<td class=number>%s</td>',
+					<td class="number">%s</td>',
 					'StockID=' . mb_strtoupper($myrows['stockid']),
 					mb_strtoupper($myrows['stockid']),
 					$myrows['description'],
@@ -137,7 +137,7 @@ if(isset($_POST['ShowStatus']) AND Is_Date($_POST['OnHandDate'])) {
 			} else {
 				printf('<td><a TARGET="_blank" href="StockStatus.php?%s">%s</td>
 					<td>%s</td>
-					<td class=number>%s</td>',
+					<td class="number">%s</td>',
 					'StockID=' . mb_strtoupper($myrows['stockid']),
 					mb_strtoupper($myrows['stockid']),
 					$myrows['description'],
