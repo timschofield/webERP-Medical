@@ -79,18 +79,18 @@ if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
 
    echo '<br /><table cellpadding=2 class="selection">';
 
-   $tableheader = "<tr>
-			<th>" . _('Type') . "</th>
-			<th>" . _('Number') . "</th>
-			<th>" . _('Date') . "</th>
-			<th>" . _('Customer') . "</th>
-			<th>" . _('Branch') . "</th>
-			<th>" . _('Reference') . "</th>
-			<th>" . _('Comments') . "</th>
-			<th>" . _('Order') . "</th>
-			<th>" . _('Ex Rate') . "</th>
-			<th>" . _('Amount') . "</th>
-			<th>" . _('Currency') . '</th></tr>';
+   $tableheader = '<tr>
+			<th>' . _('Type') . '</th>
+			<th>' . _('Number') . '</th>
+			<th>' . _('Date') . '</th>
+			<th>' . _('Customer') . '</th>
+			<th>' . _('Branch') . '</th>
+			<th>' . _('Reference') . '</th>
+			<th>' . _('Comments') . '</th>
+			<th>' . _('Order') . '</th>
+			<th>' . _('Ex Rate') . '</th>
+			<th>' . _('Amount') . '</th>
+			<th>' . _('Currency') . '</th></tr>';
 	echo $tableheader;
 
 	$RowCounter = 1;
@@ -106,17 +106,17 @@ if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
 			$k++;
 		}
 
-		$format_base = "<td>%s</td>
+		$format_base = '<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
-				<td width='200'>%s</td>
+				<td width="200">%s</td>
 				<td>%s</td>
-				<td class=number>%s</td>
-				<td class=number>%s</td>
-				<td>%s</td>";
+				<td class="number">%s</td>
+				<td class="number">%s</td>
+				<td>%s</td>';
 
 		if ($_POST['TransType']==10){ /* invoices */
 
