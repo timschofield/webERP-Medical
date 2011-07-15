@@ -435,9 +435,9 @@ If (isset($_POST['PrintPDF']) && isset($_POST['FromCust']) && $_POST['FromCust']
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 		echo '<tr><td>' . _('Starting Customer statement to print (Customer code)'). '
-			</td><td><input Type=text max=6 size=7 name=FromCust value="1"></td></tr>
+			</td><td><input type="text" max=6 size=7 name=FromCust value="1"></td></tr>
 			<tr><td>'. _('Ending Customer statement to print (Customer code)').'</td><td>
-				<input Type=text max=6 size=7 name=ToCust value="zzzzzz"></td></tr></table>
+				<input type="text" max=6 size=7 name=ToCust value="zzzzzz"></td></tr></table>
 				<br /><div class="centre">
 				<input type=Submit Name="PrintPDF" Value="' .
 				_('Print All Statements in the Range Selected').'">
