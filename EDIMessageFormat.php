@@ -145,7 +145,7 @@ or deletion of the records*/
 
 
 		printf('<td>%s</td>
-			<td class=number>%s</td>
+			<td class="number">%s</td>
 			<td>%s</td>
 			<td><a href="%sSelectedMessageLine=%s">' . _('Edit') . '</a></td>
 			<td><a href="%sdelete=%s">' . _('Delete') . '</a></td>

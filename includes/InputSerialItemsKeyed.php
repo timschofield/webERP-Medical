@@ -48,10 +48,10 @@ foreach ($LineItem->SerialItems as $Bundle){
 	echo '<td>' . $Bundle->BundleRef . '</td>';
 
 	if ($LineItem->Serialised==0 and $Perishable==0){
-		echo '<td class=number>' . number_format($Bundle->BundleQty, $LineItem->DecimalPlaces) . '</td>';
+		echo '<td class="number">' . number_format($Bundle->BundleQty, $LineItem->DecimalPlaces) . '</td>';
 	} else if ($LineItem->Serialised==0 and $Perishable==1){
-		echo '<td class=number>' . number_format($Bundle->BundleQty, $LineItem->DecimalPlaces) . '</td>';
-		echo '<td class=number>' . $Bundle->ExpiryDate . '</td>';
+		echo '<td class="number">' . number_format($Bundle->BundleQty, $LineItem->DecimalPlaces) . '</td>';
+		echo '<td class="number">' . $Bundle->ExpiryDate . '</td>';
 	}
 
 	echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $Bundle->BundleRef . '&StockID=' . $LineItem->StockID . '&LineNo=' . $LineNo .'">'. _('Delete'). '</a></td></tr>';
@@ -62,9 +62,9 @@ foreach ($LineItem->SerialItems as $Bundle){
 
 /*Display the totals and rule off before allowing new entries */
 if ($LineItem->Serialised==1){
-	echo '<tr><td class=number><B>'. _('Total Quantity'). ': ' . number_format($TotalQuantity,$LineItem->DecimalPlaces) . '</b></td></tr>';
+	echo '<tr><td class="number"><B>'. _('Total Quantity'). ': ' . number_format($TotalQuantity,$LineItem->DecimalPlaces) . '</b></td></tr>';
 } else {
-	echo '<tr><td class=number><B>'. _('Total Quantity'). ':</b></td><td class=number><b>' . number_format($TotalQuantity,$LineItem->DecimalPlaces) . '</b></td></tr>';
+	echo '<tr><td class="number"><B>'. _('Total Quantity'). ':</b></td><td class="number"><b>' . number_format($TotalQuantity,$LineItem->DecimalPlaces) . '</b></td></tr>';
 }
 
 /*Close off old table */

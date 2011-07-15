@@ -483,7 +483,7 @@ echo '<tr><td class="label">' . _('Required By') . ':</td>
 
 if (isset($WOResult)){
 	echo '<tr><td class="label">' . _('Accumulated Costs') . ':</td>
-			  <td class=number>' . number_format($myrow['costissued'],2) . '</td></tr>';
+			  <td class="number">' . number_format($myrow['costissued'],2) . '</td></tr>';
 }
 echo '</table>
 		<br /><table class="selection">';
@@ -512,8 +512,8 @@ if (isset($NumberOfOutputs)){
 		} else {
 		  	echo'<td><input type="text" class="number" name="OutputQty' . $i . '" value=' . $_POST['OutputQty' . $i] . ' size=10 maxlength=10></td>';
 		}
-		 echo '<td class=number><input type="hidden" name="RecdQty' . $i . '" value=' . $_POST['RecdQty' .$i] . '>' . $_POST['RecdQty' .$i] .'</td>
-		  		<td class=number>' . ($_POST['OutputQty' . $i] - $_POST['RecdQty' .$i]) . '</td>';
+		 echo '<td class="number"><input type="hidden" name="RecdQty' . $i . '" value=' . $_POST['RecdQty' .$i] . '>' . $_POST['RecdQty' .$i] .'</td>
+		  		<td class="number">' . ($_POST['OutputQty' . $i] - $_POST['RecdQty' .$i]) . '</td>';
 		if ($_POST['Controlled'.$i]==1){
 			echo '<td><input type="text" name="NextLotSNRef' .$i . '" value="' . $_POST['NextLotSNRef'.$i] . '"></td>';
 			if ($_SESSION['DefineControlledOnWOEntry']==1){

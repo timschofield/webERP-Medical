@@ -158,7 +158,7 @@ if (isset($_POST['ShowUsage'])){
 
 		$TotalUsage += $myrow['qtyused'];
 		$PeriodsCounter++;
-		printf('<td>%s</td><td class=number>%s</td></tr>', $DisplayDate, number_format($myrow['qtyused'],$DecimalPlaces));
+		printf('<td>%s</td><td class="number">%s</td></tr>', $DisplayDate, number_format($myrow['qtyused'],$DecimalPlaces));
 
 	//end of page full new headings if
 	}

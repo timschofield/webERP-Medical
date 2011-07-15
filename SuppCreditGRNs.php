@@ -85,9 +85,9 @@ foreach ($_SESSION['SuppTrans']->GRNs as $EnteredGRN){
 	echo '<tr><td>' . $EnteredGRN->GRNNo . '</td>
 			<td>' . $EnteredGRN->ItemCode . '</td>
 			<td>' . $EnteredGRN->ItemDescription . '</td>
-			<td class=number>' . number_format($EnteredGRN->This_QuantityInv,2) . '</td>
-			<td class=number>' . number_format($EnteredGRN->ChgPrice,2) . '</td>
-			<td class=number>' . number_format($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv,2) . '</td>
+			<td class="number">' . number_format($EnteredGRN->This_QuantityInv,2) . '</td>
+			<td class="number">' . number_format($EnteredGRN->ChgPrice,2) . '</td>
+			<td class="number">' . number_format($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv,2) . '</td>
 			<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $EnteredGRN->GRNNo . '">' . _('Delete') . '</a></td></tr>';
 
 	$TotalValueCharged = $TotalValueCharged + ($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv);
@@ -99,8 +99,8 @@ foreach ($_SESSION['SuppTrans']->GRNs as $EnteredGRN){
 	}
 }
 
-echo '<tr><td colspan=5 class=number><font size=2 color=navy>' . _('Total Value Credited Against Goods') . ':</font></td>
-		  <td class=number><font size=2 color=navy><U>' . number_format($TotalValueCharged,2) . '</U></font></td></tr>';
+echo '<tr><td colspan=5 class="number"><font size=2 color=navy>' . _('Total Value Credited Against Goods') . ':</font></td>
+		  <td class="number"><font size=2 color=navy><U>' . number_format($TotalValueCharged,2) . '</U></font></td></tr>';
 echo '</table><br /><div class=centre><a href="' . $rootpath . '/SupplierCredit.php">' . _('Back to Credit Note Entry') . '</a></div>';
 
 /* Now get all the GRNs for this supplier from the database
@@ -140,7 +140,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 echo '<br /><table cellpadding=2 colspan=7 class="selection">';
 
 echo '<tr><th colspan=10><font size=3 color=navy>' . _('Show Goods Received Since') . ':&nbsp;</font>';
-echo '<input type=Text name="Show_Since" maxlength=11 size=12 class=date alt='.$_SESSION['DefaultDateFormat'].' value="' . $_POST['Show_Since'] . '"><font size=3 color=navy> ';
+echo '<input type=Text name="Show_Since" maxlength=11 size=12 class="date" alt='.$_SESSION['DefaultDateFormat'].' value="' . $_POST['Show_Since'] . '"><font size=3 color=navy> ';
 echo  _('From') . ' ' . $_SESSION['SuppTrans']->SupplierName . '</font></th></tr>';
 
 $TableHeader = '<tr><th>' . _('GRN') . '</th>
@@ -173,11 +173,11 @@ while ($myrow=DB_fetch_array($GRNResults)){
 			  		<td>' . $myrow['itemcode'] . '</td>
 			  		<td>' . $myrow['itemdescription'] . '</td>
 			  		<td>' . ConvertSQLDate($myrow['deliverydate']) . '</td>
-			  		<td class=number>' . number_format($myrow['qtyrecd'],2) . '</td>
-			  		<td class=number>' . number_format($myrow['quantityinv'],2) . '</td>
-			  		<td class=number>' . number_format($myrow['qtyrecd'] - $myrow['quantityinv'],2) . '</td>
-			  		<td class=number>' . number_format($myrow['unitprice'],2) . '</td>
-			  		<td class=number>' . number_format($myrow['unitprice']*($myrow['qtyrecd'] - $myrow['quantityinv']),2) . '</td>
+			  		<td class="number">' . number_format($myrow['qtyrecd'],2) . '</td>
+			  		<td class="number">' . number_format($myrow['quantityinv'],2) . '</td>
+			  		<td class="number">' . number_format($myrow['qtyrecd'] - $myrow['quantityinv'],2) . '</td>
+			  		<td class="number">' . number_format($myrow['unitprice'],2) . '</td>
+			  		<td class="number">' . number_format($myrow['unitprice']*($myrow['qtyrecd'] - $myrow['quantityinv']),2) . '</td>
 			  	</tr>';
 		$i++;
 		if ($i>15){
@@ -228,9 +228,9 @@ if (isset($_POST['GRNNo']) AND $_POST['GRNNo']!=''){
 
 	echo '<tr><td>' . $_POST['GRNNo'] . '</td>
 				<td>' . $myrow['itemcode'] . ' ' . $myrow['itemdescription'] . '</td>
-				<td class=number>' . number_format($myrow['qtyostdg'],2) . '</td>
+				<td class="number">' . number_format($myrow['qtyostdg'],2) . '</td>
 				<td><input type=Text Name="This_QuantityCredited" Value=' . $myrow['qtyostdg'] . ' size=11 maxlength=10></td>
-				<td class=number>' . $myrow['unitprice'] . '</td>
+				<td class="number">' . $myrow['unitprice'] . '</td>
 				<td><input type=Text Name="ChgPrice" Value=' . $myrow['unitprice'] . ' size=11 maxlength=10></td>
 			</tr>';
 	echo '</table>';

@@ -407,9 +407,9 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 							</tr>';
 					}
 					printf('<td colspan=2><I>%s</I></td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
 						<td></td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
 						</tr>',
 						$ParentGroups[$Level],
 						number_format($GroupTotal[$Level]),
@@ -432,9 +432,9 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 				}
 
 				printf('<td colspan=2>%s</td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					<td></td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					</tr>',
 					$ParentGroups[$Level],
 					number_format($GroupTotal[$Level]),
@@ -468,9 +468,9 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 
 				printf('<tr>
 					<td colspan=3><font size=4>%s</font></td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					<td></td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 				</tr>',
 				$Sections[$Section],
 				number_format($SectionBalance),
@@ -535,9 +535,9 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 
 			$PrintString = '<td>%s</td>
 					<td>%s</td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					<td></td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
 					<td></td>
 					</tr>';
 
@@ -566,9 +566,9 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 				</tr>';
 		}
 		printf('<td colspan=2><I>%s</I></td>
-			<td class=number>%s</td>
+			<td class="number">%s</td>
 			<td></td>
-			<td class=number>%s</td>
+			<td class="number">%s</td>
 			</tr>',
 			$ParentGroups[$Level],
 			number_format($GroupTotal[$Level]),
@@ -587,9 +587,9 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 	}
 
 	printf('<td colspan=2>%s</td>
-		<td class=number>%s</td>
+		<td class="number">%s</td>
 		<td></td>
-		<td class=number>%s</td>
+		<td class="number">%s</td>
 		</tr>',
 		$ParentGroups[$Level],
 		number_format($GroupTotal[$Level]),
@@ -615,9 +615,9 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 
 	printf('<tr>
 		<td colspan=3><font size=4>%s</font></td>
-		<td class=number>%s</td>
+		<td class="number">%s</td>
 		<td></td>
-		<td class=number>%s</td>
+		<td class="number">%s</td>
 	</tr>',
 	$Sections[$Section],
 	number_format($SectionBalance),
@@ -641,9 +641,9 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 
 	printf('<tr>
 		<td colspan=3>'._('Check Total').'</font></td>
-		<td class=number>%s</td>
+		<td class="number">%s</td>
 		<td></td>
-		<td class=number>%s</td>
+		<td class="number">%s</td>
 		</tr>',
 		number_format($CheckTotal),
 		number_format($LYCheckTotal));

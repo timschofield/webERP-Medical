@@ -145,11 +145,11 @@ echo '<table width=90% class="selection">
 			<th>' . _('Over') . ' ' . $_SESSION['PastDueDays2'] . ' ' . _('Days Overdue') . '</th>
 		</tr>';
 
-echo '<tr>	<td class=number>' . number_format($SupplierRecord['balance'],2) . '</td>
-			<td class=number>' . number_format(($SupplierRecord['balance'] - $SupplierRecord['due']),2) . '</td>
-			<td class=number>' . number_format(($SupplierRecord['due']-$SupplierRecord['overdue1']),2) . '</td>
-			<td class=number>' . number_format(($SupplierRecord['overdue1']-$SupplierRecord['overdue2']) ,2) . '</td>
-			<td class=number>' . number_format($SupplierRecord['overdue2'],2) . '</td>
+echo '<tr>	<td class="number">' . number_format($SupplierRecord['balance'],2) . '</td>
+			<td class="number">' . number_format(($SupplierRecord['balance'] - $SupplierRecord['due']),2) . '</td>
+			<td class="number">' . number_format(($SupplierRecord['due']-$SupplierRecord['overdue1']),2) . '</td>
+			<td class="number">' . number_format(($SupplierRecord['overdue1']-$SupplierRecord['overdue2']) ,2) . '</td>
+			<td class="number">' . number_format($SupplierRecord['overdue2'],2) . '</td>
 		</tr></table>';
 
 echo '<br /><div class="centre"><form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
@@ -289,9 +289,9 @@ while ($myrow=DB_fetch_array($TransResult)) {
 						<td>%s</td>
 						<td>%s</td>
 						<td>%s</td>
-						<td class=number>%s</td>
-						<td class=number>%s</td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
+						<td class="number">%s</td>
+						<td class="number">%s</td>
 						<td align=left>%s</td>
 						</td></tr>',
 						$myrow['transno'],
@@ -309,9 +309,9 @@ while ($myrow=DB_fetch_array($TransResult)) {
 						<td>%s</td>
 						<td>%s</td>
 						<td>%s</td>
-						<td class=number>%s</td>
-						<td class=number>%s</td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
+						<td class="number">%s</td>
+						<td class="number">%s</td>
 						<td align=left>%s</td>
 						<td><a href="%s?HoldType=%s&HoldTrans=%s&HoldStatus=%s&FromDate=%s">%s</a></td>
 						<td><a href="%s/PaymentAllocations.php?SuppID=%s&InvID=%s">' . _('View Payments') . '</a></tr>',
@@ -343,9 +343,9 @@ while ($myrow=DB_fetch_array($TransResult)) {
 					<td>%s</td>
 					<td>%s</td>
 					<td>%s</td>
-					<td class=number>%s</td>
-					<td class=number>%s</td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
+					<td class="number">%s</td>
+					<td class="number">%s</td>
 					<td align=left>%s</td>
 					<td><a href="%s/SupplierAllocations.php?AllocTrans=%s">' .
 					  _('View Allocations') . '</a></td>
@@ -372,9 +372,9 @@ while ($myrow=DB_fetch_array($TransResult)) {
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
-				<td class=number>%s</td>
-				<td class=number>%s</td>
-				<td class=number>%s</td>
+				<td class="number">%s</td>
+				<td class="number">%s</td>
+				<td class="number">%s</td>
 				<td align=left>%s</td>
 				<td><a href="%s/SupplierAllocations.php?AllocTrans=%s">' . _('View Allocations') . '</a></td>
 				</tr>',

@@ -770,13 +770,13 @@ if (!isset($DebtorNo)) {
 			<tr><td>' . _('Customer Since') . ' (' . $_SESSION['DefaultDateFormat'] . '):</td>
 				<td><input ' . (in_array('ClientSince',$Errors) ?  'class="inputerror"' : '' ) .' type="Text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="ClientSince" size=11 maxlength=10 value=' . $_POST['ClientSince'] . '></td></tr>';
 		echo '<tr><td>' . _('Discount Percent') . ':</td>
-			<td><input type="Text" name="Discount" class=number size=5 maxlength=4 value=' . $_POST['Discount'] . '></td></tr>';
+			<td><input type="Text" name="Discount" class="number" size=5 maxlength=4 value=' . $_POST['Discount'] . '></td></tr>';
 		echo '<tr><td>' . _('Discount Code') . ':</td>
 			<td><input ' . (in_array('DiscountCode',$Errors) ?  'class="inputerror"' : '' ) .' type="Text" name="DiscountCode" size=3 maxlength=2 value="' . $_POST['DiscountCode'] . '"></td></tr>';
 		echo '<tr><td>' . _('Payment Discount Percent') . ':</td>
-		<td><input ' . (in_array('PymtDiscount',$Errors) ?  'class="inputerror"' : '' ) .' type="Text" class=number name="PymtDiscount" size=5 maxlength=4 value=' . $_POST['PymtDiscount'] . '></td></tr>';
+		<td><input ' . (in_array('PymtDiscount',$Errors) ?  'class="inputerror"' : '' ) .' type="Text" class="number" name="PymtDiscount" size=5 maxlength=4 value=' . $_POST['PymtDiscount'] . '></td></tr>';
 		echo '<tr><td>' . _('Credit Limit') . ':</td>
-			<td><input ' . (in_array('CreditLimit',$Errors) ?  'class="inputerror"' : '' ) .' type="Text" class=number name="CreditLimit" size=16 maxlength=14 value=' . $_POST['CreditLimit'] . '></td></tr>';
+			<td><input ' . (in_array('CreditLimit',$Errors) ?  'class="inputerror"' : '' ) .' type="Text" class="number" name="CreditLimit" size=16 maxlength=14 value=' . $_POST['CreditLimit'] . '></td></tr>';
 		echo '<tr><td>' . _('Tax Reference') . ':</td>
 			<td><input type="Text" name="TaxRef" size=22 maxlength=20  value="' . $_POST['TaxRef'] . '"></td></tr>';
 	}

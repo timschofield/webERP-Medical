@@ -68,11 +68,11 @@ if (DB_num_rows($Result) == 0){
 }
 
 echo '<table cellpadding=2 colspan=7 width=80% class="selection">';
-$TableHeader = "<tr>
-<th>" . _('Supplier Number') . '<br />' . _('Reference') . "</th>
-<th>" . _('Payment') .'<br />' . _('Reference') . "</th>
-<th>" . _('Payment') . '<br />' . _('Date') . "</th>
-<th>" . _('Total Payment') . '<br />' . _('Amount') .	'</th></tr>';
+$TableHeader = '<tr>
+<th>' . _('Supplier Number') . '<br />' . _('Reference') . '</th>
+<th>' . _('Payment') .'<br />' . _('Reference') . '</th>
+<th>' . _('Payment') . '<br />' . _('Date') . '</th>
+<th>' . _('Total Payment') . '<br />' . _('Amount') .	'</th></tr>';
 
 echo $TableHeader;
 
@@ -90,7 +90,7 @@ $k=0; //row colour counter
 	echo '<td>'.$myrow['supplierno'].'</td>
 		<td>'.$myrow['suppreference'].'</td>
 		<td>'.ConvertSQLDate($myrow['trandate']).'</td>
-		<td class=number>'.number_format($myrow['alloc'],2).'</td>
+		<td class="number">'.number_format($myrow['alloc'],2).'</td>
 		</tr>';
 
 		$j++;

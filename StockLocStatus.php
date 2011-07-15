@@ -251,11 +251,11 @@ if (isset($_POST['ShowStatus'])){
 				}
 				printf('<td><a target="_blank" href="StockStatus.php?StockID=%s">%s</a></td>
 					<td>%s</td>
-					<td class=number>%s</td>
-					<td class=number>%s</td>
-					<td class=number>%s</td>
-					<td class=number><a target="_blank" href="SelectProduct.php?StockID=%s">%s</a></td>
-					<td class=number>%s</td></tr>',
+					<td class="number">%s</td>
+					<td class="number">%s</td>
+					<td class="number">%s</td>
+					<td class="number"><a target="_blank" href="SelectProduct.php?StockID=%s">%s</a></td>
+					<td class="number">%s</td></tr>',
 					strtoupper($myrow['stockid']),
 					strtoupper($myrow['stockid']),
 					$myrow['description'],
@@ -281,11 +281,11 @@ if (isset($_POST['ShowStatus'])){
 				}
 				printf('<td><a target="_blank" href="StockStatus.php?StockID=%s">%s</a></td>
 					<td>%s</td>
-					<td class=number>%s</td>
-					<td class=number>%s</td>
-					<td class=number>%s</td>
-					<td class=number><a target="_blank" href="SelectProduct.php?StockID=%s">%s</a></td>
-					<td class=number>%s</td>',
+					<td class="number">%s</td>
+					<td class="number">%s</td>
+					<td class="number">%s</td>
+					<td class="number"><a target="_blank" href="SelectProduct.php?StockID=%s">%s</a></td>
+					<td class="number">%s</td>',
 					strtoupper($myrow['stockid']),
 					strtoupper($myrow['stockid']),
 					$myrow['description'],

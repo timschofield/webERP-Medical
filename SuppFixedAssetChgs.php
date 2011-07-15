@@ -80,7 +80,7 @@ foreach ($_SESSION['SuppTrans']->Assets as $EnteredAsset){
 
 	echo '<tr><td>' . $EnteredAsset->AssetID . '</td>
 						<td>' . $EnteredAsset->Description . '</td>
-		<td class=number>' . number_format($EnteredAsset->Amount,2) . '</td>
+		<td class="number">' . number_format($EnteredAsset->Amount,2) . '</td>
 		<td><a href="' . $_SERVER['PHP_SELF'] . '&Delete=' . $EnteredAsset->Counter . '">' . _('Delete') . '</a></td></tr>';
 
 	$TotalAssetValue +=  $EnteredAsset->Amount;

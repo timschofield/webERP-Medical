@@ -819,7 +819,7 @@ if ($_SESSION['PaymentDetail']->AccountCurrency!=$_SESSION['PaymentDetail']->Cur
 		$_POST['ExRate'] = $SuggestedExRate;
 	}
 	echo '<tr><td>' . _('Payment Exchange Rate') . ':</td>
-				<td><input class=number type="text" name="ExRate" maxlength=10 size=12 value="' . $_POST['ExRate'] . '"></td>
+				<td><input class="number" type="text" name="ExRate" maxlength=10 size=12 value="' . $_POST['ExRate'] . '"></td>
 			<td>' . $SuggestedExRateText . ' <i>' . _('The exchange rate between the currency of the bank account currency and the currency of the payment') . '. 1 ' . $_SESSION['PaymentDetail']->AccountCurrency . ' = ? ' . $_SESSION['PaymentDetail']->Currency . '</i></td></tr>';
 }
 
@@ -977,10 +977,10 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 
 	if (isset($_POST['GLAmount'])) {
 		echo '<tr><td>' . _('Amount') . ' (' . $_SESSION['PaymentDetail']->Currency . '):</td>
-				<td><input type=Text Name="GLAmount" Maxlength=12 size=12 class=number value=' . $_POST['GLAmount'] . '></td></tr>';
+				<td><input type=Text Name="GLAmount" Maxlength=12 size=12 class="number" value=' . $_POST['GLAmount'] . '></td></tr>';
 	} else {
 		echo '<tr><td>' . _('Amount') . ' (' . $_SESSION['PaymentDetail']->Currency . '):</td>
-				<td><input type=Text Name="GLAmount" Maxlength=12 size=12 class=number></td></tr>';
+				<td><input type=Text Name="GLAmount" Maxlength=12 size=12 class="number"></td></tr>';
 	}
 
 	echo '</table><br />';
@@ -1009,7 +1009,7 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 			}
 			echo '<tr>
 				<td align=left>' . $PaymentItem->cheque . '</td>
-				<td class=number>' . number_format($PaymentItem->Amount,2) . '</td>
+				<td class="number">' . number_format($PaymentItem->Amount,2) . '</td>
 				<td>' . $PaymentItem->GLCode . ' - ' . $PaymentItem->GLActName . '</td>
 				<td>' . stripslashes($PaymentItem->Narrative)  . '</td>
 				<td>' . $PaymentItem->tag . ' - ' . $TagName . '</td>
@@ -1017,7 +1017,7 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 				</tr>';
 			$PaymentTotal += $PaymentItem->Amount;
 		}
-		echo '<tr><td></td><td class=number><b>' . number_format($PaymentTotal,2) . '</b></td><td></td><td></td><td></td></tr></table><br />';
+		echo '<tr><td></td><td class="number"><b>' . number_format($PaymentTotal,2) . '</b></td><td></td><td></td><td></td></tr></table><br />';
 		echo '<input type=submit name="CommitBatch" value="' . _('Accept and Process Payment') . '">';
 	}
 
@@ -1026,11 +1026,11 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 the fields for entry of receipt amt and disc */
 
 	echo '<table class="selection"><tr><td>' . _('Amount of Payment') . ' ' . $_SESSION['PaymentDetail']->Currency . ':</td>
-				<td><input class=number type="text" name="Amount" maxlength=12 size=13 value=' . $_SESSION['PaymentDetail']->Amount . '></td></tr>';
+				<td><input class="number" type="text" name="Amount" maxlength=12 size=13 value=' . $_SESSION['PaymentDetail']->Amount . '></td></tr>';
 
 	if (isset($_SESSION['PaymentDetail']->SupplierID)){ /*So it is a supplier payment so show the discount entry item */
 		echo '<tr><td>' . _('Amount of Discount') . ':</td>
-					<td><input class=number type="text" name="Discount" maxlength=12 size=13 value=' . $_SESSION['PaymentDetail']->Discount . '></td></tr>';
+					<td><input class="number" type="text" name="Discount" maxlength=12 size=13 value=' . $_SESSION['PaymentDetail']->Discount . '></td></tr>';
 		echo '<input type="hidden" name="SuppName" value="' . $_SESSION['PaymentDetail']->SuppName . '">';
 	} else {
 		echo '<input type="hidden" name="discount" Value=0>';

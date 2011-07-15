@@ -460,7 +460,7 @@ if(isset($_POST['ConversionFactor'])) {
 echo '">';
 
 echo '<tr><td>' . _('Price') . ':</td>
-	          <td><input type="text" class=number name="Price" size="11" maxlength="10" value="' . $_POST['Price'] . '" /></td>
+	          <td><input type="text" class="number" name="Price" size="11" maxlength="10" value="' . $_POST['Price'] . '" /></td>
 				</tr></table>';
 
 

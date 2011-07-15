@@ -278,7 +278,7 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 				$k++;
 			}
 
-			printf('\n <td><a href="%s/WorkOrderEntry.php?NewItem=%s&ReqQty=%s&ReqDate=%s">%s</a></td>',
+			printf('<td><a href="%s/WorkOrderEntry.php?NewItem=%s&ReqQty=%s&ReqDate=%s">%s</a></td>',
 				$rootpath,
 				$myrow['part'],
 				$myrow['supplyquantity'],
@@ -289,11 +289,11 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 			printf("\n". '<td>%s</td>', $myrow['description']);
 			printf("\n". '<td>%s</td>', ConvertSQLDate($myrow['mrpdate']));
 			printf("\n". '<td>%s</td>', ConvertSQLDate($myrow['duedate']));
-			printf("\n". '<td class=number>%s</td>', number_format($myrow['supplyquantity'],$myrow['decimalplaces']));
-			printf("\n". '<td class=number>%.2f</td>', number_format($myrow['computedcost'],2));
-			printf("\n". '<td class=number>%.2f</td>', number_format($myrow['supplyquantity'] * $myrow['computedcost'],2));
+			printf("\n". '<td class="number">%s</td>', number_format($myrow['supplyquantity'],$myrow['decimalplaces']));
+			printf("\n". '<td class="number">%.2f</td>', number_format($myrow['computedcost'],2));
+			printf("\n". '<td class="number">%.2f</td>', number_format($myrow['supplyquantity'] * $myrow['computedcost'],2));
 			if ($_POST['Consolidation']!='None') {
-				printf("\n". '<td class=number>%s</td>', $myrow['consolidatedcount']);
+				printf("\n". '<td class="number">%s</td>', $myrow['consolidatedcount']);
 			}
 			echo '</tr>';
 
@@ -338,7 +338,7 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 	echo '<option selected value="yes">' . _('Print With Alternating Highlighted Lines') . '</option>';
 	echo '<option value="no">' . _('Plain Print') . '</option>';
 	echo '</select></td></tr>';
-	echo '<tr><td>' . _('Cut Off Date') . ':</td><td><input type ="text" class=date alt="'.$_SESSION['DefaultDateFormat'] .'" name="cutoffdate" size="10" value="'.date($_SESSION['DefaultDateFormat']).'"></tr>';
+	echo '<tr><td>' . _('Cut Off Date') . ':</td><td><input type ="text" class="date" alt="'.$_SESSION['DefaultDateFormat'] .'" name="cutoffdate" size="10" value="'.date($_SESSION['DefaultDateFormat']).'"></tr>';
 	echo '</table><br /><div class="centre"><input type=submit name="Review" value="' . _('Review') . '"> <input type=submit name="PrintPDF" value="' . _('Print PDF') . '"></div>';
 
 	include('includes/footer.inc');

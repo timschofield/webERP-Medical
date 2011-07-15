@@ -547,7 +547,7 @@ echo '<table cellpadding=2 class="selection">
 		<td colspan="2">' . $WORow['units'] . '</td></tr>
 	<tr><td colspan=4></td></tr>
 	 <tr><td class="label">' . _('Date Material Issued') . ':</td>
-		<td><input type=text name=issuedate value=' . Date($_SESSION['DefaultDateFormat']) . ' class=date size=10 alt="'.$_SESSION['DefaultDateFormat'].'" ></td>
+		<td><input type=text name=issuedate value=' . Date($_SESSION['DefaultDateFormat']) . ' class="date" size=10 alt="'.$_SESSION['DefaultDateFormat'].'" ></td>
 		<td class="label">' . _('Issued From') . ':</td><td>';
 
 if (!isset($_POST['IssueItem'])){
@@ -612,8 +612,8 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 										$db);
 		$IssuedAlreadyRow = DB_fetch_row($IssuedAlreadyResult);
 
-		echo '<td class=number>' . number_format($WORow['qtyreqd']*$RequirementsRow['qtypu'],$RequirementsRow['decimalplaces']) . '</td>
-			<td class=number>' . number_format($IssuedAlreadyRow[0],$RequirementsRow['decimalplaces']) . '</td></tr>';
+		echo '<td class="number">' . number_format($WORow['qtyreqd']*$RequirementsRow['qtypu'],$RequirementsRow['decimalplaces']) . '</td>
+			<td class="number">' . number_format($IssuedAlreadyRow[0],$RequirementsRow['decimalplaces']) . '</td></tr>';
 	}
 
 	echo '</table><br />';
@@ -785,7 +785,7 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 	} else { //not controlled - an easy one!
 		echo '<input type="hidden" name="IssueItem" value="' . $_POST['IssueItem'] . '">';
 		echo '<tr><td>' . _('Quantity Issued') . ':</td>
-			  <td><input class=number type="textbox" name="Qty"></tr>';
+			  <td><input class="number" type="textbox" name="Qty"></tr>';
 		echo '<tr><td colspan=2><div class=centre><input type=submit name="Process" value="' . _('Process Items Issued') . '"></div></td></tr>';
 	}
 } //end if selecting new item to issue or entering the issued item quantities

@@ -501,9 +501,9 @@ If (isset($StockItemsResult)) {
 
 		printf('<td><font size=1><input type="submit" name="SelectedStockItem" value="%s" /></font></td>
 			<td><font size=1>%s</font></td>
-			<td class=number><font size=1>%s</font></td>
-			<td class=number><font size=1>%s</font></td>
-			<td class=number><font size=1>%s</font></td>
+			<td class="number"><font size=1>%s</font></td>
+			<td class="number"><font size=1>%s</font></td>
+			<td class="number"><font size=1>%s</font></td>
 			<td><font size=1>%s</font></td></tr>',
 			$myrow['stockid'],
 			$myrow['description'],
@@ -563,7 +563,7 @@ If (isset($SalesOrdersResult)) {
 			<td>%s</td>
 			<td>%s</td>
 			<td>%s</td>
-			<td class=number>%s</td>
+			<td class="number">%s</td>
 			</tr>',
 			$ViewPage,
 			$myrow['orderno'],

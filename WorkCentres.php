@@ -132,7 +132,7 @@ or deletion of the records*/
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
-				<td class=number>%s</td>
+				<td class="number">%s</td>
 				<td><a href="%s&SelectedWC=%s">' . _('Edit') . '</td>
 				<td><a href="%s&SelectedWC=%s&delete=yes">' . _('Delete') .'</td>
 				</tr>',

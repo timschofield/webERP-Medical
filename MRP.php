@@ -572,7 +572,7 @@ if (isset($_POST['submit'])) {
 		$leeway =0;
 	}
 
-	echo '<tr><td>' . _('Days Leeway') . ':</td><td><input type="text" name="Leeway" class=number size="4" value=' . $leeway . '>';
+	echo '<tr><td>' . _('Days Leeway') . ':</td><td><input type="text" name="Leeway" class="number" size="4" value=' . $leeway . '>';
 	echo '<tr><td>' ._('Use MRP Demands?') . ':</td>';
 	echo '<td><input type="checkbox" name="usemrpdemands" value="y" checked></td></tr>';
 	echo '<tr><td>' ._('Use EOQ?') . ':</td>';

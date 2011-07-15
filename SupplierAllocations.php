@@ -502,14 +502,14 @@ if (isset($_POST['AllocTrans'])){
 	    		<td>'.$AllocnItem->TypeNo.'</td>
 			<td>'.$AllocnItem->TransDate.'</td>
 	    		<td>'.$AllocnItem->SuppRef.'</td>
-			<td class=number>' . number_format($AllocnItem->TransAmount,2) . '</td>
-	    		<td class=number>' . number_format($YetToAlloc,2) . '<input type=hidden name="YetToAlloc' .
+			<td class="number">' . number_format($AllocnItem->TransAmount,2) . '</td>
+	    		<td class="number">' . number_format($YetToAlloc,2) . '<input type=hidden name="YetToAlloc' .
 	    		 $Counter . '" value="' . $YetToAlloc . '"></td>';
 
 	    if (ABS($AllocnItem->AllocAmt-$YetToAlloc) < 0.01){
-			echo '<td class=number><input type="checkbox" name="All' .  $Counter . '" value="' . True . '">';
+			echo '<td class="number"><input type="checkbox" name="All' .  $Counter . '" value="' . True . '">';
 	    } else {
-	    	echo '<td class=number><input type="checkbox" name="All' .  $Counter . '" />';
+	    	echo '<td class="number"><input type="checkbox" name="All' .  $Counter . '" />';
 	    }
        echo '<input type=text class="number" name="Amt' . $Counter .'" maxlength=12 size=13 value="' .
        		$AllocnItem->AllocAmt . '"><input type=hidden name="AllocID' . $Counter .
@@ -521,10 +521,10 @@ if (isset($_POST['AllocTrans'])){
 
    }
 
-   echo '<tr><td colspan=5 class=number><b><U>' . _('Total Allocated') . ':</U></b></td>
-   		<td class=number><b><U>' .  number_format($TotalAllocated,2) . '</U></b></td></tr>';
+   echo '<tr><td colspan=5 class="number"><b><U>' . _('Total Allocated') . ':</U></b></td>
+   		<td class="number"><b><U>' .  number_format($TotalAllocated,2) . '</U></b></td></tr>';
 
-   echo '<tr><td colspan=5 class=number><b>' . _('Left to allocate') . '</b></td><td class=number><b>' .
+   echo '<tr><td colspan=5 class="number"><b>' . _('Left to allocate') . '</b></td><td class="number"><b>' .
      		number_format(-$_SESSION['Alloc']->TransAmt - $TotalAllocated,2) . '</b></td></tr></table>';
 
    echo '<div class="centre"><input type=hidden name="TotalNumberOfAllocs" value="' . $Counter . '" />';
@@ -596,8 +596,8 @@ if (isset($_POST['AllocTrans'])){
 		<td>%s</td>
 		<td>%s</td>
 		<td>%s</td>
-		<td class=number>%0.2f</td>
-		<td class=number>%0.2f</td>
+		<td class="number">%0.2f</td>
+		<td class="number">%0.2f</td>
 		<td><a href="%sAllocTrans=%s">' . _('Allocate') .'</td>
 		</tr>',
 		$myrow['typename'],
@@ -667,8 +667,8 @@ if (isset($_POST['AllocTrans'])){
 		<td>%s</td>
 		<td>%s</td>
 		<td>%s</td>
-		<td class=number>%0.2f</td>
-		<td class=number>%0.2f</td>
+		<td class="number">%0.2f</td>
+		<td class="number">%0.2f</td>
 		<td><a href="%sAllocTrans=%s">' . _('Allocate') . '</td>
 		</tr>',
 		$myrow['typename'],

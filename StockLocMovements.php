@@ -111,11 +111,11 @@ while ($myrow=DB_fetch_array($MovtsResult)) {
 			<td>%s</td>
 			<td>%s</td>
 			<td>%s</td>
-			<td class=number>%s</td>
+			<td class="number">%s</td>
 			<td>%s</td>
-			<td class=number>%s</td>
-			<td class=number>%s</td>
-			<td class=number>%s</td>
+			<td class="number">%s</td>
+			<td class="number">%s</td>
+			<td class="number">%s</td>
 			</tr>',
 			strtoupper($myrow['stockid']),
 			strtoupper($myrow['stockid']),

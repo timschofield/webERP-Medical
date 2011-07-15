@@ -135,8 +135,8 @@ if ( !isset($_GET['TypeID']) OR !isset($_GET['TransNo']) )
 							echo	'<td>' . $TranDate . '</td>
 										<td>' . MonthAndYearFromSQLDate($TransRow['lastdate_in_period']) . '</td>
 										<td><a href="' . $URL . '">' . $TransRow['accountname'] . '</a></td>
-										<td class=number>' . $DebitAmount . '</td>
-										<td class=number>' . $CreditAmount . '</td>
+										<td class="number">' . $DebitAmount . '</td>
+										<td class="number">' . $CreditAmount . '</td>
 										<td>' . $TransRow['narrative'] . '</td>
 										<td>' . $Posted . '</td>
 									</tr>';
@@ -172,8 +172,8 @@ if ( !isset($_GET['TypeID']) OR !isset($_GET['TransNo']) )
 							echo	'<td>' . $TranDate . '</td>
 										<td>' . MonthAndYearFromSQLDate($TransRow['lastdate_in_period']) . '</td>
 										<td><a href="' . $URL . $DetailRow[0] . $date . '">' . $TransRow['accountname']  . ' - ' . $DetailRow[4] . '</a></td>
-										<td class=number>' . $Debit . '</td>
-										<td class=number>' . $Credit . '</td>
+										<td class="number">' . $Debit . '</td>
+										<td class="number">' . $Credit . '</td>
 										<td>' . $TransRow['narrative'] . '</td>
 										<td>' . $Posted . '</td>
 									</tr>';
@@ -184,9 +184,9 @@ if ( !isset($_GET['TypeID']) OR !isset($_GET['TransNo']) )
 				DB_free_result($TransResult);
 
 				echo '<tr bgcolor="#FFFFFF">
-						<td class=number colspan=3><b>' . _('Total') . '</b></td>
-						<td class=number>' . number_format(($DebitTotal),2) . '</td>
-						<td class=number>' . number_format((-$CreditTotal),2) . '</td>
+						<td class="number" colspan=3><b>' . _('Total') . '</b></td>
+						<td class="number">' . number_format(($DebitTotal),2) . '</td>
+						<td class="number">' . number_format((-$CreditTotal),2) . '</td>
 						<td colspan=2>&nbsp</td>
 					</tr>';
 				echo '</table><br />';

@@ -212,9 +212,9 @@ or deletion of the records*/
 		<td>%s</td>
 		<td>%s</td>
 		<td>%s</td>
-		<td class=number>%s</td>
-		<td class=number>%s</td>
-		<td class=number>%s</td>
+		<td class="number">%s</td>
+		<td class="number">%s</td>
+		<td class="number">%s</td>
 		<td>%s</td>
 		<td><a href="%sSelectedSaleperson=%s">'. _('Edit') . '</a></td>
 		<td><a href="%sSelectedSaleperson=%s&delete=1">' . _('Delete') . '</a></td>
@@ -307,9 +307,9 @@ if (! isset($_GET['delete'])) {
 	echo '<tr><td>' . _('Salesperson Name') . ':</td><td><input type="text" '. (in_array('SalesmanName',$Errors) ? 'class="inputerror"' : '' ) .' name="SalesmanName"  size=30 maxlength=30 value="' . $_POST['SalesmanName'] . '"></td></tr>';
 	echo '<tr><td>' . _('Telephone No') . ':</td><td><input type="text" name="SManTel" size=20 maxlength=20 value="' . $_POST['SManTel'] . '"></td></tr>';
 	echo '<tr><td>' . _('Facsimile No') . ':</td><td><input type="text" name="SManFax" size=20 maxlength=20 value="' . $_POST['SManFax'] . '"></td></tr>';
-	echo '<tr><td>' . _('Commission Rate 1') . ':</td><td><input type="text" class=number name="CommissionRate1" size=5 maxlength=5 value="' . $_POST['CommissionRate1'] . '"></td></tr>';
-	echo '<tr><td>' . _('Breakpoint') . ':</td><td><input type="text" class=number name="Breakpoint" size=6 maxlength=6 value="' . $_POST['Breakpoint'] . '"></td></tr>';
-	echo '<tr><td>' . _('Commission Rate 2') . ':</td><td><input type="text" class=number name="CommissionRate2" size=5 maxlength=5 value="' . $_POST['CommissionRate2']. '"></td></tr>';
+	echo '<tr><td>' . _('Commission Rate 1') . ':</td><td><input type="text" class="number" name="CommissionRate1" size=5 maxlength=5 value="' . $_POST['CommissionRate1'] . '"></td></tr>';
+	echo '<tr><td>' . _('Breakpoint') . ':</td><td><input type="text" class="number" name="Breakpoint" size=6 maxlength=6 value="' . $_POST['Breakpoint'] . '"></td></tr>';
+	echo '<tr><td>' . _('Commission Rate 2') . ':</td><td><input type="text" class="number" name="CommissionRate2" size=5 maxlength=5 value="' . $_POST['CommissionRate2']. '"></td></tr>';
 
 	echo '<tr><td>' . _('Current?') . ':</td><td><select name="Current">';
 	if ($_POST['Current']==1){

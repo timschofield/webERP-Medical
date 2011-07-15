@@ -346,7 +346,7 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 	echo '<table class="selection"><tr>';
 	echo '<input type=hidden name="SupplierID" value="' . $_POST['SupplierID'] . '">';
 	echo '<input type=hidden name="SuppName" value="' . $_POST['SuppName'] . '">';
-	echo '<td>'._('Show all goods received after') . ': </td><td><input type=text class=date alt="'.
+	echo '<td>'._('Show all goods received after') . ': </td><td><input type=text class="date" alt="'.
 			$_SESSION['DefaultDateFormat'].'" name="RecdAfterDate" Value="' . $_POST['RecdAfterDate'] .
 			'" MAXLENGTH =10 size=10></td></tr>';;
 	echo '</table>';
@@ -407,9 +407,9 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 					<td>%s</td>
 					<td>%s</td>
 					<td>%s</td>
-					<td class=number>%s</td>
-					<td class=number>%s</td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
+					<td class="number">%s</td>
+					<td class="number">%s</td>
 					<td>%s</td>
 					</tr>',
 					$myrow['grnno'],

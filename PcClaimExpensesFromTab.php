@@ -293,7 +293,7 @@ if (isset($SelectedTabs)) {
 			} else {
 				printf('<td>%s</td>
 						<td>%s</td>
-						<td class=number>%s</td>
+						<td class="number">%s</td>
 						<td>%s</td>
 						<td>%s</td>
 						<td>%s</td>

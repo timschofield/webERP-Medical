@@ -111,7 +111,7 @@ if (isset($_POST['SearchRecurringOrders'])){
 			<td>%s</td>
 			<td>%s</td>
 			<td>%s</td>
-			<td class=number>%s</td>
+			<td class="number">%s</td>
 			</tr>',
 			$ModifyPage,
 			$myrow['recurrorderno'],

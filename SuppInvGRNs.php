@@ -126,9 +126,9 @@ foreach ($_SESSION['SuppTrans']->GRNs as $EnteredGRN){
 	echo '<tr><td>' . $EnteredGRN->GRNNo . '</td>
 		<td>' . $EnteredGRN->ItemCode . '</td>
 		<td>' . $EnteredGRN->ItemDescription . '</td>
-		<td class=number>' . number_format($EnteredGRN->This_QuantityInv,2) . '</td>
-		<td class=number>' . number_format($EnteredGRN->ChgPrice,2) . '</td>
-		<td class=number>' . number_format($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv,2) . '</td>
+		<td class="number">' . number_format($EnteredGRN->This_QuantityInv,2) . '</td>
+		<td class="number">' . number_format($EnteredGRN->ChgPrice,2) . '</td>
+		<td class="number">' . number_format($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv,2) . '</td>
 		<td><a href="' . $_SERVER['PHP_SELF'] . '?Modify=' . $EnteredGRN->GRNNo . '">'. _('Modify') . '</a></td>
 		<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $EnteredGRN->GRNNo . '">' . _('Delete') . '</a></td>
 	</tr>';
@@ -238,9 +238,9 @@ if (isset($_GET['Modify'])){
 	echo '<tr>
 		<td>' . $GRNTmp->GRNNo . '</td>
 		<td>' . $GRNTmp->ItemCode . ' ' . $GRNTmp->ItemDescription . '</td>
-		<td class=number>' . number_format($GRNTmp->QtyRecd - $GRNTmp->Prev_QuantityInv,2) . '</td>
+		<td class="number">' . number_format($GRNTmp->QtyRecd - $GRNTmp->Prev_QuantityInv,2) . '</td>
 		<td><input type="text" class="number" Name="This_QuantityInv" Value="' . $GRNTmp->This_QuantityInv . '" size=11 maxlength=10></td>
-		<td class=number>' . $GRNTmp->OrderPrice . '</td>
+		<td class="number">' . $GRNTmp->OrderPrice . '</td>
 		<td><input type="text" class="number" Name="ChgPrice" Value=' . $GRNTmp->ChgPrice . ' size="11" maxlength="10"></td>
 	</tr>';
 	echo '</table>';
@@ -307,11 +307,11 @@ else {
 		<td>' . $GRNTmp->PONo . '</td>
 		<td>' . $GRNTmp->ItemCode . '</td>
 		<td>' . $GRNTmp->ItemDescription . '</td>
-		<td class=number>' . $GRNTmp->QtyRecd . '</td>
-		<td class=number>' . $GRNTmp->Prev_QuantityInv . '</td>
-		<td class=number>' . ($GRNTmp->QtyRecd - $GRNTmp->Prev_QuantityInv) . '</td>
-		<td class=number>' . $GRNTmp->OrderPrice . '</td>
-		<td class=number>' . number_format($GRNTmp->OrderPrice * ($GRNTmp->QtyRecd - $GRNTmp->Prev_QuantityInv),2) . '</td>
+		<td class="number">' . $GRNTmp->QtyRecd . '</td>
+		<td class="number">' . $GRNTmp->Prev_QuantityInv . '</td>
+		<td class="number">' . ($GRNTmp->QtyRecd - $GRNTmp->Prev_QuantityInv) . '</td>
+		<td class="number">' . $GRNTmp->OrderPrice . '</td>
+		<td class="number">' . number_format($GRNTmp->OrderPrice * ($GRNTmp->QtyRecd - $GRNTmp->Prev_QuantityInv),2) . '</td>
 		</tr>';
 		$i++;
 		if ($i>15){

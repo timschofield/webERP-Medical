@@ -204,7 +204,7 @@ or deletion of the records*/
 
 		printf('<td>%s</td>
 			<td>%s</td>
-			<td class=number>%s</td>
+			<td class="number">%s</td>
 			<td>%s</td>
 			<td><a href="%s?SelectedExpense=%s">' . _('Edit') . '</td>
 			<td><a href="%s?SelectedExpense=%s&delete=yes" onclick="return confirm("' . _('Are you sure you wish to delete this expense code and all the details it may have set up?') .

@@ -228,10 +228,10 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 
 echo '<br /><table>
 	<tr><td>' . _('Existing Debtor Code') . ':</td>
-		<td><input type=Text name="OldDebtorNo" size=20 maxlength=20></td>
+		<td><input type="text" name="OldDebtorNo" size=20 maxlength=20></td>
 	</tr>';
 echo '<tr><td> ' . _('New Debtor Code') . ':</td>
-	<td><input type=Text name="NewDebtorNo" size=20 maxlength=20></td>
+	<td><input type="text" name="NewDebtorNo" size=20 maxlength=20></td>
 	</tr>
 	</table>';
 

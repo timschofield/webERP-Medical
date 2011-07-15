@@ -237,9 +237,9 @@ or deletion of the records*/
 					<td>%s</td>
 					<td>%s</td>
 					<td>%s</td>
-					<td class=number>%s</td>
-					<td class=number>%s</td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
+					<td class="number">%s</td>
+					<td class="number">%s</td>
 					<td><a href="%s&SelectedCurrency=%s">%s</a></td>
 					<td><a href="%s&SelectedCurrency=%sdelete=1">%s</a></td>
 					<td><a href="%s/ExchangeRateTrend.php?%s">' . _('Graph') . '</a></td>
@@ -266,8 +266,8 @@ or deletion of the records*/
 					<td>%s</td>
 					<td>%s</td>
 					<td>%s</td>
-					<td class=number>%s</td>
-					<td class=number>%s</td>
+					<td class="number">%s</td>
+					<td class="number">%s</td>
 					<td colspan=4>%s</td>
 					</tr>',
 					$ImageFile,
@@ -354,12 +354,12 @@ if (!isset($_GET['delete'])) {
 	echo '<tr><td>'._('Exchange Rate').':</td>';
 	echo '<td>';
 	if (!isset($_POST['ExchangeRate'])) {$_POST['ExchangeRate']='';}
-	echo '<input ' . (in_array('ExchangeRate',$Errors) ?  'class="inputerror"' : '' ) .' type="text" class=number name="ExchangeRate" size=10 maxlength=9 value='. $_POST['ExchangeRate'].'>';
+	echo '<input ' . (in_array('ExchangeRate',$Errors) ?  'class="inputerror"' : '' ) .' type="text" class="number" name="ExchangeRate" size=10 maxlength=9 value='. $_POST['ExchangeRate'].'>';
 	echo '</td></tr>';
 	echo '<tr><td>'._('Decimal Places to Show').':</td>';
 	echo '<td>';
 	if (!isset($_POST['DecimalPlaces'])) {$_POST['DecimalPlaces']=2;}
-	echo '<input ' . (in_array('DecimalPlaces',$Errors) ?  'class="inputerror"' : '' ) .' type="text" class=number name="DecimalPlaces" size=10 maxlength=9 value='. $_POST['DecimalPlaces'].'>';
+	echo '<input ' . (in_array('DecimalPlaces',$Errors) ?  'class="inputerror"' : '' ) .' type="text" class="number" name="DecimalPlaces" size=10 maxlength=9 value='. $_POST['DecimalPlaces'].'>';
 	echo '</td></tr>';
 	echo '</table>';
 

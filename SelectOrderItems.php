@@ -1368,7 +1368,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 					<td><input class="number" type=text name="Discount_' . $OrderLine->LineNumber . '" size=5 maxlength=4 value=' . ($OrderLine->DiscountPercent * 100) . '></td>
 					<td><input class="number" type=text name="GPPercent_' . $OrderLine->LineNumber . '" size=3 maxlength=40 value=' . $OrderLine->GPPercent . '></td>';
 			} else {
-				echo '<td class=number>' . $OrderLine->Price . '</td><td></td>';
+				echo '<td class="number">' . $OrderLine->Price . '</td><td></td>';
 				echo '<input type=hidden name="Price_' . $OrderLine->LineNumber . '" value=' . $OrderLine->Price . '>';
 			}
 			if ($_SESSION['Items'.$identifier]->Some_Already_Delivered($OrderLine->LineNumber)){
@@ -1376,7 +1376,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			} else {
 				$RemTxt = _('Delete');
 			}
-			echo '</td><td class=number>' . $DisplayLineTotal . '</td>';
+			echo '</td><td class="number">' . $DisplayLineTotal . '</td>';
 			$LineDueDate = $OrderLine->ItemDue;
 			if (!Is_Date($OrderLine->ItemDue)){
 				$LineDueDate = DateAdd (Date($_SESSION['DefaultDateFormat']),'d', $_SESSION['Items'.$identifier]->DeliveryDays);
@@ -1407,7 +1407,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			$ColSpanNumber = 1;
 		}
 		echo '<tr class="EvenTableRows"><td class="number" colspan=7><b>' . _('TOTAL Excl Tax/Freight') . '</b></td>
-							<td colspan="' . $ColSpanNumber . '" class=number>' . $DisplayTotal . '</td></tr></table>';
+							<td colspan="' . $ColSpanNumber . '" class="number">' . $DisplayTotal . '</td></tr></table>';
 
 		$DisplayVolume = number_format($_SESSION['Items'.$identifier]->totalVolume,2);
 		$DisplayWeight = number_format($_SESSION['Items'.$identifier]->totalWeight,2);

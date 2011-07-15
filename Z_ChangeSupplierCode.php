@@ -19,7 +19,7 @@ echo '
 		<td><input type="Text" name="OldSupplierNo" size=20 maxlength=20></td>
 	</tr>
         <tr><td> ' . _('New Supplier Code') . ':</td>
-	<td><input type=Text name="NewSupplierNo" size=20 maxlength=20></td>
+	<td><input type="text" name="NewSupplierNo" size=20 maxlength=20></td>
 	</tr>
     </table>
     <input type=submit name="ProcessSupplierChange" value="' . _('Process') . '">

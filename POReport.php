@@ -552,8 +552,8 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 					}
 					$linectr++;
 				   // Detail for both DateType of Order
-					printf('<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td class=number>%s</td>
-						<td class=number>%s</td><td class=number>%s</td><td class=number>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>',
+					printf('<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td class="number">%s</td>
+						<td class="number">%s</td><td class="number">%s</td><td class="number">%s</td><td>%s</td><td>%s</td><td>%s</td></tr>',
 					$myrow['orderno'],
 					$myrow['itemcode'],
 					ConvertSQLDate($myrow['orddate']),
@@ -573,8 +573,8 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 					$TotalInvQty += $myrow['qtyinvoiced'];
 				} //END WHILE LIST LOOP
 				// Print totals
-					printf('<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td class=number>%s</td><td class=number>%s</td>
-						<td class=number>%s</td><td class=number>%s</td><td>%s</td><td>%s</td></tr>',
+					printf('<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td class="number">%s</td><td class="number">%s</td>
+						<td class="number">%s</td><td class="number">%s</td><td>%s</td><td>%s</td></tr>',
 					'Totals',
 					_('Lines - ') . $linectr,
 					' ',
@@ -614,8 +614,8 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 					$linectr++;
 				   // Detail for both DateType of Ship
 				   // In sql, had to alias grns.qtyrecd as quantityord so could use same name here
-					printf('<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td class=number>%s</td><td class=number>
-						%s</td><td class=number>%s</td><td class=number>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>',
+					printf('<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td class="number">%s</td><td class="number">
+						%s</td><td class="number">%s</td><td class="number">%s</td><td>%s</td><td>%s</td><td>%s</td></tr>',
 						$myrow['orderno'],
 						$myrow['itemcode'],
 						ConvertSQLDate($myrow['orddate']),
@@ -635,8 +635,8 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 						$TotalInvQty += $myrow['qtyinvoiced'];
 				} //END WHILE LIST LOOP
 				// Print totals
-					printf('<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td class=number>%s</td><td class=number>
-						%s</td><td class=number>%s</td><td class=number>%s</td><td>%s</td><td>%s</td></tr>',
+					printf('<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td class="number">%s</td><td class="number">
+						%s</td><td class="number">%s</td><td class="number">%s</td><td>%s</td><td>%s</td></tr>',
 					'Totals',
 					_('Lines - ') . $linectr,
 					' ',
@@ -715,7 +715,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 						echo '<tr class="OddTableRows">';
 						$k++;
 					}
-				printf('<td>%s</td><td>%s</td><td class=number>%s</td><td class=number>%s</td><td class=number>%s</td><td class=number>%s</td></tr>',
+				printf('<td>%s</td><td>%s</td><td class="number">%s</td><td class="number">%s</td><td class="number">%s</td><td class="number">%s</td></tr>',
 				$myrow[$summarytype],
 				$myrow[$description],
 				$myrow['quantityord'],
@@ -729,7 +729,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 				$TotalInvQty += $myrow['qtyinvoiced'];
 			} //END WHILE LIST LOOP
 			// Print totals
-				printf('<tr><td>%s</td><td>%s</td><td class=number>%s</td><td class=number>%s</td><td class=number>%s</td><td class=number>%s</td></tr>',
+				printf('<tr><td>%s</td><td>%s</td><td class="number">%s</td><td class="number">%s</td><td class="number">%s</td><td class="number">%s</td></tr>',
 				'Totals',
 				_('Lines - ') . $linectr,
 				$TotalQty,

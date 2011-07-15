@@ -397,7 +397,7 @@ if (isset($_GET['AllocTrans'])) {
 					echo '<td>' . $curTrans .'</td><td class="number">' . number_format($balance,2) . '</td></tr>';
 			} else {
 					echo '<input type=hidden name="YetToAlloc"' . $Counter . '" value="' . round($YetToAlloc,2) . '"></td>';
-					echo '<td class=number>';
+					echo '<td class="number">';
 
 					if (ABS($AllocnItem->AllocAmt-$YetToAlloc) < 0.01) {
 							echo '<input tabindex="'.$j.'" type="checkbox" name="All"' .  $Counter . '" value=' . True . ' />';
@@ -422,8 +422,8 @@ if (isset($_GET['AllocTrans'])) {
 				<input tabindex='.$j.' type=submit name=RefreshAllocTotal value=' . _('Recalculate Total To Allocate') . '></td>';
 
 		echo '<tr>
-				<td colspan=5 class=number><b>'._('Left to allocate').'</b></td>
-				<td class=number><b>' . number_format($remaining-$TotalAllocated,2).'</b></td>
+				<td colspan=5 class="number"><b>'._('Left to allocate').'</b></td>
+				<td class="number"><b>' . number_format($remaining-$TotalAllocated,2).'</b></td>
 			</tr>';
 		echo '</table><br />';
 		echo '<input type="hidden" name="TotalNumberOfAllocs" value="' . $Counter . '" />';
@@ -477,8 +477,8 @@ if (isset($_GET['AllocTrans'])) {
 					<td>' . $myrow['debtorno'] . '</td>
 					<td>' . $myrow['transno'] . '</td>
 					<td>' . ConvertSQLDate($myrow['trandate']) . '</td>
-					<td class=number>' . number_format($myrow['total'],2) . '</td>
-					<td class=number>' . number_format($myrow['total']-$myrow['alloc'],2) . '</td>';
+					<td class="number">' . number_format($myrow['total'],2) . '</td>
+					<td class="number">' . number_format($myrow['total']-$myrow['alloc'],2) . '</td>';
 			echo '<td><a href=' . $_SERVER['PHP_SELF']. '?AllocTrans=' . $myrow['id'] . '>' . _('Allocate') . '</a></td></tr>';
 		}
 		DB_free_result($result);
@@ -521,7 +521,7 @@ if (isset($_GET['AllocTrans'])) {
 
 			if ( $curDebtor != $myrow['debtorno'] ) {
 				if ( $curTrans > 1 ) {
-					echo '<tr class="OddTableRows"><td colspan=7 class=number>' . number_format($balance,2) . '</td><td><b>Balance</b></td></tr>';
+					echo '<tr class="OddTableRows"><td colspan=7 class="number">' . number_format($balance,2) . '</td><td><b>Balance</b></td></tr>';
 				}
 
 				$balance = 0;
@@ -558,15 +558,15 @@ if (isset($_GET['AllocTrans'])) {
 					<td>' . $myrow['debtorno'] . '</td>
 					<td>' . $myrow['transno'] . '</td>
 					<td>' . ConvertSQLDate($myrow['trandate']) . '</td>
-					<td class=number>' . number_format($myrow['total'],2) . '</td>
-					<td class=number>' . number_format($myrow['total']-$myrow['alloc'],2) . '</td>';
+					<td class="number">' . number_format($myrow['total'],2) . '</td>
+					<td class="number">' . number_format($myrow['total']-$myrow['alloc'],2) . '</td>';
 			echo '<td>' . $allocate . '</td></tr>';
 
 			if ( $curTrans > $trans ) {
 				if (!isset($balance)) {
 					$balance=0;
 				}
-				echo '<tr class="OddTableRows"><td colspan=7 class=number>' . number_format($balance,2) . '</td><td><b>Balance</b></td></tr>';
+				echo '<tr class="OddTableRows"><td colspan=7 class="number">' . number_format($balance,2) . '</td><td><b>Balance</b></td></tr>';
 			}
 		}
 		DB_free_result($result);

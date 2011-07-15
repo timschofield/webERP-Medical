@@ -115,8 +115,8 @@ if (isset($_POST['ShowResults']) AND  $_POST['TransNo']!=''){
 				<td>'.$myrow['transno'].'</td>
 				<td>'.$myrow['reference'].'</td>
 				<td>'.$myrow['rate'].'</td>
-				<td class=number>'.number_format($myrow['totalamt'],2).'</td>
-				<td class=number>'.number_format($myrow['amt'],2).'</td>
+				<td class="number">'.number_format($myrow['totalamt'],2).'</td>
+				<td class="number">'.number_format($myrow['amt'],2).'</td>
 				</tr>';
 
 		$RowCounter++;
@@ -128,8 +128,8 @@ if (isset($_POST['ShowResults']) AND  $_POST['TransNo']!=''){
 		$AllocsTotal +=$myrow['amt'];
 		}
 		//end of while loop
-		echo '<tr><td colspan = 5 class=number>'._('Total allocated').'</td>
-			<td class=number>' . number_format($AllocsTotal,2) . '</td></tr>';
+		echo '<tr><td colspan = 5 class="number">'._('Total allocated').'</td>
+			<td class="number">' . number_format($AllocsTotal,2) . '</td></tr>';
 		echo '</table>';
 	}
 	}
