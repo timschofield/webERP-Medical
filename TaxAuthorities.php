@@ -307,7 +307,7 @@ echo '<td><input type="text" name="BankSwift" size=15 maxlength=14 value="' . $_
 
 echo '</table>';
 
-echo '<br /><div class="centre"><input type=submit name=submit value=' . _('Enter Information') . '></div></form>';
+echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div></form>';
 
 include('includes/footer.inc');
 
