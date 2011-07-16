@@ -78,7 +78,7 @@ if ($_POST['EntryType']=='FILE') {
 echo ' value="FILE">'. _('File Upload');
 echo '&nbsp; <input type="file" name="ImportFile" onClick="document.getElementById(\'FileEntry\').checked=true;" >';
 echo '</td></tr><tr><td colspan=3>';
-echo '<div class="centre"><input type=submit value="'. _('Set Entry Type'). ':"></div>';
+echo '<div class="centre"><input type="submit" value="'. _('Set Entry Type'). ':" /></div>';
 echo '</td></tr></table>';
 echo '</form>';
 
