@@ -412,7 +412,7 @@ if (DB_num_rows($result2) == 0) {
 }
 
 echo '</td></tr></table><br />';
-echo '<div class="centre"><input type=submit name="Search" value="' . _('Search Now') . '"><input type=submit name="CSV" value="' . _('CSV Format') . '"></div>';
+echo '<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '"><input type="submit" name="CSV" value="' . _('CSV Format') . '"></div>';
 if (isset($_SESSION['SalesmanLogin']) and $_SESSION['SalesmanLogin'] != '') {
 	prnMsg(_('Your account enables you to see only customers allocated to you'), 'warn', _('Note: Sales-person Login'));
 }
@@ -445,9 +445,9 @@ if (isset($result)) {
 				$ListPage++;
 			}
 			echo '</select>
-				<input type=submit name="Go1" value="' . _('Go') . '">
-				<input type=submit name="Previous" value="' . _('Previous') . '">
-				<input type=submit name="Next" value="' . _('Next') . '">';
+				<input type="submit" name="Go1" value="' . _('Go') . '">
+				<input type="submit" name="Previous" value="' . _('Previous') . '">
+				<input type="submit" name="Next" value="' . _('Next') . '">';
 			echo '</div>';
 		}
 		echo '<br /><table cellpadding=2 colspan=7 class="selection">';
@@ -486,7 +486,7 @@ if (isset($result)) {
 				echo '<tr class="OddTableRows">';
 				$k = 1;
 			}
-			echo '<td><font size=1><input type=submit name="Select" value="' . $myrow['debtorno'].' '.$myrow['branchcode'] . '"></font></td>
+			echo '<td><font size=1><input type="submit" name="Select" value="' . $myrow['debtorno'].' '.$myrow['branchcode'] . '"></font></td>
 				<td><font size=1>' . $myrow['name'] . '</font></td>
 				<td><font size=1>' . $myrow['brname'] . '</font></td>
 				<td><font size=1>' . $myrow['contactname'] . '</font></td>
@@ -521,9 +521,9 @@ if (!isset($_POST['CSV'])) {
 			$ListPage++;
 		}
 		echo '</select>
-			<input type=submit name="Go2" value="' . _('Go') . '">
-			<input type=submit name="Previous" value="' . _('Previous') . '">
-			<input type=submit name="Next" value="' . _('Next') . '">';
+			<input type="submit" name="Go2" value="' . _('Go') . '" />
+			<input type="submit" name="Previous" value="' . _('Previous') . '" />
+			<input type="submit" name="Next" value="' . _('Next') . '" />';
 	}
 	//end if results to show
 	echo '</div></form>';
