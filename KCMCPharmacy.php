@@ -654,7 +654,8 @@ if (isset($_POST['Patient'])) {
 			FROM stockmaster
 			LEFT JOIN stockcategory
 				ON stockmaster.categoryid=stockcategory.categoryid
-			WHERE stockcategory.stocktype='P'";
+			WHERE stockcategory.stocktype='P'
+			ORDER BY description";
 
 	$result=DB_query($sql, $db);
 	if (isset($_POST['StockID'])) {
