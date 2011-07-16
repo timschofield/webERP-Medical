@@ -4,7 +4,7 @@
 
 include('includes/session.inc');
 
-If (isset($_POST['PrintPDF'])
+if (isset($_POST['PrintPDF'])
 	AND isset($_POST['FromCriteria'])
 	AND mb_strlen($_POST['FromCriteria'])>=1
 	AND isset($_POST['ToCriteria'])
@@ -153,7 +153,7 @@ If (isset($_POST['PrintPDF'])
 	echo '</select></td></tr>';
 
 
-	echo '</table><br /><div class="centre"><input type=Submit Name="PrintPDF" Value="' . _('Print PDF') . '"></div>';
+	echo '</table><br /><div class="centre"><input type="submit" Name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
 
 	include('includes/footer.inc');
 }/*end of else not PrintPDF */
