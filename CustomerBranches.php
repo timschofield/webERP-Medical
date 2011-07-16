@@ -536,8 +536,8 @@ if (!isset($_GET['delete'])) {
 			$_POST['DeliverBlind'] = $myrow['deliverblind'];
 		}
 
-		echo '<input type=hidden name="SelectedBranch" value="' . $SelectedBranch . '">';
-		echo '<input type=hidden name="BranchCode" value="' . $_POST['BranchCode'] . '">';
+		echo '<input type="hidden" name="SelectedBranch" value="' . $SelectedBranch . '">';
+		echo '<input type="hidden" name="BranchCode" value="' . $_POST['BranchCode'] . '">';
 
 		echo '<p Class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') .
 			'" alt="">' . ' ' . _('Change Details for Branch'). ' '. $SelectedBranch . '</p>';
@@ -599,7 +599,7 @@ if (!isset($_GET['delete'])) {
 		exit;
 	}
 
-	echo '<input type=hidden name="DebtorNo" value="'. $DebtorNo . '">';
+	echo '<input type="hidden" name="DebtorNo" value="'. $DebtorNo . '" />';
 
 
 	echo '<tr><td>'._('Branch Name').':</td>';
