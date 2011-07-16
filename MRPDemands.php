@@ -101,7 +101,7 @@ function search(&$db,&$StockID) { //####SEARCH_SEARCH_SEARCH_SEARCH_SEARCH_SEARC
 				$k++;
 			}
 			$tabindex=$j+4;
-			echo '<td><input tabindex="'.$tabindex.'" type=submit name="StockID" value="'.$myrow['stockid'].'" /></td>
+			echo '<td><input tabindex="'.$tabindex.'" type="submit" name="StockID" value="'.$myrow['stockid'].'" /></td>
 				<td>'.$myrow['description'].'</td></tr>';
 			$j++;
 	}  //end of while loop
