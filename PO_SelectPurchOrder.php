@@ -35,7 +35,7 @@ if (isset($OrderNumber) && $OrderNumber != "") {
 } else {
 	if (isset($SelectedSupplier)) {
 		$Intro = _('For supplier') . ': ' . $SelectedSupplier . ' ' . _('and') . ' ';
-		echo '<input type=hidden name="SelectedSupplier" value=' . $SelectedSupplier . '>';
+		echo '<input type="hidden" name="SelectedSupplier" value=' . $SelectedSupplier . '>';
 	}
 }
 if (isset($_POST['SearchParts'])) {
@@ -102,7 +102,7 @@ if (isset($_POST['SearchParts'])) {
 if (!isset($OrderNumber) or $OrderNumber == "") {
 	echo '<table class="selection"><tr><td>';
 	if (isset($SelectedStockItem)) {
-		echo _('For the part') . ':<b>' . $SelectedStockItem . '</b> ' . _('and') . ' <input type=hidden name="SelectedStockItem" value="' . $SelectedStockItem . '">';
+		echo _('For the part') . ':<b>' . $SelectedStockItem . '</b> ' . _('and') . ' <input type="hidden" name="SelectedStockItem" value="' . $SelectedStockItem . '" />';
 	}
 	echo $Intro . _('Order Number') . ': <input type="text" name="OrderNumber" maxlength=8 size=9> ' . _('Into Stock Location') . ':<select name="StockLocation"> ';
 	$sql = "SELECT loccode, locationname FROM locations";
