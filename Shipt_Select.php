@@ -45,11 +45,11 @@ If (isset($ShiptRef) && $ShiptRef!="") {
 } else {
 	if (isset($SelectedSupplier)) {
 		echo '<br />' ._('For supplier'). ': '. $SelectedSupplier . ' ' . _('and'). ' ';
-		echo '<input type=hidden name="SelectedSupplier" value="'. $SelectedSupplier. '">';
+		echo '<input type="hidden" name="SelectedSupplier" value="'. $SelectedSupplier. '" />';
 	}
 	If (isset($SelectedStockItem)) {
 		 echo _('for the part'). ': ' . $SelectedStockItem . '.';
-		echo '<input type=hidden name="SelectedStockItem" value="'. $SelectedStockItem. '">';
+		echo '<input type="hidden" name="SelectedStockItem" value="'. $SelectedStockItem. '" />';
 	}
 }
 
