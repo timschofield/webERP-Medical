@@ -147,7 +147,7 @@ If ((isset($_POST['PrintPDF']))
 	echo '<tr><td>' . _('Date Of Payment') . ':</td>
             <td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="PaymentDate" maxlength=11 size=12 value=' . $DefaultDate . '></td></tr>';
 
-	echo '</table><div class="centre"><input type=Submit Name="PrintPDF" Value="' . _('Print PDF') . '"></div>';
+	echo '</table><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
 
 	include ('includes/footer.inc');
 } /*end of else not PrintPDF */
