@@ -168,7 +168,7 @@ while ($myrow=DB_fetch_array($GRNResults)){
 		}
 	}
 	if ($GRNAlreadyOnCredit == False){
-		echo '<tr><td><input type=Submit name="GRNNo" Value="' . $myrow['grnno'] . '"></td>
+		echo '<tr><td><input type="submit" name="GRNNo" value="' . $myrow['grnno'] . '" /></td>
 			  		<td>' . $myrow['orderno'] . '</td>
 			  		<td>' . $myrow['itemcode'] . '</td>
 			  		<td>' . $myrow['itemdescription'] . '</td>
