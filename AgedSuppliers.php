@@ -316,7 +316,7 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/m
 		echo "<option value='Yes'>" . _('Detailed Report') . '</option>';
 		echo '</select></td></tr>';
 
-		echo '</table><br /><div class="centre"><input tabindex="6" type=submit name="PrintPDF" value="' . _('Print PDF') . '"></div>';
+		echo '</table><br /><div class="centre"><input tabindex="6" type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
 	}
 	include('includes/footer.inc');
 } /*end of else not PrintPDF */
