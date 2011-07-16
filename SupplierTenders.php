@@ -150,7 +150,7 @@ if (isset($_POST['SupplierID']) and empty($_POST['TenderType']) and empty($_POST
 	echo '<option value=2>'._('Create a new offer from').' '.$Supplier .'</option>';
 	echo '<option value=3>'._('View any open tenders without an offer from').' '.$Supplier .'</option>';
 	echo '</select></td></tr>';
-	echo '<input type=hidden name=SupplierID value="'.$_POST['SupplierID'].'" />';
+	echo '<input type="hidden" name=SupplierID value="'.$_POST['SupplierID'].'" />';
 	echo '<tr><td colspan=2><div class=centre><input type="submit" name="submit" value="' . _('Select') . '"></div></td></tr>';
 	echo '</table></form>';
 }
@@ -335,7 +335,7 @@ if ($_POST['TenderType']!=3 and isset($_SESSION['offer']) and $_SESSION['offer']
 		}
 	}
 	echo '</table>';
-	echo '<input type=hidden name=TenderType value="'.$_POST['TenderType'].'">';
+	echo '<input type="hidden" name=TenderType value="'.$_POST['TenderType'].'" />';
 	if ($_POST['TenderType']==1) {
 		echo '<br /><div class="centre"><input type="submit" name="Update" value="Update offer">';
 		echo '<input type="submit" name="Refresh" value="Refresh screen"></div>';
