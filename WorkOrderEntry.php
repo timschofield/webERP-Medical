@@ -453,7 +453,7 @@ if (DB_num_rows($WOResult)==1){
 	}
 }
 
-echo '<input type=hidden name="WO" value=' .$_POST['WO'] . '>';
+echo '<input type="hidden" name="WO" value=' .$_POST['WO'] . '>';
 echo '<tr><td class="label">' . _('Work Order Reference') . ':</td><td>' . $_POST['WO'] . '</td></tr>';
 echo '<tr><td class="label">' . _('Factory Location') .':</td>
 	<td><select name="StockLocation">';
@@ -539,7 +539,7 @@ if (isset($NumberOfOutputs)){
 			echo '<input type="hidden" name="HasWOSerialNos' . $i .'" value="' . $_POST['HasWOSerialNos' . $i] . '">';
 		}
 	}
-	echo '<input type=hidden name="NumberOfOutputs" value=' . ($i -1).'>';
+	echo '<input type="hidden" name="NumberOfOutputs" value="' . ($i -1).'" />';
 }
 echo '</table>';
 
