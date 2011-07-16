@@ -269,7 +269,7 @@ if (isset($SupplierID) AND $SupplierID != '' AND !isset($_POST['SearchSupplier']
 		echo '<td>' . _('Text in Supplier') . ' <b>' . _('CODE') . '</b>:</font></td>';
 		echo '<td><input type="Text" name="SupplierCode" size=15 maxlength=18></td>';
 		echo '</tr></table><br />';
-		echo '<div class="centre"><input type=submit name="SearchSupplier" value="' . _('Find Suppliers Now') . '"></div></form>';
+		echo '<div class="centre"><input type="submit" name="SearchSupplier" value="' . _('Find Suppliers Now') . '"></div></form>';
 		include ('includes/footer.inc');
 		exit;
 	};
@@ -361,7 +361,7 @@ if (isset($SuppliersResult)) {
 			echo '<tr class="OddTableRows">';
 			$k++;
 		}
-	   printf('<td><font size=1><input type=submit name="SupplierID" value="%s" /></font></td>
+	   printf('<td><font size=1><input type="submit" name="SupplierID" value="%s" /></font></td>
 				<td><font size=1>%s</font></td>
 				<td><font size=1>%s</font></td>
 				<td><font size=1>%s</font></td>
@@ -517,9 +517,9 @@ if (!isset($SuppliersResult)) {
 	}
 	echo '</select></td></tr></table><br /><div class="centre">';
 	if (isset($_GET['Edit'])) {
-		echo '<input type=submit name="UpdateRecord" value="' . _('Update') . '">';
+		echo '<input type="submit" name="UpdateRecord" value="' . _('Update') . '" />';
 	} else {
-		echo '<input type=submit name="AddRecord" value="' . _('Add') . '">';
+		echo '<input type="submit" name="AddRecord" value="' . _('Add') . '" />';
 	}
 	echo '</div>';
 	echo '<div class="centre">';
