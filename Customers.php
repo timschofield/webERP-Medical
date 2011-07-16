@@ -671,11 +671,11 @@ if (!isset($DebtorNo)) {
 		$_POST['CustomerPOLine'] = $myrow['customerpoline'];
 		$_POST['typeid'] = $myrow['typeid'];
 
-		echo '<input type=hidden name="DebtorNo" value="' . $DebtorNo . '">';
+		echo '<input type="hidden" name="DebtorNo" value="' . $DebtorNo . '">';
 
 	} else {
 	// its a new customer being added
-		echo '<input type=hidden name="New" value="Yes">';
+		echo '<input type="hidden" name="New" value="Yes" />';
 
 		/* if $AutoDebtorNo in config.php has not been set or if it has been set to a number less than one,
 		then provide an input box for the DebtorNo to manually assigned */
