@@ -15,10 +15,10 @@ echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (isset($_POST['completed'])) {
-	$completed="=1";
-	$ShowChecked="checked='checked'";
+	$completed='=1';
+	$ShowChecked='checked="checked"';
 } else {
-	$completed=">=0";
+	$completed='>=0';
 	$ShowChecked='';
 }
 
@@ -464,7 +464,7 @@ if (!isset($SelectedStockItem)) {
    echo '<td><font size=3><b> ' ._('OR') . ' </b></font><font size=1>' . _('Enter extract of the Stock Code') . ':</font></td>';
    echo '<td><input type="text" name="StockCode" size=15 maxlength=18></td>';
    echo '</tr>';
-   echo '<tr><td colspan=4><div class=centre><input type="submit" name="SearchParts" value="' . _('Search Parts Now') . '">';
+   echo '<tr><td colspan=4><div class="centre"><input type="submit" name="SearchParts" value="' . _('Search Parts Now') . '">';
 
    if (count($_SESSION['AllowedPageSecurityTokens'])>1){
 		echo '<input type=submit name="ResetPart" value="' . _('Show All') . '"></div>';
