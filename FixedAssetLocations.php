@@ -105,7 +105,7 @@ echo '<form name="LocationForm" method="post" action="' . $_SERVER['PHP_SELF'] .
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo '<tr><th style="text-align:left">'._('Location ID').'</th>';
 if (isset($_GET['SelectedLocation'])) {
-	echo '<input type=hidden name=LocationID value="'.$LocationID.'">';
+	echo '<input type="hidden" name="LocationID" value="'.$LocationID.'" />';
 	echo '<td>'.$LocationID.'</td>';
 } else {
 	echo '<td><input type="text" name=LocationID size=6 value="'.$LocationID.'"></td></tr>';
