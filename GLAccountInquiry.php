@@ -75,7 +75,7 @@ while ($myrow=DB_fetch_array($Periods,$db)){
 	}
 }
 echo '</select></td></tr><table>';
-echo '<p><div class="centre"><input type=submit name="Show" value="'._('Show Account Transactions').'"></div></p></form>';
+echo '<p><div class="centre"><input type="submit" name="Show" value="'._('Show Account Transactions').'" /></div></p></form>';
 
 /* End of the Form  rest of script is what happens if the show button is hit*/
 
