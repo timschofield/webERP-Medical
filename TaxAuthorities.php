@@ -231,7 +231,7 @@ if (isset($SelectedTaxAuthID)) {
 	$_POST['BankSwift']	= $myrow['bankswift'];
 
 
-	echo '<input type=hidden name="SelectedTaxAuthID" value="' . $SelectedTaxAuthID . '">';
+	echo '<input type="hidden" name="SelectedTaxAuthID" value="' . $SelectedTaxAuthID . '" />';
 
 }  //end of if $SelectedTaxAuthID only do the else when a new record is being entered
 
