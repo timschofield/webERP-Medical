@@ -67,21 +67,22 @@ if (isset($_POST['SearchParts'])) {
 		$SearchString = '%' . str_replace(' ', '%', $_POST['Keywords']) . '%';
 
 		$SQL = "SELECT stockmaster.stockid,
-										stockmaster.description,
-										SUM(locstock.quantity) AS qoh,
-										stockmaster.units,
-										SUM(purchorderdetails.quantityord-purchorderdetails.quantityrecd) AS qord
-									FROM stockmaster INNER JOIN locstock
-										ON stockmaster.stockid = locstock.stockid
-										INNER JOIN purchorderdetails
-											ON stockmaster.stockid=purchorderdetails.itemcode
-									WHERE purchorderdetails.completed=0
-									AND stockmaster.description LIKE " . $SearchString ."
-									AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
-									GROUP BY stockmaster.stockid,
-										stockmaster.description,
-										stockmaster.units
-									ORDER BY stockmaster.stockid";
+						stockmaster.description,
+						SUM(locstock.quantity) AS qoh,
+						stockmaster.units,
+						SUM(purchorderdetails.quantityord-purchorderdetails.quantityrecd) AS qord
+					FROM stockmaster
+					INNER JOIN locstock
+						ON stockmaster.stockid = locstock.stockid
+					INNER JOIN purchorderdetails
+						ON stockmaster.stockid=purchorderdetails.itemcode
+					WHERE purchorderdetails.completed=0
+						AND stockmaster.description LIKE '" . $SearchString ."'
+						AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
+					GROUP BY stockmaster.stockid,
+							stockmaster.description,
+							stockmaster.units
+					ORDER BY stockmaster.stockid";
 
 
 	 } elseif ($_POST['StockCode']){
@@ -176,7 +177,7 @@ if (!isset($OrderNumber) or $OrderNumber=='' ){
 	} else {
 		echo '<option value="Rejected">' . _('Rejected') . '</option>';
 	}
- 	echo '</select> <input type=submit name="SearchOrders" value="' . _('Search Purchase Orders') . '"></td></tr></table>';
+ 	echo '</select> <input type="submit" name="SearchOrders" value="' . _('Search Purchase Orders') . '"></td></tr></table>';
 }
 
 $SQL="SELECT categoryid, categorydescription FROM stockcategory ORDER BY categorydescription";
@@ -200,8 +201,8 @@ echo '<td><font size=1>' . _('Enter text extracts in the') . '<b>' . _('descript
 echo '<td><input type="text" name="Keywords" size=20 maxlength=25></td></tr><tr><td></td>';
 echo '<td><font size<b>' . _('OR') . '</b></font><font size=1>' .  _('Enter extract of the') .  '<b>' .  _('Stock Code') . '</b>:</font></td>';
 echo '<td><input type="text" name="StockCode" size=15 maxlength=18></td></tr></table><br />';
-echo '<table><tr><td><input type=submit name="SearchParts" value="' . _('Search Parts Now') . '">';
-echo '<input type=submit name="ResetPart" value="' . _('Show All') . '"></td></tr></table>';
+echo '<table><tr><td><input type="submit" name="SearchParts" value="' . _('Search Parts Now') . '">';
+echo '<input type="submit" name="ResetPart" value="' . _('Show All') . '"></td></tr></table>';
 
 echo '<br />';
 
@@ -228,7 +229,7 @@ if (isset($StockItemsResult)) {
 			$k=1;
 		}
 
-		printf('<td><input type=submit name="SelectedStockItem" value="%s"</td>
+		printf('<td><input type="submit" name="SelectedStockItem" value="%s" /></td>
 				<td>%s</td>
 			<td class="number">%s</td>
 			<td class="number">%s</td>
