@@ -688,7 +688,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			   	echo '<td><input type="text" class="number" name="Quantity_' . $LineItem->LineNumber . '" maxlength=6 size=6 value=' . $LineItem->Quantity . '></td>';
 			   } else {
 				echo '<td class="number"><a href="' . $rootpath . '/CreditItemsControlled.php?LineNo=' . $LineItem->LineNumber . '">' . $LineItem->Quantity . '</a>
-              <input type=hidden name="Quantity_' . $LineItem->LineNumber . '" value=' . $LineItem->Quantity . '></td>';
+              <input type="hidden" name="Quantity_' . $LineItem->LineNumber . '" value="' . $LineItem->Quantity . '" /></td>';
 			   }
 
 			echo '<td>' . $LineItem->Units . '</td>
