@@ -252,7 +252,7 @@ if (isset($_GET['Modify'])){
 		echo '<input type="hidden" name="ShiptRef" Value="' . $GRNTmp->ShiptRef . '">';
 //	}
 
-	echo '<div class="centre"><p><input type=Submit Name="ModifyGRN" Value="' . _('Modify Line') . '"></p></div>';
+	echo '<div class="centre"><p><input type="submit" Name="ModifyGRN" Value="' . _('Modify Line') . '"></p></div>';
 
 
 	echo '<input type="hidden" name="GRNNumber" value="' . $GRNTmp->GRNNo . '" />';
@@ -292,7 +292,7 @@ else {
 
 		if (isset($POs[$GRNTmp->PONo]) and $POs[$GRNTmp->PONo] != $GRNTmp->PONo) {
 					$POs[$GRNTmp->PONo] = $GRNTmp->PONo;
-					echo '<tr><td><input type=Submit Name="AddPOToTrans" Value="' . $GRNTmp->PONo . '"></td><td colspan=3>' . _('Add Whole PO to Invoice') . '</td></tr>';
+					echo '<tr><td><input type="submit" Name="AddPOToTrans" Value="' . $GRNTmp->PONo . '"></td><td colspan=3>' . _('Add Whole PO to Invoice') . '</td></tr>';
 					$i = 0;
 			}
 			if ($i == 0){
@@ -319,9 +319,9 @@ else {
 		}
 		}
 		echo '</table>';
-		echo '<br /><div class="centre"><input type=Submit name="SelectAll" Value="' . _('Select All') . '">';
-		echo '<input type=Submit Name="DeSelectAll" value="' . _('Deselect All') . '">';
-		echo '<br /><input type=Submit Name="AddGRNToTrans" value="' . _('Add to Invoice') . '"></div>';
+		echo '<br /><div class="centre"><input type="submit" name="SelectAll" Value="' . _('Select All') . '">';
+		echo '<input type="submit" Name="DeSelectAll" value="' . _('Deselect All') . '">';
+		echo '<br /><input type="submit" Name="AddGRNToTrans" value="' . _('Add to Invoice') . '" /></div>';
 	}
 }
 
