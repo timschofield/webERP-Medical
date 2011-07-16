@@ -666,7 +666,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				echo '<td></td>';
 			}
 			echo '<td><input tabindex='.number_format($j+5).' type=submit name="Submit" value="'.$myrow['brname'].'" /></td>
-					<input type=hidden name="Select" value="'.$myrow['debtorno'].' - '.$myrow['branchcode'].'">
+					<input type="hidden" name="Select" value="'.$myrow['debtorno'].' - '.$myrow['branchcode'].'">
 					<td>'.$myrow['contactname'].'</td>
 					<td>'.$myrow['phoneno'].'</td>
 					<td>'.$myrow['faxno'].'</td>
@@ -1369,7 +1369,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 					<td><input class="number" type="text" name="GPPercent_' . $OrderLine->LineNumber . '" size=3 maxlength=40 value=' . $OrderLine->GPPercent . '></td>';
 			} else {
 				echo '<td class="number">' . $OrderLine->Price . '</td><td></td>';
-				echo '<input type=hidden name="Price_' . $OrderLine->LineNumber . '" value=' . $OrderLine->Price . '>';
+				echo '<input type="hidden" name="Price_' . $OrderLine->LineNumber . '" value=' . $OrderLine->Price . '>';
 			}
 			if ($_SESSION['Items'.$identifier]->Some_Already_Delivered($OrderLine->LineNumber)){
 				$RemTxt = _('Clear Remaining');
@@ -1391,7 +1391,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				echo $RowStarter;
 				echo '<td colspan=10>' . _('Narrative') . ':<textarea name="Narrative_' . $OrderLine->LineNumber . '" cols="100%" rows="1">' . stripslashes(AddCarriageReturns($OrderLine->Narrative)) . '</textarea><br /></td></tr>';
 			} else {
-				echo '<input type=hidden name="Narrative" value="">';
+				echo '<input type="hidden" name="Narrative" value="" />';
 			}
 
 			$_SESSION['Items'.$identifier]->total = $_SESSION['Items'.$identifier]->total + $LineTotal;
