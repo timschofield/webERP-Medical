@@ -112,6 +112,7 @@ if (!isset($_GET['InvoiceNumber']) AND !$_SESSION['ProcessingCredit']) {
 								stockmoves.qty as quantity,
 								stockmoves.discountpercent,
 								stockmoves.trandate,
+								stockmaster.eoq,
 								stockmaster.materialcost
 									+ stockmaster.labourcost
 									+ stockmaster.overheadcost AS standardcost,
@@ -149,15 +150,18 @@ if (!isset($_GET['InvoiceNumber']) AND !$_SESSION['ProcessingCredit']) {
 														$myrow['controlled'],
 														$myrow['serialised'],
 														$myrow['decimalplaces'],
+														2,
 														$myrow['narrative'],
 														'No',
 														-1,
 														$myrow['taxcatid'],
 														'',
 														'',
+														$myrow['standardcost'],
+														$myrow['eoq'],
 														'',
-														$myrow['standardcost']
-														);
+														1,
+														1);
 				$_SESSION['CreditItems']->GetExistingTaxes($LineNumber, $myrow['stkmoveno']);
 
 				if ($myrow['controlled']==1){/* Populate the SerialItems array too*/
