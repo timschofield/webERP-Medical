@@ -629,8 +629,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 	<td><input tabindex=3 type="Text" name="CustPhone" size=15	maxlength=18></td>
 	</tr>
 	</table>
-	<br /><div class="centre"><input tabindex=4 type=submit name="SearchCust" value="<?php echo _('Search Now'); ?>">
-	<input tabindex=5 type=submit action=reset value="<?php echo _('Reset'); ?>"></div>
+	<br /><div class="centre"><input tabindex=4 type="submit" name="SearchCust" value="<?php echo _('Search Now'); ?>">
+	<input tabindex=5 type="submit" action=reset value="<?php echo _('Reset'); ?>"></div>
 	<?php
 
 	if (isset($result_CustSelect)) {
@@ -665,7 +665,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			} else {
 				echo '<td></td>';
 			}
-			echo '<td><input tabindex='.number_format($j+5).' type=submit name="Submit" value="'.$myrow['brname'].'" /></td>
+			echo '<td><input tabindex='.number_format($j+5).' type="submit" name="Submit" value="'.$myrow['brname'].'" /></td>
 					<input type="hidden" name="Select" value="'.$myrow['debtorno'].' - '.$myrow['branchcode'].'">
 					<td>'.$myrow['contactname'].'</td>
 					<td>'.$myrow['phoneno'].'</td>
@@ -1418,8 +1418,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 					   </tr></table>';
 
 
-		echo '<br /><div class="centre"><input type=submit name="Recalculate" Value="' . _('Re-Calculate') . '">
-				<input type=submit name="DeliveryDetails" value="' . _('Enter Delivery Details and Confirm Order') . '"></div><hr>';
+		echo '<br /><div class="centre"><input type="submit" name="Recalculate" Value="' . _('Re-Calculate') . '">
+				<input type="submit" name="DeliveryDetails" value="' . _('Enter Delivery Details and Confirm Order') . '"></div><hr>';
 	} # end of if lines
 
 /* Now show the stock item selection search stuff below */
@@ -1614,8 +1614,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		echo '"></td></tr>';
 
 		echo '<tr>
-					<td style="text-align:center" colspan=1><input tabindex=4 type=submit name="Search" value="' . _('Search Now') . '"></td>
-					<td style="text-align:center" colspan=1><input tabindex=5 type=submit name="QuickEntry" value="' .  _('Use Quick Entry') . '"></td>';
+					<td style="text-align:center" colspan=1><input tabindex=4 type="submit" name="Search" value="' . _('Search Now') . '"></td>
+					<td style="text-align:center" colspan=1><input tabindex=5 type="submit" name="QuickEntry" value="' .  _('Use Quick Entry') . '"></td>';
 
 		if (!isset($_POST['PartSearch'])) {
 			echo '<script  type="text/javascript">if (document.SelectParts) {defaultControl(document.SelectParts.Keywords);}</script>';
@@ -1859,7 +1859,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		} //end of if it is a Quick Entry screen/part search or asset selection form to display
 
 		if ($_SESSION['Items'.$identifier]->ItemsOrdered >=1){
-	  		echo '<br /><div class="centre"><input type=submit name="CancelOrder" value="' . _('Cancel Whole Order') . '" onclick="return confirm(\'' . _('Are you sure you wish to cancel this entire order?') . '\');"></div>';
+	  		echo '<br /><div class="centre"><input type="submit" name="CancelOrder" value="' . _('Cancel Whole Order') . '" onclick="return confirm(\'' . _('Are you sure you wish to cancel this entire order?') . '\');"></div>';
 		}
 	}#end of else not selecting a customer
 
