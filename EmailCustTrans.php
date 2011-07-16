@@ -38,8 +38,8 @@ include ('includes/header.inc');
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<input type=hidden name="TransNo" value="' . $_GET['FromTransNo'] . '">';
-echo '<input type=hidden name="InvOrCredit" value="' . $_GET['InvOrCredit'] . '>';
+echo '<input type="hidden" name="TransNo" value="' . $_GET['FromTransNo'] . '" />';
+echo '<input type="hidden" name="InvOrCredit" value="' . $_GET['InvOrCredit'] . '" />';
 
 echo '<br /><table>';
 
