@@ -974,7 +974,7 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 	}
 
 	echo '</table><br />';
-	echo '<div class="centre"><input type=submit name="Process" value="' . _('Accept') . '"><input type=submit name="Cancel" value="' . _('Cancel') . '"></div>';
+	echo '<div class="centre"><input type="submit" name="Process" value="' . _('Accept') . '"><input type="submit" name="Cancel" value="' . _('Cancel') . '"></div>';
 
 	if (sizeOf($_SESSION['PaymentDetail']->GLItems)>0) {
 		echo '<br />
@@ -1008,7 +1008,7 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 			$PaymentTotal += $PaymentItem->Amount;
 		}
 		echo '<tr><td></td><td class="number"><b>' . number_format($PaymentTotal,2) . '</b></td><td></td><td></td><td></td></tr></table><br />';
-		echo '<input type=submit name="CommitBatch" value="' . _('Accept and Process Payment') . '">';
+		echo '<input type="submit" name="CommitBatch" value="' . _('Accept and Process Payment') . '">';
 	}
 
 } else {
@@ -1026,7 +1026,7 @@ the fields for entry of receipt amt and disc */
 		echo '<input type="hidden" name="discount" Value=0>';
 	}
 	echo '</table><br />';
-	echo '<input type=submit name="CommitBatch" value="' . _('Accept and Process Payment') . '">';
+	echo '<input type="submit" name="CommitBatch" value="' . _('Accept and Process Payment') . '" />';
 }
 echo '</form>';
 
