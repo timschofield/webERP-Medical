@@ -50,8 +50,8 @@ $valid = true;
 
 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '" enctype="multipart/form-data" >';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<input type=hidden name="LineNo" value="' . $LineNo . '">';
-echo '<input type=hidden name="StockID" value="'. $StockID. '">';
+echo '<input type="hidden" name="LineNo" value="' . $LineNo . '" />';
+echo '<input type="hidden" name="StockID" value="'. $StockID. '" />';
 echo '<table class="selection"><tr><td>';
 echo '<input type=radio name=EntryType onClick="submit();" ';
 if ($_POST['EntryType']=='KEYED') {
