@@ -502,7 +502,7 @@ if ($_SESSION['SuppTrans']->GLLink_Creditors ==1){
 		  	<td colspan=2 class="number"><input type="text" size="12" maxlength="10" name="OvAmount" value="' . number_format($_SESSION['SuppTrans']->OvAmount,2) . '"></td></tr>';
 }
 
-echo '<tr><td colspan=2><input type=Submit name="ToggleTaxMethod" value="' . _('Change Tax Calculation Method') .
+echo '<tr><td colspan=2><input type="submit" name="ToggleTaxMethod" value="' . _('Change Tax Calculation Method') .
 	  '"></td><td><select name="OverRideTax" onChange="ReloadForm(form1.ToggleTaxMethod)">';
 
 if ($_POST['OverRideTax']=='Man'){
@@ -565,13 +565,13 @@ foreach ($_SESSION['SuppTrans']->Taxes as $Tax) {
 
 $DisplayTotal = number_format($_SESSION['SuppTrans']->OvAmount + $TaxTotal,2);
 
-echo '<tr><td><font color=red>' . _('Credit Note Total') . '</font></td><td colspan=2 class="number"><b>' .
+echo '<tr><td><font color="red">' . _('Credit Note Total') . '</font></td><td colspan="2" class="number"><b>' .
 	  $DisplayTotal. '</b></td></tr></table> <br />';
 
-echo '<table class="selection"><tr><td><font color=red>' . _('Comments') . '</font></td><td><textarea name=Comments cols=40 rows=2>' .
+echo '<table class="selection"><tr><td><font color="red">' . _('Comments') . '</font></td><td><textarea name="Comments" cols="40" rows="2">' .
 	  $_SESSION['SuppTrans']->Comments . '</textarea></td></tr></table>';
 
-echo '<p><div class="centre"><input type=submit name="PostCreditNote" value="' . _('Enter Credit Note') . '"></div></p>';
+echo '<p><div class="centre"><input type="submit" name="PostCreditNote" value="' . _('Enter Credit Note') . '" /></div></p>';
 
 
 if (isset($_POST['PostCreditNote'])){
