@@ -161,8 +161,8 @@ or deletion of the records*/
 	} //END WHILE LIST LOOP
 	echo '</table><br />';
 	if (DB_num_rows($result)==0){
-		echo '<div class="centre"><input tabindex=1 type=submit name="NewEDIInvMsg" value="' .
-			_('Create New EDI Invoice Message From Default Template') . '"></div><br />';
+		echo '<div class="centre"><input tabindex=1 type="submit" name="NewEDIInvMsg" value="' .
+			_('Create New EDI Invoice Message From Default Template') . '" /></div><br />';
 	}
 } //end of ifs SelectedLine is not set
 
