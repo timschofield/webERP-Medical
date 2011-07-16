@@ -243,7 +243,7 @@ prnMsg( $TotalRecords . ' ' . _('records have been created'),'success');
 		 ':</td><td><input type ="text" class="number" name="Excludeamt" size="8" value="0">';
 	echo '<tr><td>' . _('Multiplier') .
 		 ':</td><td><input type ="text" class="number" name="Multiplier" size="2" value=1><tr><td></td></tr></table>';
-	echo '<br /><div class="centre"><input type=submit name="submit" value="' . _('Submit') .  '" /></div>';
+	echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Submit') .  '" /></div>';
 
 include('includes/footer.inc');
 ?>
