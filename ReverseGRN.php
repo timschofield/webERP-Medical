@@ -337,11 +337,11 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (!isset($_POST['RecdAfterDate']) OR !Is_Date($_POST['RecdAfterDate'])) {
-		$_POST['RecdAfterDate'] = Date($_SESSION['DefaultDateFormat'],Mktime(0,0,0,Date("m")-3,Date("d"),Date("Y")));
+		$_POST['RecdAfterDate'] = Date($_SESSION['DefaultDateFormat'],mktime(0,0,0,Date('m')-3,Date('d'),Date('Y')));
 	}
 	echo '<table class="selection"><tr>';
-	echo '<input type=hidden name="SupplierID" value="' . $_POST['SupplierID'] . '">';
-	echo '<input type=hidden name="SuppName" value="' . $_POST['SuppName'] . '">';
+	echo '<input type="hidden" name="SupplierID" value="' . $_POST['SupplierID'] . '" />';
+	echo '<input type="hidden" name="SuppName" value="' . $_POST['SuppName'] . '" />';
 	echo '<td>'._('Show all goods received after') . ': </td><td><input type="text" class="date" alt="'.
 			$_SESSION['DefaultDateFormat'].'" name="RecdAfterDate" Value="' . $_POST['RecdAfterDate'] .
 			'" MAXLENGTH =10 size=10></td></tr>';;
