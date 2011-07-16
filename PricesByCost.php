@@ -221,8 +221,8 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 		} //end of looping
 		echo '<input type="hidden" name="Counter" value="' . $PriceCounter . '" />';
 		echo '<tr>
-			<td colspan="12" style="text-align:center"><input type=submit name=submit value=' . _('Update') . '>
-			<a href="' . $_SERVER['PHP_SELF'] . '"><input type=submit  value=' . _('Back') . '><a/></td>
+			<td colspan="12" style="text-align:center"><input type="submit" name=submit value=' . _('Update') . '>
+			<a href="' . $_SERVER['PHP_SELF'] . '"><input type="submit"  value=' . _('Back') . '><a/></td>
 			 </tr></form>';
 	} else {
 		prnMsg(_('There were no prices meeting the criteria specified to review'),'info');
@@ -283,7 +283,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 	} //end while loop
 	DB_data_seek($result, 0);
 	echo '</select></td></tr>';
-	echo '</table><br /><p><div class="centre"><input type=submit name="submit" value="' . _('Submit') . '"></div></p>';
+	echo '</table><br /><p><div class="centre"><input type="submit" name="submit" value="' . _('Submit') . '" /></div></p>';
 } /*end of else not submit */
 include ('includes/footer.inc');
 ?>
