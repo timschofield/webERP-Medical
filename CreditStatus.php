@@ -212,8 +212,8 @@ if (!isset($_GET['delete'])) {
 		$_POST['ReasonDescription']  = $myrow['reasondescription'];
 		$_POST['DisallowInvoices']  = $myrow['dissallowinvoices'];
 
-		echo '<input type=hidden name="SelectedReason" value="' . $SelectedReason . '">';
-		echo '<input type=hidden name="ReasonCode" value="' . $_POST['ReasonCode'] . '">';
+		echo '<input type="hidden" name="SelectedReason" value="' . $SelectedReason . '" />';
+		echo '<input type="hidden" name="ReasonCode" value="' . $_POST['ReasonCode'] . '" />';
 		echo '<table class="selection"><tr><td>'. _('Status Code') .':</td><td>';
 		echo $_POST['ReasonCode'] . '</td></tr>';
 
