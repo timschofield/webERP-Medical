@@ -249,8 +249,8 @@ if (! isset($_GET['delete'])) {
 		$_POST['description']  = $myrow['description'];
 		$_POST['glaccount']  = $myrow['glaccount'];
 
-		echo '<input type=hidden name="SelectedExpense" value="' . $SelectedExpense . '">';
-		echo '<input type=hidden name="codeexpense" value="' . $_POST['codeexpense']. '">';
+		echo '<input type="hidden" name="SelectedExpense" value="' . $SelectedExpense . '" />';
+		echo '<input type="hidden" name="codeexpense" value="' . $_POST['codeexpense']. '" />';
 		echo '<table class="selection"> <tr><td>' . _('Code Of Expense') . ':</td><td>';
 
 		// We dont allow the user to change an existing type code
