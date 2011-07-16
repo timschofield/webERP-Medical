@@ -210,7 +210,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 	echo '<td><input type="Text" name="CustCode" size=15	maxlength=18></td>';
 	echo '</tr>';
 	echo '</table>';
-	echo '<br /><div class="centre"><input type=submit name="SearchCust" value="' . _('Search Now') . '"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="SearchCust" value="' . _('Search Now') . '"></div>';
 
 	if (isset($result_CustSelect)) {
 
@@ -239,7 +239,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				    $k=1;
 			   }
 
-			   printf('<td><font size=1><input type=submit name="Select" value="%s - %s" /></font></td>
+			   printf('<td><font size=1><input type="submit" name="Select" value="%s - %s" /></font></td>
 					<td><font size=1>%s</font></td>
 					<td><font size=1>%s</font></td>
 					<td><font size=1>%s</font></td>
@@ -894,10 +894,10 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			prnMsg (_('The GL code to write off the credit value to must be specified. Please select the appropriate GL code for the selection box'),'info');
 			$OKToProcess = false;
 		  }
-		  echo '<div class="centre"><input type=submit name="Update" value="' . _('Update') . '">
-                  				<input type=submit name="CancelCredit" value="' . _('Cancel') . '" onclick="return confirm(\'' . _('Are you sure you wish to cancel the whole of this credit note?') . '\');">';
+		  echo '<div class="centre"><input type="submit" name="Update" value="' . _('Update') . '">
+                  				<input type="submit" name="CancelCredit" value="' . _('Cancel') . '" onclick="return confirm(\'' . _('Are you sure you wish to cancel the whole of this credit note?') . '\');">';
 		  if (!isset($_POST['ProcessCredit']) AND $OKToProcess == true){
-			echo '<input type=submit name="ProcessCredit" value="' . _('Process Credit Note') . '"></div><br />';
+			echo '<input type="submit" name="ProcessCredit" value="' . _('Process Credit Note') . '"></div><br />';
 		  }
 	 } # end of if lines
 
@@ -943,9 +943,9 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		 echo '</tr>';
 		 echo '</table><br /><div class="centre">';
 
-		 echo '<input type=submit name="Search" value="' . _('Search Now') .'">';
-		 echo '<input type=submit Name="ChangeCustomer" value="' . _('Change Customer') . '">';
-		 echo '<input type=submit Name="Quick" value="' . _('Quick Entry') . '">';
+		 echo '<input type="submit" name="Search" value="' . _('Search Now') .'">';
+		 echo '<input type="submit" Name="ChangeCustomer" value="' . _('Change Customer') . '">';
+		 echo '<input type="submit" Name="Quick" value="' . _('Quick Entry') . '">';
 		 echo '</div>';
 
 		 if (isset($SearchResult)) {
@@ -977,7 +977,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 					    $k++;
 				   }
 
-				   printf('<td><font size=1><input type=submit name="NewItem" value="%s"></font></td>
+				   printf('<td><font size=1><input type="submit" name="NewItem" value="%s" /></font></td>
                    				<td><font size=1>%s</font></td>
                    				<td><font size=1>%s</font></td>
                    				<td>%s</td></tr>',
