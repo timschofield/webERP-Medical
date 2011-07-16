@@ -35,9 +35,15 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate']) OR $InputError==1){
 
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<table class="selection"><tr><td>' . _('Enter the date from which orders are to be listed') . ':</td><td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="FromDate" maxlength=10 size=10 value="' . Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m'),Date('d')-1,Date('y'))) . '"></td></tr>';
-	echo '<tr><td>' . _('Enter the date to which orders are to be listed') . ':</td>
-			<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="ToDate" maxlength=10 size=10 value="' . Date($_SESSION['DefaultDateFormat']) . '"></td></tr>';
+	echo '<table class="selection">
+			<tr>
+				<td>' . _('Enter the date from which orders are to be listed') . ':</td>
+				<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="FromDate" maxlength="10" size="10" value="' . Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m'),Date('d')-1,Date('y'))) . '" /></td>
+			</tr>';
+	echo '<tr>
+				<td>' . _('Enter the date to which orders are to be listed') . ':</td>
+				<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="ToDate" maxlength="10" size="10" value="' . Date($_SESSION['DefaultDateFormat']) . '" /></td>
+			</tr>';
 	echo '<tr><td>' . _('Inventory Category') . '</td><td>';
 
 	$sql = "SELECT categorydescription,
@@ -157,7 +163,7 @@ if ($_POST['CategoryID']=='All' AND $_POST['Location']=='All'){
 			 WHERE stockmaster.categoryid ='" . $_POST['CategoryID'] . "'
 				  AND orddate >='" . FormatDateForSQL($_POST['FromDate']) . "'
 				  AND orddate <='" . FormatDateForSQL($_POST['ToDate']) . "'
-		 GROUP BY salesorders.orderno,
+			GROUP BY salesorders.orderno,
 				salesorders.debtorno,
 				salesorders.branchcode,
 				salesorders.customerref,
@@ -373,16 +379,18 @@ while ($myrow=DB_fetch_array($Result)){
 
 	/*OK now get the invoices where the item was charged */
 	$sql = "SELECT debtortrans.order_,
-			systypes.typename,
-			debtortrans.transno,
-	 		stockmoves.price,
-			-stockmoves.qty AS quantity
-		FROM debtortrans INNER JOIN stockmoves
-			ON debtortrans.type = stockmoves.type
-			AND debtortrans.transno=stockmoves.transno
-			INNER JOIN systypes ON debtortrans.type=systypes.typeid
-		WHERE debtortrans.order_ ='" . $OrderNo . "'
-		AND stockmoves.stockid ='" . $myrow['stkcode'] . "'";
+					systypes.typename,
+					debtortrans.transno,
+					stockmoves.price,
+					-stockmoves.qty AS quantity
+				FROM debtortrans
+				INNER JOIN stockmoves
+					ON debtortrans.type = stockmoves.type
+					AND debtortrans.transno=stockmoves.transno
+				INNER JOIN systypes
+					ON debtortrans.type=systypes.typeid
+				WHERE debtortrans.order_ ='" . $OrderNo . "'
+					AND stockmoves.stockid ='" . $myrow['stkcode'] . "'";
 
 	$InvoicesResult =DB_query($sql,$db);
 	if (DB_num_rows($InvoicesResult)>0){
