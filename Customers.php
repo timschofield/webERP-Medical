@@ -438,7 +438,7 @@ if (!isset($DebtorNo)) {
 	}
 
 	if ($SetupErrors>0) {
-		echo '<br /><div class=centre><a href="'.$_SERVER['PHP_SELF'] .'" >'._('Click here to continue').'</a></div>';
+		echo '<br /><div class="centre"><a href="'.$_SERVER['PHP_SELF'] .'" >'._('Click here to continue').'</a></div>';
 		include('includes/footer.inc');
 		exit;
 	}
