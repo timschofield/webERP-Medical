@@ -1077,7 +1077,7 @@ echo '<tr><td>'. _('Charge Freight Cost inc tax') .':</td>';
 echo '<td><input type="text" class="number" size=10 maxlength=12 name="FreightCost" value=' . $_SESSION['Items'.$identifier]->FreightCost . '></td>';
 
 if ($_SESSION['DoFreightCalc']==true){
-	echo '<td><input type=submit name="Update" value="' . _('Recalc Freight Cost') . '"></td></tr>';
+	echo '<td><input type="submit" name="Update" value="' . _('Recalc Freight Cost') . '"></td></tr>';
 }
 
 if ((!isset($_POST['ShipVia']) OR $_POST['ShipVia']=='') AND isset($_SESSION['Items'.$identifier]->ShipVia)){
@@ -1114,13 +1114,13 @@ echo '</select></td></tr>';
 
 echo '</table>';
 
-echo '<br /><div class="centre"><input type=submit name="BackToLineDetails" value="' . _('Modify Order Lines') . '"><br />';
+echo '<br /><div class="centre"><input type="submit" name="BackToLineDetails" value="' . _('Modify Order Lines') . '"><br />';
 
 if ($_SESSION['ExistingOrder']==0){
-	echo '<br /><br /><input type=submit name="ProcessOrder" value="' . _('Place Order') . '">';
-	echo '<br /><br /><input type=submit name="MakeRecurringOrder" value="' . _('Create Recurring Order') . '">';
+	echo '<br /><br /><input type="submit" name="ProcessOrder" value="' . _('Place Order') . '" />';
+	echo '<br /><br /><input type="submit" name="MakeRecurringOrder" value="' . _('Create Recurring Order') . '" />';
 } else {
-	echo '<br /><input type=submit name="ProcessOrder" value="' . _('Commit Order Changes') . '">';
+	echo '<br /><input type="submit" name="ProcessOrder" value="' . _('Commit Order Changes') . '" />';
 }
 
 echo '</div></form>';
