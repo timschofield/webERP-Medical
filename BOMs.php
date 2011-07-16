@@ -414,7 +414,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 			break;
 	}
 
-	echo '<br /><div class=centre><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Select a Different BOM') . '</a></div><br />';
+	echo '<br /><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Select a Different BOM') . '</a></div><br />';
 	echo '<table class="selection">';
 	// Display Manufatured Parent Items
 	$sql = "SELECT bom.parent,
