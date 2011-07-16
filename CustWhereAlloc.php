@@ -36,7 +36,7 @@ echo '<td>'._('Transaction Number') . ':</td>
 	<td><input tabindex=2 type="text" name="TransNo" maxlength=10 size=10 value="'. $_POST['TransNo'] . '"></td>';
 
 echo '</tr></table><br />
-	<div class="centre"><input tabindex=3 type=submit name="ShowResults" value="'._('Show How Allocated').'"></div>';
+	<div class="centre"><input tabindex=3 type="submit" name="ShowResults" value="'._('Show How Allocated').'" /></div>';
 
 if (isset($_POST['ShowResults']) AND  $_POST['TransNo']==''){
 	echo '<br />';
