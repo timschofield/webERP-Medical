@@ -323,7 +323,7 @@ foreach ($_SESSION['Items']->LineItems as $LnItm) {
 		if (isset($_POST['ProcessInvoice'])) {
 			echo '<td class="number">' . $LnItm->QtyDispatched . '</td>';
 		} else {
-			echo '<td class="number"><input type=hidden name="' . $LnItm->LineNumber . '_QtyDispatched"  value="' .
+			echo '<td class="number"><input type="hidden" name="' . $LnItm->LineNumber . '_QtyDispatched"  value="' .
 				$LnItm->QtyDispatched . '"><a href="' . $rootpath .'/ConfirmDispatchControlled_Invoice.php?LineNo='. $LnItm->LineNumber.'">' .$LnItm->QtyDispatched . '</a></td>';
 		}
 	} else {
@@ -1673,7 +1673,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 	$j++;
 	echo '<br /><input type=submit tabindex='.$j.' name="ProcessInvoice" Value="'._('Process Invoice').'" /></div>';
 
-	echo '<input type=hidden name="ShipVia" value="' . $_SESSION['Items']->ShipVia . '">';
+	echo '<input type="hidden" name="ShipVia" value="' . $_SESSION['Items']->ShipVia . '" />';
 }
 
 echo '</form>';
