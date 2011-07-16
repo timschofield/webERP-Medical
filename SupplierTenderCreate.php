@@ -502,7 +502,7 @@ if (isset($_POST['Suppliers'])) {
 	} else {
 		echo '<input type="Text" name="SupplierCode" size=15 maxlength=18>';
 	}
-	echo '</td></tr></table><br /><div class="centre"><input type=submit name="SearchSupplier" value="' . _('Search Now') . '"></div>';
+	echo '</td></tr></table><br /><div class="centre"><input type="submit" name="SearchSupplier" value="' . _('Search Now') . '"></div>';
 	echo '</form>';
 }
 
@@ -534,9 +534,9 @@ if (isset($_POST['SearchSupplier'])) {
 			$ListPage++;
 		}
 		echo '</select>
-			<input type=submit name="Go" value="' . _('Go') . '">
-			<input type=submit name="Previous" value="' . _('Previous') . '">
-			<input type=submit name="Next" value="' . _('Next') . '">';
+			<input type="submit" name="Go" value="' . _('Go') . '">
+			<input type="submit" name="Previous" value="' . _('Previous') . '">
+			<input type="submit" name="Next" value="' . _('Next') . '">';
 		echo '<br />';
 	}
 	echo '<input type="hidden" name="Search" value="' . _('Search Now') . '">';
@@ -566,7 +566,7 @@ if (isset($_POST['SearchSupplier'])) {
 			echo '<tr class="OddTableRows">';
 			$k = 1;
 		}
-		echo '<td><input type=submit name="SelectedSupplier" value="'.$myrow['supplierid'].'" /></td>
+		echo '<td><input type="submit" name="SelectedSupplier" value="'.$myrow['supplierid'].'" /></td>
 			<td>'.$myrow['suppname'].'</td>
 			<td>'.$myrow['currcode'].'</td>
 			<td>'.$myrow['address1'].'</td>
@@ -633,7 +633,7 @@ if (isset($_POST['Items'])) {
 		echo '<input type="text" name="StockCode" size=15 maxlength=18>';
 	}
 	echo '</td></tr></table><br />';
-	echo '<div class="centre"><input type=submit name="Search" value="' . _('Search Now') . '"></div><br /></form>';
+	echo '<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" /></div><br /></form>';
 	echo '<script  type="text/javascript">defaultControl(document.forms[0].StockCode);</script>';
 	echo '</form>';
 }
