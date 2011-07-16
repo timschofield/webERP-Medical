@@ -219,7 +219,7 @@ or deletion of the records*/
 		echo '</select></td></tr>';
 
 
-		echo '<input type=hidden name="SelectedTab" value="' . $SelectedTab . '">';
+		echo '<input type="hidden" name="SelectedTab" value="' . $SelectedTab . '" />';
 
 		echo '</td></tr></table>'; // close main table
 
