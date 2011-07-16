@@ -213,11 +213,11 @@ if (isset($_POST['submit']) or isset($_POST['pdf']) or isset($_POST['csv'])) {
 		header('Location: ' .$_SESSION['reports_dir'] . '/FixedAssetRegister_' . Date('Y-m-d') .'.csv');
 
 	} else {
-		echo '<input type=hidden name=FromDate value="' . $_POST['FromDate'] . '">';
-		echo '<input type=hidden name=ToDate value=' . $_POST['ToDate'] . '>';
-		echo '<input type=hidden name=AssetCategory value=' . $_POST['AssetCategory'] . '>';
-		echo '<input type=hidden name=AssetID value=' . $_POST['AssetID'] . '>';
-		echo '<input type=hidden name=AssetLocation value=' . $_POST['AssetLocation'] . '>';
+		echo '<input type="hidden" name="FromDate value="' . $_POST['FromDate'] . '" />';
+		echo '<input type="hidden" name="ToDate" value="' . $_POST['ToDate'] . '" />';
+		echo '<input type="hidden" name="AssetCategory" value="' . $_POST['AssetCategory'] . '" />';
+		echo '<input type="hidden" name="AssetID" value="' . $_POST['AssetID'] . '" />';
+		echo '<input type="hidden" name="AssetLocation" value="' . $_POST['AssetLocation'] . '" />';
 		//Total Values
 		echo '<tr><th style="vertical-align:top" colspan="5">' . _('TOTAL') . '</th>';
 		echo '<th style="text-align:right">' . number_format($TotalCostBfwd, 2) . '</th>';
