@@ -488,7 +488,7 @@ if (isset($_SESSION['Transfer'])){
 	} /*end of foreach TransferItem */
 
 	echo '</table><br />
-		<div class="centre"><input type=submit name="ProcessTransfer" value="'. _('Process Inventory Transfer'). '"><bR />
+		<div class="centre"><input type="submit" name="ProcessTransfer" value="'. _('Process Inventory Transfer'). '"><bR />
 		</form></div>';
 	echo '<a href="'.$_SERVER['PHP_SELF']. '?NewTransfer=true">'. _('Select A Different Transfer').'</a>';
 
@@ -515,7 +515,7 @@ if (isset($_SESSION['Transfer'])){
 			echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	}
-	echo '</select><input type=submit name="RefreshTransferList" value="' . _('Refresh Transfer List') . '"></td></tr></table><br />';
+	echo '</select><input type="submit" name="RefreshTransferList" value="' . _('Refresh Transfer List') . '" /></td></tr></table><br />';
 
 	$sql = "SELECT DISTINCT reference,
 				locations.locationname as trffromloc,
