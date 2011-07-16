@@ -703,7 +703,7 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 	unset($_SESSION['PO']);
 	unset($_POST['ProcessGoodsReceived']);
 
-	echo '<br /><div class=centre>'. _('GRN number'). ' '. $GRN .' '. _('has been processed').'<br />';
+	echo '<br /><div class="centre">'. _('GRN number'). ' '. $GRN .' '. _('has been processed').'<br />';
 	echo '<br /><a href=PDFGrn.php?GRNNo='.$GRN .'&PONo='.$PONo.'>'. _('Print this Goods Received Note (GRN)').'</a><br /><br />';
 	echo '<a href="' . $rootpath . '/PO_SelectOSPurchOrder.php">' .
 		_('Select a different purchase order for receiving goods against'). '</a></div>';
