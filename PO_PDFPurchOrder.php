@@ -403,7 +403,7 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 	} else {
 		echo '</table>';
 	}
-	echo '<br /><div class="centre"><input type=submit name="DoIt" value="' . _('OK') . '"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="DoIt" value="' . _('OK') . '" /></div>';
 	echo '</form>';
 	include('includes/footer.inc');
 }
