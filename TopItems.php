@@ -52,15 +52,15 @@ if (!(isset($_POST['Search']))) {
 	//view number of NumberOfTopItems items
 	echo '<tr>
 			<td>' . _('Number Of Top Items') . ' </td><td>:</td>
-			<td><input class="number" tabindex="4" type="Text" name="NumberOfTopItems" size="8"	maxlength="8" value=1></td>
+			<td><input class="number" tabindex="4" type="text" name="NumberOfTopItems" size="8"	maxlength="8" value=1></td>
 		 </tr>
 		 <tr>
 			<td></td>
 			<td></td>
 		</tr>
 	</table>
-	<br /><div class=centre>
-				<input tabindex=5 type=submit name="Search" value="' . _('Search') . '">
+	<br /><div class="centre">
+				<input tabindex="5" type="submit" name="Search" value="' . _('Search') . '">
 				</div></form>';
 } else {
 	// everything below here to view NumberOfTopItems items sale on selected location
