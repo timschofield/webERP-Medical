@@ -346,7 +346,7 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 			$_SESSION['DefaultDateFormat'].'" name="RecdAfterDate" Value="' . $_POST['RecdAfterDate'] .
 			'" MAXLENGTH =10 size=10></td></tr>';;
 	echo '</table>';
-	echo '<br /><div class="centre"><input type=submit name="ShowGRNS" value=' . _('Show Outstanding Goods Received') . '></div>';
+	echo '<br /><div class="centre"><input type="submit" name="ShowGRNS" value="' . _('Show Outstanding Goods Received') . '"/></div>';
 	if (isset($_POST['ShowGRNS'])){
 
 		$sql = "SELECT grnno,
