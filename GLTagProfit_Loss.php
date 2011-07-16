@@ -445,7 +445,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<input type="hidden" name="FromPeriod" value="' . $_POST['FromPeriod'] . '" />
-			<input type=hidden name="ToPeriod" value="' . $_POST['ToPeriod'] . '" />';
+			<input type="hidden" name="ToPeriod" value="' . $_POST['ToPeriod'] . '" />';
 
 	$NumberOfMonths = $_POST['ToPeriod'] - $_POST['FromPeriod'] + 1;
 
