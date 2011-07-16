@@ -120,7 +120,7 @@ if (DB_num_rows($AccountsResults)==0){
 
 include ('includes/GLPostings.inc');
 
-echo '</table><br /><div class="centre"><input type=submit tabindex="2" name="ShowRec" value="' . _('Show bank reconciliation statement') . '"></div><br />';
+echo '</table><br /><div class="centre"><input type="submit" tabindex="2" name="ShowRec" value="' . _('Show bank reconciliation statement') . '"></div><br />';
 
 
 if (isset($_POST['ShowRec']) OR isset($_POST['DoExchangeDifference'])){
@@ -330,7 +330,7 @@ if (isset($_POST['ShowRec']) OR isset($_POST['DoExchangeDifference'])){
 
 		echo '<tr><td colspan=7><hr></td></tr>
 				<tr><td colspan=7>' . _('It is normal for foreign currency accounts to have exchange differences that need to be reflected as the exchange rate varies. This reconciliation is prepared using the exchange rate set up in the currencies table (see the set-up tab). This table must be maintained with the current exchange rate before running the reconciliation. If you wish to create a journal to reflect the exchange difference based on the current exchange rate to correct the reconciliation to the actual bank statement balance click below.') . '</td></tr>';
-		echo '<tr><td colspan=7 align="center"><input type=submit name="DoExchangeDifference" value="' . _('Calculate and Post Exchange Difference') . '"></td></tr>';
+		echo '<tr><td colspan=7 align="center"><input type="submit" name="DoExchangeDifference" value="' . _('Calculate and Post Exchange Difference') . '" /></td></tr>';
 	}
 	echo '</table>';
 }
