@@ -424,7 +424,7 @@ if (count($_SESSION['Shipment']->LineItems)>0){
 echo '</table>';
 }//there are lines on the shipment
 
-echo '<br /><div class="centre"><input type=submit name="Update" Value="'. _('Update Shipment Details') . '"></div><br />';
+echo '<br /><div class="centre"><input type="submit" name="Update" value="'. _('Update Shipment Details') . '" /></div><br />';
 
 if (!isset($_POST['StockLocation'])) {
 	$_POST['StockLocation'] =$_SESSION['Shipment']->StockLocation;
