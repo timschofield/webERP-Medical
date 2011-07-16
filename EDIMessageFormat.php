@@ -190,12 +190,12 @@ if (isset($SelectedMessageLine)) {
 
 	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '?MessageType=INVOIC&PartnerCode=' . $myrow['partnercode'] . '">' . _('Review Message Lines') . '</a></div>';
 
-	echo '<input type=hidden name="SelectedMessageLine" value="' . $SelectedMessageLine . '">';
-	echo '<input type=hidden name="MessageType" value="' . $myrow['messagetype'] . '">';
-	echo '<input type=hidden name="PartnerCode" value="' . $myrow['partnercode'] . '">';
+	echo '<input type="hidden" name="SelectedMessageLine" value="' . $SelectedMessageLine . '" />';
+	echo '<input type="hidden" name="MessageType" value="' . $myrow['messagetype'] . '" />';
+	echo '<input type="hidden" name="PartnerCode" value="' . $myrow['partnercode'] . '" />';
 } else { //end of if $SelectedMessageLine only do the else when a new record is being entered
-	echo '<input type=hidden name="MessageType" value="' . $MessageType . '">';
-	echo '<input type=hidden name="PartnerCode" value="' . $PartnerCode . '">';
+	echo '<input type="hidden" name="MessageType" value="' . $MessageType . '" />';
+	echo '<input type="hidden" name="PartnerCode" value="' . $PartnerCode . '" />';
 }
 
 echo '<table class="selection">';
