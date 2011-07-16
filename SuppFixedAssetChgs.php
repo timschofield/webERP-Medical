@@ -140,7 +140,7 @@ echo '<tr><td>' . _('Amount') . ':</td>
 	<td><input type="text" class="number" name="Amount" size="12" maxlength="11" value="' .  $_POST['Amount'] . '"></td></tr>';
 echo '</table>';
 
-echo '<br /><div class=centre><input type="submit" name="AddAssetToInvoice" value="' . _('Enter Fixed Asset') . '"></div>';
+echo '<br /><div class="centre"><input type="submit" name="AddAssetToInvoice" value="' . _('Enter Fixed Asset') . '" /></div>';
 
 echo '</form>';
 include('includes/footer.inc');
