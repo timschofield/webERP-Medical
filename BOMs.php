@@ -576,15 +576,15 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 			$_POST['AutoIssue'] = $myrow['autoissue'];
 
 			prnMsg(_('Edit the details of the selected component in the fields below') . '. <br />' . _('Click on the Enter Information button to update the component details'),'info');
-			echo '<br /><input type=hidden name="SelectedParent" value="'.$SelectedParent.'">';
-			echo '<input type=hidden name="SelectedComponent" value="'.$SelectedComponent.'">';
+			echo '<br /><input type="hidden" name="SelectedParent" value="'.$SelectedParent.'">';
+			echo '<input type="hidden" name="SelectedComponent" value="'.$SelectedComponent.'">';
 			echo '<table class="selection">';
 			echo '<tr><th colspan=13><div class="centre"><font color=blue size=3><b>'. ('Edit Component Details') .'</font></b></th></tr>';
 			echo '<tr><td>' . _('Component') . ':</td><td><b>' . $SelectedComponent . '</b></td></tr>';
 
 		} else { //end of if $SelectedComponent
 
-			echo '<input type=hidden name="SelectedParent" value="'.$SelectedParent.'">';
+			echo '<input type="hidden" name="SelectedParent" value="'.$SelectedParent.'">';
 			/* echo "Enter the details of a new component in the fields below. <br />Click on 'Enter Information' to add the new component, once all fields are completed.";
 			*/
 			echo '<table class="selection">';
@@ -716,7 +716,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 
 			echo '</select></td></tr>';
 		} else {
-			echo '<input type=hidden name="AutoIssue" value=0>';
+			echo '<input type="hidden" name="AutoIssue" value="0" />';
 		}
 
 		echo '</table><br /><div class="centre"><input tabindex="8" type="Submit" name="Submit" value="' . _('Enter Information') . '"></form></div>';
