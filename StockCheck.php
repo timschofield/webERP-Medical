@@ -332,7 +332,7 @@ If (isset($_POST['PrintPDF'])
 				echo '<input type=checkbox name="NonZerosOnly" value=TRUE>';
 		}
 
-			echo '</td></tr></table><br /><div class="centre"><input type=Submit Name="PrintPDF" Value="' . _('Print and Process') . '"></div></form>';
+			echo '</td></tr></table><br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print and Process') . '" /></div></form>';
 	}
 	include('includes/footer.inc');
 
