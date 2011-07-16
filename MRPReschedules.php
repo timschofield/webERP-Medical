@@ -138,7 +138,7 @@ if (isset($_POST['PrintPDF'])) {
 	echo '<option value="PO">' . _('Purchase Orders Only').'</option>';
 	echo '</select></td></tr>';
 	echo '</table><br />';
-	echo '<div class="centre"><input type=submit name="PrintPDF" value="' . _('Print PDF') . '"></div>';
+	echo '<div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
 
 	include('includes/footer.inc');
 
