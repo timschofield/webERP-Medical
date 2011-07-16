@@ -495,7 +495,7 @@ if ($_SESSION['SuppTrans']->GLLink_Creditors ==1){
 
 	echo '<table class="selection"><tr><td><font color=red>' . _('Credit Amount in Supplier Currency') . ':</font></td>
 			<td colspan=2 class="number">' . number_format($_SESSION['SuppTrans']->OvAmount,2) . '</td></tr>';
-	echo '<input type=hidden name="OvAmount" value="' . number_format($_SESSION['SuppTrans']->OvAmount,2) . '">';
+	echo '<input type="hidden" name="OvAmount" value="' . number_format($_SESSION['SuppTrans']->OvAmount,2) . '">';
 } else {
 	echo '<table class="selection"><tr><td><font color=red>' . _('Credit Amount in Supplier Currency') .
 		  ':</font></td>
@@ -543,14 +543,14 @@ foreach ($_SESSION['SuppTrans']->Taxes as $Tax) {
 		}
 
 
-		echo '<input type=hidden name="TaxAmount'  . $Tax->TaxCalculationOrder . '"  value=' . round($_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount,2) . '>';
+		echo '<input type="hidden" name="TaxAmount'  . $Tax->TaxCalculationOrder . '"  value=' . round($_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount,2) . '>';
 
 		echo '</td><td class="number">' . number_format($_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount,2);
 
 	} else { /*Tax being entered manually accept the taxamount entered as is*/
 		$_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount = $_POST['TaxAmount'  . $Tax->TaxCalculationOrder];
 
-		echo  ' <input type=hidden name=TaxRate' . $Tax->TaxCalculationOrder . ' value=' . $_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxRate * 100 . '>';
+		echo  ' <input type="hidden" name=TaxRate' . $Tax->TaxCalculationOrder . ' value="' . $_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxRate * 100 . '" />';
 
 
 		echo '</td><td><input type="text" class="number" size=12 maxlength=12 name="TaxAmount'  . $Tax->TaxCalculationOrder . '"  value=' . round($_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount,2) . '>';
