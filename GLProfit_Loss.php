@@ -92,8 +92,8 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 
 	echo '</table>';
 
-	echo '<br /><div class="centre"><input type=submit Name="ShowPL" Value="'._('Show on Screen (HTML)').'"></div>';
-	echo '<br /><div class="centre"><input type=submit Name="PrintPDF" Value="'._('Produce PDF Report').'"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="ShowPL" value="'._('Show on Screen (HTML)').'" /></div>';
+	echo '<br /><div class="centre"><input type="submit" name="PrintPDF" value="'._('Produce PDF Report').'" /></div>';
 
 	/*Now do the posting while the user is thinking about the period to select */
 
