@@ -206,8 +206,8 @@ if (! isset($_GET['delete'])) {
 		$_POST['TypeTabCode'] = $myrow['typetabcode'];
 		$_POST['TypeTabDescription']  = $myrow['typetabdescription'];
 
-		echo '<input type=hidden name="SelectedTab" value="' . $SelectedTab . '">';
-		echo '<input type=hidden name="TypeTabCode" value="' . $_POST['TypeTabCode']. '">';
+		echo '<input type="hidden" name="SelectedTab" value="' . $SelectedTab . '" />';
+		echo '<input type="hidden" name="TypeTabCode" value="' . $_POST['TypeTabCode']. '" />';
 		echo '<table class="selection"> <tr><td>' . _('Code Of Type Of Tab') . ':</td><td>';
 
 		// We dont allow the user to change an existing type code
