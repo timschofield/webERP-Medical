@@ -395,7 +395,7 @@ function display(&$db,&$StockID,&$DemandID) { //####DISPLAY_DISPLAY_DISPLAY_DISP
 		echo '</select></td></tr>';
 
 		echo '</table>';
-		echo '<br /><div class=centre><input type="submit" name="submit" value="' . _('Enter Information') . '">&nbsp&nbsp';
+		echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '">&nbsp&nbsp';
 		echo '<input type="submit" name="listsome" value="' . _('List Selection') . '">&nbsp&nbsp';
 		echo '<input type="Submit" name="deletesome" value="' . _('Delete Demand Type') . '">';
 		// If mrpdemand record exists, display option to delete it
