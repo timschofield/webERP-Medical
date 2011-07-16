@@ -135,7 +135,7 @@ if ($_POST['First20_or_All']=='All'){
 echo '</select></td></tr>';
 
 
-echo '</table><br /><div class="centre"><input tabindex="6" type=submit name="ShowTransactions" value="' . _('Show selected') . ' ' . $TypeName . '">';
+echo '</table><br /><div class="centre"><input tabindex="6" type="submit" name="ShowTransactions" value="' . _('Show selected') . ' ' . $TypeName . '">';
 
 if (isset($_POST['BankAccount'])) {
 	echo '<p><a href="'.$rootpath.'/BankReconciliation.php?Account='.$_POST['BankAccount'].'">' . _('Show reconciliation') . '</a></p></div>';
@@ -316,7 +316,9 @@ if ($InputError !=1 AND isset($_POST['BankAccount']) AND $_POST['BankAccount']!=
 	}
 	//end of while loop
 
-	echo '</table><br /><div class="centre"><input type="hidden" name="RowCounter" value="' . $i . '" /><input type=submit name="Update" value="' . _('Update Matching') . '"></div>';
+	echo '</table><br /><div class="centre">
+				<input type="hidden" name="RowCounter" value="' . $i . '" />
+				<input type="submit" name="Update" value="' . _('Update Matching') . '" /></div>';
 
 }
 
