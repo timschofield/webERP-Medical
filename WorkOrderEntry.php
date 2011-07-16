@@ -543,9 +543,9 @@ if (isset($NumberOfOutputs)){
 }
 echo '</table>';
 
-echo '<div class="centre"><br /><input type=submit name="submit" value="' . _('Update') . '">';
+echo '<div class="centre"><br /><input type="submit" name="submit" value="' . _('Update') . '">';
 
-echo '<br /><input type=submit name="delete" value="' . _('Delete This Work Order') . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');">';
+echo '<br /><input type="submit" name="delete" value="' . _('Delete This Work Order') . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');">';
 
 echo '<br /></div>';
 
@@ -583,7 +583,7 @@ while ($myrow1 = DB_fetch_array($result1)) {
 		<td><input type="Text" name="StockCode" size=15 maxlength=18 value=" <?php if (isset($_POST['StockCode'])) echo $_POST['StockCode']; ?>"></td>
 		</tr>
 		</table>
-		<br /><div class="centre"><input type=submit name="Search" value=" <?php echo _('Search Now'); ?>">
+		<br /><div class="centre"><input type="submit" name="Search" value=" <?php echo _('Search Now'); ?>" />
 
 <?php
 
