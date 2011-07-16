@@ -756,7 +756,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 		echo '<input type="hidden" name="Category" value="'.$_POST['Category'].'">';
 		echo '<input type="hidden" name="SortBy" value="'.$_POST['SortBy'].'">';
 		echo '<input type="hidden" name="SummaryType" value="'.$_POST['SummaryType'].'">';
-		echo '<br /><div class=centre><input type="submit" name="submitcsv" value="' . _('Export as csv file') . '"></div></td>';
+		echo '<br /><div class="centre"><input type="submit" name="submitcsv" value="' . _('Export as csv file') . '"></div></td>';
 		echo '</form>';
 	} // End of if inputerror != 1
 } // End of function submit()
@@ -1525,10 +1525,10 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 
 	echo '<tr><td>&nbsp</td></tr>
 	<tr>
-		<td colspan=4><div class=centre><input type="submit" name="submit" value="' . _('Run Inquiry') . '" /></div></td>
+		<td colspan=4><div class="centre"><input type="submit" name="submit" value="' . _('Run Inquiry') . '" /></div></td>
 	</tr>
 	<tr>
-		<td colspan=4><div class=centre><input type="submit" name="submitcsv" value="' . _('Export as csv file') . '" /></div></td>
+		<td colspan=4><div class="centre"><input type="submit" name="submitcsv" value="' . _('Export as csv file') . '" /></div></td>
 	</tr>
 	</table>
 	<br/>';
