@@ -201,7 +201,7 @@ if (isset($_POST['SupplierCode'])) {
 } else {
 	echo '<input type="Text" name="SupplierCode" size=15 maxlength=18>';
 }
-echo '</td></tr></table><br /><div class="centre"><input type=submit name="Search" value="' . _('Search Now') . '"></div>';
+echo '</td></tr></table><br /><div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '"></div>';
 //if (isset($result) AND !isset($SingleSupplierReturned)) {
 if (isset($_POST['Search'])) {
 	$ListCount = DB_num_rows($result);
@@ -229,9 +229,9 @@ if (isset($_POST['Search'])) {
 			$ListPage++;
 		}
 		echo '</select>
-			<input type=submit name="Go" value="' . _('Go') . '" />
-			<input type=submit name="Previous" value="' . _('Previous') . '" />
-			<input type=submit name="Next" value="' . _('Next') . '" />';
+			<input type="submit" name="Go" value="' . _('Go') . '" />
+			<input type="submit" name="Previous" value="' . _('Previous') . '" />
+			<input type="submit" name="Next" value="' . _('Next') . '" />';
 		echo '<br />';
 	}
 	echo '<input type="hidden" name="Search" value="' . _('Search Now') . '" />';
@@ -261,7 +261,7 @@ if (isset($_POST['Search'])) {
 			echo '<tr class="OddTableRows">';
 			$k = 1;
 		}
-		echo '<td><input type=submit name="Select" value="'.$myrow['supplierid'].'" /></td>
+		echo '<td><input type="submit" name="Select" value="'.$myrow['supplierid'].'" /></td>
 			<td>'.$myrow['suppname'].'</td>
 			<td>'.$myrow['currcode'].'</td>
 			<td>'.$myrow['address1'].'</td>
@@ -289,9 +289,9 @@ if (isset($ListPageMax) and $ListPageMax > 1) {
 		$ListPage++;
 	}
 	echo '</select>
-		<input type=submit name="Go" value="' . _('Go') . '">
-		<input type=submit name="Previous" value="' . _('Previous') . '">
-		<input type=submit name="Next" value="' . _('Next') . '">';
+		<input type="submit" name="Go" value="' . _('Go') . '" />
+		<input type="submit" name="Previous" value="' . _('Previous') . '" />
+		<input type="submit" name="Next" value="' . _('Next') . '" />';
 	echo '<br />';
 }
 echo '</form>';
