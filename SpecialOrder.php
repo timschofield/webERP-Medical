@@ -147,7 +147,7 @@ if (!isset($_SESSION['SPL']->BranchCode)){
 				$k++;
 			}
 
-			printf('<td><input type=submit name="SelectBranch" value="%s" /></td><td>%s</td></tr>', $myrow['branchcode'], $myrow['brname']);
+			printf('<td><input type="submit" name="SelectBranch" value="%s" /></td><td>%s</td></tr>', $myrow['branchcode'], $myrow['brname']);
 
 //end of page full new headings if
 		}
@@ -651,10 +651,10 @@ echo '<tr><td>' . _('Required Delivery Date') . ':</td>
 
 echo '</table>'; /* end of main table */
 
-echo '<div class="centre"><input type=submit Name="EnterLine" value="' . _('Add Item to Order') . '">';
+echo '<div class="centre"><input type="submit" Name="EnterLine" value="' . _('Add Item to Order') . '" />';
 
-echo '<br /><br /><input type=submit Name="Cancel" value="' . _('Start Again') . '">';
-echo '<br /><br /><input type=submit Name="Commit" value="' . _('Process This Order') . '">';
+echo '<br /><br /><input type="submit" name="Cancel" value="' . _('Start Again') . '" />';
+echo '<br /><br /><input type="submit" name="Commit" value="' . _('Process This Order') . '" />';
 
 echo '</div></form>';
 include('includes/footer.inc');
