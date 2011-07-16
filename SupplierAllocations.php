@@ -525,8 +525,8 @@ if (isset($_POST['AllocTrans'])){
 
    echo '<div class="centre"><input type="hidden" name="TotalNumberOfAllocs" value="' . $Counter . '" />';
 
-   echo '<br /><input type=submit name="RefreshAllocTotal" value="' . _('Recalculate Total To Allocate') . '">';
-   echo '<input type=submit name=UpdateDatabase value="' . _('Process Allocations') . '"></div>';
+   echo '<br /><input type="submit" name="RefreshAllocTotal" value="' . _('Recalculate Total To Allocate') . '">';
+   echo '<input type="submit" name="UpdateDatabase" value="' . _('Process Allocations') . '" /></div>';
 
 } elseif(isset($_GET['SupplierID'])){
 
