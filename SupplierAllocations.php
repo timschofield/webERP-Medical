@@ -499,7 +499,7 @@ if (isset($_POST['AllocTrans'])){
 			<td>'.$AllocnItem->TransDate.'</td>
 	    		<td>'.$AllocnItem->SuppRef.'</td>
 			<td class="number">' . number_format($AllocnItem->TransAmount,2) . '</td>
-	    		<td class="number">' . number_format($YetToAlloc,2) . '<input type=hidden name="YetToAlloc' .
+	    		<td class="number">' . number_format($YetToAlloc,2) . '<input type="hidden" name="YetToAlloc' .
 	    		 $Counter . '" value="' . $YetToAlloc . '"></td>';
 
 	    if (ABS($AllocnItem->AllocAmt-$YetToAlloc) < 0.01){
@@ -508,7 +508,7 @@ if (isset($_POST['AllocTrans'])){
 	    	echo '<td class="number"><input type="checkbox" name="All' .  $Counter . '" />';
 	    }
        echo '<input type="text" class="number" name="Amt' . $Counter .'" maxlength=12 size=13 value="' .
-       		$AllocnItem->AllocAmt . '"><input type=hidden name="AllocID' . $Counter .
+       		$AllocnItem->AllocAmt . '"><input type="hidden" name="AllocID' . $Counter .
        		'" value=' . $AllocnItem->ID . '></td></tr>';
 
 	    $TotalAllocated = $TotalAllocated + $AllocnItem->AllocAmt;
@@ -523,7 +523,7 @@ if (isset($_POST['AllocTrans'])){
    echo '<tr><td colspan=5 class="number"><b>' . _('Left to allocate') . '</b></td><td class="number"><b>' .
      		number_format(-$_SESSION['Alloc']->TransAmt - $TotalAllocated,2) . '</b></td></tr></table>';
 
-   echo '<div class="centre"><input type=hidden name="TotalNumberOfAllocs" value="' . $Counter . '" />';
+   echo '<div class="centre"><input type="hidden" name="TotalNumberOfAllocs" value="' . $Counter . '" />';
 
    echo '<br /><input type=submit name="RefreshAllocTotal" value="' . _('Recalculate Total To Allocate') . '">';
    echo '<input type=submit name=UpdateDatabase value="' . _('Process Allocations') . '"></div>';
@@ -533,7 +533,7 @@ if (isset($_POST['AllocTrans'])){
   /*page called with a supplier code  so show the transactions to allocate
   specific to the supplier selected */
 
-  echo '<input type=hidden name=SupplierID value="' . $_GET['SupplierID'] . '">';
+  echo '<input type="hidden" name=SupplierID value="' . $_GET['SupplierID'] . '" />';
 
   /*Clear any previous allocation records */
 
