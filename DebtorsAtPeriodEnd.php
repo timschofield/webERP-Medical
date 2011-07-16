@@ -162,7 +162,7 @@ if (isset($_POST['PrintPDF'])
 	echo '</select></td></tr>';
 
 
-	echo "</table><br /><div class='centre'><input tabindex=5 type=Submit Name='PrintPDF' Value='" . _('Print PDF') . "'></div>";
+	echo '</table><br /><div class="centre"><input tabindex="5" type="submit" name="PrintPDF" value="' . _('Print PDF') . '"></div>';
 
 	include('includes/footer.inc');
 } /*end of else not PrintPDF */
