@@ -204,7 +204,7 @@ if (!(isset($_POST['Search']))) {
 		$i++;
 	}
 	echo '</table>';
-	echo '<br /><div class="centre"><input type=Submit Name="PrintPDF" value="' . _('Print To PDF') . '"></div>';
+	echo '<br /><div class="centre"><input type="submit" Name="PrintPDF" value="' . _('Print To PDF') . '" /></div>';
 	echo '</form>';
 }
 include ('includes/footer.inc');
