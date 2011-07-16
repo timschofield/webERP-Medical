@@ -22,7 +22,7 @@ if (!isset($_GET['TransferNo'])){
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table><tr><td>'._('Transfer docket to reprint').'</td>';
 	echo '<td><input type="text" class="number" size=10 name="TransferNo"></td></tr></table>';
-	echo '<div class="centre"><input type=submit Name="Print" Value="' . _('Print') .'">';
+	echo '<div class="centre"><input type="submit" name="Print" value="' . _('Print') .'" />';
 	include ('includes/footer.inc');
 	exit;
 }
