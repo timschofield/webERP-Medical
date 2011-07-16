@@ -135,7 +135,7 @@ if(isset($_POST['Submit']) AND $InputError==False){
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<table class="selection">';
-	echo '<tr><th colspan=4><input type=hidden name="Trf_ID" value="' . $Trf_ID . '"><font size=3 color=blue>'.
+	echo '<tr><th colspan=4><input type="hidden" name="Trf_ID" value="' . $Trf_ID . '"><font size=3 color=blue>'.
 			_('Inventory Location Transfer Shipment Reference').' # '. $Trf_ID. '</font></th></tr>';
 
 	$sql = "SELECT loccode, locationname FROM locations";
@@ -215,7 +215,9 @@ if(isset($_POST['Submit']) AND $InputError==False){
 	}
 
 	echo '</table><br /><div class="centre">
-		<input type=hidden name="LinesCounter" value='. $i .'><input type=submit name="EnterMoreItems" value="'. _('Add More Items'). '"><input type=submit name="Submit" value="'. _('Create Transfer Shipment'). '"><br />';
+		<input type="hidden" name="LinesCounter" value="'. $i .'" />
+		<input type="submit" name="EnterMoreItems" value="'. _('Add More Items'). '" />
+		<input type="submit" name="Submit" value="'. _('Create Transfer Shipment'). '" /><br />';
 	echo '<script  type="text/javascript">defaultControl(document.forms[0].StockID0);</script>';
 	echo '</form></div>';
 	include('includes/footer.inc');
