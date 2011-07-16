@@ -135,7 +135,7 @@ if (!isset($ShiptRef) or $ShiptRef==""){
 	}
 	echo '</select></td></tr></table>';
 
-	echo '<br /><div class="centre"><input type=submit name="SearchShipments" value="'. _('Search Shipments'). '"></div></div><br />';
+	echo '<br /><div class="centre"><input type="submit" name="SearchShipments" value="'. _('Search Shipments'). '"></div></div><br />';
 }
 
 $SQL="SELECT categoryid,
@@ -171,8 +171,8 @@ while ($myrow1 = DB_fetch_array($result1)) {
 </table><br />
 
 <?php
-echo '<div class="centre"><input type=submit name="SearchParts" value="'._('Search Parts Now').'">';
-echo '<input type=submit name="ResetPart" value="'. _('Show All') .'"></div><br />';
+echo '<div class="centre"><input type="submit" name="SearchParts" value="'._('Search Parts Now').'">';
+echo '<input type="submit" name="ResetPart" value="'. _('Show All') .'"></div><br />';
 
 if (isset($StockItemsResult)) {
 
@@ -201,7 +201,7 @@ if (isset($StockItemsResult)) {
 		}
 /*
 Code	 Description	On Hand		 Orders Ostdg     Units		 Code	Description 	 On Hand     Orders Ostdg	Units	 */
-		printf('<td><input type=submit name="SelectedStockItem" value="%s" /></td>
+		printf('<td><input type="submit" name="SelectedStockItem" value="%s" /></td>
 			<td>%s</td>
 			<td class="number">%s</td>
 			<td class="number">%s</td>
