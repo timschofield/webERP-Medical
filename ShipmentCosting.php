@@ -629,7 +629,7 @@ if ( isset($_GET['Close'])) { /* Only an opportunity to confirm user wishes to c
 			<option value="No">'. _('No') . '</option>
 			</select>';
 		}
-	echo '<br /><br /><input type=submit name="Close" value="'. _('Confirm OK to Close'). '">';
+	echo '<br /><br /><input type="submit" name="Close" value="'. _('Confirm OK to Close'). '" /s>';
 	echo '</form></div>';
 }
 
