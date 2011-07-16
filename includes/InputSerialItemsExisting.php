@@ -54,7 +54,7 @@ if ($_POST['EntryType'] == 'KEYED'){
 			}
                 }
                 echo '</select><br />';
-		echo '<br /><div class=centre><input type=submit name="AddBatches" value="'. _('Enter'). '"></div><br />';
+		echo '<br /><div class="centre"><input type=submit name="AddBatches" value="'. _('Enter'). '"></div><br />';
 		echo '</form>';
 		echo $ItemsAvailable . ' ' . _('items available');
 		echo '</td>';
