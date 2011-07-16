@@ -52,8 +52,8 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 
 	echo '</table>';
 
-	echo '<br /><div class="centre"><input type=submit Name="ShowBalanceSheet" Value="'._('Show on Screen (HTML)').'"></div>';
-	echo '<br /><div class="centre"><input type=submit Name="PrintPDF" Value="'._('Produce PDF Report').'"></div>';
+	echo '<br /><div class="centre"><input type="submit" Name="ShowBalanceSheet" Value="'._('Show on Screen (HTML)').'"></div>';
+	echo '<br /><div class="centre"><input type="submit" Name="PrintPDF" Value="'._('Produce PDF Report').'"></div>';
 
 	/*Now do the posting while the user is thinking about the period to select */
 	include ('includes/GLPostings.inc');
@@ -656,7 +656,7 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 		</tr>';
 
 	echo '</table>';
-	echo '<br /><div class="centre"><input type=submit Name="SelectADifferentPeriod" Value="'._('Select A Different Balance Date').'"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="SelectADifferentPeriod" value="'._('Select A Different Balance Date').'" /></div>';
 }
 
 echo '</form>';
