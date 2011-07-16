@@ -368,8 +368,8 @@ if (isset($SuppliersResult)) {
 				<td><font size=1>%s</font></td>
 				<td><font size=1>%s</font></td>
 			</tr>', $myrow['supplierid'], $myrow['suppname'], $myrow['currcode'], $myrow['address1'], $myrow['address2'], $myrow['address3']);
-		echo '<input type=hidden name=StockID value="' . $StockID . '">';
-		echo '<input type=hidden name=StockUOM value="' . $StockUOM . '">';
+		echo '<input type="hidden" name=StockID value="' . $StockID . '">';
+		echo '<input type="hidden" name=StockUOM value="' . $StockUOM . '">';
 
 	}
 	//end of while loop
@@ -425,10 +425,10 @@ if (!isset($SuppliersResult)) {
 	}
 	if (isset($_GET['Edit'])) {
 		echo '<tr><td>' . _('Supplier Name') . ':</td>
-		<td><input type=hidden name="SupplierID" value="' . $SupplierID . '">' . $SupplierID . ' - ' . $SuppName . '<input type=hidden name="WasEffectiveFrom" value="' . $myrow['effectivefrom'] . '"></td></tr>';
+		<td><input type="hidden" name="SupplierID" value="' . $SupplierID . '">' . $SupplierID . ' - ' . $SuppName . '<input type="hidden" name="WasEffectiveFrom" value="' . $myrow['effectivefrom'] . '"></td></tr>';
 	} else {
 		echo '<tr><td>' . _('Supplier Name') . ':</td>
-		<input type=hidden name="SupplierID" maxlength=10 size=11 value="' . $SupplierID . '">';
+		<input type="hidden" name="SupplierID" maxlength=10 size=11 value="' . $SupplierID . '">';
 		if ($SupplierID!='') {
 			echo '<td>'.$SuppName;
 		}
@@ -439,7 +439,7 @@ if (!isset($SuppliersResult)) {
 		}
 		echo '</td></tr>';
 	}
-   	echo '<td><input type=hidden name="StockID" maxlength=10 size=11 value="' . $StockID . '">';
+   	echo '<td><input type="hidden" name="StockID" maxlength=10 size=11 value="' . $StockID . '" />';
 	if (!isset($CurrCode)) {
 		$CurrCode = '';
 	}
@@ -462,7 +462,7 @@ if (!isset($SuppliersResult)) {
 		$_POST['MinOrderQty'] = '1';
 	}
 	echo '<tr><td>' . _('Currency') . ':</td>
-	<td><input type=hidden name="CurrCode" . value="' . $CurrCode . '">' . $CurrCode . '</td></tr>';
+	<td><input type="hidden" name="CurrCode" . value="' . $CurrCode . '" />' . $CurrCode . '</td></tr>';
 	echo '<tr><td>' . _('Price') . ' (' . _('in Supplier Currency') . '):</td>
 	<td><input type="text" class="number" name="Price" maxlength=12 size=12 value=' . number_format($_POST['Price'], $_SESSION['Currencies'][$CurrCode]['DecimalPlaces'] ,'.','') . '></td></tr>';
 	echo '<tr><td>' . _('Date Updated') . ':</td>
