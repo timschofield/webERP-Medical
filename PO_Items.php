@@ -1023,7 +1023,7 @@ if (isset($_POST['NonStockOrder'])) {
 				<tr><td>'._('Delivery Date').'</td>
 						<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="ReqDelDate" size=11 value="'.$_SESSION['PO'.$identifier]->DeliveryDate .'"></td></tr>';
 	echo '</table>';
-	echo '<div class="centre"><input type=submit name="EnterLine" value="Enter Item"></div>';
+	echo '<div class="centre"><input type="submit" name="EnterLine" value="Enter Item"></div>';
 }
 
 /* Now show the stock item selection search stuff below */
@@ -1074,8 +1074,8 @@ if (!isset($_GET['Edit'])) {
 		<tr><td></td>
 		<td><font size=3><b>' . _('OR') . ' </b></font><a target="_blank" href="'.$rootpath.'/Stocks.php">' . _('Create a New Stock Item') . '</a></td></tr>
 		</table><br />
-		<div class="centre"><input type=submit name="Search" value="' . _('Search Now') . '">
-		<input type=submit name="NonStockOrder" value="' . _('Order a non stock item') . '">
+		<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" />
+		<input type="submit" name="NonStockOrder" value="' . _('Order a non stock item') . '" />
 		</div><br />';
 
 
