@@ -113,7 +113,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 	}
 
 	// TempStockmoves function creates a temporary table of stockmoves that is used when the DateType
-	
+
 	// is Invoice Date
 
 	if ($_POST['DateType'] == 'Invoice') {
@@ -123,7 +123,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 	}
 
 	# Add more to WHERE statement, if user entered something for the part number,debtorno, name
-	
+
 	// Variables that end with Op - meaning operator - are either = or LIKE
 
 	$WherePart = ' ';
@@ -165,10 +165,10 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 	$WhereLineStatus = ' ';
 
 	# Had to use IF statement instead of comparing 'linestatus' to $_POST['LineStatus']
-	
+
 	#in WHERE clause because the WHERE clause did not recognize
 
-	
+
 	# that had used the IF statement to create a field caused linestatus
 
 	if ($_POST['LineStatus'] != 'All') {
@@ -177,10 +177,10 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 	}
 
 	// The following is from PDFCustomerList.php and shows how to set up WHERE clause
-	
+
 	// for multiple selections from Areas - decided to just allow selection of one Area at
 
-	
+
 	// a time, so used simpler code
 
 	$WhereArea = ' ';
@@ -296,10 +296,10 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 			$orderby = $_POST['SummaryType'];
 
 			// The following is because the 'extprice' summary is a special case - with the other
-			
+
 			// summaries, you group and order on the same field; with 'extprice', you are actually
 
-			
+
 			// grouping on the stkcode and ordering by extprice descending
 
 			if ($_POST['SummaryType'] == 'extprice') {
@@ -769,7 +769,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 			}
 		} // End of if ($_POST['ReportType']
 
-		
+
 		//echo "<br/>$sql<br/>";
 
 		$ErrMsg = _('The SQL to find the parts selected failed with the message');
@@ -871,7 +871,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 				$TotalInvQty+= $myrow['qtyinvoiced'];
 			} //END WHILE LIST LOOP
 
-			
+
 			// Print totals
 
 			if ($_POST['DateType'] == 'Order') {
@@ -969,16 +969,16 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 				$TotalInvQty+= $myrow['qtyinvoiced'];
 			} //END WHILE LIST LOOP
 
-			
+
 			// Print totals
 
 			printf('	%-30s | %-40s | %12s | %14s | %14s | %14s', _('Totals') , _('Lines - ') . $linectr, number_format($TotalQty, 2) , number_format($TotalExtCost, 2) , number_format($TotalExtPrice, 2) , number_format($TotalInvQty, 2) , ' ');
 		} // End of if ($_POST['ReportType']
 
-		
+
 	} // End of if inputerror != 1
 
-	
+
 } // End of function submit()
 
 
@@ -987,7 +987,7 @@ function display(&$db, $PartNumber, $DebtorNo, $DebtorName) //####DISPLAY_DISPLA
 {
 
 	// Display form fields. This function is called the first time
-	
+
 	// the page is called.
 
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
@@ -1139,26 +1139,26 @@ function display(&$db, $PartNumber, $DebtorNo, $DebtorName) //####DISPLAY_DISPLA
 	</table>
 	<br />';
 	echo '<div class="centre"><input type="submit" name="submit" value="' . _('Run Inquiry') . '" /></div><br />
-		<div class=centre><input type="submit" name="submitcsv" value="' . _('Export as csv file') . '" /></div></form>';
+		<div class="centre"><input type="submit" name="submitcsv" value="' . _('Export as csv file') . '" /></div></form>';
 } // End of function display()
 
 
 function TempStockmoves(&$db) {
 
 	// When report based on Invoice Date, use stockmoves as the main file, but credit
-	
+
 	// notes, which are type 11 in stockmoves, do not have the order number in the
 
-	
+
 	// reference field; instead they have "Ex Inv - " and then the transno from the
 
-	
+
 	// type 10 stockmoves the credit note was applied to. Use this function to load all
 
-	
+
 	// type 10 and 11 stockmoves into a temporary table and then update the
 
-	
+
 	// reference field for type 11 records with the orderno from the type 10 records.
 
 	$FromDate = FormatDateForSQL($_POST['FromDate']);
