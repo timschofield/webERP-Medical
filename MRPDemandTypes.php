@@ -155,8 +155,8 @@ if (isset($SelectedDT) and !isset($_GET['delete'])) {
 	$_POST['MRPDemandType'] = $myrow['mrpdemandtype'];
 	$_POST['Description'] = $myrow['description'];
 
-	echo '<input type=hidden name=SelectedDT value=' . $SelectedDT . '>';
-	echo '<input type=hidden name=MRPDemandType value="' . $_POST['MRPDemandType'] . '">';
+	echo '<input type="hidden" name="SelectedDT" value="' . $SelectedDT . '" />';
+	echo '<input type="hidden" name="MRPDemandType" value="' . $_POST['MRPDemandType'] . '" />';
 	echo '<table class="selection"><tr><td>' ._('Demand Type') . ':</td><td>' . $_POST['MRPDemandType'] . '</td></tr>';
 
 } else { //end of if $SelectedDT only do the else when a new record is being entered
