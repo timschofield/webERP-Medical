@@ -467,7 +467,7 @@ if (!isset($SelectedStockItem)) {
    echo '<tr><td colspan=4><div class="centre"><input type="submit" name="SearchParts" value="' . _('Search Parts Now') . '">';
 
    if (count($_SESSION['AllowedPageSecurityTokens'])>1){
-		echo '<input type=submit name="ResetPart" value="' . _('Show All') . '"></div>';
+		echo '<input type="submit" name="ResetPart" value="' . _('Show All') . '" /></div>';
    }
    echo '</td></tr></table>';
 
