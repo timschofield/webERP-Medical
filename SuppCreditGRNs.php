@@ -101,7 +101,7 @@ foreach ($_SESSION['SuppTrans']->GRNs as $EnteredGRN){
 
 echo '<tr><td colspan=5 class="number"><font size=2 color=navy>' . _('Total Value Credited Against Goods') . ':</font></td>
 		  <td class="number"><font size=2 color=navy><U>' . number_format($TotalValueCharged,2) . '</U></font></td></tr>';
-echo '</table><br /><div class=centre><a href="' . $rootpath . '/SupplierCredit.php">' . _('Back to Credit Note Entry') . '</a></div>';
+echo '</table><br /><div class="centre"><a href="' . $rootpath . '/SupplierCredit.php">' . _('Back to Credit Note Entry') . '</a></div>';
 
 /* Now get all the GRNs for this supplier from the database
 after the date entered */
@@ -242,7 +242,7 @@ if (isset($_POST['GRNNo']) AND $_POST['GRNNo']!=''){
 		echo '<input type="hidden" name="ShiptRef" Value="' . $myrow['shiptref'] . '">';
 	}
 
-	echo '<br /><div class=centre><input type=Submit Name="AddGRNToTrans" Value="' . _('Add to Credit Note') . '"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="AddGRNToTrans" value="' . _('Add to Credit Note') . '" /></div>';
 
 
 	echo '<input type="hidden" name="GRNNumber" value=' . $_POST['GRNNo'] . '>';
