@@ -264,9 +264,9 @@ if (isset($_POST['amend']) or isset($_POST['Create'])) {
 
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<input type=hidden name="ManufacturerID" value="'.$ManufacturerID.'">';
+	echo '<input type="hidden" name="ManufacturerID" value="'.$ManufacturerID.'" />';
 	echo '<table class="selection">';
-	echo '<input type=hidden name="New" value="Yes">';
+	echo '<input type="hidden" name="New" value="Yes" />';
 	echo '<tr><td>' . _('Manufacturer Name') . ':</td><td><input tabindex=1 type="text" name="ManufacturerName" size=42 maxlength=40 value="'.$_POST['ManufacturerName'].'"></td></tr>';
 	echo '<tr><td>' . _('Address Line 1') . ':</td><td><input tabindex=2 type="text" name="Address1" size=42 maxlength=40 value="'.$_POST['Address1'].'"></td></tr>';
 	echo '<tr><td>' . _('Address Line 2') . ':</td><td><input tabindex=3 type="text" name="Address2" size=42 maxlength=40 value="'.$_POST['Address2'].'"></td></tr>';
