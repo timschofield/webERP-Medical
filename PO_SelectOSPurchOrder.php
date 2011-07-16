@@ -49,10 +49,10 @@ if (isset($OrderNumber) && $OrderNumber!='') {
 } else {
 	if (isset($SelectedSupplier)) {
 		echo '<br /><div class="page_help_text">' . _('For supplier') . ': ' . $SelectedSupplier . ' ' . _('and') . ' ';
-		echo '<input type=hidden name="SelectedSupplier" value="' . $SelectedSupplier . '"></div>';
+		echo '<input type="hidden" name="SelectedSupplier" value="' . $SelectedSupplier . '" /></div>';
 	}
 	if (isset($SelectedStockItem)) {
-		 echo '<input type=hidden name="SelectedStockItem" value="' . $SelectedStockItem . '">';
+		 echo '<input type="hidden" name="SelectedStockItem" value="' . $SelectedStockItem . '">';
 	}
 }
 
