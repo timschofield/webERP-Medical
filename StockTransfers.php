@@ -454,7 +454,7 @@ if (isset($_POST['StockID'])) {
 } else {
 	echo '<input type="text" name="StockCode" size=21 value="" maxlength=20>';
 }
-echo '</td><td><input type=submit name="CheckCode" value="'._('Check Part').'"></td></tr>';
+echo '</td><td><input type="submit" name="CheckCode" value="'._('Check Part').'" /></td></tr>';
 
 if (isset($_SESSION['Transfer']->TransferItem[0]->ItemDescription) and mb_strlen($_SESSION['Transfer']->TransferItem[0]->ItemDescription)>1){
 	echo '<tr><td colspan=3><font color=BLUE size=3>' . $_SESSION['Transfer']->TransferItem[0]->ItemDescription . ' ('._('In Units of').' ' . $_SESSION['Transfer']->TransferItem[0]->PartUnit . ' )</font></td></tr>';
