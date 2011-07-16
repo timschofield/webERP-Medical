@@ -296,8 +296,8 @@ if (!isset($_GET['delete'])) {
 		$_POST['glaccountpcashtab']  = $myrow['glaccountpcash'];
 
 
-		echo '<input type=hidden name="SelectedTab" value="' . $SelectedTab . '">';
-		echo '<input type=hidden name="tabcode" value="' . $_POST['tabcode']. '">';
+		echo '<input type="hidden" name="SelectedTab" value="' . $SelectedTab . '" />';
+		echo '<input type="hidden" name="tabcode" value="' . $_POST['tabcode']. '" />';
 		echo '<table class="selection"> <tr><td>' . _('Tabcode') . ':</td><td>';
 
 		// We dont allow the user to change an existing tab code
