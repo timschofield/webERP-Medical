@@ -797,7 +797,7 @@ if (!isset($SelectedParent)) {
 	 ' <b>' . _('description') . '</b>:</font></td><td><input tabindex="1" type="Text" name="Keywords" size=20 maxlength=25></td>
 	 <td><font size=3><b>' . _('OR') . '</b></font></td><td><font size=1>' . _('Enter extract of the') .
      ' <b>' . _('Stock Code') . '</b>:</font></td><td><input tabindex="2" type="Text" name="StockCode" size=15 maxlength=18></td>
-	 </tr></table><br /><div class="centre"><input tabindex="3" type=submit name="Search" value="' . _('Search Now') . '"></div>';
+	 </tr></table><br /><div class="centre"><input tabindex="3" type="submit" name="Search" value="' . _('Search Now') . '"></div>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (isset($_POST['Search']) and isset($result) AND !isset($SelectedParent)) {
@@ -827,7 +827,7 @@ if (isset($_POST['Search']) and isset($result) AND !isset($SelectedParent)) {
 			$StockOnHand = number_format($myrow['totalonhand'],2);
 		}
 		$tab = $j+3;
-		printf('<td><input tabindex="'.$tab.'" type=submit name="Select" value="%s" /></td>
+		printf('<td><input tabindex="'.$tab.'" type="submit" name="Select" value="%s" /></td>
 		        <td>%s</td>
 			<td class="number">%s</td>
 			<td>%s</td></tr>',
