@@ -407,7 +407,7 @@ if (isset($_POST['PrintPDF'])){
 	echo '<tr><td>' . _('Activity Since'). ':</td><td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'"  name="ActivitySince" size=10 maxlength=10
 		value="' . $DefaultActivitySince . '"></td></tr>';
 
-	echo '</table><br /><div class="centre"><input type=Submit Name="PrintPDF" Value="'. _('Print PDF'). '"></div>';
+	echo '</table><br /><div class="centre"><input type="submit" name="PrintPDF" value="'. _('Print PDF'). '" /></div>';
 
 	include('includes/footer.inc');
 
