@@ -210,7 +210,7 @@ if (! isset($_GET['delete'])) {
 
 			$_POST['TaxProvinceName']  = $myrow['taxprovincename'];
 
-			echo '<input type=hidden name="SelectedTaxProvince" value="' . $myrow['taxprovinceid'] . '">';
+			echo '<input type="hidden" name="SelectedTaxProvince" value="' . $myrow['taxprovinceid'] . '">';
 			echo '<table class="selection">';
 		}
 
