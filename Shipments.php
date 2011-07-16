@@ -365,7 +365,7 @@ if (!isset($_SESSION['Shipment']->StockLocation)){
 	$sql = "SELECT locationname FROM locations WHERE loccode='" . $_SESSION['Shipment']->StockLocation . "'";
 	$resultStkLocs = DB_query($sql,$db);
 	$myrow=DB_fetch_array($resultStkLocs);
-	echo '<input type=hidden name=StockLocation value='.$_SESSION['Shipment']->StockLocation.'>';
+	echo '<input type="hidden" name=StockLocation value="'.$_SESSION['Shipment']->StockLocation.'" />';
  	echo $myrow['locationname'];
 }
 
