@@ -137,7 +137,7 @@ echo '<tr><td>' . _('Amount') . ':</td>
 	<td><input type="text" name="Amount" size="12" maxlength="11" value="' .  $_POST['Amount'] . '"></td></tr>';
 echo '</table>';
 
-echo '<br /><div class=centre><input type="submit" name="AddShiptChgToInvoice" value="' . _('Enter Shipment Charge') . '"></div>';
+echo '<br /><div class="centre"><input type="submit" name="AddShiptChgToInvoice" value="' . _('Enter Shipment Charge') . '"></div>';
 
 echo '</form>';
 include('includes/footer.inc');
