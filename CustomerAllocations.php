@@ -340,7 +340,7 @@ if (isset($_GET['AllocTrans'])) {
 		// Page called with trans number
 		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-		echo '<input type=hidden name="AllocTrans" value="' . $_POST['AllocTrans'] . '">';
+		echo '<input type="hidden" name="AllocTrans" value="' . $_POST['AllocTrans'] . '">';
 
 		// Show trans already allocated and potential new allocations
 
@@ -392,7 +392,7 @@ if (isset($_GET['AllocTrans'])) {
 					$balance+=$YetToAlloc;
 					echo '<td>' . $curTrans .'</td><td class="number">' . number_format($balance,2) . '</td></tr>';
 			} else {
-					echo '<input type=hidden name="YetToAlloc"' . $Counter . '" value="' . round($YetToAlloc,2) . '"></td>';
+					echo '<input type="hidden" name="YetToAlloc"' . $Counter . '" value="' . round($YetToAlloc,2) . '" /></td>';
 					echo '<td class="number">';
 
 					if (ABS($AllocnItem->AllocAmt-$YetToAlloc) < 0.01) {
