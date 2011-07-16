@@ -205,8 +205,8 @@ if (! isset($_GET['delete'])) {
 		$_POST['Fax']  = $myrow['fax'];
 		$_POST['Email']  = $myrow['email'];
 		$_POST['Mobile']  = $myrow['mobile'];
-		echo '<input type=hidden name="SelectedContact" value="' . $_POST['Contact'] . '">';
-		echo '<input type=hidden name="Contact" value="' . $_POST['Contact'] . '">';
+		echo '<input type="hidden" name="SelectedContact" value="' . $_POST['Contact'] . '">';
+		echo '<input type="hidden" name="Contact" value="' . $_POST['Contact'] . '">';
 		echo '<table><tr><td>' . _('Contact') . ':</td><td>' . $_POST['Contact'] . '</td></tr>';
 
 	} else { //end of if $SelectedContact only do the else when a new record is being entered
@@ -232,17 +232,17 @@ if (! isset($_GET['delete'])) {
 		$_POST['Email'] = '';
 	}
 
-	echo '<input type=hidden name="SupplierID" value="' . $SupplierID . '">
+	echo '<input type="hidden" name="SupplierID" value="' . $SupplierID . '" />
 		<tr><td>' . _('Position') . ':</td>
-		<td><input type=text name="Position" size=31 maxlength=30 value="' . $_POST['Position'] . '"></td></tr>
+		<td><input type="text" name="Position" size=31 maxlength=30 value="' . $_POST['Position'] . '"></td></tr>
 		<tr><td>' . _('Telephone No') . ':</td>
-		<td><input type=text name="Tel" size=31 maxlength=30 value="' . $_POST['Tel'] . '"></td></tr>
+		<td><input type="text" name="Tel" size=31 maxlength=30 value="' . $_POST['Tel'] . '"></td></tr>
 		<tr><td>' . _('Facsimile No') . ':</td>
-		<td><input type=text name="Fax" size=31 maxlength=30 value="' . $_POST['Fax'] . '"></td></tr>
+		<td><input type="text" name="Fax" size=31 maxlength=30 value="' . $_POST['Fax'] . '"></td></tr>
 		<tr><td>' . _('Mobile No') . ':</td>
-		<td><input type=text name="Mobile" size=31 maxlength=30 value="' . $_POST['Mobile'] . '"></td></tr>
+		<td><input type="text" name="Mobile" size=31 maxlength=30 value="' . $_POST['Mobile'] . '"></td></tr>
 		<tr><td><a href="Mailto:' . $_POST['Email'] . '">' . _('Email') . ':</a></td>
-		<td><input type=text name="Email" size=51 maxlength=50 value="' . $_POST['Email'] . '"></td></tr>
+		<td><input type="text" name="Email" size=51 maxlength=50 value="' . $_POST['Email'] . '"></td></tr>
 		</table><br />';
 
 	echo '<div class="centre"><input type="Submit" name="submit" value="' . _('Enter Information') . '">';

@@ -161,7 +161,7 @@ echo '<br />';
 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 if( isset($_POST['SelectedRole'])) {
-	echo '<input type=hidden name="SelectedRole" value="' . $_POST['SelectedRole'] . '">';
+	echo '<input type="hidden" name="SelectedRole" value="' . $_POST['SelectedRole'] . '">';
 }
 echo '<table class="selection">';
 if (!isset($_POST['SecRoleName'])) {

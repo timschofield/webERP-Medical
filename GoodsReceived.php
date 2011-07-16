@@ -70,7 +70,7 @@ if (!isset($_POST['ProcessGoodsReceived'])) {
 		$_POST['DefaultReceivedDate'] = Date($_SESSION['DefaultDateFormat']);
 	}
 
-	echo '<table class="selection"><tr><td>'. _('Date Goods/Service Received'). ':</td><td><input type=text class="date" alt="'.
+	echo '<table class="selection"><tr><td>'. _('Date Goods/Service Received'). ':</td><td><input type="text" class="date" alt="'.
 		$_SESSION['DefaultDateFormat'] .'" maxlength=10 size=10 onChange="return isDate(this, this.value, '."'".
 			$_SESSION['DefaultDateFormat']."'".')" name=DefaultReceivedDate value="' . $_POST['DefaultReceivedDate'] .
 				'"></td></tr></table><br />';
@@ -159,10 +159,10 @@ if (count($_SESSION['PO']->LineItems)>0 and !isset($_POST['ProcessGoodsReceived'
 
 		if ($LnItm->Controlled == 1) {
 
-			echo '<input type=hidden name="RecvQty_' . $LnItm->LineNo . '" value="' . $LnItm->ReceiveQty . '"><a href="GoodsReceivedControlled.php?LineNo=' . $LnItm->LineNo . '">' . number_format($LnItm->ReceiveQty,$LnItm->DecimalPlaces) . '</a></td>';
+			echo '<input type="hidden" name="RecvQty_' . $LnItm->LineNo . '" value="' . $LnItm->ReceiveQty . '"><a href="GoodsReceivedControlled.php?LineNo=' . $LnItm->LineNo . '" />' . number_format($LnItm->ReceiveQty,$LnItm->DecimalPlaces) . '</a></td>';
 
 		} else {
-			echo '<input type=text class="number" name="RecvQty_' . $LnItm->LineNo . '" maxlength=10 size=10 value="' . $LnItm->ReceiveQty . '"></td>';
+			echo '<input type="text" class="number" name="RecvQty_' . $LnItm->LineNo . '" maxlength=10 size=10 value="' . $LnItm->ReceiveQty . '"></td>';
 		}
 
 		if ($_SESSION['ShowValueOnGRN']==1) {
@@ -237,20 +237,20 @@ if (count($_SESSION['PO']->LineItems)>0){
 if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then dont bother proceeding cos nothing to do ! */
 
 	prnMsg(_('There is nothing to process') . '. ' . _('Please enter valid quantities greater than zero'),'warn');
-	echo '<div class="centre"><input type=submit name=Update Value=' . _('Update') . '></div>';
+	echo '<div class="centre"><input type="submit" name=Update Value=' . _('Update') . '></div>';
 
 } elseif ($NegativesFound){
 
 	prnMsg(_('Negative stocks would result by processing a negative delivery - quantities must be changed or the stock quantity of the item going negative corrected before this delivery will be processed.'),'error');
 
-	echo '<div class="centre"><input type=submit name=Update Value=' . _('Update') . '>';
+	echo '<div class="centre"><input type="submit" name=Update Value=' . _('Update') . '>';
 
 }elseif ($DeliveryQuantityTooLarge==1 AND isset($_POST['ProcessGoodsReceived'])){
 
 	prnMsg(_('Entered quantities cannot be greater than the quantity entered on the purchase invoice including the allowed over-receive percentage'). ' ' . '(' . $_SESSION['OverReceiveProportion'] .'%)','error');
 	echo '<br />';
 	prnMsg(_('Modify the ordered items on the purchase invoice if you wish to increase the quantities'),'info');
-	echo '<div class="centre"><input type=submit name=Update Value=' . _('Update') . '>';
+	echo '<div class="centre"><input type="submit" name=Update Value=' . _('Update') . '>';
 
 }  elseif (isset($_POST['ProcessGoodsReceived']) AND $SomethingReceived==1 AND $InputError == false){
 
@@ -707,7 +707,7 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 	unset($_SESSION['PO']);
 	unset($_POST['ProcessGoodsReceived']);
 
-	echo '<br /><div class=centre>'. _('GRN number'). ' '. $GRN .' '. _('has been processed').'<br />';
+	echo '<br /><div class="centre">'. _('GRN number'). ' '. $GRN .' '. _('has been processed').'<br />';
 	echo '<br /><a href=PDFGrn.php?GRNNo='.$GRN .'&PONo='.$PONo.'>'. _('Print this Goods Received Note (GRN)').'</a><br /><br />';
 	echo '<a href="' . $rootpath . '/PO_SelectOSPurchOrder.php">' .
 		_('Select a different purchase order for receiving goods against'). '</a></div>';
@@ -719,8 +719,8 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 
 	echo '<br /><div class="centre"><a href="' . $rootpath . '/PO_Items.php">' . _('Modify Order Items'). '</a></div>';
 
-	echo '<br /><div class="centre"><input type=submit name=Update Value=' . _('Update') . '></div><br />';
-	echo '<div class="centre"><input type=submit name="ProcessGoodsReceived" Value="' . _('Process Goods Received') . '"></div>';
+	echo '<br /><div class="centre"><input type="submit" name=Update value="' . _('Update') . '" /></div><br />';
+	echo '<div class="centre"><input type="submit" name="ProcessGoodsReceived" value="' . _('Process Goods Received') . '" /></div>';
 }
 
 echo '</form>';

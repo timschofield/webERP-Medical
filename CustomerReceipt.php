@@ -840,7 +840,7 @@ if (!isset($_SESSION['ReceiptBatch']->Narrative)) {
 	$_SESSION['ReceiptBatch']->Narrative='';
 }
 echo '<tr><td>' . _('Narrative') . ':</td><td><input tabindex=7 type="text" name="BatchNarrative" maxlength=50 size=52 value="' . $_SESSION['ReceiptBatch']->Narrative . '"></td></tr>';
-echo '<tr><td colspan=3><div class="centre"><input tabindex=8 type=submit name="BatchInput" Value="' . _('Accept') . '"></div></td></tr>';
+echo '<tr><td colspan=3><div class="centre"><input tabindex=8 type="submit" name="BatchInput" Value="' . _('Accept') . '"></div></td></tr>';
 echo '</table><br />';
 
 if (isset($_SESSION['ReceiptBatch'])){
@@ -1045,8 +1045,8 @@ if (((isset($_SESSION['CustomerRecord'])
 	echo '<td><input tabindex=11 type="text" name="CustInvNo" size=8 maxlength=8></td>';
 	echo '</tr></table>';
 	echo '<div class="centre"><br />';
-	echo '<input tabindex=11 type=submit name="Search" value="' . _('Search Now') . '">';
-	echo '<br/><br/><input tabindex=12 type=submit name="GLEntry" value="' . _('Enter A GL Receipt') . '"><br /></div>';
+	echo '<input tabindex=11 type="submit" name="Search" value="' . _('Search Now') . '">';
+	echo '<br/><br/><input tabindex=12 type="submit" name="GLEntry" value="' . _('Enter A GL Receipt') . '"><br /></div>';
 
 	if (isset($CustomerSearchResult)) {
 
@@ -1068,7 +1068,7 @@ if (((isset($_SESSION['CustomerRecord'])
 			}
 
 			printf('<td><font size=1>
-					<input tabindex='.number_format(12+$j).' type=submit name="Select" value="%s"></font></td>
+					<input tabindex="'.number_format(12+$j).'" type="submit" name="Select" value="%s"></font></td>
 					<td>%s</td></tr>',
 					$myrow['debtorno'],
 					$myrow['name']);

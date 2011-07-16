@@ -173,9 +173,9 @@ if (!isset($_GET['delete'])) {
 		$_POST['conPhone']  = $myrow['phoneno'];
 		$_POST['conNotes']  = $myrow['notes'];
 		$_POST['debtorno']  = $myrow['debtorno'];
-		echo '<input type=hidden name="Id" value='. $Id .'>';
-		echo '<input type=hidden name="Con_ID" value=' . $_POST['Con_ID'] . '>';
-		echo '<input type=hidden name="DebtorNo" value=' . $_POST['debtorno'] . '>';
+		echo '<input type="hidden" name="Id" value="'. $Id .'" />';
+		echo '<input type="hidden" name="Con_ID" value="' . $_POST['Con_ID'] . '" />';
+		echo '<input type="hidden" name="DebtorNo" value="' . $_POST['debtorno'] . '" />';
 		echo '<table class="selection"><tr><td>'. _('Contact Code').':</td><td>' . $_POST['Con_ID'] . '</td></tr>';
 	} else {
 		echo '<table class="selection">';

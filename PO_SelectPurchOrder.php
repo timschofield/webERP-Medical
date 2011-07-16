@@ -35,7 +35,7 @@ if (isset($OrderNumber) && $OrderNumber != "") {
 } else {
 	if (isset($SelectedSupplier)) {
 		$Intro = _('For supplier') . ': ' . $SelectedSupplier . ' ' . _('and') . ' ';
-		echo '<input type=hidden name="SelectedSupplier" value=' . $SelectedSupplier . '>';
+		echo '<input type="hidden" name="SelectedSupplier" value=' . $SelectedSupplier . '>';
 	}
 }
 if (isset($_POST['SearchParts'])) {
@@ -102,22 +102,25 @@ if (isset($_POST['SearchParts'])) {
 if (!isset($OrderNumber) or $OrderNumber == "") {
 	echo '<table class="selection"><tr><td>';
 	if (isset($SelectedStockItem)) {
-		echo _('For the part') . ':<b>' . $SelectedStockItem . '</b> ' . _('and') . ' <input type=hidden name="SelectedStockItem" value="' . $SelectedStockItem . '">';
+		echo _('For the part') . ':<b>' . $SelectedStockItem . '</b> ' . _('and') . ' <input type="hidden" name="SelectedStockItem" value="' . $SelectedStockItem . '" />';
 	}
-	echo $Intro . _('Order Number') . ': <input type=text name="OrderNumber" maxlength=8 size=9> ' . _('Into Stock Location') . ':<select name="StockLocation"> ';
+	if (!isset($Intro)) {
+		$Intro='';
+	}
+	echo $Intro . _('Order Number') . ': <input type="text" name="OrderNumber" maxlength=8 size=9> ' . _('Into Stock Location') . ':<select name="StockLocation"> ';
 	$sql = "SELECT loccode, locationname FROM locations";
 	$resultStkLocs = DB_query($sql, $db);
 	while ($myrow = DB_fetch_array($resultStkLocs)) {
 		if (isset($_POST['StockLocation'])) {
 			if ($myrow['loccode'] == $_POST['StockLocation']) {
-				echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+				echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			} else {
-				echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+				echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			}
 		} elseif ($myrow['loccode'] == $_SESSION['UserStockLocation']) {
-			echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
-			echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	}
 	echo '</select> ' . _('Order Status:') .' <select name="Status">';
@@ -146,7 +149,7 @@ if (!isset($OrderNumber) or $OrderNumber == "") {
 	} else {
 		echo '<option value="Rejected">' . _('Rejected') . '</option>';
 	}
- 	echo '</select> <input type=submit name="SearchOrders" value="' . _('Search Purchase Orders') . '"></td></tr></table>';
+ 	echo '</select> <input type="submit" name="SearchOrders" value="' . _('Search Purchase Orders') . '"></td></tr></table>';
 }
 $SQL = "SELECT categoryid, categorydescription FROM stockcategory ORDER BY categorydescription";
 $result1 = DB_query($SQL, $db);
@@ -164,8 +167,8 @@ echo '</select><td><font size=1>' . _('Enter text extracts in the') . ' <b>' . _
 echo '<td><input type="Text" name="Keywords" size=20 maxlength=25></td></tr><tr><td></td>';
 echo '<td><font size=3><b>' . _('OR') . ' </b></font><font size=1>' . _('Enter extract of the') . '<b>' . _('Stock Code') . '</b>:</font></td>';
 echo '<td><input type="text" name="StockCode" size=15 maxlength=18></td></tr>';
-echo '<tr><td colspan=3><div class=centre><input type=submit name="SearchParts" value="' . _('Search Parts Now') . '">';
-echo '<input type=submit name="ResetPart" value="' . _('Show All') . '"></div></td></tr>';
+echo '<tr><td colspan=3><div class="centre"><input type="submit" name="SearchParts" value="' . _('Search Parts Now') . '">';
+echo '<input type="submit" name="ResetPart" value="' . _('Show All') . '"></div></td></tr>';
 echo '</table><br /><br />';
 if (isset($StockItemsResult)) {
 	echo '<table cellpadding=2 colspan=7 class="selection">';
@@ -186,7 +189,7 @@ if (isset($StockItemsResult)) {
 			echo '<tr bgcolor="#EEEEEE">';
 			$k = 1;
 		}
-		echo '<td><input type=submit name="SelectedStockItem" value="' . $myrow['stockid'] . '"</td>
+		echo '<td><input type="submit" name="SelectedStockItem" value="' . $myrow['stockid'] . '" /></td>
 				<td>' . $myrow['description'] . '</td>
 			<td class="number">' . $myrow['qoh'] . '</td>
 			<td class="number">' . $myrow['qord'] . '</td>

@@ -168,8 +168,8 @@ if ((! isset($_POST['FromPeriod']) OR ! isset($_POST['ToPeriod']))
 			<input type="RADIO" name="GraphOn" value="All" CHECKED>' . _('All') . '<br />
 			<input type="RADIO" name="GraphOn" value="Customer">' . _('Customer') . '<br />
 			<input type="RADIO" name="GraphOn" value="StockID">' . _('Item Code') . '</td></tr>';
-	echo '<tr><td>' . _('From:') . ' <input type=TEXT name="ValueFrom" value=' . $_POST['ValueFrom'] . '></td>
-	 		<td>' . _('To:') . ' <input type=TEXT name="ValueTo" value=' . $_POST['ValueTo'] . '></td></tr>';
+	echo '<tr><td>' . _('From:') . ' <input type="text" name="ValueFrom" value=' . $_POST['ValueFrom'] . '></td>
+	 		<td>' . _('To:') . ' <input type="text" name="ValueTo" value=' . $_POST['ValueTo'] . '></td></tr>';
 
 	echo '<tr><td>' . _('Graph Value:') . '</td><td>
 			<input type="RADIO" name="GraphValue" value="Net" CHECKED>' . _('Net Sales Value') . '<br />
@@ -178,7 +178,7 @@ if ((! isset($_POST['FromPeriod']) OR ! isset($_POST['ToPeriod']))
 
 	echo '</table>';
 
-	echo '<br /><div class="centre"><input type=submit Name="ShowGraph" Value="' . _('Show Sales Graph') .'"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="ShowGraph" value="' . _('Show Sales Graph') .'" /></div>';
 	include('includes/footer.inc');
 } else {
 

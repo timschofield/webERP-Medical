@@ -71,7 +71,7 @@ if (!isset($_POST['FromDate'])){
 	}
 	echo '</select></td></tr>';
 
-	echo '</table><br /><div class="centre"><input type=submit name="Go" value="' . _('Create PDF') . '"></div>';
+	echo '</table><br /><div class="centre"><input type="submit" name="Go" value="' . _('Create PDF') . '" /></div>';
 
 	 include('includes/footer.inc');
 	 exit;

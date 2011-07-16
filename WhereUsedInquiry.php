@@ -33,12 +33,12 @@ echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post><div class="centre
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (isset($StockID)) {
-	echo _('Enter an Item Code') . ': <input type=text name="StockID" size="21" maxlength="20" value="'.$StockID.'" />';
+	echo _('Enter an Item Code') . ': <input type="text" name="StockID" size="21" maxlength="20" value="'.$StockID.'" />';
 } else {
-	echo _('Enter an Item Code') . ': <input type=text name="StockID" size="21" maxlength="20">';
+	echo _('Enter an Item Code') . ': <input type="text" name="StockID" size="21" maxlength="20">';
 }
 
-echo '<input type=submit name="ShowWhereUsed" value="' . _('Show Where Used') . '">';
+echo '<input type="submit" name="ShowWhereUsed" value="' . _('Show Where Used') . '" />';
 
 echo '</div><br />';
 

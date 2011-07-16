@@ -335,10 +335,10 @@ if (isset($_REQUEST['OrderNumber']) AND $_REQUEST['OrderNumber']!='') {
 } else {
 	if (isset($_REQUEST['SelectedCustomer'])) {
 		echo _('For customer') . ': ' . $_REQUEST['SelectedCustomer'] . ' ' . _('and') . ' ';
-		echo '<input type=hidden name="SelectedCustomer" value="' . $_REQUEST['SelectedCustomer'] . '">';
+		echo '<input type="hidden" name="SelectedCustomer" value="' . $_REQUEST['SelectedCustomer'] . '">';
 	}
 	if (isset($_REQUEST['SelectedStockItem'])) {
-		 echo _('for the part') . ': ' . $_REQUEST['SelectedStockItem'] . ' ' . _('and') . ' <input type=hidden name="SelectedStockItem" value="' . $_REQUEST['SelectedStockItem'] . '">';
+		 echo _('for the part') . ': ' . $_REQUEST['SelectedStockItem'] . ' ' . _('and') . ' <input type="hidden" name="SelectedStockItem" value="' . $_REQUEST['SelectedStockItem'] . '">';
 	}
 }
 
@@ -414,7 +414,7 @@ if (!isset($StockID)) {
 	if (!isset($_REQUEST['OrderNumber']) or $_REQUEST['OrderNumber']==''){
 
 		echo '<table class="selection">';
-		echo '<tr><td>' . _('Order number') . ': </td><td><input type=text name="OrderNumber" maxlength=8 size=9></td><td>' .
+		echo '<tr><td>' . _('Order number') . ': </td><td><input type="text" name="OrderNumber" maxlength=8 size=9></td><td>' .
 				_('From Stock Location') . ':</td><td><select name="StockLocation">';
 
 		$sql = "SELECT loccode, locationname FROM locations";
@@ -451,7 +451,7 @@ if (!isset($StockID)) {
 		}
 
 		echo '</select> </td><td>';
-		echo '<input type=submit name="SearchOrders" value="' . _('Search') . '"></td>';
+		echo '<input type="submit" name="SearchOrders" value="' . _('Search') . '"></td>';
     echo '&nbsp;&nbsp;<td><a href="' . $rootpath . '/SelectOrderItems.php?NewOrder=Yes">' .
 		_('Add Sales Order') . '</a></td></tr></table>';
 	}
@@ -483,8 +483,8 @@ if (!isset($StockID)) {
       		<td><input type="text" name="StockCode" size=15 maxlength=18></td>
       	</tr>
       </table>';
-	echo '<br /><input type=submit name="SearchParts" value="' . _('Search Parts Now') .
-			'"><input type=submit name="ResetPart" value="' . _('Show All') . '"></div><br />';
+	echo '<br /><input type="submit" name="SearchParts" value="' . _('Search Parts Now') .
+			'"><input type="submit" name="ResetPart" value="' . _('Show All') . '"></div><br />';
 
 if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 
@@ -510,7 +510,7 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 			$k++;
 		}
 
-		printf('<td><input type=submit name="SelectedStockItem" value="%s"</td>
+		printf('<td><input type="submit" name="SelectedStockItem" value="%s" /></td>
 			<td>%s</td>
 			<td class="number">%s</td>
 			<td>%s</td>
@@ -817,7 +817,7 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 	        				<td>%s</td>
 	        				<td>%s</td>
 	        				<td class="number">%s</td>
-	        				<td><input type=checkbox name=PlacePO_%s value><input type=hidden name=OrderNo_PO_%s value=%s></td>
+	        				<td><input type=checkbox name=PlacePO_%s value><input type="hidden" name=OrderNo_PO_%s value=%s></td>
 	        				</tr>',
 	        				$ModifyPage,
 	        				$myrow['orderno'],

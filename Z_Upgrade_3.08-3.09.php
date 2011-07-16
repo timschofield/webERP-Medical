@@ -9,7 +9,7 @@ prnMsg(_('This script will run perform any modifications to the database since v
 
 echo '<p><form method="post" action="' . $_SERVER['PHP_SELF'] . '"></p>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<input type=submit name=DoUpgrade value="' . _('Perform Upgrade') . '">';
+echo '<input type="submit" name="DoUpgrade" value="' . _('Perform Upgrade') . '" />';
 echo '</form>';
 
 if ($_POST['DoUpgrade'] == _('Perform Upgrade')){

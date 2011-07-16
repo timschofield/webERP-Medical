@@ -56,7 +56,7 @@ $myrow = DB_fetch_row($TaxAuthDetail);
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<input type=hidden name="TaxAuthority" value=' . $TaxAuthority . '>';
+echo '<input type="hidden" name="TaxAuthority" value=' . $TaxAuthority . ' />';
 
 $TaxRatesResult = DB_query("SELECT taxauthrates.taxcatid,
 						taxcategories.taxcatname,
@@ -102,7 +102,7 @@ if (DB_num_rows($TaxRatesResult)>0){
 
 		printf('<td>%s</td>
 			<td>%s</td>
-			<td><input type=text class="number" name=%s maxlength=5 size=5 value=%s></td>
+			<td><input type="text" class="number" name=%s maxlength=5 size=5 value=%s></td>
 			</tr>',
 			$myrow['taxprovincename'],
 			$myrow['taxcatname'],
@@ -114,7 +114,7 @@ if (DB_num_rows($TaxRatesResult)>0){
 	}
 //end of while loop
 echo '</table>';
-echo '<br /><div class="centre"><input type=submit name="UpdateRates" value="' . _('Update Rates') . '">';
+echo '<br /><div class="centre"><input type="submit" name="UpdateRates" value="' . _('Update Rates') . '" />';
 } //end if tax taxcatid/rates to show
 	else {
 	prnMsg(_('There are no tax rates to show - perhaps the dispatch tax province records have not yet been created?'),'warn');

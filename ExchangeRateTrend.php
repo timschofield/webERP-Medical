@@ -49,7 +49,7 @@ if ( isset($_GET['CurrencyToShow']) ){
    	echo '</table>'; /*close off the table in the third column */
 
 
-	echo '<br /><div class="centre"><input type=submit name=submit value="' . _('Accept') . '"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Accept') . '" /></div>';
    	echo '</form>';
 
 

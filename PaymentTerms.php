@@ -241,8 +241,8 @@ if (!isset($_GET['delete'])) {
 		$DaysBeforeDue  = $myrow['daysbeforedue'];
 		$DayInFollowingMonth  = $myrow['dayinfollowingmonth'];
 
-		echo '<input type=hidden name="SelectedTerms" value="' . $SelectedTerms . '">';
-		echo '<input type=hidden name="TermsIndicator" value="' . $_POST['TermsIndicator'] . '">';
+		echo '<input type="hidden" name="SelectedTerms" value="' . $SelectedTerms . '" />';
+		echo '<input type="hidden" name="TermsIndicator" value="' . $_POST['TermsIndicator'] . '" />';
 		echo '<br /><table class="selection">';
 		echo '<tr><th colspan=6><font color=blue size=3>'._('Update Payment Terms.').'</font></th></tr>';
 		echo '<tr><td>' . _('Term Code') . ':</td><td>';

@@ -56,9 +56,9 @@ while ($myrow=DB_fetch_array($resultStkLocs)){
 }
 
 echo '</select></th></tr>';
-echo '<tr><th colspan=10>' . _('Show Movements before') . ': <input type=text name="BeforeDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="12" maxlength="12" value="' . $_POST['BeforeDate'] . '">';
-echo ' ' . _('But after') . ': <input type=TEXT name="AfterDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="12" maxlength="12" value="' . $_POST['AfterDate'] . '">';
-echo '     <input type=submit name="ShowMoves" value="' . _('Show Stock Movements') . '"></th></tr>';
+echo '<tr><th colspan=10>' . _('Show Movements before') . ': <input type="text" name="BeforeDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="12" maxlength="12" value="' . $_POST['BeforeDate'] . '">';
+echo ' ' . _('But after') . ': <input type="text" name="AfterDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="12" maxlength="12" value="' . $_POST['AfterDate'] . '">';
+echo '     <input type="submit" name="ShowMoves" value="' . _('Show Stock Movements') . '" /></th></tr>';
 
 $SQLBeforeDate = FormatDateForSQL($_POST['BeforeDate']);
 $SQLAfterDate = FormatDateForSQL($_POST['AfterDate']);
@@ -197,7 +197,7 @@ while ($myrow=DB_fetch_array($MovtsResult)) {
 //end of while loop
 
 echo '</table>';
-echo '<div class=centre><br /><a href="'.$rootpath.'/StockStatus.php?StockID='.$StockID.'">' . _('Show Stock Status') . '</a>';
+echo '<div class="centre"><br /><a href="'.$rootpath.'/StockStatus.php?StockID='.$StockID.'">' . _('Show Stock Status') . '</a>';
 echo '<br /><a href="'.$rootpath.'/StockUsage.php?StockID='.$StockID.'&StockLocation=' . $_POST['StockLocation'] . '">' . _('Show Stock Usage') . '</a>';
 echo '<br /><a href="'.$rootpath.'/SelectSalesOrder.php?SelectedStockItem='.$StockID.'&StockLocation=' . $_POST['StockLocation'] . '">' . _('Search Outstanding Sales Orders') . '</a>';
 echo '<br /><a href="'.$rootpath.'/SelectCompletedOrder.php?SelectedStockItem='.$StockID.'">' . _('Search Completed Sales Orders') . '</a>';

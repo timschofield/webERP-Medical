@@ -25,7 +25,7 @@ echo '<div class="centre">
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo  _('Serial Number') .': <input ID="serialno" name="serialno" size=21 maxlength=20 value="'. $SN . '"> &nbsp;
-<input type=submit name=submit></div><br />
+<input type="submit" name="submit" /></div><br />
 </form>';
 
 echo '<SCRIPT>

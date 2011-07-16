@@ -4,7 +4,7 @@
 
 include('includes/session.inc');
 
-If (isset($_POST['PrintPDF'])
+if (isset($_POST['PrintPDF'])
 	AND isset($_POST['FromCriteria'])
 	AND strlen($_POST['FromCriteria'])>=1
 	AND isset($_POST['ToCriteria'])
@@ -129,9 +129,9 @@ If (isset($_POST['PrintPDF'])
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<tr><td>' . _('From Supplier Code') . ':</font></td>
-			<td><input Type=text maxlength=6 size=7 name=FromCriteria value="'.$_POST['FromCriteria'].'"></td></tr>';
+			<td><input type="text" maxlength=6 size=7 name=FromCriteria value="'.$_POST['FromCriteria'].'"></td></tr>';
 	echo '<tr><td>' . _('To Supplier Code') . ':</td>
-			<td><input Type=text maxlength=6 size=7 name=ToCriteria value="'.$_POST['ToCriteria'].'"></td></tr>';
+			<td><input type="text" maxlength=6 size=7 name=ToCriteria value="'.$_POST['ToCriteria'].'"></td></tr>';
 
 	echo '<tr><td>' . _('Balances As At') . ':</td>
 			<td><select Name="PeriodEnd">';
@@ -153,7 +153,7 @@ If (isset($_POST['PrintPDF'])
 	echo '</select></td></tr>';
 
 
-	echo '</table><br /><div class="centre"><input type=Submit Name="PrintPDF" Value="' . _('Print PDF') . '"></div>';
+	echo '</table><br /><div class="centre"><input type="submit" Name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
 
 	include('includes/footer.inc');
 }/*end of else not PrintPDF */

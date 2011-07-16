@@ -185,7 +185,7 @@ If (isset($_POST['PrintPDF'])) {
 		}
 	}
 	echo '</select></td></tr>';
-	echo '</table><br /><div class="centre"><input type=submit name="PrintPDF" value="' . _('Print PDF') . '"></div>';
+	echo '</table><br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
 
 	include('includes/footer.inc');
 

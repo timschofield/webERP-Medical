@@ -78,7 +78,7 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 
 	printf('<td>%s</td>
 		<td class="number">%s</td>
-		<td><input type=text class="number" name=%s maxlength=10 size=10 value=%s></td>',
+		<td><input type="text" class="number" name=%s maxlength=10 size=10 value=%s></td>',
 		$myrow['locationname'],
 		number_format($myrow['quantity'],$myrow['decimalplaces']),
 		$myrow['loccode'],
@@ -92,7 +92,7 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 }
 //end of while loop
 
-echo '</table><br /><div class="centre"><input type=submit name="UpdateData" value="' . _('Update') . '"><br /><br />';
+echo '</table><br /><div class="centre"><input type="submit" name="UpdateData" value="' . _('Update') . '" /><br /><br />';
 echo '<a href="' . $rootpath . '/StockMovements.php?StockID=$StockID">' . _('Show Stock Movements') . '</a>';
 echo '<br /><a href="' . $rootpath . '/StockUsage.php?StockID=$StockID">' . _('Show Stock Usage') . '</a>';
 echo '<br /><a href="' . $rootpath . '/SelectSalesOrder.php?SelectedStockItem=$StockID">' . _('Search Outstanding Sales Orders') . '</a>';

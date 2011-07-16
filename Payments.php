@@ -902,10 +902,10 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 	/*now set up a GLCode field to select from avaialble GL accounts */
 	if (isset($_POST['GLManualCode'])) {
 		echo '<tr><td>' . _('Enter GL Account Manually') . ':</td>
-			<td><input type=Text class="number" Name="GLManualCode" Maxlength=12 size=12 onChange="return inArray(this, GLCode.options,'.	"'".'The account code '."'".'+ this.value+ '."'".' doesnt exist'."'".')"' . ' value='. $_POST['GLManualCode'] .'  ></td></tr>';
+			<td><input type="text" class="number" Name="GLManualCode" Maxlength=12 size=12 onChange="return inArray(this, GLCode.options,'.	"'".'The account code '."'".'+ this.value+ '."'".' doesnt exist'."'".')"' . ' value='. $_POST['GLManualCode'] .'  ></td></tr>';
 	} else {
 		echo '<tr><td>' . _('Enter GL Account Manually') . ':</td>
-			<td><input type=Text class="number" Name="GLManualCode" Maxlength=12 size=12 onChange="return inArray(this, GLCode.options,'.	"'".'The account code '."'".'+ this.value+ '."'".' doesnt exist'."'".')"></td></tr>';
+			<td><input type="text" class="number" Name="GLManualCode" Maxlength=12 size=12 onChange="return inArray(this, GLCode.options,'.	"'".'The account code '."'".'+ this.value+ '."'".' doesnt exist'."'".')"></td></tr>';
 	}
 
 	echo '<tr><td>' . _('Select GL Group') . ':</td>
@@ -977,14 +977,14 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 
 	if (isset($_POST['GLAmount'])) {
 		echo '<tr><td>' . _('Amount') . ' (' . $_SESSION['PaymentDetail']->Currency . '):</td>
-				<td><input type=Text Name="GLAmount" Maxlength=12 size=12 class="number" value=' . $_POST['GLAmount'] . '></td></tr>';
+				<td><input type="text" Name="GLAmount" Maxlength=12 size=12 class="number" value=' . $_POST['GLAmount'] . '></td></tr>';
 	} else {
 		echo '<tr><td>' . _('Amount') . ' (' . $_SESSION['PaymentDetail']->Currency . '):</td>
-				<td><input type=Text Name="GLAmount" Maxlength=12 size=12 class="number"></td></tr>';
+				<td><input type="text" Name="GLAmount" Maxlength=12 size=12 class="number"></td></tr>';
 	}
 
 	echo '</table><br />';
-	echo '<div class="centre"><input type=submit name="Process" value="' . _('Accept') . '"><input type=submit name="Cancel" value="' . _('Cancel') . '"></div>';
+	echo '<div class="centre"><input type="submit" name="Process" value="' . _('Accept') . '"><input type="submit" name="Cancel" value="' . _('Cancel') . '"></div>';
 
 	if (sizeOf($_SESSION['PaymentDetail']->GLItems)>0) {
 		echo '<br />
@@ -1018,7 +1018,7 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 			$PaymentTotal += $PaymentItem->Amount;
 		}
 		echo '<tr><td></td><td class="number"><b>' . number_format($PaymentTotal,2) . '</b></td><td></td><td></td><td></td></tr></table><br />';
-		echo '<input type=submit name="CommitBatch" value="' . _('Accept and Process Payment') . '">';
+		echo '<input type="submit" name="CommitBatch" value="' . _('Accept and Process Payment') . '">';
 	}
 
 } else {
@@ -1036,7 +1036,7 @@ the fields for entry of receipt amt and disc */
 		echo '<input type="hidden" name="discount" Value=0>';
 	}
 	echo '</table><br />';
-	echo '<input type=submit name="CommitBatch" value="' . _('Accept and Process Payment') . '">';
+	echo '<input type="submit" name="CommitBatch" value="' . _('Accept and Process Payment') . '" />';
 }
 echo '</form>';
 

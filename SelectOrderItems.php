@@ -629,8 +629,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 	<td><input tabindex=3 type="Text" name="CustPhone" size=15	maxlength=18></td>
 	</tr>
 	</table>
-	<br /><div class="centre"><input tabindex=4 type=submit name="SearchCust" value="<?php echo _('Search Now'); ?>">
-	<input tabindex=5 type=submit action=reset value="<?php echo _('Reset'); ?>"></div>
+	<br /><div class="centre"><input tabindex=4 type="submit" name="SearchCust" value="<?php echo _('Search Now'); ?>">
+	<input tabindex=5 type="submit" action=reset value="<?php echo _('Reset'); ?>"></div>
 	<?php
 
 	if (isset($result_CustSelect)) {
@@ -665,8 +665,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			} else {
 				echo '<td></td>';
 			}
-			echo '<td><input tabindex='.number_format($j+5).' type=submit name="Submit" value="'.$myrow['brname'].'" /></td>
-					<input type=hidden name="Select" value="'.$myrow['debtorno'].' - '.$myrow['branchcode'].'">
+			echo '<td><input tabindex='.number_format($j+5).' type="submit" name="Submit" value="'.$myrow['brname'].'" /></td>
+					<input type="hidden" name="Select" value="'.$myrow['debtorno'].' - '.$myrow['branchcode'].'">
 					<td>'.$myrow['contactname'].'</td>
 					<td>'.$myrow['phoneno'].'</td>
 					<td>'.$myrow['faxno'].'</td>
@@ -1344,7 +1344,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 			echo $RowStarter;
 			if($_SESSION['Items'.$identifier]->DefaultPOLine ==1){ //show the input field only if required
-				echo '<td><input tabindex=1 type=text name="POLine_' . $OrderLine->LineNumber . '" size=20 maxlength=20 value=' . $OrderLine->POLine . '></td>';
+				echo '<td><input tabindex=1 type="text" name="POLine_' . $OrderLine->LineNumber . '" size=20 maxlength=20 value=' . $OrderLine->POLine . '></td>';
 			} else {
 				echo '<input type="hidden" name="POLine_' .	 $OrderLine->LineNumber . '" value="">';
 			}
@@ -1364,12 +1364,12 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 			if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 				/*OK to display with discount if it is an internal user with appropriate permissions */
-				echo '<td><input class="number" type=text name="Price_' . $OrderLine->LineNumber . '" size=16 maxlength=16 value=' . $OrderLine->Price . '></td>
-					<td><input class="number" type=text name="Discount_' . $OrderLine->LineNumber . '" size=5 maxlength=4 value=' . ($OrderLine->DiscountPercent * 100) . '></td>
-					<td><input class="number" type=text name="GPPercent_' . $OrderLine->LineNumber . '" size=3 maxlength=40 value=' . $OrderLine->GPPercent . '></td>';
+				echo '<td><input class="number" type="text" name="Price_' . $OrderLine->LineNumber . '" size=16 maxlength=16 value=' . $OrderLine->Price . '></td>
+					<td><input class="number" type="text" name="Discount_' . $OrderLine->LineNumber . '" size=5 maxlength=4 value=' . ($OrderLine->DiscountPercent * 100) . '></td>
+					<td><input class="number" type="text" name="GPPercent_' . $OrderLine->LineNumber . '" size=3 maxlength=40 value=' . $OrderLine->GPPercent . '></td>';
 			} else {
 				echo '<td class="number">' . $OrderLine->Price . '</td><td></td>';
-				echo '<input type=hidden name="Price_' . $OrderLine->LineNumber . '" value=' . $OrderLine->Price . '>';
+				echo '<input type="hidden" name="Price_' . $OrderLine->LineNumber . '" value=' . $OrderLine->Price . '>';
 			}
 			if ($_SESSION['Items'.$identifier]->Some_Already_Delivered($OrderLine->LineNumber)){
 				$RemTxt = _('Clear Remaining');
@@ -1383,7 +1383,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				$_SESSION['Items'.$identifier]->LineItems[$OrderLine->LineNumber]->ItemDue= $LineDueDate;
 			}
 
-			echo '<td><input type=text class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="ItemDue_' . $OrderLine->LineNumber . '" size=10 maxlength=10 value=' . $LineDueDate . '></td>';
+			echo '<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="ItemDue_' . $OrderLine->LineNumber . '" size=10 maxlength=10 value=' . $LineDueDate . '></td>';
 
 			echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier . '&Delete=' . $OrderLine->LineNumber . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');">' . $RemTxt . '</a></td></tr>';
 
@@ -1391,7 +1391,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				echo $RowStarter;
 				echo '<td colspan=10>' . _('Narrative') . ':<textarea name="Narrative_' . $OrderLine->LineNumber . '" cols="100%" rows="1">' . stripslashes(AddCarriageReturns($OrderLine->Narrative)) . '</textarea><br /></td></tr>';
 			} else {
-				echo '<input type=hidden name="Narrative" value="">';
+				echo '<input type="hidden" name="Narrative" value="" />';
 			}
 
 			$_SESSION['Items'.$identifier]->total = $_SESSION['Items'.$identifier]->total + $LineTotal;
@@ -1418,8 +1418,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 					   </tr></table>';
 
 
-		echo '<br /><div class="centre"><input type=submit name="Recalculate" Value="' . _('Re-Calculate') . '">
-				<input type=submit name="DeliveryDetails" value="' . _('Enter Delivery Details and Confirm Order') . '"></div><hr>';
+		echo '<br /><div class="centre"><input type="submit" name="Recalculate" Value="' . _('Re-Calculate') . '">
+				<input type="submit" name="DeliveryDetails" value="' . _('Enter Delivery Details and Confirm Order') . '"></div><hr>';
 	} # end of if lines
 
 /* Now show the stock item selection search stuff below */
@@ -1614,8 +1614,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		echo '"></td></tr>';
 
 		echo '<tr>
-					<td style="text-align:center" colspan=1><input tabindex=4 type=submit name="Search" value="' . _('Search Now') . '"></td>
-					<td style="text-align:center" colspan=1><input tabindex=5 type=submit name="QuickEntry" value="' .  _('Use Quick Entry') . '"></td>';
+					<td style="text-align:center" colspan=1><input tabindex=4 type="submit" name="Search" value="' . _('Search Now') . '"></td>
+					<td style="text-align:center" colspan=1><input tabindex=5 type="submit" name="QuickEntry" value="' .  _('Use Quick Entry') . '"></td>';
 
 		if (!isset($_POST['PartSearch'])) {
 			echo '<script  type="text/javascript">if (document.SelectParts) {defaultControl(document.SelectParts.Keywords);}</script>';
@@ -1859,7 +1859,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		} //end of if it is a Quick Entry screen/part search or asset selection form to display
 
 		if ($_SESSION['Items'.$identifier]->ItemsOrdered >=1){
-	  		echo '<br /><div class="centre"><input type=submit name="CancelOrder" value="' . _('Cancel Whole Order') . '" onclick="return confirm(\'' . _('Are you sure you wish to cancel this entire order?') . '\');"></div>';
+	  		echo '<br /><div class="centre"><input type="submit" name="CancelOrder" value="' . _('Cancel Whole Order') . '" onclick="return confirm(\'' . _('Are you sure you wish to cancel this entire order?') . '\');"></div>';
 		}
 	}#end of else not selecting a customer
 

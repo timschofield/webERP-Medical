@@ -210,7 +210,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 	echo '<td><input type="Text" name="CustCode" size=15	maxlength=18></td>';
 	echo '</tr>';
 	echo '</table>';
-	echo '<br /><div class="centre"><input type=submit name="SearchCust" value="' . _('Search Now') . '"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="SearchCust" value="' . _('Search Now') . '"></div>';
 
 	if (isset($result_CustSelect)) {
 
@@ -239,7 +239,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				    $k=1;
 			   }
 
-			   printf('<td><font size=1><input type=submit name="Select" value="%s - %s" /></font></td>
+			   printf('<td><font size=1><input type="submit" name="Select" value="%s - %s" /></font></td>
 					<td><font size=1>%s</font></td>
 					<td><font size=1>%s</font></td>
 					<td><font size=1>%s</font></td>
@@ -685,16 +685,16 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			   			<td>' . $LineItem->ItemDescription . '</td>';
 
 			   if ($LineItem->Controlled==0){
-			   	echo '<td><input type=text class="number" name="Quantity_' . $LineItem->LineNumber . '" maxlength=6 size=6 value=' . $LineItem->Quantity . '></td>';
+			   	echo '<td><input type="text" class="number" name="Quantity_' . $LineItem->LineNumber . '" maxlength=6 size=6 value=' . $LineItem->Quantity . '></td>';
 			   } else {
 				echo '<td class="number"><a href="' . $rootpath . '/CreditItemsControlled.php?LineNo=' . $LineItem->LineNumber . '">' . $LineItem->Quantity . '</a>
-              <input type=hidden name="Quantity_' . $LineItem->LineNumber . '" value=' . $LineItem->Quantity . '></td>';
+              <input type="hidden" name="Quantity_' . $LineItem->LineNumber . '" value="' . $LineItem->Quantity . '" /></td>';
 			   }
 
 			echo '<td>' . $LineItem->Units . '</td>
-			<td><input type=text class="number" name="Price_' . $LineItem->LineNumber . '" size=10 maxlength=12 value=' . $LineItem->Price . '></td>
+			<td><input type="text" class="number" name="Price_' . $LineItem->LineNumber . '" size=10 maxlength=12 value=' . $LineItem->Price . '></td>
 			<td><input type="checkbox" name="Gross" value=False></td>
-			<td><input type=text class="number" name="Discount_' . $LineItem->LineNumber . '" size=3 maxlength=3 value=' . ($LineItem->DiscountPercent * 100) . '>%</td>
+			<td><input type="text" class="number" name="Discount_' . $LineItem->LineNumber . '" size=3 maxlength=3 value=' . ($LineItem->DiscountPercent * 100) . '>%</td>
 			<td class="number">' . $DisplayLineTotal . '</td>';
 
 
@@ -721,7 +721,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				if ($i>0){
 					echo '<br />';
 				}
-				echo '<input type=text class="number" name="' . $LineItem->LineNumber . $Tax->TaxCalculationOrder . '_TaxRate" maxlength=4 size=4 value="' . $Tax->TaxRate*100 . '">';
+				echo '<input type="text" class="number" name="' . $LineItem->LineNumber . $Tax->TaxCalculationOrder . '_TaxRate" maxlength=4 size=4 value="' . $Tax->TaxRate*100 . '">';
 				$i++;
 				if ($Tax->TaxOnTax ==1){
 					$TaxTotals[$Tax->TaxAuthID] += ($Tax->TaxRate * ($LineTotal + $TaxLineTotal));
@@ -762,7 +762,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 
 		echo '<td colspan=2 class="number">'. _('Credit Freight').'</td>
-			<td><input type=TEXT class="number" size=6 maxlength=6 name=ChargeFreightCost value=' . $_SESSION['CreditItems']->FreightCost . '></td>';
+			<td><input type="text" class="number" size=6 maxlength=6 name=ChargeFreightCost value=' . $_SESSION['CreditItems']->FreightCost . '></td>';
 
 		$FreightTaxTotal =0; //initialise tax total
 
@@ -785,7 +785,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				echo '<br />';
 			}
 
-			echo  '<input type=TEXT class="number" name=FreightTaxRate' . $FreightTaxLine->TaxCalculationOrder . ' maxlength=4 size=4 value=' . $FreightTaxLine->TaxRate * 100 . '>';
+			echo  '<input type="text" class="number" name=FreightTaxRate' . $FreightTaxLine->TaxCalculationOrder . ' maxlength=4 size=4 value=' . $FreightTaxLine->TaxRate * 100 . '>';
 
 			if ($FreightTaxLine->TaxOnTax ==1){
 				$TaxTotals[$FreightTaxLine->TaxAuthID] += ($FreightTaxLine->TaxRate * ($_SESSION['CreditItems']->FreightCost + $FreightTaxTotal));
@@ -894,10 +894,10 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			prnMsg (_('The GL code to write off the credit value to must be specified. Please select the appropriate GL code for the selection box'),'info');
 			$OKToProcess = false;
 		  }
-		  echo '<div class="centre"><input type=submit name="Update" value="' . _('Update') . '">
-                  				<input type=submit name="CancelCredit" value="' . _('Cancel') . '" onclick="return confirm(\'' . _('Are you sure you wish to cancel the whole of this credit note?') . '\');">';
+		  echo '<div class="centre"><input type="submit" name="Update" value="' . _('Update') . '">
+                  				<input type="submit" name="CancelCredit" value="' . _('Cancel') . '" onclick="return confirm(\'' . _('Are you sure you wish to cancel the whole of this credit note?') . '\');">';
 		  if (!isset($_POST['ProcessCredit']) AND $OKToProcess == true){
-			echo '<input type=submit name="ProcessCredit" value="' . _('Process Credit Note') . '"></div><br />';
+			echo '<input type="submit" name="ProcessCredit" value="' . _('Process Credit Note') . '"></div><br />';
 		  }
 	 } # end of if lines
 
@@ -943,9 +943,9 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		 echo '</tr>';
 		 echo '</table><br /><div class="centre">';
 
-		 echo '<input type=submit name="Search" value="' . _('Search Now') .'">';
-		 echo '<input type=submit Name="ChangeCustomer" value="' . _('Change Customer') . '">';
-		 echo '<input type=submit Name="Quick" value="' . _('Quick Entry') . '">';
+		 echo '<input type="submit" name="Search" value="' . _('Search Now') .'">';
+		 echo '<input type="submit" Name="ChangeCustomer" value="' . _('Change Customer') . '">';
+		 echo '<input type="submit" Name="Quick" value="' . _('Quick Entry') . '">';
 		 echo '</div>';
 
 		 if (isset($SearchResult)) {
@@ -977,7 +977,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 					    $k++;
 				   }
 
-				   printf('<td><font size=1><input type=submit name="NewItem" value="%s"></font></td>
+				   printf('<td><font size=1><input type="submit" name="NewItem" value="%s" /></font></td>
                    				<td><font size=1>%s</font></td>
                    				<td><font size=1>%s</font></td>
                    				<td>%s</td></tr>',

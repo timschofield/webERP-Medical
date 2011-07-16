@@ -404,8 +404,8 @@ if (isset($SelectedTabs)) {
 		}
 
 		echo '<tr><td>' . _('Receipt') . ':</td><td><input type="text" name="Receipt" size="50" maxlength="49" value="' . $_POST['Receipt'] . '" /></td></tr>';
-		echo '<input type=hidden name="SelectedTabs" value="' . $SelectedTabs . '" />';
-		echo '<input type=hidden name="Days" value="' .$Days. '" />';
+		echo '<input type="hidden" name="SelectedTabs" value="' . $SelectedTabs . '" />';
+		echo '<input type="hidden" name="Days" value="' .$Days. '" />';
 		echo '</td></tr></table>'; // close main table
 		echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Accept') . '" />
 				<input type="submit" name="Cancel" value="' . _('Cancel') . '" /></div>';

@@ -938,7 +938,7 @@ echo '<br /><table  class="selection">';
 echo '<tr><th colspan=2><font color="navy" size=3>'._('Delivery Details').'</font></th></tr>';
 echo '<tr>
 		<td>'. _('Deliver To') .':</td>
-		<td><input type=text size=42 maxlength=40 name="DeliverTo" value="' . $_SESSION['Items'.$identifier]->DeliverTo . '"></td>
+		<td><input type="text" size=42 maxlength=40 name="DeliverTo" value="' . $_SESSION['Items'.$identifier]->DeliverTo . '"></td>
 	</tr>';
 
 echo '<tr>
@@ -993,43 +993,43 @@ echo '<tr>
 
 echo '<tr>
 	<td>'. _('Delivery Address 1') . ':</td>
-	<td><input type=text size=42 maxlength=40 name="BrAdd1" value="' . $_SESSION['Items'.$identifier]->DelAdd1 . '"></td>
+	<td><input type="text" size=42 maxlength=40 name="BrAdd1" value="' . $_SESSION['Items'.$identifier]->DelAdd1 . '"></td>
 </tr>';
 
 echo '<tr>
 	<td>'. _('Delivery Address 2') . ':</td>
-	<td><input type=text size=42 maxlength=40 name="BrAdd2" value="' . $_SESSION['Items'.$identifier]->DelAdd2 . '"></td>
+	<td><input type="text" size=42 maxlength=40 name="BrAdd2" value="' . $_SESSION['Items'.$identifier]->DelAdd2 . '"></td>
 </tr>';
 
 echo '<tr>
 	<td>'. _('Delivery Address 3') . ':</td>
-	<td><input type=text size=42 maxlength=40 name="BrAdd3" value="' . $_SESSION['Items'.$identifier]->DelAdd3 . '"></td>
+	<td><input type="text" size=42 maxlength=40 name="BrAdd3" value="' . $_SESSION['Items'.$identifier]->DelAdd3 . '"></td>
 </tr>';
 
 echo '<tr>
 	<td>'. _('Delivery Address 4') . ':</td>
-	<td><input type=text size=42 maxlength=40 name="BrAdd4" value="' . $_SESSION['Items'.$identifier]->DelAdd4 . '"></td>
+	<td><input type="text" size=42 maxlength=40 name="BrAdd4" value="' . $_SESSION['Items'.$identifier]->DelAdd4 . '"></td>
 </tr>';
 
 echo '<tr>
 	<td>'. _('Delivery Address 5') . ':</td>
-	<td><input type=text size=42 maxlength=40 name="BrAdd5" value="' . $_SESSION['Items'.$identifier]->DelAdd5 . '"></td>
+	<td><input type="text" size=42 maxlength=40 name="BrAdd5" value="' . $_SESSION['Items'.$identifier]->DelAdd5 . '"></td>
 </tr>';
 
 echo '<tr>
 	<td>'. _('Delivery Address 6') . ':</td>
-	<td><input type=text size=42 maxlength=40 name="BrAdd6" value="' . $_SESSION['Items'.$identifier]->DelAdd6 . '"></td>
+	<td><input type="text" size=42 maxlength=40 name="BrAdd6" value="' . $_SESSION['Items'.$identifier]->DelAdd6 . '"></td>
 </tr>';
 
 echo '<tr>
 	<td>'. _('Contact Phone Number') .':</td>
-	<td><input type=text size=25 maxlength=25 name="PhoneNo" value="' . $_SESSION['Items'.$identifier]->PhoneNo . '"></td>
+	<td><input type="text" size=25 maxlength=25 name="PhoneNo" value="' . $_SESSION['Items'.$identifier]->PhoneNo . '"></td>
 </tr>';
 
-echo '<tr><td>' . _('Contact Email') . ':</td><td><input type=text size=40 maxlength=38 name="Email" value="' . $_SESSION['Items'.$identifier]->Email . '"></td></tr>';
+echo '<tr><td>' . _('Contact Email') . ':</td><td><input type="text" size=40 maxlength=38 name="Email" value="' . $_SESSION['Items'.$identifier]->Email . '"></td></tr>';
 
 echo '<tr><td>'. _('Customer Reference') .':</td>
-	<td><input type=text size=25 maxlength=25 name="CustRef" value="' . $_SESSION['Items'.$identifier]->CustRef . '"></td>
+	<td><input type="text" size=25 maxlength=25 name="CustRef" value="' . $_SESSION['Items'.$identifier]->CustRef . '"></td>
 </tr>';
 
 echo '<tr>
@@ -1069,15 +1069,15 @@ if (isset($_SESSION['PrintedPackingSlip']) and $_SESSION['PrintedPackingSlip']==
 
 } else {
 
-	echo '<input type=hidden name="ReprintPackingSlip" value=0>';
+	echo '<input type="hidden" name="ReprintPackingSlip" value="0" />';
 
 }
 
 echo '<tr><td>'. _('Charge Freight Cost inc tax') .':</td>';
-echo '<td><input type=text class="number" size=10 maxlength=12 name="FreightCost" value=' . $_SESSION['Items'.$identifier]->FreightCost . '></td>';
+echo '<td><input type="text" class="number" size=10 maxlength=12 name="FreightCost" value=' . $_SESSION['Items'.$identifier]->FreightCost . '></td>';
 
 if ($_SESSION['DoFreightCalc']==true){
-	echo '<td><input type=submit name="Update" value="' . _('Recalc Freight Cost') . '"></td></tr>';
+	echo '<td><input type="submit" name="Update" value="' . _('Recalc Freight Cost') . '"></td></tr>';
 }
 
 if ((!isset($_POST['ShipVia']) OR $_POST['ShipVia']=='') AND isset($_SESSION['Items'.$identifier]->ShipVia)){
@@ -1114,13 +1114,13 @@ echo '</select></td></tr>';
 
 echo '</table>';
 
-echo '<br /><div class="centre"><input type=submit name="BackToLineDetails" value="' . _('Modify Order Lines') . '"><br />';
+echo '<br /><div class="centre"><input type="submit" name="BackToLineDetails" value="' . _('Modify Order Lines') . '"><br />';
 
 if ($_SESSION['ExistingOrder']==0){
-	echo '<br /><br /><input type=submit name="ProcessOrder" value="' . _('Place Order') . '">';
-	echo '<br /><br /><input type=submit name="MakeRecurringOrder" value="' . _('Create Recurring Order') . '">';
+	echo '<br /><br /><input type="submit" name="ProcessOrder" value="' . _('Place Order') . '" />';
+	echo '<br /><br /><input type="submit" name="MakeRecurringOrder" value="' . _('Create Recurring Order') . '" />';
 } else {
-	echo '<br /><input type=submit name="ProcessOrder" value="' . _('Commit Order Changes') . '">';
+	echo '<br /><input type="submit" name="ProcessOrder" value="' . _('Commit Order Changes') . '" />';
 }
 
 echo '</div></form>';

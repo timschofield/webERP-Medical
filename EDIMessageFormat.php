@@ -161,8 +161,8 @@ or deletion of the records*/
 	} //END WHILE LIST LOOP
 	echo '</table><br />';
 	if (DB_num_rows($result)==0){
-		echo '<div class="centre"><input tabindex=1 type=submit name="NewEDIInvMsg" value="' .
-			_('Create New EDI Invoice Message From Default Template') . '"></div><br />';
+		echo '<div class="centre"><input tabindex=1 type="submit" name="NewEDIInvMsg" value="' .
+			_('Create New EDI Invoice Message From Default Template') . '" /></div><br />';
 	}
 } //end of ifs SelectedLine is not set
 
@@ -190,12 +190,12 @@ if (isset($SelectedMessageLine)) {
 
 	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '?MessageType=INVOIC&PartnerCode=' . $myrow['partnercode'] . '">' . _('Review Message Lines') . '</a></div>';
 
-	echo '<input type=hidden name="SelectedMessageLine" value="' . $SelectedMessageLine . '">';
-	echo '<input type=hidden name="MessageType" value="' . $myrow['messagetype'] . '">';
-	echo '<input type=hidden name="PartnerCode" value="' . $myrow['partnercode'] . '">';
+	echo '<input type="hidden" name="SelectedMessageLine" value="' . $SelectedMessageLine . '" />';
+	echo '<input type="hidden" name="MessageType" value="' . $myrow['messagetype'] . '" />';
+	echo '<input type="hidden" name="PartnerCode" value="' . $myrow['partnercode'] . '" />';
 } else { //end of if $SelectedMessageLine only do the else when a new record is being entered
-	echo '<input type=hidden name="MessageType" value="' . $MessageType . '">';
-	echo '<input type=hidden name="PartnerCode" value="' . $PartnerCode . '">';
+	echo '<input type="hidden" name="MessageType" value="' . $MessageType . '" />';
+	echo '<input type="hidden" name="PartnerCode" value="' . $PartnerCode . '" />';
 }
 
 echo '<table class="selection">';
@@ -234,7 +234,7 @@ if (!isset($_POST['LineText'])) {$_POST['LineText']='';}
 echo '</td></tr>';
 
 echo '<tr><td>Sequence Number:</td>';
-echo '<td><input tabindex=3 type=text name=SequenceNo size=3 maxlength=3 value='.$_POST['SequenceNo'].'>';
+echo '<td><input tabindex=3 type="text" name=SequenceNo size=3 maxlength=3 value='.$_POST['SequenceNo'].'>';
 echo '</td></tr>';
 echo '<tr><td>' .  _('Line Text') . ':' .'</td>';
 echo '<td>';

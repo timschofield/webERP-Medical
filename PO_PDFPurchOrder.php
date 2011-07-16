@@ -345,9 +345,9 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	if ($ViewingOnly==1){
-		echo '<input type=hidden name="ViewingOnly" value=1>';
+		echo '<input type="hidden" name="ViewingOnly" value=1>';
 	}
-	echo '<input type=hidden name="OrderNo" value="'. $OrderNo. '">';
+	echo '<input type="hidden" name="OrderNo" value="'. $OrderNo. '" />';
 	echo '<table class="selection"><tr><td>'. _('Print or Email the Order'). '</td><td>
 		<select name="PrintOrEmail">';
 	if (!isset($_POST['PrintOrEmail'])){
@@ -403,7 +403,7 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 	} else {
 		echo '</table>';
 	}
-	echo '<br /><div class="centre"><input type=submit name="DoIt" value="' . _('OK') . '"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="DoIt" value="' . _('OK') . '" /></div>';
 	echo '</form>';
 	include('includes/footer.inc');
 }

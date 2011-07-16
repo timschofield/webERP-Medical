@@ -414,7 +414,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 			break;
 	}
 
-	echo '<br /><div class=centre><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Select a Different BOM') . '</a></div><br />';
+	echo '<br /><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Select a Different BOM') . '</a></div><br />';
 	echo '<table class="selection">';
 	// Display Manufatured Parent Items
 	$sql = "SELECT bom.parent,
@@ -576,15 +576,15 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 			$_POST['AutoIssue'] = $myrow['autoissue'];
 
 			prnMsg(_('Edit the details of the selected component in the fields below') . '. <br />' . _('Click on the Enter Information button to update the component details'),'info');
-			echo '<br /><input type=hidden name="SelectedParent" value="'.$SelectedParent.'">';
-			echo '<input type=hidden name="SelectedComponent" value="'.$SelectedComponent.'">';
+			echo '<br /><input type="hidden" name="SelectedParent" value="'.$SelectedParent.'">';
+			echo '<input type="hidden" name="SelectedComponent" value="'.$SelectedComponent.'">';
 			echo '<table class="selection">';
 			echo '<tr><th colspan=13><div class="centre"><font color=blue size=3><b>'. ('Edit Component Details') .'</font></b></th></tr>';
 			echo '<tr><td>' . _('Component') . ':</td><td><b>' . $SelectedComponent . '</b></td></tr>';
 
 		} else { //end of if $SelectedComponent
 
-			echo '<input type=hidden name="SelectedParent" value="'.$SelectedParent.'">';
+			echo '<input type="hidden" name="SelectedParent" value="'.$SelectedParent.'">';
 			/* echo "Enter the details of a new component in the fields below. <br />Click on 'Enter Information' to add the new component, once all fields are completed.";
 			*/
 			echo '<table class="selection">';
@@ -716,7 +716,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 
 			echo '</select></td></tr>';
 		} else {
-			echo '<input type=hidden name="AutoIssue" value=0>';
+			echo '<input type="hidden" name="AutoIssue" value="0" />';
 		}
 
 		echo '</table><br /><div class="centre"><input tabindex="8" type="Submit" name="Submit" value="' . _('Enter Information') . '"></form></div>';
@@ -797,7 +797,7 @@ if (!isset($SelectedParent)) {
 	 ' <b>' . _('description') . '</b>:</font></td><td><input tabindex="1" type="Text" name="Keywords" size=20 maxlength=25></td>
 	 <td><font size=3><b>' . _('OR') . '</b></font></td><td><font size=1>' . _('Enter extract of the') .
      ' <b>' . _('Stock Code') . '</b>:</font></td><td><input tabindex="2" type="Text" name="StockCode" size=15 maxlength=18></td>
-	 </tr></table><br /><div class="centre"><input tabindex="3" type=submit name="Search" value="' . _('Search Now') . '"></div>';
+	 </tr></table><br /><div class="centre"><input tabindex="3" type="submit" name="Search" value="' . _('Search Now') . '"></div>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (isset($_POST['Search']) and isset($result) AND !isset($SelectedParent)) {
@@ -827,7 +827,7 @@ if (isset($_POST['Search']) and isset($result) AND !isset($SelectedParent)) {
 			$StockOnHand = number_format($myrow['totalonhand'],2);
 		}
 		$tab = $j+3;
-		printf('<td><input tabindex="'.$tab.'" type=submit name="Select" value="%s" /></td>
+		printf('<td><input tabindex="'.$tab.'" type="submit" name="Select" value="%s" /></td>
 		        <td>%s</td>
 			<td class="number">%s</td>
 			<td>%s</td></tr>',

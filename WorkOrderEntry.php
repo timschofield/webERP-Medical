@@ -250,7 +250,7 @@ if (isset($NewItem) AND isset($_POST['WO'])){
 
 if (isset($_POST['submit'])) { //The update button has been clicked
 
-	echo '<div class=centre><a href="' . $_SERVER['PHP_SELF'] .'">' . _('Enter a new work order') . '</a>';
+	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] .'">' . _('Enter a new work order') . '</a>';
 	echo '<br /><a href="' . $rootpath . '/SelectWorkOrder.php">' . _('Select an existing work order') . '</a>';
 	echo '<br /><a href="'. $rootpath . '/WorkOrderCosting.php?WO=' .  $_REQUEST['WO'] . '">' . _('Go to Costing'). '</a></div>';
 
@@ -453,7 +453,7 @@ if (DB_num_rows($WOResult)==1){
 	}
 }
 
-echo '<input type=hidden name="WO" value=' .$_POST['WO'] . '>';
+echo '<input type="hidden" name="WO" value=' .$_POST['WO'] . '>';
 echo '<tr><td class="label">' . _('Work Order Reference') . ':</td><td>' . $_POST['WO'] . '</td></tr>';
 echo '<tr><td class="label">' . _('Factory Location') .':</td>
 	<td><select name="StockLocation">';
@@ -539,13 +539,13 @@ if (isset($NumberOfOutputs)){
 			echo '<input type="hidden" name="HasWOSerialNos' . $i .'" value="' . $_POST['HasWOSerialNos' . $i] . '">';
 		}
 	}
-	echo '<input type=hidden name="NumberOfOutputs" value=' . ($i -1).'>';
+	echo '<input type="hidden" name="NumberOfOutputs" value="' . ($i -1).'" />';
 }
 echo '</table>';
 
-echo '<div class="centre"><br /><input type=submit name="submit" value="' . _('Update') . '">';
+echo '<div class="centre"><br /><input type="submit" name="submit" value="' . _('Update') . '">';
 
-echo '<br /><input type=submit name="delete" value="' . _('Delete This Work Order') . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');">';
+echo '<br /><input type="submit" name="delete" value="' . _('Delete This Work Order') . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');">';
 
 echo '<br /></div>';
 
@@ -583,7 +583,7 @@ while ($myrow1 = DB_fetch_array($result1)) {
 		<td><input type="Text" name="StockCode" size=15 maxlength=18 value=" <?php if (isset($_POST['StockCode'])) echo $_POST['StockCode']; ?>"></td>
 		</tr>
 		</table>
-		<br /><div class="centre"><input type=submit name="Search" value=" <?php echo _('Search Now'); ?>">
+		<br /><div class="centre"><input type="submit" name="Search" value=" <?php echo _('Search Now'); ?>" />
 
 <?php
 

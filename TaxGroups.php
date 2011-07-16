@@ -262,7 +262,7 @@ if (isset($SelectedGroup)) {
 	if (count($TaxAuthsUsed)>0) {
 		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-		echo '<input type=hidden name="SelectedGroup" value="' . $SelectedGroup .'">';
+		echo '<input type="hidden" name="SelectedGroup" value="' . $SelectedGroup .'">';
 		echo '<table class="selection">';
 		echo '<tr><th colspan=3><font size=3 color=navy>'._('Calculation Order').'</font></th></tr>';
 

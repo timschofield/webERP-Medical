@@ -323,7 +323,7 @@ foreach ($_SESSION['Items']->LineItems as $LnItm) {
 		if (isset($_POST['ProcessInvoice'])) {
 			echo '<td class="number">' . $LnItm->QtyDispatched . '</td>';
 		} else {
-			echo '<td class="number"><input type=hidden name="' . $LnItm->LineNumber . '_QtyDispatched"  value="' .
+			echo '<td class="number"><input type="hidden" name="' . $LnItm->LineNumber . '_QtyDispatched"  value="' .
 				$LnItm->QtyDispatched . '"><a href="' . $rootpath .'/ConfirmDispatchControlled_Invoice.php?LineNo='. $LnItm->LineNumber.'">' .$LnItm->QtyDispatched . '</a></td>';
 		}
 	} else {
@@ -627,7 +627,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 
 		if ($NegativesFound){
 			echo '<div class="centre">
-					<input type=submit name=Update Value=' . _('Update'). '></div>';
+					<input type="submit" name=Update Value=' . _('Update'). '></div>';
 			include('includes/footer.inc');
 			exit;
 		}
@@ -1672,14 +1672,14 @@ invoices can have a zero amount but there must be a quantity to invoice */
 	$j++;
 	echo '<tr>
 		<td>' . _('Consignment Note Ref'). ':</td>
-		<td><input tabindex='.$j.' type=text maxlength=15 size=15 name=Consignment value="' . $_POST['Consignment'] . '"></td>
+		<td><input tabindex='.$j.' type="text" maxlength=15 size=15 name=Consignment value="' . $_POST['Consignment'] . '"></td>
 	</tr>';
 	$j++;
 	echo '<tr>
 		<td>'._('Action For Balance'). ':</td>
 		<td><select tabindex='.$j.' name=BOPolicy>
-			<option selected Value="BO">'._('Automatically put balance on back order') . '</option>'.
-			'<option Value="CAN">'._('Cancel any quantities not delivered') . '</option>'.'</select></td>
+			<option selected Value="BO">'._('Automatically put balance on back order') . '</option>
+			<option value="CAN">'._('Cancel any quantities not delivered') . '</option>'.'</select></td>
 	</tr>';
 	$j++;
 	echo '<tr>
@@ -1690,12 +1690,12 @@ invoices can have a zero amount but there must be a quantity to invoice */
 	$j++;
 	echo '</table>
 	<br /><div class="centre">
-	<input type=submit tabindex='.$j.' name=Update Value=' . _('Update'). '><br />';
+	<input type="submit" tabindex="'.$j.'" name="Update" value="' . _('Update'). '" /><br />';
 
 	$j++;
-	echo '<br /><input type=submit tabindex='.$j.' name="ProcessInvoice" Value="'._('Process Invoice').'" /></div>';
+	echo '<br /><input type="submit" tabindex="'.$j.'" name="ProcessInvoice" value="'._('Process Invoice').'" /></div>';
 
-	echo '<input type=hidden name="ShipVia" value="' . $_SESSION['Items']->ShipVia . '">';
+	echo '<input type="hidden" name="ShipVia" value="' . $_SESSION['Items']->ShipVia . '" />';
 }
 
 echo '</form>';

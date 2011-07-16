@@ -1139,7 +1139,7 @@ function display(&$db, $PartNumber, $DebtorNo, $DebtorName) //####DISPLAY_DISPLA
 	</table>
 	<br />';
 	echo '<div class="centre"><input type="submit" name="submit" value="' . _('Run Inquiry') . '" /></div><br />
-		<div class=centre><input type="submit" name="submitcsv" value="' . _('Export as csv file') . '" /></div></form>';
+		<div class="centre"><input type="submit" name="submitcsv" value="' . _('Export as csv file') . '" /></div></form>';
 } // End of function display()
 
 

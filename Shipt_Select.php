@@ -45,11 +45,11 @@ If (isset($ShiptRef) && $ShiptRef!="") {
 } else {
 	if (isset($SelectedSupplier)) {
 		echo '<br />' ._('For supplier'). ': '. $SelectedSupplier . ' ' . _('and'). ' ';
-		echo '<input type=hidden name="SelectedSupplier" value="'. $SelectedSupplier. '">';
+		echo '<input type="hidden" name="SelectedSupplier" value="'. $SelectedSupplier. '" />';
 	}
 	If (isset($SelectedStockItem)) {
 		 echo _('for the part'). ': ' . $SelectedStockItem . '.';
-		echo '<input type=hidden name="SelectedStockItem" value="'. $SelectedStockItem. '">';
+		echo '<input type="hidden" name="SelectedStockItem" value="'. $SelectedStockItem. '" />';
 	}
 }
 
@@ -104,7 +104,7 @@ if (isset($_POST['SearchParts'])) {
 
 if (!isset($ShiptRef) or $ShiptRef==""){
 	echo '<table class="selection"><tr><td>';
-	echo _('Shipment Number'). ': <input type=text name="ShiptRef" MAXLENGTH =10 size=10> '.
+	echo _('Shipment Number'). ': <input type="text" name="ShiptRef" MAXLENGTH =10 size=10> '.
 		_('Into Stock Location').' :<select name="StockLocation"> ';
 	$sql = "SELECT loccode, locationname FROM locations";
 	$resultStkLocs = DB_query($sql,$db);
@@ -135,7 +135,7 @@ if (!isset($ShiptRef) or $ShiptRef==""){
 	}
 	echo '</select></td></tr></table>';
 
-	echo '<br /><div class=centre><input type=submit name="SearchShipments" value="'. _('Search Shipments'). '"></div></div><br />';
+	echo '<br /><div class="centre"><input type="submit" name="SearchShipments" value="'. _('Search Shipments'). '"></div></div><br />';
 }
 
 $SQL="SELECT categoryid,
@@ -171,8 +171,8 @@ while ($myrow1 = DB_fetch_array($result1)) {
 </table><br />
 
 <?php
-echo '<div class=centre><input type=submit name="SearchParts" value="'._('Search Parts Now').'">';
-echo '<input type=submit name="ResetPart" value="'. _('Show All') .'"></div><br />';
+echo '<div class="centre"><input type="submit" name="SearchParts" value="'._('Search Parts Now').'">';
+echo '<input type="submit" name="ResetPart" value="'. _('Show All') .'"></div><br />';
 
 if (isset($StockItemsResult)) {
 
@@ -201,7 +201,7 @@ if (isset($StockItemsResult)) {
 		}
 /*
 Code	 Description	On Hand		 Orders Ostdg     Units		 Code	Description 	 On Hand     Orders Ostdg	Units	 */
-		printf('<td><input type=submit name="SelectedStockItem" value="%s" /></td>
+		printf('<td><input type="submit" name="SelectedStockItem" value="%s" /></td>
 			<td>%s</td>
 			<td class="number">%s</td>
 			<td class="number">%s</td>

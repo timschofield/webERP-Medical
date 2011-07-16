@@ -123,7 +123,7 @@ if (isset($_POST['submit'])) {
 		echo '<br />';
 		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-		echo '<br /><div class="centre"><input type=submit name=return value="' . _('Return to list of tab types') . '"></div>';
+		echo '<br /><div class="centre"><input type="submit" name=return value="' . _('Return to list of tab types') . '"></div>';
 		echo '</form>';
 		include('includes/footer.inc');
 		exit;
@@ -206,8 +206,8 @@ if (! isset($_GET['delete'])) {
 		$_POST['TypeTabCode'] = $myrow['typetabcode'];
 		$_POST['TypeTabDescription']  = $myrow['typetabdescription'];
 
-		echo '<input type=hidden name="SelectedTab" value="' . $SelectedTab . '">';
-		echo '<input type=hidden name="TypeTabCode" value="' . $_POST['TypeTabCode']. '">';
+		echo '<input type="hidden" name="SelectedTab" value="' . $SelectedTab . '" />';
+		echo '<input type="hidden" name="TypeTabCode" value="' . $_POST['TypeTabCode']. '" />';
 		echo '<table class="selection"> <tr><td>' . _('Code Of Type Of Tab') . ':</td><td>';
 
 		// We dont allow the user to change an existing type code
@@ -230,7 +230,8 @@ if (! isset($_GET['delete'])) {
 
 	echo '</td></tr></table>'; // close main table
 
-	echo '<br /><div class="centre"><input type=submit name=submit value="' . _('Accept') . '"><input type=submit name=Cancel value="' . _('Cancel') . '"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Accept') . '" />
+				<input type="submit" name="Cancel" value="' . _('Cancel') . '" /></div>';
 
 	echo '</form>';
 

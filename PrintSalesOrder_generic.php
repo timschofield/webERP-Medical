@@ -9,23 +9,23 @@ include('includes/SQL_CommonFunctions.inc');
 
 //Get Out if we have no order number to work with
 If (!isset($_GET['TransNo']) OR $_GET['TransNo']==""){
-        $title = _('Select Order To Print');
-        include('includes/header.inc');
-        echo '<div class=centre><br /><br /><br />';
-        prnMsg( _('Select an Order Number to Print before calling this page') , 'error');
-        echo '<br /><br /><br /><table class="table_index"><tr><td class="menu_group_item">
-                <li><a href="'. $rootpath . '/SelectSalesOrder.php">' . _('Outstanding Sales Orders') . '</a></li>
-                <li><a href="'. $rootpath . '/SelectCompletedOrder.php">' . _('Completed Sales Orders') . '</a></li>
-                </td></tr></table></div><br /><br /><br />';
-        include('includes/footer.inc');
-        exit();
+		$title = _('Select Order To Print');
+		include('includes/header.inc');
+		echo '<div class="centre"><br /><br /><br />';
+		prnMsg( _('Select an Order Number to Print before calling this page') , 'error');
+		echo '<br /><br /><br /><table class="table_index"><tr><td class="menu_group_item">
+				<li><a href="'. $rootpath . '/SelectSalesOrder.php">' . _('Outstanding Sales Orders') . '</a></li>
+				<li><a href="'. $rootpath . '/SelectCompletedOrder.php">' . _('Completed Sales Orders') . '</a></li>
+				</td></tr></table></div><br /><br /><br />';
+		include('includes/footer.inc');
+		exit();
 }
 
 /*retrieve the order details from the database to print */
 $ErrMsg = _('There was a problem retrieving the order header details for Order Number') . ' ' . $_GET['TransNo'] . ' ' . _('from the database');
 
 $sql = "SELECT salesorders.debtorno,
-    		salesorders.customerref,
+			salesorders.customerref,
 		salesorders.comments,
 		salesorders.orddate,
 		salesorders.deliverto,
@@ -60,43 +60,43 @@ $result=DB_query($sql,$db, $ErrMsg);
 
 //If there are no rows, there's a problem.
 if (DB_num_rows($result)==0){
-        $title = _('Print Packing Slip Error');
-        include('includes/header.inc');
-         echo '<div class=centre><br /><br /><br />';
-        prnMsg( _('Unable to Locate Order Number') . ' : ' . $_GET['TransNo'] . ' ', 'error');
-        echo '<br /><br /><br /><table class="table_index"><tr><td class="menu_group_item">
-                <li><a href="'. $rootpath . '/SelectSalesOrder.php">' . _('Outstanding Sales Orders') . '</a></li>
-                <li><a href="'. $rootpath . '/SelectCompletedOrder.php">' . _('Completed Sales Orders') . '</a></li>
-                </td></tr></table></div><br /><br /><br />';
-        include('includes/footer.inc');
-        exit();
+		$title = _('Print Packing Slip Error');
+		include('includes/header.inc');
+		echo '<div class="centre"><br /><br /><br />';
+		prnMsg( _('Unable to Locate Order Number') . ' : ' . $_GET['TransNo'] . ' ', 'error');
+		echo '<br /><br /><br /><table class="table_index"><tr><td class="menu_group_item">
+				<li><a href="'. $rootpath . '/SelectSalesOrder.php">' . _('Outstanding Sales Orders') . '</a></li>
+				<li><a href="'. $rootpath . '/SelectCompletedOrder.php">' . _('Completed Sales Orders') . '</a></li>
+				</td></tr></table></div><br /><br /><br />';
+		include('includes/footer.inc');
+		exit();
 } elseif (DB_num_rows($result)==1){ /*There is only one order header returned - thats good! */
 
-        $myrow = DB_fetch_array($result);
-        /* Place the deliver blind variable into a hold variable to used when
-        producing the packlist */
-        $DeliverBlind = $myrow['deliverblind'];
-        if ($myrow['printedpackingslip']==1 AND ($_GET['Reprint']!='OK' OR !isset($_GET['Reprint']))){
-                $title = _('Print Packing Slip Error');
-                include('includes/header.inc');
-                echo '<br />';
-                prnMsg( _('The packing slip for order number') . ' ' . $_GET['TransNo'] . ' ' .
-                        _('has previously been printed') . '. ' . _('It was printed on'). ' ' . ConvertSQLDate($myrow['datepackingslipprinted']) .
-                        '<br />' . _('This check is there to ensure that duplicate packing slips are not produced and dispatched more than once to the customer'), 'warn' );
-              echo '<p><a href="' . $rootpath . '/PrintCustOrder.php?TransNo=' . $_GET['TransNo'] . '&Reprint=OK">'
-                . _('Do a Re-Print') . ' (' . _('On Pre-Printed Stationery') . ') ' . _('Even Though Previously Printed') . '</a></p>' .
-                '<a href="' . $rootpath. '/PrintCustOrder_generic.php?TransNo=' . $_GET['TransNo'] . '&Reprint=OK">'. _('Do a Re-Print') . ' (' . _('Plain paper') . ' - ' . _('A4') . ' ' . _('landscape') . ') ' . _('Even Though Previously Printed'). '</a>';
+		$myrow = DB_fetch_array($result);
+		/* Place the deliver blind variable into a hold variable to used when
+		producing the packlist */
+		$DeliverBlind = $myrow['deliverblind'];
+		if ($myrow['printedpackingslip']==1 AND ($_GET['Reprint']!='OK' OR !isset($_GET['Reprint']))){
+				$title = _('Print Packing Slip Error');
+				include('includes/header.inc');
+				echo '<br />';
+				prnMsg( _('The packing slip for order number') . ' ' . $_GET['TransNo'] . ' ' .
+						_('has previously been printed') . '. ' . _('It was printed on'). ' ' . ConvertSQLDate($myrow['datepackingslipprinted']) .
+						'<br />' . _('This check is there to ensure that duplicate packing slips are not produced and dispatched more than once to the customer'), 'warn' );
+			  echo '<p><a href="' . $rootpath . '/PrintCustOrder.php?TransNo=' . $_GET['TransNo'] . '&Reprint=OK">'
+				. _('Do a Re-Print') . ' (' . _('On Pre-Printed Stationery') . ') ' . _('Even Though Previously Printed') . '</a></p>' .
+				'<a href="' . $rootpath. '/PrintCustOrder_generic.php?TransNo=' . $_GET['TransNo'] . '&Reprint=OK">'. _('Do a Re-Print') . ' (' . _('Plain paper') . ' - ' . _('A4') . ' ' . _('landscape') . ') ' . _('Even Though Previously Printed'). '</a>';
 
-                echo '<br /><br /><br />';
-                echo  _('Or select another Order Number to Print');
-                echo '<table class="table_index"><tr><td class="menu_group_item">
-                        <li><a href="'. $rootpath . '/SelectSalesOrder.php">' . _('Outstanding Sales Orders') . '</a></li>
-                        <li><a href="'. $rootpath . '/SelectCompletedOrder.php">' . _('Completed Sales Orders') . '</a></li>
-                        </td></tr></table></div><br /><br /><br />';
+				echo '<br /><br /><br />';
+				echo  _('Or select another Order Number to Print');
+				echo '<table class="table_index"><tr><td class="menu_group_item">
+						<li><a href="'. $rootpath . '/SelectSalesOrder.php">' . _('Outstanding Sales Orders') . '</a></li>
+						<li><a href="'. $rootpath . '/SelectCompletedOrder.php">' . _('Completed Sales Orders') . '</a></li>
+						</td></tr></table></div><br /><br /><br />';
 
-                include('includes/footer.inc');
-                exit;
-        }//packing slip has been printed.
+				include('includes/footer.inc');
+				exit;
+		}//packing slip has been printed.
 }
 
 /*retrieve the order details from the database to print */
@@ -144,7 +144,7 @@ for ($i=1;$i<=2;$i++){  /*Print it out twice one copy for customer and one for o
 
 		while ($myrow2=DB_fetch_array($result)){
 
-            $ListCount ++;
+			$ListCount ++;
 
 			$DisplayQty = number_format($myrow2['quantity'],2);
 			$DisplayPrevDel = number_format($myrow2['qtyinvoiced'],2);
@@ -182,8 +182,8 @@ if ($ListCount == 0){
 	include('includes/footer.inc');
 	exit;
 } else {
-    $pdf->OutputD($_SESSION['DatabaseName'] . '_SalesOrder_' . date('Y-m-d') . '.pdf');//UldisN
-    $pdf->__destruct(); //UldisN
+	$pdf->OutputD($_SESSION['DatabaseName'] . '_SalesOrder_' . date('Y-m-d') . '.pdf');//UldisN
+	$pdf->__destruct(); //UldisN
 
 	$sql = "UPDATE salesorders SET printedpackingslip=1, datepackingslipprinted='" . Date('Y-m-d') . "' WHERE salesorders.orderno='" .$_GET['TransNo'] . "'";
 	$result = DB_query($sql,$db);

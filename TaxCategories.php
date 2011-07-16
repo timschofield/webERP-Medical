@@ -216,7 +216,7 @@ if (! isset($_GET['delete'])) {
 
 			$_POST['TaxCategoryName']  = $myrow['taxcatname'];
 
-			echo '<input type=hidden name="SelectedTaxCategory" value="' . $myrow['taxcatid'] . '">';
+			echo '<input type="hidden" name="SelectedTaxCategory" value="' . $myrow['taxcatid'] . '">';
 			echo '<table class="selection">';
 		}
 
@@ -226,11 +226,11 @@ if (! isset($_GET['delete'])) {
 	}
 	echo '<tr>
 		<td>' . _('Tax Category Name') . ':' . '</td>
-		<td><input type="Text" name="TaxCategoryName" size=30 maxlength=30 value="' . $_POST['TaxCategoryName'] . '"></td>
+		<td><input type="text" name="TaxCategoryName" size=30 maxlength=30 value="' . $_POST['TaxCategoryName'] . '"></td>
 		</tr>';
 	echo '</table>';
 
-	echo '<br /><div class="centre"><input type=Submit name=submit value=' . _('Enter Information') . '></div>';
+	echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div>';
 
 	echo '</form>';
 

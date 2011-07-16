@@ -216,12 +216,12 @@ if (isset($_POST['PrintPDF'])) {
 	echo '</select></td></tr>';
 
 	echo '<tr><td>' . _('Price List') . ':</td><td><select name="price"> ';
-	echo '<option Value="all">' ._('All Prices').'</option>';
-	echo '<option Value="current">' ._('Only Current Price').'</option>';
+	echo '<option value="all">' ._('All Prices').'</option>';
+	echo '<option value="current">' ._('Only Current Price').'</option>';
 	echo '</select></td></tr>';
 
 
-	echo '</table><br/><div class="centre"><input type=submit name="PrintPDF" value="' . _('Print PDF') . '"></div>';
+	echo '</table><br/><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
 
 	include('includes/footer.inc');
 

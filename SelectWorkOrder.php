@@ -104,9 +104,9 @@ if (!isset($StockID)) {
 	if (!isset($_REQUEST['WO']) or ($_REQUEST['WO']=='')){
 		echo '<table class="selection"><tr><td>';
 		if (isset($_REQUEST['SelectedStockItem'])) {
-			echo _('For the item') . ': ' . $_REQUEST['SelectedStockItem'] . ' ' . _('and') . ' <input type=hidden name="SelectedStockItem" value="' . $_REQUEST['SelectedStockItem'] . '">';
+			echo _('For the item') . ': ' . $_REQUEST['SelectedStockItem'] . ' ' . _('and') . ' <input type="hidden" name="SelectedStockItem" value="' . $_REQUEST['SelectedStockItem'] . '">';
 		}
-		echo _('Work Order number') . ': <input type=text name="WO" MAXLENGTH =8 size=9>&nbsp ' . _('Processing at') . ':<select name="StockLocation"> ';
+		echo _('Work Order number') . ': <input type="text" name="WO" MAXLENGTH =8 size=9>&nbsp ' . _('Processing at') . ':<select name="StockLocation"> ';
 
 		$sql = "SELECT loccode, locationname FROM locations";
 
@@ -142,7 +142,7 @@ if (!isset($StockID)) {
 		}
 
 		echo '</select> &nbsp&nbsp';
-		echo '<input type=submit name="SearchOrders" value="' . _('Search') . '">';
+		echo '<input type="submit" name="SearchOrders" value="' . _('Search') . '">';
 		echo '&nbsp;&nbsp;<a href="' . $rootpath . '/WorkOrderEntry.php">' . _('New Work Order') . '</a></td></tr></table><br />';
 	}
 
@@ -169,11 +169,11 @@ if (!isset($StockID)) {
 	</tr>
 	  	<tr><td></td>
 	  		<td><font size=3><b>' . _('OR') . ' </b></font><font size=1>' . _('Enter extract of the Stock Code') . '</b>:</font></td>
-	  		<td><input type="Text" name="StockCode" size=15 maxlength=18></td>
+	  		<td><input type="text" name="StockCode" size=15 maxlength=18></td>
 	  	</tr>
 	  </table><br />';
-	echo '<div class=centre><input type=submit name="SearchParts" value="' . _('Search Items Now') . '">
-		<input type=submit name="ResetPart" value="' . _('Show All') . '"></div>';
+	echo '<div class="centre"><input type="submit" name="SearchParts" value="' . _('Search Items Now') . '">
+		<input type="submit" name="ResetPart" value="' . _('Show All') . '"></div>';
 }
 
 if (isset($StockItemsResult)) {
@@ -200,7 +200,7 @@ if (isset($StockItemsResult)) {
 			$k++;
 		}
 
-		printf('<td><input type=submit name="SelectedStockItem" value="%s" /></td>
+		printf('<td><input type="submit" name="SelectedStockItem" value="%s" /></td>
 			<td>%s</td>
 			<td class="number">%s</td>
 			<td>%s</td>

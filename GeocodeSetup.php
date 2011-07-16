@@ -221,8 +221,8 @@ if (!isset($_GET['delete'])) {
 		$_POST['map_width']  = $myrow['map_width'];
 		$_POST['map_host']  = $myrow['map_host'];
 
-		echo '<input type=hidden name="SelectedParam" value="' . $SelectedParam . '">';
-		echo '<input type=hidden name="geocodeid" value="' . $_POST['geocodeid'] . '">';
+		echo '<input type="hidden" name="SelectedParam" value="' . $SelectedParam . '" />';
+		echo '<input type="hidden" name="geocodeid" value="' . $_POST['geocodeid'] . '" />';
 		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Geocode Setup') . '" alt="">'. _('Setup configuration for Geocoding of Customers and Suppliers') .'</p>';
 		echo '<table><tr><td>'. _('Geocode Code') .':</td><td>';
 		echo $_POST['geocodeid'] . '</td></tr>';

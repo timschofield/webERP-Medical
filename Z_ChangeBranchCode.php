@@ -203,7 +203,7 @@ echo '<br /><table>
 <tr><td>' . _('New Branch Code') . ':</td><td><input type="text" name="NewBranchCode" size=20 maxlength=20></td></tr>
 </table>';
 
-echo '<input type=submit name="ProcessCustomerChange" value="' . _('Process') . '">';
+echo '<input type="submit" name="ProcessCustomerChange" value="' . _('Process') . '" />';
 
 echo '</form>';
 

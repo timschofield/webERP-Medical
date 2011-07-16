@@ -290,8 +290,8 @@ if (isset($SelectedBankAccount) AND !isset($_GET['delete'])) {
 	$_POST['CurrCode'] = $myrow['currcode'];
 	$_POST['DefAccount'] = $myrow['invoice'];
 
-	echo '<input type=hidden name=SelectedBankAccount value=' . $SelectedBankAccount . '>';
-	echo '<input type=hidden name=AccountCode value=' . $_POST['AccountCode'] . '>';
+	echo '<input type="hidden" name="SelectedBankAccount" value="' . $SelectedBankAccount . '" />';
+	echo '<input type="hidden" name="AccountCode" value="' . $_POST['AccountCode'] . '" />';
 	echo '<table class="selection"> <tr><td>' . _('Bank Account GL Code') . ':</td><td>';
 	echo $_POST['AccountCode'] . '</td></tr>';
 } else { //end of if $Selectedbank account only do the else when a new record is being entered

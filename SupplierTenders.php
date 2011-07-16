@@ -150,8 +150,8 @@ if (isset($_POST['SupplierID']) and empty($_POST['TenderType']) and empty($_POST
 	echo '<option value=2>'._('Create a new offer from').' '.$Supplier .'</option>';
 	echo '<option value=3>'._('View any open tenders without an offer from').' '.$Supplier .'</option>';
 	echo '</select></td></tr>';
-	echo '<input type=hidden name=SupplierID value="'.$_POST['SupplierID'].'" />';
-	echo '<tr><td colspan=2><div class=centre><input type="submit" name="submit" value="' . _('Select') . '"></div></td></tr>';
+	echo '<input type="hidden" name=SupplierID value="'.$_POST['SupplierID'].'" />';
+	echo '<tr><td colspan="2"><div class="centre"><input type="submit" name="submit" value="' . _('Select') . '" /></div></td></tr>';
 	echo '</table></form>';
 }
 
@@ -325,17 +325,17 @@ if ($_POST['TenderType']!=3 and isset($_SESSION['offer']) and $_SESSION['offer']
 			}
 			echo '<td>'.$LineItems->StockID.'</td>';
 			echo '<td>'.$LineItems->ItemDescription.'</td>';
-			echo '<td><input type=text class="number" name="qty'.$LineItems->LineNo.'" value='.number_format($LineItems->Quantity,$LineItems->DecimalPlaces).'></td>';
+			echo '<td><input type="text" class="number" name="qty'.$LineItems->LineNo.'" value='.number_format($LineItems->Quantity,$LineItems->DecimalPlaces).'></td>';
 			echo '<td>'.$LineItems->Units.'</td>';
-			echo '<td><input type=text class="number" name="price'.$LineItems->LineNo.'" value='.number_format($LineItems->Price,2,'.','').'></td>';
+			echo '<td><input type="text" class="number" name="price'.$LineItems->LineNo.'" value='.number_format($LineItems->Price,2,'.','').'></td>';
 			echo '<td class="number">'.number_format($LineItems->Price*$LineItems->Quantity,2).'</td>';
-			echo '<td><input type=text size=11 class="date" alt='.$_SESSION['DefaultDateFormat'].' name="expirydate'.$LineItems->LineNo.'" value='.$LineItems->ExpiryDate.'></td>';
+			echo '<td><input type="text" size=11 class="date" alt='.$_SESSION['DefaultDateFormat'].' name="expirydate'.$LineItems->LineNo.'" value='.$LineItems->ExpiryDate.'></td>';
 			echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $LineItems->LineNo . '&Type=' . $_POST['TenderType'] . '">' . _('Remove') . '</a></td></tr>';
 			echo '</tr>';
 		}
 	}
 	echo '</table>';
-	echo '<input type=hidden name=TenderType value="'.$_POST['TenderType'].'">';
+	echo '<input type="hidden" name=TenderType value="'.$_POST['TenderType'].'" />';
 	if ($_POST['TenderType']==1) {
 		echo '<br /><div class="centre"><input type="submit" name="Update" value="Update offer">';
 		echo '<input type="submit" name="Refresh" value="Refresh screen"></div>';
@@ -403,7 +403,7 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==2 and !isset($_POST['S
 		echo '<input type="text" name="StockCode" size=15 maxlength=18>';
 	}
 	echo '</td></tr></table><br />';
-	echo '<div class="centre"><input type=submit name="Search" value="' . _('Search Now') . '"></div><br /></form>';
+	echo '<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" /></div><br /></form>';
 	echo '<script  type="text/javascript">defaultControl(document.forms[0].StockCode);</script>';
 	echo '</form>';
 }

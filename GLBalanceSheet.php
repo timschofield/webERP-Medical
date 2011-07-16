@@ -52,8 +52,8 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 
 	echo '</table>';
 
-	echo '<br /><div class="centre"><input type=submit Name="ShowBalanceSheet" Value="'._('Show on Screen (HTML)').'"></div>';
-	echo '<br /><div class="centre"><input type=submit Name="PrintPDF" Value="'._('Produce PDF Report').'"></div>';
+	echo '<br /><div class="centre"><input type="submit" Name="ShowBalanceSheet" Value="'._('Show on Screen (HTML)').'"></div>';
+	echo '<br /><div class="centre"><input type="submit" Name="PrintPDF" Value="'._('Produce PDF Report').'"></div>';
 
 	/*Now do the posting while the user is thinking about the period to select */
 	include ('includes/GLPostings.inc');
@@ -301,7 +301,7 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 	include('includes/header.inc');
 	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<input type=hidden name="BalancePeriodEnd" value="' . $_POST['BalancePeriodEnd'] . '">';
+	echo '<input type="hidden" name="BalancePeriodEnd" value="' . $_POST['BalancePeriodEnd'] . '" />';
 
 	$RetainedEarningsAct = $_SESSION['CompanyRecord']['retainedearnings'];
 
@@ -656,7 +656,7 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 		</tr>';
 
 	echo '</table>';
-	echo '<br /><div class="centre"><input type=submit Name="SelectADifferentPeriod" Value="'._('Select A Different Balance Date').'"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="SelectADifferentPeriod" value="'._('Select A Different Balance Date').'" /></div>';
 }
 
 echo '</form>';

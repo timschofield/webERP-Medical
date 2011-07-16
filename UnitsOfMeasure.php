@@ -224,7 +224,7 @@ if (! isset($_GET['delete'])) {
 			$_POST['MeasureID'] = $myrow['unitid'];
 			$_POST['MeasureName']  = $myrow['unitname'];
 
-			echo '<input type=hidden name="SelectedMeasureID" value="' . $_POST['MeasureID'] . '">';
+			echo '<input type="hidden" name="SelectedMeasureID" value="' . $_POST['MeasureID'] . '">';
 			echo '<table class="selection">';
 		}
 
@@ -238,7 +238,7 @@ if (! isset($_GET['delete'])) {
 		</tr>';
 	echo '</table>';
 
-	echo '<br /><div class="centre"><input type=Submit name=submit value=' . _('Enter Information') . '></div>';
+	echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div>';
 
 	echo '</form>';
 

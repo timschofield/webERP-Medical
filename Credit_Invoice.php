@@ -315,7 +315,7 @@ foreach ($_SESSION['CreditItems']->LineItems as $LnItm) {
 
 		if ($LnItm->Controlled==1){
 
-			echo '<td><input type=hidden name="Quantity_' . $LnItm->LineNumber .'"  value="' . $LnItm->QtyDispatched . '"><a href="'.$rootpath.'/CreditItemsControlled.php?LineNo=' . $LnItm->LineNumber . '&CreditInvoice=Yes>' . $LnItm->QtyDispatched . '</a></td>';
+			echo '<td><input type="hidden" name="Quantity_' . $LnItm->LineNumber .'"  value="' . $LnItm->QtyDispatched . '" /><a href="'.$rootpath.'/CreditItemsControlled.php?LineNo=' . $LnItm->LineNumber . '&CreditInvoice=Yes>' . $LnItm->QtyDispatched . '</a></td>';
 
 		} else {
 
@@ -357,7 +357,7 @@ foreach ($_SESSION['CreditItems']->LineItems as $LnItm) {
 				echo '<br />';
 			}
 			if (!isset($_POST['ProcessCredit'])) {
-				echo '<input type=text class="number" name="' . $LnItm->LineNumber . $Tax->TaxCalculationOrder .
+				echo '<input type="text" class="number" name="' . $LnItm->LineNumber . $Tax->TaxCalculationOrder .
 					'_TaxRate" maxlength=4 size=4 value="' . $Tax->TaxRate*100 . '">';
 			}
 			$i++;
@@ -398,7 +398,7 @@ if (!isset($_POST['ProcessCredit'])) {
 		<td class="number">' . number_format($_SESSION['Old_FreightCost'],2) . '</td>
 		<td></td>
 		<td colspan=2 class="number">' . _('Credit Freight Cost') . '</td>
-		<td><input tabindex="'.$j.'" type=text class="number" size=6 maxlength=6 name="ChargeFreightCost" value="' . $_SESSION['CreditItems']->FreightCost . '"></td>';
+		<td><input tabindex="'.$j.'" type="text" class="number" size=6 maxlength=6 name="ChargeFreightCost" value="' . $_SESSION['CreditItems']->FreightCost . '"></td>';
 
 	echo '<td>';
 	echo '</td><td>';
@@ -421,7 +421,7 @@ foreach ($_SESSION['CreditItems']->FreightTaxes as $FreightTaxLine) {
 	}
 
 	if (!isset($_POST['ProcessCredit'])) {
-		echo  '<input type=text class="number" name=FreightTaxRate' . $FreightTaxLine->TaxCalculationOrder . ' maxlength=4 size=4 value=' . $FreightTaxLine->TaxRate * 100 . '>';
+		echo  '<input type="text" class="number" name=FreightTaxRate' . $FreightTaxLine->TaxCalculationOrder . ' maxlength=4 size=4 value=' . $FreightTaxLine->TaxRate * 100 . '>';
 	}
 	if ($FreightTaxLine->TaxOnTax ==1){
 		$TaxTotals[$FreightTaxLine->TaxAuthID] += ($FreightTaxLine->TaxRate * ($_SESSION['CreditItems']->FreightCost + $FreightTaxTotal));
@@ -1541,7 +1541,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 	}
 	$j++;
 	echo '<tr><td>' . _('Credit note text') . '</td><td><textarea tabindex='.$j.'  name=CreditText cols=31 rows=5>' . $_POST['CreditText'] . '</textarea></td></tr>';
-	echo '</table><br /><div class="centre"><input TABINDEX='.$j.' type=submit name=Update Value=' . _('Update') . '><br />';
+	echo '</table><br /><div class="centre"><input TABINDEX='.$j.' type="submit" name="Update" value="' . _('Update') . '" /><br />';
 	$j++;
 	 echo '<input type="submit" tabindex='.$j++.' name="ProcessCredit" value="' . _('Process Credit') .'"></div>';
 }

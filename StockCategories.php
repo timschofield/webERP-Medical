@@ -308,8 +308,8 @@ if (! isset($_GET['delete'])) {
 			$_POST['MaterialUseageVarAc']  = $myrow['materialuseagevarac'];
 			$_POST['WIPAct']  = $myrow['wipact'];
 		}
-		echo '<input type=hidden name="SelectedCategory" value="' . $SelectedCategory . '">';
-		echo '<input type=hidden name="CategoryID" value="' . $_POST['CategoryID'] . '">';
+		echo '<input type="hidden" name="SelectedCategory" value="' . $SelectedCategory . '">';
+		echo '<input type="hidden" name="CategoryID" value="' . $_POST['CategoryID'] . '">';
 		echo '<table class="selection"><tr><td>' . _('Category Code') . ':</td><td>' . $_POST['CategoryID'] . '</td></tr>';
 
 	} else { //end of if $SelectedCategory only do the else when a new record is being entered
@@ -530,7 +530,7 @@ if (! isset($_GET['delete'])) {
 				<td><input type="textbox" name="PropMaximum' . $PropertyCounter . '"></td>
 				<td align="center"><input type="checkbox" name="PropReqSO' . $PropertyCounter .'"></td></tr>';
 		echo '</table>';
-		echo '<input type=hidden name="PropertyCounter" value=' . $PropertyCounter . '>';
+		echo '<input type="hidden" name="PropertyCounter" value="' . $PropertyCounter . '" />';
 
 	} /* end if there is a category selected */
 

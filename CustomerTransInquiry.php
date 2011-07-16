@@ -44,7 +44,7 @@ if (!isset($_POST['ToDate'])){
 echo '<td>' . _('From') . ':</td><td><input tabindex="2" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="TEXT" name="FromDate" maxlength="10" size="11" value="' . $_POST['FromDate'] . '"></td>';
 echo '<td>' . _('To') . ':</td><td><input tabindex="3" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="TEXT" name="ToDate" maxlength="10" size="11" value="' . $_POST['ToDate'] . '"></td>';
 
-echo "</tr></table><br /><div class='centre'><input tabindex=4 type=submit name='ShowResults' value='" . _('Show Transactions') . "'>";
+echo '</tr></table><br /><div class="centre"><input tabindex="4" type="submit" name="ShowResults" value="' . _('Show Transactions') . '">';
 
 echo '</form></div>';
 

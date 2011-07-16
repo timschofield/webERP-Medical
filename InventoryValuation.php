@@ -237,7 +237,7 @@ if (isset($_POST['PrintPDF'])
 		echo '<option Value="Yes">' . _('Detailed Report') . '</option>';
 		echo '</select></td></tr>';
 
-		echo '</table><br /><div class="centre"><input type=Submit Name="PrintPDF" Value="' . _('Print PDF') . '"></div>';
+		echo '</table><br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
 	}
 	include('includes/footer.inc');
 

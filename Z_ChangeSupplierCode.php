@@ -22,7 +22,7 @@ echo '
 	<td><input type="text" name="NewSupplierNo" size=20 maxlength=20></td>
 	</tr>
     </table>
-    <input type=submit name="ProcessSupplierChange" value="' . _('Process') . '">
+    <input type="submit" name="ProcessSupplierChange" value="' . _('Process') . '" />
     <div>
     </form>';
 

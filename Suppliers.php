@@ -795,11 +795,11 @@ if (!isset($SupplierID)) {
 		$_POST['FactorID'] = $myrow['factorcompanyid'];
 		$_POST['TaxRef'] = $myrow['taxref'];
 
-		echo '<input type=hidden name="SupplierID" value="' . $SupplierID . '">';
+		echo '<input type="hidden" name="SupplierID" value="' . $SupplierID . '">';
 
 	} else {
 	// its a new supplier being added
-		echo '<input type=hidden name="New" value="Yes">';
+		echo '<input type="hidden" name="New" value="Yes" />';
 		echo '<tr><td>' . _('Supplier Code') . ':</td><td><input '.(in_array('ID',$Errors) ? 'class="inputerror"' : '').' type="text" name="SupplierID" value="' . $SupplierID . '" size=12 maxlength=10></td></tr>';
 	}
 
@@ -903,7 +903,7 @@ if (!isset($SupplierID)) {
 		echo '<br /><div class="centre"><input type="Submit" name="submit" value="' . _('Update Supplier') . '"></div><br />';
 //		echo '<font color=red><b>' . _('WARNING') . ': ' . _('There is no second warning if you hit the delete button below') . '. ' . _('However checks will be made to ensure there are no outstanding purchase orders or existing accounts payable transactions before the deletion is processed') . '<br /></font></b>';
 		prnMsg(_('WARNING') . ': ' . _('There is no second warning if you hit the delete button below') . '. ' . _('However checks will be made to ensure there are no outstanding purchase orders or existing accounts payable transactions before the deletion is processed'), 'Warn');
-		echo '<br /><div class=centre><input type="submit" name="delete" value="' . _('Delete Supplier') . '" onclick=\"return confirm(\'' . _('Are you sure you wish to delete this supplier?') . '\');\"></form>';
+		echo '<br /><div class="centre"><input type="submit" name="delete" value="' . _('Delete Supplier') . '" onclick=\"return confirm(\'' . _('Are you sure you wish to delete this supplier?') . '\');\"></form>';
 		echo '<br /><a href="' . $rootpath . '/SupplierContacts.php?SupplierID=' . $SupplierID . '">' . _('Review Contact Details') . '</a></div>';
 	}
 	echo '</div>';

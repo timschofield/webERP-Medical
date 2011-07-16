@@ -398,19 +398,6 @@ If (isset($_POST['PrintPDF']) && isset($_POST['FromCust']) && $_POST['FromCust']
 
 	if (isset($pdf)){
 
-// Here we output the actual PDF file, we have given the file a name (this could perhaps be a variable based on the Customer name), and outputted via the "I" Inline method
-/*
-	$pdfcode = $pdf->output("Customer_Statement.pdf", "I");
-	$len = strlen($pdfcode);
-	header('Content-type: application/pdf');
-	header('Content-Length: ' . $len);
-	header('Content-Disposition: inline; filename=Statements.pdf');
-	header('Expires: 0');
-	header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-	header('Pragma: public');
-    $pdf->Output('CustStatements.pdf', 'I');
-*/
-
         $pdf->OutputI($_SESSION['DatabaseName'] . '_CustStatements_' . date('Y-m-d') . '.pdf');//UldisN
         $pdf->__destruct(); //UldisN
 
@@ -435,12 +422,12 @@ If (isset($_POST['PrintPDF']) && isset($_POST['FromCust']) && $_POST['FromCust']
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 		echo '<tr><td>' . _('Starting Customer statement to print (Customer code)'). '
-			</td><td><input Type=text max=6 size=7 name=FromCust value="1"></td></tr>
+			</td><td><input type="text" max=6 size=7 name=FromCust value="1"></td></tr>
 			<tr><td>'. _('Ending Customer statement to print (Customer code)').'</td><td>
-				<input Type=text max=6 size=7 name=ToCust value="zzzzzz"></td></tr></table>
+				<input type="text" max="6" size="7" name="ToCust" value="zzzzzz" /></td></tr></table>
 				<br /><div class="centre">
-				<input type=Submit Name="PrintPDF" Value="' .
-				_('Print All Statements in the Range Selected').'">
+				<input type="submit" Name="PrintPDF" value="' .
+				_('Print All Statements in the Range Selected').'" />
 			</div>';
 	}
 	echo '<br /><br /><br />';

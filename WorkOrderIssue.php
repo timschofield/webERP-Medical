@@ -547,7 +547,7 @@ echo '<table cellpadding=2 class="selection">
 		<td colspan="2">' . $WORow['units'] . '</td></tr>
 	<tr><td colspan=4></td></tr>
 	 <tr><td class="label">' . _('Date Material Issued') . ':</td>
-		<td><input type=text name=issuedate value=' . Date($_SESSION['DefaultDateFormat']) . ' class="date" size=10 alt="'.$_SESSION['DefaultDateFormat'].'" ></td>
+		<td><input type="text" name=issuedate value=' . Date($_SESSION['DefaultDateFormat']) . ' class="date" size=10 alt="'.$_SESSION['DefaultDateFormat'].'" ></td>
 		<td class="label">' . _('Issued From') . ':</td><td>';
 
 if (!isset($_POST['IssueItem'])){
@@ -652,7 +652,7 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 		<td><input type="Text" name="StockCode" size="15" maxlength="18" value=" <?php if (isset($_POST['StockCode'])) echo $_POST['StockCode']; ?>"></td>
 			</tr>
 			</table>
-			<br /><div class="centre"><input type=submit name="Search" value=" <?php echo _('Search Now'); ?>">
+			<br /><div class="centre"><input type="submit" name="Search" value=" <?php echo _('Search Now'); ?>">
 
 	<script language='JavaScript' type='text/javascript'>
 
@@ -758,7 +758,7 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 						$db,_('Could not retrieve the serial numbers available at the location specified because'));
 			if (DB_num_rows($SerialNoResult)==0){
 				echo '<tr><td>' . _('There are no serial numbers at this location to issue') . '</td></tr>';
-				echo '<tr><td colspan=2><div class=centre><input type=submit name="Retry" value="' . _('Reselect Location or Issued Item') . '"></td></tr>';
+				echo '<tr><td colspan=2><div class="centre"><input type="submit" name="Retry" value="' . _('Reselect Location or Issued Item') . '"></td></tr>';
 			} else {
 				echo '<tr><td><select name="SerialNos[]" multiple>';
 				while ($SerialNoRow = DB_fetch_array($SerialNoResult)){
@@ -770,7 +770,7 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 				}
 				echo '</select></td></tr>';
 				echo '<input type="hidden" name="IssueItem" value="' . $_POST['IssueItem'] . '">';
-				echo '<tr><td colspan=2><div class=centre><input type=submit name="Process" value="' . _('Process Items Issued') . '"></div></td></tr>';
+				echo '<tr><td colspan=2><div class="centre"><input type="submit" name="Process" value="' . _('Process Items Issued') . '"></div></td></tr>';
 			}
 		} else { //controlled but not serialised - just lot/batch control
 			echo '<tr><th colspan="2">' . _('Batch/Lots Issued') . '</th></tr>';
@@ -780,13 +780,13 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 					  <td><input type="textbox" name="Qty' . $i .'"></td></tr>';
 			}
 			echo '<input type="hidden" name="IssueItem" value="' . $_POST['IssueItem'] . '">';
-			echo '<tr><td colspan=2><div class=centre><input type=submit name="Process" value="' . _('Process Items Issued') . '"></div></td></tr>';
+			echo '<tr><td colspan=2><div class="centre"><input type="submit" name="Process" value="' . _('Process Items Issued') . '" /></div></td></tr>';
 		} //end of lot/batch control
 	} else { //not controlled - an easy one!
 		echo '<input type="hidden" name="IssueItem" value="' . $_POST['IssueItem'] . '">';
 		echo '<tr><td>' . _('Quantity Issued') . ':</td>
 			  <td><input class="number" type="textbox" name="Qty"></tr>';
-		echo '<tr><td colspan=2><div class=centre><input type=submit name="Process" value="' . _('Process Items Issued') . '"></div></td></tr>';
+		echo '<tr><td colspan=2><div class="centre"><input type="submit" name="Process" value="' . _('Process Items Issued') . '"></div></td></tr>';
 	}
 } //end if selecting new item to issue or entering the issued item quantities
 echo '</table>';

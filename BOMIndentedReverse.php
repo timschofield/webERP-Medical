@@ -249,13 +249,13 @@ if (isset($_POST['PrintPDF'])) {
 		_('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
 	echo '<br /><br /><form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<tr><td>' . _('Part') . ":</td>";
-	echo "<td><input type ='text' name='Part' size='20'>";
-	echo '<tr><td>' . _('Print Option') . ":</td><td><select name='Fill'>";
-	echo "<option selected value='yes'>" . _('Print With Alternating Highlighted Lines') . '</option>';
-	echo "<option value='no'>" . _('Plain Print') . '</option>';
+	echo '<tr><td>' . _('Part') . ':</td>';
+	echo '<td><input type ="text" name="Part" size="20">';
+	echo '<tr><td>' . _('Print Option') . ':</td><td><select name="Fill">';
+	echo '<option selected value="yes">' . _('Print With Alternating Highlighted Lines') . '</option>';
+	echo '<option value="no">' . _('Plain Print') . '</option>';
 	echo '</select></td></tr>';
-	echo "</table><br /><div class='centre'><input type=submit name='PrintPDF' value='" . _('Print PDF') . "'></div>";
+	echo '</table><br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '"></div>';
 
 	include('includes/footer.inc');
 

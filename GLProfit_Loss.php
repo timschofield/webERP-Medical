@@ -92,8 +92,8 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 
 	echo '</table>';
 
-	echo '<br /><div class="centre"><input type=submit Name="ShowPL" Value="'._('Show on Screen (HTML)').'"></div>';
-	echo '<br /><div class="centre"><input type=submit Name="PrintPDF" Value="'._('Produce PDF Report').'"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="ShowPL" value="'._('Show on Screen (HTML)').'" /></div>';
+	echo '<br /><div class="centre"><input type="submit" name="PrintPDF" value="'._('Produce PDF Report').'" /></div>';
 
 	/*Now do the posting while the user is thinking about the period to select */
 
@@ -531,8 +531,8 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 	include('includes/header.inc');
 	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<input type=hidden name="FromPeriod" value="' . $_POST['FromPeriod'] . '">
-			<input type=hidden name="ToPeriod" value="' . $_POST['ToPeriod'] . '">';
+	echo '<input type="hidden" name="FromPeriod" value="' . $_POST['FromPeriod'] . '" />
+			<input type="hidden" name="ToPeriod" value="' . $_POST['ToPeriod'] . '" />';
 
 	$NumberOfMonths = $_POST['ToPeriod'] - $_POST['FromPeriod'] + 1;
 

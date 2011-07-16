@@ -438,7 +438,7 @@ if (!isset($DebtorNo)) {
 	}
 
 	if ($SetupErrors>0) {
-		echo '<br /><div class=centre><a href="'.$_SERVER['PHP_SELF'] .'" >'._('Click here to continue').'</a></div>';
+		echo '<br /><div class="centre"><a href="'.$_SERVER['PHP_SELF'] .'" >'._('Click here to continue').'</a></div>';
 		include('includes/footer.inc');
 		exit;
 	}
@@ -595,7 +595,7 @@ if (!isset($DebtorNo)) {
 	echo'</table></td></tr></table>';
 	if ($DataError ==0){
 		echo '<br /><div class="centre"><input tabindex=20 type="Submit" name="submit" value="' . _('Add New Customer') .
-			'">&nbsp;<input tabindex=21 type=submit action=RESET value="' . _('Reset') . '"></div>';
+			'">&nbsp;<input tabindex=21 type="submit" action=RESET value="' . _('Reset') . '"></div>';
 	}
 	echo '</form>';
 
@@ -671,11 +671,11 @@ if (!isset($DebtorNo)) {
 		$_POST['CustomerPOLine'] = $myrow['customerpoline'];
 		$_POST['typeid'] = $myrow['typeid'];
 
-		echo '<input type=hidden name="DebtorNo" value="' . $DebtorNo . '">';
+		echo '<input type="hidden" name="DebtorNo" value="' . $DebtorNo . '">';
 
 	} else {
 	// its a new customer being added
-		echo '<input type=hidden name="New" value="Yes">';
+		echo '<input type="hidden" name="New" value="Yes" />';
 
 		/* if $AutoDebtorNo in config.php has not been set or if it has been set to a number less than one,
 		then provide an input box for the DebtorNo to manually assigned */
@@ -956,11 +956,11 @@ if (!isset($DebtorNo)) {
 		$_POST['notes']=$myrowcc['notes'];
 		echo '<table class="selection">';
 		echo '<tr>
-				<td>' . _('Name') . '</td><td><input type=text name="custname" value="'.$_POST['custname'].'"></td></tr><tr>
-				<td>' . _('Role') . '</td><td><input type=text name="role" value="'.$_POST['role'].'"></td></tr><tr>
+				<td>' . _('Name') . '</td><td><input type="text" name="custname" value="'.$_POST['custname'].'"></td></tr><tr>
+				<td>' . _('Role') . '</td><td><input type="text" name="role" value="'.$_POST['role'].'"></td></tr><tr>
 				<td>' . _('Phone no') . '</td><td><input type="text" name="phoneno" value="'.$_POST['phoneno'].'"></td></tr><tr>
 				<td>' . _('Notes') . '</td><td><textarea name="notes">'.$_POST['notes'].'</textarea></td></tr>
-				<tr><td colspan=2><input type=submit name=update value=update></td></tr></table>
+				<tr><td colspan=2><input type="submit" name=update value=update></td></tr></table>
 				';
 
 		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?DebtorNo='.$DebtorNo.'&ID'.$ID.'">';
@@ -995,8 +995,8 @@ if (!isset($DebtorNo)) {
 	echo'</td></tr></table>';
 
 	if (isset($_POST['New']) and $_POST['New']) {
-		echo '<div class="centre"><input type="Submit" name="submit" value="' . _('Add New Customer') .
-			'">&nbsp;<input type=submit name="reset" value="' . _('Reset') . '"></div></form>';
+		echo '<div class="centre"><input type="submit" name="submit" value="' . _('Add New Customer') . '" />&nbsp;
+				<input type="submit" name="reset" value="' . _('Reset') . '" /></div></form>';
 	} else if (!isset($_GET['Modify'])){
 		echo '<br /><div class="centre"><input type="Submit" name="submit" value="' . _('Update Customer') . '">';
 		echo '&nbsp;<input type="Submit" name="delete" value="' . _('Delete Customer') . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');">';

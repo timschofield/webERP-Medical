@@ -34,11 +34,17 @@ while ($PeriodRow = DB_fetch_array($PeriodsResult)){
 	}
 }
 echo '</select></td>';
+
 echo '<td>' . _('Sales Type') . ':</td>';
 
+if (!isset($_POST['StockType'])) {
+	$_POST['StockType']='';
+}
+
 ShowStockTypes($_POST['StockType']);
-echo '<input type="submit" name="UpdateItems" style="visibility:hidden" value="Not Seen">';
+echo '<input type="submit" name="UpdateItems" style="visibility:hidden" value="Not Seen" />';
 echo '</tr></table><br /><div class="centre"><input tabindex=4 type=submit name="ShowResults" value="' . _('Show Daily Sales For The Selected Month') . '">';
+
 echo '</form></div>';
 echo '<br />';
 /*Now get and display the sales data returned */
@@ -83,10 +89,15 @@ $SalesResult = DB_query($sql, $db,$ErrMsg);
 echo '<table cellpadding=2 class="selection">';
 echo '<tr><th colspan="7"><font color="navy" size="3">' . _('Sales For The Month Of') . ' ' .
 		MonthAndYearFromSQLDate($StartDateSQL) . '</font></th></tr>';
-echo '<tr><th colspan="7"><font color="navy" size="2">' . _('For sales of type') . ' ' .
-		GetStockType($_POST['StockType']) . '</font></th></tr>';
 
-echo'<tr>
+if ($_POST['StockType']!='') {
+	echo '<tr><th colspan="7"><font color="navy" size="2">' . _('For sales of type') . ' ' .
+		GetStockType($_POST['StockType']) . '</font></th></tr>';
+} else {
+	echo '<tr><th colspan="7"><font color="navy" size="2">' . _('For all sales') . '</font></th></tr>';
+}
+
+echo '<tr>
 	<th width="14.285714286%">' . _('Sunday') . '</th>
 	<th width="14.285714286%">' . _('Monday') . '</th>
 	<th width="14.285714286%">' . _('Tuesday') . '</th>

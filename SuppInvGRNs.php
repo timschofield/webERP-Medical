@@ -246,26 +246,26 @@ if (isset($_GET['Modify'])){
 	echo '</table>';
 
 /*	if ($myrow['closed']==1){ //Shipment is closed so pre-empt problems later by warning the user - need to modify the order first
-		echo '<input type=hidden name='ShiptRef' Value=''>";
+		echo '<input type="hidden" name='ShiptRef' Value=''>";
 		echo "Unfortunately, the shipment that this purchase order line item was allocated to has been closed - if you add this item to the transaction then no shipments will not be updated. If you wish to allocate the order line item to a different shipment the order must be modified first.";
 	} else {	*/
-		echo '<input type=hidden name="ShiptRef" Value="' . $GRNTmp->ShiptRef . '">';
+		echo '<input type="hidden" name="ShiptRef" Value="' . $GRNTmp->ShiptRef . '">';
 //	}
 
-	echo '<div class="centre"><p><input type=Submit Name="ModifyGRN" Value="' . _('Modify Line') . '"></p></div>';
+	echo '<div class="centre"><p><input type="submit" Name="ModifyGRN" Value="' . _('Modify Line') . '"></p></div>';
 
 
-	echo '<input type=hidden name="GRNNumber" value="' . $GRNTmp->GRNNo . '">';
-	echo '<input type=hidden name="ItemCode" value="' . $GRNTmp->ItemCode . '">';
-	echo '<input type=hidden name="ItemDescription" value="' . $GRNTmp->ItemDescription . '">';
-	echo '<input type=hidden name="QtyRecd" value="' . $GRNTmp->QtyRecd . '">';
-	echo '<input type=hidden name="Prev_QuantityInv" value="' . $GRNTmp->Prev_QuantityInv . '">';
-	echo '<input type=hidden name="OrderPrice" value="' . $GRNTmp->OrderPrice . '">';
-	echo '<input type=hidden name="StdCostUnit" value=' . $GRNTmp->StdCostUnit . '">';
-	echo '<input type=hidden name="JobRef" Value="' . $GRNTmp->JobRef . '">';
-	echo '<input type=hidden name="GLCode" Value="' . $GRNTmp->GLCode . '">';
-	echo '<input type=hidden name="PODetailItem" Value="' . $GRNTmp->PODetailItem . '">';
-	echo '<input type=hidden name="AssetID" Value="' . $GRNTmp->AssetID . '">';
+	echo '<input type="hidden" name="GRNNumber" value="' . $GRNTmp->GRNNo . '" />';
+	echo '<input type="hidden" name="ItemCode" value="' . $GRNTmp->ItemCode . '" />';
+	echo '<input type="hidden" name="ItemDescription" value="' . $GRNTmp->ItemDescription . '" />';
+	echo '<input type="hidden" name="QtyRecd" value="' . $GRNTmp->QtyRecd . '" />';
+	echo '<input type="hidden" name="Prev_QuantityInv" value="' . $GRNTmp->Prev_QuantityInv . '" />';
+	echo '<input type="hidden" name="OrderPrice" value="' . $GRNTmp->OrderPrice . '" />';
+	echo '<input type="hidden" name="StdCostUnit" value=' . $GRNTmp->StdCostUnit . '" />';
+	echo '<input type="hidden" name="JobRef" value="' . $GRNTmp->JobRef . '" />';
+	echo '<input type="hidden" name="GLCode" value="' . $GRNTmp->GLCode . '" />';
+	echo '<input type="hidden" name="PODetailItem" value="' . $GRNTmp->PODetailItem . '" />';
+	echo '<input type="hidden" name="AssetID" value="' . $GRNTmp->AssetID . '" />';
 }
 else {
 	if (count( $_SESSION['SuppTransTmp']->GRNs)>0){   /*if there are any outstanding GRNs then */
@@ -292,7 +292,7 @@ else {
 
 		if (isset($POs[$GRNTmp->PONo]) and $POs[$GRNTmp->PONo] != $GRNTmp->PONo) {
 					$POs[$GRNTmp->PONo] = $GRNTmp->PONo;
-					echo '<tr><td><input type=Submit Name="AddPOToTrans" Value="' . $GRNTmp->PONo . '"></td><td colspan=3>' . _('Add Whole PO to Invoice') . '</td></tr>';
+					echo '<tr><td><input type="submit" Name="AddPOToTrans" Value="' . $GRNTmp->PONo . '"></td><td colspan=3>' . _('Add Whole PO to Invoice') . '</td></tr>';
 					$i = 0;
 			}
 			if ($i == 0){
@@ -319,9 +319,9 @@ else {
 		}
 		}
 		echo '</table>';
-		echo '<br /><div class="centre"><input type=Submit name="SelectAll" Value="' . _('Select All') . '">';
-		echo '<input type=Submit Name="DeSelectAll" value="' . _('Deselect All') . '">';
-		echo '<br /><input type=Submit Name="AddGRNToTrans" value="' . _('Add to Invoice') . '"></div>';
+		echo '<br /><div class="centre"><input type="submit" name="SelectAll" Value="' . _('Select All') . '">';
+		echo '<input type="submit" Name="DeSelectAll" value="' . _('Deselect All') . '">';
+		echo '<br /><input type="submit" Name="AddGRNToTrans" value="' . _('Add to Invoice') . '" /></div>';
 	}
 }
 
