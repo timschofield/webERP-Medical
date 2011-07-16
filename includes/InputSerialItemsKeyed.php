@@ -80,9 +80,9 @@ echo $tableheader;
 
 
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" name="Ga6uF5Wa" method="post">
-      <input type=hidden name=LineNo value="' . $LineNo . '">
-      <input type=hidden name=StockID value="' . $StockID . '">
-      <input type=hidden name=EntryType value="KEYED">';
+      <input type="hidden" name=LineNo value="' . $LineNo . '">
+      <input type="hidden" name=StockID value="' . $StockID . '">
+      <input type="hidden" name=EntryType value="KEYED">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 if ( isset($_GET['EditControlled']) ) {
 	$EditControlled = isset($_GET['EditControlled'])?$_GET['EditControlled']:false;
@@ -103,7 +103,7 @@ if ($EditControlled){
 		into the form for entry of quantities manually */
 
 		if ($LineItem->Serialised==1){
-			echo '<input type=hidden name="Qty' . $StartAddingAt .'" Value=1></TR>';
+			echo '<input type="hidden" name="Qty' . $StartAddingAt .'" Value=1></TR>';
 		} else if ($LineItem->Serialised==0 and $Perishable==1) {
 			echo '<td><input type="text" class="number" name="Qty' . $StartAddingAt .'" size=11
 				value="'. number_format($Bundle->BundleQty, $LineItem->DecimalPlaces). '" maxlength=10></tr>';
@@ -124,7 +124,7 @@ for ($i=0;$i < 10;$i++){
 	into the form for entry of quantities manually */
 
 	if ($LineItem->Serialised==1){
-		echo '<input type=hidden name="Qty' . ($StartAddingAt+$i) .'" Value=1></tr>';
+		echo '<input type="hidden" name="Qty' . ($StartAddingAt+$i) .'" value="1" /></tr>';
 	} else if ($LineItem->Serialised==0 and $Perishable==1) {
 		echo '<td><input type="text" class="number" name="Qty' . ($StartAddingAt+$i) .'" size=11  maxlength=10></td>';
 		echo '<td><input type="text" class="date" name="ExpiryDate' . ($StartAddingAt+$i) .'" size=11
