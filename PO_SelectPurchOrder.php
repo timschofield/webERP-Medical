@@ -146,7 +146,7 @@ if (!isset($OrderNumber) or $OrderNumber == "") {
 	} else {
 		echo '<option value="Rejected">' . _('Rejected') . '</option>';
 	}
- 	echo '</select> <input type=submit name="SearchOrders" value="' . _('Search Purchase Orders') . '"></td></tr></table>';
+ 	echo '</select> <input type="submit" name="SearchOrders" value="' . _('Search Purchase Orders') . '"></td></tr></table>';
 }
 $SQL = "SELECT categoryid, categorydescription FROM stockcategory ORDER BY categorydescription";
 $result1 = DB_query($SQL, $db);
@@ -164,8 +164,8 @@ echo '</select><td><font size=1>' . _('Enter text extracts in the') . ' <b>' . _
 echo '<td><input type="Text" name="Keywords" size=20 maxlength=25></td></tr><tr><td></td>';
 echo '<td><font size=3><b>' . _('OR') . ' </b></font><font size=1>' . _('Enter extract of the') . '<b>' . _('Stock Code') . '</b>:</font></td>';
 echo '<td><input type="text" name="StockCode" size=15 maxlength=18></td></tr>';
-echo '<tr><td colspan=3><div class="centre"><input type=submit name="SearchParts" value="' . _('Search Parts Now') . '">';
-echo '<input type=submit name="ResetPart" value="' . _('Show All') . '"></div></td></tr>';
+echo '<tr><td colspan=3><div class="centre"><input type="submit" name="SearchParts" value="' . _('Search Parts Now') . '">';
+echo '<input type="submit" name="ResetPart" value="' . _('Show All') . '"></div></td></tr>';
 echo '</table><br /><br />';
 if (isset($StockItemsResult)) {
 	echo '<table cellpadding=2 colspan=7 class="selection">';
@@ -186,7 +186,7 @@ if (isset($StockItemsResult)) {
 			echo '<tr bgcolor="#EEEEEE">';
 			$k = 1;
 		}
-		echo '<td><input type=submit name="SelectedStockItem" value="' . $myrow['stockid'] . '"</td>
+		echo '<td><input type="submit" name="SelectedStockItem" value="' . $myrow['stockid'] . '" /></td>
 				<td>' . $myrow['description'] . '</td>
 			<td class="number">' . $myrow['qoh'] . '</td>
 			<td class="number">' . $myrow['qord'] . '</td>
