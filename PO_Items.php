@@ -1023,7 +1023,7 @@ if (isset($_POST['NonStockOrder'])) {
 				<tr><td>'._('Delivery Date').'</td>
 						<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="ReqDelDate" size=11 value="'.$_SESSION['PO'.$identifier]->DeliveryDate .'"></td></tr>';
 	echo '</table>';
-	echo '<div class=centre><input type=submit name="EnterLine" value="Enter Item"></div>';
+	echo '<div class="centre"><input type=submit name="EnterLine" value="Enter Item"></div>';
 }
 
 /* Now show the stock item selection search stuff below */
