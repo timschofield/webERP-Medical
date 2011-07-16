@@ -588,13 +588,13 @@ echo '<tr><td>' . _('Depreciation last run') . ':</td><td>' . $LastRunDate . '</
 			</table>';
 
 if ($New==0) {
-	echo '<div class=centre><br /><input type="Submit" name="submit" value="' . _('Insert New Fixed Asset') . '">';
+	echo '<div class="centre"><br /><input type="Submit" name="submit" value="' . _('Insert New Fixed Asset') . '">';
 
 } else {
 
-	echo '<br /><div class=centre><input type="submit" name="submit" value="' . _('Update') . '"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Update') . '"></div>';
 	prnMsg( _('Only click the Delete button if you are sure you wish to delete the asset. Only assets with a zero book value can be deleted'), 'warn', _('WARNING'));
-	echo '<br /><div class=centre><input type="Submit" name="delete" value="' . _('Delete This Asset') . '" onclick="return confirm(\'' . _('Are You Sure? Only assets with a zero book value can be deleted.') . '\');"></div>';
+	echo '<br /><div class="centre"><input type="Submit" name="delete" value="' . _('Delete This Asset') . '" onclick="return confirm(\'' . _('Are You Sure? Only assets with a zero book value can be deleted.') . '\');"></div>';
 }
 
 echo '</form></div>';
