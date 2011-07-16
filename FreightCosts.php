@@ -298,15 +298,15 @@ if (isset($LocationFrom) AND isset($ShipperID)) {
 		$_POST['FixedPrice'] = $myrow['fixedprice'];
 		$_POST['MinimumChg'] = $myrow['minimumchg'];
 
-		echo '<input type=hidden name="SelectedFreightCost" value="'.$SelectedFreightCost.'">';
+		echo '<input type="hidden" name="SelectedFreightCost" value="'.$SelectedFreightCost.'">';
 
 	} else {
 		$_POST['FixedPrice'] = 0;
 		$_POST['MinimumChg'] = 0;
 
 	}
-	echo '<input type=hidden name="LocationFrom" value="'.$LocationFrom.'">';
-	echo '<input type=hidden name="ShipperID" value="'.$ShipperID.'">';
+	echo '<input type="hidden" name="LocationFrom" value="'.$LocationFrom.'" />';
+	echo '<input type="hidden" name="ShipperID" value="'.$ShipperID.'" />';
 
 	if (!isset($_POST['Destination'])) {$_POST['Destination']='';}
 	if (!isset($_POST['CubRate'])) {$_POST['CubRate']='';}
