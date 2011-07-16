@@ -504,7 +504,7 @@ if (!isset($_POST['PostInvoice'])){
 			}
 
 
-			echo '<input type=hidden name="TaxAmount'  . $Tax->TaxCalculationOrder . '"  value=' . round($_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount,2) . '>';
+			echo '<input type="hidden" name="TaxAmount'  . $Tax->TaxCalculationOrder . '"  value="' . round($_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount,2) . '" />';
 
 			echo '</td><td class="number">' . number_format($_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount,2);
 
