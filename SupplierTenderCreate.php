@@ -539,7 +539,7 @@ if (isset($_POST['SearchSupplier'])) {
 			<input type=submit name="Next" value="' . _('Next') . '">';
 		echo '<br />';
 	}
-	echo '<input type=hidden name="Search" value="' . _('Search Now') . '">';
+	echo '<input type="hidden" name="Search" value="' . _('Search Now') . '">';
 	echo '<br /><br />';
 	echo '<br /><table cellpadding=2 colspan=7>';
 	$tableheader = '<tr>
