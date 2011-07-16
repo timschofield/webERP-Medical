@@ -335,10 +335,10 @@ if (isset($_REQUEST['OrderNumber']) AND $_REQUEST['OrderNumber']!='') {
 } else {
 	if (isset($_REQUEST['SelectedCustomer'])) {
 		echo _('For customer') . ': ' . $_REQUEST['SelectedCustomer'] . ' ' . _('and') . ' ';
-		echo '<input type=hidden name="SelectedCustomer" value="' . $_REQUEST['SelectedCustomer'] . '">';
+		echo '<input type="hidden" name="SelectedCustomer" value="' . $_REQUEST['SelectedCustomer'] . '">';
 	}
 	if (isset($_REQUEST['SelectedStockItem'])) {
-		 echo _('for the part') . ': ' . $_REQUEST['SelectedStockItem'] . ' ' . _('and') . ' <input type=hidden name="SelectedStockItem" value="' . $_REQUEST['SelectedStockItem'] . '">';
+		 echo _('for the part') . ': ' . $_REQUEST['SelectedStockItem'] . ' ' . _('and') . ' <input type="hidden" name="SelectedStockItem" value="' . $_REQUEST['SelectedStockItem'] . '">';
 	}
 }
 
@@ -817,7 +817,7 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 	        				<td>%s</td>
 	        				<td>%s</td>
 	        				<td class="number">%s</td>
-	        				<td><input type=checkbox name=PlacePO_%s value><input type=hidden name=OrderNo_PO_%s value=%s></td>
+	        				<td><input type=checkbox name=PlacePO_%s value><input type="hidden" name=OrderNo_PO_%s value=%s></td>
 	        				</tr>',
 	        				$ModifyPage,
 	        				$myrow['orderno'],
