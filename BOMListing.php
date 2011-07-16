@@ -124,7 +124,7 @@ If (isset($_POST['PrintPDF'])
 		echo '<tr><td>' . _('To Inventory Part Code') . ':' . '</td><td><input tabindex="2" type="text" name=ToCriteria size=20 maxlength=20 value="zzzzzzz"></td></tr>';
 
 
-		echo '</table><br /><div class="centre"><input tabindex="3" type=Submit Name="PrintPDF" Value="' . _('Print PDF') . '"></div>';
+		echo '</table><br /><div class="centre"><input tabindex="3" type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
 		echo '<script>defaultControl(document.forms[0].FromCriteria);</script>';
 	}
 	include('includes/footer.inc');;
