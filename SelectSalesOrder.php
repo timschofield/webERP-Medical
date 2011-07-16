@@ -451,7 +451,7 @@ if (!isset($StockID)) {
 		}
 
 		echo '</select> </td><td>';
-		echo '<input type=submit name="SearchOrders" value="' . _('Search') . '"></td>';
+		echo '<input type="submit" name="SearchOrders" value="' . _('Search') . '"></td>';
     echo '&nbsp;&nbsp;<td><a href="' . $rootpath . '/SelectOrderItems.php?NewOrder=Yes">' .
 		_('Add Sales Order') . '</a></td></tr></table>';
 	}
@@ -483,8 +483,8 @@ if (!isset($StockID)) {
       		<td><input type="text" name="StockCode" size=15 maxlength=18></td>
       	</tr>
       </table>';
-	echo '<br /><input type=submit name="SearchParts" value="' . _('Search Parts Now') .
-			'"><input type=submit name="ResetPart" value="' . _('Show All') . '"></div><br />';
+	echo '<br /><input type="submit" name="SearchParts" value="' . _('Search Parts Now') .
+			'"><input type="submit" name="ResetPart" value="' . _('Show All') . '"></div><br />';
 
 if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 
@@ -510,7 +510,7 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 			$k++;
 		}
 
-		printf('<td><input type=submit name="SelectedStockItem" value="%s"</td>
+		printf('<td><input type="submit" name="SelectedStockItem" value="%s" /></td>
 			<td>%s</td>
 			<td class="number">%s</td>
 			<td>%s</td>
