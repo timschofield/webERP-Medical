@@ -1069,7 +1069,7 @@ if (isset($_SESSION['PrintedPackingSlip']) and $_SESSION['PrintedPackingSlip']==
 
 } else {
 
-	echo '<input type=hidden name="ReprintPackingSlip" value=0>';
+	echo '<input type="hidden" name="ReprintPackingSlip" value="0" />';
 
 }
 
