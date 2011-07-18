@@ -47,7 +47,7 @@ if (isset($_POST['OrderItems'])){
 				$BatchQuantityResult=DB_query($sql, $db);
 				$BatchQuantityRow=DB_fetch_array($BatchQuantityResult);
 				if (!isset($NewItemArray[$StockID])) {
-					if ($BatchQuantityRow['quantity']<$Quantity) {
+					if ($BatchQuantityRow['quantity']<$Quantity and $Quantity>0) {
 						prnMsg( _('Batch number').' '.$Batch.' '.
 							_('of item number').' '.$StockID.' '.
 								_('has insufficient items remaining in it to complete this sale') , 'info');
@@ -57,7 +57,7 @@ if (isset($_POST['OrderItems'])){
 						$NewItemArray[$StockID]['Batch']['Quantity'][] = $Quantity;
 					}
 				} else {
-					if ($BatchQuantityRow['quantity']<$Quantity+$NewItemArray[$StockID]['Quantity']) {
+					if ($BatchQuantityRow['quantity']<$Quantity+$NewItemArray[$StockID]['Quantity'] and $NewItemArray[$StockID]['Quantity']>0) {
 						prnMsg( _('Batch number').' '.$Batch.' '.
 							_('of item number').' '.$StockID.' '.
 								_('has insufficient items remaining in it to complete this sale'), 'info');
@@ -119,8 +119,13 @@ if (!isset($_SESSION['Items'.$identifier])){
 			exit;
 		}
 
-		$CashSaleCustomer[0]=$myrow['cashsalecustomer'];
-		$CashSaleCustomer[1]=$myrow['cashsalebranch'];
+		if (isset($_GET['DebtorNo'])) {
+			$CashSaleCustomer[0]=$_GET['DebtorNo'];
+			$CashSaleCustomer[1]=$_GET['BranchNo'];
+		} else {
+			$CashSaleCustomer[0]=$myrow['cashsalecustomer'];
+			$CashSaleCustomer[1]=$myrow['cashsalebranch'];
+		}
 
 		$_SESSION['Items'.$identifier]->Branch  = $CashSaleCustomer[1];
 		$_SESSION['Items'.$identifier]->DebtorNo = $CashSaleCustomer[0];
@@ -249,7 +254,9 @@ if (isset($_POST['CancelOrder'])) {
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Counter Sales') . '" alt="" />' . ' ';
 
-	echo _('Counter Sale') . ' - ' . $_SESSION['Items'.$identifier]->LocationName . ' (' . _('all amounts in') . ' ' . $_SESSION['Items'.$identifier]->DefaultCurrency . ')';
+	echo _('Counter Sale') . ' - ' . $_SESSION['Items'.$identifier]->LocationName . ' (' . _('all amounts in') . ' ' . $_SESSION['Items'.$identifier]->DefaultCurrency . ')<br />';
+
+	echo _('Customer') . ' - ' . $_SESSION['Items'.$identifier]->CustomerName;
 	echo '</p>';
 }
 
