@@ -7,6 +7,17 @@ include('includes/header.inc');
 
 /*The module link codes are hard coded in a switch statement below to determine the options to show for each tab */
 $ModuleLink = array('orders', 'AR', 'AP', 'PO', 'stock', 'manuf',  'GL', 'FA', 'PC', 'system');
+$ReportList = array('orders'=>'ord',
+					'AR'=>'ar',
+					'AP'=>'ap',
+					'PO'=>'prch',
+					'stock'=>'inv',
+					'manuf'=>'man',
+					'GL'=>'gl',
+					'FA'=>'fa',
+					'PC'=>'pc'
+					);
+
 /*The headings showing on the tabs accross the main index used also in WWW_Users for defining what should be visible to the user */
 $ModuleList = array(_('Sales'),
 					_('Receivables'),
@@ -628,10 +639,10 @@ in the acssociative array $ReportGroups[]. It will fetch the reports belonging s
 specified to create a list of links for insertion into a table to choose a report. Two table sections will
 be generated, one for standard reports and the other for custom reports.
 */
-	global $db, $rootpath;
+	global $db, $rootpath, $ReportList;
 	require_once('reportwriter/languages/en_US/reports.php');
 	require_once('reportwriter/admin/defaults.php');
-
+	$GroupID=$ReportList[$GroupID];
 	$Title= array(_('Custom Reports'), _('Standard Reports and Forms'));
 
 	$sql= "SELECT id,
