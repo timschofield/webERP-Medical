@@ -354,9 +354,6 @@ foreach ($_SESSION['CreditItems']->LineItems as $LnItm) {
 	$TaxLineTotal =0; //initialise tax total for the line
 	if (is_array($LnItm->Taxes) ){
 		foreach ($LnItm->Taxes as $Tax) {
-			$TaxTotals[$Tax->TaxAuthID]=0;
-		}
-		foreach ($LnItm->Taxes as $Tax) {
 			if ($i>0){
 				echo '<br />';
 			}
@@ -679,9 +676,9 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 				if ($MBFlag=='B' OR $MBFlag=='M') {
 
 					$SQL = "UPDATE locstock
-						SET locstock.quantity = locstock.quantity + " . $OrderLine->QtyDispatched . "
-						WHERE locstock.stockid = '" . $OrderLine->StockID . "'
-						AND loccode = '" . $_SESSION['CreditItems']->Location . "'";
+								SET locstock.quantity = locstock.quantity + " . $OrderLine->QtyDispatched . "
+							WHERE locstock.stockid = '" . $OrderLine->StockID . "'
+								AND loccode = '" . $_SESSION['CreditItems']->Location . "'";
 
 					$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Location stock record could not be updated because');
 					$DbgMsg = _('The following SQL to update the location stock record was used');
@@ -692,18 +689,15 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 					and of course update the Location stock balances */
 
 					$StandardCost =0; /*To start with - accumulate the cost of the comoponents for use in journals later on */
-					$sql = "SELECT
-						bom.component,
-						bom.quantity,
-					stockmaster.materialcost
-						+ stockmaster.labourcost
-						+ stockmaster.overheadcost AS standard
-					FROM bom,
-						stockmaster
-					WHERE bom.component=stockmaster.stockid
-					AND bom.parent='" . $OrderLine->StockID . "'
-					AND bom.effectiveto > '" . Date('Y-m-d') . "'
-					AND bom.effectiveafter < '" . Date('Y-m-d') . "'";
+					$sql = "SELECT bom.component,
+									bom.quantity,
+									stockmaster.materialcost + stockmaster.labourcost + stockmaster.overheadcost AS standard
+								FROM bom,
+									stockmaster
+								WHERE bom.component=stockmaster.stockid
+									AND bom.parent='" . $OrderLine->StockID . "'
+									AND bom.effectiveto > '" . Date('Y-m-d') . "'
+									AND bom.effectiveafter < '" . Date('Y-m-d') . "'";
 
 					$ErrMsg = _('Could not retrieve assembly components from the database for') . ' ' . $OrderLine->StockID . ' ' . _('because');
 					$DbgMsg = _('The SQL that failed was');
