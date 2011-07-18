@@ -1,14 +1,6 @@
 <?php
 
 /* $Id$*/
-	echo '</td>';
-	echo '</tr>';
-	echo '</table>';
-
-	echo '</td></tr>';
-/*Do the borders */
-
-	echo '</table>';
 	setlocale(LC_ALL,$_SESSION['Language']);
 	if (!isset($DefaultClock)) {
 		include('config.php');
