@@ -15,7 +15,8 @@ $ReportList = array('orders'=>'ord',
 					'manuf'=>'man',
 					'GL'=>'gl',
 					'FA'=>'fa',
-					'PC'=>'pc'
+					'PC'=>'pc',
+					'system'=>'sys'
 					);
 
 /*The headings showing on the tabs accross the main index used also in WWW_Users for defining what should be visible to the user */
