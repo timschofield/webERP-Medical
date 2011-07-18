@@ -103,7 +103,7 @@ if (isset($_POST['Search'])){
 					stockmaster.units
 					FROM stockmaster, stockcategory
 					WHERE stockmaster.categoryid=stockcategory.categoryid
-					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
+					AND (stockcategory.stocktype='P' OR stockcategory.stocktype='R')
 					AND stockmaster.stockid " . LIKE . " '" . $SearchString . "'
 					AND stockmaster.discontinued=0
 					AND mbflag='M'
@@ -114,7 +114,7 @@ if (isset($_POST['Search'])){
 					stockmaster.units
 					FROM stockmaster, stockcategory
 					WHERE stockmaster.categoryid=stockcategory.categoryid
-					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
+					AND (stockcategory.stocktype='P' OR stockcategory.stocktype='R')
 					AND stockmaster.stockid " . LIKE . " '" . $SearchString . "'
 					AND stockmaster.discontinued=0
 					AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
@@ -128,7 +128,7 @@ if (isset($_POST['Search'])){
 					stockmaster.units
 					FROM stockmaster, stockcategory
 					WHERE  stockmaster.categoryid=stockcategory.categoryid
-					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
+					AND (stockcategory.stocktype='P' OR stockcategory.stocktype='R')
 					AND stockmaster.discontinued=0
 					AND mbflag='M'
 					ORDER BY stockmaster.stockid";
@@ -138,7 +138,7 @@ if (isset($_POST['Search'])){
 					stockmaster.units
 					FROM stockmaster, stockcategory
 					WHERE stockmaster.categoryid=stockcategory.categoryid
-					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
+					AND (stockcategory.stocktype='P' OR stockcategory.stocktype='R')
 					AND stockmaster.discontinued=0
 					AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
 					AND mbflag='M'
