@@ -510,6 +510,48 @@ $MenuItems['system']['Maintenance']['URL'] = array ('/StockCategories.php',
 													'/MRPDemandTypes.php'
 													);
 
+if (isset($SupplierLogin) and $SupplierLogin==1){
+	echo '<table class="table_index">
+			<tr>
+			<td class="menu_group_item">
+				<p>&bull; <a href="' . $rootpath . '/SupplierTenders.php?TenderType=1">' . _('View or Amend outstanding offers') . '</a></p>
+			</td>
+			</tr>
+			<tr>
+			<td class="menu_group_item">
+				<p>&bull; <a href="' . $rootpath . '/SupplierTenders.php?TenderType=2">' . _('Create a new offer') . '</a></p>
+			</td>
+			</tr>
+			<tr>
+			<td class="menu_group_item">
+				<p>&bull; <a href="' . $rootpath . '/SupplierTenders.php?TenderType=3">' . _('View any open tenders without an offer') . '</a></p>
+			</td>
+			</tr>
+		</table>';
+	include('includes/footer.inc');
+	exit;
+} elseif (isset($SupplierLogin) and $SupplierLogin==0){
+	echo '<table class="table_index">
+			<tr>
+			<td class="menu_group_item">
+				<p>&bull; <a href="' . $rootpath . '/CustomerInquiry.php?CustomerID=' . $_SESSION['CustomerID'] . '">' . _('Account Status') . '</a></p>
+			</td>
+			</tr>
+			<tr>
+			<td class="menu_group_item">
+				<p>&bull; <a href="' . $rootpath . '/SelectOrderItems.php?NewOrder=Yes">' . _('Place An Order') . '</a></p>
+			</td>
+			</tr>
+			<tr>
+			<td class="menu_group_item">
+				<p>&bull; <a href="' . $rootpath . '/SelectCompletedOrder.php?SelectedCustomer=' . $_SESSION['CustomerID'] . '">' . _('Order Status') . '</a></p>
+			</td>
+			</tr>
+		</table>';
+	include('includes/footer.inc');
+	exit;
+}
+
 if (isset($_GET['Application'])){ /*This is sent by this page (to itself) when the user clicks on a tab */
 	$_SESSION['Module'] = $_GET['Application'];
 }
@@ -666,7 +708,7 @@ be generated, one for standard reports and the other for custom reports.
 			foreach ($ReportList as $Report) {
 				if ($Report['groupname']==$GroupID AND $Report['defaultreport']==$Def) {
 					$RptLinks .= '<tr><td class="menu_group_item">';
-					$RptLinks .= '<a href="' . $rootpath . '/reportwriter/ReportMaker.php?action=go&reportid=' . $Report['id'] . '">' . _($Report['reportname']) . '</a>';
+					$RptLinks .= '<p>&bull; <a href="' . $rootpath . '/reportwriter/ReportMaker.php?action=go&reportid=' . $Report['id'] . '">' . _($Report['reportname']) . '</a></p>';
 					$RptLinks .= '</td></tr>';
 					$NoEntries = false;
 				}
@@ -678,7 +720,7 @@ be generated, one for standard reports and the other for custom reports.
 				if ($NoForms AND $Group[0]==$GroupID AND $Report['reporttype']=='frm' AND $Report['defaultreport']==$Def) {
 					$RptLinks .= '<tr><td class="menu_group_item">';
 					$RptLinks .= '<img src="' . $rootpath . '/css/' . $_SESSION['Theme'] . '/images/folders.gif" width="16" height="13">&nbsp;';
-					$RptLinks .= '<a href="' . $rootpath . '/reportwriter/FormMaker.php?id=' . $Report['groupname'] . '">';
+					$RptLinks .= '<p>&bull; <a href="' . $rootpath . '/reportwriter/FormMaker.php?id=' . $Report['groupname'] . '"></p>';
 					$RptLinks .= $FormGroups[$Report['groupname']] . '</a>';
 					$RptLinks .= '</td></tr>';
 					$NoForms = false;
