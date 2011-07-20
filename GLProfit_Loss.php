@@ -37,7 +37,7 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 	/*Show a form to allow input of criteria for profit and loss to show */
 	echo '<br /><table class="selection">
 			<tr><td>'._('Select Period From').
-				':</td><td><select Name="FromPeriod">';
+				':</td><td><select name="FromPeriod">';
 
 	$sql = "SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno DESC";
 	$Periods = DB_query($sql,$db);
@@ -71,7 +71,7 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 		$DefaultToPeriod = $_POST['ToPeriod'];
 	}
 
-	echo '<tr><td>' . _('Select Period To') . ':</td><td><select Name="ToPeriod">';
+	echo '<tr><td>' . _('Select Period To') . ':</td><td><select name="ToPeriod">';
 
 	$RetResult = DB_data_seek($Periods,0);
 
@@ -85,7 +85,7 @@ echo '<div class="page_help_text">' . _('Profit and loss statement (P&L), also c
 	}
 	echo '</select></td></tr>';
 
-	echo '<tr><td>'._('Detail Or Summary').':</td><td><select Name="Detail">';
+	echo '<tr><td>'._('Detail Or Summary').':</td><td><select name="Detail">';
 	echo '<option selected value="Summary">'._('Summary') . '</option>';
 	echo '<option selected value="Detailed">'._('All Accounts') . '</option>';
 	echo '</select></td></tr>';
