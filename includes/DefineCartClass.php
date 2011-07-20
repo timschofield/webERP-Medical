@@ -179,16 +179,16 @@ Class Cart {
 	}
 
 	function update_cart_item( $UpdateLineNumber,
-														$Qty,
-														$Price,
-														$Units,
-														$ConversionFactor=1,
-														$Disc,
-														$Narrative,
-														$UpdateDB='No',
-														$ItemDue,
-														$POLine,
-														$GPPercent){
+								$Qty,
+								$Price,
+								$Units,
+								$ConversionFactor=1,
+								$Disc,
+								$Narrative,
+								$UpdateDB='No',
+								$ItemDue,
+								$POLine,
+								$GPPercent){
 
 		if ($Qty>0){
 			$this->LineItems[$UpdateLineNumber]->Quantity = $Qty;

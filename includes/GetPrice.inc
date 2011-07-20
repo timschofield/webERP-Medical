@@ -145,7 +145,6 @@ function GetPrice ($StockID, $DebtorNo, $BranchCode, $db){
 											debtorsmaster
 										WHERE prices.stockid = '" . $StockID . "'
 										AND prices.currabrev = debtorsmaster.currcode
-										AND debtorsmaster.debtorno='" . $DebtorNo . "'
 										AND prices.typeabbrev='" . $_SESSION['DefaultPriceList'] . "'
 										AND prices.debtorno=''
 										AND prices.startdate <='" . Date('Y-m-d') . "'
