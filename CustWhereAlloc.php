@@ -6,13 +6,13 @@ include('includes/session.inc');
 $title = _('Customer How Paid Inquiry');
 include('includes/header.inc');
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' .
 	_('Customer Where Allocated'). '" alt="" />' . $title . '</p>';
 
-echo '<table class="selection" cellpadding=2><tr>';
+echo '<table class="selection" cellpadding="2"><tr>';
 
 echo '<td>' . _('Type') . ':</td><td><select tabindex=1 name="TransType"> ';
 
@@ -21,22 +21,22 @@ $resultTypes = DB_query($sql,$db);
 while ($myrow=DB_fetch_array($resultTypes)){
 	if (isset($_POST['TransType'])){
 		if ($myrow['typeid'] == $_POST['TransType']){
-			 echo '<option selected Value="' . $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
+			 echo '<option selected value="' . $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
 		} else {
-			 echo '<option Value="' . $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
+			 echo '<option value="' . $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
 		}
 	} else {
-			 echo '<option Value="' . $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
+			 echo '<option value="' . $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
 	}
 }
 echo '</select></td>';
 
 if (!isset($_POST['TransNo'])) {$_POST['TransNo']='';}
 echo '<td>'._('Transaction Number') . ':</td>
-	<td><input tabindex=2 type="text" name="TransNo" maxlength=10 size=10 value="'. $_POST['TransNo'] . '"></td>';
+	<td><input tabindex="2" type="text" name="TransNo" maxlength="10" size="10" value="'. $_POST['TransNo'] . '"></td>';
 
 echo '</tr></table><br />
-	<div class="centre"><input tabindex=3 type="submit" name="ShowResults" value="'._('Show How Allocated').'" /></div>';
+	<div class="centre"><input tabindex="3" type="submit" name="ShowResults" value="'._('Show How Allocated').'" /></div>';
 
 if (isset($_POST['ShowResults']) AND  $_POST['TransNo']==''){
 	echo '<br />';
@@ -78,7 +78,7 @@ if (isset($_POST['ShowResults']) AND  $_POST['TransNo']!=''){
 	if (DB_num_rows($TransResult)==0){
 		prnMsg(_('There are no allocations made against this transaction'),'info');
 	} else {
-		echo '<br /><table cellpadding=2 class="selection">';
+		echo '<br /><table cellpadding="2" class="selection">';
 
 		echo '<tr><th colspan=6><div class="centre"><font size=3 color=blue><b>'._('Allocations made against invoice number') . ' ' . $_POST['TransNo']
 			. '<br />'._('Transaction Total').': '. number_format($myrow['totamt'],2) . '</font></b></div></th></tr>';
@@ -128,7 +128,7 @@ if (isset($_POST['ShowResults']) AND  $_POST['TransNo']!=''){
 		$AllocsTotal +=$myrow['amt'];
 		}
 		//end of while loop
-		echo '<tr><td colspan = 5 class="number">'._('Total allocated').'</td>
+		echo '<tr><td colspan="5" class="number">'._('Total allocated').'</td>
 			<td class="number">' . number_format($AllocsTotal,2) . '</td></tr>';
 		echo '</table>';
 	}
