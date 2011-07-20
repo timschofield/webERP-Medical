@@ -18,7 +18,7 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/t
 
 echo '<div class="page_help_text">' . _('Use the keyboard Shift key to select multiple accounts and periods') . '</div><br />';
 
-echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
+echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 /*Dates in SQL format for the last day of last month*/
@@ -43,7 +43,7 @@ while ($myrow=DB_fetch_array($AccountsResult,$db)){
 echo '</select></td>';
 
 echo '<td>'._('For Period range').':</td>
-		<td><select Name=Period[] multiple>';
+		<td><select name="Period[]" multiple>';
 $sql = "SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno DESC";
 $Periods = DB_query($sql,$db);
 $id=0;
@@ -131,20 +131,23 @@ if (isset($_POST['MakeCSV'])){
 
 		if ($_POST['tag']==0) {
 	 		$sql= "SELECT type,
-					  typename,
-					  gltrans.typeno,
-					  gltrans.trandate,
-					  gltrans.narrative,
-		  				  gltrans.amount,
-					  gltrans.periodno,
-					  gltrans.tag
-				FROM gltrans, systypes
-				WHERE gltrans.account = '" . $SelectedAccount . "'
-				AND systypes.typeid=gltrans.type
-				AND posted=1
-				AND periodno>='" . $FirstPeriodSelected . "'
-				AND periodno<='" . $LastPeriodSelected . "'
-				ORDER BY periodno, gltrans.trandate, counterindex";
+						typename,
+						gltrans.typeno,
+						gltrans.trandate,
+						gltrans.narrative,
+		  				gltrans.amount,
+						gltrans.periodno,
+						gltrans.tag
+					FROM gltrans,
+						systypes
+					WHERE gltrans.account = '" . $SelectedAccount . "'
+						AND systypes.typeid=gltrans.type
+						AND posted=1
+						AND periodno>='" . $FirstPeriodSelected . "'
+						AND periodno<='" . $LastPeriodSelected . "'
+						ORDER BY periodno,
+								gltrans.trandate,
+								counterindex";
 
 		} else {
 	 		$sql= "SELECT gltrans.type,
@@ -155,14 +158,17 @@ if (isset($_POST['MakeCSV'])){
 		  				gltrans.amount,
 						gltrans.periodno,
 						gltrans.tag
-					FROM gltrans, systypes
+					FROM gltrans,
+						systypes
 					WHERE gltrans.account = '" . $SelectedAccount . "'
 						AND systypes.typeid=gltrans.type
 						AND posted=1
 						AND periodno>='" . $FirstPeriodSelected . "'
 						AND periodno<='" . $LastPeriodSelected . "'
 						AND tag='".$_POST['tag']."'
-					ORDER BY periodno, gltrans.trandate, counterindex";
+					ORDER BY periodno,
+							gltrans.trandate,
+							counterindex";
 		}
 
 		$ErrMsg = _('The transactions for account') . ' ' . $SelectedAccount . ' ' . _('could not be retrieved because') ;
@@ -173,11 +179,11 @@ if (isset($_POST['MakeCSV'])){
 			$RunningTotal = 0;
 		} else {
 			$sql = "SELECT bfwd,
-					actual,
-					period
-				FROM chartdetails
-				WHERE chartdetails.accountcode='" . $SelectedAccount . "'
-				AND chartdetails.period='" . $FirstPeriodSelected . "'";
+							actual,
+							period
+						FROM chartdetails
+						WHERE chartdetails.accountcode='" . $SelectedAccount . "'
+							AND chartdetails.period='" . $FirstPeriodSelected . "'";
 
 			$ErrMsg = _('The chart details for account') . ' ' . $SelectedAccount . ' ' . _('could not be retrieved');
 			$ChartDetailsResult = DB_query($sql,$db,$ErrMsg);
@@ -202,11 +208,11 @@ if (isset($_POST['MakeCSV'])){
 				if ($PeriodNo!=-9999){ //ie its not the first time around
 					/*Get the ChartDetails balance b/fwd and the actual movement in the account for the period as recorded in the chart details - need to ensure integrity of transactions to the chart detail movements. Also, for a balance sheet account it is the balance carried forward that is important, not just the transactions*/
 					$sql = "SELECT bfwd,
-							actual,
-							period
-						FROM chartdetails
-						WHERE chartdetails.accountcode='" . $SelectedAccount . "'
-						AND chartdetails.period='" . $PeriodNo . "'";
+									actual,
+									period
+								FROM chartdetails
+								WHERE chartdetails.accountcode='" . $SelectedAccount . "'
+									AND chartdetails.period='" . $PeriodNo . "'";
 
 					$ErrMsg = _('The chart details for account') . ' ' . $SelectedAccount . ' ' . _('could not be retrieved');
 					$ChartDetailsResult = DB_query($sql,$db,$ErrMsg);
