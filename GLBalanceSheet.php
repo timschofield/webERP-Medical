@@ -24,7 +24,7 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 
 	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<br /><table class="selection"><tr><td>'._('Select the balance date').':</td><td><select Name="BalancePeriodEnd">';
+	echo '<br /><table class="selection"><tr><td>'._('Select the balance date').':</td><td><select name="BalancePeriodEnd">';
 
 	$periodno=GetPeriod(Date($_SESSION['DefaultDateFormat']), $db);
 	$sql = "SELECT lastdate_in_period FROM periods WHERE periodno='".$periodno . "'";
@@ -45,15 +45,15 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 
 	echo '</select></td></tr>';
 
-	echo '<tr><td>'._('Detail Or Summary').':</td><td><select Name="Detail">';
+	echo '<tr><td>'._('Detail Or Summary').':</td><td><select name="Detail">';
 	echo '<option selected value="Summary">'._('Summary') . '</option>';
 	echo '<option selected value="Detailed">'._('All Accounts') . '</option>';
 	echo '</select></td></tr>';
 
 	echo '</table>';
 
-	echo '<br /><div class="centre"><input type="submit" Name="ShowBalanceSheet" Value="'._('Show on Screen (HTML)').'"></div>';
-	echo '<br /><div class="centre"><input type="submit" Name="PrintPDF" Value="'._('Produce PDF Report').'"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="ShowBalanceSheet" Value="'._('Show on Screen (HTML)').'"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="PrintPDF" Value="'._('Produce PDF Report').'"></div>';
 
 	/*Now do the posting while the user is thinking about the period to select */
 	include ('includes/GLPostings.inc');
