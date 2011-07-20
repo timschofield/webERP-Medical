@@ -77,7 +77,7 @@ if (isset($_POST['Process'])) {
 	}
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/supplier.png" title="' .
 		_('Tenders') . '" alt="" />' . ' ' . _('Confirm the Response For Tender') . ' ' . $_SESSION['offer']->TenderID .'</p>';
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
+	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection">';
 	echo '<input type="hidden" name="TenderType" value="3" />';
@@ -352,7 +352,7 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==2 and !isset($_POST['S
 	if (!isset($_SESSION['offer'])) {
 		$_SESSION['offer']=new Offer($_POST['SupplierID']);
 	}
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
+	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' .
 		_('Search') . '" alt="" />' . ' ' . _('Search for Inventory Items') . '</p>';
@@ -428,7 +428,7 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==3 and !isset($_POST['S
 	echo '<table class="selection">';
 	echo '<tr><th colspan="13"><font size="3" color="navy">' . _('Outstanding Tenders Waiting For Offer') . '</font></th></tr>';
 	while ($myrow=DB_fetch_row($result)) {
-		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
+		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<input type="hidden" name="TenderType" value="3" />';
 		$LocationSQL="SELECT tenderid,
