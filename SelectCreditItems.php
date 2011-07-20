@@ -1246,8 +1246,8 @@ if (isset($_SESSION['CreditItems']->DebtorNo) and !isset($_POST['ProcessCredit']
 		echo '</table><br /><div class="centre">';
 
 		echo '<input type="submit" name="Search" value="' . _('Search Now') .'" />';
-		echo '<input type="submit" Name="ChangeCustomer" value="' . _('Change Customer') . '" />';
-		echo '<input type="submit" Name="Quick" value="' . _('Quick Entry') . '" />';
+		echo '<input type="submit" name="ChangeCustomer" value="' . _('Change Customer') . '" />';
+		echo '<input type="submit" name="Quick" value="' . _('Quick Entry') . '" />';
 		echo '</div>';
 
 		if (isset($SearchResult)) {
