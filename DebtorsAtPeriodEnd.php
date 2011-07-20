@@ -147,14 +147,14 @@ if (isset($_POST['PrintPDF'])
 		echo '<tr><td>' . _('From Customer Code') .':</font></td><td><input tabindex=1 type="text" maxlength=6 size=7 name=FromCriteria value="1"></td></tr>';
 		echo '<tr><td>' . _('To Customer Code') . ':</td><td><input tabindex=2 type="text" maxlength=6 size=7 name=ToCriteria value="zzzzzz"></td></tr>';
 
-		echo '<tr><td>' . _('Balances As At') . ":</td><td><select tabindex=3 Name='PeriodEnd'>";
+		echo '<tr><td>' . _('Balances As At') . ':</td><td><select tabindex="3" name="PeriodEnd">';
 
 		$sql = "SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno DESC";
 		$Periods = DB_query($sql,$db,_('Could not retrieve period data because'),_('The SQL that failed to get the period data was'));
 
 		while ($myrow = DB_fetch_array($Periods,$db)){
 
-			echo '<option value=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
+			echo '<option value="' . $myrow['periodno'] . '">' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
 
 		}
 	}
