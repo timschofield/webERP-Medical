@@ -19,7 +19,7 @@ echo '<a href="'. $rootpath . '/WorkOrderCosting.php?WO=' .  $_POST['WO'] . '">'
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/group_add.png" title="' .
 	_('Search') . '" alt="" />' . ' ' . $title.'</p>';
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 
@@ -31,8 +31,8 @@ if (!isset($_POST['WO']) OR !isset($_POST['StockID'])) {
 	include ('includes/footer.inc');
 	exit;
 } else {
-	echo '<input type="hidden" name="WO" value=' .$_POST['WO'] . '>';
-	echo '<input type="hidden" name="StockID" value=' .$_POST['StockID'] . '>';
+	echo '<input type="hidden" name="WO" value="' .$_POST['WO'] . '" />';
+	echo '<input type="hidden" name="StockID" value="' .$_POST['StockID'] . ' />';
 }
 if (isset($_GET['IssueItem'])){
 	$_POST['IssueItem']=$_GET['IssueItem'];
