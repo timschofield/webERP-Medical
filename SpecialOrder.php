@@ -651,7 +651,7 @@ echo '<tr><td>' . _('Required Delivery Date') . ':</td>
 
 echo '</table>'; /* end of main table */
 
-echo '<div class="centre"><input type="submit" Name="EnterLine" value="' . _('Add Item to Order') . '" />';
+echo '<div class="centre"><input type="submit" name="EnterLine" value="' . _('Add Item to Order') . '" />';
 
 echo '<br /><br /><input type="submit" name="Cancel" value="' . _('Start Again') . '" />';
 echo '<br /><br /><input type="submit" name="Commit" value="' . _('Process This Order') . '" />';
