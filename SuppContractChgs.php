@@ -103,7 +103,7 @@ if ($_SESSION['SuppTrans']->InvoiceOrCredit == 'Invoice'){
 }
 
 /*Set up a form to allow input of new Contract charges */
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (!isset($_POST['ContractRef'])) {
