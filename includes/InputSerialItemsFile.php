@@ -143,7 +143,7 @@ if (!$LineItem->SerialItemsValid && !$_SESSION['CurImportFile']['Processed']){
 		}
 		fclose($handle);
 
-	echo '<br /><form method=POST>';
+	echo '<br /><form method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<input type="submit" name="ValidateFile" value="' . _('Validate File') . '" />
 			<input type="hidden" name="LineNo" value="' . $LineNo . '" />
