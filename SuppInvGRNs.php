@@ -239,9 +239,9 @@ if (isset($_GET['Modify'])){
 		<td>' . $GRNTmp->GRNNo . '</td>
 		<td>' . $GRNTmp->ItemCode . ' ' . $GRNTmp->ItemDescription . '</td>
 		<td class="number">' . number_format($GRNTmp->QtyRecd - $GRNTmp->Prev_QuantityInv,2) . '</td>
-		<td><input type="text" class="number" Name="This_QuantityInv" Value="' . $GRNTmp->This_QuantityInv . '" size=11 maxlength=10></td>
+		<td><input type="text" class="number" name="This_QuantityInv" Value="' . $GRNTmp->This_QuantityInv . '" size=11 maxlength=10></td>
 		<td class="number">' . $GRNTmp->OrderPrice . '</td>
-		<td><input type="text" class="number" Name="ChgPrice" Value=' . $GRNTmp->ChgPrice . ' size="11" maxlength="10"></td>
+		<td><input type="text" class="number" name="ChgPrice" Value=' . $GRNTmp->ChgPrice . ' size="11" maxlength="10"></td>
 	</tr>';
 	echo '</table>';
 
@@ -252,7 +252,7 @@ if (isset($_GET['Modify'])){
 		echo '<input type="hidden" name="ShiptRef" Value="' . $GRNTmp->ShiptRef . '">';
 //	}
 
-	echo '<div class="centre"><p><input type="submit" Name="ModifyGRN" Value="' . _('Modify Line') . '"></p></div>';
+	echo '<div class="centre"><p><input type="submit" name="ModifyGRN" Value="' . _('Modify Line') . '"></p></div>';
 
 
 	echo '<input type="hidden" name="GRNNumber" value="' . $GRNTmp->GRNNo . '" />';
@@ -292,7 +292,7 @@ else {
 
 		if (isset($POs[$GRNTmp->PONo]) and $POs[$GRNTmp->PONo] != $GRNTmp->PONo) {
 					$POs[$GRNTmp->PONo] = $GRNTmp->PONo;
-					echo '<tr><td><input type="submit" Name="AddPOToTrans" Value="' . $GRNTmp->PONo . '"></td><td colspan=3>' . _('Add Whole PO to Invoice') . '</td></tr>';
+					echo '<tr><td><input type="submit" name="AddPOToTrans" Value="' . $GRNTmp->PONo . '"></td><td colspan=3>' . _('Add Whole PO to Invoice') . '</td></tr>';
 					$i = 0;
 			}
 			if ($i == 0){
@@ -320,8 +320,8 @@ else {
 		}
 		echo '</table>';
 		echo '<br /><div class="centre"><input type="submit" name="SelectAll" Value="' . _('Select All') . '">';
-		echo '<input type="submit" Name="DeSelectAll" value="' . _('Deselect All') . '">';
-		echo '<br /><input type="submit" Name="AddGRNToTrans" value="' . _('Add to Invoice') . '" /></div>';
+		echo '<input type="submit" name="DeSelectAll" value="' . _('Deselect All') . '">';
+		echo '<br /><input type="submit" name="AddGRNToTrans" value="' . _('Add to Invoice') . '" /></div>';
 	}
 }
 
