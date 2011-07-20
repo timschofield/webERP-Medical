@@ -32,7 +32,7 @@ if (!isset($_GET['InvoiceNumber']) AND !$_SESSION['ProcessingCredit']) {
 
 
 	$InvoiceHeaderSQL = "SELECT DISTINCT
-								debtortrans.id as transid,
+								debtortrans.id AS transid,
 								debtortrans.debtorno,
 								debtorsmaster.name,
 								debtortrans.branchcode,
@@ -49,17 +49,18 @@ if (!isset($_GET['InvoiceNumber']) AND !$_SESSION['ProcessingCredit']) {
 								custbranch.taxgroupid,
 								stockmoves.loccode,
 								locations.taxprovinceid
-							FROM debtortrans INNER JOIN debtorsmaster ON
-								debtortrans.debtorno = debtorsmaster.debtorno
-								INNER JOIN custbranch ON
-								debtortrans.branchcode = custbranch.branchcode
+							FROM debtortrans
+							INNER JOIN debtorsmaster
+							ON debtortrans.debtorno = debtorsmaster.debtorno
+							INNER JOIN custbranch
+							ON debtortrans.branchcode = custbranch.branchcode
 								AND debtortrans.debtorno = custbranch.debtorno
-								INNER JOIN currencies ON
-								debtorsmaster.currcode = currencies.currabrev
-								INNER JOIN stockmoves ON
-								stockmoves.transno=debtortrans.transno
-								INNER JOIN locations ON
-								stockmoves.loccode = locations.loccode
+							INNER JOIN currencies
+							ON debtorsmaster.currcode = currencies.currabrev
+							INNER JOIN stockmoves
+							ON stockmoves.transno=debtortrans.transno
+							INNER JOIN locations
+							ON stockmoves.loccode = locations.loccode
 							WHERE debtortrans.transno = '" . $_GET['InvoiceNumber'] . "'
 								AND debtortrans.type=10
 								AND stockmoves.type=10";
