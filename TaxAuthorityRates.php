@@ -53,7 +53,7 @@ if (isset($_POST['UpdateRates'])){
 $TaxAuthDetail = DB_query("SELECT description FROM taxauthorities WHERE taxid='" . $TaxAuthority . "'",$db);
 $myrow = DB_fetch_row($TaxAuthDetail);
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<input type="hidden" name="TaxAuthority" value=' . $TaxAuthority . ' />';
