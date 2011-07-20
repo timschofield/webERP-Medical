@@ -32,7 +32,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 	$period=GetPeriod($FromDate, $db);
 
 	/*Show a form to allow input of criteria for profit and loss to show */
-	echo '<table class="selection"><tr><td>' . _('Select Period From') . ':</td><td><select Name="FromPeriod">';
+	echo '<table class="selection"><tr><td>' . _('Select Period From') . ':</td><td><select name="FromPeriod">';
 
 	$sql = "SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno DESC";
 	$Periods = DB_query($sql,$db);
@@ -66,7 +66,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 		$DefaultToPeriod = $_POST['ToPeriod'];
 	}
 
-	echo '<tr><td>' . _('Select Period To') . ':</td><td><select Name="ToPeriod">';
+	echo '<tr><td>' . _('Select Period To') . ':</td><td><select name="ToPeriod">';
 
 	$RetResult = DB_data_seek($Periods,0);
 
@@ -99,15 +99,15 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 	echo '</select></td>';
 // End select tag
 
-	echo '<tr><td>'._('Detail Or Summary').':</td><td><select Name="Detail">';
+	echo '<tr><td>'._('Detail Or Summary').':</td><td><select name="Detail">';
 		echo '<option selected value="Summary">'._('Summary') . '</option>';
 		echo '<option selected value="Detailed">'._('All Accounts') . '</option>';
 	echo '</select></td></tr>';
 
 	echo '</table><br />';
 
-	echo '<div class="centre"><input type="submit" Name="ShowPL" Value="'._('Show Statement of Income and Expenditure').'"><br />';
-	echo '<br /><input type="submit" Name="PrintPDF" Value="'._('PrintPDF').'"></div>';
+	echo '<div class="centre"><input type="submit" name="ShowPL" value="'._('Show Statement of Income and Expenditure').'"><br />';
+	echo '<br /><input type="submit" name="PrintPDF" value="'._('PrintPDF').'"></div>';
 
 	/*Now do the posting while the user is thinking about the period to select */
 
