@@ -7,6 +7,7 @@ $title = _('Currencies Maintenance');
 
 include('includes/header.inc');
 include('includes/SQL_CommonFunctions.inc');
+include('includes/CurrenciesArray.php');
 
 if (isset($_GET['SelectedCurrency'])){
 	$SelectedCurrency = $_GET['SelectedCurrency'];
@@ -89,7 +90,7 @@ if (isset($_POST['submit'])) {
 		$InputError = 1;
 		prnMsg(_('The functional currency cannot be modified or deleted'),'error');
 	}
-	if (strstr($_POST['Abbreviation'],"'") OR strstr($_POST['Abbreviation'],'+') OR strstr($_POST['Abbreviation'],"\"") OR strstr($_POST['Abbreviation'],'&') OR strstr($_POST['Abbreviation'],' ') OR strstr($_POST['Abbreviation'],"\\") OR strstr($_POST['Abbreviation'],'.') OR strstr($_POST['Abbreviation'],'"')) {
+	if (mb_strstr($_POST['Abbreviation'],"'") OR mb_strstr($_POST['Abbreviation'],'+') OR mb_strstr($_POST['Abbreviation'],"\"") OR mb_strstr($_POST['Abbreviation'],'&') OR mb_strstr($_POST['Abbreviation'],' ') OR mb_strstr($_POST['Abbreviation'],"\\") OR mb_strstr($_POST['Abbreviation'],'.') OR mb_strstr($_POST['Abbreviation'],'"')) {
 		$InputError = 1;
 		prnMsg( _('The currency code cannot contain any of the following characters') . " . - ' & + \" " . _('or a space'),'error');
 		$Errors[$i] = 'Abbreviation';
@@ -100,7 +101,7 @@ if (isset($_POST['submit'])) {
 
 		/*SelectedCurrency could also exist if submit had not been clicked this code would not run in this case cos submit is false of course  see the delete code below*/
 		$sql = "UPDATE currencies SET
-					currency='" . $_POST['CurrencyName'] . "',
+					currency='" . $CurrenciesArray[$SelectedCurrency] . "',
 					country='". $_POST['Country']. "',
 					hundredsname='" . $_POST['HundredsName'] . "',
 					decimalplaces='" . $_POST['DecimalPlaces'] . "',
@@ -117,12 +118,13 @@ if (isset($_POST['submit'])) {
 						hundredsname,
 						decimalplaces,
 						rate)
-				VALUES ('" . $_POST['CurrencyName'] . "',
-					'" . $_POST['Abbreviation'] . "',
-					'" . $_POST['Country'] . "',
-					'" . $_POST['HundredsName'] .  "',
-					'" . $_POST['DecimalPlaces'] .  "',
-					'" . $_POST['ExchangeRate'] . "')";
+				VALUES ('" . $CurrenciesArray[$_POST['Abbreviation']] . "',
+						'" . $_POST['Abbreviation'] . "',
+						'" . $_POST['Country'] . "',
+						'" . $_POST['HundredsName'] .  "',
+						'" . $_POST['DecimalPlaces'] .  "',
+						'" . $_POST['ExchangeRate'] . "'
+						)";
 
 		$msg = _('The currency definition record has been added');
 	}
@@ -195,7 +197,7 @@ or deletion of the records*/
 				FROM currencies";
 	$result = DB_query($sql, $db);
 
-	echo '<table class="selection">';
+	echo '<br /><table class="selection">';
 	echo '<tr><td></td>
 			<th>' . _('ISO4217 Code') . '</th>
 			<th>' . _('Currency Name') . '</th>
@@ -241,7 +243,7 @@ or deletion of the records*/
 					<td class="number">%s</td>
 					<td class="number">%s</td>
 					<td><a href="%s&SelectedCurrency=%s">%s</a></td>
-					<td><a href="%s&SelectedCurrency=%sdelete=1">%s</a></td>
+					<td><a href="%s&SelectedCurrency=%s&delete=1">%s</a></td>
 					<td><a href="%s/ExchangeRateTrend.php?%s">' . _('Graph') . '</a></td>
 					</tr>',
 					$ImageFile,
@@ -333,14 +335,13 @@ if (!isset($_GET['delete'])) {
 		if (!isset($_POST['Abbreviation'])) {$_POST['Abbreviation']='';}
 		echo '<table class="selection"><tr>
 			<td>' ._('Currency Abbreviation') . ':</td>
-			<td><input ' . (in_array('Abbreviation',$Errors) ?  'class="inputerror"' : '' ) .' type="Text" name="Abbreviation" value="' . $_POST['Abbreviation'] . '" size=4 maxlength=3></td></tr>';
+			<td><select name="Abbreviation">';
+		foreach ($CurrenciesArray as $Abbreviation=>$CurrencyName) {
+			echo '<option value="'.$Abbreviation.'">'.$CurrencyName.'</option>';
+		}
+		echo '</select></td></tr>';
 	}
 
-	echo '<tr><td>'._('Currency Name').':</td>';
-	echo '<td>';
-	if (!isset($_POST['CurrencyName'])) {$_POST['CurrencyName']='';}
-	echo '<input ' . (in_array('CurrencyName',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="CurrencyName" size=20 maxlength=20 value="' . $_POST['CurrencyName'] . '">';
-	echo '</td></tr>';
 	echo '<tr><td>'._('Country').':</td>';
 	echo '<td>';
 	if (!isset($_POST['Country'])) {$_POST['Country']='';}

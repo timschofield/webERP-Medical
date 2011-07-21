@@ -260,7 +260,7 @@ if (isset($_POST['CommitBatch'])){
 
 		echo '<br /><a href="' . $rootpath . '/PrintCheque.php?ChequeNum=' . $_POST['ChequeNum'] . '">' . _('Print Cheque using pre-printed stationery') . '</a><br /><br />';
 
-		echo '<form method=post action="' . $_SERVER['PHP_SELF'] . '">';
+		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo _('Has the cheque been printed') . '?<br /><br />';
 		echo '<input type="hidden" name="CommitBatch" value="' . $_POST['CommitBatch'] . '">';
@@ -712,7 +712,7 @@ if (isset($_POST['BankAccount']) AND $_POST['BankAccount']!='') {
 }
 
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 
@@ -902,10 +902,10 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 	/*now set up a GLCode field to select from avaialble GL accounts */
 	if (isset($_POST['GLManualCode'])) {
 		echo '<tr><td>' . _('Enter GL Account Manually') . ':</td>
-			<td><input type="text" class="number" Name="GLManualCode" Maxlength=12 size=12 onChange="return inArray(this, GLCode.options,'.	"'".'The account code '."'".'+ this.value+ '."'".' doesnt exist'."'".')"' . ' value='. $_POST['GLManualCode'] .'  ></td></tr>';
+			<td><input type="text" class="number" name="GLManualCode" Maxlength=12 size=12 onChange="return inArray(this, GLCode.options,'.	"'".'The account code '."'".'+ this.value+ '."'".' doesnt exist'."'".')"' . ' value='. $_POST['GLManualCode'] .'  ></td></tr>';
 	} else {
 		echo '<tr><td>' . _('Enter GL Account Manually') . ':</td>
-			<td><input type="text" class="number" Name="GLManualCode" Maxlength=12 size=12 onChange="return inArray(this, GLCode.options,'.	"'".'The account code '."'".'+ this.value+ '."'".' doesnt exist'."'".')"></td></tr>';
+			<td><input type="text" class="number" name="GLManualCode" Maxlength=12 size=12 onChange="return inArray(this, GLCode.options,'.	"'".'The account code '."'".'+ this.value+ '."'".' doesnt exist'."'".')"></td></tr>';
 	}
 
 	echo '<tr><td>' . _('Select GL Group') . ':</td>
@@ -977,10 +977,10 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 
 	if (isset($_POST['GLAmount'])) {
 		echo '<tr><td>' . _('Amount') . ' (' . $_SESSION['PaymentDetail']->Currency . '):</td>
-				<td><input type="text" Name="GLAmount" Maxlength=12 size=12 class="number" value=' . $_POST['GLAmount'] . '></td></tr>';
+				<td><input type="text" name="GLAmount" Maxlength=12 size=12 class="number" value=' . $_POST['GLAmount'] . '></td></tr>';
 	} else {
 		echo '<tr><td>' . _('Amount') . ' (' . $_SESSION['PaymentDetail']->Currency . '):</td>
-				<td><input type="text" Name="GLAmount" Maxlength=12 size=12 class="number"></td></tr>';
+				<td><input type="text" name="GLAmount" Maxlength=12 size=12 class="number"></td></tr>';
 	}
 
 	echo '</table><br />';

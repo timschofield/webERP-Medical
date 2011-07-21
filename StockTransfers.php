@@ -29,7 +29,7 @@ if (isset($_POST['CheckCode'])) {
 	if (strlen($_POST['StockText'])>0) {
 		$sql="SELECT stockid, description from stockmaster where description " . LIKE . " '%" . $_POST['StockText'] . "%'";
 	} else {
-		$sql="SELECT stockid, description from stockmaster where stockid " . LIKE . " '%" . $_POST['StockCode']."%'";
+		$sql="SELECT stockid, description FROM stockmaster WHERE stockid " . LIKE . " '%" . $_POST['StockCode']."%'";
 	}
 	$ErrMsg=_('The stock information cannot be retrieved because');
 	$DbgMsg=_('The SQL to get the stock description was');
@@ -434,7 +434,7 @@ if ( isset($_POST['EnterTransfer']) ){
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Dispatch') .
 		'" alt="" />' . ' ' . $title . '</p>';
 
-echo '<form action="'. $_SERVER['PHP_SELF'] . '" method=post>';
+echo '<form action="'. $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 

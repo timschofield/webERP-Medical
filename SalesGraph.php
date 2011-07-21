@@ -33,7 +33,7 @@ if ((! isset($_POST['FromPeriod']) OR ! isset($_POST['ToPeriod']))
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>';
 /*Show a form to allow input of criteria for TB to show */
-	echo '<table class="selection"><tr><td>' . _('Select Period From:') . '</td><td><select Name="FromPeriod">';
+	echo '<table class="selection"><tr><td>' . _('Select Period From:') . '</td><td><select name="FromPeriod">';
 
 	if (Date('m') > $_SESSION['YearEnd']){
 		/*Dates in SQL format */
@@ -67,7 +67,7 @@ if ((! isset($_POST['FromPeriod']) OR ! isset($_POST['ToPeriod']))
 		$DefaultToPeriod = $_POST['ToPeriod'];
 	}
 
-	echo '<tr><td>' . _('Select Period To:') .'</td><td><select Name="ToPeriod">';
+	echo '<tr><td>' . _('Select Period To:') .'</td><td><select name="ToPeriod">';
 
 	$RetResult = DB_data_seek($Periods,0);
 
@@ -86,7 +86,7 @@ if ((! isset($_POST['FromPeriod']) OR ! isset($_POST['ToPeriod']))
 	if (!isset($_POST['SalesArea'])){
 		$_POST['SalesArea']='';
 	}
-	echo '<tr><td>' . _('For Sales Area/Region:') .'</td><td><select Name="SalesArea">';
+	echo '<tr><td>' . _('For Sales Area/Region:') .'</td><td><select name="SalesArea">';
 	if($_POST['SalesArea']=='All'){
 		echo '<option selected value="All">' . _('All') . '</option>';
 	} else {
@@ -106,7 +106,7 @@ if ((! isset($_POST['FromPeriod']) OR ! isset($_POST['ToPeriod']))
 	if (!isset($_POST['CategoryID'])){
 		$_POST['CategoryID']='';
 	}
-	echo '<tr><td>' . _('For Stock Category:') .'</td><td><select Name="CategoryID">';
+	echo '<tr><td>' . _('For Stock Category:') .'</td><td><select name="CategoryID">';
 	if($_POST['CategoryID']=='All'){
 		echo '<option selected value="All">' . _('All') . '</option>';
 	} else {
@@ -128,7 +128,7 @@ if ((! isset($_POST['FromPeriod']) OR ! isset($_POST['ToPeriod']))
  		$_POST['SalesmanCode'] = '';
 	}
 
-	echo '<tr><td>' . _('For Sales Person:') .'</td><td><select Name="SalesmanCode">';
+	echo '<tr><td>' . _('For Sales Person:') .'</td><td><select name="SalesmanCode">';
 
 	if($_POST['SalesmanCode']=='All'){
 		echo '<option selected value="All">' . _('All') . '</option>';

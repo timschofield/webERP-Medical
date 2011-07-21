@@ -33,9 +33,9 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 echo '<table class="selection">';
 
 echo '<tr><td>'. _('From Date') . ' ' . $_SESSION['DefaultDateFormat'] .'</td>
-	<td><input tabindex="1" type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="FromDate" size="11" maxlength="10" value="' .$_POST['FromDate'].'"></td></tr>';
+	<td><input tabindex="1" type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="FromDate" size="11" maxlength="10" value="' .$_POST['FromDate'].'" /></td></tr>';
 echo '<tr><td>'. _('To Date') . ' ' . $_SESSION['DefaultDateFormat'] .'</td>
-	<td><input tabindex="2" type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="ToDate" size="11" maxlength="10" value="' . $_POST['ToDate'] . '"></td></tr>';
+	<td><input tabindex="2" type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="ToDate" size="11" maxlength="10" value="' . $_POST['ToDate'] . '" /></td></tr>';
 
 // Show user selections
 echo '<tr><td>'. _('User ID'). '</td>
@@ -56,7 +56,7 @@ echo '<tr><td>'. _('Table '). '</td>
 echo '<option value="ALL">' . _('ALL') . '</option>';
 while ($tables = DB_fetch_row($TableResult)) {
 	if (isset($_POST['SelectedTable']) and $tables[0]==$_POST['SelectedTable']) {
-		echo '<option selected value=' . $tables[0] . '>' . $tables[0] . '</option>';
+		echo '<option selected="True" value=' . $tables[0] . '>' . $tables[0] . '</option>';
 	} else {
 		echo '<option value=' . $tables[0] . '>' . $tables[0] . '</option>';
 	}
@@ -64,7 +64,7 @@ while ($tables = DB_fetch_row($TableResult)) {
 echo '</select></td></tr>';
 
 echo '</table><br />';
-echo '<div class="centre"><input tabindex="5" type="submit" name="View" value="' . _('View') . '"></div>';
+echo '<div class="centre"><input tabindex="5" type="submit" name="View" value="' . _('View') . '" /></div>';
 echo '</form>';
 
 // View the audit trail
@@ -140,7 +140,7 @@ if (isset($_POST['View'])) {
 	}
 	$result = DB_query($sql,$db);
 
-	echo '<table border=0 width="98%" class="selection">';
+	echo '<table width="98%" class="selection">';
 	echo '<tr><th>' . _('Date/Time') . '</th>
 				<th>' . _('User') . '</th>
 				<th>' . _('Type') . '</th>
@@ -187,7 +187,7 @@ if (isset($_POST['View'])) {
 					echo '</tr>';
 				}
 			}
-			echo '<tr bgcolor=black> <td colspan="6"></td> </tr>';
+			echo '<tr bgcolor="black"> <td colspan="6"></td> </tr>';
 		}
 		unset($_SESSION['SQLString']);
 	}

@@ -36,13 +36,6 @@
 	echo '<tr>';
 	echo '<td colspan="2" rowspan="2">';
 
-	echo '<table class="main_page" cellpadding="0" cellspacing="0">';
-	echo '<tr>';
-	echo '<td>';
-	echo '<table width="100%" border="0" cellpadding="0" cellspacing="0" >';
-	echo '<tr>';
-	echo '<td>';
-
 	if (isset($title)) {
 		echo '<table cellpadding="0" cellspacing="0" border="0" id="quick_menu" class="quick_menu">';
 		echo '<tr>';

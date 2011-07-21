@@ -7,7 +7,7 @@ $title = _('Search Work Orders');
 include('includes/header.inc');
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p>';
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 
@@ -37,50 +37,50 @@ if (isset($_POST['SearchParts'])){
 		$SearchString = '%' . str_replace(' ', '%', $_POST['Keywords']) . '%';
 
 		$SQL = "SELECT stockmaster.stockid,
-				stockmaster.description,
-				SUM(locstock.quantity) AS qoh,
-				stockmaster.units
-			FROM stockmaster,
-				locstock
-			WHERE stockmaster.stockid=locstock.stockid
-			AND stockmaster.description " . LIKE . " '" . $SearchString . "'
-			AND stockmaster.categoryid='" . $_POST['StockCat']. "'
-			AND stockmaster.mbflag='M'
-			GROUP BY stockmaster.stockid,
-				stockmaster.description,
-				stockmaster.units
-			ORDER BY stockmaster.stockid";
+						stockmaster.description,
+						SUM(locstock.quantity) AS qoh,
+						stockmaster.units
+					FROM stockmaster,
+						locstock
+					WHERE stockmaster.stockid=locstock.stockid
+						AND stockmaster.description " . LIKE . " '" . $SearchString . "'
+						AND stockmaster.categoryid='" . $_POST['StockCat']. "'
+						AND stockmaster.mbflag='M'
+					GROUP BY stockmaster.stockid,
+							stockmaster.description,
+							stockmaster.units
+					ORDER BY stockmaster.stockid";
 
 	 } elseif (isset($_POST['StockCode'])){
 		$SQL = "SELECT stockmaster.stockid,
-				stockmaster.description,
-				sum(locstock.quantity) as qoh,
-				stockmaster.units
-			FROM stockmaster,
-				locstock
-			WHERE stockmaster.stockid=locstock.stockid
-			AND stockmaster.stockid " . LIKE . " '%" . $_POST['StockCode'] . "%'
-			AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
-			AND stockmaster.mbflag='M'
-			GROUP BY stockmaster.stockid,
-				stockmaster.description,
-				stockmaster.units
-			ORDER BY stockmaster.stockid";
+						stockmaster.description,
+						sum(locstock.quantity) as qoh,
+						stockmaster.units
+					FROM stockmaster,
+						locstock
+					WHERE stockmaster.stockid=locstock.stockid
+						AND stockmaster.stockid " . LIKE . " '%" . $_POST['StockCode'] . "%'
+						AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
+						AND stockmaster.mbflag='M'
+					GROUP BY stockmaster.stockid,
+							stockmaster.description,
+							stockmaster.units
+					ORDER BY stockmaster.stockid";
 
 	 } elseif (!isset($_POST['StockCode']) AND !isset($_POST['Keywords'])) {
 		$SQL = "SELECT stockmaster.stockid,
-				stockmaster.description,
-				sum(locstock.quantity) as qoh,
-				stockmaster.units
-			FROM stockmaster,
-				locstock
-			WHERE stockmaster.stockid=locstock.stockid
-			AND stockmaster.categoryid='" . $_POST['StockCat'] ."'
-			AND stockmaster.mbflag='M'
-			GROUP BY stockmaster.stockid,
-				stockmaster.description,
-				stockmaster.units
-			ORDER BY stockmaster.stockid";
+						stockmaster.description,
+						sum(locstock.quantity) as qoh,
+						stockmaster.units
+					FROM stockmaster,
+						locstock
+					WHERE stockmaster.stockid=locstock.stockid
+						AND stockmaster.categoryid='" . $_POST['StockCat'] ."'
+						AND stockmaster.mbflag='M'
+					GROUP BY stockmaster.stockid,
+							stockmaster.description,
+							stockmaster.units
+					ORDER BY stockmaster.stockid";
 	 }
 
 	$ErrMsg =  _('No items were returned by the SQL because');
@@ -106,7 +106,7 @@ if (!isset($StockID)) {
 		if (isset($_REQUEST['SelectedStockItem'])) {
 			echo _('For the item') . ': ' . $_REQUEST['SelectedStockItem'] . ' ' . _('and') . ' <input type="hidden" name="SelectedStockItem" value="' . $_REQUEST['SelectedStockItem'] . '">';
 		}
-		echo _('Work Order number') . ': <input type="text" name="WO" MAXLENGTH =8 size=9>&nbsp ' . _('Processing at') . ':<select name="StockLocation"> ';
+		echo _('Work Order number') . ': <input type="text" name="WO" maxlength="8" size="9">&nbsp ' . _('Processing at') . ':<select name="StockLocation"> ';
 
 		$sql = "SELECT loccode, locationname FROM locations";
 
@@ -142,21 +142,23 @@ if (!isset($StockID)) {
 		}
 
 		echo '</select> &nbsp&nbsp';
-		echo '<input type="submit" name="SearchOrders" value="' . _('Search') . '">';
+		echo '<input type="submit" name="SearchOrders" value="' . _('Search') . '" />';
 		echo '&nbsp;&nbsp;<a href="' . $rootpath . '/WorkOrderEntry.php">' . _('New Work Order') . '</a></td></tr></table><br />';
 	}
 
 	$SQL="SELECT categoryid,
-			categorydescription
-		FROM stockcategory
-		ORDER BY categorydescription";
+				categorydescription
+			FROM stockcategory
+			ORDER BY categorydescription";
 
 	$result1 = DB_query($SQL,$db);
 
 	echo '<table class="selection">
-		<tr><th colspan=6><font size=3 color=navy>' . _('To search for work orders for a specific item use the item selection facilities below') . '</font></th></tr>
+			<tr>
+				<th colspan="6"><font size="3" color="navy">' . _('To search for work orders for a specific item use the item selection facilities below') . '</font></th>
+			</tr>
 	  	<tr>
-	  		<td><font size=1>' . _('Select a stock category') . ':</font>
+	  		<td><font size="1">' . _('Select a stock category') . ':</font>
 	  			<select name="StockCat">';
 
 	while ($myrow1 = DB_fetch_array($result1)) {
@@ -164,21 +166,22 @@ if (!isset($StockID)) {
 	}
 
 	  echo '</select>
-	  		<td><font size=1>' . _('Enter text extract(s) in the description') . ':</font></td>
-	  		<td><input type="Text" name="Keywords" size=20 maxlength=25></td>
-	</tr>
-	  	<tr><td></td>
-	  		<td><font size=3><b>' . _('OR') . ' </b></font><font size=1>' . _('Enter extract of the Stock Code') . '</b>:</font></td>
-	  		<td><input type="text" name="StockCode" size=15 maxlength=18></td>
-	  	</tr>
-	  </table><br />';
+				<td><font size="1">' . _('Enter text extract(s) in the description') . ':</font></td>
+				<td><input type="text" name="Keywords" size="20" maxlength="25"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><font size="3"><b>' . _('OR') . ' </b></font><font size="1">' . _('Enter extract of the Stock Code') . '</b>:</font></td>
+				<td><input type="text" name="StockCode" size="15" maxlength="18" /></td>
+			</tr>
+		</table><br />';
 	echo '<div class="centre"><input type="submit" name="SearchParts" value="' . _('Search Items Now') . '">
 		<input type="submit" name="ResetPart" value="' . _('Show All') . '"></div>';
 }
 
 if (isset($StockItemsResult)) {
 
-	echo '<br /><table cellpadding=2 colspan=7 class="selection">';
+	echo '<br /><table cellpadding="2" colspan="7" class="selection">';
 	$TableHeader = '<tr>
 				<th>' . _('Code') . '</th>
 				<th>' . _('Description') . '</th>
@@ -187,7 +190,7 @@ if (isset($StockItemsResult)) {
 			</tr>';
 	echo $TableHeader;
 
-	$j = 1;
+	$j=1;
 	$k=0; //row colour counter
 
 	while ($myrow=DB_fetch_array($StockItemsResult)) {
@@ -289,21 +292,21 @@ if (isset($StockItemsResult)) {
 
 	/*show a table of the orders returned by the SQL */
 	if (DB_num_rows($WorkOrdersResult)>0) {
-		echo '<br /><table cellpadding=2 colspan=7 width=95% class="selection">';
+		echo '<br /><table cellpadding="2" colspan="7" width="95%" class="selection">';
 
 
 		$tableheader = '<tr>
-				<th>' . _('Modify') . '</th>
-				<th>' . _('Status') . '</th>
-				<th>' . _('Receive') . '</th>
-				<th>' . _('Issue To') . '</th>
-				<th>' . _('Costing') . '</th>
-				<th>' . _('Item') . '</th>
-				<th>' . _('Quantity Required') . '</th>
-				<th>' . _('Quantity Received') . '</th>
-				<th>' . _('Quantity Outstanding') . '</th>
-				<th>' . _('Required Date') . '</th>
-				</tr>';
+							<th>' . _('Modify') . '</th>
+							<th>' . _('Status') . '</th>
+							<th>' . _('Receive') . '</th>
+							<th>' . _('Issue To') . '</th>
+							<th>' . _('Costing') . '</th>
+							<th>' . _('Item') . '</th>
+							<th>' . _('Quantity Required') . '</th>
+							<th>' . _('Quantity Received') . '</th>
+							<th>' . _('Quantity Outstanding') . '</th>
+							<th>' . _('Required Date') . '</th>
+						</tr>';
 
 		echo $tableheader;
 	}

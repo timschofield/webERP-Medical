@@ -134,7 +134,7 @@ if (DB_num_rows($GRNResults)==0){
 }
 
 /*Set up a table to show the GRNs outstanding for selection */
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<br /><table cellpadding=2 colspan=7 class="selection">';
@@ -229,9 +229,9 @@ if (isset($_POST['GRNNo']) AND $_POST['GRNNo']!=''){
 	echo '<tr><td>' . $_POST['GRNNo'] . '</td>
 				<td>' . $myrow['itemcode'] . ' ' . $myrow['itemdescription'] . '</td>
 				<td class="number">' . number_format($myrow['qtyostdg'],2) . '</td>
-				<td><input type="text" Name="This_QuantityCredited" Value=' . $myrow['qtyostdg'] . ' size=11 maxlength=10></td>
+				<td><input type="text" name="This_QuantityCredited" Value=' . $myrow['qtyostdg'] . ' size=11 maxlength=10></td>
 				<td class="number">' . $myrow['unitprice'] . '</td>
-				<td><input type="text" Name="ChgPrice" Value=' . $myrow['unitprice'] . ' size=11 maxlength=10></td>
+				<td><input type="text" name="ChgPrice" Value=' . $myrow['unitprice'] . ' size=11 maxlength=10></td>
 			</tr>';
 	echo '</table>';
 

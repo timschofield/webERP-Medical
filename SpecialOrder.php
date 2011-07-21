@@ -11,7 +11,7 @@ $title = _('Special Order Entry');
 
 include('includes/header.inc');
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 
@@ -651,7 +651,7 @@ echo '<tr><td>' . _('Required Delivery Date') . ':</td>
 
 echo '</table>'; /* end of main table */
 
-echo '<div class="centre"><input type="submit" Name="EnterLine" value="' . _('Add Item to Order') . '" />';
+echo '<div class="centre"><input type="submit" name="EnterLine" value="' . _('Add Item to Order') . '" />';
 
 echo '<br /><br /><input type="submit" name="Cancel" value="' . _('Start Again') . '" />';
 echo '<br /><br /><input type="submit" name="Commit" value="' . _('Process This Order') . '" />';

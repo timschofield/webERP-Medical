@@ -259,6 +259,7 @@ if ($_POST['Select'] != '' OR ($_SESSION['CustomerID'] != '' AND !isset($_POST['
 	if ($_POST['Select'] != '') {
 		$SQL = "SELECT brname, phoneno FROM custbranch WHERE debtorno='" . $Debtor[0] . "'";
 		$_SESSION['CustomerID'] = $Debtor[0];
+		$_SESSION['BranchID'] = $Debtor[1];
 	} else {
 		$SQL = "SELECT debtorsmaster.name, custbranch.phoneno FROM
 		debtorsmaster, custbranch WHERE
@@ -290,7 +291,8 @@ if ($_POST['Select'] != '' OR ($_SESSION['CustomerID'] != '' AND !isset($_POST['
 	echo '</td><td valign=top class="select">';
 	echo '<a href="' . $rootpath . '/SelectSalesOrder.php?SelectedCustomer=' . $_SESSION['CustomerID'] . '">' . _('Modify Outstanding Sales Orders') . '</a><br />';
 	echo '<a href="' . $rootpath . '/CustomerAllocations.php?DebtorNo=' . $_SESSION['CustomerID'] . '">' . _('Allocate Receipts or Credit Notes') . '</a><br />';
-	echo '</td><td valign=top class=select>';
+	echo '<a href="' . $rootpath . '/CounterSales.php?DebtorNo=' . $_SESSION['CustomerID'] . '&BranchNo=' . $_SESSION['BranchID'] . '">' . _('Create a Counter Sale for this Customer') . '</a><br />';
+	echo '</td><td valign=top class="select">';
 	echo '<a href="' . $rootpath . '/Customers.php?">' . _('Add a New Customer') . '</a><br />';
 	echo '<a href="' . $rootpath . '/Customers.php?DebtorNo=' . $_SESSION['CustomerID'] . '">' . _('Modify Customer Details') . '</a><br />';
 	echo '<a href="' . $rootpath . '/CustomerBranches.php?DebtorNo=' . $_SESSION['CustomerID'] . '">' . _('Add/Modify/Delete Customer Branches') . '</a><br />';
@@ -300,7 +302,7 @@ if ($_POST['Select'] != '' OR ($_SESSION['CustomerID'] != '' AND !isset($_POST['
 	echo '</td>';
 	echo '</tr></table><br />';
 } else {
-	echo '<table width=90%><tr><th width=33%>' . _('Customer Inquiries') . '</th>
+	echo '<table width="90%"><tr><th width="33%">' . _('Customer Inquiries') . '</th>
 			<th width=33%>' . _('Customer Transactions') . '</th>
 			<th width=33%>' . _('Customer Maintenance') . '</th></tr>';
 	echo '<tr><td class="select">';
@@ -311,7 +313,7 @@ if ($_POST['Select'] != '' OR ($_SESSION['CustomerID'] != '' AND !isset($_POST['
 	}
 	echo '</td></tr></table>';
 }
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 if (strlen($msg)>1){
    prnMsg($msg, 'info');

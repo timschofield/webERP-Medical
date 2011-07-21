@@ -20,18 +20,11 @@ if (isset($_POST['ProcessCustomerChange'])){
 		exit;
 	}
 
-	if ($_POST['NewBranchCode']==""){
+	if ($_POST['NewBranchCode']==''){
 		prnMsg(_('The new customer branch code to change the old code to must be entered as well'),'error');
 		include('includes/footer.inc');
 		exit;
 	}
-	if (strstr($_POST['NewBranchCode'],".")>0 OR  strstr($_POST['NewBranchCode'],"&") OR strstr($_POST['NewBranchCode'],"-") OR strstr($_POST['NewBranchCode']," ")){
-		prnMsg(_('The new customer branch code cannot contain') . ' - & . ' . _('or a space'),'error');
-		include('includes/footer.inc');
-		exit;
-	}
-
-
 
 /*Now check that the new code doesn't already exist */
 	$result=DB_query("SELECT debtorno FROM custbranch WHERE debtorno='" . $_POST['DebtorNo'] . "' AND branchcode ='" . $_POST['NewBranchCode'] . "'",$db);
@@ -194,7 +187,7 @@ if (isset($_POST['ProcessCustomerChange'])){
 
 }
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
+echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<br /><table>

@@ -145,18 +145,19 @@ if (isset($_POST['submit'])) {
 									branchcode,
 									startdate,
 									enddate)
-							valueS ('".$Item."',
-								'".$SalesType."',
-								'".$CurrCode."',
-								'" . $_SESSION['CustomerID'] . "',
-								'" . $_POST['Price'] . "',
-								'" . $_POST['Units'] . "',
-								'" . $_POST['ConversionFactor'] . "',
-								'" . $_POST['DecimalPlaces'] . "',
-								'" . $_POST['Branch'] . "',
-								'" . FormatDateForSQL($_POST['StartDate']) . "',
-								'" . FormatDateForSQL($_POST['EndDate']) . "'
-							)";
+							VALUES (
+									'".$Item."',
+									'".$SalesType."',
+									'".$CurrCode."',
+									'" . $_SESSION['CustomerID'] . "',
+									'" . $_POST['Price'] . "',
+									'" . $_POST['Units'] . "',
+									'" . $_POST['ConversionFactor'] . "',
+									'" . $_POST['DecimalPlaces'] . "',
+									'" . $_POST['Branch'] . "',
+									'" . FormatDateForSQL($_POST['StartDate']) . "',
+									'" . FormatDateForSQL($_POST['EndDate']) . "'
+									)";
 		$msg = _('Price added') . '.';
 	}
 	//run the SQL from either of the above possibilites
@@ -168,7 +169,7 @@ if (isset($_POST['submit'])) {
 			} else {
 				$msg = _('The price could not be added because') . ' - ' . DB_error_msg($db);
 			}
-		}else {
+		} else {
 			ReSequenceEffectiveDates ($Item, $SalesType, $CurrCode, $_SESSION['CustomerID'], $db);
 			unset($_POST['EndDate']);
 			unset($_POST['StartDate']);
@@ -209,20 +210,20 @@ $sql = "SELECT prices.price,
 				prices.typeabbrev,
 				prices.startdate,
 				prices.enddate
-		FROM prices
-		WHERE  prices.stockid='" . $Item . "'
-		AND prices.typeabbrev='". $SalesType ."'
-		AND prices.currabrev ='". $CurrCode ."'
-		AND prices.debtorno=''
-		ORDER BY currabrev,
-						typeabbrev,
-						startdate";
+			FROM prices
+			WHERE  prices.stockid='" . $Item . "'
+				AND prices.typeabbrev='". $SalesType ."'
+				AND prices.currabrev ='". $CurrCode ."'
+				AND prices.debtorno=''
+			ORDER BY currabrev,
+					typeabbrev,
+					startdate";
 
 $ErrMsg = _('Could not retrieve the normal prices set up because');
 $DbgMsg = _('The SQL used to retrieve these records was');
 $result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
-echo '<table><tr><td valign=top>';
+echo '<table><tr><td valign="top">';
 echo '<table class="selection">';
 
 if (DB_num_rows($result) == 0) {
@@ -310,20 +311,21 @@ if (DB_num_rows($result) == 0) {
 			$EndDateDisplay = ConvertSQLDate($myrow['enddate']);
 		}
 		echo '<tr bgcolor="#CCCCCC">
-		<td class="number">'.number_format($myrow['price'],2).'</td>
-		<td>'.$Branch.'</td>
-		<td>'.$myrow['units'].'</td>
-		<td class="number">'.$myrow['conversionfactor'].'</td>
-		<td class="number">'.$myrow['decimalplaces'].'</td>
-		<td>'.ConvertSQLDate($myrow['startdate']).'</td>
-		<td>'.$EndDateDisplay.'</td>
- 		<td><a href="'.$_SERVER['PHP_SELF'].'?Item='.$Item.'&Price='.$myrow['price'].'&Branch='.$myrow['branchcode'].'&StartDate='.$myrow['startdate'].'&EndDate='.$myrow['enddate'].'&Edit=1">' . _('Edit') . '</td>
-		<td><a href="'.$_SERVER['PHP_SELF'].'?Item='.$Item.'&Branch='.$myrow['branchcode'].'&StartDate='.$myrow['startdate'].'&EndDate='.$myrow['enddate'].'&delete=yes">' . _('Delete') . '</td></tr>';
+				<td class="number">'.number_format($myrow['price'],2).'</td>
+				<td>'.$Branch.'</td>
+				<td>'.$myrow['units'].'</td>
+				<td class="number">'.$myrow['conversionfactor'].'</td>
+				<td class="number">'.$myrow['decimalplaces'].'</td>
+				<td>'.ConvertSQLDate($myrow['startdate']).'</td>
+				<td>'.$EndDateDisplay.'</td>
+				<td><a href="'.$_SERVER['PHP_SELF'].'?Item='.$Item.'&amp;Price='.$myrow['price'].'&amp;Branch='.$myrow['branchcode'].'&amp;StartDate='.$myrow['startdate'].'&amp;EndDate='.$myrow['enddate'].'&amp;Edit=1">' . _('Edit') . '</a></td>
+				<td><a href="'.$_SERVER['PHP_SELF'].'?Item='.$Item.'&amp;Branch='.$myrow['branchcode'].'&amp;StartDate='.$myrow['startdate'].'&amp;EndDate='.$myrow['enddate'].'&amp;delete=yes">' . _('Delete') . '</a></td>
+			</tr>';
 	}
 //END WHILE LIST LOOP
 }
 
-echo '</table></tr></table><br />';
+echo '</table></td></tr></table><br />';
 
 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -410,12 +412,12 @@ echo '<td><select name="Branch">';
 while ($myrow=DB_fetch_array($result)) {
 	$CustomerCurrency=$myrow['currency'];
 	if ($myrow['branchcode']==$_POST['branch']) {
-		echo '<option selected value="'.$myrow['branchcode'].'">'.$myrow['brname'].'</option>';
+		echo '<option selected="True" value="'.$myrow['branchcode'].'">'.$myrow['brname'].'</option>';
 	} else {
 		echo '<option value="'.$myrow['branchcode'].'">'.$myrow['brname'].'</option>';
 	}
 }
-echo '</td></tr>';
+echo '</select></td></tr>';
 echo '<tr><td>' . _('Currency') .':</td><td>' . $CustomerCurrency.'</td></tr>';
 echo '<tr><td>' . _('Price Effective From Date') . ':</td>
 	                         <td><input type="text" name="StartDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].
@@ -429,17 +431,15 @@ $sql = "SELECT unitname FROM unitsofmeasure";
 $result = DB_query($sql, $db);
 while ($myrow = DB_fetch_array($result)) {
 	if ($_POST['Units'] == $myrow['unitname']) {
-		echo '<option selected value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
+		echo '<option selected="True" value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
 	} else if ($DefaultUOM == $myrow['unitname'] and ($_POST['Units'] != $myrow['unitname'])) {
-		echo '<option selected value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
+		echo '<option selected="True" value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
 	} else {
 		echo '<option value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
 	}
 }
-echo '</td></tr>';
-echo '<input type="hidden" name="Item" value="'.$Item.'" />';
-
 echo '</select></td></tr>';
+echo '<input type="hidden" name="Item" value="'.$Item.'" />';
 
 echo '<tr><td>'. _('Decimal Places') . '<br />'._('to display').'</td>';
 echo '<td><input type="text" class="number" name="DecimalPlaces" size="8" maxlength="8" value="';
@@ -448,7 +448,7 @@ if(isset($_POST['DecimalPlaces'])) {
 } else {
 	echo '0';
 }
-echo '">';
+echo '" /></td></tr>';
 
 echo '<tr><td>'. _('Conversion Factor') . '<br />'._('to stock units').'</td>';
 echo '<td><input type="text" class="number" name="ConversionFactor" size="8" maxlength="8" value="';
@@ -457,7 +457,7 @@ if(isset($_POST['ConversionFactor'])) {
 } else {
 	echo '1';
 }
-echo '">';
+echo '" /></td></tr>';
 
 echo '<tr><td>' . _('Price') . ':</td>
 	          <td><input type="text" class="number" name="Price" size="11" maxlength="10" value="' . $_POST['Price'] . '" /></td>

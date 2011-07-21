@@ -348,7 +348,7 @@ Payment types can be modified by editing that file */
 	echo '<tr><td>' . _('Starting Reference no (eg chq no)') . ':</td>
             <td><input type="text" name="Ref" maxlength=11 size=12 value=' . $_POST['Ref'] . '></td></tr>';
 
-	echo '</table><br /><div class="centre"><input type="submit" Name="PrintPDF" Value="' . _('Print PDF Only') . '">
+	echo '</table><br /><div class="centre"><input type="submit" name="PrintPDF" Value="' . _('Print PDF Only') . '">
                 <input type="submit" name="PrintPDFAndProcess" value="' . _('Print and Process Payments') . '" /></div>';
 
 	include ('includes/footer.inc');

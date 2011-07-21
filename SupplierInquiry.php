@@ -152,7 +152,7 @@ echo '<tr>	<td class="number">' . number_format($SupplierRecord['balance'],2) . 
 			<td class="number">' . number_format($SupplierRecord['overdue2'],2) . '</td>
 		</tr></table>';
 
-echo '<br /><div class="centre"><form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
+echo '<br /><div class="centre"><form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo _('Show all transactions after') . ': ' .'<input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="TransAfterDate" value="' .
 		$_POST['TransAfterDate'] . '" maxlength =10 size=10>

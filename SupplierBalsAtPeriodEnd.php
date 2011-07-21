@@ -134,7 +134,7 @@ if (isset($_POST['PrintPDF'])
 			<td><input type="text" maxlength=6 size=7 name=ToCriteria value="'.$_POST['ToCriteria'].'"></td></tr>';
 
 	echo '<tr><td>' . _('Balances As At') . ':</td>
-			<td><select Name="PeriodEnd">';
+			<td><select name="PeriodEnd">';
 
 	$sql = "SELECT periodno, lastdate_in_period,EXTRACT(YEAR_MONTH FROM lastdate_in_period) as YearMonth  FROM periods ORDER BY periodno DESC";
 
@@ -153,7 +153,7 @@ if (isset($_POST['PrintPDF'])
 	echo '</select></td></tr>';
 
 
-	echo '</table><br /><div class="centre"><input type="submit" Name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
+	echo '</table><br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
 
 	include('includes/footer.inc');
 }/*end of else not PrintPDF */

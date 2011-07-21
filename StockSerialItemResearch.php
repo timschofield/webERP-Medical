@@ -21,7 +21,7 @@ $SN = $SN;
 
 echo '<div class="centre">
 <br />
-<form name=SNRESEARCH method=post action="' . $_SERVER['PHP_SELF'] .'">';
+<form name=SNRESEARCH method="post" action="' . $_SERVER['PHP_SELF'] .'">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo  _('Serial Number') .': <input ID="serialno" name="serialno" size=21 maxlength=20 value="'. $SN . '"> &nbsp;
@@ -35,8 +35,8 @@ document.getElementById("serialno").focus();
 
 if ($SN!='') {
 	//the point here is to allow a semi fuzzy search, but still keep someone from killing the db server
-	if (strstr($SN,'%')){
-		while(strstr($SN,'%%'))	{
+	if (mb_strstr($SN,'%')){
+		while(mb_strstr($SN,'%%'))	{
 			$SN = str_replace('%%','%',$SN);
 		}
 		if (strlen($SN) < 11){

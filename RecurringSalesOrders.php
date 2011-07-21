@@ -143,6 +143,7 @@ if (isset($_GET['NewRecurringOrder'])){
 								0,	/*Controlled*/
 								0,	/*Serialised */
 								$myrow['decimalplaces'],
+								2,
 								$myrow['narrative']);
 					/*Just populating with existing order - no DBUpdates */
 

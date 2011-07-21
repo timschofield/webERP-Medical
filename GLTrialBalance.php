@@ -23,7 +23,7 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 	include  ('includes/header.inc');
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' .
 		_('Trial Balance') . '" alt="" />' . ' ' . $title . '</p>';
-	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (Date('m') > $_SESSION['YearEnd']){
@@ -37,7 +37,7 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 	$period=GetPeriod($FromDate, $db);
 
 	/*Show a form to allow input of criteria for TB to show */
-	echo '<table class="selection"><tr><td>' . _('Select Period From:') . '</td><td><select Name="FromPeriod">';
+	echo '<table class="selection"><tr><td>' . _('Select Period From:') . '</td><td><select name="FromPeriod">';
 	$nextYear = date('Y-m-d',strtotime('+1 Year'));
 	$sql = "SELECT periodno,
 					lastdate_in_period
@@ -50,13 +50,13 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 	while ($myrow=DB_fetch_array($Periods,$db)){
 		if(isset($_POST['FromPeriod']) AND $_POST['FromPeriod']!=''){
 			if( $_POST['FromPeriod']== $myrow['periodno']){
-				echo '<option selected value="' . $myrow['periodno'] . '">' .MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
+				echo '<option selected="True" value="' . $myrow['periodno'] . '">' .MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
 			} else {
 				echo '<option value="' . $myrow['periodno'] . '">' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
 			}
 		} else {
 			if($myrow['lastdate_in_period']==$DefaultFromDate){
-				echo '<option selected value="' . $myrow['periodno'] . '">' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
+				echo '<option selected="True" value="' . $myrow['periodno'] . '">' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
 			} else {
 				echo '<option value="' . $myrow['periodno'] . '">' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
 			}
@@ -77,22 +77,22 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 		$DefaultToPeriod = $_POST['ToPeriod'];
 	}
 
-	echo '<tr><td>' . _('Select Period To:') .'</td><td><select Name="ToPeriod">';
+	echo '<tr><td>' . _('Select Period To:') .'</td><td><select name="ToPeriod">';
 
 	$RetResult = DB_data_seek($Periods,0);
 
 	while ($myrow=DB_fetch_array($Periods,$db)){
 
 		if($myrow['periodno']==$DefaultToPeriod){
-			echo '<option selected value="' . $myrow['periodno'] . '">' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
+			echo '<option selected="True" value="' . $myrow['periodno'] . '">' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
 		} else {
 			echo '<option value ="' . $myrow['periodno'] . '">' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
 		}
 	}
 	echo '</select></td></tr></table><br />';
 
-	echo '<div class="centre"><input type="submit" Name="ShowTB" Value="' . _('Show Trial Balance') .'">';
-	echo '<input type="submit" Name="PrintPDF" Value="'._('PrintPDF').'"></div>';
+	echo '<div class="centre"><input type="submit" name="ShowTB" value="' . _('Show Trial Balance') .'" />';
+	echo '<input type="submit" name="PrintPDF" value="'._('PrintPDF').'" /></div>';
 
 /*Now do the posting while the user is thinking about the period to select */
 
@@ -380,9 +380,10 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 } else {
 
 	include('includes/header.inc');
-	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<input type="hidden" name="FromPeriod" value="' . $_POST['FromPeriod'] . '"><input type="hidden" name="ToPeriod" value="' . $_POST['ToPeriod'] . '" />';
+	echo '<input type="hidden" name="FromPeriod" value="' . $_POST['FromPeriod'] . '" />
+			<input type="hidden" name="ToPeriod" value="' . $_POST['ToPeriod'] . '" />';
 
 	$NumberOfMonths = $_POST['ToPeriod'] - $_POST['FromPeriod'] + 1;
 
@@ -431,8 +432,8 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 	/*show a table of the accounts info returned by the SQL
 	Account Code ,   Account Name , Month Actual, Month Budget, Period Actual, Period Budget */
 
-	echo '<table cellpadding=2 class="selection">';
-	echo '<tr><th colspan=6><font size=3 color=blue><b>'. _('Trial Balance for the month of ') . $PeriodToDate .
+	echo '<table cellpadding="2" class="selection">';
+	echo '<tr><th colspan="6"><font size="3" color="blue"><b>'. _('Trial Balance for the month of ') . $PeriodToDate .
 		_(' and for the ') . $NumberOfMonths . _(' months to ') . $PeriodToDate .'</b></font></th></tr>';
 	$TableHeader = '<tr>
 			<th>' . _('Account') . '</th>
@@ -478,7 +479,7 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 					$ParentGroups[$Level]='';
 				} elseif ($ParentGroups[$Level]==$myrow['parentgroupname']) {
 					printf('<tr>
-						<td colspan=2><font size=2><I>%s ' . _('Total') . ' </I></font></td>
+						<td colspan="2"><font size="2"><I>%s ' . _('Total') . ' </I></font></td>
 						<td class="number"><I>%s</I></td>
 						<td class="number"><I>%s</I></td>
 						<td class="number"><I>%s</I></td>
@@ -498,7 +499,7 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 				} else {
 					do {
 						printf('<tr>
-							<td colspan=2><font size=2><I>%s ' . _('Total') . ' </I></font></td>
+							<td colspan="2"><font size="2"><I>%s ' . _('Total') . ' </I></font></td>
 							<td class="number"><I>%s</I></td>
 							<td class="number"><I>%s</I></td>
 							<td class="number"><I>%s</I></td>
@@ -522,7 +523,7 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 
 					if ($Level>0){
 						printf('<tr>
-						<td colspan=2><font size=2><I>%s ' . _('Total') . ' </I></font></td>
+						<td colspan="2"><font size="2"><I>%s ' . _('Total') . ' </I></font></td>
 						<td class="number"><I>%s</I></td>
 						<td class="number"><I>%s</I></td>
 						<td class="number"><I>%s</I></td>
@@ -547,7 +548,7 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 			$ParentGroups[$Level]=$myrow['groupname'];
 			$ActGrp = $myrow['groupname'];
 			printf('<tr>
-				<td colspan=6><font size=4 color=blue><b>%s</b></font></td>
+				<td colspan="6"><font size="4" color="blue"><b>%s</b></font></td>
 				</tr>',
 				$myrow['groupname']);
 			echo $TableHeader;
@@ -599,7 +600,7 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 		$CheckPeriodActual += $AccountPeriodActual;
 		$CheckPeriodBudget += $AccountPeriodBudget;
 
-		$ActEnquiryURL = '<a href="'. $rootpath . '/GLAccountInquiry.php?Period=' . $_POST['ToPeriod'] . '&Account=' . $myrow['accountcode'] . '&Show=Yes">' . $myrow['accountcode'] . '<a>';
+		$ActEnquiryURL = '<a href="'. $rootpath . '/GLAccountInquiry.php?Period=' . $_POST['ToPeriod'] . '&amp;Account=' . $myrow['accountcode'] . '&amp;Show=Yes">' . $myrow['accountcode'] . '</a>';
 
 		printf('<td>%s</td>
 			<td>%s</td>
@@ -609,7 +610,7 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 			<td class="number">%s</td>
 			</tr>',
 			$ActEnquiryURL,
-			$myrow['accountname'],
+			htmlspecialchars($myrow['accountname']),
 			number_format($myrow['monthactual'],2),
 			number_format($myrow['monthbudget'],2),
 			number_format($AccountPeriodActual,2),
@@ -626,7 +627,7 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 			$ParentGroups[$Level]=$myrow['groupname'];
 		} elseif ($ParentGroups[$Level]==$myrow['parentgroupname']) {
 			printf('<tr>
-				<td colspan=2><font size=2><I>%s ' . _('Total') . ' </I></font></td>
+				<td colspan="2"><font size="2"><i>%s ' . _('Total') . ' </i></font></td>
 				<td class="number"><I>%s</I></td>
 				<td class="number"><I>%s</I></td>
 				<td class="number"><I>%s</I></td>
@@ -646,7 +647,7 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 		} else {
 			do {
 				printf('<tr>
-					<td colspan=2><font size=2><I>%s ' . _('Total') . ' </I></font></td>
+					<td colspan="2"><font size="2"><i>%s ' . _('Total') . ' </i></font></td>
 					<td class="number"><I>%s</I></td>
 					<td class="number"><I>%s</I></td>
 					<td class="number"><I>%s</I></td>
@@ -670,7 +671,7 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 
 			if ($Level >0){
 				printf('<tr>
-				<td colspan=2><font size=2><I>%s ' . _('Total') . ' </I></font></td>
+				<td colspan="2"><font size="2"><I>%s ' . _('Total') . ' </I></font></td>
 				<td class="number"><I>%s</I></td>
 				<td class="number"><I>%s</I></td>
 				<td class="number"><I>%s</I></td>
@@ -696,7 +697,7 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 
 
 	printf('<tr bgcolor="#ffffff">
-			<td colspan=2><font color=BLUE><b>' . _('Check Totals') . '</b></font></td>
+			<td colspan="2"><font color="blue"><b>' . _('Check Totals') . '</b></font></td>
 			<td class="number">%s</td>
 			<td class="number">%s</td>
 			<td class="number">%s</td>
