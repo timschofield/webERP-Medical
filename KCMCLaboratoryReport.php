@@ -3,7 +3,7 @@
 /* $Id$*/
 $PageSecurity=1;
 include ('includes/session.inc');
-$title = _('Financial Report for Radiology Department');
+$title = _('Financial Report for Laboratory Department');
 
 include('includes/header.inc');
 
