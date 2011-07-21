@@ -65,6 +65,8 @@ $MenuItems['orders']['Transactions']['URL'] = array( '/SelectOrderItems.php?NewO
 													);
 
 $MenuItems['orders']['Reports']['Caption'] = array( _('Order Inquiry'),
+													_('Radiology Dept Financial Report'),
+													_('Laboratory Dept Financial Report'),
 													_('Print Price Lists'),
 													_('Order Status Report'),
 													_('Orders Invoiced Reports'),
@@ -77,6 +79,8 @@ $MenuItems['orders']['Reports']['Caption'] = array( _('Order Inquiry'),
 												);
 
 $MenuItems['orders']['Reports']['URL'] = array( '/SelectCompletedOrder.php',
+												'/KCMCRadiologyReport.php',
+												'/KCMCLaboratoryReport.php',
 												'/PDFPriceList.php',
 												'/PDFOrderStatus.php',
 												'/PDFOrdersInvoiced.php',
