@@ -293,7 +293,7 @@ if($_POST['install_tables'] == true){
 		$SQLScriptFile[$i] = trim($SQLScriptFile[$i]);
 		//ignore lines that start with -- or USE or /*
 		if (mb_substr($SQLScriptFile[$i], 0, 2) != '--'
-			OR strstr($SQLScriptFile[$i],'/*')==FALSE
+			OR mb_strstr($SQLScriptFile[$i],'/*')==FALSE
 			OR mb_strlen($SQLScriptFile[$i])>1){
 
 			$SQL .= ' ' . $SQLScriptFile[$i];

@@ -33,7 +33,7 @@ if (isset($_POST['QuickEntry'])){
 
 if (isset($_POST['OrderItems'])){
 	foreach ($_POST as $key => $value) {
-		if (strstr($key,'StockID')) {
+		if (mb_strstr($key,'StockID')) {
 			$Index=substr($key,7);
 			$StockID=$value;
 			$Quantity=$_POST['Quantity'.$Index];

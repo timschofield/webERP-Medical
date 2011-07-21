@@ -24,7 +24,7 @@ if (isset($_POST['QuickEntry'])){
 
 if (isset($_POST['order_items'])){
 	foreach ($_POST as $key => $value) {
-		if (strstr($key,'StockID')) {
+		if (mb_strstr($key,'StockID')) {
 			$Index=mb_substr($key, 7);
 			$StockID=$value;
 			$NewItem_array[$StockID] = $_POST['Quantity'.$Index];

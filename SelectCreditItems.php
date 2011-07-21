@@ -35,7 +35,7 @@ if (isset($_GET['NewCredit'])){
 
 if (isset($_POST['AddToCredit'])){
 	foreach ($_POST as $key => $value) {
-		if (strstr($key,'StockID')) {
+		if (mb_strstr($key,'StockID')) {
 			$Index=mb_substr($key, 7);
 			$StockID=$value;
 			if ($_POST['Quantity'.$Index]!=0) {

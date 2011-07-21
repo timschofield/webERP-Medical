@@ -108,12 +108,12 @@ function IsEmailAddress($Email){
 
 function ContainsIllegalCharacters ($CheckVariable) {
 
-	if (strstr($CheckVariable,"'")
-		OR strstr($CheckVariable,'+')
-		OR strstr($CheckVariable,"\"")
-		OR strstr($CheckVariable,'&')
-		OR strstr($CheckVariable,"\\")
-		OR strstr($CheckVariable,'"')){
+	if (mb_strstr($CheckVariable,"'")
+		OR mb_strstr($CheckVariable,'+')
+		OR mb_strstr($CheckVariable,"\"")
+		OR mb_strstr($CheckVariable,'&')
+		OR mb_strstr($CheckVariable,"\\")
+		OR mb_strstr($CheckVariable,'"')){
 
 		return true;
 	} else {
