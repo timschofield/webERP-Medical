@@ -121,7 +121,7 @@ if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
 		if ($_POST['TransType']==10){ /* invoices */
 
 			printf($format_base.'
-				<td><a target="_blank" href="%s/PrintCustTrans.php?FromTransNo=%s&InvOrCredit=Invoice"><img src='%s' title="' . _('Click to preview the invoice') . '"></a></td>
+				<td><a target="_blank" href="%s/PrintCustTrans.php?FromTransNo=%s&InvOrCredit=Invoice"><img src="%s" title="' . _('Click to preview the invoice') . '"></a></td>
 				</tr>',
 				$myrow['typename'],
 				$myrow['transno'],
@@ -139,7 +139,7 @@ if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
 				$rootpath.'/css/'.$theme.'/images/preview.gif');
 		} elseif ($_POST['TransType']==11){ /* credit notes */
 			printf($format_base.'
-				<td><a target="_blank" href="%s/PrintCustTrans.php?FromTransNo=%s&InvOrCredit=Credit"><img src='%s' title="' . _('Click to preview the credit') . '"></a></td>
+				<td><a target="_blank" href="%s/PrintCustTrans.php?FromTransNo=%s&InvOrCredit=Credit"><img src="%s" title="' . _('Click to preview the credit') . '"></a></td>
 				</tr>',
 				$myrow['typename'],
 				$myrow['transno'],

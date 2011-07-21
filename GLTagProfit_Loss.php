@@ -34,22 +34,25 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 	/*Show a form to allow input of criteria for profit and loss to show */
 	echo '<table class="selection"><tr><td>' . _('Select Period From') . ':</td><td><select name="FromPeriod">';
 
-	$sql = "SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno DESC";
+	$sql = "SELECT periodno,
+					lastdate_in_period
+				FROM periods
+				ORDER BY periodno DESC";
 	$Periods = DB_query($sql,$db);
 
 
 	while ($myrow=DB_fetch_array($Periods,$db)){
 		if(isset($_POST['FromPeriod']) AND $_POST['FromPeriod']!=''){
 			if( $_POST['FromPeriod']== $myrow['periodno']){
-				echo '<option selected value=' . $myrow['periodno'] . '>' .MonthAndYearFromSQLDate($myrow['lastdate_in_period']). '</option>';
+				echo '<option selected value="' . $myrow['periodno'] . '">' .MonthAndYearFromSQLDate($myrow['lastdate_in_period']). '</option>';
 			} else {
-				echo '<option value=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']). '</option>';
+				echo '<option value="' . $myrow['periodno'] . '">' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']). '</option>';
 			}
 		} else {
 			if($myrow['lastdate_in_period']==$DefaultFromDate){
-				echo '<option selected value=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']). '</option>';
+				echo '<option selected value="' . $myrow['periodno'] . '">' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']). '</option>';
 			} else {
-				echo '<option value=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']). '</option>';
+				echo '<option value="' . $myrow['periodno'] . '">' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']). '</option>';
 			}
 		}
 	}
