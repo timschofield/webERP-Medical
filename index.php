@@ -478,20 +478,20 @@ $MenuItems['system']['Reports']['Caption'] = array (_('Sales Types'),
 													_('Discount Matrix')
 													);
 
-$MenuItems['system']['Reports']['URL'] = array ('/CompanyPreferences.php',
-												'/SystemParameters.php',
-												'/WWW_Users.php',
-												'/SecurityTokens.php',
-												'/WWW_Access.php',
-												'/PageSecurity.php',
-												'/BankAccounts.php',
-												'/Currencies.php',
-												'/TaxAuthorities.php',
-												'/TaxGroups.php',
-												'/TaxProvinces.php',
-												'/TaxCategories.php',
-												'/PeriodsInquiry.php',
-												'/SMTPServer.php'
+$MenuItems['system']['Reports']['URL'] = array ('/SalesTypes.php',
+												'/CustomerTypes.php',
+												'/SupplierTypes.php',
+												'/CreditStatus.php',
+												'/PaymentTerms.php',
+												'/PO_AuthorisationLevels.php',
+												'/PaymentMethods.php',
+												'/SalesPeople.php',
+												'/Areas.php',
+												'/Shippers.php',
+												'/SalesGLPostings.php',
+												'/COGSGLPostings.php',
+												'/FreightCosts.php',
+												'/DiscountMatrix.php'
 												);
 
 $MenuItems['system']['Maintenance']['Caption'] = array (_('Inventory Categories Maintenance'),
