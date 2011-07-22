@@ -303,6 +303,12 @@ if (isset($SelectedUser)) {
 	$_POST['UserLanguage'] = $myrow['language'];
 	$_POST['Blocked'] = $myrow['blocked'];
 
+	if ($myrow['supplierid']!=$_SESSION['SupplierID']) {
+		prnMsg( _('This is not a user for this supplier, and so cannot be edited'), 'error');
+		include('includes/footer.inc');
+		exit;
+	}
+
 	echo '<input type="hidden" name="SelectedUser" value="' . $SelectedUser . '">';
 	echo '<input type="hidden" name="UserID" value="' . $_POST['UserID'] . '">';
 	echo '<input type="hidden" name="ModulesAllowed" value="' . $_POST['ModulesAllowed'] . '">';
