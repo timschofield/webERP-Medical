@@ -719,7 +719,8 @@ if (isset($_POST['Patient'])) {
 				description
 		FROM stockmaster
 		LEFT JOIN stockcategory
-			ON stockmaster.categoryid=stockcategory.categoryid";
+			ON stockmaster.categoryid=stockcategory.categoryid
+		ORDER BY description";
 	} else {
 		ShowStockTypes($_POST['StockType']);
 		$sql="SELECT stockid,
@@ -727,7 +728,8 @@ if (isset($_POST['Patient'])) {
 		FROM stockmaster
 		LEFT JOIN stockcategory
 			ON stockmaster.categoryid=stockcategory.categoryid
-			WHERE stockcategory.stocktype='".$_POST['StockType']."'";
+			WHERE stockcategory.stocktype='".$_POST['StockType']."'
+		ORDER BY description";
 	}
 	$result=DB_query($sql, $db);
 	echo '<select name="StockID">';
