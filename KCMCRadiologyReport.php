@@ -5,6 +5,9 @@ $PageSecurity=1;
 include ('includes/session.inc');
 $title = _('Financial Report for Radiology Department');
 
+include('includes/pchart/pChart/pData.class');
+include('includes/pchart/pChart/pChart.class');
+
 include('includes/header.inc');
 
 if (!isset($_POST['ReportDate'])) {
@@ -108,7 +111,7 @@ $sql = "SELECT stockmoves.trandate,
 					stockmoves.stockid
 			ORDER BY stockmoves.trandate DESC";
 $result = DB_query($sql, $db);
-echo '</td><td width="33%" style="text-align: left;">';
+echo '</td><td width="33%" style="text-align: left;vertical-align: top;">';
 echo '<table width="100%" class="selection">';
 
 
@@ -174,8 +177,58 @@ echo '<tr><th colspan="5"></th></tr>';
 
 echo '</table>';
 echo '</td>';
-echo '<td></td></tr>';
-echo '</table>';
+echo '<td width="33%" style="text-align: left;vertical-align: top;">';
+echo '<table width="100%" class="selection">';
+
+$sql = "SELECT stockmoves.stockid,
+				stockmaster.description,
+				sum(-qty*price) AS value
+			FROM stockmoves
+			LEFT JOIN stockmaster
+			ON stockmaster.stockid=stockmoves.stockid
+			LEFT JOIN stockcategory
+			ON stockmaster.categoryid=stockcategory.categoryid
+			WHERE stockcategory.stocktype='X'
+				AND stockmoves.trandate='".FormatDateForSQL($_POST['ReportDate'])."'
+			GROUP BY stockmoves.stockid";
+$result = DB_query($sql, $db);
+
+while ($myrow=DB_fetch_array($result)) {
+	$Point1[]=$myrow['value'];
+	$Point2[]=$myrow['stockid'];
+}
+// Dataset definition
+$DataSet = new pData;
+$DataSet->AddPoint($Point1,"Serie1");
+$DataSet->AddPoint($Point2,"Serie2");
+$DataSet->AddAllSeries();
+$DataSet->SetAbsciseLabelSerie("Serie2");
+
+ // Initialise the graph
+$Test = new pChart(420,250);
+$Test->drawFilledRoundedRectangle(7,7,413,243,5,240,240,240);
+$Test->drawRoundedRectangle(5,5,415,245,5,230,230,230);
+$Test->createColorGradientPalette(195,204,56,223,110,41,5);
+
+// Draw the pie chart
+$Test->setFontProperties("includes/pchart/Fonts/tahoma.ttf",8);
+$Test->AntialiasQuality = 0;
+$Test->drawPieGraph($DataSet->GetData(),$DataSet->GetDataDescription(),180,130,110,PIE_PERCENTAGE_LABEL,FALSE,50,20,5);
+$Test->drawPieLegend(330,15,$DataSet->GetData(),$DataSet->GetDataDescription(),250,250,250);
+
+// Write the title
+$Test->setFontProperties("includes/pchart/Fonts/MankSans.ttf",10);
+$Test->drawTitle(10,20,"Sales per month",100,100,100);
+
+$Test->Render("example10.png");
+
+echo '<tr><th colspan="5"><font color="navy" size="2">';
+echo _('Income for the previous week');
+echo '</font></th></tr>';
+echo '<td>';
+echo '<img src=example10.png />';
+echo '</td></tr></table>';
+echo '</td></table>';
 
 
 include('includes/footer.inc');
