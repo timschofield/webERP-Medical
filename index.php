@@ -426,10 +426,10 @@ $MenuItems['PC']['Transactions']['URL'] = array ('/PcAssignCashToTab.php',
 												'/PcAuthorizeExpenses.php'
 												);
 
-$MenuItems['PC']['Reports']['Caption'] = array (_('Asset Register'),
+$MenuItems['PC']['Reports']['Caption'] = array (_('PC Tab General Report'),
 												);
 
-$MenuItems['PC']['Reports']['URL'] = array ('/FixedAssetRegister.php',
+$MenuItems['PC']['Reports']['URL'] = array ('/PCReportTab.php',
 											);
 
 $MenuItems['PC']['Maintenance']['Caption'] = array (_('Types of PC Tabs'),
