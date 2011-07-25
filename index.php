@@ -429,7 +429,7 @@ $MenuItems['PC']['Transactions']['URL'] = array ('/PcAssignCashToTab.php',
 $MenuItems['PC']['Reports']['Caption'] = array (_('PC Tab General Report'),
 												);
 
-$MenuItems['PC']['Reports']['URL'] = array ('/PCReportTab.php',
+$MenuItems['PC']['Reports']['URL'] = array ('/PcReportTab.php',
 											);
 
 $MenuItems['PC']['Maintenance']['Caption'] = array (_('Types of PC Tabs'),
