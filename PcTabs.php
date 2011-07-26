@@ -328,7 +328,7 @@ if (!isset($_GET['delete'])) {
 	echo '<option value=""></option>';
 	while ($myrow = DB_fetch_array($UsersResult)) {
 		if (isset($_POST['SelectUser']) and $myrow['userid']==$_POST['SelectUser']) {
-			echo '<option selected value="' . $myrow['userid'] . '">' . $myrow['userid'].' - '.$myrow['realname'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['userid'] . '">' . $myrow['userid'].' - '.$myrow['realname'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow['userid'] . '">' . $myrow['userid'].' - '.$myrow['realname'] . '</option>';
 		}
@@ -350,7 +350,7 @@ if (!isset($_GET['delete'])) {
 	echo '<option value=""></option>';
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['SelectTabs']) and $myrow['typetabcode']==$_POST['SelectTabs']) {
-			echo '<option selected value="'.$myrow['typetabcode'] . '">' . $myrow['typetabcode'].' - ' . $myrow['typetabdescription'] . '</option>';
+			echo '<option selected="True" value="'.$myrow['typetabcode'] . '">' . $myrow['typetabcode'].' - ' . $myrow['typetabdescription'] . '</option>';
 		} else {
 			echo '<option value="'.$myrow['typetabcode'] . '">' . $myrow['typetabcode'].' - ' . $myrow['typetabdescription'] . '</option>';
 		}
@@ -370,9 +370,9 @@ if (!isset($_GET['delete'])) {
 	echo '<option value=""></option>';
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['SelectCurrency']) and $myrow['currabrev']==$_POST['SelectCurrency']) {
-			echo '<option selected value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 		} else if (!isset($_POST['SelectCurrency']) and ($_SESSION['CompanyRecord']['currencydefault']==$myrow['currabrev'])) {
-			echo '<option selected value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 		} else {
 			echo '<option value=' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 		}
@@ -393,7 +393,7 @@ if (!isset($_GET['delete'])) {
 	echo '<option value=""></option>';
 	while ($myrow = DB_fetch_array($UsersResult)) {
 		if (isset($_POST['SelectAssigner']) and $myrow['userid']==$_POST['SelectAssigner']) {
-			echo '<option selected value="' . $myrow['userid'] . '">' . $myrow['userid'].' - '.$myrow['realname'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['userid'] . '">' . $myrow['userid'].' - '.$myrow['realname'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow['userid'] . '">' . $myrow['userid'].' - '.$myrow['realname'] . '</option>';
 		}
@@ -409,7 +409,7 @@ if (!isset($_GET['delete'])) {
 	echo '<option value=""></option>';
 	while ($myrow = DB_fetch_array($UsersResult)) {
 		if (isset($_POST['SelectAuthorizer']) and $myrow['userid']==$_POST['SelectAuthorizer']) {
-			echo '<option selected value="' . $myrow['userid'] . '">' . $myrow['userid'].' - '.$myrow['realname'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['userid'] . '">' . $myrow['userid'].' - '.$myrow['realname'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow['userid'] . '">' . $myrow['userid'].' - '.$myrow['realname'] . '</option>';
 		}
@@ -431,7 +431,7 @@ if (!isset($_GET['delete'])) {
 	echo '<option value=""></option>';
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['glaccountcash']) and $myrow['accountcode']==$_POST['glaccountcash']) {
-			echo '<option selected value="'.$myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
+			echo '<option selected="True" value="'.$myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
 		} else {
 			echo '<option value="'.$myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
 		}
@@ -452,7 +452,7 @@ if (!isset($_GET['delete'])) {
 	echo '<option value=""></option>';
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['glaccountpcashtab']) and $myrow['accountcode']==$_POST['glaccountpcashtab']) {
-			echo '<option selected value="'.$myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
+			echo '<option selected="True" value="'.$myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
 		} else {
 			echo '<option value="'.$myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
 		}
