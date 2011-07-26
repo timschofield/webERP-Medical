@@ -165,7 +165,7 @@ if (isset($SelectedDT) and !isset($_GET['delete'])) {
 	}
 	echo '<table class="selection"><tr>
 			<td>' . _('Demand Type') . ':</td>
-			<td><input type="Text" name="MRPDemandType" size=6 maxlength=5 value="' . $_POST['MRPDemandType'] . '"></td>
+			<td><input type="text" name="MRPDemandType" size=6 maxlength=5 value="' . $_POST['MRPDemandType'] . '"></td>
 			</tr>';
 }
 
