@@ -163,10 +163,10 @@ while ($myrow1 = DB_fetch_array($result1)) {
 ?>
 </select>
 <td><font size=1><?php echo _('Enter text extracts in the');?> <b><?php echo _('description');?></b>:</font></td>
-<td><input type="Text" name="Keywords" size=20 maxlength=25></td></tr>
+<td><input type="text" name="Keywords" size=20 maxlength=25></td></tr>
 <tr><td></td>
 <td><font SIZE 3><b><?php echo _('OR');?> </b></font><font size=1><?php echo _('Enter extract of the');?> <b><?php echo _('Stock Code');?></b>:</font></td>
-<td><input type="Text" name="StockCode" size=15 maxlength=18></td>
+<td><input type="text" name="StockCode" size=15 maxlength=18></td>
 </tr>
 </table><br />
 
