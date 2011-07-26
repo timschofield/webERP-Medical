@@ -978,17 +978,17 @@ if (!isset($_SESSION['Items'.$identifier]->ConfirmedDate)) {
 // The estimated Dispatch date or Delivery date for this order
 echo '<tr>
 	<td>'. _('Estimated Delivery Date') .':</td>
-	<td><input class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="Text" size=15 maxlength=14 name="DeliveryDate" value="' . $_SESSION['Items'.$identifier]->DeliveryDate . '"></td>
+	<td><input class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="text" size="15" maxlength="14" name="DeliveryDate" value="' . $_SESSION['Items'.$identifier]->DeliveryDate . '"></td>
 	</tr>';
 // The date when a quote was issued to the customer
 echo '<tr>
 	<td>'. _('Quote Date') .':</td>
-	<td><input class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="Text" size=15 maxlength=14 name="QuoteDate" value="' . $_SESSION['Items'.$identifier]->QuoteDate . '"></td>
+	<td><input class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="text" size="15" maxlength="14" name="QuoteDate" value="' . $_SESSION['Items'.$identifier]->QuoteDate . '"></td>
 	</tr>';
 // The date when the customer confirmed their order
 echo '<tr>
 	<td>'. _('Confirmed Order Date') .':</td>
-	<td><input class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="Text" size=15 maxlength=14 name="ConfirmedDate" value="' . $_SESSION['Items'.$identifier]->ConfirmedDate . '"></td>
+	<td><input class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="text" size="15" maxlength="14" name="ConfirmedDate" value="' . $_SESSION['Items'.$identifier]->ConfirmedDate . '"></td>
 	</tr>';
 
 echo '<tr>
