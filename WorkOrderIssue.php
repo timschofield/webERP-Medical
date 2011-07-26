@@ -557,7 +557,7 @@ if (!isset($_POST['IssueItem'])){
 
 	while ($LocRow = DB_fetch_array($LocResult)){
 		if ($_POST['FromLocation'] ==$LocRow['loccode']){
-			echo '<option selected value="' . $LocRow['loccode'] .'">' . $LocRow['locationname'] . '</option>';
+			echo '<option selected="True" value="' . $LocRow['loccode'] .'">' . $LocRow['locationname'] . '</option>';
 		} else {
 			echo '<option value="' . $LocRow['loccode'] .'">' . $LocRow['locationname'] . '</option>';
 		}
@@ -624,7 +624,7 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 	echo '<table class="selection"><tr><td>' . _('Select a stock category') . ':<select name="StockCat">';
 
 	if (!isset($_POST['StockCat'])){
-		echo '<option selected value="All">' . _('All') . '</option>';
+		echo '<option selected="True" value="All">' . _('All') . '</option>';
 		$_POST['StockCat'] ='All';
 	} else {
 		echo '<option value="All">' . _('All') . '</option>';
@@ -633,7 +633,7 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 	while ($myrow1 = DB_fetch_array($result1)) {
 
 		if ($_POST['StockCat']==$myrow1['categoryid']){
-			echo '<option selected value=' . $myrow1['categoryid'] . '>' . $myrow1['categorydescription'] . '</option>';
+			echo '<option selected="True" value=' . $myrow1['categoryid'] . '>' . $myrow1['categorydescription'] . '</option>';
 		} else {
 			echo '<option value='. $myrow1['categoryid'] . '>' . $myrow1['categorydescription'] . '</option>';
 		}
@@ -759,7 +759,7 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 				echo '<tr><td><select name="SerialNos[]" multiple>';
 				while ($SerialNoRow = DB_fetch_array($SerialNoResult)){
 					if (in_array($SerialNoRow['serialno'],$_POST['SerialNos'])){
-						echo '<option selected value="' . $SerialNoRow['serialno'] . '">' . $SerialNoRow['serialno'] . '</option>';
+						echo '<option selected="True" value="' . $SerialNoRow['serialno'] . '">' . $SerialNoRow['serialno'] . '</option>';
 					} else {
 						echo '<option value="' . $SerialNoRow['serialno'] . '">' . $SerialNoRow['serialno'] . '</option>';
 					}
