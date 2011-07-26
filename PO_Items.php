@@ -1010,7 +1010,7 @@ if (isset($_POST['NonStockOrder'])) {
 									datepurchased
 								FROM fixedassets
 								ORDER BY assetid DESC",$db);
-	echo '<option selected value="-1">' . _('Not an Asset') . '</option>';
+	echo '<option selected="True" value="-1">' . _('Not an Asset') . '</option>';
 	while ($AssetRow = DB_fetch_array($AssetsResult)){
 		if ($AssetRow['datepurchased']=='0000-00-00'){
 			$DatePurchased = _('Not yet purchased');
@@ -1048,10 +1048,10 @@ if (!isset($_GET['Edit'])) {
 
 	echo ':</font></tr><tr><td><select name="StockCat">';
 
-	echo '<option selected value="All">' . _('All') . '</option>';
+	echo '<option selected="True" value="All">' . _('All') . '</option>';
 	while ($myrow1 = DB_fetch_array($result1)) {
 		if (isset($_POST['StockCat']) and $_POST['StockCat']==$myrow1['categoryid']){
-			echo '<option selected value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
+			echo '<option selected="True" value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 		} else {
 			echo '<option value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 		}
