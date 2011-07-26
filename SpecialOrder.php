@@ -632,22 +632,22 @@ echo '</select></td></tr>';
 $_POST['Qty'] = 1;
 
 echo '<tr><td>' . _('Order Quantity') . ':</td>
-	<td><input type="Text" class="number" size=7 maxlength=6 name="Qty" value="' . $_POST['Qty'] . '"></td></tr>';
+	<td><input type="text" class="number" size=7 maxlength=6 name="Qty" value="' . $_POST['Qty'] . '"></td></tr>';
 
 if (!isset($_POST['Cost'])) {$_POST['Cost']='';}
 echo '<tr><td>' . _('Unit Cost') . ':</td>
-	<td><input type="Text" class="number" size=15 maxlength=14 name="Cost" value="' . $_POST['Cost'] . '"></td></tr>';
+	<td><input type="text" class="number" size=15 maxlength=14 name="Cost" value="' . $_POST['Cost'] . '"></td></tr>';
 
 if (!isset($_POST['Price'])) { $_POST['Price']='';}
 echo '<tr><td>' . _('Unit Price') . ':</td>
-	<td><input type="Text" class="number" size=15 maxlength=14 name="Price" value="' . $_POST['Price'] . '"></td></tr>';
+	<td><input type="text" class="number" size=15 maxlength=14 name="Price" value="' . $_POST['Price'] . '"></td></tr>';
 
 
 /*Default the required delivery date to tomorrow as a starting point */
 $_POST['ReqDelDate'] = Date($_SESSION['DefaultDateFormat'],Mktime(0,0,0,Date('m'),Date('d')+1,Date('y')));
 
 echo '<tr><td>' . _('Required Delivery Date') . ':</td>
-	<td><input type="Text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size=12 maxlength=11 name="ReqDelDate" value="' . $_POST['ReqDelDate'] . '"></td></tr>';
+	<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size=12 maxlength=11 name="ReqDelDate" value="' . $_POST['ReqDelDate'] . '"></td></tr>';
 
 echo '</table>'; /* end of main table */
 
