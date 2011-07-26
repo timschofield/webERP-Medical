@@ -115,7 +115,7 @@ echo $_SESSION['UsersRealName'] . '</td>
 
 echo '<tr>
 	<td>' . _('Maximum Number of Records to Display') . ':</td>
-	<td><input type="Text" class="number" name="DisplayRecordsMax" size=3 maxlength=3 value="' . $_POST['DisplayRecordsMax'] . '" ></td>
+	<td><input type="text" class="number" name="DisplayRecordsMax" size="3" maxlength="3" value="' . $_POST['DisplayRecordsMax'] . '" /></td>
 	</tr>';
 
 
