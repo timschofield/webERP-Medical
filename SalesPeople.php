@@ -313,14 +313,14 @@ if (! isset($_GET['delete'])) {
 
 	echo '<tr><td>' . _('Current?') . ':</td><td><select name="Current">';
 	if ($_POST['Current']==1){
-		echo '<option selected value=1>' . _('Yes') . '</option>';
+		echo '<option selected="True" value="1">' . _('Yes') . '</option>';
 	} else {
-		echo '<option value=1>' . _('Yes') . '</option>';
+		echo '<option value="1">' . _('Yes') . '</option>';
 	}
 	if ($_POST['Current']==0){
-		echo '<option selected value=0>' . _('No') . '</option>';
+		echo '<option selected="True" value="0">' . _('No') . '</option>';
 	} else {
-		echo '<option value=0>' . _('No') . '</option>';
+		echo '<option value="0">' . _('No') . '</option>';
 	}
 	echo '</select></td></tr>';
 
