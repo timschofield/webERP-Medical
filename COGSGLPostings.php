@@ -273,7 +273,7 @@ echo '<table class="selection">
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['Area']) and $myrow['areacode']==$_POST['Area']) {
-		echo '<option selected value="'.$myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
+		echo '<option selected="True" value="'.$myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
 	} else {
 		echo '<option value="'.$myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
 	}
@@ -291,7 +291,7 @@ echo '</select></td></tr>
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['StkCat']) and $myrow["categoryid"]==$_POST['StkCat']) {
-		echo '<option selected value="'.$myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
+		echo '<option selected="True" value="'.$myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	} else {
 		echo '<option value="'.$myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	}
@@ -310,7 +310,7 @@ echo '</select></td></tr>
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['SalesType']) and $myrow['typeabbrev']==$_POST['SalesType']) {
-		echo '<option selected value="'.$myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
+		echo '<option selected="True" value="'.$myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
 	} else {
 		echo '<option value="'.$myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
 	}
@@ -335,7 +335,7 @@ $result = DB_query($sql,$db);
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['GLCode']) and $myrow['accountcode']==$_POST['GLCode']) {
-		echo '<option selected value="'.$myrow['accountcode'] . '">' . $myrow['accountcode']  . ' - '  . $myrow['accountname'] . '</option>';
+		echo '<option selected="True" value="'.$myrow['accountcode'] . '">' . $myrow['accountcode']  . ' - '  . $myrow['accountname'] . '</option>';
 	} else {
 		echo '<option value="'.$myrow['accountcode'] . '">' . $myrow['accountcode']  . ' - '  . $myrow['accountname'] . '</option>';
 	}
