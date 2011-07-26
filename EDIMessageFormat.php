@@ -234,17 +234,17 @@ if (!isset($_POST['LineText'])) {$_POST['LineText']='';}
 echo '</td></tr>';
 
 echo '<tr><td>Sequence Number:</td>';
-echo '<td><input tabindex=3 type="text" name=SequenceNo size=3 maxlength=3 value='.$_POST['SequenceNo'].'>';
+echo '<td><input tabindex="3" type="text" name="SequenceNo" size="3" maxlength="3" value="'.$_POST['SequenceNo'].'" />';
 echo '</td></tr>';
 echo '<tr><td>' .  _('Line Text') . ':' .'</td>';
 echo '<td>';
-echo '<input tabindex=4 type="Text" name="LineText" size=50 maxlength=50 value='.$_POST['LineText'] .'>';
+echo '<input tabindex=4 type="text" name="LineText" size="50" maxlength="50" value="'.$_POST['LineText'] .'" />';
 echo '</td></tr>';
 echo '</table><br />';
 if (isset($_GET['SelectedMessageLine'])) {
-	echo '<div class="centre"><input tabindex=5 type="submit" name="update" value="'.  _('Update Information'). '"></div>';
+	echo '<div class="centre"><input tabindex="5" type="submit" name="update" value="'.  _('Update Information'). '" /></div>';
 } else {
-	echo '<div class="centre"><input tabindex=5 type="submit" name="submit" value="'.  _('Enter Information'). '"></div>';
+	echo '<div class="centre"><input tabindex="5" type="submit" name="submit" value="'.  _('Enter Information'). '" /></div>';
 }
 
 echo '</form>';
