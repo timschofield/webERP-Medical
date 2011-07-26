@@ -690,7 +690,7 @@ if (!isset($SupplierID)) {
 	echo '<option value=0>' . _('None') . '</option>';
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['FactorID']) and $_POST['FactorID'] == $myrow['id']){
-		echo '<option selected value=' . $myrow['id'] . '>' . $myrow['coyname'] . '</option>';
+		echo '<option selected="True" value=' . $myrow['id'] . '>' . $myrow['coyname'] . '</option>';
 		} else {
 		echo '<option value=' . $myrow['id'] . '>' . $myrow['coyname'] . '</option>';
 		}
@@ -709,7 +709,7 @@ if (!isset($SupplierID)) {
 	echo '<tr><td>' . _('Supplier Currency') . ':</td><td><select name="CurrCode">';
 	while ($myrow = DB_fetch_array($result)) {
 		if ($_POST['CurrCode'] == $myrow['currabrev']){
-			echo '<option selected value=' . $myrow['currabrev'] . '>' . $myrow['currency'] . '</option>';
+			echo '<option selected="True" value=' . $myrow['currabrev'] . '>' . $myrow['currency'] . '</option>';
 		} else {
 			echo '<option value=' . $myrow['currabrev'] . '>' . $myrow['currency'] . '</option>';
 		}
@@ -731,7 +731,7 @@ if (!isset($SupplierID)) {
 
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['TaxGroup']) and $_POST['TaxGroup'] == $myrow['taxgroupid']){
-			echo '<option selected value=' . $myrow['taxgroupid'] . '>' . $myrow['taxgroupdescription'] . '</option>';
+			echo '<option selected="True" value=' . $myrow['taxgroupid'] . '>' . $myrow['taxgroupdescription'] . '</option>';
 		} else {
 			echo '<option value=' . $myrow['taxgroupid'] . '>' . $myrow['taxgroupdescription'] . '</option>';
 		}
@@ -815,7 +815,7 @@ if (!isset($SupplierID)) {
 	$result=DB_query("SELECT typeid, typename FROM suppliertype", $db);
 	while ($myrow = DB_fetch_array($result)) {
 		if ($_POST['SupplierType']==$myrow['typeid']) {
-			echo '<option selected value="'. $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
+			echo '<option selected="True" value="'. $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
 		} else {
 			echo '<option value="'. $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
 		}
@@ -833,7 +833,7 @@ if (!isset($SupplierID)) {
 
 	while ($myrow = DB_fetch_array($result)) {
 		if ($_POST['PaymentTerms'] == $myrow['termsindicator']){
-		echo '<option selected value=' . $myrow['termsindicator'] . '>' . $myrow['terms'] . '</option>';
+		echo '<option selected="True" value=' . $myrow['termsindicator'] . '>' . $myrow['terms'] . '</option>';
 		} else {
 		echo '<option value=' . $myrow['termsindicator'] . '>' . $myrow['terms'] . '</option>';
 		}
@@ -846,7 +846,7 @@ if (!isset($SupplierID)) {
 	echo '<option value=0>' . _('None') . '</option>';
 	while ($myrow = DB_fetch_array($result)) {
 		if ($_POST['FactorID'] == $myrow['id']){
-		echo '<option selected value=' . $myrow['id'] . '>' . $myrow['coyname'] . '</option>';
+		echo '<option selected="True" value=' . $myrow['id'] . '>' . $myrow['coyname'] . '</option>';
 		} else {
 		echo '<option value=' . $myrow['id'] . '>' . $myrow['coyname'] . '</option>';
 		}
@@ -859,7 +859,7 @@ if (!isset($SupplierID)) {
 	echo '</select></td></tr><tr><td>' . _('Supplier Currency') . ':</td><td><select name="CurrCode">';
 	while ($myrow = DB_fetch_array($result)) {
 		if ($_POST['CurrCode'] == $myrow['currabrev']){
-			echo '<option selected value=' . $myrow['currabrev'] . '>' . $myrow['currency'] . '</option>';
+			echo '<option selected="True" value=' . $myrow['currabrev'] . '>' . $myrow['currency'] . '</option>';
 		} else {
 			echo '<option value=' . $myrow['currabrev'] . '>' . $myrow['currency'] . '</option>';
 		}
@@ -869,11 +869,11 @@ if (!isset($SupplierID)) {
 	echo '</select></td></tr><tr><td>' . _('Remittance Advice') . ':</td><td><select name="Remittance">';
 
 	if ($_POST['Remittance'] == 0){
-		echo '<option selected value=0>' . _('Not Required') . '</option>';
-		echo '<option value=1>' . _('Required') . '</option>';
+		echo '<option selected="True" value="0">' . _('Not Required') . '</option>';
+		echo '<option value="1">' . _('Required') . '</option>';
 	} else {
-		echo '<option value=0>' . _('Not Required') . '</option>';
-		echo '<option selected value=1>' . _('Required') . '</option>';
+		echo '<option value="0">' . _('Not Required') . '</option>';
+		echo '<option selected="True" value="1">' . _('Required') . '</option>';
 
 	}
 
@@ -888,7 +888,7 @@ if (!isset($SupplierID)) {
 
 	while ($myrow = DB_fetch_array($result)) {
 		if ($myrow['taxgroupid'] == $_POST['TaxGroup']) {
-			echo '<option selected value="'.$myrow['taxgroupid'] . '">' . $myrow['taxgroupdescription'] . '</option>';
+			echo '<option selected="True" value="'.$myrow['taxgroupid'] . '">' . $myrow['taxgroupdescription'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow['taxgroupid'] . '">' . $myrow['taxgroupdescription'] . '</option>';
 		}
