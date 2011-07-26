@@ -49,7 +49,7 @@ if ((! isset($_POST['FromDate']) AND ! isset($_POST['ToDate'])) OR isset($_POST[
 
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['SelectedTabs']) and $myrow['tabcode']==$_POST['SelectedTabs']) {
-			echo '<option selected value="' .$myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
+			echo '<option selected="True" value="' .$myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
 		}
