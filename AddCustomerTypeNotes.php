@@ -187,9 +187,9 @@ if (!isset($_GET['delete'])) {
 	echo '<td><input type="text" name="date" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" value="'. $_POST['date'].
 		'" size=10 maxlength=10></td></tr>';
 	echo '<tr><td>'. _('Priority').':</td>';
-	echo '<td><input type="Text" name="priority" value="'. $_POST['priority'].'" size=1 maxlength=3></td></td>
+	echo '<td><input type="text" name="priority" value="'. $_POST['priority'].'" size=1 maxlength=3></td></td>
 	</table>';
-	echo '<br /><div class="centre"><input type="Submit" name="submit" value="'. _('Enter Information').'"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="submit" value="'. _('Enter Information').'"></div>';
 
 	echo '</form>';
 
