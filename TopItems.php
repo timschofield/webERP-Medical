@@ -47,7 +47,7 @@ if (!(isset($_POST['Search']))) {
 				</tr>';
 	//View number of days
 	echo '<tr><td>' . _('Number Of Days') . ' </td><td>:</td>
-			<td><input class="number" tabindex="3" type="Text" name="NumberOfDays" size="8"	maxlength="8" value=0></td>
+			<td><input class="number" tabindex="3" type="text" name="NumberOfDays" size="8"	maxlength="8" value="0"></td>
 		 </tr>';
 	//view number of NumberOfTopItems items
 	echo '<tr>
