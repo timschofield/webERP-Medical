@@ -251,7 +251,7 @@ if (!isset($_POST['OverheadPerHour'])) {
 
 echo '</td></tr>';
 echo '<tr><td>' . _('Overhead Per Hour') . ':</td>
-	<td><input type="Text" class="number" name="OverheadPerHour" size=6 maxlength=6 value='.$_POST['OverheadPerHour'].'>';
+	<td><input type="text" class="number" name="OverheadPerHour" size=6 maxlength=6 value='.$_POST['OverheadPerHour'].'>';
 
 echo '</td></tr></table>';
 
