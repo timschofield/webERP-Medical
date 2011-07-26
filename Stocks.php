@@ -572,11 +572,10 @@ if (isset($_POST['submit'])) {
 }
 
 
-echo '<form name="ItemForm" enctype="multipart/form-data" method="post" action="' . $_SERVER['PHP_SELF'] . '"><table class="selection">
-	<tr><td>'. "\n"; // Nested table
+echo '<form name="ItemForm" enctype="multipart/form-data" method="post" action="' . $_SERVER['PHP_SELF'] . '"><table class="selection">'. "\n"; // Nested table
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<input type="hidden" name="New" value="'.$New.'">'. "\n";
+echo '<input type="hidden" name="New" value="'.$New.'" />'. "\n";
 
 if (!isset($StockID) or $StockID=='' or isset($_POST['UpdateCategories'])) {
 
@@ -643,7 +642,7 @@ if (!isset($StockID) or $StockID=='' or isset($_POST['UpdateCategories'])) {
 	$_POST['ShrinkFactor'] = $myrow['shrinkfactor'];
 
 	echo '<tr><td>' . _('Item Code') . ':</td><td>'.$StockID.'</td></tr>'. "\n";
-	echo '<input type="Hidden" name="StockID" value="'.$StockID.'" />'. "\n";
+	echo '<input type="hidden" name="StockID" value="'.$StockID.'" />'. "\n";
 
 } else { // some changes were made to the data so don't re-set form variables to DB ie the code above
 	echo '<tr><td>' . _('Item Code') . ':</td><td>'.$StockID.'</td></tr>';
@@ -720,16 +719,16 @@ echo '<tr><td>'. _('Image File (.jpg)') . ':</td><td><input type="file" id="Item
 		'" />';
 } else {
 	if( isset($StockID) and file_exists($_SESSION['part_pics_dir'] . '/' .$StockID.'.jpg') ) {
-		$StockImgLink = '<img src="' . $_SESSION['part_pics_dir'] . '/' .$StockID.'.jpg" >';
+		$StockImgLink = '<img src="' . $_SESSION['part_pics_dir'] . '/' .$StockID.'.jpg" />';
 	} else {
 		$StockImgLink = _('No Image');
 	}
 }
 
 if ($StockImgLink!=_('No Image')) {
-	echo '</td><td>' . _('Image') . '<br />'.$StockImgLink . '</td></tr>';
+	echo '</td><td>' . _('Image') . '<br />'.$StockImgLink . '</td>';
 }
-
+echo '</tr>';
 // EOR Add Image upload for New Item  - by Ori
 
  echo '<tr><td>' . _('Category') . ':</td><td><select name="CategoryID" onChange="ReloadForm(ItemForm.UpdateCategories)">';
@@ -813,7 +812,7 @@ while( $UOMrow = DB_fetch_array($UOMResult) ) {
 echo '</select></td></tr>';
 
 echo '<tr><td>' . _('Assembly, Kit, Manufactured or Service/Labour') . ':</td><td><select name="MBFlag">';
-if ($_POST['MBFlag']=='A'){
+if (isset($_POST['MBFlag']) and $_POST['MBFlag']=='A'){
 	echo '<option selected="True" value="A">' . _('Assembly') . '</option>';
 } else {
 	echo '<option value="A">' . _('Assembly') . '</option>';
@@ -889,9 +888,10 @@ if ($_POST['Serialised']==1){
 echo '</select><i>' . _('Note') . ', ' . _('this has no effect if the item is not Controlled') . '</i></td></tr>';
 
 if ($_POST['Serialised']==1 AND $_POST['MBFlag']=='M'){
-	echo '<tr><td>' . _('Next Serial No (greater than 0 for auto numbering)') . ':</td><td><input ' . (in_array('NextSerialNo',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="NextSerialNo" size="15" maxlength="15" value="' . $_POST['NextSerialNo'] . '" /><td></tr>';
+	echo '<tr><td>' . _('Next Serial No (greater than 0 for auto numbering)') . ':</td><td>
+		<input ' . (in_array('NextSerialNo',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="NextSerialNo" size="15" maxlength="15" value="' . $_POST['NextSerialNo'] . '" /><td></tr>';
 } else {
-	echo '<input type="hidden" name="NextSerialNo" value="0">';
+	echo '<input type="hidden" name="NextSerialNo" value="0" />';
 }
 
 echo '<tr><td>' . _('Perishable') . ':</td><td><select name="Perishable">';
@@ -916,14 +916,15 @@ if (isset($_POST['BarCode'])) {
 } else {
 	$BarCode='';
 }
-echo '<tr><td>' . _('Bar Code') . ':</td><td><input ' . (in_array('BarCode',$Errors) ?  'class="inputerror"' : '' ) .'  type="Text" name="BarCode" size="22" maxlength="20" value="' . $BarCode . '" /></td></tr>';
+echo '<tr><td>' . _('Bar Code') . ':</td><td>
+<input ' . (in_array('BarCode',$Errors) ?  'class="inputerror"' : '' ) .'  type="text" name="BarCode" size="22" maxlength="20" value="' . $BarCode . '" /></td></tr>';
 
 if (isset($_POST['DiscountCategory'])) {
 	$DiscountCategory = $_POST['DiscountCategory'];
 } else {
 	$DiscountCategory='';
 }
-echo '<tr><td>' . _('Discount Category') . ':</td><td><input type="Text" name="DiscountCategory" size="2" maxlength="2" value="' . $DiscountCategory . '"></td></tr>';
+echo '<tr><td>' . _('Discount Category') . ':</td><td><input type="text" name="DiscountCategory" size="2" maxlength="2" value="' . $DiscountCategory . '" /></td></tr>';
 
 echo '<tr><td>' . _('Tax Category') . ':</td><td><select name="TaxCat">';
 $sql = "SELECT taxcatid, taxcatname FROM taxcategories ORDER BY taxcatname";
@@ -935,9 +936,9 @@ if (!isset($_POST['TaxCat'])){
 
 while ($myrow = DB_fetch_array($result)) {
 	if ($_POST['TaxCat'] == $myrow['taxcatid']){
-		echo '<option selected="True" value=' . $myrow['taxcatid'] . '>' . $myrow['taxcatname'] . '</option>';
+		echo '<option selected="True" value="' . $myrow['taxcatid'] . '">' . $myrow['taxcatname'] . '</option>';
 	} else {
-		echo '<option value=' . $myrow['taxcatid'] . '>' . $myrow['taxcatname'] . '</option>';
+		echo '<option value="' . $myrow['taxcatid'] . '">' . $myrow['taxcatname'] . '</option>';
 	}
 } //end while loop
 
@@ -945,11 +946,11 @@ echo '</select></td></tr>';
 
 echo '<tr>
 		<td>' . _('Pan Size') . ':</td>
-		<td><input type="Text" class="number" name="Pansize" size="6" maxlength="6" value=' . $_POST['Pansize'] . '></td>
+		<td><input type="text" class="number" name="Pansize" size="6" maxlength="6" value="' . $_POST['Pansize'] . '" /></td>
 	</tr>
 	 <tr>
 		<td>' . _('Shrinkage Factor') . ':</td>
-		<td><input type="Text" class="number" name="ShrinkFactor" size="6" maxlength="6" value=' . $_POST['ShrinkFactor'] . '></td>
+		<td><input type="text" class="number" name="ShrinkFactor" size="6" maxlength="6" value="' . $_POST['ShrinkFactor'] . '" /></td>
 	</tr>';
 
 echo '</table><div class="centre">';
@@ -992,17 +993,17 @@ while ($PropertyRow=DB_fetch_array($PropertiesResult)){
 	} else {
 		$PropertyValue =  '';
 	}
-	echo '<input type="hidden" name="PropID' . $PropertyCounter . '" value=' .$PropertyRow['stkcatpropid'] .'>';
+	echo '<input type="hidden" name="PropID' . $PropertyCounter . '" value="' .$PropertyRow['stkcatpropid'] .'" />';
 
 	echo '<tr><td>' . $PropertyRow['label'] . '</td>
 				<td>';
 	switch ($PropertyRow['controltype']) {
 	 	case 0; //textbox
 	 		if ($PropertyRow['numericvalue']==1) {
-				echo '<input type="textbox" class="number" name="PropValue' . $PropertyCounter . '" size="20" maxlength="100" value="' . $PropertyValue . '">';
+				echo '<input type="textbox" class="number" name="PropValue' . $PropertyCounter . '" size="20" maxlength="100" value="' . $PropertyValue . '" />';
 				echo _('A number between') . ' ' . $PropertyRow['minimumvalue'] . ' ' . _('and') . ' ' . $PropertyRow['maximumvalue'] . ' ' . _('is expected');
 			} else {
-				echo '<input type="textbox" name="PropValue' . $PropertyCounter . '" size="20" maxlength="100" value="' . $PropertyValue . '">';
+				echo '<input type="textbox" name="PropValue' . $PropertyCounter . '" size="20" maxlength="100" value="' . $PropertyValue . '" />';
 			}
 	 		break;
 	 	case 1; //select box
@@ -1029,34 +1030,34 @@ while ($PropertyRow=DB_fetch_array($PropertiesResult)){
 		case 2; //checkbox
 			echo '<input type="checkbox" name="PropValue' . $PropertyCounter . '"';
 			if ($PropertyValue==1){
-				echo '"checked"';
+				echo ' checked="True"';
 			}
-			echo '>';
+			echo ' />';
 			break;
 	} //end switch
-	echo '<input type="hidden" name="PropType' . $PropertyCounter .'" value=' . $PropertyRow['controltype'] . '>';
+	echo '<input type="hidden" name="PropType' . $PropertyCounter .'" value="' . $PropertyRow['controltype'] . '" />';
 	echo '</td></tr>';
 	$PropertyCounter++;
 } //end loop round properties for the item category
 unset($StockID);
 echo '</table><br />';
-echo '<input type="hidden" name="PropertyCounter" value=' . $PropertyCounter . '>';
+echo '<input type="hidden" name="PropertyCounter" value="' . $PropertyCounter . '" />';
 
 if ($New==1) {
-	echo '<input type="Submit" name="submit" value="' . _('Insert New Item') . '">';
-	echo '<input type="submit" name="UpdateCategories" style="visibility:hidden;width:1px" value="' . _('Categories') . '">';
+	echo '<input type="Submit" name="submit" value="' . _('Insert New Item') . '" />';
+	echo '<input type="submit" name="UpdateCategories" style="visibility:hidden;width:1px" value="' . _('Categories') . '" />';
 
 } else {
 
 	// Now the form to enter the item properties
 
-	echo '<input type="submit" name="submit" value="' . _('Update') . '">';
-	echo '<input type="submit" name="UpdateCategories" style="visibility:hidden;width:1px" value="' . _('Categories') . '">';
+	echo '<input type="submit" name="submit" value="' . _('Update') . '" />';
+	echo '<input type="submit" name="UpdateCategories" style="visibility:hidden;width:1px" value="' . _('Categories') . '" />';
 	echo '<br />';
 	prnMsg( _('Only click the Delete button if you are sure you wish to delete the item!') .  _('Checks will be made to ensure that there are no stock movements, sales analysis records, sales order items or purchase order items for the item') . '. ' . _('No deletions will be allowed if they exist'), 'warn', _('WARNING'));
-	echo '<br /><input type="Submit" name="delete" value="' . _('Delete This Item') . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');">';
+	echo '<br /><input type="Submit" name="delete" value="' . _('Delete This Item') . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');" />';
 }
 
-echo '</form></div>';
+echo '</div></form>';
 include('includes/footer.inc');
 ?>
