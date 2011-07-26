@@ -14,42 +14,42 @@ function GrpByDataOptions($GroupByDataX) {
 
 /*Sales analysis headers group by data options */
  if ($GroupByDataX == 'Sales Area') {
-	echo '<option selected value="Sales Area">' . _('Sales Area') . '</option>';
+	echo '<option selected="True" value="Sales Area">' . _('Sales Area') . '</option>';
  } else {
 	echo '<option value="Sales Area">' . _('Sales Area') . '</option>';
  }
  if ($GroupByDataX == 'Product Code') {
-	echo '<option selected value="Product Code">' . _('Product Code') . '</option>';
+	echo '<option selected="True" value="Product Code">' . _('Product Code') . '</option>';
  } else {
 	echo '<option value="Product Code">' . _('Product Code') . '</option>';
  }
  if ($GroupByDataX == 'Customer Code') {
-	echo '<option selected value="Customer Code">' . _('Customer Code') . '</option>';
+	echo '<option selected="True" value="Customer Code">' . _('Customer Code') . '</option>';
  } else {
 	echo '<option value="Customer Code">' . _('Customer Code') . '</option>';
  }
  if ($GroupByDataX == 'Sales Type') {
-	echo '<option selected value="Sales Type">' . _('Sales Type') . '</option>';
+	echo '<option selected="True" value="Sales Type">' . _('Sales Type') . '</option>';
  } else {
 	echo '<option value="Sales Type">' . _('Sales Type') . '</option>';
  }
  if ($GroupByDataX == 'Product Type') {
-	echo '<option selected value="Product Type">' . _('Product Type') . '</option>';
+	echo '<option selected="True" value="Product Type">' . _('Product Type') . '</option>';
  } else {
 	echo '<option value="Product Type">' . _('Product Type') . '</option>';
  }
  if ($GroupByDataX == 'Customer Branch') {
-	echo '<option selected value="Customer Branch">' . _('Customer Branch') . '</option>';
+	echo '<option selected="True" value="Customer Branch">' . _('Customer Branch') . '</option>';
  } else {
 	echo '<option value="Customer Branch">' . _('Customer Branch') . '</option>';
  }
  if ($GroupByDataX == 'Sales Person') {
-	echo '<option selected value="Sales Person">' . _('Sales Person') . '</option>';
+	echo '<option selected="True" value="Sales Person">' . _('Sales Person') . '</option>';
  } else {
 	echo '<option value="Sales Person">' . _('Sales Person') . '</option>';
  }
  if ($GroupByDataX=='Not Used' OR $GroupByDataX == '' OR ! isset($GroupByDataX) OR is_null($GroupByDataX)){
-	echo '<option selected value="Not Used">' . _('Not Used') . '</option>';
+	echo '<option selected="True" value="Not Used">' . _('Not Used') . '</option>';
  } else {
 	echo '<option value="Not Used">' . _('Not Used') . '</option>';
  }
@@ -409,11 +409,11 @@ if (!isset($_GET['delete'])) {
 	echo '</select></td><td>' . _('Page Break After') . ': <select name=NewPageAfter1>';
 
 	if ($_POST['NewPageAfter1']==0){
-	  echo '<option selected value="0">' . _('No') . '</option>';
+	  echo '<option selected="True" value="0">' . _('No') . '</option>';
 	  echo '<option value="1">' . _('Yes') . '</option>';
 	} Else {
 	  echo '<option value="0">' . _('No') . '</option>';
-	  echo '<option selected value="1">' . _('Yes') . '</option>';
+	  echo '<option selected="True" value="1">' . _('Yes') . '</option>';
 	}
 
 	echo '</select></td>';
@@ -435,11 +435,11 @@ if (!isset($_GET['delete'])) {
 	echo '</select></td><td>' . _('Page Break After') . ': <select name="NewPageAfter2">';
 
 	if ($_POST['NewPageAfter2']==0){
-	  echo '<option selected value="0">' . _('No') . '</option>';
+	  echo '<option selected="True" value="0">' . _('No') . '</option>';
 	  echo '<option value="1">' . _('Yes') . '</option>';
 	} Else {
 	  echo '<option value="0">' . _('No') . '</option>';
-	  echo '<option selected value="1">' . _('Yes') . '</option>';
+	  echo '<option selected="True" value="1">' . _('Yes') . '</option>';
 	}
 
 	if (!isset($_POST['Lower2'])) {
@@ -461,11 +461,11 @@ if (!isset($_GET['delete'])) {
 	echo '</select></td><td>' . _('Page Break After') . ': <select name="NewPageAfter3">';
 
 	if ($_POST['NewPageAfter3']==0){
-	 	echo '<option selected value="0">' . _('No') . '</option>';
+	 	echo '<option selected="True" value="0">' . _('No') . '</option>';
 	 	echo '<option value="1">' . _('Yes') . '</option>';
 	} else {
 	 	echo '<option value="0">' . _('No') . '</option>';
-	 	echo '<option selected value="1">' . _('Yes') . '</option>';
+	 	echo '<option selected="True" value="1">' . _('Yes') . '</option>';
 	}
 
 	echo '</select></td>';
