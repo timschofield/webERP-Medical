@@ -45,7 +45,7 @@ if (!isset($_POST['FromDate']) or !isset($_POST['ToDate'])){
 
 
 	echo '<select name="CategoryID">';
-	echo '<option selected value="All">' . _('Over All Categories') . '</option>';
+	echo '<option selected="True" value="All">' . _('Over All Categories') . '</option>';
 
 	while ($myrow=DB_fetch_array($result)){
 		echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
@@ -53,7 +53,7 @@ if (!isset($_POST['FromDate']) or !isset($_POST['ToDate'])){
 	echo '</select></td></tr>';
 
 	echo '<tr><td>' . _('Inventory Location') . ':</td><td><select name="Location">';
-	echo '<option selected value="All">' . _('All Locations') . '</option>';
+	echo '<option selected="True" value="All">' . _('All Locations') . '</option>';
 
 	$result= DB_query("SELECT loccode, locationname FROM locations",$db);
 	while ($myrow=DB_fetch_array($result)){
@@ -62,7 +62,7 @@ if (!isset($_POST['FromDate']) or !isset($_POST['ToDate'])){
 	echo '</select></td></tr>';
 
 	echo '<tr><td>' . _('Back Order Only') . ':</td><td><select name="BackOrders">';
-	echo '<option selected value="Yes">' . _('Only Show Back Orders') . '</option>';
+	echo '<option selected="True" value="Yes">' . _('Only Show Back Orders') . '</option>';
 	echo '<option value="No">' . _('Show All Orders') . '</option>';
 	echo '</select></td></tr></table><br /><div class="centre"><input type="submit" name="Go" value="' . _('Create PDF') . '" /></div>';
 
