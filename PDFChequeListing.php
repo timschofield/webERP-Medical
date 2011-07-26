@@ -58,7 +58,7 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate'])){
 	echo '</select></td></tr>';
 
 	echo '<tr><td>' . _('Email the report off') . ':</td><td><select name="Email">';
-	echo '<option selected value="No">' . _('No') . '</option>';
+	echo '<option selected="True" value="No">' . _('No') . '</option>';
 	echo '<option value="Yes">' . _('Yes') . '</option>';
 	echo '</select></td></tr></table><br /><div class="centre"><input type="submit" name="Go" value="' . _('Create PDF') . '" /></div>';
 
