@@ -639,7 +639,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 
 		while ($myrow = DB_fetch_array($result)) {
 			if (isset($_POST['LocCode']) and $myrow['loccode']==$_POST['LocCode']) {
-				echo '<option selected value="'.$myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+				echo '<option selected="True" value="'.$myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			} else {
 				echo '<option value="'.$myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			}
@@ -663,7 +663,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 
 		while ($myrow = DB_fetch_array($result)) {
 			if (isset($_POST['WorkCentreAdded']) and $myrow['code']==$_POST['WorkCentreAdded']) {
-				echo '<option selected value="'.$myrow['code'] . '">' . $myrow['description'] . '</option>';
+				echo '<option selected="True" value="'.$myrow['code'] . '">' . $myrow['description'] . '</option>';
 			} else {
 				echo '<option value="'.$myrow['code'] . '">' . $myrow['description'] . '</option>';
 			}
@@ -706,10 +706,10 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 				$_POST['AutoIssue'] = $_SESSION['AutoIssue'];
 			}
 			if ($_POST['AutoIssue']==0) {
-				echo '<option selected value=0>' . _('No') . '</option>';
+				echo '<option selected="True" value=0>' . _('No') . '</option>';
 				echo '<option value=1>' . _('Yes') . '</option>';
 			} else {
-				echo '<option selected value=1>' . _('Yes') . '</option>';
+				echo '<option selected="True" value=1>' . _('Yes') . '</option>';
 				echo '<option value=0>' . _('No') . '</option>';
 			}
 
