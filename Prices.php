@@ -345,7 +345,7 @@ if ($InputError ==0){
 
 		while ($myrow = DB_fetch_array($result)) {
 			if ($myrow['typeabbrev']==$_POST['TypeAbbrev']) {
-				echo '<option selected value="' . $myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
+				echo '<option selected="True" value="' . $myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
 			} else {
 				echo '<option value="' . $myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
 			}
@@ -359,7 +359,7 @@ if ($InputError ==0){
 		echo '<tr><td>' . _('Currency') . ':</td><td><select name="CurrAbrev">';
 		while ($myrow = DB_fetch_array($result)) {
 			if ($myrow['currabrev']==$_POST['CurrAbrev']) {
-				echo '<option selected value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
+				echo '<option selected="True" value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 			} else {
 				echo '<option value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 			}
@@ -385,7 +385,7 @@ if ($InputError ==0){
 		$result = DB_query($sql, $db);
 		while ($myrow = DB_fetch_array($result)) {
 			if ($_POST['Units'] == $myrow['unitname']) {
-				echo '<option selected value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
+				echo '<option selected="True" value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
 			} else {
 				echo '<option value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
 			}
