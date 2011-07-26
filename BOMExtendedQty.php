@@ -277,11 +277,11 @@ if (isset($_POST['PrintPDF'])) {
 	echo '<tr><td>' . _('Part') . ':</td><td><input type ="text" name="Part" size="20">';
 	echo '<tr><td>' . _('Quantity') . ':</td><td><input type="text" class="number" name="Quantity" size="4">';
 	echo '<tr><td>' . _('Selection Option') . ':</td><td><select name="Select">';
-	echo '<option selected value="All">' . _('Show All Parts') . '</option>';
+	echo '<option selected="True" value="All">' . _('Show All Parts') . '</option>';
 	echo '<option value="Shortages">' . _('Only Show Shortages') . '</option>';
 	echo '</select></td></tr>';
 	echo '<tr><td>' . _('Print Option') . ':</td><td><select name="Fill">';
-	echo '<option selected value="yes">' . _('Print With Alternating Highlighted Lines') . '</option>';
+	echo '<option selected="True" value="yes">' . _('Print With Alternating Highlighted Lines') . '</option>';
 	echo '<option value="no">' . _('Plain Print') . '</option>';
 	echo '</select></td></tr>';
 	echo '</table><br /><br /><div class="centre"><br /><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
