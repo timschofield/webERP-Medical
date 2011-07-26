@@ -624,13 +624,13 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 	<table cellpadding="3" colspan="4" class="selection">
 	<tr>
 	<td><h5><?php echo _('Part of the Customer Branch Name'); ?>:</h5></td>
-	<td><input tabindex="1" type="Text" name="CustKeywords" size="20"	maxlength="25"></td>
+	<td><input tabindex="1" type="text" name="CustKeywords" size="20"	maxlength="25"></td>
 	<td><h2><b><?php echo _('OR'); ?></b></h2></td>
 	<td><h5><?php echo _('Part of the Customer Branch Code'); ?>:</h5></td>
-	<td><input tabindex="2" type="Text" name="CustCode" size="15"	maxlength="18"></td>
+	<td><input tabindex="2" type="text" name="CustCode" size="15"	maxlength="18"></td>
 	<td><h2><b><?php echo _('OR'); ?></b></h2></td>
 	<td><h5><?php echo _('Part of the Branch Phone Number'); ?>:</h5></td>
-	<td><input tabindex="3" type="Text" name="CustPhone" size="15"	maxlength="18"></td>
+	<td><input tabindex="3" type="text" name="CustPhone" size="15"	maxlength="18"></td>
 	</tr>
 	</table>
 	<br /><div class="centre"><input tabindex="4" type="submit" name="SearchCust" value="<?php echo _('Search Now'); ?>">
@@ -639,7 +639,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 	if (isset($result_CustSelect)) {
 
-		echo '<table cellpadding=2 colspan=7>';
+		echo '<table cellpadding="2" colspan="7">';
 
 		$TableHeader = '<br /><tr>
 								<th>' . _('Customer') . '</th>
@@ -1612,14 +1612,14 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		}
 
 		echo '</select></td>
-					<td><b>' . _('Enter partial Description') . ':</b><input tabindex=2 type="Text" name="Keywords" size=20 maxlength=25 value="' ;
+					<td><b>' . _('Enter partial Description') . ':</b><input tabindex="2" type="text" name="Keywords" size="20" maxlength="25" value="' ;
 
 		if (isset($_POST['Keywords'])) {
 			 echo$_POST['Keywords'] ;
 		}
 		echo '"></td>';
 
-		echo '<td align="right"><b>' . _('OR') .  ' ' . _('Enter extract of the Stock Code') . ':</b><input tabindex=3 type="Text" name="StockCode" size=15 maxlength=18 value="';
+		echo '<td align="right"><b>' . _('OR') .  ' ' . _('Enter extract of the Stock Code') . ':</b><input tabindex="3" type="text" name="StockCode" size="15" maxlength="18" value="';
 		if (isset($_POST['StockCode'])) {
 			echo  $_POST['StockCode'];
 		}
