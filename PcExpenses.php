@@ -261,10 +261,10 @@ if (! isset($_GET['delete'])) {
 
 		// This is a new type so the user may volunteer a type code
 		if (isset($_POST['codeexpense'])) {
-			echo '<table class="selection"><tr><td>' . _('Code Of Expense') . ':</td><td><input type="Text" value="'.$_POST['codeexpense'].'"
+			echo '<table class="selection"><tr><td>' . _('Code Of Expense') . ':</td><td><input type="text" value="'.$_POST['codeexpense'].'"
 				' . (in_array('SalesType',$Errors) ? 'class="inputerror"' : '' ) .' name="codeexpense"></td></tr>';
 		} else {
-			echo '<table class="selection"><tr><td>' . _('Code Of Expense') . ':</td><td><input type="Text"
+			echo '<table class="selection"><tr><td>' . _('Code Of Expense') . ':</td><td><input type="text"
 				' . (in_array('SalesType',$Errors) ? 'class="inputerror"' : '' ) .' name="codeexpense"></td></tr>';
 		}
 	}
@@ -272,7 +272,7 @@ if (! isset($_GET['delete'])) {
 	if (!isset($_POST['description'])) {
 		$_POST['description']='';
 	}
-	echo '<tr><td>' . _('Description') . ':</td><td><input type="Text" name="description" size=50 maxlength=49 value="' . $_POST['description'] . '"></td></tr>';
+	echo '<tr><td>' . _('Description') . ':</td><td><input type="text" name="description" size="50" maxlength="49" value="' . $_POST['description'] . '"></td></tr>';
 
 	echo '<tr><td>' . _('Account Code') . ':</td><td><select name="glaccount">';
 
