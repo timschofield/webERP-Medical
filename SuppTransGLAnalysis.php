@@ -94,7 +94,7 @@ if ($_SESSION['SuppTrans']->InvoiceOrCredit == 'Invoice'){
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('General Ledger') . '" alt="" />' . ' '
 	. _('General Ledger Analysis of Credit Note From') . ' ' . $_SESSION['SuppTrans']->SupplierName. '</p>';
 }
-echo '<table cellpadding=2 class="selection">';
+echo '<table cellpadding="2" class="selection">';
 
 $TableHeader = '<tr>
 				<th>' . _('Account') . '</th>
@@ -127,8 +127,8 @@ foreach ( $_SESSION['SuppTrans']->GLCodes as $EnteredGLCode){
 }
 
 echo '<tr>
-	<td colspan=2 class="number"><font size=4 color=blue>' . _('Total') . ':</font></td>
-	<td class="number"><font size=2 color=navy><u>' . number_format($TotalGLValue,$_SESSION['SuppTrans']->CurrDecimalPlaces) . '</u></font></td>
+	<td colspan="2" class="number"><font size="4" color="blue">' . _('Total') . ':</font></td>
+	<td class="number"><font size="2" color="navy"><u>' . number_format($TotalGLValue,$_SESSION['SuppTrans']->CurrDecimalPlaces) . '</u></font></td>
 	</tr>
 	</table>';
 
@@ -188,7 +188,7 @@ echo '<tr>
 	</tr>
 	</table><br />';
 
-echo '<div class="centre"><input type="submit" name="AddGLCodeToTrans" value="' . _('Enter GL Line') . '"></div>';
+echo '<div class="centre"><input type="submit" name="AddGLCodeToTrans" value="' . _('Enter GL Line') . '" /></div>';
 
 echo '</form>';
 include('includes/footer.inc');
