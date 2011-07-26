@@ -140,12 +140,12 @@ if (!isset($OrderNumber) or $OrderNumber=='' ){
 	while ($myrow=DB_fetch_array($resultStkLocs)){
 		if (isset($_POST['StockLocation'])){
 			if ($myrow['loccode'] == $_POST['StockLocation']){
-				echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+				echo '<option selected="True" Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			} else {
 				echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			}
 		} elseif ($myrow['loccode']== $_SESSION['UserStockLocation']){
-			echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option selected="True" Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
 			echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
@@ -153,27 +153,27 @@ if (!isset($OrderNumber) or $OrderNumber=='' ){
 
  	echo '</select> ' . _('Order Status:') .' <select name="Status">';
  	if (!isset($_POST['Status']) OR $_POST['Status']=='Pending_Authorised'){
-		echo '<option selected value="Pending_Authorised">' . _('Pending and Authorised') . '</option>';
+		echo '<option selected="True" value="Pending_Authorised">' . _('Pending and Authorised') . '</option>';
 	} else {
 		echo '<option value="Pending_Authorised">' . _('Pending and Authorised') . '</option>';
 	}
 	if ($_POST['Status']=='Pending'){
-		echo '<option selected value="Pending">' . _('Pending') . '</option>';
+		echo '<option selected="True" value="Pending">' . _('Pending') . '</option>';
 	} else {
 		echo '<option value="Pending">' . _('Pending') . '</option>';
 	}
  	if ($_POST['Status']=='Authorised'){
-		echo '<option selected value="Authorised">' . _('Authorised') . '</option>';
+		echo '<option selected="True" value="Authorised">' . _('Authorised') . '</option>';
 	} else {
 		echo '<option value="Authorised">' . _('Authorised') . '</option>';
 	}
 	if ($_POST['Status']=='Cancelled'){
-		echo '<option selected value="Cancelled">' . _('Cancelled') . '</option>';
+		echo '<option selected="True" value="Cancelled">' . _('Cancelled') . '</option>';
 	} else {
 		echo '<option value="Cancelled">' . _('Cancelled') . '</option>';
 	}
 	if ($_POST['Status']=='Rejected'){
-		echo '<option selected value="Rejected">' . _('Rejected') . '</option>';
+		echo '<option selected="True" value="Rejected">' . _('Rejected') . '</option>';
 	} else {
 		echo '<option value="Rejected">' . _('Rejected') . '</option>';
 	}
@@ -191,7 +191,7 @@ echo '<td><font size=1>' . _('Select a stock category') . ':</font><select name=
 
 while ($myrow1 = DB_fetch_array($result1)) {
 	if (isset($_POST['StockCat']) and $myrow1['categoryid']==$_POST['StockCat']){
-		echo '<option selected value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
+		echo '<option selected="True" value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 	} else {
 		echo '<option value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 	}
