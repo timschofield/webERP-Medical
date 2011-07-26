@@ -348,22 +348,22 @@ if (! isset($_GET['delete'])) {
 	echo '<tr><td>' . _('Stock Type') . ':</td>
             <td><select name="StockType" onChange="ReloadForm(CategoryForm.UpdateTypes)" >';
 		if (isset($_POST['StockType']) and $_POST['StockType']=='F') {
-			echo '<option selected value="F">' . _('Finished Goods') . '</option>';
+			echo '<option selected="True" value="F">' . _('Finished Goods') . '</option>';
 		} else {
 			echo '<option value="F">' . _('Finished Goods') . '</option>';
 		}
 		if (isset($_POST['StockType']) and $_POST['StockType']=='M') {
-			echo '<option selected value="M">' . _('Raw Materials') . '</option>';
+			echo '<option selected="True" value="M">' . _('Raw Materials') . '</option>';
 		} else {
 			echo '<option value="M">' . _('Raw Materials') . '</option>';
 		}
 		if (isset($_POST['StockType']) and $_POST['StockType']=='D') {
-			echo '<option selected value="D">' . _('Dummy Item - (No Movements)') . '</option>';
+			echo '<option selected="True" value="D">' . _('Dummy Item - (No Movements)') . '</option>';
 		} else {
 			echo '<option value="D">' . _('Dummy Item - (No Movements)') . '</option>';
 		}
 		if (isset($_POST['StockType']) and $_POST['StockType']=='L') {
-			echo '<option selected value="L">' . _('Labour') . '</option>';
+			echo '<option selected="True" value="L">' . _('Labour') . '</option>';
 		} else {
 			echo '<option value="L">' . _('Labour') . '</option>';
 		}
@@ -383,7 +383,7 @@ if (! isset($_GET['delete'])) {
 	while ($myrow = DB_fetch_array($Result)){
 
 		if (isset($_POST['StockAct']) and $myrow['accountcode']==$_POST['StockAct']) {
-			echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
+			echo '<option selected="True" value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 		} else {
 			echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 		}
@@ -397,7 +397,7 @@ if (! isset($_GET['delete'])) {
 	while ($myrow = DB_fetch_array($BSAccountsResult)) {
 
 		if (isset($_POST['WIPAct']) and $myrow['accountcode']==$_POST['WIPAct']) {
-			echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
+			echo '<option selected="True" value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 		} else {
 			echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 		}
@@ -411,7 +411,7 @@ if (! isset($_GET['delete'])) {
 
 	while ($myrow = DB_fetch_array($PnLAccountsResult)) {
 		if (isset($_POST['AdjGLAct']) and $myrow['accountcode']==$_POST['AdjGLAct']) {
-			echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
+			echo '<option selected="True" value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 		} else {
 			echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 		}
@@ -425,7 +425,7 @@ if (! isset($_GET['delete'])) {
 
 	while ($myrow = DB_fetch_array($PnLAccountsResult)) {
 		if (isset($_POST['PurchPriceVarAct']) and $myrow['accountcode']==$_POST['PurchPriceVarAct']) {
-			echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
+			echo '<option selected="True" value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 		} else {
 			echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 		}
@@ -443,7 +443,7 @@ if (! isset($_GET['delete'])) {
 
 	while ($myrow = DB_fetch_array($PnLAccountsResult)) {
 		if (isset($_POST['MaterialUseageVarAc']) and $myrow['accountcode']==$_POST['MaterialUseageVarAc']) {
-			echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
+			echo '<option selected="True" value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 		} else {
 			echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 		}
@@ -495,17 +495,17 @@ if (! isset($_GET['delete'])) {
 			echo '<tr><td><input type="textbox" name="PropLabel' . $PropertyCounter . '" size="50" maxlength="100" value="' . $myrow['label'] . '"></td>
 						<td><select name="PropControlType' . $PropertyCounter . '">';
 			if ($myrow['controltype']==0){
-				echo '<option selected value=0>' . _('Text Box') . '</option>';
+				echo '<option selected="True" value=0>' . _('Text Box') . '</option>';
 			} else {
 				echo '<option value=0>' . _('Text Box') . '</option>';
 			}
 			if ($myrow['controltype']==1){
-				echo '<option selected value=1>' . _('Select Box') . '</option>';
+				echo '<option selected="True" value=1>' . _('Select Box') . '</option>';
 			} else {
 				echo '<option value=1>' . _('Select Box') . '</option>';
 			}
 			if ($myrow['controltype']==2){
-				echo '<option selected value=2>' . _('Check Box') . '</option>';
+				echo '<option selected="True" value=2>' . _('Check Box') . '</option>';
 			} else {
 				echo '<option value=2>' . _('Check Box') . '</option>';
 			}
@@ -536,7 +536,7 @@ if (! isset($_GET['delete'])) {
 		echo '<input type="hidden" name="PropID' . $PropertyCounter .'" value="NewProperty">';
 		echo '<tr><td><input type="textbox" name="PropLabel' . $PropertyCounter . '" size="50" maxlength="100"></td>
 					<td><select name="PropControlType' . $PropertyCounter . '">';
-		echo '<option selected value=0>' . _('Text Box') . '</option>';
+		echo '<option selected="True" value=0>' . _('Text Box') . '</option>';
 		echo '<option value=1>' . _('Select Box') . '</option>';
 		echo '<option value=2>' . _('Check Box') . '</option>';
 		echo '</select></td>
