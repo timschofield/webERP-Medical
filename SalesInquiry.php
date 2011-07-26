@@ -996,7 +996,7 @@ function display(&$db, $PartNumber, $DebtorNo, $DebtorName) //####DISPLAY_DISPLA
 	echo '<tr>
 			<td>' . _('Report Type') . ':</td>
 			<td><select name="ReportType">
-				<option selected value="Detail">' . _('Detail') . '</option>
+				<option selected="True" value="Detail">' . _('Detail') . '</option>
 				<option value="Summary">' . _('Summary') . '</option>
 				</select>
 			</td>
@@ -1004,7 +1004,7 @@ function display(&$db, $PartNumber, $DebtorNo, $DebtorName) //####DISPLAY_DISPLA
 	echo '<tr>
 			<td>' . _('Order Type') . ':</td>
 			<td><select name="OrderType">
-				<option selected value="0">' . _('Sales Order') . '</option>
+				<option selected="True" value="0">' . _('Sales Order') . '</option>
 				<option value="1">' . _('Quotation') . '</option>
 				</select>
 			</td>
@@ -1012,7 +1012,7 @@ function display(&$db, $PartNumber, $DebtorNo, $DebtorName) //####DISPLAY_DISPLA
 	echo '<tr>
 			<td>' . _('Date Type') . ':</td>
 			<td><select name="DateType">
-				<option selected value="Order">' . _('Order Date') . '</option>
+				<option selected="True" value="Order">' . _('Order Date') . '</option>
 				<option value="Invoice">' . _('Invoice Date') . '</option>
 				</select>
 			</td>
@@ -1020,7 +1020,7 @@ function display(&$db, $PartNumber, $DebtorNo, $DebtorName) //####DISPLAY_DISPLA
 	echo '<tr>
 			<td>' . _('Invoice Type') . ':</td>
 			<td><select name="InvoiceType">
-				<option selected value="All">' . _('All') . '</option>
+				<option selected="True" value="All">' . _('All') . '</option>
 				<option value="10">' . _('Sales Invoice') . '</option>
 				<option value="11">' . _('Credit Note') . '</option>
 				</select>
@@ -1036,7 +1036,7 @@ function display(&$db, $PartNumber, $DebtorNo, $DebtorName) //####DISPLAY_DISPLA
 	echo '<tr>
 			<td>' . _('Part Number') . ':</td>
 			<td><select name="PartNumberOp">
-				<option selected value="Equals">' . _('Equals') . '</option>
+				<option selected="True" value="Equals">' . _('Equals') . '</option>
 				<option value="LIKE">' . _('Begins With') . '</option>
 				</select>
 			</td>
@@ -1054,7 +1054,7 @@ function display(&$db, $PartNumber, $DebtorNo, $DebtorName) //####DISPLAY_DISPLA
 	echo '<tr>
 			<td>' . _('Customer Name') . ':</td>
 			<td><select name="DebtorNameOp">
-				<option selected value="LIKE">' . _('Begins With') . '</option>
+				<option selected="True" value="LIKE">' . _('Begins With') . '</option>
 				<option value="Equals">' . _('Equals') . '</option>
 				</select>
 			</td>
@@ -1068,7 +1068,7 @@ function display(&$db, $PartNumber, $DebtorNo, $DebtorName) //####DISPLAY_DISPLA
 	echo '<tr>
 			<td>' . _('Line Item Status') . ':</td>
 			<td><select name="LineStatus">
-				<option selected value="All">' . _('All') . '</option>
+				<option selected="True" value="All">' . _('All') . '</option>
 				<option value="Completed">' . _('Completed') . '</option>
 				<option value="Open">' . _('Not Completed') . '</option>
 				</select>
@@ -1079,7 +1079,7 @@ function display(&$db, $PartNumber, $DebtorNo, $DebtorName) //####DISPLAY_DISPLA
 	echo '<tr>
 			<td>' . _('Stock Categories') . ':</td>
 			<td><select name="Category">
-				<option selected value="All">' . _('All Categories') . '</option>';
+				<option selected="True" value="All">' . _('All Categories') . '</option>';
 	while ($myrow = DB_fetch_array($CategoryResult)) {
 		echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	}
@@ -1089,7 +1089,7 @@ function display(&$db, $PartNumber, $DebtorNo, $DebtorName) //####DISPLAY_DISPLA
 	echo '<tr>
 			<td>' . _('For Sales Man') . ':</td>
 			<td><select name="Salesman">
-				<option selected value="All">' . _('All Salesmen') . '</option>';
+				<option selected="True" value="All">' . _('All Salesmen') . '</option>';
 	while ($myrow = DB_fetch_array($SalesmanResult)) {
 		echo '<option value="' . $myrow['salesmancode'] . '">' . $myrow['salesmanname'] . '</option>';
 	}
@@ -1101,7 +1101,7 @@ function display(&$db, $PartNumber, $DebtorNo, $DebtorName) //####DISPLAY_DISPLA
 	echo '<tr>
 			<td>' . _('For Sales Areas') . ':</td>
 			<td><select name="Area">
-				<option selected value="All">' . _('All Areas') . '</option>';
+				<option selected="True" value="All">' . _('All Areas') . '</option>';
 	while ($myrow = DB_fetch_array($AreasResult)) {
 		echo '<option value="' . $myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
 	}
@@ -1109,7 +1109,7 @@ function display(&$db, $PartNumber, $DebtorNo, $DebtorName) //####DISPLAY_DISPLA
 	echo '<tr>
 			<td>' . _('Sort By') . ':</td>
 			<td><select name="SortBy">
-				<option selected value="salesorderdetails.orderno">' . _('Order Number') . '</option>
+				<option selected="True" value="salesorderdetails.orderno">' . _('Order Number') . '</option>
 				<option value="salesorderdetails.stkcode">' . _('Part Number') . '</option>
 				<option value="debtorsmaster.debtorno,salesorderdetails.orderno">' . _('Customer Number') . '</option>
 				<option value="debtorsmaster.name,debtorsmaster.debtorno,salesorderdetails.orderno">' . _('Customer Name') . '</option>
@@ -1121,7 +1121,7 @@ function display(&$db, $PartNumber, $DebtorNo, $DebtorName) //####DISPLAY_DISPLA
 	echo '<tr>
 			<td>' . _('Summary Type') . ':</td>
 			<td><select name="SummaryType">
-				<option selected value="orderno">' . _('Order Number') . '</option>
+				<option selected="True" value="orderno">' . _('Order Number') . '</option>
 				<option value="transno">' . _('Transaction Number') . '</option>
 				<option value="stkcode">' . _('Part Number') . '</option>
 				<option value="extprice">' . _('Extended Price') . '</option>
