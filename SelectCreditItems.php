@@ -1238,10 +1238,10 @@ if (isset($_SESSION['CreditItems']->DebtorNo) and !isset($_POST['ProcessCredit']
 			$_POST['StockCode'] = '';
 		}
 		echo '<td>' . _('Enter text extracts in the description') . ':&nbsp;</td>';
-		echo '<td><input type="Text" name="Keywords" size="20" maxlength="25" value="' . $_POST['Keywords'] . '" /></td></tr>';
+		echo '<td><input type="text" name="Keywords" size="20" maxlength="25" value="' . $_POST['Keywords'] . '" /></td></tr>';
 		echo '<tr><td></td>';
 		echo '<td><font size="3"><b>' ._('OR') . '</b></font>&nbsp;&nbsp;' . _('Enter extract of the Stock Code') . ':&nbsp;</td>';
-		echo '<td><input type="Text" name="StockCode" size="15" maxlength="18" value="' . $_POST['StockCode'] . '" /></td>';
+		echo '<td><input type="text" name="StockCode" size="15" maxlength="18" value="' . $_POST['StockCode'] . '" /></td>';
 		echo '</tr>';
 		echo '</table><br /><div class="centre">';
 
