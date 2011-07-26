@@ -195,7 +195,7 @@ if (isset($_POST['PrintPDF'])) {
 	echo '<tr><td>' . _('Supplier') . ':</td><td><select name="supplier"> ';
 	while ($myrow=DB_fetch_array($result)){
 		if (isset($_POST['supplierid']) and ($myrow['supplierid'] == $_POST['supplierid'])) {
-			 echo '<option selected Value="' . $myrow['supplierid'] . '">' . $myrow['supplierid'].' - '.$myrow['suppname'].'</option>';
+			 echo '<option selected="True" Value="' . $myrow['supplierid'] . '">' . $myrow['supplierid'].' - '.$myrow['suppname'].'</option>';
 		} else {
 			 echo '<option Value="' . $myrow['supplierid'] . '">' . $myrow['supplierid'].' - '.$myrow['suppname'].'</option>';
 		}
@@ -208,9 +208,9 @@ if (isset($_POST['PrintPDF'])) {
 		echo '<option Value="all">' ._('ALL').'</option>';
 	while ($myrow=DB_fetch_array($result)){
 		if (isset($_POST['categoryid']) and ($myrow['categoryid'] == $_POST['categoryid'])) {
-			 echo '<option selected Value="' . $myrow['categoryid'] . '">' . $myrow['categoryid']-$myrow['categorydescription'].'</option>';
+			 echo '<option selected="True" value="' . $myrow['categoryid'] . '">' . $myrow['categoryid']-$myrow['categorydescription'].'</option>';
 		} else {
-			 echo '<option Value="' . $myrow['categoryid'] . '">' .$myrow['categoryid'].' - '. $myrow['categorydescription'].'</option>';
+			 echo '<option value="' . $myrow['categoryid'] . '">' .$myrow['categoryid'].' - '. $myrow['categorydescription'].'</option>';
 		}
 	}
 	echo '</select></td></tr>';
