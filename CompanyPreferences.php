@@ -223,51 +223,51 @@ if ($InputError != 1) {
 }
 
 echo '<tr><td>' . _('Name') . ' (' . _('to appear on reports') . '):</td>
-	<td><input '.(in_array('CoyName',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="1" type="Text" name="CoyName" value="' . stripslashes($_POST['CoyName']) . '" size=52 maxlength=50></td>
+	<td><input '.(in_array('CoyName',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="1" type="text" name="CoyName" value="' . stripslashes($_POST['CoyName']) . '" size=52 maxlength=50></td>
 </tr>';
 
 echo '<tr><td>' . _('Official Company Number') . ':</td>
-	<td><input '.(in_array('CoyNumber',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="2" type="Text" name="CompanyNumber" value="' . $_POST['CompanyNumber'] . '" size=22 maxlength=20></td>
+	<td><input '.(in_array('CoyNumber',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="2" type="text" name="CompanyNumber" value="' . $_POST['CompanyNumber'] . '" size=22 maxlength=20></td>
 	</tr>';
 
 echo '<tr><td>' . _('Tax Authority Reference') . ':</td>
-	<td><input '.(in_array('TaxRef',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="3" type="Text" name="GSTNo" value="' . $_POST['GSTNo'] . '" size=22 maxlength=20></td>
+	<td><input '.(in_array('TaxRef',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="3" type="text" name="GSTNo" value="' . $_POST['GSTNo'] . '" size=22 maxlength=20></td>
 </tr>';
 
 echo '<tr><td>' . _('Address Line 1') . ':</td>
-	<td><input '.(in_array('RegOffice1',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="4" type="Text" name="RegOffice1" size=42 maxlength=40 value="' . stripslashes($_POST['RegOffice1']) . '"></td>
+	<td><input '.(in_array('RegOffice1',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="4" type="text" name="RegOffice1" size=42 maxlength=40 value="' . stripslashes($_POST['RegOffice1']) . '"></td>
 </tr>';
 
 echo '<tr><td>' . _('Address Line 2') . ':</td>
-	<td><input '.(in_array('RegOffice2',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="5" type="Text" name="RegOffice2" size=42 maxlength=40 value="' . stripslashes($_POST['RegOffice2']) . '"></td>
+	<td><input '.(in_array('RegOffice2',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="5" type="text" name="RegOffice2" size=42 maxlength=40 value="' . stripslashes($_POST['RegOffice2']) . '"></td>
 </tr>';
 
 echo '<tr><td>' . _('Address Line 3') . ':</td>
-	<td><input '.(in_array('RegOffice3',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="6" type="Text" name="RegOffice3" size=42 maxlength=40 value="' . stripslashes($_POST['RegOffice3']) . '"></td>
+	<td><input '.(in_array('RegOffice3',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="6" type="text" name="RegOffice3" size=42 maxlength=40 value="' . stripslashes($_POST['RegOffice3']) . '"></td>
 </tr>';
 
 echo '<tr><td>' . _('Address Line 4') . ':</td>
-	<td><input '.(in_array('RegOffice4',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="7" type="Text" name="RegOffice4" size=42 maxlength=40 value="' . stripslashes($_POST['RegOffice4']) . '"></td>
+	<td><input '.(in_array('RegOffice4',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="7" type="text" name="RegOffice4" size=42 maxlength=40 value="' . stripslashes($_POST['RegOffice4']) . '"></td>
 </tr>';
 
 echo '<tr><td>' . _('Address Line 5') . ':</td>
-	<td><input '.(in_array('RegOffice5',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="8" type="Text" name="RegOffice5" size=22 maxlength=20 value="' . stripslashes($_POST['RegOffice5']) . '"></td>
+	<td><input '.(in_array('RegOffice5',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="8" type="text" name="RegOffice5" size=22 maxlength=20 value="' . stripslashes($_POST['RegOffice5']) . '"></td>
 </tr>';
 
 echo '<tr><td>' . _('Address Line 6') . ':</td>
-	<td><input '.(in_array('RegOffice6',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="9" type="Text" name="RegOffice6" size=17 maxlength=15 value="' . stripslashes($_POST['RegOffice6']) . '"></td>
+	<td><input '.(in_array('RegOffice6',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="9" type="text" name="RegOffice6" size=17 maxlength=15 value="' . stripslashes($_POST['RegOffice6']) . '"></td>
 </tr>';
 
 echo '<tr><td>' . _('Telephone Number') . ':</td>
-	<td><input '.(in_array('Telephone',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="10" type="Text" name="Telephone" size=26 maxlength=25 value="' . $_POST['Telephone'] . '"></td>
+	<td><input '.(in_array('Telephone',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="10" type="text" name="Telephone" size=26 maxlength=25 value="' . $_POST['Telephone'] . '"></td>
 </tr>';
 
 echo '<tr><td>' . _('Facsimile Number') . ':</td>
-	<td><input '.(in_array('Fax',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="11" type="Text" name="Fax" size=26 maxlength=25 value="' . $_POST['Fax'] . '"></td>
+	<td><input '.(in_array('Fax',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="11" type="text" name="Fax" size=26 maxlength=25 value="' . $_POST['Fax'] . '"></td>
 </tr>';
 
 echo '<tr><td>' . _('Email Address') . ':</td>
-	<td><input '.(in_array('Email',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="12" type="Text" name="Email" size=50 maxlength=55 value="' . $_POST['Email'] . '"></td>
+	<td><input '.(in_array('Email',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="12" type="text" name="Email" size=50 maxlength=55 value="' . $_POST['Email'] . '"></td>
 </tr>';
 
 
