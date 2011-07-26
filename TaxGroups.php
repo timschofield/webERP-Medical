@@ -264,7 +264,7 @@ if (isset($SelectedGroup)) {
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<input type="hidden" name="SelectedGroup" value="' . $SelectedGroup .'">';
 		echo '<table class="selection">';
-		echo '<tr><th colspan=3><font size=3 color=navy>'._('Calculation Order').'</font></th></tr>';
+		echo '<tr><th colspan="3"><font size="3" color="navy">'._('Calculation Order').'</font></th></tr>';
 
 		echo '<tr>
 				<th>'._('Tax Authority').'</th>
@@ -290,11 +290,11 @@ if (isset($SelectedGroup)) {
 					$TaxAuthRow[$i]['calculationorder'] . '" size=2 maxlength=2 style="width: 100%"></td>';
 			echo '<td><select name="TaxOnTax_' . $TaxAuthRow[$i]['taxauthid'] . '" style="width: 100%">';
 			if ($TaxAuthRow[$i]['taxontax']==1){
-				echo '<option selected value=1>' . _('Yes') . '</option>';
-				echo '<option value=0>' . _('No') . '</option>';
+				echo '<option selected="True" value="1">' . _('Yes') . '</option>';
+				echo '<option value="0">' . _('No') . '</option>';
 			} else {
-				echo '<option value=1>' . _('Yes') . '</option>';
-				echo '<option selected value=0>' . _('No') . '</option>';
+				echo '<option value="1">' . _('Yes') . '</option>';
+				echo '<option selected="True" value="0">' . _('No') . '</option>';
 			}
 			echo '</select></td></tr>';
 
