@@ -66,8 +66,8 @@ if (isset($_GET['Delete'])){
 
 /*Show all the selected GRNs so far from the SESSION['SuppTrans']->GRNs array */
 
-echo '<table cellpadding=0 class="selection">';
-echo '<tr><th colspan=6><font size=3 color=navy>' . _('Credits Against Goods Received Selected') . '</font></th></tr>';
+echo '<table cellpadding="0" class="selection">';
+echo '<tr><th colspan="6"><font size="3" color="navy">' . _('Credits Against Goods Received Selected') . '</font></th></tr>';
 $TableHeader = '<tr><th>' . _('GRN') . '</th>
 					<th>' . _('Item Code') . '</th>
 					<th>' . _('Description') . '</th>
@@ -99,8 +99,8 @@ foreach ($_SESSION['SuppTrans']->GRNs as $EnteredGRN){
 	}
 }
 
-echo '<tr><td colspan=5 class="number"><font size=2 color=navy>' . _('Total Value Credited Against Goods') . ':</font></td>
-		  <td class="number"><font size=2 color=navy><U>' . number_format($TotalValueCharged,2) . '</U></font></td></tr>';
+echo '<tr><td colspan="5" class="number"><font size="2" color="navy">' . _('Total Value Credited Against Goods') . ':</font></td>
+		  <td class="number"><font size="2" color="navy"><u>' . number_format($TotalValueCharged,2) . '</u></font></td></tr>';
 echo '</table><br /><div class="centre"><a href="' . $rootpath . '/SupplierCredit.php">' . _('Back to Credit Note Entry') . '</a></div>';
 
 /* Now get all the GRNs for this supplier from the database
@@ -137,10 +137,11 @@ if (DB_num_rows($GRNResults)==0){
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<br /><table cellpadding=2 colspan=7 class="selection">';
+echo '<br /><table cellpadding="2" colspan="7" class="selection">';
 
 echo '<tr><th colspan=10><font size=3 color=navy>' . _('Show Goods Received Since') . ':&nbsp;</font>';
-echo '<input type="text" name="Show_Since" maxlength=11 size=12 class="date" alt='.$_SESSION['DefaultDateFormat'].' value="' . $_POST['Show_Since'] . '"><font size=3 color=navy> ';
+echo '<input type="text" name="Show_Since" maxlength="11" size="12" class="date" alt='.$_SESSION['DefaultDateFormat'].' value="' . $_POST['Show_Since'] . '">
+		<font size="3" color="navy"> ';
 echo  _('From') . ' ' . $_SESSION['SuppTrans']->SupplierName . '</font></th></tr>';
 
 $TableHeader = '<tr><th>' . _('GRN') . '</th>
@@ -217,7 +218,7 @@ if (isset($_POST['GRNNo']) AND $_POST['GRNNo']!=''){
 	$myrow = DB_fetch_array($GRNEntryResult);
 
 	echo '<br /><table class="selection">';
-	echo '<tr><th colspan=6><font size=3 color=navy>' . _('GRN Selected For Adding To A Suppliers Credit Note') . '</font></th></tr>';
+	echo '<tr><th colspan="6"><font size="3" color="navy">' . _('GRN Selected For Adding To A Suppliers Credit Note') . '</font></th></tr>';
 	echo '<tr><th>' . _('GRN') . '</th>
 				<th>' . _('Item') . '</th>
 				<th>' . _('Quantity') . '<br />' . _('Outstanding') . '</th>
