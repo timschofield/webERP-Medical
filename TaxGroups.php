@@ -174,9 +174,9 @@ if (!isset($SelectedGroup)) {
 			}
 
 			printf('<td>%s</td>
-				<td>%s</td>
-				<td><a href="%s&SelectedGroup=%s">' . _('Edit') . '</a></td>
-				<td><a href="%s&SelectedGroup=%s&Delete=1&GroupID=%s">' . _('Delete') . '</a></td>
+					<td>%s</td>
+					<td><a href="%s&SelectedGroup=%s">' . _('Edit') . '</a></td>
+					<td><a href="%s&SelectedGroup=%s&Delete=1&GroupID=%s">' . _('Delete') . '</a></td>
 				</tr>',
 				$myrow['taxgroupid'],
 				$myrow['taxgroupdescription'],
@@ -216,7 +216,7 @@ echo '<br />';
 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 if( isset($_POST['SelectedGroup'])) {
-	echo '<input type="hidden" name="SelectedGroup" value="' . $_POST['SelectedGroup'] . '">';
+	echo '<input type="hidden" name="SelectedGroup" value="' . $_POST['SelectedGroup'] . '" / />';
 }
 echo '<table class="selection">';
 
@@ -224,8 +224,8 @@ if (!isset($_POST['GroupName'])) {
 	$_POST['GroupName']='';
 }
 echo '<tr><td>' . _('Tax Group') . ':</td>
-		<td><input type="text" name="GroupName" size=40 maxlength=40 value="' . $_POST['GroupName'] . '"></td>';
-echo '<td><input type="submit" name="submit" value="' . _('Enter Group') . '"></td></tr></form>';
+		<td><input type="text" name="GroupName" size="40" maxlength="40" value="' . $_POST['GroupName'] . '"></td>';
+echo '<td><input type="submit" name="submit" value="' . _('Enter Group') . '" /></td></tr></form>';
 
 
 if (isset($SelectedGroup)) {
@@ -287,7 +287,7 @@ if (isset($SelectedGroup)) {
 
 			echo '<td>' . $TaxAuthRow[$i]['taxname'] . '</td><td>'.
 				'<input type="text" class="number" name="CalcOrder_' . $TaxAuthRow[$i]['taxauthid'] . '" value="' .
-					$TaxAuthRow[$i]['calculationorder'] . '" size=2 maxlength=2 style="width: 100%"></td>';
+					$TaxAuthRow[$i]['calculationorder'] . '" size="2" maxlength="2" style="width: 100%"></td>';
 			echo '<td><select name="TaxOnTax_' . $TaxAuthRow[$i]['taxauthid'] . '" style="width: 100%">';
 			if ($TaxAuthRow[$i]['taxontax']==1){
 				echo '<option selected="True" value="1">' . _('Yes') . '</option>';
@@ -309,9 +309,9 @@ if (isset($SelectedGroup)) {
 		echo '<br />';
 		echo '<table class="selection">
 				<tr>
-					<th colspan=4>'._('Assigned Taxes') . '</th>
+					<th colspan="4">'._('Assigned Taxes') . '</th>
 					<th></th>
-					<th colspan=2>' . _('Available Taxes') . '</th>
+					<th colspan="2">' . _('Available Taxes') . '</th>
 				</tr>';
 		echo '<tr>
 				<th>' . _('Tax Auth ID') . '</th>
