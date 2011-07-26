@@ -265,10 +265,10 @@ if (isset($SupplierID) AND $SupplierID != '' AND !isset($_POST['SearchSupplier']
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<input type="hidden" name="StockID" value="' . $StockID . '">';
 		echo '<td>' . _('Text in the Supplier') . ' <b>' . _('NAME') . '</b>:</font></td>';
-		echo '<td><input type="Text" name="Keywords" size=20 maxlength=25></td>';
+		echo '<td><input type="text" name="Keywords" size=20 maxlength=25></td>';
 		echo '<td><font size=3><b>' . _('OR') . '</b></font></td>';
 		echo '<td>' . _('Text in Supplier') . ' <b>' . _('CODE') . '</b>:</font></td>';
-		echo '<td><input type="Text" name="SupplierCode" size=15 maxlength=18></td>';
+		echo '<td><input type="text" name="SupplierCode" size=15 maxlength=18></td>';
 		echo '</tr></table><br />';
 		echo '<div class="centre"><input type="submit" name="SearchSupplier" value="' . _('Find Suppliers Now') . '"></div></form>';
 		include ('includes/footer.inc');
