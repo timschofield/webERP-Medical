@@ -477,7 +477,7 @@ if (isset($_POST['PrintPDF'])
 		echo '<tr><td>' . _('To Customer Code') . ':' . '</td><td><input tabindex="2" type="text" maxlength=6 size=7 name=ToCriteria value="zzzzzz"></td></tr>';
 
 		echo '<tr><td>' . _('All balances or overdues only') . ':' . '</td><td><select tabindex="3" name="All_Or_Overdues">';
-		echo '<option selected Value="All">' . _('All customers with balances') . '</option>';
+		echo '<option selected="True" Value="All">' . _('All customers with balances') . '</option>';
 		echo '<option Value="OverduesOnly">' . _('Overdue accounts only') . '</option>';
 		echo '<option Value="HeldOnly">' . _('Held accounts only') . '</option>';
 		echo '</select></td></tr>';
@@ -503,7 +503,7 @@ if (isset($_POST['PrintPDF'])
 
 		while ($myrow=DB_fetch_array($result)){
 		      if ($myrow['currabrev'] == $_SESSION['CompanyRecord']['currencydefault']){
-				echo '<option selected value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
+				echo '<option selected="True" value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 		      } else {
 			      echo '<option value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 		      }
@@ -512,7 +512,7 @@ if (isset($_POST['PrintPDF'])
 
 		echo '<tr><td>' . _('Summary or detailed report') . ':' . '</td>
 			<td><select tabindex="6" name="DetailedReport">';
-		echo '<option selected value="No">' . _('Summary Report') . '</option>';
+		echo '<option selected="True" value="No">' . _('Summary Report') . '</option>';
 		echo '<option value="Yes">' . _('Detailed Report') . '</option>';
 		echo '</select></td></tr>';
 
