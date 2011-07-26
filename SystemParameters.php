@@ -351,18 +351,18 @@ echo '<tr><th colspan=3>' . _('Accounts Receivable/Payable Settings') . '</th></
 
 // PastDueDays1
 echo '<tr style="outline: 1px solid"><td>' . _('First Overdue Deadline in (days)') . ':</td>
-	<td><input type="Text" class="number" name="X_PastDueDays1" value="' . $_SESSION['PastDueDays1'] . '" size=3 maxlength=3></td>
+	<td><input type="text" class="number" name="X_PastDueDays1" value="' . $_SESSION['PastDueDays1'] . '" size=3 maxlength=3></td>
 	<td>' . _('Customer and supplier balances are displayed as overdue by this many days. This parameter is used on customer and supplier enquiry screens and aged listings') . '</td></tr>';
 
 // PastDueDays2
 echo '<tr style="outline: 1px solid"><td>' . _('Second Overdue Deadline in (days)') . ':</td>
-	<td><input type="Text" class="number" name="X_PastDueDays2" value="' . $_SESSION['PastDueDays2'] . '" size=3 maxlength=3></td>
+	<td><input type="text" class="number" name="X_PastDueDays2" value="' . $_SESSION['PastDueDays2'] . '" size=3 maxlength=3></td>
 	<td>' . _('As above but the next level of overdue') . '</td></tr>';
 
 
 // DefaultCreditLimit
 echo '<tr style="outline: 1px solid"><td>' . _('Default Credit Limit') . ':</td>
-	<td><input type="Text" class="number" name="X_DefaultCreditLimit" value="' . $_SESSION['DefaultCreditLimit'] . '" size=12 maxlength=12></td>
+	<td><input type="text" class="number" name="X_DefaultCreditLimit" value="' . $_SESSION['DefaultCreditLimit'] . '" size=12 maxlength=12></td>
 	<td>' . _('The default used in new customer set up') . '</td></tr>';
 
 // Check Credit Limits
@@ -389,12 +389,12 @@ echo '<tr style="outline: 1px solid"><td>' . _('Romalpa Clause') . ':</td>
 
 // QuickEntries
 echo '<tr style="outline: 1px solid"><td>' . _('Quick Entries') . ':</td>
-	<td><input type="Text" class="number" name="X_QuickEntries" value="' . $_SESSION['QuickEntries'] . '" size=3 maxlength=2></td>
+	<td><input type="text" class="number" name="X_QuickEntries" value="' . $_SESSION['QuickEntries'] . '" size=3 maxlength=2></td>
 	<td>' . _('This parameter defines the layout of the sales order entry screen. The number of fields available for quick entries. Any number from 1 to 99 can be entered.') . '</td></tr>';
 
 // Frequently Ordered Items
 echo '<tr style="outline: 1px solid"><td>' . _('Frequently Ordered Items') . ':</td>
-	<td><input type="Text" class="number" name="X_FrequentlyOrderedItems" value="' . $_SESSION['FrequentlyOrderedItems'] . '" size=3 maxlength=2></td>
+	<td><input type="text" class="number" name="X_FrequentlyOrderedItems" value="' . $_SESSION['FrequentlyOrderedItems'] . '" size=3 maxlength=2></td>
 	<td>' . _('To show the most frequently ordered items enter the number of frequently ordered items you wish to display from 1 to 99. If you do not wish to display the frequently ordered item list enter 0.') . '</td></tr>';
 
 // SO_AllowSameItemMultipleTimes
@@ -534,7 +534,7 @@ echo '<tr style="outline: 1px solid"><td>' . _('Do Freight Calculation') . ':</t
 
 //FreightChargeAppliesIfLessThan
 echo '<tr style="outline: 1px solid"><td>' . _('Apply freight charges if an order is less than') . ':</td>
-	<td><input type="Text" class="number" name="X_FreightChargeAppliesIfLessThan" size=12 maxlength=12 value="' . $_SESSION['FreightChargeAppliesIfLessThan'] . '"></td>
+	<td><input type="text" class="number" name="X_FreightChargeAppliesIfLessThan" size=12 maxlength=12 value="' . $_SESSION['FreightChargeAppliesIfLessThan'] . '"></td>
 	<td>' . _('This parameter is only effective if Do Freight Calculation is set to Yes. If it is set to 0 then freight is always charged. The total order value is compared to this value in deciding whether or not to charge freight') .'</td></tr>';
 
 
@@ -571,7 +571,7 @@ echo '</select></td>
 
 //TaxAuthorityReferenceName
 echo '<tr style="outline: 1px solid"><td>' . _('TaxAuthorityReferenceName') . ':</td>
-	<td><input type="Text" name="X_TaxAuthorityReferenceName" size=16 maxlength=25 value="' . $_SESSION['TaxAuthorityReferenceName'] . '"></td>
+	<td><input type="text" name="X_TaxAuthorityReferenceName" size=16 maxlength=25 value="' . $_SESSION['TaxAuthorityReferenceName'] . '"></td>
 	<td>' . _('This parameter is what is displayed on tax invoices and credits for the tax authority of the company eg. in Australian this would by A.B.N.: - in NZ it would be GST No: in the UK it would be VAT Regn. No') .'</td></tr>';
 
 // CountryOfOperation
@@ -624,12 +624,12 @@ echo '<tr style="outline: 1px solid"><td>' . _('Check Price Charged vs Order Pri
 
 // OverChargeProportion
 echo '<tr style="outline: 1px solid"><td>' . _('Allowed Over Charge Proportion') . ':</td>
-	<td><input type="Text" class="number" name="X_OverChargeProportion" size=4 maxlength=3 value="' . $_SESSION['OverChargeProportion'] . '"></td>
+	<td><input type="text" class="number" name="X_OverChargeProportion" size=4 maxlength=3 value="' . $_SESSION['OverChargeProportion'] . '"></td>
 	<td>' . _('If check price charges vs Order price is set to yes then this proportion determines the percentage by which invoices can be overcharged with respect to price') .'</td></tr>';
 
 // OverReceiveProportion
 echo '<tr style="outline: 1px solid"><td>' . _('Allowed Over Receive Proportion') . ':</td>
-	<td><input type="Text" class="number" name="X_OverReceiveProportion" size=4 maxlength=3 value="' . $_SESSION['OverReceiveProportion'] . '"></td>
+	<td><input type="text" class="number" name="X_OverReceiveProportion" size=4 maxlength=3 value="' . $_SESSION['OverReceiveProportion'] . '"></td>
 	<td>' . _('If check quantity charged vs delivery quantity is set to yes then this proportion determines the percentage by which invoices can be overcharged with respect to delivery') .'</td></tr>';
 
 // PO_AllowSameItemMultipleTimes
@@ -638,7 +638,7 @@ echo '<tr style="outline: 1px solid"><td>' . _('Purchase Order Allows Same Item 
 	<option '.($_SESSION['PO_AllowSameItemMultipleTimes']?'selected ':'').'value="1">'._('Yes') . '</option>
 	<option '.(!$_SESSION['PO_AllowSameItemMultipleTimes']?'selected ':'').'value="0">'._('No') . '</option>
 	</select></td><td>' . _('If a purchase order can have the same item on the order several times this parameter should be set to yes') . '</td></tr>';
-echo '<tr><th colspan=3>' . _('General Settings') . '</th></tr>';
+echo '<tr><th colspan="3">' . _('General Settings') . '</th></tr>';
 echo $TableHeader;
 
 // YearEnd
