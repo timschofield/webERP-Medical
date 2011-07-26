@@ -47,7 +47,7 @@ if (DB_num_rows($result)==0){
 	while ($myrow=DB_fetch_array($result)){
 		$account = $myrow['accountcode'] . ' - ' . $myrow['accountname'];
 		if (isset($SelectedAccount) and isset($LastCode) and $SelectedAccount==$myrow['accountcode']){
-			echo '<option selected value=' . $myrow['accountcode'] . '>' . $account . '</option>';
+			echo '<option selected="True" value=' . $myrow['accountcode'] . '>' . $account . '</option>';
 			$PrevCode=$LastCode;
 		} else {
 			echo '<option value=' . $myrow['accountcode'] . '>' . $account . '</option>';
