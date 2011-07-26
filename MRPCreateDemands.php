@@ -196,7 +196,7 @@ prnMsg( $TotalRecords . ' ' . _('records have been created'),'success');
 	} //end while loop
 	echo '</select></td></tr>';
 	echo '<tr><td>' . _('Inventory Category') . ':</td><td><select name="CategoryID">';
-	echo '<option selected value="All">' . _('All Stock Categories') . '</option>';
+	echo '<option selected="True" value="All">' . _('All Stock Categories') . '</option>';
 	$sql = "SELECT categoryid,
 				   categorydescription
 			FROM stockcategory";
@@ -207,7 +207,7 @@ prnMsg( $TotalRecords . ' ' . _('records have been created'),'success');
 	} //end while loop
 	echo '</select></td></tr>';
 	echo '<tr><td>' . _('Inventory Location') . ':</td><td><select name="Location">';
-	echo '<option selected value="All">' . _('All Locations') . '</option>';
+	echo '<option selected="True" value="All">' . _('All Locations') . '</option>';
 
 	$result= DB_query("SELECT loccode,
 							   locationname
@@ -232,7 +232,7 @@ prnMsg( $TotalRecords . ' ' . _('records have been created'),'success');
 	echo '<tr><td>' . _('Start Date For Distribution') .
 		 ':</td><td><input type ="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="DistDate" size="10" value="' . $_POST['DistDate'] . '"></tr>';
 	echo '<tr><td>' . _('Distribution Period') . ':</td><td><select name="Period">';
-	echo '<option selected value="weekly">' . _('Weekly') . '</option>';
+	echo '<option selected="True" value="weekly">' . _('Weekly') . '</option>';
 	echo '<option value="monthly">' . _('Monthly') . '</option>';
 	echo '</select></td></tr>';
 	echo '<tr><td>' . _('Number of Periods') .
