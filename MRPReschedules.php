@@ -129,11 +129,11 @@ if (isset($_POST['PrintPDF'])) {
 	echo '<br /><br /><form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<tr><td>' . _('Print Option') . ':</td><td><select name="Fill">';
-	echo '<option selected value="yes">' . _('Print With Alternating Highlighted Lines') . '</option>';
+	echo '<option selected="True" value="yes">' . _('Print With Alternating Highlighted Lines') . '</option>';
 	echo '<option value="no">' . _('Plain Print') . '</option>';
 	echo '</select></td></tr>';
 	echo '<tr><td>' . _('Selection') . ':</td><td><select name="Selection">';
-	echo '<option selected value="All">' . _('All').'</option>';
+	echo '<option selected="True" value="All">' . _('All').'</option>';
 	echo '<option value="WO">' . _('Work Orders Only').'</option>';
 	echo '<option value="PO">' . _('Purchase Orders Only').'</option>';
 	echo '</select></td></tr>';
