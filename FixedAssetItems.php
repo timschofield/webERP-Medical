@@ -504,7 +504,7 @@ $result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
 while ($myrow=DB_fetch_array($result)){
 	if (!isset($_POST['AssetCategoryID']) or $myrow['categoryid']==$_POST['AssetCategoryID']){
-		echo '<option selected value="'. $myrow['categoryid'] . '">' . $myrow['categorydescription']. '</option>';
+		echo '<option selected="True" value="'. $myrow['categoryid'] . '">' . $myrow['categorydescription']. '</option>';
 	} else {
 		echo '<option value="'. $myrow['categoryid'] . '">' . $myrow['categorydescription']. '</option>';
 	}
@@ -527,7 +527,7 @@ $result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 echo '<tr><td>' . _('Asset Location') . ':</td><td><select name="AssetLocation">';
 while ($myrow=DB_fetch_array($result)){
 	if ($_POST['AssetLocation']==$myrow['locationid']){
-		echo '<option selected value="' . $myrow['locationid'] .'">' . $myrow['locationdescription'] . '</option>';
+		echo '<option selected="True" value="' . $myrow['locationid'] .'">' . $myrow['locationdescription'] . '</option>';
 	} else {
 		echo '<option value="' . $myrow['locationid'] .'">' . $myrow['locationdescription'] . '</option>';
 	}
@@ -545,11 +545,11 @@ if (!isset($_POST['DepnType'])){
 	$_POST['DepnType'] = 0; //0 = Straight line - 1 = Diminishing Value
 }
 if ($_POST['DepnType']==0){ //straight line
-	echo '<option selected value="0">' . _('Straight Line') . '</option>';
+	echo '<option selected="True" value="0">' . _('Straight Line') . '</option>';
 	echo '<option value="1">' . _('Diminishing Value') . '</option>';
 } else {
 	echo '<option value="0">' . _('Straight Line') . '</option>';
-	echo '<option selected value="1">' . _('Diminishing Value') . '</option>';
+	echo '<option selected="True" value="1">' . _('Diminishing Value') . '</option>';
 }
 
 echo '</select></td></tr>';
