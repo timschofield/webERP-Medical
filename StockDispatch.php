@@ -115,7 +115,7 @@ If (isset($_POST['PrintPDF'])) {
 			$YPos -=(2 * $line_height);
 			// Parameters for addTextWrap are defined in /includes/class.pdf.php
 			// 1) X position 2) Y position 3) Width
-			// 4) Height 5) Text 6) Alignment 7) Border 8) Fill - True to use SetFillColor
+			// 4) Height 5) text 6) Alignment 7) Border 8) Fill - True to use SetFillColor
 			// and False to set to transparent
 				if($template=='simple'){
 					//for simple template
