@@ -804,7 +804,7 @@ if (!isset($_POST['Units'])) {
 }
 while( $UOMrow = DB_fetch_array($UOMResult) ) {
 	 if (isset($_POST['Units']) and $_POST['Units']==$UOMrow['unitname']){
-		echo '<option selected value="' . $UOMrow['unitname'] . '">' . $UOMrow['unitname'] . '</option>';
+		echo '<option selected="True" value="' . $UOMrow['unitname'] . '">' . $UOMrow['unitname'] . '</option>';
 	 } else {
 		echo '<option value="' . $UOMrow['unitname'] . '">' . $UOMrow['unitname']  . '</option>';
 	 }
@@ -814,33 +814,33 @@ echo '</select></td></tr>';
 
 echo '<tr><td>' . _('Assembly, Kit, Manufactured or Service/Labour') . ':</td><td><select name="MBFlag">';
 if ($_POST['MBFlag']=='A'){
-	echo '<option selected value="A">' . _('Assembly') . '</option>';
+	echo '<option selected="True" value="A">' . _('Assembly') . '</option>';
 } else {
 	echo '<option value="A">' . _('Assembly') . '</option>';
 }
 if (!isset($_POST['MBFlag']) or $_POST['MBFlag']=='K'){
-	echo '<option selected value="K">' . _('Kit') . '</option>';
+	echo '<option selected="True" value="K">' . _('Kit') . '</option>';
 } else {
 	echo '<option value="K">' . _('Kit') . '</option>';
 }
 if (!isset($_POST['MBFlag']) or $_POST['MBFlag']=='M'){
-	echo '<option selected value="M">' . _('Manufactured') . '</option>';
+	echo '<option selected="True" value="M">' . _('Manufactured') . '</option>';
 } else {
 	echo '<option value="M">' . _('Manufactured') . '</option>';
 }
 if (!isset($_POST['MBFlag']) or $_POST['MBFlag']=='G' OR !isset($_POST['MBFlag']) OR $_POST['MBFlag']==''){
-	echo '<option selected value="G">' . _('Phantom') . '</option>';
+	echo '<option selected="True" value="G">' . _('Phantom') . '</option>';
 } else {
 	echo '<option value="G">' . _('Phantom') . '</option>';
 }
 if (!isset($_POST['MBFlag']) or $_POST['MBFlag']=='B' OR !isset($_POST['MBFlag']) OR $_POST['MBFlag']==''){
-	echo '<option selected value="B">' . _('Purchased') . '</option>';
+	echo '<option selected="True" value="B">' . _('Purchased') . '</option>';
 } else {
 	echo '<option value="B">' . _('Purchased') . '</option>';
 }
 
 if (isset($_POST['MBFlag']) and $_POST['MBFlag']=='D'){
-	echo '<option selected value="D">' . _('Service/Labour') . '</option>';
+	echo '<option selected="True" value="D">' . _('Service/Labour') . '</option>';
 } else {
 	echo '<option value="D">' . _('Service/Labour') . '</option>';
 }
@@ -849,12 +849,12 @@ echo '</select></td></tr>';
 
 echo '<tr><td>' . _('Current or Obsolete') . ':</td><td><select name="Discontinued">';
 if ($_POST['Discontinued']==0){
-	echo '<option selected value="0">' . _('Current') . '</option>';
+	echo '<option selected="True" value="0">' . _('Current') . '</option>';
 } else {
 	echo '<option value="0">' . _('Current') . '</option>';
 }
 if ($_POST['Discontinued']==1){
-	echo '<option selected value="1">' . _('Obsolete') . '</option>';
+	echo '<option selected="True" value="1">' . _('Obsolete') . '</option>';
 } else {
 	echo '<option value="1">' . _('Obsolete') . '</option>';
 }
@@ -863,12 +863,12 @@ echo '</select></td></tr>';
 echo '<tr><td>' . _('Batch, Serial or Lot Control') . ':</td><td><select name="Controlled">';
 
 if ($_POST['Controlled']==0){
-	echo '<option selected value="0">' . _('No Control') . '</option>';
+	echo '<option selected="True" value="0">' . _('No Control') . '</option>';
 } else {
 		echo '<option value="0">' . _('No Control') . '</option>';
 }
 if ($_POST['Controlled']==1){
-	echo '<option selected value="1">' . _('Controlled'). '</option>';
+	echo '<option selected="True" value="1">' . _('Controlled'). '</option>';
 } else {
 	echo '<option value="1">' . _('Controlled'). '</option>';
 }
@@ -877,12 +877,12 @@ echo '</select></td></tr>';
 echo '<tr><td>' . _('Serialised') . ':</td><td><select ' . (in_array('Serialised',$Errors) ?  'class="selecterror"' : '' ) .'  name="Serialised">';
 
 if ($_POST['Serialised']==0){
-		echo '<option selected value="0">' . _('No'). '</option>';
+		echo '<option selected="True" value="0">' . _('No'). '</option>';
 } else {
 		echo '<option value="0">' . _('No'). '</option>';
 }
 if ($_POST['Serialised']==1){
-		echo '<option selected value="1">' . _('Yes') . '</option>';
+		echo '<option selected="True" value="1">' . _('Yes') . '</option>';
 } else {
 		echo '<option value="1">' . _('Yes'). '</option>';
 }
@@ -897,12 +897,12 @@ if ($_POST['Serialised']==1 AND $_POST['MBFlag']=='M'){
 echo '<tr><td>' . _('Perishable') . ':</td><td><select name="Perishable">';
 
 if (!isset($_POST['Perishable']) or $_POST['Perishable']==0){
-		echo '<option selected value="0">' . _('No'). '</option>';
+		echo '<option selected="True" value="0">' . _('No'). '</option>';
 } else {
 		echo '<option value="0">' . _('No'). '</option>';
 }
 if (isset($_POST['Perishable']) and $_POST['Perishable']==1){
-		echo '<option selected value="1">' . _('Yes'). '</option>';
+		echo '<option selected="True" value="1">' . _('Yes'). '</option>';
 } else {
 		echo '<option value="1">' . _('Yes'). '</option>';
 }
@@ -934,7 +934,7 @@ if (!isset($_POST['TaxCat'])){
 
 while ($myrow = DB_fetch_array($result)) {
 	if ($_POST['TaxCat'] == $myrow['taxcatid']){
-		echo '<option selected value=' . $myrow['taxcatid'] . '>' . $myrow['taxcatname'] . '</option>';
+		echo '<option selected="True" value=' . $myrow['taxcatid'] . '>' . $myrow['taxcatname'] . '</option>';
 	} else {
 		echo '<option value=' . $myrow['taxcatid'] . '>' . $myrow['taxcatname'] . '</option>';
 	}
@@ -1018,7 +1018,7 @@ while ($PropertyRow=DB_fetch_array($PropertiesResult)){
 			echo '<select name="PropValue' . $PropertyCounter . '">';
 			foreach ($OptionValues as $PropertyOptionValue){
 				if ($PropertyOptionValue == $PropertyValue){
-					echo '<option selected value="' . $PropertyOptionValue . '">' . $PropertyOptionValue . '</option>';
+					echo '<option selected="True" value="' . $PropertyOptionValue . '">' . $PropertyOptionValue . '</option>';
 				} else {
 					echo '<option value="' . $PropertyOptionValue . '">' . $PropertyOptionValue . '</option>';
 				}
