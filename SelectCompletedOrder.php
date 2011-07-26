@@ -451,7 +451,7 @@ if (!isset($SelectedStockItem)) {
 
 	while ($myrow1 = DB_fetch_array($result1)) {
 		if (isset($_POST['StockCat']) and $myrow1['categoryid'] == $_POST['StockCat']){
-			echo '<option selected value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
+			echo '<option selected="True" value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 		} else {
 			echo '<option value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 		}
