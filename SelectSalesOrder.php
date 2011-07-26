@@ -424,14 +424,14 @@ if (!isset($StockID)) {
 		while ($myrow=DB_fetch_array($resultStkLocs)){
 			if (isset($_POST['StockLocation'])){
 				if ($myrow['loccode'] == $_POST['StockLocation']){
-				     echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+				     echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 				} else {
-				     echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname']. '</option>';
+				     echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname']. '</option>';
 				}
 			} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
-				 echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname']. '</option>';
+				 echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname']. '</option>';
 			} else {
-				 echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname']. '</option>';
+				 echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname']. '</option>';
 			}
 		}
 
@@ -443,10 +443,10 @@ if (!isset($StockID)) {
 		}
 
 		if ($_POST['Quotations']=='Quotes_Only'){
-			echo '<option selected value="Quotes_Only">' . _('Quotations Only') . '</option>';
+			echo '<option selected="True" value="Quotes_Only">' . _('Quotations Only') . '</option>';
 			echo '<option value="Orders_Only">' . _('Orders Only') . '</option>';
 		} else {
-			echo '<option selected value="Orders_Only">' . _('Orders Only') . '</option>';
+			echo '<option selected="True" value="Orders_Only">' . _('Orders Only') . '</option>';
 			echo '<option value="Quotes_Only">' . _('Quotations Only') . '</option>';
 		}
 
