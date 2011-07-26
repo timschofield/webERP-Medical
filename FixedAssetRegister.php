@@ -244,7 +244,7 @@ if (isset($_POST['submit']) or isset($_POST['pdf']) or isset($_POST['csv'])) {
 	echo '<option value="%">' . _('ALL') . '</option>';
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['AssetCategory']) and $myrow['categoryid'] == $_POST['AssetCategory']) {
-			echo '<option selected value=' . $myrow['categoryid'] . '>' . $myrow['categorydescription'] . '</option>';
+			echo '<option selected="True" value=' . $myrow['categoryid'] . '>' . $myrow['categorydescription'] . '</option>';
 		} else {
 			echo '<option value=' . $myrow['categoryid'] . '>' . $myrow['categorydescription'] . '</option>';
 		}
@@ -257,7 +257,7 @@ if (isset($_POST['submit']) or isset($_POST['pdf']) or isset($_POST['csv'])) {
 	echo '<option value="%">' . _('ALL') . '</option>';
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['AssetLocation']) AND $myrow['locationid'] == $_POST['AssetLocation']) {
-			echo '<option selected value="' . $myrow['locationid'] . '">' . $myrow['locationdescription'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['locationid'] . '">' . $myrow['locationdescription'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow['locationid'] . '">' . $myrow['locationdescription'] . '</option>';
 		}
@@ -270,7 +270,7 @@ if (isset($_POST['submit']) or isset($_POST['pdf']) or isset($_POST['csv'])) {
 	echo '<option value="%">' . _('ALL') . '</option>';
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['AssetID']) AND $myrow['assetid'] == $_POST['AssetID']) {
-			echo '<option selected value=' . $myrow['assetid'] . '>' . $myrow['assetid'] . ' - ' . $myrow['description'] . '</option>';
+			echo '<option selected="True" value=' . $myrow['assetid'] . '>' . $myrow['assetid'] . ' - ' . $myrow['description'] . '</option>';
 		} else {
 			echo '<option value=' . $myrow['assetid'] . '>'  . $myrow['assetid'] . ' - ' . $myrow['description'] . '</option>';
 		}
