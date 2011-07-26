@@ -889,7 +889,7 @@ if ($_POST['Serialised']==1){
 echo '</select><i>' . _('Note') . ', ' . _('this has no effect if the item is not Controlled') . '</i></td></tr>';
 
 if ($_POST['Serialised']==1 AND $_POST['MBFlag']=='M'){
-	echo '<tr><td>' . _('Next Serial No (greater than 0 for auto numbering)') . ':</td><td><input ' . (in_array('NextSerialNo',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="NextSerialNo" size=15 maxlength=15 value="' . $_POST['NextSerialNo'] . '"><td></tr>';
+	echo '<tr><td>' . _('Next Serial No (greater than 0 for auto numbering)') . ':</td><td><input ' . (in_array('NextSerialNo',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="NextSerialNo" size="15" maxlength="15" value="' . $_POST['NextSerialNo'] . '" /><td></tr>';
 } else {
 	echo '<input type="hidden" name="NextSerialNo" value="0">';
 }
@@ -908,14 +908,14 @@ if (isset($_POST['Perishable']) and $_POST['Perishable']==1){
 }
 echo '</select></td></tr>';
 
-echo '<tr><td>' . _('Decimal Places for display Quantity') . ':</td><td><input type="text" class="number" name="DecimalPlaces" size=1 maxlength=1 value="' . $_POST['DecimalPlaces'] . '"><td></tr>';
+echo '<tr><td>' . _('Decimal Places for display Quantity') . ':</td><td><input type="text" class="number" name="DecimalPlaces" size="1" maxlength="1" value="' . $_POST['DecimalPlaces'] . '" /><td></tr>';
 
 if (isset($_POST['BarCode'])) {
 	$BarCode = $_POST['BarCode'];
 } else {
 	$BarCode='';
 }
-echo '<tr><td>' . _('Bar Code') . ':</td><td><input ' . (in_array('BarCode',$Errors) ?  'class="inputerror"' : '' ) .'  type="Text" name="BarCode" size=22 maxlength=20 value="' . $BarCode . '"></td></tr>';
+echo '<tr><td>' . _('Bar Code') . ':</td><td><input ' . (in_array('BarCode',$Errors) ?  'class="inputerror"' : '' ) .'  type="Text" name="BarCode" size="22" maxlength="20" value="' . $BarCode . '" /></td></tr>';
 
 if (isset($_POST['DiscountCategory'])) {
 	$DiscountCategory = $_POST['DiscountCategory'];
