@@ -675,10 +675,10 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 		    ;
 		if (isset($_POST['Quantity'])){
 			echo '<input ' . (in_array('Quantity',$Errors) ?  'class="inputerror"' : '' ) .'
-		     tabindex="4" type="Text" class="number" name="Quantity" class="number" size=10 maxlength=8 value="'.$_POST['Quantity'] . '" />';
+		     tabindex="4" type="text" class="number" name="Quantity" class="number" size="10" maxlength="8" value="'.$_POST['Quantity'] . '" />';
 		} else {
 			echo '<input ' . (in_array('Quantity',$Errors) ?  'class="inputerror"' : '' ) .'
-		     tabindex="4" type="Text" class="number" name="Quantity" class="number" size=10 maxlength=8 value="1" />';
+		     tabindex="4" type="text" class="number" name="Quantity" class="number" size="10" maxlength="8" value="1" />';
 		}
 
 		echo '</td></tr>';
@@ -692,10 +692,10 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 
 		echo '<tr><td>' . _('Effective After') . ' (' . $_SESSION['DefaultDateFormat'] . '):</td>
 		  <td><input ' . (in_array('EffectiveAfter',$Errors) ?  'class="inputerror"' : '' ) .
-			' tabindex="5" type="Text" name="EffectiveAfter" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size=11 maxlength=10 value=' . $_POST['EffectiveAfter'] .'>
+			' tabindex="5" type="text" name="EffectiveAfter" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="11" maxlength="10" value="' . $_POST['EffectiveAfter'] .'" />
 		  </td></tr><tr><td>' . _('Effective To') . ' (' . $_SESSION['DefaultDateFormat'] . '):</td><td>
 		  <input  ' . (in_array('EffectiveTo',$Errors) ?  'class="inputerror"' : '' ) .
-			' tabindex="6" type="Text" name="EffectiveTo" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size=11 maxlength=10 value="' . $_POST['EffectiveTo'] .'"></td></tr>';
+			' tabindex="6" type="text" name="EffectiveTo" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="11" maxlength="10" value="' . $_POST['EffectiveTo'] .'" /></td></tr>';
 
 		if ($ParentMBflag=='M' OR $ParentMBflag=='G'){
 			echo '<tr><td>' . _('Auto Issue this Component to Work Orders') . ':</td>
