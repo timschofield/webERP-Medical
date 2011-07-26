@@ -510,9 +510,9 @@ if (isset($_SESSION['Transfer'])){
 	}
 	while ($myrow=DB_fetch_array($LocResult)){
 		if ($myrow['loccode'] == $_POST['RecLocation']){
-			echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
-			echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	}
 	echo '</select><input type="submit" name="RefreshTransferList" value="' . _('Refresh Transfer List') . '" /></td></tr></table><br />';
