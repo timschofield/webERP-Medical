@@ -708,7 +708,7 @@ be generated, one for standard reports and the other for custom reports.
 			foreach ($ReportList as $Report) {
 				if ($Report['groupname']==$GroupID AND $Report['defaultreport']==$Def) {
 					$RptLinks .= '<tr><td class="menu_group_item">';
-					$RptLinks .= '<p>&bull; <a href="' . $rootpath . '/reportwriter/ReportMaker.php?action=go&reportid=' . $Report['id'] . '">' . _($Report['reportname']) . '</a></p>';
+					$RptLinks .= '<p>&bull; <a href="' . $rootpath . '/reportwriter/ReportMaker.php?action=go&amp;reportid=' . $Report['id'] . '">' . _($Report['reportname']) . '</a></p>';
 					$RptLinks .= '</td></tr>';
 					$NoEntries = false;
 				}

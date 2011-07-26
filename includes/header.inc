@@ -6,7 +6,7 @@
 	//  $rootpath
 	//  $title - should be defined in the page this file is included with
 
-	$StrictXHTML=False;
+	$StrictXHTML=True;
 
 	if (!headers_sent()){
 		if ($StrictXHTML) {
