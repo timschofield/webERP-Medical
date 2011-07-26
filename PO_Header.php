@@ -770,7 +770,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	if ($_SESSION['PO'.$identifier]->AllowPrintPO==0 AND empty($_POST['RePrint'])){
 		echo '<tr><td>' . _('Allow Reprint') . ':</td>
 							<td><select name="RePrint" onChange="ReloadForm(form1.AllowRePrint)">
-									<option selected value="0">' . _('No') . '</option>
+									<option selected="True" value="0">' . _('No') . '</option>
 									<option value="1">' . _('Yes') . '</option>
 									</select></td>';
 		echo '<td><input type="submit" name="AllowRePrint" value="Update" /></td></tr>';
@@ -821,7 +821,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	echo '<td>' . _('Status') . ' :  </td><td><select name="Status" onChange="ReloadForm(UpdateStatus)">';
 	foreach ($StatusList as $Status) {
 		if ($_SESSION['PO'.$identifier]->Status == $Status){
-			echo '<option selected value="' . $Status . '">' . _($Status) . '</option>';
+			echo '<option selected="True" value="' . $Status . '">' . _($Status) . '</option>';
 		} else {
 			echo '<option value="'.$Status.'">' . _($Status) . '</option>';
 		}
@@ -857,7 +857,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	while ($LocnRow=DB_fetch_array($LocnResult)){
 		if (($_POST['StkLocation'] == $LocnRow['loccode'] OR
 				($_POST['StkLocation']=='' AND $LocnRow['loccode']==$_SESSION['UserStockLocation']))){
-			echo '<option selected value="' . $LocnRow['loccode'] . '">' . $LocnRow['locationname'] . '</option>';
+			echo '<option selected="True" value="' . $LocnRow['loccode'] . '">' . $LocnRow['locationname'] . '</option>';
 		} else {
 			echo '<option value="' . $LocnRow['loccode'] . '">' . $LocnRow['locationname'] . '</option>';
 		}
@@ -984,7 +984,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 
 	while ($ShipperRow=DB_fetch_array($ShipperResult)){
 		if (isset($_POST['DeliveryBy']) and ($_POST['DeliveryBy'] == $ShipperRow['shipper_id'])) {
-			echo '<option selected value="' . $ShipperRow['shipper_id'] . '">' . $ShipperRow['shippername'] . '</option>';
+			echo '<option selected="True" value="' . $ShipperRow['shipper_id'] . '">' . $ShipperRow['shippername'] . '</option>';
 		} else {
 			echo '<option value="' . $ShipperRow['shipper_id'] . '">' . $ShipperRow['shippername'] . '</option>';
 		}
@@ -1001,7 +1001,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 
 	while ( $SuppCoRow=DB_fetch_array($SuppCoResult)){
 		if ($SuppCoRow['suppname'] == $_SESSION['PO'.$identifier]->SupplierName) {
-			echo '<option selected value="' . $SuppCoRow['suppname'] . '">' . $SuppCoRow['suppname'] . '</option>';
+			echo '<option selected="True" value="' . $SuppCoRow['suppname'] . '">' . $SuppCoRow['suppname'] . '</option>';
 		} else {
 			echo '<option value="' . $SuppCoRow['suppname'] . '">' . $SuppCoRow['suppname'] . '</option>';
 		}
@@ -1020,7 +1020,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 		if ($_POST['SupplierContact'] == $SuppCoRow['contact'] OR ($_POST['SupplierContact']==''
 			AND $SuppCoRow['contact']==$_SESSION['PO'.$identifier]->SupplierContact)){
 
-			echo '<option selected value="' . $SuppCoRow['contact'] . '">' . $SuppCoRow['contact'] . '</option>';
+			echo '<option selected="True" value="' . $SuppCoRow['contact'] . '">' . $SuppCoRow['contact'] . '</option>';
 		} else {
 			echo '<option value="' . $SuppCoRow['contact'] . '">' . $SuppCoRow['contact'] . '</option>';
 		}
@@ -1054,7 +1054,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 
 	while ($myrow = DB_fetch_array($result)) {
 		if ($myrow['termsindicator']==$_SESSION['PO'.$identifier]->PaymentTerms) {
-			echo '<option selected value="'. $myrow['termsindicator'] . '">' . $myrow['terms'] . '</option>';
+			echo '<option selected="True" value="'. $myrow['termsindicator'] . '">' . $myrow['terms'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow['termsindicator'] . '">' . $myrow['terms'] . '</option>';
 		} //end while loop
