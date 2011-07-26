@@ -108,7 +108,7 @@ if (DB_num_rows($AccountsResults)==0){
 	while ($myrow=DB_fetch_array($AccountsResults)){
 		/*list the bank account names */
 		if (isset($_POST['BankAccount']) and $_POST['BankAccount']==$myrow['accountcode']){
-			echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . '</option>';
 		}
