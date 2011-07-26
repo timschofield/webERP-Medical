@@ -138,15 +138,15 @@ if (isset($_SESSION['SupplierID'])) {
 	}
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/supplier.png" title="' .
 				_('Supplier') . '" alt="" />' . ' ' . _('Supplier') . ' : <b>' . $_SESSION['SupplierID'] .
-				" - $SupplierName</b> " . _('has been selected') . '.</p>';
+				' - $SupplierName</b> ' . _('has been selected') . '.</p>';
 	echo '<div class="page_help_text">' . _('Select a menu option to operate using this supplier.') . '</div>';
 	echo '<br /><table width=90% colspan=2 cellpadding=4>';
 	echo '<tr>
-		<th width=33%>' . _('Supplier Inquiries') . '</th>
-		<th width=33%>' . _('Supplier Transactions') . '</th>
-		<th width=33%>' . _('Supplier Maintenance') . '</th>
+		<th width="33%">' . _('Supplier Inquiries') . '</th>
+		<th width="33%">' . _('Supplier Transactions') . '</th>
+		<th width="33%">' . _('Supplier Maintenance') . '</th>
 	</tr>';
-	echo '<tr><td valign=top class="select">'; /* Inquiry Options */
+	echo '<tr><td valign="top" class="select">'; /* Inquiry Options */
 	echo '<a href="' . $rootpath . '/SupplierInquiry.php?SupplierID=' . $_SESSION['SupplierID'] . '">' . _('Supplier Account Inquiry') . '</a><br />';
 	echo '<br />';
 	echo '<br /><a href="'.$rootpath.'/PO_SelectOSPurchOrder.php?SelectedSupplier=' . $_SESSION['SupplierID'] . '">' . _('Add / Receive / View Outstanding Purchase Orders') . '</a>';
@@ -191,15 +191,15 @@ echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/
 		'" alt="" />' . ' ' . _('Search for Suppliers') . '</p>
 		<table cellpadding=3 colspan=4 class="selection"><tr><td>' . _('Enter a partial Name') . ':</font></td><td>';
 if (isset($_POST['Keywords'])) {
-	echo '<input type="Text" name="Keywords" value="' . $_POST['Keywords'] . '" size=20 maxlength=25>';
+	echo '<input type="text" name="Keywords" value="' . $_POST['Keywords'] . '" size=20 maxlength=25>';
 } else {
-	echo '<input type="Text" name="Keywords" size=20 maxlength=25>';
+	echo '<input type="text" name="Keywords" size=20 maxlength=25>';
 }
 echo '</td><td><b>' . _('OR') . '</b></font></td><td>' . _('Enter a partial Code') . ':</font></td><td>';
 if (isset($_POST['SupplierCode'])) {
-	echo '<input type="Text" name="SupplierCode" value="' . $_POST['SupplierCode'] . '" size=15 maxlength=18>';
+	echo '<input type="text" name="SupplierCode" value="' . $_POST['SupplierCode'] . '" size=15 maxlength=18>';
 } else {
-	echo '<input type="Text" name="SupplierCode" size=15 maxlength=18>';
+	echo '<input type="text" name="SupplierCode" size=15 maxlength=18>';
 }
 echo '</td></tr></table><br /><div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '"></div>';
 //if (isset($result) AND !isset($SingleSupplierReturned)) {
