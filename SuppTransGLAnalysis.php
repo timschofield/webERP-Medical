@@ -149,7 +149,7 @@ if (!isset($_POST['GLCode'])) {
 }
 echo '<tr>
 	<td>' . _('Account Code') . ':</td>
-	<td><input type="text" name="GLCode" size=12 maxlength=11 value="' .  $_POST['GLCode'] . '"></td>
+	<td><input type="text" name="GLCode" size="12" maxlength="11" value="' .  $_POST['GLCode'] . '" /></td>
 	<input type="hidden" name="JobRef" value="">
 	</tr>';
 echo '<tr>
@@ -162,7 +162,7 @@ $result = DB_query($sql, $db);
 echo '<option value=""></option>';
 while ($myrow = DB_fetch_array($result)) {
 	if ($myrow['accountcode'] == $_POST['AcctSelection']) {
-		echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
+		echo '<option selected="True" value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
 	} else {
 		echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
 	}
