@@ -313,7 +313,7 @@ if (! isset($_GET['delete'])) {
 			$_POST['CategoryID'] = '';
 		}
 		echo '<table class="selection"><tr><td>' . _('Category Code') . ':</td>
-                             <td><input type="Text" name="CategoryID" size=7 maxlength=6 value="' . $_POST['CategoryID'] . '"></td></tr>';
+                             <td><input type="text" name="CategoryID" size=7 maxlength=6 value="' . $_POST['CategoryID'] . '"></td></tr>';
 	}
 
 	//SQL to poulate account selection boxes
@@ -342,7 +342,7 @@ if (! isset($_GET['delete'])) {
 	}
 
 	echo '<tr><td>' . _('Category Description') . ':</td>
-            <td><input type="Text" name="CategoryDescription" size=22 maxlength=20 value="' . $_POST['CategoryDescription'] . '"></td></tr>';
+            <td><input type="text" name="CategoryDescription" size=22 maxlength=20 value="' . $_POST['CategoryDescription'] . '"></td></tr>';
 
 
 	echo '<tr><td>' . _('Stock Type') . ':</td>
