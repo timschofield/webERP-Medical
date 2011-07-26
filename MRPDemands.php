@@ -375,9 +375,9 @@ function display(&$db,&$StockID,&$DemandID) { //####DISPLAY_DISPLAY_DISPLAY_DISP
 			$_POST['Duedate']=' ';
 		}
 
-		echo '<tr><td>' . _('Quantity') . ':</td><td><input type="Text" name="Quantity" class="number" size=6
+		echo '<tr><td>' . _('Quantity') . ':</td><td><input type="text" name="Quantity" class="number" size=6
 			maxlength=6 value="' . $_POST['Quantity'] . '"></td></tr><tr><td>' . _('Due Date') . ':</td>
-			<td><input type="Text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="Duedate" size=12
+			<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="Duedate" size=12
 			maxlength=12 value="' . $_POST['Duedate'] . '"></td></tr>';
 		// Generate selections for Demand Type
 		echo '<tr><td>' . _('Demand Type') . '</td><td><select name="MRPDemandtype">';
