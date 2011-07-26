@@ -90,7 +90,7 @@ $sql = "SELECT accountcode, bankaccountname FROM bankaccounts";
 $resultBankActs = DB_query($sql,$db);
 while ($myrow=DB_fetch_array($resultBankActs)){
 	if (isset($_POST['BankAccount']) and $myrow['accountcode']==$_POST['BankAccount']){
-		echo '<option selected Value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . '</option>';
+		echo '<option selected="True" Value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . '</option>';
 	} else {
 		echo '<option Value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . '</option>';
 	}
@@ -115,22 +115,22 @@ echo '<tr><td colspan=3>' . _('Choose outstanding') . ' ' . $TypeName . ' ' . _(
 	<td><select tabindex="4" name="Ostg_or_All">';
 
 if ($_POST['Ostg_or_All']=='All'){
-	echo '<option selected Value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range') . '</option>';
-	echo '<option Value="Ostdg">' . _('Show unmatched') . ' ' . $TypeName . ' ' . _('only') . '</option>';
+	echo '<option selected="True" value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range') . '</option>';
+	echo '<option value="Ostdg">' . _('Show unmatched') . ' ' . $TypeName . ' ' . _('only') . '</option>';
 } else {
-	echo '<option Value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range') . '</option>';
-	echo '<option selected Value="Ostdg">' . _('Show unmatched') . ' ' . $TypeName . ' ' . _('only') . '</option>';
+	echo '<option value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range') . '</option>';
+	echo '<option selected="True" value="Ostdg">' . _('Show unmatched') . ' ' . $TypeName . ' ' . _('only') . '</option>';
 }
 echo '</select></td></tr>';
 
 echo '<tr><td colspan=3>' . _('Choose to display only the first 20 matching') . ' ' . $TypeName . ' ' .
 	_('or all') . ' ' . $TypeName . ' ' . _('meeting the criteria') . ':</td><td><select tabindex="5" name="First20_or_All">';
 if ($_POST['First20_or_All']=='All'){
-	echo '<option selected Value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range') . '</option>';
-	echo '<option Value="First20">' . _('Show only the first 20') . ' ' . $TypeName . '</option>';
+	echo '<option selected="True" value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range') . '</option>';
+	echo '<option value="First20">' . _('Show only the first 20') . ' ' . $TypeName . '</option>';
 } else {
-	echo '<option Value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range') . '</option>';
-	echo '<option selected Value="First20">' . _('Show only the first 20') . ' ' . $TypeName . '</option>';
+	echo '<option value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range') . '</option>';
+	echo '<option selected="True" value="First20">' . _('Show only the first 20') . ' ' . $TypeName . '</option>';
 }
 echo '</select></td></tr>';
 
