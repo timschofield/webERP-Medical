@@ -923,7 +923,7 @@ if (isset($_POST['DiscountCategory'])) {
 } else {
 	$DiscountCategory='';
 }
-echo '<tr><td>' . _('Discount Category') . ':</td><td><input type="Text" name="DiscountCategory" size=2 maxlength=2 value="' . $DiscountCategory . '"></td></tr>';
+echo '<tr><td>' . _('Discount Category') . ':</td><td><input type="Text" name="DiscountCategory" size="2" maxlength="2" value="' . $DiscountCategory . '"></td></tr>';
 
 echo '<tr><td>' . _('Tax Category') . ':</td><td><select name="TaxCat">';
 $sql = "SELECT taxcatid, taxcatname FROM taxcategories ORDER BY taxcatname";
