@@ -717,16 +717,22 @@ function CreateTableList($ReportID,$Table) {
 
 	while ($mytable=DB_fetch_row($Result)) {
 		$tablename = strtolower($mytable[0]);
-		if ($myrow[0] == $tablename) $TableList .= "<OPTION SELECTED Value='" . $tablename . "'>" . $tablename . "</OPTION>";
-			else $TableList .= "<OPTION Value='" . $tablename . "'>" . $tablename . "</OPTION>";
+		if ($myrow[0] == $tablename) $TableList .= '<option selected="True" value="' . $tablename . '">' . $tablename . '</option>';
+			else $TableList .= '<option value="' . $tablename . '">' . $tablename . '</option>';
 	}
 	return $TableList;
 } // CreateTableList
 
 function CreateLinkList($ReportID,$Table) {
 	global $db;
-	$sql = "SELECT table1, table2, table3, table4, table5, table6
-		FROM ".DBReports." WHERE id='".$ReportID."'";
+	$sql = "SELECT table1,
+					table2,
+					table3,
+					table4,
+					table5,
+					table6
+				FROM ".DBReports."
+				WHERE id='".$ReportID."'";
 	$Result=DB_query($sql,$db,'','',false,true);
 	$myrow = DB_fetch_row($Result);
 	$LinkList = ''; $j = 0;
@@ -739,15 +745,15 @@ function CreateLinkList($ReportID,$Table) {
 		while($mytable=DB_fetch_row($Result)) {
 			if ($myrow[$Table]) {
 				if ($myrow[$Table] == $mytable[1]){
-					$LinkList .= "<OPTION SELECTED Value='" . $mytable[1] . "'>" . $mytable[1];
+					$LinkList .= '<option selected="True" value="' . $mytable[1] . '">' . $mytable[1] . '</option>';
 				} else {
-					$LinkList .= "<OPTION Value='" . $mytable[1] . "'>" . $mytable[1];
+					$LinkList .= '<option value="' . $mytable[1] . '">' . $mytable[1] . '</option>';
 				}
 			} else {
 				if ($j == 0){
-					$LinkList .= "<OPTION SELECTED Value='" . $mytable[1] . "'>" . $mytable[1];
+					$LinkList .= '<option selected="True" value="' . $mytable[1] . '">' . $mytable[1] . '</option>';
 				} else {
-					$LinkList .= "<OPTION Value='" . $mytable[1] . "'>" . $mytable[1];
+					$LinkList .= '<option value="' . $mytable[1] . '">' . $mytable[1] . '</option>';
 				}
 				$j++;
 			}
@@ -762,12 +768,18 @@ function CreateLinkList($ReportID,$Table) {
 function CreateLinkEqList($ReportID,$Table) {
 	global $db;
 	$sql = "SELECT table1,
-		table2, table2criteria,
-		table3, table3criteria,
-		table4, table4criteria,
-		table5, table5criteria,
-		table6, table6criteria
-		FROM ".DBReports." WHERE id='".$ReportID."'";
+					table2,
+					table2criteria,
+					table3,
+					table3criteria,
+					table4,
+					table4criteria,
+					table5,
+					table5criteria,
+					table6,
+					table6criteria
+				FROM ".DBReports."
+				WHERE id='".$ReportID."'";
 	$Result=DB_query($sql,$db,'','',false,true);
 	$myrow = DB_fetch_row($Result);
 	$LinkEqList = ''; $j = 0;
@@ -775,20 +787,24 @@ function CreateLinkEqList($ReportID,$Table) {
 	/* Get list of foreign key constraints */
 	for ($i = 0; $i < $Table; $i++) {
 		$comments = '';
-		$sql = "SELECT table1, table2, equation FROM reportlinks WHERE table1 = '" . $myrow[$i] . "'";
+		$sql = "SELECT table1,
+						table2,
+						equation
+					FROM reportlinks
+					WHERE table1 = '" . $myrow[$i] . "'";
 		$Result=DB_query($sql,$db,'','',false,true);
 		while($mytable=DB_fetch_row($Result)) {
 			if ($myrow[$Table+3]) {
 				if ($myrow[$Table+3] == $mytable[2]){
-					$LinkEqList .= "<OPTION SELECTED Value='" . $mytable[2] . "'>" . $mytable[2];
+					$LinkEqList .= '<option selected="True" value="' . $mytable[2] . '">' . $mytable[2] . '</option>';
 				} else {
-					$LinkEqList .= "<OPTION Value='" . $mytable[2] . "'>" . $mytable[2];
+					$LinkEqList .= '<option value="' . $mytable[2] . '">' . $mytable[2] . '</option>';
 				}
 			} else {
 				if ($j == 0){
-					$LinkEqList .= "<OPTION SELECTED Value='" . $mytable[2] . "'>" . $mytable[2];
+					$LinkEqList .= '<option selected="True" value="' . $mytable[2] . '">' . $mytable[2] . '</option>';
 				} else {
-					$LinkEqList .= "<OPTION Value='" . $mytable[2] . "'>" . $mytable[2];
+					$LinkEqList .= '<option value="' . $mytable[2] . '">' . $mytable[2] . '</option>';
 				}
 				$j++;
 			}
@@ -805,8 +821,14 @@ function CreateFieldList($ReportID,$FName,$Type) {
 	if ($Type=='Company') { // then pull from the company information table
 		$myrow[]=CompanyDataBase;
 	} else { // pull from user selected tables for this report
-		$sql = "SELECT table1, table2, table3, table4, table5, table6
-			FROM " . DBReports . " WHERE id='" . $ReportID . "'";
+		$sql = "SELECT table1,
+						table2,
+						table3,
+						table4,
+						table5,
+						table6
+					FROM " . DBReports . "
+					WHERE id='" . $ReportID . "'";
 		$Result=DB_query($sql,$db,'','',false,true);
 		$myrow = DB_fetch_row($Result);
 	}
@@ -818,9 +840,9 @@ function CreateFieldList($ReportID,$FName,$Type) {
 			while ($mytable=DB_fetch_row($Result)) {
 				$fieldname = strtolower($myrow[$i]) . "." . strtolower($mytable[0]);
 				if ($FName == $fieldname){
-					$FieldList .= "<OPTION SELECTED Value='" . $fieldname . "'>" . $fieldname . "</OPTION>";
+					$FieldList .= '<option selected="True" value="' . $fieldname . '">' . $fieldname . '</option>';
 				} else {
-					$FieldList .= "<OPTION Value='" . $fieldname . "'>" . $fieldname . "</OPTION>";
+					$FieldList .= '<option value="' . $fieldname . '">' . $fieldname . '</option>';
 				}
 			} // while
 		} // if
