@@ -908,7 +908,8 @@ if (isset($_POST['Perishable']) and $_POST['Perishable']==1){
 }
 echo '</select></td></tr>';
 
-echo '<tr><td>' . _('Decimal Places for display Quantity') . ':</td><td><input type="text" class="number" name="DecimalPlaces" size="1" maxlength="1" value="' . $_POST['DecimalPlaces'] . '" /><td></tr>';
+echo '<tr><td>' . _('Decimal Places for display Quantity') . ':</td>
+			<td><input type="text" class="number" name="DecimalPlaces" size="1" maxlength="1" value="' . $_POST['DecimalPlaces'] . '" /></td></tr>';
 
 if (isset($_POST['BarCode'])) {
 	$BarCode = $_POST['BarCode'];

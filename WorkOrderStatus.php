@@ -41,12 +41,32 @@ include('includes/header.inc');
 		_('Search') . '" alt="" />' . ' ' . $title.'</p>';
 
 	echo '<table cellpadding="2" class="selection">
-		<tr><td class="label">' . _('Issue to work order') . ':</td><td>' . $_REQUEST['WO'] .'</td><td class="label">' . _('Item') . ':</td><td>' . $_REQUEST['StockID'] . ' - ' . $WORow['description'] . '</td></tr>
-	 	<tr><td class="label">' . _('Manufactured at') . ':</td><td>' . $WORow['locationname'] . '</td><td class="label">' . _('Required By') . ':</td><td>' . ConvertSQLDate($WORow['requiredby']) . '</td></tr>
-	 	<tr><td class="label">' . _('Quantity Ordered') . ':</td><td class="number">' . number_format($WORow['qtyreqd'],$WORow['decimalplaces']) . '</td><td colspan=2>' . $WORow['units'] . '</td></tr>
-	 	<tr><td class="label">' . _('Already Received') . ':</td><td class="number">' . number_format($WORow['qtyrecd'],$WORow['decimalplaces']) . '</td><td colspan=2>' . $WORow['units'] . '</td></tr>
-	 	<tr><td class="label">' . _('Date Material Issued') . ':</td><td>' . Date($_SESSION['DefaultDateFormat']) . '</td>
-		<td class="label">' . _('Issued From') . ':</td><td>';
+		<tr>
+			<td class="label">' . _('Issue to work order') . ':</td>
+			<td>' . $_REQUEST['WO'] .'</td><td class="label">' . _('Item') . ':</td>
+			<td>' . $_REQUEST['StockID'] . ' - ' . $WORow['description'] . '</td>
+		</tr>
+	 	<tr>
+			<td class="label">' . _('Manufactured at') . ':</td>
+			<td>' . $WORow['locationname'] . '</td>
+			<td class="label">' . _('Required By') . ':</td>
+			<td>' . ConvertSQLDate($WORow['requiredby']) . '</td>
+		</tr>
+	 	<tr>
+			<td class="label">' . _('Quantity Ordered') . ':</td>
+			<td class="number">' . number_format($WORow['qtyreqd'],$WORow['decimalplaces']) . '</td>
+			<td colspan="2">' . $WORow['units'] . '</td>
+		</tr>
+	 	<tr>
+			<td class="label">' . _('Already Received') . ':</td>
+			<td class="number">' . number_format($WORow['qtyrecd'],$WORow['decimalplaces']) . '</td>
+			<td colspan="2">' . $WORow['units'] . '</td>
+		</tr>
+	 	<tr>
+			<td class="label">' . _('Date Material Issued') . ':</td>
+			<td>' . Date($_SESSION['DefaultDateFormat']) . '</td>
+			<td class="label">' . _('Issued From') . ':</td>
+		</tr>';
 
 		if (!isset($_POST['FromLocation'])){
 			$_POST['FromLocation']=$WORow['loccode'];
@@ -57,14 +77,15 @@ include('includes/header.inc');
 				$db);
 		$LocRow = DB_fetch_array($LocResult);
 		echo $LocRow['locationname'];
-		echo '<tr><td colspan=4></td></tr>';
+		echo '<tr><td colspan="4"></td></tr>';
 		echo '</td></tr></table><br />';
 
 		//set up options for selection of the item to be issued to the WO
-		echo '<table class="selection"><tr><th colspan=5><font size=2 color=navy>' . _('Material Requirements For this Work Order') . '</font></th></tr>';
-		echo '<tr><th colspan=2>' . _('Item') . '</th>
-			<th>' . _('Qty Required') . '</th>
-			<th>' . _('Qty Issued') . '</th></tr>';
+		echo '<table class="selection"><tr><th colspan="5"><font size="2" color="navy">' . _('Material Requirements For this Work Order') . '</font></th></tr>';
+		echo '<tr><th colspan="2">' . _('Item') . '</th>
+				<th>' . _('Qty Required') . '</th>
+				<th>' . _('Qty Issued') . '</th>
+			</tr>';
 
 		$RequirmentsResult = DB_query("SELECT worequirements.stockid,
 						stockmaster.description,
