@@ -85,7 +85,7 @@ if ($_GET['Action'] == 'Enter'){
 	while ($myrow=DB_fetch_array($result)){
 
 		if (isset($_POST['Location']) and $myrow['loccode']==$_POST['Location']){
-			echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
