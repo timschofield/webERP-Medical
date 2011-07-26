@@ -362,7 +362,7 @@ if (isset($_POST['CustType'])) {
 		echo '<option value="ALL">' . _('Any') . '</option>';
 		while ($myrow = DB_fetch_array($result2)) {
 			if ($_POST['CustType'] == $myrow['typename']) {
-				echo '<option selected value="' . $myrow['typename'] . '">' . $myrow['typename']  . '</option>';
+				echo '<option selected="True" value="' . $myrow['typename'] . '">' . $myrow['typename']  . '</option>';
 			} else {
 				echo '<option value="' . $myrow['typename'] . '">' . $myrow['typename']  . '</option>';
 			}
@@ -397,14 +397,14 @@ $result2 = DB_query("SELECT areacode, areadescription FROM areas", $db);
 if (DB_num_rows($result2) == 0) {
 	$DataError = 1;
 	echo '<a href="Areas.php?" target="_parent">Setup Types</a>';
-	echo '<tr><td colspan=2>' . prnMsg(_('No Sales Areas defined'), 'error') . '</td></tr>';
+	echo '<tr><td colspan="2">' . prnMsg(_('No Sales Areas defined'), 'error') . '</td></tr>';
 } else {
 	// if OK show select box with available options to choose
 	echo '<select name="Area">';
 	echo '<option value="ALL">' . _('Any') . '</option>';
 	while ($myrow = DB_fetch_array($result2)) {
 		if (isset($_POST['Area']) and $_POST['Area']==$myrow['areacode']) {
-			echo '<option selected value="' . $myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
 		}
