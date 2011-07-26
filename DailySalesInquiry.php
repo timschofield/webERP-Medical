@@ -27,7 +27,7 @@ $PeriodsResult = DB_query("SELECT periodno, lastdate_in_period FROM periods",$db
 
 while ($PeriodRow = DB_fetch_array($PeriodsResult)){
 	if ($_POST['MonthToShow']==$PeriodRow['periodno']) {
-	     echo '<option selected Value="' . $PeriodRow['periodno'] . '">' . MonthAndYearFromSQLDate($PeriodRow['lastdate_in_period']) . '</option>';
+	     echo '<option selected="True" Value="' . $PeriodRow['periodno'] . '">' . MonthAndYearFromSQLDate($PeriodRow['lastdate_in_period']) . '</option>';
 		 $EndDateSQL = $PeriodRow['lastdate_in_period'];
 	} else {
 	     echo '<option Value="' . $PeriodRow['periodno'] . '">' . MonthAndYearFromSQLDate($PeriodRow['lastdate_in_period']) . '</option>';
@@ -39,16 +39,16 @@ echo '<td>' . _('Salesperson') . ':</td><td><select tabindex=2 name="Salesperson
 $SalespeopleResult = DB_query("SELECT salesmancode, salesmanname FROM salesman",$db);
 if (!isset($_POST['Salesperson'])){
 	$_POST['Salesperson'] = 'All';
-	echo '<option selected value="All">' . _('All') . '</option>';
+	echo '<option selected="True" value="All">' . _('All') . '</option>';
 } else {
 	echo '<option value="All">' . _('All') . '</option>';
 }
 while ($SalespersonRow = DB_fetch_array($SalespeopleResult)){
 
 	if ($_POST['Salesperson']==$SalespersonRow['salesmancode']) {
-	     echo '<option selected value="' . $SalespersonRow['salesmancode'] . '">' . $SalespersonRow['salesmanname'] . '</option>';
+	     echo '<option selected="True" value="' . $SalespersonRow['salesmancode'] . '">' . $SalespersonRow['salesmanname'] . '</option>';
 	} else {
-	     echo '<option Value="' . $SalespersonRow['salesmancode'] . '">' . $SalespersonRow['salesmanname'] . '</option>';
+	     echo '<option value="' . $SalespersonRow['salesmancode'] . '">' . $SalespersonRow['salesmanname'] . '</option>';
 	}
 }
 echo '</select></td>';
