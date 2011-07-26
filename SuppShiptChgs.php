@@ -75,7 +75,7 @@ if ($_SESSION['SuppTrans']->InvoiceOrCredit=='Invoice'){
 }
 echo '<p>'.$_SESSION['SuppTrans']->SuppReference . ' ' ._('From') . ' ' . $_SESSION['SuppTrans']->SupplierName.'</p>';
 
-echo '<table cellpadding=2 class="selection">';
+echo '<table cellpadding="2" class="selection">';
 $TableHeader = '<tr><th>' . _('Shipment') . '</th>
 		<th>' . _('Amount') . '</th></tr>';
 echo $TableHeader;
@@ -93,8 +93,8 @@ foreach ($_SESSION['SuppTrans']->Shipts as $EnteredShiptRef){
 }
 
 echo '<tr>
-	<td class="number"><font size=2 color=navy>' . _('Total') . ':</font></td>
-	<td class="number"><font size=2 color=navy><U>' . number_format($TotalShiptValue,2) . '</U></font></td>
+	<td class="number"><font size="2" color="navy">' . _('Total') . ':</font></td>
+	<td class="number"><font size="2" color="navy"><u>' . number_format($TotalShiptValue,2) . '</u></font></td>
 </tr>
 </table><br />';
 
