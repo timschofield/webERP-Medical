@@ -1459,17 +1459,17 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 	echo '<tr><td>' . _('Credit Note Type') . '</td><td><select tabindex="'.$j.'" name=CreditType>';
 
 	if (!isset($_POST['CreditType']) OR $_POST['CreditType']=="Return"){
-		echo '<option selected value="Return">' . _('Goods returned to store') . '</option>';
+		echo '<option selected="True" value="Return">' . _('Goods returned to store') . '</option>';
 		echo '<option value="WriteOff">' . _('Goods written off') . '</option>';
 		echo '<option value="ReverseOverCharge">' . _('Reverse overcharge') . '</option>';
 	} elseif($_POST['CreditType']=='WriteOff') {
-		echo '<option selected value="WriteOff">' . _('Goods written off') . '</option>';
+		echo '<option selected="True" value="WriteOff">' . _('Goods written off') . '</option>';
 		echo '<option value="Return">' . _('Goods returned to store') . '</option>';
 		echo '<option value="ReverseOverCharge">' . _('Reverse overcharge') . '</option>';
 	} else {
 		echo '<option value="WriteOff">' . _('Goods written off') . '</option>';
 		echo '<option value="Return">' . _('Goods returned to store') . '</option>';
-		echo '<option selected value="ReverseOverCharge">' . _('Reverse overcharge') . '</option>';
+		echo '<option selected="True" value="ReverseOverCharge">' . _('Reverse overcharge') . '</option>';
 	}
 	echo "</select></td></tr>";
 	$j++;
@@ -1489,7 +1489,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 		while ($myrow = DB_fetch_array($Result)) {
 
 			if ($_POST['Location']==$myrow['loccode']){
-				echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+				echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			} else {
 				echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			}
@@ -1512,9 +1512,9 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 		while ($myrow = DB_fetch_array($Result)) {
 
 			if ($_POST['WriteOffGLCode']==$myrow["accountcode"]){
-				echo '<option selected value=' . $myrow['accountcode'] . '>' . $myrow['accountname'].'</option>';
+				echo '<option selected="True" value="' . $myrow['accountcode'] . '">' . $myrow['accountname'].'</option>';
 			} else {
-				echo '<option value=' . $myrow['accountcode'] . '>' . $myrow['accountname'].'</option>';
+				echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountname'].'</option>';
 			}
 		}
 		echo "</select></td></tr>";
