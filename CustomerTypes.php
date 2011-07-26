@@ -260,7 +260,7 @@ if (! isset($_GET['delete'])) {
 	if (!isset($_POST['typename'])) {
 		$_POST['typename']='';
 	}
-	echo '<tr><td>' . _('Type Name') . ':</td><td><input type="Text" name="typename" value="' . $_POST['typename'] . '"></td></tr>';
+	echo '<tr><td>' . _('Type Name') . ':</td><td><input type="text" name="typename" value="' . $_POST['typename'] . '" /></td></tr>';
 
    	echo '</td></tr></table>'; // close main table
 
