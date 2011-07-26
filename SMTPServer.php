@@ -45,11 +45,11 @@ echo '<tr><td>'._('Helo Command').'</td>
 echo '<tr><td>'._('Authorisation Required').'</td><td>';
 echo '<select name=auth>';
 if ($myrow['auth']==1) {
-	echo '<option selected value=1>'._('True').'</option>';
-	echo '<option value=0>'._('False').'</option>';
+	echo '<option selected="True" value="1">'._('True').'</option>';
+	echo '<option value="0">'._('False').'</option>';
 } else {
-	echo '<option value=1>'._('True').'</option>';
-	echo '<option selected value=0>'._('False').'</option>';
+	echo '<option value="1">'._('True').'</option>';
+	echo '<option selected="True" value="0">'._('False').'</option>';
 }
 echo '</select></td></tr>';
 echo '<tr><td>'._('User Name').'</td>
