@@ -327,7 +327,7 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 	echo '<option value=""></option>';
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['SelectTabs']) and $myrow['tabcode']==$_POST['SelectTabs']) {
-			echo '<option selected value="' . $myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
 		}
