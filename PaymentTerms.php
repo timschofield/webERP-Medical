@@ -258,7 +258,7 @@ if (!isset($_GET['delete'])) {
 
 		echo '<table class="selection">';
 		echo '<tr><th colspan=6><font color=blue size=3>'._('New Payment Terms.').'</font></th></tr>';
-		echo '<tr><td>' . _('Term Code') . ':</td><td><input type="Text" name="TermsIndicator"
+		echo '<tr><td>' . _('Term Code') . ':</td><td><input type="text" name="TermsIndicator"
 		 ' . (in_array('TermsIndicator',$Errors) ? 'class="inputerror"' : '' ) .' value="' . $_POST['TermsIndicator'] .
 			'" size=3 maxlength=2></td></tr>';
 	}
@@ -271,7 +271,7 @@ if (!isset($_GET['delete'])) {
 	<td><input type="checkbox" name="DaysOrFoll"';
 	if ( isset($DayInFollowingMonth) && !$DayInFollowingMonth) { echo "checked"; }
 	echo ' ></td></tr><tr><td>'._('Days (Or Day In Following Month)').':</td><td>
-		<input type="Text"' . (in_array('DayNumber',$Errors) ? 'class="inputerror"' : '' ) .' name="DayNumber" class="number"  size=4 maxlength=3 value=';
+		<input type="text"' . (in_array('DayNumber',$Errors) ? 'class="inputerror"' : '' ) .' name="DayNumber" class="number"  size=4 maxlength=3 value=';
 	if ($DaysBeforeDue !=0) {
 			echo $DaysBeforeDue;
 			} else {
