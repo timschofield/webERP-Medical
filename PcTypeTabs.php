@@ -218,7 +218,7 @@ if (! isset($_GET['delete'])) {
 
 		// This is a new type so the user may volunteer a type code
 
-		echo '<table class="selection"><tr><td>' . _('Code Of Type Of Tab') . ':</td><td><input type="Text"
+		echo '<table class="selection"><tr><td>' . _('Code Of Type Of Tab') . ':</td><td><input type="text"
 				' . (in_array('TypeTabCode',$Errors) ? 'class="inputerror"' : '' ) .' name="TypeTabCode"></td></tr>';
 
 	}
@@ -226,7 +226,9 @@ if (! isset($_GET['delete'])) {
 	if (!isset($_POST['TypeTabDescription'])) {
 		$_POST['TypeTabDescription']='';
 	}
-	echo '<tr><td>' . _('Description Of Type of Tab') . ':</td><td><input type="Text" name="TypeTabDescription" size=50 maxlength=49 value="' . $_POST['TypeTabDescription'] . '"></td></tr>';
+	echo '<tr><td>' . _('Description Of Type of Tab') . ':</td>
+			<td><input type="text" name="TypeTabDescription" size="50" maxlength="49" value="' . $_POST['TypeTabDescription'] . '"></td>
+		</tr>';
 
 	echo '</td></tr></table>'; // close main table
 
