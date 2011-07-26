@@ -480,7 +480,7 @@ if (!isset($SuppliersResult)) {
 	$result = DB_query($sql, $db);
 	while ($myrow = DB_fetch_array($result)) {
 		if ($_POST['SuppliersUOM'] == $myrow['unitid']) {
-			echo '<option selected value="' . $myrow['unitid'] . '">' . $myrow['unitname'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['unitid'] . '">' . $myrow['unitname'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow['unitid'] . '">' . $myrow['unitname'] . '</option>';
 		}
@@ -510,11 +510,11 @@ if (!isset($SuppliersResult)) {
 	echo '<tr><td>' . _('Preferred Supplier') . ':</td>
 	<td><select name="Preferred">';
 	if ($_POST['Preferred'] == 1) {
-		echo '<option selected value=1>' . _('Yes') . '</option>';
-		echo '<option value=0>' . _('No') . '</option>';
+		echo '<option selected="True" value="1">' . _('Yes') . '</option>';
+		echo '<option value="0">' . _('No') . '</option>';
 	} else {
-		echo '<option value=1>' . _('Yes') . '</option>';
-		echo '<option selected value=0>' . _('No') . '</option>';
+		echo '<option value="1">' . _('Yes') . '</option>';
+		echo '<option selected="True" value="0">' . _('No') . '</option>';
 	}
 	echo '</select></td></tr></table><br /><div class="centre">';
 	if (isset($_GET['Edit'])) {
