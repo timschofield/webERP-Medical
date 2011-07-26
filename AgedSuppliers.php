@@ -289,31 +289,31 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/m
 			<td><input tabindex="2" type="text" maxlength=6 size=7 name=ToCriteria value="zzzzzz"></td>
 		</tr>';
 
-		echo '<tr><td>' . _('All balances or overdues only') . ':' . "</td>
-			<td><select tabindex='3' name='All_Or_Overdues'>";
-		echo "<option selected value='All'>" . _('All suppliers with balances') . '</option>';
-		echo "<option value='OverduesOnly'>" . _('Overdue accounts only') . '</option>';
+		echo '<tr><td>' . _('All balances or overdues only') . ':' . '</td>
+			<td><select tabindex="3" name="All_Or_Overdues">';
+		echo '<option selected="True" value="All">' . _('All suppliers with balances') . '</option>';
+		echo '<option value="OverduesOnly">' . _('Overdue accounts only') . '</option>';
 		echo '</select></td></tr>';
 
-		echo '<tr><td>' . _('For suppliers trading in') . ':' . "</td>
-			<td><select tabindex='4' name='Currency'>";
+		echo '<tr><td>' . _('For suppliers trading in') . ':' . '</td>
+			<td><select tabindex="4" name="Currency">';
 
 		$sql = "SELECT currency, currabrev FROM currencies";
 		$result=DB_query($sql,$db);
 
 		while ($myrow=DB_fetch_array($result)){
 		      if ($myrow['currabrev'] == $_SESSION['CompanyRecord']['currencydefault']){
-				echo "<option selected value='" . $myrow["currabrev"] . "'>" . $myrow['currency'] . '</option>';
+				echo '<option selected="True" value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 		      } else {
-			      echo "<option value='" . $myrow['currabrev'] . "'>" . $myrow['currency'] . '</option>';
+			      echo '<option value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 		      }
 		}
 		echo '</select></td></tr>';
 
-		echo '<tr><td>' . _('Summary or Detailed Report') . ':' . "</td>
-			<td><select tabindex='5' name='DetailedReport'>";
-		echo "<option selected value='No'>" . _('Summary Report') . '</option>';
-		echo "<option value='Yes'>" . _('Detailed Report') . '</option>';
+		echo '<tr><td>' . _('Summary or Detailed Report') . ':' . '</td>
+			<td><select tabindex="5" name="DetailedReport">';
+		echo '<option selected="True" value="No">' . _('Summary Report') . '</option>';
+		echo '<option value="Yes">' . _('Detailed Report') . '</option>';
 		echo '</select></td></tr>';
 
 		echo '</table><br /><div class="centre"><input tabindex="6" type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
