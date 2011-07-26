@@ -503,7 +503,7 @@ if (!isset($_GET['delete'])) {
 	$TaxProvinceResult = DB_query("SELECT taxprovinceid, taxprovincename FROM taxprovinces",$db);
 	while ($myrow=DB_fetch_array($TaxProvinceResult)){
 		if ($_POST['TaxProvince']==$myrow['taxprovinceid']){
-			echo '<option selected value=' . $myrow['taxprovinceid'] . '>' . $myrow['taxprovincename'] . '</option>';
+			echo '<option selected="True" value=' . $myrow['taxprovinceid'] . '>' . $myrow['taxprovincename'] . '</option>';
 		} else {
 			echo '<option value=' . $myrow['taxprovinceid'] . '>' . $myrow['taxprovincename'] . '</option>';
 		}
