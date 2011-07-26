@@ -209,18 +209,18 @@ echo '<td>';
 echo '<select tabindex=2 name="Section">';
 
 if ($_POST['Section']=='Heading') {
-	echo '<option selected value="Heading">' . _('Heading') . '</option>';
+	echo '<option selected="True" value="Heading">' . _('Heading') . '</option>';
 } else {
 	echo '<option value="Heading">' . _('Heading') . '</option>';
 }
 
 if (isset($_POST['Section']) and $_POST['Section']=='Detail') {
-	echo '<option selected value="Detail">' . _('Detail') . '</option>';
+	echo '<option selected="True" value="Detail">' . _('Detail') . '</option>';
 } else {
 	echo '<option value="Detail">' . _('Detail') . '</option>';
 }
 if (isset($_POST['Section']) and $_POST['Section']=='Summary') {
-	echo '<option selected value="Summary">' . _('Summary') . '</option>';
+	echo '<option selected="True" value="Summary">' . _('Summary') . '</option>';
 } else {
 	echo '<option value="Summary">' . _('Summary') . '</option>';
 }
