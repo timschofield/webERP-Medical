@@ -804,11 +804,11 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 /*Display the order with or without discount depending on access level*/
 if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 
-	echo '<table cellpading=2 class="selection">';
+	echo '<table cellpading="2" class="selection">';
 	if ($_SESSION['Items'.$identifier]->Quotation==1){
-		echo '<tr><th colspan=7><font size=2 color="navy">'._('Quotation Summary').'</font></th></tr>';
+		echo '<tr><th colspan="7"><font size="2" color="navy">'._('Quotation Summary').'</font></th></tr>';
 	} else {
-		echo '<tr><th colspan=7><font size=2 color="navy">'._('Order Summary').'</font></th></tr>';
+		echo '<tr><th colspan="7"><font size="2" color="navy">'._('Order Summary').'</font></th></tr>';
 	}
 	echo '<tr>
 			<th>'. _('Item Code') .'</th>
