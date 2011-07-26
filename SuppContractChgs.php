@@ -111,7 +111,7 @@ if (!isset($_POST['ContractRef'])) {
 }
 echo '<table>';
 echo '<tr><td>' . _('Contract Reference') . ':</td>
-	<td><input type="Text" name="ContractRef" size="22" maxlength="20" value="' .  $_POST['ContractRef'] . '" /></td></tr>';
+	<td><input type="text" name="ContractRef" size="22" maxlength="20" value="' .  $_POST['ContractRef'] . '" /></td></tr>';
 echo '<tr><td>' . _('Contract Selection') . ':<br /><font size=1>' . _('If you know the code enter it above') . '<br />' . _('otherwise select the contract from the list') . '</font></td><td><select name="ContractSelection">';
 
 $sql = "SELECT contractref, name
