@@ -13,32 +13,32 @@ Function DataOptions ($DataX){
 
 /*Sales analysis headers group by data options */
  if ($DataX == 'Quantity'){
-	 echo '<option selected value="Quantity">' . _('Quantity') . '</option>';
+	 echo '<option selected="True" value="Quantity">' . _('Quantity') . '</option>';
  } else {
 	echo '<option value="Quantity">' . _('Quantity') . '</option>';
  }
  if ($DataX == 'Gross Value'){
-	 echo '<option selected value="Gross Value">' . _('Gross Value') . '</option>';
+	 echo '<option selected="True" value="Gross Value">' . _('Gross Value') . '</option>';
  } else {
 	echo '<option value="Gross Value">' . _('Gross Value') . '</option>';
  }
  if ($DataX == 'Net Value'){
-	 echo '<option selected value="Net Value">' . _('Net Value') . '</option>';
+	 echo '<option selected="True" value="Net Value">' . _('Net Value') . '</option>';
  } else {
 	echo '<option value="Net Value">' . _('Net Value') . '</option>';
  }
  if ($DataX == 'Gross Profit'){
-	 echo '<option selected value="Gross Profit">' . _('Gross Profit') . '</option>';
+	 echo '<option selected="True" value="Gross Profit">' . _('Gross Profit') . '</option>';
  } else {
 	echo '<option value="Gross Profit">' . _('Gross Profit') . '</option>';
  }
  if ($DataX == 'Cost'){
-	 echo '<option selected value="Cost">' . _('Cost') . '</option>';
+	 echo '<option selected="True" value="Cost">' . _('Cost') . '</option>';
  } else {
 	echo '<option value="Cost">' . _('Cost') . '</option>';
  }
  if ($DataX == 'Discount'){
-	 echo '<option selected value="Discount">' . _('Discount') . '</option>';
+	 echo '<option selected="True" value="Discount">' . _('Discount') . '</option>';
  } else {
 	echo '<option value="Discount">' . _('Discount') . '</option>';
  }
@@ -397,11 +397,11 @@ if (!isset($_GET['delete'])) {
 		$_POST['Calculation']=0;
 	}
 	if ($_POST['Calculation'] ==1){
-		echo '<option selected value="1">' . _('Yes') . '</option>';
+		echo '<option selected="True" value="1">' . _('Yes') . '</option>';
 		echo '<option value="0">' . _('No') . '</option>';
 	} else {
 		echo '<option value="1">' . _('Yes') . '</option>';
-		echo '<option selected value="0">' . _('No') . '</option>';
+		echo '<option selected="True" value="0">' . _('No') . '</option>';
 	}
 	echo '</select></td></tr>';
 
@@ -415,7 +415,7 @@ if (!isset($_GET['delete'])) {
 		$result = DB_query($sql,$db,$ErrMsg);
 		while ($PeriodRow = DB_fetch_row($result)){
 			if ($_POST['PeriodFrom']==$PeriodRow[0]){
-				echo  '<option selected value="' . $PeriodRow[0] . '">' . ConvertSQLDate($PeriodRow[1]) . '</option>';
+				echo  '<option selected="True" value="' . $PeriodRow[0] . '">' . ConvertSQLDate($PeriodRow[1]) . '</option>';
 			} else {
 				echo  '<option value="' . $PeriodRow[0] . '">' . ConvertSQLDate($PeriodRow[1]) . '</option>';
 			}
@@ -429,7 +429,7 @@ if (!isset($_GET['delete'])) {
 		$result = DB_query($sql,$db,$ErrMsg);
 		while ($PeriodRow = DB_fetch_row($result)){
 			if ($_POST['PeriodTo']==$PeriodRow[0]){
-				echo  '<option selected value="' . $PeriodRow[0] . '">' . ConvertSQLDate($PeriodRow[1]) . '</option>';
+				echo  '<option selected="True" value="' . $PeriodRow[0] . '">' . ConvertSQLDate($PeriodRow[1]) . '</option>';
 			} else {
 				echo  '<option value="' . $PeriodRow[0] . '">' . ConvertSQLDate($PeriodRow[1]) . '</option>';
 			}
@@ -441,11 +441,11 @@ if (!isset($_GET['delete'])) {
 		echo '</select></td></tr>';
 		echo '<tr><td>' . _('Budget or Actual') . ':</td><td><select name="BudgetOrActual">';
 		if ($_POST['BudgetOrActual']==0){
-			echo '<option selected value="0">' . _('Budget') . '</option>';
+			echo '<option selected="True" value="0">' . _('Budget') . '</option>';
 			echo '<option value="1">' . _('Actual') . '</option>';
 		} else {
 			  echo '<option value="0">' . _('Budget') . '</option>';
-			  echo '<option selected value="1">' . _('Actual') . '</option>';
+			  echo '<option selected="True" value="1">' . _('Actual') . '</option>';
 		}
 		echo '</select></td></tr>';
 		echo '<input type="hidden" name="ValFormat" value="N" />
@@ -463,27 +463,27 @@ if (!isset($_GET['delete'])) {
 		echo '<tr><td>' . _('Calculation Operator') . ':</td>
 			  <td><select name="CalcOperator">';
 		if ($_POST['CalcOperator'] == '/'){
-			echo '<option selected value="/">' . _('Numerator Divided By Denominator') . '</option>';
+			echo '<option selected="True" value="/">' . _('Numerator Divided By Denominator') . '</option>';
 		} else {
 			echo '<option value="/">' . _('Numerator Divided By Denominator') . '</option>';
 		}
 		if ($_POST['CalcOperator'] == 'C'){
-			echo '<option selected value="/">' . _('Numerator Divided By Constant') . '</option>';
+			echo '<option selected="True" value="/">' . _('Numerator Divided By Constant') . '</option>';
 		} else {
 			echo '<option value="/C">' . _('Numerator Divided By Constant') . '</option>';
 		}
 		if ($_POST['CalcOperator'] == '*'){
-			echo '<option selected value="*">' . _('Numerator Col x Constant') . '</option>';
+			echo '<option selected="True" value="*">' . _('Numerator Col x Constant') . '</option>';
 		} else {
 			echo '<option value="*">' . _('Numerator Col x Constant') . '</option>';
 		}
 		if ($_POST['CalcOperator'] == '+'){
-			echo '<option selected value="+">' . _('Add to') . '</option>';
+			echo '<option selected="True" value="+">' . _('Add to') . '</option>';
 		} else {
 			echo '<option value="+">' . _('Add to') . '</option>';
 		}
 		if ($_POST['CalcOperator'] == '-'){
-			echo '<option selected value="-">' . _('Numerator Minus Denominator') . '</option>';
+			echo '<option selected="True" value="-">' . _('Numerator Minus Denominator') . '</option>';
 		} else {
 			echo '<option value="-">' . _('Numerator Minus Denominator') . '</option>';
 		}
@@ -492,11 +492,11 @@ if (!isset($_GET['delete'])) {
 		echo '<tr><td>' . _('Constant') . ':</td><td><input type="text" size="10" maxlength="10" name="Constant" value="' . $_POST['Constant'] . '" /></td></tr>';
 		echo '<tr><td>' . _('Format Type') . ':</td><td><select name="ValFormat">';
 		if ($_POST['ValFormat']=='N'){
-			  echo '<option selected value="N">' . _('Numeric') . '</option>';
+			  echo '<option selected="True" value="N">' . _('Numeric') . '</option>';
 			  echo '<option value="P">' . _('Percentage') . '</option>';
 		} else {
 			  echo '<option value="N">' . _('Numeric') . '</option>';
-		  	echo '<option selected value="P">' . _('Percentage') . '</option>';
+		  	echo '<option selected="True" value="P">' . _('Percentage') . '</option>';
 		}
 		echo '</select></td></tr><input type="hidden" name="BudgetOrActual" value="0">
 							<input type="hidden" name="DataType" value="">
