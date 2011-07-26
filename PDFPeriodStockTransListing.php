@@ -39,13 +39,13 @@ if (!isset($_POST['FromDate'])){
 	echo '<tr><td>' . _('Transaction type') . '</td><td>';
 
 	echo '<select name="TransType">';
-	echo '<option value=10>' . _('Sales Invoice').'</option>
-			<option value=11>' . _('Sales Credit Note').'</option>
-			<option value=16>' . _('Location Transfer').'</option>
-			<option value=17>' . _('Stock Adjustment').'</option>
-			<option value=25>' . _('Purchase Order Delivery').'</option>
-			<option value=26>' . _('Work Order Receipt').'</option>
-			<option value=28>' . _('Work Order Issue').'</option>';
+	echo '<option value="10">' . _('Sales Invoice').'</option>
+			<option value="11">' . _('Sales Credit Note').'</option>
+			<option value="16">' . _('Location Transfer').'</option>
+			<option value="17">' . _('Stock Adjustment').'</option>
+			<option value="25">' . _('Purchase Order Delivery').'</option>
+			<option value="26">' . _('Work Order Receipt').'</option>
+			<option value="28">' . _('Work Order Issue').'</option>';
 
 	 echo '</select></td></tr>';
 
@@ -58,12 +58,12 @@ if (!isset($_POST['FromDate'])){
 	while ($myrow=DB_fetch_array($resultStkLocs)){
 		if (isset($_POST['StockLocation']) AND $_POST['StockLocation']!='All'){
 			if ($myrow['loccode'] == $_POST['StockLocation']){
-				echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+				echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			} else {
 				echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			}
 		} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
-			echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			$_POST['StockLocation']=$myrow['loccode'];
 		} else {
 			echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
