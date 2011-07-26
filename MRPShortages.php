@@ -265,7 +265,7 @@ if (isset($_POST['PrintPDF'])) {
 	echo '<table class="selection">';
 	echo '</select></td></tr>';
 	echo '<tr><td>' . _('Inventory Category') . ':</td><td><select name="CategoryID">';
-	echo '<option selected value="All">' . _('All Stock Categories') . '</option>';
+	echo '<option selected="True" value="All">' . _('All Stock Categories') . '</option>';
 	$sql = 'SELECT categoryid,
 				   categorydescription
 			FROM stockcategory';
@@ -274,17 +274,17 @@ if (isset($_POST['PrintPDF'])) {
 		echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categoryid'] . ' - ' .$myrow['categorydescription'] . '</option>';
 	} //end while loop
 	echo '<tr><td>' . _('Sort') . ':</td><td><select name="Sort">';
-	echo '<option selected value="extcost">' . _('Extended Shortage Dollars').'</option>';
+	echo '<option selected="True" value="extcost">' . _('Extended Shortage Dollars').'</option>';
 	echo '<option value="stockid">' . _('Part Number').'</option>';
 	echo '</select></td></tr>';
 
 	echo '<tr><td>' . _('Shortage-Excess Option') . ':</td><td><select name="ReportType">';
-	echo '<option selected value="Shortage">' . _('Report MRP Shortages').'</option>';
+	echo '<option selected="True" value="Shortage">' . _('Report MRP Shortages').'</option>';
 	echo '<option value="Excess">' . _('Report MRP Excesses').'</option>';
 	echo '</select></td></tr>';
 
 	echo '<tr><td>' . _('Print Option') . ':</td><td><select name="Fill">';
-	echo '<option selected value="yes">' . _('Print With Alternating Highlighted Lines').'</option>';
+	echo '<option selected="True" value="yes">' . _('Print With Alternating Highlighted Lines').'</option>';
 	echo '<option value="no">' . _('Plain Print').'</option>';
 	echo '</select></td></tr>';
 	echo '</table><br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
