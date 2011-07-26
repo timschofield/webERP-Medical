@@ -300,17 +300,17 @@ If (isset($_POST['PrintPDF'])
 			$_POST['MakeStkChkData'] = 'PrintOnly';
 		}
 		if ($_POST['MakeStkChkData'] =='New'){
-			echo '<option selected value="New">' . _('Make new stock check data file') . '</option>';
+			echo '<option selected="True" value="New">' . _('Make new stock check data file') . '</option>';
 		} else {
 			echo '<option value="New">' . _('Make new stock check data file') . '</option>';
 		}
 		if ($_POST['MakeStkChkData'] =='AddUpdate'){
-			echo '<option selected value="AddUpdate">' . _('Add/update existing stock check file') . '</option>';
+			echo '<option selected="True" value="AddUpdate">' . _('Add/update existing stock check file') . '</option>';
 		} else {
 			echo '<option value="AddUpdate">' . _('Add/update existing stock check file') . '</option>';
 		}
 		if ($_POST['MakeStkChkData'] =='PrintOnly'){
-			echo '<option selected value="PrintOnly">' . _('Print Stock Check Sheets Only') . '</option>';
+			echo '<option selected="True" value="PrintOnly">' . _('Print Stock Check Sheets Only') . '</option>';
 		} else {
 			echo '<option value="PrintOnly">' . _('Print Stock Check Sheets Only') . '</option>';
 		}
