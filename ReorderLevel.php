@@ -79,7 +79,7 @@ if (isset($_POST['PrintPDF'])) {
 
 			// Parameters for addTextWrap are defined in /includes/class.pdf.php
 			// 1) X position 2) Y position 3) Width
-			// 4) Height 5) Text 6) Alignment 7) Border 8) Fill - True to use SetFillColor
+			// 4) Height 5) text 6) Alignment 7) Border 8) Fill - True to use SetFillColor
 			// and False to set to transparent
 			$fill = '';
 			$pdf->addTextWrap(50,$YPos,100,$FontSize,$myrow['stockid'],'',0,$fill);
@@ -115,7 +115,7 @@ if (isset($_POST['PrintPDF'])) {
 
 					// Parameters for addTextWrap are defined in /includes/class.pdf.php
 					// 1) X position 2) Y position 3) Width
-					// 4) Height 5) Text 6) Alignment 7) Border 8) Fill - True to use SetFillColor
+					// 4) Height 5) text 6) Alignment 7) Border 8) Fill - True to use SetFillColor
 					// and False to set to transparent
 
 						$pdf->addTextWrap(310,$YPos,60,$FontSize,$myrow2['loccode'],'left',0,$fill);
