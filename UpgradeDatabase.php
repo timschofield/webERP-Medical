@@ -17,7 +17,7 @@ if (!isset($_POST['DoUpgrade'])){
 		prnMsg(_('The webERP code is version')  . ' ' . $Version . ' ' . _('and the database version is not actually recorded at this version'),'info');
 		echo '<table><tr><td>' . _('Select the version you are upgrading from:') . '</td>
 											<td><select name="OldVersion" >';
-		echo '<option selected value="Manual">' . _('Apply database changes manually') . '</option>';
+		echo '<option selected="True" value="Manual">' . _('Apply database changes manually') . '</option>';
 		echo '<option value="3.00">' . _('Version 3.00') . '</option>';
 		echo '<option value="3.01">' . _('Version 3.01') . '</option>';
 		echo '<option value="3.02">' . _('Version 3.02') . '</option>';
