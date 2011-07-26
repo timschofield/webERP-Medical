@@ -236,7 +236,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 				echo '<td align="left" width="60"><select name="PropValue' . $PropertyCounter . '" onChange="ReloadForm(UpdateProps)" >';
 				foreach ($OptionValues as $PropertyOptionValue){
 					if ($PropertyOptionValue == $PropertyValue){
-						echo '<option selected value="' . $PropertyOptionValue . '">' . $PropertyOptionValue . '</option>';
+						echo '<option selected="True" value="' . $PropertyOptionValue . '">' . $PropertyOptionValue . '</option>';
 					} else {
 						echo '<option value="' . $PropertyOptionValue . '">' . $PropertyOptionValue . '</option>';
 					}
