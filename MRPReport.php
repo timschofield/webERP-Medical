@@ -434,7 +434,7 @@ if (isset($_POST['PrintPDF']) AND $_POST['Part']!='') {
 		*/
 		// Parameters for addTextWrap are defined in /includes/class.pdf.php
 		// 1) X position 2) Y position 3) Width
-		// 4) Height 5) Text To Display  6) Alignment 7) Border 8) Fill - True to use SetFillColor
+		// 4) Height 5) text To Display  6) Alignment 7) Border 8) Fill - True to use SetFillColor
 		// and False to set for transparent
 		if (isset($Requirements[$i]['part']) and mb_strlen($Requirements[$i]['part']) > 1) {
 			$FormatedReqDueDate = ConvertSQLDate($Requirements[$i]['daterequired']);
