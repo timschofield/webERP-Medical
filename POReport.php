@@ -1424,13 +1424,13 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 
 	echo '<tr><td>' . _('Report Type') . ':</td>';
 	echo '<td><select name="ReportType">';
-	echo '<option selected value="Detail">' . _('Detail') . '</option>';
+	echo '<option selected="True" value="Detail">' . _('Detail') . '</option>';
 	echo '<option value="Summary">' . _('Summary') . '</option>';
 	echo '</select></td><td>&nbsp</td></tr>';
 
 	echo '<tr><td>' . _('Date Type') . ':</td>';
 	echo '<td><select name="DateType">';
-	echo '<option selected value="Order">' . _('Order Date') . '</option>';
+	echo '<option selected="True" value="Order">' . _('Order Date') . '</option>';
 	echo '<option value="Delivery">' . _('Delivery Date') . '</option>';
 	echo '</select></td><td>&nbsp</td></tr>';
 
@@ -1443,7 +1443,7 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 
 	echo '<tr><td>' . _('Part Number') . ':</td>';
 	echo '<td><select name="PartNumberOp">';
-	echo '<option selected value="Equals">' . _('Equals') . '</option>';
+	echo '<option selected="True" value="Equals">' . _('Equals') . '</option>';
 	echo '<option value="LIKE">' . _('Begins With') . '</option>';
 	echo '</select>';
 	echo '&nbsp&nbsp<input type="text" name="PartNumber" size="20" maxlength="20" value="';
@@ -1455,7 +1455,7 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 
 	echo '<tr><td>' . _('Supplier Number') . ':</td>';
 	echo '<td><select name="SupplierIdOp">';
-	echo '<option selected value="Equals">' . _('Equals') . '</option>';
+	echo '<option selected="True" value="Equals">' . _('Equals') . '</option>';
 	echo '<option value="LIKE">' . _('Begins With') . '</option>';
 	echo '</select>';
 	echo '&nbsp&nbsp<input type="text" name="SupplierId" size="10" maxlength="10" value="';
@@ -1467,7 +1467,7 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 
 	echo '<tr><td>' . _('Supplier Name') . ':</td>';
 	echo '<td><select name="SupplierNameOp">';
-	echo '<option selected value="LIKE">' . _('Begins With') . '</option>';
+	echo '<option selected="True" value="LIKE">' . _('Begins With') . '</option>';
 	echo '<option value="Equals">' . _('Equals') . '</option>';
 	echo '</select>';
 	echo '&nbsp&nbsp<input type="text" name="SupplierName" size="30" maxlength="30" value="';
@@ -1488,7 +1488,7 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 
 	echo '<tr><td>' . _('Line Item Status') . ':</td>';
 	echo '<td><select name="LineStatus">';
-	echo '<option selected value="All">' . _('All') . '</option>';
+	echo '<option selected="True" value="All">' . _('All') . '</option>';
 	echo '<option value="Completed">' . _('Completed') . '</option>';
 	echo '<option value="Open">' . _('Not Completed') . '</option>';
 	echo '</select></td><td>&nbsp</td></tr>';
@@ -1496,7 +1496,7 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 	echo '<tr><td>' . _('Stock Categories') . ':</td><td> <select name="Category">';
 	$sql="SELECT categoryid, categorydescription FROM stockcategory";
 	$CategoryResult= DB_query($sql,$db);
-	echo '<option selected value="All">' . _('All Categories') . '</option>';
+	echo '<option selected="True" value="All">' . _('All Categories') . '</option>';
 	While ($myrow = DB_fetch_array($CategoryResult)){
 		echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	}
@@ -1505,7 +1505,7 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 	echo '<tr><td>&nbsp</td></tr>';
 	echo '<tr><td>' . _('Sort By') . ':</td>';
 	echo '<td><select name="SortBy">';
-	echo '<option selected value="purchorderdetails.orderno">' . _('Order Number') . '</option>';
+	echo '<option selected="True" value="purchorderdetails.orderno">' . _('Order Number') . '</option>';
 	echo '<option value="purchorderdetails.itemcode">' . _('Part Number') . '</option>';
 	echo '<option value="suppliers.supplierid,purchorderdetails.orderno">' . _('Supplier Number') . '</option>';
 	echo '<option value="suppliers.suppname,suppliers.supplierid,purchorderdetails.orderno">' . _('Supplier Name') . '</option>';
@@ -1514,7 +1514,7 @@ function display(&$db)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_##
 	echo '<tr><td>&nbsp</td></tr>';
 	echo '<tr><td>' . _('Summary Type') . ':</td>';
 	echo '<td><select name="SummaryType">';
-	echo '<option selected value="orderno">' . _('Order Number') . '</option>';
+	echo '<option selected="True" value="orderno">' . _('Order Number') . '</option>';
 	echo '<option value="itemcode">' . _('Part Number') . '</option>';
 	echo '<option value="extprice">' . _('Extended Price') . '</option>';
 	echo '<option value="supplierno">' . _('Supplier Number') . '</option>';
