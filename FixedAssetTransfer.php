@@ -38,7 +38,7 @@ if (isset($_GET['AssetID'])) {
 
 	while ($myrow = DB_fetch_array($result)) {
 		if ($myrow['categoryid'] == $_POST['AssetCat']) {
-			echo '<option selected value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 		}
@@ -128,7 +128,7 @@ if (isset($_POST['Search'])) {
 		echo '<option value=""></option>';
 		while ($LocationRow=DB_fetch_array($LocationResult)) {
 			if ($LocationRow['locationid']==$myrow['location']) {
-				echo '<option selected value="'.$LocationRow['locationid'].'">'.$LocationRow['locationdescription'] . '</option>';
+				echo '<option selected="True" value="'.$LocationRow['locationid'].'">'.$LocationRow['locationdescription'] . '</option>';
 			} else {
 				echo '<option value="'.$LocationRow['locationid'].'">'.$LocationRow['locationdescription'].'</option>';
 			}
