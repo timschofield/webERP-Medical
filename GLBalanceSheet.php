@@ -467,7 +467,7 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 				}
 
 				printf('<tr>
-					<td colspan=3><font size=4>%s</font></td>
+					<td colspan="3"><font size="4">%s</font></td>
 					<td class="number">%s</td>
 					<td></td>
 					<td class="number">%s</td>
@@ -484,7 +484,7 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 
 			if ($_POST['Detail']=='Detailed'){
 				printf('<tr>
-					<td colspan=6><font size=4 color=BLUE><b>%s</b></font></td>
+					<td colspan="6"><font size="4" color="blue"><b>%s</b></font></td>
 					</tr>',
 					$Sections[$myrow['sectioninaccounts']]);
 			}
@@ -499,7 +499,7 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 			if ($_POST['Detail']=='Detailed'){
 				$ActGrp = $myrow['groupname'];
 				printf('<tr>
-				<td colspan=6><font size=2 color=BLUE><b>%s</b></font></td>
+				<td colspan="6"><font size="2" color="blue"><b>%s</b></font></td>
 				</tr>',
 				$myrow['groupname']);
 				echo $TableHeader;
