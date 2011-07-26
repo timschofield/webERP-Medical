@@ -518,7 +518,7 @@ if (!isset($_SESSION['SPL']->StkLocation) OR $_SESSION['SPL']->StkLocation==""){
 
 while ($LocnRow=DB_fetch_array($LocnResult)){
 	if ($_SESSION['SPL']->StkLocation == $LocnRow['loccode']){
-		echo '<option selected Value="' . $LocnRow['loccode'] . '">' . $LocnRow['locationname'] . '</option>';
+		echo '<option selected="True" Value="' . $LocnRow['loccode'] . '">' . $LocnRow['locationname'] . '</option>';
 	} else {
 		echo '<option Value="' . $LocnRow['loccode'] . '">' . $LocnRow['locationname'] . '</option>';
 	}
@@ -620,7 +620,7 @@ $result = DB_query($sql,$db, $ErrMsg, $DbgMsg);
 
 while ($myrow=DB_fetch_array($result)){
 	if (isset($_POST['StkCat']) and $myrow['categoryid']==$_POST['StkCat']){
-		echo '<option selected value="'. $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
+		echo '<option selected="True" value="'. $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	} else {
 		echo '<option value="'. $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	}
