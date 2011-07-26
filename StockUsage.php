@@ -64,12 +64,12 @@ $resultStkLocs = DB_query($sql,$db);
 while ($myrow=DB_fetch_array($resultStkLocs)){
 	if (isset($_POST['StockLocation'])){
 		if ($myrow['loccode'] == $_POST['StockLocation']){
-		     echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		     echo '<option selected="True" Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
 		     echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
-		 echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		 echo '<option selected="True" Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		 $_POST['StockLocation']=$myrow['loccode'];
 	} else {
 		 echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
@@ -77,9 +77,9 @@ while ($myrow=DB_fetch_array($resultStkLocs)){
 }
 if (isset($_POST['StockLocation'])){
 	if ('All'== $_POST['StockLocation']){
-	     echo '<option selected Value="All">' . _('All Locations') . '</option>';
+	     echo '<option selected="True" value="All">' . _('All Locations') . '</option>';
 	} else {
-	     echo '<option Value="All">' . _('All Locations') . '</option>';
+	     echo '<option value="All">' . _('All Locations') . '</option>';
 	}
 }
 echo '</select>';
