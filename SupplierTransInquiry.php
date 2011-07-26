@@ -23,12 +23,12 @@ echo '<option Value="All"> All </option>';
 while ($myrow=DB_fetch_array($resultTypes)){
 	if (isset($_POST['TransType'])){
 		if ($myrow['typeid'] == $_POST['TransType']){
-		     echo '<option selected Value="' . $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
+		     echo '<option selected="True" value="' . $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
 		} else {
-		     echo '<option Value="' . $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
+		     echo '<option value="' . $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
 		}
 	} else {
-		     echo '<option Value="' . $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
+		     echo '<option value="' . $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
 	}
 }
 echo '</select></td>';
