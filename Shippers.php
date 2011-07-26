@@ -186,7 +186,7 @@ if (!isset($_GET['delete'])) {
 	}
 
 	echo '<tr><td>'. _('Shipper Name') .':</td>
-	<td><input type="Text" name="ShipperName"'. (in_array('ShipperName',$Errors) ? 'class="inputerror"' : '' ) .
+	<td><input type="text" name="ShipperName"'. (in_array('ShipperName',$Errors) ? 'class="inputerror"' : '' ) .
 		' value="'. $_POST['ShipperName'] .'" size=35 maxlength=40></td></tr>
 
 	</table>
