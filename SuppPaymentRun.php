@@ -279,7 +279,7 @@ If ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 		$DefaultExRate = $_POST['ExRate'];
 	}
 	echo '<tr><td>' . _('Exchange Rate') . ':</td>
-            <td><input type="text" class="number" name="ExRate" maxlength=11 size=12 value=' . $DefaultExRate . '></td></tr>';
+            <td><input type="text" class="number" name="ExRate" maxlength="11" size="12" value="' . $DefaultExRate . '" /></td></tr>';
 
 	if (!isset($_POST['AmountsDueBy'])){
 		$DefaultDate = Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m')+1,0 ,Date('y')));
@@ -288,7 +288,7 @@ If ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 	}
 
 	echo '<tr><td>' . _('Payments Due To') . ':</td>
-            <td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="AmountsDueBy" maxlength=11 size=12 value=' . $DefaultDate . '></td></tr>';
+            <td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="AmountsDueBy" maxlength="11" size="12" value="' . $DefaultDate . '" /></td></tr>';
 
 	$SQL = "SELECT bankaccountname, accountcode FROM bankaccounts";
 
@@ -346,7 +346,7 @@ Payment types can be modified by editing that file */
 	}
 
 	echo '<tr><td>' . _('Starting Reference no (eg chq no)') . ':</td>
-            <td><input type="text" name="Ref" maxlength=11 size=12 value=' . $_POST['Ref'] . '></td></tr>';
+            <td><input type="text" name="Ref" maxlength="11" size="12" value="' . $_POST['Ref'] . '" /></td></tr>';
 
 	echo '</table><br /><div class="centre"><input type="submit" name="PrintPDF" Value="' . _('Print PDF Only') . '">
                 <input type="submit" name="PrintPDFAndProcess" value="' . _('Print and Process Payments') . '" /></div>';
