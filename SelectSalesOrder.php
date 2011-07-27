@@ -464,7 +464,7 @@ if (!isset($StockID)) {
 	$result1 = DB_query($SQL,$db);
 
 	echo '<br /><table class="selection">';
-	echo '<tr><th colspan=6><font size=3 color=navy>' . _('To search for sales orders for a specific part use the part selection facilities below');
+	echo '<tr><th colspan="6"><font size="3" color="navy">' . _('To search for sales orders for a specific part use the part selection facilities below');
 	echo '</th></tr>';
 	echo '<tr>
       		<td><font size="1">' . _('Select a stock category') . ':</font>
@@ -475,12 +475,12 @@ if (!isset($StockID)) {
 	}
 
       echo '</select>
-      		<td><font size=1>' . _('Enter text extract(s) in the description') . ':</font></td>
-      		<td><input type="text" name="Keywords" size=20 maxlength=25></td>
+      		<td><font size="1">' . _('Enter text extract(s) in the description') . ':</font></td>
+      		<td><input type="text" name="Keywords" size="20" maxlength="25" /></td>
 	</tr>
       	<tr><td></td>
-      		<td><font size="3"><b>' . _('OR') . ' </b></font><font size=1>' . _('Enter extract of the Stock Code') . '</b>:</font></td>
-      		<td><input type="text" name="StockCode" size=15 maxlength=18></td>
+      		<td><font size="3"><b>' . _('OR') . ' </b></font><font size="1">' . _('Enter extract of the Stock Code') . '</b>:</font></td>
+      		<td><input type="text" name="StockCode" size="15" maxlength="18" /></td>
       	</tr>
       </table>';
 	echo '<br /><input type="submit" name="SearchParts" value="' . _('Search Parts Now') .
