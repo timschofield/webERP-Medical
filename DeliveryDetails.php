@@ -1023,13 +1023,13 @@ echo '<tr>
 
 echo '<tr>
 	<td>'. _('Contact Phone Number') .':</td>
-	<td><input type="text" size=25 maxlength=25 name="PhoneNo" value="' . $_SESSION['Items'.$identifier]->PhoneNo . '"></td>
+	<td><input type="text" size="25" maxlength="25" name="PhoneNo" value="' . $_SESSION['Items'.$identifier]->PhoneNo . '" /></td>
 </tr>';
 
 echo '<tr><td>' . _('Contact Email') . ':</td><td><input type="text" size=40 maxlength=38 name="Email" value="' . $_SESSION['Items'.$identifier]->Email . '"></td></tr>';
 
 echo '<tr><td>'. _('Customer Reference') .':</td>
-	<td><input type="text" size=25 maxlength=25 name="CustRef" value="' . $_SESSION['Items'.$identifier]->CustRef . '"></td>
+	<td><input type="text" size="25" maxlength="25" name="CustRef" value="' . $_SESSION['Items'.$identifier]->CustRef . '" /></td>
 </tr>';
 
 echo '<tr>
