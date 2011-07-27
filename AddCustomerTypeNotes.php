@@ -182,14 +182,14 @@ if (!isset($_GET['delete'])) {
 	echo '<tr><td>'._('Contact Group Note').':</td>';
 	echo '<td><textarea name="note">'. $_POST['note'].'</textarea></td></tr>';
 	echo '<tr><td>'. _('Web site').':</td>';
-	echo '<td><input type="text" name="href" value="'. $_POST['href'].'" size=35 maxlength=100></td></tr>
+	echo '<td><input type="text" name="href" value="'. $_POST['href'].'" size="35" maxlength="100" /></td></tr>
 		<tr><td>'. _('Date').':</td>';
 	echo '<td><input type="text" name="date" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" value="'. $_POST['date'].
-		'" size=10 maxlength=10></td></tr>';
+		'" size="10" maxlength="10" /></td></tr>';
 	echo '<tr><td>'. _('Priority').':</td>';
-	echo '<td><input type="text" name="priority" value="'. $_POST['priority'].'" size=1 maxlength=3></td></td>
+	echo '<td><input type="text" name="priority" value="'. $_POST['priority'].'" size="1" maxlength="3" /></td></td>
 	</table>';
-	echo '<br /><div class="centre"><input type="submit" name="submit" value="'. _('Enter Information').'"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="submit" value="'. _('Enter Information').'" /></div>';
 
 	echo '</form>';
 
