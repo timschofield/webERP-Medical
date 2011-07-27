@@ -233,7 +233,7 @@ echo '<table class="selection">';
 if ($Serialised==1 AND $NextSerialNo>0){
 	echo '<tr><td>' . _('Add A Number of New Serial Numbers');
 	echo ':</td>
-		<td><input type="text" name="NumberToAdd" size=10 class="number" maxlength=10 value="1"></td>
+		<td><input type="text" name="NumberToAdd" size="10" class="number" maxlength="10" value="1" /></td>
 		<td>' . _('Starting at') . ':</td><td align="right">' . $NextSerialNo . '</td>';
 } else {
 	//Need to allow entry of batch or serial number and its a batch a quantity too for individual entry
@@ -248,13 +248,13 @@ if ($Serialised==1 AND $NextSerialNo>0){
 	}
 	echo '<td><input type="text" name="Reference" maxlength="30" size="30"></td>';
 	if ($Serialised==0){ //also need to add the quantity
-		echo '<td><input type="text" name="Quantity" size=10 class="number" maxlength=10 value="1"></td>';
+		echo '<td><input type="text" name="Quantity" size="10" class="number" maxlength="10" value="1" /></td>';
 	} else { //it will be 1 for a serial item
 		echo '<input type="hidden" name="Quantity" value=1>';
 	}
 }
 
-echo '<td><input type="submit" name="AddControlledItems" value="' . _('Add') . '"></td></tr>
+echo '<td><input type="submit" name="AddControlledItems" value="' . _('Add') . '" /></td></tr>
 	</table><br />';
 
 $sql = "SELECT serialno,
