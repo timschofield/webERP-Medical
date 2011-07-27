@@ -70,12 +70,14 @@ if (!isset($_POST['ProcessGoodsReceived'])) {
 		$_POST['DefaultReceivedDate'] = Date($_SESSION['DefaultDateFormat']);
 	}
 
-	echo '<table class="selection"><tr><td>'. _('Date Goods/Service Received'). ':</td><td><input type="text" class="date" alt="'.
-		$_SESSION['DefaultDateFormat'] .'" maxlength=10 size=10 onChange="return isDate(this, this.value, '."'".
-			$_SESSION['DefaultDateFormat']."'".')" name=DefaultReceivedDate value="' . $_POST['DefaultReceivedDate'] .
-				'"></td></tr></table><br />';
+	echo '<table class="selection">
+			<tr>
+				<td>'. _('Date Goods/Service Received'). ':</td>
+				<td><input type="text" class="date" alt="'. $_SESSION['DefaultDateFormat'] .'" maxlength="10" size="10" onChange="return isDate(this, this.value, '."'". $_SESSION['DefaultDateFormat']."'".')" name=DefaultReceivedDate value="' . $_POST['DefaultReceivedDate'] .'" /></td>
+			</tr>
+		</table><br />';
 
-	echo '<table cellpadding=2 class="selection">
+	echo '<table cellpadding="2" class="selection">
 					<tr><th>' . _('Item Code') . '</th>
 							<th>' . _('Description') . '</th>
 							<th>' . _('Quantity') . '<br />' . _('Ordered') . '</th>
@@ -125,15 +127,15 @@ if (count($_SESSION['PO']->LineItems)>0 and !isset($_POST['ProcessGoodsReceived'
 		$DisplayPrice = number_format($LnItm->Price,2);
 
 		$SupplierUomSQL="SELECT unitsofmeasure.unitname,
-															conversionfactor,
-															suppliersuom,
-															max(effectivefrom)
-												FROM purchdata
-												LEFT JOIN unitsofmeasure
-												ON purchdata.suppliersuom=unitsofmeasure.unitid
-												WHERE supplierno='".$_SESSION['PO']->SupplierID."'
-												AND stockid='".$LnItm->StockID."'
-												GROUP BY unitsofmeasure.unitname";
+								conversionfactor,
+								suppliersuom,
+								max(effectivefrom)
+							FROM purchdata
+							LEFT JOIN unitsofmeasure
+								ON purchdata.suppliersuom=unitsofmeasure.unitid
+							WHERE supplierno='".$_SESSION['PO']->SupplierID."'
+								AND stockid='".$LnItm->StockID."'
+							GROUP BY unitsofmeasure.unitname";
 
 		$SupplierUOMResult=DB_query($SupplierUomSQL, $db);
 		if (DB_num_rows($SupplierUOMResult)>0) {
@@ -159,10 +161,11 @@ if (count($_SESSION['PO']->LineItems)>0 and !isset($_POST['ProcessGoodsReceived'
 
 		if ($LnItm->Controlled == 1) {
 
-			echo '<input type="hidden" name="RecvQty_' . $LnItm->LineNo . '" value="' . $LnItm->ReceiveQty . '"><a href="GoodsReceivedControlled.php?LineNo=' . $LnItm->LineNo . '" />' . number_format($LnItm->ReceiveQty,$LnItm->DecimalPlaces) . '</a></td>';
+			echo '<input type="hidden" name="RecvQty_' . $LnItm->LineNo . '" value="' . $LnItm->ReceiveQty . '" />
+					<a href="GoodsReceivedControlled.php?LineNo=' . $LnItm->LineNo . '" />' . number_format($LnItm->ReceiveQty,$LnItm->DecimalPlaces) . '</a></td>';
 
 		} else {
-			echo '<input type="text" class="number" name="RecvQty_' . $LnItm->LineNo . '" maxlength=10 size=10 value="' . $LnItm->ReceiveQty . '"></td>';
+			echo '<input type="text" class="number" name="RecvQty_' . $LnItm->LineNo . '" maxlength="10" size="10" value="' . $LnItm->ReceiveQty . '" /></td>';
 		}
 
 		if ($_SESSION['ShowValueOnGRN']==1) {
@@ -185,9 +188,10 @@ if (count($_SESSION['PO']->LineItems)>0 and !isset($_POST['ProcessGoodsReceived'
 	echo '<script>defaultControl(document.forms[0].RecvQty_'.$LnItm->LineNo.');</script>';
 $DisplayTotal = number_format($_SESSION['PO']->Total,2);
 if ($_SESSION['ShowValueOnGRN']==1) {
-	echo '<tr><td colspan=7 class="number"><b>' . _('Total value of goods received'). '</b></td>
-						<td class="number"><b>'. $DisplayTotal. '</b></td>
-				</tr></table>';
+	echo '<tr>
+			<td colspan="7" class="number"><b>' . _('Total value of goods received'). '</b></td>
+			<td class="number"><b>'. $DisplayTotal. '</b></td>
+		</tr></table>';
 } else {
 	echo '</table>';
 }
@@ -221,9 +225,10 @@ if (count($_SESSION['PO']->LineItems)>0){
 		}
 		if ($OrderLine->ReceiveQty < 0 AND $_SESSION['ProhibitNegativeStock']==1){
 
-			$SQL = "SELECT locstock.quantity FROM
-											locstock WHERE locstock.stockid='" . $OrderLine->StockID . "'
-											AND loccode= '" . $_SESSION['PO']->Location . "'";
+			$SQL = "SELECT locstock.quantity
+						FROM locstock
+						WHERE locstock.stockid='" . $OrderLine->StockID . "'
+							AND loccode= '" . $_SESSION['PO']->Location . "'";
 			$CheckNegResult = DB_query($SQL,$db);
 			$CheckNegRow = DB_fetch_row($CheckNegResult);
 			if ($CheckNegRow[0]+$OrderLine->ReceiveQty<0){
@@ -268,16 +273,16 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 /*Now need to check that the order details are the same as they were when they were read into the Items array. If they have changed then someone else must have altered them */
 // Otherwise if you try to fullfill item quantities separately will give error.
 	$SQL = "SELECT itemcode,
-									glcode,
-									quantityord,
-									quantityrecd,
-									qtyinvoiced,
-									shiptref,
-									jobref
-					FROM purchorderdetails
-					WHERE orderno='" . (int) $_SESSION['PO']->OrderNo . "'
+					glcode,
+					quantityord,
+					quantityrecd,
+					qtyinvoiced,
+					shiptref,
+					jobref
+				FROM purchorderdetails
+				WHERE orderno='" . (int) $_SESSION['PO']->OrderNo . "'
 					AND completed=0
-					ORDER BY podetailitem";
+				ORDER BY podetailitem";
 
 	$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Could not check that the details of the purchase order had not been changed by another user because'). ':';
 	$DbgMsg = _('The following SQL to retrieve the purchase order details was used');
