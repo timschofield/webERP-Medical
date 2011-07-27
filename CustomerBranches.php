@@ -724,16 +724,16 @@ if (!isset($_GET['delete'])) {
 	}
 	echo '<tr><td>'._('Phone Number').':</td>';
 	if (!isset($_POST['PhoneNo'])) {$_POST['PhoneNo']='';}
-	echo '<td><input tabindex=16 type="text" name="PhoneNo" size=22 maxlength=20 value="'. $_POST['PhoneNo'].'"></td></tr>';
+	echo '<td><input tabindex="16" type="text" name="PhoneNo" size="22" maxlength="20" value="'. $_POST['PhoneNo'].'" /></td></tr>';
 
 	echo '<tr><td>'._('Fax Number').':</td>';
 	if (!isset($_POST['FaxNo'])) {$_POST['FaxNo']='';}
-	echo '<td><input tabindex=17 type="text" name="FaxNo" size=22 maxlength=20 value="'. $_POST['FaxNo'].'"></td></tr>';
+	echo '<td><input tabindex="17" type="text" name="FaxNo" size="22" maxlength="20" value="'. $_POST['FaxNo'].'" /></td></tr>';
 
 	if (!isset($_POST['Email'])) {$_POST['Email']='';}
 	echo '<tr><td>'.(($_POST['Email']) ? '<a href="Mailto:'.$_POST['Email'].'">'._('Email').':</a>' : _('Email').':').'</td>';
 	  //only display email link if there is an email address
-	echo '<td><input tabindex=18 type="text" name="Email" size=56 maxlength=55 value="'. $_POST['Email'].'"></td></tr>';
+	echo '<td><input tabindex="18" type="text" name="Email" size="56" maxlength="55" value="'. $_POST['Email'].'" /></td></tr>';
 
 	echo '<tr><td>'._('Tax Group').':</td>';
 	echo '<td><select tabindex=19 name="TaxGroup">';
