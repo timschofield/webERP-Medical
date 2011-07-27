@@ -542,9 +542,9 @@ if (isset($_POST['PrintPDF']) AND $_POST['Part']!='') {
 	echo '<td><font size 3><b>' . _('OR') . ' ' . '</b></font>' . _('Enter partial') . ' <b>' . _('Stock Code') . '</b>:</td>';
 	echo '<td>';
 	if (isset($_POST['StockCode'])) {
-		echo '<input type="text" name="StockCode" value="' . $_POST['StockCode'] . '" size=15 maxlength=18>';
+		echo '<input type="text" name="StockCode" value="' . $_POST['StockCode'] . '" size="15" maxlength="18" />';
 	} else {
-		echo '<input type="text" name="StockCode" size=15 maxlength=18>';
+		echo '<input type="text" name="StockCode" size="15" maxlength="18" />';
 	}
 	echo '</td></tr></table><br />';
 	echo '<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '"></div><br /></form>';
