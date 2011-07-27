@@ -182,23 +182,23 @@ if (!isset($_GET['delete'])) {
 	}
 	echo '<tr><td>'. _('WWW').'</td>';
 	if (isset($_POST['href'])) {
-		echo '<td><input type="text" name="href" value="'.$_POST['href'].'" size=35 maxlength=100></td></tr>';
+		echo '<td><input type="text" name="href" value="'.$_POST['href'].'" size="35" maxlength="100" /></td></tr>';
 	} else {
-		echo '<td><input type="text" name="href" size=35 maxlength=100></td></tr>';
+		echo '<td><input type="text" name="href" size="35" maxlength="100" /></td></tr>';
 	}
 	echo '<tr><td>' . _('Date') .'</td>';
 	if (isset($_POST['date'])) {
-		echo '<td><input type="text" name="date" value="'.ConvertSQLDate($_POST['date']).'" size=10 maxlength=10></td></tr>';
+		echo '<td><input type="text" name="date" value="'.ConvertSQLDate($_POST['date']).'" size="10" maxlength="10" /></td></tr>';
 	} else {
-		echo '<td><input type="text" name="date" size=10 maxlength=10></td></tr>';
+		echo '<td><input type="text" name="date" size="10" maxlength="10" /></td></tr>';
 	}
 	echo '<tr><td>'. _('Priority'). '</td>';
 	if (isset($_POST['priority'])) {
-		echo '<td><input type="text" name="priority" value="' .$_POST['priority']. '" size=1 maxlength=3></td></td>';
+		echo '<td><input type="text" name="priority" value="' .$_POST['priority']. '" size="1" maxlength="3" /></td></td>';
 	} else {
-		echo '<td><input type="text" name="priority" size=1 maxlength=3></td></td>';
+		echo '<td><input type="text" name="priority" size="1" maxlength="3"></td></td>';
 	}
-	echo '<tr><td colspan=2><div class="centre"><input type="submit" name="submit" value="'._('Enter Information').'"></div></td></tr>';
+	echo '<tr><td colspan="2"><div class="centre"><input type="submit" name="submit" value="'._('Enter Information').'"></div></td></tr>';
 	echo '</table>';
 
 	echo '</form>';

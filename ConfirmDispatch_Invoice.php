@@ -323,15 +323,15 @@ foreach ($_SESSION['Items']->LineItems as $LnItm) {
 		if (isset($_POST['ProcessInvoice'])) {
 			echo '<td class="number">' . $LnItm->QtyDispatched . '</td>';
 		} else {
-			echo '<td class="number"><input type="hidden" name="' . $LnItm->LineNumber . '_QtyDispatched"  value="' .
-				$LnItm->QtyDispatched . '"><a href="' . $rootpath .'/ConfirmDispatchControlled_Invoice.php?LineNo='. $LnItm->LineNumber.'">' .$LnItm->QtyDispatched . '</a></td>';
+			echo '<td class="number"><input type="hidden" name="' . $LnItm->LineNumber . '_QtyDispatched"  value="' .$LnItm->QtyDispatched . '" />
+			<a href="' . $rootpath .'/ConfirmDispatchControlled_Invoice.php?LineNo='. $LnItm->LineNumber.'">' .$LnItm->QtyDispatched . '</a></td>';
 		}
 	} else {
 		if (isset($_POST['ProcessInvoice'])) {
 			echo '<td class="number">' .  $LnItm->QtyDispatched . '</td>';
 		} else {
-			echo '<td class="number"><input tabindex="'.$j.'" type="text" class="number" name="' . $LnItm->LineNumber .
-				'_QtyDispatched" maxlength=12 size=12 value="' . $LnItm->QtyDispatched . '"></td>';
+			echo '<td class="number">
+			<input tabindex="'.$j.'" type="text" class="number" name="' . $LnItm->LineNumber . '_QtyDispatched" maxlength="12" size="12" value="' . $LnItm->QtyDispatched . '" /></td>';
 		}
 	}
 	$DisplayDiscountPercent = number_format($LnItm->DiscountPercent*100,2) . '%';
@@ -369,7 +369,7 @@ foreach ($_SESSION['Items']->LineItems as $LnItm) {
 			echo  $Tax->TaxRate*100;
 		} else {
 			echo '<input type="text" class="number" name="' . $LnItm->LineNumber . $Tax->TaxCalculationOrder .
-				'_TaxRate" maxlength=4 size=4 value="' . $Tax->TaxRate*100 . '">';
+				'_TaxRate" maxlength="4" size="4" value="' . $Tax->TaxRate*100 . '">';
 		}
 		$i++;
 		if ($Tax->TaxOnTax ==1){
@@ -405,7 +405,7 @@ foreach ($_SESSION['Items']->LineItems as $LnItm) {
 	echo '</tr>';
 	if (mb_strlen($LnItm->Narrative)>1){
 		$narrative=str_replace('\r\n','<br />', $LnItm->Narrative);
-		echo $RowStarter . '<td colspan=12>' . stripslashes($narrative) . '</td></tr>';
+		echo $RowStarter . '<td colspan="12">' . stripslashes($narrative) . '</td></tr>';
 	}
 }//end foreach ($line)
 
@@ -1650,19 +1650,19 @@ invoices can have a zero amount but there must be a quantity to invoice */
 	$j++;
 	echo '<tr>
 		<td>' . _('Consignment Note Ref'). ':</td>
-		<td><input tabindex='.$j.' type="text" maxlength=15 size=15 name=Consignment value="' . $_POST['Consignment'] . '"></td>
+		<td><input tabindex='.$j.' type="text" maxlength="15" size="15" name="Consignment" value="' . $_POST['Consignment'] . '" /></td>
 	</tr>';
 	$j++;
 	echo '<tr>
 		<td>'._('Action For Balance'). ':</td>
-		<td><select tabindex='.$j.' name=BOPolicy>
+		<td><select tabindex="'.$j.'" name="BOPolicy">
 			<option selected="True" value="BO">'._('Automatically put balance on back order') . '</option>
 			<option value="CAN">'._('Cancel any quantities not delivered') . '</option>'.'</select></td>
 	</tr>';
 	$j++;
 	echo '<tr>
 		<td>' ._('Invoice Text'). ':</td>
-		<td><textarea tabindex="'.$j.'" name="InvoiceText" COLS="31" ROWS="5">' . reverse_escape($_POST['InvoiceText']) . '</textarea></td>
+		<td><textarea tabindex="'.$j.'" name="InvoiceText" cols="31" rows="5">' . reverse_escape($_POST['InvoiceText']) . '</textarea></td>
 	</tr>';
 
 	$j++;
