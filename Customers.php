@@ -1012,8 +1012,8 @@ if (!isset($DebtorNo)) {
 		echo '<div class="centre"><input type="submit" name="submit" value="' . _('Add New Customer') . '" />&nbsp;
 				<input type="submit" name="reset" value="' . _('Reset') . '" /></div></form>';
 	} else if (!isset($_GET['Modify'])){
-		echo '<br /><div class="centre"><input type="Submit" name="submit" value="' . _('Update Customer') . '" />';
-		echo '&nbsp;<input type="Submit" name="delete" value="' . _('Delete Customer') . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');" /></div></form>';
+		echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Update Customer') . '" />';
+		echo '&nbsp;<input type="submit" name="delete" value="' . _('Delete Customer') . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');" /></div></form>';
 	} else {
 		echo '</form>';
 	}
