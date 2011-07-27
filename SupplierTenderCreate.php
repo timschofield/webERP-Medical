@@ -341,28 +341,28 @@ if (!isset($_SESSION['tender']) or isset($_POST['LookupDeliveryAddress']) or $Sh
 	/* Display the details of the delivery location
 	 */
 	echo '<tr><td>' . _('Delivery Contact') . ':</td>
-		<td><input type="text" name="Contact" size="41"  value="' . $_SESSION['tender']->Contact . '"></td>
+		<td><input type="text" name="Contact" size="41"  value="' . $_SESSION['tender']->Contact . '" /></td>
 		</tr>';
 	echo '<tr><td>' . _('Address') . ' 1 :</td>
-		<td><input type="text" name="DelAdd1" size="41" maxlength="40" value="' . $_POST['DelAdd1'] . '"></td>
+		<td><input type="text" name="DelAdd1" size="41" maxlength="40" value="' . $_POST['DelAdd1'] . '" /></td>
 		</tr>';
 	echo '<tr><td>' . _('Address') . ' 2 :</td>
-		<td><input type="text" name="DelAdd2" size="41" maxlength="40" value="' . $_POST['DelAdd2'] . '"></td>
+		<td><input type="text" name="DelAdd2" size="41" maxlength="40" value="' . $_POST['DelAdd2'] . '" /></td>
 		</tr>';
 	echo '<tr><td>' . _('Address') . ' 3 :</td>
-		<td><input type="text" name="DelAdd3" size="41" maxlength="40" value="' . $_POST['DelAdd3'] . '"></td>
+		<td><input type="text" name="DelAdd3" size="41" maxlength="40" value="' . $_POST['DelAdd3'] . '" /></td>
 		</tr>';
 	echo '<tr><td>' . _('Address') . ' 4 :</td>
-		<td><input type="text" name="DelAdd4" size="21" maxlength="20" value="' . $_POST['DelAdd4'] . '"></td>
+		<td><input type="text" name="DelAdd4" size="21" maxlength="20" value="' . $_POST['DelAdd4'] . '" /></td>
 		</tr>';
 	echo '<tr><td>' . _('Address') . ' 5 :</td>
-		<td><input type="text" name="DelAdd5" size="16" maxlength="15" value="' . $_POST['DelAdd5'] . '"></td>
+		<td><input type="text" name="DelAdd5" size="16" maxlength="15" value="' . $_POST['DelAdd5'] . '" /></td>
 		</tr>';
 	echo '<tr><td>' . _('Address') . ' 6 :</td>
-		<td><input type="text" name="DelAdd6" size="16" maxlength=15 value="' . $_POST['DelAdd6'] . '"></td>
+		<td><input type="text" name="DelAdd6" size="16" maxlength="15" value="' . $_POST['DelAdd6'] . '" /></td>
 		</tr>';
 	echo '<tr><td>' . _('Phone') . ':</td>
-		<td><input type="text" name="Tel" size="31" maxlength="30" value="' . $_SESSION['tender']->Telephone . '"></td>
+		<td><input type="text" name="Tel" size="31" maxlength="30" value="' . $_SESSION['tender']->Telephone . '" /></td>
 		</tr>';
 	echo '</table><br />';
 
@@ -498,9 +498,9 @@ if (isset($_POST['Suppliers'])) {
 	}
 	echo '</td><td><b>' . _('OR') . '</b></font></td><td>' . _('Enter a partial Code') . ':</font></td><td>';
 	if (isset($_POST['SupplierCode'])) {
-		echo '<input type="text" name="SupplierCode" value="' . $_POST['SupplierCode'] . '" size=15 maxlength=18>';
+		echo '<input type="text" name="SupplierCode" value="' . $_POST['SupplierCode'] . '" size="15" maxlength="18" />';
 	} else {
-		echo '<input type="text" name="SupplierCode" size=15 maxlength=18>';
+		echo '<input type="text" name="SupplierCode" size="15" maxlength="18" />';
 	}
 	echo '</td></tr></table><br /><div class="centre"><input type="submit" name="SearchSupplier" value="' . _('Search Now') . '"></div>';
 	echo '</form>';
