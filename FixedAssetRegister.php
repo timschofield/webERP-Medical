@@ -283,9 +283,10 @@ if (isset($_POST['submit']) or isset($_POST['pdf']) or isset($_POST['csv'])) {
 		$_POST['ToDate'] = date($_SESSION['DefaultDateFormat']);
 	}
 
-	echo '<tr><th>' . _(' From Date') . "</th><td><input type='text' class='date' alt='" . $_SESSION['DefaultDateFormat'] . "' name='FromDate' maxlength=10 size=11 value='" . $_POST['FromDate'] . "'></td>";
+	echo '<tr><th>' . _(' From Date') . '</th>
+			<td><input type="text" class="date" alt="' . $_SESSION['DefaultDateFormat'] . '" name="FromDate" maxlength="10" size="11" value="' . $_POST['FromDate'] . '"></td>';
 	echo '</tr>';
-	echo '<tr><th>' . _('To Date ') . "</th><td><input type='text' class='date' alt='" . $_SESSION['DefaultDateFormat'] . "' name='ToDate' maxlength=10 size=11 value='" . $_POST['ToDate'] . "'></td>";
+	echo '<tr><th>' . _('To Date ') . '</th><td><input type="text" class="date" alt="' . $_SESSION['DefaultDateFormat'] . '" name="ToDate" maxlength="10" size="11" value="' . $_POST['ToDate'] . '"></td>';
 	echo '</tr>';
 
 	echo '</table><br />';
