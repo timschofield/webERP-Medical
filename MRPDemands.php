@@ -375,10 +375,14 @@ function display(&$db,&$StockID,&$DemandID) { //####DISPLAY_DISPLAY_DISPLAY_DISP
 			$_POST['Duedate']=' ';
 		}
 
-		echo '<tr><td>' . _('Quantity') . ':</td><td><input type="text" name="Quantity" class="number" size=6
-			maxlength=6 value="' . $_POST['Quantity'] . '"></td></tr><tr><td>' . _('Due Date') . ':</td>
-			<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="Duedate" size=12
-			maxlength=12 value="' . $_POST['Duedate'] . '"></td></tr>';
+		echo '<tr>
+				<td>' . _('Quantity') . ':</td>
+				<td><input type="text" name="Quantity" class="number" size="6" maxlength="6" value="' . $_POST['Quantity'] . '"></td>
+			</tr>
+			<tr>
+				<td>' . _('Due Date') . ':</td>
+				<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="Duedate" size="12" maxlength="12" value="' . $_POST['Duedate'] . '" /></td>
+			</tr>';
 		// Generate selections for Demand Type
 		echo '<tr><td>' . _('Demand Type') . '</td><td><select name="MRPDemandtype">';
 		$sql = "SELECT mrpdemandtype,
@@ -395,7 +399,7 @@ function display(&$db,&$StockID,&$DemandID) { //####DISPLAY_DISPLAY_DISPLAY_DISP
 		echo '</select></td></tr>';
 
 		echo '</table>';
-		echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '">&nbsp&nbsp';
+		echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" />&nbsp&nbsp';
 		echo '<input type="submit" name="listsome" value="' . _('List Selection') . '">&nbsp&nbsp';
 		echo '<input type="submit" name="deletesome" value="' . _('Delete Demand Type') . '">';
 		// If mrpdemand record exists, display option to delete it
