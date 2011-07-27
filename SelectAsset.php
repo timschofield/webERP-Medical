@@ -94,12 +94,12 @@ echo '</select>';
 echo '  </td><td><b>' . _('OR') . ' ' . '</b>' . _('Enter partial asset code') . '</b>:</td>';
 echo '<td>';
 if (isset($_POST['AssetCode'])) {
-	echo '<input type="text" class="number" name="AssetCode" value="' . $_POST['AssetCode'] . '" size=15 maxlength=13>';
+	echo '<input type="text" class="number" name="AssetCode" value="' . $_POST['AssetCode'] . '" size="15" maxlength="13" />';
 } else {
-	echo '<input type="text" name="AssetCode" size=15 maxlength=13>';
+	echo '<input type="text" name="AssetCode" size="15" maxlength="13" />';
 }
 echo '</td></tr></table><br />';
-echo '<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '"></div><br /></form>';
+echo '<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" /></div><br /></form>';
 echo '<script  type="text/javascript">defaultControl(document.forms[0].Keywords);</script>';
 echo '</form>';
 // query for list of record(s)
