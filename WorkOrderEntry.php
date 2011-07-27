@@ -470,16 +470,19 @@ if (!isset($_POST['StartDate'])){
 	$_POST['StartDate'] = Date($_SESSION['DefaultDateFormat']);
 }
 
-echo '<tr><td class="label">' . _('Start Date') . ':</td><td><input type="text" name="StartDate" size=12 maxlength=12 value="' . $_POST['StartDate'] .
-			'" class="date" alt="'.$_SESSION['DefaultDateFormat'].'"></td></tr>';
+echo '<tr>
+		<td class="label">' . _('Start Date') . ':</td>
+		<td><input type="text" name="StartDate" size="12" maxlength="12" value="' . $_POST['StartDate'] .'" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" /></td>
+	</tr>';
 
 if (!isset($_POST['RequiredBy'])){
 	$_POST['RequiredBy'] = Date($_SESSION['DefaultDateFormat']);
 }
 
-echo '<tr><td class="label">' . _('Required By') . ':</td>
-		  <td><input type="text" name="RequiredBy"  size=12 maxlength=12 value="' . $_POST['RequiredBy'] .
-			'" class="date" alt="'.$_SESSION['DefaultDateFormat'].'"></td></tr>';
+echo '<tr>
+		<td class="label">' . _('Required By') . ':</td>
+		<td><input type="text" name="RequiredBy" size="12" maxlength="12" value="' . $_POST['RequiredBy'] .'" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" /></td>
+	</tr>';
 
 if (isset($WOResult)){
 	echo '<tr><td class="label">' . _('Accumulated Costs') . ':</td>
@@ -510,7 +513,7 @@ if (isset($NumberOfOutputs)){
 			echo '<td style="text-align: right">' . $_POST['OutputQty' . $i] . '</td>';
 			echo '<input type="hidden" name="OutputQty' . $i .'" value=' . $_POST['OutputQty' . $i] . '>';
 		} else {
-		  	echo'<td><input type="text" class="number" name="OutputQty' . $i . '" value=' . $_POST['OutputQty' . $i] . ' size=10 maxlength=10></td>';
+		  	echo'<td><input type="text" class="number" name="OutputQty' . $i . '" value="' . $_POST['OutputQty' . $i] . '" size="10" maxlength="10" /></td>';
 		}
 		 echo '<td class="number"><input type="hidden" name="RecdQty' . $i . '" value=' . $_POST['RecdQty' .$i] . '>' . $_POST['RecdQty' .$i] .'</td>
 		  		<td class="number">' . ($_POST['OutputQty' . $i] - $_POST['RecdQty' .$i]) . '</td>';
