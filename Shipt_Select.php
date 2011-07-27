@@ -162,21 +162,21 @@ while ($myrow1 = DB_fetch_array($result1)) {
 }
 ?>
 </select>
-<td><font size=1><?php echo _('Enter text extracts in the');?> <b><?php echo _('description');?></b>:</font></td>
-<td><input type="text" name="Keywords" size=20 maxlength=25></td></tr>
+<td><font size="1"><?php echo _('Enter text extracts in the');?> <b><?php echo _('description');?></b>:</font></td>
+<td><input type="text" name="Keywords" size="20" maxlength="25" /></td></tr>
 <tr><td></td>
-<td><font SIZE 3><b><?php echo _('OR');?> </b></font><font size=1><?php echo _('Enter extract of the');?> <b><?php echo _('Stock Code');?></b>:</font></td>
-<td><input type="text" name="StockCode" size=15 maxlength=18></td>
+<td><font size="3"><b><?php echo _('OR');?> </b></font><font size="1"><?php echo _('Enter extract of the');?> <b><?php echo _('Stock Code');?></b>:</font></td>
+<td><input type="text" name="StockCode" size="15" maxlength="18" /></td>
 </tr>
 </table><br />
 
 <?php
-echo '<div class="centre"><input type="submit" name="SearchParts" value="'._('Search Parts Now').'">';
-echo '<input type="submit" name="ResetPart" value="'. _('Show All') .'"></div><br />';
+echo '<div class="centre"><input type="submit" name="SearchParts" value="'._('Search Parts Now').'" />';
+echo '<input type="submit" name="ResetPart" value="'. _('Show All') .'" /></div><br />';
 
 if (isset($StockItemsResult)) {
 
-	echo '<table cellpadding=2 colspan=7 class="selection">';
+	echo '<table cellpadding="2" colspan="7" class="selection">';
 	$TableHeader = '<tr>
 			<th>'. _('Code').'</th>
 			<th>'. _('Description').'</th>
