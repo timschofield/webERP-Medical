@@ -135,9 +135,9 @@ if (!isset($_POST['Amount'])) {
 	$_POST['Amount']=0;
 }
 echo '<tr><td>' . _('Amount') . ':</td>
-	<td><input type="text" name="Amount" size=12 maxlength=11 value="' .  $_POST['Amount'] . '"></td></tr>';
+	<td><input type="text" name="Amount" size="12" maxlength="11" value="' .  $_POST['Amount'] . '"></td></tr>';
 echo '<tr><td>' . _('Narrative') . ':</td>
-	<td><input type="text" name="Narrative" size=42 maxlength=40 value="' .  $_POST['Narrative'] . '"></td></tr>';
+	<td><input type="text" name="Narrative" size="42" maxlength="40" value="' .  $_POST['Narrative'] . '"></td></tr>';
 echo '<tr><td>' . _('Aniticpated Cost') . ':</td>
 	<td>';
 if (isset($_POST['AnticipatedCost']) AND $_POST['AnticipatedCost']==1){
@@ -148,7 +148,7 @@ if (isset($_POST['AnticipatedCost']) AND $_POST['AnticipatedCost']==1){
 
 echo '</td></tr></table>';
 
-echo '<input type="Submit" name="AddContractChgToInvoice" value="' . _('Enter Contract Charge') . '">';
+echo '<input type="submit" name="AddContractChgToInvoice" value="' . _('Enter Contract Charge') . '">';
 
 echo '</form>';
 include('includes/footer.inc');
