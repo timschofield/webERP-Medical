@@ -85,11 +85,11 @@ if (!isset($AccountID)) {
 
 	echo '<table cellpadding=3 colspan=4 class="selection">
 		<tr>
-		<td><font size=1>' . _('Enter extract of text in the Account name') .':</font></td>
-		<td><input type="text" name="Keywords" size=20 maxlength=25></td>
-		<td><font size=3><b>' .  _('OR') . '</b></font></td>
-		<td><font size=1>' . _('Enter Account No. to search from') . ':</font></td>
-		<td><input type="text" name="GLCode" size=15 maxlength=18 class="number" ></td>
+		<td><font size="1">' . _('Enter extract of text in the Account name') .':</font></td>
+		<td><input type="text" name="Keywords" size="20" maxlength="25" /></td>
+		<td><font size="3"><b>' .  _('OR') . '</b></font></td>
+		<td><font size="1">' . _('Enter Account No. to search from') . ':</font></td>
+		<td><input type="text" name="GLCode" size="15" maxlength="18" class="number" /></td>
 		</tr>
 		</table><br />';
 
@@ -98,7 +98,7 @@ if (!isset($AccountID)) {
 
 	if (isset($result) and DB_num_rows($result)>0) {
 
-		echo '<br /><table cellpadding=2 colspan=7 class="selection">';
+		echo '<br /><table cellpadding="2" colspan="7" class="selection">';
 
 		$TableHeader = '<tr><th>' . _('Code') . '</th>
 					  <th>' . _('Account Name') . '</th>
