@@ -78,7 +78,7 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 
 	printf('<td>%s</td>
 		<td class="number">%s</td>
-		<td><input type="text" class="number" name=%s maxlength=10 size=10 value=%s></td>',
+		<td><input type="text" class="number" name="%s" maxlength="10" size="10" value="%s" /></td>',
 		$myrow['locationname'],
 		number_format($myrow['quantity'],$myrow['decimalplaces']),
 		$myrow['loccode'],
