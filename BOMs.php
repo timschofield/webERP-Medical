@@ -719,7 +719,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 			echo '<input type="hidden" name="AutoIssue" value="0" />';
 		}
 
-		echo '</table><br /><div class="centre"><input tabindex="8" type="Submit" name="Submit" value="' . _('Enter Information') . '"></form></div>';
+		echo '</table><br /><div class="centre"><input tabindex="8" type="submit" name="Submit" value="' . _('Enter Information') . '" /></form></div>';
 
 	} //end if record deleted no point displaying form to add record
 
