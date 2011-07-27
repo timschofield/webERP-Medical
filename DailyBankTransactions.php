@@ -46,12 +46,12 @@ if (!isset($_POST['Show'])) {
 		echo '</select></td></tr>';
 	}
 	echo '<tr><td>' . _('Transactions Dated From') . ':</td>
-		<td><input type="text" name="FromTransDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" maxlength=10 size=11 onChange="isDate(this, this.value, '."'".$_SESSION['DefaultDateFormat']."'".')" value="' .
-				date($_SESSION['DefaultDateFormat']) . '"></td></tr>
+		<td><input type="text" name="FromTransDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" maxlength="10" size="11" onChange="isDate(this, this.value, '."'".$_SESSION['DefaultDateFormat']."'".')" value="' .
+				date($_SESSION['DefaultDateFormat']) . '" /></td></tr>
 		<tr><td>' . _('Transactions Dated To') . ':</td>
-		<td><input type="text" name="ToTransDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" maxlength=10 size=11
+		<td><input type="text" name="ToTransDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" maxlength="10" size="11"
 			onChange="isDate(this, this.value, '."'".$_SESSION['DefaultDateFormat']."'".')" value="' .
-				date($_SESSION['DefaultDateFormat']) . '"></td>
+				date($_SESSION['DefaultDateFormat']) . '" /></td>
 		</tr>';
 
 	echo '</table>';
