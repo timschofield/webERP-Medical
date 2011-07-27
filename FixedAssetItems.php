@@ -445,11 +445,11 @@ if (!isset($AssetID) or $AssetID=='') {
 	$_POST['DepnRate']  = $AssetRow['depnrate'];
 
 	echo '<tr><td>' . _('Asset Code') . ':</td><td>'.$AssetID.'</td></tr>'. "\n";
-	echo '<input type="Hidden" name="AssetID" value='.$AssetID.'>'. "\n";
+	echo '<input type="hidden" name="AssetID" value='.$AssetID.'>'. "\n";
 
 } else { // some changes were made to the data so don't re-set form variables to DB ie the code above
 	echo '<tr><td>' . _('Asset Code') . ':</td><td>' . $AssetID . '</td></tr>';
-	echo '<input type="Hidden" name="AssetID" value="' . $AssetID . '">';
+	echo '<input type="hidden" name="AssetID" value="' . $AssetID . '">';
 }
 
 if (isset($_POST['Description'])) {
