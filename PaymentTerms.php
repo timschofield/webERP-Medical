@@ -244,7 +244,7 @@ if (!isset($_GET['delete'])) {
 		echo '<input type="hidden" name="SelectedTerms" value="' . $SelectedTerms . '" />';
 		echo '<input type="hidden" name="TermsIndicator" value="' . $_POST['TermsIndicator'] . '" />';
 		echo '<br /><table class="selection">';
-		echo '<tr><th colspan=6><font color=blue size=3>'._('Update Payment Terms.').'</font></th></tr>';
+		echo '<tr><th colspan="6"><font color="blue" size="3">'._('Update Payment Terms.').'</font></th></tr>';
 		echo '<tr><td>' . _('Term Code') . ':</td><td>';
 		echo $_POST['TermsIndicator'] . '</td></tr>';
 
@@ -257,10 +257,10 @@ if (!isset($_GET['delete'])) {
 		if (!isset($_POST['Terms'])) $_POST['Terms']='';
 
 		echo '<table class="selection">';
-		echo '<tr><th colspan=6><font color=blue size=3>'._('New Payment Terms.').'</font></th></tr>';
+		echo '<tr><th colspan="6"><font color="blue" size="3">'._('New Payment Terms.').'</font></th></tr>';
 		echo '<tr><td>' . _('Term Code') . ':</td><td><input type="text" name="TermsIndicator"
 		 ' . (in_array('TermsIndicator',$Errors) ? 'class="inputerror"' : '' ) .' value="' . $_POST['TermsIndicator'] .
-			'" size=3 maxlength=2></td></tr>';
+			'" size="3" maxlength="2" /></td></tr>';
 	}
 
 	echo '<tr><td>'. _('Terms Description'). ':</td>
@@ -277,7 +277,7 @@ if (!isset($_GET['delete'])) {
 			} else {
 			if (isset($DayInFollowingMonth)) {echo $DayInFollowingMonth;}
 			}
-	echo '></td></tr></table><br /><div class="centre"><input type="Submit" name="submit" value="'._('Enter Information').'"></form></div>';
+	echo '></td></tr></table><br /><div class="centre"><input type="submit" name="submit" value="'._('Enter Information').'" /></form></div>';
 } //end if record deleted no point displaying form to add record
 
 include('includes/footer.inc');
