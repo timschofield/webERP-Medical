@@ -255,7 +255,7 @@ echo '<tr><td>' . _('Overhead Per Hour') . ':</td>
 
 echo '</td></tr></table>';
 
-echo '<br /><div class="centre"><input type="Submit" name="submit" value="' . _('Enter Information') . '"></div>';
+echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '"></div>';
 
 if (!isset($_GET['SelectedWC']) or $_GET['SelectedWC']=='') {
 	echo '<script>defaultControl(document.forms[0].Code);</script>';
