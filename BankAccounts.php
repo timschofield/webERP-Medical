@@ -366,7 +366,7 @@ if (isset($SelectedBankAccount)) {
 echo '</select></td>';
 
 echo '</tr></table><br />
-		<div class="centre"><input tabindex="7" type="Submit" name="submit" value="'. _('Enter Information') .'"></div>';
+		<div class="centre"><input tabindex="7" type="submit" name="submit" value="'. _('Enter Information') .'" /></div>';
 
 echo '</form>';
 include('includes/footer.inc');
