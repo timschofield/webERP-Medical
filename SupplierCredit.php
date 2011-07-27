@@ -288,9 +288,9 @@ if (!isset($_SESSION['SuppTrans']->TranDate)){
 	$_SESSION['SuppTrans']->TranDate= Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m'),Date('d')-1,Date('y')));
 }
 echo '<td><font color=red>' . _('Credit Note Date') . ' (' . _('in format') . ' ' . $_SESSION['DefaultDateFormat'] . ') :</font></td>
-		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat']. '" size=11 maxlength=10 name="TranDate" value="' . $_SESSION['SuppTrans']->TranDate . '"></td>';
+		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat']. '" size="11" maxlength="10" name="TranDate" value="' . $_SESSION['SuppTrans']->TranDate . '" /></td>';
 echo '<td><font color=red>' . _('Exchange Rate') . ':</font></td>
-		<td><input type="text" class="number" size=11 maxlength=10 name="ExRate" value="' . $_SESSION['SuppTrans']->ExRate . '"></td></tr>';
+		<td><input type="text" class="number" size="11" maxlength="10" name="ExRate" value="' . $_SESSION['SuppTrans']->ExRate . '" /></td></tr>';
 echo '</table>';
 
 echo '<br /><div class="centre"><input type="submit" name="GRNS" value="' . _('Purchase Orders') . '"> ';
@@ -554,7 +554,7 @@ foreach ($_SESSION['SuppTrans']->Taxes as $Tax) {
 		echo  ' <input type="hidden" name=TaxRate' . $Tax->TaxCalculationOrder . ' value="' . $_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxRate * 100 . '" />';
 
 
-		echo '</td><td><input type="text" class="number" size=12 maxlength=12 name="TaxAmount'  . $Tax->TaxCalculationOrder . '"  value=' . round($_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount,2) . '>';
+		echo '</td><td><input type="text" class="number" size="12" maxlength="12" name="TaxAmount'  . $Tax->TaxCalculationOrder . '"  value="' . round($_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount,2) . '" />';
 
 	}
 
