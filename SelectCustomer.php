@@ -322,28 +322,28 @@ echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/
 echo '<table cellpadding=3 colspan=4 class="selection">';
 echo '<tr><td colspan=2>' . _('Enter a partial Name') . ':</td><td>';
 if (isset($_POST['Keywords'])) {
-	echo '<input type="text" name="Keywords" value="' . $_POST['Keywords'] . '" size=20 maxlength=25>';
+	echo '<input type="text" name="Keywords" value="' . $_POST['Keywords'] . '" size="20" maxlength="25">';
 } else {
-	echo '<input type="text" name="Keywords" size=20 maxlength=25>';
+	echo '<input type="text" name="Keywords" size="20" maxlength="25" />';
 }
 echo '</td><td><font size=3><b>' . _('OR') . '</b></font></td><td>' . _('Enter a partial Code') . ':</td><td>';
 if (isset($_POST['CustCode'])) {
-	echo '<input type="text" name="CustCode" value="' . $_POST['CustCode'] . '" size=15 maxlength=18>';
+	echo '<input type="text" name="CustCode" value="' . $_POST['CustCode'] . '" size="15" maxlength="18" />';
 } else {
-	echo '<input type="text" name="CustCode" size=15 maxlength=18>';
+	echo '<input type="text" name="CustCode" size="15" maxlength="18" />';
 }
-echo '</td></tr><tr><td><font size=3><b>' . _('OR') . '</b></font></td><td>' . _('Enter a partial Phone Number') . ':</td><td>';
+echo '</td></tr><tr><td><font size="3"><b>' . _('OR') . '</b></font></td><td>' . _('Enter a partial Phone Number') . ':</td><td>';
 if (isset($_POST['CustPhone'])) {
-	echo '<input type="text" name="CustPhone" value="' . $_POST['CustPhone'] . '" size=15 maxlength=18>';
+	echo '<input type="text" name="CustPhone" value="' . $_POST['CustPhone'] . '" size="15" maxlength="18">';
 } else {
-	echo '<input type="text" name="CustPhone" size=15 maxlength=18>';
+	echo '<input type="text" name="CustPhone" size="15" maxlength="18" />';
 }
 echo '</td>';
 echo '<td><font size=3><b>' . _('OR') . '</b></font></td><td>' . _('Enter part of the Address') . ':</td><td>';
 if (isset($_POST['CustAdd'])) {
-	echo '<input type="text" name="CustAdd" value="' . $_POST['CustAdd'] . '" size=20 maxlength=25>';
+	echo '<input type="text" name="CustAdd" value="' . $_POST['CustAdd'] . '" size="20" maxlength="25" />';
 } else {
-	echo '<input type="text" name="CustAdd" size=20 maxlength=25>';
+	echo '<input type="text" name="CustAdd" size="20" maxlength="25" />';
 }
 echo '</td></tr>';
 /* End addded search feature. Gilles Deacur */
