@@ -333,7 +333,7 @@ if (isset($SelectedCategory)) {
 }
 
 echo '</table>';
-echo '<br /><div class="centre"><input type="Submit" name="submit" value="' . _('Submit Information') . '"></div>';
+echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Submit Information') . '"></div>';
 
 echo '</form></p>';
 
