@@ -318,7 +318,7 @@ if (isset($SelectedUser)) {
 
 } else { //end of if $SelectedUser only do the else when a new record is being entered
 
-	echo '<table class="selection"><tr><td>' . _('User Login') . ':</td><td><input type="text" name="UserID" size=22 maxlength=20 ></td></tr>';
+	echo '<table class="selection"><tr><td>' . _('User Login') . ':</td><td><input type="text" name="UserID" size="22" maxlength="20" /></td></tr>';
 
 	/*set the default modules to show to all
 	this had trapped a few people previously*/
@@ -348,13 +348,13 @@ if (!isset($_POST['Email'])) {
 	$_POST['Email']='';
 }
 echo '<tr><td>' . _('Password') . ':</td>
-	<td><input type="password" name="Password" size=22 maxlength=20 value="' . $_POST['Password'] . '"></tr>';
+	<td><input type="password" name="Password" size="22" maxlength="20" value="' . $_POST['Password'] . '" /></tr>';
 echo '<tr><td>' . _('Full Name') . ':</td>
-	<td><input type="text" name="RealName" value="' . $_POST['RealName'] . '" size=36 maxlength=35></td></tr>';
+	<td><input type="text" name="RealName" value="' . $_POST['RealName'] . '" size="36" maxlength="35" /></td></tr>';
 echo '<tr><td>' . _('Telephone No') . ':</td>
-	<td><input type="text" name="Phone" value="' . $_POST['Phone'] . '" size=32 maxlength=30></td></tr>';
+	<td><input type="text" name="Phone" value="' . $_POST['Phone'] . '" size="32" maxlength="30" /></td></tr>';
 echo '<tr><td>' . _('Email Address') .':</td>
-	<td><input type="text" name="Email" value="' . $_POST['Email'] .'" size=32 maxlength=55></td></tr>';
+	<td><input type="text" name="Email" value="' . $_POST['Email'] .'" size="32" maxlength="55" /></td></tr>';
 echo '<tr><td>' . _('Security Role') . ':</td><td><select name="Access">';
 
 foreach ($SecurityRoles as $SecKey => $SecVal) {
