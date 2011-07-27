@@ -136,7 +136,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 			$Cost = $myrow['cost'];
 		}
 		if (DB_num_rows($PriceResult) == 0) {
-			echo _('No Default Price Set in Home Currency');
+			echo _('No Default Price Set in Home Currency') . '</td>';
 			$Price = 0;
 		} else {
 			$PriceRow = DB_fetch_row($PriceResult);
