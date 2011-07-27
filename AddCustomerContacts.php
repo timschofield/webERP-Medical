@@ -205,7 +205,7 @@ if (!isset($_GET['delete'])) {
     } else {
        echo '<td><textarea name="conNotes"></textarea>';
     }
-	echo '<tr><td colspan=2><div class="centre"><input type="Submit" name="submit" value="'. _('Enter Information') . '"></div></td></tr>';
+	echo '<tr><td colspan="2"><div class="centre"><input type="submit" name="submit" value="'. _('Enter Information') . '" /></div></td></tr>';
 	echo '</table>';
 	echo '</form>';
 
