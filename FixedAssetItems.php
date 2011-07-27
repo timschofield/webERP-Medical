@@ -534,9 +534,9 @@ while ($myrow=DB_fetch_array($result)){
 }
  echo '</select><a target="_blank" href="'. $rootpath . '/FixedAssetLocations.php">'.' ' . _('Add Asset Location') . '</a></td></tr>';
 
-echo '<tr><td>' . _('Bar Code') . ':</td><td><input ' . (in_array('BarCode',$Errors) ?  'class="inputerror"' : '' ) .'  type="text" name="BarCode" size=22 maxlength=20 value="' . $_POST['BarCode'] . '"></td></tr>';
+echo '<tr><td>' . _('Bar Code') . ':</td><td><input ' . (in_array('BarCode',$Errors) ?  'class="inputerror"' : '' ) .'  type="text" name="BarCode" size="22" maxlength="20" value="' . $_POST['BarCode'] . '" /></td></tr>';
 
-echo '<tr><td>' . _('Serial Number') . ':</td><td><input ' . (in_array('SerialNo',$Errors) ?  'class="inputerror"' : '' ) .'  type="text" name="SerialNo" size=32 maxlength=30 value="' . $_POST['SerialNo'] . '"></td></tr>';
+echo '<tr><td>' . _('Serial Number') . ':</td><td><input ' . (in_array('SerialNo',$Errors) ?  'class="inputerror"' : '' ) .'  type="text" name="SerialNo" size="32" maxlength="30" value="' . $_POST['SerialNo'] . '" /></td></tr>';
 
 
 echo '<tr><td>' . _('Depreciation Type') . ':</td><td><select name="DepnType">';
@@ -554,11 +554,11 @@ if ($_POST['DepnType']==0){ //straight line
 
 echo '</select></td></tr>';
 
-echo '<tr><td>' . _('Depreciation Rate') . ':</td><td><input ' . (in_array('DepnRate',$Errors) ?  'class="inputerror"' : 'class="number"' ) .'  type="text" name="DepnRate" size=4 maxlength=4 value="' . $_POST['DepnRate'] . '">%</td></tr>';
+echo '<tr><td>' . _('Depreciation Rate') . ':</td><td><input ' . (in_array('DepnRate',$Errors) ?  'class="inputerror"' : 'class="number"' ) .'  type="text" name="DepnRate" size="4" maxlength="4" value="' . $_POST['DepnRate'] . '" />%</td></tr>';
 echo '</table>';
 
 /*Get the last period depreciation (depn is transtype =44) was posted for */
-echo '<br /><table class="selection"><tr><th colspan=2>' . _('Asset Financial Summary') . '</th></tr>';
+echo '<br /><table class="selection"><tr><th colspan="2">' . _('Asset Financial Summary') . '</th></tr>';
 
 if (isset($AssetRow)) {
 	echo '<tr><td>' . _('Accumulated Costs') . ':</td><td class="number">' . number_format($AssetRow['cost'],2) . '</td></tr>';
