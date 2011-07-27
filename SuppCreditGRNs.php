@@ -230,9 +230,9 @@ if (isset($_POST['GRNNo']) AND $_POST['GRNNo']!=''){
 	echo '<tr><td>' . $_POST['GRNNo'] . '</td>
 				<td>' . $myrow['itemcode'] . ' ' . $myrow['itemdescription'] . '</td>
 				<td class="number">' . number_format($myrow['qtyostdg'],2) . '</td>
-				<td><input type="text" name="This_QuantityCredited" Value=' . $myrow['qtyostdg'] . ' size=11 maxlength=10></td>
+				<td><input type="text" name="This_QuantityCredited" Value=' . $myrow['qtyostdg'] . ' size="11" maxlength="10" /></td>
 				<td class="number">' . $myrow['unitprice'] . '</td>
-				<td><input type="text" name="ChgPrice" Value=' . $myrow['unitprice'] . ' size=11 maxlength=10></td>
+				<td><input type="text" name="ChgPrice" Value=' . $myrow['unitprice'] . ' size="11" maxlength="10" /></td>
 			</tr>';
 	echo '</table>';
 
@@ -246,19 +246,19 @@ if (isset($_POST['GRNNo']) AND $_POST['GRNNo']!=''){
 	echo '<br /><div class="centre"><input type="submit" name="AddGRNToTrans" value="' . _('Add to Credit Note') . '" /></div>';
 
 
-	echo '<input type="hidden" name="GRNNumber" value=' . $_POST['GRNNo'] . '>';
-	echo '<input type="hidden" name="ItemCode" value="' . $myrow['itemcode'] . '">';
-	echo '<input type="hidden" name="ItemDescription" value="' . $myrow['itemdescription'] . '">';
-	echo '<input type="hidden" name="QtyRecd" value=' . $myrow['qtyrecd'] . '>';
-	echo '<input type="hidden" name="Prev_QuantityInv" value=' . $myrow['quantityinv'] . '>';
-	echo '<input type="hidden" name="OrderPrice" value=' . $myrow['unitprice'] . '>';
-	echo '<input type="hidden" name="StdCostUnit" value=' . $myrow['stdcostunit'] . '>';
+	echo '<input type="hidden" name="GRNNumber" value="' . $_POST['GRNNo'] . '" />';
+	echo '<input type="hidden" name="ItemCode" value="' . $myrow['itemcode'] . '" />';
+	echo '<input type="hidden" name="ItemDescription" value="' . $myrow['itemdescription'] . '" />';
+	echo '<input type="hidden" name="QtyRecd" value="' . $myrow['qtyrecd'] . '" />';
+	echo '<input type="hidden" name="Prev_QuantityInv" value="' . $myrow['quantityinv'] . '" />';
+	echo '<input type="hidden" name="OrderPrice" value="' . $myrow['unitprice'] . '" />';
+	echo '<input type="hidden" name="StdCostUnit" value="' . $myrow['stdcostunit'] . '" />';
 
-	echo '<input type="hidden" name="JobRef" Value="' . $myrow['jobref'] . '">';
-	echo '<input type="hidden" name="GLCode" Value="' . $myrow['glcode'] . '">';
-	echo '<input type="hidden" name="PODetailItem" Value="' . $myrow['podetailitem'] . '">';
-	echo '<input type="hidden" name="PONo" Value="' . $myrow['orderno'] . '">';
-	echo '<input type="hidden" name="AssetID" Value="' . $myrow['assetid'] . '">';
+	echo '<input type="hidden" name="JobRef" value="' . $myrow['jobref'] . '" />';
+	echo '<input type="hidden" name="GLCode" value="' . $myrow['glcode'] . '" />';
+	echo '<input type="hidden" name="PODetailItem" value="' . $myrow['podetailitem'] . '" />';
+	echo '<input type="hidden" name="PONo" value="' . $myrow['orderno'] . '" />';
+	echo '<input type="hidden" name="AssetID" value="' . $myrow['assetid'] . '" />';
 }
 
 echo '</form>';
