@@ -1003,7 +1003,7 @@ echo '<tr style="outline: 1px solid"><td>' . _('Purchasing Manager Email Address
 
 
 echo '</table>
-		<br /><div class="centre"><input type="Submit" name="submit" value="' . _('Update') . '"></div>
+		<br /><div class="centre"><input type="submit" name="submit" value="' . _('Update') . '"></div>
 	</form>';
 
 include('includes/footer.inc');
