@@ -163,7 +163,7 @@ if (isset($_POST['module'])) {
 		echo '</td></tr>';
 		echo '</table>';
 		echo '<br /><div class="centre">';
-		echo '<input type="Submit" name="submit" value="' . _('Modify') . '">&nbsp;&nbsp;';
+		echo '<input type="submit" name="submit" value="' . _('Modify') . '">&nbsp;&nbsp;';
 		echo '<input type="hidden" name="module" value="' . $_POST['module'] . '">';
 
 		echo '</form>';
@@ -225,8 +225,8 @@ if (isset($_POST['module'])) {
 		echo '</tr></table>';
 		echo '<br />';
 		echo '<div class="centre">';
-		echo '<input type="Submit" name="proceed" value="' . _('Proceed') . '">&nbsp;&nbsp;';
-		echo '<br /><br /><input type="Submit" name="ReMergePO" value="' . _('Refresh messages with latest strings') . '">';
+		echo '<input type="submit" name="proceed" value="' . _('Proceed') . '">&nbsp;&nbsp;';
+		echo '<br /><br /><input type="submit" name="ReMergePO" value="' . _('Refresh messages with latest strings') . '">';
 		echo '</div>';
 		echo '</form>';
 		echo '</td></tr></table>';
