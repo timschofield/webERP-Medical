@@ -173,11 +173,11 @@ if (isset($_SESSION['SupplierID'])) {
 } else {
 	// Supplier is not selected yet
 	echo '<br />';
-	echo '<table width=90% colspan=2 cellpadding=4>';
+	echo '<table width="90%" colspan="2" cellpadding="4">';
 	echo '<tr>
-		<th width=33%>' . _('Supplier Inquiries') . '</th>
-		<th width=33%>' . _('Supplier Transactions') . '</th>
-		<th width=33%>' . _('Supplier Maintenance') . '</th>
+		<th width="33%">' . _('Supplier Inquiries') . '</th>
+		<th width="33%">' . _('Supplier Transactions') . '</th>
+		<th width="33%">' . _('Supplier Maintenance') . '</th>
 		</tr>';
 	echo '<tr><td valign=top class="select">'; /* Inquiry Options */
 	echo '</td><td valign=top class="select">'; /* Supplier Transactions */
@@ -189,17 +189,17 @@ echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') .
 		'" alt="" />' . ' ' . _('Search for Suppliers') . '</p>
-		<table cellpadding=3 colspan=4 class="selection"><tr><td>' . _('Enter a partial Name') . ':</font></td><td>';
+		<table cellpadding="3" colspan="4" class="selection"><tr><td>' . _('Enter a partial Name') . ':</font></td><td>';
 if (isset($_POST['Keywords'])) {
-	echo '<input type="text" name="Keywords" value="' . $_POST['Keywords'] . '" size=20 maxlength=25>';
+	echo '<input type="text" name="Keywords" value="' . $_POST['Keywords'] . '" size="20" maxlength="25" />';
 } else {
-	echo '<input type="text" name="Keywords" size=20 maxlength=25>';
+	echo '<input type="text" name="Keywords" size="20" maxlength="25" />';
 }
 echo '</td><td><b>' . _('OR') . '</b></font></td><td>' . _('Enter a partial Code') . ':</font></td><td>';
 if (isset($_POST['SupplierCode'])) {
-	echo '<input type="text" name="SupplierCode" value="' . $_POST['SupplierCode'] . '" size=15 maxlength=18>';
+	echo '<input type="text" name="SupplierCode" value="' . $_POST['SupplierCode'] . '" size="15" maxlength="18" />';
 } else {
-	echo '<input type="text" name="SupplierCode" size=15 maxlength=18>';
+	echo '<input type="text" name="SupplierCode" size="15" maxlength="18" />';
 }
 echo '</td></tr></table><br /><div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '"></div>';
 //if (isset($result) AND !isset($SingleSupplierReturned)) {
