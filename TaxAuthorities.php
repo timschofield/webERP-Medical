@@ -297,13 +297,13 @@ if (!isset($_POST['BankSwift'])) {
 
 echo '</select></td></tr>';
 echo '<tr><td>' . _('Bank Name') . ':</td>';
-echo '<td><input type="text" name="Bank" size=41 maxlength=40 value="' . $_POST['Bank'] . '"></td></tr>';
+echo '<td><input type="text" name="Bank" size="41" maxlength="40" value="' . $_POST['Bank'] . '" /></td></tr>';
 echo '<tr><td>' . _('Bank Account Type') . ':</td>';
-echo '<td><input type="text" name="BankAccType" size=15 maxlength=20 value="' . $_POST['BankAccType'] . '"></td></tr>';
+echo '<td><input type="text" name="BankAccType" size="15" maxlength="20" value="' . $_POST['BankAccType'] . '" /></td></tr>';
 echo '<tr><td>' . _('Bank Account') . ':</td>';
-echo '<td><input type="text" name="BankAcc" size=21 maxlength=20 value="' . $_POST['BankAcc'] . '"></td></tr>';
+echo '<td><input type="text" name="BankAcc" size="21" maxlength="20" value="' . $_POST['BankAcc'] . '" /></td></tr>';
 echo '<tr><td>' . _('Bank Swift No') . ':</td>';
-echo '<td><input type="text" name="BankSwift" size=15 maxlength=14 value="' . $_POST['BankSwift'] . '"></td></tr>';
+echo '<td><input type="text" name="BankSwift" size="15" maxlength="14" value="' . $_POST['BankSwift'] . '" /></td></tr>';
 
 echo '</table>';
 
