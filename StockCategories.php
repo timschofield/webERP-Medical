@@ -491,35 +491,35 @@ if (! isset($_GET['delete'])) {
 			} else {
 				$HeadingCounter++;
 			}
-			echo '<input type="hidden" name="PropID' . $PropertyCounter .'" value=' . $myrow['stkcatpropid'] . '>';
-			echo '<tr><td><input type="textbox" name="PropLabel' . $PropertyCounter . '" size="50" maxlength="100" value="' . $myrow['label'] . '"></td>
+			echo '<input type="hidden" name="PropID' . $PropertyCounter .'" value="' . $myrow['stkcatpropid'] . '" />';
+			echo '<tr><td><input type="text" name="PropLabel' . $PropertyCounter . '" size="50" maxlength="100" value="' . $myrow['label'] . '"></td>
 						<td><select name="PropControlType' . $PropertyCounter . '">';
 			if ($myrow['controltype']==0){
-				echo '<option selected="True" value=0>' . _('Text Box') . '</option>';
+				echo '<option selected="True" value="0">' . _('Text Box') . '</option>';
 			} else {
-				echo '<option value=0>' . _('Text Box') . '</option>';
+				echo '<option value="0">' . _('Text Box') . '</option>';
 			}
 			if ($myrow['controltype']==1){
-				echo '<option selected="True" value=1>' . _('Select Box') . '</option>';
+				echo '<option selected="True" value="1">' . _('Select Box') . '</option>';
 			} else {
-				echo '<option value=1>' . _('Select Box') . '</option>';
+				echo '<option value="1">' . _('Select Box') . '</option>';
 			}
 			if ($myrow['controltype']==2){
-				echo '<option selected="True" value=2>' . _('Check Box') . '</option>';
+				echo '<option selected="True" value="2">' . _('Check Box') . '</option>';
 			} else {
-				echo '<option value=2>' . _('Check Box') . '</option>';
+				echo '<option value="2">' . _('Check Box') . '</option>';
 			}
 
 			echo '</select></td>
-					<td><input type="textbox" name="PropDefault' . $PropertyCounter . '" value="' . $myrow['defaultvalue'] . '"></td>
+					<td><input type="text" name="PropDefault' . $PropertyCounter . '" value="' . $myrow['defaultvalue'] . '"></td>
 					<td><input type="checkbox" name="PropNumeric' . $PropertyCounter . '"';
 
 			if ($myrow['numericvalue'] ==1){
 				echo 'checked';
 			}
 			echo '"></td>
-					<td><input type="textbox" "name="PropMinimum' . $PropertyCounter . '" value="' . $myrow['minimumvalue'] . '"></td>
-						<td><input type="textbox" name="PropMaximum' . $PropertyCounter . '" value="' . $myrow['maximumvalue'] . '"></td>';
+					<td><input type="text" "name="PropMinimum' . $PropertyCounter . '" value="' . $myrow['minimumvalue'] . '"></td>
+						<td><input type="text" name="PropMaximum' . $PropertyCounter . '" value="' . $myrow['maximumvalue'] . '"></td>';
 			echo '<td align="center"><input type="checkbox" name="PropReqSO' . $PropertyCounter .'"';
 
 			if ($myrow['reqatsalesorder']==1){
@@ -534,24 +534,24 @@ if (! isset($_GET['delete'])) {
 			$PropertyCounter++;
 		} //end loop around defined properties for this category
 		echo '<input type="hidden" name="PropID' . $PropertyCounter .'" value="NewProperty">';
-		echo '<tr><td><input type="textbox" name="PropLabel' . $PropertyCounter . '" size="50" maxlength="100"></td>
+		echo '<tr><td><input type="text" name="PropLabel' . $PropertyCounter . '" size="50" maxlength="100"></td>
 					<td><select name="PropControlType' . $PropertyCounter . '">';
 		echo '<option selected="True" value=0>' . _('Text Box') . '</option>';
 		echo '<option value=1>' . _('Select Box') . '</option>';
 		echo '<option value=2>' . _('Check Box') . '</option>';
 		echo '</select></td>
-				<td><input type="textbox" name="PropDefault' . $PropertyCounter . '"></td>
-				<td><input type="checkbox" name="PropNumeric' . $PropertyCounter . '"></td>
-				<td><input type="textbox" "name="PropMinimum' . $PropertyCounter . '"></td>
-				<td><input type="textbox" name="PropMaximum' . $PropertyCounter . '"></td>
-				<td align="center"><input type="checkbox" name="PropReqSO' . $PropertyCounter .'"></td></tr>';
+				<td><input type="text" name="PropDefault' . $PropertyCounter . '" /></td>
+				<td><input type="checkbox" name="PropNumeric' . $PropertyCounter . '" /></td>
+				<td><input type="text" "name="PropMinimum' . $PropertyCounter . '" /></td>
+				<td><input type="text" name="PropMaximum' . $PropertyCounter . '" /></td>
+				<td align="center"><input type="checkbox" name="PropReqSO' . $PropertyCounter .'" /></td></tr>';
 		echo '</table>';
 		echo '<input type="hidden" name="PropertyCounter" value="' . $PropertyCounter . '" />';
 
 	} /* end if there is a category selected */
 
 
-	echo '<br /><div class="centre"><input type="Submit" name="submit" value="' . _('Enter Information') . '"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '"></div>';
 
 
 	echo '</form>';
