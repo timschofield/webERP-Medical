@@ -351,18 +351,18 @@ echo '<tr><th colspan=3>' . _('Accounts Receivable/Payable Settings') . '</th></
 
 // PastDueDays1
 echo '<tr style="outline: 1px solid"><td>' . _('First Overdue Deadline in (days)') . ':</td>
-	<td><input type="text" class="number" name="X_PastDueDays1" value="' . $_SESSION['PastDueDays1'] . '" size=3 maxlength=3></td>
+	<td><input type="text" class="number" name="X_PastDueDays1" value="' . $_SESSION['PastDueDays1'] . '" size="3" maxlength="3" /></td>
 	<td>' . _('Customer and supplier balances are displayed as overdue by this many days. This parameter is used on customer and supplier enquiry screens and aged listings') . '</td></tr>';
 
 // PastDueDays2
 echo '<tr style="outline: 1px solid"><td>' . _('Second Overdue Deadline in (days)') . ':</td>
-	<td><input type="text" class="number" name="X_PastDueDays2" value="' . $_SESSION['PastDueDays2'] . '" size=3 maxlength=3></td>
+	<td><input type="text" class="number" name="X_PastDueDays2" value="' . $_SESSION['PastDueDays2'] . '" size="3" maxlength="3" /></td>
 	<td>' . _('As above but the next level of overdue') . '</td></tr>';
 
 
 // DefaultCreditLimit
 echo '<tr style="outline: 1px solid"><td>' . _('Default Credit Limit') . ':</td>
-	<td><input type="text" class="number" name="X_DefaultCreditLimit" value="' . $_SESSION['DefaultCreditLimit'] . '" size=12 maxlength=12></td>
+	<td><input type="text" class="number" name="X_DefaultCreditLimit" value="' . $_SESSION['DefaultCreditLimit'] . '" size="12" maxlength="12" /></td>
 	<td>' . _('The default used in new customer set up') . '</td></tr>';
 
 // Check Credit Limits
@@ -534,7 +534,7 @@ echo '<tr style="outline: 1px solid"><td>' . _('Do Freight Calculation') . ':</t
 
 //FreightChargeAppliesIfLessThan
 echo '<tr style="outline: 1px solid"><td>' . _('Apply freight charges if an order is less than') . ':</td>
-	<td><input type="text" class="number" name="X_FreightChargeAppliesIfLessThan" size=12 maxlength=12 value="' . $_SESSION['FreightChargeAppliesIfLessThan'] . '"></td>
+	<td><input type="text" class="number" name="X_FreightChargeAppliesIfLessThan" size="12" maxlength="12" value="' . $_SESSION['FreightChargeAppliesIfLessThan'] . '" /></td>
 	<td>' . _('This parameter is only effective if Do Freight Calculation is set to Yes. If it is set to 0 then freight is always charged. The total order value is compared to this value in deciding whether or not to charge freight') .'</td></tr>';
 
 
