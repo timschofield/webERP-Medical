@@ -60,7 +60,7 @@ if (!isset($_POST['OnHandDate'])){
 }
 
 echo '<td>' . _('On-Hand On Date') . ':</td>
-	<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="OnHandDate" size=12 maxlength=12 value="' . $_POST['OnHandDate'] . '"></td></tr>';
+	<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="OnHandDate" size="12" maxlength="12" value="' . $_POST['OnHandDate'] . '" /></td></tr>';
 echo '<tr><td colspan=6><div class="centre"><input type="submit" name="ShowStatus" value="' . _('Show Stock Status') .'" /></div></td></tr></table>';
 echo '</form>';
 
