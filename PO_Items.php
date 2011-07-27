@@ -1070,11 +1070,11 @@ if (!isset($_GET['Edit'])) {
 
 	echo '</select></td>
 		<td>' . _('Enter text extracts in the description') . ':</td>
-		<td><input type="text" name="Keywords" size=20 maxlength=25 value="' . $_POST['Keywords'] . '"></td></tr>
+		<td><input type="text" name="Keywords" size="20" maxlength="25" value="' . $_POST['Keywords'] . '" /></td></tr>
 		<tr><td></td>
-		<td><font size=3><b>' . _('OR') . ' </b></font>' . _('Enter extract of the Stock Code') .
+		<td><font size="3"><b>' . _('OR') . ' </b></font>' . _('Enter extract of the Stock Code') .
 			':</td>
-		<td><input type="text" name="StockCode" size=15 maxlength=18 value="' . $_POST['StockCode'] . '"></td>
+		<td><input type="text" name="StockCode" size="15" maxlength="18" value="' . $_POST['StockCode'] . '" /></td>
 		</tr>
 		<tr><td></td>
 		<td><font size=3><b>' . _('OR') . ' </b></font><a target="_blank" href="'.$rootpath.'/Stocks.php">' . _('Create a New Stock Item') . '</a></td></tr>
@@ -1089,13 +1089,13 @@ if (!isset($_GET['Edit'])) {
 
 if (isset($SearchResult)) {
 
-	echo '<table cellpadding=1 colspan=7 class="selection">';
+	echo '<table cellpadding="1" colspan="7" class="selection">';
 
 	$TableHeader = '<tr>
 						<th>' . _('Code')  . '</th>
 						<th>' . _('Description') . '</th>
 						<th>' . _('Units') . '</th>
-						<th colspan=2><a href="#end">'._('Go to end of list').'</a></th>
+						<th colspan="2"><a href="#end">'._('Go to end of list').'</a></th>
 					</tr>';
 	echo $TableHeader;
 
