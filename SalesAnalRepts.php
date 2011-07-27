@@ -495,12 +495,12 @@ if (!isset($_GET['delete'])) {
 		$_POST['Upper4'] = '';
 	}
 
-	echo '<td>' . _('From') .': <input type="text" name="Lower4" size=10 maxlength=10 value="' . $_POST['Lower4'] . '"></td>';
-	echo '<td>' . _('To') . ': <input type="text" name="Upper4" size=10 maxlength=10 value="' . $_POST['Upper4'] . '"></td></tr>';
+	echo '<td>' . _('From') .': <input type="text" name="Lower4" size="10" maxlength="10" value="' . $_POST['Lower4'] . '"></td>';
+	echo '<td>' . _('To') . ': <input type="text" name="Upper4" size="10" maxlength="10" value="' . $_POST['Upper4'] . '"></td></tr>';
 
 	echo '</table>';
 
-	echo '<br /><div class="centre"><input type="Submit" name="submit" value="' . _('Enter Information') . '"></div></form>';
+	echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div></form>';
 
 } //end if record deleted no point displaying form to add record
 
