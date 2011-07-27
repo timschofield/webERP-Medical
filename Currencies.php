@@ -339,22 +339,22 @@ if (!isset($_GET['delete'])) {
 	echo '<tr><td>'._('Country').':</td>';
 	echo '<td>';
 	if (!isset($_POST['Country'])) {$_POST['Country']='';}
-	echo '<input ' . (in_array('Country',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="Country" size=30 maxlength=50 value="' . $_POST['Country'] . '">';
+	echo '<input ' . (in_array('Country',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="Country" size="30" maxlength="50" value="' . $_POST['Country'] . '" />';
 	echo '</td></tr>';
 	echo '<tr><td>'._('Hundredths Name').':</td>';
 	echo '<td>';
 	if (!isset($_POST['HundredsName'])) {$_POST['HundredsName']='';}
-	echo '<input ' . (in_array('HundredsName',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="HundredsName" size=10 maxlength=15 value="'. $_POST['HundredsName'].'">';
+	echo '<input ' . (in_array('HundredsName',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="HundredsName" size="10" maxlength="15" value="'. $_POST['HundredsName'].'" />';
 	echo '</td></tr>';
 	echo '<tr><td>'._('Exchange Rate').':</td>';
 	echo '<td>';
 	if (!isset($_POST['ExchangeRate'])) {$_POST['ExchangeRate']='';}
-	echo '<input ' . (in_array('ExchangeRate',$Errors) ?  'class="inputerror"' : '' ) .' type="text" class="number" name="ExchangeRate" size=10 maxlength=9 value='. $_POST['ExchangeRate'].'>';
+	echo '<input ' . (in_array('ExchangeRate',$Errors) ?  'class="inputerror"' : '' ) .' type="text" class="number" name="ExchangeRate" size="10" maxlength="9" value="'. $_POST['ExchangeRate'].'" />';
 	echo '</td></tr>';
 	echo '<tr><td>'._('Decimal Places to Show').':</td>';
 	echo '<td>';
 	if (!isset($_POST['DecimalPlaces'])) {$_POST['DecimalPlaces']=2;}
-	echo '<input ' . (in_array('DecimalPlaces',$Errors) ?  'class="inputerror"' : '' ) .' type="text" class="number" name="DecimalPlaces" size=10 maxlength=9 value='. $_POST['DecimalPlaces'].'>';
+	echo '<input ' . (in_array('DecimalPlaces',$Errors) ?  'class="inputerror"' : '' ) .' type="text" class="number" name="DecimalPlaces" size="10" maxlength="9" value="'. $_POST['DecimalPlaces'].'" />';
 	echo '</td></tr>';
 	echo '</table>';
 
