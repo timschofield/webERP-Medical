@@ -215,7 +215,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 						<td class="number">' . number_format($Cost, 2) . '</td>
 						<td class="number">' . number_format($CurrentGP, 1) . '%</td>
 						<td class="number">' . number_format($Proposed, 2) . '</td>
-						<td><input type="text" class="number" name="Price_' . $PriceCounter . '" maxlength=14 size=10 value="' . $myrow['price'] . '"></td>
+						<td><input type="text" class="number" name="Price_' . $PriceCounter . '" maxlength="14" size="10" value="' . $myrow['price'] . '" /></td>
 					</tr> ';
 			$PriceCounter++;
 		} //end of looping
