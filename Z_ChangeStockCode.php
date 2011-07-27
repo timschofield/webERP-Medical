@@ -310,9 +310,9 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 
 echo '<br /><table>
 	<tr><td>' . _('Existing Inventory Code') . ':</td>
-	<td><input type="text" name="OldStockID" size=20 maxlength=20></td></tr>';
+	<td><input type="text" name="OldStockID" size="20" maxlength="20" /></td></tr>';
 
-echo '<tr><td>' . _('New Inventory Code') . ':</td><td><input type="text" name="NewStockID" size=20 maxlength=20></td></tr>';
+echo '<tr><td>' . _('New Inventory Code') . ':</td><td><input type="text" name="NewStockID" size="20" maxlength="20" /></td></tr>';
 echo '</table>';
 
 echo '<div class="centre"><input type="submit" name="ProcessStockChange" value="' . _('Process') . '" /></div>';
