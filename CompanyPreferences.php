@@ -438,11 +438,11 @@ echo '<tr><td>' . _('Create GL entries for accounts receivable transactions') . 
 			<td><select tabindex="23" name=GLLink_Debtors>';
 
 if ($_POST['GLLink_Debtors']==0){
-	echo '<option selected="True" value=0>' . _('No') . '</option>';
-	echo '<option value=1>' . _('Yes') . '</option>';
+	echo '<option selected="True" value="0">' . _('No') . '</option>';
+	echo '<option value="1">' . _('Yes') . '</option>';
 } else {
-	echo '<option selected="True" value=1>' . _('Yes') . '</option>';
-	echo '<option value=0>' . _('No') . '</option>';
+	echo '<option selected="True" value="1">' . _('Yes') . '</option>';
+	echo '<option value="0">' . _('No') . '</option>';
 }
 
 echo '</select></td></tr>';
@@ -451,11 +451,11 @@ echo '<tr><td>' . _('Create GL entries for accounts payable transactions') . ':<
 			<td><select tabindex="24" name=GLLink_Creditors>';
 
 if ($_POST['GLLink_Creditors']==0){
-	echo '<option selected="True" value=0>' . _('No') . '</option>';
-	echo '<option value=1>' . _('Yes') . '</option>';
+	echo '<option selected="True" value="0">' . _('No') . '</option>';
+	echo '<option value="1">' . _('Yes') . '</option>';
 } else {
-	echo '<option selected="True" value=1>' . _('Yes') . '</option>';
-	echo '<option value=0>' . _('No') . '</option>';
+	echo '<option selected="True" value="1">' . _('Yes') . '</option>';
+	echo '<option value="0">' . _('No') . '</option>';
 }
 
 echo '</select></td></tr>';
@@ -464,17 +464,17 @@ echo '<tr><td>' . _('Create GL entries for stock transactions') . ' :</td>
 			<td><select tabindex="25" name=GLLink_Stock>';
 
 if ($_POST['GLLink_Stock']==0){
-	echo '<option selected="True" value=0>' . _('No') . '</option>';
-	echo '<option value=1>' . _('Yes') . '</option>';
+	echo '<option selected="True" value="0">' . _('No') . '</option>';
+	echo '<option value="1">' . _('Yes') . '</option>';
 } else {
-	echo '<option selected="True" value=1>' . _('Yes') . '</option>';
-	echo '<option value=0>' . _('No') . '</option>';
+	echo '<option selected="True" value="1">' . _('Yes') . '</option>';
+	echo '<option value="0">' . _('No') . '</option>';
 }
 
 echo '</select></td></tr>';
 
 
-echo '</table><br /><div class="centre"><input tabindex="26" type="Submit" name="submit" value="' . _('Update') . '"></div>';
+echo '</table><br /><div class="centre"><input tabindex="26" type="submit" name="submit" value="' . _('Update') . '" /></div>';
 
 include('includes/footer.inc');
 ?>
