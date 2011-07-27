@@ -262,7 +262,7 @@ if (!isset($_GET['delete'])) {
 				</tr>
 		</table>';
 
-	echo '<div class="centre"><input tabindex=4 type="Submit" name="submit" value="' . _('Enter Information') . '" /></div><br /><br /></form>';
+	echo '<div class="centre"><input tabindex=4 type="submit" name="submit" value="' . _('Enter Information') . '" /></div><br /><br /></form>';
 	echo '<div class="page_help_text">' . _('When ready, click on the link below to run the GeoCode process. This will Geocode all Branches and Suppliers. This may take some time. Errors will be returned to the screen.') . '</p>';
 	echo '<p>' . _('Suppliers and Customer Branches are geocoded when being entered/updated. You can rerun the geocode process from this screen at any time.') . '</p></div><br />';
 
