@@ -51,18 +51,18 @@ if (isset($_GET['AssetID'])) {
 	if (isset($_POST['Keywords'])) {
 		echo '<input type="text" name="Keywords" value="' . trim($_POST['Keywords'],'%') . '" size=20 maxlength=25>';
 	} else {
-		echo '<input type="text" name="Keywords" size=20 maxlength=25>';
+		echo '<input type="text" name="Keywords" size="20" maxlength="25" />';
 	}
 
 	echo '</td></tr><tr><td></td>';
 
-	echo '<td><font size 3><b>' . _('OR').' ' . '</b></font>' . _('Enter partial') .' <b>'. _('Asset Code') . '</b>:</td>';
+	echo '<td><font size="3"><b>' . _('OR').' ' . '</b></font>' . _('Enter partial') .' <b>'. _('Asset Code') . '</b>:</td>';
 	echo '<td>';
 
 	if (isset($_POST['AssetID'])) {
-		echo '<input type="text" name="AssetID" value="'. trim($_POST['AssetID'],'%') . '" size=15 maxlength=18>';
+		echo '<input type="text" name="AssetID" value="'. trim($_POST['AssetID'],'%') . '" size="15" maxlength="18" />';
 	} else {
-		echo '<input type="text" name="AssetID" size=15 maxlength=18>';
+		echo '<input type="text" name="AssetID" size="15" maxlength="18" />';
 	}
 
 	echo '</td></tr></table><br />';
