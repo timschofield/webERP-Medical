@@ -509,12 +509,12 @@ if (isset($_SESSION['Transfer']->TransferItem[0]->Controlled) and $_SESSION['Tra
 	echo '<td class="number"><input type="hidden" name="Quantity" value="' . $_SESSION['Transfer']->TransferItem[0]->Quantity . '" />
 		<a href="' . $rootpath .'/StockTransferControlled.php?StockLocationFrom='.$_SESSION['Transfer']->StockLocationFrom.'">' . $_SESSION['Transfer']->TransferItem[0]->Quantity . '</a></td></tr>';
 } elseif (isset($_SESSION['Transfer']->TransferItem[0]->Controlled)){
-	echo '<td><input type="text" class="number" name="Quantity" size=12 maxlength=12 value=' . $_SESSION['Transfer']->TransferItem[0]->Quantity . '></td></tr>';
+	echo '<td><input type="text" class="number" name="Quantity" size="12" maxlength="12" value="' . $_SESSION['Transfer']->TransferItem[0]->Quantity . '" /></td></tr>';
 } else {
-	echo '<td><input type="text" class="number" name="Quantity" size=12 maxlength=12 value="0"></td></tr>';
+	echo '<td><input type="text" class="number" name="Quantity" size="12" maxlength="12" value="0" /></td></tr>';
 }
 
-echo '</table><div class="centre"><br /><input type="submit" name="EnterTransfer" value="' . _('Enter Stock Transfer') . '"><br />';
+echo '</table><div class="centre"><br /><input type="submit" name="EnterTransfer" value="' . _('Enter Stock Transfer') . '" /><br />';
 
 
 if (empty($_SESSION['Transfer']->TransferItem[0]->StockID) and isset($_POST['StockID'])) {
