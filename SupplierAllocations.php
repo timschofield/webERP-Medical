@@ -507,9 +507,9 @@ if (isset($_POST['AllocTrans'])){
 	    } else {
 	    	echo '<td class="number"><input type="checkbox" name="All' .  $Counter . '" />';
 	    }
-       echo '<input type="text" class="number" name="Amt' . $Counter .'" maxlength=12 size=13 value="' .
-       		$AllocnItem->AllocAmt . '"><input type="hidden" name="AllocID' . $Counter .
-       		'" value=' . $AllocnItem->ID . '></td></tr>';
+       echo '<input type="text" class="number" name="Amt' . $Counter .'" maxlength="12" size="13" value="' .
+       		$AllocnItem->AllocAmt . '" /><input type="hidden" name="AllocID' . $Counter .
+       		'" value="' . $AllocnItem->ID . '" /></td></tr>';
 
 	    $TotalAllocated = $TotalAllocated + $AllocnItem->AllocAmt;
 
