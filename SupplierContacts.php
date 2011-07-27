@@ -134,7 +134,7 @@ if (!isset($SelectedContact)){
 	$result = DB_query($sql, $db);
 
 	if (DB_num_rows($result)>0){
-		echo '<table class="selection"><tr><th colspan=7><font size=3 color=navy>' . _('Contacts Defined for') . ' - ' . $myrow['suppname'] . '</font></th></tr>';
+		echo '<table class="selection"><tr><th colspan="7"><font size="3" color="navy">' . _('Contacts Defined for') . ' - ' . $myrow['suppname'] . '</font></th></tr>';
 
 		echo '<tr><th>' . _('Name') . '</th>
 							<th>' . _('Position') . '</th>
@@ -187,14 +187,14 @@ if (! isset($_GET['delete'])) {
 		//editing an existing contact
 
 		$sql = "SELECT contact,
-									position,
-									tel,
-									fax,
-									mobile,
-									email
-								FROM suppliercontacts
-								WHERE contact='".$SelectedContact."'
-								AND supplierid='".$SupplierID."'";
+						position,
+						tel,
+						fax,
+						mobile,
+						email
+					FROM suppliercontacts
+					WHERE contact='".$SelectedContact."'
+						AND supplierid='".$SupplierID."'";
 
 		$result = DB_query($sql, $db);
 		$myrow = DB_fetch_array($result);
@@ -234,18 +234,18 @@ if (! isset($_GET['delete'])) {
 
 	echo '<input type="hidden" name="SupplierID" value="' . $SupplierID . '" />
 		<tr><td>' . _('Position') . ':</td>
-		<td><input type="text" name="Position" size=31 maxlength=30 value="' . $_POST['Position'] . '"></td></tr>
+		<td><input type="text" name="Position" size="31" maxlength="30" value="' . $_POST['Position'] . '" /></td></tr>
 		<tr><td>' . _('Telephone No') . ':</td>
-		<td><input type="text" name="Tel" size=31 maxlength=30 value="' . $_POST['Tel'] . '"></td></tr>
+		<td><input type="text" name="Tel" size="31" maxlength="30" value="' . $_POST['Tel'] . '" /></td></tr>
 		<tr><td>' . _('Facsimile No') . ':</td>
-		<td><input type="text" name="Fax" size=31 maxlength=30 value="' . $_POST['Fax'] . '"></td></tr>
+		<td><input type="text" name="Fax" size="31" maxlength="30" value="' . $_POST['Fax'] . '" /></td></tr>
 		<tr><td>' . _('Mobile No') . ':</td>
-		<td><input type="text" name="Mobile" size=31 maxlength=30 value="' . $_POST['Mobile'] . '"></td></tr>
+		<td><input type="text" name="Mobile" size="31" maxlength="30" value="' . $_POST['Mobile'] . '" /></td></tr>
 		<tr><td><a href="Mailto:' . $_POST['Email'] . '">' . _('Email') . ':</a></td>
-		<td><input type="text" name="Email" size=51 maxlength=50 value="' . $_POST['Email'] . '"></td></tr>
+		<td><input type="text" name="Email" size="51" maxlength="50" value="' . $_POST['Email'] . '" /></td></tr>
 		</table><br />';
 
-	echo '<div class="centre"><input type="Submit" name="submit" value="' . _('Enter Information') . '">';
+	echo '<div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" />';
 	echo '</div></form>';
 
 } //end if record deleted no point displaying form to add record
