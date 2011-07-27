@@ -367,7 +367,7 @@ if (isset($_SESSION['Adjustment']) and !isset($_SESSION['Adjustment']->Narrative
 }
 
 echo '<tr><td>'. _('Comments On Why').':</td>
-	<td><input type="text" name="Narrative" size=32 maxlength=30 value="' . $_SESSION['Adjustment']->Narrative . '"></td></tr>';
+	<td><input type="text" name="Narrative" size="32" maxlength="30" value="' . $_SESSION['Adjustment']->Narrative . '" /></td></tr>';
 
 echo '<tr><td>'._('Adjustment Quantity').':</td>';
 
@@ -381,7 +381,7 @@ if ($Controlled==1){
 				[<a href="'.$rootpath.'/StockAdjustmentsControlled.php?AdjType=REMOVE">'._('Remove').'</a>]
 				[<a href="'.$rootpath.'/StockAdjustmentsControlled.php?AdjType=ADD">'._('Add').'</a>]';
 } else {
-	echo '<input type="text" class="number" name="Quantity" size=12 maxlength=12 Value="' . $Quantity . '">';
+	echo '<input type="text" class="number" name="Quantity" size="12" maxlength="12" value="' . $Quantity . '" />';
 }
 echo '</td></tr>';
 	//Select the tag
