@@ -443,21 +443,21 @@ if (!isset($_GET['Description'])) {
 }
 echo '<table class="selection"><tr><td>'. _('Stock Code'). ':</td><td>';
 if (isset($_POST['StockID'])) {
-	echo '<input type="text" name="StockID" size=21 value="' . $_POST['StockID'] . '" maxlength=20></td></tr>';
+	echo '<input type="text" name="StockID" size="21" value="' . $_POST['StockID'] . '" maxlength="20" /></td></tr>';
 } else {
-	echo '<input type="text" name="StockID" size=21 value="" maxlength=20></td></tr>';
+	echo '<input type="text" name="StockID" size="21" value="" maxlength="20" /></td></tr>';
 }
 echo '<tr><td>'. _('Partial Description'). ':</td><td><input type="text" name="StockText" size=21 value="' .
 	$_GET['Description'] .'"></td><td>'._('Partial Stock Code'). ':</td><td>';
 if (isset($_POST['StockID'])) {
-	echo '<input type="text" name="StockCode" size=21 value="' . $_POST['StockID'] .'" maxlength=20>';
+	echo '<input type="text" name="StockCode" size="21" value="' . $_POST['StockID'] .'" maxlength="20" />';
 } else {
-	echo '<input type="text" name="StockCode" size=21 value="" maxlength=20>';
+	echo '<input type="text" name="StockCode" size="21" value="" maxlength="20" />';
 }
 echo '</td><td><input type="submit" name="CheckCode" value="'._('Check Part').'" /></td></tr>';
 
 if (isset($_SESSION['Transfer']->TransferItem[0]->ItemDescription) and mb_strlen($_SESSION['Transfer']->TransferItem[0]->ItemDescription)>1){
-	echo '<tr><td colspan=3><font color=BLUE size=3>' . $_SESSION['Transfer']->TransferItem[0]->ItemDescription . ' ('._('In Units of').' ' . $_SESSION['Transfer']->TransferItem[0]->PartUnit . ' )</font></td></tr>';
+	echo '<tr><td colspan="3"><font color="blue" size="3">' . $_SESSION['Transfer']->TransferItem[0]->ItemDescription . ' ('._('In Units of').' ' . $_SESSION['Transfer']->TransferItem[0]->PartUnit . ' )</font></td></tr>';
 }
 
 echo '<tr><td>' . _('From Stock Location').':</td><td><select name="StockLocationFrom">';
