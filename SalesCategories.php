@@ -324,8 +324,7 @@ echo '<input type="hidden" name="EditName" value="1">';
 echo '<table class="selection">';
 echo '<tr><th colspan="2">' . $FormCaps . '</th></tr>';
 echo '<tr><td>' . _('Category Name') . ':</td>
-            <td><input type="text" name="SalesCatName" size=20 maxlength=20 value="' .
-			$_POST['SalesCatName'] . '"></td></tr>';
+            <td><input type="text" name="SalesCatName" size="20" maxlength="20" value="' . $_POST['SalesCatName'] . '"></td></tr>';
 // Image upload only if we have a selected category
 if (isset($SelectedCategory)) {
 	echo '<tr><td>'. _('Image File (.jpg)') . ':</td>
