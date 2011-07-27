@@ -197,18 +197,18 @@ while ($myrow1 = DB_fetch_array($result1)) {
 	}
 }
 echo '</select>';
-echo '<td><font size=1>' . _('Enter text extracts in the') . '<b>' . _('description') . '</b>:</font></td>';
-echo '<td><input type="text" name="Keywords" size=20 maxlength=25></td></tr><tr><td></td>';
-echo '<td><font size<b>' . _('OR') . '</b></font><font size=1>' .  _('Enter extract of the') .  '<b>' .  _('Stock Code') . '</b>:</font></td>';
-echo '<td><input type="text" name="StockCode" size=15 maxlength=18></td></tr></table><br />';
-echo '<table><tr><td><input type="submit" name="SearchParts" value="' . _('Search Parts Now') . '">';
-echo '<input type="submit" name="ResetPart" value="' . _('Show All') . '"></td></tr></table>';
+echo '<td><font size="1">' . _('Enter text extracts in the') . '<b>' . _('description') . '</b>:</font></td>';
+echo '<td><input type="text" name="Keywords" size="20" maxlength="25" /></td></tr><tr><td></td>';
+echo '<td><font size="4"><b>' . _('OR') . '</b></font><font size="1">' .  _('Enter extract of the') .  '<b>' .  _('Stock Code') . '</b>:</font></td>';
+echo '<td><input type="text" name="StockCode" size="15" maxlength="18" /></td></tr></table><br />';
+echo '<table><tr><td><input type="submit" name="SearchParts" value="' . _('Search Parts Now') . '" />';
+echo '<input type="submit" name="ResetPart" value="' . _('Show All') . '" /></td></tr></table>';
 
 echo '<br />';
 
 if (isset($StockItemsResult)) {
 
-	echo '<table cellpadding=2 colspan=7 class="selection">';
+	echo '<table cellpadding="2" colspan="7" class="selection">';
 	$TableHeader = 	'<tr><th>' . _('Code') . '</th>
 			<th>' . _('Description') . '</th>
 			<th>' . _('On Hand') . '</th>
