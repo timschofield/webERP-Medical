@@ -324,16 +324,16 @@ if (!isset($_GET['Description'])) {
 }
 echo '<tr><td>'. _('Stock Code'). ':</td><td>';
 if (isset($StockID)) {
-	echo '<input type="text" name="StockID" size=21 value="' . $StockID . '" maxlength=20></td></tr>';
+	echo '<input type="text" name="StockID" size="21" value="' . $StockID . '" maxlength="20" /></td></tr>';
 } else {
-	echo '<input type="text" name="StockID" size=21 value="" maxlength=20></td></tr>';
+	echo '<input type="text" name="StockID" size="21" value="" maxlength="20" /></td></tr>';
 }
-echo '<tr><td>'. _('Partial Description'). ':</td><td><input type="text" name="StockText" size=21 value="' .
+echo '<tr><td>'. _('Partial Description'). ':</td><td><input type="text" name="StockText" size="21" value="' .
 	$_GET['Description'] .'">&nbsp; &nbsp;'._('Partial Stock Code'). ':</td><td>';
 if (isset($StockID)) {
-	echo '<input type="text" name="StockCode" size=21 value="' . $StockID .'" maxlength=20>';
+	echo '<input type="text" name="StockCode" size="21" value="' . $StockID .'" maxlength="20" />';
 } else {
-	echo '<input type="text" name="StockCode" size=21 value="" maxlength=20>';
+	echo '<input type="text" name="StockCode" size="21" value="" maxlength="20" />';
 }
 echo '</td><td><input type="submit" name="CheckCode" value="'._('Check Part').'"></td></tr>';
 if (isset($_SESSION['Adjustment']) and mb_strlen($_SESSION['Adjustment']->ItemDescription)>1){
