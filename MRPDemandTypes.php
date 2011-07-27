@@ -165,7 +165,7 @@ if (isset($SelectedDT) and !isset($_GET['delete'])) {
 	}
 	echo '<table class="selection"><tr>
 			<td>' . _('Demand Type') . ':</td>
-			<td><input type="text" name="MRPDemandType" size=6 maxlength=5 value="' . $_POST['MRPDemandType'] . '"></td>
+			<td><input type="text" name="MRPDemandType" size="6" maxlength="5" value="' . $_POST['MRPDemandType'] . '"></td>
 			</tr>';
 }
 
@@ -174,11 +174,11 @@ if (!isset($_POST['Description'])) {
 }
 
 echo '<tr><td>' . _('Demand Type Description') . ':</td>
-	<td><input type="text" name="Description" size=31 maxlength=30 value="' . $_POST['Description'] . '"></td>
+	<td><input type="text" name="Description" size="31" maxlength="30" value="' . $_POST['Description'] . '"></td>
 	</tr>
 	</table>';
 
-echo '<br /><div class="centre"><input type="Submit" name="submit" value="' . _('Enter Information') . '"></div>';
+echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div>';
 
 echo '</form>';
 include('includes/footer.inc');
