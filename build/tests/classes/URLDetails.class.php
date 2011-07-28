@@ -9,6 +9,8 @@ class URLDetails {
 
 	function __construct($SessionID) {
 		$this->SessionID = $SessionID;
+		$this->xml = new DOMDocument();
+		$this->PostArray=array();
 		if (!file_exists('/tmp/'.$this->SessionID))
 			mkdir('/tmp/'.$this->SessionID);
 	}
@@ -61,141 +63,131 @@ class URLDetails {
 	public function Load($name) {
 	}
 
-	private function GetTextDetails($xml) {
+	private function GetTextDetails() {
 		$Texts=array();
-		$result=$xml->xpath('//input');
-		$j = 0;
-		for ($i=0; $i<sizeOf($result); $i++) {
-			foreach ($result[$i]->attributes() as $key=>$value) {
-				if ($key=='type' and $value=='text') {
-					foreach ($result[$i]->attributes() as $key=>$value) {
-						$Texts['text'][$j][$key]=(string)$value[0];
-					}
-					$j++;
+		$result=$this->xml->getElementsByTagName('input');
+		$k=0;
+		for ($i=0; $i<$result->length; $i++) {
+			if ($result->item($i)->getAttribute('type')=='text') {
+				for ($j=0; $j<$result->item($i)->attributes->length; $j++) {
+					$name = $result->item($i)->attributes->item($j)->name;
+//					echo $name.' '.$result->item($i)->attributes->getNamedItem($name)->nodeValue . "\n";
+					$Texts['text'][$k][$name]=(string)$result->item($i)->attributes->getNamedItem($name)->nodeValue;
 				}
+				$k++;
 			}
 		}
 		return $Texts;
 	}
 
-	private function GetSubmitDetails($xml) {
+	private function GetSubmitDetails() {
 		$Submits=array();
-		$result=$xml->xpath('//input');
-		$j = 0;
-		for ($i=0; $i<sizeOf($result); $i++) {
-			foreach ($result[$i]->attributes() as $key=>$value) {
-				if ($key=='type' and $value=='submit') {
-					foreach ($result[$i]->attributes() as $key=>$value) {
-						$Submits['submit'][$j][$key]=(string)$value[0];
-					}
-					$j++;
+		$result=$this->xml->getElementsByTagName('input');
+		$k=0;
+		for ($i=0; $i<$result->length; $i++) {
+			if ($result->item($i)->getAttribute('type')=='submit') {
+				for ($j=0; $j<$result->item($i)->attributes->length; $j++) {
+					$name = $result->item($i)->attributes->item($j)->name;
+					$Submits['submit'][$k][$name]=(string)$result->item($i)->attributes->getNamedItem($name)->nodeValue;
 				}
+				$k++;
 			}
 		}
 		return $Submits;
 	}
 
-	private function GetRadioDetails($xml) {
+	private function GetRadioDetails() {
 		$Radios=array();
-		$result=$xml->xpath('//input');
-		$j = 0;
-		for ($i=0; $i<sizeOf($result); $i++) {
-			foreach ($result[$i]->attributes() as $key=>$value) {
-				if ($key=='type' and $value=='radio') {
-					foreach ($result[$i]->attributes() as $key=>$value) {
-						$Radios['radio'][$j][$key]=(string)$value[0];
-					}
-					$j++;
+		$result=$this->xml->getElementsByTagName('input');
+		$k=0;
+		for ($i=0; $i<$result->length; $i++) {
+			if ($result->item($i)->getAttribute('type')=='radio') {
+				for ($j=0; $j<$result->item($i)->attributes->length; $j++) {
+					$name = $result->item($i)->attributes->item($j)->name;
+					$Radios['radio'][$k][$name]=(string)$result->item($i)->attributes->getNamedItem($name)->nodeValue;
 				}
+				$k++;
 			}
 		}
 		return $Radios;
 	}
 
-	private function GetCheckBoxDetails($xml) {
+	private function GetCheckBoxDetails() {
 		$CheckBoxs=array();
-		$result=$xml->xpath('//input');
-		$j = 0;
-		for ($i=0; $i<sizeOf($result); $i++) {
-			foreach ($result[$i]->attributes() as $key=>$value) {
-				if ($key=='type' and $value=='checkbox') {
-					foreach ($result[$i]->attributes() as $key=>$value) {
-						$CheckBoxs['checkbox'][$j][$key]=(string)$value[0];
-					}
-					$j++;
+		$result=$this->xml->getElementsByTagName('input');
+		$k=0;
+		for ($i=0; $i<$result->length; $i++) {
+			if ($result->item($i)->getAttribute('type')=='checkbox') {
+				for ($j=0; $j<$result->item($i)->attributes->length; $j++) {
+					$name = $result->item($i)->attributes->item($j)->name;
+					$CheckBoxs['checkbox'][$k][$name]=(string)$result->item($i)->attributes->getNamedItem($name)->nodeValue;
 				}
+				$k++;
 			}
 		}
 		return $CheckBoxs;
 	}
 
-	private function GetHiddenDetails($xml) {
+	private function GetHiddenDetails() {
 		$Hiddens=array();
-		$result=$xml->xpath('//input');
-		$j = 0;
-		for ($i=0; $i<sizeOf($result); $i++) {
-			foreach ($result[$i]->attributes() as $key=>$value) {
-				if ($key=='type' and $value=='hidden') {
-					foreach ($result[$i]->attributes() as $key=>$value) {
-						$Hiddens['hidden'][$j][$key]=(string)$value[0];
-					}
-					$j++;
+		$result=$this->xml->getElementsByTagName('input');
+		$k=0;
+		for ($i=0; $i<$result->length; $i++) {
+			if ($result->item($i)->getAttribute('type')=='hidden') {
+				for ($j=0; $j<$result->item($i)->attributes->length; $j++) {
+					$name = $result->item($i)->attributes->item($j)->name;
+					$Hiddens['hidden'][$k][$name]=(string)$result->item($i)->attributes->getNamedItem($name)->nodeValue;
 				}
+				$k++;
 			}
 		}
 		return $Hiddens;
 	}
 
-	private function GetHREFDetails($xml) {
-		$Links=array();
-		print_r($xml);
-		$result=$xml->xpath('//title');
-		$j = 0;
-		for ($i=0; $i<sizeOf($result); $i++) {
-			foreach ($result[$i]->attributes() as $key=>$value) {
-				echo $key.' '.$value."\n";
-				foreach ($result[$i]->attributes() as $key=>$value) {
-					$Links['a'][$j][$key]=(string)$value[0];
-				}
-			}
-		}
-		return $Links;
-	}
-
-	private function GetPasswordDetails($xml) {
+	private function GetPasswordDetails() {
 		$Passwords=array();
-		$result=$xml->xpath('//input');
-		$j = 0;
-		for ($i=0; $i<sizeOf($result); $i++) {
-			foreach ($result[$i]->attributes() as $key=>$value) {
-				if ($key=='type' and $value=='password') {
-					foreach ($result[$i]->attributes() as $key=>$value) {
-						$Passwords['password'][$j][$key]=(string)$value[0];
-					}
-					$j++;
+		$result=$this->xml->getElementsByTagName('input');
+		$k=0;
+		for ($i=0; $i<$result->length; $i++) {
+			if ($result->item($i)->getAttribute('type')=='password') {
+				for ($j=0; $j<$result->item($i)->attributes->length; $j++) {
+					$name = $result->item($i)->attributes->item($j)->name;
+					$Passwords['password'][$k][$name]=(string)$result->item($i)->attributes->getNamedItem($name)->nodeValue;
 				}
+				$k++;
 			}
 		}
 		return $Passwords;
 	}
 
-	private function GetSelectDetails($xml) {
+	private function GetSelectDetails() {
 		$Selects=array();
-		$result=$xml->xpath('//select');
-		$j = 0;
-		for ($i=0; $i<sizeOf($result); $i++) {
-			foreach ($result[$i]->attributes() as $key=>$value) {
-				$result1=$value->xpath('//option');
-				$name=(string)$value;
-				for ($k=0; $k<sizeOf($result1); $k++) {
-				foreach ($result1[$j]->attributes() as $key=>$value) {
-					$Selects['select'][$name]['options'][$j][$key]=(string)$value;
-				}
-				$j++;
+		$result=$this->xml->getElementsByTagName('select');
+		for ($i=0; $i<$result->length; $i++) {
+			$SelectName=$result->item($i)->getAttribute('name');
+			$result1=$result->item($i)->getElementsByTagName('option');
+			for ($j=0; $j<$result1->length; $j++) {
+				for ($k=0; $k<$result1->item($j)->attributes->length; $k++) {
+					$name = $result1->item($j)->attributes->item($k)->name;
+					$Selects['select'][$SelectName]['options'][$j][$name]=(string)$result1->item($j)->attributes->getNamedItem($name)->nodeValue;
 				}
 			}
 		}
 		return $Selects;
+	}
+
+	private function GetHREFDetails() {
+		$Links=array();
+		$result=$this->xml->getElementsByTagName('a');
+		$k=0;
+		for ($i=0; $i<$result->length; $i++) {
+			for ($j=0; $j<$result->item($i)->attributes->length; $j++) {
+				$name = $result->item($i)->attributes->item($j)->name;
+				$Links[$k][$name]=(string)$result->item($i)->attributes->getNamedItem($name)->nodeValue;
+			}
+			$k++;
+		}
+		return $Links;
 	}
 
 	public function GetFormDetails() {
@@ -212,10 +204,20 @@ class URLDetails {
 		return $result;
 	}
 
-	private function ValidateLink($html) {
+	private function ValidateLinks($ServerPath, $ch) {
+		for ($i=0; $i<sizeOf($this->Links); $i++) {
+			curl_setopt($ch,CURLOPT_URL,$ServerPath.$this->Links[$i]['href']);
+			curl_setopt($ch,CURLOPT_RETURNTRANSFER,True);
+			curl_setopt($ch,CURLOPT_COOKIEJAR,'/tmp/'.$this->SessionID.'/curl.txt');
+			$result = curl_exec($ch);
+			$response = curl_getinfo( $ch );
+			if ($response['http_code']!=200) {
+				error_log($i.' '.$this->Links[$i]['href'].' '.$response['http_code']."\n", 3, '/home/tim/weberp'.$this->SessionID.'.log');
+			}
+		}
 	}
 
-	public function FetchPage($RootPath, $ch) {
+	public function FetchPage($RootPath, $ServerPath, $ch) {
 		//url-ify the data for the POST
 		$fields_string='';
 		foreach($this->GetPostArray() as $key=>$value) {
@@ -233,10 +235,15 @@ class URLDetails {
 		//execute post
 		$result = curl_exec($ch);
 
-		$this->xml = simplexml_load_string($result);
+		$this->xml->loadHTML($result);
 		$answer = $this->ValidateHTML($result);
-		$this->GetHREFDetails($this->xml);
+
+		$this->Links=$this->GetHREFDetails();
+		$this->ValidateLinks($ServerPath, $ch);
+
 		$this->GetFormDetails();
+
+		return $result;
 
 	}
 

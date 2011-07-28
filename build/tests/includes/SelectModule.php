@@ -1,8 +1,12 @@
 <?php
 
-$ModuleID=mb_substr(mb_strstr($result, $ModuleName, true),-4,2);
-$url=$RootPath.'index.php?Application='.$ModuleID;
+function FindModule($ch, $RootPath, $ServerPath, $TestSessionID, $IndexPage, $Module) {
+	$SelectedModuleScreen = new URLDetails($TestSessionID);
+	$SelectedModuleScreen->SetURL('index.php?Application='.$Module);
 
-include('GetURL.php');
+	$ModulePage=$SelectedModuleScreen->FetchPage($RootPath, $ServerPath, $ch);
+
+	return $ModulePage;
+}
 
 ?>

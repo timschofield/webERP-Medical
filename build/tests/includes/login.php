@@ -1,13 +1,12 @@
 <?php
 
-function webERPLogIn($ch, $RootPath, $Company, $UserName, $Password) {
-	$TestSessionID = sha1(uniqid(mt_rand(), true));
+function webERPLogIn($ch, $TestSessionID, $RootPath, $ServerPath, $Company, $UserName, $Password) {
 
 	$LoginScreenDetails = new URLDetails($TestSessionID);
 	$LoginScreenDetails->SetURL('index.php');
 	$LoginScreenDetails->SetPostArray(array());
 
-	$LoginScreenDetails->FetchPage($RootPath, $ch);
+	$LoginScreenDetails->FetchPage($RootPath, $ServerPath, $ch);
 
 	for ($i=0; $i<sizeOf($LoginScreenDetails->FormDetails['Selects']['select']['CompanyNameField']['options']); $i++) {
 		if ($LoginScreenDetails->FormDetails['Selects']['select']['CompanyNameField']['options'][$i]['label']==$Company) {
@@ -44,13 +43,17 @@ function webERPLogIn($ch, $RootPath, $Company, $UserName, $Password) {
 		}
 	}
 
+	$LoginScreenDetails->__destruct();
+
 	$IndexScreenDetails = new URLDetails($TestSessionID);
 	$IndexScreenDetails->SetURL('index.php');
 	$IndexScreenDetails->SetPostArray($PostArray);
 
-	$IndexScreenDetails->FetchPage($RootPath, $ch);
+	$IndexPage=$IndexScreenDetails->FetchPage($RootPath, $ServerPath, $ch);
 
-	return $IndexScreenDetails;
+	$IndexScreenDetails->__destruct();
+
+	return $IndexPage;
 }
 
 ?>

@@ -6,7 +6,7 @@
 	//  $rootpath
 	//  $title - should be defined in the page this file is included with
 
-	$StrictXHTML=True;
+	$StrictXHTML=False;
 
 	if (!headers_sent()){
 		if ($StrictXHTML) {
@@ -41,8 +41,8 @@
 		echo '<tr>';
 		echo '<td align="left" style="width:100%;" class="quick_menu_left">';
 // Use icons for company and user data, saves screen realestate, use ALT tag in case theme icon not avail.
-		echo '<img src="'.$rootpath.'/css/'.$theme.'/images/company.png" title="' . _('Company') . '" ALT="' . _('Company') . '"></img>';
-		echo ' ' . stripslashes($_SESSION['CompanyRecord']['coyname']) . '  <a href="' .  $rootpath . '/UserSettings.php"><img src="'.$rootpath.'/css/'.$theme.'/images/user.png" TITLE="User" ALT="' . _('User') . '"> </img>' . stripslashes($_SESSION['UsersRealName']) . '</a>';
+		echo '<img src="'.$rootpath.'/css/'.$theme.'/images/company.png" title="' . _('Company') . '" ALT="' . _('Company') . '" />';
+		echo ' ' . stripslashes($_SESSION['CompanyRecord']['coyname']) . '  <a href="' .  $rootpath . '/UserSettings.php"><img src="'.$rootpath.'/css/'.$theme.'/images/user.png" TITLE="User" ALT="' . _('User') . '" /> ' . stripslashes($_SESSION['UsersRealName']) . '</a>';
 // Make the title text a class, can be set to display:none is some themes
 		echo '<br /><font class="header_title"> ' . $title . '</font></td>';
 		echo '<td class="quick_menu_tabs">';
