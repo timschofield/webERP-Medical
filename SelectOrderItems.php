@@ -1583,7 +1583,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 #end of page full new headings if
 			}
 #end of while loop for Frequently Ordered Items
-			echo '<td style="text-align:center" colspan=8><input type="hidden" name="order_items" value=1><input tabindex='.number_format($j+8).' type="submit" value="'._('Add to Sales Order').'"></td>';
+			echo '<td style="text-align:center" colspan="8"><input type="hidden" name="order_items" value="1" />
+					<input tabindex='.number_format($j+8).' type="submit" value="'._('Add to Sales Order').'" /></td>';
 			echo '</table>';
 		} //end of if Frequently Ordered Items > 0
 		echo '<p><div class="centre"><b>' . $msg . '</b></div></p>';
@@ -1607,9 +1608,9 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		$result1 = DB_query($SQL,$db);
 		while ($myrow1 = DB_fetch_array($result1)) {
 			if ($_POST['StockCat']==$myrow1['categoryid']){
-				echo '<option selected="True" value=' . $myrow1['categoryid'] . '>' . $myrow1['categorydescription'] . '</option>';
+				echo '<option selected="True" value="' . $myrow1['categoryid'] . '" />' . $myrow1['categorydescription'] . '</option>';
 			} else {
-				echo '<option value='. $myrow1['categoryid'] . '>' . $myrow1['categorydescription'] . '</option>';
+				echo '<option value="'. $myrow1['categoryid'] . '" />' . $myrow1['categorydescription'] . '</option>';
 			}
 		}
 
