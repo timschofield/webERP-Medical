@@ -13,9 +13,9 @@ if (isset($_GET['StockID'])){
 }
 
 if (!isset($_POST['StockID'])) {
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post"><b><br /></b>'.
-	'<div class="page_help_text">'. _('Select a manufactured part') . ' (' . _('or Assembly or Kit part') . ') ' .
-	 _('to view the costed bill of materials') . '.' . '<br /><font size=1>' .
+	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">
+			<div class="page_help_text">'. _('Select a manufactured part') . ' (' . _('or Assembly or Kit part') . ') ' .
+	 _('to view the costed bill of materials') . '.' . '<br /><font size="1">' .
 	 _('Parts must be defined in the stock item entry') . '/' . _('modification screen as manufactured') .
      ', ' . _('kits or assemblies to be available for construction of a bill of material').'</div>'
 	.'</font><br /><table class="selection" cellpadding="3" colspan="4"><tr><td><font size="1">' . _('Enter text extracts in the') .
@@ -87,7 +87,7 @@ if (isset($_POST['Search'])){
 
 if (isset($_POST['Search']) and isset($result) AND !isset($SelectedParent)) {
 
-	echo '<br /><hr><br /><table class="selection" cellpadding=2 colspan=7>';
+	echo '<br /><hr><br /><table class="selection" cellpadding="2" colspan="7">';
 	$TableHeader = '<tr><th>' . _('Code') . '</th>
 				<th>' . _('Description') . '</th>
 				<th>' . _('On Hand') . '</th>
