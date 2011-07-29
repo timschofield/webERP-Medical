@@ -172,7 +172,7 @@ while ($RequirementsRow = DB_fetch_array($RequirementsResult)){
 			} else {
 				echo '<tr class="OddTableRows">';
 			}
-			echo '<td colspan=4></td><td>' . ConvertSQLDate($IssuesRow['trandate']) . '</td>
+			echo '<td colspan="4"></td><td>' . ConvertSQLDate($IssuesRow['trandate']) . '</td>
 				<td align="right">' . number_format(-$IssuesRow['qty'],$RequirementsRow['decimalplaces']) . '</td>
 				<td align="right">' . number_format(-($IssuesRow['qty']*$IssuesRow['standardcost']),2) . '</td></tr>';
 			$IssueQty -= $IssuesRow['qty'];// because qty for the stock movement will be negative
