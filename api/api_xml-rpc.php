@@ -3037,7 +3037,7 @@
 
 function apiBuildDocHTML( $description, $parameter, $return )
 {
-	$doc = '<tr><td><b><u>'._('Description').'</u></b></td><td colspan=2>' .$description.'</td></tr>
+	$doc = '<tr><td><b><u>'._('Description').'</u></b></td><td colspan="2">' .$description.'</td></tr>
 			<tr><td valign="top"><b><u>'._('Parameters').'</u></b></td>';
 	for ($ii=0; $ii<sizeof($parameter); $ii++) {
 		$doc .= '<tr><td valign="top">'.$parameter[$ii]['name'].'</td><td>'.
