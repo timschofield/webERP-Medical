@@ -111,15 +111,15 @@ $k=0;
 while ($AssetRow=DB_fetch_array($AssetsResult)) {
 	if ($AssetCategoryDescription != $AssetRow['categorydescription'] OR $AssetCategoryDescription =='0'){
 		if ($AssetCategoryDescription !='0'){ //then print totals
-			echo '<tr><th colspan=3 align="right">' . _('Total for') . ' ' . $AssetCategoryDescription . ' </th>
+			echo '<tr><th colspan="3" align="right">' . _('Total for') . ' ' . $AssetCategoryDescription . ' </th>
 						<th class="number">' . number_format($TotalCategoryCost,2) . '</th>
 						<th class="number">' . number_format($TotalCategoryAccumDepn,2) . '</th>
 						<th class="number">' . number_format(($TotalCategoryCost-$TotalCategoryAccumDepn),2) . '</th>
-						<th colspan=2></th>
+						<th colspan="2"></th>
 						<th class="number">' . number_format($TotalCategoryDepn,2) . '</th>
 					</tr>';
 		}
-		echo '<tr><th colspan=9 align="left">' . $AssetRow['categorydescription']  . '</th></tr>';
+		echo '<tr><th colspan="9" align="left">' . $AssetRow['categorydescription']  . '</th></tr>';
 		$AssetCategoryDescription = $AssetRow['categorydescription'];
 		$TotalCategoryCost = 0;
 		$TotalCategoryAccumDepn =0;
@@ -234,18 +234,18 @@ while ($AssetRow=DB_fetch_array($AssetsResult)) {
 		$Result = DB_query($SQL,$db,$ErrMsg, $DbgMsg, true);
 	} //end if Committing the depreciation to DB
 } //end loop around the assets to calculate depreciation for
-echo '<tr><th colspan=3 align="right">' . _('Total for') . ' ' . $AssetCategoryDescription . ' </th>
+echo '<tr><th colspan="3" align="right">' . _('Total for') . ' ' . $AssetCategoryDescription . ' </th>
 		<th class="number">' . number_format($TotalCategoryCost,2) . '</th>
 		<th class="number">' . number_format($TotalCategoryAccumDepn,2) . '</th>
 		<th class="number">' . number_format(($TotalCategoryCost-$TotalCategoryAccumDepn),2) . '</th>
-		<th colspan=2></th>
+		<th colspan="2"></th>
 		<th class="number">' . number_format($TotalCategoryDepn,2) . '</th>
 	</tr>';
-echo '<tr><th colspan=3 align="right">' . _('GRAND Total') . ' </th>
+echo '<tr><th colspan="3" align="right">' . _('GRAND Total') . ' </th>
 		<th class="number">' . number_format($TotalCost,2) . '</th>
 		<th class="number">' . number_format($TotalAccumDepn,2) . '</th>
 		<th class="number">' . number_format(($TotalCost-$TotalAccumDepn),2) . '</th>
-		<th colspan=2></th>
+		<th colspan="2"></th>
 		<th class="number">' . number_format($TotalDepn,2) . '</th>
 	</tr>';
 
