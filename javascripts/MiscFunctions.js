@@ -107,7 +107,7 @@ function drawCalendar(md,y,m,d,dF){
 	xTR="</tr>";
 	TD="<td class='dpTD' onMouseOut='this.className=\"dpTD\";' onMouseOver='this.className=\"dpTDHover\";'";
 	xTD="</td>";
-	html="<table class='dpTbl'>"+TR+"<th colspan=3>"+months[tD.getMonth()]+" "+tD.getFullYear()+"</th>"+"<td colspan=\"2\">"+
+	html="<table class='dpTbl'>"+TR+"<th colspan=\"3\">"+months[tD.getMonth()]+" "+tD.getFullYear()+"</th>"+"<td colspan=\"2\">"+
 	getButtonCode(md,tD,-1,"&lt;",dF)+xTD+"<td colspan=\"2\">"+getButtonCode(md,tD,1,"&gt;",dF)+xTD+xTR+TR;
 	for(i=0;i<days.length;i++) html+="<th>"+days[i]+"</th>";
 		html+=xTR+TR;
