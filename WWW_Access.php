@@ -192,8 +192,8 @@ if (isset($SelectedRole)) {
 	echo '<br /><table class="selection"><tr>';
 
 	if (DB_num_rows($Result)>0 ) {
-		echo '<th colspan=3><div class="centre">'._('Assigned Security Tokens').'</div></th>';
-		echo '<th colspan=3><div class="centre">'._('Available Security Tokens').'</div></th>';
+		echo '<th colspan="3"><div class="centre">'._('Assigned Security Tokens').'</div></th>';
+		echo '<th colspan="3"><div class="centre">'._('Available Security Tokens').'</div></th>';
 	}
 	echo '</tr>';
 
