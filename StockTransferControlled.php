@@ -62,7 +62,7 @@ if (isset($TransferItem)){
 	echo '<br /><a href="'.$rootpath.'/StockTransfers.php?StockID='.$LineItem->StockID. '">'._('Back To Transfer Screen').'</a>';
 }
 
-echo '<br /><font size=2><b>'. _('Transfer of controlled item'). ' ' . $LineItem->StockID  . ' - ' . $LineItem->ItemDescription . '</b></font></div>';
+echo '<br /><font size="2"><b>'. _('Transfer of controlled item'). ' ' . $LineItem->StockID  . ' - ' . $LineItem->ItemDescription . '</b></font></div>';
 
 /** vars needed by InputSerialItem : **/
 $LocationOut = $_SESSION['Transfer']->StockLocationFrom;
