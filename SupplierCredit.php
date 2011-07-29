@@ -332,14 +332,14 @@ if (count($_SESSION['SuppTrans']->GRNs)>0){   /*if there are some GRNs selected 
 
 	}
 
-	echo '<tr><td colspan=5 class="number"><font color=red>' . _('Total Value of Goods Credited') . ':</font></td>
-		<td class="number"><font color=red><U>' . number_format($TotalGRNValue,2) . '</U></font></td></tr>';
+	echo '<tr><td colspan="5" class="number"><font color="red">' . _('Total Value of Goods Credited') . ':</font></td>
+		<td class="number"><font color="red"><u>' . number_format($TotalGRNValue,2) . '</u></font></td></tr>';
 	echo '</table><br />';
 }
 
 if (count($_SESSION['SuppTrans']->Shipts)>0){   /*if there are any Shipment charges on the credit note*/
 
-		echo '<table cellpadding=2 class="selection">
+		echo '<table cellpadding="2" class="selection">
 				<tr><th colspan="2">' . _('Shipment Credits') . '</th></tr>';
 		$TableHeader = '<tr><th>' . _('Shipment') . '</th>
 							<th>' . _('Amount') . '</th>
