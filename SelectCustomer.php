@@ -319,10 +319,10 @@ if (mb_strlen($msg)>1){
    prnMsg($msg, 'info');
 }
 echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Search for Customers').'</p>';
-echo '<table cellpadding=3 colspan=4 class="selection">';
-echo '<tr><td colspan=2>' . _('Enter a partial Name') . ':</td><td>';
+echo '<table cellpadding="3" colspan="4" class="selection">';
+echo '<tr><td colspan="2">' . _('Enter a partial Name') . ':</td><td>';
 if (isset($_POST['Keywords'])) {
-	echo '<input type="text" name="Keywords" value="' . $_POST['Keywords'] . '" size="20" maxlength="25">';
+	echo '<input type="text" name="Keywords" value="' . $_POST['Keywords'] . '" size="20" maxlength="25" />';
 } else {
 	echo '<input type="text" name="Keywords" size="20" maxlength="25" />';
 }
@@ -334,7 +334,7 @@ if (isset($_POST['CustCode'])) {
 }
 echo '</td></tr><tr><td><font size="3"><b>' . _('OR') . '</b></font></td><td>' . _('Enter a partial Phone Number') . ':</td><td>';
 if (isset($_POST['CustPhone'])) {
-	echo '<input type="text" name="CustPhone" value="' . $_POST['CustPhone'] . '" size="15" maxlength="18">';
+	echo '<input type="text" name="CustPhone" value="' . $_POST['CustPhone'] . '" size="15" maxlength="18" />';
 } else {
 	echo '<input type="text" name="CustPhone" size="15" maxlength="18" />';
 }
@@ -355,7 +355,7 @@ if (isset($_POST['CustType'])) {
 	if (DB_num_rows($result2) == 0) {
 		$DataError = 1;
 		echo '<a href="CustomerTypes.php?" target="_parent">Setup Types</a>';
-		echo '<tr><td colspan=2>' . prnMsg(_('No Customer types defined'), 'error') . '</td></tr>';
+		echo '<tr><td colspan="2">' . prnMsg(_('No Customer types defined'), 'error') . '</td></tr>';
 	} else {
 		// If OK show select box with option selected
 		echo '<select name="CustType">';
@@ -377,7 +377,7 @@ if (isset($_POST['CustType'])) {
 	if (DB_num_rows($result2) == 0) {
 		$DataError = 1;
 		echo '<a href="CustomerTypes.php?" target="_parent">Setup Types</a>';
-		echo '<tr><td colspan=2>' . prnMsg(_('No Customer types defined'), 'error') . '</td></tr>';
+		echo '<tr><td colspan="2">' . prnMsg(_('No Customer types defined'), 'error') . '</td></tr>';
 	} else {
 		// if OK show select box with available options to choose
 		echo '<select name="CustType">';
@@ -537,10 +537,10 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 		if ($lat == 0) {
 			echo '<div class="centre">' . _('Mapping is enabled, but no Mapping data to display for this Customer.') . '</div>';
 		} else {
-			echo '<tr><td colspan=2>';
-			echo '<table width=45% colspan=2 cellpadding=4>';
-			echo '<tr><th width=33%>' . _('Customer Mapping') . '</th></tr>';
-			echo '</td><td valign=TOp>'; /* Mapping */
+			echo '<tr><td colspan="2">';
+			echo '<table width="45%" colspan="2" cellpadding="4">';
+			echo '<tr><th width="33%">' . _('Customer Mapping') . '</th></tr>';
+			echo '</td><td valign="top">'; /* Mapping */
 			echo '<div class="centre">' . _('Mapping is enabled, Map will display below.') . '</div>';
 			echo '<div align="center" id="map" style="width: ' . $map_width . 'px; height: ' . $map_height . 'px"></div><br />';
 			echo '</th></tr></table>';
@@ -573,33 +573,54 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 			$SQL = "SELECT sum(ovamount+ovgst) AS total FROM debtortrans WHERE debtorno = '" . $_SESSION['CustomerID'] . "' AND type !=12";
 			$Total1Result = DB_query($SQL, $db);
 			$row = DB_fetch_array($Total1Result);
-			echo '<tr><td colspan=2>';
-			echo '<table width=45% colspan=2 cellpadding=4>';
-			echo '<tr><th width=33% colspan=3>' . _('Customer Data') . '</th></tr>';
-			echo '<tr><td valign=top class=select>'; /* Customer Data */
+			echo '<tr><td colspan="2">';
+			echo '<table width="45%" colspan="2" cellpadding="4">';
+			echo '<tr><th width="33%" colspan="3">' . _('Customer Data') . '</th></tr>';
+			echo '<tr><td valign="top" class="select">'; /* Customer Data */
 			//echo _('Distance to this customer:') . '<b>TBA</b><br />';
 			if ($myrow['lastpaiddate'] == 0) {
-				echo _('No receipts from this customer.') . '</td><td class=select></td><td class=select></td></tr>';
+				echo _('No receipts from this customer.') . '</td><td class="select"></td><td class="select"></td></tr>';
 			} else {
-				echo _('Last Paid Date:') . '</td><td class=select> <b>' . ConvertSQLDate($myrow['lastpaiddate']) . '</b> </td><td class=select>' . $myrow['lastpaiddays'] . ' ' . _('days') . '</td></tr>';
+				echo _('Last Paid Date:') . '</td><td class="select"> <b>' . ConvertSQLDate($myrow['lastpaiddate']) . '</b> </td>
+					<td class="select">' . $myrow['lastpaiddays'] . ' ' . _('days') . '</td></tr>';
 			}
-			echo '<tr><td class=select>' . _('Last Paid Amount (inc tax):') . '</td><td class=select> <b>' . number_format($myrow['lastpaid'], 2) . '</b></td><td class=select></td></tr>';
-			echo '<tr><td class=select>' . _('Customer since:') . '</td><td class=select> <b>' . ConvertSQLDate($myrow['clientsince']) . '</b> </td><td class=select>' . $myrow['customersincedays'] . ' ' . _('days') . '</td></tr>';
+			echo '<tr>
+					<td class="select">' . _('Last Paid Amount (inc tax):') . '</td>
+					<td class="select"> <b>' . number_format($myrow['lastpaid'], 2) . '</b></td>
+					<td class="select"></td>
+				</tr>';
+			echo '<tr>
+					<td class="select">' . _('Customer since:') . '</td>
+					<td class="select"> <b>' . ConvertSQLDate($myrow['clientsince']) . '</b> </td>
+					<td class="select">' . $myrow['customersincedays'] . ' ' . _('days') . '</td>
+				</tr>';
 			if ($row['total'] == 0) {
-				echo '<tr><td class=select>' . _('No Spend from this Customer.') . '</b></td><td class=select></td><td class=select></td></tr>';
+				echo '<tr>
+						<td class="select">' . _('No Spend from this Customer.') . '</b></td>
+						<td class="select"></td>
+						<td class="select"></td>
+					</tr>';
 			} else {
-				echo '<tr><td class=select>' . _('Total Spend from this Customer (inc tax):') . ' </td><td class=select><b>' . number_format($row['total'], 2) . '</b></td><td class=select></td></tr>';
+				echo '<tr>
+						<td class="select">' . _('Total Spend from this Customer (inc tax):') . ' </td>
+						<td class="select"><b>' . number_format($row['total'], 2) . '</b></td>
+						<td class="select"></td>
+					</tr>';
 			}
-			echo '<tr><td class=select>' . _('Customer Type:') . ' </td><td class=select><b>' . $CustomerTypeName . '</b></td><td class=select></td></tr>';
+			echo '<tr>
+					<td class="select">' . _('Customer Type:') . ' </td>
+					<td class="select"><b>' . $CustomerTypeName . '</b></td>
+					<td class="select"></td>
+				</tr>';
 			echo '</th></tr></table>';
 		}
 		// Customer Contacts
-		echo '<tr><td colspan=2>';
+		echo '<tr><td colspan="2">';
 		$sql = "SELECT * FROM custcontacts where debtorno='" . $_SESSION['CustomerID'] . "' ORDER BY contid";
 		$result = DB_query($sql, $db);
 		if (DB_num_rows($result) <> 0) {
-			echo '<table width=45%>';
-			echo '<br /><th colspan=7><img src="' . $rootpath . '/css/' . $theme . '/images/group_add.png" title="' . _('Customer Contacts') . '" alt="">' . ' ' . _('Customer Contacts') . '</th>';
+			echo '<table width="45%">';
+			echo '<br /><th colspan="7"><img src="' . $rootpath . '/css/' . $theme . '/images/group_add.png" title="' . _('Customer Contacts') . '" alt="" />' . ' ' . _('Customer Contacts') . '</th>';
 			echo '<tr>
 						<th>' . _('Name') . '</th>
 						<th>' . _('Role') . '</th>
@@ -632,12 +653,12 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 			}
 		}
 		// Customer Notes
-		echo '<tr><td colspan=2>';
+		echo '<tr><td colspan="2">';
 		$sql = "SELECT * FROM custnotes where debtorno='" . $_SESSION['CustomerID'] . "' ORDER BY date DESC";
 		$result = DB_query($sql, $db);
 		if (DB_num_rows($result) <> 0) {
-			echo '<br /><div class="centre"><img src="' . $rootpath . '/css/' . $theme . '/images/note_add.png" title="' . _('Customer Notes') . '" alt="">' . ' ' . _('Customer Notes') . '</div><br />';
-			echo '<table width=45%>';
+			echo '<br /><div class="centre"><img src="' . $rootpath . '/css/' . $theme . '/images/note_add.png" title="' . _('Customer Notes') . '" alt="" />' . ' ' . _('Customer Notes') . '</div><br />';
+			echo '<table width="45%">';
 			echo '<tr>
 					<th>' . _('date') . '</th>
 					<th>' . _('note') . '</th>
@@ -670,12 +691,12 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 			}
 		}
 		// Custome Type Notes
-		echo '<tr><td colspan=2>';
+		echo '<tr><td colspan="2">';
 		$sql = "SELECT * FROM debtortypenotes where typeid='" . $CustomerType . "' ORDER BY date DESC";
 		$result = DB_query($sql, $db);
 		if (DB_num_rows($result) <> 0) {
-			echo '<br /><div class="centre"><img src="' . $rootpath . '/css/' . $theme . '/images/folder_add.png" title="' . _('Customer Type (Group) Notes') . '" alt="">' . ' ' . _('Customer Type (Group) Notes for:' . '<b> ' . $CustomerTypeName . '</b>') . '</div><br />';
-			echo '<table width=45%>';
+			echo '<br /><div class="centre"><img src="' . $rootpath . '/css/' . $theme . '/images/folder_add.png" title="' . _('Customer Type (Group) Notes') . '" alt="" />' . ' ' . _('Customer Type (Group) Notes for:' . '<b> ' . $CustomerTypeName . '</b>') . '</div><br />';
+			echo '<table width="45%">';
 			echo '<tr>
 					 	<th>' . _('date') . '</th>
 					  	<th>' . _('note') . '</th>
@@ -694,12 +715,12 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 					$k = 1;
 				}
 				echo '<td>' . $myrow[4] . '</td>
-								<td>' . $myrow[3] . '</td>
-								<td>' . $myrow[2] . '</td>
-								<td>' . $myrow[5] . '</td>
-								<td><a href="AddCustomerTypeNotes.php?Id=' . $myrow[0] . '&DebtorType=' . $myrow[1] . '">' . _('Edit') . '</a></td>
-								<td><a href="AddCustomerTypeNotes.php?Id=' . $myrow[0] . '&DebtorType=' . $myrow[1] . '&delete=1">' . _('Delete') . '</a></td>
-								</tr>';
+						<td>' . $myrow[3] . '</td>
+						<td>' . $myrow[2] . '</td>
+						<td>' . $myrow[5] . '</td>
+						<td><a href="AddCustomerTypeNotes.php?Id=' . $myrow[0] . '&DebtorType=' . $myrow[1] . '">' . _('Edit') . '</a></td>
+						<td><a href="AddCustomerTypeNotes.php?Id=' . $myrow[0] . '&DebtorType=' . $myrow[1] . '&delete=1">' . _('Delete') . '</a></td>
+					</tr>';
 			} //END WHILE LIST LOOP
 			echo '</table>';
 		} else {
