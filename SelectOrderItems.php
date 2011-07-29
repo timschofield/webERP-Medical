@@ -1418,7 +1418,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		} else {
 			$ColSpanNumber = 1;
 		}
-		echo '<tr class="EvenTableRows"><td class="number" colspan=7><b>' . _('TOTAL Excl Tax/Freight') . '</b></td>
+		echo '<tr class="EvenTableRows"><td class="number" colspan="7"><b>' . _('TOTAL Excl Tax/Freight') . '</b></td>
 							<td colspan="' . $ColSpanNumber . '" class="number">' . $DisplayTotal . '</td></tr></table>';
 
 		$DisplayVolume = number_format($_SESSION['Items'.$identifier]->totalVolume,2);
@@ -1430,8 +1430,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 					   <tr/><table/>';
 
 
-		echo '<br /><div class="centre"><input type="submit" name="Recalculate" Value="' . _('Re-Calculate') . '">
-				<input type="submit" name="DeliveryDetails" value="' . _('Enter Delivery Details and Confirm Order') . '"><div/><hr />';
+		echo '<br /><div class="centre"><input type="submit" name="Recalculate" value="' . _('Re-Calculate') . '" />
+				<input type="submit" name="DeliveryDetails" value="' . _('Enter Delivery Details and Confirm Order') . '" /><div/><hr />';
 	} # end of if lines
 
 /* Now show the stock item selection search stuff below */
@@ -1439,7 +1439,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 	 if ((!isset($_POST['QuickEntry'])
 			AND !isset($_POST['SelectAsset']))){
 
-		echo '<input type="hidden" name="PartSearch" value="' .  _('Yes Please') . '">';
+		echo '<input type="hidden" name="PartSearch" value="' .  _('Yes Please') . '" />';
 
 		if ($_SESSION['FrequentlyOrderedItems']>0){ //show the Frequently Order Items selection where configured to do so
 
