@@ -225,7 +225,7 @@ foreach ($FormDesign as $key) {
 						echo '<td>'.$subkey['name'].'</td>';
 						DataTextLine($subkey);
 					} elseif ($subkey['type']=='StartLine') {
-						echo '<td colspan=3>'.$subkey['name'].' = '.'</td><td><input type="text" class="number" name="StartLine" size="4" maxlength="4" value="'.$key->y.'" /></td>';
+						echo '<td colspan="3">'.$subkey['name'].' = '.'</td><td><input type="text" class="number" name="StartLine" size="4" maxlength="4" value="'.$key->y.'" /></td>';
 					}
 					echo '</tr>';
 				}
