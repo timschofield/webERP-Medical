@@ -222,7 +222,7 @@ if ($InputError ==0){
 
 	if (DB_num_rows($result) > 0) {
 		echo '<table class="selection">';
-		echo '<tr><th colspan=8><form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+		echo '<tr><th colspan="8"><form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo _('Pricing for part') . ':<input type="text" name="Item" maxsize="22" value="' . $Item . '" maxlength="20" />
 				<input type="submit" name="NewPart" value="' . _('Review Prices') . '" />';
