@@ -935,10 +935,10 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 }
 
 echo '<br /><table  class="selection">';
-echo '<tr><th colspan=2><font color="navy" size=3>'._('Delivery Details').'</font></th></tr>';
+echo '<tr><th colspan="2"><font color="navy" size="3">'._('Delivery Details').'</font></th></tr>';
 echo '<tr>
 		<td>'. _('Deliver To') .':</td>
-		<td><input type="text" size=42 maxlength=40 name="DeliverTo" value="' . $_SESSION['Items'.$identifier]->DeliverTo . '"></td>
+		<td><input type="text" size="42" maxlength="40" name="DeliverTo" value="' . $_SESSION['Items'.$identifier]->DeliverTo . '" /></td>
 	</tr>';
 
 echo '<tr>
