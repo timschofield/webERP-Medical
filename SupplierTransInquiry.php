@@ -138,7 +138,7 @@ if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
 					_('Could not retrieve the GL transactions for this AP transaction'));
 
 		if (DB_num_rows($GLTransResult)==0){
-			echo '<tr><td colspan=10>' . _('There are no GL transactions created for the above AP transaction') . '</td></tr>';
+			echo '<tr><td colspan="10">' . _('There are no GL transactions created for the above AP transaction') . '</td></tr>';
 		} else {
 			echo '<tr><td colspan="2"></td><td colspan="8"><table class="selection" width="100%">';
 			echo '<tr><th colspan="2"><b>' . _('GL Account') . '</b></th><th><b>' . _('Local Amount') . '</b></th><th><b>' . _('Narrative') . '</b></th></tr>';
