@@ -47,7 +47,7 @@
 			$Errors[0]=NoAuthorisation;
 			return $Errors;
 		}
-		$sql = "select confvalue from config where confname='DefaultDateFormat'";
+		$sql = "SELECT confvalue FROM config WHERE confname='DefaultDateFormat'";
 		$result = DB_query($sql, $db);
 		$answer=DB_fetch_array($result);
 		$ReturnValue[0]=0;
@@ -65,7 +65,7 @@
 			$Errors[0]=NoAuthorisation;
 			return $Errors;
 		}
-		$sql = "select defaultlocation from www_users where userid='".$user."'";
+		$sql = "SELECT defaultlocation FROM www_users WHERE userid='".$user."'";
 		$result = DB_query($sql, $db);
 		$answer=DB_fetch_array($result);
 		$ReturnValue[0]=0;
