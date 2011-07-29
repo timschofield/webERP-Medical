@@ -976,9 +976,9 @@ if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
 	}
 
 	$DisplayTotal = number_format($_SESSION['PO'.$identifier]->Total,2);
-	echo '<tr><td colspan=6 class="number">' . _('TOTAL') . _(' excluding Tax') . '</td><td class="number"><b>' . $DisplayTotal . '</b></td></tr></table>';
-	echo '<br /><div class="centre"><input type="submit" name="UpdateLines" value="Update Order Lines">';
-	echo '&nbsp;<input type="submit" name="Commit" value="Process Order"></div>';
+	echo '<tr><td colspan="6" class="number">' . _('TOTAL') . _(' excluding Tax') . '</td><td class="number"><b>' . $DisplayTotal . '</b></td></tr></table>';
+	echo '<br /><div class="centre"><input type="submit" name="UpdateLines" value="Update Order Lines" />';
+	echo '&nbsp;<input type="submit" name="Commit" value="Process Order" /></div>';
 	if (!isset($_POST['NewItem']) and isset($_GET['Edit'])) {
 
 	/*show a form for putting in a new line item with or without a stock entry */
@@ -989,7 +989,7 @@ if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
 if (isset($_POST['NonStockOrder'])) {
 
 	echo '<br /><table class="selection"><tr><td>'._('Item Description').'</td>';
-	echo '<td><input type="text" name=ItemDescription size=40></td></tr>';
+	echo '<td><input type="text" name=ItemDescription size="40" /></td></tr>';
 	echo '<tr><td>'._('General Ledger Code').'</td>';
 	echo '<td><select name="GLCode">';
 	$sql="SELECT accountcode,
@@ -1002,7 +1002,7 @@ if (isset($_POST['NonStockOrder'])) {
 		echo '<option value="'.$myrow['accountcode'].'">'.$myrow['accountcode'].' - '.$myrow['accountname'].'</option>';
 	}
 	echo '</select></td></tr>';
-	echo '<input type="hidden" name="ConversionFactor" value="1">';
+	echo '<input type="hidden" name="ConversionFactor" value="1" />';
 	echo '<tr><td>'._('OR Asset ID'). '</td>
 						<td><select name="AssetID">';
 	$AssetsResult = DB_query("SELECT assetid,
