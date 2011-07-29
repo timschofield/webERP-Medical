@@ -104,7 +104,7 @@ if (isset($_POST['SearchParts'])) {
 
 if (!isset($ShiptRef) or $ShiptRef==""){
 	echo '<table class="selection"><tr><td>';
-	echo _('Shipment Number'). ': <input type="text" name="ShiptRef" MAXLENGTH =10 size=10> '.
+	echo _('Shipment Number'). ': <input type="text" name="ShiptRef" maxlength="10" size="10" /> '.
 		_('Into Stock Location').' :<select name="StockLocation"> ';
 	$sql = "SELECT loccode, locationname FROM locations";
 	$resultStkLocs = DB_query($sql,$db);
@@ -126,16 +126,16 @@ if (!isset($ShiptRef) or $ShiptRef==""){
 	echo '</select>';
 	echo ' <select name="OpenOrClosed">';
 	if ($_POST['OpenOrClosed']==1){
-		echo '<option selected="True" value=1>'. _('Closed Shipments Only') . '</option>';
-		echo '<option value=0>'. _('Open Shipments Only') . '</option>';
+		echo '<option selected="True" value="1">'. _('Closed Shipments Only') . '</option>';
+		echo '<option value="0">'. _('Open Shipments Only') . '</option>';
 	} else {
 		$_POST['OpenOrClosed']=0;
-		echo '<option value=1>'. _('Closed Shipments Only') . '</option>';
-		echo '<option selected="True" value=0>'. _('Open Shipments Only') . '</option>';
+		echo '<option value="1">'. _('Closed Shipments Only') . '</option>';
+		echo '<option selected="True" value="0">'. _('Open Shipments Only') . '</option>';
 	}
 	echo '</select></td></tr></table>';
 
-	echo '<br /><div class="centre"><input type="submit" name="SearchShipments" value="'. _('Search Shipments'). '"></div></div><br />';
+	echo '<br /><div class="centre"><input type="submit" name="SearchShipments" value="'. _('Search Shipments'). '" /></div></div><br />';
 }
 
 $SQL="SELECT categoryid,
