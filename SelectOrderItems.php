@@ -1399,7 +1399,9 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 			if ($_SESSION['AllowOrderLineItemNarrative'] == 1){
 				echo $RowStarter;
-				echo '<td colspan=10>' . _('Narrative') . ':<textarea name="Narrative_' . $OrderLine->LineNumber . '" cols="100%" rows="1">' . stripslashes(AddCarriageReturns($OrderLine->Narrative)) . '</textarea><br /></td></tr>';
+				echo '<td colspan="10">' . _('Narrative') . ':
+					<textarea name="Narrative_' . $OrderLine->LineNumber . '" cols="100%" rows="1">' . stripslashes(AddCarriageReturns($OrderLine->Narrative)) . '</textarea>
+						<br /></td></tr>';
 			} else {
 				echo '<input type="hidden" name="Narrative" value="" />';
 			}
