@@ -122,7 +122,7 @@ if ($_SESSION['RequireCustomerSelection']==1) {
 		if (DB_num_rows($result2) == 0) {
 			$DataError = 1;
 			echo '<a href="CustomerTypes.php?" target="_parent">Setup Types</a>';
-			echo '<tr><td colspan=2>' . prnMsg(_('No Customer types defined'), 'error') . '</td></tr>';
+			echo '<tr><td colspan="2">' . prnMsg(_('No Customer types defined'), 'error') . '</td></tr>';
 		} else {
 			// If OK show select box with option selected
 			echo '<select name="CustType">';
@@ -144,7 +144,7 @@ if ($_SESSION['RequireCustomerSelection']==1) {
 		if (DB_num_rows($result2) == 0) {
 			$DataError = 1;
 			echo '<a href="CustomerTypes.php?" target="_parent">Setup Types</a>';
-			echo '<tr><td colspan=2>' . prnMsg(_('No Customer types defined'), 'error') . '</td></tr>';
+			echo '<tr><td colspan="2">' . prnMsg(_('No Customer types defined'), 'error') . '</td></tr>';
 		} else {
 		// if OK show select box with available options to choose
 			echo '<select name="CustType">';
@@ -164,7 +164,7 @@ if ($_SESSION['RequireCustomerSelection']==1) {
 	if (DB_num_rows($result2) == 0) {
 		$DataError = 1;
 		echo '<a href="Areas.php?" target="_parent">Setup Types</a>';
-		echo '<tr><td colspan=2>' . prnMsg(_('No Sales Areas defined'), 'error') . '</td></tr>';
+		echo '<tr><td colspan="2">' . prnMsg(_('No Sales Areas defined'), 'error') . '</td></tr>';
 	} else {
 		// if OK show select box with available options to choose
 		echo '<select name="Area">';
