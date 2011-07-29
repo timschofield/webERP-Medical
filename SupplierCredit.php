@@ -262,18 +262,17 @@ if (isset($_POST['FixedAssets']) and $_POST['FixedAssets'] == _('Fixed Assets'))
 /* everything below here only do if a Supplier is selected
    fisrt add a header to show who we are making an credit note for */
 
-echo '<table class="selection" colspan=4>
+echo '<table class="selection" colspan="4">
 			<tr><th>' . _('Supplier') . '</th>
 				<th>' . _('Currency') . '</th>
 				<th>' . _('Terms') . '</th>
 				<th>' . _('Tax Group') . '</th>
 			</tr>';
 
-echo '<tr><td><font color=blue><b>' . $_SESSION['SuppTrans']->SupplierID . ' - ' .
-	  $_SESSION['SuppTrans']->SupplierName . '</b></font></td>
-	  <th><font color=blue><b>' .  $_SESSION['SuppTrans']->CurrCode . '</b></font></th>
-	  <td><font color=blue><b>' . $_SESSION['SuppTrans']->TermsDescription . '</b></font></td>
-	  <td><font color=blue><b>' . $_SESSION['SuppTrans']->TaxGroupDescription . '</b></font></td>
+echo '<tr><td><font color="blue"><b>' . $_SESSION['SuppTrans']->SupplierID . ' - ' . $_SESSION['SuppTrans']->SupplierName . '</b></font></td>
+	  <th><font color="blue"><b>' .  $_SESSION['SuppTrans']->CurrCode . '</b></font></th>
+	  <td><font color="blue"><b>' . $_SESSION['SuppTrans']->TermsDescription . '</b></font></td>
+	  <td><font color="blue"><b>' . $_SESSION['SuppTrans']->TaxGroupDescription . '</b></font></td>
 	  </tr>
 	  </table>';
 
@@ -281,23 +280,23 @@ echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post" name=form1>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<br /><table class="selection">';
-echo '<tr><td><font color=red>' . _('Supplier Credit Note Reference') . ':</font></td>
-	<td><font size=2><input type="text" size="20" maxlength="20" name="SuppReference" value="' . $_SESSION['SuppTrans']->SuppReference . '" /></td>';
+echo '<tr><td><font color="red">' . _('Supplier Credit Note Reference') . ':</font></td>
+	<td><font size="2"><input type="text" size="20" maxlength="20" name="SuppReference" value="' . $_SESSION['SuppTrans']->SuppReference . '" /></td>';
 
 if (!isset($_SESSION['SuppTrans']->TranDate)){
 	$_SESSION['SuppTrans']->TranDate= Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m'),Date('d')-1,Date('y')));
 }
-echo '<td><font color=red>' . _('Credit Note Date') . ' (' . _('in format') . ' ' . $_SESSION['DefaultDateFormat'] . ') :</font></td>
+echo '<td><font color="red">' . _('Credit Note Date') . ' (' . _('in format') . ' ' . $_SESSION['DefaultDateFormat'] . ') :</font></td>
 		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat']. '" size="11" maxlength="10" name="TranDate" value="' . $_SESSION['SuppTrans']->TranDate . '" /></td>';
-echo '<td><font color=red>' . _('Exchange Rate') . ':</font></td>
+echo '<td><font color="red">' . _('Exchange Rate') . ':</font></td>
 		<td><input type="text" class="number" size="11" maxlength="10" name="ExRate" value="' . $_SESSION['SuppTrans']->ExRate . '" /></td></tr>';
 echo '</table>';
 
-echo '<br /><div class="centre"><input type="submit" name="GRNS" value="' . _('Purchase Orders') . '"> ';
-echo '<input type="submit" name="Shipts" value="' . _('Shipments') . '"> ';
-echo '<input type="submit" name="Contracts" value="' . _('Contracts') . '"> ';
+echo '<br /><div class="centre"><input type="submit" name="GRNS" value="' . _('Purchase Orders') . '" /> ';
+echo '<input type="submit" name="Shipts" value="' . _('Shipments') . '" /> ';
+echo '<input type="submit" name="Contracts" value="' . _('Contracts') . '" /> ';
 if ( $_SESSION['SuppTrans']->GLLink_Creditors ==1){
-	echo '<input type="submit" name="GL" value="' . _('General Ledger') . '"> ';
+	echo '<input type="submit" name="GL" value="' . _('General Ledger') . '" /> ';
 }
 echo '<input type="submit" name="FixedAssets" value="' . _('Fixed Assets') . '"></div>';
 echo '<br />';
