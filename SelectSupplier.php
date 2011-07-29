@@ -140,7 +140,7 @@ if (isset($_SESSION['SupplierID'])) {
 				_('Supplier') . '" alt="" />' . ' ' . _('Supplier') . ' : <b>' . $_SESSION['SupplierID'] .
 				' - $SupplierName</b> ' . _('has been selected') . '.</p>';
 	echo '<div class="page_help_text">' . _('Select a menu option to operate using this supplier.') . '</div>';
-	echo '<br /><table width=90% colspan=2 cellpadding=4>';
+	echo '<br /><table width=90% colspan="2" cellpadding="4">';
 	echo '<tr>
 		<th width="33%">' . _('Supplier Inquiries') . '</th>
 		<th width="33%">' . _('Supplier Transactions') . '</th>
@@ -303,10 +303,10 @@ if (isset($_SESSION['SupplierID']) and $_SESSION['SupplierID'] != '') {
 			echo '<div class="centre">' . _('Mapping is enabled, but no Mapping data to display for this Supplier.') . '</div>';
 		} else {
 			echo '<div class="centre"><br />';
-			echo '<tr><td colspan=2>';
-			echo '<table width=45% colspan=2 border=2 cellpadding=4>';
-			echo '<tr><th width=33%>' . _('Supplier Mapping') . '</th></tr>';
-			echo '</td><td valign=top>'; /* Mapping */
+			echo '<tr><td colspan="2">';
+			echo '<table width="45%" colspan="2" border="2" cellpadding="4">';
+			echo '<tr><th width="33%">' . _('Supplier Mapping') . '</th></tr>';
+			echo '</td><td valign="top">'; /* Mapping */
 			echo '<div class="centre">' . _('Mapping is enabled, Map will display below.') . '</div>';
 			echo '<div class="centre" id="map" style="width: ' . $map_width . 'px; height: ' . $map_height . 'px"></div></div><br />';
 			echo '</th></tr></table>';
@@ -329,19 +329,28 @@ if (isset($_SESSION['SupplierID']) and $_SESSION['SupplierID'] != '') {
 			$Total1Result = DB_query($SQL, $db);
 			$row = DB_fetch_array($Total1Result);
 			echo '<br />';
-			echo '<tr><td colspan=2>';
-			echo '<table width=45% colspan=2 cellpadding=4>';
-			echo '<tr><th width=33% colspan=2>' . _('Supplier Data') . '</th></tr>';
-			echo '<tr><td valign=top class=select>'; /* Supplier Data */
+			echo '<tr><td colspan="2">';
+			echo '<table width="45%" colspan="2" cellpadding="4">';
+			echo '<tr><th width="33%" colspan="2">' . _('Supplier Data') . '</th></tr>';
+			echo '<tr><td valign="top" class="select">'; /* Supplier Data */
 			//echo "Distance to this Supplier: <b>TBA</b><br />";
 			if ($myrow['lastpaiddate'] == 0) {
 				echo _('No payments yet to this supplier.') . '</td><td valign=top class=select></td></tr>';
 			} else {
-				echo _('Last Paid:') . '</td><td valign=top class=select> <b>' . ConvertSQLDate($myrow['lastpaiddate']) . '</b></td></tr>';
+				echo _('Last Paid:') . '</td><td valign="top" class="select"> <b>' . ConvertSQLDate($myrow['lastpaiddate']) . '</b></td></tr>';
 			}
-			echo '<tr><td valign=top class=select>'._('Last Paid Amount:') . '</td><td valign=top class=select>  <b>' . number_format($myrow['lastpaid'], 2) . '</b></td></tr>';
-			echo '<tr><td valign=top class=select>'._('Supplier since:') . '</td><td valign=top class=select> <b>' . ConvertSQLDate($myrow['suppliersince']) . '</b></td></tr>';
-			echo '<tr><td valign=top class=select>'._('Total Spend with this Supplier:') . '</td><td valign=top class=select> <b>' . number_format($row['total'], 2) . '</b></td></tr>';
+			echo '<tr>
+					<td valign="top" class="select">'._('Last Paid Amount:') . '</td>
+					<td valign="top" class="select">  <b>' . number_format($myrow['lastpaid'], 2) . '</b></td>
+				</tr>';
+			echo '<tr>
+					<td valign="top" class="select">'._('Supplier since:') . '</td>
+					<td valign="top" class="select"> <b>' . ConvertSQLDate($myrow['suppliersince']) . '</b></td>
+				</tr>';
+			echo '<tr>
+					<td valign="top" class="select">'._('Total Spend with this Supplier:') . '</td>
+					<td valign="top" class="select"> <b>' . number_format($row['total'], 2) . '</b></td>
+				</tr>';
 			echo '</th></tr></table>';
 		}
 	}
