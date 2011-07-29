@@ -140,8 +140,8 @@ if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
 		if (DB_num_rows($GLTransResult)==0){
 			echo '<tr><td colspan=10>' . _('There are no GL transactions created for the above AP transaction') . '</td></tr>';
 		} else {
-			echo '<tr><td colspan=2></td><td colspan=8><table class="selection" width=100%>';
-			echo '<tr><th colspan=2><b>' . _('GL Account') . '</b></th><th><b>' . _('Local Amount') . '</b></th><th><b>' . _('Narrative') . '</b></th></tr>';
+			echo '<tr><td colspan="2"></td><td colspan="8"><table class="selection" width="100%">';
+			echo '<tr><th colspan="2"><b>' . _('GL Account') . '</b></th><th><b>' . _('Local Amount') . '</b></th><th><b>' . _('Narrative') . '</b></th></tr>';
 			$CheckGLTransBalance =0;
 			while ($GLTransRow = DB_fetch_array($GLTransResult)){
 
@@ -159,7 +159,7 @@ if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
 				$CheckGLTransBalance += $GLTransRow['amount'];
 			}
 			if (round($CheckGLTransBalance,5)!= 0){
-				echo '<tr><td colspan=4 bgcolor=RED><b>' . _('The GL transactions for this AP transaction are out of balance by') .  ' ' . $CheckGLTransBalance . '</b></td></tr>';
+				echo '<tr><td colspan="4" bgcolor="red"><b>' . _('The GL transactions for this AP transaction are out of balance by') .  ' ' . $CheckGLTransBalance . '</b></td></tr>';
 			}
 			echo '</table></td></tr>';
 		}
