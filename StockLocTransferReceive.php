@@ -531,7 +531,7 @@ if (isset($_SESSION['Transfer'])){
 		$LocResult = DB_query($LocSql,$db);
 		$LocRow = DB_fetch_array($LocResult);
 		echo '<table class="selection">';
-		echo '<tr><th colspan=4><font size=3 color=blue>'._('Pending Transfers Into').' '.$LocRow['locationname'].'</font></th></tr>';
+		echo '<tr><th colspan="4"><font size="3" color="blue">'._('Pending Transfers Into').' '.$LocRow['locationname'].'</font></th></tr>';
 		echo '<tr>
 			<th>'. _('Transfer Ref'). '</th>
 			<th>'. _('Transfer From'). '</th>
