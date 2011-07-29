@@ -353,12 +353,12 @@ function change_data(type) {
 			</td>
 			<?php //only show submit button if ready to go
 			if (($phpversion > 4.1 ) AND is_writable($CompanyPath)) {
-				// AND $_SESSION['session_support'] == 'Enabled' 
+				// AND $_SESSION['session_support'] == 'Enabled'
 				echo '<td colspan="1" align="right">
 						<input type="submit" tabindex="20" name="submit" value="Install WebERP" class="submit" />
 						</td>';
 			} else {
-				echo '<td>FIX ERRORS FIRST</td></tr><tr><td colspan=5><h2>The installation cannot proceed until the above errors are resolved</h2></td>';
+				echo '<td>FIX ERRORS FIRST</td></tr><tr><td colspan="5"><h2>The installation cannot proceed until the above errors are resolved</h2></td>';
 			}
 			?>
 		</tr>
