@@ -418,7 +418,7 @@ if (isset($_GET['AllocTrans'])) {
 				<input tabindex='.$j.' type="submit" name="RefreshAllocTotal" value="' . _('Recalculate Total To Allocate') . '" /></td>';
 
 		echo '<tr>
-				<td colspan=5 class="number"><b>'._('Left to allocate').'</b></td>
+				<td colspan="5" class="number"><b>'._('Left to allocate').'</b></td>
 				<td class="number"><b>' . number_format($remaining-$TotalAllocated,2).'</b></td>
 			</tr>';
 		echo '</table><br />';
