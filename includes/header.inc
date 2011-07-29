@@ -42,7 +42,7 @@
 		echo '<td align="left" style="width:100%;" class="quick_menu_left">';
 // Use icons for company and user data, saves screen realestate, use ALT tag in case theme icon not avail.
 		echo '<img src="'.$rootpath.'/css/'.$theme.'/images/company.png" title="' . _('Company') . '" ALT="' . _('Company') . '" />';
-		echo ' ' . stripslashes($_SESSION['CompanyRecord']['coyname']) . '  <a href="' .  $rootpath . '/UserSettings.php"><img src="'.$rootpath.'/css/'.$theme.'/images/user.png" TITLE="User" ALT="' . _('User') . '" /> ' . stripslashes($_SESSION['UsersRealName']) . '</a>';
+		echo ' ' . stripslashes($_SESSION['CompanyRecord']['coyname']) . '  <a href="' .  $rootpath . '/UserSettings.php"><img src="'.$rootpath.'/css/'.$theme.'/images/user.png" TITLE="User" ALT="' . _('User') . '" />' . stripslashes($_SESSION['UsersRealName']) . '</a>';
 // Make the title text a class, can be set to display:none is some themes
 		echo '<br /><font class="header_title"> ' . $title . '</font></td>';
 		echo '<td class="quick_menu_tabs">';

@@ -6,6 +6,7 @@ class URLDetails {
 	private $URL;
 	private $PostArray;
 	public $xml;
+	public $Links;
 
 	function __construct($SessionID) {
 		$this->SessionID = $SessionID;
@@ -184,6 +185,7 @@ class URLDetails {
 			for ($j=0; $j<$result->item($i)->attributes->length; $j++) {
 				$name = $result->item($i)->attributes->item($j)->name;
 				$Links[$k][$name]=(string)$result->item($i)->attributes->getNamedItem($name)->nodeValue;
+				$Links[$k]['value']=$result->item($i)->nodeValue;
 			}
 			$k++;
 		}
