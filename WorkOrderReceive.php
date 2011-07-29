@@ -822,8 +822,8 @@ if($WORow['controlled']==1){ //controlled
 		}
 		echo '</tr>';
 		echo '<input type="hidden" name="CountOfInputs" value=' . $i . '>';
-		echo '<tr><td colspan=5></td></tr></table>';
-		echo '<br /><div class="centre"><input type="submit" name="Process" value="' . _('Process Manufactured Items Received') . '"></div>';
+		echo '<tr><td colspan="5"></td></tr></table>';
+		echo '<br /><div class="centre"><input type="submit" name="Process" value="' . _('Process Manufactured Items Received') . '" /></div>';
 	} else { //controlled but not serialised - just lot/batch control
 		echo '<tr><th colspan="2">' . _('Batch/Lots Received') . '</th></tr>';
 		if ($_SESSION['DefineControlledOnWOEntry']==1){ //then potentially batches/lots already set up
@@ -840,22 +840,22 @@ if($WORow['controlled']==1){ //controlled
 					if (($i/5 -intval($i/5))==0){
 						echo '</tr><tr>';
 					}
-					echo '<td><input type="textbox" name="BatchRef' . $i . '" value="' . $WOSNRow[0] . '"></td>
-						  <td><input type="textbox" class="number" name="Qty' . $i . '" >
-						  		<input type="hidden" name="QualityText' . $i . '" value="' . $WOSNRow[2] . '">
-						  		<input type="hidden" name="QtyReqd' . $i . '" value="' . $WOSNRow[1] . '"></td></tr>';
+					echo '<td><input type="text" name="BatchRef' . $i . '" value="' . $WOSNRow[0] . '" /></td>
+						  <td><input type="text" class="number" name="Qty' . $i . '" />
+						  		<input type="hidden" name="QualityText' . $i . '" value="' . $WOSNRow[2] . '" />
+						  		<input type="hidden" name="QtyReqd' . $i . '" value="' . $WOSNRow[1] . '" /></td></tr>';
 					$i++;
 				}
 			}
 		} else { // batches/lots yet to be set up enter them manually
 			for ($i=0;$i<15;$i++){
-				echo '<tr><td><input type="textbox" name="BatchRef' . $i .'" ';
+				echo '<tr><td><input type="text" name="BatchRef' . $i .'" ';
 
 				if ($i==0){
 					echo 'value="' . $StringBitOfLotSNRef . ($LotSNRefNumeric + 1) . '"';
 				}
-				echo '></td>
-						  <td><input type="textbox" class="number" name="Qty' . $i .'"></td></tr>';
+				echo ' /></td>
+						  <td><input type="text" class="number" name="Qty' . $i .'" /></td></tr>';
 			}
 		}
 		echo '<input type="hidden" name="CountOfInputs" value=' . $i . '></table>';
