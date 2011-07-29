@@ -1,29 +1,29 @@
 <?php
 /* $Id$*/
-/*Function to calculate the freight cost. 
+/*Function to calculate the freight cost.
 Freight cost is determined by looking for a match of destination city from the Address2 and Address3 fields then looking through the freight company rates for the total KGs and Cubic meters  to figure out the least cost shipping company. */
 
 
-Function CalcFreightCost ($TotalValue, 
-				$BrAdd2, 
-				$BrAdd3, 
-				$TotalVolume, 
-				$TotalWeight, 
+function CalcFreightCost ($TotalValue,
+				$BrAdd2,
+				$BrAdd3,
+				$TotalVolume,
+				$TotalWeight,
 				$FromLocation,
 				$db){
 
 	# make an array of all the words that could be the name of the destination city
 	$FindCity = explode(' ', $BrAdd2 . ' ' . $BrAdd3);
 
-	$sql = 'Select shipperid,
-			kgrate *' . $TotalWeight . ' AS kgcost,
-			cubrate * ' . $TotalVolume . " AS cubcost,
+	$sql = "SELECT shipperid,
+			kgrate *" . $TotalWeight . " AS kgcost,
+			cubrate * " . $TotalVolume . " AS cubcost,
 			fixedprice, minimumchg
 		FROM freightcosts
-		WHERE locationfrom = '$FromLocation'
-		AND maxkgs > " . $TotalWeight . '
-		AND maxcub >' . $TotalVolume . '
-		AND (';
+		WHERE locationfrom = '".$FromLocation."'
+		AND maxkgs > " . $TotalWeight . "
+		AND maxcub > " . $TotalVolume . "
+		AND (";
 
 	foreach ($FindCity as $City) {
 
