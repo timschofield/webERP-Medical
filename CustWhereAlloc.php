@@ -80,7 +80,7 @@ if (isset($_POST['ShowResults']) AND  $_POST['TransNo']!=''){
 	} else {
 		echo '<br /><table cellpadding="2" class="selection">';
 
-		echo '<tr><th colspan=6><div class="centre"><font size=3 color=blue><b>'._('Allocations made against invoice number') . ' ' . $_POST['TransNo']
+		echo '<tr><th colspan="6"><div class="centre"><font size="3" color="blue"><b>'._('Allocations made against invoice number') . ' ' . $_POST['TransNo']
 			. '<br />'._('Transaction Total').': '. number_format($myrow['totamt'],2) . '</font></b></div></th></tr>';
 
 		$tableheader = '<tr><th>'._('Type').'</th>
