@@ -280,7 +280,7 @@ if (! isset($_GET['delete'])) {
 	} else { //end of if $SelectedSaleperson only do the else when a new record is being entered
 
 		echo '<table class="selection"><tr><td>' . _('Salesperson code') . ':</td>
-			<td><input type="text" '. (in_array('SalesmanCode',$Errors) ? 'class="inputerror"' : '' ) .' name="SalesmanCode" size=3 maxlength=3></td></tr>';
+			<td><input type="text" '. (in_array('SalesmanCode',$Errors) ? 'class="inputerror"' : '' ) .' name="SalesmanCode" size="3" maxlength="3" /></td></tr>';
 	}
 	if (!isset($_POST['SalesmanName'])){
 	  $_POST['SalesmanName']='';
