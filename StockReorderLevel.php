@@ -42,9 +42,9 @@ $DbgMsg = _('The SQL that failed was');
 $LocStockResult = DB_query($sql, $db, $ErrMsg, $DbgMsg);
 
 echo '<table cellpadding="2" class="selection">';
-echo '<tr><th colspan="3">'._('Stock Code') . ':<input type="text" name="StockID" size="21" value="' . $StockID . '" maxlength="20">';
+echo '<tr><th colspan="3">'._('Stock Code') . ':<input type="text" name="StockID" size="21" value="' . $StockID . '" maxlength="20" />';
 echo '<input type="submit" name="Show" value="' . _('Show Re-Order Levels') . '"></th></tr>';
-echo '<tr><th colspan=3><font color=BLUE size=3><b>' . $StockID . ' - ' . $myrow[0] . '</b>  (' . _('In Units of') . ' ' . $myrow[1] . ')</font></th></tr>';
+echo '<tr><th colspan="3"><font color="blue" size="3"><b>' . $StockID . ' - ' . $myrow[0] . '</b>  (' . _('In Units of') . ' ' . $myrow[1] . ')</font></th></tr>';
 
 $TableHeader = '<tr>
 		<th>' . _('Location') . '</th>
