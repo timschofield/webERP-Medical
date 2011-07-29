@@ -114,7 +114,7 @@ if (isset($_POST['DoUpgrade'])){
 		$sql ='';
 		$InAFunction = false;
 		echo '<br /><table>
-					<tr><th colspan=2>' . _('Applying') . ' ' . $SQLScriptFile . '</th></tr>';
+					<tr><th colspan="2">' . _('Applying') . ' ' . $SQLScriptFile . '</th></tr>';
 
 		for ($i=0; $i<=$ScriptFileEntries; $i++) {
 
