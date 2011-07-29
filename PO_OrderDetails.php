@@ -84,7 +84,7 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/s
 		_('Purchase Order') . '" alt="" />' . ' ' . $title . '</p>';
 
 echo '<table class="selection" cellpadding=2>';
-echo '<tr><th colspan=8><font size=3 color=navy>'. _('Order Header Details'). '</font></th></tr>';
+echo '<tr><th colspan="8"><font size="3" color="navy">'. _('Order Header Details'). '</font></th></tr>';
 echo '<tr><th style="text-align:left">' . _('Supplier Code'). '</td><td><a href="SelectSupplier.php?SupplierID='.$myrow['supplierid'].'">' . $myrow['supplierid'] . '</a></td>
 	<th style="text-align:left">' . _('Supplier Name'). '</td><td><a href="SelectSupplier.php?SupplierID='.$myrow['supplierid'].'">' . $myrow['suppname'] . '</a></td></tr>';
 
