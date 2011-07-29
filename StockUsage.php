@@ -165,7 +165,7 @@ if (isset($_POST['ShowUsage'])){
 	//end of while loop
 
 	if ($TotalUsage>0 && $PeriodsCounter>0){
-	echo '<tr><th colspan=2>' . _('Average Usage per month is') . ' ' . number_format($TotalUsage/$PeriodsCounter);
+	echo '<tr><th colspan="2">' . _('Average Usage per month is') . ' ' . number_format($TotalUsage/$PeriodsCounter);
 	echo '</th></tr>';
 	}
 	echo '</table>';
