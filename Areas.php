@@ -217,7 +217,7 @@ if (!isset($_GET['delete'])) {
 		<td><input tabindex="2" ' . (in_array('AreaDescription',$Errors) ?  'class="inputerror"' : '' ) .'  type="text" name="AreaDescription" value="' . $_POST['AreaDescription'] .'" size="26" maxlength="25" /></td>
 		</tr>';
 
-	echo '<tr><td colspan=2><div class="centre"><input tabindex="3" type="submit" name="submit" value=' . _('Enter Information') .'></div></td></tr>';
+	echo '<tr><td colspan="2"><div class="centre"><input tabindex="3" type="submit" name="submit" value=' . _('Enter Information') .'></div></td></tr>';
 	echo '</table></form>';
 
  } //end if record deleted no point displaying form to add record
