@@ -1044,7 +1044,7 @@ if (!isset($_GET['Edit'])) {
 	$DbgMsg = _('The SQL used to retrieve the category details but failed was');
 	$result1 = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
-	echo '<table class="selection"><tr><th colspan=3><font size=3 color=blue>'. _('Search For Stock Items') . '</th>';
+	echo '<table class="selection"><tr><th colspan="3"><font size="3" color="blue">'. _('Search For Stock Items') . '</th>';
 
 	echo ':</font></tr><tr><td><select name="StockCat">';
 
