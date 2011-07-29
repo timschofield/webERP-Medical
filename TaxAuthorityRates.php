@@ -89,7 +89,7 @@ if (DB_num_rows($TaxRatesResult)>0){
 	while ($myrow = DB_fetch_array($TaxRatesResult)){
 
 		if ($OldProvince!=$myrow['dispatchtaxprovince'] AND $OldProvince!=''){
-			echo '<tr bgcolor="#555555"><font size=1> </font><td colspan=3></td></tr>';
+			echo '<tr bgcolor="#555555"><font size="1"> </font><td colspan="3"></td></tr>';
 		}
 
 		if ($k==1){
@@ -102,7 +102,7 @@ if (DB_num_rows($TaxRatesResult)>0){
 
 		printf('<td>%s</td>
 			<td>%s</td>
-			<td><input type="text" class="number" name=%s maxlength=5 size=5 value=%s></td>
+			<td><input type="text" class="number" name="%s" maxlength="5" size="5" value="%s" /></td>
 			</tr>',
 			$myrow['taxprovincename'],
 			$myrow['taxcatname'],
