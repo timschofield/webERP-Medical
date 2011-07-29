@@ -174,7 +174,7 @@ echo '</select></td></tr>
 	<td><input type="password" name="pass" size=20 value="' .  $_POST['pass'] . '"></td></tr>
 	<tr><td>' . _('Confirm Password') . ':</td>
 	<td><input type="password" name="passcheck" size=20  value="' . $_POST['passcheck'] . '"></td></tr>
-	<tr><td colspan=2 align="center"><i>' . _('If you leave the password boxes empty your password will not change') . '</i></td></tr>
+	<tr><td colspan="2" align="center"><i>' . _('If you leave the password boxes empty your password will not change') . '</i></td></tr>
 	<tr><td>' . _('Email') . ':</td>';
 
 $sql = "SELECT email from www_users WHERE userid = '" . $_SESSION['UserID'] . "'";
