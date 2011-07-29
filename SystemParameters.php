@@ -318,16 +318,16 @@ $TableHeader = '<tr>
 				<th>' . _('Value') . '</th>
 				<th>' . _('Notes') . '</th>';
 
-echo '<tr><th colspan=3>' . _('General Settings') . '</th></tr>';
+echo '<tr><th colspan="3">' . _('General Settings') . '</th></tr>';
 echo $TableHeader;
 
 // DefaultDateFormat
 echo '<tr style="outline: 1px solid"><td>' . _('Default Date Format') . ':</td>
 	<td><select name="X_DefaultDateFormat">
-	<option '.(($_SESSION['DefaultDateFormat']=='d/m/Y')?'selected ':'').'Value="d/m/Y">d/m/Y</option>
-	<option '.(($_SESSION['DefaultDateFormat']=='d.m.Y')?'selected ':'').'Value="d.m.Y">d.m.Y</option>
-	<option '.(($_SESSION['DefaultDateFormat']=='m/d/Y')?'selected ':'').'Value="m/d/Y">m/d/Y</option>
-	<option '.(($_SESSION['DefaultDateFormat']=='Y/m/d')?'selected ':'').'Value="Y/m/d">Y/m/d</option>
+	<option '.(($_SESSION['DefaultDateFormat']=='d/m/Y')?'selected="True" ':'').'value="d/m/Y">d/m/Y</option>
+	<option '.(($_SESSION['DefaultDateFormat']=='d.m.Y')?'selected="True" ':'').'value="d.m.Y">d.m.Y</option>
+	<option '.(($_SESSION['DefaultDateFormat']=='m/d/Y')?'selected="True" ':'').'value="m/d/Y">m/d/Y</option>
+	<option '.(($_SESSION['DefaultDateFormat']=='Y/m/d')?'selected="True" ':'').'value="Y/m/d">Y/m/d</option>
 	</select></td>
 	<td>' . _('The default date format for entry of dates and display.') . '</td></tr>';
 
@@ -347,7 +347,7 @@ while (false != ($ThemeName = $ThemeDirectory->read())){
 echo '</select></td>
 	<td>' . _('The default theme is used for new users who have not yet defined the display colour scheme theme of their choice') . '</td></tr>';
 
-echo '<tr><th colspan=3>' . _('Accounts Receivable/Payable Settings') . '</th></tr>';
+echo '<tr><th colspan="3">' . _('Accounts Receivable/Payable Settings') . '</th></tr>';
 
 // PastDueDays1
 echo '<tr style="outline: 1px solid"><td>' . _('First Overdue Deadline in (days)') . ':</td>
@@ -368,17 +368,17 @@ echo '<tr style="outline: 1px solid"><td>' . _('Default Credit Limit') . ':</td>
 // Check Credit Limits
 echo '<tr style="outline: 1px solid"><td>' . _('Check Credit Limits') . ':</td>
 	<td><select name="X_CheckCreditLimits">
-	<option '.($_SESSION['CheckCreditLimits']==0?'selected ':'').'value="0">'._('Do not check').'</option>
-	<option '.($_SESSION['CheckCreditLimits']==1?'selected ':'').'value="1">'._('Warn on breach').'</option>
-	<option '.($_SESSION['CheckCreditLimits']==2?'selected ':'').'value="2">'._('Prohibit Sales').'</option>
+	<option '.($_SESSION['CheckCreditLimits']==0?'selected="True" ':'').'value="0">'._('Do not check').'</option>
+	<option '.($_SESSION['CheckCreditLimits']==1?'selected="True" ':'').'value="1">'._('Warn on breach').'</option>
+	<option '.($_SESSION['CheckCreditLimits']==2?'selected="True" ':'').'value="2">'._('Prohibit Sales').'</option>
 	</select></td>
 	<td>' . _('Credit limits can be checked at order entry to warn only or to stop the order from being entered where it would take a customer account balance over their limit') . '</td></tr>';
 
 // Show_Settled_LastMonth
 echo '<tr style="outline: 1px solid"><td>' . _('Show Settled Last Month') . ':</td>
 	<td><select name="X_Show_Settled_LastMonth">
-	<option '.($_SESSION['Show_Settled_LastMonth']?'selected ':'').'value="1">'._('Yes').'</option>
-	<option '.(!$_SESSION['Show_Settled_LastMonth']?'selected ':'').'value="0">'._('No').'</option>
+	<option '.($_SESSION['Show_Settled_LastMonth']?'selected="True" ':'').'value="1">'._('Yes').'</option>
+	<option '.(!$_SESSION['Show_Settled_LastMonth']?'selected="True" ':'').'value="0">'._('No').'</option>
 	</select></td>
 	<td>' . _('This setting refers to the format of customer statements. If the invoices and credit notes that have been paid and settled during the course of the current month should be shown then select Yes. Selecting No will only show currently outstanding invoices, credits and payments that have not been allocated') . '</td></tr>';
 
