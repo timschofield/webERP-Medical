@@ -266,9 +266,9 @@ if (isset($_POST['PrintPDF'])) {
 	echo '</select></td></tr>';
 	echo '<tr><td>' . _('Inventory Category') . ':</td><td><select name="CategoryID">';
 	echo '<option selected="True" value="All">' . _('All Stock Categories') . '</option>';
-	$sql = 'SELECT categoryid,
+	$sql = "SELECT categoryid,
 				   categorydescription
-			FROM stockcategory';
+			FROM stockcategory";
 	$result = DB_query($sql,$db);
 	while ($myrow = DB_fetch_array($result)) {
 		echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categoryid'] . ' - ' .$myrow['categorydescription'] . '</option>';
