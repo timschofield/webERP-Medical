@@ -205,7 +205,7 @@ if (isset($SelectedAccount) and $SelectedAccount != '') {
 	echo '<tr><td colspan="2">'._('Annual Budget').'</td>
 				<td><input class="number" type="text" size="14" name="AnnualAmountLY" value="0.00" /></td>
 				</td><td><td></td>
-				<td><input class="number" type="text" size=14 name="AnnualAmountTY" value="0.00" /></td>
+				<td><input class="number" type="text" size="14" name="AnnualAmountTY" value="0.00" /></td>
 				<td></td>
 				<td><input onChange="numberFormat(this,2)" class="number" type="text" size="14" name="AnnualAmount" value="0.00" /></td>';
 	echo '<td><input type="submit" name="apportion" value="' . _('Apportion Budget') . '"></td>';
