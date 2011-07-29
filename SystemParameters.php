@@ -624,12 +624,12 @@ echo '<tr style="outline: 1px solid"><td>' . _('Check Price Charged vs Order Pri
 
 // OverChargeProportion
 echo '<tr style="outline: 1px solid"><td>' . _('Allowed Over Charge Proportion') . ':</td>
-	<td><input type="text" class="number" name="X_OverChargeProportion" size=4 maxlength=3 value="' . $_SESSION['OverChargeProportion'] . '"></td>
+	<td><input type="text" class="number" name="X_OverChargeProportion" size="4" maxlength="3" value="' . $_SESSION['OverChargeProportion'] . '" /></td>
 	<td>' . _('If check price charges vs Order price is set to yes then this proportion determines the percentage by which invoices can be overcharged with respect to price') .'</td></tr>';
 
 // OverReceiveProportion
 echo '<tr style="outline: 1px solid"><td>' . _('Allowed Over Receive Proportion') . ':</td>
-	<td><input type="text" class="number" name="X_OverReceiveProportion" size=4 maxlength=3 value="' . $_SESSION['OverReceiveProportion'] . '"></td>
+	<td><input type="text" class="number" name="X_OverReceiveProportion" size="4" maxlength="3" value="' . $_SESSION['OverReceiveProportion'] . '" /></td>
 	<td>' . _('If check quantity charged vs delivery quantity is set to yes then this proportion determines the percentage by which invoices can be overcharged with respect to delivery') .'</td></tr>';
 
 // PO_AllowSameItemMultipleTimes
@@ -663,18 +663,18 @@ echo '</select></td>
 
 //PageLength
 echo '<tr style="outline: 1px solid"><td>' . _('Report Page Length') . ':</td>
-	<td><input type="text" class="number" name="X_PageLength" size=4 maxlength=6 value="' . $_SESSION['PageLength'] . '"></td><td>&nbsp;</td>
+	<td><input type="text" class="number" name="X_PageLength" size="4" maxlength="6" value="' . $_SESSION['PageLength'] . '" /></td><td>&nbsp;</td>
 </tr>';
 
 //DefaultDisplayRecordsMax
 echo '<tr style="outline: 1px solid"><td>' . _('Default Maximum Number of Records to Show') . ':</td>
-	<td><input type="text" class="number" name="X_DefaultDisplayRecordsMax" size=4 maxlength=3 value="' . $_SESSION['DefaultDisplayRecordsMax'] . '"></td>
+	<td><input type="text" class="number" name="X_DefaultDisplayRecordsMax" size="4" maxlength="3" value="' . $_SESSION['DefaultDisplayRecordsMax'] . '" /></td>
 	<td>' . _('When pages have code to limit the number of returned records - such as select customer, select supplier and select item, then this will be the default number of records to show for a user who has not changed this for themselves in user settings.') . '</td>
 	</tr>';
 
 //MaxImageSize
 echo '<tr style="outline: 1px solid"><td>' . _('Maximum Size in KB of uploaded images') . ':</td>
-	<td><input type="text" class="number" name="X_MaxImageSize" size=4 maxlength=3 value="' . $_SESSION['MaxImageSize'] . '"></td>
+	<td><input type="text" class="number" name="X_MaxImageSize" size="4" maxlength="3" value="' . $_SESSION['MaxImageSize'] . '" /></td>
 	<td>' . _('Picture files of items can be uploaded to the server. The system will check that files uploaded are less than this size (in KB) before they will be allowed to be uploaded. Large pictures will make the system slow and will be difficult to view in the stock maintenance screen.') .'</td>
 </tr>';
 //NumberOfMonthMustBeShown
@@ -688,7 +688,7 @@ $row = DB_fetch_array($result);
 $_SESSION['NumberOfMonthMustBeShown'] = $row['confvalue'];
 
 echo '<tr style="outline: 1px solid"><td>' . _('Number Of Month Must Be Shown') . ':</td>
-		  <td><input type="text" class="number" name="X_NumberOfMonthMustBeShown" size=4 maxlength=3 value="' . $_SESSION['NumberOfMonthMustBeShown'] . '"></td>
+		  <td><input type="text" class="number" name="X_NumberOfMonthMustBeShown" size="4" maxlength="3" value="' . $_SESSION['NumberOfMonthMustBeShown'] . '" /></td>
 		  <td>' . _('Number of month must be shown on report can be changed with this parameters ex: in CustomerInquiry.php ') .'</td>
       </tr>';
 
