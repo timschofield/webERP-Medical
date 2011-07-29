@@ -545,7 +545,7 @@ if (!isset($_GET['delete'])) {
 			echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '?DebtorNo=' . $DebtorNo. '">' . _('Show all branches defined for'). ' '. $DebtorNo . '</a></div>';
 		}
 		echo '<br /><table class="selection">';
-		echo '<tr><th colspan=2><div class="centre"><b>'._('Change Branch').'</b></th></tr>';
+		echo '<tr><th colspan="2"><div class="centre"><b>'._('Change Branch').'</b></th></tr>';
 		echo '<tr><td>'._('Branch Code').':</td><td>';
 		echo $_POST['BranchCode'] . '</td></tr>';
 
