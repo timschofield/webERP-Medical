@@ -525,7 +525,7 @@ if ($WORow['closed']==1){
 if (!isset($_POST['IssuedDate'])){
 	$_POST['IssuedDate'] = Date($_SESSION['DefaultDateFormat']);
 }
-echo '<table cellpadding=2 class="selection">
+echo '<table cellpadding="2" class="selection">
 	<tr><td class="label">' . _('Issue to work order') . ':</td>
 		<td>' . $_POST['WO'] .'</td><td class="label">' . _('Item') . ':</td>
 		<td>' . $_POST['StockID'] . ' - ' . $WORow['description'] . '</td>
@@ -541,9 +541,9 @@ echo '<table cellpadding=2 class="selection">
 	 <tr><td class="label">' . _('Already Received') . ':</td>
 		<td class="number">' . number_format($WORow['qtyrecd'],$WORow['decimalplaces']) . '</td>
 		<td colspan="2">' . $WORow['units'] . '</td></tr>
-	<tr><td colspan=4></td></tr>
+	<tr><td colspan="4"></td></tr>
 	 <tr><td class="label">' . _('Date Material Issued') . ':</td>
-		<td><input type="text" name=issuedate value=' . Date($_SESSION['DefaultDateFormat']) . ' class="date" size=10 alt="'.$_SESSION['DefaultDateFormat'].'" ></td>
+		<td><input type="text" name="issuedate" value="' . Date($_SESSION['DefaultDateFormat']) . '" class="date" size="10" alt="'.$_SESSION['DefaultDateFormat'].'" /></td>
 		<td class="label">' . _('Issued From') . ':</td><td>';
 
 if (!isset($_POST['IssueItem'])){
