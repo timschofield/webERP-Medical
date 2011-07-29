@@ -100,7 +100,7 @@ while ($myrow=DB_fetch_array($result)) {
 			WHERE orderno='".$myrow['orderno'] . "'";
 		$lineresult=DB_query($linesql, $db);
 
-		echo '<tr><td></td><td colspan=5 align=left><table class="selection" align=left>';
+		echo '<tr><td></td><td colspan="5" align="left"><table class="selection" align="left">';
 		echo '<th>'._('Product').'</th>';
 		echo '<th>'._('Quantity Ordered').'</th>';
 		echo '<th>'._('Currency').'</th>';
