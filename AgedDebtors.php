@@ -473,13 +473,13 @@ if (isset($_POST['PrintPDF'])
 		echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table>';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-		echo '<tr><td>' . _('From Customer Code') . ':' . '</font></td><td><input tabindex="1" type="text" maxlength=6 size=7 name=FromCriteria value="0"></td></tr>';
-		echo '<tr><td>' . _('To Customer Code') . ':' . '</td><td><input tabindex="2" type="text" maxlength=6 size=7 name=ToCriteria value="zzzzzz"></td></tr>';
+		echo '<tr><td>' . _('From Customer Code') . ':' . '</font></td><td><input tabindex="1" type="text" maxlength="6" size="7" name="FromCriteria" value="0" /></td></tr>';
+		echo '<tr><td>' . _('To Customer Code') . ':' . '</td><td><input tabindex="2" type="text" maxlength="6" size="7" name="ToCriteria" value="zzzzzz" /></td></tr>';
 
 		echo '<tr><td>' . _('All balances or overdues only') . ':' . '</td><td><select tabindex="3" name="All_Or_Overdues">';
-		echo '<option selected="True" Value="All">' . _('All customers with balances') . '</option>';
-		echo '<option Value="OverduesOnly">' . _('Overdue accounts only') . '</option>';
-		echo '<option Value="HeldOnly">' . _('Held accounts only') . '</option>';
+		echo '<option selected="True" value="All">' . _('All customers with balances') . '</option>';
+		echo '<option value="OverduesOnly">' . _('Overdue accounts only') . '</option>';
+		echo '<option value="HeldOnly">' . _('Held accounts only') . '</option>';
 		echo '</select></td></tr>';
 
 		echo '<tr><td>' . _('Only Show Customers Of') . ':' . '</td><td><select tabindex="4" name="Salesman">';
