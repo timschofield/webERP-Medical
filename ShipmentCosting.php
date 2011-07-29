@@ -460,17 +460,17 @@ if (db_num_rows($LineItemsResult) > 0) {
 				<td class="number">' . $VariancePercentage . '%</td></tr>';
 	}
 }
-echo '<tr><td colspan=3 class="number"><font color=BLUE><b>'. _('Total Shipment Charges'). '</b></font></td>
+echo '<tr><td colspan="3" class="number"><font color="blue"><b>'. _('Total Shipment Charges'). '</b></font></td>
 	<td class="number">' . number_format($TotalInvoiceValueOfShipment) . '</td>
 	<td class="number">' . number_format($TotalCostsToApportion) .'</td></tr>';
 
-echo '<tr><td colspan=6 class="number">' . _('Total Value of all variances on this shipment') . '</td>
+echo '<tr><td colspan="6" class="number">' . _('Total Value of all variances on this shipment') . '</td>
 			  <td class="number">' . number_format($TotalShiptVariance,2) . '</td></tr>';
 
 echo '</table>';
 
 
-echo '<br /><table colspan=2 width=95%><tr><td valign=top>'; // put this shipment charges side by side in a table (major table 2 cols)
+echo '<br /><table colspan="2" width="95%"><tr><td valign="top">'; // put this shipment charges side by side in a table (major table 2 cols)
 
 $sql = "SELECT suppliers.suppname,
 				supptrans.suppreference,
@@ -498,8 +498,8 @@ $sql = "SELECT suppliers.suppname,
 
 $ChargesResult = DB_query($sql,$db);
 
-echo '<table cellpadding=2 colspan=6 class="selection">';
-echo '<tr><th colspan=6><font color=navy size=3>' . _('Shipment Charges Against Products'). '</font></th></tr>';
+echo '<table cellpadding="2" colspan="6" class="selection">';
+echo '<tr><th colspan="6"><font color="navy" size="3">' . _('Shipment Charges Against Products'). '</font></th></tr>';
 
 $TableHeader = '<tr>
 					<th>'. _('Supplier'). '</th>
