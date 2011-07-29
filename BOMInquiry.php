@@ -18,7 +18,7 @@ if (!isset($_POST['StockID'])) {
 	 _('to view the costed bill of materials') . '.' . '<br /><font size=1>' .
 	 _('Parts must be defined in the stock item entry') . '/' . _('modification screen as manufactured') .
      ', ' . _('kits or assemblies to be available for construction of a bill of material').'</div>'
-	.'</font><br /><table class="selection" cellpadding=3 colspan=4><tr><td><font size=1>' . _('Enter text extracts in the') .
+	.'</font><br /><table class="selection" cellpadding="3" colspan="4"><tr><td><font size="1">' . _('Enter text extracts in the') .
 	 ' <b>' . _('description') . '</b>:</font></td><td><input tabindex="1" type="text" name="Keywords" size="20" maxlength="25" /></td>
 	 <td><font size="3"><b>' . _('OR') . '</b></font></td><td><font size="1">' . _('Enter extract of the') .
      ' <b>' . _('Stock Code') . '</b>:</font></td><td><input tabindex="2" type="text" name="StockCode" size="15" maxlength="20" /></td>
@@ -214,15 +214,15 @@ if (isset($StockID) and $StockID!=""){
 		/*CCF modification */
 		$TotalCost += $ParentLabourCost;
 		echo '<tr>
-			<td colspan=4 class="number"><b>' . _('Labour Cost') . '</b></td>
+			<td colspan="4" class="number"><b>' . _('Labour Cost') . '</b></td>
 			<td class="number"><b>' . number_format($ParentLabourCost,2) . '</b></td> </tr>';
 		$TotalCost += $ParentOverheadCost;
-		echo '<tr><td colspan=4 class="number"><b>' . _('Overhead Cost') . '</b></td>
+		echo '<tr><td colspan="4" class="number"><b>' . _('Overhead Cost') . '</b></td>
 			<td class="number"><b>' . number_format($ParentOverheadCost,2) . '</b></td></tr>';
 		/*CCF end modification */
 
 		echo '<tr>
-			<td colspan=4 class="number"><b>' . _('Total Cost') . '</b></td>
+			<td colspan="4" class="number"><b>' . _('Total Cost') . '</b></td>
 			<td class="number"><b>' . number_format($TotalCost,2) . '</b></td>
 		</tr>';
 
