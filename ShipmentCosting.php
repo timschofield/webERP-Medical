@@ -47,7 +47,7 @@ if (DB_num_rows($GetShiptHdrResult)==0) {
 $HeaderData = DB_fetch_array($GetShiptHdrResult);
 echo '<br />';
 echo '<table class="selection">';
-echo '<tr><th colspan=4><font size=3 color=navy>'._('Shipment Details').'</font></th></tr>';
+echo '<tr><th colspan="4"><font size="3" color="navy">'._('Shipment Details').'</font></th></tr>';
 echo '<tr>
 		<td><b>'. _('Shipment') .': </td>
 		<td><b>' . $_GET['SelectedShipment'] . '</b></td>
@@ -609,7 +609,7 @@ while ($myrow=db_fetch_array($ChargesResult)) {
 }
 
 echo '<tr>
-	<td class="number" colspan=4><font color=BLUE><b>'. _('Total General Shipment Charges'). ':</b></font></td>
+	<td class="number" colspan="4"><font color="blue"><b>'. _('Total General Shipment Charges'). ':</b></font></td>
 	<td class="number">' . number_format($TotalGeneralShipmentChgs) . '</td></tr>';
 
 echo '</table>';
