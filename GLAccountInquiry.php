@@ -179,16 +179,16 @@ if (isset($_POST['Show'])){
 		$RunningTotal =$ChartDetailRow['bfwd'];
 		if ($RunningTotal < 0 ){ //its a credit balance b/fwd
 			echo '<tr bgcolor="#FDFEEF">
-				<td colspan=3><b>' . _('Brought Forward Balance') . '</b><td>
+				<td colspan="3"><b>' . _('Brought Forward Balance') . '</b><td>
 				</td></td>
 				<td class="number"><b>' . number_format(-$RunningTotal,2) . '</b></td>
 				<td></td>
 				</tr>';
 		} else { //its a debit balance b/fwd
 			echo '<tr bgcolor="#FDFEEF">
-				<td colspan=3><b>' . _('Brought Forward Balance') . '</b></td>
+				<td colspan="3"><b>' . _('Brought Forward Balance') . '</b></td>
 				<td class="number"><b>' . number_format($RunningTotal,2) . '</b></td>
-				<td colspan=2></td>
+				<td colspan="2"></td>
 				</tr>';
 		}
 	}
@@ -215,7 +215,7 @@ if (isset($_POST['Show'])){
 				$ChartDetailRow = DB_fetch_array($ChartDetailsResult);
 
 				echo '<tr bgcolor="#FDFEEF">
-					<td colspan=3><b>' . _('Total for period') . ' ' . $PeriodNo . '</b></td>';
+					<td colspan="3"><b>' . _('Total for period') . ' ' . $PeriodNo . '</b></td>';
 				if ($PeriodTotal < 0 ){ //its a credit balance b/fwd
 					if ($PandLAccount==True) {
 						$RunningTotal = 0;
@@ -229,7 +229,7 @@ if (isset($_POST['Show'])){
 						$RunningTotal = 0;
 					}
 					echo '<td class="number"><b>' . number_format($PeriodTotal,2) . '</b></td>
-						<td colspan=2></td>
+						<td colspan="2"></td>
 						</tr>';
 				}
 				$IntegrityReport .= '<br />' . _('Period') . ': ' . $PeriodNo  . _('Account movement per transaction') . ': '  . number_format($PeriodTotal,2) . ' ' . _('Movement per ChartDetails record') . ': ' . number_format($ChartDetailRow['actual'],2) . ' ' . _('Period difference') . ': ' . number_format($PeriodTotal -$ChartDetailRow['actual'],3);
@@ -300,9 +300,9 @@ if (isset($_POST['Show'])){
 	echo '</b></td>';
 
 	if ($RunningTotal >0){
-		echo '<td class="number"><b>' . number_format(($RunningTotal),2) . '</b></td><td colspan=2></td></tr>';
+		echo '<td class="number"><b>' . number_format(($RunningTotal),2) . '</b></td><td colspan="2"></td></tr>';
 	}else {
-		echo '<td></td><td class="number"><b>' . number_format((-$RunningTotal),2) . '</b></td><td colspan=2></td></tr>';
+		echo '<td></td><td class="number"><b>' . number_format((-$RunningTotal),2) . '</b></td><td colspan="2"></td></tr>';
 	}
 	echo '</table>';
 } /* end of if Show button hit */
