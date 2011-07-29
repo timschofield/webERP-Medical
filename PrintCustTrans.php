@@ -712,7 +712,7 @@ if (($InvOrCredit == 'Invoice' or $InvOrCredit == 'Credit') and isset($PrintPDF)
 							} else {
 								echo '<font color="red" size="4">' . _('TAX CREDIT NOTE') . ' ';
 							}
-							echo '</b>' . _('Number') . ' ' . $FromTransNo . '</font><br /><font size=1>' . _('GST Number') . ' - ' . $_SESSION['CompanyRecord']['gstno'] . '</td></tr></table>';
+							echo '</b>' . _('Number') . ' ' . $FromTransNo . '</font><br /><font size="1">' . _('GST Number') . ' - ' . $_SESSION['CompanyRecord']['gstno'] . '</td></tr></table>';
 							/*Now print out company name and address */
 							echo '<table class="table1"><tr>
 						    	<td><font size="4" color="#333333"><b>' . $_SESSION['CompanyRecord']['coyname'] . '</b></font><br />';
@@ -753,7 +753,7 @@ if (($InvOrCredit == 'Invoice' or $InvOrCredit == 'Credit') and isset($PrintPDF)
 					} else {
 						echo '<font color=RED size=4>' . _('TAX CREDIT NOTE') . ' ';
 					}
-					echo '</b>' . _('Number') . ' ' . $FromTransNo . '</font><br /><font size=1>' . _('GST Number') . ' - ' . $_SESSION['CompanyRecord']['gstno'] . '</td></tr><table>';
+					echo '</b>' . _('Number') . ' ' . $FromTransNo . '</font><br /><font size="1">' . _('GST Number') . ' - ' . $_SESSION['CompanyRecord']['gstno'] . '</td></tr><table>';
 					/* Print out the logo and company name and address */
 					echo '<table class="table1"><tr><td><font size="4" color="#333333"><b>' . $_SESSION['CompanyRecord']['coyname'] . '</b></font><br />';
 					echo $_SESSION['CompanyRecord']['regoffice1'] . '<br />';
