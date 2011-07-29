@@ -348,7 +348,7 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 	$AccountsResult = DB_query($SQL,$db,_('No general ledger accounts were returned by the SQL because'));
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/preview.gif" title="' . _('Search') . '" alt="" /> ' . _('HTML View') . '</p>';
 
-	echo '<div class=invoice><table class="selection"><tr><th colspan=6><div class="centre"><font size=4 color=blue><b>' .
+	echo '<div class=invoice><table class="selection"><tr><th colspan="6"><div class="centre"><font size="4" color="blue"><b>' .
 		_('Balance Sheet as at') . ' ' . $BalanceDate .'</b></font></div></th></tr>';
 
 	if ($_POST['Detail']=='Detailed'){
@@ -627,7 +627,7 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 
 	if (isset($myrow['sectioninaccounts']) and $_POST['Detail']=='Detailed'){
 		printf('<tr>
-			<td colspan=6><font size=4 color=BLUE><b>%s</b></font></td>
+			<td colspan="6"><font size="4" color="blue"><b>%s</b></font></td>
 			</tr>',
 			$Sections[$myrow['sectioninaccounts']]);
 	}
