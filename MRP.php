@@ -539,7 +539,7 @@ if (isset($_POST['submit'])) {
 		}
 		echo '<table cellpadding=5><tr><td valign=top>';
 		echo '<table class="selection">';
-		echo '<tr><th colspan=3><font color=blue size=3>'._('Last Run Details').'</font></th></tr>';
+		echo '<tr><th colspan="3"><font color="blue" size="3">'._('Last Run Details').'</font></th></tr>';
 		echo '<tr>';
 		echo '<td>' . _('Last Run Time') . ':&nbsp&nbsp</td><td>' . $myrow['runtime'] . '</td></tr>';
 		echo '<td>' . _('Location') . ':&nbsp&nbsp</td><td>' . $myrow['location'] . '</td></tr>';
@@ -554,7 +554,7 @@ if (isset($_POST['submit'])) {
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection">';
 	// Generate selections for Location
-	echo '<tr><th colspan=3><font color=blue size=3>'._('This Run Details').'</font></th></tr>';
+	echo '<tr><th colspan="3"><font color="blue" size="3">'._('This Run Details').'</font></th></tr>';
 	echo '<tr>
 	 <td>' . _('Location') . '</td>
 	 <td><select name="location[]" multiple>
