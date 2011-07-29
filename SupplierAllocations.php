@@ -517,10 +517,10 @@ if (isset($_POST['AllocTrans'])){
 
    }
 
-   echo '<tr><td colspan=5 class="number"><b><U>' . _('Total Allocated') . ':</U></b></td>
-   		<td class="number"><b><U>' .  number_format($TotalAllocated,2) . '</U></b></td></tr>';
+   echo '<tr><td colspan="5" class="number"><b><u>' . _('Total Allocated') . ':</u></b></td>
+   		<td class="number"><b><u>' .  number_format($TotalAllocated,2) . '</u></b></td></tr>';
 
-   echo '<tr><td colspan=5 class="number"><b>' . _('Left to allocate') . '</b></td><td class="number"><b>' .
+   echo '<tr><td colspan="5" class="number"><b>' . _('Left to allocate') . '</b></td><td class="number"><b>' .
      		number_format(-$_SESSION['Alloc']->TransAmt - $TotalAllocated,2) . '</b></td></tr></table>';
 
    echo '<div class="centre"><input type="hidden" name="TotalNumberOfAllocs" value="' . $Counter . '" />';
