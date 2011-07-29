@@ -146,7 +146,7 @@ if (isset($_POST['Show'])){
 
 	echo '<br /><table class="selection">';
 
-	echo '<tr><th colspan=8><b>' ._('Transactions for account').' '.$SelectedAccount. ' - '. $SelectedAccountName.'</b></th></tr>';
+	echo '<tr><th colspan="8"><b>' ._('Transactions for account').' '.$SelectedAccount. ' - '. $SelectedAccountName.'</b></th></tr>';
 	$TableHeader = '<tr>
 			<th>' . _('Type') . '</th>
 			<th>' . _('Number') . '</th>
