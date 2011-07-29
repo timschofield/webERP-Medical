@@ -501,7 +501,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 	 	echo '</div></td></tr>';
 	}
 	echo '</table><br /><table class="selection">';
-	echo '<tr><th colspan=13><div class="centre"><font color=blue size=3><b>'.$SelectedParent .' - ' . $myrow[0] . ' ('. $MBdesc. ') </font></b></th></tr>';
+	echo '<tr><th colspan="13"><div class="centre"><font color="blue" size="3"><b>'.$SelectedParent .' - ' . $myrow[0] . ' ('. $MBdesc. ') </font></b></th></tr>';
 
     // *** POPAD&T
 	$BOMTree = array();
@@ -579,7 +579,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 			echo '<br /><input type="hidden" name="SelectedParent" value="'.$SelectedParent.'">';
 			echo '<input type="hidden" name="SelectedComponent" value="'.$SelectedComponent.'">';
 			echo '<table class="selection">';
-			echo '<tr><th colspan=13><div class="centre"><font color=blue size=3><b>'. ('Edit Component Details') .'</font></b></th></tr>';
+			echo '<tr><th colspan="13"><div class="centre"><font color="blue" size="3"><b>'. ('Edit Component Details') .'</font></b></th></tr>';
 			echo '<tr><td>' . _('Component') . ':</td><td><b>' . $SelectedComponent . '</b></td></tr>';
 
 		} else { //end of if $SelectedComponent
@@ -588,7 +588,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 			/* echo "Enter the details of a new component in the fields below. <br />Click on 'Enter Information' to add the new component, once all fields are completed.";
 			*/
 			echo '<table class="selection">';
-			echo '<tr><th colspan=13><div class="centre"><font color=blue size=3><b>'. ('New Component Details') .'</font></b></th></tr>';
+			echo '<tr><th colspan="13"><div class="centre"><font color="blue" size="3"><b>'. ('New Component Details') .'</font></b></th></tr>';
 			echo '<tr><td>' . _('Component code') . ':</td><td>';
 			echo '<select ' . (in_array('ComponentCode',$Errors) ?  'class="selecterror"' : '' ) .' tabindex="1" name="Component">';
 
