@@ -664,7 +664,7 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 
 		if (DB_num_rows($SearchResult)>1){
 
-			echo '<br /><table cellpadding=2 colspan=7 class="selection">';
+			echo '<br /><table cellpadding="2" colspan="7" class="selection">';
 			$TableHeader = '<tr><th>' . _('Code') . '</th>
 						<th>' . _('Description') . '</th>
 						<th>' . _('Units') . '</th></tr>';
@@ -677,10 +677,10 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 
 				if (!in_array($myrow['stockid'],$ItemCodes)){
 					if (function_exists('imagecreatefrompng') ){
-						$ImageSource = '<IMG SRC="GetStockImage.php?automake=1&textcolor=FFFFFF&bgcolor=CCCCCC&StockID=' . urlencode($myrow['stockid']). '&text=&width=64&height=64">';
+						$ImageSource = '<img src="GetStockImage.php?automake=1&textcolor=FFFFFF&bgcolor=CCCCCC&StockID=' . urlencode($myrow['stockid']). '&text=&width=64&height=64" />';
 					} else {
 						if(file_exists($_SERVER['DOCUMENT_ROOT'] . $rootpath. '/' . $_SESSION['part_pics_dir'] . '/' . $myrow['stockid'] . '.jpg')) {
-							$ImageSource = '<IMG SRC="' .$_SERVER['DOCUMENT_ROOT'] . $rootpath . '/' . $_SESSION['part_pics_dir'] . '/' . $myrow['stockid'] . '.jpg">';
+							$ImageSource = '<img src="' .$_SERVER['DOCUMENT_ROOT'] . $rootpath . '/' . $_SESSION['part_pics_dir'] . '/' . $myrow['stockid'] . '.jpg" />';
 						} else {
 							$ImageSource = _('No Image');
 						}
@@ -695,11 +695,11 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 					}
 
 					$IssueLink = $_SERVER['PHP_SELF'] . '?WO=' . $_POST['WO'] . '&StockID=' . $_POST['StockID'] . '&IssueItem=' . $myrow['stockid'] . '&FromLocation=' . $_POST['FromLocation'];
-					printf('<td><font size=1>%s</font></td>
-							<td><font size=1>%s</font></td>
-							<td><font size=1>%s</font></td>
+					printf('<td><font size="1">%s</font></td>
+							<td><font size="1">%s</font></td>
+							<td><font size="1">%s</font></td>
 							<td>%s</td>
-							<td><font size=1><a href="%s">'
+							<td><font size="1"><a href="%s">'
 							. _('Add to Work Order') . '</a></font></td>
 							</tr>',
 							$myrow['stockid'],
