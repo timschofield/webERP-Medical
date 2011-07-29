@@ -183,11 +183,11 @@ if (!isset($OrderNumber) or $OrderNumber=='' ){
 $SQL="SELECT categoryid, categorydescription FROM stockcategory ORDER BY categorydescription";
 $result1 = DB_query($SQL,$db);
 
-echo '<br /><font size=1><div class="page_help_text">' ._('To search for purchase orders for a specific part use the part selection facilities below')
+echo '<br /><font size="1"><div class="page_help_text">' ._('To search for purchase orders for a specific part use the part selection facilities below')
 		.'</div> </font>';
 echo '<br /><table class="selection"><tr>';
 
-echo '<td><font size=1>' . _('Select a stock category') . ':</font><select name="StockCat">';
+echo '<td><font size="1">' . _('Select a stock category') . ':</font><select name="StockCat">';
 
 while ($myrow1 = DB_fetch_array($result1)) {
 	if (isset($_POST['StockCat']) and $myrow1['categoryid']==$_POST['StockCat']){
