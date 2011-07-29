@@ -892,10 +892,10 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 	/*now set up a GLCode field to select from avaialble GL accounts */
 	if (isset($_POST['GLManualCode'])) {
 		echo '<tr><td>' . _('Enter GL Account Manually') . ':</td>
-			<td><input type="text" class="number" name="GLManualCode" Maxlength=12 size=12 onChange="return inArray(this, GLCode.options,'.	"'".'The account code '."'".'+ this.value+ '."'".' doesnt exist'."'".')"' . ' value='. $_POST['GLManualCode'] .'  ></td></tr>';
+			<td><input type="text" class="number" name="GLManualCode" maxlength="12" size="12" onChange="return inArray(this, GLCode.options,'.	"'".'The account code '."'".'+ this.value+ '."'".' doesnt exist'."'".')"' . ' value="'. $_POST['GLManualCode'] .'" /></td></tr>';
 	} else {
 		echo '<tr><td>' . _('Enter GL Account Manually') . ':</td>
-			<td><input type="text" class="number" name="GLManualCode" Maxlength=12 size=12 onChange="return inArray(this, GLCode.options,'.	"'".'The account code '."'".'+ this.value+ '."'".' doesnt exist'."'".')"></td></tr>';
+			<td><input type="text" class="number" name="GLManualCode" maxlength="12" size="12" onChange="return inArray(this, GLCode.options,'.	"'".'The account code '."'".'+ this.value+ '."'".' doesnt exist'."'".')" /></td></tr>';
 	}
 
 	echo '<tr><td>' . _('Select GL Group') . ':</td>
@@ -955,26 +955,26 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 	}
 
 	echo '<tr><td>'. _('Cheque/Voucher Number') .'</td>
-			<td><input type="text" name="cheque" Maxlength=12 size=12></td></tr>';
+			<td><input type="text" name="cheque" maxlength="12" size="12" /></td></tr>';
 
 	if (isset($_POST['GLNarrative'])) {
 		echo '<tr><td>' . _('GL Narrative') . ':</td>
-				<td><input type="text" name="GLNarrative" maxlength=50 size=52 value="' . $_POST['GLNarrative'] . '"></td></tr>';
+				<td><input type="text" name="GLNarrative" maxlength="50" size="52" value="' . $_POST['GLNarrative'] . '" /></td></tr>';
 	} else {
 		echo '<tr><td>' . _('GL Narrative') . ':</td>
-				<td><input type="text" name="GLNarrative" maxlength=50 size=52></td></tr>';
+				<td><input type="text" name="GLNarrative" maxlength="50" size="52" /></td></tr>';
 	}
 
 	if (isset($_POST['GLAmount'])) {
 		echo '<tr><td>' . _('Amount') . ' (' . $_SESSION['PaymentDetail']->Currency . '):</td>
-				<td><input type="text" name="GLAmount" Maxlength=12 size=12 class="number" value=' . $_POST['GLAmount'] . '></td></tr>';
+				<td><input type="text" name="GLAmount" maxlength="12" size="12" class="number" value="' . $_POST['GLAmount'] . '" /></td></tr>';
 	} else {
 		echo '<tr><td>' . _('Amount') . ' (' . $_SESSION['PaymentDetail']->Currency . '):</td>
-				<td><input type="text" name="GLAmount" Maxlength=12 size=12 class="number"></td></tr>';
+				<td><input type="text" name="GLAmount" maxlength="12" size="12" class="number" /></td></tr>';
 	}
 
 	echo '</table><br />';
-	echo '<div class="centre"><input type="submit" name="Process" value="' . _('Accept') . '"><input type="submit" name="Cancel" value="' . _('Cancel') . '"></div>';
+	echo '<div class="centre"><input type="submit" name="Process" value="' . _('Accept') . '" /><input type="submit" name="Cancel" value="' . _('Cancel') . '" /></div>';
 
 	if (sizeOf($_SESSION['PaymentDetail']->GLItems)>0) {
 		echo '<br />
