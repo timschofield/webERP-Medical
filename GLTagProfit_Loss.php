@@ -508,7 +508,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 		. _('Print') . '" alt="" />' . ' ' . $title . '</p>';
 
 	echo '<table cellpadding=2 class="selection">';
-	echo '<tr><th colspan=9><div class="centre"><font size=3 color=blue><b>' . _('Statement of Income and Expenditure for Tag'). ' ' .
+	echo '<tr><th colspan="9"><div class="centre"><font size="3" color="blue"><b>' . _('Statement of Income and Expenditure for Tag'). ' ' .
 			$myrow[0]._('during the'). ' ' . $NumberOfMonths . ' ' . _('months to'). ' ' . $PeriodToDate . '</b></font></div></th></tr>';
 
 	if ($_POST['Detail']=='Detailed'){
