@@ -431,11 +431,11 @@ if (isset($PartString)) {
 }
 
 if (!isset($OrderNumber) or $OrderNumber==''){
-	echo '<td>' . _('Order Number') . ':</td><td>' . '<input type="text" name="OrderNumber" maxlength =8 size=9></td><td>' . _('for all orders placed after') .
-			': </td><td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'"  name="OrdersAfterDate" maxlength =10 size=11 value=' . $_POST['OrdersAfterDate'] . '></td><td>' .
-			'<input type="submit" name="SearchOrders" value="' . _('Search Orders') . '"></td></tr>';
-	echo '<tr><td></td><td>' . _('Customer Ref') . ':</td><td>' . '<input type="text" name=2CustomerRef" maxlength =8 size=9></td>
-			<td></td><td colspan=2><input type="checkbox" '.$ShowChecked.' name="completed" />'._('Show Completed orders only') . '</td></tr>';
+	echo '<td>' . _('Order Number') . ':</td><td>' . '<input type="text" name="OrderNumber" maxlength="8" size="9" /></td><td>' . _('for all orders placed after') .
+			': </td><td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'"  name="OrdersAfterDate" maxlength="10" size="11" value="' . $_POST['OrdersAfterDate'] . '" /></td><td>' .
+			'<input type="submit" name="SearchOrders" value="' . _('Search Orders') . '" /></td></tr>';
+	echo '<tr><td></td><td>' . _('Customer Ref') . ':</td><td>' . '<input type="text" name="2CustomerRef" maxlength="8" size="9" /></td>
+			<td></td><td colspan="2"><input type="checkbox" '.$ShowChecked.' name="completed" />'._('Show Completed orders only') . '</td></tr>';
 }
 echo '</table>';
 
@@ -462,9 +462,9 @@ if (!isset($SelectedStockItem)) {
    echo '<td><input type="text" name="Keywords" size="20" maxlength="25" /></td></tr>';
    echo '<tr><td></td>';
    echo '<td><font size="3"><b> ' ._('OR') . ' </b></font><font size="1">' . _('Enter extract of the Stock Code') . ':</font></td>';
-   echo '<td><input type="text" name="StockCode" size="15" maxlength="18"></td>';
+   echo '<td><input type="text" name="StockCode" size="15" maxlength="18" /></td>';
    echo '</tr>';
-   echo '<tr><td colspan=4><div class="centre"><input type="submit" name="SearchParts" value="' . _('Search Parts Now') . '">';
+   echo '<tr><td colspan=4><div class="centre"><input type="submit" name="SearchParts" value="' . _('Search Parts Now') . '" />';
 
    if (count($_SESSION['AllowedPageSecurityTokens'])>1){
 		echo '<input type="submit" name="ResetPart" value="' . _('Show All') . '" /></div>';
