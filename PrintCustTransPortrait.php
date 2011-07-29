@@ -910,7 +910,7 @@ if (isset($PrintPDF)
 								$DisplayNet);
 
 						if (mb_strlen($myrow2['narrative'])>1){
-							echo $RowStarter . '<td></td><td colspan=6>' . $myrow2['narrative'] . '</td></tr>';
+							echo $RowStarter . '<td></td><td colspan="6">' . $myrow2['narrative'] . '</td></tr>';
 							$LineCounter++;
 						}
 
@@ -921,17 +921,17 @@ if (isset($PrintPDF)
 						/* head up a new invoice/credit note page */
 
 							$PageNumber++;
-							echo '</table><table class="table1"><tr><td VALIGN=TOP><img src="' . $_SESSION['LogoFile'] . '"></td><td bgcolor="#bbb"><b>';
+							echo '</table><table class="table1"><tr><td valign="top"><img src="' . $_SESSION['LogoFile'] . '" /></td><td bgcolor="#bbb"><b>';
 							if ($InvOrCredit=='Invoice') {
-								echo '<font size=4>' . _('TAX INVOICE') . ' ';
+								echo '<font size="4">' . _('TAX INVOICE') . ' ';
 							} else {
-								echo '<font color=RED size=4>' . _('TAX CREDIT NOTE') . ' ';
+								echo '<font color="red" size="4">' . _('TAX CREDIT NOTE') . ' ';
 							}
-							echo '</b>' . _('Number') . ' ' . $FromTransNo . '</font><br /><font size=1>' . _('GST Number') . ' - ' . $_SESSION['CompanyRecord']['gstno'] . '</td></tr></table>';
+							echo '</b>' . _('Number') . ' ' . $FromTransNo . '</font><br /><font size="1">' . _('GST Number') . ' - ' . $_SESSION['CompanyRecord']['gstno'] . '</td></tr></table>';
 
 	/*Now print out company name and address */
 							echo '<table class="table1"><tr>
-								<td><font size=4 color="#333"><b>' . $_SESSION['CompanyRecord']['coyname'] . '</b></font><br />';
+								<td><font size="4" color="#333"><b>' . $_SESSION['CompanyRecord']['coyname'] . '</b></font><br />';
 							echo $_SESSION['CompanyRecord']['regoffice1'] . '<br />';
 							echo $_SESSION['CompanyRecord']['regoffice2'] . '<br />';
 							echo $_SESSION['CompanyRecord']['regoffice3'] . '<br />';
