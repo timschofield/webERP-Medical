@@ -360,7 +360,7 @@ foreach ($_SESSION['CreditItems']->LineItems as $LnItm) {
 			}
 			if (!isset($_POST['ProcessCredit'])) {
 				echo '<input type="text" class="number" name="' . $LnItm->LineNumber . $Tax->TaxCalculationOrder .
-					'_TaxRate" maxlength=4 size=4 value="' . $Tax->TaxRate*100 . '">';
+					'_TaxRate" maxlength="4" size="4" value="' . $Tax->TaxRate*100 . '" />';
 			}
 			$i++;
 			if ($Tax->TaxOnTax ==1){
@@ -385,7 +385,7 @@ foreach ($_SESSION['CreditItems']->LineItems as $LnItm) {
 			<td class="number">' . $DisplayGrossLineTotal . '</td>
 			<td><a href="'. $_SERVER['PHP_SELF'] . '?Delete=' . $LnItm->LineNumber . '">' . _('Delete') . '</a></td></tr>';
 
-		echo '<tr'.$RowStarter . '><td colspan=12><textarea tabindex="'.$j.'"  name="Narrative_' . $LnItm->LineNumber . '" cols=100% rows=1>' . $LnItm->Narrative . '</textarea><br /><hr></td></tr>';
+		echo '<tr'.$RowStarter . '><td colspan="12"><textarea tabindex="'.$j.'"  name="Narrative_' . $LnItm->LineNumber . '" cols=100% rows=1>' . $LnItm->Narrative . '</textarea><br /><hr></td></tr>';
 		$j++;
 	}
 } /*end foreach loop displaying the invoice lines to credit */
@@ -396,11 +396,11 @@ if (!isset($_POST['ChargeFreightCost']) AND !isset($_SESSION['CreditItems']->Fre
 
 if (!isset($_POST['ProcessCredit'])) {
 	echo '<tr>
-		<td colspan=3 class="number">' . _('Freight cost charged on invoice') . '</td>
+		<td colspan="3" class="number">' . _('Freight cost charged on invoice') . '</td>
 		<td class="number">' . number_format($_SESSION['Old_FreightCost'],2) . '</td>
 		<td></td>
-		<td colspan=2 class="number">' . _('Credit Freight Cost') . '</td>
-		<td><input tabindex="'.$j.'" type="text" class="number" size=6 maxlength=6 name="ChargeFreightCost" value="' . $_SESSION['CreditItems']->FreightCost . '"></td>';
+		<td colspan="2" class="number">' . _('Credit Freight Cost') . '</td>
+		<td><input tabindex="'.$j.'" type="text" class="number" size="6" maxlength="6" name="ChargeFreightCost" value="' . $_SESSION['CreditItems']->FreightCost . '" /></td>';
 
 	echo '<td>';
 	echo '</td><td>';
@@ -423,7 +423,7 @@ foreach ($_SESSION['CreditItems']->FreightTaxes as $FreightTaxLine) {
 	}
 
 	if (!isset($_POST['ProcessCredit'])) {
-		echo  '<input type="text" class="number" name=FreightTaxRate' . $FreightTaxLine->TaxCalculationOrder . ' maxlength=4 size=4 value=' . $FreightTaxLine->TaxRate * 100 . '>';
+		echo  '<input type="text" class="number" name="FreightTaxRate' . $FreightTaxLine->TaxCalculationOrder . '" maxlength="4" size="4" value="' . $FreightTaxLine->TaxRate * 100 . '" />';
 	}
 	if ($FreightTaxLine->TaxOnTax ==1){
 		$TaxTotals[$FreightTaxLine->TaxAuthID] += ($FreightTaxLine->TaxRate * ($_SESSION['CreditItems']->FreightCost + $FreightTaxTotal));
