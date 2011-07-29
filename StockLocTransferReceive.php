@@ -420,7 +420,7 @@ if (isset($_SESSION['Transfer'])){
 	$i = 0; //Line Item Array pointer
 
 	echo '<br /><table class="selection">';
-	echo '<tr><th colspan=7><font size=3 color=blue>' . _('Location Transfer Reference'). ' #' . $_SESSION['Transfer']->TrfID .
+	echo '<tr><th colspan="7"><font size="3" color="blue">' . _('Location Transfer Reference'). ' #' . $_SESSION['Transfer']->TrfID .
 			' '. _('from').' ' . $_SESSION['Transfer']->StockLocationFromName . ' '. _('to'). ' ' .
 				$_SESSION['Transfer']->StockLocationToName . '</font></th></tr>';
 
