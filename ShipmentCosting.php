@@ -539,12 +539,12 @@ while ($myrow=db_fetch_array($ChargesResult)) {
 	$TotalItemShipmentChgs += $myrow['value'];
 }
 
-echo '<tr><td colspan=5 class="number"><font color=BLUE><b>'. _('Total Charges Against Shipment Items'). ':</b></font></td>
+echo '<tr><td colspan="5" class="number"><font color="blue"><b>'. _('Total Charges Against Shipment Items'). ':</b></font></td>
 	<td class="number">' . number_format($TotalItemShipmentChgs) . '</td></tr>';
 
 echo '</table>';
 
-echo '</td><td VALIGN=TOp>'; //major table
+echo '</td><td valign="top">'; //major table
 
 /* Now the shipment freight/duty etc general charges */
 
@@ -570,8 +570,8 @@ $sql = "SELECT suppliers.suppname,
 
 $ChargesResult = DB_query($sql,$db);
 
-echo '<table cellpadding=2 colspan=5 class="selection">';
-echo '<tr><th colspan=6><font color=navy size=3>'._('General Shipment Charges').'</font></th></tr>';
+echo '<table cellpadding="2" colspan="5" class="selection">';
+echo '<tr><th colspan="6"><font color="navy" size="3">'._('General Shipment Charges').'</font></th></tr>';
 
 $TableHeader = '<tr>
 		<th>'. _('Supplier'). '</th>
