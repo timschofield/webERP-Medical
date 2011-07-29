@@ -225,7 +225,7 @@ if (isset($_GET['Modify'])){
 	$GRNTmp = $_SESSION['SuppTrans']->GRNs[$GRNNo];
 
 	echo '<table class="selection">';
-	echo '<tr><th colspan=10><font size=3 color=navy>' . _('GRN Selected For Adding To A Purchase Invoice') . '</font></th></tr>';
+	echo '<tr><th colspan="10"><font size="3" color="navy">' . _('GRN Selected For Adding To A Purchase Invoice') . '</font></th></tr>';
 	echo '<tr bgcolor=#800000>
 			<th>' . _('Sequence') . ' #</th>
 			<th>' . _('Item') . '</th>
@@ -241,7 +241,7 @@ if (isset($_GET['Modify'])){
 		<td class="number">' . number_format($GRNTmp->QtyRecd - $GRNTmp->Prev_QuantityInv,2) . '</td>
 		<td><input type="text" class="number" name="This_QuantityInv" value="' . $GRNTmp->This_QuantityInv . '" size="11" maxlength="10" /></td>
 		<td class="number">' . $GRNTmp->OrderPrice . '</td>
-		<td><input type="text" class="number" name="ChgPrice" value=' . $GRNTmp->ChgPrice . ' size="11" maxlength="10" /></td>
+		<td><input type="text" class="number" name="ChgPrice" value="' . $GRNTmp->ChgPrice . '" size="11" maxlength="10" /></td>
 	</tr>';
 	echo '</table>';
 
