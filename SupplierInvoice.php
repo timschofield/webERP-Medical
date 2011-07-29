@@ -329,17 +329,17 @@ if (!isset($_POST['PostInvoice'])){
 			}
 		}
 
-		echo '<tr><td colspan=2 class="number"><font size=4 color=blue>' . _('Total') . ':</font></td>
-			<td class="number"><font size=4 color=BLUE><U>' .  number_format($TotalShiptValue,2) . '</U></font></td></tr></table>';
+		echo '<tr><td colspan="2" class="number"><font size="4" color="blue">' . _('Total') . ':</font></td>
+			<td class="number"><font size="4" color="blue"><u>' .  number_format($TotalShiptValue,2) . '</u></font></td></tr></table>';
 	}
 
 	$TotalAssetValue = 0;
 
 	if (count( $_SESSION['SuppTrans']->Assets) > 0){   /*if there are any fixed assets on the invoice*/
 
-		echo '<br /><table cellpadding=2 class="selection">
+		echo '<br /><table cellpadding="2" class="selection">
 					<tr>
-						<th colspan=3>' . _('Fixed Asset Additions') . '</th>
+						<th colspan="3">' . _('Fixed Asset Additions') . '</th>
 					</tr>';
 		$TableHeader = '<tr>
 							<th>' . _('Asset ID') . '</th>
@@ -366,8 +366,8 @@ if (!isset($_POST['PostInvoice'])){
 		}
 
 		echo '<tr>
-				<td colspan=2 class="number"><font size=4 color=blue>' . _('Total') . ':</font></td>
-				<td class="number"><font size=4 color=blue><u>' .  number_format($TotalAssetValue,2) . '</u></font></td>
+				<td colspan="2" class="number"><font size="4" color="blue">' . _('Total') . ':</font></td>
+				<td class="number"><font size="4" color="blue"><u>' .  number_format($TotalAssetValue,2) . '</u></font></td>
 			</tr></table>';
 	} //end loop around assets added to invocie
 
@@ -442,7 +442,7 @@ if (!isset($_POST['PostInvoice'])){
 			}
 
 			echo '<tr>
-					<td colspan=2 class="number">' . _('Total') .  ':</td>
+					<td colspan="2" class="number">' . _('Total') .  ':</td>
 					<td class="number">' .  number_format($TotalGLValue,2) . '</td>
 				</tr></table>';
 		}
@@ -452,13 +452,13 @@ if (!isset($_POST['PostInvoice'])){
 		echo '<br /><table class="selection">
 					<tr>
 						<td>' . _('Amount in supplier currency') . ':</td>
-						<td colspan=2 class="number">' . number_format( $_SESSION['SuppTrans']->OvAmount,2) . '</td>
+						<td colspan="2" class="number">' . number_format( $_SESSION['SuppTrans']->OvAmount,2) . '</td>
 					</tr>';
 	} else {
 		echo '<br /><table class="selection">
 					<tr>
 						<td>' . _('Amount in supplier currency') . ':</td>
-						<td colspan=2 class="number"><input type="text" size="12" maxlength="10" name="OvAmount" value=' . number_format( $_SESSION['SuppTrans']->OvAmount,2) . '></td>
+						<td colspan="2" class="number"><input type="text" size="12" maxlength="10" name="OvAmount" value="' . number_format( $_SESSION['SuppTrans']->OvAmount,2) . '" /></td>
 					</tr>';
 	}
 
@@ -529,12 +529,12 @@ if (!isset($_POST['PostInvoice'])){
 
 	echo '<tr>
 			<td>' . _('Invoice Total') . ':</td>
-			<td colspan=2 class="number"><b>' . $DisplayTotal . '</b></td>
+			<td colspan="2" class="number"><b>' . $DisplayTotal . '</b></td>
 		</tr></table>';
 
 	echo '<br /><table class="selection">
 				<tr>
-					<td>' . _('Comments') . '</td><td><textarea name=Comments cols=40 rows=2>' . $_SESSION['SuppTrans']->Comments . '</textarea></td>
+					<td>' . _('Comments') . '</td><td><textarea name="Comments" cols="40" rows="2">' . $_SESSION['SuppTrans']->Comments . '</textarea></td>
 				</tr></table>';
 
 	echo '<p><div class="centre"><input type="submit" name="PostInvoice" value="' . _('Enter Invoice') . '"></div></p>';
