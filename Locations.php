@@ -432,7 +432,7 @@ if (!isset($_GET['delete'])) {
 		if (!isset($_POST['LocCode'])) {
 			$_POST['LocCode'] = '';
 		}
-		echo '<table class="selection"><tr><th colspan=2><font size="3" color="blue">'._('New Location details').'</font></th></tr>';
+		echo '<table class="selection"><tr><th colspan="2"><font size="3" color="blue">'._('New Location details').'</font></th></tr>';
 		echo '<tr><td>' . _('Location Code') . ':</td><td><input type="text" name="LocCode" value="' . $_POST['LocCode'] . '" size="5" maxlength="5" /></td></tr>';
 	}
 	if (!isset($_POST['LocationName'])) {
