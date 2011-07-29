@@ -444,9 +444,9 @@ if (!isset($SelectedStockItem)) {
 	$result1 = DB_query($SQL,$db);
 
    echo '<br />';
-   echo '<div class="page_help_text"><font size=1>' . _('To search for sales orders for a specific part use the part selection facilities below') . '   </font></div>';
+   echo '<div class="page_help_text"><font size="1">' . _('To search for sales orders for a specific part use the part selection facilities below') . '   </font></div>';
    echo '<br /><table class="selection">';
-   echo '<tr><td><font size=1>' . _('Select a stock category') . ':</font>';
+   echo '<tr><td><font size="1">' . _('Select a stock category') . ':</font>';
    echo '<select name="StockCat">';
 
 	while ($myrow1 = DB_fetch_array($result1)) {
