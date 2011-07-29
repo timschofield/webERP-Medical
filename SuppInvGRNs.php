@@ -292,16 +292,16 @@ else {
 
 		if (isset($POs[$GRNTmp->PONo]) and $POs[$GRNTmp->PONo] != $GRNTmp->PONo) {
 					$POs[$GRNTmp->PONo] = $GRNTmp->PONo;
-					echo '<tr><td><input type="submit" name="AddPOToTrans" Value="' . $GRNTmp->PONo . '"></td><td colspan=3>' . _('Add Whole PO to Invoice') . '</td></tr>';
+					echo '<tr><td><input type="submit" name="AddPOToTrans" value="' . $GRNTmp->PONo . '" /></td><td colspan="3">' . _('Add Whole PO to Invoice') . '</td></tr>';
 					$i = 0;
 			}
 			if ($i == 0){
 				echo $tableheader;
 		}
 		if (isset($_POST['SelectAll'])) {
-			echo '<tr><td><input type=checkbox checked name="GRNNo_' . $GRNTmp->GRNNo . '"></td>';
+			echo '<tr><td><input type="checkbox" checked name="GRNNo_' . $GRNTmp->GRNNo . '"></td>';
 		} else {
-			echo '<tr><td><input type=checkbox name="GRNNo_' . $GRNTmp->GRNNo . '"></td>';
+			echo '<tr><td><input type="checkbox" name="GRNNo_' . $GRNTmp->GRNNo . '"></td>';
 		}
 		echo '<td>' . $GRNTmp->GRNNo . '</td>
 		<td>' . $GRNTmp->PONo . '</td>
