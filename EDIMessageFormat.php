@@ -201,12 +201,12 @@ if (isset($SelectedMessageLine)) {
 echo '<table class="selection">';
 
 if ($myrow['messagetype']!='') {
-	echo '<tr><th colspan=2><font size=3>' . _('Definition of') . ' ' . $myrow['messagetype'] . ' ' . _('for') . ' ' . $myrow['partnercode'].'</font></th></tr>';
+	echo '<tr><th colspan="2"><font size="3">' . _('Definition of') . ' ' . $myrow['messagetype'] . ' ' . _('for') . ' ' . $myrow['partnercode'].'</font></th></tr>';
 }
 
 echo '<tr><td>' . _('Section') . ':</td>';
 echo '<td>';
-echo '<select tabindex=2 name="Section">';
+echo '<select tabindex="2" name="Section">';
 
 if ($_POST['Section']=='Heading') {
 	echo '<option selected="True" value="Heading">' . _('Heading') . '</option>';
@@ -238,7 +238,7 @@ echo '<td><input tabindex="3" type="text" name="SequenceNo" size="3" maxlength="
 echo '</td></tr>';
 echo '<tr><td>' .  _('Line Text') . ':' .'</td>';
 echo '<td>';
-echo '<input tabindex=4 type="text" name="LineText" size="50" maxlength="50" value="'.$_POST['LineText'] .'" />';
+echo '<input tabindex="4" type="text" name="LineText" size="50" maxlength="50" value="'.$_POST['LineText'] .'" />';
 echo '</td></tr>';
 echo '</table><br />';
 if (isset($_GET['SelectedMessageLine'])) {
