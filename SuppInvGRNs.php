@@ -105,10 +105,10 @@ if (isset($_GET['Delete'])){
 
 /*Show all the selected GRNs so far from the SESSION['SuppTrans']->GRNs array */
 
-echo '<table cellpadding=1 class="selection">';
-echo '<tr><th colspan=6><font size=3 color=navy>' . _('Invoiced Goods Received Selected') . '</font></th></tr>';
+echo '<table cellpadding="1" class="selection">';
+echo '<tr><th colspan="6"><font size="3" color="navy">' . _('Invoiced Goods Received Selected') . '</font></th></tr>';
 
-$tableheader = '<tr bgcolor=#800000>
+$tableheader = '<tr bgcolor="#800000">
 			<th>' . _('Sequence') . ' #</th>
 			<th>' . _('Item Code') . '</th>
 			<th>' . _('Description') . '</th>
