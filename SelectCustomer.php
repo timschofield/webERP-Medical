@@ -488,13 +488,13 @@ if (isset($result)) {
 				echo '<tr class="OddTableRows">';
 				$k = 1;
 			}
-			echo '<td><font size=1><input type="submit" name="Select" value="' . $myrow['debtorno'].' '.$myrow['branchcode'] . '"></font></td>
-				<td><font size=1>' . $myrow['name'] . '</font></td>
-				<td><font size=1>' . $myrow['brname'] . '</font></td>
-				<td><font size=1>' . $myrow['contactname'] . '</font></td>
-				<td><font size=1>' . $myrow['typename'] . '</font></td>
-				<td><font size=1>' . $myrow['phoneno'] . '</font></td>
-				<td><font size=1>' . $myrow['faxno'] . '</font></td></tr>';
+			echo '<td><font size="1"><input type="submit" name="Select" value="' . $myrow['debtorno'].' '.$myrow['branchcode'] . '" /></font></td>
+				<td><font size="1">' . $myrow['name'] . '</font></td>
+				<td><font size="1">' . $myrow['brname'] . '</font></td>
+				<td><font size="1">' . $myrow['contactname'] . '</font></td>
+				<td><font size="1">' . $myrow['typename'] . '</font></td>
+				<td><font size="1">' . $myrow['phoneno'] . '</font></td>
+				<td><font size="1">' . $myrow['faxno'] . '</font></td></tr>';
 			$j++;
 			if ($j == 11 AND ($RowIndex + 1 != $_SESSION['DisplayRecordsMax'])) {
 				$j = 1;
