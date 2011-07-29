@@ -856,8 +856,8 @@ if (!isset($_POST['Narrative'])) {
 }
 
 echo '<tr><td>' . _('Reference / Narrative') . ':</td>
-		<td colspan=2><input type="text" name="Narrative" maxlength=80 size=82 value="' . $_POST['Narrative'] . '">  ' . _('(Max. length 80 characters)') . '</td></tr>';
-echo '<tr><td colspan=3><div class="centre"><input type="submit" name="UpdateHeader" value="' . _('Update'). '"></td></tr>';
+		<td colspan="2"><input type="text" name="Narrative" maxlength="80" size="82" value="' . $_POST['Narrative'] . '" />  ' . _('(Max. length 80 characters)') . '</td></tr>';
+echo '<tr><td colspan="3"><div class="centre"><input type="submit" name="UpdateHeader" value="' . _('Update'). '" /></td></tr>';
 
 
 echo '</table><br />';
@@ -867,7 +867,7 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 /* Set upthe form for the transaction entry for a GL Payment Analysis item */
 
 	echo '<br /><table class="selection">';
-	echo '<tr><th colspan=2><font size=3 color=blue>' . _('General Ledger Payment Analysis Entry') . '</font></th></tr>';
+	echo '<tr><th colspan="2"><font size="3" color="blue">' . _('General Ledger Payment Analysis Entry') . '</font></th></tr>';
 
 	//Select the tag
 	echo '<tr><td>' . _('Select Tag') . ':</td><td><select name="tag">';
@@ -878,12 +878,12 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 		ORDER BY tagref";
 
 	$result=DB_query($SQL,$db);
-	echo '<option value=0></option>';
+	echo '<option value="0"></option>';
 	while ($myrow=DB_fetch_array($result)){
 		if (isset($_POST['tag']) and $_POST['tag']==$myrow['tagref']){
-			echo '<option selected="True" value=' . $myrow['tagref'] . '>' . $myrow['tagref'].' - ' .$myrow['tagdescription'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['tagref'] . '">' . $myrow['tagref'].' - ' .$myrow['tagdescription'] . '</option>';
 		} else {
-			echo '<option value=' . $myrow['tagref'] . '>' . $myrow['tagref'].' - ' .$myrow['tagdescription'] . '</option>';
+			echo '<option value="' . $myrow['tagref'] . '">' . $myrow['tagref'].' - ' .$myrow['tagdescription'] . '</option>';
 		}
 	}
 	echo '</select></td></tr>';
