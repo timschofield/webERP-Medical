@@ -345,7 +345,7 @@ if (isset($_GET['AllocTrans'])) {
 		// Show trans already allocated and potential new allocations
 
 		echo '<br /><table class="selection">';
-		echo '<tr><th colspan=7><div class="centre"><font color=blue><b>' . $_SESSION['Alloc']->DebtorNo . ' - ' . $_SESSION['Alloc']->CustomerName . '</b></div>';
+		echo '<tr><th colspan="7"><div class="centre"><font color="blue"><b>' . $_SESSION['Alloc']->DebtorNo . ' - ' . $_SESSION['Alloc']->CustomerName . '</b></div>';
 
 		if ($_SESSION['Alloc']->TransExRate != 1) {
 				echo '<br />'._('Amount in customer currency').' <b>' .
@@ -517,7 +517,7 @@ if (isset($_GET['AllocTrans'])) {
 
 			if ( $curDebtor != $myrow['debtorno'] ) {
 				if ( $curTrans > 1 ) {
-					echo '<tr class="OddTableRows"><td colspan=7 class="number">' . number_format($balance,2) . '</td><td><b>Balance</b></td></tr>';
+					echo '<tr class="OddTableRows"><td colspan="7" class="number">' . number_format($balance,2) . '</td><td><b>Balance</b></td></tr>';
 				}
 
 				$balance = 0;
@@ -562,7 +562,7 @@ if (isset($_GET['AllocTrans'])) {
 				if (!isset($balance)) {
 					$balance=0;
 				}
-				echo '<tr class="OddTableRows"><td colspan=7 class="number">' . number_format($balance,2) . '</td><td><b>Balance</b></td></tr>';
+				echo '<tr class="OddTableRows"><td colspan="7" class="number">' . number_format($balance,2) . '</td><td><b>Balance</b></td></tr>';
 			}
 		}
 		DB_free_result($result);
