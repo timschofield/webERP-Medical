@@ -396,13 +396,13 @@ if ($InputError ==0){
 		echo '</select></td></tr>';
 
 		echo '<tr><td>'. _('Decimal Places') . '<br />'._('to display').'</td>';
-		echo '<td><input type="text" class="number" name="DecimalPlaces" size=8 maxlength=8 value="';
+		echo '<td><input type="text" class="number" name="DecimalPlaces" size="8" maxlength="8" value="';
 		if(isset($_POST['DecimalPlaces'])) {
 			echo $_POST['DecimalPlaces'];
 		} else {
 			echo '0';
 		}
-		echo '">';
+		echo '" />';
 
 		echo '</td></tr>';
 		echo '<tr><td>'. _('Conversion Factor') . '<br />'._('to stock units').'</td>';
@@ -412,7 +412,7 @@ if ($InputError ==0){
 		} else {
 			echo '1';
 		}
-		echo '">';
+		echo '" />';
 
 
 		echo '</td></tr>';
@@ -422,7 +422,7 @@ if ($InputError ==0){
 		if(isset($_POST['Price'])) {
 			echo $_POST['Price'];
 		}
-		echo '">';
+		echo '" />';
 
 		echo '</td></tr>';
 
