@@ -264,7 +264,7 @@ or deletion of the records*/
 					<td>%s</td>
 					<td class="number">%s</td>
 					<td class="number">%s</td>
-					<td colspan=4>%s</td>
+					<td colspan="4">%s</td>
 					</tr>',
 					$ImageFile,
 					$myrow['currabrev'],
