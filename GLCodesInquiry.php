@@ -22,7 +22,7 @@ $AccountsResult = DB_query($SQL,$db,$ErrMsg);
 
 /*show a table of the orders returned by the SQL */
 
-echo '<table cellpadding=2 colspan=2>
+echo '<table cellpadding="2" colspan="2">
 		<tr>
 			<th>'._('Group').'</font></th>
 			<th>'._('Code').'</font></th>
@@ -44,8 +44,8 @@ while ($myrow=DB_fetch_array($AccountsResult)) {
 
        if ($myrow['group_']== $ActGrp){
               printf('<td></td>
-	      		<td><font size=2>%s</font></td>
-			<td><font size=2>%s</font></td>
+	      		<td><font size="2">%s</font></td>
+			<td><font size="2">%s</font></td>
 			</tr>',
 			$myrow['accountcode'],
 			$myrow['accountname']);
