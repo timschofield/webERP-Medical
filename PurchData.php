@@ -435,7 +435,7 @@ if (!isset($SuppliersResult)) {
 			echo '<td>'.$SuppName;
 		}
 		if (!isset($SuppName) OR $SuppName = "") {
-			echo '<font size=1>' . '(' . _('A search facility is available below if necessary') . ')';
+			echo '<font size="1">' . '(' . _('A search facility is available below if necessary') . ')';
 		} else {
 			echo '<td>'.$SuppName;
 		}
