@@ -130,11 +130,11 @@ if ($CustomerRecord['dissallowinvoices']!=0){
 
 echo '<table class="selection" width=70%>
 	<tr>
-		<th width=20%>' . _('Total Balance') . '</th>
-		<th width=20%>' . _('Current') . '</th>
-		<th width=20%>' . _('Now Due') . '</th>
-		<th width=20%>' . $_SESSION['PastDueDays1'] . '-' . $_SESSION['PastDueDays2'] . ' ' . _('Days Overdue') . '</th>
-		<th width=20%>' . _('Over') . ' ' . $_SESSION['PastDueDays2'] . ' ' . _('Days Overdue') . '</th></tr>';
+		<th width="20%">' . _('Total Balance') . '</th>
+		<th width="20%">' . _('Current') . '</th>
+		<th width="20%">' . _('Now Due') . '</th>
+		<th width="20%">' . $_SESSION['PastDueDays1'] . '-' . $_SESSION['PastDueDays2'] . ' ' . _('Days Overdue') . '</th>
+		<th width="20%">' . _('Over') . ' ' . $_SESSION['PastDueDays2'] . ' ' . _('Days Overdue') . '</th></tr>';
 
 echo '<tr><td class="number">' . number_format($CustomerRecord['balance'],2) . '</td>
 	<td class="number">' . number_format(($CustomerRecord['balance'] - $CustomerRecord['due']),2) . '</td>
@@ -146,8 +146,8 @@ echo '<tr><td class="number">' . number_format($CustomerRecord['balance'],2) . '
 
 echo '<br /><div class="centre"><form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo _('Show all transactions after') . ': <input tabindex=1 type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" id="datepicker" name="TransAfterDate" Value="' . $_POST['TransAfterDate'] . '" MAXLENGTH =10 size=12>' .
-		'	<input tabindex=2 type="submit" name="Refresh Inquiry" value="' . _('Refresh Inquiry') . '" /></div></form><br />';
+echo _('Show all transactions after') . ': <input tabindex="1" type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" id="datepicker" name="TransAfterDate" Value="' . $_POST['TransAfterDate'] . '" maxlength="10" size="12" />' .
+		'	<input tabindex="2" type="submit" name="Refresh Inquiry" value="' . _('Refresh Inquiry') . '" /></div></form><br />';
 
 $DateAfterCriteria = FormatDateForSQL($_POST['TransAfterDate']);
 
