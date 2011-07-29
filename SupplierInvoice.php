@@ -490,7 +490,7 @@ if (!isset($_POST['PostInvoice'])){
 
 		if (!isset($_POST['OverRideTax']) or $_POST['OverRideTax']=='Auto'){
 
-			echo  ' <input type="text" class="number" name=TaxRate' . $Tax->TaxCalculationOrder . ' maxlength=4 size=4 value=' . $_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxRate * 100 . '>%';
+			echo  ' <input type="text" class="number" name=TaxRate' . $Tax->TaxCalculationOrder . ' maxlength="4" size="4" value="' . $_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxRate * 100 . '" />%';
 
 			/*Now recaluclate the tax depending on the method */
 			if ($Tax->TaxOnTax ==1){
