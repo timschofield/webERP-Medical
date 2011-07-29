@@ -251,11 +251,11 @@ if (!isset($_POST['OverheadPerHour'])) {
 
 echo '</td></tr>';
 echo '<tr><td>' . _('Overhead Per Hour') . ':</td>
-	<td><input type="text" class="number" name="OverheadPerHour" size=6 maxlength=6 value='.$_POST['OverheadPerHour'].'>';
+	<td><input type="text" class="number" name="OverheadPerHour" size="6" maxlength="6" value="'.$_POST['OverheadPerHour'].'" />';
 
 echo '</td></tr></table>';
 
-echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '"></div>';
+echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div>';
 
 if (!isset($_GET['SelectedWC']) or $_GET['SelectedWC']=='') {
 	echo '<script>defaultControl(document.forms[0].Code);</script>';
