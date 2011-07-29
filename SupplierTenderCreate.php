@@ -539,9 +539,9 @@ if (isset($_POST['SearchSupplier'])) {
 			<input type="submit" name="Next" value="' . _('Next') . '">';
 		echo '<br />';
 	}
-	echo '<input type="hidden" name="Search" value="' . _('Search Now') . '">';
+	echo '<input type="hidden" name="Search" value="' . _('Search Now') . '" />';
 	echo '<br /><br />';
-	echo '<br /><table cellpadding=2 colspan=7>';
+	echo '<br /><table cellpadding="2" colspan="7">';
 	$tableheader = '<tr>
   		<th>' . _('Code') . '</th>
 		<th>' . _('Supplier Name') . '</th>
@@ -752,7 +752,7 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 
 	if (isset($SearchResult)) {
 
-		echo '<table cellpadding=1 colspan=7>';
+		echo '<table cellpadding="1" colspan="7">';
 
 		$tableheader = '<tr>
 			<th>' . _('Code')  . '</th>
@@ -779,8 +779,7 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 			$filename = $myrow['stockid'] . '.jpg';
 			if (file_exists( $_SESSION['part_pics_dir'] . '/' . $filename) ) {
 
-				$ImageSource = '<img src="'.$rootpath . '/' . $_SESSION['part_pics_dir'] . '/' . $myrow['stockid'] .
-					'.jpg" width="50" height="50">';
+				$ImageSource = '<img src="'.$rootpath . '/' . $_SESSION['part_pics_dir'] . '/' . $myrow['stockid'] . '.jpg" width="50" height="50" />';
 
 			} else {
 				$ImageSource = '<i>'._('No Image').'</i>';
