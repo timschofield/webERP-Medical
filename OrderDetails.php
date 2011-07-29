@@ -196,8 +196,8 @@ if (DB_num_rows($GetOrdHdrResult)==1) {
 		$DisplayWeight = number_format($OrderTotalWeight,2);
 
 		echo '<tr>
-			<td colspan=5 class="number"><b>' . _('TOTAL Excl Tax/Freight') . '</b></td>
-			<td colspan=2 class="number">' . $DisplayTotal . '</td>
+			<td colspan="5" class="number"><b>' . _('TOTAL Excl Tax/Freight') . '</b></td>
+			<td colspan="2" class="number">' . $DisplayTotal . '</td>
 			</tr>
 		</table>';
 
