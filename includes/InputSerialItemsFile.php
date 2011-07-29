@@ -20,8 +20,8 @@ if (isset($_GET['LineNo'])){
 	$LineNo = $_POST['LineNo'];
 }
 
-echo '<DIV Align=Center>';
-echo '<TABLE>';
+echo '<div align=center>';
+echo '<table>';
 echo $tableheader;
 
 $TotalQuantity = 0; /*Variable to accumulate total quantity received */
@@ -41,10 +41,10 @@ foreach ($LineItem->SerialItems as $Bundle){
 			$k=1;
 		}
 
-		echo '<TD>' . $Bundle->BundleRef . '</TD>';
+		echo '<td>' . $Bundle->BundleRef . '</td>';
 
 		if ($LineItem->Serialised==0){
-			echo '<TD ALIGN=RIGHT>' . number_format($Bundle->BundleQty, $LineItem->DecimalPlaces) . '</TD>';
+			echo '<td align="right">' . number_format($Bundle->BundleQty, $LineItem->DecimalPlaces) . '</td>';
 		}
 	}
 
@@ -54,15 +54,15 @@ foreach ($LineItem->SerialItems as $Bundle){
 
 /*Display the totals and rule off before allowing new entries */
 if ($LineItem->Serialised==1){
-	echo '<TR><TD ALIGN=RIGHT><B>'.  _('Total Quantity'). ': ' . number_format($TotalQuantity,$LineItem->DecimalPlaces) . '</B></TD></TR>';
-	echo '<TR><TD><HR></TD></TR>';
+	echo '<tr><td align="right"><b>'.  _('Total Quantity'). ': ' . number_format($TotalQuantity,$LineItem->DecimalPlaces) . '</b></td></tr>';
+	echo '<tr><td><hr /></td></tr>';
 } else {
-	echo '<TR><TD ALIGN=RIGHT><B>'. _('Total Quantity'). ':</B></TD><TD ALIGN=RIGHT><B>' . number_format($TotalQuantity,$LineItem->DecimalPlaces) . '</B></TD></TR>';
-	echo '<TR><TD COLSPAN=2><HR></TD></TR>';
+	echo '<tr><td align="right"><b>'. _('Total Quantity'). ':</b></td><td align="right"><b>' . number_format($TotalQuantity,$LineItem->DecimalPlaces) . '</b></td></tr>';
+	echo '<tr><td colspan="2"><hr /></td></tr>';
 }
 
-echo '</TABLE><HR>';
-//echo "<TABLE><TR><TD>";
+echo '</table><hr />';
+//echo "<table><tr><td>";
 
 //DISPLAY FILE INFO
 // do some inits & error checks...
@@ -75,7 +75,7 @@ if ($_FILES['ImportFile']['name'] == '' && $_SESSION['CurImportFile'] == ''){
 	$msg = _('Please Choose a file and then click Set Entry Type to upload a file for import');
 	prnMsg($msg);
 	$LineItem->SerialItemsValid=false;
-	echo '</TD></TR></TABLE>';
+	echo '</td></tr></table>';
 	include('includes/footer.inc');
 	exit();
 }
@@ -86,7 +86,7 @@ if ($_FILES['ImportFile']['error'] != '' && !isset($_SESSION['CurImportFile'])){
 				 _('Type').':'.$_FILES['ImportFile']['type'].'<br />';
 		echo '<br />'._('Error was').' '.$_FILES['ImportFile']['error'].'<br />';
 		$LineItem->SerialItemsValid=false;
-		echo '</TD></TR></TABLE>';
+		echo '</td></tr></table>';
 		include('includes/footer.inc');
 		exit();
 } elseif ($_FILES['ImportFile']['name']!=''){
@@ -100,7 +100,7 @@ if ($_FILES['ImportFile']['error'] != '' && !isset($_SESSION['CurImportFile'])){
 	if (!move_uploaded_file($_FILES['ImportFile']['tmp_name'],$_SESSION['CurImportFile']['tmp_name'])){
 		prnMsg(_('Error moving temporary file') . '. ' . _('Please check your configuration'),'error' );
 		$LineItem->SerialItemsValid=false;
-		echo '</TD></TR></TABLE>';
+		echo '</td></tr></table>';
 		include('includes/footer.inc');
 		exit;
 	}
@@ -120,14 +120,14 @@ if ($ShowFileInfo){
 	/********************************************
 	  Display file info for visual verification
 	********************************************/
-	echo '<TABLE>';
+	echo '<table>';
 	echo '<tr><td>'._('Name').':</td><td>'.$_SESSION['CurImportFile']['name'].'</td></tr>
 		<tr><td>'. _('Size') .':</td><td>' . number_format($_SESSION['CurImportFile']['size']/1024,4) . 'kb</td></tr>
 		<tr><td>'. _('Type') .':</td><td>' . $_SESSION['CurImportFile']['type'] . '</td></tr>
 		<tr><td>'. _('TempName') .':</td><td>' . $_SESSION['CurImportFile']['tmp_name'] . '</td></tr>
 	   <tr><td>'. _('Status') .':</td><td>' .
 	($LineItem->SerialItemsValid?getMsg(_('Valid'),'success'):getMsg(_('Invalid'),'error')) . '</td></tr>
-	   </TABLE>'.
+	   </table>'.
 		$invalid_imports.' '. _('out of') .' '.$TotalLines.' '. _('records are invalid').'<br />';
 	$filename = $_SESSION['CurImportFile']['tmp_name'];
 }
@@ -151,7 +151,7 @@ if (!$LineItem->SerialItemsValid && !$_SESSION['CurImportFile']['Processed']){
 			<input type="hidden" name="EntryType" value="FILE" />
 			</form>
 			<p>'. _('1st 10 Lines of File'). '....</p>
-			<hr width=15%>
+			<hr width="15%">
 		<pre>';
 
 	echo $contents;
@@ -161,7 +161,7 @@ if (!$LineItem->SerialItemsValid && !$_SESSION['CurImportFile']['Processed']){
 } else {
 		//Otherwise we have all valid records. show the first (100)  for visual verification.
 	echo _('Below are the 1st 100 records as parsed');
-	echo '<hr width=20%>';
+	echo '<hr width="20%">';
 	foreach($LineItem->SerialItems as $SItem){
 		echo $SItem->BundleRef.'<br />';
 		$i++;
