@@ -363,16 +363,16 @@ if (count($_SESSION['SuppTrans']->Shipts)>0){   /*if there are any Shipment char
 	}
 
 	echo '<tr>
-			<td class="number"><font color=red>' . _('Total Credited Against Shipments') .  ':</font></td>
-			<td class="number"><fontcolor=red><U>' . number_format($TotalShiptValue,2) .  '</U></font></td>
+			<td class="number"><font color="red">' . _('Total Credited Against Shipments') .  ':</font></td>
+			<td class="number"><font color="red"><u>' . number_format($TotalShiptValue,2) .  '</u></font></td>
 		</tr>
 		</table><br />';
 }
 
 if (count( $_SESSION['SuppTrans']->Assets) > 0){   /*if there are any fixed assets on the invoice*/
 
-	echo '<br /><table cellpadding=2 class="selection">
-					<tr><th colspan=3>' . _('Fixed Asset Credits') . '</th></tr>';
+	echo '<br /><table cellpadding="2" class="selection">
+					<tr><th colspan="3">' . _('Fixed Asset Credits') . '</th></tr>';
 	$TableHeader = '<tr><th>' . _('Asset ID') . '</th>
 						<th>' . _('Description') . '</th>
 						<th>' . _('Amount') . ' ' . $_SESSION['SuppTrans']->CurrCode . '</th>
@@ -399,7 +399,7 @@ if (count( $_SESSION['SuppTrans']->Assets) > 0){   /*if there are any fixed asse
 	}
 
 	echo '<tr><td colspan="2" class="number"><font size="4" color="blue">' . _('Total') . ':</font></td>
-		<td class="number"><font size="4" color="blue"><U>' .  number_format($TotalAssetValue,2) . '</U></font></td></tr></table>';
+		<td class="number"><font size="4" color="blue"><u>' .  number_format($TotalAssetValue,2) . '</u></font></td></tr></table>';
 } //end loop around fixed assets
 
 
@@ -443,7 +443,7 @@ if (count( $_SESSION['SuppTrans']->Contracts) > 0){   /*if there are any contrac
 if ($_SESSION['SuppTrans']->GLLink_Creditors ==1){
 
 	if (count($_SESSION['SuppTrans']->GLCodes)>0){
-		echo '<table cellpadding=2 class="selection">
+		echo '<table cellpadding="2" class="selection">
 			<tr><th colspan="3">' . _('General Ledger Analysis') . '</th></tr>';
 		$TableHeader = '<tr><th>' . _('Account') . '</th>
 							<th>' . _('Name') . '</th>
