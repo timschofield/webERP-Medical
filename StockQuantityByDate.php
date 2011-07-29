@@ -61,7 +61,7 @@ if (!isset($_POST['OnHandDate'])){
 
 echo '<td>' . _('On-Hand On Date') . ':</td>
 	<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="OnHandDate" size="12" maxlength="12" value="' . $_POST['OnHandDate'] . '" /></td></tr>';
-echo '<tr><td colspan=6><div class="centre"><input type="submit" name="ShowStatus" value="' . _('Show Stock Status') .'" /></div></td></tr></table>';
+echo '<tr><td colspan="6"><div class="centre"><input type="submit" name="ShowStatus" value="' . _('Show Stock Status') .'" /></div></td></tr></table>';
 echo '</form>';
 
 $TotalQuantity = 0;
@@ -89,7 +89,7 @@ if(isset($_POST['ShowStatus']) AND Is_Date($_POST['OnHandDate'])) {
 
 	$SQLOnHandDate = FormatDateForSQL($_POST['OnHandDate']);
 
-	echo '<br /><table cellpadding=5 cellspacing=1 class="selection">';
+	echo '<br /><table cellpadding="5" cellspacing="1" class="selection">';
 
 	$tableheader = '<tr>
 				<th>' . _('Item Code') . '</th>
