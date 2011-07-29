@@ -169,11 +169,15 @@ then none of the above are true and the list of payment termss will be displayed
 links to delete or edit each. These will call the same page again and allow update/input
 or deletion of the records*/
 
-	$sql = "SELECT termsindicator, terms, daysbeforedue, dayinfollowingmonth FROM paymentterms";
+	$sql = "SELECT termsindicator,
+					terms,
+					daysbeforedue,
+					dayinfollowingmonth
+				FROM paymentterms";
 	$result = DB_query($sql, $db);
 
 	echo '<table class="selection">';
-	echo '<tr><th colspan=6><font color=blue size=3>'._('Payment Terms.').'</font></th></tr>';
+	echo '<tr><th colspan="6"><font color="blue" size="3">'._('Payment Terms.').'</font></th></tr>';
 	echo '<tr><th>' . _('Term Code') . '</th>
 		<th>' . _('Description') . '</th>
 		<th>' . _('Following Month On') . '</th>
