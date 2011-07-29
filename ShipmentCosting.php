@@ -131,10 +131,10 @@ if (db_num_rows($LineItemsResult) > 0) {
 		$PeriodNo = GetPeriod(Date($_SESSION['DefaultDateFormat']), $db);
 	}
 
-	echo '<br /><table cellpadding=2 colspan=7 class="selection">';
-	echo '<tr><th colspan=9><font color=navy size=3>' . _('Items on shipment'). '</font></th></tr>';
+	echo '<br /><table cellpadding="2" colspan="7" class="selection">';
+	echo '<tr><th colspan="9"><font color="navy" size="3">' . _('Items on shipment'). '</font></th></tr>';
 
-	$TableHeader = '<tr>	<th>'. _('Item'). '</th>
+	$TableHeader = '<tr><th>'. _('Item'). '</th>
 				<th>'. _('Quantity'). '<br />'. _('Invoiced'). '</th>
 				<th>'. _('Quantity'). '<br />'. _('Received'). '</th>
 				<th>'. _('Invoiced'). '<br />'. _('Charges'). '</th>
