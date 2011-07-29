@@ -291,7 +291,7 @@ if (isset($_POST['Show'])){
 
 	}
 
-	echo '<tr bgcolor="#FDFEEF"><td colspan=3><b>';
+	echo '<tr bgcolor="#FDFEEF"><td colspan="3"><b>';
 	if ($PandLAccount==True){
 		echo _('Total Period Movement');
 	} else { /*its a balance sheet account*/
