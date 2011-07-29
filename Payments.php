@@ -711,7 +711,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 
 echo '<br /><table class="selection">';
 
-echo '<tr><th colspan=4><font size=3 color=blue>' . _('Payment');
+echo '<tr><th colspan="4"><font size="3" color="blue">' . _('Payment');
 
 if ($_SESSION['PaymentDetail']->SupplierID!=""){
 	echo ' ' . _('to') . ' ' . $_SESSION['PaymentDetail']->SuppName;
