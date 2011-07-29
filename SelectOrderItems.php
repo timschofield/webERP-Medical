@@ -1566,7 +1566,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 							<td class="number">%s</td>
 							<td class="number">%s</td>
 							<td class="number">%s</td>
-							<td><font size=1><input class="number"  tabindex='.number_format($j+7).' type="textbox" size=6 name="itm'.$myrow['stockid'].'" value=0>
+							<td><font size="1"><input class="number"  tabindex="'.number_format($j+7).'" type="text" size="6" name="itm'.$myrow['stockid'].'" value="0" />
 							</td>
 							</tr>',
 							$myrow['stockid'],
@@ -1584,7 +1584,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			}
 #end of while loop for Frequently Ordered Items
 			echo '<td style="text-align:center" colspan="8"><input type="hidden" name="order_items" value="1" />
-					<input tabindex='.number_format($j+8).' type="submit" value="'._('Add to Sales Order').'" /></td>';
+					<input tabindex="'.number_format($j+8).'" type="submit" value="'._('Add to Sales Order').'" /></td>';
 			echo '</table>';
 		} //end of if Frequently Ordered Items > 0
 		echo '<p><div class="centre"><b>' . $msg . '</b></div></p>';
@@ -1799,7 +1799,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 						<td class="number">'.number_format($DemandQty,$DecimalPlaces).'</td>
 						<td class="number">'.number_format($OnOrder, $DecimalPlaces).'</td>
 						<td class="number">'.number_format($Available,$DecimalPlaces).'</td>
-						<td><font size=1><input class="number"  tabindex='.number_format($j+7).' type="textbox" size=6 name="Quantity'.$i.'" value=0>
+						<td><font size="1"><input class="number"  tabindex="'.number_format($j+7).'" type="text" size="6" name="Quantity'.$i.'" value="0" />
 						<input type="hidden" name="StockID'.$i.'" value="'.$myrow['stockid'].'" />
 						<td class="number">'.number_format($PriceRow['price'],2).'</td>
 						</td>
@@ -1813,9 +1813,12 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 	#end of page full new headings if
 			}
 	#end of while loop
-			echo '<tr><td><input type="hidden" name="previous" value='.number_format($Offset-1).'><input tabindex='.number_format($j+7).' type="submit" name="Prev" value="'._('Prev').'"></td>';
-			echo '<td style="text-align:center" colspan="7"><input type="hidden" name="order_items" value=1><input tabindex='.number_format($j+8).' type="submit" value="'._('Add to Sales Order').'"></td>';
-			echo '<td><input type="hidden" name="nextlist" value='.number_format($Offset+1).'><input tabindex='.number_format($j+9).' type="submit" name="Next" value="'._('Next').'"></td><tr/>';
+			echo '<tr><td><input type="hidden" name="previous" value="'.number_format($Offset-1).'" />
+					<input tabindex="'.number_format($j+7).'" type="submit" name="Prev" value="'._('Prev').'" /></td>';
+			echo '<td style="text-align:center" colspan="7"><input type="hidden" name="order_items" value="1" />
+				<input tabindex="'.number_format($j+8).'" type="submit" value="'._('Add to Sales Order').'" /></td>';
+			echo '<td><input type="hidden" name="nextlist" value='.number_format($Offset+1).'>
+				<input tabindex="'.number_format($j+9).'" type="submit" name="Next" value="'._('Next').'" /></td><tr/>';
 			echo '</table></form>';
 			echo $jsCall;
 
