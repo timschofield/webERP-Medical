@@ -294,7 +294,7 @@ if (DB_num_rows($WOSerialNoResult)==0){
 		} else {
 			echo '<input type="hidden" name="Quantity' . $i . '" value="1">';
 		}
-		echo '<td><textarea name="Notes' . $i .'" cols=60 rows=3>' . $WOSNRow['qualitytext'] .'</textarea></td>';
+		echo '<td><textarea name="Notes' . $i .'" cols="60" rows="3">' . $WOSNRow['qualitytext'] .'</textarea></td>';
 		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=1&Reference=' . $WOSNRow['serialno'] . '&Quantity=' . $WOSNRow['quantity'] . '&WO=' . $WO . '&StockID=' . $StockID . '&Description=' . $Description . '&Serialised=' . $Serialised . '&NextSerialNo=' . $NextSerialNo . '">' . _('Delete') . '</td></tr>';
 		$i++;
 		$j++;
@@ -303,9 +303,9 @@ if (DB_num_rows($WOSerialNoResult)==0){
 	echo '<input type="hidden" name="CountOfItems" value=' . $i . '>';
 
 	if ($Serialised==0){
-		echo '<tr><td align="center" colspan=3>';
+		echo '<tr><td align="center" colspan="3">';
 	} else {
-		echo '<tr><td style="text-align: center" colspan=2>';
+		echo '<tr><td style="text-align: center" colspan="2">';
 	}
 	echo '<input type="submit" name="UpdateItems" value="' . _('Update') . '"></td></tr>';
 	echo '</table>';
