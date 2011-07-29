@@ -62,9 +62,9 @@ echo '</TD>';
 
 if ($LineItem->Serialised==1){
 	echo '<td>';
-	echo '<input type=radio name=EntryType onClick="submit();" ';
+	echo '<input type="radio" name="EntryType" onClick="submit();" ';
 	if ($_POST['EntryType']=='SEQUENCE') {
-		echo ' checked ';
+		echo ' checked="True" ';
 	}
 	echo ' value="SEQUENCE">'. _('Sequential');
 	echo '</td>';
@@ -77,7 +77,7 @@ if ($_POST['EntryType']=='FILE') {
 }
 echo ' value="FILE">'. _('File Upload');
 echo '&nbsp; <input type="file" name="ImportFile" onClick="document.getElementById(\'FileEntry\').checked=true;" >';
-echo '</td></tr><tr><td colspan=3>';
+echo '</td></tr><tr><td colspan="3">';
 echo '<div class="centre"><input type="submit" value="'. _('Set Entry Type'). ':" /></div>';
 echo '</td></tr></table>';
 echo '</form>';
