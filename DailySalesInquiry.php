@@ -14,7 +14,7 @@ echo '<div class="page_help_text">' . _('Select the month to show daily sales fo
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<table cellpadding=2 class="selection"><tr>';
+echo '<table cellpadding="2" class="selection"><tr>';
 
 echo '<td>' . _('Month to Show') . ':</td><td><select tabindex=1 name="MonthToShow">';
 
@@ -173,7 +173,7 @@ if ($CumulativeTotalSales !=0){
 	$AverageDailySales = 0;
 }
 
-echo '<th colspan=7>' . _('Total Sales for month') . ': ' . number_format($CumulativeTotalSales,0) . ' ' . _('GP%') . ': ' . number_format($AverageGPPercent,1) . '% ' . _('Avg Daily Sales') . ': ' . number_format($AverageDailySales,0) . '</th></tr>';
+echo '<th colspan="7">' . _('Total Sales for month') . ': ' . number_format($CumulativeTotalSales,0) . ' ' . _('GP%') . ': ' . number_format($AverageGPPercent,1) . '% ' . _('Avg Daily Sales') . ': ' . number_format($AverageDailySales,0) . '</th></tr>';
 
 echo '</table>';
 
