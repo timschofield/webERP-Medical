@@ -425,15 +425,15 @@ if (!isset($_GET['delete'])) {
 		echo '<input type="hidden" name="SelectedLocation" value="' . $SelectedLocation . '" />';
 		echo '<input type="hidden" name="LocCode" value="' . $_POST['LocCode'] . '" />';
 		echo '<table class="selection">';
-		echo '<tr><th colspan=2><font size=3 color=blue>'._('Amend Location details').'</font></th></tr>';
+		echo '<tr><th colspan="2"><font size="3" color="blue">'._('Amend Location details').'</font></th></tr>';
 		echo '<tr><td>' . _('Location Code') . ':</td><td>';
 		echo $_POST['LocCode'] . '</td></tr>';
 	} else { //end of if $SelectedLocation only do the else when a new record is being entered
 		if (!isset($_POST['LocCode'])) {
 			$_POST['LocCode'] = '';
 		}
-		echo '<table class="selection"><tr><th colspan=2><font size=3 color=blue>'._('New Location details').'</font></th></tr>';
-		echo '<tr><td>' . _('Location Code') . ':</td><td><input type="text" name="LocCode" value="' . $_POST['LocCode'] . '" size=5 maxlength=5></td></tr>';
+		echo '<table class="selection"><tr><th colspan=2><font size="3" color="blue">'._('New Location details').'</font></th></tr>';
+		echo '<tr><td>' . _('Location Code') . ':</td><td><input type="text" name="LocCode" value="' . $_POST['LocCode'] . '" size="5" maxlength="5" /></td></tr>';
 	}
 	if (!isset($_POST['LocationName'])) {
 		$_POST['LocationName'] = '';
