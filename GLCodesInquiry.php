@@ -51,9 +51,9 @@ while ($myrow=DB_fetch_array($AccountsResult)) {
 			$myrow['accountname']);
        } else {
               $ActGrp = $myrow['group_'];
-              printf('<td><font size=2>%s</font></td>
-	      		<td><font size=2>%s</font></td>
-			<td><font size=2>%s</font></td>
+              printf('<td><font size="2">%s</font></td>
+	      		<td><font size="2">%s</font></td>
+			<td><font size="2">%s</font></td>
 			</tr>',
 			$myrow['group_'],
 			$myrow['accountcode'],
