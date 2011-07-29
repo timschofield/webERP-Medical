@@ -184,10 +184,10 @@ if ( !isset($_GET['TypeID']) OR !isset($_GET['TransNo']) )
 				DB_free_result($TransResult);
 
 				echo '<tr bgcolor="#FFFFFF">
-						<td class="number" colspan=3><b>' . _('Total') . '</b></td>
+						<td class="number" colspan="3"><b>' . _('Total') . '</b></td>
 						<td class="number">' . number_format(($DebitTotal),2) . '</td>
 						<td class="number">' . number_format((-$CreditTotal),2) . '</td>
-						<td colspan=2>&nbsp</td>
+						<td colspan="2">&nbsp</td>
 					</tr>';
 				echo '</table><br />';
 		}
