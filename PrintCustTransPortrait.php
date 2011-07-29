@@ -845,7 +845,7 @@ if (isset($PrintPDF)
 				}
 
 				echo '<hr>';
-				echo '<div class="centre"><font size=2>' . _('All amounts stated in') . ' ' . $myrow['currcode'] . '</font></div>';
+				echo '<div class="centre"><font size="2">' . _('All amounts stated in') . ' ' . $myrow['currcode'] . '</font></div>';
 
 				$result=DB_query($sql,$db);
 				if (DB_error_no($db)!=0) {
