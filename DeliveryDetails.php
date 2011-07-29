@@ -858,13 +858,13 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 
 	$DisplayTotal = number_format($_SESSION['Items'.$identifier]->total,2);
 	echo '<tr class="EvenTableRows">
-		<td colspan=6 class="number"><b>'. _('TOTAL Excl Tax/Freight') .'</b></td>
+		<td colspan="6" class="number"><b>'. _('TOTAL Excl Tax/Freight') .'</b></td>
 		<td class="number">'.$DisplayTotal.'</td>
 	</tr>';
 
 	$DisplayVolume = number_format($_SESSION['Items'.$identifier]->totalVolume,2);
 	$DisplayWeight = number_format($_SESSION['Items'.$identifier]->totalWeight,2);
-	echo '<br /><tr class="EvenTableRows"><td colspan=3></td>
+	echo '<br /><tr class="EvenTableRows"><td colspan="3"></td>
 		<td>'. _('Total Weight') .':</td>
 		<td class="number">'.$DisplayWeight.'</td>
 		<td>'. _('Total Volume') .':</td>
@@ -876,7 +876,7 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 /*Display the order without discount */
 
 	echo '<div class="centre"><b>' . _('Order Summary') . '</b></div>
-	<table cellpadding=2 colspan=7 border=1><tr>
+	<table cellpadding="2" colspan="7" border="1"><tr>
 		<th>'. _('Item Description') .'</th>
 		<th>'. _('Quantity') .'</th>
 		<th>'. _('Unit') .'</th>
