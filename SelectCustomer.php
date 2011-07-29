@@ -452,7 +452,7 @@ if (isset($result)) {
 				<input type="submit" name="Next" value="' . _('Next') . '">';
 			echo '</div>';
 		}
-		echo '<br /><table cellpadding=2 colspan=7 class="selection">';
+		echo '<br /><table cellpadding="2" colspan="7" class="selection">';
 		$TableHeader = '<tr>
 				<th>' . _('Code') . '</th>
 				<th>' . _('Customer Name') . '</th>
