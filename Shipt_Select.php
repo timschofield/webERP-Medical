@@ -147,10 +147,10 @@ $result1 = DB_query($SQL,$db);
 
 
 echo '<table class="selection">';
-echo '<tr><th colspan=5><font size=3 color=navy>'._('To search for shipments for a specific part use the part selection facilities below') . '</font></th></tr>';
+echo '<tr><th colspan="5"><font size="3" color="navy">'._('To search for shipments for a specific part use the part selection facilities below') . '</font></th></tr>';
 ?>
 <tr>
-<td><font size=1><?php echo _('Select a stock category');?>:</font>
+<td><font size="1"><?php echo _('Select a stock category');?>:</font>
 <select name="StockCat">
 <?php
 while ($myrow1 = DB_fetch_array($result1)) {
