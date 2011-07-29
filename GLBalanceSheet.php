@@ -355,14 +355,14 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 		$TableHeader = '<tr>
 				<th>'._('Account').'</td>
 				<th>'._('Account Name').'</td>
-				<th colspan=2>$BalanceDate</th>
-				<th colspan=2>'._('Last Year').'</th>
+				<th colspan="2">$BalanceDate</th>
+				<th colspan="2">'._('Last Year').'</th>
 				</tr>';
 	} else { /*summary */
 		$TableHeader = '<tr>
-				<th colspan=2></th>
-				<th colspan=2>$BalanceDate</th>
-				<th colspan=2>'._('Last Year').'</th>
+				<th colspan="2"></th>
+				<th colspan="2">$BalanceDate</th>
+				<th colspan="2">'._('Last Year').'</th>
 				</tr>';
 	}
 
@@ -399,14 +399,14 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 				while ($myrow['groupname']!=$ParentGroups[$Level] AND $Level>0){
 					if ($_POST['Detail']=='Detailed'){
 						echo '<tr>
-							<td colspan=2></td>
+							<td colspan="2"></td>
       							<td><hr></td>
 							<td></td>
 							<td><hr></td>
 							<td></td>
 							</tr>';
 					}
-					printf('<td colspan=2><I>%s</I></td>
+					printf('<td colspan="2"><I>%s</I></td>
 						<td class="number">%s</td>
 						<td></td>
 						<td class="number">%s</td>
@@ -423,7 +423,7 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 				}
 				if ($_POST['Detail']=='Detailed'){
 					echo '<tr>
-						<td colspan=2></td>
+						<td colspan="2"></td>
 						<td><hr></td>
 						<td></td>
 						<td><hr></td>
@@ -431,7 +431,7 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 						</tr>';
 				}
 
-				printf('<td colspan=2>%s</td>
+				printf('<td colspan="2">%s</td>
 					<td class="number">%s</td>
 					<td></td>
 					<td class="number">%s</td>
@@ -451,7 +451,7 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 			if ($Section!=''){
 				if ($_POST['Detail']=='Detailed'){
 					echo '<tr>
-					<td colspan=2></td>
+					<td colspan="2"></td>
 					<td><hr></td>
 					<td></td>
 					<td><hr></td>
@@ -459,7 +459,7 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 					</tr>';
 				} else {
 					echo '<tr>
-					<td colspan=3></td>
+					<td colspan="3"></td>
 					<td><hr></td>
 					<td></td>
 					<td><hr></td>
@@ -467,7 +467,7 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 				}
 
 				printf('<tr>
-					<td colspan="3"><font size="4">%s</font></td>
+					<td colspan=""3""><font size="4">%s</font></td>
 					<td class="number">%s</td>
 					<td></td>
 					<td class="number">%s</td>
@@ -558,14 +558,14 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 	while ($myrow['groupname']!=$ParentGroups[$Level] AND $Level>0){
 		if ($_POST['Detail']=='Detailed'){
 			echo '<tr>
-				<td colspan=2></td>
+				<td colspan="2"></td>
 				<td><hr></td>
 				<td></td>
 				<td><hr></td>
 				<td></td>
 				</tr>';
 		}
-		printf('<td colspan=2><I>%s</I></td>
+		printf('<td colspan="2"><I>%s</I></td>
 			<td class="number">%s</td>
 			<td></td>
 			<td class="number">%s</td>
@@ -578,7 +578,7 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 	}
 	if ($_POST['Detail']=='Detailed'){
 		echo '<tr>
-			<td colspan=2></td>
+			<td colspan="2"></td>
 			<td><hr></td>
 			<td></td>
 			<td><hr></td>
@@ -586,7 +586,7 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 			</tr>';
 	}
 
-	printf('<td colspan=2>%s</td>
+	printf('<td colspan="2">%s</td>
 		<td class="number">%s</td>
 		<td></td>
 		<td class="number">%s</td>
@@ -598,7 +598,7 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 
 	if ($_POST['Detail']=='Detailed'){
 		echo '<tr>
-		<td colspan=2></td>
+		<td colspan="2"></td>
 		<td><hr></td>
 		<td></td>
 		<td><hr></td>
@@ -606,7 +606,7 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 		</tr>';
 	} else {
 		echo '<tr>
-		<td colspan=3></td>
+		<td colspan="3"></td>
 		<td><hr></td>
 		<td></td>
 		<td><hr></td>
@@ -614,7 +614,7 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 	}
 
 	printf('<tr>
-		<td colspan=3><font size=4>%s</font></td>
+		<td colspan="3"><font size="4">%s</font></td>
 		<td class="number">%s</td>
 		<td></td>
 		<td class="number">%s</td>
@@ -633,14 +633,14 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 	}
 
 	echo '<tr>
-		<td colspan=3></td>
+		<td colspan="3"></td>
       		<td><hr></td>
 		<td></td>
 		<td><hr></td>
 		</tr>';
 
 	printf('<tr>
-		<td colspan=3>'._('Check Total').'</font></td>
+		<td colspan="3">'._('Check Total').'</font></td>
 		<td class="number">%s</td>
 		<td></td>
 		<td class="number">%s</td>
@@ -649,7 +649,7 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 		number_format($LYCheckTotal));
 
 	echo '<tr>
-		<td colspan=3></td>
+		<td colspan="3"></td>
       		<td><hr></td>
 		<td></td>
 		<td><hr></td>
