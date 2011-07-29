@@ -414,7 +414,7 @@ if (!isset($StockID)) {
 	if (!isset($_REQUEST['OrderNumber']) or $_REQUEST['OrderNumber']==''){
 
 		echo '<table class="selection">';
-		echo '<tr><td>' . _('Order number') . ': </td><td><input type="text" name="OrderNumber" maxlength=8 size=9></td><td>' .
+		echo '<tr><td>' . _('Order number') . ': </td><td><input type="text" name="OrderNumber" maxlength="8" size="9" /></td><td>' .
 				_('From Stock Location') . ':</td><td><select name="StockLocation">';
 
 		$sql = "SELECT loccode, locationname FROM locations";
