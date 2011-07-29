@@ -447,8 +447,8 @@ if (isset($_POST['StockID'])) {
 } else {
 	echo '<input type="text" name="StockID" size="21" value="" maxlength="20" /></td></tr>';
 }
-echo '<tr><td>'. _('Partial Description'). ':</td><td><input type="text" name="StockText" size=21 value="' .
-	$_GET['Description'] .'"></td><td>'._('Partial Stock Code'). ':</td><td>';
+echo '<tr><td>'. _('Partial Description'). ':</td><td><input type="text" name="StockText" size="21" value="' .
+	$_GET['Description'] .'" /></td><td>'._('Partial Stock Code'). ':</td><td>';
 if (isset($_POST['StockID'])) {
 	echo '<input type="text" name="StockCode" size="21" value="' . $_POST['StockID'] .'" maxlength="20" />';
 } else {
