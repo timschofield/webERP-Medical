@@ -342,11 +342,11 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 	echo '<table class="selection"><tr>';
 	echo '<input type="hidden" name="SupplierID" value="' . $_POST['SupplierID'] . '" />';
 	echo '<input type="hidden" name="SuppName" value="' . $_POST['SuppName'] . '" />';
-	echo '<td>'._('Show all goods received after') . ': </td><td><input type="text" class="date" alt="'.
-			$_SESSION['DefaultDateFormat'].'" name="RecdAfterDate" Value="' . $_POST['RecdAfterDate'] .
-			'" MAXLENGTH =10 size=10></td></tr>';;
+	echo '<td>'._('Show all goods received after') . ': </td>
+		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="RecdAfterDate" value="' . $_POST['RecdAfterDate'] .'" maxlength="10" size="10" /></td>
+			</tr>';;
 	echo '</table>';
-	echo '<br /><div class="centre"><input type="submit" name="ShowGRNS" value="' . _('Show Outstanding Goods Received') . '"/></div>';
+	echo '<br /><div class="centre"><input type="submit" name="ShowGRNS" value="' . _('Show Outstanding Goods Received') . '" /></div>';
 	if (isset($_POST['ShowGRNS'])){
 
 		$sql = "SELECT grnno,
