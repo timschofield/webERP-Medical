@@ -110,7 +110,7 @@ if (DB_num_rows($GetOrdHdrResult)==1) {
 		<td class="OddTableRows"><font>' . $myrow['freightcost'] . '</font></td>
 	</tr>';
 	echo '<tr><th style="text-align: left">'._('Comments'). ': ';
-	echo '</th><td colspan=3>'.$myrow['comments'] . '</td></tr>';
+	echo '</th><td colspan="3">'.$myrow['comments'] . '</td></tr>';
 	echo '</table>';
 }
 
