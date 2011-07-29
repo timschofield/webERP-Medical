@@ -236,7 +236,7 @@ if (isset($_POST['Search'])) {
 	}
 	echo '<input type="hidden" name="Search" value="' . _('Search Now') . '" />';
 	echo '<br /><br />';
-	echo '<br /><table cellpadding=2 colspan=7>';
+	echo '<br /><table cellpadding="2" colspan="7">';
 	$tableheader = '<tr>
   		<th>' . _('Code') . '</th>
 		<th>' . _('Supplier Name') . '</th>
