@@ -596,7 +596,7 @@ if (isset($SearchResult)) {
 
 	if (DB_num_rows($SearchResult)>1){
 
-		echo '<table cellpadding=2 colspan=7 class="selection">';
+		echo '<table cellpadding=2 colspan="7" class="selection">';
 		$TableHeader = '<tr><th>' . _('Code') . '</th>
 				   			<th>' . _('Description') . '</th>
 				   			<th>' . _('Units') . '</th></tr>';
@@ -612,10 +612,10 @@ if (isset($SearchResult)) {
 
 			if (!in_array($myrow['stockid'],$ItemCodes)){
 				if (function_exists('imagecreatefrompng') ){
-					$ImageSource = '<img src="GetStockImage.php?automake=1&textcolor=FFFFFF&bgcolor=CCCCCC&StockID=' . urlencode($myrow['stockid']). '&text=&width=64&height=64">';
+					$ImageSource = '<img src="GetStockImage.php?automake=1&textcolor=FFFFFF&bgcolor=CCCCCC&StockID=' . urlencode($myrow['stockid']). '&text=&width=64&height=64" />';
 				} else {
 					if(file_exists($_SERVER['DOCUMENT_ROOT'] . $rootpath . '/' . $_SESSION['part_pics_dir'] . '/' . $myrow['stockid'] . '.jpg')) {
-						$ImageSource = '<img src="' .$_SERVER['DOCUMENT_ROOT'] . $rootpath .  '/' . $_SESSION['part_pics_dir'] . '/' . $myrow['stockid'] . '.jpg">';
+						$ImageSource = '<img src="' .$_SERVER['DOCUMENT_ROOT'] . $rootpath .  '/' . $_SESSION['part_pics_dir'] . '/' . $myrow['stockid'] . '.jpg" />';
 					} else {
 						$ImageSource = _('No Image');
 					}
@@ -629,11 +629,11 @@ if (isset($SearchResult)) {
 					$k=1;
 				}
 
-				printf('<td><font size=1>%s</font></td>
-						<td><font size=1>%s</font></td>
-						<td><font size=1>%s</font></td>
+				printf('<td><font size="1">%s</font></td>
+						<td><font size="1">%s</font></td>
+						<td><font size="1">%s</font></td>
 						<td>%s</td>
-						<td><font size=1><a href="%s">'
+						<td><font size="1"><a href="%s">'
 						. _('Add to Work Order') . '</a></font></td>
 						</tr>',
 						$myrow['stockid'],
