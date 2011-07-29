@@ -84,15 +84,15 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 echo '<input type="hidden" name="Type" Value="' . $Type . '">';
 
 echo '<table class="selection"><tr>';
-echo '<td align=left>' . _('Bank Account') . ':</td><td colspan=3><select tabindex="1" name="BankAccount">';
+echo '<td align=left>' . _('Bank Account') . ':</td><td colspan="3"><select tabindex="1" name="BankAccount">';
 
 $sql = "SELECT accountcode, bankaccountname FROM bankaccounts";
 $resultBankActs = DB_query($sql,$db);
 while ($myrow=DB_fetch_array($resultBankActs)){
 	if (isset($_POST['BankAccount']) and $myrow['accountcode']==$_POST['BankAccount']){
-		echo '<option selected="True" Value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . '</option>';
+		echo '<option selected="True" value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . '</option>';
 	} else {
-		echo '<option Value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . '</option>';
+		echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . '</option>';
 	}
 }
 
@@ -111,7 +111,7 @@ echo '<tr><td>' . _('Show') . ' ' . $TypeName . ' ' . _('from') . ':</td>
 
 echo '<td>' . _('to') . ':</td>
 	<td><input tabindex="2" type="text" name="BeforeDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="12" maxlength="10" onChange="isDate(this, this.value, '."'".$_SESSION['DefaultDateFormat']."'".')" Value="' . $_POST['BeforeDate'] . '"></td>';
-echo '<tr><td colspan=3>' . _('Choose outstanding') . ' ' . $TypeName . ' ' . _('only or all') . ' ' . $TypeName . ' ' . _('in the date range') . ':</td>
+echo '<tr><td colspan="3">' . _('Choose outstanding') . ' ' . $TypeName . ' ' . _('only or all') . ' ' . $TypeName . ' ' . _('in the date range') . ':</td>
 	<td><select tabindex="4" name="Ostg_or_All">';
 
 if ($_POST['Ostg_or_All']=='All'){
@@ -123,7 +123,7 @@ if ($_POST['Ostg_or_All']=='All'){
 }
 echo '</select></td></tr>';
 
-echo '<tr><td colspan=3>' . _('Choose to display only the first 20 matching') . ' ' . $TypeName . ' ' .
+echo '<tr><td colspan="3">' . _('Choose to display only the first 20 matching') . ' ' . $TypeName . ' ' .
 	_('or all') . ' ' . $TypeName . ' ' . _('meeting the criteria') . ':</td><td><select tabindex="5" name="First20_or_All">';
 if ($_POST['First20_or_All']=='All'){
 	echo '<option selected="True" value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range') . '</option>';
@@ -239,9 +239,9 @@ if ($InputError !=1 AND isset($_POST['BankAccount']) AND $_POST['BankAccount']!=
 			<th>' . _('Date') . '</th>
 			<th>' . _('Amount') . '</th>
 			<th>' . _('Outstanding') . '</th>
-			<th colspan=3>' . _('Clear') . ' / ' . _('Unclear') . '</th>
+			<th colspan="3">' . _('Clear') . ' / ' . _('Unclear') . '</th>
 		</tr>';
-	echo '<table cellpadding=2 class="selection">' . $TableHeader;
+	echo '<table cellpadding="2" class="selection">' . $TableHeader;
 
 
 	$j = 1;  //page length counter
