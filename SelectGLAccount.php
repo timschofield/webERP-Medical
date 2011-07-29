@@ -83,7 +83,7 @@ if (!isset($AccountID)) {
 		prnMsg($msg,'info');
 	}
 
-	echo '<table cellpadding=3 colspan=4 class="selection">
+	echo '<table cellpadding="3" colspan="4" class="selection">
 		<tr>
 		<td><font size="1">' . _('Enter extract of text in the Account name') .':</font></td>
 		<td><input type="text" name="Keywords" size="20" maxlength="25" /></td>
@@ -112,9 +112,9 @@ if (!isset($AccountID)) {
 		while ($myrow=DB_fetch_array($result)) {
 
 			printf('<tr><td><font size="1"><input type="submit" name="Select" value="%s" /></font></td>
-				<td><font size=1>%s</font></td>
-				<td><font size=1>%s</font></td>
-				<td><font size=1>%s</font></td>
+				<td><font size="1">%s</font></td>
+				<td><font size="1">%s</font></td>
+				<td><font size="1">%s</font></td>
 				</tr>',
 				$myrow['accountcode'],
 				$myrow['accountname'],
