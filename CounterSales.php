@@ -2331,7 +2331,7 @@ if (!isset($_POST['ProcessSale'])){
 								$myrow['units'],
 								number_format($QOH, $QOHRow['decimalplaces']));
 						} else {
-							echo '<td colspan=4>';
+							echo '<td colspan="4">';
 						}
 						echo '<input type="hidden" name="Batch'.$i.'" value="'.$BatchRow['serialno'].'" />';
 						echo '<input type="hidden" name="StockID'.$i.'" value="'.$myrow['stockid'].'" />';
