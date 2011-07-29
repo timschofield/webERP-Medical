@@ -356,7 +356,7 @@ else {
 
 	if (DB_num_rows($PurchOrdersResult) > 0) {
 		/*show a table of the orders returned by the SQL */
-		echo '<table cellpadding=2 colspan=7 width=90% class="selection">';
+		echo '<table cellpadding="2" colspan="7" width="90%" class="selection">';
 		$TableHeader = '<tr><th>' . _('View') . '</th>
 				<th>' . _('Supplier') . '</th>
 				<th>' . _('Currency') . '</th>
