@@ -329,7 +329,7 @@ if ($_POST['TenderType']!=3 and isset($_SESSION['offer']) and $_SESSION['offer']
 			echo '<td>'.$LineItems->Units.'</td>';
 			echo '<td><input type="text" class="number" name="price'.$LineItems->LineNo.'" value='.number_format($LineItems->Price,2,'.','').'></td>';
 			echo '<td class="number">'.number_format($LineItems->Price*$LineItems->Quantity,2).'</td>';
-			echo '<td><input type="text" size=11 class="date" alt='.$_SESSION['DefaultDateFormat'].' name="expirydate'.$LineItems->LineNo.'" value='.$LineItems->ExpiryDate.'></td>';
+			echo '<td><input type="text" size="11" class="date" alt='.$_SESSION['DefaultDateFormat'].' name="expirydate'.$LineItems->LineNo.'" value='.$LineItems->ExpiryDate.'></td>';
 			echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $LineItems->LineNo . '&Type=' . $_POST['TenderType'] . '">' . _('Remove') . '</a></td></tr>';
 			echo '</tr>';
 		}
@@ -685,9 +685,9 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 					<td>'.$myrow['description'].'</td>
 					<td>'.$uom.'</td>
 					<td>'.$ImageSource.'</td>
-					<td><input class="number" type="text" size=6 value=0 name="qty'.$myrow['stockid'].'"></td>
-					<td><input class="number" type="text" size=12 value=0 name="price'.$myrow['stockid'].'"></td>
-					<input type="hidden" size=6 value="'.$uom.'" name="uom'.$myrow['stockid'].'">
+					<td><input class="number" type="text" size="6" value="0" name="qty'.$myrow['stockid'].'" /></td>
+					<td><input class="number" type="text" size="12" value="0" name="price'.$myrow['stockid'].'" /></td>
+					<input type="hidden" value="'.$uom.'" name="uom'.$myrow['stockid'].'" />
 					</tr>';
 
 			$PartsDisplayed++;
@@ -707,8 +707,8 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 		}
 		echo '<a name="end"></a><br /><div class="centre"><input type="submit" name="NewItem" value="Add to Offer"></div>';
 	}#end if SearchResults to show
-	echo '<input type="hidden" name="TenderType" value='.$_POST['TenderType'].'>';
-	echo '<input type="hidden" name="SupplierID" value='.$_POST['SupplierID'].'>';
+	echo '<input type="hidden" name="TenderType" value="'.$_POST['TenderType'].'" />';
+	echo '<input type="hidden" name="SupplierID" value="'.$_POST['SupplierID'].'" />';
 
 	echo '</form>';
 
