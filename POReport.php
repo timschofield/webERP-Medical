@@ -508,7 +508,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 		} else {
 			$SortBy_Display = $Detail_Array[$_POST['SortBy']];
 		}
-		echo '<tr><th colspan=2><font size=3 color=navy>'._('Header Details').'</font></th></tr>';
+		echo '<tr><th colspan="2"><font size="3" color="navy">'._('Header Details').'</font></th></tr>';
 		echo '<tr><td>' . _('Purchase Order Report') . '</td><td>' . $_POST['ReportType'] . ' By '.$SortBy_Display .'</td></tr>';
 		echo '<tr><td>' . _('Date Type') . '</td><td>' . $_POST['DateType'] . '</tr>';
 		echo '<tr><td>' . _('Date Range') . '</td><td>' . $_POST['FromDate'] . _(' To ') .  $_POST['ToDate'] . '</td></tr>';
@@ -525,7 +525,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 		echo '<tr><td>' . _('Stock Category') . '</td><td>' . $_POST['Category'] . '</tr></table>';
 
 		if ($_POST['ReportType'] == 'Detail') {
-			echo '<br /><table class="selection" width=98%>';
+			echo '<br /><table class="selection" width="98%">';
 			if ($_POST['DateType'] == 'Order') {
 				printf('<tr><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%-s</th><th>%s',
 					 _('Order No'),
