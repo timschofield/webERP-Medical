@@ -122,7 +122,7 @@ if (isset($_POST['ProcessStockChange'])){
 	$result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 	echo ' ... ' . _('completed');
 
-	$sql="select count(table_name) from information_schema.tables where table_schema='".$_SESSION['DatabaseName']."' and table_name='mrpplannedorders'";
+	$sql="SELECT count(table_name) FROM information_schema.tables WHERE table_schema='".$_SESSION['DatabaseName']."' AND table_name='mrpplannedorders'";
 	$result = DB_query($sql,$db);
 	$row=DB_fetch_row($result);
 	if ($row[0]>0) {
