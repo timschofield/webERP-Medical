@@ -1022,11 +1022,11 @@ if (isset($_POST['NonStockOrder'])) {
 
 	echo'</select><a href="FixedAssetItems.php" target=_blank>'. _('New Fixed Asset') . '</a></td>
 				<tr><td>'._('Quantity to purchase').'</td>
-						<td><input type="text" class="number" name="Qty" size=10></td></tr>
+						<td><input type="text" class="number" name="Qty" size="10" /></td></tr>
 				<tr><td>'._('Price per item').'</td>
-						<td><input type="text" class="number" name="Price" size=10></td></tr>
+						<td><input type="text" class="number" name="Price" size="10" /></td></tr>
 				<tr><td>'._('Delivery Date').'</td>
-						<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="ReqDelDate" size=11 value="'.$_SESSION['PO'.$identifier]->DeliveryDate .'"></td></tr>';
+						<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="ReqDelDate" size="11" value="'.$_SESSION['PO'.$identifier]->DeliveryDate .'" /></td></tr>';
 	echo '</table>';
 	echo '<div class="centre"><input type="submit" name="EnterLine" value="Enter Item"></div>';
 }
