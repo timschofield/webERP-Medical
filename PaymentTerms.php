@@ -271,13 +271,15 @@ if (!isset($_GET['delete'])) {
 	<td><input type="checkbox" name="DaysOrFoll"';
 	if ( isset($DayInFollowingMonth) && !$DayInFollowingMonth) { echo "checked"; }
 	echo ' ></td></tr><tr><td>'._('Days (Or Day In Following Month)').':</td><td>
-		<input type="text"' . (in_array('DayNumber',$Errors) ? 'class="inputerror"' : '' ) .' name="DayNumber" class="number"  size=4 maxlength=3 value=';
+		<input type="text"' . (in_array('DayNumber',$Errors) ? 'class="inputerror"' : '' ) .' name="DayNumber" class="number"  size="4" maxlength="3" value="';
 	if ($DaysBeforeDue !=0) {
-			echo $DaysBeforeDue;
-			} else {
-			if (isset($DayInFollowingMonth)) {echo $DayInFollowingMonth;}
-			}
-	echo '></td></tr></table><br /><div class="centre"><input type="submit" name="submit" value="'._('Enter Information').'" /></form></div>';
+		echo $DaysBeforeDue;
+	} else {
+		if (isset($DayInFollowingMonth)) {
+			echo $DayInFollowingMonth;
+		}
+	}
+	echo '" /></td></tr></table><br /><div class="centre"><input type="submit" name="submit" value="'._('Enter Information').'" /></form></div>';
 } //end if record deleted no point displaying form to add record
 
 include('includes/footer.inc');
