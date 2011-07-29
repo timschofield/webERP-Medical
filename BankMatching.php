@@ -261,8 +261,8 @@ if ($InputError !=1 AND isset($_POST['BankAccount']) AND $_POST['BankAccount']!=
 				<td>%s</td>
 				<td class="number">%s</td>
 				<td class="number">%s</td>
-				<td colspan=2>%s</td>
-				<td><input type="checkbox" name="Unclear_%s"><input type="hidden" name="BankTrans_%s" value=%s></td>
+				<td colspan="2">%s</td>
+				<td><input type="checkbox" name="Unclear_%s"><input type="hidden" name="BankTrans_%s" value="%s" /></td>
 				</tr>',
 				$myrow['chequeno'],
 				$myrow['ref'],
@@ -290,8 +290,8 @@ if ($InputError !=1 AND isset($_POST['BankAccount']) AND $_POST['BankAccount']!=
 				<td>%s</td>
 				<td class="number">%s</td>
 				<td class="number">%s</td>
-				<td><input type="checkbox" name="Clear_%s"><input type="hidden" name="BankTrans_%s" value=%s></td>
-				<td colspan=2><input type="text" maxlength="15" size="15" class="number" name="AmtClear_%s" /></td>
+				<td><input type="checkbox" name="Clear_%s"><input type="hidden" name="BankTrans_%s" value="%s" /></td>
+				<td colspan="2"><input type="text" maxlength="15" size="15" class="number" name="AmtClear_%s" /></td>
 				</tr>',
 				$myrow['chequeno'],
 				$myrow['ref'],
