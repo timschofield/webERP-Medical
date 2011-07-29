@@ -255,9 +255,9 @@ If ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 		$DefaultToCriteria = $_POST['ToCriteria'];
 	}
 	echo '<tr><td>' . _('From Supplier Code') . ':</font></td>
-            <td><input type="text" maxlength=6 size=7 name=FromCriteria value="' . $DefaultFromCriteria . '"></td></tr>';
+            <td><input type="text" maxlength="6" size="7" name="FromCriteria" value="' . $DefaultFromCriteria . '" /></td></tr>';
 	echo '<tr><td>' . _('To Supplier Code') . ':</td>
-            <td><input type="text" maxlength=6 size=7 name=ToCriteria value="' . $DefaultToCriteria . '"></td></tr>';
+            <td><input type="text" maxlength="6" size="7" name="ToCriteria" value="' . $DefaultToCriteria . '" /></td></tr>';
 
 
 	echo '<tr><td>' . _('For Suppliers Trading in') . ':</td><td><select name="Currency">';
