@@ -299,8 +299,8 @@ if (!isset($_POST['PostInvoice'])){
 
 		}
 
-		echo '<tr><td colspan=5 class="number"><font color=blue>' . _('Total Value of Goods Charged') . ':</font></td>
-			<td class="number"><font color=blue><U>' . number_format($TotalGRNValue,2) . '</U></font></td></tr>';
+		echo '<tr><td colspan="5" class="number"><font color="blue">' . _('Total Value of Goods Charged') . ':</font></td>
+			<td class="number"><font color="blue"><u>' . number_format($TotalGRNValue,2) . '</u></font></td></tr>';
 		echo '</table>';
 	}
 
@@ -308,7 +308,7 @@ if (!isset($_POST['PostInvoice'])){
 
 	if (count( $_SESSION['SuppTrans']->Shipts) > 0){   /*if there are any Shipment charges on the invoice*/
 
-		echo '<br /><table cellpadding=2 class="selection">
+		echo '<br /><table cellpadding="2" class="selection">
 					<tr>
 						<th colspan="2">' . _('Shipment Charges') . '</th>
 					</tr>';
