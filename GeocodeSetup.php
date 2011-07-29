@@ -239,26 +239,26 @@ if (!isset($_GET['delete'])) {
 	}
 	echo '<br /><tr>
 					<td>'. _('Geocode Key') .':</td>
-					<td><input ' . (in_array('geocode_key',$Errors) ? 'class="inputerror"' : '' ) .' tabindex=2 type="text" name="geocode_key" value="'. $_POST['geocode_key'] .'" size=28 maxlength=300></td>
+					<td><input ' . (in_array('geocode_key',$Errors) ? 'class="inputerror"' : '' ) .' tabindex=2 type="text" name="geocode_key" value="'. $_POST['geocode_key'] .'" size="28" maxlength="300" /></td>
 				</tr>
 				<tr>
 					<td>'. _('Geocode Center Long') . '</td>
-					<td><input tabindex=3 type="text" name="center_long" value="'. $_POST['center_long'] .'" size=28 maxlength=300 /></td>
+					<td><input tabindex="3" type="text" name="center_long" value="'. $_POST['center_long'] .'" size="28" maxlength="300" /></td>
 				</tr>
 				<tr><td>'. _('Geocode Center Lat') . '</td>
-					<td><input tabindex=4 type="text" name="center_lat" value="'. $_POST['center_lat'] .'" size=28 maxlength=300 /></td>
+					<td><input tabindex="4" type="text" name="center_lat" value="'. $_POST['center_lat'] .'" size="28" maxlength="300" /></td>
 				</tr>
 				<tr>
 					<td>'. _('Geocode Map Height') . '</td>
-					<td><input tabindex=5 type="text" name="map_height" value="'. $_POST['map_height'] .'" size=28 maxlength=300 /></td>
+					<td><input tabindex="5" type="text" name="map_height" value="'. $_POST['map_height'] .'" size="28" maxlength="300" /></td>
 				</tr>
 				<tr>
 					<td>'. _('Geocode Map Width') . '</td>
-					<td><input tabindex=6 type="text" name="map_width" value="'. $_POST['map_width'] .'" size=28 maxlength=300 /></td>
+					<td><input tabindex="6" type="text" name="map_width" value="'. $_POST['map_width'] .'" size="28" maxlength="300" /></td>
 				</tr>
 				<tr>
 					<td>'. _('Geocode Host') . '</td>
-					<td><input tabindex=7 type="text" name="map_host" value="'. $_POST['map_host'] .'" size=20 maxlength=300 /></td>
+					<td><input tabindex="7" type="text" name="map_host" value="'. $_POST['map_host'] .'" size="20" maxlength="300" /></td>
 				</tr>
 		</table>';
 
