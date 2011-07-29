@@ -1626,15 +1626,15 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		echo '"></td></tr>';
 
 		echo '<tr>
-					<td style="text-align:center" colspan=1><input tabindex=4 type="submit" name="Search" value="' . _('Search Now') . '"></td>
-					<td style="text-align:center" colspan=1><input tabindex=5 type="submit" name="QuickEntry" value="' .  _('Use Quick Entry') . '"></td>';
+					<td style="text-align:center" colspan="1"><input tabindex="4" type="submit" name="Search" value="' . _('Search Now') . '" /></td>
+					<td style="text-align:center" colspan="1"><input tabindex="5" type="submit" name="QuickEntry" value="' .  _('Use Quick Entry') . '" /></td>';
 
 		if (!isset($_POST['PartSearch'])) {
 			echo '<script  type="text/javascript">if (document.SelectParts) {defaultControl(document.SelectParts.Keywords);}</script>';
 		}
 		if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){ //not a customer entry of own order
-			echo '<td style="text-align:center" colspan=1><input tabindex=6 type="submit" name="ChangeCustomer" value="' . _('Change Customer') . '"></td>
-						<td style="text-align:center" colspan=1><input tabindex=7 type="submit" name="SelectAsset" value="' . _('Fixed Asset Disposal') . '"></td>
+			echo '<td style="text-align:center" colspan="1"><input tabindex="6" type="submit" name="ChangeCustomer" value="' . _('Change Customer') . '" /></td>
+						<td style="text-align:center" colspan="1"><input tabindex="7" type="submit" name="SelectAsset" value="' . _('Fixed Asset Disposal') . '" /></td>
 							</tr></table><br />';
 		}
 
