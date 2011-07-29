@@ -107,7 +107,7 @@ if (!isset($OrderNumber) or $OrderNumber == "") {
 	if (!isset($Intro)) {
 		$Intro='';
 	}
-	echo $Intro . _('Order Number') . ': <input type="text" name="OrderNumber" maxlength=8 size=9> ' . _('Into Stock Location') . ':<select name="StockLocation"> ';
+	echo $Intro . _('Order Number') . ': <input type="text" name="OrderNumber" maxlength="8" size="9" /> ' . _('Into Stock Location') . ':<select name="StockLocation"> ';
 	$sql = "SELECT loccode, locationname FROM locations";
 	$resultStkLocs = DB_query($sql, $db);
 	while ($myrow = DB_fetch_array($resultStkLocs)) {
