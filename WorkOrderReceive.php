@@ -732,7 +732,7 @@ if ($WORow['closed']==1){
 if (!isset($_POST['ReceivedDate'])){
 	$_POST['ReceivedDate'] = Date($_SESSION['DefaultDateFormat']);
 }
-echo '<table cellpadding=2 class="selection">
+echo '<table cellpadding="2" class="selection">
 		<tr><td>' . _('Receive work order') . ':</td>
 			<td>' . $_POST['WO'] .'</td><td>' . _('Item') . ':</td>
 			<td>' . $_POST['StockID'] . ' - ' . $WORow['description'] . '</td></tr>
@@ -742,10 +742,10 @@ echo '<table cellpadding=2 class="selection">
 			<td>' . ConvertSQLDate($WORow['requiredby']) . '</td></tr>
 		 <tr><td>' . _('Quantity Ordered') . ':</td>
 		 	<td class="number">' . number_format($WORow['qtyreqd'],$WORow['decimalplaces']) . '</td>
-			<td colspan=2>' . $WORow['units'] . '</td></tr>
+			<td colspan="2">' . $WORow['units'] . '</td></tr>
 		 <tr><td>' . _('Already Received') . ':</td>
 		 	<td class="number">' . number_format($WORow['qtyrecd'],$WORow['decimalplaces']) . '</td>
-			<td colspan=2>' . $WORow['units'] . '</td></tr>
+			<td colspan="2">' . $WORow['units'] . '</td></tr>
 		 <tr><td>' . _('Date Received') . ':</td>
 		 	<td>' . Date($_SESSION['DefaultDateFormat']) . '</td>
 			<td>' . _('Received Into') . ':</td><td>
