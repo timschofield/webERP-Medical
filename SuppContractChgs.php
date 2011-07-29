@@ -112,7 +112,7 @@ if (!isset($_POST['ContractRef'])) {
 echo '<table>';
 echo '<tr><td>' . _('Contract Reference') . ':</td>
 	<td><input type="text" name="ContractRef" size="22" maxlength="20" value="' .  $_POST['ContractRef'] . '" /></td></tr>';
-echo '<tr><td>' . _('Contract Selection') . ':<br /><font size=1>' . _('If you know the code enter it above') . '<br />' . _('otherwise select the contract from the list') . '</font></td><td><select name="ContractSelection">';
+echo '<tr><td>' . _('Contract Selection') . ':<br /><font size="1">' . _('If you know the code enter it above') . '<br />' . _('otherwise select the contract from the list') . '</font></td><td><select name="ContractSelection">';
 
 $sql = "SELECT contractref, name
 						FROM contracts INNER JOIN debtorsmaster
@@ -135,15 +135,15 @@ if (!isset($_POST['Amount'])) {
 	$_POST['Amount']=0;
 }
 echo '<tr><td>' . _('Amount') . ':</td>
-	<td><input type="text" name="Amount" size="12" maxlength="11" value="' .  $_POST['Amount'] . '"></td></tr>';
+	<td><input type="text" name="Amount" size="12" maxlength="11" value="' .  $_POST['Amount'] . '" /></td></tr>';
 echo '<tr><td>' . _('Narrative') . ':</td>
-	<td><input type="text" name="Narrative" size="42" maxlength="40" value="' .  $_POST['Narrative'] . '"></td></tr>';
+	<td><input type="text" name="Narrative" size="42" maxlength="40" value="' .  $_POST['Narrative'] . '" /></td></tr>';
 echo '<tr><td>' . _('Aniticpated Cost') . ':</td>
 	<td>';
 if (isset($_POST['AnticipatedCost']) AND $_POST['AnticipatedCost']==1){
-	echo '<input type="checkbox" name="AnticipatedCost" checked>';
+	echo '<input type="checkbox" name="AnticipatedCost" checked="True" />';
 } else {
-	echo '<input type="checkbox" name="AnticipatedCost">';
+	echo '<input type="checkbox" name="AnticipatedCost" />';
 }
 
 echo '</td></tr></table>';
