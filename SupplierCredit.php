@@ -398,8 +398,8 @@ if (count( $_SESSION['SuppTrans']->Assets) > 0){   /*if there are any fixed asse
 		}
 	}
 
-	echo '<tr><td colspan=2 class="number"><font size=4 color=blue>' . _('Total') . ':</font></td>
-		<td class="number"><font size=4 color=BLUE><U>' .  number_format($TotalAssetValue,2) . '</U></font></td></tr></table>';
+	echo '<tr><td colspan="2" class="number"><font size="4" color="blue">' . _('Total') . ':</font></td>
+		<td class="number"><font size="4" color="blue"><U>' .  number_format($TotalAssetValue,2) . '</U></font></td></tr></table>';
 } //end loop around fixed assets
 
 
@@ -471,8 +471,8 @@ if ($_SESSION['SuppTrans']->GLLink_Creditors ==1){
 			}
 		}
 
-		echo '<tr>	<td colspan=2 class="number"><font size=4 color=red>' . _('Total') . ':</font></td>
-					<td class="number"><font size=4 color=red><u>' . number_format($TotalGLValue,2) . '</u></font></td>
+		echo '<tr>	<td colspan="2" class="number"><font size="4" color="red">' . _('Total') . ':</font></td>
+					<td class="number"><font size="4" color="red"><u>' . number_format($TotalGLValue,2) . '</u></font></td>
 			</tr></table><br />';
 	}
 
