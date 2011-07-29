@@ -150,15 +150,15 @@ if (isset($SelectedAccount) and $SelectedAccount != '') {
 	echo '<form name="form" action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<br /><table class="selection">';
-	echo '<tr><th colspan=3>'. _('Last Financial Year') .'</th>';
-	echo '<th colspan=3>'. _('This Financial Year') .'</th>';
-	echo '<th colspan=3>'. _('Next Financial Year') .'</th></tr>';
+	echo '<tr><th colspan="3">'. _('Last Financial Year') .'</th>';
+	echo '<th colspan="3">'. _('This Financial Year') .'</th>';
+	echo '<th colspan="3">'. _('Next Financial Year') .'</th></tr>';
 
-	echo '<tr><th colspan=3>'. _('Year ended').' - '.
+	echo '<tr><th colspan="3">'. _('Year ended').' - '.
 		Date($_SESSION['DefaultDateFormat'],YearEndDate($_SESSION['YearEnd'],-1)) .'</th>';
-	echo '<th colspan=3>'. _('Year ended').' - '.
+	echo '<th colspan="3">'. _('Year ended').' - '.
 		Date($_SESSION['DefaultDateFormat'],YearEndDate($_SESSION['YearEnd'],0)) .'</th>';
-	echo '<th colspan=3>'. _('Year ended').' - '.
+	echo '<th colspan="3">'. _('Year ended').' - '.
 		Date($_SESSION['DefaultDateFormat'],YearEndDate($_SESSION['YearEnd'],1)) .'</th></tr>';
 
 	echo '<tr>';
@@ -175,13 +175,13 @@ if (isset($SelectedAccount) and $SelectedAccount != '') {
 		echo '<tr>';
 		echo '<th>'. $PeriodEnd[$CurrentYearEndPeriod-(24-$i)] .'</th>';
 		echo '<td bgcolor="d2e5e8" class="number">'.number_format($actual[$CurrentYearEndPeriod-(24-$i)],2,'.','').'</td>';
-		echo '<td><input type="text" class="number" size=14 name="'.$i.'last" value="'.$budget[$CurrentYearEndPeriod-(24-$i)] .'"></td>';
+		echo '<td><input type="text" class="number" size="14" name="'.$i.'last" value="'.$budget[$CurrentYearEndPeriod-(24-$i)] .'" /></td>';
 		echo '<th>'. $PeriodEnd[$CurrentYearEndPeriod-(12-$i)] .'</th>';
 		echo '<td bgcolor="d2e5e8" class="number">'.number_format($actual[$CurrentYearEndPeriod-(12-$i)],2,'.','').'</td>';
-		echo '<td><input type="text" class="number" size=14 name="'.$i.'this" value="'. $budget[$CurrentYearEndPeriod-(12-$i)] .'"></td>';
+		echo '<td><input type="text" class="number" size="14" name="'.$i.'this" value="'. $budget[$CurrentYearEndPeriod-(12-$i)] .'" /></td>';
 		echo '<th>'. $PeriodEnd[$CurrentYearEndPeriod+($i)] .'</th>';
 		echo '<td bgcolor="d2e5e8" class="number">'.number_format($actual[$CurrentYearEndPeriod+$i],2,'.','').'</td>';
-		echo '<td><input type="text" class="number" size=14 name="'.$i.'next" value='. $budget[$CurrentYearEndPeriod+$i] .'></td>';
+		echo '<td><input type="text" class="number" size="14" name="'.$i.'next" value="'. $budget[$CurrentYearEndPeriod+$i] .'" /></td>';
 		echo '</tr>';
 		$LastYearActual=$LastYearActual+$actual[$CurrentYearEndPeriod-(24-$i)];
 		$LastYearBudget=$LastYearBudget+$budget[$CurrentYearEndPeriod-(24-$i)];
