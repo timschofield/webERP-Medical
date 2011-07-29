@@ -128,7 +128,7 @@ if (!isset($_SESSION['SPL']->BranchCode)){
 		echo '<div class="centre">';
 		echo '<br /><br />' . _('Select the customer branch to deliver the special to from the list below');
 
-		echo '</div><br /><table cellpadding=3 colspan=2 BORDER=1>';
+		echo '</div><br /><table cellpadding="3" colspan="2" border="1">';
 
 		$tableheader = '<tr><th>' ._('Code') . '</th>
 					<th>' . _('Branch Name') . '</th></tr>';
