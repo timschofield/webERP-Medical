@@ -470,11 +470,11 @@ if (!isset($_POST['ChargeFreightCost'])) {
 	$_POST['ChargeFreightCost']=0;
 }
 if ($_SESSION['Items']->Any_Already_Delivered()==1 and (!isset($_SESSION['Items']->FreightCost) or $_POST['ChargeFreightCost']==0)) {
-	echo '<td colspan=2 class="number">'. _('Charge Freight Cost inc Tax').'</td>
-		<td><input tabindex='.$j.' type="text" class="number" size="10" maxlength="12" name="ChargeFreightCost" value="0"></td>';
+	echo '<td colspan="2" class="number">'. _('Charge Freight Cost inc Tax').'</td>
+		<td><input tabindex="'.$j.'" type="text" class="number" size="10" maxlength="12" name="ChargeFreightCost" value="0" /></td>';
 	$_SESSION['Items']->FreightCost=0;
 } else {
-	echo '<td colspan=2 class="number">'. _('Charge Freight Cost inc Tax').'</td>';
+	echo '<td colspan="2" class="number">'. _('Charge Freight Cost inc Tax').'</td>';
 	if (isset($_POST['ProcessInvoice'])) {
 		echo '<td class="number">' . $_SESSION['Items']->FreightCost . '</td>';
 	} else {
