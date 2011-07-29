@@ -433,7 +433,7 @@ else {
 
 	/*show a table of the orders returned by the SQL */
 
-	echo '<table cellpadding=2 colspan=7 width=97% class="selection">';
+	echo '<table cellpadding="2" colspan="7" width="97%" class="selection">';
 
 //				   '</td><td class="tableheader">' . _('Receive') .
 
