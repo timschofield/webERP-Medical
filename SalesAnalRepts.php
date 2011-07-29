@@ -399,7 +399,7 @@ if (!isset($_GET['delete'])) {
 	}
 	echo '<tr>
 			<td class="number">' . _('Report Heading') . ':</td>
-			<td colspan=2><input type="text" size="80" maxlength="80" name="ReportHeading" value="' . $_POST['ReportHeading'] . '" /></td>
+			<td colspan="2"><input type="text" size="80" maxlength="80" name="ReportHeading" value="' . $_POST['ReportHeading'] . '" /></td>
 		</tr>';
 
 	echo '<tr><td>' . _('Group By 1') . ': <select name="GroupByData1">';
