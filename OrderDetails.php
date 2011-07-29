@@ -58,7 +58,7 @@ if (DB_num_rows($GetOrdHdrResult)==1) {
 
 	$myrow = DB_fetch_array($GetOrdHdrResult);
 	echo '<table class="selection">';
-	echo '<tr><th colspan=4><font color=blue>'._('Order Header Details For Order No').' '.$_GET['OrderNumber'].'</font></th></tr>';
+	echo '<tr><th colspan="4"><font color="blue">'._('Order Header Details For Order No').' '.$_GET['OrderNumber'].'</font></th></tr>';
 	echo '<tr>
 		<th style="text-align: left">' . _('Customer Code') . ':</th>
 		<td class="OddTableRows"><font><a href="' . $rootpath . '/SelectCustomer.php?Select=' . $myrow['debtorno'] . '">' . $myrow['debtorno'] . '</a></td>
