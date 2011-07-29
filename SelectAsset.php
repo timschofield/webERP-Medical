@@ -223,9 +223,9 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 			$ListPage = 1;
 			while ($ListPage <= $ListPageMax) {
 				if ($ListPage == $_POST['PageOffset']) {
-					echo '<option value=' . $ListPage . ' selected>' . $ListPage . '</option>';
+					echo '<option value="' . $ListPage . '" selected="True">' . $ListPage . '</option>';
 				} else {
-					echo '<option value=' . $ListPage . '>' . $ListPage . '</option>';
+					echo '<option value="' . $ListPage . '">' . $ListPage . '</option>';
 				}
 				$ListPage++;
 			}
@@ -236,7 +236,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 
 			echo '<br /></div>';
 		}
-		echo '<table cellpadding=2 colspan=7 class="selection">';
+		echo '<table cellpadding="2" colspan="7" class="selection">';
 		$tableheader = '<tr>
 					<th>' . _('Asset Code') . '</th>
 					<th>' . _('Description') . '</th>
