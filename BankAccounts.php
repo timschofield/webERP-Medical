@@ -214,7 +214,7 @@ If (!isset($SelectedBankAccount)) {
 	} else {
 		$defacc=_('Yes');
 	}
-	printf('<td>%s<br /><font size=2>%s</font></td>
+	printf('<td>%s<br /><font size="2">%s</font></td>
 		<td>%s</td>
 		<td>%s</td>
 		<td>%s</td>
