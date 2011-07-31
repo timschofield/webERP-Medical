@@ -183,21 +183,21 @@ if (!isset($_GET['delete'])) {
 
 	echo '<tr><td>'. _('Contact Name') . '</td>';
     if (isset($_POST['conName'])) {
-        echo '<td><input type="text" name="conName" value="' . $_POST['conName']. '" size=35 maxlength=40></td></tr>';
+        echo '<td><input type="text" name="conName" value="' . $_POST['conName']. '" size="35" maxlength="40" /></td></tr>';
     } else {
-        echo '<td><input type="text" name="conName" size=35 maxlength=40></td></tr>';
+        echo '<td><input type="text" name="conName" size="35" maxlength="40"></td></tr>';
     }
 	echo '<tr><td>' . _('Role') . '</td>';
     if (isset($_POST['conRole'])) {
-        echo '<td><input type="text" name="conRole" value="'. $_POST['conRole']. '" size=35 maxlength=40></td></tr>';
+        echo '<td><input type="text" name="conRole" value="'. $_POST['conRole']. '" size="35" maxlength="40" /></td></tr>';
     } else {
-        echo '<td><input type="text" name="conRole" size=35 maxlength=40></td></tr>';
+        echo '<td><input type="text" name="conRole" size="35" maxlength="40"></td></tr>';
     }
 	echo '<tr><td>' . _('Phone') . '</td>';
     if (isset($_POST['conPhone'])) {
-        echo '<td><input type="text" name="conPhone" value="' . $_POST['conPhone'] . '" size=35 maxlength=40></td></tr>';
+        echo '<td><input type="text" name="conPhone" value="' . $_POST['conPhone'] . '" size="35" maxlength="40" /></td></tr>';
     } else {
-        echo '<td><input type="text" name="conPhone"" size=35 maxlength=40></td></tr>';
+        echo '<td><input type="text" name="conPhone"" size="35" maxlength="40" /></td></tr>';
     }
 	echo '<tr><td>' . _('Notes') . '</td>';
     if (isset($_POST['conNotes'])) {
