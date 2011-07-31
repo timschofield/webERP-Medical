@@ -3,7 +3,7 @@
 function webERPLogIn($ch, $TestSessionID, $RootPath, $ServerPath, $Company, $UserName, $Password) {
 
 	$LoginScreenDetails = new URLDetails($TestSessionID);
-	$LoginScreenDetails->SetURL('index.php');
+	$LoginScreenDetails->SetURL($RootPath.'index.php');
 	$LoginScreenDetails->SetPostArray(array());
 
 	$LoginScreenDetails->FetchPage($RootPath, $ServerPath, $ch);
@@ -43,15 +43,13 @@ function webERPLogIn($ch, $TestSessionID, $RootPath, $ServerPath, $Company, $Use
 		}
 	}
 
-	$LoginScreenDetails->__destruct();
 
 	$IndexScreenDetails = new URLDetails($TestSessionID);
-	$IndexScreenDetails->SetURL('index.php');
+	$IndexScreenDetails->SetURL($RootPath.'index.php');
 	$IndexScreenDetails->SetPostArray($PostArray);
 
 	$IndexPage=$IndexScreenDetails->FetchPage($RootPath, $ServerPath, $ch);
 
-	$IndexScreenDetails->__destruct();
 
 	return $IndexPage;
 }

@@ -16,9 +16,9 @@ $ch = curl_init();
 $TestSessionID = sha1(uniqid(mt_rand(), true));
 
 $IndexPage=webERPLogIn($ch, $TestSessionID, $RootPath, $ServerPath, $CompanyName, $UserName, $Password);
-$APPage=FindModule($ch, $RootPath, $ServerPath, $TestSessionID, $IndexPage, 'AP');
-$SupplierInsertPage=ChooseMenuOption($ch, $RootPath, $ServerPath, $TestSessionID, $APPage, 'Add Supplier');
-//echo $APPage;
+$APPage=FindModule($ch, $RootPath, $ServerPath, $TestSessionID, $IndexPage, 'Payables');
+$SupplierPage=ChooseMenuOption($ch, $RootPath, $ServerPath, $TestSessionID, $APPage, 'Add Supplier');
+//echo $SupplierPage[0];
 curl_close($ch);
 
 ?>

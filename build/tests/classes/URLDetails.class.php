@@ -72,8 +72,10 @@ class URLDetails {
 			if ($result->item($i)->getAttribute('type')=='text') {
 				for ($j=0; $j<$result->item($i)->attributes->length; $j++) {
 					$name = $result->item($i)->attributes->item($j)->name;
-//					echo $name.' '.$result->item($i)->attributes->getNamedItem($name)->nodeValue . "\n";
 					$Texts['text'][$k][$name]=(string)$result->item($i)->attributes->getNamedItem($name)->nodeValue;
+				}
+				if (!isset($Texts['text'][$k]['maxlength'])) {
+					error_log('Warning: '.$Texts['text'][$k]['name'].' in '.$this->GetURL().' has no maxlength attribute set.'."\n", 3, '/home/tim/weberp'.date('Y-m-d').'.log');
 				}
 				$k++;
 			}
@@ -208,13 +210,15 @@ class URLDetails {
 
 	private function ValidateLinks($ServerPath, $ch) {
 		for ($i=0; $i<sizeOf($this->Links); $i++) {
-			curl_setopt($ch,CURLOPT_URL,$ServerPath.$this->Links[$i]['href']);
-			curl_setopt($ch,CURLOPT_RETURNTRANSFER,True);
-			curl_setopt($ch,CURLOPT_COOKIEJAR,'/tmp/'.$this->SessionID.'/curl.txt');
-			$result = curl_exec($ch);
-			$response = curl_getinfo( $ch );
-			if ($response['http_code']!=200) {
-				error_log($i.' '.$this->Links[$i]['href'].' '.$response['http_code']."\n", 3, '/home/tim/weberp'.$this->SessionID.'.log');
+			if ($this->Links[$i]['href']!='/trunk/Logout.php') {
+				curl_setopt($ch,CURLOPT_URL,$ServerPath.$this->Links[$i]['href']);
+				curl_setopt($ch,CURLOPT_RETURNTRANSFER,True);
+				curl_setopt($ch,CURLOPT_COOKIEJAR,'/tmp/'.$this->SessionID.'/curl.txt');
+				$result = curl_exec($ch);
+				$response = curl_getinfo( $ch );
+				if ($response['http_code']!=200) {
+					error_log($i.' '.$this->Links[$i]['href'].' '.$response['http_code']."\n", 3, '/home/tim/weberp'.date('Y-m-d').'.log');
+				}
 			}
 		}
 	}
@@ -228,20 +232,22 @@ class URLDetails {
 		rtrim($fields_string,'&');
 
 		//set the url, number of POST vars, POST data
-		curl_setopt($ch,CURLOPT_URL,$RootPath.$this->GetURL());
+		curl_setopt($ch,CURLOPT_URL,$this->GetURL());
 		curl_setopt($ch,CURLOPT_POST,count($this->GetPostArray()));
 		curl_setopt($ch,CURLOPT_POSTFIELDS,$fields_string);
 		curl_setopt($ch,CURLOPT_RETURNTRANSFER,True);
 		curl_setopt($ch,CURLOPT_COOKIEJAR,'/tmp/'.$this->SessionID.'/curl.txt');
 
 		//execute post
-		$result = curl_exec($ch);
+		$result[0] = curl_exec($ch);
 
-		$this->xml->loadHTML($result);
-		$answer = $this->ValidateHTML($result);
+		$this->xml->loadHTML($result[0]);
+		$answer = $this->ValidateHTML($result[0]);
 
 		$this->Links=$this->GetHREFDetails();
 		$this->ValidateLinks($ServerPath, $ch);
+
+		$result[1] = $this->Links;
 
 		$this->GetFormDetails();
 
