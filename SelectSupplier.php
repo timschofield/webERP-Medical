@@ -138,7 +138,7 @@ if (isset($_SESSION['SupplierID'])) {
 	}
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/supplier.png" title="' .
 				_('Supplier') . '" alt="" />' . ' ' . _('Supplier') . ' : <b>' . $_SESSION['SupplierID'] .
-				' - $SupplierName</b> ' . _('has been selected') . '.</p>';
+				' - ' . $SupplierName . '</b> ' . _('has been selected') . '.</p>';
 	echo '<div class="page_help_text">' . _('Select a menu option to operate using this supplier.') . '</div>';
 	echo '<br /><table width=90% colspan="2" cellpadding="4">';
 	echo '<tr>
