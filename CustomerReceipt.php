@@ -1016,7 +1016,7 @@ if (((isset($_SESSION['CustomerRecord'])
 	echo '<tr><td>' . _('Payee Bank Details') . ':</td>
 		<td><input tabindex="12" type="text" name="PayeeBankDetail" maxlength="22" size="20" value="' . $_POST['PayeeBankDetail'] . '" /></td></tr>';
 //	echo '<tr><td>' . _('Narrative') . ':</td>
-//		<td><input tabindex=13 type="text" name="Narrative" maxlength=30 size=32 value="' . $_POST['Narrative'] . '"></td></tr>';
+//		<td><input tabindex=13 type="text" name="Narrative" maxlength="30" size="32" value="' . $_POST['Narrative'] . '"></td></tr>';
 	echo '<td>' . _('Narrative') . ':</td>';
 	echo '<td><textarea name="Narrative"  cols="40" rows="1"></textarea></td>';
 	echo '</table>';
@@ -1032,10 +1032,10 @@ if (((isset($_SESSION['CustomerRecord'])
 	echo '<table cellpadding="3" colspan="4"  class="selection">';
 	echo '<tr><td>' . _('Text in the Customer') . ' ' . '<b>' . _('name') . '</b>:</td>';
 	echo '<td><input tabindex="9" type="text" name="Keywords" size="15" maxlength="25" /></td>';
-	echo '<td><font size=3><b>' . _('OR') . '</b></font></td>';
+	echo '<td><font size="3"><b>' . _('OR') . '</b></font></td>';
 	echo '<td>' . _('Text extract in the Customer') . ' ' . '<b>' . _('code') . '</b>:</td>';
 	echo '<td><input tabindex="10" type="text" name="CustCode" size="10" maxlength="18" /></td>';
-	echo '<td><font size=3><b>' . _('OR') . '</b></font></td>';
+	echo '<td><font size="3"><b>' . _('OR') . '</b></font></td>';
 	echo '<td>' . _('Customer invoice number') . ':</td>';
 	echo '<td><input tabindex="11" type="text" name="CustInvNo" size="8" maxlength="8" /></td>';
 	echo '</tr></table>';
