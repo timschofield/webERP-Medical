@@ -1077,7 +1077,7 @@ if (!isset($_GET['Edit'])) {
 		<td><input type="text" name="StockCode" size="15" maxlength="18" value="' . $_POST['StockCode'] . '" /></td>
 		</tr>
 		<tr><td></td>
-		<td><font size=3><b>' . _('OR') . ' </b></font><a target="_blank" href="'.$rootpath.'/Stocks.php">' . _('Create a New Stock Item') . '</a></td></tr>
+		<td><font size="3"><b>' . _('OR') . ' </b></font><a target="_blank" href="'.$rootpath.'/Stocks.php">' . _('Create a New Stock Item') . '</a></td></tr>
 		</table><br />
 		<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" />
 		<input type="submit" name="NonStockOrder" value="' . _('Order a non stock item') . '" />
