@@ -326,7 +326,7 @@ if (isset($_POST['Keywords'])) {
 } else {
 	echo '<input type="text" name="Keywords" size="20" maxlength="25" />';
 }
-echo '</td><td><font size=3><b>' . _('OR') . '</b></font></td><td>' . _('Enter a partial Code') . ':</td><td>';
+echo '</td><td><font size="3"><b>' . _('OR') . '</b></font></td><td>' . _('Enter a partial Code') . ':</td><td>';
 if (isset($_POST['CustCode'])) {
 	echo '<input type="text" name="CustCode" value="' . $_POST['CustCode'] . '" size="15" maxlength="18" />';
 } else {
@@ -339,7 +339,7 @@ if (isset($_POST['CustPhone'])) {
 	echo '<input type="text" name="CustPhone" size="15" maxlength="18" />';
 }
 echo '</td>';
-echo '<td><font size=3><b>' . _('OR') . '</b></font></td><td>' . _('Enter part of the Address') . ':</td><td>';
+echo '<td><font size="3"><b>' . _('OR') . '</b></font></td><td>' . _('Enter part of the Address') . ':</td><td>';
 if (isset($_POST['CustAdd'])) {
 	echo '<input type="text" name="CustAdd" value="' . $_POST['CustAdd'] . '" size="20" maxlength="25" />';
 } else {
@@ -391,7 +391,7 @@ if (isset($_POST['CustType'])) {
 }
 
 /* Option to select a sales area */
-echo '<td><font size=3><b>' . _('OR') . '</b></font></td><td>' . _('Choose an Area') . ':</td><td>';
+echo '<td><font size="3"><b>' . _('OR') . '</b></font></td><td>' . _('Choose an Area') . ':</td><td>';
 $result2 = DB_query("SELECT areacode, areadescription FROM areas", $db);
 // Error if no sales areas setup
 if (DB_num_rows($result2) == 0) {
