@@ -333,7 +333,7 @@ if (isset($SuppliersResult)) {
 				include ('includes/footer.inc');
 				exit;
 			} else {
- //			   echo '<br /><font color=BLUE size=3><b>' . $StockID . ' - ' . $myrow[0] . ' </b>  (' . _('In Units of') . ' ' . $myrow[1] . ' )</font>';
+ //			   echo '<br /><font color="blue" size="3"><b>' . $StockID . ' - ' . $myrow[0] . ' </b>  (' . _('In Units of') . ' ' . $myrow[1] . ' )</font>';
 			}
 		} else {
 			prnMsg(_('Stock Item') . ' - ' . $StockID . ' ' . _('is not defined in the database'), 'warn');
