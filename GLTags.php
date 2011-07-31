@@ -37,8 +37,8 @@ echo '<br /><table><tr>';
 
 
 echo '<td>'. _('Description') . '</td>
-		<td><input type="text" size=30 maxlength=30 name="description" value="'.$description.'"></td><td>
-		<input type="hidden" name="reference" value="'.$_GET['SelectedTag'].'">';
+		<td><input type="text" size="30" maxlength="30" name="description" value="'.$description.'" /></td><td>
+		<input type="hidden" name="reference" value="'.$_GET['SelectedTag'].'" />';
 
 if (isset($_GET['Action']) and $_GET['Action']=='edit') {
 	echo '<input type="submit" name="update" value="' . _('Update') . '" />';
@@ -64,7 +64,7 @@ while ($myrow = DB_fetch_array($result,$db)){
 
 echo '</table><p></p>';
 
-echo "<script>defaultControl(document.form.description);</script>";
+echo '<script>defaultControl(document.form.description);</script>';
 
 include('includes/footer.inc');
 
