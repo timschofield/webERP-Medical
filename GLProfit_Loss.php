@@ -774,7 +774,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 							<td><hr /></td>
 						</tr>';
 					printf('<tr>
-								<td colspan="2"><font size=4>%s</font></td>
+								<td colspan="2"><font size="4">%s</font></td>
 								<td></td>
 								<td class="number">%s</td>
 								<td></td>
