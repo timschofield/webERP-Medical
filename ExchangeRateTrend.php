@@ -63,7 +63,7 @@ if ( isset($_GET['CurrencyToShow']) ){
 	$image = 'http://www.x-rates.com/d/' . $graph;
 
 	echo '<br /></div><table class="selection">';
-	echo '<tr><th><div class="centre"><font size=4 color=BLUE><b><U>' . $FunctionalCurrency . ' / ' . $CurrencyToShow . '</b></U></font></th></tr>';
+	echo '<tr><th><div class="centre"><font size="4" color="blue"><b><U>' . $FunctionalCurrency . ' / ' . $CurrencyToShow . '</b></U></font></th></tr>';
 	echo '<tr><td><img src=' . $image . ' alt="Trend Currently Unavailable"></td></tr>';
 	echo '</table>';
 
