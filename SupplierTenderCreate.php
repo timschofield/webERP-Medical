@@ -594,7 +594,7 @@ if (isset($_POST['Items'])) {
 		ORDER BY categorydescription";
 	$result = DB_query($sql, $db);
 	if (DB_num_rows($result) == 0) {
-		echo '<br /><font size=4 color=red>' . _('Problem Report') . ':</font><br />' .
+		echo '<br /><font size="4" color="red">' . _('Problem Report') . ':</font><br />' .
 			_('There are no stock categories currently defined please use the link below to set them up');
 		echo '<br /><a href="' . $rootpath . '/StockCategories.php">' . _('Define Stock Categories') . '</a>';
 		exit;
