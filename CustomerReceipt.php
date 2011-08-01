@@ -903,7 +903,7 @@ if (isset($_SESSION['CustomerRecord'])
 		number_format($_SESSION['CustomerRecord']['creditlimit'],0) . '  ' . _('Credit Status') . ': ' . $_SESSION['CustomerRecord']['reasondescription'] . '</p>';
 
 	if ($_SESSION['CustomerRecord']['dissallowinvoices']!=0){
-	   echo '<br /><font color=red size=4><b>' . _('ACCOUNT ON HOLD') . '</font></b><br/>';
+	   echo '<br /><font color="red" size="4"><b>' . _('ACCOUNT ON HOLD') . '</font></b><br/>';
 	}
 
 	echo '<table width="90%" class="selection">
