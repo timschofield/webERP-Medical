@@ -909,7 +909,7 @@ if (isset($_POST['NewItem'])){ /* NewItem is set from the part selection list as
 echo '<form name=form1 action="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier. '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-//echo  _('Purchase Order') . ': <font color=BLUE size=4><b>' . $_SESSION['PO'.$identifier]->OrderNo . ' ' . $_SESSION['PO'.$identifier]->SupplierName . ' </b></font> - ' . _('All amounts stated in') . ' ' . $_SESSION['PO'.$identifier]->CurrCode . '<br />';
+//echo  _('Purchase Order') . ': <font color=BLUE size="4"><b>' . $_SESSION['PO'.$identifier]->OrderNo . ' ' . $_SESSION['PO'.$identifier]->SupplierName . ' </b></font> - ' . _('All amounts stated in') . ' ' . $_SESSION['PO'.$identifier]->CurrCode . '<br />';
 
 /*need to set up entry for item description where not a stock item and GL Codes */
 
