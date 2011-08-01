@@ -184,7 +184,7 @@ if(!isset($_POST['email'])){
 	$_POST['email'] = $myrow['email'];
 }
 
-echo '<td><input type="text" name="email" size=40 value="' . $_POST['email'] . '"></td></tr>';
+echo '<td><input type="text" name="email" size="40" value="' . $_POST['email'] . '" /></td></tr>';
 
 if (!isset($_POST['PDFLanguage'])){
 	$_POST['PDFLanguage']=$_SESSION['PDFLanguage'];
@@ -199,7 +199,7 @@ for($i=0;$i<count($PDFLanguages);$i++){
 	}
 }
 echo '</select></td></tr></table>
-	<br /><div class="centre"><input type="submit" name="Modify" value="' . _('Modify') . '"></div>
+	<br /><div class="centre"><input type="submit" name="Modify" value="' . _('Modify') . '" /></div>
 	</form>';
 
 include('includes/footer.inc');
