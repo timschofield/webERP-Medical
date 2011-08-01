@@ -1146,7 +1146,7 @@ if (isset($SearchResult)) {
 		<td>'.$myrow['description'].'</td>
 		<td>'.$Uom.'</td>
 		<td>'.$ImageSource.'</td>
-		<td><input class="number" type="text" size=6 value=0 name="Quantity'.$i.'" /></td>
+		<td><input class="number" type="text" size="6" value="0" name="Quantity'.$i.'" /></td>
 		<input type="hidden" value="'.$myrow['stockid'].'" name="StockID'.$i.'" /></td>
 		<input type="hidden" value="'.$Uom.'" name="uom'.$i.'" />
 		</tr>';
