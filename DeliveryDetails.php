@@ -796,7 +796,7 @@ if (isset($_SESSION['Items'.$identifier]->SpecialInstructions) and mb_strlen($_S
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Delivery') . '" alt="" />' . ' ' . _('Delivery Details') . '</p>';
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') . '" alt="" />' . ' ' . _('Customer Code') . ' :<b> ' . $_SESSION['Items'.$identifier]->DebtorNo . '<br />';
 echo '</b>&nbsp;' . _('Customer Name') . ' :<b> ' . $_SESSION['Items'.$identifier]->CustomerName . '</b></p>';
-//echo '<font size=4><b>'. _('Customer') .' : ' . $_SESSION['Items'.$identifier]->CustomerName . '</b></font>';
+//echo '<font size="4"><b>'. _('Customer') .' : ' . $_SESSION['Items'.$identifier]->CustomerName . '</b></font>';
 echo '<form action="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier  . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
@@ -993,32 +993,32 @@ echo '<tr>
 
 echo '<tr>
 	<td>'. _('Delivery Address 1') . ':</td>
-	<td><input type="text" size=42 maxlength=40 name="BrAdd1" value="' . $_SESSION['Items'.$identifier]->DelAdd1 . '"></td>
+	<td><input type="text" size="42" maxlength="40" name="BrAdd1" value="' . $_SESSION['Items'.$identifier]->DelAdd1 . '" /></td>
 </tr>';
 
 echo '<tr>
 	<td>'. _('Delivery Address 2') . ':</td>
-	<td><input type="text" size=42 maxlength=40 name="BrAdd2" value="' . $_SESSION['Items'.$identifier]->DelAdd2 . '"></td>
+	<td><input type="text" size="42" maxlength="40" name="BrAdd2" value="' . $_SESSION['Items'.$identifier]->DelAdd2 . '" /></td>
 </tr>';
 
 echo '<tr>
 	<td>'. _('Delivery Address 3') . ':</td>
-	<td><input type="text" size=42 maxlength=40 name="BrAdd3" value="' . $_SESSION['Items'.$identifier]->DelAdd3 . '"></td>
+	<td><input type="text" size="42" maxlength="40" name="BrAdd3" value="' . $_SESSION['Items'.$identifier]->DelAdd3 . '" /></td>
 </tr>';
 
 echo '<tr>
 	<td>'. _('Delivery Address 4') . ':</td>
-	<td><input type="text" size=42 maxlength=40 name="BrAdd4" value="' . $_SESSION['Items'.$identifier]->DelAdd4 . '"></td>
+	<td><input type="text" size="42" maxlength="40" name="BrAdd4" value="' . $_SESSION['Items'.$identifier]->DelAdd4 . '" /></td>
 </tr>';
 
 echo '<tr>
 	<td>'. _('Delivery Address 5') . ':</td>
-	<td><input type="text" size=42 maxlength=40 name="BrAdd5" value="' . $_SESSION['Items'.$identifier]->DelAdd5 . '"></td>
+	<td><input type="text" size="42" maxlength="40" name="BrAdd5" value="' . $_SESSION['Items'.$identifier]->DelAdd5 . '" /></td>
 </tr>';
 
 echo '<tr>
 	<td>'. _('Delivery Address 6') . ':</td>
-	<td><input type="text" size=42 maxlength=40 name="BrAdd6" value="' . $_SESSION['Items'.$identifier]->DelAdd6 . '"></td>
+	<td><input type="text" size="42" maxlength="40" name="BrAdd6" value="' . $_SESSION['Items'.$identifier]->DelAdd6 . '" /></td>
 </tr>';
 
 echo '<tr>
@@ -1026,7 +1026,7 @@ echo '<tr>
 	<td><input type="text" size="25" maxlength="25" name="PhoneNo" value="' . $_SESSION['Items'.$identifier]->PhoneNo . '" /></td>
 </tr>';
 
-echo '<tr><td>' . _('Contact Email') . ':</td><td><input type="text" size=40 maxlength=38 name="Email" value="' . $_SESSION['Items'.$identifier]->Email . '"></td></tr>';
+echo '<tr><td>' . _('Contact Email') . ':</td><td><input type="text" size="40" maxlength="38" name="Email" value="' . $_SESSION['Items'.$identifier]->Email . '" /></td></tr>';
 
 echo '<tr><td>'. _('Customer Reference') .':</td>
 	<td><input type="text" size="25" maxlength="25" name="CustRef" value="' . $_SESSION['Items'.$identifier]->CustRef . '" /></td>
