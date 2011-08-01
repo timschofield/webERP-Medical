@@ -995,7 +995,7 @@ while ($LocationRow = DB_fetch_array($result)){
 echo '</select></td><td>' . _('This location is the location where work orders will be created from when the auto create work orders option is activated') . '</td></tr>';
 
 echo '<tr style="outline: 1px solid"><td>' . _('Factory Manager Email Address') . ':</td>
-	<td><input type="text" name="X_FactoryManagerEmail" size=50 maxlength=50 value="' . $_SESSION['FactoryManagerEmail'] . '"></td>
+	<td><input type="text" name="X_FactoryManagerEmail" size="50" maxlength="50" value="' . $_SESSION['FactoryManagerEmail'] . '" /></td>
 	<td>' . _('Work orders automatically created when sales orders are entered will be emailed to this address') .'</td></tr>';
 
 echo '<tr style="outline: 1px solid"><td>' . _('Purchasing Manager Email Address') . ':</td>
