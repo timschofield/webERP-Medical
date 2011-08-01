@@ -34,7 +34,7 @@ $SQL = "SELECT categoryid,
 			ORDER BY categorydescription";
 $result1 = DB_query($SQL, $db);
 if (DB_num_rows($result1) == 0) {
-	echo '<p><font size=4 color=red>' . _('Problem Report') . ':</font><br />' . _('There are no stock categories currently defined please use the link below to set them up').'</p>';
+	echo '<p><font size="4" color="red">' . _('Problem Report') . ':</font><br />' . _('There are no stock categories currently defined please use the link below to set them up').'</p>';
 	echo '<br /><a href="' . $rootpath . '/StockCategories.php?">' . _('Define Stock Categories') . '</a>';
 	exit;
 }
