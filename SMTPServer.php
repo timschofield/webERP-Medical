@@ -57,7 +57,7 @@ echo '<tr><td>'._('User Name').'</td>
 echo '<tr><td>'._('Password').'</td>
 	<td><input type="password" name="password" value="'.$myrow['password'].'" /></td></tr>';
 echo '<tr><td>'._('Timeout (seconds)').'</td>
-	<td><input type="text" size=5 name=timeout class="number" value='.$myrow['timeout'].'></td></tr>';
+	<td><input type="text" size="5" name=timeout class="number" value="'.$myrow['timeout'].'" /></td></tr>';
 echo '<tr><td colspan="2"><div class="centre"><input type="submit" name="submit" value="' . _('Update') . '"></div></td></tr>';
 echo '</table></form>';
 
