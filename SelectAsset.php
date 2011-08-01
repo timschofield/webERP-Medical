@@ -34,7 +34,7 @@ $SQL = "SELECT categoryid,
 			ORDER BY categorydescription";
 $result = DB_query($SQL, $db);
 if (DB_num_rows($result) == 0) {
-	echo '<p><font size=4 color=red>' . _('Problem Report') . ':</font><br />' . _('There are no asset categories currently defined please use the link below to set them up');
+	echo '<p><font size="4" color="red">' . _('Problem Report') . ':</font><br />' . _('There are no asset categories currently defined please use the link below to set them up');
 	echo '<br /><a href="' . $rootpath . '/FixedAssetCategories.php">' . _('Define Asset Categories') . '</a></font></p>';
 	exit;
 }
