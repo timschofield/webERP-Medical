@@ -807,7 +807,7 @@ echo '</select></td>
 	<td>' . _('This feature makes webERP show links to a free form company knowledge base using a wiki. This allows sharing of important company information - about customers, suppliers and products and the set up of work flow menus and/or company procedures documentation') .'</td></tr>';
 
 echo '<tr style="outline: 1px solid"><td>' . _('Wiki Path') . ':</td>
-	<td><input type="text" name="X_WikiPath" size=40 maxlength=40 value="' . $_SESSION['WikiPath'] . '"></td>
+	<td><input type="text" name="X_WikiPath" size="40" maxlength="40" value="' . $_SESSION['WikiPath'] . '" /></td>
 	<td>' . _('The path to the wiki installation to form the basis of wiki URLs - this should be the directory on the web-server where the wiki is installed. The wiki must be installed on the same web-server as webERP') .'</td></tr>';
 
 echo '<tr style="outline: 1px solid"><td>' . _('Geocode Customers and Suppliers') . ':</td>
