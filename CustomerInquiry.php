@@ -125,7 +125,7 @@ if ($NIL_BALANCE==True){
 	': ' . number_format($CustomerRecord['creditlimit'],0) . ' ' . _('Credit Status') . ': ' . $CustomerRecord['reasondescription'] . '</p>';
 
 if ($CustomerRecord['dissallowinvoices']!=0){
-	echo '<br /><font color=RED size=4><b>' . _('ACCOUNT ON HOLD') . '</font></b><br />';
+	echo '<br /><font color="red" size="4"><b>' . _('ACCOUNT ON HOLD') . '</font></b><br />';
 }
 
 echo '<table class="selection" width=70%>
