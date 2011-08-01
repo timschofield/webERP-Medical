@@ -458,7 +458,7 @@ if (isset($_POST['Description'])) {
 	$Description ='';
 }
 echo '<tr><td>' . _('Asset Description') . ' (' . _('short') . '):</td>
-					<td><input ' . (in_array('Description',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="Description" size=52 maxlength=50 value="' . $Description . '"></td></tr>'."\n";
+					<td><input ' . (in_array('Description',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="Description" size="52" maxlength="50" value="' . $Description . '" /></td></tr>'."\n";
 
 if (isset($_POST['LongDescription'])) {
 	$LongDescription = AddCarriageReturns($_POST['LongDescription']);
