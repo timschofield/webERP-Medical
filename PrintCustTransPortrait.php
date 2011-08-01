@@ -695,7 +695,7 @@ if (isset($PrintPDF)
 				$myrow = DB_fetch_array($result);
 	/* Then there's an invoice (or credit note) to print. So print out the invoice header and GST Number from the company record */
 				if (count($_SESSION['AllowedPageSecurityTokens'])==1 AND in_array(1, $_SESSION['AllowedPageSecurityTokens']) AND $myrow['debtorno'] != $_SESSION['CustomerID']){
-					echo '<p><font color=red size=4>' . _('This transaction is addressed to another customer and cannot be displayed for privacy reasons') .
+					echo '<p><font color="red" size="4">' . _('This transaction is addressed to another customer and cannot be displayed for privacy reasons') .
 					'. ' . _('Please select only transactions relevant to your company') . '</font></p>';
 					exit;
 				}
@@ -707,9 +707,9 @@ if (isset($PrintPDF)
 					<tr><td valign=top width=10%><img src="' . $_SESSION['LogoFile'] . '"></td><td bgcolor="#bbb"><b>';
 
 				if ($InvOrCredit=='Invoice') {
-					echo '<font size=4>' . _('TAX INVOICE') . ' ';
+					echo '<font size="4">' . _('TAX INVOICE') . ' ';
 				} else {
-					echo '<font color=RED size=4>' . _('TAX CREDIT NOTE') . ' ';
+					echo '<font color="red" size="4">' . _('TAX CREDIT NOTE') . ' ';
 				}
 				echo '</b>' . _('Number') . ' ' . $FromTransNo . '</font><br /><font size="1">' . _('Tax Authority Ref') . '. ' . $_SESSION['CompanyRecord']['gstno'] . '</td></tr></table>';
 
@@ -970,9 +970,9 @@ if (isset($PrintPDF)
 					$PageNumber++;
 					echo '<table class="table1"><tr><td VALIGN="TOP"><img src="' . $_SESSION['LogoFile'] . '"></td><td bgcolor="#bbb"><b>';
 					if ($InvOrCredit=='Invoice') {
-						echo '<font size=4>' . _('TAX INVOICE') .' ';
+						echo '<font size="4">' . _('TAX INVOICE') .' ';
 					} else {
-						echo '<font color=RED size=4>' . _('TAX CREDIT NOTE') . ' ';
+						echo '<font color="red" size="4">' . _('TAX CREDIT NOTE') . ' ';
 					}
 					echo '</b>' . _('Number') . ' ' . $FromTransNo . '</font><br /><font size="1">' . _('GST Number') . ' - ' . $_SESSION['CompanyRecord']['gstno'] . '</td></tr></table>';
 
