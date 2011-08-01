@@ -267,7 +267,7 @@ if (!isset($_POST['ProcessCredit'])) {
 
 	echo '<table cellpadding="2" colspan="7" class="selection"><tr>';
 	echo '<tr><th colspan="13">';
-	echo '<div class="centre"><font color=blue size=4><b>' . _('Credit Invoice') . ' ' . $_SESSION['ProcessingCredit'] . '</b>
+	echo '<div class="centre"><font color="blue" size="4"><b>' . _('Credit Invoice') . ' ' . $_SESSION['ProcessingCredit'] . '</b>
 		<b>'.' - ' . $_SESSION['CreditItems']->CustomerName . '</b></font>
 		<font size="3" color="blue"> - ' . _('Credit Note amounts stated in') . ' ' . $_SESSION['CreditItems']->DefaultCurrency . '</div></font>';
 	echo '</th></tr>';
