@@ -999,7 +999,7 @@ echo '<tr style="outline: 1px solid"><td>' . _('Factory Manager Email Address') 
 	<td>' . _('Work orders automatically created when sales orders are entered will be emailed to this address') .'</td></tr>';
 
 echo '<tr style="outline: 1px solid"><td>' . _('Purchasing Manager Email Address') . ':</td>
-	<td><input type="text" name="X_PurchasingManagerEmail" size=50 maxlength=50 value="' . $_SESSION['PurchasingManagerEmail'] . '"></td>
+	<td><input type="text" name="X_PurchasingManagerEmail" size="50" maxlength="50" value="' . $_SESSION['PurchasingManagerEmail'] . '" /></td>
 	<td>' . _('The email address for the purchasing manager, used to receive notifications by the tendering system') .'</td></tr>';
 
 
