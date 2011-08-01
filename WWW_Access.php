@@ -168,9 +168,9 @@ if (!isset($_POST['SecRoleName'])) {
 	$_POST['SecRoleName']='';
 }
 echo '<tr><td>' . _('Role') . ':</td>
-	<td><input type="text" name="SecRoleName" size=40 maxlength=40 value="' . $_POST['SecRoleName'] . '"></tr>';
+	<td><input type="text" name="SecRoleName" size="40" maxlength="40" value="' . $_POST['SecRoleName'] . '" /></tr>';
 echo '</table><br />
-	<div class="centre"><input type="submit" name="submit" value="' . _('Enter Role') . '"></div></form>';
+	<div class="centre"><input type="submit" name="submit" value="' . _('Enter Role') . '" /></div></form>';
 
 if (isset($SelectedRole)) {
 	$sql = "SELECT tokenid, tokenname
