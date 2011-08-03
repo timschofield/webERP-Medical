@@ -1,4 +1,4 @@
-<a name="ReportBuilder"><h1 align="center">Report Builder/Form Builder</h1>
+<h1 align="center"><a name="ReportBuilder">Report Builder/Form Builder</a></h1>
 
 <h2>Table of Contents</h2>
 
@@ -13,7 +13,8 @@
 <a href="#RB_NewRpt">How Do I Create a New Report?</a><br />
 <a href="#RB_NewFrm">How Do I Create a New Form?</a><br />
 <a href="#RB_ViewRpt">Viewing your report/form</a><br />
-<a href="#RB_FrmParam">Passing Parameters to Forms</a></p>
+<a href="#RB_FrmParam">Passing Parameters to Forms</a>
+</p>
 <h2><a name="RB_RevHist">Revision History</a></h2>
 Revision History<br />
   Rev 1.0 - 2005-11-03 - Original release, written by D. Premo<br />
@@ -620,7 +621,7 @@ more than enough choices. <br />2. Enter salesorders.orddate in the Date Fieldna
                                   Quotation: No is selected to show that the report only contains filtered data.</p>
 <p>The form should look something like this:</p>
 <p align="center"><img src="images/RBCritSetup.gif"></p>
-<p>That’s it, click on Finish to exit the report builder and we’re ready to see our result.</p>
+<p>That's it, click on Finish to exit the report builder and we're ready to see our result.</p>
 
 <h2><a name="RB_NewFrm">How Do I Create a New Form?</a></h2>
 <p>There are five steps to building a form. They are:</p>
@@ -631,12 +632,12 @@ more than enough choices. <br />2. Enter salesorders.orddate in the Date Fieldna
   <li>Entering and arranging a list of possible fields to display and setting their attributes. </li>
   <li>Entering and arranging date, form break,  and filter criteria.</li>
 </ol>
-<p> The best way to demonstrate how to build a report would be to show an example. We&rsquo;ll build a report called: Invoice Form. First we&rsquo;ll need to access the report builder. It is found under the Setup menu under the General category titled Report Builder Tool. Once there press the Add New button.</p>
+<p> The best way to demonstrate how to build a report would be to show an example. We'll build a report called: Invoice Form. First we'll need to access the report builder. It is found under the Setup menu under the General category titled Report Builder Tool. Once there press the Add New button.</p>
 <h3>Step 1: Form name and group category</h3>
 <p>For our form, enter Invoice Form into the Enter a name text box. Also, we need to specify that it is a form by selecting the Form radio button. We now need to place this form under the proper category so select Invoices/Packing Slips from the drop down menu for the group this form is a part of. </p>
 <p align="center"><img src="images/RBFrmName.gif"></p>
 <p>Press Continue when all information has been entered.</p>
-<p><strong>IMPORTANT</strong>: At this time a record will be added to the forms table and will appear in the list of available forms. Users can choose this form to generate but the result will be a &lsquo;No data in this form &rsquo; warning. The form should be deleted if the report builder process is not completed for a given form. </p>
+<p><strong>IMPORTANT</strong>: At this time a record will be added to the forms table and will appear in the list of available forms. Users can choose this form to generate but the result will be a 'No data in this form' warning. The form should be deleted if the report builder process is not completed for a given form. </p>
 <h3>Step 2. Setting up the page layout</h3>
 <p>The next screen allows us to alter some of the default settings for the page layout of the form. Most fields are self explanatory but there are a few notes to remember.</p>
 <p><strong>Page layout</strong>: Set the settings desired for the page layout. Each displayed entry for the page are handled individually in the field setup form. You may return here to make further changes by editing the form after you finish building the form testing the output.</p>
@@ -681,16 +682,16 @@ more than enough choices. <br />2. Enter salesorders.orddate in the Date Fieldna
   </tr>
 </table>
 <p><strong>NOTE</strong>: After the data has been entered, the tool will validate the data by attempting to retrieve a single row from the query. If a single row cannot be accessed from the database, you cannot progress past this point.</p>
-<p> <strong>NOTE</strong>: If you get stuck here, remember that the report exists in the standard reports list and should be deleted to prevent users from running the report. </p>
+<p><strong>NOTE</strong>: If you get stuck here, remember that the report exists in the standard reports list and should be deleted to prevent users from running the report. </p>
 <p align="center"><img src="images/RBFrmDbSetup.gif" width="743" height="221"></p>
 <p>After all information has been entered, press Continue to enter the fields to display.</p>
-<h3>Step 4. Specifying the possible fields to display </h3>
-<p>This form will add the allowed fields used to generate the form output. Fields may be graphic, image, data or static text. At least one field needs to be entered to make a valid form. Up to the total number of fields in the linked databases provided in step 3 are allowed for data fields. In practice, however, a smaller list usually works the best. Each field has it&rsquo;s own attributes, including placement, font style, size, color and alignment and more depending on the field chosen. More on  field types later.</p>
-<p><strong>PRACTICAL NOTE</strong>: It&rsquo;s a good idea to pre-order the fields in a logical order in the way you want to the data to appear.</p>
+<h3>Step 4. Specifying the possible fields to display</h3>
+<p>This form will add the allowed fields used to generate the form output. Fields may be graphic, image, data or static text. At least one field needs to be entered to make a valid form. Up to the total number of fields in the linked databases provided in step 3 are allowed for data fields. In practice, however, a smaller list usually works the best. Each field has it's own attributes, including placement, font style, size, color and alignment and more depending on the field chosen. More on  field types later.</p>
+<p><strong>PRACTICAL NOTE</strong>: It's a good idea to pre-order the fields in a logical order in the way you want to the data to appear.</p>
 <p><strong>Order</strong>: The order determines the sequence of the generation of the field list. If an order number is entered that already exists, it will be inserted into the list in the order specified and the remaining fields will be bumped down one position. If the order number is left out, it will append the new field to the end of the list. Order numbers begin with 1. </p>
 <p>NOTE: In forms, the order is not terribly important since each field contains it's own positioning information.</p>
 <p><strong>Name to Display</strong>: The description can be any English (or other language) description. This is the ID assigned to the fieldname. It will appear on the report heading and links directly to the table.fieldname entry. Special characters are allowed but not recommended.</p>
-<p><strong>Show</strong>: Identifies the fields to display. Only fields that are checked to show will appear in the form. It is a good practice to show the fields that you want to appear in the standard report but not necessarily all fields. The user can decide what pieces of data they want and alter this field only in custom reports. If no fields are identified to show, the report viewer will generate a warning message &lsquo;No data to display&rsquo;.</p>
+<p><strong>Show</strong>: Identifies the fields to display. Only fields that are checked to show will appear in the form. It is a good practice to show the fields that you want to appear in the standard report but not necessarily all fields. The user can decide what pieces of data they want and alter this field only in custom reports. If no fields are identified to show, the report viewer will generate a warning message 'No data to display'.</p>
 <p><strong>Type</strong>: Specifies the type of field. We will go over each type in detail below. </p>
 <h3> Data Line</h3>
 <p>Data lines contain a single piece of information from the database query. A dropdown list of available fields is shown along with the attributes of the text to be displayed. </p>
@@ -736,28 +737,29 @@ more than enough choices. <br />2. Enter salesorders.orddate in the Date Fieldna
 <p align="center"><img src="images/RBFrmFldSetup.gif"></p>
 <p>After all information has been entered, press Continue to enter the filter criteria. </p>
 <h3>Step 5. Entering and arranging criteria</h3>
-<p>This form builds the options for date selection,  page break field,  and filtering for the  form.  Here&rsquo;s how each field works:</p>
-<p><strong>Date</strong>: If your report has a date field that is displaying, this is where you will specify the type of data choices available. Many are just quick selections to standard periods of time. The two most generic, ALL and RANGE allow the user to quickly view every entry in the database or specify the particular date range they are interested in. For all date selections (except ALL), the table name and fieldname &lsquo;table.fieldname&rsquo; must be entered into the Date Fieldname text box or an sql error will result. The fieldname will be tested with the selected tables to validate the input. A default date can be chosen hare as well. For example, If a standard report named Today's Sales is being generated, you may still want to allow the user to select a date range but you want the date to first come up with Today as the default. In this case, you would select as many date choices as you wish but upon entry to the report, Today will be the default.</p>
-<p><strong>NOTE</strong>: If your report doesn&rsquo;t have any date fields, or doesn&rsquo;t depend on date information, either de-select all the check boxes in which case the date options will not be displayed in the report viewer or just check the ALL box to show the date option with only a single choice available.</p>
+<p>This form builds the options for date selection,  page break field,  and filtering for the  form.  Here's how each field works:</p>
+<p><strong>Date</strong>: If your report has a date field that is displaying, this is where you will specify the type of data choices available. Many are just quick selections to standard periods of time. The two most generic, ALL and RANGE allow the user to quickly view every entry in the database or specify the particular date range they are interested in. For all date selections (except ALL), the table name and fieldname 'table.fieldname' must be entered into the Date Fieldname text box or an sql error will result. The fieldname will be tested with the selected tables to validate the input. A default date can be chosen hare as well. For example, If a standard report named Today's Sales is being generated, you may still want to allow the user to select a date range but you want the date to first come up with Today as the default. In this case, you would select as many date choices as you wish but upon entry to the report, Today will be the default.</p>
+<p><strong>NOTE</strong>: If your report doesn't have any date fields, or doesn't depend on date information, either de-select all the check boxes in which case the date options will not be displayed in the report viewer or just check the ALL box to show the date option with only a single choice available.</p>
 <p><strong>Form Page Break  Field</strong>: Form Page Break Fields specify the field that is used to separate forms. For our invoice example, the invoice number would be the logical form break. This will force a new form for every invoice number within the range defined in the criteria and date parameters.</p>
 <p> <strong>Filter Criteria</strong>: The filter criteria allows for user options to further refine their output. There are no limit to the number of options but usually 3-4 work the best. The type of criteria must make sense relative to the field. If the field is a text field, the all:range criteria work best. For yes/no fields, the all:yes:no, printed:unprinted, etc work the best.</p>
 <p>The form should look something like this:</p>
 <p align="center"><img src="images/RBFrmCritSetup.gif"></p>
-<p>That&rsquo;s it, click on Finish to exit the report builder and we&rsquo;re ready to see our result.</p>
+<p>That's it, click on Finish to exit the report builder and we're ready to see our result.</p>
 <h2><a name="RB_ViewRpt">Viewing your report</a> or form</h2>
 <p>Reports are viewed through the Report Viewer. Report Viewer is covered in
-                                    another manual but we’ll take a quick look to see how our report turned out.
-                                    From the main menu, select Receivables, then Invoice Report under the Inquiries and Reports Menu.  The criteria page is
-                                    displayed where we can alter the filter criteria. For now, press Generate PDF
-                                    and view our report. If the columns need to be altered or fields re-arranged, go
-                                    back to the Report Builder and edit the necessary entries. Once the report is
-                                    completed and you’re satisfied with the format of the output, it’s best to
-                                    export the report (it's text file) and save it locally or in the standard reports directory on the
-  server in case it gets deleted accidentally.</p>
+   another manual but we’ll take a quick look to see how our report turned out.
+   From the main menu, select Receivables, then Invoice Report under the Inquiries and Reports Menu.  The criteria page is
+   displayed where we can alter the filter criteria. For now, press Generate PDF
+   and view our report. If the columns need to be altered or fields re-arranged, go
+   back to the Report Builder and edit the necessary entries. Once the report is
+   completed and you’re satisfied with the format of the output, it’s best to
+   export the report (it's text file) and save it locally or in the standard reports directory on the
+   server in case it gets deleted accidentally.</p>
 <h2><a name="RB_FrmParam">Passing Parameters to Forms</a></h2>
 <p>Forms may be called directly from scripts by passing an id and criteria parameters. the parameters are assigned the variables cr[x] where [x] is replaced by the parameter to be assigned. Parameter 0 (zero) is reserved for the date field. Parameters 1-9 correspond to the order in which the criteria are ordered in the form. An example href tag might look like: </p>
 <p>&lt;a href=&quot;reportwriter/FormMaker.php?id=prch:po&amp;cr0=a&amp;cr1=Range:3:3&quot;&gt;</p>
-<p><strong>Variable 'id'</strong>: The id definitions correspond to the index value of the variable $FormGroups in the file /reportwriter/admin/defaults.php. the current definition codes are:</p>
+<h3>Variable 'id'</h3>
+The id definitions correspond to the index value of the variable $FormGroups in the file /reportwriter/admin/defaults.php. the current definition codes are:
 <p> gl:chk = Bank Checks <br />
 ar:col = Collection Letters<br />
 ar:cust = Customer Statements<br />
@@ -769,25 +771,29 @@ prch:po = Purchase Orders<br />
 ord:quot = Customer Quotes<br />
 ar:rcpt = Sales Records<br />
 ord:so = Sales Orders<br />
-misc:misc = Miscellaneous </p>
-<p><strong>Variable cr0</strong>: The possible values for cr0 are the letters a-k as defined below (also found as  the indexes of the variable $DateChoices in the file /reportwriter/admin/defaults.php):</p>
-<p> 	a = All<br />
+misc:misc = Miscellaneous
+</p>
+<h3>Variable cr0</h3>
+The possible values for cr0 are the letters a-k as defined below (also found as the indexes of the variable $DateChoices in the file /reportwriter/admin/defaults.php):
+<p>
+a = All<br />
 b = Range<br />
-c =&gt; Today<br />
-d =&gt; This Week <br />
-e =&gt; This Week to Date <br />
-f =&gt; This Month<br />
-g =&gt; This Month to Date<br />
-h =&gt; This Quarter<br />
-i =&gt; This Quarter to Date<br />
-j =&gt; This Year<br />
-k =&gt; This Year to Date</p>
-<p><strong>Variable cr1 through cr9</strong>: Variables cr1-cr9 need to correspond to the sequence of the field as specified in the form criteria. There are three parts to the value passed. The first is the text label which must match <u>exactly</u> to a label from the criteria dropdown list for the associated field. The second and third are the >From and To values for label of the criteria if they require them (such as the labels Range and Equal To). The three values are separated by semi-colons. If the second or third parameter is not required, it may be left out (such as in the case Yes, No, Printed, Unprinted, etc.). </p>
+c = Today<br />
+d = This Week <br />
+e = This Week to Date <br />
+f = This Month<br />
+g = This Month to Date<br />
+h = This Quarter<br />
+i = This Quarter to Date<br />
+j = This Year<br />
+k = This Year to Date
+</p>
+<h3>Variable cr1 through cr9</h3>
+Variables cr1-cr9 need to correspond to the sequence of the field as specified in the form criteria. There are three parts to the value passed. The first is the text label which must match <u>exactly</u> to a label from the criteria dropdown list for the associated field. The second and third are the From and To values for label of the criteria if they require them (such as the labels Range and Equal To). The three values are separated by semi-colons. If the second or third parameter is not required, it may be left out (such as in the case Yes, No, Printed, Unprinted, etc.).
 <p>From our example above:</p>
 <p>&lt;a href=&quot;reportwriter/FormMaker.php?id=prch:po&amp;cr0=a&amp;cr1=Range:3:3&quot;&gt;</p>
 <p>The form group for Purchase Orders will appear (listing all variations of the PO forms) as shown below:</p>
 <p align="center"><img src="images/RBFrmShow.gif"></p>
 <p> The user must select which variation of the form he needs and can either Generate the PDF, alter the Criteria, or Cancel and return to the index.php script. The hidden parameters cr0=a will default to the All date range (date independent) and cr1=Range:3:3 would default the first field listed in the criteria listing setting the To and From value to 3. If the first criteria field is the PO Number, report writer will generate just a single PO form with the PO number equal to 3. If the user wishes to alter the criteria by pressing Criteria Setup, The default parameters will be filled in automatically but may be changed if the user desires.</p>
 <p align="center"><img src="images/RBFrmShowCrit.gif"></p>
-<p>&nbsp;</p>
-<p>&nbsp; </p>
+<br />

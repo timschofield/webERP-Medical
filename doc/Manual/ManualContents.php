@@ -53,899 +53,887 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
 <?php
   }
 ?>
-          <font size="+3"><b>Table of Contents</b></font>
-          <br /><br />
-          <UL>
-            <LI>
+          <h1 style="display:inline;">Table of Contents</h1>
+          <ul>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectIntroduction">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=Introduction'; ?>">Introduction</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=Introduction'; ?>">Introduction</a>
 <?php
   } else {
 ?>
-              <A href="#Introduction">Introduction</A>
+              <a href="#Introduction">Introduction</a>
 <?php
 	}
 ?>
-              <UL>
-                <LI>Why Another Accounting Program?</LI>
-              </UL>
-              <BR>
-            </LI>
-						<LI>
+              <ul>
+                <li>Why Another Accounting Program?</li>
+              </ul>
+              <br />
+            </li>
+						<li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectRequirements">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=Requirements'; ?>">Requirements</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=Requirements'; ?>">Requirements</a>
 <?php
   } else {
 ?>
-              <A href="#Requirements">Requirements</A>
+              <a href="#Requirements">Requirements</a>
 <?php
 	}
 ?>
-              <UL>
-                <LI>Hardware Requirements</LI>
-                <LI>Software Requirements</LI>
-                <LI>Using webERP with a Wiki</LI>
-              </UL>
-              <BR>
-            </LI>
-						<LI>
+              <ul>
+                <li>Hardware Requirements</li>
+                <li>Software Requirements</li>
+                <li>Using webERP with a Wiki</li>
+              </ul>
+              <br />
+            </li>
+						<li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectGettingStarted">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=GettingStarted'; ?>">Getting Started</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=GettingStarted'; ?>">Getting Started</a>
 <?php
   } else {
 ?>
-              <A HREF="#GettingStarted">Getting Started</A>
+              <a href="#GettingStarted">Getting Started</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Prerequisites</LI>
-                <LI>Copying the PHP Scripts</LI>
-                <LI>Creating the Database</LI>
-                <LI>Editing config.php</LI>
-                <LI>Logging In For the First Time</LI>
-                <LI>Themes and GUI Modification</LI>
-                <LI>Setting Up Users</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>Prerequisites</li>
+                <li>Copying the PHP Scripts</li>
+                <li>Creating the Database</li>
+                <li>Editing config.php</li>
+                <li>Logging In For the First Time</li>
+                <li>Themes and GUI Modification</li>
+                <li>Setting Up Users</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectSecuritySchema">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=SecuritySchema'; ?>">Security Schema</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=SecuritySchema'; ?>">Security Schema</a>
 <?php
   } else {
 ?>
-              <A HREF="#SecuritySchema">Security Schema</A>
+              <a href="#SecuritySchema">Security Schema</a>
 <?php
   }
 ?>
-            </LI>
             <br /><br />
-            <LI>
+            </li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectCreatingNewSystem">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=CreatingNewSystem'; ?>">Creating a New System</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=CreatingNewSystem'; ?>">Creating a New System</a>
 <?php
   } else {
 ?>
-              <A HREF="#CreatingNewSystem">Creating a New System</A>
+              <a href="#CreatingNewSystem">Creating a New System</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Running the Demonstration Database</LI>
-                <LI>Setting Up A System</LI>
-                <LI>Setting Up Inventory Items</LI>
-                <LI>Entering Inventory Balances</LI>
-                <LI>Inventory Ledger Integration to General Ledger Issues</LI>
-                <LI>Setting Up Customers</LI>
-                <LI>Entering Customer Balances</LI>
-                <LI>Reconciling the Debtors Ledger Control Account</LI>
-                <LI>Finally</LI>
-              </UL>
-              <BR>
-						</LI>
-            <LI>
+              <ul>
+                <li>Running the Demonstration Database</li>
+                <li>Setting Up A System</li>
+                <li>Setting Up Inventory Items</li>
+                <li>Entering Inventory Balances</li>
+                <li>Inventory Ledger Integration to General Ledger Issues</li>
+                <li>Setting Up Customers</li>
+                <li>Entering Customer Balances</li>
+                <li>Reconciling the Debtors Ledger Control Account</li>
+                <li>Finally</li>
+              </ul>
+              <br />
+						</li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectSystemConventions">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=SystemConventions'; ?>">System Conventions</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=SystemConventions'; ?>">System Conventions</a>
 <?php
   } else {
 ?>
-              <A HREF="#SystemConventions">System Conventions</A>
+              <a href="#SystemConventions">System Conventions</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Navigating the Menu</LI>
-                <LI>Reporting</LI>
-              </UL>
-              <BR>
-            </LI>
-						<LI>
+              <ul>
+                <li>Navigating the Menu</li>
+                <li>Reporting</li>
+              </ul>
+              <br />
+            </li>
+						<li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectInventory">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=Inventory'; ?>">Inventory (aka "Stock")</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=Inventory'; ?>">Inventory (aka "Stock")</a>
 <?php
   } else {
 ?>
-              <A HREF="#Inventory">Inventory (aka "Stock")</A>
+              <a href="#Inventory">Inventory (aka "Stock")</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Overview</LI>
-                <LI>Inventory System Features</LI>
-                <LI>Inventory Categories</LI>
-                <LI>Adding Inventory Items</LI>
-                <LI>Item Code</LI>
-                <LI>Part Descriptions</LI>
-                <LI>Categories</LI>
-                <LI>Unit of Measurement</LI>
-                <LI>Economic Order Quantity</LI>
-                <LI>Packaged Volume</LI>
-                <LI>Packaged Weight</LI>
-                <LI>Units of Measure</LI>
-                <LI>Current or Obsolete</LI>
-                <LI>Make Or Buy</LI>
-                <LI>Setting Up Assembly Items</LI>
-                <LI>Controlled</LI>
-                <LI>Serialised</LI>
-                <LI>Bar Code</LI>
-                <LI>Discount Category</LI>
-                <LI>Decimal Places</LI>
-                <LI>Inventory Costing</LI>
-                <LI>Material Cost</LI>
-                <LI>Labour Cost</LI>
-                <LI>Overhead Cost</LI>
-                <LI>Standard Costing Considerations</LI>
-                <LI>Actual Cost</LI>
-                <LI>Alterations To Labour Cost, Material Cost or Overhead Cost</LI>
-                <LI>Selecting Inventory Items</LI>
-                <LI>Amending Inventory Items</LI>
-                <LI>Changing a Category</LI>
-                <LI>Alterations to the Make or Buy Flag</LI>
-                <LI>Inventory Categories</LI>
-                <LI>Inventory Category Code</LI>
-                <LI>Inventory Category Description</LI>
-                <LI>Balance Sheet Inventory GL Account</LI>
-                <LI>Inventory Adjustments GL Posting Account</LI>
-                <LI>Purchase Price Variance Account</LI>
-                <LI>Material Usage Variance Account</LI>
-                <LI>Type of Resource</LI>
-                <LI>Inventory Location Maintenance</LI>
-                <LI>Inventory Adjustments</LI>
-                <LI>Inventory Location Transfers</LI>
-                <LI>Inventory Reports and Inquiries</LI>
-                <LI>Inventory Status inquiries</LI>
-                <LI>Inventory Movement inquiries</LI>
-                <LI>Inventory Usage inquiries</LI>
-                <LI>Inventory Valuation Report</LI>
-                <LI>Inventory Planning Report</LI>
-                <LI>Inventory Checks</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>Overview</li>
+                <li>Inventory System Features</li>
+                <li>Inventory Categories</li>
+                <li>Adding Inventory Items</li>
+                <li>Item Code</li>
+                <li>Part Descriptions</li>
+                <li>Categories</li>
+                <li>Unit of Measurement</li>
+                <li>Economic Order Quantity</li>
+                <li>Packaged Volume</li>
+                <li>Packaged Weight</li>
+                <li>Units of Measure</li>
+                <li>Current or Obsolete</li>
+                <li>Make Or Buy</li>
+                <li>Setting Up Assembly Items</li>
+                <li>Controlled</li>
+                <li>Serialised</li>
+                <li>Bar Code</li>
+                <li>Discount Category</li>
+                <li>Decimal Places</li>
+                <li>Inventory Costing</li>
+                <li>Material Cost</li>
+                <li>Labour Cost</li>
+                <li>Overhead Cost</li>
+                <li>Standard Costing Considerations</li>
+                <li>Actual Cost</li>
+                <li>Alterations To Labour Cost, Material Cost or Overhead Cost</li>
+                <li>Selecting Inventory Items</li>
+                <li>Amending Inventory Items</li>
+                <li>Changing a Category</li>
+                <li>Alterations to the Make or Buy Flag</li>
+                <li>Inventory Categories</li>
+                <li>Inventory Category Code</li>
+                <li>Inventory Category Description</li>
+                <li>Balance Sheet Inventory GL Account</li>
+                <li>Inventory Adjustments GL Posting Account</li>
+                <li>Purchase Price Variance Account</li>
+                <li>Material Usage Variance Account</li>
+                <li>Type of Resource</li>
+                <li>Inventory Location Maintenance</li>
+                <li>Inventory Adjustments</li>
+                <li>Inventory Location Transfers</li>
+                <li>Inventory Reports and Inquiries</li>
+                <li>Inventory Status inquiries</li>
+                <li>Inventory Movement inquiries</li>
+                <li>Inventory Usage inquiries</li>
+                <li>Inventory Valuation Report</li>
+                <li>Inventory Planning Report</li>
+                <li>Inventory Checks</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectAccountsReceivable">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=AccountsReceivable'; ?>">Accounts Receivable</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=AccountsReceivable'; ?>">Accounts Receivable</a>
 <?php
   } else {
 ?>
-              <A HREF="#AccountsReceivable">Accounts Receivable</A>
+              <a href="#AccountsReceivable">Accounts Receivable</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Overview</LI>
-                <LI>Features</LI>
-                <LI>Entering New Customers</LI>
-                <LI>Customer Code</LI>
-                <LI>Customer Name</LI>
-                <LI>Address Line 1, 2, 3 and 4</LI>
-                <LI>Currency</LI>
-                <LI>Invoice Discount</LI>
-                <LI>Prompt Payment Discount</LI>
-                <LI>Customer Since</LI>
-                <LI>Payment Terms</LI>
-                <LI>Credit Status or Rating</LI>
-                <LI>Credit Limit</LI>
-                <LI>Invoice Addressing</LI>
-                <LI>Entering Customer Branches</LI>
-                <LI>Branch Name</LI>
-                <LI>Branch Code</LI>
-                <LI>Branch Contact / Phone / Fax / Address</LI>
-                <LI>Sales Person</LI>
-                <LI>Draw Stock From</LI>
-                <LI>Forward Date From A Day In The Month</LI>
-                <LI>Delivery Days</LI>
-                <LI>Phone/Fax/Email</LI>
-                <LI>Tax Authority</LI>
-                <LI>Disable Transactions</LI>
-                <LI>Default Freight Company</LI>
-                <LI>Postal Address 1, 2, 3 and 4</LI>
-                <LI>Amending Customer Details</LI>
-                <LI>Shippers</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>Overview</li>
+                <li>Features</li>
+                <li>Entering New Customers</li>
+                <li>Customer Code</li>
+                <li>Customer Name</li>
+                <li>Address Line 1, 2, 3 and 4</li>
+                <li>Currency</li>
+                <li>Invoice Discount</li>
+                <li>Prompt Payment Discount</li>
+                <li>Customer Since</li>
+                <li>Payment Terms</li>
+                <li>Credit Status or Rating</li>
+                <li>Credit Limit</li>
+                <li>Invoice Addressing</li>
+                <li>Entering Customer Branches</li>
+                <li>Branch Name</li>
+                <li>Branch Code</li>
+                <li>Branch Contact / Phone / Fax / Address</li>
+                <li>Sales Person</li>
+                <li>Draw Stock From</li>
+                <li>Forward Date From A Day In The Month</li>
+                <li>Delivery Days</li>
+                <li>Phone/Fax/Email</li>
+                <li>Tax Authority</li>
+                <li>Disable Transactions</li>
+                <li>Default Freight Company</li>
+                <li>Postal Address 1, 2, 3 and 4</li>
+                <li>Amending Customer Details</li>
+                <li>Shippers</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectAccountsPayable">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=AccountsPayable'; ?>">Accounts Payable</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=AccountsPayable'; ?>">Accounts Payable</a>
 <?php
   } else {
 ?>
-              <A HREF="#AccountsPayable">Accounts Payable</A>
+              <a href="#AccountsPayable">Accounts Payable</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Overview</LI>
-                <LI>Features</LI>
-                <LI>Entering New Suppliers</LI>
-                <LI>Supplier Code</LI>
-                <LI>Supplier Name</LI>
-                <LI>Address Line 1, 2, 3 and 4</LI>
-                <LI>Supplier Since</LI>
-                <LI>Payment Terms</LI>
-                <LI>Bank Particulars/Reference</LI>
-                <LI>Bank Account Number</LI>
-                <LI>Currency</LI>
-		<LI>Remittance Advice</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>Overview</li>
+                <li>Features</li>
+                <li>Entering New Suppliers</li>
+                <li>Supplier Code</li>
+                <li>Supplier Name</li>
+                <li>Address Line 1, 2, 3 and 4</li>
+                <li>Supplier Since</li>
+                <li>Payment Terms</li>
+                <li>Bank Particulars/Reference</li>
+                <li>Bank Account Number</li>
+                <li>Currency</li>
+		          <li>Remittance Advice</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectSalesPeople">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=SalesPeople'; ?>">Sales People</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=SalesPeople'; ?>">Sales People</a>
 <?php
   } else {
 ?>
-              <A HREF="#SalesPeople">Sales People</A>
+              <a href="#SalesPeople">Sales People</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Salesperson Records</LI>
-                <LI>Salespeople Code</LI>
-                <LI>Salesperson Name, Telephone and Fax Numbers</LI>
-                <LI>Salesperson Commission Rates and Breakpoint</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>Salesperson Records</li>
+                <li>Salespeople Code</li>
+                <li>Salesperson Name, Telephone and Fax Numbers</li>
+                <li>Salesperson Commission Rates and Breakpoint</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectCurrencies">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=Currencies'; ?>">Currencies</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=Currencies'; ?>">Currencies</a>
 <?php
   } else {
 ?>
-              <A HREF="#Currencies">Currencies</A>
+              <a href="#Currencies">Currencies</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Currency Abbreviation</LI>
-                <LI>Currency Name</LI>
-                <LI>Country of Currency</LI>
-                <LI>Hundredths Name</LI>
-                <LI>Exchange Rates</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>Currency Abbreviation</li>
+                <li>Currency Name</li>
+                <li>Country of Currency</li>
+                <li>Hundredths Name</li>
+                <li>Exchange Rates</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectSalesTypes">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=SalesTypes'; ?>">Sales Types / Price Lists</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=SalesTypes'; ?>">Sales Types / Price Lists</a>
 <?php
   } else {
 ?>
-              <A HREF="#SalesTypes">Sales Types / Price Lists</A>
+              <a href="#SalesTypes">Sales Types / Price Lists</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Sales Types / Price Lists</LI>
-                <LI>Sales Type Code</LI>
-                <LI>Sales Type Description</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>Sales Types / Price Lists</li>
+                <li>Sales Type Code</li>
+                <li>Sales Type Description</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectPaymentTerms">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=PaymentTerms'; ?>">Payment Terms</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=PaymentTerms'; ?>">Payment Terms</a>
 <?php
   } else {
 ?>
-              <A HREF="#PaymentTerms">Payment Terms</A>
+              <a href="#PaymentTerms">Payment Terms</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Payment Terms</LI>
-                <LI>Payment Terms Code</LI>
-                <LI>Payment Terms Description</LI>
-                <LI>Days Before Due / Day In Following Month When Due</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>Payment Terms</li>
+                <li>Payment Terms Code</li>
+                <li>Payment Terms Description</li>
+                <li>Days Before Due / Day In Following Month When Due</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectCreditStatus">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=CreditStatus'; ?>">Credit Status</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=CreditStatus'; ?>">Credit Status</a>
 <?php
   } else {
 ?>
-              <A HREF="#CreditStatus">Credit Status</A>
+              <a href="#CreditStatus">Credit Status</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Credit Status Ratings</LI>
-                <LI>Status Code</LI>
-                <LI>Status Description</LI>
-                <LI>Disallow Invoices</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>Credit Status Ratings</li>
+                <li>Status Code</li>
+                <li>Status Description</li>
+                <li>Disallow Invoices</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectTax">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=Tax'; ?>">Tax</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=Tax'; ?>">Tax</a>
 <?php
   } else {
 ?>
-              <A HREF="#Tax">Tax</A>
+              <a href="#Tax">Tax</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Tax Calculations</LI>
-                <LI>Overview</LI>
-                <LI>Setting up Taxes</LI>
-                <LI>Sales only within one Tax Authority Example - 2 Tax Levels:</LI>
-                <LI>Sales only within one Tax Authority Example - 3 Tax Levels:</LI>
-                <LI>Sales Within Two Tax Authorities Example - 3 Tax Levels:</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>Tax Calculations</li>
+                <li>Overview</li>
+                <li>Setting up Taxes</li>
+                <li>Sales only within one Tax Authority Example - 2 Tax Levels:</li>
+                <li>Sales only within one Tax Authority Example - 3 Tax Levels:</li>
+                <li>Sales Within Two Tax Authorities Example - 3 Tax Levels:</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectPrices">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=Prices'; ?>">Prices and Discounts</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=Prices'; ?>">Prices and Discounts</a>
 <?php
   } else {
 ?>
-              <A HREF="#Prices">Prices and Discounts</A>
+              <a href="#Prices">Prices and Discounts</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Prices and Discounts</LI>
-                <LI>Pricing Overview</LI>
-                <LI>Maintaining Prices</LI>
-                <LI>Discount Matrix</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>Prices and Discounts</li>
+                <li>Pricing Overview</li>
+                <li>Maintaining Prices</li>
+                <li>Discount Matrix</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectARTransactions">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=ARTransactions'; ?>">Accounts Receivable Transactions</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=ARTransactions'; ?>">Accounts Receivable Transactions</a>
 <?php
   } else {
 ?>
-              <A HREF="#ARTransactions">Accounts Receivable Transactions</A>
+              <a href="#ARTransactions">Accounts Receivable Transactions</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Invoicing An Order</LI>
-                <LI>Selecting an Order To Invoice</LI>
-                <LI>Producing An Invoice From A Selected Order</LI>
-                <LI>Credit Notes</LI>
-                <LI>Entry Of Receipts</LI>
-                <LI>Receipts - Customer</LI>
-                <LI>Receipts - Date</LI>
-                <LI>Receipts - Currency and Exchange Rate</LI>
-                <LI>Receipts - Payment Method</LI>
-                <LI>Receipts - Amount</LI>
-                <LI>Receipts - Discount</LI>
-                <LI>Receipts - Allocating to Invoices</LI>
-                <LI>Differences on Exchange</LI>
-                <LI>Receipts Processing</LI>
-                <LI>Deposits Listing</LI>
-                <LI>Allocate Credits To A Customer's Account</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>Invoicing An Order</li>
+                <li>Selecting an Order To Invoice</li>
+                <li>Producing An Invoice From A Selected Order</li>
+                <li>Credit Notes</li>
+                <li>Entry Of Receipts</li>
+                <li>Receipts - Customer</li>
+                <li>Receipts - Date</li>
+                <li>Receipts - Currency and Exchange Rate</li>
+                <li>Receipts - Payment Method</li>
+                <li>Receipts - Amount</li>
+                <li>Receipts - Discount</li>
+                <li>Receipts - Allocating to Invoices</li>
+                <li>Differences on Exchange</li>
+                <li>Receipts Processing</li>
+                <li>Deposits Listing</li>
+                <li>Allocate Credits To A Customer's Account</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectARInquiries">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=ARInquiries'; ?>">Accounts Receivable Inquiries</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=ARInquiries'; ?>">Accounts Receivable Inquiries</a>
 <?php
   } else {
 ?>
-              <A HREF="#ARInquiries">Accounts Receivable Inquiries</A>
+              <a href="#ARInquiries">Accounts Receivable Inquiries</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Customer Inquiries</LI>
-                <LI>Customer Account inquiries</LI>
-                <LI>Transaction Detail inquiries</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>Customer Inquiries</li>
+                <li>Customer Account inquiries</li>
+                <li>Transaction Detail inquiries</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectARReports">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=ARReports'; ?>">Accounts Receivable Reports</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=ARReports'; ?>">Accounts Receivable Reports</a>
 <?php
   } else {
 ?>
-              <A HREF="#ARReports">Accounts Receivable Reports</A>
+              <a href="#ARReports">Accounts Receivable Reports</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Customers - Reporting</LI>
-                <LI>Aged Customer Balance Listing</LI>
-                <LI>Customer Statements</LI>
-                <LI>Customer Transaction Listing Options</LI>
-                <LI>Printing Invoices Or Credit Notes</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>Customers - Reporting</li>
+                <li>Aged Customer Balance Listing</li>
+                <li>Customer Statements</li>
+                <li>Customer Transaction Listing Options</li>
+                <li>Printing Invoices Or Credit Notes</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectSalesAnalysis">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=SalesAnalysis'; ?>">Sales Analysis</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=SalesAnalysis'; ?>">Sales Analysis</a>
 <?php
   } else {
 ?>
-              <A HREF="#SalesAnalysis">Sales Analysis</A>
+              <a href="#SalesAnalysis">Sales Analysis</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Sales Analysis</LI>
-                <LI>Sales Analysis Report Headers</LI>
-                <LI>Sales Analysis Report Columns</LI>
-                <LI>Automating Sales Reports</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>Sales Analysis</li>
+                <li>Sales Analysis Report Headers</li>
+                <li>Sales Analysis Report Columns</li>
+                <li>Automating Sales Reports</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectSalesOrders">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=SalesOrders'; ?>">Sales Orders</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=SalesOrders'; ?>">Sales Orders</a>
 <?php
   } else {
 ?>
-              <A HREF="#SalesOrders">Sales Orders</A>
+              <a href="#SalesOrders">Sales Orders</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Sales Orders</LI>
-                <LI>Sales Order Functionality</LI>
-                <LI>Entry of Sales Orders</LI>
-                <LI>Sales Orders - Selection of the Customer and Branch</LI>
-                <LI>Selection of Order Line Items</LI>
-                <LI>Delivery Details</LI>
-                <LI>Modfiying An Order</LI>
-				<LI>Quotations</LI>
-				<LI>Recurring Orders</LI>
-				<LI>Counter Sales - Entering Sales Directly</LI>
-				<LI>Managing Discounts by product group and customer group (Matrix)</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>Sales Orders</li>
+                <li>Sales Order Functionality</li>
+                <li>Entry of Sales Orders</li>
+                <li>Sales Orders - Selection of the Customer and Branch</li>
+                <li>Selection of Order Line Items</li>
+                <li>Delivery Details</li>
+                <li>Modfiying An Order</li>
+				<li>Quotations</li>
+				<li>Recurring Orders</li>
+				<li>Counter Sales - Entering Sales Directly</li>
+				<li>Managing Discounts by product group and customer group (Matrix)</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="PurchaseOrdering">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=PurchaseOrdering'; ?>">Purchase Ordering</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=PurchaseOrdering'; ?>">Purchase Ordering</a>
 <?php
   } else {
 ?>
-              <A HREF="#Shipments">Purchase Orders</A>
+              <a href="#Shipments">Purchase Orders</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Overview</LI>
-                <LI>Purchase Orders</LI>
-                <LI>Adding a New Purchase Order</LI>
-                <LI>Authorising Purchase Orders </LI>
-                <LI>Recieving Purchase Orders</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>Overview</li>
+                <li>Purchase Orders</li>
+                <li>Adding a New Purchase Order</li>
+                <li>Authorising Purchase Orders </li>
+                <li>Recieving Purchase Orders</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectShipments">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=Shipments'; ?>">Shipments</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=Shipments'; ?>">Shipments</a>
 <?php
   } else {
 ?>
-              <A HREF="#Shipments">Shipments</A>
+              <a href="#Shipments">Shipments</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Shipments</LI>
-                <LI>Shipment General Ledger Posting</LI>
-                <LI>Creating Shipments</LI>
-                <LI>Shipment Costings</LI>
-                <LI>Closing a Shipment</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>Shipments</li>
+                <li>Shipment General Ledger Posting</li>
+                <li>Creating Shipments</li>
+                <li>Shipment Costings</li>
+                <li>Closing a Shipment</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectContractCosting">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=Contracts'; ?>">Contract Costing</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=Contracts'; ?>">Contract Costing</a>
 <?php
   } else {
 ?>
-              <A HREF="#Contracts">Contract Costing</A>
+              <a href="#Contracts">Contract Costing</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Contract Costing Overview</LI>
-                <LI>Creating A New Contract</LI>
-                <LI>Selecting A Contract</LI>
-                <LI>Charging Against Contracts</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>Contract Costing Overview</li>
+                <li>Creating A New Contract</li>
+                <li>Selecting A Contract</li>
+                <li>Charging Against Contracts</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectManufacturing">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=Manufacturing'; ?>">Manufacturing</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=Manufacturing'; ?>">Manufacturing</a>
 <?php
   } else {
 ?>
-              <A HREF="#Manufacturing">Manufacturing</A>
+              <a href="#Manufacturing">Manufacturing</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Manufacturing Overview</LI>
-                <LI>General Ledger Implications</LI>
-                <LI>Work Order Entry</LI>
-                <LI>Work Order Receipts</LI>
-                <LI>Work Order Issues</LI>
-                <LI>Closing Work Orders</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>Manufacturing Overview</li>
+                <li>General Ledger Implications</li>
+                <li>Work Order Entry</li>
+                <li>Work Order Receipts</li>
+                <li>Work Order Issues</li>
+                <li>Closing Work Orders</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectMRP">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=MRP'; ?>">
-              Material Requirements Planning</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=MRP'; ?>">
+              Material Requirements Planning</a>
 <?php
   } else {
 ?>
-              <A HREF="#MRP">Material Requirements Planning</A>
+              <a href="#MRP">Material Requirements Planning</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>MRP Overview</LI>
-                <LI>Base Data Required</LI>
-                <LI>Production Calendar</LI>
-                <LI>Master (Production) Schedule</LI>
-                <LI>Running The MRP Calculation</LI>
-                <LI>How It Works</LI>
-                <LI>MRP Reports</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>MRP Overview</li>
+                <li>Base Data Required</li>
+                <li>Production Calendar</li>
+                <li>Master (Production) Schedule</li>
+                <li>Running The MRP Calculation</li>
+                <li>How It Works</li>
+                <li>MRP Reports</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectGeneralLedger">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=GeneralLedger'; ?>">General Ledger</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=GeneralLedger'; ?>">General Ledger</a>
 <?php
   } else {
 ?>
-              <A HREF="#GeneralLedger">General Ledger</A>
+              <a href="#GeneralLedger">General Ledger</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>General Ledger Overview</LI>
-                <LI>Account Groups</LI>
-                <LI>Bank Accounts</LI>
-                <LI>Bank Account Payments</LI>
-                <LI>General Ledger Integration Setup</LI>
-                <LI>Sales Journals</LI>
-                <LI>Stock Journals</LI>
-                <LI>EDI</LI>
-                <LI>EDI Setup</LI>
-                <LI>Sending EDI Invoices</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>General Ledger Overview</li>
+                <li>Account Groups</li>
+                <li>Bank Accounts</li>
+                <li>Bank Account Payments</li>
+                <li>General Ledger Integration Setup</li>
+                <li>Sales Journals</li>
+                <li>Stock Journals</li>
+                <li>EDI</li>
+                <li>EDI Setup</li>
+                <li>Sending EDI Invoices</li>
+              </ul>
+              <br />
+            </li>
+            <li>
  <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectFixedAssets">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=FixedAssets'; ?>">Fixed Assets</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=FixedAssets'; ?>">Fixed Assets</a>
 <?php
   } else {
 ?>
-              <A HREF="#Fixed Assets">Fixed Assets</A>
+              <a href="#Fixed Assets">Fixed Assets</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Fixed Assets Overview</LI>
-                <LI>Creating a Fixed Asset</LI>
-                <LI>Selecting Fixed Assets</LI>
-                <LI>Depreciation Run</LI>
-                <LI>Fixed Asset Schedule</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>Fixed Assets Overview</li>
+                <li>Creating a Fixed Asset</li>
+                <li>Selecting Fixed Assets</li>
+                <li>Depreciation Run</li>
+                <li>Fixed Asset Schedule</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 <?php
 if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectReportBuilder">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=ReportBuilder'; ?>">SQL Report Writer</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=ReportBuilder'; ?>">SQL Report Writer</a>
 <?php
   } else {
 ?>
-              <A HREF="#ReportBuilder">Report Writer</A>
+              <a href="#ReportBuilder">Report Writer</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Report Writer Introduction</LI>
-                <LI>Reports Administration</LI>
-                <LI>Importing and Exporting Reports</LI>
-                <LI>Editing Copying Renaming Reports</LI>
-                <LI>Creating A New Report - Identification</LI>
-                <LI>Creating A New Report - Page Setup</LI>
-                <LI>Creating A New Report - Specifying Database Tables and Links</LI>
-                <LI>Creating A New Report - Specifying fields to Retrieve</LI>
-                <LI>Creating A New Report - Entering and Arranging Criteria</LI>
-                <LI>Viewing Reports</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>Report Writer Introduction</li>
+                <li>Reports Administration</li>
+                <li>Importing and Exporting Reports</li>
+                <li>Editing Copying Renaming Reports</li>
+                <li>Creating A New Report - Identification</li>
+                <li>Creating A New Report - Page Setup</li>
+                <li>Creating A New Report - Specifying Database Tables and Links</li>
+                <li>Creating A New Report - Specifying fields to Retrieve</li>
+                <li>Creating A New Report - Entering and Arranging Criteria</li>
+                <li>Viewing Reports</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 <?php
 if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="PettyCash">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=PettyCash'; ?>">Petty Cash Management System</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=PettyCash'; ?>">Petty Cash Management System</a>
 <?php
   } else {
 ?>
-              <A HREF="#PettyCash">Petty Cash Management System</A>
+              <a href="#PettyCash">Petty Cash Management System</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Overview</LI>
-                <LI>Setup General Parameters</LI>
+              <ul>
+                <li>Overview</li>
+                <li>Setup General Parameters</li>
 
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              </ul>
+              <br />
+            </li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectMultilanguage">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=Multilanguage'; ?>">Multilanguage</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=Multilanguage'; ?>">Multilanguage</a>
 <?php
   } else {
 ?>
-              <A HREF="#Multilanguage">Multilanguage</A>
+              <a href="#Multilanguage">Multilanguage</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Introduction to Multilanguage</LI>
-                <LI>Rebuild the System Default Language File</LI>
-                <LI>Add a New Language to the System</LI>
-                <LI>Edit a Language File Header</LI>
-                <LI>Edit a Language File Module</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>Introduction to Multilanguage</li>
+                <li>Rebuild the System Default Language File</li>
+                <li>Add a New Language to the System</li>
+                <li>Edit a Language File Header</li>
+                <li>Edit a Language File Module</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectSpecialUtilities">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=SpecialUtilities'; ?>">Special Utilities</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=SpecialUtilities'; ?>">Special Utilities</a>
 <?php
   } else {
 ?>
-              <A HREF="#SpecialUtilities">Special Utilities</A>
+              <a href="#SpecialUtilities">Special Utilities</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Re-Apply Standard Costs to Sales Analysis</LI>
-                <LI>Change A Customer Code</LI>
-                <LI>Change An Inventory Code</LI>
-                <LI>Make Stock Locations</LI>
-                <LI>Repost General Ledger from Period</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>Re-Apply Standard Costs to Sales Analysis</li>
+                <li>Change A Customer Code</li>
+                <li>Change An Inventory Code</li>
+                <li>Make Stock Locations</li>
+                <li>Repost General Ledger from Period</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectNewScripts">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=NewScripts'; ?>">Development - Foundations</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=NewScripts'; ?>">Development - Foundations</a>
 <?php
   } else {
 ?>
-              <A HREF="#NewScripts">Development - Foundations</A>
+              <a href="#NewScripts">Development - Foundations</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Directory Structure</LI>
-                <LI>session.inc</LI>
-                <LI>header.inc</LI>
-                <LI>footer.inc</LI>
-                <LI>config.php</LI>
-                <LI>PDFStarter.php</LI>
-                <LI>Database Abstraction - ConnectDB.inc</LI>
-                <LI>DateFunctions.inc</LI>
-                <LI>SQL_CommonFuctions.inc</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
-
-
-
-
-
+              <ul>
+                <li>Directory Structure</li>
+                <li>session.inc</li>
+                <li>header.inc</li>
+                <li>footer.inc</li>
+                <li>config.php</li>
+                <li>PDFStarter.php</li>
+                <li>Database Abstraction - ConnectDB.inc</li>
+                <li>DateFunctions.inc</li>
+                <li>SQL_CommonFuctions.inc</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectAPI">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=API'; ?>">Development - API</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=API'; ?>">Development - API</a>
 <?php
   } else {
 ?>
-              <A HREF="#API">Development - API</A>
+              <a href="#API">Development - API</a>
 <?php
   }
 ?>
-              <BR>
-              <BR>
-            </LI>
-            <LI>
-
-
-
-
-
-
+              <br />
+              <br />
+            </li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectStructure">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=Structure'; ?>">Development - Structure</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=Structure'; ?>">Development - Structure</a>
 <?php
   } else {
 ?>
-              <A HREF="#Structure">Development - Structure</A>
+              <a href="#Structure">Development - Structure</a>
 <?php
   }
 ?>
-              <UL>
-                <LI>Sales Orders</LI>
-                <LI>Pricing</LI>
-                <LI>Delivery and Freight Charges</LI>
-                <LI>Finding Sales Orders</LI>
-                <LI>Invoicing</LI>
-                <LI>Accounts Receivable / Debtors Accounts</LI>
-                <LI>Accounts Receivable Receipts</LI>
-                <LI>Accounts Receivable Allocations</LI>
-                <LI>Sales Analysis</LI>
-                <LI>Purchase Orders</LI>
-                <LI>Inventory</LI>
-                <LI>Stock Inquiries</LI>
-                <LI>Accounts Payable</LI>
-                <LI>Supplier Payments</LI>
-              </UL>
-              <BR>
-            </LI>
-            <LI>
+              <ul>
+                <li>Sales Orders</li>
+                <li>Pricing</li>
+                <li>Delivery and Freight Charges</li>
+                <li>Finding Sales Orders</li>
+                <li>Invoicing</li>
+                <li>Accounts Receivable / Debtors Accounts</li>
+                <li>Accounts Receivable Receipts</li>
+                <li>Accounts Receivable Allocations</li>
+                <li>Sales Analysis</li>
+                <li>Purchase Orders</li>
+                <li>Inventory</li>
+                <li>Stock Inquiries</li>
+                <li>Accounts Payable</li>
+                <li>Supplier Payments</li>
+              </ul>
+              <br />
+            </li>
+            <li>
 <?php
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectContributors">
-              <A HREF="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=Contributors'; ?>">Contributors - Acknowledgements</A>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . '?ViewTopic=Contributors'; ?>">Contributors - Acknowledgements</a>
 <?php
   } else {
 ?>
-              <A HREF="#Contributors">Contributors - Acknowledgements</A>
+              <a href="#Contributors">Contributors - Acknowledgements</a>
 <?php
   }
 ?>
-            </LI>
-          </UL>
+            </li>
+          </ul>
         </td>
       </tr>
     </table>

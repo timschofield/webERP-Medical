@@ -1,10 +1,7 @@
 <!-- Help Begin: Manufacturing -->
 
-<br /><br />
-<a name="Manufacturing"><font size="+3"><b>Manufacturing</b></font></a>
-<br /><br />
-<font size="+1"><b>Overview</b></font>
-<br /><br />
+<h1><a name="Manufacturing">Manufacturing</a></h1>
+<h3>Overview</h3>
 Manufacturing - simply the combination of items to make other items can be implemented effective from webERP version 3.06.
 <br />It has been possible to build bills of material for manufactured items for some time but the functionality that allows the materials to be issued from stock and manufactured items received into stock was introduced with 3.06. This is the purpose of the work order.
 <br />Functionality to add labour items to work orders and post recovery amounts to a profit and loss account for issues of labour to a work order was added after 3.09 (Sept 2008).
@@ -23,21 +20,19 @@ The sequence of events in manufacturing an item is as follows:
 <li>Issue components and raw materials to the work order</li>
 <li>Once all components and raw materials are issued to the work order and no more manufactured items can be received against the work order it can be closed. The closing process recalculates the cost of the items manufactured on the work order and if weighted average costing is used a cost update will be processed.</li>
 </ul>
-<br /><br />
-<font size="+1"><b>General Ledger Integration Issues</b></font>
-<br /><br />
+<br />
+<h3>General Ledger Integration Issues</h3>
 When the "Create GL entries for stock transactions (at standard cost)" option in the company preferences form is set to "Yes", then GL journals are created as a result of work order transactions. When a work order is created there is no GL impact. The ways the GL is impacted as a result of manufacturing processes are as follows:
 <ul>
 <li>Receiving Manufactured Items - the stock of finished goods - as per the stock category record of the item being manufactured is debited with the recaclulated (rolled up) cost of the item - as at the time of the first receipt against the work order and credited against the work in progress account of the item (from its stock category record). Subsequent receipts of manufactured stock against the work order are debited to the stock account at the same cost as the first entry. Also, auto-issue components that get issued at the time of the receipt of the manufactured item also create GL entries to debit the work in progress account of the manufactured item's stock category WIP account. The credit goes against the stock account of the component's stock category. For manufactued and purchased items this will be a balance sheet account. However, if the item belongs to a labour type stock category then it is possible to select a profit and loss "recovery account" and for the credit for the value of labour "issued" to the work order to go to this profit and loss account.</li>
 <li>Issuing components to the work order - the same entries as for auto-issue components above. i.e. debit the manufactured output item's WIP account and credit the component item's stock account. Labour items can also be auto issue.</li>
 <li>Closing the work order - compares the quantity of components issued against the bill of material at the time of the first receipt of the manufactured items - the volume differences are evaluated at the standard cost (as at the time of the first receipt of manufactured item) to come up with the usage variance posted to the debit or credit of the manufactured item's stock category record's usage variance account. Then the cost of the items issued to the work order are compared against the cost as at the time the first receipt of the manufactured item was entered - differences here are taken to the price variances account in the manufactured item's stock category record. It is the closing of the work order that ensures that the costs received from the work order in the form of manufacturing output equals the cost of the inputs - the various components and materials issued to the work order</li>
 </ul>
-<br /><br />
-<font size="+1"><b>Work Order Entry</b></font>
-<br /><br />
+<br />
+<h3>Work Order Entry</h3>
 The Work Order is the medium for issuing components/raw materials to. A running total of the costs issued to the work order is maintained. Work orders can be created that have any number of output items. Output items are restricted to only "manufactured" items as defined in the item entry form. The work order tracks the quantity of the output items received against the work order and checks that no more than the work order quantity originally set up, with an allowance including the over-receive proportion as defined for purchase orders, is received.
 <br /><br />
-Setting up a work order is performed from the Manufacuting tab -> transaction entry -> Work Order Entry. The work order number is automatically maintained and defaulted for new work orders as is the start date defaulted to the date the work order was created. Other data required includes:
+Setting up a work order is performed from the Manufacuting tab &rarr; transaction entry &rarr; Work Order Entry. The work order number is automatically maintained and defaulted for new work orders as is the start date defaulted to the date the work order was created. Other data required includes:
 <ul>
 <li>Factory location - this is the inventory location which is used to retrieve the bill of materials for the items being manufactured on the work order - it is possible to have different bills of material for the same item depending on the inventory location. This inventory location is also used as the default location where materials for the work order are issued from and the default location where manufactured items are received into. It is possible to modify this during the issuing and receive processes.</li>
 <li>Required By - this is the date when the manufacturing must be completed by</li>
@@ -46,8 +41,7 @@ With the above information completed then the items to be manufactured on the wo
 <br /><br />
 The quantity received of the item is maintained automatically against the work order items. The balance of the work order yet to be manufactured and received shows as "on order" in the stock status inquiry. Similarly the quantity required of components as extended by the bill of material for work order items is shown as quantity demanded against component items stock status inquiries.
 <br /><br />
-<font size="+1"><b>Closing Work Orders</b></font>
-<br /><br />
+<h3>Closing Work Orders</h3>
 The selection of work orders allows the costing to be viewed. The work order costing shows all the issues of materials and components against the work order as compared against the bill of material requirments - as they were when the first reciept of manufactured stock was received against the work order. The variances on the work order in terms of the usage of components and the expected cost of materials/components issued to the work order are displayed. Closing the work order takes these variances and if general ledger integration to inventory is enabled then journals are created to write back the work in progress balance. Of course if there are several manufactured output items on the work order then the variances are apportioned between the items based on the quantity of the item received multipled by the expected cost as a proportion of the total expected cost of all items received on the work order. The detail of how the postings created depends on whether weighted average costing is used or standard costing.
 <ul>
 <li><b>Standard Costing:</b> Under standard costing the entire variances are taken to the profit and loss account.  The usage variance is taken to the general ledger account specified in the manufactured item's stock category record. The cost variance is taken to the item's purchase price variance account on the stock category record.</li>
@@ -56,8 +50,7 @@ The selection of work orders allows the costing to be viewed. The work order cos
 <br /><br />
 Closing the work order also deletes any existing serial number/lots that were defined at the time the work order was entered (where this conifguration option is enabled) but the serial number has not been entered as received/finished.
 <br /><br />
-<font size="+1"><b>Material Requirements Planning (MRP)</b></font>
-<br /><br />
+<h3>Material Requirements Planning (MRP)</h3>
 It is one thing to plan for purchasing where the item being sold is the item to be purchased. Things get more complicated when the item being sold is manufactured - each of the components in the bill of material need to be available before the item being sold can be manufactured. Where the components in turn are also manufactured then the complexity compounds - this is the material requirements planning calculations are for.
 <br /><br />
 The author of the MRP - Mark Yeager has also contributed a manual page for his scripts which is linked from the manual contents page. For the curious, here (in the developers own words) are the basic steps of the MRP calculations: First, create a levels table by examining the bom table and finding a level number for each part; for instance, a part with nothing under it in a bom structure is a level 0 part, a part with 7 levels of parts below it is level 7. Next, I create an mrpsupplies table and an mrprequirements table. Supplies are from the current quantity on hand, open purchase orders, and work orders. Requirements are from open sales orders, worequirements records for open work orders, parts below their reorder levels, and demands the users can enter in an mrpdemands table for sales forecasting. Then I read through the levels table, starting at the highest level, and net the supplies and requirements for every part. If there is not enough supply, an mrpplannedorder record is created, and, if that part has parts below it in the bom structure, a requirement record is created for those lower level parts based on the net requirement for the top level part times the quantity per assembly for the component, with a schedule date based on the lead time for the part.
@@ -95,7 +88,7 @@ factor should be used. The MRP runs pretty quickly. The system I am running it a
 have close to a thousand parts, plus individual demands for a few hundred other parts, I run this on a 3 and a half year old iMac with 1 gig of memory and it takes less than a minute. I also tried it on my web host, which is in Chicago, while I’m in New Jersey about 30 miles west
 of New York, and it took less than 20 seconds.
 <br /><br />
-The MRP doesn’t change or create webERP purchase orders or work orders. I think it might be dangerous to do that automatically, without some sort of human oversight. In the 2.0 version, I might have some sort of screen that will bring up what I call MRP Planned Orders and
+The MRP doesn't change or create webERP purchase orders or work orders. I think it might be dangerous to do that automatically, without some sort of human oversight. In the 2.0 version, I might have some sort of screen that will bring up what I call MRP Planned Orders and
 allow users to generate purchase orders or work orders from them. Right now, there are several reports to show the results of the MRP. MRPReschedules.php shows those work orders and purchase orders that the system calculates should have their dates changed; if there is no requirement
 for the orders, a CANCEL message is displayed. MRPPlannedWorkOrders.php and MRPPlannedPurchaseOrders.php show orders that the MRP calculates should be created. The reports can be created showing every individual order needed and the source of its requirement, or the orders can be consolidated into weekly or monthly orders. MRPReport.php shows the supply and demand for individual parts. On the demand side, it shows the type of order that created the demand, the top level part for that demand, and the order number – in the case of user entered MRP demands, the order number is system generated. The supply side shows orders that make up the supply and in the case of Planned orders created by the MRP, it shows the type of demand
 the supply was planned to cover and the order number for that demand. Finally, there is MRPShortages.php that shows those parts that have a demand that is greater than the supply. The dollar total might be a little misleading because if there is a sales order for an assembly
