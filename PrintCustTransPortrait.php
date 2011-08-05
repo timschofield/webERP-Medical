@@ -556,8 +556,8 @@ if (isset($PrintPDF)
 		}
 
 		echo '</select></td></tr>';
-		echo '<tr><td>' . _('Start invoice/credit note number to print') . '</td><td><input class="number" type="text" max=6 size=7 name=FromTransNo></td></tr>';
-		echo '<tr><td>' . _('End invoice/credit note number to print') . '</td><td><input class="number" type="text" max=6 size=7 name="ToTransNo"></td></tr></table>';
+		echo '<tr><td>' . _('Start invoice/credit note number to print') . '</td><td><input class="number" type="text" maxlength="6" size="7" name="FromTransNo" /></td></tr>';
+		echo '<tr><td>' . _('End invoice/credit note number to print') . '</td><td><input class="number" type="text" maxlength="6" size="7" name="ToTransNo" /></td></tr></table>';
 		echo '<div class="centre"><br /><input type="submit" name="Print" value="' . _('Print Preview') . '" /><br />';
 		echo '<input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
 
