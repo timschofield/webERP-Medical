@@ -258,7 +258,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 		$_POST['Margin']=1;
 	}
 	echo '<td>
-				<input type="text" class="number" name="Margin" MAXLENGTH =8 size=8 value=' .$_POST['Margin'] . '></td></tr>';
+				<input type="text" class="number" name="Margin" maxlength="8" size="8" value="' .$_POST['Margin'] . '" /></td></tr>';
 	$result = DB_query("SELECT typeabbrev, sales_type FROM salestypes ", $db);
 	echo '<tr><td>' . _('Sales Type') . '/' . _('Price List') . ':</td>
 		<td><select name="SalesType">';
