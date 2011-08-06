@@ -260,20 +260,20 @@ if (!isset($_POST['PostInvoice'])){
 
 	echo '<br /><div class="centre"><input type="submit" name="GRNS" value="' . _('Purchase Orders') . '" /> ';
 
-	echo '<input type="submit" name="Shipts" value="' . _('Shipments') . '"> ';
-	echo '<input type="submit" name="Contracts" value="' . _('Contracts') . '"> ';
+	echo '<input type="submit" name="Shipts" value="' . _('Shipments') . '" /> ';
+	echo '<input type="submit" name="Contracts" value="' . _('Contracts') . '" /> ';
 
 	if ( $_SESSION['SuppTrans']->GLLink_Creditors == 1){
-		echo '<input type="submit" name="GL" value="' . _('General Ledger') . '"> ';
+		echo '<input type="submit" name="GL" value="' . _('General Ledger') . '" /> ';
 	}
-	echo ' <input type="submit" name="FixedAssets" value="' . _('Fixed Assets') . '"></div>';
+	echo ' <input type="submit" name="FixedAssets" value="' . _('Fixed Assets') . '" /></div>';
 
 	$TotalGRNValue = 0;
 
 	if (count( $_SESSION['SuppTrans']->GRNs)>0){   /*if there are any GRNs selected for invoicing then */
 		/*Show all the selected GRNs so far from the SESSION['SuppInv']->GRNs array */
 
-		echo '<br /><table cellpadding=2 class="selection">
+		echo '<br /><table cellpadding="2" class="selection">
 			<tr><th colspan="6">' . _('Purchase Order Charges') . '</th></tr>';
 		$tableheader = '<tr bgcolor=#800000>
 							<th>' . _('Seq') . ' #</th>
@@ -418,7 +418,7 @@ if (!isset($_POST['PostInvoice'])){
 	if ( $_SESSION['SuppTrans']->GLLink_Creditors == 1){
 
 		if (count($_SESSION['SuppTrans']->GLCodes) > 0){
-			echo '<br /><table cellpadding=2 class="selection">
+			echo '<br /><table cellpadding="2" class="selection">
 							<tr>
 								<th colspan="5">' . _('General Ledger Analysis') . '</th>
 							</tr>';
@@ -466,7 +466,7 @@ if (!isset($_POST['PostInvoice'])){
 	}
 
 	echo '<tr>
-			<td colspan="2"><input type="submit" name="ToggleTaxMethod" value="' . _('Update Tax Calculation') . '"></td>
+			<td colspan="2"><input type="submit" name="ToggleTaxMethod" value="' . _('Update Tax Calculation') . '" /></td>
 			<td><select name="OverRideTax" onChange="ReloadForm(form1.ToggleTaxMethod)">';
 
 	if ($_POST['OverRideTax']=='Man'){
@@ -517,9 +517,9 @@ if (!isset($_POST['PostInvoice'])){
 //		}
 			$_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount = $_POST['TaxAmount'  . $Tax->TaxCalculationOrder];
 
-			echo  ' <input type="hidden" name="TaxRate"' . $Tax->TaxCalculationOrder . ' value="' . $_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxRate * 100 . '">';
+			echo  ' <input type="hidden" name="TaxRate' . $Tax->TaxCalculationOrder . '" value="' . $_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxRate * 100 . '" />';
 
-			echo '</td><td><input type="text" class="number" size="12" maxlength="12" name="TaxAmount'  . $Tax->TaxCalculationOrder . '"  value=' . round($_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount,2) . '>';
+			echo '</td><td><input type="text" class="number" size="12" maxlength="12" name="TaxAmount'  . $Tax->TaxCalculationOrder . '"  value="' . round($_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount,2) . '" />';
 		}
 
 		$TaxTotal += $_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount;
@@ -540,7 +540,7 @@ if (!isset($_POST['PostInvoice'])){
 					<td>' . _('Comments') . '</td><td><textarea name="Comments" cols="40" rows="2">' . $_SESSION['SuppTrans']->Comments . '</textarea></td>
 				</tr></table>';
 
-	echo '<p><div class="centre"><input type="submit" name="PostInvoice" value="' . _('Enter Invoice') . '"></div></p>';
+	echo '<p><div class="centre"><input type="submit" name="PostInvoice" value="' . _('Enter Invoice') . '" /></div></p>';
 
 } else { //do the postings -and dont show the button to process
 
