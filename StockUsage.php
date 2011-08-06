@@ -26,8 +26,7 @@ if (isset($_POST['ShowGraphUsage'])) {
 
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Dispatch') .
-		'" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Dispatch') . '" alt="" />' . ' ' . $title . '</p>';
 
 $result = DB_query("SELECT description,
 				units,
