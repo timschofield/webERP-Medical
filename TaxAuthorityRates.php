@@ -56,7 +56,7 @@ $myrow = DB_fetch_row($TaxAuthDetail);
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<input type="hidden" name="TaxAuthority" value=' . $TaxAuthority . ' />';
+echo '<input type="hidden" name="TaxAuthority" value="' . $TaxAuthority . '" />';
 
 $TaxRatesResult = DB_query("SELECT taxauthrates.taxcatid,
 						taxcategories.taxcatname,
@@ -76,7 +76,7 @@ $TaxRatesResult = DB_query("SELECT taxauthrates.taxcatid,
 
 if (DB_num_rows($TaxRatesResult)>0){
 
-	echo '<table cellpadding=2 class="selection">';
+	echo '<table cellpadding="2" class="selection">';
 	echo '<tr><th colspan="3"><font size="3" color="navy">' . _('Update') . ' ' . $myrow[0] . ' ' . _('Rates') . '</font></th></tr>';
 	$TableHeader = '<tr><th>' . _('Deliveries From') . '<br />' . _('Tax Province') . '</th>
 						<th>' . _('Tax Category') . '</th>
