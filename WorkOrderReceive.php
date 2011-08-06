@@ -813,7 +813,7 @@ if($WORow['controlled']==1){ //controlled
 				if (($i/5 -intval($i/5))==0){
 					echo '</tr><tr>';
 				}
-				echo '<td><input type="textbox" name="SerialNo' . $i . '" ';
+				echo '<td><input type="text" name="SerialNo' . $i . '" ';
 				if ($i==0){
 					echo 'value="' . $StringBitOfLotSNRef . ($LotSNRefNumeric + 1) . '"';
 				}
