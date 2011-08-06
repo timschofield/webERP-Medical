@@ -286,8 +286,7 @@ if (isset($_POST['TaxAuthority']) AND
 	$title=_('Tax Reporting');
 	include('includes/header.inc');
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Supplier Types')
-	. '" alt="" />' . $title. '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Supplier Types') . '" alt="" />' . $title. '</p>';
 
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="POST">
 			<table class="selection">';
@@ -341,7 +340,7 @@ if (isset($_POST['TaxAuthority']) AND
 
 
 	echo '</table>
-		<br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '">
+		<br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" />
 		</div>
 		</form>';
 
