@@ -537,7 +537,7 @@ if (isset($_POST['submit'])) {
 		if ($myrow['shrinkageflag'] == 'y') {
 			 $useshrinkage = _('Yes');
 		}
-		echo '<table cellpadding=5><tr><td valign=top>';
+		echo '<table cellpadding="5"><tr><td valign="top">';
 		echo '<table class="selection">';
 		echo '<tr><th colspan="3"><font color="blue" size="3">'._('Last Run Details').'</font></th></tr>';
 		echo '<tr>';
@@ -572,16 +572,16 @@ if (isset($_POST['submit'])) {
 		$leeway =0;
 	}
 
-	echo '<tr><td>' . _('Days Leeway') . ':</td><td><input type="text" name="Leeway" class="number" size="4" value=' . $leeway . '>';
+	echo '<tr><td>' . _('Days Leeway') . ':</td><td><input type="text" name="Leeway" class="number" size="4" value="' . $leeway . '" />';
 	echo '<tr><td>' ._('Use MRP Demands?') . ':</td>';
-	echo '<td><input type="checkbox" name="usemrpdemands" value="y" checked></td></tr>';
+	echo '<td><input type="checkbox" name="usemrpdemands" value="y" checked="True" /></td></tr>';
 	echo '<tr><td>' ._('Use EOQ?') . ':</td>';
-	echo '<td><input type="checkbox" name="eoqflag" value="y" checked></td></tr>';
+	echo '<td><input type="checkbox" name="eoqflag" value="y" checked="True" /></td></tr>';
 	echo '<tr><td>' ._('Use Pan Size?') . ':</td>';
-	echo '<td><input type="checkbox" name="pansizeflag" value="y" checked></td></tr>';
+	echo '<td><input type="checkbox" name="pansizeflag" value="y" checked="True" /></td></tr>';
 	echo '<tr><td>' ._('Use Shrinkage?') . ':</td>';
-	echo '<td><input type="checkbox" name="shrinkageflag" value="y" checked></td></tr>';
-	echo '</table></td></tr></table><div class="centre"><br /><br /><input type="submit" name="submit" value="' . _('Run MRP') . '"></div>';
+	echo '<td><input type="checkbox" name="shrinkageflag" value="y" checked="True" /></td></tr>';
+	echo '</table></td></tr></table><div class="centre"><br /><br /><input type="submit" name="submit" value="' . _('Run MRP') . '" /></div>';
 	echo '</form>';
 }  // End of Main program logic -------------------------------------------------------
 
