@@ -122,10 +122,15 @@ if ($_GET['Action'] == 'Enter'){
 	}
 
 	//START OF action=VIEW
-	$SQL = "SELECT * FROM stockcounts";
+	$SQL = "SELECT id,
+					stockid,
+					loccode,
+					qtycounted,
+					reference
+				FROM stockcounts";
 	$result = DB_query($SQL, $db);
 	echo '<input type="hidden" name="Action" value="View" />';
-	echo '<table cellpadding=2 class="selection">';
+	echo '<table cellpadding="2" class="selection">';
 	echo '<tr>
 		<th>' . _('Stock Code') . '</th>
 		<th>' . _('Location') . '</th>
@@ -141,7 +146,7 @@ if ($_GET['Action'] == 'Enter'){
 			<td><input type="checkbox" name="DEL[' .$myrow['id'].']" maxlength="20" size="20" /></td></tr>';
 
 	}
-	echo '</table><br /><div class="centre"><input type="submit" name="SubmitChanges" value="' . _('Save Changes') . '"></div>';
+	echo '</table><br /><div class="centre"><input type="submit" name="SubmitChanges" value="' . _('Save Changes') . '" /></div>';
 
 //END OF action=VIEW
 }
