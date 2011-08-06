@@ -10,8 +10,7 @@ include('includes/header.inc');
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' .
-	_('Inventory Adjustment') . '" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory Adjustment') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (!isset($_POST['Action']) and !isset($_GET['Action'])) {
 	$_GET['Action'] = 'Enter';
@@ -105,7 +104,7 @@ if ($_GET['Action'] == 'Enter'){
 
 	}
 
-	echo '</table><br /><div class="centre"><input type="submit" name="EnterCounts" value="' . _('Enter Above Counts') . '"></div>';
+	echo '</table><br /><div class="centre"><input type="submit" name="EnterCounts" value="' . _('Enter Above Counts') . '" /></div>';
 
 //END OF action=ENTER
 } elseif ($_GET['Action']=='View'){
