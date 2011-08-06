@@ -6,8 +6,7 @@ include('includes/session.inc');
 $title = _('Units Of Measure');
 
 include('includes/header.inc');
-echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' .
-		_('Top Sales Order Search') . '" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Top Sales Order Search') . '" alt="" />' . ' ' . $title . '</p>';
 
 if ( isset($_GET['SelectedMeasureID']) ) {
 	$SelectedMeasureID = $_GET['SelectedMeasureID'];
@@ -224,7 +223,7 @@ if (! isset($_GET['delete'])) {
 			$_POST['MeasureID'] = $myrow['unitid'];
 			$_POST['MeasureName']  = $myrow['unitname'];
 
-			echo '<input type="hidden" name="SelectedMeasureID" value="' . $_POST['MeasureID'] . '">';
+			echo '<input type="hidden" name="SelectedMeasureID" value="' . $_POST['MeasureID'] . '" />';
 			echo '<table class="selection">';
 		}
 
