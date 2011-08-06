@@ -71,7 +71,7 @@ if ($LineItem->Serialised==1){
 }
 
 echo '<td valign=bottom>';
-echo '<input type=radio id="FileEntry" name=EntryType onClick="submit();" ';
+echo '<input type="radio" id="FileEntry" name=EntryType onClick="submit();" ';
 if ($_POST['EntryType']=='FILE') {
 	echo ' checked ';
 }
