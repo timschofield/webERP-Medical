@@ -14,8 +14,7 @@ $title = _('Enter Supplier Credit Note Against Goods Received');
 
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Dispatch') .
-		'" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Dispatch') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (!isset($_SESSION['SuppTrans'])){
 	prnMsg(_('To enter a supplier transactions the supplier must first be selected from the supplier selection screen') . ', ' . _('then the link to enter a supplier credit note must be clicked on'),'info');
@@ -237,10 +236,10 @@ if (isset($_POST['GRNNo']) AND $_POST['GRNNo']!=''){
 	echo '</table>';
 
 	if ($myrow['closed']==1){ /*Shipment is closed so pre-empt problems later by warning the user - need to modify the order first */
-		echo '<input type="hidden" name="ShiptRef" Value="">';
+		echo '<input type="hidden" name="ShiptRef" value="" />';
 		prnMsg(_('Unfortunately the shipment that this purchase order line item was allocated to has been closed') . ' - ' . _('if you add this item to the transaction then no shipments will not be updated') . '. ' . _('If you wish to allocate the order line item to a different shipment the order must be modified first'),'error');
 	} else {
-		echo '<input type="hidden" name="ShiptRef" Value="' . $myrow['shiptref'] . '">';
+		echo '<input type="hidden" name="ShiptRef" value="' . $myrow['shiptref'] . '" />';
 	}
 
 	echo '<br /><div class="centre"><input type="submit" name="AddGRNToTrans" value="' . _('Add to Credit Note') . '" /></div>';
