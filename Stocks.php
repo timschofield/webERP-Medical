@@ -33,8 +33,7 @@ if (isset($_POST['New'])) {
 
 echo '<a href="' . $rootpath . '/SelectProduct.php">' . _('Back to Items') . '</a><br />' . "\n";
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="'
-		. _('Stock') . '" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Stock') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (isset($_FILES['ItemPicture']) AND $_FILES['ItemPicture']['name'] !='') {
 
@@ -584,8 +583,8 @@ if (!isset($StockID) or $StockID=='' or isset($_POST['UpdateCategories'])) {
 		$StockID='';
 	}
 	if ($New==1) {
-		echo '<tr><td>'. _('Item Code'). ':</td><td><input ' . (in_array('StockID',$Errors) ?  'class="inputerror"' : '' ) .'  type="text"
-			value="'.$StockID.'" name="StockID" size="21" maxlength="20" /></td></tr>'. "\n";
+		echo '<tr><td>'. _('Item Code'). ':</td>
+				<td><input ' . (in_array('StockID',$Errors) ?  'class="inputerror"' : '' ) .'  type="text" value="'.$StockID.'" name="StockID" size="21" maxlength="20" /></td></tr>'. "\n";
 	} else {
 		echo '<tr><td>'. _('Item Code'). ':</td><td>'.$StockID.'</td></tr>'. "\n";
 		echo '<input type="hidden" name ="StockID" value="'.$StockID.'" />';
@@ -654,7 +653,8 @@ if (isset($_POST['Description'])) {
 } else {
 	$Description ='';
 }
-echo '<tr><td>' . _('Part Description') . ' (' . _('short') . '):</td><td><input ' . (in_array('Description',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="Description" size="52" maxlength="50" value="' . $Description . '" /></td></tr>'."\n";
+echo '<tr><td>' . _('Part Description') . ' (' . _('short') . '):</td>
+		<td><input ' . (in_array('Description',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="Description" size="52" maxlength="50" value="' . $Description . '" /></td></tr>'."\n";
 
 if (isset($_POST['LongDescription'])) {
 	$LongDescription = AddCarriageReturns($_POST['LongDescription']);
@@ -711,12 +711,7 @@ echo '<tr><td>' . _('PDF attachment (.pdf)') . ':</td><td>' . select_files('comp
 echo '<tr><td>'. _('Image File (.jpg)') . ':</td><td><input type="file" id="ItemPicture" name="ItemPicture" /></td>';
 
  if (function_exists('imagecreatefromjpg')){
-	$StockImgLink = '<img src="GetStockImage.php?automake=1&textcolor=FFFFFF&bgcolor=CCCCCC'.
-		'&StockID='.urlencode($StockID).
-		'&text='.
-		'&width=64'.
-		'&height=64'.
-		'" />';
+	$StockImgLink = '<img src="GetStockImage.php?automake=1&textcolor=FFFFFF&bgcolor=CCCCCC&StockID='.urlencode($StockID).'&text=&width=64&height=64" />';
 } else {
 	if( isset($StockID) and file_exists($_SESSION['part_pics_dir'] . '/' .$StockID.'.jpg') ) {
 		$StockImgLink = '<img src="' . $_SESSION['part_pics_dir'] . '/' .$StockID.'.jpg" />';
@@ -1028,11 +1023,11 @@ while ($PropertyRow=DB_fetch_array($PropertiesResult)){
 			echo '</select>';
 			break;
 		case 2; //checkbox
-			echo '<input type="checkbox" name="PropValue' . $PropertyCounter . '"';
 			if ($PropertyValue==1){
-				echo ' checked="True"';
+				echo '<input type="checkbox" name="PropValue' . $PropertyCounter . '" checked="True" />';
+			} else {
+				echo '<input type="checkbox" name="PropValue' . $PropertyCounter . '" />';
 			}
-			echo ' />';
 			break;
 	} //end switch
 	echo '<input type="hidden" name="PropType' . $PropertyCounter .'" value="' . $PropertyRow['controltype'] . '" />';

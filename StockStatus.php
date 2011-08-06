@@ -39,8 +39,8 @@ $DecimalPlaces = $myrow[3];
 $Serialised = $myrow[4];
 $Controlled = $myrow[5];
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') .
-	'" alt="" /><b>' . ' ' . $StockID . ' - ' . $myrow['0'] . ' : ' . _('in units of') . ' : ' . $myrow[1] . '</b></p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') . '" alt="" />
+		<b>' . ' ' . $StockID . ' - ' . $myrow['0'] . ' : ' . _('in units of') . ' : ' . $myrow[1] . '</b></p>';
 
 $Its_A_KitSet_Assembly_Or_Dummy =False;
 if ($myrow[2]=='K'){
