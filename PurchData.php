@@ -170,7 +170,7 @@ if (!isset($_GET['Edit'])) {
 		$StockDecimalPlaces=$DecimalPlacesRow['decimalplaces'];
 		$NoPurchasingData=1;
 	} else if ($StockID != '') {
-		echo '<table cellpadding=2 class="selection">';
+		echo '<table cellpadding="2" class="selection">';
 		$TableHeader = '<tr><th>' . _('Supplier') . '</th>
 						<th>' . _('Price') . '</th>
 						<th>' . _('Currency') . '</th>
