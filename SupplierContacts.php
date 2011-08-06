@@ -15,8 +15,7 @@ if (isset($_GET['SupplierID'])){
 
 echo '<a href="' . $rootpath . '/SelectSupplier.php">' . _('Back to Suppliers') . '</a><br />';
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' .
-	_('Supplier Allocations') . '" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('Supplier Allocations') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (!isset($SupplierID)) {
 	echo '<br />';
@@ -205,8 +204,8 @@ if (! isset($_GET['delete'])) {
 		$_POST['Fax']  = $myrow['fax'];
 		$_POST['Email']  = $myrow['email'];
 		$_POST['Mobile']  = $myrow['mobile'];
-		echo '<input type="hidden" name="SelectedContact" value="' . $_POST['Contact'] . '">';
-		echo '<input type="hidden" name="Contact" value="' . $_POST['Contact'] . '">';
+		echo '<input type="hidden" name="SelectedContact" value="' . $_POST['Contact'] . '" />';
+		echo '<input type="hidden" name="Contact" value="' . $_POST['Contact'] . '" />';
 		echo '<table><tr><td>' . _('Contact') . ':</td><td>' . $_POST['Contact'] . '</td></tr>';
 
 	} else { //end of if $SelectedContact only do the else when a new record is being entered
