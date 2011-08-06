@@ -12,8 +12,7 @@ include('includes/session.inc');
 $title = _('Enter Supplier Invoice Against Goods Received');
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Dispatch') .
-		'" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Dispatch') . '" alt="" />' . ' ' . $title . '</p>';
 
 $Complete=false;
 if (!isset($_SESSION['SuppTrans'])){
@@ -199,21 +198,21 @@ if (!isset( $_SESSION['SuppTransTmp'])){
 		}
 		if ($GRNAlreadyOnInvoice == False){
 			$_SESSION['SuppTransTmp']->Add_GRN_To_Trans($myrow['grnno'],
-																									$myrow['podetailitem'],
-																									$myrow['itemcode'],
-																									$myrow['itemdescription'],
-																									$myrow['qtyrecd'],
-																									$myrow['quantityinv'],
-																									$myrow['qtyrecd'] - $myrow['quantityinv'],
-																									$myrow['unitprice'],
-																									$myrow['unitprice'],
-																									$Complete,
-																									$myrow['stdcostunit'],
-																									$myrow['shiptref'],
-																									$myrow['jobref'],
-																									$myrow['glcode'],
-																									$myrow['orderno'],
-																									$myrow['assetid']);
+														$myrow['podetailitem'],
+														$myrow['itemcode'],
+														$myrow['itemdescription'],
+														$myrow['qtyrecd'],
+														$myrow['quantityinv'],
+														$myrow['qtyrecd'] - $myrow['quantityinv'],
+														$myrow['unitprice'],
+														$myrow['unitprice'],
+														$Complete,
+														$myrow['stdcostunit'],
+														$myrow['shiptref'],
+														$myrow['jobref'],
+														$myrow['glcode'],
+														$myrow['orderno'],
+														$myrow['assetid']);
 		}
 	}
 }
@@ -246,13 +245,13 @@ if (isset($_GET['Modify'])){
 	echo '</table>';
 
 /*	if ($myrow['closed']==1){ //Shipment is closed so pre-empt problems later by warning the user - need to modify the order first
-		echo '<input type="hidden" name='ShiptRef' Value=''>";
+		echo '<input type="hidden" name='ShiptRef' Value='' />";
 		echo "Unfortunately, the shipment that this purchase order line item was allocated to has been closed - if you add this item to the transaction then no shipments will not be updated. If you wish to allocate the order line item to a different shipment the order must be modified first.";
 	} else {	*/
-		echo '<input type="hidden" name="ShiptRef" Value="' . $GRNTmp->ShiptRef . '">';
+		echo '<input type="hidden" name="ShiptRef" value="' . $GRNTmp->ShiptRef . '" />';
 //	}
 
-	echo '<div class="centre"><p><input type="submit" name="ModifyGRN" Value="' . _('Modify Line') . '"></p></div>';
+	echo '<div class="centre"><p><input type="submit" name="ModifyGRN" value="' . _('Modify Line') . '" /></p></div>';
 
 
 	echo '<input type="hidden" name="GRNNumber" value="' . $GRNTmp->GRNNo . '" />';
@@ -292,16 +291,16 @@ else {
 
 		if (isset($POs[$GRNTmp->PONo]) and $POs[$GRNTmp->PONo] != $GRNTmp->PONo) {
 					$POs[$GRNTmp->PONo] = $GRNTmp->PONo;
-					echo '<tr><td><input type="submit" name="AddPOToTrans" value="' . $GRNTmp->PONo . '" /></td><td colspan="3">' . _('Add Whole PO to Invoice') . '</td></tr>';
+					echo '<tr><td><input type="submit" name="AddPOToTrans" value="' . $GRNTmp->PONo . '" /></td><td colspan="3" />' . _('Add Whole PO to Invoice') . '</td></tr>';
 					$i = 0;
 			}
 			if ($i == 0){
 				echo $tableheader;
 		}
 		if (isset($_POST['SelectAll'])) {
-			echo '<tr><td><input type="checkbox" checked name="GRNNo_' . $GRNTmp->GRNNo . '"></td>';
+			echo '<tr><td><input type="checkbox" checked name="GRNNo_' . $GRNTmp->GRNNo . '" /></td>';
 		} else {
-			echo '<tr><td><input type="checkbox" name="GRNNo_' . $GRNTmp->GRNNo . '"></td>';
+			echo '<tr><td><input type="checkbox" name="GRNNo_' . $GRNTmp->GRNNo . '" /></td>';
 		}
 		echo '<td>' . $GRNTmp->GRNNo . '</td>
 		<td>' . $GRNTmp->PONo . '</td>
@@ -319,8 +318,8 @@ else {
 		}
 		}
 		echo '</table>';
-		echo '<br /><div class="centre"><input type="submit" name="SelectAll" Value="' . _('Select All') . '">';
-		echo '<input type="submit" name="DeSelectAll" value="' . _('Deselect All') . '">';
+		echo '<br /><div class="centre"><input type="submit" name="SelectAll" Value="' . _('Select All') . '" />';
+		echo '<input type="submit" name="DeSelectAll" value="' . _('Deselect All') . '" />';
 		echo '<br /><input type="submit" name="AddGRNToTrans" value="' . _('Add to Invoice') . '" /></div>';
 	}
 }
