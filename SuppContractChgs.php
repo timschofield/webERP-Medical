@@ -64,11 +64,12 @@ if ($_SESSION['SuppTrans']->InvoiceOrCredit=='Invoice'){
 			._('From') . ' ' . $_SESSION['SuppTrans']->SupplierName . '</p></div>';
 }
 
-echo '<table cellpadding=2>';
+echo '<table cellpadding="2">';
 $TableHeader = '<tr><th>' . _('Contract') . '</th>
-										<th>' . _('Amount') . '</th>
-										<th>' . _('Narrative') . '</th>
-										<th>' . _('Anticipated') . '</th></tr>';
+					<th>' . _('Amount') . '</th>
+					<th>' . _('Narrative') . '</th>
+					<th>' . _('Anticipated') . '</th>
+				</tr>';
 echo $TableHeader;
 
 $TotalContractsValue = 0;
@@ -148,7 +149,7 @@ if (isset($_POST['AnticipatedCost']) AND $_POST['AnticipatedCost']==1){
 
 echo '</td></tr></table>';
 
-echo '<input type="submit" name="AddContractChgToInvoice" value="' . _('Enter Contract Charge') . '">';
+echo '<input type="submit" name="AddContractChgToInvoice" value="' . _('Enter Contract Charge') . '" />';
 
 echo '</form>';
 include('includes/footer.inc');
