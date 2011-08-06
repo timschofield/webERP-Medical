@@ -16,8 +16,7 @@ if (isset($_GET['StockID'])){
 echo '<a href="'. $rootpath . '/SelectWorkOrder.php">' . _('Back to Work Orders'). '</a><br />';
 echo '<a href="'. $rootpath . '/WorkOrderCosting.php?WO=' .  $_POST['WO'] . '">' . _('Back to Costing'). '</a><br />';
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/group_add.png" title="' .
-	_('Search') . '" alt="" />' . ' ' . $title.'</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/group_add.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>';
 
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -569,7 +568,7 @@ if (!isset($_POST['IssueItem'])){
 						WHERE loccode='" . $_POST['FromLocation'] . "'",
 				$db);
 	$LocRow = DB_fetch_array($LocResult);
-	echo '<input type="hidden" name="FromLocation" value="' . $_POST['FromLocation'] . '">';
+	echo '<input type="hidden" name="FromLocation" value="' . $_POST['FromLocation'] . '" />';
 	echo $LocRow['locationname'];
 }
 echo '</td></tr>
@@ -596,7 +595,7 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 
 	while ($RequirementsRow = DB_fetch_array($RequirmentsResult)){
 		if ($RequirementsRow['autoissue']==0){
-			echo '<tr><td><input type="submit" name="IssueItem" value="' .$RequirementsRow['stockid'] . '"></td>
+			echo '<tr><td><input type="submit" name="IssueItem" value="' .$RequirementsRow['stockid'] . '" /></td>
 					<td>' . $RequirementsRow['stockid'] . ' - ' . $RequirementsRow['description'] . '</td>';
 		} else {
 			echo '<tr><td class="notavailable">' . _('Auto Issue') . '<td class="notavailable">' .$RequirementsRow['stockid'] . ' - ' . $RequirementsRow['description'] .'</td>';
@@ -642,13 +641,13 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 
 	</select>
 	<td><?php echo _('Enter text extracts in the'); ?> <b><?php echo _('description'); ?></b>:</td>
-	<td><input type="text" name="Keywords" size="20" maxlength="25" value=" <?php if (isset($_POST['Keywords'])) echo $_POST['Keywords']; ?>"></td></tr>
+	<td><input type="text" name="Keywords" size="20" maxlength="25" value=" <?php if (isset($_POST['Keywords'])) echo $_POST['Keywords']; ?>" /></td></tr>
 	<tr><td></td>
 			<td><font size="3"><b><?php echo _('OR'); ?> </b></font><?php echo _('Enter extract of the'); ?> <b><?php echo _('Stock Code'); ?></b>:</td>
-		<td><input type="text" name="StockCode" size="15" maxlength="18" value=" <?php if (isset($_POST['StockCode'])) echo $_POST['StockCode']; ?>"></td>
+		<td><input type="text" name="StockCode" size="15" maxlength="18" value=" <?php if (isset($_POST['StockCode'])) echo $_POST['StockCode']; ?>" /></td>
 			</tr>
 			</table>
-			<br /><div class="centre"><input type="submit" name="Search" value=" <?php echo _('Search Now'); ?>">
+			<br /><div class="centre"><input type="submit" name="Search" value=" <?php echo _('Search Now'); ?>" />
 
 	<script language='JavaScript' type='text/javascript'>
 
@@ -765,7 +764,7 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 					}
 				}
 				echo '</select></td></tr>';
-				echo '<input type="hidden" name="IssueItem" value="' . $_POST['IssueItem'] . '">';
+				echo '<input type="hidden" name="IssueItem" value="' . $_POST['IssueItem'] . '" />';
 				echo '<tr><td colspan="2"><div class="centre"><input type="submit" name="Process" value="' . _('Process Items Issued') . '" /></div></td></tr>';
 			}
 		} else { //controlled but not serialised - just lot/batch control
@@ -773,16 +772,16 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 			for ($i=0;$i<15;$i++){
 				echo '<tr><td><input type="textbox" name="BatchRef' . $i .'" />';
 				echo '</td>
-					  <td><input type="textbox" name="Qty' . $i .'"></td></tr>';
+					  <td><input type="textbox" name="Qty' . $i .'" /></td></tr>';
 			}
-			echo '<input type="hidden" name="IssueItem" value="' . $_POST['IssueItem'] . '">';
+			echo '<input type="hidden" name="IssueItem" value="' . $_POST['IssueItem'] . '" />';
 			echo '<tr><td colspan="2"><div class="centre"><input type="submit" name="Process" value="' . _('Process Items Issued') . '" /></div></td></tr>';
 		} //end of lot/batch control
 	} else { //not controlled - an easy one!
-		echo '<input type="hidden" name="IssueItem" value="' . $_POST['IssueItem'] . '">';
+		echo '<input type="hidden" name="IssueItem" value="' . $_POST['IssueItem'] . '" />';
 		echo '<tr><td>' . _('Quantity Issued') . ':</td>
-			  <td><input class="number" type="textbox" name="Qty"></tr>';
-		echo '<tr><td colspan="2"><div class="centre"><input type="submit" name="Process" value="' . _('Process Items Issued') . '"></div></td></tr>';
+			  <td><input class="number" type="text" name="Qty" /></tr>';
+		echo '<tr><td colspan="2"><div class="centre"><input type="submit" name="Process" value="' . _('Process Items Issued') . '" /></div></td></tr>';
 	}
 } //end if selecting new item to issue or entering the issued item quantities
 echo '</table>';
