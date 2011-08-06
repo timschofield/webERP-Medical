@@ -14,8 +14,7 @@ if (isset($_GET['StockID'])){
 
 echo '<a href="' . $rootpath . '/SelectProduct.php">' . _('Back to Items') . '</a>';
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') .
-		'" alt="" /><b>' . $title. '</b></p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') . '" alt="" /><b>' . $title. '</b></p>';
 
 $result = DB_query("SELECT description, units FROM stockmaster WHERE stockid='" . $StockID . "'", $db);
 $myrow = DB_fetch_row($result);
@@ -43,7 +42,7 @@ $LocStockResult = DB_query($sql, $db, $ErrMsg, $DbgMsg);
 
 echo '<table cellpadding="2" class="selection">';
 echo '<tr><th colspan="3">'._('Stock Code') . ':<input type="text" name="StockID" size="21" value="' . $StockID . '" maxlength="20" />';
-echo '<input type="submit" name="Show" value="' . _('Show Re-Order Levels') . '"></th></tr>';
+echo '<input type="submit" name="Show" value="' . _('Show Re-Order Levels') . '" /></th></tr>';
 echo '<tr><th colspan="3"><font color="blue" size="3"><b>' . $StockID . ' - ' . $myrow[0] . '</b>  (' . _('In Units of') . ' ' . $myrow[1] . ')</font></th></tr>';
 
 $TableHeader = '<tr>
