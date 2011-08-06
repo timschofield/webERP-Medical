@@ -68,7 +68,7 @@ if ($_SESSION['SuppTrans']->InvoiceOrCredit=='Invoice'){
 }
 echo'<div class="centre"><p class="page_title_text">' . $_SESSION['SuppTrans']->SuppReference . ' ' ._('From') . ' ' . $_SESSION['SuppTrans']->SupplierName . '</p></div>';
 
-echo '<table cellpadding=2 class="selection">';
+echo '<table cellpadding="2" class="selection">';
 $TableHeader = '<tr><th>' . _('Asset ID') . '</th>
 					<th>' . _('Description') . '</th>
 					<th>' . _('Amount') . '</th></tr>';
@@ -112,7 +112,7 @@ prnMsg(_('If you know the code enter it in the Asset ID input box, otherwise sel
 echo '<br /><table class="selection">';
 
 echo '<tr><td>' . _('Enter Asset ID') . ':</td>
-	<td><input type="text" name="AssetID" size="5" maxlength="6" value="' .  $_POST['AssetID'] . '"> <a href="FixedAssetItems.php" target=_blank>'. _('New Fixed Asset') . '</a></td></tr>';
+	<td><input type="text" name="AssetID" size="5" maxlength="6" value="' .  $_POST['AssetID'] . '" /> <a href="FixedAssetItems.php" target=_blank>'. _('New Fixed Asset') . '</a></td></tr>';
 echo '<tr><td><b>' . _('OR') .' </b>'. _('Select from list') . ':</td><td><select name="AssetSelection">';
 
 $sql = "SELECT assetid,
@@ -137,7 +137,7 @@ if (!isset($_POST['Amount'])) {
 	$_POST['Amount']=0;
 }
 echo '<tr><td>' . _('Amount') . ':</td>
-	<td><input type="text" class="number" name="Amount" size="12" maxlength="11" value="' .  $_POST['Amount'] . '"></td></tr>';
+	<td><input type="text" class="number" name="Amount" size="12" maxlength="11" value="' .  $_POST['Amount'] . '" /></td></tr>';
 echo '</table>';
 
 echo '<br /><div class="centre"><input type="submit" name="AddAssetToInvoice" value="' . _('Enter Fixed Asset') . '" /></div>';
