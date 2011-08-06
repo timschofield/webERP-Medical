@@ -298,7 +298,7 @@ echo '<input type="submit" name="Contracts" value="' . _('Contracts') . '" /> ';
 if ( $_SESSION['SuppTrans']->GLLink_Creditors ==1){
 	echo '<input type="submit" name="GL" value="' . _('General Ledger') . '" /> ';
 }
-echo '<input type="submit" name="FixedAssets" value="' . _('Fixed Assets') . '"></div>';
+echo '<input type="submit" name="FixedAssets" value="' . _('Fixed Assets') . '" /></div>';
 echo '<br />';
 
 if (count($_SESSION['SuppTrans']->GRNs)>0){   /*if there are some GRNs selected for crediting then */
@@ -306,7 +306,7 @@ if (count($_SESSION['SuppTrans']->GRNs)>0){   /*if there are some GRNs selected 
 	/*Show all the selected GRNs so far from the SESSION['SuppInv']->GRNs array
 	Note that the class for carrying GRNs refers to quantity invoiced read credited in this context*/
 
-	echo '<table cellpadding=2 class="selection">
+	echo '<table cellpadding="2" class="selection">
 		<tr><th colspan="6">' . _('Purchase Order Credits') . '</th></tr>';
 	$TableHeader = '<tr><th>' . _('GRN') . '</th>
 						<th>' . _('Item Code') . '</th>
@@ -494,11 +494,11 @@ if ($_SESSION['SuppTrans']->GLLink_Creditors ==1){
 
 	echo '<table class="selection"><tr><td><font color="red">' . _('Credit Amount in Supplier Currency') . ':</font></td>
 			<td colspan="2" class="number">' . number_format($_SESSION['SuppTrans']->OvAmount,2) . '</td></tr>';
-	echo '<input type="hidden" name="OvAmount" value="' . number_format($_SESSION['SuppTrans']->OvAmount,2) . '">';
+	echo '<input type="hidden" name="OvAmount" value="' . number_format($_SESSION['SuppTrans']->OvAmount,2) . '" />';
 } else {
 	echo '<table class="selection"><tr><td><font color="red">' . _('Credit Amount in Supplier Currency') .
 		  ':</font></td>
-		  	<td colspan="2" class="number"><input type="text" size="12" maxlength="10" name="OvAmount" value="' . number_format($_SESSION['SuppTrans']->OvAmount,2) . '"></td></tr>';
+		  	<td colspan="2" class="number"><input type="text" size="12" maxlength="10" name="OvAmount" value="' . number_format($_SESSION['SuppTrans']->OvAmount,2) . '" /></td></tr>';
 }
 
 echo '<tr>
@@ -543,7 +543,7 @@ foreach ($_SESSION['SuppTrans']->Taxes as $Tax) {
 		}
 
 
-		echo '<input type="hidden" name="TaxAmount'  . $Tax->TaxCalculationOrder . '"  value=' . round($_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount,2) . '>';
+		echo '<input type="hidden" name="TaxAmount'  . $Tax->TaxCalculationOrder . '"  value="' . round($_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount,2) . '" />';
 
 		echo '</td><td class="number">' . number_format($_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount,2);
 
