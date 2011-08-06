@@ -1336,7 +1336,7 @@ if (isset($_SESSION['CreditItems']->DebtorNo) and !isset($_POST['ProcessCredit']
 				echo '<td>'.$myrow['stockid'].'</td>
 					<td>'.$myrow['description'].'</td>
 					<td>'.$myrow['units'].'</td>
-					<td><font size="1"><input class="number" type="textbox" size="6" name="Quantity'.$i.'" value="0" /></font></td>
+					<td><font size="1"><input class="number" type="text" size="6" name="Quantity'.$i.'" value="0" /></font></td>
 					<input type="hidden" name="StockID'.$i.'" value="'.$myrow['stockid'].'" />
 					<td class="number">'.number_format($PriceRow['price'],$PriceRow['pricedecimal']).'</td>
 				</tr>';
