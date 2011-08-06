@@ -380,9 +380,9 @@ if (isset($SelectedUser)) {
 	$_POST['Blocked'] = $myrow['blocked'];
 	$_POST['PDFLanguage'] = $myrow['pdflanguage'];
 
-	echo '<input type="hidden" name="SelectedUser" value="' . $SelectedUser . '">';
-	echo '<input type="hidden" name="UserID" value="' . $_POST['UserID'] . '">';
-	echo '<input type="hidden" name="ModulesAllowed" value="' . $_POST['ModulesAllowed'] . '">';
+	echo '<input type="hidden" name="SelectedUser" value="' . $SelectedUser . '" />';
+	echo '<input type="hidden" name="UserID" value="' . $_POST['UserID'] . '" />';
+	echo '<input type="hidden" name="ModulesAllowed" value="' . $_POST['ModulesAllowed'] . '" />';
 
 	echo '<table class="selection"> <tr><td>' . _('User code') . ':</td><td>';
 	echo $_POST['UserID'] . '</td></tr>';
@@ -422,13 +422,13 @@ if (!isset($_POST['Email'])) {
 	$_POST['Email']='';
 }
 echo '<tr><td>' . _('Password') . ':</td>
-	<td><input type="password" name="Password" size="22" maxlength="20" value="' . $_POST['Password'] . '"></tr>';
+	<td><input type="password" name="Password" size="22" maxlength="20" value="' . $_POST['Password'] . '" /></tr>';
 echo '<tr><td>' . _('Full Name') . ':</td>
-	<td><input type="text" name="RealName" value="' . $_POST['RealName'] . '" size="36" maxlength="35"></td></tr>';
+	<td><input type="text" name="RealName" value="' . $_POST['RealName'] . '" size="36" maxlength="35" /></td></tr>';
 echo '<tr><td>' . _('Telephone No') . ':</td>
-	<td><input type="text" name="Phone" value="' . $_POST['Phone'] . '" size="32" maxlength="30"></td></tr>';
+	<td><input type="text" name="Phone" value="' . $_POST['Phone'] . '" size="32" maxlength="30" /></td></tr>';
 echo '<tr><td>' . _('Email Address') .':</td>
-	<td><input type="text" name="Email" value="' . $_POST['Email'] .'" size="32" maxlength="55"></td></tr>';
+	<td><input type="text" name="Email" value="' . $_POST['Email'] .'" size="32" maxlength="55" /></td></tr>';
 echo '<tr><td>' . _('Security Role') . ':</td><td><select name="Access">';
 
 foreach ($SecurityRoles as $SecKey => $SecVal) {
@@ -452,7 +452,7 @@ echo '</select></td></tr>';
 
 
 echo '</select></td></tr>';
-echo '<input type="hidden" name="ID" value="'.$_SESSION['UserID'].'">';
+echo '<input type="hidden" name="ID" value="'.$_SESSION['UserID'].'" />';
 
 echo '<tr><td>' . _('Default Location') . ':</td>
 	<td><select name="DefaultLocation">';
@@ -643,7 +643,7 @@ if ($_POST['Blocked']==0){
 echo '</select></td></tr>';
 
 echo '</table><br />
-	<div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '"></div>
+	<div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div>
 	</form>';
 
 if (isset($_GET['SelectedUser'])) {
