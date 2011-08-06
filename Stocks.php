@@ -998,12 +998,12 @@ while ($PropertyRow=DB_fetch_array($PropertiesResult)){
 	echo '<tr><td>' . $PropertyRow['label'] . '</td>
 				<td>';
 	switch ($PropertyRow['controltype']) {
-	 	case 0; //textbox
+	 	case 0; //text
 	 		if ($PropertyRow['numericvalue']==1) {
-				echo '<input type="textbox" class="number" name="PropValue' . $PropertyCounter . '" size="20" maxlength="100" value="' . $PropertyValue . '" />';
+				echo '<input type="text" class="number" name="PropValue' . $PropertyCounter . '" size="20" maxlength="100" value="' . $PropertyValue . '" />';
 				echo _('A number between') . ' ' . $PropertyRow['minimumvalue'] . ' ' . _('and') . ' ' . $PropertyRow['maximumvalue'] . ' ' . _('is expected');
 			} else {
-				echo '<input type="textbox" name="PropValue' . $PropertyCounter . '" size="20" maxlength="100" value="' . $PropertyValue . '" />';
+				echo '<input type="text" name="PropValue' . $PropertyCounter . '" size="20" maxlength="100" value="' . $PropertyValue . '" />';
 			}
 	 		break;
 	 	case 1; //select box

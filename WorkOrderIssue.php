@@ -770,9 +770,9 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 		} else { //controlled but not serialised - just lot/batch control
 			echo '<tr><th colspan="2">' . _('Batch/Lots Issued') . '</th></tr>';
 			for ($i=0;$i<15;$i++){
-				echo '<tr><td><input type="textbox" name="BatchRef' . $i .'" />';
+				echo '<tr><td><input type="text" name="BatchRef' . $i .'" />';
 				echo '</td>
-					  <td><input type="textbox" name="Qty' . $i .'" /></td></tr>';
+					  <td><input type="text" name="Qty' . $i .'" /></td></tr>';
 			}
 			echo '<input type="hidden" name="IssueItem" value="' . $_POST['IssueItem'] . '" />';
 			echo '<tr><td colspan="2"><div class="centre"><input type="submit" name="Process" value="' . _('Process Items Issued') . '" /></div></td></tr>';
