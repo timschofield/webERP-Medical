@@ -96,13 +96,13 @@ else
 
 		echo '<tr>';
 		echo '<td>' . _('Header Line') . ' # ' . $i . '</td>';
-		echo '<td><input type="text" size="80" name="Header_' . $i . '" value="' . htmlentities($LanguageHeader[$i]) . '" ></td>';
+		echo '<td><input type="text" size="80" name="Header_' . $i . '" value="' . htmlentities($LanguageHeader[$i]) . '" /></td>';
 		echo '</tr>';
 	}
 
 	echo '</table>';
-	echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Modify') . '">&nbsp;&nbsp;';
-	echo '<input type="hidden" name="language" value="' . $_POST['language'] . '"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Modify') . '" />&nbsp;&nbsp;';
+	echo '<input type="hidden" name="language" value="' . $_POST['language'] . '" /></div>';
 	echo '</form>';
 }
 }
