@@ -6,8 +6,7 @@ $title = _('SMTP Server details');
 
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/email.gif" title="' .
-		_('SMTP Server') . '" alt="" />' . ' ' . _('SMTP Server Settings') . '</p>';
+echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/email.gif" title="' . _('SMTP Server') . '" alt="" />' . ' ' . _('SMTP Server Settings') . '</p>';
 
 if (isset($_POST['submit'])) {
 	$sql="UPDATE emailsettings SET
@@ -58,7 +57,7 @@ echo '<tr><td>'._('Password').'</td>
 	<td><input type="password" name="password" value="'.$myrow['password'].'" /></td></tr>';
 echo '<tr><td>'._('Timeout (seconds)').'</td>
 	<td><input type="text" size="5" name=timeout class="number" value="'.$myrow['timeout'].'" /></td></tr>';
-echo '<tr><td colspan="2"><div class="centre"><input type="submit" name="submit" value="' . _('Update') . '"></div></td></tr>';
+echo '<tr><td colspan="2"><div class="centre"><input type="submit" name="submit" value="' . _('Update') . '" /></div></td></tr>';
 echo '</table></form>';
 
 include('includes/footer.inc');
