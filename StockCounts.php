@@ -138,7 +138,7 @@ if ($_GET['Action'] == 'Enter'){
 			<td>'.$myrow['loccode'].'</td>
 			<td>'.$myrow['qtycounted'].'</td>
 			<td>'.$myrow['reference'].'</td>
-			<td><input type=checkbox name="DEL[' .$myrow['id'].']" maxlength="20" size="20"></td></tr>';
+			<td><input type="checkbox" name="DEL[' .$myrow['id'].']" maxlength="20" size="20" /></td></tr>';
 
 	}
 	echo '</table><br /><div class="centre"><input type="submit" name="SubmitChanges" value="' . _('Save Changes') . '"></div>';
