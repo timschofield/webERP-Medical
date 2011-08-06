@@ -217,10 +217,10 @@ echo '<table><tr>';
 echo '<td>' . _('Enter up to 32 character lower case character abbreviation for the company') . '</td>
 	<td><input type="text" size="33" maxlength="32" name="NewCompany" /></td></tr>
 	<tr><td>'. _('Logo Image File (.jpg)') . ':</td><td><input type="file" ID="LogoFile" name="LogoFile" /></td></tr>
-	<tr><td>' . _('Create Database?') . '</td><td><input type="checkbox" name="CreateDB"></td></tr>
+	<tr><td>' . _('Create Database?') . '</td><td><input type="checkbox" name="CreateDB" /></td></tr>
 	</table>';
 
-echo '<br /><input type="submit" name="submit" value="' . _('Proceed') . '">&nbsp;&nbsp;&nbsp;&nbsp;';
+echo '<br /><input type="submit" name="submit" value="' . _('Proceed') . '" />&nbsp;&nbsp;&nbsp;&nbsp;';
 echo '</form>';
 echo '</div>';
 
