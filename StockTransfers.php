@@ -23,8 +23,7 @@ if (isset($_GET['From'])) {
 
 if (isset($_POST['CheckCode'])) {
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Dispatch') .
-		'" alt="" />' . ' ' . _('Select Item to Transfer') . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Dispatch') . '" alt="" />' . ' ' . _('Select Item to Transfer') . '</p>';
 
 	if (mb_strlen($_POST['StockText'])>0) {
 		$sql="SELECT stockid, description FROM stockmaster WHERE description " . LIKE . " '%" . $_POST['StockText'] . "%'";
@@ -431,8 +430,7 @@ if ( isset($_POST['EnterTransfer']) ){
 
 }
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Dispatch') .
-		'" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Dispatch') . '" alt="" />' . ' ' . $title . '</p>';
 
 echo '<form action="'. $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -447,8 +445,9 @@ if (isset($_POST['StockID'])) {
 } else {
 	echo '<input type="text" name="StockID" size="21" value="" maxlength="20" /></td></tr>';
 }
-echo '<tr><td>'. _('Partial Description'). ':</td><td><input type="text" name="StockText" size="21" value="' .
-	$_GET['Description'] .'" /></td><td>'._('Partial Stock Code'). ':</td><td>';
+echo '<tr><td>'. _('Partial Description'). ':</td>
+	<td><input type="text" name="StockText" size="21" value="' . $_GET['Description'] .'" /></td>
+	<td>'._('Partial Stock Code'). ':</td><td>';
 if (isset($_POST['StockID'])) {
 	echo '<input type="text" name="StockCode" size="21" value="' . $_POST['StockID'] .'" maxlength="20" />';
 } else {
