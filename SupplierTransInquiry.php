@@ -12,7 +12,7 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/s
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<table cellpadding=2 class="selection"><tr>';
+echo '<table cellpadding="2" class="selection"><tr>';
 
 echo '<td>' . _('Type') . ':</td><td><select name="TransType"> ';
 
@@ -78,7 +78,7 @@ if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
    $ErrMsg = _('The supplier transactions for the selected criteria could not be retrieved because') . ' - ' . DB_error_msg($db);
    $DbgMsg =  _('The SQL that failed was');
 
-   echo '<table cellpadding=2 class="selection">';
+   echo '<table cellpadding="2" class="selection">';
 
    $tableheader = '<tr>
 			<th>' . _('Type') . '</th>
