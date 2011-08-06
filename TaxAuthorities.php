@@ -6,8 +6,7 @@ include('includes/session.inc');
 $title = _('Tax Authorities');
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Supplier Types')
-	. '" alt="" />' . $title. '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Supplier Types') . '" alt="" />' . $title. '</p>';
 
 if (isset($_POST['SelectedTaxAuthID'])){
 	$SelectedTaxAuthID =$_POST['SelectedTaxAuthID'];
@@ -250,7 +249,7 @@ if (!isset($_POST['Description'])) {
 }
 echo '<table class="selection">
 <tr><td>' . _('Tax Type Description') . ':</td>
-<td><input type="text" name="Description" size="21" maxlength="20" value="' . $_POST['Description'] . '"></td></tr>';
+<td><input type="text" name="Description" size="21" maxlength="20" value="' . $_POST['Description'] . '" /></td></tr>';
 
 
 echo '<tr><td>' . _('Input tax GL Account') . ':</td>
