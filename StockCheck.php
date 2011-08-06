@@ -3,7 +3,7 @@
 /* $Id$*/
 include('includes/session.inc');
 
-If (isset($_POST['PrintPDF'])
+if (isset($_POST['PrintPDF'])
 		AND isset($_POST['FromCriteria'])
 		AND mb_strlen($_POST['FromCriteria'])>=1
 		AND isset($_POST['ToCriteria'])
@@ -260,8 +260,7 @@ If (isset($_POST['PrintPDF'])
 	if (!isset($_POST['FromCriteria']) and !isset($_POST['ToCriteria'])) {
 
 	/*if $FromCriteria is not set then show a form to allow input	*/
-		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="'
-			. _('print') . '" alt="" />' . ' ' . $title.'</p><br />';
+		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('print') . '" alt="" />' . ' ' . $title.'</p><br />';
 
 		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="POST"><table class="selection">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
