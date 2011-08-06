@@ -138,40 +138,40 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 
 echo '<br /><table>
 	<tr><td>' . _('Delete All Sales Analysis') . '</td>
-		<td><input type=checkbox name=SalesAnalysis></td>
+		<td><input type="checkbox" name="SalesAnalysis" /></td>
 	</tr>
 	<tr><td>' . _('Delete All statement transactions') . '</td>
-		<td><input type=checkbox name=DebtorTrans></td>
+		<td><input type="checkbox" name="DebtorTrans" /></td>
 	</tr>
 	<tr><td>' . _('Zero All stock balances') . '</td>
-		<td><input type=checkbox name=ZeroStock></td>
+		<td><input type="checkbox" name="ZeroStock" /></td>
 	</tr>
 	<tr><td>' . _('Make Invoiced Qty Of All Sales Orders Nil') . '</td>
-		<td><input type=checkbox name=ZeroSalesOrders></td>
+		<td><input type="checkbox" name="ZeroSalesOrders" /></td>
 	</tr>
 	<tr><td>' . _('Delete All Sales Orders') . '</td>
-		<td><input type=checkbox name=SalesOrders></td>
+		<td><input type="checkbox" name="SalesOrders" /></td>
 	</tr>
 	<tr><td>' . _('Zero Received Qty of all purchase orders') . '</td>
-		<td><input type=checkbox name=ZeroPurchOrders></td>
+		<td><input type="checkbox" name="ZeroPurchOrders" /></td>
 	</tr>
 	<tr><td>' . _('Delete All Purchase Orders') . '</td>
-		<td><input type=checkbox name=PurchOrders></td>
+		<td><input type="checkbox" name="PurchOrders" /></td>
 	</tr>
 	<tr><td>' . _('Delete All Sales related stock movements') . '</td>
-		<td><input type=checkbox name=SalesStockMoves></td>
+		<td><input type="checkbox" name="SalesStockMoves" /></td>
 	</tr>
 	<tr><td>' . _('Delete All Stock Receipt stock movements') . '</td>
-		<td><input type=checkbox name=ReceiptStockMoves></td>
+		<td><input type="checkbox" name="ReceiptStockMoves" /></td>
 	</tr>
 	<tr><td>' . _('Delete All Sales GL Transactions') . '</td>
-		<td><input type=checkbox name=SalesGL></td>
+		<td><input type="checkbox" name="SalesGL" /></td>
 	</tr>
 	<tr><td>' . _('Delete All Stock GL Transactions') . '</td>
-		<td><input type=checkbox name=StockGL></td>
+		<td><input type="checkbox" name="StockGL" /></td>
 	</tr>
 	<tr><td>' . _('Delete All PO Goods Received (GRNs)') . '</td>
-		<td><input type=checkbox name=GRNs></td>
+		<td><input type="checkbox" name="GRNs" /></td>
 	</tr>
 </table>';
 
