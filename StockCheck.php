@@ -319,17 +319,17 @@ If (isset($_POST['PrintPDF'])
 		echo '<tr><td>' . _('Show system quantity on sheets') . ':</td><td>';
 
 		if (isset($_POST['ShowInfo']) and $_POST['ShowInfo'] == false){
-				echo '<input type=checkbox name="ShowInfo" value=FALSE>';
+				echo '<input type="checkbox" name="ShowInfo" value="FALSE" />';
 		} else {
-				echo '<input type=checkbox name="ShowInfo" value=TRUE>';
+				echo '<input type="checkbox" name="ShowInfo" value="TRUE" />';
 		}
 		echo '</td></tr>';
 
 		echo '<tr><td>' . _('Only print items with non zero quantities') . ':</td><td>';
 		if (isset($_POST['NonZerosOnly']) and $_POST['NonZerosOnly'] == false){
-				echo '<input type=checkbox name="NonZerosOnly" value=FALSE>';
+				echo '<input type="checkbox" name="NonZerosOnly" value="FALSE" />';
 		} else {
-				echo '<input type=checkbox name="NonZerosOnly" value=TRUE>';
+				echo '<input type="checkbox" name="NonZerosOnly" value="TRUE" />';
 		}
 
 			echo '</td></tr></table><br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print and Process') . '" /></div></form>';
