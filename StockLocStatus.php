@@ -140,7 +140,7 @@ if (isset($_POST['ShowStatus'])){
 	$DbgMsg = _('The SQL that failed was');
 	$LocStockResult = DB_query($sql, $db, $ErrMsg, $DbgMsg);
 
-	echo '<br /><table cellpadding=5 cellspacing=4 class="selection">';
+	echo '<br /><table cellpadding="5" cellspacing="4" class="selection">';
 
 	$tableheader = '<tr>
 					<th>' . _('StockID') . '</th>
