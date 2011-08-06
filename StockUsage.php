@@ -134,7 +134,7 @@ if (isset($_POST['ShowUsage'])){
 		exit;
 	}
 
-	echo '</div><table cellpadding=2 class="selection">';
+	echo '</div><table cellpadding="2" class="selection">';
 	$tableheader = '<tr><th>' . _('Month') . '</th><th>' . _('Usage') . '</th></tr>';
 	echo $tableheader;
 
