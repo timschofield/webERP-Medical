@@ -14,8 +14,7 @@ if (isset($_GET['NewShipment']) and $_GET['NewShipment']=='Yes'){
 	unset($_SESSION['Shipment']);
 }
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') .
-	'" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (!isset($_SESSION['SupplierID']) AND !isset($_SESSION['Shipment'])){
 	prnMsg( _('To set up a shipment') . ', ' . _('the supplier must first be selected from the Select Supplier page'), 'error');
