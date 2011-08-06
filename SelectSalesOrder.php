@@ -817,7 +817,7 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 	        				<td>%s</td>
 	        				<td>%s</td>
 	        				<td class="number">%s</td>
-	        				<td><input type=checkbox name=PlacePO_%s value><input type="hidden" name=OrderNo_PO_%s value=%s></td>
+	        				<td><input type="checkbox" name="PlacePO_%s" value"" /><input type="hidden" name="OrderNo_PO_%s" value="%s" /></td>
 	        				</tr>',
 	        				$ModifyPage,
 	        				$myrow['orderno'],
