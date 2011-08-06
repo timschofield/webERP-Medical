@@ -278,9 +278,9 @@ if ($_POST['Select'] != '' OR ($_SESSION['CustomerID'] != '' AND !isset($_POST['
 		_('Customer') . ' : ' . $_SESSION['CustomerID'] . ' - ' . $CustomerName . ' - ' . $phone . _(' has been selected') . '</p>';
 	echo '<div class="page_help_text">' . _('Select a menu option to operate using this customer') . '.</div><br />';
 	$_POST['Select'] = NULL;
-	echo '<table cellpadding=4 width=90% class="selection"><tr><th width=33%>' . _('Customer Inquiries') . '</th>
-			<th width=33%>' . _('Customer Transactions') . '</th>
-			<th width=33%>' . _('Customer Maintenance') . '</th></tr>';
+	echo '<table cellpadding="4" width="90%" class="selection"><tr><th width="33%">' . _('Customer Inquiries') . '</th>
+			<th width="33%">' . _('Customer Transactions') . '</th>
+			<th width="33%">' . _('Customer Maintenance') . '</th></tr>';
 	echo '<tr><td valign=top class="select">';
 	/* Customer Inquiry Options */
 	echo '<a href="' . $rootpath . '/CustomerInquiry.php?CustomerID=' . $_SESSION['CustomerID'] . '">' . _('Customer Transaction Inquiries') . '</a><br />';
@@ -414,7 +414,7 @@ if (DB_num_rows($result2) == 0) {
 }
 
 echo '</td></tr></table><br />';
-echo '<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '"><input type="submit" name="CSV" value="' . _('CSV Format') . '"></div>';
+echo '<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '"><input type="submit" name="CSV" value="' . _('CSV Format') . '" /></div>';
 if (isset($_SESSION['SalesmanLogin']) and $_SESSION['SalesmanLogin'] != '') {
 	prnMsg(_('Your account enables you to see only customers allocated to you'), 'warn', _('Note: Sales-person Login'));
 }
@@ -447,9 +447,9 @@ if (isset($result)) {
 				$ListPage++;
 			}
 			echo '</select>
-				<input type="submit" name="Go1" value="' . _('Go') . '">
-				<input type="submit" name="Previous" value="' . _('Previous') . '">
-				<input type="submit" name="Next" value="' . _('Next') . '">';
+				<input type="submit" name="Go1" value="' . _('Go') . '" />
+				<input type="submit" name="Previous" value="' . _('Previous') . '" />
+				<input type="submit" name="Next" value="' . _('Next') . '" />';
 			echo '</div>';
 		}
 		echo '<br /><table cellpadding="2" colspan="7" class="selection">';
