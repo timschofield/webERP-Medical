@@ -113,8 +113,7 @@ if ($NIL_BALANCE == True){
 	$SupplierRecord['overdue2'] = 0;
 }
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' .
-	_('Supplier') . '" alt="" />' . ' ' . _('Supplier') . ' : ' . $SupplierRecord['suppname'] . ' - (' . _('All amounts stated in') .
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' ._('Supplier') . '" alt="" />' . ' ' . _('Supplier') . ' : ' . $SupplierRecord['suppname'] . ' - (' . _('All amounts stated in') .
 	  ' ' . $SupplierRecord['currency'] . ')<br /><br />' . _('Terms') . ': ' . $SupplierRecord['terms'] . '</p>';
 
 if (isset($_GET['HoldType']) AND isset($_GET['HoldTrans'])){
@@ -154,8 +153,8 @@ echo '<tr>	<td class="number">' . number_format($SupplierRecord['balance'],2) . 
 
 echo '<br /><div class="centre"><form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo _('Show all transactions after') . ': ' .'<input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="TransAfterDate" value="' .
-		$_POST['TransAfterDate'] . '" maxlength="10" size="10" />
+echo _('Show all transactions after') . ': ' .
+		'<input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="TransAfterDate" value="' . $_POST['TransAfterDate'] . '" maxlength="10" size="10" />
 	  <input type="submit" name="Refresh Inquiry" value="' . _('Refresh Inquiry') . '" />
 	  </form>
 	  <br />';
