@@ -311,7 +311,7 @@ if (isset($_POST['submit'])) {
 
 echo '<form method="post" action=' . $_SERVER['PHP_SELF'] . '>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<table cellpadding=2 class="selection" width=98%>';
+echo '<table cellpadding="2" class="selection" width="98%">';
 
 $TableHeader = '<tr>
 				<th>' . _('System Variable Name') . '</th>
@@ -1004,7 +1004,7 @@ echo '<tr style="outline: 1px solid"><td>' . _('Purchasing Manager Email Address
 
 
 echo '</table>
-		<br /><div class="centre"><input type="submit" name="submit" value="' . _('Update') . '"></div>
+		<br /><div class="centre"><input type="submit" name="submit" value="' . _('Update') . '" /></div>
 	</form>';
 
 include('includes/footer.inc');
