@@ -10,8 +10,7 @@ include('includes/header.inc');
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') .
-	'" alt="" />' . ' ' . $title.'</p>';
+echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>';
 
 echo '<table class="selection"><tr><td>';
 echo '  ' . _('From Stock Location') . ':<select name="StockLocation"> ';
@@ -75,7 +74,7 @@ $sql = "SELECT stockmoves.stockid,
 $ErrMsg = _('The stock movements for the selected criteria could not be retrieved because');
 $MovtsResult = DB_query($sql, $db,$ErrMsg);
 
-echo '<table cellpadding=5 CELLSPACING=4 class="selection">';
+echo '<table cellpadding="5" cellspacing="4" class="selection">';
 $tableheader = '<tr>
 		<th>' . _('Item Code') . '</th>
 		<th>' . _('Type') . '</th>
