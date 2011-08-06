@@ -14,7 +14,7 @@ echo '<div class="page_help_text">' . _('Choose which type of transaction to rep
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<table cellpadding=2 class="selection"><tr>';
+echo '<table cellpadding="2" class="selection"><tr>';
 
 echo '<td>' . _('Type') . ':</td><td><select tabindex="1" name="TransType">';
 
@@ -41,10 +41,10 @@ if (!isset($_POST['FromDate'])){
 if (!isset($_POST['ToDate'])){
 	$_POST['ToDate'] = Date($_SESSION['DefaultDateFormat']);
 }
-echo '<td>' . _('From') . ':</td><td><input tabindex="2" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="text" name="FromDate" maxlength="10" size="11" value="' . $_POST['FromDate'] . '"></td>';
-echo '<td>' . _('To') . ':</td><td><input tabindex="3" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="text" name="ToDate" maxlength="10" size="11" value="' . $_POST['ToDate'] . '"></td>';
+echo '<td>' . _('From') . ':</td><td><input tabindex="2" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="text" name="FromDate" maxlength="10" size="11" value="' . $_POST['FromDate'] . '" /></td>';
+echo '<td>' . _('To') . ':</td><td><input tabindex="3" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="text" name="ToDate" maxlength="10" size="11" value="' . $_POST['ToDate'] . '" /></td>';
 
-echo '</tr></table><br /><div class="centre"><input tabindex="4" type="submit" name="ShowResults" value="' . _('Show Transactions') . '">';
+echo '</tr></table><br /><div class="centre"><input tabindex="4" type="submit" name="ShowResults" value="' . _('Show Transactions') . '" />';
 
 echo '</form></div>';
 

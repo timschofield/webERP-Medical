@@ -90,7 +90,7 @@ $sql .= " GROUP BY stockmoves.trandate ORDER BY stockmoves.trandate";
 $ErrMsg = _('The sales data could not be retrieved because') . ' - ' . DB_error_msg($db);
 $SalesResult = DB_query($sql, $db,$ErrMsg);
 
-echo '<table cellpadding=2 class="selection">';
+echo '<table cellpadding="2" class="selection">';
 
 echo'<tr>
 	<th>' . _('Sunday') . '</th>
