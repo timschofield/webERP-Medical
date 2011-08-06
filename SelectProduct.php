@@ -218,7 +218,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<tr><th align="right">' . $PropertyRow['label'] . ':</th>';
 		switch ($PropertyRow['controltype']) {
-			case 0; //textbox
+			case 0; //text
 				echo '<td class="select" width="60"><input type="text" name="PropValue' . $PropertyCounter . '" value="' . $PropertyValue . '" />';
 				break;
 			case 1; //select box
