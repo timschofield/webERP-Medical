@@ -8,8 +8,7 @@ $title = _('System Configuration');
 
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Supplier Types')
-	. '" alt="" />' . $title. '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Supplier Types') . '" alt="" />' . $title. '</p>';
 
 if (isset($_POST['submit'])) {
 
@@ -954,7 +953,8 @@ echo '<td>' . _('Choose which Status messages to keep in your log file.') . '</t
 
 //Path to keep log files in
 echo '<tr style="outline: 1px solid"><td>' . _('Path to log files') . ':</td>
-	<td><input type="text" name="X_LogPath" size="40" maxlength="79" value="' . $_SESSION['LogPath'] . '" /></td><td>' . _('The path to the directory where the log files will be stored. Note the apache user must have write permissions on this directory.') . '</td>
+	<td><input type="text" name="X_LogPath" size="40" maxlength="79" value="' . $_SESSION['LogPath'] . '" /></td>
+	<td>' . _('The path to the directory where the log files will be stored. Note the apache user must have write permissions on this directory.') . '</td>
 </tr>';
 
 //DefineControlledOnWOEntry
