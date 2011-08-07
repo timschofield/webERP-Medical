@@ -149,18 +149,17 @@ If (isset($_POST['PrintPDF'])
 	$title=_('Outstanding GRNs Report');
 	include('includes/header.inc');
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') .
-		'" alt="" />' . ' ' . $title . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p>';
 
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<tr><td>' . _('From Supplier Code') . ':</td>
-		<td><input type="text" name="FromCriteria" value="0"></td></tr>';
+		<td><input type="text" name="FromCriteria" value="0" /></td></tr>';
 	echo '<tr><td>' . _('To Supplier Code'). ':</td>
-		<td><input type="text" name="ToCriteria" value="zzzzzzz"></td></tr>';
+		<td><input type="text" name="ToCriteria" value="zzzzzzz" /></td></tr>';
 
-	echo '</table><br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '"></div>';
+	echo '</table><br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
 
 	include('includes/footer.inc');
 
