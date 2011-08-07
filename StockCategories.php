@@ -522,15 +522,14 @@ if (! isset($_GET['delete'])) {
 			echo '</td>
 					<td><input type="text" "name="PropMinimum' . $PropertyCounter . '" value="' . $myrow['minimumvalue'] . '" /></td>
 						<td><input type="text" name="PropMaximum' . $PropertyCounter . '" value="' . $myrow['maximumvalue'] . '" /></td>';
-			echo '<td align="center"><input type="checkbox" name="PropReqSO' . $PropertyCounter .'"';
 
 			if ($myrow['reqatsalesorder']==1){
-					echo 'checked="True"';
+				echo '<td align="center"><input type="checkbox" name="PropReqSO' . $PropertyCounter .'" checked="True" />';
 			} else {
-				echo '';
+				echo '<td align="center"><input type="checkbox" name="PropReqSO' . $PropertyCounter .'" />';
 			}
 
-			echo ' /></td>
+			echo '</td>
 					<td><a href="' . $_SERVER['PHP_SELF'] . '?DeleteProperty=' . $myrow['stkcatpropid'] .'&SelectedCategory=' . $SelectedCategory . '" onclick=\'return confirm("' . _('Are you sure you wish to delete this property? All properties of this type set up for stock items will also be deleted.') . '");\'>' . _('Delete') . '</td></tr>';
 
 			$PropertyCounter++;
