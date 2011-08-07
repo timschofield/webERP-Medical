@@ -41,8 +41,7 @@ $result = DB_query("SELECT debtorsmaster.name,
 						 WHERE
 							debtorsmaster.debtorno='" . $_SESSION['CustomerID'] . "'",$db);
 $myrow = DB_fetch_row($result);
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') .
-		'" alt="" />' . _('Special Customer Prices').'</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . _('Special Customer Prices').'</p>';
 echo '<p class="page_title_text"><font color="blue"><b>' . $myrow[0] . ' ' . _('in') . ' ' . $myrow[1] . '<br />' . ' ' . _('for') . ' ';
 
 $CurrCode = $myrow[1];
@@ -420,11 +419,9 @@ while ($myrow=DB_fetch_array($result)) {
 echo '</select></td></tr>';
 echo '<tr><td>' . _('Currency') .':</td><td>' . $CustomerCurrency.'</td></tr>';
 echo '<tr><td>' . _('Price Effective From Date') . ':</td>
-	                         <td><input type="text" name="StartDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].
-	                         '" size="11" maxlength="10" value="' . $_POST['StartDate'] . '" /></td></tr>';
+		<td><input type="text" name="StartDate" class="date" alt="'.$_SESSION['DefaultDateFormat']. '" size="11" maxlength="10" value="' . $_POST['StartDate'] . '" /></td></tr>';
 echo '<tr><td>' . _('Price Effective To Date') . ':</td>
-	                         <td><input type="text" name="EndDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].
-	                         '" size="11" maxlength="10" value="' . $_POST['EndDate'] . '" /></td></tr>';
+		<td><input type="text" name="EndDate" class="date" alt="'.$_SESSION['DefaultDateFormat']. '" size="11" maxlength="10" value="' . $_POST['EndDate'] . '" /></td></tr>';
 echo '<tr><td>' . _('Unit of Measure') . ':</td>';
 echo '<td><select name="Units">';
 $sql = "SELECT unitname FROM unitsofmeasure";
