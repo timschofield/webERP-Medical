@@ -6,8 +6,7 @@ include('includes/session.inc');
 $title = _('Maintenance Of Petty Cash Of Expenses');
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Payment Entry')
-	. '" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Payment Entry') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (isset($_POST['SelectedExpense'])){
 	$SelectedExpense = mb_strtoupper($_POST['SelectedExpense']);
@@ -261,18 +260,18 @@ if (! isset($_GET['delete'])) {
 
 		// This is a new type so the user may volunteer a type code
 		if (isset($_POST['codeexpense'])) {
-			echo '<table class="selection"><tr><td>' . _('Code Of Expense') . ':</td><td><input type="text" value="'.$_POST['codeexpense'].'"
-				' . (in_array('SalesType',$Errors) ? 'class="inputerror"' : '' ) .' name="codeexpense"></td></tr>';
+			echo '<table class="selection"><tr><td>' . _('Code Of Expense') . ':</td>
+					<td><input type="text" value="'.$_POST['codeexpense'].'" ' . (in_array('SalesType',$Errors) ? 'class="inputerror"' : '' ) .' name="codeexpense" /></td></tr>';
 		} else {
-			echo '<table class="selection"><tr><td>' . _('Code Of Expense') . ':</td><td><input type="text"
-				' . (in_array('SalesType',$Errors) ? 'class="inputerror"' : '' ) .' name="codeexpense"></td></tr>';
+			echo '<table class="selection"><tr><td>' . _('Code Of Expense') . ':</td>
+					<td><input type="text" ' . (in_array('SalesType',$Errors) ? 'class="inputerror"' : '' ) .' name="codeexpense" /></td></tr>';
 		}
 	}
 
 	if (!isset($_POST['description'])) {
 		$_POST['description']='';
 	}
-	echo '<tr><td>' . _('Description') . ':</td><td><input type="text" name="description" size="50" maxlength="49" value="' . $_POST['description'] . '"></td></tr>';
+	echo '<tr><td>' . _('Description') . ':</td><td><input type="text" name="description" size="50" maxlength="49" value="' . $_POST['description'] . '" /></td></tr>';
 
 	echo '<tr><td>' . _('Account Code') . ':</td><td><select name="glaccount">';
 
