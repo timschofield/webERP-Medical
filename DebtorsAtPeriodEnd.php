@@ -134,8 +134,7 @@ if (isset($_POST['PrintPDF'])
 
 	$title=_('Debtor Balances');
 	include('includes/header.inc');
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Search') .
-	 '" alt="" />' . ' ' . $title.'</p><br />';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
 
 	if (!isset($_POST['FromCriteria']) || !isset($_POST['ToCriteria'])) {
 
@@ -162,7 +161,7 @@ if (isset($_POST['PrintPDF'])
 	echo '</select></td></tr>';
 
 
-	echo '</table><br /><div class="centre"><input tabindex="5" type="submit" name="PrintPDF" value="' . _('Print PDF') . '"></div>';
+	echo '</table><br /><div class="centre"><input tabindex="5" type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
 
 	include('includes/footer.inc');
 } /*end of else not PrintPDF */
