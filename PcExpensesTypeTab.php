@@ -5,8 +5,7 @@ include('includes/session.inc');
 $title = _('Maintenance Of Petty Cash Expenses For a Type Tab');
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Payment Entry')
-	. '" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Payment Entry') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (isset($_POST['SelectedType'])){
 	$SelectedType = mb_strtoupper($_POST['SelectedType']);
@@ -139,7 +138,9 @@ or deletion of the records*/
 	   	echo '</table>'; // close table in first column
    	echo '</td></tr></table>'; // close main table
 
-	echo '<br /><div class="centre"><input type="submit" name=process value="' . _('Accept') . '"><input type="submit" name=Cancel value="' . _('Cancel') . '"></div>';
+	echo '<br /><div class="centre">
+			<input type="submit" name=process value="' . _('Accept') . '" />
+			<input type="submit" name=Cancel value="' . _('Cancel') . '" /></div>';
 
 	echo '</form>';
 
