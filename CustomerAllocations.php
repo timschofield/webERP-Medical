@@ -322,8 +322,8 @@ if (isset($_GET['AllocTrans'])) {
 }
 
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('Allocate Receipt') .
-		'" alt="" />' . ' ' . _('Allocate Receipts') . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('Allocate Receipt') . '" alt="" />' .
+			' ' . _('Allocate Receipts') . '</p>';
 
 	$TableHeader = '<tr>
 			 		<th>' . _('Trans Type') . '</th>
@@ -340,7 +340,7 @@ if (isset($_GET['AllocTrans'])) {
 		// Page called with trans number
 		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-		echo '<input type="hidden" name="AllocTrans" value="' . $_POST['AllocTrans'] . '">';
+		echo '<input type="hidden" name="AllocTrans" value="' . $_POST['AllocTrans'] . '" />';
 
 		// Show trans already allocated and potential new allocations
 
@@ -396,13 +396,13 @@ if (isset($_GET['AllocTrans'])) {
 					echo '<td class="number">';
 
 					if (ABS($AllocnItem->AllocAmt-$YetToAlloc) < 0.01) {
-							echo '<input tabindex="'.$j.'" type="checkbox" name="All"' .  $Counter . '" value=' . True . ' />';
+							echo '<input tabindex="'.$j.'" type="checkbox" name="All' .  $Counter . '" value="' . True . '" />';
 					} else {
-							echo '<input tabindex="'.$j.'" type="checkbox" name="All"' .  $Counter . '" />';
+							echo '<input tabindex="'.$j.'" type="checkbox" name="All' .  $Counter . '" />';
 					}
 					$balance += $YetToAlloc-$AllocnItem->AllocAmt;
 					$j++;
-					echo '<input tabindex="'.$j.'" type="text" class="number" name="Amt"' . $Counter .'" maxlength="12" size="13" value="' . round($AllocnItem->AllocAmt,2) . '" />
+					echo '<input tabindex="'.$j.'" type="text" class="number" name="Amt' . $Counter .'" maxlength="12" size="13" value="' . round($AllocnItem->AllocAmt,2) . '" />
 						<input type="hidden" name="AllocID"' . $Counter . '" value="' . $AllocnItem->ID . '" /></td>
 						<td class="number">' . number_format($balance,2) . '</td></tr>';
 			}
