@@ -3,8 +3,7 @@
 include('includes/session.inc');
 $title = _('Fixed Asset Locations');
 include('includes/header.inc');
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' .
-	 _('Search') . '" alt="" />' . ' ' . $title.'</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>';
 
 if (isset($_POST['submit']) and !isset($_POST['delete'])) {
 	$InputError=0;
@@ -139,11 +138,11 @@ echo '</table><br />';
 
 echo '<div class="centre">';
 if (isset($_GET['SelectedLocation'])) {
-	echo '<input type="submit" name="update" value="' . _('Update Information') . '">';
+	echo '<input type="submit" name="update" value="' . _('Update Information') . '" />';
 	echo '<br />';
-	echo '<br /><div class="centre"><input type="submit" name="delete" value="' . _('Delete This Location') . '"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="delete" value="' . _('Delete This Location') . '" /></div>';
 } else {
-	echo '<input type="submit" name="submit" value="' . _('Enter Information') . '">';
+	echo '<input type="submit" name="submit" value="' . _('Enter Information') . '" />';
 }
 echo '</div>';
 echo '</form>';
