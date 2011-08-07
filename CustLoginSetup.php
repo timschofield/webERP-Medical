@@ -29,9 +29,8 @@ $result=DB_query($sql, $db);
 $myrow=DB_fetch_array($result);
 $CustomerName=$myrow['name'];
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') .
-	'" alt="" />' . ' ' . _('Customer') . ' : ' . $_SESSION['CustomerID'] . ' - ' . $CustomerName. _(' has been selected') .
-		'</p><br />';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') .'" alt="" />' .
+			' ' . _('Customer') . ' : ' . $_SESSION['CustomerID'] . ' - ' . $CustomerName. _(' has been selected') . '</p><br />';
 //echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/group_add.png" title="' . _('Search') . '" alt="">' . ' ' . $title.'</p><br />';
 
 
@@ -363,9 +362,9 @@ if (isset($SelectedUser)) {
 		exit;
 	}
 
-	echo '<input type="hidden" name="SelectedUser" value="' . $SelectedUser . '">';
-	echo '<input type="hidden" name="UserID" value="' . $_POST['UserID'] . '">';
-	echo '<input type="hidden" name="ModulesAllowed" value="' . $_POST['ModulesAllowed'] . '">';
+	echo '<input type="hidden" name="SelectedUser" value="' . $SelectedUser . '" />';
+	echo '<input type="hidden" name="UserID" value="' . $_POST['UserID'] . '" />';
+	echo '<input type="hidden" name="ModulesAllowed" value="' . $_POST['ModulesAllowed'] . '" />';
 
 	echo '<table class="selection"> <tr><td>' . _('User code') . ':</td><td>';
 	echo $_POST['UserID'] . '</td></tr>';
@@ -419,7 +418,7 @@ foreach ($SecurityRoles as $SecKey => $SecVal) {
 	}
 }
 echo '</select></td></tr>';
-echo '<input type="hidden" name="ID" value="'.$_SESSION['UserID'].'">';
+echo '<input type="hidden" name="ID" value="'.$_SESSION['UserID'].'" />';
 
 echo '<tr><td>' . _('Default Location') . ':</td>
 	<td><select name="DefaultLocation">';
@@ -442,7 +441,7 @@ while ($myrow=DB_fetch_array($result)){
 
 //Customer is fixed by selection of customer
 $_POST['Cust']=$_SESSION['CustomerID'];
-echo '<input type="hidden" name="Cust" value="' . $_POST['Cust'] . '">';
+echo '<input type="hidden" name="Cust" value="' . $_POST['Cust'] . '" />';
 echo '<tr><td>'._('Customer Code').':</td>
 	<td>' . $_POST['Cust'] . '</td></tr>';
 
@@ -594,7 +593,7 @@ echo '</select></td></tr>';
 
 
 echo '</table><br />
-	<div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '"></div></form>';
+	<div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div></form>';
 
 if (isset($_GET['SelectedUser'])) {
 	echo '<script  type="text/javascript">defaultControl(document.forms[0].Password);</script>';
