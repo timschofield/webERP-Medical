@@ -8,8 +8,7 @@ $title = _('Authorise Purchase Orders');
 
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . $title .
-	 '" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . $title . '" alt="" />' . ' ' . $title . '</p>';
 
 $emailsql="SELECT email FROM www_users WHERE userid='".$_SESSION['UserID']."'";
 $emailresult=DB_query($emailsql, $db);
@@ -91,7 +90,7 @@ while ($myrow=DB_fetch_array($result)) {
 		echo '<option value="Cancelled">'._('Cancelled').'</option>';
 		echo '</select></td>';
 		echo '</tr>';
-		echo "<input type='hidden' name='comment' value='".$myrow['stat_comment']."'>";
+		echo '<input type="hidden" name="comment" value="'.$myrow['stat_comment'].'" />';
 		$linesql="SELECT purchorderdetails.*,
 					stockmaster.description
 				FROM purchorderdetails
@@ -121,7 +120,7 @@ while ($myrow=DB_fetch_array($result)) {
 	}
 } //end while header loop
 echo '</table>';
-echo '<br /><div class="centre"><input type="submit" name="updateall" value="' . _('Update'). '"></form>';
+echo '<br /><div class="centre"><input type="submit" name="updateall" value="' . _('Update'). '" /></form>';
 
 include('includes/footer.inc');
 ?>
