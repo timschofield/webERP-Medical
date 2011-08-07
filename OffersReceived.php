@@ -36,8 +36,8 @@ if (!isset($_POST['supplierid'])) {
 	if (DB_num_rows($result)==0) {
 		prnMsg(_('There are no offers outstanding that you are authorised to deal with'), 'information');
 	} else {
-		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' .
-			_('Select Supplier') . '" alt="" />' . ' ' . _('Select Supplier') . '</p>';
+		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Select Supplier') . '" alt="" />' .
+			' ' . _('Select Supplier') . '</p>';
 		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] .'">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<table class="selection">';
@@ -82,8 +82,7 @@ if (!isset($_POST['submit']) and isset($_POST['supplierid'])) {
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] .'">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' .
-		_('Supplier Offers') . '" alt="" />' . ' ' . _('Supplier Offers') . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Supplier Offers') . '" alt="" />' . ' ' . _('Supplier Offers') . '</p>';
 
 	echo '<table class="selection">';
 	echo '<tr><th>'._('Offer ID').'</th>';
@@ -117,10 +116,10 @@ if (!isset($_POST['submit']) and isset($_POST['supplierid'])) {
 		echo '<td class="number">'.number_format($myrow['price']*$myrow['quantity'],2).'</td>';
 		echo '<td>'.$myrow['currcode'].'</td>';
 		echo '<td>'.$myrow['expirydate'].'</td>';
-		echo '<td><input type="radio" name="action'.$myrow['offerid'].'" value="1"></td>';
-		echo '<td><input type="radio" name="action'.$myrow['offerid'].'" value="2"></td>';
-		echo '<td><input type="radio" checked name="action'.$myrow['offerid'].'" value="3"></td>';
-		echo '<td><input type="hidden" name="supplierid" value="'.$myrow['supplierid'].'"></td>';
+		echo '<td><input type="radio" name="action'.$myrow['offerid'].'" value="1" /></td>';
+		echo '<td><input type="radio" name="action'.$myrow['offerid'].'" value="2" /></td>';
+		echo '<td><input type="radio" checked name="action'.$myrow['offerid'].'" value="3" /></td>';
+		echo '<td><input type="hidden" name="supplierid" value="'.$myrow['supplierid'].'" /></td>';
 		echo '</tr>';
 	}
 	echo '<tr><td colspan="12"><div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div></td></tr>';
