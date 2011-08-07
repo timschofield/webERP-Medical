@@ -8,8 +8,7 @@ $title = _('Fixed Asset Category Maintenance');
 
 include('includes/header.inc');
 
-echo '<div class="centre"><p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' .
-		_('Fixed Asset Categories') . '" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Fixed Asset Categories') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (isset($_GET['SelectedCategory'])){
 	$SelectedCategory = mb_strtoupper($_GET['SelectedCategory']);
@@ -235,7 +234,7 @@ if (isset($SelectedCategory) and !isset($_POST['submit'])) {
 		$_POST['CategoryID'] = '';
 	}
 	echo '<br /><table class="selection"><tr><td>' . _('Category Code') . ':</td>
-				 <td><input type="text" name="CategoryID" size="7" maxlength="6" value="' . $_POST['CategoryID'] . '"></td></tr>';
+				 <td><input type="text" name="CategoryID" size="7" maxlength="6" value="' . $_POST['CategoryID'] . '" /></td></tr>';
 }
 
 //SQL to poulate account selection boxes
@@ -320,7 +319,7 @@ while ($myrow = DB_fetch_array($BSAccountsResult)) {
 
 echo '</select></td></tr></table><br />';
 
-echo '<div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '"></div>';
+echo '<div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div>';
 
 echo '</form>';
 
