@@ -9,8 +9,7 @@ $title = _('Customer Maintenance');
 include('includes/header.inc');
 include('includes/SQL_CommonFunctions.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') .
-	'" alt="" />' . ' ' . _('Customer Maintenance') . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') . '" alt="" />' . ' ' . _('Customer Maintenance') . '</p>';
 
 if (isset($Errors)) {
 	unset($Errors);
@@ -594,8 +593,8 @@ if (!isset($DebtorNo)) {
 
 	echo'</table></td></tr></table>';
 	if ($DataError ==0){
-		echo '<br /><div class="centre"><input tabindex="20" type="submit" name="submit" value="' . _('Add New Customer') .
-			'" />&nbsp;<input tabindex="21" type="submit" action="reset" value="' . _('Reset') . '" /></div>';
+		echo '<br /><div class="centre"><input tabindex="20" type="submit" name="submit" value="' . _('Add New Customer') . '" />&nbsp;
+		<input tabindex="21" type="submit" action="reset" value="' . _('Reset') . '" /></div>';
 	}
 	echo '</form>';
 
@@ -703,7 +702,7 @@ if (!isset($DebtorNo)) {
 			<td><input ' . (in_array('Phone',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="Phone" value="' . $_POST['Phone'] . '" size="42" maxlength="40" /></td></tr>';
 		echo '<tr><td>' . _('Facsimile') . ':</td>
 			<td><input ' . (in_array('Fax',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="Fax" value="' . $_POST['Fax'] . '" size="42" maxlength="40" /></td></tr>';
-			echo '<tr><td>' . _('Email Address') . ':</td>
+		echo '<tr><td>' . _('Email Address') . ':</td>
 			<td><input ' . (in_array('Email',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="Email" value="' . $_POST['Email'] . '" size="42" maxlength="40" /></td></tr>';
 		echo '<tr><td>' . _('Address Line 1 (Street)') . ':</td>
 			<td><input ' . (in_array('Address1',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="Address1" size="42" maxlength="40" value="' . $_POST['Address1'] . '" /></td></tr>';
@@ -942,7 +941,7 @@ if (!isset($DebtorNo)) {
 		}
 	}//END WHILE LIST LOOP
 	echo '</table>';
-		//	echo "<input type='Submit' name='addcontact' value='" . _('ADD Contact') . "'>";
+		//	echo "<input type='Submit' name='addcontact' value='" . _('ADD Contact') . "' />";
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?DebtorNo='.$DebtorNo.'&amp;ID='.$ID.'&amp;Edit'.$Edit.'">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	if (isset($Edit) and $Edit!='') {
