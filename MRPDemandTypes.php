@@ -13,8 +13,7 @@ if (isset($_POST['SelectedDT'])){
 	$SelectedDT = trim(mb_strtoupper($_GET['SelectedDT']));
 }
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' .
-		_('Inventory') . '" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' ._('Inventory') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (isset($_POST['submit'])) {
 
@@ -165,7 +164,7 @@ if (isset($SelectedDT) and !isset($_GET['delete'])) {
 	}
 	echo '<table class="selection"><tr>
 			<td>' . _('Demand Type') . ':</td>
-			<td><input type="text" name="MRPDemandType" size="6" maxlength="5" value="' . $_POST['MRPDemandType'] . '"></td>
+			<td><input type="text" name="MRPDemandType" size="6" maxlength="5" value="' . $_POST['MRPDemandType'] . '" /></td>
 			</tr>';
 }
 
@@ -174,7 +173,7 @@ if (!isset($_POST['Description'])) {
 }
 
 echo '<tr><td>' . _('Demand Type Description') . ':</td>
-	<td><input type="text" name="Description" size="31" maxlength="30" value="' . $_POST['Description'] . '"></td>
+	<td><input type="text" name="Description" size="31" maxlength="30" value="' . $_POST['Description'] . '" /></td>
 	</tr>
 	</table>';
 
