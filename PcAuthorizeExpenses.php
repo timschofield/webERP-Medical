@@ -57,11 +57,11 @@ if (isset($_POST['Go'])) {
 }
 
 if (isset($SelectedTabs)) {
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Petty Cash') .
-		'" alt="" />' . _('Authorization Of Petty Cash Expenses ') . ''.$SelectedTabs.'</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Petty Cash') . '" alt="" />' .
+			_('Authorization Of Petty Cash Expenses ') . ''.$SelectedTabs.'</p>';
 } else {
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Petty Cash') .
-		'" alt="" />' . _('Authorization Of Petty Cash Expenses ') . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Petty Cash') . '" alt="" />' .
+			_('Authorization Of Petty Cash Expenses ') . '</p>';
 }
 if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) OR isset ($_POST['GO'])) {
 
