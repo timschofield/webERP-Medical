@@ -19,8 +19,8 @@ if ((isset($_GET['Type']) AND $_GET['Type']=='Receipts') OR
 
 	$Type = 'Payments';
 	$TypeName =_('Payments');
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_delete.png" title="' . _('Bank Matching') .
-		'" alt="" />' . ' ' . _('Bank Account Matching - Payments') . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_delete.png" title="' . _('Bank Matching') . '" alt="" />' .
+			' ' . _('Bank Account Matching - Payments') . '</p>';
 
 } else {
 
@@ -81,7 +81,7 @@ echo '<div class="page_help_text">' . _('Use this screen to match webERP Receipt
 echo '<form action="'. $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<input type="hidden" name="Type" Value="' . $Type . '">';
+echo '<input type="hidden" name="Type" Value="' . $Type . '" />';
 
 echo '<table class="selection"><tr>';
 echo '<td align=left>' . _('Bank Account') . ':</td><td colspan="3"><select tabindex="1" name="BankAccount">';
@@ -107,10 +107,10 @@ if (!isset($_POST['AfterDate']) OR !Is_Date($_POST['AfterDate'])){
 
 // Change to allow input of FROM DATE and then TO DATE, instead of previous back-to-front method, add datepicker
 echo '<tr><td>' . _('Show') . ' ' . $TypeName . ' ' . _('from') . ':</td>
-		<td><input tabindex="3" type="text" name="AfterDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="12" maxlength="10" onChange="isDate(this, this.value, '."'".$_SESSION['DefaultDateFormat']."'".')" Value="' . $_POST['AfterDate'] . '"></td></tr>';
+		<td><input tabindex="3" type="text" name="AfterDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="12" maxlength="10" onChange="isDate(this, this.value, '."'".$_SESSION['DefaultDateFormat']."'".')" value="' . $_POST['AfterDate'] . '" /></td></tr>';
 
 echo '<td>' . _('to') . ':</td>
-	<td><input tabindex="2" type="text" name="BeforeDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="12" maxlength="10" onChange="isDate(this, this.value, '."'".$_SESSION['DefaultDateFormat']."'".')" Value="' . $_POST['BeforeDate'] . '"></td>';
+	<td><input tabindex="2" type="text" name="BeforeDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="12" maxlength="10" onChange="isDate(this, this.value, '."'".$_SESSION['DefaultDateFormat']."'".')" value="' . $_POST['BeforeDate'] . '" /></td>';
 echo '<tr><td colspan="3">' . _('Choose outstanding') . ' ' . $TypeName . ' ' . _('only or all') . ' ' . $TypeName . ' ' . _('in the date range') . ':</td>
 	<td><select tabindex="4" name="Ostg_or_All">';
 
@@ -135,7 +135,7 @@ if ($_POST['First20_or_All']=='All'){
 echo '</select></td></tr>';
 
 
-echo '</table><br /><div class="centre"><input tabindex="6" type="submit" name="ShowTransactions" value="' . _('Show selected') . ' ' . $TypeName . '">';
+echo '</table><br /><div class="centre"><input tabindex="6" type="submit" name="ShowTransactions" value="' . _('Show selected') . ' ' . $TypeName . '" />';
 
 if (isset($_POST['BankAccount'])) {
 	echo '<p><a href="'.$rootpath.'/BankReconciliation.php?Account='.$_POST['BankAccount'].'">' . _('Show reconciliation') . '</a></p></div>';
@@ -262,7 +262,7 @@ if ($InputError !=1 AND isset($_POST['BankAccount']) AND $_POST['BankAccount']!=
 				<td class="number">%s</td>
 				<td class="number">%s</td>
 				<td colspan="2">%s</td>
-				<td><input type="checkbox" name="Unclear_%s"><input type="hidden" name="BankTrans_%s" value="%s" /></td>
+				<td><input type="checkbox" name="Unclear_%s" /><input type="hidden" name="BankTrans_%s" value="%s" /></td>
 				</tr>',
 				$myrow['chequeno'],
 				$myrow['ref'],
@@ -290,7 +290,7 @@ if ($InputError !=1 AND isset($_POST['BankAccount']) AND $_POST['BankAccount']!=
 				<td>%s</td>
 				<td class="number">%s</td>
 				<td class="number">%s</td>
-				<td><input type="checkbox" name="Clear_%s"><input type="hidden" name="BankTrans_%s" value="%s" /></td>
+				<td><input type="checkbox" name="Clear_%s" /><input type="hidden" name="BankTrans_%s" value="%s" /></td>
 				<td colspan="2"><input type="text" maxlength="15" size="15" class="number" name="AmtClear_%s" /></td>
 				</tr>',
 				$myrow['chequeno'],
