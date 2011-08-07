@@ -68,8 +68,7 @@ if (isset($_POST['submit'])) {
 	//initialise no input errors assumed initially before we test
 	$InputError = 0;
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' .
-		_('Search') . '" alt="" />' . ' ' . $title. '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Search') . '" alt="" />' . ' ' . $title. '</p>';
 
 	/* actions to take once the user has clicked the submit button
 	ie the page has called itself with some user input */
@@ -147,8 +146,7 @@ if (isset($_POST['submit'])) {
 
 } elseif ( isset($_GET['delete']) ) {
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' .
-		_('Search') . '" alt="">' . ' ' . $title. '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Search') . '" alt="" />' . ' ' . $title. '</p>';
 	$sql="DELETE FROM pcashdetails
 		WHERE counterindex='" . $SelectedIndex . "'";
 	$ErrMsg = _('The assignment of cash record could not be deleted because');
@@ -163,8 +161,7 @@ if (!isset($SelectedTabs)){
 	then none of the above are true and the list of sales types will be displayed with
 	links to delete or edit each. These will call the same page again and allow update/input
 	or deletion of the records*/
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' .
-		_('Search') . '" alt="" />' . ' ' . $title. '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Search') . '" alt="" />' . ' ' . $title. '</p>';
 
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -198,8 +195,7 @@ if (!isset($SelectedTabs)){
 } elseif (isset($SelectedTabs)) {
 
 	if (!isset($_POST['submit'])) {
-		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' .
-			_('Search') . '" alt="" />' . ' ' . $title. '</p>';
+		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Search') . '" alt="" />' . ' ' . $title. '</p>';
 	}
 	echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Select Another Petty Cash Tab ') . '<a/></div></p>';
 
@@ -341,10 +337,10 @@ if (!isset($SelectedTabs)){
 			$_POST['Notes']  = $myrow['notes'];
 			$_POST['Receipt']  = $myrow['receipt'];
 
-			echo '<input type="hidden" name="SelectedTabs" value="' . $SelectedTabs . '">';
-			echo '<input type="hidden" name="SelectedIndex" value="' . $SelectedIndex. '">';
-			echo '<input type="hidden" name="CurrentAmount" value="' . $Amount[0]. '">';
-			echo '<input type="hidden" name="Days" value="' .$Days. '">';
+			echo '<input type="hidden" name="SelectedTabs" value="' . $SelectedTabs . '" />';
+			echo '<input type="hidden" name="SelectedIndex" value="' . $SelectedIndex. '" />';
+			echo '<input type="hidden" name="CurrentAmount" value="' . $Amount[0]. '" />';
+			echo '<input type="hidden" name="Days" value="' .$Days. '" />';
 		}
 
 /* Ricard: needs revision of this date initialization */
