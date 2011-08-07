@@ -393,8 +393,9 @@ if (($InvOrCredit == 'Invoice' or $InvOrCredit == 'Credit') and isset($PrintPDF)
 		/* if FromTransNo is not set then show a form to allow input of either a single invoice number or a range of invoices to be printed. Also get the last invoice number created to show the user where the current range is up to */
 		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post"><table class="selection">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-		echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/printer.png" title="' .
-			_('Print') . '" alt="" />' . ' ' . _('Print Invoices or Credit Notes (Landscape Mode)') . '</p>';
+		echo '<p class="page_title_text">
+				<img src="' . $rootpath . '/css/' . $theme . '/images/printer.png" title="' . _('Print') . '" alt="" />' .
+					' ' . _('Print Invoices or Credit Notes (Landscape Mode)') . '</p>';
 		echo '<tr><td>' . _('Print Invoices or Credit Notes') . '</td><td><select name="InvOrCredit">';
 		if ($InvOrCredit == 'Invoice' OR !isset($InvOrCredit)) {
 			echo '<option selected="True" value="Invoice">' . _('Invoices') . '</option>';
@@ -415,8 +416,8 @@ if (($InvOrCredit == 'Invoice' or $InvOrCredit == 'Credit') and isset($PrintPDF)
 		echo '</select></td></tr>';
 		echo '<tr><td>' . _('Start invoice/credit note number to print') . '</td><td><input type="text" class="number" maxlength="6" size="7" name="FromTransNo" /></td></tr>';
 		echo '<tr><td>' . _('End invoice/credit note number to print') . '</td><td><input type="text" class="number" maxlength="6" size="7" name="ToTransNo" /></td></tr></table>';
-		echo '<br /><div class="centre"><input type="submit" name="Print" value="' . _('Print') . '"><br />';
-		echo '<input type="submit" name="PrintPDF" value="' . _('Print PDF') . '"></div>';
+		echo '<br /><div class="centre"><input type="submit" name="Print" value="' . _('Print') . '" /><br />';
+		echo '<input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
 		$sql = "SELECT typeno FROM systypes WHERE typeid=10";
 		$result = DB_query($sql, $db);
 		$myrow = DB_fetch_row($result);
@@ -541,7 +542,7 @@ if (($InvOrCredit == 'Invoice' or $InvOrCredit == 'Credit') and isset($PrintPDF)
 				}
 				$ExchRate = $myrow['rate'];
 				$PageNumber = 1;
-				echo '<table class="table1"><tr><td valign="top" width="10%"><img src="' . $_SESSION['LogoFile'] . '"></td><td bgcolor="#BBBBBB"><b>';
+				echo '<table class="table1"><tr><td valign="top" width="10%"><img src="' . $_SESSION['LogoFile'] . '" /></td><td bgcolor="#BBBBBB"><b>';
 				if ($InvOrCredit == 'Invoice') {
 					echo '<font size="4">' . _('TAX INVOICE') . ' ';
 				} else {
@@ -706,7 +707,7 @@ if (($InvOrCredit == 'Invoice' or $InvOrCredit == 'Credit') and isset($PrintPDF)
 						if ($LineCounter == ($_SESSION['PageLength'] - 2)) {
 							/* head up a new invoice/credit note page */
 							$PageNumber++;
-							echo '</table><table class="table1"><tr><td valign="top"><img src="' . $_SESSION['LogoFile'] . '"></td><td bgcolor="#BBBBBB"><b>';
+							echo '</table><table class="table1"><tr><td valign="top"><img src="' . $_SESSION['LogoFile'] . '" /></td><td bgcolor="#BBBBBB"><b>';
 							if ($InvOrCredit == 'Invoice') {
 								echo '<font size="4">' . _('TAX INVOICE') . ' ';
 							} else {
@@ -747,7 +748,7 @@ if (($InvOrCredit == 'Invoice' or $InvOrCredit == 'Credit') and isset($PrintPDF)
 				if ($LineCounter >= ($_SESSION['PageLength'] - 8 - $LinesRequiredForText)) {
 					/* head up a new invoice/credit note page */
 					$PageNumber++;
-					echo '<table class="table1"><tr><td valign="top"><img src="' . $_SESSION['LogoFile'] . '"></td><td bgcolor="#BBBBBB"><b>';
+					echo '<table class="table1"><tr><td valign="top"><img src="' . $_SESSION['LogoFile'] . '" /></td><td bgcolor="#BBBBBB"><b>';
 					if ($InvOrCredit == 'Invoice') {
 						echo '<font size="4">' . _('TAX INVOICE') . ' ';
 					} else {
