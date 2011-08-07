@@ -510,13 +510,16 @@ if (! isset($_GET['delete'])) {
 			}
 
 			echo '</select></td>
-					<td><input type="text" name="PropDefault' . $PropertyCounter . '" value="' . $myrow['defaultvalue'] . '" /></td>
-					<td><input type="checkbox" name="PropNumeric' . $PropertyCounter . '"';
+					<td><input type="text" name="PropDefault' . $PropertyCounter . '" value="' . $myrow['defaultvalue'] . '" /></td>';
+
 
 			if ($myrow['numericvalue'] ==1){
-				echo 'checked="True"';
+				echo '<td><input type="checkbox" name="PropNumeric' . $PropertyCounter . '" checked="True" />';
+			} else {
+				echo '<td><input type="checkbox" name="PropNumeric' . $PropertyCounter . '" />';
 			}
-			echo ' /></td>
+
+			echo '</td>
 					<td><input type="text" "name="PropMinimum' . $PropertyCounter . '" value="' . $myrow['minimumvalue'] . '" /></td>
 						<td><input type="text" name="PropMaximum' . $PropertyCounter . '" value="' . $myrow['maximumvalue'] . '" /></td>';
 			echo '<td align="center"><input type="checkbox" name="PropReqSO' . $PropertyCounter .'"';
