@@ -5,8 +5,7 @@ include('includes/session.inc');
 $title = _('Maintenance Of Petty Cash Tabs');
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Payment Entry')
-	. '" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Payment Entry') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (isset($_POST['SelectedTab'])){
 	$SelectedTab = mb_strtoupper($_POST['SelectedTab']);
@@ -308,11 +307,11 @@ if (!isset($_GET['delete'])) {
 
 		// This is a new tab so the user may volunteer a tab code
 		if (isset($_POST['tabcode'])) {
-			echo '<table class="selection"><tr><td>' . _('Tabcode') . ':</td><td><input type="text" value="'.$_POST['tabcode'].'"
-				' . (in_array('TypeTabCode',$Errors) ? 'class="inputerror"' : '' ) .' name="tabcode"></td></tr>';
+			echo '<table class="selection"><tr><td>' . _('Tabcode') . ':</td>
+					<td><input type="text" value="'.$_POST['tabcode'].'"' . (in_array('TypeTabCode',$Errors) ? 'class="inputerror"' : '' ) .' name="tabcode" /></td></tr>';
 		} else {
-			echo '<table class="selection"><tr><td>' . _('Tabcode') . ':</td><td><input type="text"
-				' . (in_array('TypeTabCode',$Errors) ? 'class="inputerror"' : '' ) .' name="tabcode"></td></tr>';
+			echo '<table class="selection"><tr><td>' . _('Tabcode') . ':</td>
+					<td><input type="text" ' . (in_array('TypeTabCode',$Errors) ? 'class="inputerror"' : '' ) .' name="tabcode" /></td></tr>';
 		}
 	}
 
@@ -384,7 +383,7 @@ if (!isset($_GET['delete'])) {
 		$_POST['tablimit']=0;
 	}
 
-	echo '<tr><td>' . _('Limit Of Tab') . ':</td><td><input type="text" class="number" name="tablimit" size="12" maxlength="11" value="' . $_POST['tablimit'] . '"></td></tr>';
+	echo '<tr><td>' . _('Limit Of Tab') . ':</td><td><input type="text" class="number" name="tablimit" size="12" maxlength="11" value="' . $_POST['tablimit'] . '" /></td></tr>';
 
 	echo '<tr><td>' . _('Cash Assigner') . ':</td><td><select name="SelectAssigner">';
 
