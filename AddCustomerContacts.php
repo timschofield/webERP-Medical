@@ -22,11 +22,11 @@ $SQLname="SELECT name FROM debtorsmaster WHERE debtorno='".$DebtorNo."'";
 $Result = DB_query($SQLname,$db);
 $row = DB_fetch_array($Result);
 if (!isset($_GET['Id'])) {
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') .
-		'" alt="" />' . ' ' . _('Contacts for Customer: <b>') .$row['name'].'</p><br />';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' .
+			' ' . _('Contacts for Customer: <b>') .$row['name'].'</p><br />';
 } else {
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') .
-		'" alt="" />' . ' ' . _('Edit contact for <b>') .$row['name'].'</p><br />';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' .
+			' ' . _('Edit contact for <b>') .$row['name'].'</p><br />';
 }
 if ( isset($_POST['submit']) ) {
 
@@ -185,13 +185,13 @@ if (!isset($_GET['delete'])) {
     if (isset($_POST['conName'])) {
         echo '<td><input type="text" name="conName" value="' . $_POST['conName']. '" size="35" maxlength="40" /></td></tr>';
     } else {
-        echo '<td><input type="text" name="conName" size="35" maxlength="40"></td></tr>';
+        echo '<td><input type="text" name="conName" size="35" maxlength="40" /></td></tr>';
     }
 	echo '<tr><td>' . _('Role') . '</td>';
     if (isset($_POST['conRole'])) {
         echo '<td><input type="text" name="conRole" value="'. $_POST['conRole']. '" size="35" maxlength="40" /></td></tr>';
     } else {
-        echo '<td><input type="text" name="conRole" size="35" maxlength="40"></td></tr>';
+        echo '<td><input type="text" name="conRole" size="35" maxlength="40" /></td></tr>';
     }
 	echo '<tr><td>' . _('Phone') . '</td>';
     if (isset($_POST['conPhone'])) {
