@@ -150,7 +150,7 @@ if (!isset($_POST['GLCode'])) {
 echo '<tr>
 	<td>' . _('Account Code') . ':</td>
 	<td><input type="text" name="GLCode" size="12" maxlength="11" value="' .  $_POST['GLCode'] . '" /></td>
-	<input type="hidden" name="JobRef" value="">
+	<input type="hidden" name="JobRef" value="" />
 	</tr>';
 echo '<tr>
 	<td>' . _('Account Selection') . ':<br />(' . _('If you know the code enter it above') . '<br />' . _('otherwise select the account from the list') . ')</td>
@@ -176,7 +176,7 @@ if (!isset($_POST['Amount'])) {
 }
 echo '<tr>
 	<td>' . _('Amount') . ':</td>
-	<td><input type="text" class="number" name="Amount" size="12" maxlength="11" value="' .  $_POST['Amount'] . '"></td>
+	<td><input type="text" class="number" name="Amount" size="12" maxlength="11" value="' .  $_POST['Amount'] . '" /></td>
 	</tr>';
 
 if (!isset($_POST['Narrative'])) {

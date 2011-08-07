@@ -286,7 +286,7 @@ if (isset($SelectedGroup)) {
 			}
 
 			echo '<td>' . $TaxAuthRow[$i]['taxname'] . '</td><td>'.
-				'<input type="text" class="number" name="CalcOrder_' . $TaxAuthRow[$i]['taxauthid'] . '" value="' . $TaxAuthRow[$i]['calculationorder'] . '" size="2" maxlength="2" style="width: 100%"></td>';
+				'<input type="text" class="number" name="CalcOrder_' . $TaxAuthRow[$i]['taxauthid'] . '" value="' . $TaxAuthRow[$i]['calculationorder'] . '" size="2" maxlength="2" style="width: 100%" /></td>';
 			echo '<td><select name="TaxOnTax_' . $TaxAuthRow[$i]['taxauthid'] . '" style="width: 100%">';
 			if ($TaxAuthRow[$i]['taxontax']==1){
 				echo '<option selected="True" value="1">' . _('Yes') . '</option>';
