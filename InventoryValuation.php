@@ -196,8 +196,7 @@ if (isset($_POST['PrintPDF'])
 	if (empty($_POST['FromCriteria']) or empty($_POST['ToCriteria'])) {
 
 	/*if $FromCriteria is not set then show a form to allow input	*/
-		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' .
-			_('Inventory') . '" alt="" />' . ' ' . $title . '</p>';
+		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') . '" alt="" />' . ' ' . $title . '</p>';
 
 		echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="POST"><table class="selection">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
