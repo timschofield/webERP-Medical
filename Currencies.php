@@ -228,7 +228,7 @@ or deletion of the records*/
 		}
 
 		if ($myrow[1]!=$FunctionalCurrency){
-			printf('<td><img src=\'%s\'></td>
+			printf('<td><img src="%s" /></td>
 					<td>%s</td>
 					<td>%s</td>
 					<td>%s</td>
@@ -257,7 +257,7 @@ or deletion of the records*/
 					$rootpath,
 					'CurrencyToShow=' . $myrow['currabrev']);
 		} else {
-			printf('<td><img src="%s"></td>
+			printf('<td><img src="%s" /></td>
 					<td>%s</td>
 					<td>%s</td>
 					<td>%s</td>
@@ -318,8 +318,8 @@ if (!isset($_GET['delete'])) {
 
 
 
-		echo '<input type="hidden" name="SelectedCurrency" value="' . $SelectedCurrency . '">';
-		echo '<input type="hidden" name="Abbreviation" value="' . $_POST['Abbreviation'] . '">';
+		echo '<input type="hidden" name="SelectedCurrency" value="' . $SelectedCurrency . '" />';
+		echo '<input type="hidden" name="Abbreviation" value="' . $_POST['Abbreviation'] . '" />';
 		echo '<table class="selection"><tr>
 			<td>' . _('ISO 4217 Currency Code').':</td>
 			<td>';
@@ -358,7 +358,7 @@ if (!isset($_GET['delete'])) {
 	echo '</td></tr>';
 	echo '</table>';
 
-	echo '<br /><div class="centre"><input type="submit" name="submit" value='._('Enter Information').'></div>';
+	echo '<br /><div class="centre"><input type="submit" name="submit" value="'._('Enter Information').'" /></div>';
 
 	echo '</form>';
 
