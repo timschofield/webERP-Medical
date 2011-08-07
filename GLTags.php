@@ -28,8 +28,7 @@ if (isset($_POST['update'])) {
 		"' WHERE tagref='".$_POST['reference']."'";
 	$result= DB_query($sql,$db);
 }
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' .
-		_('Print') . '" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Print') . '" alt="" />' . ' ' . $title . '</p>';
 
 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '" name="form">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
