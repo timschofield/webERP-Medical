@@ -4,8 +4,7 @@ include ('includes/session.inc');
 $title = _('Bank Transactions Inquiry');
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' .
-	 _('Search') . '" alt="" />' . ' ' . $title.'</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>';
 
 if (!isset($_POST['Show'])) {
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
@@ -46,43 +45,40 @@ if (!isset($_POST['Show'])) {
 		echo '</select></td></tr>';
 	}
 	echo '<tr><td>' . _('Transactions Dated From') . ':</td>
-		<td><input type="text" name="FromTransDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" maxlength="10" size="11" onChange="isDate(this, this.value, '."'".$_SESSION['DefaultDateFormat']."'".')" value="' .
-				date($_SESSION['DefaultDateFormat']) . '" /></td></tr>
+		<td><input type="text" name="FromTransDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" maxlength="10" size="11" onChange="isDate(this, this.value, '."'".$_SESSION['DefaultDateFormat']."'".')" value="' . date($_SESSION['DefaultDateFormat']) . '" /></td></tr>
 		<tr><td>' . _('Transactions Dated To') . ':</td>
-		<td><input type="text" name="ToTransDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" maxlength="10" size="11"
-			onChange="isDate(this, this.value, '."'".$_SESSION['DefaultDateFormat']."'".')" value="' .
-				date($_SESSION['DefaultDateFormat']) . '" /></td>
+		<td><input type="text" name="ToTransDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" maxlength="10" size="11" onChange="isDate(this, this.value, '."'".$_SESSION['DefaultDateFormat']."'".')" value="' . date($_SESSION['DefaultDateFormat']) . '" /></td>
 		</tr>';
 
 	echo '</table>';
-	echo '<br /><div class="centre"><input type="submit" name="Show" value="' . _('Show transactions'). '"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="Show" value="' . _('Show transactions'). '" /></div>';
 	echo '</form>';
 } else {
 	$SQL = "SELECT 	bankaccountname,
-									bankaccounts.currcode
-							FROM bankaccounts
-							WHERE bankaccounts.accountcode='" . $_POST['BankAccount'] . "'";
+					bankaccounts.currcode
+				FROM bankaccounts
+				WHERE bankaccounts.accountcode='" . $_POST['BankAccount'] . "'";
 	$BankResult = DB_query($SQL,$db,_('Could not retrieve the bank account details'));
 
 
-	$sql="SELECT 	banktrans.currcode,
-								banktrans.amount,
-								banktrans.functionalexrate,
-								banktrans.exrate,
-								banktrans.banktranstype,
-								banktrans.transdate,
-								bankaccounts.bankaccountname,
-								systypes.typename,
-								systypes.typeid
-							FROM banktrans
-							INNER JOIN bankaccounts
-							ON banktrans.bankact=bankaccounts.accountcode
-							INNER JOIN systypes
-							ON banktrans.type=systypes.typeid
-							WHERE bankact='".$_POST['BankAccount']."'
-								AND transdate>='" . FormatDateForSQL($_POST['FromTransDate']) . "'
-								AND transdate<='" . FormatDateForSQL($_POST['ToTransDate']) . "'
-							ORDER BY banktrans.transdate";
+	$sql="SELECT banktrans.currcode,
+				banktrans.amount,
+				banktrans.functionalexrate,
+				banktrans.exrate,
+				banktrans.banktranstype,
+				banktrans.transdate,
+				bankaccounts.bankaccountname,
+				systypes.typename,
+				systypes.typeid
+			FROM banktrans
+			INNER JOIN bankaccounts
+				ON banktrans.bankact=bankaccounts.accountcode
+			INNER JOIN systypes
+				ON banktrans.type=systypes.typeid
+			WHERE bankact='".$_POST['BankAccount']."'
+				AND transdate>='" . FormatDateForSQL($_POST['FromTransDate']) . "'
+				AND transdate<='" . FormatDateForSQL($_POST['ToTransDate']) . "'
+			ORDER BY banktrans.transdate";
 	$result = DB_query($sql, $db);
 	if (DB_num_rows($result)==0) {
 		prnMsg(_('There are no transactions for this account in the date range selected'), 'info');
@@ -127,7 +123,7 @@ if (!isset($_POST['Show'])) {
 
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<br /><div class="centre"><input type="submit" name="Return" value="' . _('Select Another Date'). '"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="Return" value="' . _('Select Another Date'). '" /></div>';
 	echo '</form>';
 }
 include('includes/footer.inc');
