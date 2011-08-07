@@ -239,16 +239,10 @@ if (DB_num_rows($result) == 0) {
 		}
 
 		if (function_exists('imagecreatefrompng')){
-			$CatImgLink = '<img src="GetStockImage.php?automake=1&textcolor=FFFFFF&bgcolor=CCCCCC'.
-				'&stockid='.urlencode('cat_'.$myrow['salescatid'].'.jpg').
-				'&text='.
-				'&width=32'.
-				'&height=32'.
-				'" >';
+			$CatImgLink = '<img src="GetStockImage.php?automake=1&textcolor=FFFFFF&bgcolor=CCCCCC&stockid='.urlencode('cat_'.$myrow['salescatid'].'.jpg').'&text=&width=32&height=32" />';
 		} else {
 			if( file_exists($_SESSION['part_pics_dir'] . '/' .'cat_'.$myrow['salescatid'].'.jpg') ) {
-				$CatImgLink = '<img src="'.$rootpath . '/' . $_SESSION['part_pics_dir'] . '/' .
-					'cat_'.$myrow['salescatid'].'.jpg" >';
+				$CatImgLink = '<img src="'.$rootpath . '/' . $_SESSION['part_pics_dir'] . '/' . 'cat_'.$myrow['salescatid'].'.jpg" />';
 			} else {
 				$CatImgLink = 'No Image';
 			}
@@ -306,9 +300,8 @@ if (isset($SelectedCategory)) {
 	$_POST['ParentCategory']  = $myrow['parentcatid'];
 	$_POST['SalesCatName']  = $myrow['salescatname'];
 
-	echo '<input type="hidden" name="SelectedCategory" value="' . $SelectedCategory . '">';
-	echo '<input type="hidden" name="ParentCategory" value="' .
-		(isset($_POST['ParentCatId'])?($_POST['ParentCategory']):('0')) . '">';
+	echo '<input type="hidden" name="SelectedCategory" value="' . $SelectedCategory . '" />';
+	echo '<input type="hidden" name="ParentCategory" value="' . (isset($_POST['ParentCatId'])?($_POST['ParentCategory']):('0')) . '" />';
 	$FormCaps = _('Edit Sub Category');
 
 } else { //end of if $SelectedCategory only do the else when a new record is being entered
@@ -316,23 +309,22 @@ if (isset($SelectedCategory)) {
 	if (isset($ParentCategory)) {
 		$_POST['ParentCategory']  = $ParentCategory;
 	}
-	echo '<input type="hidden" name="ParentCategory" value="' .
-		(isset($_POST['ParentCategory'])?($_POST['ParentCategory']):('0')) . '">';
+	echo '<input type="hidden" name="ParentCategory" value="' . (isset($_POST['ParentCategory'])?($_POST['ParentCategory']):('0')) . '" />';
 	$FormCaps = _('New Sub Category');
 }
-echo '<input type="hidden" name="EditName" value="1">';
+echo '<input type="hidden" name="EditName" value="1" />';
 echo '<table class="selection">';
 echo '<tr><th colspan="2">' . $FormCaps . '</th></tr>';
 echo '<tr><td>' . _('Category Name') . ':</td>
-            <td><input type="text" name="SalesCatName" size="20" maxlength="20" value="' . $_POST['SalesCatName'] . '"></td></tr>';
+            <td><input type="text" name="SalesCatName" size="20" maxlength="20" value="' . $_POST['SalesCatName'] . '" /></td></tr>';
 // Image upload only if we have a selected category
 if (isset($SelectedCategory)) {
 	echo '<tr><td>'. _('Image File (.jpg)') . ':</td>
-		<td><input type="file" id="ItemPicture" name="ItemPicture"></td></tr>';
+		<td><input type="file" id="ItemPicture" name="ItemPicture" /></td></tr>';
 }
 
 echo '</table>';
-echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Submit Information') . '"></div>';
+echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Submit Information') . '" /></div>';
 
 echo '</form></p>';
 
@@ -378,8 +370,7 @@ if (isset($ParentCategory) and $ParentCategory!='NULL') {
 		if( isset($SelectedCategory) ) { // If we selected a category we need to keep it selected
 			echo '<input type="hidden" name="SelectedCategory" value="' . $SelectedCategory . '" />';
 		}
-		echo '<input type="hidden" name="ParentCategory" value="' .
-			(isset($_POST['ParentCategory'])?($_POST['ParentCategory']):('0')) . '" />';
+		echo '<input type="hidden" name="ParentCategory" value="' . (isset($_POST['ParentCategory'])?($_POST['ParentCategory']):('0')) . '" />';
 
 		echo '';
 		echo '<table class="selection">';
@@ -396,7 +387,7 @@ if (isset($ParentCategory) and $ParentCategory!='NULL') {
 		}
 		echo '</select>';
 		echo '</td></tr></table>';
-		echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Add Inventory Item') . '"></div>';
+		echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Add Inventory Item') . '" /></div>';
 		echo '';
 		echo '</form></p>';
 	} else {
