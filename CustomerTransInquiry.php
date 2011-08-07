@@ -7,8 +7,8 @@ include('includes/session.inc');
 $title = _('Customer Transactions Inquiry');
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' .
-	_('Transaction Inquiry') . '" alt="" />' . ' ' . _('Transaction Inquiry') . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('Transaction Inquiry') . '" alt="" />' .
+		' ' . _('Transaction Inquiry') . '</p>';
 echo '<div class="page_help_text">' . _('Choose which type of transaction to report on.') . '</div><br />';
 
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
@@ -121,7 +121,7 @@ if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
 		if ($_POST['TransType']==10){ /* invoices */
 
 			printf($format_base.'
-				<td><a target="_blank" href="%s/PrintCustTrans.php?FromTransNo=%s&InvOrCredit=Invoice"><img src="%s" title="' . _('Click to preview the invoice') . '"></a></td>
+				<td><a target="_blank" href="%s/PrintCustTrans.php?FromTransNo=%s&InvOrCredit=Invoice"><img src="%s" title="' . _('Click to preview the invoice') . '" /></a></td>
 				</tr>',
 				$myrow['typename'],
 				$myrow['transno'],
@@ -139,7 +139,7 @@ if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
 				$rootpath.'/css/'.$theme.'/images/preview.gif');
 		} elseif ($_POST['TransType']==11){ /* credit notes */
 			printf($format_base.'
-				<td><a target="_blank" href="%s/PrintCustTrans.php?FromTransNo=%s&InvOrCredit=Credit"><img src="%s" title="' . _('Click to preview the credit') . '"></a></td>
+				<td><a target="_blank" href="%s/PrintCustTrans.php?FromTransNo=%s&InvOrCredit=Credit"><img src="%s" title="' . _('Click to preview the credit') . '" /></a></td>
 				</tr>',
 				$myrow['typename'],
 				$myrow['transno'],
