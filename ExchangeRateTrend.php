@@ -23,8 +23,7 @@ if ( isset($_GET['CurrencyToShow']) ){
 
 	echo '<form method="post" name=update action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<div class="centre"><p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' .
-		_('View Currency Trend') . '" alt="" />' . ' ' . _('View Currency Trend') . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('View Currency Trend') . '" alt="" />' . ' ' . _('View Currency Trend') . '</p>';
 	echo '<table>'; // First column
 
 	$SQL = "SELECT * FROM currencies";
@@ -64,7 +63,7 @@ if ( isset($_GET['CurrencyToShow']) ){
 
 	echo '<br /></div><table class="selection">';
 	echo '<tr><th><div class="centre"><font size="4" color="blue"><b><U>' . $FunctionalCurrency . ' / ' . $CurrencyToShow . '</b></U></font></th></tr>';
-	echo '<tr><td><img src=' . $image . ' alt="Trend Currently Unavailable"></td></tr>';
+	echo '<tr><td><img src=' . $image . ' alt="Trend Currently Unavailable" /></td></tr>';
 	echo '</table>';
 
 
