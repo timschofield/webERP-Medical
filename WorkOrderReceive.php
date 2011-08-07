@@ -813,11 +813,12 @@ if($WORow['controlled']==1){ //controlled
 				if (($i/5 -intval($i/5))==0){
 					echo '</tr><tr>';
 				}
-				echo '<td><input type="text" name="SerialNo' . $i . '" ';
+
 				if ($i==0){
-					echo 'value="' . $StringBitOfLotSNRef . ($LotSNRefNumeric + 1) . '"';
+					echo '<td><input type="text" name="SerialNo' . $i . '" value="' . $StringBitOfLotSNRef . ($LotSNRefNumeric + 1) . '" /></td>';
+				} else {
+					echo '<td><input type="text" name="SerialNo' . $i . '" value="" /></td>';
 				}
-				echo '"></td>';
 
 			}
 		}
@@ -864,7 +865,7 @@ if($WORow['controlled']==1){ //controlled
 	} //end of lot/batch control
 } else { //not controlled - an easy one!
 
-	echo '<input type="hidden" name="CountOfInputs" value=1>';
+	echo '<input type="hidden" name="CountOfInputs" value="1" />';
 	echo '<tr><td>' . _('Quantity Received') . ':</td>
 			  <td><input type="text" class="number" name="Qty" /></tr></table>';
 	echo '<br /><div class="centre"><input type="submit" name="Process" value="' . _('Process Manufactured Items Received') . '" /></div>';
