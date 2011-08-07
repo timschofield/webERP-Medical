@@ -16,8 +16,7 @@ if (isset($_POST['TransferNo'])) {
 if (!isset($_GET['TransferNo'])){
 
 	include ('includes/header.inc');
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') .
-		'" alt="" />' . ' ' . _('Reprint transfer docket').'</p><br />';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Reprint transfer docket').'</p><br />';
 	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '?">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table><tr><td>'._('Transfer docket to reprint').'</td>';
