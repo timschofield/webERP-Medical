@@ -165,16 +165,16 @@ if ((! isset($_POST['FromPeriod']) OR ! isset($_POST['ToPeriod']))
 		$_POST['ValueTo']='';
 	}
 	echo '<tr><td>' . _('Graph On:') . '</td><td>
-			<input type="RADIO" name="GraphOn" value="All" CHECKED>' . _('All') . '<br />
-			<input type="RADIO" name="GraphOn" value="Customer">' . _('Customer') . '<br />
-			<input type="RADIO" name="GraphOn" value="StockID">' . _('Item Code') . '</td></tr>';
-	echo '<tr><td>' . _('From:') . ' <input type="text" name="ValueFrom" value=' . $_POST['ValueFrom'] . '></td>
-	 		<td>' . _('To:') . ' <input type="text" name="ValueTo" value=' . $_POST['ValueTo'] . '></td></tr>';
+			<input type="radio" name="GraphOn" value="All" checked="True" />' . _('All') . '<br />
+			<input type="radio" name="GraphOn" value="Customer" />' . _('Customer') . '<br />
+			<input type="radio" name="GraphOn" value="StockID" />' . _('Item Code') . '</td></tr>';
+	echo '<tr><td>' . _('From:') . ' <input type="text" name="ValueFrom" value="' . $_POST['ValueFrom'] . '" /></td>
+	 		<td>' . _('To:') . ' <input type="text" name="ValueTo" value="' . $_POST['ValueTo'] . '" /></td></tr>';
 
 	echo '<tr><td>' . _('Graph Value:') . '</td><td>
-			<input type="RADIO" name="GraphValue" value="Net" CHECKED>' . _('Net Sales Value') . '<br />
-			<input type="RADIO" name="GraphValue" value="GP">' . _('Gross Profit') . '<br />
-			<input type="RADIO" name="GraphValue" value="Quantity">' . _('Quantity') . '</td></tr>';
+			<input type="radio" name="GraphValue" value="Net" checked="True" />' . _('Net Sales Value') . '<br />
+			<input type="radio" name="GraphValue" value="GP" />' . _('Gross Profit') . '<br />
+			<input type="radio" name="GraphValue" value="Quantity" />' . _('Quantity') . '</td></tr>';
 
 	echo '</table>';
 
@@ -298,7 +298,7 @@ if ((! isset($_POST['FromPeriod']) OR ! isset($_POST['ToPeriod']))
 	//Draw it
 	$graph->DrawGraph();
 	echo '<table class="selection"><tr><td>';
-	echo '<p><img src="companies/' .$_SESSION['DatabaseName'] .  '/reports/salesgraph.png" alt="Sales Report Graph"></img></p>';
+	echo '<p><img src="companies/' .$_SESSION['DatabaseName'] .  '/reports/salesgraph.png" alt="Sales Report Graph" /></p>';
 	echo '</td></tr></table>';
 	include('includes/footer.inc');
 }
