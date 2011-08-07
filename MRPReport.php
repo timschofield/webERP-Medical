@@ -511,8 +511,8 @@ if (isset($_POST['PrintPDF']) AND $_POST['Part']!='') {
 
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') .
-		'" alt="" />' . ' ' . _('Search for Inventory Items').'</p>';
+	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' .
+			' ' . _('Search for Inventory Items').'</p>';
 	echo '<table class="selection"><tr>';
 	echo '<td>' . _('In Stock Category') . ':';
 	echo '<select name="StockCat">';
@@ -547,7 +547,7 @@ if (isset($_POST['PrintPDF']) AND $_POST['Part']!='') {
 		echo '<input type="text" name="StockCode" size="15" maxlength="18" />';
 	}
 	echo '</td></tr></table><br />';
-	echo '<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '"></div><br /></form>';
+	echo '<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" /></div><br /></form>';
 	echo '<script  type="text/javascript">defaultControl(document.forms[0].StockCode);</script>';
 	echo '</form>';
 	if (!isset($_POST['Search'])) {
@@ -730,7 +730,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 			echo '<input type="hidden" name="Keywords" value="'.$_POST['Keywords'].'" />';
 			echo '<input type="hidden" name="StockCat" value="'.$_POST['StockCat'].'" />';
 			echo '<input type="hidden" name="StockCode" value="'.$_POST['StockCode'].'" />';
-//			echo '<input type="hidden" name=Search value="Search">';
+//			echo '<input type="hidden" name=Search value="Search" />';
 			echo '<br /></div>';
 		}
 		echo '<table cellpadding="2" colspan="7">';
