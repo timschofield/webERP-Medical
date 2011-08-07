@@ -9,8 +9,7 @@ include('includes/SQL_CommonFunctions.inc');
 
 echo '<a href="' . $rootpath . '/SelectAsset.php">' . _('Back to Select') . '</a><br />' . "\n";
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' .
-		_('Fixed Asset Items') . '" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Fixed Asset Items') . '" alt="" />' . ' ' . $title . '</p>';
 
 
 /* If this form is called with the AssetID then it is assumed that the asset is to be modified  */
@@ -404,7 +403,7 @@ if (!isset($AssetID) or $AssetID=='') {
 /*If the page was called without $AssetID passed to page then assume a new asset is to be entered other wise the form showing the fields with the existing entries against the asset will show for editing with a hidden AssetID field. New is set to flag that the page may have called itself and still be entering a new asset, in which case the page needs to know not to go looking up details for an existing asset*/
 
 	$New = 0;
-	echo '<input type="hidden" name="New" value="">'. "\n";
+	echo '<input type="hidden" name="New" value="" />'. "\n";
 
 	$_POST['LongDescription'] = '';
 	$_POST['Description'] = '';
@@ -445,11 +444,11 @@ if (!isset($AssetID) or $AssetID=='') {
 	$_POST['DepnRate']  = $AssetRow['depnrate'];
 
 	echo '<tr><td>' . _('Asset Code') . ':</td><td>'.$AssetID.'</td></tr>'. "\n";
-	echo '<input type="hidden" name="AssetID" value='.$AssetID.'>'. "\n";
+	echo '<input type="hidden" name="AssetID" value="'.$AssetID.'" />'. "\n";
 
 } else { // some changes were made to the data so don't re-set form variables to DB ie the code above
 	echo '<tr><td>' . _('Asset Code') . ':</td><td>' . $AssetID . '</td></tr>';
-	echo '<input type="hidden" name="AssetID" value="' . $AssetID . '">';
+	echo '<input type="hidden" name="AssetID" value="' . $AssetID . '" />';
 }
 
 if (isset($_POST['Description'])) {
@@ -469,18 +468,13 @@ echo '<tr><td>' . _('Asset Description') . ' (' . _('long') . '):</td><td><texta
 
 if (!isset($New) ) { //ie not new at all!
 
-	echo '<tr><td>'. _('Image File (.jpg)') . ':</td><td><input type="file" id="ItemPicture" name="ItemPicture"></td>';
+	echo '<tr><td>'. _('Image File (.jpg)') . ':</td><td><input type="file" id="ItemPicture" name="ItemPicture" /></td>';
 
 	if (function_exists('imagecreatefromjpg')){
-		$StockImgLink = '<img src="GetStockImage.php?automake=1&textcolor=FFFFFF&bgcolor=CCCCCC'.
-			'&AssetID='.urlencode($AssetID).
-			'&text='.
-			'&width=64'.
-			'&height=64'.
-			'" >';
+		$StockImgLink = '<img src="GetStockImage.php?automake=1&textcolor=FFFFFF&bgcolor=CCCCCC&AssetID='.urlencode($AssetID).'&text=&width=64&height=64" />';
 	} else {
 		if( isset($AssetID) and file_exists($_SESSION['part_pics_dir'] . '/ASSET_' .$AssetID.'.jpg') ) {
-			$AssetImgLink = '<img src="' . $_SESSION['part_pics_dir'] . '/ASSET_' .$AssetID.'.jpg" >';
+			$AssetImgLink = '<img src="' . $_SESSION['part_pics_dir'] . '/ASSET_' .$AssetID.'.jpg" />';
 		} else {
 			$AssetImgLink = _('No Image');
 		}
@@ -588,13 +582,13 @@ echo '<tr><td>' . _('Depreciation last run') . ':</td><td>' . $LastRunDate . '</
 			</table>';
 
 if ($New==0) {
-	echo '<div class="centre"><br /><input type="submit" name="submit" value="' . _('Insert New Fixed Asset') . '">';
+	echo '<div class="centre"><br /><input type="submit" name="submit" value="' . _('Insert New Fixed Asset') . '" />';
 
 } else {
 
-	echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Update') . '"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Update') . '" /></div>';
 	prnMsg( _('Only click the Delete button if you are sure you wish to delete the asset. Only assets with a zero book value can be deleted'), 'warn', _('WARNING'));
-	echo '<br /><div class="centre"><input type="submit" name="delete" value="' . _('Delete This Asset') . '" onclick="return confirm(\'' . _('Are You Sure? Only assets with a zero book value can be deleted.') . '\');"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="delete" value="' . _('Delete This Asset') . '" onclick="return confirm(\'' . _('Are You Sure? Only assets with a zero book value can be deleted.') . '\');" /></div>';
 }
 
 echo '</form></div>';
