@@ -22,7 +22,7 @@ if (!isset($_POST['StockID'])) {
 	 ' <b>' . _('description') . '</b>:</font></td><td><input tabindex="1" type="text" name="Keywords" size="20" maxlength="25" /></td>
 	 <td><font size="3"><b>' . _('OR') . '</b></font></td><td><font size="1">' . _('Enter extract of the') .
      ' <b>' . _('Stock Code') . '</b>:</font></td><td><input tabindex="2" type="text" name="StockCode" size="15" maxlength="20" /></td>
-	 </tr></table><br /><div class="centre"><input tabindex="3" type="submit" name="Search" value="' . _('Search Now') . '"></div><br />';
+	 </tr></table><br /><div class="centre"><input tabindex="3" type="submit" name="Search" value="' . _('Search Now') . '" /></div><br />';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 }
 
@@ -160,8 +160,7 @@ if (isset($StockID) and $StockID!=""){
 		prnMsg(_('The bill of material for this part is not set up') . ' - ' . _('there are no components defined for it'),'warn');
 	} else {
 		echo '<a href="'.$rootpath.'/index.php">'._('Return to Main Menu').'</a>';
-		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' .
-			_('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
+		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
 
 		echo '<table class="selection" cellpadding="2">';
 		echo '<tr><th colspan="5"><div class="centre"><font size="4"><b>' . $myrow[0] . ' : ' . _('per') . ' ' . $myrow[1] .
