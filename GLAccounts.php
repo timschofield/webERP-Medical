@@ -13,8 +13,7 @@ if (isset($_POST['SelectedAccount'])){
 	$SelectedAccount = $_GET['SelectedAccount'];
 }
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' .
-		_('General Ledger Accounts') . '" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('General Ledger Accounts') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (isset($_POST['submit'])) {
 
@@ -237,7 +236,7 @@ if (!isset($_GET['delete'])) {
 		$_POST['AccountName']	= $myrow['accountname'];
 		$_POST['Group'] = $myrow['group_'];
 
-		echo '<input type="hidden" name="SelectedAccount" value="' . $SelectedAccount . '" >';
+		echo '<input type="hidden" name="SelectedAccount" value="' . $SelectedAccount . '" />';
 		echo '<input type="hidden" name="AccountCode" value="' . $_POST['AccountCode'] .'" />';
 		echo '<table class="selection">
 				<tr><td>' . _('Account Code') . ':</td>
