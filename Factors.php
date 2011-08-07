@@ -20,8 +20,7 @@ if (isset($_POST['Create'])) {
 	$_POST['New'] = "Yes";
 };
 
-echo '<div class="centre"><p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="'
-	. _('Factor Companies') . '" alt="" />' . ' ' .$title . '</p></div>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Factor Companies') . '" alt="" />' . ' ' .$title . '</p>';
 
 /* This section has been reached because the user has pressed either the insert/update buttons on the
  form hopefully with input in the correct fields, which we check for firsrt. */
@@ -154,7 +153,7 @@ if (empty($FactorID)) {
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-	echo '<input type="hidden" name="New" value="No">';
+	echo '<input type="hidden" name="New" value="No" />';
 	echo '<table class="selection"><tr>';
 	echo '<th>' . _('ID') . '</th>';
 	echo '<th>' . _('Company Name').'</th>';
@@ -206,7 +205,7 @@ if (empty($FactorID)) {
 		echo '<td><a href="'.$rootpath . '/Factors.php?FactorID='.$myrow['id'].'">'._('Edit').'</a></td></tr>';
 	}
 	echo '</table><br /><div class="centre">';
-	echo '<br /><input tabindex=3 type="submit" name="Create" value="' . _('Create New Factor') . '">';
+	echo '<br /><input tabindex=3 type="submit" name="Create" value="' . _('Create New Factor') . '" />';
 	echo '</div></form>';
 	include('includes/footer.inc');
 	exit;
@@ -264,7 +263,7 @@ if (isset($_POST['amend']) or isset($_POST['Create'])) {
 
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<input type="hidden" name="FactorID" value="'.$FactorID.'">';
+	echo '<input type="hidden" name="FactorID" value="'.$FactorID.'" />';
 	echo '<table class="selection">';
 	echo '<input type="hidden" name="New" value="Yes" />';
 	echo '<tr><td>' . _('Factor company Name') . ':</td><td><input tabindex="1" type="text" name="FactorName" size="42" maxlength="40" value="'.$_POST['FactorName'].'" /></td></tr>';
@@ -287,8 +286,7 @@ if (isset($_POST['Create'])) {
 } else if (isset($_POST['amend'])) {
 	echo '</table><p><div class="centre"><input tabindex="13" type="submit" name="update" value="' . _('Update Factor') . '" /></p>';
 	prnMsg ( _('There is no second warning if you hit the delete button below') . '. ' . _('However checks will be made to ensure there are no suppliers are using this factor before the deletion is processed'), 'warn');
-	echo '<br /><input tabindex="14" type="submit" name="delete" value="' . _('Delete Factor') .
-		'" onclick="return confirm(' . _('Are you sure you wish to delete this factoring company?') . '");" /></form></div>';
+	echo '<br /><input tabindex="14" type="submit" name="delete" value="' . _('Delete Factor') . '" onclick="return confirm(' . _('Are you sure you wish to delete this factoring company?') . '");" /></form></div>';
 }
 
 
