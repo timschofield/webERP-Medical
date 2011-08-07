@@ -222,11 +222,11 @@ if (isset($_POST['UpdateItems'])){
 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '" name="form">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<input type="hidden" name="StockID" value="' . $StockID . '">';
-echo '<input type="hidden" name="Description" value="' . $Description . '">';
-echo '<input type="hidden" name="WO" value="' . $WO . '">';
-echo '<input type="hidden" name="Serialised" value="' . $Serialised . '">';
-echo '<input type="hidden" name="NextSerialNo" value="' . $NextSerialNo . '">';
+echo '<input type="hidden" name="StockID" value="' . $StockID . '" />';
+echo '<input type="hidden" name="Description" value="' . $Description . '" />';
+echo '<input type="hidden" name="WO" value="' . $WO . '" />';
+echo '<input type="hidden" name="Serialised" value="' . $Serialised . '" />';
+echo '<input type="hidden" name="NextSerialNo" value="' . $NextSerialNo . '" />';
 
 echo '<table class="selection">';
 
@@ -246,11 +246,11 @@ if ($Serialised==1 AND $NextSerialNo>0){
 				<tr><td>';
 		echo _('Add a single batch/lot number');
 	}
-	echo '<td><input type="text" name="Reference" maxlength="30" size="30"></td>';
+	echo '<td><input type="text" name="Reference" maxlength="30" size="30" /></td>';
 	if ($Serialised==0){ //also need to add the quantity
 		echo '<td><input type="text" name="Quantity" size="10" class="number" maxlength="10" value="1" /></td>';
 	} else { //it will be 1 for a serial item
-		echo '<input type="hidden" name="Quantity" value=1>';
+		echo '<input type="hidden" name="Quantity" value="1" />';
 	}
 }
 
@@ -286,13 +286,13 @@ if (DB_num_rows($WOSerialNoResult)==0){
 			$j=0;
 		}
 
-		echo '<tr><td><input type="text" name="Reference' . $i .'" value="' . $WOSNRow['serialno'] . '"></td>';
-		echo '<input type="hidden" name="OldReference' . $i . '" value="' . $WOSNRow['serialno'] . '">';
+		echo '<tr><td><input type="text" name="Reference' . $i .'" value="' . $WOSNRow['serialno'] . '" /></td>';
+		echo '<input type="hidden" name="OldReference' . $i . '" value="' . $WOSNRow['serialno'] . '" />';
 		if ($Serialised==0){
 			echo '<td><input type="text" name="Quantity' . $i .'" value="' . $WOSNRow['quantity'] . '" /></td>';
-			echo '<input type="hidden" name="OldQuantity' . $i . '" value="' . $WOSNRow['quantity'] . '">';
+			echo '<input type="hidden" name="OldQuantity' . $i . '" value="' . $WOSNRow['quantity'] . '" />';
 		} else {
-			echo '<input type="hidden" name="Quantity' . $i . '" value="1">';
+			echo '<input type="hidden" name="Quantity' . $i . '" value="1" />';
 		}
 		echo '<td><textarea name="Notes' . $i .'" cols="60" rows="3">' . $WOSNRow['qualitytext'] .'</textarea></td>';
 		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=1&Reference=' . $WOSNRow['serialno'] . '&Quantity=' . $WOSNRow['quantity'] . '&WO=' . $WO . '&StockID=' . $StockID . '&Description=' . $Description . '&Serialised=' . $Serialised . '&NextSerialNo=' . $NextSerialNo . '">' . _('Delete') . '</td></tr>';
@@ -300,14 +300,14 @@ if (DB_num_rows($WOSerialNoResult)==0){
 		$j++;
 	}
 
-	echo '<input type="hidden" name="CountOfItems" value=' . $i . '>';
+	echo '<input type="hidden" name="CountOfItems" value="' . $i . '" />';
 
 	if ($Serialised==0){
 		echo '<tr><td align="center" colspan="3">';
 	} else {
 		echo '<tr><td style="text-align: center" colspan="2">';
 	}
-	echo '<input type="submit" name="UpdateItems" value="' . _('Update') . '"></td></tr>';
+	echo '<input type="submit" name="UpdateItems" value="' . _('Update') . '" /></td></tr>';
 	echo '</table>';
 
 } //end of if there are woserialno items defined
