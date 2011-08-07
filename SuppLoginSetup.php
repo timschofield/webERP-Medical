@@ -309,9 +309,9 @@ if (isset($SelectedUser)) {
 		exit;
 	}
 
-	echo '<input type="hidden" name="SelectedUser" value="' . $SelectedUser . '">';
-	echo '<input type="hidden" name="UserID" value="' . $_POST['UserID'] . '">';
-	echo '<input type="hidden" name="ModulesAllowed" value="' . $_POST['ModulesAllowed'] . '">';
+	echo '<input type="hidden" name="SelectedUser" value="' . $SelectedUser . '" />';
+	echo '<input type="hidden" name="UserID" value="' . $_POST['UserID'] . '" />';
+	echo '<input type="hidden" name="ModulesAllowed" value="' . $_POST['ModulesAllowed'] . '" />';
 
 	echo '<table class="selection"> <tr><td>' . _('User code') . ':</td><td>';
 	echo $_POST['UserID'] . '</td></tr>';
@@ -365,7 +365,7 @@ foreach ($SecurityRoles as $SecKey => $SecVal) {
 	}
 }
 echo '</select></td></tr>';
-echo '<input type="hidden" name="ID" value="'.$_SESSION['UserID'].'">';
+echo '<input type="hidden" name="ID" value="'.$_SESSION['UserID'].'" />';
 
 echo '<tr><td>' . _('Default Location') . ':</td>
 	<td><select name="DefaultLocation">';
@@ -388,7 +388,7 @@ while ($myrow=DB_fetch_array($result)){
 
 //Supplier is fixed by selection of supplier
 $_POST['Supp']=$_SESSION['SupplierID'];
-echo '<input type="hidden" name="Supp" value="' . $_POST['Supp'] . '">';
+echo '<input type="hidden" name="Supp" value="' . $_POST['Supp'] . '" />';
 echo '<tr><td>'._('Supplier Code').':</td>
 	<td>' . $_POST['Supp'] . '</td></tr>';
 
@@ -514,7 +514,7 @@ echo '</select></td></tr>';
 
 
 echo '</table><br />
-	<div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '"></div></form>';
+	<div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div></form>';
 
 if (isset($_GET['SelectedUser'])) {
 	echo '<script  type="text/javascript">defaultControl(document.forms[0].Password);</script>';
