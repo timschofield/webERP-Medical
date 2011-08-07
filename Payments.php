@@ -39,8 +39,7 @@ if ((isset($_POST['UpdateHeader'])
 //note this is already linked from this page
 //echo "<a href='" . $rootpath . '/SelectSupplier.php'>" . _('Back to Suppliers') . '</a><br />';
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('Payment Entry')
-	. '" alt="" />' . ' ' . _('Payment Entry') . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('Payment Entry'). '" alt="" />' . ' ' . _('Payment Entry') . '</p>';
 echo '<div class="page_help_text">' . _('Use this screen to enter payments FROM your bank account.  <br />Note: To enter a payment FROM a supplier, first select the Supplier, click Enter a Payment to, or Receipt from the Supplier, and use a negative Payment amount on this form.') . '</div><br /><div class="centre">';
 
 if (isset($_GET['SupplierID'])){
@@ -263,10 +262,10 @@ if (isset($_POST['CommitBatch'])){
 		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo _('Has the cheque been printed') . '?<br /><br />';
-		echo '<input type="hidden" name="CommitBatch" value="' . $_POST['CommitBatch'] . '">';
-		echo '<input type="hidden" name="BankAccount" value="' . $_POST['BankAccount'] . '">';
-		echo '<input type="submit" name="ChequePrinted" value="' . _('Yes / Continue') . '">&nbsp;&nbsp;';
-		echo '<input type="submit" name="PaymentCancelled" value="' . _('No / Cancel Payment') . '">';
+		echo '<input type="hidden" name="CommitBatch" value="' . $_POST['CommitBatch'] . '" />';
+		echo '<input type="hidden" name="BankAccount" value="' . $_POST['BankAccount'] . '" />';
+		echo '<input type="submit" name="ChequePrinted" value="' . _('Yes / Continue') . '" />&nbsp;&nbsp;';
+		echo '<input type="submit" name="PaymentCancelled" value="' . _('No / Cancel Payment') . '" />';
 	} else {
 
 		//Start a transaction to do the whole lot inside
@@ -781,7 +780,7 @@ if ($_SESSION['PaymentDetail']->SupplierID==''){
 	}
 } else { /*its a supplier payment so it must be in the suppliers currency */
 	echo '<tr><td>' . _('Supplier Currency') . ':</td><td>' . $_SESSION['PaymentDetail']->Currency . '</td></tr>';
-	echo '<input type="hidden" name="Currency" value="' . $_SESSION['PaymentDetail']->Currency . '">';
+	echo '<input type="hidden" name="Currency" value="' . $_SESSION['PaymentDetail']->Currency . '" />';
 	/*get the default rate from the currency table if it has not been set */
 	if (!isset($_POST['ExRate']) OR $_POST['ExRate']==''){
 		$SQL = "SELECT rate FROM currencies WHERE currabrev='" . $_SESSION['PaymentDetail']->Currency ."'";
@@ -1008,7 +1007,7 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 			$PaymentTotal += $PaymentItem->Amount;
 		}
 		echo '<tr><td></td><td class="number"><b>' . number_format($PaymentTotal,2) . '</b></td><td></td><td></td><td></td></tr></table><br />';
-		echo '<input type="submit" name="CommitBatch" value="' . _('Accept and Process Payment') . '">';
+		echo '<input type="submit" name="CommitBatch" value="' . _('Accept and Process Payment') . '" />';
 	}
 
 } else {
@@ -1021,9 +1020,9 @@ the fields for entry of receipt amt and disc */
 	if (isset($_SESSION['PaymentDetail']->SupplierID)){ /*So it is a supplier payment so show the discount entry item */
 		echo '<tr><td>' . _('Amount of Discount') . ':</td>
 					<td><input class="number" type="text" name="Discount" maxlength="12" size="13" value="' . $_SESSION['PaymentDetail']->Discount . '" /></td></tr>';
-		echo '<input type="hidden" name="SuppName" value="' . $_SESSION['PaymentDetail']->SuppName . '">';
+		echo '<input type="hidden" name="SuppName" value="' . $_SESSION['PaymentDetail']->SuppName . '" />';
 	} else {
-		echo '<input type="hidden" name="discount" Value=0>';
+		echo '<input type="hidden" name="discount" value=0 />';
 	}
 	echo '</table><br />';
 	echo '<input type="submit" name="CommitBatch" value="' . _('Accept and Process Payment') . '" />';
