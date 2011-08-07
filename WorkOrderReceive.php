@@ -850,8 +850,6 @@ if($WORow['controlled']==1){ //controlled
 			}
 		} else { // batches/lots yet to be set up enter them manually
 			for ($i=0;$i<15;$i++){
-				echo
-
 				if ($i==0){
 					echo '<tr><td><input type="text" name="BatchRef' . $i .'" value="' . $StringBitOfLotSNRef . ($LotSNRefNumeric + 1) . '" />';
 				} else {
