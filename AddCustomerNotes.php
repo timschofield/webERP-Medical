@@ -94,8 +94,8 @@ if (!isset($Id)) {
 	$SQLname="SELECT * from debtorsmaster where debtorno='".$DebtorNo."'";
 	$Result = DB_query($SQLname,$db);
 	$row = DB_fetch_array($Result);
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') .
-		'" alt="" />' . _('Notes for Customer').': <b>' .$row['name'].'</b></p><br />';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' .
+		_('Notes for Customer').': <b>' .$row['name'].'</b></p><br />';
 
 	$sql = "SELECT * FROM custnotes where debtorno='".$DebtorNo."' ORDER BY date DESC";
 	$result = DB_query($sql,$db);
@@ -196,9 +196,9 @@ if (!isset($_GET['delete'])) {
 	if (isset($_POST['priority'])) {
 		echo '<td><input type="text" name="priority" value="' .$_POST['priority']. '" size="1" maxlength="3" /></td></td>';
 	} else {
-		echo '<td><input type="text" name="priority" size="1" maxlength="3"></td></td>';
+		echo '<td><input type="text" name="priority" size="1" maxlength="3" /></td></td>';
 	}
-	echo '<tr><td colspan="2"><div class="centre"><input type="submit" name="submit" value="'._('Enter Information').'"></div></td></tr>';
+	echo '<tr><td colspan="2"><div class="centre"><input type="submit" name="submit" value="'._('Enter Information').'" /></div></td></tr>';
 	echo '</table>';
 
 	echo '</form>';
