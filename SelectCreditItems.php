@@ -521,8 +521,8 @@ if (isset($_SESSION['CreditItems']->DebtorNo) and !isset($_POST['ProcessCredit']
 /* everything below here only do if a customer is selected
    first add a header to show who we are making a credit note for */
 
-	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' .
-		_('Search') . '" alt="" />' . ' ' . htmlspecialchars($_SESSION['CreditItems']->CustomerName)  . ' - ' . htmlspecialchars($_SESSION['CreditItems']->DeliverTo).'</p>';
+	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' .
+			' ' . htmlspecialchars($_SESSION['CreditItems']->CustomerName)  . ' - ' . htmlspecialchars($_SESSION['CreditItems']->DeliverTo).'</p>';
 
  /* do the search for parts that might be being looked up to add to the credit note */
 	if (isset($_POST['Search'])){
@@ -986,8 +986,7 @@ if (isset($_SESSION['CreditItems']->DebtorNo) and !isset($_POST['ProcessCredit']
 			}
 
 			echo '<td>' . $LineItem->Units . '</td>
-				<td><input type="text" class="number" name="Price_' . $LineItem->LineNumber . '" size="10" maxlength="12" value="' .
-					number_format($LineItem->Price, $LineItem->PriceDecimals) . '" /></td>
+				<td><input type="text" class="number" name="Price_' . $LineItem->LineNumber . '" size="10" maxlength="12" value="' . number_format($LineItem->Price, $LineItem->PriceDecimals) . '" /></td>
 				<td><input type="checkbox" name="Gross" value="False" /></td>
 				<td><input type="text" class="number" name="Discount_' . $LineItem->LineNumber . '" size="3" maxlength="3" value="' . ($LineItem->DiscountPercent * 100) . '" />&nbsp;%</td>
 				<td class="number">' . $DisplayLineTotal . '</td>';
@@ -1319,7 +1318,7 @@ if (isset($_SESSION['CreditItems']->DebtorNo) and !isset($_POST['ProcessCredit']
 				}
 				$ImageSource = $_SESSION['part_pics_dir'] . '/' . $myrow['stockid'] . '.jpg';
 				if (file_exists($ImageSource)){
-					$ImageSource  = '<img src="'.$ImageSource.'">';
+					$ImageSource  = '<img src="'.$ImageSource.'" />';
 				} else {
 					$ImageSource  = '<i>'._('No Image').'</i>';
 				}
