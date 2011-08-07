@@ -53,8 +53,7 @@ $DbgMsg = _('The SQL that failed to get the order header was');
 $GetOrdHdrResult = DB_query($OrderHeaderSQL,$db, $ErrMsg, $DbgMsg);
 
 if (DB_num_rows($GetOrdHdrResult)==1) {
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' .
-		_('Order Details') . '" alt="" />' . ' ' . $title . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Order Details') . '" alt="" />' . ' ' . $title . '</p>';
 
 	$myrow = DB_fetch_array($GetOrdHdrResult);
 	echo '<table class="selection">';
