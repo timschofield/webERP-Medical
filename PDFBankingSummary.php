@@ -13,8 +13,7 @@ if (!isset($_POST['BatchNo'])){
 	$title = _('Create PDF Print Out For A Batch Of Receipts');
 	include ('includes/header.inc');
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' .
-		 $title . '" alt="" />' . ' ' . $title . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . $title . '" alt="" />' . ' ' . $title . '</p>';
 
 	$sql="SELECT DISTINCT
 			transno,
@@ -32,7 +31,7 @@ if (!isset($_POST['BatchNo'])){
 		echo '<option value="'.$myrow['transno'].'">'._('Batch') .' '. $myrow['transno'].' - '.ConvertSqlDate($myrow['transdate']).'</option>';
 	}
 	echo '</select></td></tr></table>';
-	echo '<br /><div class="centre"><input type="submit" name="EnterBatchNo" value="' . _('Create PDF') . '"></div></form>';
+	echo '<br /><div class="centre"><input type="submit" name="EnterBatchNo" value="' . _('Create PDF') . '" /></div></form>';
 
 	include ('includes/footer.inc');
 	exit;
