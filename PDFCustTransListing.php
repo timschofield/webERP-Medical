@@ -17,7 +17,7 @@ if (!isset($_POST['Date'])){
 	 $title = _('Customer Transaction Listing');
 	 include ('includes/header.inc');
 
-	echo '<div class="centre"><p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . $title . '" alt="">' . ' '
+	echo '<div class="centre"><p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . $title . '" alt="" />' . ' '
 		. _('Customer Transaction Listing').'</p>';
 
 	if ($InputError==1){
