@@ -23,8 +23,7 @@ if (isset($_GET['SelectedFreightCost'])){
 	$SelectedFreightCost = $_POST['SelectedFreightCost'];
 }
 
-	echo '<div class="centre"><p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' .
-		_('Freight Costs') . '" alt="" />' . ' ' . $title . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Freight Costs') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (!isset($LocationFrom) OR !isset($ShipperID)) {
 
@@ -53,7 +52,7 @@ if (!isset($LocationFrom) OR !isset($ShipperID)) {
 		echo '<option value=' . $myrow['loccode'] . '>' . $myrow['locationname'] . '</option>';
 	}
 
-	echo '</select></td></tr></table><br /><div class="centre"><input type="submit" value="' . _('Accept') . '" name="Accept"></div></form>';
+	echo '</select></td></tr></table><br /><div class="centre"><input type="submit" value="' . _('Accept') . '" name="Accept" /></div></form>';
 
 } else {
 
@@ -298,7 +297,7 @@ if (isset($LocationFrom) AND isset($ShipperID)) {
 		$_POST['FixedPrice'] = $myrow['fixedprice'];
 		$_POST['MinimumChg'] = $myrow['minimumchg'];
 
-		echo '<input type="hidden" name="SelectedFreightCost" value="'.$SelectedFreightCost.'">';
+		echo '<input type="hidden" name="SelectedFreightCost" value="'.$SelectedFreightCost.'" />';
 
 	} else {
 		$_POST['FixedPrice'] = 0;
@@ -318,23 +317,23 @@ if (isset($LocationFrom) AND isset($ShipperID)) {
 	echo '<tr><th colspan="2"><font size="4" color="blue">' . _('For Deliveries From') . ' ' . $LocationName . ' ' . _('using') . ' ' .
 		$ShipperName . '</font></th></tr>';
 	echo'<tr><td>' . _('Destination') . ':</td>
-		<td><input type="text" maxlength="20" size="20" name="Destination" value="' . $_POST['Destination'] . '"></td></tr>';
+		<td><input type="text" maxlength="20" size="20" name="Destination" value="' . $_POST['Destination'] . '" /></td></tr>';
 	echo '<tr><td>' . _('Rate per Cubic Metre') . ':</td>
-		<td><input type="text" name="CubRate" class="number" size="6" maxlength="5" value="' . $_POST['CubRate'] . '"></td></tr>';
+		<td><input type="text" name="CubRate" class="number" size="6" maxlength="5" value="' . $_POST['CubRate'] . '" /></td></tr>';
 	echo '<tr><td>' . _('Rate Per KG') . ':</td>
-		<td><input type="text" name="KGRate" class="number" size="6" maxlength="5" value="' . $_POST['KGRate'] . '"></td></tr>';
+		<td><input type="text" name="KGRate" class="number" size="6" maxlength="5" value="' . $_POST['KGRate'] . '" /></td></tr>';
 	echo '<tr><td>' . _('Maximum Weight Per Package (KGs)') . ':</a></td>
-		<td><input type="text" name="MAXKGs" class="number" size="8" maxlength="7" value="' . $_POST['MAXKGs'] . '"></td></tr>';
+		<td><input type="text" name="MAXKGs" class="number" size="8" maxlength="7" value="' . $_POST['MAXKGs'] . '" /></td></tr>';
 	echo '<tr><td>' . _('Maximum Volume Per Package (cubic metres)') . ':</a></td>
-		<td><input type="text" name="MAXCub" class="number" size="8" maxlength="7" value="' . $_POST['MAXCub'] . '"></td></tr>';
+		<td><input type="text" name="MAXCub" class="number" size="8" maxlength="7" value="' . $_POST['MAXCub'] . '" /></td></tr>';
 	echo '<tr><td>' . _('Fixed Price (zero if rate per KG or Cubic)') . ':</a></td>
-		<td><input type="text" name="FixedPrice" class="number" size="6" maxlength="5" value="' . $_POST['FixedPrice'] . '"></td></tr>';
+		<td><input type="text" name="FixedPrice" class="number" size="6" maxlength="5" value="' . $_POST['FixedPrice'] . '" /></td></tr>';
 	echo '<tr><td>' . _('Minimum Charge (0 is N/A)') . ':</a></td>
-		<td><input type="text" name="MinimumChg" class="number" size="6" maxlength="5" value="' . $_POST['MinimumChg'] . '"></td></tr>';
+		<td><input type="text" name="MinimumChg" class="number" size="6" maxlength="5" value="' . $_POST['MinimumChg'] . '" /></td></tr>';
 
 	echo '</table><br />';
 
-	echo '<div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '"></div>';
+	echo '<div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div>';
 
 	echo '</form>';
 
