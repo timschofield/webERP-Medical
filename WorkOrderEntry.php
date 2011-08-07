@@ -517,7 +517,7 @@ if (isset($NumberOfOutputs)){
 		 echo '<td class="number"><input type="hidden" name="RecdQty' . $i . '" value="' . $_POST['RecdQty' .$i] . '" />' . $_POST['RecdQty' .$i] .'</td>
 		  		<td class="number">' . ($_POST['OutputQty' . $i] - $_POST['RecdQty' .$i]) . '</td>';
 		if ($_POST['Controlled'.$i]==1){
-			echo '<td><input type="text" name="NextLotSNRef' .$i . '" value="' . $_POST['NextLotSNRef'.$i] . '"></td>';
+			echo '<td><input type="text" name="NextLotSNRef' .$i . '" value="' . $_POST['NextLotSNRef'.$i] . '" /></td>';
 			if ($_SESSION['DefineControlledOnWOEntry']==1){
 				if ($_POST['Serialised' . $i]==1){
 					$LotOrSN = _('S/Ns');
