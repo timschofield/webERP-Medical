@@ -662,8 +662,8 @@ if (!isset($SupplierID)) {
 	echo '</select></td></tr>';
 
 	$DateString = Date($_SESSION['DefaultDateFormat']);
-	echo '<tr><td>' . _('Supplier Since') . ' (' . $_SESSION['DefaultDateFormat'] . '):</td><td><input type="text" class="date" alt="'.
-		$_SESSION['DefaultDateFormat'].'" name="SupplierSince" value="' . $DateString . '" size="12" maxlength="10" /></td></tr>';
+	echo '<tr><td>' . _('Supplier Since') . ' (' . $_SESSION['DefaultDateFormat'] . '):</td>
+			<td><input type="text" class="date" alt="'. $_SESSION['DefaultDateFormat'].'" name="SupplierSince" value="' . $DateString . '" size="12" maxlength="10" /></td></tr>';
 	echo '<tr><td>' . _('Bank Particulars') . ':</td><td><input type="text" name="BankPartics" size="13" maxlength="12" /></td></tr>';
 	echo '<tr><td>' . _('Bank reference') . ':</td><td><input type="text" name="BankRef" value="0" size="13" maxlength="12" /></td></tr>';
 	echo '<tr><td>' . _('Bank Account No') . ':</td><td><input type="text" name="BankAct" size="31" maxlength="30" /></td></tr>';
