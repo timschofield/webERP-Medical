@@ -704,7 +704,7 @@ if (isset($PrintPDF)
 				$PageNumber = 1;
 
 				echo '<table class="table1">
-					<tr><td valign=top width=10%><img src="' . $_SESSION['LogoFile'] . '"></td><td bgcolor="#bbb"><b>';
+					<tr><td valign=top width=10%><img src="' . $_SESSION['LogoFile'] . '" /></td><td bgcolor="#bbb"><b>';
 
 				if ($InvOrCredit=='Invoice') {
 					echo '<font size="4">' . _('TAX INVOICE') . ' ';
@@ -968,7 +968,7 @@ if (isset($PrintPDF)
 					/* head up a new invoice/credit note page */
 
 					$PageNumber++;
-					echo '<table class="table1"><tr><td VALIGN="TOP"><img src="' . $_SESSION['LogoFile'] . '"></td><td bgcolor="#bbb"><b>';
+					echo '<table class="table1"><tr><td VALIGN="TOP"><img src="' . $_SESSION['LogoFile'] . '" /></td><td bgcolor="#bbb"><b>';
 					if ($InvOrCredit=='Invoice') {
 						echo '<font size="4">' . _('TAX INVOICE') .' ';
 					} else {
