@@ -258,7 +258,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 				echo '<tr class="OddTableRows">';
 				$k++;
 			}
-			echo '<td><input type="submit" name="Select" value="' . $myrow['assetid'] .'"></td>
+			echo '<td><input type="submit" name="Select" value="' . $myrow['assetid'] .'" /></td>
 				<td>' . $myrow['description'] . '</td>
 				<td>' . $myrow['locationdescription'] . '</td>
 				<td>' . ConvertSQLDate($myrow['datepurchased']) . '</td>
