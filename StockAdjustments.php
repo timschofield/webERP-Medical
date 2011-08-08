@@ -326,14 +326,16 @@ if (isset($StockID)) {
 } else {
 	echo '<input type="text" name="StockID" size="21" value="" maxlength="20" /></td></tr>';
 }
-echo '<tr><td>'. _('Partial Description'). ':</td><td><input type="text" name="StockText" size="21" value="' .
-	$_GET['Description'] .'">&nbsp; &nbsp;'._('Partial Stock Code'). ':</td><td>';
+echo '<tr>
+		<td>'. _('Partial Description'). ':</td>
+		<td><input type="text" name="StockText" size="21" value="' . $_GET['Description'] .'" />&nbsp; &nbsp;'._('Partial Stock Code'). ':</td>
+		<td>';
 if (isset($StockID)) {
 	echo '<input type="text" name="StockCode" size="21" value="' . $StockID .'" maxlength="20" />';
 } else {
 	echo '<input type="text" name="StockCode" size="21" value="" maxlength="20" />';
 }
-echo '</td><td><input type="submit" name="CheckCode" value="'._('Check Part').'"></td></tr>';
+echo '</td><td><input type="submit" name="CheckCode" value="'._('Check Part').'" /></td></tr>';
 if (isset($_SESSION['Adjustment']) and mb_strlen($_SESSION['Adjustment']->ItemDescription)>1){
 	echo '<tr><td colspan="3"><font color="blue" size="3">' . $_SESSION['Adjustment']->ItemDescription . ' ('._('In Units of').' ' .
 		$_SESSION['Adjustment']->PartUnit . ' ) - ' . _('Unit Cost').' = ' .
@@ -374,7 +376,7 @@ if ($Controlled==1){
 		if ($_SESSION['Adjustment']->StockLocation == ''){
 			$_SESSION['Adjustment']->StockLocation = $_SESSION['UserStockLocation'];
 		}
-		echo '<input type="HIDDEN" name="Quantity" Value="' . $_SESSION['Adjustment']->Quantity . '">
+		echo '<input type="HIDDEN" name="Quantity" value="' . $_SESSION['Adjustment']->Quantity . '" />
 				'.$_SESSION['Adjustment']->Quantity.' &nbsp; &nbsp; &nbsp; &nbsp;
 				[<a href="'.$rootpath.'/StockAdjustmentsControlled.php?AdjType=REMOVE">'._('Remove').'</a>]
 				[<a href="'.$rootpath.'/StockAdjustmentsControlled.php?AdjType=ADD">'._('Add').'</a>]';
