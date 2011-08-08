@@ -104,9 +104,10 @@ if (!isset($StockID)) {
 	if (!isset($_REQUEST['WO']) or ($_REQUEST['WO']=='')){
 		echo '<table class="selection"><tr><td>';
 		if (isset($_REQUEST['SelectedStockItem'])) {
-			echo _('For the item') . ': ' . $_REQUEST['SelectedStockItem'] . ' ' . _('and') . ' <input type="hidden" name="SelectedStockItem" value="' . $_REQUEST['SelectedStockItem'] . '">';
+			echo _('For the item') . ': ' . $_REQUEST['SelectedStockItem'] . ' ' . _('and') .
+			' <input type="hidden" name="SelectedStockItem" value="' . $_REQUEST['SelectedStockItem'] . '" />';
 		}
-		echo _('Work Order number') . ': <input type="text" name="WO" maxlength="8" size="9">&nbsp ' . _('Processing at') . ':<select name="StockLocation"> ';
+		echo _('Work Order number') . ': <input type="text" name="WO" maxlength="8" size="9" />&nbsp ' . _('Processing at') . ':<select name="StockLocation"> ';
 
 		$sql = "SELECT loccode, locationname FROM locations";
 
@@ -167,7 +168,7 @@ if (!isset($StockID)) {
 
 	  echo '</select>
 				<td><font size="1">' . _('Enter text extract(s) in the description') . ':</font></td>
-				<td><input type="text" name="Keywords" size="20" maxlength="25"></td>
+				<td><input type="text" name="Keywords" size="20" maxlength="25" /></td>
 			</tr>
 			<tr>
 				<td></td>
@@ -175,8 +176,8 @@ if (!isset($StockID)) {
 				<td><input type="text" name="StockCode" size="15" maxlength="18" /></td>
 			</tr>
 		</table><br />';
-	echo '<div class="centre"><input type="submit" name="SearchParts" value="' . _('Search Items Now') . '">
-		<input type="submit" name="ResetPart" value="' . _('Show All') . '"></div>';
+	echo '<div class="centre"><input type="submit" name="SearchParts" value="' . _('Search Items Now') . '" />
+		<input type="submit" name="ResetPart" value="' . _('Show All') . '" /></div>';
 }
 
 if (isset($StockItemsResult)) {
