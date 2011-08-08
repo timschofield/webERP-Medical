@@ -28,7 +28,7 @@ if (isset($_POST['ContractRef']) AND $_POST['ContractRef']!='') {
 } else {
 	if (isset($_POST['SelectedCustomer'])) {
 		echo _('For customer') . ': ' . $_POST['SelectedCustomer'] . ' ' . _('and') . ' ';
-		echo '<input type="hidden" name="SelectedCustomer" value="' . $_POST['SelectedCustomer'] . '">';
+		echo '<input type="hidden" name="SelectedCustomer" value="' . $_POST['SelectedCustomer'] . '" />';
 	}
 }
 
