@@ -371,7 +371,7 @@ if (!isset($_GET['delete'])) {
 		$_POST['BudgetOrActual']=$myrow['budgetoractual'];
 		$_POST['ValFormat']=$myrow['valformat'];
 
-		echo '<input type="hidden" name="SelectedCol" value="' . $SelectedCol . '">';
+		echo '<input type="hidden" name="SelectedCol" value="' . $SelectedCol . '" />';
 		echo '<table class="selection">';
 
 	} else {
@@ -498,10 +498,10 @@ if (!isset($_GET['delete'])) {
 			  echo '<option value="N">' . _('Numeric') . '</option>';
 		  	echo '<option selected="True" value="P">' . _('Percentage') . '</option>';
 		}
-		echo '</select></td></tr><input type="hidden" name="BudgetOrActual" value="0">
-							<input type="hidden" name="DataType" value="">
-							<input type="hidden" name="PeriodFrom" value="0">
-							<input type="hidden" name="PeriodTo" value="0">';
+		echo '</select></td></tr><input type="hidden" name="BudgetOrActual" value="0" />
+							<input type="hidden" name="DataType" value="" />
+							<input type="hidden" name="PeriodFrom" value="0" />
+							<input type="hidden" name="PeriodTo" value="0" />';
 	}
 
 
