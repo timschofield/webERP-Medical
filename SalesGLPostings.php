@@ -293,7 +293,7 @@ if (!isset($_GET['delete'])) {
 		$_POST['SalesType']=$myrow['salestype'];
 		DB_free_result($result);
 
-		echo '<input type="hidden" name="SelectedSalesPostingID" value="' . $SelectedSalesPostingID . '">';
+		echo '<input type="hidden" name="SelectedSalesPostingID" value="' . $SelectedSalesPostingID . '" />';
 
 	}
 /*end of if $SelectedSalesPostingID only do the else when a new record is being entered */
@@ -406,7 +406,7 @@ if (!isset($_GET['delete'])) {
 	</tr>
 	</table>';
 
-	echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div>';
 
 	echo '</form>';
 
