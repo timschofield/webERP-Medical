@@ -1618,7 +1618,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 					<td><b>' . _('Enter partial Description') . ':</b>';
 
 		if (isset($_POST['Keywords'])) {
-			echo '<input tabindex="2" type="text" name="Keywords" size="20" maxlength="25" value="' . echo$_POST['Keywords'] .'" /></td>';
+			echo '<input tabindex="2" type="text" name="Keywords" size="20" maxlength="25" value="' . $_POST['Keywords'] .'" /></td>';
 		} else {
 			echo '<input tabindex="2" type="text" name="Keywords" size="20" maxlength="25" value="" /></td>';
 		}
