@@ -244,17 +244,17 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 				echo '</select>';
 				break;
 			case 2; //checkbox
-				echo '<td align="left" width="60"><input type="checkbox" name="PropValue' . $PropertyCounter . '"';
 				if ($PropertyValue == 1) {
-					echo ' checked';
+					echo '<td align="left" width="60"><input type="checkbox" name="PropValue' . $PropertyCounter . '" checked="True" />';
+				} else {
+					echo '<td align="left" width="60"><input type="checkbox" name="PropValue' . $PropertyCounter . '" />';
 				}
-				echo ' />';
 				break;
 		} //end switch
 		echo '</td></tr>';
 		$PropertyCounter++;
 	} //end loop round properties for the item category
-	echo '<input type="submit" name="UpdateProps" style="visibility:hidden;width:1px" value="' . _('Categories') . '">';
+	echo '<input type="submit" name="UpdateProps" style="visibility:hidden;width:1px" value="' . _('Categories') . '" />';
 	echo '</form>';
 	echo '</table>'; //end of Item Category Property mod
 	echo '<td style="width: 15%; vertical-align: top">
@@ -718,7 +718,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 			echo '<input type="hidden" name=Keywords value="'.$_POST['Keywords'].'" />';
 			echo '<input type="hidden" name=StockCat value="'.$_POST['StockCat'].'" />';
 			echo '<input type="hidden" name=StockCode value="'.$_POST['StockCode'].'" />';
-//			echo '<input type="hidden" name=Search value="Search">';
+//			echo '<input type="hidden" name=Search value="Search" />';
 			echo '<br /></div>';
 		}
 		echo '<table cellpadding="2" colspan="7">';
