@@ -149,6 +149,11 @@ if (!isset($OrderNumber) or $OrderNumber == "") {
 	} else {
 		echo '<option value="Rejected">' . _('Rejected') . '</option>';
 	}
+	if ($_POST['Status']=='Complete'){
+		echo '<option selected="True" value="Complete">' . _('Completed') . '</option>';
+	} else {
+		echo '<option value="Complete">' . _('Completed') . '</option>';
+	}
  	echo '</select> <input type="submit" name="SearchOrders" value="' . _('Search Purchase Orders') . '"></td></tr></table>';
 }
 $SQL = "SELECT categoryid, categorydescription FROM stockcategory ORDER BY categorydescription";
@@ -220,6 +225,8 @@ else {
 		$StatusCriteria = " AND purchorders.status='Rejected' ";
 	}elseif ($_POST['Status']=='Cancelled'){
 		$StatusCriteria = " AND purchorders.status='Cancelled' ";
+	}elseif ($_POST['Status']=='Complete'){
+		$StatusCriteria = " AND purchorders.status='Completed' ";
 	}
 
 	if (isset($OrderNumber) && $OrderNumber != "") {
