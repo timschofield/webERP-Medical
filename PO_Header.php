@@ -99,6 +99,16 @@ if (isset($_POST['UpdateStatus']) AND $_POST['UpdateStatus']!='') {
 			}
 		}
 
+		if ($_POST['Status'] == 'Completed') {
+			if ($AuthorityLevel > $OrderTotal) {
+				$_SESSION['PO'.$identifier]->StatComments = date($_SESSION['DefaultDateFormat']) . ' - ' . _('Completed by') . $UserChangedStatus . $_POST['StatusComments'] . '<br />' . html_entity_decode($_POST['StatusCommentsComplete']);
+				$_SESSION['PO'.$identifier]->AllowPrintPO=1;
+			} else {
+				$OKToUpdateStatus=0;
+				prnMsg( _('You do not have permission to complete this purchase order').'.<br />', 'error');
+			}
+		}
+
 
 		if ($_POST['Status'] == 'Rejected' OR $_POST['Status'] == 'Cancelled' ) {
 			if(!isset($_SESSION['ExistingOrder']) OR $_SESSION['ExistingOrder']!=0) {

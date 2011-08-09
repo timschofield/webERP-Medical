@@ -58,7 +58,7 @@ if (isset($_POST['SummaryType']) and $_POST['SummaryType'] == 'suppname') {
 
 if (isset($_POST['submit'])) {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . $title.'</p>';
-	submit($db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$SupplierName,$SupplierNameOp,$SaveSummaryType);
+	submit($db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$SupplierName,$SupplierNameOp,$SaveSummaryType, $rootpath);
 } else if (isset($_POST['submitcsv'])) {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . $title.'</p>';
 	submitcsv($db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$SupplierName,$SupplierNameOp,$SaveSummaryType);
@@ -69,7 +69,7 @@ if (isset($_POST['submit'])) {
 
 
 //####_SUBMIT_SUBMIT_SUBMIT_SUBMIT_SUBMIT_SUBMIT_SUBMIT_SUBMIT_SUBMIT_SUBMIT_SUBMIT_SUBMIT####
-function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$SupplierName,$SupplierNameOp,$SaveSummaryType)
+function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$SupplierName,$SupplierNameOp,$SaveSummaryType, $rootpath)
 {
 
 	//initialize no input errors
@@ -162,6 +162,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 							   purchorderdetails.deliverydate,
 							   purchorders.supplierno,
 							   purchorders.orddate,
+							   purchorders.status,
 							   purchorderdetails.quantityord,
 							   purchorderdetails.qtyinvoiced,
 							   (purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
@@ -191,6 +192,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 							   grns.deliverydate,
 							   purchorders.supplierno,
 							   purchorders.orddate,
+							   purchorders.status,
 							   grns.qtyrecd as quantityord,
 							   grns.quantityinv as qtyinvoiced,
 							   (grns.qtyrecd * purchorderdetails.unitprice) as extprice,
@@ -232,6 +234,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 								   SUM(purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
 								   SUM(purchorderdetails.quantityord * purchorderdetails.stdcostunit) as extcost,
 								   stockmaster.decimalplaces,
+									purchorders.status,
 								   stockmaster.description
 								   FROM purchorderdetails
 							LEFT JOIN purchorders ON purchorders.orderno=purchorderdetails.orderno
@@ -257,6 +260,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 								   SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
 								   SUM(purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
 								   SUM(purchorderdetails.quantityord * purchorderdetails.stdcostunit) as extcost,
+									purchorders.status,
 								   suppliers.suppname
 								   FROM purchorderdetails
 							LEFT JOIN purchorders ON purchorders.orderno=purchorderdetails.orderno
@@ -281,6 +285,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 								   SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
 								   SUM(purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
 								   SUM(purchorderdetails.quantityord * purchorderdetails.stdcostunit) as extcost,
+									purchorders.status,
 								   suppliers.suppname
 								   FROM purchorderdetails
 							LEFT JOIN purchorders ON purchorders.orderno=purchorderdetails.orderno
@@ -302,6 +307,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 				} elseif ($_POST['SummaryType'] == 'month') {
 					$sql = "SELECT EXTRACT(YEAR_MONTH from purchorders.orddate) as month,
 								   CONCAT(MONTHNAME(purchorders.orddate),' ',YEAR(purchorders.orddate)) as monthname,
+									purchorders.status,
 								   SUM(purchorderdetails.quantityord) as quantityord,
 								   SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
 								   SUM(purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
@@ -354,6 +360,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 								   SUM(grns.quantityinv) as qtyinvoiced,
 								   SUM(grns.qtyrecd * purchorderdetails.unitprice) as extprice,
 								   SUM(grns.qtyrecd * grns.stdcostunit) as extcost,
+									purchorders.status,
 								   stockmaster.description
 								   FROM grns
 							LEFT JOIN purchorderdetails ON grns.podetailitem = purchorderdetails.podetailitem
@@ -379,6 +386,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 								   SUM(grns.quantityinv) as qtyinvoiced,
 								   SUM(grns.qtyrecd * purchorderdetails.unitprice) as extprice,
 								   SUM(grns.qtyrecd * grns.stdcostunit) as extcost,
+									purchorders.status,
 								   suppliers.suppname
 								   FROM grns
 							LEFT JOIN purchorderdetails ON grns.podetailitem = purchorderdetails.podetailitem
@@ -404,6 +412,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 								   SUM(grns.quantityinv) as qtyinvoiced,
 								   SUM(grns.qtyrecd * purchorderdetails.unitprice) as extprice,
 								   SUM(grns.qtyrecd * grns.stdcostunit) as extcost,
+									purchorders.status,
 								   suppliers.suppname
 								   FROM grns
 							LEFT JOIN purchorderdetails ON grns.podetailitem = purchorderdetails.podetailitem
@@ -429,6 +438,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 								   SUM(grns.qtyrecd) as quantityord,
 								   SUM(grns.quantityinv) as qtyinvoiced,
 								   SUM(grns.qtyrecd * purchorderdetails.unitprice) as extprice,
+							   purchorders.status,
 								   SUM(grns.qtyrecd * grns.stdcostunit) as extcost
 								   FROM grns
 							LEFT JOIN purchorderdetails ON grns.podetailitem = purchorderdetails.podetailitem
@@ -453,6 +463,7 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 								   SUM(grns.qtyrecd) as quantityord,
 								   SUM(grns.quantityinv) as qtyinvoiced,
 								   SUM(grns.qtyrecd * purchorderdetails.unitprice) as extprice,
+							   purchorders.status,
 								   SUM(grns.qtyrecd * grns.stdcostunit) as extcost
 								   FROM grns
 							LEFT JOIN purchorderdetails ON grns.podetailitem = purchorderdetails.podetailitem
@@ -549,7 +560,13 @@ function submit(&$db,$PartNumber,$PartNumberOp,$SupplierId,$SupplierIdOp,$Suppli
 					}
 					$linectr++;
 				   // Detail for both DateType of Order
-					printf('<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td class="number">%s</td>
+					if ($myrow['status']=='Completed' or $myrow['status']=='Cancelled' or $myrow['status']=='Rejected') {
+						$ViewPurchOrder = $rootpath . '/PO_OrderDetails.php?OrderNo=' . $myrow['orderno'];
+					} else {
+						$ViewPurchOrder = $rootpath . '/PO_Header.php?ModifyOrderNumber=' . $myrow['orderno'];
+					}
+					printf('<td><a href="' . $ViewPurchOrder . '">%s</td>
+							<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td class="number">%s</td>
 						<td class="number">%s</td><td class="number">%s</td><td class="number">%s</td><td>%s</td><td>%s</td><td>%s</td></tr>',
 					$myrow['orderno'],
 					$myrow['itemcode'],
