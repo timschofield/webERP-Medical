@@ -73,12 +73,12 @@ document.onmousedown = mouseSelect;
 <table align="center" width="550" border="0" cellspacing="1" cellpadding="1">
   <form name="RptFieldForm" method="post" action="ReportCreator.php?action=step6">
 	<input type="hidden" name="FormID" value="<?php echo $_SESSION['FormID']; ?>" />
-	<input name="ReportID" type="hidden" value="<?php echo $ReportID; ?>">
-	<input name="Type" type="hidden" value="<?php echo $Type; ?>">
-	<input name="ReportName" type="hidden" value="<?php echo $reportname; ?>">
+	<input name="ReportID" type="hidden" value="<?php echo $ReportID; ?>" />
+	<input name="Type" type="hidden" value="<?php echo $Type; ?>" />
+	<input name="ReportName" type="hidden" value="<?php echo $reportname; ?>" />
     <tr>
-      <td><input name="todo" type="submit" value="<?php echo RPT_BTN_BACK; ?>"></td>
-      <td align="right"><input name="todo" type="submit" value="<?php echo RPT_BTN_CONT; ?>"></td>
+      <td><input name="todo" type="submit" value="<?php echo RPT_BTN_BACK; ?>" /></td>
+      <td align="right"><input name="todo" type="submit" value="<?php echo RPT_BTN_CONT; ?>" /></td>
     </tr>
   </form>
 </table>
@@ -98,19 +98,19 @@ document.onmousedown = mouseSelect;
     <tr>
 	<form name="RptFieldForm1" method="post" action="ReportCreator.php?action=step6">
 	<input type="hidden" name="FormID" value="<?php echo $_SESSION['FormID']; ?>" />
-	<input name="ReportID" type="hidden" value="<?php echo $ReportID ?>">
-	<input name="Type" type="hidden" value="<?php echo $Type; ?>">
-	<input name="ReportName" type="hidden" value="<?php echo $reportname; ?>">
+	<input name="ReportID" type="hidden" value="<?php echo $ReportID ?>" />
+	<input name="Type" type="hidden" value="<?php echo $Type; ?>" />
+	<input name="ReportName" type="hidden" value="<?php echo $reportname; ?>" />
 		<td align="center">
 	  <?php if ($FieldListings['defaults']['buttonvalue']=='Change') { ?>
-	  <input name="SeqNum" type="hidden" value="<?php echo $FieldListings['defaults']['seqnum']; ?>">
+	  <input name="SeqNum" type="hidden" value="<?php echo $FieldListings['defaults']['seqnum']; ?>" />
 	  <?php echo $FieldListings['defaults']['seqnum']; } else { ?>
-	  <input name="SeqNum"  type="text" value="<?php echo $FieldListings['defaults']['seqnum']; ?>" size="4" maxlength="3">
+	  <input name="SeqNum"  type="text" value="<?php echo $FieldListings['defaults']['seqnum']; ?>" size="4" maxlength="3" />
 	  <?php } // end if ?>
 		</td>
 	  <?php if ($Type<>'frm') { ?>
 	    <td>
-			<input type="text" name="FieldName" id="FieldName" value="<?php echo $FieldListings['defaults']['fieldname']; ?>" size="30">
+			<input type="text" name="FieldName" id="FieldName" value="<?php echo $FieldListings['defaults']['fieldname']; ?>" size="30" />
 			<image name="imgName" src="../images/pull_down_inactive.gif" height="20" width="19"
 			onMouseOver="handleOver(); return true;" onMouseOut="handleOut(); return true;"
 			onclick="JavaScript:menuActivate('FieldName', 'combodiv', 'combosel')">
@@ -123,15 +123,15 @@ document.onmousedown = mouseSelect;
 		</td>
 	  <?php } ?>
       <td>
-	  <input name="DisplayDesc" type="text" value="<?php echo $FieldListings['defaults']['displaydesc']; ?>" size="20" maxlength="25">
+	  <input name="DisplayDesc" type="text" value="<?php echo $FieldListings['defaults']['displaydesc']; ?>" size="20" maxlength="25" />
 	  </td>
       <?php if ($Type<>'frm') {
 		echo '<td align="center">';
 	  	if ($FieldListings['defaults']['columnbreak']=='1') $selected = ' checked'; else  $selected = '';
-	    echo '<input name="ColumnBreak" type="checkbox" value="1"'.$selected.'></td>'; } ?>
+	    echo '<input name="ColumnBreak" type="checkbox" value="1"'.$selected.' /></td>'; } ?>
       <td align="center">
 	  <?php if ($FieldListings['defaults']['visible']=='1') $selected = ' checked'; else  $selected = ''; ?>
-	  <input name="Visible" type="checkbox" value="1"<?php echo $selected ?>></td>
+	  <input name="Visible" type="checkbox" value="1"<?php echo $selected ?> /></td>
       <td>
 		<?php if ($Type=='frm') {
 			if ($FieldListings['defaults']['buttonvalue']==RPT_BTN_ADDNEW) {
@@ -155,7 +155,7 @@ document.onmousedown = mouseSelect;
 		} ?>
         </td>
       <td align = "center">
-	  <input name="todo" type="submit" value="<?php echo $FieldListings['defaults']['buttonvalue']; ?>">
+	  <input name="todo" type="submit" value="<?php echo $FieldListings['defaults']['buttonvalue']; ?>" />
 	  </td>
     </form></tr>
     <tr bgcolor="#CCCCCC"><td colspan="7"><div align="center"><?php echo RPT_FLDLIST; ?></div></td></tr>
@@ -165,24 +165,24 @@ document.onmousedown = mouseSelect;
 	foreach ($FieldListings['lists'] as $FieldDetails) { ?>
     <tr><form name="RptFieldForm" method="post" action="ReportCreator.php?action=step6">
 	<input type="hidden" name="FormID" value="<?php echo $_SESSION['FormID']; ?>" />
-	<input name="ReportID" type="hidden" value="<?php echo $ReportID; ?>">
-	<input name="Type" type="hidden" value="<?php echo $Type; ?>">
-	<input name="ReportName" type="hidden" value="<?php echo $reportname; ?>">
-	<input name="SeqNum" type="hidden" value="<?php echo $FieldDetails['seqnum']; ?>">
-	<input name="FieldName" type="hidden" value="<?php echo $FieldDetails['fieldname']; ?>">
-	<input name="DisplayDesc" type="hidden" value="<?php echo $FieldDetails['displaydesc']; ?>">
+	<input name="ReportID" type="hidden" value="<?php echo $ReportID; ?>" />
+	<input name="Type" type="hidden" value="<?php echo $Type; ?>" />
+	<input name="ReportName" type="hidden" value="<?php echo $reportname; ?>" />
+	<input name="SeqNum" type="hidden" value="<?php echo $FieldDetails['seqnum']; ?>" />
+	<input name="FieldName" type="hidden" value="<?php echo $FieldDetails['fieldname']; ?>" />
+	<input name="DisplayDesc" type="hidden" value="<?php echo $FieldDetails['displaydesc']; ?>" />
 	<?php if ($Type<>'frm') echo '<input name="ColumnBreak" type="hidden" value="'.$FieldDetails['columnbreak'].'">'; ?>
-	<input name="Visible" type="hidden" value="<?php echo $FieldDetails['visible']; ?>">
-	<input name="Params" type="hidden" value="<?php echo $FieldDetails['params']; ?>">
+	<input name="Visible" type="hidden" value="<?php echo $FieldDetails['visible']; ?>" />
+	<input name="Params" type="hidden" value="<?php echo $FieldDetails['params']; ?>" />
 	  <td align = "center"><?php echo $FieldDetails['seqnum']; ?></td>
       <?php if ($Type<>'frm') echo '<td>'.$FieldDetails['fieldname'].'</td>' ?>
       <td><?php echo $FieldDetails['displaydesc']; ?></td>
 	  <?php if ($Type<>'frm') {
 	  	if ($FieldDetails['columnbreak']=='1') $selected = ' checked'; else $selected = '';
-      	echo'<td align="center"><input disabled type="checkbox"'.$selected.'></td>';
+      	echo'<td align="center"><input disabled type="checkbox"'.$selected.' /></td>';
 	  }
 	  if ($FieldDetails['visible']=='1') $selected=' checked'; else $selected=''; ?>
-      <td align="center"><input disabled type="checkbox"<?php echo $selected; ?>></td>
+      <td align="center"><input disabled type="checkbox"<?php echo $selected; ?> /></td>
       <td>
 	  	<?php if ($Type=='frm') {
 			$Temp = unserialize($FieldDetails['params']);
@@ -192,11 +192,11 @@ document.onmousedown = mouseSelect;
 			echo $TotalLevels[$FieldDetails['params']];
 		} ?></td>
       <td>
-		<input type=image name="up" value="up" src="../images/upicon.png" border="0">
-		<input type=image name="dn" value="down" src="../images/downicon.png" border="0">
-		<input type=image name="ed" value="edit" src="../images/editicon.png" border="0">
-		<input type=image name="rm" value="delete" src="../images/delicon.png" border="0" onClick="return confirm('Delete this field?')">
-		<?php if ($Type=='frm') echo '<input name="todo" type="submit" value="'.RPT_BTN_PROP.'">'; ?>
+		<input type=image name="up" value="up" src="../images/upicon.png" border="0" />
+		<input type=image name="dn" value="down" src="../images/downicon.png" border="0" />
+		<input type=image name="ed" value="edit" src="../images/editicon.png" border="0" />
+		<input type=image name="rm" value="delete" src="../images/delicon.png" border="0" onClick="return confirm('Delete this field?')" />
+		<?php if ($Type=='frm') echo '<input name="todo" type="submit" value="'.RPT_BTN_PROP.'" />'; ?>
 	  </td>
     </form></tr>
 <?php } // end foreach
@@ -205,12 +205,12 @@ document.onmousedown = mouseSelect;
 <table align="center" width="550" border="0" cellspacing="1" cellpadding="1">
   <form name="RptFieldForm" method="post" action="ReportCreator.php?action=step6">
 	<input type="hidden" name="FormID" value="<?php echo $_SESSION['FormID']; ?>" />
-	<input name="ReportID" type="hidden" value="<?php echo $ReportID; ?>">
-	<input name="Type" type="hidden" value="<?php echo $Type; ?>">
-	<input name="ReportName" type="hidden" value="<?php echo $reportname; ?>">
+	<input name="ReportID" type="hidden" value="<?php echo $ReportID; ?>" />
+	<input name="Type" type="hidden" value="<?php echo $Type; ?>" />
+	<input name="ReportName" type="hidden" value="<?php echo $reportname; ?>" />
     <tr>
-      <td><input name="todo" type="submit" value="<?php echo RPT_BTN_BACK; ?>"></td>
-      <td align="right"><input name="todo" type="submit" value="<?php echo RPT_BTN_CONT; ?>"></td>
+      <td><input name="todo" type="submit" value="<?php echo RPT_BTN_BACK; ?>" /></td>
+      <td align="right"><input name="todo" type="submit" value="<?php echo RPT_BTN_CONT; ?>" /></td>
     </tr>
   </form>
 </table>
