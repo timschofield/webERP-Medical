@@ -11,7 +11,7 @@ Class PurchOrder {
 	const STATUS_REJECTED   = 'Rejected';
 	const STATUS_CANCELLED  = 'Cancelled';
 	const STATUS_PRINTED    = 'Printed';
-	const STATUS_COMPLITED  = 'Completed';
+	const STATUS_COMPLETED  = 'Completed';
 
 	var $LineItems; /*array of objects of class LineDetails using the product id as the pointer */
 	var $CurrCode;

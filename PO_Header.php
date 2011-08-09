@@ -308,31 +308,31 @@ if (isset($_POST['SearchSuppliers'])){
 			$SearchString = '%' . str_replace(' ', '%', $_POST['Keywords']) . '%';
 
 			$SQL = "SELECT suppliers.supplierid,
-											suppliers.suppname,
-											suppliers.address1,
-											suppliers.address2,
-											suppliers.address3,
-											suppliers.address4,
-											suppliers.address5,
-											suppliers.address6,
-											suppliers.currcode
-										FROM suppliers
-										WHERE suppliers.suppname LIKE '". $SearchString ."'
-										ORDER BY suppliers.suppname";
+							suppliers.suppname,
+							suppliers.address1,
+							suppliers.address2,
+							suppliers.address3,
+							suppliers.address4,
+							suppliers.address5,
+							suppliers.address6,
+							suppliers.currcode
+						FROM suppliers
+						WHERE suppliers.suppname LIKE '". $SearchString ."'
+						ORDER BY suppliers.suppname";
 
 		} elseif (mb_strlen($_POST['SuppCode'])>0){
 			$SQL = "SELECT suppliers.supplierid,
-											suppliers.suppname,
-											suppliers.address1,
-											suppliers.address2,
-											suppliers.address3,
-											suppliers.address4,
-											suppliers.address5,
-											suppliers.address6,
-											suppliers.currcode
-										FROM suppliers
-										WHERE suppliers.supplierid LIKE '%" . $_POST['SuppCode'] . "%'
-										ORDER BY suppliers.supplierid";
+							suppliers.suppname,
+							suppliers.address1,
+							suppliers.address2,
+							suppliers.address3,
+							suppliers.address4,
+							suppliers.address5,
+							suppliers.address6,
+							suppliers.currcode
+						FROM suppliers
+						WHERE suppliers.supplierid LIKE '%" . $_POST['SuppCode'] . "%'
+						ORDER BY suppliers.supplierid";
 		}
 
 		$ErrMsg = _('The searched supplier records requested cannot be retrieved because');
@@ -805,10 +805,10 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 			break;
 		case PurchOrder::STATUS_PRINTED:
 			$StatusList = array(PurchOrder::STATUS_PENDING, PurchOrder::STATUS_PRINTED,
-                                PurchOrder::STATUS_CANCELLED);
+                                PurchOrder::STATUS_CANCELLED, PurchOrder::STATUS_COMPLETED);
 			break;
-		case PurchOrder::STATUS_COMPLITED:
-			$StatusList = array(PurchOrder::STATUS_COMPLITED);
+		case PurchOrder::STATUS_COMPLETED:
+			$StatusList = array(PurchOrder::STATUS_COMPLETED);
 			break;
 		default:
 			$StatusList = array(PurchOrder::STATUS_NEW_ORDER, PurchOrder::STATUS_PENDING,

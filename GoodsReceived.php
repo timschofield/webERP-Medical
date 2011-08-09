@@ -694,7 +694,7 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 		$date = date($_SESSION['DefaultDateFormat']);
 		$StatusComment=$date.' - Order Completed'.'<br />'.$comment;
 		$sql="UPDATE purchorders
-					SET status='" . PurchOrder::STATUS_COMPLITED . "',
+					SET status='" . PurchOrder::STATUS_COMPLETED . "',
 					stat_comment='" . $StatusComment . "'
 					WHERE orderno='" . $_SESSION['PO']->OrderNo . "'";
 		$result=DB_query($sql,$db);
