@@ -439,6 +439,7 @@ if (db_num_rows($LineItemsResult) > 0) {
 				$sql = "UPDATE stockmaster SET materialcost=" . $ItemShipmentCost . ",
 												labourcost=0,
 												overheadcost=0,
+												lastcurcostdate='" . Date('Y-m-d') . "'
 												lastcost='" . $StdCostUnit . "'
 											WHERE stockid='" . $myrow['itemcode'] . "'";
 
