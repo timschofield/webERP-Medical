@@ -43,7 +43,7 @@ if (isset($_POST['submit']) or isset($_POST['submitcsv'])) {
 	$SupplierNameOp = $_POST['SupplierNameOp'];
 
 	// Save $_POST['SummaryType'] in $SaveSummaryType because change $_POST['SummaryType'] when
-	
+
 	// create $sql
 
 	$SaveSummaryType = $_POST['SummaryType'];
@@ -144,10 +144,10 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 	$WhereLineStatus = ' ';
 
 	// Had to use IF statement instead of comparing 'linestatus' to $_POST['LineStatus']
-	
+
 	//in WHERE clause because the WHERE clause didn't recognize
 
-	
+
 	// that had used the IF statement to create a field called linestatus
 
 	if ($_POST['LineStatus'] != 'All') {
@@ -169,67 +169,76 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 		if ($_POST['ReportType'] == 'Detail') {
 			if ($_POST['DateType'] == 'Order') {
 				$sql = "SELECT purchorderdetails.orderno,
-							   purchorderdetails.itemcode,
-							   purchorderdetails.deliverydate,
-							   purchorders.supplierno,
-							   purchorders.orddate,
-							   purchorders.status,
-							   purchorders.initiator,
-							   purchorderdetails.quantityord,
-							   purchorderdetails.qtyinvoiced,
-							   (purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
-							   (purchorderdetails.quantityord * purchorderdetails.stdcostunit) as extcost,
-							   IF(purchorderdetails.quantityord = purchorderdetails.qtyinvoiced ||
-								  purchorderdetails.completed = 1,'Completed','Open') as linestatus,
-							   suppliers.suppname,
-							   stockmaster.decimalplaces,
-							   stockmaster.description
-							   FROM purchorderdetails
-						LEFT JOIN purchorders ON purchorders.orderno=purchorderdetails.orderno
-						LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
-						LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
-						WHERE purchorders.orddate >='" . $FromDate . "'
-						 AND purchorders.orddate <='$ToDate'
-						$WherePart
-						$WhereSupplierID
-						$WhereSupplierName
-						$WhereOrderNo
-						$WhereLineStatus
-						$WhereCategory
-						ORDER BY " . $_POST['SortBy'];
+								purchorderdetails.itemcode,
+								purchorderdetails.deliverydate,
+								purchorders.supplierno,
+								purchorders.orddate,
+								purchorders.status,
+								purchorders.initiator,
+								purchorderdetails.quantityord,
+								purchorderdetails.qtyinvoiced,
+								(purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
+								(purchorderdetails.quantityord * purchorderdetails.stdcostunit) as extcost,
+								IF (purchorderdetails.quantityord = purchorderdetails.qtyinvoiced ||
+								  purchorderdetails.completed = 1,'Completed','Open') AS linestatus,
+								suppliers.suppname,
+								suppliers.currcode,
+								stockmaster.decimalplaces,
+								stockmaster.description
+							FROM purchorderdetails
+							LEFT JOIN purchorders
+								ON purchorders.orderno=purchorderdetails.orderno
+							LEFT JOIN suppliers
+								ON purchorders.supplierno = suppliers.supplierid
+							LEFT JOIN stockmaster
+								ON purchorderdetails.itemcode = stockmaster.stockid
+							WHERE purchorders.orddate >='" . $FromDate . "'
+								AND purchorders.orddate <='$ToDate'
+							$WherePart
+							$WhereSupplierID
+							$WhereSupplierName
+							$WhereOrderNo
+							$WhereLineStatus
+							$WhereCategory
+							ORDER BY " . $_POST['SortBy'];
 			}
 			else {
 
 				// Selects by delivery date from grns
 				$sql = "SELECT purchorderdetails.orderno,
-							   purchorderdetails.itemcode,
-							   grns.deliverydate,
-							   purchorders.supplierno,
-							   purchorders.orddate,
-							   purchorders.status,
-							   purchorders.initiator,
-							   grns.qtyrecd as quantityord,
-							   grns.quantityinv as qtyinvoiced,
-							   (grns.qtyrecd * purchorderdetails.unitprice) as extprice,
-							   (grns.qtyrecd * grns.stdcostunit) as extcost,
-							   IF(grns.qtyrecd - grns.quantityinv <> 0,'Open','Completed') as linestatus,
-							   suppliers.suppname,
-							   stockmaster.decimalplaces,
-							   stockmaster.description
-							   FROM grns
-						LEFT JOIN purchorderdetails ON grns.podetailitem = purchorderdetails.podetailitem
-						LEFT JOIN purchorders ON purchorders.orderno=purchorderdetails.orderno
-						LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
-						LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
-						WHERE grns.deliverydate >='$FromDate'
-						 AND grns.deliverydate <='$ToDate'
-						$WherePart
-						$WhereSupplierID
-						$WhereSupplierName
-						$WhereOrderNo
-						$WhereLineStatus
-						$WhereCategory
-						ORDER BY " . $_POST['SortBy'];
+								purchorderdetails.itemcode,
+								grns.deliverydate,
+								purchorders.supplierno,
+								purchorders.orddate,
+								purchorders.status,
+								purchorders.initiator,
+								grns.qtyrecd as quantityord,
+								grns.quantityinv as qtyinvoiced,
+								(grns.qtyrecd * purchorderdetails.unitprice) as extprice,
+								(grns.qtyrecd * grns.stdcostunit) as extcost,
+								IF (grns.qtyrecd - grns.quantityinv <> 0,'Open','Completed') as linestatus,
+								suppliers.suppname,
+								suppliers.currcode,
+								stockmaster.decimalplaces,
+								stockmaster.description
+							FROM grns
+							LEFT JOIN purchorderdetails
+								ON grns.podetailitem = purchorderdetails.podetailitem
+							LEFT JOIN purchorders
+								ON purchorders.orderno=purchorderdetails.orderno
+							LEFT JOIN suppliers
+								ON purchorders.supplierno = suppliers.supplierid
+							LEFT JOIN stockmaster
+								ON purchorderdetails.itemcode = stockmaster.stockid
+							WHERE grns.deliverydate >='$FromDate'
+								AND grns.deliverydate <='$ToDate'
+							$WherePart
+							$WhereSupplierID
+							$WhereSupplierName
+							$WhereOrderNo
+							$WhereLineStatus
+							$WhereCategory
+							ORDER BY " . $_POST['SortBy'];
 			}
 		}
 		else {
@@ -238,10 +247,10 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 			$orderby = $_POST['SummaryType'];
 
 			// The following is because the 'extprice' summary is a special case - with the other
-			
+
 			// summaries, you group and order on the same field; with 'extprice', you are actually
 
-			
+
 			// grouping on the stkcode and ordering by extprice descending
 
 			if ($_POST['SummaryType'] == 'extprice') {
@@ -251,133 +260,164 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 			if ($_POST['DateType'] == 'Order') {
 				if ($_POST['SummaryType'] == 'extprice' || $_POST['SummaryType'] == 'itemcode') {
 					$sql = "SELECT purchorderdetails.itemcode,
-								   SUM(purchorderdetails.quantityord) as quantityord,
-								   SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
-								   SUM(purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
-								   SUM(purchorderdetails.quantityord * purchorderdetails.stdcostunit) as extcost,
-								   stockmaster.decimalplaces,
+									SUM(purchorderdetails.quantityord) as quantityord,
+									SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
+									SUM(purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
+									SUM(purchorderdetails.quantityord * purchorderdetails.stdcostunit) as extcost,
+									stockmaster.decimalplaces,
 									purchorders.status,
-							   purchorders.initiator,
-								   stockmaster.description
-								   FROM purchorderdetails
-							LEFT JOIN purchorders ON purchorders.orderno=purchorderdetails.orderno
-							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
-							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
-							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE purchorders.orddate >='$FromDate'
-							 AND purchorders.orddate <='$ToDate'
-							$WherePart
-							$WhereSupplierID
-							$WhereSupplierName
-							$WhereOrderNo
-							$WhereLineStatus
-							$WhereCategory
-							GROUP BY " . $_POST['SummaryType'] . ",stockmaster.decimalplaces,
-							  stockmaster.description
-							ORDER BY " . $orderby;
+									purchorders.initiator,
+									suppliers.currcode,
+									stockmaster.description
+								FROM purchorderdetails
+								LEFT JOIN purchorders
+									ON purchorders.orderno=purchorderdetails.orderno
+								LEFT JOIN suppliers
+									ON purchorders.supplierno = suppliers.supplierid
+								LEFT JOIN stockmaster
+									ON purchorderdetails.itemcode = stockmaster.stockid
+								LEFT JOIN stockcategory
+									ON stockcategory.categoryid = stockmaster.categoryid
+								WHERE purchorders.orddate >='$FromDate'
+									AND purchorders.orddate <='$ToDate'
+								$WherePart
+								$WhereSupplierID
+								$WhereSupplierName
+								$WhereOrderNo
+								$WhereLineStatus
+								$WhereCategory
+								GROUP BY " . $_POST['SummaryType'] . ",
+									stockmaster.decimalplaces,
+								stockmaster.description
+								ORDER BY " . $orderby;
 				}
 				elseif ($_POST['SummaryType'] == 'orderno') {
 					$sql = "SELECT purchorderdetails.orderno,
-								   purchorders.supplierno,
-								   SUM(purchorderdetails.quantityord) as quantityord,
-								   SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
-								   SUM(purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
-								   SUM(purchorderdetails.quantityord * purchorderdetails.stdcostunit) as extcost,
+									purchorders.supplierno,
+									SUM(purchorderdetails.quantityord) as quantityord,
+									SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
+									SUM(purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
+									SUM(purchorderdetails.quantityord * purchorderdetails.stdcostunit) as extcost,
 									purchorders.status,
-							   purchorders.initiator,
-								   suppliers.suppname
-								   FROM purchorderdetails
-							LEFT JOIN purchorders ON purchorders.orderno=purchorderdetails.orderno
-							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
-							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
-							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE purchorders.orddate >='$FromDate'
-							 AND purchorders.orddate <='$ToDate'
-							$WherePart
-							$WhereSupplierID
-							$WhereSupplierName
-							$WhereOrderNo
-							$WhereLineStatus
-							$WhereCategory
-							GROUP BY " . $_POST['SummaryType'] . ",purchorders.supplierno,
-							  suppliers.suppname
-							ORDER BY " . $orderby;
+									purchorders.initiator,
+									suppliers.currcode,
+									suppliers.suppname
+								FROM purchorderdetails
+								LEFT JOIN purchorders
+									ON purchorders.orderno=purchorderdetails.orderno
+								LEFT JOIN suppliers
+									ON purchorders.supplierno = suppliers.supplierid
+								LEFT JOIN stockmaster
+									ON purchorderdetails.itemcode = stockmaster.stockid
+								LEFT JOIN stockcategory
+									ON stockcategory.categoryid = stockmaster.categoryid
+								WHERE purchorders.orddate >='$FromDate'
+									AND purchorders.orddate <='$ToDate'
+								$WherePart
+								$WhereSupplierID
+								$WhereSupplierName
+								$WhereOrderNo
+								$WhereLineStatus
+								$WhereCategory
+								GROUP BY " . $_POST['SummaryType'] . ",
+									purchorders.supplierno,
+									suppliers.suppname
+								ORDER BY " . $orderby;
 				}
 				elseif ($_POST['SummaryType'] == 'supplierno' || $_POST['SummaryType'] == 'suppname,suppliers.supplierid') {
 					$sql = "SELECT purchorders.supplierno,
-								   SUM(purchorderdetails.quantityord) as quantityord,
-								   SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
-								   SUM(purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
-								   SUM(purchorderdetails.quantityord * purchorderdetails.stdcostunit) as extcost,
+									SUM(purchorderdetails.quantityord) as quantityord,
+									SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
+									SUM(purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
+									SUM(purchorderdetails.quantityord * purchorderdetails.stdcostunit) as extcost,
 									purchorders.status,
-							   purchorders.initiator,
-								   suppliers.suppname
-								   FROM purchorderdetails
-							LEFT JOIN purchorders ON purchorders.orderno=purchorderdetails.orderno
-							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
-							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
-							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE purchorders.orddate >='$FromDate'
-							 AND purchorders.orddate <='$ToDate'
-							$WherePart
-							$WhereSupplierID
-							$WhereSupplierName
-							$WhereOrderNo
-							$WhereLineStatus
-							$WhereCategory
-							GROUP BY " . $_POST['SummaryType'] . ",purchorders.supplierno,
-							  suppliers.suppname
-							ORDER BY " . $orderby;
+									purchorders.initiator,
+									suppliers.currcode,
+									suppliers.suppname
+								FROM purchorderdetails
+								LEFT JOIN purchorders
+									ON purchorders.orderno=purchorderdetails.orderno
+								LEFT JOIN suppliers
+									ON purchorders.supplierno = suppliers.supplierid
+								LEFT JOIN stockmaster
+									ON purchorderdetails.itemcode = stockmaster.stockid
+								LEFT JOIN stockcategory
+									ON stockcategory.categoryid = stockmaster.categoryid
+								WHERE purchorders.orddate >='$FromDate'
+									AND purchorders.orddate <='$ToDate'
+								$WherePart
+								$WhereSupplierID
+								$WhereSupplierName
+								$WhereOrderNo
+								$WhereLineStatus
+								$WhereCategory
+								GROUP BY " . $_POST['SummaryType'] . ",
+									purchorders.supplierno,
+									suppliers.suppname
+								ORDER BY " . $orderby;
 				}
 				elseif ($_POST['SummaryType'] == 'month') {
 					$sql = "SELECT EXTRACT(YEAR_MONTH from purchorders.orddate) as month,
-								   CONCAT(MONTHNAME(purchorders.orddate),' ',YEAR(purchorders.orddate)) as monthname,
+									CONCAT(MONTHNAME(purchorders.orddate),' ',
+									YEAR(purchorders.orddate)) as monthname,
 									purchorders.status,
-							   purchorders.initiator,
-								   SUM(purchorderdetails.quantityord) as quantityord,
-								   SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
-								   SUM(purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
-								   SUM(purchorderdetails.quantityord * purchorderdetails.stdcostunit) as extcost
-								   FROM purchorderdetails
-							LEFT JOIN purchorders ON purchorders.orderno=purchorderdetails.orderno
-							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
-							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
-							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE purchorders.orddate >='$FromDate'
-							 AND purchorders.orddate <='$ToDate'
-							$WherePart
-							$WhereSupplierID
-							$WhereSupplierName
-							$WhereOrderNo
-							$WhereLineStatus
-							$WhereCategory
-							GROUP BY " . $_POST['SummaryType'] . ", monthname
-							ORDER BY " . $orderby;
+									purchorders.initiator,
+									suppliers.currcode,
+									SUM(purchorderdetails.quantityord) as quantityord,
+									SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
+									SUM(purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
+									SUM(purchorderdetails.quantityord * purchorderdetails.stdcostunit) as extcost
+									FROM purchorderdetails
+								LEFT JOIN purchorders
+									ON purchorders.orderno=purchorderdetails.orderno
+								LEFT JOIN suppliers
+									ON purchorders.supplierno = suppliers.supplierid
+								LEFT JOIN stockmaster
+									ON purchorderdetails.itemcode = stockmaster.stockid
+								LEFT JOIN stockcategory
+									ON stockcategory.categoryid = stockmaster.categoryid
+								WHERE purchorders.orddate >='$FromDate'
+									AND purchorders.orddate <='$ToDate'
+								$WherePart
+								$WhereSupplierID
+								$WhereSupplierName
+								$WhereOrderNo
+								$WhereLineStatus
+								$WhereCategory
+								GROUP BY " . $_POST['SummaryType'] . ",
+									monthname
+								ORDER BY " . $orderby;
 				}
 				elseif ($_POST['SummaryType'] == 'categoryid') {
 					$sql = "SELECT SUM(purchorderdetails.quantityord) as quantityord,
-								   SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
-								   SUM(purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
-								   SUM(purchorderdetails.quantityord * purchorderdetails.stdcostunit) as extcost,
-								   stockmaster.categoryid,
+									SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
+									SUM(purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
+									SUM(purchorderdetails.quantityord * purchorderdetails.stdcostunit) as extcost,
+									stockmaster.categoryid,
 									purchorders.status,
-							   purchorders.initiator,
-								   stockcategory.categorydescription
-								   FROM purchorderdetails
-							LEFT JOIN purchorders ON purchorders.orderno=purchorderdetails.orderno
-							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
-							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
-							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE purchorders.orddate >='$FromDate'
-							 AND purchorders.orddate <='$ToDate'
-							$WherePart
-							$WhereSupplierID
-							$WhereSupplierName
-							$WhereOrderNo
-							$WhereLineStatus
-							$WhereCategory
-							GROUP BY " . $_POST['SummaryType'] . ", categorydescription
-							ORDER BY " . $orderby;
+									suppliers.currcode,
+									purchorders.initiator,
+									stockcategory.categorydescription
+								FROM purchorderdetails
+								LEFT JOIN purchorders
+									ON purchorders.orderno=purchorderdetails.orderno
+								LEFT JOIN suppliers
+									ON purchorders.supplierno = suppliers.supplierid
+								LEFT JOIN stockmaster
+									ON purchorderdetails.itemcode = stockmaster.stockid
+								LEFT JOIN stockcategory
+									ON stockcategory.categoryid = stockmaster.categoryid
+								WHERE purchorders.orddate >='$FromDate'
+									AND purchorders.orddate <='$ToDate'
+								$WherePart
+								$WhereSupplierID
+								$WhereSupplierName
+								$WhereOrderNo
+								$WhereLineStatus
+								$WhereCategory
+								GROUP BY " . $_POST['SummaryType'] . ",
+									categorydescription
+								ORDER BY " . $orderby;
 				}
 			}
 			else {
@@ -385,141 +425,178 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 				// Selects by delivery date from grns
 				if ($_POST['SummaryType'] == 'extprice' || $_POST['SummaryType'] == 'itemcode') {
 					$sql = "SELECT purchorderdetails.itemcode,
-								   SUM(grns.qtyrecd) as quantityord,
-								   SUM(grns.quantityinv) as qtyinvoiced,
-								   SUM(grns.qtyrecd * purchorderdetails.unitprice) as extprice,
-								   SUM(grns.qtyrecd * grns.stdcostunit) as extcost,
+									SUM(grns.qtyrecd) as quantityord,
+									SUM(grns.quantityinv) as qtyinvoiced,
+									SUM(grns.qtyrecd * purchorderdetails.unitprice) as extprice,
+									SUM(grns.qtyrecd * grns.stdcostunit) as extcost,
 									purchorders.status,
-							   purchorders.initiator,
-								   stockmaster.description
-								   FROM grns
-							LEFT JOIN purchorderdetails ON grns.podetailitem = purchorderdetails.podetailitem
-							LEFT JOIN purchorders ON purchorders.orderno=purchorderdetails.orderno
-							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
-							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
-							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE grns.deliverydate >='$FromDate'
-							 AND grns.deliverydate <='$ToDate'
-							$WherePart
-							$WhereSupplierID
-							$WhereSupplierName
-							$WhereOrderNo
-							$WhereLineStatus
-							$WhereCategory
-							GROUP BY " . $_POST['SummaryType'] . ", stockmaster.description
-							ORDER BY " . $orderby;
+									suppliers.currcode,
+									purchorders.initiator,
+									stockmaster.description
+								FROM grns
+								LEFT JOIN purchorderdetails
+									ON grns.podetailitem = purchorderdetails.podetailitem
+								LEFT JOIN purchorders
+									ON purchorders.orderno=purchorderdetails.orderno
+								LEFT JOIN suppliers
+									ON purchorders.supplierno = suppliers.supplierid
+								LEFT JOIN stockmaster
+									ON purchorderdetails.itemcode = stockmaster.stockid
+								LEFT JOIN stockcategory
+									ON stockcategory.categoryid = stockmaster.categoryid
+								WHERE grns.deliverydate >='$FromDate'
+									AND grns.deliverydate <='$ToDate'
+								$WherePart
+								$WhereSupplierID
+								$WhereSupplierName
+								$WhereOrderNo
+								$WhereLineStatus
+								$WhereCategory
+								GROUP BY " . $_POST['SummaryType'] . ",
+									stockmaster.description
+								ORDER BY " . $orderby;
 				}
 				elseif ($_POST['SummaryType'] == 'orderno') {
 					$sql = "SELECT purchorderdetails.orderno,
-								   purchorders.supplierno,
-								   SUM(grns.qtyrecd) as quantityord,
-								   SUM(grns.quantityinv) as qtyinvoiced,
-								   SUM(grns.qtyrecd * purchorderdetails.unitprice) as extprice,
-								   SUM(grns.qtyrecd * grns.stdcostunit) as extcost,
-							   purchorders.initiator,
+									purchorders.supplierno,
+									SUM(grns.qtyrecd) as quantityord,
+									SUM(grns.quantityinv) as qtyinvoiced,
+									SUM(grns.qtyrecd * purchorderdetails.unitprice) as extprice,
+									SUM(grns.qtyrecd * grns.stdcostunit) as extcost,
+									purchorders.initiator,
 									purchorders.status,
-								   suppliers.suppname
-								   FROM grns
-							LEFT JOIN purchorderdetails ON grns.podetailitem = purchorderdetails.podetailitem
-							LEFT JOIN purchorders ON purchorders.orderno=purchorderdetails.orderno
-							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
-							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
-							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE grns.deliverydate >='$FromDate'
-							 AND grns.deliverydate <='$ToDate'
-							$WherePart
-							$WhereSupplierID
-							$WhereSupplierName
-							$WhereOrderNo
-							$WhereLineStatus
-							$WhereCategory
-							GROUP BY " . $_POST['SummaryType'] . ", purchorders.supplierno,
-							   suppliers.suppname
-							ORDER BY " . $orderby;
+									suppliers.currcode,
+									suppliers.suppname
+								FROM grns
+								LEFT JOIN purchorderdetails
+									ON grns.podetailitem = purchorderdetails.podetailitem
+								LEFT JOIN purchorders
+									ON purchorders.orderno=purchorderdetails.orderno
+								LEFT JOIN suppliers
+									ON purchorders.supplierno = suppliers.supplierid
+								LEFT JOIN stockmaster
+									ON purchorderdetails.itemcode = stockmaster.stockid
+								LEFT JOIN stockcategory
+									ON stockcategory.categoryid = stockmaster.categoryid
+								WHERE grns.deliverydate >='$FromDate'
+									AND grns.deliverydate <='$ToDate'
+								$WherePart
+								$WhereSupplierID
+								$WhereSupplierName
+								$WhereOrderNo
+								$WhereLineStatus
+								$WhereCategory
+								GROUP BY " . $_POST['SummaryType'] . ",
+									purchorders.supplierno,
+									suppliers.suppname
+								ORDER BY " . $orderby;
 				}
 				elseif ($_POST['SummaryType'] == 'supplierno' || $_POST['SummaryType'] == 'suppname,suppliers.supplierid') {
 					$sql = "SELECT purchorders.supplierno,
-								   SUM(grns.qtyrecd) as quantityord,
-								   SUM(grns.quantityinv) as qtyinvoiced,
-								   SUM(grns.qtyrecd * purchorderdetails.unitprice) as extprice,
-								   SUM(grns.qtyrecd * grns.stdcostunit) as extcost,
-							   purchorders.initiator,
+									SUM(grns.qtyrecd) as quantityord,
+									SUM(grns.quantityinv) as qtyinvoiced,
+									SUM(grns.qtyrecd * purchorderdetails.unitprice) as extprice,
+									SUM(grns.qtyrecd * grns.stdcostunit) as extcost,
+									purchorders.initiator,
 									purchorders.status,
-								   suppliers.suppname
-								   FROM grns
-							LEFT JOIN purchorderdetails ON grns.podetailitem = purchorderdetails.podetailitem
-							LEFT JOIN purchorders ON purchorders.orderno=purchorderdetails.orderno
-							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
-							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
-							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE grns.deliverydate >='$FromDate'
-							 AND grns.deliverydate <='$ToDate'
-							$WherePart
-							$WhereSupplierID
-							$WhereSupplierName
-							$WhereOrderNo
-							$WhereLineStatus
-							$WhereCategory
-							GROUP BY " . $_POST['SummaryType'] . ", purchorders.supplierno,
-							   suppliers.suppname
-							ORDER BY " . $orderby;
+									suppliers.currcode,
+									suppliers.suppname
+								FROM grns
+								LEFT JOIN purchorderdetails
+									ON grns.podetailitem = purchorderdetails.podetailitem
+								LEFT JOIN purchorders
+									ON purchorders.orderno=purchorderdetails.orderno
+								LEFT JOIN suppliers
+									ON purchorders.supplierno = suppliers.supplierid
+								LEFT JOIN stockmaster
+									ON purchorderdetails.itemcode = stockmaster.stockid
+								LEFT JOIN stockcategory
+									ON stockcategory.categoryid = stockmaster.categoryid
+								WHERE grns.deliverydate >='$FromDate'
+									AND grns.deliverydate <='$ToDate'
+								$WherePart
+								$WhereSupplierID
+								$WhereSupplierName
+								$WhereOrderNo
+								$WhereLineStatus
+								$WhereCategory
+								GROUP BY " . $_POST['SummaryType'] . ",
+									purchorders.supplierno,
+									suppliers.suppname
+								ORDER BY " . $orderby;
 				}
 				elseif ($_POST['SummaryType'] == 'month') {
 					$sql = "SELECT EXTRACT(YEAR_MONTH from purchorders.orddate) as month,
-								   CONCAT(MONTHNAME(purchorders.orddate),' ',YEAR(purchorders.orddate)) as monthname,
-								   SUM(grns.qtyrecd) as quantityord,
-								   SUM(grns.quantityinv) as qtyinvoiced,
-								   SUM(grns.qtyrecd * purchorderdetails.unitprice) as extprice,
-							   purchorders.initiator,
-							   purchorders.status,
-								   SUM(grns.qtyrecd * grns.stdcostunit) as extcost
-								   FROM grns
-							LEFT JOIN purchorderdetails ON grns.podetailitem = purchorderdetails.podetailitem
-							LEFT JOIN purchorders ON purchorders.orderno=purchorderdetails.orderno
-							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
-							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
-							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE grns.deliverydate >='$FromDate'
-							 AND grns.deliverydate <='$ToDate'
-							$WherePart
-							$WhereSupplierID
-							$WhereSupplierName
-							$WhereOrderNo
-							$WhereLineStatus
-							$WhereCategory
-							GROUP BY " . $_POST['SummaryType'] . ",monthname
-							ORDER BY " . $orderby;
+									CONCAT(MONTHNAME(purchorders.orddate),
+									' ',
+									YEAR(purchorders.orddate)) as monthname,
+									SUM(grns.qtyrecd) as quantityord,
+									SUM(grns.quantityinv) as qtyinvoiced,
+									SUM(grns.qtyrecd * purchorderdetails.unitprice) as extprice,
+									suppliers.currcode,
+									purchorders.initiator,
+									purchorders.status,
+									SUM(grns.qtyrecd * grns.stdcostunit) as extcost
+								FROM grns
+								LEFT JOIN purchorderdetails
+									ON grns.podetailitem = purchorderdetails.podetailitem
+								LEFT JOIN purchorders
+									ON purchorders.orderno=purchorderdetails.orderno
+								LEFT JOIN suppliers
+									ON purchorders.supplierno = suppliers.supplierid
+								LEFT JOIN stockmaster
+									ON purchorderdetails.itemcode = stockmaster.stockid
+								LEFT JOIN stockcategory
+									ON stockcategory.categoryid = stockmaster.categoryid
+								WHERE grns.deliverydate >='$FromDate'
+									AND grns.deliverydate <='$ToDate'
+								$WherePart
+								$WhereSupplierID
+								$WhereSupplierName
+								$WhereOrderNo
+								$WhereLineStatus
+								$WhereCategory
+								GROUP BY " . $_POST['SummaryType'] . ",
+									monthname
+								ORDER BY " . $orderby;
 				}
 				elseif ($_POST['SummaryType'] == 'categoryid') {
 					$sql = "SELECT stockmaster.categoryid,
-								   stockcategory.categorydescription,
-								   SUM(grns.qtyrecd) as quantityord,
-								   SUM(grns.quantityinv) as qtyinvoiced,
-								   SUM(grns.qtyrecd * purchorderdetails.unitprice) as extprice,
-							   purchorders.initiator,
-							   purchorders.status,
-								   SUM(grns.qtyrecd * grns.stdcostunit) as extcost
-								   FROM grns
-							LEFT JOIN purchorderdetails ON grns.podetailitem = purchorderdetails.podetailitem
-							LEFT JOIN purchorders ON purchorders.orderno=purchorderdetails.orderno
-							LEFT JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
-							LEFT JOIN stockmaster ON purchorderdetails.itemcode = stockmaster.stockid
-							LEFT JOIN stockcategory ON stockcategory.categoryid = stockmaster.categoryid
-							WHERE grns.deliverydate >='$FromDate'
-							 AND grns.deliverydate <='$ToDate'
-							$WherePart
-							$WhereSupplierID
-							$WhereSupplierName
-							$WhereOrderNo
-							$WhereLineStatus
-							$WhereCategory
-							GROUP BY " . $_POST['SummaryType'] . ",categorydescription
-							ORDER BY " . $orderby;
+									stockcategory.categorydescription,
+									SUM(grns.qtyrecd) as quantityord,
+									SUM(grns.quantityinv) as qtyinvoiced,
+									SUM(grns.qtyrecd * purchorderdetails.unitprice) as extprice,
+									purchorders.initiator,
+									purchorders.status,
+									suppliers.currcode,
+									SUM(grns.qtyrecd * grns.stdcostunit) as extcost
+								FROM grns
+								LEFT JOIN purchorderdetails
+									ON grns.podetailitem = purchorderdetails.podetailitem
+								LEFT JOIN purchorders
+									ON purchorders.orderno=purchorderdetails.orderno
+								LEFT JOIN suppliers
+									ON purchorders.supplierno = suppliers.supplierid
+								LEFT JOIN stockmaster
+									ON purchorderdetails.itemcode = stockmaster.stockid
+								LEFT JOIN stockcategory
+									ON stockcategory.categoryid = stockmaster.categoryid
+								WHERE grns.deliverydate >='$FromDate'
+									AND grns.deliverydate <='$ToDate'
+								$WherePart
+								$WhereSupplierID
+								$WhereSupplierName
+								$WhereOrderNo
+								$WhereLineStatus
+								$WhereCategory
+								GROUP BY " . $_POST['SummaryType'] . ",
+									categorydescription
+								ORDER BY " . $orderby;
 				}
 			}
 		} // End of if ($_POST['ReportType']
 
-		
+
 		//echo "<br/>$sql<br/>";
 
 		$ErrMsg = _('The SQL to find the parts selected failed with the message');
@@ -571,7 +648,30 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 		if ($_POST['ReportType'] == 'Detail') {
 			echo '<br /><table class="selection" width="98%">';
 			if ($_POST['DateType'] == 'Order') {
-				printf('<tr><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%-s</th><th>%s', _('Order No') , _('Initiator') , _('Part Number') , _('Order Date') , _('Supplier No') , _('Supplier Name') , _('Order Qty') , _('Extended Cost') , _('Extended Price') , _('Invoiced Qty') , _('Line Status') , _('Item Due') , _('Part Description'));
+				printf('<tr>
+							<th>%s</th>
+							<th>%s</th>
+							<th>%s</th>
+							<th>%s</th>
+							<th>%s</th>
+							<th>%s</th>
+							<th>%s</th>
+							<th>%s</th>
+							<th>%s</th>
+							<th>%-s</th>
+							<th>%s</th>',
+							_('Order No') ,
+							_('Order Date') ,
+							_('Initiator') ,
+							_('Part Description') ,
+							_('Supplier Name') ,
+							_('Order Qty') ,
+							_('Extended Cost') ,
+							_('Extended Price') ,
+							_('Invoiced Qty') ,
+							_('Line Status') ,
+							_('Item Due')
+						);
 				$linectr = 0;
 				$k = 0;
 				while ($myrow = DB_fetch_array($result)) {
@@ -593,8 +693,32 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 						$ViewPurchOrder = $rootpath . '/PO_Header.php?ModifyOrderNumber=' . $myrow['orderno'];
 					}
 					printf('<td><a href="' . $ViewPurchOrder . '">%s</td>
-							<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td class="number">%s</td>
-						<td class="number">%s</td><td class="number">%s</td><td class="number">%s</td><td>%s</td><td>%s</td><td>%s</td></tr>', $myrow['orderno'], $myrow['initiator'], $myrow['itemcode'], ConvertSQLDate($myrow['orddate']) , $myrow['supplierno'], $myrow['suppname'], number_format($myrow['quantityord'], $myrow['decimalplaces']) , number_format($myrow['extcost'], 2) , number_format($myrow['extprice'], 2) , number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) , $myrow['linestatus'], ConvertSQLDate($myrow['deliverydate']) , $myrow['description']);
+							<td>%s</td>
+							<td>%s</td>
+							<td><a href="'.$rootpath . '/SelectProduct.php?StockID=%s">%s</a></td>
+							<td><a href="'.$rootpath . '/SelectSupplier.php?SupplierID=%s">%s</a></td>
+							<td class="number">%s</td>
+							<td class="number">%s&nbsp;%s</td>
+							<td class="number">%s&nbsp;%s</td>
+							<td class="number">%s</td>
+							<td>%s</td><td>%s</td></tr>',
+							$myrow['orderno'],
+							ConvertSQLDate($myrow['orddate']),
+							$myrow['initiator'],
+							$myrow['itemcode'] ,
+							$myrow['description'] ,
+							$myrow['supplierno'],
+							$myrow['suppname'],
+							number_format($myrow['quantityord'], $myrow['decimalplaces']) ,
+							$myrow['currcode'],
+							number_format($myrow['extcost'], $_SESSION['Currencies'][$myrow['currcode']]['DecimalPlaces']) ,
+							$myrow['currcode'],
+							number_format($myrow['extprice'], $_SESSION['Currencies'][$myrow['currcode']]['DecimalPlaces']) ,
+							number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) ,
+							$myrow['linestatus'],
+							ConvertSQLDate($myrow['deliverydate'])
+						);
+
 					$LastDecimalPlaces = $myrow['decimalplaces'];
 					$TotalQty+= $myrow['quantityord'];
 					$TotalExtCost+= $myrow['extcost'];
@@ -602,16 +726,12 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 					$TotalInvQty+= $myrow['qtyinvoiced'];
 				} //END WHILE LIST LOOP
 
-				
-				// Print totals
 
-				printf('<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td class="number">%s</td><td class="number">%s</td>
-						<td class="number">%s</td><td class="number">%s</td><td>%s</td><td>%s</td></tr>', 'Totals', ' ', _('Lines - ') . $linectr, ' ', ' ', ' ', number_format($TotalQty, 2) , number_format($TotalExtCost, 2) , number_format($TotalExtPrice, 2) , number_format($TotalInvQty, 2) , ' ', ' ');
 			}
 			else {
 
 				// Header for Date Type of Delivery Date
-				printf('<tr><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th></tr>', _('Order No') , _('Initiator') , _('Part Number') , _('Order Date') , _('Supplier No') , _('Supplier Name') , _('Received') , _('Extended Cost') , _('Extended Price') , _('Invoiced Qty') , _('Line Status') , _('Delivered') , _('Part Description'));
+				printf('<tr><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th><th>%s</th></tr>', _('Order No') , _('Order Date') , _('Initiator') , _('Part Description') , _('Supplier Name') , _('Received') , _('Extended Cost') , _('Extended Price') , _('Invoiced Qty') , _('Line Status') , _('Delivered'));
 				$linectr = 0;
 				$k = 0;
 				while ($myrow = DB_fetch_array($result)) {
@@ -626,7 +746,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 					$linectr++;
 
 					// Detail for both DateType of Ship
-					
+
 					// In sql, had to alias grns.qtyrecd as quantityord so could use same name here
 
 					if ($myrow['status'] == 'Completed' or $myrow['status'] == 'Cancelled' or $myrow['status'] == 'Rejected') {
@@ -636,8 +756,32 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 						$ViewPurchOrder = $rootpath . '/PO_Header.php?ModifyOrderNumber=' . $myrow['orderno'];
 					}
 					printf('<td><a href="' . $ViewPurchOrder . '">%s</td>
-							<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td class="number">%s</td><td class="number">
-						%s</td><td class="number">%s</td><td class="number">%s</td><td>%s</td><td>%s</td><td>%s</td></tr>', $myrow['orderno'], $myrow['initiator'], $myrow['itemcode'], ConvertSQLDate($myrow['orddate']) , $myrow['supplierno'], $myrow['suppname'], number_format($myrow['quantityord'], $myrow['decimalplaces']) , number_format($myrow['extcost'], 2) , number_format($myrow['extprice'], 2) , number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) , $myrow['linestatus'], ConvertSQLDate($myrow['deliverydate']) , $myrow['description']);
+							<td>%s</td>
+							<td>%s</td>
+							<td><a href="'.$rootpath . '/SelectProduct.php?StockID=%s">%s</a></td>
+							<td><a href="'.$rootpath . '/SelectSupplier.php?SupplierID=%s">%s</a></td>
+							<td class="number">%s</td>
+							<td class="number">%s</td>
+							<td class="number">%s</td>
+							<td class="number">%s</td>
+							<td>%s</td>
+							<td>%s</td>
+							</tr>',
+							$myrow['orderno'],
+							ConvertSQLDate($myrow['orddate']) ,
+							$myrow['initiator'],
+							$myrow['itemcode'],
+							$myrow['description'],
+							$myrow['supplierno'],
+							$myrow['suppname'],
+							number_format($myrow['quantityord'], $myrow['decimalplaces']) ,
+							number_format($myrow['extcost'], $_SESSION['Currencies'][$myrow['currcode']]['DecimalPlaces']) ,
+							number_format($myrow['extprice'], $_SESSION['Currencies'][$myrow['currcode']]['DecimalPlaces']) ,
+							number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) ,
+							$myrow['linestatus'],
+							ConvertSQLDate($myrow['deliverydate'])
+						);
+
 					$LastDecimalPlaces = $myrow['decimalplaces'];
 					$TotalQty+= $myrow['quantityord'];
 					$TotalExtCost+= $myrow['extcost'];
@@ -645,11 +789,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 					$TotalInvQty+= $myrow['qtyinvoiced'];
 				} //END WHILE LIST LOOP
 
-				
-				// Print totals
 
-				printf('<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td class="number">%s</td><td class="number">
-						%s</td><td class="number">%s</td><td class="number">%s</td><td>%s</td><td>%s</td></tr>', 'Totals', _('Lines - ') . $linectr, ' ', ' ', ' ', number_format($TotalQty, $LastDecimalPlaces) , number_format($TotalExtCost, 2) , number_format($TotalExtPrice, 2) , number_format($TotalInvQty, $LastDecimalPlaces) , ' ', ' ');
 			}
 			echo '</table>';
 		}
@@ -660,10 +800,10 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 			$summarytype = $_POST['SummaryType'];
 
 			// For SummaryType 'suppname' had to add supplierid to it for the GROUP BY in the sql,
-			
+
 			// but have to take it away for $myrow[$summarytype] to be valid
 
-			
+
 			// Set up description based on the Summary Type
 
 			if ($summarytype == 'suppname,suppliers.supplierid') {
@@ -732,7 +872,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 				$TotalInvQty+= $myrow['qtyinvoiced'];
 			} //END WHILE LIST LOOP
 
-			
+
 			// Print totals
 
 			printf('<tr><td>%s</td><td>%s</td><td class="number">%s</td><td class="number">%s</td><td class="number">%s</td><td class="number">%s</td></tr>', 'Totals', _('Lines - ') . $linectr, $TotalQty, number_format($TotalExtCost, 2) , number_format($TotalExtPrice, 2) , $TotalInvQty, ' ');
@@ -761,7 +901,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 		echo '</form>';
 	} // End of if inputerror != 1
 
-	
+
 } // End of function submit()
 
 
@@ -835,10 +975,10 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 	$WhereLineStatus = ' ';
 
 	// Had to use IF statement instead of comparing 'linestatus' to $_POST['LineStatus']
-	
+
 	//in WHERE clause because the WHERE clause didn't recognize
 
-	
+
 	// that had used the IF statement to create a field called linestatus
 
 	if ($_POST['LineStatus'] != 'All') {
@@ -925,10 +1065,10 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 			$orderby = $_POST['SummaryType'];
 
 			// The following is because the 'extprice' summary is a special case - with the other
-			
+
 			// summaries, you group and order on the same field; with 'extprice', you are actually
 
-			
+
 			// grouping on the stkcode and ordering by extprice descending
 
 			if ($_POST['SummaryType'] == 'extprice') {
@@ -1186,7 +1326,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 			}
 		} // End of if ($_POST['ReportType']
 
-		
+
 		//echo "<br/>$sql<br/>";
 
 		$ErrMsg = _('The SQL to find the parts selected failed with the message');
@@ -1251,7 +1391,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 					$TotalInvQty+= $myrow['qtyinvoiced'];
 				} //END WHILE LIST LOOP
 
-				
+
 				// Print totals
 
 				fprintf($FileHandle, '"%s","%s","%s","%s","%s",%s,%s,%s,%s,"%s","%s"' . "\n", 'Totals', _('Lines - ') . $linectr, ' ', ' ', ' ', number_format($TotalQty, 2) , number_format($TotalExtCost, 2) , number_format($TotalExtPrice, 2) , number_format($TotalInvQty, 2) , ' ', ' ');
@@ -1265,7 +1405,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 					$linectr++;
 
 					// Detail for both DateType of Ship
-					
+
 					// In sql, had to alias grns.qtyrecd as quantityord so could use same name here
 
 					fprintf($FileHandle, '"%s","%s","%s","%s","%s",%s,%s,%s,%s,"%s","%s","%s"' . "\n", $myrow['orderno'], $myrow['itemcode'], ConvertSQLDate($myrow['orddate']) , $myrow['supplierno'], $myrow['suppname'], number_format($myrow['quantityord'], $myrow['decimalplaces']) , number_format($myrow['extcost'], 2) , number_format($myrow['extprice'], 2) , number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) , $myrow['linestatus'], ConvertSQLDate($myrow['deliverydate']) , $myrow['description']);
@@ -1276,7 +1416,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 					$TotalInvQty+= $myrow['qtyinvoiced'];
 				} //END WHILE LIST LOOP
 
-				
+
 				// Print totals
 
 				fprintf($FileHandle, '"%s","%s","%s","%s","%s",%s,%s,%s,%s,"%s","%s"' . "\n", 'Totals', _('Lines - ') . $linectr, ' ', ' ', ' ', number_format($TotalQty, $LastDecimalPlaces) , number_format($TotalExtCost, 2) , number_format($TotalExtPrice, 2) , number_format($TotalInvQty, $LastDecimalPlaces) , " ", " ");
@@ -1288,10 +1428,10 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 			$summarytype = $_POST['SummaryType'];
 
 			// For SummaryType 'suppname' had to add supplierid to it for the GROUP BY in the sql,
-			
+
 			// but have to take it away for $myrow[$summarytype] to be valid
 
-			
+
 			// Set up description based on the Summary Type
 
 			if ($summarytype == 'suppname,suppliers.supplierid') {
@@ -1346,7 +1486,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 				$TotalInvQty+= $myrow['qtyinvoiced'];
 			} //END WHILE LIST LOOP
 
-			
+
 			// Print totals
 
 			fprintf($FileHandle, '"%s","%s",%s,%s,%s,%s,"%s"' . "\n", 'Totals', _('Lines - ') . $linectr, number_format($TotalQty, $LastDecimalPlaces) , number_format($TotalExtCost, 2) , number_format($TotalExtPrice, 2) , number_format($TotalInvQty, $LastDecimalPlaces) , ' ');
@@ -1358,7 +1498,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 		echo '<div class="centre"><a href="">' . _('Return to Selection') . '</a></div>';
 	} // End of if inputerror != 1
 
-	
+
 } // End of function submitcvs()
 
 
@@ -1367,7 +1507,7 @@ function display(&$db) //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_###
 {
 
 	// Display form fields. This function is called the first time
-	
+
 	// the page is called.
 
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
