@@ -213,7 +213,8 @@ if (isset($_POST['submit'])) {
 							controlled,
 							serialised,
 							materialcost+labourcost+overheadcost AS itemcost,
-							stockcategory.stockact
+							stockcategory.stockact,
+							stockcategory.wipact
 					FROM stockmaster
 					INNER JOIN stockcategory
 						ON stockmaster.categoryid=stockcategory.categoryid
@@ -225,6 +226,7 @@ if (isset($_POST['submit'])) {
 			$OldSerialised = $myrow[2];
 			$UnitCost = $myrow[3];
 			$OldStockAccount = $myrow[4];
+			$OldWipAccount = $myrow[5];
 
 			$sql = "SELECT SUM(locstock.quantity)
 					FROM locstock
@@ -234,12 +236,14 @@ if (isset($_POST['submit'])) {
 
 			/*Now check the GL account of the new category to see if it is different to the old stock gl account */
 
-			$result = DB_query("SELECT stockact
+			$result = DB_query("SELECT stockact,
+										wipact
 								FROM stockcategory
 								WHERE categoryid='" . $_POST['CategoryID'] . "'",
 							$db);
 			$NewStockActRow = DB_fetch_array($result);
 			$NewStockAct = $NewStockActRow['stockact'];
+			$NewWipAct = $NewStockActRow['wipact'];
 
 			if ($OldMBFlag != $_POST['MBFlag']){
 				if (($OldMBFlag == 'M' OR $OldMBFlag=='B') AND ($_POST['MBFlag']=='A' OR $_POST['MBFlag']=='K' OR $_POST['MBFlag']=='D' OR $_POST['MBFlag']=='G')){ /*then need to check that there is no stock holding first */
@@ -406,6 +410,41 @@ if (isset($_POST['submit'])) {
 												'" . Date('Y-m-d') . "',
 												'" . GetPeriodNo(Date('Y-m-d'),true) . "',
 												'" . $OldStockAccount . "',
+												'" . $StockID . ' ' . _('Change stock category') . "',
+												'" . (-$UnitCost* $StockQtyRow[0]) . "'";
+					$result = DB_query($sql,$db, $ErrMsg, $DbgMsg,true);
+
+					/*Then we need to make a journal to transfer the cost to the new wip account */
+					$JournalNo = GetNextTransNo(0,$db); //enter as a journal
+					$SQL = "INSERT INTO gltrans (type,
+												typeno,
+												trandate,
+												periodno,
+												account,
+												narrative,
+												amount)
+											VALUES ( 0,
+												'" . $JournalNo . "',
+												'" . Date('Y-m-d') . "',
+												'" . GetPeriodNo(Date('Y-m-d'),true) . "',
+												'" . $NewWipAccount . "',
+												'" . $StockID . ' ' . _('Change stock category') . "',
+												'" . ($UnitCost* $StockQtyRow[0]) . "'";
+					$ErrMsg =  _('The WIP cost journal could not be inserted because');
+					$DbgMsg = _('The SQL that was used to create the wip cost journal and failed was');
+					$result = DB_query($sql,$db, $ErrMsg, $DbgMsg,true);
+					$SQL = "INSERT INTO gltrans (type,
+												typeno,
+												trandate,
+												periodno,
+												account,
+												narrative,
+												amount)
+											VALUES ( 0,
+												'" . $JournalNo . "',
+												'" . Date('Y-m-d') . "',
+												'" . GetPeriodNo(Date('Y-m-d'),true) . "',
+												'" . $OldWipAccount . "',
 												'" . $StockID . ' ' . _('Change stock category') . "',
 												'" . (-$UnitCost* $StockQtyRow[0]) . "'";
 					$result = DB_query($sql,$db, $ErrMsg, $DbgMsg,true);
