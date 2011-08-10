@@ -262,6 +262,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 							materialcost='" . $Cost . "',
 							labourcost='" . $ItemCostRow['labourcost'] . "',
 							overheadcost='" . $ItemCostRow['overheadcost'] . "',
+							lastcurcostdate='" . Date('Y-m-d') . "',
 							lastcost='" . $ItemCostRow['cost'] . "'
 						WHERE stockid='" . $_POST['StockID'] . "'";
 
