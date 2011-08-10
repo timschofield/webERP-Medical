@@ -936,12 +936,14 @@ then do the updates and inserts to process the invoice entered */
 
 									$sql = "UPDATE stockmaster
 											SET lastcost=materialcost+overheadcost+labourcost,
+												lastcurcostdate='" . Date('Y-m-d') . "',
 												materialcost=materialcost+" . $CostIncrement . "
 											WHERE stockid='" . $EnteredGRN->ItemCode . "'";
 									$Result = DB_query($sql, $db, $ErrMsg, $DbgMsg, True);
 								} else {
 									$sql = "UPDATE stockmaster
 											SET lastcost=materialcost+overheadcost+labourcost,
+												lastcurcostdate='" . Date('Y-m-d') . "',
 												materialcost=" . ($EnteredGRN->ChgPrice /  $_SESSION['SuppTrans']->ExRate) . "
 											WHERE stockid='" . $EnteredGRN->ItemCode . "'";
 									$Result = DB_query($sql, $db, $ErrMsg, $DbgMsg, True);
