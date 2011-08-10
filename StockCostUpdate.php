@@ -22,21 +22,22 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/s
 if (isset($_POST['UpdateData'])){
 
 	$sql = "SELECT materialcost,
-								labourcost,
-								overheadcost,
-								mbflag,
-								sum(quantity) as totalqoh
-					FROM stockmaster INNER JOIN locstock
+					labourcost,
+					overheadcost,
+					mbflag,
+					sum(quantity) as totalqoh
+				FROM stockmaster
+				INNER JOIN locstock
 					ON stockmaster.stockid=locstock.stockid
-					WHERE stockmaster.stockid='".$StockID."'
-					GROUP BY description,
-								units,
-								lastcost,
-								actualcost,
-								materialcost,
-								labourcost,
-								overheadcost,
-								mbflag";
+				WHERE stockmaster.stockid='".$StockID."'
+				GROUP BY description,
+						units,
+						lastcost,
+						actualcost,
+						materialcost,
+						labourcost,
+						overheadcost,
+						mbflag";
 	$ErrMsg = _('The entered item code does not exist');
     $OldResult = DB_query($sql,$db,$ErrMsg);
     $OldRow = DB_fetch_array($OldResult);
@@ -65,11 +66,11 @@ if (isset($_POST['UpdateData'])){
 		$Result = DB_Txn_Begin($db);
 		ItemCostUpdateGL($db, $StockID, $NewCost, $OldCost, $_POST['QOH']);
 
-		$SQL = "UPDATE stockmaster SET
-											materialcost='" . $_POST['MaterialCost'] . "',
-											labourcost='" . $_POST['LabourCost'] . "',
-											overheadcost='" . $_POST['OverheadCost'] . "',
-											lastcost='" . $OldCost . "'
+		$SQL = "UPDATE stockmaster SET materialcost='" . $_POST['MaterialCost'] . "',
+										labourcost='" . $_POST['LabourCost'] . "',
+										overheadcost='" . $_POST['OverheadCost'] . "',
+										lastcost='" . $OldCost . "',
+										lastcurcostdate='" . Date('Y-m-d') . "'
 									WHERE stockid='" . $StockID . "'";
 
 		$ErrMsg = _('The cost details for the stock item could not be updated because');
@@ -86,30 +87,31 @@ $ErrMsg = _('The cost details for the stock item could not be retrieved because'
 $DbgMsg = _('The SQL that failed was');
 
 $result = DB_query("SELECT description,
-													units,
-													lastcost,
-													actualcost,
-													materialcost,
-													labourcost,
-													overheadcost,
-													mbflag,
-													stocktype,
-													sum(quantity) as totalqoh
-												FROM stockmaster INNER JOIN locstock
-													ON stockmaster.stockid=locstock.stockid
-													INNER JOIN stockcategory
-													ON stockmaster.categoryid = stockcategory.categoryid
-												WHERE stockmaster.stockid='" . $StockID . "'
-												GROUP BY description,
-													units,
-													lastcost,
-													actualcost,
-													materialcost,
-													labourcost,
-													overheadcost,
-													mbflag,
-													stocktype",
-												$db,$ErrMsg,$DbgMsg);
+							units,
+							lastcost,
+							actualcost,
+							materialcost,
+							labourcost,
+							overheadcost,
+							mbflag,
+							stocktype,
+							sum(quantity) as totalqoh
+						FROM stockmaster
+						INNER JOIN locstock
+							ON stockmaster.stockid=locstock.stockid
+						INNER JOIN stockcategory
+							ON stockmaster.categoryid = stockcategory.categoryid
+						WHERE stockmaster.stockid='" . $StockID . "'
+						GROUP BY description,
+								units,
+								lastcost,
+								actualcost,
+								materialcost,
+								labourcost,
+								overheadcost,
+								mbflag,
+								stocktype",
+						$db,$ErrMsg,$DbgMsg);
 
 
 $myrow = DB_fetch_array($result);
