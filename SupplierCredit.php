@@ -948,13 +948,15 @@ then do the updates and inserts to process the credit note entered */
 
 									$sql = "UPDATE stockmaster
 												SET lastcost=materialcost+overheadcost+labourcost,
+													lastcurcostdate='" . Date('Y-m-d') . "'
 													materialcost=materialcost+" . $CostIncrement . "
 												WHERE stockid='" . $EnteredGRN->ItemCode . "'";
 									$Result = DB_query($sql, $db, $ErrMsg, $DbgMsg, True);
 								} else {
 									$sql = "UPDATE stockmaster
 												SET lastcost=materialcost+overheadcost+labourcost,
-													materialcost=" . ($EnteredGRN->ChgPrice  / $_SESSION['SuppTrans']->ExRate) . "
+													materialcost=" . ($EnteredGRN->ChgPrice  / $_SESSION['SuppTrans']->ExRate) . ",
+													lastcurcostdate='" . Date('Y-m-d') . "'
 												WHERE stockid='" . $EnteredGRN->ItemCode . "'";
 									$Result = DB_query($sql, $db, $ErrMsg, $DbgMsg, True);
 								}
