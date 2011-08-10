@@ -383,6 +383,7 @@ If (isset($_POST['Close'])) {
 						materialcost='" . $NewCost . "',
 						labourcost=0,
 						overheadcost=0,
+						lastcurcostdate='" . Date('Y-m-d') . "',
 						lastcost='" . $WORow['currcost'] . "'
 					WHERE stockid='" . $_POST['StockID'] . "'";
 
