@@ -149,8 +149,7 @@ echo '<tr>
 
 $ThemeDirectory = dir('css/');
 
-
-while (false != ($ThemeName = $ThemeDirectory->read())){
+while (false !== ($ThemeName = $ThemeDirectory->read())){
 
 	if (is_dir("css/$ThemeName") AND $ThemeName != '.' AND $ThemeName != '..' AND $ThemeName != '.svn'){
 
@@ -161,6 +160,8 @@ while (false != ($ThemeName = $ThemeDirectory->read())){
 		}
 	}
 }
+
+$ThemeDirectory->close();
 
 if (!isset($_POST['passcheck'])) {
 	$_POST['passcheck']='';
