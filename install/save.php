@@ -3,6 +3,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', "On");
 ini_set('max_execution_time', "360");
+set_time_limit(360);
 
 require_once('../includes/MiscFunctions.php');
 // Start a session
