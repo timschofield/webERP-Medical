@@ -199,7 +199,7 @@ if (isset($_GET['NewOrder']) and isset($_GET['StockID']) and isset($_GET['Select
 
 }
 
-if (isset($_POST['EnterLines'])){
+if (isset($_POST['EnterLines']) or isset($_POST['LookupDeliveryAddress']) or isset($_POST['SearchSuppliers'])){
 /*User hit the button to enter line items -
  *  ensure session variables updated then meta refresh to PO_Items.php*/
 
@@ -231,27 +231,29 @@ if (isset($_POST['EnterLines'])){
 	$_SESSION['PO'.$identifier]->Tel = $_POST['Tel'];
 	$_SESSION['PO'.$identifier]->Port = $_POST['Port'];
 
-	if (isset($_POST['RePrint']) and $_POST['RePrint']==1){
+	if (!isset($_POST['LookupDeliveryAddress']) and !isset($_POST['SearchSuppliers'])) {
+		if (isset($_POST['RePrint']) and $_POST['RePrint']==1){
 
-		$_SESSION['PO'.$identifier]->AllowPrintPO=1;
+			$_SESSION['PO'.$identifier]->AllowPrintPO=1;
 
-		$sql = "UPDATE purchorders
+			$sql = "UPDATE purchorders
 						SET purchorders.allowprint=1
 						WHERE purchorders.orderno='" . $_SESSION['PO'.$identifier]->OrderNo ."'";
 
-		$ErrMsg = _('An error occurred updating the purchase order to allow reprints') . '. ' . _('The error says');
-		$UpdateResult = DB_query($sql,$db,$ErrMsg);
-	} else {
-		$_POST['RePrint'] = 0;
-	}
+			$ErrMsg = _('An error occurred updating the purchase order to allow reprints') . '. ' . _('The error says');
+			$UpdateResult = DB_query($sql,$db,$ErrMsg);
+		} else {
+			$_POST['RePrint'] = 0;
+		}
 
-	echo '<meta http-equiv="Refresh" content="0; url=' . $rootpath . '/PO_Items.php?identifier='.$identifier. '">';
-	echo '<br />';
-	prnMsg(_('You should automatically be forwarded to the entry of the purchase order line items page') . '. ' .
-		_('If this does not happen') . ' (' . _('if the browser does not support META Refresh') . ') ' .
-		'<a href="$rootpath/PO_Items.php?identifier='.$identifier . '">' . _('click here') . '</a> ' . _('to continue'),'info');
+		echo '<meta http-equiv="Refresh" content="0; url=' . $rootpath . '/PO_Items.php?identifier='.$identifier. '">';
+		echo '<br />';
+		prnMsg(_('You should automatically be forwarded to the entry of the purchase order line items page') . '. ' .
+			_('If this does not happen') . ' (' . _('if the browser does not support META Refresh') . ') ' .
+			'<a href="$rootpath/PO_Items.php?identifier='.$identifier . '">' . _('click here') . '</a> ' . _('to continue'),'info');
 		include('includes/footer.inc');
 		exit;
+	}
 } /* end of if isset _POST'EnterLines' */
 
 echo '<span style="float:left"><a href="'. $rootpath . '/PO_SelectOSPurchOrder.php?identifier='.$identifier.'">'. _('Back to Purchase Orders'). '</a></span>';
@@ -693,8 +695,8 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	if (!isset($_POST['LookupDeliveryAddress']) and (!isset($_POST['StkLocation']) or $_POST['StkLocation'])
 		AND (isset($_SESSION['PO'.$identifier]->Location) AND $_SESSION['PO'.$identifier]->Location != '')) {
 		/* The session variables are set but the form variables have
-	     * been lost --
-	     * need to restore the form variables from the session */
+		* been lost --
+		* need to restore the form variables from the session */
 		$_POST['StkLocation']=$_SESSION['PO'.$identifier]->Location;
 		$_POST['SupplierContact']=$_SESSION['PO'.$identifier]->SupplierContact;
 		$_POST['DelAdd1']=$_SESSION['PO'.$identifier]->DelAdd1;
