@@ -832,7 +832,7 @@ if (isset($_POST['NewItem'])){ /* NewItem is set from the part selection list as
 																	$myrow['price'],
 																	$myrow['unitname'],
 																	$myrow['stockact'],
-																	$_SESSION['PO'.$identifier]->DeliveryDate,
+																	DateAdd(date($_SESSION['DefaultDateFormat']),'d',$myrow['leadtime']),
 																	0,
 																	0,
 																	0,
