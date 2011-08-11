@@ -426,8 +426,7 @@ If (isset($_POST['PrintPDF']) && isset($_POST['FromCust']) && $_POST['FromCust']
 			<tr><td>'. _('Ending Customer statement to print (Customer code)').'</td><td>
 				<input type="text" maxlength="6" size="7" name="ToCust" value="zzzzzz" /></td></tr></table>
 				<br /><div class="centre">
-				<input type="submit" name="PrintPDF" value="' .
-				_('Print All Statements in the Range Selected').'" />
+				<input type="submit" name="PrintPDF" value="' . _('Print All Statements in the Range Selected').'" />
 			</div>';
 	}
 	echo '<br /><br /><br />';
