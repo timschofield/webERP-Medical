@@ -395,33 +395,31 @@ if ($InputError ==0){
 		echo '</select></td></tr>';
 
 		echo '<tr><td>'. _('Decimal Places') . '<br />'._('to display').'</td>';
-		echo '<td><input type="text" class="number" name="DecimalPlaces" size="8" maxlength="8" value="';
+
 		if(isset($_POST['DecimalPlaces'])) {
-			echo $_POST['DecimalPlaces'];
+			echo '<td><input type="text" class="number" name="DecimalPlaces" size="8" maxlength="8" value="' . $_POST['DecimalPlaces'] . '" />';
 		} else {
-			echo '0';
+			echo '<td><input type="text" class="number" name="DecimalPlaces" size="8" maxlength="8" value=0" />';
 		}
-		echo '" />';
 
 		echo '</td></tr>';
 		echo '<tr><td>'. _('Conversion Factor') . '<br />'._('to stock units').'</td>';
-		echo '<td><input type="text" class="number" name="ConversionFactor" size="8" maxlength="8" value="';
-		if(isset($_POST['ConversionFactor'])) {
-			echo $_POST['ConversionFactor'];
-		} else {
-			echo '1';
-		}
-		echo '" />';
 
+		if(isset($_POST['ConversionFactor'])) {
+			echo '<td><input type="text" class="number" name="ConversionFactor" size="8" maxlength="8" value="' . $_POST['ConversionFactor'] . '" />';
+		} else {
+			echo '<td><input type="text" class="number" name="ConversionFactor" size="8" maxlength="8" value="1" />';
+		}
 
 		echo '</td></tr>';
 
 		echo '<tr><td>'. _('Price') . ':</td>';
-		echo '<td><input type="text" class="number" name="Price" size="12" maxlength="11" value="';
+
 		if(isset($_POST['Price'])) {
-			echo $_POST['Price'];
+			echo '<td><input type="text" class="number" name="Price" size="12" maxlength="11" value="' . $_POST['Price'] . '" />';
+		} else {
+			echo '<td><input type="text" class="number" name="Price" size="12" maxlength="11" value="0" />';
 		}
-		echo '" />';
 
 		echo '</td></tr>';
 
