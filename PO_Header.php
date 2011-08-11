@@ -199,7 +199,7 @@ if (isset($_GET['NewOrder']) and isset($_GET['StockID']) and isset($_GET['Select
 
 }
 
-if (isset($_POST['EnterLines']) or isset($_POST['LookupDeliveryAddress']) or isset($_POST['SearchSuppliers'])){
+if ((isset($_POST['EnterLines']) or isset($_POST['LookupDeliveryAddress']) or isset($_POST['SearchSuppliers'])) and isset($_POST['StkLocation'])){
 /*User hit the button to enter line items -
  *  ensure session variables updated then meta refresh to PO_Items.php*/
 
