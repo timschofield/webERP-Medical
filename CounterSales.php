@@ -722,7 +722,7 @@ foreach ($_SESSION['Items'.$identifier]->LineItems as $OrderLine) {
 											FROM discountmatrix
 											WHERE salestype='" .  $_SESSION['Items'.$identifier]->DefaultSalesType . "'
 											AND discountcategory ='" . $OrderLine->DiscCat . "'
-											AND quantitybreak <'" . $QuantityOfDiscCat . "'",$db);
+											AND quantitybreak <='" . $QuantityOfDiscCat . "'",$db);
 		$myrow = DB_fetch_row($result);
 		if ($myrow[0]!=0){ /* need to update the lines affected */
 			foreach ($_SESSION['Items'.$identifier]->LineItems as $StkItems_2) {
