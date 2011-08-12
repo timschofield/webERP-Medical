@@ -6,8 +6,7 @@ include('includes/session.inc');
 $title = _('Tax Authorities');
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Supplier Types')
-	. '" alt="" />' . $title. '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Supplier Types') . '" alt="" />' . $title. '</p>';
 
 if (isset($_POST['SelectedTaxAuthID'])){
 	$SelectedTaxAuthID =$_POST['SelectedTaxAuthID'];
@@ -250,7 +249,7 @@ if (!isset($_POST['Description'])) {
 }
 echo '<table class="selection">
 <tr><td>' . _('Tax Type Description') . ':</td>
-<td><input type="text" name="Description" size="21" maxlength="20" value="' . $_POST['Description'] . '"></td></tr>';
+<td><input type="text" name="Description" size="21" maxlength="20" value="' . $_POST['Description'] . '" /></td></tr>';
 
 
 echo '<tr><td>' . _('Input tax GL Account') . ':</td>
@@ -258,9 +257,9 @@ echo '<tr><td>' . _('Input tax GL Account') . ':</td>
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['PurchTaxGLCode']) and $myrow['accountcode']==$_POST['PurchTaxGLCode']) {
-		echo '<option selected value='. $myrow['accountcode'] . '>' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
+		echo '<option selected="True" value="'. $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 	} else {
-		echo '<option value=' . $myrow['accountcode'] . '>' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
+		echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 	}
 
 } //end while loop
@@ -275,7 +274,7 @@ echo '<tr><td>' . _('Output tax GL Account') . ':</td>
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['TaxGLCode']) and $myrow['accountcode']==$_POST['TaxGLCode']) {
-		echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
+		echo '<option selected="True" value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 	} else {
 		echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 	}
@@ -297,13 +296,13 @@ if (!isset($_POST['BankSwift'])) {
 
 echo '</select></td></tr>';
 echo '<tr><td>' . _('Bank Name') . ':</td>';
-echo '<td><input type="text" name="Bank" size=41 maxlength=40 value="' . $_POST['Bank'] . '"></td></tr>';
+echo '<td><input type="text" name="Bank" size="41" maxlength="40" value="' . $_POST['Bank'] . '" /></td></tr>';
 echo '<tr><td>' . _('Bank Account Type') . ':</td>';
-echo '<td><input type="text" name="BankAccType" size=15 maxlength=20 value="' . $_POST['BankAccType'] . '"></td></tr>';
+echo '<td><input type="text" name="BankAccType" size="15" maxlength="20" value="' . $_POST['BankAccType'] . '" /></td></tr>';
 echo '<tr><td>' . _('Bank Account') . ':</td>';
-echo '<td><input type="text" name="BankAcc" size=21 maxlength=20 value="' . $_POST['BankAcc'] . '"></td></tr>';
+echo '<td><input type="text" name="BankAcc" size="21" maxlength="20" value="' . $_POST['BankAcc'] . '" /></td></tr>';
 echo '<tr><td>' . _('Bank Swift No') . ':</td>';
-echo '<td><input type="text" name="BankSwift" size=15 maxlength=14 value="' . $_POST['BankSwift'] . '"></td></tr>';
+echo '<td><input type="text" name="BankSwift" size="15" maxlength="14" value="' . $_POST['BankSwift'] . '" /></td></tr>';
 
 echo '</table>';
 

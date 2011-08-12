@@ -14,8 +14,7 @@ if (isset($_GET['New']) and isset($_SESSION['tender'])) {
 if (isset($_GET['New']) and $_SESSION['CanCreateTender']==0) {
 	$title = _('Authorisation Problem');
 	include('includes/header.inc');
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' .
-		$title . '" alt="">  '.$title . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . $title . '" alt="" />  '.$title . '</p>';
 	prnMsg( _('You do not have authority to create supplier tenders for this company.') . '<br />' .
 			_('Please see your system administrator'), 'warn');
 	include('includes/footer.inc');
@@ -25,8 +24,7 @@ if (isset($_GET['New']) and $_SESSION['CanCreateTender']==0) {
 if (isset($_GET['Edit']) and $_SESSION['CanCreateTender']==0) {
 	$title = _('Authorisation Problem');
 	include('includes/header.inc');
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' .
-		$title . '" alt="">  '.$title . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . $title . '" alt="" />  '.$title . '</p>';
 	prnMsg( _('You do not have authority to amend supplier tenders for this company.') . '<br />' .
 			_('Please see your system administrator'), 'warn');
 	include('includes/footer.inc');
@@ -105,8 +103,7 @@ if (isset($_GET['ID'])) {
 if (isset($_GET['Edit'])) {
 	$title = _('Edit an Existing Supplier Tender Request');
 	include('includes/header.inc');
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' .
-		_('Purchase Order Tendering') . '" alt="">  '.$title . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Purchase Order Tendering') . '" alt="" />  '.$title . '</p>';
 	$sql="SELECT tenderid,
 				location,
 				address1,
@@ -147,13 +144,11 @@ if (isset($_GET['Edit'])) {
 } else if (isset($_GET['ID']) or (isset($_SESSION['tender']->TenderId))) {
 	$title = _('Edit an Existing Supplier Tender Request');
 	include('includes/header.inc');
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' .
-		_('Purchase Order Tendering') . '" alt="">  '.$title . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Purchase Order Tendering') . '" alt="" />  '.$title . '</p>';
 } else {
 	$title = _('Create a New Supplier Tender Request');
 	include('includes/header.inc');
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' .
-		_('Purchase Order Tendering') . '" alt="">  '.$title . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Purchase Order Tendering') . '" alt="" />  '.$title . '</p>';
 }
 
 if (isset($_POST['Save'])) {
@@ -233,8 +228,7 @@ if (!isset($_SESSION['tender']) or isset($_POST['LookupDeliveryAddress']) or $Sh
 	echo '<table class="selection">';
 	echo '<tr><th colspan="4"><font size="3" color="navy">' . _('Tender header details') . '</font></th></tr>';
 	echo '<tr><td>' . _('Delivery Must Be Made Before') . '</td>';
-	echo '<td><input type="text" class="date" alt="' .$_SESSION['DefaultDateFormat'] . '" name="RequiredByDate" size="11" value="' .
-		date($_SESSION['DefaultDateFormat']) . '" /></td></tr>';
+	echo '<td><input type="text" class="date" alt="' .$_SESSION['DefaultDateFormat'] . '" name="RequiredByDate" size="11" value="' . date($_SESSION['DefaultDateFormat']) . '" /></td></tr>';
 
 	if (!isset($_POST['StkLocation']) OR $_POST['StkLocation']==''){
 	/* If this is the first time
@@ -328,41 +322,41 @@ if (!isset($_SESSION['tender']) or isset($_POST['LookupDeliveryAddress']) or $Sh
 
 	while ($LocnRow=DB_fetch_array($LocnResult)){
 		if ((isset($_SESSION['tender']->Location) and $_SESSION['tender']->Location == $LocnRow['loccode'])){
-			echo '<option selected value="' . $LocnRow['loccode'] . '">' . $LocnRow['locationname'] . '</option>';
+			echo '<option selected="True" value="' . $LocnRow['loccode'] . '">' . $LocnRow['locationname'] . '</option>';
 		} else {
 			echo '<option value="' . $LocnRow['loccode'] . '">' . $LocnRow['locationname'] . '</option>';
 		}
 	}
 
 	echo '</select>
-		<input type="submit" name="LookupDeliveryAddress" value="' ._('Select') . '"></td>
+		<input type="submit" name="LookupDeliveryAddress" value="' ._('Select') . '" /></td>
 		</tr>';
 
 	/* Display the details of the delivery location
 	 */
 	echo '<tr><td>' . _('Delivery Contact') . ':</td>
-		<td><input type="text" name="Contact" size="41"  value="' . $_SESSION['tender']->Contact . '"></td>
+		<td><input type="text" name="Contact" size="41"  value="' . $_SESSION['tender']->Contact . '" /></td>
 		</tr>';
 	echo '<tr><td>' . _('Address') . ' 1 :</td>
-		<td><input type="text" name="DelAdd1" size="41" maxlength="40" value="' . $_POST['DelAdd1'] . '"></td>
+		<td><input type="text" name="DelAdd1" size="41" maxlength="40" value="' . $_POST['DelAdd1'] . '" /></td>
 		</tr>';
 	echo '<tr><td>' . _('Address') . ' 2 :</td>
-		<td><input type="text" name="DelAdd2" size="41" maxlength="40" value="' . $_POST['DelAdd2'] . '"></td>
+		<td><input type="text" name="DelAdd2" size="41" maxlength="40" value="' . $_POST['DelAdd2'] . '" /></td>
 		</tr>';
 	echo '<tr><td>' . _('Address') . ' 3 :</td>
-		<td><input type="text" name="DelAdd3" size="41" maxlength="40" value="' . $_POST['DelAdd3'] . '"></td>
+		<td><input type="text" name="DelAdd3" size="41" maxlength="40" value="' . $_POST['DelAdd3'] . '" /></td>
 		</tr>';
 	echo '<tr><td>' . _('Address') . ' 4 :</td>
-		<td><input type="text" name="DelAdd4" size="21" maxlength="20" value="' . $_POST['DelAdd4'] . '"></td>
+		<td><input type="text" name="DelAdd4" size="21" maxlength="20" value="' . $_POST['DelAdd4'] . '" /></td>
 		</tr>';
 	echo '<tr><td>' . _('Address') . ' 5 :</td>
-		<td><input type="text" name="DelAdd5" size="16" maxlength="15" value="' . $_POST['DelAdd5'] . '"></td>
+		<td><input type="text" name="DelAdd5" size="16" maxlength="15" value="' . $_POST['DelAdd5'] . '" /></td>
 		</tr>';
 	echo '<tr><td>' . _('Address') . ' 6 :</td>
-		<td><input type="text" name="DelAdd6" size="16" maxlength=15 value="' . $_POST['DelAdd6'] . '"></td>
+		<td><input type="text" name="DelAdd6" size="16" maxlength="15" value="' . $_POST['DelAdd6'] . '" /></td>
 		</tr>';
 	echo '<tr><td>' . _('Phone') . ':</td>
-		<td><input type="text" name="Tel" size="31" maxlength="30" value="' . $_SESSION['tender']->Telephone . '"></td>
+		<td><input type="text" name="Tel" size="31" maxlength="30" value="' . $_SESSION['tender']->Telephone . '" /></td>
 		</tr>';
 	echo '</table><br />';
 
@@ -488,21 +482,20 @@ if (!isset($_POST['PageOffset'])) {
 if (isset($_POST['Suppliers'])) {
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') .
-		'" alt="" />' . ' ' . _('Search for Suppliers') . '</p>
-		<table cellpadding=3 colspan=4 class="selection"><tr><td>' . _('Enter a partial Name') . ':</font></td><td>';
+	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Search for Suppliers') . '</p>
+		<table cellpadding="3" colspan="4" class="selection"><tr><td>' . _('Enter a partial Name') . ':</td><td>';
 	if (isset($_POST['Keywords'])) {
-		echo '<input type="Text" name="Keywords" value="' . $_POST['Keywords'] . '" size=20 maxlength=25>';
+		echo '<input type="text" name="Keywords" value="' . $_POST['Keywords'] . '" size="20" maxlength="25" />';
 	} else {
-		echo '<input type="Text" name="Keywords" size=20 maxlength=25>';
+		echo '<input type="text" name="Keywords" size="20" maxlength="25" />';
 	}
 	echo '</td><td><b>' . _('OR') . '</b></font></td><td>' . _('Enter a partial Code') . ':</font></td><td>';
 	if (isset($_POST['SupplierCode'])) {
-		echo '<input type="text" name="SupplierCode" value="' . $_POST['SupplierCode'] . '" size=15 maxlength=18>';
+		echo '<input type="text" name="SupplierCode" value="' . $_POST['SupplierCode'] . '" size="15" maxlength="18" />';
 	} else {
-		echo '<input type="Text" name="SupplierCode" size=15 maxlength=18>';
+		echo '<input type="text" name="SupplierCode" size="15" maxlength="18" />';
 	}
-	echo '</td></tr></table><br /><div class="centre"><input type="submit" name="SearchSupplier" value="' . _('Search Now') . '"></div>';
+	echo '</td></tr></table><br /><div class="centre"><input type="submit" name="SearchSupplier" value="' . _('Search Now') . '" /></div>';
 	echo '</form>';
 }
 
@@ -534,14 +527,14 @@ if (isset($_POST['SearchSupplier'])) {
 			$ListPage++;
 		}
 		echo '</select>
-			<input type="submit" name="Go" value="' . _('Go') . '">
-			<input type="submit" name="Previous" value="' . _('Previous') . '">
-			<input type="submit" name="Next" value="' . _('Next') . '">';
+			<input type="submit" name="Go" value="' . _('Go') . '" />
+			<input type="submit" name="Previous" value="' . _('Previous') . '" />
+			<input type="submit" name="Next" value="' . _('Next') . '" />';
 		echo '<br />';
 	}
-	echo '<input type="hidden" name="Search" value="' . _('Search Now') . '">';
+	echo '<input type="hidden" name="Search" value="' . _('Search Now') . '" />';
 	echo '<br /><br />';
-	echo '<br /><table cellpadding=2 colspan=7>';
+	echo '<br /><table cellpadding="2" colspan="7">';
 	$tableheader = '<tr>
   		<th>' . _('Code') . '</th>
 		<th>' . _('Supplier Name') . '</th>
@@ -586,15 +579,14 @@ if (isset($_POST['SearchSupplier'])) {
 if (isset($_POST['Items'])) {
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' .
-		_('Search') . '" alt="" />' . ' ' . _('Search for Inventory Items') . '</p>';
+	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Search for Inventory Items') . '</p>';
 	$sql = "SELECT categoryid,
 			categorydescription
 		FROM stockcategory
 		ORDER BY categorydescription";
 	$result = DB_query($sql, $db);
 	if (DB_num_rows($result) == 0) {
-		echo '<br /><font size=4 color=red>' . _('Problem Report') . ':</font><br />' .
+		echo '<br /><font size="4" color="red">' . _('Problem Report') . ':</font><br />' .
 			_('There are no stock categories currently defined please use the link below to set them up');
 		echo '<br /><a href="' . $rootpath . '/StockCategories.php">' . _('Define Stock Categories') . '</a>';
 		exit;
@@ -606,13 +598,13 @@ if (isset($_POST['Items'])) {
 		$_POST['StockCat'] = "";
 	}
 	if ($_POST['StockCat'] == 'All') {
-		echo '<option selected value="All">' . _('All') . '</option>';
+		echo '<option selected="True" value="All">' . _('All') . '</option>';
 	} else {
 		echo '<option value="All">' . _('All') . '</option>';
 	}
 	while ($myrow1 = DB_fetch_array($result)) {
 		if ($myrow1['categoryid'] == $_POST['StockCat']) {
-			echo '<option selected value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
+			echo '<option selected="True" value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 		}
@@ -620,17 +612,17 @@ if (isset($_POST['Items'])) {
 	echo '</select>';
 	echo '<td>' . _('Enter partial') . '<b> ' . _('Description') . '</b>:</td><td>';
 	if (isset($_POST['Keywords'])) {
-		echo '<input type="text" name="Keywords" value="' . $_POST['Keywords'] . '" size=20 maxlength=25>';
+		echo '<input type="text" name="Keywords" value="' . $_POST['Keywords'] . '" size="20" maxlength="25" />';
 	} else {
-		echo '<input type="text" name="Keywords" size=20 maxlength=25>';
+		echo '<input type="text" name="Keywords" size="20" maxlength="25" />';
 	}
 	echo '</td></tr><tr><td></td>';
-	echo '<td><font size 3><b>' . _('OR') . ' ' . '</b></font>' . _('Enter partial') . ' <b>' . _('Stock Code') . '</b>:</td>';
+	echo '<td><font size="3"><b>' . _('OR') . ' ' . '</b></font>' . _('Enter partial') . ' <b>' . _('Stock Code') . '</b>:</td>';
 	echo '<td>';
 	if (isset($_POST['StockCode'])) {
-		echo '<input type="text" name="StockCode" value="' . $_POST['StockCode'] . '" size=15 maxlength=18>';
+		echo '<input type="text" name="StockCode" value="' . $_POST['StockCode'] . '" size="15" maxlength="18" />';
 	} else {
-		echo '<input type="text" name="StockCode" size=15 maxlength=18>';
+		echo '<input type="text" name="StockCode" size="15" maxlength="18" />';
 	}
 	echo '</td></tr></table><br />';
 	echo '<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" /></div><br /></form>';
@@ -641,8 +633,7 @@ if (isset($_POST['Items'])) {
 if (isset($_POST['Search'])){  /*ie seach for stock items */
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] .'">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/supplier.png" title="' .
-		_('Tenders') . '" alt="" />' . ' ' . _('Select items required on this tender').'</p>';
+	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/supplier.png" title="' . _('Tenders') . '" alt="" />' . ' ' . _('Select items required on this tender').'</p>';
 
 	if ($_POST['Keywords'] AND $_POST['StockCode']) {
 		prnMsg( _('Stock description keywords have been used in preference to the Stock code extract entered'), 'info' );
@@ -752,7 +743,7 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 
 	if (isset($SearchResult)) {
 
-		echo '<table cellpadding=1 colspan=7>';
+		echo '<table cellpadding="1" colspan="7">';
 
 		$tableheader = '<tr>
 			<th>' . _('Code')  . '</th>
@@ -779,8 +770,7 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 			$filename = $myrow['stockid'] . '.jpg';
 			if (file_exists( $_SESSION['part_pics_dir'] . '/' . $filename) ) {
 
-				$ImageSource = '<img src="'.$rootpath . '/' . $_SESSION['part_pics_dir'] . '/' . $myrow['stockid'] .
-					'.jpg" width="50" height="50">';
+				$ImageSource = '<img src="'.$rootpath . '/' . $_SESSION['part_pics_dir'] . '/' . $myrow['stockid'] . '.jpg" width="50" height="50" />';
 
 			} else {
 				$ImageSource = '<i>'._('No Image').'</i>';
@@ -792,8 +782,8 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 					<td>'.$myrow['description'].'</td>
 					<td>'.$uom.'</td>
 					<td>'.$ImageSource.'</td>
-					<td><input class="number" type="text" size=6 value=0 name="qty'.$myrow['stockid'].'"></td>
-					<input type="hidden" size=6 value="'.$uom.'" name="uom'.$myrow['stockid'].'">
+					<td><input class="number" type="text" size="6" value="0" name="qty'.$myrow['stockid'].'" /></td>
+					<input type="hidden" size="6" value="'.$uom.'" name="uom'.$myrow['stockid'].'" />
 					</tr>';
 
 			$PartsDisplayed++;
@@ -811,7 +801,7 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 			prnMsg( _('Only the first') . ' ' . $Maximum_Number_Of_Parts_To_Show . ' ' . _('can be displayed') . '. ' .
 				_('Please restrict your search to only the parts required'),'info');
 		}
-		echo '<a name="end"></a><br /><div class="centre"><input type="submit" name="NewItem" value="Add to Tender"></div>';
+		echo '<a name="end"></a><br /><div class="centre"><input type="submit" name="NewItem" value="Add to Tender" /></div>';
 	}#end if SearchResults to show
 
 	echo '</form>';

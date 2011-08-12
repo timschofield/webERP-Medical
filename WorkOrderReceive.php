@@ -9,8 +9,7 @@ include('includes/SQL_CommonFunctions.inc');
 echo '<a href="'. $rootpath . '/SelectWorkOrder.php">' . _('Back to Work Orders'). '</a><br />';
 echo '<a href="'. $rootpath . '/WorkOrderCosting.php?WO=' .  $_REQUEST['WO'] . '">' . _('Back to Costing'). '</a><br />';
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/group_add.png" title="' .
-	_('Search') . '" alt="" />' . $title.'</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/group_add.png" title="' . _('Search') . '" alt="" />' . $title.'</p>';
 
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -23,9 +22,9 @@ if (!isset($_REQUEST['WO']) OR !isset($_REQUEST['StockID'])) {
 	include ('includes/footer.inc');
 	exit;
 } else {
-	echo '<input type="hidden" name="WO" value=' .$_REQUEST['WO'] . '>';
+	echo '<input type="hidden" name="WO" value="' .$_REQUEST['WO'] . '" />';
 	$_POST['WO']=$_REQUEST['WO'];
-	echo '<input type="hidden" name="StockID" value=' .$_REQUEST['StockID'] . '>';
+	echo '<input type="hidden" name="StockID" value="' .$_REQUEST['StockID'] . '" />';
 	$_POST['StockID']=$_REQUEST['StockID'];
 }
 
@@ -267,6 +266,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 							materialcost='" . $Cost . "',
 							labourcost='" . $ItemCostRow['labourcost'] . "',
 							overheadcost='" . $ItemCostRow['overheadcost'] . "',
+							lastcurcostdate='" . Date('Y-m-d') . "',
 							lastcost='" . $ItemCostRow['cost'] . "'
 						WHERE stockid='" . $_POST['StockID'] . "'";
 
@@ -744,7 +744,7 @@ if ($WORow['closed']==1){
 if (!isset($_POST['ReceivedDate'])){
 	$_POST['ReceivedDate'] = Date($_SESSION['DefaultDateFormat']);
 }
-echo '<table cellpadding=2 class="selection">
+echo '<table cellpadding="2" class="selection">
 		<tr><td>' . _('Receive work order') . ':</td>
 			<td>' . $_POST['WO'] .'</td><td>' . _('Item') . ':</td>
 			<td>' . $_POST['StockID'] . ' - ' . $WORow['description'] . '</td></tr>
@@ -754,10 +754,10 @@ echo '<table cellpadding=2 class="selection">
 			<td>' . ConvertSQLDate($WORow['requiredby']) . '</td></tr>
 		 <tr><td>' . _('Quantity Ordered') . ':</td>
 		 	<td class="number">' . number_format($WORow['qtyreqd'],$WORow['decimalplaces']) . '</td>
-			<td colspan=2>' . $WORow['units'] . '</td></tr>
+			<td colspan="2">' . $WORow['units'] . '</td></tr>
 		 <tr><td>' . _('Already Received') . ':</td>
 		 	<td class="number">' . number_format($WORow['qtyrecd'],$WORow['decimalplaces']) . '</td>
-			<td colspan=2>' . $WORow['units'] . '</td></tr>
+			<td colspan="2">' . $WORow['units'] . '</td></tr>
 		 <tr><td>' . _('Date Received') . ':</td>
 		 	<td>' . Date($_SESSION['DefaultDateFormat']) . '</td>
 			<td>' . _('Received Into') . ':</td><td>
@@ -770,7 +770,7 @@ if (!isset($_POST['IntoLocation'])){
 $LocResult = DB_query("SELECT loccode, locationname FROM locations",$db);
 while ($LocRow = DB_fetch_array($LocResult)){
 	if ($_POST['IntoLocation'] ==$LocRow['loccode']){
-		echo '<option selected value="' . $LocRow['loccode'] .'">' . $LocRow['locationname'] . '</option>';
+		echo '<option selected="True" value="' . $LocRow['loccode'] .'">' . $LocRow['locationname'] . '</option>';
 	} else {
 		echo '<option value="' . $LocRow['loccode'] .'">' . $LocRow['locationname'] . '</option>';
 	}
@@ -815,7 +815,9 @@ if($WORow['controlled']==1){ //controlled
 					if (($i/5 -intval($i/5))==0){
 						echo '</tr><tr>';
 					}
-					echo '<td><input type="checkbox" name="CheckItem' . $i . '">'. $WOSNRow[0] .'<input type="hidden" name="SerialNo' . $i . '" value="' . $WOSNRow[0] . '"><input type="hidden" name="QualityText' . $i . '" value="' . $WOSNRow[1] . '"></td>';
+					echo '<td><input type="checkbox" name="CheckItem' . $i . '" />'. $WOSNRow[0] .
+						'<input type="hidden" name="SerialNo' . $i . '" value="' . $WOSNRow[0] . '" />
+						<input type="hidden" name="QualityText' . $i . '" value="' . $WOSNRow[1] . '" /></td>';
 					$i++;
 				}
 			}
@@ -824,18 +826,19 @@ if($WORow['controlled']==1){ //controlled
 				if (($i/5 -intval($i/5))==0){
 					echo '</tr><tr>';
 				}
-				echo '<td><input type="textbox" name="SerialNo' . $i . '" ';
+
 				if ($i==0){
-					echo 'value="' . $StringBitOfLotSNRef . ($LotSNRefNumeric + 1) . '"';
+					echo '<td><input type="text" name="SerialNo' . $i . '" value="' . $StringBitOfLotSNRef . ($LotSNRefNumeric + 1) . '" /></td>';
+				} else {
+					echo '<td><input type="text" name="SerialNo' . $i . '" value="" /></td>';
 				}
-				echo '"></td>';
 
 			}
 		}
 		echo '</tr>';
-		echo '<input type="hidden" name="CountOfInputs" value=' . $i . '>';
-		echo '<tr><td colspan=5></td></tr></table>';
-		echo '<br /><div class="centre"><input type="submit" name="Process" value="' . _('Process Manufactured Items Received') . '"></div>';
+		echo '<input type="hidden" name="CountOfInputs" value="' . $i . '" />';
+		echo '<tr><td colspan="5"></td></tr></table>';
+		echo '<br /><div class="centre"><input type="submit" name="Process" value="' . _('Process Manufactured Items Received') . '" /></div>';
 	} else { //controlled but not serialised - just lot/batch control
 		echo '<tr><th colspan="2">' . _('Batch/Lots Received') . '</th></tr>';
 		if ($_SESSION['DefineControlledOnWOEntry']==1){ //then potentially batches/lots already set up
@@ -852,32 +855,32 @@ if($WORow['controlled']==1){ //controlled
 					if (($i/5 -intval($i/5))==0){
 						echo '</tr><tr>';
 					}
-					echo '<td><input type="textbox" name="BatchRef' . $i . '" value="' . $WOSNRow[0] . '"></td>
-						  <td><input type="textbox" class="number" name="Qty' . $i . '" >
-						  		<input type="hidden" name="QualityText' . $i . '" value="' . $WOSNRow[2] . '">
-						  		<input type="hidden" name="QtyReqd' . $i . '" value="' . $WOSNRow[1] . '"></td></tr>';
+					echo '<td><input type="text" name="BatchRef' . $i . '" value="' . $WOSNRow[0] . '" /></td>
+						  <td><input type="text" class="number" name="Qty' . $i . '" />
+						  		<input type="hidden" name="QualityText' . $i . '" value="' . $WOSNRow[2] . '" />
+						  		<input type="hidden" name="QtyReqd' . $i . '" value="' . $WOSNRow[1] . '" /></td></tr>';
 					$i++;
 				}
 			}
 		} else { // batches/lots yet to be set up enter them manually
 			for ($i=0;$i<15;$i++){
-				echo '<tr><td><input type="textbox" name="BatchRef' . $i .'" ';
-
 				if ($i==0){
-					echo 'value="' . $StringBitOfLotSNRef . ($LotSNRefNumeric + 1) . '"';
+					echo '<tr><td><input type="text" name="BatchRef' . $i .'" value="' . $StringBitOfLotSNRef . ($LotSNRefNumeric + 1) . '" />';
+				} else {
+					echo '<tr><td><input type="text" name="BatchRef' . $i .'" />';
 				}
-				echo '></td>
-						  <td><input type="textbox" class="number" name="Qty' . $i .'"></td></tr>';
+				echo '</td>
+						  <td><input type="text" class="number" name="Qty' . $i .'" /></td></tr>';
 			}
 		}
-		echo '<input type="hidden" name="CountOfInputs" value=' . $i . '></table>';
+		echo '<input type="hidden" name="CountOfInputs" value="' . $i . '" /></table>';
 		echo '<br /><div class="centre"><input type="submit" name="Process" value="' . _('Process Manufactured Items Received') . '"></div>';
 	} //end of lot/batch control
 } else { //not controlled - an easy one!
 
-	echo '<input type="hidden" name="CountOfInputs" value=1>';
+	echo '<input type="hidden" name="CountOfInputs" value="1" />';
 	echo '<tr><td>' . _('Quantity Received') . ':</td>
-			  <td><input type="text" class="number" name="Qty"></tr></table>';
+			  <td><input type="text" class="number" name="Qty" /></tr></table>';
 	echo '<br /><div class="centre"><input type="submit" name="Process" value="' . _('Process Manufactured Items Received') . '" /></div>';
 }
 

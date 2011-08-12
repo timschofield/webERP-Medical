@@ -110,8 +110,7 @@ If (isset($_POST['PrintPDF'])
 
 	$title=_('Bill Of Material Listing');
 	include('includes/header.inc');
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/reports.png" title="' . _('Search') .
-		'" alt="" />' . ' ' . $title . '</p><br />';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/reports.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p><br />';
 	if (!isset($_POST['FromCriteria']) || !isset($_POST['ToCriteria'])) {
 
 	/*if $FromCriteria is not set then show a form to allow input	*/
@@ -119,9 +118,9 @@ If (isset($_POST['PrintPDF'])
 		echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="POST"><table class="selection">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-		echo '<tr><td>' . _('From Inventory Part Code') . ':' . '</font></td><td><input tabindex="1" type="text" name=FromCriteria size=20 maxlength=20 value="1"></td></tr>';
+		echo '<tr><td>' . _('From Inventory Part Code') . ':' . '</font></td><td><input tabindex="1" type="text" name="FromCriteria" size="20" maxlength="20" value="1" /></td></tr>';
 
-		echo '<tr><td>' . _('To Inventory Part Code') . ':' . '</td><td><input tabindex="2" type="text" name=ToCriteria size=20 maxlength=20 value="zzzzzzz"></td></tr>';
+		echo '<tr><td>' . _('To Inventory Part Code') . ':' . '</td><td><input tabindex="2" type="text" name="ToCriteria" size="20" maxlength="20" value="zzzzzzz" /></td></tr>';
 
 
 		echo '</table><br /><div class="centre"><input tabindex="3" type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';

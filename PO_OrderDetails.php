@@ -26,7 +26,7 @@ if (isset($_GET['FromGRNNo'])){
 
 	$orderRow = DB_fetch_row($orderResult);
 	$_GET['OrderNo'] = $orderRow[0];
-	echo '<br /><font size=4 color=BLUE>' . _('Order Number') . ' ' . $_GET['OrderNo'] . '</font>';
+	echo '<br /><font size="4" color="blue">' . _('Order Number') . ' ' . $_GET['OrderNo'] . '</font>';
 }
 
 if (!isset($_GET['OrderNo'])) {
@@ -80,11 +80,10 @@ if (DB_num_rows($GetOrdHdrResult)!=1) {
 $myrow = DB_fetch_array($GetOrdHdrResult);
 
 /* SHOW ALL THE ORDER INFO IN ONE PLACE */
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' .
-		_('Purchase Order') . '" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Purchase Order') . '" alt="" />' . ' ' . $title . '</p>';
 
-echo '<table class="selection" cellpadding=2>';
-echo '<tr><th colspan=8><font size=3 color=navy>'. _('Order Header Details'). '</font></th></tr>';
+echo '<table class="selection" cellpadding="2">';
+echo '<tr><th colspan="8"><font size="3" color="navy">'. _('Order Header Details'). '</font></th></tr>';
 echo '<tr><th style="text-align:left">' . _('Supplier Code'). '</td><td><a href="SelectSupplier.php?SupplierID='.$myrow['supplierid'].'">' . $myrow['supplierid'] . '</a></td>
 	<th style="text-align:left">' . _('Supplier Name'). '</td><td><a href="SelectSupplier.php?SupplierID='.$myrow['supplierid'].'">' . $myrow['suppname'] . '</a></td></tr>';
 
@@ -107,7 +106,7 @@ echo '<tr><th style="text-align:left">' . _('Requisition Ref'). '.</td><td>' . $
 	<th style="text-align:left">' . _('Delivery Address 6'). '</td><td>' . $myrow['deladd6'] . '</td></tr>';
 
 
-echo '<tr><th style="text-align:left">'. _('Printing') . '</td><td colspan=3>';
+echo '<tr><th style="text-align:left">'. _('Printing') . '</td><td colspan="3">';
 
 if ($myrow['dateprinted'] == ''){
 	echo '<i>'. _('Not yet printed') . '</i> &nbsp; &nbsp; ';
@@ -120,7 +119,7 @@ if ($myrow['dateprinted'] == ''){
 echo  '</td></tr>';
 echo '<tr><th style="text-align:left">'. _('Status') . '</td><td>'. _($myrow['status']) . '</td></tr>';
 
-echo '<tr><th style="text-align:left">' . _('Comments'). '</td><td colspan=3>' . $myrow['comments'] . '</td></tr>';
+echo '<tr><th style="text-align:left">' . _('Comments'). '</td><td colspan="3">' . $myrow['comments'] . '</td></tr>';
 
 echo '</table>';
 
@@ -134,8 +133,8 @@ $LineItemsSQL = "SELECT purchorderdetails.* FROM purchorderdetails
 $LineItemsResult = db_query($LineItemsSQL,$db, $ErrMsg);
 
 
-echo '<table colspan=8 class="selection" cellpadding=0>';
-echo '<tr><th colspan=8><font size=3 color=navy>'. _('Order Line Details'). '</font></th></tr>';
+echo '<table colspan="8" class="selection" cellpadding="0">';
+echo '<tr><th colspan="8"><font size="3" color="navy">'. _('Order Line Details'). '</font></th></tr>';
 echo '<tr>
 		<th>' . _('Item Code'). '</td>
 		<th>' . _('Item Description'). '</td>
@@ -194,11 +193,11 @@ while ($myrow=db_fetch_array($LineItemsResult)) {
 
 echo '<tr><td><br /></td>
 	</tr>
-	<tr><td colspan=4 class="number">' . _('Total Order Value Excluding Tax') .'</td>
-	<td colspan=2 class="number">' . number_format($OrderTotal,2) . '</td></tr>';
+	<tr><td colspan="4" class="number">' . _('Total Order Value Excluding Tax') .'</td>
+	<td colspan="2" class="number">' . number_format($OrderTotal,2) . '</td></tr>';
 echo '<tr>
-	<td colspan=4 class="number">' . _('Total Order Value Received Excluding Tax') . '</td>
-	<td colspan=2 class="number">' . number_format($RecdTotal,2) . '</td></tr>';
+	<td colspan="4" class="number">' . _('Total Order Value Received Excluding Tax') . '</td>
+	<td colspan="2" class="number">' . number_format($RecdTotal,2) . '</td></tr>';
 echo '</table>';
 
 echo '<br />';

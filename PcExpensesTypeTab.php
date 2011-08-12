@@ -5,8 +5,7 @@ include('includes/session.inc');
 $title = _('Maintenance Of Petty Cash Expenses For a Type Tab');
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Payment Entry')
-	. '" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Payment Entry') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (isset($_POST['SelectedType'])){
 	$SelectedType = strtoupper($_POST['SelectedType']);
@@ -127,7 +126,7 @@ or deletion of the records*/
 	echo '<option value=""></option>';
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($SelectedTab) and $myrow['typetabcode']==$SelectedTab) {
-			echo '<option selected value="' . $myrow['typetabcode'] . '">' . $myrow['typetabcode'] . ' - ' . $myrow['typetabdescription'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['typetabcode'] . '">' . $myrow['typetabcode'] . ' - ' . $myrow['typetabdescription'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow['typetabcode'] . '">' . $myrow['typetabcode'] . ' - ' . $myrow['typetabdescription'] . '</option>';
 		}
@@ -139,7 +138,9 @@ or deletion of the records*/
 	   	echo '</table>'; // close table in first column
    	echo '</td></tr></table>'; // close main table
 
-	echo '<br /><div class="centre"><input type="submit" name=process value="' . _('Accept') . '"><input type="submit" name=Cancel value="' . _('Cancel') . '"></div>';
+	echo '<br /><div class="centre">
+			<input type="submit" name=process value="' . _('Accept') . '" />
+			<input type="submit" name=Cancel value="' . _('Cancel') . '" /></div>';
 
 	echo '</form>';
 
@@ -209,7 +210,7 @@ or deletion of the records*/
 		echo '<option value=""></option>';
 		while ($myrow = DB_fetch_array($result)) {
 			if (isset($_POST['SelectedExpense']) and $myrow['codeexpense']==$_POST['SelectedExpense']) {
-				echo '<option selected value="' . $myrow['codeexpense'] . '">' . $myrow['codeexpense'] . ' - ' . $myrow['description'] . '</option>';
+				echo '<option selected="True" value="' . $myrow['codeexpense'] . '">' . $myrow['codeexpense'] . ' - ' . $myrow['description'] . '</option>';
 			} else {
 				echo '<option value="' . $myrow['codeexpense'] . '">' . $myrow['codeexpense'] . ' - ' . $myrow['description'] . '</option>';
 			}

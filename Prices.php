@@ -27,8 +27,7 @@ if (!isset($_POST['CurrAbrev'])){
 	$_POST['CurrAbrev'] = $_SESSION['CompanyRecord']['currencydefault'];
 }
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Search') .
-		'" alt="" />' . '</img>' . $title.'</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Search') .  '" alt="" />' . '</img>' . $title.'</p>';
 
 echo '<div class="centre"><a href="' . $rootpath . '/SelectProduct.php">' . _('Back to Items') . '</a></div>';
 
@@ -223,7 +222,7 @@ if ($InputError ==0){
 
 	if (DB_num_rows($result) > 0) {
 		echo '<table class="selection">';
-		echo '<tr><th colspan=8><form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+		echo '<tr><th colspan="8"><form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo _('Pricing for part') . ':<input type="text" name="Item" maxsize="22" value="' . $Item . '" maxlength="20" />
 				<input type="submit" name="NewPart" value="' . _('Review Prices') . '" />';
@@ -346,7 +345,7 @@ if ($InputError ==0){
 
 		while ($myrow = DB_fetch_array($result)) {
 			if ($myrow['typeabbrev']==$_POST['TypeAbbrev']) {
-				echo '<option selected value="' . $myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
+				echo '<option selected="True" value="' . $myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
 			} else {
 				echo '<option value="' . $myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
 			}
@@ -360,7 +359,7 @@ if ($InputError ==0){
 		echo '<tr><td>' . _('Currency') . ':</td><td><select name="CurrAbrev">';
 		while ($myrow = DB_fetch_array($result)) {
 			if ($myrow['currabrev']==$_POST['CurrAbrev']) {
-				echo '<option selected value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
+				echo '<option selected="True" value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 			} else {
 				echo '<option value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 			}
@@ -386,7 +385,7 @@ if ($InputError ==0){
 		$result = DB_query($sql, $db);
 		while ($myrow = DB_fetch_array($result)) {
 			if ($_POST['Units'] == $myrow['unitname']) {
-				echo '<option selected value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
+				echo '<option selected="True" value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
 			} else {
 				echo '<option value="' . $myrow['unitname'] . '">' . $myrow['unitname'] . '</option>';
 			}
@@ -397,33 +396,31 @@ if ($InputError ==0){
 		echo '</select></td></tr>';
 
 		echo '<tr><td>'. _('Decimal Places') . '<br />'._('to display').'</td>';
-		echo '<td><input type="text" class="number" name="DecimalPlaces" size=8 maxlength=8 value="';
+
 		if(isset($_POST['DecimalPlaces'])) {
-			echo $_POST['DecimalPlaces'];
+			echo '<td><input type="text" class="number" name="DecimalPlaces" size="8" maxlength="8" value="' . $_POST['DecimalPlaces'] . '" />';
 		} else {
-			echo '0';
+			echo '<td><input type="text" class="number" name="DecimalPlaces" size="8" maxlength="8" value=0" />';
 		}
-		echo '">';
 
 		echo '</td></tr>';
 		echo '<tr><td>'. _('Conversion Factor') . '<br />'._('to stock units').'</td>';
-		echo '<td><input type="text" class="number" name="ConversionFactor" size="8" maxlength="8" value="';
-		if(isset($_POST['ConversionFactor'])) {
-			echo $_POST['ConversionFactor'];
-		} else {
-			echo '1';
-		}
-		echo '">';
 
+		if(isset($_POST['ConversionFactor'])) {
+			echo '<td><input type="text" class="number" name="ConversionFactor" size="8" maxlength="8" value="' . $_POST['ConversionFactor'] . '" />';
+		} else {
+			echo '<td><input type="text" class="number" name="ConversionFactor" size="8" maxlength="8" value="1" />';
+		}
 
 		echo '</td></tr>';
 
 		echo '<tr><td>'. _('Price') . ':</td>';
-		echo '<td><input type="text" class="number" name="Price" size="12" maxlength="11" value="';
+
 		if(isset($_POST['Price'])) {
-			echo $_POST['Price'];
+			echo '<td><input type="text" class="number" name="Price" size="12" maxlength="11" value="' . $_POST['Price'] . '" />';
+		} else {
+			echo '<td><input type="text" class="number" name="Price" size="12" maxlength="11" value="0" />';
 		}
-		echo '">';
 
 		echo '</td></tr>';
 

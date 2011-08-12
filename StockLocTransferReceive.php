@@ -410,8 +410,7 @@ if(isset($_GET['Trf_ID'])){
 if (isset($_SESSION['Transfer'])){
 	//Begin Form for receiving shipment
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Dispatch') .
-		'" alt="" />' . ' ' . $title . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Dispatch') . '" alt="" />' . ' ' . $title . '</p>';
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
@@ -420,7 +419,7 @@ if (isset($_SESSION['Transfer'])){
 	$i = 0; //Line Item Array pointer
 
 	echo '<br /><table class="selection">';
-	echo '<tr><th colspan=7><font size=3 color=blue>' . _('Location Transfer Reference'). ' #' . $_SESSION['Transfer']->TrfID .
+	echo '<tr><th colspan="7"><font size="3" color="blue">' . _('Location Transfer Reference'). ' #' . $_SESSION['Transfer']->TrfID .
 			' '. _('from').' ' . $_SESSION['Transfer']->StockLocationFromName . ' '. _('to'). ' ' .
 				$_SESSION['Transfer']->StockLocationToName . '</font></th></tr>';
 
@@ -466,12 +465,12 @@ if (isset($_SESSION['Transfer'])){
 		if ($TrfLine->Controlled==1){
 			echo '<td class="number"><input type="hidden" name="Qty' . $i . '" value="' . $Qty . '"><a href="' . $rootpath .'/StockTransferControlled.php?TransferItem=' . $i . '" />' . $Qty . '</a></td>';
 		} else {
-			echo '<td><input type="text" class="number" name="Qty' . $i . '" maxlength=10 class="number" size=auto value="' . $Qty . '"></td>';
+			echo '<td><input type="text" class="number" name="Qty' . $i . '" maxlength="10" class="number" size="auto" value="' . $Qty . '" /></td>';
 		}
 
 		echo '<td>' . $TrfLine->PartUnit . '</td>';
 
-		echo '<td><input type="checkbox" name="CancelBalance' . $i . '" value=1></td>';
+		echo '<td><input type="checkbox" name="CancelBalance' . $i . '" value="1" /></td>';
 
 
 		if ($TrfLine->Controlled==1){
@@ -488,14 +487,13 @@ if (isset($_SESSION['Transfer'])){
 	} /*end of foreach TransferItem */
 
 	echo '</table><br />
-		<div class="centre"><input type="submit" name="ProcessTransfer" value="'. _('Process Inventory Transfer'). '"><bR />
+		<div class="centre"><input type="submit" name="ProcessTransfer" value="'. _('Process Inventory Transfer'). '" /><br />
 		</form></div>';
 	echo '<a href="'.$_SERVER['PHP_SELF']. '?NewTransfer=true">'. _('Select A Different Transfer').'</a>';
 
 } else { /*Not $_SESSION['Transfer'] set */
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Dispatch') .
-		'" alt="" />' . ' ' . $title . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Dispatch') . '" alt="" />' . ' ' . $title . '</p>';
 
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post" name="form1">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -510,9 +508,9 @@ if (isset($_SESSION['Transfer'])){
 	}
 	while ($myrow=DB_fetch_array($LocResult)){
 		if ($myrow['loccode'] == $_POST['RecLocation']){
-			echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
-			echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	}
 	echo '</select><input type="submit" name="RefreshTransferList" value="' . _('Refresh Transfer List') . '" /></td></tr></table><br />';
@@ -531,7 +529,7 @@ if (isset($_SESSION['Transfer'])){
 		$LocResult = DB_query($LocSql,$db);
 		$LocRow = DB_fetch_array($LocResult);
 		echo '<table class="selection">';
-		echo '<tr><th colspan=4><font size=3 color=blue>'._('Pending Transfers Into').' '.$LocRow['locationname'].'</font></th></tr>';
+		echo '<tr><th colspan="4"><font size="3" color="blue">'._('Pending Transfers Into').' '.$LocRow['locationname'].'</font></th></tr>';
 		echo '<tr>
 			<th>'. _('Transfer Ref'). '</th>
 			<th>'. _('Transfer From'). '</th>

@@ -1,8 +1,6 @@
-<html><head></head><body><br /><br />
-<a name="GettingStarted"><font size="+3"><b>Getting Started</b></font></a><br />
-<br />
-<font size="+2"><b>Prerequisites</b></font><br />
-<br />
+<html><head></head><body>
+<h1><a name="GettingStarted">Getting Started</a></h1>
+<h2>Prerequisites</h2>
 <ul>
 <li>PHP greater than 4.2. The system is therefore operating system
 independent since PHP can be configured as a CGI module for use on MS
@@ -47,7 +45,7 @@ used extensively in the system and the system starts sessions whenever
 it needs them. It is safe to set this to 0.<br />
 <br />
 The main issues with installation of PHP appear to be:
-<ol>
+<ul>
 <li>Some Windows installations come with a setting for
 session.save_path= /tmp this is an inappropriate directory for Windows
 and should be changed to session.save_path=C:\temp or something more
@@ -63,7 +61,8 @@ correct directory automatically using the line: $rootpath =
 dirname($_SERVER['PHP_SELF']); This will be evidenced by the system's
 inability to find the page links for the various system options. If
 this happens the $rootpath variable can be set to the root path of the
-scripts directly.<br />
+scripts directly.</li>
+</ul>
 <br />
 The system could be used with many other database servers but
 it is tested and developed on MySQL. A Postgres ConnectDB.inc is
@@ -85,23 +84,22 @@ free form information across the business.
 The ftp library for PHP is only required for sending order files to a Radio Beacon ftp server for remote warehouse services.<br />
 <br />
 <br />
-<font size="+2"><b>Using the webERP Installer</b></font><br />
-<br />
+<h2>Using the webERP Installer</h2>
 Assuming that a web server with PHP functionality is operational and a MySQL database server is available either on the same machine or on the network and that the web-server is running under a user that is able to write to the webERP installation directory then a new installation can proceed.
 <br />
 <ul>
 <li>
 An installation must first copy the scripts to a directory under the web-server's document root directory. Then from a browser enter the URL for the new webERP directory and the installer screen will display:
-</li>
 <p align="center"><img src="images/Installer_1.jpg"> </p>
+</li>
 <li>The installer checks that all the pre-requistes are met for an installation. You will note from the screen shot above that this installation does not have sufficient privileges to install webERP because the web-server is unable to write to the webERP directory. It is first necessary to change the permissions on the directory where webERP is installed to ensure that the user that the web-server runs as  is able to write a new configuration file to the web space. Cpanel and Plesk have facilities to enable this change to the permissions. Any messages on this screen displayed in red need to be resolved before the installation can proceed. Do not attempt to run the installer while red messages persist.
 </li>
 <li>
 Many of the fields required will be populated correctly based. However, it is important to check the entries are correct. The installer will not be able to determine the host (computer) where the mysql database server is installed and this must be entered.
 </li>
 <li>The user name and the password to the mysql database server are also required.
-</li>
 <p align="center"><img src="images/Installer_2.jpg"> </p>
+</li>
 <li>The name of the company entered in the installer screen will become the name of the mysql database created. Perhaps an abbreviated name for the company without spaces is idea. The weberpdemo is the name of the weberpdemo database that is a good place to test webERP functionality, but you will wish to change this to the name of your company in a live enviroment.
 </li>
 <li>
@@ -118,9 +116,7 @@ The time-zone is important if your installation is to display the correct time o
 Hitting the install webERP button will then create the database for the company with the user admin given the password details and provide a fresh webERP installation from which to start the configuration of the company, see below.
 <br />
 <br />
-<font size="+2"><b>Manual webERP Installation</b></font><br />
-<br />
-<br />
+<h2>Manual webERP Installation</h2>
 A manual installation consists of the following five steps:<br />
 <br />
 <ul>
@@ -132,8 +128,7 @@ A manual installation consists of the following five steps:<br />
 <li>Setting up company specific information in the system </li>
 </ul><br />
 <br />
-<font size="+2"><b>Copying the PHP Scripts</b></font><br />
-<br />
+<h2>Copying the PHP Scripts</h2>
 All files in the archive except the installation instructions
 in INSTALL.txt, weberp-demo.sql and weberp-new.sql should be copied
 to a directory under the web server DocumentRoot directory. This varies
@@ -147,8 +142,7 @@ Copy the archive to this directory and then extract the
 archive. The webERP directory will be created here (/srv/www/htdocs/webERP)
 and all scripts and other directories will be copied to that directory.<br />
 <br />
-<font size="+2"><b>Creating the Database</b></font><br />
-<br />
+<h2>Creating the Database</h2>
 webERP works only with MySQL or MariaDB database servers.
 <br />
 <br />
@@ -183,7 +177,7 @@ You can, in MySQL Version 3.22 and above, use the SET PASSWORD statement:<br />
 <br />
 shell&gt; mysql -u root mysql
 <br />
-mysql&gt; SET PASSWORD FOR root=PASSWORD('new_password');"<br />
+mysql&gt; SET PASSWORD FOR root=PASSWORD('new_password');<br />
 <br />
 where 'new_password' is the new password you chose for the root user.<br />
 <br />
@@ -193,7 +187,7 @@ You can add new users by issuing GRANT statements:<br />
 <br />
 shell&gt; mysql --user=root -p 'new_password' mysql
 <br />
-mysql&gt; GRANT ALL PRIVILEGES ON *.* TO weberp@localhost IDENTIFIED BY 'some_pass' WITH GRANT OPTION;"<br />
+mysql&gt; GRANT ALL PRIVILEGES ON *.* TO weberp@localhost IDENTIFIED BY 'some_pass' WITH GRANT OPTION;<br />
 <br />
 Where 'some_pass' is a password of your choice for the new user
 'weberp'. Note that this user 'weberp' can only connect from the local
@@ -217,11 +211,13 @@ Two scripts are provided under the webERP/sql/mysql directory (folder):<br />
 <li>weberp-demo.sql This has a minimal amount of demonstration data
 with a bogus company set up so that transactions can be tried to see
 how the system works.
-</li><li>weberp-new.sql This script has only the basic data necessary
+</li>
+<li>weberp-new.sql This script has only the basic data necessary
 to start a new company. If you wish to set up your company
 using the webERP software, then this is the script to use. This creates
 a webERP database and populates it with only the very basic starting data.
-</li></ol><br />
+</li>
+</ol>
 <br />
 The files weberp-demo.sql and web-erp-new.sql should be in
 the directory with all the PHP scripts. Change to the  directory
@@ -239,8 +235,7 @@ as 'some_pass' to the password appropriate for the user. Also modify the
 path_to_the_sql_script to the appropriate path - perhaps something like
 /srv/www/htdocs/webERP/.<br />
 <br />
-<font size="+2"><b>Editing config.php</b></font><br />
-<br />
+<h2>Editing config.php</h2>
 config.php contains a series of user defined variables that
 determine how the system behaves. Critically it contains the host
 (computer name), username and password of the database connection
@@ -263,7 +258,7 @@ putenv('Australia/Sydney');
 <br />
 <br />
 This ensures that the time-zone of the business is displayed on all browsers using the system irrespective of where the web-server is located (i.e. the timezone of the web-server)
-
+<br />
 ============================================<br />
 beginning of config.php<br />
 ============================================<br />
@@ -303,7 +298,7 @@ $host = 'localhost';<br />
 $dbType = 'mysql';<br />
 //$dbType = 'mysqli';<br />
 <br />
-// sql user & password<br />
+// sql user &amp; password<br />
 $dbuser = 'weberp_db_user';<br />
 $dbpassword = 'weberp_db_pwd';<br />
 <br />
@@ -351,16 +346,15 @@ if ($rootpath == "/" OR $rootpath == "\\") {<br />
 This is the default value set in php.ini for most installations but just to be sure it is forced here
 turning on NOTICES destroys things */<br />
 <br />
-error_reporting (E_ALL & ~E_NOTICE);<br />
+error_reporting (E_ALL &amp; ~E_NOTICE);<br />
 <br />
-/*Make sure there is nothing - not even spaces after this last ?> */
+/*Make sure there is nothing - not even spaces after this last ?&gt; */
 ?&gt;<br />
 ============================================<br />
 end of config.php<br />
 ============================================<br />
 <br />
-<font size="+2"><b>Logging In For the First Time</b></font><br />
-<br />
+<h2>Logging In For the First Time</h2>
 Open a browser connected to the network upon which the
 web server is also connected. Enter the URL for the web server
 directory where webERP is installed. If the browser is on the same
@@ -387,8 +381,7 @@ NB The importance of setting a password for the root user of
 MySQL, otherwise anyone could modify WWW_Users and gain access to
 private company information.<br />
 <br />
-<font size="+2"><b>Adding New Companies</b></font><br />
-<br />
+<h2>Adding New Companies</h2>
 At this point having followed all the instructions above you should be able to log into the single company database you set up above. However, you may wish to add additional companies. If you system is set up such that the user account that is running your web-server is able to write to the webERP directory then it is possible to enter the URL:
 <br />
 <br />
@@ -402,8 +395,7 @@ This script may not work because it requires that the web-server has write permi
 <br />In the default install above you created a database called weberp and there is a directory under webERP/companies also called weberp. To make another company you need to copy this directory and all the sub-directories under it to a new directory under webERP/companies/. The name of this directory needs to be identical to the name of the new database created on the same mysql server.
 <br />
 <br />
-<font size="+2"><b>Configuration Parameters</b></font><br />
-<br />
+<h2>Configuration Parameters</h2>
 In versions prior to version 3.0, configuration
 parameters were stored under the config.php file which required manual
 editing of the system parameters. Since version 3.0 a new screen for
@@ -417,8 +409,7 @@ are shown along side it.<br />
 <br />There is additional information on installation in webERP/doc/INSTALL.txt
 <br />
 <br />
-<font size="+2"><b>Themes and GUI Modification</b></font><br />
-<br />
+<h2>Themes and GUI Modification</h2>
 Often what visually appeals to one does not appeal to another.
 Whilst accounting software is primarily about function - appearances do
 matter! Some flexibility is available with the colour scheme and font
@@ -444,8 +435,7 @@ screen so users can select the customised theme.<br />
 
 <!-- Help Begin: WWW_Users -->
 
-<font size="+2"><b>Setting Up Users</b></font><br />
-<br />
+<h2>Setting Up Users</h2>
 Having logged in as user 'demo'. A new user should
 be defined whom has administrative privileges and the user 'demo'
 should be deleted. From the menu click on the 'Setup' tab and then
@@ -476,10 +466,8 @@ addition, the customer code and branch code applicable to the person
 logging on must be entered.<br />
 <br />
 <br />
-<font size="+2"><b>Internationalisation and Language Translations</b></font><br />
-<br />
-<br />
-As of webERP version 3.12 all translations of the user interface use utf-8 character encoding. Inspecting the character set that your browser is using (View->Character Encoding in Firefox) will show utf-8 (perhaps not the english manual). To use a language other than english the web-server must have a locale installed for that language using the utf-8 character set. For German this would be the locale called de_DE.utf8 - most locales follow a similar naming convention e.g. en_GB.utf8 for English - Great Britain with utf-8 characters. en_GB.utf8 is the default locale for webERP.
+<h2>Internationalisation and Language Translations</h2>
+As of webERP version 3.12 all translations of the user interface use utf-8 character encoding. Inspecting the character set that your browser is using (View &rarr; Character Encoding in Firefox) will show utf-8 (perhaps not the english manual). To use a language other than english the web-server must have a locale installed for that language using the utf-8 character set. For German this would be the locale called de_DE.utf8 - most locales follow a similar naming convention e.g. en_GB.utf8 for English - Great Britain with utf-8 characters. en_GB.utf8 is the default locale for webERP.
 <br />
 <br />
 Under the main webERP directory the locale directory contains the language specific data necessary for translations. By default there will only be one directory under locale for en_GB.utf8 - the default locale. Under the language_country.utf8 locale there is a further sub-directory for LC_MESSAGES - it is under this directory where the messages.po lives - this file contains a lits of all the strings used in the interface and their translation into the language of the locale. To use the translations the .po file needs to be "compiled" into a binary format for faster retrieval and this is what the messages.mo file is.
@@ -493,7 +481,7 @@ Browse to the language your require and download the zip archive. Transfer the f
 <br />
 <br />
 To change the language displayed for a specific user - the user clicks on their name as shown on every screen at the top of the page. This brings up their user settings.
-<p align="center"><img src="images/UserSettings.jpg"> </p>
+<p align="center"><img src="images/UserSettings.jpg"></p>
 webERP looks at all the directories available under webERP/locale to see which languages are installed and provides a convenient way for users to select their preferred language. In addition to selecting the language it is also necessary to select the fonts required for pdf support in the selected language.
 <br />
 <br />

@@ -226,8 +226,8 @@ echo '<form name="ContractBOMForm" action="' . $_SERVER['PHP_SELF'] . '?identifi
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (count($_SESSION['Contract'.$identifier]->ContractBOM)>0){
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/contract.png" title="' .
-		_('Contract Bill of Material') . '" alt="" />  '.$_SESSION['Contract'.$identifier]->CustomerName . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/contract.png" title="' ._('Contract Bill of Material') . '" alt="" />'.
+			$_SESSION['Contract'.$identifier]->CustomerName . '</p>';
 
 	echo '<table cellpadding="2" class="selection">';
 
@@ -288,8 +288,8 @@ if (!isset($_GET['Edit'])) {
 	$ErrMsg = _('The supplier category details could not be retrieved because');
 	$DbgMsg = _('The SQL used to retrieve the category details but failed was');
 	$result1 = DB_query($sql,$db,$ErrMsg,$DbgMsg);
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' .
-		_('Print') . '" alt="" />' . ' ' . _('Search For Stock Items') . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Print') . '" alt="" />' .
+			' ' . _('Search For Stock Items') . '</p>';
 	echo '<table class="selection"><tr>';
 
 	echo ':</tr><tr><td><select name="StockCat">';
@@ -297,7 +297,7 @@ if (!isset($_GET['Edit'])) {
 	echo '<option selected="true" value="All">' . _('All').'</option>';
 	while ($myrow1 = DB_fetch_array($result1)) {
 		if (isset($_POST['StockCat']) and $_POST['StockCat']==$myrow1['categoryid']){
-			echo '<option selected value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'].'</option>';
+			echo '<option selected="True" value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'].'</option>';
 		} else {
 			echo '<option value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'].'</option>';
 		}

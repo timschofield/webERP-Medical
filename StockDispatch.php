@@ -115,7 +115,7 @@ If (isset($_POST['PrintPDF'])) {
 			$YPos -=(2 * $line_height);
 			// Parameters for addTextWrap are defined in /includes/class.pdf.php
 			// 1) X position 2) Y position 3) Width
-			// 4) Height 5) Text 6) Alignment 7) Border 8) Fill - True to use SetFillColor
+			// 4) Height 5) text 6) Alignment 7) Border 8) Fill - True to use SetFillColor
 			// and False to set to transparent
 				if($template=='simple'){
 					//for simple template
@@ -235,11 +235,11 @@ If (isset($_POST['PrintPDF'])) {
 	if (!isset($_POST['FromLocation'])) {
 		$_POST['FromLocation']=$DefaultLocation;
 	}
-	echo '<table class="selection"><tr><td>' . _('Dispatch Percent') . ':</td><td><input type ="text" name="Percent" class="number" size="8" value=0>';
+	echo '<table class="selection"><tr><td>' . _('Dispatch Percent') . ':</td><td><input type ="text" name="Percent" class="number" size="8" value="0" />';
 	echo '<tr><td>' . _('From Stock Location') . ':</td><td><select name="FromLocation"> ';
 	while ($myrow=DB_fetch_array($resultStkLocs)){
 		if ($myrow['loccode'] == $_POST['FromLocation']){
-			 echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			 echo '<option selected="True" Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
 			 echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
@@ -252,7 +252,7 @@ If (isset($_POST['PrintPDF'])) {
 	echo '<tr><td>' . _('To Stock Location') . ':</td><td><select name="ToLocation"> ';
 	while ($myrow=DB_fetch_array($resultStkLocs)){
 		if ($myrow['loccode'] == $_POST['ToLocation']){
-			 echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			 echo '<option selected="True" Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
 			 echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
@@ -279,13 +279,13 @@ If (isset($_POST['PrintPDF'])) {
 		$_POST['StockCat']='All';
 	}
 	if ($_POST['StockCat']=='All'){
-		echo '<option selected value="All">' . _('All') . '</option>';
+		echo '<option selected="True" value="All">' . _('All') . '</option>';
 	} else {
 		echo '<option value="All">' . _('All') . '</option>';
 	}
 	while ($myrow1 = DB_fetch_array($result1)) {
 		if ($myrow1['categoryid']==$_POST['StockCat']){
-			echo '<option selected value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
+			echo '<option selected="True" value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 		}
@@ -294,14 +294,14 @@ If (isset($_POST['PrintPDF'])) {
 
 	echo '<tr></tr><tr></tr><tr><td>' . _('Report Type') . ':</td>';
 	echo '<td><select name="ReportType">';
-	echo '<option selected value="Batch">' . _('Create Batch') . '</option>';
+	echo '<option selected="True" value="Batch">' . _('Create Batch') . '</option>';
 	echo '<option value="Report">' . _('Report Only') . '</option>';
 	echo '</select></td><td>&nbsp</td></tr>';
 
 
 	echo '<tr><td>' . _('Template') . ':</td>';
 	echo '<td><select name="template">';
-	echo '<option selected value="standard">' . _('Standard') . '</option>';
+	echo '<option selected="True" value="standard">' . _('Standard') . '</option>';
 	echo '<option value="simple">' . _('Simple') . '</option>';
 	echo '</select></td><td>&nbsp</td></tr>';
 

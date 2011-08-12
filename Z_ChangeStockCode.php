@@ -122,7 +122,7 @@ if (isset($_POST['ProcessStockChange'])){
 	$result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 	echo ' ... ' . _('completed');
 
-	$sql="select count(table_name) from information_schema.tables where table_schema='".$_SESSION['DatabaseName']."' and table_name='mrpplannedorders'";
+	$sql="SELECT count(table_name) FROM information_schema.tables WHERE table_schema='".$_SESSION['DatabaseName']."' AND table_name='mrpplannedorders'";
 	$result = DB_query($sql,$db);
 	$row=DB_fetch_row($result);
 	if ($row[0]>0) {
@@ -310,9 +310,9 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 
 echo '<br /><table>
 	<tr><td>' . _('Existing Inventory Code') . ':</td>
-	<td><input type="text" name="OldStockID" size=20 maxlength=20></td></tr>';
+	<td><input type="text" name="OldStockID" size="20" maxlength="20" /></td></tr>';
 
-echo '<tr><td>' . _('New Inventory Code') . ':</td><td><input type="text" name="NewStockID" size=20 maxlength=20></td></tr>';
+echo '<tr><td>' . _('New Inventory Code') . ':</td><td><input type="text" name="NewStockID" size="20" maxlength="20" /></td></tr>';
 echo '</table>';
 
 echo '<div class="centre"><input type="submit" name="ProcessStockChange" value="' . _('Process') . '" /></div>';

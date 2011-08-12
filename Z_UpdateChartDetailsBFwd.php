@@ -51,14 +51,14 @@ if (!isset($_POST['FromPeriod']) OR !isset($_POST['ToPeriod'])){
 	while ($myrow=DB_fetch_array($Periods,$db)){
 
 		if($myrow['periodno']==$DefaultToPeriod){
-			echo '<option selected value=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
+			echo '<option selected="True" value=' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
 		} else {
 			echo '<option value =' . $myrow['periodno'] . '>' . MonthAndYearFromSQLDate($myrow['lastdate_in_period']) . '</option>';
 		}
 	}
 	echo '</select></td></tr></table>';
 
-	echo '<div class="centre"><input type="submit" name="recalc" value="' . _('Do the Recalculation') . '"></div></form>';
+	echo '<div class="centre"><input type="submit" name="recalc" value="' . _('Do the Recalculation') . '" /></div></form>';
 
 } else {  /*OK do the updates */
 

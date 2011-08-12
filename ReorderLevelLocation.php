@@ -194,7 +194,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 	echo '</select></td></tr>';
 	echo'<tr>
 			<td>' . _('Number Of Days Sales') . ':</td>
-			<td><input type="text" class="number" name="NumberOfDays" maxlength="3" size="4" value="0"></td>';
+			<td><input type="text" class="number" name="NumberOfDays" maxlength="3" size="4" value="0" /></td>';
 	echo '<tr><td>' . _('Order By') . ':</td>
 				<td><select name="order">';
 	echo '<option value="1">'. _('Total Invoiced') . '</option>';

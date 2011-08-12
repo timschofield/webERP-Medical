@@ -306,8 +306,8 @@ If (isset($_POST['Process'])) {
 	}
 }
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Search') .
-		'" alt="" /><b>'.' '. _('Recurring Order for Customer') .' : ' . $_SESSION['Items'.$identifier]->CustomerName .'</b></p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Search') . '" alt="" />
+		<b>'.' '. _('Recurring Order for Customer') .' : ' . $_SESSION['Items'.$identifier]->CustomerName .'</b></p>';
 echo '<form action="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier. '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
@@ -451,37 +451,37 @@ echo '<tr>
 		<td><select name="Frequency">';
 
 if (isset($_POST['Frequency']) and $_POST['Frequency']==52){
-	echo '<option selected value="52">' . _('Weekly') . '</option>';
+	echo '<option selected="True" value="52">' . _('Weekly') . '</option>';
 } else {
 	echo '<option value="52">' . _('Weekly') . '</option>';
 }
 if (isset($_POST['Frequency']) and $_POST['Frequency']==26){
-	echo '<option selected value="26">' . _('Fortnightly') . '</option>';
+	echo '<option selected="True" value="26">' . _('Fortnightly') . '</option>';
 } else {
 	echo '<option value="26">' . _('Fortnightly') . '</option>';
 }
 if (isset($_POST['Frequency']) and $_POST['Frequency']==12){
-	echo '<option selected value="12">' . _('Monthly') . '</option>';
+	echo '<option selected="True" value="12">' . _('Monthly') . '</option>';
 } else {
 	echo '<option value=12>' . _('Monthly') . '</option>';
 }
 if (isset($_POST['Frequency']) and $_POST['Frequency']==6){
-	echo '<option selected value="6">' . _('Bi-monthly') . '</option>';
+	echo '<option selected="True" value="6">' . _('Bi-monthly') . '</option>';
 } else {
 	echo '<option value="6">' . _('Bi-monthly') . '</option>';
 }
 if (isset($_POST['Frequency']) and $_POST['Frequency']==4){
-	echo '<option selected value="4">' . _('Quarterly') . '</option>';
+	echo '<option selected="True" value="4">' . _('Quarterly') . '</option>';
 } else {
 	echo '<option value="4">' . _('Quarterly') . '</option>';
 }
 if (isset($_POST['Frequency']) and $_POST['Frequency']==2){
-	echo '<option selected value="2">' . _('Bi-Annually') . '</option>';
+	echo '<option selected="True" value="2">' . _('Bi-Annually') . '</option>';
 } else {
 	echo '<option value="2">' . _('Bi-Annually') . '</option>';
 }
 if (isset($_POST['Frequency']) and $_POST['Frequency']==1){
-	echo '<option selected value="1">' . _('Annually') . '</option>';
+	echo '<option selected="True" value="1">' . _('Annually') . '</option>';
 } else {
 	echo '<option value="1">' . _('Annually') . '</option>';
 }
@@ -494,15 +494,15 @@ if ($_SESSION['Items'.$identifier]->AllDummyLineItems()==true){
 			<td>' . _('Invoice Automatically') . ':</td>
 			<td><select name="AutoInvoice">';
 	if ($_POST['AutoInvoice']==0){
-		echo '<option selected value="0">' . _('No') . '</option>';
+		echo '<option selected="True" value="0">' . _('No') . '</option>';
 		echo '<option value="1">' . _('Yes') . '</option>';
 	} else {
 		echo '<option value="0">' . _('No') . '</option>';
-		echo '<option selected value="1">' . _('Yes') . '</option>';
+		echo '<option selected="True" value="1">' . _('Yes') . '</option>';
 	}
 	echo '</select></td></tr>';
 } else {
-	echo '<input type="hidden" name="AutoInvoice" value="0">';
+	echo '<input type="hidden" name="AutoInvoice" value="0" />';
 }
 
 echo '</table>';

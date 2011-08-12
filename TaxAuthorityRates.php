@@ -12,8 +12,7 @@ include('includes/session.inc');
 $title = _('Tax Rates');
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Supplier Types')
-	. '" alt="" />' . $title. '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Supplier Types') . '" alt="" />' . $title. '</p>';
 
 /* <-- $Revision: 1.16 $ --> */
 
@@ -56,7 +55,7 @@ $myrow = DB_fetch_row($TaxAuthDetail);
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<input type="hidden" name="TaxAuthority" value=' . $TaxAuthority . ' />';
+echo '<input type="hidden" name="TaxAuthority" value="' . $TaxAuthority . '" />';
 
 $TaxRatesResult = DB_query("SELECT taxauthrates.taxcatid,
 						taxcategories.taxcatname,
@@ -76,8 +75,8 @@ $TaxRatesResult = DB_query("SELECT taxauthrates.taxcatid,
 
 if (DB_num_rows($TaxRatesResult)>0){
 
-	echo '<table cellpadding=2 class="selection">';
-	echo '<tr><th colspan=3><font size=3 color=navy>' . _('Update') . ' ' . $myrow[0] . ' ' . _('Rates') . '</font></th></tr>';
+	echo '<table cellpadding="2" class="selection">';
+	echo '<tr><th colspan="3"><font size="3" color="navy">' . _('Update') . ' ' . $myrow[0] . ' ' . _('Rates') . '</font></th></tr>';
 	$TableHeader = '<tr><th>' . _('Deliveries From') . '<br />' . _('Tax Province') . '</th>
 						<th>' . _('Tax Category') . '</th>
 						<th>' . _('Tax Rate') . ' %</th></tr>';
@@ -89,7 +88,7 @@ if (DB_num_rows($TaxRatesResult)>0){
 	while ($myrow = DB_fetch_array($TaxRatesResult)){
 
 		if ($OldProvince!=$myrow['dispatchtaxprovince'] AND $OldProvince!=''){
-			echo '<tr bgcolor="#555555"><font size=1> </font><td colspan=3></td></tr>';
+			echo '<tr bgcolor="#555555"><font size="1"> </font><td colspan="3"></td></tr>';
 		}
 
 		if ($k==1){
@@ -102,7 +101,7 @@ if (DB_num_rows($TaxRatesResult)>0){
 
 		printf('<td>%s</td>
 			<td>%s</td>
-			<td><input type="text" class="number" name=%s maxlength=5 size=5 value=%s></td>
+			<td><input type="text" class="number" name="%s" maxlength="5" size="5" value="%s" /></td>
 			</tr>',
 			$myrow['taxprovincename'],
 			$myrow['taxcatname'],

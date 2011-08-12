@@ -115,8 +115,7 @@ if (isset($_POST['PrintPDF'])
 	$title=_('Supplier Balances At A Period End');
 	include('includes/header.inc');
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' .
-		_('Supplier Allocations') . '" alt="" />' . ' ' . $title . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('Supplier Allocations') . '" alt="" />' . ' ' . $title . '</p>';
 	if (!isset($_POST['FromCriteria'])) {
 		$_POST['FromCriteria'] = '1';
 	}
@@ -129,9 +128,9 @@ if (isset($_POST['PrintPDF'])
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<tr><td>' . _('From Supplier Code') . ':</font></td>
-			<td><input type="text" maxlength=6 size=7 name=FromCriteria value="'.$_POST['FromCriteria'].'"></td></tr>';
+			<td><input type="text" maxlength="6" size="7" name="FromCriteria" value="'.$_POST['FromCriteria'].'" /></td></tr>';
 	echo '<tr><td>' . _('To Supplier Code') . ':</td>
-			<td><input type="text" maxlength=6 size=7 name=ToCriteria value="'.$_POST['ToCriteria'].'"></td></tr>';
+			<td><input type="text" maxlength="6" size="7" name="ToCriteria" value="'.$_POST['ToCriteria'].'" /></td></tr>';
 
 	echo '<tr><td>' . _('Balances As At') . ':</td>
 			<td><select name="PeriodEnd">';

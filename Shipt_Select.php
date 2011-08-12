@@ -5,8 +5,7 @@
 include('includes/session.inc');
 $title = _('Search Shipments');
 include('includes/header.inc');
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') .
-	'" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (isset($_GET['SelectedStockItem'])){
 	$SelectedStockItem=$_GET['SelectedStockItem'];
@@ -104,20 +103,20 @@ if (isset($_POST['SearchParts'])) {
 
 if (!isset($ShiptRef) or $ShiptRef==""){
 	echo '<table class="selection"><tr><td>';
-	echo _('Shipment Number'). ': <input type="text" name="ShiptRef" MAXLENGTH =10 size=10> '.
+	echo _('Shipment Number'). ': <input type="text" name="ShiptRef" maxlength="10" size="10" /> '.
 		_('Into Stock Location').' :<select name="StockLocation"> ';
 	$sql = "SELECT loccode, locationname FROM locations";
 	$resultStkLocs = DB_query($sql,$db);
 	while ($myrow=DB_fetch_array($resultStkLocs)){
 		if (isset($_POST['StockLocation'])){
 			if ($myrow['loccode'] == $_POST['StockLocation']){
-			echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option selected="True" Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			} else {
 			echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			}
 		} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
 			$_POST['StockLocation'] = $_SESSION['UserStockLocation'];
-			echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option selected="True" Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
 			echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
@@ -126,16 +125,16 @@ if (!isset($ShiptRef) or $ShiptRef==""){
 	echo '</select>';
 	echo ' <select name="OpenOrClosed">';
 	if ($_POST['OpenOrClosed']==1){
-		echo '<option selected value=1>'. _('Closed Shipments Only') . '</option>';
-		echo '<option value=0>'. _('Open Shipments Only') . '</option>';
+		echo '<option selected="True" value="1">'. _('Closed Shipments Only') . '</option>';
+		echo '<option value="0">'. _('Open Shipments Only') . '</option>';
 	} else {
 		$_POST['OpenOrClosed']=0;
-		echo '<option value=1>'. _('Closed Shipments Only') . '</option>';
-		echo '<option selected value=0>'. _('Open Shipments Only') . '</option>';
+		echo '<option value="1">'. _('Closed Shipments Only') . '</option>';
+		echo '<option selected="True" value="0">'. _('Open Shipments Only') . '</option>';
 	}
 	echo '</select></td></tr></table>';
 
-	echo '<br /><div class="centre"><input type="submit" name="SearchShipments" value="'. _('Search Shipments'). '"></div></div><br />';
+	echo '<br /><div class="centre"><input type="submit" name="SearchShipments" value="'. _('Search Shipments'). '" /></div></div><br />';
 }
 
 $SQL="SELECT categoryid,
@@ -147,36 +146,36 @@ $result1 = DB_query($SQL,$db);
 
 
 echo '<table class="selection">';
-echo '<tr><th colspan=5><font size=3 color=navy>'._('To search for shipments for a specific part use the part selection facilities below') . '</font></th></tr>';
+echo '<tr><th colspan="5"><font size="3" color="navy">'._('To search for shipments for a specific part use the part selection facilities below') . '</font></th></tr>';
 ?>
 <tr>
-<td><font size=1><?php echo _('Select a stock category');?>:</font>
+<td><font size="1"><?php echo _('Select a stock category');?>:</font>
 <select name="StockCat">
 <?php
 while ($myrow1 = DB_fetch_array($result1)) {
 	if (isset($_POST['StockCat']) and $myrow1['categoryid']==$_POST['StockCat']){
-		echo '<option selected value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
+		echo '<option selected="True" value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 	} else {
 		echo '<option value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 	}
 }
 ?>
 </select>
-<td><font size=1><?php echo _('Enter text extracts in the');?> <b><?php echo _('description');?></b>:</font></td>
-<td><input type="Text" name="Keywords" size=20 maxlength=25></td></tr>
+<td><font size="1"><?php echo _('Enter text extracts in the');?> <b><?php echo _('description');?></b>:</font></td>
+<td><input type="text" name="Keywords" size="20" maxlength="25" /></td></tr>
 <tr><td></td>
-<td><font SIZE 3><b><?php echo _('OR');?> </b></font><font size=1><?php echo _('Enter extract of the');?> <b><?php echo _('Stock Code');?></b>:</font></td>
-<td><input type="Text" name="StockCode" size=15 maxlength=18></td>
+<td><font size="3"><b><?php echo _('OR');?> </b></font><font size="1"><?php echo _('Enter extract of the');?> <b><?php echo _('Stock Code');?></b>:</font></td>
+<td><input type="text" name="StockCode" size="15" maxlength="18" /></td>
 </tr>
 </table><br />
 
 <?php
-echo '<div class="centre"><input type="submit" name="SearchParts" value="'._('Search Parts Now').'">';
-echo '<input type="submit" name="ResetPart" value="'. _('Show All') .'"></div><br />';
+echo '<div class="centre"><input type="submit" name="SearchParts" value="'._('Search Parts Now').'" />';
+echo '<input type="submit" name="ResetPart" value="'. _('Show All') .'" /></div><br />';
 
 if (isset($StockItemsResult)) {
 
-	echo '<table cellpadding=2 colspan=7 class="selection">';
+	echo '<table cellpadding="2" colspan="7" class="selection">';
 	$TableHeader = '<tr>
 			<th>'. _('Code').'</th>
 			<th>'. _('Description').'</th>
@@ -277,7 +276,7 @@ Code	 Description	On Hand		 Orders Ostdg     Units		 Code	Description 	 On Hand 
 	if (DB_num_rows($ShipmentsResult)>0){
 		/*show a table of the shipments returned by the SQL */
 
-		echo '<table cellpadding=2 colspan=7 width=95% class="selection">';
+		echo '<table cellpadding="2" colspan="7" width="95%" class="selection">';
 		$TableHeader = '<tr>
 				<th>'. _('Shipment'). '</th>
 				<th>'. _('Supplier'). '</th>

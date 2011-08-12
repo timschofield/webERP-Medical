@@ -140,8 +140,7 @@ if (!isset($SelectedArea)) {
 	$sql = "SELECT * FROM areas";
 	$result = DB_query($sql,$db);
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' .
-		_('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
 
 	echo '<table>
 		<tr>
@@ -209,15 +208,15 @@ if (!isset($_GET['delete'])) {
 		echo '<table class="selection">
 			<tr>
 				<td>' . _('Area Code') . ':</td>
-				<td><input tabindex="1" ' . (in_array('AreaCode',$Errors) ?  'class="inputerror"' : '' ) .'   type="Text" name="AreaCode" value="' . $_POST['AreaCode'] . '" size=3 maxlength=3></td>
+				<td><input tabindex="1" ' . (in_array('AreaCode',$Errors) ?  'class="inputerror"' : '' ) .'   type="text" name="AreaCode" value="' . $_POST['AreaCode'] . '" size="3" maxlength="3" /></td>
 			</tr>';
 	}
 
 	echo '<tr><td>' . _('Area Name') . ':</td>
-		<td><input tabindex="2" ' . (in_array('AreaDescription',$Errors) ?  'class="inputerror"' : '' ) .'  type="text" name="AreaDescription" value="' . $_POST['AreaDescription'] .'" size=26 maxlength=25></td>
+		<td><input tabindex="2" ' . (in_array('AreaDescription',$Errors) ?  'class="inputerror"' : '' ) .'  type="text" name="AreaDescription" value="' . $_POST['AreaDescription'] .'" size="26" maxlength="25" /></td>
 		</tr>';
 
-	echo '<tr><td colspan=2><div class="centre"><input tabindex="3" type="Submit" name="submit" value=' . _('Enter Information') .'></div></td></tr>';
+	echo '<tr><td colspan="2"><div class="centre"><input tabindex="3" type="submit" name="submit" value="' . _('Enter Information') .'" /></div></td></tr>';
 	echo '</table></form>';
 
  } //end if record deleted no point displaying form to add record

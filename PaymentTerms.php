@@ -169,11 +169,15 @@ then none of the above are true and the list of payment termss will be displayed
 links to delete or edit each. These will call the same page again and allow update/input
 or deletion of the records*/
 
-	$sql = "SELECT termsindicator, terms, daysbeforedue, dayinfollowingmonth FROM paymentterms";
+	$sql = "SELECT termsindicator,
+					terms,
+					daysbeforedue,
+					dayinfollowingmonth
+				FROM paymentterms";
 	$result = DB_query($sql, $db);
 
 	echo '<table class="selection">';
-	echo '<tr><th colspan=6><font color=blue size=3>'._('Payment Terms.').'</font></th></tr>';
+	echo '<tr><th colspan="6"><font color="blue" size="3">'._('Payment Terms.').'</font></th></tr>';
 	echo '<tr><th>' . _('Term Code') . '</th>
 		<th>' . _('Description') . '</th>
 		<th>' . _('Following Month On') . '</th>
@@ -244,7 +248,7 @@ if (!isset($_GET['delete'])) {
 		echo '<input type="hidden" name="SelectedTerms" value="' . $SelectedTerms . '" />';
 		echo '<input type="hidden" name="TermsIndicator" value="' . $_POST['TermsIndicator'] . '" />';
 		echo '<br /><table class="selection">';
-		echo '<tr><th colspan=6><font color=blue size=3>'._('Update Payment Terms.').'</font></th></tr>';
+		echo '<tr><th colspan="6"><font color="blue" size="3">'._('Update Payment Terms.').'</font></th></tr>';
 		echo '<tr><td>' . _('Term Code') . ':</td><td>';
 		echo $_POST['TermsIndicator'] . '</td></tr>';
 
@@ -257,27 +261,29 @@ if (!isset($_GET['delete'])) {
 		if (!isset($_POST['Terms'])) $_POST['Terms']='';
 
 		echo '<table class="selection">';
-		echo '<tr><th colspan=6><font color=blue size=3>'._('New Payment Terms.').'</font></th></tr>';
-		echo '<tr><td>' . _('Term Code') . ':</td><td><input type="Text" name="TermsIndicator"
+		echo '<tr><th colspan="6"><font color="blue" size="3">'._('New Payment Terms.').'</font></th></tr>';
+		echo '<tr><td>' . _('Term Code') . ':</td><td><input type="text" name="TermsIndicator"
 		 ' . (in_array('TermsIndicator',$Errors) ? 'class="inputerror"' : '' ) .' value="' . $_POST['TermsIndicator'] .
-			'" size=3 maxlength=2></td></tr>';
+			'" size="3" maxlength="2" /></td></tr>';
 	}
 
 	echo '<tr><td>'. _('Terms Description'). ':</td>
 	<td>
-	<input type="text"' . (in_array('Terms',$Errors) ? 'class="inputerror"' : '' ) .' name="Terms" value="'.$_POST['Terms']. '" size=35 maxlength=40>
+	<input type="text"' . (in_array('Terms',$Errors) ? 'class="inputerror"' : '' ) .' name="Terms" value="'.$_POST['Terms']. '" size="35" maxlength="40" />
 	</td></tr>
 	<tr><td>'._('Due After A Given No. Of Days').':</td>
 	<td><input type="checkbox" name="DaysOrFoll"';
 	if ( isset($DayInFollowingMonth) && !$DayInFollowingMonth) { echo "checked"; }
 	echo ' ></td></tr><tr><td>'._('Days (Or Day In Following Month)').':</td><td>
-		<input type="Text"' . (in_array('DayNumber',$Errors) ? 'class="inputerror"' : '' ) .' name="DayNumber" class="number"  size=4 maxlength=3 value=';
+		<input type="text"' . (in_array('DayNumber',$Errors) ? 'class="inputerror"' : '' ) .' name="DayNumber" class="number"  size="4" maxlength="3" value="';
 	if ($DaysBeforeDue !=0) {
-			echo $DaysBeforeDue;
-			} else {
-			if (isset($DayInFollowingMonth)) {echo $DayInFollowingMonth;}
-			}
-	echo '></td></tr></table><br /><div class="centre"><input type="Submit" name="submit" value="'._('Enter Information').'"></form></div>';
+		echo $DaysBeforeDue;
+	} else {
+		if (isset($DayInFollowingMonth)) {
+			echo $DayInFollowingMonth;
+		}
+	}
+	echo '" /></td></tr></table><br /><div class="centre"><input type="submit" name="submit" value="'._('Enter Information').'" /></form></div>';
 } //end if record deleted no point displaying form to add record
 
 include('includes/footer.inc');

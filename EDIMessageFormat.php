@@ -101,8 +101,8 @@ echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<br /><table border=0 width=100%>
-	<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') .
-		'" alt="" />' . ' ' . $title.'</p>';
+	<p class="page_title_text">
+		<img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>';
 
 if (!isset($SelectedMessageLine)) {
 
@@ -124,7 +124,7 @@ or deletion of the records*/
 	$result = DB_query($sql,$db);
 
 	echo '<table class="selection">';
-	echo '<tr><th colspan=5><font size=3>' . _('Definition of') . ' ' . $MessageType . ' ' . _('for') . ' ' . $PartnerCode.'</font></th></tr>';
+	echo '<tr><th colspan="5"><font size="3">' . _('Definition of') . ' ' . $MessageType . ' ' . _('for') . ' ' . $PartnerCode.'</font></th></tr>';
 	$TableHeader = '<tr>
 			<th>' . _('Section') . '</th>
 			<th>' . _('Sequence') . '</th>
@@ -161,8 +161,9 @@ or deletion of the records*/
 	} //END WHILE LIST LOOP
 	echo '</table><br />';
 	if (DB_num_rows($result)==0){
-		echo '<div class="centre"><input tabindex=1 type="submit" name="NewEDIInvMsg" value="' .
-			_('Create New EDI Invoice Message From Default Template') . '" /></div><br />';
+		echo '<div class="centre">
+				<input tabindex=1 type="submit" name="NewEDIInvMsg" value="' . _('Create New EDI Invoice Message From Default Template') . '" />
+			</div><br />';
 	}
 } //end of ifs SelectedLine is not set
 
@@ -201,26 +202,26 @@ if (isset($SelectedMessageLine)) {
 echo '<table class="selection">';
 
 if ($myrow['messagetype']!='') {
-	echo '<tr><th colspan=2><font size=3>' . _('Definition of') . ' ' . $myrow['messagetype'] . ' ' . _('for') . ' ' . $myrow['partnercode'].'</font></th></tr>';
+	echo '<tr><th colspan="2"><font size="3">' . _('Definition of') . ' ' . $myrow['messagetype'] . ' ' . _('for') . ' ' . $myrow['partnercode'].'</font></th></tr>';
 }
 
 echo '<tr><td>' . _('Section') . ':</td>';
 echo '<td>';
-echo '<select tabindex=2 name="Section">';
+echo '<select tabindex="2" name="Section">';
 
 if ($_POST['Section']=='Heading') {
-	echo '<option selected value="Heading">' . _('Heading') . '</option>';
+	echo '<option selected="True" value="Heading">' . _('Heading') . '</option>';
 } else {
 	echo '<option value="Heading">' . _('Heading') . '</option>';
 }
 
 if (isset($_POST['Section']) and $_POST['Section']=='Detail') {
-	echo '<option selected value="Detail">' . _('Detail') . '</option>';
+	echo '<option selected="True" value="Detail">' . _('Detail') . '</option>';
 } else {
 	echo '<option value="Detail">' . _('Detail') . '</option>';
 }
 if (isset($_POST['Section']) and $_POST['Section']=='Summary') {
-	echo '<option selected value="Summary">' . _('Summary') . '</option>';
+	echo '<option selected="True" value="Summary">' . _('Summary') . '</option>';
 } else {
 	echo '<option value="Summary">' . _('Summary') . '</option>';
 }
@@ -234,17 +235,17 @@ if (!isset($_POST['LineText'])) {$_POST['LineText']='';}
 echo '</td></tr>';
 
 echo '<tr><td>Sequence Number:</td>';
-echo '<td><input tabindex=3 type="text" name=SequenceNo size=3 maxlength=3 value='.$_POST['SequenceNo'].'>';
+echo '<td><input tabindex="3" type="text" name="SequenceNo" size="3" maxlength="3" value="'.$_POST['SequenceNo'].'" />';
 echo '</td></tr>';
 echo '<tr><td>' .  _('Line Text') . ':' .'</td>';
 echo '<td>';
-echo '<input tabindex=4 type="Text" name="LineText" size=50 maxlength=50 value='.$_POST['LineText'] .'>';
+echo '<input tabindex="4" type="text" name="LineText" size="50" maxlength="50" value="'.$_POST['LineText'] .'" />';
 echo '</td></tr>';
 echo '</table><br />';
 if (isset($_GET['SelectedMessageLine'])) {
-	echo '<div class="centre"><input tabindex=5 type="submit" name="update" value="'.  _('Update Information'). '"></div>';
+	echo '<div class="centre"><input tabindex="5" type="submit" name="update" value="'.  _('Update Information'). '" /></div>';
 } else {
-	echo '<div class="centre"><input tabindex=5 type="submit" name="submit" value="'.  _('Enter Information'). '"></div>';
+	echo '<div class="centre"><input tabindex="5" type="submit" name="submit" value="'.  _('Enter Information'). '" /></div>';
 }
 
 echo '</form>';

@@ -39,8 +39,8 @@ $DecimalPlaces = $myrow[3];
 $Serialised = $myrow[4];
 $Controlled = $myrow[5];
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') .
-	'" alt="" /><b>' . ' ' . $StockID . ' - ' . $myrow['0'] . ' : ' . _('in units of') . ' : ' . $myrow[1] . '</b></p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') . '" alt="" />
+		<b>' . ' ' . $StockID . ' - ' . $myrow['0'] . ' : ' . _('in units of') . ' : ' . $myrow[1] . '</b></p>';
 
 $Its_A_KitSet_Assembly_Or_Dummy =False;
 if ($myrow[2]=='K'){
@@ -302,7 +302,7 @@ if ($DebtorNo) { /* display recent pricing history for this debtor and this stoc
 	}
 	if (isset($PriceHistory)) {
 	  echo '<br /><table cellpadding="4" class="selection">';
-	  echo '<tr><th colspan=4><font color=navy size=2>' . _('Pricing history for sales of') . ' ' . $StockID . ' ' . _('to') . ' ' . $DebtorNo . '</font></th></tr>';
+	  echo '<tr><th colspan="4"><font color="navy" size="2">' . _('Pricing history for sales of') . ' ' . $StockID . ' ' . _('to') . ' ' . $DebtorNo . '</font></th></tr>';
 	  $tableheader = '<tr>
 			<th>' . _('Date Range') . '</th>
 			<th>' . _('Quantity') . '</th>

@@ -8,8 +8,7 @@ $title = _('Shipment Costing');
 include('includes/header.inc');
 include('includes/SQL_CommonFunctions.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') .
-	'" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (isset($_GET['NewShipment']) and $_GET['NewShipment']=='Yes'){
 	unset($_SESSION['Shipment']->LineItems);
@@ -47,7 +46,7 @@ if (DB_num_rows($GetShiptHdrResult)==0) {
 $HeaderData = DB_fetch_array($GetShiptHdrResult);
 echo '<br />';
 echo '<table class="selection">';
-echo '<tr><th colspan=4><font size=3 color=navy>'._('Shipment Details').'</font></th></tr>';
+echo '<tr><th colspan="4"><font size="3" color="navy">'._('Shipment Details').'</font></th></tr>';
 echo '<tr>
 		<td><b>'. _('Shipment') .': </td>
 		<td><b>' . $_GET['SelectedShipment'] . '</b></td>
@@ -131,10 +130,10 @@ if (db_num_rows($LineItemsResult) > 0) {
 		$PeriodNo = GetPeriod(Date($_SESSION['DefaultDateFormat']), $db);
 	}
 
-	echo '<br /><table cellpadding=2 colspan=7 class="selection">';
-	echo '<tr><th colspan=9><font color=navy size=3>' . _('Items on shipment'). '</font></th></tr>';
+	echo '<br /><table cellpadding="2" colspan="7" class="selection">';
+	echo '<tr><th colspan="9"><font color="navy" size="3">' . _('Items on shipment'). '</font></th></tr>';
 
-	$TableHeader = '<tr>	<th>'. _('Item'). '</th>
+	$TableHeader = '<tr><th>'. _('Item'). '</th>
 				<th>'. _('Quantity'). '<br />'. _('Invoiced'). '</th>
 				<th>'. _('Quantity'). '<br />'. _('Received'). '</th>
 				<th>'. _('Invoiced'). '<br />'. _('Charges'). '</th>
@@ -327,11 +326,15 @@ if (db_num_rows($LineItemsResult) > 0) {
 
 					$CostIncrement = ($myrow['totqtyinvoiced'] *($ItemShipmentCost - $StdCostUnit) - $WriteOffToVariances) / $TotalQuantityOnHand;
 					$sql = "UPDATE stockmaster SET lastcost=materialcost+overheadcost+labourcost,
-																   materialcost=materialcost+" . $CostIncrement . " WHERE stockid='" . $myrow['itemcode'] . "'";
+													materialcost=materialcost+" . $CostIncrement . ",
+													lastcurcostdate='" . Date('Y-m-d') . "'
+												WHERE stockid='" . $myrow['itemcode'] . "'";
 					$Result = DB_query($sql, $db, $ErrMsg, $DbgMsg,'',TRUE);
 				} else {
 					$sql = "UPDATE stockmaster SET lastcost=materialcost+overheadcost+labourcost,
-								materialcost='" . $ItemShipmentCost . "' WHERE stockid='" . $myrow['itemcode'] . "'";
+													materialcost='" . $ItemShipmentCost . "',
+													lastcurcostdate='" . Date('Y-m-d') . "'
+												WHERE stockid='" . $myrow['itemcode'] . "'";
 					$Result = DB_query($sql, $db, $ErrMsg, $DbgMsg,'',TRUE);
 				}
 				/* End of Weighted Average Costing Code */
@@ -450,6 +453,7 @@ if (db_num_rows($LineItemsResult) > 0) {
 				$sql = "UPDATE stockmaster SET materialcost=" . $ItemShipmentCost . ",
 												labourcost=0,
 												overheadcost=0,
+												lastcurcostdate='" . Date('Y-m-d') . "'
 												lastcost='" . $StdCostUnit . "'
 											WHERE stockid='" . $myrow['itemcode'] . "'";
 
@@ -474,17 +478,17 @@ if (db_num_rows($LineItemsResult) > 0) {
 				<td class="number">' . $VariancePercentage . '%</td></tr>';
 	}
 }
-echo '<tr><td colspan=3 class="number"><font color=BLUE><b>'. _('Total Shipment Charges'). '</b></font></td>
+echo '<tr><td colspan="3" class="number"><font color="blue"><b>'. _('Total Shipment Charges'). '</b></font></td>
 	<td class="number">' . number_format($TotalInvoiceValueOfShipment) . '</td>
 	<td class="number">' . number_format($TotalCostsToApportion) .'</td></tr>';
 
-echo '<tr><td colspan=6 class="number">' . _('Total Value of all variances on this shipment') . '</td>
+echo '<tr><td colspan="6" class="number">' . _('Total Value of all variances on this shipment') . '</td>
 			  <td class="number">' . number_format($TotalShiptVariance,2) . '</td></tr>';
 
 echo '</table>';
 
 
-echo '<br /><table colspan=2 width=95%><tr><td valign=top>'; // put this shipment charges side by side in a table (major table 2 cols)
+echo '<br /><table colspan="2" width="95%"><tr><td valign="top">'; // put this shipment charges side by side in a table (major table 2 cols)
 
 $sql = "SELECT suppliers.suppname,
 				supptrans.suppreference,
@@ -512,8 +516,8 @@ $sql = "SELECT suppliers.suppname,
 
 $ChargesResult = DB_query($sql,$db);
 
-echo '<table cellpadding=2 colspan=6 class="selection">';
-echo '<tr><th colspan=6><font color=navy size=3>' . _('Shipment Charges Against Products'). '</font></th></tr>';
+echo '<table cellpadding="2" colspan="6" class="selection">';
+echo '<tr><th colspan="6"><font color="navy" size="3">' . _('Shipment Charges Against Products'). '</font></th></tr>';
 
 $TableHeader = '<tr>
 					<th>'. _('Supplier'). '</th>
@@ -553,12 +557,12 @@ while ($myrow=db_fetch_array($ChargesResult)) {
 	$TotalItemShipmentChgs += $myrow['value'];
 }
 
-echo '<tr><td colspan=5 class="number"><font color=BLUE><b>'. _('Total Charges Against Shipment Items'). ':</b></font></td>
+echo '<tr><td colspan="5" class="number"><font color="blue"><b>'. _('Total Charges Against Shipment Items'). ':</b></font></td>
 	<td class="number">' . number_format($TotalItemShipmentChgs) . '</td></tr>';
 
 echo '</table>';
 
-echo '</td><td VALIGN=TOp>'; //major table
+echo '</td><td valign="top">'; //major table
 
 /* Now the shipment freight/duty etc general charges */
 
@@ -584,8 +588,8 @@ $sql = "SELECT suppliers.suppname,
 
 $ChargesResult = DB_query($sql,$db);
 
-echo '<table cellpadding=2 colspan=5 class="selection">';
-echo '<tr><th colspan=6><font color=navy size=3>'._('General Shipment Charges').'</font></th></tr>';
+echo '<table cellpadding="2" colspan="5" class="selection">';
+echo '<tr><th colspan="6"><font color="navy" size="3">'._('General Shipment Charges').'</font></th></tr>';
 
 $TableHeader = '<tr>
 		<th>'. _('Supplier'). '</th>
@@ -623,7 +627,7 @@ while ($myrow=db_fetch_array($ChargesResult)) {
 }
 
 echo '<tr>
-	<td class="number" colspan=4><font color=BLUE><b>'. _('Total General Shipment Charges'). ':</b></font></td>
+	<td class="number" colspan="4"><font color="blue"><b>'. _('Total General Shipment Charges'). ':</b></font></td>
 	<td class="number">' . number_format($TotalGeneralShipmentChgs) . '</td></tr>';
 
 echo '</table>';
@@ -639,7 +643,7 @@ if ( isset($_GET['Close'])) { /* Only an opportunity to confirm user wishes to c
 		if ($_SESSION['WeightedAverageCosting']==0){
 		/* We are standard costing - so show the option to update costs - under W. Avg cost updates are implicit */
 			echo _('Update Standard Costs') .':<select name="UpdateCost">
-			<option selected value="Yes">'. _('Yes') . '</option>
+			<option selected="True" value="Yes">'. _('Yes') . '</option>
 			<option value="No">'. _('No') . '</option>
 			</select>';
 		}

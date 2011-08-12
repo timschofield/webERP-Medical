@@ -7,8 +7,7 @@ $title = _('Tax Categories');
 
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Supplier Types')
-	. '" alt="" />' . $title. '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Supplier Types') . '" alt="" />' . $title. '</p>';
 
 if ( isset($_GET['SelectedTaxCategory']) )
 	$SelectedTaxCategory = $_GET['SelectedTaxCategory'];
@@ -216,7 +215,7 @@ if (! isset($_GET['delete'])) {
 
 			$_POST['TaxCategoryName']  = $myrow['taxcatname'];
 
-			echo '<input type="hidden" name="SelectedTaxCategory" value="' . $myrow['taxcatid'] . '">';
+			echo '<input type="hidden" name="SelectedTaxCategory" value="' . $myrow['taxcatid'] . '" />';
 			echo '<table class="selection">';
 		}
 
@@ -226,7 +225,7 @@ if (! isset($_GET['delete'])) {
 	}
 	echo '<tr>
 		<td>' . _('Tax Category Name') . ':' . '</td>
-		<td><input type="text" name="TaxCategoryName" size=30 maxlength=30 value="' . $_POST['TaxCategoryName'] . '"></td>
+		<td><input type="text" name="TaxCategoryName" size="30" maxlength="30" value="' . $_POST['TaxCategoryName'] . '" /></td>
 		</tr>';
 	echo '</table>';
 

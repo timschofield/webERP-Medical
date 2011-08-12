@@ -26,8 +26,7 @@ if (isset($_GET['AssetID'])) {
 	$result=DB_query($sql, $db);
 	echo '<form action="'. $_SERVER['PHP_SELF'] . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') .
-		'" alt="" />' . ' ' . $title . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p>';
 	echo '<table class="selection"><tr>';
 	echo '<td>'. _('In Asset Category') . ': ';
 	echo '<select name="AssetCat">';
@@ -38,7 +37,7 @@ if (isset($_GET['AssetID'])) {
 
 	while ($myrow = DB_fetch_array($result)) {
 		if ($myrow['categoryid'] == $_POST['AssetCat']) {
-			echo '<option selected value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 		}
@@ -49,20 +48,20 @@ if (isset($_GET['AssetID'])) {
 
 
 	if (isset($_POST['Keywords'])) {
-		echo '<input type="text" name="Keywords" value="' . trim($_POST['Keywords'],'%') . '" size=20 maxlength=25>';
+		echo '<input type="text" name="Keywords" value="' . trim($_POST['Keywords'],'%') . '" size="20" maxlength="25" />';
 	} else {
-		echo '<input type="text" name="Keywords" size=20 maxlength=25>';
+		echo '<input type="text" name="Keywords" size="20" maxlength="25" />';
 	}
 
 	echo '</td></tr><tr><td></td>';
 
-	echo '<td><font size 3><b>' . _('OR').' ' . '</b></font>' . _('Enter partial') .' <b>'. _('Asset Code') . '</b>:</td>';
+	echo '<td><font size="3"><b>' . _('OR').' ' . '</b></font>' . _('Enter partial') .' <b>'. _('Asset Code') . '</b>:</td>';
 	echo '<td>';
 
 	if (isset($_POST['AssetID'])) {
-		echo '<input type="text" name="AssetID" value="'. trim($_POST['AssetID'],'%') . '" size=15 maxlength=18>';
+		echo '<input type="text" name="AssetID" value="'. trim($_POST['AssetID'],'%') . '" size="15" maxlength="18" />';
 	} else {
-		echo '<input type="text" name="AssetID" size=15 maxlength=18>';
+		echo '<input type="text" name="AssetID" size="15" maxlength="18" />';
 	}
 
 	echo '</td></tr></table><br />';
@@ -128,7 +127,7 @@ if (isset($_POST['Search'])) {
 		echo '<option value=""></option>';
 		while ($LocationRow=DB_fetch_array($LocationResult)) {
 			if ($LocationRow['locationid']==$myrow['location']) {
-				echo '<option selected value="'.$LocationRow['locationid'].'">'.$LocationRow['locationdescription'] . '</option>';
+				echo '<option selected="True" value="'.$LocationRow['locationid'].'">'.$LocationRow['locationdescription'] . '</option>';
 			} else {
 				echo '<option value="'.$LocationRow['locationid'].'">'.$LocationRow['locationdescription'].'</option>';
 			}

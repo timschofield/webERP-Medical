@@ -120,8 +120,8 @@ echo '<br />&nbsp;' . _('Current language is') . ' ' . $_SESSION['Language'];
 			if ($ModuleText[$i] == "") {
 				echo '<tr>';
 				echo '<td valign="top"><I>'. $DefaultText[$i] . '</I></td>';
-				echo '<td valign="top"><input type="text" size="60" name="moduletext_' . $msgstr[$i] . '" value="' . $ModuleText[$i] . '"></td>';
-				echo '<td valign="top">' . $AlsoIn[$i] . '<input type="hidden" name="msgstr_' . $msgstr[$i] . '" value="' . $msgstr[$i] . '"></td>';
+				echo '<td valign="top"><input type="text" size="60" name="moduletext_' . $msgstr[$i] . '" value="' . $ModuleText[$i] . '" /></td>';
+				echo '<td valign="top">' . $AlsoIn[$i] . '<input type="hidden" name="msgstr_' . $msgstr[$i] . '" value="' . $msgstr[$i] . '" /></td>';
 				echo '</tr>';
 				echo '<tr><th colspan="3"></th></tr>';
 			}
@@ -132,8 +132,8 @@ echo '<br />&nbsp;' . _('Current language is') . ' ' . $_SESSION['Language'];
 		echo '</td></tr>';
 		echo '</table>';
 		echo '<br /><div class="centre">';
-		echo '<input type="Submit" name="submit" value="' . _('Modify') . '">&nbsp;&nbsp;';
-		echo '<input type="hidden" name="module" value="' . $_POST['module'] . '">';
+		echo '<input type="submit" name="submit" value="' . _('Modify') . '" />&nbsp;&nbsp;';
+		echo '<input type="hidden" name="module" value="' . $_POST['module'] . '" />';
 
 		echo '</form>';
 		echo '</div>';

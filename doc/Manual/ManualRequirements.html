@@ -1,12 +1,8 @@
-<html><head></head><body><br /><br />
+<html><head></head><body>
 
-<a name="Requirements"><font size="+3"><b>Requirements</b></font></a>
+<h1><a name="Requirements">Requirements</a></h1>
 
-<br /><br />
-
-<font size="+2"><b>Hardware Requirements</b></font>
-
-<br /><br />
+<h2>Hardware Requirements</h2>
 
 There are many possible
 configurations that could run this application. The scale of the
@@ -43,9 +39,7 @@ When using the hosting facilities of a 3rd party it is important to consider the
 <li>Backup connectivity options of the host ie more than one connection to the internet is preferable</li>
 </ul>
 
-<font size="+2"><b>Software Requirements</b></font>
-
-<br /><br />
+<h2>Software Requirements</h2>
 If the business elects to have their own on-site web-server there are many software bundles that will provide the necessary infrastructure of:
 <ul>
 <li><a href="http://www.php.net">PHP</a> a versions later than 5.1</li>
@@ -85,8 +79,7 @@ secure sockets makes sense where
 there is any data transmitted over the Internet and not just over a
 LAN.
 <br /><br />
-<font size="+2"><b>Using webERP with a Wiki</b></font>
-<br /><br />
+<h2>Using webERP with a Wiki</h2>
 Wikis are an unfortunate name for a marvellous business tool. They are a genre of software that allow user editing of a web-site. webERP defines the names for wiki pages and provides a structure for the information held on the wiki - where users can add their experiences and information about customer, products and suppliers. webERP links to a customer page - if the page does not exist then there is a prompt to create it - it is then up to the business how they implement the wiki into their business. Possible scenarios might be that the customer page contains links to:
 <ul>
 <li>Credit control History</li>
@@ -95,7 +88,7 @@ Wikis are an unfortunate name for a marvellous business tool. They are a genre o
 </ul>
 If an integrated wiki is enabled from
 <br /><br />
-Setup->General->Configuration Settings
+Setup &rarr; General &rarr; Configuration Settings
 <br /><br />
 then select the wiki application to integrate with. webERP has links from the Selection menus for Items (SelectProduct.php), Customers (SelectCustomer.php) and Suppliers (SelectSupplier.php). Clicking on the link brings up the wiki if the page does not currently exist you will be able to create it - in future it will go directly to the page created.
 <br /><br />
@@ -103,12 +96,12 @@ The webERP product link to the wiki might contain details about the development 
 <br /><br />
 The <a href="http://wackowiki.org/Download">wacko wiki</a> is very lightweight and imposes minimal additional overhead on a web-server and is possibly one of the most functional and flexible wikis available.
 <br /><br />
-Simply install this on the same web server as your webERP install and provide the path to the wiki in Setup->General->Configuration Settings.
+Simply install this on the same web server as your webERP install and provide the path to the wiki in Setup &rarr; General &rarr; Configuration Settings.
 <br /><br />
 You should make the wiki only visible to registered users - see the configuration pages of the wacko wiki - in particular the setting in config.inc.php for:
 <ul>
-<li>"default_read_acl" => "*" - this setting determines who can read the page by default "*" means anyone can read change this to "?" for only registered users</li>
-<li>"default_comment_acl" => "*" - this determines who can comment on the page by default "*" allows anyone to comment on the page - change this to "?" for just registered users</li>
-<li>"allow_registration" => "1" - change this to "0" to ensure that unuathorised people need to contact the system administrator to register</li>
+<li>"default_read_acl" =&gt; "*" - this setting determines who can read the page by default "*" means anyone can read change this to "?" for only registered users</li>
+<li>"default_comment_acl" =&gt; "*" - this determines who can comment on the page by default "*" allows anyone to comment on the page - change this to "?" for just registered users</li>
+<li>"allow_registration" =&gt; "1" - change this to "0" to ensure that unuathorised people need to contact the system administrator to register</li>
 </ul>
 </body></html>

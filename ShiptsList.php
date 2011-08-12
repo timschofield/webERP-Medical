@@ -6,8 +6,7 @@ include ('includes/session.inc');
 $title = _('Shipments Open Inquiry');
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/supplier.png" title="' .
-				_('Supplier') . '" alt="" />' . ' ' . _('Open Shipments for').' ' . $_GET['SupplierName']. '.</p>';
+echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/supplier.png" title="' . _('Supplier') . '" alt="" />' . ' ' . _('Open Shipments for').' ' . $_GET['SupplierName']. '.</p>';
 
 if (!isset($_GET['SupplierID']) or !isset($_GET['SupplierName'])){
 	echo '<br />';
@@ -31,7 +30,7 @@ if (DB_num_rows($ShiptsResult)==0){
 }
 /*show a table of the shipments returned by the SQL */
 
-echo '<table cellpadding=2 colspan=2 class="selection">';
+echo '<table cellpadding="2" colspan="2" class="selection">';
 echo '<tr>
 		<th>'. _('Reference'). '</a></th>
 		<th>'. _('Vessel'). '</th>

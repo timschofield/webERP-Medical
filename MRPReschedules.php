@@ -89,7 +89,7 @@ if (isset($_POST['PrintPDF'])) {
 
 		// Parameters for addTextWrap are defined in /includes/class.pdf.php
 		// 1) X position 2) Y position 3) Width
-		// 4) Height 5) Text 6) Alignment 7) Border 8) Fill - True to use SetFillColor
+		// 4) Height 5) text 6) Alignment 7) Border 8) Fill - True to use SetFillColor
 		// and False to set to transparent
 		$pdf->addTextWrap($Left_Margin,$YPos,90,$FontSize,$myrow['part'],'',0,$fill);
 		$pdf->addTextWrap(130,$YPos,200,$FontSize,$myrow['description'],'',0,$fill);
@@ -123,17 +123,16 @@ if (isset($_POST['PrintPDF'])) {
 	$title=_('MRP Reschedule Reporting');
 	include('includes/header.inc');
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="'
-		. _('Stock') . '" alt="" />' . ' ' . $title . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Stock') . '" alt="" />' . ' ' . $title . '</p>';
 
 	echo '<br /><br /><form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<tr><td>' . _('Print Option') . ':</td><td><select name="Fill">';
-	echo '<option selected value="yes">' . _('Print With Alternating Highlighted Lines') . '</option>';
+	echo '<option selected="True" value="yes">' . _('Print With Alternating Highlighted Lines') . '</option>';
 	echo '<option value="no">' . _('Plain Print') . '</option>';
 	echo '</select></td></tr>';
 	echo '<tr><td>' . _('Selection') . ':</td><td><select name="Selection">';
-	echo '<option selected value="All">' . _('All').'</option>';
+	echo '<option selected="True" value="All">' . _('All').'</option>';
 	echo '<option value="WO">' . _('Work Orders Only').'</option>';
 	echo '<option value="PO">' . _('Purchase Orders Only').'</option>';
 	echo '</select></td></tr>';

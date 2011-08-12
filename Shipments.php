@@ -14,8 +14,7 @@ if (isset($_GET['NewShipment']) and $_GET['NewShipment']=='Yes'){
 	unset($_SESSION['Shipment']);
 }
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') .
-	'" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (!isset($_SESSION['SupplierID']) AND !isset($_SESSION['Shipment'])){
 	prnMsg( _('To set up a shipment') . ', ' . _('the supplier must first be selected from the Select Supplier page'), 'error');
@@ -292,9 +291,9 @@ echo '<table class="selection"><tr><td><b>'. _('Shipment').': </td><td><b>' . $_
 		<td><b>'. _('From'). ' ' . $_SESSION['Shipment']->SupplierName . '</b></td></tr>';
 
 echo '<tr><td>'. _('Vessel Name /Transport Agent'). ': </td>
-	<td colspan=3><input type="text" name="Vessel" maxlength=50 size=50 value="' . $_SESSION['Shipment']->Vessel . '"></td>
+	<td colspan="3"><input type="text" name="Vessel" maxlength="50" size="50" value="' . $_SESSION['Shipment']->Vessel . '" /></td>
 	<td>'._('Voyage Ref / Consignment Note').': </td>
-	<td><input type="text" name="VoyageRef" maxlength=20 size=20 value="' . $_SESSION['Shipment']->VoyageRef . '"></td>
+	<td><input type="text" name="VoyageRef" maxlength="20" size="20" value="' . $_SESSION['Shipment']->VoyageRef . '" /></td>
 </tr>';
 
 if (isset($_SESSION['Shipment']->ETA)){
@@ -305,9 +304,9 @@ if (isset($_SESSION['Shipment']->ETA)){
 
 echo '<tr><td>'. _('Expected Arrival Date (ETA)'). ': </td>';
 if (isset($_SESSION['Shipment']->ETA)) {
-	echo '<td><input type="text" class="date" alt='.$_SESSION['DefaultDateFormat'].' name="ETA" maxlength=10 size=10 value="' . $ETA . '"></td>';
+	echo '<td><input type="text" class="date" alt='.$_SESSION['DefaultDateFormat'].' name="ETA" maxlength="10" size="10" value="' . $ETA . '" /></td>';
 } else {
-	echo '<td><input type="text" class="date" alt='.$_SESSION['DefaultDateFormat'].' name="ETA" maxlength=10 size=10 value="' . Date($_SESSION['DefaultDateFormat']) . '"></td>';
+	echo '<td><input type="text" class="date" alt='.$_SESSION['DefaultDateFormat'].' name="ETA" maxlength="10" size="10" value="' . Date($_SESSION['DefaultDateFormat']) . '" /></td>';
 }
 echo '<td>'. _('Into').' ';
 
@@ -344,14 +343,14 @@ if (!isset($_SESSION['Shipment']->StockLocation)){
 
 		if (isset($_POST['StockLocation'])){
 			if ($myrow['loccode'] == $_POST['StockLocation']){
-				echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+				echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			} else {
-				echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+				echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			}
 		} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
-			echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
-			echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	}
 
@@ -374,8 +373,8 @@ echo '</td></tr></table>';
 if (count($_SESSION['Shipment']->LineItems)>0){
 	/* Always display all shipment lines */
 
-	echo '<br /><table cellpadding=2 colspan=7 class="selection">';
-	echo '<tr><th colspan=9><font color=navy size=3>'. _('Order Lines On This Shipment'). '</font></th></tr>';
+	echo '<br /><table cellpadding="2" colspan="7" class="selection">';
+	echo '<tr><th colspan="9"><font color="navy" size="3">'. _('Order Lines On This Shipment'). '</font></th></tr>';
 
 	$TableHeader = '<tr>
 			<th>'. _('Order'). '</th>
@@ -452,8 +451,8 @@ $result = DB_query($sql,$db);
 
 if (DB_num_rows($result)>0){
 
-	echo '<table cellpadding=2 colspan=7 class="selection">';
-	echo '<tr><th colspan=7><font color=navy size=3>'. _('Possible Order Lines To Add To This Shipment').'</font></th></tr>';
+	echo '<table cellpadding="2" colspan="7" class="selection">';
+	echo '<tr><th colspan="7"><font color="navy" size="3">'. _('Possible Order Lines To Add To This Shipment').'</font></th></tr>';
 
 	$TableHeader = '<tr>
 			<th>'. _('Order').'</th>

@@ -19,8 +19,8 @@ if ((isset($_GET['Type']) AND $_GET['Type']=='Receipts') OR
 
 	$Type = 'Payments';
 	$TypeName =_('Payments');
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_delete.png" title="' . _('Bank Matching') .
-		'" alt="" />' . ' ' . _('Bank Account Matching - Payments') . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_delete.png" title="' . _('Bank Matching') . '" alt="" />' .
+			' ' . _('Bank Account Matching - Payments') . '</p>';
 
 } else {
 
@@ -81,18 +81,18 @@ echo '<div class="page_help_text">' . _('Use this screen to match webERP Receipt
 echo '<form action="'. $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<input type="hidden" name="Type" Value="' . $Type . '">';
+echo '<input type="hidden" name="Type" Value="' . $Type . '" />';
 
 echo '<table class="selection"><tr>';
-echo '<td align=left>' . _('Bank Account') . ':</td><td colspan=3><select tabindex="1" name="BankAccount">';
+echo '<td align=left>' . _('Bank Account') . ':</td><td colspan="3"><select tabindex="1" name="BankAccount">';
 
 $sql = "SELECT accountcode, bankaccountname FROM bankaccounts";
 $resultBankActs = DB_query($sql,$db);
 while ($myrow=DB_fetch_array($resultBankActs)){
 	if (isset($_POST['BankAccount']) and $myrow['accountcode']==$_POST['BankAccount']){
-		echo '<option selected Value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . '</option>';
+		echo '<option selected="True" value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . '</option>';
 	} else {
-		echo '<option Value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . '</option>';
+		echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . '</option>';
 	}
 }
 
@@ -107,35 +107,35 @@ if (!isset($_POST['AfterDate']) OR !Is_Date($_POST['AfterDate'])){
 
 // Change to allow input of FROM DATE and then TO DATE, instead of previous back-to-front method, add datepicker
 echo '<tr><td>' . _('Show') . ' ' . $TypeName . ' ' . _('from') . ':</td>
-		<td><input tabindex="3" type="text" name="AfterDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="12" maxlength="10" onChange="isDate(this, this.value, '."'".$_SESSION['DefaultDateFormat']."'".')" Value="' . $_POST['AfterDate'] . '"></td></tr>';
+		<td><input tabindex="3" type="text" name="AfterDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="12" maxlength="10" onChange="isDate(this, this.value, '."'".$_SESSION['DefaultDateFormat']."'".')" value="' . $_POST['AfterDate'] . '" /></td></tr>';
 
 echo '<td>' . _('to') . ':</td>
-	<td><input tabindex="2" type="text" name="BeforeDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="12" maxlength="10" onChange="isDate(this, this.value, '."'".$_SESSION['DefaultDateFormat']."'".')" Value="' . $_POST['BeforeDate'] . '"></td>';
-echo '<tr><td colspan=3>' . _('Choose outstanding') . ' ' . $TypeName . ' ' . _('only or all') . ' ' . $TypeName . ' ' . _('in the date range') . ':</td>
+	<td><input tabindex="2" type="text" name="BeforeDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="12" maxlength="10" onChange="isDate(this, this.value, '."'".$_SESSION['DefaultDateFormat']."'".')" value="' . $_POST['BeforeDate'] . '" /></td>';
+echo '<tr><td colspan="3">' . _('Choose outstanding') . ' ' . $TypeName . ' ' . _('only or all') . ' ' . $TypeName . ' ' . _('in the date range') . ':</td>
 	<td><select tabindex="4" name="Ostg_or_All">';
 
 if ($_POST['Ostg_or_All']=='All'){
-	echo '<option selected Value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range') . '</option>';
-	echo '<option Value="Ostdg">' . _('Show unmatched') . ' ' . $TypeName . ' ' . _('only') . '</option>';
+	echo '<option selected="True" value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range') . '</option>';
+	echo '<option value="Ostdg">' . _('Show unmatched') . ' ' . $TypeName . ' ' . _('only') . '</option>';
 } else {
-	echo '<option Value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range') . '</option>';
-	echo '<option selected Value="Ostdg">' . _('Show unmatched') . ' ' . $TypeName . ' ' . _('only') . '</option>';
+	echo '<option value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range') . '</option>';
+	echo '<option selected="True" value="Ostdg">' . _('Show unmatched') . ' ' . $TypeName . ' ' . _('only') . '</option>';
 }
 echo '</select></td></tr>';
 
-echo '<tr><td colspan=3>' . _('Choose to display only the first 20 matching') . ' ' . $TypeName . ' ' .
+echo '<tr><td colspan="3">' . _('Choose to display only the first 20 matching') . ' ' . $TypeName . ' ' .
 	_('or all') . ' ' . $TypeName . ' ' . _('meeting the criteria') . ':</td><td><select tabindex="5" name="First20_or_All">';
 if ($_POST['First20_or_All']=='All'){
-	echo '<option selected Value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range') . '</option>';
-	echo '<option Value="First20">' . _('Show only the first 20') . ' ' . $TypeName . '</option>';
+	echo '<option selected="True" value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range') . '</option>';
+	echo '<option value="First20">' . _('Show only the first 20') . ' ' . $TypeName . '</option>';
 } else {
-	echo '<option Value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range') . '</option>';
-	echo '<option selected Value="First20">' . _('Show only the first 20') . ' ' . $TypeName . '</option>';
+	echo '<option value="All">' . _('Show all') . ' ' . $TypeName . ' ' . _('in the date range') . '</option>';
+	echo '<option selected="True" value="First20">' . _('Show only the first 20') . ' ' . $TypeName . '</option>';
 }
 echo '</select></td></tr>';
 
 
-echo '</table><br /><div class="centre"><input tabindex="6" type="submit" name="ShowTransactions" value="' . _('Show selected') . ' ' . $TypeName . '">';
+echo '</table><br /><div class="centre"><input tabindex="6" type="submit" name="ShowTransactions" value="' . _('Show selected') . ' ' . $TypeName . '" />';
 
 if (isset($_POST['BankAccount'])) {
 	echo '<p><a href="'.$rootpath.'/BankReconciliation.php?Account='.$_POST['BankAccount'].'">' . _('Show reconciliation') . '</a></p></div>';
@@ -239,9 +239,9 @@ if ($InputError !=1 AND isset($_POST['BankAccount']) AND $_POST['BankAccount']!=
 			<th>' . _('Date') . '</th>
 			<th>' . _('Amount') . '</th>
 			<th>' . _('Outstanding') . '</th>
-			<th colspan=3>' . _('Clear') . ' / ' . _('Unclear') . '</th>
+			<th colspan="3">' . _('Clear') . ' / ' . _('Unclear') . '</th>
 		</tr>';
-	echo '<table cellpadding=2 class="selection">' . $TableHeader;
+	echo '<table cellpadding="2" class="selection">' . $TableHeader;
 
 
 	$j = 1;  //page length counter
@@ -261,8 +261,8 @@ if ($InputError !=1 AND isset($_POST['BankAccount']) AND $_POST['BankAccount']!=
 				<td>%s</td>
 				<td class="number">%s</td>
 				<td class="number">%s</td>
-				<td colspan=2>%s</td>
-				<td><input type="checkbox" name="Unclear_%s"><input type="hidden" name="BankTrans_%s" value=%s></td>
+				<td colspan="2">%s</td>
+				<td><input type="checkbox" name="Unclear_%s" /><input type="hidden" name="BankTrans_%s" value="%s" /></td>
 				</tr>',
 				$myrow['chequeno'],
 				$myrow['ref'],
@@ -290,8 +290,8 @@ if ($InputError !=1 AND isset($_POST['BankAccount']) AND $_POST['BankAccount']!=
 				<td>%s</td>
 				<td class="number">%s</td>
 				<td class="number">%s</td>
-				<td><input type="checkbox" name="Clear_%s"><input type="hidden" name="BankTrans_%s" value=%s></td>
-				<td colspan=2><input type="text" maxlength=15 size=15 class="number" name="AmtClear_%s"></td>
+				<td><input type="checkbox" name="Clear_%s" /><input type="hidden" name="BankTrans_%s" value="%s" /></td>
+				<td colspan="2"><input type="text" maxlength="15" size="15" class="number" name="AmtClear_%s" /></td>
 				</tr>',
 				$myrow['chequeno'],
 				$myrow['ref'],

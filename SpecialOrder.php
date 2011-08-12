@@ -109,9 +109,9 @@ if (isset($_POST['SelectBranch'])){
 }
 echo '<div class="centre">';
 if (!isset($_SESSION['SPL']->BranchCode)){
-	echo '<br /><font size=4 color=BLUE>' . _('Purchase from') . ' ' . $_SESSION['SPL']->SupplierName . ' ' . _('in') . ' ' . $_SESSION['SPL']->SuppCurrCode . ' ' . _('for') . ' ' . $_SESSION['SPL']->CustomerName . ' (' . $_SESSION['SPL']->CustCurrCode . ')';
+	echo '<br /><font size="4" color="blue">' . _('Purchase from') . ' ' . $_SESSION['SPL']->SupplierName . ' ' . _('in') . ' ' . $_SESSION['SPL']->SuppCurrCode . ' ' . _('for') . ' ' . $_SESSION['SPL']->CustomerName . ' (' . $_SESSION['SPL']->CustCurrCode . ')';
 } else {
-	echo '<br /><font size=4 color=BLUE>' . _('Purchase from') . ' ' . $_SESSION['SPL']->SupplierName . ' ' . _('in') . ' ' . $_SESSION['SPL']->SuppCurrCode . ' ' . _('for') . ' ' . $_SESSION['SPL']->CustomerName . ' (' . $_SESSION['SPL']->CustCurrCode . ') - ' . _('delivered to') . ' ' . $_SESSION['SPL']->BranchName . ' ' . _('branch');
+	echo '<br /><font size="4" color="blue">' . _('Purchase from') . ' ' . $_SESSION['SPL']->SupplierName . ' ' . _('in') . ' ' . $_SESSION['SPL']->SuppCurrCode . ' ' . _('for') . ' ' . $_SESSION['SPL']->CustomerName . ' (' . $_SESSION['SPL']->CustCurrCode . ') - ' . _('delivered to') . ' ' . $_SESSION['SPL']->BranchName . ' ' . _('branch');
 }
 echo '</div></font>';
 /*if the branch details and delivery details have not been entered then select them from the list */
@@ -128,7 +128,7 @@ if (!isset($_SESSION['SPL']->BranchCode)){
 		echo '<div class="centre">';
 		echo '<br /><br />' . _('Select the customer branch to deliver the special to from the list below');
 
-		echo '</div><br /><table cellpadding=3 colspan=2 BORDER=1>';
+		echo '</div><br /><table cellpadding="3" colspan="2" border="1">';
 
 		$tableheader = '<tr><th>' ._('Code') . '</th>
 					<th>' . _('Branch Name') . '</th></tr>';
@@ -518,19 +518,19 @@ if (!isset($_SESSION['SPL']->StkLocation) OR $_SESSION['SPL']->StkLocation==""){
 
 while ($LocnRow=DB_fetch_array($LocnResult)){
 	if ($_SESSION['SPL']->StkLocation == $LocnRow['loccode']){
-		echo '<option selected Value="' . $LocnRow['loccode'] . '">' . $LocnRow['locationname'] . '</option>';
+		echo '<option selected="True" Value="' . $LocnRow['loccode'] . '">' . $LocnRow['locationname'] . '</option>';
 	} else {
 		echo '<option Value="' . $LocnRow['loccode'] . '">' . $LocnRow['locationname'] . '</option>';
 	}
 }
 echo '</select></td>';
 
-echo '<td>' . _('Initiated By') . ': <input type="text" name="Initiator" size=11 maxlength=10 value="' . $_SESSION['SPL']->Initiator . '"></td>';
-echo '<td>' . _('Special Ref') . ': <input type="text" name="QuotationRef" size=16 maxlength=15 value="' . $_SESSION['SPL']->QuotationRef . '"></td>';
-echo '<td>' . _('Customer Ref') . ': <input type="text" name="CustRef" size=11 maxlength=10 value="' . $_SESSION['SPL']->CustRef . '"></td></tr>';
+echo '<td>' . _('Initiated By') . ': <input type="text" name="Initiator" size="11" maxlength="10" value="' . $_SESSION['SPL']->Initiator . '" /></td>';
+echo '<td>' . _('Special Ref') . ': <input type="text" name="QuotationRef" size="16" maxlength="15" value="' . $_SESSION['SPL']->QuotationRef . '" /></td>';
+echo '<td>' . _('Customer Ref') . ': <input type="text" name="CustRef" size="11" maxlength="10" value="' . $_SESSION['SPL']->CustRef . '" /></td></tr>';
 
-echo '<tr><td VALIGN=TOP colspan=2>' . _('Comments') . ':';
-echo '<textarea name="Comments" cols=70 rows=2>' . $_SESSION['SPL']->Comments . '</textarea></td></tr></table>';
+echo '<tr><td valign=top colspan="2">' . _('Comments') . ':';
+echo '<textarea name="Comments" cols="70" rows="2">' . $_SESSION['SPL']->Comments . '</textarea></td></tr></table>';
 
 echo '<hr>'; /* Rule off the header */
 
@@ -539,7 +539,7 @@ echo '<hr>'; /* Rule off the header */
 if (count($_SESSION['SPL']->LineItems)>0){
 
 	echo '<div class="centre"><b>' . _('Special Order Summary') . '</b></div>';
-	echo '<table cellpadding=2 colspan=7 border=1>';
+	echo '<table cellpadding="2" colspan="7" border="1">';
 
 	$sql = "SELECT currencydefault FROM companies";
 	$result = DB_query($sql, $db);
@@ -595,7 +595,7 @@ if (count($_SESSION['SPL']->LineItems)>0){
 
 	$DisplayTotal = number_format($_SESSION['SPL']->total,2);
 	echo '<tr>
-		<td colspan=8 class="number">' . _('TOTAL Excl Tax') . '</td>
+		<td colspan="8" class="number">' . _('TOTAL Excl Tax') . '</td>
 		<td class="number"><b>'.$DisplayTotal.'</b></td>
 	</tr></table>';
 
@@ -605,10 +605,10 @@ if (count($_SESSION['SPL']->LineItems)>0){
 
 echo '<table>';
 
-echo '<input type="hidden" name="LineNo" value="' . ($_SESSION['SPL']->LinesOnOrder + 1) .'">';
+echo '<input type="hidden" name="LineNo" value="' . ($_SESSION['SPL']->LinesOnOrder + 1) .'" />';
 
 if (!isset($_POST['ItemDescription'])) {$_POST['ItemDescription']='';}
-echo '<tr><td>' . _('Ordered item Description') . ':</td><td><input type="text" name="ItemDescription" size=40 maxlength=40 value="' . $_POST['ItemDescription'] . '"></td></tr>';
+echo '<tr><td>' . _('Ordered item Description') . ':</td><td><input type="text" name="ItemDescription" size="40" maxlength="40" value="' . $_POST['ItemDescription'] . '" /></td></tr>';
 
 
 echo '<tr><td>' . _('Category') . ':</td><td><select name=StkCat>';
@@ -620,7 +620,7 @@ $result = DB_query($sql,$db, $ErrMsg, $DbgMsg);
 
 while ($myrow=DB_fetch_array($result)){
 	if (isset($_POST['StkCat']) and $myrow['categoryid']==$_POST['StkCat']){
-		echo '<option selected value="'. $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
+		echo '<option selected="True" value="'. $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	} else {
 		echo '<option value="'. $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	}
@@ -632,22 +632,22 @@ echo '</select></td></tr>';
 $_POST['Qty'] = 1;
 
 echo '<tr><td>' . _('Order Quantity') . ':</td>
-	<td><input type="Text" class="number" size=7 maxlength=6 name="Qty" value="' . $_POST['Qty'] . '"></td></tr>';
+	<td><input type="text" class="number" size="7" maxlength="6" name="Qty" value="' . $_POST['Qty'] . '" /></td></tr>';
 
 if (!isset($_POST['Cost'])) {$_POST['Cost']='';}
 echo '<tr><td>' . _('Unit Cost') . ':</td>
-	<td><input type="Text" class="number" size=15 maxlength=14 name="Cost" value="' . $_POST['Cost'] . '"></td></tr>';
+	<td><input type="text" class="number" size="15" maxlength="14" name="Cost" value="' . $_POST['Cost'] . '" /></td></tr>';
 
 if (!isset($_POST['Price'])) { $_POST['Price']='';}
 echo '<tr><td>' . _('Unit Price') . ':</td>
-	<td><input type="Text" class="number" size=15 maxlength=14 name="Price" value="' . $_POST['Price'] . '"></td></tr>';
+	<td><input type="text" class="number" size="15" maxlength="14" name="Price" value="' . $_POST['Price'] . '" /></td></tr>';
 
 
 /*Default the required delivery date to tomorrow as a starting point */
 $_POST['ReqDelDate'] = Date($_SESSION['DefaultDateFormat'],Mktime(0,0,0,Date('m'),Date('d')+1,Date('y')));
 
 echo '<tr><td>' . _('Required Delivery Date') . ':</td>
-	<td><input type="Text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size=12 maxlength=11 name="ReqDelDate" value="' . $_POST['ReqDelDate'] . '"></td></tr>';
+	<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="12" maxlength="11" name="ReqDelDate" value="' . $_POST['ReqDelDate'] . '" /></td></tr>';
 
 echo '</table>'; /* end of main table */
 

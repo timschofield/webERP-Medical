@@ -24,13 +24,13 @@ echo '<div class="centre">
 <form name=SNRESEARCH method="post" action="' . $_SERVER['PHP_SELF'] .'">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo  _('Serial Number') .': <input ID="serialno" name="serialno" size=21 maxlength=20 value="'. $SN . '"> &nbsp;
+echo  _('Serial Number') .': <input id="serialno" name="serialno" size="21" maxlength="20" value="'. $SN . '" /> &nbsp;
 <input type="submit" name="submit" /></div><br />
 </form>';
 
-echo '<SCRIPT>
+echo '<script>
 document.getElementById("serialno").focus();
-</SCRIPT>';
+</script>';
 
 
 if ($SN!='') {

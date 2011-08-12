@@ -112,7 +112,7 @@ if (DB_num_rows($AccountsResults)==0){
 	while ($myrow=DB_fetch_array($AccountsResults)){
 		/*list the bank account names */
 		if (isset($_POST['BankAccount']) and $_POST['BankAccount']==$myrow['accountcode']){
-			echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . '</option>';
 		}
@@ -160,12 +160,12 @@ if (isset($_POST['ShowRec']) OR isset($_POST['DoExchangeDifference'])){
 	$BankAccountName = $CurrencyRow[2];
 
 	echo '<table class="selection">
-			<tr class=EvenTableRows><td colspan=6><b>' . $BankAccountName . ' ' . _('Balance as at') . ' ' . Date($_SESSION['DefaultDateFormat']);
+			<tr class="EvenTableRows"><td colspan="6"><b>' . $BankAccountName . ' ' . _('Balance as at') . ' ' . Date($_SESSION['DefaultDateFormat']);
 	if ($_SESSION['CompanyRecord']['currencydefault']!=$BankCurrCode){
 		echo  ' (' . $BankCurrCode . ' @ ' . $ExRate .')';
 	}
 	echo '</b></td>
-			<td valign=bottom class="number"><b>' . number_format($Balance*$ExRate,2) . '</b></td></tr>';
+			<td valign="bottom" class="number"><b>' . number_format($Balance*$ExRate,2) . '</b></td></tr>';
 
 	$SQL = "SELECT amount/exrate AS amt,
 					amountcleared,
@@ -187,7 +187,7 @@ if (isset($_POST['ShowRec']) OR isset($_POST['DoExchangeDifference'])){
 	$ErrMsg = _('The unpresented cheques could not be retrieved by the SQL because');
 	$UPChequesResult = DB_query($SQL, $db, $ErrMsg);
 
-	echo '<tr><td colspan=6><b>' . _('Add back unpresented cheques') . ':</b></td></tr>';
+	echo '<tr><td colspan="6"><b>' . _('Add back unpresented cheques') . ':</b></td></tr>';
 
 	$TableHeader = '<tr>
 			<th>' . _('Date') . '</th>
@@ -240,7 +240,7 @@ if (isset($_POST['ShowRec']) OR isset($_POST['DoExchangeDifference'])){
 	}
 	//end of while loop
 	echo '<tr></tr>
-			<tr class=EvenTableRows><td colspan=6>' . _('Total of all unpresented cheques') . '</td><td class="number">' . number_format($TotalUnpresentedCheques,2) . '</td></tr>';
+			<tr class="EvenTableRows"><td colspan="6">' . _('Total of all unpresented cheques') . '</td><td class="number">' . number_format($TotalUnpresentedCheques,2) . '</td></tr>';
 
 	$SQL = "SELECT amount/exrate AS amt,
 				amountcleared,
@@ -263,7 +263,7 @@ if (isset($_POST['ShowRec']) OR isset($_POST['DoExchangeDifference'])){
 
 	$UPChequesResult = DB_query($SQL,$db,$ErrMsg);
 
-	echo '<tr><td colspan=6><b>' . _('Less deposits not cleared') . ':</b></td></tr>';
+	echo '<tr><td colspan="6"><b>' . _('Less deposits not cleared') . ':</b></td></tr>';
 
 	$TableHeader = '<tr>
 					<th>' . _('Date') . '</th>
@@ -316,15 +316,15 @@ if (isset($_POST['ShowRec']) OR isset($_POST['DoExchangeDifference'])){
 		}
 	}
 	//end of while loop
-	echo '<tr></tr><tr class=EvenTableRows><td colspan=6>' . _('Total of all uncleared deposits') . '</td><td class="number">' . number_format($TotalUnclearedDeposits,2) . '</td></tr>';
+	echo '<tr></tr><tr class="EvenTableRows"><td colspan="6">' . _('Total of all uncleared deposits') . '</td><td class="number">' . number_format($TotalUnclearedDeposits,2) . '</td></tr>';
 	$FXStatementBalance = ($Balance*$ExRate) - $TotalUnpresentedCheques -$TotalUnclearedDeposits;
-	echo '<tr></tr><tr class=EvenTableRows><td colspan=6><b>' . _('Bank statement balance should be') . ' (' . $BankCurrCode . ')</b></td><td class="number">' . number_format($FXStatementBalance,2) . '</td></tr>';
+	echo '<tr></tr><tr class="EvenTableRows"><td colspan="6"><b>' . _('Bank statement balance should be') . ' (' . $BankCurrCode . ')</b></td><td class="number">' . number_format($FXStatementBalance,2) . '</td></tr>';
 
 	if (isset($_POST['DoExchangeDifference'])){
-		echo '<input type="hidden" name="DoExchangeDifference" value=' . $FXStatementBalance . '>';
-		echo '<tr><td colspan=6>' . _('Enter the actual bank statement balance') . ' (' . $BankCurrCode . ')</b></td>
-				<td class="number"><input type="text" name="BankStatementBalance" maxlength=15 size=15 value=' . $_POST['BankStatementBalance'] . '><td></tr>';
-		echo '<tr><td colspan=7 align="center"><input type="submit" name="PostExchangeDifference" value="' . _('Calculate and Post Exchange Difference') . '" onclick="return confirm(\'' . _('This will create a general ledger journal to write off the exchange difference in the current balance of the account. It is important that the exchange rate above reflects the current value of the bank account currency') . ' - ' . _('Are You Sure?') . '\');"></td></tr>';
+		echo '<input type="hidden" name="DoExchangeDifference" value="' . $FXStatementBalance . '" />';
+		echo '<tr><td colspan="6">' . _('Enter the actual bank statement balance') . ' (' . $BankCurrCode . ')</b></td>
+				<td class="number"><input type="text" name="BankStatementBalance" maxlength="15" size="15" value="' . $_POST['BankStatementBalance'] . '" /><td></tr>';
+		echo '<tr><td colspan="7" align="center"><input type="submit" name="PostExchangeDifference" value="' . _('Calculate and Post Exchange Difference') . '" onclick="return confirm(\'' . _('This will create a general ledger journal to write off the exchange difference in the current balance of the account. It is important that the exchange rate above reflects the current value of the bank account currency') . ' - ' . _('Are You Sure?') . '\');" /></td></tr>';
 
 	}
 
@@ -332,9 +332,9 @@ if (isset($_POST['ShowRec']) OR isset($_POST['DoExchangeDifference'])){
 
 	if ($_SESSION['CompanyRecord']['currencydefault']!=$BankCurrCode AND !isset($_POST['DoExchangeDifference'])){
 
-		echo '<tr><td colspan=7><hr></td></tr>
-				<tr><td colspan=7>' . _('It is normal for foreign currency accounts to have exchange differences that need to be reflected as the exchange rate varies. This reconciliation is prepared using the exchange rate set up in the currencies table (see the set-up tab). This table must be maintained with the current exchange rate before running the reconciliation. If you wish to create a journal to reflect the exchange difference based on the current exchange rate to correct the reconciliation to the actual bank statement balance click below.') . '</td></tr>';
-		echo '<tr><td colspan=7 align="center"><input type="submit" name="DoExchangeDifference" value="' . _('Calculate and Post Exchange Difference') . '" /></td></tr>';
+		echo '<tr><td colspan="7"><hr></td></tr>
+				<tr><td colspan="7">' . _('It is normal for foreign currency accounts to have exchange differences that need to be reflected as the exchange rate varies. This reconciliation is prepared using the exchange rate set up in the currencies table (see the set-up tab). This table must be maintained with the current exchange rate before running the reconciliation. If you wish to create a journal to reflect the exchange difference based on the current exchange rate to correct the reconciliation to the actual bank statement balance click below.') . '</td></tr>';
+		echo '<tr><td colspan="7" align="center"><input type="submit" name="DoExchangeDifference" value="' . _('Calculate and Post Exchange Difference') . '" /></td></tr>';
 	}
 	echo '</table>';
 }

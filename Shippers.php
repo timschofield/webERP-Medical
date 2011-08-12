@@ -118,8 +118,7 @@ if (!isset($SelectedShipper)) {
 then none of the above are true and the list of Shippers will be displayed with
 links to delete or edit each. These will call the same page again and allow update/input
 or deletion of the records*/
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Search') .
-		'" alt="" />' . ' ' . $title . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p>';
 
 	$sql = "SELECT * FROM shippers ORDER BY shipper_id";
 	$result = DB_query($sql,$db);
@@ -154,8 +153,7 @@ or deletion of the records*/
 
 
 if (isset($SelectedShipper)) {
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Search') .
-		'" alt="" />' . ' ' . $title . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p>';
 	echo '<div class="centre"><a href="'.$_SERVER['PHP_SELF'] . '">'._('REVIEW RECORDS').'</a></div>';
 }
 
@@ -186,12 +184,11 @@ if (!isset($_GET['delete'])) {
 	}
 
 	echo '<tr><td>'. _('Shipper Name') .':</td>
-	<td><input type="Text" name="ShipperName"'. (in_array('ShipperName',$Errors) ? 'class="inputerror"' : '' ) .
-		' value="'. $_POST['ShipperName'] .'" size=35 maxlength=40></td></tr>
+	<td><input type="text" name="ShipperName"'. (in_array('ShipperName',$Errors) ? 'class="inputerror"' : '' ) . ' value="'. $_POST['ShipperName'] .'" size="35" maxlength="40" /></td></tr>
 
 	</table>
 
-	<br /><div class="centre"><input type="Submit" name="submit" value="'. _('Enter Information').'"></div>
+	<br /><div class="centre"><input type="submit" name="submit" value="'. _('Enter Information').'" /></div>
 
 	</form>';
 

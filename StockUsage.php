@@ -26,8 +26,7 @@ if (isset($_POST['ShowGraphUsage'])) {
 
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Dispatch') .
-		'" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Dispatch') . '" alt="" />' . ' ' . $title . '</p>';
 
 $result = DB_query("SELECT description,
 				units,
@@ -44,18 +43,18 @@ echo '<table class="selection">';
 $Its_A_KitSet_Assembly_Or_Dummy =False;
 if (($myrow[2]=='K') OR ($myrow[2]=='A') OR ($myrow[2]=='D')) {
 	$Its_A_KitSet_Assembly_Or_Dummy =True;
-	echo '<font color=navy size=3><b>' . $StockID - $myrow[0] . '</b></font>';
+	echo '<font color="navy" size="3"><b>' . $StockID - $myrow[0] . '</b></font>';
 
 	echo '<br />' . _('The selected item is a dummy or assembly or kit-set item and cannot have a stock holding') . '. ' . _('Please select a different item');
 
 	$StockID = '';
 } else {
-	echo '<tr><th><font size=3 color=navy>' . _('Item') . ' :<b> ' . $StockID . ' - ' . $myrow[0] . ' </b>  (' . _('in units of') . ' :<b> ' . $myrow[1] . ')</b></font></th></tr>';
+	echo '<tr><th><font size="3" color="navy">' . _('Item') . ' :<b> ' . $StockID . ' - ' . $myrow[0] . ' </b>  (' . _('in units of') . ' :<b> ' . $myrow[1] . ')</b></font></th></tr>';
 }
 
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post"><tr><td>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo _('Stock Code') . ':<input type="text" name="StockID" size=21 maxlength=20 value="' . $StockID . '" />';
+echo _('Stock Code') . ':<input type="text" name="StockID" size="21" maxlength="20" value="' . $StockID . '" />';
 
 echo _('From Stock Location') . ':<select name="StockLocation">';
 
@@ -64,12 +63,12 @@ $resultStkLocs = DB_query($sql,$db);
 while ($myrow=DB_fetch_array($resultStkLocs)){
 	if (isset($_POST['StockLocation'])){
 		if ($myrow['loccode'] == $_POST['StockLocation']){
-		     echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		     echo '<option selected="True" Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
 		     echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
-		 echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		 echo '<option selected="True" Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		 $_POST['StockLocation']=$myrow['loccode'];
 	} else {
 		 echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
@@ -77,9 +76,9 @@ while ($myrow=DB_fetch_array($resultStkLocs)){
 }
 if (isset($_POST['StockLocation'])){
 	if ('All'== $_POST['StockLocation']){
-	     echo '<option selected Value="All">' . _('All Locations') . '</option>';
+	     echo '<option selected="True" value="All">' . _('All Locations') . '</option>';
 	} else {
-	     echo '<option Value="All">' . _('All Locations') . '</option>';
+	     echo '<option value="All">' . _('All Locations') . '</option>';
 	}
 }
 echo '</select>';
@@ -134,7 +133,7 @@ if (isset($_POST['ShowUsage'])){
 		exit;
 	}
 
-	echo '</div><table cellpadding=2 class="selection">';
+	echo '</div><table cellpadding="2" class="selection">';
 	$tableheader = '<tr><th>' . _('Month') . '</th><th>' . _('Usage') . '</th></tr>';
 	echo $tableheader;
 
@@ -165,7 +164,7 @@ if (isset($_POST['ShowUsage'])){
 	//end of while loop
 
 	if ($TotalUsage>0 && $PeriodsCounter>0){
-	echo '<tr><th colspan=2>' . _('Average Usage per month is') . ' ' . number_format($TotalUsage/$PeriodsCounter);
+	echo '<tr><th colspan="2">' . _('Average Usage per month is') . ' ' . number_format($TotalUsage/$PeriodsCounter);
 	echo '</th></tr>';
 	}
 	echo '</table>';

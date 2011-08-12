@@ -215,7 +215,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 						<td class="number">' . number_format($Cost, 2) . '</td>
 						<td class="number">' . number_format($CurrentGP, 1) . '%</td>
 						<td class="number">' . number_format($Proposed, 2) . '</td>
-						<td><input type="text" class="number" name="Price_' . $PriceCounter . '" maxlength=14 size=10 value="' . $myrow['price'] . '"></td>
+						<td><input type="text" class="number" name="Price_' . $PriceCounter . '" maxlength="14" size="10" value="' . $myrow['price'] . '" /></td>
 					</tr> ';
 			$PriceCounter++;
 		} //end of looping
@@ -258,13 +258,13 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 		$_POST['Margin']=1;
 	}
 	echo '<td>
-				<input type="text" class="number" name="Margin" MAXLENGTH =8 size=8 value=' .$_POST['Margin'] . '></td></tr>';
+				<input type="text" class="number" name="Margin" maxlength="8" size="8" value="' .$_POST['Margin'] . '" /></td></tr>';
 	$result = DB_query("SELECT typeabbrev, sales_type FROM salestypes ", $db);
 	echo '<tr><td>' . _('Sales Type') . '/' . _('Price List') . ':</td>
 		<td><select name="SalesType">';
 	while ($myrow = DB_fetch_array($result)) {
 		if ($_POST['SalesType'] == $myrow['typeabbrev']) {
-			echo '<option selected value="' . $myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
 		}
@@ -276,9 +276,9 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 		<td><select name="CurrCode">';
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['CurrCode']) and $_POST['CurrCode'] == $myrow['currabrev']) {
-			echo '<option selected value=' . $myrow['currabrev'] . '>' . $myrow['currency'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 		} else {
-			echo '<option value=' . $myrow['currabrev'] . '>' . $myrow['currency'] . '</option>';
+			echo '<option value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 		}
 	} //end while loop
 	DB_data_seek($result, 0);

@@ -100,7 +100,7 @@ echo '<select tabindex=1 name="SalesType">';
 
 while ($myrow = DB_fetch_array($result)){
 	if (isset($_POST['SalesType']) and $myrow['typeabbrev']==$_POST['SalesType']){
-		echo '<option selected value="' . $myrow['typeabbrev'] . '">' . $myrow['sales_type']. '</option>';
+		echo '<option selected="True" value="' . $myrow['typeabbrev'] . '">' . $myrow['sales_type']. '</option>';
 	} else {
 		echo '<option value="' . $myrow['typeabbrev'] . '">' . $myrow['sales_type']. '</option>';
 	}
@@ -117,7 +117,7 @@ if (DB_num_rows($result) > 0) {
 
 	while ($myrow = DB_fetch_array($result)){
 		if ($myrow['discountcategory']==$_POST['DiscCat']){
-			echo '<option selected value="' . $myrow['discountcategory'] . '">' . $myrow['discountcategory']. '</option>';
+			echo '<option selected="True" value="' . $myrow['discountcategory'] . '">' . $myrow['discountcategory']. '</option>';
 		} else {
 			echo '<option value="' . $myrow['discountcategory'] . '">' . $myrow['discountcategory'] . '</option>';
 		}
@@ -129,14 +129,14 @@ if (DB_num_rows($result) > 0) {
 
 echo '<tr><td>' . _('Quantity Break') . ':</td><td><input class="number" tabindex=3 '
 	 . (in_array('QuantityBreak',$Errors) ? 'class="inputerror"' : '')
-	 .' type="text" name="QuantityBreak" size=10 maxlength=10></td></tr>';
+	 .' type="text" name="QuantityBreak" size="10" maxlength="10" /></td></tr>';
 
 echo '<tr><td>' . _('Discount Rate') . ' (%):</td><td><input class="number" tabindex=4 '
 	. (in_array('DiscountRate',$Errors) ? 'class="inputerror"' : '') .
-		'type="text" name="DiscountRate" size=11 maxlength=14></td></tr>';
+		'type="text" name="DiscountRate" size="11" maxlength="14" /></td></tr>';
 echo '</table><br />';
 
-echo '<div class="centre"><input tabindex=5 type="submit" name="submit" value="' . _('Enter Information') . '"></div><br />';
+echo '<div class="centre"><input tabindex="5" type="submit" name="submit" value="' . _('Enter Information') . '" /></div><br />';
 
 $sql = "SELECT sales_type,
 		salestype,

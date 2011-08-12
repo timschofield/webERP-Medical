@@ -4,8 +4,7 @@ include('includes/session.inc');
 $title=_('Reprint a GRN');
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' .
-		$title . '" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . $title . '" alt="" />' . ' ' . $title . '</p>';
 
 if (!isset($_POST['PONumber'])) {
 	$_POST['PONumber']='';
@@ -17,7 +16,7 @@ echo '<table class="selection">';
 echo '<tr><th colspan="2"><font size="2" color="navy">' . _('Select a purchase order') . '</th></tr>';
 echo '<tr><td>' . _('Enter a Purchase Order Number') . '</td>';
 echo '<td>' . '<input type="text" name="PONumber" class="number" size="7" value="'.$_POST['PONumber'].'" /></td></tr>';
-echo '<tr><td colspan=2 style="text-align: center">' . '<input type="submit" name="Show" value="Show GRNs" /></td></tr>';
+echo '<tr><td colspan="2" style="text-align: center">' . '<input type="submit" name="Show" value="Show GRNs" /></td></tr>';
 
 echo '</table>';
 echo '</form>';

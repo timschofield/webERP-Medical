@@ -234,7 +234,7 @@ or deletion of the records*/
 		}
 
 		if ($myrow[1]!=$FunctionalCurrency){
-			printf('<td><img src=\'%s\'></td>
+			printf('<td><img src="%s" /></td>
 					<td>%s</td>
 					<td>%s</td>
 					<td>%s</td>
@@ -263,14 +263,14 @@ or deletion of the records*/
 					$rootpath,
 					'CurrencyToShow=' . $myrow['currabrev']);
 		} else {
-			printf('<td><img src="%s"></td>
+			printf('<td><img src="%s" /></td>
 					<td>%s</td>
 					<td>%s</td>
 					<td>%s</td>
 					<td>%s</td>
 					<td class="number">%s</td>
 					<td class="number">%s</td>
-					<td colspan=4>%s</td>
+					<td colspan="4">%s</td>
 					</tr>',
 					$ImageFile,
 					$myrow['currabrev'],
@@ -324,8 +324,8 @@ if (!isset($_GET['delete'])) {
 
 
 
-		echo '<input type="hidden" name="SelectedCurrency" value="' . $SelectedCurrency . '">';
-		echo '<input type="hidden" name="Abbreviation" value="' . $_POST['Abbreviation'] . '">';
+		echo '<input type="hidden" name="SelectedCurrency" value="' . $SelectedCurrency . '" />';
+		echo '<input type="hidden" name="Abbreviation" value="' . $_POST['Abbreviation'] . '" />';
 		echo '<table class="selection"><tr>
 			<td>' . _('ISO 4217 Currency Code').':</td>
 			<td>';
@@ -345,26 +345,26 @@ if (!isset($_GET['delete'])) {
 	echo '<tr><td>'._('Country').':</td>';
 	echo '<td>';
 	if (!isset($_POST['Country'])) {$_POST['Country']='';}
-	echo '<input ' . (in_array('Country',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="Country" size=30 maxlength=50 value="' . $_POST['Country'] . '">';
+	echo '<input ' . (in_array('Country',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="Country" size="30" maxlength="50" value="' . $_POST['Country'] . '" />';
 	echo '</td></tr>';
 	echo '<tr><td>'._('Hundredths Name').':</td>';
 	echo '<td>';
 	if (!isset($_POST['HundredsName'])) {$_POST['HundredsName']='';}
-	echo '<input ' . (in_array('HundredsName',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="HundredsName" size=10 maxlength=15 value="'. $_POST['HundredsName'].'">';
+	echo '<input ' . (in_array('HundredsName',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="HundredsName" size="10" maxlength="15" value="'. $_POST['HundredsName'].'" />';
 	echo '</td></tr>';
 	echo '<tr><td>'._('Exchange Rate').':</td>';
 	echo '<td>';
 	if (!isset($_POST['ExchangeRate'])) {$_POST['ExchangeRate']='';}
-	echo '<input ' . (in_array('ExchangeRate',$Errors) ?  'class="inputerror"' : '' ) .' type="text" class="number" name="ExchangeRate" size=10 maxlength=9 value='. $_POST['ExchangeRate'].'>';
+	echo '<input ' . (in_array('ExchangeRate',$Errors) ?  'class="inputerror"' : '' ) .' type="text" class="number" name="ExchangeRate" size="10" maxlength="9" value="'. $_POST['ExchangeRate'].'" />';
 	echo '</td></tr>';
 	echo '<tr><td>'._('Decimal Places to Show').':</td>';
 	echo '<td>';
 	if (!isset($_POST['DecimalPlaces'])) {$_POST['DecimalPlaces']=2;}
-	echo '<input ' . (in_array('DecimalPlaces',$Errors) ?  'class="inputerror"' : '' ) .' type="text" class="number" name="DecimalPlaces" size=10 maxlength=9 value='. $_POST['DecimalPlaces'].'>';
+	echo '<input ' . (in_array('DecimalPlaces',$Errors) ?  'class="inputerror"' : '' ) .' type="text" class="number" name="DecimalPlaces" size="10" maxlength="9" value="'. $_POST['DecimalPlaces'].'" />';
 	echo '</td></tr>';
 	echo '</table>';
 
-	echo '<br /><div class="centre"><input type="Submit" name="submit" value='._('Enter Information').'></div>';
+	echo '<br /><div class="centre"><input type="submit" name="submit" value="'._('Enter Information').'" /></div>';
 
 	echo '</form>';
 

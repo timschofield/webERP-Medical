@@ -8,8 +8,7 @@ $title = _('Fixed Asset Category Maintenance');
 
 include('includes/header.inc');
 
-echo '<div class="centre"><p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' .
-		_('Fixed Asset Categories') . '" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Fixed Asset Categories') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (isset($_GET['SelectedCategory'])){
 	$SelectedCategory = strtoupper($_GET['SelectedCategory']);
@@ -235,7 +234,7 @@ if (isset($SelectedCategory) and !isset($_POST['submit'])) {
 		$_POST['CategoryID'] = '';
 	}
 	echo '<br /><table class="selection"><tr><td>' . _('Category Code') . ':</td>
-				 <td><input type="Text" name="CategoryID" size=7 maxlength=6 value="' . $_POST['CategoryID'] . '"></td></tr>';
+				 <td><input type="text" name="CategoryID" size="7" maxlength="6" value="' . $_POST['CategoryID'] . '" /></td></tr>';
 }
 
 //SQL to poulate account selection boxes
@@ -264,7 +263,7 @@ if (!isset($_POST['CategoryDescription'])) {
 }
 
 echo '<tr><td>' . _('Category Description') . ':</td>
-			<td><input type="Text" name="CategoryDescription" size=22 maxlength=20 value="' . $_POST['CategoryDescription'] . '"></td></tr>';
+			<td><input type="text" name="CategoryDescription" size="22" maxlength="20" value="' . $_POST['CategoryDescription'] . '" /></td></tr>';
 
 echo '<tr><td>' . _('Fixed Asset Cost GL Code');
 
@@ -273,9 +272,9 @@ echo ':</td><td><select name="CostAct">';
 while ($myrow = DB_fetch_array($BSAccountsResult)){
 
 	if (isset($_POST['CostAct']) and $myrow['accountcode']==$_POST['CostAct']) {
-		echo '<option selected value='.$myrow['accountcode'] . '>' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')</option>';
+		echo '<option selected="True" value="'.$myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')</option>';
 	} else {
-		echo '<option value='.$myrow['accountcode'] . '>' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')</option>';
+		echo '<option value="'.$myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')</option>';
 	}
 } //end while loop
 echo '</select></td></tr>';
@@ -285,9 +284,9 @@ echo '<tr><td>' . _('Profit and Loss Depreciation GL Code') . ':</td>
 
 while ($myrow = DB_fetch_array($PnLAccountsResult)) {
 	if (isset($_POST['DepnAct']) and $myrow['accountcode']==$_POST['DepnAct']) {
-		echo '<option selected value='.$myrow['accountcode'] . '>' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')</option>';
+		echo '<option selected="True" value="'.$myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')</option>';
 	} else {
-		echo '<option value='.$myrow['accountcode'] . '>' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')</option>';
+		echo '<option value="'.$myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')</option>';
 	}
 } //end while loop
 echo '</select></td></tr>';
@@ -296,9 +295,9 @@ DB_data_seek($PnLAccountsResult,0);
 echo '<tr><td>' .  _('Profit or Loss on Disposal GL Code:') . '</td><td><select name="DisposalAct">';
 while ($myrow = DB_fetch_array($PnLAccountsResult)) {
 	if (isset($_POST['DisposalAct']) and $myrow['accountcode']==$_POST['DisposalAct']) {
-		echo '<option selected value='.$myrow['accountcode'] . '>' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
+		echo '<option selected="True" value="'.$myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 	} else {
-		echo '<option value='.$myrow['accountcode'] . '>' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
+		echo '<option value="'.$myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 	}
 } //end while loop
 echo '</select></td></tr>';
@@ -310,9 +309,9 @@ echo '<tr><td>' . _('Balance Sheet Accumulated Depreciation GL Code') . ':</td><
 while ($myrow = DB_fetch_array($BSAccountsResult)) {
 
 	if (isset($_POST['AccumDepnAct']) and $myrow['accountcode']==$_POST['AccumDepnAct']) {
-		echo '<option selected value='.$myrow['accountcode'] . '>' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
+		echo '<option selected="True" value="'.$myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 	} else {
-		echo '<option value='.$myrow['accountcode'] . '>' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
+		echo '<option value="'.$myrow['accountcode'] . '">' . $myrow['accountname'] . ' ('.$myrow['accountcode'].')' . '</option>';
 	}
 
 } //end while loop
@@ -320,7 +319,7 @@ while ($myrow = DB_fetch_array($BSAccountsResult)) {
 
 echo '</select></td></tr></table><br />';
 
-echo '<div class="centre"><input type="Submit" name="submit" value="' . _('Enter Information') . '"></div>';
+echo '<div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div>';
 
 echo '</form>';
 

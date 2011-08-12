@@ -14,7 +14,7 @@ echo '<div class="page_help_text">' . _('Select the month to show daily sales fo
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<table cellpadding=2 class="selection"><tr>';
+echo '<table cellpadding="2" class="selection"><tr>';
 
 echo '<td>' . _('Month to Show') . ':</td><td><select tabindex=1 name="MonthToShow">';
 
@@ -27,7 +27,7 @@ $PeriodsResult = DB_query("SELECT periodno, lastdate_in_period FROM periods",$db
 
 while ($PeriodRow = DB_fetch_array($PeriodsResult)){
 	if ($_POST['MonthToShow']==$PeriodRow['periodno']) {
-	     echo '<option selected Value="' . $PeriodRow['periodno'] . '">' . MonthAndYearFromSQLDate($PeriodRow['lastdate_in_period']) . '</option>';
+	     echo '<option selected="True" Value="' . $PeriodRow['periodno'] . '">' . MonthAndYearFromSQLDate($PeriodRow['lastdate_in_period']) . '</option>';
 		 $EndDateSQL = $PeriodRow['lastdate_in_period'];
 	} else {
 	     echo '<option Value="' . $PeriodRow['periodno'] . '">' . MonthAndYearFromSQLDate($PeriodRow['lastdate_in_period']) . '</option>';
@@ -43,7 +43,7 @@ if (!isset($_POST['StockType'])) {
 
 ShowStockTypes($_POST['StockType']);
 echo '<input type="submit" name="UpdateItems" style="visibility:hidden" value="Not Seen" />';
-echo '</tr></table><br /><div class="centre"><input tabindex=4 type=submit name="ShowResults" value="' . _('Show Daily Sales For The Selected Month') . '">';
+echo '</tr></table><br /><div class="centre"><input tabindex="4" type="submit" name="ShowResults" value="' . _('Show Daily Sales For The Selected Month') . '" />';
 
 echo '</form></div>';
 echo '<br />';
@@ -86,7 +86,7 @@ $sql .= " GROUP BY stockmoves.trandate ORDER BY stockmoves.trandate";
 $ErrMsg = _('The sales data could not be retrieved because') . ' - ' . DB_error_msg($db);
 $SalesResult = DB_query($sql, $db,$ErrMsg);
 
-echo '<table cellpadding=2 class="selection">';
+echo '<table cellpadding="2" class="selection">';
 echo '<tr><th colspan="7"><font color="navy" size="3">' . _('Sales For The Month Of') . ' ' .
 		MonthAndYearFromSQLDate($StartDateSQL) . '</font></th></tr>';
 
@@ -178,7 +178,7 @@ if ($CumulativeTotalSales !=0){
 	$AverageDailySales = 0;
 }
 
-echo '<th colspan=7>' . _('Total Sales for month') . ': ' . number_format($CumulativeTotalSales,0) . ' ' . _('GP%') . ': ' . number_format($AverageGPPercent,1) . '% ' . _('Avg Daily Sales') . ': ' . number_format($AverageDailySales,0) . '</th></tr>';
+echo '<th colspan="7">' . _('Total Sales for month') . ': ' . number_format($CumulativeTotalSales,0) . ' ' . _('GP%') . ': ' . number_format($AverageGPPercent,1) . '% ' . _('Avg Daily Sales') . ': ' . number_format($AverageDailySales,0) . '</th></tr>';
 
 echo '</table>';
 

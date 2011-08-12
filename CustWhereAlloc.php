@@ -9,8 +9,7 @@ include('includes/header.inc');
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' .
-	_('Customer Where Allocated'). '" alt="" />' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Customer Where Allocated'). '" alt="" />' . $title . '</p>';
 
 echo '<table class="selection" cellpadding="2"><tr>';
 
@@ -21,7 +20,7 @@ $resultTypes = DB_query($sql,$db);
 while ($myrow=DB_fetch_array($resultTypes)){
 	if (isset($_POST['TransType'])){
 		if ($myrow['typeid'] == $_POST['TransType']){
-			 echo '<option selected value="' . $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
+			 echo '<option selected="True" value="' . $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
 		} else {
 			 echo '<option value="' . $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
 		}
@@ -33,7 +32,7 @@ echo '</select></td>';
 
 if (!isset($_POST['TransNo'])) {$_POST['TransNo']='';}
 echo '<td>'._('Transaction Number') . ':</td>
-	<td><input tabindex="2" type="text" name="TransNo" maxlength="10" size="10" value="'. $_POST['TransNo'] . '"></td>';
+	<td><input tabindex="2" type="text" name="TransNo" maxlength="10" size="10" value="'. $_POST['TransNo'] . '" /></td>';
 
 echo '</tr></table><br />
 	<div class="centre"><input tabindex="3" type="submit" name="ShowResults" value="'._('Show How Allocated').'" /></div>';
@@ -80,7 +79,7 @@ if (isset($_POST['ShowResults']) AND  $_POST['TransNo']!=''){
 	} else {
 		echo '<br /><table cellpadding="2" class="selection">';
 
-		echo '<tr><th colspan=6><div class="centre"><font size=3 color=blue><b>'._('Allocations made against invoice number') . ' ' . $_POST['TransNo']
+		echo '<tr><th colspan="6"><div class="centre"><font size="3" color="blue"><b>'._('Allocations made against invoice number') . ' ' . $_POST['TransNo']
 			. '<br />'._('Transaction Total').': '. number_format($myrow['totamt'],2) . '</font></b></div></th></tr>';
 
 		$tableheader = '<tr><th>'._('Type').'</th>

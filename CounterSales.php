@@ -722,7 +722,7 @@ foreach ($_SESSION['Items'.$identifier]->LineItems as $OrderLine) {
 											FROM discountmatrix
 											WHERE salestype='" .  $_SESSION['Items'.$identifier]->DefaultSalesType . "'
 											AND discountcategory ='" . $OrderLine->DiscCat . "'
-											AND quantitybreak <'" . $QuantityOfDiscCat . "'",$db);
+											AND quantitybreak <='" . $QuantityOfDiscCat . "'",$db);
 		$myrow = DB_fetch_row($result);
 		if ($myrow[0]!=0){ /* need to update the lines affected */
 			foreach ($_SESSION['Items'.$identifier]->LineItems as $StkItems_2) {
@@ -2154,7 +2154,7 @@ if (!isset($_POST['ProcessSale'])){
 						<td style="text-align:center">%s</td>
 						<td style="text-align:center">%s</td>
 						<td style="text-align:center">%s</td>
-						<td><font size=1><input class="number"  tabindex="'.number_format($j+7).'" type="textbox" size="6" name="itm'.$myrow['stockid'].'" value="0" />
+						<td><font size="1"><input class="number"  tabindex="'.number_format($j+7).'" type="text" size="6" name="itm'.$myrow['stockid'].'" value="0" />
 						</td>
 						</tr>',
 						$myrow['stockid'],
@@ -2309,7 +2309,7 @@ if (!isset($_POST['ProcessSale'])){
 							<td>%s</td>
 							<td>%s</td>
 							<td class="number">%s</td>
-							<td><font size="1"><input class="number"  tabindex="'.number_format($j+7).'" type="textbox" size="15" name="Quantity'.$i.'" value="0" />
+							<td><font size="1"><input class="number"  tabindex="'.number_format($j+7).'" type="text" size="15" name="Quantity'.$i.'" value="0" />
 							</font></td>
 							</tr>',
 							$myrow['stockid'],
@@ -2331,11 +2331,11 @@ if (!isset($_POST['ProcessSale'])){
 								$myrow['units'],
 								number_format($QOH, $QOHRow['decimalplaces']));
 						} else {
-							echo '<td colspan=4>';
+							echo '<td colspan="4">';
 						}
 						echo '<input type="hidden" name="Batch'.$i.'" value="'.$BatchRow['serialno'].'" />';
 						echo '<input type="hidden" name="StockID'.$i.'" value="'.$myrow['stockid'].'" />';
-						printf('<td><font size="1"><input class="number"  tabindex="'.number_format($j+7).'" type="textbox" size="15"
+						printf('<td><font size="1"><input class="number"  tabindex="'.number_format($j+7).'" type="text" size="15"
 								name="Quantity'.$i.'" value="0" />
 								</font></td>
 								<td class="number">%s</td>

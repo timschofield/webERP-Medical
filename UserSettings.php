@@ -6,8 +6,7 @@ include('includes/session.inc');
 $title = _('User Settings');
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/user.png" title="' .
-	_('User Settings') . '" alt="" />' . ' ' . _('User Settings') . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/user.png" title="' . _('User Settings') . '" alt="" />' . ' ' . _('User Settings') . '</p>';
 
 $PDFLanguages = array(_('Latin Western Languages'),
 					_('Eastern European Russian Japanese Korean Hebrew Arabic Thai'),
@@ -115,7 +114,7 @@ echo $_SESSION['UsersRealName'] . '</td>
 
 echo '<tr>
 	<td>' . _('Maximum Number of Records to Display') . ':</td>
-	<td><input type="Text" class="number" name="DisplayRecordsMax" size=3 maxlength=3 value="' . $_POST['DisplayRecordsMax'] . '" ></td>
+	<td><input type="text" class="number" name="DisplayRecordsMax" size="3" maxlength="3" value="' . $_POST['DisplayRecordsMax'] . '" /></td>
 	</tr>';
 
 
@@ -134,7 +133,7 @@ foreach ($Languages as $LanguageEntry){
 			AND $LanguageEntry!='.'){
 
 		if ($_SESSION['Language'] == $LanguageEntry){
-			echo '<option selected value="' . $LanguageEntry . '">' . $LanguageEntry . '</option>';
+			echo '<option selected="True" value="' . $LanguageEntry . '">' . $LanguageEntry . '</option>';
 		} else {
 			echo '<option value="' . $LanguageEntry . '">' . $LanguageEntry . '</option>';
 		}
@@ -150,18 +149,19 @@ echo '<tr>
 
 $ThemeDirectory = dir('css/');
 
-
-while (false != ($ThemeName = $ThemeDirectory->read())){
+while (false !== ($ThemeName = $ThemeDirectory->read())){
 
 	if (is_dir("css/$ThemeName") AND $ThemeName != '.' AND $ThemeName != '..' AND $ThemeName != '.svn'){
 
 		if ($_SESSION['Theme'] == $ThemeName){
-			echo '<option selected value="' . $ThemeName . '">' . $ThemeName . '</option>';
+			echo '<option selected="True" value="' . $ThemeName . '">' . $ThemeName . '</option>';
 		} else {
 			echo '<option value="' . $ThemeName . '">' . $ThemeName . '</option>';
 		}
 	}
 }
+
+$ThemeDirectory->close();
 
 if (!isset($_POST['passcheck'])) {
 	$_POST['passcheck']='';
@@ -171,10 +171,10 @@ if (!isset($_POST['pass'])) {
 }
 echo '</select></td></tr>
 	<tr><td>' . _('New Password') . ':</td>
-	<td><input type="password" name="pass" size=20 value="' .  $_POST['pass'] . '"></td></tr>
+	<td><input type="password" name="pass" size="20" value="' .  $_POST['pass'] . '" /></td></tr>
 	<tr><td>' . _('Confirm Password') . ':</td>
-	<td><input type="password" name="passcheck" size=20  value="' . $_POST['passcheck'] . '"></td></tr>
-	<tr><td colspan=2 align="center"><i>' . _('If you leave the password boxes empty your password will not change') . '</i></td></tr>
+	<td><input type="password" name="passcheck" size="20"  value="' . $_POST['passcheck'] . '" /></td></tr>
+	<tr><td colspan="2" align="center"><i>' . _('If you leave the password boxes empty your password will not change') . '</i></td></tr>
 	<tr><td>' . _('Email') . ':</td>';
 
 $sql = "SELECT email from www_users WHERE userid = '" . $_SESSION['UserID'] . "'";
@@ -184,7 +184,7 @@ if(!isset($_POST['email'])){
 	$_POST['email'] = $myrow['email'];
 }
 
-echo '<td><input type="text" name="email" size=40 value="' . $_POST['email'] . '"></td></tr>';
+echo '<td><input type="text" name="email" size="40" value="' . $_POST['email'] . '" /></td></tr>';
 
 if (!isset($_POST['PDFLanguage'])){
 	$_POST['PDFLanguage']=$_SESSION['PDFLanguage'];
@@ -193,13 +193,13 @@ if (!isset($_POST['PDFLanguage'])){
 echo '<tr><td>' . _('PDF Language Support') . ': </td><td><select name="PDFLanguage">';
 for($i=0;$i<count($PDFLanguages);$i++){
 	if ($_POST['PDFLanguage']==$i){
-		echo '<option selected value=' . $i .'>' . $PDFLanguages[$i] . '</option>';
+		echo '<option selected="True" value="' . $i .'">' . $PDFLanguages[$i] . '</option>';
 	} else {
-		echo '<option value=' . $i .'>' . $PDFLanguages[$i]. '</option>';
+		echo '<option value="' . $i .'">' . $PDFLanguages[$i]. '</option>';
 	}
 }
 echo '</select></td></tr></table>
-	<br /><div class="centre"><input type="Submit" name="Modify" value="' . _('Modify') . '"></div>
+	<br /><div class="centre"><input type="submit" name="Modify" value="' . _('Modify') . '" /></div>
 	</form>';
 
 include('includes/footer.inc');

@@ -128,14 +128,13 @@ if(isset($_POST['Submit']) AND $InputError==False){
 
 	}
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Dispatch') .
-		'" alt="" />' . ' ' . $title . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Dispatch') . '" alt="" />' . ' ' . $title . '</p>';
 
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<table class="selection">';
-	echo '<tr><th colspan=4><input type="hidden" name="Trf_ID" value="' . $Trf_ID . '"><font size=3 color=blue>'.
+	echo '<tr><th colspan="4"><input type="hidden" name="Trf_ID" value="' . $Trf_ID . '"><font size="3" color="blue" />'.
 			_('Inventory Location Transfer Shipment Reference').' # '. $Trf_ID. '</font></th></tr>';
 
 	$sql = "SELECT loccode, locationname FROM locations";
@@ -144,12 +143,12 @@ if(isset($_POST['Submit']) AND $InputError==False){
 	while ($myrow=DB_fetch_array($resultStkLocs)){
 		if (isset($_POST['FromStockLocation'])){
 			if ($myrow['loccode'] == $_POST['FromStockLocation']){
-				echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+				echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			} else {
 				echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			}
 		} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
-			echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			$_POST['FromStockLocation']=$myrow['loccode'];
 		} else {
 			echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
@@ -162,12 +161,12 @@ if(isset($_POST['Submit']) AND $InputError==False){
 	while ($myrow=DB_fetch_array($resultStkLocs)){
 		if (isset($_POST['ToStockLocation'])){
 			if ($myrow['loccode'] == $_POST['ToStockLocation']){
-				echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+				echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			} else {
 				echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			}
 		} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
-			echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			$_POST['ToStockLocation']=$myrow['loccode'];
 		} else {
 			echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
@@ -190,8 +189,8 @@ if(isset($_POST['Submit']) AND $InputError==False){
 				$k=0;
 			}
 			echo '<tr>
-				<td><input type="text" name="StockID' . $i .'" size=21  maxlength=20 value="' . $_POST['StockID' . $i] . '"></td>
-				<td><input type="text" name="StockQTY' . $i .'" size=10 maxlength=10 class="number" value="' . $_POST['StockQTY' . $i] . '"></td>
+				<td><input type="text" name="StockID' . $i .'" size="21"  maxlength="20" value="' . $_POST['StockID' . $i] . '" /></td>
+				<td><input type="text" name="StockQTY' . $i .'" size="10" maxlength="10" class="number" value="' . $_POST['StockQTY' . $i] . '" /></td>
 			</tr>';
 		}
 	}else {
@@ -208,8 +207,8 @@ if(isset($_POST['Submit']) AND $InputError==False){
 			$_POST['StockQTY' . $i]=0;
 		}
 		echo '<tr>
-			<td><input type="text" name="StockID' . $i .'" size=21  maxlength=20 value="' . $_POST['StockID' . $i] . '"></td>
-			<td><input type="text" name="StockQTY' . $i .'" size=10 maxlength=10 class="number" value="' . $_POST['StockQTY' . $i] . '"></td>
+			<td><input type="text" name="StockID' . $i .'" size="21"  maxlength="20" value="' . $_POST['StockID' . $i] . '" /></td>
+			<td><input type="text" name="StockQTY' . $i .'" size="10" maxlength="10" class="number" value="' . $_POST['StockQTY' . $i] . '" /></td>
 		</tr>';
 		$i++;
 	}

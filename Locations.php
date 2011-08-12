@@ -319,8 +319,7 @@ or deletion of the records*/
 	if (DB_num_rows($result)==0){
 		prnMsg (_('There are no locations that match up with a tax province record to display. Check that tax provinces are set up for all dispatch locations'),'error');
 	}
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' .
-			_('Inventory') . '" alt="" />' . ' ' . $title . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Inventory') . '" alt="" />' . ' ' . $title . '</p>';
 
 	echo '<table class="selection">';
 	echo '<tr><th>' . _('Location Code') . '</th>
@@ -381,8 +380,7 @@ if (!isset($_GET['delete'])) {
 
 	if (isset($SelectedLocation)) {
 		//editing an existing Location
-		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' .
-			_('Inventory') . '" alt="" />' . ' ' . $title . '</p>';
+		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Inventory') . '" alt="" />' . ' ' . $title . '</p>';
 
 		$sql = "SELECT loccode,
 				locationname,
@@ -425,15 +423,15 @@ if (!isset($_GET['delete'])) {
 		echo '<input type="hidden" name="SelectedLocation" value="' . $SelectedLocation . '" />';
 		echo '<input type="hidden" name="LocCode" value="' . $_POST['LocCode'] . '" />';
 		echo '<table class="selection">';
-		echo '<tr><th colspan=2><font size=3 color=blue>'._('Amend Location details').'</font></th></tr>';
+		echo '<tr><th colspan="2"><font size="3" color="blue">'._('Amend Location details').'</font></th></tr>';
 		echo '<tr><td>' . _('Location Code') . ':</td><td>';
 		echo $_POST['LocCode'] . '</td></tr>';
 	} else { //end of if $SelectedLocation only do the else when a new record is being entered
 		if (!isset($_POST['LocCode'])) {
 			$_POST['LocCode'] = '';
 		}
-		echo '<table class="selection"><tr><th colspan=2><font size=3 color=blue>'._('New Location details').'</font></th></tr>';
-		echo '<tr><td>' . _('Location Code') . ':</td><td><input type="Text" name="LocCode" value="' . $_POST['LocCode'] . '" size=5 maxlength=5></td></tr>';
+		echo '<table class="selection"><tr><th colspan="2"><font size="3" color="blue">'._('New Location details').'</font></th></tr>';
+		echo '<tr><td>' . _('Location Code') . ':</td><td><input type="text" name="LocCode" value="' . $_POST['LocCode'] . '" size="5" maxlength="5" /></td></tr>';
 	}
 	if (!isset($_POST['LocationName'])) {
 		$_POST['LocationName'] = '';
@@ -476,34 +474,34 @@ if (!isset($_GET['delete'])) {
 	}
 
 	echo '<tr><td>' .  _('Location Name') . ':' . '</td>';
-	echo '<td><input type="Text" name="LocationName" value="'. $_POST['LocationName'] . '" size=51 maxlength=50></td></tr>';
+	echo '<td><input type="text" name="LocationName" value="'. $_POST['LocationName'] . '" size="51" maxlength="50" /></td></tr>';
 	echo '<tr><td>' . _('Contact for deliveries') . ':' . '</td>';
-	echo '<td><input type="Text" name="Contact" value="' . $_POST['Contact'] . '" size=31 maxlength=30></td></tr>';
+	echo '<td><input type="text" name="Contact" value="' . $_POST['Contact'] . '" size="31" maxlength="30" /></td></tr>';
 	echo '<tr><td>' .  _('Delivery Address 1') . ':' . '</td>';
-	echo '<td><input type="Text" name="DelAdd1" value="' . $_POST['DelAdd1'] . '" size=41 maxlength=40></td></tr>';
+	echo '<td><input type="text" name="DelAdd1" value="' . $_POST['DelAdd1'] . '" size="41" maxlength="40" /></td></tr>';
 	echo '<tr><td>' . _('Delivery Address 2') . ':' . '</td>';
-	echo '<td><input type="Text" name="DelAdd2" value="' .  $_POST['DelAdd2'] . '" size=41 maxlength=40></td></tr>';
+	echo '<td><input type="text" name="DelAdd2" value="' .  $_POST['DelAdd2'] . '" size="41" maxlength="40" /></td></tr>';
 	echo '<tr><td>' .  _('Delivery Address 3') . ':' . '</td>';
-	echo '<td><input type="Text" name="DelAdd3" value="' .  $_POST['DelAdd3'] . '" size=41 maxlength=40></td></tr>';
+	echo '<td><input type="text" name="DelAdd3" value="' .  $_POST['DelAdd3'] . '" size="41" maxlength="40" /></td></tr>';
 	echo '<tr><td>' .  _('Delivery Address 4') . ':' . '</td>';
-	echo '<td><input type="Text" name="DelAdd4" value="' . $_POST['DelAdd4'] . '" size=41 maxlength=40></td></tr>';
+	echo '<td><input type="text" name="DelAdd4" value="' . $_POST['DelAdd4'] . '" size="41" maxlength="40" /></td></tr>';
 	echo '<tr><td>' .  _('Delivery Address 5') . ':' . '</td>';
-	echo '<td><input type="Text" name="DelAdd5" value="' . $_POST['DelAdd5'] . '" size=21 maxlength=20></td></tr>';
+	echo '<td><input type="text" name="DelAdd5" value="' . $_POST['DelAdd5'] . '" size="21" maxlength="20" /></td></tr>';
 	echo '<tr><td>' . _('Delivery Address 6') . ':' . '</td>';
-	echo '<td><input type="Text" name="DelAdd6" value="' . $_POST['DelAdd6'] . '" size=16 maxlength=15></td></tr>';
+	echo '<td><input type="text" name="DelAdd6" value="' . $_POST['DelAdd6'] . '" size="16" maxlength="15" /></td></tr>';
 	echo '<tr><td>' .  _('Telephone No') . ':' . '</td>';
-	echo '<td><input type="Text" name="Tel" value="' . $_POST['Tel'] . '" size=31 maxlength=30></td></tr>';
+	echo '<td><input type="text" name="Tel" value="' . $_POST['Tel'] . '" size="31" maxlength="30" /></td></tr>';
 	echo '<tr><td>' .  _('Facsimile No') . ':' . '</td>';
-	echo '<td><input type="Text" name="Fax" value="' . $_POST['Fax'] . '" size=31 maxlength=30></td></tr>';
+	echo '<td><input type="text" name="Fax" value="' . $_POST['Fax'] . '" size="31" maxlength="30" /></td></tr>';
 	echo '<tr><td>' .  _('Email') . ':' . '</td>';
-	echo '<td><input type="Text" name="Email" value="' . $_POST['Email'] . '" size=31 maxlength=55></td></tr>';
+	echo '<td><input type="text" name="Email" value="' . $_POST['Email'] . '" size="31" maxlength="55" /></td></tr>';
 
 	echo '<td>' .  _('Tax Province') . ':' . '</td><td><select name="TaxProvince">';
 
 	$TaxProvinceResult = DB_query("SELECT taxprovinceid, taxprovincename FROM taxprovinces",$db);
 	while ($myrow=DB_fetch_array($TaxProvinceResult)){
 		if ($_POST['TaxProvince']==$myrow['taxprovinceid']){
-			echo '<option selected value=' . $myrow['taxprovinceid'] . '>' . $myrow['taxprovincename'] . '</option>';
+			echo '<option selected="True" value=' . $myrow['taxprovinceid'] . '>' . $myrow['taxprovincename'] . '</option>';
 		} else {
 			echo '<option value=' . $myrow['taxprovinceid'] . '>' . $myrow['taxprovincename'] . '</option>';
 		}
@@ -513,11 +511,11 @@ if (!isset($_GET['delete'])) {
 	/*
 	This functionality is not written yet ...
 	<tr><td><?php echo _('Enable Warehouse Management') . ':'; ?></td>
-	<td><input type='checkbox' name='Managed'<?php if($_POST['Managed'] == 1) echo ' checked';?>></td></tr>
+	<td><input type='checkbox' name='Managed'<?php if($_POST['Managed'] == 1) echo ' checked';?> /></td></tr>
 	*/
 	echo '</table><br />';
 
-	echo '<div class="centre"><input type="Submit" name="submit" value="' .  _('Enter Information') . '"></div>';
+	echo '<div class="centre"><input type="submit" name="submit" value="' .  _('Enter Information') . '" /></div>';
 
 	echo '</form>';
 

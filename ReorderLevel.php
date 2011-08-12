@@ -79,7 +79,7 @@ if (isset($_POST['PrintPDF'])) {
 
 			// Parameters for addTextWrap are defined in /includes/class.pdf.php
 			// 1) X position 2) Y position 3) Width
-			// 4) Height 5) Text 6) Alignment 7) Border 8) Fill - True to use SetFillColor
+			// 4) Height 5) text 6) Alignment 7) Border 8) Fill - True to use SetFillColor
 			// and False to set to transparent
 			$fill = '';
 			$pdf->addTextWrap(50,$YPos,100,$FontSize,$myrow['stockid'],'',0,$fill);
@@ -115,7 +115,7 @@ if (isset($_POST['PrintPDF'])) {
 
 					// Parameters for addTextWrap are defined in /includes/class.pdf.php
 					// 1) X position 2) Y position 3) Width
-					// 4) Height 5) Text 6) Alignment 7) Border 8) Fill - True to use SetFillColor
+					// 4) Height 5) text 6) Alignment 7) Border 8) Fill - True to use SetFillColor
 					// and False to set to transparent
 
 						$pdf->addTextWrap(310,$YPos,60,$FontSize,$myrow2['loccode'],'left',0,$fill);
@@ -173,13 +173,13 @@ if (isset($_POST['PrintPDF'])) {
 		$_POST['StockLocation']='All';
 	}
 	if ($_POST['StockLocation']=='All'){
-		echo '<option selected value="All">' . _('All') . '</option>';
+		echo '<option selected="True" value="All">' . _('All') . '</option>';
 	} else {
 		echo '<option value="All">' . _('All') . '</option>';
 	}
 	while ($myrow=DB_fetch_array($resultStkLocs)){
 		if ($myrow['loccode'] == $_POST['StockLocation']){
-			 echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			 echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
 			 echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
@@ -203,13 +203,13 @@ if (isset($_POST['PrintPDF'])) {
 		$_POST['StockCat']='All';
 	}
 	if ($_POST['StockCat']=='All'){
-		echo '<option selected value="All">' . _('All') . '</option>';
+		echo '<option selected="True" value="All">' . _('All') . '</option>';
 	} else {
 		echo '<option value="All">' . _('All') . '</option>';
 	}
 	while ($myrow1 = DB_fetch_array($result1)) {
 		if ($myrow1['categoryid']==$_POST['StockCat']){
-			echo '<option selected value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
+			echo '<option selected="True" value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 		}

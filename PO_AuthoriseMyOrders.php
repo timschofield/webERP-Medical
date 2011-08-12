@@ -8,8 +8,7 @@ $title = _('Authorise Purchase Orders');
 
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . $title .
-	 '" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . $title . '" alt="" />' . ' ' . $title . '</p>';
 
 $emailsql="SELECT email FROM www_users WHERE userid='".$_SESSION['UserID']."'";
 $emailresult=DB_query($emailsql, $db);
@@ -85,13 +84,13 @@ while ($myrow=DB_fetch_array($result)) {
 		echo '<td><a href="mailto:'.$myrow['email'].'">'.$myrow['realname'].'</td>';
 		echo '<td>'.ConvertSQLDate($myrow['deliverydate']).'</td>';
 		echo '<td><select name=status'.$myrow['orderno'].'>';
-		echo '<option selected value="Pending">'._('Pending').'</option>';
+		echo '<option selected="True" value="Pending">'._('Pending').'</option>';
 		echo '<option value="Authorised">'._('Authorised').'</option>';
 		echo '<option value="Rejected">'._('Rejected').'</option>';
 		echo '<option value="Cancelled">'._('Cancelled').'</option>';
 		echo '</select></td>';
 		echo '</tr>';
-		echo "<input type='hidden' name='comment' value='".$myrow['stat_comment']."'>";
+		echo '<input type="hidden" name="comment" value="'.$myrow['stat_comment'].'" />';
 		$linesql="SELECT purchorderdetails.*,
 					stockmaster.description
 				FROM purchorderdetails
@@ -100,7 +99,7 @@ while ($myrow=DB_fetch_array($result)) {
 			WHERE orderno='".$myrow['orderno'] . "'";
 		$lineresult=DB_query($linesql, $db);
 
-		echo '<tr><td></td><td colspan=5 align=left><table class="selection" align=left>';
+		echo '<tr><td></td><td colspan="5" align="left"><table class="selection" align="left">';
 		echo '<th>'._('Product').'</th>';
 		echo '<th>'._('Quantity Ordered').'</th>';
 		echo '<th>'._('Currency').'</th>';
@@ -121,7 +120,7 @@ while ($myrow=DB_fetch_array($result)) {
 	}
 } //end while header loop
 echo '</table>';
-echo '<br /><div class="centre"><input type="submit" name="updateall" value="' . _('Update'). '"></form>';
+echo '<br /><div class="centre"><input type="submit" name="updateall" value="' . _('Update'). '" /></form>';
 
 include('includes/footer.inc');
 ?>

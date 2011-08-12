@@ -77,7 +77,7 @@ if (isset($_POST['selectchoice'])) {
 
 		while ($myrow = DB_fetch_array($result)){
 			if ($myrow['discountcategory']==$_POST['DiscCat']){
-				echo '<option selected value="' . $myrow['discountcategory'] . '">' . $myrow['discountcategory']. '</option>';
+				echo '<option selected="True" value="' . $myrow['discountcategory'] . '">' . $myrow['discountcategory']. '</option>';
 			} else {
 				echo '<option value="' . $myrow['discountcategory'] . '">' . $myrow['discountcategory']. '</option>';
 			}
@@ -96,10 +96,10 @@ if (isset($_POST['selectchoice'])) {
 		echo '<table class="selection"><tr><td>'. _('Discount Category Code') .':</td><td>';
 
 		if (isset($_POST['DiscCat'])) {
-			echo '<input type="text" name="DiscountCategory" maxlength=2 size=2 value="' . $_POST['DiscCat'] .
+			echo '<input type="text" name="DiscountCategory" maxlength="2" size="2" value="' . $_POST['DiscCat'] .
 				'"></td><td>'._('OR').'</td><td></td><td>'._('OR').'</td></tr>';
 		} else {
-			echo '<input type="text" name="DiscountCategory" maxlength=2 size=2></td><td>'.
+			echo '<input type="text" name="DiscountCategory" maxlength="2" size="2"></td><td>'.
 				_('OR').'</td><td></td><td>'._('OR').'</td></tr>';
 		}
 
@@ -112,15 +112,15 @@ if (isset($_POST['selectchoice'])) {
 		if (!isset($_POST['PartDesc'])) {
 			$_POST['PartDesc']='';
 		}
-		echo '<tr><td>'. _('Enter Stock Code') .':</td><td><input type="text" name="StockID" size=20 maxlength=20
+		echo '<tr><td>'. _('Enter Stock Code') .':</td><td><input type="text" name="StockID" size="20" maxlength="20"
 			value="'.$_POST['StockID'].'"></td>
-			<td>'._('Partial code').':</td><td><input type="text" name="PartID" size=10 maxlength=10 value="'.$_POST['PartID'].'"></td>
-			<td>'._('Partial description').':</td><td><input type="text" name="PartDesc" size=10 value="'.$_POST['PartDesc'].'" maxlength=10></td>
-			<td><input type="Submit" name="search" value="'. _('Search') .'"></td></tr>';
+			<td>'._('Partial code').':</td><td><input type="text" name="PartID" size="10" maxlength="10" value="'.$_POST['PartID'].'"></td>
+			<td>'._('Partial description').':</td><td><input type="text" name="PartDesc" size="10" value="'.$_POST['PartDesc'].'" maxlength="10" /></td>
+			<td><input type="submit" name="search" value="'. _('Search') .'"></td></tr>';
 
 		echo '</table>';
 
-		echo '<br /><div class="centre"><input type="Submit" name="submit" value="'. _('Update Item') .'"></div>';
+		echo '<br /><div class="centre"><input type="submit" name="submit" value="'. _('Update Item') .'"></div>';
 
 		if (isset($_POST['search'])) {
 			if ($_POST['PartID']!='' and $_POST['PartDesc']=='')
@@ -140,7 +140,7 @@ if (isset($_POST['selectchoice'])) {
 		}
 	} else {
 		echo '<table class="selection"><tr><td>'._('Assign discount category').'</td>';
-		echo '<td><input type="text" name="DiscountCategory" maxlength=2 size=2></td>';
+		echo '<td><input type="text" name="DiscountCategory" maxlength="2" size="2"></td>';
 		echo '<td>'._('to all items in stock category').'</td>';
 		$sql = "SELECT categoryid,
 				categorydescription
@@ -151,7 +151,7 @@ if (isset($_POST['selectchoice'])) {
 			echo '<option value="'.$myrow['categoryid'].'">'.$myrow['categorydescription'].'</option>';
 		}
 		echo '</select></td></tr></table>';
-		echo '<br /><div class="centre"><input type="Submit" name="submitcategory" value="'. _('Update Items') .'"></div>';
+		echo '<br /><div class="centre"><input type="submit" name="submitcategory" value="'. _('Update Items') .'"></div>';
 	}
 	echo '</form>';
 

@@ -8,8 +8,7 @@ include('includes/SQL_CommonFunctions.inc');
 
 echo '<a href="'. $rootpath . '/SelectWorkOrder.php" >' . _('Back to Work Orders'). '</a><br />';
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' .
-	_('Search') . '" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p>';
 
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -22,7 +21,7 @@ if (!isset($_REQUEST['WO'])) {
 	include ('includes/footer.inc');
 	exit;
 } else {
-	echo '<input type="hidden" name="WO" value=' .$_REQUEST['WO'] . '>';
+	echo '<input type="hidden" name="WO" value="' .$_REQUEST['WO'] . '" />';
 	$_POST['WO']=$_REQUEST['WO'];
 }
 
@@ -48,7 +47,7 @@ if (DB_num_rows($WOResult)==0){
 $WorkOrderRow = DB_fetch_array($WOResult);
 
 
-echo '<table cellpadding=2 class="selection">
+echo '<table cellpadding="2" class="selection">
 	<tr><td class="label">' . _('Work order') . ':</td>
 		<td>' . $_POST['WO'] .'</td>
 	 	<td class="label">' . _('Manufactured at') . ':</td>
@@ -172,7 +171,7 @@ while ($RequirementsRow = DB_fetch_array($RequirementsResult)){
 			} else {
 				echo '<tr class="OddTableRows">';
 			}
-			echo '<td colspan=4></td><td>' . ConvertSQLDate($IssuesRow['trandate']) . '</td>
+			echo '<td colspan="4"></td><td>' . ConvertSQLDate($IssuesRow['trandate']) . '</td>
 				<td align="right">' . number_format(-$IssuesRow['qty'],$RequirementsRow['decimalplaces']) . '</td>
 				<td align="right">' . number_format(-($IssuesRow['qty']*$IssuesRow['standardcost']),2) . '</td></tr>';
 			$IssueQty -= $IssuesRow['qty'];// because qty for the stock movement will be negative
@@ -390,6 +389,7 @@ If (isset($_POST['Close'])) {
 						materialcost='" . $NewCost . "',
 						labourcost=0,
 						overheadcost=0,
+						lastcurcostdate='" . Date('Y-m-d') . "',
 						lastcost='" . $WORow['currcost'] . "'
 					WHERE stockid='" . $_POST['StockID'] . "'";
 
@@ -521,7 +521,7 @@ If (isset($_POST['Close'])) {
 
 
 if ($WorkOrderRow['closed']==0){
-	echo '<tr><td colspan="9"><div class="centre"><input type="submit" name="Close" value="' . _('Close This Work Order') . '" onclick="return confirm(\'' . _('Closing the work order takes the variances to the general ledger (if integrated). The work order will no longer be able to have manufactured goods received entered against it or materials issued to it.') . '  ' . _('Are You Sure?') . '\');"></div></td></tr>';
+	echo '<tr><td colspan="9"><div class="centre"><input type="submit" name="Close" value="' . _('Close This Work Order') . '" onclick="return confirm(\'' . _('Closing the work order takes the variances to the general ledger (if integrated). The work order will no longer be able to have manufactured goods received entered against it or materials issued to it.') . '  ' . _('Are You Sure?') . '\');" /></div></td></tr>';
 } else {
 	echo '<tr><td colspan="9">' . _('This work order is closed and cannot accept additional issues of materials or receipts of manufactured items') . '</td></tr>';
 }

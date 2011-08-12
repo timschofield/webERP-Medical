@@ -225,7 +225,7 @@ If (!isset($SelectedBankAccount)) {
 	} else {
 		$PettyCash=_('Yes');
 	}
-	printf('<td>%s - %s</td>
+	printf('<td>%s<br /><font size="2">%s</font></td>
 		<td>%s</td>
 		<td>%s</td>
 		<td>%s</td>
@@ -309,7 +309,7 @@ if (isset($SelectedBankAccount) AND !isset($_GET['delete'])) {
 	$result = DB_query($sql,$db);
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['AccountCode']) and $myrow['accountcode']==$_POST['AccountCode']) {
-			echo '<option selected value="'.$myrow['accountcode'] . '">' . $myrow['accountname'] . '</option>';
+			echo '<option selected="True" value="'.$myrow['accountcode'] . '">' . $myrow['accountname'] . '</option>';
 		} else {
 			echo '<option value="'.$myrow['accountcode'] . '">' . $myrow['accountname'] . '</option>';
 		}
@@ -334,13 +334,13 @@ if (!isset($_POST['BankAddress'])) {
 }
 
 echo '<tr><td>' . _('Bank Account Name') . ': </td>
-			<td><input tabindex="2" ' . (in_array('AccountName',$Errors) ?  'class="inputerror"' : '' ) .' type="Text" name="BankAccountName" value="' . $_POST['BankAccountName'] . '" size=40 maxlength=50></td></tr>
+			<td><input tabindex="2" ' . (in_array('AccountName',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="BankAccountName" value="' . $_POST['BankAccountName'] . '" size="40" maxlength="50" /></td></tr>
 		<tr><td>' . _('Bank Account Code') . ': </td>
-                        <td><input tabindex="3" ' . (in_array('AccountCode',$Errors) ?  'class="inputerror"' : '' ) .' type="Text" name="BankAccountCode" value="' . $_POST['BankAccountCode'] . '" size=40 maxlength=50></td></tr>
+                        <td><input tabindex="3" ' . (in_array('AccountCode',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="BankAccountCode" value="' . $_POST['BankAccountCode'] . '" size="40" maxlength="50" /></td></tr>
 		<tr><td>' . _('Bank Account Number') . ': </td>
-			<td><input tabindex="3" ' . (in_array('AccountNumber',$Errors) ?  'class="inputerror"' : '' ) .' type="Text" name="BankAccountNumber" value="' . $_POST['BankAccountNumber'] . '" size=40 maxlength=50></td></tr>
+			<td><input tabindex="3" ' . (in_array('AccountNumber',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="BankAccountNumber" value="' . $_POST['BankAccountNumber'] . '" size="40" maxlength="50" /></td></tr>
 		<tr><td>' . _('Bank Address') . ': </td>
-			<td><input tabindex="4" ' . (in_array('BankAddress',$Errors) ?  'class="inputerror"' : '' ) .' type="Text" name="BankAddress" value="' . $_POST['BankAddress'] . '" size=40 maxlength=50></td></tr>
+			<td><input tabindex="4" ' . (in_array('BankAddress',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="BankAddress" value="' . $_POST['BankAddress'] . '" size="40" maxlength="50" /></td></tr>
 		<tr><td>' . _('Currency Of Account') . ': </td><td><select tabindex="5" name="CurrCode">';
 
 if (!isset($_POST['CurrCode']) OR $_POST['CurrCode']==''){
@@ -349,7 +349,7 @@ if (!isset($_POST['CurrCode']) OR $_POST['CurrCode']==''){
 $result = DB_query("SELECT currabrev, currency FROM currencies",$db);
 while ($myrow = DB_fetch_array($result)) {
 	if ($myrow['currabrev']==$_POST['CurrCode']) {
-		echo '<option selected value="'.$myrow['currabrev'] . '">' . $myrow['currabrev'] . '</option>';
+		echo '<option selected="True" value="'.$myrow['currabrev'] . '">' . $myrow['currabrev'] . '</option>';
 	} else {
 		echo '<option value="'.$myrow['currabrev'] . '">' . $myrow['currabrev'] . '</option>';
 	}
@@ -367,9 +367,9 @@ if (isset($SelectedBankAccount)) {
 	$result = DB_query("SELECT invoice FROM bankaccounts where accountcode =" . $SelectedBankAccount ,$db);
 	while ($myrow = DB_fetch_array($result)) {
 		if ($myrow['invoice']== 1) {
-			echo '<option selected value=1>'._('Yes').'</option><option value=0>'._('No').'</option>';
+			echo '<option selected="True" value="1">'._('Yes').'</option><option value=0>'._('No').'</option>';
 		} else {
-			echo '<option selected value=0>'._('No').'</option><option value=1>'._('Yes').'</option>';
+			echo '<option selected="True" value="0">'._('No').'</option><option value=1>'._('Yes').'</option>';
 		}
 	}//end while loop
 } else {
@@ -403,7 +403,7 @@ echo '</select></td>';
 
 echo '</tr>';
 echo '</table><br />
-		<div class="centre"><input tabindex="7" type="Submit" name="submit" value="'. _('Enter Information') .'"></div>';
+		<div class="centre"><input tabindex="7" type="Submit" name="submit" value="'. _('Enter Information') .'" /></div>';
 
 echo '</form>';
 include('includes/footer.inc');

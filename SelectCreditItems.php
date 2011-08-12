@@ -122,7 +122,7 @@ if ($_SESSION['RequireCustomerSelection']==1) {
 		if (DB_num_rows($result2) == 0) {
 			$DataError = 1;
 			echo '<a href="CustomerTypes.php?" target="_parent">Setup Types</a>';
-			echo '<tr><td colspan=2>' . prnMsg(_('No Customer types defined'), 'error') . '</td></tr>';
+			echo '<tr><td colspan="2">' . prnMsg(_('No Customer types defined'), 'error') . '</td></tr>';
 		} else {
 			// If OK show select box with option selected
 			echo '<select name="CustType">';
@@ -144,7 +144,7 @@ if ($_SESSION['RequireCustomerSelection']==1) {
 		if (DB_num_rows($result2) == 0) {
 			$DataError = 1;
 			echo '<a href="CustomerTypes.php?" target="_parent">Setup Types</a>';
-			echo '<tr><td colspan=2>' . prnMsg(_('No Customer types defined'), 'error') . '</td></tr>';
+			echo '<tr><td colspan="2">' . prnMsg(_('No Customer types defined'), 'error') . '</td></tr>';
 		} else {
 		// if OK show select box with available options to choose
 			echo '<select name="CustType">';
@@ -164,7 +164,7 @@ if ($_SESSION['RequireCustomerSelection']==1) {
 	if (DB_num_rows($result2) == 0) {
 		$DataError = 1;
 		echo '<a href="Areas.php?" target="_parent">Setup Types</a>';
-		echo '<tr><td colspan=2>' . prnMsg(_('No Sales Areas defined'), 'error') . '</td></tr>';
+		echo '<tr><td colspan="2">' . prnMsg(_('No Sales Areas defined'), 'error') . '</td></tr>';
 	} else {
 		// if OK show select box with available options to choose
 		echo '<select name="Area">';
@@ -521,8 +521,8 @@ if (isset($_SESSION['CreditItems']->DebtorNo) and !isset($_POST['ProcessCredit']
 /* everything below here only do if a customer is selected
    first add a header to show who we are making a credit note for */
 
-	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' .
-		_('Search') . '" alt="" />' . ' ' . htmlspecialchars($_SESSION['CreditItems']->CustomerName)  . ' - ' . htmlspecialchars($_SESSION['CreditItems']->DeliverTo).'</p>';
+	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' .
+			' ' . htmlspecialchars($_SESSION['CreditItems']->CustomerName)  . ' - ' . htmlspecialchars($_SESSION['CreditItems']->DeliverTo).'</p>';
 
  /* do the search for parts that might be being looked up to add to the credit note */
 	if (isset($_POST['Search'])){
@@ -986,8 +986,7 @@ if (isset($_SESSION['CreditItems']->DebtorNo) and !isset($_POST['ProcessCredit']
 			}
 
 			echo '<td>' . $LineItem->Units . '</td>
-				<td><input type="text" class="number" name="Price_' . $LineItem->LineNumber . '" size="10" maxlength="12" value="' .
-					number_format($LineItem->Price, $LineItem->PriceDecimals) . '" /></td>
+				<td><input type="text" class="number" name="Price_' . $LineItem->LineNumber . '" size="10" maxlength="12" value="' . number_format($LineItem->Price, $LineItem->PriceDecimals) . '" /></td>
 				<td><input type="checkbox" name="Gross" value="False" /></td>
 				<td><input type="text" class="number" name="Discount_' . $LineItem->LineNumber . '" size="3" maxlength="3" value="' . ($LineItem->DiscountPercent * 100) . '" />&nbsp;%</td>
 				<td class="number">' . $DisplayLineTotal . '</td>';
@@ -1238,10 +1237,10 @@ if (isset($_SESSION['CreditItems']->DebtorNo) and !isset($_POST['ProcessCredit']
 			$_POST['StockCode'] = '';
 		}
 		echo '<td>' . _('Enter text extracts in the description') . ':&nbsp;</td>';
-		echo '<td><input type="Text" name="Keywords" size="20" maxlength="25" value="' . $_POST['Keywords'] . '" /></td></tr>';
+		echo '<td><input type="text" name="Keywords" size="20" maxlength="25" value="' . $_POST['Keywords'] . '" /></td></tr>';
 		echo '<tr><td></td>';
 		echo '<td><font size="3"><b>' ._('OR') . '</b></font>&nbsp;&nbsp;' . _('Enter extract of the Stock Code') . ':&nbsp;</td>';
-		echo '<td><input type="Text" name="StockCode" size="15" maxlength="18" value="' . $_POST['StockCode'] . '" /></td>';
+		echo '<td><input type="text" name="StockCode" size="15" maxlength="18" value="' . $_POST['StockCode'] . '" /></td>';
 		echo '</tr>';
 		echo '</table><br /><div class="centre">';
 
@@ -1319,7 +1318,7 @@ if (isset($_SESSION['CreditItems']->DebtorNo) and !isset($_POST['ProcessCredit']
 				}
 				$ImageSource = $_SESSION['part_pics_dir'] . '/' . $myrow['stockid'] . '.jpg';
 				if (file_exists($ImageSource)){
-					$ImageSource  = '<img src="'.$ImageSource.'">';
+					$ImageSource  = '<img src="'.$ImageSource.'" />';
 				} else {
 					$ImageSource  = '<i>'._('No Image').'</i>';
 				}
@@ -1336,7 +1335,7 @@ if (isset($_SESSION['CreditItems']->DebtorNo) and !isset($_POST['ProcessCredit']
 				echo '<td>'.$myrow['stockid'].'</td>
 					<td>'.$myrow['description'].'</td>
 					<td>'.$myrow['units'].'</td>
-					<td><font size="1"><input class="number" type="textbox" size="6" name="Quantity'.$i.'" value="0" /></font></td>
+					<td><font size="1"><input class="number" type="text" size="6" name="Quantity'.$i.'" value="0" /></font></td>
 					<input type="hidden" name="StockID'.$i.'" value="'.$myrow['stockid'].'" />
 					<td class="number">'.number_format($PriceRow['price'],$PriceRow['pricedecimal']).'</td>
 				</tr>';

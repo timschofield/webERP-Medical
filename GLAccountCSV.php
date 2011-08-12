@@ -13,8 +13,8 @@ if (isset($_POST['Period'])){
 	$SelectedPeriod = $_GET['Period'];
 }
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' .
-	_('General Ledger Account Inquiry') . '" alt="" />' . ' ' . _('General Ledger Account Report') . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('General Ledger Account Inquiry') . '" alt="" />' .
+		' ' . _('General Ledger Account Report') . '</p>';
 
 echo '<div class="page_help_text">' . _('Use the keyboard Shift key to select multiple accounts and periods') . '</div><br />';
 
@@ -34,7 +34,7 @@ $AccountsResult = DB_query($sql,$db);
 $i=0;
 while ($myrow=DB_fetch_array($AccountsResult,$db)){
 	if(isset($_POST['Account'][$i]) AND $myrow['accountcode'] == $_POST['Account'][$i]){
-		echo '<option selected value=' . $myrow['accountcode'] . '>' . $myrow['accountcode'] . ' ' . $myrow['accountname'] . '</option>';
+		echo '<option selected="True" value=' . $myrow['accountcode'] . '>' . $myrow['accountcode'] . ' ' . $myrow['accountname'] . '</option>';
 		$i++;
 	} else {
 		echo '<option value=' . $myrow['accountcode'] . '>' . $myrow['accountcode'] . ' ' . $myrow['accountname'] . '</option>';
@@ -50,10 +50,10 @@ $id=0;
 
 while ($myrow=DB_fetch_array($Periods,$db)){
 	if (isset($SelectedPeriod[$id]) and $myrow['periodno'] == $SelectedPeriod[$id]){
-		echo '<option selected value=' . $myrow['periodno'] . '>' . _(MonthAndYearFromSQLDate($myrow['lastdate_in_period'])) . '</option>';
+		echo '<option selected="True" value="' . $myrow['periodno'] . '">' . _(MonthAndYearFromSQLDate($myrow['lastdate_in_period'])) . '</option>';
 		$id++;
 	} else {
-		echo '<option value=' . $myrow['periodno'] . '>' . _(MonthAndYearFromSQLDate($myrow['lastdate_in_period'])) . '</option>';
+		echo '<option value="' . $myrow['periodno'] . '">' . _(MonthAndYearFromSQLDate($myrow['lastdate_in_period'])) . '</option>';
 	}
 }
 echo '</select></td></tr>';
@@ -70,16 +70,16 @@ $result=DB_query($SQL,$db);
 echo '<option value=0>0 - '._('All tags') . '</option>';
 while ($myrow=DB_fetch_array($result)){
 	if (isset($_POST['tag']) and $_POST['tag']==$myrow['tagref']){
-	   echo '<option selected value=' . $myrow['tagref'] . '>' . $myrow['tagref'].' - ' .$myrow['tagdescription'] . '</option>';
+	   echo '<option selected="True" value="' . $myrow['tagref'] . '">' . $myrow['tagref'].' - ' .$myrow['tagdescription'] . '</option>';
 	} else {
-	   echo '<option value=' . $myrow['tagref'] . '>' . $myrow['tagref'].' - ' .$myrow['tagdescription'] . '</option>';
+	   echo '<option value="' . $myrow['tagref'] . '">' . $myrow['tagref'].' - ' .$myrow['tagdescription'] . '</option>';
 	}
 }
 echo '</select></td></tr>';
 // End select tag
 
 echo '</table><br />
-<div class="centre"><input type="submit" name="MakeCSV" value="'._('Make CSV File').'"></div></form>';
+<div class="centre"><input type="submit" name="MakeCSV" value="'._('Make CSV File').'" /></div></form>';
 
 /* End of the Form  rest of script is what happens if the show button is hit*/
 

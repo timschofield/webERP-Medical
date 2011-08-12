@@ -335,10 +335,11 @@ if (isset($_REQUEST['OrderNumber']) AND $_REQUEST['OrderNumber']!='') {
 } else {
 	if (isset($_REQUEST['SelectedCustomer'])) {
 		echo _('For customer') . ': ' . $_REQUEST['SelectedCustomer'] . ' ' . _('and') . ' ';
-		echo '<input type="hidden" name="SelectedCustomer" value="' . $_REQUEST['SelectedCustomer'] . '">';
+		echo '<input type="hidden" name="SelectedCustomer" value="' . $_REQUEST['SelectedCustomer'] . '" />';
 	}
 	if (isset($_REQUEST['SelectedStockItem'])) {
-		 echo _('for the part') . ': ' . $_REQUEST['SelectedStockItem'] . ' ' . _('and') . ' <input type="hidden" name="SelectedStockItem" value="' . $_REQUEST['SelectedStockItem'] . '">';
+		 echo _('for the part') . ': ' . $_REQUEST['SelectedStockItem'] . ' ' . _('and') . '
+			<input type="hidden" name="SelectedStockItem" value="' . $_REQUEST['SelectedStockItem'] . '" />';
 	}
 }
 
@@ -414,7 +415,8 @@ if (!isset($StockID)) {
 	if (!isset($_REQUEST['OrderNumber']) or $_REQUEST['OrderNumber']==''){
 
 		echo '<table class="selection">';
-		echo '<tr><td>' . _('Order number') . ': </td><td><input type="text" name="OrderNumber" maxlength=8 size=9></td><td>' .
+		echo '<tr><td>' . _('Order number') . ': </td>
+			<td><input type="text" name="OrderNumber" maxlength="8" size="9" /></td><td>' .
 				_('From Stock Location') . ':</td><td><select name="StockLocation">';
 
 		$sql = "SELECT loccode, locationname FROM locations";
@@ -424,14 +426,14 @@ if (!isset($StockID)) {
 		while ($myrow=DB_fetch_array($resultStkLocs)){
 			if (isset($_POST['StockLocation'])){
 				if ($myrow['loccode'] == $_POST['StockLocation']){
-				     echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+				     echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 				} else {
-				     echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname']. '</option>';
+				     echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname']. '</option>';
 				}
 			} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
-				 echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname']. '</option>';
+				 echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname']. '</option>';
 			} else {
-				 echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname']. '</option>';
+				 echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname']. '</option>';
 			}
 		}
 
@@ -443,17 +445,17 @@ if (!isset($StockID)) {
 		}
 
 		if ($_POST['Quotations']=='Quotes_Only'){
-			echo '<option selected value="Quotes_Only">' . _('Quotations Only') . '</option>';
+			echo '<option selected="True" value="Quotes_Only">' . _('Quotations Only') . '</option>';
 			echo '<option value="Orders_Only">' . _('Orders Only') . '</option>';
 		} else {
-			echo '<option selected value="Orders_Only">' . _('Orders Only') . '</option>';
+			echo '<option selected="True" value="Orders_Only">' . _('Orders Only') . '</option>';
 			echo '<option value="Quotes_Only">' . _('Quotations Only') . '</option>';
 		}
 
 		echo '</select> </td><td>';
-		echo '<input type="submit" name="SearchOrders" value="' . _('Search') . '"></td>';
-    echo '&nbsp;&nbsp;<td><a href="' . $rootpath . '/SelectOrderItems.php?NewOrder=Yes">' .
-		_('Add Sales Order') . '</a></td></tr></table>';
+		echo '<input type="submit" name="SearchOrders" value="' . _('Search') . '" /></td>';
+		echo '&nbsp;&nbsp;<td><a href="' . $rootpath . '/SelectOrderItems.php?NewOrder=Yes">' .
+			_('Add Sales Order') . '</a></td></tr></table>';
 	}
 
 	$SQL="SELECT categoryid,
@@ -464,7 +466,7 @@ if (!isset($StockID)) {
 	$result1 = DB_query($SQL,$db);
 
 	echo '<br /><table class="selection">';
-	echo '<tr><th colspan=6><font size=3 color=navy>' . _('To search for sales orders for a specific part use the part selection facilities below');
+	echo '<tr><th colspan="6"><font size="3" color="navy">' . _('To search for sales orders for a specific part use the part selection facilities below');
 	echo '</th></tr>';
 	echo '<tr>
       		<td><font size="1">' . _('Select a stock category') . ':</font>
@@ -475,20 +477,20 @@ if (!isset($StockID)) {
 	}
 
       echo '</select>
-      		<td><font size=1>' . _('Enter text extract(s) in the description') . ':</font></td>
-      		<td><input type="text" name="Keywords" size=20 maxlength=25></td>
+      		<td><font size="1">' . _('Enter text extract(s) in the description') . ':</font></td>
+      		<td><input type="text" name="Keywords" size="20" maxlength="25" /></td>
 	</tr>
       	<tr><td></td>
-      		<td><font size="3"><b>' . _('OR') . ' </b></font><font size=1>' . _('Enter extract of the Stock Code') . '</b>:</font></td>
-      		<td><input type="text" name="StockCode" size=15 maxlength=18></td>
+      		<td><font size="3"><b>' . _('OR') . ' </b></font><font size="1">' . _('Enter extract of the Stock Code') . '</b>:</font></td>
+      		<td><input type="text" name="StockCode" size="15" maxlength="18" /></td>
       	</tr>
       </table>';
-	echo '<br /><input type="submit" name="SearchParts" value="' . _('Search Parts Now') .
-			'"><input type="submit" name="ResetPart" value="' . _('Show All') . '"></div><br />';
+	echo '<br /><input type="submit" name="SearchParts" value="' . _('Search Parts Now') . '" />
+				<input type="submit" name="ResetPart" value="' . _('Show All') . '" /></div><br />';
 
 if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 
-	echo '<table cellpadding=2 colspan=7 class="selection">';
+	echo '<table cellpadding="2" colspan="7" class="selection">';
 	$TableHeader = '<tr>
 				<th>' . _('Code') . '</th>
 				<th>' . _('Description') . '</th>
@@ -734,7 +736,7 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 		$AuthResult=DB_query($AuthSQL,$db);
 		$AuthRow=DB_fetch_array($AuthResult);
 
-                echo '<table cellpadding=2 colspan=7 width=95% class="selection">';
+                echo '<table cellpadding="2" colspan="7" width="95%" class="selection">';
 
 		if (isset($_POST['Quotations']) AND $_POST['Quotations']=='Orders_Only'){
 			$tableheader = '<tr>
@@ -809,7 +811,7 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 	                        if ($AuthRow['cancreate']==0 AND $myrow['poplaced']==0){ //cancreate==0 if the user can create POs and not already placed
 	        			printf('<td><a href="%s">%s</a></td>
 	        				<td><a href="%s">' . _('Invoice') . '</a></td>
-	        				<td><a target="_blank" href="%s">' . $PrintText . ' <img src="' .$rootpath.'/css/'.$theme.'/images/pdf.png" title="' . _('Click for PDF') . '"></a></td>
+	        				<td><a target="_blank" href="%s">' . $PrintText . ' <img src="' .$rootpath.'/css/'.$theme.'/images/pdf.png" title="' . _('Click for PDF') . '" /></a></td>
 	        				<td>%s</td>
 	        				<td>%s</td>
 	        				<td>%s</td>
@@ -817,7 +819,7 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 	        				<td>%s</td>
 	        				<td>%s</td>
 	        				<td class="number">%s</td>
-	        				<td><input type=checkbox name=PlacePO_%s value><input type="hidden" name=OrderNo_PO_%s value=%s></td>
+	        				<td><input type="checkbox" name="PlacePO_%s" value"" /><input type="hidden" name="OrderNo_PO_%s" value="%s" /></td>
 	        				</tr>',
 	        				$ModifyPage,
 	        				$myrow['orderno'],
@@ -836,7 +838,7 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 	                        } else {  //User is not authorised to create POs so don't even show the option
 	                               	printf('<td><a href="%s">%s</a></td>
 	        				<td><a href="%s">' . _('Invoice') . '</a></td>
-	        				<td><a target="_blank" href="%s">' . $PrintText . ' <img src="' .$rootpath.'/css/'.$theme.'/images/pdf.png" title="' . _('Click for PDF') . '"></a></td>
+	        				<td><a target="_blank" href="%s">' . $PrintText . ' <img src="' .$rootpath.'/css/'.$theme.'/images/pdf.png" title="' . _('Click for PDF') . '" /></a></td>
 	        				<td>%s</td>
 	        				<td>%s</td>
 	        				<td>%s</td>
@@ -890,7 +892,8 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 		//end of page full new headings if
 		}//end while loop through orders to display
 		if ($_POST['Quotations']=='Orders_Only'  AND $AuthRow['cancreate']==0){ //cancreate==0 means can create POs
-			echo '<tr><td colspan="8"><td><td colspan="2" class="number"><input type="submit" name="PlacePO" value="' . _('Place') . "\n" . _('PO') . '" onclick="return confirm(\'' . _('This will create purchase orders for all the items on the checked sales orders above, based on the preferred supplier purchasing data held in the system. Are You Absolutely Sure?') . '\');"></td></tr>';
+			echo '<tr><td colspan="8"><td><td colspan="2" class="number">
+				<input type="submit" name="PlacePO" value="' . _('Place') . "\n" . _('PO') . '" onclick="return confirm(\'' . _('This will create purchase orders for all the items on the checked sales orders above, based on the preferred supplier purchasing data held in the system. Are You Absolutely Sure?') . '\');" /></td></tr>';
 		}
 		echo '<tr><td colspan="9" class="number">';
 		if ($_POST['Quotations']=='Orders_Only'){

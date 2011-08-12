@@ -10,8 +10,7 @@ include('includes/header.inc');
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') .
-	'" alt="" />' . ' ' . $title.'</p>';
+echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>';
 
 echo '<table class="selection"><tr><td>';
 echo '  ' . _('From Stock Location') . ':<select name="StockLocation"> ';
@@ -21,15 +20,15 @@ $resultStkLocs = DB_query($sql,$db);
 while ($myrow=DB_fetch_array($resultStkLocs)){
 	if (isset($_POST['StockLocation']) AND $_POST['StockLocation']!='All'){
 		if ($myrow['loccode'] == $_POST['StockLocation']){
-		     echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		     echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
-		     echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		     echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
-		 echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		 echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		 $_POST['StockLocation']=$myrow['loccode'];
 	} else {
-		 echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		 echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 	}
 }
 
@@ -41,8 +40,8 @@ if (!isset($_POST['BeforeDate']) OR !Is_Date($_POST['BeforeDate'])){
 if (!isset($_POST['AfterDate']) OR !Is_Date($_POST['AfterDate'])){
    $_POST['AfterDate'] = Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m')-1,Date('d'),Date('y')));
 }
-echo ' ' . _('Show Movements before') . ': <input type="text" name="BeforeDate" size=12 maxlength=12 Value="' . $_POST['BeforeDate'] . '">';
-echo ' ' . _('But after') . ': <input type="text" name="AfterDate" size=12 maxlength=12 Value="' . $_POST['AfterDate'] . '">';
+echo ' ' . _('Show Movements before') . ': <input type="text" name="BeforeDate" size="12" maxlength="12" value="' . $_POST['BeforeDate'] . '" />';
+echo ' ' . _('But after') . ': <input type="text" name="AfterDate" size="12" maxlength="12" value="' . $_POST['AfterDate'] . '" />';
 echo '</td></tr></table><br />';
 echo '<div class="centre"><input type="submit" name="ShowMoves" value="' . _('Show Stock Movements') . '" /></div><br />';
 
@@ -75,7 +74,7 @@ $sql = "SELECT stockmoves.stockid,
 $ErrMsg = _('The stock movements for the selected criteria could not be retrieved because');
 $MovtsResult = DB_query($sql, $db,$ErrMsg);
 
-echo '<table cellpadding=5 CELLSPACING=4 class="selection">';
+echo '<table cellpadding="5" cellspacing="4" class="selection">';
 $tableheader = '<tr>
 		<th>' . _('Item Code') . '</th>
 		<th>' . _('Type') . '</th>

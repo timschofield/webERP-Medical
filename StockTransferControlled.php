@@ -11,8 +11,7 @@ $title = _('Transfer Controlled Items');
 
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') .
-	'" alt=""><b>' . $title . '</b></p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') . '" alt="" /><b>' . $title . '</b></p>';
 
 if (!isset($_SESSION['Transfer'])) {
 	/* This page can only be called when a stock Transfer is pending */
@@ -62,7 +61,7 @@ if (isset($TransferItem)){
 	echo '<br /><a href="'.$rootpath.'/StockTransfers.php?StockID='.$LineItem->StockID. '">'._('Back To Transfer Screen').'</a>';
 }
 
-echo '<br /><font size=2><b>'. _('Transfer of controlled item'). ' ' . $LineItem->StockID  . ' - ' . $LineItem->ItemDescription . '</b></font></div>';
+echo '<br /><font size="2"><b>'. _('Transfer of controlled item'). ' ' . $LineItem->StockID  . ' - ' . $LineItem->ItemDescription . '</b></font></div>';
 
 /** vars needed by InputSerialItem : **/
 $LocationOut = $_SESSION['Transfer']->StockLocationFrom;

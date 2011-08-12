@@ -66,6 +66,7 @@ function userLogin($Name, $Password, $db) {
 			$_SESSION['CanCreateTender'] = $myrow['cancreatetender'];
 			$_SESSION['CustomerID'] = $myrow['customerid'];
 			$_SESSION['UserBranch'] = $myrow['branchcode'];
+			$_SESSION['UserSupplierID'] = $myrow['supplierid'];
 			$_SESSION['DefaultPageSize'] = $myrow['pagesize'];
 			$_SESSION['UserStockLocation'] = $myrow['defaultlocation'];
 			$_SESSION['DefaultTag'] = $myrow['defaulttag'];

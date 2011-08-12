@@ -282,7 +282,7 @@ $result=DB_query($SQL,$db);
 echo '<option value="0">0 - None</option>';
 while ($myrow=DB_fetch_array($result)){
 	if (isset($_POST['tag']) and $_POST['tag']==$myrow['tagref']){
-		echo '<option selected value="' . $myrow['tagref'] . '">' . $myrow['tagref'].' - ' .$myrow['tagdescription']."</option>";
+		echo '<option selected="True" value="' . $myrow['tagref'] . '">' . $myrow['tagref'].' - ' .$myrow['tagdescription']."</option>";
 	} else {
 		echo '<option value="' . $myrow['tagref'] . '">' . $myrow['tagref'].' - ' .$myrow['tagdescription']."</option>";
 	}
@@ -307,7 +307,7 @@ echo '<td><select name="GLCode" onChange="return assignComboToInput(this,'.'GLMa
 echo '<option value="">' . _('Select a general ledger account code') . '</option>';
 while ($myrow=DB_fetch_array($result)){
 	if (isset($_POST['tag']) and $_POST['tag']==$myrow['accountcode']){
-		echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'].' - ' .htmlentities($myrow['accountname'], ENT_QUOTES,'UTF-8')."</option>";
+		echo '<option selected="True" value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'].' - ' .htmlentities($myrow['accountname'], ENT_QUOTES,'UTF-8')."</option>";
 	} else {
 		echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'].' - ' .htmlentities($myrow['accountname'], ENT_QUOTES,'UTF-8')."</option>";
 	}

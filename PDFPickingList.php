@@ -30,14 +30,14 @@ if ((!isset($_GET['TransNo']) or $_GET['TransNo']=="") and !isset($_POST['TransD
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection"><tr>';
 	echo '<td>'._('Create picking lists for all deliveries to be made on').' : '.'</td>';
-	echo '<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="TransDate" maxlength=10 size=11 value='.date($_SESSION['DefaultDateFormat'], mktime(date('m'),date('Y'),date('d')+1)).'></td></tr>';
+	echo '<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="TransDate" maxlength="10" size="11" value="'.date($_SESSION['DefaultDateFormat'], mktime(date('m'),date('Y'),date('d')+1)).'" /></td></tr>';
 	echo '<tr><td>'._('From Warehouse').' : '.'</td><td><select name="loccode">';
 	while ($myrow=DB_fetch_array($result)) {
 		echo '<option value='.$myrow['loccode'].'>'.$myrow['locationname'].'</option>';
 	}
 	echo '</select></td></tr>';
 	echo '</table>';
-	echo '<br /><div class="centre"><input type="submit" name="Process" value="' . _('Print Picking Lists') . '"></div></form>';
+	echo '<br /><div class="centre"><input type="submit" name="Process" value="' . _('Print Picking Lists') . '" /></div></form>';
 	include('includes/footer.inc');
 	exit();
 }

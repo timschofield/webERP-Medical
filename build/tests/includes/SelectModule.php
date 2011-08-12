@@ -1,8 +1,20 @@
 <?php
 
-$ModuleID=substr(strstr($result, $ModuleName, true),-4,2);
-$url=$RootPath.'index.php?Application='.$ModuleID;
+function FindModule($ch, $RootPath, $ServerPath, $TestSessionID, $IndexPage, $Module) {
+	$i=0;
+	do {
+		$i++;
+	} while ($i<sizeOf($IndexPage[1]) and $IndexPage[1][$i]['value'] != $Module);
+	if ($i>=sizeOf($IndexPage[1])) {
+		error_log('Error finding module '.$Module.'. Link not found.'."\n", 3, '/home/tim/weberp'.date('Y-m-d').'.log');
+		return false;
+	}
+	$SelectedModuleScreen = new URLDetails($TestSessionID);
+	$SelectedModuleScreen->SetURL($ServerPath.$IndexPage[1][$i]['href']);
 
-include('GetURL.php');
+	$ModulePage=$SelectedModuleScreen->FetchPage($RootPath, $ServerPath, $ch);
+
+	return $ModulePage;
+}
 
 ?>

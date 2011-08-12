@@ -10,8 +10,7 @@ include('includes/header.inc');
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' .
-	_('Inventory Adjustment') . '" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory Adjustment') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (!isset($_POST['Action']) and !isset($_GET['Action'])) {
 	$_GET['Action'] = 'Enter';
@@ -77,15 +76,15 @@ if ($_GET['Action'] == 'Enter'){
 	} // end of if enter counts button hit
 
 
-	echo '<table cellpadding=2 class="selection">';
-	echo '<tr><th colspan=3>'._('Stock Check Counts at Location') . ':<select name="Location">';
+	echo '<table cellpadding="2" class="selection">';
+	echo '<tr><th colspan="3">'._('Stock Check Counts at Location') . ':<select name="Location">';
 	$sql = "SELECT loccode, locationname FROM locations";
 	$result = DB_query($sql,$db);
 
 	while ($myrow=DB_fetch_array($result)){
 
 		if (isset($_POST['Location']) and $myrow['loccode']==$_POST['Location']){
-			echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
@@ -99,13 +98,13 @@ if ($_GET['Action'] == 'Enter'){
 	for ($i=1;$i<=10;$i++){
 
 		echo '<tr>
-			<td><input type="text" name="StockID_' . $i . '" maxlength="20" size="20"></td>
-			<td><input type="text" name="Qty_' . $i . '" maxlength="10" size="10"></td>
-			<td><input type="text" name="Ref_' . $i . '" maxlength="20" size="20"></td></tr>';
+			<td><input type="text" name="StockID_' . $i . '" maxlength="20" size="20" /></td>
+			<td><input type="text" name="Qty_' . $i . '" maxlength="10" size="10" /></td>
+			<td><input type="text" name="Ref_' . $i . '" maxlength="20" size="20" /></td></tr>';
 
 	}
 
-	echo '</table><br /><div class="centre"><input type="submit" name="EnterCounts" value="' . _('Enter Above Counts') . '"></div>';
+	echo '</table><br /><div class="centre"><input type="submit" name="EnterCounts" value="' . _('Enter Above Counts') . '" /></div>';
 
 //END OF action=ENTER
 } elseif ($_GET['Action']=='View'){
@@ -122,10 +121,15 @@ if ($_GET['Action'] == 'Enter'){
 	}
 
 	//START OF action=VIEW
-	$SQL = "SELECT * FROM stockcounts";
+	$SQL = "SELECT id,
+					stockid,
+					loccode,
+					qtycounted,
+					reference
+				FROM stockcounts";
 	$result = DB_query($SQL, $db);
 	echo '<input type="hidden" name="Action" value="View" />';
-	echo '<table cellpadding=2 class="selection">';
+	echo '<table cellpadding="2" class="selection">';
 	echo '<tr>
 		<th>' . _('Stock Code') . '</th>
 		<th>' . _('Location') . '</th>
@@ -138,10 +142,10 @@ if ($_GET['Action'] == 'Enter'){
 			<td>'.$myrow['loccode'].'</td>
 			<td>'.$myrow['qtycounted'].'</td>
 			<td>'.$myrow['reference'].'</td>
-			<td><input type=checkbox name="DEL[' .$myrow['id'].']" maxlength="20" size="20"></td></tr>';
+			<td><input type="checkbox" name="DEL[' .$myrow['id'].']" maxlength="20" size="20" /></td></tr>';
 
 	}
-	echo '</table><br /><div class="centre"><input type="submit" name="SubmitChanges" value="' . _('Save Changes') . '"></div>';
+	echo '</table><br /><div class="centre"><input type="submit" name="SubmitChanges" value="' . _('Save Changes') . '" /></div>';
 
 //END OF action=VIEW
 }

@@ -47,7 +47,7 @@ if (DB_num_rows($result)==0){
 	while ($myrow=DB_fetch_array($result)){
 		$account = $myrow['accountcode'] . ' - ' . $myrow['accountname'];
 		if (isset($SelectedAccount) and isset($LastCode) and $SelectedAccount==$myrow['accountcode']){
-			echo '<option selected value=' . $myrow['accountcode'] . '>' . $account . '</option>';
+			echo '<option selected="True" value=' . $myrow['accountcode'] . '>' . $account . '</option>';
 			$PrevCode=$LastCode;
 		} else {
 			echo '<option value=' . $myrow['accountcode'] . '>' . $account . '</option>';
@@ -150,15 +150,15 @@ if (isset($SelectedAccount) and $SelectedAccount != '') {
 	echo '<form name="form" action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<br /><table class="selection">';
-	echo '<tr><th colspan=3>'. _('Last Financial Year') .'</th>';
-	echo '<th colspan=3>'. _('This Financial Year') .'</th>';
-	echo '<th colspan=3>'. _('Next Financial Year') .'</th></tr>';
+	echo '<tr><th colspan="3">'. _('Last Financial Year') .'</th>';
+	echo '<th colspan="3">'. _('This Financial Year') .'</th>';
+	echo '<th colspan="3">'. _('Next Financial Year') .'</th></tr>';
 
-	echo '<tr><th colspan=3>'. _('Year ended').' - '.
+	echo '<tr><th colspan="3">'. _('Year ended').' - '.
 		Date($_SESSION['DefaultDateFormat'],YearEndDate($_SESSION['YearEnd'],-1)) .'</th>';
-	echo '<th colspan=3>'. _('Year ended').' - '.
+	echo '<th colspan="3">'. _('Year ended').' - '.
 		Date($_SESSION['DefaultDateFormat'],YearEndDate($_SESSION['YearEnd'],0)) .'</th>';
-	echo '<th colspan=3>'. _('Year ended').' - '.
+	echo '<th colspan="3">'. _('Year ended').' - '.
 		Date($_SESSION['DefaultDateFormat'],YearEndDate($_SESSION['YearEnd'],1)) .'</th></tr>';
 
 	echo '<tr>';
@@ -175,13 +175,13 @@ if (isset($SelectedAccount) and $SelectedAccount != '') {
 		echo '<tr>';
 		echo '<th>'. $PeriodEnd[$CurrentYearEndPeriod-(24-$i)] .'</th>';
 		echo '<td bgcolor="d2e5e8" class="number">'.number_format($actual[$CurrentYearEndPeriod-(24-$i)],2,'.','').'</td>';
-		echo '<td><input type="text" class="number" size=14 name="'.$i.'last" value="'.$budget[$CurrentYearEndPeriod-(24-$i)] .'"></td>';
+		echo '<td><input type="text" class="number" size="14" name="'.$i.'last" value="'.$budget[$CurrentYearEndPeriod-(24-$i)] .'" /></td>';
 		echo '<th>'. $PeriodEnd[$CurrentYearEndPeriod-(12-$i)] .'</th>';
 		echo '<td bgcolor="d2e5e8" class="number">'.number_format($actual[$CurrentYearEndPeriod-(12-$i)],2,'.','').'</td>';
-		echo '<td><input type="text" class="number" size=14 name="'.$i.'this" value="'. $budget[$CurrentYearEndPeriod-(12-$i)] .'"></td>';
+		echo '<td><input type="text" class="number" size="14" name="'.$i.'this" value="'. $budget[$CurrentYearEndPeriod-(12-$i)] .'" /></td>';
 		echo '<th>'. $PeriodEnd[$CurrentYearEndPeriod+($i)] .'</th>';
 		echo '<td bgcolor="d2e5e8" class="number">'.number_format($actual[$CurrentYearEndPeriod+$i],2,'.','').'</td>';
-		echo '<td><input type="text" class="number" size=14 name="'.$i.'next" value='. $budget[$CurrentYearEndPeriod+$i] .'></td>';
+		echo '<td><input type="text" class="number" size="14" name="'.$i.'next" value="'. $budget[$CurrentYearEndPeriod+$i] .'" /></td>';
 		echo '</tr>';
 		$LastYearActual=$LastYearActual+$actual[$CurrentYearEndPeriod-(24-$i)];
 		$LastYearBudget=$LastYearBudget+$budget[$CurrentYearEndPeriod-(24-$i)];
@@ -202,16 +202,16 @@ if (isset($SelectedAccount) and $SelectedAccount != '') {
 	echo '<th align="right"></th>';
 	echo '<th align="right">'.number_format($NextYearActual,2,'.',''). '</th>';
 	echo '<th align="right">'.number_format($NextYearBudget,2,'.',''). '</th></tr>';
-	echo '<tr><td colspan=2>'._('Annual Budget').'</td>
-				<td><input class="number" type="text" size="14" name="AnnualAmountLY" value="0.00"></td>
+	echo '<tr><td colspan="2">'._('Annual Budget').'</td>
+				<td><input class="number" type="text" size="14" name="AnnualAmountLY" value="0.00" /></td>
 				</td><td><td></td>
-				<td><input class="number" type="text" size=14 name="AnnualAmountTY" value="0.00"></td>
+				<td><input class="number" type="text" size="14" name="AnnualAmountTY" value="0.00" /></td>
 				<td></td>
-				<td><input onChange="numberFormat(this,2)" class="number" type="text" size="14" name="AnnualAmount" value="0.00"></td>';
+				<td><input onChange="numberFormat(this,2)" class="number" type="text" size="14" name="AnnualAmount" value="0.00" /></td>';
 	echo '<td><input type="submit" name="apportion" value="' . _('Apportion Budget') . '"></td>';
 	echo '</tr>';
 	echo '</table>';
-	echo '<input type="hidden" name="SelectedAccount" value='.$SelectedAccount.'>';
+	echo '<input type="hidden" name="SelectedAccount" value="'.$SelectedAccount.'" />';
 
 	echo '<script>defaultControl(document.form.1next);</script>';
 	echo '<br /><div class="centre"><input type="submit" name=update value="' . _('Update') . '"></div></form>';

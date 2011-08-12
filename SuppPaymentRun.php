@@ -1,7 +1,7 @@
 <?php
 /* $Id$*/
 
-Class Allocation {
+class Allocation {
 	Var $TransID;
 	Var $Amount;
 
@@ -15,7 +15,7 @@ include('includes/session.inc');
 include('includes/SQL_CommonFunctions.inc');
 include('includes/GetPaymentMethods.php');
 
-If ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
+if ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 	AND isset($_POST['FromCriteria'])
 	AND strlen($_POST['FromCriteria'])>=1
 	AND isset($_POST['ToCriteria'])
@@ -232,8 +232,7 @@ If ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 	$title=_('Payment Run');
 	include('includes/header.inc');
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Supplier Types')
-		. '" alt="" />' . $title . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Supplier Types') . '" alt="" />' . $title . '</p>';
 
 	if (isset($_POST['Currency']) AND !is_numeric($_POST['ExRate'])){
 		echo '<br />' . _('To process payments for') . ' ' . $_POST['Currency'] . ' ' . _('a numeric exchange rate applicable for purchasing the currency to make the payment with must be entered') . '. ' . _('This rate is used to calculate the difference in exchange and make the necessary postings to the General ledger if linked') . '.';
@@ -255,9 +254,9 @@ If ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 		$DefaultToCriteria = $_POST['ToCriteria'];
 	}
 	echo '<tr><td>' . _('From Supplier Code') . ':</font></td>
-            <td><input type="text" maxlength=6 size=7 name=FromCriteria value="' . $DefaultFromCriteria . '"></td></tr>';
+            <td><input type="text" maxlength="6" size="7" name="FromCriteria" value="' . $DefaultFromCriteria . '" /></td></tr>';
 	echo '<tr><td>' . _('To Supplier Code') . ':</td>
-            <td><input type="text" maxlength=6 size=7 name=ToCriteria value="' . $DefaultToCriteria . '"></td></tr>';
+            <td><input type="text" maxlength="6" size="7" name="ToCriteria" value="' . $DefaultToCriteria . '" /></td></tr>';
 
 
 	echo '<tr><td>' . _('For Suppliers Trading in') . ':</td><td><select name="Currency">';
@@ -266,7 +265,7 @@ If ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 
 	while ($myrow=DB_fetch_array($result)){
 	if ($myrow['currabrev'] == $_SESSION['CompanyRecord']['currencydefault']){
-			echo '<option selected Value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
+			echo '<option selected="True" Value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 	} else {
 		echo '<option Value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 	}
@@ -279,7 +278,7 @@ If ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 		$DefaultExRate = $_POST['ExRate'];
 	}
 	echo '<tr><td>' . _('Exchange Rate') . ':</td>
-            <td><input type="text" class="number" name="ExRate" maxlength=11 size=12 value=' . $DefaultExRate . '></td></tr>';
+            <td><input type="text" class="number" name="ExRate" maxlength="11" size="12" value="' . $DefaultExRate . '" /></td></tr>';
 
 	if (!isset($_POST['AmountsDueBy'])){
 		$DefaultDate = Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m')+1,0 ,Date('y')));
@@ -288,7 +287,7 @@ If ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 	}
 
 	echo '<tr><td>' . _('Payments Due To') . ':</td>
-            <td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="AmountsDueBy" maxlength=11 size=12 value=' . $DefaultDate . '></td></tr>';
+            <td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="AmountsDueBy" maxlength="11" size="12" value="' . $DefaultDate . '" /></td></tr>';
 
 	$SQL = "SELECT bankaccountname, accountcode FROM bankaccounts";
 
@@ -313,7 +312,7 @@ If ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 		      /*list the bank account names */
 
 			if (isset($_POST['BankAccount']) and $_POST['BankAccount']==$myrow['accountcode']){
-				echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . '</option>';
+				echo '<option selected="True" value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . '</option>';
 			} else {
 				echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['bankaccountname'] . '</option>';
 			}
@@ -329,9 +328,9 @@ Payment types can be modified by editing that file */
 	foreach ($PaytTypes as $PaytType) {
 
 	     if (isset($_POST['PaytType']) and $_POST['PaytType']==$PaytType){
-		   echo '<option selected Value="' . $PaytType . '">' . $PaytType . '</option>';
+		   echo '<option selected="True" value="' . $PaytType . '">' . $PaytType . '</option>';
 	     } else {
-		   echo '<option Value="' . $PaytType . '">' . $PaytType . '</option>';
+		   echo '<option value="' . $PaytType . '">' . $PaytType . '</option>';
 	     }
 	}
 	echo '</select></td></tr>';
@@ -346,9 +345,9 @@ Payment types can be modified by editing that file */
 	}
 
 	echo '<tr><td>' . _('Starting Reference no (eg chq no)') . ':</td>
-            <td><input type="text" name="Ref" maxlength=11 size=12 value=' . $_POST['Ref'] . '></td></tr>';
+            <td><input type="text" name="Ref" maxlength="11" size="12" value="' . $_POST['Ref'] . '" /></td></tr>';
 
-	echo '</table><br /><div class="centre"><input type="submit" name="PrintPDF" Value="' . _('Print PDF Only') . '">
+	echo '</table><br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF Only') . '" />
                 <input type="submit" name="PrintPDFAndProcess" value="' . _('Print and Process Payments') . '" /></div>';
 
 	include ('includes/footer.inc');

@@ -20,8 +20,7 @@ if (isset($_POST['Create'])) {
 	$_POST['New'] = "Yes";
 };
 
-echo '<div class="centre"><p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="'
-	. _('Manufacturing Companies') . '" alt="" />' . ' ' .$title . '</p></div>';
+echo '<div class="centre"><p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Manufacturing Companies') . '" alt="" />' . ' ' .$title . '</p></div>';
 
 /* This section has been reached because the user has pressed either the insert/update buttons on the
  form hopefully with input in the correct fields, which we check for firsrt. */
@@ -154,7 +153,7 @@ if (!isset($ManufacturerID)) {
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-	echo '<input type="hidden" name="New" value="No">';
+	echo '<input type="hidden" name="New" value="No" />';
 	echo '<table class="selection"><tr>';
 	echo '<th>' . _('ID') . '</th>';
 	echo '<th>' . _('Company Name').'</th>';
@@ -206,7 +205,7 @@ if (!isset($ManufacturerID)) {
 		echo '<td><a href="'.$rootpath . '/Manufacturers.php?ManufacturerID='.$myrow['id'].'">'._('Edit').'</a></td></tr>';
 	}
 	echo '</table><br /><div class="centre">';
-	echo '<br /><input tabindex=3 type="submit" name="Create" value="' . _('Create New Manufacturer') . '">';
+	echo '<br /><input tabindex="3" type="submit" name="Create" value="' . _('Create New Manufacturer') . '" />';
 	echo '</div></form>';
 	include('includes/footer.inc');
 	exit;
@@ -267,27 +266,28 @@ if (isset($_POST['amend']) or isset($_POST['Create'])) {
 	echo '<input type="hidden" name="ManufacturerID" value="'.$ManufacturerID.'" />';
 	echo '<table class="selection">';
 	echo '<input type="hidden" name="New" value="Yes" />';
-	echo '<tr><td>' . _('Manufacturer Name') . ':</td><td><input tabindex=1 type="text" name="ManufacturerName" size=42 maxlength=40 value="'.$_POST['ManufacturerName'].'"></td></tr>';
-	echo '<tr><td>' . _('Address Line 1') . ':</td><td><input tabindex=2 type="text" name="Address1" size=42 maxlength=40 value="'.$_POST['Address1'].'"></td></tr>';
-	echo '<tr><td>' . _('Address Line 2') . ':</td><td><input tabindex=3 type="text" name="Address2" size=42 maxlength=40 value="'.$_POST['Address2'].'"></td></tr>';
-	echo '<tr><td>' . _('Address Line 3') . ':</td><td><input tabindex=4 type="text" name="Address3" size=42 maxlength=40 value="'.$_POST['Address3'].'"></td></tr>';
-	echo '<tr><td>' . _('Address Line 4') . ':</td><td><input tabindex=5 type="text" name="Address4" size=42 maxlength=40 value="'.$_POST['Address4'].'"></td></tr>';
-	echo '<tr><td>' . _('Address Line 5') . ':</td><td><input tabindex=6 type="text" name="Address5" size=42 maxlength=40 value="'.$_POST['Address5'].'"></td></tr>';
-	echo '<tr><td>' . _('Address Line 6') . ':</td><td><input tabindex=7 type="text" name="Address6" size=42 maxlength=40 value="'.$_POST['Address6'].'"></td></tr>';
-	echo '<tr><td>' . _('Contact Name') . ':</td><td><input tabindex=8 type="text" name="ContactName" size=13 maxlength=25 value="'.$_POST['ContactName'].'"></td></tr>';
-	echo '<tr><td>' . _('Telephone') . ':</td><td><input tabindex=9 type="text" name="Telephone" size=13 maxlength=25 value="'.$_POST['Telephone'].'"></td></tr>';
-	echo '<tr><td>' . _('Fax') . ':</td><td><input tabindex=10 type="text" name="Fax" value=0 size=13 maxlength=25 value="'.$_POST['Fax'].'"></td></tr>';
-	echo '<tr><td>' . _('Email') . ':</td><td><input tabindex=11 type="text" name="Email" size=55 maxlength=55 value="'.$_POST['Email'].'"></td></tr>';
-	echo '</form>';
+	echo '<tr><td>' . _('Manufacturer Name') . ':</td><td><input tabindex="1" type="text" name="ManufacturerName" size="42" maxlength="40" value="'.$_POST['ManufacturerName'].'" /></td></tr>';
+	echo '<tr><td>' . _('Address Line 1') . ':</td><td><input tabindex="2" type="text" name="Address1" size="42" maxlength="40" value="'.$_POST['Address1'].'" /></td></tr>';
+	echo '<tr><td>' . _('Address Line 2') . ':</td><td><input tabindex="3" type="text" name="Address2" size="42" maxlength="40" value="'.$_POST['Address2'].'" /></td></tr>';
+	echo '<tr><td>' . _('Address Line 3') . ':</td><td><input tabindex="4" type="text" name="Address3" size="42" maxlength="40" value="'.$_POST['Address3'].'" /></td></tr>';
+	echo '<tr><td>' . _('Address Line 4') . ':</td><td><input tabindex="5" type="text" name="Address4" size="42" maxlength="40" value="'.$_POST['Address4'].'" /></td></tr>';
+	echo '<tr><td>' . _('Address Line 5') . ':</td><td><input tabindex="6" type="text" name="Address5" size="42" maxlength="40" value="'.$_POST['Address5'].'" /></td></tr>';
+	echo '<tr><td>' . _('Address Line 6') . ':</td><td><input tabindex="7" type="text" name="Address6" size="42" maxlength="40" value="'.$_POST['Address6'].'" /></td></tr>';
+	echo '<tr><td>' . _('Contact Name') . ':</td><td><input tabindex="8" type="text" name="ContactName" size="13" maxlength="25" value="'.$_POST['ContactName'].'" /></td></tr>';
+	echo '<tr><td>' . _('Telephone') . ':</td><td><input tabindex="9" type="text" name="Telephone" size="13" maxlength="25" value="'.$_POST['Telephone'].'" /></td></tr>';
+	echo '<tr><td>' . _('Fax') . ':</td><td><input tabindex="10" type="text" name="Fax" size="13" maxlength="25" value="'.$_POST['Fax'].'" /></td></tr>';
+	echo '<tr><td>' . _('Email') . ':</td><td><input tabindex="11" type="text" name="Email" size="55" maxlength="55" value="'.$_POST['Email'].'" /></td></tr>';
 }
 
 
 if (isset($_POST['Create'])) {
-	echo '</table><br /><div class="centre"><input tabindex=12 type="submit" name="submit" value="' . _('Insert New Manufacturer') . '"></div>';
+	echo '</table><br /><div class="centre"><input tabindex="12" type="submit" name="submit" value="' . _('Insert New Manufacturer') . '" /></div>';
+	echo '</form>';
 } else if (isset($_POST['amend'])) {
-	echo '</table><br /><div class="centre"><input tabindex=13 type="submit" name="update" value="' . _('Update Manufacturer') . '"><br />';
+	echo '</table><br /><div class="centre"><input tabindex="13" type="submit" name="update" value="' . _('Update Manufacturer') . '" /><br />';
 	prnMsg ( _('There is no second warning if you hit the delete button below') . '. ' . _('However checks will be made to ensure there are no suppliers are using this manufacturer before the deletion is processed'), 'warn');
-	echo '<br /><input tabindex=14 type="submit" name="delete" value="' . _('Delete Manufacturer') . '" onclick="return confirm("' . _('Are you sure you wish to delete this manufacturer?') . '");"></form></div>';
+	echo '<br /><input tabindex="14" type="submit" name="delete" value="' . _('Delete Manufacturer') . '" onclick="return confirm("' . _('Are you sure you wish to delete this manufacturer?') . '");" /></form></div>';
+	echo '</form>';
 }
 
 

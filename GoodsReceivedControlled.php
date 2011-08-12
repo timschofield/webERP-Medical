@@ -50,7 +50,7 @@ echo '<div class="centre">';
 
 echo '<br /><a href="'.$rootpath.'/GoodsReceived.php">'. _('Back To Purchase Order'). ' # '. $_SESSION['PO']->OrderNo . '</a>';
 
-echo '<br /><font size=2><b>'. _('Receive controlled item'). ' '. $LineItem->StockID  . ' - ' . $LineItem->ItemDescription .
+echo '<br /><font size="2"><b>'. _('Receive controlled item'). ' '. $LineItem->StockID  . ' - ' . $LineItem->ItemDescription .
 	' ' . _('on order') . ' ' . $_SESSION['PO']->OrderNo . ' ' . _('from') . ' ' . $_SESSION['PO']->SupplierName . '</b></font></div>';
 
 /** vars needed by InputSerialItem : **/

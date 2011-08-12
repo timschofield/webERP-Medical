@@ -3,7 +3,7 @@
 /* $Id$*/
 include('includes/session.inc');
 
-If (isset($_POST['PrintPDF'])
+if (isset($_POST['PrintPDF'])
 		AND isset($_POST['FromCriteria'])
 		AND strlen($_POST['FromCriteria'])>=1
 		AND isset($_POST['ToCriteria'])
@@ -260,8 +260,7 @@ If (isset($_POST['PrintPDF'])
 	if (!isset($_POST['FromCriteria']) and !isset($_POST['ToCriteria'])) {
 
 	/*if $FromCriteria is not set then show a form to allow input	*/
-		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="'
-			. _('print') . '" alt="" />' . ' ' . $title.'</p><br />';
+		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('print') . '" alt="" />' . ' ' . $title.'</p><br />';
 
 		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="POST"><table class="selection">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -300,17 +299,17 @@ If (isset($_POST['PrintPDF'])
 			$_POST['MakeStkChkData'] = 'PrintOnly';
 		}
 		if ($_POST['MakeStkChkData'] =='New'){
-			echo '<option selected value="New">' . _('Make new stock check data file') . '</option>';
+			echo '<option selected="True" value="New">' . _('Make new stock check data file') . '</option>';
 		} else {
 			echo '<option value="New">' . _('Make new stock check data file') . '</option>';
 		}
 		if ($_POST['MakeStkChkData'] =='AddUpdate'){
-			echo '<option selected value="AddUpdate">' . _('Add/update existing stock check file') . '</option>';
+			echo '<option selected="True" value="AddUpdate">' . _('Add/update existing stock check file') . '</option>';
 		} else {
 			echo '<option value="AddUpdate">' . _('Add/update existing stock check file') . '</option>';
 		}
 		if ($_POST['MakeStkChkData'] =='PrintOnly'){
-			echo '<option selected value="PrintOnly">' . _('Print Stock Check Sheets Only') . '</option>';
+			echo '<option selected="True" value="PrintOnly">' . _('Print Stock Check Sheets Only') . '</option>';
 		} else {
 			echo '<option value="PrintOnly">' . _('Print Stock Check Sheets Only') . '</option>';
 		}
@@ -319,17 +318,17 @@ If (isset($_POST['PrintPDF'])
 		echo '<tr><td>' . _('Show system quantity on sheets') . ':</td><td>';
 
 		if (isset($_POST['ShowInfo']) and $_POST['ShowInfo'] == false){
-				echo '<input type=checkbox name="ShowInfo" value=FALSE>';
+				echo '<input type="checkbox" name="ShowInfo" value="FALSE" />';
 		} else {
-				echo '<input type=checkbox name="ShowInfo" value=TRUE>';
+				echo '<input type="checkbox" name="ShowInfo" value="TRUE" />';
 		}
 		echo '</td></tr>';
 
 		echo '<tr><td>' . _('Only print items with non zero quantities') . ':</td><td>';
 		if (isset($_POST['NonZerosOnly']) and $_POST['NonZerosOnly'] == false){
-				echo '<input type=checkbox name="NonZerosOnly" value=FALSE>';
+				echo '<input type="checkbox" name="NonZerosOnly" value="FALSE" />';
 		} else {
-				echo '<input type=checkbox name="NonZerosOnly" value=TRUE>';
+				echo '<input type="checkbox" name="NonZerosOnly" value="TRUE" />';
 		}
 
 			echo '</td></tr></table><br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print and Process') . '" /></div></form>';

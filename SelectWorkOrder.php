@@ -104,9 +104,10 @@ if (!isset($StockID)) {
 	if (!isset($_REQUEST['WO']) or ($_REQUEST['WO']=='')){
 		echo '<table class="selection"><tr><td>';
 		if (isset($_REQUEST['SelectedStockItem'])) {
-			echo _('For the item') . ': ' . $_REQUEST['SelectedStockItem'] . ' ' . _('and') . ' <input type="hidden" name="SelectedStockItem" value="' . $_REQUEST['SelectedStockItem'] . '">';
+			echo _('For the item') . ': ' . $_REQUEST['SelectedStockItem'] . ' ' . _('and') .
+			' <input type="hidden" name="SelectedStockItem" value="' . $_REQUEST['SelectedStockItem'] . '" />';
 		}
-		echo _('Work Order number') . ': <input type="text" name="WO" maxlength="8" size="9">&nbsp ' . _('Processing at') . ':<select name="StockLocation"> ';
+		echo _('Work Order number') . ': <input type="text" name="WO" maxlength="8" size="9" />&nbsp ' . _('Processing at') . ':<select name="StockLocation"> ';
 
 		$sql = "SELECT loccode, locationname FROM locations";
 
@@ -115,14 +116,14 @@ if (!isset($StockID)) {
 		while ($myrow=DB_fetch_array($resultStkLocs)){
 			if (isset($_POST['StockLocation'])){
 				if ($myrow['loccode'] == $_POST['StockLocation']){
-					 echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+					 echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 				} else {
-					 echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+					 echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 				}
 			} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
-				 echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+				 echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			} else {
-				 echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+				 echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			}
 		}
 
@@ -134,11 +135,11 @@ if (!isset($StockID)) {
 		}
 
 		if ($_POST['ClosedOrOpen']=='Closed_Only'){
-			echo '<option selected value="Closed_Only">' . _('Closed Work Orders Only') . '</option>';
+			echo '<option selected="True" value="Closed_Only">' . _('Closed Work Orders Only') . '</option>';
 			echo '<option value="Open_Only">' . _('Open Work Orders Only') . '</option>';
 		} else {
 			echo '<option value="Closed_Only">' . _('Closed Work Orders Only') . '</option>';
-			echo '<option selected value="Open_Only">' . _('Open Work Orders Only') . '</option>';
+			echo '<option selected="True" value="Open_Only">' . _('Open Work Orders Only') . '</option>';
 		}
 
 		echo '</select> &nbsp&nbsp';
@@ -167,7 +168,7 @@ if (!isset($StockID)) {
 
 	  echo '</select>
 				<td><font size="1">' . _('Enter text extract(s) in the description') . ':</font></td>
-				<td><input type="text" name="Keywords" size="20" maxlength="25"></td>
+				<td><input type="text" name="Keywords" size="20" maxlength="25" /></td>
 			</tr>
 			<tr>
 				<td></td>
@@ -175,8 +176,8 @@ if (!isset($StockID)) {
 				<td><input type="text" name="StockCode" size="15" maxlength="18" /></td>
 			</tr>
 		</table><br />';
-	echo '<div class="centre"><input type="submit" name="SearchParts" value="' . _('Search Items Now') . '">
-		<input type="submit" name="ResetPart" value="' . _('Show All') . '"></div>';
+	echo '<div class="centre"><input type="submit" name="SearchParts" value="' . _('Search Items Now') . '" />
+		<input type="submit" name="ResetPart" value="' . _('Show All') . '" /></div>';
 }
 
 if (isset($StockItemsResult)) {

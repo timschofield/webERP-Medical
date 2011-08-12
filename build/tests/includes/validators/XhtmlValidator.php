@@ -1,4 +1,4 @@
-|<?php
+<?php
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 // +----------------------------------------------------------------------+
 // | Akelos Framework - http://www.akelos.org                             |
@@ -839,7 +839,7 @@ class XhtmlValidator
 
     function validateAttribute($tag, $attribute, $value = null)
     {
-        if (isset($this->_tags[$tag]['attributes'][$attribute]) && (strlen($value) > 0)) {
+        if (isset($this->_tags[$tag]['attributes'][$attribute]) && (mb_strlen($value) > 0)) {
             if (!preg_match($this->_tags[$tag]['attributes'][$attribute], $value)) {
                 $this->addError($this->translate("Invalid value on &lt;%tag %attribute=\"%value\"... Valid values must match the pattern \"%pattern\"", array(
                 '%tag' => $tag,
@@ -854,7 +854,7 @@ class XhtmlValidator
                 ));
             }
         }
-        if (isset($this->_tags[$tag]['required']) && in_array($attribute, $this->_tags[$tag]['required']) && (strlen($value) == 0)) {
+        if (isset($this->_tags[$tag]['required']) && in_array($attribute, $this->_tags[$tag]['required']) && (mb_strlen($value) == 0)) {
             $this->addError($this->translate("Missing required attribute %attribute on &lt;%tag&gt;", array(
             '%tag' => $tag,
             '%attribute' => $attribute
@@ -1069,11 +1069,11 @@ class XhtmlValidator
 
     function removeDoctypeHeader($xhtml)
     {
-        if (substr($xhtml, 0, 9) == '<!DOCTYPE') {
-            $replacement = substr($xhtml, 0, strpos($xhtml, '>'));
-            $this->_startLine = count(substr_count($replacement, "\n"));
+        if (mb_substr($xhtml, 0, 9) == '<!DOCTYPE') {
+            $replacement = mb_substr($xhtml, 0, mb_strpos($xhtml, '>'));
+            $this->_startLine = count(mb_substr_count($replacement, "\n"));
         }
-        return (isset($replacement)) ? substr($xhtml, strlen($replacement)) : $xhtml;
+        return (isset($replacement)) ? mb_substr($xhtml, mb_strlen($replacement)) : $xhtml;
     }
 
     function removeCdata($xhtml)
@@ -1472,7 +1472,7 @@ class XhtmlValidator
         $hex = '';
         foreach (count($rgb) == 1 ? $rgb[0] : $rgb as $color){
             $color = dechex($color);
-            $hex .= strlen($color) == 2 ? $color : $color.$color;
+            $hex .= mb_strlen($color) == 2 ? $color : $color.$color;
         }
         return $hex;
     }
@@ -1480,7 +1480,7 @@ class XhtmlValidator
     function hexToRgb($hex_color)
     {
         $hex_color = strtolower(trim($hex_color,'#;&Hh'));
-        return array_map('hexdec',explode('.',wordwrap($hex_color, ceil(strlen($hex_color)/3),'.',1)));
+        return array_map('hexdec',explode('.',wordwrap($hex_color, ceil(mb_strlen($hex_color)/3),'.',1)));
     }
 
     function getOpositeHex($hex_color)

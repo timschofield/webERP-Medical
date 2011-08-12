@@ -183,7 +183,7 @@ if (isset($_POST['PrintPDF'])) {
 
 			// Parameters for addTextWrap are defined in /includes/class.pdf.php
 			// 1) X position 2) Y position 3) Width
-			// 4) Height 5) Text 6) Alignment 7) Border 8) Fill - True to use SetFillColor
+			// 4) Height 5) text 6) Alignment 7) Border 8) Fill - True to use SetFillColor
 			// and False to set to transparent
 			$FormatedSupDueDate = ConvertSQLDate($myrow['duedate']);
 			$FormatedSupMRPDate = ConvertSQLDate($myrow['mrpdate']);
@@ -261,23 +261,22 @@ if (isset($_POST['PrintPDF'])) {
 
 	$title=_('MRP Planned Purchase Orders Reporting');
 	include('includes/header.inc');
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' .
-		_('Inventory') . '" alt="" />' . ' ' . $title . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') . '" alt="" />' . ' ' . $title . '</p>';
 
 	echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<tr><td>' . _('Consolidation') . ':</td><td><select name="Consolidation">';
-	echo '<option selected value="None">' . _('None') . '</option>';
+	echo '<option selected="True" value="None">' . _('None') . '</option>';
 	echo '<option value="Weekly">' . _('Weekly') . '</option>';
 	echo '<option value="Monthly">' . _('Monthly') . '</option>';
 	echo '</select></td></tr>';
 	echo '<tr><td>' . _('Print Option') . ':</td><td><select name="Fill">';
-	echo '<option selected value="yes">' . _('Print With Alternating Highlighted Lines') . '</option>';
+	echo '<option selected="True" value="yes">' . _('Print With Alternating Highlighted Lines') . '</option>';
 	echo '<option value="no">' . _('Plain Print') . '</option>';
 	echo '</select></td></tr>';
-	echo '<tr><td>' . _('Cut Off Date') . ':</td><td><input type ="text" class="date" alt="'.$_SESSION['DefaultDateFormat'] .
-			'" name="cutoffdate" size="10" value="'.date($_SESSION['DefaultDateFormat']).'"></td></tr>';
-	echo '</table><br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '"></div></form>';
+	echo '<tr><td>' . _('Cut Off Date') . ':</td>
+			<td><input type ="text" class="date" alt="'.$_SESSION['DefaultDateFormat'] . '" name="cutoffdate" size="10" value="'.date($_SESSION['DefaultDateFormat']).'" /></td></tr>';
+	echo '</table><br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div></form>';
 
 	include('includes/footer.inc');
 

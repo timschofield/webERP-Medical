@@ -136,17 +136,16 @@ if (isset($_SESSION['SupplierID'])) {
 		$myrow = DB_fetch_row($SupplierNameResult);
 		$SupplierName = $myrow[0];
 	}
-	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/supplier.png" title="' .
-				_('Supplier') . '" alt="" />' . ' ' . _('Supplier') . ' : <b>' . $_SESSION['SupplierID'] .
-				" - $SupplierName</b> " . _('has been selected') . '.</p>';
+	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/supplier.png" title="' . _('Supplier') . '" alt="" />' . ' ' . _('Supplier') . ' : <b>' . $_SESSION['SupplierID'] .
+				' - ' . $SupplierName . '</b> ' . _('has been selected') . '.</p>';
 	echo '<div class="page_help_text">' . _('Select a menu option to operate using this supplier.') . '</div>';
-	echo '<br /><table width=90% colspan=2 cellpadding=4>';
+	echo '<br /><table width=90% colspan="2" cellpadding="4">';
 	echo '<tr>
-		<th width=33%>' . _('Supplier Inquiries') . '</th>
-		<th width=33%>' . _('Supplier Transactions') . '</th>
-		<th width=33%>' . _('Supplier Maintenance') . '</th>
+		<th width="33%">' . _('Supplier Inquiries') . '</th>
+		<th width="33%">' . _('Supplier Transactions') . '</th>
+		<th width="33%">' . _('Supplier Maintenance') . '</th>
 	</tr>';
-	echo '<tr><td valign=top class="select">'; /* Inquiry Options */
+	echo '<tr><td valign="top" class="select">'; /* Inquiry Options */
 	echo '<a href="' . $rootpath . '/SupplierInquiry.php?SupplierID=' . $_SESSION['SupplierID'] . '">' . _('Supplier Account Inquiry') . '</a><br />';
 	echo '<br />';
 	echo '<br /><a href="'.$rootpath.'/PO_SelectOSPurchOrder.php?SelectedSupplier=' . $_SESSION['SupplierID'] . '">' . _('Add / Receive / View Outstanding Purchase Orders') . '</a>';
@@ -173,11 +172,11 @@ if (isset($_SESSION['SupplierID'])) {
 } else {
 	// Supplier is not selected yet
 	echo '<br />';
-	echo '<table width=90% colspan=2 cellpadding=4>';
+	echo '<table width="90%" colspan="2" cellpadding="4">';
 	echo '<tr>
-		<th width=33%>' . _('Supplier Inquiries') . '</th>
-		<th width=33%>' . _('Supplier Transactions') . '</th>
-		<th width=33%>' . _('Supplier Maintenance') . '</th>
+		<th width="33%">' . _('Supplier Inquiries') . '</th>
+		<th width="33%">' . _('Supplier Transactions') . '</th>
+		<th width="33%">' . _('Supplier Maintenance') . '</th>
 		</tr>';
 	echo '<tr><td valign=top class="select">'; /* Inquiry Options */
 	echo '</td><td valign=top class="select">'; /* Supplier Transactions */
@@ -187,21 +186,20 @@ if (isset($_SESSION['SupplierID'])) {
 }
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') .
-		'" alt="" />' . ' ' . _('Search for Suppliers') . '</p>
-		<table cellpadding=3 colspan=4 class="selection"><tr><td>' . _('Enter a partial Name') . ':</font></td><td>';
+echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') .  '" alt="" />' . ' ' . _('Search for Suppliers') . '</p>
+		<table cellpadding="3" colspan="4" class="selection"><tr><td>' . _('Enter a partial Name') . ':</font></td><td>';
 if (isset($_POST['Keywords'])) {
-	echo '<input type="Text" name="Keywords" value="' . $_POST['Keywords'] . '" size=20 maxlength=25>';
+	echo '<input type="text" name="Keywords" value="' . $_POST['Keywords'] . '" size="20" maxlength="25" />';
 } else {
-	echo '<input type="Text" name="Keywords" size=20 maxlength=25>';
+	echo '<input type="text" name="Keywords" size="20" maxlength="25" />';
 }
 echo '</td><td><b>' . _('OR') . '</b></font></td><td>' . _('Enter a partial Code') . ':</font></td><td>';
 if (isset($_POST['SupplierCode'])) {
-	echo '<input type="Text" name="SupplierCode" value="' . $_POST['SupplierCode'] . '" size=15 maxlength=18>';
+	echo '<input type="text" name="SupplierCode" value="' . $_POST['SupplierCode'] . '" size="15" maxlength="18" />';
 } else {
-	echo '<input type="Text" name="SupplierCode" size=15 maxlength=18>';
+	echo '<input type="text" name="SupplierCode" size="15" maxlength="18" />';
 }
-echo '</td></tr></table><br /><div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '"></div>';
+echo '</td></tr></table><br /><div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" /></div>';
 //if (isset($result) AND !isset($SingleSupplierReturned)) {
 if (isset($_POST['Search'])) {
 	$ListCount = DB_num_rows($result);
@@ -236,7 +234,7 @@ if (isset($_POST['Search'])) {
 	}
 	echo '<input type="hidden" name="Search" value="' . _('Search Now') . '" />';
 	echo '<br /><br />';
-	echo '<br /><table cellpadding=2 colspan=7>';
+	echo '<br /><table cellpadding="2" colspan="7">';
 	$tableheader = '<tr>
   		<th>' . _('Code') . '</th>
 		<th>' . _('Supplier Name') . '</th>
@@ -303,10 +301,10 @@ if (isset($_SESSION['SupplierID']) and $_SESSION['SupplierID'] != '') {
 			echo '<div class="centre">' . _('Mapping is enabled, but no Mapping data to display for this Supplier.') . '</div>';
 		} else {
 			echo '<div class="centre"><br />';
-			echo '<tr><td colspan=2>';
-			echo '<table width=45% colspan=2 border=2 cellpadding=4>';
-			echo '<tr><th width=33%>' . _('Supplier Mapping') . '</th></tr>';
-			echo '</td><td valign=top>'; /* Mapping */
+			echo '<tr><td colspan="2">';
+			echo '<table width="45%" colspan="2" border="2" cellpadding="4">';
+			echo '<tr><th width="33%">' . _('Supplier Mapping') . '</th></tr>';
+			echo '</td><td valign="top">'; /* Mapping */
 			echo '<div class="centre">' . _('Mapping is enabled, Map will display below.') . '</div>';
 			echo '<div class="centre" id="map" style="width: ' . $map_width . 'px; height: ' . $map_height . 'px"></div></div><br />';
 			echo '</th></tr></table>';
@@ -329,19 +327,28 @@ if (isset($_SESSION['SupplierID']) and $_SESSION['SupplierID'] != '') {
 			$Total1Result = DB_query($SQL, $db);
 			$row = DB_fetch_array($Total1Result);
 			echo '<br />';
-			echo '<tr><td colspan=2>';
-			echo '<table width=45% colspan=2 cellpadding=4>';
-			echo '<tr><th width=33% colspan=2>' . _('Supplier Data') . '</th></tr>';
-			echo '<tr><td valign=top class=select>'; /* Supplier Data */
+			echo '<tr><td colspan="2">';
+			echo '<table width="45%" colspan="2" cellpadding="4">';
+			echo '<tr><th width="33%" colspan="2">' . _('Supplier Data') . '</th></tr>';
+			echo '<tr><td valign="top" class="select">'; /* Supplier Data */
 			//echo "Distance to this Supplier: <b>TBA</b><br />";
 			if ($myrow['lastpaiddate'] == 0) {
 				echo _('No payments yet to this supplier.') . '</td><td valign=top class=select></td></tr>';
 			} else {
-				echo _('Last Paid:') . '</td><td valign=top class=select> <b>' . ConvertSQLDate($myrow['lastpaiddate']) . '</b></td></tr>';
+				echo _('Last Paid:') . '</td><td valign="top" class="select"> <b>' . ConvertSQLDate($myrow['lastpaiddate']) . '</b></td></tr>';
 			}
-			echo '<tr><td valign=top class=select>'._('Last Paid Amount:') . '</td><td valign=top class=select>  <b>' . number_format($myrow['lastpaid'], 2) . '</b></td></tr>';
-			echo '<tr><td valign=top class=select>'._('Supplier since:') . '</td><td valign=top class=select> <b>' . ConvertSQLDate($myrow['suppliersince']) . '</b></td></tr>';
-			echo '<tr><td valign=top class=select>'._('Total Spend with this Supplier:') . '</td><td valign=top class=select> <b>' . number_format($row['total'], 2) . '</b></td></tr>';
+			echo '<tr>
+					<td valign="top" class="select">'._('Last Paid Amount:') . '</td>
+					<td valign="top" class="select">  <b>' . number_format($myrow['lastpaid'], 2) . '</b></td>
+				</tr>';
+			echo '<tr>
+					<td valign="top" class="select">'._('Supplier since:') . '</td>
+					<td valign="top" class="select"> <b>' . ConvertSQLDate($myrow['suppliersince']) . '</b></td>
+				</tr>';
+			echo '<tr>
+					<td valign="top" class="select">'._('Total Spend with this Supplier:') . '</td>
+					<td valign="top" class="select"> <b>' . number_format($row['total'], 2) . '</b></td>
+				</tr>';
 			echo '</th></tr></table>';
 		}
 	}

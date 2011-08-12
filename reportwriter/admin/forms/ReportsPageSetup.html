@@ -1,13 +1,13 @@
 <h2 align="center"><?php echo $FormParams['heading'].$myrow['reportname'].' - '.RPT_BTN_PGSETUP; ?></h2>
 <form name="RptPageSetup" method="post" action="ReportCreator.php?action=step4">
 	<input type="hidden" name="FormID" value="<?php echo $_SESSION['FormID']; ?>" />
-	<input name="ReportID" type="hidden" value="<?php echo $ReportID; ?>">
-	<input name="Type" type="hidden" value="<?php echo $Type; ?>">
+	<input name="ReportID" type="hidden" value="<?php echo $ReportID; ?>" />
+	<input name="Type" type="hidden" value="<?php echo $Type; ?>" />
   <table align="center" width="550" border="0" cellspacing="0" cellpadding="0">
     <tr>
-		<td width="33%"><input name="todo" type="submit" value="<?php echo RPT_BTN_BACK; ?>"></td>
-		<td width="34%"><div align="center"><input name="todo" type="submit" value="<?php echo RPT_BTN_UPDATE; ?>"></div></td>
-		<td width="33%"><div align="right"><input name="todo" type="submit" value="<?php echo RPT_BTN_CONT; ?>"></div></td>
+		<td width="33%"><input name="todo" type="submit" value="<?php echo RPT_BTN_BACK; ?>" /></td>
+		<td width="34%"><div align="center"><input name="todo" type="submit" value="<?php echo RPT_BTN_UPDATE; ?>" /></div></td>
+		<td width="33%"><div align="right"><input name="todo" type="submit" value="<?php echo RPT_BTN_CONT; ?>" /></div></td>
     </tr>
   </table>
   <table align="center" width="550" border="2" cellspacing="1" cellpadding="1">
@@ -24,25 +24,25 @@
         </select></td>
       <td colspan="2" width="50%"><?php echo RPT_ORIEN; ?>
 		<?php if ($myrow['paperorientation']=='P') $selected = ' checked'; else  $selected = ''; ?>
-        <label><input name="PaperOrientation" type="radio" value="P"<?php echo $selected ?>><?php echo RPT_PORTRAIT; ?></label>
+        <label><input name="PaperOrientation" type="radio" value="P"<?php echo $selected ?> /><?php echo RPT_PORTRAIT; ?></label>
 		<?php if ($myrow['paperorientation']=='L') $selected = ' checked'; else  $selected = ''; ?>
-        <label><input name="PaperOrientation" type="radio" value="L"<?php echo $selected ?>><?php echo RPT_LANDSCAPE; ?></label></td>
+        <label><input name="PaperOrientation" type="radio" value="L"<?php echo $selected ?> /><?php echo RPT_LANDSCAPE; ?></label></td>
     </tr>
     <tr bgcolor="#CCCCCC">
       <td colspan="6"><div align="center"><?php echo RPT_PGMARGIN; ?></div></td>
     </tr>
     <tr>
       <td><div align="center"><?php echo RPT_TOP; ?>
-          <input name="MarginTop" type="text" value="<?php echo $myrow['margintop']; ?>" size="5" maxlength="3">
+          <input name="MarginTop" type="text" value="<?php echo $myrow['margintop']; ?>" size="5" maxlength="3" />
           <?php echo RPT_MM; ?></div></td>
       <td><div align="center"><?php echo RPT_BOTTOM; ?>
-          <input name="MarginBottom" type="text" value="<?php echo $myrow['marginbottom']; ?>" size="5" maxlength="3">
+          <input name="MarginBottom" type="text" value="<?php echo $myrow['marginbottom']; ?>" size="5" maxlength="3" />
           <?php echo RPT_MM; ?></div></td>
       <td><div align="center"><?php echo RPT_LEFT; ?>
-          <input name="MarginLeft" type="text" value="<?php echo $myrow['marginleft']; ?>" size="5" maxlength="3">
+          <input name="MarginLeft" type="text" value="<?php echo $myrow['marginleft']; ?>" size="5" maxlength="3" />
           <?php echo RPT_MM; ?></div></td>
       <td><div align="center"><?php echo RPT_RIGHT; ?>
-          <input name="MarginRight" type="text" value="<?php echo $myrow['marginright']; ?>" size="5" maxlength="3">
+          <input name="MarginRight" type="text" value="<?php echo $myrow['marginright']; ?>" size="5" maxlength="3" />
           <?php echo RPT_MM; ?></div></td>
     </tr>
   </table>
@@ -63,7 +63,7 @@
     <tr>
       <td colspan="3"><?php echo RPT_PGCOYNM; ?></td>
       <td><?php if ($myrow['coynameshow']=='1') $selected = ' checked'; else  $selected = ''; ?>
-		<input name="CoyNameShow" type="checkbox" id="CoyNameShow" value="1"<?php echo $selected ?>></td>
+		<input name="CoyNameShow" type="checkbox" id="CoyNameShow" value="1"<?php echo $selected ?> /></td>
       <td><select name="CoyNameFont" id="CoyNameFont">
 		<?php foreach($Fonts as $key => $value) {
 			if ($myrow['coynamefont']==$key) $selected = ' selected'; else  $selected = '';
@@ -88,9 +88,9 @@
     </tr>
     <tr>
       <td colspan="3"><?php echo RPT_PGTITL1; ?>
-        <input name="Title1Desc" type="text" id="Title1Desc" value="<?php echo $myrow['title1desc']; ?>" size="30" maxlength="50"></td>
+        <input name="Title1Desc" type="text" id="Title1Desc" value="<?php echo $myrow['title1desc']; ?>" size="30" maxlength="50" /></td>
       <td><?php if ($myrow['title1show']=='1') $selected = ' checked'; else  $selected = ''; ?>
-        <input name="Title1Show" type="checkbox" id="Title1Show" value="1"<?php echo $selected ?>></td>
+        <input name="Title1Show" type="checkbox" id="Title1Show" value="1"<?php echo $selected ?> /></td>
       <td><select name="Title1Font" id="Title1Font">
 		<?php foreach($Fonts as $key => $value) {
 			if ($myrow['title1font']==$key) $selected = ' selected'; else  $selected = '';
@@ -114,9 +114,9 @@
     </tr>
     <tr>
       <td colspan="3"><?php echo RPT_PGTITL2; ?>
-      <input name="Title2Desc" type="text" id="Title2Desc" value="<?php echo $myrow['title2desc']; ?>" size="30" maxlength="50"></td>
+      <input name="Title2Desc" type="text" id="Title2Desc" value="<?php echo $myrow['title2desc']; ?>" size="30" maxlength="50" /></td>
       <td><?php if ($myrow['title2show']=='1') $selected = ' checked'; else  $selected = ''; ?>
-        <input name="Title2Show" type="checkbox" id="Title2Show" value="1"<?php echo $selected ?>></td>
+        <input name="Title2Show" type="checkbox" id="Title2Show" value="1"<?php echo $selected ?> /></td>
       <td><select name="Title2Font" id="Title2Font">
 		<?php foreach($Fonts as $key => $value) {
 			if ($myrow['title2font']==$key) $selected = ' selected'; else  $selected = '';
@@ -237,45 +237,45 @@
     </tr>
     <tr>
       <td><div align="center">
-        <input name="Col1Width" type="text" value="<?php echo $myrow['col1width']; ?>" size="5" maxlength="3"></div></td>
+        <input name="Col1Width" type="text" value="<?php echo $myrow['col1width']; ?>" size="5" maxlength="3" /></div></td>
       <td><div align="center">
-        <input name="Col2Width" type="text" value="<?php echo $myrow['col2width']; ?>" size="5" maxlength="3"></div></td>
+        <input name="Col2Width" type="text" value="<?php echo $myrow['col2width']; ?>" size="5" maxlength="3" /></div></td>
       <td><div align="center">
-        <input name="Col3Width" type="text" value="<?php echo $myrow['col3width']; ?>" size="5" maxlength="3"></div></td>
+        <input name="Col3Width" type="text" value="<?php echo $myrow['col3width']; ?>" size="5" maxlength="3" /></div></td>
       <td><div align="center">
-        <input name="Col4Width" type="text" value="<?php echo $myrow['col4width']; ?>" size="5" maxlength="3"></div></td>
+        <input name="Col4Width" type="text" value="<?php echo $myrow['col4width']; ?>" size="5" maxlength="3" /></div></td>
       <td><div align="center">
-        <input name="Col5Width" type="text" value="<?php echo $myrow['col5width']; ?>" size="5" maxlength="3"></div></td>
+        <input name="Col5Width" type="text" value="<?php echo $myrow['col5width']; ?>" size="5" maxlength="3" /></div></td>
       <td><div align="center">
-        <input name="Col6Width" type="text" value="<?php echo $myrow['col6width']; ?>" size="5" maxlength="3"></div></td>
+        <input name="Col6Width" type="text" value="<?php echo $myrow['col6width']; ?>" size="5" maxlength="3" /></div></td>
       <td><div align="center">
-        <input name="Col7Width" type="text" value="<?php echo $myrow['col7width']; ?>" size="5" maxlength="3"></div></td>
+        <input name="Col7Width" type="text" value="<?php echo $myrow['col7width']; ?>" size="5" maxlength="3" /></div></td>
       <td><div align="center">
-        <input name="Col8Width" type="text" value="<?php echo $myrow['col8width']; ?>" size="5" maxlength="3"></div></td>
+        <input name="Col8Width" type="text" value="<?php echo $myrow['col8width']; ?>" size="5" maxlength="3" /></div></td>
       <td><div align="center">
-        <input name="Col9Width" type="text" value="<?php echo $myrow['col9width']; ?>" size="5" maxlength="3"></div></td>
+        <input name="Col9Width" type="text" value="<?php echo $myrow['col9width']; ?>" size="5" maxlength="3" /></div></td>
       <td><div align="center">
-        <input name="Col10Width" type="text" value="<?php echo $myrow['col10width']; ?>" size="5" maxlength="3"></div></td>
+        <input name="Col10Width" type="text" value="<?php echo $myrow['col10width']; ?>" size="5" maxlength="3" /></div></td>
       <td><div align="center">
-        <input name="Col11Width" type="text" value="<?php echo $myrow['col11width']; ?>" size="5" maxlength="3"></div></td>
+        <input name="Col11Width" type="text" value="<?php echo $myrow['col11width']; ?>" size="5" maxlength="3" /></div></td>
       <td><div align="center">
-        <input name="Col12Width" type="text" value="<?php echo $myrow['col12width']; ?>" size="5" maxlength="3"></div></td>
+        <input name="Col12Width" type="text" value="<?php echo $myrow['col12width']; ?>" size="5" maxlength="3" /></div></td>
       <td><div align="center">
-        <input name="Col13Width" type="text" value="<?php echo $myrow['col13width']; ?>" size="5" maxlength="3"></div></td>
+        <input name="Col13Width" type="text" value="<?php echo $myrow['col13width']; ?>" size="5" maxlength="3" /></div></td>
       <td><div align="center">
-        <input name="Col14Width" type="text" value="<?php echo $myrow['col14width']; ?>" size="5" maxlength="3"></div></td>
+        <input name="Col14Width" type="text" value="<?php echo $myrow['col14width']; ?>" size="5" maxlength="3" /></div></td>
       <td><div align="center">
-        <input name="Col15Width" type="text" value="<?php echo $myrow['col15width']; ?>" size="5" maxlength="3"></div></td>
+        <input name="Col15Width" type="text" value="<?php echo $myrow['col15width']; ?>" size="5" maxlength="3" /></div></td>
       <td><div align="center">
-        <input name="Col16Width" type="text" value="<?php echo $myrow['col16width']; ?>" size="5" maxlength="3"></div></td>
+        <input name="Col16Width" type="text" value="<?php echo $myrow['col16width']; ?>" size="5" maxlength="3" /></div></td>
       <td><div align="center">
-        <input name="Col17Width" type="text" value="<?php echo $myrow['col17width']; ?>" size="5" maxlength="3"></div></td>
+        <input name="Col17Width" type="text" value="<?php echo $myrow['col17width']; ?>" size="5" maxlength="3" /></div></td>
       <td><div align="center">
-        <input name="Col18Width" type="text" value="<?php echo $myrow['col18width']; ?>" size="5" maxlength="3"></div></td>
+        <input name="Col18Width" type="text" value="<?php echo $myrow['col18width']; ?>" size="5" maxlength="3" /></div></td>
       <td><div align="center">
-        <input name="Col19Width" type="text" value="<?php echo $myrow['col19width']; ?>" size="5" maxlength="3"></div></td>
+        <input name="Col19Width" type="text" value="<?php echo $myrow['col19width']; ?>" size="5" maxlength="3" /></div></td>
       <td><div align="center">
-        <input name="Col20Width" type="text" value="<?php echo $myrow['col20width']; ?>" size="5" maxlength="3"></div></td>
+        <input name="Col20Width" type="text" value="<?php echo $myrow['col20width']; ?>" size="5" maxlength="3" /></div></td>
     </tr>
   </table>
   <?php } // end if ($Type<>'frm') ?>

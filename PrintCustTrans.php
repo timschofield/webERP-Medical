@@ -393,30 +393,31 @@ if (($InvOrCredit == 'Invoice' or $InvOrCredit == 'Credit') and isset($PrintPDF)
 		/* if FromTransNo is not set then show a form to allow input of either a single invoice number or a range of invoices to be printed. Also get the last invoice number created to show the user where the current range is up to */
 		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post"><table class="selection">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-		echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/printer.png" title="' .
-			_('Print') . '" alt="" />' . ' ' . _('Print Invoices or Credit Notes (Landscape Mode)') . '</p>';
+		echo '<p class="page_title_text">
+				<img src="' . $rootpath . '/css/' . $theme . '/images/printer.png" title="' . _('Print') . '" alt="" />' .
+					' ' . _('Print Invoices or Credit Notes (Landscape Mode)') . '</p>';
 		echo '<tr><td>' . _('Print Invoices or Credit Notes') . '</td><td><select name="InvOrCredit">';
 		if ($InvOrCredit == 'Invoice' OR !isset($InvOrCredit)) {
-			echo '<option selected value="Invoice">' . _('Invoices') . '</option>';
+			echo '<option selected="True" value="Invoice">' . _('Invoices') . '</option>';
 			echo '<option value="Credit">' . _('Credit Notes') . '</option>';
 		} else {
-			echo '<option selected value="Credit">' . _('Credit Notes') . '</option>';
+			echo '<option selected="True" value="Credit">' . _('Credit Notes') . '</option>';
 			echo '<option value="Invoice">' . _('Invoices') . '</option>';
 		}
 		echo '</select></td></tr>';
 		echo '<tr><td>' . _('Print EDI Transactions') . '</td><td><select name=PrintEDI>';
 		if ($InvOrCredit == 'Invoice' OR !isset($InvOrCredit)) {
-			echo '<option selected value="No">' . _('Do not Print PDF EDI Transactions') . '</option>';
+			echo '<option selected="True" value="No">' . _('Do not Print PDF EDI Transactions') . '</option>';
 			echo '<option value="Yes">' . _('Print PDF EDI Transactions Too') . '</option>';
 		} else {
 			echo '<option value="No">' . _('Do not Print PDF EDI Transactions') . '</option>';
-			echo '<option selected value="Yes">' . _('Print PDF EDI Transactions Too') . '</option>';
+			echo '<option selected="True" value="Yes">' . _('Print PDF EDI Transactions Too') . '</option>';
 		}
 		echo '</select></td></tr>';
-		echo '<tr><td>' . _('Start invoice/credit note number to print') . '</td><td><input type="text" class="number" max=6 size=7 name=FromTransNo></td></tr>';
-		echo '<tr><td>' . _('End invoice/credit note number to print') . '</td><td><input type="text" class="number" max=6 size=7 name="ToTransNo"></td></tr></table>';
-		echo '<br /><div class="centre"><input type="submit" name="Print" value="' . _('Print') . '"><br />';
-		echo '<input type="submit" name="PrintPDF" value="' . _('Print PDF') . '"></div>';
+		echo '<tr><td>' . _('Start invoice/credit note number to print') . '</td><td><input type="text" class="number" maxlength="6" size="7" name="FromTransNo" /></td></tr>';
+		echo '<tr><td>' . _('End invoice/credit note number to print') . '</td><td><input type="text" class="number" maxlength="6" size="7" name="ToTransNo" /></td></tr></table>';
+		echo '<br /><div class="centre"><input type="submit" name="Print" value="' . _('Print') . '" /><br />';
+		echo '<input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
 		$sql = "SELECT typeno FROM systypes WHERE typeid=10";
 		$result = DB_query($sql, $db);
 		$myrow = DB_fetch_row($result);
@@ -541,7 +542,7 @@ if (($InvOrCredit == 'Invoice' or $InvOrCredit == 'Credit') and isset($PrintPDF)
 				}
 				$ExchRate = $myrow['rate'];
 				$PageNumber = 1;
-				echo '<table class="table1"><tr><td valign="top" width="10%"><img src="' . $_SESSION['LogoFile'] . '"></td><td bgcolor="#BBBBBB"><b>';
+				echo '<table class="table1"><tr><td valign="top" width="10%"><img src="' . $_SESSION['LogoFile'] . '" /></td><td bgcolor="#BBBBBB"><b>';
 				if ($InvOrCredit == 'Invoice') {
 					echo '<font size="4">' . _('TAX INVOICE') . ' ';
 				} else {
@@ -549,7 +550,7 @@ if (($InvOrCredit == 'Invoice' or $InvOrCredit == 'Credit') and isset($PrintPDF)
 				}
 				echo '</b>' . _('Number') . ' ' . $FromTransNo . '</font><br /><font size="1">' . _('Tax Authority Ref') . '. ' . $_SESSION['CompanyRecord']['gstno'] . '</td></tr></table>';
 				/* Now print out the logo and company name and address */
-				echo '<table class="table1"><tr><td><font size=4 color="#333333"><b>' . $_SESSION['CompanyRecord']['coyname'] . '</b></font><br />';
+				echo '<table class="table1"><tr><td><font size="4" color="#333333"><b>' . $_SESSION['CompanyRecord']['coyname'] . '</b></font><br />';
 				echo $_SESSION['CompanyRecord']['regoffice1'] . '<br />';
 				echo $_SESSION['CompanyRecord']['regoffice2'] . '<br />';
 				echo $_SESSION['CompanyRecord']['regoffice3'] . '<br />';
@@ -707,13 +708,13 @@ if (($InvOrCredit == 'Invoice' or $InvOrCredit == 'Credit') and isset($PrintPDF)
 						if ($LineCounter == ($_SESSION['PageLength'] - 2)) {
 							/* head up a new invoice/credit note page */
 							$PageNumber++;
-							echo '</table><table class="table1"><tr><td valign="top"><img src="' . $_SESSION['LogoFile'] . '"></td><td bgcolor="#BBBBBB"><b>';
+							echo '</table><table class="table1"><tr><td valign="top"><img src="' . $_SESSION['LogoFile'] . '" /></td><td bgcolor="#BBBBBB"><b>';
 							if ($InvOrCredit == 'Invoice') {
 								echo '<font size="4">' . _('TAX INVOICE') . ' ';
 							} else {
 								echo '<font color="red" size="4">' . _('TAX CREDIT NOTE') . ' ';
 							}
-							echo '</b>' . _('Number') . ' ' . $FromTransNo . '</font><br /><font size=1>' . _('GST Number') . ' - ' . $_SESSION['CompanyRecord']['gstno'] . '</td></tr></table>';
+							echo '</b>' . _('Number') . ' ' . $FromTransNo . '</font><br /><font size="1">' . _('GST Number') . ' - ' . $_SESSION['CompanyRecord']['gstno'] . '</td></tr></table>';
 							/*Now print out company name and address */
 							echo '<table class="table1"><tr>
 						    	<td><font size="4" color="#333333"><b>' . $_SESSION['CompanyRecord']['coyname'] . '</b></font><br />';
@@ -748,13 +749,13 @@ if (($InvOrCredit == 'Invoice' or $InvOrCredit == 'Credit') and isset($PrintPDF)
 				if ($LineCounter >= ($_SESSION['PageLength'] - 8 - $LinesRequiredForText)) {
 					/* head up a new invoice/credit note page */
 					$PageNumber++;
-					echo '<table class="table1"><tr><td valign="top"><img src="' . $_SESSION['LogoFile'] . '"></td><td bgcolor="#BBBBBB"><b>';
+					echo '<table class="table1"><tr><td valign="top"><img src="' . $_SESSION['LogoFile'] . '" /></td><td bgcolor="#BBBBBB"><b>';
 					if ($InvOrCredit == 'Invoice') {
-						echo '<font size=4>' . _('TAX INVOICE') . ' ';
+						echo '<font size="4">' . _('TAX INVOICE') . ' ';
 					} else {
-						echo '<font color=RED size=4>' . _('TAX CREDIT NOTE') . ' ';
+						echo '<font color="red" size="4">' . _('TAX CREDIT NOTE') . ' ';
 					}
-					echo '</b>' . _('Number') . ' ' . $FromTransNo . '</font><br /><font size=1>' . _('GST Number') . ' - ' . $_SESSION['CompanyRecord']['gstno'] . '</td></tr><table>';
+					echo '</b>' . _('Number') . ' ' . $FromTransNo . '</font><br /><font size="1">' . _('GST Number') . ' - ' . $_SESSION['CompanyRecord']['gstno'] . '</td></tr><table>';
 					/* Print out the logo and company name and address */
 					echo '<table class="table1"><tr><td><font size="4" color="#333333"><b>' . $_SESSION['CompanyRecord']['coyname'] . '</b></font><br />';
 					echo $_SESSION['CompanyRecord']['regoffice1'] . '<br />';

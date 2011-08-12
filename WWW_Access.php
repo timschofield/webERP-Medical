@@ -7,8 +7,7 @@ include('includes/session.inc');
 $title = _('Access Permission Maintenance');
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/group_add.png" title="' .
-		_('Search') . '" alt="" />' . ' ' . $title.'</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/group_add.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>';
 
 if (isset($_GET['SelectedRole'])){
 	$SelectedRole = $_GET['SelectedRole'];
@@ -161,16 +160,16 @@ echo '<br />';
 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 if( isset($_POST['SelectedRole'])) {
-	echo '<input type="hidden" name="SelectedRole" value="' . $_POST['SelectedRole'] . '">';
+	echo '<input type="hidden" name="SelectedRole" value="' . $_POST['SelectedRole'] . '" />';
 }
 echo '<table class="selection">';
 if (!isset($_POST['SecRoleName'])) {
 	$_POST['SecRoleName']='';
 }
 echo '<tr><td>' . _('Role') . ':</td>
-	<td><input type="text" name="SecRoleName" size=40 maxlength=40 value="' . $_POST['SecRoleName'] . '"></tr>';
+	<td><input type="text" name="SecRoleName" size="40" maxlength="40" value="' . $_POST['SecRoleName'] . '" /></tr>';
 echo '</table><br />
-	<div class="centre"><input type="Submit" name="submit" value="' . _('Enter Role') . '"></div></form>';
+	<div class="centre"><input type="submit" name="submit" value="' . _('Enter Role') . '" /></div></form>';
 
 if (isset($SelectedRole)) {
 	$sql = "SELECT tokenid, tokenname
@@ -192,8 +191,8 @@ if (isset($SelectedRole)) {
 	echo '<br /><table class="selection"><tr>';
 
 	if (DB_num_rows($Result)>0 ) {
-		echo '<th colspan=3><div class="centre">'._('Assigned Security Tokens').'</div></th>';
-		echo '<th colspan=3><div class="centre">'._('Available Security Tokens').'</div></th>';
+		echo '<th colspan="3"><div class="centre">'._('Assigned Security Tokens').'</div></th>';
+		echo '<th colspan="3"><div class="centre">'._('Available Security Tokens').'</div></th>';
 	}
 	echo '</tr>';
 

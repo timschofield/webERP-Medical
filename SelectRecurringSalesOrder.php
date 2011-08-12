@@ -7,8 +7,7 @@ include('includes/header.inc');
 
 echo '<form action="' . $_SERVER['PHP_SELF'] .'" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/customer.png" title="' .
-	_('Inventory Items') . '" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/customer.png" title="' . _('Inventory Items') . '" alt="" />' . ' ' . $title . '</p>';
 
 echo '<table class="selection"><tr><td>';
 echo _('Select recurring order templates for delivery from:') . ' </td><td>' . '<select name="StockLocation">';
@@ -20,12 +19,12 @@ $resultStkLocs = DB_query($sql,$db);
 while ($myrow=DB_fetch_array($resultStkLocs)){
 	if (isset($_POST['StockLocation'])){
 		if ($myrow['loccode'] == $_POST['StockLocation']){
-			echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
-			echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 	} else {
 			echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 	}
@@ -71,7 +70,7 @@ if (isset($_POST['SearchRecurringOrders'])){
 
 	/*show a table of the orders returned by the SQL */
 
-	echo '<br /><table cellpadding=2 colspan=7 width=90% class="selection">';
+	echo '<br /><table cellpadding="2" colspan="7" width="90%" class="selection">';
 
 	$tableheader = '<tr>
 			<th>' . _('Modify') . '</th>

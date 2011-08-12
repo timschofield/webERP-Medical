@@ -280,7 +280,7 @@ if (! isset($_GET['delete'])) {
 	} else { //end of if $SelectedSaleperson only do the else when a new record is being entered
 
 		echo '<table class="selection"><tr><td>' . _('Salesperson code') . ':</td>
-			<td><input type="text" '. (in_array('SalesmanCode',$Errors) ? 'class="inputerror"' : '' ) .' name="SalesmanCode" size=3 maxlength=3></td></tr>';
+			<td><input type="text" '. (in_array('SalesmanCode',$Errors) ? 'class="inputerror"' : '' ) .' name="SalesmanCode" size="3" maxlength="3" /></td></tr>';
 	}
 	if (!isset($_POST['SalesmanName'])){
 	  $_POST['SalesmanName']='';
@@ -304,29 +304,29 @@ if (! isset($_GET['delete'])) {
 	  $_POST['Current']=0;
 	}
 
-	echo '<tr><td>' . _('Salesperson Name') . ':</td><td><input type="text" '. (in_array('SalesmanName',$Errors) ? 'class="inputerror"' : '' ) .' name="SalesmanName"  size=30 maxlength=30 value="' . $_POST['SalesmanName'] . '"></td></tr>';
-	echo '<tr><td>' . _('Telephone No') . ':</td><td><input type="text" name="SManTel" size=20 maxlength=20 value="' . $_POST['SManTel'] . '"></td></tr>';
-	echo '<tr><td>' . _('Facsimile No') . ':</td><td><input type="text" name="SManFax" size=20 maxlength=20 value="' . $_POST['SManFax'] . '"></td></tr>';
-	echo '<tr><td>' . _('Commission Rate 1') . ':</td><td><input type="text" class="number" name="CommissionRate1" size=5 maxlength=5 value="' . $_POST['CommissionRate1'] . '"></td></tr>';
-	echo '<tr><td>' . _('Breakpoint') . ':</td><td><input type="text" class="number" name="Breakpoint" size=6 maxlength=6 value="' . $_POST['Breakpoint'] . '"></td></tr>';
-	echo '<tr><td>' . _('Commission Rate 2') . ':</td><td><input type="text" class="number" name="CommissionRate2" size=5 maxlength=5 value="' . $_POST['CommissionRate2']. '"></td></tr>';
+	echo '<tr><td>' . _('Salesperson Name') . ':</td><td><input type="text" '. (in_array('SalesmanName',$Errors) ? 'class="inputerror"' : '' ) .' name="SalesmanName"  size="30" maxlength="30" value="' . $_POST['SalesmanName'] . '" /></td></tr>';
+	echo '<tr><td>' . _('Telephone No') . ':</td><td><input type="text" name="SManTel" size="20" maxlength="20" value="' . $_POST['SManTel'] . '" /></td></tr>';
+	echo '<tr><td>' . _('Facsimile No') . ':</td><td><input type="text" name="SManFax" size="20" maxlength="20" value="' . $_POST['SManFax'] . '" /></td></tr>';
+	echo '<tr><td>' . _('Commission Rate 1') . ':</td><td><input type="text" class="number" name="CommissionRate1" size="5" maxlength="5" value="' . $_POST['CommissionRate1'] . '" /></td></tr>';
+	echo '<tr><td>' . _('Breakpoint') . ':</td><td><input type="text" class="number" name="Breakpoint" size="6" maxlength="6" value="' . $_POST['Breakpoint'] . '" /></td></tr>';
+	echo '<tr><td>' . _('Commission Rate 2') . ':</td><td><input type="text" class="number" name="CommissionRate2" size="5" maxlength="5" value="' . $_POST['CommissionRate2']. '" /></td></tr>';
 
 	echo '<tr><td>' . _('Current?') . ':</td><td><select name="Current">';
 	if ($_POST['Current']==1){
-		echo '<option selected value=1>' . _('Yes') . '</option>';
+		echo '<option selected="True" value="1">' . _('Yes') . '</option>';
 	} else {
-		echo '<option value=1>' . _('Yes') . '</option>';
+		echo '<option value="1">' . _('Yes') . '</option>';
 	}
 	if ($_POST['Current']==0){
-		echo '<option selected value=0>' . _('No') . '</option>';
+		echo '<option selected="True" value="0">' . _('No') . '</option>';
 	} else {
-		echo '<option value=0>' . _('No') . '</option>';
+		echo '<option value="0">' . _('No') . '</option>';
 	}
 	echo '</select></td></tr>';
 
 	echo '</table>';
 
-	echo '<br /><div class="centre"><input type="Submit" name="submit" value="' . _('Enter Information') . '"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div>';
 
 	echo '</form>';
 

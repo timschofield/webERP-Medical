@@ -832,7 +832,7 @@ if (isset($_POST['NewItem'])){ /* NewItem is set from the part selection list as
 																	$myrow['price'],
 																	$myrow['unitname'],
 																	$myrow['stockact'],
-																	$_SESSION['PO'.$identifier]->DeliveryDate,
+																	DateAdd(date($_SESSION['DefaultDateFormat']),'d',$myrow['leadtime']),
 																	0,
 																	0,
 																	0,
@@ -909,19 +909,19 @@ if (isset($_POST['NewItem'])){ /* NewItem is set from the part selection list as
 echo '<form name=form1 action="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier. '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-//echo  _('Purchase Order') . ': <font color=BLUE size=4><b>' . $_SESSION['PO'.$identifier]->OrderNo . ' ' . $_SESSION['PO'.$identifier]->SupplierName . ' </b></font> - ' . _('All amounts stated in') . ' ' . $_SESSION['PO'.$identifier]->CurrCode . '<br />';
+//echo  _('Purchase Order') . ': <font color=BLUE size="4"><b>' . $_SESSION['PO'.$identifier]->OrderNo . ' ' . $_SESSION['PO'.$identifier]->SupplierName . ' </b></font> - ' . _('All amounts stated in') . ' ' . $_SESSION['PO'.$identifier]->CurrCode . '<br />';
 
 /*need to set up entry for item description where not a stock item and GL Codes */
 
 if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' .
-		_('Purchase Order') . '" alt="">  '.$_SESSION['PO'.$identifier]->SupplierName;
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Purchase Order') . '" alt="" />'.
+			$_SESSION['PO'.$identifier]->SupplierName;
 
 	if (isset($_SESSION['PO'.$identifier]->OrderNo)) {
 		echo  ' ' . _('Purchase Order') .' '. $_SESSION['PO'.$identifier]->OrderNo ;
 	}
 	echo '<br /><b>'._(' Order Summary') . '</b></p>';
-	echo '<table cellpadding=2 colspan=7 class="selection">';
+	echo '<table cellpadding="2" colspan="7" class="selection">';
 	echo '<tr>
 		<th>' . _('Item Code') . '</th>
 		<th>' . _('Description') . '</th>
@@ -963,12 +963,12 @@ if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
 			echo '<input type="hidden" name="ConversionFactor" value="'.$POLine->ConversionFactor.'" />';
 			echo '<td>' . $POLine->StockID  . '</td>
 				<td>' . $POLine->ItemDescription . '</td>
-				<td><input type="text" class="number" name="Qty' . $POLine->LineNo .'" size="11" value="' . $DisplayQuantity . '"></td>
+				<td><input type="text" class="number" name="Qty' . $POLine->LineNo .'" size="11" value="' . $DisplayQuantity . '" /></td>
 				<td>' . $Uom . '</td>
-				<td><input type="text" class="number" name="NetWeight' . $POLine->LineNo . '" size="11" value="' . $POLine->NetWeight . '"></td>
-				<td><input type="text" class="number" name="Price' . $POLine->LineNo . '" size="11" value="' .$DisplayPrice.'"></td>
+				<td><input type="text" class="number" name="NetWeight' . $POLine->LineNo . '" size="11" value="' . $POLine->NetWeight . '" /></td>
+				<td><input type="text" class="number" name="Price' . $POLine->LineNo . '" size="11" value="' .$DisplayPrice.'" /></td>
 				<td class="number">' . $DisplayLineTotal . '</td>
-				<td><input type="text" class="date" alt="' .$_SESSION['DefaultDateFormat'].'" name="ReqDelDate' . $POLine->LineNo.'" size="11" value="' .$POLine->ReqDelDate .'"></td>
+				<td><input type="text" class="date" alt="' .$_SESSION['DefaultDateFormat'].'" name="ReqDelDate' . $POLine->LineNo.'" size="11" value="' .$POLine->ReqDelDate .'" /></td>
 				<td>'.$POLine->PODetailRec.'</td>
 				<td><a href="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier. '&Delete=' . $POLine->LineNo . '">' . _('Delete') . '</a></td></tr>';
 			$_SESSION['PO'.$identifier]->Total = $_SESSION['PO'.$identifier]->Total + $LineTotal;
@@ -976,9 +976,9 @@ if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
 	}
 
 	$DisplayTotal = number_format($_SESSION['PO'.$identifier]->Total,2);
-	echo '<tr><td colspan=6 class="number">' . _('TOTAL') . _(' excluding Tax') . '</td><td class="number"><b>' . $DisplayTotal . '</b></td></tr></table>';
-	echo '<br /><div class="centre"><input type="submit" name="UpdateLines" value="Update Order Lines">';
-	echo '&nbsp;<input type="submit" name="Commit" value="Process Order"></div>';
+	echo '<tr><td colspan="6" class="number">' . _('TOTAL') . _(' excluding Tax') . '</td><td class="number"><b>' . $DisplayTotal . '</b></td></tr></table>';
+	echo '<br /><div class="centre"><input type="submit" name="UpdateLines" value="Update Order Lines" />';
+	echo '&nbsp;<input type="submit" name="Commit" value="Process Order" /></div>';
 	if (!isset($_POST['NewItem']) and isset($_GET['Edit'])) {
 
 	/*show a form for putting in a new line item with or without a stock entry */
@@ -989,7 +989,7 @@ if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
 if (isset($_POST['NonStockOrder'])) {
 
 	echo '<br /><table class="selection"><tr><td>'._('Item Description').'</td>';
-	echo '<td><input type="text" name=ItemDescription size=40></td></tr>';
+	echo '<td><input type="text" name=ItemDescription size="40" /></td></tr>';
 	echo '<tr><td>'._('General Ledger Code').'</td>';
 	echo '<td><select name="GLCode">';
 	$sql="SELECT accountcode,
@@ -1002,7 +1002,7 @@ if (isset($_POST['NonStockOrder'])) {
 		echo '<option value="'.$myrow['accountcode'].'">'.$myrow['accountcode'].' - '.$myrow['accountname'].'</option>';
 	}
 	echo '</select></td></tr>';
-	echo '<input type="hidden" name="ConversionFactor" value="1">';
+	echo '<input type="hidden" name="ConversionFactor" value="1" />';
 	echo '<tr><td>'._('OR Asset ID'). '</td>
 						<td><select name="AssetID">';
 	$AssetsResult = DB_query("SELECT assetid,
@@ -1010,7 +1010,7 @@ if (isset($_POST['NonStockOrder'])) {
 									datepurchased
 								FROM fixedassets
 								ORDER BY assetid DESC",$db);
-	echo '<option selected value="-1">' . _('Not an Asset') . '</option>';
+	echo '<option selected="True" value="-1">' . _('Not an Asset') . '</option>';
 	while ($AssetRow = DB_fetch_array($AssetsResult)){
 		if ($AssetRow['datepurchased']=='0000-00-00'){
 			$DatePurchased = _('Not yet purchased');
@@ -1022,13 +1022,13 @@ if (isset($_POST['NonStockOrder'])) {
 
 	echo'</select><a href="FixedAssetItems.php" target=_blank>'. _('New Fixed Asset') . '</a></td>
 				<tr><td>'._('Quantity to purchase').'</td>
-						<td><input type="text" class="number" name="Qty" size=10></td></tr>
+						<td><input type="text" class="number" name="Qty" size="10" /></td></tr>
 				<tr><td>'._('Price per item').'</td>
-						<td><input type="text" class="number" name="Price" size=10></td></tr>
+						<td><input type="text" class="number" name="Price" size="10" /></td></tr>
 				<tr><td>'._('Delivery Date').'</td>
-						<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="ReqDelDate" size=11 value="'.$_SESSION['PO'.$identifier]->DeliveryDate .'"></td></tr>';
+						<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="ReqDelDate" size="11" value="'.$_SESSION['PO'.$identifier]->DeliveryDate .'" /></td></tr>';
 	echo '</table>';
-	echo '<div class="centre"><input type="submit" name="EnterLine" value="Enter Item"></div>';
+	echo '<div class="centre"><input type="submit" name="EnterLine" value="Enter Item" /></div>';
 }
 
 /* Now show the stock item selection search stuff below */
@@ -1044,14 +1044,14 @@ if (!isset($_GET['Edit'])) {
 	$DbgMsg = _('The SQL used to retrieve the category details but failed was');
 	$result1 = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
-	echo '<table class="selection"><tr><th colspan=3><font size=3 color=blue>'. _('Search For Stock Items') . '</th>';
+	echo '<table class="selection"><tr><th colspan="3"><font size="3" color="blue">'. _('Search For Stock Items') . '</th>';
 
 	echo ':</font></tr><tr><td><select name="StockCat">';
 
-	echo '<option selected value="All">' . _('All') . '</option>';
+	echo '<option selected="True" value="All">' . _('All') . '</option>';
 	while ($myrow1 = DB_fetch_array($result1)) {
 		if (isset($_POST['StockCat']) and $_POST['StockCat']==$myrow1['categoryid']){
-			echo '<option selected value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
+			echo '<option selected="True" value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 		} else {
 			echo '<option value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 		}
@@ -1070,14 +1070,14 @@ if (!isset($_GET['Edit'])) {
 
 	echo '</select></td>
 		<td>' . _('Enter text extracts in the description') . ':</td>
-		<td><input type="text" name="Keywords" size=20 maxlength=25 value="' . $_POST['Keywords'] . '"></td></tr>
+		<td><input type="text" name="Keywords" size="20" maxlength="25" value="' . $_POST['Keywords'] . '" /></td></tr>
 		<tr><td></td>
-		<td><font size=3><b>' . _('OR') . ' </b></font>' . _('Enter extract of the Stock Code') .
+		<td><font size="3"><b>' . _('OR') . ' </b></font>' . _('Enter extract of the Stock Code') .
 			':</td>
-		<td><input type="text" name="StockCode" size=15 maxlength=18 value="' . $_POST['StockCode'] . '"></td>
+		<td><input type="text" name="StockCode" size="15" maxlength="18" value="' . $_POST['StockCode'] . '" /></td>
 		</tr>
 		<tr><td></td>
-		<td><font size=3><b>' . _('OR') . ' </b></font><a target="_blank" href="'.$rootpath.'/Stocks.php">' . _('Create a New Stock Item') . '</a></td></tr>
+		<td><font size="3"><b>' . _('OR') . ' </b></font><a target="_blank" href="'.$rootpath.'/Stocks.php">' . _('Create a New Stock Item') . '</a></td></tr>
 		</table><br />
 		<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" />
 		<input type="submit" name="NonStockOrder" value="' . _('Order a non stock item') . '" />
@@ -1089,13 +1089,13 @@ if (!isset($_GET['Edit'])) {
 
 if (isset($SearchResult)) {
 
-	echo '<table cellpadding=1 colspan=7 class="selection">';
+	echo '<table cellpadding="1" colspan="7" class="selection">';
 
 	$TableHeader = '<tr>
 						<th>' . _('Code')  . '</th>
 						<th>' . _('Description') . '</th>
 						<th>' . _('Units') . '</th>
-						<th colspan=2><a href="#end">'._('Go to end of list').'</a></th>
+						<th colspan="2"><a href="#end">'._('Go to end of list').'</a></th>
 					</tr>';
 	echo $TableHeader;
 
@@ -1115,8 +1115,7 @@ if (isset($SearchResult)) {
 		$filename = $myrow['stockid'] . '.jpg';
 		if (file_exists( $_SESSION['part_pics_dir'] . '/' . $filename) ) {
 
-			$ImageSource = '<img src="'.$rootpath . '/' . $_SESSION['part_pics_dir'] . '/' . $myrow['stockid'] .
-				'.jpg" width="50" height="50">';
+			$ImageSource = '<img src="'.$rootpath . '/' . $_SESSION['part_pics_dir'] . '/' . $myrow['stockid'] . '.jpg" width="50" height="50" />';
 
 		} else {
 			$ImageSource = '<i>'._('No Image').'</i>';
@@ -1146,7 +1145,7 @@ if (isset($SearchResult)) {
 		<td>'.$myrow['description'].'</td>
 		<td>'.$Uom.'</td>
 		<td>'.$ImageSource.'</td>
-		<td><input class="number" type="text" size=6 value=0 name="Quantity'.$i.'" /></td>
+		<td><input class="number" type="text" size="6" value="0" name="Quantity'.$i.'" /></td>
 		<input type="hidden" value="'.$myrow['stockid'].'" name="StockID'.$i.'" /></td>
 		<input type="hidden" value="'.$Uom.'" name="uom'.$i.'" />
 		</tr>';
@@ -1167,7 +1166,7 @@ if (isset($SearchResult)) {
 		prnMsg( _('Only the first') . ' ' . $Maximum_Number_Of_Parts_To_Show . ' ' . _('can be displayed') . '. ' .
 			_('Please restrict your search to only the parts required'),'info');
 	}
-	echo '<a name="end"></a><br /><div class="centre"><input type="submit" name="NewItem" value="Order some"></div>';
+	echo '<a name="end"></a><br /><div class="centre"><input type="submit" name="NewItem" value="Order some" /></div>';
 }#end if SearchResults to show
 
 echo '</form>';

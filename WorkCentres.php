@@ -191,7 +191,7 @@ if (isset($SelectedWC)) {
 	}
 	echo '<table class="selection"><tr>
 			<td>' . _('Work Centre Code') . ':</td>
-			<td><input type="text" name="Code" size="6" maxlength="5" value="' . $_POST['Code'] . '"></td>
+			<td><input type="text" name="Code" size="6" maxlength="5" value="' . $_POST['Code'] . '" /></td>
 			</tr>';
 }
 
@@ -204,14 +204,14 @@ if (!isset($_POST['Description'])) {
 	$_POST['Description'] = '';
 }
 echo '<tr><td>' . _('Work Centre Description') . ':</td>
-	<td><input type="text" name="Description" size="21" maxlength="20" value="' . $_POST['Description'] . '"></td>
+	<td><input type="text" name="Description" size="21" maxlength="20" value="' . $_POST['Description'] . '" /></td>
 	</tr>
 	<tr><td>' . _('Location') . ':</td>
 		<td><select name="Location">';
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['Location']) and $myrow['loccode']==$_POST['Location']) {
-		echo '<option selected value="'.$myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		echo '<option selected="True" value="'.$myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 	} else {
 		echo '<option value="'.$myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 	}
@@ -237,9 +237,9 @@ $result = DB_query($SQL,$db);
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['OverheadRecoveryAct']) and $myrow['accountcode']==$_POST['OverheadRecoveryAct']) {
-		echo '<option selected value='.$myrow['accountcode'] . '>' . $myrow['accountname'] . '</option>';
+		echo '<option selected="True" value="'.$myrow['accountcode'] . '">' . $myrow['accountname'] . '</option>';
 	} else {
-		echo '<option value='.$myrow['accountcode'] . '>' . $myrow['accountname'] . '</option>';
+		echo '<option value="'.$myrow['accountcode'] . '">' . $myrow['accountname'] . '</option>';
 	}
 
 } //end while loop
@@ -251,11 +251,11 @@ if (!isset($_POST['OverheadPerHour'])) {
 
 echo '</td></tr>';
 echo '<tr><td>' . _('Overhead Per Hour') . ':</td>
-	<td><input type="Text" class="number" name="OverheadPerHour" size=6 maxlength=6 value='.$_POST['OverheadPerHour'].'>';
+	<td><input type="text" class="number" name="OverheadPerHour" size="6" maxlength="6" value="'.$_POST['OverheadPerHour'].'" />';
 
 echo '</td></tr></table>';
 
-echo '<br /><div class="centre"><input type="Submit" name="submit" value="' . _('Enter Information') . '"></div>';
+echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div>';
 
 if (!isset($_GET['SelectedWC']) or $_GET['SelectedWC']=='') {
 	echo '<script>defaultControl(document.forms[0].Code);</script>';

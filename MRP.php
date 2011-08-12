@@ -510,8 +510,7 @@ if (isset($_POST['submit'])) {
 
 } else { // End of if submit isset
 	// Display form if submit has not been hit
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' .
-			_('Inventory') . '" alt="" />' . ' ' . $title . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') . '" alt="" />' . ' ' . $title . '</p>';
 
 	// Display parameters from last run
 	$sql = "SELECT * FROM mrpparameters";
@@ -537,9 +536,9 @@ if (isset($_POST['submit'])) {
 		if ($myrow['shrinkageflag'] == 'y') {
 			 $useshrinkage = _('Yes');
 		}
-		echo '<table cellpadding=5><tr><td valign=top>';
+		echo '<table cellpadding="5"><tr><td valign="top">';
 		echo '<table class="selection">';
-		echo '<tr><th colspan=3><font color=blue size=3>'._('Last Run Details').'</font></th></tr>';
+		echo '<tr><th colspan="3"><font color="blue" size="3">'._('Last Run Details').'</font></th></tr>';
 		echo '<tr>';
 		echo '<td>' . _('Last Run Time') . ':&nbsp&nbsp</td><td>' . $myrow['runtime'] . '</td></tr>';
 		echo '<td>' . _('Location') . ':&nbsp&nbsp</td><td>' . $myrow['location'] . '</td></tr>';
@@ -554,7 +553,7 @@ if (isset($_POST['submit'])) {
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection">';
 	// Generate selections for Location
-	echo '<tr><th colspan=3><font color=blue size=3>'._('This Run Details').'</font></th></tr>';
+	echo '<tr><th colspan="3"><font color="blue" size="3">'._('This Run Details').'</font></th></tr>';
 	echo '<tr>
 	 <td>' . _('Location') . '</td>
 	 <td><select name="location[]" multiple>
@@ -572,16 +571,16 @@ if (isset($_POST['submit'])) {
 		$leeway =0;
 	}
 
-	echo '<tr><td>' . _('Days Leeway') . ':</td><td><input type="text" name="Leeway" class="number" size="4" value=' . $leeway . '>';
+	echo '<tr><td>' . _('Days Leeway') . ':</td><td><input type="text" name="Leeway" class="number" size="4" value="' . $leeway . '" />';
 	echo '<tr><td>' ._('Use MRP Demands?') . ':</td>';
-	echo '<td><input type="checkbox" name="usemrpdemands" value="y" checked></td></tr>';
+	echo '<td><input type="checkbox" name="usemrpdemands" value="y" checked="True" /></td></tr>';
 	echo '<tr><td>' ._('Use EOQ?') . ':</td>';
-	echo '<td><input type="checkbox" name="eoqflag" value="y" checked></td></tr>';
+	echo '<td><input type="checkbox" name="eoqflag" value="y" checked="True" /></td></tr>';
 	echo '<tr><td>' ._('Use Pan Size?') . ':</td>';
-	echo '<td><input type="checkbox" name="pansizeflag" value="y" checked></td></tr>';
+	echo '<td><input type="checkbox" name="pansizeflag" value="y" checked="True" /></td></tr>';
 	echo '<tr><td>' ._('Use Shrinkage?') . ':</td>';
-	echo '<td><input type="checkbox" name="shrinkageflag" value="y" checked></td></tr>';
-	echo '</table></td></tr></table><div class="centre"><br /><br /><input type="submit" name="submit" value="' . _('Run MRP') . '"></div>';
+	echo '<td><input type="checkbox" name="shrinkageflag" value="y" checked="True" /></td></tr>';
+	echo '</table></td></tr></table><div class="centre"><br /><br /><input type="submit" name="submit" value="' . _('Run MRP') . '" /></div>';
 	echo '</form>';
 }  // End of Main program logic -------------------------------------------------------
 

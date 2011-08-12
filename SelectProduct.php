@@ -34,7 +34,7 @@ $SQL = "SELECT categoryid,
 			ORDER BY categorydescription";
 $result1 = DB_query($SQL, $db);
 if (DB_num_rows($result1) == 0) {
-	echo '<p><font size=4 color=red>' . _('Problem Report') . ':</font><br />' . _('There are no stock categories currently defined please use the link below to set them up').'</p>';
+	echo '<p><font size="4" color="red">' . _('Problem Report') . ':</font><br />' . _('There are no stock categories currently defined please use the link below to set them up').'</p>';
 	echo '<br /><a href="' . $rootpath . '/StockCategories.php?">' . _('Define Stock Categories') . '</a>';
 	exit;
 }
@@ -136,7 +136,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 			$Cost = $myrow['cost'];
 		}
 		if (DB_num_rows($PriceResult) == 0) {
-			echo _('No Default Price Set in Home Currency');
+			echo _('No Default Price Set in Home Currency') . '</td>';
 			$Price = 0;
 		} else {
 			$PriceRow = DB_fetch_row($PriceResult);
@@ -218,7 +218,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<tr><th align="right">' . $PropertyRow['label'] . ':</th>';
 		switch ($PropertyRow['controltype']) {
-			case 0; //textbox
+			case 0; //text
 				echo '<td class="select" width="60"><input type="text" name="PropValue' . $PropertyCounter . '" value="' . $PropertyValue . '" />';
 				break;
 			case 1; //select box
@@ -236,7 +236,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 				echo '<td align="left" width="60"><select name="PropValue' . $PropertyCounter . '" onChange="ReloadForm(UpdateProps)" >';
 				foreach ($OptionValues as $PropertyOptionValue){
 					if ($PropertyOptionValue == $PropertyValue){
-						echo '<option selected value="' . $PropertyOptionValue . '">' . $PropertyOptionValue . '</option>';
+						echo '<option selected="True" value="' . $PropertyOptionValue . '">' . $PropertyOptionValue . '</option>';
 					} else {
 						echo '<option value="' . $PropertyOptionValue . '">' . $PropertyOptionValue . '</option>';
 					}
@@ -244,17 +244,17 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 				echo '</select>';
 				break;
 			case 2; //checkbox
-				echo '<td align="left" width="60"><input type="checkbox" name="PropValue' . $PropertyCounter . '"';
 				if ($PropertyValue == 1) {
-					echo ' checked';
+					echo '<td align="left" width="60"><input type="checkbox" name="PropValue' . $PropertyCounter . '" checked="True" />';
+				} else {
+					echo '<td align="left" width="60"><input type="checkbox" name="PropValue' . $PropertyCounter . '" />';
 				}
-				echo ' />';
 				break;
 		} //end switch
 		echo '</td></tr>';
 		$PropertyCounter++;
 	} //end loop round properties for the item category
-	echo '<input type="submit" name="UpdateProps" style="visibility:hidden;width:1px" value="' . _('Categories') . '">';
+	echo '<input type="submit" name="UpdateProps" style="visibility:hidden;width:1px" value="' . _('Categories') . '" />';
 	echo '</form>';
 	echo '</table>'; //end of Item Category Property mod
 	echo '<td style="width: 15%; vertical-align: top">
@@ -718,7 +718,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 			echo '<input type="hidden" name=Keywords value="'.$_POST['Keywords'].'" />';
 			echo '<input type="hidden" name=StockCat value="'.$_POST['StockCat'].'" />';
 			echo '<input type="hidden" name=StockCode value="'.$_POST['StockCode'].'" />';
-//			echo '<input type="hidden" name=Search value="Search">';
+//			echo '<input type="hidden" name=Search value="Search" />';
 			echo '<br /></div>';
 		}
 		echo '<table cellpadding="2" colspan="7">';

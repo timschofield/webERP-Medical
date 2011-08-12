@@ -91,9 +91,7 @@ if (!isset($Id)) {
 	$SQLname="SELECT * from debtortype where typeid='".$DebtorType."'";
 	$Result = DB_query($SQLname,$db);
 	$row = DB_fetch_array($Result);
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Search') .
-		'" alt="" />'  . _('Notes for Customer Type').': <b>' .$row['typename'].'</b></p><br />';
-
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Search') . '" alt="" />'  . _('Notes for Customer Type').': <b>' .$row['typename'].'</b></p><br />';
 
 	$sql = "SELECT * FROM debtortypenotes where typeid='".$DebtorType."' ORDER BY date DESC";
 	$result = DB_query($sql,$db);
@@ -182,14 +180,13 @@ if (!isset($_GET['delete'])) {
 	echo '<tr><td>'._('Contact Group Note').':</td>';
 	echo '<td><textarea name="note">'. $_POST['note'].'</textarea></td></tr>';
 	echo '<tr><td>'. _('Web site').':</td>';
-	echo '<td><input type="text" name="href" value="'. $_POST['href'].'" size=35 maxlength=100></td></tr>
+	echo '<td><input type="text" name="href" value="'. $_POST['href'].'" size="35" maxlength="100" /></td></tr>
 		<tr><td>'. _('Date').':</td>';
-	echo '<td><input type="text" name="date" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" value="'. $_POST['date'].
-		'" size=10 maxlength=10></td></tr>';
+	echo '<td><input type="text" name="date" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" value="'. $_POST['date']. '" size="10" maxlength="10" /></td></tr>';
 	echo '<tr><td>'. _('Priority').':</td>';
-	echo '<td><input type="Text" name="priority" value="'. $_POST['priority'].'" size=1 maxlength=3></td></td>
+	echo '<td><input type="text" name="priority" value="'. $_POST['priority'].'" size="1" maxlength="3" /></td></td>
 	</table>';
-	echo '<br /><div class="centre"><input type="Submit" name="submit" value="'. _('Enter Information').'"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="submit" value="'. _('Enter Information').'" /></div>';
 
 	echo '</form>';
 

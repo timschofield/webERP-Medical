@@ -7,8 +7,7 @@ $title = _('Work Order Entry');
 include('includes/header.inc');
 include('includes/SQL_CommonFunctions.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('Search') .
-	'" alt="" />' . ' ' . $title.'</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>';
 
 if (isset($_GET['ReqDate'])){
 	$ReqDate = $_GET['ReqDate'];
@@ -453,14 +452,14 @@ if (DB_num_rows($WOResult)==1){
 	}
 }
 
-echo '<input type="hidden" name="WO" value=' .$_POST['WO'] . '>';
+echo '<input type="hidden" name="WO" value="' .$_POST['WO'] . '" />';
 echo '<tr><td class="label">' . _('Work Order Reference') . ':</td><td>' . $_POST['WO'] . '</td></tr>';
 echo '<tr><td class="label">' . _('Factory Location') .':</td>
 	<td><select name="StockLocation">';
 $LocResult = DB_query("SELECT loccode,locationname FROM locations",$db);
 while ($LocRow = DB_fetch_array($LocResult)){
 	if ($_POST['StockLocation']==$LocRow['loccode']){
-		echo '<option selected value="' . $LocRow['loccode'] .'">' . $LocRow['locationname'] . '</option>';
+		echo '<option selected="True" value="' . $LocRow['loccode'] .'">' . $LocRow['locationname'] . '</option>';
 	} else {
 		echo '<option value="' . $LocRow['loccode'] .'">' . $LocRow['locationname'] . '</option>';
 	}
@@ -470,16 +469,19 @@ if (!isset($_POST['StartDate'])){
 	$_POST['StartDate'] = Date($_SESSION['DefaultDateFormat']);
 }
 
-echo '<tr><td class="label">' . _('Start Date') . ':</td><td><input type="text" name="StartDate" size=12 maxlength=12 value="' . $_POST['StartDate'] .
-			'" class="date" alt="'.$_SESSION['DefaultDateFormat'].'"></td></tr>';
+echo '<tr>
+		<td class="label">' . _('Start Date') . ':</td>
+		<td><input type="text" name="StartDate" size="12" maxlength="12" value="' . $_POST['StartDate'] .'" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" /></td>
+	</tr>';
 
 if (!isset($_POST['RequiredBy'])){
 	$_POST['RequiredBy'] = Date($_SESSION['DefaultDateFormat']);
 }
 
-echo '<tr><td class="label">' . _('Required By') . ':</td>
-		  <td><input type="text" name="RequiredBy"  size=12 maxlength=12 value="' . $_POST['RequiredBy'] .
-			'" class="date" alt="'.$_SESSION['DefaultDateFormat'].'"></td></tr>';
+echo '<tr>
+		<td class="label">' . _('Required By') . ':</td>
+		<td><input type="text" name="RequiredBy" size="12" maxlength="12" value="' . $_POST['RequiredBy'] .'" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" /></td>
+	</tr>';
 
 if (isset($WOResult)){
 	echo '<tr><td class="label">' . _('Accumulated Costs') . ':</td>
@@ -504,18 +506,18 @@ if (isset($NumberOfOutputs)){
 			echo '<tr class="EvenTableRows">';
 			$j++;
 		}
-		echo '<td><input type="hidden" name="OutputItem' . $i . '" value="' . $_POST['OutputItem' .$i] . '">' .
+		echo '<td><input type="hidden" name="OutputItem' . $i . '" value="' . $_POST['OutputItem' .$i] . '" />' .
 			$_POST['OutputItem' . $i] . ' - ' . $_POST['OutputItemDesc' .$i] . '</td>';
 		if ($_POST['Controlled'.$i]==1 AND $_SESSION['DefineControlledOnWOEntry']==1){
 			echo '<td style="text-align: right">' . $_POST['OutputQty' . $i] . '</td>';
-			echo '<input type="hidden" name="OutputQty' . $i .'" value=' . $_POST['OutputQty' . $i] . '>';
+			echo '<input type="hidden" name="OutputQty' . $i .'" value="' . $_POST['OutputQty' . $i] . '" />';
 		} else {
-		  	echo'<td><input type="text" class="number" name="OutputQty' . $i . '" value=' . $_POST['OutputQty' . $i] . ' size=10 maxlength=10></td>';
+		  	echo'<td><input type="text" class="number" name="OutputQty' . $i . '" value="' . $_POST['OutputQty' . $i] . '" size="10" maxlength="10" /></td>';
 		}
-		 echo '<td class="number"><input type="hidden" name="RecdQty' . $i . '" value=' . $_POST['RecdQty' .$i] . '>' . $_POST['RecdQty' .$i] .'</td>
+		 echo '<td class="number"><input type="hidden" name="RecdQty' . $i . '" value="' . $_POST['RecdQty' .$i] . '" />' . $_POST['RecdQty' .$i] .'</td>
 		  		<td class="number">' . ($_POST['OutputQty' . $i] - $_POST['RecdQty' .$i]) . '</td>';
 		if ($_POST['Controlled'.$i]==1){
-			echo '<td><input type="text" name="NextLotSNRef' .$i . '" value="' . $_POST['NextLotSNRef'.$i] . '"></td>';
+			echo '<td><input type="text" name="NextLotSNRef' .$i . '" value="' . $_POST['NextLotSNRef'.$i] . '" /></td>';
 			if ($_SESSION['DefineControlledOnWOEntry']==1){
 				if ($_POST['Serialised' . $i]==1){
 					$LotOrSN = _('S/Ns');
@@ -530,22 +532,22 @@ if (isset($NumberOfOutputs)){
 		echo '</td>';
 		echo '</tr>';
 		if (isset($_POST['Controlled' . $i])) {
-			echo '<input type="hidden" name="Controlled' . $i .'" value="' . $_POST['Controlled' . $i] . '">';
+			echo '<input type="hidden" name="Controlled' . $i .'" value="' . $_POST['Controlled' . $i] . '" />';
 		}
 		if (isset( $_POST['Serialised' . $i])) {
-			echo '<input type="hidden" name="Serialised' . $i .'" value="' . $_POST['Serialised' . $i] . '">';
+			echo '<input type="hidden" name="Serialised' . $i .'" value="' . $_POST['Serialised' . $i] . '" />';
 		}
 		if (isset($_POST['HasWOSerialNos' . $i])) {
-			echo '<input type="hidden" name="HasWOSerialNos' . $i .'" value="' . $_POST['HasWOSerialNos' . $i] . '">';
+			echo '<input type="hidden" name="HasWOSerialNos' . $i .'" value="' . $_POST['HasWOSerialNos' . $i] . '" />';
 		}
 	}
 	echo '<input type="hidden" name="NumberOfOutputs" value="' . ($i -1).'" />';
 }
 echo '</table>';
 
-echo '<div class="centre"><br /><input type="submit" name="submit" value="' . _('Update') . '">';
+echo '<div class="centre"><br /><input type="submit" name="submit" value="' . _('Update') . '" />';
 
-echo '<br /><input type="submit" name="delete" value="' . _('Delete This Work Order') . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');">';
+echo '<br /><input type="submit" name="delete" value="' . _('Delete This Work Order') . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');" />';
 
 echo '<br /></div>';
 
@@ -559,7 +561,7 @@ $SQL="SELECT categoryid,
 echo '<table class="selection"><tr><td>' . _('Select a stock category') . ':<select name="StockCat">';
 
 if (!isset($_POST['StockCat'])){
-	echo '<option selected value="All">' . _('All') . '</option>';
+	echo '<option selected="True" value="All">' . _('All') . '</option>';
 	$_POST['StockCat'] ='All';
 } else {
 	echo '<option value="All">' . _('All') . '</option>';
@@ -568,7 +570,7 @@ if (!isset($_POST['StockCat'])){
 while ($myrow1 = DB_fetch_array($result1)) {
 
 	if ($_POST['StockCat']==$myrow1['categoryid']){
-		echo '<option selected value=' . $myrow1['categoryid'] . '>' . $myrow1['categorydescription'] . '</option>';
+		echo '<option selected="True" value=' . $myrow1['categoryid'] . '>' . $myrow1['categorydescription'] . '</option>';
 	} else {
 		echo '<option value='. $myrow1['categoryid'] . '>' . $myrow1['categorydescription'] . '</option>';
 	}
@@ -577,10 +579,11 @@ while ($myrow1 = DB_fetch_array($result1)) {
 
 </select>
 <td><?php echo _('Enter text extracts in the'); ?> <b><?php echo _('description'); ?></b>:</td>
-<td><input type="Text" name="Keywords" size=20 maxlength=25 value="<?php if (isset($_POST['Keywords'])) echo $_POST['Keywords']; ?>"></td></tr>
+
+<td><input type="text" name="Keywords" size="20" maxlength="25" value="<?php if (isset($_POST['Keywords'])) echo $_POST['Keywords']; ?>" /></td></tr>
 <tr><td></td>
-		<td><font SIZE 3><b><?php echo _('OR'); ?> </b></font><?php echo _('Enter extract of the'); ?> <b><?php echo _('Stock Code'); ?></b>:</td>
-		<td><input type="Text" name="StockCode" size=15 maxlength=18 value="<?php if (isset($_POST['StockCode'])) echo $_POST['StockCode']; ?>"></td>
+		<td><font size="3"><b><?php echo _('OR'); ?> </b></font><?php echo _('Enter extract of the'); ?> <b><?php echo _('Stock Code'); ?></b>:</td>
+		<td><input type="text" name="StockCode" size="15" maxlength="18" value="<?php if (isset($_POST['StockCode'])) echo $_POST['StockCode']; ?>" /></td>
 		</tr>
 		</table>
 		<br /><div class="centre"><input type="submit" name="Search" value=" <?php echo _('Search Now'); ?>" />
@@ -593,7 +596,7 @@ if (isset($SearchResult)) {
 
 	if (DB_num_rows($SearchResult)>1){
 
-		echo '<table cellpadding=2 colspan=7 class="selection">';
+		echo '<table cellpadding="2" colspan="7" class="selection">';
 		$TableHeader = '<tr><th>' . _('Code') . '</th>
 				   			<th>' . _('Description') . '</th>
 				   			<th>' . _('Units') . '</th></tr>';
@@ -609,10 +612,10 @@ if (isset($SearchResult)) {
 
 			if (!in_array($myrow['stockid'],$ItemCodes)){
 				if (function_exists('imagecreatefrompng') ){
-					$ImageSource = '<img src="GetStockImage.php?automake=1&textcolor=FFFFFF&bgcolor=CCCCCC&StockID=' . urlencode($myrow['stockid']). '&text=&width=64&height=64">';
+					$ImageSource = '<img src="GetStockImage.php?automake=1&textcolor=FFFFFF&bgcolor=CCCCCC&StockID=' . urlencode($myrow['stockid']). '&text=&width=64&height=64" />';
 				} else {
 					if(file_exists($_SERVER['DOCUMENT_ROOT'] . $rootpath . '/' . $_SESSION['part_pics_dir'] . '/' . $myrow['stockid'] . '.jpg')) {
-						$ImageSource = '<img src="' .$_SERVER['DOCUMENT_ROOT'] . $rootpath .  '/' . $_SESSION['part_pics_dir'] . '/' . $myrow['stockid'] . '.jpg">';
+						$ImageSource = '<img src="' .$_SERVER['DOCUMENT_ROOT'] . $rootpath .  '/' . $_SESSION['part_pics_dir'] . '/' . $myrow['stockid'] . '.jpg" />';
 					} else {
 						$ImageSource = _('No Image');
 					}
@@ -626,11 +629,11 @@ if (isset($SearchResult)) {
 					$k=1;
 				}
 
-				printf('<td><font size=1>%s</font></td>
-						<td><font size=1>%s</font></td>
-						<td><font size=1>%s</font></td>
+				printf('<td><font size="1">%s</font></td>
+						<td><font size="1">%s</font></td>
+						<td><font size="1">%s</font></td>
 						<td>%s</td>
-						<td><font size=1><a href="%s">'
+						<td><font size="1"><a href="%s">'
 						. _('Add to Work Order') . '</a></font></td>
 						</tr>',
 						$myrow['stockid'],

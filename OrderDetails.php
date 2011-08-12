@@ -53,12 +53,11 @@ $DbgMsg = _('The SQL that failed to get the order header was');
 $GetOrdHdrResult = DB_query($OrderHeaderSQL,$db, $ErrMsg, $DbgMsg);
 
 if (DB_num_rows($GetOrdHdrResult)==1) {
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' .
-		_('Order Details') . '" alt="" />' . ' ' . $title . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Order Details') . '" alt="" />' . ' ' . $title . '</p>';
 
 	$myrow = DB_fetch_array($GetOrdHdrResult);
 	echo '<table class="selection">';
-	echo '<tr><th colspan=4><font color=blue>'._('Order Header Details For Order No').' '.$_GET['OrderNumber'].'</font></th></tr>';
+	echo '<tr><th colspan="4"><font color="blue">'._('Order Header Details For Order No').' '.$_GET['OrderNumber'].'</font></th></tr>';
 	echo '<tr>
 		<th style="text-align: left">' . _('Customer Code') . ':</th>
 		<td class="OddTableRows"><font><a href="' . $rootpath . '/SelectCustomer.php?Select=' . $myrow['debtorno'] . '">' . $myrow['debtorno'] . '</a></td>
@@ -110,7 +109,7 @@ if (DB_num_rows($GetOrdHdrResult)==1) {
 		<td class="OddTableRows"><font>' . $myrow['freightcost'] . '</font></td>
 	</tr>';
 	echo '<tr><th style="text-align: left">'._('Comments'). ': ';
-	echo '</th><td colspan=3>'.$myrow['comments'] . '</td></tr>';
+	echo '</th><td colspan="3">'.$myrow['comments'] . '</td></tr>';
 	echo '</table>';
 }
 
@@ -145,8 +144,8 @@ if (DB_num_rows($GetOrdHdrResult)==1) {
 		$OrderTotalVolume = 0;
 		$OrderTotalWeight = 0;
 
-		echo '<br /><table cellpadding=2 colspan=9 class="selection">';
-		echo '<tr><th colspan=9><font color=blue>'._('Order Line Details For Order No').' '.$_GET['OrderNumber'].'</font></th></tr>';
+		echo '<br /><table cellpadding="2" colspan="9" class="selection">';
+		echo '<tr><th colspan="9"><font color="blue">'._('Order Line Details For Order No').' '.$_GET['OrderNumber'].'</font></th></tr>';
 		echo '<tr>
 			<th>' . _('Item Code') . '</th>
 			<th>' . _('Item Description') . '</th>
@@ -196,8 +195,8 @@ if (DB_num_rows($GetOrdHdrResult)==1) {
 		$DisplayWeight = number_format($OrderTotalWeight,2);
 
 		echo '<tr>
-			<td colspan=5 class="number"><b>' . _('TOTAL Excl Tax/Freight') . '</b></td>
-			<td colspan=2 class="number">' . $DisplayTotal . '</td>
+			<td colspan="5" class="number"><b>' . _('TOTAL Excl Tax/Freight') . '</b></td>
+			<td colspan="2" class="number">' . $DisplayTotal . '</td>
 			</tr>
 		</table>';
 

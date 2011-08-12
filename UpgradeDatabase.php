@@ -9,14 +9,13 @@ include('includes/header.inc');
 
 if (!isset($_POST['DoUpgrade'])){
 
-	prnMsg(_('This script will perform any modifications to the database required to allow the additional functionality in later scripts'),'info');
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<p><form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (!isset($_SESSION['VersionNumber'])){
 		prnMsg(_('The webERP code is version')  . ' ' . $Version . ' ' . _('and the database version is not actually recorded at this version'),'info');
 		echo '<table><tr><td>' . _('Select the version you are upgrading from:') . '</td>
-											<td><select name="OldVersion" >';
+				<td><select name="OldVersion" >';
 		echo '<option selected value="Manual">' . _('Apply database changes manually') . '</option>';
 		echo '<option value="3.00">' . _('Version 3.00') . '</option>';
 		echo '<option value="3.01">' . _('Version 3.01') . '</option>';
@@ -29,17 +28,22 @@ if (!isset($_POST['DoUpgrade'])){
 		echo '<option value="3.08">' . _('Version 3.08') . '</option>';
 		echo '<option value="3.09">' . _('Version 3.09') . '</option>';
 		echo '<option value="3.10">' . _('Version 3.10') . '</option>';
-		echo '<option value="3.11">' . _('Version 3.11 or 4.01 - 4.02') . '</option>';
+		echo '<option value="3.11.x">' . _('Version 3.11 or 4.01 - 4.02') . '</option>';
 		echo '</select></td></tr></table>';
 	} else {
 		if ($_SESSION['VersionNumber']=='4.00RC1'){
 			$_SESSION['VersionNumber']='3.12';
 		}
-		prnMsg(_('The webERP code is version')  . ' ' . $Version . ' ' . _('and the database version is') . ' ' . $_SESSION['VersionNumber'],'info');
-		echo '<input type="hidden" name="OldVersion" value="' . $_SESSION['VersionNumber'] . '" />';
+		if ( $_SESSION['VersionNumber'] == $Version){
+			prnMsg(_('The database is up to date, there are no upgrades to perform'),'info');
+		} else {
+			prnMsg(_('This script will perform any modifications to the database required to allow the additional functionality in later scripts.') . '<br />' . _('The webERP code is version')  . ' ' . $Version . ' ' . _('and the database version is') . ' ' . $_SESSION['VersionNumber'] . '<br /><a target="_blank" href="' . $rootpath . '/BackupDatabase.php">' ._('Click to do a database backup now before proceeding!') . '</a>','info');
+
+			echo '<input type="hidden" name="OldVersion" value="' . $_SESSION['VersionNumber'] . '" />';
+			echo '<div class="centre"><input type="submit" name="DoUpgrade" value="' . _('Perform Database Upgrade') . '" /></div>';
+		}
 	}
 
-	echo '<div class="centre"><input type="submit" name="DoUpgrade" value="' . _('Perform Database Upgrade') . '" /></div>';
 	echo '</form>';
 }
 
@@ -47,23 +51,7 @@ if (isset($_POST['DoUpgrade'])){
 
 	if ($dbType=='mysql' OR $dbType =='mysqli'){
 
-		/* First do a backup */
-		$BackupFile =  $PathPrefix . './companies/' . $_SESSION['DatabaseName']  .'/' . _('Backup') . '_' . Date('Y-m-d-H-i-s') . '.sql.gz';
-		$Command = 'mysqldump --opt -h' . $host . ' -u' . $dbuser . ' -p' . $dbpassword  . '  ' . $_SESSION['DatabaseName'] . "| gzip > " . $BackupFile;
-		system($Command);
-
-		/*this could be a weighty file attachment!! */
-		include('includes/htmlMimeMail.php');
-		$mail = new htmlMimeMail();
-		$attachment = $mail->getFile( $BackupFile);
-		$mail->setText(_('webERP backup file attached'));
-		$mail->addAttachment($attachment, $BackupFile, 'application/gz');
-		$mail->setSubject(_('Database Backup'));
-		$mail->setFrom($_SESSION['CompanyRecord']['coyname'] . '<' . $_SESSION['CompanyRecord']['email'] . '>');
-		$result = $mail->send(array('"' . $_SESSION['UsersRealName'] . '" <' . $_SESSION['UserEmail'] . '>'));
-
-		prnMsg(_('A backup of the database has been taken and emailed to you'), 'info');
-		unlink($BackupFile); // would be a security issue to leave it there for all to download/see
+		$SQLScripts = array();
 
 		if ($_POST['OldVersion']=='Manual') {
 			prnMsg(_('No datbase updates have been done as you selected to apply these manually - upgrade SQL scripts are under sql/mysql/ directory in the distribution'),'info');
@@ -93,13 +81,38 @@ if (isset($_POST['DoUpgrade'])){
 					$SQLScripts[] = './sql/mysql/upgrade3.09-3.10.sql';
 				case '3.10':
 					$SQLScripts[] = './sql/mysql/upgrade3.10-3.11.sql';
-				case '3.11':
+				case '3.11.x':
+				case '3.11.1':
+				case '3.11.2':
+				case '3.11.3':
+				case '3.12.32':
+				case '4.0RC1':
+				case '4.01':
+				case '4.02':
+				case '4.03RC1':
+				case '4.03RC2':
+				case '4.03':
+				case '4.03.2':
+				case '4.03.3':
+				case '4.03.5':
+				case '4.03.6':
+				case '4.03.7':
 					$SQLScripts[] = './sql/mysql/upgrade3.11.1-4.00.sql';
+				case '4.03.8':
+					$SQLScripts[] = './sql/mysql/upgrade4.03-4.04.sql';
+				case '4.04':
+					$SQLScripts[] = './sql/mysql/upgrade4.04-4.04.1.sql';
+				case '4.04.1':
+				case '4.04.2':
+				case '4.04.3':
+					$SQLScripts[] = './sql/mysql/upgrade4.04.1-4.04.4.sql';
+				case '4.04.4':
+					$SQLScripts[] = './sql/mysql/upgrade4.04.4-4.04.5.sql';
+				case '4.04.5':
+					$SQLScripts[] = './sql/mysql/upgrade4.04.5-4.05.sql';
+				case '4.05':
 					break;
 			} //end switch
-			if(isset($_SESSION['VersionNumber']) AND strcmp($_SESSION['VersionNumber'],'4.04')<0) { /* VersionNumber is set to less than '4.04' when upgrade3.11.1-4.00.sql is run */
-				$SQLScripts[] = './sql/mysql/upgrade3.11.1-4.00.sql';
-			}
 		}
 	} else { //dbType is not mysql or mysqli
 		prnMsg(_('Only mysql upgrades are performed seamlessly at this time. Your database will need to be manually updated'),'info');
@@ -114,29 +127,29 @@ if (isset($_POST['DoUpgrade'])){
 		$sql ='';
 		$InAFunction = false;
 		echo '<br /><table>
-					<tr><th colspan=2>' . _('Applying') . ' ' . $SQLScriptFile . '</th></tr>';
+				<tr><th colspan="2">' . _('Applying') . ' ' . $SQLScriptFile . '</th></tr>';
 
 		for ($i=0; $i<=$ScriptFileEntries; $i++) {
 
 			$SQLEntries[$i] = trim($SQLEntries[$i]);
 
-			if (substr($SQLEntries[$i], 0, 2) != '--'
-				AND substr($SQLEntries[$i], 0, 3) != 'USE'
-				AND strstr($SQLEntries[$i],'/*')==FALSE
-				AND strlen($SQLEntries[$i])>1){
+			if (mb_substr($SQLEntries[$i], 0, 2) != '--'
+				AND mb_substr($SQLEntries[$i], 0, 3) != 'USE'
+				AND mb_strstr($SQLEntries[$i],'/*')==FALSE
+				AND mb_strlen($SQLEntries[$i])>1){
 
 				$sql .= ' ' . $SQLEntries[$i];
 
 				//check if this line kicks off a function definition - pg chokes otherwise
-				if (substr($SQLEntries[$i],0,15) == 'CREATE FUNCTION'){
+				if (mb_substr($SQLEntries[$i],0,15) == 'CREATE FUNCTION'){
 					$InAFunction = true;
 				}
 				//check if this line completes a function definition - pg chokes otherwise
-				if (substr($SQLEntries[$i],0,8) == 'LANGUAGE'){
+				if (mb_substr($SQLEntries[$i],0,8) == 'LANGUAGE'){
 					$InAFunction = false;
 				}
-				if (strpos($SQLEntries[$i],';')>0 AND ! $InAFunction){
-					$sql = substr($sql,0,strlen($sql)-1);
+				if (mb_strpos($SQLEntries[$i],';')>0 AND ! $InAFunction){
+					$sql = mb_substr($sql,0,mb_strlen($sql)-1);
 					$result = DB_query($sql, $db, '','', false, false);
 					echo '<tr><td>' . $sql . '</td>';
 					switch (DB_error_no($db)) {

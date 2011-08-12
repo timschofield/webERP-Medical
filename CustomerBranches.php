@@ -375,8 +375,8 @@ if (!isset($SelectedBranch)){
 	$TotalEnable = 0;
 	$TotalDisable = 0;
 	if ($myrow) {
-		echo '<p Class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') .
-			'" alt="" />' . ' ' . _('Branches defined for'). ' '. $DebtorNo . ' - ' . $myrow[0] . '</p>';
+		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') .'" alt="" />' .
+			' ' . _('Branches defined for'). ' '. $DebtorNo . ' - ' . $myrow[0] . '</p>';
 		echo '<table class="selection">';
 		echo '<tr><th>'._('Code').'</th>
 			<th>'._('Name').'</th>
@@ -536,16 +536,16 @@ if (!isset($_GET['delete'])) {
 			$_POST['DeliverBlind'] = $myrow['deliverblind'];
 		}
 
-		echo '<input type="hidden" name="SelectedBranch" value="' . $SelectedBranch . '">';
-		echo '<input type="hidden" name="BranchCode" value="' . $_POST['BranchCode'] . '">';
+		echo '<input type="hidden" name="SelectedBranch" value="' . $SelectedBranch . '" />';
+		echo '<input type="hidden" name="BranchCode" value="' . $_POST['BranchCode'] . '" />';
 
-		echo '<p Class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') .
-			'" alt="">' . ' ' . _('Change Details for Branch'). ' '. $SelectedBranch . '</p>';
+		echo '<p Class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') . '" alt="" />' .
+			' ' . _('Change Details for Branch'). ' '. $SelectedBranch . '</p>';
 		if (isset($SelectedBranch)) {
 			echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '?DebtorNo=' . $DebtorNo. '">' . _('Show all branches defined for'). ' '. $DebtorNo . '</a></div>';
 		}
 		echo '<br /><table class="selection">';
-		echo '<tr><th colspan=2><div class="centre"><b>'._('Change Branch').'</b></th></tr>';
+		echo '<tr><th colspan="2"><div class="centre"><b>'._('Change Branch').'</b></th></tr>';
 		echo '<tr><td>'._('Branch Code').':</td><td>';
 		echo $_POST['BranchCode'] . '</td></tr>';
 
@@ -562,9 +562,8 @@ if (!isset($_GET['delete'])) {
 					address4,
 					address5,
 					address6
-					FROM
-					debtorsmaster
-					WHERE debtorno='".$_GET['BranchCode']."'";
+				FROM debtorsmaster
+				WHERE debtorno='".$_GET['BranchCode']."'";
 			$result = DB_query($sql, $db);
 			$myrow = DB_fetch_array($result);
 			$_POST['BranchCode'] = $_GET['BranchCode'];
@@ -579,10 +578,9 @@ if (!isset($_GET['delete'])) {
 		if (!isset($_POST['BranchCode'])) {
 			$_POST['BranchCode']='';
 		}
-		echo '<p Class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') . '" alt="">' . ' ' . _('Add a Branch').'</p>';
+		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') . '" alt="" />' . ' ' . _('Add a Branch').'</p>';
 		echo '<table class="selection"><tr><td>'._('Branch Code'). ':</td>
-			<td><input ' .(in_array('BranchCode',$Errors) ?  'class="inputerror"' : '' ) .
-				' tabindex=1 type="Text" name="BranchCode" size=12 maxlength=10 value="' . $_POST['BranchCode'] . '"></td></tr>';
+			<td><input ' .(in_array('BranchCode',$Errors) ?  'class="inputerror"' : '' ) . ' tabindex=1 type="text" name="BranchCode" size="12" maxlength="10" value="' . $_POST['BranchCode'] . '" /></td></tr>';
 		$_POST['DeliverBlind'] = $_SESSION['DefaultBlindPackNote'];
 	}
 
@@ -604,44 +602,44 @@ if (!isset($_GET['delete'])) {
 
 	echo '<tr><td>'._('Branch Name').':</td>';
 	if (!isset($_POST['BrName'])) {$_POST['BrName']='';}
-	echo '<td><input tabindex=2 type="Text" name="BrName" size=41 maxlength=40 value="'. $_POST['BrName'].'"></td></tr>';
+	echo '<td><input tabindex="2" type="text" name="BrName" size="41" maxlength="40" value="'. $_POST['BrName'].'" /></td></tr>';
 	echo '<tr><td>'._('Branch Contact').':</td>';
 	if (!isset($_POST['ContactName'])) {$_POST['ContactName']='';}
-	echo '<td><input tabindex=3 type="Text" name="ContactName" size=41 maxlength=40 value="'. $_POST['ContactName'].'"></td></tr>';
+	echo '<td><input tabindex="3" type="text" name="ContactName" size="41" maxlength="40" value="'. $_POST['ContactName'].'" /></td></tr>';
 	echo '<tr><td>'._('Street Address 1 (Street)').':</td>';
 	if (!isset($_POST['BrAddress1'])) {$_POST['BrAddress1']='';}
-	echo '<td><input tabindex=4 type="Text" name="BrAddress1" size=41 maxlength=40 value="'. $_POST['BrAddress1'].'"></td></tr>';
+	echo '<td><input tabindex="4" type="text" name="BrAddress1" size="41" maxlength="40" value="'. $_POST['BrAddress1'].'" /></td></tr>';
 	echo '<tr><td>'._('Street Address 2 (Suburb/City)').':</td>';
 	if (!isset($_POST['BrAddress2'])) {$_POST['BrAddress2']='';}
-	echo '<td><input tabindex=5 type="Text" name="BrAddress2" size=41 maxlength=40 value="'. $_POST['BrAddress2'].'"></td></tr>';
+	echo '<td><input tabindex="5" type="text" name="BrAddress2" size="41" maxlength="40" value="'. $_POST['BrAddress2'].'" /></td></tr>';
 	echo '<tr><td>'._('Street Address 3 (State)').':</td>';
 	if (!isset($_POST['BrAddress3'])) {$_POST['BrAddress3']='';}
-	echo '<td><input tabindex=6 type="Text" name="BrAddress3" size=41 maxlength=40 value="'. $_POST['BrAddress3'].'"></td></tr>';
+	echo '<td><input tabindex="6" type="text" name="BrAddress3" size="41" maxlength="40" value="'. $_POST['BrAddress3'].'" /></td></tr>';
 	echo '<tr><td>'._('Street Address 4 (Postal Code)').':</td>';
 	if (!isset($_POST['BrAddress4'])) {$_POST['BrAddress4']='';}
-	echo '<td><input tabindex=7 type="Text" name="BrAddress4" size=31 maxlength=40 value="'. $_POST['BrAddress4'].'"></td></tr>';
+	echo '<td><input tabindex="7" type="text" name="BrAddress4" size="31" maxlength="40" value="'. $_POST['BrAddress4'].'" /></td></tr>';
 	echo '<tr><td>'._('Street Address 5').':</td>';
 	if (!isset($_POST['BrAddress5'])) {$_POST['BrAddress5']='';}
-	echo '<td><input tabindex=8 type="Text" name="BrAddress5" size=21 maxlength=20 value="'. $_POST['BrAddress5'].'"></td></tr>';
+	echo '<td><input tabindex="8" type="text" name="BrAddress5" size="21" maxlength="20" value="'. $_POST['BrAddress5'].'" /></td></tr>';
 	echo '<tr><td>'._('Street Address 6').':</td>';
 	if (!isset($_POST['BrAddress6'])) {$_POST['BrAddress6']='';}
-	echo '<td><input tabindex=9 type="Text" name="BrAddress6" size=16 maxlength=15 value="'. $_POST['BrAddress6'].'"></td></tr>';
+	echo '<td><input tabindex="9" type="text" name="BrAddress6" size="16" maxlength="15" value="'. $_POST['BrAddress6'].'" /></td></tr>';
 	echo '<tr><td>'._('Special Instructions').':</td>';
 	if (!isset($_POST['specialinstructions'])) {$_POST['specialinstructions']='';}
-	echo '<td><input tabindex=10 type="Text" name="specialinstructions" size=56 value="'. $_POST['specialinstructions'].'"></td></tr>';
+	echo '<td><input tabindex="10" type="text" name="specialinstructions" size="56" value="'. $_POST['specialinstructions'].'" /></td></tr>';
 	echo '<tr><td>'._('Default days to deliver').':</td>';
 	if (!isset($_POST['EstDeliveryDays'])) {$_POST['EstDeliveryDays']=0;}
-	echo '<td><input ' .(in_array('EstDeliveryDays',$Errors) ?  'class="inputerror"' : '' ) .' tabindex=11 type="Text" class="number" name="EstDeliveryDays" size=4 maxlength=2 value='. $_POST['EstDeliveryDays'].'></td></tr>';
+	echo '<td><input ' .(in_array('EstDeliveryDays',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="11" type="text" class="number" name="EstDeliveryDays" size="4" maxlength="2" value="'. $_POST['EstDeliveryDays'].'" /></td></tr>';
 	echo '<tr><td>'._('Forward Date After (day in month)').':</td>';
 	if (!isset($_POST['FwdDate'])) {$_POST['FwdDate']=0;}
-	echo '<td><input ' .(in_array('FwdDate',$Errors) ?  'class="inputerror"' : '' ) .' tabindex=12 type="Text" class="number" name="FwdDate" size=4 maxlength=2 value='. $_POST['FwdDate'].'></td></tr>';
+	echo '<td><input ' .(in_array('FwdDate',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="12" type="text" class="number" name="FwdDate" size="4" maxlength="2" value="'. $_POST['FwdDate'].'" /></td></tr>';
 
 	echo '<tr><td>'._('Salesperson').':</td>';
-	echo '<td><select tabindex=13 name="Salesman">';
+	echo '<td><select tabindex="13" name="Salesman">';
 
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['Salesman']) and $myrow['salesmancode']==$_POST['Salesman']) {
-			echo '<option selected value="'.$myrow['salesmancode'] . '">' . $myrow['salesmanname'] . '</option>';
+			echo '<option selected="True" value="'.$myrow['salesmancode'] . '">' . $myrow['salesmanname'] . '</option>';
 		} else {
 			echo '<option value="'.$myrow['salesmancode'] . '">' . $myrow['salesmanname'] . '</option>';
 		}
@@ -665,7 +663,7 @@ if (!isset($_GET['delete'])) {
 	echo '<td><select tabindex=14 name="Area">';
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['Area']) and $myrow['areacode']==$_POST['Area']) {
-			echo '<option selected value="'.$myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
+			echo '<option selected="True" value="'.$myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
 		} else {
 			echo '<option value="'.$myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
 		}
@@ -691,7 +689,7 @@ if (!isset($_GET['delete'])) {
 
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['DefaultLocation']) and $myrow['loccode']==$_POST['DefaultLocation']) {
-			echo '<option selected value="'.$myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option selected="True" value="'.$myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
 			echo '<option value="'.$myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
@@ -724,16 +722,16 @@ if (!isset($_GET['delete'])) {
 	}
 	echo '<tr><td>'._('Phone Number').':</td>';
 	if (!isset($_POST['PhoneNo'])) {$_POST['PhoneNo']='';}
-	echo '<td><input tabindex=16 type="Text" name="PhoneNo" size=22 maxlength=20 value="'. $_POST['PhoneNo'].'"></td></tr>';
+	echo '<td><input tabindex="16" type="text" name="PhoneNo" size="22" maxlength="20" value="'. $_POST['PhoneNo'].'" /></td></tr>';
 
 	echo '<tr><td>'._('Fax Number').':</td>';
 	if (!isset($_POST['FaxNo'])) {$_POST['FaxNo']='';}
-	echo '<td><input tabindex=17 type="Text" name="FaxNo" size=22 maxlength=20 value="'. $_POST['FaxNo'].'"></td></tr>';
+	echo '<td><input tabindex="17" type="text" name="FaxNo" size="22" maxlength="20" value="'. $_POST['FaxNo'].'" /></td></tr>';
 
 	if (!isset($_POST['Email'])) {$_POST['Email']='';}
 	echo '<tr><td>'.(($_POST['Email']) ? '<a href="Mailto:'.$_POST['Email'].'">'._('Email').':</a>' : _('Email').':').'</td>';
 	  //only display email link if there is an email address
-	echo '<td><input tabindex=18 type="Text" name="Email" size=56 maxlength=55 value="'. $_POST['Email'].'"></td></tr>';
+	echo '<td><input tabindex="18" type="text" name="Email" size="56" maxlength="55" value="'. $_POST['Email'].'" /></td></tr>';
 
 	echo '<tr><td>'._('Tax Group').':</td>';
 	echo '<td><select tabindex=19 name="TaxGroup">';
@@ -745,7 +743,7 @@ if (!isset($_GET['delete'])) {
 
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['TaxGroup']) and $myrow['taxgroupid']==$_POST['TaxGroup']) {
-			echo '<option selected value="'. $myrow['taxgroupid'] . '">' . $myrow['taxgroupdescription'] . '</option>';
+			echo '<option selected="True" value="'. $myrow['taxgroupid'] . '">' . $myrow['taxgroupdescription'] . '</option>';
 		} else {
 			echo '<option value="'. $myrow['taxgroupid'] . '">' . $myrow['taxgroupdescription'] . '</option>';
 		}
@@ -756,10 +754,10 @@ if (!isset($_GET['delete'])) {
 	echo '</select></td></tr>';
 	echo '<tr><td>'._('Transactions on this branch').':</td><td><select tabindex=20 name="DisableTrans">';
 	if ($_POST['DisableTrans']==0){
-		echo '<option selected value=0>' . _('Enabled') . '</option>';
+		echo '<option selected="True" value=0>' . _('Enabled') . '</option>';
 		echo '<option value=1>' . _('Disabled') . '</option>';
 	} else {
-		echo '<option selected value=1>' . _('Disabled') . '</option>';
+		echo '<option selected="True" value=1>' . _('Disabled') . '</option>';
 		echo '<option value=0>' . _('Enabled') . '</option>';
 	}
 
@@ -770,9 +768,9 @@ if (!isset($_GET['delete'])) {
 	$ShipperResults = DB_query($SQL,$db);
 	while ($myrow=DB_fetch_array($ShipperResults)){
 		if (isset($_POST['DefaultShipVia'])and $myrow['shipper_id']==$_POST['DefaultShipVia']){
-			echo '<option selected value=' . $myrow['shipper_id'] . '>' . $myrow['shippername'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['shipper_id'] . '">' . $myrow['shippername'] . '</option>';
 		}else {
-			echo '<option value=' . $myrow['shipper_id'] . '>' . $myrow['shippername'] . '</option>';
+			echo '<option value="' . $myrow['shipper_id'] . '">' . $myrow['shippername'] . '</option>';
 		}
 	}
 
@@ -799,21 +797,21 @@ if (!isset($_GET['delete'])) {
 
 	echo '<tr><td>'._('Postal Address 1 (Street)').':</td>';
 	if (!isset($_POST['BrPostAddr1'])) {$_POST['BrPostAddr1']='';}
-	echo '<td><input tabindex=23 type="Text" name="BrPostAddr1" size=41 maxlength=40 value="'. $_POST['BrPostAddr1'].'"></td></tr>';
+	echo '<td><input tabindex=23 type="text" name="BrPostAddr1" size="41" maxlength="40" value="'. $_POST['BrPostAddr1'].'" /></td></tr>';
 	echo '<tr><td>'._('Postal Address 2 (Suburb/City)').':</td>';
 	if (!isset($_POST['BrPostAddr2'])) {$_POST['BrPostAddr2']='';}
-	echo '<td><input tabindex=24 type="Text" name="BrPostAddr2" size=41 maxlength=40 value="'. $_POST['BrPostAddr2'].'"></td></tr>';
+	echo '<td><input tabindex=24 type="text" name="BrPostAddr2" size="41" maxlength="40" value="'. $_POST['BrPostAddr2'].'" /></td></tr>';
 	echo '<tr><td>'._('Postal Address 3 (State)').':</td>';
 	if (!isset($_POST['BrPostAddr3'])) {$_POST['BrPostAddr3']='';}
-	echo '<td><input tabindex=25 type="Text" name="BrPostAddr3" size=31 maxlength=30 value="'. $_POST['BrPostAddr3'].'"></td></tr>';
+	echo '<td><input tabindex=25 type="text" name="BrPostAddr3" size="31" maxlength="30" value="'. $_POST['BrPostAddr3'].'" /></td></tr>';
 	echo '<tr><td>'._('Postal Address 4 (Postal Code)').':</td>';
 	if (!isset($_POST['BrPostAddr4'])) {$_POST['BrPostAddr4']='';}
-	echo '<td><input tabindex=26 type="Text" name="BrPostAddr4" size=21 maxlength=20 value="'. $_POST['BrPostAddr4'].'"></td></tr>';
+	echo '<td><input tabindex=26 type="text" name="BrPostAddr4" size="21" maxlength="20" value="'. $_POST['BrPostAddr4'].'" /></td></tr>';
 	echo '<tr><td>'._('Customers Internal Branch Code (EDI)').':</td>';
 	if (!isset($_POST['CustBranchCode'])) {$_POST['CustBranchCode']='';}
-	echo '<td><input tabindex=27 type="Text" name="CustBranchCode" size=31 maxlength=30 value="'. $_POST['CustBranchCode'].'"></td></tr>';
+	echo '<td><input tabindex=27 type="text" name="CustBranchCode" size="31" maxlength="30" value="'. $_POST['CustBranchCode'].'" /></td></tr>';
 	echo '</table>';
-	echo '<br /><div class="centre"><input tabindex=28 type="Submit" name="submit" value="' . _('Enter Branch') . '"></div>';
+	echo '<br /><div class="centre"><input tabindex="28" type="submit" name="submit" value="' . _('Enter Branch') . '" /></div>';
 	echo '</form>';
 
 } //end if record deleted no point displaying form to add record

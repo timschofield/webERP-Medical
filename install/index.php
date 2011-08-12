@@ -85,9 +85,9 @@ function change_data(type) {
 <tr>
 	<td class="content">
 			<h2>Welcome to the WebERP Installation Wizard.</h2>
-		<center>
+		<div class="centre">
 			<img src="<?php echo "../companies/weberpdemo/logo.jpg"; ?>" width="250" height="50" alt="Logo" />
-		</center>
+		</div>
 
 
 		<?php
@@ -353,12 +353,12 @@ function change_data(type) {
 			</td>
 			<?php //only show submit button if ready to go
 			if (($phpversion > 4.1 ) AND is_writable($CompanyPath)) {
-				// AND $_SESSION['session_support'] == 'Enabled' 
+				// AND $_SESSION['session_support'] == 'Enabled'
 				echo '<td colspan="1" align="right">
 						<input type="submit" tabindex="20" name="submit" value="Install WebERP" class="submit" />
 						</td>';
 			} else {
-				echo '<td>FIX ERRORS FIRST</td></tr><tr><td colspan=5><h2>The installation cannot proceed until the above errors are resolved</h2></td>';
+				echo '<td>FIX ERRORS FIRST</td></tr><tr><td colspan="5"><h2>The installation cannot proceed until the above errors are resolved</h2></td>';
 			}
 			?>
 		</tr>

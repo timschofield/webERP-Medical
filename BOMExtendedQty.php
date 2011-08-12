@@ -214,7 +214,7 @@ if (isset($_POST['PrintPDF'])) {
 
 		// Parameters for addTextWrap are defined in /includes/class.pdf.php
 		// 1) X position 2) Y position 3) Width
-		// 4) Height 5) Text 6) Alignment 7) Border 8) Fill - True to use SetFillColor
+		// 4) Height 5) text 6) Alignment 7) Border 8) Fill - True to use SetFillColor
 		// and False to set to transparent
 		$Difference = $myrow['quantity'] - ($myrow['qoh'] + $myrow['poqty'] + $myrow['woqty']);
 		if (($_POST['Select'] == 'All') or ($Difference > 0)) {
@@ -269,19 +269,18 @@ if (isset($_POST['PrintPDF'])) {
 
 	$title=_('Quantity Extended BOM Listing');
 	include('includes/header.inc');
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' .
-		_('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
 
 	echo '<br /><br /><form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<tr><td>' . _('Part') . ':</td><td><input type ="text" name="Part" size="20">';
-	echo '<tr><td>' . _('Quantity') . ':</td><td><input type="text" class="number" name="Quantity" size="4">';
+	echo '<tr><td>' . _('Part') . ':</td><td><input type ="text" name="Part" size="20" />';
+	echo '<tr><td>' . _('Quantity') . ':</td><td><input type="text" class="number" name="Quantity" size="4" />';
 	echo '<tr><td>' . _('Selection Option') . ':</td><td><select name="Select">';
-	echo '<option selected value="All">' . _('Show All Parts') . '</option>';
+	echo '<option selected="True" value="All">' . _('Show All Parts') . '</option>';
 	echo '<option value="Shortages">' . _('Only Show Shortages') . '</option>';
 	echo '</select></td></tr>';
 	echo '<tr><td>' . _('Print Option') . ':</td><td><select name="Fill">';
-	echo '<option selected value="yes">' . _('Print With Alternating Highlighted Lines') . '</option>';
+	echo '<option selected="True" value="yes">' . _('Print With Alternating Highlighted Lines') . '</option>';
 	echo '<option value="no">' . _('Plain Print') . '</option>';
 	echo '</select></td></tr>';
 	echo '</table><br /><br /><div class="centre"><br /><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';

@@ -354,11 +354,11 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 		$_POST['PrintOrEmail'] = 'Print';
 	}
 	if ($_POST['PrintOrEmail']=='Print'){
-		echo '<option selected value="Print">'. _('Print') . '</option>';
+		echo '<option selected="True" value="Print">'. _('Print') . '</option>';
 		echo '<option value="Email">' . _('Email') . '</option>';
 	} else {
 		echo '<option value="Print">'. _('Print') . '</option>';
-		echo '<option selected value="Email">'. _('Email') . '</option>';
+		echo '<option selected="True" value="Email">'. _('Email') . '</option>';
 	}
 	echo '</select></td></tr>';
 	echo '<tr><td>'. _('Show Amounts on the Order'). '</td><td>
@@ -367,11 +367,11 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 		$_POST['ShowAmounts'] = 'Yes';
 	}
 	if ($_POST['ShowAmounts']=='Yes'){
-		echo '<option selected value="Yes">'. _('Yes') . '</option>';
+		echo '<option selected="True" value="Yes">'. _('Yes') . '</option>';
 		echo '<option value="No">' . _('No') . '</option>';
 	} else {
 		echo '<option value="Yes">'. _('Yes') . '</option>';
-		echo '<option selected value="No">'. _('No') . '</option>';
+		echo '<option selected="True" value="No">'. _('No') . '</option>';
 	}
 	echo '</select></td></tr>';
 	if ($_POST['PrintOrEmail']=='Email'){
@@ -387,7 +387,7 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 			while ($ContactDetails = DB_fetch_array($ContactsResult)){
 				if (strlen($ContactDetails['email'])>2 AND strpos($ContactDetails['email'],'@')>0){
 					if ($_POST['EmailTo']==$ContactDetails['email']){
-						echo '<option selected value="' . $ContactDetails['email'] . '">' . $ContactDetails['Contact'] . ' - ' . $ContactDetails['email'] . '</option>';
+						echo '<option selected="True" value="' . $ContactDetails['email'] . '">' . $ContactDetails['Contact'] . ' - ' . $ContactDetails['email'] . '</option>';
 					} else {
 						echo '<option value="' . $ContactDetails['email'] . '">' . $ContactDetails['contact'] . ' - ' . $ContactDetails['email'] . '</option>';
 					}

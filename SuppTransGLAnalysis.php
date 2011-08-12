@@ -94,7 +94,7 @@ if ($_SESSION['SuppTrans']->InvoiceOrCredit == 'Invoice'){
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('General Ledger') . '" alt="" />' . ' '
 	. _('General Ledger Analysis of Credit Note From') . ' ' . $_SESSION['SuppTrans']->SupplierName. '</p>';
 }
-echo '<table cellpadding=2 class="selection">';
+echo '<table cellpadding="2" class="selection">';
 
 $TableHeader = '<tr>
 				<th>' . _('Account') . '</th>
@@ -127,8 +127,8 @@ foreach ( $_SESSION['SuppTrans']->GLCodes as $EnteredGLCode){
 }
 
 echo '<tr>
-	<td colspan=2 class="number"><font size=4 color=blue>' . _('Total') . ':</font></td>
-	<td class="number"><font size=2 color=navy><u>' . number_format($TotalGLValue,$_SESSION['SuppTrans']->CurrDecimalPlaces) . '</u></font></td>
+	<td colspan="2" class="number"><font size="4" color="blue">' . _('Total') . ':</font></td>
+	<td class="number"><font size="2" color="navy"><u>' . number_format($TotalGLValue,$_SESSION['SuppTrans']->CurrDecimalPlaces) . '</u></font></td>
 	</tr>
 	</table>';
 
@@ -149,8 +149,8 @@ if (!isset($_POST['GLCode'])) {
 }
 echo '<tr>
 	<td>' . _('Account Code') . ':</td>
-	<td><input type="text" name="GLCode" size=12 maxlength=11 value="' .  $_POST['GLCode'] . '"></td>
-	<input type="hidden" name="JobRef" value="">
+	<td><input type="text" name="GLCode" size="12" maxlength="11" value="' .  $_POST['GLCode'] . '" /></td>
+	<input type="hidden" name="JobRef" value="" />
 	</tr>';
 echo '<tr>
 	<td>' . _('Account Selection') . ':<br />(' . _('If you know the code enter it above') . '<br />' . _('otherwise select the account from the list') . ')</td>
@@ -162,7 +162,7 @@ $result = DB_query($sql, $db);
 echo '<option value=""></option>';
 while ($myrow = DB_fetch_array($result)) {
 	if ($myrow['accountcode'] == $_POST['AcctSelection']) {
-		echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
+		echo '<option selected="True" value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
 	} else {
 		echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
 	}
@@ -176,7 +176,7 @@ if (!isset($_POST['Amount'])) {
 }
 echo '<tr>
 	<td>' . _('Amount') . ':</td>
-	<td><input type="text" class="number" name="Amount" size="12" maxlength="11" value="' .  $_POST['Amount'] . '"></td>
+	<td><input type="text" class="number" name="Amount" size="12" maxlength="11" value="' .  $_POST['Amount'] . '" /></td>
 	</tr>';
 
 if (!isset($_POST['Narrative'])) {
@@ -188,7 +188,7 @@ echo '<tr>
 	</tr>
 	</table><br />';
 
-echo '<div class="centre"><input type="submit" name="AddGLCodeToTrans" value="' . _('Enter GL Line') . '"></div>';
+echo '<div class="centre"><input type="submit" name="AddGLCodeToTrans" value="' . _('Enter GL Line') . '" /></div>';
 
 echo '</form>';
 include('includes/footer.inc');

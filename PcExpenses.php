@@ -6,8 +6,7 @@ include('includes/session.inc');
 $title = _('Maintenance Of Petty Cash Of Expenses');
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Payment Entry')
-	. '" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Payment Entry') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (isset($_POST['SelectedExpense'])){
 	$SelectedExpense = strtoupper($_POST['SelectedExpense']);
@@ -214,7 +213,7 @@ or deletion of the records*/
 			$myrow[1],
 			$myrow[2],
 			$Description[0],
-			$_SERVER['PHP_SELF'], htmlentities($myrow[0]),
+			$_SERVER['PHP_SELF'], htmlentities($myrow[0], ENT_QUOTES,'UTF-8'),
 		$_SERVER['PHP_SELF'], $myrow[0]);
 	}
 	//END WHILE LIST LOOP
@@ -261,18 +260,18 @@ if (! isset($_GET['delete'])) {
 
 		// This is a new type so the user may volunteer a type code
 		if (isset($_POST['codeexpense'])) {
-			echo '<table class="selection"><tr><td>' . _('Code Of Expense') . ':</td><td><input type="Text" value="'.$_POST['codeexpense'].'"
-				' . (in_array('SalesType',$Errors) ? 'class="inputerror"' : '' ) .' name="codeexpense"></td></tr>';
+			echo '<table class="selection"><tr><td>' . _('Code Of Expense') . ':</td>
+					<td><input type="text" value="'.$_POST['codeexpense'].'" ' . (in_array('SalesType',$Errors) ? 'class="inputerror"' : '' ) .' name="codeexpense" /></td></tr>';
 		} else {
-			echo '<table class="selection"><tr><td>' . _('Code Of Expense') . ':</td><td><input type="Text"
-				' . (in_array('SalesType',$Errors) ? 'class="inputerror"' : '' ) .' name="codeexpense"></td></tr>';
+			echo '<table class="selection"><tr><td>' . _('Code Of Expense') . ':</td>
+					<td><input type="text" ' . (in_array('SalesType',$Errors) ? 'class="inputerror"' : '' ) .' name="codeexpense" /></td></tr>';
 		}
 	}
 
 	if (!isset($_POST['description'])) {
 		$_POST['description']='';
 	}
-	echo '<tr><td>' . _('Description') . ':</td><td><input type="Text" name="description" size=50 maxlength=49 value="' . $_POST['description'] . '"></td></tr>';
+	echo '<tr><td>' . _('Description') . ':</td><td><input type="text" name="description" size="50" maxlength="49" value="' . $_POST['description'] . '" /></td></tr>';
 
 	echo '<tr><td>' . _('Account Code') . ':</td><td><select name="glaccount">';
 
@@ -286,7 +285,7 @@ if (! isset($_GET['delete'])) {
 	echo '<option value=""></option>';
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['glaccount']) and $myrow['accountcode']==$_POST['glaccount']) {
-			echo '<option selected value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
 		}

@@ -295,11 +295,10 @@ function BuildCriteria($FieldListings) {
 		default:
 		case 0: $EndString = '<td>&nbsp;</td><td>&nbsp;</td>';
 			break;
-		case 1: $EndString = '<td><input name="fromvalue'.$SeqNum.'" type="text"
-				value="'.$Params[1].'" size="21" maxlength="20"></td><td>&nbsp;</td>';
+		case 1: $EndString = '<td><input name="fromvalue'.$SeqNum.'" type="text" value="'.$Params[1].'" size="21" maxlength="20" /></td><td>&nbsp;</td>';
 			break;
-		case 2: $EndString = '<td><input name="fromvalue'.$SeqNum.'" type="text" value="'.$Params[1].'" size="21" maxlength="20"></td>
-				<td><input name="tovalue'.$SeqNum.'" type="text" value="'.$Params[2].'" size="21" maxlength="20"></td>';
+		case 2: $EndString = '<td><input name="fromvalue'.$SeqNum.'" type="text" value="'.$Params[1].'" size="21" maxlength="20" /></td>
+				<td><input name="tovalue'.$SeqNum.'" type="text" value="'.$Params[2].'" size="21" maxlength="20" /></td>';
 	} // end switch array_shift($CritBlocks)
 	$CriteriaString .= '<td><select name="defcritsel'.$SeqNum.'">';
 	foreach ($CritBlocks as $value) {
@@ -316,20 +315,20 @@ function BuildFieldList($FieldListings) {
 	$CriteriaString = '';
 	foreach ($FieldListings as $FieldValues) {
 		$SeqNum = $FieldValues['seqnum'];
-		$CriteriaString .= '<tr><td><input name="DataField'.$SeqNum.'" type="hidden" value="'.$SeqNum.'">';
+		$CriteriaString .= '<tr><td><input name="DataField'.$SeqNum.'" type="hidden" value="'.$SeqNum.'" />';
 		$CriteriaString .= $FieldValues['displaydesc'].'</td>'; // add the description
-		if ($FieldValues['visible']=='1') $Checked = ' checked'; else $Checked = '';
-		$CriteriaString .= '<td align="center"><input type="checkbox" name="show'.$SeqNum.'" value="1"'.$Checked.'></td>';
+		if ($FieldValues['visible']=='1') $Checked = ' checked="True"'; else $Checked = '';
+		$CriteriaString .= '<td align="center"><input type="checkbox" name="show'.$SeqNum.'" value="1"'.$Checked.' /></td>';
 		if ($FieldValues['columnbreak']=='1') $Checked = ' checked'; else $Checked = '';
-		$CriteriaString .= '<td align="center"><input type="checkbox" name="break'.$SeqNum.'" value="1"'.$Checked.'></td>';
+		$CriteriaString .= '<td align="center"><input type="checkbox" name="break'.$SeqNum.'" value="1"'.$Checked.' /></td>';
 		if ($FieldValues['visible']=='1') {
 			$CriteriaString .= '<td align="center">'.$ColCount.'</td>';
 			if ($FieldValues['columnbreak']=='1') $ColCount++;
 		} else {
 			$CriteriaString .= '<td>&nbsp;</td>';
 		}
-		$CriteriaString .= '<td align="center"><INPUT type=image name="up'.$SeqNum.'" value="up'.$SeqNum.'" src="images/upicon.png" border="0">
-			&nbsp;<INPUT type=image name="dn'.$SeqNum.'" value="dn" src="images/downicon.png" border="0"></td>';
+		$CriteriaString .= '<td align="center"><input type=image name="up'.$SeqNum.'" value="up'.$SeqNum.'" src="images/upicon.png" border="0" />
+			&nbsp;<input type=image name="dn'.$SeqNum.'" value="dn" src="images/downicon.png" border="0" /></td>';
 		$CriteriaString .= '</tr>';
 	}
 	return $CriteriaString;

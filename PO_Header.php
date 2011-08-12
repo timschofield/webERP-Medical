@@ -99,6 +99,16 @@ if (isset($_POST['UpdateStatus']) AND $_POST['UpdateStatus']!='') {
 			}
 		}
 
+		if ($_POST['Status'] == 'Completed') {
+			if ($AuthorityLevel > $OrderTotal) {
+				$_SESSION['PO'.$identifier]->StatComments = date($_SESSION['DefaultDateFormat']) . ' - ' . _('Completed by') . $UserChangedStatus . $_POST['StatusComments'] . '<br />' . html_entity_decode($_POST['StatusCommentsComplete']);
+				$_SESSION['PO'.$identifier]->AllowPrintPO=1;
+			} else {
+				$OKToUpdateStatus=0;
+				prnMsg( _('You do not have permission to complete this purchase order').'.<br />', 'error');
+			}
+		}
+
 
 		if ($_POST['Status'] == 'Rejected' OR $_POST['Status'] == 'Cancelled' ) {
 			if(!isset($_SESSION['ExistingOrder']) OR $_SESSION['ExistingOrder']!=0) {
@@ -189,7 +199,7 @@ if (isset($_GET['NewOrder']) and isset($_GET['StockID']) and isset($_GET['Select
 
 }
 
-if (isset($_POST['EnterLines'])){
+if ((isset($_POST['EnterLines']) or isset($_POST['LookupDeliveryAddress']) or isset($_POST['SearchSuppliers'])) and isset($_POST['StkLocation'])){
 /*User hit the button to enter line items -
  *  ensure session variables updated then meta refresh to PO_Items.php*/
 
@@ -221,27 +231,29 @@ if (isset($_POST['EnterLines'])){
 	$_SESSION['PO'.$identifier]->Tel = $_POST['Tel'];
 	$_SESSION['PO'.$identifier]->Port = $_POST['Port'];
 
-	if (isset($_POST['RePrint']) and $_POST['RePrint']==1){
+	if (!isset($_POST['LookupDeliveryAddress']) and !isset($_POST['SearchSuppliers'])) {
+		if (isset($_POST['RePrint']) and $_POST['RePrint']==1){
 
-		$_SESSION['PO'.$identifier]->AllowPrintPO=1;
+			$_SESSION['PO'.$identifier]->AllowPrintPO=1;
 
-		$sql = "UPDATE purchorders
+			$sql = "UPDATE purchorders
 						SET purchorders.allowprint=1
 						WHERE purchorders.orderno='" . $_SESSION['PO'.$identifier]->OrderNo ."'";
 
-		$ErrMsg = _('An error occurred updating the purchase order to allow reprints') . '. ' . _('The error says');
-		$UpdateResult = DB_query($sql,$db,$ErrMsg);
-	} else {
-		$_POST['RePrint'] = 0;
-	}
+			$ErrMsg = _('An error occurred updating the purchase order to allow reprints') . '. ' . _('The error says');
+			$UpdateResult = DB_query($sql,$db,$ErrMsg);
+		} else {
+			$_POST['RePrint'] = 0;
+		}
 
-	echo '<meta http-equiv="Refresh" content="0; url=' . $rootpath . '/PO_Items.php?identifier='.$identifier. '">';
-	echo '<br />';
-	prnMsg(_('You should automatically be forwarded to the entry of the purchase order line items page') . '. ' .
-		_('If this does not happen') . ' (' . _('if the browser does not support META Refresh') . ') ' .
-		'<a href="$rootpath/PO_Items.php?identifier='.$identifier . '">' . _('click here') . '</a> ' . _('to continue'),'info');
+		echo '<meta http-equiv="Refresh" content="0; url=' . $rootpath . '/PO_Items.php?identifier='.$identifier. '">';
+		echo '<br />';
+		prnMsg(_('You should automatically be forwarded to the entry of the purchase order line items page') . '. ' .
+			_('If this does not happen') . ' (' . _('if the browser does not support META Refresh') . ') ' .
+			'<a href="$rootpath/PO_Items.php?identifier='.$identifier . '">' . _('click here') . '</a> ' . _('to continue'),'info');
 		include('includes/footer.inc');
 		exit;
+	}
 } /* end of if isset _POST'EnterLines' */
 
 echo '<span style="float:left"><a href="'. $rootpath . '/PO_SelectOSPurchOrder.php?identifier='.$identifier.'">'. _('Back to Purchase Orders'). '</a></span>';
@@ -308,31 +320,31 @@ if (isset($_POST['SearchSuppliers'])){
 			$SearchString = '%' . str_replace(' ', '%', $_POST['Keywords']) . '%';
 
 			$SQL = "SELECT suppliers.supplierid,
-											suppliers.suppname,
-											suppliers.address1,
-											suppliers.address2,
-											suppliers.address3,
-											suppliers.address4,
-											suppliers.address5,
-											suppliers.address6,
-											suppliers.currcode
-										FROM suppliers
-										WHERE suppliers.suppname LIKE '". $SearchString ."'
-										ORDER BY suppliers.suppname";
+							suppliers.suppname,
+							suppliers.address1,
+							suppliers.address2,
+							suppliers.address3,
+							suppliers.address4,
+							suppliers.address5,
+							suppliers.address6,
+							suppliers.currcode
+						FROM suppliers
+						WHERE suppliers.suppname LIKE '". $SearchString ."'
+						ORDER BY suppliers.suppname";
 
 		} elseif (strlen($_POST['SuppCode'])>0){
 			$SQL = "SELECT suppliers.supplierid,
-											suppliers.suppname,
-											suppliers.address1,
-											suppliers.address2,
-											suppliers.address3,
-											suppliers.address4,
-											suppliers.address5,
-											suppliers.address6,
-											suppliers.currcode
-										FROM suppliers
-										WHERE suppliers.supplierid LIKE '%" . $_POST['SuppCode'] . "%'
-										ORDER BY suppliers.supplierid";
+							suppliers.suppname,
+							suppliers.address1,
+							suppliers.address2,
+							suppliers.address3,
+							suppliers.address4,
+							suppliers.address5,
+							suppliers.address6,
+							suppliers.currcode
+						FROM suppliers
+						WHERE suppliers.supplierid LIKE '%" . $_POST['SuppCode'] . "%'
+						ORDER BY suppliers.supplierid";
 		}
 
 		$ErrMsg = _('The searched supplier records requested cannot be retrieved because');
@@ -515,8 +527,8 @@ if (isset($_POST['Select'])) {
 if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifier]->SupplierID) OR
 		$_SESSION['PO'.$identifier]->SupplierID=='' ) {
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' .
-		_('Purchase Order') . '" alt="">' . ' ' . _('Purchase Order: Select Supplier') . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Purchase Order') . '" alt="" />' .
+		' ' . _('Purchase Order: Select Supplier') . '</p>';
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier.'" method="post" name="choosesupplier">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	if (isset($SuppliersReturned )) {
@@ -526,14 +538,14 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	echo '<table cellpadding="3" colspan="4" class="selection">
 	<tr>
 	<td><font size="1">' . _('Enter text in the supplier name') . ':</font></td>
-	<td><input type="text" name="Keywords" size="20" maxlength="25"></td>
+	<td><input type="text" name="Keywords" size="20" maxlength="25" /></td>
 	<td><font size="3"><b>' . _('OR') . '</b></font></td>
 	<td><font size="1">' . _('Enter text extract in the supplier code') . ':</font></td>
-	<td><input type="text" name="SuppCode" size="15" maxlength="18"></td>
+	<td><input type="text" name="SuppCode" size="15" maxlength="18" /></td>
 	</tr>
 	</table><br /><div class="centre">
-	<input type="submit" name="SearchSuppliers" value="' . _('Search Now') . '">
-	<input type="submit" action="reset" value="' . _('Reset') . '"></div>';
+	<input type="submit" name="SearchSuppliers" value="' . _('Search Now') . '" />
+	<input type="submit" action="reset" value="' . _('Reset') . '" /></div>';
 
 	echo '<script  type="text/javascript">defaultControl(document.forms[0].Keywords);</script>';
 
@@ -590,7 +602,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<p class="page_title_text">
-				<img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Purchase Order') . '" alt="">
+				<img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Purchase Order') . '" alt="" />
 				' . $_SESSION['PO'.$identifier]->SupplierName . ' - ' . _('All amounts stated in') . '
 				' . $_SESSION['PO'.$identifier]->CurrCode . '<br />';
 
@@ -683,8 +695,8 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	if (!isset($_POST['LookupDeliveryAddress']) and (!isset($_POST['StkLocation']) or $_POST['StkLocation'])
 		AND (isset($_SESSION['PO'.$identifier]->Location) AND $_SESSION['PO'.$identifier]->Location != '')) {
 		/* The session variables are set but the form variables have
-	     * been lost --
-	     * need to restore the form variables from the session */
+		* been lost --
+		* need to restore the form variables from the session */
 		$_POST['StkLocation']=$_SESSION['PO'.$identifier]->Location;
 		$_POST['SupplierContact']=$_SESSION['PO'.$identifier]->SupplierContact;
 		$_POST['DelAdd1']=$_SESSION['PO'.$identifier]->DelAdd1;
@@ -748,8 +760,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	}
 
 	echo '<tr><td>' . _('Initiated By') . ':</td>
-			<td><input type="hidden" name="Initiator" size="11" maxlength="10" value="' .
-			$_POST['Initiator'] . '" />' . $_POST['Initiator'] . '</td></tr>';
+			<td><input type="hidden" name="Initiator" size="11" maxlength="10" value="' . $_POST['Initiator'] . '" />' . $_POST['Initiator'] . '</td></tr>';
 	echo '<tr><td>' . _('Requisition Ref') . ':</td>
 					<td><input type="text" name="Requisition" size="16" maxlength="15" value="' . $_POST['Requisition'] . '" /></td></tr>';
 
@@ -770,7 +781,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	if ($_SESSION['PO'.$identifier]->AllowPrintPO==0 AND empty($_POST['RePrint'])){
 		echo '<tr><td>' . _('Allow Reprint') . ':</td>
 							<td><select name="RePrint" onChange="ReloadForm(form1.AllowRePrint)">
-									<option selected value="0">' . _('No') . '</option>
+									<option selected="True" value="0">' . _('No') . '</option>
 									<option value="1">' . _('Yes') . '</option>
 									</select></td>';
 		echo '<td><input type="submit" name="AllowRePrint" value="Update" /></td></tr>';
@@ -806,10 +817,10 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 			break;
 		case PurchOrder::STATUS_PRINTED:
 			$StatusList = array(PurchOrder::STATUS_PENDING, PurchOrder::STATUS_PRINTED,
-                                PurchOrder::STATUS_CANCELLED);
+                                PurchOrder::STATUS_CANCELLED, PurchOrder::STATUS_COMPLETED);
 			break;
-		case PurchOrder::STATUS_COMPLITED:
-			$StatusList = array(PurchOrder::STATUS_COMPLITED);
+		case PurchOrder::STATUS_COMPLETED:
+			$StatusList = array(PurchOrder::STATUS_COMPLETED);
 			break;
 		default:
 			$StatusList = array(PurchOrder::STATUS_NEW_ORDER, PurchOrder::STATUS_PENDING,
@@ -821,7 +832,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	echo '<td>' . _('Status') . ' :  </td><td><select name="Status" onChange="ReloadForm(UpdateStatus)">';
 	foreach ($StatusList as $Status) {
 		if ($_SESSION['PO'.$identifier]->Status == $Status){
-			echo '<option selected value="' . $Status . '">' . _($Status) . '</option>';
+			echo '<option selected="True" value="' . $Status . '">' . _($Status) . '</option>';
 		} else {
 			echo '<option value="'.$Status.'">' . _($Status) . '</option>';
 		}
@@ -830,11 +841,11 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	echo '</select></td></tr>';
 
 	echo '<tr><td>' . _('Status Comment') . ':</td>
-						<td><input type="text" name="StatusComments" size="50"></td></tr>
-					<tr><td colspan=2><b>' .  html_entity_decode($_SESSION['PO'.$identifier]->StatComments) .'</b></td></tr>';
+						<td><input type="text" name="StatusComments" size="50" /></td></tr>
+					<tr><td colspan="2"><b>' .  html_entity_decode($_SESSION['PO'.$identifier]->StatComments) .'</b></td></tr>';
 	//need to use single quotes as double quotes inside the string of StatusComments
 	echo '<input type="hidden" name="StatusCommentsComplete" value="' . addslashes($_SESSION['PO'.$identifier]->StatComments) .'" />';
-	echo '<tr><td><input type="submit" name="UpdateStatus" value="' . _('Status Update') .'"></td>';
+	echo '<tr><td><input type="submit" name="UpdateStatus" value="' . _('Status Update') .'" /></td>';
 
 	echo '</tr></table></td>';
 
@@ -857,7 +868,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	while ($LocnRow=DB_fetch_array($LocnResult)){
 		if (($_POST['StkLocation'] == $LocnRow['loccode'] OR
 				($_POST['StkLocation']=='' AND $LocnRow['loccode']==$_SESSION['UserStockLocation']))){
-			echo '<option selected value="' . $LocnRow['loccode'] . '">' . $LocnRow['locationname'] . '</option>';
+			echo '<option selected="True" value="' . $LocnRow['loccode'] . '">' . $LocnRow['locationname'] . '</option>';
 		} else {
 			echo '<option value="' . $LocnRow['loccode'] . '">' . $LocnRow['locationname'] . '</option>';
 		}
@@ -954,28 +965,28 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 
 
 	echo '<tr><td>' . _('Delivery Contact') . ':</td>
-		<td><input type="text" name="Contact" size="41"  value="' . $_SESSION['PO'.$identifier]->Contact . '"></td>
+		<td><input type="text" name="Contact" size="41"  value="' . $_SESSION['PO'.$identifier]->Contact . '" /></td>
 		</tr>';
 	echo '<tr><td>' . _('Address') . ' 1 :</td>
-		<td><input type="text" name="DelAdd1" size="41" maxlength="40" value="' . $_POST['DelAdd1'] . '"></td>
+		<td><input type="text" name="DelAdd1" size="41" maxlength="40" value="' . $_POST['DelAdd1'] . '" /></td>
 		</tr>';
 	echo '<tr><td>' . _('Address') . ' 2 :</td>
-		<td><input type="text" name="DelAdd2" size="41" maxlength="40" value="' . $_POST['DelAdd2'] . '"></td>
+		<td><input type="text" name="DelAdd2" size="41" maxlength="40" value="' . $_POST['DelAdd2'] . '" /></td>
 		</tr>';
 	echo '<tr><td>' . _('Address') . ' 3 :</td>
-		<td><input type="text" name="DelAdd3" size="41" maxlength="40" value="' . $_POST['DelAdd3'] . '"></td>
+		<td><input type="text" name="DelAdd3" size="41" maxlength="40" value="' . $_POST['DelAdd3'] . '" /></td>
 		</tr>';
 	echo '<tr><td>' . _('Address') . ' 4 :</td>
-		<td><input type="text" name="DelAdd4" size="21" maxlength="20" value="' . $_POST['DelAdd4'] . '"></td>
+		<td><input type="text" name="DelAdd4" size="21" maxlength="20" value="' . $_POST['DelAdd4'] . '" /></td>
 		</tr>';
 	echo '<tr><td>' . _('Address') . ' 5 :</td>
-		<td><input type="text" name="DelAdd5" size="16" maxlength="15" value="' . $_POST['DelAdd5'] . '"></td>
+		<td><input type="text" name="DelAdd5" size="16" maxlength="15" value="' . $_POST['DelAdd5'] . '" /></td>
 		</tr>';
 	echo '<tr><td>' . _('Address') . ' 6 :</td>
-		<td><input type="text" name="DelAdd6" size="16" maxlength=15 value="' . $_POST['DelAdd6'] . '"></td>
+		<td><input type="text" name="DelAdd6" size="16" maxlength="15" value="' . $_POST['DelAdd6'] . '" /></td>
 		</tr>';
 	echo '<tr><td>' . _('Phone') . ':</td>
-		<td><input type="text" name="Tel" size="31" maxlength="30" value="' . $_SESSION['PO'.$identifier]->Tel . '"></td>
+		<td><input type="text" name="Tel" size="31" maxlength="30" value="' . $_SESSION['PO'.$identifier]->Tel . '" /></td>
 		</tr>';
 
 	echo '<tr><td>' . _('Delivery By') . ':</td><td><select name="DeliveryBy">';
@@ -984,7 +995,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 
 	while ($ShipperRow=DB_fetch_array($ShipperResult)){
 		if (isset($_POST['DeliveryBy']) and ($_POST['DeliveryBy'] == $ShipperRow['shipper_id'])) {
-			echo '<option selected value="' . $ShipperRow['shipper_id'] . '">' . $ShipperRow['shippername'] . '</option>';
+			echo '<option selected="True" value="' . $ShipperRow['shipper_id'] . '">' . $ShipperRow['shippername'] . '</option>';
 		} else {
 			echo '<option value="' . $ShipperRow['shipper_id'] . '">' . $ShipperRow['shippername'] . '</option>';
 		}
@@ -1001,14 +1012,14 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 
 	while ( $SuppCoRow=DB_fetch_array($SuppCoResult)){
 		if ($SuppCoRow['suppname'] == $_SESSION['PO'.$identifier]->SupplierName) {
-			echo '<option selected value="' . $SuppCoRow['suppname'] . '">' . $SuppCoRow['suppname'] . '</option>';
+			echo '<option selected="True" value="' . $SuppCoRow['suppname'] . '">' . $SuppCoRow['suppname'] . '</option>';
 		} else {
 			echo '<option value="' . $SuppCoRow['suppname'] . '">' . $SuppCoRow['suppname'] . '</option>';
 		}
 	}
 
 	echo '</select> ';
-	echo '<input type="submit" name="SearchSuppliers" value="' . _('Select Now') . '"></td></tr>';
+	echo '<input type="submit" name="SearchSuppliers" value="' . _('Select Now') . '" /></td></tr>';
 
 	echo '</td></tr><tr><td>' . _('Supplier Contact') . ':</td><td>
 		<select name="SupplierContact">';
@@ -1020,7 +1031,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 		if ($_POST['SupplierContact'] == $SuppCoRow['contact'] OR ($_POST['SupplierContact']==''
 			AND $SuppCoRow['contact']==$_SESSION['PO'.$identifier]->SupplierContact)){
 
-			echo '<option selected value="' . $SuppCoRow['contact'] . '">' . $SuppCoRow['contact'] . '</option>';
+			echo '<option selected="True" value="' . $SuppCoRow['contact'] . '">' . $SuppCoRow['contact'] . '</option>';
 		} else {
 			echo '<option value="' . $SuppCoRow['contact'] . '">' . $SuppCoRow['contact'] . '</option>';
 		}
@@ -1054,7 +1065,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 
 	while ($myrow = DB_fetch_array($result)) {
 		if ($myrow['termsindicator']==$_SESSION['PO'.$identifier]->PaymentTerms) {
-			echo '<option selected value="'. $myrow['termsindicator'] . '">' . $myrow['terms'] . '</option>';
+			echo '<option selected="True" value="'. $myrow['termsindicator'] . '">' . $myrow['terms'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow['termsindicator'] . '">' . $myrow['terms'] . '</option>';
 		} //end while loop
@@ -1071,10 +1082,10 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 		</tr>';
 
 	if ($_SESSION['PO'.$identifier]->CurrCode != $_SESSION['CompanyRecord']['currencydefault']) {
-		echo '<tr><td>'. _('Exchange Rate').':'.'</td><td><input type="text" name="ExRate"
-		value="'.$_POST['ExRate'].'" class="number" size="11"></td></tr>';
+		echo '<tr><td>'. _('Exchange Rate').':'.'</td>
+					<td><input type="text" name="ExRate" value="'.$_POST['ExRate'].'" class="number" size="11" /></td></tr>';
 	} else {
-		echo '<input type="hidden" name="ExRate" value="1">';
+		echo '<input type="hidden" name="ExRate" value="1" />';
 	}
 	echo '</td></tr></table>'; /*end of sub table */
 

@@ -22,19 +22,18 @@ $sql = "SELECT loccode,
 	FROM locations";
 $resultStkLocs = DB_query($sql,$db);
 
-echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') .
-	'" alt="" />' . ' ' . $title.'</p>';
+echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>';
 
 echo '<table class="selection"><tr><td>' . _('From Stock Location') . ':</td><td><select name="StockLocation"> ';
 while ($myrow=DB_fetch_array($resultStkLocs)){
 	if (isset($_POST['StockLocation']) AND $_POST['StockLocation']!='All'){
 		if ($myrow['loccode'] == $_POST['StockLocation']){
-		     echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		     echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
 		     echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
-		 echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		 echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		 $_POST['StockLocation']=$myrow['loccode'];
 	} else {
 		 echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
@@ -57,13 +56,13 @@ if (!isset($_POST['StockCat'])){
 	$_POST['StockCat']='All';
 }
 if ($_POST['StockCat']=='All'){
-	echo '<option selected value="All">' . _('All') . '</option>';
+	echo '<option selected="True" value="All">' . _('All') . '</option>';
 } else {
 	echo '<option value="All">' . _('All') . '</option>';
 }
 while ($myrow1 = DB_fetch_array($result1)) {
 	if ($myrow1['categoryid']==$_POST['StockCat']){
-		echo '<option selected value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
+		echo '<option selected="True" value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 	} else {
 		echo '<option value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 	}
@@ -77,17 +76,17 @@ if (!isset($_POST['BelowReorderQuantity'])){
 	$_POST['BelowReorderQuantity']='All';
 }
 if ($_POST['BelowReorderQuantity']=='All'){
-	echo '<option selected value="All">' . _('All') . '</option>';
+	echo '<option selected="True" value="All">' . _('All') . '</option>';
 	echo '<option value="Below">' . _('Only Items Below Re-order Quantity') . '</option>';
 	echo '<option value="NotZero">' . _('Only items where stock is available') . '</option>';
 } else if ($_POST['BelowReorderQuantity']=='Below') {
 	echo '<option value="All">' . _('All') . '</option>';
-	echo '<option selected value="Below">' . _('Only Items Below Re-order Quantity') . '</option>';
+	echo '<option selected="True" value="Below">' . _('Only Items Below Re-order Quantity') . '</option>';
 	echo '<option value="NotZero">' . _('Only items where stock is available') . '</option>';
 } else  {
 	echo '<option value="All">' . _('All') . '</option>';
 	echo '<option value="Below">' . _('Only Items Below Re-order Quantity') . '</option>';
-	echo '<option selected value="NotZero">' . _('Only items where stock is available') . '</option>';
+	echo '<option selected="True" value="NotZero">' . _('Only items where stock is available') . '</option>';
 }
 
 echo '</td></tr></table>';
@@ -140,7 +139,7 @@ if (isset($_POST['ShowStatus'])){
 	$DbgMsg = _('The SQL that failed was');
 	$LocStockResult = DB_query($sql, $db, $ErrMsg, $DbgMsg);
 
-	echo '<br /><table cellpadding=5 cellspacing=4 class="selection">';
+	echo '<br /><table cellpadding="5" cellspacing="4" class="selection">';
 
 	$tableheader = '<tr>
 					<th>' . _('StockID') . '</th>

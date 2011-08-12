@@ -249,8 +249,8 @@ set all the necessary session variables changed by the POST  */
 if ($_SESSION['Items']->SpecialInstructions) {
   prnMsg($_SESSION['Items']->SpecialInstructions,'warn');
 }
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Confirm Invoice') .
-	'" alt="" />' . ' ' . _('Confirm Dispatch and Invoice'). '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Confirm Invoice') . '" alt="" />' .
+	' ' . _('Confirm Dispatch and Invoice'). '</p>';
 echo '<table class="selection">
 			<tr>
 				<th><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') . '" alt="" />' . ' ' . _('Customer Code') . ' :<b> ' . $_SESSION['Items']->DebtorNo.'</b></th>
@@ -323,15 +323,15 @@ foreach ($_SESSION['Items']->LineItems as $LnItm) {
 		if (isset($_POST['ProcessInvoice'])) {
 			echo '<td class="number">' . $LnItm->QtyDispatched . '</td>';
 		} else {
-			echo '<td class="number"><input type="hidden" name="' . $LnItm->LineNumber . '_QtyDispatched"  value="' .
-				$LnItm->QtyDispatched . '"><a href="' . $rootpath .'/ConfirmDispatchControlled_Invoice.php?LineNo='. $LnItm->LineNumber.'">' .$LnItm->QtyDispatched . '</a></td>';
+			echo '<td class="number"><input type="hidden" name="' . $LnItm->LineNumber . '_QtyDispatched"  value="' .$LnItm->QtyDispatched . '" />
+			<a href="' . $rootpath .'/ConfirmDispatchControlled_Invoice.php?LineNo='. $LnItm->LineNumber.'">' .$LnItm->QtyDispatched . '</a></td>';
 		}
 	} else {
 		if (isset($_POST['ProcessInvoice'])) {
 			echo '<td class="number">' .  $LnItm->QtyDispatched . '</td>';
 		} else {
-			echo '<td class="number"><input tabindex="'.$j.'" type="text" class="number" name="' . $LnItm->LineNumber .
-				'_QtyDispatched" maxlength=12 size=12 value="' . $LnItm->QtyDispatched . '"></td>';
+			echo '<td class="number">
+			<input tabindex="'.$j.'" type="text" class="number" name="' . $LnItm->LineNumber . '_QtyDispatched" maxlength="12" size="12" value="' . $LnItm->QtyDispatched . '" /></td>';
 		}
 	}
 	$DisplayDiscountPercent = number_format($LnItm->DiscountPercent*100,2) . '%';
@@ -368,8 +368,7 @@ foreach ($_SESSION['Items']->LineItems as $LnItm) {
 		if (isset($_POST['ProcessInvoice'])) {
 			echo  $Tax->TaxRate*100;
 		} else {
-			echo '<input type="text" class="number" name="' . $LnItm->LineNumber . $Tax->TaxCalculationOrder .
-				'_TaxRate" maxlength=4 size=4 value="' . $Tax->TaxRate*100 . '">';
+			echo '<input type="text" class="number" name="' . $LnItm->LineNumber . $Tax->TaxCalculationOrder . '_TaxRate" maxlength="4" size="4" value="' . $Tax->TaxRate*100 . '" />';
 		}
 		$i++;
 		if ($Tax->TaxOnTax ==1){
@@ -405,7 +404,7 @@ foreach ($_SESSION['Items']->LineItems as $LnItm) {
 	echo '</tr>';
 	if (strlen($LnItm->Narrative)>1){
 		$narrative=str_replace('\r\n','<br />', $LnItm->Narrative);
-		echo $RowStarter . '<td colspan=12>' . stripslashes($narrative) . '</td></tr>';
+		echo $RowStarter . '<td colspan="12">' . stripslashes($narrative) . '</td></tr>';
 	}
 }//end foreach ($line)
 
@@ -470,16 +469,15 @@ if (!isset($_POST['ChargeFreightCost'])) {
 	$_POST['ChargeFreightCost']=0;
 }
 if ($_SESSION['Items']->Any_Already_Delivered()==1 and (!isset($_SESSION['Items']->FreightCost) or $_POST['ChargeFreightCost']==0)) {
-	echo '<td colspan=2 class="number">'. _('Charge Freight Cost inc Tax').'</td>
-		<td><input tabindex='.$j.' type="text" class="number" size="10" maxlength="12" name="ChargeFreightCost" value="0"></td>';
+	echo '<td colspan="2" class="number">'. _('Charge Freight Cost inc Tax').'</td>
+		<td><input tabindex="'.$j.'" type="text" class="number" size="10" maxlength="12" name="ChargeFreightCost" value="0" /></td>';
 	$_SESSION['Items']->FreightCost=0;
 } else {
-	echo '<td colspan=2 class="number">'. _('Charge Freight Cost inc Tax').'</td>';
+	echo '<td colspan="2" class="number">'. _('Charge Freight Cost inc Tax').'</td>';
 	if (isset($_POST['ProcessInvoice'])) {
 		echo '<td class="number">' . $_SESSION['Items']->FreightCost . '</td>';
 	} else {
-		echo '<td class="number"><input tabindex='.$j.' type="text" class="number" size="10" maxlength="12"
-				name="ChargeFreightCost" value="' . $_SESSION['Items']->FreightCost . '"></td>';
+		echo '<td class="number"><input tabindex='.$j.' type="text" class="number" size="10" maxlength="12" name="ChargeFreightCost" value="' . $_SESSION['Items']->FreightCost . '" /></td>';
 	}
 	$_POST['ChargeFreightCost'] = $_SESSION['Items']->FreightCost;
 }
@@ -508,8 +506,7 @@ foreach ($_SESSION['Items']->FreightTaxes as $FreightTaxLine) {
 	if (isset($_POST['ProcessInvoice'])) {
 		echo   $FreightTaxLine->TaxRate * 100 ;
 	} else {
-		echo  '<input type="text" class="number" name="FreightTaxRate' . $FreightTaxLine->TaxCalculationOrder .
-			'" maxlength="4" size="4" value="' . $FreightTaxLine->TaxRate * 100 . '">';
+		echo  '<input type="text" class="number" name="FreightTaxRate' . $FreightTaxLine->TaxCalculationOrder . '" maxlength="4" size="4" value="' . $FreightTaxLine->TaxRate * 100 . '" />';
 	}
 
 	if ($FreightTaxLine->TaxOnTax ==1){
@@ -627,7 +624,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 
 		if ($NegativesFound){
 			echo '<div class="centre">
-					<input type="submit" name=Update Value=' . _('Update'). '></div>';
+					<input type="submit" name=Update value="' . _('Update'). '" /></div>';
 			include('includes/footer.inc');
 			exit;
 		}
@@ -1120,7 +1117,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 													'" . -$OrderLine->QtyDispatched*$OrderLine->ConversionFactor . "',
 													'" . $OrderLine->DiscountPercent . "',
 													'" . $OrderLine->StandardCost . "',
-													'" . DB_escape_string($OrderLine->Narrative) . "'
+													'" . DB_escape_string($OrderLine->Narrative) . "',
 													'" . $OrderLine->Units . "',
 													'" . $OrderLine->ConversionFactor . "'
 												)";
@@ -1665,26 +1662,24 @@ invoices can have a zero amount but there must be a quantity to invoice */
 	$j++;
 	echo '<table class="selection"><tr>
 		<td>' ._('Date On Invoice'). ':</td>
-	<td><input tabindex='.$j.' type="text" maxlength="10" size="15"
-	name="DispatchDate" value="'.$DefaultDispatchDate.'" id="datepicker"
-	alt="'.$_SESSION['DefaultDateFormat'].'" class="date"></td>
+	<td><input tabindex='.$j.' type="text" maxlength="10" size="15" name="DispatchDate" value="'.$DefaultDispatchDate.'" id="datepicker" alt="'.$_SESSION['DefaultDateFormat'].'" class="date" /></td>
 	</tr>';
 	$j++;
 	echo '<tr>
 		<td>' . _('Consignment Note Ref'). ':</td>
-		<td><input tabindex='.$j.' type="text" maxlength=15 size=15 name=Consignment value="' . $_POST['Consignment'] . '"></td>
+		<td><input tabindex='.$j.' type="text" maxlength="15" size="15" name="Consignment" value="' . $_POST['Consignment'] . '" /></td>
 	</tr>';
 	$j++;
 	echo '<tr>
 		<td>'._('Action For Balance'). ':</td>
-		<td><select tabindex='.$j.' name=BOPolicy>
-			<option selected Value="BO">'._('Automatically put balance on back order') . '</option>
+		<td><select tabindex="'.$j.'" name="BOPolicy">
+			<option selected="True" value="BO">'._('Automatically put balance on back order') . '</option>
 			<option value="CAN">'._('Cancel any quantities not delivered') . '</option>'.'</select></td>
 	</tr>';
 	$j++;
 	echo '<tr>
 		<td>' ._('Invoice Text'). ':</td>
-		<td><textarea tabindex="'.$j.'" name="InvoiceText" COLS="31" ROWS="5">' . reverse_escape($_POST['InvoiceText']) . '</textarea></td>
+		<td><textarea tabindex="'.$j.'" name="InvoiceText" cols="31" rows="5">' . reverse_escape($_POST['InvoiceText']) . '</textarea></td>
 	</tr>';
 
 	$j++;

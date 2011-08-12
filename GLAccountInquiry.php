@@ -36,9 +36,9 @@ $sql = "SELECT accountcode, accountname FROM chartmaster ORDER BY accountcode";
 $Account = DB_query($sql,$db);
 while ($myrow=DB_fetch_array($Account,$db)){
 	if($myrow['accountcode'] == $SelectedAccount){
-		echo '<option selected value=' . $myrow['accountcode'] . '>' . $myrow['accountcode'] . ' ' . $myrow['accountname'] . '</option>';
+		echo '<option selected="True" value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' ' . $myrow['accountname'] . '</option>';
 	} else {
-		echo '<option value=' . $myrow['accountcode'] . '>' . $myrow['accountcode'] . ' ' . $myrow['accountname'] . '</option>';
+		echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' ' . $myrow['accountname'] . '</option>';
 	}
  }
 echo '</select></td></tr>';
@@ -55,9 +55,9 @@ $result=DB_query($SQL,$db);
 echo '<option value=0>0 - '._('All tags') . '</option>';
 while ($myrow=DB_fetch_array($result)){
 	if (isset($_POST['tag']) and $_POST['tag']==$myrow['tagref']){
-		echo '<option selected value=' . $myrow['tagref'] . '>' . $myrow['tagref'].' - ' .$myrow['tagdescription'] . '</option>';
+		echo '<option selected="True" value="' . $myrow['tagref'] . '">' . $myrow['tagref'].' - ' .$myrow['tagdescription'] . '</option>';
 	} else {
-		echo '<option value=' . $myrow['tagref'] . '>' . $myrow['tagref'].' - ' .$myrow['tagdescription'] . '</option>';
+		echo '<option value="' . $myrow['tagref'] . '">' . $myrow['tagref'].' - ' .$myrow['tagdescription'] . '</option>';
 	}
 }
 echo '</select></td></tr>';
@@ -68,10 +68,10 @@ $Periods = DB_query($sql,$db);
 $id=0;
 while ($myrow=DB_fetch_array($Periods,$db)){
 	if(isset($SelectedPeriod[$id]) and $myrow['periodno'] == $SelectedPeriod[$id]){
-		echo '<option selected value=' . $myrow['periodno'] . '>' . _(MonthAndYearFromSQLDate($myrow['lastdate_in_period'])) . '</option>';
+		echo '<option selected="True" value="' . $myrow['periodno'] . '">' . _(MonthAndYearFromSQLDate($myrow['lastdate_in_period'])) . '</option>';
 		$id++;
 	} else {
-		echo '<option value=' . $myrow['periodno'] . '>' . _(MonthAndYearFromSQLDate($myrow['lastdate_in_period'])) . '</option>';
+		echo '<option value="' . $myrow['periodno'] . '">' . _(MonthAndYearFromSQLDate($myrow['lastdate_in_period'])) . '</option>';
 	}
 }
 echo '</select></td></tr><table>';
@@ -146,7 +146,7 @@ if (isset($_POST['Show'])){
 
 	echo '<br /><table class="selection">';
 
-	echo '<tr><th colspan=8><b>' ._('Transactions for account').' '.$SelectedAccount. ' - '. $SelectedAccountName.'</b></th></tr>';
+	echo '<tr><th colspan="8"><b>' ._('Transactions for account').' '.$SelectedAccount. ' - '. $SelectedAccountName.'</b></th></tr>';
 	$TableHeader = '<tr>
 			<th>' . _('Type') . '</th>
 			<th>' . _('Number') . '</th>
@@ -179,16 +179,16 @@ if (isset($_POST['Show'])){
 		$RunningTotal =$ChartDetailRow['bfwd'];
 		if ($RunningTotal < 0 ){ //its a credit balance b/fwd
 			echo '<tr bgcolor="#FDFEEF">
-				<td colspan=3><b>' . _('Brought Forward Balance') . '</b><td>
+				<td colspan="3"><b>' . _('Brought Forward Balance') . '</b><td>
 				</td></td>
 				<td class="number"><b>' . number_format(-$RunningTotal,2) . '</b></td>
 				<td></td>
 				</tr>';
 		} else { //its a debit balance b/fwd
 			echo '<tr bgcolor="#FDFEEF">
-				<td colspan=3><b>' . _('Brought Forward Balance') . '</b></td>
+				<td colspan="3"><b>' . _('Brought Forward Balance') . '</b></td>
 				<td class="number"><b>' . number_format($RunningTotal,2) . '</b></td>
-				<td colspan=2></td>
+				<td colspan="2"></td>
 				</tr>';
 		}
 	}
@@ -215,7 +215,7 @@ if (isset($_POST['Show'])){
 				$ChartDetailRow = DB_fetch_array($ChartDetailsResult);
 
 				echo '<tr bgcolor="#FDFEEF">
-					<td colspan=3><b>' . _('Total for period') . ' ' . $PeriodNo . '</b></td>';
+					<td colspan="3"><b>' . _('Total for period') . ' ' . $PeriodNo . '</b></td>';
 				if ($PeriodTotal < 0 ){ //its a credit balance b/fwd
 					if ($PandLAccount==True) {
 						$RunningTotal = 0;
@@ -229,7 +229,7 @@ if (isset($_POST['Show'])){
 						$RunningTotal = 0;
 					}
 					echo '<td class="number"><b>' . number_format($PeriodTotal,2) . '</b></td>
-						<td colspan=2></td>
+						<td colspan="2"></td>
 						</tr>';
 				}
 				$IntegrityReport .= '<br />' . _('Period') . ': ' . $PeriodNo  . _('Account movement per transaction') . ': '  . number_format($PeriodTotal,2) . ' ' . _('Movement per ChartDetails record') . ': ' . number_format($ChartDetailRow['actual'],2) . ' ' . _('Period difference') . ': ' . number_format($PeriodTotal -$ChartDetailRow['actual'],3);
@@ -291,7 +291,7 @@ if (isset($_POST['Show'])){
 
 	}
 
-	echo '<tr bgcolor="#FDFEEF"><td colspan=3><b>';
+	echo '<tr bgcolor="#FDFEEF"><td colspan="3"><b>';
 	if ($PandLAccount==True){
 		echo _('Total Period Movement');
 	} else { /*its a balance sheet account*/
@@ -300,9 +300,9 @@ if (isset($_POST['Show'])){
 	echo '</b></td>';
 
 	if ($RunningTotal >0){
-		echo '<td class="number"><b>' . number_format(($RunningTotal),2) . '</b></td><td colspan=2></td></tr>';
+		echo '<td class="number"><b>' . number_format(($RunningTotal),2) . '</b></td><td colspan="2"></td></tr>';
 	}else {
-		echo '<td></td><td class="number"><b>' . number_format((-$RunningTotal),2) . '</b></td><td colspan=2></td></tr>';
+		echo '<td></td><td class="number"><b>' . number_format((-$RunningTotal),2) . '</b></td><td colspan="2"></td></tr>';
 	}
 	echo '</table>';
 } /* end of if Show button hit */

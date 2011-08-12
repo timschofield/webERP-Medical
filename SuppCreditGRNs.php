@@ -14,8 +14,7 @@ $title = _('Enter Supplier Credit Note Against Goods Received');
 
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Dispatch') .
-		'" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Dispatch') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (!isset($_SESSION['SuppTrans'])){
 	prnMsg(_('To enter a supplier transactions the supplier must first be selected from the supplier selection screen') . ', ' . _('then the link to enter a supplier credit note must be clicked on'),'info');
@@ -66,8 +65,8 @@ if (isset($_GET['Delete'])){
 
 /*Show all the selected GRNs so far from the SESSION['SuppTrans']->GRNs array */
 
-echo '<table cellpadding=0 class="selection">';
-echo '<tr><th colspan=6><font size=3 color=navy>' . _('Credits Against Goods Received Selected') . '</font></th></tr>';
+echo '<table cellpadding="0" class="selection">';
+echo '<tr><th colspan="6"><font size="3" color="navy">' . _('Credits Against Goods Received Selected') . '</font></th></tr>';
 $TableHeader = '<tr><th>' . _('GRN') . '</th>
 					<th>' . _('Item Code') . '</th>
 					<th>' . _('Description') . '</th>
@@ -99,8 +98,8 @@ foreach ($_SESSION['SuppTrans']->GRNs as $EnteredGRN){
 	}
 }
 
-echo '<tr><td colspan=5 class="number"><font size=2 color=navy>' . _('Total Value Credited Against Goods') . ':</font></td>
-		  <td class="number"><font size=2 color=navy><U>' . number_format($TotalValueCharged,2) . '</U></font></td></tr>';
+echo '<tr><td colspan="5" class="number"><font size="2" color="navy">' . _('Total Value Credited Against Goods') . ':</font></td>
+		  <td class="number"><font size="2" color="navy"><u>' . number_format($TotalValueCharged,2) . '</u></font></td></tr>';
 echo '</table><br /><div class="centre"><a href="' . $rootpath . '/SupplierCredit.php">' . _('Back to Credit Note Entry') . '</a></div>';
 
 /* Now get all the GRNs for this supplier from the database
@@ -137,10 +136,11 @@ if (DB_num_rows($GRNResults)==0){
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<br /><table cellpadding=2 colspan=7 class="selection">';
+echo '<br /><table cellpadding="2" colspan="7" class="selection">';
 
-echo '<tr><th colspan=10><font size=3 color=navy>' . _('Show Goods Received Since') . ':&nbsp;</font>';
-echo '<input type="text" name="Show_Since" maxlength=11 size=12 class="date" alt='.$_SESSION['DefaultDateFormat'].' value="' . $_POST['Show_Since'] . '"><font size=3 color=navy> ';
+echo '<tr><th colspan="10"><font size="3" color="navy">' . _('Show Goods Received Since') . ':&nbsp;</font>';
+echo '<input type="text" name="Show_Since" maxlength="11" size="12" class="date" alt='.$_SESSION['DefaultDateFormat'].' value="' . $_POST['Show_Since'] . '" />
+		<font size="3" color="navy"> ';
 echo  _('From') . ' ' . $_SESSION['SuppTrans']->SupplierName . '</font></th></tr>';
 
 $TableHeader = '<tr><th>' . _('GRN') . '</th>
@@ -217,7 +217,7 @@ if (isset($_POST['GRNNo']) AND $_POST['GRNNo']!=''){
 	$myrow = DB_fetch_array($GRNEntryResult);
 
 	echo '<br /><table class="selection">';
-	echo '<tr><th colspan=6><font size=3 color=navy>' . _('GRN Selected For Adding To A Suppliers Credit Note') . '</font></th></tr>';
+	echo '<tr><th colspan="6"><font size="3" color="navy">' . _('GRN Selected For Adding To A Suppliers Credit Note') . '</font></th></tr>';
 	echo '<tr><th>' . _('GRN') . '</th>
 				<th>' . _('Item') . '</th>
 				<th>' . _('Quantity') . '<br />' . _('Outstanding') . '</th>
@@ -229,35 +229,35 @@ if (isset($_POST['GRNNo']) AND $_POST['GRNNo']!=''){
 	echo '<tr><td>' . $_POST['GRNNo'] . '</td>
 				<td>' . $myrow['itemcode'] . ' ' . $myrow['itemdescription'] . '</td>
 				<td class="number">' . number_format($myrow['qtyostdg'],2) . '</td>
-				<td><input type="text" name="This_QuantityCredited" Value=' . $myrow['qtyostdg'] . ' size=11 maxlength=10></td>
+				<td><input type="text" name="This_QuantityCredited" Value=' . $myrow['qtyostdg'] . ' size="11" maxlength="10" /></td>
 				<td class="number">' . $myrow['unitprice'] . '</td>
-				<td><input type="text" name="ChgPrice" Value=' . $myrow['unitprice'] . ' size=11 maxlength=10></td>
+				<td><input type="text" name="ChgPrice" Value=' . $myrow['unitprice'] . ' size="11" maxlength="10" /></td>
 			</tr>';
 	echo '</table>';
 
 	if ($myrow['closed']==1){ /*Shipment is closed so pre-empt problems later by warning the user - need to modify the order first */
-		echo '<input type="hidden" name="ShiptRef" Value="">';
+		echo '<input type="hidden" name="ShiptRef" value="" />';
 		prnMsg(_('Unfortunately the shipment that this purchase order line item was allocated to has been closed') . ' - ' . _('if you add this item to the transaction then no shipments will not be updated') . '. ' . _('If you wish to allocate the order line item to a different shipment the order must be modified first'),'error');
 	} else {
-		echo '<input type="hidden" name="ShiptRef" Value="' . $myrow['shiptref'] . '">';
+		echo '<input type="hidden" name="ShiptRef" value="' . $myrow['shiptref'] . '" />';
 	}
 
 	echo '<br /><div class="centre"><input type="submit" name="AddGRNToTrans" value="' . _('Add to Credit Note') . '" /></div>';
 
 
-	echo '<input type="hidden" name="GRNNumber" value=' . $_POST['GRNNo'] . '>';
-	echo '<input type="hidden" name="ItemCode" value="' . $myrow['itemcode'] . '">';
-	echo '<input type="hidden" name="ItemDescription" value="' . $myrow['itemdescription'] . '">';
-	echo '<input type="hidden" name="QtyRecd" value=' . $myrow['qtyrecd'] . '>';
-	echo '<input type="hidden" name="Prev_QuantityInv" value=' . $myrow['quantityinv'] . '>';
-	echo '<input type="hidden" name="OrderPrice" value=' . $myrow['unitprice'] . '>';
-	echo '<input type="hidden" name="StdCostUnit" value=' . $myrow['stdcostunit'] . '>';
+	echo '<input type="hidden" name="GRNNumber" value="' . $_POST['GRNNo'] . '" />';
+	echo '<input type="hidden" name="ItemCode" value="' . $myrow['itemcode'] . '" />';
+	echo '<input type="hidden" name="ItemDescription" value="' . $myrow['itemdescription'] . '" />';
+	echo '<input type="hidden" name="QtyRecd" value="' . $myrow['qtyrecd'] . '" />';
+	echo '<input type="hidden" name="Prev_QuantityInv" value="' . $myrow['quantityinv'] . '" />';
+	echo '<input type="hidden" name="OrderPrice" value="' . $myrow['unitprice'] . '" />';
+	echo '<input type="hidden" name="StdCostUnit" value="' . $myrow['stdcostunit'] . '" />';
 
-	echo '<input type="hidden" name="JobRef" Value="' . $myrow['jobref'] . '">';
-	echo '<input type="hidden" name="GLCode" Value="' . $myrow['glcode'] . '">';
-	echo '<input type="hidden" name="PODetailItem" Value="' . $myrow['podetailitem'] . '">';
-	echo '<input type="hidden" name="PONo" Value="' . $myrow['orderno'] . '">';
-	echo '<input type="hidden" name="AssetID" Value="' . $myrow['assetid'] . '">';
+	echo '<input type="hidden" name="JobRef" value="' . $myrow['jobref'] . '" />';
+	echo '<input type="hidden" name="GLCode" value="' . $myrow['glcode'] . '" />';
+	echo '<input type="hidden" name="PODetailItem" value="' . $myrow['podetailitem'] . '" />';
+	echo '<input type="hidden" name="PONo" value="' . $myrow['orderno'] . '" />';
+	echo '<input type="hidden" name="AssetID" value="' . $myrow['assetid'] . '" />';
 }
 
 echo '</form>';

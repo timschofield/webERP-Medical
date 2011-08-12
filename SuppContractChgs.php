@@ -64,11 +64,12 @@ if ($_SESSION['SuppTrans']->InvoiceOrCredit=='Invoice'){
 			._('From') . ' ' . $_SESSION['SuppTrans']->SupplierName . '</p></div>';
 }
 
-echo '<table cellpadding=2>';
+echo '<table cellpadding="2">';
 $TableHeader = '<tr><th>' . _('Contract') . '</th>
-										<th>' . _('Amount') . '</th>
-										<th>' . _('Narrative') . '</th>
-										<th>' . _('Anticipated') . '</th></tr>';
+					<th>' . _('Amount') . '</th>
+					<th>' . _('Narrative') . '</th>
+					<th>' . _('Anticipated') . '</th>
+				</tr>';
 echo $TableHeader;
 
 $TotalContractsValue = 0;
@@ -111,8 +112,8 @@ if (!isset($_POST['ContractRef'])) {
 }
 echo '<table>';
 echo '<tr><td>' . _('Contract Reference') . ':</td>
-	<td><input type="Text" name="ContractRef" size=22 maxlength=20 value="' .  $_POST['ContractRef'] . '"></td></tr>';
-echo '<tr><td>' . _('Contract Selection') . ':<br /><font size=1>' . _('If you know the code enter it above') . '<br />' . _('otherwise select the contract from the list') . '</font></td><td><select name="ContractSelection">';
+	<td><input type="text" name="ContractRef" size="22" maxlength="20" value="' .  $_POST['ContractRef'] . '" /></td></tr>';
+echo '<tr><td>' . _('Contract Selection') . ':<br /><font size="1">' . _('If you know the code enter it above') . '<br />' . _('otherwise select the contract from the list') . '</font></td><td><select name="ContractSelection">';
 
 $sql = "SELECT contractref, name
 						FROM contracts INNER JOIN debtorsmaster
@@ -123,7 +124,7 @@ $result = DB_query($sql, $db);
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['ContractSelection']) and $myrow['contractref']==$_POST['ContractSelection']) {
-		echo '<option selected value="' . $myrow['contractref'] . '">' . $myrow['contractref'] . ' - ' . $myrow['name'] . '</option>';
+		echo '<option selected="True" value="' . $myrow['contractref'] . '">' . $myrow['contractref'] . ' - ' . $myrow['name'] . '</option>';
 	} else {
 		echo '<option value="' . $myrow['contractref'] . '">' . $myrow['contractref'] . ' - ' . $myrow['name'] . '</option>';
 	}
@@ -135,20 +136,20 @@ if (!isset($_POST['Amount'])) {
 	$_POST['Amount']=0;
 }
 echo '<tr><td>' . _('Amount') . ':</td>
-	<td><input type="text" name="Amount" size=12 maxlength=11 value="' .  $_POST['Amount'] . '"></td></tr>';
+	<td><input type="text" name="Amount" size="12" maxlength="11" value="' .  $_POST['Amount'] . '" /></td></tr>';
 echo '<tr><td>' . _('Narrative') . ':</td>
-	<td><input type="text" name="Narrative" size=42 maxlength=40 value="' .  $_POST['Narrative'] . '"></td></tr>';
+	<td><input type="text" name="Narrative" size="42" maxlength="40" value="' .  $_POST['Narrative'] . '" /></td></tr>';
 echo '<tr><td>' . _('Aniticpated Cost') . ':</td>
 	<td>';
 if (isset($_POST['AnticipatedCost']) AND $_POST['AnticipatedCost']==1){
-	echo '<input type="checkbox" name="AnticipatedCost" checked>';
+	echo '<input type="checkbox" name="AnticipatedCost" checked="True" />';
 } else {
-	echo '<input type="checkbox" name="AnticipatedCost">';
+	echo '<input type="checkbox" name="AnticipatedCost" />';
 }
 
 echo '</td></tr></table>';
 
-echo '<input type="Submit" name="AddContractChgToInvoice" value="' . _('Enter Contract Charge') . '">';
+echo '<input type="submit" name="AddContractChgToInvoice" value="' . _('Enter Contract Charge') . '" />';
 
 echo '</form>';
 include('includes/footer.inc');

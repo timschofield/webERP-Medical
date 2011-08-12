@@ -3,8 +3,7 @@
 include('includes/session.inc');
 $title = _('Fixed Asset Locations');
 include('includes/header.inc');
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' .
-	 _('Search') . '" alt="" />' . ' ' . $title.'</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>';
 
 if (isset($_POST['submit']) and !isset($_POST['delete'])) {
 	$InputError=0;
@@ -108,14 +107,14 @@ if (isset($_GET['SelectedLocation'])) {
 	echo '<input type="hidden" name="LocationID" value="'.$LocationID.'" />';
 	echo '<td>'.$LocationID.'</td>';
 } else {
-	echo '<td><input type="text" name=LocationID size=6 value="'.$LocationID.'"></td></tr>';
+	echo '<td><input type="text" name="LocationID" size="6" value="'.$LocationID.'" /></td></tr>';
 }
 
 echo '<tr><th style="text-align:left">'._('Location Description').'</th>';
-echo '<td><input type="text" name=LocationDescription size=20 value="'.$LocationDescription.'"></td></tr>';
+echo '<td><input type="text" name="LocationDescription" size="20" value="'.$LocationDescription.'" /></td></tr>';
 
 echo '<tr><th style="text-align:left">'._('Parent Location').'</th>';
-echo '<td><select name=ParentLocationID>';
+echo '<td><select name="ParentLocationID">';
 
 $sql="SELECT * FROM fixedassetlocations";
 $result=DB_query($sql, $db);
@@ -123,7 +122,7 @@ $result=DB_query($sql, $db);
 echo '<option value=""></option>';
 while ($row=DB_fetch_array($result)) {
 	if ($row['locationid']==$ParentLocationID) {
-		echo '<option selected value="'.$row['locationid'].'">'.$row['locationdescription'].'</option>';
+		echo '<option selected="True" value="'.$row['locationid'].'">'.$row['locationdescription'].'</option>';
 	} else {
 		echo '<option value="'.$row['locationid'].'">'.$row['locationdescription'].'</option>';
 	}
@@ -139,11 +138,11 @@ echo '</table><br />';
 
 echo '<div class="centre">';
 if (isset($_GET['SelectedLocation'])) {
-	echo '<input type="Submit" name="update" value="' . _('Update Information') . '">';
+	echo '<input type="submit" name="update" value="' . _('Update Information') . '" />';
 	echo '<br />';
-	echo '<br /><div class="centre"><input type="Submit" name="delete" value="' . _('Delete This Location') . '"></div>';
+	echo '<br /><div class="centre"><input type="submit" name="delete" value="' . _('Delete This Location') . '" /></div>';
 } else {
-	echo '<input type="submit" name="submit" value="' . _('Enter Information') . '">';
+	echo '<input type="submit" name="submit" value="' . _('Enter Information') . '" />';
 }
 echo '</div>';
 echo '</form>';

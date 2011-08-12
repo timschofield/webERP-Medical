@@ -51,13 +51,11 @@ if (isset($_GET['StockID'])){
 	$_SESSION['Adjustment']->Quantity = $_POST['Quantity'];
 }
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' .
-	_('Inventory Adjustment') . '" alt="" />' . ' ' . _('Inventory Adjustment') . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Inventory Adjustment') . '" alt="" />' . ' ' . _('Inventory Adjustment') . '</p>';
 
 if (isset($_POST['CheckCode'])) {
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Dispatch') .
-		'" alt="" />' . ' ' . _('Select Item to Adjust') . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Dispatch') . '" alt="" />' . ' ' . _('Select Item to Adjust') . '</p>';
 
 	if (strlen($_POST['StockText'])>0) {
 		$sql="SELECT stockid, description from stockmaster where description like '%".$_POST['StockText']."%'";
@@ -322,27 +320,29 @@ if (!isset($_SESSION['Adjustment'])) {
 	$_SESSION['Adjustment']->StandardCost=$myrow['materialcost']+$myrow['labourcost']+$myrow['overheadcost'];
 }
 echo '<br /><table class="selection">';
-echo '<tr><th colspan=4><font color=blue size=3>'._('Adjustment Details').'</font></th></tr>';
+echo '<tr><th colspan="4"><font color="blue" size="3">'._('Adjustment Details').'</font></th></tr>';
 if (!isset($_GET['Description'])) {
 	$_GET['Description']='';
 }
 echo '<tr><td>'. _('Stock Code'). ':</td><td>';
 if (isset($StockID)) {
-	echo '<input type="text" name="StockID" size=21 value="' . $StockID . '" maxlength=20></td></tr>';
+	echo '<input type="text" name="StockID" size="21" value="' . $StockID . '" maxlength="20" /></td></tr>';
 } else {
-	echo '<input type="text" name="StockID" size=21 value="" maxlength=20></td></tr>';
+	echo '<input type="text" name="StockID" size="21" value="" maxlength="20" /></td></tr>';
 }
-echo '<tr><td>'. _('Partial Description'). ':</td><td><input type="text" name="StockText" size=21 value="' .
-	$_GET['Description'] .'">&nbsp; &nbsp;'._('Partial Stock Code'). ':</td><td>';
+echo '<tr>
+		<td>'. _('Partial Description'). ':</td>
+		<td><input type="text" name="StockText" size="21" value="' . $_GET['Description'] .'" />&nbsp; &nbsp;'._('Partial Stock Code'). ':</td>
+		<td>';
 if (isset($StockID)) {
-	echo '<input type="text" name="StockCode" size=21 value="' . $StockID .'" maxlength=20>';
+	echo '<input type="text" name="StockCode" size="21" value="' . $StockID .'" maxlength="20" />';
 } else {
-	echo '<input type="text" name="StockCode" size=21 value="" maxlength=20>';
+	echo '<input type="text" name="StockCode" size="21" value="" maxlength="20" />';
 }
 
-echo '</td><td><input type="submit" name="CheckCode" value="'._('Check Part').'"></td></tr>';
+echo '</td><td><input type="submit" name="CheckCode" value="'._('Check Part').'" /></td></tr>';
 if (isset($_SESSION['Adjustment']) and strlen($_SESSION['Adjustment']->ItemDescription)>1){
-	echo '<tr><td colspan=3><font color="blue" size="3">' . $_SESSION['Adjustment']->ItemDescription . ' ('._('In Units of').' ' .
+	echo '<tr><td colspan="3"><font color="blue" size="3">' . $_SESSION['Adjustment']->ItemDescription . ' ('._('In Units of').' ' .
 		$_SESSION['Adjustment']->PartUnit . ' ) - ' . _('Unit Cost').' = ' .
 			number_format($_SESSION['Adjustment']->StandardCost,4) . '</font></td></tr>';
 }
@@ -354,12 +354,12 @@ $resultStkLocs = DB_query($sql,$db);
 while ($myrow=DB_fetch_array($resultStkLocs)){
 	if (isset($_SESSION['Adjustment']->StockLocation)){
 		if ($myrow['loccode'] == $_SESSION['Adjustment']->StockLocation){
-			 echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			 echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
-			 echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			 echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
-		 echo '<option selected Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		 echo '<option selected="True" Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		 $_POST['StockLocation']=$myrow['loccode'];
 	} else {
 		 echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
@@ -372,7 +372,7 @@ if (isset($_SESSION['Adjustment']) and !isset($_SESSION['Adjustment']->Narrative
 }
 
 echo '<tr><td>'. _('Comments On Why').':</td>
-	<td><input type="text" name="Narrative" size=32 maxlength=30 value="' . $_SESSION['Adjustment']->Narrative . '"></td></tr>';
+	<td><input type="text" name="Narrative" size="32" maxlength="30" value="' . $_SESSION['Adjustment']->Narrative . '" /></td></tr>';
 
 echo '<tr><td>'._('Adjustment Quantity').':</td>';
 
@@ -381,12 +381,12 @@ if ($Controlled==1){
 		if ($_SESSION['Adjustment']->StockLocation == ''){
 			$_SESSION['Adjustment']->StockLocation = $_SESSION['UserStockLocation'];
 		}
-		echo '<input type="HIDDEN" name="Quantity" Value="' . $_SESSION['Adjustment']->Quantity . '">
+		echo '<input type="HIDDEN" name="Quantity" value="' . $_SESSION['Adjustment']->Quantity . '" />
 				'.$_SESSION['Adjustment']->Quantity.' &nbsp; &nbsp; &nbsp; &nbsp;
 				[<a href="'.$rootpath.'/StockAdjustmentsControlled.php?AdjType=REMOVE">'._('Remove').'</a>]
 				[<a href="'.$rootpath.'/StockAdjustmentsControlled.php?AdjType=ADD">'._('Add').'</a>]';
 } else {
-	echo '<input type="text" class="number" name="Quantity" size=12 maxlength=12 Value="' . $Quantity . '">';
+	echo '<input type="text" class="number" name="Quantity" size="12" maxlength="12" value="' . $Quantity . '" />';
 }
 echo '</td></tr>';
 	//Select the tag
@@ -401,9 +401,9 @@ $result=DB_query($SQL,$db);
 echo '<option value=0>0 - None</option>';
 while ($myrow=DB_fetch_array($result)){
 	if (isset($_SESSION['Adjustment']->tag) and $_SESSION['Adjustment']->tag==$myrow['tagref']){
-		echo '<option selected value=' . $myrow['tagref'] . '>' . $myrow['tagref'].' - ' .$myrow['tagdescription'] . '</option>';
+		echo '<option selected="True" value="' . $myrow['tagref'] . '">' . $myrow['tagref'].' - ' .$myrow['tagdescription'] . '</option>';
 	} else {
-		echo '<option value=' . $myrow['tagref'] . '>' . $myrow['tagref'].' - ' .$myrow['tagdescription'] . '</option>';
+		echo '<option value="' . $myrow['tagref'] . '">' . $myrow['tagref'].' - ' .$myrow['tagdescription'] . '</option>';
 	}
 }
 echo '</select></td>';

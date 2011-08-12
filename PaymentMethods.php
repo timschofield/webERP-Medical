@@ -8,8 +8,7 @@ $title = _('Payment Methods');
 
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('Payments') .
-	'" alt="" />' . ' ' . $title.'</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('Payments') . '" alt="" />' . ' ' . $title.'</p>';
 
 if ( isset($_GET['SelectedPaymentID']) )
 	$SelectedPaymentID = $_GET['SelectedPaymentID'];
@@ -256,7 +255,7 @@ if (! isset($_GET['delete'])) {
 	}
 	echo '<tr>
 			<td>' . _('Payment Method') . ':' . '</td>
-			<td><input type="text" '. (in_array('MethodName',$Errors) ? 'class="inputerror"' : '' ) .' name="MethodName" size="30" maxlength="30" value="' . $_POST['MethodName'] . '"></td>
+			<td><input type="text" '. (in_array('MethodName',$Errors) ? 'class="inputerror"' : '' ) .' name="MethodName" size="30" maxlength="30" value="' . $_POST['MethodName'] . '" /></td>
 		</tr>';
 	echo '<tr>
 		<td>' . _('Use For Payments') . ':' . '</td>

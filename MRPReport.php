@@ -434,7 +434,7 @@ if (isset($_POST['PrintPDF']) AND $_POST['Part']!='') {
 		*/
 		// Parameters for addTextWrap are defined in /includes/class.pdf.php
 		// 1) X position 2) Y position 3) Width
-		// 4) Height 5) Text To Display  6) Alignment 7) Border 8) Fill - True to use SetFillColor
+		// 4) Height 5) text To Display  6) Alignment 7) Border 8) Fill - True to use SetFillColor
 		// and False to set for transparent
 		if (isset($Requirements[$i]['part']) and strlen($Requirements[$i]['part']) > 1) {
 			$FormatedReqDueDate = ConvertSQLDate($Requirements[$i]['daterequired']);
@@ -504,15 +504,15 @@ if (isset($_POST['PrintPDF']) AND $_POST['Part']!='') {
 		ORDER BY categorydescription";
 	$result1 = DB_query($SQL, $db);
 	if (DB_num_rows($result1) == 0) {
-		echo '<p><font size=4 color=red>' . _('Problem Report') . ':</font><br />' . _('There are no stock categories currently defined please use the link below to set them up');
+		echo '<p><font size="4" color="red">' . _('Problem Report') . ':</font><br />' . _('There are no stock categories currently defined please use the link below to set them up');
 		echo '<br /><a href="' . $rootpath . '/StockCategories.php">' . _('Define Stock Categories') . '</a></font></p>';
 		exit;
 	}
 
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') .
-		'" alt="" />' . ' ' . _('Search for Inventory Items').'</p>';
+	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' .
+			' ' . _('Search for Inventory Items').'</p>';
 	echo '<table class="selection"><tr>';
 	echo '<td>' . _('In Stock Category') . ':';
 	echo '<select name="StockCat">';
@@ -520,13 +520,13 @@ if (isset($_POST['PrintPDF']) AND $_POST['Part']!='') {
 		$_POST['StockCat'] = '';
 	}
 	if ($_POST['StockCat'] == 'All') {
-		echo '<option selected value="All">' . _('All') . '</option>';
+		echo '<option selected="True" value="All">' . _('All') . '</option>';
 	} else {
 		echo '<option value="All">' . _('All') . '</option>';
 	}
 	while ($myrow1 = DB_fetch_array($result1)) {
 		if ($myrow1['categoryid'] == $_POST['StockCat']) {
-			echo '<option selected value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
+			echo '<option selected="True" value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 		}
@@ -534,20 +534,20 @@ if (isset($_POST['PrintPDF']) AND $_POST['Part']!='') {
 	echo '</select>';
 	echo '<td>' . _('Enter partial') . '<b> ' . _('Description') . '</b>:</td><td>';
 	if (isset($_POST['Keywords'])) {
-		echo '<input type="text" name="Keywords" value="' . $_POST['Keywords'] . '" size=20 maxlength=25>';
+		echo '<input type="text" name="Keywords" value="' . $_POST['Keywords'] . '" size="20" maxlength="25" />';
 	} else {
-		echo '<input type="text" name="Keywords" size=20 maxlength=25>';
+		echo '<input type="text" name="Keywords" size="20" maxlength="25" />';
 	}
 	echo '</td></tr><tr><td></td>';
 	echo '<td><font size 3><b>' . _('OR') . ' ' . '</b></font>' . _('Enter partial') . ' <b>' . _('Stock Code') . '</b>:</td>';
 	echo '<td>';
 	if (isset($_POST['StockCode'])) {
-		echo '<input type="text" name="StockCode" value="' . $_POST['StockCode'] . '" size=15 maxlength=18>';
+		echo '<input type="text" name="StockCode" value="' . $_POST['StockCode'] . '" size="15" maxlength="18" />';
 	} else {
-		echo '<input type="text" name="StockCode" size=15 maxlength=18>';
+		echo '<input type="text" name="StockCode" size="15" maxlength="18" />';
 	}
 	echo '</td></tr></table><br />';
-	echo '<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '"></div><br /></form>';
+	echo '<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" /></div><br /></form>';
 	echo '<script  type="text/javascript">defaultControl(document.forms[0].StockCode);</script>';
 	echo '</form>';
 	if (!isset($_POST['Search'])) {
@@ -730,10 +730,10 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 			echo '<input type="hidden" name="Keywords" value="'.$_POST['Keywords'].'" />';
 			echo '<input type="hidden" name="StockCat" value="'.$_POST['StockCat'].'" />';
 			echo '<input type="hidden" name="StockCode" value="'.$_POST['StockCode'].'" />';
-//			echo '<input type="hidden" name=Search value="Search">';
+//			echo '<input type="hidden" name=Search value="Search" />';
 			echo '<br /></div>';
 		}
-		echo '<table cellpadding=2 colspan=7>';
+		echo '<table cellpadding="2" colspan="7">';
 		$tableheader = '<tr>
 					<th>' . _('Code') . '</th>
 					<th>' . _('Description') . '</th>

@@ -170,7 +170,7 @@ if (!isset($_GET['Edit'])) {
 		$StockDecimalPlaces=$DecimalPlacesRow['decimalplaces'];
 		$NoPurchasingData=1;
 	} else if ($StockID != '') {
-		echo '<table cellpadding=2 class="selection">';
+		echo '<table cellpadding="2" class="selection">';
 		$TableHeader = '<tr><th>' . _('Supplier') . '</th>
 						<th>' . _('Price') . '</th>
 						<th>' . _('Currency') . '</th>
@@ -263,14 +263,14 @@ if (isset($SupplierID) AND $SupplierID != '' AND !isset($_POST['SearchSupplier']
 		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">
 				<table cellpadding="3" colspan="4" class="selection"><tr>';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-		echo '<input type="hidden" name="StockID" value="' . $StockID . '">';
+		echo '<input type="hidden" name="StockID" value="' . $StockID . '" />';
 		echo '<td>' . _('Text in the Supplier') . ' <b>' . _('NAME') . '</b>:</font></td>';
-		echo '<td><input type="Text" name="Keywords" size=20 maxlength=25></td>';
-		echo '<td><font size=3><b>' . _('OR') . '</b></font></td>';
+		echo '<td><input type="text" name="Keywords" size="20" maxlength="25" /></td>';
+		echo '<td><font size="3"><b>' . _('OR') . '</b></font></td>';
 		echo '<td>' . _('Text in Supplier') . ' <b>' . _('CODE') . '</b>:</font></td>';
-		echo '<td><input type="Text" name="SupplierCode" size=15 maxlength=18></td>';
+		echo '<td><input type="text" name="SupplierCode" size="15" maxlength="18" /></td>';
 		echo '</tr></table><br />';
-		echo '<div class="centre"><input type="submit" name="SearchSupplier" value="' . _('Find Suppliers Now') . '"></div></form>';
+		echo '<div class="centre"><input type="submit" name="SearchSupplier" value="' . _('Find Suppliers Now') . '" /></div></form>';
 		include ('includes/footer.inc');
 		exit;
 	};
@@ -333,7 +333,7 @@ if (isset($SuppliersResult)) {
 				include ('includes/footer.inc');
 				exit;
 			} else {
- //			   echo '<br /><font color=BLUE size=3><b>' . $StockID . ' - ' . $myrow[0] . ' </b>  (' . _('In Units of') . ' ' . $myrow[1] . ' )</font>';
+ //			   echo '<br /><font color="blue" size="3"><b>' . $StockID . ' - ' . $myrow[0] . ' </b>  (' . _('In Units of') . ' ' . $myrow[1] . ' )</font>';
 			}
 		} else {
 			prnMsg(_('Stock Item') . ' - ' . $StockID . ' ' . _('is not defined in the database'), 'warn');
@@ -343,7 +343,7 @@ if (isset($SuppliersResult)) {
 		$StockUOM = 'each';
 	}
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">
-			<table cellpadding=2 colspan=7 class="selection">';
+			<table cellpadding="2" colspan="7" class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	$TableHeader = '<tr><th>' . _('Code') . '</th>
 						<th>' . _('Supplier Name') . '</th>
@@ -362,15 +362,15 @@ if (isset($SuppliersResult)) {
 			echo '<tr class="OddTableRows">';
 			$k++;
 		}
-	   printf('<td><font size=1><input type="submit" name="SupplierID" value="%s" /></font></td>
-				<td><font size=1>%s</font></td>
-				<td><font size=1>%s</font></td>
-				<td><font size=1>%s</font></td>
-				<td><font size=1>%s</font></td>
-				<td><font size=1>%s</font></td>
+	   printf('<td><font size="1"><input type="submit" name="SupplierID" value="%s" /></font></td>
+				<td><font size="1">%s</font></td>
+				<td><font size="1">%s</font></td>
+				<td><font size="1">%s</font></td>
+				<td><font size="1">%s</font></td>
+				<td><font size="1">%s</font></td>
 			</tr>', $myrow['supplierid'], $myrow['suppname'], $myrow['currcode'], $myrow['address1'], $myrow['address2'], $myrow['address3']);
-		echo '<input type="hidden" name=StockID value="' . $StockID . '">';
-		echo '<input type="hidden" name=StockUOM value="' . $StockUOM . '">';
+		echo '<input type="hidden" name="StockID" value="' . $StockID . '" />';
+		echo '<input type="hidden" name="StockUOM" value="' . $StockUOM . '" />';
 
 	}
 	//end of while loop
@@ -426,21 +426,22 @@ if (!isset($SuppliersResult)) {
 	}
 	if (isset($_GET['Edit'])) {
 		echo '<tr><td>' . _('Supplier Name') . ':</td>
-		<td><input type="hidden" name="SupplierID" value="' . $SupplierID . '">' . $SupplierID . ' - ' . $SuppName . '<input type="hidden" name="WasEffectiveFrom" value="' . $myrow['effectivefrom'] . '"></td></tr>';
+		<td><input type="hidden" name="SupplierID" value="' . $SupplierID . '" />' . $SupplierID . ' - ' . $SuppName . '
+			<input type="hidden" name="WasEffectiveFrom" value="' . $myrow['effectivefrom'] . '" /></td></tr>';
 	} else {
 		echo '<tr><td>' . _('Supplier Name') . ':</td>
-		<input type="hidden" name="SupplierID" maxlength=10 size=11 value="' . $SupplierID . '">';
+		<input type="hidden" name="SupplierID" maxlength="10" size="11" value="' . $SupplierID . '" />';
 		if ($SupplierID!='') {
 			echo '<td>'.$SuppName;
 		}
 		if (!isset($SuppName) OR $SuppName = "") {
-			echo '<font size=1>' . '(' . _('A search facility is available below if necessary') . ')';
+			echo '<font size="1">' . '(' . _('A search facility is available below if necessary') . ')';
 		} else {
 			echo '<td>'.$SuppName;
 		}
 		echo '</td></tr>';
 	}
-   	echo '<td><input type="hidden" name="StockID" maxlength=10 size=11 value="' . $StockID . '" />';
+   	echo '<td><input type="hidden" name="StockID" value="' . $StockID . '" />';
 	if (!isset($CurrCode)) {
 		$CurrCode = '';
 	}
@@ -465,9 +466,9 @@ if (!isset($SuppliersResult)) {
 	echo '<tr><td>' . _('Currency') . ':</td>
 	<td><input type="hidden" name="CurrCode" . value="' . $CurrCode . '" />' . $CurrCode . '</td></tr>';
 	echo '<tr><td>' . _('Price') . ' (' . _('in Supplier Currency') . '):</td>
-	<td><input type="text" class="number" name="Price" maxlength=12 size=12 value=' . number_format($_POST['Price'], $_SESSION['Currencies'][$CurrCode]['DecimalPlaces'] ,'.','') . '></td></tr>';
+	<td><input type="text" class="number" name="Price" maxlength="12" size="12" value="' . number_format($_POST['Price'], $_SESSION['Currencies'][$CurrCode]['DecimalPlaces'] ,'.','') . '" /></td></tr>';
 	echo '<tr><td>' . _('Date Updated') . ':</td>
-	<td><input type="text" class="date" alt="' . $_SESSION['DefaultDateFormat'] . '" name="EffectiveFrom" maxlength=10 size=11 value="' . $_POST['EffectiveFrom'] . '"></td></tr>';
+	<td><input type="text" class="date" alt="' . $_SESSION['DefaultDateFormat'] . '" name="EffectiveFrom" maxlength="10" size="11" value="' . $_POST['EffectiveFrom'] . '" /></td></tr>';
 	echo '<tr><td>' . _('Our Unit of Measure') . ':</td>';
 	if (isset($SupplierID)) {
 		echo '<td>' . $StockUOM . '</td></tr>';
@@ -480,7 +481,7 @@ if (!isset($SuppliersResult)) {
 	$result = DB_query($sql, $db);
 	while ($myrow = DB_fetch_array($result)) {
 		if ($_POST['SuppliersUOM'] == $myrow['unitid']) {
-			echo '<option selected value="' . $myrow['unitid'] . '">' . $myrow['unitname'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['unitid'] . '">' . $myrow['unitname'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow['unitid'] . '">' . $myrow['unitname'] . '</option>';
 		}
@@ -493,28 +494,28 @@ if (!isset($SuppliersResult)) {
 		$_POST['DecimalPlaces'] = $StockDecimalPlaces;
 	}
 	echo '<tr><td>' . _('Conversion Factor (to our UOM)') . ':</td>
-	<td><input type="text" class="number" name="ConversionFactor" maxlength=12 size=12 value=' . $_POST['ConversionFactor'] . '></td></tr>';
+	<td><input type="text" class="number" name="ConversionFactor" maxlength="12" size="12" value="' . $_POST['ConversionFactor'] . '" /></td></tr>';
 	echo '<tr><td>' . _('Decimal Places (for quantities in suppliers UOM)') . ':</td>
-	<td><input type="text" class="number" name="DecimalPlaces" maxlength=12 size=12 value=' . $_POST['DecimalPlaces'] . '></td></tr>';
+	<td><input type="text" class="number" name="DecimalPlaces" maxlength="12" size="12" value="' . $_POST['DecimalPlaces'] . '" /></td></tr>';
 	echo '<tr><td>' . _('Supplier Stock Code') . ':</td>
-	<td><input type="text" name="SupplierCode" maxlength=15 size=15 value="' . $_POST['SupplierCode'] . '"></td></tr>';
+	<td><input type="text" name="SupplierCode" maxlength="15" size="15" value="' . $_POST['SupplierCode'] . '" /></td></tr>';
 	echo '<tr><td>' . _('MinOrderQty') . ':</td>
-	<td><input type="text" class="number" name="MinOrderQty" maxlength=15 size=15 value="' . $_POST['MinOrderQty'] . '"></td></tr>';
+	<td><input type="text" class="number" name="MinOrderQty" maxlength="15" size="15" value="' . $_POST['MinOrderQty'] . '" /></td></tr>';
 	echo '<tr><td>' . _('Supplier Stock Description') . ':</td>
-	<td><input type="text" name="SupplierDescription" maxlength=50 size=51 value="' . $_POST['SupplierDescription'] . '"></td></tr>';
+	<td><input type="text" name="SupplierDescription" maxlength="50" size="51" value="' . $_POST['SupplierDescription'] . '" /></td></tr>';
 	if (!isset($_POST['LeadTime']) OR $_POST['LeadTime'] == "") {
 		$_POST['LeadTime'] = 1;
 	}
 	echo '<tr><td>' . _('Lead Time') . ' (' . _('in days from date of order') . '):</td>
-	<td><input type="text" class="number" name="LeadTime" maxlength=4 size=5 value=' . $_POST['LeadTime'] . '></td></tr>';
+	<td><input type="text" class="number" name="LeadTime" maxlength="4" size="5" value="' . $_POST['LeadTime'] . '" /></td></tr>';
 	echo '<tr><td>' . _('Preferred Supplier') . ':</td>
 	<td><select name="Preferred">';
 	if ($_POST['Preferred'] == 1) {
-		echo '<option selected value=1>' . _('Yes') . '</option>';
-		echo '<option value=0>' . _('No') . '</option>';
+		echo '<option selected="True" value="1">' . _('Yes') . '</option>';
+		echo '<option value="0">' . _('No') . '</option>';
 	} else {
-		echo '<option value=1>' . _('Yes') . '</option>';
-		echo '<option selected value=0>' . _('No') . '</option>';
+		echo '<option value="1">' . _('Yes') . '</option>';
+		echo '<option selected="True" value="0">' . _('No') . '</option>';
 	}
 	echo '</select></td></tr></table><br /><div class="centre">';
 	if (isset($_GET['Edit'])) {

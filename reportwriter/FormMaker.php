@@ -157,7 +157,7 @@ function BuildFormList($GroupID) {
 					foreach ($FormList as $Entry) {
 						if ($Entry['groupname']==$index) { // then it's part of this listing
 							if ($WriteOnce) { $OutputString .= $value.'<br />'; $WriteOnce=false; }
-							$OutputString .= '&nbsp;&nbsp;<input type="radio" name="ReportID" value="'.$Entry['id'].'">'.$Entry['reportname'].'<br />';
+							$OutputString .= '&nbsp;&nbsp;<input type="radio" name="ReportID" value="'.$Entry['id'].'" />'.$Entry['reportname'].'<br />';
 						}
 					}
 				}
@@ -173,7 +173,7 @@ function BuildFormList($GroupID) {
 		$Result=DB_query($sql,$db,'','',false,true);
 		$OutputString .= '<tr><td colspan="3" width="250" valign="top">';
 		while ($Forms = DB_fetch_array($Result)) {
-			$OutputString .= '<input type="radio" name="ReportID" value="'.$Forms['id'].'">'.$Forms['reportname'].'<br />';
+			$OutputString .= '<input type="radio" name="ReportID" value="'.$Forms['id'].'" />'.$Forms['reportname'].'<br />';
 		}
 		$OutputString .= '</td></tr>';
 	}
@@ -249,11 +249,10 @@ function BuildCriteria($FieldListings) {
 		default:
 		case 0: $EndString = '<td>&nbsp;</td><td>&nbsp;</td>';
 			break;
-		case 1: $EndString = '<td><input name="fromvalue'.$SeqNum.'" type="text"
-				value="'.$Params[1].'" size="21" maxlength="20"></td><td>&nbsp;</td>';
+		case 1: $EndString = '<td><input name="fromvalue'.$SeqNum.'" type="text" value="'.$Params[1].'" size="21" maxlength="20" /></td><td>&nbsp;</td>';
 			break;
-		case 2: $EndString = '<td><input name="fromvalue'.$SeqNum.'" type="text" value="'.$Params[1].'" size="21" maxlength="20"></td>
-				<td><input name="tovalue'.$SeqNum.'" type="text" value="'.$Params[2].'" size="21" maxlength="20"></td>';
+		case 2: $EndString = '<td><input name="fromvalue'.$SeqNum.'" type="text" value="'.$Params[1].'" size="21" maxlength="20" /></td>
+				<td><input name="tovalue'.$SeqNum.'" type="text" value="'.$Params[2].'" size="21" maxlength="20" /></td>';
 	} // end switch array_shift($CritBlocks)
 	$CriteriaString .= '<td><select name="defcritsel'.$SeqNum.'">';
 	foreach ($CritBlocks as $value) {

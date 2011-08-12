@@ -732,7 +732,7 @@ be generated, one for standard reports and the other for custom reports.
 			foreach ($ReportList as $Report) {
 				if ($Report['groupname']==$GroupID AND $Report['defaultreport']==$Def) {
 					$RptLinks .= '<tr><td class="menu_group_item">';
-					$RptLinks .= '<p>&bull; <a href="' . $rootpath . '/reportwriter/ReportMaker.php?action=go&reportid=' . $Report['id'] . '">' . _($Report['reportname']) . '</a></p>';
+					$RptLinks .= '<p>&bull; <a href="' . $rootpath . '/reportwriter/ReportMaker.php?action=go&amp;reportid=' . $Report['id'] . '">' . _($Report['reportname']) . '</a></p>';
 					$RptLinks .= '</td></tr>';
 					$NoEntries = false;
 				}
@@ -743,7 +743,7 @@ be generated, one for standard reports and the other for custom reports.
 				$Group=explode(':',$Report['groupname']); // break into main group and form group array
 				if ($NoForms AND $Group[0]==$GroupID AND $Report['reporttype']=='frm' AND $Report['defaultreport']==$Def) {
 					$RptLinks .= '<tr><td class="menu_group_item">';
-					$RptLinks .= '<img src="' . $rootpath . '/css/' . $_SESSION['Theme'] . '/images/folders.gif" width="16" height="13">&nbsp;';
+					$RptLinks .= '<img src="' . $rootpath . '/css/' . $_SESSION['Theme'] . '/images/folders.gif" width="16" height="13" />&nbsp;';
 					$RptLinks .= '<p>&bull; <a href="' . $rootpath . '/reportwriter/FormMaker.php?id=' . $Report['groupname'] . '"></p>';
 					$RptLinks .= $FormGroups[$Report['groupname']] . '</a>';
 					$RptLinks .= '</td></tr>';

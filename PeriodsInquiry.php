@@ -31,7 +31,7 @@ $TableHeader = '<tr><th>' . _('Period Number') . '</th>
 echo '<table><tr>';
 for ($i=0;$i<2;$i++) {
 	echo '<td>';
-	echo '<table cellpadding=2 colspan=2 class="selection">';
+	echo '<table cellpadding="2" colspan="2" class="selection">';
 	echo $TableHeader;
 	$k=0;
 	for ($j=0; $j<$PeriodsInTable;$j++) {
@@ -44,15 +44,15 @@ for ($i=0;$i<2;$i++) {
 			$k++;
 		}
 		$FormatedLastDate = ConvertSQLDate($myrow['lastdate_in_period']);
-		echo "<td>".$myrow['periodno']."</td>
-			<td>".$FormatedLastDate."</td>
-			</tr>";
+		echo '<td>'.$myrow['periodno'].'</td>
+			<td>'.$FormatedLastDate.'</td>
+			</tr>';
 	}
 	echo '</table>';
 	echo '</td>';
 }
 echo '<td>';
-echo '<table cellpadding=2 colspan=2 class="selection">';
+echo '<table cellpadding="2" colspan="2" class="selection">';
 echo $TableHeader;
 $k = 0; //row colour counter
 while ($myrow=DB_fetch_array($PeriodsResult)) {
@@ -64,9 +64,9 @@ while ($myrow=DB_fetch_array($PeriodsResult)) {
 		$k++;
 	}
 	$FormatedLastDate = ConvertSQLDate($myrow['lastdate_in_period']);
-	echo "<td>".$myrow['periodno']."</td>
-		<td>".$FormatedLastDate."</td>
-		</tr>";
+	echo '<td>'.$myrow['periodno'].'</td>
+		<td>'.$FormatedLastDate.'</td>
+		</tr>';
 }
 echo '</table>';
 echo '</td>';

@@ -41,8 +41,7 @@ if (isset($_POST['update'])) {
 	unset($description);
 	unset($_POST['TokenID']);
 }
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' .
-		_('Print') . '" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Print') . '" alt="" />' . ' ' . $title . '</p>';
 
 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '" name="form">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -52,12 +51,12 @@ echo '<br /><table><tr>';
 
 if (isset($_GET['Action']) and $_GET['Action']=='edit') {
 	echo '<td>'. _('Description') . '</td>
-		<td><input type="text" size=30 maxlength=30 name="Description" value="'.$description.'"></td><td>
-		<input type="hidden" name="TokenID" value="'.$_GET['SelectedToken'].'">';
+		<td><input type="text" size="30" maxlength="30" name="Description" value="'.$description.'" /></td><td>
+		<input type="hidden" name="TokenID" value="'.$_GET['SelectedToken'].'" />';
 	echo '<input type="submit" name="update" value="' . _('Update') . '" />';
 } else {
-	echo '<td>'._('Token ID') . '<td><input type="text" name="TokenID" value="'.$_POST['TokenID'].'"></td></tr>
-		<tr><td>'. _('Description') . '</td><td><input type="text" size=30 maxlength=30 name="Description" value="'.$description.'"></td><td>';
+	echo '<td>'._('Token ID') . '<td><input type="text" name="TokenID" value="'.$_POST['TokenID'].'" /></td></tr>
+		<tr><td>'. _('Description') . '</td><td><input type="text" size="30" maxlength="30" name="Description" value="'.$description.'" /></td><td>';
 	echo '<input type="submit" name="submit" value="' . _('Insert') . '" />';
 }
 
@@ -79,7 +78,7 @@ while ($myrow = DB_fetch_array($result,$db)){
 
 echo '</table><p></p>';
 
-echo "<script>defaultControl(document.form.description);</script>";
+echo '<script>defaultControl(document.form.description);</script>';
 
 include('includes/footer.inc');
 

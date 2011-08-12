@@ -29,6 +29,8 @@ if (isset($_GET['EditName'])){
 	$EditName = strtoupper($_GET['EditName']);
 } else if (isset($_POST['EditName'])){
 	$EditName = strtoupper($_POST['EditName']);
+} else {
+	$EditName = '';
 }
 
 if (isset($SelectedCategory) AND isset($_FILES['ItemPicture']) AND $_FILES['ItemPicture']['name'] !='') {
@@ -98,7 +100,7 @@ if (isset($_POST['submit'])  && $EditName == 1 ) { // Creating or updating a cat
                                        parentcatid)
                                        VALUES (
                                        '" . $_POST['SalesCatName'] . "',
-                                       '" . (isset($ParentCategory)?($ParentCategory):('NULL')) . "')";
+                                       " . (isset($ParentCategory)?($ParentCategory):('NULL')) . ")";
 		$msg = _('A new Sales category record has been added');
 	}
 
@@ -147,7 +149,7 @@ if (isset($_POST['submit'])  && $EditName == 1 ) { // Creating or updating a cat
 				salescatid
 			) VALUES (
 				'". $_POST['AddStockID']."',
-				'".(isset($ParentCategory)?($ParentCategory):('NULL'))."'
+				'". $ParentCategory."'
 			)";
 	$result = DB_query($sql,$db);
 	prnMsg(_('Stock item') . ' ' . $_POST['AddStockID'] . ' ' . _('has been added') .
@@ -214,10 +216,9 @@ or deletion of the records*/
 $sql = "SELECT salescatid,
 		salescatname
 	FROM salescat
-	WHERE parentcatid". (isset($ParentCategory)?('='.$ParentCategory):' is NULL') . "
+	WHERE parentcatid". (isset($ParentCategory)?('='.$ParentCategory):" is NULL") . "
 	ORDER BY salescatname";
 $result = DB_query($sql,$db);
-
 
 echo '<p>';
 if (DB_num_rows($result) == 0) {
@@ -238,20 +239,18 @@ if (DB_num_rows($result) == 0) {
 		}
 
 		if (function_exists('imagecreatefrompng')){
-			$CatImgLink = '<img src="GetStockImage.php?automake=1&textcolor=FFFFFF&bgcolor=CCCCCC'.
-				'&stockid='.urlencode('cat_'.$myrow['salescatid'].'.jpg').
-				'&text='.
-				'&width=32'.
-				'&height=32'.
-				'" >';
+			$CatImgLink = '<img src="GetStockImage.php?automake=1&textcolor=FFFFFF&bgcolor=CCCCCC&stockid='.urlencode('cat_'.$myrow['salescatid'].'.jpg').'&text=&width=32&height=32" />';
 		} else {
 			if( file_exists($_SESSION['part_pics_dir'] . '/' .'cat_'.$myrow['salescatid'].'.jpg') ) {
-				$CatImgLink = '<img src="'.$rootpath . '/' . $_SESSION['part_pics_dir'] . '/' .
-					'cat_'.$myrow['salescatid'].'.jpg" >';
+				$CatImgLink = '<img src="'.$rootpath . '/' . $_SESSION['part_pics_dir'] . '/' . 'cat_'.$myrow['salescatid'].'.jpg" />';
 			} else {
 				$CatImgLink = 'No Image';
 			}
 
+		}
+
+		if (!isset($ParentCategory)) {
+			$ParentCategory='NULL';
 		}
 
 		printf('<td>%s</td>
@@ -301,9 +300,8 @@ if (isset($SelectedCategory)) {
 	$_POST['ParentCategory']  = $myrow['parentcatid'];
 	$_POST['SalesCatName']  = $myrow['salescatname'];
 
-	echo '<input type="hidden" name="SelectedCategory" value="' . $SelectedCategory . '">';
-	echo '<input type="hidden" name="ParentCategory" value="' .
-		(isset($_POST['ParentCatId'])?($_POST['ParentCategory']):('0')) . '">';
+	echo '<input type="hidden" name="SelectedCategory" value="' . $SelectedCategory . '" />';
+	echo '<input type="hidden" name="ParentCategory" value="' . (isset($_POST['ParentCatId'])?($_POST['ParentCategory']):('0')) . '" />';
 	$FormCaps = _('Edit Sub Category');
 
 } else { //end of if $SelectedCategory only do the else when a new record is being entered
@@ -311,24 +309,22 @@ if (isset($SelectedCategory)) {
 	if (isset($ParentCategory)) {
 		$_POST['ParentCategory']  = $ParentCategory;
 	}
-	echo '<input type="hidden" name="ParentCategory" value="' .
-		(isset($_POST['ParentCategory'])?($_POST['ParentCategory']):('0')) . '">';
+	echo '<input type="hidden" name="ParentCategory" value="' . (isset($_POST['ParentCategory'])?($_POST['ParentCategory']):('0')) . '" />';
 	$FormCaps = _('New Sub Category');
 }
-echo '<input type="hidden" name="EditName" value="1">';
+echo '<input type="hidden" name="EditName" value="1" />';
 echo '<table class="selection">';
 echo '<tr><th colspan="2">' . $FormCaps . '</th></tr>';
 echo '<tr><td>' . _('Category Name') . ':</td>
-            <td><input type="Text" name="SalesCatName" size=20 maxlength=20 value="' .
-			$_POST['SalesCatName'] . '"></td></tr>';
+            <td><input type="text" name="SalesCatName" size="20" maxlength="20" value="' . $_POST['SalesCatName'] . '" /></td></tr>';
 // Image upload only if we have a selected category
 if (isset($SelectedCategory)) {
 	echo '<tr><td>'. _('Image File (.jpg)') . ':</td>
-		<td><input type="file" id="ItemPicture" name="ItemPicture"></td></tr>';
+		<td><input type="file" id="ItemPicture" name="ItemPicture" /></td></tr>';
 }
 
 echo '</table>';
-echo '<br /><div class="centre"><input type="Submit" name="submit" value="' . _('Submit Information') . '"></div>';
+echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Submit Information') . '" /></div>';
 
 echo '</form></p>';
 
@@ -363,48 +359,49 @@ if($result && DB_num_rows($result)) {
 	DB_free_result($result);
 }
 
-// This query will return the stock that is available
-$sql = "SELECT stockid, description FROM stockmaster ORDER BY stockid";
-$result = DB_query($sql,$db);
-if($result && DB_num_rows($result)) {
-	// continue id stock id in the stockid array
-	echo '<p><form ENCtype="MULTIPART/FORM-DATA" method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
-	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	if( isset($SelectedCategory) ) { // If we selected a category we need to keep it selected
-		echo '<input type="hidden" name="SelectedCategory" value="' . $SelectedCategory . '" />';
-	}
-	echo '<input type="hidden" name="ParentCategory" value="' .
-		(isset($_POST['ParentCategory'])?($_POST['ParentCategory']):('0')) . '" />';
-
-	echo '';
-	echo '<table class="selection">';
-	echo '<tr><th colspan="2">'._('Add Inventory to this category.').'</th></tr>';
-	echo '<tr><td>' . _('Select Inv. Item') . ':</td><td>';
-	echo '<select name="AddStockID">';
-	while( $myrow = DB_fetch_array($result) ) {
-		if ( !array_keys( $stockids, $myrow['stockid']  ) ) {
-			// Only if the StockID is not already selected
-			echo '<option value="'.$myrow['stockid'].'">'.
-				$myrow['stockid'] . '&nbsp;-&nbsp;&quot;'.
-				$myrow['description'] . '&quot;' . '</option>';
+if (isset($ParentCategory) and $ParentCategory!='NULL') {
+	// This query will return the stock that is available
+	$sql = "SELECT stockid, description FROM stockmaster ORDER BY stockid";
+	$result = DB_query($sql,$db);
+	if($result and DB_num_rows($result)) {
+		// continue id stock id in the stockid array
+		echo '<p><form ENCtype="MULTIPART/FORM-DATA" method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
+		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
+		if( isset($SelectedCategory) ) { // If we selected a category we need to keep it selected
+			echo '<input type="hidden" name="SelectedCategory" value="' . $SelectedCategory . '" />';
 		}
+		echo '<input type="hidden" name="ParentCategory" value="' . (isset($_POST['ParentCategory'])?($_POST['ParentCategory']):('0')) . '" />';
+
+		echo '';
+		echo '<table class="selection">';
+		echo '<tr><th colspan="2">'._('Add Inventory to this category.').'</th></tr>';
+		echo '<tr><td>' . _('Select Inv. Item') . ':</td><td>';
+		echo '<select name="AddStockID">';
+		while( $myrow = DB_fetch_array($result) ) {
+			if ( !array_keys( $stockids, $myrow['stockid']  ) ) {
+				// Only if the StockID is not already selected
+				echo '<option value="'.$myrow['stockid'].'">'.
+					$myrow['stockid'] . '&nbsp;-&nbsp;&quot;'.
+					$myrow['description'] . '&quot;' . '</option>';
+			}
+		}
+		echo '</select>';
+		echo '</td></tr></table>';
+		echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Add Inventory Item') . '" /></div>';
+		echo '';
+		echo '</form></p>';
+	} else {
+		echo '<p>';
+		echo prnMsg( _('No more Inventory items to add.') );
+		echo '</p>';
 	}
-	echo '</select>';
-	echo '</td></tr></table>';
-	echo '<br /><div class="centre"><input type="Submit" name="submit" value="' . _('Add Inventory Item') . '"></div>';
-	echo '';
-	echo '</form></p>';
-} else {
-	echo '<p>';
-	echo prnMsg( _('No more Inventory items to add.') );
-	echo '</p>';
-}
-if( $result ) {
-	DB_free_result($result);
-}
-unset($stockids);
+	if( $result ) {
+		DB_free_result($result);
+	}
+	unset($stockids);
 // END Always display Stock Select screen
 // ----------------------------------------------------------------------------------------
+}
 
 // ----------------------------------------------------------------------------------------
 // Always Show Stock In Category
@@ -435,7 +432,7 @@ if($result ) {
 
 			echo '<td>' . $myrow['stockid'] . '</td>';
 			echo '<td>' . $myrow['description'] . '</td>';
-			echo '<td><a href="'.$_SERVER['PHP_SELF'] . 'ParentCategory='.$ParentCategory.'&DelStockID='.$myrow['stockid'].'">'.
+			echo '<td><a href="'.$_SERVER['PHP_SELF'] . '?ParentCategory='.$ParentCategory.'&DelStockID='.$myrow['stockid'].'">'.
 					_('Remove').
 					'</a></td></tr>';
 		}

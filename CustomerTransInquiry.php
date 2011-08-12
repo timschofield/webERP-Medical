@@ -7,14 +7,14 @@ include('includes/session.inc');
 $title = _('Customer Transactions Inquiry');
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' .
-	_('Transaction Inquiry') . '" alt="" />' . ' ' . _('Transaction Inquiry') . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('Transaction Inquiry') . '" alt="" />' .
+		' ' . _('Transaction Inquiry') . '</p>';
 echo '<div class="page_help_text">' . _('Choose which type of transaction to report on.') . '</div><br />';
 
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<table cellpadding=2 class="selection"><tr>';
+echo '<table cellpadding="2" class="selection"><tr>';
 
 echo '<td>' . _('Type') . ':</td><td><select tabindex="1" name="TransType">';
 
@@ -25,12 +25,12 @@ echo '<option value="All"> All' . '</option>';
 while ($myrow=DB_fetch_array($resultTypes)){
 	if (isset($_POST['TransType'])){
 		if ($myrow['typeid'] == $_POST['TransType']){
-		     echo '<option selected value="' . $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
+		     echo '<option selected="True" value="' . $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
 		} else {
 		     echo '<option value="' . $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
 		}
 	} else {
-		     echo '<option Value="' . $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
+		     echo '<option value="' . $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
 	}
 }
 echo '</select></td>';
@@ -41,10 +41,10 @@ if (!isset($_POST['FromDate'])){
 if (!isset($_POST['ToDate'])){
 	$_POST['ToDate'] = Date($_SESSION['DefaultDateFormat']);
 }
-echo '<td>' . _('From') . ':</td><td><input tabindex="2" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="text" name="FromDate" maxlength="10" size="11" value="' . $_POST['FromDate'] . '"></td>';
-echo '<td>' . _('To') . ':</td><td><input tabindex="3" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="text" name="ToDate" maxlength="10" size="11" value="' . $_POST['ToDate'] . '"></td>';
+echo '<td>' . _('From') . ':</td><td><input tabindex="2" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="text" name="FromDate" maxlength="10" size="11" value="' . $_POST['FromDate'] . '" /></td>';
+echo '<td>' . _('To') . ':</td><td><input tabindex="3" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="text" name="ToDate" maxlength="10" size="11" value="' . $_POST['ToDate'] . '" /></td>';
 
-echo '</tr></table><br /><div class="centre"><input tabindex="4" type="submit" name="ShowResults" value="' . _('Show Transactions') . '">';
+echo '</tr></table><br /><div class="centre"><input tabindex="4" type="submit" name="ShowResults" value="' . _('Show Transactions') . '" />';
 
 echo '</form></div>';
 
@@ -121,7 +121,7 @@ if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
 		if ($_POST['TransType']==10){ /* invoices */
 
 			printf($format_base.'
-				<td><a target="_blank" href="%s/PrintCustTrans.php?FromTransNo=%s&InvOrCredit=Invoice"><img src="%s" title="' . _('Click to preview the invoice') . '"></a></td>
+				<td><a target="_blank" href="%s/PrintCustTrans.php?FromTransNo=%s&InvOrCredit=Invoice"><img src="%s" title="' . _('Click to preview the invoice') . '" /></a></td>
 				</tr>',
 				$myrow['typename'],
 				$myrow['transno'],
@@ -139,7 +139,7 @@ if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
 				$rootpath.'/css/'.$theme.'/images/preview.gif');
 		} elseif ($_POST['TransType']==11){ /* credit notes */
 			printf($format_base.'
-				<td><a target="_blank" href="%s/PrintCustTrans.php?FromTransNo=%s&InvOrCredit=Credit"><img src="%s" title="' . _('Click to preview the credit') . '"></a></td>
+				<td><a target="_blank" href="%s/PrintCustTrans.php?FromTransNo=%s&InvOrCredit=Credit"><img src="%s" title="' . _('Click to preview the credit') . '" /></a></td>
 				</tr>',
 				$myrow['typename'],
 				$myrow['transno'],

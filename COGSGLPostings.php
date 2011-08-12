@@ -15,8 +15,7 @@ if (isset($_POST['SelectedCOGSPostingID'])){
 	$SelectedCOGSPostingID=$_GET['SelectedCOGSPostingID'];
 }
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') .
-	'" alt="" />' . ' ' . $title.'</p><br />';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
 
 if (isset($_POST['submit'])) {
 
@@ -273,7 +272,7 @@ echo '<table class="selection">
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['Area']) and $myrow['areacode']==$_POST['Area']) {
-		echo '<option selected value="'.$myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
+		echo '<option selected="True" value="'.$myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
 	} else {
 		echo '<option value="'.$myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
 	}
@@ -291,7 +290,7 @@ echo '</select></td></tr>
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['StkCat']) and $myrow["categoryid"]==$_POST['StkCat']) {
-		echo '<option selected value="'.$myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
+		echo '<option selected="True" value="'.$myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	} else {
 		echo '<option value="'.$myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 	}
@@ -310,7 +309,7 @@ echo '</select></td></tr>
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['SalesType']) and $myrow['typeabbrev']==$_POST['SalesType']) {
-		echo '<option selected value="'.$myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
+		echo '<option selected="True" value="'.$myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
 	} else {
 		echo '<option value="'.$myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
 	}
@@ -335,7 +334,7 @@ $result = DB_query($sql,$db);
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['GLCode']) and $myrow['accountcode']==$_POST['GLCode']) {
-		echo '<option selected value="'.$myrow['accountcode'] . '">' . $myrow['accountcode']  . ' - '  . $myrow['accountname'] . '</option>';
+		echo '<option selected="True" value="'.$myrow['accountcode'] . '">' . $myrow['accountcode']  . ' - '  . $myrow['accountname'] . '</option>';
 	} else {
 		echo '<option value="'.$myrow['accountcode'] . '">' . $myrow['accountcode']  . ' - '  . $myrow['accountname'] . '</option>';
 	}
@@ -345,7 +344,7 @@ while ($myrow = DB_fetch_array($result)) {
 DB_free_result($result);
 
 echo '</select></td></tr></table>';
-echo '<br /><div class="centre"><input tabindex="5" type="Submit" name="submit" value="' . _('Enter Information') . '"></form></div>';
+echo '<br /><div class="centre"><input tabindex="5" type="submit" name="submit" value="' . _('Enter Information') . '" /></form></div>';
 
 include('includes/footer.inc');
 ?>

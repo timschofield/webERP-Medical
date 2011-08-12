@@ -44,7 +44,7 @@
 	}
 
 	function VerifyRequiredByDate($RequiredByDate, $i, $Errors, $db) {
-		$sql="select confvalue from config where confname='DefaultDateFormat'";
+		$sql="SELECT confvalue FROM config WHERE confname='DefaultDateFormat'";
 		$result=DB_query($sql, $db);
 		$myrow=DB_fetch_array($result);
 		$DateFormat=$myrow[0];
@@ -77,7 +77,7 @@
 	}
 
 	function VerifyStartDate($StartDate, $i, $Errors, $db) {
-		$sql="select confvalue from config where confname='DefaultDateFormat'";
+		$sql="SELECT confvalue FROM config WHERE confname='DefaultDateFormat'";
 		$result=DB_query($sql, $db);
 		$myrow=DB_fetch_array($result);
 		$DateFormat=$myrow[0];

@@ -18,8 +18,7 @@ if (isset($Errors)) {
 
 $Errors = array();
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Customer Types') .
-	'" alt="" />' . _('Customer Type Setup') . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Customer Types') . '" alt="" />' . _('Customer Type Setup') . '</p>';
 echo '<div class="page_help_text">' . _('Add/edit/delete Customer Types') . '</div>';
 
 if (isset($_POST['submit'])) {
@@ -260,7 +259,7 @@ if (! isset($_GET['delete'])) {
 	if (!isset($_POST['typename'])) {
 		$_POST['typename']='';
 	}
-	echo '<tr><td>' . _('Type Name') . ':</td><td><input type="Text" name="typename" value="' . $_POST['typename'] . '"></td></tr>';
+	echo '<tr><td>' . _('Type Name') . ':</td><td><input type="text" name="typename" value="' . $_POST['typename'] . '" /></td></tr>';
 
    	echo '</td></tr></table>'; // close main table
 

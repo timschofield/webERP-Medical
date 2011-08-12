@@ -23,8 +23,7 @@ if (isset($_GET['From'])) {
 
 if (isset($_POST['CheckCode'])) {
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Dispatch') .
-		'" alt="" />' . ' ' . _('Select Item to Transfer') . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Dispatch') . '" alt="" />' . ' ' . _('Select Item to Transfer') . '</p>';
 
 	if (strlen($_POST['StockText'])>0) {
 		$sql="SELECT stockid, description from stockmaster where description " . LIKE . " '%" . $_POST['StockText'] . "%'";
@@ -431,8 +430,7 @@ if ( isset($_POST['EnterTransfer']) ){
 
 }
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Dispatch') .
-		'" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Dispatch') . '" alt="" />' . ' ' . $title . '</p>';
 
 echo '<form action="'. $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -443,21 +441,22 @@ if (!isset($_GET['Description'])) {
 }
 echo '<table class="selection"><tr><td>'. _('Stock Code'). ':</td><td>';
 if (isset($_POST['StockID'])) {
-	echo '<input type="text" name="StockID" size=21 value="' . $_POST['StockID'] . '" maxlength=20></td></tr>';
+	echo '<input type="text" name="StockID" size="21" value="' . $_POST['StockID'] . '" maxlength="20" /></td></tr>';
 } else {
-	echo '<input type="text" name="StockID" size=21 value="" maxlength=20></td></tr>';
+	echo '<input type="text" name="StockID" size="21" value="" maxlength="20" /></td></tr>';
 }
-echo '<tr><td>'. _('Partial Description'). ':</td><td><input type="text" name="StockText" size=21 value="' .
-	$_GET['Description'] .'"></td><td>'._('Partial Stock Code'). ':</td><td>';
+echo '<tr><td>'. _('Partial Description'). ':</td>
+	<td><input type="text" name="StockText" size="21" value="' . $_GET['Description'] .'" /></td>
+	<td>'._('Partial Stock Code'). ':</td><td>';
 if (isset($_POST['StockID'])) {
-	echo '<input type="text" name="StockCode" size=21 value="' . $_POST['StockID'] .'" maxlength=20>';
+	echo '<input type="text" name="StockCode" size="21" value="' . $_POST['StockID'] .'" maxlength="20" />';
 } else {
-	echo '<input type="text" name="StockCode" size=21 value="" maxlength=20>';
+	echo '<input type="text" name="StockCode" size="21" value="" maxlength="20" />';
 }
 echo '</td><td><input type="submit" name="CheckCode" value="'._('Check Part').'" /></td></tr>';
 
 if (isset($_SESSION['Transfer']->TransferItem[0]->ItemDescription) and strlen($_SESSION['Transfer']->TransferItem[0]->ItemDescription)>1){
-	echo '<tr><td colspan=3><font color=BLUE size=3>' . $_SESSION['Transfer']->TransferItem[0]->ItemDescription . ' ('._('In Units of').' ' . $_SESSION['Transfer']->TransferItem[0]->PartUnit . ' )</font></td></tr>';
+	echo '<tr><td colspan="3"><font color="blue" size="3">' . $_SESSION['Transfer']->TransferItem[0]->ItemDescription . ' ('._('In Units of').' ' . $_SESSION['Transfer']->TransferItem[0]->PartUnit . ' )</font></td></tr>';
 }
 
 echo '<tr><td>' . _('From Stock Location').':</td><td><select name="StockLocationFrom">';
@@ -467,12 +466,12 @@ $resultStkLocs = DB_query($sql,$db);
 while ($myrow=DB_fetch_array($resultStkLocs)){
 	if (isset($_SESSION['Transfer']->StockLocationFrom)){
 		if ($myrow['loccode'] == $_SESSION['Transfer']->StockLocationFrom){
-			 echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			 echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
 			 echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	} elseif ($myrow['loccode']==$_SESSION['UserStockLocation'] and isset($_SESSION['Transfer'])){
-		 echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		 echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		 $_SESSION['Transfer']->StockLocationFrom=$myrow['loccode'];
 	} else {
 		 echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
@@ -488,12 +487,12 @@ DB_data_seek($resultStkLocs,0);
 while ($myrow=DB_fetch_array($resultStkLocs)){
 	if (isset($_SESSION['Transfer']) and isset($_SESSION['Transfer']->StockLocationTo)){
 		if ($myrow['loccode'] == $_SESSION['Transfer']->StockLocationTo){
-			 echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			 echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
 			 echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	} elseif ($myrow['loccode']==$_SESSION['UserStockLocation'] and isset($_SESSION['Transfer'])){
-		 echo '<option selected value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		 echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		 $_SESSION['Transfer']->StockLocationTo=$myrow['loccode'];
 	} else {
 		 echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
@@ -509,12 +508,12 @@ if (isset($_SESSION['Transfer']->TransferItem[0]->Controlled) and $_SESSION['Tra
 	echo '<td class="number"><input type="hidden" name="Quantity" value="' . $_SESSION['Transfer']->TransferItem[0]->Quantity . '" />
 		<a href="' . $rootpath .'/StockTransferControlled.php?StockLocationFrom='.$_SESSION['Transfer']->StockLocationFrom.'">' . $_SESSION['Transfer']->TransferItem[0]->Quantity . '</a></td></tr>';
 } elseif (isset($_SESSION['Transfer']->TransferItem[0]->Controlled)){
-	echo '<td><input type="text" class="number" name="Quantity" size=12 maxlength=12 value=' . $_SESSION['Transfer']->TransferItem[0]->Quantity . '></td></tr>';
+	echo '<td><input type="text" class="number" name="Quantity" size="12" maxlength="12" value="' . $_SESSION['Transfer']->TransferItem[0]->Quantity . '" /></td></tr>';
 } else {
-	echo '<td><input type="text" class="number" name="Quantity" size=12 maxlength=12 value="0"></td></tr>';
+	echo '<td><input type="text" class="number" name="Quantity" size="12" maxlength="12" value="0" /></td></tr>';
 }
 
-echo '</table><div class="centre"><br /><input type="submit" name="EnterTransfer" value="' . _('Enter Stock Transfer') . '"><br />';
+echo '</table><div class="centre"><br /><input type="submit" name="EnterTransfer" value="' . _('Enter Stock Transfer') . '" /><br />';
 
 
 if (empty($_SESSION['Transfer']->TransferItem[0]->StockID) and isset($_POST['StockID'])) {

@@ -201,7 +201,7 @@ if (isset($_POST['PrintPDF'])) {
 
 			// Parameters for addTextWrap are defined in /includes/class.pdf.php
 			// 1) X position 2) Y position 3) Width
-			// 4) Height 5) Text 6) Alignment 7) Border 8) Fill - True to use SetFillColor
+			// 4) Height 5) text 6) Alignment 7) Border 8) Fill - True to use SetFillColor
 			// and False to set to transparent
 			$shortage = ($myrow['demand'] - $myrow['supply']) * -1;
 			$extcost = $shortage * $myrow['computedcost'];
@@ -257,34 +257,33 @@ if (isset($_POST['PrintPDF'])) {
 	$title=_('MRP Shortages - Excess Reporting');
 	include('includes/header.inc');
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="'
-		. _('Stock') . '" alt="" />' . ' ' . $title . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Stock') . '" alt="" />' . ' ' . $title . '</p>';
 
 	echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection">';
 	echo '</select></td></tr>';
 	echo '<tr><td>' . _('Inventory Category') . ':</td><td><select name="CategoryID">';
-	echo '<option selected value="All">' . _('All Stock Categories') . '</option>';
-	$sql = 'SELECT categoryid,
+	echo '<option selected="True" value="All">' . _('All Stock Categories') . '</option>';
+	$sql = "SELECT categoryid,
 				   categorydescription
-			FROM stockcategory';
+			FROM stockcategory";
 	$result = DB_query($sql,$db);
 	while ($myrow = DB_fetch_array($result)) {
 		echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categoryid'] . ' - ' .$myrow['categorydescription'] . '</option>';
 	} //end while loop
 	echo '<tr><td>' . _('Sort') . ':</td><td><select name="Sort">';
-	echo '<option selected value="extcost">' . _('Extended Shortage Dollars').'</option>';
+	echo '<option selected="True" value="extcost">' . _('Extended Shortage Dollars').'</option>';
 	echo '<option value="stockid">' . _('Part Number').'</option>';
 	echo '</select></td></tr>';
 
 	echo '<tr><td>' . _('Shortage-Excess Option') . ':</td><td><select name="ReportType">';
-	echo '<option selected value="Shortage">' . _('Report MRP Shortages').'</option>';
+	echo '<option selected="True" value="Shortage">' . _('Report MRP Shortages').'</option>';
 	echo '<option value="Excess">' . _('Report MRP Excesses').'</option>';
 	echo '</select></td></tr>';
 
 	echo '<tr><td>' . _('Print Option') . ':</td><td><select name="Fill">';
-	echo '<option selected value="yes">' . _('Print With Alternating Highlighted Lines').'</option>';
+	echo '<option selected="True" value="yes">' . _('Print With Alternating Highlighted Lines').'</option>';
 	echo '<option value="no">' . _('Plain Print').'</option>';
 	echo '</select></td></tr>';
 	echo '</table><br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';

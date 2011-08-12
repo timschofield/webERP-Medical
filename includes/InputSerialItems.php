@@ -53,31 +53,31 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 echo '<input type="hidden" name="LineNo" value="' . $LineNo . '" />';
 echo '<input type="hidden" name="StockID" value="'. $StockID. '" />';
 echo '<table class="selection"><tr><td>';
-echo '<input type=radio name=EntryType onClick="submit();" ';
+echo '<input type="radio" name=EntryType onClick="submit();" ';
 if ($_POST['EntryType']=='KEYED') {
 	echo ' checked ';
 }
-echo 'value="KEYED">'. _('Keyed Entry');
-echo '</TD>';
+echo 'value="KEYED" />'. _('Keyed Entry');
+echo '</td>';
 
 if ($LineItem->Serialised==1){
 	echo '<td>';
-	echo '<input type=radio name=EntryType onClick="submit();" ';
+	echo '<input type="radio" name="EntryType" onClick="submit();" ';
 	if ($_POST['EntryType']=='SEQUENCE') {
-		echo ' checked ';
+		echo ' checked="True" ';
 	}
 	echo ' value="SEQUENCE">'. _('Sequential');
 	echo '</td>';
 }
 
 echo '<td valign=bottom>';
-echo '<input type=radio id="FileEntry" name=EntryType onClick="submit();" ';
+echo '<input type="radio" id="FileEntry" name=EntryType onClick="submit();" ';
 if ($_POST['EntryType']=='FILE') {
 	echo ' checked ';
 }
-echo ' value="FILE">'. _('File Upload');
+echo ' value="FILE" />'. _('File Upload');
 echo '&nbsp; <input type="file" name="ImportFile" onClick="document.getElementById(\'FileEntry\').checked=true;" >';
-echo '</td></tr><tr><td colspan=3>';
+echo '</td></tr><tr><td colspan="3">';
 echo '<div class="centre"><input type="submit" value="'. _('Set Entry Type'). ':" /></div>';
 echo '</td></tr></table>';
 echo '</form>';

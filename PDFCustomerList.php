@@ -365,8 +365,7 @@ if (isset($_POST['PrintPDF'])){
 
 	$title = _('Customer Details Listing');
 	include('includes/header.inc');
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' .
-		 $title . '" alt="" />' . ' ' . $title . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . $title . '" alt="" />' . ' ' . $title . '</p>';
 
 	echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="POST"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -375,7 +374,7 @@ if (isset($_POST['PrintPDF'])){
 	$sql="SELECT areacode, areadescription FROM areas";
 	$AreasResult= DB_query($sql,$db);
 
-	echo '<option selected value="All">' . _('All Areas') . '</option>';
+	echo '<option selected="True" value="All">' . _('All Areas') . '</option>';
 
 	While ($myrow = DB_fetch_array($AreasResult)){
 		echo '<option value="' . $myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
@@ -384,7 +383,7 @@ if (isset($_POST['PrintPDF'])){
 
 	echo '<tr><td>' . _('For Sales folk'). ':</td><td><select name=SalesPeople[] multiple>';
 
-	echo '<option selected value="All">'. _('All sales folk') . '</option>';
+	echo '<option selected="True" value="All">'. _('All sales folk') . '</option>';
 
 	$sql = "SELECT salesmancode, salesmanname FROM salesman";
 	$SalesFolkResult = DB_query($sql,$db);
@@ -396,16 +395,18 @@ if (isset($_POST['PrintPDF'])){
 
 	echo '<tr><td>' . _('Level Of Activity'). ':</td><td><select name="Activity">';
 
-	echo '<option selected value="All">'. _('All customers') . '</option>';
+	echo '<option selected="True" value="All">'. _('All customers') . '</option>';
 	echo '<option value="GreaterThan">'. _('Sales Greater Than') . '</option>';
 	echo '<option value="LessThan">'. _('Sales Less Than') . '</option>';
 	echo '</select></td><td>';
 
-	echo '<input type="text" class="number" name="ActivityAmount" size=8 maxlength=8 value=0></td></tr>';
+	echo '<input type="text" class="number" name="ActivityAmount" size="8" maxlength="8" value="0" /></td></tr>';
 
 	$DefaultActivitySince = Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m')-6,0,Date('y')));
-	echo '<tr><td>' . _('Activity Since'). ':</td><td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'"  name="ActivitySince" size=10 maxlength=10
-		value="' . $DefaultActivitySince . '"></td></tr>';
+	echo '<tr>
+			<td>' . _('Activity Since'). ':</td>
+			<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'"  name="ActivitySince" size="10" maxlength="10" value="' . $DefaultActivitySince . '" /></td>
+		</tr>';
 
 	echo '</table><br /><div class="centre"><input type="submit" name="PrintPDF" value="'. _('Print PDF'). '" /></div>';
 

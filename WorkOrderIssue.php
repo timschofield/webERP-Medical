@@ -16,8 +16,7 @@ if (isset($_GET['StockID'])){
 echo '<a href="'. $rootpath . '/SelectWorkOrder.php">' . _('Back to Work Orders'). '</a><br />';
 echo '<a href="'. $rootpath . '/WorkOrderCosting.php?WO=' .  $_POST['WO'] . '">' . _('Back to Costing'). '</a><br />';
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/group_add.png" title="' .
-	_('Search') . '" alt="" />' . ' ' . $title.'</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/group_add.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>';
 
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -529,7 +528,7 @@ if ($WORow['closed']==1){
 if (!isset($_POST['IssuedDate'])){
 	$_POST['IssuedDate'] = Date($_SESSION['DefaultDateFormat']);
 }
-echo '<table cellpadding=2 class="selection">
+echo '<table cellpadding="2" class="selection">
 	<tr><td class="label">' . _('Issue to work order') . ':</td>
 		<td>' . $_POST['WO'] .'</td><td class="label">' . _('Item') . ':</td>
 		<td>' . $_POST['StockID'] . ' - ' . $WORow['description'] . '</td>
@@ -545,9 +544,9 @@ echo '<table cellpadding=2 class="selection">
 	 <tr><td class="label">' . _('Already Received') . ':</td>
 		<td class="number">' . number_format($WORow['qtyrecd'],$WORow['decimalplaces']) . '</td>
 		<td colspan="2">' . $WORow['units'] . '</td></tr>
-	<tr><td colspan=4></td></tr>
+	<tr><td colspan="4"></td></tr>
 	 <tr><td class="label">' . _('Date Material Issued') . ':</td>
-		<td><input type="text" name=issuedate value=' . Date($_SESSION['DefaultDateFormat']) . ' class="date" size=10 alt="'.$_SESSION['DefaultDateFormat'].'" ></td>
+		<td><input type="text" name="issuedate" value="' . Date($_SESSION['DefaultDateFormat']) . '" class="date" size="10" alt="'.$_SESSION['DefaultDateFormat'].'" /></td>
 		<td class="label">' . _('Issued From') . ':</td><td>';
 
 if (!isset($_POST['IssueItem'])){
@@ -561,7 +560,7 @@ if (!isset($_POST['IssueItem'])){
 
 	while ($LocRow = DB_fetch_array($LocResult)){
 		if ($_POST['FromLocation'] ==$LocRow['loccode']){
-			echo '<option selected value="' . $LocRow['loccode'] .'">' . $LocRow['locationname'] . '</option>';
+			echo '<option selected="True" value="' . $LocRow['loccode'] .'">' . $LocRow['locationname'] . '</option>';
 		} else {
 			echo '<option value="' . $LocRow['loccode'] .'">' . $LocRow['locationname'] . '</option>';
 		}
@@ -573,7 +572,7 @@ if (!isset($_POST['IssueItem'])){
 						WHERE loccode='" . $_POST['FromLocation'] . "'",
 				$db);
 	$LocRow = DB_fetch_array($LocResult);
-	echo '<input type="hidden" name="FromLocation" value="' . $_POST['FromLocation'] . '">';
+	echo '<input type="hidden" name="FromLocation" value="' . $_POST['FromLocation'] . '" />';
 	echo $LocRow['locationname'];
 }
 echo '</td></tr>
@@ -583,8 +582,8 @@ echo '</td></tr>
 
 if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 	//set up options for selection of the item to be issued to the WO
-	echo '<tr><th colspan=5>' . _('Material Requirements For this Work Order') . '</th></tr>';
-	echo '<tr><th colspan=2>' . _('Item') . '</th>
+	echo '<tr><th colspan="5">' . _('Material Requirements For this Work Order') . '</th></tr>';
+	echo '<tr><th colspan="2">' . _('Item') . '</th>
 		<th>' . _('Qty Required') . '</th>
 		<th>' . _('Qty Issued') . '</th></tr>';
 
@@ -600,7 +599,7 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 
 	while ($RequirementsRow = DB_fetch_array($RequirmentsResult)){
 		if ($RequirementsRow['autoissue']==0){
-			echo '<tr><td><input type="submit" name="IssueItem" value="' .$RequirementsRow['stockid'] . '"></td>
+			echo '<tr><td><input type="submit" name="IssueItem" value="' .$RequirementsRow['stockid'] . '" /></td>
 					<td>' . $RequirementsRow['stockid'] . ' - ' . $RequirementsRow['description'] . '</td>';
 		} else {
 			echo '<tr><td class="notavailable">' . _('Auto Issue') . '<td class="notavailable">' .$RequirementsRow['stockid'] . ' - ' . $RequirementsRow['description'] .'</td>';
@@ -628,7 +627,7 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 	echo '<table class="selection"><tr><td>' . _('Select a stock category') . ':<select name="StockCat">';
 
 	if (!isset($_POST['StockCat'])){
-		echo '<option selected value="All">' . _('All') . '</option>';
+		echo '<option selected="True" value="All">' . _('All') . '</option>';
 		$_POST['StockCat'] ='All';
 	} else {
 		echo '<option value="All">' . _('All') . '</option>';
@@ -637,7 +636,7 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 	while ($myrow1 = DB_fetch_array($result1)) {
 
 		if ($_POST['StockCat']==$myrow1['categoryid']){
-			echo '<option selected value=' . $myrow1['categoryid'] . '>' . $myrow1['categorydescription'] . '</option>';
+			echo '<option selected="True" value=' . $myrow1['categoryid'] . '>' . $myrow1['categorydescription'] . '</option>';
 		} else {
 			echo '<option value='. $myrow1['categoryid'] . '>' . $myrow1['categorydescription'] . '</option>';
 		}
@@ -646,13 +645,13 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 
 	</select>
 	<td><?php echo _('Enter text extracts in the'); ?> <b><?php echo _('description'); ?></b>:</td>
-	<td><input type="Text" name="Keywords" size=20 maxlength=25 value=" <?php if (isset($_POST['Keywords'])) echo $_POST['Keywords']; ?>"></td></tr>
+	<td><input type="text" name="Keywords" size="20" maxlength="25" value=" <?php if (isset($_POST['Keywords'])) echo $_POST['Keywords']; ?>" /></td></tr>
 	<tr><td></td>
-			<td><font SIZE 3><b><?php echo _('OR'); ?> </b></font><?php echo _('Enter extract of the'); ?> <b><?php echo _('Stock Code'); ?></b>:</td>
-		<td><input type="Text" name="StockCode" size="15" maxlength="18" value=" <?php if (isset($_POST['StockCode'])) echo $_POST['StockCode']; ?>"></td>
+			<td><font size="3"><b><?php echo _('OR'); ?> </b></font><?php echo _('Enter extract of the'); ?> <b><?php echo _('Stock Code'); ?></b>:</td>
+		<td><input type="text" name="StockCode" size="15" maxlength="18" value=" <?php if (isset($_POST['StockCode'])) echo $_POST['StockCode']; ?>" /></td>
 			</tr>
 			</table>
-			<br /><div class="centre"><input type="submit" name="Search" value=" <?php echo _('Search Now'); ?>">
+			<br /><div class="centre"><input type="submit" name="Search" value=" <?php echo _('Search Now'); ?>" />
 
 	<script language='JavaScript' type='text/javascript'>
 
@@ -668,7 +667,7 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 
 		if (DB_num_rows($SearchResult)>1){
 
-			echo '<br /><table cellpadding=2 colspan=7 class="selection">';
+			echo '<br /><table cellpadding="2" colspan="7" class="selection">';
 			$TableHeader = '<tr><th>' . _('Code') . '</th>
 						<th>' . _('Description') . '</th>
 						<th>' . _('Units') . '</th></tr>';
@@ -681,10 +680,10 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 
 				if (!in_array($myrow['stockid'],$ItemCodes)){
 					if (function_exists('imagecreatefrompng') ){
-						$ImageSource = '<IMG SRC="GetStockImage.php?automake=1&textcolor=FFFFFF&bgcolor=CCCCCC&StockID=' . urlencode($myrow['stockid']). '&text=&width=64&height=64">';
+						$ImageSource = '<img src="GetStockImage.php?automake=1&textcolor=FFFFFF&bgcolor=CCCCCC&StockID=' . urlencode($myrow['stockid']). '&text=&width=64&height=64" />';
 					} else {
 						if(file_exists($_SERVER['DOCUMENT_ROOT'] . $rootpath. '/' . $_SESSION['part_pics_dir'] . '/' . $myrow['stockid'] . '.jpg')) {
-							$ImageSource = '<IMG SRC="' .$_SERVER['DOCUMENT_ROOT'] . $rootpath . '/' . $_SESSION['part_pics_dir'] . '/' . $myrow['stockid'] . '.jpg">';
+							$ImageSource = '<img src="' .$_SERVER['DOCUMENT_ROOT'] . $rootpath . '/' . $_SESSION['part_pics_dir'] . '/' . $myrow['stockid'] . '.jpg" />';
 						} else {
 							$ImageSource = _('No Image');
 						}
@@ -699,11 +698,11 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 					}
 
 					$IssueLink = $_SERVER['PHP_SELF'] . '?WO=' . $_POST['WO'] . '&StockID=' . $_POST['StockID'] . '&IssueItem=' . $myrow['stockid'] . '&FromLocation=' . $_POST['FromLocation'];
-					printf('<td><font size=1>%s</font></td>
-							<td><font size=1>%s</font></td>
-							<td><font size=1>%s</font></td>
+					printf('<td><font size="1">%s</font></td>
+							<td><font size="1">%s</font></td>
+							<td><font size="1">%s</font></td>
 							<td>%s</td>
-							<td><font size=1><a href="%s">'
+							<td><font size="1"><a href="%s">'
 							. _('Add to Work Order') . '</a></font></td>
 							</tr>',
 							$myrow['stockid'],
@@ -758,35 +757,35 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 						$db,_('Could not retrieve the serial numbers available at the location specified because'));
 			if (DB_num_rows($SerialNoResult)==0){
 				echo '<tr><td>' . _('There are no serial numbers at this location to issue') . '</td></tr>';
-				echo '<tr><td colspan=2><div class="centre"><input type="submit" name="Retry" value="' . _('Reselect Location or Issued Item') . '"></td></tr>';
+				echo '<tr><td colspan="2"><div class="centre"><input type="submit" name="Retry" value="' . _('Reselect Location or Issued Item') . '" /></td></tr>';
 			} else {
 				echo '<tr><td><select name="SerialNos[]" multiple>';
 				while ($SerialNoRow = DB_fetch_array($SerialNoResult)){
 					if (in_array($SerialNoRow['serialno'],$_POST['SerialNos'])){
-						echo '<option selected value="' . $SerialNoRow['serialno'] . '">' . $SerialNoRow['serialno'] . '</option>';
+						echo '<option selected="True" value="' . $SerialNoRow['serialno'] . '">' . $SerialNoRow['serialno'] . '</option>';
 					} else {
 						echo '<option value="' . $SerialNoRow['serialno'] . '">' . $SerialNoRow['serialno'] . '</option>';
 					}
 				}
 				echo '</select></td></tr>';
-				echo '<input type="hidden" name="IssueItem" value="' . $_POST['IssueItem'] . '">';
-				echo '<tr><td colspan=2><div class="centre"><input type="submit" name="Process" value="' . _('Process Items Issued') . '"></div></td></tr>';
+				echo '<input type="hidden" name="IssueItem" value="' . $_POST['IssueItem'] . '" />';
+				echo '<tr><td colspan="2"><div class="centre"><input type="submit" name="Process" value="' . _('Process Items Issued') . '" /></div></td></tr>';
 			}
 		} else { //controlled but not serialised - just lot/batch control
 			echo '<tr><th colspan="2">' . _('Batch/Lots Issued') . '</th></tr>';
 			for ($i=0;$i<15;$i++){
-				echo '<tr><td><input type="textbox" name="BatchRef' . $i .'" ';
-				echo '></td>
-					  <td><input type="textbox" name="Qty' . $i .'"></td></tr>';
+				echo '<tr><td><input type="text" name="BatchRef' . $i .'" />';
+				echo '</td>
+					  <td><input type="text" name="Qty' . $i .'" /></td></tr>';
 			}
-			echo '<input type="hidden" name="IssueItem" value="' . $_POST['IssueItem'] . '">';
-			echo '<tr><td colspan=2><div class="centre"><input type="submit" name="Process" value="' . _('Process Items Issued') . '" /></div></td></tr>';
+			echo '<input type="hidden" name="IssueItem" value="' . $_POST['IssueItem'] . '" />';
+			echo '<tr><td colspan="2"><div class="centre"><input type="submit" name="Process" value="' . _('Process Items Issued') . '" /></div></td></tr>';
 		} //end of lot/batch control
 	} else { //not controlled - an easy one!
-		echo '<input type="hidden" name="IssueItem" value="' . $_POST['IssueItem'] . '">';
+		echo '<input type="hidden" name="IssueItem" value="' . $_POST['IssueItem'] . '" />';
 		echo '<tr><td>' . _('Quantity Issued') . ':</td>
-			  <td><input class="number" type="textbox" name="Qty"></tr>';
-		echo '<tr><td colspan=2><div class="centre"><input type="submit" name="Process" value="' . _('Process Items Issued') . '"></div></td></tr>';
+			  <td><input class="number" type="text" name="Qty" /></tr>';
+		echo '<tr><td colspan="2"><div class="centre"><input type="submit" name="Process" value="' . _('Process Items Issued') . '" /></div></td></tr>';
 	}
 } //end if selecting new item to issue or entering the issued item quantities
 echo '</table>';

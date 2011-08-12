@@ -25,8 +25,7 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate'])){
 	$title = _('Payment Listing');
 	include ('includes/header.inc');
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' .
-		 $title . '" alt="" />' . ' ' . $title . '</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . $title . '" alt="" />' . ' ' . $title . '</p>';
 
 	if ($InputError==1){
 		prnMsg($msg,'error');
@@ -37,10 +36,10 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate'])){
 	echo '<table class="selection">
 	 			<tr>
 				<td>' . _('Enter the date from which cheques are to be listed') . ':</td>
-				<td><input type="text" name="FromDate" maxlength=10 size=10 class="date" alt="'.$_SESSION['DefaultDateFormat'].'"  value="' . Date($_SESSION['DefaultDateFormat']) . '"></td>
+				<td><input type="text" name="FromDate" maxlength="10" size="10" class="date" alt="'.$_SESSION['DefaultDateFormat'].'"  value="' . Date($_SESSION['DefaultDateFormat']) . '" /></td>
 			</tr>';
 	echo '<tr><td>' . _('Enter the date to which cheques are to be listed') . ':</td>
-				<td><input type="text" name="ToDate" maxlength=10 size=10  class="date" alt="'.$_SESSION['DefaultDateFormat'].'"  value="' . Date($_SESSION['DefaultDateFormat']) . '"></td>
+				<td><input type="text" name="ToDate" maxlength="10" size="10"  class="date" alt="'.$_SESSION['DefaultDateFormat'].'"  value="' . Date($_SESSION['DefaultDateFormat']) . '" /></td>
 			</tr>';
 	echo '<tr><td>' . _('Bank Account') . '</td><td>';
 
@@ -58,7 +57,7 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate'])){
 	echo '</select></td></tr>';
 
 	echo '<tr><td>' . _('Email the report off') . ':</td><td><select name="Email">';
-	echo '<option selected value="No">' . _('No') . '</option>';
+	echo '<option selected="True" value="No">' . _('No') . '</option>';
 	echo '<option value="Yes">' . _('Yes') . '</option>';
 	echo '</select></td></tr></table><br /><div class="centre"><input type="submit" name="Go" value="' . _('Create PDF') . '" /></div>';
 

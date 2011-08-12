@@ -31,7 +31,7 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/t
 
 echo '<div class="page_help_text">' . _('This shows how the payment to the supplier was allocated') . '<a href="SupplierInquiry.php?&SupplierID=' . $SuppID . '"><br /> ' . _('Back to supplier inquiry') . '</a></div><br />';
 
-//echo "<br /><font size=4 color=BLUE>Payment Allocation for Supplier: '$SuppID' and Invoice: '$InvID'</font>";
+//echo "<br /><font size="4" color=BLUE>Payment Allocation for Supplier: '$SuppID' and Invoice: '$InvID'</font>";
 
 //	$_SESSION['SuppID'] = new SupplierID;
 //	$_SESSION['InvID'] = new InvoiceID;
@@ -67,7 +67,7 @@ if (DB_num_rows($Result) == 0){
 	exit;
 }
 
-echo '<table cellpadding=2 colspan=7 width=80% class="selection">';
+echo '<table cellpadding="2" colspan="7" width="80%" class="selection">';
 $TableHeader = '<tr>
 <th>' . _('Supplier Number') . '<br />' . _('Reference') . '</th>
 <th>' . _('Payment') .'<br />' . _('Reference') . '</th>
