@@ -213,7 +213,7 @@ or deletion of the records*/
 			$myrow[1],
 			$myrow[2],
 			$Description[0],
-			$_SERVER['PHP_SELF'], htmlentities($myrow[0]),
+			$_SERVER['PHP_SELF'], htmlentities($myrow[0], ENT_QUOTES,'UTF-8'),
 		$_SERVER['PHP_SELF'], $myrow[0]);
 	}
 	//END WHILE LIST LOOP
