@@ -418,6 +418,22 @@ if (isset($_POST['submit'])) {
 
 				if ($OldWipAccount != $NewWipAct AND $_SESSION['CompanyRecord']['gllink_stock']==1) {
 					/*Then we need to make a journal to transfer the cost to the new wip account */
+					$WOCostsResult = DB_query("SELECT workorders.costissued,
+													SUM(woitems.qtyreqd * woitems.stdcost) AS costrecd
+												FROM woitems
+												INNER JOIN workorders
+													ON woitems.wo = workorders.wo
+												INNER JOIN stockmaster
+													ON woitems.stockid=stockmaster.stockid
+												WHERE stockmaster.stockid='". $StockID . "'
+													AND workorders.closed=0
+												GROUP BY workorders.costissued",
+											$db,
+											_('Error retrieving value of finished goods received and cost issued against work orders for this item'));
+					$WIPValue = 0;
+					while ($WIPRow=DB_fetch_array($WOCostsResult)){
+						$WIPValue += ($WIPRow['costissued']-$WIPRow['costrecd']);
+					}
 					$JournalNo = GetNextTransNo(0,$db); //enter as a journal
 					$SQL = "INSERT INTO gltrans (type,
 												typeno,
@@ -432,7 +448,7 @@ if (isset($_POST['submit'])) {
 												'" . GetPeriod(Date('Y-m-d'),$db,true) . "',
 												'" . $NewWipAct . "',
 												'" . $StockID . ' ' . _('Change wip category') . "',
-												'" . ($UnitCost* $StockQtyRow[0]) . "')";
+												'" . $WIPValue . "')";
 					$ErrMsg =  _('The WIP cost journal could not be inserted because');
 					$DbgMsg = _('The SQL that was used to create the wip cost journal and failed was');
 					$result = DB_query($SQL,$db, $ErrMsg, $DbgMsg,true);
@@ -449,7 +465,7 @@ if (isset($_POST['submit'])) {
 												'" . GetPeriod(Date('Y-m-d'),$db,true) . "',
 												'" . $OldWipAccount . "',
 												'" . $StockID . ' ' . _('Change wip category') . "',
-												'" . (-$UnitCost* $StockQtyRow[0]) . "')";
+												'" . -$WIPValue . "')";
 					$result = DB_query($SQL,$db, $ErrMsg, $DbgMsg,true);
 
 				} /* end if the stock category changed and forced a change in stock cost account */
