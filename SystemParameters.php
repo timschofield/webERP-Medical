@@ -863,6 +863,9 @@ echo '<tr style="outline: 1px solid"><td>' . _('Prohibit GL Journals to Periods 
 $sql = "SELECT lastdate_in_period FROM periods ORDER BY periodno DESC";
 $ErrMsg = _('Could not load periods table');
 $result = DB_query($sql,$db,$ErrMsg);
+if ($_SESSION['ProhibitPostingsBefore']=='' OR $_SESSION['ProhibitPostingsBefore']=='1900-01-01' OR !isset($_SESSION['ProhibitPostingsBefore'])){
+	echo '<option selected value="1900-01-01">' . ConvertSQLDate('1900-01-01') . '</option>';
+}
 while ($PeriodRow = DB_fetch_row($result)){
 	if ($_SESSION['ProhibitPostingsBefore']==$PeriodRow[0]){
 		echo  '<option selected="True" value="' . $PeriodRow[0] . '">' . ConvertSQLDate($PeriodRow[0]) . '</option>';
