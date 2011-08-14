@@ -5,6 +5,7 @@
 include('includes/session.inc');
 $title = _('Item Maintenance');
 include('includes/header.inc');
+include('includes/SQL_CommonFunctions.inc');
 
 /*If this form is called with the StockID then it is assumed that the stock item is to be modified */
 
@@ -391,10 +392,10 @@ if (isset($_POST['submit'])) {
 											VALUES ( 0,
 												'" . $JournalNo . "',
 												'" . Date('Y-m-d') . "',
-												'" . GetPeriodNo(Date('Y-m-d'),$db,true) . "',
-												'" . $NewStockAccount . "',
+												'" . GetPeriod(Date('Y-m-d'),$db,true) . "',
+												'" . $NewStockAct . "',
 												'" . $StockID . ' ' . _('Change stock category') . "',
-												'" . ($UnitCost* $StockQtyRow[0]) . "'";
+												'" . ($UnitCost* $StockQtyRow[0]) . "')";
 					$ErrMsg =  _('The stock cost journal could not be inserted because');
 					$DbgMsg = _('The SQL that was used to create the stock cost journal and failed was');
 					$result = DB_query($SQL,$db, $ErrMsg, $DbgMsg,true);
@@ -408,12 +409,14 @@ if (isset($_POST['submit'])) {
 											VALUES ( 0,
 												'" . $JournalNo . "',
 												'" . Date('Y-m-d') . "',
-												'" . GetPeriodNo(Date('Y-m-d'),$db,true) . "',
+												'" . GetPeriod(Date('Y-m-d'),$db,true) . "',
 												'" . $OldStockAccount . "',
 												'" . $StockID . ' ' . _('Change stock category') . "',
-												'" . (-$UnitCost* $StockQtyRow[0]) . "'";
+												'" . (-$UnitCost* $StockQtyRow[0]) . "')";
 					$result = DB_query($SQL,$db, $ErrMsg, $DbgMsg,true);
+				}
 
+				if ($OldWipAccount != $NewWipAct AND $_SESSION['CompanyRecord']['gllink_stock']==1) {
 					/*Then we need to make a journal to transfer the cost to the new wip account */
 					$JournalNo = GetNextTransNo(0,$db); //enter as a journal
 					$SQL = "INSERT INTO gltrans (type,
@@ -426,10 +429,10 @@ if (isset($_POST['submit'])) {
 											VALUES ( 0,
 												'" . $JournalNo . "',
 												'" . Date('Y-m-d') . "',
-												'" . GetPeriodNo(Date('Y-m-d'),$db,true) . "',
-												'" . $NewWipAccount . "',
-												'" . $StockID . ' ' . _('Change stock category') . "',
-												'" . ($UnitCost* $StockQtyRow[0]) . "'";
+												'" . GetPeriod(Date('Y-m-d'),$db,true) . "',
+												'" . $NewWipAct . "',
+												'" . $StockID . ' ' . _('Change wip category') . "',
+												'" . ($UnitCost* $StockQtyRow[0]) . "')";
 					$ErrMsg =  _('The WIP cost journal could not be inserted because');
 					$DbgMsg = _('The SQL that was used to create the wip cost journal and failed was');
 					$result = DB_query($SQL,$db, $ErrMsg, $DbgMsg,true);
@@ -443,10 +446,10 @@ if (isset($_POST['submit'])) {
 											VALUES ( 0,
 												'" . $JournalNo . "',
 												'" . Date('Y-m-d') . "',
-												'" . GetPeriodNo(Date('Y-m-d'),$db,true) . "',
+												'" . GetPeriod(Date('Y-m-d'),$db,true) . "',
 												'" . $OldWipAccount . "',
-												'" . $StockID . ' ' . _('Change stock category') . "',
-												'" . (-$UnitCost* $StockQtyRow[0]) . "'";
+												'" . $StockID . ' ' . _('Change wip category') . "',
+												'" . (-$UnitCost* $StockQtyRow[0]) . "')";
 					$result = DB_query($SQL,$db, $ErrMsg, $DbgMsg,true);
 
 				} /* end if the stock category changed and forced a change in stock cost account */
