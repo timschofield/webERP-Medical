@@ -378,7 +378,7 @@ if (isset($_POST['submit'])) {
 										$db,$ErrMsg,$DbgMsg,true);
 				} //end of loop around properties defined for the category
 
-				if ($OldStockAccount != $NewStockAct AND $_SESSION['CompanyRecord']['gllinkstock']==1) {
+				if ($OldStockAccount != $NewStockAct AND $_SESSION['CompanyRecord']['gllink_stock']==1) {
 					/*Then we need to make a journal to transfer the cost to the new stock account */
 					$JournalNo = GetNextTransNo(0,$db); //enter as a journal
 					$SQL = "INSERT INTO gltrans (type,
@@ -391,13 +391,13 @@ if (isset($_POST['submit'])) {
 											VALUES ( 0,
 												'" . $JournalNo . "',
 												'" . Date('Y-m-d') . "',
-												'" . GetPeriodNo(Date('Y-m-d'),true) . "',
+												'" . GetPeriodNo(Date('Y-m-d'),$db,true) . "',
 												'" . $NewStockAccount . "',
 												'" . $StockID . ' ' . _('Change stock category') . "',
 												'" . ($UnitCost* $StockQtyRow[0]) . "'";
 					$ErrMsg =  _('The stock cost journal could not be inserted because');
 					$DbgMsg = _('The SQL that was used to create the stock cost journal and failed was');
-					$result = DB_query($sql,$db, $ErrMsg, $DbgMsg,true);
+					$result = DB_query($SQL,$db, $ErrMsg, $DbgMsg,true);
 					$SQL = "INSERT INTO gltrans (type,
 												typeno,
 												trandate,
@@ -408,11 +408,11 @@ if (isset($_POST['submit'])) {
 											VALUES ( 0,
 												'" . $JournalNo . "',
 												'" . Date('Y-m-d') . "',
-												'" . GetPeriodNo(Date('Y-m-d'),true) . "',
+												'" . GetPeriodNo(Date('Y-m-d'),$db,true) . "',
 												'" . $OldStockAccount . "',
 												'" . $StockID . ' ' . _('Change stock category') . "',
 												'" . (-$UnitCost* $StockQtyRow[0]) . "'";
-					$result = DB_query($sql,$db, $ErrMsg, $DbgMsg,true);
+					$result = DB_query($SQL,$db, $ErrMsg, $DbgMsg,true);
 
 					/*Then we need to make a journal to transfer the cost to the new wip account */
 					$JournalNo = GetNextTransNo(0,$db); //enter as a journal
@@ -426,13 +426,13 @@ if (isset($_POST['submit'])) {
 											VALUES ( 0,
 												'" . $JournalNo . "',
 												'" . Date('Y-m-d') . "',
-												'" . GetPeriodNo(Date('Y-m-d'),true) . "',
+												'" . GetPeriodNo(Date('Y-m-d'),$db,true) . "',
 												'" . $NewWipAccount . "',
 												'" . $StockID . ' ' . _('Change stock category') . "',
 												'" . ($UnitCost* $StockQtyRow[0]) . "'";
 					$ErrMsg =  _('The WIP cost journal could not be inserted because');
 					$DbgMsg = _('The SQL that was used to create the wip cost journal and failed was');
-					$result = DB_query($sql,$db, $ErrMsg, $DbgMsg,true);
+					$result = DB_query($SQL,$db, $ErrMsg, $DbgMsg,true);
 					$SQL = "INSERT INTO gltrans (type,
 												typeno,
 												trandate,
@@ -443,11 +443,11 @@ if (isset($_POST['submit'])) {
 											VALUES ( 0,
 												'" . $JournalNo . "',
 												'" . Date('Y-m-d') . "',
-												'" . GetPeriodNo(Date('Y-m-d'),true) . "',
+												'" . GetPeriodNo(Date('Y-m-d'),$db,true) . "',
 												'" . $OldWipAccount . "',
 												'" . $StockID . ' ' . _('Change stock category') . "',
 												'" . (-$UnitCost* $StockQtyRow[0]) . "'";
-					$result = DB_query($sql,$db, $ErrMsg, $DbgMsg,true);
+					$result = DB_query($SQL,$db, $ErrMsg, $DbgMsg,true);
 
 				} /* end if the stock category changed and forced a change in stock cost account */
 				DB_Txn_Commit($db);
@@ -544,11 +544,11 @@ if (isset($_POST['submit'])) {
 						unset($_POST['ShrinkFactor']);
 						unset($_POST['Pansize']);
 						unset($StockID);
+						$New=1;
 					}//ALL WORKED SO RESET THE FORM VARIABLES
 				}//THE INSERT OF THE NEW CODE WORKED SO BANG IN THE STOCK LOCATION RECORDS TOO
 			}//END CHECK FOR ALREADY EXISTING ITEM OF THE SAME CODE
 		}
-		$New=1;
 
 	} else {
 		echo '<br />'. "\n";
