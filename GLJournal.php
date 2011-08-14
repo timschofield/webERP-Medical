@@ -111,13 +111,15 @@ if (isset($_POST['CommitBatch']) and $_POST['CommitBatch']==_('Accept and Proces
 
 	prnMsg(_('Journal').' ' . $TransNo . ' '._('has been successfully entered'),'success');
 
+	echo '<br /><div class="centre"><a href="PDFGLJournal.php?JournalNo='.$TransNo.'">'._('Print this Journal').'</a>';
+
 	unset($_POST['JournalProcessDate']);
 	unset($_POST['JournalType']);
 	unset($_SESSION['JournalDetail']->GLEntries);
 	unset($_SESSION['JournalDetail']);
 
 	/*Set up a newy in case user wishes to enter another */
-	echo '<br /><a href="' . $_SERVER['PHP_SELF'] . '?NewJournal=Yes">'._('Enter Another General Ledger Journal').'</a>';
+	echo '<br /><a href="' . $_SERVER['PHP_SELF'] . '?NewJournal=Yes">'._('Enter Another General Ledger Journal').'</a></div>';
 	/*And post the journal too */
 	include ('includes/GLPostings.inc');
 	include ('includes/footer.inc');
