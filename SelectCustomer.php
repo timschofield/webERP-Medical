@@ -254,28 +254,41 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 if (!isset($_POST['Select'])) {
 	$_POST['Select'] = "";
 }
-$Debtor=explode(' ', $_POST['Select']);
-if ($_POST['Select'] != '' OR ($_SESSION['CustomerID'] != '' AND !isset($_POST['Keywords']) AND !isset($_POST['CustCode']) AND !isset($_POST['CustType']) AND !isset($_POST['CustPhone']))) {
-	if ($_POST['Select'] != '') {
-		$SQL = "SELECT brname, phoneno FROM custbranch WHERE debtorno='" . $Debtor[0] . "'";
-		$_SESSION['CustomerID'] = $Debtor[0];
-		$_SESSION['BranchID'] = $Debtor[1];
-	} else {
-		$SQL = "SELECT debtorsmaster.name, custbranch.phoneno FROM
-		debtorsmaster, custbranch WHERE
-		custbranch.debtorno='" . $_SESSION['CustomerID'] . "' AND
-		debtorsmaster.debtorno = custbranch.debtorno";
+
+if (isset($_POST['JustSelectedACustomer'])){
+	/*Need to figure out the number of the form variable that the user clicked on */
+	for ($i=0; $i< count($_POST); $i++){ //loop through the returned customers
+		if(isset($_POST['SubmitCustomerSelection'.$i])){
+			break;
+		}
 	}
+	if ($i==count($_POST)){
+		prnMsg(_('Unable to identify the selected customer'),'error');
+	} else {
+		$_SESSION['CustomerID'] = $_POST['SelectedCustomer'.$i];
+		$_SESSION['BranchID'] = $_POST['SelectedBranch'.$i];
+	}
+}
+
+if ($_SESSION['CustomerID'] != '' AND !isset($_POST['Search']) AND !isset($_POST['CSV'])) {
+	$SQL = "SELECT debtorsmaster.name,
+					custbranch.phoneno
+			FROM debtorsmaster INNER JOIN custbranch
+			ON debtorsmaster.debtorno=custbranch.debtorno
+			WHERE custbranch.debtorno='" . $_SESSION['CustomerID'] . "'
+			AND custbranch.branchcode='" . $_SESSION['BranchID'] . "'";
+
 	$ErrMsg = _('The customer name requested cannot be retrieved because');
 	$result = DB_query($SQL, $db, $ErrMsg);
-	if ($myrow = DB_fetch_row($result)) {
-		$CustomerName = $myrow[0];
-		$phone = $myrow[1];
+	if ($myrow = DB_fetch_array($result)) {
+		$CustomerName = $myrow['name'];
+		$PhoneNo = $myrow['phoneno'];
 	}
 	unset($result);
+
 	// Adding customer encoding. Not needed for general use. This is not a recommended upgrade submission. Gilles Deacur
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/customer.png" title="' . _('Customer') . '" alt="" />' . ' ' .
-		_('Customer') . ' : ' . $_SESSION['CustomerID'] . ' - ' . $CustomerName . ' - ' . $phone . _(' has been selected') . '</p>';
+		_('Customer') . ' : ' . $_SESSION['CustomerID'] . ' - ' . $CustomerName . ' - ' . $PhoneNo . _(' has been selected') . '</p>';
 	echo '<div class="page_help_text">' . _('Select a menu option to operate using this customer') . '.</div><br />';
 	$_POST['Select'] = NULL;
 	echo '<table cellpadding="4" width="90%" class="selection"><tr><th width="33%">' . _('Customer Inquiries') . '</th>
@@ -480,6 +493,7 @@ if (isset($result)) {
 		if (!isset($_POST['CSV'])) {
 			DB_data_seek($result, ($_POST['PageOffset'] - 1) * $_SESSION['DisplayRecordsMax']);
 		}
+		$i=0; //counter for input controls
 		while (($myrow = DB_fetch_array($result)) AND ($RowIndex <> $_SESSION['DisplayRecordsMax'])) {
 			if ($k == 1) {
 				echo '<tr class="EvenTableRows">';
@@ -488,24 +502,23 @@ if (isset($result)) {
 				echo '<tr class="OddTableRows">';
 				$k = 1;
 			}
-			echo '<td><font size="1"><input type="submit" name="Select" value="' . $myrow['debtorno'].' '.$myrow['branchcode'] . '" /></font></td>
-				<td><font size="1">' . $myrow['name'] . '</font></td>
-				<td><font size="1">' . $myrow['brname'] . '</font></td>
-				<td><font size="1">' . $myrow['contactname'] . '</font></td>
-				<td><font size="1">' . $myrow['typename'] . '</font></td>
-				<td><font size="1">' . $myrow['phoneno'] . '</font></td>
-				<td><font size="1">' . $myrow['faxno'] . '</font></td></tr>';
-			$j++;
-			if ($j == 11 AND ($RowIndex + 1 != $_SESSION['DisplayRecordsMax'])) {
-				$j = 1;
-				echo $TableHeader;
-			}
-			$RowIndex++;
+			echo '<td><font size=1><input type="submit" name="SubmitCustomerSelection' . $i .'" value="' . htmlentities($myrow['debtorno'].' '.$myrow['branchcode'],ENT_QUOTES,'UTF-8') . '" /></font></td>
+				<input type="hidden" name="SelectedCustomer' . $i .'" value="'.$myrow['debtorno'].'">
+				<input type="hidden" name="SelectedBranch' . $i .'" value="'. $myrow['branchcode'].'" />
+				<td><font size=1>' . $myrow['name'] . '</font></td>
+				<td><font size=1>' . $myrow['brname'] . '</font></td>
+				<td><font size=1>' . $myrow['contactname'] . '</font></td>
+				<td><font size=1>' . $myrow['typename'] . '</font></td>
+				<td><font size=1>' . $myrow['phoneno'] . '</font></td>
+				<td><font size=1>' . $myrow['faxno'] . '</font></td></tr>';
+			$i++;
+			$j++;//row counter
 			//end of page full new headings if
 
 		}
 		//end of while loop
 		echo '</table>';
+		echo '<input type="hidden" name="JustSelectedACustomer" value="Yes">';
 	}
 }
 //end if results to show
