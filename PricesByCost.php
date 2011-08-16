@@ -160,11 +160,11 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 		$k = 0; //row colour counter
 		echo '<form action="' .$_SERVER['PHP_SELF'] .'" method="POST" name="update">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-		echo'<input type="hidden" value=' . $_POST['StockCat'] . ' name="StockCat">
-			<input type="hidden" value=' . $_POST['Margin'] . ' name="Margin">
-			<input type="hidden" value=' . $_POST['CurrCode'] . ' name="CurrCode">
-			<input type="hidden" value=' . $_POST['Comparator'] . ' name="Comparator">
-			<input type="hidden" value=' . $_POST['SalesType'] . ' name="SalesType">';
+		echo'<input type="hidden" value="' . $_POST['StockCat'] . '" name="StockCat" />
+			<input type="hidden" value="' . $_POST['Margin'] . '" name="Margin" />
+			<input type="hidden" value="' . $_POST['CurrCode'] . '" name="CurrCode" />
+			<input type="hidden" value="' . $_POST['Comparator'] . '" name="Comparator" />
+			<input type="hidden" value="' . $_POST['SalesType'] . '" name="SalesType" />';
 
 		$PriceCounter =0;
 		while ($myrow = DB_fetch_array($result)) {
@@ -184,13 +184,13 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 			} /*end of else Cost */
 
 			//variables for update
-			echo '<input type="hidden" value=' . $myrow['stockid'] . ' name="StockID_' . $PriceCounter .'">
-					<input type="hidden" value=' . $myrow['debtorno'] . ' name="DebtorNo_' . $PriceCounter .'">
-					<input type="hidden" value=' . $myrow['branchcode'] . ' name="BranchCode_' . $PriceCounter .'">
-					<input type="hidden" value=' . $myrow['conversionfactor'] . ' name="ConversionFactor_' . $PriceCounter .'">
-					<input type="hidden" value=' . $myrow['units'] . ' name="Units_' . $PriceCounter .'">
-					<input type="hidden" value=' . $myrow['startdate'] . ' name="StartDate_' . $PriceCounter .'">
-					<input type="hidden" value=' . $myrow['enddate'] . ' name="EndDate_' . $PriceCounter .'">';
+			echo '<input type="hidden" value="' . $myrow['stockid'] . '" name="StockID_' . $PriceCounter .'" />
+					<input type="hidden" value="' . $myrow['debtorno'] . '" name="DebtorNo_' . $PriceCounter .'" />
+					<input type="hidden" value="' . $myrow['branchcode'] . '" name="BranchCode_' . $PriceCounter .'" />
+					<input type="hidden" value="' . $myrow['conversionfactor'] . '" name="ConversionFactor_' . $PriceCounter .'" />
+					<input type="hidden" value="' . $myrow['units'] . '" name="Units_' . $PriceCounter .'" />
+					<input type="hidden" value="' . $myrow['startdate'] . '" name="StartDate_' . $PriceCounter .'" />
+					<input type="hidden" value="' . $myrow['enddate'] . '" name="EndDate_' . $PriceCounter .'" />';
 			//variable for current margin
 			if ($myrow['price'] != 0){
 				$CurrentGP = ($myrow['price']-$Cost)*100 / $myrow['price'];
@@ -221,8 +221,8 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 		} //end of looping
 		echo '<input type="hidden" name="Counter" value="' . $PriceCounter . '" />';
 		echo '<tr>
-			<td colspan="12" style="text-align:center"><input type="submit" name=submit value=' . _('Update') . '>
-			<a href="' . $_SERVER['PHP_SELF'] . '"><input type="submit"  value=' . _('Back') . '><a/></td>
+			<td colspan="12" style="text-align:center"><input type="submit" name="submit" value="' . _('Update') . '" />
+			<a href="' . $_SERVER['PHP_SELF'] . '"><input type="submit"  value="' . _('Back') . '" /><a/></td>
 			 </tr></form>';
 	} else {
 		prnMsg(_('There were no prices meeting the criteria specified to review'),'info');
