@@ -262,9 +262,8 @@ if (!isset($_GET['delete'])) {
 
 		echo '<table class="selection">';
 		echo '<tr><th colspan="6"><font color="blue" size="3">'._('New Payment Terms.').'</font></th></tr>';
-		echo '<tr><td>' . _('Term Code') . ':</td><td><input type="text" name="TermsIndicator"
-		 ' . (in_array('TermsIndicator',$Errors) ? 'class="inputerror"' : '' ) .' value="' . $_POST['TermsIndicator'] .
-			'" size="3" maxlength="2" /></td></tr>';
+		echo '<tr><td>' . _('Term Code') . ':</td>
+			<td><input type="text" name="TermsIndicator" ' . (in_array('TermsIndicator',$Errors) ? 'class="inputerror"' : '' ) .' value="' . $_POST['TermsIndicator'] . '" size="3" maxlength="2" /></td></tr>';
 	}
 
 	echo '<tr><td>'. _('Terms Description'). ':</td>
@@ -272,18 +271,21 @@ if (!isset($_GET['delete'])) {
 	<input type="text"' . (in_array('Terms',$Errors) ? 'class="inputerror"' : '' ) .' name="Terms" value="'.$_POST['Terms']. '" size="35" maxlength="40" />
 	</td></tr>
 	<tr><td>'._('Due After A Given No. Of Days').':</td>
-	<td><input type="checkbox" name="DaysOrFoll"';
-	if ( isset($DayInFollowingMonth) && !$DayInFollowingMonth) { echo "checked"; }
-	echo ' ></td></tr><tr><td>'._('Days (Or Day In Following Month)').':</td><td>
-		<input type="text"' . (in_array('DayNumber',$Errors) ? 'class="inputerror"' : '' ) .' name="DayNumber" class="number"  size="4" maxlength="3" value="';
+	<td>';
+	if ( isset($DayInFollowingMonth) && !$DayInFollowingMonth) {
+		echo '<input type="checkbox" name="DaysOrFoll" checked="True" />';
+	} else {
+		echo '<input type="checkbox" name="DaysOrFoll" />';
+	}
+	echo '</td></tr><tr><td>'._('Days (Or Day In Following Month)').':</td><td>';
 	if ($DaysBeforeDue !=0) {
-		echo $DaysBeforeDue;
+		echo '<input type="text" name="DayNumber" class="number"  size="4" maxlength="3" value="' . $DaysBeforeDue . '" />';
 	} else {
 		if (isset($DayInFollowingMonth)) {
-			echo $DayInFollowingMonth;
+			echo '<input type="text" name="DayNumber" class="number"  size="4" maxlength="3" value="' . $DayInFollowingMonth . '" />';
 		}
 	}
-	echo '" /></td></tr></table><br /><div class="centre"><input type="submit" name="submit" value="'._('Enter Information').'" /></form></div>';
+	echo '</td></tr></table><br /><div class="centre"><input type="submit" name="submit" value="'._('Enter Information').'" /></form></div>';
 } //end if record deleted no point displaying form to add record
 
 include('includes/footer.inc');
