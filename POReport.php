@@ -1533,45 +1533,44 @@ function display(&$db) //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_###
 	echo '<option selected="True" value="Equals">' . _('Equals') . '</option>';
 	echo '<option value="LIKE">' . _('Begins With') . '</option>';
 	echo '</select>';
-	echo '&nbsp&nbsp<input type="text" name="PartNumber" size="20" maxlength="20" value="';
+	echo '&nbsp&nbsp';
 	if (isset($_POST['PartNumber'])) {
-		echo $_POST['PartNumber'] . '" /></td></tr>';
+		echo '<input type="text" name="PartNumber" size="20" maxlength="20" value="' . $_POST['PartNumber'] . '" /></td></tr>';
 	}
 	else {
-		echo '" /></td></tr>';
+		echo '<input type="text" name="PartNumber" size="20" maxlength="20" value="" /></td></tr>';
 	}
 	echo '<tr><td>' . _('Supplier Number') . ':</td>';
 	echo '<td><select name="SupplierIdOp">';
 	echo '<option selected="True" value="Equals">' . _('Equals') . '</option>';
 	echo '<option value="LIKE">' . _('Begins With') . '</option>';
 	echo '</select>';
-	echo '&nbsp&nbsp<input type="text" name="SupplierId" size="10" maxlength="10" value="';
+	echo '&nbsp&nbsp';
 	if (isset($_POST['SupplierId'])) {
-		echo $_POST['SupplierId'] . '" /></td></tr>';
+		echo '<input type="text" name="SupplierId" size="10" maxlength="10" value="' . $_POST['SupplierId'] . '" /></td></tr>';
 	}
 	else {
-		echo '" /></td></tr>';
+		echo '<input type="text" name="SupplierId" size="10" maxlength="10" value="" /></td></tr>';
 	}
 	echo '<tr><td>' . _('Supplier Name') . ':</td>';
 	echo '<td><select name="SupplierNameOp">';
 	echo '<option selected="True" value="LIKE">' . _('Begins With') . '</option>';
 	echo '<option value="Equals">' . _('Equals') . '</option>';
 	echo '</select>';
-	echo '&nbsp&nbsp<input type="text" name="SupplierName" size="30" maxlength="30" value="';
+	echo '&nbsp&nbsp';
 	if (isset($_POST['SupplierName'])) {
-		echo $_POST['SupplierName'] . '" /></td></tr>';
+		echo '<input type="text" name="SupplierName" size="30" maxlength="30" value="' . $_POST['SupplierName'] . '" /></td></tr>';
 	}
 	else {
-		echo '" /></td></tr>';
+		echo '<input type="text" name="SupplierName" size="30" maxlength="30" value="" /></td></tr>';
 	}
 	echo '<tr><td>' . _('Order Number') . ':</td>';
 	echo '<td>' . _('Equals') . ':&nbsp&nbsp';
-	echo '<input type="text" name="OrderNo" size="10" maxlength="10" value="';
 	if (isset($_POST['OrderNo'])) {
-		echo $_POST['OrderNo'] . '" /></td></tr>';
+		echo '<input type="text" name="OrderNo" size="10" maxlength="10" value="' . $_POST['OrderNo'] . '" /></td></tr>';
 	}
 	else {
-		echo '" /></td></tr>';
+		echo '<input type="text" name="OrderNo" size="10" maxlength="10" value="" /></td></tr>';
 	}
 	echo '<tr><td>' . _('Line Item Status') . ':</td>';
 	echo '<td><select name="LineStatus">';
