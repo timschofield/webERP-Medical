@@ -141,8 +141,7 @@ function showLabelOptions() {
 		</tr>';
 	echo '<tr>
 				<td class="number">'.$txt[$iTxt++].':</td>
-				<td><input type="text" class="number" name="QtyByItem" value="'.$_POST['QtyByItem'].'" size="2"
-					maxlength="4"></td>
+				<td><input type="text" class="number" name="QtyByItem" value="'.$_POST['QtyByItem'].'" size="2" maxlength="4" /></td>
 		</tr>';
 	echo '<tr>
 				<td class="number">'.$txt[$iTxt++].':</td>
@@ -163,7 +162,7 @@ function showLabelOptions() {
 			</tr>';
 	echo '<tr>
 				<th colspan="2">
-				<input type="submit" name="refresh" value="Refresh options">
+				<input type="submit" name="refresh" value="Refresh options" />
 				</th>';
 	echo '<tr>
 				<td colspan="2">
@@ -247,7 +246,7 @@ function tableItems($CategoryID, &$ok) {
 				<th>'.$txt[$ix++].'</th>
 				<th>'.$txt[$ix++].'</th>
 				<th colspan="2" align="center">'.$txt[$ix++].'
-					<input type="checkbox" checked onclick="setAll(this);">
+					<input type="checkbox" checked="True" onclick="setAll(this);" />
 				</th>
 			</tr>
 		</thead>
@@ -264,7 +263,7 @@ function tableItems($CategoryID, &$ok) {
 				<td>'.$myrow['description'].'</td>
 				<td class="number">'.$price.'</td>
 				<td><div class="centre">
-					<input type="checkbox" checked name="StockID['.$myrow['stockid'].']" id="item" />
+					<input type="checkbox" checked="True" name="StockID['.$myrow['stockid'].']" id="item" />
 					</div>
 				</td>
 				<td>&nbsp;&nbsp;&nbsp;</td>
