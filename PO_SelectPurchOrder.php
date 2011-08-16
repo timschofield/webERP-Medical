@@ -35,7 +35,7 @@ if (isset($OrderNumber) && $OrderNumber != "") {
 } else {
 	if (isset($SelectedSupplier)) {
 		$Intro = _('For supplier') . ': ' . $SelectedSupplier . ' ' . _('and') . ' ';
-		echo '<input type="hidden" name="SelectedSupplier" value=' . $SelectedSupplier . '>';
+		echo '<input type="hidden" name="SelectedSupplier" value="' . $SelectedSupplier . '" />';
 	}
 }
 if (isset($_POST['SearchParts'])) {
@@ -154,7 +154,7 @@ if (!isset($OrderNumber) or $OrderNumber == "") {
 	} else {
 		echo '<option value="Complete">' . _('Completed') . '</option>';
 	}
- 	echo '</select> <input type="submit" name="SearchOrders" value="' . _('Search Purchase Orders') . '"></td></tr></table>';
+ 	echo '</select> <input type="submit" name="SearchOrders" value="' . _('Search Purchase Orders') . '" /></td></tr></table>';
 }
 $SQL = "SELECT categoryid, categorydescription FROM stockcategory ORDER BY categorydescription";
 $result1 = DB_query($SQL, $db);
