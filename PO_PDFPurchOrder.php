@@ -345,7 +345,7 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	if ($ViewingOnly==1){
-		echo '<input type="hidden" name="ViewingOnly" value=1>';
+		echo '<input type="hidden" name="ViewingOnly" value="1" />';
 	}
 	echo '<input type="hidden" name="OrderNo" value="'. $OrderNo. '" />';
 	echo '<table class="selection"><tr><td>'. _('Print or Email the Order'). '</td><td>
