@@ -427,7 +427,7 @@ if (DB_num_rows($result2) == 0) {
 }
 
 echo '</td></tr></table><br />';
-echo '<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '"><input type="submit" name="CSV" value="' . _('CSV Format') . '" /></div>';
+echo '<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" /><input type="submit" name="CSV" value="' . _('CSV Format') . '" /></div>';
 if (isset($_SESSION['SalesmanLogin']) and $_SESSION['SalesmanLogin'] != '') {
 	prnMsg(_('Your account enables you to see only customers allocated to you'), 'warn', _('Note: Sales-person Login'));
 }
@@ -502,15 +502,15 @@ if (isset($result)) {
 				echo '<tr class="OddTableRows">';
 				$k = 1;
 			}
-			echo '<td><font size=1><input type="submit" name="SubmitCustomerSelection' . $i .'" value="' . htmlentities($myrow['debtorno'].' '.$myrow['branchcode'],ENT_QUOTES,'UTF-8') . '" /></font></td>
-				<input type="hidden" name="SelectedCustomer' . $i .'" value="'.$myrow['debtorno'].'">
+			echo '<td><font size="1"><input type="submit" name="SubmitCustomerSelection' . $i .'" value="' . htmlentities($myrow['debtorno'].' '.$myrow['branchcode'],ENT_QUOTES,'UTF-8') . '" /></font></td>
+				<input type="hidden" name="SelectedCustomer' . $i .'" value="'.$myrow['debtorno'].'" />
 				<input type="hidden" name="SelectedBranch' . $i .'" value="'. $myrow['branchcode'].'" />
-				<td><font size=1>' . $myrow['name'] . '</font></td>
-				<td><font size=1>' . $myrow['brname'] . '</font></td>
-				<td><font size=1>' . $myrow['contactname'] . '</font></td>
-				<td><font size=1>' . $myrow['typename'] . '</font></td>
-				<td><font size=1>' . $myrow['phoneno'] . '</font></td>
-				<td><font size=1>' . $myrow['faxno'] . '</font></td></tr>';
+				<td><font size="1">' . $myrow['name'] . '</font></td>
+				<td><font size="1">' . $myrow['brname'] . '</font></td>
+				<td><font size="1">' . $myrow['contactname'] . '</font></td>
+				<td><font size="1">' . $myrow['typename'] . '</font></td>
+				<td><font size="1">' . $myrow['phoneno'] . '</font></td>
+				<td><font size="1">' . $myrow['faxno'] . '</font></td></tr>';
 			$i++;
 			$j++;//row counter
 			//end of page full new headings if
@@ -518,7 +518,7 @@ if (isset($result)) {
 		}
 		//end of while loop
 		echo '</table>';
-		echo '<input type="hidden" name="JustSelectedACustomer" value="Yes">';
+		echo '<input type="hidden" name="JustSelectedACustomer" value="Yes" />';
 	}
 }
 //end if results to show
