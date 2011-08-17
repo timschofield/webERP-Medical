@@ -728,7 +728,7 @@ if (isset($_POST['GLEntry'])) {
 	echo '<div class="page_help_text">' . _('To enter a payment TO a customer (ie. to pay out a credit note), enter a negative payment amount.') . '</div>';
 }
 echo '<br /><table class="selection"><tr><td>' . _('Bank Account') . ':</td>
-				 <td><select tabindex=1 name="BankAccount" onChange="ReloadForm(form1.BatchInput)">';
+				 <td><select tabindex="1" name="BankAccount" onChange="ReloadForm(form1.BatchInput)">';
 
 if (DB_num_rows($AccountsResults)==0){
 	echo '</select></td></tr></table><br />';
@@ -753,9 +753,9 @@ if (!Is_Date($_SESSION['ReceiptBatch']->DateBanked)){
 }
 
 echo '<tr><td>' . _('Date Banked') . ':</td>
-		<td><input tabindex=2 type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="DateBanked" maxlength="10" size="10" onChange="isDate(this, this.value, '."'".$_SESSION['DefaultDateFormat']."'".')" value="' . $_SESSION['ReceiptBatch']->DateBanked . '" /></td></tr>';
+		<td><input tabindex="2" type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="DateBanked" maxlength="10" size="10" onChange="isDate(this, this.value, '."'".$_SESSION['DefaultDateFormat']."'".')" value="' . $_SESSION['ReceiptBatch']->DateBanked . '" /></td></tr>';
 echo '<tr><td>' . _('Currency') . ':</td>
-		<td><select tabindex=3 name="Currency" onChange="ReloadForm(form1.BatchInput)">';
+		<td><select tabindex="3" name="Currency" onChange="ReloadForm(form1.BatchInput)">';
 
 if (!isset($_SESSION['ReceiptBatch']->Currency)){
   $_SESSION['ReceiptBatch']->Currency=$_SESSION['CompanyRecord']['currencydefault'];
@@ -796,7 +796,7 @@ if ($_SESSION['ReceiptBatch']->AccountCurrency!=$_SESSION['ReceiptBatch']->Curre
 		$_SESSION['ReceiptBatch']->ExRate = $SuggestedExRate;
 	}
 	echo '<tr><td>' . _('Receipt Exchange Rate') . ':</td>
-			<td><input tabindex=4 type="text" name="ExRate" maxlength="10" size="12" class="number" value="' . $_SESSION['ReceiptBatch']->ExRate . '" /></td>
+			<td><input tabindex="4" type="text" name="ExRate" maxlength="10" size="12" class="number" value="' . $_SESSION['ReceiptBatch']->ExRate . '" /></td>
 			<td>' . $SuggestedExRateText . ' <i>' . _('The exchange rate between the currency of the bank account currency and the currency of the receipt') . '. 1 ' . $_SESSION['ReceiptBatch']->AccountCurrency . ' = ? ' . $_SESSION['ReceiptBatch']->Currency . '</i></td></tr>';
 }
 
@@ -814,7 +814,7 @@ if ($_SESSION['ReceiptBatch']->AccountCurrency!=$_SESSION['CompanyRecord']['curr
 			<td>' . ' ' . $SuggestedFunctionalExRateText . ' <i>' . _('The exchange rate between the currency of the business (the functional currency) and the currency of the bank account') .  '. 1 ' . $_SESSION['CompanyRecord']['currencydefault'] . ' = ? ' . $_SESSION['ReceiptBatch']->AccountCurrency . '</i></td></tr>';
 }
 
-echo '<tr><td>' . _('Receipt Type') . ':</td><td><select tabindex=6 name="ReceiptType">';
+echo '<tr><td>' . _('Receipt Type') . ':</td><td><select tabindex="6" name="ReceiptType">';
 
 include('includes/GetPaymentMethods.php');
 /* The array ReceiptTypes is defined from the setup tab of the main menu under payment methods - the array is populated from the include file GetPaymentMethods.php */
@@ -957,7 +957,7 @@ if (isset($_POST['GLEntry']) AND isset($_SESSION['ReceiptBatch'])){
 // End select tag
 
 	/*now set up a GLCode field to select from avaialble GL accounts */
-	echo '<tr><td>' . _('GL Account') . ':</td><td><select tabindex=8 name="GLCode">';
+	echo '<tr><td>' . _('GL Account') . ':</td><td><select tabindex="8" name="GLCode">';
 	$SQL = "SELECT accountcode,
 					accountname
 				FROM chartmaster
@@ -1014,11 +1014,11 @@ if (((isset($_SESSION['CustomerRecord'])
 	echo '<tr><td>' . _('Payee Bank Details') . ':</td>
 		<td><input tabindex="12" type="text" name="PayeeBankDetail" maxlength="22" size="20" value="' . $_POST['PayeeBankDetail'] . '" /></td></tr>';
 //	echo '<tr><td>' . _('Narrative') . ':</td>
-//		<td><input tabindex=13 type="text" name="Narrative" maxlength="30" size="32" value="' . $_POST['Narrative'] . '" /></td></tr>';
+//		<td><input tabindex="13" type="text" name="Narrative" maxlength="30" size="32" value="' . $_POST['Narrative'] . '" /></td></tr>';
 	echo '<td>' . _('Narrative') . ':</td>';
 	echo '<td><textarea name="Narrative"  cols="40" rows="1"></textarea></td>';
 	echo '</table>';
-	echo '<br /><div class="centre"><input tabindex=14 type="submit" name="Process" value="' . _('Accept') . '" />';
+	echo '<br /><div class="centre"><input tabindex="14" type="submit" name="Process" value="' . _('Accept') . '" />';
 	echo '<input tabindex="14" type="submit" name="Cancel" value="' . _('Cancel') . '" /></div>';
 
 } elseif (isset($_SESSION['ReceiptBatch']) AND !isset($_POST['GLEntry'])){
