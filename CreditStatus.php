@@ -224,8 +224,7 @@ if (!isset($_GET['delete'])) {
 		echo '<br /><table class="selection">
 			<tr>
 				<td>'. _('Status Code') .':</td>
-				<td><input ' . (in_array('ReasonCode',$Errors) ? 'class="inputerror"' : '' ) .
-					' tabindex="1" type="text" name="ReasonCode" value="'. $_POST['ReasonCode'] .'" size="3" maxlength="2" /></td>
+				<td><input tabindex="1" type="text" name="ReasonCode" value="'. $_POST['ReasonCode'] .'" size="3" maxlength="2" /></td>
 			</tr>';
 	}
 
@@ -234,16 +233,15 @@ if (!isset($_GET['delete'])) {
 	}
 	echo '<tr>
 		<td>'. _('Description') .':</td>
-		<td><input ' . (in_array('ReasonDescription',$Errors) ? 'class="inputerror"' : '' ) .
-		 ' tabindex=2 type="text" name="ReasonDescription" value="'. $_POST['ReasonDescription'] .'" size="28" maxlength="30" />
+		<td><input tabindex="2" type="text" name="ReasonDescription" value="'. $_POST['ReasonDescription'] .'" size="28" maxlength="30" />
 		</td></tr>
 		<tr><td>'. _('Disallow Invoices') . '</td>';
 	if (isset($_POST['DisallowInvoices']) and $_POST['DisallowInvoices']==1) {
-		echo '<td><input tabindex=3 type="checkbox" checked name="DisallowInvoices"></td></tr>';
+		echo '<td><input tabindex="3" type="checkbox" checked="True" name="DisallowInvoices" /></td></tr>';
 	} else {
-		echo '<td><input tabindex=3 type="checkbox" name="DisallowInvoices"></td></tr>';
+		echo '<td><input tabindex="3" type="checkbox" name="DisallowInvoices" /></td></tr>';
 	}
-	echo '</table><br /><div class="centre"><input tabindex=4 type="submit" name="submit" value="' . _('Enter Information') . '" /></div></form>';
+	echo '</table><br /><div class="centre"><input tabindex="4" type="submit" name="submit" value="' . _('Enter Information') . '" /></div></form>';
 } //end if record deleted no point displaying form to add record
 include('includes/footer.inc');
 ?>
