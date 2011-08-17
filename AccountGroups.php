@@ -392,9 +392,7 @@ if (! isset($_GET['delete'])) {
 	echo '</select></td></tr>';
 
 	echo '<tr><td>' . _('Sequence In TB') . ':' . '</td>';
-	echo '<td><input tabindex="5" ' . (in_array('SequenceInTB',$Errors) ? 'class="inputerror"' : '' ) .
-		' type="text" maxlength="4" name="SequenceInTB" class="number"
-		 value="' . $_POST['SequenceInTB'] . '" /></td></tr>';
+	echo '<td><input tabindex="5" type="text" maxlength="4" name="SequenceInTB" class="number" value="' . $_POST['SequenceInTB'] . '" /></td></tr>';
 
 	echo '<tr><td colspan="2"><div class="centre"><input tabindex="6" type="submit" name="submit" value="' . _('Enter Information') . '" /></div></td></tr>';
 
