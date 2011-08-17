@@ -276,7 +276,7 @@ if (isset($_POST['amend']) or isset($_POST['Create'])) {
 	echo '<tr><td>' . _('Contact Name') . ':</td><td><input tabindex="8" type="text" name="ContactName" size="13" maxlength="25" value="'.$_POST['ContactName'].'" /></td></tr>';
 	echo '<tr><td>' . _('Telephone') . ':</td><td><input tabindex="9" type="text" name="Telephone" size="13" maxlength="25" value="'.$_POST['Telephone'].'" /></td></tr>';
 	echo '<tr><td>' . _('Fax') . ':</td><td><input tabindex="10" type="text" name="Fax" size="13" maxlength="25" value="'.$_POST['Fax'].'" /></td></tr>';
-	echo '<tr><td>' . _('Email') . ':</td><td><input tabindex=11 type="text" name="Email" size="55" maxlength="55" value="'.$_POST['Email'].'" /></td></tr>';
+	echo '<tr><td>' . _('Email') . ':</td><td><input tabindex="11" type="text" name="Email" size="55" maxlength="55" value="'.$_POST['Email'].'" /></td></tr>';
 	echo '</form>';
 }
 
