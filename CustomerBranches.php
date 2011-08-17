@@ -734,7 +734,7 @@ if (!isset($_GET['delete'])) {
 	echo '<td><input tabindex="18" type="text" name="Email" size="56" maxlength="55" value="'. $_POST['Email'].'" /></td></tr>';
 
 	echo '<tr><td>'._('Tax Group').':</td>';
-	echo '<td><select tabindex=19 name="TaxGroup">';
+	echo '<td><select tabindex="19" name="TaxGroup">';
 
 	DB_data_seek($result,0);
 
@@ -754,11 +754,11 @@ if (!isset($_GET['delete'])) {
 	echo '</select></td></tr>';
 	echo '<tr><td>'._('Transactions on this branch').':</td><td><select tabindex="20" name="DisableTrans">';
 	if ($_POST['DisableTrans']==0){
-		echo '<option selected="True" value=0>' . _('Enabled') . '</option>';
-		echo '<option value=1>' . _('Disabled') . '</option>';
+		echo '<option selected="True" value="0">' . _('Enabled') . '</option>';
+		echo '<option value="1">' . _('Disabled') . '</option>';
 	} else {
-		echo '<option selected="True" value=1>' . _('Disabled') . '</option>';
-		echo '<option value=0>' . _('Enabled') . '</option>';
+		echo '<option selected="True" value="1">' . _('Disabled') . '</option>';
+		echo '<option value="0">' . _('Enabled') . '</option>';
 	}
 
 	echo '	</select></td></tr>';
