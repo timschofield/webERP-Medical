@@ -2174,7 +2174,9 @@ if (!isset($_POST['ProcessSale'])){
 	#end of page full new headings if
 			}
 	#end of while loop for Frequently Ordered Items
-			echo '<td style="text-align:center" colspan="8"><input type="hidden" name="OrderItems" value="1" /><input tabindex='.number_format($j+8).' type="submit" value="'._('Add to Sale').'" /></td>';
+			echo '<td style="text-align:center" colspan="8">
+					<input type="hidden" name="OrderItems" value="1" />
+					<input tabindex="'.number_format($j+8).'" type="submit" value="'._('Add to Sale').'" /></td>';
 			echo '</table>';
 		} //end of if Frequently Ordered Items > 0
 		if (isset($msg)){
@@ -2239,7 +2241,9 @@ if (!isset($_POST['ProcessSale'])){
 			echo '<table class="selection">';
 			echo '<tr><td><input type="hidden" name="previous" value="'.number_format($Offset-1).'" />
 				<input tabindex="'.number_format($j+7).'" type="submit" name="Prev" value="'._('Prev').'" /></td>';
-			echo '<td style="text-align:center" colspan="6"><input type="hidden" name="OrderItems" value="1" /><input tabindex="'.number_format($j+8).'" type="submit" value="'._('Add to Sale').'" /></td>';
+			echo '<td style="text-align:center" colspan="6">
+					<input type="hidden" name="OrderItems" value="1" />
+					<input tabindex="'.number_format($j+8).'" type="submit" value="'._('Add to Sale').'" /></td>';
 			echo '<td><input type="hidden" name="NextList" value="'.number_format($Offset+1).'" />
 				<input tabindex="'.number_format($j+9).'" type="submit" name="Next" value="'._('Next').'" /></td></tr>';
 			$TableHeader = '<tr><th>' . _('Code') . '</th>
@@ -2335,8 +2339,8 @@ if (!isset($_POST['ProcessSale'])){
 						}
 						echo '<input type="hidden" name="Batch'.$i.'" value="'.$BatchRow['serialno'].'" />';
 						echo '<input type="hidden" name="StockID'.$i.'" value="'.$myrow['stockid'].'" />';
-						printf('<td><font size="1"><input class="number"  tabindex="'.number_format($j+7).'" type="text" size="15"
-								name="Quantity'.$i.'" value="0" />
+						printf('<td><font size="1">
+								<input class="number"  tabindex="'.number_format($j+7).'" type="text" size="15" name="Quantity'.$i.'" value="0" />
 								</font></td>
 								<td class="number">%s</td>
 								<td class="number">%s</td>
@@ -2349,12 +2353,6 @@ if (!isset($_POST['ProcessSale'])){
 						echo '<input type="hidden" name="Units' . $i . '" value="' . $myrow['units'] . '" />';
 						$i++;
 					}
-/*					if (!isset($_POST['itm'.$myrow['stockid']])) {
-						$_POST['itm'.$myrow['stockid']]=0;
-					}
-					echo '<td class="number"><input type="HIDDEN" name=="itm'.$myrow['stockid'].'"  value="'.$_POST['itm'.$myrow['stockid']].'"><a href="'.$rootpath.
-								'/ConfirmDispatchControlled_Counter.php?StockID='.$myrow['stockid'].'&Location='.$_SESSION['UserStockLocation'].'">'.
-							$_POST['itm'.$myrow['stockid']].'</a></td></tr>'; */
 				}
 
 				if ($j==1) {
@@ -2370,9 +2368,17 @@ if (!isset($_POST['ProcessSale'])){
 			echo '<input type="hidden" name="PhoneNo" value="'.$_SESSION['Items'.$identifier]->PhoneNo.'" />';
 			echo '<input type="hidden" name="Email" value="'.$_SESSION['Items'.$identifier]->Email.'" />';
 
-			echo '<tr><td><input type="hidden" name="previous" value="'.number_format($Offset-1).'" /><input tabindex="'.number_format($j+7).'" type="submit" name="Prev" value="'._('Prev').'" /></td>';
-			echo '<td style="text-align:center" colspan="6"><input type="hidden" name="OrderItems" value="1" /><input tabindex="'.number_format($j+8).'" type="submit" value="'._('Add to Sale').'" /></td>';
-			echo '<td><input type="hidden" name="NextList" value="'.number_format($Offset+1).'" /><input tabindex="'.number_format($j+9).'" type="submit" name="Next" value="'._('Next').'" /></td></tr>';
+			echo '<tr><td>
+					<input type="hidden" name="previous" value="'.number_format($Offset-1).'" />
+					<input tabindex="'.number_format($j+7).'" type="submit" name="Prev" value="'._('Prev').'" /></td>';
+			echo '<td style="text-align:center" colspan="6">
+					<input type="hidden" name="OrderItems" value="1" />
+					<input tabindex="'.number_format($j+8).'" type="submit" value="'._('Add to Sale').'" />
+				</td>';
+			echo '<td>
+					<input type="hidden" name="NextList" value="'.number_format($Offset+1).'" />
+					<input tabindex="'.number_format($j+9).'" type="submit" name="Next" value="'._('Next').'" />
+				</td></tr>';
 			echo '</table></form>';
 			echo $jsCall;
 
@@ -2401,8 +2407,7 @@ if (!isset($_POST['ProcessSale'])){
 	 		/* Do not display colum unless customer requires po line number by sales order line*/
 	 		echo '<td><input type="text" name="part_' . $i . '" size="21" maxlength="20" /></td>
 					<td><input type="text" class="number" name="qty_' . $i . '" size="6" maxlength="6" /></td>
-						<input type="hidden" class="date" name="ItemDue_' . $i . '"
-						value="' . $DefaultDeliveryDate . '" /></tr>';
+						<input type="hidden" class="date" name="ItemDue_' . $i . '"value="' . $DefaultDeliveryDate . '" /></tr>';
    		}
 		echo '<script  type="text/javascript">if (document.SelectParts) {defaultControl(document.SelectParts.part_1);}</script>';
 
