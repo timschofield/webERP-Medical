@@ -205,7 +205,7 @@ if (empty($FactorID)) {
 		echo '<td><a href="'.$rootpath . '/Factors.php?FactorID='.$myrow['id'].'">'._('Edit').'</a></td></tr>';
 	}
 	echo '</table><br /><div class="centre">';
-	echo '<br /><input tabindex=3 type="submit" name="Create" value="' . _('Create New Factor') . '" />';
+	echo '<br /><input tabindex="3" type="submit" name="Create" value="' . _('Create New Factor') . '" />';
 	echo '</div></form>';
 	include('includes/footer.inc');
 	exit;
