@@ -237,8 +237,7 @@ if (!Is_Date($_SESSION['JournalDetail']->JnlDate)){
 
 echo '<table><tr>
 		<td colspan="5"><table class="selection"><tr><td>'._('Date to Process Journal').':</td>
-		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="JournalProcessDate" maxlength="10" size="11" value="' .
-					 $_SESSION['JournalDetail']->JnlDate . '" /></td>';
+		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="JournalProcessDate" maxlength="10" size="11" value="' . $_SESSION['JournalDetail']->JnlDate . '" /></td>';
 echo '<td>' . _('Type') . ':</td>
 		<td><select name="JournalType">';
 
@@ -291,9 +290,7 @@ echo '</select></td>';
 if (!isset($_POST['GLManualCode'])) {
 	$_POST['GLManualCode']='';
 }
-echo '<td><input class="number" type="text" name="GLManualCode" Maxlength="12" size="12" onChange="inArray(this.value, GLCode.options,'.
-	"'".'The account code '."'".'+ this.value+ '."'".' doesnt exist'."'".')"' .
-		' value="'. $_POST['GLManualCode'] .'"  /></td>';
+echo '<td><input class="number" type="text" name="GLManualCode" Maxlength="12" size="12" onChange="inArray(this.value, GLCode.options,'. "'".'The account code '."'".'+ this.value+ '."'".' doesnt exist'."'".')"' . ' value="'. $_POST['GLManualCode'] .'"  /></td>';
 
 $sql="SELECT accountcode,
 			accountname
@@ -322,12 +319,12 @@ if (!isset($_POST['Debit'])) {
 	$_POST['Debit'] = '';
 }
 
-echo '</tr><tr><th>' . _('Debit') . '</th><td><input type="text" class="number" Name = "Debit" ' .
-			'onChange="eitherOr(this, '.'Credit'.')"'.
-			' Maxlength="12" size="10" value="' . $_POST['Debit'] . '" /></td>';
-echo '</tr><tr><th>' . _('Credit') . '</th><td><input type="text" class="number" Name = "Credit" ' .
-			'onChange="eitherOr(this, '.'Debit'.')"'.
-			' Maxlength="12" size="10" value="' . $_POST['Credit'] . '" /></td>';
+echo '</tr><tr>
+			<th>' . _('Debit') . '</th>
+			<td><input type="text" class="number" Name = "Debit" onChange="eitherOr(this, '.'Credit'.')" maxlength="12" size="10" value="' . $_POST['Debit'] . '" /></td>';
+echo '</tr><tr>
+			<th>' . _('Credit') . '</th>
+			<td><input type="text" class="number" Name = "Credit" onChange="eitherOr(this, '.'Debit'.')"  maxlength="12" size="10" value="' . $_POST['Credit'] . '" /></td>';
 echo '</tr><tr><td></td><td></td><th>'. _('Narrative'). '</th>';
 echo '</tr><tr><th></th><th>' . _('GL Narrative') . '</th>';
 
