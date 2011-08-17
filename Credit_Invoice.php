@@ -324,15 +324,15 @@ foreach ($_SESSION['CreditItems']->LineItems as $LnItm) {
 
 		} else {
 
-			echo '<td><input tabindex="'.$j.'" type="text" class="number" name="Quantity_' . $LnItm->LineNumber .'" maxlength="6" size="6" value="' . $LnItm->QtyDispatched . '"></td>';
+			echo '<td><input tabindex="'.$j.'" type="text" class="number" name="Quantity_' . $LnItm->LineNumber .'" maxlength="6" size="6" value="' . $LnItm->QtyDispatched . '" /></td>';
 
 		}
 
 		$DisplayLineTotal = number_format($LineTotal,2);
 
 		$j++;
-		echo '<td><input tabindex="'.$j.'" type="text" class="number" name="Price_' . $LnItm->LineNumber . '" maxlength="12" size="6" value="' . $LnItm->Price . '"></td>
-		<td><input tabindex="'.$j.'" type="text" class="number" name="Discount_' . $LnItm->LineNumber . '" maxlength="3" size="3" value="' . ($LnItm->DiscountPercent * 100) . '"></td>
+		echo '<td><input tabindex="'.$j.'" type="text" class="number" name="Price_' . $LnItm->LineNumber . '" maxlength="12" size="6" value="' . $LnItm->Price . '" /></td>
+		<td><input tabindex="'.$j.'" type="text" class="number" name="Discount_' . $LnItm->LineNumber . '" maxlength="3" size="3" value="' . ($LnItm->DiscountPercent * 100) . '" /></td>
 		<td class="number">'.$DisplayLineTotal.'</td>';
 
 		/*Need to list the taxes applicable to this line */
@@ -359,8 +359,7 @@ foreach ($_SESSION['CreditItems']->LineItems as $LnItm) {
 				echo '<br />';
 			}
 			if (!isset($_POST['ProcessCredit'])) {
-				echo '<input type="text" class="number" name="' . $LnItm->LineNumber . $Tax->TaxCalculationOrder .
-					'_TaxRate" maxlength="4" size="4" value="' . $Tax->TaxRate*100 . '" />';
+				echo '<input type="text" class="number" name="' . $LnItm->LineNumber . $Tax->TaxCalculationOrder . '_TaxRate" maxlength="4" size="4" value="' . $Tax->TaxRate*100 . '" />';
 			}
 			$i++;
 			if ($Tax->TaxOnTax ==1){
@@ -1523,10 +1522,10 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 		$_POST['CreditText'] = '';
 	}
 	$j++;
-	echo '<tr><td>' . _('Credit note text') . '</td><td><textarea tabindex='.$j.'  name=CreditText cols=31 rows=5>' . $_POST['CreditText'] . '</textarea></td></tr>';
-	echo '</table><br /><div class="centre"><input TABINDEX='.$j.' type="submit" name="Update" value="' . _('Update') . '" /><br />';
+	echo '<tr><td>' . _('Credit note text') . '</td><td><textarea tabindex="'.$j.'"  name="CreditText" cols="31" rows="5">' . $_POST['CreditText'] . '</textarea></td></tr>';
+	echo '</table><br /><div class="centre"><input tabindex="'.$j.'" type="submit" name="Update" value="' . _('Update') . '" /><br />';
 	$j++;
-	 echo '<input type="submit" tabindex='.$j++.' name="ProcessCredit" value="' . _('Process Credit') .'"></div>';
+	 echo '<input type="submit" tabindex="'.$j++.'" name="ProcessCredit" value="' . _('Process Credit') .'" /></div>';
 }
 
 echo '</form>';
