@@ -240,7 +240,7 @@ if (!isset($_GET['delete'])) {
 	}
 	echo '<br /><tr>
 					<td>'. _('Geocode Key') .':</td>
-					<td><input ' . (in_array('geocode_key',$Errors) ? 'class="inputerror"' : '' ) .' tabindex=2 type="text" name="geocode_key" value="'. $_POST['geocode_key'] .'" size="28" maxlength="300" /></td>
+					<td><input ' . (in_array('geocode_key',$Errors) ? 'class="inputerror"' : '' ) .' tabindex="2" type="text" name="geocode_key" value="'. $_POST['geocode_key'] .'" size="28" maxlength="300" /></td>
 				</tr>
 				<tr>
 					<td>'. _('Geocode Center Long') . '</td>
