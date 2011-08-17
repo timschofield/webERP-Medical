@@ -96,7 +96,7 @@ $result = DB_query($sql, $db);
 
 echo '<tr><td>' . _('Customer Price List') . ' (' . _('Sales Type') . '):</td><td>';
 
-echo '<select tabindex=1 name="SalesType">';
+echo '<select tabindex="1" name="SalesType">';
 
 while ($myrow = DB_fetch_array($result)){
 	if (isset($_POST['SalesType']) and $myrow['typeabbrev']==$_POST['SalesType']){
