@@ -102,7 +102,7 @@ if ($EditControlled){
 		into the form for entry of quantities manually */
 
 		if ($LineItem->Serialised==1){
-			echo '<input type="hidden" name="Qty' . $StartAddingAt .'" Value=1></TR>';
+			echo '<input type="hidden" name="Qty' . $StartAddingAt .'" value="1" /></tr>';
 		} else if ($LineItem->Serialised==0 and $Perishable==1) {
 			echo '<td><input type="text" class="number" name="Qty' . $StartAddingAt .'" size="11" value="'. number_format($Bundle->BundleQty, $LineItem->DecimalPlaces). '" maxlength="10" /></tr>';
 		} else {
