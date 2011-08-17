@@ -16,7 +16,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 
 echo '<table cellpadding="2" class="selection"><tr>';
 
-echo '<td>' . _('Month to Show') . ':</td><td><select tabindex=1 name="MonthToShow">';
+echo '<td>' . _('Month to Show') . ':</td><td><select tabindex="1" name="MonthToShow">';
 
 
 if (!isset($_POST['MonthToShow'])){
@@ -34,7 +34,7 @@ while ($PeriodRow = DB_fetch_array($PeriodsResult)){
 	}
 }
 echo '</select></td>';
-echo '<td>' . _('Salesperson') . ':</td><td><select tabindex=2 name="Salesperson">';
+echo '<td>' . _('Salesperson') . ':</td><td><select tabindex="2" name="Salesperson">';
 
 $SalespeopleResult = DB_query("SELECT salesmancode, salesmanname FROM salesman",$db);
 if (!isset($_POST['Salesperson'])){
@@ -53,7 +53,7 @@ while ($SalespersonRow = DB_fetch_array($SalespeopleResult)){
 }
 echo '</select></td>';
 
-echo '</tr></table><br /><div class="centre"><input tabindex=4 type="submit" name="ShowResults" value="' . _('Show Daily Sales For The Selected Month') . '" />';
+echo '</tr></table><br /><div class="centre"><input tabindex="4" type="submit" name="ShowResults" value="' . _('Show Daily Sales For The Selected Month') . '" />';
 echo '</form></div>';
 echo '<br />';
 /*Now get and display the sales data returned */
