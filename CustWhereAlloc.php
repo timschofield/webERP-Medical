@@ -13,7 +13,7 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/m
 
 echo '<table class="selection" cellpadding="2"><tr>';
 
-echo '<td>' . _('Type') . ':</td><td><select tabindex=1 name="TransType"> ';
+echo '<td>' . _('Type') . ':</td><td><select tabindex="1" name="TransType"> ';
 
 $sql = "SELECT typeid, typename FROM systypes WHERE typeid = 10 OR typeid=12";
 $resultTypes = DB_query($sql,$db);
