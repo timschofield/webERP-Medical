@@ -63,12 +63,12 @@ if (DB_num_rows($result)==0){
 if (!isset($PrevCode)) {$PrevCode='';}
 if (!isset($NextCode)) {$NextCode='';}
 
-echo '<input type="hidden" name="PrevAccount" value="'.$PrevCode.'">';
-echo '<input type="hidden" name="NextAccount" value="'.$NextCode.'">';
+echo '<input type="hidden" name="PrevAccount" value="'.$PrevCode.'" />';
+echo '<input type="hidden" name="NextAccount" value="'.$NextCode.'" />';
 echo '</table>';
-echo '<br /><table><tr><td><input type="submit" name="Previous" value="' . _('Prev Account') . '"></td>';
-echo '<td><input type="submit" name="Select" value="' . _('Select Account') . '"></td>';
-echo '<td><input type="submit" name="Next" value="' . _('Next Account') . '"></td></tr>';
+echo '<br /><table><tr><td><input type="submit" name="Previous" value="' . _('Prev Account') . '" /></td>';
+echo '<td><input type="submit" name="Select" value="' . _('Select Account') . '" /></td>';
+echo '<td><input type="submit" name="Next" value="' . _('Next Account') . '" /></td></tr>';
 echo '</table><br />';
 echo '</form>';
 
@@ -208,13 +208,13 @@ if (isset($SelectedAccount) and $SelectedAccount != '') {
 				<td><input class="number" type="text" size="14" name="AnnualAmountTY" value="0.00" /></td>
 				<td></td>
 				<td><input onChange="numberFormat(this,2)" class="number" type="text" size="14" name="AnnualAmount" value="0.00" /></td>';
-	echo '<td><input type="submit" name="apportion" value="' . _('Apportion Budget') . '"></td>';
+	echo '<td><input type="submit" name="apportion" value="' . _('Apportion Budget') . '" /></td>';
 	echo '</tr>';
 	echo '</table>';
 	echo '<input type="hidden" name="SelectedAccount" value="'.$SelectedAccount.'" />';
 
 	echo '<script>defaultControl(document.form.1next);</script>';
-	echo '<br /><div class="centre"><input type="submit" name=update value="' . _('Update') . '"></div></form>';
+	echo '<br /><div class="centre"><input type="submit" name="update" value="' . _('Update') . '" /></div></form>';
 
 	$SQL="SELECT MIN(periodno) FROM periods";
 	$result=DB_query($SQL,$db);
