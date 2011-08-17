@@ -669,7 +669,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			} else {
 				echo '<td></td>';
 			}
-			echo '<td><input tabindex='.number_format($j+5).' type="submit" name="Submit" value="'.$myrow['brname'].'" /></td>
+			echo '<td><input tabindex="'.number_format($j+5).'" type="submit" name="Submit" value="'.$myrow['brname'].'" /></td>
 					<input type="hidden" name="Select" value="'.$myrow['debtorno'].' - '.$myrow['branchcode'].'" />
 					<td>'.$myrow['contactname'].'</td>
 					<td>'.$myrow['phoneno'].'</td>
@@ -1591,7 +1591,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ';
 		echo _('Search for Order Items') . '</p>';
 		echo '<div class="page_help_text">' . _('Search for Order Items') . _(', Searches the database for items, you can narrow the results by selecting a stock category, or just enter a partial item description or partial item code') . '.</div><br />';
-		echo '<table class="selection"><tr><td><b>' . _('Select a Stock Category') . ': </b><select tabindex=1 name="StockCat">';
+		echo '<table class="selection"><tr><td><b>' . _('Select a Stock Category') . ': </b><select tabindex="1" name="StockCat">';
 
 		if (!isset($_POST['StockCat'])){
 			echo '<option selected="True" value="All">' . _('All') . '</option>';
@@ -1654,13 +1654,13 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			echo '<table class="table1">';
 			echo '<tr><td>
 					<input type="hidden" name="previous" value="'.number_format($Offset-1).'" />
-					<input tabindex='.number_format($j+8).' type="submit" name="Prev" value="'._('Prev').'" /></td>';
+					<input tabindex="'.number_format($j+8).'" type="submit" name="Prev" value="'._('Prev').'" /></td>';
 			echo '<td style="text-align:center" colspan="7">
 					<input type="hidden" name="order_items" value="1" />
-					<input tabindex='.number_format($j+9).' type="submit" value="'._('Add to Sales Order').'" /></td>';
+					<input tabindex="'.number_format($j+9).'" type="submit" value="'._('Add to Sales Order').'" /></td>';
 			echo '<td>
 					<input type="hidden" name="nextlist" value="'.number_format($Offset+1).'" />
-					<input tabindex='.number_format($j+10).' type="submit" name="Next" value="'._('Next').'" /></td></tr>';
+					<input tabindex="'.number_format($j+10).'" type="submit" name="Next" value="'._('Next').'" /></td></tr>';
 			$TableHeader = '<tr><th>' . _('Code') . '</th>
 					   			<th>' . _('Description') . '</th>
 					   			<th>' . _('Units') . '</th>
