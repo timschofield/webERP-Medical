@@ -18,7 +18,7 @@
 
 		$PositionPointer++;
 
-		echo '<BR>' . _('The variable') . ' - ' . $VariableName . ' ' . _('is set to') . ' ' . $$VariableName;
+		echo '<br />' . _('The variable') . ' - ' . $VariableName . ' ' . _('is set to') . ' ' . $$VariableName;
 
 		$NewLineText = $NewLineText . $$VariableName;
 
@@ -27,7 +27,7 @@
 	$LastPositionPointer = $PositionPointer;
 	$NewLineText = $NewLineText .  mb_substr($MsgLineText,$LastPositionPointer);
 
-	echo "<BR>$NewLineText";
+	echo '<br />'.$NewLineText;
 
 	fputs($fp, $NewLineText . "\n");
 ?>
