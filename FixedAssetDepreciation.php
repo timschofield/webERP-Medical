@@ -22,7 +22,7 @@ $result = DB_query("SELECT periods.lastdate_in_period,
 
 $LastDepnRun = DB_fetch_row($result);
 
-//echo '<BR>LastRun period = ' . $LastDepnRun[1] . ' Last date in period = ' . $LastDepnRun[0];
+//echo '<br />LastRun period = ' . $LastDepnRun[1] . ' Last date in period = ' . $LastDepnRun[0];
 
 $AllowUserEnteredProcessDate = true;
 
