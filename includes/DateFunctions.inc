@@ -19,7 +19,7 @@ function Is_date($DateEntry) {
 
 	$DateEntry =Trim($DateEntry);
 
-	//echo '<BR>The date entered is ' . $DateEntry;
+	//echo '<br />The date entered is ' . $DateEntry;
 
 	if (mb_strpos($DateEntry,'/')) {
 		$Date_Array = explode('/',$DateEntry);
@@ -422,7 +422,7 @@ and converts to a yyyy/mm/dd format */
 				$Date_Array[2] = '19'.$Date_Array[2];
 			}
 		}
-		/* echo '<BR>The date returned is ' . $Date_Array[2].'/'.$Date_Array[1].'/'.$Date_Array[0]; */
+		/* echo '<br />The date returned is ' . $Date_Array[2].'/'.$Date_Array[1].'/'.$Date_Array[0]; */
 		return $Date_Array[2].'-'.$Date_Array[1].'-'.$Date_Array[0];
 
 	} elseif ($_SESSION['DefaultDateFormat']=='m/d/Y') {
@@ -448,11 +448,11 @@ function FormatDateWithTimeForSQL ($datetime) {
 function LastDayOfMonth ( $DateEntry) {
 	/*Expects a date in DefaultDateFormat and
 	 * Returns the last day of the month in the entered date
-	 * in the DefaultDateFormat 
-	 * 
+	 * in the DefaultDateFormat
+	 *
 	 * mktime (0,0,0 month, day, year)
 	 */
-	
+
 	$DateEntry = trim($DateEntry);
 
 	if (mb_strpos($DateEntry,'/')) {
@@ -491,8 +491,8 @@ function LastDayOfMonth ( $DateEntry) {
 			}
 		}
 		$DateStamp =  mktime(0,0,0, $Date_Array[1]+1, 0, $Date_Array[2]);
-		
-		
+
+
 	} elseif ($_SESSION['DefaultDateFormat']=='m/d/Y') {
 		if (mb_strlen($Date_Array[2])==2) {
 			if ((int)$Date_Array[2] <=60) {
