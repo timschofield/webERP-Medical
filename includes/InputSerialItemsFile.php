@@ -80,7 +80,7 @@ if ($_FILES['ImportFile']['name'] == '' && $_SESSION['CurImportFile'] == ''){
 	exit();
 }
 if ($_FILES['ImportFile']['error'] != '' && !isset($_SESSION['CurImportFile'])){
-		echo _('There was a problem with the uploaded file') . '. ' . _('We received').':<BR>'.
+		echo _('There was a problem with the uploaded file') . '. ' . _('We received').':<br />'.
 				 _('Name').':'.$_FILES['ImportFile']['name'].'<br />'.
 				 _('Size').':'.number_format($_FILES['ImportFile']['size']/1024,2).'kb<br />'.
 				 _('Type').':'.$_FILES['ImportFile']['type'].'<br />';
