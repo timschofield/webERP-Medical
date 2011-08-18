@@ -75,7 +75,7 @@ class URLDetails {
 					$Texts['text'][$k][$name]=(string)$result->item($i)->attributes->getNamedItem($name)->nodeValue;
 				}
 				if (!isset($Texts['text'][$k]['maxlength'])) {
-					error_log('Warning: '.$Texts['text'][$k]['name'].' in '.$this->GetURL().' has no maxlength attribute set.'."\n", 3, '/home/tim/weberp'.date('Y-m-d').'.log');
+					error_log('Warning: '.$Texts['text'][$k]['name'].' in '.$this->GetURL().' has no maxlength attribute set.'."\n", 3, '/home/tim/weberp'.date('Ymd').'.log');
 				}
 				$k++;
 			}
@@ -217,7 +217,7 @@ class URLDetails {
 				$result = curl_exec($ch);
 				$response = curl_getinfo( $ch );
 				if ($response['http_code']!=200) {
-					error_log($i.' '.$this->Links[$i]['href'].' '.$response['http_code']."\n", 3, '/home/tim/weberp'.date('Y-m-d').'.log');
+					error_log($i.' '.$this->Links[$i]['href'].' '.$response['http_code']."\n", 3, '/home/tim/weberp'.date('Ymd').'.log');
 				}
 			}
 		}
