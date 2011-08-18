@@ -4,7 +4,8 @@ ROOT_DIR=$PWD
 cd $ROOT_DIR
 ClosedTagTests=("<input" "<img" "<br")
 QuotingTests=("maxlength" "size" "colspan" "cellpadding" "cellspacing" "tabindex")
-for f in `find . -name "*.php"`
+UnquotedTypes=("submit" "hidden" "text" "checkbox" "radio" "file")
+for f in `find . -name "*.php" -o -name "*.inc" -o -name "*.html"`
 do
     newname=`echo $f | cut -c3-`
     filename="$ROOT_DIR/$newname"
@@ -41,26 +42,31 @@ do
 					for i in `seq 1 "${#output[@]}"`;
 					do
 						echo $filename >> ~/weberp$(date +%Y%m%d).log
-						echo '**Warning** Line number '`echo ${output[i-1]} | cut -f1 -d':' `' appears to have a '${QuotingTests[test-1]}' attribute that is not quoted' >> ~/weberp$(date +%Y%m%d).log
+						echo '**Warning** Line number '`echo ${output[i-1]} | cut -f1 -d':' `' appears to have a '${QuotingTests[test-1]}' attribute the value of which is not quoted' >> ~/weberp$(date +%Y%m%d).log
 						echo '' >> ~/weberp$(date +%Y%m%d).log
 					done
 				fi
 			done
 		done
+		for test in `seq 1 "${#UnquotedTypes[@]}"`;
+		do
+			count=0
+			output=()
+			while read -r line; do
+				output[((count++))]="$line"
+			done < <(grep -i "type=${UnquotedTypes[test-1]}"  $filename -n)
+			if [ "${#output[@]}" != 0 ]
+			then
+				for i in `seq 1 "${#output[@]}"`;
+				do
+					echo $filename >> ~/weberp$(date +%Y%m%d).log
+					echo '**Warning** Line number '`echo ${output[i-1]} | cut -f1 -d':' `' appears to have a '${QuotingTests[test-1]}' attribute that is not quoted' >> ~/weberp$(date +%Y%m%d).log
+					echo '' >> ~/weberp$(date +%Y%m%d).log
+				done
+			fi
+		done
 	fi
 done
-
-# grep -i 'type=submit' * -Rrn --exclude-dir=locale --exclude-dir=includes/phplot --exclude-dir=includes/tcpdf --exclude-dir=doc --exclude-dir=build
-
-# grep -i 'type=hidden' * -Rrn --exclude-dir=locale --exclude-dir=includes/phplot --exclude-dir=includes/tcpdf --exclude-dir=doc --exclude-dir=build
-
-# grep -i 'type=text' * -Rrn --exclude-dir=locale --exclude-dir=includes/phplot --exclude-dir=includes/tcpdf --exclude-dir=doc --exclude-dir=build
-
-# grep -i 'type=checkbox' * -Rrn --exclude-dir=locale --exclude-dir=includes/phplot --exclude-dir=includes/tcpdf --exclude-dir=doc --exclude-dir=build
-
-# grep -i 'type=radio' * -Rrn --exclude-dir=locale --exclude-dir=includes/phplot --exclude-dir=includes/tcpdf --exclude-dir=doc --exclude-dir=build
-
-# grep -i 'type=file' * -Rrn --exclude-dir=locale --exclude-dir=includes/phplot --exclude-dir=includes/tcpdf --exclude-dir=doc --exclude-dir=build
 
 # grep -i '<center>' * -Rrn --exclude-dir=locale --exclude-dir=includes/phplot --exclude-dir=includes/tcpdf --exclude-dir=doc --exclude-dir=build
 
