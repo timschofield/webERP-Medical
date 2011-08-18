@@ -6,7 +6,7 @@ function FindModule($ch, $RootPath, $ServerPath, $TestSessionID, $IndexPage, $Mo
 		$i++;
 	} while ($i<sizeOf($IndexPage[1]) and $IndexPage[1][$i]['value'] != $Module);
 	if ($i>=sizeOf($IndexPage[1])) {
-		error_log('Error finding module '.$Module.'. Link not found.'."\n", 3, '/home/tim/weberp'.date('Y-m-d').'.log');
+		error_log('Error finding module '.$Module.'. Link not found.'."\n", 3, '/home/tim/weberp'.date('Ymd').'.log');
 		return false;
 	}
 	$SelectedModuleScreen = new URLDetails($TestSessionID);
