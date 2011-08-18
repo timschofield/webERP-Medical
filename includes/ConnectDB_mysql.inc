@@ -23,7 +23,7 @@ mysql_set_charset("utf8", $db);
 
 
 if ( !$db ) {
-	echo '<BR>' . _('The configuration in the file config.php for the database user name and password do not provide the information required to connect to the database server');
+	echo '<br />' . _('The configuration in the file config.php for the database user name and password do not provide the information required to connect to the database server');
 	session_unset();
 	session_destroy();
 	echo '<p>' . _('Click') . '<a href="index.php">' . _('here') . '</a>' ._('to try logging in
@@ -35,13 +35,13 @@ again') . '</p>';
 /* Update to allow RecurringSalesOrdersProcess.php to run via cron */
 if (isset($DatabaseName)) {
         if (! mysql_select_db($_SESSION['DatabaseName'],$db)) {
-            echo '<BR>' . _('The company name entered does not correspond to a database on the database server specified in the config.php configuration file. Try logging in with a different company name');  echo '<BR><A HREF="index.php">' . _('Back to login page') . '</A>';
+            echo '<br />' . _('The company name entered does not correspond to a database on the database server specified in the config.php configuration file. Try logging in with a different company name');  echo '<br /><a href="index.php">' . _('Back to login page') . '</a>';
                 unset ($_SESSION['DatabaseName']);
                 exit;
         }
 } else {
 	if (! mysql_select_db($_SESSION['DatabaseName'],$db)) {
-	    echo '<BR>' . _('The company name entered does not correspond to a database on the database server specified in the config.php configuration file. Try logging in with a different company name');	echo '<BR><A HREF="index.php">' . _('Back to login page') . '</A>';
+	    echo '<br />' . _('The company name entered does not correspond to a database on the database server specified in the config.php configuration file. Try logging in with a different company name');	echo '<br /><a href="index.php">' . _('Back to login page') . '</a>';
 		unset ($_SESSION['DatabaseName']);
 		exit;
 	}
@@ -74,7 +74,7 @@ function DB_query ($SQL,
 		}
 		prnMsg($ErrorMessage.'<br />' . DB_error_msg($Conn),'error', _('Database Error'));
 		if ($debug==1){
-			prnMsg($DebugMessage. "<br />$SQL<br />",'error',_('Database SQL Failure'));
+			prnMsg($DebugMessage. '<br />'.$SQL.'<br />','error',_('Database SQL Failure'));
 			}
 		if ($Transaction){
 			$SQL = 'rollback';
