@@ -333,8 +333,10 @@ echo '<tr style="outline: 1px solid"><td>' . _('Default Date Format') . ':</td>
 // DefaultTheme
 echo '<tr style="outline: 1px solid"><td>' . _('New Users Default Theme') . ':</td>
 	 <td><select name="X_DefaultTheme">';
+
 $ThemeDirectory = dir('css/');
-while (false != ($ThemeName = $ThemeDirectory->read())){
+
+while (false !== ($ThemeName = $ThemeDirectory->read())){
 	if (is_dir("css/$ThemeName") AND $ThemeName != '.' AND $ThemeName != '..' AND $ThemeName != '.svn'){
 		if ($_SESSION['DefaultTheme'] == $ThemeName) {
 			echo '<option selected="True" value="' . $ThemeName . '">' . $ThemeName . '</option>';
@@ -343,6 +345,9 @@ while (false != ($ThemeName = $ThemeDirectory->read())){
 		}
 	}
 }
+
+$ThemeDirectory->close();
+
 echo '</select></td>
 	<td>' . _('The default theme is used for new users who have not yet defined the display colour scheme theme of their choice') . '</td></tr>';
 
@@ -697,9 +702,10 @@ echo '<tr style="outline: 1px solid"><td>' . _('The directory where images are s
 
 
 $CompanyDirectory = 'companies/' . $_SESSION['DatabaseName'] . '/';
+
 $DirHandle = dir($CompanyDirectory);
 
-while ($DirEntry = $DirHandle->read() ){
+while (false !== ($DirEntry = $DirHandle->read()) ){
 
 	if (is_dir($CompanyDirectory . $DirEntry)
 		AND $DirEntry != '..'
@@ -717,6 +723,9 @@ while ($DirEntry = $DirHandle->read() ){
 		}
 	}
 }
+
+$DirHandle->close();
+
 echo '</select></td>
 	<td>' . _('The directory under which all image files should be stored. Image files take the format of ItemCode.jpg - they must all be .jpg files and the part code will be the name of the image file. This is named automatically on upload. The system will check to ensure that the image is a .jpg file') . '</td>
 	</tr>';
@@ -728,7 +737,7 @@ echo '<tr style="outline: 1px solid"><td>' . _('The directory where reports are 
 
 $DirHandle = dir($CompanyDirectory);
 
-while (false != ($DirEntry = $DirHandle->read())){
+while (false !== ($DirEntry = $DirHandle->read())){
 
 	if (is_dir($CompanyDirectory . $DirEntry)
 		AND $DirEntry != '..'
@@ -750,6 +759,8 @@ while (false != ($DirEntry = $DirHandle->read())){
 		}
 	}
 }
+
+$DirHandle->close();
 
 echo '</select></td>
 	<td>' . _('The directory under which all report pdf files should be created in. A separate directory is recommended') . '</td>
