@@ -108,14 +108,14 @@ if (isset($_POST['ProcessStockChange'])){
 	$result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 	echo ' ... ' . _('completed');
 
-	echo '<BR>' . _('Changing location transfer information');
+	echo '<br />' . _('Changing location transfer information');
 
 	$sql = "UPDATE loctransfers SET stockid='" . $_POST['NewStockID'] . "' WHERE stockid='" . $_POST['OldStockID'] . "'";
 	$ErrMsg = _('The SQL to update the loctransfers records failed');
 	$result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 	echo ' ... ' . _('completed');
 
-	echo '<BR>' . _('Changing MRP demands information');
+	echo '<br />' . _('Changing MRP demands information');
 
 	$sql = "UPDATE mrpdemands SET stockid='" . $_POST['NewStockID'] . "' WHERE stockid='" . $_POST['OldStockID'] . "'";
 	$ErrMsg = _('The SQL to update the mrpdemands records failed');
@@ -126,7 +126,7 @@ if (isset($_POST['ProcessStockChange'])){
 	$result = DB_query($sql,$db);
 	$row=DB_fetch_row($result);
 	if ($row[0]>0) {
-		echo '<BR>' . _('Changing MRP planned orders information');
+		echo '<br />' . _('Changing MRP planned orders information');
 
 		$sql = "UPDATE mrpplannedorders SET part='" . $_POST['NewStockID'] . "' WHERE part='" . $_POST['OldStockID'] . "'";
 		$ErrMsg = _('The SQL to update the mrpplannedorders records failed');
@@ -134,14 +134,14 @@ if (isset($_POST['ProcessStockChange'])){
 		echo ' ... ' . _('completed');
 	}
 
-	echo '<BR>' . _('Changing MRP requirements information');
+	echo '<br />' . _('Changing MRP requirements information');
 
 	$sql = "UPDATE mrprequirements SET part='" . $_POST['NewStockID'] . "' WHERE part='" . $_POST['OldStockID'] . "'";
 	$ErrMsg = _('The SQL to update the mrprequirements records failed');
 	$result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 	echo ' ... ' . _('completed');
 
-	echo '<BR>' . _('Changing MRP supplies information');
+	echo '<br />' . _('Changing MRP supplies information');
 
 	$sql = "UPDATE mrpsupplies SET part='" . $_POST['NewStockID'] . "' WHERE part='" . $_POST['OldStockID'] . "'";
 	$ErrMsg = _('The SQL to update the mrpsupplies records failed');
@@ -258,7 +258,7 @@ if (isset($_POST['ProcessStockChange'])){
 	$sql = 'SET FOREIGN_KEY_CHECKS=0';
 	$result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 
-	echo '<BR>' . _('Changing work order requirements information');
+	echo '<br />' . _('Changing work order requirements information');
 
 	$sql = "UPDATE worequirements SET stockid='" . $_POST['NewStockID'] . "' WHERE stockid='" . $_POST['OldStockID'] . "'";
 	$ErrMsg = _('The SQL to update the stockid worequirements records failed');
@@ -270,7 +270,7 @@ if (isset($_POST['ProcessStockChange'])){
 	$result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 	echo ' ... ' . _('completed');
 
-	echo '<BR>' . _('Changing work order information');
+	echo '<br />' . _('Changing work order information');
 
 	$sql = "UPDATE woitems SET stockid='" . $_POST['NewStockID'] . "' WHERE stockid='" . $_POST['OldStockID'] . "'";
 	$ErrMsg = _('The SQL to update the woitem records failed');
