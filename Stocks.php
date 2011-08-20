@@ -392,7 +392,7 @@ if (isset($_POST['submit'])) {
 											VALUES ( 0,
 												'" . $JournalNo . "',
 												'" . Date('Y-m-d') . "',
-												'" . GetPeriod(Date('Y-m-d'),$db,true) . "',
+												'" . GetPeriod(Date($_SESSION['DefaultDateFormat']),$db,true) . "',
 												'" . $NewStockAct . "',
 												'" . $StockID . ' ' . _('Change stock category') . "',
 												'" . ($UnitCost* $StockQtyRow[0]) . "')";
@@ -409,7 +409,7 @@ if (isset($_POST['submit'])) {
 											VALUES ( 0,
 												'" . $JournalNo . "',
 												'" . Date('Y-m-d') . "',
-												'" . GetPeriod(Date('Y-m-d'),$db,true) . "',
+												'" . GetPeriod(Date($_SESSION['DefaultDateFormat']),$db,true) . "',
 												'" . $OldStockAccount . "',
 												'" . $StockID . ' ' . _('Change stock category') . "',
 												'" . (-$UnitCost* $StockQtyRow[0]) . "')";
@@ -445,7 +445,7 @@ if (isset($_POST['submit'])) {
 											VALUES ( 0,
 												'" . $JournalNo . "',
 												'" . Date('Y-m-d') . "',
-												'" . GetPeriod(Date('Y-m-d'),$db,true) . "',
+												'" . GetPeriod(Date($_SESSION['DefaultDateFormat']),$db,true) . "',
 												'" . $NewWipAct . "',
 												'" . $StockID . ' ' . _('Change wip category') . "',
 												'" . $WIPValue . "')";
@@ -462,7 +462,7 @@ if (isset($_POST['submit'])) {
 											VALUES ( 0,
 												'" . $JournalNo . "',
 												'" . Date('Y-m-d') . "',
-												'" . GetPeriod(Date('Y-m-d'),$db,true) . "',
+												'" . GetPeriod(Date($_SESSION['DefaultDateFormat']),$db,true) . "',
 												'" . $OldWipAccount . "',
 												'" . $StockID . ' ' . _('Change wip category') . "',
 												'" . -$WIPValue . "')";
