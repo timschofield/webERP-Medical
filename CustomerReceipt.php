@@ -1016,10 +1016,10 @@ if (((isset($_SESSION['CustomerRecord'])
 //	echo '<tr><td>' . _('Narrative') . ':</td>
 //		<td><input tabindex="13" type="text" name="Narrative" maxlength="30" size="32" value="' . $_POST['Narrative'] . '" /></td></tr>';
 	echo '<td>' . _('Narrative') . ':</td>';
-	echo '<td><textarea name="Narrative"  cols="40" rows="1"></textarea></td>';
+	echo '<td><textarea tabindex="13" name="Narrative"  cols="40" rows="1"></textarea></td>';
 	echo '</table>';
 	echo '<br /><div class="centre"><input tabindex="14" type="submit" name="Process" value="' . _('Accept') . '" />';
-	echo '<input tabindex="14" type="submit" name="Cancel" value="' . _('Cancel') . '" /></div>';
+	echo '<input tabindex="15" type="submit" name="Cancel" value="' . _('Cancel') . '" /></div>';
 
 } elseif (isset($_SESSION['ReceiptBatch']) AND !isset($_POST['GLEntry'])){
 
