@@ -6,7 +6,7 @@ function ChooseMenuOption($ch, $RootPath, $ServerPath, $TestSessionID, $IndexPag
 		$i++;
 	} while ($i<sizeOf($IndexPage[1]) and $IndexPage[1][$i]['value'] != $MenuOption);
 	if ($i>=sizeOf($IndexPage[1])) {
-		error_log('Error finding module '.$Module.'. Link not found.'."\n", 3, '/home/tim/weberp'.date('Y-m-d').'.log');
+		error_log('Error finding option '.$MenuOption.'. Link not found.'."\n", 3, '/home/tim/weberp'.date('Ymd').'.log');
 		return false;
 	}
 

@@ -5,6 +5,7 @@ class URLDetails {
 	private $SessionID;
 	private $URL;
 	private $PostArray;
+	private $FormDetails;
 	public $xml;
 	public $Links;
 
@@ -75,7 +76,7 @@ class URLDetails {
 					$Texts['text'][$k][$name]=(string)$result->item($i)->attributes->getNamedItem($name)->nodeValue;
 				}
 				if (!isset($Texts['text'][$k]['maxlength'])) {
-					error_log('**Warning** '.$Texts['text'][$k]['name'].' in '.$this->GetURL().' has no maxlength attribute set.'."\n", 3, '/home/tim/weberp'.date('Ymd').'.log');
+					error_log('**Warning** '.$Texts['text'][$k]['name'].' in '.$this->GetURL().' has no maxlength attribute set.'."\n\n", 3, '/home/tim/weberp'.date('Ymd').'.log');
 				}
 				$k++;
 			}
@@ -179,7 +180,7 @@ class URLDetails {
 		return $Selects;
 	}
 
-	private function GetHREFDetails() {
+	public function GetHREFDetails() {
 		$Links=array();
 		$result=$this->xml->getElementsByTagName('a');
 		$k=0;
@@ -194,12 +195,25 @@ class URLDetails {
 		return $Links;
 	}
 
+	public function GetFormAction() {
+		$Action='';
+		$Passwords=array();
+		$result=$this->xml->getElementsByTagName('form');
+		$k=0;
+		for ($i=0; $i<$result->length; $i++) {
+			$Action=(string)$result->item($i)->attributes->getNamedItem('action')->nodeValue;
+		}
+		return $Action;
+	}
+
 	public function GetFormDetails() {
-		$this->FormDetails['Texts']=$this->GetTextDetails($this->xml);
-		$this->FormDetails['Passwords']=$this->GetPasswordDetails($this->xml);
-		$this->FormDetails['Selects']=$this->GetSelectDetails($this->xml);
-		$this->FormDetails['Submits']=$this->GetSubmitDetails($this->xml);
-		$this->FormDetails['Hiddens']=$this->GetHiddenDetails($this->xml);
+		$this->FormDetails['Texts']=$this->GetTextDetails();
+		$this->FormDetails['Passwords']=$this->GetPasswordDetails();
+		$this->FormDetails['Selects']=$this->GetSelectDetails();
+		$this->FormDetails['Submits']=$this->GetSubmitDetails();
+		$this->FormDetails['Hiddens']=$this->GetHiddenDetails();
+		$this->FormDetails['Action']=$this->GetFormAction();
+		return $this->FormDetails;
 	}
 
 	private function ValidateHTML($html) {
@@ -247,9 +261,8 @@ class URLDetails {
 		$this->Links=$this->GetHREFDetails();
 		$this->ValidateLinks($ServerPath, $ch);
 
-		$result[1] = $this->Links;
-
-		$this->GetFormDetails();
+		$result[1] = $this->GetHREFDetails();
+		$result[2] = $this->GetFormDetails();
 
 		return $result;
 
