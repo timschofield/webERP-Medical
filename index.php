@@ -501,7 +501,8 @@ $MenuItems['system']['Maintenance']['Caption'] = array (_('Inventory Categories 
 														_('Discount Category Maintenance'),
 														_('Units of Measure'),
 														_('MRP Available Production Days'),
-														_('MRP Demand Types')
+														_('MRP Demand Types'),
+														_('Create and Manage Database Backups')
 														);
 
 $MenuItems['system']['Maintenance']['URL'] = array ('/StockCategories.php',
@@ -509,7 +510,8 @@ $MenuItems['system']['Maintenance']['URL'] = array ('/StockCategories.php',
 													'/DiscountCategories.php',
 													'/UnitsOfMeasure.php',
 													'/MRPCalendar.php',
-													'/MRPDemandTypes.php'
+													'/MRPDemandTypes.php',
+													'/BackupDatabase.php'
 													);
 
 if (isset($SupplierLogin) and $SupplierLogin==1){
