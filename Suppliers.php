@@ -822,11 +822,11 @@ if (!isset($SupplierID)) {
 		</tr>';
 	echo '<tr>
 			<td>' . _('Telephone') . ':</td>
-			<td><input '.(in_array('Name',$Errors) ? 'class="inputerror"' : '').' type="text" name="Phone" value="' . $_POST['Phone'] . '" size="42" maxlength="40" /></td>
+			<td><input '.(in_array('Name',$Errors) ? 'class="inputerror"' : '').' type="text" name="Phone" value="' . $_POST['Phone'] . '" size="25" maxlength="25" /></td>
 		</tr>';
 	echo '<tr>
 			<td>' . _('Facsimile') . ':</td>
-			<td><input '.(in_array('Name',$Errors) ? 'class="inputerror"' : '').' type="text" name="Fax" value="' . $_POST['Fax'] . '" size="42" maxlength="40" /></td>
+			<td><input '.(in_array('Name',$Errors) ? 'class="inputerror"' : '').' type="text" name="Fax" value="' . $_POST['Fax'] . '" size="25" maxlength="25" /></td>
 		</tr>';
 	echo '<tr>
 			<td>' . _('Email Address') . ':</td>
@@ -933,7 +933,7 @@ if (!isset($SupplierID)) {
 	echo '</select></td></tr></table>';
 
 	if (isset($_POST['New'])) {
-		echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Add These New Supplier Details') . '" /></form></div>';
+		echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Add These New Supplier Details') . '" /></div></form>';
 	} else {
 		echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Update Supplier') . '" /></div><br />';
 //		echo '<font color=red><b>' . _('WARNING') . ': ' . _('There is no second warning if you hit the delete button below') . '. ' . _('However checks will be made to ensure there are no outstanding purchase orders or existing accounts payable transactions before the deletion is processed') . '<br /></font></b>';
