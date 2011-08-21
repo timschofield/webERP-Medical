@@ -273,8 +273,8 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 				if ($POLine->Deleted==true) {
 					if ($POLine->PODetailRec!='') {
 						$sql="DELETE FROM purchorderdetails WHERE podetailitem='" . $POLine->PODetailRec . "'";
-						$ErrMsg =  _('The purchase order could not be deleted because');
-						$DbgMsg = _('The SQL statement used to delete the purchase order header record, that failed was');
+						$ErrMsg =  _('The purchase order detail line could not be deleted because');
+						$DbgMsg = _('The SQL statement used to delete the purchase order detail record, that failed was');
 						$result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 					}
 				} else if ($POLine->PODetailRec=='') {
