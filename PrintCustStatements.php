@@ -35,7 +35,7 @@ if (isset($_GET['ToCust'])) {
 }
 
 
-If (isset($_POST['PrintPDF']) && isset($_POST['FromCust']) && $_POST['FromCust']!=''){
+If (isset($_POST['PrintPDF']) and isset($_POST['FromCust']) and $_POST['FromCust']!=''){
 	$_POST['FromCust'] = mb_strtoupper($_POST['FromCust']);
 
 	If (!isset($_POST['ToCust'])){
@@ -379,7 +379,7 @@ If (isset($_POST['PrintPDF']) && isset($_POST['FromCust']) && $_POST['FromCust']
 			$pdf->line($Left_Margin, $YPos,$Perforation,$YPos);
 
 
-			if (mb_strlen($StmtHeader['lastpaiddate'])>1 && $StmtHeader['lastpaid']!=0){
+			if (mb_strlen($StmtHeader['lastpaiddate'])>1 and $StmtHeader['lastpaid']!=0){
 				$pdf->addText($Left_Margin+5, $Bottom_Margin+13, $FontSize, _('Last payment received').' ' . ConvertSQLDate($StmtHeader['lastpaiddate']) .
 					'    ' . _('Amount received was').' ' . number_format($StmtHeader['lastpaid'],2));
 
