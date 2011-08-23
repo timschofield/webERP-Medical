@@ -691,7 +691,7 @@ if (isset($_SESSION['CreditItems']->DebtorNo) and !isset($_POST['ProcessCredit']
 			/* do a loop round the items on the credit note to see that the item
 			is not already on this credit note */
 
-				if ($_SESSION['SO_AllowSameItemMultipleTimes']==0 && strcasecmp($OrderItem->StockID, $_POST['NewItem']) == 0) {
+				if ($_SESSION['SO_AllowSameItemMultipleTimes']==0 and strcasecmp($OrderItem->StockID, $_POST['NewItem']) == 0) {
 					$AlreadyOnThisCredit = 1;
 					prnMsg($_POST['NewItem'] . ' ' . _('is already on this credit - the system will not allow the same item on the credit note more than once. However you can change the quantity credited of the existing line if necessary'),'warn');
 				}
@@ -858,7 +858,7 @@ if (isset($_SESSION['CreditItems']->DebtorNo) and !isset($_POST['ProcessCredit']
 			/* do a loop round the items on the credit note to see that the item
 			is not already on this credit note */
 
-				if ($_SESSION['SO_AllowSameItemMultipleTimes']==0 && strcasecmp($OrderItem->StockID, $_POST['NewItem']) == 0) {
+				if ($_SESSION['SO_AllowSameItemMultipleTimes']==0 and strcasecmp($OrderItem->StockID, $_POST['NewItem']) == 0) {
 					$AlreadyOnThisCredit = 1;
 					prnMsg(_('The item selected is already on this credit the system will not allow the same item on the credit note more than once. However you can change the quantity credited of the existing line if necessary.'),'warn');
 				}
