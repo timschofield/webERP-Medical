@@ -32,7 +32,7 @@ Class SpecialOrder {
 	}
 
 	function add_to_order($LineNo, $Qty, $ItemDescr, $Price, $Cost, $StkCat, $ReqDelDate){
-		if ($Qty!=0 && isset($Qty)){
+		if ($Qty!=0 and isset($Qty)){
 			$this->LineItems[$LineNo] = new LineDetails($LineNo, $Qty, $ItemDescr, $Price, $Cost, $StkCat, $ReqDelDate);
 			$this->LinesOnOrder++;
 			Return 1;
