@@ -127,7 +127,7 @@ function DB_escape_string($String){
 
 function INTERVAL( $val, $Inter ) {
 	global $dbtype;
-	return "\n(CAST( (" . $val . ") as text ) || ' ". $Inter ."')::interval\n";
+	return "\n(CAST( (" . $val . ") as text ) or ' ". $Inter ."')::interval\n";
 }
 function DB_show_tables (&$Conn){
 	$Result =DB_query("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'",$Conn);
