@@ -239,7 +239,7 @@ if (isset($StockItemsResult)) {
 	} else {
 		$ClosedOrOpen = 1;
 	}
-	if (isset($_REQUEST['WO']) && $_REQUEST['WO'] !='') {
+	if (isset($_REQUEST['WO']) and $_REQUEST['WO'] !='') {
 			$SQL = "SELECT workorders.wo,
 					woitems.stockid,
 					stockmaster.description,
