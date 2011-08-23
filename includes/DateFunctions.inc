@@ -250,7 +250,7 @@ and converts to a yyyymmdd - EANCOM format 102*/
 		return 0;
 	}
 
-	if (($_SESSION['DefaultDateFormat']=='d/m/Y') || ($_SESSION['DefaultDateFormat']=='d.m.Y')){
+	if (($_SESSION['DefaultDateFormat']=='d/m/Y') or ($_SESSION['DefaultDateFormat']=='d.m.Y')){
 		return $Date_Array[2].$Date_Array[1].$Date_Array[0];
 
 	} elseif ($_SESSION['DefaultDateFormat']=='m/d/Y') {
