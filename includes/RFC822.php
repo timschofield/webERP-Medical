@@ -151,7 +151,7 @@ class Mail_RFC822
             continue;
         }
 
-        if ($this->address === false || isset($this->error)) {
+        if ($this->address === false or isset($this->error)) {
             return false;
         }
 
@@ -163,7 +163,7 @@ class Mail_RFC822
         for ($i = 0; $i < count($this->addresses); $i++){
 
             if (($return = $this->_validateAddress($this->addresses[$i])) === false
-                || isset($this->error)) {
+                or isset($this->error)) {
                 return false;
             }
 
@@ -291,10 +291,10 @@ class Mail_RFC822
 
         for ($i = 0; $i < count($parts); $i++) {
             if ($this->_hasUnclosedQuotes($string)
-                || $this->_hasUnclosedBrackets($string, '<>')
-                || $this->_hasUnclosedBrackets($string, '[]')
-                || $this->_hasUnclosedBrackets($string, '()')
-                || mb_substr($string, -1) == '\\') {
+                or $this->_hasUnclosedBrackets($string, '<>')
+                or $this->_hasUnclosedBrackets($string, '[]')
+                or $this->_hasUnclosedBrackets($string, '()')
+                or mb_substr($string, -1) == '\\') {
                 if (isset($parts[$i + 1])) {
                     $string = $string . $char . $parts[$i + 1];
                 } else {
@@ -367,7 +367,7 @@ class Mail_RFC822
     {
         $parts = explode($char, $string);
         for ($i = 0; $i < count($parts); $i++){
-            if (mb_substr($parts[$i], -1) == '\\' || $this->_hasUnclosedQuotes($parts[$i]))
+            if (mb_substr($parts[$i], -1) == '\\' or $this->_hasUnclosedQuotes($parts[$i]))
                 $num--;
             if (isset($parts[$i + 1]))
                 $parts[$i + 1] = $parts[$i] . $char . $parts[$i + 1];
@@ -598,7 +598,7 @@ class Mail_RFC822
             $phrase     = trim($name);
             $route_addr = trim(mb_substr($mailbox, mb_strlen($name.'<'), -1));
 
-            if ($this->_validatePhrase($phrase) === false || ($route_addr = $this->_validateRouteAddr($route_addr)) === false)
+            if ($this->_validatePhrase($phrase) === false or ($route_addr = $this->_validateRouteAddr($route_addr)) === false)
                 return false;
 
         // Only got addr-spec
