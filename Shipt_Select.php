@@ -33,7 +33,7 @@ If (isset($_POST['ResetPart'])) {
      unset($SelectedStockItem);
 }
 
-If (isset($ShiptRef) && $ShiptRef!="") {
+If (isset($ShiptRef) and $ShiptRef!="") {
 	if (!is_numeric($ShiptRef)){
 		  echo '<br />';
 		  prnMsg( _('The Shipment Number entered MUST be numeric') );
@@ -224,7 +224,7 @@ Code	 Description	On Hand		 Orders Ostdg     Units		 Code	Description 	 On Hand 
 
 	//figure out the SQL required from the inputs available
 
-	if (isset($ShiptRef) && $ShiptRef !="") {
+	if (isset($ShiptRef) and $ShiptRef !="") {
 		$SQL = "SELECT shipments.shiptref,
 				vessel,
 				voyageref,
