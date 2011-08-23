@@ -830,7 +830,7 @@ if (!isset($SupplierID)) {
 		</tr>';
 	echo '<tr>
 			<td>' . _('Email Address') . ':</td>
-			<td><input '.(in_array('Name',$Errors) ? 'class="inputerror"' : '').' type="text" name="Email" value="' . $_POST['Email'] . '" size="42" maxlength="40" /></td>
+			<td><input class="email" '.(in_array('Name',$Errors) ? 'class="inputerror"' : '').' type="text" name="Email" value="' . $_POST['Email'] . '" size="42" maxlength="40" /></td>
 		</tr>';
 	echo '<tr><td>' . _('Supplier Type') . ':</td><td><select name="SupplierType">';
 	$result=DB_query("SELECT typeid, typename FROM suppliertype", $db);

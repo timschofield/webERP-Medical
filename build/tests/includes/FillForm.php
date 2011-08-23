@@ -2,8 +2,16 @@
 
 function RandomASCIIString($MaxLength) {
 	$Answer = '';
+	$Length = rand(0, $MaxLength-5);
+	for ($i=0; $i<$Length; $i++) {
+		$Answer .= chr(rand(32, 127));
+	}
+	return $Answer;
+}
+
+function RandomEmailString($MaxLength) {
+	$Answer = '';
 	$Length = rand(0, $MaxLength);
-	echo $Length.'xxxx'.$MaxLength;
 	for ($i=0; $i<$Length; $i++) {
 		$Answer .= chr(rand(32, 127));
 	}
@@ -32,6 +40,8 @@ function FillFormWithRandomData($FormDetails) {
 				$PostData[$Field['name']]=RandomNumberString($Field['maxlength']);
 			} else if (isset($Field['class']) and $Field['class']=='date') {
 				$PostData[$Field['name']]=RandomDateString('2000-01-01', '2012-12-31');
+			} else if (isset($Field['class']) and $Field['class']=='email') {
+				$PostData[$Field['name']]=RandomEmailString($Field['maxlength']);
 			} else {
 				$PostData[$Field['name']]=RandomASCIIString($Field['maxlength']);
 			}
