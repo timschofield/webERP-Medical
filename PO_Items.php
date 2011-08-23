@@ -64,7 +64,7 @@ if (isset($_POST['StockID2']) AND !isset($_GET['Edit'])) {
 	$_POST['gw'] = $myrow['kgs'];
 	$_POST['CuFt'] = $myrow['volume'];
 	$_POST['MinimumOrderQty'] = $myrow['minorderqty'];
-} // end if (isset($_POST['StockID2']) && $_GET['Edit']=='')
+} // end if (isset($_POST['StockID2']) and $_GET['Edit']=='')
 
 if (isset($_POST['UpdateLines']) OR isset($_POST['Commit'])) {
 	foreach ($_SESSION['PO'.$identifier]->LineItems as $POLine) {
@@ -501,7 +501,7 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 	$DbgMsg = _('The SQL statement that failed was');
 	$SearchResult = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
-	if (DB_num_rows($SearchResult)==0 && $debug==1){
+	if (DB_num_rows($SearchResult)==0 and $debug==1){
 		prnMsg( _('There are no products to display matching the criteria provided'),'warn');
 	}
 	if (DB_num_rows($SearchResult)==1){
