@@ -465,7 +465,7 @@ if (isset($_POST['PrintPDF'])
 
     echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
 
-	if ((!isset($_POST['FromCriteria']) || !isset($_POST['ToCriteria']))) {
+	if ((!isset($_POST['FromCriteria']) or !isset($_POST['ToCriteria']))) {
 
 	/*if $FromCriteria is not set then show a form to allow input	*/
 
