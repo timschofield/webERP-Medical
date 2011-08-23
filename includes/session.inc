@@ -178,7 +178,7 @@ if (isset($_SESSION['UpdateCurrencyRatesDaily'])){
 }
 
 
-If (isset($_POST['Theme']) && ($_SESSION['UsersRealName'] == $_POST['RealName'])) {
+if (isset($_POST['Theme']) and ($_SESSION['UsersRealName'] == $_POST['RealName'])) {
 	$_SESSION['Theme'] = $_POST['Theme'];
 	$theme = $_POST['Theme'];
 } elseif (!isset($_SESSION['Theme'])) {
