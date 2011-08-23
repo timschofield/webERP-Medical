@@ -7,7 +7,7 @@ include('includes/session.inc');
 include('includes/SQL_CommonFunctions.inc');
 
 //Get Out if we have no order number to work with
-If (!isset($_GET['QuotationNo']) || $_GET['QuotationNo']==""){
+If (!isset($_GET['QuotationNo']) or $_GET['QuotationNo']==""){
 		$title = _('Select Quotation To Print');
 		include('includes/header.inc');
 		echo '<div class="centre"><br /><br /><br />';
