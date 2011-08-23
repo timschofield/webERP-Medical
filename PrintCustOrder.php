@@ -7,7 +7,7 @@ include('includes/class.pdf.php');
 include('includes/SQL_CommonFunctions.inc');
 
 //Get Out if we have no order number to work with
-If (!isset($_GET['TransNo']) || $_GET['TransNo']==""){
+If (!isset($_GET['TransNo']) or $_GET['TransNo']==""){
 	$title = _('Select Order To Print');
 	include('includes/header.inc');
 	echo '<div class="centre">';
