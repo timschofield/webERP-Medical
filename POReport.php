@@ -97,7 +97,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 
 	// Add more to WHERE statement, if user entered something for the part number,supplierid, name
 	$WherePart = ' ';
-	if (mb_strlen($PartNumber) > 0 && $PartNumberOp == 'LIKE') {
+	if (mb_strlen($PartNumber) > 0 and $PartNumberOp == 'LIKE') {
 		$PartNumber = $PartNumber . '%';
 	}
 	else {
@@ -123,7 +123,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 		$WhereSupplierID = ' ';
 	}
 	$WhereSupplierName = ' ';
-	if (mb_strlen($SupplierName) > 0 && $SupplierNameOp == 'LIKE') {
+	if (mb_strlen($SupplierName) > 0 and $SupplierNameOp == 'LIKE') {
 		$SupplierName = $SupplierName . '%';
 	}
 	else {
@@ -928,7 +928,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 
 	# Add more to WHERE statement, if user entered something for the part number,supplierid, name
 	$WherePart = ' ';
-	if (mb_strlen($PartNumber) > 0 && $PartNumberOp == 'LIKE') {
+	if (mb_strlen($PartNumber) > 0 and $PartNumberOp == 'LIKE') {
 		$PartNumber = $PartNumber . '%';
 	}
 	else {
@@ -954,7 +954,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 		$WhereSupplierID = ' ';
 	}
 	$WhereSupplierName = ' ';
-	if (mb_strlen($SupplierName) > 0 && $SupplierNameOp == 'LIKE') {
+	if (mb_strlen($SupplierName) > 0 and $SupplierNameOp == 'LIKE') {
 		$SupplierName = $SupplierName . '%';
 	}
 	else {
