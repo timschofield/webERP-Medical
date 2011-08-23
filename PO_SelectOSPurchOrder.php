@@ -39,7 +39,7 @@ if (isset($_POST['ResetPart'])){
 	 unset($SelectedStockItem);
 }
 
-if (isset($OrderNumber) && $OrderNumber!='') {
+if (isset($OrderNumber) and $OrderNumber!='') {
 	if (!is_numeric($OrderNumber)){
 		echo '<br /><b>' . _('The Order Number entered') . ' <U>' . _('MUST') . '</U> ' . _('be numeric') . '.</b><br />';
 		unset ($OrderNumber);
@@ -270,7 +270,7 @@ else {
 		$StatusCriteria = " AND purchorders.status='Cancelled' ";
 	}
 
-	if (isset($OrderNumber) && $OrderNumber !='') {
+	if (isset($OrderNumber) and $OrderNumber !='') {
 		$SQL = "SELECT purchorders.orderno,
 										suppliers.suppname,
 										purchorders.orddate,
