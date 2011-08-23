@@ -78,8 +78,8 @@ function GetAPIErrorMessages( $errcodes )
     foreach ($errcodes as $errnum) {
 	$rm = array ($errnum );
 	if (isset ($ErrorDescription[$errnum]) ) {
-	    if ($errnum == DatabaseUpdateFailed &&
-			isset ($_SESSION['db_err_msg']) &&
+	    if ($errnum == DatabaseUpdateFailed and
+			isset ($_SESSION['db_err_msg']) and
 			mb_strlen ($_SESSION['db_err_msg']) > 0 )
 		$rm[] = $ErrorDescription[$errnum] . ":\n" . $_SESSION['db_err_msg'];
 	    else
