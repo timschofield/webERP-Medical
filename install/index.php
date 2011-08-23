@@ -12,7 +12,7 @@ if(!defined('SESSION_STARTED')) {
 $_SESSION['MaxLogoSize'] = 10 * 1024;	    // Limit logo file size.
 
 // Check if the page has been reloaded
-if(!isset($_GET['sessions_checked']) || $_GET['sessions_checked'] != 'true') {
+if(!isset($_GET['sessions_checked']) or $_GET['sessions_checked'] != 'true') {
 	// Set session variable
 	$_SESSION['session_support'] = '<font class="good">Enabled</font>';
 	// Reload page
