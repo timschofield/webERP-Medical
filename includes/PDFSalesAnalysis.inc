@@ -65,7 +65,7 @@ While ($myrow = DB_fetch_array($result)){
 	}
 	if ($ThisLineHasOutput==True){
 
-		if ($myrow['col5']!=$GrpData3 && $myrow['col5']!='0' && $myrow['col7']!='0'){
+		if ($myrow['col5']!=$GrpData3 and $myrow['col5']!='0' and $myrow['col7']!='0'){
 			/*Totals only relevant to GrpByLevel 3 if GrpByLevel 4 also used */
 			if ($Counter > 0){ /*Dont want to print totals if this is the first record */
 				$TotalText = mb_substr(_('TOTAL') . ' ' . $LastLine['col5'] . ' - ' . $LastLine['col6'],0,33);
@@ -119,7 +119,7 @@ While ($myrow = DB_fetch_array($result)){
 			}
 		}
 
-		if ($myrow['col3']!=$GrpData2 && $myrow['col3']!='0' && $myrow['col5']!='0'){
+		if ($myrow['col3']!=$GrpData2 and $myrow['col3']!='0' and $myrow['col5']!='0'){
 		/*Totals only relevant to GrpByLevel 2 if GrpByLevel 3 also used */
 			if ($Counter > 0){ /*Dont want to print totals if this is the first record */
 				$TotalText = mb_substr(_('TOTAL') . ' ' . $LastLine['col3'] . ' - ' . $LastLine['col4'],0,43);
@@ -172,7 +172,7 @@ While ($myrow = DB_fetch_array($result)){
 			}/*end if Counter > 0 */
 		}
 
-		if ($myrow['col1']!=$GrpData1  && $myrow['col3']!='0'){
+		if ($myrow['col1']!=$GrpData1  and $myrow['col3']!='0'){
 			/*Totals only relevant to GrpByLevel 1 if GrpByLevel 2 also used */
 			if ($Counter > 0){ /*Dont want to print totals if this is the first record */
 				$TotalText = mb_substr(_('TOTAL') . ' ' . $LastLine['col1'] . ' - ' . $LastLine['col2'],0,46);
@@ -306,7 +306,7 @@ While ($myrow = DB_fetch_array($result)){
 	} /*The line has some positive amount on it */
 } /*end of the data loop to print lines */
 
-if ($LastLine['col5']!='0' && $LastLine['col7']!='0'){
+if ($LastLine['col5']!='0' and $LastLine['col7']!='0'){
 /* if GrpBY3 and GrpBy4 are both set need to show totals for GrpBy3 */
 if ($Counter>0){ /*Dont want to print totals if this is the first record */
 	$TotalText = mb_substr(_('TOTAL') . ' ' . $LastLine['col5'] . ' - ' . $LastLine['col6'],0,33);
@@ -358,7 +358,7 @@ if ($Counter>0){ /*Dont want to print totals if this is the first record */
 }
 }
 
-if ($LastLine['col3']!='0' && $LastLine['col5']!='0'){
+if ($LastLine['col3']!='0' and $LastLine['col5']!='0'){
 /* if GrpBY2 and GrpBy3 are both set need to show totals for GrpBy2 */
 if ($Counter>0){ /*Dont want to print totals if this is the first record */
 	$TotalText = mb_substr(_('TOTAL') . ' ' . $LastLine['col3'] . ' - ' . $LastLine['col4'],0,33);
