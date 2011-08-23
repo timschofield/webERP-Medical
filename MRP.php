@@ -626,10 +626,10 @@ function LevelNetting(&$db,$part,$eoq,$PanSize,$ShrinkFactor) {
 	$totalrequirement = 0;
 	$totalsupply = 0;
 
-	if ($Requirementcount > 0 && $supplycount > 0) {
+	if ($Requirementcount > 0 and $supplycount > 0) {
 		$totalrequirement += $Requirements[$reqi]['quantity'];
 		$totalsupply += $supplies[$supi]['supplyquantity'];
-		while ($totalrequirement > 0 && $totalsupply > 0) {
+		while ($totalrequirement > 0 and $totalsupply > 0) {
 				$supplies[$supi]['updateflag'] = 1;
 				// ******** Put leeway calculation in here ********
 				$duedate = ConvertSQLDate($supplies[$supi]['duedate']);
@@ -743,7 +743,7 @@ function LevelNetting(&$db,$part,$eoq,$PanSize,$ShrinkFactor) {
 	// necessary, so change date
 
 	foreach($supplies as $supply) {
-		if ($supply['supplyquantity'] > 0  && $supply['updateflag'] == 0) {
+		if ($supply['supplyquantity'] > 0  and $supply['updateflag'] == 0) {
 			$id = $supply['id'];
 			$sql = "UPDATE mrpsupplies SET mrpdate ='2050-12-31' WHERE id = '".$id."'
 					  AND ordertype <> 'QOH'";
