@@ -170,7 +170,7 @@ if( !$automake and !isset($filename) ) {
 
 
 // See if we need to automake this image
-if( $automake and !isset($filename) || $useblank ) {
+if( $automake and !isset($filename) or $useblank ) {
 	// Have we got height and width specs
 	if( !isset($width) )
 		$width = 64;
@@ -269,7 +269,7 @@ if( $automake and !isset($filename) || $useblank ) {
 	}
 	$sw = imagesx($im);
 	$sh = imagesy($im);
-	if ( isset($width) and ($width != $sw) || isset($height) and ($height != $sh)) {
+	if ( isset($width) and ($width != $sw) or isset($height) and ($height != $sh)) {
 		if( !isset($width) )
 			$width = imagesx($im);
 		if( !isset($height) )
