@@ -88,7 +88,7 @@ if (isset($_POST['UpdateStatus']) AND $_POST['UpdateStatus']!='') {
 
 		if ($_POST['Status'] == 'Authorised') {
 			if ($AuthorityLevel > $OrderTotal) {
-				$_SESSION['PO'.$identifier]->StatComments = date($_SESSION['DefaultDateFormat']) . ' - ' . _('Authorised by') . $UserChangedStatus . $_POST['StatusComments'] . '<br />' . html_entity_decode($_POST['StatusCommentsComplete'],ENT_QUOTES,UTF-8);
+				$_SESSION['PO'.$identifier]->StatComments = date($_SESSION['DefaultDateFormat']) . ' - ' . _('Authorised by') . $UserChangedStatus . $_POST['StatusComments'] . '<br />' . html_entity_decode($_POST['StatusCommentsComplete'],ENT_QUOTES,'UTF-8');
 				$_SESSION['PO'.$identifier]->AllowPrintPO=1;
 			} else {
 				$OKToUpdateStatus=0;
@@ -101,7 +101,7 @@ if (isset($_POST['UpdateStatus']) AND $_POST['UpdateStatus']!='') {
 
 		if ($_POST['Status'] == 'Completed') {
 			if ($AuthorityLevel > $OrderTotal) {
-				$_SESSION['PO'.$identifier]->StatComments = date($_SESSION['DefaultDateFormat']) . ' - ' . _('Completed by') . $UserChangedStatus . $_POST['StatusComments'] . '<br />' . html_entity_decode($_POST['StatusCommentsComplete'],ENT_QUOTES,UTF-8);
+				$_SESSION['PO'.$identifier]->StatComments = date($_SESSION['DefaultDateFormat']) . ' - ' . _('Completed by') . $UserChangedStatus . $_POST['StatusComments'] . '<br />' . html_entity_decode($_POST['StatusCommentsComplete'],ENT_QUOTES,'UTF-8');
 				$_SESSION['PO'.$identifier]->AllowPrintPO=1;
 			} else {
 				$OKToUpdateStatus=0;
@@ -842,9 +842,9 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 
 	echo '<tr><td>' . _('Status Comment') . ':</td>
 						<td><input type="text" name="StatusComments" size="50" /></td></tr>
-					<tr><td colspan="2"><b>' .  html_entity_decode($_SESSION['PO'.$identifier]->StatComments,ENT_QUOTES,UTF-8) .'</b></td></tr>';
+					<tr><td colspan="2"><b>' .  html_entity_decode($_SESSION['PO'.$identifier]->StatComments,ENT_QUOTES,'UTF-8') .'</b></td></tr>';
 	//need to use single quotes as double quotes inside the string of StatusComments
-	echo "<input type='hidden' name='StatusCommentsComplete' value='" . addslashes(html_entity_decode($_SESSION['PO'.$identifier]->StatComments,ENT_QUOTES,UTF-8)) ."' />";
+	echo "<input type='hidden' name='StatusCommentsComplete' value='" . addslashes(html_entity_decode($_SESSION['PO'.$identifier]->StatComments,ENT_QUOTES,'UTF-8')) ."' />";
 	echo '<tr><td><input type="submit" name="UpdateStatus" value="' . _('Status Update') .'" /></td>';
 
 	echo '</tr></table></td>';

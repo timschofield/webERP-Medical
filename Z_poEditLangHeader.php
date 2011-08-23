@@ -39,7 +39,7 @@ if (isset($_POST['submit'])) {
 	$fpOut = fopen($PathToNewLanguage, 'w');
 
 	for ($i=1; $i<=17; $i++) {
-		$Result = fputs($fpOut, stripslashes(html_entity_decode($_POST['Header_'.$i],ENT_QUOTES,UTF-8))."\n");
+		$Result = fputs($fpOut, stripslashes(html_entity_decode($_POST['Header_'.$i],ENT_QUOTES,'UTF-8'))."\n");
 	}
 
 	prnMsg (_('Writing the rest of the language file') . '.....<br />', 'info', ' ');

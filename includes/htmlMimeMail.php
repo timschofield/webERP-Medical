@@ -141,8 +141,8 @@ class htmlMimeMail
 		$this->smtp_params['port'] = $_SESSION['SMTPSettings']['port'];
 		$this->smtp_params['helo'] = $_SESSION['SMTPSettings']['heloaddress'];
 		$this->smtp_params['auth'] = $_SESSION['SMTPSettings']['auth'];
-		$this->smtp_params['user'] = html_entity_decode($_SESSION['SMTPSettings']['username']);
-		$this->smtp_params['pass'] = html_entity_decode($_SESSION['SMTPSettings']['password']);
+		$this->smtp_params['user'] = html_entity_decode($_SESSION['SMTPSettings']['username'],ENT_QUOTES,UTF-8);
+		$this->smtp_params['pass'] = html_entity_decode($_SESSION['SMTPSettings']['password'],ENT_QUOTES,UTF-8);
 
 		/**
         * Make sure the MIME version header is first.
