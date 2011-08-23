@@ -58,7 +58,7 @@ if (isset($_POST['PrintPDF']) OR isset($_POST['PDFTest']) ) {
 					$_POST['Currency'],
 					$_POST['SalesType'],
 					$_POST['StockID'],
-					FormatDateForSQL($_POST['EffectiveDate']);
+					FormatDateForSQL($_POST['EffectiveDate']));
 
 			if ($ok)
 				exit(); // the print was success
