@@ -6,14 +6,14 @@ define ('LIKE','ILIKE');
 /* $PgConnStr = $PgConnStr = "host=".$host." dbname=".$_SESSION['DatabaseName']; */
 $PgConnStr = 'dbname='.$_SESSION['DatabaseName'];
 
-if ( isset($host) && ($host != "")) {
+if ( isset($host) and ($host != "")) {
 	$PgConnStr = 'host='.$host.' '.$PgConnStr;
 }
 
-if ( isset( $dbuser ) && ($dbuser != "") ) {
+if ( isset( $dbuser ) and ($dbuser != "") ) {
     // if we have a user we need to use password if supplied
     $PgConnStr .= " user=".$dbuser;
-    if ( isset( $dbpassword ) && ($dbpassword != "") ) {
+    if ( isset( $dbpassword ) and ($dbpassword != "") ) {
 	$PgConnStr .= " password=".$dbpassword;
     }
 }
