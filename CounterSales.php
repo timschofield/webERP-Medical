@@ -709,13 +709,13 @@ $counter =0;
 foreach ($_SESSION['Items'.$identifier]->LineItems as $OrderLine) {
 
 	if ($OrderLine->DiscCat !="" AND ! in_array($OrderLine->DiscCat,$DiscCatsDone)){
-		$DiscCatsDone[$counter]=$OrderLine->DiscCat;
-		$QuantityOfDiscCat =0;
+		$DiscCatsDone[]=$OrderLine->DiscCat;
+		$QuantityOfDiscCat = 0;
 
-		foreach ($_SESSION['Items'.$identifier]->LineItems as $StkItems_2) {
+		foreach ($_SESSION['Items'.$identifier]->LineItems as $OrderLine_2) {
 			/* add up total quantity of all lines of this DiscCat */
-			if ($StkItems_2->DiscCat==$OrderLine->DiscCat){
-				$QuantityOfDiscCat += $StkItems_2->Quantity;
+			if ($OrderLine_2->DiscCat==$OrderLine->DiscCat){
+				$QuantityOfDiscCat += $OrderLine_2->Quantity;
 			}
 		}
 		$result = DB_query("SELECT MAX(discountrate) AS discount
@@ -724,11 +724,17 @@ foreach ($_SESSION['Items'.$identifier]->LineItems as $OrderLine) {
 											AND discountcategory ='" . $OrderLine->DiscCat . "'
 											AND quantitybreak <='" . $QuantityOfDiscCat . "'",$db);
 		$myrow = DB_fetch_row($result);
+		if ($myrow[0]==NULL){
+			$DiscountMatrixRate = 0;
+		} else {
+			$DiscountMatrixRate = $myrow[0];
+		}
 		if ($myrow[0]!=0){ /* need to update the lines affected */
-			foreach ($_SESSION['Items'.$identifier]->LineItems as $StkItems_2) {
+			foreach ($_SESSION['Items'.$identifier]->LineItems as $OrderLine_2) {
 				/* add up total quantity of all lines of this DiscCat */
-				if ($StkItems_2->DiscCat==$OrderLine->DiscCat AND $StkItems_2->DiscountPercent == 0){
-					$_SESSION['Items'.$identifier]->LineItems[$StkItems_2->LineNumber]->DiscountPercent = $myrow[0];
+				if ($OrderLine_2->DiscCat==$OrderLine->DiscCat){
+					$_SESSION['Items'.$identifier]->LineItems[$OrderLine_2->LineNumber]->DiscountPercent = $DiscountMatrixRate;
+					$_SESSION['Items'.$identifier]->LineItems[$OrderLine_2->LineNumber]->GPPercent = (($_SESSION['Items'.$identifier]->LineItems[$OrderLine_2->LineNumber]->Price*(1-$DiscountMatrixRate)) - $_SESSION['Items'.$identifier]->LineItems[$OrderLine_2->LineNumber]->StandardCost*$ExRate)/($_SESSION['Items'.$identifier]->LineItems[$OrderLine_2->LineNumber]->Price *(1-$DiscountMatrixRate)/100);
 				}
 			}
 		}
