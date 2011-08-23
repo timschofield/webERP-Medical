@@ -36,7 +36,7 @@ echo '<a href="' . $rootpath . '/SelectProduct.php">' . _('Back to Items') . '</
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Stock') . '" alt="" />' . ' ' . $title . '</p>';
 
-if (isset($_FILES['ItemPicture']) AND $_FILES['ItemPicture']['name'] !='') {
+if (isset($_FILES['ItemPicture']) and $_FILES['ItemPicture']['name'] !='') {
 
 	$result	= $_FILES['ItemPicture']['error'];
  	$UploadTheFile = 'Yes'; //Assume all is well to start off with
@@ -879,7 +879,7 @@ if (!isset($_POST['KGS']) or $_POST['KGS']==''){
 if (!isset($_POST['Controlled']) or $_POST['Controlled']==''){
 	$_POST['Controlled']=0;
 }
-if (!isset($_POST['Serialised']) or $_POST['Serialised']=='' || $_POST['Controlled']==0){
+if (!isset($_POST['Serialised']) or $_POST['Serialised']=='' or $_POST['Controlled']==0){
 	$_POST['Serialised']=0;
 }
 if (!isset($_POST['DecimalPlaces']) or $_POST['DecimalPlaces']==''){
