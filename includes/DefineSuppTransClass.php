@@ -144,7 +144,7 @@ Class SuppTrans {
 								$AssetID=0,
 								$DecimalPlaces=2){
 
-		if ($This_QuantityInv!=0 && isset($This_QuantityInv)){
+		if ($This_QuantityInv!=0 and isset($This_QuantityInv)){
 			$this->GRNs[$GRNNo]->Modify($PODetailItem,
 										$ItemCode,
 										$ItemDescription,
@@ -165,7 +165,7 @@ Class SuppTrans {
 	}
 
 	function Copy_GRN_To_Trans($GRNSrc){
-		if ($GRNSrc->This_QuantityInv!=0 && isset($GRNSrc->This_QuantityInv)){
+		if ($GRNSrc->This_QuantityInv!=0 and isset($GRNSrc->This_QuantityInv)){
 
 			$this->GRNs[$GRNSrc->GRNNo] = new GRNs($GRNSrc->GRNNo,
 													$GRNSrc->PODetailItem,
