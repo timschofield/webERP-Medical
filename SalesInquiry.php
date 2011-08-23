@@ -172,7 +172,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 	# that had used the IF statement to create a field caused linestatus
 
 	if ($_POST['LineStatus'] != 'All') {
-		$WhereLineStatus = " AND IF(salesorderdetails.quantity = salesorderdetails.qtyinvoiced ||
+		$WhereLineStatus = " AND IF(salesorderdetails.quantity = salesorderdetails.qtyinvoiced or
 		  salesorderdetails.completed = 1,'Completed','Open') = '" . $_POST['LineStatus'] . "'";
 	}
 
@@ -216,7 +216,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 							   salesorderdetails.qtyinvoiced,
 							   (salesorderdetails.quantity * salesorderdetails.unitprice) as extprice,
 							   (salesorderdetails.quantity * stockmaster.actualcost) as extcost,
-							   IF(salesorderdetails.quantity = salesorderdetails.qtyinvoiced ||
+							   IF(salesorderdetails.quantity = salesorderdetails.qtyinvoiced or
 								  salesorderdetails.completed = 1,'Completed','Open') as linestatus,
 							   debtorsmaster.name,
 							   custbranch.brname,
@@ -255,7 +255,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 							   salesorderdetails.qtyinvoiced,
 							   (tempstockmoves.qty * salesorderdetails.unitprice) * -1 as extprice,
 							   (tempstockmoves.qty * tempstockmoves.standardcost) * -1 as extcost,
-							   IF(salesorderdetails.quantity = salesorderdetails.qtyinvoiced ||
+							   IF(salesorderdetails.quantity = salesorderdetails.qtyinvoiced or
 								  salesorderdetails.completed = 1,'Completed','Open') as linestatus,
 							   debtorsmaster.name,
 							   custbranch.brname,
@@ -307,7 +307,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 				$orderby = 'extprice DESC';
 			}
 			if ($_POST['DateType'] == 'Order') {
-				if ($_POST['SummaryType'] == 'extprice' || $_POST['SummaryType'] == 'stkcode') {
+				if ($_POST['SummaryType'] == 'extprice' or $_POST['SummaryType'] == 'stkcode') {
 					$sql = "SELECT salesorderdetails.stkcode,
 								   SUM(salesorderdetails.quantity) as quantity,
 								   SUM(salesorderdetails.qtyinvoiced) as qtyinvoiced,
@@ -370,7 +370,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 								   debtorsmaster.name
 								   ORDER BY " . $orderby;
 				}
-				elseif ($_POST['SummaryType'] == 'debtorno' || $_POST['SummaryType'] == 'name') {
+				elseif ($_POST['SummaryType'] == 'debtorno' or $_POST['SummaryType'] == 'name') {
 					if ($_POST['SummaryType'] == 'name') {
 						$orderby = 'name';
 					}
@@ -523,7 +523,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 			else {
 
 				// Selects by tempstockmoves.trandate not order date
-				if ($_POST['SummaryType'] == 'extprice' || $_POST['SummaryType'] == 'stkcode') {
+				if ($_POST['SummaryType'] == 'extprice' or $_POST['SummaryType'] == 'stkcode') {
 					$sql = "SELECT salesorderdetails.stkcode,
 								   SUM(salesorderdetails.quantity) as quantity,
 								   SUM(salesorderdetails.qtyinvoiced) as qtyinvoiced,
@@ -593,7 +593,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 								   debtorsmaster.name
 								   ORDER BY " . $orderby;
 				}
-				elseif ($_POST['SummaryType'] == 'debtorno' || $_POST['SummaryType'] == 'name') {
+				elseif ($_POST['SummaryType'] == 'debtorno' or $_POST['SummaryType'] == 'name') {
 					if ($_POST['SummaryType'] == 'name') {
 						$orderby = 'name';
 					}
@@ -897,7 +897,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 				$summaryheader = _('Customer Name');
 				$descriptionheader = _('Customer Number');
 			}
-			if ($summarytype == 'stkcode' || $summarytype == 'extprice') {
+			if ($summarytype == 'stkcode' or $summarytype == 'extprice') {
 				$description = 'description';
 				$summaryheader = _('Part Number');
 				$descriptionheader = _('Part Description');
