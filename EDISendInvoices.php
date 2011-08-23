@@ -230,7 +230,7 @@ while ($CustDetails = DB_fetch_array($EDIInvCusts)){
 				// set up basic connection
 				$conn_id = ftp_connect($CustDetails['ediaddress']); // login with username and password
 				$login_result = ftp_login($conn_id, $CustDetails['ediserveruser'], $CustDetails['ediserverpwd']); // check connection
-				if ((!$conn_id) || (!$login_result)) {
+				if ((!$conn_id) or (!$login_result)) {
 					prnMsg( _('Ftp connection has failed'). '<br />' . _('Attempted to connect to') . ' ' . $CustDetails['ediaddress'] . ' ' ._('for user') . ' ' . $CustDetails['ediserveruser'],'error');
 					include('includes/footer.inc');
 					exit;
