@@ -44,7 +44,7 @@ function set_error($message) {
 
 	if(isset($message) AND $message != '') {
 		// Copy values entered into session so user doesn't have to re-enter everything
-		if(isset($_POST['company_name']) && isset($_POST['ba_url'])) {
+		if(isset($_POST['company_name']) and isset($_POST['ba_url'])) {
 			$_SESSION['ba_url'] = $_POST['ba_url'];
 			if(!isset($_POST['operating_system'])) {
 				$_SESSION['operating_system'] = 'linux';
@@ -83,7 +83,7 @@ function default_file_mode($temp_dir) {
 	$v = explode(".",PHP_VERSION);
 	$v = $v[0].$v[1];
 
-	if($v > 41 && is_writable($temp_dir)) {
+	if($v > 41 and is_writable($temp_dir)) {
 		$filename = $temp_dir.'/test_permissions.txt';
 		$handle = fopen($filename, 'w');
 		fwrite($handle, 'This file is to get the default file permissions');
@@ -100,7 +100,7 @@ function default_file_mode($temp_dir) {
 function default_dir_mode($temp_dir) {
 	$v = explode(".",PHP_VERSION);
 	$v = $v[0].$v[1];
-	if ($v > 41 && is_writable($temp_dir)) {
+	if ($v > 41 and is_writable($temp_dir)) {
 		$dirname = $temp_dir.'/test_permissions/';
 		mkdir($dirname);
 		$default_dir_mode = '0'.mb_substr(sprintf('%o', fileperms($dirname)), -3);
@@ -155,7 +155,7 @@ if(mb_substr($ba_url, mb_strlen($ba_url) - 1, 1) == "\\") {
 
 // Begin operating system specific code
 // Get operating system
-if (!isset($_POST['operating_system']) || $_POST['operating_system'] != 'linux' && $_POST['operating_system'] != 'windows') {
+if (!isset($_POST['operating_system']) || $_POST['operating_system'] != 'linux' and $_POST['operating_system'] != 'windows') {
 	set_error('Please select a valid operating system');
 } else {
 	$operating_system = $_POST['operating_system'];
@@ -164,7 +164,7 @@ if (!isset($_POST['operating_system']) || $_POST['operating_system'] != 'linux' 
 if($operating_system == 'windows') {
 	$file_mode = '0777';
 	$dir_mode = '0777';
-} elseif (isset($_POST['world_writeable']) && $_POST['world_writeable'] == 'true') {
+} elseif (isset($_POST['world_writeable']) and $_POST['world_writeable'] == 'true') {
 	$file_mode = '0777';
 	$dir_mode = '0777';
 } else {
