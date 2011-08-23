@@ -44,7 +44,7 @@ class URLDetails {
 		if (is_dir($dir)) {
 			$objects = scandir($dir);
 			foreach ($objects as $object) {
-				if ($object != "." && $object != "..") {
+				if ($object != "." and $object != "..") {
 					if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object);
 				}
 			}
