@@ -449,7 +449,7 @@ if (isset($_POST['PrintPDF']) AND $_POST['Part']!='') {
 			$suptype = $Supplies[$i]['ordertype'];
 			// If ordertype is not QOH,PO,or WO, it is an MRP generated planned order and the
 			// ordertype is actually the demandtype that caused the planned order
-			if ($suptype == 'QOH' || $suptype == 'PO' || $suptype == 'WO') {
+			if ($suptype == 'QOH' or $suptype == 'PO' or $suptype == 'WO') {
 				$displaytype = $suptype;
 				$fortype = " ";
 			} else {
@@ -459,7 +459,7 @@ if (isset($_POST['PrintPDF']) AND $_POST['Part']!='') {
 			$FormatedSupDueDate = ConvertSQLDate($Supplies[$i]['duedate']);
 			$FormatedSupMRPDate = ConvertSQLDate($Supplies[$i]['mrpdate']);
 			// Order no is meaningless for QOH and REORD ordertypes
-			if ($suptype == "QOH" || $suptype == "REORD") {
+			if ($suptype == 'QOH' or $suptype == 'REORD') {
 				$pdf->addTextWrap(310,$YPos,45,$FontSize," ",'');
 			} else {
 				$pdf->addTextWrap(310,$YPos,45,$FontSize,$Supplies[$i]['orderno'],'');
