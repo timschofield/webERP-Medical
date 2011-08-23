@@ -148,25 +148,25 @@ Class Cart {
 
 				global $db;
 				$sql = "INSERT INTO salesorderdetails (orderlineno,
-																						orderno,
-																						stkcode,
-																						quantity,
-																						unitprice,
-																						units,
-																						conversionfactor,
-																						discountpercent,
-																						itemdue,
-																						poline)
-																					VALUES('" . $this->LineCounter . "',
-																						'" . $_SESSION['ExistingOrder'] . "',
-																						'" . trim(mb_strtoupper($StockID)) ."',
-																						'" . $Qty . "',
-																						'" . $Price . "',
-																						'" . $Units . "',
-																						'" . $ConversionFactor . "',
-																						'" . $Disc . "',
-																						'" . $ItemDue . "',
-																						'" . $POLine . "')";
+														orderno,
+														stkcode,
+														quantity,
+														unitprice,
+														units,
+														conversionfactor,
+														discountpercent,
+														itemdue,
+														poline)
+													VALUES('" . $this->LineCounter . "',
+														'" . $_SESSION['ExistingOrder'] . "',
+														'" . trim(mb_strtoupper($StockID)) ."',
+														'" . $Qty . "',
+														'" . $Price . "',
+														'" . $Units . "',
+														'" . $ConversionFactor . "',
+														'" . $Disc . "',
+														'" . $ItemDue . "',
+														'" . $POLine . "')";
 				$result = DB_query($sql,
 							$db ,
 							_('The order line for') . ' ' . mb_strtoupper($StockID) . ' ' ._('could not be inserted'));
@@ -204,13 +204,13 @@ Class Cart {
 		if ($UpdateDB=='Yes'){
 			global $db;
 			$result = DB_query("UPDATE salesorderdetails SET quantity='" . $Qty . "',
-																										unitprice='" . $Price . "',
-																										units='" . $Units . "',
-																										conversionfactor='" . $ConversionFactor . "',
-																										discountpercent='" . $Disc . "',
-																										narrative ='" . DB_escape_string($Narrative) . "',
-																										itemdue = '" . FormatDateForSQL($ItemDue) . "',
-																										poline = '" . DB_escape_string($POLine) . "'
+															unitprice='" . $Price . "',
+															units='" . $Units . "',
+															conversionfactor='" . $ConversionFactor . "',
+															discountpercent='" . $Disc . "',
+															narrative ='" . DB_escape_string($Narrative) . "',
+															itemdue = '" . FormatDateForSQL($ItemDue) . "',
+															poline = '" . DB_escape_string($POLine) . "'
 														WHERE orderno='" . $_SESSION['ExistingOrder'] . "'
 														AND orderlineno='" . $UpdateLineNumber . "'"
 													, $db
@@ -220,7 +220,7 @@ Class Cart {
 
 	function remove_from_cart($LineNumber, $UpdateDB='No'){
 
-		if (!isset($LineNumber) || $LineNumber=='' || $LineNumber < 0){ /* over check it */
+		if (!isset($LineNumber) or $LineNumber=='' or $LineNumber < 0){ /* over check it */
 			prnMsg(_('No Line Number passed to remove_from_cart, so nothing has been removed.'), 'error');
 			return;
 		}
