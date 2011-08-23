@@ -7,7 +7,7 @@ include('includes/header.inc');
 
 if (isset($_POST['submit'])) {
 
-	if (!$_POST['Leeway'] || !is_numeric($_POST['Leeway'])) {
+	if (!$_POST['Leeway'] or !is_numeric($_POST['Leeway'])) {
 		$_POST['Leeway'] = 0;
 	}
 
