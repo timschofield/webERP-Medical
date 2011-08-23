@@ -56,8 +56,8 @@
 			$this->port				= $_SESSION['SMTPSettings']['port'];
 			$this->helo				= $_SESSION['SMTPSettings']['heloaddress'];
 			$this->auth				= $_SESSION['SMTPSettings']['auth'];
-			$this->user				= html_entity_decode($_SESSION['SMTPSettings']['username'],ENT_QUOTES,UTF-8);
-			$this->pass				= html_entity_decode($_SESSION['SMTPSettings']['password'],ENT_QUOTES,UTF-8);
+			$this->user				= html_entity_decode($_SESSION['SMTPSettings']['username'],ENT_QUOTES,'UTF-8');
+			$this->pass				= html_entity_decode($_SESSION['SMTPSettings']['password'],ENT_QUOTES,'UTF-8');
 			$this->errors   		= array();
 
 			foreach($params as $key => $value){
