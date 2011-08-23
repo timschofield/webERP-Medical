@@ -276,7 +276,7 @@ while ($Cols = DB_fetch_array($ColsResult)){
 	do {
 	     $strt_ColNum = mb_strpos( $SQLSelectCls, ',', $strt_ColNum + 1) + 1;
 
-	} while (mb_strpos($SQLSelectCls, ',', $strt_ColNum) < $length_ColNum && mb_strpos($SQLSelectCls, ',' , $strt_ColNum)!=0);
+	} while (mb_strpos($SQLSelectCls, ',', $strt_ColNum) < $length_ColNum and mb_strpos($SQLSelectCls, ',' , $strt_ColNum)!=0);
 
 
 /*The length of the element in the select clause defining the column will be from the comma to the
@@ -301,7 +301,7 @@ while ($Cols = DB_fetch_array($ColsResult)){
 	do {
 	     $strt_ColDen = mb_strpos( $SQLSelectCls, ',', $strt_ColDen +1)+1;
 
-	} while (mb_strpos($SQLSelectCls, ',', $strt_ColDen) < $length_ColDen && mb_strpos($SQLSelectCls, ',' , $strt_ColDen)!=0);
+	} while (mb_strpos($SQLSelectCls, ',', $strt_ColDen) < $length_ColDen and mb_strpos($SQLSelectCls, ',' , $strt_ColDen)!=0);
 
 	 $length_ColDen = $length_ColDen - $strt_ColDen - 1;
 
