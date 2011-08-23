@@ -101,12 +101,12 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 		$InputError = 1;
 		prnMsg(_('Invalid To Date') , 'error');
 	}
-	if ($_POST['ReportType'] == 'Summary' && $_POST['DateType'] == 'Order' && $_POST['SummaryType'] == 'transno') {
+	if ($_POST['ReportType'] == 'Summary' and $_POST['DateType'] == 'Order' and $_POST['SummaryType'] == 'transno') {
 		$InputError = 1;
 		prnMsg(_('Cannot summarize by transaction number with a date type of Order Date') , 'error');
 		return;
 	}
-	if ($_POST['ReportType'] == 'Detail' && $_POST['DateType'] == 'Order' && $_POST['SortBy'] == 'tempstockmoves.transno,salesorderdetails.stkcode') {
+	if ($_POST['ReportType'] == 'Detail' and $_POST['DateType'] == 'Order' and $_POST['SortBy'] == 'tempstockmoves.transno,salesorderdetails.stkcode') {
 		$InputError = 1;
 		prnMsg(_('Cannot sort by transaction number with a date type of Order Date') , 'error');
 		return;
@@ -127,7 +127,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 	// Variables that end with Op - meaning operator - are either = or LIKE
 
 	$WherePart = ' ';
-	if (mb_strlen($PartNumber) > 0 && $PartNumberOp == 'LIKE') {
+	if (mb_strlen($PartNumber) > 0 and $PartNumberOp == 'LIKE') {
 		$PartNumber = $PartNumber . '%';
 	}
 	else {
@@ -147,7 +147,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 		$WhereDebtorNo = " AND salesorders.debtorno " . $DebtorNoOp . " '" . $DebtorNo . "'  ";
 	}
 	$WhereDebtorName = ' ';
-	if (mb_strlen($DebtorName) > 0 && $DebtorNameOp == 'LIKE') {
+	if (mb_strlen($DebtorName) > 0 and $DebtorNameOp == 'LIKE') {
 		$DebtorName = $DebtorName . '%';
 	}
 	else {
