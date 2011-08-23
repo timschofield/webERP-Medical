@@ -201,10 +201,10 @@ if (isset($_POST['EntryType']) and $_POST['EntryType']=='FILE' and isset($_POST[
 			if ($LineItem->Serialised){
 				$ExistingQty = ValidBundleRef($StockID, $LocationOut, $NewSerialNo);
 				if ($NewQty == 1 and $ExistingQty != 0){
-					prnMsg( '<a href="'.$rootpath.'/StockSerialItemResearch.php?serialno='. $NewSerialNo . '" target=_blank>'.$NewSerialNo. '</a>: '. _("The Serial Number being added exists with a Quantity that is not Zero (0)!"), 'error' );
+					prnMsg( '<a href="'.$rootpath.'/StockSerialItemResearch.php?serialno='. $NewSerialNo . '" target=_blank>'.$NewSerialNo. '</a>: '. _('The Serial Number being added exists with a Quantity that is not Zero (0)!'), 'error' );
 					$SerialError = true;
 				} elseif ($NewQty == -1 and $ExistingQty != 1){
-					prnMsg( '<a href="'.$rootpath.'/StockSerialItemResearch.php?serialno='. $NewSerialNo . '" target=_blank>'.$NewSerialNo. '</a> : '. _("The Serial Number being removed exists with a Quantity that is not One (1)!"), 'error');
+					prnMsg( '<a href="'.$rootpath.'/StockSerialItemResearch.php?serialno='. $NewSerialNo . '" target=_blank>'.$NewSerialNo. '</a> : '. _('The Serial Number being removed exists with a Quantity that is not One (1)!'), 'error');
 					$SerialError = true;
 				}
 			}
@@ -227,7 +227,7 @@ if (isset($_POST['EntryType']) and $_POST['EntryType']=='FILE' and isset($_POST[
 	 is added. So, after the validation, we will exit and NOT allow more items to be added.
 
 ********************************************/
-if (isset($_GET['REVALIDATE']) || isset($_POST['REVALIDATE'])) {
+if (isset($_GET['REVALIDATE']) or isset($_POST['REVALIDATE'])) {
 	$invalid_imports = 0;
 	$OrigLineItem = $LineItem; //grab a copy of the old one...
 	$LineItem->SerialItems = array(); // and then reset it so we can add back to it.
