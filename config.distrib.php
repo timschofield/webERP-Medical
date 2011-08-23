@@ -91,7 +91,7 @@ if ($rootpath == "/" OR $rootpath == "\\") {
 This is the default value set in php.ini for most installations but just to be sure it is forced here
 turning on NOTICES destroys things */
 
-error_reporting (E_ALL && ~E_NOTICE);
+error_reporting (E_ALL and ~E_NOTICE);
 
 /*Make sure there is nothing - not even spaces after this last ?> */
 ?>
