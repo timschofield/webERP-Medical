@@ -272,7 +272,7 @@ if (!isset($_GET['delete'])) {
 	</td></tr>
 	<tr><td>'._('Due After A Given No. Of Days').':</td>
 	<td>';
-	if ( isset($DayInFollowingMonth) && !$DayInFollowingMonth) {
+	if ( isset($DayInFollowingMonth) and !$DayInFollowingMonth) {
 		echo '<input type="checkbox" name="DaysOrFoll" checked="True" />';
 	} else {
 		echo '<input type="checkbox" name="DaysOrFoll" />';
