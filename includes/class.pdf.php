@@ -72,7 +72,7 @@ class Cpdf extends TCPDF {
 
 	function addText($xb,$yb,$size,$text)//,$angle=0,$wordSpaceAdjust=0)
 															{
-// Javier	$text = html_entity_decode($text);
+// Javier	$text = html_entity_decode($text,ENT_QUOTES,'UTF-8');
 		$this->SetFontSize($size);
 		$this->Text($xb, $this->h-$yb, $text);
 	}
@@ -243,8 +243,6 @@ class Cpdf extends TCPDF {
 	}
 
 	function addTextWrap($xb, $yb, $w, $h, $txt, $align='J', $border=0, $fill=0) {
-
-		//$txt = html_entity_decode($txt);
 
 		//some special characters are html encoded
 		//this code serves to make them appear human readable in pdf file
