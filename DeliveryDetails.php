@@ -219,7 +219,7 @@ if (isset($_POST['Update'])
 		and show a link to set them up
 		- if shippers defined but the default shipper is bogus then use the first shipper defined
 		*/
-		if ((isset($BestShipper) and $BestShipper=='') AND ($_POST['ShipVia']=='' || !isset($_POST['ShipVia']))){
+		if ((isset($BestShipper) and $BestShipper=='') and ($_POST['ShipVia']=='' or !isset($_POST['ShipVia']))){
 			$sql =  "SELECT shipper_id
 						FROM shippers
 						WHERE shipper_id='" . $_SESSION['Default_Shipper']."'";
