@@ -834,7 +834,7 @@ class XhtmlValidator
 
     function doesAttributeNeedsValidation($tag, $attribute)
     {
-        return isset($this->_tags[$tag]['attributes'][$attribute]) || isset($this->_tags[$tag]['required']) and in_array($attribute, $this->_tags[$tag]['required']);
+        return isset($this->_tags[$tag]['attributes'][$attribute]) or isset($this->_tags[$tag]['required']) and in_array($attribute, $this->_tags[$tag]['required']);
     }
 
     function validateAttribute($tag, $attribute, $value = null)
@@ -1023,9 +1023,9 @@ class XhtmlValidator
     function getDefaultAttributesAndEventsForTag($tag)
     {
         $default = array();
-        if (isset($this->_tags[$tag]) || in_array($tag, $this->_tags)) {
+        if (isset($this->_tags[$tag]) or in_array($tag, $this->_tags)) {
             foreach($this->getDefaultAttributesAndEventsForTags() as $defaults) {
-                if ((isset($defaults['except']) and in_array($tag, $defaults['except'])) || (isset($defaults['only']) and !in_array($tag, $defaults['only']))) {
+                if ((isset($defaults['except']) and in_array($tag, $defaults['except'])) or (isset($defaults['only']) and !in_array($tag, $defaults['only']))) {
                     continue;
                 }
                 foreach(isset($defaults['attributes']) ? $defaults['attributes'] : $defaults['events'] as $k => $candidate) {
