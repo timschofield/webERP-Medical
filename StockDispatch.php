@@ -27,7 +27,7 @@ If (isset($_POST['PrintPDF'])) {
 		$template='standard';
 	}
 	// Create Transfer Number
-	if(!isset($Trf_ID) && $_POST['ReportType'] == 'Batch'){
+	if(!isset($Trf_ID) and $_POST['ReportType'] == 'Batch'){
 		$Trf_ID = GetNextTransNo(16,$db);
 	}
 
