@@ -161,7 +161,7 @@ if (isset($_POST['View'])) {
 			$RowColour = '#fe90bf';
 		}
 
-		if ((trim($_SESSION['SQLString']['table']) == $_POST['SelectedTable'])  ||
+		if ((trim($_SESSION['SQLString']['table']) == $_POST['SelectedTable'])  or
 			($_POST['SelectedTable'] == 'ALL')) {
 			if (!isset($_SESSION['SQLString']['values'])) {
 				$_SESSION['SQLString']['values'][0]='';
