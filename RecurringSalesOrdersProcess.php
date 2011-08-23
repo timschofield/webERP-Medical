@@ -4,7 +4,7 @@
 /*need to allow this script to run from Cron or windows scheduler */
 $AllowAnyone = true;
 
-/* Get this puppy to run from cron (cd weberp && php -f RecurringSalesOrdersProcess.php "weberpdemo") or direct URL (RecurringSalesOrdersProcess.php?Database=weberpdemo) */
+/* Get this puppy to run from cron (cd weberp and php -f RecurringSalesOrdersProcess.php "weberpdemo") or direct URL (RecurringSalesOrdersProcess.php?Database=weberpdemo) */
 if (isset($_GET['Database'])) {
 	$_SESSION['DatabaseName'] = $_GET['Database'];
 	$DatabaseName = $_GET['Database'];
@@ -482,7 +482,7 @@ while ($RecurrOrderRow = DB_fetch_array($RecurrOrdersDueResult)){
 			$DbgMsg = _('The following SQL to insert the sales analysis record was used');
 			$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
 
-			if ($_SESSION['CompanyRecord']['gllink_debtors']==1 && $RecurrOrderLineRow['unitprice'] !=0){
+			if ($_SESSION['CompanyRecord']['gllink_debtors']==1 and $RecurrOrderLineRow['unitprice'] !=0){
 
 				//Post sales transaction to GL credit sales
 				$SalesGLAccounts = GetSalesGLAccount($Area, $RecurrOrderLineRow['stkcode'], $RecurrOrderRow['ordertype'], $db);
