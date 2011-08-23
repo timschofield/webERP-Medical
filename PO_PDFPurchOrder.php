@@ -60,7 +60,7 @@ if (isset($_GET['ViewingOnly']) and $_GET['ViewingOnly']!='') {
 if ($OrderNo != 'Preview') {
 	$_POST['PrintOrEmail']='Print';
 }
-if (isset($_POST['DoIt'])  AND ($_POST['PrintOrEmail']=='Print' || $ViewingOnly==1) ){
+if (isset($_POST['DoIt'])  and ($_POST['PrintOrEmail']=='Print' or $ViewingOnly==1) ){
 	$MakePDFThenDisplayIt = True;
 } elseif (isset($_POST['DoIt']) AND $_POST['PrintOrEmail']=='Email' AND mb_strlen($_POST['EmailTo'])>6){
 	$MakePDFThenEmailIt = True;
