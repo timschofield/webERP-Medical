@@ -279,7 +279,7 @@ if ($_FILES['userfile']['name']) { //start file processing
 
 	fclose($handle);
 
-} elseif ( isset($_POST['gettemplate']) || isset($_GET['gettemplate']) ) { //download an import template
+} elseif ( isset($_POST['gettemplate']) or isset($_GET['gettemplate']) ) { //download an import template
 
 	echo '<br /><br /><br />"'. implode('","',$headers). '" <br /><br /><br />';
 
