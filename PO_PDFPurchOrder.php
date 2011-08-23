@@ -4,7 +4,7 @@
 include('includes/session.inc');
 include('includes/SQL_CommonFunctions.inc');
 include('includes/DefinePOClass.php');
-if(!isset($_GET['OrderNo']) && !isset($_POST['OrderNo'])){
+if(!isset($_GET['OrderNo']) and !isset($_POST['OrderNo'])){
 	$title = _('Select a Purchase Order');
 	include('includes/header.inc');
 	echo '<div class="centre"><br /><br /><br />';
@@ -50,9 +50,9 @@ if ($OrderStatus != PurchOrder::STATUS_AUTHORISED and $OrderStatus != PurchOrder
 	exit;
 }
 $ViewingOnly = 0;
-if (isset($_GET['ViewingOnly']) && $_GET['ViewingOnly']!='') {
+if (isset($_GET['ViewingOnly']) and $_GET['ViewingOnly']!='') {
 	$ViewingOnly = $_GET['ViewingOnly'];
-} elseif (isset($_POST['ViewingOnly']) && $_POST['ViewingOnly']!='') {
+} elseif (isset($_POST['ViewingOnly']) and $_POST['ViewingOnly']!='') {
 	$ViewingOnly = $_POST['ViewingOnly'];
 }
 /* If we are previewing the order then we dont
@@ -65,7 +65,7 @@ if (isset($_POST['DoIt'])  AND ($_POST['PrintOrEmail']=='Print' || $ViewingOnly=
 } elseif (isset($_POST['DoIt']) AND $_POST['PrintOrEmail']=='Email' AND mb_strlen($_POST['EmailTo'])>6){
 	$MakePDFThenEmailIt = True;
 }
-if (isset($OrderNo) && $OrderNo != "" && $OrderNo > 0 && $OrderNo != 'Preview'){
+if (isset($OrderNo) and $OrderNo != "" and $OrderNo > 0 and $OrderNo != 'Preview'){
 	//Check this up front. Note that the myrow recordset is carried into the actual make pdf section
 	/*retrieve the order details from the database to print */
 	$ErrMsg = _('There was a problem retrieving the purchase order header details for Order Number'). ' ' . $OrderNo .
@@ -313,7 +313,7 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 			prnMsg( _('Emailing Purchase order'). ' ' . $OrderNo.' ' . _('to') .' ' . $_POST['EmailTo'] . ' ' . _('failed'), 'error');
 		}
 	}
-	if ($ViewingOnly==0 && !$failed) {
+	if ($ViewingOnly==0 and !$failed) {
 		$commentsql="SELECT initiator,stat_comment FROM purchorders WHERE orderno='".$OrderNo."'";
 		$commentresult=DB_query($commentsql,$db);
 		$commentrow=DB_fetch_array($commentresult);
