@@ -71,11 +71,11 @@ function IsEmailAddress($Email){
 	$Local= mb_substr ($Email, 0, $AtIndex);
 	$LocalLen = mb_strlen ($Local);
 	$DomainLen = mb_strlen ($Domain);
-	if ($LocalLen < 1 || $LocalLen > 64){
+	if ($LocalLen < 1 or $LocalLen > 64){
 	    // local part length exceeded
 	    return  false;
 	}
-	if ($DomainLen < 1 || $DomainLen > 255){
+	if ($DomainLen < 1 or $DomainLen > 255){
 	    // domain part length exceeded
 	    return  false;
 	}
