@@ -48,7 +48,7 @@ echo '</tr></table><br /><div class="centre"><input tabindex="4" type="submit" n
 
 echo '</form></div>';
 
-if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
+if (isset($_POST['ShowResults']) and $_POST['TransType'] != ''){
    $SQL_FromDate = FormatDateForSQL($_POST['FromDate']);
    $SQL_ToDate = FormatDateForSQL($_POST['ToDate']);
    $sql = "SELECT transno,
