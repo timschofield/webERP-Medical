@@ -122,7 +122,7 @@ if( $i === false )
 else {
 	$type   = strtolower(mb_substr($stockid,$i+1,mb_strlen($stockid)));
 	$stockid = mb_substr($stockid,0,$i);
-	if($blanktext && !isset($text))
+	if($blanktext and !isset($text))
 		$text = '';
 }
 $style = $type;
@@ -147,7 +147,7 @@ if ( file_exists($tmpfilename.'.jpg') ) {
 	$filename = $defaultimage;
 	$isjpeg = $defaultisjpeg;
 }
-if( !$automake && !isset($filename) ) {
+if( !$automake and !isset($filename) ) {
 		$title = _('Stock Image Retrieval ....');
 		include('includes/header.inc');
 		prnMsg( _('The Image could not be retrieved because it does not exist'), 'error');
@@ -170,7 +170,7 @@ if( !$automake && !isset($filename) ) {
 
 
 // See if we need to automake this image
-if( $automake && !isset($filename) || $useblank ) {
+if( $automake and !isset($filename) || $useblank ) {
 	// Have we got height and width specs
 	if( !isset($width) )
 		$width = 64;
@@ -269,7 +269,7 @@ if( $automake && !isset($filename) || $useblank ) {
 	}
 	$sw = imagesx($im);
 	$sh = imagesy($im);
-	if ( isset($width) && ($width != $sw) || isset($height) && ($height != $sh)) {
+	if ( isset($width) and ($width != $sw) || isset($height) and ($height != $sh)) {
 		if( !isset($width) )
 			$width = imagesx($im);
 		if( !isset($height) )
