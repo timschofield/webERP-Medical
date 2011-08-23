@@ -109,7 +109,7 @@ if ($_GET['Action'] == 'Enter'){
 //END OF action=ENTER
 } elseif ($_GET['Action']=='View'){
 
-	if (isset($_POST['DEL']) && is_array($_POST['DEL']) ){
+	if (isset($_POST['DEL']) and is_array($_POST['DEL']) ){
 		foreach ($_POST['DEL'] as $id=>$val){
 			if ($val == 'on'){
 				$sql = "DELETE FROM stockcounts WHERE id='".$id."'";
