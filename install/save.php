@@ -132,7 +132,7 @@ if (!isset($_POST['company_name'])) {
 // Begin path and timezone details code
 
 // Check if user has entered the installation url
-if (!isset($_POST['ba_url']) || $_POST['ba_url'] == '') {
+if (!isset($_POST['ba_url']) or $_POST['ba_url'] == '') {
 	set_error('Please enter an absolute URL');
 } else {
 	$ba_url = $_POST['ba_url'];
@@ -155,7 +155,7 @@ if(mb_substr($ba_url, mb_strlen($ba_url) - 1, 1) == "\\") {
 
 // Begin operating system specific code
 // Get operating system
-if (!isset($_POST['operating_system']) || $_POST['operating_system'] != 'linux' and $_POST['operating_system'] != 'windows') {
+if (!isset($_POST['operating_system']) or $_POST['operating_system'] != 'linux' and $_POST['operating_system'] != 'windows') {
 	set_error('Please select a valid operating system');
 } else {
 	$operating_system = $_POST['operating_system'];
@@ -175,11 +175,11 @@ if($operating_system == 'windows') {
 
 // Begin database details code
 // Check if user has entered a database host
-if (!isset($_POST['database_host']) || $_POST['database_host'] == '') {
+if (!isset($_POST['database_host']) or $_POST['database_host'] == '') {
 	set_error('Please enter a database host name');
 }
 // Check if user has entered a database username
-if (!isset($_POST['database_username']) || $_POST['database_username'] == '') {
+if (!isset($_POST['database_username']) or $_POST['database_username'] == '') {
 	set_error('Please enter a database username');
 }
 
@@ -188,13 +188,13 @@ if (!isset($_POST['database_password'])) {
 	set_error('Please enter a database password');
 }
 // Check if user has entered a database name
-if (!isset($_POST['company_name']) || $_POST['company_name'] == '') {
+if (!isset($_POST['company_name']) or $_POST['company_name'] == '') {
 	set_error('Please enter a company name');
 } else {
 	$_POST['company_name'] = Replace_Dodgy_Characters($_POST['company_name']);
 }
 
-if (!isset($_POST['timezone']) || $_POST['timezone'] == ''){
+if (!isset($_POST['timezone']) or $_POST['timezone'] == ''){
 	set_error('Please enter timezone');
 }
 
@@ -206,7 +206,7 @@ if (!file_exists($path_to_root.'/sql/mysql/weberp-demo.sql')){
 }
 
 // Get admin email and validate it
-if (!isset($_POST['admin_email']) || $_POST['admin_email'] == ''){
+if (!isset($_POST['admin_email']) or $_POST['admin_email'] == ''){
 	set_error('Please enter an email for the Administrator account');
 } else {
 	if (IsEmailAddress($_POST['admin_email'])==false) {
@@ -214,10 +214,10 @@ if (!isset($_POST['admin_email']) || $_POST['admin_email'] == ''){
 	}
 }
 // Get the two admin passwords entered, and check that they match
-if (!isset($_POST['admin_password']) || $_POST['admin_password'] == '') {
+if (!isset($_POST['admin_password']) or $_POST['admin_password'] == '') {
 	set_error('Please enter a password for the Administrator account');
 }
-if (!isset($_POST['admin_repassword']) || $_POST['admin_repassword'] == '') {
+if (!isset($_POST['admin_repassword']) or $_POST['admin_repassword'] == '') {
 	set_error('Please make sure you re-enter the password for the Administrator account');
 }
 if ($_POST['admin_password'] != $_POST['admin_repassword']){
@@ -252,7 +252,7 @@ if ($_POST['DemoData']==false){
 	    if ($_FILES['LogoFile']['error'] == UPLOAD_ERR_OK) {
 		$result = move_uploaded_file($_FILES['LogoFile']['tmp_name'],
 						    $CompanyDir . '/logo.jpg');
-	    } elseif ($_FILES['LogoFile']['error'] == UPLOAD_ERR_INI_SIZE ||
+	    } elseif ($_FILES['LogoFile']['error'] == UPLOAD_ERR_INI_SIZE or
 		      $_FILES['LogoFile']['error'] == UPLOAD_ERR_FORM_SIZE) {
 			set_error( "Logo file is too big - Limit: " . $_SESSION['MaxLogoSize'] );
 	    } elseif ($_FILES['LogoFile']['error'] == UPLOAD_ERR_NO_FILE ) {
