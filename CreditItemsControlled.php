@@ -12,7 +12,7 @@ $title = _('Specify Credited Controlled Items');
 include('includes/header.inc');
 
 
-if ($_GET['CreditInvoice']=='Yes' || $_POST['CreditInvoice']=='Yes'){
+if ($_GET['CreditInvoice']=='Yes' or $_POST['CreditInvoice']=='Yes'){
 	$_SESSION['CreditInv']=true;
 } else {
 	$_SESSION['CreditInv']=false;
