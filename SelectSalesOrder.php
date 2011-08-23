@@ -546,7 +546,7 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 	if(!isset($_POST['StockLocation'])) {
 		$_POST['StockLocation'] = '';
 	}
-	if (isset($_REQUEST['OrderNumber']) && $_REQUEST['OrderNumber'] !='') {
+	if (isset($_REQUEST['OrderNumber']) and $_REQUEST['OrderNumber'] !='') {
 			$SQL = "SELECT salesorders.orderno,
 					debtorsmaster.name,
 					custbranch.brname,
