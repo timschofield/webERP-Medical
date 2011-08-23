@@ -148,7 +148,7 @@ function update(&$db,&$ChangeDate)  //####UPDATE_UPDATE_UPDATE_UPDATE_UPDATE_UPD
 		  GROUP BY calendardate";
 	$result = DB_query($sql,$db);
 	$myrow = DB_fetch_row($result);
-	if ($myrow[0] < 1  ||  !Is_Date($ChangeDate))  {
+	if ($myrow[0] < 1  or  !Is_Date($ChangeDate))  {
 		$InputError = 1;
 		prnMsg(_('Invalid Change Date'),'error');
 	}
