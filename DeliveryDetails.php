@@ -188,6 +188,7 @@ if (isset($_POST['Update'])
 			$_SESSION['Items'.$identifier]->Quotation = $_POST['Quotation'];
 		} else {
 			$_SESSION['Items'.$identifier]->DeliverTo = $_POST['DeliverTo'];
+			$_SESSION['Items'.$identifier]->BuyerName = $_POST['BuyerName'];
 			$_SESSION['Items'.$identifier]->DelAdd1 = $_POST['BrAdd1'];
 			$_SESSION['Items'.$identifier]->DelAdd2 = $_POST['BrAdd2'];
 			$_SESSION['Items'.$identifier]->DelAdd3 = $_POST['BrAdd3'];
@@ -334,6 +335,7 @@ if (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 and $_SESSION['ExistingOrder']
 								ordertype,
 								shipvia,
 								deliverto,
+								buyername,
 								deladd1,
 								deladd2,
 								deladd3,
@@ -355,10 +357,11 @@ if (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 and $_SESSION['ExistingOrder']
 								'" . $_SESSION['Items'.$identifier]->Branch . "',
 								'". DB_escape_string($_SESSION['Items'.$identifier]->CustRef) ."',
 								'". DB_escape_string($_SESSION['Items'.$identifier]->Comments) ."',
-								'" . Date("Y-m-d H:i") . "',
+								'" . Date('Y-m-d H:i') . "',
 								'" . $_SESSION['Items'.$identifier]->DefaultSalesType . "',
 								'" . $_POST['ShipVia'] ."',
-								'". DB_escape_string($_SESSION['Items'.$identifier]->DeliverTo) . "',
+								'" . DB_escape_string($_SESSION['Items'.$identifier]->DeliverTo) . "',
+								'" . DB_escape_string($_SESSION['Items'.$identifier]->BuyerName) . "',
 								'" . DB_escape_string($_SESSION['Items'.$identifier]->DelAdd1) . "',
 								'" . DB_escape_string($_SESSION['Items'.$identifier]->DelAdd2) . "',
 								'" . DB_escape_string($_SESSION['Items'.$identifier]->DelAdd3) . "',
@@ -729,6 +732,7 @@ if (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 and $_SESSION['ExistingOrder']
 				quotedate = '" . FormatDateForSQL(DB_escape_string($_SESSION['Items'.$identifier]->QuoteDate)) . "',
 				confirmeddate = '" . FormatDateForSQL(DB_escape_string($_SESSION['Items'.$identifier]->ConfirmedDate)) . "',
 				deliverto = '" . DB_escape_string($_SESSION['Items'.$identifier]->DeliverTo) . "',
+				buyername = '" . DB_escape_string($_SESSION['Items'.$identifier]->BuyerName) . "',
 				deladd1 = '" . DB_escape_string($_SESSION['Items'.$identifier]->DelAdd1) . "',
 				deladd2 = '" . DB_escape_string($_SESSION['Items'.$identifier]->DelAdd2) . "',
 				deladd3 = '" . DB_escape_string($_SESSION['Items'.$identifier]->DelAdd3) . "',
@@ -990,6 +994,11 @@ echo '<tr>
 	<td>'. _('Confirmed Order Date') .':</td>
 	<td><input class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="text" size="15" maxlength="14" name="ConfirmedDate" value="' . $_SESSION['Items'.$identifier]->ConfirmedDate . '" /></td>
 	</tr>';
+
+echo '<tr>
+		<td>'. _('Buyer Name') . ':</td>
+		<td><input type="text" size="30" maxlength="30" name="BuyerName" value="' . $_SESSION['Items'.$identifier]->BuyerName . '" /></td>
+</tr>';
 
 echo '<tr>
 	<td>'. _('Delivery Address 1') . ':</td>
