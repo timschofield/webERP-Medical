@@ -188,9 +188,9 @@ function DB_Maintenance($Conn){
 
 	prnMsg(_('The system has just run the regular database administration and optimisation routine.'),'info');
 
-	$TablesResult = DB_query('SHOW TABLES',$Conn);
+	$TablesResult = DB_query("SHOW TABLES",$Conn);
 	while ($myrow = DB_fetch_row($TablesResult)){
-		$Result = DB_query('OPTIMIZE TABLE ' . $myrow[0],$Conn);
+		$Result = DB_query("OPTIMIZE TABLE " . $myrow[0],$Conn);
 	}
 
 	$Result = DB_query("UPDATE config
@@ -201,24 +201,24 @@ function DB_Maintenance($Conn){
 
 
 function DB_Txn_Begin($Conn){
-	mysql_query('SET autocommit=0;',$Conn);
-	mysql_query('START TRANSACTION',$Conn);
+	mysql_query("SET autocommit=0;",$Conn);
+	mysql_query("START TRANSACTION",$Conn);
 }
 
 function DB_Txn_Commit($Conn){
-	mysql_query('COMMIT',$Conn );
-	mysql_query('SET autocommit=1;',$Conn);
+	mysql_query("COMMIT",$Conn );
+	mysql_query("SET autocommit=1;",$Conn);
 }
 
 function DB_Txn_Rollback($Conn){
-    mysql_query('ROLLBACK', $Conn );
+    mysql_query("ROLLBACK", $Conn );
 }
 
 function DB_IgnoreForeignKeys($Conn){
-	msql_query('SET FOREIGN_KEY_CHECKS=0',$Conn);
+	mysql_query("SET FOREIGN_KEY_CHECKS=0",$Conn);
 }
 function DB_ReinstateForeignKeys($Conn){
-	msql_query('SET FOREIGN_KEY_CHECKS=1',$Conn);
+	mysql_query("SET FOREIGN_KEY_CHECKS=1",$Conn);
 }
 
 function DB_table_exists($Tablename, $Conn) {

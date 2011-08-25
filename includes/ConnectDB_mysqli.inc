@@ -221,23 +221,23 @@ function DB_Maintenance($Conn){
 }
 
 function DB_Txn_Begin($Conn){
-	mysqli_query($Conn,'SET autocommit=0');
-	mysqli_query($Conn,'START TRANSACTION');
+	mysqli_query($Conn,"SET autocommit=0");
+	mysqli_query($Conn,"START TRANSACTION");
 }
 
 function DB_Txn_Commit($Conn){
-	mysqli_query($Conn,'COMMIT');
-	mysqli_query($Conn,'SET autocommit=1');
+	mysqli_query($Conn,"COMMIT");
+	mysqli_query($Conn,"SET autocommit=1");
 }
 
 function DB_Txn_Rollback($Conn){
-	mysqli_query($Conn,'ROLLBACK');
+	mysqli_query($Conn,"ROLLBACK");
 }
 function DB_IgnoreForeignKeys($Conn){
-	mysqli_query($Conn,'SET FOREIGN_KEY_CHECKS=0');
+	mysqli_query($Conn,"SET FOREIGN_KEY_CHECKS=0");
 }
 function DB_ReinstateForeignKeys($Conn){
-	mysqli_query($Conn, 'SET FOREIGN_KEY_CHECKS=1');
+	mysqli_query($Conn, "SET FOREIGN_KEY_CHECKS=1");
 }
 
 function DB_table_exists($TableName, $Conn) {
