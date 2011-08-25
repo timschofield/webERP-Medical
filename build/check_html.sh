@@ -9,7 +9,7 @@ for f in `find . -name "*.php" -o -name "*.inc" -o -name "*.html"`
 do
     newname=`echo $f | cut -c3-`
     filename="$ROOT_DIR/$newname"
-	if [[ $filename != */locale/* && $filename != */doc/* && $filename != */phplot/* && $filename != */tcpdf/* && $filename != */build/* ]]
+	if [[ $filename != */locale/* && $filename != *Change.log.html && $filename != */phplot/* && $filename != */tcpdf/* && $filename != */build/* ]]
 	then
 		for test in `seq 1 "${#ClosedTagTests[@]}"`;
 		do
