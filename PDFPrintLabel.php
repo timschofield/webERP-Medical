@@ -169,7 +169,7 @@ function showLabelOptions() {
 					</select> </td>
 			</tr>';
 	echo '<tr><td class="number">'.$txt[$iTxt++].':</td>
-			<td><input type="text" class=date alt="'.$_SESSION['DefaultDateFormat'].'" name="EffectiveDate" size="11" maxlength="10" value=' . $_POST['EffectiveDate'] . '></td>
+			<td><input type="text" class=date alt="'.$_SESSION['DefaultDateFormat'].'" name="EffectiveDate" size="11" maxlength="10" value="' . $_POST['EffectiveDate'] . '" /></td>
 		</tr>';
 	echo '<tr>
 				<th colspan="2">
