@@ -622,7 +622,7 @@ echo '<td width="30%" valign="top">';
 if ($_SESSION['Module']=='system') {
 	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/ar.png" title="' . _('Receivables/Payables Setup') . '" alt="' . _('Receivables/Payables Setup') . '" /><b>' . _('Receivables/Payables Setup') . '</b>';
 } else {
-	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/reports.png" title="' . _('Inquiries and Reports') . '" alt="' . _('Inquiries and Reports') . '"" /><b>'. _('Inquiries and Reports') . '</b>';
+	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/reports.png" title="' . _('Inquiries and Reports') . '" alt="' . _('Inquiries and Reports') . '" /><b>'. _('Inquiries and Reports') . '</b>';
 }
 echo '	<table width="100%" class="selection">
 			<tr>
