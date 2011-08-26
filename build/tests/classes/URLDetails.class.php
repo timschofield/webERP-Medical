@@ -235,7 +235,7 @@ class URLDetails {
 				$result = curl_exec($ch);
 				$response = curl_getinfo( $ch );
 				if ($response['http_code']!=200) {
-					error_log('**Error**'.$i.' '.$this->Links[$i]['href'].' '.$response['http_code']."\n", 3, '/home/tim/weberp'.date('Ymd').'.log');
+					error_log('**Warning**'.$i.' '.$this->Links[$i]['href'].' '.$response['http_code']."\n", 3, '/home/tim/weberp'.date('Ymd').'.log');
 				}
 			}
 		}
