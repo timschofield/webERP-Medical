@@ -326,7 +326,7 @@ if (isset($_POST['submit'])) {
 		$Errors[$i] = 'ID';
 		$i++;
 	}
-	if (mb_strlen($_POST['SuppName']) > 40 or mb_strlen($_POST['SuppName']) == 0 or $_POST['SuppName'] == '') {
+	if (mb_strlen(stripslashes($_POST['SuppName'])) > 40 or mb_strlen($_POST['SuppName']) == 0 or $_POST['SuppName'] == '') {
 		$InputError = 1;
 		prnMsg(_('The supplier name must be entered and be forty characters or less long'),'error');
 		$Errors[$i]='Name';
@@ -338,19 +338,19 @@ if (isset($_POST['submit'])) {
 		$Errors[$i]='ID';
 		$i++;
 	}
-	if (mb_strlen($_POST['Phone']) >25) {
+	if (mb_strlen(stripslashes($_POST['Phone'])) > 25) {
 		$InputError = 1;
 		prnMsg(_('The telephone number must be 25 characters or less long'),'error');
 		$Errors[$i] = 'Telephone';
 		$i++;
 	}
-	if (mb_strlen($_POST['Fax']) >25) {
+	if (mb_strlen(stripslashes($_POST['Fax'])) > 25) {
 		$InputError = 1;
 		prnMsg(_('The fax number must be 25 characters or less long'),'error');
 		$Errors[$i] = 'Fax';
 		$i++;
 	}
-	if (mb_strlen($_POST['Email']) >55) {
+	if (mb_strlen(stripslashes($_POST['Email'])) > 55) {
 		$InputError = 1;
 		prnMsg(_('The email address must be 55 characters or less long'),'error');
 		$Errors[$i] = 'Email';
@@ -362,7 +362,7 @@ if (isset($_POST['submit'])) {
 		$Errors[$i] = 'Email';
 		$i++;
 	}
-	if (mb_strlen($_POST['BankRef']) > 12) {
+	if (mb_strlen(stripslashes($_POST['BankRef'])) > 12) {
 		$InputError = 1;
 		prnMsg(_('The bank reference text must be less than 12 characters long'),'error');
 		$Errors[$i]='BankRef';
@@ -651,9 +651,9 @@ if (!isset($SupplierID)) {
 	echo '<tr><td>' . _('Address Line 2 (Suburb/City)') . ':</td><td><input type="text" name="Address2" size="42" maxlength="40" /></td></tr>';
 	echo '<tr><td>' . _('Address Line 3 (State/Province)') . ':</td><td><input type="text" name="Address3" size="42" maxlength="40" /></td></tr>';
 	echo '<tr><td>' . _('Address Line 4 (Postal Code)') . ':</td><td><input type="text" name="Address4" size="42" maxlength="40" /></td></tr>';
-	echo '<tr><td>' . _('Telephone') . ':</td><td><input type="text" name="Phone" size="30" maxlength="40" /></td></tr>';
-	echo '<tr><td>' . _('Facsimile') . ':</td><td><input type="text" name="Fax" size="30" maxlength="40" /></td></tr>';
-	echo '<tr><td>' . _('Email Address') . ':</td><td><input type="text" name="Email" size="30" maxlength="40" /></td></tr>';
+	echo '<tr><td>' . _('Telephone') . ':</td><td><input type="text" name="Phone" size="25" maxlength="25" /></td></tr>';
+	echo '<tr><td>' . _('Facsimile') . ':</td><td><input type="text" name="Fax" size="25" maxlength="25" /></td></tr>';
+	echo '<tr><td>' . _('Email Address') . ':</td><td><input class="email" type="text" name="Email" size="30" maxlength="40" /></td></tr>';
 	echo '<tr><td>' . _('Supplier Type') . ':</td><td><select name="SupplierType">';
 	$result=DB_query("SELECT typeid, typename FROM suppliertype", $db);
 	while ($myrow = DB_fetch_array($result)) {
