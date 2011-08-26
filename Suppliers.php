@@ -626,7 +626,7 @@ if (isset($_POST['submit'])) {
 
 	}
 	if ($CancelDelete == 0) {
-		$sql="DELETE FROM suppliers WHERE supplierid='" . $SupplierID . "'";
+		$sql="DELETE FROM suppliers WHERE supplierid='" . stripslashes($SupplierID) . "'";
 		$result = DB_query($sql, $db);
 		prnMsg(_('Supplier record for') . ' ' . $SupplierID . ' ' . _('has been deleted'),'success');
 		unset($SupplierID);
