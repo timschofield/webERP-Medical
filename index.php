@@ -591,9 +591,9 @@ echo '</table>';
 echo '</td>';
 echo '<td width="30%" valign="top">';
 if ($_SESSION['Module']=='system') {
-	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/company.png" title="' . _('General Setup Options') . '" alt="" /><b>' . _('General Setup Options') . '</b>';
+	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/company.png" title="' . _('General Setup Options') . '" alt="' . _('General Setup Options') . '" /><b>' . _('General Setup Options') . '</b>';
 } else {
-	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/transactions.png" title="' . _('Transactions') . '" alt="" /><b>'. _('Transactions') . '</b>';
+	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/transactions.png" title="' . _('Transactions') . '" alt="' . _('Transactions') . '" /><b>'. _('Transactions') . '</b>';
 }
 echo '	<table width="100%" class="selection">
 			<tr>
@@ -620,9 +620,9 @@ echo '</td>';
 
 echo '<td width="30%" valign="top">';
 if ($_SESSION['Module']=='system') {
-	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/ar.png" title="' . _('Receivables/Payables Setup') . '" alt="" /><b>' . _('Receivables/Payables Setup') . '</b>';
+	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/ar.png" title="' . _('Receivables/Payables Setup') . '" alt="' . _('Receivables/Payables Setup') . '" /><b>' . _('Receivables/Payables Setup') . '</b>';
 } else {
-	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/reports.png" title="' . _('Inquiries and Reports') . '" alt="" /><b>'. _('Inquiries and Reports') . '</b>';
+	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/reports.png" title="' . _('Inquiries and Reports') . '" alt="' . _('Inquiries and Reports') . '"" /><b>'. _('Inquiries and Reports') . '</b>';
 }
 echo '	<table width="100%" class="selection">
 			<tr>
@@ -649,9 +649,9 @@ echo '</td>';
 
 echo '<td width="30%" valign="top">';
 if ($_SESSION['Module']=='system') {
-	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/inventory.png" title="' . _('Inventory Setup') . '" alt="" /><b>' . _('Inventory Setup') . '</b>';
+	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/inventory.png" title="' . _('Inventory Setup') . '" alt="' . _('Inventory Setup') . '" /><b>' . _('Inventory Setup') . '</b>';
 } else {
-	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/maintenance.png" title="' . _('Maintenance') . '" alt="" /><b>'. _('Maintenance') . '</b>';
+	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/maintenance.png" title="' . _('Maintenance') . '" alt="' . _('Maintenance') . '" /><b>'. _('Maintenance') . '</b>';
 }
 echo '	<table width="100%" class="selection">
 			<tr>
@@ -723,7 +723,7 @@ be generated, one for standard reports and the other for custom reports.
 				$Group=explode(':',$Report['groupname']); // break into main group and form group array
 				if ($NoForms AND $Group[0]==$GroupID AND $Report['reporttype']=='frm' AND $Report['defaultreport']==$Def) {
 					$RptLinks .= '<tr><td class="menu_group_item">';
-					$RptLinks .= '<img src="' . $rootpath . '/css/' . $_SESSION['Theme'] . '/images/folders.gif" width="16" height="13" />&nbsp;';
+					$RptLinks .= '<img src="' . $rootpath . '/css/' . $_SESSION['Theme'] . '/images/folders.gif" width="16" height="13" alt="" />&nbsp;';
 					$RptLinks .= '<p>&bull; <a href="' . $rootpath . '/reportwriter/FormMaker.php?id=' . $Report['groupname'] . '"></p>';
 					$RptLinks .= $FormGroups[$Report['groupname']] . '</a>';
 					$RptLinks .= '</td></tr>';
