@@ -2,7 +2,7 @@
 
 function RandomASCIIString($MaxLength) {
 	$Answer = '';
-	$Length = rand(0, $MaxLength-5);
+	$Length = rand(1, $MaxLength);
 	for ($i=0; $i<$Length; $i++) {
 		$Answer .= chr(rand(32, 127));
 	}
@@ -11,10 +11,16 @@ function RandomASCIIString($MaxLength) {
 
 function RandomEmailString($MaxLength) {
 	$Answer = '';
-	$Length = rand(0, $MaxLength);
+	$Length = rand(4, $MaxLength-5);
 	for ($i=0; $i<$Length; $i++) {
-		$Answer .= chr(rand(32, 127));
+		$Answer .= chr(rand(97, 122));
 	}
+	$Offset = rand(0, $Length-1);
+	$part1 = substr($Answer, 0, $Offset);
+	$part2 = substr($Answer, $Offset);
+
+	$part1 = $part1 . '@';
+	$Answer = $part1 . $part2 . '.com';
 	return $Answer;
 }
 
@@ -41,7 +47,7 @@ function FillFormWithRandomData($FormDetails) {
 			} else if (isset($Field['class']) and $Field['class']=='date') {
 				$PostData[$Field['name']]=RandomDateString('2000-01-01', '2012-12-31');
 			} else if (isset($Field['class']) and $Field['class']=='email') {
-				$PostData[$Field['name']]=RandomEmailString($Field['maxlength']);
+				$PostData[$Field['name']]=RandomEmailString($Field['maxlength']-6);
 			} else {
 				$PostData[$Field['name']]=RandomASCIIString($Field['maxlength']);
 			}

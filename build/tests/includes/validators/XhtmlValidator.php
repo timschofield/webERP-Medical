@@ -950,6 +950,11 @@ class XhtmlValidator
         echo '<ul><li>'.join("</li>\n<li>", $this->getErrors()) .'</li></ul>';
     }
 
+    function logErrors()
+    {
+		error_log(print_r($this->getErrors(), true), 3, '/home/tim/weberp'.date('Ymd').'.log');
+    }
+
     function getPossibleTagAttributes($tag)
     {
         static $cache;
@@ -1462,8 +1467,10 @@ class XhtmlValidator
     */
     function highlight($text, $phrase, $highlighter = '<strong class="highlight">\1</strong>')
     {
+		$highlighter='\1';
         $phrase = is_array($phrase) ? join('|',array_map('preg_quote',$phrase)) : preg_quote($phrase);
-        return !empty($phrase) ? preg_replace('/('.$phrase.')/i', $highlighter,$text) : $text;
+        $phrase = is_array($phrase) ? join('|',$phrase) : $phrase;
+        return !empty($phrase) ? preg_replace('/('.$phrase.')/i', $highlighter,html_entity_decode($text)) : html_entity_decode($text);
     }
 
     function rgbToHex()

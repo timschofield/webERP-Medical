@@ -219,6 +219,10 @@ class URLDetails {
 	private function ValidateHTML($html) {
 		$Validator = new XhtmlValidator();
 		$result=$Validator->validate($html);
+		if($Validator->validate($html) === false){
+			error_log('**Error**'.'There are errors in the XHTML of page '.$this->GetURL()."\n", 3, '/home/tim/weberp'.date('Ymd').'.log');
+			$Validator->logErrors();
+		}
 		return $result;
 	}
 

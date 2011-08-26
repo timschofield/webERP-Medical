@@ -26,9 +26,13 @@ $PostData=FillFormWithRandomData($SupplierPage[2]);
 $SupplierInsertPage = new URLDetails($TestSessionID);
 $SupplierInsertPage->SetURL($ServerPath.$SupplierPage[2]['Action']);
 $SupplierInsertPage->SetPostArray($PostData);
-print_r($PostData);
-$Page=$SupplierInsertPage->FetchPage($RootPath, $ServerPath, $ch);
 
+$Page=$SupplierInsertPage->FetchPage($RootPath, $ServerPath, $ch);
+if (!strstr($Page[0], 'success')) {
+	$InputDump = print_r($PostData, true);
+	error_log('**Error**'.' The supplier does not seem to have been inserted correctly using the following data:'."\n", 3, '/home/tim/weberp'.date('Ymd').'.log');
+	error_log($InputDump."\n\n", 3, '/home/tim/weberp'.date('Ymd').'.log');
+}
 curl_close($ch);
 
 ?>
