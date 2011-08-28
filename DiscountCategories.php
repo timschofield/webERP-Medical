@@ -1,6 +1,6 @@
 <?php
-/* $Revision: 1.10 $ */
-/* $Id$*/
+
+/* $Id: DiscountCategories.php 4622 2011-07-03 04:33:19Z daintree $*/
 
 include('includes/session.inc');
 
@@ -13,7 +13,7 @@ if (isset($_POST['stockID'])) {
 	$_POST['StockID']=$_POST['stockID'];
 } elseif (isset($_GET['StockID'])) {
 	$_POST['StockID']=$_GET['StockID'];
-	$_POST['chooseoption']=1;
+	$_POST['ChooseOption']=1;
 	$_POST['selectchoice']=1;
 }
 
@@ -28,10 +28,10 @@ if (isset($_POST['submit'])) {
 	//first off validate inputs sensible
 
 	$result = DB_query("SELECT stockid
-				FROM stockmaster
-				WHERE mbflag <>'K'
-				AND mbflag<>'D'
-				AND stockid='" . mb_strtoupper($_POST['StockID']) . "'",$db);
+						FROM stockmaster
+						WHERE mbflag <>'K'
+						AND mbflag<>'D'
+						AND stockid='" . mb_strtoupper($_POST['StockID']) . "'",$db);
 	if (DB_num_rows($result)==0){
 		$InputError = 1;
 		prnMsg(_('The stock item entered must be set up as either a manufactured or purchased or assembly item'),'warn');
@@ -40,7 +40,7 @@ if (isset($_POST['submit'])) {
 	if ($InputError !=1) {
 
 		$sql = "UPDATE stockmaster SET discountcategory='" . $_POST['DiscountCategory'] . "'
-			WHERE stockid='" . mb_strtoupper($_POST['StockID']) . "'";
+				WHERE stockid='" . mb_strtoupper($_POST['StockID']) . "'";
 
 		$result = DB_query($sql,$db, _('The discount category') . ' ' . $_POST['DiscountCategory'] . ' ' . _('record for') . ' ' . mb_strtoupper($_POST['StockID']) . ' ' . _('could not be updated because'));
 
@@ -57,10 +57,10 @@ if (isset($_POST['submit'])) {
 	$result = DB_query($sql,$db);
 	prnMsg( _('The stock master record has been updated to no discount category'),'success');
 	echo '<br />';
-} elseif (isset($_POST['submitcategory'])) {
+} elseif (isset($_POST['SubmitCategory'])) {
 	$sql="UPDATE stockmaster
-		SET discountcategory='".$_POST['DiscountCategory']."'
-		WHERE categoryid='".$_POST['stockcategory']."'";
+			SET discountcategory='".$_POST['DiscountCategory']."'
+			WHERE categoryid='".$_POST['stockcategory']."'";
 	$result=DB_query($sql, $db);
 }
 
@@ -77,34 +77,39 @@ if (isset($_POST['selectchoice'])) {
 
 		while ($myrow = DB_fetch_array($result)){
 			if ($myrow['discountcategory']==$_POST['DiscCat']){
-				echo '<option selected="True" value="' . $myrow['discountcategory'] . '">' . $myrow['discountcategory']. '</option>';
+				echo '<option selected value="' . $myrow['discountcategory'] . '">' . $myrow['discountcategory']  . '</option>';
 			} else {
-				echo '<option value="' . $myrow['discountcategory'] . '">' . $myrow['discountcategory']. '</option>';
+				echo '<option value="' . $myrow['discountcategory'] . '">' . $myrow['discountcategory'] . '</option>';
 			}
 		}
 
 		echo '</select></td>';
-		echo '<td><input type="submit" name="select" value="'._('Select').'" /></td></tr></table><br />';
+		echo '<td><input type="submit" name="select" value="'._('Select').'" /></td>
+			</tr>
+			</table>
+			<br />';
 	}
 
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<input type="hidden" name="chooseoption" value="'.$_POST['chooseoption'].'" />';
+	echo '<input type="hidden" name="ChooseOption" value="'.$_POST['ChooseOption'].'" />';
 	echo '<input type="hidden" name="selectchoice" value="'.$_POST['selectchoice'].'" />';
 
-	if (isset($_POST['chooseoption']) and $_POST['chooseoption']==1) {
+	if (isset($_POST['ChooseOption']) and $_POST['ChooseOption']==1) {
 		echo '<table class="selection"><tr><td>'. _('Discount Category Code') .':</td><td>';
 
 		if (isset($_POST['DiscCat'])) {
-			echo '<input type="text" name="DiscountCategory" maxlength="2" size="2" value="' . $_POST['DiscCat'] . '" /></td>
-					<td>'._('OR').'</td>
-					<td></td>
-					<td>'._('OR').'</td></tr>';
+			echo '<input type="text" name="DiscountCategory" maxlength="2" size="2" value="' . $_POST['DiscCat'] .'" /></td>
+				<td>'._('OR') . '</td>
+				<td></td>
+				<td>'._('OR').'</td>
+				</tr>';
 		} else {
 			echo '<input type="text" name="DiscountCategory" maxlength="2" size="2" /></td>
-					<td>'. _('OR').'</td>
-					<td></td>
-					<td>'._('OR').'</td></tr>';
+				<td>' ._('OR') . '</td>
+				<td></td>
+				<td>'._('OR') . '</td>
+				</tr>';
 		}
 
 		if (!isset($_POST['StockID'])) {
@@ -116,14 +121,13 @@ if (isset($_POST['selectchoice'])) {
 		if (!isset($_POST['PartDesc'])) {
 			$_POST['PartDesc']='';
 		}
-		echo '<tr>
-				<td>'. _('Enter Stock Code') .':</td>
-				<td><input type="text" name="StockID" size="20" maxlength="20" value="'.$_POST['StockID'].'" /></td>
-				<td>'._('Partial code').':</td>
-				<td><input type="text" name="PartID" size="10" maxlength="10" value="'.$_POST['PartID'].'" /></td>
-				<td>'._('Partial description').':</td>
-				<td><input type="text" name="PartDesc" size="10" value="'.$_POST['PartDesc'].'" maxlength="10" /></td>
-				<td><input type="submit" name="search" value="'. _('Search') .'" /></td>
+		echo '<tr><td>'. _('Enter Stock Code') .':</td>
+				<td><input type="text" name="StockID" size="20" maxlength="20" value="' . $_POST['StockID'] . '" /></td>
+				<td>'._('Partial code') . ':</td>
+				<td><input type="text" name="PartID" size="10" maxlength="10" value="' . $_POST['PartID'] . '" /></td>
+				<td>' . _('Partial description') . ':</td>
+				<td><input type="text" name="PartDesc" size="10" value="' . $_POST['PartDesc'] .'" maxlength="10" /></td>
+				<td><input type="submit" name="search" value="' . _('Search') .'" /></td>
 			</tr>';
 
 		echo '</table>';
@@ -132,12 +136,15 @@ if (isset($_POST['selectchoice'])) {
 
 		if (isset($_POST['search'])) {
 			if ($_POST['PartID']!='' and $_POST['PartDesc']=='')
-				$sql="SELECT stockid, description FROM stockmaster WHERE stockid LIKE '%".$_POST['PartID']."%'";
+				$sql="SELECT stockid, description FROM stockmaster
+						WHERE stockid " . LIKE  . " '%".$_POST['PartID']."%'";
 			if ($_POST['PartID']=='' and $_POST['PartDesc']!='')
-				$sql="SELECT stockid, description FROM stockmaster WHERE description LIKE '%".$_POST['PartDesc']."%'";
+				$sql="SELECT stockid, description FROM stockmaster
+						WHERE description " . LIKE  . " '%".$_POST['PartDesc']."%'";
 			if ($_POST['PartID']!='' and $_POST['PartDesc']!='')
-				$sql="SELECT stockid, description FROM stockmaster WHERE stockid LIKE '%".$_POST['PartID']."%' and
-				 description LIKE '%".$_POST['PartDesc']."%'";
+				$sql="SELECT stockid, description FROM stockmaster
+						WHERE stockid " . LIKE  . " '%".$_POST['PartID']."%'
+						AND description " . LIKE . " '%".$_POST['PartDesc']."%'";
 			$result=DB_query($sql,$db);
 			if (!isset($_POST['stockID'])) {
 				echo _('Select a part code').':<br />';
@@ -147,7 +154,9 @@ if (isset($_POST['selectchoice'])) {
 			}
 		}
 	} else {
-		echo '<table class="selection"><tr><td>'._('Assign discount category').'</td>';
+		echo '<table class=selection>
+				<tr>
+				<td>'._('Assign discount category').'</td>';
 		echo '<td><input type="text" name="DiscountCategory" maxlength="2" size="2" /></td>';
 		echo '<td>'._('to all items in stock category').'</td>';
 		$sql = "SELECT categoryid,
@@ -159,7 +168,7 @@ if (isset($_POST['selectchoice'])) {
 			echo '<option value="'.$myrow['categoryid'].'">'.$myrow['categorydescription'].'</option>';
 		}
 		echo '</select></td></tr></table>';
-		echo '<br /><div class="centre"><input type="submit" name="submitcategory" value="'. _('Update Items') .'" /></div>';
+		echo '<br /><div class="centre"><input type="submit" name="SubmitCategory" value="'. _('Update Items') .'" /></div>';
 	}
 	echo '</form>';
 
@@ -205,13 +214,13 @@ if (isset($_POST['selectchoice'])) {
 			$DeleteURL = $_SERVER['PHP_SELF'] . '?Delete=yes&StockID=' . $myrow['stockid'] . '&DiscountCategory=' . $myrow['discountcategory'];
 
 			printf('<td>%s</td>
-				<td>%s - %s</td>
-				<td><a href="%s">'. _('Delete') .'</td>
-				</tr>',
-				$myrow['discountcategory'],
-				$myrow['stockid'],
-				$myrow['description'],
-				$DeleteURL);
+					<td>%s - %s</td>
+					<td><a href="%s" onclick="return confirm(\'' . _('Are you sure you wish to delete this discount category?') . '\');">'. _('Delete') .'</td>
+					</tr>',
+					$myrow['discountcategory'],
+					$myrow['stockid'],
+					$myrow['description'],
+					$DeleteURL);
 
 		}
 
@@ -225,14 +234,16 @@ if (isset($_POST['selectchoice'])) {
 }
 
 if (!isset($_POST['selectchoice'])) {
-	echo '<form method="post" name="choose" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<form method="post" name="choose" action="' . $_SERVER['PHP_SELF'] .  '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection">';
 	echo '<tr><td>'._('Update discount category for').'</td>';
-	echo '<td><select name="chooseoption" onChange="ReloadForm(choose.selectchoice)">';
+	echo '<td><select name="ChooseOption" onChange="ReloadForm(choose.selectchoice)">';
 	echo '<option value="1">'._('a single stock item').'</option>';
 	echo '<option value="2">'._('a complete stock category').'</option>';
-	echo '</select></td></tr></table><br />';
+	echo '</select></td></tr>
+		</table>
+		<br />';
 	echo '<div class="centre"><input type="submit" name="selectchoice" value="'._('Select').'" /></div>';
 }
 
