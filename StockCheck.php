@@ -158,7 +158,7 @@ if (isset($_POST['PrintPDF'])
 
 	$Category = '';
 
-	While ($InventoryPlan = DB_fetch_array($InventoryResult,$db)){
+	while ($InventoryPlan = DB_fetch_array($InventoryResult,$db)){
 
 		if ($Category!=$InventoryPlan['categoryid']){
 			$FontSize=12;
@@ -262,10 +262,13 @@ if (isset($_POST['PrintPDF'])
 	/*if $FromCriteria is not set then show a form to allow input	*/
 		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('print') . '" alt="" />' . ' ' . $title.'</p><br />';
 
-		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="POST"><table class="selection">';
+		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-		echo '<tr><td>' . _('From Inventory Category Code') . ':</font></td><td><select name="FromCriteria">';
+		echo '<table class="selection">
+				<tr>
+					<td>' . _('From Inventory Category Code') . ':</font></td>
+					<td><select name="FromCriteria">';
 
 		$sql="SELECT categoryid, categorydescription FROM stockcategory ORDER BY categoryid";
 		$CatResult= DB_query($sql,$db);
@@ -279,7 +282,7 @@ if (isset($_POST['PrintPDF'])
 		/*Set the index for the categories result set back to 0 */
 		DB_data_seek($CatResult,0);
 
-		While ($myrow = DB_fetch_array($CatResult)){
+		while ($myrow = DB_fetch_array($CatResult)){
 			echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categoryid'] . ' - ' . $myrow['categorydescription'] . '</option>';
 		}
 		echo '</select></td></tr>';
