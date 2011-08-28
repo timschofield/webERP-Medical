@@ -290,11 +290,10 @@ Function Is_ValidAccount ($ActNo) {
 
 } //End Function
 
-
 if (isset($_GET['SupplierID'])){
-	$SupplierID = mb_strtoupper($_GET['SupplierID']);
+	$SupplierID = htmlspecialchars_decode(html_entity_decode($_GET['SupplierID']));
 } elseif (isset($_POST['SupplierID'])){
-	$SupplierID = mb_strtoupper($_POST['SupplierID']);
+	$SupplierID = htmlspecialchars_decode(html_entity_decode($_POST['SupplierID']));
 } else {
 	unset($SupplierID);
 }
@@ -626,7 +625,7 @@ if (isset($_POST['submit'])) {
 
 	}
 	if ($CancelDelete == 0) {
-		$sql="DELETE FROM suppliers WHERE supplierid='" . stripslashes($SupplierID) . "'";
+		$sql="DELETE FROM suppliers WHERE supplierid='" . $SupplierID . "'";
 		$result = DB_query($sql, $db);
 		prnMsg(_('Supplier record for') . ' ' . $SupplierID . ' ' . _('has been deleted'),'success');
 		unset($SupplierID);
@@ -769,7 +768,7 @@ if (!isset($SupplierID)) {
 		$result = DB_query($sql, $db);
 		$myrow = DB_fetch_array($result);
 
-		$_POST['SuppName'] = stripcslashes($myrow['suppname']);
+		$_POST['SuppName'] = stripslashes($myrow['suppname']);
 		$_POST['Address1']  = stripcslashes($myrow['address1']);
 		$_POST['Address2']  = stripcslashes($myrow['address2']);
 		$_POST['Address3']  = stripcslashes($myrow['address3']);
@@ -789,7 +788,7 @@ if (!isset($SupplierID)) {
 		$_POST['FactorID'] = $myrow['factorcompanyid'];
 		$_POST['TaxRef'] = $myrow['taxref'];
 
-		echo '<input type="hidden" name="SupplierID" value="' . $SupplierID . '" />';
+		echo '<input type="hidden" name="SupplierID" value="' . htmlentities($SupplierID) . '" />';
 
 	} else {
 	// its a new supplier being added
