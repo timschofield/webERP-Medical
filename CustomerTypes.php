@@ -242,11 +242,11 @@ if (! isset($_GET['delete'])) {
 
 		echo '<input type="hidden" name="SelectedType" value="' . $SelectedType . '" />';
 		echo '<input type="hidden" name="typeid" value="' . $_POST['typeid'] . '" />';
-		echo '<table class="selection"> <tr><td>';
+		echo '<table class="selection">';
 
 		// We dont allow the user to change an existing type code
 
-		echo 'Type ID: ' . $_POST['typeid'] . '</td></tr>';
+		echo '<tr><td>' . _('Type ID') . ': ' . $_POST['typeid'] . '</td></tr>';
 
 	} else 	{
 
