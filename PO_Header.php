@@ -637,6 +637,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 					unitsofmeasure.unitname as supplierunits,
 					purchdata.suppliers_partno,
 					purchdata.conversionfactor,
+					purchdata.leadtime,
 					stockcategory.stockact
 				FROM stockmaster INNER JOIN stockcategory
 					ON stockmaster.categoryid=stockcategory.categoryid
@@ -655,6 +656,9 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 		}
 		if (!isset($PurchItemRow['conversionfactor'])) {
 			$PurchItemRow['conversionfactor']=1;
+		}
+		if (!isset($PurchItemRow['leadtime'])) {
+			$PurchItemRow['leadtime']=1;
 		}
 
 		$_SESSION['PO'.$identifier]->add_to_order(	1,
@@ -677,6 +681,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 													$Purch_Item,
 													$PurchItemRow['suppliersuom'],
 													$PurchItemRow['conversionfactor'],
+													$PurchItemRow['leadtime'],
 													$PurchItemRow['suppliers_partno'],
 													$Qty*$PurchItemRow['price'],
 													'',
