@@ -241,7 +241,7 @@ if (isset($_POST['submit'])) {
 					)";
 	}
 	echo '<br />';
-	$msg = _('Customer branch<b>').' ' . $_POST['BranchCode'] . ': ' . $_POST['BrName'] . ' '._('</b>has been added, add another branch, or return to <a href=index.php>Main Menu</a>');
+	$msg = _('Customer branch').' <b>' . $_POST['BranchCode'] . ': ' . $_POST['BrName'] . ' </b>'._('has been added, add another branch, or return to') . '<a href="index.php">'._('Main Menu') . '</a>';
 
 	//run the SQL from either of the above possibilites
 
