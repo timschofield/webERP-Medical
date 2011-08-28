@@ -114,19 +114,7 @@ if (isset($_POST['PrintPDF'])
 
 	$LeftOvers = $pdf->addTextWrap(50,$YPos,160,$FontSize,_('Total balances'),'left');
 	$LeftOvers = $pdf->addTextWrap(220,$YPos,60,$FontSize,$DisplayTotBalance,'right');
-	/* UldisN
-	$buf = $pdf->output();
-	$len = mb_strlen($buf);
 
-	header('Content-type: application/pdf');
-	header("Content-Length: ".$len);
-	header('Content-Disposition: inline; filename=DebtorBals.pdf');
-	header('Expires: 0');
-	header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-	header('Pragma: public');
-
-	$pdf->stream();
-	*/
 	$pdf->OutputD($_SESSION['DatabaseName'] . '_DebtorBals_' . date('Y-m-d').'.pdf');//UldisN
 	$pdf->__destruct(); //UldisN
 
@@ -140,7 +128,7 @@ if (isset($_POST['PrintPDF'])
 
 	/*if $FromCriteria is not set then show a form to allow input	*/
 
-		echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="POST"><table class="selection">';
+		echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table class="selection">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 		echo '<tr><td>' . _('From Customer Code') .':</font></td><td><input tabindex="1" type="text" maxlength="6" size="7" name="FromCriteria" value="1" /></td></tr>';
