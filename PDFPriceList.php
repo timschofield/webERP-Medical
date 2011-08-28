@@ -3,7 +3,7 @@
 
 include('includes/session.inc');
 
-If (isset($_POST['PrintPDF'])
+if (isset($_POST['PrintPDF'])
 	AND isset($_POST['FromCriteria'])
 	AND mb_strlen($_POST['FromCriteria'])>=1
 	AND isset($_POST['ToCriteria'])
@@ -252,10 +252,10 @@ If (isset($_POST['PrintPDF'])
 
 	/*if $FromCriteria is not set then show a form to allow input	*/
 
-		echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="POST"><table class="selection">';
+		echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="post">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-		echo '<tr><td>'. _('From Inventory Category Code') .':</font></td><td><select name=FromCriteria>';
+		echo '<table class="selection"><tr><td>'. _('From Inventory Category Code') .':</font></td><td><select name=FromCriteria>';
 
 		$sql="SELECT categoryid, categorydescription FROM stockcategory ORDER BY categoryid";
 		$CatResult= DB_query($sql,$db);
