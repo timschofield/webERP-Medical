@@ -25,7 +25,7 @@ include($PathPrefix.'includes/session.inc');
 
 include('ManualHeader.html');
 ?>
-	<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+	<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 <?php
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
