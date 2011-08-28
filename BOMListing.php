@@ -6,7 +6,7 @@
 
 include('includes/session.inc');
 
-If (isset($_POST['PrintPDF'])
+if (isset($_POST['PrintPDF'])
 	AND isset($_POST['FromCriteria'])
 	AND mb_strlen($_POST['FromCriteria'])>=1
 	AND isset($_POST['ToCriteria'])
@@ -19,7 +19,7 @@ If (isset($_POST['PrintPDF'])
 	$PageNumber=0;
 	$line_height=12;
 
-      /*Now figure out the bills to report for the part range under review */
+		/*Now figure out the bills to report for the part range under review */
 	$SQL = "SELECT bom.parent,
 					bom.component,
 					stockmaster.description as compdescription,
@@ -42,22 +42,22 @@ If (isset($_POST['PrintPDF'])
 	$BOMResult = DB_query($SQL,$db,'','',false,false); //dont do error trapping inside DB_query
 
 	if (DB_error_no($db) !=0) {
-	   $title = _('Bill of Materials Listing') . ' - ' . _('Problem Report');
-	   include('includes/header.inc');
-	   prnMsg(_('The Bill of Material listing could not be retrieved by the SQL because'),'error');
-	   echo '<br /><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
-	   if ($debug==1){
-	      echo '<br />' . $SQL;
-	   }
-	   include('includes/footer.inc');
-	   exit;
+		$title = _('Bill of Materials Listing') . ' - ' . _('Problem Report');
+		include('includes/header.inc');
+		prnMsg(_('The Bill of Material listing could not be retrieved by the SQL because'),'error');
+		echo '<br /><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
+		if ($debug==1){
+			echo '<br />' . $SQL;
+		}
+		include('includes/footer.inc');
+		exit;
 	}
 	if (DB_num_rows($BOMResult)==0){
-	   $title = _('Bill of Materials Listing') . ' - ' . _('Problem Report');
-	   include('includes/header.inc');
-	   prnMsg( _('The Bill of Material listing has no bills to report on'),'warn');
-	   include('includes/footer.inc');
-	   exit;
+		$title = _('Bill of Materials Listing') . ' - ' . _('Problem Report');
+		include('includes/header.inc');
+		prnMsg( _('The Bill of Material listing has no bills to report on'),'warn');
+		include('includes/footer.inc');
+		exit;
 	}
 
 	include ('includes/PDFBOMListingPageHeader.inc');
@@ -78,7 +78,7 @@ If (isset($_POST['PrintPDF'])
 			$SQL = "SELECT description FROM stockmaster WHERE stockmaster.stockid = '" . $BOMList['parent'] . "'";
 			$ParentResult = DB_query($SQL,$db);
 			$ParentRow = DB_fetch_row($ParentResult);
-		        $LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,400-$Left_Margin,$FontSize,$BOMList['parent'] . ' - ' . $ParentRow[0],'left');
+				  $LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,400-$Left_Margin,$FontSize,$BOMList['parent'] . ' - ' . $ParentRow[0],'left');
 			$ParentPart = $BOMList['parent'];
 		}
 
@@ -95,15 +95,15 @@ If (isset($_POST['PrintPDF'])
 		$LeftOvers = $pdf->addTextWrap(480,$YPos,60,$FontSize,$DisplayQuantity,'right');
 
 		if ($YPos < $Bottom_Margin + $line_height){
-		   include('includes/PDFBOMListingPageHeader.inc');
+			include('includes/PDFBOMListingPageHeader.inc');
 		}
 
 	} /*end BOM Listing while loop */
 
 	$YPos -=$line_height;
 	$pdf->line($Page_Width-$Right_Margin, $YPos,$Left_Margin, $YPos);
-     $pdf->OutputD($_SESSION['DatabaseName'] . '_BOMListing_' . date('Y-m-d').'.pdf');//UldisN
-    $pdf->__destruct(); //UldisN
+	  $pdf->OutputD($_SESSION['DatabaseName'] . '_BOMListing_' . date('Y-m-d').'.pdf');//UldisN
+	 $pdf->__destruct(); //UldisN
 
 } else { /*The option to print PDF was not hit */
 
@@ -114,10 +114,13 @@ If (isset($_POST['PrintPDF'])
 
 	/*if $FromCriteria is not set then show a form to allow input	*/
 
-		echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="POST"><table class="selection">';
+		echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="post">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-		echo '<tr><td>' . _('From Inventory Part Code') . ':' . '</font></td><td><input tabindex="1" type="text" name="FromCriteria" size="20" maxlength="20" value="1" /></td></tr>';
+		echo '<table class="selection">
+				<tr>
+					<td>' . _('From Inventory Part Code') . ':' . '</font></td><td><input tabindex="1" type="text" name="FromCriteria" size="20" maxlength="20" value="1" /></td>
+				</tr>';
 
 		echo '<tr><td>' . _('To Inventory Part Code') . ':' . '</td><td><input tabindex="2" type="text" name="ToCriteria" size="20" maxlength="20" value="zzzzzzz" /></td></tr>';
 
