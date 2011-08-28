@@ -125,10 +125,10 @@ if (isset($_POST['PrintPDF'])) {
 		$_POST['FromDate']=Date($_SESSION['DefaultDateFormat']);
 		$_POST['ToDate']=Date($_SESSION['DefaultDateFormat']);
 		$_POST['GPMin']=0;
-		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="POST"><table class="selection">';
+		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-		echo '<tr><td>' . _('Sales Made From') . ' (' . _('in the format') . ' ' . $_SESSION['DefaultDateFormat'] . '):</td>
+		echo '<table class="selection"><tr><td>' . _('Sales Made From') . ' (' . _('in the format') . ' ' . $_SESSION['DefaultDateFormat'] . '):</td>
 								<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="FromDate" size="10" maxlength="10" value="' . $_POST['FromDate'] . '" /></td>
 						</tr>';
 
