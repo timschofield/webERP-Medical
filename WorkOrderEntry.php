@@ -392,7 +392,7 @@ if (isset($_POST['submit'])) { //The update button has been clicked
 	}
 }
 
-echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '" name="form">';
+echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '" name="form1">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<br /><table class="selection">';
@@ -455,7 +455,7 @@ if (DB_num_rows($WOResult)==1){
 echo '<input type="hidden" name="WO" value="' .$_POST['WO'] . '" />';
 echo '<tr><td class="label">' . _('Work Order Reference') . ':</td><td>' . $_POST['WO'] . '</td></tr>';
 echo '<tr><td class="label">' . _('Factory Location') .':</td>
-	<td><select name="StockLocation">';
+	<td><select name="StockLocation" onChange="ReloadForm(form1.submit)">';
 $LocResult = DB_query("SELECT loccode,locationname FROM locations",$db);
 while ($LocRow = DB_fetch_array($LocResult)){
 	if ($_POST['StockLocation']==$LocRow['loccode']){
