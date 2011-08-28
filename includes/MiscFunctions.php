@@ -18,6 +18,11 @@ function reverse_escape($str) {
   return str_replace($search,$replace,$str);
 }
 
+function stock_number_format($Number, $DecimalPlaces) {
+	$LocaleInfo = localeconv();
+	return number_format($Number, $DecimalPlaces, $LocaleInfo['decimal_point'], $LocaleInfo['thousands_sep']);
+}
+
 function getMsg($Msg,$Type='info',$Prefix=''){
 	$Colour='';
 	if (isset($_SESSION['LogSeverity']) and $_SESSION['LogSeverity']>0) {
