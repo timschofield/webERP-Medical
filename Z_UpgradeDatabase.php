@@ -45,8 +45,8 @@ if (!isset($_POST['continue']) and !isset($_POST['CreateSQLFile'])) {
 	echo '<div class="page_help_text">' . _('You have database updates that are required.').'<br />'.
 		_('Please ensure that you have taken a backup of your current database before continuing.'). '</div><br />';
 
-	echo '<div class="centre"><input type="submit" name="continue" value="'.('Continue With Updates').'" />
-		<input type="submit" name="CreateSQLFile" value="'.('Create an SQL file to apply manually').'" /></div>';
+	echo '<div class="centre"><input type="submit" name="continue" value="'. _('Continue With Updates').'" />
+		<input type="submit" name="CreateSQLFile" value="'. _('Create an SQL file to apply manually').'" /></div>';
 	echo '</form>';
 } else {
 	$StartingUpdate=$_SESSION['DBUpdateNumber']+1;

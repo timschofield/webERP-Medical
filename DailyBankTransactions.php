@@ -89,7 +89,7 @@ if (!isset($_POST['Show'])) {
 							<th colspan="7"><font size="3" color="blue">' . _('Account Transactions For').' '.$BankDetailRow['bankaccountname'].' '._('Between').' '.$_POST['FromTransDate'] . ' ' . _('and') . ' ' . $_POST['ToTransDate'] . '</font></th>
 						</tr>';
 		echo '<tr>
-						<th>' . ('Date') . '</th>
+						<th>' . _('Date') . '</th>
 						<th>'._('Transaction type').'</th>
 						<th>'._('Type').'</th>
 						<th>'._('Reference').'</th>
