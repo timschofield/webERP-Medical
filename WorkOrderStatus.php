@@ -75,12 +75,12 @@ include('includes/header.inc');
 				WHERE loccode='" . $_POST['FromLocation'] . "'",
 				$db);
 		$LocRow = DB_fetch_array($LocResult);
-		echo $LocRow['locationname'];
-		echo '<tr><td colspan="4"></td></tr>';
+
 		echo '</td></tr></table><br />';
 
 		//set up options for selection of the item to be issued to the WO
 		echo '<table class="selection"><tr><th colspan="5"><font size="2" color="navy">' . _('Material Requirements For this Work Order') . '</font></th></tr>';
+		echo '<tr><th colspan="4"><font size="2" color="navy">' . _('Stock Issued From') . ' - ' . $LocRow['locationname'] . '</font></th></tr>';
 		echo '<tr><th colspan="2">' . _('Item') . '</th>
 				<th>' . _('Qty Required') . '</th>
 				<th>' . _('Qty Issued') . '</th>
