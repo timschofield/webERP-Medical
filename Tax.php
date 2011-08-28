@@ -81,7 +81,7 @@ if (isset($_POST['TaxAuthority']) AND
 
     $ListCount = 0;
 
-	While ($DebtorTransRow = DB_fetch_array($DebtorTransResult,$db)){
+	while ($DebtorTransRow = DB_fetch_array($DebtorTransResult,$db)){
 
         $ListCount ++;
 
@@ -288,7 +288,7 @@ if (isset($_POST['TaxAuthority']) AND
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Supplier Types') . '" alt="" />' . $title. '</p>';
 
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="POST">
+	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">
 			<table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
