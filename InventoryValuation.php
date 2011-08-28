@@ -168,7 +168,7 @@ if (isset($_POST['PrintPDF'])
 	$DisplayCatTotQty = number_format($CatTot_Qty,0);
 	$LeftOvers = $pdf->addTextWrap(360,$YPos,60,$FontSize,$DisplayCatTotQty, 'right');
 
-	If ($_POST['DetailedReport']=='Yes'){
+	if ($_POST['DetailedReport']=='Yes'){
 		/*draw a line under the CATEGORY TOTAL*/
 		$YPos -= ($line_height);
 		$pdf->line($Left_Margin, $YPos+$line_height-2,$Page_Width-$Right_Margin, $YPos+$line_height-2);
@@ -198,10 +198,10 @@ if (isset($_POST['PrintPDF'])
 	/*if $FromCriteria is not set then show a form to allow input	*/
 		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') . '" alt="" />' . ' ' . $title . '</p>';
 
-		echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="POST"><table class="selection">';
+		echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="post">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-		echo '<tr><td>' . _('From Inventory Category Code') . ':</font></td><td><select name=FromCriteria>';
+		echo '<table class="selection"><tr><td>' . _('From Inventory Category Code') . ':</font></td><td><select name=FromCriteria>';
 
 		$sql="SELECT categoryid, categorydescription FROM stockcategory ORDER BY categoryid";
 		$CatResult= DB_query($sql,$db);
