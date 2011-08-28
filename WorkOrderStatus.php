@@ -53,12 +53,12 @@ include('includes/header.inc');
 		</tr>
 	 	<tr>
 			<td class="label">' . _('Quantity Ordered') . ':</td>
-			<td class="number">' . number_format($WORow['qtyreqd'],$WORow['decimalplaces']) . '</td>
+			<td class="number">' . stock_number_format($WORow['qtyreqd'],$WORow['decimalplaces']) . '</td>
 			<td colspan="2">' . $WORow['units'] . '</td>
 		</tr>
 	 	<tr>
 			<td class="label">' . _('Already Received') . ':</td>
-			<td class="number">' . number_format($WORow['qtyrecd'],$WORow['decimalplaces']) . '</td>
+			<td class="number">' . stock_number_format($WORow['qtyrecd'],$WORow['decimalplaces']) . '</td>
 			<td colspan="2">' . $WORow['units'] . '</td>
 		</tr>
 	 	<tr>
@@ -110,8 +110,8 @@ include('includes/header.inc');
 						$db);
 			$IssuedAlreadyRow = DB_fetch_row($IssuedAlreadyResult);
 
-			echo '<td align="right">' . number_format($WORow['qtyreqd']*$RequirementsRow['qtypu'],$RequirementsRow['decimalplaces']) . '</td>
-				<td align="right">' . number_format($IssuedAlreadyRow[0],$RequirementsRow['decimalplaces']) . '</td></tr>';
+			echo '<td class="number">' . stock_number_format($WORow['qtyreqd']*$RequirementsRow['qtypu'],$RequirementsRow['decimalplaces']) . '</td>
+				<td class="number">' . stock_number_format($IssuedAlreadyRow[0],$RequirementsRow['decimalplaces']) . '</td></tr>';
 		}
 
 		echo '</table>';
