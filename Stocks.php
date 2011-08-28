@@ -345,7 +345,6 @@ if (isset($_POST['submit'])) {
 							discountcategory='" . $_POST['DiscountCategory'] . "',
 							taxcatid='" . $_POST['TaxCat'] . "',
 							decimalplaces='" . $_POST['DecimalPlaces'] . "',
-							appendfile='" . $_POST['ItemPDF'] . "',
 							shrinkfactor='" . $_POST['ShrinkFactor'] . "',
 							pansize='" . $_POST['Pansize'] . "',
 							nextserialno='" . $_POST['NextSerialNo'] . "'
@@ -499,7 +498,6 @@ if (isset($_POST['submit'])) {
 							discountcategory,
 							taxcatid,
 							decimalplaces,
-							appendfile,
 							shrinkfactor,
 							pansize)
 						VALUES ('".$StockID."',
@@ -519,7 +517,6 @@ if (isset($_POST['submit'])) {
 							'" . $_POST['DiscountCategory'] . "',
 							'" . $_POST['TaxCat'] . "',
 							'" . $_POST['DecimalPlaces']. "',
-							'" . $_POST['ItemPDF']. "',
 							'" . $_POST['ShrinkFactor'] . "',
 							'" . $_POST['Pansize'] . "'
 							)";
@@ -559,7 +556,6 @@ if (isset($_POST['submit'])) {
 						unset($_POST['ReorderLevel']);
 						unset($_POST['DiscountCategory']);
 						unset($_POST['DecimalPlaces']);
-						unset($_POST['ItemPDF']);
 						unset($_POST['ShrinkFactor']);
 						unset($_POST['Pansize']);
 						unset($StockID);
@@ -679,7 +675,6 @@ if (isset($_POST['submit'])) {
 		unset($_POST['DiscountCategory']);
 		unset($_POST['TaxCat']);
 		unset($_POST['DecimalPlaces']);
-		unset($_POST['ItemPDF']);
 		unset($_SESSION['SelectedStockItem']);
 		unset($StockID);
 		//echo '<meta http-equiv='Refresh' content='0; url=" . $rootpath . '/SelectProduct.php'>";
@@ -753,7 +748,6 @@ if (!isset($StockID) or $StockID=='' or isset($_POST['UpdateCategories'])) {
 	$_POST['DiscountCategory']  = $myrow['discountcategory'];
 	$_POST['TaxCat'] = $myrow['taxcatid'];
 	$_POST['DecimalPlaces'] = $myrow['decimalplaces'];
-	$_POST['ItemPDF']  = $myrow['appendfile'];
 	$_POST['NextSerialNo'] = $myrow['nextserialno'];
 	$_POST['Pansize']  = $myrow['pansize'];
 	$_POST['ShrinkFactor'] = $myrow['shrinkfactor'];
@@ -819,11 +813,6 @@ function select_files($dir, $label = '', $select_name = 'ItemPDF', $curr_val = '
 	}
 	return $mydir;
 }
-if (!isset($_POST['ItemPDF'])) {
-	$_POST['ItemPDF'] = '';
-}
-echo '<tr><td>' . _('PDF attachment (.pdf)') . ':</td><td>' . select_files('companies/' . $_SESSION['DatabaseName'] .
-		'/pdf_append/','' , 'ItemPDF', $_POST['ItemPDF'], '60') . '</td></tr>';
 
 // Add image upload for New Item  - by Ori
 echo '<tr><td>'. _('Image File (.jpg)') . ':</td><td><input type="file" id="ItemPicture" name="ItemPicture" /></td>';
