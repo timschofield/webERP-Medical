@@ -130,7 +130,7 @@ if (isset($_SESSION['SupplierID'])) {
 	$SupplierName = '';
 	$SQL = "SELECT suppliers.suppname
 		FROM suppliers
-		WHERE suppliers.supplierid ='" . $_SESSION['SupplierID'] . "'";
+		WHERE suppliers.supplierid='" . htmlspecialchars_decode(html_entity_decode(stripslashes($_SESSION['SupplierID']))) . "'";
 	$SupplierNameResult = DB_query($SQL, $db);
 	if (DB_num_rows($SupplierNameResult) == 1) {
 		$myrow = DB_fetch_row($SupplierNameResult);
@@ -163,7 +163,7 @@ if (isset($_SESSION['SupplierID'])) {
 	echo '<br /><a href="'.$rootpath.'/ReverseGRN.php?&SupplierID=' . stripslashes($_SESSION['SupplierID']) . '">' . _('Reverse an Outstanding Goods Received Note (GRN)') . '</a>';
 	echo '</td><td valign=top class="select">'; /* Supplier Maintenance */
 	echo '<a href="' . $rootpath . '/Suppliers.php?">' . _('Add a New Supplier') . '</a><br />';
-	echo '<a href="' . $rootpath . '/Suppliers.php?SupplierID=' . stripslashes($_SESSION['SupplierID']) . '">' . _('Modify Or Delete Supplier Details') . '</a>';
+	echo '<a href="' . $rootpath . '/Suppliers.php?SupplierID=' . urlencode(stripslashes($_SESSION['SupplierID'])) . '">' . _('Modify Or Delete Supplier Details') . '</a>';
 	echo '<br /><a href="' . $rootpath . '/SupplierContacts.php?&SupplierID=' . stripslashes($_SESSION['SupplierID']) . '">' . _('Add/Modify/Delete Supplier Contacts') . '</a>';
 	echo '<br />';
 	echo '<br /><a href="'.$rootpath.'/Shipments.php?NewShipment=Yes">' . _('Set Up A New Shipment') . '</a>';
@@ -259,7 +259,7 @@ if (isset($_POST['Search'])) {
 			echo '<tr class="OddTableRows">';
 			$k = 1;
 		}
-		echo '<td><input type="submit" name="Select" value="'.$myrow['supplierid'].'" /></td>
+		echo '<td><input type="submit" name="Select" value="'.DB_escape_string($myrow['supplierid']).'" /></td>
 			<td>'.$myrow['suppname'].'</td>
 			<td>'.$myrow['currcode'].'</td>
 			<td>'.$myrow['address1'].'</td>
