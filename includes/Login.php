@@ -36,8 +36,10 @@ if (get_magic_quotes_gpc()){
 	<?php
 		if ($AllowCompanySelectionBox == true){
 			echo '<select name="CompanyNameField">';
+
 			$DirHandle = dir('companies/');
-			while (false != ($CompanyEntry = $DirHandle->read())){
+
+			while (false !== ($CompanyEntry = $DirHandle->read())){
 				if (is_dir('companies/' . $CompanyEntry) AND $CompanyEntry != '..' AND $CompanyEntry != '' AND $CompanyEntry!='.svn' AND $CompanyEntry!='.'){
 					if ($CompanyEntry==$DefaultCompany) {
 						echo '<option selected="selected" label="'.$CompanyEntry.'" value="'.$CompanyEntry.'">'.$CompanyEntry.'</option>';
@@ -46,6 +48,9 @@ if (get_magic_quotes_gpc()){
 					}
 				}
 			}
+
+			$DirHandle->close();
+
 			echo '</select>';
 		} else {
 			echo '<input type="text" name="CompanyNameField"  value="' . $DefaultCompany . '" />';
@@ -63,7 +68,7 @@ if (get_magic_quotes_gpc()){
 </div>
     <script type="text/javascript">
             <!--
-                  document.loginform.UserNameEntryField.focus();
+                  document.forms[0].UserNameEntryField.focus();
             //-->
     </script>
 </body>
