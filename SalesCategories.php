@@ -283,7 +283,7 @@ echo '</p>';
 // ----------------------------------------------------------------------------------------
 // Show New or Edit Category
 
-echo '<p><form ENCtype="MULTIPART/FORM-DATA" method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
+echo '<p><form ENCtype="MULTIPART/FORM-DATA" method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 // This array will contain the stockids in use for this category
@@ -365,7 +365,7 @@ if (isset($ParentCategory) and $ParentCategory!='NULL') {
 	$result = DB_query($sql,$db);
 	if($result and DB_num_rows($result)) {
 		// continue id stock id in the stockid array
-		echo '<p><form ENCtype="MULTIPART/FORM-DATA" method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
+		echo '<p><form ENCtype="MULTIPART/FORM-DATA" method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		if( isset($SelectedCategory) ) { // If we selected a category we need to keep it selected
 			echo '<input type="hidden" name="SelectedCategory" value="' . $SelectedCategory . '" />';
