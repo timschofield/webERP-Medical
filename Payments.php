@@ -11,6 +11,15 @@ include('includes/header.inc');
 
 include('includes/SQL_CommonFunctions.inc');
 
+if (isset($_POST['GLAmount'])) {
+	$_POST['GLAmount'] = filter_currency_input($_POST['GLAmount']);
+}
+
+if (isset($_POST['Amount'])) {
+	$_POST['Amount'] = filter_currency_input($_POST['Amount']);
+	$_POST['Discount'] = filter_currency_input($_POST['Discount']);
+}
+
 if (isset($_POST['PaymentCancelled'])) {
 	prnMsg(_('Payment Cancelled since cheque was not printed'), 'warning');
 	include('includes/footer.inc');
@@ -815,7 +824,7 @@ if ($_SESSION['PaymentDetail']->AccountCurrency!=$_SESSION['PaymentDetail']->Cur
 if ($_SESSION['PaymentDetail']->AccountCurrency!=$_SESSION['CompanyRecord']['currencydefault']
 												AND isset($_SESSION['PaymentDetail']->AccountCurrency)){
 	if (isset($SuggestedFunctionalExRate)){
-		$SuggestedFunctionalExRateText = '<b>' . _('Suggested rate:') . ' ' . number_format($SuggestedFunctionalExRate,4) . '</b>';
+		$SuggestedFunctionalExRateText = '<b>' . _('Suggested rate:') . ' ' . currency_number_format($SuggestedFunctionalExRate,$_SESSION['PaymentDetail']->AccountCurrency) . '</b>';
 	} else {
 		$SuggestedFunctionalExRateText ='';
 	}
@@ -823,7 +832,7 @@ if ($_SESSION['PaymentDetail']->AccountCurrency!=$_SESSION['CompanyRecord']['cur
 		$_POST['FunctionalExRate'] = $SuggestedFunctionalExRate;
 	}
 	echo '<tr><td>' . _('Functional Exchange Rate') . ':</td>
-			<td><input type="text" name="FunctionalExRate" maxlength="10" size="12" value="' . $_POST['FunctionalExRate'] . '" /></td>
+			<td><input type="text" name="FunctionalExRate" maxlength="10" size="12" value="' . currency_number_format($_POST['FunctionalExRate'], $_SESSION['PaymentDetail']->AccountCurrency) . '" /></td>
 			<td>' . ' ' . $SuggestedFunctionalExRateText . ' <i>' . _('The exchange rate between the currency of the business (the functional currency) and the currency of the bank account') .  '. 1 ' . $_SESSION['CompanyRecord']['currencydefault'] . ' = ? ' . $_SESSION['PaymentDetail']->AccountCurrency . '</i></td></tr>';
 }
 echo '<tr><td>' . _('Payment type') . ':</td>
@@ -966,14 +975,17 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 
 	if (isset($_POST['GLAmount'])) {
 		echo '<tr><td>' . _('Amount') . ' (' . $_SESSION['PaymentDetail']->Currency . '):</td>
-				<td><input type="text" name="GLAmount" maxlength="12" size="12" class="number" value="' . $_POST['GLAmount'] . '" /></td></tr>';
+				<td><input type="text" name="GLAmount" maxlength="12" size="12" class="number" value="' . currency_number_format($_POST['GLAmount'], $_SESSION['PaymentDetail']->Currency) . '" /></td></tr>';
 	} else {
 		echo '<tr><td>' . _('Amount') . ' (' . $_SESSION['PaymentDetail']->Currency . '):</td>
-				<td><input type="text" name="GLAmount" maxlength="12" size="12" class="number" /></td></tr>';
+				<td><input type="text" name="GLAmount" maxlength="12" size="12" class="number" value="0" /></td></tr>';
 	}
 
 	echo '</table><br />';
-	echo '<div class="centre"><input type="submit" name="Process" value="' . _('Accept') . '" /><input type="submit" name="Cancel" value="' . _('Cancel') . '" /></div>';
+	echo '<div class="centre">
+			<input type="submit" name="Process" value="' . _('Accept') . '" />
+			<input type="submit" name="Cancel" value="' . _('Cancel') . '" />
+		</div>';
 
 	if (sizeOf($_SESSION['PaymentDetail']->GLItems)>0) {
 		echo '<br />
@@ -998,7 +1010,7 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 			}
 			echo '<tr>
 				<td align=left>' . $PaymentItem->cheque . '</td>
-				<td class="number">' . number_format($PaymentItem->Amount,2) . '</td>
+				<td class="number">' . currency_number_format($PaymentItem->Amount,$_SESSION['PaymentDetail']->Currency) . '</td>
 				<td>' . $PaymentItem->GLCode . ' - ' . $PaymentItem->GLActName . '</td>
 				<td>' . stripslashes($PaymentItem->Narrative)  . '</td>
 				<td>' . $PaymentItem->tag . ' - ' . $TagName . '</td>
@@ -1006,7 +1018,7 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 				</tr>';
 			$PaymentTotal += $PaymentItem->Amount;
 		}
-		echo '<tr><td></td><td class="number"><b>' . number_format($PaymentTotal,2) . '</b></td><td></td><td></td><td></td></tr></table><br />';
+		echo '<tr><td></td><td class="number"><b>' . currency_number_format($PaymentTotal,$_SESSION['PaymentDetail']->Currency) . '</b></td><td colspan="3"></td></tr></table><br />';
 		echo '<input type="submit" name="CommitBatch" value="' . _('Accept and Process Payment') . '" />';
 	}
 
@@ -1015,11 +1027,11 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 the fields for entry of receipt amt and disc */
 
 	echo '<table class="selection"><tr><td>' . _('Amount of Payment') . ' ' . $_SESSION['PaymentDetail']->Currency . ':</td>
-				<td><input class="number" type="text" name="Amount" maxlength="12" size="13" value="' . $_SESSION['PaymentDetail']->Amount . '" /></td></tr>';
+				<td><input class="number" type="text" name="Amount" maxlength="12" size="13" value="' . currency_number_format($_SESSION['PaymentDetail']->Amount, $_SESSION['PaymentDetail']->Currency) . '" /></td></tr>';
 
 	if (isset($_SESSION['PaymentDetail']->SupplierID)){ /*So it is a supplier payment so show the discount entry item */
 		echo '<tr><td>' . _('Amount of Discount') . ':</td>
-					<td><input class="number" type="text" name="Discount" maxlength="12" size="13" value="' . $_SESSION['PaymentDetail']->Discount . '" /></td></tr>';
+					<td><input class="number" type="text" name="Discount" maxlength="12" size="13" value="' . currency_number_format($_SESSION['PaymentDetail']->Discount, $_SESSION['PaymentDetail']->Currency) . '" /></td></tr>';
 		echo '<input type="hidden" name="SuppName" value="' . $_SESSION['PaymentDetail']->SuppName . '" />';
 	} else {
 		echo '<input type="hidden" name="discount" value=0 />';
