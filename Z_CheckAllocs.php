@@ -96,8 +96,8 @@ while ($myrow = DB_fetch_array($result)){
 			$myrow1['transno'],
 			$myrow1['reference'],
 			$myrow1['exrate'],
-			$myrow1['totalamt'],
-			$myrow1['amt']);
+			currency_number_format($myrow1['totalamt'], $myrow['currcode']),
+			currency_number_format($myrow1['amt'], $myrow['currcode']));
 
 		$RowCounter++;
 		If ($RowCounter == 12){
@@ -108,7 +108,7 @@ while ($myrow = DB_fetch_array($result)){
 		$AllocsTotal +=$myrow1['amt'];
 	}
 	//end of while loop
-	echo '<tr><td colspan="6" class="number">' . number_format($AllocsTotal,2) . '</td></tr>';
+	echo '<tr><td colspan="6" class="number">' . currency_number_format($AllocsTotal, $myrow['currcode']) . '</td></tr>';
 	echo '</table><hr>';
 }
 
