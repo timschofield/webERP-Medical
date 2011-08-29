@@ -25,7 +25,17 @@ function stock_number_format($Number, $DecimalPlaces) {
 
 function currency_number_format($Amount, $Currency) {
 	$LocaleInfo = localeconv();
-	return number_format($Amount, $_SESSION['Currencies'][$Currency]['DecimalPlaces'], $LocaleInfo['decimal_point'], $LocaleInfo['thousands_sep']);
+	return number_format($Amount, $_SESSION['Currencies'][$Currency]['DecimalPlaces'], $LocaleInfo['mon_decimal_point'], $LocaleInfo['mon_thousands_sep']);
+}
+
+function filter_number_input($Number) {
+	$LocaleInfo = localeconv();
+	return str_replace($LocaleInfo['decimal_point'], '.', str_replace($LocaleInfo['thousands_sep'], '', $Number));
+}
+
+function filter_currency_input($Amount) {
+	$LocaleInfo = localeconv();
+	return str_replace($LocaleInfo['mon_decimal_point'], '.', str_replace($LocaleInfo['mon_thousands_sep'], '', $Amount));
 }
 
 function getMsg($Msg,$Type='info',$Prefix=''){
