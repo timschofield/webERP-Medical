@@ -254,7 +254,7 @@ function WoRealRequirements($db, $WO, $LocCode, $StockID, $Qty=1, $ParentID="") 
 	// remember, 'G' is for ghost (phantom part type)
 
 	// all components should be referenced to the initial parent
-	if ($ParentID == "") {
+	if ($ParentID == '') {
 		$ParentID = $StockID;
 	}
 
