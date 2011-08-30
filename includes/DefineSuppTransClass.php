@@ -208,7 +208,7 @@ Class SuppTrans {
 
 	function Add_Shipt_To_Trans($ShiptRef, $Amount){
 		if ($Amount!=0){
-			$this->Shipts[$this->ShiptCounter] = new Shipment($this->ShiptCounter,
+			$this->Shipts[$this->ShiptsCounter] = new Shipment($this->ShiptsCounter,
 																$ShiptRef,
 																$Amount);
 			$this->ShiptCounter++;
