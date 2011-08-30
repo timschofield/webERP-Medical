@@ -20,6 +20,12 @@ if (isset($_GET['loccode'])){
 	$LocCode=$_SESSION['UserStockLocation'];
 }
 
+foreach ($_POST as $key=>$value) {
+	if (substr($key, 0, 9)=='OutputQty' or substr($key, 0, 7)=='RecdQty') {
+		$_POST[$key] = filter_number_input($value);
+	}
+}
+
 // check for new or modify condition
 if (isset($_REQUEST['WO']) and $_REQUEST['WO']!=''){
 	// modify
@@ -423,6 +429,7 @@ if (DB_num_rows($WOResult)==1){
 										nextlotsnref,
 										controlled,
 										serialised,
+										stockmaster.decimalplaces,
 										nextserialno
 								FROM woitems INNER JOIN stockmaster
 								ON woitems.stockid=stockmaster.stockid
@@ -435,6 +442,7 @@ if (DB_num_rows($WOResult)==1){
 				$_POST['OutputItemDesc'.$i]=$WOItem['description'];
 				$_POST['OutputQty' . $i]= $WOItem['qtyreqd'];
 		  		$_POST['RecdQty' .$i] =$WOItem['qtyrecd'];
+		  		$_POST['DecimalPlaces' . $i] = $WOItem['decimalplaces'];
 		  		if ($WOItem['serialised']==1 AND $WOItem['nextserialno']>0){
 		  		   $_POST['NextLotSNRef' .$i]=$WOItem['nextserialno'];
 		  		} else {
@@ -485,7 +493,7 @@ echo '<tr>
 
 if (isset($WOResult)){
 	echo '<tr><td class="label">' . _('Accumulated Costs') . ':</td>
-			  <td class="number">' . number_format($myrow['costissued'],2) . '</td></tr>';
+			  <td class="number">' . currency_number_format($myrow['costissued'],$_SESSION['CompanyRecord']['currencydefault']) . '</td></tr>';
 }
 echo '</table>
 		<br /><table class="selection">';
@@ -509,13 +517,13 @@ if (isset($NumberOfOutputs)){
 		echo '<td><input type="hidden" name="OutputItem' . $i . '" value="' . $_POST['OutputItem' .$i] . '" />' .
 			$_POST['OutputItem' . $i] . ' - ' . $_POST['OutputItemDesc' .$i] . '</td>';
 		if ($_POST['Controlled'.$i]==1 AND $_SESSION['DefineControlledOnWOEntry']==1){
-			echo '<td style="text-align: right">' . $_POST['OutputQty' . $i] . '</td>';
-			echo '<input type="hidden" name="OutputQty' . $i .'" value="' . $_POST['OutputQty' . $i] . '" />';
+			echo '<td class="number">' . stock_number_format($_POST['OutputQty' . $i], $_POST['DecimalPlaces' . $i]) . '</td>';
+			echo '<input type="hidden" name="OutputQty' . $i .'" value="' . stock_number_format($_POST['OutputQty' . $i], $_POST['DecimalPlaces' . $i]) . '" />';
 		} else {
-		  	echo'<td><input type="text" class="number" name="OutputQty' . $i . '" value="' . $_POST['OutputQty' . $i] . '" size="10" maxlength="10" /></td>';
+		  	echo'<td><input type="text" class="number" name="OutputQty' . $i . '" value="' . stock_number_format($_POST['OutputQty' . $i], $_POST['DecimalPlaces' . $i]) . '" size="10" maxlength="10" /></td>';
 		}
-		 echo '<td class="number"><input type="hidden" name="RecdQty' . $i . '" value="' . $_POST['RecdQty' .$i] . '" />' . $_POST['RecdQty' .$i] .'</td>
-		  		<td class="number">' . ($_POST['OutputQty' . $i] - $_POST['RecdQty' .$i]) . '</td>';
+		 echo '<td class="number"><input type="hidden" name="RecdQty' . $i . '" value="' . stock_number_format($_POST['RecdQty' .$i], $_POST['DecimalPlaces' . $i]) . '" />' . stock_number_format($_POST['RecdQty' .$i], $_POST['DecimalPlaces' . $i]) .'</td>
+		  		<td class="number">' . stock_number_format(($_POST['OutputQty' . $i] - $_POST['RecdQty' .$i]), $_POST['DecimalPlaces' . $i]) . '</td>';
 		if ($_POST['Controlled'.$i]==1){
 			echo '<td><input type="text" name="NextLotSNRef' .$i . '" value="' . $_POST['NextLotSNRef'.$i] . '" /></td>';
 			if ($_SESSION['DefineControlledOnWOEntry']==1){
