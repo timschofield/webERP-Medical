@@ -120,10 +120,15 @@ echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<table cellpadding="2" class="selection">';
-echo '<tr><th colspan="2">' . _('Item Code') . ':<input type="text" name="StockID" value="' . $StockID . '" maxlength="20" />';
+echo '<tr>
+		<th colspan="2">' . _('Item Code') . ':<input type="text" name="StockID" value="' . $StockID . '" maxlength="20" />';
 echo '<input type="submit" name="Show" value="' . _('Show Cost Details') . '" /></th></tr>';
-echo '<tr><th colspan="2"><font color="navy" size="2">' . $StockID . ' - ' . $myrow['description'] . '</font></th></tr>';
-echo '<tr><th colspan="2"><font color="navy" size="2">'. _('Total Quantity On Hand') . ': ' . $myrow['totalqoh'] . ' ' . $myrow['units'] .'</font></th></tr>';
+echo '<tr>
+		<th colspan="2"><font color="navy" size="2">' . $StockID . ' - ' . $myrow['description'] . '</font></th>
+	</tr>';
+echo '<tr>
+		<th colspan="2"><font color="navy" size="2">'. _('Total Quantity On Hand') . ': ' . $myrow['totalqoh'] . ' ' . $myrow['units'] .'</font></th>
+	</tr>';
 
 if (($myrow['mbflag']=='D' AND $myrow['stocktype'] != 'L')
 										OR $myrow['mbflag']=='A'
@@ -146,18 +151,36 @@ echo '<input type="hidden" name="OldLabourCost" value="' . $myrow['labourcost'] 
 echo '<input type="hidden" name="OldOverheadCost" value="' . $myrow['overheadcost'] .'" />';
 echo '<input type="hidden" name="QOH" value="' . $myrow['totalqoh'] .'" />';
 
-echo '<tr><td>' . _('Last Cost') .':</td><td class="number">' . number_format($myrow['lastcost'],2) . '</td></tr>';
+echo '<tr>
+		<td>' . _('Last Cost') .':</td>
+		<td class="number">' . number_format($myrow['lastcost'],2) . '</td>
+	</tr>';
 if (!isset($UpdateSecurity) or !in_array($UpdateSecurity,$_SESSION['AllowedPageSecurityTokens'])){
-	echo '<tr><td>' . _('Cost') . ':</td><td class="number">' . number_format($myrow['materialcost']+$myrow['labourcost']+$myrow['overheadcost'],2) . '</td></tr></table><br />';
+	echo '<tr>
+			<td>' . _('Cost') . ':</td>
+			<td class="number">' . number_format($myrow['materialcost']+$myrow['labourcost']+$myrow['overheadcost'],2) . '</td>
+		</tr></table><br />';
 } else {
 
 	if ($myrow['mbflag']=='M'){
 		echo '<input type="hidden" name="MaterialCost" value="' . $myrow['materialcost'] . '" />';
-		echo '<tr><td>' . _('Standard Material Cost Per Unit') .':</td><td class="number">' . number_format($myrow['materialcost'],4) . '</td></tr>';
-		echo '<tr><td>' . _('Standard Labour Cost Per Unit') . ':</td><td class="number"><input type="text" class="number" name=LabourCost value="' . $myrow['labourcost'] . '" /></td></tr>';
-		echo '<tr><td>' . _('Standard Overhead Cost Per Unit') . ':</td><td class="number"><input type="text" class="number" name=OverheadCost value="' . $myrow['overheadcost'] . '" /></td></tr>';
+		echo '<tr>
+				<td>' . _('Standard Material Cost Per Unit') .':</td>
+				<td class="number">' . number_format($myrow['materialcost'],4) . '</td>
+			</tr>';
+		echo '<tr>
+				<td>' . _('Standard Labour Cost Per Unit') . ':</td>
+				<td class="number"><input type="text" class="number" name=LabourCost value="' . $myrow['labourcost'] . '" /></td>
+			</tr>';
+		echo '<tr>
+				<td>' . _('Standard Overhead Cost Per Unit') . ':</td>
+				<td class="number"><input type="text" class="number" name=OverheadCost value="' . $myrow['overheadcost'] . '" /></td>
+			</tr>';
 	} elseif ($myrow['mbflag']=='B' OR  $myrow['mbflag']=='D') {
-		echo '<tr><td>' . _('Standard Cost') .':</td><td class="number"><input type="text" class="number" name="MaterialCost" value="' . $myrow['materialcost'] . '" /></td></tr>';
+		echo '<tr>
+				<td>' . _('Standard Cost') .':</td>
+				<td class="number"><input type="text" class="number" name="MaterialCost" value="' . $myrow['materialcost'] . '" /></td>
+			</tr>';
 	} else 	{
 		echo '<input type="hidden" name="LabourCost" value="0" />';
 		echo '<input type="hidden" name="OverheadCost" value="0" />';
