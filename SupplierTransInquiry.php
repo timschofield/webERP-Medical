@@ -124,8 +124,8 @@ if (isset($_POST['ShowResults']) and $_POST['TransType'] != ''){
 			$myrow['supplierno'] . ' - ' . $myrow['suppname'],
 			$myrow['transtext'],
 			ConvertSQLDate($myrow['duedate']),
-			$myrow['rate'],
-			number_format($myrow['totalamt'],2),
+			currency_number_format($myrow['rate'],$myrow['currcode']),
+			currency_number_format($myrow['totalamt'],$myrow['currcode']),
 			$myrow['currcode']
 		);
 
