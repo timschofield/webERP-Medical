@@ -386,10 +386,10 @@ if (isset($_POST['CommitBatch'])){
 								banktranstype,
 								amount,
 								currcode)
-						valueS ('" . $ReceiptTransNo . "',
+						VALUES ('" . $ReceiptTransNo . "',
 							2,
 							'" . $PaymentItem->GLCode . "',
-							'" . _('Act Transfer From ') . $_SESSION['PaymentDetail']->Account . ' - ' . $PaymentItem->Narrative . "',
+							'" . substr(_('Act Transfer From ') . $_SESSION['PaymentDetail']->Account . ' - ' . $PaymentItem->Narrative,0,50) . "',
 							'" . (($_SESSION['PaymentDetail']->ExRate * $_SESSION['PaymentDetail']->FunctionalExRate)/$TrfToBankExRate). "',
 							'" . $TrfToBankExRate . "',
 							'" . FormatDateForSQL($_SESSION['PaymentDetail']->DatePaid) . "',
@@ -420,7 +420,7 @@ if (isset($_POST['CommitBatch'])){
 						rate,
 						ovamount,
 						transtext) ";
-			$SQL = $SQL . "valueS ('" . $TransNo . "',
+			$SQL = $SQL . "VALUES ('" . $TransNo . "',
 					22,
 					'" . $_SESSION['PaymentDetail']->SupplierID . "',
 					'" . FormatDateForSQL($_SESSION['PaymentDetail']->DatePaid) . "',
@@ -459,7 +459,7 @@ if (isset($_POST['CommitBatch'])){
 							account,
 							narrative,
 							amount) ";
-				$SQL=$SQL . "valueS (
+				$SQL=$SQL . "VALUES (
 						22,
 						'" . $TransNo . "',
 						'" . FormatDateForSQL($_SESSION['PaymentDetail']->DatePaid) . "',
@@ -481,7 +481,7 @@ if (isset($_POST['CommitBatch'])){
 								account,
 								narrative,
 								amount) ";
-					$SQL=$SQL . "valueS (22,
+					$SQL=$SQL . "VALUES (22,
 						'" . $TransNo . "',
 						'" . FormatDateForSQL($_SESSION['PaymentDetail']->DatePaid) . "',
 						'" . $PeriodNo . "',
@@ -507,7 +507,7 @@ if (isset($_POST['CommitBatch'])){
 							account,
 							narrative,
 							amount) ";
-				$SQL = $SQL . "valueS ('" . $Transtype . "',
+				$SQL = $SQL . "VALUES ('" . $Transtype . "',
 						'" . $TransNo . "',
 						'" . FormatDateForSQL($_SESSION['PaymentDetail']->DatePaid) . "',
 						'" . $PeriodNo . "',
@@ -535,7 +535,7 @@ if (isset($_POST['CommitBatch'])){
 					banktranstype,
 					amount,
 					currcode) ";
-			$SQL= $SQL . "valueS ('" . $TransNo . "',
+			$SQL= $SQL . "VALUES ('" . $TransNo . "',
 				'" . $Transtype . "',
 				'" . $_SESSION['PaymentDetail']->Account . "',
 				'" . $_SESSION['PaymentDetail']->Narrative . "',
@@ -562,7 +562,7 @@ if (isset($_POST['CommitBatch'])){
 					banktranstype,
 					amount,
 					currcode) ";
-				$SQL= $SQL . "valueS ('" . $TransNo . "',
+				$SQL= $SQL . "VALUES ('" . $TransNo . "',
 					'" . $Transtype . "',
 					'" . $_SESSION['PaymentDetail']->Account . "',
 					'" . $_SESSION['PaymentDetail']->Narrative . "',
