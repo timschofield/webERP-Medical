@@ -154,7 +154,7 @@ if (isset($_POST['ShowResults']) and $_POST['TransType'] != ''){
 					</tr>',
 					$GLTransRow['account'],
 					$GLTransRow['accountname'],
-					number_format($GLTransRow['amount'],2),
+					currency_number_format($GLTransRow['amount'],$_SESSION['Currencies']['currencydefault']),
 					$GLTransRow['narrative']);
 
 				$CheckGLTransBalance += $GLTransRow['amount'];
