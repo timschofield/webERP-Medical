@@ -59,19 +59,20 @@ if (isset($_POST['Process'])) {
 	$_SESSION['offer']->CurrCode=$Currency;
 	$LineNo=0;
 	foreach ($_POST as $key=>$value) {
-		if (mb_substr($key, 0, 8)=='Quantity') {
-			$ItemCode=mb_substr($key, 8, mb_strlen($key));
-			$Quantity=$value;
-			$Price=$_POST['Price'.$ItemCode];
+		if (mb_substr($key,0,7)=='StockID') {
+			$Index = mb_substr($key,7,mb_strlen($key)-7);
+			$ItemCode=$value;
+			$Quantity=$_POST['Qty'.$Index];
+			$Price=$_POST['Price'.$Index];
 			$_SESSION['offer']->add_to_offer(
 				$LineNo,
 				$ItemCode,
 				$Quantity,
-				$_POST['ItemDescription'.$ItemCode],
+				$_POST['ItemDescription'.$Index],
 				$Price,
-				$_POST['UOM'.$ItemCode],
-				$_POST['DecimalPlaces'.$ItemCode],
-				$_POST['RequiredByDate'.$ItemCode]);
+				$_POST['UOM'.$Index],
+				$_POST['DecimalPlaces'.$Index],
+				$_POST['RequiredByDate'.$Index]);
 			$LineNo++;
 		}
 	}
@@ -116,11 +117,11 @@ if (isset($_POST['Process'])) {
 	foreach ($_SESSION['offer']->LineItems as $LineItem)  {
 		echo '<tr><td>' . $LineItem->StockID . '</td>';
 		echo '<td>' . $LineItem->ItemDescription . '</td>';
-		echo '<td class="number"> ' .number_format($LineItem->Quantity, $LineItem->DecimalPlaces) . '</td>';
+		echo '<td class="number"> ' .stock_number_format($LineItem->Quantity, $LineItem->DecimalPlaces) . '</td>';
 		echo '<td>' . $LineItem->Units . '</td>';
 		echo '<td>' . $_SESSION['offer']->CurrCode . '</td>';
-		echo '<td class="number">' . number_format($LineItem->Price, 2) . '</td>';
-		echo '<td class="number">' . number_format($LineItem->Price*$LineItem->Quantity, 2) . '</td>';
+		echo '<td class="number">' . currency_number_format($LineItem->Price, $_SESSION['offer']->CurrCod) . '</td>';
+		echo '<td class="number">' . currency_number_format($LineItem->Price*$LineItem->Quantity, $_SESSION['offer']->CurrCod) . '</td>';
 		echo '<td>' . $LineItem->ExpiryDate . '</td>';
 	}
 	echo '</table><br />';
@@ -155,49 +156,42 @@ if (isset($_POST['SupplierID']) and empty($_POST['TenderType']) and empty($_POST
 
 if (isset($_POST['NewItem']) and !isset($_POST['Refresh'])) {
 	foreach ($_POST as $key => $value) {
-		if (mb_substr($key,0,3)=='qty') {
-			$StockID=mb_substr($key,3);
-			$Quantity=$value;
-		}
-		if (mb_substr($key,0,5)=='price') {
-			$Price=$value;
-		}
-		if (mb_substr($key,0,3)=='uom') {
-			$UOM=$value;
-		}
-		if (isset($UOM)) {
-			$sql="SELECT description, decimalplaces FROM stockmaster WHERE stockid='".$StockID."'";
-			$result=DB_query($sql, $db);
-			$myrow=DB_fetch_array($result);
-			$_SESSION['offer']->add_to_offer(
-				$_SESSION['offer']->LinesOnOffer,
-				$StockID,
-				$Quantity,
-				$myrow['description'],
-				$Price,
-				$UOM,
-				$myrow['decimalplaces'],
-				DateAdd(date($_SESSION['DefaultDateFormat']),'m',3));
-			unset($UOM);
+		if (mb_substr($key,0,7)=='StockID') {
+			$Index = mb_substr($key,7,mb_strlen($key)-7);
+			$StockID=$value;
+			$Quantity=filter_number_input($_POST['Qty'.$Index]);
+			$Price=filter_currency_input($_POST['Price'.$Index]);
+			$UOM=$_POST['uom'.$Index];
+			if (isset($UOM) and $Quantity>0) {
+				$sql="SELECT description, decimalplaces FROM stockmaster WHERE stockid='".$StockID."'";
+				$result=DB_query($sql, $db);
+				$myrow=DB_fetch_array($result);
+				$_SESSION['offer']->add_to_offer($_SESSION['offer']->LinesOnOffer,
+												$StockID,
+												$Quantity,
+												$myrow['description'],
+												$Price,
+												$UOM,
+												$myrow['decimalplaces'],
+												DateAdd(date($_SESSION['DefaultDateFormat']),'m',3));
+				unset($UOM);
+			}
 		}
 	}
 }
 
 if (isset($_POST['Refresh']) and !isset($_POST['NewItem'])) {
 	foreach ($_POST as $key => $value) {
-		if (mb_substr($key,0,3)=='qty') {
-			$LineNo=mb_substr($key,3);
-			$Quantity=$value;
-		}
-		if (mb_substr($key,0,5)=='price') {
-			$Price=$value;
-		}
-		if (mb_substr($key,0,10)=='expirydate') {
-			$ExpiryDate=$value;
+		if (mb_substr($key,0,7)=='StockID') {
+			$Index = mb_substr($key,7,mb_strlen($key)-7);
+			$StockID=$value;
+			$Quantity=filter_number_input($_POST['Qty'.$Index]);
+			$Price=filter_currency_input($_POST['Price'.$Index]);
+			$ExpiryDate=$_POST['expirydate'.$Index];
 		}
 		if (isset($ExpiryDate)) {
 			$_SESSION['offer']->update_offer_item(
-				$LineNo,
+				$Index,
 				$Quantity,
 				$Price,
 				$ExpiryDate);
@@ -318,14 +312,15 @@ if ($_POST['TenderType']!=3 and isset($_SESSION['offer']) and $_SESSION['offer']
 				$k=1;
 			}
 			if ($LineItems->ExpiryDate < date('Y-m-d')) {
-				echo '<tr bgcolor=#F7A9A9>';
+				echo '<tr bgcolor="#F7A9A9">';
 			}
+			echo '<input type="hidden" name="StockID'.$LineItems->LineNo.'" value="'.$LineItems->StockID.'" />';
 			echo '<td>'.$LineItems->StockID.'</td>';
 			echo '<td>'.$LineItems->ItemDescription.'</td>';
-			echo '<td><input type="text" class="number" name="qty'.$LineItems->LineNo.'" value="'.number_format($LineItems->Quantity,$LineItems->DecimalPlaces).'" /></td>';
+			echo '<td><input type="text" class="number" name="Qty'.$LineItems->LineNo.'" value="'.stock_number_format($LineItems->Quantity,$LineItems->DecimalPlaces).'" /></td>';
 			echo '<td>'.$LineItems->Units.'</td>';
-			echo '<td><input type="text" class="number" name="price'.$LineItems->LineNo.'" value="'.number_format($LineItems->Price,2,'.','').'" /></td>';
-			echo '<td class="number">'.number_format($LineItems->Price*$LineItems->Quantity,2).'</td>';
+			echo '<td><input type="text" class="number" name="Price'.$LineItems->LineNo.'" value="'.currency_number_format($LineItems->Price,$Currency).'" /></td>';
+			echo '<td class="number">'.currency_number_format($LineItems->Price*$LineItems->Quantity,$Currency).'</td>';
 			echo '<td><input type="text" size="11" class="date" alt='.$_SESSION['DefaultDateFormat'].' name="expirydate'.$LineItems->LineNo.'" value="'.$LineItems->ExpiryDate.'" /></td>';
 			echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $LineItems->LineNo . '&Type=' . $_POST['TenderType'] . '">' . _('Remove') . '</a></td></tr>';
 			echo '</tr>';
@@ -482,24 +477,26 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==3 and !isset($_POST['S
 		echo '<th>' . _('Currency') . '</th>';
 		echo '<th>' . $Supplier . '<br />' . _('Price') . '</th>';
 		echo '<th>' . _('Delivery By') . '</th>';
+		$i=0;
 		while ($MyItemRow=DB_fetch_array($ItemResult)) {
 			echo '<tr><td>' . $MyItemRow['stockid'] . '</td>';
 			echo '<td>' . $MyItemRow['description'] . '</td>';
-			echo '<input type="hidden" name="ItemDescription'. $MyItemRow['stockid'] . '" value="' . $MyItemRow['description'] . '" />';
+			echo '<input type="hidden" name="StockID'. $i . '" value="' . $MyItemRow['stockid'] . '" />';
+			echo '<input type="hidden" name="ItemDescription'. $i . '" value="' . $MyItemRow['description'] . '" />';
 			echo '<td>' . $MyItemRow['suppliers_partno'] . '</td>';
-			echo '<td class="number">' . number_format($MyItemRow['quantity'], $MyItemRow['decimalplaces']) . '</td>';
+			echo '<td class="number">' . stock_number_format($MyItemRow['quantity'], $MyItemRow['decimalplaces']) . '</td>';
 			echo '<td>' . $MyItemRow['units'] . '</td>';
 			echo '<td>' . ConvertSQLDate($MyItemRow['requiredbydate']) . '</td>';
 			if ($MyItemRow['suppliersuom']=='') {
 				$MyItemRow['suppliersuom']=$MyItemRow['units'];
 			}
-			echo '<td><input type="text" class="number" size="10" name="Quantity'. $MyItemRow['stockid'] . '" value="' . number_format($MyItemRow['quantity'], $MyItemRow['decimalplaces']) . '" /></td>';
-			echo '<input type="hidden" name="UOM'. $MyItemRow['stockid'] . '" value="' . $MyItemRow['units'] . '" />';
-			echo '<input type="hidden" name="DecimalPlaces'. $MyItemRow['stockid'] . '" value="' . $MyItemRow['decimalplaces'] . '" />';
+			echo '<td><input type="text" class="number" size="10" name="Qty'. $i . '" value="' . stock_number_format($MyItemRow['quantity'], $MyItemRow['decimalplaces']) . '" /></td>';
+			echo '<input type="hidden" name="UOM'. $i . '" value="' . $MyItemRow['units'] . '" />';
+			echo '<input type="hidden" name="DecimalPlaces'. $i . '" value="' . $MyItemRow['decimalplaces'] . '" />';
 			echo '<td>' . $MyItemRow['suppliersuom'] . '</td>';
 			echo '<td>' . $myrow[1] . '</td>';
-			echo '<td><input type="text" class="number" size="10" name="Price'. $MyItemRow['stockid'] . '" value="0.00" /></td>';
-			echo '<td><input type="text" class="date" alt="' .$_SESSION['DefaultDateFormat'] .'" name="RequiredByDate'. $MyItemRow['stockid'] . '" size="11" value="' . ConvertSQLDate($MyItemRow['requiredbydate']) . '" /></td>';
+			echo '<td><input type="text" class="number" size="10" name="Price'. $i . '" value="0.00" /></td>';
+			echo '<td><input type="text" class="date" alt="' .$_SESSION['DefaultDateFormat'] .'" name="RequiredByDate'. $i . '" size="11" value="' . ConvertSQLDate($MyItemRow['requiredbydate']) . '" /></td>';
 		}
 		echo '</form>';
 	}
@@ -631,8 +628,8 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 			</tr>';
 		echo $tableheader;
 
-		$j = 1;
-		$k=0; //row colour counter
+		$i = 0;
+		$k = 0; //row colour counter
 		$PartsDisplayed=0;
 		while ($myrow=DB_fetch_array($SearchResult)) {
 
@@ -677,11 +674,12 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 					<td>'.$myrow['description'].'</td>
 					<td>'.$uom.'</td>
 					<td>'.$ImageSource.'</td>
-					<td><input class="number" type="text" size="6" value="0" name="qty'.$myrow['stockid'].'" /></td>
-					<td><input class="number" type="text" size="12" value="0" name="price'.$myrow['stockid'].'" /></td>
-					<input type="hidden" value="'.$uom.'" name="uom'.$myrow['stockid'].'" />
+					<td><input class="number" type="text" size="6" value="0" name="Qty'.$i.'" /></td>
+					<td><input class="number" type="text" size="12" value="0" name="Price'.$i.'" /></td>
+					<input type="hidden" size="12" value="'.$myrow['stockid'].'" name="StockID'.$i.'" />
+					<input type="hidden" value="'.$uom.'" name="uom'.$i.'" />
 					</tr>';
-
+			$i++;
 			$PartsDisplayed++;
 			if ($PartsDisplayed == $Maximum_Number_Of_Parts_To_Show){
 				break;
