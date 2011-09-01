@@ -10,10 +10,12 @@
     <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
         <tr>
             <td>
-            <div class+"centre"><font size="4" color="red"><br /><br /><br /><b>
-
-		Too many failed login attempts
-		<p>You will have to see an authorised person to obtain access to the system</p></b></font></div>
+            <div class="centre">
+             <h3 class="error">
+		Too many failed login attempts<br /><br />
+		You will have to see an authorised person to obtain access to the system
+             </h3>
+            </div>
             </td>
         </tr>
     </table>
