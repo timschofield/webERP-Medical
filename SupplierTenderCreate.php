@@ -190,17 +190,11 @@ if (isset($_POST['SelectedSupplier'])) {
 
 if (isset($_POST['NewItem']) and !isset($_POST['Refresh'])) {
 	foreach ($_POST as $key => $value) {
-		if (mb_substr($key,0,3)=='qty') {
-			$StockID=mb_substr($key,3);
-			$Quantity=$value;
-		}
-		if (mb_substr($key,0,5)=='price') {
-			$Price=$value;
-		}
-		if (mb_substr($key,0,3)=='uom') {
-			$UOM=$value;
-		}
-		if (isset($UOM)) {
+		if (mb_substr($key,0,7)=='StockID') {
+			$Index = mb_substr($key,7,mb_strlen($key)-7);
+			$StockID = $value;
+			$Quantity = $_POST['Qty'.$Index];
+			$UOM = $_POST['UOM'.$Index];
 			$sql="SELECT description, decimalplaces FROM stockmaster WHERE stockid='".$StockID."'";
 			$result=DB_query($sql, $db);
 			$myrow=DB_fetch_array($result);
@@ -398,7 +392,7 @@ if (!isset($_SESSION['tender']) or isset($_POST['LookupDeliveryAddress']) or $Sh
 			}
 			echo '<td>'.$LineItems->StockID.'</td>';
 			echo '<td>'.$LineItems->ItemDescription.'</td>';
-			echo '<td class="number">' . number_format($LineItems->Quantity,$LineItems->DecimalPlaces).'</td>';
+			echo '<td class="number">' . stock_number_format($LineItems->Quantity,$LineItems->DecimalPlaces).'</td>';
 			echo '<td>'.$LineItems->Units.'</td>';
 			echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?DeleteItem=' . $LineItems->LineNo . '">' . _('Delete') . '</a></td></tr>';
 			echo '</tr>';
@@ -754,8 +748,8 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 			</tr>';
 		echo $tableheader;
 
-		$j = 1;
-		$k=0; //row colour counter
+		$i = 0;
+		$k = 0; //row colour counter
 		$PartsDisplayed=0;
 		while ($myrow=DB_fetch_array($SearchResult)) {
 
@@ -782,14 +776,16 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 					<td>'.$myrow['description'].'</td>
 					<td>'.$uom.'</td>
 					<td>'.$ImageSource.'</td>
-					<td><input class="number" type="text" size="6" value="0" name="qty'.$myrow['stockid'].'" /></td>
-					<input type="hidden" size="6" value="'.$uom.'" name="uom'.$myrow['stockid'].'" />
+					<td><input class="number" type="text" size="6" value="0" name="Qty'.$i.'" /></td>
+					<input type="hidden" value="'.$uom.'" name="UOM'.$i.'" />
+					<input type="hidden" value="'.$myrow['stockid'].'" name="StockID'.$i.'" />
 					</tr>';
 
 			$PartsDisplayed++;
 			if ($PartsDisplayed == $Maximum_Number_Of_Parts_To_Show){
 				break;
 			}
+			$i++;
 #end of page full new headings if
 		}
 #end of while loop
