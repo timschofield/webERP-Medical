@@ -193,7 +193,7 @@ if (isset($_POST['NewItem']) and !isset($_POST['Refresh'])) {
 		if (mb_substr($key,0,7)=='StockID') {
 			$Index = mb_substr($key,7,mb_strlen($key)-7);
 			$StockID = $value;
-			$Quantity = $_POST['Qty'.$Index];
+			$Quantity = filter_number_input($_POST['Qty'.$Index]);
 			$UOM = $_POST['UOM'.$Index];
 			$sql="SELECT description, decimalplaces FROM stockmaster WHERE stockid='".$StockID."'";
 			$result=DB_query($sql, $db);
