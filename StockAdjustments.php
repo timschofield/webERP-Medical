@@ -290,8 +290,14 @@ if (isset($_POST['EnterAdjustment']) and $_POST['EnterAdjustment']!= ''){
 
 		$Result = DB_Txn_Commit($db);
 
-		prnMsg( _('A stock adjustment for'). ' ' . $_SESSION['Adjustment']->StockID . ' -  ' . $_SESSION['Adjustment']->ItemDescription . ' '._('has been created from location').' ' . $_SESSION['Adjustment']->StockLocation .' '. _('for a quantity of') . ' ' . $_SESSION['Adjustment']->Quantity,'success');
+		$ConfirmationText = _('A stock adjustment for'). ' ' . $_SESSION['Adjustment']->StockID . ' -  ' . $_SESSION['Adjustment']->ItemDescription . ' '._('has been created from location').' ' . $_SESSION['Adjustment']->StockLocation .' '. _('for a quantity of') . ' ' . $_SESSION['Adjustment']->Quantity ;
+		prnMsg( $ConfirmationText,'success');
 
+		if ($_SESSION['InventoryManagerEmail']!=''){
+			$ConfirmationText = $ConfirmationText . ' ' . _('by user') . ' ' . $_SESSION['UserID'] . ' ' . _('at') . ' ' . Date('Y-m-d H:i:s');
+			$EmailSubject = _('Stock adjustment for'). ' ' . $_SESSION['Adjustment']->StockID;
+			mail($_SESSION['InventoryManagerEmail'],$EmailSubject,$ConfirmationText);
+		}
 		unset ($_SESSION['Adjustment']);
 	} /* end if there was no input error */
 

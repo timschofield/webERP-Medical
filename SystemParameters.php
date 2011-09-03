@@ -83,6 +83,9 @@ if (isset($_POST['submit'])) {
 	}elseif (!IsEmailAddress($_POST['X_PurchasingManagerEmail'])){
 		$InputError = 1;
 		prnMsg(_('The Purchasing Manager Email address does not appear to be valid'),'error');
+	}elseif (!IsEmailAddress($_POST['X_InventoryManagerEmail']) AND $_POST['X_InventoryManagerEmail']!=''){
+		$InputError = 1;
+		prnMsg(_('The Inventory Manager Email address does not appear to be valid'),'error');
 	}elseif (mb_strlen($_POST['X_FrequentlyOrderedItems']) > 2 or !is_numeric($_POST['X_FrequentlyOrderedItems'])) {
 		$InputError = 1;
 		prnMsg(_('The number of frequently ordered items to display must be numeric'),'error');
@@ -274,6 +277,9 @@ if (isset($_POST['submit'])) {
 		if ($_SESSION['PurchasingManagerEmail'] != $_POST['X_PurchasingManagerEmail']){
 			$sql[] = "UPDATE config SET confvalue='" . $_POST['X_PurchasingManagerEmail'] . "' WHERE confname='PurchasingManagerEmail'";
 		}
+		if ($_SESSION['InventoryManagerEmail'] != $_POST['X_InventoryManagerEmail']){
+			$sql[] = "UPDATE config SET confvalue='" . $_POST['X_InventoryManagerEmail'] . "' WHERE confname='InventoryManagerEmail'";
+		}
 		if ($_SESSION['AutoCreateWOs'] != $_POST['X_AutoCreateWOs']){
 			$sql[] = "UPDATE config SET confvalue='" . $_POST['X_AutoCreateWOs'] . "' WHERE confname='AutoCreateWOs'";
 		}
@@ -456,8 +462,8 @@ echo '<tr style="outline: 1px solid"><td>' . _('Invoice Orientation') . ':</td>
 //Blind packing note
 echo '<tr style="outline: 1px solid"><td>' . _('Show company details on packing slips') . ':</td>
 	<td><select name="X_DefaultBlindPackNote">
-	<option '.($_SESSION['DefaultBlindPackNote']=="1"?'selected ':'').'value="1">'._('Show Company Details') . '</option>
-	<option '.($_SESSION['DefaultBlindPackNote']=="2"?'selected ':'').'value="2">'._('Hide Company Details') . '</option>
+	<option '.($_SESSION['DefaultBlindPackNote']=='1'?'selected ':'').'value="1">'._('Show Company Details') . '</option>
+	<option '.($_SESSION['DefaultBlindPackNote']=='2'?'selected ':'').'value="2">'._('Hide Company Details') . '</option>
 	</select></td>
 	<td>' . _('Customer branches can be set by default not to print packing slips with the company logo and address. This is useful for companies that ship to customers customers and to show the source of the shipment would be inappropriate. There is an option on the setup of customer branches to ship blind, this setting is the default applied to all new customer branches') . '</td>
 	</tr>';
@@ -1016,6 +1022,9 @@ echo '<tr style="outline: 1px solid"><td>' . _('Purchasing Manager Email Address
 	<td><input type="text" name="X_PurchasingManagerEmail" size="50" maxlength="50" value="' . $_SESSION['PurchasingManagerEmail'] . '" /></td>
 	<td>' . _('The email address for the purchasing manager, used to receive notifications by the tendering system') .'</td></tr>';
 
+echo '<tr style="outline: 1px solid"><td>' . _('Inventory Manager Email Address') . ':</td>
+	<td><input type="text" name="X_InventoryManagerEmail" size=50 maxlength=50 value="' . $_SESSION['InventoryManagerEmail'] . '"></td>
+	<td>' . _('The email address for the inventory manager, where notifications of all manual stock adjustments created are sent by the system. Leave blank if no emails should be sent to the factory manager for manual stock adjustments') .'</td></tr>';
 
 echo '</table>
 		<br /><div class="centre"><input type="submit" name="submit" value="' . _('Update') . '" /></div>
