@@ -262,7 +262,16 @@ if( $automake && !isset($FileName) || $useblank ) {
 		if( !isset($height) ) {
 			$height = imagesy($im);
 		}
-		$tmpim = imagecreatetruecolor($width, $height);
+		$resize_scale = min($width/$sw, $height/$sh);
+		if ($resize_scale < 1) {
+			$resize_new_width = floor($resize_scale*$sw);
+			$resize_new_height = floor($resize_scale*$sh);
+		} else {
+			$resize_new_width = $sw;
+			$resize_new_height = $sh;
+		}
+
+		$tmpim = imagecreatetruecolor($resize_new_width, $resize_new_height);
 		imagealphablending ( $tmpim, true);
 		imagecopyresized($tmpim,$im,0,0,0,0,$width, $height, imagesx($im), imagesy($im) );
 		imagedestroy($im);
