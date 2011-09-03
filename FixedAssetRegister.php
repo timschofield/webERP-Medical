@@ -223,14 +223,14 @@ if (isset($_POST['submit']) or isset($_POST['pdf']) or isset($_POST['csv'])) {
 		echo '<input type="hidden" name="AssetLocation" value="' . $_POST['AssetLocation'] . '" />';
 		//Total Values
 		echo '<tr><th style="vertical-align:top" colspan="5">' . _('TOTAL') . '</th>';
-		echo '<th style="text-align:right">' . number_format($TotalCostBfwd, 2) . '</th>';
-		echo '<th style="text-align:right">' . number_format($TotalDepnBfwd, 2) . '</th>';
-		echo '<th style="text-align:right">' . number_format($TotalAdditions, 2) . '</th>';
-		echo '<th style="text-align:right">' . number_format($TotalDepn, 2) . '</th>';
-		echo '<th style="text-align:right">' . number_format($TotalCostCfwd, 2) . '</th>';
-		echo '<th style="text-align:right">' . number_format($TotalDepnCfwd, 2) . '</th>';
-		echo '<th style="text-align:right">' . number_format($TotalNBV, 2) . '</th>';
-		echo '<th style="text-align:right">' . number_format($TotalDisposals, 2) . '</th></tr>';
+		echo '<th class="number">' . number_format($TotalCostBfwd, 2) . '</th>';
+		echo '<th class="number">' . number_format($TotalDepnBfwd, 2) . '</th>';
+		echo '<th class="number">' . number_format($TotalAdditions, 2) . '</th>';
+		echo '<th class="number">' . number_format($TotalDepn, 2) . '</th>';
+		echo '<th class="number">' . number_format($TotalCostCfwd, 2) . '</th>';
+		echo '<th class="number">' . number_format($TotalDepnCfwd, 2) . '</th>';
+		echo '<th class="number">' . number_format($TotalNBV, 2) . '</th>';
+		echo '<th class="number">' . number_format($TotalDisposals, 2) . '</th></tr>';
 		echo '</table>';
 		echo '<br /><div class="centre"><input type="submit" name="pdf" value="' . _('Print as a pdf') . '" />&nbsp;';
 		echo '<input type="submit" name="csv" value="' . _('Print as CSV') . '" /></div></form>';
