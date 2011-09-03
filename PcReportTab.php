@@ -408,7 +408,7 @@ if (DB_error_no($db)!=0){
 		$Amount[0]=0;
 	}
 
-	echo '<tr><td colspan="2" style="text-align:right">' . _('Balance At') . ' '.$_POST['ToDate'].':</td>
+	echo '<tr><td colspan="2" class="number">' . _('Balance At') . ' '.$_POST['ToDate'].':</td>
 				<td>'.number_format($Amount[0],2).' </td>
 				<td>'.$Tabs['currency'].'</td>
 			</tr>';
