@@ -91,134 +91,58 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 	if ($_POST['Keywords'] AND (($_POST['CustCode']) OR ($_POST['CustPhone']) OR ($_POST['CustType']))) {
 		$_POST['Keywords'] = mb_strtoupper($_POST['Keywords']);
 	}
-	if (empty($_POST['Keywords']) AND empty($_POST['CustCode']) AND empty($_POST['CustPhone']) AND ($_POST['CustType']=='ALL') AND ($_POST['Area']=='ALL') AND empty($_POST['CustAdd'])) {
+	if (($_POST['Keywords'] == '') AND ($_POST['CustCode'] == '') AND ($_POST['CustPhone'] == '') AND (		$_POST['CustType'] == 'ALL') AND ($_POST['Area'] == 'ALL') AND ($_POST['CustAdd'] == '')) {
+		//no criteria set then default to all customers
 		$SQL = "SELECT debtorsmaster.debtorno,
-				debtorsmaster.name,
-				debtorsmaster.address1,
-				debtorsmaster.address2,
-				debtorsmaster.address3,
-				debtorsmaster.address4,
-				custbranch.branchcode,
-				custbranch.brname,
-				custbranch.contactname,
-				debtortype.typename,
-				custbranch.phoneno,
-				custbranch.faxno
-			FROM debtorsmaster LEFT JOIN custbranch
-				ON debtorsmaster.debtorno = custbranch.debtorno, debtortype
-			WHERE debtorsmaster.typeid = debtortype.typeid";
+					debtorsmaster.name,
+					debtorsmaster.address1,
+					debtorsmaster.address2,
+					debtorsmaster.address3,
+					debtorsmaster.address4,
+					custbranch.branchcode,
+					custbranch.brname,
+					custbranch.contactname,
+					debtortype.typename,
+					custbranch.phoneno,
+					custbranch.faxno
+				FROM debtorsmaster LEFT JOIN custbranch
+				ON debtorsmaster.debtorno = custbranch.debtorno
+				INNER JOIN debtortype
+				ON debtorsmaster.typeid = debtortype.typeid";
 	} else {
-		if (mb_strlen($_POST['Keywords']) > 0) {
-			//using the customer name
-			$_POST['Keywords'] = mb_strtoupper(trim($_POST['Keywords']));
-			//insert wildcard characters in spaces
-			$SearchString = '%' . str_replace(' ', '%', $_POST['Keywords']) . '%';
-			$SQL = "SELECT debtorsmaster.debtorno,
-				debtorsmaster.name,
-				debtorsmaster.address1,
-				debtorsmaster.address2,
-				debtorsmaster.address3,
-				debtorsmaster.address4,
-				custbranch.branchcode,
-				custbranch.brname,
-				custbranch.contactname,
-				debtortype.typename,
-				custbranch.phoneno,
-				custbranch.faxno
-			FROM debtorsmaster LEFT JOIN custbranch
-				ON debtorsmaster.debtorno = custbranch.debtorno, debtortype
-			WHERE debtorsmaster.name " . LIKE . " '$SearchString'
-			AND debtorsmaster.typeid = debtortype.typeid";
-		} elseif (mb_strlen($_POST['CustCode']) > 0) {
-			$_POST['CustCode'] = mb_strtoupper(trim($_POST['CustCode']));
-			$SQL = "SELECT debtorsmaster.debtorno,
-				debtorsmaster.name,
-				debtorsmaster.address1,
-				debtorsmaster.address2,
-				debtorsmaster.address3,
-				debtorsmaster.address4,
-				custbranch.branchcode,
-				custbranch.brname,
-				custbranch.contactname,
-				debtortype.typename,
-				custbranch.phoneno,
-				custbranch.faxno
-			FROM debtorsmaster LEFT JOIN custbranch
-				ON debtorsmaster.debtorno = custbranch.debtorno, debtortype
-			WHERE debtorsmaster.debtorno " . LIKE . " '%" . $_POST['CustCode'] . "%'
-			AND debtorsmaster.typeid = debtortype.typeid";
-		} elseif (mb_strlen($_POST['CustPhone']) > 0) {
-			$SQL = "SELECT debtorsmaster.debtorno,
-				debtorsmaster.name,
-				debtorsmaster.address1,
-				debtorsmaster.address2,
-				debtorsmaster.address3,
-				debtorsmaster.address4,
-				custbranch.branchcode,
-				custbranch.brname,
-				custbranch.contactname,
-				debtortype.typename,
-				custbranch.phoneno,
-				custbranch.faxno
-			FROM debtorsmaster LEFT JOIN custbranch
-				ON debtorsmaster.debtorno = custbranch.debtorno, debtortype
-			WHERE custbranch.phoneno " . LIKE . " '%" . $_POST['CustPhone'] . "%'
-			AND debtorsmaster.typeid = debtortype.typeid";
-			// Added an option to search by address. I tried having it search address1, address2, address3, and address4, but my knowledge of MYSQL is limited.  This will work okay if you select the CSV Format then you can search though the address1 field. I would like to extend this to all 4 address fields. Gilles Deacur
+		$SearchKeywords = mb_strtoupper(trim(str_replace(' ', '%', $_POST['Keywords'])));
+		$_POST['CustCode'] = mb_strtoupper(trim($_POST['CustCode']));
+		$_POST['CustPhone'] = trim($_POST['CustPhone']);
+		$_POST['CustAdd'] = trim($_POST['CustAdd']);
+		$SQL = "SELECT debtorsmaster.debtorno,
+						debtorsmaster.name,
+						debtorsmaster.address1,
+						debtorsmaster.address2,
+						debtorsmaster.address3,
+						debtorsmaster.address4,
+						custbranch.branchcode,
+						custbranch.brname,
+						custbranch.contactname,
+						debtortype.typename,
+						custbranch.phoneno,
+						custbranch.faxno
+					FROM debtorsmaster INNER JOIN debtortype
+						ON debtorsmaster.typeid = debtortype.typeid
+					LEFT JOIN custbranch
+						ON debtorsmaster.debtorno = custbranch.debtorno
+					WHERE debtorsmaster.name " . LIKE . " '%" . $SearchKeywords . "%'
+					AND debtorsmaster.debtorno " . LIKE . " '%" . $_POST['CustCode'] . "%'
+					AND custbranch.phoneno " . LIKE . " '%" . $_POST['CustPhone'] . "%'
+					AND (debtorsmaster.address1 " . LIKE . " '%" . $_POST['CustAdd'] . "%'
+						OR debtorsmaster.address2 " . LIKE . " '%" . $_POST['CustAdd'] . "%'
+						OR debtorsmaster.address3 "  . LIKE . " '%" . $_POST['CustAdd'] . "%'
+						OR debtorsmaster.address4 "  . LIKE . " '%" . $_POST['CustAdd'] . "%')";
 
-		} elseif (mb_strlen($_POST['CustAdd']) > 0) {
-			$SQL = "SELECT debtorsmaster.debtorno,
-				debtorsmaster.name,
-				debtorsmaster.address1,
-				debtorsmaster.address2,
-				debtorsmaster.address3,
-				debtorsmaster.address4,
-				custbranch.branchcode,
-				custbranch.brname,
-				custbranch.contactname,
-				debtortype.typename,
-				custbranch.phoneno,
-				custbranch.faxno
-			FROM debtorsmaster LEFT JOIN custbranch
-				ON debtorsmaster.debtorno = custbranch.debtorno, debtortype
-			WHERE CONCAT_WS(debtorsmaster.address1,debtorsmaster.address2,debtorsmaster.address3,debtorsmaster.address4) " . LIKE . " '%" . $_POST['CustAdd'] . "%'
-			AND debtorsmaster.typeid = debtortype.typeid";
-			// End added search feature. Gilles Deacur
-
-		} elseif (mb_strlen($_POST['CustType']) > 0 AND $_POST['CustType'] != 'ALL') {
-			$SQL = "SELECT debtorsmaster.debtorno,
-								debtorsmaster.name,
-								debtorsmaster.address1,
-								debtorsmaster.address2,
-								debtorsmaster.address3,
-								debtorsmaster.address4,
-								custbranch.branchcode,
-								custbranch.brname,
-								custbranch.contactname,
-								debtortype.typename,
-								custbranch.phoneno,
-								custbranch.faxno
-						FROM debtorsmaster LEFT JOIN custbranch
-								ON debtorsmaster.debtorno = custbranch.debtorno, debtortype
-						WHERE debtorsmaster.typeid LIKE debtortype.typeid
-						AND debtortype.typename = '" . $_POST['CustType'] . "'";
-		} elseif (mb_strlen($_POST['Area']) > 0 AND $_POST['Area']!='ALL') {
-			$SQL = "SELECT debtorsmaster.debtorno,
-								debtorsmaster.name,
-								debtorsmaster.address1,
-								debtorsmaster.address2,
-								debtorsmaster.address3,
-								debtorsmaster.address4,
-								custbranch.branchcode,
-								custbranch.brname,
-								custbranch.contactname,
-								debtortype.typename,
-								custbranch.phoneno,
-								custbranch.faxno
-						FROM debtorsmaster LEFT JOIN custbranch
-								ON debtorsmaster.debtorno = custbranch.debtorno, debtortype
-						WHERE debtorsmaster.typeid LIKE debtortype.typeid
-						AND custbranch.area = '" . $_POST['Area'] . "'";
+		if (mb_strlen($_POST['CustType']) > 0 AND $_POST['CustType']!='ALL') {
+			$SQL .= " AND debtortype.typename = '" . $_POST['CustType'] . "'";
+		}
+		if (mb_strlen($_POST['Area']) > 0 AND $_POST['Area']!='ALL') {
+			$SQL .= " AND custbranch.area = '" . $_POST['Area'] . "'";
 		}
 	} //one of keywords or custcode or custphone was more than a zero length string
 	if ($_SESSION['SalesmanLogin'] != '') {
