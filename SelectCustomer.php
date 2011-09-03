@@ -89,28 +89,15 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 		$_POST['PageOffset'] = 1;
 	}
 	if ($_POST['Keywords'] AND (($_POST['CustCode']) OR ($_POST['CustPhone']) OR ($_POST['CustType']))) {
-		$msg = _('Search Result: Customer Name has been used in search') . '<br />';
 		$_POST['Keywords'] = mb_strtoupper($_POST['Keywords']);
 	}
-	if ($_POST['CustCode'] AND $_POST['CustPhone'] == "" AND isset($_POST['CustType']) AND $_POST['Keywords'] == "") {
-		$msg = _('Search Result: Customer Code has been used in search') . '<br />';
-	}
-	if (($_POST['CustPhone'])) {
-		$msg = _('Search Result: Customer Phone has been used in search') . '<br />';
-	}
-	if (($_POST['CustAdd'])) {
-		$msg = _('Search Result: Customer Address has been used in search') . '<br />';
-	}
-	if ($_POST['CustType'] AND $_POST['CustPhone'] == "" AND $_POST['CustCode'] == "" AND $_POST['Keywords'] == "" AND $_POST['CustAdd'] == "") {
-		$msg = _('Search Result: Customer Type has been used in search') . '<br />';
-	}
-	if (($_POST['Keywords'] == "") AND ($_POST['CustCode'] == "") AND ($_POST['CustPhone'] == "") AND ($_POST['CustType'] == "") AND ($_POST['Area'] == "") AND ($_POST['CustAdd'] == "")) {
+	if (empty($_POST['Keywords']) AND empty($_POST['CustCode']) AND empty($_POST['CustPhone']) AND ($_POST['CustType']=='ALL') AND ($_POST['Area']=='ALL') AND empty($_POST['CustAdd'])) {
 		$SQL = "SELECT debtorsmaster.debtorno,
 				debtorsmaster.name,
 				debtorsmaster.address1,
-								debtorsmaster.address2,
-								debtorsmaster.address3,
-								debtorsmaster.address4,
+				debtorsmaster.address2,
+				debtorsmaster.address3,
+				debtorsmaster.address4,
 				custbranch.branchcode,
 				custbranch.brname,
 				custbranch.contactname,
@@ -164,9 +151,9 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 			$SQL = "SELECT debtorsmaster.debtorno,
 				debtorsmaster.name,
 				debtorsmaster.address1,
-								debtorsmaster.address2,
-								debtorsmaster.address3,
-								debtorsmaster.address4,
+				debtorsmaster.address2,
+				debtorsmaster.address3,
+				debtorsmaster.address4,
 				custbranch.branchcode,
 				custbranch.brname,
 				custbranch.contactname,
@@ -183,9 +170,9 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 			$SQL = "SELECT debtorsmaster.debtorno,
 				debtorsmaster.name,
 				debtorsmaster.address1,
-								debtorsmaster.address2,
-								debtorsmaster.address3,
-								debtorsmaster.address4,
+				debtorsmaster.address2,
+				debtorsmaster.address3,
+				debtorsmaster.address4,
 				custbranch.branchcode,
 				custbranch.brname,
 				custbranch.contactname,
@@ -198,7 +185,7 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 			AND debtorsmaster.typeid = debtortype.typeid";
 			// End added search feature. Gilles Deacur
 
-		} elseif (mb_strlen($_POST['CustType']) > 0) {
+		} elseif (mb_strlen($_POST['CustType']) > 0 AND $_POST['CustType'] != 'ALL') {
 			$SQL = "SELECT debtorsmaster.debtorno,
 								debtorsmaster.name,
 								debtorsmaster.address1,
@@ -240,22 +227,20 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 	$SQL.= ' ORDER BY debtorsmaster.name';
 	$ErrMsg = _('The searched customer records requested cannot be retrieved because');
 
-
 	$result = DB_query($SQL, $db, $ErrMsg);
 	if (DB_num_rows($result) == 1) {
 		$myrow = DB_fetch_array($result);
-		$_POST['Select'] = $myrow['debtorno'];
+		$_SESSION['CustomerID'] = $myrow['debtorno'];
+		$_SESSION['BranchID'] = $myrow['branchcode'];
+		unset($_POST['Search']);
 		unset($result);
 	} elseif (DB_num_rows($result) == 0) {
 		prnMsg(_('No customer records contain the selected text') . ' - ' . _('please alter your search criteria and try again'), 'info');
 		echo '<br />';
 	}
 } //end of if search
-if (!isset($_POST['Select'])) {
-	$_POST['Select'] = "";
-}
 
-if (isset($_POST['JustSelectedACustomer'])){
+if (isset($_POST['JustSelectedACustomer']) and empty($_SESSION['CustomerID'])){
 	/*Need to figure out the number of the form variable that the user clicked on */
 	for ($i=0; $i< count($_POST); $i++){ //loop through the returned customers
 		if(isset($_POST['SubmitCustomerSelection'.$i])){
@@ -267,6 +252,7 @@ if (isset($_POST['JustSelectedACustomer'])){
 	} else {
 		$_SESSION['CustomerID'] = $_POST['SelectedCustomer'.$i];
 		$_SESSION['BranchID'] = $_POST['SelectedBranch'.$i];
+		unset($_POST['Search']);
 	}
 }
 
