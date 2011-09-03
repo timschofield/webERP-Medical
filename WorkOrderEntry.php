@@ -174,43 +174,43 @@ if (isset($_POST['Search'])){
 
 if (isset($NewItem) AND isset($_POST['WO'])){
 
-	  $InputError=false;
-	  $CheckItemResult = DB_query("SELECT mbflag,
+	$InputError=false;
+	$CheckItemResult = DB_query("SELECT mbflag,
 											eoq,
 											controlled
-											FROM stockmaster
-											WHERE stockid='" . $NewItem . "'",
-											$db);
-	  if (DB_num_rows($CheckItemResult)==1){
-	  		$CheckItemRow = DB_fetch_array($CheckItemResult);
-			if ($CheckItemRow['controlled']==1 AND $_SESSION['DefineControlledOnWOEntry']==1){ //need to add serial nos or batches to determine quantity
-				$EOQ = 0;
-			} else {
-				if (!isset($ReqQty)) {
-					$ReqQty=$CheckItemRow['eoq'];
-				}
-				$EOQ = $ReqQty;
+										FROM stockmaster
+										WHERE stockid='" . $NewItem . "'",
+								$db);
+	if (DB_num_rows($CheckItemResult)==1){
+		$CheckItemRow = DB_fetch_array($CheckItemResult);
+		if ($CheckItemRow['controlled']==1 AND $_SESSION['DefineControlledOnWOEntry']==1){ //need to add serial nos or batches to determine quantity
+			$EOQ = 0;
+		} else {
+			if (!isset($ReqQty)) {
+				$ReqQty=$CheckItemRow['eoq'];
 			}
-	  		if ($CheckItemRow['mbflag']!='M'){
-	  			prnMsg(_('The item selected cannot be added to a work order because it is not a manufactured item'),'warn');
-	  			$InputError=true;
-	  		}
-	  } else {
-	  		prnMsg(_('The item selected cannot be found in the database'),'error');
-	  		$InputError = true;
-	  }
-	  $CheckItemResult = DB_query("SELECT stockid
+			$EOQ = $ReqQty;
+		}
+		if ($CheckItemRow['mbflag']!='M'){
+			prnMsg(_('The item selected cannot be added to a work order because it is not a manufactured item'),'warn');
+			$InputError=true;
+		}
+	} else {
+		prnMsg(_('The item selected cannot be found in the database'),'error');
+		$InputError = true;
+	}
+	$CheckItemResult = DB_query("SELECT stockid
 									FROM woitems
 									WHERE stockid='" . $NewItem . "'
 									AND wo='" .$_POST['WO'] . "'",
 									$db);
-	  if (DB_num_rows($CheckItemResult)==1){
-	  		prnMsg(_('This item is already on the work order and cannot be added again'),'warn');
-	  		$InputError=true;
-	  }
+	if (DB_num_rows($CheckItemResult)==1){
+		prnMsg(_('This item is already on the work order and cannot be added again'),'warn');
+		$InputError=true;
+	}
 
 
-	  if ($InputError==false){
+	if ($InputError==false){
 		$CostResult = DB_query("SELECT SUM((materialcost+labourcost+overheadcost)*bom.quantity) AS cost
 									FROM stockmaster INNER JOIN bom
 									ON stockmaster.stockid=bom.component
