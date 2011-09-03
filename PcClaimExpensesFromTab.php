@@ -319,7 +319,7 @@ if (isset($SelectedTabs)) {
 			$Amount['0']=0;
 		}
 
-		echo '<tr><td colspan="2" style="text-align:right">' . _('Current balance') . ':</td>
+		echo '<tr><td colspan="2" class="number">' . _('Current balance') . ':</td>
 					<td class="number">'.number_format($Amount['0'],2).'</td></tr>';
 
 
