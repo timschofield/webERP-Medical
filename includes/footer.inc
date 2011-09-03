@@ -5,7 +5,7 @@
 	if (!isset($DefaultClock)) {
 		include('config.php');
 	}
-	echo '<p class="number">'.(strftime('%A')).', '.(date($_SESSION['DefaultDateFormat']).' | '.(strftime(($DefaultClock==12) ? '%I:%M %p' : '%H:%M'))).'</p>';
+	echo '<p style="text-align: right">'.(strftime('%A')).', '.(date($_SESSION['DefaultDateFormat']).' | '.(strftime(($DefaultClock==12) ? '%I:%M %p' : '%H:%M'))).'</p>';
 
 
 	echo '<table width="100%" id="footer">';
