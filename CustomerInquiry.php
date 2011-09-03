@@ -236,11 +236,11 @@ while ($myrow=DB_fetch_array($TransResult)) {
 	$CreditInvoiceFormatString = '<td><a href="%s/Credit_Invoice.php?InvoiceNumber=%s">' . _('Credit ') .'<img src="%s/credit.gif" title="' . _('Click to credit the invoice') . '" /></a></td>';
 
 	$PreviewInvoiceFormatString = '<td><a href="%s/PrintCustTrans.php?FromTransNo=%s&InvOrCredit=Invoice">' . _('HTML ') . '<img src="%s/preview.gif" title="' . _('Click to preview the invoice') . '" /></a></td>
-	<td><a href="%s/%s?FromTransNo=%s&InvOrCredit=Invoice&PrintPDF=True">' . _('PDF ') . '<img src="%s/css/' . $theme . '/images/pdf.png" title="' . _('Click for PDF') . '" /></a></td>
+	<td><a href="%s/%s?FromTransNo=%s&InvOrCredit=Invoice&PrintPDF=True">' . _('PDF ') . '<img src="%s/pdf.png" title="' . _('Click for PDF') . '" /></a></td>
 		<td><a href="%s/EmailCustTrans.php?FromTransNo=%s&InvOrCredit=Invoice">' . _('Email ') . '<img src="%s/email.gif" title="' . _('Click to email the invoice') . '" /></a></td>';
 
 	$PreviewCreditFormatString = '<td><a href="%s/PrintCustTrans.php?FromTransNo=%s&InvOrCredit=Credit">' . _('HTML ') . ' <img src="%s/preview.gif" title="' . _('Click to preview the credit note') . '" /></a></td>
-	<td><a href="%s/%s?FromTransNo=%s&InvOrCredit=Credit&PrintPDF=True">' . _('PDF ') . '<img src="%s/css/' . $theme . '/images/pdf.png" title="' . _('Click for PDF') . '" /></a></td>
+	<td><a href="%s/%s?FromTransNo=%s&InvOrCredit=Credit&PrintPDF=True">' . _('PDF ') . '<img src="%s/pdf.png" title="' . _('Click for PDF') . '" /></a></td>
 	<td><a href="%s/EmailCustTrans.php?FromTransNo=%s&InvOrCredit=Credit">' . _('Email') . ' <img src="%s/email.gif" title="' . _('Click to email the credit note') . '" /></a></td>';
 
 	/* assumed allowed page security token 3 allows the user to create credits for invoices */
