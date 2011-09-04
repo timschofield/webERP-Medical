@@ -81,7 +81,7 @@ while ($myrow=DB_fetch_array($result)) {
 		echo '<td>'.$myrow['orderno'].'</td>';
 		echo '<td>'.$myrow['suppname'].'</td>';
 		echo '<td>'.ConvertSQLDate($myrow['orddate']).'</td>';
-		echo '<td><a href="mailto:'.$myrow['email'].'">'.$myrow['realname'].'</td>';
+		echo '<td><a href="mailto:'.$myrow['email'].'">'.$myrow['realname'].'</a></td>';
 		echo '<td>'.ConvertSQLDate($myrow['deliverydate']).'</td>';
 		echo '<td><select name=status'.$myrow['orderno'].'>';
 		echo '<option selected="True" value="Pending">'._('Pending').'</option>';
