@@ -149,7 +149,7 @@ foreach ($_SESSION['SuppTrans']->GRNs as $EnteredGRN){
 
 echo '<tr>
 	<td colspan="5" align="right"><font size="2" color="navy">' . _('Total Value of Goods Charged') . ':</font></td>
-	<td class="number"><font size="2" color="navy">' . number_format($TotalValueCharged,2) . '</font></td>
+	<td class="number"><font size="2" color="navy">' . currency_number_format($TotalValueCharged,$_SESSION['SuppTrans']->CurrCode) . '</font></td>
 </tr>';
 echo '</table>';
 echo '<br /><div class="centre"><a href="' . $rootpath . '/SupplierInvoice.php">' . _('Back to Invoice Entry') . '</a></div><br />';
