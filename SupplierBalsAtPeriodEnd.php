@@ -24,6 +24,7 @@ if (isset($_POST['PrintPDF'])
 	$SQL = "SELECT suppliers.supplierid,
 			suppliers.suppname,
   			currencies.currency,
+  			suppliers.currcode,
 			SUM((supptrans.ovamount + supptrans.ovgst - supptrans.alloc)/supptrans.rate) AS balance,
 			SUM(supptrans.ovamount + supptrans.ovgst - supptrans.alloc) AS fxbalance,
 			SUM(CASE WHEN supptrans.trandate > '" . $_POST['PeriodEnd'] . "' THEN
@@ -73,15 +74,15 @@ if (isset($_POST['PrintPDF'])
 
 	$TotBal=0;
 
-	While ($SupplierBalances = DB_fetch_array($SupplierResult,$db)){
+	while ($SupplierBalances = DB_fetch_array($SupplierResult,$db)){
 
 		$Balance = $SupplierBalances['balance'] - $SupplierBalances['afterdatetrans'] + $SupplierBalances['afterdatediffonexch'];
 		$FXBalance = $SupplierBalances['fxbalance'] - $SupplierBalances['fxafterdatetrans'];
 
 		if (ABS($Balance)>0.009 OR ABS($FXBalance)>0.009) {
 
-			$DisplayBalance = number_format($SupplierBalances['balance'] - $SupplierBalances['afterdatetrans'],2);
-			$DisplayFXBalance = number_format($SupplierBalances['fxbalance'] - $SupplierBalances['fxafterdatetrans'],2);
+			$DisplayBalance = currency_number_format($SupplierBalances['balance'] - $SupplierBalances['afterdatetrans'],$SupplierBalances['currcode']);
+			$DisplayFXBalance = currency_number_format($SupplierBalances['fxbalance'] - $SupplierBalances['fxafterdatetrans'],$SupplierBalances['currcode']);
 
 			$TotBal += $Balance;
 
@@ -103,7 +104,7 @@ if (isset($_POST['PrintPDF'])
 		include('includes/PDFSupplierBalsPageHeader.inc');
 	}
 
-	$DisplayTotBalance = number_format($TotBal,2);
+	$DisplayTotBalance = currency_number_format($TotBal,$_SESSION['CompanyRecord']['currencydefault']);
 
 	$LeftOvers = $pdf->addTextWrap(220,$YPos,60,$FontSize,$DisplayTotBalance,'right');
 
