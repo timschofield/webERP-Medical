@@ -9,6 +9,7 @@ Class Allocation {
 	var $AllocTrans; /*The ID of the transaction being allocated */
 	var $SupplierID;
 	var $SuppName;
+	var $CurrCode;
 	var $TransType;
 	var $TransTypeName;
 	var $TransNo;

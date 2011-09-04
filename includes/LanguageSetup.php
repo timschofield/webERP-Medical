@@ -31,7 +31,7 @@ if (function_exists('gettext')){
 
 	//$Locale = setlocale (LC_CTYPE, $_SESSION['Language']);
 	//$Locale = setlocale (LC_MESSAGES, $_SESSION['Language']);
-	$Locale = setlocale (LC_NUMERIC, 'en_US'); //currently need all decimal points etc to be as expected on webserver
+//	$Locale = setlocale (LC_NUMERIC, 'en_US'); //currently need all decimal points etc to be as expected on webserver
 	if ($_SESSION['Language']=='tr_TR.utf8') {
 		$Locale = setlocale(LC_CTYPE, 'C');
 	}
