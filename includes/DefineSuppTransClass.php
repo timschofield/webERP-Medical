@@ -100,6 +100,7 @@ Class SuppTrans {
 								$GLCode,
 								$PONo,
 								$AssetID=0,
+								$Hold=0,
 								$DecimalPlaces=2){
 
 		if ($This_QuantityInv!=0 AND isset($This_QuantityInv)){
@@ -119,7 +120,8 @@ Class SuppTrans {
 											$GLCode,
 											$PONo,
 											$AssetID,
-											$DecimalPlaces=2);
+											$Hold,
+											$DecimalPlaces);
 			Return 1;
 		}
 		Return 0;
@@ -140,12 +142,12 @@ Class SuppTrans {
 								$JobRef,
 								$GLCode,
 								$Hold,
-								$PONo,
 								$AssetID=0,
 								$DecimalPlaces=2){
 
 		if ($This_QuantityInv!=0 and isset($This_QuantityInv)){
-			$this->GRNs[$GRNNo]->Modify($PODetailItem,
+			$this->GRNs[$GRNNo]->Modify($GRNNo,
+										$PODetailItem,
 										$ItemCode,
 										$ItemDescription,
 										$QtyRecd,
@@ -158,6 +160,7 @@ Class SuppTrans {
 										$ShiptRef,
 										$JobRef,
 										$GLCode,
+										$DecimalPlaces,
 										$Hold );
 			Return 1;
 		}
@@ -301,8 +304,7 @@ all the info to do the necessary entries without looking up ie additional querie
 					$PONo,
 					$AssetID,
 					$Hold=0,
-					$DecimalPlaces=2){
-
+					$DecimalPlaces){
 
 	/* Constructor function to add a new GRNs object with passed params */
 		$this->GRNNo = $GRNNo;
@@ -325,7 +327,8 @@ all the info to do the necessary entries without looking up ie additional querie
 		$this->DecimalPlaces = $DecimalPlaces;
 	}
 
-	function Modify ($PODetailItem,
+	function Modify ($GRNNo,
+				$PODetailItem,
 				$ItemCode,
 				$ItemDescription,
 				$QtyRecd,
@@ -338,6 +341,7 @@ all the info to do the necessary entries without looking up ie additional querie
 				$ShiptRef,
 				$JobRef,
 				$GLCode,
+				$DecimalPlaces,
 				$Hold){
 
 	/* Modify function to edit a GRNs object with passed params */
@@ -353,6 +357,7 @@ all the info to do the necessary entries without looking up ie additional querie
 		$this->StdCostUnit = $StdCostUnit;
 		$this->ShiptRef = $ShiptRef;
 		$this->JobRef = $JobRef;
+		$this->DecimalPlaces = $DecimalPlaces;
 		$this->Hold = $Hold;
 		$this->GLCode = $GLCode;
 	}
