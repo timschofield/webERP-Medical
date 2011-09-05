@@ -27,6 +27,7 @@ if(isset($_POST['ProcessTransfer'])){
 	$i=0;
 	$TotalQuantity = 0;
 	foreach ($_SESSION['Transfer']->TransferItem AS $TrfLine) {
+		$_POST['Qty' . $i] = filter_number_input($_POST['Qty' . $i]);
 		if (is_numeric($_POST['Qty' . $i])){
 		/*Update the quantity received from the inputs */
 			$_SESSION['Transfer']->TransferItem[$i]->Quantity= $_POST['Qty' . $i];
@@ -42,11 +43,11 @@ if(isset($_POST['ProcessTransfer'])){
 			prnMsg( _('The Quantity entered plus the Quantity Previously Received can not be greater than the Total Quantity shipped for').' '. $TrfLine->StockID , 'error');
 			$InputError = True;
 		}
-				if (isset($_POST['CancelBalance' . $i]) and $_POST['CancelBalance' . $i]==1){
-					$_SESSION['Transfer']->TransferItem[$i]->CancelBalance=1;
-				} else {
-					 $_SESSION['Transfer']->TransferItem[$i]->CancelBalance=0;
-				}
+		if (isset($_POST['CancelBalance' . $i]) and $_POST['CancelBalance' . $i]==1){
+			$_SESSION['Transfer']->TransferItem[$i]->CancelBalance=1;
+		} else {
+			 $_SESSION['Transfer']->TransferItem[$i]->CancelBalance=0;
+		}
 		$TotalQuantity += $TrfLine->Quantity;
 		$i++;
 	} /*end loop to validate and update the SESSION['Transfer'] data */
@@ -353,6 +354,7 @@ if(isset($_GET['Trf_ID'])){
 			stockmaster.controlled,
 			stockmaster.serialised,
 			stockmaster.decimalplaces,
+			stockmaster.perishable,
 			loctransfers.shipqty,
 			loctransfers.recqty,
 			locations.locationname as shiplocationname,
@@ -396,6 +398,7 @@ if(isset($_GET['Trf_ID'])){
 									$myrow['units'],
 									$myrow['controlled'],
 									$myrow['serialised'],
+									$myrow['perishable'],
 									$myrow['decimalplaces']
 									);
 		$_SESSION['Transfer']->TransferItem[$i]->PrevRecvQty = $myrow['recqty'];
@@ -447,7 +450,7 @@ if (isset($_SESSION['Transfer'])){
 		echo '<td>' . $TrfLine->StockID . '</td>
 			<td>' . $TrfLine->ItemDescription . '</td>';
 
-		echo '<td class="number">' . number_format($TrfLine->ShipQty, $TrfLine->DecimalPlaces) . '</td>';
+		echo '<td class="number">' . stock_number_format($TrfLine->ShipQty, $TrfLine->DecimalPlaces) . '</td>';
 		if (isset($_POST['Qty' . $i]) and is_numeric($_POST['Qty' . $i])){
 			$_SESSION['Transfer']->TransferItem[$i]->Quantity= $_POST['Qty' . $i];
 			$Qty = $_POST['Qty' . $i];
@@ -460,12 +463,12 @@ if (isset($_SESSION['Transfer'])){
 		} else {
 			$Qty = $TrfLine->Quantity;
 		}
-		echo '<td class="number">' . number_format($TrfLine->PrevRecvQty, $TrfLine->DecimalPlaces) . '</td>';
+		echo '<td class="number">' . stock_number_format($TrfLine->PrevRecvQty, $TrfLine->DecimalPlaces) . '</td>';
 
 		if ($TrfLine->Controlled==1){
-			echo '<td class="number"><input type="hidden" name="Qty' . $i . '" value="' . $Qty . '"><a href="' . $rootpath .'/StockTransferControlled.php?TransferItem=' . $i . '" />' . $Qty . '</a></td>';
+			echo '<td class="number"><input type="hidden" name="Qty' . $i . '" value="' . stock_number_format($Qty, $TrfLine->DecimalPlaces) . '"><a href="' . $rootpath .'/StockTransferControlled.php?TransferItem=' . $i . '" />' . stock_number_format($Qty, $TrfLine->DecimalPlaces) . '</a></td>';
 		} else {
-			echo '<td><input type="text" class="number" name="Qty' . $i . '" maxlength="10" class="number" size="auto" value="' . $Qty . '" /></td>';
+			echo '<td><input type="text" class="number" name="Qty' . $i . '" maxlength="10" class="number" size="auto" value="' . stock_number_format($Qty, $TrfLine->DecimalPlaces) . '" /></td>';
 		}
 
 		echo '<td>' . $TrfLine->PartUnit . '</td>';
@@ -487,9 +490,9 @@ if (isset($_SESSION['Transfer'])){
 	} /*end of foreach TransferItem */
 
 	echo '</table><br />
-		<div class="centre"><input type="submit" name="ProcessTransfer" value="'. _('Process Inventory Transfer'). '" /><br />
-		</form></div>';
-	echo '<a href="'.$_SERVER['PHP_SELF']. '?NewTransfer=true">'. _('Select A Different Transfer').'</a>';
+		<div class="centre"><input type="submit" name="ProcessTransfer" value="'. _('Process Inventory Transfer'). '" />
+		</form></div><br />';
+	echo '<div class="centre"><a href="'.$_SERVER['PHP_SELF']. '?NewTransfer=true">'. _('Select A Different Transfer').'</a></div>';
 
 } else { /*Not $_SESSION['Transfer'] set */
 
@@ -498,11 +501,13 @@ if (isset($_SESSION['Transfer'])){
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post" name="form1">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-	$LocResult = DB_query("SELECT locationname, loccode FROM locations",$db);
+	$LocResult = DB_query("SELECT locationname,
+									loccode
+								FROM locations",$db);
 
 	echo '<table class="selection">';
 	echo '<tr><td>'. _('Select Location Receiving Into'). ':</td><td>';
-	echo '<select NAME = "RecLocation" onChange=ReloadForm(form1.RefreshTransferList)>';
+	echo '<select name = "RecLocation" onChange=ReloadForm(form1.RefreshTransferList)>';
 	if (!isset($_POST['RecLocation'])){
 		$_POST['RecLocation'] = $_SESSION['UserStockLocation'];
 	}
@@ -531,9 +536,10 @@ if (isset($_SESSION['Transfer'])){
 		echo '<table class="selection">';
 		echo '<tr><th colspan="4"><font size="3" color="blue">'._('Pending Transfers Into').' '.$LocRow['locationname'].'</font></th></tr>';
 		echo '<tr>
-			<th>'. _('Transfer Ref'). '</th>
-			<th>'. _('Transfer From'). '</th>
-			<th>'. _('Dispatch Date'). '</th></tr>';
+				<th>'. _('Transfer Ref'). '</th>
+				<th>'. _('Transfer From'). '</th>
+				<th>'. _('Dispatch Date'). '</th>
+			</tr>';
 		$k=0;
 		while ($myrow=DB_fetch_array($TrfResult)){
 
