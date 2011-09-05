@@ -5,6 +5,7 @@
 include('includes/session.inc');
 $title = _('User Settings');
 include('includes/header.inc');
+include('includes/LanguagesArray.php');
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/user.png" title="' . _('User Settings') . '" alt="" />' . ' ' . _('User Settings') . '</p>';
 
@@ -124,28 +125,23 @@ echo '<tr>
 
 
 echo '<tr>
-		<td>' . _('Language') . ':</td>
-		<td><select name="Language">';
+	<td>' . _('Language') . ':</td>
+	<td><select name="Language">';
 
-$Languages = scandir('locale/', 0);
-
-
-foreach ($Languages as $LanguageEntry){
-
-	if (is_dir('locale/' . $LanguageEntry)
-			AND $LanguageEntry != '..'
-			AND $LanguageEntry != '.svn'
-			AND $LanguageEntry!='.'){
-
-		if ($_SESSION['Language'] == $LanguageEntry){
-			echo '<option selected="True" value="' . $LanguageEntry . '">' . $LanguageEntry . '</option>';
-		} else {
-			echo '<option value="' . $LanguageEntry . '">' . $LanguageEntry . '</option>';
-		}
-	}
+if (!isset($_POST['Language'])){
+	$_POST['Language']=$_SESSION['Language'];
 }
 
-	echo '</select></td></tr>';
+foreach ($LanguagesArray as $LanguageEntry => $LanguageName){
+	if (isset($_POST['Language']) AND $_POST['Language'] == $LanguageEntry){
+		echo '<option selected value="' . $LanguageEntry . '">' . $LanguageName .'</option>';
+	} elseif (!isset($_POST['Language']) AND $LanguageEntry == $DefaultLanguage) {
+		echo '<option selected value="' . $LanguageEntry . '">' . $LanguageName .'</option>';
+	} else {
+		echo '<option value="' . $LanguageEntry . '">' . $LanguageName .'</option>';
+	}
+}
+echo '</select></td></tr>';
 
 
 echo '<tr>
