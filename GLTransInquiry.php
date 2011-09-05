@@ -69,6 +69,7 @@ if ( !isset($_GET['TypeID']) OR !isset($_GET['TransNo']) ) {
 		$Posted = _('Yes');
 		$CreditTotal = $DebitTotal = 0;
 
+		$j = 1;
 		while ( $TransRow = DB_fetch_array($TransResult) ) {
 			$TranDate = ConvertSQLDate($TransRow['trandate']);
 			$DetailResult = false;
@@ -122,7 +123,7 @@ if ( !isset($_GET['TypeID']) OR !isset($_GET['TransNo']) ) {
 				if ( $TransRow['posted']==0 )	{
 					$Posted = _('No');
 				}
-				$j=0;
+
 				if ($j==1) {
 					echo '<tr class="OddTableRows">';
 					$j=0;
