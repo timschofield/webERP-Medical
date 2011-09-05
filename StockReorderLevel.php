@@ -64,7 +64,7 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 		echo '<tr class="OddTableRows">';
 		$k=1;
 	}
-
+	$_POST[$myrow['loccode']] = filter_number_input($_POST[$myrow['loccode']]);
 	if (isset($_POST['UpdateData']) AND is_numeric($_POST[$myrow['loccode']]) AND $_POST[$myrow['loccode']]>=0){
 
 	   $myrow['reorderlevel'] = $_POST[$myrow['loccode']];
@@ -79,9 +79,9 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 		<td class="number">%s</td>
 		<td><input type="text" class="number" name="%s" maxlength="10" size="10" value="%s" /></td>',
 		$myrow['locationname'],
-		number_format($myrow['quantity'],$myrow['decimalplaces']),
+		stock_number_format($myrow['quantity'],$myrow['decimalplaces']),
 		$myrow['loccode'],
-		$myrow['reorderlevel']);
+		stock_number_format($myrow['reorderlevel'],$myrow['decimalplaces']));
 	$j++;
 	If ($j == 12){
 		$j=1;
@@ -92,10 +92,10 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 //end of while loop
 
 echo '</table><br /><div class="centre"><input type="submit" name="UpdateData" value="' . _('Update') . '" /><br /><br />';
-echo '<a href="' . $rootpath . '/StockMovements.php?StockID=$StockID">' . _('Show Stock Movements') . '</a>';
-echo '<br /><a href="' . $rootpath . '/StockUsage.php?StockID=$StockID">' . _('Show Stock Usage') . '</a>';
-echo '<br /><a href="' . $rootpath . '/SelectSalesOrder.php?SelectedStockItem=$StockID">' . _('Search Outstanding Sales Orders') . '</a>';
-echo '<br /><a href="' . $rootpath . '/SelectCompletedOrder.php?SelectedStockItem=$StockID">' . _('Search Completed Sales Orders') . '</a>';
+echo '<a href="' . $rootpath . '/StockMovements.php?StockID=' . $StockID . '">' . _('Show Stock Movements') . '</a>';
+echo '<br /><a href="' . $rootpath . '/StockUsage.php?StockID=' . $StockID . '">' . _('Show Stock Usage') . '</a>';
+echo '<br /><a href="' . $rootpath . '/SelectSalesOrder.php?SelectedStockItem=' . $StockID . '">' . _('Search Outstanding Sales Orders') . '</a>';
+echo '<br /><a href="' . $rootpath . '/SelectCompletedOrder.php?SelectedStockItem=' . $StockID . '">' . _('Search Completed Sales Orders') . '</a>';
 
 echo '</div></form>';
 include('includes/footer.inc');
