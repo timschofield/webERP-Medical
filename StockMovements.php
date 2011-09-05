@@ -138,12 +138,11 @@ while ($myrow=DB_fetch_array($MovtsResult)) {
 		$DisplayTranDate,
 		$myrow['debtorno'],
 		$myrow['branchcode'],
-		number_format($myrow['qty'],
-		$myrow['decimalplaces']),
+		stock_number_format($myrow['qty'],$myrow['decimalplaces']),
 		$myrow['reference'],
-		number_format($myrow['price'],2),
-		number_format($myrow['discountpercent']*100,2),
-		number_format($myrow['newqoh'],$myrow['decimalplaces']));
+		currency_number_format($myrow['price'],$_SESSION['CompanyRecord']['currencydefault']),
+		stock_number_format($myrow['discountpercent']*100,2),
+		stock_number_format($myrow['newqoh'],$myrow['decimalplaces']));
 
 	} elseif ($myrow['type']==11){
 
@@ -165,11 +164,11 @@ while ($myrow=DB_fetch_array($MovtsResult)) {
 		$DisplayTranDate,
 		$myrow['debtorno'],
 		$myrow['branchcode'],
-		number_format($myrow['qty'],$myrow['decimalplaces']),
+		stock_number_format($myrow['qty'],$myrow['decimalplaces']),
 		$myrow['reference'],
-		number_format($myrow['price'],2),
-		number_format($myrow['discountpercent']*100,2),
-		number_format($myrow['newqoh'],$myrow['decimalplaces']));
+		currency_number_format($myrow['price'],$_SESSION['CompanyRecord']['currencydefault']),
+		stock_number_format($myrow['discountpercent']*100,2),
+		stock_number_format($myrow['newqoh'],$myrow['decimalplaces']));
 	} else {
 
 		printf('<td>%s</td>
@@ -188,11 +187,11 @@ while ($myrow=DB_fetch_array($MovtsResult)) {
 			$DisplayTranDate,
 			$myrow['debtorno'],
 			$myrow['branchcode'],
-			number_format($myrow['qty'],$myrow['decimalplaces']),
+			stock_number_format($myrow['qty'],$myrow['decimalplaces']),
 			$myrow['reference'],
-			number_format($myrow['price'],2),
-			number_format($myrow['discountpercent']*100,2),
-			number_format($myrow['newqoh'],$myrow['decimalplaces']));
+			currency_number_format($myrow['price'],$_SESSION['CompanyRecord']['currencydefault']),
+			stock_number_format($myrow['discountpercent']*100,2),
+			stock_number_format($myrow['newqoh'],$myrow['decimalplaces']));
 	}
 //end of page full new headings if
 }
