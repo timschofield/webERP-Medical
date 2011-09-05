@@ -45,9 +45,12 @@ if (isset($_GET['StockID'])){
 	$_SESSION['Adjustment']->tag = $_POST['tag'];
 	$_SESSION['Adjustment']->Narrative = $_POST['Narrative'];
 	$_SESSION['Adjustment']->StockLocation = $_POST['StockLocation'];
-	if ($_POST['Quantity']=='' or !is_numeric($_POST['Quantity'])){
+	if ($_POST['Quantity']==''){
 		$_POST['Quantity']=0;
+	} else {
+		$_POST['Quantity'] = filter_number_input($_POST['Quantity']);
 	}
+echo $_POST['Quantity'];
 	$_SESSION['Adjustment']->Quantity = $_POST['Quantity'];
 }
 
@@ -382,12 +385,12 @@ if ($Controlled==1){
 		if ($_SESSION['Adjustment']->StockLocation == ''){
 			$_SESSION['Adjustment']->StockLocation = $_SESSION['UserStockLocation'];
 		}
-		echo '<input type="HIDDEN" name="Quantity" value="' . $_SESSION['Adjustment']->Quantity . '" />
-				'.$_SESSION['Adjustment']->Quantity.' &nbsp; &nbsp; &nbsp; &nbsp;
+		echo '<input type="hidden" name="Quantity" value="' . stock_number_format($_SESSION['Adjustment']->Quantity , $_SESSION['Adjustment']->DecimalPlaces). '" />
+				'.stock_number_format($_SESSION['Adjustment']->Quantity, $_SESSION['Adjustment']->DecimalPlaces).' &nbsp; &nbsp; &nbsp; &nbsp;
 				[<a href="'.$rootpath.'/StockAdjustmentsControlled.php?AdjType=REMOVE">'._('Remove').'</a>]
 				[<a href="'.$rootpath.'/StockAdjustmentsControlled.php?AdjType=ADD">'._('Add').'</a>]';
 } else {
-	echo '<input type="text" class="number" name="Quantity" size="12" maxlength="12" value="' . $Quantity . '" />';
+	echo '<input type="text" class="number" name="Quantity" size="12" maxlength="12" value="' . stock_number_format($Quantity, $_SESSION['Adjustment']->DecimalPlaces) . '" />';
 }
 echo '</td></tr>';
 	//Select the tag
