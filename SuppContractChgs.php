@@ -16,6 +16,10 @@ $title = _('Contract Charges or Credits');
 
 include('includes/header.inc');
 
+if (isset($_POST['Amount'])) {
+	$_POST['Amount'] = filter_currency_input($_POST['Amount']);
+}
+
 if (!isset($_SESSION['SuppTrans'])){
 	prnMsg(_('Contract charges or credits are entered against supplier invoices or credit notes respectively. To enter supplier transactions the supplier must first be selected from the supplier selection screen, then the link to enter a supplier invoice or credit note must be clicked on'),'info');
 	echo '<br /><a href="' . $rootpath . '/SelectSupplier.php?">' . _('Select A Supplier') . '</a>';
@@ -31,8 +35,10 @@ if (isset($_POST['AddContractChgToInvoice'])){
 	if ($_POST['ContractRef'] == ''){
 		$_POST['ContractRef'] = $_POST['ContractSelection'];
 	} else{
-		$result = DB_query("SELECT contractref FROM contracts
-												WHERE status=2 AND contractref='" . $_POST['ContractRef'] . "'",$db);
+		$result = DB_query("SELECT contractref
+								FROM contracts
+								WHERE status=2
+									AND contractref='" . $_POST['ContractRef'] . "'",$db);
 		if (DB_num_rows($result)==0){
 			prnMsg(_('The contract reference entered does not exist as a customer ordered contract. This contract cannot be charged to'),'error');
 			$InputError =true;
@@ -64,7 +70,7 @@ if ($_SESSION['SuppTrans']->InvoiceOrCredit=='Invoice'){
 			._('From') . ' ' . $_SESSION['SuppTrans']->SupplierName . '</p></div>';
 }
 
-echo '<table cellpadding="2">';
+echo '<table cellpadding="2" class="selection">';
 $TableHeader = '<tr><th>' . _('Contract') . '</th>
 					<th>' . _('Amount') . '</th>
 					<th>' . _('Narrative') . '</th>
@@ -82,7 +88,7 @@ foreach ($_SESSION['SuppTrans']->Contracts as $EnteredContract){
 		$AnticipatedCost = _('No');
 	}
 	echo '<tr><td>' . $EnteredContract->ContractRef . '</td>
-		<td class="number">' . number_format($EnteredContract->Amount,2) . '</td>
+		<td class="number">' . currency_number_format($EnteredContract->Amount,$_SESSION['SuppTrans']->CurrCode) . '</td>
 		<td>' . $EnteredContract->Narrative . '</td>
 		<td>' . $AnticipatedCost . '</td>
 		<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $EnteredContract->Counter . '">' . _('Delete') . '</a></td></tr>';
@@ -93,14 +99,14 @@ foreach ($_SESSION['SuppTrans']->Contracts as $EnteredContract){
 
 echo '<tr>
 	<td  class="number">' . _('Total') . ':</font></td>
-	<td class="number">' . number_format($TotalContractsValue,2) . '</td>
+	<td class="number">' . currency_number_format($TotalContractsValue,$_SESSION['SuppTrans']->CurrCode) . '</td>
 </tr>
 </table>';
 
 if ($_SESSION['SuppTrans']->InvoiceOrCredit == 'Invoice'){
-	echo '<br /><a href="' . $rootpath . '/SupplierInvoice.php">' . _('Back to Invoice Entry') . '</a><hr>';
+	echo '<br /><div class="centre"><a href="' . $rootpath . '/SupplierInvoice.php">' . _('Back to Invoice Entry') . '</a></div><br />';
 } else {
-	echo '<br /><a href="' . $rootpath . '/SupplierCredit.php">' . _('Back to Credit Note Entry') . '</a><hr>';
+	echo '<br /><div class="centre"><a href="' . $rootpath . '/SupplierCredit.php">' . _('Back to Credit Note Entry') . '</a></div><br />';
 }
 
 /*Set up a form to allow input of new Contract charges */
@@ -110,15 +116,17 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 if (!isset($_POST['ContractRef'])) {
 	$_POST['ContractRef']='';
 }
-echo '<table>';
+echo '<table class="selection">';
 echo '<tr><td>' . _('Contract Reference') . ':</td>
 	<td><input type="text" name="ContractRef" size="22" maxlength="20" value="' .  $_POST['ContractRef'] . '" /></td></tr>';
 echo '<tr><td>' . _('Contract Selection') . ':<br /><font size="1">' . _('If you know the code enter it above') . '<br />' . _('otherwise select the contract from the list') . '</font></td><td><select name="ContractSelection">';
 
-$sql = "SELECT contractref, name
-						FROM contracts INNER JOIN debtorsmaster
-						ON contracts.debtorno=debtorsmaster.debtorno
-						WHERE status=2"; //only show customer ordered contracts not quotes or contracts that are finished with
+$sql = "SELECT contractref,
+				name
+			FROM contracts
+			INNER JOIN debtorsmaster
+				ON contracts.debtorno=debtorsmaster.debtorno
+			WHERE status=2"; //only show customer ordered contracts not quotes or contracts that are finished with
 
 $result = DB_query($sql, $db);
 
@@ -134,9 +142,10 @@ echo '</select></td></tr>';
 
 if (!isset($_POST['Amount'])) {
 	$_POST['Amount']=0;
+	$_POST['Narrative']='';
 }
 echo '<tr><td>' . _('Amount') . ':</td>
-	<td><input type="text" name="Amount" size="12" maxlength="11" value="' .  $_POST['Amount'] . '" /></td></tr>';
+	<td><input type="text" class="number" name="Amount" size="12" maxlength="11" value="' .  currency_number_format($_POST['Amount'], $_SESSION['SuppTrans']->CurrCode) . '" /></td></tr>';
 echo '<tr><td>' . _('Narrative') . ':</td>
 	<td><input type="text" name="Narrative" size="42" maxlength="40" value="' .  $_POST['Narrative'] . '" /></td></tr>';
 echo '<tr><td>' . _('Aniticpated Cost') . ':</td>
@@ -147,9 +156,9 @@ if (isset($_POST['AnticipatedCost']) AND $_POST['AnticipatedCost']==1){
 	echo '<input type="checkbox" name="AnticipatedCost" />';
 }
 
-echo '</td></tr></table>';
+echo '</td></tr></table><br />';
 
-echo '<input type="submit" name="AddContractChgToInvoice" value="' . _('Enter Contract Charge') . '" />';
+echo '<div class="centre"><input type="submit" name="AddContractChgToInvoice" value="' . _('Enter Contract Charge') . '" /></div>';
 
 echo '</form>';
 include('includes/footer.inc');
