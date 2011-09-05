@@ -84,6 +84,10 @@ if ( !isset($_GET['TypeID']) OR !isset($_GET['TransNo']) ) {
 				$DebitAmount = '&nbsp';
 			}
 
+			if ( $TransRow['posted']==0 ){
+				$Posted = _('No');
+			}
+
 			if ( $TransRow['account'] == $_SESSION['CompanyRecord']['debtorsact'] )	{
 				$URL = $rootpath . '/CustomerInquiry.php?CustomerID=';
 				$date = '&TransAfterDate=' . $TranDate;
@@ -119,9 +123,6 @@ if ( !isset($_GET['TypeID']) OR !isset($_GET['TransNo']) ) {
 
 				if( mb_strlen($TransRow['narrative'])==0 ) {
 					$TransRow['narrative'] = '&nbsp';
-				}
-				if ( $TransRow['posted']==0 )	{
-					$Posted = _('No');
 				}
 
 				if ($j==1) {
