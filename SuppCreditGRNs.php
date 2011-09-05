@@ -14,8 +14,11 @@ $title = _('Enter Supplier Credit Note Against Goods Received');
 
 include('includes/header.inc');
 
-$_POST['ChgPrice']=filter_currency_input($_POST['ChgPrice']);
-$_POST['This_QuantityCredited']=filter_number_input($_POST['This_QuantityCredited']);
+if (isset($_POST['ChgPrice'])) {
+	$_POST['ChgPrice']=filter_currency_input($_POST['ChgPrice']);
+	$_POST['This_QuantityCredited']=filter_number_input($_POST['This_QuantityCredited']);
+}
+
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Dispatch') . '" alt="" />' . ' ' . $title . '</p>';
 
@@ -104,7 +107,7 @@ foreach ($_SESSION['SuppTrans']->GRNs as $EnteredGRN){
 }
 
 echo '<tr><td colspan="5" class="number"><font size="2" color="navy">' . _('Total Value Credited Against Goods') . ':</font></td>
-		  <td class="number"><font size="2" color="navy"><u>' . number_format($TotalValueCharged,2) . '</u></font></td></tr>';
+		  <td class="number"><font size="2" color="navy"><u>' . currency_number_format($TotalValueCharged,$_SESSION['SuppTrans']->CurrCode) . '</u></font></td></tr>';
 echo '</table><br /><div class="centre"><a href="' . $rootpath . '/SupplierCredit.php">' . _('Back to Credit Note Entry') . '</a></div>';
 
 /* Now get all the GRNs for this supplier from the database
