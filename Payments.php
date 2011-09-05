@@ -447,7 +447,7 @@ if (isset($_POST['CommitBatch'])){
 			$DbgMsg = _('Cannot update the supplier record for the date of the last payment made using the SQL');
 			$result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
 
-			$_SESSION['PaymentDetail']->Narrative = $_SESSION['PaymentDetail']->SupplierID . "-" . $_SESSION['PaymentDetail']->Narrative;
+			$_SESSION['PaymentDetail']->Narrative = $_SESSION['PaymentDetail']->SupplierID . '-' . $_SESSION['PaymentDetail']->Narrative;
 
 			if ($_SESSION['CompanyRecord']['gllink_creditors']==1){ /* then do the supplier control GLTrans */
 			/* Now debit creditors account with payment + discount */
@@ -721,11 +721,11 @@ echo '<br /><table class="selection">';
 
 echo '<tr><th colspan="4"><font size="3" color="blue">' . _('Payment');
 
-if ($_SESSION['PaymentDetail']->SupplierID!=""){
+if ($_SESSION['PaymentDetail']->SupplierID!=''){
 	echo ' ' . _('to') . ' ' . $_SESSION['PaymentDetail']->SuppName;
 }
 
-if ($_SESSION['PaymentDetail']->BankAccountName!=""){
+if ($_SESSION['PaymentDetail']->BankAccountName!=''){
 	echo ' ' . _('from the') . ' ' . $_SESSION['PaymentDetail']->BankAccountName;
 }
 
