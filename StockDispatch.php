@@ -6,11 +6,13 @@
 
 include('includes/session.inc');
 include('includes/SQL_CommonFunctions.inc');
-If (isset($_POST['PrintPDF'])) {
+if (isset($_POST['PrintPDF'])) {
 
 	include('includes/PDFStarter.php');
 	if (!is_numeric($_POST['Percent'])) {
 		$_POST['Percent'] = 0;
+	} else {
+		$_POST['Percent'] = filter_number_input($_POST['Percent']);
 	}
 
 	$pdf->addInfo('Title',_('Stock Dispatch Report'));
@@ -110,6 +112,7 @@ If (isset($_POST['PrintPDF'])) {
 				$Page_Width,$Right_Margin,$Trf_ID,$FromLocation,$ToLocation,$template);
 
 	$FontSize=8;
+	$fill = 0;
 
 	while ($myrow = DB_fetch_array($result,$db)){
 			$YPos -=(2 * $line_height);
@@ -121,35 +124,27 @@ If (isset($_POST['PrintPDF'])) {
 					//for simple template
 					$pdf->addTextWrap(50,$YPos,70,$FontSize,$myrow['stockid'],'',0,$fill);
 					$pdf->addTextWrap(135,$YPos,250,$FontSize,$myrow['description'],'',0,$fill);
-					$pdf->addTextWrap(380,$YPos,45,$FontSize,number_format($myrow['fromquantity'],
-														$myrow['decimalplaces']),'right',0,$fill);
-					$pdf->addTextWrap(425,$YPos,40,$FontSize,number_format($myrow['quantity'],
-														$myrow['decimalplaces']),'right',0,$fill);
+					$pdf->addTextWrap(380,$YPos,45,$FontSize,stock_number_format($myrow['fromquantity'], $myrow['decimalplaces']),'right',0,$fill);
+					$pdf->addTextWrap(425,$YPos,40,$FontSize,stock_number_format($myrow['quantity'], $myrow['decimalplaces']),'right',0,$fill);
 					$shipqty = $myrow['available'];
 					if ($myrow['neededqty'] < $myrow['available']) {
 							$shipqty = $myrow['neededqty'];
 						}
-					$pdf->addTextWrap(465,$YPos,40,11,number_format($shipqty,
-														$myrow['decimalplaces']),'right',0,$fill);
+					$pdf->addTextWrap(465,$YPos,40,11,stock_number_format($shipqty, $myrow['decimalplaces']),'right',0,$fill);
 					$pdf->addTextWrap(510,$YPos,40,$FontSize,'_________','right',0,$fill);
 				}else{
 					//for standard template
 					$pdf->addTextWrap(50,$YPos,70,$FontSize,$myrow['stockid'],'',0,$fill);
 					$pdf->addTextWrap(135,$YPos,200,$FontSize,$myrow['description'],'',0,$fill);
-					$pdf->addTextWrap(305,$YPos,40,$FontSize,number_format($myrow['fromquantity'],
-														$myrow['decimalplaces']),'right',0,$fill);
-					$pdf->addTextWrap(345,$YPos,40,$FontSize,number_format($myrow['fromreorderlevel'],
-														$myrow['decimalplaces']),'right',0,$fill);
-					$pdf->addTextWrap(380,$YPos,40,$FontSize,number_format($myrow['quantity'],
-														$myrow['decimalplaces']),'right',0,$fill);
-					$pdf->addTextWrap(420,$YPos,40,$FontSize,number_format($myrow['reorderlevel'],
-														$myrow['decimalplaces']),'right',0,$fill);
+					$pdf->addTextWrap(305,$YPos,40,$FontSize,stock_number_format($myrow['fromquantity'], $myrow['decimalplaces']),'right',0,$fill);
+					$pdf->addTextWrap(345,$YPos,40,$FontSize,stock_number_format($myrow['fromreorderlevel'], $myrow['decimalplaces']),'right',0,$fill);
+					$pdf->addTextWrap(380,$YPos,40,$FontSize,stock_number_format($myrow['quantity'], $myrow['decimalplaces']),'right',0,$fill);
+					$pdf->addTextWrap(420,$YPos,40,$FontSize,stock_number_format($myrow['reorderlevel'], $myrow['decimalplaces']),'right',0,$fill);
 					$shipqty = $myrow['available'];
 					if ($myrow['neededqty'] < $myrow['available']) {
 							$shipqty = $myrow['neededqty'];
-						}
-					$pdf->addTextWrap(460,$YPos,40,11,number_format($shipqty,
-														$myrow['decimalplaces']),'right',0,$fill);
+					}
+					$pdf->addTextWrap(460,$YPos,40,11,stock_number_format($shipqty, $myrow['decimalplaces']),'right',0,$fill);
 					$pdf->addTextWrap(510,$YPos,40,$FontSize,'_________','right',0,$fill);
 				}
 
@@ -173,7 +168,7 @@ If (isset($_POST['PrintPDF'])) {
 							'" . Date('Y-m-d') . "',
 							'" . $_POST['FromLocation']  ."',
 							'" . $_POST['ToLocation'] . "')";
-			$ErrMsg = _('CRITICAL ERROR') . '! ' . _('Unable to enter Location Transfer record for'). ' '.$_POST['StockID' . $i];
+			$ErrMsg = _('CRITICAL ERROR') . '! ' . _('Unable to enter Location Transfer record for'). ' '.$myrow['stockid'];
 			if ($_POST['ReportType'] == 'Batch') {
 				$resultLocShip = DB_query($sql2,$db, $ErrMsg);
 			}
@@ -343,7 +338,7 @@ function PrintHeader(&$pdf,&$YPos,&$PageNumber,$Page_Height,$Top_Margin,$Left_Ma
 	$YPos -= $line_height;
 	$pdf->addTextWrap($Left_Margin,$YPos,50,$FontSize,_('Category'));
 	$pdf->addTextWrap(95,$YPos,50,$FontSize,$_POST['StockCat']);
-	$pdf->addTextWrap(160,$YPos,150,$FontSize,$catdescription,'left');
+//	$pdf->addTextWrap(160,$YPos,150,$FontSize,$catdescription,'left');
 	$YPos -= $line_height;
 	$pdf->addTextWrap($Left_Margin,$YPos,50,$FontSize,_('Percent'));
 	$pdf->addTextWrap(95,$YPos,50,$FontSize,$_POST['Percent']);
