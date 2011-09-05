@@ -157,25 +157,25 @@ if (isset($_POST['ShowUsage'])){
 
 		$TotalUsage += $myrow['qtyused'];
 		$PeriodsCounter++;
-		printf('<td>%s</td><td class="number">%s</td></tr>', $DisplayDate, number_format($myrow['qtyused'],$DecimalPlaces));
+		printf('<td>%s</td><td class="number">%s</td></tr>', $DisplayDate, stock_number_format($myrow['qtyused'],$DecimalPlaces));
 
 	//end of page full new headings if
 	}
 	//end of while loop
 
 	if ($TotalUsage>0 and $PeriodsCounter>0){
-	echo '<tr><th colspan="2">' . _('Average Usage per month is') . ' ' . number_format($TotalUsage/$PeriodsCounter);
+	echo '<tr><th colspan="2">' . _('Average Usage per month is') . ' ' . stock_number_format($TotalUsage/$PeriodsCounter,$DecimalPlaces);
 	echo '</th></tr>';
 	}
 	echo '</table>';
 } /* end if Show Usage is clicked */
 
 echo '<br /><div class="centre">';
-echo '<a href="' . $rootpath . '/StockStatus.php?StockID=$StockID">' . _('Show Stock Status') .'</a>';
+echo '<a href="' . $rootpath . '/StockStatus.php?StockID=' . $StockID . '">' . _('Show Stock Status') .'</a>';
 echo '<br /><a href="' . $rootpath . '/StockMovements.php?StockID=' . $StockID . '&StockLocation=' . $_POST['StockLocation'] . '">' . _('Show Stock Movements') . '</a>';
-echo '<br /><a href="' . $rootpath . '/SelectSalesOrder.php?SelectedStockItem=$StockID&StockLocation=' . $_POST['StockLocation'] . '">' . _('Search Outstanding Sales Orders') . '</a>';
-echo '<br /><a href="' . $rootpath . '/SelectCompletedOrder.php?SelectedStockItem=$StockID">' . _('Search Completed Sales Orders') . '</a>';
-echo '<br /><a href="' . $rootpath . '/PO_SelectOSPurchOrder.php?SelectedStockItem=$StockID">' . _('Search Outstanding Purchase Orders') . '</a>';
+echo '<br /><a href="' . $rootpath . '/SelectSalesOrder.php?SelectedStockItem=' . $StockID . '&StockLocation=' . $_POST['StockLocation'] . '">' . _('Search Outstanding Sales Orders') . '</a>';
+echo '<br /><a href="' . $rootpath . '/SelectCompletedOrder.php?SelectedStockItem=' . $StockID . '">' . _('Search Completed Sales Orders') . '</a>';
+echo '<br /><a href="' . $rootpath . '/PO_SelectOSPurchOrder.php?SelectedStockItem=' . $StockID . '">' . _('Search Outstanding Purchase Orders') . '</a>';
 
 echo '</form></div>';
 include('includes/footer.inc');
