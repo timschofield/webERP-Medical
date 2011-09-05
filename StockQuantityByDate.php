@@ -12,7 +12,9 @@ echo '<p Class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/i
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-$sql = "SELECT categoryid, categorydescription FROM stockcategory";
+$sql = "SELECT categoryid,
+				categorydescription
+			FROM stockcategory";
 $resultStkLocs = DB_query($sql, $db);
 
 echo '<table class="selection"><tr>';
@@ -33,7 +35,9 @@ while ($myrow=DB_fetch_array($resultStkLocs)){
 }
 echo '</select></td>';
 
-$sql = "SELECT loccode, locationname FROM locations";
+$sql = "SELECT loccode,
+				locationname
+			FROM locations";
 $resultStkLocs = DB_query($sql, $db);
 
 echo '<td>' . _('For Stock Location') . ':</td>
@@ -127,7 +131,7 @@ if(isset($_POST['ShowStatus']) AND Is_Date($_POST['OnHandDate'])) {
 			}
 
 			if($NumRows == 0){
-				printf('<td><a TARGET="_blank" href="StockStatus.php?%s">%s</td>
+				printf('<td><a target="_blank" href="StockStatus.php?%s">%s</td>
 					<td>%s</td>
 					<td class="number">%s</td>',
 					'StockID=' . mb_strtoupper($myrows['stockid']),
@@ -135,13 +139,13 @@ if(isset($_POST['ShowStatus']) AND Is_Date($_POST['OnHandDate'])) {
 					$myrows['description'],
 					0);
 			} else {
-				printf('<td><a TARGET="_blank" href="StockStatus.php?%s">%s</td>
+				printf('<td><a target="_blank" href="StockStatus.php?%s">%s</td>
 					<td>%s</td>
 					<td class="number">%s</td>',
 					'StockID=' . mb_strtoupper($myrows['stockid']),
 					mb_strtoupper($myrows['stockid']),
 					$myrows['description'],
-					number_format($LocQtyRow['newqoh'],$myrows['decimalplaces']));
+					stock_number_format($LocQtyRow['newqoh'],$myrows['decimalplaces']));
 
 				$TotalQuantity += $LocQtyRow['newqoh'];
 			}
