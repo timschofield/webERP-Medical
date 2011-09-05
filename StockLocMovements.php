@@ -122,12 +122,11 @@ while ($myrow=DB_fetch_array($MovtsResult)) {
 			$myrow['transno'],
 			$DisplayTranDate,
 			$myrow['debtorno'],
-			number_format($myrow['qty'],
-			$myrow['decimalplaces']),
+			stock_number_format($myrow['qty'], $myrow['decimalplaces']),
 			$myrow['reference'],
-			number_format($myrow['price'],2),
-			number_format($myrow['discountpercent']*100,2),
-			number_format($myrow['newqoh'],$myrow['decimalplaces']));
+			currency_number_format($myrow['price'],$_SESSION['CompanyRecord']['currencydefault']),
+			stock_number_format($myrow['discountpercent']*100,2),
+			stock_number_format($myrow['newqoh'],$myrow['decimalplaces']));
 	$j++;
 	If ($j == 16){
 		$j=1;
