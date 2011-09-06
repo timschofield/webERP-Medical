@@ -797,7 +797,7 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 			$PrintQuotation = $rootpath . '/PDFQuotation.php?QuotationNo=' . $myrow['orderno'];
 			$FormatedDelDate = ConvertSQLDate($myrow['deliverydate']);
 			$FormatedOrderDate = ConvertSQLDate($myrow['orddate']);
-			$FormatedOrderValue = number_format($myrow['ordervalue'],2);
+			$FormatedOrderValue = currency_number_format($myrow['ordervalue'],$_SESSION['CompanyRecord']['currencydefault']);
 
 			if ($myrow['printedpackingslip']==0) {
 			  $PrintText = _('Print');
@@ -892,8 +892,8 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 		//end of page full new headings if
 		}//end while loop through orders to display
 		if ($_POST['Quotations']=='Orders_Only'  AND $AuthRow['cancreate']==0){ //cancreate==0 means can create POs
-			echo '<tr><td colspan="8"><td><td colspan="2" class="number">
-				<input type="submit" name="PlacePO" value="' . _('Place') . "\n" . _('PO') . '" onclick="return confirm(\'' . _('This will create purchase orders for all the items on the checked sales orders above, based on the preferred supplier purchasing data held in the system. Are You Absolutely Sure?') . '\');" /></td></tr>';
+			echo '<tr><th colspan="8"></th><th></th><th colspan="2" class="number">
+				<input type="submit" name="PlacePO" value="' . _('Place') . "\n" . _('PO') . '" onclick="return confirm(\'' . _('This will create purchase orders for all the items on the checked sales orders above, based on the preferred supplier purchasing data held in the system. Are You Absolutely Sure?') . '\');" /></th></tr>';
 		}
 		echo '<tr><td colspan="9" class="number">';
 		if ($_POST['Quotations']=='Orders_Only'){
@@ -901,7 +901,7 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 		} else {
 			echo '<b>' . _('Total Quotation(s) Value in');
 		}
-		echo ' ' . $_SESSION['CompanyRecord']['currencydefault'] . ' :</b></td><td class="number"><b>' . number_format($OrdersTotal,2) . '</b></td></tr>
+		echo ' ' . $_SESSION['CompanyRecord']['currencydefault'] . ' :</b></td><td class="number"><b>' . currency_number_format($OrdersTotal,$_SESSION['CompanyRecord']['currencydefault']) . '</b></td></tr>
 			</table>';
 	} //end if there are some orders to show
 }
