@@ -50,7 +50,6 @@ if (isset($_GET['StockID'])){
 	} else {
 		$_POST['Quantity'] = filter_number_input($_POST['Quantity']);
 	}
-echo $_POST['Quantity'];
 	$_SESSION['Adjustment']->Quantity = $_POST['Quantity'];
 }
 
@@ -348,7 +347,7 @@ echo '</td><td><input type="submit" name="CheckCode" value="'._('Check Part').'"
 if (isset($_SESSION['Adjustment']) and mb_strlen($_SESSION['Adjustment']->ItemDescription)>1){
 	echo '<tr><td colspan="3"><font color="blue" size="3">' . $_SESSION['Adjustment']->ItemDescription . ' ('._('In Units of').' ' .
 		$_SESSION['Adjustment']->PartUnit . ' ) - ' . _('Unit Cost').' = ' .
-			number_format($_SESSION['Adjustment']->StandardCost,4) . '</font></td></tr>';
+			currency_number_format($_SESSION['Adjustment']->StandardCost,$_SESSION['CompanyRecord']['currencydefault']) . '</font></td></tr>';
 }
 
 echo '<tr><td>'. _('Adjustment to Stock At Location').':</td><td><select name="StockLocation"> ';

@@ -250,6 +250,7 @@ if (isset($_GET['Add']) AND $_SESSION['Shipment']->Closed==0 AND $InputError==0)
 			purchorderdetails.quantityrecd,
 			purchorderdetails.deliverydate,
 			stockmaster.units,
+			stockmaster.decimalplaces,
 			purchorderdetails.qtyinvoiced
 		FROM purchorderdetails INNER JOIN stockmaster
 			ON purchorderdetails.itemcode=stockmaster.stockid
@@ -277,6 +278,7 @@ if (isset($_GET['Add']) AND $_SESSION['Shipment']->Closed==0 AND $InputError==0)
 								$myrow['quantityord'],
 								$myrow['quantityrecd'],
 								$StandardCost,
+								$myrow['decimalplaces'],
 								$db);
 }
 
@@ -411,12 +413,13 @@ if (count($_SESSION['Shipment']->LineItems)>0){
 
 
 		echo '<td>'.$LnItm->OrderNo.'</td>
-			<td>'. $LnItm->StockID .' - '. $LnItm->ItemDescription. '</td><td class="number">' . number_format($LnItm->QuantityOrd,2) . '</td>
+			<td>'. $LnItm->StockID .' - '. $LnItm->ItemDescription. '</td>
+			<td class="number">' . stock_number_format($LnItm->QuantityOrd,$LnItm->DecimalPlaces) . '</td>
 			<td>'. $LnItm->UOM .'</td>
-			<td class="number">' . number_format($LnItm->QuantityRecd,2) . '</td>
-			<td class="number">' . number_format($LnItm->QtyInvoiced,2) . '</td>
-			<td class="number">' . number_format($LnItm->UnitPrice,2) . '</td>
-			<td class="number">' . number_format($LnItm->StdCostUnit,2) . '</td>
+			<td class="number">' . stock_number_format($LnItm->QuantityRecd,$LnItm->DecimalPlaces) . '</td>
+			<td class="number">' . stock_number_format($LnItm->QtyInvoiced,$LnItm->DecimalPlaces) . '</td>
+			<td class="number">' . currency_number_format($LnItm->UnitPrice,$_SESSION['Shipment']->CurrCode) . '</td>
+			<td class="number">' . currency_number_format($LnItm->StdCostUnit,$_SESSION['Shipment']->CurrCode) . '</td>
 			<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $LnItm->PODetailItem . '">'. _('Delete'). '</a></td>
 			</tr>';
 	}//for each line on the shipment
@@ -437,7 +440,8 @@ $sql = "SELECT purchorderdetails.podetailitem,
 		purchorderdetails.quantityord,
 		purchorderdetails.quantityrecd,
 		purchorderdetails.deliverydate,
-		stockmaster.units
+		stockmaster.units,
+		stockmaster.decimalplaces
 	FROM purchorderdetails INNER JOIN purchorders
 		ON purchorderdetails.orderno=purchorders.orderno
 		INNER JOIN stockmaster
@@ -488,9 +492,9 @@ if (DB_num_rows($result)>0){
 
 		echo '<td>' . $myrow['orderno'] . '</td>
 			<td>' . $myrow['itemcode'] . ' - ' . $myrow['itemdescription'] . '</td>
-			<td class="number">' . number_format($myrow['quantityord'],2) . '</td>
+			<td class="number">' . stock_number_format($myrow['quantityord'],$myrow['decimalplaces']) . '</td>
 			<td>' . $myrow['units'] . '</td>
-			<td class="number">' . number_format($myrow['quantityrecd'],2) . '</td>
+			<td class="number">' . stock_number_format($myrow['quantityrecd'],$myrow['decimalplaces']) . '</td>
 			<td class="number">' . ConvertSQLDate($myrow['deliverydate']) . '</td>
 			<td><a href="' . $_SERVER['PHP_SELF'] . '?Add=' . $myrow['podetailitem'] . '">'. _('Add').'</a></td>
 			</tr>';

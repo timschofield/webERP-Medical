@@ -541,10 +541,7 @@ if (count($_SESSION['SPL']->LineItems)>0){
 	echo '<div class="centre"><b>' . _('Special Order Summary') . '</b></div>';
 	echo '<table cellpadding="2" colspan="7" border="1">';
 
-	$sql = "SELECT currencydefault FROM companies";
-	$result = DB_query($sql, $db);
-	$myrow = DB_fetch_row($result);
-	$DefaultCurrency = $myrow[0];
+	$DefaultCurrency = $_SESSION['CompanyRecord']['currencydefault'];
 
 	echo '<tr>
 		<th>' . _('Item Description') . '</th>
@@ -564,13 +561,13 @@ if (count($_SESSION['SPL']->LineItems)>0){
 
 		$LineTotal = $SPLLine->Quantity * $SPLLine->Price;
 		$LineCostTotal = $SPLLine->Quantity * $SPLLine->Cost;
-		$DisplayLineTotal = number_format($LineTotal,2);
-		$DisplayLineCostTotal = number_format($LineCostTotal,2);
-		$DisplayLineTotalCurr = number_format($LineTotal/$_SESSION['SPL']->CustCurrExRate,2);
-		$DisplayLineCostTotalCurr = number_format($LineCostTotal/$_SESSION['SPL']->SuppCurrExRate,2);
-		$DisplayCost = number_format($SPLLine->Cost,2);
-		$DisplayPrice = number_format($SPLLine->Price,2);
-		$DisplayQuantity = number_format($SPLLine->Quantity,2);
+		$DisplayLineTotal = currency_number_format($LineTotal,$DefaultCurrency);
+		$DisplayLineCostTotal = currency_number_format($LineCostTotal,$_SESSION['SPL']->SuppCurrCode);
+		$DisplayLineTotalCurr = currency_number_format($LineTotal/$_SESSION['SPL']->CustCurrExRate,$_SESSION['SPL']->CustCurrCode);
+		$DisplayLineCostTotalCurr = currency_number_format($LineCostTotal/$_SESSION['SPL']->SuppCurrExRate,$_SESSION['SPL']->SuppCurrCode);
+		$DisplayCost = currency_number_format($SPLLine->Cost,$_SESSION['SPL']->SuppCurrCode);
+		$DisplayPrice = currency_number_format($SPLLine->Price,$_SESSION['SPL']->CustCurrCode);
+		$DisplayQuantity = currency_number_format($SPLLine->Quantity,$DefaultCurrency);
 
 		if ($k==1){
 				echo '<tr class="EvenTableRows">';
@@ -593,7 +590,7 @@ if (count($_SESSION['SPL']->LineItems)>0){
 		$_SESSION['SPL']->total = $_SESSION['SPL']->total + $DisplayLineTotalCurr;
 	}
 
-	$DisplayTotal = number_format($_SESSION['SPL']->total,2);
+	$DisplayTotal = currency_number_format($_SESSION['SPL']->total,$DefaultCurrency);
 	echo '<tr>
 		<td colspan="8" class="number">' . _('TOTAL Excl Tax') . '</td>
 		<td class="number"><b>'.$DisplayTotal.'</b></td>

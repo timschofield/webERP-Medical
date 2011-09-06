@@ -34,9 +34,21 @@ Class Shipment {
 					$QuantityOrd,
 					$QuantityRecd,
 					$StdCostUnit,
+					$DecimalPlaces,
 					&$db){
 
-		$this->LineItems[$PODetailItem]= new LineDetails($PODetailItem,$OrderNo,$StockID,$ItemDescr, $QtyInvoiced, $UnitPrice, $UOM, $DelDate, $QuantityOrd, $QuantityRecd, $StdCostUnit);
+		$this->LineItems[$PODetailItem]= new LineDetails($PODetailItem,
+														$OrderNo,
+														$StockID,
+														$ItemDescr,
+														$QtyInvoiced,
+														$UnitPrice,
+														$UOM,
+														$DelDate,
+														$QuantityOrd,
+														$QuantityRecd,
+														$StdCostUnit,
+														$DecimalPlaces);
 
 		$sql = "UPDATE purchorderdetails SET shiptref = '" . $this->ShiptRef . "'
 			WHERE podetailitem = '" . $PODetailItem . "'";
@@ -74,9 +86,21 @@ Class LineDetails {
 	var $QuantityOrd;
 	var $QuantityRecd;
 	var $StdCostUnit;
+	var $DecimalPlaces;
 
 
-	function LineDetails ($PODetailItem, $OrderNo, $StockID, $ItemDescr, $QtyInvoiced, $UnitPrice, $UOM, $DelDate, $QuantityOrd, $QuantityRecd, $StdCostUnit){
+	function LineDetails ($PODetailItem,
+							$OrderNo,
+							$StockID,
+							$ItemDescr,
+							$QtyInvoiced,
+							$UnitPrice,
+							$UOM,
+							$DelDate,
+							$QuantityOrd,
+							$QuantityRecd,
+							$StdCostUnit,
+							$DecimalPlaces){
 
 	/* Constructor function to add a new LineDetail object with passed params */
 		$this->PODetailItem = $PODetailItem;
@@ -90,6 +114,7 @@ Class LineDetails {
 		$this->QuantityRecd = $QuantityRecd;
 		$this->QuantityOrd = $QuantityOrd;
 		$this->StdCostUnit = $StdCostUnit;
+		$this->DecimalPlaces = $DecimalPlaces;
 	}
 }
 
