@@ -616,9 +616,9 @@ p.page_title_text {
         padding-top: 2px;
         padding-bottom: 2px;
         font-weight: bold;
-        font-size: 100%;
-        color: black;
-        background-color: #cccce5;
+        font-size: 150%;
+        color: white;
+        background-color: #B0B0D5;
         width: 33%;
         border-style: solid;
         border-width: 1px;

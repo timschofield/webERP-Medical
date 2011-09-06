@@ -38,6 +38,7 @@ if (isset($_POST['SearchRecurringOrders'])){
 
 	$SQL = "SELECT recurringsalesorders.recurrorderno,
 				debtorsmaster.name,
+				debtorsmaster.currcode,
 				custbranch.brname,
 				recurringsalesorders.customerref,
 				recurringsalesorders.orddate,
@@ -101,7 +102,7 @@ if (isset($_POST['SearchRecurringOrders'])){
 		$ModifyPage = $rootpath . '/RecurringSalesOrders.php?ModifyRecurringSalesOrder=' . $myrow['recurrorderno'];
 		$FormatedLastRecurrence = ConvertSQLDate($myrow['lastrecurrence']);
 		$FormatedStopDate = ConvertSQLDate($myrow['stopdate']);
-		$FormatedOrderValue = number_format($myrow['ordervalue'],2);
+		$FormatedOrderValue = currency_number_format($myrow['ordervalue'],$myrow['currcode']);
 
 		printf('<td><a href="%s">%s</a></td>
 			<td>%s</td>
