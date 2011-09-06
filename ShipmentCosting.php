@@ -62,7 +62,7 @@ echo '<tr><td>' . _('Expected Arrival Date (ETA)') . ': </td>
 	<td>' . ConvertSQLDate($HeaderData['eta']) . '</td></tr>';
 
 echo '</table>';
-
+$ShipmentCurrency = $HeaderData['currcode'];
 /*Get the total non-stock item shipment charges */
 
 $sql = "SELECT SUM(value)
@@ -211,7 +211,7 @@ if (db_num_rows($LineItemsResult) > 0) {
 		$TotalShiptVariance += ($Variance *$myrow['totqtyinvoiced']);
 
 		if ($StdCostUnit>0 ){
-			$VariancePercentage = number_format(($Variance*100)/$StdCostUnit);
+			$VariancePercentage = stock_number_format(($Variance*100)/$StdCostUnit,0);
 		} else {
 			$VariancePercentage =100;
 		}
@@ -283,7 +283,7 @@ if (db_num_rows($LineItemsResult) > 0) {
 									'" . Date('Y-m-d') . "',
 									'" . $PeriodNo . "',
 							 		'" . $StockGLCodes['purchpricevaract'] . "',
-								 	'" . $myrow['itemcode'] . ' ' . _('shipment cost') . ' ' .  number_format($ItemShipmentCost,2) . _('shipment quantity > stock held - variance write off') . "',
+								 	'" . $myrow['itemcode'] . ' ' . _('shipment cost') . ' ' .  currency_number_format($ItemShipmentCost,$ShipmentCurrency) . _('shipment quantity > stock held - variance write off') . "',
 															 " . $WriteOffToVariances . ")";
 
 						$ErrMsg =  _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The GL entry for the shipment variance posting for'). ' ' . $myrow['itemcode'] . ' '. _('could not be inserted into the database because');
@@ -354,7 +354,7 @@ if (db_num_rows($LineItemsResult) > 0) {
 										'" . Date('Y-m-d') . "',
 										'" . $PeriodNo . "',
 										'" . $StockGLCodes['purchpricevaract'] . "',
-										'" . $myrow['itemcode'] . ' ' . _('shipment cost') . ' ' .  number_format($ItemShipmentCost,2) . ' x ' . _('Qty recd') .' ' . $myrow['totqtyrecd'] . "', " . (-$Variance * $myrow['totqtyrecd']) . ")";
+										'" . $myrow['itemcode'] . ' ' . _('shipment cost') . ' ' .  currency_number_format($ItemShipmentCost,$ShipmentCurrency) . ' x ' . _('Qty recd') .' ' . $myrow['totqtyrecd'] . "', " . (-$Variance * $myrow['totqtyrecd']) . ")";
 											   $ErrMsg =  _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The Positive GL entry for the shipment variance posting for'). ' ' . $myrow['itemcode'] . ' '. _('could not be inserted into the database because');
 		   			$result = DB_query($sql,$db, $ErrMsg,'',TRUE);
 				 }
@@ -375,7 +375,7 @@ if (db_num_rows($LineItemsResult) > 0) {
 								'" . Date('Y-m-d') . "',
 								'" . $PeriodNo . "',
 								'" . $_SESSION['CompanyRecord']['grnact'] . "',
-								'" . $myrow['itemcode'] . ' ' ._('shipment cost') . ' ' .  number_format($ItemShipmentCost,2) . ' x ' . _('Qty invoiced') . ' ' . $myrow['totqtyinvoiced'] . "',
+								'" . $myrow['itemcode'] . ' ' ._('shipment cost') . ' ' .  currency_number_format($ItemShipmentCost,$ShipmentCurrency) . ' x ' . _('Qty invoiced') . ' ' . $myrow['totqtyinvoiced'] . "',
 													" . ($Variance * $myrow['totqtyinvoiced']) . ")";
 
 				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The credit GL entry for the shipment variance posting for') . ' ' . $myrow['itemcode'] . ' ' . _('could not be inserted because');
@@ -408,7 +408,7 @@ if (db_num_rows($LineItemsResult) > 0) {
 											'" . Date('Y-m-d') . "',
 											'" . $PeriodNo . "',
 											'" . $StockGLCodes['adjglact'] . "',
-											'" . _('Shipment of') . ' ' . $myrow['itemcode'] . " " . _('cost was') . ' ' . $StdCostUnit . ' ' . _('changed to') . ' ' . number_format($ItemShipmentCost,2) . ' x ' . _('QOH of') . ' ' . $QOH . "', " . (-$ValueOfChange) . ")";
+											'" . _('Shipment of') . ' ' . $myrow['itemcode'] . " " . _('cost was') . ' ' . $StdCostUnit . ' ' . _('changed to') . ' ' . currency_number_format($ItemShipmentCost,$ShipmentCurrency) . ' x ' . _('QOH of') . ' ' . $QOH . "', " . (-$ValueOfChange) . ")";
 
 					$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The GL credit for the shipment stock cost adjustment posting could not be inserted because'). ' ' . DB_error_msg($db);
 
@@ -426,7 +426,7 @@ if (db_num_rows($LineItemsResult) > 0) {
 									'" . Date('Y-m-d') . "',
 									'" . $PeriodNo . "',
 									'" . $StockGLCodes['stockact'] . "',
-									'" . _('Shipment of') . ' ' . $myrow['itemcode'] .  ' ' . _('cost was') . ' ' . $StdCostUnit . ' ' . _('changed to') . ' ' . number_format($ItemShipmentCost,2) . ' x ' . _('QOH of') . ' ' . $QOH . "',
+									'" . _('Shipment of') . ' ' . $myrow['itemcode'] .  ' ' . _('cost was') . ' ' . $StdCostUnit . ' ' . _('changed to') . ' ' . currency_number_format($ItemShipmentCost,$ShipmentCurrency) . ' x ' . _('QOH of') . ' ' . $QOH . "',
 																" . $ValueOfChange . ")";
 					$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The GL debit for stock cost adjustment posting could not be inserted because') .' '. DB_error_msg($db);
 
@@ -452,22 +452,22 @@ if (db_num_rows($LineItemsResult) > 0) {
 /*  Item / Qty Inv/  FX price/ Local Val/ Portion of chgs/ Shipt Cost/ Std Cost/ Variance/ Var % */
 
 		echo '<td>' . $myrow['itemcode'] . ' - ' . $myrow['itemdescription'] . '</td>
-				<td class="number">' . number_format($myrow['totqtyinvoiced']) . '</td>
-				<td class="number">' . number_format($myrow['totqtyrecd']) . '</td>
-				<td class="number">' . number_format($ItemCharges) . '</td>
-				<td class="number">' . number_format($PortionOfCharges) . '</td>
-				<td class="number">' . number_format($ItemShipmentCost,2) . '</td>
-				<td class="number">' . number_format($StdCostUnit,2) . '</td>
-				<td class="number">' . number_format($Variance,2) . '</td>
+				<td class="number">' . currency_number_format($myrow['totqtyinvoiced'],$ShipmentCurrency) . '</td>
+				<td class="number">' . currency_number_format($myrow['totqtyrecd'],$ShipmentCurrency) . '</td>
+				<td class="number">' . currency_number_format($ItemCharges,$ShipmentCurrency) . '</td>
+				<td class="number">' . currency_number_format($PortionOfCharges,$ShipmentCurrency) . '</td>
+				<td class="number">' . currency_number_format($ItemShipmentCost,$ShipmentCurrency) . '</td>
+				<td class="number">' . currency_number_format($StdCostUnit,$ShipmentCurrency) . '</td>
+				<td class="number">' . currency_number_format($Variance,$ShipmentCurrency) . '</td>
 				<td class="number">' . $VariancePercentage . '%</td></tr>';
 	}
 }
 echo '<tr><td colspan="3" class="number"><font color="blue"><b>'. _('Total Shipment Charges'). '</b></font></td>
-	<td class="number">' . number_format($TotalInvoiceValueOfShipment) . '</td>
-	<td class="number">' . number_format($TotalCostsToApportion) .'</td></tr>';
+	<td class="number">' . currency_number_format($TotalInvoiceValueOfShipment,$ShipmentCurrency) . '</td>
+	<td class="number">' . currency_number_format($TotalCostsToApportion,$ShipmentCurrency) .'</td></tr>';
 
 echo '<tr><td colspan="6" class="number">' . _('Total Value of all variances on this shipment') . '</td>
-			  <td class="number">' . number_format($TotalShiptVariance,2) . '</td></tr>';
+			  <td class="number">' . currency_number_format($TotalShiptVariance,$ShipmentCurrency) . '</td></tr>';
 
 echo '</table>';
 
@@ -533,13 +533,13 @@ while ($myrow=db_fetch_array($ChargesResult)) {
 		<td>' . $myrow['suppreference'] . '</td>
 		<td>' . ConvertSQLDate($myrow['trandate']) . '</td>
 		<td>' . $myrow['stockid'] . '</td>
-		<td class=number>' . number_format($myrow['value']) . '</td></tr>';
+		<td class=number>' . currency_number_format($myrow['value'], $myrow['currcode']) . '</td></tr>';
 
 	$TotalItemShipmentChgs += $myrow['value'];
 }
 
 echo '<tr><td colspan="5" class="number"><font color="blue"><b>'. _('Total Charges Against Shipment Items'). ':</b></font></td>
-	<td class="number">' . number_format($TotalItemShipmentChgs) . '</td></tr>';
+	<td class="number">' . currency_number_format($TotalItemShipmentChgs, $ShipmentCurrency) . '</td></tr>';
 
 echo '</table>';
 
@@ -602,7 +602,7 @@ while ($myrow=db_fetch_array($ChargesResult)) {
 		<td>' .$myrow['typename'] . '</td>
 		<td>' . $myrow['suppreference'] . '</td>
 		<td>' . ConvertSQLDate($myrow['trandate']) . '</td>
-		<td class=number>' . number_format($myrow['value']) . '</td></tr>';
+		<td class=number>' . currency_number_format($myrow['value'], $myrow['currcode']) . '</td></tr>';
 
 	$TotalGeneralShipmentChgs += $myrow['value'];
 
@@ -610,7 +610,7 @@ while ($myrow=db_fetch_array($ChargesResult)) {
 
 echo '<tr>
 	<td class="number" colspan="4"><font color="blue"><b>'. _('Total General Shipment Charges'). ':</b></font></td>
-	<td class="number">' . number_format($TotalGeneralShipmentChgs) . '</td></tr>';
+	<td class="number">' . currency_number_format($TotalGeneralShipmentChgs, $ShipmentCurrency) . '</td></tr>';
 
 echo '</table>';
 
