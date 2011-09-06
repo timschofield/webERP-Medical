@@ -277,7 +277,8 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 		if ($_POST['StockCat']=='All'){
 			$SQL = "SELECT stockmaster.stockid,
 							stockmaster.description,
-							stockmaster.units
+							stockmaster.units,
+							stockmaster.decimalplaces
 					FROM stockmaster,
 							stockcategory
 					WHERE stockmaster.categoryid=stockcategory.categoryid
@@ -289,7 +290,8 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 		} else {
 			$SQL = "SELECT stockmaster.stockid,
 							stockmaster.description,
-							stockmaster.units
+							stockmaster.units,
+							stockmaster.decimalplaces
 					FROM stockmaster, stockcategory
 					WHERE  stockmaster.categoryid=stockcategory.categoryid
 					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
@@ -309,7 +311,8 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 			$SQL = "SELECT stockmaster.stockid,
 							stockmaster.description,
 							stockmaster.units,
-							stockmaster.controlled
+							stockmaster.controlled,
+							stockmaster.decimalplaces
 					FROM stockmaster, stockcategory
 					WHERE stockmaster.categoryid=stockcategory.categoryid
 					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
@@ -321,7 +324,8 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 			$SQL = "SELECT stockmaster.stockid,
 							stockmaster.description,
 							stockmaster.units,
-							stockmaster.controlled
+							stockmaster.controlled,
+							stockmaster.decimalplaces
 					FROM stockmaster, stockcategory
 					WHERE stockmaster.categoryid=stockcategory.categoryid
 					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
@@ -337,7 +341,8 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 			$SQL = "SELECT stockmaster.stockid,
 							stockmaster.description,
 							stockmaster.units,
-							stockmaster.controlled
+							stockmaster.controlled,
+							stockmaster.decimalplaces
 					FROM stockmaster, stockcategory
 					WHERE  stockmaster.categoryid=stockcategory.categoryid
 					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
@@ -347,7 +352,8 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 			$SQL = "SELECT stockmaster.stockid,
 							stockmaster.description,
 							stockmaster.units,
-							stockmaster.controlled
+							stockmaster.controlled,
+							stockmaster.decimalplaces
 					FROM stockmaster, stockcategory
 					WHERE stockmaster.categoryid=stockcategory.categoryid
 					AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
@@ -2287,10 +2293,8 @@ if (!isset($_POST['ProcessSale'])){
 				}
 
 				// Find the quantity in stock at location
-				$QOHSql = "SELECT sum(quantity) AS QOH,
-											stockmaster.decimalplaces
-										FROM locstock INNER JOIN stockmaster
-										 ON stockmaster.stockid=locstock.stockid
+				$QOHSql = "SELECT sum(quantity) AS QOH
+										FROM locstock
 										WHERE locstock.stockid='" .$myrow['stockid'] . "'
 										AND loccode = '" . $_SESSION['Items'.$identifier]->Location . "'";
 				$QOHResult =  DB_query($QOHSql,$db);
@@ -2325,7 +2329,7 @@ if (!isset($_POST['ProcessSale'])){
 							$myrow['stockid'],
 							$myrow['description'],
 							$myrow['units'],
-							number_format($QOH, $QOHRow['decimalplaces']));
+							number_format($QOH, $myrow['decimalplaces']));
 					echo '<input type="hidden" name="Units' . $i . '" value="' . $myrow['units'] . '" />';
 					$i++;
 				} else {
@@ -2339,7 +2343,7 @@ if (!isset($_POST['ProcessSale'])){
 								$myrow['stockid'],
 								$myrow['description'],
 								$myrow['units'],
-								number_format($QOH, $QOHRow['decimalplaces']));
+								number_format($QOH, $myrow['decimalplaces']));
 						} else {
 							echo '<td colspan="4">';
 						}
@@ -2353,7 +2357,7 @@ if (!isset($_POST['ProcessSale'])){
 								<td class="number">%s</td>
 								</tr>',
 								$BatchRow['serialno'],
-								number_format($BatchRow['quantity']/$myrow['conversionfactor'], $QOHRow['decimalplaces']),
+								number_format($BatchRow['quantity']/$myrow['conversionfactor'], $myrow['decimalplaces']),
 								ConvertSQLDate($BatchRow['expirationdate']));
 						$LastStockID=$myrow['stockid'];
 						echo '<input type="hidden" name="Units' . $i . '" value="' . $myrow['units'] . '" />';
