@@ -27,7 +27,7 @@ if (isset($_POST['order_items'])){
 		if (mb_strstr($key,'StockID')) {
 			$Index=mb_substr($key, 7);
 			$StockID=$value;
-			$NewItem_array[$StockID] = $_POST['Quantity'.$Index];
+			$NewItem_array[$StockID] = filter_number_input($_POST['Quantity'.$Index]);
 			$_POST['Units'.$StockID]=$_POST['Units'.$Index];
 			$NewItem='Here';
 		}
@@ -305,9 +305,6 @@ if (isset($_POST['SearchCust']) AND $_SESSION['RequireCustomerSelection']==1 AND
 	}
 	if (($_POST['CustCode']!='') AND ($_POST['CustPhone']!='')) {
 		prnMsg(_('Customer Branch Code has been used in preference to the Customer Branch Phone Number entered'), 'warn');
-	}
-	if (($_POST['CustKeywords']=='') AND ($_POST['CustCode']=='')  AND ($_POST['CustPhone']=='')) {
-		prnMsg(_('At least one Customer Branch Name keyword OR an extract of a Customer Branch Code or Branch Phone Number must be entered for the search'), 'warn');
 	} else {
 		if (mb_strlen($_POST['CustKeywords'])>0) {
 		//insert wildcard characters in spaces
@@ -329,8 +326,8 @@ if (isset($_POST['SearchCust']) AND $_SESSION['RequireCustomerSelection']==1 AND
 			if ($_SESSION['SalesmanLogin']!=''){
 				$SQL .= " AND custbranch.salesman='" . $_SESSION['SalesmanLogin'] . "'";
 			}
-			$SQL .=	' AND custbranch.disabletrans=0
-						ORDER BY custbranch.debtorno, custbranch.branchcode';
+			$SQL .=	" AND custbranch.disabletrans=0
+						ORDER BY custbranch.debtorno, custbranch.branchcode";
 
 		} elseif (mb_strlen($_POST['CustCode'])>0){
 
@@ -352,8 +349,8 @@ if (isset($_POST['SearchCust']) AND $_SESSION['RequireCustomerSelection']==1 AND
 			if ($_SESSION['SalesmanLogin']!=''){
 				$SQL .= " AND custbranch.salesman='" . $_SESSION['SalesmanLogin'] . "'";
 			}
-			$SQL .=	' AND custbranch.disabletrans=0
-						ORDER BY custbranch.debtorno';
+			$SQL .=	" AND custbranch.disabletrans=0
+						ORDER BY custbranch.debtorno";
 		} elseif (mb_strlen($_POST['CustPhone'])>0){
 			$SQL = "SELECT custbranch.brname,
 							custbranch.contactname,
@@ -371,8 +368,22 @@ if (isset($_POST['SearchCust']) AND $_SESSION['RequireCustomerSelection']==1 AND
 				$SQL .= " AND custbranch.salesman='" . $_SESSION['SalesmanLogin'] . "'";
 			}
 
-			$SQL .=	' AND custbranch.disabletrans=0
-								ORDER BY custbranch.debtorno';
+			$SQL .=	" AND custbranch.disabletrans=0
+								ORDER BY custbranch.debtorno";
+		} else {
+			$SQL = "SELECT custbranch.brname,
+							custbranch.contactname,
+							custbranch.phoneno,
+							custbranch.faxno,
+							custbranch.branchcode,
+							custbranch.debtorno,
+							debtorsmaster.name
+						FROM custbranch
+						LEFT JOIN debtorsmaster
+							ON custbranch.debtorno=debtorsmaster.debtorno";
+			if ($_SESSION['SalesmanLogin']!=''){
+				$SQL .= " AND custbranch.salesman='" . $_SESSION['SalesmanLogin'] . "'";
+			}
 		}
 
 		$ErrMsg = _('The searched customer records requested cannot be retrieved because');
@@ -632,7 +643,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 	<td><h5><?php echo _('Part of the Branch Phone Number'); ?>:</h5></td>
 	<td><input tabindex="3" type="text" name="CustPhone" size="15"	maxlength="18" /></td>
 	</tr>
-	</table>
+	</table></b>
 	<br /><div class="centre"><input tabindex="4" type="submit" name="SearchCust" value="<?php echo _('Search Now'); ?>" />
 	<input tabindex="5" type="submit" action="reset" value="<?php echo _('Reset'); ?>" /></div>
 	<?php
@@ -669,7 +680,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			} else {
 				echo '<td></td>';
 			}
-			echo '<td><input tabindex="'.number_format($j+5).'" type="submit" name="Submit" value="'.$myrow['brname'].'" /></td>
+			echo '<td><input tabindex="'.($j+5).'" type="submit" name="Submit" value="'.$myrow['brname'].'" /></td>
 					<input type="hidden" name="Select" value="'.$myrow['debtorno'].' - '.$myrow['branchcode'].'" />
 					<td>'.$myrow['contactname'].'</td>
 					<td>'.$myrow['phoneno'].'</td>
@@ -871,7 +882,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		if (!isset($Offset) or $Offset<0) {
 			$Offset=0;
 		}
-		$SQL = $SQL . ' LIMIT ' . $_SESSION['DefaultDisplayRecordsMax'].' OFFSET '.number_format($_SESSION['DefaultDisplayRecordsMax']*$Offset);
+		$SQL = $SQL . ' LIMIT ' . $_SESSION['DefaultDisplayRecordsMax'].' OFFSET '.($_SESSION['DefaultDisplayRecordsMax']*$Offset);
 
 		$ErrMsg = _('There is a problem selecting the part records to display because');
 		$DbgMsg = _('The SQL used to get the part selection was');
@@ -1109,10 +1120,10 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 			if (isset($_POST['Quantity_' . $OrderLine->LineNumber])){
 
-				$Quantity = $_POST['Quantity_' . $OrderLine->LineNumber];
+				$Quantity = filter_number_input($_POST['Quantity_' . $OrderLine->LineNumber]);
 
 				if (ABS($OrderLine->Price - $_POST['Price_' . $OrderLine->LineNumber])>0.01){
-					$Price = $_POST['Price_' . $OrderLine->LineNumber];
+					$Price = filter_currency_input($_POST['Price_' . $OrderLine->LineNumber]);
 					$_POST['GPPercent_' . $OrderLine->LineNumber] = (($Price*(1-($_POST['Discount_' . $OrderLine->LineNumber]/100))) - $OrderLine->StandardCost*$ExRate)/($Price *(1-$_POST['Discount_' . $OrderLine->LineNumber])/100);
 				} elseif (ABS($OrderLine->GPPercent - $_POST['GPPercent_' . $OrderLine->LineNumber])>=0.001) {
 					//then do a recalculation of the price at this new GP Percentage
@@ -1336,8 +1347,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		foreach ($_SESSION['Items'.$identifier]->LineItems as $OrderLine) {
 
 			$LineTotal = $OrderLine->Quantity * $OrderLine->Price * (1 - $OrderLine->DiscountPercent);
-			$DisplayLineTotal = number_format($LineTotal,2);
-			$DisplayDiscount = number_format(($OrderLine->DiscountPercent * 100),2);
+			$DisplayLineTotal = currency_number_format($LineTotal,$_SESSION['Items'.$identifier]->DefaultCurrency);
+			$DisplayDiscount = stock_number_format(($OrderLine->DiscountPercent * 100),2);
 			$QtyOrdered = $OrderLine->Quantity;
 			$QtyRemain = $QtyOrdered - $OrderLine->QtyInv;
 
@@ -1362,21 +1373,21 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			echo '<td><a target="_blank" href="' . $rootpath . '/StockStatus.php?identifier='.$identifier . '&StockID=' . $OrderLine->StockID . '&DebtorNo=' . $_SESSION['Items'.$identifier]->DebtorNo . '">' . $OrderLine->StockID . '</a></td>
 				<td>' . $OrderLine->ItemDescription . '</td>';
 
-			echo '<td><input class="number" tabindex="2" type="text" name="Quantity_' . $OrderLine->LineNumber . '" size="6" maxlength="6" value="' . $OrderLine->Quantity . '" />';
+			echo '<td><input class="number" tabindex="2" type="text" name="Quantity_' . $OrderLine->LineNumber . '" size="6" maxlength="6" value="' . stock_number_format($OrderLine->Quantity, $OrderLine->DecimalPlaces) . '" />';
 			if ($QtyRemain != $QtyOrdered){
-				echo '<br />'.$OrderLine->QtyInv.' of '.$OrderLine->Quantity.' invoiced';
+				echo '<br />'.stock_number_format($OrderLine->QtyInv, $OrderLine->DecimalPlaces).' of '.stock_number_format($OrderLine->Quantity, $OrderLine->DecimalPlaces).' invoiced';
 			}
 			echo '</td>
-					<td class="number">' . $OrderLine->QOHatLoc . '</td>
+					<td class="number">' . stock_number_format($OrderLine->QOHatLoc, $OrderLine->DecimalPlaces) . '</td>
 					<td>' . $OrderLine->Units . '</td>';
 			echo '<input type="hidden" name="Units_'.$OrderLine->LineNumber.'" value="' . $OrderLine->Units . '" />';
 			echo '<input type="hidden" name="ConversionFactor_'.$OrderLine->LineNumber.'" value="' . $OrderLine->ConversionFactor . '" />';
 
 			if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 				/*OK to display with discount if it is an internal user with appropriate permissions */
-				echo '<td><input class="number" type="text" name="Price_' . $OrderLine->LineNumber . '" size="16" maxlength="16" value="' . $OrderLine->Price . '" /></td>
-					<td><input class="number" type="text" name="Discount_' . $OrderLine->LineNumber . '" size="5" maxlength="4" value="' . ($OrderLine->DiscountPercent * 100) . '" /></td>
-					<td><input class="number" type="text" name="GPPercent_' . $OrderLine->LineNumber . '" size="3" maxlength="40" value="' . $OrderLine->GPPercent . '" /></td>';
+				echo '<td><input class="number" type="text" name="Price_' . $OrderLine->LineNumber . '" size="16" maxlength="16" value="' . currency_number_format($OrderLine->Price, $_SESSION['Items'.$identifier]->DefaultCurrency) . '" /></td>
+					<td><input class="number" type="text" name="Discount_' . $OrderLine->LineNumber . '" size="5" maxlength="4" value="' . stock_number_format($OrderLine->DiscountPercent * 100, 2) . '" />%</td>
+					<td><input class="number" type="text" name="GPPercent_' . $OrderLine->LineNumber . '" size="8" maxlength="40" value="' . stock_number_format($OrderLine->GPPercent,2) . '" /></td>';
 			} else {
 				echo '<td class="number">' . $OrderLine->Price . '</td><td></td>';
 				echo '<input type="hidden" name="Price_' . $OrderLine->LineNumber . '" value="' . $OrderLine->Price . '" />';
@@ -1412,7 +1423,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 		} /* end of loop around items */
 
-		$DisplayTotal = number_format($_SESSION['Items'.$identifier]->total,2);
+		$DisplayTotal = currency_number_format($_SESSION['Items'.$identifier]->total,$_SESSION['Items'.$identifier]->DefaultCurrency);
 		if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 			$ColSpanNumber = 3;
 		} else {
@@ -1421,8 +1432,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		echo '<tr class="EvenTableRows"><td class="number" colspan="7"><b>' . _('TOTAL Excl Tax/Freight') . '</b></td>
 							<td colspan="' . $ColSpanNumber . '" class="number">' . $DisplayTotal . '</td></tr></table>';
 
-		$DisplayVolume = number_format($_SESSION['Items'.$identifier]->totalVolume,2);
-		$DisplayWeight = number_format($_SESSION['Items'.$identifier]->totalWeight,2);
+		$DisplayVolume = stock_number_format($_SESSION['Items'.$identifier]->totalVolume,2);
+		$DisplayWeight = stock_number_format($_SESSION['Items'.$identifier]->totalWeight,2);
 		echo '<table><tr class="EvenTableRows"><td>' . _('Total Weight') . ':</td>
 						 <td>' . $DisplayWeight . '</td>
 						 <td>' . _('Total Volume') . ':</td>
@@ -1566,16 +1577,16 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 							<td class="number">%s</td>
 							<td class="number">%s</td>
 							<td class="number">%s</td>
-							<td><font size="1"><input class="number"  tabindex="'.number_format($j+7).'" type="text" size="6" name="itm'.$myrow['stockid'].'" value="0" />
+							<td><font size="1"><input class="number"  tabindex="'.($j+7).'" type="text" size="6" name="itm'.$myrow['stockid'].'" value="0" />
 							</td>
 							</tr>',
 							$myrow['stockid'],
 							$myrow['description'],
 							$myrow['units'],
-							number_format($QOH, $DecimalPlaces),
-							number_format($DemandQty, $DecimalPlaces),
-							number_format($OnOrder, $DecimalPlaces),
-							number_format($Available, $DecimalPlaces));
+							stock_number_format($QOH, $DecimalPlaces),
+							stock_number_format($DemandQty, $DecimalPlaces),
+							stock_number_format($OnOrder, $DecimalPlaces),
+							stock_number_format($Available, $DecimalPlaces));
 				if ($j==1) {
 					$jsCall = '<script  type="text/javascript">if (document.SelectParts) {defaultControl(document.SelectParts.itm'.$myrow['stockid'].');}</script>';
 				}
@@ -1584,7 +1595,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			}
 #end of while loop for Frequently Ordered Items
 			echo '<td style="text-align:center" colspan="8"><input type="hidden" name="order_items" value="1" />
-					<input tabindex="'.number_format($j+8).'" type="submit" value="'._('Add to Sales Order').'" /></td>';
+					<input tabindex="'.($j+8).'" type="submit" value="'._('Add to Sales Order').'" /></td>';
 			echo '</table>';
 		} //end of if Frequently Ordered Items > 0
 		echo '<p><div class="centre"><b>' . $msg . '</b></div></p>';
@@ -1653,14 +1664,14 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 			echo '<table class="table1">';
 			echo '<tr><td>
-					<input type="hidden" name="previous" value="'.number_format($Offset-1).'" />
-					<input tabindex="'.number_format($j+8).'" type="submit" name="Prev" value="'._('Prev').'" /></td>';
+					<input type="hidden" name="previous" value="'.($Offset-1).'" />
+					<input tabindex="'.($j+8).'" type="submit" name="Prev" value="'._('Prev').'" /></td>';
 			echo '<td style="text-align:center" colspan="7">
 					<input type="hidden" name="order_items" value="1" />
-					<input tabindex="'.number_format($j+9).'" type="submit" value="'._('Add to Sales Order').'" /></td>';
+					<input tabindex="'.($j+9).'" type="submit" value="'._('Add to Sales Order').'" /></td>';
 			echo '<td>
-					<input type="hidden" name="nextlist" value="'.number_format($Offset+1).'" />
-					<input tabindex="'.number_format($j+10).'" type="submit" name="Next" value="'._('Next').'" /></td></tr>';
+					<input type="hidden" name="nextlist" value="'.($Offset+1).'" />
+					<input tabindex="'.($j+10).'" type="submit" name="Next" value="'._('Next').'" /></td></tr>';
 			$TableHeader = '<tr><th>' . _('Code') . '</th>
 					   			<th>' . _('Description') . '</th>
 					   			<th>' . _('Units') . '</th>
@@ -1804,13 +1815,13 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				echo '<td>'.$myrow['stockid'].'</font></td>
 						<td>'.$myrow['description'].'</td>
 						<td>'.$myrow['units'].'</td>
-						<td class="number">'.number_format($QOH,$DecimalPlaces).'</td>
-						<td class="number">'.number_format($DemandQty,$DecimalPlaces).'</td>
-						<td class="number">'.number_format($OnOrder, $DecimalPlaces).'</td>
-						<td class="number">'.number_format($Available,$DecimalPlaces).'</td>
-						<td><font size="1"><input class="number"  tabindex="'.number_format($j+7).'" type="text" size="6" name="Quantity'.$i.'" value="0" />
+						<td class="number">'.stock_number_format($QOH,$DecimalPlaces).'</td>
+						<td class="number">'.stock_number_format($DemandQty,$DecimalPlaces).'</td>
+						<td class="number">'.stock_number_format($OnOrder, $DecimalPlaces).'</td>
+						<td class="number">'.stock_number_format($Available,$DecimalPlaces).'</td>
+						<td><font size="1"><input class="number"  tabindex="'.($j+7).'" type="text" size="6" name="Quantity'.$i.'" value="0" />
 						<input type="hidden" name="StockID'.$i.'" value="'.$myrow['stockid'].'" />
-						<td class="number">'.number_format($PriceRow['price'],2).'</td>
+						<td class="number">'.currency_number_format($PriceRow['price'],$_SESSION['Items'.$identifier]->DefaultCurrency).'</td>
 						</td>
 						</tr>';
 				echo '<input type="hidden" name="ConversionFactor'.$i.'" value="' . $PriceRow['conversionfactor'] . '" />';
@@ -1822,12 +1833,12 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 	#end of page full new headings if
 			}
 	#end of while loop
-			echo '<tr><td><input type="hidden" name="previous" value="'.number_format($Offset-1).'" />
-					<input tabindex="'.number_format($j+7).'" type="submit" name="Prev" value="'._('Prev').'" /></td>';
+			echo '<tr><td><input type="hidden" name="previous" value="'.($Offset-1).'" />
+					<input tabindex="'.($j+7).'" type="submit" name="Prev" value="'._('Prev').'" /></td>';
 			echo '<td style="text-align:center" colspan="7"><input type="hidden" name="order_items" value="1" />
-				<input tabindex="'.number_format($j+8).'" type="submit" value="'._('Add to Sales Order').'" /></td>';
-			echo '<td><input type="hidden" name="nextlist" value="'.number_format($Offset+1).'" />
-				<input tabindex="'.number_format($j+9).'" type="submit" name="Next" value="'._('Next').'" /></td><tr/>';
+				<input tabindex="'.($j+8).'" type="submit" value="'._('Add to Sales Order').'" /></td>';
+			echo '<td><input type="hidden" name="nextlist" value="'.($Offset+1).'" />
+				<input tabindex="'.($j+9).'" type="submit" name="Next" value="'._('Next').'" /></td><tr/>';
 			echo '</table></form>';
 			echo $jsCall;
 
