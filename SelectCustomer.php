@@ -182,6 +182,7 @@ if (isset($_POST['JustSelectedACustomer']) and empty($_SESSION['CustomerID'])){
 
 if ($_SESSION['CustomerID'] != '' AND !isset($_POST['Search']) AND !isset($_POST['CSV'])) {
 	$SQL = "SELECT debtorsmaster.name,
+					debtorsmaster.currcode,
 					custbranch.phoneno
 			FROM debtorsmaster INNER JOIN custbranch
 			ON debtorsmaster.debtorno=custbranch.debtorno
@@ -193,6 +194,7 @@ if ($_SESSION['CustomerID'] != '' AND !isset($_POST['Search']) AND !isset($_POST
 	if ($myrow = DB_fetch_array($result)) {
 		$CustomerName = $myrow['name'];
 		$PhoneNo = $myrow['phoneno'];
+		$Currency = $myrow['currcode'];
 	}
 	unset($result);
 
@@ -497,7 +499,7 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 			$Total1Result = DB_query($SQL, $db);
 			$row = DB_fetch_array($Total1Result);
 			echo '<tr><td colspan="2">';
-			echo '<table width="45%" colspan="2" cellpadding="4">';
+			echo '<table width="45%" colspan="2" cellpadding="4" class="selection">';
 			echo '<tr><th width="33%" colspan="3">' . _('Customer Data') . '</th></tr>';
 			echo '<tr><td valign="top" class="select">'; /* Customer Data */
 			//echo _('Distance to this customer:') . '<b>TBA</b><br />';
@@ -509,7 +511,7 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 			}
 			echo '<tr>
 					<td class="select">' . _('Last Paid Amount (inc tax):') . '</td>
-					<td class="select"> <b>' . number_format($myrow['lastpaid'], 2) . '</b></td>
+					<td class="select"> <b>' . currency_number_format($myrow['lastpaid'], $Currency) . '</b></td>
 					<td class="select"></td>
 				</tr>';
 			echo '<tr>
@@ -526,7 +528,7 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 			} else {
 				echo '<tr>
 						<td class="select">' . _('Total Spend from this Customer (inc tax):') . ' </td>
-						<td class="select"><b>' . number_format($row['total'], 2) . '</b></td>
+						<td class="select"><b>' . currency_number_format($row['total'], $Currency) . '</b></td>
 						<td class="select"></td>
 					</tr>';
 			}
