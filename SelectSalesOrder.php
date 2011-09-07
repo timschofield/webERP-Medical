@@ -906,10 +906,9 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 	} //end if there are some orders to show
 }
 
-?>
-</form>
+echo '</form>';
 
-<?php } //end StockID already selected
+} //end StockID already selected
 
 include('includes/footer.inc');
 ?>
