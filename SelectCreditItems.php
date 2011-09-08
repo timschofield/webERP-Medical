@@ -779,7 +779,7 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 		}
 
 		if (isset($_POST['ChargeFreightCost'])){
-			$_SESSION['CreditItems'.$identifier]->FreightCost = $_POST['ChargeFreightCost'];
+			$_SESSION['CreditItems'.$identifier]->FreightCost = filter_currency_input($_POST['ChargeFreightCost']);
 		}
 
 		if (isset($_POST['Location']) AND $_POST['Location'] != $_SESSION['CreditItems'.$identifier]->Location){
@@ -1050,6 +1050,8 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 
 		if (!isset($_POST['ChargeFreightCost']) AND !isset($_SESSION['CreditItems'.$identifier]->FreightCost)){
 			$_POST['ChargeFreightCost']=0;
+		} else {
+			$_POST['ChargeFreightCost']=filter_currency_input($_POST['ChargeFreightCost']);
 		}
 		echo '<tr>
 			<td colspan="5"></td>';
