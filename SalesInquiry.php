@@ -219,6 +219,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 							   IF(salesorderdetails.quantity = salesorderdetails.qtyinvoiced or
 								  salesorderdetails.completed = 1,'Completed','Open') as linestatus,
 							   debtorsmaster.name,
+							   debtorsmaster.currcode,
 							   custbranch.brname,
 							   custbranch.area,
 							   custbranch.salesman,
@@ -258,6 +259,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 							   IF(salesorderdetails.quantity = salesorderdetails.qtyinvoiced or
 								  salesorderdetails.completed = 1,'Completed','Open') as linestatus,
 							   debtorsmaster.name,
+							   debtorsmaster.currcode,
 							   custbranch.brname,
 							   custbranch.area,
 							   custbranch.salesman,
@@ -314,6 +316,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 								   SUM(salesorderdetails.quantity * salesorderdetails.unitprice * (1 - salesorderdetails.discountpercent)) as extprice,
 								   SUM(salesorderdetails.quantity * stockmaster.actualcost) as extcost,
 								   stockmaster.description,
+								   debtorsmaster.currcode,
 								   stockmaster.decimalplaces
 								   FROM salesorderdetails
 							LEFT JOIN salesorders ON salesorders.orderno=salesorderdetails.orderno
@@ -343,6 +346,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 					$sql = "SELECT salesorderdetails.orderno,
 								   salesorders.debtorno,
 								   debtorsmaster.name,
+								   debtorsmaster.currcode,
 								   SUM(salesorderdetails.quantity) as quantity,
 								   SUM(salesorderdetails.qtyinvoiced) as qtyinvoiced,
 								   SUM(salesorderdetails.quantity * salesorderdetails.unitprice * (1 - salesorderdetails.discountpercent)) as extprice,
@@ -376,6 +380,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 					}
 					$sql = "SELECT debtorsmaster.debtorno,
 								   debtorsmaster.name,
+								   debtorsmaster.currcode,
 								   SUM(salesorderdetails.quantity) as quantity,
 								   SUM(salesorderdetails.qtyinvoiced) as qtyinvoiced,
 								   SUM(salesorderdetails.quantity * salesorderdetails.unitprice * (1 - salesorderdetails.discountpercent)) as extprice,
@@ -409,7 +414,8 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 								   SUM(salesorderdetails.quantity) as quantity,
 								   SUM(salesorderdetails.qtyinvoiced) as qtyinvoiced,
 								   SUM(salesorderdetails.quantity * salesorderdetails.unitprice * (1 - salesorderdetails.discountpercent)) as extprice,
-								   SUM(salesorderdetails.quantity * stockmaster.actualcost) as extcost
+								   SUM(salesorderdetails.quantity * stockmaster.actualcost) as extcost,
+								   debtorsmaster.currcode
 								   FROM salesorderdetails
 							LEFT JOIN salesorders ON salesorders.orderno=salesorderdetails.orderno
 							LEFT JOIN debtorsmaster ON salesorders.debtorno = debtorsmaster.debtorno
@@ -438,7 +444,8 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 								   SUM(salesorderdetails.quantity) as quantity,
 								   SUM(salesorderdetails.qtyinvoiced) as qtyinvoiced,
 								   SUM(salesorderdetails.quantity * salesorderdetails.unitprice * (1 - salesorderdetails.discountpercent)) as extprice,
-								   SUM(salesorderdetails.quantity * stockmaster.actualcost) as extcost
+								   SUM(salesorderdetails.quantity * stockmaster.actualcost) as extcost,
+								   debtorsmaster.currcode
 								   FROM salesorderdetails
 							LEFT JOIN salesorders ON salesorders.orderno=salesorderdetails.orderno
 							LEFT JOIN debtorsmaster ON salesorders.debtorno = debtorsmaster.debtorno
@@ -467,7 +474,8 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 								   SUM(salesorderdetails.quantity) as quantity,
 								   SUM(salesorderdetails.qtyinvoiced) as qtyinvoiced,
 								   SUM(salesorderdetails.quantity * salesorderdetails.unitprice * (1 - salesorderdetails.discountpercent)) as extprice,
-								   SUM(salesorderdetails.quantity * stockmaster.actualcost) as extcost
+								   SUM(salesorderdetails.quantity * stockmaster.actualcost) as extcost,
+								   debtorsmaster.currcode
 								   FROM salesorderdetails
 							LEFT JOIN salesorders ON salesorders.orderno=salesorderdetails.orderno
 							LEFT JOIN debtorsmaster ON salesorders.debtorno = debtorsmaster.debtorno
@@ -496,7 +504,8 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 								   SUM(salesorderdetails.quantity) as quantity,
 								   SUM(salesorderdetails.qtyinvoiced) as qtyinvoiced,
 								   SUM(salesorderdetails.quantity * salesorderdetails.unitprice * (1 - salesorderdetails.discountpercent)) as extprice,
-								   SUM(salesorderdetails.quantity * stockmaster.actualcost) as extcost
+								   SUM(salesorderdetails.quantity * stockmaster.actualcost) as extcost,
+								   debtorsmaster.currcode
 								   FROM salesorderdetails
 							LEFT JOIN salesorders ON salesorders.orderno=salesorderdetails.orderno
 							LEFT JOIN debtorsmaster ON salesorders.debtorno = debtorsmaster.debtorno
@@ -530,6 +539,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 								   SUM(tempstockmoves.qty * tempstockmoves.price) * -1 as extprice,
 								   SUM(tempstockmoves.qty * tempstockmoves.standardcost) * -1 as extcost,
 								   stockmaster.description,
+								   debtorsmaster.currcode,
 								   SUM(tempstockmoves.qty * -1) as qty
 								   FROM tempstockmoves
 							LEFT JOIN salesorderdetails ON tempstockmoves.reference=salesorderdetails.orderno
@@ -565,7 +575,8 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 								   SUM(salesorderdetails.qtyinvoiced) as qtyinvoiced,
 								   SUM(tempstockmoves.qty * tempstockmoves.price) * -1 as extprice,
 								   SUM(tempstockmoves.qty * tempstockmoves.standardcost) * -1 as extcost,
-								   SUM(tempstockmoves.qty * -1) as qty
+								   SUM(tempstockmoves.qty * -1) as qty,
+								   debtorsmaster.currcode
 								   FROM tempstockmoves
 							LEFT JOIN salesorderdetails ON tempstockmoves.reference=salesorderdetails.orderno
 							LEFT JOIN salesorders ON salesorders.orderno=salesorderdetails.orderno
@@ -599,6 +610,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 					}
 					$sql = "SELECT debtorsmaster.debtorno,
 								   debtorsmaster.name,
+								   debtorsmaster.currcode,
 								   SUM(salesorderdetails.quantity) as quantity,
 								   SUM(salesorderdetails.qtyinvoiced) as qtyinvoiced,
 								   SUM(tempstockmoves.qty * tempstockmoves.price) * -1 as extprice,
@@ -637,7 +649,8 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 								   SUM(salesorderdetails.qtyinvoiced) as qtyinvoiced,
 								   SUM(tempstockmoves.qty * tempstockmoves.price) * -1 as extprice,
 								   SUM(tempstockmoves.qty * tempstockmoves.standardcost) * -1 as extcost,
-								   SUM(tempstockmoves.qty * -1) as qty
+								   SUM(tempstockmoves.qty * -1) as qty,
+								   debtorsmaster.currcode
 								   FROM tempstockmoves
 							LEFT JOIN salesorderdetails ON tempstockmoves.reference=salesorderdetails.orderno
 							LEFT JOIN salesorders ON salesorders.orderno=salesorderdetails.orderno
@@ -671,7 +684,8 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 								   SUM(salesorderdetails.qtyinvoiced) as qtyinvoiced,
 								   SUM(tempstockmoves.qty * tempstockmoves.price) * -1 as extprice,
 								   SUM(tempstockmoves.qty * tempstockmoves.standardcost) * -1 as extcost,
-								   SUM(tempstockmoves.qty * -1) as qty
+								   SUM(tempstockmoves.qty * -1) as qty,
+								   debtorsmaster.currcode
 								   FROM tempstockmoves
 							LEFT JOIN salesorderdetails ON tempstockmoves.reference=salesorderdetails.orderno
 							LEFT JOIN salesorders ON salesorders.orderno=salesorderdetails.orderno
@@ -701,6 +715,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 				elseif ($_POST['SummaryType'] == 'salesman') {
 					$sql = "SELECT custbranch.salesman,
 								   salesman.salesmanname,
+								   debtorsmaster.currcode,
 								   SUM(salesorderdetails.quantity) as quantity,
 								   SUM(salesorderdetails.qtyinvoiced) as qtyinvoiced,
 								   SUM(tempstockmoves.qty * tempstockmoves.price) * -1 as extprice,
@@ -735,6 +750,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 				elseif ($_POST['SummaryType'] == 'area') {
 					$sql = "SELECT custbranch.area,
 								   areas.areadescription,
+								   debtorsmaster.currcode,
 								   SUM(salesorderdetails.quantity) as quantity,
 								   SUM(salesorderdetails.qtyinvoiced) as qtyinvoiced,
 								   SUM(tempstockmoves.qty * tempstockmoves.price) * -1 as extprice,
@@ -854,14 +870,14 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 			while ($myrow = DB_fetch_array($result)) {
 				$linectr++;
 				if ($_POST['DateType'] == 'Order') {
-					printf('%10s | %-20s | %10s | %-10s | %-30s | %-30s | %12s | %14s | %14s | %14s | %12s | %-10s | %-10s | %-10s | %-40s ', $myrow['orderno'], $myrow['stkcode'], ConvertSQLDate($myrow['orddate']) , $myrow['debtorno'], $myrow['name'], $myrow['brname'], number_format($myrow['quantity'], $myrow['decimalplaces']) , number_format($myrow['extcost'], 2) , number_format($myrow['extprice'], 2) , number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) , $myrow['linestatus'], ConvertSQLDate($myrow['itemdue']) , $myrow['salesman'], $myrow['area'], $myrow['description']);
+					printf('%10s | %-20s | %10s | %-10s | %-30s | %-30s | %12s | %14s | %14s | %14s | %12s | %-10s | %-10s | %-10s | %-40s ', $myrow['orderno'], $myrow['stkcode'], ConvertSQLDate($myrow['orddate']) , $myrow['debtorno'], $myrow['name'], $myrow['brname'], stock_number_format($myrow['quantity'], $myrow['decimalplaces']) , currency_number_format($myrow['extcost'], $myrow['currcode']) , currency_number_format($myrow['extprice'], $myrow['currcode']) , stock_number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) , $myrow['linestatus'], ConvertSQLDate($myrow['itemdue']) , $myrow['salesman'], $myrow['area'], $myrow['description']);
 					print '<br/>';
 					$TotalQty+= $myrow['quantity'];
 				}
 				else {
 
 					// Detail for Invoiced Date
-					printf('%10s | %14s | %-20s | %10s | %-10s | %-30s | %-30s | %12s | %14s | %14s | %12s | %-10s | %-10s | %-10s | %-40s ', $myrow['orderno'], $myrow['transno'], $myrow['stkcode'], ConvertSQLDate($myrow['orddate']) , $myrow['debtorno'], $myrow['name'], $myrow['brname'], number_format($myrow['qty'], $myrow['decimalplaces']) , number_format($myrow['extcost'], 2) , number_format($myrow['extprice'], 2) , $myrow['linestatus'], ConvertSQLDate($myrow['trandate']) , $myrow['salesman'], $myrow['area'], $myrow['description']);
+					printf('%10s | %14s | %-20s | %10s | %-10s | %-30s | %-30s | %12s | %14s | %14s | %12s | %-10s | %-10s | %-10s | %-40s ', $myrow['orderno'], $myrow['transno'], $myrow['stkcode'], ConvertSQLDate($myrow['orddate']) , $myrow['debtorno'], $myrow['name'], $myrow['brname'], stock_number_format($myrow['qty'], $myrow['decimalplaces']) , currency_number_format($myrow['extcost'], $myrow['currcode']) , currency_number_format($myrow['extprice'], $myrow['currcode']) , $myrow['linestatus'], ConvertSQLDate($myrow['trandate']) , $myrow['salesman'], $myrow['area'], $myrow['description']);
 					print '<br/>';
 					$TotalQty+= $myrow['qty'];
 				}
@@ -871,17 +887,6 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 				$TotalInvQty+= $myrow['qtyinvoiced'];
 			} //END WHILE LIST LOOP
 
-
-			// Print totals
-
-			if ($_POST['DateType'] == 'Order') {
-				printf('%10s | %-20s | %10s | %-10s | %-30s | %-30s | %12s | %14s | %14s | %14s | %12s | %-10s | %-40s ', _('Totals') , _('Lines - ') . $linectr, ' ', ' ', ' ', ' ', number_format($TotalQty, 2) , number_format($TotalExtCost, 2) , number_format($TotalExtPrice, 2) , number_format($TotalInvQty, 2) , ' ', ' ', ' ');
-			}
-			else {
-
-				// Print totals for Invoiced Date Type - Don't print invoice quantity
-				printf('%10s | %14s | %-20s | %10s | %-10s | %-30s | %-30s | %12s | %14s | %14s | %12s | %10s | %-40s ', _('Totals') , _('Lines - ') . $linectr, ' ', ' ', ' ', ' ', ' ', number_format($TotalQty, 2) , number_format($TotalExtCost, 2) , number_format($TotalExtPrice, 2) , ' ', ' ', ' ');
-			}
 			echo '</pre>';
 		}
 		else {
@@ -961,7 +966,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 					// qty is from stockmoves
 					$displayqty = $myrow['qty'];
 				}
-				printf('	%-30s | %-40s | %12s | %14s | %14s | %14s |  %-40s', $myrow[$summarytype], $myrow[$description], number_format($displayqty, 2) , number_format($myrow['extcost'], 2) , number_format($myrow['extprice'], 2) , number_format($myrow['qtyinvoiced'], 2) , $column7);
+				printf('	%-30s | %-40s | %12s | %14s | %14s | %14s |  %-40s', $myrow[$summarytype], $myrow[$description], stock_number_format($displayqty, $myrow['decimalplaces']) , currency_number_format($myrow['extcost'], $myrow['currcode']) , currency_number_format($myrow['extprice'], $myrow['currcode']) , stock_number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) , $column7);
 				print '<br/>';
 				$TotalQty+= $displayqty;
 				$TotalExtCost+= $myrow['extcost'];
@@ -970,9 +975,6 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 			} //END WHILE LIST LOOP
 
 
-			// Print totals
-
-			printf('	%-30s | %-40s | %12s | %14s | %14s | %14s', _('Totals') , _('Lines - ') . $linectr, number_format($TotalQty, 2) , number_format($TotalExtCost, 2) , number_format($TotalExtPrice, 2) , number_format($TotalInvQty, 2) , ' ');
 		} // End of if ($_POST['ReportType']
 
 
