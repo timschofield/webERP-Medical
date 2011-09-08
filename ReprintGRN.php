@@ -85,7 +85,7 @@ if (isset($_POST['Show'])) {
 		echo '<td>' . $myrow['itemcode'] . '</td>';
 		echo '<td>' . $myrow['itemdescription'] . '</td>';
 		echo '<td>' . $myrow['deliverydate'] . '</td>';
-		echo '<td class="number">' . number_format($myrow['qtyrecd'], $myrow['decimalplaces']) . '</td>';
+		echo '<td class="number">' . stock_number_format($myrow['qtyrecd'], $myrow['decimalplaces']) . '</td>';
 		echo '<td><a href="PDFGrn.php?GRNNo=' . $myrow['grnbatch'] .'&PONo=' . $_POST['PONumber'] . '">' . _('Reprint') . '</a></td>';
 		echo '</tr>';
 	}
