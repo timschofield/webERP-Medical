@@ -332,10 +332,10 @@ $k = 0; //row colour counter
 foreach ($_SESSION['Items'.$identifier]->LineItems as $StockItem) {
 
 	$LineTotal = $StockItem->Quantity * $StockItem->Price * (1 - $StockItem->DiscountPercent);
-	$DisplayLineTotal = number_format($LineTotal,2);
-	$DisplayPrice = number_format($StockItem->Price,2);
-	$DisplayQuantity = number_format($StockItem->Quantity,$StockItem->DecimalPlaces);
-	$DisplayDiscount = number_format(($StockItem->DiscountPercent * 100),2);
+	$DisplayLineTotal = currency_number_format($LineTotal,$_SESSION['Items'.$identifier]->DefaultCurrency);
+	$DisplayPrice = currency_number_format($StockItem->Price,$_SESSION['Items'.$identifier]->DefaultCurrency);
+	$DisplayQuantity = stock_number_format($StockItem->Quantity,$StockItem->DecimalPlaces);
+	$DisplayDiscount = stock_number_format(($StockItem->DiscountPercent * 100),2);
 
 
 	if ($k==1){
@@ -360,10 +360,10 @@ foreach ($_SESSION['Items'.$identifier]->LineItems as $StockItem) {
 	$_SESSION['Items'.$identifier]->totalWeight = $_SESSION['Items'.$identifier]->totalWeight + ($StockItem->Quantity * $StockItem->Weight);
 }
 
-$DisplayTotal = number_format($_SESSION['Items'.$identifier]->total,2);
+$DisplayTotal = currency_number_format($_SESSION['Items'.$identifier]->total,$_SESSION['Items'.$identifier]->DefaultCurrency);
 echo '<tr>
 			<td colspan="6" class="number"><b>'. _('TOTAL Excl Tax/Freight') .'</b></td>
-			<td class="number">$DisplayTotal</td>
+			<td class="number">' . $DisplayTotal . '</td>
 		</tr>
 	</table>';
 
