@@ -129,6 +129,7 @@ for ($i=1;$i<=2;$i++){  /*Print it out twice one copy for customer and one for o
 
 	$sql = "SELECT salesorderdetails.stkcode,
 			stockmaster.description,
+			stockmaster.decimalplaces,
 			salesorderdetails.quantity,
 			salesorderdetails.qtyinvoiced,
 			salesorderdetails.unitprice,
@@ -146,9 +147,9 @@ for ($i=1;$i<=2;$i++){  /*Print it out twice one copy for customer and one for o
 
 			$ListCount ++;
 
-			$DisplayQty = number_format($myrow2['quantity'],2);
-			$DisplayPrevDel = number_format($myrow2['qtyinvoiced'],2);
-			$DisplayQtySupplied = number_format($myrow2['quantity'] - $myrow2['qtyinvoiced'],2);
+			$DisplayQty = stock_number_format($myrow2['quantity'],$myrow2['decimalplaces']);
+			$DisplayPrevDel = stock_number_format($myrow2['qtyinvoiced'],$myrow2['decimalplaces']);
+			$DisplayQtySupplied = stock_number_format($myrow2['quantity'] - $myrow2['qtyinvoiced'],$myrow2['decimalplaces']);
 			$itemdesc = $myrow2['description'] . ' - ' . $myrow2['narrative'];
 			$LeftOvers = $pdf->addTextWrap($XPos,$YPos,127,$FontSize,$myrow2['stkcode']);
 			$LeftOvers = $pdf->addTextWrap(147,$YPos,355,$FontSize,$itemdesc);
