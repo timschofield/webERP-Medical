@@ -118,7 +118,7 @@ if (isset($_POST['submit'])) {
 								price='" . filter_currency_input($_POST['Price']) . "',
 								units='" . $_POST['Units'] . "',
 								conversionfactor='" . filter_number_input($_POST['ConversionFactor']) . "',
-								decimalplaces='" . $_POST['DecimalPlaces'] . "',
+								decimalplaces='" . round($_POST['DecimalPlaces'],0) . "',
 								branchcode='" . $_POST['Branch'] . "',
 								startdate='" . FormatDateForSQL($_POST['StartDate']) . "',
 								enddate='" . FormatDateForSQL($_POST['EndDate']) . "'
@@ -152,7 +152,7 @@ if (isset($_POST['submit'])) {
 									'" . filter_currency_input($_POST['Price']) . "',
 									'" . $_POST['Units'] . "',
 									'" . filter_number_input($_POST['ConversionFactor']) . "',
-									'" . $_POST['DecimalPlaces'] . "',
+									'" . round($_POST['DecimalPlaces'],0) . "',
 									'" . $_POST['Branch'] . "',
 									'" . FormatDateForSQL($_POST['StartDate']) . "',
 									'" . FormatDateForSQL($_POST['EndDate']) . "'
@@ -310,10 +310,10 @@ if (DB_num_rows($result) == 0) {
 			$EndDateDisplay = ConvertSQLDate($myrow['enddate']);
 		}
 		echo '<tr bgcolor="#CCCCCC">
-				<td class="number">'.locale_money_format($myrow['price'],$myrow['currcode']).'</td>
+				<td class="number">'.locale_money_format($myrow['price'],$CurrCode).'</td>
 				<td>'.$Branch.'</td>
 				<td>'.$myrow['units'].'</td>
-				<td class="number">'.$myrow['conversionfactor'].'</td>
+				<td class="number">'.locale_number_format($myrow['conversionfactor'],4).'</td>
 				<td class="number">'.$myrow['decimalplaces'].'</td>
 				<td>'.ConvertSQLDate($myrow['startdate']).'</td>
 				<td>'.$EndDateDisplay.'</td>
