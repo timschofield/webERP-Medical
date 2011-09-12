@@ -376,7 +376,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 								'" . Date('Y-m-d') . "',
 								'" . $PeriodNo . "',
 								'" . $StockGLCode['wipact'] . "',
-								'" . $_POST['WO'] . ' - ' . $_POST['StockID'] . ' ' . _('Component') . ': ' . $AutoIssueCompRow['stockid'] . ' - ' . $QuantityReceived . ' x ' . $AutoIssueCompRow['qtypu'] . ' @ ' . currency_number_format($AutoIssueCompRow['cost'], $_SESSION['CompanyRecord']['currencydefault']) . "',
+								'" . $_POST['WO'] . ' - ' . $_POST['StockID'] . ' ' . _('Component') . ': ' . $AutoIssueCompRow['stockid'] . ' - ' . $QuantityReceived . ' x ' . $AutoIssueCompRow['qtypu'] . ' @ ' . locale_money_format($AutoIssueCompRow['cost'], $_SESSION['CompanyRecord']['currencydefault']) . "',
 								'" . ($AutoIssueCompRow['qtypu'] * $QuantityReceived * $AutoIssueCompRow['cost']) . "')";
 
 					$ErrMsg =   _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The WIP side of the work order issue GL posting could not be inserted because');
@@ -395,7 +395,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 								'" . Date('Y-m-d') . "',
 								'" . $PeriodNo . "',
 								'" . $AutoIssueCompRow['stockact'] . "',
-								'" . $_POST['WO'] . ' - ' . $_POST['StockID'] . ' -> ' . $AutoIssueCompRow['stockid'] . ' - ' . $QuantityReceived . ' x ' . $AutoIssueCompRow['qtypu'] . ' @ ' . currency_number_format($AutoIssueCompRow['cost'],$_SESSION['CompanyRecord']['currencydefault']) . "',
+								'" . $_POST['WO'] . ' - ' . $_POST['StockID'] . ' -> ' . $AutoIssueCompRow['stockid'] . ' - ' . $QuantityReceived . ' x ' . $AutoIssueCompRow['qtypu'] . ' @ ' . locale_money_format($AutoIssueCompRow['cost'],$_SESSION['CompanyRecord']['currencydefault']) . "',
 								'" . -($AutoIssueCompRow['qtypu'] * $QuantityReceived * $AutoIssueCompRow['cost']) . "')";
 
 				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The stock side of the work order issue GL posting could not be inserted because');
@@ -630,7 +630,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 								'" . Date('Y-m-d') . "',
 								'" . $PeriodNo . "',
 								'" . $StockGLCode['stockact'] . "',
-								'" . $_POST['WO'] . " " . $_POST['StockID'] . " - " . $WORow['description'] . ' x ' . $QuantityReceived . " @ " . currency_number_format($WORow['stdcost'],$_SESSION['CompanyRecord']['currencydefault']) . "',
+								'" . $_POST['WO'] . " " . $_POST['StockID'] . " - " . $WORow['description'] . ' x ' . $QuantityReceived . " @ " . locale_money_format($WORow['stdcost'],$_SESSION['CompanyRecord']['currencydefault']) . "',
 								'" . ($WORow['stdcost'] * $QuantityReceived) . "')";
 
 			$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The receipt of work order finished stock GL posting could not be inserted because');
@@ -650,7 +650,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 								'" . Date('Y-m-d') . "',
 								'" . $PeriodNo . "',
 								'" . $StockGLCode['wipact'] . "',
-								'" . $_POST['WO'] . " " . $_POST['StockID'] . " - " . $WORow['description'] . ' x ' . $QuantityReceived . " @ " . currency_number_format($WORow['stdcost'],$_SESSION['CompanyRecord']['currencydefault']) . "',
+								'" . $_POST['WO'] . " " . $_POST['StockID'] . " - " . $WORow['description'] . ' x ' . $QuantityReceived . " @ " . locale_money_format($WORow['stdcost'],$_SESSION['CompanyRecord']['currencydefault']) . "',
 								'" . -($WORow['stdcost'] * $QuantityReceived) . "')";
 
 			$ErrMsg =   _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The WIP credit on receipt of finished items from a work order GL posting could not be inserted because');
@@ -747,10 +747,10 @@ echo '<table cellpadding="2" class="selection">
 			<td>' . _('Required By') . ':</td>
 			<td>' . ConvertSQLDate($WORow['requiredby']) . '</td></tr>
 		 <tr><td>' . _('Quantity Ordered') . ':</td>
-		 	<td class="number">' . stock_number_format($WORow['qtyreqd'],$WORow['decimalplaces']) . '</td>
+		 	<td class="number">' . locale_number_format($WORow['qtyreqd'],$WORow['decimalplaces']) . '</td>
 			<td colspan="2">' . $WORow['units'] . '</td></tr>
 		 <tr><td>' . _('Already Received') . ':</td>
-		 	<td class="number">' . stock_number_format($WORow['qtyrecd'],$WORow['decimalplaces']) . '</td>
+		 	<td class="number">' . locale_number_format($WORow['qtyrecd'],$WORow['decimalplaces']) . '</td>
 			<td colspan="2">' . $WORow['units'] . '</td></tr>
 		 <tr><td>' . _('Date Received') . ':</td>
 		 	<td>' . Date($_SESSION['DefaultDateFormat']) . '</td>

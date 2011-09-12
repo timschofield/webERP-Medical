@@ -259,9 +259,9 @@ if ($InputError ==0){
 				echo '<td>'.$myrow['sales_type'].'</td>
 						<td>'.$myrow['currency'].'</td>
 						<td>'.$myrow['units'].'</td>
-						<td class="number">'.stock_number_format($myrow['conversionfactor'],4).'</td>
+						<td class="number">'.locale_number_format($myrow['conversionfactor'],4).'</td>
 						<td class="number">'.$myrow['decimalplaces'].'</td>
-						<td class="number">'.currency_number_format($myrow['price'],$myrow['currabrev']).'</td>
+						<td class="number">'.locale_money_format($myrow['price'],$myrow['currabrev']).'</td>
 						<td>'.ConvertSQLDate($myrow['startdate']).'</td>
 						<td>'.$EndDateDisplay.'</td>
 						</tr>';
@@ -269,9 +269,9 @@ if ($InputError ==0){
 				echo '<td>'.$myrow['sales_type'].'</td>
 						<td>'.$myrow['currency'].'</td>
 						<td>'.$myrow['units'].'</td>
-						<td class="number">'.stock_number_format($myrow['conversionfactor']).'</td>
+						<td class="number">'.locale_number_format($myrow['conversionfactor']).'</td>
 						<td class="number">'.$myrow['decimalplaces'].'</td>
-						<td class="number">'.currency_number_format($myrow['price'],$myrow['currabrev']).'</td>
+						<td class="number">'.locale_money_format($myrow['price'],$myrow['currabrev']).'</td>
 						<td>'.ConvertSQLDate($myrow['startdate']).'</td>
 						<td>'.$EndDateDisplay.'</td>
 						</tr>';
@@ -397,7 +397,7 @@ if ($InputError ==0){
 		echo '<tr><td>'. _('Decimal Places') . '<br />'._('to display').'</td>';
 
 		if(isset($_POST['DecimalPlaces'])) {
-			echo '<td><input type="text" class="number" name="DecimalPlaces" size="8" maxlength="8" value="' . stock_number_format($_POST['DecimalPlaces'],0) . '" />';
+			echo '<td><input type="text" class="number" name="DecimalPlaces" size="8" maxlength="8" value="' . locale_number_format($_POST['DecimalPlaces'],0) . '" />';
 		} else {
 			echo '<td><input type="text" class="number" name="DecimalPlaces" size="8" maxlength="8" value="0" />';
 		}
@@ -406,9 +406,9 @@ if ($InputError ==0){
 		echo '<tr><td>'. _('Conversion Factor') . '<br />'._('to stock units').'</td>';
 
 		if(isset($_POST['ConversionFactor'])) {
-			echo '<td><input type="text" class="number" name="ConversionFactor" size="8" maxlength="8" value="' . stock_number_format($_POST['ConversionFactor'],4) . '" />';
+			echo '<td><input type="text" class="number" name="ConversionFactor" size="8" maxlength="8" value="' . locale_number_format($_POST['ConversionFactor'],4) . '" />';
 		} else {
-			echo '<td><input type="text" class="number" name="ConversionFactor" size="8" maxlength="8" value="' . stock_number_format(1.0000,4) . '" />';
+			echo '<td><input type="text" class="number" name="ConversionFactor" size="8" maxlength="8" value="' . locale_number_format(1.0000,4) . '" />';
 		}
 
 		echo '</td></tr>';
@@ -416,9 +416,9 @@ if ($InputError ==0){
 		echo '<tr><td>'. _('Price') . ':</td>';
 
 		if(isset($_POST['Price'])) {
-			echo '<td><input type="text" class="number" name="Price" size="12" maxlength="11" value="' . currency_number_format($_POST['Price'],$_POST['CurrAbrev']) . '" />';
+			echo '<td><input type="text" class="number" name="Price" size="12" maxlength="11" value="' . locale_money_format($_POST['Price'],$_POST['CurrAbrev']) . '" />';
 		} else {
-			echo '<td><input type="text" class="number" name="Price" size="12" maxlength="11" value="' . currency_number_format(0,$_POST['CurrAbrev']) . '" />';
+			echo '<td><input type="text" class="number" name="Price" size="12" maxlength="11" value="' . locale_money_format(0,$_POST['CurrAbrev']) . '" />';
 		}
 
 		echo '</td></tr>';

@@ -870,14 +870,14 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 			while ($myrow = DB_fetch_array($result)) {
 				$linectr++;
 				if ($_POST['DateType'] == 'Order') {
-					printf('%10s | %-20s | %10s | %-10s | %-30s | %-30s | %12s | %14s | %14s | %14s | %12s | %-10s | %-10s | %-10s | %-40s ', $myrow['orderno'], $myrow['stkcode'], ConvertSQLDate($myrow['orddate']) , $myrow['debtorno'], $myrow['name'], $myrow['brname'], stock_number_format($myrow['quantity'], $myrow['decimalplaces']) , currency_number_format($myrow['extcost'], $myrow['currcode']) , currency_number_format($myrow['extprice'], $myrow['currcode']) , stock_number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) , $myrow['linestatus'], ConvertSQLDate($myrow['itemdue']) , $myrow['salesman'], $myrow['area'], $myrow['description']);
+					printf('%10s | %-20s | %10s | %-10s | %-30s | %-30s | %12s | %14s | %14s | %14s | %12s | %-10s | %-10s | %-10s | %-40s ', $myrow['orderno'], $myrow['stkcode'], ConvertSQLDate($myrow['orddate']) , $myrow['debtorno'], $myrow['name'], $myrow['brname'], locale_number_format($myrow['quantity'], $myrow['decimalplaces']) , locale_money_format($myrow['extcost'], $myrow['currcode']) , locale_money_format($myrow['extprice'], $myrow['currcode']) , locale_number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) , $myrow['linestatus'], ConvertSQLDate($myrow['itemdue']) , $myrow['salesman'], $myrow['area'], $myrow['description']);
 					print '<br/>';
 					$TotalQty+= $myrow['quantity'];
 				}
 				else {
 
 					// Detail for Invoiced Date
-					printf('%10s | %14s | %-20s | %10s | %-10s | %-30s | %-30s | %12s | %14s | %14s | %12s | %-10s | %-10s | %-10s | %-40s ', $myrow['orderno'], $myrow['transno'], $myrow['stkcode'], ConvertSQLDate($myrow['orddate']) , $myrow['debtorno'], $myrow['name'], $myrow['brname'], stock_number_format($myrow['qty'], $myrow['decimalplaces']) , currency_number_format($myrow['extcost'], $myrow['currcode']) , currency_number_format($myrow['extprice'], $myrow['currcode']) , $myrow['linestatus'], ConvertSQLDate($myrow['trandate']) , $myrow['salesman'], $myrow['area'], $myrow['description']);
+					printf('%10s | %14s | %-20s | %10s | %-10s | %-30s | %-30s | %12s | %14s | %14s | %12s | %-10s | %-10s | %-10s | %-40s ', $myrow['orderno'], $myrow['transno'], $myrow['stkcode'], ConvertSQLDate($myrow['orddate']) , $myrow['debtorno'], $myrow['name'], $myrow['brname'], locale_number_format($myrow['qty'], $myrow['decimalplaces']) , locale_money_format($myrow['extcost'], $myrow['currcode']) , locale_money_format($myrow['extprice'], $myrow['currcode']) , $myrow['linestatus'], ConvertSQLDate($myrow['trandate']) , $myrow['salesman'], $myrow['area'], $myrow['description']);
 					print '<br/>';
 					$TotalQty+= $myrow['qty'];
 				}
@@ -966,7 +966,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 					// qty is from stockmoves
 					$displayqty = $myrow['qty'];
 				}
-				printf('	%-30s | %-40s | %12s | %14s | %14s | %14s |  %-40s', $myrow[$summarytype], $myrow[$description], stock_number_format($displayqty, $myrow['decimalplaces']) , currency_number_format($myrow['extcost'], $myrow['currcode']) , currency_number_format($myrow['extprice'], $myrow['currcode']) , stock_number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) , $column7);
+				printf('	%-30s | %-40s | %12s | %14s | %14s | %14s |  %-40s', $myrow[$summarytype], $myrow[$description], locale_number_format($displayqty, $myrow['decimalplaces']) , locale_money_format($myrow['extcost'], $myrow['currcode']) , locale_money_format($myrow['extprice'], $myrow['currcode']) , locale_number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) , $column7);
 				print '<br/>';
 				$TotalQty+= $displayqty;
 				$TotalExtCost+= $myrow['extcost'];

@@ -91,8 +91,8 @@ if (isset($_POST['TaxAuthority']) and
 			$LeftOvers = $pdf->addTextWrap(140,$YPos,60,$FontSize,ConvertSQLDate($DebtorTransRow['trandate']),'left');
 			$LeftOvers = $pdf->addTextWrap(200,$YPos,150,$FontSize, $DebtorTransRow['name'],'left');
 			$LeftOvers = $pdf->addTextWrap(350,$YPos,60,$FontSize, $DebtorTransRow['branchcode'],'left');
-			$LeftOvers = $pdf->addTextWrap(410,$YPos,60,$FontSize, currency_number_format($DebtorTransRow['netamount'],$_SESSION['CompanyRecord']['currencydefault']),'right');
-			$LeftOvers = $pdf->addTextWrap(470,$YPos,60,$FontSize, currency_number_format($DebtorTransRow['tax'],$_SESSION['CompanyRecord']['currencydefault']),'right');
+			$LeftOvers = $pdf->addTextWrap(410,$YPos,60,$FontSize, locale_money_format($DebtorTransRow['netamount'],$_SESSION['CompanyRecord']['currencydefault']),'right');
+			$LeftOvers = $pdf->addTextWrap(470,$YPos,60,$FontSize, locale_money_format($DebtorTransRow['tax'],$_SESSION['CompanyRecord']['currencydefault']),'right');
 
 			$YPos -=$line_height;
 			if ($YPos < $Bottom_Margin + $line_height){
@@ -118,8 +118,8 @@ if (isset($_POST['TaxAuthority']) and
 
 	if ($_POST['DetailOrSummary']=='Detail'){
 		/*Print out the outputs totals */
-		$LeftOvers = $pdf->addTextWrap(410,$YPos,60,8, currency_number_format($Outputs,$_SESSION['CompanyRecord']['currencydefault']),'right');
-		$LeftOvers = $pdf->addTextWrap(470,$YPos,60,8, currency_number_format($OutputTax,$_SESSION['CompanyRecord']['currencydefault']),'right');
+		$LeftOvers = $pdf->addTextWrap(410,$YPos,60,8, locale_money_format($Outputs,$_SESSION['CompanyRecord']['currencydefault']),'right');
+		$LeftOvers = $pdf->addTextWrap(470,$YPos,60,8, locale_money_format($OutputTax,$_SESSION['CompanyRecord']['currencydefault']),'right');
 
 		/*Rule off under output totals */
 		$pdf->line(410, $YPos-5,530, $YPos-5);
@@ -190,8 +190,8 @@ if (isset($_POST['TaxAuthority']) and
 			$LeftOvers = $pdf->addTextWrap(140,$YPos,60,$FontSize,ConvertSQLDate($SuppTransRow['trandate']),'left');
 			$LeftOvers = $pdf->addTextWrap(200,$YPos,150,$FontSize, $SuppTransRow['suppname'],'left');
 
-			$LeftOvers = $pdf->addTextWrap(410,$YPos,60,$FontSize, currency_number_format($SuppTransRow['netamount'],$_SESSION['CompanyRecord']['currencydefault']),'right');
-			$LeftOvers = $pdf->addTextWrap(470,$YPos,60,$FontSize, currency_number_format($SuppTransRow['taxamt'],$_SESSION['CompanyRecord']['currencydefault']),'right');
+			$LeftOvers = $pdf->addTextWrap(410,$YPos,60,$FontSize, locale_money_format($SuppTransRow['netamount'],$_SESSION['CompanyRecord']['currencydefault']),'right');
+			$LeftOvers = $pdf->addTextWrap(470,$YPos,60,$FontSize, locale_money_format($SuppTransRow['taxamt'],$_SESSION['CompanyRecord']['currencydefault']),'right');
 
 			$YPos -=$line_height;
 			if ($YPos < $Bottom_Margin + $line_height){
@@ -217,8 +217,8 @@ if (isset($_POST['TaxAuthority']) and
 
 	if ($_POST['DetailOrSummary']=='Detail'){
 		/*Print out the input totals */
-		$LeftOvers = $pdf->addTextWrap(410,$YPos,60,8, currency_number_format($Inputs,$_SESSION['CompanyRecord']['currencydefault']),'right');
-		$LeftOvers = $pdf->addTextWrap(470,$YPos,60,8, currency_number_format($InputTax,$_SESSION['CompanyRecord']['currencydefault']),'right');
+		$LeftOvers = $pdf->addTextWrap(410,$YPos,60,8, locale_money_format($Inputs,$_SESSION['CompanyRecord']['currencydefault']),'right');
+		$LeftOvers = $pdf->addTextWrap(470,$YPos,60,8, locale_money_format($InputTax,$_SESSION['CompanyRecord']['currencydefault']),'right');
 
 		/*Rule off under input totals */
 		$pdf->line(410, $YPos-5,530, $YPos-5);
@@ -253,17 +253,17 @@ if (isset($_POST['TaxAuthority']) and
 	$YPos -= (2*$line_height);
 
 	$LeftOvers = $pdf->addTextWrap(40,$YPos,180,$FontSize,_('Total Sales and Income (incl Tax)'),'left');
-	$LeftOvers = $pdf->addTextWrap(220,$YPos,100,$FontSize,currency_number_format($Outputs+$OutputTax,$_SESSION['CompanyRecord']['currencydefault']),'right');
+	$LeftOvers = $pdf->addTextWrap(220,$YPos,100,$FontSize,locale_money_format($Outputs+$OutputTax,$_SESSION['CompanyRecord']['currencydefault']),'right');
 
 	$YPos -= $line_height;
 
 	$LeftOvers = $pdf->addTextWrap(40,$YPos,180,$FontSize,_('Tax On Liable Sales'),'left');
-	$LeftOvers = $pdf->addTextWrap(220,$YPos,100,$FontSize,currency_number_format($OutputTax,$_SESSION['CompanyRecord']['currencydefault']),'right');
+	$LeftOvers = $pdf->addTextWrap(220,$YPos,100,$FontSize,locale_money_format($OutputTax,$_SESSION['CompanyRecord']['currencydefault']),'right');
 
 
 	$YPos -= $line_height;
 	$LeftOvers = $pdf->addTextWrap(40,$YPos,200,$FontSize,_('Tax On Purchases'),'left');
-	$LeftOvers = $pdf->addTextWrap(220,$YPos,100,$FontSize,currency_number_format($InputTax,$_SESSION['CompanyRecord']['currencydefault']),'right');
+	$LeftOvers = $pdf->addTextWrap(220,$YPos,100,$FontSize,locale_money_format($InputTax,$_SESSION['CompanyRecord']['currencydefault']),'right');
 
 	$YPos -= (2*$line_height);
 	$LeftOvers = $pdf->addTextWrap(40,$YPos,500,$FontSize,_('Adjustments for Tax paid to Customs, FBT, entertainments etc must also be entered'),'left');

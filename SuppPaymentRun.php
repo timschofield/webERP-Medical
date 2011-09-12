@@ -195,8 +195,8 @@ if ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 				}
 			}
 
-			$LeftOvers = $pdf->addTextWrap(340, $YPos,60,$FontSize,currency_number_format($DetailTrans['balance'],$_POST['Currency']), 'right');
-			$LeftOvers = $pdf->addTextWrap(405, $YPos,60,$FontSize,currency_number_format($DiffOnExch,$_POST['Currency']), 'right');
+			$LeftOvers = $pdf->addTextWrap(340, $YPos,60,$FontSize,locale_money_format($DetailTrans['balance'],$_POST['Currency']), 'right');
+			$LeftOvers = $pdf->addTextWrap(405, $YPos,60,$FontSize,locale_money_format($DiffOnExch,$_POST['Currency']), 'right');
 
 			$YPos -=$line_height;
 			if ($YPos < $Bottom_Margin + $line_height){
@@ -225,8 +225,8 @@ if ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 		}
 
 		$LeftOvers = $pdf->addTextWrap($Left_Margin, $YPos, 340-$Left_Margin,$FontSize,_('Grand Total Payments Due'), 'left');
-		$LeftOvers = $pdf->addTextWrap(340, $YPos, 60,$FontSize,currency_number_format($TotalPayments,$_POST['Currency']), 'right');
-		$LeftOvers = $pdf->addTextWrap(405, $YPos, 60,$FontSize,currency_number_format($TotalAccumDiffOnExch,$_POST['Currency']), 'right');
+		$LeftOvers = $pdf->addTextWrap(340, $YPos, 60,$FontSize,locale_money_format($TotalPayments,$_POST['Currency']), 'right');
+		$LeftOvers = $pdf->addTextWrap(405, $YPos, 60,$FontSize,locale_money_format($TotalAccumDiffOnExch,$_POST['Currency']), 'right');
 
 	}
 
@@ -284,7 +284,7 @@ if ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 		$DefaultExRate = $_POST['ExRate'];
 	}
 	echo '<tr><td>' . _('Exchange Rate') . ':</td>
-            <td><input type="text" class="number" name="ExRate" maxlength="11" size="12" value="' . currency_number_format($DefaultExRate, $_SESSION['CompanyRecord']['currencydefault']) . '" /></td></tr>';
+            <td><input type="text" class="number" name="ExRate" maxlength="11" size="12" value="' . locale_money_format($DefaultExRate, $_SESSION['CompanyRecord']['currencydefault']) . '" /></td></tr>';
 
 	if (!isset($_POST['AmountsDueBy'])){
 		$DefaultDate = Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m')+1,0 ,Date('y')));

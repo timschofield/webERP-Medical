@@ -92,9 +92,9 @@ foreach ($_SESSION['SuppTrans']->GRNs as $EnteredGRN){
 	echo '<tr><td>' . $EnteredGRN->GRNNo . '</td>
 			<td>' . $EnteredGRN->ItemCode . '</td>
 			<td>' . $EnteredGRN->ItemDescription . '</td>
-			<td class="number">' . stock_number_format($EnteredGRN->This_QuantityInv,$EnteredGRN->DecimalPlaces) . '</td>
-			<td class="number">' . currency_number_format($EnteredGRN->ChgPrice,$_SESSION['SuppTrans']->CurrCode) . '</td>
-			<td class="number">' . currency_number_format($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv,$_SESSION['SuppTrans']->CurrCode) . '</td>
+			<td class="number">' . locale_number_format($EnteredGRN->This_QuantityInv,$EnteredGRN->DecimalPlaces) . '</td>
+			<td class="number">' . locale_money_format($EnteredGRN->ChgPrice,$_SESSION['SuppTrans']->CurrCode) . '</td>
+			<td class="number">' . locale_money_format($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv,$_SESSION['SuppTrans']->CurrCode) . '</td>
 			<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $EnteredGRN->GRNNo . '">' . _('Delete') . '</a></td></tr>';
 
 	$TotalValueCharged = $TotalValueCharged + ($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv);
@@ -107,7 +107,7 @@ foreach ($_SESSION['SuppTrans']->GRNs as $EnteredGRN){
 }
 
 echo '<tr><td colspan="5" class="number"><font size="2" color="navy">' . _('Total Value Credited Against Goods') . ':</font></td>
-		  <td class="number"><font size="2" color="navy"><u>' . currency_number_format($TotalValueCharged,$_SESSION['SuppTrans']->CurrCode) . '</u></font></td></tr>';
+		  <td class="number"><font size="2" color="navy"><u>' . locale_money_format($TotalValueCharged,$_SESSION['SuppTrans']->CurrCode) . '</u></font></td></tr>';
 echo '</table><br /><div class="centre"><a href="' . $rootpath . '/SupplierCredit.php">' . _('Back to Credit Note Entry') . '</a></div>';
 
 /* Now get all the GRNs for this supplier from the database
@@ -185,11 +185,11 @@ while ($myrow=DB_fetch_array($GRNResults)){
 			  		<td>' . $myrow['itemcode'] . '</td>
 			  		<td>' . $myrow['itemdescription'] . '</td>
 			  		<td>' . ConvertSQLDate($myrow['deliverydate']) . '</td>
-			  		<td class="number">' . stock_number_format($myrow['qtyrecd'],$myrow['decimalplaces']) . '</td>
-			  		<td class="number">' . stock_number_format($myrow['quantityinv'],$myrow['decimalplaces']) . '</td>
-			  		<td class="number">' . stock_number_format($myrow['qtyrecd'] - $myrow['quantityinv'],$myrow['decimalplaces']) . '</td>
-			  		<td class="number">' . currency_number_format($myrow['unitprice'],$_SESSION['SuppTrans']->CurrCode) . '</td>
-			  		<td class="number">' . currency_number_format($myrow['unitprice']*($myrow['qtyrecd'] - $myrow['quantityinv']),$_SESSION['SuppTrans']->CurrCode) . '</td>
+			  		<td class="number">' . locale_number_format($myrow['qtyrecd'],$myrow['decimalplaces']) . '</td>
+			  		<td class="number">' . locale_number_format($myrow['quantityinv'],$myrow['decimalplaces']) . '</td>
+			  		<td class="number">' . locale_number_format($myrow['qtyrecd'] - $myrow['quantityinv'],$myrow['decimalplaces']) . '</td>
+			  		<td class="number">' . locale_money_format($myrow['unitprice'],$_SESSION['SuppTrans']->CurrCode) . '</td>
+			  		<td class="number">' . locale_money_format($myrow['unitprice']*($myrow['qtyrecd'] - $myrow['quantityinv']),$_SESSION['SuppTrans']->CurrCode) . '</td>
 			  	</tr>';
 		$i++;
 		if ($i>15){
@@ -243,10 +243,10 @@ if (isset($_POST['GRNNo']) AND $_POST['GRNNo']!=''){
 
 	echo '<tr><td>' . $_POST['GRNNo'] . '</td>
 				<td>' . $myrow['itemcode'] . ' ' . $myrow['itemdescription'] . '</td>
-				<td class="number">' . stock_number_format($myrow['qtyostdg'], $myrow['decimalplaces']) . '</td>
-				<td><input type="text" class="number" name="This_QuantityCredited" value=' . stock_number_format($myrow['qtyostdg'], $myrow['decimalplaces']) . ' size="11" maxlength="10" /></td>
-				<td class="number">' . currency_number_format($myrow['unitprice'], $_SESSION['SuppTrans']->CurrCode) . '</td>
-				<td><input type="text" class="number" name="ChgPrice" value="' . currency_number_format($myrow['unitprice'], $_SESSION['SuppTrans']->CurrCode) . '" size="11" maxlength="10" /></td>
+				<td class="number">' . locale_number_format($myrow['qtyostdg'], $myrow['decimalplaces']) . '</td>
+				<td><input type="text" class="number" name="This_QuantityCredited" value=' . locale_number_format($myrow['qtyostdg'], $myrow['decimalplaces']) . ' size="11" maxlength="10" /></td>
+				<td class="number">' . locale_money_format($myrow['unitprice'], $_SESSION['SuppTrans']->CurrCode) . '</td>
+				<td><input type="text" class="number" name="ChgPrice" value="' . locale_money_format($myrow['unitprice'], $_SESSION['SuppTrans']->CurrCode) . '" size="11" maxlength="10" /></td>
 			</tr>';
 	echo '</table>';
 

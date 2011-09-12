@@ -1341,8 +1341,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		foreach ($_SESSION['Items'.$identifier]->LineItems as $OrderLine) {
 
 			$LineTotal = $OrderLine->Quantity * $OrderLine->Price * (1 - $OrderLine->DiscountPercent);
-			$DisplayLineTotal = currency_number_format($LineTotal,$_SESSION['Items'.$identifier]->DefaultCurrency);
-			$DisplayDiscount = stock_number_format(($OrderLine->DiscountPercent * 100),2);
+			$DisplayLineTotal = locale_money_format($LineTotal,$_SESSION['Items'.$identifier]->DefaultCurrency);
+			$DisplayDiscount = locale_number_format(($OrderLine->DiscountPercent * 100),2);
 			$QtyOrdered = $OrderLine->Quantity;
 			$QtyRemain = $QtyOrdered - $OrderLine->QtyInv;
 
@@ -1367,21 +1367,21 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			echo '<td><a target="_blank" href="' . $rootpath . '/StockStatus.php?identifier='.$identifier . '&StockID=' . $OrderLine->StockID . '&DebtorNo=' . $_SESSION['Items'.$identifier]->DebtorNo . '">' . $OrderLine->StockID . '</a></td>
 				<td>' . $OrderLine->ItemDescription . '</td>';
 
-			echo '<td><input class="number" tabindex="2" type="text" name="Quantity_' . $OrderLine->LineNumber . '" size="6" maxlength="6" value="' . stock_number_format($OrderLine->Quantity, $OrderLine->DecimalPlaces) . '" />';
+			echo '<td><input class="number" tabindex="2" type="text" name="Quantity_' . $OrderLine->LineNumber . '" size="6" maxlength="6" value="' . locale_number_format($OrderLine->Quantity, $OrderLine->DecimalPlaces) . '" />';
 			if ($QtyRemain != $QtyOrdered){
-				echo '<br />'.stock_number_format($OrderLine->QtyInv, $OrderLine->DecimalPlaces).' of '.stock_number_format($OrderLine->Quantity, $OrderLine->DecimalPlaces).' invoiced';
+				echo '<br />'.locale_number_format($OrderLine->QtyInv, $OrderLine->DecimalPlaces).' of '.locale_number_format($OrderLine->Quantity, $OrderLine->DecimalPlaces).' invoiced';
 			}
 			echo '</td>
-					<td class="number">' . stock_number_format($OrderLine->QOHatLoc, $OrderLine->DecimalPlaces) . '</td>
+					<td class="number">' . locale_number_format($OrderLine->QOHatLoc, $OrderLine->DecimalPlaces) . '</td>
 					<td>' . $OrderLine->Units . '</td>';
 			echo '<input type="hidden" name="Units_'.$OrderLine->LineNumber.'" value="' . $OrderLine->Units . '" />';
 			echo '<input type="hidden" name="ConversionFactor_'.$OrderLine->LineNumber.'" value="' . $OrderLine->ConversionFactor . '" />';
 
 			if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 				/*OK to display with discount if it is an internal user with appropriate permissions */
-				echo '<td><input class="number" type="text" name="Price_' . $OrderLine->LineNumber . '" size="16" maxlength="16" value="' . currency_number_format($OrderLine->Price, $_SESSION['Items'.$identifier]->DefaultCurrency) . '" /></td>
-					<td><input class="number" type="text" name="Discount_' . $OrderLine->LineNumber . '" size="5" maxlength="4" value="' . stock_number_format($OrderLine->DiscountPercent * 100, 2) . '" />%</td>
-					<td><input class="number" type="text" name="GPPercent_' . $OrderLine->LineNumber . '" size="8" maxlength="40" value="' . stock_number_format($OrderLine->GPPercent,2) . '" /></td>';
+				echo '<td><input class="number" type="text" name="Price_' . $OrderLine->LineNumber . '" size="16" maxlength="16" value="' . locale_money_format($OrderLine->Price, $_SESSION['Items'.$identifier]->DefaultCurrency) . '" /></td>
+					<td><input class="number" type="text" name="Discount_' . $OrderLine->LineNumber . '" size="5" maxlength="4" value="' . locale_number_format($OrderLine->DiscountPercent * 100, 2) . '" />%</td>
+					<td><input class="number" type="text" name="GPPercent_' . $OrderLine->LineNumber . '" size="8" maxlength="40" value="' . locale_number_format($OrderLine->GPPercent,2) . '" /></td>';
 			} else {
 				echo '<td class="number">' . $OrderLine->Price . '</td><td></td>';
 				echo '<input type="hidden" name="Price_' . $OrderLine->LineNumber . '" value="' . $OrderLine->Price . '" />';
@@ -1417,7 +1417,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 		} /* end of loop around items */
 
-		$DisplayTotal = currency_number_format($_SESSION['Items'.$identifier]->total,$_SESSION['Items'.$identifier]->DefaultCurrency);
+		$DisplayTotal = locale_money_format($_SESSION['Items'.$identifier]->total,$_SESSION['Items'.$identifier]->DefaultCurrency);
 		if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 			$ColSpanNumber = 3;
 		} else {
@@ -1426,8 +1426,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		echo '<tr class="EvenTableRows"><td class="number" colspan="7"><b>' . _('TOTAL Excl Tax/Freight') . '</b></td>
 							<td colspan="' . $ColSpanNumber . '" class="number">' . $DisplayTotal . '</td></tr></table>';
 
-		$DisplayVolume = stock_number_format($_SESSION['Items'.$identifier]->totalVolume,2);
-		$DisplayWeight = stock_number_format($_SESSION['Items'.$identifier]->totalWeight,2);
+		$DisplayVolume = locale_number_format($_SESSION['Items'.$identifier]->totalVolume,2);
+		$DisplayWeight = locale_number_format($_SESSION['Items'.$identifier]->totalWeight,2);
 		echo '<table><tr class="EvenTableRows"><td>' . _('Total Weight') . ':</td>
 						 <td>' . $DisplayWeight . '</td>
 						 <td>' . _('Total Volume') . ':</td>
@@ -1577,10 +1577,10 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 							$myrow['stockid'],
 							$myrow['description'],
 							$myrow['units'],
-							stock_number_format($QOH, $DecimalPlaces),
-							stock_number_format($DemandQty, $DecimalPlaces),
-							stock_number_format($OnOrder, $DecimalPlaces),
-							stock_number_format($Available, $DecimalPlaces));
+							locale_number_format($QOH, $DecimalPlaces),
+							locale_number_format($DemandQty, $DecimalPlaces),
+							locale_number_format($OnOrder, $DecimalPlaces),
+							locale_number_format($Available, $DecimalPlaces));
 				if ($j==1) {
 					$jsCall = '<script  type="text/javascript">if (document.SelectParts) {defaultControl(document.SelectParts.itm'.$myrow['stockid'].');}</script>';
 				}
@@ -1809,13 +1809,13 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				echo '<td>'.$myrow['stockid'].'</font></td>
 						<td>'.$myrow['description'].'</td>
 						<td>'.$myrow['units'].'</td>
-						<td class="number">'.stock_number_format($QOH,$DecimalPlaces).'</td>
-						<td class="number">'.stock_number_format($DemandQty,$DecimalPlaces).'</td>
-						<td class="number">'.stock_number_format($OnOrder, $DecimalPlaces).'</td>
-						<td class="number">'.stock_number_format($Available,$DecimalPlaces).'</td>
+						<td class="number">'.locale_number_format($QOH,$DecimalPlaces).'</td>
+						<td class="number">'.locale_number_format($DemandQty,$DecimalPlaces).'</td>
+						<td class="number">'.locale_number_format($OnOrder, $DecimalPlaces).'</td>
+						<td class="number">'.locale_number_format($Available,$DecimalPlaces).'</td>
 						<td><font size="1"><input class="number"  tabindex="'.($j+7).'" type="text" size="6" name="Quantity'.$i.'" value="0" />
 						<input type="hidden" name="StockID'.$i.'" value="'.$myrow['stockid'].'" />
-						<td class="number">'.currency_number_format($PriceRow['price'],$_SESSION['Items'.$identifier]->DefaultCurrency).'</td>
+						<td class="number">'.locale_money_format($PriceRow['price'],$_SESSION['Items'.$identifier]->DefaultCurrency).'</td>
 						</td>
 						</tr>';
 				echo '<input type="hidden" name="ConversionFactor'.$i.'" value="' . $PriceRow['conversionfactor'] . '" />';

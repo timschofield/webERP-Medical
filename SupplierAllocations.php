@@ -449,13 +449,13 @@ if (isset($_POST['AllocTrans'])){
 
         if ($_SESSION['Alloc']->TransExRate != 1){
 	     	  echo '<br />' . _('Amount in supplier currency'). ' <b>' .
-	     	  		currency_number_format(-$_SESSION['Alloc']->TransAmt,$_SESSION['Alloc']->CurrCode) . '</b><i> (' .
+	     	  		locale_money_format(-$_SESSION['Alloc']->TransAmt,$_SESSION['Alloc']->CurrCode) . '</b><i> (' .
 	     	  		 _('converted into local currency at an exchange rate of') . ' ' .
 	     	  		 $_SESSION['Alloc']->TransExRate . ')</i></font><br />';
 
         } else {
 
-		     echo '<br />' . _('Transaction total') . ': <b>' . currency_number_format(-$_SESSION['Alloc']->TransAmt, $_SESSION['Alloc']->CurrCode) . '</b></div>';
+		     echo '<br />' . _('Transaction total') . ': <b>' . locale_money_format(-$_SESSION['Alloc']->TransAmt, $_SESSION['Alloc']->CurrCode) . '</b></div>';
         }
 
     /*Now display the potential and existing allocations put into the array above */
@@ -502,16 +502,16 @@ if (isset($_POST['AllocTrans'])){
 	    		<td>'.$AllocnItem->TypeNo.'</td>
 			<td>'.$AllocnItem->TransDate.'</td>
 	    		<td>'.$AllocnItem->SuppRef.'</td>
-			<td class="number">' . currency_number_format($AllocnItem->TransAmount,$_SESSION['Alloc']->CurrCode) . '</td>
-	    		<td class="number">' . currency_number_format($YetToAlloc,$_SESSION['Alloc']->CurrCode) . '
-	    		<input type="hidden" name="YetToAlloc' . $Counter . '" value="' . currency_number_format($YetToAlloc,$_SESSION['Alloc']->CurrCode) . '" /></td>';
+			<td class="number">' . locale_money_format($AllocnItem->TransAmount,$_SESSION['Alloc']->CurrCode) . '</td>
+	    		<td class="number">' . locale_money_format($YetToAlloc,$_SESSION['Alloc']->CurrCode) . '
+	    		<input type="hidden" name="YetToAlloc' . $Counter . '" value="' . locale_money_format($YetToAlloc,$_SESSION['Alloc']->CurrCode) . '" /></td>';
 
 	    if (ABS($AllocnItem->AllocAmt-$YetToAlloc) < 0.01){
 			echo '<td class="number"><input type="checkbox" name="All' .  $Counter . '" value="' . True . '" />';
 	    } else {
 	    	echo '<td class="number"><input type="checkbox" name="All' .  $Counter . '" />';
 	    }
-       echo '<input type="text" class="number" name="Amt' . $Counter .'" maxlength="12" size="13" value="' . currency_number_format($AllocnItem->AllocAmt,$_SESSION['Alloc']->CurrCode) . '" />
+       echo '<input type="text" class="number" name="Amt' . $Counter .'" maxlength="12" size="13" value="' . locale_money_format($AllocnItem->AllocAmt,$_SESSION['Alloc']->CurrCode) . '" />
 			<input type="hidden" name="AllocID' . $Counter . '" value="' . $AllocnItem->ID . '" /></td></tr>';
 
 	    $TotalAllocated = $TotalAllocated + $AllocnItem->AllocAmt;
@@ -521,10 +521,10 @@ if (isset($_POST['AllocTrans'])){
    }
 
    echo '<tr><td colspan="5" class="number"><b><u>' . _('Total Allocated') . ':</u></b></td>
-   		<td class="number"><b><u>' .  currency_number_format($TotalAllocated,$_SESSION['Alloc']->CurrCode) . '</u></b></td></tr>';
+   		<td class="number"><b><u>' .  locale_money_format($TotalAllocated,$_SESSION['Alloc']->CurrCode) . '</u></b></td></tr>';
 
    echo '<tr><td colspan="5" class="number"><b>' . _('Left to allocate') . '</b></td><td class="number"><b>' .
-     		currency_number_format(-$_SESSION['Alloc']->TransAmt - $TotalAllocated,$_SESSION['Alloc']->CurrCode) . '</b></td></tr></table>';
+     		locale_money_format(-$_SESSION['Alloc']->TransAmt - $TotalAllocated,$_SESSION['Alloc']->CurrCode) . '</b></td></tr></table>';
 
    echo '<div class="centre"><input type="hidden" name="TotalNumberOfAllocs" value="' . $Counter . '" />';
 
@@ -603,8 +603,8 @@ if (isset($_POST['AllocTrans'])){
 		$myrow['suppname'],
 		$myrow['transno'],
 		ConvertSQLDate($myrow['trandate']),
-		currency_number_format($myrow['total'],$myrow['currcode']),
-		currency_number_format($myrow['total']-$myrow['alloc'],$myrow['currcode']),
+		locale_money_format($myrow['total'],$myrow['currcode']),
+		locale_money_format($myrow['total']-$myrow['alloc'],$myrow['currcode']),
 		$_SERVER['PHP_SELF'] .'?',
 		$myrow['id']);
 
@@ -675,8 +675,8 @@ if (isset($_POST['AllocTrans'])){
 		$myrow['suppname'],
 		$myrow['transno'],
 		ConvertSQLDate($myrow['trandate']),
-		currency_number_format($myrow['total'],$myrow['currcode']),
-		currency_number_format($myrow['total']-$myrow['alloc'],$myrow['currcode']),
+		locale_money_format($myrow['total'],$myrow['currcode']),
+		locale_money_format($myrow['total']-$myrow['alloc'],$myrow['currcode']),
 		$_SERVER['PHP_SELF'] .'?',
 		$myrow['id']);
 

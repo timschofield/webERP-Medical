@@ -145,9 +145,9 @@ for ($i=1;$i<=2;$i++){  /*Print it out twice one copy for customer and one for o
 
             $ListCount ++;
 
-			$DisplayQty = stock_number_format($myrow2['quantity'],$myrow2['decimalplaces']);
-			$DisplayPrevDel = stock_number_format($myrow2['qtyinvoiced'],$myrow2['decimalplaces']);
-			$DisplayQtySupplied = stock_number_format($myrow2['quantity'] - $myrow2['qtyinvoiced'],$myrow2['decimalplaces']);
+			$DisplayQty = locale_number_format($myrow2['quantity'],$myrow2['decimalplaces']);
+			$DisplayPrevDel = locale_number_format($myrow2['qtyinvoiced'],$myrow2['decimalplaces']);
+			$DisplayQtySupplied = locale_number_format($myrow2['quantity'] - $myrow2['qtyinvoiced'],$myrow2['decimalplaces']);
 
 			$LeftOvers = $pdf->addTextWrap($XPos,$YPos,127,$FontSize,$myrow2['stkcode']);
 			$LeftOvers = $pdf->addTextWrap(147,$YPos,255,$FontSize,$myrow2['description']);

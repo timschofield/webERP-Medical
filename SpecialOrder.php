@@ -561,13 +561,13 @@ if (count($_SESSION['SPL']->LineItems)>0){
 
 		$LineTotal = $SPLLine->Quantity * $SPLLine->Price;
 		$LineCostTotal = $SPLLine->Quantity * $SPLLine->Cost;
-		$DisplayLineTotal = currency_number_format($LineTotal,$DefaultCurrency);
-		$DisplayLineCostTotal = currency_number_format($LineCostTotal,$_SESSION['SPL']->SuppCurrCode);
-		$DisplayLineTotalCurr = currency_number_format($LineTotal/$_SESSION['SPL']->CustCurrExRate,$_SESSION['SPL']->CustCurrCode);
-		$DisplayLineCostTotalCurr = currency_number_format($LineCostTotal/$_SESSION['SPL']->SuppCurrExRate,$_SESSION['SPL']->SuppCurrCode);
-		$DisplayCost = currency_number_format($SPLLine->Cost,$_SESSION['SPL']->SuppCurrCode);
-		$DisplayPrice = currency_number_format($SPLLine->Price,$_SESSION['SPL']->CustCurrCode);
-		$DisplayQuantity = currency_number_format($SPLLine->Quantity,$DefaultCurrency);
+		$DisplayLineTotal = locale_money_format($LineTotal,$DefaultCurrency);
+		$DisplayLineCostTotal = locale_money_format($LineCostTotal,$_SESSION['SPL']->SuppCurrCode);
+		$DisplayLineTotalCurr = locale_money_format($LineTotal/$_SESSION['SPL']->CustCurrExRate,$_SESSION['SPL']->CustCurrCode);
+		$DisplayLineCostTotalCurr = locale_money_format($LineCostTotal/$_SESSION['SPL']->SuppCurrExRate,$_SESSION['SPL']->SuppCurrCode);
+		$DisplayCost = locale_money_format($SPLLine->Cost,$_SESSION['SPL']->SuppCurrCode);
+		$DisplayPrice = locale_money_format($SPLLine->Price,$_SESSION['SPL']->CustCurrCode);
+		$DisplayQuantity = locale_money_format($SPLLine->Quantity,$DefaultCurrency);
 
 		if ($k==1){
 				echo '<tr class="EvenTableRows">';
@@ -590,7 +590,7 @@ if (count($_SESSION['SPL']->LineItems)>0){
 		$_SESSION['SPL']->total = $_SESSION['SPL']->total + $DisplayLineTotalCurr;
 	}
 
-	$DisplayTotal = currency_number_format($_SESSION['SPL']->total,$DefaultCurrency);
+	$DisplayTotal = locale_money_format($_SESSION['SPL']->total,$DefaultCurrency);
 	echo '<tr>
 		<td colspan="8" class="number">' . _('TOTAL Excl Tax') . '</td>
 		<td class="number"><b>'.$DisplayTotal.'</b></td>

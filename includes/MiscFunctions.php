@@ -18,12 +18,12 @@ function reverse_escape($str) {
   return str_replace($search,$replace,$str);
 }
 
-function stock_number_format($Number, $DecimalPlaces) {
+function locale_number_format($Number, $DecimalPlaces) {
 	$LocaleInfo = localeconv();
 	return number_format($Number, $DecimalPlaces, $LocaleInfo['decimal_point'], $LocaleInfo['thousands_sep']);
 }
 
-function currency_number_format($Amount, $Currency) {
+function locale_money_format($Amount, $Currency) {
 	$LocaleInfo = localeconv();
 	return number_format($Amount, $_SESSION['Currencies'][$Currency]['DecimalPlaces'], $LocaleInfo['mon_decimal_point'], $LocaleInfo['mon_thousands_sep']);
 }

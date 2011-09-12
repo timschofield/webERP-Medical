@@ -822,7 +822,7 @@ if ($_SESSION['PaymentDetail']->AccountCurrency!=$_SESSION['PaymentDetail']->Cur
 if ($_SESSION['PaymentDetail']->AccountCurrency!=$_SESSION['CompanyRecord']['currencydefault']
 												AND isset($_SESSION['PaymentDetail']->AccountCurrency)){
 	if (isset($SuggestedFunctionalExRate)){
-		$SuggestedFunctionalExRateText = '<b>' . _('Suggested rate:') . ' ' . currency_number_format($SuggestedFunctionalExRate,$_SESSION['PaymentDetail']->AccountCurrency) . '</b>';
+		$SuggestedFunctionalExRateText = '<b>' . _('Suggested rate:') . ' ' . locale_money_format($SuggestedFunctionalExRate,$_SESSION['PaymentDetail']->AccountCurrency) . '</b>';
 	} else {
 		$SuggestedFunctionalExRateText ='';
 	}
@@ -830,7 +830,7 @@ if ($_SESSION['PaymentDetail']->AccountCurrency!=$_SESSION['CompanyRecord']['cur
 		$_POST['FunctionalExRate'] = $SuggestedFunctionalExRate;
 	}
 	echo '<tr><td>' . _('Functional Exchange Rate') . ':</td>
-			<td><input type="text" name="FunctionalExRate" maxlength="10" size="12" value="' . currency_number_format($_POST['FunctionalExRate'], $_SESSION['PaymentDetail']->AccountCurrency) . '" /></td>
+			<td><input type="text" name="FunctionalExRate" maxlength="10" size="12" value="' . locale_money_format($_POST['FunctionalExRate'], $_SESSION['PaymentDetail']->AccountCurrency) . '" /></td>
 			<td>' . ' ' . $SuggestedFunctionalExRateText . ' <i>' . _('The exchange rate between the currency of the business (the functional currency) AND the currency of the bank account') .  '. 1 ' . $_SESSION['CompanyRecord']['currencydefault'] . ' = ? ' . $_SESSION['PaymentDetail']->AccountCurrency . '</i></td></tr>';
 }
 echo '<tr><td>' . _('Payment type') . ':</td>
@@ -978,7 +978,7 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 
 	if (isset($_POST['GLAmount'])) {
 		echo '<tr><td>' . _('Amount') . ' (' . $_SESSION['PaymentDetail']->Currency . '):</td>
-				<td><input type="text" name="GLAmount" maxlength="12" size="12" class="number" value="' . currency_number_format($_POST['GLAmount'], $_SESSION['PaymentDetail']->Currency) . '" /></td>
+				<td><input type="text" name="GLAmount" maxlength="12" size="12" class="number" value="' . locale_money_format($_POST['GLAmount'], $_SESSION['PaymentDetail']->Currency) . '" /></td>
 			</tr>';
 	} else {
 		echo '<tr><td>' . _('Amount') . ' (' . $_SESSION['PaymentDetail']->Currency . '):</td>
@@ -1015,7 +1015,7 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 			}
 			echo '<tr>
 				<td align=left>' . $PaymentItem->cheque . '</td>
-				<td class="number">' . currency_number_format($PaymentItem->Amount,$_SESSION['PaymentDetail']->Currency) . '</td>
+				<td class="number">' . locale_money_format($PaymentItem->Amount,$_SESSION['PaymentDetail']->Currency) . '</td>
 				<td>' . $PaymentItem->GLCode . ' - ' . $PaymentItem->GLActName . '</td>
 				<td>' . stripslashes($PaymentItem->Narrative)  . '</td>
 				<td>' . $PaymentItem->tag . ' - ' . $TagName . '</td>
@@ -1023,7 +1023,7 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 				</tr>';
 			$PaymentTotal += $PaymentItem->Amount;
 		}
-		echo '<tr><td></td><td class="number"><b>' . currency_number_format($PaymentTotal,$_SESSION['PaymentDetail']->Currency) . '</b></td><td colspan="3"></td></tr></table><br />';
+		echo '<tr><td></td><td class="number"><b>' . locale_money_format($PaymentTotal,$_SESSION['PaymentDetail']->Currency) . '</b></td><td colspan="3"></td></tr></table><br />';
 		echo '<input type="submit" name="CommitBatch" value="' . _('Accept AND Process Payment') . '" />';
 	}
 
@@ -1032,11 +1032,11 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 the fields for entry of receipt amt and disc */
 
 	echo '<table class="selection"><tr><td>' . _('Amount of Payment') . ' ' . $_SESSION['PaymentDetail']->Currency . ':</td>
-				<td><input class="number" type="text" name="Amount" maxlength="12" size="13" value="' . currency_number_format($_SESSION['PaymentDetail']->Amount, $_SESSION['PaymentDetail']->Currency) . '" /></td></tr>';
+				<td><input class="number" type="text" name="Amount" maxlength="12" size="13" value="' . locale_money_format($_SESSION['PaymentDetail']->Amount, $_SESSION['PaymentDetail']->Currency) . '" /></td></tr>';
 
 	if (isset($_SESSION['PaymentDetail']->SupplierID)){ /*So it is a supplier payment so show the discount entry item */
 		echo '<tr><td>' . _('Amount of Discount') . ':</td>
-					<td><input class="number" type="text" name="Discount" maxlength="12" size="13" value="' . currency_number_format($_SESSION['PaymentDetail']->Discount, $_SESSION['PaymentDetail']->Currency) . '" /></td></tr>';
+					<td><input class="number" type="text" name="Discount" maxlength="12" size="13" value="' . locale_money_format($_SESSION['PaymentDetail']->Discount, $_SESSION['PaymentDetail']->Currency) . '" /></td></tr>';
 		echo '<input type="hidden" name="SuppName" value="' . $_SESSION['PaymentDetail']->SuppName . '" />';
 	} else {
 		echo '<input type="hidden" name="discount" value=0 />';

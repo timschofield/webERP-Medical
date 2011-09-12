@@ -102,7 +102,7 @@ if (isset($_POST['SearchRecurringOrders'])){
 		$ModifyPage = $rootpath . '/RecurringSalesOrders.php?ModifyRecurringSalesOrder=' . $myrow['recurrorderno'];
 		$FormatedLastRecurrence = ConvertSQLDate($myrow['lastrecurrence']);
 		$FormatedStopDate = ConvertSQLDate($myrow['stopdate']);
-		$FormatedOrderValue = currency_number_format($myrow['ordervalue'],$myrow['currcode']);
+		$FormatedOrderValue = locale_money_format($myrow['ordervalue'],$myrow['currcode']);
 
 		printf('<td><a href="%s">%s</a></td>
 			<td>%s</td>

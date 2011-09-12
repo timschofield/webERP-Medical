@@ -511,7 +511,7 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 			}
 			echo '<tr>
 					<td class="select">' . _('Last Paid Amount (inc tax):') . '</td>
-					<td class="select"> <b>' . currency_number_format($myrow['lastpaid'], $Currency) . '</b></td>
+					<td class="select"> <b>' . locale_money_format($myrow['lastpaid'], $Currency) . '</b></td>
 					<td class="select"></td>
 				</tr>';
 			echo '<tr>
@@ -528,7 +528,7 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 			} else {
 				echo '<tr>
 						<td class="select">' . _('Total Spend from this Customer (inc tax):') . ' </td>
-						<td class="select"><b>' . currency_number_format($row['total'], $Currency) . '</b></td>
+						<td class="select"><b>' . locale_money_format($row['total'], $Currency) . '</b></td>
 						<td class="select"></td>
 					</tr>';
 			}

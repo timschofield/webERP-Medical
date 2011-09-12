@@ -157,14 +157,14 @@ if (isset($_POST['ShowUsage'])){
 
 		$TotalUsage += $myrow['qtyused'];
 		$PeriodsCounter++;
-		printf('<td>%s</td><td class="number">%s</td></tr>', $DisplayDate, stock_number_format($myrow['qtyused'],$DecimalPlaces));
+		printf('<td>%s</td><td class="number">%s</td></tr>', $DisplayDate, locale_number_format($myrow['qtyused'],$DecimalPlaces));
 
 	//end of page full new headings if
 	}
 	//end of while loop
 
 	if ($TotalUsage>0 and $PeriodsCounter>0){
-	echo '<tr><th colspan="2">' . _('Average Usage per month is') . ' ' . stock_number_format($TotalUsage/$PeriodsCounter,$DecimalPlaces);
+	echo '<tr><th colspan="2">' . _('Average Usage per month is') . ' ' . locale_number_format($TotalUsage/$PeriodsCounter,$DecimalPlaces);
 	echo '</th></tr>';
 	}
 	echo '</table>';

@@ -131,9 +131,9 @@ foreach ($_SESSION['SuppTrans']->GRNs as $EnteredGRN){
 	echo '<tr><td>' . $EnteredGRN->GRNNo . '</td>
 		<td>' . $EnteredGRN->ItemCode . '</td>
 		<td>' . $EnteredGRN->ItemDescription . '</td>
-		<td class="number">' . stock_number_format($EnteredGRN->This_QuantityInv,$EnteredGRN->DecimalPlaces) . '</td>
-		<td class="number">' . currency_number_format($EnteredGRN->ChgPrice,$_SESSION['SuppTrans']->CurrCode) . '</td>
-		<td class="number">' . currency_number_format($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv,$_SESSION['SuppTrans']->CurrCode) . '</td>
+		<td class="number">' . locale_number_format($EnteredGRN->This_QuantityInv,$EnteredGRN->DecimalPlaces) . '</td>
+		<td class="number">' . locale_money_format($EnteredGRN->ChgPrice,$_SESSION['SuppTrans']->CurrCode) . '</td>
+		<td class="number">' . locale_money_format($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv,$_SESSION['SuppTrans']->CurrCode) . '</td>
 		<td><a href="' . $_SERVER['PHP_SELF'] . '?Modify=' . $EnteredGRN->GRNNo . '">'. _('Modify') . '</a></td>
 		<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $EnteredGRN->GRNNo . '">' . _('Delete') . '</a></td>
 	</tr>';
@@ -149,7 +149,7 @@ foreach ($_SESSION['SuppTrans']->GRNs as $EnteredGRN){
 
 echo '<tr>
 	<td colspan="5" align="right"><font size="2" color="navy">' . _('Total Value of Goods Charged') . ':</font></td>
-	<td class="number"><font size="2" color="navy">' . currency_number_format($TotalValueCharged,$_SESSION['SuppTrans']->CurrCode) . '</font></td>
+	<td class="number"><font size="2" color="navy">' . locale_money_format($TotalValueCharged,$_SESSION['SuppTrans']->CurrCode) . '</font></td>
 </tr>';
 echo '</table>';
 echo '<br /><div class="centre"><a href="' . $rootpath . '/SupplierInvoice.php">' . _('Back to Invoice Entry') . '</a></div><br />';
@@ -248,10 +248,10 @@ if (isset($_GET['Modify'])){
 	echo '<tr>
 		<td>' . $GRNTmp->GRNNo . '</td>
 		<td>' . $GRNTmp->ItemCode . ' ' . $GRNTmp->ItemDescription . '</td>
-		<td class="number">' . stock_number_format($GRNTmp->QtyRecd - $GRNTmp->Prev_QuantityInv, $GRNTmp->DecimalPlaces) . '</td>
-		<td><input type="text" class="number" name="This_QuantityInv" value="' . stock_number_format($GRNTmp->This_QuantityInv, $GRNTmp->DecimalPlaces) . '" size="11" maxlength="10" /></td>
-		<td class="number">' . currency_number_format($GRNTmp->OrderPrice, $_SESSION['SuppTrans']->CurrCode) . '</td>
-		<td><input type="text" class="number" name="ChgPrice" value="' . currency_number_format($GRNTmp->ChgPrice, $_SESSION['SuppTrans']->CurrCode) . '" size="11" maxlength="10" /></td>
+		<td class="number">' . locale_number_format($GRNTmp->QtyRecd - $GRNTmp->Prev_QuantityInv, $GRNTmp->DecimalPlaces) . '</td>
+		<td><input type="text" class="number" name="This_QuantityInv" value="' . locale_number_format($GRNTmp->This_QuantityInv, $GRNTmp->DecimalPlaces) . '" size="11" maxlength="10" /></td>
+		<td class="number">' . locale_money_format($GRNTmp->OrderPrice, $_SESSION['SuppTrans']->CurrCode) . '</td>
+		<td><input type="text" class="number" name="ChgPrice" value="' . locale_money_format($GRNTmp->ChgPrice, $_SESSION['SuppTrans']->CurrCode) . '" size="11" maxlength="10" /></td>
 	</tr>';
 	echo '</table>';
 
@@ -312,11 +312,11 @@ if (isset($_GET['Modify'])){
 					<td>' . $GRNTmp->PONo . '</td>
 					<td>' . $GRNTmp->ItemCode . '</td>
 					<td>' . $GRNTmp->ItemDescription . '</td>
-					<td class="number">' . stock_number_format($GRNTmp->QtyRecd,$GRNTmp->DecimalPlaces) . '</td>
-					<td class="number">' . stock_number_format($GRNTmp->Prev_QuantityInv,$GRNTmp->DecimalPlaces) . '</td>
-					<td class="number">' . stock_number_format(($GRNTmp->QtyRecd - $GRNTmp->Prev_QuantityInv),$GRNTmp->DecimalPlaces) . '</td>
-					<td class="number">' . currency_number_format($GRNTmp->OrderPrice, $_SESSION['SuppTrans']->CurrCode) . '</td>
-					<td class="number">' . currency_number_format($GRNTmp->OrderPrice * ($GRNTmp->QtyRecd - $GRNTmp->Prev_QuantityInv),$_SESSION['SuppTrans']->CurrCode) . '</td>
+					<td class="number">' . locale_number_format($GRNTmp->QtyRecd,$GRNTmp->DecimalPlaces) . '</td>
+					<td class="number">' . locale_number_format($GRNTmp->Prev_QuantityInv,$GRNTmp->DecimalPlaces) . '</td>
+					<td class="number">' . locale_number_format(($GRNTmp->QtyRecd - $GRNTmp->Prev_QuantityInv),$GRNTmp->DecimalPlaces) . '</td>
+					<td class="number">' . locale_money_format($GRNTmp->OrderPrice, $_SESSION['SuppTrans']->CurrCode) . '</td>
+					<td class="number">' . locale_money_format($GRNTmp->OrderPrice * ($GRNTmp->QtyRecd - $GRNTmp->Prev_QuantityInv),$_SESSION['SuppTrans']->CurrCode) . '</td>
 				</tr>';
 		}
 		echo '</table>';

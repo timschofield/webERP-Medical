@@ -117,7 +117,7 @@ foreach ( $_SESSION['SuppTrans']->GLCodes as $EnteredGLCode){
 	echo '<tr>
 		<td>' . $EnteredGLCode->GLCode . '</td>
 		<td>' . $EnteredGLCode->GLActName . '</td>
-		<td class="number">' . currency_number_format($EnteredGLCode->Amount,$_SESSION['SuppTrans']->CurrCode) . '</td>
+		<td class="number">' . locale_money_format($EnteredGLCode->Amount,$_SESSION['SuppTrans']->CurrCode) . '</td>
 		<td>' . $EnteredGLCode->Narrative . '</td>
 		<td><a href="' . $_SERVER['PHP_SELF'] . '?Edit=' . $EnteredGLCode->Counter . '">' . _('Edit') . '</a></td>
 		<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $EnteredGLCode->Counter . '">' . _('Delete') . '</a></td>
@@ -134,7 +134,7 @@ foreach ( $_SESSION['SuppTrans']->GLCodes as $EnteredGLCode){
 
 echo '<tr>
 	<td colspan="2" class="number"><font size="4" color="blue">' . _('Total') . ':</font></td>
-	<td class="number"><font size="2" color="navy"><u>' . currency_number_format($TotalGLValue,$_SESSION['SuppTrans']->CurrCode) . '</u></font></td>
+	<td class="number"><font size="2" color="navy"><u>' . locale_money_format($TotalGLValue,$_SESSION['SuppTrans']->CurrCode) . '</u></font></td>
 	</tr>
 	</table>';
 
@@ -182,7 +182,7 @@ if (!isset($_POST['Amount'])) {
 }
 echo '<tr>
 	<td>' . _('Amount') . ':</td>
-	<td><input type="text" class="number" name="Amount" size="12" maxlength="11" value="' .  currency_number_format($_POST['Amount'],$_SESSION['SuppTrans']->CurrCode) . '" /></td>
+	<td><input type="text" class="number" name="Amount" size="12" maxlength="11" value="' .  locale_money_format($_POST['Amount'],$_SESSION['SuppTrans']->CurrCode) . '" /></td>
 	</tr>';
 
 if (!isset($_POST['Narrative'])) {

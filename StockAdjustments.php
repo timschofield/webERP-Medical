@@ -347,7 +347,7 @@ echo '</td><td><input type="submit" name="CheckCode" value="'._('Check Part').'"
 if (isset($_SESSION['Adjustment']) and mb_strlen($_SESSION['Adjustment']->ItemDescription)>1){
 	echo '<tr><td colspan="3"><font color="blue" size="3">' . $_SESSION['Adjustment']->ItemDescription . ' ('._('In Units of').' ' .
 		$_SESSION['Adjustment']->PartUnit . ' ) - ' . _('Unit Cost').' = ' .
-			currency_number_format($_SESSION['Adjustment']->StandardCost,$_SESSION['CompanyRecord']['currencydefault']) . '</font></td></tr>';
+			locale_money_format($_SESSION['Adjustment']->StandardCost,$_SESSION['CompanyRecord']['currencydefault']) . '</font></td></tr>';
 }
 
 echo '<tr><td>'. _('Adjustment to Stock At Location').':</td><td><select name="StockLocation"> ';
@@ -384,12 +384,12 @@ if ($Controlled==1){
 		if ($_SESSION['Adjustment']->StockLocation == ''){
 			$_SESSION['Adjustment']->StockLocation = $_SESSION['UserStockLocation'];
 		}
-		echo '<input type="hidden" name="Quantity" value="' . stock_number_format($_SESSION['Adjustment']->Quantity , $_SESSION['Adjustment']->DecimalPlaces). '" />
-				'.stock_number_format($_SESSION['Adjustment']->Quantity, $_SESSION['Adjustment']->DecimalPlaces).' &nbsp; &nbsp; &nbsp; &nbsp;
+		echo '<input type="hidden" name="Quantity" value="' . locale_number_format($_SESSION['Adjustment']->Quantity , $_SESSION['Adjustment']->DecimalPlaces). '" />
+				'.locale_number_format($_SESSION['Adjustment']->Quantity, $_SESSION['Adjustment']->DecimalPlaces).' &nbsp; &nbsp; &nbsp; &nbsp;
 				[<a href="'.$rootpath.'/StockAdjustmentsControlled.php?AdjType=REMOVE">'._('Remove').'</a>]
 				[<a href="'.$rootpath.'/StockAdjustmentsControlled.php?AdjType=ADD">'._('Add').'</a>]';
 } else {
-	echo '<input type="text" class="number" name="Quantity" size="12" maxlength="12" value="' . stock_number_format($Quantity, $_SESSION['Adjustment']->DecimalPlaces) . '" />';
+	echo '<input type="text" class="number" name="Quantity" size="12" maxlength="12" value="' . locale_number_format($Quantity, $_SESSION['Adjustment']->DecimalPlaces) . '" />';
 }
 echo '</td></tr>';
 	//Select the tag

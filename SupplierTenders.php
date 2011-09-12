@@ -117,11 +117,11 @@ if (isset($_POST['Process'])) {
 	foreach ($_SESSION['offer']->LineItems as $LineItem)  {
 		echo '<tr><td>' . $LineItem->StockID . '</td>';
 		echo '<td>' . $LineItem->ItemDescription . '</td>';
-		echo '<td class="number"> ' .stock_number_format($LineItem->Quantity, $LineItem->DecimalPlaces) . '</td>';
+		echo '<td class="number"> ' .locale_number_format($LineItem->Quantity, $LineItem->DecimalPlaces) . '</td>';
 		echo '<td>' . $LineItem->Units . '</td>';
 		echo '<td>' . $_SESSION['offer']->CurrCode . '</td>';
-		echo '<td class="number">' . currency_number_format($LineItem->Price, $_SESSION['offer']->CurrCod) . '</td>';
-		echo '<td class="number">' . currency_number_format($LineItem->Price*$LineItem->Quantity, $_SESSION['offer']->CurrCod) . '</td>';
+		echo '<td class="number">' . locale_money_format($LineItem->Price, $_SESSION['offer']->CurrCod) . '</td>';
+		echo '<td class="number">' . locale_money_format($LineItem->Price*$LineItem->Quantity, $_SESSION['offer']->CurrCod) . '</td>';
 		echo '<td>' . $LineItem->ExpiryDate . '</td>';
 	}
 	echo '</table><br />';
@@ -317,10 +317,10 @@ if ($_POST['TenderType']!=3 and isset($_SESSION['offer']) and $_SESSION['offer']
 			echo '<input type="hidden" name="StockID'.$LineItems->LineNo.'" value="'.$LineItems->StockID.'" />';
 			echo '<td>'.$LineItems->StockID.'</td>';
 			echo '<td>'.$LineItems->ItemDescription.'</td>';
-			echo '<td><input type="text" class="number" name="Qty'.$LineItems->LineNo.'" value="'.stock_number_format($LineItems->Quantity,$LineItems->DecimalPlaces).'" /></td>';
+			echo '<td><input type="text" class="number" name="Qty'.$LineItems->LineNo.'" value="'.locale_number_format($LineItems->Quantity,$LineItems->DecimalPlaces).'" /></td>';
 			echo '<td>'.$LineItems->Units.'</td>';
-			echo '<td><input type="text" class="number" name="Price'.$LineItems->LineNo.'" value="'.currency_number_format($LineItems->Price,$Currency).'" /></td>';
-			echo '<td class="number">'.currency_number_format($LineItems->Price*$LineItems->Quantity,$Currency).'</td>';
+			echo '<td><input type="text" class="number" name="Price'.$LineItems->LineNo.'" value="'.locale_money_format($LineItems->Price,$Currency).'" /></td>';
+			echo '<td class="number">'.locale_money_format($LineItems->Price*$LineItems->Quantity,$Currency).'</td>';
 			echo '<td><input type="text" size="11" class="date" alt='.$_SESSION['DefaultDateFormat'].' name="expirydate'.$LineItems->LineNo.'" value="'.$LineItems->ExpiryDate.'" /></td>';
 			echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $LineItems->LineNo . '&Type=' . $_POST['TenderType'] . '">' . _('Remove') . '</a></td></tr>';
 			echo '</tr>';
@@ -484,13 +484,13 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==3 and !isset($_POST['S
 			echo '<input type="hidden" name="StockID'. $i . '" value="' . $MyItemRow['stockid'] . '" />';
 			echo '<input type="hidden" name="ItemDescription'. $i . '" value="' . $MyItemRow['description'] . '" />';
 			echo '<td>' . $MyItemRow['suppliers_partno'] . '</td>';
-			echo '<td class="number">' . stock_number_format($MyItemRow['quantity'], $MyItemRow['decimalplaces']) . '</td>';
+			echo '<td class="number">' . locale_number_format($MyItemRow['quantity'], $MyItemRow['decimalplaces']) . '</td>';
 			echo '<td>' . $MyItemRow['units'] . '</td>';
 			echo '<td>' . ConvertSQLDate($MyItemRow['requiredbydate']) . '</td>';
 			if ($MyItemRow['suppliersuom']=='') {
 				$MyItemRow['suppliersuom']=$MyItemRow['units'];
 			}
-			echo '<td><input type="text" class="number" size="10" name="Qty'. $i . '" value="' . stock_number_format($MyItemRow['quantity'], $MyItemRow['decimalplaces']) . '" /></td>';
+			echo '<td><input type="text" class="number" size="10" name="Qty'. $i . '" value="' . locale_number_format($MyItemRow['quantity'], $MyItemRow['decimalplaces']) . '" /></td>';
 			echo '<input type="hidden" name="UOM'. $i . '" value="' . $MyItemRow['units'] . '" />';
 			echo '<input type="hidden" name="DecimalPlaces'. $i . '" value="' . $MyItemRow['decimalplaces'] . '" />';
 			echo '<td>' . $MyItemRow['suppliersuom'] . '</td>';

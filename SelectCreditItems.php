@@ -968,7 +968,7 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 		foreach ($_SESSION['CreditItems'.$identifier]->LineItems as $LineItem) {
 
 			$LineTotal =  $LineItem->Quantity * $LineItem->Price * (1 - $LineItem->DiscountPercent);
-			$DisplayLineTotal = currency_number_format($LineTotal,$_SESSION['CreditItems'.$identifier]->DefaultCurrency);
+			$DisplayLineTotal = locale_money_format($LineTotal,$_SESSION['CreditItems'.$identifier]->DefaultCurrency);
 
 			if ($k==1){
 				$RowStarter = '<tr class="EvenTableRows">';
@@ -982,16 +982,16 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 								<td>' . $LineItem->ItemDescription . '</td>';
 
 			if ($LineItem->Controlled==0){
-				echo '<td><input type="text" class="number" name="Quantity_' . $LineItem->LineNumber . '" maxlength="6" size="6" value="' . stock_number_format($LineItem->Quantity, $LineItem->DecimalPlaces) . '" /></td>';
+				echo '<td><input type="text" class="number" name="Quantity_' . $LineItem->LineNumber . '" maxlength="6" size="6" value="' . locale_number_format($LineItem->Quantity, $LineItem->DecimalPlaces) . '" /></td>';
 			} else {
 				echo '<td class="number"><a href="' . $rootpath . '/CreditItemsControlled.php?LineNo=' . $LineItem->LineNumber . '">' . $LineItem->Quantity . '</a>
 					<input type="hidden" name="Quantity_' . $LineItem->LineNumber . '" value="' . $LineItem->Quantity . '" /></td>';
 			}
 
 			echo '<td>' . $LineItem->Units . '</td>
-				<td><input type="text" class="number" name="Price_' . $LineItem->LineNumber . '" size="10" maxlength="12" value="' . currency_number_format($LineItem->Price, $_SESSION['CreditItems'.$identifier]->DefaultCurrency) . '" /></td>
+				<td><input type="text" class="number" name="Price_' . $LineItem->LineNumber . '" size="10" maxlength="12" value="' . locale_money_format($LineItem->Price, $_SESSION['CreditItems'.$identifier]->DefaultCurrency) . '" /></td>
 				<td><input type="checkbox" name="Gross" value="False" /></td>
-				<td><input type="text" class="number" name="Discount_' . $LineItem->LineNumber . '" size="3" maxlength="3" value="' . stock_number_format(($LineItem->DiscountPercent * 100),2) . '" />&nbsp;%</td>
+				<td><input type="text" class="number" name="Discount_' . $LineItem->LineNumber . '" size="3" maxlength="3" value="' . locale_number_format(($LineItem->DiscountPercent * 100),2) . '" />&nbsp;%</td>
 				<td class="number">' . $DisplayLineTotal . '</td>';
 
 
@@ -1015,7 +1015,7 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 				if ($i>0){
 					echo '<br />';
 				}
-				echo '<input type="text" class="number" name="' . $LineItem->LineNumber . $Tax->TaxCalculationOrder . '_TaxRate" maxlength="4" size="4" value="' . stock_number_format($Tax->TaxRate*100, 2) . '" />&nbsp;%';
+				echo '<input type="text" class="number" name="' . $LineItem->LineNumber . $Tax->TaxCalculationOrder . '_TaxRate" maxlength="4" size="4" value="' . locale_number_format($Tax->TaxRate*100, 2) . '" />&nbsp;%';
 				$i++;
 				if ($Tax->TaxOnTax ==1){
 					$TaxTotals[$Tax->TaxAuthID] += ($Tax->TaxRate * ($LineTotal + $TaxLineTotal));
@@ -1030,8 +1030,8 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 
 			$TaxTotal += $TaxLineTotal;
 
-			$DisplayTaxAmount = currency_number_format($TaxLineTotal ,$_SESSION['CreditItems'.$identifier]->DefaultCurrency);
-			$DisplayGrossLineTotal = currency_number_format($LineTotal+ $TaxLineTotal,$_SESSION['CreditItems'.$identifier]->DefaultCurrency);
+			$DisplayTaxAmount = locale_money_format($TaxLineTotal ,$_SESSION['CreditItems'.$identifier]->DefaultCurrency);
+			$DisplayGrossLineTotal = locale_money_format($LineTotal+ $TaxLineTotal,$_SESSION['CreditItems'.$identifier]->DefaultCurrency);
 
 			echo '<td class="number">' . $DisplayTaxAmount . '</td>
 				<td class="number">' . $DisplayGrossLineTotal . '</td>
@@ -1058,7 +1058,7 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 
 
 		echo '<td colspan="2" class="number">'. _('Credit Freight').'</td>
-			<td><input type="text" class="number" size="6" maxlength="6" name="ChargeFreightCost" value="' . currency_number_format($_SESSION['CreditItems'.$identifier]->FreightCost ,$_SESSION['CreditItems'.$identifier]->DefaultCurrency) . '" /></td>';
+			<td><input type="text" class="number" size="6" maxlength="6" name="ChargeFreightCost" value="' . locale_money_format($_SESSION['CreditItems'.$identifier]->FreightCost ,$_SESSION['CreditItems'.$identifier]->DefaultCurrency) . '" /></td>';
 
 		$FreightTaxTotal =0; //initialise tax total
 
@@ -1081,7 +1081,7 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 				echo '<br />';
 			}
 
-			echo  '<input type="text" class="number" name="FreightTaxRate' . $FreightTaxLine->TaxCalculationOrder . '" maxlength="4" size="4" value="' . currency_number_format($FreightTaxLine->TaxRate * 100, $_SESSION['CreditItems'.$identifier]->DefaultCurrency) . '" />';
+			echo  '<input type="text" class="number" name="FreightTaxRate' . $FreightTaxLine->TaxCalculationOrder . '" maxlength="4" size="4" value="' . locale_money_format($FreightTaxLine->TaxRate * 100, $_SESSION['CreditItems'.$identifier]->DefaultCurrency) . '" />';
 
 			if ($FreightTaxLine->TaxOnTax ==1){
 				$TaxTotals[$FreightTaxLine->TaxAuthID] += ($FreightTaxLine->TaxRate * ($_SESSION['CreditItems'.$identifier]->FreightCost + $FreightTaxTotal));
@@ -1095,20 +1095,20 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 		}
 		echo '</td>';
 
-		echo '<td class="number">' . currency_number_format($FreightTaxTotal, $_SESSION['CreditItems'.$identifier]->DefaultCurrency) . '</td>
-			<td class="number">' . currency_number_format($FreightTaxTotal+ $_SESSION['CreditItems'.$identifier]->FreightCost, $_SESSION['CreditItems'.$identifier]->DefaultCurrency) . '</td>
+		echo '<td class="number">' . locale_money_format($FreightTaxTotal, $_SESSION['CreditItems'.$identifier]->DefaultCurrency) . '</td>
+			<td class="number">' . locale_money_format($FreightTaxTotal+ $_SESSION['CreditItems'.$identifier]->FreightCost, $_SESSION['CreditItems'.$identifier]->DefaultCurrency) . '</td>
 			</tr>';
 
 		$TaxTotal += $FreightTaxTotal;
-		$DisplayTotal = currency_number_format($_SESSION['CreditItems'.$identifier]->total + $_SESSION['CreditItems'.$identifier]->FreightCost, $_SESSION['CreditItems'.$identifier]->DefaultCurrency);
+		$DisplayTotal = locale_money_format($_SESSION['CreditItems'.$identifier]->total + $_SESSION['CreditItems'.$identifier]->FreightCost, $_SESSION['CreditItems'.$identifier]->DefaultCurrency);
 
 
 		echo '<tr>
 			<td colspan="7" class="number">' . _('Credit Totals') . '</td>
 			<td class="number"><b>' . $DisplayTotal . '</b></td>
 			<td colspan="2"></td>
-			<td class="number"><b>' . currency_number_format($TaxTotal, $_SESSION['CreditItems'.$identifier]->DefaultCurrency) . '</b></td>
-			<td class="number"><b>' . currency_number_format($TaxTotal+($_SESSION['CreditItems'.$identifier]->total + $_SESSION['CreditItems'.$identifier]->FreightCost), $_SESSION['CreditItems'.$identifier]->DefaultCurrency) . '</b></td>
+			<td class="number"><b>' . locale_money_format($TaxTotal, $_SESSION['CreditItems'.$identifier]->DefaultCurrency) . '</b></td>
+			<td class="number"><b>' . locale_money_format($TaxTotal+($_SESSION['CreditItems'.$identifier]->total + $_SESSION['CreditItems'.$identifier]->FreightCost), $_SESSION['CreditItems'.$identifier]->DefaultCurrency) . '</b></td>
 		</tr></table></font>';
 		$_SESSION['CreditItems'.$identifier]->TaxTotal=$TaxTotal;
 		$_SESSION['CreditItems'.$identifier]->TaxTotals=$TaxTotals;
@@ -1339,7 +1339,7 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 					<td>'.$myrow['units'].'</td>
 					<td><font size="1"><input class="number" type="text" size="6" name="Quantity'.$i.'" value="0" /></font></td>
 					<input type="hidden" name="StockID'.$i.'" value="'.$myrow['stockid'].'" />
-					<td class="number">'.currency_number_format($PriceRow['price'],$PriceRow['currabrev']).'</td>
+					<td class="number">'.locale_money_format($PriceRow['price'],$PriceRow['currabrev']).'</td>
 				</tr>';
 				echo '<input type="hidden" name="ConversionFactor'.$i.'" value="' . $PriceRow['conversionfactor'] . '" />';
 				echo '<input type="hidden" name="Units'.$i.'" value="' . $myrow['units'] . '" />';

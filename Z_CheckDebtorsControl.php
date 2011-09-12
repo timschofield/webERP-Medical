@@ -101,7 +101,7 @@ include('includes/header.inc');
 				$j++;
 			}
 			echo '<td>' . $CurPeriod . '</td>
-					<td class="number">' . currency_number_format($DTRow['bfwd'],$_SESSION['CompanyRecord']['currencydefault']) . '</td>';
+					<td class="number">' . locale_money_format($DTRow['bfwd'],$_SESSION['CompanyRecord']['currencydefault']) . '</td>';
 
 			$SQL = "SELECT SUM((ovamount+ovgst+ovdiscount)*rate) AS totinvnetcrds
 					FROM debtortrans
@@ -113,7 +113,7 @@ include('includes/header.inc');
 
 			$InvTotal += $InvRow['totinvnetcrds'];
 
-			echo '<td class="number">' . currency_number_format($InvRow['totinvnetcrds'],$_SESSION['CompanyRecord']['currencydefault']) . '</td>';
+			echo '<td class="number">' . locale_money_format($InvRow['totinvnetcrds'],$_SESSION['CompanyRecord']['currencydefault']) . '</td>';
 
 			$SQL = "SELECT SUM((ovamount+ovgst+ovdiscount)*rate) AS totreceipts
 					FROM debtortrans
@@ -126,7 +126,7 @@ include('includes/header.inc');
 			$RecTotal += $RecRow['totreceipts'];
 			$CalcMovement = $DTRow['bfwd'] + $InvRow['totinvnetcrds'] + $RecRow['totreceipts'];
 
-			echo '<td class="number">' . currency_number_format($RecRow['totreceipts'],$_SESSION['CompanyRecord']['currencydefault']) . '</td>';
+			echo '<td class="number">' . locale_money_format($RecRow['totreceipts'],$_SESSION['CompanyRecord']['currencydefault']) . '</td>';
 
 			$GLClosing += $GLMovement;
 			$CalcTotal += $CalcMovement;
@@ -135,9 +135,9 @@ include('includes/header.inc');
 			$Diff = ( $DTRow['bfwd'] == 0 ) ? 0 : round($GLMovement,2) - round($CalcMovement,2);
 			$Color = ( $Diff == 0 OR $DTRow['bfwd'] == 0 ) ? 'green' : 'red';
 
-			echo '<td class="number">' . currency_number_format($GLMovement,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
-					<td class="number">' . currency_number_format(($CalcMovement),$_SESSION['CompanyRecord']['currencydefault']) . '</td>
-					<td class="number" bgcolor=white><font color="' . $Color . '">' . currency_number_format($Diff,$_SESSION['CompanyRecord']['currencydefault']) . '</font></td>
+			echo '<td class="number">' . locale_money_format($GLMovement,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
+					<td class="number">' . locale_money_format(($CalcMovement),$_SESSION['CompanyRecord']['currencydefault']) . '</td>
+					<td class="number" bgcolor=white><font color="' . $Color . '">' . locale_money_format($Diff,$_SESSION['CompanyRecord']['currencydefault']) . '</font></td>
 			</tr>';
 			$CurPeriod++;
 		}
@@ -146,12 +146,12 @@ include('includes/header.inc');
 
 		echo '<tr bgcolor=white>
 				<td>' . _('Total') . '</td>
-				<td class="number">' . currency_number_format($GLOpening,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
-				<td class="number">' . currency_number_format($InvTotal,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
-				<td class="number">' . currency_number_format($RecTotal,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
-				<td class="number">' . currency_number_format($GLClosing,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
-				<td class="number">' . currency_number_format($CalcTotal,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
-				<td class="number"><font color="' . $DiffColor . '">' . currency_number_format($DiffTotal,$_SESSION['CompanyRecord']['currencydefault']) . '</font></td>
+				<td class="number">' . locale_money_format($GLOpening,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
+				<td class="number">' . locale_money_format($InvTotal,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
+				<td class="number">' . locale_money_format($RecTotal,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
+				<td class="number">' . locale_money_format($GLClosing,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
+				<td class="number">' . locale_money_format($CalcTotal,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
+				<td class="number"><font color="' . $DiffColor . '">' . locale_money_format($DiffTotal,$_SESSION['CompanyRecord']['currencydefault']) . '</font></td>
 			</tr>';
 		echo '</table></form>';
 	}

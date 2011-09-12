@@ -79,9 +79,9 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 		<td class="number">%s</td>
 		<td><input type="text" class="number" name="%s" maxlength="10" size="10" value="%s" /></td>',
 		$myrow['locationname'],
-		stock_number_format($myrow['quantity'],$myrow['decimalplaces']),
+		locale_number_format($myrow['quantity'],$myrow['decimalplaces']),
 		$myrow['loccode'],
-		stock_number_format($myrow['reorderlevel'],$myrow['decimalplaces']));
+		locale_number_format($myrow['reorderlevel'],$myrow['decimalplaces']));
 	$j++;
 	If ($j == 12){
 		$j=1;

@@ -88,7 +88,7 @@ foreach ($_SESSION['SuppTrans']->Contracts as $EnteredContract){
 		$AnticipatedCost = _('No');
 	}
 	echo '<tr><td>' . $EnteredContract->ContractRef . '</td>
-		<td class="number">' . currency_number_format($EnteredContract->Amount,$_SESSION['SuppTrans']->CurrCode) . '</td>
+		<td class="number">' . locale_money_format($EnteredContract->Amount,$_SESSION['SuppTrans']->CurrCode) . '</td>
 		<td>' . $EnteredContract->Narrative . '</td>
 		<td>' . $AnticipatedCost . '</td>
 		<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $EnteredContract->Counter . '">' . _('Delete') . '</a></td></tr>';
@@ -99,7 +99,7 @@ foreach ($_SESSION['SuppTrans']->Contracts as $EnteredContract){
 
 echo '<tr>
 	<td  class="number">' . _('Total') . ':</font></td>
-	<td class="number">' . currency_number_format($TotalContractsValue,$_SESSION['SuppTrans']->CurrCode) . '</td>
+	<td class="number">' . locale_money_format($TotalContractsValue,$_SESSION['SuppTrans']->CurrCode) . '</td>
 </tr>
 </table>';
 
@@ -145,7 +145,7 @@ if (!isset($_POST['Amount'])) {
 	$_POST['Narrative']='';
 }
 echo '<tr><td>' . _('Amount') . ':</td>
-	<td><input type="text" class="number" name="Amount" size="12" maxlength="11" value="' .  currency_number_format($_POST['Amount'], $_SESSION['SuppTrans']->CurrCode) . '" /></td></tr>';
+	<td><input type="text" class="number" name="Amount" size="12" maxlength="11" value="' .  locale_money_format($_POST['Amount'], $_SESSION['SuppTrans']->CurrCode) . '" /></td></tr>';
 echo '<tr><td>' . _('Narrative') . ':</td>
 	<td><input type="text" name="Narrative" size="42" maxlength="40" value="' .  $_POST['Narrative'] . '" /></td></tr>';
 echo '<tr><td>' . _('Aniticpated Cost') . ':</td>

@@ -173,9 +173,9 @@ if (!(isset($_POST['Search']))) {
 	echo $TableHeader;
 	echo '<input type="hidden" value="' . $_POST['Location'] . '" name="Location" />
 			<input type="hidden" value="' . $_POST['Sequence'] . '" name="Sequence" />
-			<input type="hidden" value="' . stock_number_format($_POST['NumberOfDays'],0) . '" name="NumberOfDays" />
+			<input type="hidden" value="' . locale_number_format($_POST['NumberOfDays'],0) . '" name="NumberOfDays" />
 			<input type="hidden" value="' . $_POST['Customers'] . '" name="Customers" />
-			<input type="hidden" value="' . stock_number_format($_POST['NumberOfTopItems'],0) . '" name="NumberOfTopItems" />';
+			<input type="hidden" value="' . locale_number_format($_POST['NumberOfTopItems'],0) . '" name="NumberOfTopItems" />';
 	$k = 0; //row colour counter
 	$i = 1;
 	while ($myrow = DB_fetch_array($result)) {
@@ -203,10 +203,10 @@ if (!(isset($_POST['Search']))) {
 				$i,
 				$myrow['stkcode'],
 				$myrow['description'],
-				stock_number_format($myrow['totalinvoiced'],$myrow['decimalplaces']), //total invoice here
+				locale_number_format($myrow['totalinvoiced'],$myrow['decimalplaces']), //total invoice here
 				$myrow['units'], //unit
-				currency_number_format($myrow['valuesales'],$_SESSION['CompanyRecord']['currencydefault']), //value sales here
-				stock_number_format($ohRow[0], $myrow['decimalplaces']) //on hand
+				locale_money_format($myrow['valuesales'],$_SESSION['CompanyRecord']['currencydefault']), //value sales here
+				locale_number_format($ohRow[0], $myrow['decimalplaces']) //on hand
 				);
 		$i++;
 	}

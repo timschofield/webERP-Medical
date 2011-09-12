@@ -144,11 +144,11 @@ echo '<table width=90% class="selection">
 			<th>' . _('Over') . ' ' . $_SESSION['PastDueDays2'] . ' ' . _('Days Overdue') . '</th>
 		</tr>';
 
-echo '<tr>	<td class="number">' . currency_number_format($SupplierRecord['balance'],$SupplierRecord['currcode']) . '</td>
-			<td class="number">' . currency_number_format(($SupplierRecord['balance'] - $SupplierRecord['due']),$SupplierRecord['currcode']) . '</td>
-			<td class="number">' . currency_number_format(($SupplierRecord['due']-$SupplierRecord['overdue1']),$SupplierRecord['currcode']) . '</td>
-			<td class="number">' . currency_number_format(($SupplierRecord['overdue1']-$SupplierRecord['overdue2']) ,$SupplierRecord['currcode']) . '</td>
-			<td class="number">' . currency_number_format($SupplierRecord['overdue2'],$SupplierRecord['currcode']) . '</td>
+echo '<tr>	<td class="number">' . locale_money_format($SupplierRecord['balance'],$SupplierRecord['currcode']) . '</td>
+			<td class="number">' . locale_money_format(($SupplierRecord['balance'] - $SupplierRecord['due']),$SupplierRecord['currcode']) . '</td>
+			<td class="number">' . locale_money_format(($SupplierRecord['due']-$SupplierRecord['overdue1']),$SupplierRecord['currcode']) . '</td>
+			<td class="number">' . locale_money_format(($SupplierRecord['overdue1']-$SupplierRecord['overdue2']) ,$SupplierRecord['currcode']) . '</td>
+			<td class="number">' . locale_money_format($SupplierRecord['overdue2'],$SupplierRecord['currcode']) . '</td>
 		</tr></table>';
 
 echo '<br /><div class="centre"><form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
@@ -249,9 +249,9 @@ while ($myrow=DB_fetch_array($TransResult)) {
 						<td>' . $myrow['typename'] . '</td>
 						<td>' . $myrow['suppreference'] . '</td>
 						<td>' . ConvertSQLDate($myrow['trandate']) . '</td>
-						<td class="number">' . currency_number_format($myrow['totalamount'],$myrow['currcode']) .'</td>
-						<td class="number">' . currency_number_format($myrow['allocated'],$myrow['currcode']) . '</td>
-						<td class="number">' . currency_number_format($myrow['totalamount']-$myrow['allocated'],$myrow['currcode']) . '</td>
+						<td class="number">' . locale_money_format($myrow['totalamount'],$myrow['currcode']) .'</td>
+						<td class="number">' . locale_money_format($myrow['allocated'],$myrow['currcode']) . '</td>
+						<td class="number">' . locale_money_format($myrow['totalamount']-$myrow['allocated'],$myrow['currcode']) . '</td>
 						<td align="left">' . $myrow['transtext'] . '</td>
 						<td><a target="_blank" href="' . $rootpath . '/GLTransInquiry.php?TypeID=' . $myrow['type'] . '&TransNo=' . $myrow['transno'] .'">' . _('View GL Postings') . '</a></td>
 						<td><a href="' . $rootpath . '/PaymentAllocations.php?SuppID=' . $myrow['supplierno'] . '&InvID=' . $myrow['suppreference'] .'">' . _('View Payments') . '</a></td></tr>';
@@ -260,9 +260,9 @@ while ($myrow=DB_fetch_array($TransResult)) {
 						<td>' . $myrow['typename'] . '</td>
 						<td>' . $myrow['suppreference'] . '</td>
 						<td>' . ConvertSQLDate($myrow['trandate']) . '</td>
-						<td class="number">' . currency_number_format($myrow['totalamount'],$myrow['currcode']) . '</td>
-						<td class="number">' . currency_number_format($myrow['allocated'],$myrow['currcode']) . '</td>
-						<td class="number">' . currency_number_format($myrow['totalamount'] - $myrow['allocated'],$myrow['currcode']) .'</td>
+						<td class="number">' . locale_money_format($myrow['totalamount'],$myrow['currcode']) . '</td>
+						<td class="number">' . locale_money_format($myrow['allocated'],$myrow['currcode']) . '</td>
+						<td class="number">' . locale_money_format($myrow['totalamount'] - $myrow['allocated'],$myrow['currcode']) .'</td>
 						<td align="left">' . $myrow['transtext'] . '</td>';
 				$authsql="SELECT offhold
 							FROM purchorderauth
@@ -300,9 +300,9 @@ while ($myrow=DB_fetch_array($TransResult)) {
 						$myrow['typename'],
 						$myrow['suppreference'],
 						ConvertSQLDate($myrow['trandate']),
-						currency_number_format($myrow['totalamount'],$myrow['currcode']),
-						currency_number_format($myrow['allocated'],$myrow['currcode']),
-						currency_number_format($myrow['totalamount'] - $myrow['allocated'],$myrow['currcode']),
+						locale_money_format($myrow['totalamount'],$myrow['currcode']),
+						locale_money_format($myrow['allocated'],$myrow['currcode']),
+						locale_money_format($myrow['totalamount'] - $myrow['allocated'],$myrow['currcode']),
 						$myrow['transtext']);
 
 			} else {
@@ -321,9 +321,9 @@ while ($myrow=DB_fetch_array($TransResult)) {
 						$myrow['typename'],
 						$myrow['suppreference'],
 						ConvertSQLDate($myrow['trandate']),
-						currency_number_format($myrow['totalamount'],$myrow['currcode']),
-						currency_number_format($myrow['allocated'],$myrow['currcode']),
-						currency_number_format($myrow['totalamount']-$myrow['allocated'],$myrow['currcode']),
+						locale_money_format($myrow['totalamount'],$myrow['currcode']),
+						locale_money_format($myrow['allocated'],$myrow['currcode']),
+						locale_money_format($myrow['totalamount']-$myrow['allocated'],$myrow['currcode']),
 						$myrow['transtext'],
 						$_SERVER['PHP_SELF'],
 						$myrow['type'],
@@ -358,9 +358,9 @@ while ($myrow=DB_fetch_array($TransResult)) {
 					$myrow['typename'],
 					$myrow['suppreference'],
 					ConvertSQLDate($myrow['trandate']),
-					currency_number_format($myrow['totalamount'],$myrow['currcode']),
-					currency_number_format($myrow['allocated'],$myrow['currcode']),
-					currency_number_format($myrow['totalamount']-$myrow['allocated'],$myrow['currcode']),
+					locale_money_format($myrow['totalamount'],$myrow['currcode']),
+					locale_money_format($myrow['allocated'],$myrow['currcode']),
+					locale_money_format($myrow['totalamount']-$myrow['allocated'],$myrow['currcode']),
 					$myrow['transtext'],
 					$rootpath,
 					$myrow['id'],
@@ -384,9 +384,9 @@ while ($myrow=DB_fetch_array($TransResult)) {
 				$myrow['typename'],
 				$myrow['suppreference'],
 				ConvertSQLDate($myrow['trandate']),
-				currency_number_format($myrow['totalamount'],$myrow['currcode']),
-				currency_number_format($myrow['allocated'],$myrow['currcode']),
-				currency_number_format(($myrow['totalamount'] - $myrow['allocated']),$myrow['currcode']),
+				locale_money_format($myrow['totalamount'],$myrow['currcode']),
+				locale_money_format($myrow['allocated'],$myrow['currcode']),
+				locale_money_format(($myrow['totalamount'] - $myrow['allocated']),$myrow['currcode']),
 				$myrow['transtext'],
 				$rootpath,
 				$myrow['id']);

@@ -138,11 +138,11 @@ while ($myrow=DB_fetch_array($MovtsResult)) {
 		$DisplayTranDate,
 		$myrow['debtorno'],
 		$myrow['branchcode'],
-		stock_number_format($myrow['qty'],$myrow['decimalplaces']),
+		locale_number_format($myrow['qty'],$myrow['decimalplaces']),
 		$myrow['reference'],
-		currency_number_format($myrow['price'],$_SESSION['CompanyRecord']['currencydefault']),
-		stock_number_format($myrow['discountpercent']*100,2),
-		stock_number_format($myrow['newqoh'],$myrow['decimalplaces']));
+		locale_money_format($myrow['price'],$_SESSION['CompanyRecord']['currencydefault']),
+		locale_number_format($myrow['discountpercent']*100,2),
+		locale_number_format($myrow['newqoh'],$myrow['decimalplaces']));
 
 	} elseif ($myrow['type']==11){
 
@@ -164,11 +164,11 @@ while ($myrow=DB_fetch_array($MovtsResult)) {
 		$DisplayTranDate,
 		$myrow['debtorno'],
 		$myrow['branchcode'],
-		stock_number_format($myrow['qty'],$myrow['decimalplaces']),
+		locale_number_format($myrow['qty'],$myrow['decimalplaces']),
 		$myrow['reference'],
-		currency_number_format($myrow['price'],$_SESSION['CompanyRecord']['currencydefault']),
-		stock_number_format($myrow['discountpercent']*100,2),
-		stock_number_format($myrow['newqoh'],$myrow['decimalplaces']));
+		locale_money_format($myrow['price'],$_SESSION['CompanyRecord']['currencydefault']),
+		locale_number_format($myrow['discountpercent']*100,2),
+		locale_number_format($myrow['newqoh'],$myrow['decimalplaces']));
 	} else {
 
 		printf('<td>%s</td>
@@ -187,11 +187,11 @@ while ($myrow=DB_fetch_array($MovtsResult)) {
 			$DisplayTranDate,
 			$myrow['debtorno'],
 			$myrow['branchcode'],
-			stock_number_format($myrow['qty'],$myrow['decimalplaces']),
+			locale_number_format($myrow['qty'],$myrow['decimalplaces']),
 			$myrow['reference'],
-			currency_number_format($myrow['price'],$_SESSION['CompanyRecord']['currencydefault']),
-			stock_number_format($myrow['discountpercent']*100,2),
-			stock_number_format($myrow['newqoh'],$myrow['decimalplaces']));
+			locale_money_format($myrow['price'],$_SESSION['CompanyRecord']['currencydefault']),
+			locale_number_format($myrow['discountpercent']*100,2),
+			locale_number_format($myrow['newqoh'],$myrow['decimalplaces']));
 	}
 //end of page full new headings if
 }

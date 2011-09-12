@@ -213,7 +213,7 @@ if (!isset($_GET['Edit'])) {
 					<td><a href="%s?StockID=%s&SupplierID=%s&Delete=1&EffectiveFrom=%s" onclick="return confirm(\'' . _('Are you sure you wish to delete this suppliers price?') . '\');">' . _('Delete') . '</a></td>
 					</tr>',
 					$myrow['suppname'],
-					currency_number_format($myrow['price'], $myrow['currcode']),
+					locale_money_format($myrow['price'], $myrow['currcode']),
 					$myrow['currcode'],
 					ConvertSQLDate($myrow['effectivefrom']),
 					$myrow['unitname'],
@@ -466,7 +466,7 @@ if (!isset($SuppliersResult)) {
 	echo '<tr><td>' . _('Currency') . ':</td>
 	<td><input type="hidden" name="CurrCode" . value="' . $CurrCode . '" />' . $CurrCode . '</td></tr>';
 	echo '<tr><td>' . _('Price') . ' (' . _('in Supplier Currency') . '):</td>
-	<td><input type="text" class="number" name="Price" maxlength="12" size="12" value="' . currency_number_format($_POST['Price'], $CurrCode) . '" /></td></tr>';
+	<td><input type="text" class="number" name="Price" maxlength="12" size="12" value="' . locale_money_format($_POST['Price'], $CurrCode) . '" /></td></tr>';
 	echo '<tr><td>' . _('Date Updated') . ':</td>
 	<td><input type="text" class="date" alt="' . $_SESSION['DefaultDateFormat'] . '" name="EffectiveFrom" maxlength="10" size="11" value="' . $_POST['EffectiveFrom'] . '" /></td></tr>';
 	echo '<tr><td>' . _('Our Unit of Measure') . ':</td>';

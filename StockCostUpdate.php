@@ -136,7 +136,7 @@ echo '<tr>
 		<th colspan="2"><font color="navy" size="2">' . $StockID . ' - ' . $myrow['description'] . '</font></th>
 	</tr>';
 echo '<tr>
-		<th colspan="2"><font color="navy" size="2">'. _('Total Quantity On Hand') . ': ' . stock_number_format($myrow['totalqoh'], $myrow['decimalplaces']) . ' ' . $myrow['units'] .'</font></th>
+		<th colspan="2"><font color="navy" size="2">'. _('Total Quantity On Hand') . ': ' . locale_number_format($myrow['totalqoh'], $myrow['decimalplaces']) . ' ' . $myrow['units'] .'</font></th>
 	</tr>';
 
 if (($myrow['mbflag']=='D' AND $myrow['stocktype'] != 'L')
@@ -155,40 +155,40 @@ if (($myrow['mbflag']=='D' AND $myrow['stocktype'] != 'L')
    exit;
 }
 
-echo '<input type="hidden" name="OldMaterialCost" value="' . currency_number_format($myrow['materialcost'], $_SESSION['CompanyRecord']['currencydefault']) .'" />';
-echo '<input type="hidden" name="OldLabourCost" value="' . currency_number_format($myrow['labourcost'], $_SESSION['CompanyRecord']['currencydefault']) .'" />';
-echo '<input type="hidden" name="OldOverheadCost" value="' . currency_number_format($myrow['overheadcost'], $_SESSION['CompanyRecord']['currencydefault']) .'" />';
+echo '<input type="hidden" name="OldMaterialCost" value="' . locale_money_format($myrow['materialcost'], $_SESSION['CompanyRecord']['currencydefault']) .'" />';
+echo '<input type="hidden" name="OldLabourCost" value="' . locale_money_format($myrow['labourcost'], $_SESSION['CompanyRecord']['currencydefault']) .'" />';
+echo '<input type="hidden" name="OldOverheadCost" value="' . locale_money_format($myrow['overheadcost'], $_SESSION['CompanyRecord']['currencydefault']) .'" />';
 echo '<input type="hidden" name="QOH" value="' . $myrow['totalqoh'] .'" />';
 
 echo '<tr>
 		<td>' . _('Last Cost') .':</td>
-		<td class="number">' . currency_number_format($myrow['lastcost'], $_SESSION['CompanyRecord']['currencydefault']) . '</td>
+		<td class="number">' . locale_money_format($myrow['lastcost'], $_SESSION['CompanyRecord']['currencydefault']) . '</td>
 	</tr>';
 if (!isset($UpdateSecurity) or !in_array($UpdateSecurity,$_SESSION['AllowedPageSecurityTokens'])){
 	echo '<tr>
 			<td>' . _('Cost') . ':</td>
-			<td class="number">' . currency_number_format($myrow['materialcost']+$myrow['labourcost']+$myrow['overheadcost'], $_SESSION['CompanyRecord']['currencydefault']) . '</td>
+			<td class="number">' . locale_money_format($myrow['materialcost']+$myrow['labourcost']+$myrow['overheadcost'], $_SESSION['CompanyRecord']['currencydefault']) . '</td>
 		</tr></table><br />';
 } else {
 
 	if ($myrow['mbflag']=='M'){
-		echo '<input type="hidden" name="MaterialCost" value="' . currency_number_format($myrow['materialcost'], $_SESSION['CompanyRecord']['currencydefault']) . '" />';
+		echo '<input type="hidden" name="MaterialCost" value="' . locale_money_format($myrow['materialcost'], $_SESSION['CompanyRecord']['currencydefault']) . '" />';
 		echo '<tr>
 				<td>' . _('Standard Material Cost Per Unit') .':</td>
-				<td class="number">' . currency_number_format($myrow['materialcost'], $_SESSION['CompanyRecord']['currencydefault']) . '</td>
+				<td class="number">' . locale_money_format($myrow['materialcost'], $_SESSION['CompanyRecord']['currencydefault']) . '</td>
 			</tr>';
 		echo '<tr>
 				<td>' . _('Standard Labour Cost Per Unit') . ':</td>
-				<td class="number"><input type="text" class="number" name=LabourCost value="' . currency_number_format($myrow['labourcost'], $_SESSION['CompanyRecord']['currencydefault']) . '" /></td>
+				<td class="number"><input type="text" class="number" name=LabourCost value="' . locale_money_format($myrow['labourcost'], $_SESSION['CompanyRecord']['currencydefault']) . '" /></td>
 			</tr>';
 		echo '<tr>
 				<td>' . _('Standard Overhead Cost Per Unit') . ':</td>
-				<td class="number"><input type="text" class="number" name=OverheadCost value="' . currency_number_format($myrow['overheadcost'], $_SESSION['CompanyRecord']['currencydefault']) . '" /></td>
+				<td class="number"><input type="text" class="number" name=OverheadCost value="' . locale_money_format($myrow['overheadcost'], $_SESSION['CompanyRecord']['currencydefault']) . '" /></td>
 			</tr>';
 	} elseif ($myrow['mbflag']=='B' OR  $myrow['mbflag']=='D') {
 		echo '<tr>
 				<td>' . _('Standard Cost') .':</td>
-				<td class="number"><input type="text" class="number" name="MaterialCost" value="' . currency_number_format($myrow['materialcost'], $_SESSION['CompanyRecord']['currencydefault']) . '" /></td>
+				<td class="number"><input type="text" class="number" name="MaterialCost" value="' . locale_money_format($myrow['materialcost'], $_SESSION['CompanyRecord']['currencydefault']) . '" /></td>
 			</tr>';
 	} else 	{
 		echo '<input type="hidden" name="LabourCost" value="0" />';

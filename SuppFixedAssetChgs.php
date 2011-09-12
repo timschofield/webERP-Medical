@@ -81,7 +81,7 @@ foreach ($_SESSION['SuppTrans']->Assets as $EnteredAsset){
 
 	echo '<tr><td>' . $EnteredAsset->AssetID . '</td>
 						<td>' . $EnteredAsset->Description . '</td>
-		<td class="number">' . currency_number_format($EnteredAsset->Amount,$_SESSION['SuppTrans']->CurrCode) . '</td>
+		<td class="number">' . locale_money_format($EnteredAsset->Amount,$_SESSION['SuppTrans']->CurrCode) . '</td>
 		<td><a href="' . $_SERVER['PHP_SELF'] . '&Delete=' . $EnteredAsset->Counter . '">' . _('Delete') . '</a></td></tr>';
 
 	$TotalAssetValue +=  $EnteredAsset->Amount;
@@ -90,7 +90,7 @@ foreach ($_SESSION['SuppTrans']->Assets as $EnteredAsset){
 
 echo '<tr>
 	<td class="number"><font size="2" color="navy">' . _('Total') . ':</font></td>
-	<td class="number"><font size="2" color="navy"><U>' . currency_number_format($TotalAssetValue,$_SESSION['SuppTrans']->CurrCode) . '</U></font></td>
+	<td class="number"><font size="2" color="navy"><U>' . locale_money_format($TotalAssetValue,$_SESSION['SuppTrans']->CurrCode) . '</U></font></td>
 </tr>
 </table><br />';
 
@@ -138,7 +138,7 @@ if (!isset($_POST['Amount'])) {
 	$_POST['Amount']=0;
 }
 echo '<tr><td>' . _('Amount') . ':</td>
-	<td><input type="text" class="number" name="Amount" size="12" maxlength="11" value="' .  currency_number_format($_POST['Amount'], $_SESSION['SuppTrans']->CurrCode) . '" /></td></tr>';
+	<td><input type="text" class="number" name="Amount" size="12" maxlength="11" value="' .  locale_money_format($_POST['Amount'], $_SESSION['SuppTrans']->CurrCode) . '" /></td></tr>';
 echo '</table>';
 
 echo '<br /><div class="centre"><input type="submit" name="AddAssetToInvoice" value="' . _('Enter Fixed Asset') . '" /></div>';

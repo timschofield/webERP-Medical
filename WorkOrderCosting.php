@@ -91,9 +91,9 @@ while ($WORow = DB_fetch_array($WOItemsResult)){
 
 	 echo '<tr><td>' . $WORow['stockid'] . '</td>
 	 			<td>' . $WORow['description'] . '</td>
-	 			<td class="number">' . stock_number_format($WORow['qtyreqd'],$WORow['decimalplaces']) . '</td>
+	 			<td class="number">' . locale_number_format($WORow['qtyreqd'],$WORow['decimalplaces']) . '</td>
 	 			<td>' . $WORow['units'] . '</td>
-	 			<td class="number">' . stock_number_format($WORow['qtyrecd'],$WORow['decimalplaces']) . '</td>
+	 			<td class="number">' . locale_number_format($WORow['qtyrecd'],$WORow['decimalplaces']) . '</td>
 	 			<td class="number"><a href="'. $rootpath . '/WorkOrderStatus.php?WO=' . $_POST['WO'] . '&StockID=' . $WORow['stockid'] . '">' . _('Status') . '</a></td>
                 <td class="number"><a href="'. $rootpath . '/WorkOrderReceive.php?WO=' . $_POST['WO'] . '&StockID=' . $WORow['stockid'] . '">' . _('Receive') . '</a></td>
                 <td class="number"><a href="'. $rootpath . '/WorkOrderIssue.php?WO=' . $_POST['WO'] . '&StockID=' . $WORow['stockid'] . '">' . _('Issue') . '</a></td>
@@ -172,8 +172,8 @@ while ($RequirementsRow = DB_fetch_array($RequirementsResult)){
 				echo '<tr class="OddTableRows">';
 			}
 			echo '<td colspan="4"></td><td>' . ConvertSQLDate($IssuesRow['trandate']) . '</td>
-				<td class="number">' . stock_number_format(-$IssuesRow['qty'],$RequirementsRow['decimalplaces']) . '</td>
-				<td class="number">' . currency_number_format(-($IssuesRow['qty']*$IssuesRow['standardcost']),$_SESSION['CompanyRecord']['currencydefault']) . '</td></tr>';
+				<td class="number">' . locale_number_format(-$IssuesRow['qty'],$RequirementsRow['decimalplaces']) . '</td>
+				<td class="number">' . locale_money_format(-($IssuesRow['qty']*$IssuesRow['standardcost']),$_SESSION['CompanyRecord']['currencydefault']) . '</td></tr>';
 			$IssueQty -= $IssuesRow['qty'];// because qty for the stock movement will be negative
 			$IssueCost -= ($IssuesRow['qty']*$IssuesRow['standardcost']);
 
@@ -199,13 +199,13 @@ while ($RequirementsRow = DB_fetch_array($RequirementsResult)){
 	/*Required quantity is the quantity required of the component based on the quantity of the finished item received */
 	$UsageVar =($RequirementsRow['requiredqty']-$IssueQty)*($RequirementsRow['stdcost']);
 
-	echo '<td colspan="2"></td><td class="number">'  . stock_number_format($RequirementsRow['requiredqty'],$RequirementsRow['decimalplaces']) . '</td>
-				<td class="number">' . currency_number_format($RequirementsRow['expectedcost'],$_SESSION['CompanyRecord']['currencydefault']) . '</td>
+	echo '<td colspan="2"></td><td class="number">'  . locale_number_format($RequirementsRow['requiredqty'],$RequirementsRow['decimalplaces']) . '</td>
+				<td class="number">' . locale_money_format($RequirementsRow['expectedcost'],$_SESSION['CompanyRecord']['currencydefault']) . '</td>
 				<td></td>
-				<td class="number">' . stock_number_format($IssueQty,$RequirementsRow['decimalplaces']) . '</td>
-				<td class="number">' . currency_number_format($IssueCost,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
-				<td class="number">' . currency_number_format($UsageVar,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
-				<td class="number">' . currency_number_format($CostVar,$_SESSION['CompanyRecord']['currencydefault']) . '</td></tr>';
+				<td class="number">' . locale_number_format($IssueQty,$RequirementsRow['decimalplaces']) . '</td>
+				<td class="number">' . locale_money_format($IssueCost,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
+				<td class="number">' . locale_money_format($UsageVar,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
+				<td class="number">' . locale_money_format($CostVar,$_SESSION['CompanyRecord']['currencydefault']) . '</td></tr>';
 	$TotalReqdCost += $RequirementsRow['expectedcost'];
 	$TotalIssuedCost += $IssueCost;
 	$TotalCostVar += $CostVar;
@@ -253,9 +253,9 @@ if (DB_num_rows($WOIssuesResult)>0){
 			<td class="number">0</td>
 			<td class="number">0</td>
 			<td>' . ConvertSQLDate($WOIssuesRow['trandate']) . '</td>
-			<td class="number">' . stock_number_format(-$WOIssuesRow['qty'],$WOIssuesRow['decimalplaces'])  .'</td>
-			<td class="number">' . currency_number_format(-$WOIssuesRow['qty']*$WOIssuesRow['standardcost'],$_SESSION['CompanyRecord']['currencydefault'])  .'</td>
-			<td class="number">' . currency_number_format($WOIssuesRow['qty']*$WOIssuesRow['standardcost'],$_SESSION['CompanyRecord']['currencydefault'])  .'</td>
+			<td class="number">' . locale_number_format(-$WOIssuesRow['qty'],$WOIssuesRow['decimalplaces'])  .'</td>
+			<td class="number">' . locale_money_format(-$WOIssuesRow['qty']*$WOIssuesRow['standardcost'],$_SESSION['CompanyRecord']['currencydefault'])  .'</td>
+			<td class="number">' . locale_money_format($WOIssuesRow['qty']*$WOIssuesRow['standardcost'],$_SESSION['CompanyRecord']['currencydefault'])  .'</td>
 			<td class="number">0</td></tr>';
 
 		$TotalUsageVar += ($WOIssuesRow['qty']*$WOIssuesRow['standardcost']);
@@ -265,11 +265,11 @@ if (DB_num_rows($WOIssuesResult)>0){
 echo '<tr><td colspan="3"></td><td><hr/></td><td colspan="2"></td><td colspan="3"><hr></td></tr>';
 echo '<tr><td colspan="2" class="number">' . _('Totals') . '</td>
 	<td></td>
-	<td class="number">' . currency_number_format($TotalReqdCost,$_SESSION['CompanyRecord']['currencydefault']) .'</td>
+	<td class="number">' . locale_money_format($TotalReqdCost,$_SESSION['CompanyRecord']['currencydefault']) .'</td>
 	<td></td><td></td>
-	<td class="number">' . currency_number_format($TotalIssuedCost,$_SESSION['CompanyRecord']['currencydefault']) .'</td>
-	<td class="number">' . currency_number_format($TotalUsageVar,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
-	<td class="number">' . currency_number_format($TotalCostVar,$_SESSION['CompanyRecord']['currencydefault']) . '</td></tr>';
+	<td class="number">' . locale_money_format($TotalIssuedCost,$_SESSION['CompanyRecord']['currencydefault']) .'</td>
+	<td class="number">' . locale_money_format($TotalUsageVar,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
+	<td class="number">' . locale_money_format($TotalCostVar,$_SESSION['CompanyRecord']['currencydefault']) . '</td></tr>';
 echo '<tr><td colspan="3"></td><td><hr/></td><td colspan="2"></td><td colspan="3"><hr></td></tr>';
 #echo '<tr><td colspan="7"></td><td colspan="2"><hr></td></tr>';
 

@@ -300,7 +300,7 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 				'" . $GRN['deliverydate'] . "',
 				'" . $PeriodNo . "',
 				'" . $GRN['glcode'] . "',
-				'" . _('GRN Reversal for PO') .": " . $GRN['orderno'] . " " . $_POST['SupplierID'] . " - " . $GRN['itemcode'] . "-" . $GRN['itemdescription'] . " x " . $QtyToReverse . " @ " . currency_number_format($GRN['stdcostunit'],$GRN['currcode']) . "',
+				'" . _('GRN Reversal for PO') .": " . $GRN['orderno'] . " " . $_POST['SupplierID'] . " - " . $GRN['itemcode'] . "-" . $GRN['itemdescription'] . " x " . $QtyToReverse . " @ " . locale_money_format($GRN['stdcostunit'],$GRN['currcode']) . "',
 				'" . -($GRN['stdcostunit'] * $QtyToReverse) . "'
 				)";
 
@@ -322,7 +322,7 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 									'" . $GRN['deliverydate'] . "',
 									'" . $PeriodNo . "',
 									'" . $_SESSION['CompanyRecord']['grnact'] . "', '"
-										. _('GRN Reversal PO') . ': ' . $GRN['orderno'] . " " . $_POST['SupplierID'] . " - " . $GRN['itemcode'] . "-" . $GRN['itemdescription'] . " x " . $QtyToReverse . " @ " . stock_number_format($GRN['stdcostunit'],$GRN['decimalplaces']) . "',
+										. _('GRN Reversal PO') . ': ' . $GRN['orderno'] . " " . $_POST['SupplierID'] . " - " . $GRN['itemcode'] . "-" . $GRN['itemdescription'] . " x " . $QtyToReverse . " @ " . locale_number_format($GRN['stdcostunit'],$GRN['decimalplaces']) . "',
 									'" . $GRN['stdcostunit'] * $QtyToReverse . "'
 								)";
 
@@ -403,9 +403,9 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 					$k=1;
 				}
 
-				$DisplayQtyRecd = stock_number_format($myrow['qtyrecd'],$myrow['decimalplaces']);
-				$DisplayQtyInv = stock_number_format($myrow['quantityinv'],$myrow['decimalplaces']);
-				$DisplayQtyRev = stock_number_format($myrow['qtytoreverse'],$myrow['decimalplaces']);
+				$DisplayQtyRecd = locale_number_format($myrow['qtyrecd'],$myrow['decimalplaces']);
+				$DisplayQtyInv = locale_number_format($myrow['quantityinv'],$myrow['decimalplaces']);
+				$DisplayQtyRev = locale_number_format($myrow['qtytoreverse'],$myrow['decimalplaces']);
 				$DisplayDateDel = ConvertSQLDate($myrow['deliverydate']);
 				$LinkToRevGRN = '<a href="' . $_SERVER['PHP_SELF'] . '?GRNNo=' . $myrow['grnno'] . '">' . _('Reverse') . '</a>';
 

@@ -47,7 +47,7 @@ while ($OutOfWackRow = DB_fetch_array($OutOfWackResult)){
 			<td><a href="' . $rootpath . '/GLTransInquiry.php?TypeID=' . $OutOfWackRow['type'] . '&TransNo=' .
 				$OutOfWackRow['typeno'] . '">' . $OutOfWackRow['typename'] . '</a></td><td class="number">' . $OutOfWackRow['typeno'] . '</td>
 			<td class="number">' . $OutOfWackRow['periodno'] . '</td>
-			<td class="number">' . currency_number_format($OutOfWackRow['nettot'],$_SESSION['CompanyRecord']['currencydefault']) . '</td>
+			<td class="number">' . locale_money_format($OutOfWackRow['nettot'],$_SESSION['CompanyRecord']['currencydefault']) . '</td>
 		</tr>';
 
 }

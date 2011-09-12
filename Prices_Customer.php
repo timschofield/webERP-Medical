@@ -115,9 +115,9 @@ if (isset($_POST['submit'])) {
 
 		$sql = "UPDATE prices SET typeabbrev='" . $SalesType . "',
 		                        currabrev='" . $CurrCode . "',
-								price='" . $_POST['Price'] . "',
+								price='" . filter_currency_input($_POST['Price']) . "',
 								units='" . $_POST['Units'] . "',
-								conversionfactor='" . $_POST['ConversionFactor'] . "',
+								conversionfactor='" . filter_number_input($_POST['ConversionFactor']) . "',
 								decimalplaces='" . $_POST['DecimalPlaces'] . "',
 								branchcode='" . $_POST['Branch'] . "',
 								startdate='" . FormatDateForSQL($_POST['StartDate']) . "',
@@ -149,9 +149,9 @@ if (isset($_POST['submit'])) {
 									'".$SalesType."',
 									'".$CurrCode."',
 									'" . $_SESSION['CustomerID'] . "',
-									'" . $_POST['Price'] . "',
+									'" . filter_currency_input($_POST['Price']) . "',
 									'" . $_POST['Units'] . "',
-									'" . $_POST['ConversionFactor'] . "',
+									'" . filter_number_input($_POST['ConversionFactor']) . "',
 									'" . $_POST['DecimalPlaces'] . "',
 									'" . $_POST['Branch'] . "',
 									'" . FormatDateForSQL($_POST['StartDate']) . "',
@@ -243,9 +243,9 @@ if (DB_num_rows($result) == 0) {
 			$EndDateDisplay = ConvertSQLDate($myrow['enddate']);
 		}
 		echo '<tr class="EvenTableRows">
-				<td class="number">'.number_format($myrow['price'],2).'</td>
+				<td class="number">'.locale_money_format($myrow['price'],$CurrCode).'</td>
 				<td>'.$myrow['units'].'</td>
-				<td class="number">'.$myrow['conversionfactor'].'</td>
+				<td class="number">'.locale_number_format($myrow['conversionfactor'],4).'</td>
 				<td class="number">'.$myrow['decimalplaces'].'</td>
 				<td class="date">'.ConvertSQLDate($myrow['startdate']).'</td>
 				<td class="date">'.$EndDateDisplay.'</td>
@@ -310,7 +310,7 @@ if (DB_num_rows($result) == 0) {
 			$EndDateDisplay = ConvertSQLDate($myrow['enddate']);
 		}
 		echo '<tr bgcolor="#CCCCCC">
-				<td class="number">'.number_format($myrow['price'],2).'</td>
+				<td class="number">'.locale_money_format($myrow['price'],$myrow['currcode']).'</td>
 				<td>'.$Branch.'</td>
 				<td>'.$myrow['units'].'</td>
 				<td class="number">'.$myrow['conversionfactor'].'</td>
@@ -396,6 +396,7 @@ if (!isset($_POST['EndDate'])){
 
 $sql = "SELECT custbranch.branchcode,
 					custbranch.brname,
+					debtorsmaster.currcode,
 					currencies.currency
 					FROM custbranch
 					LEFT JOIN debtorsmaster
@@ -410,6 +411,7 @@ echo '<tr><td>' . _('Branch') . ':</td>';
 echo '<td><select name="Branch">';
 while ($myrow=DB_fetch_array($result)) {
 	$CustomerCurrency=$myrow['currency'];
+	$CustomerCurrencyCode=$myrow['currcode'];
 	if ($myrow['branchcode']==$_POST['branch']) {
 		echo '<option selected="True" value="'.$myrow['branchcode'].'">'.$myrow['brname'].'</option>';
 	} else {
@@ -449,13 +451,13 @@ if(isset($_POST['DecimalPlaces'])) {
 echo '<tr><td>'. _('Conversion Factor') . '<br />'._('to stock units').'</td>';
 
 if(isset($_POST['ConversionFactor'])) {
-	echo '<td><input type="text" class="number" name="ConversionFactor" size="8" maxlength="8" value="' . $_POST['ConversionFactor'] . '" /></td></tr>';
+	echo '<td><input type="text" class="number" name="ConversionFactor" size="8" maxlength="8" value="' . locale_number_format($_POST['ConversionFactor'],4) . '" /></td></tr>';
 } else {
-	echo '<td><input type="text" class="number" name="ConversionFactor" size="8" maxlength="8" value="1" /></td></tr>';
+	echo '<td><input type="text" class="number" name="ConversionFactor" size="8" maxlength="8" value="' . locale_number_format(1,4) . '" /></td></tr>';
 }
 
 echo '<tr><td>' . _('Price') . ':</td>
-	          <td><input type="text" class="number" name="Price" size="11" maxlength="10" value="' . $_POST['Price'] . '" /></td>
+	          <td><input type="text" class="number" name="Price" size="11" maxlength="10" value="' . locale_money_format($_POST['Price'], $CustomerCurrencyCode) . '" /></td>
 				</tr></table>';
 
 

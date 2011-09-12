@@ -493,7 +493,7 @@ echo '<tr>
 
 if (isset($WOResult)){
 	echo '<tr><td class="label">' . _('Accumulated Costs') . ':</td>
-			  <td class="number">' . currency_number_format($myrow['costissued'],$_SESSION['CompanyRecord']['currencydefault']) . '</td></tr>';
+			  <td class="number">' . locale_money_format($myrow['costissued'],$_SESSION['CompanyRecord']['currencydefault']) . '</td></tr>';
 }
 echo '</table>
 		<br /><table class="selection">';
@@ -517,13 +517,13 @@ if (isset($NumberOfOutputs)){
 		echo '<td><input type="hidden" name="OutputItem' . $i . '" value="' . $_POST['OutputItem' .$i] . '" />' .
 			$_POST['OutputItem' . $i] . ' - ' . $_POST['OutputItemDesc' .$i] . '</td>';
 		if ($_POST['Controlled'.$i]==1 AND $_SESSION['DefineControlledOnWOEntry']==1){
-			echo '<td class="number">' . stock_number_format($_POST['OutputQty' . $i], $_POST['DecimalPlaces' . $i]) . '</td>';
-			echo '<input type="hidden" name="OutputQty' . $i .'" value="' . stock_number_format($_POST['OutputQty' . $i], $_POST['DecimalPlaces' . $i]) . '" />';
+			echo '<td class="number">' . locale_number_format($_POST['OutputQty' . $i], $_POST['DecimalPlaces' . $i]) . '</td>';
+			echo '<input type="hidden" name="OutputQty' . $i .'" value="' . locale_number_format($_POST['OutputQty' . $i], $_POST['DecimalPlaces' . $i]) . '" />';
 		} else {
-		  	echo'<td><input type="text" class="number" name="OutputQty' . $i . '" value="' . stock_number_format($_POST['OutputQty' . $i], $_POST['DecimalPlaces' . $i]) . '" size="10" maxlength="10" /></td>';
+		  	echo'<td><input type="text" class="number" name="OutputQty' . $i . '" value="' . locale_number_format($_POST['OutputQty' . $i], $_POST['DecimalPlaces' . $i]) . '" size="10" maxlength="10" /></td>';
 		}
-		 echo '<td class="number"><input type="hidden" name="RecdQty' . $i . '" value="' . stock_number_format($_POST['RecdQty' .$i], $_POST['DecimalPlaces' . $i]) . '" />' . stock_number_format($_POST['RecdQty' .$i], $_POST['DecimalPlaces' . $i]) .'</td>
-		  		<td class="number">' . stock_number_format(($_POST['OutputQty' . $i] - $_POST['RecdQty' .$i]), $_POST['DecimalPlaces' . $i]) . '</td>';
+		 echo '<td class="number"><input type="hidden" name="RecdQty' . $i . '" value="' . locale_number_format($_POST['RecdQty' .$i], $_POST['DecimalPlaces' . $i]) . '" />' . locale_number_format($_POST['RecdQty' .$i], $_POST['DecimalPlaces' . $i]) .'</td>
+		  		<td class="number">' . locale_number_format(($_POST['OutputQty' . $i] - $_POST['RecdQty' .$i]), $_POST['DecimalPlaces' . $i]) . '</td>';
 		if ($_POST['Controlled'.$i]==1){
 			echo '<td><input type="text" name="NextLotSNRef' .$i . '" value="' . $_POST['NextLotSNRef'.$i] . '" /></td>';
 			if ($_SESSION['DefineControlledOnWOEntry']==1){

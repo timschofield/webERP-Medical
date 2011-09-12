@@ -290,9 +290,9 @@ if (!isset($_POST['PostInvoice'])){
 			echo '<tr>
 					<td>' . $EnteredGRN->GRNNo . '</td><td>' . $EnteredGRN->ItemCode .'</td>
 					<td>' . $EnteredGRN->ItemDescription . '</td>
-					<td class="number">' .stock_number_format($EnteredGRN->This_QuantityInv,$EnteredGRN->DecimalPlaces) . '</td>
-					<td class="number">' .currency_number_format($EnteredGRN->ChgPrice,$_SESSION['SuppTrans']->CurrCode) . '</td>
-					<td class="number">' .currency_number_format($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv,$_SESSION['SuppTrans']->CurrCode) . '</td>
+					<td class="number">' .locale_number_format($EnteredGRN->This_QuantityInv,$EnteredGRN->DecimalPlaces) . '</td>
+					<td class="number">' .locale_money_format($EnteredGRN->ChgPrice,$_SESSION['SuppTrans']->CurrCode) . '</td>
+					<td class="number">' .locale_money_format($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv,$_SESSION['SuppTrans']->CurrCode) . '</td>
 				</tr>';
 
 			$TotalGRNValue = $TotalGRNValue + ($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv);
@@ -300,7 +300,7 @@ if (!isset($_POST['PostInvoice'])){
 		}
 
 		echo '<tr><td colspan="5" class="number"><font color="blue">' . _('Total Value of Goods Charged') . ':</font></td>
-			<td class="number"><font color="blue"><u>' . currency_number_format($TotalGRNValue,$_SESSION['SuppTrans']->CurrCode) . '</u></font></td></tr>';
+			<td class="number"><font color="blue"><u>' . locale_money_format($TotalGRNValue,$_SESSION['SuppTrans']->CurrCode) . '</u></font></td></tr>';
 		echo '</table>';
 	}
 
@@ -321,7 +321,7 @@ if (!isset($_POST['PostInvoice'])){
 		foreach ($_SESSION['SuppTrans']->Shipts as $EnteredShiptRef){
 
 			echo '<tr><td>' . $EnteredShiptRef->ShiptRef . '</td><td class="number">' .
-				currency_number_format($EnteredShiptRef->Amount,$_SESSION['SuppTrans']->CurrCode) . '</td></tr>';
+				locale_money_format($EnteredShiptRef->Amount,$_SESSION['SuppTrans']->CurrCode) . '</td></tr>';
 
 			$TotalShiptValue = $TotalShiptValue + $EnteredShiptRef->Amount;
 
@@ -333,7 +333,7 @@ if (!isset($_POST['PostInvoice'])){
 		}
 
 		echo '<tr><td colspan="2" class="number"><font size="4" color="blue">' . _('Total') . ':</font></td>
-			<td class="number"><font size="4" color="blue"><u>' .  currency_number_format($TotalShiptValue,$_SESSION['SuppTrans']->CurrCode) . '</u></font></td></tr></table>';
+			<td class="number"><font size="4" color="blue"><u>' .  locale_money_format($TotalShiptValue,$_SESSION['SuppTrans']->CurrCode) . '</u></font></td></tr></table>';
 	}
 
 	$TotalAssetValue = 0;
@@ -356,7 +356,7 @@ if (!isset($_POST['PostInvoice'])){
 			echo '<tr>
 					<td>' . $EnteredAsset->AssetID . '</td>
 					<td>' . $EnteredAsset->Description . '</td>
-					<td class="number">' .	currency_number_format($EnteredAsset->Amount,$_SESSION['SuppTrans']->CurrCode) . '</td>
+					<td class="number">' .	locale_money_format($EnteredAsset->Amount,$_SESSION['SuppTrans']->CurrCode) . '</td>
 				</tr>';
 
 			$TotalAssetValue += $EnteredAsset->Amount;
@@ -370,7 +370,7 @@ if (!isset($_POST['PostInvoice'])){
 
 		echo '<tr>
 				<td colspan="2" class="number"><font size="4" color="blue">' . _('Total') . ':</font></td>
-				<td class="number"><font size="4" color="blue"><u>' .  currency_number_format($TotalAssetValue,$_SESSION['SuppTrans']->CurrCode) . '</u></font></td>
+				<td class="number"><font size="4" color="blue"><u>' .  locale_money_format($TotalAssetValue,$_SESSION['SuppTrans']->CurrCode) . '</u></font></td>
 			</tr></table>';
 	} //end loop around assets added to invocie
 
@@ -394,7 +394,7 @@ if (!isset($_POST['PostInvoice'])){
 
 			echo '<tr>
 					<td>' . $Contract->ContractRef . '</td>
-					<td class="number">' . currency_number_format($Contract->Amount,$_SESSION['SuppTrans']->CurrCode) . '</td>
+					<td class="number">' . locale_money_format($Contract->Amount,$_SESSION['SuppTrans']->CurrCode) . '</td>
 					<td>' . $Contract->Narrative . '</td>
 				</tr>';
 
@@ -409,7 +409,7 @@ if (!isset($_POST['PostInvoice'])){
 
 		echo '<tr>
 				<td class="number">' . _('Total') . ':</font></td>
-				<td class="number">' .  currency_number_format($TotalContractsValue,$_SESSION['SuppTrans']->CurrCode) . '</td>
+				<td class="number">' .  locale_money_format($TotalContractsValue,$_SESSION['SuppTrans']->CurrCode) . '</td>
 			</tr></table>';
 	}
 
@@ -436,7 +436,7 @@ if (!isset($_POST['PostInvoice'])){
 				echo '<tr>
 						<td>' . $EnteredGLCode->GLCode . '</td>
 						<td>' . $EnteredGLCode->GLActName . '</td>
-						<td class="number">' . currency_number_format($EnteredGLCode->Amount,$_SESSION['SuppTrans']->CurrCode) .  '</td>
+						<td class="number">' . locale_money_format($EnteredGLCode->Amount,$_SESSION['SuppTrans']->CurrCode) .  '</td>
 						<td>' . $EnteredGLCode->Narrative . '</td>
 					</tr>';
 
@@ -446,7 +446,7 @@ if (!isset($_POST['PostInvoice'])){
 
 			echo '<tr>
 					<td colspan="2" class="number">' . _('Total') .  ':</td>
-					<td class="number">' .  currency_number_format($TotalGLValue,$_SESSION['SuppTrans']->CurrCode) . '</td>
+					<td class="number">' .  locale_money_format($TotalGLValue,$_SESSION['SuppTrans']->CurrCode) . '</td>
 				</tr></table>';
 		}
 
@@ -455,13 +455,13 @@ if (!isset($_POST['PostInvoice'])){
 		echo '<br /><table class="selection">
 					<tr>
 						<td>' . _('Amount in supplier currency') . ':</td>
-						<td colspan="2" class="number">' . currency_number_format( $_SESSION['SuppTrans']->OvAmount,$_SESSION['SuppTrans']->CurrCode) . '</td>
+						<td colspan="2" class="number">' . locale_money_format( $_SESSION['SuppTrans']->OvAmount,$_SESSION['SuppTrans']->CurrCode) . '</td>
 					</tr>';
 	} else {
 		echo '<br /><table class="selection">
 					<tr>
 						<td>' . _('Amount in supplier currency') . ':</td>
-						<td colspan="2" class="number"><input type="text" size="12" maxlength="10" name="OvAmount" value="' . currency_number_format( $_SESSION['SuppTrans']->OvAmount,$_SESSION['SuppTrans']->CurrCode) . '" /></td>
+						<td colspan="2" class="number"><input type="text" size="12" maxlength="10" name="OvAmount" value="' . locale_money_format( $_SESSION['SuppTrans']->OvAmount,$_SESSION['SuppTrans']->CurrCode) . '" /></td>
 					</tr>';
 	}
 
@@ -509,7 +509,7 @@ if (!isset($_POST['PostInvoice'])){
 
 			echo '<input type="hidden" name="TaxAmount'  . $Tax->TaxCalculationOrder . '"  value="' . round($_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount,2) . '" />';
 
-			echo '</td><td class="number">' . currency_number_format($_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount,$_SESSION['SuppTrans']->CurrCode);
+			echo '</td><td class="number">' . locale_money_format($_SESSION['SuppTrans']->Taxes[$Tax->TaxCalculationOrder]->TaxOvAmount,$_SESSION['SuppTrans']->CurrCode);
 
 		} else { /*Tax being entered manually accept the taxamount entered as is*/
 //			if (!isset($_POST['TaxAmount'  . $Tax->TaxCalculationOrder])) {
@@ -528,7 +528,7 @@ if (!isset($_POST['PostInvoice'])){
 
 	$_SESSION['SuppTrans']->OvAmount = round($_SESSION['SuppTrans']->OvAmount,2);
 
-	$DisplayTotal = currency_number_format(( $_SESSION['SuppTrans']->OvAmount + $TaxTotal), $_SESSION['SuppTrans']->CurrCode);
+	$DisplayTotal = locale_money_format(( $_SESSION['SuppTrans']->OvAmount + $TaxTotal), $_SESSION['SuppTrans']->CurrCode);
 
 	echo '<tr>
 			<td>' . _('Invoice Total') . ':</td>
@@ -1074,7 +1074,7 @@ then do the updates and inserts to process the invoice entered */
 																'" . $PeriodNo . "',
 																'" . $Tax->TaxGLCode . "',
 																'" . $_SESSION['SuppTrans']->SupplierID . ' - ' . _('Inv') . ' ' .
-																	 $_SESSION['SuppTrans']->SuppReference . ' ' . $Tax->TaxAuthDescription . ' ' . currency_number_format($Tax->TaxRate*100,$_SESSION['SuppTrans']->CurrCode) . '% ' . $_SESSION['SuppTrans']->CurrCode .
+																	 $_SESSION['SuppTrans']->SuppReference . ' ' . $Tax->TaxAuthDescription . ' ' . locale_money_format($Tax->TaxRate*100,$_SESSION['SuppTrans']->CurrCode) . '% ' . $_SESSION['SuppTrans']->CurrCode .
 																	 $Tax->TaxOvAmount  . ' @ ' . _('exch rate') . ' ' . $_SESSION['SuppTrans']->ExRate . "',
 																'" . round( $Tax->TaxOvAmount/ $_SESSION['SuppTrans']->ExRate,2) . "'
 															)";
@@ -1104,7 +1104,7 @@ then do the updates and inserts to process the invoice entered */
 										'" . $_SESSION['SuppTrans']->CreditorsAct .  "',
 										'" . $_SESSION['SuppTrans']->SupplierID . ' - ' . _('Inv') . ' ' .
 											 $_SESSION['SuppTrans']->SuppReference . ' ' . $_SESSION['SuppTrans']->CurrCode .
-											 currency_number_format( $_SESSION['SuppTrans']->OvAmount + $TaxTotal,$_SESSION['SuppTrans']->CurrCode)  .
+											 locale_money_format( $_SESSION['SuppTrans']->OvAmount + $TaxTotal,$_SESSION['SuppTrans']->CurrCode)  .
 											 ' @ ' . _('a rate of') . ' ' . $_SESSION['SuppTrans']->ExRate . "',
 										'" .  -round(($LocalTotal + ( $TaxTotal / $_SESSION['SuppTrans']->ExRate)),2) . "'
 									)";

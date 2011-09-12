@@ -392,7 +392,7 @@ if (!isset($_SESSION['tender']) or isset($_POST['LookupDeliveryAddress']) or $Sh
 			}
 			echo '<td>'.$LineItems->StockID.'</td>';
 			echo '<td>'.$LineItems->ItemDescription.'</td>';
-			echo '<td class="number">' . stock_number_format($LineItems->Quantity,$LineItems->DecimalPlaces).'</td>';
+			echo '<td class="number">' . locale_number_format($LineItems->Quantity,$LineItems->DecimalPlaces).'</td>';
 			echo '<td>'.$LineItems->Units.'</td>';
 			echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?DeleteItem=' . $LineItems->LineNo . '">' . _('Delete') . '</a></td></tr>';
 			echo '</tr>';
