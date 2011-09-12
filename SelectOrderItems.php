@@ -296,14 +296,12 @@ if (isset($_POST['ChangeCustomer']) AND $_POST['ChangeCustomer']!=''){
 	}
 }
 
-$msg='';
-
 if (isset($_POST['SearchCust']) AND $_SESSION['RequireCustomerSelection']==1 AND in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 
 	if (($_POST['CustKeywords']!='') AND (($_POST['CustCode']!='') OR ($_POST['CustPhone']!=''))) {
 		prnMsg( _('Customer Branch Name keywords have been used in preference to the Customer Branch Code or Branch Phone Number entered'), 'warn');
 	}
-	if (($_POST['CustCode']!='') AND ($_POST['CustPhone']!='')) {
+	elseif (($_POST['CustCode']!='') AND ($_POST['CustPhone']!='')) {
 		prnMsg(_('Customer Branch Code has been used in preference to the Customer Branch Phone Number entered'), 'warn');
 	} else {
 		if (mb_strlen($_POST['CustKeywords'])>0) {
@@ -626,31 +624,27 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' .
 	' ' . _('Enter an Order or Quotation') . ' : ' . _('Search for the Customer Branch.') . '</p>';
 	echo '<div class="page_help_text">' . _('Orders/Quotations are placed against the Customer Branch. A Customer may have several Branches.') . '</div>';
-	?>
-	<form action="<?php echo $_SERVER['PHP_SELF'] . '?identifier='.$identifier;?>" name="SelectCustomer" method="post">
-<?php
+	echo '<br /><form action="' . $_SERVER['PHP_SELF'] . '?identifier=' . $identifier . '" name="SelectCustomer" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-?>
-	<b><?php echo '<p>' . $msg; ?></p>
-	<table cellpadding="3" colspan="4" class="selection">
-	<tr>
-	<td><h5><?php echo _('Part of the Customer Branch Name'); ?>:</h5></td>
-	<td><input tabindex="1" type="text" name="CustKeywords" size="20"	maxlength="25" /></td>
-	<td><h2><b><?php echo _('OR'); ?></b></h2></td>
-	<td><h5><?php echo _('Part of the Customer Branch Code'); ?>:</h5></td>
-	<td><input tabindex="2" type="text" name="CustCode" size="15"	maxlength="18" /></td>
-	<td><h2><b><?php echo _('OR'); ?></b></h2></td>
-	<td><h5><?php echo _('Part of the Branch Phone Number'); ?>:</h5></td>
-	<td><input tabindex="3" type="text" name="CustPhone" size="15"	maxlength="18" /></td>
-	</tr>
-	</table></b>
-	<br /><div class="centre"><input tabindex="4" type="submit" name="SearchCust" value="<?php echo _('Search Now'); ?>" />
-	<input tabindex="5" type="submit" action="reset" value="<?php echo _('Reset'); ?>" /></div>
-	<?php
+
+	echo '<table cellpadding="3" class="selection">';
+	echo '<tr>';
+	echo '<td><h5>' . _('Part of the Customer Branch Name') . ':</h5></td>';
+	echo '<td><input tabindex="1" type="text" name="CustKeywords" size="20" maxlength="25" /></td>';
+	echo '<td><h2>' . _('OR') . '</h2></td>';
+	echo '<td><h5>' . _('Part of the Customer Branch Code') . ':</h5></td>';
+	echo '<td><input tabindex="2" type="text" name="CustCode" size="15" maxlength="18" /></td>';
+	echo '<td><h2>' . _('OR') . '</h2></td>';
+	echo '<td><h5>' . _('Part of the Branch Phone Number') . ':</h5></td>';
+	echo '<td><input tabindex="3" type="text" name="CustPhone" size="15" maxlength="18" /></td>';
+	echo '</tr>';
+	echo '</table>';
+   echo '<br /><div class="centre"><input tabindex="4" type="submit" name="SearchCust" value="' . _('Search Now') . '" />';
+   echo '<input tabindex="5" type="reset" value="' . _('Reset') . '" /></div>';
 
 	if (isset($result_CustSelect)) {
 
-		echo '<table cellpadding="2" colspan="7">';
+		echo '<table cellpadding="2">';
 
 		$TableHeader = '<br /><tr>
 								<th>' . _('Customer') . '</th>
@@ -769,12 +763,12 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 	if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 
-		if ($_POST['Keywords']!=='' AND $_POST['StockCode']=='') {
-			$msg='</b><div class="page_help_text">' . _('Order Item description has been used in search') . '.</div>';
-		} elseif ($_POST['StockCode']!=='' AND $_POST['Keywords']=='') {
-			$msg='</b><div class="page_help_text">' . _('Stock Code has been used in search') . '.</div>';
+		if ($_POST['Keywords']!='' AND $_POST['StockCode']=='') {
+			prnMsg ( _('Order Item description has been used in search'), 'warn' );
+		} elseif ($_POST['StockCode']!='' AND $_POST['Keywords']=='') {
+			prnMsg ( _('Stock Code has been used in search'), 'warn' );
 		} elseif ($_POST['Keywords']=='' AND $_POST['StockCode']=='') {
-			$msg='</b><div class="page_help_text">' . _('Stock Category has been used in search') . '.</div>';
+			prnMsg ( _('Stock Category has been used in search'), 'warn' );
 		}
 		if (isset($_POST['Keywords']) AND mb_strlen($_POST['Keywords'])>0) {
 			//insert wildcard characters in spaces
@@ -1598,7 +1592,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 					<input tabindex="'.($j+8).'" type="submit" value="'._('Add to Sales Order').'" /></td>';
 			echo '</table>';
 		} //end of if Frequently Ordered Items > 0
-		echo '<p><div class="centre"><b>' . $msg . '</b></div></p>';
+		
 		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ';
 		echo _('Search for Order Items') . '</p>';
 		echo '<div class="page_help_text">' . _('Search for Order Items') . _(', Searches the database for items, you can narrow the results by selecting a stock category, or just enter a partial item description or partial item code') . '.</div><br />';
