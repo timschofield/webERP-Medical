@@ -79,6 +79,7 @@ if (isset($_POST['SearchParts'])) {
 	} elseif (!$_POST['StockCode'] AND !$_POST['Keywords']) {
 		$SQL = "SELECT stockmaster.stockid,
 				stockmaster.description,
+				stockmaster.decimalplaces,
 				SUM(locstock.quantity) AS qoh,
 				stockmaster.units,
 				SUM(purchorderdetails.quantityord-purchorderdetails.quantityrecd) AS qord
@@ -196,8 +197,8 @@ if (isset($StockItemsResult)) {
 		}
 		echo '<td><input type="submit" name="SelectedStockItem" value="' . $myrow['stockid'] . '" /></td>
 				<td>' . $myrow['description'] . '</td>
-			<td class="number">' . $myrow['qoh'] . '</td>
-			<td class="number">' . $myrow['qord'] . '</td>
+			<td class="number">' . locale_number_format($myrow['qoh'], $myrow['decimalplaces']) . '</td>
+			<td class="number">' . locale_number_format($myrow['qord'], $myrow['decimalplaces']) . '</td>
 			<td>' . $myrow['units'] . '</td>
 			</tr>';
 		$j++;
@@ -386,7 +387,7 @@ else {
 			}
 			$ViewPurchOrder = $rootpath . '/PO_OrderDetails.php?OrderNo=' . $myrow['orderno'];
 			$FormatedOrderDate = ConvertSQLDate($myrow['orddate']);
-			$FormatedOrderValue = number_format($myrow['ordervalue'], 2);
+			$FormatedOrderValue = locale_money_format($myrow['ordervalue'], $myrow['currcode']);
 			/*						  View					   Supplier					Currency			   Requisition			 Order Date				 Initiator				Order Total
 			ModifyPage, $myrow["orderno"],		  $myrow["suppname"],			$myrow["currcode"],		 $myrow["requisitionno"]		$FormatedOrderDate,			 $myrow["initiator"]			 $FormatedOrderValue 			Order Status*/
 			echo '<td><a href="' . $ViewPurchOrder . '">' . $myrow['orderno'] . '</a></td>
