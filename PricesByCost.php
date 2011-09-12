@@ -36,7 +36,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 			LEFT JOIN prices
 			ON stockmaster.stockid=prices.stockid
 			WHERE stockmaster.discontinued = 0" . $Category . "
-			AND   prices.price" . $Comparator . "(stockmaster.materialcost + stockmaster.labourcost + stockmaster.overheadcost)*conversionfactor * '" . $_POST['Margin'] . "'
+			AND   prices.price" . $Comparator . "(stockmaster.materialcost + stockmaster.labourcost + stockmaster.overheadcost)*conversionfactor * '" . filter_number_input($_POST['Margin']) . "'
 			AND prices.typeabbrev ='" . $_POST['SalesType'] . "'
 			AND prices.currabrev ='" . $_POST['CurrCode'] . "'
 			AND (prices.enddate>='" . Date('Y-m-d') . "' OR prices.enddate='2030-01-01')";
@@ -63,14 +63,14 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 			if (DB_num_rows($TestExistsResult)==1){
 			//then we are updating
 				$SQLUpdate = "UPDATE prices
-									SET price = '" . $_POST['Price_' . $PriceCounter] . "'
+									SET price = '" . filter_currency_input($_POST['Price_' . $PriceCounter]) . "'
 								WHERE stockid = '" . $_POST['StockID_' . $PriceCounter] . "'
 									AND prices.typeabbrev ='" . $_POST['SalesType'] . "'
 									AND prices.currabrev ='" . $_POST['CurrCode'] . "'
 									AND prices.debtorno ='" . $_POST['DebtorNo_' . $PriceCounter] . "'
 									AND prices.branchcode ='" . $_POST['BranchCode_' . $PriceCounter] . "'
 									AND prices.units ='" . $_POST['Units_' . $PriceCounter] . "'
-									AND prices.conversionfactor ='" . $_POST['ConversionFactor_' . $PriceCounter] . "'
+									AND prices.conversionfactor ='" . filter_number_input($_POST['ConversionFactor_' . $PriceCounter]) . "'
 									AND prices.startdate<='" . date('Y-m-d') . "'";
 				$ResultUpdate = DB_query($SQLUpdate, $db);
 				if (DB_error_no($db)==0) {
@@ -94,7 +94,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 							conversionfactor
 						) VALUES (
 							'" . $_POST['StockID_' . $PriceCounter] . "',
-							'" . $_POST['Price_' . $PriceCounter] . "',
+							'" . filter_currency_input($_POST['Price_' . $PriceCounter]) . "',
 							'" . $_POST['SalesType'] . "',
 							'" . $_POST['CurrCode'] . "',
 							'" . $_POST['DebtorNo_' . $PriceCounter] . "',
@@ -102,7 +102,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 							'" . date('Y-m-d') . "',
 							'2030-01-01',
 							'" . $_POST['Units_' . $PriceCounter] . "',
-							'" . $_POST['ConversionFactor_' . $PriceCounter] . "'
+							'" . filter_number_input($_POST['ConversionFactor_' . $PriceCounter]) . "'
 						)";
 				$ResultInsert = DB_query($SQLInsert, $db);
 				if (DB_error_no($db)==0) {
@@ -211,11 +211,11 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 						<td>' . ConvertSQLDate($myrow['startdate']) . '</td>
 						<td>' . $EndDateDisplay . '</td>
 						<td>' . $myrow['units'] . '</td>
-						<td class="number">' . $myrow['conversionfactor'] . '</td>
-						<td class="number">' . number_format($Cost, 2) . '</td>
-						<td class="number">' . number_format($CurrentGP, 1) . '%</td>
-						<td class="number">' . number_format($Proposed, 2) . '</td>
-						<td><input type="text" class="number" name="Price_' . $PriceCounter . '" maxlength="14" size="10" value="' . $myrow['price'] . '" /></td>
+						<td class="number">' . locale_number_format($myrow['conversionfactor'],4) . '</td>
+						<td class="number">' . locale_money_format($Cost, $_POST['CurrCode']) . '</td>
+						<td class="number">' . locale_number_format($CurrentGP, 1) . '%</td>
+						<td class="number">' . locale_money_format($Proposed, $_POST['CurrCode']) . '</td>
+						<td><input type="text" class="number" name="Price_' . $PriceCounter . '" maxlength="14" size="10" value="' . locale_money_format($myrow['price'], $_POST['CurrCode']) . '" /></td>
 					</tr> ';
 			$PriceCounter++;
 		} //end of looping
@@ -258,7 +258,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 		$_POST['Margin']=1;
 	}
 	echo '<td>
-				<input type="text" class="number" name="Margin" maxlength="8" size="8" value="' .$_POST['Margin'] . '" /></td></tr>';
+				<input type="text" class="number" name="Margin" maxlength="8" size="8" value="' . locale_number_format($_POST['Margin'],2) . '" /></td></tr>';
 	$result = DB_query("SELECT typeabbrev, sales_type FROM salestypes ", $db);
 	echo '<tr><td>' . _('Sales Type') . '/' . _('Price List') . ':</td>
 		<td><select name="SalesType">';
