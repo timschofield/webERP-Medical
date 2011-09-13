@@ -709,12 +709,12 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 							$myrow['description'] ,
 							$myrow['supplierno'],
 							$myrow['suppname'],
-							number_format($myrow['quantityord'], $myrow['decimalplaces']) ,
+							locale_number_format($myrow['quantityord'], $myrow['decimalplaces']) ,
 							$myrow['currcode'],
-							number_format($myrow['extcost'], $_SESSION['Currencies'][$myrow['currcode']]['DecimalPlaces']) ,
+							locale_money_format($myrow['extcost'], $myrow['currcode']) ,
 							$myrow['currcode'],
-							number_format($myrow['extprice'], $_SESSION['Currencies'][$myrow['currcode']]['DecimalPlaces']) ,
-							number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) ,
+							locale_money_format($myrow['extprice'], $myrow['currcode']) ,
+							locale_number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) ,
 							$myrow['linestatus'],
 							ConvertSQLDate($myrow['deliverydate'])
 						);
@@ -774,10 +774,10 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 							$myrow['description'],
 							$myrow['supplierno'],
 							$myrow['suppname'],
-							number_format($myrow['quantityord'], $myrow['decimalplaces']) ,
-							number_format($myrow['extcost'], $_SESSION['Currencies'][$myrow['currcode']]['DecimalPlaces']) ,
-							number_format($myrow['extprice'], $_SESSION['Currencies'][$myrow['currcode']]['DecimalPlaces']) ,
-							number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) ,
+							locale_number_format($myrow['quantityord'], $myrow['decimalplaces']) ,
+							locale_money_format($myrow['extcost'], $myrow['currcode']) ,
+							locale_money_format($myrow['extprice'], $myrow['currcode']) ,
+							locale_number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) ,
 							$myrow['linestatus'],
 							ConvertSQLDate($myrow['deliverydate'])
 						);
@@ -865,17 +865,12 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 					$ViewPurchOrder = $rootpath . '/PO_Header.php?ModifyOrderNumber=' . $myrow['orderno'];
 				}
 				printf('<td><a href="' . $ViewPurchOrder . '">%s</td>
-						<td>%s</td><td class="number">%s</td><td class="number">%s</td><td class="number">%s</td><td class="number">%s</td></tr>', $myrow[$summarytype], $myrow[$description], $myrow['quantityord'], number_format($myrow['extcost'], 2) , number_format($myrow['extprice'], 2) , $myrow['qtyinvoiced'], $suppname);
+						<td>%s</td><td class="number">%s</td><td class="number">%s</td><td class="number">%s</td><td class="number">%s</td></tr>', $myrow[$summarytype], $myrow[$description], locale_number_format($myrow['quantityord'], $myrow['decimalplaces']), locale_money_format($myrow['extcost'], $myrow['currcode']) , locale_money_format($myrow['extprice'], $myrow['currcode']) , locale_number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']), $suppname);
 				$TotalQty+= $myrow['quantityord'];
 				$TotalExtCost+= $myrow['extcost'];
 				$TotalExtPrice+= $myrow['extprice'];
 				$TotalInvQty+= $myrow['qtyinvoiced'];
 			} //END WHILE LIST LOOP
-
-
-			// Print totals
-
-			printf('<tr><td>%s</td><td>%s</td><td class="number">%s</td><td class="number">%s</td><td class="number">%s</td><td class="number">%s</td></tr>', 'Totals', _('Lines - ') . $linectr, $TotalQty, number_format($TotalExtCost, 2) , number_format($TotalExtPrice, 2) , $TotalInvQty, ' ');
 		} // End of if ($_POST['ReportType']
 
 		echo '</table>';
@@ -1011,6 +1006,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 							   IF(purchorderdetails.quantityord = purchorderdetails.qtyinvoiced or
 								  purchorderdetails.completed = 1,'Completed','Open') as linestatus,
 							   suppliers.suppname,
+							   suppliers.currcode,
 							   stockmaster.decimalplaces,
 							   stockmaster.description
 							   FROM purchorderdetails
@@ -1041,6 +1037,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 							   (grns.qtyrecd * grns.stdcostunit) as extcost,
 							   IF(grns.qtyrecd - grns.quantityinv <> 0,'Open','Completed') as linestatus,
 							   suppliers.suppname,
+							   suppliers.currcode,
 							   stockmaster.decimalplaces,
 							   stockmaster.description
 							   FROM grns
@@ -1082,6 +1079,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 								   SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
 								   SUM(purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
 								   SUM(purchorderdetails.quantityord * purchorderdetails.stdcostunit) as extcost,
+								   suppliers.currcode,
 								   stockmaster.decimalplaces,
 								   stockmaster.description
 								   FROM purchorderdetails
@@ -1108,6 +1106,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 								   SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
 								   SUM(purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
 								   SUM(purchorderdetails.quantityord * purchorderdetails.stdcostunit) as extcost,
+								   suppliers.currcode,
 								   suppliers.suppname
 								   FROM purchorderdetails
 							LEFT JOIN purchorders ON purchorders.orderno=purchorderdetails.orderno
@@ -1132,6 +1131,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 								   SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
 								   SUM(purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
 								   SUM(purchorderdetails.quantityord * purchorderdetails.stdcostunit) as extcost,
+								   suppliers.currcode,
 								   suppliers.suppname
 								   FROM purchorderdetails
 							LEFT JOIN purchorders ON purchorders.orderno=purchorderdetails.orderno
@@ -1152,6 +1152,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 				}
 				elseif ($_POST['SummaryType'] == 'month') {
 					$sql = "SELECT EXTRACT(YEAR_MONTH from purchorders.orddate) as month,
+								   suppliers.currcode,
 								   CONCAT(MONTHNAME(purchorders.orddate),' ',YEAR(purchorders.orddate)) as monthname,
 								   SUM(purchorderdetails.quantityord) as quantityord,
 								   SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
@@ -1178,6 +1179,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 								   SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
 								   SUM(purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
 								   SUM(purchorderdetails.quantityord * purchorderdetails.stdcostunit) as extcost,
+								   suppliers.currcode,
 								   stockmaster.categoryid,
 								   stockcategory.categorydescription
 								   FROM purchorderdetails
@@ -1206,6 +1208,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 								   SUM(grns.quantityinv) as qtyinvoiced,
 								   SUM(grns.qtyrecd * purchorderdetails.unitprice) as extprice,
 								   SUM(grns.qtyrecd * grns.stdcostunit) as extcost,
+								   suppliers.currcode,
 								   stockmaster.description
 								   FROM grns
 							LEFT JOIN purchorderdetails ON grns.podetailitem = purchorderdetails.podetailitem
@@ -1231,6 +1234,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 								   SUM(grns.quantityinv) as qtyinvoiced,
 								   SUM(grns.qtyrecd * purchorderdetails.unitprice) as extprice,
 								   SUM(grns.qtyrecd * grns.stdcostunit) as extcost,
+								   suppliers.currcode,
 								   suppliers.suppname
 								   FROM grns
 							LEFT JOIN purchorderdetails ON grns.podetailitem = purchorderdetails.podetailitem
@@ -1256,6 +1260,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 								   SUM(grns.quantityinv) as qtyinvoiced,
 								   SUM(grns.qtyrecd * purchorderdetails.unitprice) as extprice,
 								   SUM(grns.qtyrecd * grns.stdcostunit) as extcost,
+								   suppliers.currcode,
 								   suppliers.suppname
 								   FROM grns
 							LEFT JOIN purchorderdetails ON grns.podetailitem = purchorderdetails.podetailitem
@@ -1278,6 +1283,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 				elseif ($_POST['SummaryType'] == 'month') {
 					$sql = "SELECT EXTRACT(YEAR_MONTH from purchorders.orddate) as month,
 								   CONCAT(MONTHNAME(purchorders.orddate),' ',YEAR(purchorders.orddate)) as monthname,
+								   suppliers.currcode,
 								   SUM(grns.qtyrecd) as quantityord,
 								   SUM(grns.quantityinv) as qtyinvoiced,
 								   SUM(grns.qtyrecd * purchorderdetails.unitprice) as extprice,
@@ -1302,6 +1308,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 				elseif ($_POST['SummaryType'] == 'categoryid') {
 					$sql = "SELECT stockmaster.categoryid,
 								   stockcategory.categorydescription,
+								   suppliers.currcode,
 								   SUM(grns.qtyrecd) as quantityord,
 								   SUM(grns.quantityinv) as qtyinvoiced,
 								   SUM(grns.qtyrecd * purchorderdetails.unitprice) as extprice,
@@ -1383,18 +1390,13 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 					$linectr++;
 
 					// Detail for both DateType of Order
-					fprintf($FileHandle, '"%s","%s","%s","%s","%s",%s,%s,%s,%s,"%s","%s","%s"' . "\n", $myrow['orderno'], $myrow['itemcode'], ConvertSQLDate($myrow['orddate']) , $myrow['supplierno'], $myrow['suppname'], number_format($myrow['quantityord'], $myrow['decimalplaces']) , number_format($myrow['extcost'], 2) , number_format($myrow['extprice'], 2) , number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) , $myrow['linestatus'], ConvertSQLDate($myrow['deliverydate']) , $myrow['description']);
+					fprintf($FileHandle, '"%s","%s","%s","%s","%s",%s,%s,%s,%s,"%s","%s","%s"' . "\n", $myrow['orderno'], $myrow['itemcode'], ConvertSQLDate($myrow['orddate']) , $myrow['supplierno'], $myrow['suppname'], locale_number_format($myrow['quantityord'], $myrow['decimalplaces']) , locale_money_format($myrow['extcost'], $myrow['currcode']) , locale_money_format($myrow['extprice'], $myrow['currcode']) , locale_number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) , $myrow['linestatus'], ConvertSQLDate($myrow['deliverydate']) , $myrow['description']);
 					$LastDecimalPlaces = $myrow['decimalplaces'];
 					$TotalQty+= $myrow['quantityord'];
 					$TotalExtCost+= $myrow['extcost'];
 					$TotalExtPrice+= $myrow['extprice'];
 					$TotalInvQty+= $myrow['qtyinvoiced'];
 				} //END WHILE LIST LOOP
-
-
-				// Print totals
-
-				fprintf($FileHandle, '"%s","%s","%s","%s","%s",%s,%s,%s,%s,"%s","%s"' . "\n", 'Totals', _('Lines - ') . $linectr, ' ', ' ', ' ', number_format($TotalQty, 2) , number_format($TotalExtCost, 2) , number_format($TotalExtPrice, 2) , number_format($TotalInvQty, 2) , ' ', ' ');
 			}
 			else {
 
@@ -1408,18 +1410,13 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 
 					// In sql, had to alias grns.qtyrecd as quantityord so could use same name here
 
-					fprintf($FileHandle, '"%s","%s","%s","%s","%s",%s,%s,%s,%s,"%s","%s","%s"' . "\n", $myrow['orderno'], $myrow['itemcode'], ConvertSQLDate($myrow['orddate']) , $myrow['supplierno'], $myrow['suppname'], number_format($myrow['quantityord'], $myrow['decimalplaces']) , number_format($myrow['extcost'], 2) , number_format($myrow['extprice'], 2) , number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) , $myrow['linestatus'], ConvertSQLDate($myrow['deliverydate']) , $myrow['description']);
+					fprintf($FileHandle, '"%s","%s","%s","%s","%s",%s,%s,%s,%s,"%s","%s","%s"' . "\n", $myrow['orderno'], $myrow['itemcode'], ConvertSQLDate($myrow['orddate']) , $myrow['supplierno'], $myrow['suppname'], locale_number_format($myrow['quantityord'], $myrow['decimalplaces']) , locale_money_format($myrow['extcost'], $myrow['currcode']) , locale_money_format($myrow['extprice'], $myrow['currcode']) , locale_number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) , $myrow['linestatus'], ConvertSQLDate($myrow['deliverydate']) , $myrow['description']);
 					$LastDecimalPlaces = $myrow['decimalplaces'];
 					$TotalQty+= $myrow['quantityord'];
 					$TotalExtCost+= $myrow['extcost'];
 					$TotalExtPrice+= $myrow['extprice'];
 					$TotalInvQty+= $myrow['qtyinvoiced'];
 				} //END WHILE LIST LOOP
-
-
-				// Print totals
-
-				fprintf($FileHandle, '"%s","%s","%s","%s","%s",%s,%s,%s,%s,"%s","%s"' . "\n", 'Totals', _('Lines - ') . $linectr, ' ', ' ', ' ', number_format($TotalQty, $LastDecimalPlaces) , number_format($TotalExtCost, 2) , number_format($TotalExtPrice, 2) , number_format($TotalInvQty, $LastDecimalPlaces) , " ", " ");
 			}
 		}
 		else {
@@ -1477,7 +1474,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 				if ($summarytype == 'orderno') {
 					$suppname = $myrow['suppname'];
 				}
-				fprintf($FileHandle, '"%s","%s",%s,%s,%s,%s,"%s"' . "\n", $myrow[$summarytype], $myrow[$description], number_format($myrow['quantityord'], $myrow['decimalplaces']) , number_format($myrow['extcost'], 2) , number_format($myrow['extprice'], 2) , number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) , $suppname);
+				fprintf($FileHandle, '"%s","%s",%s,%s,%s,%s,"%s"' . "\n", $myrow[$summarytype], $myrow[$description], locale_number_format($myrow['quantityord'], $myrow['decimalplaces']) , locale_money_format($myrow['extcost'], $myrow['currcode']) , locale_money_format($myrow['extprice'], $myrow['currcode']) , locale_number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) , $suppname);
 				print '<br/>';
 				$LastDecimalPlaces = $myrow['decimalplaces'];
 				$TotalQty+= $myrow['quantityord'];
@@ -1486,10 +1483,6 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 				$TotalInvQty+= $myrow['qtyinvoiced'];
 			} //END WHILE LIST LOOP
 
-
-			// Print totals
-
-			fprintf($FileHandle, '"%s","%s",%s,%s,%s,%s,"%s"' . "\n", 'Totals', _('Lines - ') . $linectr, number_format($TotalQty, $LastDecimalPlaces) , number_format($TotalExtCost, 2) , number_format($TotalExtPrice, 2) , number_format($TotalInvQty, $LastDecimalPlaces) , ' ');
 		} // End of if ($_POST['ReportType']
 
 		fclose($FileHandle);
