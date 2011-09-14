@@ -3,7 +3,7 @@
 
 include('includes/session.inc');
 
-If ((isset($_POST['PrintPDF']))
+if (isset($_POST['PrintPDF'])
 			AND isset($_POST['FromCriteria'])
 			AND mb_strlen($_POST['FromCriteria'])>=1
 			AND isset($_POST['ToCriteria'])
@@ -19,6 +19,7 @@ If ((isset($_POST['PrintPDF']))
 					suppliers.address5,
 					suppliers.address6,
 					suppliers.currcode,
+					suppliers.paymentterms,
 					supptrans.id
 			FROM supptrans INNER JOIN suppliers ON supptrans.supplierno = suppliers.supplierid
 			INNER JOIN paymentterms ON suppliers.paymentterms = paymentterms.termsindicator
@@ -95,8 +96,8 @@ If ((isset($_POST['PrintPDF']))
 			$LeftOvers = $pdf->addTextWrap($Left_Margin+5, $YPos, 80,$FontSize,$DetailTrans['typename'], 'left');
 			$LeftOvers = $pdf->addTextWrap($Left_Margin+95, $YPos, 80,$FontSize,$DisplayTranDate, 'left');
 			$LeftOvers = $pdf->addTextWrap($Left_Margin+175, $YPos, 80,$FontSize,$DetailTrans['suppreference'], 'left');
-			$LeftOvers = $pdf->addTextWrap($Left_Margin+255, $YPos, 80,$FontSize,number_format($DetailTrans['trantotal'],2), 'right');
-			$LeftOvers = $pdf->addTextWrap($Left_Margin+355, $YPos,80,$FontSize,number_format($DetailTrans['amt'],2), 'right');
+			$LeftOvers = $pdf->addTextWrap($Left_Margin+255, $YPos, 80,$FontSize,locale_money_format($DetailTrans['trantotal'],$SuppliersPaid['currcode']), 'right');
+			$LeftOvers = $pdf->addTextWrap($Left_Margin+355, $YPos,80,$FontSize,locale_money_format($DetailTrans['amt'],$SuppliersPaid['currcode']), 'right');
 			$AccumBalance += $DetailTrans['amt'];
 
 			$YPos -=$line_height;
@@ -134,9 +135,9 @@ If ((isset($_POST['PrintPDF']))
 		$DefaultToCriteria = $_POST['ToCriteria'];
 	}
 	echo '<tr><td>' . _('From Supplier Code') . ':</font></td>
-            <td><input type="text" maxlength="6" size="7 name="FromCriteria" value="' . $DefaultFromCriteria . '" /></td></tr>';
+            <td><input type="text" maxlength="6" size="7" name="FromCriteria" value="' . $DefaultFromCriteria . '" /></td></tr>';
 	echo '<tr><td>' . _('To Supplier Code') . ':</td>
-            <td><input type="text" maxlength="6" size="7" name=ToCriteria value="' . $DefaultToCriteria . '" /></td></tr>';
+            <td><input type="text" maxlength="6" size="7" name="ToCriteria" value="' . $DefaultToCriteria . '" /></td></tr>';
 
 	if (!isset($_POST['PaymentDate'])){
 		$DefaultDate = Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m')+1,0 ,Date('y')));
@@ -147,7 +148,7 @@ If ((isset($_POST['PrintPDF']))
 	echo '<tr><td>' . _('Date Of Payment') . ':</td>
             <td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="PaymentDate" maxlength="11" size="12" value="' . $DefaultDate . '" /></td></tr>';
 
-	echo '</table><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
+	echo '</table><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div></form>';
 
 	include ('includes/footer.inc');
 } /*end of else not PrintPDF */
@@ -173,7 +174,7 @@ function PaymentFooter (){
 
 	$TotalPayments += $AccumBalance;
 
-	$LeftOvers = $pdf->addTextWrap($Left_Margin+355,$YPos,80,$FontSize,number_format($AccumBalance,2), 'right');
+	$LeftOvers = $pdf->addTextWrap($Left_Margin+355,$YPos,80,$FontSize, locale_money_format($AccumBalance,$_SESSION['CompanyRecord']['currencydefault']), 'right');
 
 	$YPos -= (1.5*$line_height);
 	$pdf->line($Left_Margin, $YPos+$line_height,$Page_Width-$Right_Margin, $YPos+$line_height);
@@ -272,7 +273,7 @@ function PageHeader(){
 	$XPos = $Page_Width/2 - 60;
 	$pdf->addText($XPos, $YPos,$FontSize, _('All amounts stated in') . ' - ' . $SuppliersPaid['currcode']);
 	$YPos -= $line_height;
-	$pdf->addText($XPos, $YPos,$FontSize, $SuppliersPaid['terms']);
+	$pdf->addText($XPos, $YPos,$FontSize, $SuppliersPaid['paymentterms']);
 
 	$YPos = $Page_Height - $Top_Margin - 180;
 	//$YPos -= $line_height;
