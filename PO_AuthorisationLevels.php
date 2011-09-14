@@ -45,7 +45,7 @@ if (isset($_POST['Submit'])) {
 			'".$_POST['CurrCode']."',
 			'".$CanCreate."',
 			'".$OffHold."',
-			'".$_POST['AuthLevel']."')";
+			'".filter_currency_input($_POST['AuthLevel'])."')";
 		$ErrMsg = _('The authentication details cannot be inserted because');
 		$Result=DB_query($sql,$db,$ErrMsg);
 	} else {
@@ -68,7 +68,7 @@ if (isset($_POST['Update'])) {
 	$sql="UPDATE purchorderauth SET
 			cancreate='".$CanCreate."',
 			offhold='".$OffHold."',
-			authlevel='".$_POST['AuthLevel']."'
+			authlevel='".filter_currency_input($_POST['AuthLevel'])."'
 		WHERE userid='".$_POST['UserID']."'
 		AND currabrev='".$_POST['CurrCode']."'";
 
@@ -124,7 +124,7 @@ while ($myrow=DB_fetch_array($Result)) {
 	echo '<td>'.$myrow['currency'].'</td>';
 	echo '<td>'.$CanCreate.'</td>';
 	echo '<td>'.$OffHold.'</td>';
-	echo '<td class="number">'.number_format($myrow['authlevel'],2).'</td>';
+	echo '<td class="number">'.locale_money_format($myrow['authlevel'],$myrow['currabrev']).'</td>';
 	echo '<td><a href="'.$rootpath.'/PO_AuthorisationLevels.php?Edit=Yes&UserID=' . $myrow['userid'] . '&Currency='.$myrow['currabrev'].'">'._('Edit').'</td>';
 	echo '<td><a href="'.$rootpath.'/PO_AuthorisationLevels.php?Delete=Yes&UserID=' . $myrow['userid'] . '&Currency='.$myrow['currabrev'].'">'._('Delete').'</td></tr>';
 }
@@ -219,7 +219,7 @@ if ($OffHold=='No') {
 }
 
 echo '<tr><td>'._('User can authorise orders up to :').'</td>';
-echo '<td><input type="input" name="AuthLevel" size="11" class="number" value="'.$AuthLevel.'" /></td></tr>';
+echo '<td><input type="input" name="AuthLevel" size="11" class="number" value="'.locale_money_format($AuthLevel, $Currency).'" /></td></tr>';
 echo '</table>';
 
 if (isset($_GET['Edit'])) {
