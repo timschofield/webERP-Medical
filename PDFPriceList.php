@@ -172,7 +172,7 @@ if (isset($_POST['PrintPDF'])
 		}
 		$LeftOvers = $pdf->addTextWrap($Left_Margin+80+47,$YPos,47,$FontSize,$DisplayEndDate);
 		$LeftOvers = $pdf->addTextWrap($Left_Margin+80+47+47,$YPos,130,$FontSize,$PriceList['description']);
-		$DisplayUnitPrice = number_format($PriceList['price'],2);
+		$DisplayUnitPrice = locale_money_format($PriceList['price'],$PriceList['currabrev']);
 		$LeftOvers = $pdf->addTextWrap($Left_Margin+80+47+47+130,$YPos,200,$FontSize,$DisplayUnitPrice, 'right');
 
 		if ($PriceList['price']!=0){
