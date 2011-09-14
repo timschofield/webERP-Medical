@@ -32,7 +32,10 @@ if (isset($_POST['updateall'])) {
 
 /* Retrieve the purchase order header information
  */
-$sql="SELECT purchorders.*,
+$sql="SELECT purchorders.orderno,
+			purchorders.orddate,
+			purchorders.deliverydate,
+			purchorders.stat_comment,
 			suppliers.suppname,
 			suppliers.currcode,
 			www_users.realname,
@@ -90,9 +93,11 @@ while ($myrow=DB_fetch_array($result)) {
 		echo '<option value="Cancelled">'._('Cancelled').'</option>';
 		echo '</select></td>';
 		echo '</tr>';
-		echo '<input type="hidden" name="comment" value="'.$myrow['stat_comment'].'" />';
-		$linesql="SELECT purchorderdetails.*,
-					stockmaster.description
+		echo '<input type="hidden" name="comment" value="'.htmlentities($myrow['stat_comment']).'" />';
+		$linesql="SELECT purchorderdetails.quantityord,
+						purchorderdetails.unitprice,
+						stockmaster.description,
+						stockmaster.decimalplaces
 				FROM purchorderdetails
 				LEFT JOIN stockmaster
 				ON stockmaster.stockid=purchorderdetails.itemcode
@@ -110,10 +115,10 @@ while ($myrow=DB_fetch_array($result)) {
 		while ($linerow=DB_fetch_array($lineresult)) {
 			echo '<tr>';
 			echo '<td>'.$linerow['description'].'</td>';
-			echo '<td class="number">'.number_format($linerow['quantityord'],2).'</td>';
+			echo '<td class="number">'.locale_number_format($linerow['quantityord'],$linerow['decimalplaces']).'</td>';
 			echo '<td>'.$myrow['currcode'].'</td>';
-			echo '<td class="number">'.number_format($linerow['unitprice'],2).'</td>';
-			echo '<td class="number">'.number_format($linerow['unitprice']*$linerow['quantityord'],2).'</td>';
+			echo '<td class="number">'.locale_money_format($linerow['unitprice'],$myrow['currcode']).'</td>';
+			echo '<td class="number">'.locale_money_format($linerow['unitprice']*$linerow['quantityord'],$myrow['currcode']).'</td>';
 			echo '</tr>';
 		} // end while order line detail
 		echo '</table></td></tr>';
