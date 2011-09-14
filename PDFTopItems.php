@@ -18,6 +18,8 @@ if (($_GET['Location'] == 'All') and ($_GET['Customers'] == 'All')) {
 				SUM(salesorderdetails.qtyinvoiced) totalinvoiced,
 				SUM(salesorderdetails.qtyinvoiced * salesorderdetails.unitprice ) AS valuesales,
 				stockmaster.description,
+				stockmaster.decimalplaces,
+				debtorsmaster.currcode,
 				stockmaster.units
 			FROM 	salesorderdetails, salesorders, debtorsmaster,stockmaster
 			WHERE 	salesorderdetails.orderno = salesorders.orderno
@@ -33,6 +35,8 @@ if (($_GET['Location'] == 'All') and ($_GET['Customers'] == 'All')) {
 					SUM(salesorderdetails.qtyinvoiced) totalinvoiced,
 					SUM(salesorderdetails.qtyinvoiced * salesorderdetails.unitprice ) AS valuesales,
 					stockmaster.description,
+					stockmaster.decimalplaces,
+					debtorsmaster.currcode,
 					stockmaster.units
 				FROM 	salesorderdetails, salesorders, debtorsmaster,stockmaster
 				WHERE 	salesorderdetails.orderno = salesorders.orderno
@@ -50,6 +54,8 @@ if (($_GET['Location'] == 'All') and ($_GET['Customers'] == 'All')) {
 						SUM(salesorderdetails.qtyinvoiced) totalinvoiced,
 						SUM(salesorderdetails.qtyinvoiced * salesorderdetails.unitprice ) AS valuesales,
 						stockmaster.description,
+						stockmaster.decimalplaces,
+						debtorsmaster.currcode,
 						stockmaster.units
 					FROM 	salesorderdetails, salesorders, debtorsmaster,stockmaster
 					WHERE 	salesorderdetails.orderno = salesorders.orderno
@@ -66,6 +72,8 @@ if (($_GET['Location'] == 'All') and ($_GET['Customers'] == 'All')) {
 						SUM(salesorderdetails.qtyinvoiced) totalinvoiced,
 						SUM(salesorderdetails.qtyinvoiced * salesorderdetails.unitprice ) AS valuesales,
 						stockmaster.description,
+						stockmaster.decimalplaces,
+						debtorsmaster.currcode,
 						stockmaster.units
 					FROM 	salesorderdetails, salesorders, debtorsmaster,stockmaster
 					WHERE 	salesorderdetails.orderno = salesorders.orderno
@@ -92,10 +100,10 @@ while ($myrow = DB_fetch_array($result)) {
 	$ohRow = db_fetch_row($oh);
 	$LeftOvers = $pdf->addTextWrap($Left_Margin + 1, $YPos, 300 - $Left_Margin, $FontSize, $myrow['stkcode']);
 	$LeftOvers = $pdf->addTextWrap($Left_Margin + 100, $YPos, 270 - $Left_Margin, $FontSize, $myrow['description']);
-	$LeftOvers = $pdf->addTextWrap($Left_Margin + 330, $YPos, 30, $FontSize, $myrow['totalinvoiced'], 'right');
+	$LeftOvers = $pdf->addTextWrap($Left_Margin + 330, $YPos, 30, $FontSize, locale_number_format($myrow['totalinvoiced'], $myrow['decimalplaces']), 'right');
 	$LeftOvers = $pdf->addTextWrap($Left_Margin + 370, $YPos, 300 - $Left_Margin, $FontSize, $myrow['units'], 'left');
-	$LeftOvers = $pdf->addTextWrap($Left_Margin + 400, $YPos, 70, $FontSize, number_format($myrow['valuesales'], 2), 'right');
-	$LeftOvers = $pdf->addTextWrap($Left_Margin + 490, $YPos, 30, $FontSize, $ohRow[0], 'right');
+	$LeftOvers = $pdf->addTextWrap($Left_Margin + 400, $YPos, 70, $FontSize, locale_money_format($myrow['valuesales'], $myrow['currcode']), 'right');
+	$LeftOvers = $pdf->addTextWrap($Left_Margin + 490, $YPos, 30, $FontSize, locale_number_format($ohRow[0], $myrow['decimalplaces']), 'right');
 	if (mb_strlen($LeftOvers) > 1) {
 		$LeftOvers = $pdf->addTextWrap($Left_Margin + 1 + 94, $YPos - $line_height, 270, $FontSize, $LeftOvers, 'left');
 		$YPos-= $line_height;
