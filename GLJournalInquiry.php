@@ -11,7 +11,7 @@ if (!isset($_POST['Show'])) {
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<table class="selection">';
-	echo '<tr><th colspan="3"><font color="navy" size="2">' . _('Selection Criteria') . '</font></th></tr>';
+	echo '<tr><th colspan="3"><font color="#616161" size="2">' . _('Selection Criteria') . '</font></th></tr>';
 
 	$sql = "SELECT typeno FROM systypes WHERE typeid=0";
 	$result = DB_query($sql, $db);
@@ -86,7 +86,7 @@ if (!isset($_POST['Show'])) {
 			}
 
 			if ($myrow['typeno']!=$LastJournal) {
-				echo '<tr><td colspan="8" bgcolor="navy"></td></tr><tr>
+				echo '<tr><td colspan="8" bgcolor="#616161"></td></tr><tr>
 					<td>'. ConvertSQLDate($myrow['trandate']) . '</td>
 					<td class="number">'.$myrow['typeno'].'</td>';
 

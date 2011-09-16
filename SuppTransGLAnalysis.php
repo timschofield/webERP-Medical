@@ -134,7 +134,7 @@ foreach ( $_SESSION['SuppTrans']->GLCodes as $EnteredGLCode){
 
 echo '<tr>
 	<td colspan="2" class="number"><font size="4" color="blue">' . _('Total') . ':</font></td>
-	<td class="number"><font size="2" color="navy"><u>' . locale_money_format($TotalGLValue,$_SESSION['SuppTrans']->CurrCode) . '</u></font></td>
+	<td class="number"><font size="2" color="#616161"><u>' . locale_money_format($TotalGLValue,$_SESSION['SuppTrans']->CurrCode) . '</u></font></td>
 	</tr>
 	</table>';
 

@@ -1356,7 +1356,7 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 
 		/*FORM VARIABLES TO POST TO THE CREDIT NOTE 10 AT A TIME WITH PART CODE AND QUANTITY */
 		echo '<table class="selection">';
-		echo '<tr><th colspan="2"><font size="3" color="navy"><b>' . _('Quick Entry') . '</b></font></th></tr>';
+		echo '<tr><th colspan="2"><font size="3" color="#616161"><b>' . _('Quick Entry') . '</b></font></th></tr>';
 		echo '<tr>
 				<th>' . _('Part Code') . '</th>
 				<th>' . _('Quantity') . '</th>

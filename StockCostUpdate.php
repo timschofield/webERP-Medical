@@ -133,10 +133,10 @@ echo '<tr>
 		<th colspan="2">' . _('Item Code') . ':<input type="text" name="StockID" value="' . $StockID . '" maxlength="20" />';
 echo '<input type="submit" name="Show" value="' . _('Show Cost Details') . '" /></th></tr>';
 echo '<tr>
-		<th colspan="2"><font color="navy" size="2">' . $StockID . ' - ' . $myrow['description'] . '</font></th>
+		<th colspan="2"><font color="#616161" size="2">' . $StockID . ' - ' . $myrow['description'] . '</font></th>
 	</tr>';
 echo '<tr>
-		<th colspan="2"><font color="navy" size="2">'. _('Total Quantity On Hand') . ': ' . locale_number_format($myrow['totalqoh'], $myrow['decimalplaces']) . ' ' . $myrow['units'] .'</font></th>
+		<th colspan="2"><font color="#616161" size="2">'. _('Total Quantity On Hand') . ': ' . locale_number_format($myrow['totalqoh'], $myrow['decimalplaces']) . ' ' . $myrow['units'] .'</font></th>
 	</tr>';
 
 if (($myrow['mbflag']=='D' AND $myrow['stocktype'] != 'L')

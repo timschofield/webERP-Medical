@@ -313,7 +313,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 
 
 echo '<table cellpadding="2" colspan="7" class="selection">';
-echo '<tr><th colspan="7"><font size="2" color="navy"><b>'._('Order Line Details').'</b></font></th></tr>';
+echo '<tr><th colspan="7"><font size="2" color="#616161"><b>'._('Order Line Details').'</b></font></th></tr>';
 echo '<tr>
 		<th>'. _('Item Code') .'</th>
 		<th>'. _('Item Description') .'</th>
@@ -368,7 +368,7 @@ echo '<tr>
 	</table>';
 
 echo '<br /><table class="selection">';
-echo '<tr><th colspan="7"><font size="2" color="navy"><b>'._('Order Header Details').'</b></font></th></tr>';
+echo '<tr><th colspan="7"><font size="2" color="#616161"><b>'._('Order Header Details').'</b></font></th></tr>';
 
 echo '<tr>
 		<td>'. _('Deliver To') .':</td>

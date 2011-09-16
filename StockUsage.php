@@ -43,13 +43,13 @@ echo '<table class="selection">';
 $Its_A_KitSet_Assembly_Or_Dummy =False;
 if (($myrow[2]=='K') OR ($myrow[2]=='A') OR ($myrow[2]=='D')) {
 	$Its_A_KitSet_Assembly_Or_Dummy =True;
-	echo '<font color="navy" size="3"><b>' . $StockID - $myrow[0] . '</b></font>';
+	echo '<font color="#616161" size="3"><b>' . $StockID - $myrow[0] . '</b></font>';
 
 	echo '<br />' . _('The selected item is a dummy or assembly or kit-set item and cannot have a stock holding') . '. ' . _('Please select a different item');
 
 	$StockID = '';
 } else {
-	echo '<tr><th><font size="3" color="navy">' . _('Item') . ' :<b> ' . $StockID . ' - ' . $myrow[0] . ' </b>  (' . _('in units of') . ' :<b> ' . $myrow[1] . ')</b></font></th></tr>';
+	echo '<tr><th><font size="3" color="#616161">' . _('Item') . ' :<b> ' . $StockID . ' - ' . $myrow[0] . ' </b>  (' . _('in units of') . ' :<b> ' . $myrow[1] . ')</b></font></th></tr>';
 }
 
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post"><tr><td>';

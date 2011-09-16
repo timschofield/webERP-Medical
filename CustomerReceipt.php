@@ -934,7 +934,7 @@ if (isset($_SESSION['CustomerRecord'])
 if (isset($_POST['GLEntry']) AND isset($_SESSION['ReceiptBatch'])){
 /* Set up a heading for the transaction entry for a GL Receipt */
 	echo '<br /><table class="selection">';
-	echo '<th colspan="2"><font size="2" color="navy">' . _('General Ledger Receipt Entry') . '</font></th>';
+	echo '<th colspan="2"><font size="2" color="#616161">' . _('General Ledger Receipt Entry') . '</font></th>';
 
 	//Select the tag
 	echo '<tr><td>' . _('Select Tag') . ':</td><td><select name="tag">';

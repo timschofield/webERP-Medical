@@ -220,7 +220,7 @@ if (!isset($_SESSION['tender']) or isset($_POST['LookupDeliveryAddress']) or $Sh
 	echo '<form name="form1" action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection">';
-	echo '<tr><th colspan="4"><font size="3" color="navy">' . _('Tender header details') . '</font></th></tr>';
+	echo '<tr><th colspan="4"><font size="3" color="#616161">' . _('Tender header details') . '</font></th></tr>';
 	echo '<tr><td>' . _('Delivery Must Be Made Before') . '</td>';
 	echo '<td><input type="text" class="date" alt="' .$_SESSION['DefaultDateFormat'] . '" name="RequiredByDate" size="11" value="' . date($_SESSION['DefaultDateFormat']) . '" /></td></tr>';
 
@@ -361,7 +361,7 @@ if (!isset($_SESSION['tender']) or isset($_POST['LookupDeliveryAddress']) or $Sh
 	/* Supplier Details
 	 */
 	echo '<tr><td valign="top"><table class="selection">';
-	echo '<tr><th colspan="4"><font size="3" color="navy">' . _('Suppliers To Send Tender') . '</font></th></tr>';
+	echo '<tr><th colspan="4"><font size="3" color="#616161">' . _('Suppliers To Send Tender') . '</font></th></tr>';
 	echo '<tr><th>'. _('Supplier Code') . '</th><th>' ._('Supplier Name') . '</th><th>' ._('Email Address') . '</th></tr>';
 	foreach ($_SESSION['tender']->Suppliers as $Supplier) {
 		echo '<tr><td>' . $Supplier->SupplierCode . '</td>';
@@ -373,7 +373,7 @@ if (!isset($_SESSION['tender']) or isset($_POST['LookupDeliveryAddress']) or $Sh
 	/* Item Details
 	 */
 	echo '<td valign="top"><table class="selection">';
-	echo '<tr><th colspan="6"><font size="3" color="navy">' . _('Items in Tender') . '</font></th></tr>';
+	echo '<tr><th colspan="6"><font size="3" color="#616161">' . _('Items in Tender') . '</font></th></tr>';
 	echo '<tr>';
 	echo '<th>'._('Stock ID').'</th>';
 	echo '<th>'._('Description').'</th>';

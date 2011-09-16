@@ -466,7 +466,7 @@ if (!isset($StockID)) {
 	$result1 = DB_query($SQL,$db);
 
 	echo '<br /><table class="selection">';
-	echo '<tr><th colspan="6"><font size="3" color="navy">' . _('To search for sales orders for a specific part use the part selection facilities below');
+	echo '<tr><th colspan="6"><font size="3" color="#616161">' . _('To search for sales orders for a specific part use the part selection facilities below');
 	echo '</th></tr>';
 	echo '<tr>
       		<td><font size="1">' . _('Select a stock category') . ':</font>

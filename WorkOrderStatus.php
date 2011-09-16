@@ -79,8 +79,8 @@ include('includes/header.inc');
 		echo '</td></tr></table><br />';
 
 		//set up options for selection of the item to be issued to the WO
-		echo '<table class="selection"><tr><th colspan="5"><font size="2" color="navy">' . _('Material Requirements For this Work Order') . '</font></th></tr>';
-		echo '<tr><th colspan="4"><font size="2" color="navy">' . _('Stock Issued From') . ' - ' . $LocRow['locationname'] . '</font></th></tr>';
+		echo '<table class="selection"><tr><th colspan="5"><font size="2" color="#616161">' . _('Material Requirements For this Work Order') . '</font></th></tr>';
+		echo '<tr><th colspan="4"><font size="2" color="#616161">' . _('Stock Issued From') . ' - ' . $LocRow['locationname'] . '</font></th></tr>';
 		echo '<tr><th colspan="2">' . _('Item') . '</th>
 				<th>' . _('Qty Required') . '</th>
 				<th>' . _('Qty Issued') . '</th>

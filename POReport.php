@@ -630,7 +630,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 		else {
 			$SortBy_Display = $Detail_Array[$_POST['SortBy']];
 		}
-		echo '<tr><th colspan="2"><font size="3" color="navy">' . _('Header Details') . '</font></th></tr>';
+		echo '<tr><th colspan="2"><font size="3" color="#616161">' . _('Header Details') . '</font></th></tr>';
 		echo '<tr><td>' . _('Purchase Order Report') . '</td><td>' . $_POST['ReportType'] . ' By ' . $SortBy_Display . '</td></tr>';
 		echo '<tr><td>' . _('Date Type') . '</td><td>' . $_POST['DateType'] . '</tr>';
 		echo '<tr><td>' . _('Date Range') . '</td><td>' . $_POST['FromDate'] . _(' To ') . $_POST['ToDate'] . '</td></tr>';

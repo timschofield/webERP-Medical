@@ -376,7 +376,7 @@ if (count($_SESSION['Shipment']->LineItems)>0){
 	/* Always display all shipment lines */
 
 	echo '<br /><table cellpadding="2" colspan="7" class="selection">';
-	echo '<tr><th colspan="9"><font color="navy" size="3">'. _('Order Lines On This Shipment'). '</font></th></tr>';
+	echo '<tr><th colspan="9"><font color="#616161" size="3">'. _('Order Lines On This Shipment'). '</font></th></tr>';
 
 	$TableHeader = '<tr>
 			<th>'. _('Order'). '</th>
@@ -456,7 +456,7 @@ $result = DB_query($sql,$db);
 if (DB_num_rows($result)>0){
 
 	echo '<table cellpadding="2" colspan="7" class="selection">';
-	echo '<tr><th colspan="7"><font color="navy" size="3">'. _('Possible Order Lines To Add To This Shipment').'</font></th></tr>';
+	echo '<tr><th colspan="7"><font color="#616161" size="3">'. _('Possible Order Lines To Add To This Shipment').'</font></th></tr>';
 
 	$TableHeader = '<tr>
 			<th>'. _('Order').'</th>

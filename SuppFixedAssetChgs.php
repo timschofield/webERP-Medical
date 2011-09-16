@@ -89,8 +89,8 @@ foreach ($_SESSION['SuppTrans']->Assets as $EnteredAsset){
 }
 
 echo '<tr>
-	<td class="number"><font size="2" color="navy">' . _('Total') . ':</font></td>
-	<td class="number"><font size="2" color="navy"><U>' . locale_money_format($TotalAssetValue,$_SESSION['SuppTrans']->CurrCode) . '</U></font></td>
+	<td class="number"><font size="2" color="#616161">' . _('Total') . ':</font></td>
+	<td class="number"><font size="2" color="#616161"><U>' . locale_money_format($TotalAssetValue,$_SESSION['SuppTrans']->CurrCode) . '</U></font></td>
 </tr>
 </table><br />';
 

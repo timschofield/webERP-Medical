@@ -44,12 +44,12 @@ a {
 	font-size: 100%;
 	font-weight: normal;
 	text-decoration: none;
-	color: #00f;
+	color: #676774;
 }
 
 /*links on any screen except quick menu which is overridden when mouse is hovering over them */
 a:hover {
-	color: #00a;
+	color: #000;
 	text-decoration: underline;
 }
 
@@ -60,7 +60,7 @@ table {
 
 th {
 	font-weight: normal;
-	background-color: #cccce5;
+	background-color: #C3C3C3;
 	font-size: 100%;
 	color: #300;
 	text-align: center;
@@ -618,7 +618,7 @@ p.page_title_text {
         font-weight: bold;
         font-size: 150%;
         color: white;
-        background-color: #B0B0D5;
+        background-color: #7A7A89;
         width: 33%;
         border-style: solid;
         border-width: 1px;

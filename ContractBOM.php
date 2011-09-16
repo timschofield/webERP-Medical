@@ -232,7 +232,7 @@ if (count($_SESSION['Contract'.$identifier]->ContractBOM)>0){
 	echo '<table cellpadding="2" class="selection">';
 
 	if (isset($_SESSION['Contract'.$identifier]->ContractRef)) {
-		echo  '<tr><th colspan="7"><font color="navy" size="2">' . _('Contract Reference:') .' '. $_SESSION['Contract'.$identifier]->ContractRef.'</font></th></tr>';
+		echo  '<tr><th colspan="7"><font color="#616161" size="2">' . _('Contract Reference:') .' '. $_SESSION['Contract'.$identifier]->ContractRef.'</font></th></tr>';
 	}
 
 	echo '<tr>

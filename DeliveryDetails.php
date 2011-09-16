@@ -810,9 +810,9 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 
 	echo '<table cellpading="2" class="selection">';
 	if ($_SESSION['Items'.$identifier]->Quotation==1){
-		echo '<tr><th colspan="7"><font size="2" color="navy">'._('Quotation Summary').'</font></th></tr>';
+		echo '<tr><th colspan="7"><font size="2" color="#616161">'._('Quotation Summary').'</font></th></tr>';
 	} else {
-		echo '<tr><th colspan="7"><font size="2" color="navy">'._('Order Summary').'</font></th></tr>';
+		echo '<tr><th colspan="7"><font size="2" color="#616161">'._('Order Summary').'</font></th></tr>';
 	}
 	echo '<tr>
 			<th>'. _('Item Code') .'</th>
@@ -939,7 +939,7 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 }
 
 echo '<br /><table  class="selection">';
-echo '<tr><th colspan="2"><font color="navy" size="3">'._('Delivery Details').'</font></th></tr>';
+echo '<tr><th colspan="2"><font color="#616161" size="3">'._('Delivery Details').'</font></th></tr>';
 echo '<tr>
 		<td>'. _('Deliver To') .':</td>
 		<td><input type="text" size="42" maxlength="40" name="DeliverTo" value="' . $_SESSION['Items'.$identifier]->DeliverTo . '" /></td>

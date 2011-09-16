@@ -104,7 +104,7 @@ if (isset($_POST['Process'])) {
 		}
 	}
 	echo '</td>';
-	echo '<th colspan="8" style="vertical-align:top"><font size="2" color="navy">' . _('Tender Number') . ': ' .$_SESSION['offer']->TenderID . '</font></th>';
+	echo '<th colspan="8" style="vertical-align:top"><font size="2" color="#616161">' . _('Tender Number') . ': ' .$_SESSION['offer']->TenderID . '</font></th>';
 	echo '<input type="hidden" value="' . $_SESSION['offer']->TenderID . '" name="Tender" />';
 	echo '<tr><th>' . stripslashes($_SESSION['CompanyRecord']['coyname']) . '<br />' . _('Item Code') . '</th>';
 	echo '<th>' . _('Item Description') . '</th>';
@@ -416,7 +416,7 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==3 and !isset($_POST['S
 			ORDER BY tendersuppliers.tenderid";
 	$result=DB_query($sql, $db);
 	echo '<table class="selection">';
-	echo '<tr><th colspan="13"><font size="3" color="navy">' . _('Outstanding Tenders Waiting For Offer') . '</font></th></tr>';
+	echo '<tr><th colspan="13"><font size="3" color="#616161">' . _('Outstanding Tenders Waiting For Offer') . '</font></th></tr>';
 	while ($myrow=DB_fetch_row($result)) {
 		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -444,7 +444,7 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==3 and !isset($_POST['S
 			}
 		}
 		echo '</td>';
-		echo '<th colspan="8" style="vertical-align:top"><font size="2" color="navy">' . _('Tender Number') . ': ' .$myrow[0] . '</font></th>';
+		echo '<th colspan="8" style="vertical-align:top"><font size="2" color="#616161">' . _('Tender Number') . ': ' .$myrow[0] . '</font></th>';
 		echo '<input type="hidden" value="' . $myrow[0] . '" name="Tender" />';
 		echo '<th><input type="submit" value="' . _('Process') . "\n" . _('Tender') . '" name="Process" /></th></tr>';
 		$ItemSQL="SELECT tenderitems.tenderid,

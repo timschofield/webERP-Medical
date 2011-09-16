@@ -511,7 +511,7 @@ class PHPlot {
                 'DimGrey'        => array(105, 105, 105),
                 'gray'           => array(190, 190, 190),
                 'grey'           => array(190, 190, 190),
-                'navy'           => array(  0,   0, 128),
+                '#616161'           => array(  0,   0, 128),
                 'SlateBlue'      => array(106,  90, 205),
                 'blue'           => array(  0,   0, 255),
                 'SkyBlue'        => array(135, 206, 235),

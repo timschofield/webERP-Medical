@@ -228,7 +228,7 @@ echo '<table class="selection">';
 if (DB_num_rows($result) == 0) {
 	echo '<tr><td>' . _('There are no default prices set up for this part in this currency') . '</td></tr>';
 } else {
-	echo '<tr><th colspan="6"><font color="navy" size="2">' . _('Normal Price') . '</font></th></tr>';
+	echo '<tr><th colspan="6"><font color="#616161" size="2">' . _('Normal Price') . '</font></th></tr>';
 	echo '<tr><th>' . _('Price') . '</th>
 				<th>' . _('UOM'). '</th>
 				<th>' . _('Conversion') . '<br />'._('Factor') . '</th>
@@ -281,7 +281,7 @@ $DbgMsg = _('The SQL used to retrieve these records was');
 $result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
 echo '<table class="selection">';
-echo '<tr><th colspan="9"><font color="navy" size="2">' . _('Special Prices') . '</font></th></tr>';
+echo '<tr><th colspan="9"><font color="#616161" size="2">' . _('Special Prices') . '</font></th></tr>';
 
 if (DB_num_rows($result) == 0) {
 	echo '<tr><td>' . _('There are no special prices set up for this part') . '</td></tr>';

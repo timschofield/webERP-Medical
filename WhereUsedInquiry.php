@@ -26,7 +26,7 @@ if (isset($StockID)){
 		include('includes/footer.inc');
 		exit;
 	}
-	echo '<br /><font color="navy" size="3"><b>'.$StockID - $myrow[0] .'</b>  (' . _('in units of') . ' ' . $myrow[1] . ')</font>';
+	echo '<br /><font color="#616161" size="3"><b>'.$StockID - $myrow[0] .'</b>  (' . _('in units of') . ' ' . $myrow[1] . ')</font>';
 }
 
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post"><div class="centre">';
