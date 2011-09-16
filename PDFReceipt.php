@@ -10,14 +10,10 @@ $pdf->addInfo('Title', _('Sales Receipt') );
 
 $PageNumber=1;
 $line_height=17;
-if ($PageNumber>1){
-	$pdf->newPage();
-}
-
 $FontSize=16;
 $YPos= $Page_Height-$Top_Margin;
 $XPos=0;
-$pdf->addJpegFromFile($_SESSION['LogoFile'] ,$XPos,$YPos,0,30);
+$pdf->addJpegFromFile($_SESSION['LogoFile'] ,$XPos,$YPos-30,0,60);
 
 $sql="SELECT locationname, deladd1 FROM locations WHERE loccode='".$_SESSION['UserStockLocation']."'";
 $result=DB_query($sql, $db);
@@ -31,8 +27,8 @@ $LeftOvers = $pdf->addTextWrap(0,$YPos-($line_height*7),300,$FontSize,$_SESSION[
 $LeftOvers = $pdf->addTextWrap(0,$YPos-($line_height*8),300,$FontSize,$_SESSION['CompanyRecord']['regoffice5']);
 $LeftOvers = $pdf->addTextWrap(0,$YPos-($line_height*9),300,$FontSize,$_SESSION['CompanyRecord']['regoffice6']);
 $LeftOvers = $pdf->addTextWrap(0,$YPos-($line_height*10),150,$FontSize, _('Customer Receipt Number ').'  : ' . $_GET['FromTransNo'] );
-//$LeftOvers = $pdf->addTextWrap(0,$YPos-($line_height*14),140,$FontSize, _('Printed').': ' . Date($_SESSION['DefaultDateFormat']) . '   '. _('Page'). ' ' . $PageNumber);
-$NameYPos=$YPos-($line_height*11);
+$LeftOvers = $pdf->addTextWrap(0,$YPos-($line_height*12),140,$FontSize, _('Cashier').': ' . $_SESSION['UsersRealName'] );
+$NameYPos=$YPos-($line_height*13);
 $sql="SELECT MIN(id) as start FROM debtortrans WHERE type=10 AND transno='".$_GET['FromTransNo']. "'";
 $result=DB_query($sql, $db);
 $myrow=DB_fetch_array($result);
@@ -88,7 +84,7 @@ $pdf->line(20, $YPos+$line_height,$Page_Width-$Right_Margin, $YPos+$line_height)
 $FontSize=16;
 $YPos -= (1.5 * $line_height);
 
-$PageNumber++;
+//$PageNumber++;
 
 $sql="SELECT currency,
 						decimalplaces
@@ -118,7 +114,7 @@ $myrow=DB_fetch_array($result);
 
 $LeftOvers = $pdf->addTextWrap(0,$NameYPos,300,$FontSize,_('Received From').' : ');
 
-$LeftOvers = $pdf->addTextWrap(110,$NameYPos,300,$FontSize, htmlspecialchars_decode($myrow['name']));
+$LeftOvers = $pdf->addTextWrap(110,$NameYPos,300,$FontSize, $DebtorNo.' '.htmlspecialchars_decode($myrow['name']));
 /*
 $LeftOvers = $pdf->addTextWrap(150,$YPos-($line_height*1),300,$FontSize, htmlspecialchars_decode($myrow['address1']));
 $LeftOvers = $pdf->addTextWrap(150,$YPos-($line_height*2),300,$FontSize, htmlspecialchars_decode($myrow['address2']));
@@ -131,6 +127,13 @@ $YPos=$YPos-($line_height*8);
 */
 if ($Type!=12) {
 	while ($mylines=DB_fetch_array($MyOrderResult)) {
+		if ($PageNumber>1){
+			$pdf->newPage();
+			$YPos= $Page_Height-$Top_Margin;
+			$XPos=0;
+			$PageNumber=1;
+		}
+
 		$YPos=$YPos-($line_height);
 //		$LeftOvers = $pdf->addTextWrap(20,$YPos,300,$FontSize, htmlspecialchars_decode($mylines['stkcode']));
 		$LeftOvers = $pdf->addTextWrap(0,$YPos,300,$FontSize, htmlspecialchars_decode($mylines['description']));
@@ -139,6 +142,9 @@ if ($Type!=12) {
 //		$LeftOvers = $pdf->addTextWrap(180,$YPos,300,$FontSize, htmlspecialchars_decode($mylines['unitprice']));
 		$LeftOvers = $pdf->addTextWrap(100,$YPos,300,$FontSize, number_format($mylines['quantity']*$mylines['unitprice'],0).' '.$myrow['currcode']);
 		$YPos=$YPos-($line_height);
+		if ($YPos<=0) {
+			$PageNumber++;
+		}
 	}
 } else {
 		$YPos=$YPos-($line_height);
