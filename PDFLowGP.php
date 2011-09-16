@@ -38,7 +38,8 @@ if (isset($_POST['PrintPDF'])) {
 						stockmoves.branchcode,
 						stockmoves.price*(1-stockmoves.discountpercent) as sellingprice,
 						(stockmoves.price*(1-stockmoves.discountpercent)) - (stockmaster.materialcost + stockmaster.labourcost + stockmaster.overheadcost) AS gp,
-						debtorsmaster.name
+						debtorsmaster.name,
+						debtorsmaster.currcode
 				FROM stockmaster,
 						stockmoves,
 						systypes,
@@ -47,7 +48,7 @@ if (isset($_POST['PrintPDF'])) {
 				AND stockmaster.stockid=stockmoves.stockid
 				AND stockmoves.trandate >= '" . FormatDateForSQL($_POST['FromDate']) . "'
 				AND stockmoves.trandate <= '" . FormatDateForSQL($_POST['ToDate']) . "'
-				AND ((stockmoves.price*(1-stockmoves.discountpercent)) - (stockmaster.materialcost + stockmaster.labourcost + stockmaster.overheadcost))/(stockmoves.price*(1-stockmoves.discountpercent)) <=" . ($_POST['GPMin']/100) . "
+				AND ((stockmoves.price*(1-stockmoves.discountpercent)) - (stockmaster.materialcost + stockmaster.labourcost + stockmaster.overheadcost))/(stockmoves.price*(1-stockmoves.discountpercent)) <=" . (filter_number_input($_POST['GPMin']/100)) . "
 				AND stockmoves.debtorno=debtorsmaster.debtorno
 				ORDER BY stockmaster.stockid";
 
@@ -90,10 +91,10 @@ if (isset($_POST['PrintPDF'])) {
 		$LeftOvers = $pdf->addTextWrap(100,$YPos,30,$FontSize,$LowGPItems['transno']);
 		$LeftOvers = $pdf->addTextWrap(130,$YPos,50,$FontSize,$LowGPItems['stockid']);
 		$LeftOvers = $pdf->addTextWrap(220,$YPos,50,$FontSize,$LowGPItems['name']);
-		$DisplayUnitCost = number_format($LowGPItems['unitcost'],2);
-		$DisplaySellingPrice = number_format($LowGPItems['sellingprice'],2);
-		$DisplayGP = number_format($LowGPItems['gp'],2);
-		$DisplayGPPercent = number_format(($LowGPItems['gp']*100)/$LowGPItems['sellingprice'],1);
+		$DisplayUnitCost = locale_money_format($LowGPItems['unitcost'],$LowGPItems['currcode']);
+		$DisplaySellingPrice = locale_money_format($LowGPItems['sellingprice'],$LowGPItems['currcode']);
+		$DisplayGP = locale_money_format($LowGPItems['gp'],$LowGPItems['currcode']);
+		$DisplayGPPercent = locale_money_format(($LowGPItems['gp']*100)/$LowGPItems['sellingprice'],$LowGPItems['currcode']);
 
 		$LeftOvers = $pdf->addTextWrap(330,$YPos,60,$FontSize,$DisplaySellingPrice,'right');
 		$LeftOvers = $pdf->addTextWrap(380,$YPos,62,$FontSize,$DisplayUnitCost, 'right');
@@ -136,8 +137,8 @@ if (isset($_POST['PrintPDF'])) {
 								<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="ToDate" size="10" maxlength="10" value="' . $_POST['ToDate'] . '" /></td>
 						</tr>';
 
-		echo '<tr><td>' . _('Show sales with GP') . '%' . _('below') . ':</td>
-								<td><input type="text" class="number" name="GPMin" maxlength="3" size="3" value="' . $_POST['GPMin'] . '" /></td>
+		echo '<tr><td>' . _('Show sales with GP') . ' % ' . _('below') . ':</td>
+								<td><input type="text" class="number" name="GPMin" maxlength="6" size="6" value="' . locale_number_format($_POST['GPMin'],2) . '" />&nbsp;%</td>
 						</tr>';
 
 		echo '</table><br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
