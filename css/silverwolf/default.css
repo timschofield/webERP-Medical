@@ -44,7 +44,7 @@ a {
 	font-size: 100%;
 	font-weight: normal;
 	text-decoration: none;
-	color: #676774;
+	color: #5B5B68;
 }
 
 /*links on any screen except quick menu which is overridden when mouse is hovering over them */
@@ -525,7 +525,7 @@ End Merge */
 }
 
 .main_menu_selected {
-	background: #aaa url(images/menu_bg_blue.png) 0px -10px repeat-x;
+	background: #241D1D;
 	border: 1px solid #888;
 /*	position: relative; it's not a div but a table */
 	text-align: center;
@@ -537,11 +537,11 @@ End Merge */
 .main_menu_selected:hover { } */
 
 .main_menu_selected a {
-	color: #00F;
+	color: #ddd;
 }
 
 .main_menu_selected a:hover {
-	color: #000;
+	color: #ffe;
 	text-decoration: none;
 }
 
@@ -606,7 +606,7 @@ span.main_menu_nolink {
 }
 
 .menu_group_item p {
-	color: #00f; /* This is the color for bullets, I like it to be the same as the anchor color, but it's up to you */
+	color: #000; /* This is the color for bullets, I like it to be the same as the anchor color, but it's up to you */
 	text-indent: -11px; /* this makes the bullet to appear as the li tag previously used */
 	margin: 0 0 0 12px; /* One thing that I didn´t like of the li was that it had no left margin applied */
 }

@@ -77,7 +77,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 	echo '<table width="90%" class="selection"><tr><th colspan="3"><img src="' . $rootpath . '/css/' . $theme . '/images/inventory.png" title="' . _('Inventory') . '" alt="" /><b>' . ' ' . $StockID . ' - ' . $myrow['description'] . ' ' . $ItemStatus . '</b></th></tr>';
 	echo '<tr><td width="40%" valign="top">
 			<table align="left">'; //nested table
-	echo '<tr><th class="number">' . _('Item Type:') . '</th>
+	echo '<tr><th style="text-align:right;">' . _('Item Type:') . '</th>
 			<td colspan="2" class="select">';
 	switch ($myrow['mbflag']) {
 		case 'A':
@@ -104,7 +104,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 			echo _('Manufactured Item');
 		break;
 	}
-	echo '</td><th class="number">' . _('Control Level:') . '</th><td class="select">';
+	echo '</td><th style="text-align:right;">' . _('Control Level:') . '</th><td class="select">';
 	if ($myrow['serialised'] == 1) {
 		echo _('serialised');
 	} elseif ($myrow['controlled'] == 1) {
@@ -112,13 +112,13 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 	} else {
 		echo _('N/A');
 	}
-	echo '</td><th class="number">' . _('Units') . ':</th>
+	echo '</td><th style="text-align:right;">' . _('Units') . ':</th>
 			<td class="select">' . $myrow['units'] . '</td></tr>';
-	echo '<tr><th class="number">' . _('Volume') . ':</th>
+	echo '<tr><th style="text-align:right;">' . _('Volume') . ':</th>
 			<td class="select" colspan="2">' . locale_number_format($myrow['volume'], 3) . '</td>
-			<th class="number">' . _('Weight') . ':</th>
+			<th style="text-align:right;">' . _('Weight') . ':</th>
 			<td class="select">' . locale_number_format($myrow['kgs'], 3) . '</td>
-			<th class="number">' . _('EOQ') . ':</th>
+			<th style="text-align:right;">' . _('EOQ') . ':</th>
 			<td class="select">' . locale_number_format($myrow['eoq'], $myrow['decimalplaces']) . '</td></tr>';
 	if (in_array($PricesSecurity, $_SESSION['AllowedPageSecurityTokens']) OR !isset($PricesSecurity)) {
 		echo '<tr><th colspan="2">' . _('Sell Price') . ':</th>
@@ -150,7 +150,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 			$PriceRow = DB_fetch_array($PriceResult);
 			$Price = $PriceRow['price'];
 			echo $PriceRow['typeabbrev'] . '</td><td class="select">' . locale_money_format($Price, $PriceRow['currabrev']) . '</td>
-				<th class="number">' . _('Gross Profit') . '</th>
+				<th style="text-align:right;">' . _('Gross Profit') . '</th>
 				<td class="select">';
 			if ($Price > 0) {
 				$GP = locale_money_format(($Price - $Cost) * 100 / $Price, $PriceRow['currabrev']);
@@ -163,7 +163,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 				echo '<tr><td></td>
 						<td class="select">' . $PriceRow['typeabbrev'] . '</td>
 						<td class="select">' . locale_money_format($Price, $PriceRow['currabrev']) . '</td>
-						<th class="number">' . _('Gross Profit') . '</th>
+						<th style="text-align:right;">' . _('Gross Profit') . '</th>
 						<td class="select">';
 				if ($Price > 0) {
 					$GP = locale_money_format(($Price - $Cost) * 100 / $Price, $PriceRow['currabrev']);
@@ -187,7 +187,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 		} else {
 			$Cost = $myrow['cost'];
 		}
-		echo '<th class="number">' . _('Cost') . '</th>
+		echo '<th style="text-align:right;">' . _('Cost') . '</th>
 				<td class="select">' . locale_money_format($Cost, $_SESSION['CompanyRecord']['currencydefault']) . '</td>';
 	} //end of if PricesSecuirty allows viewing of prices
 	echo '</table>'; //end of first nested table
@@ -332,11 +332,11 @@ if (DB_num_rows($DemandResult) == 1) {
 		$DemandRow = DB_fetch_row($DemandResult);
 		$Demand+= $DemandRow[0];
 }
-echo '<tr><th class="number" width="15%">' . _('Quantity On Hand') . ':</th>
+echo '<tr><th style="text-align:right;" width="15%">' . _('Quantity On Hand') . ':</th>
 		<td width="17%" class="select">' . $QOH . '</td></tr>';
-echo '<tr><th class="number" width="15%">' . _('Quantity Demand') . ':</th>
+echo '<tr><th style="text-align:right;" width="15%">' . _('Quantity Demand') . ':</th>
 		<td width="17%" class="select">' . locale_number_format($Demand, $myrow['decimalplaces']) . '</td></tr>';
-echo '<tr><th class="number" width="15%">' . _('Quantity On Order') . ':</th>
+echo '<tr><th style="text-align:right;" width="15%">' . _('Quantity On Order') . ':</th>
 		<td width="17%" class="select">' . $QOO . '</td></tr>
 				</table>'; //end of nested table
 echo '</td>'; //end cell of master table
