@@ -253,7 +253,7 @@ if (isset($_POST['PrintPDF'])){
 	$Area ='';
 	$SalesPerson='';
 
-	While ($Customers = DB_fetch_array($CustomersResult,$db)){
+	while ($Customers = DB_fetch_array($CustomersResult,$db)){
 
 		if ($_POST['Activity']!='All'){
 
