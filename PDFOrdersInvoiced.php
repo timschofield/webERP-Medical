@@ -100,6 +100,7 @@ if ($_POST['CategoryID']=='All' AND $_POST['Location']=='All'){
 				  stockmaster.units,
 				  stockmaster.decimalplaces,
 				  debtorsmaster.name,
+				  debtorsmaster.currcode,
 				  custbranch.brname,
 				  locations.locationname,
 				  SUM(salesorderdetails.quantity) AS totqty,
@@ -144,6 +145,7 @@ if ($_POST['CategoryID']=='All' AND $_POST['Location']=='All'){
 				  stockmaster.units,
 				  stockmaster.decimalplaces,
 				  debtorsmaster.name,
+				  debtorsmaster.currcode,
 				  custbranch.brname,
 				  locations.locationname,
 				  SUM(salesorderdetails.quantity) AS totqty,
@@ -188,6 +190,7 @@ if ($_POST['CategoryID']=='All' AND $_POST['Location']=='All'){
 				  stockmaster.units,
 				  stockmaster.decimalplaces,
 				  debtorsmaster.name,
+				  debtorsmaster.currcode,
 				  custbranch.brname,
 				  locations.locationname,
 				  SUM(salesorderdetails.quantity) AS totqty,
@@ -231,6 +234,7 @@ if ($_POST['CategoryID']=='All' AND $_POST['Location']=='All'){
 				  stockmaster.units,
 				  stockmaster.decimalplaces,
 				  debtorsmaster.name,
+				  debtorsmaster.currcode,
 				  custbranch.brname,
 				  locations.locationname,
 				  SUM(salesorderdetails.quantity) AS totqty,
@@ -296,7 +300,7 @@ while ($myrow=DB_fetch_array($Result)){
 	if($OrderNo != $myrow['orderno']){
 		if ($AccumOrderTotal !=0){
 			$LeftOvers = $pdf->addTextWrap($Left_Margin+250,$YPos,120,$FontSize,_('Total Invoiced for order') . ' ' . $OrderNo , 'left');
-			$LeftOvers = $pdf->addTextWrap($Left_Margin+360,$YPos,80,$FontSize,number_format($AccumOrderTotal,2), 'right');
+			$LeftOvers = $pdf->addTextWrap($Left_Margin+360,$YPos,80,$FontSize,locale_money_format($AccumOrderTotal,$myrow['currcode']), 'right');
 			$YPos -= ($line_height);
 			$AccumOrderTotal =0;
 		}
@@ -360,11 +364,11 @@ while ($myrow=DB_fetch_array($Result)){
 
 	$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,60,$FontSize,$myrow['stkcode'], 'left');
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+60,$YPos,120,$FontSize,$myrow['description'], 'left');
-	$LeftOvers = $pdf->addTextWrap($Left_Margin+180,$YPos,60,$FontSize,number_format($myrow['totqty'],$myrow['decimalplaces']), 'right');
-	$LeftOvers = $pdf->addTextWrap($Left_Margin+240,$YPos,60,$FontSize,number_format($myrow['totqtyinvoiced'],$myrow['decimalplaces']), 'right');
+	$LeftOvers = $pdf->addTextWrap($Left_Margin+180,$YPos,60,$FontSize,locale_number_format($myrow['totqty'],$myrow['decimalplaces']), 'right');
+	$LeftOvers = $pdf->addTextWrap($Left_Margin+240,$YPos,60,$FontSize,locale_number_format($myrow['totqtyinvoiced'],$myrow['decimalplaces']), 'right');
 
 	if ($myrow['totqty']>$myrow['totqtyinvoiced']){
-		$LeftOvers = $pdf->addTextWrap($Left_Margin+320,$YPos,60,$FontSize,number_format($myrow['totqty']-$myrow['totqtyinvoiced'],$myrow['decimalplaces']), 'right');
+		$LeftOvers = $pdf->addTextWrap($Left_Margin+320,$YPos,60,$FontSize,locale_number_format($myrow['totqty']-$myrow['totqtyinvoiced'],$myrow['decimalplaces']), 'right');
 	} else {
 		$LeftOvers = $pdf->addTextWrap($Left_Margin+320,$YPos,60,$FontSize,_('Complete'), 'left');
 	}
@@ -406,9 +410,9 @@ while ($myrow=DB_fetch_array($Result)){
 		$ValueInvoiced = $InvRow['price']*$InvRow['quantity'];
 
 		$LeftOvers = $pdf->addTextWrap($Left_Margin+150,$YPos,90,$FontSize,$InvRow['typename'] . ' ' . $InvRow['transno'], 'left');
-		$LeftOvers = $pdf->addTextWrap($Left_Margin+240,$YPos,60,$FontSize,number_format($InvRow['quantity'],$myrow['decimalplaces']), 'right');
-		$LeftOvers = $pdf->addTextWrap($Left_Margin+300,$YPos,60,$FontSize,number_format($InvRow['price'],2), 'right');
-		$LeftOvers = $pdf->addTextWrap($Left_Margin+360,$YPos,80,$FontSize,number_format($ValueInvoiced,2), 'right');
+		$LeftOvers = $pdf->addTextWrap($Left_Margin+240,$YPos,60,$FontSize,locale_number_format($InvRow['quantity'],$myrow['decimalplaces']), 'right');
+		$LeftOvers = $pdf->addTextWrap($Left_Margin+300,$YPos,60,$FontSize,locale_money_format($InvRow['price'],$myrow['currcode']), 'right');
+		$LeftOvers = $pdf->addTextWrap($Left_Margin+360,$YPos,80,$FontSize,locale_money_format($ValueInvoiced,$myrow['currcode']), 'right');
 
 		 $YPos -= ($line_height);
 
@@ -433,7 +437,7 @@ while ($myrow=DB_fetch_array($Result)){
 
 $YPos -= ($line_height);
 $LeftOvers = $pdf->addTextWrap($Left_Margin+260,$YPos,100,$FontSize,_('GRAND TOTAL INVOICED'), 'right');
-$LeftOvers = $pdf->addTextWrap($Left_Margin+360,$YPos,80,$FontSize,number_format($AccumTotalInv,2), 'right');
+$LeftOvers = $pdf->addTextWrap($Left_Margin+360,$YPos,80,$FontSize,locale_money_format($AccumTotalInv,$_SESSION['CompanyRecord']['currencydefault']), 'right');
 $YPos -= ($line_height);
 
 $pdf->OutputD($_SESSION['DatabaseName'] . '_OrdersInvoiced_' . date('Y-m-d') . '.pdf');//UldisN
