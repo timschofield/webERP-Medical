@@ -577,14 +577,14 @@ span.main_menu_nolink {
 }
 
 .menu_group_headers {
-	background: #aaa url(images/menu_bg_white.png) 0px -3px repeat-x;
+	background: #B3B3B3;
 	width: 25%;
 	vertical-align: top;
 	padding: 0 0 2px 0;
 }
 
 .menu_group_headers table {
-	background: #aaa url(images/menu_bg_white.png) 0px -3px repeat-x;
+	background: #B3B3B3;
 }
 
 .menu_group_headers_text {
