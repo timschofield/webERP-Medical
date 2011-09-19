@@ -85,12 +85,12 @@ if (isset($_POST['submit'])) {
 		$Errors[$i] = 'TabCode';
 		$i++;
 	}
-
+	$_POST['amount'] = filter_currency_input($_POST['amount']);
 	if (isset($SelectedIndex) AND $InputError !=1)  {
 		$sql = "UPDATE pcashdetails
 			SET date = '".FormatDateForSQL($_POST['Date'])."',
 			codeexpense = '" . $_POST['SelectedExpense'] . "',
-			amount = '" .- $_POST['amount'] . "',
+			amount = -'" . $_POST['amount'] . "',
 			notes = '" . $_POST['Notes'] . "',
 			receipt = '" . $_POST['Receipt'] . "'
 			WHERE counterindex = '".$SelectedIndex."'";
@@ -113,9 +113,9 @@ if (isset($_POST['submit'])) {
 					notes,
 					receipt)
 			VALUES ('','" . $_POST['SelectedTabs'] . "',
-					'".FormatDateForSQL($_POST['Date'])."',
+					'" . FormatDateForSQL($_POST['Date'])."',
 					'" . $_POST['SelectedExpense'] . "',
-					'" .- $_POST['amount'] . "',
+					'-" . $_POST['amount'] . "',
 					'',
 					'',
 					'" . $_POST['Notes'] . "',
@@ -197,7 +197,7 @@ if (isset($SelectedTabs)) {
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Payment Entry') . '" alt="" />' . ' ' . $title . '</p>';
 /* RICARD */
-	echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Select another tab') . '</a></div></p>';
+	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Select another tab') . '</a></div>';
 
 	if (! isset($_GET['edit']) OR isset ($_POST['GO'])){
 		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
@@ -223,7 +223,13 @@ if (isset($SelectedTabs)) {
 			unset($_POST['Receipt']);
 		}
 
-		$sql = "SELECT * FROM pcashdetails
+		$sql = "SELECT counterindex,
+					date,
+					amount,
+					notes,
+					receipt,
+					authorized
+				FROM pcashdetails
 				WHERE tabcode='".$SelectedTabs."'
 					AND date >=DATE_SUB(CURDATE(), INTERVAL ".$Days." DAY)
 				ORDER BY date, counterindex ASC";
@@ -241,7 +247,7 @@ if (isset($SelectedTabs)) {
 
 		$k=0; //row colour counter
 
-		while ($myrow = DB_fetch_row($result)) {
+		while ($myrow = DB_fetch_array($result)) {
 			if ($k==1){
 				echo '<tr class="EvenTableRows">';
 				$k=0;
@@ -257,17 +263,21 @@ if (isset($SelectedTabs)) {
 			$ResultDes = DB_query($sqldes,$db);
 			$Description=DB_fetch_array($ResultDes);
 
-			if (!isset($Description['0'])){
-				$Description['0']='ASSIGNCASH';
+			$sql = "SELECT currency FROM pctabs WHERE tabcode='".$SelectedTabs."'";
+			$TabResult = DB_query($sql, $db);
+			$TabRow = DB_fetch_array($TabResult);
+
+			if (!isset($Description['description'])){
+				$Description['description']='ASSIGNCASH';
 			}
 
-			if ($myrow['5']=='0000-00-00') {
+			if ($myrow['authorized']=='0000-00-00') {
 				$AuthorisedDate=_('Unauthorised');
 			} else {
 				$AuthorisedDate=ConvertSQLDate($myrow['5']);
 			}
 
-			if (($myrow['5'] == "0000-00-00") and ($Description['0'] != 'ASSIGNCASH')){
+			if (($myrow['date'] == '0000-00-00') and ($Description['0'] != 'ASSIGNCASH')){
 				// only movements NOT authorized can be modified or deleted
 				printf('<td>%s</td>
 						<td>%s</td>
@@ -278,16 +288,16 @@ if (isset($SelectedTabs)) {
 						<td><a href="%sSelectedIndex=%s&SelectedTabs='.$SelectedTabs.'&Days='.$Days.'&edit=yes">' . _('Edit') . '</td>
 						<td><a href="%sSelectedIndex=%s&SelectedTabs='.$SelectedTabs.'&Days='.$Days.'&delete=yes" onclick="return confirm("' . _('Are you sure you wish to delete this code and the expense it may have set up?') . '");">' . _('Delete') . '</td>
 					</tr>',
-					ConvertSQLDate($myrow['2']),
-					$Description['0'],
-					number_format($myrow['4'],2),
+					ConvertSQLDate($myrow['date']),
+					$Description['description'],
+					locale_money_format($myrow['amount'],$TabRow['currency']),
 					$AuthorisedDate,
-					$myrow['7'],
-					$myrow['8'],
+					$myrow['notes'],
+					$myrow['receipt'],
 					$_SERVER['PHP_SELF'] . '?',
-					$myrow['0'],
+					$myrow['counterindex'],
 					$_SERVER['PHP_SELF'] . '?',
-					$myrow['0']);
+					$myrow['counterindex']);
 			} else {
 				printf('<td>%s</td>
 						<td>%s</td>
@@ -296,31 +306,31 @@ if (isset($SelectedTabs)) {
 						<td>%s</td>
 						<td>%s</td>
 					</tr>',
-					ConvertSQLDate($myrow['2']),
-					$Description['0'],
-					number_format($myrow['4'],2),
+					ConvertSQLDate($myrow['date']),
+					$Description['description'],
+					locale_money_format($myrow['amount'],$TabRow['currency']),
 					$AuthorisedDate,
-					$myrow['7'],
-					$myrow['8']);
+					$myrow['notes'],
+					$myrow['receipt']);
 
 			}
 
 		}
 		//END WHILE LIST LOOP
 
-		$sqlamount="SELECT sum(amount)
+		$sqlamount="SELECT sum(amount) as amount
 					FROM pcashdetails
 					WHERE tabcode='".$SelectedTabs."'";
 
 		$ResultAmount = DB_query($sqlamount,$db);
 		$Amount=DB_fetch_array($ResultAmount);
 
-		if (!isset($Amount['0'])) {
-			$Amount['0']=0;
+		if (!isset($Amount['amount'])) {
+			$Amount['amount']=0;
 		}
 
 		echo '<tr><td colspan="2" class="number">' . _('Current balance') . ':</td>
-					<td class="number">'.number_format($Amount['0'],2).'</td></tr>';
+					<td class="number">'.locale_money_format($Amount['amount'],$TabRow['currency']).'</td></tr>';
 
 
 		echo '</table>';
