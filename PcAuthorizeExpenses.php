@@ -118,6 +118,7 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 
 	while ($myrow=DB_fetch_array($result))	{
 
+		$Currency = $myrow['currency'];
 		//update database if update pressed
 		if ((isset($_POST['submit']) and $_POST['submit']=='Update') AND isset($_POST[$myrow['counterindex']])){
 
@@ -263,7 +264,7 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 
 		echo '<td>'.ConvertSQLDate($myrow['date']).'</td>
 			<td>'.$myrow['codeexpense'].'</td>
-			<td class="number">'.number_format($myrow['amount'],2).'</td>
+			<td class="number">'.locale_money_format($myrow['amount'],$myrow['currency']).'</td>
 			<td>'.$Posted.'</td>
 			<td>'.$myrow['notes'].'</td>
 			<td>'.$myrow['receipt'].'</td>';
@@ -299,7 +300,7 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 	}
 
 	echo '<tr><td colspan="2" class="number">' . _('Current balance') . ':</td>
-				<td class="number">'.number_format($Amount['0'],2).'</td></tr>';
+				<td class="number">'.locale_money_format($Amount['0'],$Currency).'</td></tr>';
 
 
 
