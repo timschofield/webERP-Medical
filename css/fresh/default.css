@@ -19,7 +19,7 @@
 body {
 	font-family: Arial, Verdana, Helvetica, sans-serif;;
 	font-size: 10px;
-	background-color: #F1FFDD;
+	background-color: #FFF;
 	margin-left: 10px;
 	margin-top: 5px;
 	margin-bottom: 0px;
@@ -37,7 +37,7 @@ a {
 	font-size: 10px;
 	font-weight: bold;
 	text-decoration: none;
-	color: black;
+	color: #4D4E1A;
 }
 
 /*links on any screen when mouse is hovering over them */
@@ -47,7 +47,7 @@ a:hover {
 }
 
 table {
-  background-color: #B4BB86;
+  background-color: #ffffff;
   margin: 0 auto;
 }
 
@@ -190,7 +190,7 @@ font.header_title {
 #topMenu {
 	width: 100%;
 	color: black;
-	background-color: #ffffff;
+	background-color: #A0C462;
 	border: none;
 	border-bottom: 1px solid #999999;
 }
@@ -302,7 +302,7 @@ div.csv {
 /* Main page heading with quick menu within */
 .quick_menu {
 	width: 100%;
-	background-color: #ffffff;
+	background-color: #C9D392;
 	border: none;
 	margin: 0px;
 	padding: 0px;
@@ -332,7 +332,7 @@ div.csv {
 
 /*the Select Customer / Item / Supplier Menu tabs */
 .quick_menu_tabs {
-	background-color: #ffffff;
+	background-color: #5A5F00;
 	white-space: nowrap;
 	border: none;
 	margin: 0px;
@@ -405,6 +405,7 @@ div.csv {
 
 .main_menu {
 	border: 2px inset #ffffff;
+	background-color: #ffffff;
 }
 
 .main_menu table {
@@ -416,9 +417,10 @@ div.csv {
 
 .main_menu_unselected {
 	background-color: #617C4F;
-	border: 2px #f1ffdd outset;
+	border: 1px solid #41437D;
 	text-align: center;
 	white-space: nowrap;
+	height: 16pt;
 }
 
 .main_menu_unselected:hover{
@@ -433,19 +435,21 @@ div.csv {
 }
 
 .main_menu_selected {
-	background-color: #617C4F;
-	border: 2px inset #41437D;
+	background-color: #C9D392;
+	border: 1px solid #41437D;
 	text-align: center;
 	white-space: nowrap;
+	color: #2B570F;
+	height: 16pt;
 }
 
 .main_menu_selected a{
-	color: #eee;
+	color: #2B570F;
     font-weight:bold;
 }
 
 .main_menu_selected a:hover{
-	color: #fff;
+	color: #2B570F;
 	text-decoration: none;
 }
 
@@ -491,7 +495,7 @@ span.main_menu_nolink {
 }
 
 .menu_group_headers {
-  border: 2px outset #aaaaaa;
+  border: 2px #aaaaaa;
   width: 25%;
 }
 
@@ -592,20 +596,21 @@ span.menu_group_nolink {
 #footer {
 	position: relative;
 	bottom: -3px;
+	background-color: #C9D392;
 }
 
 a.footer {
 	font-family: Arial, Verdana, Helvetica, sans-serif;
 	color: black;
 	font-weight: normal;
-	font-size: 8px;
+	font-size: 10px;
 }
 
 .footer {
 	font-family: Arial, Verdana, Helvetica, sans-serif;
 	color: black;
 	font-weight: normal;
-	font-size: 8px;
+	font-size: 10px;
 	text-align: center;
 }
 
