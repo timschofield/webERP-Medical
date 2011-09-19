@@ -20,10 +20,10 @@ body {
 	font-family: Arial, Verdana, Helvetica, sans-serif;;
 	font-size: 10px;
 	background-color: #FFF;
-	margin-left: 10px;
-	margin-top: 5px;
+	margin-left: 0px;
+	margin-top: 0px;
 	margin-bottom: 0px;
-	margin-right: 10px;
+	margin-right: 0px;
 	padding: 0px;
 }
 
@@ -147,7 +147,7 @@ div.success {
 div.info {
 	background-color:#c7ccf6;
 	color: navy;
-	border: 1px solid navy;
+	border: 0px solid navy;
 }
 
 input {
@@ -307,13 +307,7 @@ div.csv {
 	margin: 0px;
 	padding: 0px;
  	color: black;
-	/*border-top: 2px #aaaaaa solid;
-	border-left: 2px #aaaaaa solid;
-	border-right: 2px #ffffff solid;
-	border-bottom: 4px #ffffff solid; */
 	text-align: right;
-	/* position: relative;
-	top: 3px; */
 }
 
 #quick_menu{
@@ -325,7 +319,7 @@ div.csv {
 	font-size: 11px;
 	border: 0px;
 	white-space: nowrap;
-	margin: 2px;
+	margin: 0px;
 	padding: 0px;
 	color: black;
 }
@@ -417,9 +411,18 @@ div.csv {
 
 .main_menu_unselected {
 	background-color: #617C4F;
-	border: 1px solid #41437D;
+	border: 1px solid #5C874D;
 	text-align: center;
 	white-space: nowrap;
+	height: 16pt;
+}
+
+.main_menu_selected {
+	background-color: #C9D392;
+	border: 1px solid #5C874D;
+	text-align: center;
+	white-space: nowrap;
+	color: #2B570F;
 	height: 16pt;
 }
 
@@ -432,15 +435,6 @@ div.csv {
 }
 
 .main_menu_unselected a:hover{
-}
-
-.main_menu_selected {
-	background-color: #C9D392;
-	border: 1px solid #41437D;
-	text-align: center;
-	white-space: nowrap;
-	color: #2B570F;
-	height: 16pt;
 }
 
 .main_menu_selected a{
@@ -486,7 +480,7 @@ span.main_menu_nolink {
 }
 
 .menu_group_area {
-  border: 2px inset #ffffff;
+  border: 0px inset #ffffff;
 }
 
 .blank_area table {
@@ -495,7 +489,8 @@ span.main_menu_nolink {
 }
 
 .menu_group_headers {
-  border: 2px #aaaaaa;
+  border: 0px #aaaaaa;
+  background-color: #C9D392;
   width: 25%;
 }
 
@@ -512,30 +507,32 @@ span.main_menu_nolink {
 .menu_group_items {
 	vertical-align: top;
 	background-color: #ffffff;
-	border: 2px outset #aaaaaa;
+	border: 0px #aaaaaa;
 	padding: 10px;
 }
 
 .menu_group_item {
-	background-color: #ffffff;
 	padding-top: 2px;
 	padding-bottom: 2px;
 }
 
 .menu_group_item p {
-	color: #00f; /* This is the color for bullets, I like it to be the same as the anchor color, but it's up to you */
+	color: #5AAE34; /* This is the color for bullets, I like it to be the same as the anchor color, but it's up to you */
 	text-indent: -12px; /* this makes the bullet to appear as the li tag previously used */
 	margin: 0 0 0 12px; /* One thing that I didn´t like of the li was that it had no left margin applied */
 }
 
-.page_title_text {
+p.page_title_text {
 	font-family: Arial, Verdana, Helvetica, sans-serif;
-        padding-top: 2px;
-        padding-bottom: 2px;
+	padding-top: 2px;
+	padding-bottom: 2px;
 	font-weight: bold;
 	font-size: 10px;
 	color: black;
+	background-color: #C9D392;
+	width: 30%;
 	TEXT-ALIGN:center;
+	margin: 10px auto;
 }
 
 DIV.page_help_text {
