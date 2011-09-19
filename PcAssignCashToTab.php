@@ -97,7 +97,7 @@ if (isset($_POST['submit'])) {
 
 		$sql = "UPDATE pcashdetails
 					SET date = '".FormatDateForSQL($_POST['Date'])."',
-					amount = '" . $_POST['Amount'] . "',
+					amount = '" . filter_currency_input($_POST['Amount']) . "',
 					authorized = '0000-00-00',
 					notes = '" . $_POST['Notes'] . "',
 					receipt = '" . $_POST['Receipt'] . "'
@@ -120,7 +120,7 @@ if (isset($_POST['submit'])) {
 						'" . $_POST['SelectedTabs'] . "',
 						'".FormatDateForSQL($_POST['Date'])."',
 						'ASSIGNCASH',
-						'" .$_POST['Amount'] . "',
+						'" .filter_currency_input($_POST['Amount']) . "',
 						authorized = '0000-00-00',
 						'0',
 						'" . $_POST['Notes'] . "',
@@ -194,10 +194,18 @@ if (!isset($SelectedTabs)){
 
 } elseif (isset($SelectedTabs)) {
 
+	$SQL = "SELECT currency
+		FROM pctabs
+		WHERE tabcode ='" . $SelectedTabs . "'";
+
+	$result = DB_query($SQL,$db);
+	$myrow=DB_fetch_array($result);
+	$Currency=$myrow['currency'];
+
 	if (!isset($_POST['submit'])) {
 		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Search') . '" alt="" />' . ' ' . $title. '</p>';
 	}
-	echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Select Another Petty Cash Tab ') . '<a/></div></p>';
+	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Select Another Petty Cash Tab ') . '</a></div>';
 
 	if (! isset($_GET['edit']) OR isset ($_POST['Go'])){
 
@@ -211,11 +219,17 @@ if (!isset($SelectedTabs)){
 		if(!isset ($Days)){
 			$Days=30;
 		 }
-		$sql = "SELECT * FROM pcashdetails
+		$sql = "SELECT codeexpense,
+						authorized,
+						date,
+						amount,
+						notes,
+						receipt,
+						counterindex
+				FROM pcashdetails
 				WHERE tabcode='" . $SelectedTabs . "'
 				AND date >=DATE_SUB(CURDATE(), INTERVAL '".$Days."' DAY)
 				ORDER BY date, counterindex ASC";
-
 
 		$result = DB_query($sql,$db);
 
@@ -250,7 +264,7 @@ if (!isset($SelectedTabs)){
 
 			$sqldes="SELECT description
 					FROM pcexpenses
-					WHERE codeexpense='". $myrow['3'] . "'";
+					WHERE codeexpense='". $myrow['codeexpense'] . "'";
 
 			$ResultDes = DB_query($sqldes,$db);
 			$Description=DB_fetch_array($ResultDes);
@@ -268,7 +282,7 @@ if (!isset($SelectedTabs)){
 				}
 				echo '<td>'.ConvertSQLDate($myrow['date']).'</td>
 					<td>'.$Description['0'].'</td>
-					<td class="number">'.number_format($myrow['amount'],2).'</td>
+					<td class="number">'.locale_money_format($myrow['amount'],$Currency).'</td>
 					<td>'.$AuthorisedDate.'</td>
 					<td>'.$myrow['notes'].'</td>
 					<td>'.$myrow['receipt'].'</td>
@@ -282,7 +296,7 @@ if (!isset($SelectedTabs)){
 			}else{
 				echo '<td>'.ConvertSQLDate($myrow['date']).'</td>
 					<td>'.$Description['0'].'</td>
-					<td class="number">'.number_format($myrow['amount'],2).'</td>
+					<td class="number">'.locale_money_format($myrow['amount'],$Currency).'</td>
 					<td>'.ConvertSQLDate($myrow['authorized']).'</td>
 					<td>'.$myrow['notes'].'</td>
 					<td>'.$myrow['receipt'].'</td>
@@ -303,7 +317,7 @@ if (!isset($SelectedTabs)){
 		}
 
 		echo '<tr><td colspan="2" class="number"><b>' . _('Current balance') . ':</b></td>
-			<td>'.number_format($Amount['0'],2).'</td></tr>';
+			<td class="number">'.locale_money_format($Amount['0'],$Currency).'</td></tr>';
 
 		echo '</table>';
 
@@ -325,8 +339,13 @@ if (!isset($SelectedTabs)){
 		}
 		if ( isset($_GET['edit'])) {
 
-		$sql = "SELECT * FROM pcashdetails
-					WHERE counterindex='".$SelectedIndex."'";
+			$sql = "SELECT date,
+							codeexpense,
+							amount,
+							notes,
+							receipt
+						FROM pcashdetails
+						WHERE counterindex='".$SelectedIndex."'";
 
 			$result = DB_query($sql, $db);
 			$myrow = DB_fetch_array($result);
