@@ -91,7 +91,7 @@ if (isset($_POST['submit'])) {
 			SET usercode = '" . $_POST['SelectUser'] . "',
 			typetabcode = '" . $_POST['SelectTabs'] . "',
 			currency = '" . $_POST['SelectCurrency'] . "',
-			tablimit = '" . $_POST['tablimit'] . "',
+			tablimit = '" . filter_currency_input($_POST['tablimit']) . "',
 			assigner = '" . $_POST['SelectAssigner'] . "',
 			authorizer = '" . $_POST['SelectAuthorizer'] . "',
 			glaccountassignment = '" . $_POST['glaccountcash'] . "',
@@ -131,13 +131,13 @@ if (isset($_POST['submit'])) {
 					'" . $_POST['SelectUser'] . "',
 					'" . $_POST['SelectTabs'] . "',
 					'" . $_POST['SelectCurrency'] . "',
-					'" . $_POST['tablimit'] . "',
+					'" . filter_currency_input($_POST['tablimit']) . "',
 					'" . $_POST['SelectAssigner'] . "',
 					'" . $_POST['SelectAuthorizer'] . "',
 					'" . $_POST['glaccountcash'] . "',
 					'" . $_POST['glaccountpcashtab'] . "')";
 
-			$msg = _('The Petty Cash Tab') . ' ' . $_POST["tabcode"] .  ' ' . _('has been created');
+			$msg = _('The Petty Cash Tab') . ' ' . $_POST['tabcode'] .  ' ' . _('has been created');
 
 		}
 	}
@@ -250,9 +250,9 @@ while ($myrow = DB_fetch_array($result)) {
 		$myrow['usercode'],
 		$myrow['typetabdescription'],
 		$myrow['currency'],
-		number_format($myrow['tablimit'],2),
+		locale_money_format($myrow['tablimit'],$myrow['currency']),
+		$myrow['assigner'],
 		$myrow['authorizer'],
-		$myrow[6],
 		$myrow['glaccountassignment'].' - '.$Description[0],
 		$myrow['glaccountpcash'].' - '.$DescriptionName[0],
 		$_SERVER['PHP_SELF'] . '?',
@@ -383,7 +383,7 @@ if (!isset($_GET['delete'])) {
 		$_POST['tablimit']=0;
 	}
 
-	echo '<tr><td>' . _('Limit Of Tab') . ':</td><td><input type="text" class="number" name="tablimit" size="12" maxlength="11" value="' . $_POST['tablimit'] . '" /></td></tr>';
+	echo '<tr><td>' . _('Limit Of Tab') . ':</td><td><input type="text" class="number" name="tablimit" size="12" maxlength="11" value="' . locale_money_format($_POST['tablimit'], $_POST['SelectCurrency']) . '" /></td></tr>';
 
 	echo '<tr><td>' . _('Cash Assigner') . ':</td><td><select name="SelectAssigner">';
 
