@@ -62,7 +62,7 @@ if ($_POST['DoUpgrade'] == _('Perform Upgrade')){
 
 	prnMsg(_('Upgrade script to put cost information against GRN records from purchorderdetails records .... please wait'),'info');
 
-	$TestAlreadyDoneResult = DB_query("SELECT * FROM grns WHERE stdcostunit<>0",$db);
+	$TestAlreadyDoneResult = DB_query("SELECT grnbatch FROM grns WHERE stdcostunit<>0",$db);
 	if (DB_num_rows($TestAlreadyDoneResult)>0){
 		prnMsg(_('The upgrade script appears to have been run already successfully - there is no need to re-run it'),'info');
 		include('includes/footer.inc');
