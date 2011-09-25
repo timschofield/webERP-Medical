@@ -39,12 +39,15 @@ echo '<div class="page_help_text">' . _('This shows how the payment to the suppl
 $SQL= "SELECT supptrans.supplierno,
 		supptrans.suppreference,
 		supptrans.trandate,
-		supptrans.alloc
+		supptrans.alloc,
+		suppliers.currcode
 	FROM supptrans
+	LEFT JOIN suppliers
+	ON supptrans.supplierno=suppliers.supplierid
 	WHERE supptrans.id IN (SELECT suppallocs.transid_allocfrom
 				FROM supptrans, suppallocs
-				WHERE supptrans.supplierno = '$SuppID'
-				AND supptrans.suppreference = '$InvID'
+				WHERE supptrans.supplierno = '".$SuppID."'
+				AND supptrans.suppreference = '".$InvID."'
 				AND supptrans.id = suppallocs.transid_allocto)";
 
 /*
@@ -90,7 +93,7 @@ $k=0; //row colour counter
 	echo '<td>'.$myrow['supplierno'].'</td>
 		<td>'.$myrow['suppreference'].'</td>
 		<td>'.ConvertSQLDate($myrow['trandate']).'</td>
-		<td class="number">'.number_format($myrow['alloc'],2).'</td>
+		<td class="number">'.locale_money_format($myrow['alloc'],$myrow['currcode']).'</td>
 		</tr>';
 
 		$j++;
