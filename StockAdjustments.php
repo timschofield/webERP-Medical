@@ -79,8 +79,7 @@ if (isset($_POST['CheckCode'])) {
 if (isset($_POST['EnterAdjustment']) and $_POST['EnterAdjustment']!= ''){
 
 	$InputError = false; /*Start by hoping for the best */
-	$result = DB_query("SELECT * FROM stockmaster WHERE stockid='" . $_SESSION['Adjustment']->StockID . "'",$db);
-	$myrow = DB_fetch_row($result);
+	$result = DB_query("SELECT stockid FROM stockmaster WHERE stockid='" . $_SESSION['Adjustment']->StockID . "'",$db);
 	if (DB_num_rows($result)==0) {
 		prnMsg( _('The entered item code does not exist'),'error');
 		$InputError = true;
