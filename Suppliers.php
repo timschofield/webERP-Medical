@@ -390,7 +390,9 @@ if (isset($_POST['submit'])) {
 		$longitude = 0;
 		if ($_SESSION['geocode_integration']==1 ){
 			// Get the lat/long from our geocoding host
-			$sql = "SELECT * FROM geocode_param WHERE 1";
+			$sql = "SELECT geocode_key,
+							map_host
+						FROM geocode_param WHERE 1";
 			$ErrMsg = _('An error occurred in retrieving the information');
 			$resultgeo = DB_query($sql, $db, $ErrMsg);
 			$row = DB_fetch_array($resultgeo);
@@ -400,37 +402,37 @@ if (isset($_POST['submit'])) {
 			define('KEY', $api_key);
 			// check that some sane values are setup already in geocode tables, if not skip the geocoding but add the record anyway.
 			if ($map_host=="") {
-			echo '<div class="warn">' . _('Warning - Geocode Integration is enabled, but no hosts are setup.  Go to Geocode Setup') . '</div>';
+				echo '<div class="warn">' . _('Warning - Geocode Integration is enabled, but no hosts are setup.  Go to Geocode Setup') . '</div>';
 			} else {
-			$address = $_POST['Address1'] . ', ' . $_POST['Address2'] . ', ' . $_POST['Address3'] . ', ' . $_POST['Address4'];
+				$address = $_POST['Address1'] . ', ' . $_POST['Address2'] . ', ' . $_POST['Address3'] . ', ' . $_POST['Address4'];
 
-			$base_url = 'http://' . MAPS_HOST . '/maps/geo?output=xml' . '&key=' . KEY;
-			$request_url = $base_url . '&q=' . urlencode($address);
+				$base_url = 'http://' . MAPS_HOST . '/maps/geo?output=xml' . '&key=' . KEY;
+				$request_url = $base_url . '&q=' . urlencode($address);
 
-			$xml = simplexml_load_string(utf8_encode(file_get_contents($request_url))) or die('url not loading');
+				$xml = simplexml_load_string(utf8_encode(file_get_contents($request_url))) or die('url not loading');
 //			$xml = simplexml_load_file($request_url) or die("url not loading");
 
-			$coordinates = $xml->Response->Placemark->Point->coordinates;
-			$coordinatesSplit = explode(',', $coordinates);
-			// Format: Longitude, Latitude, Altitude
-			$latitude = $coordinatesSplit[1];
-			$longitude = $coordinatesSplit[0];
-
-			$status = $xml->Response->Status->code;
-			if (strcmp($status, "200") == 0) {
-			// Successful geocode
-				$geocode_pending = false;
 				$coordinates = $xml->Response->Placemark->Point->coordinates;
-				$coordinatesSplit = explode(",", $coordinates);
+				$coordinatesSplit = explode(',', $coordinates);
 				// Format: Longitude, Latitude, Altitude
 				$latitude = $coordinatesSplit[1];
 				$longitude = $coordinatesSplit[0];
-			} else {
+
+				$status = $xml->Response->Status->code;
+				if (strcmp($status, "200") == 0) {
+			// Successful geocode
+					$geocode_pending = false;
+					$coordinates = $xml->Response->Placemark->Point->coordinates;
+					$coordinatesSplit = explode(",", $coordinates);
+				// Format: Longitude, Latitude, Altitude
+					$latitude = $coordinatesSplit[1];
+					$longitude = $coordinatesSplit[0];
+				} else {
 			// failure to geocode
-				$geocode_pending = false;
-				echo '<p>Address: ' . $address . ' failed to geocode'."\n";
-				echo 'Received status ' . $status . "\n" . '</p>';
-			}
+					$geocode_pending = false;
+					echo '<p>Address: ' . $address . ' failed to geocode'."\n";
+					echo 'Received status ' . $status . "\n" . '</p>';
+				}
 			}
 		}
 		if (!isset($_POST['New'])) {
