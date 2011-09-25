@@ -65,8 +65,7 @@ if (isset($_POST['UpdateData'])){
 	$OldCost = filter_currency_input($_POST['OldMaterialCost'] + $_POST['OldLabourCost'] + $_POST['OldOverheadCost']);
 	$NewCost = filter_currency_input($_POST['MaterialCost'] + $_POST['LabourCost'] + $_POST['OverheadCost']);
 
-	$result = DB_query("SELECT * FROM stockmaster WHERE stockid='" . $StockID . "'",$db);
-	$myrow = DB_fetch_row($result);
+	$result = DB_query("SELECT stockid FROM stockmaster WHERE stockid='" . $StockID . "'",$db);
 	if (DB_num_rows($result)==0) {
 		prnMsg (_('The entered item code does not exist'),'error',_('Non-existent Item'));
 	} elseif ($OldCost != $NewCost){
