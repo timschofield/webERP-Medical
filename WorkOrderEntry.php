@@ -355,7 +355,7 @@ if (isset($_POST['submit'])) { //The update button has been clicked
 	$CancelDelete=false; //always assume the best
 
 	// can't delete it there are open work issues
-	$HasTransResult = DB_query("SELECT * FROM stockmoves
+	$HasTransResult = DB_query("SELECT transno FROM stockmoves
 									WHERE (stockmoves.type= 26 OR stockmoves.type=28)
 									AND reference " . LIKE  . " '%" . $_POST['WO'] . "%'",$db);
 	if (DB_num_rows($HasTransResult)>0){
@@ -450,7 +450,7 @@ if (DB_num_rows($WOResult)==1){
 				}
 		  		$_POST['Controlled'.$i] =$WOItem['controlled'];
 		  		$_POST['Serialised'.$i] =$WOItem['serialised'];
-		  		$HasWOSerialNosResult = DB_query("SELECT * FROM woserialnos WHERE wo='" . $_POST['WO'] . "'",$db);
+		  		$HasWOSerialNosResult = DB_query("SELECT wo FROM woserialnos WHERE wo='" . $_POST['WO'] . "'",$db);
 		  		if (DB_num_rows($HasWOSerialNosResult)>0){
 		  		   $_POST['HasWOSerialNos']=true;
 		  		} else {
