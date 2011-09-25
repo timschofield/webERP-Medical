@@ -243,7 +243,7 @@ CreateTable('usermenurights', "CREATE TABLE `usermenurights` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8", $db);
 
 if (DB_table_exists('usermenurights', $db)) {
-	$sql="select * FROM usermenurights";
+	$sql="select userid FROM usermenurights";
 	$result=DB_query($sql, $db);
 	if (DB_num_rows($result)==0) {
 		$response=executeSQL("INSERT INTO `usermenurights` (userid,menuid,access) SELECT www_users.userid,  menu.`id`, 1 FROM menu, www_users", $db, False);
