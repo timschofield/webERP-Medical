@@ -63,7 +63,7 @@ if (isset($_POST['submit'])) {
 		}
 	} //check the properties are sensible
 
-	if ($SelectedCategory AND $InputError !=1) {
+	if (isset($SelectedCategory) AND $InputError !=1) {
 
 		/*SelectedCategory could also exist if submit had not been clicked this code
 		would not run in this case cos submit is false of course  see the
@@ -80,6 +80,10 @@ if (isset($_POST['submit'])) {
 									 categoryid = '$SelectedCategory'";
 		$ErrMsg = _('Could not update the stock category') . $_POST['CategoryDescription'] . _('because');
 		$result = DB_query($sql,$db,$ErrMsg);
+
+		if ($_POST['PropertyCounter']==0 and $_POST['PropLabel0']!='') {
+			$_POST['PropertyCounter']=0;
+		}
 
 		for ($i=0;$i<=$_POST['PropertyCounter'];$i++){
 
@@ -280,7 +284,6 @@ if (isset($SelectedCategory)) {  ?>
 
 <?php
 
-if (! isset($_GET['delete'])) {
 
 	echo '<form name="CategoryForm" method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -469,6 +472,9 @@ if (! isset($_GET['delete'])) {
 						label,
 						controltype,
 						defaultvalue,
+						numericvalue,
+						minimumvalue,
+						maximumvalue,
 						reqatsalesorder
 				   FROM stockcatproperties
 				   WHERE categoryid='" . $SelectedCategory . "'
@@ -526,7 +532,7 @@ if (! isset($_GET['delete'])) {
 					<td><input type="text" name="PropDefault' . $PropertyCounter . '" value="' . $myrow['defaultvalue'] . '" /></td>';
 
 
-			if ($myrow['numericvalue'] ==1){
+			if ($myrow['numericvalue']==1){
 				echo '<td><input type="checkbox" name="PropNumeric' . $PropertyCounter . '" checked="True" />';
 			} else {
 				echo '<td><input type="checkbox" name="PropNumeric' . $PropertyCounter . '" />';
@@ -571,7 +577,6 @@ if (! isset($_GET['delete'])) {
 
 	echo '</form>';
 
-} //end if record deleted no point displaying form to add record
 
 
 include('includes/footer.inc');
