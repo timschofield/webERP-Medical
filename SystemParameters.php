@@ -1023,7 +1023,7 @@ echo '<tr style="outline: 1px solid"><td>' . _('Purchasing Manager Email Address
 	<td>' . _('The email address for the purchasing manager, used to receive notifications by the tendering system') .'</td></tr>';
 
 echo '<tr style="outline: 1px solid"><td>' . _('Inventory Manager Email Address') . ':</td>
-	<td><input type="text" name="X_InventoryManagerEmail" size=50 maxlength=50 value="' . $_SESSION['InventoryManagerEmail'] . '"></td>
+	<td><input type="text" name="X_InventoryManagerEmail" size="50" maxlength="50" value="' . $_SESSION['InventoryManagerEmail'] . '" /></td>
 	<td>' . _('The email address for the inventory manager, where notifications of all manual stock adjustments created are sent by the system. Leave blank if no emails should be sent to the factory manager for manual stock adjustments') .'</td></tr>';
 
 echo '</table>
