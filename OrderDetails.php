@@ -56,8 +56,9 @@ if (DB_num_rows($GetOrdHdrResult)==1) {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Order Details') . '" alt="" />' . ' ' . $title . '</p>';
 
 	$myrow = DB_fetch_array($GetOrdHdrResult);
+	$CustomerCurrency=$myrow['currcode'];
 	echo '<table class="selection">';
-	echo '<tr><th colspan="4"><font color="blue">'._('Order Header Details For Order No').' '.$_GET['OrderNumber'].'</font></th></tr>';
+	echo '<tr><th colspan="4"><font size="3" color="#616161">'._('Order Header Details For Order No').' '.$_GET['OrderNumber'].'</font></th></tr>';
 	echo '<tr>
 		<th style="text-align: left">' . _('Customer Code') . ':</th>
 		<td class="OddTableRows"><font><a href="' . $rootpath . '/SelectCustomer.php?Select=' . $myrow['debtorno'] . '">' . $myrow['debtorno'] . '</a></td>
@@ -82,7 +83,7 @@ if (DB_num_rows($GetOrdHdrResult)==1) {
 	</tr>';
 	echo '<tr>
 		<th style="text-align: left"h>' . _('Order Currency') . ':</th>
-		<td class="OddTableRows"><font>' . $myrow['currcode'] . '</font></td>
+		<td class="OddTableRows"><font>' . $CustomerCurrency . '</font></td>
 		<th style="text-align: left">' . _('Delivery Address 3') . ':</th>
 		<td class="OddTableRows"><font>' . $myrow['deladd3'] . '</font></td>
 	</tr>';
@@ -106,7 +107,7 @@ if (DB_num_rows($GetOrdHdrResult)==1) {
 	</tr>';
 	echo '<tr>
 		<th style="text-align: left">' . _('Freight Cost') . ':</th>
-		<td class="OddTableRows"><font>' . $myrow['freightcost'] . '</font></td>
+		<td class="OddTableRows"><font>' . locale_money_format($myrow['freightcost'],$CustomerCurrency) . '</font></td>
 	</tr>';
 	echo '<tr><th style="text-align: left">'._('Comments'). ': ';
 	echo '</th><td colspan="3">'.$myrow['comments'] . '</td></tr>';
@@ -115,8 +116,7 @@ if (DB_num_rows($GetOrdHdrResult)==1) {
 
 /*Now get the line items */
 
-	$LineItemsSQL = "SELECT
-				stkcode,
+	$LineItemsSQL = "SELECT stkcode,
 				stockmaster.description,
 				stockmaster.volume,
 				stockmaster.kgs,
@@ -131,8 +131,12 @@ if (DB_num_rows($GetOrdHdrResult)==1) {
 				discountpercent,
 				actualdispatchdate,
 				qtyinvoiced
-			FROM salesorderdetails, stockmaster
-			WHERE salesorderdetails.stkcode = stockmaster.stockid AND orderno ='" . $_GET['OrderNumber'] . "'";
+			FROM salesorderdetails
+			LEFT JOIN salesorders
+			ON salesorderdetails.orderno=salesorders.orderno
+			LEFT JOIN stockmaster
+			ON salesorderdetails.stkcode = stockmaster.stockid
+			WHERE salesorders.orderno ='" . $_GET['OrderNumber'] . "'";
 
 	$ErrMsg =  _('The line items of the order cannot be retrieved because');
 	$DbgMsg =  _('The SQL used to retrieve the line items, that failed was');
@@ -145,7 +149,7 @@ if (DB_num_rows($GetOrdHdrResult)==1) {
 		$OrderTotalWeight = 0;
 
 		echo '<br /><table cellpadding="2" colspan="9" class="selection">';
-		echo '<tr><th colspan="9"><font color="blue">'._('Order Line Details For Order No').' '.$_GET['OrderNumber'].'</font></th></tr>';
+		echo '<tr><th colspan="9"><font size="3" color="#616161">'._('Order Line Details For Order No').' '.$_GET['OrderNumber'].'</font></th></tr>';
 		echo '<tr>
 			<th>' . _('Item Code') . '</th>
 			<th>' . _('Item Description') . '</th>
@@ -167,7 +171,6 @@ if (DB_num_rows($GetOrdHdrResult)==1) {
 				echo '<tr class="OddTableRows">';
 				$k=1;
 			}
-
 			if ($myrow['qtyinvoiced']>0){
 				$DisplayActualDeliveryDate = ConvertSQLDate($myrow['actualdispatchdate']);
 			} else {
@@ -176,12 +179,12 @@ if (DB_num_rows($GetOrdHdrResult)==1) {
 
 			echo 	'<td>' . $myrow['stkcode'] . '</td>
 				<td>' . $myrow['description'] . '</td>
-				<td class="number">' . $myrow['quantity'] . '</td>
+				<td class="number">' . locale_number_format($myrow['quantity'],$myrow['decimalplaces']) . '</td>
 				<td>' . $myrow['units'] . '</td>
-				<td class="number">' . number_format($myrow['unitprice'],2) . '</td>
-				<td class="number">' . number_format(($myrow['discountpercent'] * 100),2) . '%' . '</td>
-				<td class="number">' . number_format($myrow['quantity'] * $myrow['unitprice'] * (1 - $myrow['discountpercent']),2) . '</td>
-				<td class="number">' . number_format($myrow['qtyinvoiced'],2) . '</td>
+				<td class="number">' . locale_number_format($myrow['unitprice'],4) . '</td>
+				<td class="number">' . locale_number_format(($myrow['discountpercent'] * 100),2) . '%' . '</td>
+				<td class="number">' . locale_money_format($myrow['quantity'] * $myrow['unitprice'] * (1 - $myrow['discountpercent']),$CustomerCurrency) . '</td>
+				<td class="number">' . locale_number_format($myrow['qtyinvoiced'],$myrow['decimalplaces']) . '</td>
 				<td>' . $DisplayActualDeliveryDate . '</td>
 			</tr>';
 
@@ -190,9 +193,9 @@ if (DB_num_rows($GetOrdHdrResult)==1) {
 			$OrderTotalWeight = $OrderTotalWeight + $myrow['quantity'] * $myrow['kgs'];
 
 		}
-		$DisplayTotal = number_format($OrderTotal,2);
-		$DisplayVolume = number_format($OrderTotalVolume,2);
-		$DisplayWeight = number_format($OrderTotalWeight,2);
+		$DisplayTotal = locale_money_format($OrderTotal,$CustomerCurrency);
+		$DisplayVolume = locale_number_format($OrderTotalVolume,2);
+		$DisplayWeight = locale_number_format($OrderTotalWeight,2);
 
 		echo '<tr>
 			<td colspan="5" class="number"><b>' . _('TOTAL Excl Tax/Freight') . '</b></td>
