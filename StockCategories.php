@@ -516,6 +516,11 @@ if (! isset($_GET['delete'])) {
 			} else {
 				echo '<option value="2">' . _('Check Box') . '</option>';
 			}
+			if ($myrow['controltype']==3){
+				echo '<option selected="True" value="3">' . _('Date Box') . '</option>';
+			} else {
+				echo '<option value="3">' . _('Date Box') . '</option>';
+			}
 
 			echo '</select></td>
 					<td><input type="text" name="PropDefault' . $PropertyCounter . '" value="' . $myrow['defaultvalue'] . '" /></td>';
@@ -548,6 +553,7 @@ if (! isset($_GET['delete'])) {
 		echo '<option selected="True" value="0">' . _('Text Box') . '</option>';
 		echo '<option value="1">' . _('Select Box') . '</option>';
 		echo '<option value="2">' . _('Check Box') . '</option>';
+		echo '<option value="3">' . _('Date Box') . '</option>';
 		echo '</select></td>
 				<td><input type="text" name="PropDefault' . $PropertyCounter . '" /></td>
 				<td><input type="checkbox" name="PropNumeric' . $PropertyCounter . '" /></td>
