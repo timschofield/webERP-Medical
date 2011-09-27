@@ -68,6 +68,8 @@ if (!isset($_POST['Show'])) {
 				banktrans.banktranstype,
 				banktrans.transdate,
 				bankaccounts.bankaccountname,
+				banktrans.userid,
+				banktrans.ref,
 				systypes.typename,
 				systypes.typeid
 			FROM banktrans
@@ -78,7 +80,7 @@ if (!isset($_POST['Show'])) {
 			WHERE bankact='".$_POST['BankAccount']."'
 				AND transdate>='" . FormatDateForSQL($_POST['FromTransDate']) . "'
 				AND transdate<='" . FormatDateForSQL($_POST['ToTransDate']) . "'
-			ORDER BY banktrans.transdate";
+			ORDER BY banktrans.transdate, banktransid";
 
 	$result = DB_query($sql, $db);
 	if (DB_num_rows($result)==0) {
@@ -93,7 +95,6 @@ if (!isset($_POST['Show'])) {
 						<th>' . ('Date') . '</th>
 						<th>' . ('Input By') . '</th>
 						<th>'._('Transaction type').'</th>
-						<th>'._('Type').'</th>
 						<th>'._('Reference').'</th>
 						<th>'._('Amount in').' '.$BankDetailRow['currcode'].'</th>
 						<th>'._('Running Total').' '.$BankDetailRow['currcode'].'</th>
@@ -113,7 +114,6 @@ if (!isset($_POST['Show'])) {
 							<td>'. ConvertSQLDate($myrow['transdate']) . '</td>
 							<td>'. $myrow['userid'] . '</td>
 							<td>'.$myrow['typename'].'</td>
-							<td>'.$myrow['banktranstype'].'</td>
 							<td>'.$myrow['ref'].'</td>
 							<td class="number">'.number_format($myrow['amount'],2).'</td>
 							<td class="number">'.number_format($AccountCurrTotal,2).'</td>
@@ -121,6 +121,7 @@ if (!isset($_POST['Show'])) {
 							<td class="number">'.number_format($LocalCurrTotal,2).'</td>
 						</tr>';
 		}
+		echo '<tr><th colspan=8>' . _('Total number of receipts') . ' - ' . DB_num_rows($result) . '</th></tr>';
 		echo '</table>';
 	} //end if no bank trans in the range to show
 
