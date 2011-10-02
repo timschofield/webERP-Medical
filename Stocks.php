@@ -1136,6 +1136,9 @@ while ($PropertyRow=DB_fetch_array($PropertiesResult)){
 				echo '<input type="checkbox" name="PropValue' . $PropertyCounter . '" />';
 			}
 			break;
+		case 3:
+			echo '<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="10" maxlength="10" name="Prop'.$k.'" value="" /></td>';
+			break;
 	} //end switch
 	echo '<input type="hidden" name="PropType' . $PropertyCounter .'" value="' . $PropertyRow['controltype'] . '" />';
 	echo '</td></tr>';
