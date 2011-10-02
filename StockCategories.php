@@ -563,7 +563,7 @@ if (isset($SelectedCategory)) {  ?>
 		echo '</select></td>
 				<td><input type="text" name="PropDefault' . $PropertyCounter . '" /></td>
 				<td><input type="checkbox" name="PropNumeric' . $PropertyCounter . '" /></td>
-				<td><input type="text" "name="PropMinimum' . $PropertyCounter . '" /></td>
+				<td><input type="text" name="PropMinimum' . $PropertyCounter . '" /></td>
 				<td><input type="text" name="PropMaximum' . $PropertyCounter . '" /></td>
 				<td align="center"><input type="checkbox" name="PropReqSO' . $PropertyCounter .'" /></td></tr>';
 		echo '</table>';
