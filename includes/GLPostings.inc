@@ -98,12 +98,12 @@ for ( $CurrPeriod = $CreateFrom; $CurrPeriod <= $CreateTo; $CurrPeriod++ ) {
 	while ($UnpostedTrans=DB_fetch_array($UnpostedTransResult)){
 		if($CurrentAccount != $UnpostedTrans['account']) {
 			if($CurrentAccount != 0) {
-				$sql = "UPDATE chartdetails SET actual = actual + " . $TotalAmount . "
+				$sql = "UPDATE chartdetails SET actual = actual + " . filter_currency_input($TotalAmount) . "
 					WHERE accountcode = '" . $CurrentAccount . "'
 					AND period= '" . $CurrPeriod . "'";
 				$PostPrd = DB_query($sql,$db);
 				/*Update the BFwd for all following ChartDetail records */
-				$sql = "UPDATE chartdetails SET bfwd = bfwd + " . $TotalAmount . "
+				$sql = "UPDATE chartdetails SET bfwd = bfwd + " . filter_currency_input($TotalAmount) . "
 					WHERE accountcode = '" . $CurrentAccount . "'
 					AND period > '" . $CurrPeriod . "'";
 				$PostBFwds = DB_query($sql,$db);
@@ -118,12 +118,12 @@ for ( $CurrPeriod = $CreateFrom; $CurrPeriod <= $CreateTo; $CurrPeriod++ ) {
 	}
 	// There will be one chartdetail update outstanding if we processed anything
 	if($CurrentAccount != 0) {
-		$sql = "UPDATE chartdetails SET actual = actual + " . $TotalAmount . "
+		$sql = "UPDATE chartdetails SET actual = actual + " . filter_currency_input($TotalAmount) . "
 			WHERE accountcode = '" . $CurrentAccount . "'
 			AND period= '" . $CurrPeriod . "'";
 		$PostPrd = DB_query($sql,$db);
 		/*Update the BFwd for all following ChartDetail records */
-		$sql = "UPDATE chartdetails SET bfwd = bfwd + " . $TotalAmount . "
+		$sql = "UPDATE chartdetails SET bfwd = bfwd + " . filter_currency_input($TotalAmount) . "
 			WHERE accountcode = '" . $CurrentAccount . "'
 			AND period > '" . $CurrPeriod . "'";
 		$PostBFwds = DB_query($sql,$db);
@@ -187,8 +187,8 @@ if (DB_num_rows($ChartDetailsNotSetUpResult)>0){
 			if ($myrow['period'] < $CreateTo) {
 				$BFwd +=$myrow['actual'];
 				$BFwdBudget += $myrow['budget'];
-				$sql = "UPDATE chartdetails SET bfwd ='" . $BFwd . "',
-							bfwdbudget ='" . $BFwdBudget . "'
+				$sql = "UPDATE chartdetails SET bfwd ='" . filter_currency_input($BFwd) . "',
+							bfwdbudget ='" . filter_currency_input($BFwdBudget) . "'
 					WHERE accountcode = '" . $AccountRow['accountcode'] . "'
 					AND period ='" . $myrow['period']+1 . "'";
 
