@@ -139,13 +139,21 @@ if (DB_num_rows($result)>0){
 		$TaxProv = $myrow['taxprovinceid'];
 		$TaxCat = $myrow2['taxcatid'];
 		$Branch = $myrow['branchcode'];
-		$sql3 = " select taxgrouptaxes.taxauthid from taxgrouptaxes INNER JOIN custbranch ON taxgrouptaxes.taxgroupid=custbranch.taxgroupid WHERE custbranch.branchcode='" .$Branch ."'";
+		$sql3 = "SELECT taxgrouptaxes.taxauthid
+					FROM taxgrouptaxes
+					INNER JOIN custbranch
+						ON taxgrouptaxes.taxgroupid=custbranch.taxgroupid
+					WHERE custbranch.branchcode='" .$Branch ."'";
 		$result3=DB_query($sql3,$db, $ErrMsg);
 		while ($myrow3=DB_fetch_array($result3)){
 			$TaxAuth = $myrow3['taxauthid'];
 		}
 
-		$sql4 = "SELECT * FROM taxauthrates WHERE dispatchtaxprovince='" .$TaxProv ."' AND taxcatid='" .$TaxCat ."' AND taxauthority='" .$TaxAuth ."'";
+		$sql4 = "SELECT taxrate
+					FROM taxauthrates
+					WHERE dispatchtaxprovince='" .$TaxProv ."'
+						AND taxcatid='" .$TaxCat ."'
+						AND taxauthority='" .$TaxAuth ."'";
 		$result4=DB_query($sql4,$db, $ErrMsg);
 		while ($myrow4=DB_fetch_array($result4)){
 			$TaxClass = 100 * $myrow4['taxrate'];
