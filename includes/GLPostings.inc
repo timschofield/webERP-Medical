@@ -48,7 +48,6 @@ $CreateTo = $LastPeriodRow[0];
 
 /*First off see if there are in fact any chartdetails */
 
-$ChartDetailsResult = DB_query("SELECT * FROM chartdetails",$db);
 $sql = "SELECT chartmaster.accountcode, MIN(periods.periodno) AS startperiod
 				FROM (chartmaster CROSS JOIN periods)
 				LEFT JOIN chartdetails ON chartmaster.accountcode = chartdetails.accountcode
