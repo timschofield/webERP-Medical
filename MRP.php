@@ -111,7 +111,9 @@ if (isset($_POST['submit'])) {
 	// part in the array for a level 4 sortpart would be created as a level 3 in levels, the fourth
 	// and last part in sortpart would have a level code of zero, meaning it has no components
 
-	$sql = "SELECT * FROM tempbom";
+	$sql = "SELECT sortpart,
+					level
+				FROM tempbom";
 	$result = DB_query($sql,$db);
 	while ($myrow=DB_fetch_array($result)) {
 			$parts = explode('%',$myrow['sortpart']);
@@ -458,7 +460,12 @@ if (isset($_POST['submit'])) {
 	// part, that serves as a gross requirement for a lower level part, so will read down through
 	// the Bill of Materials to generate those requirements in function LevelNetting().
 	for ($level = $maxlevel; $level >= $minlevel; $level--) {
-		$sql = "SELECT * FROM levels WHERE level = '" . $level ."' LIMIT 50000"; //should cover most eventualities!! ... yes indeed :-)
+		$sql = "SELECT part,
+						eoq,
+						pansize,
+						shrinkfactor
+					FROM levels
+					WHERE level = '" . $level ."' LIMIT 50000"; //should cover most eventualities!! ... yes indeed :-)
 
 		prnMsg('<br />------ ' . _('Processing level') .' ' . $level . ' ------','info');
 		flush();
@@ -513,7 +520,14 @@ if (isset($_POST['submit'])) {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') . '" alt="" />' . ' ' . $title . '</p>';
 
 	// Display parameters from last run
-	$sql = "SELECT * FROM mrpparameters";
+	$sql = "SELECT runtime,
+					location,
+					pansizeflag,
+					shrinkageflag,
+					eoqflag,
+					usemrpdemands,
+					leeway
+				FROM mrpparameters";
 	$result = DB_query($sql,$db,'','',false,false);
 	if (DB_error_no($db)==0){
 
@@ -599,7 +613,14 @@ function LevelNetting(&$db,$part,$eoq,$PanSize,$ShrinkFactor) {
 	$DecimalPlaces = $myrow[0];
 
 	// Load mrprequirements into $Requirements array
-	$sql = "SELECT * FROM mrprequirements WHERE part = '" .$part. "' ORDER BY daterequired";
+	$sql = "SELECT part,
+					daterequired,
+					quantity,
+					mrpdemandtype,
+					orderno,
+					directdemand,
+					whererequired
+				FROM mrprequirements WHERE part = '" .$part. "' ORDER BY daterequired";
 	$result = DB_query($sql,$db);
 	$Requirements = array();
 	$i = 0;
@@ -609,7 +630,17 @@ function LevelNetting(&$db,$part,$eoq,$PanSize,$ShrinkFactor) {
 	}  //end of while loop
 
 	// Load mrpsupplies into $supplies array
-	$sql = "SELECT * FROM mrpsupplies WHERE part = '" .$part. "' ORDER BY duedate";
+	$sql = "SELECT id,
+					part,
+					duedate,
+					supplyquantity,
+					ordertype,
+					orderno,
+					mrpdate,
+					updateflag
+				FROM mrpsupplies
+				WHERE part = '" .$part. "'
+				ORDER BY duedate";
 	$result = DB_query($sql,$db);
 	$supplies = array();
 	$i = 0;

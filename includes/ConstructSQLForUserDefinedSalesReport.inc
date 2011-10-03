@@ -269,7 +269,7 @@ while ($Cols = DB_fetch_array($ColsResult)){
 	     include('includes/footer.inc');
 	     exit;
 	 }
-	 $strt_ColNum = 9; /* Start searching after SELECT */
+	 $strt_ColNum = 9; /* Start searching after SELECT*/
 
 	/*find the comma just before the Select Cls statement for the numerator column */
 
@@ -294,7 +294,7 @@ while ($Cols = DB_fetch_array($ColsResult)){
 	     Exit;
 	}
 
-	 $strt_ColDen = 7; /* start searching after SELECT */
+	 $strt_ColDen = 7; /* start searching after SELECT*/
 
 	/*find the comma just before the Select Cls statement for the denominator column */
 
