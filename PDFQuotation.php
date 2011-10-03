@@ -151,7 +151,7 @@ if (DB_num_rows($result)>0){
 			$TaxAuth = $myrow3['taxauthid'];
 		}
 
-		$sql4 = "SELECT *
+		$sql4 = "SELECT taxrate
 					FROM taxauthrates
 					WHERE dispatchtaxprovince='" .$TaxProv ."'
 						AND taxcatid='" .$TaxCat ."'
