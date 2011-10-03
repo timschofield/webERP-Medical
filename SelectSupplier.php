@@ -13,7 +13,13 @@ if (isset($_GET['SupplierID'])) {
 }
 // only get geocode information if integration is on, and supplier has been selected
 if ($_SESSION['geocode_integration'] == 1 AND isset($_SESSION['SupplierID'])) {
-	$sql = "SELECT * FROM geocode_param WHERE 1";
+	$sql = "SELECT geocode_key,
+					center_long,
+					center_lat,
+					map_height,
+					map_width,
+					map_host
+				FROM geocode_param WHERE 1";
 	$ErrMsg = _('An error occurred in retrieving the information');;
 	$result = DB_query($sql, $db, $ErrMsg);
 	$myrow = DB_fetch_array($result);
