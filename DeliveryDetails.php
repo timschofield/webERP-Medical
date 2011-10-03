@@ -797,7 +797,7 @@ if (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 and $_SESSION['ExistingOrder']
 			$ItemPropertiesSQL = "UPDATE stockorderitemproperties
 											SET value='" . $PropertyValue . "'
 											WHERE stockid='" . $StockItem->StockID . "'
-												AND orderno='" . $OrderNo . "'
+												AND orderno='" . $_SESSION['Items'.$identifier]->OrderNo . "'
 												AND orderlineno='" . $StockItem->LineNumber . "'
 												AND stkcatpropid='" . $PropertyID . "'";
 			$ItemPropertyResult = DB_query($ItemPropertiesSQL,$db,$ErrMsg,$DbgMsg,true);
