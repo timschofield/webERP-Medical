@@ -1169,7 +1169,16 @@ function TempStockmoves(&$db) {
 	$ErrMsg = _('The SQL to to create passbom failed with the message');
 	$result = DB_query($sql, $db, $ErrMsg);
 	$sql = "INSERT tempstockmoves
-			  SELECT * FROM stockmoves
+			  SELECT stockid,
+				type,
+				transno,
+				loccode,
+				trandate,
+				prd,
+				reference,
+				qty,
+				newqoh
+			 FROM stockmoves
 			  WHERE (stockmoves.type='10' OR stockmoves.type='11')
 			  AND stockmoves.trandate >='" . $FromDate . "' AND stockmoves.trandate <='" . $ToDate . "'";
 	$ErrMsg = _('The SQL to create temporary stockmoves failed with the message');
