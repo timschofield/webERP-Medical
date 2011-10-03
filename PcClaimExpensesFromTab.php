@@ -344,9 +344,13 @@ if (isset($SelectedTabs)) {
 
 
 		if ( isset($_GET['edit'])) {
-			$sql = "SELECT *
-				FROM pcashdetails
-				WHERE counterindex='".$SelectedIndex."'";
+			$sql = "SELECT date,
+							codeexpense,
+							amount,
+							notes,
+							receipt
+						FROM pcashdetails
+						WHERE counterindex='".$SelectedIndex."'";
 
 			$result = DB_query($sql, $db);
 			$myrow = DB_fetch_array($result);
