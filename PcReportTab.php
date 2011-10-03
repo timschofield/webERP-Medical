@@ -113,8 +113,11 @@ if (DB_error_no($db)!=0){
 
 	include('includes/PDFTabReportHeader.inc');
 
-	$SqlTabs = "SELECT * FROM pctabs
-			WHERE tabcode='".$SelectedTabs."'";
+	$SqlTabs = "SELECT usercode,
+						currency,
+						authorizer
+					FROM pctabs
+					WHERE tabcode='".$SelectedTabs."'";
 
 	$TabResult = DB_query($SqlTabs,	$db, _('No Petty Cash tabs were returned by the SQL because'), _('The SQL that failed was:'));
 
@@ -332,7 +335,8 @@ if (DB_error_no($db)!=0){
 					amount,
 					notes,
 					receipt,
-					authorized
+					authorized,
+					codeexpense
 			FROM pcashdetails
 			WHERE tabcode='".$SelectedTabs."'
 				AND date >='" . $SQL_FromDate . "'
@@ -375,7 +379,7 @@ if (DB_error_no($db)!=0){
 	$Description=DB_fetch_array($ResultDes);
 
 	if (!isset($Description['description'])){
-	$Description['description']='ASSIGNCASH';
+		$Description['description']='ASSIGNCASH';
 	}
 	if ($myrow['authorized'] != '0000-00-00'){
 		printf('<td>%s</td>
@@ -422,7 +426,7 @@ if (DB_error_no($db)!=0){
 	}
 
 	echo '<tr><td colspan="2" class="number">' . _('Balance At') . ' '.$_POST['ToDate'].':</td>
-				<td>'.locale_money_format($Amount['amount'],$Tabs['currency']).' </td>
+				<td class="number">'.locale_money_format($Amount['amount'],$Tabs['currency']).' </td>
 				<td>'.$Tabs['currency'].'</td>
 			</tr>';
 
