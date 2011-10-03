@@ -98,7 +98,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 	echo '<br /><div class="centre"><input type="submit" name="ShowPL" value="'._('Show on Screen (HTML)').'" /></div>';
 	echo '<br /><div class="centre"><input type="submit" name="PrintPDF" value="'._('Produce PDF Report').'" /></div>';
 
-	/*Now do the posting while the user is thinking about the period to select */
+	/*Now do the posting while the user is thinking about the period to select*/
 
 	include ('includes/GLPostings.inc');
 

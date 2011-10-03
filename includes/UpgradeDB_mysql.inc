@@ -316,7 +316,7 @@ function InsertRecord($Table, $CheckFields, $CheckValues, $Fields, $Values, $db)
 function DropPrimaryKey($Table, $OldKey, $db) {
 	$Total=0;
 	foreach ($OldKey as $Field) {
-		$sql="SELECT * FROM information_schema.key_column_usage WHERE table_name='".$Table."' AND constraint_name='primary' AND
+		$sql="SELECT table_name FROM information_schema.key_column_usage WHERE table_name='".$Table."' AND constraint_name='primary' AND
 		table_schema='".$_SESSION['DatabaseName']."' AND COLUMN_NAME='".$Field."'";
 		$result = DB_query($sql, $db);
 		$Total = $Total + DB_num_rows($result);
@@ -334,7 +334,7 @@ function DropPrimaryKey($Table, $OldKey, $db) {
 }
 
 function AddPrimaryKey($Table, $Fields, $db) {
-	$sql="SELECT * FROM information_schema.key_column_usage WHERE table_name='".$Table."' AND constraint_name='primary' AND
+	$sql="SELECT table_name FROM information_schema.key_column_usage WHERE table_name='".$Table."' AND constraint_name='primary' AND
 		table_schema='".$_SESSION['DatabaseName']."'";
 	$result = DB_query($sql, $db);
 	if (DB_num_rows($result)!=sizeOf($Fields)) {

@@ -54,7 +54,7 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 	echo '<br /><div class="centre"><input type="submit" name="ShowBalanceSheet" value="'._('Show on Screen (HTML)').'" /></div>';
 	echo '<br /><div class="centre"><input type="submit" name="PrintPDF" value="'._('Produce PDF Report').'" /></div>';
 
-	/*Now do the posting while the user is thinking about the period to select */
+	/*Now do the posting while the user is thinking about the period to select*/
 	include ('includes/GLPostings.inc');
 
 } elseif (isset($_POST['PrintPDF'])) {
