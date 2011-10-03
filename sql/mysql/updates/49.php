@@ -8,7 +8,7 @@ ChangeColumnDefault('enddate', 'prices', 'Date', 'NOT NULL', '0000-00-00', $db);
 $sql="DESC prices enddate";
 $result=DB_query($sql, $db);
 if (DB_num_rows($result)>0) {
-	$sql="SELECT * FROM prices WHERE enddate='9999-12-31'";
+	$sql="SELECT price FROM prices WHERE enddate='9999-12-31'";
 	$result=DB_query($sql, $db);
 	if (DB_num_rows($result)>0) {
 		$response=executeSQL("UPDATE prices SET startdate='1999-01-01', enddate='0000-00-00' WHERE enddate='9999-12-31'", $db, False);
