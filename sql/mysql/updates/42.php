@@ -162,7 +162,7 @@ if (DB_num_rows($result)!=0) {
 
 ChangeColumnName('id', 'fixedassets', 'int(11)', 'NOT NULL', 0, 'assetid', $db, 'AUTO_INCREMENT');
 
-$sql="SELECT * FROM  stockcategory WHERE stocktype='A'";
+$sql="SELECT categoryid FROM  stockcategory WHERE stocktype='A'";
 $result=DB_query($sql, $db);
 if (DB_num_rows($result)!=0) {
 	$response=executeSQL("DELETE FROM stockcategory WHERE stocktype='A'", $db, False);
