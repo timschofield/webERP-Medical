@@ -26,7 +26,13 @@ if (!isset($_SESSION['CustomerType'])) { //initialise if not already done
 }
 // only run geocode if integration is turned on and customer has been selected
 if ($_SESSION['geocode_integration'] == 1 AND $_SESSION['CustomerID'] != "") {
-	$sql = "SELECT * FROM geocode_param WHERE 1";
+	$sql = "SELECT geocode_key,
+					center_long,
+					center_lat,
+					map_height,
+					map_width,
+					map_host
+				FROM geocode_param WHERE 1";
 	$ErrMsg = _('An error occurred in retrieving the information');
 	$result = DB_query($sql, $db, $ErrMsg);
 	$myrow = DB_fetch_array($result);
@@ -541,7 +547,15 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 		}
 		// Customer Contacts
 		echo '<tr><td colspan="2">';
-		$sql = "SELECT * FROM custcontacts where debtorno='" . $_SESSION['CustomerID'] . "' ORDER BY contid";
+		$sql = "SELECT contid,
+						debtorno,
+						contactname,
+						role,
+						phoneno,
+						notes
+					FROM custcontacts
+					WHERE debtorno='" . $_SESSION['CustomerID'] . "'
+					ORDER BY contid";
 		$result = DB_query($sql, $db);
 		if (DB_num_rows($result) <> 0) {
 			echo '<table width="45%">';
@@ -563,23 +577,31 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 					echo '<tr class="EvenTableRows">';
 					$k = 1;
 				}
-				echo '<td>' . $myrow[2] . '</td>
-								<td>' . $myrow[3] . '</td>
-								<td>' . $myrow[4] . '</td>
-								<td>' . $myrow[5] . '</td>
-								<td><a href="AddCustomerContacts.php?Id=' . $myrow[0] . '&DebtorNo=' . $myrow[1] . '">' . _('Edit') . '</a></td>
-								<td><a href="AddCustomerContacts.php?Id=' . $myrow[0] . '&DebtorNo=' . $myrow[1] . '&delete=1">' . _('Delete') . '</a></td>
-								</tr>';
+				echo '<td>' . $myrow['contactname'] . '</td>
+						<td>' . $myrow['role'] . '</td>
+						<td>' . $myrow['phoneno'] . '</td>
+						<td>' . $myrow['notes'] . '</td>
+						<td><a href="AddCustomerContacts.php?Id=' . $myrow['contid'] . '&DebtorNo=' . $myrow['debtorno'] . '">' . _('Edit') . '</a></td>
+						<td><a href="AddCustomerContacts.php?Id=' . $myrow['contid'] . '&DebtorNo=' . $myrow['debtorno'] . '&delete=1">' . _('Delete') . '</a></td>
+					</tr>';
 			} //END WHILE LIST LOOP
 			echo '</table>';
 		} else {
-			if ($_SESSION['CustomerID'] != "") {
+			if ($_SESSION['CustomerID'] != '') {
 				echo '<br /><div class="centre"><img src="' . $rootpath . '/css/' . $theme . '/images/group_add.png" title="' . _('Customer Contacts') . '" alt=""><a href="AddCustomerContacts.php?DebtorNo=' . $_SESSION['CustomerID'] . '">' . ' ' . _('Add New Contact') . '</a></div>';
 			}
 		}
 		// Customer Notes
 		echo '<tr><td colspan="2">';
-		$sql = "SELECT * FROM custnotes where debtorno='" . $_SESSION['CustomerID'] . "' ORDER BY date DESC";
+		$sql = "SELECT noteid,
+						debtorno,
+						href,
+						note,
+						date,
+						priority
+					FROM custnotes
+					WHERE debtorno='" . $_SESSION['CustomerID'] . "'
+					ORDER BY date DESC";
 		$result = DB_query($sql, $db);
 		if (DB_num_rows($result) <> 0) {
 			echo '<br /><div class="centre"><img src="' . $rootpath . '/css/' . $theme . '/images/note_add.png" title="' . _('Customer Notes') . '" alt="" />' . ' ' . _('Customer Notes') . '</div><br />';
@@ -601,12 +623,12 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 					echo '<tr class="EvenTableRows">';
 					$k = 1;
 				}
-				echo '<td>' . $myrow[4] . '</td>
-							<td>' . $myrow[3] . '</td>
-							<td>' . $myrow[2] . '</td>
-							<td>' . $myrow[5] . '</td>
-							<td><a href="AddCustomerNotes.php?Id=' . $myrow[0] . '&DebtorNo=' . $myrow[1] . '">' . _('Edit') . '</a></td>
-							<td><a href="AddCustomerNotes.php?Id=' . $myrow[0] . '&DebtorNo=' . $myrow[1] . '&delete=1">' . _('Delete') . '</a></td>
+				echo '<td>' . $myrow['date'] . '</td>
+							<td>' . $myrow['note'] . '</td>
+							<td>' . $myrow['href'] . '</td>
+							<td>' . $myrow['priorities'] . '</td>
+							<td><a href="AddCustomerNotes.php?Id=' . $myrow['noteid'] . '&DebtorNo=' . $myrow['debtorno'] . '">' . _('Edit') . '</a></td>
+							<td><a href="AddCustomerNotes.php?Id=' . $myrow['noteid'] . '&DebtorNo=' . $myrow['debtorno'] . '&delete=1">' . _('Delete') . '</a></td>
 							</tr>';
 			} //END WHILE LIST LOOP
 			echo '</table>';
@@ -617,7 +639,15 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 		}
 		// Custome Type Notes
 		echo '<tr><td colspan="2">';
-		$sql = "SELECT * FROM debtortypenotes where typeid='" . $CustomerType . "' ORDER BY date DESC";
+		$sql = "SELECT noteid,
+						typeid,
+						href,
+						note,
+						date,
+						priority
+					FROM debtortypenotes
+					WHERE typeid='" . $CustomerType . "'
+					ORDER BY date DESC";
 		$result = DB_query($sql, $db);
 		if (DB_num_rows($result) <> 0) {
 			echo '<br /><div class="centre"><img src="' . $rootpath . '/css/' . $theme . '/images/folder_add.png" title="' . _('Customer Type (Group) Notes') . '" alt="" />' . ' ' . _('Customer Type (Group) Notes for:' . '<b> ' . $CustomerTypeName . '</b>') . '</div><br />';
@@ -639,12 +669,12 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 					echo '<tr class="EvenTableRows">';
 					$k = 1;
 				}
-				echo '<td>' . $myrow[4] . '</td>
-						<td>' . $myrow[3] . '</td>
-						<td>' . $myrow[2] . '</td>
-						<td>' . $myrow[5] . '</td>
-						<td><a href="AddCustomerTypeNotes.php?Id=' . $myrow[0] . '&DebtorType=' . $myrow[1] . '">' . _('Edit') . '</a></td>
-						<td><a href="AddCustomerTypeNotes.php?Id=' . $myrow[0] . '&DebtorType=' . $myrow[1] . '&delete=1">' . _('Delete') . '</a></td>
+				echo '<td>' . $myrow['date'] . '</td>
+						<td>' . $myrow['note'] . '</td>
+						<td>' . $myrow['href'] . '</td>
+						<td>' . $myrow['priority'] . '</td>
+						<td><a href="AddCustomerTypeNotes.php?Id=' . $myrow['noteid'] . '&DebtorType=' . $myrow['typeid'] . '">' . _('Edit') . '</a></td>
+						<td><a href="AddCustomerTypeNotes.php?Id=' . $myrow['noteid'] . '&DebtorType=' . $myrow['typeid'] . '&delete=1">' . _('Delete') . '</a></td>
 					</tr>';
 			} //END WHILE LIST LOOP
 			echo '</table>';
