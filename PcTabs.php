@@ -278,8 +278,17 @@ if (!isset($_GET['delete'])) {
 
 	if ( isset($SelectedTab) AND $SelectedTab!='' ) {
 
-		$sql = "SELECT * FROM pctabs
-				WHERE tabcode='".$SelectedTab."'";
+		$sql = "SELECT tabcode,
+						usercode,
+						typetabcode,
+						currency,
+						tablimit,
+						assigner,
+						authorizer,
+						glaccountassignment,
+						glaccountpcash
+					FROM pctabs
+					WHERE tabcode='".$SelectedTab."'";
 
 		$result = DB_query($sql, $db);
 		$myrow = DB_fetch_array($result);
