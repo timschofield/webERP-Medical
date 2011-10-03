@@ -161,7 +161,6 @@ if ($AlreadyOnThisOrder!=1){
 															$myItemRow['nextserialno'],
 															$ExRate,
 															$ConversionFactor);
-
 			}
 		 } else {
 			prnMsg(_('The item code') . ' ' . $NewItem . ' ' . _('does not have a cost set up and order entry is set up to prohibit sales of items with no cost data entered'),'warn');

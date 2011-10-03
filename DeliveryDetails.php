@@ -417,6 +417,23 @@ if (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 and $_SESSION['ExistingOrder']
 		$ErrMsg = _('Unable to add the sales order line');
 		$Ins_LineItemResult = DB_query($LineItemsSQL,$db,$ErrMsg,$DbgMsg,true);
 
+		if (count($StockItem->ItemProperties) > 0) {
+			foreach ($StockItem->ItemProperties as $PropertyID=>$PropertyValue) {
+				$ItemPropertiesSQL = "INSERT INTO stockorderitemproperties (
+												stockid,
+												orderno,
+												orderlineno,
+												stkcatpropid,
+												value)
+											VALUES (
+												'" . $StockItem->StockID . "',
+												'" . $OrderNo . "',
+												'" . $StockItem->LineNumber . "',
+												'" . $PropertyID . "',
+												'" . $PropertyValue . "')";
+				$ItemPropertyResult = DB_query($ItemPropertiesSQL,$db,$ErrMsg,$DbgMsg,true);
+			}
+		}
 		/*Now check to see if the item is manufactured
 		 * 			and AutoCreateWOs is on
 		 * 			and it is a real order (not just a quotation)*/
@@ -776,6 +793,16 @@ if (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 and $_SESSION['ExistingOrder']
 		$ErrMsg = _('The updated order line cannot be modified because');
 		$Upd_LineItemResult = DB_query($LineItemsSQL,$db,$ErrMsg,$DbgMsg,true);
 
+		foreach ($StockItem->ItemProperties as $PropertyID=>$PropertyValue) {
+			$ItemPropertiesSQL = "UPDATE stockorderitemproperties
+											SET value='" . $PropertyValue . "'
+											WHERE stockid='" . $StockItem->StockID . "'
+												AND orderno='" . $OrderNo . "'
+												AND orderlineno='" . $StockItem->LineNumber . "'
+												AND stkcatpropid='" . $PropertyID . "'";
+			$ItemPropertyResult = DB_query($ItemPropertiesSQL,$db,$ErrMsg,$DbgMsg,true);
+		}
+
 	} /* updated line items into sales order details */
 
 	$Result=DB_Txn_Commit($db);
@@ -832,10 +859,10 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 	foreach ($_SESSION['Items'.$identifier]->LineItems as $StockItem) {
 
 		$LineTotal = $StockItem->Quantity * $StockItem->Price * (1 - $StockItem->DiscountPercent);
-		$DisplayLineTotal = number_format($LineTotal,2);
-		$DisplayPrice = number_format($StockItem->Price,2);
-		$DisplayQuantity = number_format($StockItem->Quantity,$StockItem->DecimalPlaces);
-		$DisplayDiscount = number_format(($StockItem->DiscountPercent * 100),2);
+		$DisplayLineTotal = locale_money_format($LineTotal,$_SESSION['Items'.$identifier]->DefaultCurrency);
+		$DisplayPrice = locale_money_format($StockItem->Price,$_SESSION['Items'.$identifier]->DefaultCurrency);
+		$DisplayQuantity = locale_number_format($StockItem->Quantity,$StockItem->DecimalPlaces);
+		$DisplayDiscount = locale_number_format(($StockItem->DiscountPercent * 100),2);
 
 
 		if ($k==1){
@@ -860,14 +887,14 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 		$_SESSION['Items'.$identifier]->totalWeight = $_SESSION['Items'.$identifier]->totalWeight + ($StockItem->Quantity * $StockItem->Weight);
 	}
 
-	$DisplayTotal = number_format($_SESSION['Items'.$identifier]->total,2);
+	$DisplayTotal = locale_money_format($_SESSION['Items'.$identifier]->total,$_SESSION['Items'.$identifier]->DefaultCurrency);
 	echo '<tr class="EvenTableRows">
 		<td colspan="6" class="number"><b>'. _('TOTAL Excl Tax/Freight') .'</b></td>
 		<td class="number">'.$DisplayTotal.'</td>
 	</tr>';
 
-	$DisplayVolume = number_format($_SESSION['Items'.$identifier]->totalVolume,2);
-	$DisplayWeight = number_format($_SESSION['Items'.$identifier]->totalWeight,2);
+	$DisplayVolume = locale_number_format($_SESSION['Items'.$identifier]->totalVolume,2);
+	$DisplayWeight = locale_number_format($_SESSION['Items'.$identifier]->totalWeight,2);
 	echo '<br /><tr class="EvenTableRows"><td colspan="3"></td>
 		<td>'. _('Total Weight') .':</td>
 		<td class="number">'.$DisplayWeight.'</td>
@@ -895,9 +922,9 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 	foreach ($_SESSION['Items'.$identifier]->LineItems as $StockItem) {
 
 		$LineTotal = $StockItem->Quantity * $StockItem->Price * (1 - $StockItem->DiscountPercent);
-		$DisplayLineTotal = number_format($LineTotal,2);
-		$DisplayPrice = number_format($StockItem->Price,2);
-		$DisplayQuantity = number_format($StockItem->Quantity,$StockItem->DecimalPlaces);
+		$DisplayLineTotal = locale_money_format($LineTotal,$_SESSION['Items'.$identifier]->DefaultCurrency);
+		$DisplayPrice = locale_money_format($StockItem->Price,$_SESSION['Items'.$identifier]->DefaultCurrency);
+		$DisplayQuantity = locale_number_format($StockItem->Quantity,$StockItem->DecimalPlaces);
 
 		if ($k==1){
 			echo '<tr class="OddTableRows">';
@@ -919,7 +946,7 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 
 	}
 
-	$DisplayTotal = number_format($_SESSION['Items'.$identifier]->total,2);
+	$DisplayTotal = locale_money_format($_SESSION['Items'.$identifier]->total,$_SESSION['Items'.$identifier]->DefaultCurrency);
 	echo '<table class="selection"><tr>
 		<td>'. _('Total Weight') .':</td>
 		<td>'.$DisplayWeight .'</td>
@@ -927,8 +954,8 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 		<td>'.$DisplayVolume .'</td>
 	</tr></table>';
 
-	$DisplayVolume = number_format($_SESSION['Items'.$identifier]->totalVolume,2);
-	$DisplayWeight = number_format($_SESSION['Items'.$identifier]->totalWeight,2);
+	$DisplayVolume = locale_number_format($_SESSION['Items'.$identifier]->totalVolume,2);
+	$DisplayWeight = locale_number_format($_SESSION['Items'.$identifier]->totalWeight,2);
 	echo '<table class="selection"><tr>
 		<td>'. _('Total Weight') .':</td>
 		<td>'. $DisplayWeight .'</td>

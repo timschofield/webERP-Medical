@@ -21,16 +21,21 @@ include('includes/SQL_CommonFunctions.inc');
 if (isset($_POST['QuickEntry'])){
 	unset($_POST['PartSearch']);
 }
-
-if (isset($_POST['order_items'])){
-	foreach ($_POST as $key => $value) {
-		if (mb_strstr($key,'StockID')) {
-			$Index=mb_substr($key, 7);
-			$StockID=$value;
-			$NewItem_array[$StockID] = filter_number_input($_POST['Quantity'.$Index]);
-			$_POST['Units'.$StockID]=$_POST['Units'.$Index];
-			$NewItem='Here';
-		}
+foreach ($_POST as $key => $value) {
+	if (mb_strstr($key,'StockID')) {
+		$Index=mb_substr($key, 7);
+		$StockID=$value;
+		$NewItem_array[$StockID] = filter_number_input($_POST['Quantity'.$Index]);
+		$_POST['Units'.$StockID]=$_POST['Units'.$Index];
+		$NewItem=True;
+	}
+	if (mb_strstr($key, 'PropOrderLine')) {
+		$OrderLinePropertyArray = explode('x', mb_substr($key, 13));
+		$OrderLine = $OrderLinePropertyArray[0];
+		$Index = $OrderLinePropertyArray[1];
+		$PropCategoryID = $_POST['PropID'.$OrderLine.'x'.$Index];
+		$PropValue = $_POST['PropValue'.$OrderLine.'x'.$Index];
+		$PropertiesArray[$OrderLine][$PropCategoryID] = $PropValue;
 	}
 }
 
@@ -227,6 +232,21 @@ if (isset($_GET['ModifyOrderNumber'])
 
 			while ($myrow=db_fetch_array($LineItemsResult)) {
 					if ($myrow['completed']==0){
+
+						$PropertiesSQL="SELECT stkcatpropid,
+												value
+											FROM stockorderitemproperties
+											WHERE orderno='" .  $_GET['ModifyOrderNumber'] . "'
+												AND orderlineno='" . $myrow['orderlineno'] . "'";
+						$PropertiesResult=DB_query($PropertiesSQL, $db);
+						if (DB_num_rows($PropertiesResult)==0) {
+							$PropertiesArray=array();
+						} else {
+							while ($MyPropertiesRow=DB_fetch_array($PropertiesResult)) {
+								$PropertiesArray[$MyPropertiesRow['stkcatpropid']]=$MyPropertiesRow['value'];
+							}
+						}
+
 						$_SESSION['Items'.$identifier]->add_to_cart($myrow['stkcode'],
 																	$myrow['quantity'],
 																	$myrow['description'],
@@ -254,8 +274,8 @@ if (isset($_GET['ModifyOrderNumber'])
 																	$myrow['eoq'],
 																	$myrow['nextserialno'],
 																	$ExRate,
-																	$myrow['conversionfactor'] );
-
+																	$myrow['conversionfactor'],
+																	$PropertiesArray );
 				/*Just populating with existing order - no DBUpdates */
 					}
 					$LastLineNo = $myrow['orderlineno'];
@@ -639,12 +659,12 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 	echo '<td><input tabindex="3" type="text" name="CustPhone" size="15" maxlength="18" /></td>';
 	echo '</tr>';
 	echo '</table>';
-   echo '<br /><div class="centre"><input tabindex="4" type="submit" name="SearchCust" value="' . _('Search Now') . '" />';
-   echo '<input tabindex="5" type="reset" value="' . _('Reset') . '" /></div>';
+	echo '<br /><div class="centre"><input tabindex="4" type="submit" name="SearchCust" value="' . _('Search Now') . '" />';
+	echo '<input tabindex="5" type="reset" value="' . _('Reset') . '" /></div>';
 
 	if (isset($result_CustSelect)) {
 
-		echo '<table cellpadding="2">';
+		echo '<table cellpadding="2" class="selection">';
 
 		$TableHeader = '<br /><tr>
 								<th>' . _('Customer') . '</th>
@@ -885,11 +905,6 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		if (DB_num_rows($SearchResult)==0 ){
 			prnMsg (_('There are no products available meeting the criteria specified'),'info');
 		}
-		if (DB_num_rows($SearchResult)==1){
-			$myrow=DB_fetch_array($SearchResult);
-			$NewItem = $myrow['stockid'];
-			DB_data_seek($SearchResult,0);
-		}
 		if (DB_num_rows($SearchResult)<$_SESSION['DisplayRecordsMax']){
 			$Offset=0;
 		}
@@ -916,7 +931,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 	/*Process Quick Entry */
 	/* If enter is pressed on the quick entry screen, the default button may be Recalculate */
-	 if (isset($_POST['order_items'])
+	if (isset($_POST['order_items'])
 			OR isset($_POST['QuickEntry'])
 			OR isset($_POST['Recalculate'])){
 
@@ -1156,8 +1171,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 							OR ABS($OrderLine->DiscountPercent -$DiscountPercentage/100) >0.001
 							OR $OrderLine->Narrative != $Narrative
 							OR $OrderLine->ItemDue != $_POST['ItemDue_' . $OrderLine->LineNumber]
-							OR $OrderLine->POLine != $_POST['POLine_' . $OrderLine->LineNumber]) {
-
+							OR $OrderLine->POLine != $_POST['POLine_' . $OrderLine->LineNumber]
+							OR isset($PropertiesArray)) {
 					$_SESSION['Items'.$identifier]->update_cart_item($OrderLine->LineNumber,
 																	$Quantity,
 																	$Price,
@@ -1168,7 +1183,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 																	'Yes', /*Update DB */
 																	$_POST['ItemDue_' . $OrderLine->LineNumber],
 																	$_POST['POLine_' . $OrderLine->LineNumber],
-																	$_POST['GPPercent_' . $OrderLine->LineNumber]);
+																	$_POST['GPPercent_' . $OrderLine->LineNumber],
+																	$PropertiesArray[$OrderLine->LineNumber]);
 				}
 			} //page not called from itself - POST variables not set
 		}
@@ -1314,8 +1330,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 /* This is where the order as selected should be displayed  reflecting any deletions or insertions*/
 
 		echo '<br />
-					<table width="90%" cellpadding="2" colspan="7">
-					<tr bgcolor=#800000>';
+					<table width="90%" cellpadding="2" colspan="7" class="selection">
+					<tr bgcolor="#800000">';
 		if($_SESSION['Items'.$identifier]->DefaultPOLine == 1){
 			echo '<th>' . _('PO Line') . '</th>';
 		}
@@ -1411,6 +1427,75 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				echo '<input type="hidden" name="Narrative" value="" />';
 			}
 
+			$PropertySQL="SELECT label,
+								controltype,
+								stkcatpropid,
+								numericvalue
+							FROM stockcatproperties
+							LEFT JOIN stockmaster
+							ON stockcatproperties.categoryid=stockmaster.categoryid
+							WHERE stockmaster.stockid='".$OrderLine->StockID."'
+								AND reqatsalesorder=1";
+			$PropertyResult=DB_query($PropertySQL, $db);
+			if (DB_num_rows($PropertyResult)>0) {
+				$PropertyCounter=0;
+				while ($PropertyRow=DB_fetch_array($PropertyResult)) {
+					if ($k==1){
+						echo '<tr class="OddTableRows">';
+						$k=0;
+					} else {
+						echo '<tr class="EvenTableRows">';
+						$k=1;
+					}
+					echo '<td>' . $PropertyRow['label'] . '</td>';
+					echo '<input type="hidden" name="PropOrderLine' . $OrderLine->LineNumber . 'x' . $PropertyCounter . '" value="" />';
+					echo '<input type="hidden" name="PropID' . $OrderLine->LineNumber . 'x' . $PropertyCounter . '" value="' . $PropertyRow['stkcatpropid'] . '" />';
+					switch ($PropertyRow['controltype']) {
+						case 0:
+							if ($PropertyRow['numericvalue']==0) {
+								echo '<td><input type="text" name="PropValue'.$OrderLine->LineNumber . 'x' . $PropertyCounter.'" value="'.$OrderLine->ItemProperties[$PropertyRow['stkcatpropid']].'" /></td>';
+							} else {
+								echo '<td><input type="text" class="number" size="12" name="PropValue'.$OrderLine->LineNumber . 'x' . $PropertyCounter.'" value="'.$OrderLine->ItemProperties[$PropertyRow['stkcatpropid']].'" /></td>';
+							}
+							break;
+						case 1; //select box
+							$OptionValues = array();
+							if ($PropertyRow['label']=='Manufacturers') {
+								$sql="SELECT coyname from manufacturers";
+								$result=DB_query($sql, $db);
+								while ($myrow=DB_fetch_array($result)) {
+									$OptionValues[]=$myrow['coyname'];
+								}
+							} else {
+								$OptionValues = explode(',',$PropertyRow['defaultvalue']);
+							}
+							echo '<select name="PropValue' . $OrderLine->LineNumber . 'x' . $PropertyCounter . '">';
+							foreach ($OptionValues as $PropertyOptionValue){
+								if ($PropertyOptionValue == $OrderLine->ItemProperties[$PropertyRow['stkcatpropid']]){
+									echo '<option selected="True" value="' . $PropertyOptionValue . '">' . $PropertyOptionValue . '</option>';
+								} else {
+									echo '<option value="' . $PropertyOptionValue . '">' . $PropertyOptionValue . '</option>';
+								}
+							}
+							echo '</select>';
+							break;
+						case 2; //checkbox
+							if ($OrderLine->ItemProperties[$PropertyRow['stkcatpropid']]==1){
+								echo '<input type="checkbox" name="PropValue' . $OrderLine->LineNumber . 'x' . $PropertyCounter . '" checked="True" />';
+							} else {
+								echo '<input type="checkbox" name="PropValue' . $OrderLine->LineNumber . 'x' . $PropertyCounter . '" />';
+							}
+							break;
+						case 3: //date box
+							echo '<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="10" maxlength="10" name="PropValue'.$OrderLine->LineNumber . 'x' . $PropertyCounter.'" value="'.$OrderLine->ItemProperties[$PropertyRow['stkcatpropid']].'" /></td>';
+							break;
+						default:
+							break;
+					}
+					echo '<td colspan="9"></td></tr>';
+					$PropertyCounter++;
+				}
+			}
 			$_SESSION['Items'.$identifier]->total = $_SESSION['Items'.$identifier]->total + $LineTotal;
 			$_SESSION['Items'.$identifier]->totalVolume = $_SESSION['Items'.$identifier]->totalVolume + $OrderLine->Quantity * $OrderLine->Volume;
 			$_SESSION['Items'.$identifier]->totalWeight = $_SESSION['Items'.$identifier]->totalWeight + $OrderLine->Quantity * $OrderLine->Weight;
@@ -1428,7 +1513,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 		$DisplayVolume = locale_number_format($_SESSION['Items'.$identifier]->totalVolume,2);
 		$DisplayWeight = locale_number_format($_SESSION['Items'.$identifier]->totalWeight,2);
-		echo '<table><tr class="EvenTableRows"><td>' . _('Total Weight') . ':</td>
+		echo '<br /><table class="selection"><tr class="EvenTableRows"><td>' . _('Total Weight') . ':</td>
 						 <td>' . $DisplayWeight . '</td>
 						 <td>' . _('Total Volume') . ':</td>
 						 <td>' . $DisplayVolume . '</td>
@@ -1436,7 +1521,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 
 		echo '<br /><div class="centre"><input type="submit" name="Recalculate" value="' . _('Re-Calculate') . '" />
-				<input type="submit" name="DeliveryDetails" value="' . _('Enter Delivery Details and Confirm Order') . '" /></div><hr />';
+				<input type="submit" name="DeliveryDetails" value="' . _('Enter Delivery Details and Confirm Order') . '" /></div>';
 	} # end of if lines
 
 /* Now show the stock item selection search stuff below */
@@ -1592,7 +1677,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 					<input tabindex="'.($j+8).'" type="submit" value="'._('Add to Sales Order').'" /></td>';
 			echo '</table>';
 		} //end of if Frequently Ordered Items > 0
-		
+
 		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ';
 		echo _('Search for Order Items') . '</p>';
 		echo '<div class="page_help_text">' . _('Search for Order Items') . _(', Searches the database for items, you can narrow the results by selecting a stock category, or just enter a partial item description or partial item code') . '.</div><br />';

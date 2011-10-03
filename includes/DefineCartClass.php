@@ -46,15 +46,15 @@ Class Cart {
 	var $ShipVia;
 	var $FreightCost;
 	var $FreightTaxes;
-	Var $OrderNo;
-	Var $Consignment;
-	Var $Quotation;
-	Var $DeliverBlind;
-	Var $CreditAvailable; //in customer currency
-	Var $TaxGroup;
-	Var $DispatchTaxProvince;
-	Var $DefaultPOLine;
-	Var $DeliveryDays;
+	var $OrderNo;
+	var $Consignment;
+	var $Quotation;
+	var $DeliverBlind;
+	var $CreditAvailable; //in customer currency
+	var $TaxGroup;
+	var $DispatchTaxProvince;
+	var $DefaultPOLine;
+	var $DeliveryDays;
 	var $TaxTotals;
 	var $TaxGLCodes;
 	var $BuyerName;
@@ -97,7 +97,8 @@ Class Cart {
 							$EOQ=1,
 							$NextSerialNo=0,
 							$ExRate=1,
-							$ConversionFactor=1){
+							$ConversionFactor=1,
+							$ItemProperties=array()){
 
 		if (isset($StockID) AND $StockID!="" AND $Qty>0 AND isset($Qty)){
 
@@ -136,6 +137,7 @@ Class Cart {
 															$EOQ,
 															$NextSerialNo,
 															$ExRate);
+			$this->LineItems[$LineNumber]->ItemProperties=$ItemProperties;
 			$this->ItemsOrdered++;
 
 			if ($UpdateDB=='Yes'){
@@ -189,7 +191,8 @@ Class Cart {
 								$UpdateDB='No',
 								$ItemDue,
 								$POLine,
-								$GPPercent){
+								$GPPercent,
+								$ItemProperties=array()){
 
 		if ($Qty>0){
 			$this->LineItems[$UpdateLineNumber]->Quantity = $Qty;
@@ -202,6 +205,7 @@ Class Cart {
 		$this->LineItems[$UpdateLineNumber]->ItemDue = $ItemDue;
 		$this->LineItems[$UpdateLineNumber]->POLine = $POLine;
 		$this->LineItems[$UpdateLineNumber]->GPPercent = $GPPercent;
+		$this->LineItems[$UpdateLineNumber]->ItemProperties = $ItemProperties;
 		if ($UpdateDB=='Yes'){
 			global $db;
 			$result = DB_query("UPDATE salesorderdetails SET quantity='" . $Qty . "',
@@ -419,37 +423,38 @@ Class Cart {
 } /* end of cart class defintion */
 
 Class LineDetails {
-	Var $LineNumber;
-	Var $StockID;
-	Var $ItemDescription;
-	Var $Quantity;
-	Var $Price;
-	Var $DiscountPercent;
-	Var $Units;
+	var $LineNumber;
+	var $StockID;
+	var $ItemDescription;
+	var $Quantity;
+	var $Price;
+	var $DiscountPercent;
+	var $Units;
 	var $ConversionFactor;
-	Var $Volume;
-	Var $Weight;
-	Var $ActDispDate;
-	Var $QtyInv;
-	Var $QtyDispatched;
-	Var $StandardCost;
-	Var $QOHatLoc;
-	Var $MBflag;	/*Make Buy Dummy, Assembly or Kitset */
-	Var $DiscCat; /* Discount Category of the item if any */
-	Var $Controlled;
-	Var $Serialised;
-	Var $DecimalPlaces;
+	var $Volume;
+	var $Weight;
+	var $ActDispDate;
+	var $QtyInv;
+	var $QtyDispatched;
+	var $StandardCost;
+	var $QOHatLoc;
+	var $MBflag;	/*Make Buy Dummy, Assembly or Kitset */
+	var $DiscCat; /* Discount Category of the item if any */
+	var $Controlled;
+	var $Serialised;
+	var $DecimalPlaces;
 	var $PriceDecimals;
-	Var $SerialItems;
-	Var $Narrative;
-	Var $TaxCategory;
-	Var $Taxes;
-	Var $WorkOrderNo;
-	Var $ItemDue;
-	Var $POLine;
-	Var $EOQ;
-	Var $NextSerialNo;
-	Var $GPPercent;
+	var $SerialItems;
+	var $Narrative;
+	var $TaxCategory;
+	var $Taxes;
+	var $WorkOrderNo;
+	var $ItemDue;
+	var $POLine;
+	var $EOQ;
+	var $NextSerialNo;
+	var $GPPercent;
+	var $ItemProperties;
 
 	function LineDetails ($LineNumber,
 							$StockItem,
@@ -507,6 +512,7 @@ Class LineDetails {
 		$this->SerialItems = array();
 		$this->Narrative = $Narrative;
 		$this->Taxes = array();
+		$this->ItemProperties = array();
 		$this->TaxCategory = $TaxCategory;
 		$this->WorkOrderNo = 0;
 		$this->ItemDue = $ItemDue;
@@ -525,11 +531,11 @@ Class LineDetails {
 }
 
 Class Tax {
-	Var $TaxCalculationOrder;  /*the index for the array */
-	Var $TaxAuthID;
-	Var $TaxAuthDescription;
-	Var $TaxRate;
-	Var $TaxOnTax;
+	var $TaxCalculationOrder;  /*the index for the array */
+	var $TaxAuthID;
+	var $TaxAuthDescription;
+	var $TaxRate;
+	var $TaxOnTax;
 	var $TaxGLCode;
 
 	function Tax ($TaxCalculationOrder,
