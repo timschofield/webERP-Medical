@@ -171,8 +171,10 @@ then none of the above are true and the list of sales types will be displayed wi
 links to delete or edit each. These will call the same page again and allow update/input
 or deletion of the records*/
 
-	$sql = "SELECT *
-			FROM pcexpenses";
+	$sql = "SELECT codeexpense,
+					description,
+					glaccount
+				FROM pcexpenses";
 	$result = DB_query($sql,$db);
 
 	echo '<table class="selection">';
@@ -202,19 +204,18 @@ or deletion of the records*/
 		$Description=DB_fetch_array($ResultDes);
 
 		printf('<td>%s</td>
-			<td>%s</td>
-			<td class="number">%s</td>
-			<td>%s</td>
-			<td><a href="%s?SelectedExpense=%s">' . _('Edit') . '</td>
-			<td><a href="%s?SelectedExpense=%s&delete=yes" onclick="return confirm("' . _('Are you sure you wish to delete this expense code and all the details it may have set up?') .
-				'");">' . _('Delete') . '</td>
+				<td>%s</td>
+				<td class="number">%s</td>
+				<td>%s</td>
+				<td><a href="%s?SelectedExpense=%s">' . _('Edit') . '</td>
+				<td><a href="%s?SelectedExpense=%s&delete=yes" onclick="return confirm("' . _('Are you sure you wish to delete this expense code and all the details it may have set up?') .'");">' . _('Delete') . '</td>
 			</tr>',
-			$myrow[0],
-			$myrow[1],
-			$myrow[2],
+			$myrow['codeexpense'],
+			$myrow['description'],
+			$myrow['glaccount'],
 			$Description[0],
-			$_SERVER['PHP_SELF'], htmlentities($myrow[0], ENT_QUOTES,'UTF-8'),
-		$_SERVER['PHP_SELF'], $myrow[0]);
+			$_SERVER['PHP_SELF'], htmlentities($myrow['codeexpense'], ENT_QUOTES,'UTF-8'),
+		$_SERVER['PHP_SELF'], $myrow['codeexpense']);
 	}
 	//END WHILE LIST LOOP
 	echo '</table>';
