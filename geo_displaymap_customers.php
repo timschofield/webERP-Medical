@@ -8,7 +8,13 @@ include ('includes/session.inc');
 include ('includes/header.inc');
 include('includes/SQL_CommonFunctions.inc');
 
-$sql="SELECT * FROM geocode_param WHERE 1";
+$sql="SELECT geocode_key,
+			center_long,
+			center_lat,
+			map_height,
+			map_width,
+			map_host
+		FROM geocode_param WHERE 1";
 $ErrMsg = _('An error occurred in retrieving the currency information');;
 $result = DB_query($sql, $db, $ErrMsg);
 $myrow = DB_fetch_array($result);
