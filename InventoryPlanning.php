@@ -30,7 +30,7 @@ if (isset($_POST['PrintPDF'])
 //	$pdf = & new Cpdf($PageSize);
 	$pdf = new Cpdf('L', 'pt', 'A4');
 	$pdf->addInfo('Creator','webERP http://www.web-erp.org');
-	$pdf->addInfo('Author','webERP ' . $Version);
+	$pdf->addInfo('Author','webERP ' . $_SESSION['VersionNumber']);
 	$pdf->addInfo('Title',_('Inventory Planning Report') . ' ' . Date($_SESSION['DefaultDateFormat']));
 	$pdf->addInfo('Subject',_('Inventory Planning'));
 
@@ -53,6 +53,7 @@ if (isset($_POST['PrintPDF'])
 	if ($_POST['Location']=='All'){
 		$SQL = "SELECT stockmaster.categoryid,
 										stockmaster.description,
+										stockmaster.decimalplaces,
 										stockcategory.categorydescription,
 										locstock.stockid,
 										SUM(locstock.quantity) AS qoh
@@ -76,6 +77,7 @@ if (isset($_POST['PrintPDF'])
 		$SQL = "SELECT stockmaster.categoryid,
 					locstock.stockid,
 					stockmaster.description,
+					stockmaster.decimalplaces,
 					stockcategory.categorydescription,
 					locstock.quantity  AS qoh
 				FROM locstock,
@@ -306,12 +308,12 @@ if (isset($_POST['PrintPDF'])
 
 		$LeftOvers = $pdf->addTextWrap($Left_Margin, $YPos, 110, $FontSize, $InventoryPlan['stockid'], 'left');
 		$LeftOvers = $pdf->addTextWrap(130, $YPos, 120,6,$InventoryPlan['description'],'left');
-		$LeftOvers = $pdf->addTextWrap(251, $YPos, 40,$FontSize,number_format($SalesRow['prd5'],0),'right');
-		$LeftOvers = $pdf->addTextWrap(292, $YPos, 40,$FontSize,number_format($SalesRow['prd4'],0),'right');
-		$LeftOvers = $pdf->addTextWrap(333, $YPos, 40,$FontSize,number_format($SalesRow['prd3'],0),'right');
-		$LeftOvers = $pdf->addTextWrap(374, $YPos, 40,$FontSize,number_format($SalesRow['prd2'],0),'right');
-		$LeftOvers = $pdf->addTextWrap(415, $YPos, 40,$FontSize,number_format($SalesRow['prd1'],0),'right');
-		$LeftOvers = $pdf->addTextWrap(456, $YPos, 40,$FontSize,number_format($SalesRow['prd0'],0),'right');
+		$LeftOvers = $pdf->addTextWrap(251, $YPos, 40,$FontSize,locale_number_format($SalesRow['prd5'],$InventoryPlan['decimalplaces']),'right');
+		$LeftOvers = $pdf->addTextWrap(292, $YPos, 40,$FontSize,locale_number_format($SalesRow['prd4'],$InventoryPlan['decimalplaces']),'right');
+		$LeftOvers = $pdf->addTextWrap(333, $YPos, 40,$FontSize,locale_number_format($SalesRow['prd3'],$InventoryPlan['decimalplaces']),'right');
+		$LeftOvers = $pdf->addTextWrap(374, $YPos, 40,$FontSize,locale_number_format($SalesRow['prd2'],$InventoryPlan['decimalplaces']),'right');
+		$LeftOvers = $pdf->addTextWrap(415, $YPos, 40,$FontSize,locale_number_format($SalesRow['prd1'],$InventoryPlan['decimalplaces']),'right');
+		$LeftOvers = $pdf->addTextWrap(456, $YPos, 40,$FontSize,locale_number_format($SalesRow['prd0'],$InventoryPlan['decimalplaces']),'right');
 
 		if ($_POST['NumberMonthsHolding']>10){
 			$NumberMonths=$_POST['NumberMonthsHolding']-10;
@@ -325,11 +327,11 @@ if (isset($_POST['PrintPDF'])
 
 
 		$IdealStockHolding = ceil($MaxMthSales * $NumberMonths);
-		$LeftOvers = $pdf->addTextWrap(497, $YPos, 40,$FontSize,number_format($IdealStockHolding,0),'right');
-		$LeftOvers = $pdf->addTextWrap(597, $YPos, 40,$FontSize,number_format($InventoryPlan['qoh'],0),'right');
-		$LeftOvers = $pdf->addTextWrap(638, $YPos, 40,$FontSize,number_format($TotalDemand,0),'right');
+		$LeftOvers = $pdf->addTextWrap(497, $YPos, 40,$FontSize,locale_number_format($IdealStockHolding,$InventoryPlan['decimalplaces']),'right');
+		$LeftOvers = $pdf->addTextWrap(597, $YPos, 40,$FontSize,locale_number_format($InventoryPlan['qoh'],$InventoryPlan['decimalplaces']),'right');
+		$LeftOvers = $pdf->addTextWrap(638, $YPos, 40,$FontSize,locale_number_format($TotalDemand,$InventoryPlan['decimalplaces']),'right');
 
-		$LeftOvers = $pdf->addTextWrap(679, $YPos, 40,$FontSize,number_format($OnOrdRow['qtyonorder'],0),'right');
+		$LeftOvers = $pdf->addTextWrap(679, $YPos, 40,$FontSize,locale_number_format($OnOrdRow['qtyonorder'],$InventoryPlan['decimalplaces']),'right');
 
 		$SuggestedTopUpOrder = $IdealStockHolding - $InventoryPlan['qoh'] + $TotalDemand - $OnOrdRow['qtyonorder'];
 		if ($SuggestedTopUpOrder <=0){
@@ -337,7 +339,7 @@ if (isset($_POST['PrintPDF'])
 
 		} else {
 
-			$LeftOvers = $pdf->addTextWrap(720, $YPos, 40,$FontSize,number_format($SuggestedTopUpOrder,0),'right');
+			$LeftOvers = $pdf->addTextWrap(720, $YPos, 40,$FontSize,locale_number_format($SuggestedTopUpOrder,$InventoryPlan['decimalplaces']),'right');
 		}
 
 
