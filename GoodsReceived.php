@@ -35,7 +35,7 @@ if (isset($_GET['PONumber']) and $_GET['PONumber']<=0 and !isset($_SESSION['PO']
  set from the post to the quantity to be received in this receival*/
 
 	foreach ($_SESSION['PO']->LineItems as $Line) {
-		$RecvQty = $_POST['RecvQty_' . $Line->LineNo];
+		$RecvQty = filter_number_input($_POST['RecvQty_' . $Line->LineNo]);
 		if (!is_numeric($RecvQty)){
 			$RecvQty = 0;
 		}
@@ -48,7 +48,7 @@ if (isset($_GET['PONumber']) and $_GET['PONumber']<=0 and !isset($_SESSION['PO']
 		}
 	}
 }
-
+print_r($_SESSION['PO']);
 $StatusSQL="SELECT status FROM purchorders WHERE orderno='".$_SESSION['PO']->OrderNo . "'";
 $StatusResult=DB_query($StatusSQL, $db);
 $StatusRow=DB_fetch_array($StatusResult);
@@ -126,10 +126,10 @@ if (count($_SESSION['PO']->LineItems)>0 and !isset($_POST['ProcessGoodsReceived'
 
 		$LineTotal = ($LnItm->ReceiveQty * $LnItm->Price );
 		$_SESSION['PO']->Total = $_SESSION['PO']->Total + $LineTotal;
-		$DisplayQtyOrd = number_format($LnItm->Quantity,$LnItm->DecimalPlaces);
-		$DisplayQtyRec = number_format($LnItm->QtyReceived,$LnItm->DecimalPlaces);
-		$DisplayLineTotal = number_format($LineTotal,2);
-		$DisplayPrice = number_format($LnItm->Price,2);
+		$DisplayQtyOrd = locale_number_format($LnItm->Quantity,$LnItm->DecimalPlaces);
+		$DisplayQtyRec = locale_number_format($LnItm->QtyReceived,$LnItm->DecimalPlaces);
+		$DisplayLineTotal = locale_money_format($LineTotal,$_SESSION['PO']->CurrCode);
+		$DisplayPrice = locale_money_format($LnItm->Price,$_SESSION['PO']->CurrCode);
 
 		$SupplierUomSQL="SELECT unitsofmeasure.unitname,
 								conversionfactor,
@@ -167,10 +167,10 @@ if (count($_SESSION['PO']->LineItems)>0 and !isset($_POST['ProcessGoodsReceived'
 		if ($LnItm->Controlled == 1) {
 
 			echo '<input type="hidden" name="RecvQty_' . $LnItm->LineNo . '" value="' . $LnItm->ReceiveQty . '" />
-					<a href="GoodsReceivedControlled.php?LineNo=' . $LnItm->LineNo . '" />' . number_format($LnItm->ReceiveQty,$LnItm->DecimalPlaces) . '</a></td>';
+					<a href="GoodsReceivedControlled.php?LineNo=' . $LnItm->LineNo . '" />' . locale_number_format($LnItm->ReceiveQty,$LnItm->DecimalPlaces) . '</a></td>';
 
 		} else {
-			echo '<input type="text" class="number" name="RecvQty_' . $LnItm->LineNo . '" maxlength="10" size="10" value="' . $LnItm->ReceiveQty . '" /></td>';
+			echo '<input type="text" class="number" name="RecvQty_' . $LnItm->LineNo . '" maxlength="10" size="10" value="' . locale_number_format($LnItm->ReceiveQty,$LnItm->DecimalPlaces) . '" /></td>';
 		}
 
 		if ($_SESSION['ShowValueOnGRN']==1) {
@@ -198,15 +198,15 @@ if (count($_SESSION['PO']->LineItems)>0 and !isset($_POST['ProcessGoodsReceived'
 		echo '</tr>';
 	}//foreach(LineItem)
 	echo '<script>defaultControl(document.forms[0].RecvQty_'.$LnItm->LineNo.');</script>';
-$DisplayTotal = number_format($_SESSION['PO']->Total,2);
-if ($_SESSION['ShowValueOnGRN']==1) {
-	echo '<tr>
-			<td colspan="7" class="number"><b>' . _('Total value of goods received'). '</b></td>
-			<td class="number"><b>'. $DisplayTotal. '</b></td>
-		</tr></table>';
-} else {
-	echo '</table>';
-}
+	$DisplayTotal = locale_money_format($_SESSION['PO']->Total,$_SESSION['PO']->CurrCode);
+	if ($_SESSION['ShowValueOnGRN']==1) {
+		echo '<tr>
+				<td colspan="7" class="number"><b>' . _('Total value of goods received'). '</b></td>
+				<td class="number"><b>'. $DisplayTotal. '</b></td>
+			</tr></table>';
+	} else {
+		echo '</table>';
+	}
 }//If count(LineItems) > 0
 
 $SomethingReceived = 0;
@@ -411,13 +411,13 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 
 			if ($OrderLine->ReceiveQty >= ($OrderLine->Quantity - $OrderLine->QtyReceived)){
 				$SQL = "UPDATE purchorderdetails SET
-												quantityrecd = quantityrecd + '" . $OrderLine->ReceiveQty . "',
+												quantityrecd = quantityrecd + " . $OrderLine->ReceiveQty . ",
 												stdcostunit='" . $_SESSION['PO']->LineItems[$OrderLine->LineNo]->StandardCost . "',
 												completed=1
 										WHERE podetailitem = '" . $OrderLine->PODetailRec . "'";
 			} else {
 				$SQL = "UPDATE purchorderdetails SET
-												quantityrecd = quantityrecd + '" . $OrderLine->ReceiveQty . "',
+												quantityrecd = quantityrecd + " . $OrderLine->ReceiveQty . ",
 												stdcostunit='" . $_SESSION['PO']->LineItems[$OrderLine->LineNo]->StandardCost . "',
 												completed='" . $_SESSION['PO'.$identifier]->LineItems[$OrderLine->LineNo]->Completed . "'
 										WHERE podetailitem = '" . $OrderLine->PODetailRec . "'";
@@ -479,7 +479,7 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 				}
 
 				$SQL = "UPDATE locstock
-								SET quantity = locstock.quantity + '" . $OrderLine->ReceiveQty*$OrderLine->ConversionFactor . "'
+								SET quantity = locstock.quantity + " . filter_currency_input($OrderLine->ReceiveQty*$OrderLine->ConversionFactor) . "
 								WHERE locstock.stockid = '" . $OrderLine->StockID . "'
 								AND loccode = '" . $_SESSION['PO']->Location . "'";
 
@@ -509,9 +509,9 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 												'" . $LocalCurrencyPrice . "',
 												'" . $PeriodNo . "',
 												'" . $_SESSION['PO']->SupplierID . " (" . $_SESSION['PO']->SupplierName . ") - " .$_SESSION['PO']->OrderNo . "',
-												'" . $OrderLine->ReceiveQty*$OrderLine->ConversionFactor . "',
-												'" . $_SESSION['PO']->LineItems[$OrderLine->LineNo]->StandardCost/$OrderLine->ConversionFactor . "',
-												'" . ($QtyOnHandPrior + ($OrderLine->ReceiveQty*$OrderLine->ConversionFactor)) . "'
+												'" . filter_number_input($OrderLine->ReceiveQty*$OrderLine->ConversionFactor) . "',
+												'" . filter_currency_input($_SESSION['PO']->LineItems[$OrderLine->LineNo]->StandardCost/$OrderLine->ConversionFactor) . "',
+												'" . filter_number_input($QtyOnHandPrior + ($OrderLine->ReceiveQty*$OrderLine->ConversionFactor)) . "'
 											)";
 
 				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('stock movement records could not be inserted because');
@@ -659,8 +659,8 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 											'" . $OrderLine->GLCode . "',
 											'PO: " . $_SESSION['PO']->OrderNo . " " . $_SESSION['PO']->SupplierID . " - " . $OrderLine->StockID
 												. " - " . $OrderLine->ItemDescription . " x " . $OrderLine->ReceiveQty*$OrderLine->ConversionFactor . " @ " .
-											number_format($CurrentStandardCost,2) . "',
-											'" . $CurrentStandardCost * $OrderLine->ReceiveQty*$OrderLine->ConversionFactor  . "'
+											locale_money_format($CurrentStandardCost,$_SESSION['CompanyRecord']['currencydefault']) . "',
+											'" . filter_currency_input($CurrentStandardCost * $OrderLine->ReceiveQty*$OrderLine->ConversionFactor)  . "'
 										)";
 
 				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The purchase GL posting could not be inserted because');
@@ -685,8 +685,8 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 											'" . $_SESSION['CompanyRecord']['grnact'] . "',
 											'" . _('PO') . ': ' . $_SESSION['PO']->OrderNo . ' ' . $_SESSION['PO']->SupplierID . ' - ' .
 												$OrderLine->StockID . ' - ' . $OrderLine->ItemDescription . ' x ' .
-												$OrderLine->ReceiveQty*$OrderLine->ConversionFactor . ' @ ' . number_format($UnitCost,2) . "',
-											'" . -$UnitCost * $OrderLine->ReceiveQty*$OrderLine->ConversionFactor . "'
+												$OrderLine->ReceiveQty*$OrderLine->ConversionFactor . ' @ ' . locale_money_format($UnitCost,$_SESSION['CompanyRecord']['currencydefault']) . "',
+											-" . filter_currency_input($UnitCost * $OrderLine->ReceiveQty*$OrderLine->ConversionFactor) . "
 										)";
 
 				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The GRN suspense side of the GL posting could not be inserted because');
