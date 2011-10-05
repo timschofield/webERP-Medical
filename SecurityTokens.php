@@ -45,7 +45,7 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/m
 
 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '" name="form">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<br /><table><tr>';
+echo '<br /><table class="selection"><tr>';
 
 
 
@@ -56,7 +56,7 @@ if (isset($_GET['Action']) and $_GET['Action']=='edit') {
 	echo '<input type="submit" name="update" value="' . _('Update') . '" />';
 } else {
 	echo '<td>'._('Token ID') . '<td><input type="text" name="TokenID" value="'.$_POST['TokenID'].'" /></td></tr>
-		<tr><td>'. _('Description') . '</td><td><input type="text" size="30" maxlength="30" name="Description" value="'.$description.'" /></td><td>';
+		<tr><td>'. _('Description') . '</td><td><input type="text" size="70" maxlength="255" name="Description" value="'.$description.'" /></td><td>';
 	echo '<input type="submit" name="submit" value="' . _('Insert') . '" />';
 }
 
