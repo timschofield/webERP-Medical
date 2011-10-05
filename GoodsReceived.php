@@ -48,7 +48,7 @@ if (isset($_GET['PONumber']) and $_GET['PONumber']<=0 and !isset($_SESSION['PO']
 		}
 	}
 }
-print_r($_SESSION['PO']);
+
 $StatusSQL="SELECT status FROM purchorders WHERE orderno='".$_SESSION['PO']->OrderNo . "'";
 $StatusResult=DB_query($StatusSQL, $db);
 $StatusRow=DB_fetch_array($StatusResult);
