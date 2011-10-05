@@ -219,7 +219,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 															'" . $POLine->gw . "',
 															'" . $POLine->CuFt . "',
 															'" . $POLine->Total_Quantity . "',
-															'" . $POLine->Total_Amount . "',
+															'" . filter_currency_input($POLine->Total_Amount) . "',
 															'" . $POLine->AssetID . "')";
 					$ErrMsg =_('One of the purchase order detail records could not be inserted into the database because');
 					$DbgMsg =_('The SQL statement used to insert the purchase order detail record and failed was');
@@ -322,7 +322,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 															'" . $POLine->gw . "',
 															'" . $POLine->CuFt . "',
 															'" . $POLine->Total_Quantity . "',
-															'" . $POLine->Total_Amount . "',
+															'" . filter_currency_input($POLine->Total_Amount) . "',
 															'" . $POLine->AssetID . "')";
 
 				} else {
@@ -346,7 +346,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 															gw='" . $POLine->gw . "',
 															cuft='" . $POLine->CuFt . "',
 															total_quantity='" . $POLine->Total_Quantity . "',
-															total_amount='" . $POLine->Total_Amount . "',
+															total_amount='" . filter_currency_input($POLine->Total_Amount) . "',
 															completed=1,
 															assetid='" . $POLine->AssetID . "'
 														WHERE podetailitem='" . $POLine->PODetailRec . "'";
@@ -370,7 +370,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 															gw='" . $POLine->gw . "',
 															cuft='" . $POLine->CuFt . "',
 															total_quantity='" . $POLine->Total_Quantity . "',
-															total_amount='" . $POLine->Total_Amount . "',
+															total_amount='" . filter_currency_input($POLine->Total_Amount) . "',
 															assetid='" . $POLine->AssetID . "'
 														WHERE podetailitem='" . $POLine->PODetailRec . "'";
 					}
