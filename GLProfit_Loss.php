@@ -224,9 +224,9 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 							$YPos -= (2 * $line_height);
 						} else { /*Costs */
 							$LeftOvers = $pdf->addTextWrap($Left_Margin +($Level*10),$YPos,200 -($Level*10),$FontSize,$ActGrpLabel);
-							$LeftOvers = $pdf->addTextWrap($Left_Margin+310,$YPos,70,$FontSize,locale_money_format($GrpPrdActual[$Level]$_SESSION['CompanyRecord']['currencydefault']),'right');
-							$LeftOvers = $pdf->addTextWrap($Left_Margin+370,$YPos,70,$FontSize,locale_money_format($GrpPrdBudget[$Level]$_SESSION['CompanyRecord']['currencydefault']),'right');
-							$LeftOvers = $pdf->addTextWrap($Left_Margin+430,$YPos,70,$FontSize,locale_money_format($GrpPrdLY[$Level]$_SESSION['CompanyRecord']['currencydefault']),'right');
+							$LeftOvers = $pdf->addTextWrap($Left_Margin+310,$YPos,70,$FontSize,locale_money_format($GrpPrdActual[$Level], $_SESSION['CompanyRecord']['currencydefault']),'right');
+							$LeftOvers = $pdf->addTextWrap($Left_Margin+370,$YPos,70,$FontSize,locale_money_format($GrpPrdBudget[$Level], $_SESSION['CompanyRecord']['currencydefault']),'right');
+							$LeftOvers = $pdf->addTextWrap($Left_Margin+430,$YPos,70,$FontSize,locale_money_format($GrpPrdLY[$Level], $_SESSION['CompanyRecord']['currencydefault']),'right');
 							$YPos -= (2 * $line_height);
 						}
 						$GrpPrdLY[$Level] = 0;

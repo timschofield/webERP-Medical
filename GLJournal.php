@@ -95,7 +95,7 @@ if (isset($_POST['CommitBatch']) and $_POST['CommitBatch']==_('Accept and Proces
 							'" . ($PeriodNo + 1) . "',
 							'" . $JournalItem->GLCode . "',
 							'Reversal - " . $JournalItem->Narrative . "',
-							'" . -($JournalItem->Amount) ."',
+							-" . $JournalItem->Amount .",
 							'".$JournalItem->tag."'
 						)";
 
@@ -136,9 +136,9 @@ if (isset($_POST['CommitBatch']) and $_POST['CommitBatch']==_('Accept and Proces
 		$_POST['GLCode'] = $extract[0];
 	}
 	if($_POST['Debit']>0) {
-		$_POST['GLAmount'] = $_POST['Debit'];
+		$_POST['GLAmount'] = filter_currency_input($_POST['Debit']);
 	} elseif($_POST['Credit']>0) {
-		$_POST['GLAmount'] = '-' . $_POST['Credit'];
+		$_POST['GLAmount'] = '-' . filter_currency_input($_POST['Credit']);
 	}
 	if ($_POST['GLManualCode'] != '' AND is_numeric($_POST['GLManualCode'])){
 		// If a manual code was entered need to check it exists and isnt a bank account
@@ -369,12 +369,12 @@ foreach ($_SESSION['JournalDetail']->GLEntries as $JournalItem) {
 	echo '<td>' . $JournalItem->tag . ' - ' . $tagdescription . '</td>';
 	echo '<td>' . $JournalItem->GLCode . ' - ' . $JournalItem->GLActName . '</td>';
 	if($JournalItem->Amount>0) {
-		echo '<td class="number">' . number_format($JournalItem->Amount,2) . '</td><td></td>';
+		echo '<td class="number">' . locale_money_format($JournalItem->Amount,$_SESSION['CompanyRecord']['currencydefault']) . '</td><td></td>';
 		$debittotal=$debittotal+$JournalItem->Amount;
 	} elseif($JournalItem->Amount<0) {
 		$credit=(-1 * $JournalItem->Amount);
 		echo '<td></td>
-			<td class="number">' . number_format($credit,2) . '</td>';
+			<td class="number">' . locale_money_format($credit,$_SESSION['CompanyRecord']['currencydefault']) . '</td>';
 		$credittotal=$credittotal+$credit;
 	}
 
@@ -385,11 +385,11 @@ foreach ($_SESSION['JournalDetail']->GLEntries as $JournalItem) {
 
 echo '<tr class="EvenTableRows"><td></td>
 		<td class="number"><b>' . _('Total') .  '</b></td>
-		<td class="number"><b>' . number_format($debittotal,2) . '</b></td>
-		<td class="number"><b>' . number_format($credittotal,2) . '</b></td></tr>';
+		<td class="number"><b>' . locale_money_format($debittotal,$_SESSION['CompanyRecord']['currencydefault']) . '</b></td>
+		<td class="number"><b>' . locale_money_format($credittotal,$_SESSION['CompanyRecord']['currencydefault']) . '</b></td></tr>';
 if ($debittotal!=$credittotal) {
 	echo '<td align="center" style="background-color: #fddbdb"><b>' . _('Required to balance') .' - </b>' .
-		number_format(abs($debittotal-$credittotal),2);
+		locale_money_format(abs($debittotal-$credittotal),$_SESSION['CompanyRecord']['currencydefault']);
 }
 if ($debittotal>$credittotal) {
 	echo ' ' . _('Credit') . '</td></tr>';
