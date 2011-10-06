@@ -167,8 +167,8 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
         			while ($myrow['groupname']!= $ParentGroups[$Level] AND $Level>0) {
         				$YPos -= $line_height;
         				$LeftOvers = $pdf->addTextWrap($Left_Margin+(10 * ($Level+1)),$YPos,200,$FontSize,_('Total') . ' ' . $ParentGroups[$Level]);
-        				$LeftOvers = $pdf->addTextWrap($Left_Margin+250,$YPos,100,$FontSize,number_format($GroupTotal[$Level]),'right');
-        				$LeftOvers = $pdf->addTextWrap($Left_Margin+350,$YPos,100,$FontSize,number_format($LYGroupTotal[$Level]),'right');
+        				$LeftOvers = $pdf->addTextWrap($Left_Margin+250,$YPos,100,$FontSize,locale_money_format($GroupTotal[$Level], $_SESSION['CompanyRecord']['currencydefault']),'right');
+        				$LeftOvers = $pdf->addTextWrap($Left_Margin+350,$YPos,100,$FontSize,locale_money_format($LYGroupTotal[$Level], $_SESSION['CompanyRecord']['currencydefault']),'right');
         				$ParentGroups[$Level]='';
         				$GroupTotal[$Level]=0;
         				$LYGroupTotal[$Level]=0;
@@ -176,8 +176,8 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
         			}
         			$YPos -= $line_height;
         			$LeftOvers = $pdf->addTextWrap($Left_Margin+(10 * ($Level+1)),$YPos,200,$FontSize,_('Total') . ' ' . $ParentGroups[$Level]);
-        			$LeftOvers = $pdf->addTextWrap($Left_Margin+250,$YPos,100,$FontSize,number_format($GroupTotal[$Level]),'right');
-        			$LeftOvers = $pdf->addTextWrap($Left_Margin+350,$YPos,100,$FontSize,number_format($LYGroupTotal[$Level]),'right');
+        			$LeftOvers = $pdf->addTextWrap($Left_Margin+250,$YPos,100,$FontSize,locale_money_format($GroupTotal[$Level], $_SESSION['CompanyRecord']['currencydefault']),'right');
+        			$LeftOvers = $pdf->addTextWrap($Left_Margin+350,$YPos,100,$FontSize,locale_money_format($LYGroupTotal[$Level], $_SESSION['CompanyRecord']['currencydefault']),'right');
         			$ParentGroups[$Level]='';
         			$GroupTotal[$Level]=0;
         			$LYGroupTotal[$Level]=0;
@@ -191,8 +191,8 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 				$FontSize = 8;
 				$pdf->setFont('','B');
 				$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,200,$FontSize,$Sections[$Section]);
-				$LeftOvers = $pdf->addTextWrap($Left_Margin+250,$YPos,100,$FontSize,number_format($SectionBalance),'right');
-				$LeftOvers = $pdf->addTextWrap($Left_Margin+350,$YPos,100,$FontSize,number_format($SectionBalanceLY),'right');
+				$LeftOvers = $pdf->addTextWrap($Left_Margin+250,$YPos,100,$FontSize,locale_money_format($SectionBalance, $_SESSION['CompanyRecord']['currencydefault']),'right');
+				$LeftOvers = $pdf->addTextWrap($Left_Margin+350,$YPos,100,$FontSize,locale_money_format($SectionBalanceLY, $_SESSION['CompanyRecord']['currencydefault']),'right');
 				$YPos -= (2 * $line_height);
 			}
 			$SectionBalanceLY = 0;
@@ -239,8 +239,8 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 			$pdf->setFont('','');
 			$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,50,$FontSize,$myrow['accountcode']);
 			$LeftOvers = $pdf->addTextWrap($Left_Margin+55,$YPos,200,$FontSize,$myrow['accountname']);
-			$LeftOvers = $pdf->addTextWrap($Left_Margin+250,$YPos,100,$FontSize,number_format($AccountBalance),'right');
-			$LeftOvers = $pdf->addTextWrap($Left_Margin+350,$YPos,100,$FontSize,number_format($LYAccountBalance),'right');
+			$LeftOvers = $pdf->addTextWrap($Left_Margin+250,$YPos,100,$FontSize,locale_money_format($AccountBalance, $_SESSION['CompanyRecord']['currencydefault']),'right');
+			$LeftOvers = $pdf->addTextWrap($Left_Margin+350,$YPos,100,$FontSize,locale_money_format($LYAccountBalance, $_SESSION['CompanyRecord']['currencydefault']),'right');
 			$YPos -= $line_height;
 		}
 		if ($YPos < ($Bottom_Margin)){
@@ -253,8 +253,8 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 	while ($Level>0) {
         	$YPos -= $line_height;
         	$LeftOvers = $pdf->addTextWrap($Left_Margin+(10 * ($Level+1)),$YPos,200,$FontSize,_('Total') . ' ' . $ParentGroups[$Level]);
-        	$LeftOvers = $pdf->addTextWrap($Left_Margin+250,$YPos,100,$FontSize,number_format($GroupTotal[$Level]),'right');
-        	$LeftOvers = $pdf->addTextWrap($Left_Margin+350,$YPos,100,$FontSize,number_format($LYGroupTotal[$Level]),'right');
+        	$LeftOvers = $pdf->addTextWrap($Left_Margin+250,$YPos,100,$FontSize,locale_money_format($GroupTotal[$Level], $_SESSION['CompanyRecord']['currencydefault']),'right');
+        	$LeftOvers = $pdf->addTextWrap($Left_Margin+350,$YPos,100,$FontSize,locale_money_format($LYGroupTotal[$Level], $_SESSION['CompanyRecord']['currencydefault']),'right');
         	$ParentGroups[$Level]='';
         	$GroupTotal[$Level]=0;
         	$LYGroupTotal[$Level]=0;
@@ -262,8 +262,8 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
         }
         $YPos -= $line_height;
         $LeftOvers = $pdf->addTextWrap($Left_Margin+(10 * ($Level+1)),$YPos,200,$FontSize,_('Total') . ' ' . $ParentGroups[$Level]);
-        $LeftOvers = $pdf->addTextWrap($Left_Margin+250,$YPos,100,$FontSize,number_format($GroupTotal[$Level]),'right');
-        $LeftOvers = $pdf->addTextWrap($Left_Margin+350,$YPos,100,$FontSize,number_format($LYGroupTotal[$Level]),'right');
+        $LeftOvers = $pdf->addTextWrap($Left_Margin+250,$YPos,100,$FontSize,locale_money_format($GroupTotal[$Level], $_SESSION['CompanyRecord']['currencydefault']),'right');
+        $LeftOvers = $pdf->addTextWrap($Left_Margin+350,$YPos,100,$FontSize,locale_money_format($LYGroupTotal[$Level], $_SESSION['CompanyRecord']['currencydefault']),'right');
         $ParentGroups[$Level]='';
         $GroupTotal[$Level]=0;
         $LYGroupTotal[$Level]=0;
@@ -273,16 +273,16 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 	        $FontSize =8;
 		$pdf->setFont('','B');
 		$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,200,$FontSize,$Sections[$Section]);
-		$LeftOvers = $pdf->addTextWrap($Left_Margin+250,$YPos,100,$FontSize,number_format($SectionBalance),'right');
-		$LeftOvers = $pdf->addTextWrap($Left_Margin+350,$YPos,100,$FontSize,number_format($SectionBalanceLY),'right');
+		$LeftOvers = $pdf->addTextWrap($Left_Margin+250,$YPos,100,$FontSize,locale_money_format($SectionBalance, $_SESSION['CompanyRecord']['currencydefault']),'right');
+		$LeftOvers = $pdf->addTextWrap($Left_Margin+350,$YPos,100,$FontSize,locale_money_format($SectionBalanceLY, $_SESSION['CompanyRecord']['currencydefault']),'right');
 		$YPos -= $line_height;
 	}
 
 	$YPos -= $line_height;
 
 	$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,200,$FontSize,_('Check Total'));
-	$LeftOvers = $pdf->addTextWrap($Left_Margin+250,$YPos,100,$FontSize,number_format($CheckTotal),'right');
-	$LeftOvers = $pdf->addTextWrap($Left_Margin+350,$YPos,100,$FontSize,number_format($LYCheckTotal),'right');
+	$LeftOvers = $pdf->addTextWrap($Left_Margin+250,$YPos,100,$FontSize,locale_money_format($CheckTotal, $_SESSION['CompanyRecord']['currencydefault']),'right');
+	$LeftOvers = $pdf->addTextWrap($Left_Margin+350,$YPos,100,$FontSize,locale_money_format($LYCheckTotal, $_SESSION['CompanyRecord']['currencydefault']),'right');
 
 	if ($ListCount == 0) {   //UldisN
 		$title = _('Print Balance Sheet Error');
@@ -354,13 +354,13 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 		$TableHeader = '<tr>
 				<th>'._('Account').'</td>
 				<th>'._('Account Name').'</td>
-				<th colspan="2">$BalanceDate</th>
+				<th colspan="2">' . $BalanceDate . '</th>
 				<th colspan="2">'._('Last Year').'</th>
 				</tr>';
 	} else { /*summary */
 		$TableHeader = '<tr>
 				<th colspan="2"></th>
-				<th colspan="2">$BalanceDate</th>
+				<th colspan="2">' . $BalanceDate . '</th>
 				<th colspan="2">'._('Last Year').'</th>
 				</tr>';
 	}
@@ -411,8 +411,8 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 						<td class="number">%s</td>
 						</tr>',
 						$ParentGroups[$Level],
-						number_format($GroupTotal[$Level]),
-						number_format($LYGroupTotal[$Level])
+						locale_money_format($GroupTotal[$Level], $_SESSION['CompanyRecord']['currencydefault']),
+						locale_money_format($LYGroupTotal[$Level], $_SESSION['CompanyRecord']['currencydefault'])
 						);
 					$GroupTotal[$Level] = 0;
 					$LYGroupTotal[$Level] = 0;
@@ -436,8 +436,8 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 					<td class="number">%s</td>
 					</tr>',
 					$ParentGroups[$Level],
-					number_format($GroupTotal[$Level]),
-					number_format($LYGroupTotal[$Level])
+					locale_money_format($GroupTotal[$Level], $_SESSION['CompanyRecord']['currencydefault']),
+					locale_money_format($LYGroupTotal[$Level], $_SESSION['CompanyRecord']['currencydefault'])
 					);
 				$GroupTotal[$Level] = 0;
 				$LYGroupTotal[$Level] = 0;
@@ -472,8 +472,8 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 					<td class="number">%s</td>
 				</tr>',
 				$Sections[$Section],
-				number_format($SectionBalance),
-				number_format($SectionBalanceLY));
+				locale_money_format($SectionBalance, $_SESSION['CompanyRecord']['currencydefault']),
+				locale_money_format($SectionBalanceLY, $_SESSION['CompanyRecord']['currencydefault']));
 				$j++;
 			}
 			$SectionBalanceLY = 0;
@@ -543,8 +543,8 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 			printf($PrintString,
 				$ActEnquiryURL,
 				$myrow['accountname'],
-				number_format($AccountBalance),
-				number_format($LYAccountBalance)
+				locale_money_format($AccountBalance, $_SESSION['CompanyRecord']['currencydefault']),
+				locale_money_format($LYAccountBalance, $_SESSION['CompanyRecord']['currencydefault'])
 				);
 			$j++;
 
@@ -570,8 +570,8 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 			<td class="number">%s</td>
 			</tr>',
 			$ParentGroups[$Level],
-			number_format($GroupTotal[$Level]),
-			number_format($LYGroupTotal[$Level])
+			locale_money_format($GroupTotal[$Level], $_SESSION['CompanyRecord']['currencydefault']),
+			locale_money_format($LYGroupTotal[$Level], $_SESSION['CompanyRecord']['currencydefault'])
 			);
 		$Level--;
 	}
@@ -591,8 +591,8 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 		<td class="number">%s</td>
 		</tr>',
 		$ParentGroups[$Level],
-		number_format($GroupTotal[$Level]),
-		number_format($LYGroupTotal[$Level])
+		locale_money_format($GroupTotal[$Level], $_SESSION['CompanyRecord']['currencydefault']),
+		locale_money_format($LYGroupTotal[$Level], $_SESSION['CompanyRecord']['currencydefault'])
 		);
 
 	if ($_POST['Detail']=='Detailed'){
@@ -619,8 +619,8 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 		<td class="number">%s</td>
 	</tr>',
 	$Sections[$Section],
-	number_format($SectionBalance),
-	number_format($SectionBalanceLY));
+	locale_money_format($SectionBalance, $_SESSION['CompanyRecord']['currencydefault']),
+	locale_money_format($SectionBalanceLY, $_SESSION['CompanyRecord']['currencydefault']));
 
 	$Section = $myrow['sectioninaccounts'];
 
@@ -644,8 +644,8 @@ if (! isset($_POST['BalancePeriodEnd']) or isset($_POST['SelectADifferentPeriod'
 		<td></td>
 		<td class="number">%s</td>
 		</tr>',
-		number_format($CheckTotal),
-		number_format($LYCheckTotal));
+		locale_money_format($CheckTotal, $_SESSION['CompanyRecord']['currencydefault']),
+		locale_money_format($LYCheckTotal, $_SESSION['CompanyRecord']['currencydefault']));
 
 	echo '<tr>
 		<td colspan="3"></td>
