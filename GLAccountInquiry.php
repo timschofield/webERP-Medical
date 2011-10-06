@@ -181,13 +181,13 @@ if (isset($_POST['Show'])){
 			echo '<tr bgcolor="#FDFEEF">
 				<td colspan="3"><b>' . _('Brought Forward Balance') . '</b><td>
 				</td></td>
-				<td class="number"><b>' . number_format(-$RunningTotal,2) . '</b></td>
+				<td class="number"><b>' . locale_money_format(-$RunningTotal,$_SESSION['CompanyRecord']['currencydefault']) . '</b></td>
 				<td></td>
 				</tr>';
 		} else { //its a debit balance b/fwd
 			echo '<tr bgcolor="#FDFEEF">
 				<td colspan="3"><b>' . _('Brought Forward Balance') . '</b></td>
-				<td class="number"><b>' . number_format($RunningTotal,2) . '</b></td>
+				<td class="number"><b>' . locale_money_format($RunningTotal,$_SESSION['CompanyRecord']['currencydefault']) . '</b></td>
 				<td colspan="2"></td>
 				</tr>';
 		}
@@ -221,14 +221,14 @@ if (isset($_POST['Show'])){
 						$RunningTotal = 0;
 					}
 					echo '<td></td>
-						<td class="number"><b>' . number_format(-$PeriodTotal,2) . '</b></td>
+						<td class="number"><b>' . locale_money_format(-$PeriodTotal,$_SESSION['CompanyRecord']['currencydefault']) . '</b></td>
 						<td></td>
 						</tr>';
 				} else { //its a debit balance b/fwd
 					if ($PandLAccount==True) {
 						$RunningTotal = 0;
 					}
-					echo '<td class="number"><b>' . number_format($PeriodTotal,2) . '</b></td>
+					echo '<td class="number"><b>' . locale_money_format($PeriodTotal,$_SESSION['CompanyRecord']['currencydefault']) . '</b></td>
 						<td colspan="2"></td>
 						</tr>';
 				}
