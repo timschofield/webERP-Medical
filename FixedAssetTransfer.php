@@ -120,8 +120,8 @@ if (isset($_POST['Search'])) {
 		echo '<tr><td>'.$myrow['assetid'].'</td>
 					<td>'.$myrow['description'].'</td>
 					<td>'.$myrow['serialno'].'</td>
-					<td class="number">'.number_format($myrow['cost'],2).'</td>
-					<td class="number">'.number_format($myrow['accumdepn'],2).'</td>
+					<td class="number">'.locale_money_format($myrow['cost'],$_SESSION['CompanyRecord']['currencydefault']).'</td>
+					<td class="number">'.locale_money_format($myrow['accumdepn'],$_SESSION['CompanyRecord']['currencydefault']).'</td>
 					<td>'.$myrow['locationdescription'].'</td>';
 		echo '<td><select name="Location'.$myrow['assetid'].'" onChange="ReloadForm(Move'.$myrow['assetid'].')">';
 		echo '<option value=""></option>';
