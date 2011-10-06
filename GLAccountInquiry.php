@@ -232,7 +232,7 @@ if (isset($_POST['Show'])){
 						<td colspan="2"></td>
 						</tr>';
 				}
-				$IntegrityReport .= '<br />' . _('Period') . ': ' . $PeriodNo  . _('Account movement per transaction') . ': '  . number_format($PeriodTotal,2) . ' ' . _('Movement per ChartDetails record') . ': ' . number_format($ChartDetailRow['actual'],2) . ' ' . _('Period difference') . ': ' . number_format($PeriodTotal -$ChartDetailRow['actual'],3);
+				$IntegrityReport .= '<br />' . _('Period') . ': ' . $PeriodNo  . _('Account movement per transaction') . ': '  . locale_money_format($PeriodTotal,$_SESSION['CompanyRecord']['currencydefault']) . ' ' . _('Movement per ChartDetails record') . ': ' . locale_money_format($ChartDetailRow['actual'],$_SESSION['CompanyRecord']['currencydefault']) . ' ' . _('Period difference') . ': ' . locale_money_format($PeriodTotal -$ChartDetailRow['actual'],$_SESSION['CompanyRecord']['currencydefault']);
 
 				if (ABS($PeriodTotal -$ChartDetailRow['actual'])>0.01){
 					$ShowIntegrityReport = True;
@@ -254,10 +254,10 @@ if (isset($_POST['Show'])){
 		$PeriodTotal += $myrow['amount'];
 
 		if($myrow['amount']>=0){
-			$DebitAmount = number_format($myrow['amount'],2);
+			$DebitAmount = locale_money_format($myrow['amount'],$_SESSION['CompanyRecord']['currencydefault']);
 			$CreditAmount = '';
 		} else {
-			$CreditAmount = number_format(-$myrow['amount'],2);
+			$CreditAmount = locale_money_format(-$myrow['amount'],$_SESSION['CompanyRecord']['currencydefault']);
 			$DebitAmount = '';
 		}
 
@@ -286,7 +286,7 @@ if (isset($_POST['Show'])){
 			$DebitAmount,
 			$CreditAmount,
 			$myrow['narrative'],
-			number_format($RunningTotal,2),
+			locale_money_format($RunningTotal,$_SESSION['CompanyRecord']['currencydefault']),
 			$tagrow['tagdescription']);
 
 	}
@@ -300,9 +300,9 @@ if (isset($_POST['Show'])){
 	echo '</b></td>';
 
 	if ($RunningTotal >0){
-		echo '<td class="number"><b>' . number_format(($RunningTotal),2) . '</b></td><td colspan="2"></td></tr>';
+		echo '<td class="number"><b>' . locale_money_format(($RunningTotal),$_SESSION['CompanyRecord']['currencydefault']) . '</b></td><td colspan="2"></td></tr>';
 	}else {
-		echo '<td></td><td class="number"><b>' . number_format((-$RunningTotal),2) . '</b></td><td colspan="2"></td></tr>';
+		echo '<td></td><td class="number"><b>' . locale_money_format((-$RunningTotal),$_SESSION['CompanyRecord']['currencydefault']) . '</b></td><td colspan="2"></td></tr>';
 	}
 	echo '</table>';
 } /* end of if Show button hit */
