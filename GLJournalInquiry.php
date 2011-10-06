@@ -97,7 +97,7 @@ if (!isset($_POST['Show'])) {
 			echo '<td>'.$myrow['account'].'</td>
 					<td>'.$myrow['accountname'].'</td>
 					<td>'.$myrow['narrative'] .'</td>
-					<td class="number">'.number_format($myrow['amount'],$_SESSION['Currencies'][$_SESSION['CompanyRecord']['currencydefault']]['DecimalPlaces']).'</td>
+					<td class="number">'.locale_money_format($myrow['amount'],$_SESSION['CompanyRecord']['currencydefault']).'</td>
 					<td class="number">'.$myrow['tag'] . ' - ' . $myrow['tagdescription'].'</td>';
 
 			if ($myrow['typeno']!=$LastJournal) {
