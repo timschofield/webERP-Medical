@@ -67,6 +67,7 @@ if (!isset($_POST['Show'])) {
 				banktrans.exrate,
 				banktrans.banktranstype,
 				banktrans.transdate,
+				banktrans.ref,
 				bankaccounts.bankaccountname,
 				systypes.typename,
 				systypes.typeid
@@ -86,7 +87,7 @@ if (!isset($_POST['Show'])) {
 		$BankDetailRow = DB_fetch_array($BankResult);
 		echo '<table class="selection">
 						<tr>
-							<th colspan="7"><font size="3" color="blue">' . _('Account Transactions For').' '.$BankDetailRow['bankaccountname'].' '._('Between').' '.$_POST['FromTransDate'] . ' ' . _('and') . ' ' . $_POST['ToTransDate'] . '</font></th>
+							<th colspan="8"><font size="3" color="blue">' . _('Account Transactions For').' '.$BankDetailRow['bankaccountname'].' '._('Between').' '.$_POST['FromTransDate'] . ' ' . _('and') . ' ' . $_POST['ToTransDate'] . '</font></th>
 						</tr>';
 		echo '<tr>
 						<th>' . _('Date') . '</th>
@@ -112,10 +113,10 @@ if (!isset($_POST['Show'])) {
 							<td>'.$myrow['typename'].'</td>
 							<td>'.$myrow['banktranstype'].'</td>
 							<td>'.$myrow['ref'].'</td>
-							<td class="number">'.number_format($myrow['amount'],2).'</td>
-							<td class="number">'.number_format($AccountCurrTotal,2).'</td>
-							<td class="number">'.number_format($myrow['amount']/$myrow['functionalexrate']/$myrow['exrate'],2).'</td>
-							<td class="number">'.number_format($LocalCurrTotal,2).'</td>
+							<td class="number">'.locale_money_format($myrow['amount'],$myrow['currcode']).'</td>
+							<td class="number">'.locale_money_format($AccountCurrTotal,$myrow['currcode']).'</td>
+							<td class="number">'.locale_money_format($myrow['amount']/$myrow['functionalexrate']/$myrow['exrate'],$_SESSION['CompanyRecord']['currencydefault']).'</td>
+							<td class="number">'.locale_money_format($LocalCurrTotal,$_SESSION['CompanyRecord']['currencydefault']).'</td>
 						</tr>';
 		}
 		echo '</table>';
