@@ -86,7 +86,7 @@ if (isset($_POST['PrintPDF'])
 
 		if (abs($Balance)>0.009 OR ABS($FXBalance)>0.009) {
 
-			$DisplayBalance = locale_money_format($DebtorBalances['balance'] - $DebtorBalances['afterdatetrans'],$DebtorBalances['currcode']);
+			$DisplayBalance = locale_money_format($DebtorBalances['balance'] - $DebtorBalances['afterdatetrans'],$_SESSION['CompanyRecord']['currencydefault']);
 			$DisplayFXBalance = locale_money_format($DebtorBalances['fxbalance'] - $DebtorBalances['fxafterdatetrans'],$DebtorBalances['currcode']);
 
 			$TotBal += $Balance;
