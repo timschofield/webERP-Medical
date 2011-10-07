@@ -29,6 +29,7 @@ if (isset($_POST['PrintPDF'])
 
 	$SQL = "SELECT debtorsmaster.debtorno,
 			debtorsmaster.name,
+			debtorsmaster.currcode,
   			currencies.currency,
 			SUM((debtortrans.ovamount + debtortrans.ovgst + debtortrans.ovfreight + debtortrans.ovdiscount - debtortrans.alloc)/debtortrans.rate) AS balance,
 			SUM(debtortrans.ovamount + debtortrans.ovgst + debtortrans.ovfreight + debtortrans.ovdiscount - debtortrans.alloc) AS fxbalance,
@@ -85,8 +86,8 @@ if (isset($_POST['PrintPDF'])
 
 		if (abs($Balance)>0.009 OR ABS($FXBalance)>0.009) {
 
-			$DisplayBalance = number_format($DebtorBalances['balance'] - $DebtorBalances['afterdatetrans'],2);
-			$DisplayFXBalance = number_format($DebtorBalances['fxbalance'] - $DebtorBalances['fxafterdatetrans'],2);
+			$DisplayBalance = locale_money_format($DebtorBalances['balance'] - $DebtorBalances['afterdatetrans'],$DebtorBalances['currcode']);
+			$DisplayFXBalance = locale_money_format($DebtorBalances['fxbalance'] - $DebtorBalances['fxafterdatetrans'],$DebtorBalances['currcode']);
 
 			$TotBal += $Balance;
 
@@ -110,7 +111,7 @@ if (isset($_POST['PrintPDF'])
 		include('includes/PDFDebtorBalsPageHeader.inc');
 	}
 
-	$DisplayTotBalance = number_format($TotBal,2);
+	$DisplayTotBalance = locale_number_format($TotBal,2);
 
 	$LeftOvers = $pdf->addTextWrap(50,$YPos,160,$FontSize,_('Total balances'),'left');
 	$LeftOvers = $pdf->addTextWrap(220,$YPos,60,$FontSize,$DisplayTotBalance,'right');
