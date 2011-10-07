@@ -1061,7 +1061,7 @@ if (((isset($_SESSION['CustomerRecord'])
 			}
 
 			printf('<td><font size="1">
-					<input tabindex="'.number_format(12+$j).'" type="submit" name="Select" value="%s" /></font></td>
+					<input type="submit" name="Select" value="%s" /></font></td>
 					<td>%s</td></tr>',
 					$myrow['debtorno'],
 					$myrow['name']);
