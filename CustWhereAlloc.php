@@ -13,7 +13,8 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/m
 
 echo '<table class="selection" cellpadding="2"><tr>';
 
-echo '<td>' . _('Type') . ':</td><td><select tabindex="1" name="TransType"> ';
+echo '<td>' . _('Type') . ':</td>
+		<td><select tabindex="1" name="TransType"> ';
 
 $sql = "SELECT typeid, typename FROM systypes WHERE typeid = 10 OR typeid=12";
 $resultTypes = DB_query($sql,$db);
@@ -47,8 +48,11 @@ if (isset($_POST['ShowResults']) AND  $_POST['TransNo']!=''){
 
 /*First off get the DebtorTransID of the transaction (invoice normally) selected */
 	$sql = "SELECT id,
+			debtorsmaster.currcode,
 			ovamount+ovgst AS totamt
 		FROM debtortrans
+			LEFT JOIN debtorsmaster
+			ON debtortrans.debtorno=debtorsmaster.debtorno
 		WHERE type='" . $_POST['TransType'] . "' AND transno = '" . $_POST['TransNo']."'";
 
 	$result = DB_query($sql , $db);
@@ -62,12 +66,16 @@ if (isset($_POST['ShowResults']) AND  $_POST['TransNo']!=''){
 			transno,
 			trandate,
 			debtortrans.debtorno,
+			debtorsmaster.currcode,
 			reference,
 			rate,
 			ovamount+ovgst+ovfreight+ovdiscount as totalamt,
 			custallocns.amt
 		FROM debtortrans
-			INNER JOIN custallocns ON debtortrans.id=custallocns.transid_allocfrom
+			INNER JOIN custallocns
+			ON debtortrans.id=custallocns.transid_allocfrom
+			LEFT JOIN debtorsmaster
+			ON debtortrans.debtorno=debtorsmaster.debtorno
 		WHERE custallocns.transid_allocto='". $AllocToID."'";
 
 		$ErrMsg = _('The customer transactions for the selected criteria could not be retrieved because');
@@ -80,7 +88,7 @@ if (isset($_POST['ShowResults']) AND  $_POST['TransNo']!=''){
 		echo '<br /><table cellpadding="2" class="selection">';
 
 		echo '<tr><th colspan="6"><div class="centre"><font size="3" color="blue"><b>'._('Allocations made against invoice number') . ' ' . $_POST['TransNo']
-			. '<br />'._('Transaction Total').': '. number_format($myrow['totamt'],2) . '</font></b></div></th></tr>';
+			. '<br />'._('Transaction Total').': '. locale_money_format($myrow['totamt'],$myrow['currcode']) . '</font></b></div></th></tr>';
 
 		$tableheader = '<tr><th>'._('Type').'</th>
 					<th>'._('Number').'</th>
@@ -114,12 +122,12 @@ if (isset($_POST['ShowResults']) AND  $_POST['TransNo']!=''){
 				<td>'.$myrow['transno'].'</td>
 				<td>'.$myrow['reference'].'</td>
 				<td>'.$myrow['rate'].'</td>
-				<td class="number">'.number_format($myrow['totalamt'],2).'</td>
-				<td class="number">'.number_format($myrow['amt'],2).'</td>
+				<td class="number">'.locale_money_format($myrow['totalamt'],$myrow['currcode']).'</td>
+				<td class="number">'.locale_money_format($myrow['amt'],$myrow['currcode']).'</td>
 				</tr>';
 
 		$RowCounter++;
-		If ($RowCounter == 12){
+		if ($RowCounter == 12){
 			$RowCounter=1;
 			echo $tableheader;
 		}
@@ -128,7 +136,7 @@ if (isset($_POST['ShowResults']) AND  $_POST['TransNo']!=''){
 		}
 		//end of while loop
 		echo '<tr><td colspan="5" class="number">'._('Total allocated').'</td>
-			<td class="number">' . number_format($AllocsTotal,2) . '</td></tr>';
+			<td class="number">' . locale_money_format($AllocsTotal,$_SESSION['CompanyRecord']['currencydefault']) . '</td></tr>';
 		echo '</table>';
 	}
 	}
