@@ -56,7 +56,7 @@ if (isset($_POST['submit'])) {
 		$Errors[$i] = 'Abbreviation';
 		$i++;
 	}
-	if (!is_numeric($_POST['ExchangeRate'])){
+	if (!is_numeric(filter_number_input($_POST['ExchangeRate']))){
 		$InputError = 1;
 	   prnMsg(_('The exchange rate must be numeric'),'error');
 		$Errors[$i] = 'ExchangeRate';
@@ -99,7 +99,7 @@ if (isset($_POST['submit'])) {
 					country='". $_POST['Country']. "',
 					hundredsname='" . $_POST['HundredsName'] . "',
 					decimalplaces='" . $_POST['DecimalPlaces'] . "',
-					rate='" .$_POST['ExchangeRate'] . "'
+					rate='" .filter_number_input($_POST['ExchangeRate']) . "'
 					WHERE currabrev = '" . $SelectedCurrency . "'";
 
 		$msg = _('The currency definition record has been updated');
@@ -117,7 +117,7 @@ if (isset($_POST['submit'])) {
 						'" . $_POST['Country'] . "',
 						'" . $_POST['HundredsName'] .  "',
 						'" . $_POST['DecimalPlaces'] .  "',
-						'" . $_POST['ExchangeRate'] . "'
+						'" . filter_number_input($_POST['ExchangeRate']) . "'
 						)";
 
 		$msg = _('The currency definition record has been added');
@@ -245,9 +245,9 @@ or deletion of the records*/
 					$myrow['currency'],
 					$myrow['country'],
 					$myrow['hundredsname'],
-					number_format($myrow['decimalplaces'],0),
-					number_format($myrow['rate'],5),
-					number_format(GetCurrencyRate($myrow['currabrev'],$CurrencyRatesArray),5),
+					locale_number_format($myrow['decimalplaces'],0),
+					locale_number_format($myrow['rate'],5),
+					locale_number_format(GetCurrencyRate($myrow['currabrev'],$CurrencyRatesArray),5),
 					$_SERVER['PHP_SELF'] . '?',
 					$myrow['currabrev'],
 					_('Edit'),
@@ -330,8 +330,9 @@ if (!isset($_GET['delete'])) {
 		echo '<table class="selection"><tr>
 			<td>' ._('Currency Abbreviation') . ':</td>
 			<td><select name="Abbreviation">';
-		foreach ($CurrenciesArray as $Abbreviation=>$CurrencyName) {
-			echo '<option value="'.$Abbreviation.'">'.$CurrencyName.'</option>';
+		foreach ($CurrenciesArray as $Abbreviation=>$CurrencyString) {
+			$CurrencyName=explode(',', $CurrencyString);
+			echo '<option value="'.$Abbreviation.'">'.$CurrencyName[1].'</option>';
 		}
 		echo '</select></td></tr>';
 	}
@@ -348,8 +349,8 @@ if (!isset($_GET['delete'])) {
 	echo '</td></tr>';
 	echo '<tr><td>'._('Exchange Rate').':</td>';
 	echo '<td>';
-	if (!isset($_POST['ExchangeRate'])) {$_POST['ExchangeRate']='';}
-	echo '<input ' . (in_array('ExchangeRate',$Errors) ?  'class="inputerror"' : '' ) .' type="text" class="number" name="ExchangeRate" size="10" maxlength="9" value="'. $_POST['ExchangeRate'].'" />';
+	if (!isset($_POST['ExchangeRate'])) {$_POST['ExchangeRate']='0';}
+	echo '<input ' . (in_array('ExchangeRate',$Errors) ?  'class="inputerror"' : '' ) .' type="text" class="number" name="ExchangeRate" size="10" maxlength="9" value="'. locale_number_format($_POST['ExchangeRate'],5).'" />';
 	echo '</td></tr>';
 	echo '<tr><td>'._('Decimal Places to Show').':</td>';
 	echo '<td>';
