@@ -18,6 +18,7 @@ CreateTable('dispatch', "CREATE TABLE dispatch (
 `loccode` VARCHAR (5) NOT NULL DEFAULT '',
 `departmentid` INT NOT NULL DEFAULT 0,
 `despatchdate` DATE NOT NULL DEFAULT '0000-00-00',
+`authorised` TINYINT NOT NULL DEFAULT 0,
 `narrative` TEXT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8", $db);
 

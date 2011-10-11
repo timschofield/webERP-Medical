@@ -607,11 +607,15 @@ echo '	<table width="100%" class="selection">
 $i=0;
 foreach ($MenuItems[$_SESSION['Module']]['Transactions']['Caption'] as $Caption) {
 /* Transactions Menu Item */
-	echo '<tr>
+	$ScriptNameArray = explode('?', substr($MenuItems[$_SESSION['Module']]['Transactions']['URL'][$i],1));
+	$PageSecurity = $_SESSION['PageSecurityArray'][$ScriptNameArray[0]];
+	if ((in_array($PageSecurity, $_SESSION['AllowedPageSecurityTokens']) OR !isset($PageSecurity))) {
+		echo '<tr>
 				<td class="menu_group_item">
 					<p>&bull; <a href="' . $rootpath . $MenuItems[$_SESSION['Module']]['Transactions']['URL'][$i] .'">' . $Caption . '</a></p>
 				</td>
 				</tr>';
+	}
 	$i++;
 }
 echo '</table>';
@@ -635,11 +639,15 @@ echo '	<table width="100%" class="selection">
 $i=0;
 foreach ($MenuItems[$_SESSION['Module']]['Reports']['Caption'] as $Caption) {
 /* Transactions Menu Item */
-	echo '<tr>
+	$ScriptNameArray = explode('?', substr($MenuItems[$_SESSION['Module']]['Reports']['URL'][$i],1));
+	$PageSecurity = $_SESSION['PageSecurityArray'][$ScriptNameArray[0]];
+	if ((in_array($PageSecurity, $_SESSION['AllowedPageSecurityTokens']) OR !isset($PageSecurity))) {
+		echo '<tr>
 				<td class="menu_group_item">
 					<p>&bull; <a href="' . $rootpath . $MenuItems[$_SESSION['Module']]['Reports']['URL'][$i] .'">' . $Caption . '</a></p>
 				</td>
 				</tr>';
+	}
 	$i++;
 }
 echo GetRptLinks($_SESSION['Module']);
@@ -664,11 +672,15 @@ echo '	<table width="100%" class="selection">
 $i=0;
 foreach ($MenuItems[$_SESSION['Module']]['Maintenance']['Caption'] as $Caption) {
 /* Transactions Menu Item */
-	echo '<tr>
+	$ScriptNameArray = explode('?', substr($MenuItems[$_SESSION['Module']]['Maintenance']['URL'][$i],1));
+	$PageSecurity = $_SESSION['PageSecurityArray'][$ScriptNameArray[0]];
+	if ((in_array($PageSecurity, $_SESSION['AllowedPageSecurityTokens']) OR !isset($PageSecurity))) {
+		echo '<tr>
 				<td class="menu_group_item">
 					<p>&bull; <a href="' . $rootpath . $MenuItems[$_SESSION['Module']]['Maintenance']['URL'][$i] .'">' . $Caption . '</a></p>
 				</td>
-				</tr>';
+			</tr>';
+	}
 	$i++;
 }
 echo '</table>';
