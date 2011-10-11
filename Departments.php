@@ -135,7 +135,7 @@ if (isset($_POST['Submit'])) {
 		$myrow = DB_fetch_row($result);
 		if ($myrow[0]>0) {
 			prnMsg( _('You cannot delete this Department'),'warn');
-			echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('There are items related to this department') . '</font>';
+			echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('There are items related to this department');
 		} else {
 			$sql="DELETE FROM departments WHERE description ".LIKE."'" . $OldDepartmentName . "'";
 			$result = DB_query($sql,$db);
@@ -226,7 +226,7 @@ if (! isset($_GET['delete'])) {
 			$_POST['DepartmentID'] = $myrow['departmentid'];
 			$_POST['DepartmentName']  = $myrow['description'];
 
-			echo '<input type="hidden" name="SelectedDepartmentID" value="' . $_POST['DepartmentID'] . '">';
+			echo '<input type="hidden" name="SelectedDepartmentID" value="' . $_POST['DepartmentID'] . '" />';
 			echo '<table class="selection">';
 		}
 
@@ -236,7 +236,7 @@ if (! isset($_GET['delete'])) {
 	}
 	echo '<tr>
 		<td>' . _('Department Name') . ':' . '</td>
-		<td><input type="text" name="DepartmentName" size="50" maxlength="100" value="' . $_POST['DepartmentName'] . '"></td>
+		<td><input type="text" name="DepartmentName" size="50" maxlength="100" value="' . $_POST['DepartmentName'] . '" /></td>
 		</tr>';
 	echo '<tr><td>'._('Authoriser').'</td><td><select name="Authoriser">';
 	$usersql="SELECT userid FROM www_users";
@@ -251,7 +251,7 @@ if (! isset($_GET['delete'])) {
 	echo '</select></td></tr>';
 	echo '</table><br />';
 
-	echo '<div class="centre"><input type="submit" name="Submit" value=' . _('Enter Information') . '></div>';
+	echo '<div class="centre"><input type="submit" name="Submit" value="' . _('Enter Information') . '" /></div>';
 
 	echo '</form>';
 
