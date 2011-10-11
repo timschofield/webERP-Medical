@@ -9,7 +9,8 @@ InsertRecord('pagesecurity', array('script', 'security'), array('PDFStockTransfe
 
 CreateTable('departments', "CREATE TABLE departments (
 `departmentid` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-`description` VARCHAR (100) NOT NULL DEFAULT ''
+`description` VARCHAR (100) NOT NULL DEFAULT '',
+`authoriser` varchar (20) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8", $db);
 
 CreateTable('dispatch', "CREATE TABLE dispatch (
@@ -23,7 +24,7 @@ CreateTable('dispatch', "CREATE TABLE dispatch (
 CreateTable('dispatchitems', "CREATE TABLE dispatchitems (
 `dispatchitemsid` INT NOT NULL DEFAULT 0,
 `dispatchid` INT NOT NULL DEFAULT 0,
-`itemid` VARCHAR (30) NOT NULL DEFAULT '',
+`stockid` VARCHAR (20) NOT NULL DEFAULT '',
 `quantity` DOUBLE NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8", $db);
 

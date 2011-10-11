@@ -60,7 +60,8 @@ if (isset($_POST['Submit'])) {
 				$OldDepartmentName = $myrow[0];
 				$sql = array();
 				$sql[] = "UPDATE departments
-					SET description='" . $_POST['DepartmentName'] . "'
+					SET description='" . $_POST['DepartmentName'] . "',
+						authoriser='" . $_POST['Authoriser'] . "'
 					WHERE description ".LIKE." '".$OldDepartmentName."'";
 			} else {
 				$InputError = 1;
@@ -79,9 +80,11 @@ if (isset($_POST['Submit'])) {
 			prnMsg( _('There is already a Department with the specified name.'),'error');
 		} else {
 			$sql = "INSERT INTO departments (
-						description )
+						description,
+						authoriser )
 				VALUES (
-					'" . $_POST['DepartmentName'] ."'
+					'" . $_POST['DepartmentName'] ."',
+					'" . $_POST['Authoriser'] ."'
 					)";
 		}
 		$msg = _('The new department has been created');
@@ -158,7 +161,8 @@ if (isset($_POST['Submit'])) {
   or deletion of the records*/
 
 	$sql = "SELECT departmentid,
-			description
+			description,
+			authoriser
 			FROM departments
 			ORDER BY departmentid";
 
@@ -167,11 +171,12 @@ if (isset($_POST['Submit'])) {
 
 	echo '<table class="selection">
 			<tr>
-				<th>' . _('Departments') . '</th>
+				<th>' . _('Department Name') . '</th>
+				<th>' . _('Authoriser') . '</th>
 			</tr>';
 
 	$k=0; //row colour counter
-	while ($myrow = DB_fetch_row($result)) {
+	while ($myrow = DB_fetch_array($result)) {
 
 		if ($k==1){
 			echo '<tr class="EvenTableRows">';
@@ -181,9 +186,10 @@ if (isset($_POST['Submit'])) {
 			$k++;
 		}
 
-		echo '<td>' . $myrow[1] . '</td>';
-		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?SelectedDepartmentID=' . $myrow[0] . '">' . _('Edit') . '</a></td>';
-		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?SelectedDepartmentID=' . $myrow[0] . '&delete=1">' . _('Delete') .'</a></td>';
+		echo '<td>' . $myrow['description'] . '</td>';
+		echo '<td>' . $myrow['authoriser'] . '</td>';
+		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?SelectedDepartmentID=' . $myrow['departmentid'] . '">' . _('Edit') . '</a></td>';
+		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?SelectedDepartmentID=' . $myrow['departmentid'] . '&delete=1">' . _('Delete') .'</a></td>';
 		echo '</tr>';
 
 	} //END WHILE LIST LOOP
@@ -192,7 +198,7 @@ if (isset($_POST['Submit'])) {
 
 
 if (isset($SelectedDepartmentID)) {
-	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Verify Departments') . '</a></div>';
+	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('View all Departments') . '</a></div>';
 }
 
 echo '<br />';
@@ -230,8 +236,19 @@ if (! isset($_GET['delete'])) {
 	}
 	echo '<tr>
 		<td>' . _('Department Name') . ':' . '</td>
-		<td><input type="text" name="DepartmentName" size="30" maxlength="30" value="' . $_POST['DepartmentName'] . '"></td>
+		<td><input type="text" name="DepartmentName" size="50" maxlength="100" value="' . $_POST['DepartmentName'] . '"></td>
 		</tr>';
+	echo '<tr><td>'._('Authoriser').'</td><td><select name="Authoriser">';
+	$usersql="SELECT userid FROM www_users";
+	$userresult=DB_query($usersql,$db);
+	while ($myrow=DB_fetch_array($userresult)) {
+		if ($myrow['userid']==$UserID) {
+			echo '<option selected="True" value="'.$myrow['userid'].'">'.$myrow['userid'].'</option>';
+		} else {
+			echo '<option value="'.$myrow['userid'].'">'.$myrow['userid'].'</option>';
+		}
+	}
+	echo '</select></td></tr>';
 	echo '</table><br />';
 
 	echo '<div class="centre"><input type="submit" name="Submit" value=' . _('Enter Information') . '></div>';
