@@ -3,16 +3,16 @@
 
 include('includes/session.inc');
 
-$title = _('Departamentos');
+$title = _('Departments');
 
 include('includes/header.inc');
 echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' .
 		_('Top Sales Order Search') . '" alt="" />' . ' ' . $title . '</p>';
 
-if ( isset($_GET['SelectedMeasureID']) )
-	$SelectedMeasureID = $_GET['SelectedMeasureID'];
-elseif (isset($_POST['SelectedMeasureID']))
-	$SelectedMeasureID = $_POST['SelectedMeasureID'];
+if ( isset($_GET['SelectedDepartmentID']) )
+	$SelectedDepartmentID = $_GET['SelectedDepartmentID'];
+elseif (isset($_POST['SelectedDepartmentID']))
+	$SelectedDepartmentID = $_POST['SelectedDepartmentID'];
 
 if (isset($_POST['Submit'])) {
 
@@ -25,73 +25,73 @@ if (isset($_POST['Submit'])) {
 
 	//first off validate inputs sensible
 
-	if (strpos($_POST['MeasureName'],'&')>0 OR strpos($_POST['MeasureName'],"'")>0) {
+	if (strpos($_POST['DepartmentName'],'&')>0 OR strpos($_POST['DepartmentName'],"'")>0) {
 		$InputError = 1;
-		prnMsg( _('La descripcion del departamento no debe contener el caracter') . " '&' " . _('or the character') ." '",'error');
+		prnMsg( _('The description of the department must not contain the character') . " '&' " . _('or the character') ." '",'error');
 	}
-	if (trim($_POST['MeasureName']) == '') {
+	if (trim($_POST['DepartmentName']) == '') {
 		$InputError = 1;
-		prnMsg( _('El Nombre del Departamento no debe estar vacio'), 'error');
+		prnMsg( _('The Name of the Department should not be empty'), 'error');
 	}
 
-	if (isset($_POST['SelectedMeasureID']) AND $_POST['SelectedMeasureID']!='' AND $InputError !=1) {
- 
+	if (isset($_POST['SelectedDepartmentID']) AND $_POST['SelectedDepartmentID']!='' AND $InputError !=1) {
 
-		/*SelectedMeasureID could also exist if submit had not been clicked this code would not run in this case cos submit is false of course  see the delete code below*/
+
+		/*SelectedDepartmentID could also exist if submit had not been clicked this code would not run in this case cos submit is false of course  see the delete code below*/
 		// Check the name does not clash
 		$sql = "SELECT count(*) FROM departments
-				WHERE departmentid <> '" . $SelectedMeasureID ."'
-				AND description ".LIKE." '" . $_POST['MeasureName'] . "'";
+				WHERE departmentid <> '" . $SelectedDepartmentID ."'
+				AND description ".LIKE." '" . $_POST['DepartmentName'] . "'";
 		$result = DB_query($sql,$db);
 		$myrow = DB_fetch_row($result);
 		if ( $myrow[0] > 0 ) {
 			$InputError = 1;
-			prnMsg( _('No se Puede Registrar un departamento con el mismo nombre.'),'error');
+			prnMsg( _('This department name already exists.'),'error');
 		} else {
 			// Get the old name and check that the record still exist neet to be very carefull here
 			// idealy this is one of those sets that should be in a stored procedure simce even the checks are
 			// relavant
 			$sql = "SELECT description FROM departments
-				WHERE departmentid = '" . $SelectedMeasureID . "'";
+				WHERE departmentid = '" . $SelectedDepartmentID . "'";
 			$result = DB_query($sql,$db);
 			if ( DB_num_rows($result) != 0 ) {
 				// This is probably the safest way there is
 				$myrow = DB_fetch_row($result);
-				$OldMeasureName = $myrow[0];
+				$OldDepartmentName = $myrow[0];
 				$sql = array();
 				$sql[] = "UPDATE departments
-					SET description='" . $_POST['MeasureName'] . "'
-					WHERE description ".LIKE." '".$OldMeasureName."'";
+					SET description='" . $_POST['DepartmentName'] . "'
+					WHERE description ".LIKE." '".$OldDepartmentName."'";
 			} else {
 				$InputError = 1;
-				prnMsg( _('El Departamento no existe.'),'error');
+				prnMsg( _('The Department does not exist.'),'error');
 			}
 		}
-		$msg = _('El Departamento fue modificado');
+		$msg = _('The department has been modified');
 	} elseif ($InputError !=1) {
-		/*SelectedMeasureID is null cos no item selected on first time round so must be adding a record*/
+		/*SelectedDepartmentID is null cos no item selected on first time round so must be adding a record*/
 		$sql = "SELECT count(*) FROM departments
-				WHERE description " .LIKE. " '".$_POST['MeasureName'] ."'";
+				WHERE description " .LIKE. " '".$_POST['DepartmentName'] ."'";
 		$result = DB_query($sql,$db);
 		$myrow = DB_fetch_row($result);
 		if ( $myrow[0] > 0 ) {
 			$InputError = 1;
-			prnMsg( _('Existe un Departamento Con el nombre indicado.'),'error');
+			prnMsg( _('There is already a Department with the specified name.'),'error');
 		} else {
 			$sql = "INSERT INTO departments (
 						description )
 				VALUES (
-					'" . $_POST['MeasureName'] ."'
+					'" . $_POST['DepartmentName'] ."'
 					)";
 		}
-		$msg = _('Se Registro un nuevo departamento');
+		$msg = _('The new department has been created');
 	}
 
 	if ($InputError!=1){
 		//run the SQL from either of the above possibilites
 		if (is_array($sql)) {
 			$result = DB_Txn_Begin($db);
-			$tmpErr = _('No se pudo registrar el departamento');
+			$tmpErr = _('The department could not be inserted');
 			$tmpDbg = _('The sql that failed was') . ':';
 			foreach ($sql as $stmt ) {
 				$result = DB_query($stmt,$db, $tmpErr,$tmpDbg,true);
@@ -110,48 +110,48 @@ if (isset($_POST['Submit'])) {
 		}
 		prnMsg($msg,'success');
 	}
-	unset ($SelectedMeasureID);
-	unset ($_POST['SelectedMeasureID']);
-	unset ($_POST['MeasureName']);
+	unset ($SelectedDepartmentID);
+	unset ($_POST['SelectedDepartmentID']);
+	unset ($_POST['DepartmentName']);
 
 } elseif (isset($_GET['delete'])) {
 //the link to delete a selected record was clicked instead of the submit button
 // PREVENT DELETES IF DEPENDENT RECORDS IN 'stockmaster'
 	// Get the original name of the unit of measure the ID is just a secure way to find the unit of measure
 	$sql = "SELECT description FROM departments
-		WHERE departmentid = '" . $SelectedMeasureID . "'";
+		WHERE departmentid = '" . $SelectedDepartmentID . "'";
 	$result = DB_query($sql,$db);
 	if ( DB_num_rows($result) == 0 ) {
 		// This is probably the safest way there is
-		prnMsg( _('No se Puede Eliminar este Departamento'),'warn');
+		prnMsg( _('You cannot delete this Department'),'warn');
 	} else {
 		$myrow = DB_fetch_row($result);
-		$OldMeasureName = $myrow[0];
-		$sql= "SELECT COUNT(*) FROM dispatch,departments WHERE dispatch.departmentid=departments.departmentid  and description ".LIKE." '" . $OldMeasureName . "'";
+		$OldDepartmentName = $myrow[0];
+		$sql= "SELECT COUNT(*) FROM dispatch,departments WHERE dispatch.departmentid=departments.departmentid  and description ".LIKE." '" . $OldDepartmentName . "'";
 		$result = DB_query($sql,$db);
 		$myrow = DB_fetch_row($result);
 		if ($myrow[0]>0) {
-			prnMsg( _('No se Puede Eliminar este departamento'),'warn');
-			echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('Articulos relacionados con este departamento') . '</font>';
+			prnMsg( _('You cannot delete this Department'),'warn');
+			echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('There are items related to this department') . '</font>';
 		} else {
-			$sql="DELETE FROM departments WHERE description ".LIKE."'" . $OldMeasureName . "'";
+			$sql="DELETE FROM departments WHERE description ".LIKE."'" . $OldDepartmentName . "'";
 			$result = DB_query($sql,$db);
-			prnMsg( $OldMeasureName . ' ' . _('El departamento fue eliminado') . '!','success');
+			prnMsg( $OldDepartmentName . ' ' . _('The department has been removed') . '!','success');
 		}
 	} //end if account group used in GL accounts
-	unset ($SelectedMeasureID);
-	unset ($_GET['SelectedMeasureID']);
+	unset ($SelectedDepartmentID);
+	unset ($_GET['SelectedDepartmentID']);
 	unset($_GET['delete']);
-	unset ($_POST['SelectedMeasureID']);
-	unset ($_POST['MeasureID']);
-	unset ($_POST['MeasureName']);
+	unset ($_POST['SelectedDepartmentID']);
+	unset ($_POST['DepartmentID']);
+	unset ($_POST['DepartmentName']);
 }
 
- if (!isset($SelectedMeasureID)) {
+ if (!isset($SelectedDepartmentID)) {
 
 /* An unit of measure could be posted when one has been edited and is being updated
   or GOT when selected for modification
-  SelectedMeasureID will exist because it was sent with the page in a GET .
+  SelectedDepartmentID will exist because it was sent with the page in a GET .
   If its the first time the page has been displayed with no parameters
   then none of the above are true and the list of account groups will be displayed with
   links to delete or edit each. These will call the same page again and allow update/input
@@ -162,12 +162,12 @@ if (isset($_POST['Submit'])) {
 			FROM departments
 			ORDER BY departmentid";
 
-	$ErrMsg = _('No Existen Departamentos Creados');
+	$ErrMsg = _('There are no departments created');
 	$result = DB_query($sql,$db,$ErrMsg);
 
 	echo '<table class="selection">
 			<tr>
-				<th>' . _('Departamentos') . '</th>
+				<th>' . _('Departments') . '</th>
 			</tr>';
 
 	$k=0; //row colour counter
@@ -182,57 +182,57 @@ if (isset($_POST['Submit'])) {
 		}
 
 		echo '<td>' . $myrow[1] . '</td>';
-		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?SelectedMeasureID=' . $myrow[0] . '">' . _('Edit') . '</a></td>';
-		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?SelectedMeasureID=' . $myrow[0] . '&delete=1">' . _('Delete') .'</a></td>';
+		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?SelectedDepartmentID=' . $myrow[0] . '">' . _('Edit') . '</a></td>';
+		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?SelectedDepartmentID=' . $myrow[0] . '&delete=1">' . _('Delete') .'</a></td>';
 		echo '</tr>';
 
 	} //END WHILE LIST LOOP
-	echo '</table><p>';
+	echo '</table>';
 } //end of ifs and buts!
 
 
-if (isset($SelectedMeasureID)) {
-	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Verificar Departamentos') . '</a></div>';
+if (isset($SelectedDepartmentID)) {
+	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Verify Departments') . '</a></div>';
 }
 
-echo '<p>';
+echo '<br />';
 
 if (! isset($_GET['delete'])) {
 
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] .  '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-	if (isset($SelectedMeasureID)) {
+	if (isset($SelectedDepartmentID)) {
 		//editing an existing section
 
 		$sql = "SELECT departmentid,
 				description
 				FROM departments
-				WHERE departmentid='" . $SelectedMeasureID . "'";
+				WHERE departmentid='" . $SelectedDepartmentID . "'";
 
 		$result = DB_query($sql, $db);
 		if ( DB_num_rows($result) == 0 ) {
-			prnMsg( _('No se pudo realizar la consulta por favor intente de nuevo.'),'warn');
-			unset($SelectedMeasureID);
+			prnMsg( _('The selected departemnt could not be found.'),'warn');
+			unset($SelectedDepartmentID);
 		} else {
 			$myrow = DB_fetch_array($result);
 
-			$_POST['MeasureID'] = $myrow['departmentid'];
-			$_POST['MeasureName']  = $myrow['description'];
+			$_POST['DepartmentID'] = $myrow['departmentid'];
+			$_POST['DepartmentName']  = $myrow['description'];
 
-			echo '<input type="hidden" name="SelectedMeasureID" value="' . $_POST['MeasureID'] . '">';
+			echo '<input type="hidden" name="SelectedDepartmentID" value="' . $_POST['DepartmentID'] . '">';
 			echo '<table class="selection">';
 		}
 
 	}  else {
-		$_POST['MeasureName']='';
-		echo '<table>';
+		$_POST['DepartmentName']='';
+		echo '<table class="selection">';
 	}
 	echo '<tr>
-		<td>' . _('Departamento') . ':' . '</td>
-		<td><input type="text" name="MeasureName" size="30" maxlength="30" value="' . $_POST['MeasureName'] . '"></td>
+		<td>' . _('Department Name') . ':' . '</td>
+		<td><input type="text" name="DepartmentName" size="30" maxlength="30" value="' . $_POST['DepartmentName'] . '"></td>
 		</tr>';
-	echo '</table>';
+	echo '</table><br />';
 
 	echo '<div class="centre"><input type="submit" name="Submit" value=' . _('Enter Information') . '></div>';
 
