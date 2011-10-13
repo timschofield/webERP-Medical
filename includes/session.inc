@@ -13,7 +13,7 @@ if (!file_exists($PathPrefix . 'config.php')){
 	header('Location:' . $rootpath . '/install/index.php');
 }
 include($PathPrefix . 'config.php');
-$DBVersion=96;
+$DBVersion=97;
 if (isset($SessionSavePath)){
 	session_save_path($SessionSavePath);
 }
