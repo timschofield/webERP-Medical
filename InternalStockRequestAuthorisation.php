@@ -1,7 +1,7 @@
 <?php
 
 /* $Id$*/
-$PageSecurity=1;
+
 include('includes/session.inc');
 
 $title = _('Authorise Internal Stock Requests');
