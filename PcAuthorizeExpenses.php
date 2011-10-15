@@ -2,7 +2,7 @@
 /* $Revision: 1.0 $ */
 
 include('includes/session.inc');
-$title = _('Authorization of Petty Cash Expenses');
+$title = _('Authorisation of Petty Cash Expenses');
 include('includes/header.inc');
 include('includes/SQL_CommonFunctions.inc');
 
@@ -37,7 +37,7 @@ if (isset($_POST['process'])) {
 
 	if ($SelectedTabs=='') {
 		$InputError = 1;
-		prnMsg('<br />' . _('You Must First Select a Petty Cash Tab To Authorise'),'error');
+		prnMsg( _('You Must First Select a Petty Cash Tab To Authorise'),'error');
 		$Errors[$i] = 'TabSelect';
 		$i++;
 		unset($SelectedTabs);
@@ -58,10 +58,10 @@ if (isset($_POST['Go'])) {
 
 if (isset($SelectedTabs)) {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Petty Cash') . '" alt="" />' .
-			_('Authorization Of Petty Cash Expenses ') . ''.$SelectedTabs.'</p>';
+			_('Authorisation Of Petty Cash Expenses ') . ''.$SelectedTabs.'</p>';
 } else {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Petty Cash') . '" alt="" />' .
-			_('Authorization Of Petty Cash Expenses ') . '</p>';
+			_('Authorisation Of Petty Cash Expenses ') . '</p>';
 }
 if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) OR isset ($_POST['GO'])) {
 
@@ -138,12 +138,14 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 				$type = 1;
 				$Amount = -$Amount;
 				$AccountFrom = $myrow['glaccountpcash'];
-				$SQLAccExp = "SELECT glaccount
+				$SQLAccExp = "SELECT glaccount,
+									tag
 								FROM pcexpenses
 								WHERE codeexpense = '".$myrow['codeexpense']."'";
 				$ResultAccExp = DB_query($SQLAccExp,$db);
 				$myrowAccExp = DB_fetch_array($ResultAccExp);
 				$AccountTo = $myrowAccExp['glaccount'];
+				$TagTo = $myrowAccExp['tag'];
 			}
 
 			//get typeno
@@ -178,7 +180,7 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 					'".-$Amount."',
 					0,
 					'',
-					0)";
+					'".$TagTo."')";
 
 			$ResultFrom = DB_Query($sqlFrom, $db, '', '', true);
 
@@ -206,7 +208,7 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 					'".$Amount."',
 					0,
 					'',
-					0)";
+					'".$TagTo."')";
 
 			$ResultTo = DB_Query($sqlTo, $db, '', '', true);
 
