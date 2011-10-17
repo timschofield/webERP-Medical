@@ -77,7 +77,7 @@ while ($myrow=DB_fetch_array($result)) {
 						stockrequestitems.quantity
 				FROM stockrequestitems
 				LEFT JOIN stockmaster
-				ON stockmaster.stockid=stockrequestitems.itemid
+				ON stockmaster.stockid=stockrequestitems.stockid
 			WHERE dispatchid='".$myrow['dispatchid'] . "'";
 	$lineresult=DB_query($linesql, $db);
 
