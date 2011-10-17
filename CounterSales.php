@@ -36,7 +36,7 @@ if (isset($_POST['OrderItems'])){
 		if (mb_strstr($key,'StockID')) {
 			$Index=substr($key,7);
 			$StockID=$value;
-			$Quantity=$_POST['Quantity'.$Index];
+			$Quantity=filter_number_input($_POST['Quantity'.$Index]);
 			$_POST['Units'.$StockID]=$_POST['Units'.$Index];
 			if (isset($_POST['Batch'.$Index])) {
 				$Batch=$_POST['Batch'.$Index];
@@ -373,7 +373,7 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 	if (!isset($Offset) or $Offset<0) {
 		$Offset=0;
 	}
-	$SQL = $SQL . ' LIMIT ' . $_SESSION['DefaultDisplayRecordsMax'].' OFFSET '.number_format($_SESSION['DefaultDisplayRecordsMax']*$Offset);
+	$SQL = $SQL . ' LIMIT ' . $_SESSION['DefaultDisplayRecordsMax'].' OFFSET '.($_SESSION['DefaultDisplayRecordsMax']*$Offset);
 
 	$ErrMsg = _('There is a problem selecting the part records to display because');
 	$DbgMsg = _('The SQL used to get the part selection was');
@@ -410,6 +410,10 @@ if ($_SESSION['Items'.$identifier]->DefaultCurrency != $_SESSION['CompanyRecord'
 	}
 } else {
 	$ExRate = 1;
+}
+
+if ($ExRate==0) {
+	$ExRate=1;
 }
 
 /*Process Quick Entry */
@@ -513,18 +517,18 @@ if ((isset($_SESSION['Items'.$identifier])) OR isset($NewItem)) {
 
 		if (isset($_POST['Quantity_' . $OrderLine->LineNumber])){
 
-			$Quantity = $_POST['Quantity_' . $OrderLine->LineNumber];
+			$Quantity = filter_number_input($_POST['Quantity_' . $OrderLine->LineNumber]);
 
 			if (abs($OrderLine->Price - $_POST['Price_' . $OrderLine->LineNumber])>0.01){
-				$Price = $_POST['Price_' . $OrderLine->LineNumber];
+				$Price = filter_number_input($_POST['Price_' . $OrderLine->LineNumber]);
 				$_POST['GPPercent_' . $OrderLine->LineNumber] = (($Price*(1-($_POST['Discount_' . $OrderLine->LineNumber]/100))) - $OrderLine->StandardCost*$ExRate)/($Price *(1-$_POST['Discount_' . $OrderLine->LineNumber])/100);
 			} else if (abs($OrderLine->GPPercent - $_POST['GPPercent_' . $OrderLine->LineNumber])>=0.001) {
 				//then do a recalculation of the price at this new GP Percentage
 				$Price = ($OrderLine->StandardCost*$ExRate)/(1 -(($_POST['GPPercent_' . $OrderLine->LineNumber] + $_POST['Discount_' . $OrderLine->LineNumber])/100));
 			} else {
-				$Price = $_POST['Price_' . $OrderLine->LineNumber];
+				$Price = filter_number_input($_POST['Price_' . $OrderLine->LineNumber]);
 			}
-			$DiscountPercentage = $_POST['Discount_' . $OrderLine->LineNumber];
+			$DiscountPercentage = filter_number_input($_POST['Discount_' . $OrderLine->LineNumber]);
 			if ($_SESSION['AllowOrderLineItemNarrative'] == 1) {
 				$Narrative = $_POST['Narrative_' . $OrderLine->LineNumber];
 			} else {
@@ -554,7 +558,7 @@ if ((isset($_SESSION['Items'.$identifier])) OR isset($NewItem)) {
 									'Yes', /*Update DB */
 									$_POST['ItemDue_' . $OrderLine->LineNumber],
 									$_POST['POLine_' . $OrderLine->LineNumber],
-									$_POST['GPPercent_' . $OrderLine->LineNumber]);
+									filter_number_input($_POST['GPPercent_' . $OrderLine->LineNumber]));
 			}
 		} //page not called from itself - POST variables not set
 	}
@@ -780,7 +784,6 @@ if (count($_SESSION['Items'.$identifier]->LineItems)>0 and !isset($_POST['Proces
 	foreach ($_SESSION['Items'.$identifier]->LineItems as $OrderLine) {
 
 		$SubTotal = $OrderLine->Quantity * $OrderLine->Price * (1 - $OrderLine->DiscountPercent);
-		$DisplayDiscount = number_format(($OrderLine->DiscountPercent * 100),2);
 		$QtyOrdered = $OrderLine->Quantity;
 		$QtyRemain = $QtyOrdered - $OrderLine->QtyInv;
 
@@ -802,16 +805,16 @@ if (count($_SESSION['Items'.$identifier]->LineItems)>0 and !isset($_POST['Proces
 		echo '<td><a target="_blank" href="' . $rootpath . '/StockStatus.php?identifier='.$identifier . '&amp;StockID=' . $OrderLine->StockID . '&amp;DebtorNo=' . $_SESSION['Items'.$identifier]->DebtorNo . '">' . $OrderLine->StockID . '</a></td>
 			<td>' . $OrderLine->ItemDescription . '</td>';
 
-		echo '<td><input class="number" tabindex="2" type="text" name="Quantity_' . ($OrderLine->LineNumber) . '" size="6" maxlength="6" value="' . ($OrderLine->Quantity) . '" />';
+		echo '<td><input class="number" tabindex="2" type="text" name="Quantity_' . ($OrderLine->LineNumber) . '" size="6" maxlength="6" value="' . locale_number_format($OrderLine->Quantity,$OrderLine->DecimalPlaces) . '" />';
 
 		echo '</td>
-				<td class="number">' . number_format($OrderLine->QOHatLoc/$OrderLine->ConversionFactor,0) . '</td>
+				<td class="number">' . locale_number_format($OrderLine->QOHatLoc/$OrderLine->ConversionFactor,$OrderLine->DecimalPlaces) . '</td>
 				<td>' . $OrderLine->Units . '</td>';
 
-		echo '<td><input class="number" type="text" name="Price_' . $OrderLine->LineNumber . '" size="16" maxlength="16" value="' . $OrderLine->Price . '" /></td>
-				<td><input class="number" type="text" name="Discount_' . $OrderLine->LineNumber . '" size="5" maxlength="4" value="' . ($OrderLine->DiscountPercent * 100) . '" /></td>
-				<td><input class="number" type="text" name="GPPercent_' . $OrderLine->LineNumber . '" size="3" maxlength="40" value="' . $OrderLine->GPPercent . '" /></td>';
-		echo '<td class="number">' . number_format($SubTotal,2) . '</td>';
+		echo '<td><input class="number" type="text" name="Price_' . $OrderLine->LineNumber . '" size="16" maxlength="16" value="' . locale_number_format($OrderLine->Price,4) . '" /></td>
+				<td><input class="number" type="text" name="Discount_' . $OrderLine->LineNumber . '" size="5" maxlength="4" value="' . locale_number_format($OrderLine->DiscountPercent * 100,2) . '" /></td>
+				<td><input class="number" type="text" name="GPPercent_' . $OrderLine->LineNumber . '" size="8" maxlength="8" value="' . locale_number_format($OrderLine->GPPercent,4) . '" /></td>';
+		echo '<td class="number">' . locale_money_format($SubTotal,$_SESSION['Items'.$identifier]->DefaultCurrency) . '</td>';
 		$LineDueDate = $OrderLine->ItemDue;
 		if (!Is_Date($OrderLine->ItemDue)){
 			$LineDueDate = DateAdd (Date($_SESSION['DefaultDateFormat']),'d', $_SESSION['Items'.$identifier]->DeliveryDays);
@@ -837,8 +840,8 @@ if (count($_SESSION['Items'.$identifier]->LineItems)>0 and !isset($_POST['Proces
 		$TaxTotal += $TaxLineTotal;
 		$_SESSION['Items'.$identifier]->TaxTotals=$TaxTotals;
 		$_SESSION['Items'.$identifier]->TaxGLCodes=$TaxGLCodes;
-		echo '<td class="number">' . number_format($TaxLineTotal ,2) . '</td>';
-		echo '<td class="number">' . number_format($SubTotal + $TaxLineTotal ,2) . '</td>';
+		echo '<td class="number">' . locale_money_format($TaxLineTotal ,$_SESSION['Items'.$identifier]->DefaultCurrency) . '</td>';
+		echo '<td class="number">' . locale_money_format($SubTotal + $TaxLineTotal ,$_SESSION['Items'.$identifier]->DefaultCurrency) . '</td>';
 		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier . '&amp;Delete=' . $OrderLine->LineNumber . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');">' . _('Delete') . '</a></td></tr>';
 
 		if ($_SESSION['AllowOrderLineItemNarrative'] == 1){
@@ -855,9 +858,9 @@ if (count($_SESSION['Items'.$identifier]->LineItems)>0 and !isset($_POST['Proces
 	} /* end of loop around items */
 
 	echo '<tr class="EvenTableRows"><td colspan="8" class="number"><b>' . _('Total') . '</b></td>
-				<td class="number">' . number_format(($_SESSION['Items'.$identifier]->total),2) . '</td>
-				<td class="number">' . number_format($TaxTotal,2) . '</td>
-				<td class="number">' . number_format(($_SESSION['Items'.$identifier]->total+$TaxTotal),2) . '</td>
+				<td class="number">' . locale_money_format(($_SESSION['Items'.$identifier]->total),$_SESSION['Items'.$identifier]->DefaultCurrency) . '</td>
+				<td class="number">' . locale_money_format($TaxTotal,$_SESSION['Items'.$identifier]->DefaultCurrency) . '</td>
+				<td class="number">' . locale_money_format(($_SESSION['Items'.$identifier]->total+$TaxTotal),$_SESSION['Items'.$identifier]->DefaultCurrency) . '</td>
 						</tr>
 		</table>';
 	echo '<input type="hidden" name="TaxTotal" value="'.$TaxTotal.'" />';
@@ -914,7 +917,7 @@ if (count($_SESSION['Items'.$identifier]->LineItems)>0 and !isset($_POST['Proces
 
 	$_POST['AmountPaid'] =($_SESSION['Items'.$identifier]->total+$TaxTotal);
 
-	echo '<tr><td>' . _('Amount Paid') . ':</td><td><input type="text" class="number" name="AmountPaid" maxlength="12" size="12" value="' . $_POST['AmountPaid'] . '" /></td></tr>';
+	echo '<tr><td>' . _('Amount Paid') . ':</td><td><input type="text" class="number" name="AmountPaid" maxlength="12" size="12" value="' . locale_money_format(round($_POST['AmountPaid'],2),$_SESSION['Items'.$identifier]->DefaultCurrency) . '" /></td></tr>';
 
 	echo '</table>'; //end the sub table in the second column of master table
 	echo '</th></tr></table>';	//end of column/row/master table
@@ -935,7 +938,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 		prnMsg(_('There are no lines on this sale. Please enter lines to invoice first'),'error');
 		$InputError = true;
 	}
-	if (abs($_POST['AmountPaid'] -($_SESSION['Items'.$identifier]->total+$_POST['TaxTotal']))>=0.01) {
+	if (abs(filter_currency_input($_POST['AmountPaid'])-($_SESSION['Items'.$identifier]->total+filter_currency_input($_POST['TaxTotal'])))>=0.01) {
 		prnMsg(_('The amount entered as payment does not equal the amount of the invoice. Please ensure the customer has paid the correct amount and re-enter'),'error');
 		$InputError = true;
 	}
@@ -1050,12 +1053,12 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 												'" . $OrderNo . "',
 												'" . $_SESSION['Items'.$identifier]->DebtorNo . "',
 												'" . $_SESSION['Items'.$identifier]->Branch . "',
-												'". DB_escape_string($_SESSION['Items'.$identifier]->CustRef) ."',
-												'". DB_escape_string($_SESSION['Items'.$identifier]->Comments) ."',
-												'" . Date("Y-m-d H:i") . "',
+												'" . DB_escape_string($_SESSION['Items'.$identifier]->CustRef) ."',
+												'" . DB_escape_string($_SESSION['Items'.$identifier]->Comments) ."',
+												'" . Date('Y-m-d H:i') . "',
 												'" . $_SESSION['Items'.$identifier]->DefaultSalesType . "',
 												'" . $_SESSION['Items'.$identifier]->ShipVia . "',
-												'". DB_escape_string($_SESSION['Items'.$identifier]->DeliverTo) . "',
+												'" . DB_escape_string($_SESSION['Items'.$identifier]->DeliverTo) . "',
 												'" . _('Counter Sale') . "',
 												'" . $_SESSION['Items'.$identifier]->PhoneNo . "',
 												'" . $_SESSION['Items'.$identifier]->Email . "',
@@ -1083,11 +1086,11 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 		$DbgMsg = _('Trouble inserting a line of a sales order. The SQL that failed was');
 		foreach ($_SESSION['Items'.$identifier]->LineItems as $StockItem) {
 
-			$LineItemsSQL = $StartOf_LineItemsSQL .
-											"'".$StockItem->LineNumber . "',
+			$LineItemsSQL = $StartOf_LineItemsSQL . "
+											'" . $StockItem->LineNumber . "',
 											'" . $OrderNo . "',
 											'" . $StockItem->StockID . "',
-											'". $StockItem->Price . "',
+											'" . $StockItem->Price . "',
 											'" . $StockItem->Quantity . "',
 											'" . floatval($StockItem->DiscountPercent) . "',
 											'" . DB_escape_string($StockItem->Narrative) . "',
@@ -1095,7 +1098,6 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 											'" . Date('Y-m-d') . "',
 											'" . $StockItem->Quantity . "',
 											1)";
-
 			$ErrMsg = _('Unable to add the sales order line');
 			$Ins_LineItemResult = DB_query($LineItemsSQL,$db,$ErrMsg,$DbgMsg,true);
 
@@ -1302,13 +1304,12 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 				'" . $_SESSION['Items'.$identifier]->CustRef  . "',
 				'" . $_SESSION['Items'.$identifier]->DefaultSalesType . "',
 				'" . $OrderNo . "',
-				'" . $_SESSION['Items'.$identifier]->total . "',
-				'" . $_POST['TaxTotal'] . "',
+				'" . filter_currency_input($_SESSION['Items'.$identifier]->total) . "',
+				'" . filter_currency_input($_POST['TaxTotal']) . "',
 				'" . $ExRate . "',
 				'" . $_SESSION['Items'.$identifier]->Comments . "',
 				'" . $_SESSION['Items'.$identifier]->ShipVia . "',
-				'" . ($_SESSION['Items'.$identifier]->total + $_POST['TaxTotal']) . "')";
-
+				'" . filter_number_input($_SESSION['Items'.$identifier]->total + $_POST['TaxTotal']) . "')";
 		$ErrMsg =_('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The debtor transaction record could not be inserted because');
 		$DbgMsg = _('The following SQL to insert the debtor transaction record was used');
 	 	$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
@@ -1323,11 +1324,12 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 													taxamount)
 										VALUES ('" . $DebtorTransID . "',
 											'" . $TaxAuthID . "',
-											'" . $TaxAmount/$ExRate . "')";
+											'" . filter_currency_input($TaxAmount/$ExRate) . "')";
 
 			$ErrMsg =_('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The debtor transaction taxes records could not be inserted because');
 			$DbgMsg = _('The following SQL to insert the debtor transaction taxes record was used');
 	 		$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+
 		}
 
 		//Loop around each item on the sale and process each in turn
@@ -1358,7 +1360,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 				}
 
 				$SQL = "UPDATE locstock
-							SET quantity = locstock.quantity - " . $OrderLine->Quantity*$OrderLine->ConversionFactor . "
+							SET quantity = locstock.quantity-" . filter_number_input($OrderLine->Quantity*$OrderLine->ConversionFactor) . "
 							WHERE locstock.stockid = '" . $OrderLine->StockID . "'
 							AND loccode = '" . $_SESSION['Items'.$identifier]->Location . "'";
 
@@ -1432,10 +1434,10 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 															'" . $_SESSION['Items'.$identifier]->Branch . "',
 															'" . $PeriodNo . "',
 															'" . _('Assembly') . ': ' . $OrderLine->StockID . ' ' . _('Order') . ': ' . $OrderNo . "',
-															'" . -$AssParts['quantity'] * $OrderLine->Quantity . "',
+															'-" . filter_number_input($AssParts['quantity'] * $OrderLine->Quantity) . "',
 															'" . $AssParts['standard'] . "',
 															0,
-															newqoh-" . ($AssParts['quantity'] * $OrderLine->Quantity) . "
+															newqoh-" . filter_number_input($AssParts['quantity'] * $OrderLine->Quantity) . "
 								)";
 
 					$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Stock movement records for the assembly components of'). ' '. $OrderLine->StockID . ' ' . _('could not be inserted because');
@@ -1444,7 +1446,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 
 
 					$SQL = "UPDATE locstock
-							SET quantity = locstock.quantity - " . $AssParts['quantity'] * $OrderLine->Quantity . "
+							SET quantity = locstock.quantity - " . filter_number_input($AssParts['quantity'] * $OrderLine->Quantity) . "
 							WHERE locstock.stockid = '" . $AssParts['component'] . "'
 							AND loccode = '" . $_SESSION['Items'.$identifier]->Location . "'";
 
@@ -1488,13 +1490,13 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 												'" . $DefaultDispatchDate . "',
 												'" . $_SESSION['Items'.$identifier]->DebtorNo . "',
 												'" . $_SESSION['Items'.$identifier]->Branch . "',
-												'" . $LocalCurrencyPrice . "',
+												'" . filter_number_input($LocalCurrencyPrice) . "',
 												'" . $PeriodNo . "',
 												'" . $OrderNo . "',
-												'" . -$OrderLine->Quantity*$OrderLine->ConversionFactor . "',
+												'-" . filter_number_input($OrderLine->Quantity*$OrderLine->ConversionFactor) . "',
 												'" . $OrderLine->DiscountPercent . "',
 												'" . $OrderLine->StandardCost . "',
-												'" . ($QtyOnHandPrior - $OrderLine->Quantity)*$OrderLine->ConversionFactor . "',
+												'" . filter_number_input(($QtyOnHandPrior - $OrderLine->Quantity)*$OrderLine->ConversionFactor) . "',
 												'" . DB_escape_string($OrderLine->Narrative) . "' )";
 			} else {
 			// its an assembly or dummy and assemblies/dummies always have nil stock (by definition they are made up at the time of dispatch  so new qty on hand will be nil
@@ -1523,15 +1525,14 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 												'" . $DefaultDispatchDate . "',
 												'" . $_SESSION['Items'.$identifier]->DebtorNo . "',
 												'" . $_SESSION['Items'.$identifier]->Branch . "',
-												'" . $LocalCurrencyPrice . "',
+												'" . filter_number_input($LocalCurrencyPrice) . "',
 												'" . $PeriodNo . "',
 												'" . $OrderNo . "',
-												'" . -$OrderLine->Quantity*$OrderLine->ConversionFactor . "',
+												'-" . filter_number_input($OrderLine->Quantity*$OrderLine->ConversionFactor) . "',
 												'" . $OrderLine->DiscountPercent . "',
 												'" . $OrderLine->StandardCost . "',
 												'" . DB_escape_string($OrderLine->Narrative) . "')";
 			}
-
 			$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Stock movement records could not be inserted because');
 			$DbgMsg = _('The following SQL to insert the stock movement records was used');
 			$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
@@ -1539,10 +1540,11 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 		/*Get the ID of the StockMove... */
 			$StkMoveNo = DB_Last_Insert_ID($db,'stockmoves','stkmoveno');
 
+			if (isset($OrderLine->SerialItems)) {
 			foreach ($OrderLine->SerialItems['Number'] as $i => $SerialItemNumber) {
 				$Batch[$SerialItemNumber]=$OrderLine->SerialItems['Quantity'][$i];
 				$SQL="UPDATE stockserialitems
-						SET quantity=quantity-".$OrderLine->SerialItems['Quantity'][$i]*$OrderLine->ConversionFactor."
+						SET quantity=quantity-".filter_number_input($OrderLine->SerialItems['Quantity'][$i]*$OrderLine->ConversionFactor)."
 						WHERE stockid='".$OrderLine->StockID."'
 							AND serialno='".$SerialItemNumber."'";
 				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Batch numbers could not be updated');
@@ -1558,11 +1560,12 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 									'" . $StkMoveNo . "',
 									'" . $OrderLine->StockID . "',
 									'" . $SerialItemNumber . "',
-									'" . -$OrderLine->SerialItems['Quantity'][$i]*$OrderLine->ConversionFactor . "'
+									'-" . filter_number_input($OrderLine->SerialItems['Quantity'][$i]*$OrderLine->ConversionFactor) . "'
 								)";
 				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Batch numbers could not be updated');
 				$DbgMsg = _('The following SQL to insert the stock batch movement was used');
 				$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+			}
 			}
 
 		/*Insert the taxes that applied to this line */
@@ -1578,6 +1581,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 							'" . $Tax->TaxRate . "',
 							'" . $Tax->TaxCalculationOrder . "',
 							'" . $Tax->TaxOnTax . "')";
+
 
 				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Taxes and rates applicable to this invoice line item could not be inserted because');
 				$DbgMsg = _('The following SQL to insert the stock movement tax detail records was used');
@@ -1667,10 +1671,10 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 			if ($myrow[0]>0){  /*Update the existing record that already exists */
 
 				$SQL = "UPDATE salesanalysis
-							SET amt=amt+" . ($OrderLine->Price * $OrderLine->Quantity / $ExRate) . ",
-								cost=cost+" . ($OrderLine->StandardCost * $OrderLine->Quantity) . ",
+							SET amt=amt+" . filter_currency_input($OrderLine->Price * $OrderLine->Quantity / $ExRate) . ",
+								cost=cost+" . filter_currency_input($OrderLine->StandardCost * $OrderLine->Quantity) . ",
 								qty=qty +" . $OrderLine->Quantity . ",
-								disc=disc+" . ($OrderLine->DiscountPercent * $OrderLine->Price * $OrderLine->Quantity / $ExRate) . "
+								disc=disc+" . filter_currency_input($OrderLine->DiscountPercent * $OrderLine->Price * $OrderLine->Quantity / $ExRate) . "
 							WHERE salesanalysis.area='" . $myrow[5] . "'
 								AND salesanalysis.salesperson='" . $myrow[8] . "'
 								AND typeabbrev ='" . $_SESSION['Items'.$identifier]->DefaultSalesType . "'
@@ -1698,12 +1702,12 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 													stkcategory	)
 					SELECT '" . $_SESSION['Items'.$identifier]->DefaultSalesType . "',
 						'" . $PeriodNo . "',
-						'" . ($OrderLine->Price * $OrderLine->Quantity / $ExRate) . "',
-						'" . ($OrderLine->StandardCost * $OrderLine->Quantity) . "',
+						'" . filter_currency_input($OrderLine->Price * $OrderLine->Quantity / $ExRate) . "',
+						'" . filter_currency_input($OrderLine->StandardCost * $OrderLine->Quantity) . "',
 						'" . $_SESSION['Items'.$identifier]->DebtorNo . "',
 						'" . $_SESSION['Items'.$identifier]->Branch . "',
 						'" . $OrderLine->Quantity . "',
-						'" . ($OrderLine->DiscountPercent * $OrderLine->Price * $OrderLine->Quantity / $ExRate) . "',
+						'" . filter_currency_input($OrderLine->DiscountPercent * $OrderLine->Price * $OrderLine->Quantity / $ExRate) . "',
 						'" . $OrderLine->StockID . "',
 						custbranch.area,
 						1,
@@ -1739,7 +1743,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 												'" . $PeriodNo . "',
 												'" . GetCOGSGLAccount($Area, $OrderLine->StockID, $_SESSION['Items'.$identifier]->DefaultSalesType, $db) . "',
 												'" . $_SESSION['Items'.$identifier]->DebtorNo . " - " . $OrderLine->StockID . " x " . $OrderLine->Quantity . " @ " . $OrderLine->StandardCost . "',
-												'" . $OrderLine->StandardCost * $OrderLine->Quantity . "')";
+												'" . filter_currency_input($OrderLine->StandardCost * $OrderLine->Quantity) . "')";
 
 				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The cost of sales GL posting could not be inserted because');
 				$DbgMsg = _('The following SQL to insert the GLTrans record was used');
@@ -1761,7 +1765,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 											'" . $PeriodNo . "',
 											'" . $StockGLCode['stockact'] . "',
 											'" . $_SESSION['Items'.$identifier]->DebtorNo . " - " . $OrderLine->StockID . " x " . $OrderLine->Quantity . " @ " . $OrderLine->StandardCost . "',
-											'" . (-$OrderLine->StandardCost * $OrderLine->Quantity) . "')";
+											'" . filter_currency_input(-$OrderLine->StandardCost * $OrderLine->Quantity) . "')";
 
 				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The stock side of the cost of sales GL posting could not be inserted because');
 				$DbgMsg = _('The following SQL to insert the GLTrans record was used');
@@ -1787,7 +1791,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 											'" . $PeriodNo . "',
 											'" . $SalesGLAccounts['salesglcode'] . "',
 											'" . $_SESSION['Items'.$identifier]->DebtorNo . " - " . $OrderLine->StockID . " x " . $OrderLine->Quantity . " @ " . $OrderLine->Price . "',
-											'" . (-$OrderLine->Price * $OrderLine->Quantity/$ExRate) . "')";
+											'" . filter_currency_input(-$OrderLine->Price * $OrderLine->Quantity/$ExRate) . "')";
 
 				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The sales GL posting could not be inserted because');
 				$DbgMsg = '<br />' ._('The following SQL to insert the GLTrans record was used');
@@ -1809,7 +1813,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 													'" . $PeriodNo . "',
 													'" . $SalesGLAccounts['discountglcode'] . "',
 													'" . $_SESSION['Items'.$identifier]->DebtorNo . " - " . $OrderLine->StockID . " @ " . ($OrderLine->DiscountPercent * 100) . "%',
-													'" . ($OrderLine->Price * $OrderLine->Quantity * $OrderLine->DiscountPercent/$ExRate) . "')";
+													'" . filter_currency_input($OrderLine->Price * $OrderLine->Quantity * $OrderLine->DiscountPercent/$ExRate) . "')";
 
 					$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The sales discount GL posting could not be inserted because');
 					$DbgMsg = _('The following SQL to insert the GLTrans record was used');
@@ -1835,7 +1839,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 												'" . $PeriodNo . "',
 												'" . $_SESSION['CompanyRecord']['debtorsact'] . "',
 												'" . $_SESSION['Items'.$identifier]->DebtorNo . "',
-												'" . (($_SESSION['Items'.$identifier]->total + $_POST['TaxTotal'])/$ExRate) . "')";
+												'" . filter_currency_input((filter_currency_input($_SESSION['Items'.$identifier]->total) + filter_currency_input($_POST['TaxTotal']))/$ExRate) . "')";
 
 				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The total debtor GL posting could not be inserted because');
 				$DbgMsg = _('The following SQL to insert the total debtors control GLTrans record was used');
@@ -1858,7 +1862,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 													'" . $PeriodNo . "',
 													'" . $_SESSION['Items'.$identifier]->TaxGLCodes[$TaxAuthID] . "',
 													'" . $_SESSION['Items'.$identifier]->DebtorNo . "',
-													'" . (-$TaxAmount/$ExRate) . "')";
+													'" . filter_currency_input(-$TaxAmount/$ExRate) . "')";
 
 					$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The tax GL posting could not be inserted because');
 					$DbgMsg = _('The following SQL to insert the GLTrans record was used');
@@ -1883,7 +1887,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 						'" . $PeriodNo . "',
 						'" . $_POST['BankAccount'] . "',
 						'" . $_SESSION['Items'.$identifier]->LocationName . ' ' . _('Counter Sale') . ' ' . $InvoiceNo . "',
-						'" . ($_POST['AmountPaid']/$ExRate) . "')";
+						'" . filter_currency_input(filter_currency_input($_POST['AmountPaid'])/$ExRate) . "')";
 				$DbgMsg = _('The SQL that failed to insert the GL transaction for the bank account debit was');
 				$ErrMsg = _('Cannot insert a GL transaction for the bank account debit');
 				$result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
@@ -1902,10 +1906,11 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 					'" . $PeriodNo . "',
 					'" . $_SESSION['CompanyRecord']['debtorsact'] . "',
 					'" . $_SESSION['Items'.$identifier]->LocationName . ' ' . _('Counter Sale') . ' ' . $InvoiceNo . "',
-					'" . -($_POST['AmountPaid']/$ExRate) . "')";
+					'-" . filter_currency_input(filter_currency_input($_POST['AmountPaid'])/$ExRate) . "')";
 				$DbgMsg = _('The SQL that failed to insert the GL transaction for the debtors account credit was');
 				$ErrMsg = _('Cannot insert a GL transaction for the debtors account credit');
 				$result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+
 			}//amount paid we not zero
 		} /*end of if Sales and GL integrated */
 		if ($_POST['AmountPaid']!=0){
@@ -1952,7 +1957,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 						'" . $BankAccountExRate . "',
 						'" . $DefaultDispatchDate . "',
 						'" . $_POST['PaymentMethod'] . "',
-						'" . ($_POST['AmountPaid'] * $BankAccountExRate) . "',
+						'" . filter_currency_input(filter_currency_input($_POST['AmountPaid']) * $BankAccountExRate) . "',
 						'" . $_SESSION['Items'.$identifier]->DefaultCurrency . "')";
 
 			$DbgMsg = _('The SQL that failed to insert the bank account transaction was');
@@ -1980,8 +1985,8 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 						'" . $PeriodNo . "',
 						'" . $InvoiceNo . "',
 						'" . $ExRate . "',
-						'" . -$_POST['AmountPaid'] . "',
-						'" . -$_POST['AmountPaid'] . "',
+						'-" . filter_currency_input($_POST['AmountPaid']) . "',
+						'-" . filter_currency_input($_POST['AmountPaid']) . "',
 						'" . $_SESSION['Items'.$identifier]->LocationName . ' ' . _('Counter Sale') ."')";
 
 			$DbgMsg = _('The SQL that failed to insert the customer receipt transaction was');
@@ -1991,7 +1996,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 			$ReceiptDebtorTransID = DB_Last_Insert_ID($db,'debtortrans','id');
 
 			$SQL = "UPDATE debtorsmaster SET lastpaiddate = '" . $DefaultDispatchDate . "',
-											lastpaid='" . $_POST['AmountPaid'] . "'
+											lastpaid='" . filter_currency_input($_POST['AmountPaid']) . "'
 									WHERE debtorsmaster.debtorno='" . $_SESSION['Items'.$identifier]->DebtorNo . "'";
 
 			$DbgMsg = _('The SQL that failed to update the date of the last payment received was');
@@ -2004,10 +2009,11 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 												datealloc,
 												transid_allocfrom,
 												transid_allocto )
-									VALUES  ('" . $_POST['AmountPaid'] . "',
+									VALUES  ('" . filter_currency_input($_POST['AmountPaid']) . "',
 											'" . $DefaultDispatchDate . "',
 											 '" . $ReceiptDebtorTransID . "',
 											 '" . $DebtorTransID . "')";
+
 			$DbgMsg = _('The SQL that failed to insert the allocation of the receipt to the invoice was');
 			$ErrMsg = _('Cannot insert the customer allocation of the receipt to the invoice because');
 			$result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
@@ -2059,6 +2065,7 @@ if (!isset($_POST['ProcessSale'])){
 
 			$SQL="SELECT stockmaster.units,
 						stockmaster.description,
+						stockmaster.decimalplaces,
 						stockmaster.stockid,
 						stockmaster.controlled,
 						salesorderdetails.stkcode,
@@ -2166,16 +2173,16 @@ if (!isset($_POST['ProcessSale'])){
 						<td style="text-align:center">%s</td>
 						<td style="text-align:center">%s</td>
 						<td style="text-align:center">%s</td>
-						<td><font size="1"><input class="number"  tabindex="'.number_format($j+7).'" type="text" size="6" name="itm'.$myrow['stockid'].'" value="0" />
+						<td><font size="1"><input class="number" type="text" size="6" name="itm'.$myrow['stockid'].'" value="0" />
 						</td>
 						</tr>',
 						$myrow['stockid'],
 						$myrow['description'],
 						$myrow['units'],
-						$QOH,
-						$DemandQty,
-						$OnOrder,
-						$Available);
+						locale_number_format($QOH, $myrow['decimalplaces']),
+						locale_number_format($DemandQty, $myrow['decimalplaces']),
+						locale_number_format($OnOrder, $myrow['decimalplaces']),
+						locale_number_format($Available, $myrow['decimalplaces']));
 
 				echo '<input type="hidden" name="Units' . $myrow['stockid'] . '" value="' . $myrow['units'] . '" />';
 
@@ -2188,7 +2195,7 @@ if (!isset($_POST['ProcessSale'])){
 	#end of while loop for Frequently Ordered Items
 			echo '<td style="text-align:center" colspan="8">
 					<input type="hidden" name="OrderItems" value="1" />
-					<input tabindex="'.number_format($j+8).'" type="submit" value="'._('Add to Sale').'" /></td>';
+					<input type="submit" value="'._('Add to Sale').'" /></td>';
 			echo '</table>';
 		} //end of if Frequently Ordered Items > 0
 		if (isset($msg)){
@@ -2200,10 +2207,10 @@ if (!isset($_POST['ProcessSale'])){
 		echo '<table class="selection"><tr><td><b>' . _('Select a Stock Category') . ': </b><select tabindex="1" name="StockCat">';
 
 		if (!isset($_POST['StockCat'])){
-			echo "<option selected='True' value='All'>" . _('All').'</option>';
+			echo '<option selected="True" value="All">' . _('All').'</option>';
 			$_POST['StockCat'] ='All';
 		} else {
-			echo "<option value='All'>" . _('All').'</option>';
+			echo '<option value="All">' . _('All').'</option>';
 		}
 		$SQL="SELECT categoryid,
 				categorydescription
@@ -2251,13 +2258,13 @@ if (!isset($_POST['ProcessSale'])){
 			echo '<form action="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier . '" method="post" name="orderform">';
 			echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 			echo '<table class="selection">';
-			echo '<tr><td><input type="hidden" name="previous" value="'.number_format($Offset-1).'" />
-				<input tabindex="'.number_format($j+7).'" type="submit" name="Prev" value="'._('Prev').'" /></td>';
+			echo '<tr><td><input type="hidden" name="previous" value="'.locale_number_format($Offset-1,0).'" />
+				<input type="submit" name="Prev" value="'._('Prev').'" /></td>';
 			echo '<td style="text-align:center" colspan="6">
 					<input type="hidden" name="OrderItems" value="1" />
-					<input tabindex="'.number_format($j+8).'" type="submit" value="'._('Add to Sale').'" /></td>';
-			echo '<td><input type="hidden" name="NextList" value="'.number_format($Offset+1).'" />
-				<input tabindex="'.number_format($j+9).'" type="submit" name="Next" value="'._('Next').'" /></td></tr>';
+					<input type="submit" value="'._('Add to Sale').'" /></td>';
+			echo '<td><input type="hidden" name="NextList" value="'.locale_number_format($Offset+1,0).'" />
+				<input type="submit" name="Next" value="'._('Next').'" /></td></tr>';
 			$TableHeader = '<tr><th>' . _('Code') . '</th>
 								<th>' . _('Description') . '</th>
 								<th>' . _('Units') . '</th>
@@ -2310,31 +2317,38 @@ if (!isset($_POST['ProcessSale'])){
 				$ErrMsg = _('The batch details cannot be found');
 				$BatchResult = db_query($sql,$db,$ErrMsg);
 
-				if ($k==1){
-					echo '<tr class="EvenTableRows">';
-					$k=0;
-				} else {
-					echo '<tr class="OddTableRows">';
-					$k=1;
-				}
 				if ($myrow['controlled']==0) {
+					if ($k==1){
+						echo '<tr class="EvenTableRows">';
+						$k=0;
+					} else {
+						echo '<tr class="OddTableRows">';
+						$k=1;
+					}
 					echo '<input type="hidden" name="StockID'.$i.'" value="'.$myrow['stockid'].'" />';
 					printf('<td>%s</td>
 							<td>%s</td>
 							<td>%s</td>
 							<td class="number">%s</td>
-							<td><font size="1"><input class="number"  tabindex="'.number_format($j+7).'" type="text" size="15" name="Quantity'.$i.'" value="0" />
+							<td><font size="1"><input class="number" type="text" size="15" name="Quantity'.$i.'" value="0" />
 							</font></td>
 							</tr>',
 							$myrow['stockid'],
 							$myrow['description'],
 							$myrow['units'],
-							number_format($QOH, $myrow['decimalplaces']));
+							locale_number_format($QOH, $myrow['decimalplaces']));
 					echo '<input type="hidden" name="Units' . $i . '" value="' . $myrow['units'] . '" />';
 					$i++;
 				} else {
 					$LastStockID='';
 					while ($BatchRow=DB_fetch_array($BatchResult)) {
+						if ($k==1){
+							echo '<tr class="EvenTableRows">';
+							$k=0;
+						} else {
+							echo '<tr class="OddTableRows">';
+							$k=1;
+						}
 						if ($LastStockID!=$myrow['stockid']) {
 							printf('<td>%s</td>
 								<td>%s</td>
@@ -2343,21 +2357,21 @@ if (!isset($_POST['ProcessSale'])){
 								$myrow['stockid'],
 								$myrow['description'],
 								$myrow['units'],
-								number_format($QOH, $myrow['decimalplaces']));
+								locale_number_format($QOH, $myrow['decimalplaces']));
 						} else {
 							echo '<td colspan="4">';
 						}
 						echo '<input type="hidden" name="Batch'.$i.'" value="'.$BatchRow['serialno'].'" />';
 						echo '<input type="hidden" name="StockID'.$i.'" value="'.$myrow['stockid'].'" />';
 						printf('<td><font size="1">
-								<input class="number"  tabindex="'.number_format($j+7).'" type="text" size="15" name="Quantity'.$i.'" value="0" />
+								<input class="number" type="text" size="15" name="Quantity'.$i.'" value="0" />
 								</font></td>
 								<td class="number">%s</td>
 								<td class="number">%s</td>
 								<td class="number">%s</td>
 								</tr>',
 								$BatchRow['serialno'],
-								number_format($BatchRow['quantity']/$myrow['conversionfactor'], $myrow['decimalplaces']),
+								locale_number_format($BatchRow['quantity']/$myrow['conversionfactor'], $myrow['decimalplaces']),
 								ConvertSQLDate($BatchRow['expirationdate']));
 						$LastStockID=$myrow['stockid'];
 						echo '<input type="hidden" name="Units' . $i . '" value="' . $myrow['units'] . '" />';
@@ -2379,15 +2393,15 @@ if (!isset($_POST['ProcessSale'])){
 			echo '<input type="hidden" name="Email" value="'.$_SESSION['Items'.$identifier]->Email.'" />';
 
 			echo '<tr><td>
-					<input type="hidden" name="previous" value="'.number_format($Offset-1).'" />
-					<input tabindex="'.number_format($j+7).'" type="submit" name="Prev" value="'._('Prev').'" /></td>';
+					<input type="hidden" name="previous" value="'.locale_number_format($Offset-1,0).'" />
+					<input type="submit" name="Prev" value="'._('Prev').'" /></td>';
 			echo '<td style="text-align:center" colspan="6">
 					<input type="hidden" name="OrderItems" value="1" />
-					<input tabindex="'.number_format($j+8).'" type="submit" value="'._('Add to Sale').'" />
+					<input type="submit" value="'._('Add to Sale').'" />
 				</td>';
 			echo '<td>
-					<input type="hidden" name="NextList" value="'.number_format($Offset+1).'" />
-					<input tabindex="'.number_format($j+9).'" type="submit" name="Next" value="'._('Next').'" />
+					<input type="hidden" name="NextList" value="'.locale_number_format($Offset+1,0).'" />
+					<input type="submit" name="Next" value="'._('Next').'" />
 				</td></tr>';
 			echo '</table></form>';
 			echo $jsCall;
