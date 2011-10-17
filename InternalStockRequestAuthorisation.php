@@ -70,7 +70,7 @@ while ($myrow=DB_fetch_array($result)) {
 	echo '<td><input type="checkbox" name="status'.$myrow['dispatchid'].'" /></td>';
 	echo '</tr>';
 	$linesql="SELECT stockrequestitems.dispatchitemsid,
-						stockrequestitems.itemid,
+						stockrequestitems.stockid,
 						stockrequestitems.decimalplaces,
 						stockrequestitems.uom,
 						stockmaster.description,

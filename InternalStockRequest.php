@@ -90,7 +90,7 @@ if (isset($_POST['Submit'])) {
 		foreach ($_SESSION['Request']->LineItems as $LineItems) {
 			$LineSQL="INSERT INTO stockrequestitems (dispatchitemsid,
 													dispatchid,
-													itemid,
+													stockid,
 													quantity,
 													decimalplaces,
 													uom)
