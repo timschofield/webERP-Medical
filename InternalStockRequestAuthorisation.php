@@ -26,7 +26,7 @@ if (isset($_POST['updateall'])) {
 	}
 }
 
-/* Retrieve the purchase order header information
+/* Retrieve the requisition header information
  */
 $sql="SELECT stockrequest.dispatchid,
 			locations.locationname,
@@ -43,6 +43,7 @@ $sql="SELECT stockrequest.dispatchid,
 		LEFT JOIN www_users
 			ON www_users.userid=departments.authoriser
 	WHERE stockrequest.authorised=0
+		AND stockrequest.closed=0
 		AND www_users.userid='".$_SESSION['UserID']."'";
 $result=DB_query($sql, $db);
 
