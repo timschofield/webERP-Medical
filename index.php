@@ -195,7 +195,8 @@ $MenuItems['stock']['Transactions']['Caption'] = array (_('Receive Purchase Orde
 														_('Reverse Goods Received'),
 														_('Enter Stock Counts'),
 														_('Create a New Internal Stock Request'),
-														_('Authorise Internal Stock Requests')
+														_('Authorise Internal Stock Requests'),
+														_('Fulfill Internal Stock Requests')
 														);
 $MenuItems['stock']['Transactions']['URL'] = array ('/PO_SelectOSPurchOrder.php',
 													'/StockLocTransfer.php',
@@ -205,7 +206,8 @@ $MenuItems['stock']['Transactions']['URL'] = array ('/PO_SelectOSPurchOrder.php'
 													'/ReverseGRN.php',
 													'/StockCounts.php',
 													'/InternalStockRequest.php?New=Yes',
-													'/InternalStockRequestAuthorisation.php'
+													'/InternalStockRequestAuthorisation.php',
+													'/InternalStockRequestFulfill.php'
 													);
 
 $MenuItems['stock']['Reports']['Caption'] = array (_('Serial Item Research Tool'),
