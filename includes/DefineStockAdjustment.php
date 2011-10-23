@@ -25,7 +25,7 @@ class StockAdjustment {
 			$this->StandardCost = 0;
 			$this->DecimalPlaces = 0;
 			$this->SerialItems = array();
-			$Quantity =0;
+			$this->Quantity =0;
 			$this->tag=0;
 		}
 }
