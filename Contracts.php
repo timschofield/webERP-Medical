@@ -67,9 +67,10 @@ if(isset($_SESSION['Contract'.$identifier]) AND
 	$_SESSION['Contract'.$identifier]->CategoryID = $_POST['CategoryID'];
 	$_SESSION['Contract'.$identifier]->LocCode = $_POST['LocCode'];
 	$_SESSION['Contract'.$identifier]->RequiredDate = $_POST['RequiredDate'];
-	$_SESSION['Contract'.$identifier]->Margin = $_POST['Margin'];
+	$_SESSION['Contract'.$identifier]->Margin = filter_number_input($_POST['Margin']);
 	$_SESSION['Contract'.$identifier]->CustomerRef = $_POST['CustomerRef'];
-	$_SESSION['Contract'.$identifier]->ExRate = $_POST['ExRate'];
+	$_SESSION['Contract'.$identifier]->ExRate = filter_number_input($_POST['ExRate']);
+	$_SESSION['Contract'.$identifier]->DefaultWorkCentre = $_POST['DefaultWorkCentre'];
 
 
 /*User hit the button to enter line items -
@@ -258,10 +259,10 @@ if (isset($_POST['CommitContract']) OR isset($_POST['CreateQuotation'])){
 		$_SESSION['Contract'.$identifier]->CategoryID = $_POST['CategoryID'];
 		$_SESSION['Contract'.$identifier]->LocCode = $_POST['LocCode'];
 		$_SESSION['Contract'.$identifier]->RequiredDate = $_POST['RequiredDate'];
-		$_SESSION['Contract'.$identifier]->Margin = $_POST['Margin'];
+		$_SESSION['Contract'.$identifier]->Margin = filter_number_input($_POST['Margin']);
 		$_SESSION['Contract'.$identifier]->Status = $_POST['Status'];
 		$_SESSION['Contract'.$identifier]->CustomerRef = $_POST['CustomerRef'];
-		$_SESSION['Contract'.$identifier]->ExRate = $_POST['ExRate'];
+		$_SESSION['Contract'.$identifier]->ExRate = filter_number_input($_POST['ExRate']);
 
 		/*Get the first work centre for the users location - until we set this up properly */
 		$result = DB_query("SELECT code FROM workcentres WHERE location='" . $_SESSION['Contract'.$identifier]->LocCode ."'",$db);
@@ -793,7 +794,7 @@ if (!isset($_SESSION['Contract'.$identifier]->DebtorNo)
 			} else {
 				echo '<td></td>';
 			}
-			echo '<td><input tabindex="'.number_format($j+5).'" type="submit" name="Submit'.$j.'" value="'.htmlentities($myrow['brname'], ENT_QUOTES,'UTF-8').'" /></td>
+			echo '<td><input type="submit" name="Submit'.$j.'" value="'.htmlentities($myrow['brname'], ENT_QUOTES,'UTF-8').'" /></td>
 					<input type="hidden" name="SelectedCustomer'.$j.'" value="'.$myrow['debtorno'].'" />
 					<input type="hidden" name="SelectedBranch'.$j.'" value="'.$myrow['branchcode'].'" />
 					<td>'.htmlentities($myrow['contactname'], ENT_QUOTES,'UTF-8').'</td>
@@ -872,7 +873,30 @@ if (!isset($_SESSION['Contract'.$identifier]->DebtorNo)
 	}
 
 	echo '</select></td></tr>';
+	echo '<tr><td>' . _('Default Work Centre') . ': </td><td>';
+	echo '<select name="DefaultWorkCentre">';
 
+	$sql = "SELECT code, description FROM workcentres";
+	$result = DB_query($sql,$db);
+
+	if (DB_num_rows($result)==0){
+		prnMsg( _('There are no work centres set up yet') . '. ' . _('Please use the link below to set up work centres'),'warn');
+		echo '<br /><a href="'.$rootpath.'/WorkCentres.php">' . _('Work Centre Maintenance') . '</a>';
+		include('includes/footer.inc');
+		exit;
+	}
+
+	while ($myrow = DB_fetch_array($result)) {
+		if (isset($_POST['DefaultWorkCentre']) and $myrow['code']==$_POST['DefaultWorkCentre']) {
+			echo '<option selected="True" value="'.$myrow['code'] . '">' . $myrow['description'] . '</option>';
+		} else {
+			echo '<option value="'.$myrow['code'] . '">' . $myrow['description'] . '</option>';
+		}
+	} //end while loop
+
+	DB_free_result($result);
+
+	echo '</select></td></tr>';
 	echo '<tr><td>' . _('Contract Description');
 	echo ':</td><td><textarea name="ContractDescription" style="width:100%" rows="5">' . $_SESSION['Contract'.$identifier]->ContractDescription . '</textarea></td></tr>';
 
@@ -888,11 +912,11 @@ if (!isset($_SESSION['Contract'.$identifier]->DebtorNo)
 	if (!isset($_SESSION['Contract'.$identifier]->Margin)){
 		$_SESSION['Contract'.$identifier]->Margin =50;
 	}
-	echo '<tr><td>' . _('Gross Profit') . ' %:</td><td><input type="text" name="Margin" size="4" maxlength="4" value="' . $_SESSION['Contract'.$identifier]->Margin . '" /></td></tr>';
+	echo '<tr><td>' . _('Gross Profit') . ' %:</td><td><input class="number" type="text" name="Margin" size="6" maxlength="6" value="' . locale_number_format($_SESSION['Contract'.$identifier]->Margin, 2) . '" /></td></tr>';
 
 	if ($_SESSION['CompanyRecord']['currencydefault'] != $_SESSION['Contract'.$identifier]->CurrCode){
 		echo '<tr><td>' . $_SESSION['Contract'.$identifier]->CurrCode . ' ' . _('Exchange Rate') . ':</td>
-				<td><input type="text" name="ExRate" size="10" maxlength="10" value="' . $_SESSION['Contract'.$identifier]->ExRate . '" /></td></tr>';
+				<td><input class="number" type="text" name="ExRate" size="10" maxlength="10" value="' . locale_number_format($_SESSION['Contract'.$identifier]->ExRate, 4) . '" /></td></tr>';
 	} else {
 		echo '<input type="hidden" name="ExRate" value="' . $_SESSION['Contract'.$identifier]->ExRate . '" />';
 	}
@@ -933,14 +957,14 @@ if (!isset($_SESSION['Contract'.$identifier]->DebtorNo)
 		foreach ($_SESSION['Contract'.$identifier]->ContractBOM as $Component) {
 			echo '<tr><td>' . $Component->StockID . '</td>
 					<td>' . $Component->ItemDescription . '</td>
-					<td class="number">' . $Component->Quantity . '</td>
+					<td class="number">' . locale_number_format($Component->Quantity, $Component->DecimalPlaces) . '</td>
 					<td>' . $Component->UOM . '</td>
-					<td class="number">' . number_format($Component->ItemCost,2) . '</td>
-					<td class="number">' . number_format(($Component->ItemCost * $Component->Quantity),2) . '</td>
+					<td class="number">' . locale_money_format($Component->ItemCost,$_SESSION['Contract'.$identifier]->CurrCode) . '</td>
+					<td class="number">' . locale_money_format(($Component->ItemCost * $Component->Quantity),$_SESSION['Contract'.$identifier]->CurrCode) . '</td>
 				</tr>';
 			$ContractBOMCost += ($Component->ItemCost *  $Component->Quantity);
 		}
-		echo '<tr><th colspan="5"><b>' . _('Total stock cost') . '</b></th><th class="number"><b>' . number_format($ContractBOMCost,2) . '</b></th></tr>';
+		echo '<tr><th colspan="5"><b>' . _('Total stock cost') . '</b></th><th class="number"><b>' . locale_money_format($ContractBOMCost,$_SESSION['Contract'.$identifier]->CurrCode) . '</b></th></tr>';
 	} else { //there are no items set up against this contract
 		echo '<tr><td colspan="6"><i>' . _('None Entered') . '</i></td></tr>';
 	}
@@ -955,19 +979,19 @@ if (!isset($_SESSION['Contract'.$identifier]->DebtorNo)
 					<th>' . _('Total Cost') . '</th></tr>';
 		foreach ($_SESSION['Contract'.$identifier]->ContractReqts as $Requirement) {
 			echo '<tr><td>' . $Requirement->Requirement . '</td>
-					<td class="number">' . $Requirement->Quantity . '</td>
-					<td class="number">' . $Requirement->CostPerUnit . '</td>
-					<td class="number">' . number_format(($Requirement->CostPerUnit * $Requirement->Quantity),2) . '</td>
+					<td class="number">' . locale_number_format($Requirement->Quantity,2) . '</td>
+					<td class="number">' . locale_money_format($Requirement->CostPerUnit, $_SESSION['Contract'.$identifier]->CurrCode) . '</td>
+					<td class="number">' . locale_money_format(($Requirement->CostPerUnit * $Requirement->Quantity),$_SESSION['Contract'.$identifier]->CurrCode) . '</td>
 				</tr>';
 			$ContractReqtsCost += ($Requirement->CostPerUnit * $Requirement->Quantity);
 		}
-		echo '<tr><th colspan="3"><b>' . _('Total other costs') . '</b></th><th class="number"><b>' . number_format($ContractReqtsCost,2) . '</b></th></tr>';
+		echo '<tr><th colspan="3"><b>' . _('Total other costs') . '</b></th><th class="number"><b>' . locale_money_format($ContractReqtsCost,$_SESSION['Contract'.$identifier]->CurrCode) . '</b></th></tr>';
 	} else { //there are no items set up against this contract
 		echo '<tr><td colspan="4"><i>' . _('None Entered') . '</i></td></tr>';
 	}
 	echo '</table></td></tr></table>';
 	echo '<br />';
-	echo'<table class="selection"><tr><th>' . _('Total Contract Cost') . '</th><th class="number">' . number_format(($ContractBOMCost+$ContractReqtsCost),2) . '</th><th>' . _('Contract Price') . '</th><th class="number">' . number_format(($ContractBOMCost+$ContractReqtsCost)*((100+$_SESSION['Contract'.$identifier]->Margin)/100),2) . '</th></tr></table>';
+	echo'<table class="selection"><tr><th>' . _('Total Contract Cost') . '</th><th class="number">' . locale_money_format(($ContractBOMCost+$ContractReqtsCost),$_SESSION['Contract'.$identifier]->CurrCode) . '</th><th>' . _('Contract Price') . '</th><th class="number">' . locale_money_format(($ContractBOMCost+$ContractReqtsCost)*((100+$_SESSION['Contract'.$identifier]->Margin)/100),$_SESSION['Contract'.$identifier]->CurrCode) . '</th></tr></table>';
 
 	echo'<p></p>';
 	echo '<div class="centre"><input type="submit" name="EnterContractBOM" value="' . _('Enter Items Required') . '" />
