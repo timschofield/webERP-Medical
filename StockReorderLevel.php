@@ -64,7 +64,11 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 		echo '<tr class="OddTableRows">';
 		$k=1;
 	}
-	$_POST[$myrow['loccode']] = filter_number_input($_POST[$myrow['loccode']]);
+	if (isset($_POST[$myrow['loccode']])) {
+		$_POST[$myrow['loccode']] = filter_number_input($_POST[$myrow['loccode']]);
+	} else {
+		$_POST[$myrow['loccode']] = filter_number_input(0);
+	}
 	if (isset($_POST['UpdateData']) AND is_numeric($_POST[$myrow['loccode']]) AND $_POST[$myrow['loccode']]>=0){
 
 	   $myrow['reorderlevel'] = $_POST[$myrow['loccode']];
