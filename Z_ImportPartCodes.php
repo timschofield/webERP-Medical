@@ -69,10 +69,10 @@ if (isset($_POST['update'])) {
 	echo '</table>';
 	fclose ($fp);
 } else {
-	$sql = "SELECT * FROM locations";
+	$sql = "SELECT loccode FROM locations";
 	$result = DB_query($sql,$db);
 	if (DB_num_rows($result)==0) {
-		prnMsg( _('No locations have been set up. At least one location should be set up first'), "error");
+		prnMsg( _('No locations have been set up. At least one location should be set up first'), 'error');
 	} else {
 		prnMsg( _('Select a csv file containing the details of the parts that you wish to import into webERP. '). '<br />' .
 			 _('The first line must contain the field names that you wish to import. ').

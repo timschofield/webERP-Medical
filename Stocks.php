@@ -5,6 +5,7 @@
 include('includes/session.inc');
 $title = _('Item Maintenance');
 include('includes/header.inc');
+include('includes/SQL_CommonFunctions.inc');
 
 /*If this form is called with the StockID then it is assumed that the stock item is to be modified */
 
@@ -35,7 +36,7 @@ echo '<a href="' . $rootpath . '/SelectProduct.php">' . _('Back to Items') . '</
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Stock') . '" alt="" />' . ' ' . $title . '</p>';
 
-if (isset($_FILES['ItemPicture']) AND $_FILES['ItemPicture']['name'] !='') {
+if (isset($_FILES['ItemPicture']) and $_FILES['ItemPicture']['name'] !='') {
 
 	$result	= $_FILES['ItemPicture']['error'];
  	$UploadTheFile = 'Yes'; //Assume all is well to start off with
@@ -344,7 +345,6 @@ if (isset($_POST['submit'])) {
 							discountcategory='" . $_POST['DiscountCategory'] . "',
 							taxcatid='" . $_POST['TaxCat'] . "',
 							decimalplaces='" . $_POST['DecimalPlaces'] . "',
-							appendfile='" . $_POST['ItemPDF'] . "',
 							shrinkfactor='" . $_POST['ShrinkFactor'] . "',
 							pansize='" . $_POST['Pansize'] . "',
 							nextserialno='" . $_POST['NextSerialNo'] . "'
@@ -378,7 +378,7 @@ if (isset($_POST['submit'])) {
 										$db,$ErrMsg,$DbgMsg,true);
 				} //end of loop around properties defined for the category
 
-				if ($OldStockAccount != $NewStockAct AND $_SESSION['CompanyRecord']['gllinkstock']==1) {
+				if ($OldStockAccount != $NewStockAct AND $_SESSION['CompanyRecord']['gllink_stock']==1) {
 					/*Then we need to make a journal to transfer the cost to the new stock account */
 					$JournalNo = GetNextTransNo(0,$db); //enter as a journal
 					$SQL = "INSERT INTO gltrans (type,
@@ -391,13 +391,13 @@ if (isset($_POST['submit'])) {
 											VALUES ( 0,
 												'" . $JournalNo . "',
 												'" . Date('Y-m-d') . "',
-												'" . GetPeriodNo(Date('Y-m-d'),true) . "',
-												'" . $NewStockAccount . "',
+												'" . GetPeriod(Date($_SESSION['DefaultDateFormat']),$db,true) . "',
+												'" . $NewStockAct . "',
 												'" . $StockID . ' ' . _('Change stock category') . "',
-												'" . ($UnitCost* $StockQtyRow[0]) . "'";
+												'" . ($UnitCost* $StockQtyRow[0]) . "')";
 					$ErrMsg =  _('The stock cost journal could not be inserted because');
 					$DbgMsg = _('The SQL that was used to create the stock cost journal and failed was');
-					$result = DB_query($sql,$db, $ErrMsg, $DbgMsg,true);
+					$result = DB_query($SQL,$db, $ErrMsg, $DbgMsg,true);
 					$SQL = "INSERT INTO gltrans (type,
 												typeno,
 												trandate,
@@ -408,13 +408,31 @@ if (isset($_POST['submit'])) {
 											VALUES ( 0,
 												'" . $JournalNo . "',
 												'" . Date('Y-m-d') . "',
-												'" . GetPeriodNo(Date('Y-m-d'),true) . "',
+												'" . GetPeriod(Date($_SESSION['DefaultDateFormat']),$db,true) . "',
 												'" . $OldStockAccount . "',
 												'" . $StockID . ' ' . _('Change stock category') . "',
-												'" . (-$UnitCost* $StockQtyRow[0]) . "'";
-					$result = DB_query($sql,$db, $ErrMsg, $DbgMsg,true);
+												'" . (-$UnitCost* $StockQtyRow[0]) . "')";
+					$result = DB_query($SQL,$db, $ErrMsg, $DbgMsg,true);
+				}
 
+				if ($OldWipAccount != $NewWipAct AND $_SESSION['CompanyRecord']['gllink_stock']==1) {
 					/*Then we need to make a journal to transfer the cost to the new wip account */
+					$WOCostsResult = DB_query("SELECT workorders.costissued,
+													SUM(woitems.qtyreqd * woitems.stdcost) AS costrecd
+												FROM woitems
+												INNER JOIN workorders
+													ON woitems.wo = workorders.wo
+												INNER JOIN stockmaster
+													ON woitems.stockid=stockmaster.stockid
+												WHERE stockmaster.stockid='". $StockID . "'
+													AND workorders.closed=0
+												GROUP BY workorders.costissued",
+											$db,
+											_('Error retrieving value of finished goods received and cost issued against work orders for this item'));
+					$WIPValue = 0;
+					while ($WIPRow=DB_fetch_array($WOCostsResult)){
+						$WIPValue += ($WIPRow['costissued']-$WIPRow['costrecd']);
+					}
 					$JournalNo = GetNextTransNo(0,$db); //enter as a journal
 					$SQL = "INSERT INTO gltrans (type,
 												typeno,
@@ -426,13 +444,13 @@ if (isset($_POST['submit'])) {
 											VALUES ( 0,
 												'" . $JournalNo . "',
 												'" . Date('Y-m-d') . "',
-												'" . GetPeriodNo(Date('Y-m-d'),true) . "',
-												'" . $NewWipAccount . "',
-												'" . $StockID . ' ' . _('Change stock category') . "',
-												'" . ($UnitCost* $StockQtyRow[0]) . "'";
+												'" . GetPeriod(Date($_SESSION['DefaultDateFormat']),$db,true) . "',
+												'" . $NewWipAct . "',
+												'" . $StockID . ' ' . _('Change wip category') . "',
+												'" . $WIPValue . "')";
 					$ErrMsg =  _('The WIP cost journal could not be inserted because');
 					$DbgMsg = _('The SQL that was used to create the wip cost journal and failed was');
-					$result = DB_query($sql,$db, $ErrMsg, $DbgMsg,true);
+					$result = DB_query($SQL,$db, $ErrMsg, $DbgMsg,true);
 					$SQL = "INSERT INTO gltrans (type,
 												typeno,
 												trandate,
@@ -443,11 +461,11 @@ if (isset($_POST['submit'])) {
 											VALUES ( 0,
 												'" . $JournalNo . "',
 												'" . Date('Y-m-d') . "',
-												'" . GetPeriodNo(Date('Y-m-d'),true) . "',
+												'" . GetPeriod(Date($_SESSION['DefaultDateFormat']),$db,true) . "',
 												'" . $OldWipAccount . "',
-												'" . $StockID . ' ' . _('Change stock category') . "',
-												'" . (-$UnitCost* $StockQtyRow[0]) . "'";
-					$result = DB_query($sql,$db, $ErrMsg, $DbgMsg,true);
+												'" . $StockID . ' ' . _('Change wip category') . "',
+												'" . -$WIPValue . "')";
+					$result = DB_query($SQL,$db, $ErrMsg, $DbgMsg,true);
 
 				} /* end if the stock category changed and forced a change in stock cost account */
 				DB_Txn_Commit($db);
@@ -480,7 +498,6 @@ if (isset($_POST['submit'])) {
 							discountcategory,
 							taxcatid,
 							decimalplaces,
-							appendfile,
 							shrinkfactor,
 							pansize)
 						VALUES ('".$StockID."',
@@ -500,7 +517,6 @@ if (isset($_POST['submit'])) {
 							'" . $_POST['DiscountCategory'] . "',
 							'" . $_POST['TaxCat'] . "',
 							'" . $_POST['DecimalPlaces']. "',
-							'" . $_POST['ItemPDF']. "',
 							'" . $_POST['ShrinkFactor'] . "',
 							'" . $_POST['Pansize'] . "'
 							)";
@@ -540,15 +556,14 @@ if (isset($_POST['submit'])) {
 						unset($_POST['ReorderLevel']);
 						unset($_POST['DiscountCategory']);
 						unset($_POST['DecimalPlaces']);
-						unset($_POST['ItemPDF']);
 						unset($_POST['ShrinkFactor']);
 						unset($_POST['Pansize']);
 						unset($StockID);
+						$New=1;
 					}//ALL WORKED SO RESET THE FORM VARIABLES
 				}//THE INSERT OF THE NEW CODE WORKED SO BANG IN THE STOCK LOCATION RECORDS TOO
 			}//END CHECK FOR ALREADY EXISTING ITEM OF THE SAME CODE
 		}
-		$New=1;
 
 	} else {
 		echo '<br />'. "\n";
@@ -660,7 +675,6 @@ if (isset($_POST['submit'])) {
 		unset($_POST['DiscountCategory']);
 		unset($_POST['TaxCat']);
 		unset($_POST['DecimalPlaces']);
-		unset($_POST['ItemPDF']);
 		unset($_SESSION['SelectedStockItem']);
 		unset($StockID);
 		//echo '<meta http-equiv='Refresh' content='0; url=" . $rootpath . '/SelectProduct.php'>";
@@ -734,7 +748,6 @@ if (!isset($StockID) or $StockID=='' or isset($_POST['UpdateCategories'])) {
 	$_POST['DiscountCategory']  = $myrow['discountcategory'];
 	$_POST['TaxCat'] = $myrow['taxcatid'];
 	$_POST['DecimalPlaces'] = $myrow['decimalplaces'];
-	$_POST['ItemPDF']  = $myrow['appendfile'];
 	$_POST['NextSerialNo'] = $myrow['nextserialno'];
 	$_POST['Pansize']  = $myrow['pansize'];
 	$_POST['ShrinkFactor'] = $myrow['shrinkfactor'];
@@ -800,11 +813,6 @@ function select_files($dir, $label = '', $select_name = 'ItemPDF', $curr_val = '
 	}
 	return $mydir;
 }
-if (!isset($_POST['ItemPDF'])) {
-	$_POST['ItemPDF'] = '';
-}
-echo '<tr><td>' . _('PDF attachment (.pdf)') . ':</td><td>' . select_files('companies/' . $_SESSION['DatabaseName'] .
-		'/pdf_append/','' , 'ItemPDF', $_POST['ItemPDF'], '60') . '</td></tr>';
 
 // Add image upload for New Item  - by Ori
 echo '<tr><td>'. _('Image File (.jpg)') . ':</td><td><input type="file" id="ItemPicture" name="ItemPicture" /></td>';
@@ -860,7 +868,7 @@ if (!isset($_POST['KGS']) or $_POST['KGS']==''){
 if (!isset($_POST['Controlled']) or $_POST['Controlled']==''){
 	$_POST['Controlled']=0;
 }
-if (!isset($_POST['Serialised']) or $_POST['Serialised']=='' || $_POST['Controlled']==0){
+if (!isset($_POST['Serialised']) or $_POST['Serialised']=='' or $_POST['Controlled']==0){
 	$_POST['Serialised']=0;
 }
 if (!isset($_POST['DecimalPlaces']) or $_POST['DecimalPlaces']==''){
@@ -1127,6 +1135,9 @@ while ($PropertyRow=DB_fetch_array($PropertiesResult)){
 			} else {
 				echo '<input type="checkbox" name="PropValue' . $PropertyCounter . '" />';
 			}
+			break;
+		case 3:
+			echo '<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="10" maxlength="10" name="Prop'.$k.'" value="" /></td>';
 			break;
 	} //end switch
 	echo '<input type="hidden" name="PropType' . $PropertyCounter .'" value="' . $PropertyRow['controltype'] . '" />';

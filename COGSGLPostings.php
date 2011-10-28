@@ -267,7 +267,7 @@ $result = DB_query($sql,$db);
 
 echo '<table class="selection">
 			<tr><td>' . _('Area') . ':</td>
-				<td><select tabindex=1 name="Area">
+				<td><select tabindex="1" name="Area">
 					<option value="AN">' . _('Any Other') . '</option>';
 
 while ($myrow = DB_fetch_array($result)) {
@@ -285,7 +285,7 @@ $result = DB_query($sql,$db);
 
 echo '</select></td></tr>
 				<tr><td>' . _('Stock Category') . ':</td>
-					<td><select tabindex=2 name="StkCat">
+					<td><select tabindex="2" name="StkCat">
 						<option value="ANY">' . _('Any Other') . '</option>';
 
 while ($myrow = DB_fetch_array($result)) {
@@ -304,7 +304,7 @@ $result = DB_query($sql,$db);
 
 echo '</select></td></tr>
 				<tr><td>' . _('Sales Type') . ' / ' . _('Price List') . ':</td>
-				<td><select tabindex=3 name="SalesType">
+				<td><select tabindex="3" name="SalesType">
 					<option value="AN">' . _('Any Other') . '</option>';
 
 while ($myrow = DB_fetch_array($result)) {

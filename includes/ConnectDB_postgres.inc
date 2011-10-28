@@ -6,14 +6,14 @@ define ('LIKE','ILIKE');
 /* $PgConnStr = $PgConnStr = "host=".$host." dbname=".$_SESSION['DatabaseName']; */
 $PgConnStr = 'dbname='.$_SESSION['DatabaseName'];
 
-if ( isset($host) && ($host != "")) {
+if ( isset($host) and ($host != "")) {
 	$PgConnStr = 'host='.$host.' '.$PgConnStr;
-} 
+}
 
-if ( isset( $dbuser ) && ($dbuser != "") ) {
+if ( isset( $dbuser ) and ($dbuser != "") ) {
     // if we have a user we need to use password if supplied
     $PgConnStr .= " user=".$dbuser;
-    if ( isset( $dbpassword ) && ($dbpassword != "") ) {
+    if ( isset( $dbpassword ) and ($dbpassword != "") ) {
 	$PgConnStr .= " password=".$dbpassword;
     }
 }
@@ -23,10 +23,10 @@ $db = pg_connect( $PgConnStr );
 
 if ( !$db ) {
 	if ($debug==1){
-		echo '<BR>' . $PgConnStr . '<BR>';
+		echo '<br />' . $PgConnStr . '<br />';
 	}
-	echo '<BR>' . _('The company name entered together with the configuration in the file config.php for the database user name and password do not provide the information required to connect to the database.') . '<BR><BR>' . _(' Try logging in with an alternative company name.');
-	echo '<BR><A HREF="index.php">' . _('Back to login page') . '</A>';
+	echo '<br />' . _('The company name entered together with the configuration in the file config.php for the database user name and password do not provide the information required to connect to the database.') . '<br /><br />' . _(' Try logging in with an alternative company name.');
+	echo '<br /><a href="index.php">' . _('Back to login page') . '</a>';
 	unset($_SESSION['DatabaseName']);
 	exit;
 }
@@ -54,9 +54,9 @@ function DB_query ($SQL,
 		if ($TrapErrors){
 			require_once($PathPrefix . 'includes/header.inc');
 		}
-		prnMsg($ErrorMessage.'<BR>' . DB_error_msg($Conn),'error', _('DB ERROR:'));
+		prnMsg($ErrorMessage.'<br />' . DB_error_msg($Conn),'error', _('DB ERROR:'));
 		if ($debug==1){
-			echo '<BR>' . $DebugMessage. "<BR>$SQL<BR>";
+			echo '<br />' . $DebugMessage. '<br />'.$SQL.'<br />';
 		}
 		if ($Transaction){
 			$SQL = 'rollback';
@@ -127,11 +127,11 @@ function DB_escape_string($String){
 
 function INTERVAL( $val, $Inter ) {
 	global $dbtype;
-	return "\n(CAST( (" . $val . ") as text ) || ' ". $Inter ."')::interval\n";
+	return "\n(CAST( (" . $val . ") as text ) or ' ". $Inter ."')::interval\n";
 }
 function DB_show_tables (&$Conn){
 	$Result =DB_query("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'",$Conn);
-	Return $Result; 
+	Return $Result;
 }
 function DB_show_fields($TableName,&$Conn){
 	$Result = DB_query("SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_name='" . $TableName . "'",$Conn);
@@ -143,11 +143,11 @@ function DB_show_fields($TableName,&$Conn){
 function DB_Maintenance($Conn){
 
 	prnMsg(_('The system has just run the regular database administration and optimisation routine'),'info');
-	
+
 	$Result = DB_query('VACUUM ANALYZE',$Conn);
-	
-	$Result = DB_query("UPDATE config 
-				SET confvalue='" . Date('Y-m-d') . "' 
+
+	$Result = DB_query("UPDATE config
+				SET confvalue='" . Date('Y-m-d') . "'
 				WHERE confname='DB_Maintenance_LastRun'",
 				$Conn);
 }

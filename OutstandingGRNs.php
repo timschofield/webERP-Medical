@@ -6,7 +6,7 @@
 
 include('includes/session.inc');
 
-If (isset($_POST['PrintPDF'])
+if (isset($_POST['PrintPDF'])
 	AND isset($_POST['FromCriteria'])
 	AND strlen($_POST['FromCriteria'])>=1
 	AND isset($_POST['ToCriteria'])
@@ -23,7 +23,7 @@ If (isset($_POST['PrintPDF'])
 	  /*Now figure out the data to report for the criteria under review */
 
 	$SQL = "SELECT grnno,
-					orderno,
+					purchorderdetails.orderno,
 					grns.supplierid,
 					suppliers.suppname,
 					grns.itemcode,
@@ -31,14 +31,18 @@ If (isset($_POST['PrintPDF'])
 					qtyrecd,
 					quantityinv,
 					grns.stdcostunit,
+					suppliers.currcode,
+					stockmaster.decimalplaces,
 					actprice,
 					unitprice
-				FROM grns,
-					purchorderdetails,
-					suppliers
-				WHERE grns.supplierid=suppliers.supplierid
-					AND grns.podetailitem = purchorderdetails.podetailitem
-					AND qtyrecd-quantityinv>0
+				FROM grns
+				LEFT JOIN purchorderdetails
+				ON grns.podetailitem = purchorderdetails.podetailitem
+				LEFT JOIN suppliers
+				ON grns.supplierid=suppliers.supplierid
+				LEFT JOIN stockmaster
+				ON grns.itemcode=stockmaster.stockid
+				WHERE qtyrecd-quantityinv>0
 					AND grns.supplierid >='" . $_POST['FromCriteria'] . "'
 					AND grns.supplierid <='" . $_POST['ToCriteria'] . "'
 				ORDER BY supplierid,
@@ -75,7 +79,7 @@ If (isset($_POST['PrintPDF'])
 	$Tot_Val=0;
 	$Supplier = '';
 	$SuppTot_Val=0;
-	While ($GRNs = DB_fetch_array($GRNsResult,$db)){
+	while ($GRNs = DB_fetch_array($GRNsResult,$db)){
 
 		if ($Supplier!=$GRNs['supplierid']){
 
@@ -83,7 +87,7 @@ If (isset($_POST['PrintPDF'])
 				/* need to print the total of previous supplier */
 				$YPos -= (2*$line_height);
 				$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,260-$Left_Margin,$FontSize,_('Total for') . ' ' . $Supplier . ' - ' . $SupplierName);
-				$DisplaySuppTotVal = number_format($SuppTot_Val,2);
+				$DisplaySuppTotVal = locale_money_format($SuppTot_Val,$GRNs['currcode']);
 				$LeftOvers = $pdf->addTextWrap(500,$YPos,60,$FontSize,$DisplaySuppTotVal, 'right');
 				$YPos -=$line_height;
 				$pdf->line($Left_Margin, $YPos+$line_height-2,$Page_Width-$Right_Margin, $YPos+$line_height-2);
@@ -99,12 +103,12 @@ If (isset($_POST['PrintPDF'])
 		$LeftOvers = $pdf->addTextWrap(32,$YPos,40,$FontSize,$GRNs['grnno']);
 		$LeftOvers = $pdf->addTextWrap(70,$YPos,40,$FontSize,$GRNs['orderno']);
 		$LeftOvers = $pdf->addTextWrap(110,$YPos,200,$FontSize,$GRNs['itemcode'] . ' - ' . $GRNs['itemdescription']);
-		$DisplayStdCost = number_format($GRNs['stdcostunit'],2);
-		$DisplayQtyRecd = number_format($GRNs['qtyrecd'],2);
-		$DisplayQtyInv = number_format($GRNs['quantityinv'],2);
-		$DisplayQtyOstg = number_format($GRNs['qtyrecd']- $GRNs['quantityinv'],2);
+		$DisplayStdCost = locale_number_format($GRNs['stdcostunit'],4);
+		$DisplayQtyRecd = locale_number_format($GRNs['qtyrecd'],$GRNs['decimalplaces']);
+		$DisplayQtyInv = locale_number_format($GRNs['quantityinv'],$GRNs['decimalplaces']);
+		$DisplayQtyOstg = locale_number_format($GRNs['qtyrecd']- $GRNs['quantityinv'],$GRNs['decimalplaces']);
 		$LineValue = ($GRNs['qtyrecd']- $GRNs['quantityinv'])*$GRNs['stdcostunit'];
-		$DisplayValue = number_format($LineValue,2);
+		$DisplayValue = locale_money_format($LineValue,$GRNs['currcode']);
 
 		$LeftOvers = $pdf->addTextWrap(310,$YPos,50,$FontSize,$DisplayQtyRecd,'right');
 		$LeftOvers = $pdf->addTextWrap(360,$YPos,50,$FontSize,$DisplayQtyInv, 'right');
@@ -126,7 +130,7 @@ If (isset($_POST['PrintPDF'])
 	$YPos -=$line_height;
 	$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,260-$Left_Margin,$FontSize,_('Total for') . ' ' . $Supplier . ' - ' . $SupplierName, 'left');
 
-	$DisplaySuppTotVal = number_format($SuppTot_Val,2);
+	$DisplaySuppTotVal = locale_money_format($SuppTot_Val,$_SESSION['CompanyRecord']['currencydefault']);
 	$LeftOvers = $pdf->addTextWrap(500,$YPos,60,$FontSize,$DisplaySuppTotVal, 'right');
 
 	/*draw a line under the SUPPLIER TOTAL*/
@@ -137,7 +141,7 @@ If (isset($_POST['PrintPDF'])
 
 /*Print out the grand totals */
 	$LeftOvers = $pdf->addTextWrap(80,$YPos,260-$Left_Margin,$FontSize,_('Grand Total Value'), 'right');
-	$DisplayTotalVal = number_format($Tot_Val,2);
+	$DisplayTotalVal = locale_money_format($Tot_Val,$_SESSION['CompanyRecord']['currencydefault']);
 	$LeftOvers = $pdf->addTextWrap(500,$YPos,60,$FontSize,$DisplayTotalVal, 'right');
 	$pdf->line($Left_Margin, $YPos+$line_height-2,$Page_Width-$Right_Margin, $YPos+$line_height-2);
 	$YPos -=(2*$line_height);

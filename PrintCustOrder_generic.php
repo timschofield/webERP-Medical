@@ -25,7 +25,7 @@ If (!isset($_GET['TransNo']) OR $_GET['TransNo']==""){
 $ErrMsg = _('There was a problem retrieving the order header details for Order Number') . ' ' . $_GET['TransNo'] . ' ' . _('from the database');
 
 $sql = "SELECT salesorders.debtorno,
-    		salesorders.customerref,
+		salesorders.customerref,
 		salesorders.comments,
 		salesorders.orddate,
 		salesorders.deliverto,
@@ -127,6 +127,7 @@ for ($i=1;$i<=2;$i++){  /*Print it out twice one copy for customer and one for o
 
 	$sql = "SELECT salesorderdetails.stkcode,
 			stockmaster.description,
+			stockmaster.decimalplaces,
 			salesorderdetails.quantity,
 			salesorderdetails.qtyinvoiced,
 			salesorderdetails.unitprice,
@@ -144,9 +145,9 @@ for ($i=1;$i<=2;$i++){  /*Print it out twice one copy for customer and one for o
 
             $ListCount ++;
 
-			$DisplayQty = number_format($myrow2['quantity'],2);
-			$DisplayPrevDel = number_format($myrow2['qtyinvoiced'],2);
-			$DisplayQtySupplied = number_format($myrow2['quantity'] - $myrow2['qtyinvoiced'],2);
+			$DisplayQty = locale_number_format($myrow2['quantity'],$myrow2['decimalplaces']);
+			$DisplayPrevDel = locale_number_format($myrow2['qtyinvoiced'],$myrow2['decimalplaces']);
+			$DisplayQtySupplied = locale_number_format($myrow2['quantity'] - $myrow2['qtyinvoiced'],$myrow2['decimalplaces']);
 
 			$LeftOvers = $pdf->addTextWrap($XPos,$YPos,127,$FontSize,$myrow2['stkcode']);
 			$LeftOvers = $pdf->addTextWrap(147,$YPos,255,$FontSize,$myrow2['description']);

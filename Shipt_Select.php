@@ -33,7 +33,7 @@ If (isset($_POST['ResetPart'])) {
      unset($SelectedStockItem);
 }
 
-If (isset($ShiptRef) && $ShiptRef!="") {
+If (isset($ShiptRef) and $ShiptRef!="") {
 	if (!is_numeric($ShiptRef)){
 		  echo '<br />';
 		  prnMsg( _('The Shipment Number entered MUST be numeric') );
@@ -146,7 +146,7 @@ $result1 = DB_query($SQL,$db);
 
 
 echo '<table class="selection">';
-echo '<tr><th colspan="5"><font size="3" color="navy">'._('To search for shipments for a specific part use the part selection facilities below') . '</font></th></tr>';
+echo '<tr><th colspan="5"><font size="3" color="#616161">'._('To search for shipments for a specific part use the part selection facilities below') . '</font></th></tr>';
 ?>
 <tr>
 <td><font size="1"><?php echo _('Select a stock category');?>:</font>
@@ -224,7 +224,7 @@ Code	 Description	On Hand		 Orders Ostdg     Units		 Code	Description 	 On Hand 
 
 	//figure out the SQL required from the inputs available
 
-	if (isset($ShiptRef) && $ShiptRef !="") {
+	if (isset($ShiptRef) and $ShiptRef !="") {
 		$SQL = "SELECT shipments.shiptref,
 				vessel,
 				voyageref,

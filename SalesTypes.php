@@ -179,7 +179,9 @@ then none of the above are true and the list of sales types will be displayed wi
 links to delete or edit each. These will call the same page again and allow update/input
 or deletion of the records*/
 
-	$sql = "SELECT * FROM salestypes";
+	$sql = "SELECT typeabbrev,
+					sales_type
+				FROM salestypes";
 	$result = DB_query($sql,$db);
 
 	echo '<table class="selection">';
@@ -190,7 +192,7 @@ or deletion of the records*/
 
 $k=0; //row colour counter
 
-while ($myrow = DB_fetch_row($result)) {
+while ($myrow = DB_fetch_array($result)) {
 	if ($k==1){
 		echo '<tr class="EvenTableRows">';
 		$k=0;
@@ -204,12 +206,12 @@ while ($myrow = DB_fetch_row($result)) {
 		<td><a href="%sSelectedType=%s">' . _('Edit') . '</td>
 		<td><a href="%sSelectedType=%s&delete=yes" onclick=\'return confirm("' . _('Are you sure you wish to delete this price list and all the prices it may have set up?') . '");\'>' . _('Delete') . '</td>
 		</tr>',
-		$myrow[0],
-		$myrow[1],
+		$myrow['typeabbrev'],
+		$myrow['sales_type'],
 		$_SERVER['PHP_SELF'] . '?',
-		$myrow[0],
+		$myrow['typeabbrev'],
 		$_SERVER['PHP_SELF'] . '?',
-		$myrow[0]);
+		$myrow['typeabbrev']);
 	}
 	//END WHILE LIST LOOP
 	echo '</table>';

@@ -24,6 +24,7 @@ Class Contract {
     var $ExRate; /*the rate of exchange between customer currency and company functional currency used when quoting */
     var $BOMComponentCounter;
     var $RequirementsCounter;
+    var $DefaultWorkCentre;
 
 	var $ContractBOM; /*array of stockid components  required for the contract */
 	var $ContractReqts; /*array of other items required for the contract */
@@ -95,6 +96,7 @@ Class ContractComponent {
 	var $Quantity;
 	var $ItemCost;
 	var $UOM;
+	var $DecimalPlaces;
 
 	function ContractComponent ($ComponentID,
 															$StockID,
@@ -104,6 +106,7 @@ Class ContractComponent {
 															$ItemCost,
 															$UOM){
 /* Constructor function to add a new Contract Component object with passed params */
+		global $db;
 		$this->ComponentID = $ComponentID;
 		$this->StockID = $StockID;
 		$this->ItemDescription = $ItemDescription;
@@ -111,6 +114,11 @@ Class ContractComponent {
 		$this->Quantity = $Quantity;
 		$this->ItemCost= $ItemCost;
 		$this->UOM = $UOM;
+
+		$SQL="SELECT decimalplaces FROM stockmaster WHERE stockid='".$StockID."'";
+		$result=DB_query($SQL, $db);
+		$myrow=DB_fetch_array($result);
+		$this->DecimalPlaces=$myrow['decimalplaces'];
 	}
 }
 

@@ -8,7 +8,7 @@
 // all locations where there are quantities of the part
 
 include('includes/session.inc');
-If (isset($_POST['PrintPDF'])) {
+if (isset($_POST['PrintPDF'])) {
 
 	include('includes/PDFStarter.php');
 	$pdf->addInfo('Title',_('Inventory Quantities Report'));
@@ -105,7 +105,7 @@ If (isset($_POST['PrintPDF'])) {
     $FontSize=8;
 
     $holdpart = " ";
-	While ($myrow = DB_fetch_array($result,$db)){
+	while ($myrow = DB_fetch_array($result,$db)){
 	      if ($myrow['stockid'] != $holdpart) {
 			  $YPos -=(2 * $line_height);
 			  $holdpart = $myrow['stockid'];
@@ -121,10 +121,8 @@ If (isset($_POST['PrintPDF'])) {
 				$pdf->addTextWrap(50,$YPos,100,$FontSize,$myrow['stockid'],'',0);
 				$pdf->addTextWrap(150,$YPos,150,$FontSize,$myrow['description'],'',0);
 				$pdf->addTextWrap(310,$YPos,60,$FontSize,$myrow['loccode'],'left',0);
-				$pdf->addTextWrap(370,$YPos,50,$FontSize,number_format($myrow['quantity'],
-				                                    $myrow['decimalplaces']),'right',0);
-				$pdf->addTextWrap(420,$YPos,50,$FontSize,number_format($myrow['reorderlevel'],
-				                                    $myrow['decimalplaces']),'right',0);
+				$pdf->addTextWrap(370,$YPos,50,$FontSize,locale_number_format($myrow['quantity'], $myrow['decimalplaces']),'right',0);
+				$pdf->addTextWrap(420,$YPos,50,$FontSize,locale_number_format($myrow['reorderlevel'], $myrow['decimalplaces']),'right',0);
 
 			if ($YPos < $Bottom_Margin + $line_height){
 			   PrintHeader($pdf,$YPos,$PageNumber,$Page_Height,$Top_Margin,$Left_Margin,$Page_Width,

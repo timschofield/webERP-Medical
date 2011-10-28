@@ -59,103 +59,107 @@ if (isset($_POST['submit'])) {
 			if (!is_numeric($_POST['PropMinimum' .$i])){
 				$InputError = 1;
 				prnMsg(_('The minimum value is expected to be a numeric value'),'error');
-        	}
-        	if (!is_numeric($_POST['PropMaximum' .$i])){
+			}
+			if (!is_numeric($_POST['PropMaximum' .$i])){
 				$InputError = 1;
 				prnMsg(_('The maximum value is expected to be a numeric value'),'error');
-        	}
+			}
 		}
 	} //check the properties are sensible
 
-	if ($SelectedCategory AND $InputError !=1) {
+	if (isset($SelectedCategory) AND $InputError !=1) {
 
 		/*SelectedCategory could also exist if submit had not been clicked this code
 		would not run in this case cos submit is false of course  see the
 		delete code below*/
 
 		$sql = "UPDATE stockcategory SET stocktype = '" . $_POST['StockType'] . "',
-                                     categorydescription = '" . $_POST['CategoryDescription'] . "',
-                                     stockact = " . $_POST['StockAct'] . ",
-                                     adjglact = " . $_POST['AdjGLAct'] . ",
-                                     purchpricevaract = " . $_POST['PurchPriceVarAct'] . ",
-                                     materialuseagevarac = " . $_POST['MaterialUseageVarAc'] . ",
-                                     wipact = " . $_POST['WIPAct'] . "
-                                     WHERE
-                                     categoryid = '$SelectedCategory'";
-        $ErrMsg = _('Could not update the stock category') . $_POST['CategoryDescription'] . _('because');
-        $result = DB_query($sql,$db,$ErrMsg);
+									 categorydescription = '" . $_POST['CategoryDescription'] . "',
+									 stockact = " . $_POST['StockAct'] . ",
+									 adjglact = " . $_POST['AdjGLAct'] . ",
+									 purchpricevaract = " . $_POST['PurchPriceVarAct'] . ",
+									 materialuseagevarac = " . $_POST['MaterialUseageVarAc'] . ",
+									 wipact = " . $_POST['WIPAct'] . "
+									 WHERE
+									 categoryid = '$SelectedCategory'";
+		$ErrMsg = _('Could not update the stock category') . $_POST['CategoryDescription'] . _('because');
+		$result = DB_query($sql,$db,$ErrMsg);
 
-        for ($i=0;$i<=$_POST['PropertyCounter'];$i++){
+		if ($_POST['PropertyCounter']==0 and $_POST['PropLabel0']!='') {
+			$_POST['PropertyCounter']=0;
+		}
 
-        	if (isset($_POST['PropReqSO' .$i]) and $_POST['PropReqSO' .$i] == true){
-        			$_POST['PropReqSO' .$i] =1;
-        	} else {
-        			$_POST['PropReqSO' .$i] =0;
-        	}
-        	if (isset($_POST['PropNumeric' .$i]) and $_POST['PropNumeric' .$i] == true){
-        			$_POST['PropNumeric' .$i] =1;
-        	} else {
-        			$_POST['PropNumeric' .$i] =0;
-        	}
-        	if ($_POST['PropID' .$i] =='NewProperty' AND strlen($_POST['PropLabel'.$i])>0){
-        		$sql = "INSERT INTO stockcatproperties (categoryid,
-        												label,
-        												controltype,
-        												defaultvalue,
-        												minimumvalue,
-        												maximumvalue,
-        												numericvalue,
-        												reqatsalesorder)
-        									VALUES ('" . $SelectedCategory . "',
-        											'" . $_POST['PropLabel' . $i] . "',
-        											" . $_POST['PropControlType' . $i] . ",
-        											'" . $_POST['PropDefault' .$i] . "',
-        											'" . $_POST['PropMinimum' .$i] . "',
-        											'" . $_POST['PropMaximum' .$i] . "',
-        											'" . $_POST['PropNumeric' .$i] . "',
-        											" . $_POST['PropReqSO' .$i] . ')';
-        		$ErrMsg = _('Could not insert a new category property for') . $_POST['PropLabel' . $i];
-        		$result = DB_query($sql,$db,$ErrMsg);
-        	} elseif ($_POST['PropID' .$i] !='NewProperty') { //we could be amending existing properties
-        		$sql = "UPDATE stockcatproperties SET label ='" . $_POST['PropLabel' . $i] . "',
-						        											  controltype = " . $_POST['PropControlType' . $i] . ",
-						        											  defaultvalue = '"	. $_POST['PropDefault' .$i] . "',
-						        											  minimumvalue = '" . $_POST['PropMinimum' .$i] . "',
-						        											  maximumvalue = '" . $_POST['PropMaximum' .$i] . "',
-						        											  numericvalue = '" . $_POST['PropNumeric' .$i] . "',
-						        											  reqatsalesorder = " . $_POST['PropReqSO' .$i] . "
-        				WHERE stkcatpropid =" . $_POST['PropID' .$i];
-        		$ErrMsg = _('Updated the stock category property for') . ' ' . $_POST['PropLabel' . $i];
-        		$result = DB_query($sql,$db,$ErrMsg);
-        	}
+		for ($i=0;$i<=$_POST['PropertyCounter'];$i++){
 
-        } //end of loop round properties
+			if (isset($_POST['PropReqSO' .$i]) and $_POST['PropReqSO' .$i] == true){
+					$_POST['PropReqSO' .$i] =1;
+			} else {
+					$_POST['PropReqSO' .$i] =0;
+			}
+			if (isset($_POST['PropNumeric' .$i]) and $_POST['PropNumeric' .$i] == true){
+					$_POST['PropNumeric' .$i] =1;
+			} else {
+					$_POST['PropNumeric' .$i] =0;
+			}
+			if ($_POST['PropID' .$i] =='NewProperty' AND mb_strlen($_POST['PropLabel'.$i])>0){
+				$sql = "INSERT INTO stockcatproperties (categoryid,
+														label,
+														controltype,
+														defaultvalue,
+														minimumvalue,
+														maximumvalue,
+														numericvalue,
+														reqatsalesorder)
+											VALUES ('" . $SelectedCategory . "',
+													'" . $_POST['PropLabel' . $i] . "',
+													" . $_POST['PropControlType' . $i] . ",
+													'" . $_POST['PropDefault' .$i] . "',
+													'" . $_POST['PropMinimum' .$i] . "',
+													'" . $_POST['PropMaximum' .$i] . "',
+													'" . $_POST['PropNumeric' .$i] . "',
+													" . $_POST['PropReqSO' .$i] . ')';
+				$ErrMsg = _('Could not insert a new category property for') . $_POST['PropLabel' . $i];
+				$result = DB_query($sql,$db,$ErrMsg);
+			} elseif ($_POST['PropID' .$i] !='NewProperty') { //we could be amending existing properties
+				$sql = "UPDATE stockcatproperties SET label ='" . $_POST['PropLabel' . $i] . "',
+																			  controltype = " . $_POST['PropControlType' . $i] . ",
+																			  defaultvalue = '"	. $_POST['PropDefault' .$i] . "',
+																			  minimumvalue = '" . $_POST['PropMinimum' .$i] . "',
+																			  maximumvalue = '" . $_POST['PropMaximum' .$i] . "',
+																			  numericvalue = '" . $_POST['PropNumeric' .$i] . "',
+																			  reqatsalesorder = " . $_POST['PropReqSO' .$i] . "
+						WHERE stkcatpropid =" . $_POST['PropID' .$i];
+				$ErrMsg = _('Updated the stock category property for') . ' ' . $_POST['PropLabel' . $i];
+				$result = DB_query($sql,$db,$ErrMsg);
+			}
 
-        prnMsg(_('Updated the stock category record for') . ' ' . $_POST['CategoryDescription'],'success');
+		} //end of loop round properties
+
+		prnMsg(_('Updated the stock category record for') . ' ' . $_POST['CategoryDescription'],'success');
 
 	} elseif ($InputError !=1) {
 
 	/*Selected category is null cos no item selected on first time round so must be adding a	record must be submitting new entries in the new stock category form */
 
 		$sql = "INSERT INTO stockcategory (categoryid,
-                                       stocktype,
-                                       categorydescription,
-                                       stockact,
-                                       adjglact,
-                                       purchpricevaract,
-                                       materialuseagevarac,
-                                       wipact)
-                                       VALUES (
-                                       '" . $_POST['CategoryID'] . "',
-                                       '" . $_POST['StockType'] . "',
-                                       '" . $_POST['CategoryDescription'] . "',
-                                       " . $_POST['StockAct'] . ",
-                                       " . $_POST['AdjGLAct'] . ",
-                                       " . $_POST['PurchPriceVarAct'] . ",
-                                       " . $_POST['MaterialUseageVarAc'] . ",
-                                       " . $_POST['WIPAct'] . ")";
-        $ErrMsg = _('Could not insert the new stock category') . $_POST['CategoryDescription'] . _('because');
-        $result = DB_query($sql,$db,$ErrMsg);
+									   stocktype,
+									   categorydescription,
+									   stockact,
+									   adjglact,
+									   purchpricevaract,
+									   materialuseagevarac,
+									   wipact)
+									   VALUES (
+									   '" . $_POST['CategoryID'] . "',
+									   '" . $_POST['StockType'] . "',
+									   '" . $_POST['CategoryDescription'] . "',
+									   " . $_POST['StockAct'] . ",
+									   " . $_POST['AdjGLAct'] . ",
+									   " . $_POST['PurchPriceVarAct'] . ",
+									   " . $_POST['MaterialUseageVarAc'] . ",
+									   " . $_POST['WIPAct'] . ")";
+		$ErrMsg = _('Could not insert the new stock category') . $_POST['CategoryDescription'] . _('because');
+		$result = DB_query($sql,$db,$ErrMsg);
 		prnMsg(_('A new stock category record has been added for') . ' ' . $_POST['CategoryDescription'],'success');
 
 	}
@@ -211,22 +215,30 @@ then none of the above are true and the list of stock categorys will be displaye
 links to delete or edit each. These will call the same page again and allow update/input
 or deletion of the records*/
 
-	$sql = "SELECT * FROM stockcategory WHERE stocktype<>'".'A'."'";
+	$sql = "SELECT categoryid,
+					categorydescription,
+					stocktype,
+					stockact,
+					adjglact,
+					purchpricevaract,
+					materialuseagevarac,
+					wipact
+				FROM stockcategory";
 	$result = DB_query($sql,$db);
 
 	echo '<br /><table class="selection">';
 	echo '<tr><th>' . _('Cat Code') . '</th>
-            <th>' . _('Description') . '</th>
-            <th>' . _('Type') . '</th>
-            <th>' . _('Stock GL') . '</th>
-            <th>' . _('Adjts GL') . '</th>
-            <th>' . _('Price Var GL') . '</th>
-            <th>' . _('Usage Var GL') . '</th>
-            <th>' . _('WIP GL') . '</th></tr>';
+			<th>' . _('Description') . '</th>
+			<th>' . _('Type') . '</th>
+			<th>' . _('Stock GL') . '</th>
+			<th>' . _('Adjts GL') . '</th>
+			<th>' . _('Price Var GL') . '</th>
+			<th>' . _('Usage Var GL') . '</th>
+			<th>' . _('WIP GL') . '</th></tr>';
 
 	$k=0; //row colour counter
 
-	while ($myrow = DB_fetch_row($result)) {
+	while ($myrow = DB_fetch_array($result)) {
 		if ($k==1){
 			echo '<tr class="EvenTableRows">';
 			$k=0;
@@ -235,28 +247,28 @@ or deletion of the records*/
 			$k=1;
 		}
 		printf('<td>%s</td>
-            		<td>%s</td>
-            		<td>%s</td>
-            		<td class="number">%s</td>
-            		<td class="number">%s</td>
-            		<td class="number">%s</td>
-            		<td class="number">%s</td>
-            		<td class="number">%s</td>
-            		<td><a href="%sSelectedCategory=%s">' . _('Edit') . '</td>
-            		<td><a href="%sSelectedCategory=%s&delete=yes" onclick="return confirm("' . _('Are you sure you wish to delete this stock category? Additional checks will be performed before actual deletion to ensure data integrity is not compromised.') . '");">' . _('Delete') . '</td>
-            		</tr>',
-            		$myrow[0],
-            		$myrow[1],
-            		$myrow[2],
-            		$myrow[3],
-            		$myrow[4],
-            		$myrow[5],
-            		$myrow[6],
-            		$myrow[7],
-            		$_SERVER['PHP_SELF'] . '?',
-            		$myrow[0],
-            		$_SERVER['PHP_SELF'] . '?',
-            		$myrow[0]);
+				<td>%s</td>
+				<td>%s</td>
+				<td class="number">%s</td>
+				<td class="number">%s</td>
+				<td class="number">%s</td>
+				<td class="number">%s</td>
+				<td class="number">%s</td>
+				<td><a href="%sSelectedCategory=%s">' . _('Edit') . '</td>
+				<td><a href="%sSelectedCategory=%s&delete=yes" onclick="return confirm("' . _('Are you sure you wish to delete this stock category? Additional checks will be performed before actual deletion to ensure data integrity is not compromised.') . '");">' . _('Delete') . '</td>
+			</tr>',
+				$myrow['categoryid'],
+				$myrow['categorydescription'],
+				$myrow['stocktype'],
+				$myrow['stockact'],
+				$myrow['adjglact'],
+				$myrow['purchpricevaract'],
+				$myrow['materialuseagevarac'],
+				$myrow['wipact'],
+				$_SERVER['PHP_SELF'] . '?',
+				$myrow['categoryid'],
+				$_SERVER['PHP_SELF'] . '?',
+				$myrow['categoryid']);
 	}
 	//END WHILE LIST LOOP
 	echo '</table>';
@@ -276,7 +288,6 @@ if (isset($SelectedCategory)) {  ?>
 
 <?php
 
-if (! isset($_GET['delete'])) {
 
 	echo '<form name="CategoryForm" method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -285,15 +296,15 @@ if (! isset($_GET['delete'])) {
 		//editing an existing stock category
 		if (!isset($_POST['UpdateItems'])) {
 			$sql = "SELECT categoryid,
-                   	stocktype,
-                   	categorydescription,
-                   	stockact,
-                   	adjglact,
-                   	purchpricevaract,
-                   	materialuseagevarac,
-                   	wipact
-                   FROM stockcategory
-                   WHERE categoryid='" . $SelectedCategory . "'";
+				   	stocktype,
+				   	categorydescription,
+				   	stockact,
+				   	adjglact,
+				   	purchpricevaract,
+				   	materialuseagevarac,
+				   	wipact
+				   FROM stockcategory
+				   WHERE categoryid='" . $SelectedCategory . "'";
 
 			$result = DB_query($sql, $db);
 			$myrow = DB_fetch_array($result);
@@ -316,27 +327,27 @@ if (! isset($_GET['delete'])) {
 			$_POST['CategoryID'] = '';
 		}
 		echo '<table class="selection"><tr><td>' . _('Category Code') . ':</td>
-                             <td><input type="text" name="CategoryID" size="7" maxlength="6" value="' . $_POST['CategoryID'] . '" /></td></tr>';
+							 <td><input type="text" name="CategoryID" size="7" maxlength="6" value="' . $_POST['CategoryID'] . '" /></td></tr>';
 	}
 
 	//SQL to poulate account selection boxes
 	$sql = "SELECT accountcode,
-                 accountname
-                 FROM chartmaster,
-                      accountgroups
-                 WHERE chartmaster.group_=accountgroups.groupname and
-                       accountgroups.pandl=0
-                 ORDER BY accountcode";
+				 accountname
+				 FROM chartmaster,
+					  accountgroups
+				 WHERE chartmaster.group_=accountgroups.groupname and
+					   accountgroups.pandl=0
+				 ORDER BY accountcode";
 
 	$BSAccountsResult = DB_query($sql,$db);
 
 	$sql = "SELECT accountcode,
-                 accountname
-                 FROM chartmaster,
-                      accountgroups
-                 WHERE chartmaster.group_=accountgroups.groupname and
-                       accountgroups.pandl!=0
-                 ORDER BY accountcode";
+				 accountname
+				 FROM chartmaster,
+					  accountgroups
+				 WHERE chartmaster.group_=accountgroups.groupname and
+					   accountgroups.pandl!=0
+				 ORDER BY accountcode";
 
 	$PnLAccountsResult = DB_query($sql,$db);
 
@@ -345,7 +356,7 @@ if (! isset($_GET['delete'])) {
 	}
 
 	echo '<tr><td>' . _('Category Description') . ':</td>
-            <td><input type="text" name="CategoryDescription" size="22" maxlength="20" value="' . $_POST['CategoryDescription'] . '" /></td></tr>';
+			<td><input type="text" name="CategoryDescription" size="22" maxlength="20" value="' . $_POST['CategoryDescription'] . '" /></td></tr>';
 
 
 	echo '<tr><td>' . _('Stock Type') . ':</td>';
@@ -354,6 +365,7 @@ if (! isset($_GET['delete'])) {
 	echo '</tr>';
 
 	echo '<input type="submit" name="UpdateItems" style="visibility:hidden;width:1px" value="Not Seen" />';
+
 	if (isset($_POST['StockType']) and $_POST['StockType']=='L') {
 		$Result = $PnLAccountsResult;
 		echo '<tr><td>' . _('Recovery GL Code');
@@ -390,7 +402,7 @@ if (! isset($_GET['delete'])) {
 	DB_data_seek($BSAccountsResult,0);
 
 	echo '<tr><td>' . _('Stock Adjustments GL Code') . ':</td>
-            <td><select name="AdjGLAct">';
+			<td><select name="AdjGLAct">';
 
 	while ($myrow = DB_fetch_array($PnLAccountsResult)) {
 		if (isset($_POST['AdjGLAct']) and $myrow['accountcode']==$_POST['AdjGLAct']) {
@@ -404,7 +416,7 @@ if (! isset($_GET['delete'])) {
 	echo '</select></td></tr>';
 
 	echo '<tr><td>' . _('Price Variance GL Code') . ':</td>
-            <td><select name="PurchPriceVarAct">';
+			<td><select name="PurchPriceVarAct">';
 
 	while ($myrow = DB_fetch_array($PnLAccountsResult)) {
 		if (isset($_POST['PurchPriceVarAct']) and $myrow['accountcode']==$_POST['PurchPriceVarAct']) {
@@ -445,10 +457,13 @@ if (! isset($_GET['delete'])) {
 						label,
 						controltype,
 						defaultvalue,
+						numericvalue,
+						minimumvalue,
+						maximumvalue,
 						reqatsalesorder
-                   FROM stockcatproperties
-                   WHERE categoryid='" . $SelectedCategory . "'
-                   ORDER BY stkcatpropid";
+				   FROM stockcatproperties
+				   WHERE categoryid='" . $SelectedCategory . "'
+				   ORDER BY stkcatpropid";
 
 		$result = DB_query($sql, $db);
 
@@ -492,12 +507,17 @@ if (! isset($_GET['delete'])) {
 			} else {
 				echo '<option value="2">' . _('Check Box') . '</option>';
 			}
+			if ($myrow['controltype']==3){
+				echo '<option selected="True" value="3">' . _('Date Box') . '</option>';
+			} else {
+				echo '<option value="3">' . _('Date Box') . '</option>';
+			}
 
 			echo '</select></td>
 					<td><input type="text" name="PropDefault' . $PropertyCounter . '" value="' . $myrow['defaultvalue'] . '" /></td>';
 
 
-			if ($myrow['numericvalue'] ==1){
+			if ($myrow['numericvalue']==1){
 				echo '<td><input type="checkbox" name="PropNumeric' . $PropertyCounter . '" checked="True" />';
 			} else {
 				echo '<td><input type="checkbox" name="PropNumeric' . $PropertyCounter . '" />';
@@ -524,10 +544,11 @@ if (! isset($_GET['delete'])) {
 		echo '<option selected="True" value="0">' . _('Text Box') . '</option>';
 		echo '<option value="1">' . _('Select Box') . '</option>';
 		echo '<option value="2">' . _('Check Box') . '</option>';
+		echo '<option value="3">' . _('Date Box') . '</option>';
 		echo '</select></td>
 				<td><input type="text" name="PropDefault' . $PropertyCounter . '" /></td>
 				<td><input type="checkbox" name="PropNumeric' . $PropertyCounter . '" /></td>
-				<td><input type="text" "name="PropMinimum' . $PropertyCounter . '" /></td>
+				<td><input type="text" name="PropMinimum' . $PropertyCounter . '" /></td>
 				<td><input type="text" name="PropMaximum' . $PropertyCounter . '" /></td>
 				<td align="center"><input type="checkbox" name="PropReqSO' . $PropertyCounter .'" /></td></tr>';
 		echo '</table>';
@@ -541,7 +562,6 @@ if (! isset($_GET['delete'])) {
 
 	echo '</form>';
 
-} //end if record deleted no point displaying form to add record
 
 
 include('includes/footer.inc');

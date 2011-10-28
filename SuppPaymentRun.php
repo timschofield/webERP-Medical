@@ -15,6 +15,12 @@ include('includes/session.inc');
 include('includes/SQL_CommonFunctions.inc');
 include('includes/GetPaymentMethods.php');
 
+foreach ($_POST as $key=>$value) {
+	if (substr($key, 0, 6)=='ExRate') {
+		$_POST[$key] = filter_currency_input($value);
+	}
+}
+
 if ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 	AND isset($_POST['FromCriteria'])
 	AND strlen($_POST['FromCriteria'])>=1
@@ -189,8 +195,8 @@ if ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 				}
 			}
 
-			$LeftOvers = $pdf->addTextWrap(340, $YPos,60,$FontSize,number_format($DetailTrans['balance'],2), 'right');
-			$LeftOvers = $pdf->addTextWrap(405, $YPos,60,$FontSize,number_format($DiffOnExch,2), 'right');
+			$LeftOvers = $pdf->addTextWrap(340, $YPos,60,$FontSize,locale_money_format($DetailTrans['balance'],$_POST['Currency']), 'right');
+			$LeftOvers = $pdf->addTextWrap(405, $YPos,60,$FontSize,locale_money_format($DiffOnExch,$_POST['Currency']), 'right');
 
 			$YPos -=$line_height;
 			if ($YPos < $Bottom_Margin + $line_height){
@@ -219,8 +225,8 @@ if ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 		}
 
 		$LeftOvers = $pdf->addTextWrap($Left_Margin, $YPos, 340-$Left_Margin,$FontSize,_('Grand Total Payments Due'), 'left');
-		$LeftOvers = $pdf->addTextWrap(340, $YPos, 60,$FontSize,number_format($TotalPayments,2), 'right');
-		$LeftOvers = $pdf->addTextWrap(405, $YPos, 60,$FontSize,number_format($TotalAccumDiffOnExch,2), 'right');
+		$LeftOvers = $pdf->addTextWrap(340, $YPos, 60,$FontSize,locale_money_format($TotalPayments,$_POST['Currency']), 'right');
+		$LeftOvers = $pdf->addTextWrap(405, $YPos, 60,$FontSize,locale_money_format($TotalAccumDiffOnExch,$_POST['Currency']), 'right');
 
 	}
 
@@ -240,7 +246,7 @@ if ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 
 	/* show form to allow input	*/
 
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="POST"><table class="selection">';
+	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (!isset($_POST['FromCriteria']) or strlen($_POST['FromCriteria'])<1){
@@ -278,7 +284,7 @@ if ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 		$DefaultExRate = $_POST['ExRate'];
 	}
 	echo '<tr><td>' . _('Exchange Rate') . ':</td>
-            <td><input type="text" class="number" name="ExRate" maxlength="11" size="12" value="' . $DefaultExRate . '" /></td></tr>';
+            <td><input type="text" class="number" name="ExRate" maxlength="11" size="12" value="' . locale_money_format($DefaultExRate, $_SESSION['CompanyRecord']['currencydefault']) . '" /></td></tr>';
 
 	if (!isset($_POST['AmountsDueBy'])){
 		$DefaultDate = Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m')+1,0 ,Date('y')));

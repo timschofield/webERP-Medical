@@ -190,17 +190,11 @@ if (isset($_POST['SelectedSupplier'])) {
 
 if (isset($_POST['NewItem']) and !isset($_POST['Refresh'])) {
 	foreach ($_POST as $key => $value) {
-		if (substr($key,0,3)=='qty') {
-			$StockID=substr($key,3);
-			$Quantity=$value;
-		}
-		if (substr($key,0,5)=='price') {
-			$Price=$value;
-		}
-		if (substr($key,0,3)=='uom') {
-			$UOM=$value;
-		}
-		if (isset($UOM)) {
+		if (substr($key,0,7)=='StockID') {
+			$Index = substr($key,7,strlen($key)-7);
+			$StockID = $value;
+			$Quantity = filter_number_input($_POST['Qty'.$Index]);
+			$UOM = $_POST['UOM'.$Index];
 			$sql="SELECT description, decimalplaces FROM stockmaster WHERE stockid='".$StockID."'";
 			$result=DB_query($sql, $db);
 			$myrow=DB_fetch_array($result);
@@ -226,7 +220,7 @@ if (!isset($_SESSION['tender']) or isset($_POST['LookupDeliveryAddress']) or $Sh
 	echo '<form name="form1" action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection">';
-	echo '<tr><th colspan="4"><font size="3" color="navy">' . _('Tender header details') . '</font></th></tr>';
+	echo '<tr><th colspan="4"><font size="3" color="#616161">' . _('Tender header details') . '</font></th></tr>';
 	echo '<tr><td>' . _('Delivery Must Be Made Before') . '</td>';
 	echo '<td><input type="text" class="date" alt="' .$_SESSION['DefaultDateFormat'] . '" name="RequiredByDate" size="11" value="' . date($_SESSION['DefaultDateFormat']) . '" /></td></tr>';
 
@@ -367,7 +361,7 @@ if (!isset($_SESSION['tender']) or isset($_POST['LookupDeliveryAddress']) or $Sh
 	/* Supplier Details
 	 */
 	echo '<tr><td valign="top"><table class="selection">';
-	echo '<tr><th colspan="4"><font size="3" color="navy">' . _('Suppliers To Send Tender') . '</font></th></tr>';
+	echo '<tr><th colspan="4"><font size="3" color="#616161">' . _('Suppliers To Send Tender') . '</font></th></tr>';
 	echo '<tr><th>'. _('Supplier Code') . '</th><th>' ._('Supplier Name') . '</th><th>' ._('Email Address') . '</th></tr>';
 	foreach ($_SESSION['tender']->Suppliers as $Supplier) {
 		echo '<tr><td>' . $Supplier->SupplierCode . '</td>';
@@ -379,7 +373,7 @@ if (!isset($_SESSION['tender']) or isset($_POST['LookupDeliveryAddress']) or $Sh
 	/* Item Details
 	 */
 	echo '<td valign="top"><table class="selection">';
-	echo '<tr><th colspan="6"><font size="3" color="navy">' . _('Items in Tender') . '</font></th></tr>';
+	echo '<tr><th colspan="6"><font size="3" color="#616161">' . _('Items in Tender') . '</font></th></tr>';
 	echo '<tr>';
 	echo '<th>'._('Stock ID').'</th>';
 	echo '<th>'._('Description').'</th>';
@@ -398,7 +392,7 @@ if (!isset($_SESSION['tender']) or isset($_POST['LookupDeliveryAddress']) or $Sh
 			}
 			echo '<td>'.$LineItems->StockID.'</td>';
 			echo '<td>'.$LineItems->ItemDescription.'</td>';
-			echo '<td class="number">' . number_format($LineItems->Quantity,$LineItems->DecimalPlaces).'</td>';
+			echo '<td class="number">' . locale_number_format($LineItems->Quantity,$LineItems->DecimalPlaces).'</td>';
 			echo '<td>'.$LineItems->Units.'</td>';
 			echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?DeleteItem=' . $LineItems->LineNo . '">' . _('Delete') . '</a></td></tr>';
 			echo '</tr>';
@@ -731,7 +725,7 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 	$DbgMsg = _('The SQL statement that failed was');
 	$SearchResult = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
-	if (DB_num_rows($SearchResult)==0 && $debug==1){
+	if (DB_num_rows($SearchResult)==0 and $debug==1){
 		prnMsg( _('There are no products to display matching the criteria provided'),'warn');
 	}
 	if (DB_num_rows($SearchResult)==1){
@@ -754,8 +748,8 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 			</tr>';
 		echo $tableheader;
 
-		$j = 1;
-		$k=0; //row colour counter
+		$i = 0;
+		$k = 0; //row colour counter
 		$PartsDisplayed=0;
 		while ($myrow=DB_fetch_array($SearchResult)) {
 
@@ -782,14 +776,16 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 					<td>'.$myrow['description'].'</td>
 					<td>'.$uom.'</td>
 					<td>'.$ImageSource.'</td>
-					<td><input class="number" type="text" size="6" value="0" name="qty'.$myrow['stockid'].'" /></td>
-					<input type="hidden" size="6" value="'.$uom.'" name="uom'.$myrow['stockid'].'" />
+					<td><input class="number" type="text" size="6" value="0" name="Qty'.$i.'" /></td>
+					<input type="hidden" value="'.$uom.'" name="UOM'.$i.'" />
+					<input type="hidden" value="'.$myrow['stockid'].'" name="StockID'.$i.'" />
 					</tr>';
 
 			$PartsDisplayed++;
 			if ($PartsDisplayed == $Maximum_Number_Of_Parts_To_Show){
 				break;
 			}
+			$i++;
 #end of page full new headings if
 		}
 #end of while loop

@@ -29,12 +29,9 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate']) OR $InputError==1){
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection"><tr><td>' . _('Enter the date from which variances between orders and deliveries are to be listed') .
-		':</td><td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].
-		'" name="FromDate" maxlength="10" size="10" value="' .
-		Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m')-1,0,Date('y'))) . '"></td></tr>';
+		':</td><td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat']. '" name="FromDate" maxlength="10" size="10" value="' . Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m')-1,0,Date('y'))) . '" /></td></tr>';
 	echo '<tr><td>' . _('Enter the date to which variances between orders and deliveries are to be listed') .
-		':</td><td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'"  name="ToDate" maxlength="10" size="10"
-			value="' . Date($_SESSION['DefaultDateFormat']) . '"></td></tr>';
+		':</td><td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'"  name="ToDate" maxlength="10" size="10" value="' . Date($_SESSION['DefaultDateFormat']) . '" /></td></tr>';
 	echo '<tr><td>' . _('Inventory Category') . '</td><td>';
 
 	$sql = "SELECT categorydescription, categoryid FROM stockcategory WHERE stocktype<>'D' AND stocktype<>'L'";
@@ -63,7 +60,7 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate']) OR $InputError==1){
 	 echo '<tr><td>' . _('Email the report off') . ':</td><td><select name="Email">';
 	 echo '<option selected="True" value="No">' . _('No') . '</option>';
 	 echo '<option value="Yes">' . _('Yes') . '</option>';
-	 echo '</select></td></tr></table><br /><div class="centre"><input type="submit" name="Go" value="' . _('Create PDF') . '"></div>';
+	 echo '</select></td></tr></table><br /><div class="centre"><input type="submit" name="Go" value="' . _('Create PDF') . '" /></div>';
 
 	 if ($InputError==1){
 	 	prnMsg($msg,'error');
@@ -79,6 +76,7 @@ if ($_POST['CategoryID']=='All' AND $_POST['Location']=='All'){
 			orderdeliverydifferenceslog.orderno,
 			orderdeliverydifferenceslog.stockid,
 			stockmaster.description,
+			stockmaster.decimalplaces,
 			quantitydiff,
 			trandate,
 			orderdeliverydifferenceslog.debtorno,
@@ -95,6 +93,7 @@ if ($_POST['CategoryID']=='All' AND $_POST['Location']=='All'){
 			orderdeliverydifferenceslog.orderno,
 			orderdeliverydifferenceslog.stockid,
 			stockmaster.description,
+			stockmaster.decimalplaces,
 			quantitydiff,
 			trandate,
 			orderdeliverydifferenceslog.debtorno,
@@ -112,6 +111,7 @@ if ($_POST['CategoryID']=='All' AND $_POST['Location']=='All'){
 			orderdeliverydifferenceslog.orderno,
 			orderdeliverydifferenceslog.stockid,
 			stockmaster.description,
+			stockmaster.decimalplaces,
 			quantitydiff,
 			trandate,
 			orderdeliverydifferenceslog.debtorno,
@@ -133,6 +133,7 @@ if ($_POST['CategoryID']=='All' AND $_POST['Location']=='All'){
 			orderdeliverydifferenceslog.orderno,
 			orderdeliverydifferenceslog.stockid,
 			stockmaster.description,
+			stockmaster.decimalplaces,
 			quantitydiff,
 			trandate,
 			orderdeliverydifferenceslog.debtorno,
@@ -190,7 +191,7 @@ while ($myrow=DB_fetch_array($Result)){
 	  $LeftOvers = $pdf->addTextWrap($Left_Margin+40,$YPos,40,$FontSize,$myrow['orderno'], 'left');
 	  $LeftOvers = $pdf->addTextWrap($Left_Margin+80,$YPos,200,$FontSize,$myrow['stockid'] . ' - ' . $myrow['description'], 'left');
 
-	  $LeftOvers = $pdf->addTextWrap($Left_Margin+280,$YPos,50,$FontSize,number_format($myrow['quantitydiff']), 'right');
+	  $LeftOvers = $pdf->addTextWrap($Left_Margin+280,$YPos,50,$FontSize,locale_number_format($myrow['quantitydiff'], $myrow['decimalplaces']), 'right');
 	  $LeftOvers = $pdf->addTextWrap($Left_Margin+335,$YPos,50,$FontSize,$myrow['debtorno'], 'left');
 	  $LeftOvers = $pdf->addTextWrap($Left_Margin+385,$YPos,50,$FontSize,$myrow['branch'], 'left');
 	  $LeftOvers = $pdf->addTextWrap($Left_Margin+435,$YPos,50,$FontSize,ConvertSQLDate($myrow['trandate']), 'left');
@@ -207,7 +208,7 @@ while ($myrow=DB_fetch_array($Result)){
 
 
 $YPos-=$line_height;
-$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,200,$FontSize,_('Total number of differences') . ' ' . number_format($TotalDiffs), 'left');
+$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,200,$FontSize,_('Total number of differences') . ' ' . locale_number_format($TotalDiffs, 0), 'left');
 
 if ($_POST['CategoryID']=='All' AND $_POST['Location']=='All'){
 	$sql = "SELECT COUNT(salesorderdetails.orderno)
@@ -253,10 +254,10 @@ $result = DB_query($sql,$db,$ErrMsg);
 
 $myrow=DB_fetch_row($result);
 $YPos-=$line_height;
-$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,200,$FontSize,_('Total number of order lines') . ' ' . number_format($myrow[0]), 'left');
+$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,200,$FontSize,_('Total number of order lines') . ' ' . locale_number_format($myrow[0], 0), 'left');
 
 $YPos-=$line_height;
-$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,200,$FontSize,_('DIFOT') . ' ' . number_format((1-($TotalDiffs/$myrow[0])) * 100,2) . '%', 'left');
+$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,200,$FontSize,_('DIFOT') . ' ' . locale_number_format((1-($TotalDiffs/$myrow[0])) * 100,2) . '%', 'left');
 
 /* UldisN
 $pdfcode = $pdf->output();

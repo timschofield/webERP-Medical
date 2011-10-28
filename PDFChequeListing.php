@@ -69,7 +69,7 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate'])){
 	include('includes/ConnectDB.inc');
 }
 
-
+$Currency=$_SESSION['CompanyRecord']['currencydefault'];
 $SQL = "SELECT bankaccountname
 	FROM bankaccounts
 	WHERE accountcode = '" .$_POST['BankAccount'] . "'";
@@ -122,7 +122,7 @@ include ('includes/PDFChequeListingPageHeader.inc');
 
 while ($myrow=DB_fetch_array($Result)){
 
-	  	$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,60,$FontSize,number_format(-$myrow['amount'],2), 'right');
+	$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,60,$FontSize,locale_money_format(-$myrow['amount'],$Currency), 'right');
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+65,$YPos,90,$FontSize,$myrow['ref'], 'left');
 
 	$sql = "SELECT accountname,
@@ -147,7 +147,7 @@ while ($myrow=DB_fetch_array($Result)){
 	}
 	while ($GLRow=DB_fetch_array($GLTransResult)){
 		$LeftOvers = $pdf->addTextWrap($Left_Margin+150,$YPos,90,$FontSize,$GLRow['accountname'], 'left');
-		$LeftOvers = $pdf->addTextWrap($Left_Margin+245,$YPos,60,$FontSize,number_format($GLRow['amount'],2), 'right');
+		$LeftOvers = $pdf->addTextWrap($Left_Margin+245,$YPos,60,$FontSize,locale_money_format($GLRow['amount'],$Currency), 'right');
 		$LeftOvers = $pdf->addTextWrap($Left_Margin+310,$YPos,120,$FontSize,$GLRow['narrative'], 'left');
 		$YPos -= ($line_height);
 		if ($YPos - (2 *$line_height) < $Bottom_Margin){
@@ -170,7 +170,7 @@ while ($myrow=DB_fetch_array($Result)){
 
 
 $YPos-=$line_height;
-$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,60,$FontSize,number_format($TotalCheques,2), 'right');
+$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,60,$FontSize,locale_money_format($TotalCheques,$Currency), 'right');
 $LeftOvers = $pdf->addTextWrap($Left_Margin+65,$YPos,300,$FontSize,_('TOTAL') . ' ' . $Currency . ' ' . _('CHEQUES'), 'left');
 
 $ReportFileName = $_SESSION['DatabaseName'] . '_ChequeListing_' . date('Y-m-d').'.pdf';

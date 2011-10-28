@@ -144,7 +144,7 @@ function submit(&$db,&$StockID,&$DemandID)  //####SUBMIT_SUBMIT_SUBMIT_SUBMIT_SU
 		$InputError = 1;
 		prnMsg(_('Invalid due date'),'error');
 	}
-	$sql = "SELECT * FROM mrpdemandtypes
+	$sql = "SELECT mrpdemandtype FROM mrpdemandtypes
 				WHERE mrpdemandtype='" . $_POST['MRPDemandtype'] . "'";
 	$result = DB_query($sql, $db);
 

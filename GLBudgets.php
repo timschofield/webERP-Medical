@@ -63,12 +63,12 @@ if (DB_num_rows($result)==0){
 if (!isset($PrevCode)) {$PrevCode='';}
 if (!isset($NextCode)) {$NextCode='';}
 
-echo '<input type="hidden" name="PrevAccount" value="'.$PrevCode.'">';
-echo '<input type="hidden" name="NextAccount" value="'.$NextCode.'">';
+echo '<input type="hidden" name="PrevAccount" value="'.$PrevCode.'" />';
+echo '<input type="hidden" name="NextAccount" value="'.$NextCode.'" />';
 echo '</table>';
-echo '<br /><table><tr><td><input type="submit" name="Previous" value="' . _('Prev Account') . '"></td>';
-echo '<td><input type="submit" name="Select" value="' . _('Select Account') . '"></td>';
-echo '<td><input type="submit" name="Next" value="' . _('Next Account') . '"></td></tr>';
+echo '<br /><table><tr><td><input type="submit" name="Previous" value="' . _('Prev Account') . '" /></td>';
+echo '<td><input type="submit" name="Select" value="' . _('Select Account') . '" /></td>';
+echo '<td><input type="submit" name="Next" value="' . _('Next Account') . '" /></td></tr>';
 echo '</table><br />';
 echo '</form>';
 
@@ -84,15 +84,15 @@ if (isset($SelectedAccount) and $SelectedAccount != '') {
 		$ErrMsg = _('Cannot update GL budgets');
 		$DbgMsg = _('The SQL that failed to update the GL budgets was');
 		for ($i=1; $i<=12; $i++) {
-			$SQL="UPDATE chartdetails SET budget='".Round($_POST[$i.'last'],2). "'
+			$SQL="UPDATE chartdetails SET budget='".filter_currency_input($_POST[$i.'last']). "'
 					WHERE period='" . ($CurrentYearEndPeriod-(24-$i)) ."'
 					AND  accountcode = '" . $SelectedAccount."'";
 			$result=DB_query($SQL,$db,$ErrMsg,$DbgMsg);
-			$SQL="UPDATE chartdetails SET budget='".Round($_POST[$i.'this'],2). "'
+			$SQL="UPDATE chartdetails SET budget='".filter_currency_input($_POST[$i.'this']). "'
 					WHERE period='" . ($CurrentYearEndPeriod-(12-$i)) ."'
 					AND  accountcode = '" . $SelectedAccount."'";
 			$result=DB_query($SQL,$db,$ErrMsg,$DbgMsg);
-			$SQL="UPDATE chartdetails SET budget='".Round($_POST[$i.'next'],2)."'
+			$SQL="UPDATE chartdetails SET budget='".filter_currency_input($_POST[$i.'next'])."'
 					WHERE period='" .  ($CurrentYearEndPeriod+$i) ."'
 					AND  accountcode = '" . $SelectedAccount."'";
 			$result=DB_query($SQL,$db,$ErrMsg,$DbgMsg);
@@ -126,14 +126,14 @@ if (isset($SelectedAccount) and $SelectedAccount != '') {
 
 	if (isset($_POST['apportion'])) {
 		for ($i=1; $i<=12; $i++) {
-			if ($_POST['AnnualAmountLY'] != '0' AND is_numeric($_POST['AnnualAmountLY'])){
-				$budget[$CurrentYearEndPeriod+$i-24]	=round( $_POST['AnnualAmountLY']/12,0);
+			if ($_POST['AnnualAmountLY'] != '0' AND is_numeric(filter_currency_input($_POST['AnnualAmountLY']))){
+				$budget[$CurrentYearEndPeriod+$i-24]	=filter_currency_input($_POST['AnnualAmountLY'])/12;
 			}
-			if ($_POST['AnnualAmountTY'] != '0' AND is_numeric($_POST['AnnualAmountTY'])){
-				$budget[$CurrentYearEndPeriod+$i-12]	= round($_POST['AnnualAmountTY']/12,0);
+			if ($_POST['AnnualAmountTY'] != '0' AND is_numeric(filter_currency_input($_POST['AnnualAmountTY']))){
+				$budget[$CurrentYearEndPeriod+$i-12]	= filter_currency_input($_POST['AnnualAmountTY'])/12;
 			}
-			if ($_POST['AnnualAmount'] != '0' AND is_numeric($_POST['AnnualAmount'])){
-				$budget[$CurrentYearEndPeriod+$i]	= round($_POST['AnnualAmount']/12,0);
+			if ($_POST['AnnualAmount'] != '0' AND is_numeric(filter_currency_input($_POST['AnnualAmount']))){
+				$budget[$CurrentYearEndPeriod+$i]	= filter_currency_input($_POST['AnnualAmount'])/12;
 			}
 		}
 	}
@@ -174,14 +174,14 @@ if (isset($SelectedAccount) and $SelectedAccount != '') {
 	for ($i=1; $i<=12; $i++) {
 		echo '<tr>';
 		echo '<th>'. $PeriodEnd[$CurrentYearEndPeriod-(24-$i)] .'</th>';
-		echo '<td bgcolor="d2e5e8" class="number">'.number_format($actual[$CurrentYearEndPeriod-(24-$i)],2,'.','').'</td>';
-		echo '<td><input type="text" class="number" size="14" name="'.$i.'last" value="'.$budget[$CurrentYearEndPeriod-(24-$i)] .'" /></td>';
+		echo '<td bgcolor="d2e5e8" class="number">'.locale_money_format($actual[$CurrentYearEndPeriod-(24-$i)],$_SESSION['CompanyRecord']['currencydefault']).'</td>';
+		echo '<td><input type="text" class="number" size="14" name="'.$i.'last" value="'.locale_money_format($budget[$CurrentYearEndPeriod-(24-$i)], $_SESSION['CompanyRecord']['currencydefault']) .'" /></td>';
 		echo '<th>'. $PeriodEnd[$CurrentYearEndPeriod-(12-$i)] .'</th>';
-		echo '<td bgcolor="d2e5e8" class="number">'.number_format($actual[$CurrentYearEndPeriod-(12-$i)],2,'.','').'</td>';
-		echo '<td><input type="text" class="number" size="14" name="'.$i.'this" value="'. $budget[$CurrentYearEndPeriod-(12-$i)] .'" /></td>';
+		echo '<td bgcolor="d2e5e8" class="number">'.locale_money_format($actual[$CurrentYearEndPeriod-(12-$i)],$_SESSION['CompanyRecord']['currencydefault']).'</td>';
+		echo '<td><input type="text" class="number" size="14" name="'.$i.'this" value="'. locale_money_format($budget[$CurrentYearEndPeriod-(12-$i)],$_SESSION['CompanyRecord']['currencydefault']) .'" /></td>';
 		echo '<th>'. $PeriodEnd[$CurrentYearEndPeriod+($i)] .'</th>';
-		echo '<td bgcolor="d2e5e8" class="number">'.number_format($actual[$CurrentYearEndPeriod+$i],2,'.','').'</td>';
-		echo '<td><input type="text" class="number" size="14" name="'.$i.'next" value="'. $budget[$CurrentYearEndPeriod+$i] .'" /></td>';
+		echo '<td bgcolor="d2e5e8" class="number">'.locale_money_format($actual[$CurrentYearEndPeriod+$i],$_SESSION['CompanyRecord']['currencydefault']).'</td>';
+		echo '<td><input type="text" class="number" size="14" name="'.$i.'next" value="'. locale_money_format($budget[$CurrentYearEndPeriod+$i],$_SESSION['CompanyRecord']['currencydefault']) .'" /></td>';
 		echo '</tr>';
 		$LastYearActual=$LastYearActual+$actual[$CurrentYearEndPeriod-(24-$i)];
 		$LastYearBudget=$LastYearBudget+$budget[$CurrentYearEndPeriod-(24-$i)];
@@ -194,27 +194,27 @@ if (isset($SelectedAccount) and $SelectedAccount != '') {
 // Total Line
 
 	echo '<tr><th>'. _('Total') .'</th>';
-	echo '<th align="right">'.number_format($LastYearActual,2,'.',''). '</th>';
-	echo '<th align="right">'.number_format($LastYearBudget,2,'.',''). '</th>';
+	echo '<th align="right">'.locale_money_format($LastYearActual,$_SESSION['CompanyRecord']['currencydefault']). '</th>';
+	echo '<th align="right">'.locale_money_format($LastYearBudget,$_SESSION['CompanyRecord']['currencydefault']). '</th>';
 	echo '<th align="right"></th>';
-	echo '<th align="right">'.number_format($ThisYearActual,2,'.',''). '</th>';
-	echo '<th align="right">'.number_format($ThisYearBudget,2,'.',''). '</th>';
+	echo '<th align="right">'.locale_money_format($ThisYearActual,$_SESSION['CompanyRecord']['currencydefault']). '</th>';
+	echo '<th align="right">'.locale_money_format($ThisYearBudget,$_SESSION['CompanyRecord']['currencydefault']). '</th>';
 	echo '<th align="right"></th>';
-	echo '<th align="right">'.number_format($NextYearActual,2,'.',''). '</th>';
-	echo '<th align="right">'.number_format($NextYearBudget,2,'.',''). '</th></tr>';
+	echo '<th align="right">'.locale_money_format($NextYearActual,$_SESSION['CompanyRecord']['currencydefault']). '</th>';
+	echo '<th align="right">'.locale_money_format($NextYearBudget,$_SESSION['CompanyRecord']['currencydefault']). '</th></tr>';
 	echo '<tr><td colspan="2">'._('Annual Budget').'</td>
-				<td><input class="number" type="text" size="14" name="AnnualAmountLY" value="0.00" /></td>
+				<td><input class="number" type="text" size="14" name="AnnualAmountLY" value="'.locale_money_format(0, $_SESSION['CompanyRecord']['currencydefault']).'" /></td>
 				</td><td><td></td>
-				<td><input class="number" type="text" size="14" name="AnnualAmountTY" value="0.00" /></td>
+				<td><input class="number" type="text" size="14" name="AnnualAmountTY" value="'.locale_money_format(0, $_SESSION['CompanyRecord']['currencydefault']).'" /></td>
 				<td></td>
-				<td><input onChange="numberFormat(this,2)" class="number" type="text" size="14" name="AnnualAmount" value="0.00" /></td>';
-	echo '<td><input type="submit" name="apportion" value="' . _('Apportion Budget') . '"></td>';
+				<td><input onChange="numberFormat(this,2)" class="number" type="text" size="14" name="AnnualAmount" value="'.locale_money_format(0, $_SESSION['CompanyRecord']['currencydefault']).'" /></td>';
+	echo '<td><input type="submit" name="apportion" value="' . _('Apportion Budget') . '" /></td>';
 	echo '</tr>';
 	echo '</table>';
 	echo '<input type="hidden" name="SelectedAccount" value="'.$SelectedAccount.'" />';
 
 	echo '<script>defaultControl(document.form.1next);</script>';
-	echo '<br /><div class="centre"><input type="submit" name=update value="' . _('Update') . '"></div></form>';
+	echo '<br /><div class="centre"><input type="submit" name="update" value="' . _('Update') . '" /></div></form>';
 
 	$SQL="SELECT MIN(periodno) FROM periods";
 	$result=DB_query($SQL,$db);

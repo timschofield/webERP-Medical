@@ -249,16 +249,16 @@ if (isset($PrintPDF) or isset($_GET['PrintPDF']) and $PrintPDF and isset($FromTr
 					if ($myrow2['discountpercent'] == 0) {
 						$DisplayDiscount = '';
 					} else {
-						$DisplayDiscount = number_format($myrow2['discountpercent'] * 100, 2) . '%';
+						$DisplayDiscount = locale_number_format($myrow2['discountpercent'] * 100, 2) . '%';
 						$DiscountPrice = $myrow2['fxprice'] * (1 - $myrow2['discountpercent']);
 					}
-					$DisplayNet = number_format($myrow2['fxnet'], 2);
+					$DisplayNet = locale_money_format($myrow2['fxnet'], $myrow['currcode']);
 					$DisplayPrice = $myrow2['fxprice'];
 					$DisplayQty = $myrow2['quantity'];
 					$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column1->x, $YPos,$FormDesign->Data->Column1->Length, $FormDesign->Data->Column1->FontSize, $myrow2['stockid']);
 					$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column2->x, $YPos,$FormDesign->Data->Column2->Length, $FormDesign->Data->Column2->FontSize, $myrow2['description']);
-					$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column3->x, $YPos,$FormDesign->Data->Column3->Length, $FormDesign->Data->Column3->FontSize, number_format($DisplayPrice,4), 'right');
-					$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column4->x, $YPos,$FormDesign->Data->Column4->Length, $FormDesign->Data->Column4->FontSize, number_format($DisplayQty,$myrow2['decimalplaces']), 'right');
+					$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column3->x, $YPos,$FormDesign->Data->Column3->Length, $FormDesign->Data->Column3->FontSize, locale_money_format($DisplayPrice,$myrow['currcode']), 'right');
+					$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column4->x, $YPos,$FormDesign->Data->Column4->Length, $FormDesign->Data->Column4->FontSize, locale_number_format($DisplayQty,$myrow2['decimalplaces']), 'right');
 					$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column5->x, $YPos,$FormDesign->Data->Column5->Length, $FormDesign->Data->Column5->FontSize, $myrow2['units'], 'centre');
 					$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column6->x, $YPos,$FormDesign->Data->Column6->Length, $FormDesign->Data->Column6->FontSize, $DisplayDiscount, 'right');
 					$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column7->x, $YPos,$FormDesign->Data->Column7->Length, $FormDesign->Data->Column7->FontSize, $DisplayNet, 'right');
@@ -312,15 +312,15 @@ if (isset($PrintPDF) or isset($_GET['PrintPDF']) and $PrintPDF and isset($FromTr
 			$pdf->line($FormDesign->LineAboveFooter->startx, $Page_Height - $FormDesign->LineAboveFooter->starty, $FormDesign->LineAboveFooter->endx, $Page_Height - $FormDesign->LineAboveFooter->endy);
 			/* Now print out the footer and totals */
 			if ($InvOrCredit == 'Invoice') {
-				$DisplaySubTot = number_format($myrow['ovamount'], 2);
-				$DisplayFreight = number_format($myrow['ovfreight'], 2);
-				$DisplayTax = number_format($myrow['ovgst'], 2);
-				$DisplayTotal = number_format($myrow['ovfreight'] + $myrow['ovgst'] + $myrow['ovamount'], 2);
+				$DisplaySubTot = locale_money_format($myrow['ovamount'], $myrow['currcode']);
+				$DisplayFreight = locale_money_format($myrow['ovfreight'], $myrow['currcode']);
+				$DisplayTax = locale_money_format($myrow['ovgst'], $myrow['currcode']);
+				$DisplayTotal = locale_money_format($myrow['ovfreight'] + $myrow['ovgst'] + $myrow['ovamount'], $myrow['currcode']);
 			} else {
-				$DisplaySubTot = number_format(-$myrow['ovamount'], 2);
-				$DisplayFreight = number_format(-$myrow['ovfreight'], 2);
-				$DisplayTax = number_format(-$myrow['ovgst'], 2);
-				$DisplayTotal = number_format(-$myrow['ovfreight'] - $myrow['ovgst'] - $myrow['ovamount'], 2);
+				$DisplaySubTot = locale_money_format(-$myrow['ovamount'], $myrow['currcode']);
+				$DisplayFreight = locale_money_format(-$myrow['ovfreight'], $myrow['currcode']);
+				$DisplayTax = locale_money_format(-$myrow['ovgst'], $myrow['currcode']);
+				$DisplayTotal = locale_money_format(-$myrow['ovfreight'] - $myrow['ovgst'] - $myrow['ovamount'], $myrow['currcode']);
 			}
 			/* Print out the payment terms */
 			$pdf->addTextWrap($FormDesign->PaymentTerms->x, $Page_Height - $FormDesign->PaymentTerms->y, $FormDesign->PaymentTerms->Length, $FormDesign->PaymentTerms->FontSize, _('Payment Terms') . ': ' . $myrow['terms']);
@@ -602,6 +602,7 @@ if (($InvOrCredit == 'Invoice' or $InvOrCredit == 'Credit') and isset($PrintPDF)
 					</table>';
 					$sql = "SELECT stockmoves.stockid,
 				   		stockmaster.description,
+				   		stockmaster.decimalplaces,
 						-stockmoves.qty*stockmoves.conversionfactor as quantity,
 						stockmoves.discountpercent,
 						((1 - stockmoves.discountpercent) * stockmoves.price * " . $ExchRate . "* -stockmoves.qty) AS fxnet,
@@ -632,6 +633,7 @@ if (($InvOrCredit == 'Invoice' or $InvOrCredit == 'Credit') and isset($PrintPDF)
 					</tr></table>';
 					$sql = "SELECT stockmoves.stockid,
 				   		stockmaster.description,
+				   		stockmaster.decimalplaces,
 						stockmoves.qty*stockmoves.conversionfactor as quantity,
 						stockmoves.discountpercent, ((1 - stockmoves.discountpercent) * stockmoves.price * " . $ExchRate . " * stockmoves.qty) AS fxnet,
 						(stockmoves.price * " . $ExchRate . ") AS fxprice,
@@ -677,13 +679,13 @@ if (($InvOrCredit == 'Invoice' or $InvOrCredit == 'Credit') and isset($PrintPDF)
 							$k = 1;
 						}
 						echo $RowStarter;
-						$DisplayPrice = number_format($myrow2['fxprice'], 2);
-						$DisplayQty = number_format($myrow2['quantity'], 2);
-						$DisplayNet = number_format($myrow2['fxnet'], 2);
+						$DisplayPrice = locale_money_format($myrow2['fxprice'], $myrow['currcode']);
+						$DisplayQty = locale_number_format($myrow2['quantity'], $myrow2['decimalplaces']);
+						$DisplayNet = locale_money_format($myrow2['fxnet'], $myrow['currcode']);
 						if ($myrow2['discountpercent'] == 0) {
 							$DisplayDiscount = '';
 						} else {
-							$DisplayDiscount = number_format($myrow2['discountpercent'] * 100, 2) . '%';
+							$DisplayDiscount = locale_number_format($myrow2['discountpercent'] * 100, 2) . '%';
 						}
 						printf('<td>%s</td>
 								<td>%s</td>
@@ -789,15 +791,15 @@ if (($InvOrCredit == 'Invoice' or $InvOrCredit == 'Credit') and isset($PrintPDF)
 				}
 				/* Now print out the footer and totals */
 				if ($InvOrCredit == 'Invoice') {
-					$DisplaySubTot = number_format($myrow['ovamount'], 2);
-					$DisplayFreight = number_format($myrow['ovfreight'], 2);
-					$DisplayTax = number_format($myrow['ovgst'], 2);
-					$DisplayTotal = number_format($myrow['ovfreight'] + $myrow['ovgst'] + $myrow['ovamount'], 2);
+					$DisplaySubTot = locale_money_format($myrow['ovamount'], $myrow['currcode']);
+					$DisplayFreight = locale_money_format($myrow['ovfreight'], $myrow['currcode']);
+					$DisplayTax = locale_money_format($myrow['ovgst'], $myrow['currcode']);
+					$DisplayTotal = locale_money_format($myrow['ovfreight'] + $myrow['ovgst'] + $myrow['ovamount'], $myrow['currcode']);
 				} else {
-					$DisplaySubTot = number_format(-$myrow['ovamount'], 2);
-					$DisplayFreight = number_format(-$myrow['ovfreight'], 2);
-					$DisplayTax = number_format(-$myrow['ovgst'], 2);
-					$DisplayTotal = number_format(-$myrow['ovfreight'] - $myrow['ovgst'] - $myrow['ovamount'], 2);
+					$DisplaySubTot = locale_money_format(-$myrow['ovamount'], $myrow['currcode']);
+					$DisplayFreight = locale_money_format(-$myrow['ovfreight'], $myrow['currcode']);
+					$DisplayTax = locale_money_format(-$myrow['ovgst'], $myrow['currcode']);
+					$DisplayTotal = locale_money_format(-$myrow['ovfreight'] - $myrow['ovgst'] - $myrow['ovamount'], $myrow['currcode']);
 				}
 				/*Print out the invoice text entered */
 				echo '<table class="table1">

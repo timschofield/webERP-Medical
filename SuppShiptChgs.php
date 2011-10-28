@@ -17,10 +17,10 @@ $title = _('Shipment Charges or Credits');
 
 include('includes/header.inc');
 
-if ($_SESSION['SuppTrans']->InvoiceOrCredit == 'Invoice'){
-	echo '<a href="' . $rootpath . '/SupplierInvoice.php">' . _('Back to Invoice Entry') . '</a>';
-} else {
-	echo '<a href="' . $rootpath . '/SupplierCredit.php">' . _('Back to Credit Note Entry') . '</a>';
+foreach ($_POST as $key=>$value) {
+	if (substr($key, 0, 6)=='Amount') {
+		$_POST[$key] = filter_currency_input($value);
+	}
 }
 
 if (!isset($_SESSION['SuppTrans'])){
@@ -69,13 +69,19 @@ if (isset($_GET['Delete'])){
 
 /*Show all the selected ShiptRefs so far from the SESSION['SuppInv']->Shipts array */
 if ($_SESSION['SuppTrans']->InvoiceOrCredit=='Invoice'){
-	echo '<p class="page_title_text">'. _('Shipment charges on Invoice') . ' '.'</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Search') . '" alt="" />'. _('Shipment charges on Invoice') . ' ';
 } else {
-	echo '<p class="page_title_text">' . _('Shipment credits on Credit Note') . ' '.'</p>';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Search') . '" alt="" />' . _('Shipment credits on Credit Note') . ' ';
 }
-echo '<p>'.$_SESSION['SuppTrans']->SuppReference . ' ' ._('From') . ' ' . $_SESSION['SuppTrans']->SupplierName.'</p>';
+echo '<br />' . $_SESSION['SuppTrans']->SuppReference . ' ' ._('From') . ' ' . $_SESSION['SuppTrans']->SupplierName.'</p>';
 
-echo '<table cellpadding="2" class="selection">';
+if ($_SESSION['SuppTrans']->InvoiceOrCredit == 'Invoice'){
+	echo '<div class="centre"><a href="' . $rootpath . '/SupplierInvoice.php">' . _('Back to Invoice Entry') . '</a></div>';
+} else {
+	echo '<div class="centre"><a href="' . $rootpath . '/SupplierCredit.php">' . _('Back to Credit Note Entry') . '</a></div>';
+}
+
+echo '<br /><table cellpadding="2" class="selection">';
 $TableHeader = '<tr><th>' . _('Shipment') . '</th>
 		<th>' . _('Amount') . '</th></tr>';
 echo $TableHeader;
@@ -85,7 +91,7 @@ $TotalShiptValue = 0;
 foreach ($_SESSION['SuppTrans']->Shipts as $EnteredShiptRef){
 
 	echo '<tr><td>' . $EnteredShiptRef->ShiptRef . '</td>
-		<td class="number">' . number_format($EnteredShiptRef->Amount,2) . '</td>
+		<td class="number">' . locale_money_format($EnteredShiptRef->Amount,$_SESSION['SuppTrans']->CurrCode) . '</td>
 		<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $EnteredShiptRef->Counter . '">' . _('Delete') . '</a></td></tr>';
 
 	$TotalShiptValue = $TotalShiptValue + $EnteredShiptRef->Amount;
@@ -93,8 +99,8 @@ foreach ($_SESSION['SuppTrans']->Shipts as $EnteredShiptRef){
 }
 
 echo '<tr>
-	<td class="number"><font size="2" color="navy">' . _('Total') . ':</font></td>
-	<td class="number"><font size="2" color="navy"><u>' . number_format($TotalShiptValue,2) . '</u></font></td>
+	<td class="number"><font size="2" color="#616161">' . _('Total') . ':</font></td>
+	<td class="number"><font size="2" color="#616161"><u>' . locale_money_format($TotalShiptValue,$_SESSION['SuppTrans']->CurrCode) . '</u></font></td>
 </tr>
 </table><br />';
 
@@ -105,6 +111,13 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 if (!isset($_POST['ShiptRef'])) {
 	$_POST['ShiptRef']='';
 }
+
+foreach ($_POST as $key=>$value) {
+	if (substr($key, 0, 6)=='Amount') {
+		$_POST[$key] = filter_currency_input($value);
+	}
+}
+
 echo '<table class="selection">';
 echo '<tr><td>' . _('Shipment Reference') . ':</td>
 	<td><input type="text" name="ShiptRef" size="12" maxlength="11" value="' .  $_POST['ShiptRef'] . '" /></td></tr>';
@@ -134,7 +147,7 @@ if (!isset($_POST['Amount'])) {
 	$_POST['Amount']=0;
 }
 echo '<tr><td>' . _('Amount') . ':</td>
-	<td><input type="text" name="Amount" size="12" maxlength="11" value="' .  $_POST['Amount'] . '" /></td></tr>';
+	<td><input type="text" class="number" name="Amount" size="12" maxlength="11" value="' .  locale_money_format($_POST['Amount'], $_SESSION['SuppTrans']->CurrCode) . '" /></td></tr>';
 echo '</table>';
 
 echo '<br /><div class="centre"><input type="submit" name="AddShiptChgToInvoice" value="' . _('Enter Shipment Charge') . '" /></div>';

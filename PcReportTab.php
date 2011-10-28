@@ -19,7 +19,7 @@ if ((! isset($_POST['FromDate']) AND ! isset($_POST['ToDate'])) OR isset($_POST[
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Payment Entry') . '" alt="" />' . ' ' . $title . '</p>';
 
-	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (!isset($_POST['FromDate'])){
@@ -81,7 +81,12 @@ if ((! isset($_POST['FromDate']) AND ! isset($_POST['ToDate'])) OR isset($_POST[
 	$SQL_FromDate = FormatDateForSQL($_POST['FromDate']);
 	$SQL_ToDate = FormatDateForSQL($_POST['ToDate']);
 
-	$SQL = "SELECT * FROM pcashdetails
+	$SQL = "SELECT date,
+					amount,
+					notes,
+					receipt,
+					authorized
+			FROM pcashdetails
 			WHERE tabcode='".$SelectedTabs."'
 			AND date >='" . $SQL_FromDate . "' AND date <= '" . $SQL_ToDate . "'
 			ORDER BY date, counterindex ASC";
@@ -108,8 +113,11 @@ if (DB_error_no($db)!=0){
 
 	include('includes/PDFTabReportHeader.inc');
 
-	$SqlTabs = "SELECT * FROM pctabs
-			WHERE tabcode='".$SelectedTabs."'";
+	$SqlTabs = "SELECT usercode,
+						currency,
+						authorizer
+					FROM pctabs
+					WHERE tabcode='".$SelectedTabs."'";
 
 	$TabResult = DB_query($SqlTabs,	$db, _('No Petty Cash tabs were returned by the SQL because'), _('The SQL that failed was:'));
 
@@ -158,7 +166,7 @@ if (DB_error_no($db)!=0){
 	$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,40,$FontSize,_('Balance before '));
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+55,$YPos,70,$FontSize,$_POST['FromDate']);
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+100,$YPos,20,$FontSize,_(': '));
-	$LeftOvers = $pdf->addTextWrap($Left_Margin+110,$YPos,70,$FontSize,number_format($Balance['0'],2));
+	$LeftOvers = $pdf->addTextWrap($Left_Margin+110,$YPos,70,$FontSize,locale_money_format($Balance['0'],$Tabs['currency']));
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+150,$YPos,70,$FontSize,$Tabs['currency']);
 
 	$YPos -= (2 * $line_height);
@@ -190,7 +198,7 @@ if (DB_error_no($db)!=0){
 		// Print total for each account
 		$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,70,$FontSize,ConvertSQLDate($myrow['date']));
 		$LeftOvers = $pdf->addTextWrap($Left_Margin+70,$YPos,130,$FontSize,$Description[0]);
-		$LeftOvers = $pdf->addTextWrap($Left_Margin+180,$YPos,50,$FontSize,number_format($myrow['amount'],2),'right');
+		$LeftOvers = $pdf->addTextWrap($Left_Margin+180,$YPos,50,$FontSize,locale_money_format($myrow['amount'],$Tabs['currency']),'right');
 		$LeftOvers = $pdf->addTextWrap($Left_Margin+250,$YPos,100,$FontSize,$myrow['notes']);
 		$LeftOvers = $pdf->addTextWrap($Left_Margin+350,$YPos,70,$FontSize,$myrow['receipt']);
 		$LeftOvers = $pdf->addTextWrap($Left_Margin+430,$YPos,70,$FontSize,ConvertSQLDate($myrow['authorized']));
@@ -198,7 +206,7 @@ if (DB_error_no($db)!=0){
 
 	}  //end of while loop
 
-	$sqlamount="SELECT sum(amount)
+	$sqlamount="SELECT sum(amount) as amount
 				FROM pcashdetails
 				WHERE tabcode='".$SelectedTabs."'
 				AND date<='".$SQL_ToDate."'";
@@ -206,8 +214,8 @@ if (DB_error_no($db)!=0){
 	$ResultAmount = DB_query($sqlamount,$db);
 	$Amount=DB_fetch_array($ResultAmount);
 
-	if (!isset($Amount[0])) {
-		$Amount[0]=0;
+	if (!isset($Amount['amount'])) {
+		$Amount['amount']=0;
 	}
 
 
@@ -217,7 +225,7 @@ if (DB_error_no($db)!=0){
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+70,$YPos,100,$FontSize,_('Balance at'));
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+110,$YPos,70,$FontSize,$_POST['ToDate']);
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+160,$YPos,20,$FontSize,_(': '));
-	$LeftOvers = $pdf->addTextWrap($Left_Margin+160,$YPos,70,$FontSize,number_format($Amount[0],2),'right');
+	$LeftOvers = $pdf->addTextWrap($Left_Margin+160,$YPos,70,$FontSize,locale_money_format($Amount['amount'],$Tabs['currency']),'right');
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+240,$YPos,70,$FontSize,$Tabs['currency']);
 	$pdf->line($Page_Width-$Right_Margin, $YPos+$line_height,$Left_Margin, $YPos+$line_height);
 
@@ -239,8 +247,11 @@ if (DB_error_no($db)!=0){
 	echo '<input type="hidden" name="FromDate" value="' . $_POST['FromDate'] . '" />
 		<input type="hidden" name="ToDate" value="' . $_POST['ToDate'] . '" />';
 
-	$SqlTabs = "SELECT * FROM pctabs
-			WHERE tabcode='".$SelectedTabs."'";
+	$SqlTabs = "SELECT usercode,
+						authorizer,
+						currency
+				FROM pctabs
+				WHERE tabcode='".$SelectedTabs."'";
 
 	$TabResult = DB_query($SqlTabs,
 				$db,
@@ -276,7 +287,7 @@ if (DB_error_no($db)!=0){
 			<td>' . ''.$Tabs['currency'].'</td>
 		</tr>';
 
-	$SqlBalance = "SELECT SUM(amount)
+	$SqlBalance = "SELECT SUM(amount) as amount
 			FROM pcashdetails
 			WHERE tabcode='".$SelectedTabs."'
 			AND date<'".$SQL_FromDate."'";
@@ -285,16 +296,16 @@ if (DB_error_no($db)!=0){
 
 	$Balance=DB_fetch_array($TabBalance);
 
-	if( !isset($Balance['0'])){
-		$Balance['0']=0;
+	if( !isset($Balance['amount'])){
+		$Balance['amount']=0;
 	}
 
 	echo '<tr><td>' . _('Balance before ') . ''.$_POST['FromDate'].'</td>
 				<td>:</td>
-				<td>' . ''.$Balance['0'].' '.$Tabs['currency'].'</td>
+				<td>' . ''.locale_money_format($Balance['amount'],$Tabs['currency']).' '.$Tabs['currency'].'</td>
 			</tr>';
 
-	$SqlBalanceNotAut = "SELECT SUM(amount)
+	$SqlBalanceNotAut = "SELECT SUM(amount) as amount
 			FROM pcashdetails
 			WHERE tabcode= '".$SelectedTabs."'
 			AND authorized = '0000-00-00'
@@ -304,13 +315,13 @@ if (DB_error_no($db)!=0){
 
 	$BalanceNotAut=DB_fetch_array($TabBalanceNotAut);
 
-	if( !isset($BalanceNotAut['0'])){
-		$BalanceNotAut['0']=0;
+	if( !isset($BalanceNotAut['amount'])){
+		$BalanceNotAut['amount']=0;
 	}
 
 	echo '<tr><td>' . _('Total not authorized before ') . ''.$_POST['FromDate'].'</td>
 			<td>:</td>
-			<td>' . ''.$BalanceNotAut['0'].' '.$Tabs['currency'].'</td>
+			<td>' . ''.locale_money_format($BalanceNotAut['amount'],$Tabs['currency']) .' '.$Tabs['currency'].'</td>
 		</tr>';
 
 
@@ -320,7 +331,13 @@ if (DB_error_no($db)!=0){
 	Account Code ,   Account Name , Month Actual, Month Budget, Period Actual, Period Budget */
 
 
-	$SQL = "SELECT * FROM pcashdetails
+	$SQL = "SELECT date,
+					amount,
+					notes,
+					receipt,
+					authorized,
+					codeexpense
+			FROM pcashdetails
 			WHERE tabcode='".$SelectedTabs."'
 				AND date >='" . $SQL_FromDate . "'
 				AND date <= '" . $SQL_ToDate . "'
@@ -344,7 +361,7 @@ if (DB_error_no($db)!=0){
 	$j = 1;
 	$k=0; //row colour counter
 
-	while ($myrow = DB_fetch_row($TabDetail)) {
+	while ($myrow = DB_fetch_array($TabDetail)) {
 	if ($k==1){
 		echo '<tr class="EvenTableRows">';
 		$k=0;
@@ -356,15 +373,15 @@ if (DB_error_no($db)!=0){
 
 	$sqldes="SELECT description
 				FROM pcexpenses
-				WHERE codeexpense='". $myrow['3'] . "'";
+				WHERE codeexpense='". $myrow['codeexpense'] . "'";
 
 	$ResultDes = DB_query($sqldes,$db);
 	$Description=DB_fetch_array($ResultDes);
 
-	if (!isset($Description['0'])){
-	$Description['0']='ASSIGNCASH';
+	if (!isset($Description['description'])){
+		$Description['description']='ASSIGNCASH';
 	}
-	if ($myrow['5'] != '0000-00-00'){
+	if ($myrow['authorized'] != '0000-00-00'){
 		printf('<td>%s</td>
 				<td>%s</td>
 				<td class="number">%s</td>
@@ -372,12 +389,12 @@ if (DB_error_no($db)!=0){
 				<td>%s</td>
 				<td>%s</td>
 			</tr>',
-				ConvertSQLDate($myrow['2']),
-				$Description['0'],
-				number_format($myrow['4'],2),
-				$myrow['7'],
-				$myrow['8'],
-				ConvertSQLDate($myrow['5']));
+				ConvertSQLDate($myrow['date']),
+				$Description['description'],
+				locale_money_format($myrow['amount'],$Tabs['currency']),
+				$myrow['notes'],
+				$myrow['receipt'],
+				ConvertSQLDate($myrow['authorized']));
 	}else{
 		printf('<td>%s</td>
 				<td>%s</td>
@@ -386,17 +403,17 @@ if (DB_error_no($db)!=0){
 				<td>%s</td>
 				<td>%s</td>
 			</tr>',
-				ConvertSQLDate($myrow['2']),
-				$Description['0'],
-				number_format($myrow['4'],2),
-				$myrow['7'],
-				$myrow['8'],
+				ConvertSQLDate($myrow['date']),
+				$Description['description'],
+				locale_money_format($myrow['amount'],$Tabs['currency']),
+				$myrow['notes'],
+				$myrow['receipt'],
 				'          ');
 	}
 
 	}
 
-	$sqlamount="SELECT sum(amount)
+	$sqlamount="SELECT sum(amount) as amount
 				FROM pcashdetails
 				WHERE tabcode='".$SelectedTabs."'
 				AND date<='".$SQL_ToDate."'";
@@ -404,12 +421,12 @@ if (DB_error_no($db)!=0){
 	$ResultAmount = DB_query($sqlamount,$db);
 	$Amount=DB_fetch_array($ResultAmount);
 
-	if (!isset($Amount[0])) {
-		$Amount[0]=0;
+	if (!isset($Amount['amount'])) {
+		$Amount['amount']=0;
 	}
 
-	echo '<tr><td colspan="2" style="text-align:right">' . _('Balance At') . ' '.$_POST['ToDate'].':</td>
-				<td>'.number_format($Amount[0],2).' </td>
+	echo '<tr><td colspan="2" class="number">' . _('Balance At') . ' '.$_POST['ToDate'].':</td>
+				<td class="number">'.locale_money_format($Amount['amount'],$Tabs['currency']).' </td>
 				<td>'.$Tabs['currency'].'</td>
 			</tr>';
 

@@ -133,7 +133,7 @@ if (!isset($SelectedContact)){
 	$result = DB_query($sql, $db);
 
 	if (DB_num_rows($result)>0){
-		echo '<table class="selection"><tr><th colspan="7"><font size="3" color="navy">' . _('Contacts Defined for') . ' - ' . $myrow['suppname'] . '</font></th></tr>';
+		echo '<table class="selection"><tr><th colspan="7"><font size="3" color="#616161">' . _('Contacts Defined for') . ' - ' . $myrow['suppname'] . '</font></th></tr>';
 
 		echo '<tr><th>' . _('Name') . '</th>
 							<th>' . _('Position') . '</th>

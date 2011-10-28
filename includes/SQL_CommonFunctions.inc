@@ -20,7 +20,7 @@ Also updates the transaction number
 
 	$SQL = "SELECT typeno FROM systypes WHERE typeid = '" . $TransType . "'";
 
-	$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': <BR>' . _('The next transaction number could not be retrieved from the database because');
+	$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': <br />' . _('The next transaction number could not be retrieved from the database because');
 	$DbgMsg =  _('The following SQL to retrieve the transaction number was used');
 	$GetTransNoResult = DB_query($SQL,$db,$ErrMsg,$DbgMsg);
 
@@ -258,7 +258,7 @@ function WoRealRequirements($db, $WO, $LocCode, $StockID, $Qty=1, $ParentID="") 
 	// remember, 'G' is for ghost (phantom part type)
 
 	// all components should be referenced to the initial parent
-	if ($ParentID == "") {
+	if ($ParentID == '') {
 		$ParentID = $StockID;
 	}
 

@@ -107,12 +107,12 @@ if (isset($_POST['submit'])) {
 		$Errors[$i] = 'Email';
 		$i++;
 	}
-	elseif (!is_numeric($_POST['CreditLimit'])) {
+	elseif (!is_numeric(filter_currency_input($_POST['CreditLimit']))) {
 		$InputError = 1;
 		prnMsg( _('The credit limit must be numeric'),'error');
 		$Errors[$i] = 'CreditLimit';
 		$i++;
-	} elseif (!is_numeric($_POST['PymtDiscount'])) {
+	} elseif (!is_numeric(filter_number_input($_POST['PymtDiscount']))) {
 		$InputError = 1;
 		prnMsg( _('The payment discount must be numeric'),'error');
 		$Errors[$i] = 'PymtDiscount';
@@ -122,7 +122,7 @@ if (isset($_POST['submit'])) {
 		prnMsg( _('The customer since field must be a date in the format') . ' ' . $_SESSION['DefaultDateFormat'],'error');
 		$Errors[$i] = 'ClientSince';
 		$i++;
-	} elseif (!is_numeric($_POST['Discount'])) {
+	} elseif (!is_numeric(filter_number_input($_POST['Discount']))) {
 		$InputError = 1;
 		prnMsg( _('The discount percentage must be numeric'),'error');
 		$Errors[$i] = 'Discount';
@@ -169,10 +169,11 @@ if (isset($_POST['submit'])) {
 					clientsince='" . $SQL_ClientSince. "',
 					holdreason='" . $_POST['HoldReason'] . "',
 					paymentterms='" . $_POST['PaymentTerms'] . "',
-					discount='" . ($_POST['Discount'])/100 . "',
+					discount=" . filter_number_input($_POST['Discount']) . "/100,
 					discountcode='" . $_POST['DiscountCode'] . "',
-					pymtdiscount='" . ($_POST['PymtDiscount'])/100 . "',
-					creditlimit='" . $_POST['CreditLimit'] . "',
+					discountcode='" . $_POST['DiscountCode'] . "',
+					pymtdiscount=" . filter_number_input($_POST['PymtDiscount']) . "/100,
+					creditlimit='" . filter_currency_input($_POST['CreditLimit']) . "',
 					salestype = '" . $_POST['SalesType'] . "',
 					invaddrbranch='" . $_POST['AddrInvBranch'] . "',
 					taxref='" . $_POST['TaxRef'] . "',
@@ -180,7 +181,6 @@ if (isset($_POST['submit'])) {
 					typeid='" . $_POST['typeid'] . "'
 				  WHERE debtorno = '" . $_POST['DebtorNo'] . "'";
 			} else {
-
 			  $currsql = "SELECT currcode
 					  		FROM debtorsmaster
 							where debtorno = '" . $_POST['DebtorNo'] . "'";
@@ -199,10 +199,10 @@ if (isset($_POST['submit'])) {
 					clientsince='" . $SQL_ClientSince . "',
 					holdreason='" . $_POST['HoldReason'] . "',
 					paymentterms='" . $_POST['PaymentTerms'] . "',
-					discount='" . ($_POST['Discount'])/100 . "',
+					discount=" . filter_number_input($_POST['Discount']) . "/100,
 					discountcode='" . $_POST['DiscountCode'] . "',
-					pymtdiscount='" . ($_POST['PymtDiscount'])/100 . "',
-					creditlimit='" . $_POST['CreditLimit'] . "',
+					pymtdiscount=" . filter_number_input($_POST['PymtDiscount']) . "/100,
+					creditlimit='" . filter_currency_input($_POST['CreditLimit']) . "',
 					salestype = '" . $_POST['SalesType'] . "',
 					invaddrbranch='" . $_POST['AddrInvBranch'] . "',
 					taxref='" . $_POST['TaxRef'] . "',
@@ -264,10 +264,10 @@ if (isset($_POST['submit'])) {
 					'" . $SQL_ClientSince . "',
 					'" . $_POST['HoldReason'] . "',
 					'" . $_POST['PaymentTerms'] . "',
-					'" . ($_POST['Discount'])/100 . "',
+					 " . filter_number_input($_POST['Discount']) . "/100,
 					'" . $_POST['DiscountCode'] . "',
-					'" . ($_POST['PymtDiscount'])/100 . "',
-					'" . $_POST['CreditLimit'] . "',
+					 " . filter_number_input($_POST['PymtDiscount']) . "/100,
+					'" . filter_currency_input($_POST['CreditLimit']) . "',
 					'" . $_POST['SalesType'] . "',
 					'" . $_POST['AddrInvBranch'] . "',
 					'" . $_POST['TaxRef'] . "',
@@ -762,21 +762,20 @@ if (!isset($DebtorNo)) {
 		echo '<tr><td>' . _('Customer Since') . ' (' . $_SESSION['DefaultDateFormat'] . '):</td><td>' . $_POST['ClientSince'] . '</td></tr>';
 		echo '<tr><td>' . _('Discount Percent') . ':</td><td>' . $_POST['Discount'] . '</td></tr>';
 		echo '<tr><td>' . _('Discount Code') . ':</td><td>' . $_POST['DiscountCode'] . '</td></tr>';
-		echo '<tr><td>' . _('Payment Discount Percent') . ':</td><td>' . $_POST['PymtDiscount'] . '</td></tr>';
-		echo '<tr><td>' . _('Credit Limit') . ':</td><td>' . number_format($_POST['CreditLimit'],2) . '</td></tr>';
+		echo '<tr><td>' . _('Payment Discount Percent') . ':</td><td>' . locale_number_format($_POST['PymtDiscount'],2) . '</td></tr>';
+		echo '<tr><td>' . _('Credit Limit') . ':</td><td>' . locale_money_format($_POST['CreditLimit'],$_POST['CurrCode']) . '</td></tr>';
 		echo '<tr><td>' . _('Tax Reference') . ':</td><td>' . $_POST['TaxRef'] . '</td></tr>';
 	} else {
-		echo '</select></td></tr>
-			<tr><td>' . _('Customer Since') . ' (' . $_SESSION['DefaultDateFormat'] . '):</td>
+		echo '<tr><td>' . _('Customer Since') . ' (' . $_SESSION['DefaultDateFormat'] . '):</td>
 				<td><input ' . (in_array('ClientSince',$Errors) ?  'class="inputerror"' : '' ) .' type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="ClientSince" size="11" maxlength="10" value="' . $_POST['ClientSince'] . '" /></td></tr>';
 		echo '<tr><td>' . _('Discount Percent') . ':</td>
 			<td><input type="text" name="Discount" class="number" size="5" maxlength="4" value="' . $_POST['Discount'] . '" /></td></tr>';
 		echo '<tr><td>' . _('Discount Code') . ':</td>
 			<td><input ' . (in_array('DiscountCode',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="DiscountCode" size="3" maxlength="2" value="' . $_POST['DiscountCode'] . '" /></td></tr>';
 		echo '<tr><td>' . _('Payment Discount Percent') . ':</td>
-		<td><input ' . (in_array('PymtDiscount',$Errors) ?  'class="inputerror"' : '' ) .' type="text" class="number" name="PymtDiscount" size="5" maxlength="4" value="' . $_POST['PymtDiscount'] . '" /></td></tr>';
+		<td><input ' . (in_array('PymtDiscount',$Errors) ?  'class="inputerror"' : '' ) .' type="text" class="number" name="PymtDiscount" size="5" maxlength="4" value="' . locale_number_format($_POST['PymtDiscount'],2) . '" /></td></tr>';
 		echo '<tr><td>' . _('Credit Limit') . ':</td>
-			<td><input ' . (in_array('CreditLimit',$Errors) ?  'class="inputerror"' : '' ) .' type="text" class="number" name="CreditLimit" size="16" maxlength="14" value="' . $_POST['CreditLimit'] . '" /></td></tr>';
+			<td><input type="text" class="number" name="CreditLimit" size="16" maxlength="14" value="' . locale_money_format($_POST['CreditLimit'],$_POST['CurrCode']) . '" /></td></tr>';
 		echo '<tr><td>' . _('Tax Reference') . ':</td>
 			<td><input type="text" name="TaxRef" size="22" maxlength="20"  value="' . $_POST['TaxRef'] . '" /></td></tr>';
 	}
@@ -859,9 +858,9 @@ if (!isset($DebtorNo)) {
 
 	if (isset($_GET['Modify'])) {
 		if ($_POST['CustomerPOLine']==0){
-			echo '<tr><td>' . _('Invoice Addressing') . ':</td><td>'._('Address to HO').'</td></tr>';
+			echo '<tr><td>' . _('Invoice Addressing') . ':</td><td>'._('Address to HO').'</td></tr></table>';
 		} else {
-			echo '<tr><td>' . _('Invoice Addressing') . ':</td><td>'._('Address to Branch').'</td></tr>';
+			echo '<tr><td>' . _('Invoice Addressing') . ':</td><td>'._('Address to Branch').'</td></tr></table>';
 		}
 	} else {
 		echo '<tr><td>' . _('Invoice Addressing') . ':</td>
@@ -873,7 +872,7 @@ if (!isset($DebtorNo)) {
 			echo '<option value="0">' . _('Address to HO') . '</option>';
 			echo '<option selected="True" value="1">' . _('Address to Branch') . '</option>';
 		}
-		echo '</select></td></tr></table>';
+		echo '</select></td></tr></table></td></tr></table><br />';
 	}
 
 //	echo '</td></tr><tr><td colspan="2">';
@@ -926,8 +925,8 @@ if (!isset($DebtorNo)) {
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
-				<td><a href="AddCustomerContacts.php?Id=%s&DebtorNo=%s">'. _('Edit'). '</a></td>
-				<td><a href="%sID=%s&DebtorNo=%s&delete=1">'. _('Delete'). '</a></td>
+				<td><a href="AddCustomerContacts.php?Id=%s&amp;DebtorNo=%s">'. _('Edit'). '</a></td>
+				<td><a href="%sID=%s&amp;DebtorNo=%s&amp;delete=1">'. _('Delete'). '</a></td>
 				</tr>',
 				$myrow[2],
 				$myrow[3],

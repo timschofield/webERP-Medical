@@ -20,6 +20,12 @@ if (isset($_GET['loccode'])){
 	$LocCode=$_SESSION['UserStockLocation'];
 }
 
+foreach ($_POST as $key=>$value) {
+	if (substr($key, 0, 9)=='OutputQty' or substr($key, 0, 7)=='RecdQty') {
+		$_POST[$key] = filter_number_input($value);
+	}
+}
+
 // check for new or modify condition
 if (isset($_REQUEST['WO']) and $_REQUEST['WO']!=''){
 	// modify
@@ -168,43 +174,43 @@ if (isset($_POST['Search'])){
 
 if (isset($NewItem) AND isset($_POST['WO'])){
 
-	  $InputError=false;
-	  $CheckItemResult = DB_query("SELECT mbflag,
+	$InputError=false;
+	$CheckItemResult = DB_query("SELECT mbflag,
 											eoq,
 											controlled
-											FROM stockmaster
-											WHERE stockid='" . $NewItem . "'",
-											$db);
-	  if (DB_num_rows($CheckItemResult)==1){
-	  		$CheckItemRow = DB_fetch_array($CheckItemResult);
-			if ($CheckItemRow['controlled']==1 AND $_SESSION['DefineControlledOnWOEntry']==1){ //need to add serial nos or batches to determine quantity
-				$EOQ = 0;
-			} else {
-				if (!isset($ReqQty)) {
-					$ReqQty=$CheckItemRow['eoq'];
-				}
-				$EOQ = $ReqQty;
+										FROM stockmaster
+										WHERE stockid='" . $NewItem . "'",
+								$db);
+	if (DB_num_rows($CheckItemResult)==1){
+		$CheckItemRow = DB_fetch_array($CheckItemResult);
+		if ($CheckItemRow['controlled']==1 AND $_SESSION['DefineControlledOnWOEntry']==1){ //need to add serial nos or batches to determine quantity
+			$EOQ = 0;
+		} else {
+			if (!isset($ReqQty)) {
+				$ReqQty=$CheckItemRow['eoq'];
 			}
-	  		if ($CheckItemRow['mbflag']!='M'){
-	  			prnMsg(_('The item selected cannot be added to a work order because it is not a manufactured item'),'warn');
-	  			$InputError=true;
-	  		}
-	  } else {
-	  		prnMsg(_('The item selected cannot be found in the database'),'error');
-	  		$InputError = true;
-	  }
-	  $CheckItemResult = DB_query("SELECT stockid
+			$EOQ = $ReqQty;
+		}
+		if ($CheckItemRow['mbflag']!='M'){
+			prnMsg(_('The item selected cannot be added to a work order because it is not a manufactured item'),'warn');
+			$InputError=true;
+		}
+	} else {
+		prnMsg(_('The item selected cannot be found in the database'),'error');
+		$InputError = true;
+	}
+	$CheckItemResult = DB_query("SELECT stockid
 									FROM woitems
 									WHERE stockid='" . $NewItem . "'
 									AND wo='" .$_POST['WO'] . "'",
 									$db);
-	  if (DB_num_rows($CheckItemResult)==1){
-	  		prnMsg(_('This item is already on the work order and cannot be added again'),'warn');
-	  		$InputError=true;
-	  }
+	if (DB_num_rows($CheckItemResult)==1){
+		prnMsg(_('This item is already on the work order and cannot be added again'),'warn');
+		$InputError=true;
+	}
 
 
-	  if ($InputError==false){
+	if ($InputError==false){
 		$CostResult = DB_query("SELECT SUM((materialcost+labourcost+overheadcost)*bom.quantity) AS cost
 									FROM stockmaster INNER JOIN bom
 									ON stockmaster.stockid=bom.component
@@ -349,7 +355,7 @@ if (isset($_POST['submit'])) { //The update button has been clicked
 	$CancelDelete=false; //always assume the best
 
 	// can't delete it there are open work issues
-	$HasTransResult = DB_query("SELECT * FROM stockmoves
+	$HasTransResult = DB_query("SELECT transno FROM stockmoves
 									WHERE (stockmoves.type= 26 OR stockmoves.type=28)
 									AND reference " . LIKE  . " '%" . $_POST['WO'] . "%'",$db);
 	if (DB_num_rows($HasTransResult)>0){
@@ -392,7 +398,7 @@ if (isset($_POST['submit'])) { //The update button has been clicked
 	}
 }
 
-echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '" name="form">';
+echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '" name="form1">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<br /><table class="selection">';
@@ -423,6 +429,7 @@ if (DB_num_rows($WOResult)==1){
 										nextlotsnref,
 										controlled,
 										serialised,
+										stockmaster.decimalplaces,
 										nextserialno
 								FROM woitems INNER JOIN stockmaster
 								ON woitems.stockid=stockmaster.stockid
@@ -435,6 +442,7 @@ if (DB_num_rows($WOResult)==1){
 				$_POST['OutputItemDesc'.$i]=$WOItem['description'];
 				$_POST['OutputQty' . $i]= $WOItem['qtyreqd'];
 		  		$_POST['RecdQty' .$i] =$WOItem['qtyrecd'];
+		  		$_POST['DecimalPlaces' . $i] = $WOItem['decimalplaces'];
 		  		if ($WOItem['serialised']==1 AND $WOItem['nextserialno']>0){
 		  		   $_POST['NextLotSNRef' .$i]=$WOItem['nextserialno'];
 		  		} else {
@@ -442,7 +450,7 @@ if (DB_num_rows($WOResult)==1){
 				}
 		  		$_POST['Controlled'.$i] =$WOItem['controlled'];
 		  		$_POST['Serialised'.$i] =$WOItem['serialised'];
-		  		$HasWOSerialNosResult = DB_query("SELECT * FROM woserialnos WHERE wo='" . $_POST['WO'] . "'",$db);
+		  		$HasWOSerialNosResult = DB_query("SELECT wo FROM woserialnos WHERE wo='" . $_POST['WO'] . "'",$db);
 		  		if (DB_num_rows($HasWOSerialNosResult)>0){
 		  		   $_POST['HasWOSerialNos']=true;
 		  		} else {
@@ -455,7 +463,7 @@ if (DB_num_rows($WOResult)==1){
 echo '<input type="hidden" name="WO" value="' .$_POST['WO'] . '" />';
 echo '<tr><td class="label">' . _('Work Order Reference') . ':</td><td>' . $_POST['WO'] . '</td></tr>';
 echo '<tr><td class="label">' . _('Factory Location') .':</td>
-	<td><select name="StockLocation">';
+	<td><select name="StockLocation" onChange="ReloadForm(form1.submit)">';
 $LocResult = DB_query("SELECT loccode,locationname FROM locations",$db);
 while ($LocRow = DB_fetch_array($LocResult)){
 	if ($_POST['StockLocation']==$LocRow['loccode']){
@@ -485,7 +493,7 @@ echo '<tr>
 
 if (isset($WOResult)){
 	echo '<tr><td class="label">' . _('Accumulated Costs') . ':</td>
-			  <td class="number">' . number_format($myrow['costissued'],2) . '</td></tr>';
+			  <td class="number">' . locale_money_format($myrow['costissued'],$_SESSION['CompanyRecord']['currencydefault']) . '</td></tr>';
 }
 echo '</table>
 		<br /><table class="selection">';
@@ -509,13 +517,13 @@ if (isset($NumberOfOutputs)){
 		echo '<td><input type="hidden" name="OutputItem' . $i . '" value="' . $_POST['OutputItem' .$i] . '" />' .
 			$_POST['OutputItem' . $i] . ' - ' . $_POST['OutputItemDesc' .$i] . '</td>';
 		if ($_POST['Controlled'.$i]==1 AND $_SESSION['DefineControlledOnWOEntry']==1){
-			echo '<td style="text-align: right">' . $_POST['OutputQty' . $i] . '</td>';
-			echo '<input type="hidden" name="OutputQty' . $i .'" value="' . $_POST['OutputQty' . $i] . '" />';
+			echo '<td class="number">' . locale_number_format($_POST['OutputQty' . $i], $_POST['DecimalPlaces' . $i]) . '</td>';
+			echo '<input type="hidden" name="OutputQty' . $i .'" value="' . locale_number_format($_POST['OutputQty' . $i], $_POST['DecimalPlaces' . $i]) . '" />';
 		} else {
-		  	echo'<td><input type="text" class="number" name="OutputQty' . $i . '" value="' . $_POST['OutputQty' . $i] . '" size="10" maxlength="10" /></td>';
+		  	echo'<td><input type="text" class="number" name="OutputQty' . $i . '" value="' . locale_number_format($_POST['OutputQty' . $i], $_POST['DecimalPlaces' . $i]) . '" size="10" maxlength="10" /></td>';
 		}
-		 echo '<td class="number"><input type="hidden" name="RecdQty' . $i . '" value="' . $_POST['RecdQty' .$i] . '" />' . $_POST['RecdQty' .$i] .'</td>
-		  		<td class="number">' . ($_POST['OutputQty' . $i] - $_POST['RecdQty' .$i]) . '</td>';
+		 echo '<td class="number"><input type="hidden" name="RecdQty' . $i . '" value="' . locale_number_format($_POST['RecdQty' .$i], $_POST['DecimalPlaces' . $i]) . '" />' . locale_number_format($_POST['RecdQty' .$i], $_POST['DecimalPlaces' . $i]) .'</td>
+		  		<td class="number">' . locale_number_format(($_POST['OutputQty' . $i] - $_POST['RecdQty' .$i]), $_POST['DecimalPlaces' . $i]) . '</td>';
 		if ($_POST['Controlled'.$i]==1){
 			echo '<td><input type="text" name="NextLotSNRef' .$i . '" value="' . $_POST['NextLotSNRef'.$i] . '" /></td>';
 			if ($_SESSION['DefineControlledOnWOEntry']==1){

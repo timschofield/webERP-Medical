@@ -96,7 +96,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 
 	// Add more to WHERE statement, if user entered something for the part number,supplierid, name
 	$WherePart = ' ';
-	if (strlen($PartNumber) > 0 && $PartNumberOp == 'LIKE') {
+	if (strlen($PartNumber) > 0 and $PartNumberOp == 'LIKE') {
 		$PartNumber = $PartNumber . '%';
 	}
 	else {
@@ -122,7 +122,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 		$WhereSupplierID = ' ';
 	}
 	$WhereSupplierName = ' ';
-	if (strlen($SupplierName) > 0 && $SupplierNameOp == 'LIKE') {
+	if (strlen($SupplierName) > 0 and $SupplierNameOp == 'LIKE') {
 		$SupplierName = $SupplierName . '%';
 	}
 	else {
@@ -151,7 +151,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 
 	if ($_POST['LineStatus'] != 'All') {
 		if ($_POST['DateType'] == 'Order') {
-			$WhereLineStatus = " AND IF(purchorderdetails.quantityord = purchorderdetails.qtyinvoiced ||
+			$WhereLineStatus = " AND IF(purchorderdetails.quantityord = purchorderdetails.qtyinvoiced or
 			  purchorderdetails.completed = 1,'Completed','Open') = '" . $_POST['LineStatus'] . "'";
 		}
 		else {
@@ -178,7 +178,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 								purchorderdetails.qtyinvoiced,
 								(purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
 								(purchorderdetails.quantityord * purchorderdetails.stdcostunit) as extcost,
-								IF (purchorderdetails.quantityord = purchorderdetails.qtyinvoiced ||
+								IF (purchorderdetails.quantityord = purchorderdetails.qtyinvoiced or
 								  purchorderdetails.completed = 1,'Completed','Open') AS linestatus,
 								suppliers.suppname,
 								suppliers.currcode,
@@ -257,7 +257,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 				$orderby = 'extprice DESC';
 			}
 			if ($_POST['DateType'] == 'Order') {
-				if ($_POST['SummaryType'] == 'extprice' || $_POST['SummaryType'] == 'itemcode') {
+				if ($_POST['SummaryType'] == 'extprice' or $_POST['SummaryType'] == 'itemcode') {
 					$sql = "SELECT purchorderdetails.itemcode,
 									SUM(purchorderdetails.quantityord) as quantityord,
 									SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
@@ -323,7 +323,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 									suppliers.suppname
 								ORDER BY " . $orderby;
 				}
-				elseif ($_POST['SummaryType'] == 'supplierno' || $_POST['SummaryType'] == 'suppname,suppliers.supplierid') {
+				elseif ($_POST['SummaryType'] == 'supplierno' or $_POST['SummaryType'] == 'suppname,suppliers.supplierid') {
 					$sql = "SELECT purchorders.supplierno,
 									SUM(purchorderdetails.quantityord) as quantityord,
 									SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
@@ -422,7 +422,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 			else {
 
 				// Selects by delivery date from grns
-				if ($_POST['SummaryType'] == 'extprice' || $_POST['SummaryType'] == 'itemcode') {
+				if ($_POST['SummaryType'] == 'extprice' or $_POST['SummaryType'] == 'itemcode') {
 					$sql = "SELECT purchorderdetails.itemcode,
 									SUM(grns.qtyrecd) as quantityord,
 									SUM(grns.quantityinv) as qtyinvoiced,
@@ -490,7 +490,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 									suppliers.suppname
 								ORDER BY " . $orderby;
 				}
-				elseif ($_POST['SummaryType'] == 'supplierno' || $_POST['SummaryType'] == 'suppname,suppliers.supplierid') {
+				elseif ($_POST['SummaryType'] == 'supplierno' or $_POST['SummaryType'] == 'suppname,suppliers.supplierid') {
 					$sql = "SELECT purchorders.supplierno,
 									SUM(grns.qtyrecd) as quantityord,
 									SUM(grns.quantityinv) as qtyinvoiced,
@@ -629,7 +629,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 		else {
 			$SortBy_Display = $Detail_Array[$_POST['SortBy']];
 		}
-		echo '<tr><th colspan="2"><font size="3" color="navy">' . _('Header Details') . '</font></th></tr>';
+		echo '<tr><th colspan="2"><font size="3" color="#616161">' . _('Header Details') . '</font></th></tr>';
 		echo '<tr><td>' . _('Purchase Order Report') . '</td><td>' . $_POST['ReportType'] . ' By ' . $SortBy_Display . '</td></tr>';
 		echo '<tr><td>' . _('Date Type') . '</td><td>' . $_POST['DateType'] . '</tr>';
 		echo '<tr><td>' . _('Date Range') . '</td><td>' . $_POST['FromDate'] . _(' To ') . $_POST['ToDate'] . '</td></tr>';
@@ -708,12 +708,12 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 							$myrow['description'] ,
 							$myrow['supplierno'],
 							$myrow['suppname'],
-							number_format($myrow['quantityord'], $myrow['decimalplaces']) ,
+							locale_number_format($myrow['quantityord'], $myrow['decimalplaces']) ,
 							$myrow['currcode'],
-							number_format($myrow['extcost'], $_SESSION['Currencies'][$myrow['currcode']]['DecimalPlaces']) ,
+							locale_money_format($myrow['extcost'], $myrow['currcode']) ,
 							$myrow['currcode'],
-							number_format($myrow['extprice'], $_SESSION['Currencies'][$myrow['currcode']]['DecimalPlaces']) ,
-							number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) ,
+							locale_money_format($myrow['extprice'], $myrow['currcode']) ,
+							locale_number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) ,
 							$myrow['linestatus'],
 							ConvertSQLDate($myrow['deliverydate'])
 						);
@@ -773,10 +773,10 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 							$myrow['description'],
 							$myrow['supplierno'],
 							$myrow['suppname'],
-							number_format($myrow['quantityord'], $myrow['decimalplaces']) ,
-							number_format($myrow['extcost'], $_SESSION['Currencies'][$myrow['currcode']]['DecimalPlaces']) ,
-							number_format($myrow['extprice'], $_SESSION['Currencies'][$myrow['currcode']]['DecimalPlaces']) ,
-							number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) ,
+							locale_number_format($myrow['quantityord'], $myrow['decimalplaces']) ,
+							locale_money_format($myrow['extcost'], $myrow['currcode']) ,
+							locale_money_format($myrow['extprice'], $myrow['currcode']) ,
+							locale_number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) ,
 							$myrow['linestatus'],
 							ConvertSQLDate($myrow['deliverydate'])
 						);
@@ -811,7 +811,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 				$summaryheader = _('Supplier Name');
 				$descriptionheader = _('Supplier Number');
 			}
-			if ($summarytype == 'itemcode' || $summarytype == 'extprice') {
+			if ($summarytype == 'itemcode' or $summarytype == 'extprice') {
 				$description = 'description';
 				$summaryheader = _('Part Number');
 				$descriptionheader = _('Part Description');
@@ -864,17 +864,12 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 					$ViewPurchOrder = $rootpath . '/PO_Header.php?ModifyOrderNumber=' . $myrow['orderno'];
 				}
 				printf('<td><a href="' . $ViewPurchOrder . '">%s</td>
-						<td>%s</td><td class="number">%s</td><td class="number">%s</td><td class="number">%s</td><td class="number">%s</td></tr>', $myrow[$summarytype], $myrow[$description], $myrow['quantityord'], number_format($myrow['extcost'], 2) , number_format($myrow['extprice'], 2) , $myrow['qtyinvoiced'], $suppname);
+						<td>%s</td><td class="number">%s</td><td class="number">%s</td><td class="number">%s</td><td class="number">%s</td></tr>', $myrow[$summarytype], $myrow[$description], locale_number_format($myrow['quantityord'], $myrow['decimalplaces']), locale_money_format($myrow['extcost'], $myrow['currcode']) , locale_money_format($myrow['extprice'], $myrow['currcode']) , locale_number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']), $suppname);
 				$TotalQty+= $myrow['quantityord'];
 				$TotalExtCost+= $myrow['extcost'];
 				$TotalExtPrice+= $myrow['extprice'];
 				$TotalInvQty+= $myrow['qtyinvoiced'];
 			} //END WHILE LIST LOOP
-
-
-			// Print totals
-
-			printf('<tr><td>%s</td><td>%s</td><td class="number">%s</td><td class="number">%s</td><td class="number">%s</td><td class="number">%s</td></tr>', 'Totals', _('Lines - ') . $linectr, $TotalQty, number_format($TotalExtCost, 2) , number_format($TotalExtPrice, 2) , $TotalInvQty, ' ');
 		} // End of if ($_POST['ReportType']
 
 		echo '</table>';
@@ -927,7 +922,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 
 	# Add more to WHERE statement, if user entered something for the part number,supplierid, name
 	$WherePart = ' ';
-	if (strlen($PartNumber) > 0 && $PartNumberOp == 'LIKE') {
+	if (strlen($PartNumber) > 0 and $PartNumberOp == 'LIKE') {
 		$PartNumber = $PartNumber . '%';
 	}
 	else {
@@ -953,7 +948,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 		$WhereSupplierID = ' ';
 	}
 	$WhereSupplierName = ' ';
-	if (strlen($SupplierName) > 0 && $SupplierNameOp == 'LIKE') {
+	if (strlen($SupplierName) > 0 and $SupplierNameOp == 'LIKE') {
 		$SupplierName = $SupplierName . '%';
 	}
 	else {
@@ -982,7 +977,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 
 	if ($_POST['LineStatus'] != 'All') {
 		if ($_POST['DateType'] == 'Order') {
-			$WhereLineStatus = " AND IF(purchorderdetails.quantityord = purchorderdetails.qtyinvoiced ||
+			$WhereLineStatus = " AND IF(purchorderdetails.quantityord = purchorderdetails.qtyinvoiced or
 			  purchorderdetails.completed = 1,'Completed','Open') = '" . $_POST['LineStatus'] . "'";
 		}
 		else {
@@ -1007,9 +1002,10 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 							   purchorderdetails.qtyinvoiced,
 							   (purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
 							   (purchorderdetails.quantityord * purchorderdetails.stdcostunit) as extcost,
-							   IF(purchorderdetails.quantityord = purchorderdetails.qtyinvoiced ||
+							   IF(purchorderdetails.quantityord = purchorderdetails.qtyinvoiced or
 								  purchorderdetails.completed = 1,'Completed','Open') as linestatus,
 							   suppliers.suppname,
+							   suppliers.currcode,
 							   stockmaster.decimalplaces,
 							   stockmaster.description
 							   FROM purchorderdetails
@@ -1040,6 +1036,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 							   (grns.qtyrecd * grns.stdcostunit) as extcost,
 							   IF(grns.qtyrecd - grns.quantityinv <> 0,'Open','Completed') as linestatus,
 							   suppliers.suppname,
+							   suppliers.currcode,
 							   stockmaster.decimalplaces,
 							   stockmaster.description
 							   FROM grns
@@ -1075,12 +1072,13 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 				$orderby = 'extprice DESC';
 			}
 			if ($_POST['DateType'] == 'Order') {
-				if ($_POST['SummaryType'] == 'extprice' || $_POST['SummaryType'] == 'itemcode') {
+				if ($_POST['SummaryType'] == 'extprice' or $_POST['SummaryType'] == 'itemcode') {
 					$sql = "SELECT purchorderdetails.itemcode,
 								   SUM(purchorderdetails.quantityord) as quantityord,
 								   SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
 								   SUM(purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
 								   SUM(purchorderdetails.quantityord * purchorderdetails.stdcostunit) as extcost,
+								   suppliers.currcode,
 								   stockmaster.decimalplaces,
 								   stockmaster.description
 								   FROM purchorderdetails
@@ -1107,6 +1105,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 								   SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
 								   SUM(purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
 								   SUM(purchorderdetails.quantityord * purchorderdetails.stdcostunit) as extcost,
+								   suppliers.currcode,
 								   suppliers.suppname
 								   FROM purchorderdetails
 							LEFT JOIN purchorders ON purchorders.orderno=purchorderdetails.orderno
@@ -1125,12 +1124,13 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 							  suppliers.suppname
 							ORDER BY " . $orderby;
 				}
-				elseif ($_POST['SummaryType'] == 'supplierno' || $_POST['SummaryType'] == 'suppname,suppliers.supplierid') {
+				elseif ($_POST['SummaryType'] == 'supplierno' or $_POST['SummaryType'] == 'suppname,suppliers.supplierid') {
 					$sql = "SELECT purchorders.supplierno,
 								   SUM(purchorderdetails.quantityord) as quantityord,
 								   SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
 								   SUM(purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
 								   SUM(purchorderdetails.quantityord * purchorderdetails.stdcostunit) as extcost,
+								   suppliers.currcode,
 								   suppliers.suppname
 								   FROM purchorderdetails
 							LEFT JOIN purchorders ON purchorders.orderno=purchorderdetails.orderno
@@ -1151,6 +1151,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 				}
 				elseif ($_POST['SummaryType'] == 'month') {
 					$sql = "SELECT EXTRACT(YEAR_MONTH from purchorders.orddate) as month,
+								   suppliers.currcode,
 								   CONCAT(MONTHNAME(purchorders.orddate),' ',YEAR(purchorders.orddate)) as monthname,
 								   SUM(purchorderdetails.quantityord) as quantityord,
 								   SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
@@ -1177,6 +1178,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 								   SUM(purchorderdetails.qtyinvoiced) as qtyinvoiced,
 								   SUM(purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
 								   SUM(purchorderdetails.quantityord * purchorderdetails.stdcostunit) as extcost,
+								   suppliers.currcode,
 								   stockmaster.categoryid,
 								   stockcategory.categorydescription
 								   FROM purchorderdetails
@@ -1199,12 +1201,13 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 			else {
 
 				// Selects by delivery date from grns
-				if ($_POST['SummaryType'] == 'extprice' || $_POST['SummaryType'] == 'itemcode') {
+				if ($_POST['SummaryType'] == 'extprice' or $_POST['SummaryType'] == 'itemcode') {
 					$sql = "SELECT purchorderdetails.itemcode,
 								   SUM(grns.qtyrecd) as quantityord,
 								   SUM(grns.quantityinv) as qtyinvoiced,
 								   SUM(grns.qtyrecd * purchorderdetails.unitprice) as extprice,
 								   SUM(grns.qtyrecd * grns.stdcostunit) as extcost,
+								   suppliers.currcode,
 								   stockmaster.description
 								   FROM grns
 							LEFT JOIN purchorderdetails ON grns.podetailitem = purchorderdetails.podetailitem
@@ -1230,6 +1233,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 								   SUM(grns.quantityinv) as qtyinvoiced,
 								   SUM(grns.qtyrecd * purchorderdetails.unitprice) as extprice,
 								   SUM(grns.qtyrecd * grns.stdcostunit) as extcost,
+								   suppliers.currcode,
 								   suppliers.suppname
 								   FROM grns
 							LEFT JOIN purchorderdetails ON grns.podetailitem = purchorderdetails.podetailitem
@@ -1249,12 +1253,13 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 							   suppliers.suppname
 							ORDER BY " . $orderby;
 				}
-				elseif ($_POST['SummaryType'] == 'supplierno' || $_POST['SummaryType'] == 'suppname,suppliers.supplierid') {
+				elseif ($_POST['SummaryType'] == 'supplierno' or $_POST['SummaryType'] == 'suppname,suppliers.supplierid') {
 					$sql = "SELECT purchorders.supplierno,
 								   SUM(grns.qtyrecd) as quantityord,
 								   SUM(grns.quantityinv) as qtyinvoiced,
 								   SUM(grns.qtyrecd * purchorderdetails.unitprice) as extprice,
 								   SUM(grns.qtyrecd * grns.stdcostunit) as extcost,
+								   suppliers.currcode,
 								   suppliers.suppname
 								   FROM grns
 							LEFT JOIN purchorderdetails ON grns.podetailitem = purchorderdetails.podetailitem
@@ -1277,6 +1282,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 				elseif ($_POST['SummaryType'] == 'month') {
 					$sql = "SELECT EXTRACT(YEAR_MONTH from purchorders.orddate) as month,
 								   CONCAT(MONTHNAME(purchorders.orddate),' ',YEAR(purchorders.orddate)) as monthname,
+								   suppliers.currcode,
 								   SUM(grns.qtyrecd) as quantityord,
 								   SUM(grns.quantityinv) as qtyinvoiced,
 								   SUM(grns.qtyrecd * purchorderdetails.unitprice) as extprice,
@@ -1301,6 +1307,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 				elseif ($_POST['SummaryType'] == 'categoryid') {
 					$sql = "SELECT stockmaster.categoryid,
 								   stockcategory.categorydescription,
+								   suppliers.currcode,
 								   SUM(grns.qtyrecd) as quantityord,
 								   SUM(grns.quantityinv) as qtyinvoiced,
 								   SUM(grns.qtyrecd * purchorderdetails.unitprice) as extprice,
@@ -1382,18 +1389,13 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 					$linectr++;
 
 					// Detail for both DateType of Order
-					fprintf($FileHandle, '"%s","%s","%s","%s","%s",%s,%s,%s,%s,"%s","%s","%s"' . "\n", $myrow['orderno'], $myrow['itemcode'], ConvertSQLDate($myrow['orddate']) , $myrow['supplierno'], $myrow['suppname'], number_format($myrow['quantityord'], $myrow['decimalplaces']) , number_format($myrow['extcost'], 2) , number_format($myrow['extprice'], 2) , number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) , $myrow['linestatus'], ConvertSQLDate($myrow['deliverydate']) , $myrow['description']);
+					fprintf($FileHandle, '"%s","%s","%s","%s","%s",%s,%s,%s,%s,"%s","%s","%s"' . "\n", $myrow['orderno'], $myrow['itemcode'], ConvertSQLDate($myrow['orddate']) , $myrow['supplierno'], $myrow['suppname'], locale_number_format($myrow['quantityord'], $myrow['decimalplaces']) , locale_money_format($myrow['extcost'], $myrow['currcode']) , locale_money_format($myrow['extprice'], $myrow['currcode']) , locale_number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) , $myrow['linestatus'], ConvertSQLDate($myrow['deliverydate']) , $myrow['description']);
 					$LastDecimalPlaces = $myrow['decimalplaces'];
 					$TotalQty+= $myrow['quantityord'];
 					$TotalExtCost+= $myrow['extcost'];
 					$TotalExtPrice+= $myrow['extprice'];
 					$TotalInvQty+= $myrow['qtyinvoiced'];
 				} //END WHILE LIST LOOP
-
-
-				// Print totals
-
-				fprintf($FileHandle, '"%s","%s","%s","%s","%s",%s,%s,%s,%s,"%s","%s"' . "\n", 'Totals', _('Lines - ') . $linectr, ' ', ' ', ' ', number_format($TotalQty, 2) , number_format($TotalExtCost, 2) , number_format($TotalExtPrice, 2) , number_format($TotalInvQty, 2) , ' ', ' ');
 			}
 			else {
 
@@ -1407,18 +1409,13 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 
 					// In sql, had to alias grns.qtyrecd as quantityord so could use same name here
 
-					fprintf($FileHandle, '"%s","%s","%s","%s","%s",%s,%s,%s,%s,"%s","%s","%s"' . "\n", $myrow['orderno'], $myrow['itemcode'], ConvertSQLDate($myrow['orddate']) , $myrow['supplierno'], $myrow['suppname'], number_format($myrow['quantityord'], $myrow['decimalplaces']) , number_format($myrow['extcost'], 2) , number_format($myrow['extprice'], 2) , number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) , $myrow['linestatus'], ConvertSQLDate($myrow['deliverydate']) , $myrow['description']);
+					fprintf($FileHandle, '"%s","%s","%s","%s","%s",%s,%s,%s,%s,"%s","%s","%s"' . "\n", $myrow['orderno'], $myrow['itemcode'], ConvertSQLDate($myrow['orddate']) , $myrow['supplierno'], $myrow['suppname'], locale_number_format($myrow['quantityord'], $myrow['decimalplaces']) , locale_money_format($myrow['extcost'], $myrow['currcode']) , locale_money_format($myrow['extprice'], $myrow['currcode']) , locale_number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) , $myrow['linestatus'], ConvertSQLDate($myrow['deliverydate']) , $myrow['description']);
 					$LastDecimalPlaces = $myrow['decimalplaces'];
 					$TotalQty+= $myrow['quantityord'];
 					$TotalExtCost+= $myrow['extcost'];
 					$TotalExtPrice+= $myrow['extprice'];
 					$TotalInvQty+= $myrow['qtyinvoiced'];
 				} //END WHILE LIST LOOP
-
-
-				// Print totals
-
-				fprintf($FileHandle, '"%s","%s","%s","%s","%s",%s,%s,%s,%s,"%s","%s"' . "\n", 'Totals', _('Lines - ') . $linectr, ' ', ' ', ' ', number_format($TotalQty, $LastDecimalPlaces) , number_format($TotalExtCost, 2) , number_format($TotalExtPrice, 2) , number_format($TotalInvQty, $LastDecimalPlaces) , " ", " ");
 			}
 		}
 		else {
@@ -1439,7 +1436,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 				$summaryheader = _('Supplier Name');
 				$descriptionheader = _('Supplier Number');
 			}
-			if ($summarytype == 'itemcode' || $summarytype == 'extprice') {
+			if ($summarytype == 'itemcode' or $summarytype == 'extprice') {
 				$description = 'description';
 				$summaryheader = _('Part Number');
 				$descriptionheader = _('Part Description');
@@ -1476,7 +1473,7 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 				if ($summarytype == 'orderno') {
 					$suppname = $myrow['suppname'];
 				}
-				fprintf($FileHandle, '"%s","%s",%s,%s,%s,%s,"%s"' . "\n", $myrow[$summarytype], $myrow[$description], number_format($myrow['quantityord'], $myrow['decimalplaces']) , number_format($myrow['extcost'], 2) , number_format($myrow['extprice'], 2) , number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) , $suppname);
+				fprintf($FileHandle, '"%s","%s",%s,%s,%s,%s,"%s"' . "\n", $myrow[$summarytype], $myrow[$description], locale_number_format($myrow['quantityord'], $myrow['decimalplaces']) , locale_money_format($myrow['extcost'], $myrow['currcode']) , locale_money_format($myrow['extprice'], $myrow['currcode']) , locale_number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']) , $suppname);
 				print '<br/>';
 				$LastDecimalPlaces = $myrow['decimalplaces'];
 				$TotalQty+= $myrow['quantityord'];
@@ -1485,10 +1482,6 @@ function submitcsv(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp,
 				$TotalInvQty+= $myrow['qtyinvoiced'];
 			} //END WHILE LIST LOOP
 
-
-			// Print totals
-
-			fprintf($FileHandle, '"%s","%s",%s,%s,%s,%s,"%s"' . "\n", 'Totals', _('Lines - ') . $linectr, number_format($TotalQty, $LastDecimalPlaces) , number_format($TotalExtCost, 2) , number_format($TotalExtPrice, 2) , number_format($TotalInvQty, $LastDecimalPlaces) , ' ');
 		} // End of if ($_POST['ReportType']
 
 		fclose($FileHandle);
@@ -1532,45 +1525,44 @@ function display(&$db) //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_###
 	echo '<option selected="True" value="Equals">' . _('Equals') . '</option>';
 	echo '<option value="LIKE">' . _('Begins With') . '</option>';
 	echo '</select>';
-	echo '&nbsp&nbsp<input type="text" name="PartNumber" size="20" maxlength="20" value="';
+	echo '&nbsp&nbsp';
 	if (isset($_POST['PartNumber'])) {
-		echo $_POST['PartNumber'] . '" /></td></tr>';
+		echo '<input type="text" name="PartNumber" size="20" maxlength="20" value="' . $_POST['PartNumber'] . '" /></td></tr>';
 	}
 	else {
-		echo '" /></td></tr>';
+		echo '<input type="text" name="PartNumber" size="20" maxlength="20" value="" /></td></tr>';
 	}
 	echo '<tr><td>' . _('Supplier Number') . ':</td>';
 	echo '<td><select name="SupplierIdOp">';
 	echo '<option selected="True" value="Equals">' . _('Equals') . '</option>';
 	echo '<option value="LIKE">' . _('Begins With') . '</option>';
 	echo '</select>';
-	echo '&nbsp&nbsp<input type="text" name="SupplierId" size="10" maxlength="10" value="';
+	echo '&nbsp&nbsp';
 	if (isset($_POST['SupplierId'])) {
-		echo $_POST['SupplierId'] . '" /></td></tr>';
+		echo '<input type="text" name="SupplierId" size="10" maxlength="10" value="' . $_POST['SupplierId'] . '" /></td></tr>';
 	}
 	else {
-		echo '" /></td></tr>';
+		echo '<input type="text" name="SupplierId" size="10" maxlength="10" value="" /></td></tr>';
 	}
 	echo '<tr><td>' . _('Supplier Name') . ':</td>';
 	echo '<td><select name="SupplierNameOp">';
 	echo '<option selected="True" value="LIKE">' . _('Begins With') . '</option>';
 	echo '<option value="Equals">' . _('Equals') . '</option>';
 	echo '</select>';
-	echo '&nbsp&nbsp<input type="text" name="SupplierName" size="30" maxlength="30" value="';
+	echo '&nbsp&nbsp';
 	if (isset($_POST['SupplierName'])) {
-		echo $_POST['SupplierName'] . '" /></td></tr>';
+		echo '<input type="text" name="SupplierName" size="30" maxlength="30" value="' . $_POST['SupplierName'] . '" /></td></tr>';
 	}
 	else {
-		echo '" /></td></tr>';
+		echo '<input type="text" name="SupplierName" size="30" maxlength="30" value="" /></td></tr>';
 	}
 	echo '<tr><td>' . _('Order Number') . ':</td>';
 	echo '<td>' . _('Equals') . ':&nbsp&nbsp';
-	echo '<input type="text" name="OrderNo" size="10" maxlength="10" value="';
 	if (isset($_POST['OrderNo'])) {
-		echo $_POST['OrderNo'] . '" /></td></tr>';
+		echo '<input type="text" name="OrderNo" size="10" maxlength="10" value="' . $_POST['OrderNo'] . '" /></td></tr>';
 	}
 	else {
-		echo '" /></td></tr>';
+		echo '<input type="text" name="OrderNo" size="10" maxlength="10" value="" /></td></tr>';
 	}
 	echo '<tr><td>' . _('Line Item Status') . ':</td>';
 	echo '<td><select name="LineStatus">';

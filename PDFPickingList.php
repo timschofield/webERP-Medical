@@ -213,6 +213,7 @@ for ($i=0;$i<sizeof($OrdersToPick);$i++){
 		/* There are no previous picking lists for this order */
 			$sql = "SELECT salesorderdetails.stkcode,
 				stockmaster.description,
+				stockmaster.decimalplaces,
 				salesorderdetails.orderlineno,
 				salesorderdetails.quantity,
 				salesorderdetails.qtyinvoiced,
@@ -228,6 +229,7 @@ for ($i=0;$i<sizeof($OrdersToPick);$i++){
 		 */
 			$sql = "SELECT salesorderdetails.stkcode,
 				stockmaster.description,
+				stockmaster.decimalplaces,
 				salesorderdetails.orderlineno,
 				salesorderdetails.quantity,
 				salesorderdetails.qtyinvoiced,
@@ -283,9 +285,9 @@ for ($i=0;$i<sizeof($OrdersToPick);$i++){
 					$myrow2['qtyexpected']=0;
 					$myrow2['qtypicked']=0;
 				}
-				$DisplayQty = number_format($myrow2['quantity'],2);
-				$DisplayPrevDel = number_format($myrow2['qtyinvoiced'],2);
-				$DisplayQtySupplied = number_format($myrow2['quantity'] - $myrow2['qtyinvoiced']-$myrow2['qtyexpected']-$myrow2['qtypicked'],2);
+				$DisplayQty = locale_number_format($myrow2['quantity'],$myrow2['decimalplaces']);
+				$DisplayPrevDel = locale_number_format($myrow2['qtyinvoiced'],$myrow2['decimalplaces']);
+				$DisplayQtySupplied = locale_number_format($myrow2['quantity'] - $myrow2['qtyinvoiced']-$myrow2['qtyexpected']-$myrow2['qtypicked'],$myrow2['decimalplaces']);
 				$itemdesc = $myrow2['description'] . ' - ' . $myrow2['narrative'];
 				$sql="INSERT INTO pickinglistdetails
 					VALUES(

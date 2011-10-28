@@ -81,7 +81,7 @@ if ($AlreadyOnThisOrder!=1){
 				$UpdateDB = 'Yes';
 				$result = DB_query("SELECT MAX(orderlineno) AS newlineno FROM  salesorderdetails WHERE orderno='" . $_SESSION['ExistingOrder'] . "'",$db);
 				$MaxNumRow = DB_fetch_row($result);
-				if ($MaxNumRow[0] != "" && $MaxNumRow[0] > 0) {
+				if ($MaxNumRow[0] != "" and $MaxNumRow[0] > 0) {
 					$NewLineNo = $MaxNumRow[0]+1;
 				} else {
 					$NewLineNo = 0;
@@ -100,7 +100,7 @@ if ($AlreadyOnThisOrder!=1){
 										AND discountcategory ='" . $myrow['discountcategory'] . "'
 										AND quantitybreak <" . $NewItemQty,$db);
 				$DiscCatRow = DB_fetch_row($result);
-				if ($DiscCatRow[0] != "" && $DiscCatRow[0] > 0) {
+				if ($DiscCatRow[0] != '' and $DiscCatRow[0] > 0) {
 					$Discount = $DiscCatRow[0];
 				} else {
 					$Discount = 0;
@@ -161,7 +161,6 @@ if ($AlreadyOnThisOrder!=1){
 															$myItemRow['nextserialno'],
 															$ExRate,
 															$ConversionFactor);
-
 			}
 		 } else {
 			prnMsg(_('The item code') . ' ' . $NewItem . ' ' . _('does not have a cost set up and order entry is set up to prohibit sales of items with no cost data entered'),'warn');

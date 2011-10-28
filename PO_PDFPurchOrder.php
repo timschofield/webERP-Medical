@@ -4,7 +4,7 @@
 include('includes/session.inc');
 include('includes/SQL_CommonFunctions.inc');
 include('includes/DefinePOClass.php');
-if(!isset($_GET['OrderNo']) && !isset($_POST['OrderNo'])){
+if(!isset($_GET['OrderNo']) and !isset($_POST['OrderNo'])){
 	$title = _('Select a Purchase Order');
 	include('includes/header.inc');
 	echo '<div class="centre"><br /><br /><br />';
@@ -50,9 +50,9 @@ if ($OrderStatus != PurchOrder::STATUS_AUTHORISED and $OrderStatus != PurchOrder
 	exit;
 }
 $ViewingOnly = 0;
-if (isset($_GET['ViewingOnly']) && $_GET['ViewingOnly']!='') {
+if (isset($_GET['ViewingOnly']) and $_GET['ViewingOnly']!='') {
 	$ViewingOnly = $_GET['ViewingOnly'];
-} elseif (isset($_POST['ViewingOnly']) && $_POST['ViewingOnly']!='') {
+} elseif (isset($_POST['ViewingOnly']) and $_POST['ViewingOnly']!='') {
 	$ViewingOnly = $_POST['ViewingOnly'];
 }
 /* If we are previewing the order then we dont
@@ -60,12 +60,12 @@ if (isset($_GET['ViewingOnly']) && $_GET['ViewingOnly']!='') {
 if ($OrderNo != 'Preview') {
 	$_POST['PrintOrEmail']='Print';
 }
-if (isset($_POST['DoIt'])  AND ($_POST['PrintOrEmail']=='Print' || $ViewingOnly==1) ){
+if (isset($_POST['DoIt'])  and ($_POST['PrintOrEmail']=='Print' or $ViewingOnly==1) ){
 	$MakePDFThenDisplayIt = True;
 } elseif (isset($_POST['DoIt']) AND $_POST['PrintOrEmail']=='Email' AND strlen($_POST['EmailTo'])>6){
 	$MakePDFThenEmailIt = True;
 }
-if (isset($OrderNo) && $OrderNo != "" && $OrderNo > 0 && $OrderNo != 'Preview'){
+if (isset($OrderNo) and $OrderNo != "" and $OrderNo > 0 and $OrderNo != 'Preview'){
 	//Check this up front. Note that the myrow recordset is carried into the actual make pdf section
 	/*retrieve the order details from the database to print */
 	$ErrMsg = _('There was a problem retrieving the purchase order header details for Order Number'). ' ' . $OrderNo .
@@ -209,15 +209,15 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 				$POLine['quantityord']=999.99;
 				$POLine['decimalplaces']=2;
 			}
-			$DisplayQty = number_format($POLine['quantityord'],$POLine['decimalplaces']);
+			$DisplayQty = locale_number_format($POLine['quantityord'],$POLine['decimalplaces']);
 			if ($_POST['ShowAmounts']=='Yes'){
-				$DisplayPrice = number_format($POLine['unitprice'],2);
+				$DisplayPrice = locale_money_format($POLine['unitprice'],$POHeader['currcode']);
 			} else {
 				$DisplayPrice = "----";
 			}
 			$DisplayDelDate = ConvertSQLDate($POLine['deliverydate'],2);
 			if ($_POST['ShowAmounts']=='Yes'){
-				$DisplayLineTotal = number_format($POLine['unitprice']*$POLine['quantityord'],2);
+				$DisplayLineTotal = locale_money_format($POLine['unitprice']*$POLine['quantityord'],$POHeader['currcode']);
 			} else {
 				$DisplayLineTotal = "----";
 			}
@@ -271,7 +271,7 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 				include ('includes/PO_PDFOrderPageHeader.inc');
 		} //end if need a new page headed up
 		if ($_POST['ShowAmounts']=='Yes'){
-			$DisplayOrderTotal = number_format($OrderTotal,2);
+			$DisplayOrderTotal = locale_money_format($OrderTotal,$POHeader['currcode']);
 		} else {
 			$DisplayOrderTotal = "----";
 		}
@@ -313,7 +313,7 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 			prnMsg( _('Emailing Purchase order'). ' ' . $OrderNo.' ' . _('to') .' ' . $_POST['EmailTo'] . ' ' . _('failed'), 'error');
 		}
 	}
-	if ($ViewingOnly==0 && !$failed) {
+	if ($ViewingOnly==0 and !$failed) {
 		$commentsql="SELECT initiator,stat_comment FROM purchorders WHERE orderno='".$OrderNo."'";
 		$commentresult=DB_query($commentsql,$db);
 		$commentrow=DB_fetch_array($commentresult);
@@ -345,7 +345,7 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	if ($ViewingOnly==1){
-		echo '<input type="hidden" name="ViewingOnly" value=1>';
+		echo '<input type="hidden" name="ViewingOnly" value="1" />';
 	}
 	echo '<input type="hidden" name="OrderNo" value="'. $OrderNo. '" />';
 	echo '<table class="selection"><tr><td>'. _('Print or Email the Order'). '</td><td>

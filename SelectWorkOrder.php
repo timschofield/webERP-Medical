@@ -156,7 +156,7 @@ if (!isset($StockID)) {
 
 	echo '<table class="selection">
 			<tr>
-				<th colspan="6"><font size="3" color="navy">' . _('To search for work orders for a specific item use the item selection facilities below') . '</font></th>
+				<th colspan="6"><font size="3" color="#616161">' . _('To search for work orders for a specific item use the item selection facilities below') . '</font></th>
 			</tr>
 	  	<tr>
 	  		<td><font size="1">' . _('Select a stock category') . ':</font>
@@ -239,7 +239,7 @@ if (isset($StockItemsResult)) {
 	} else {
 		$ClosedOrOpen = 1;
 	}
-	if (isset($_REQUEST['WO']) && $_REQUEST['WO'] !='') {
+	if (isset($_REQUEST['WO']) and $_REQUEST['WO'] !='') {
 			$SQL = "SELECT workorders.wo,
 					woitems.stockid,
 					stockmaster.description,

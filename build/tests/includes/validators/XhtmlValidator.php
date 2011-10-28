@@ -834,12 +834,12 @@ class XhtmlValidator
 
     function doesAttributeNeedsValidation($tag, $attribute)
     {
-        return isset($this->_tags[$tag]['attributes'][$attribute]) || isset($this->_tags[$tag]['required']) && in_array($attribute, $this->_tags[$tag]['required']);
+        return isset($this->_tags[$tag]['attributes'][$attribute]) or isset($this->_tags[$tag]['required']) and in_array($attribute, $this->_tags[$tag]['required']);
     }
 
     function validateAttribute($tag, $attribute, $value = null)
     {
-        if (isset($this->_tags[$tag]['attributes'][$attribute]) && (mb_strlen($value) > 0)) {
+        if (isset($this->_tags[$tag]['attributes'][$attribute]) and (mb_strlen($value) > 0)) {
             if (!preg_match($this->_tags[$tag]['attributes'][$attribute], $value)) {
                 $this->addError($this->translate("Invalid value on &lt;%tag %attribute=\"%value\"... Valid values must match the pattern \"%pattern\"", array(
                 '%tag' => $tag,
@@ -854,7 +854,7 @@ class XhtmlValidator
                 ));
             }
         }
-        if (isset($this->_tags[$tag]['required']) && in_array($attribute, $this->_tags[$tag]['required']) && (mb_strlen($value) == 0)) {
+        if (isset($this->_tags[$tag]['required']) and in_array($attribute, $this->_tags[$tag]['required']) and (mb_strlen($value) == 0)) {
             $this->addError($this->translate("Missing required attribute %attribute on &lt;%tag&gt;", array(
             '%tag' => $tag,
             '%attribute' => $attribute
@@ -950,6 +950,11 @@ class XhtmlValidator
         echo '<ul><li>'.join("</li>\n<li>", $this->getErrors()) .'</li></ul>';
     }
 
+    function logErrors()
+    {
+		error_log(print_r($this->getErrors(), true), 3, '/home/tim/weberp'.date('Ymd').'.log');
+    }
+
     function getPossibleTagAttributes($tag)
     {
         static $cache;
@@ -991,7 +996,7 @@ class XhtmlValidator
 
     function validateUniquenessOfIds()
     {
-        if (isset($this->_tagIdCounter) && max(array_values($this->_tagIdCounter)) > 1) {
+        if (isset($this->_tagIdCounter) and max(array_values($this->_tagIdCounter)) > 1) {
             foreach($this->_tagIdCounter as $id => $count) {
                 if ($count > 1) {
                     $this->addError($this->translate('You have repeated the id %id %count times on your xhtml code. Duplicated Ids found on %tags', array(
@@ -1012,7 +1017,7 @@ class XhtmlValidator
     function getUniqueAttributesAndEventsForTag($tag)
     {
         $result = array();
-        if (isset($this->_tags[$tag]['attributes']) && is_array($this->_tags[$tag]['attributes'])) {
+        if (isset($this->_tags[$tag]['attributes']) and is_array($this->_tags[$tag]['attributes'])) {
             foreach($this->_tags[$tag]['attributes'] as $k => $candidate) {
                 $result[] = is_numeric($k) ? $candidate : $k;
             }
@@ -1023,9 +1028,9 @@ class XhtmlValidator
     function getDefaultAttributesAndEventsForTag($tag)
     {
         $default = array();
-        if (isset($this->_tags[$tag]) || in_array($tag, $this->_tags)) {
+        if (isset($this->_tags[$tag]) or in_array($tag, $this->_tags)) {
             foreach($this->getDefaultAttributesAndEventsForTags() as $defaults) {
-                if ((isset($defaults['except']) && in_array($tag, $defaults['except'])) || (isset($defaults['only']) && !in_array($tag, $defaults['only']))) {
+                if ((isset($defaults['except']) and in_array($tag, $defaults['except'])) or (isset($defaults['only']) and !in_array($tag, $defaults['only']))) {
                     continue;
                 }
                 foreach(isset($defaults['attributes']) ? $defaults['attributes'] : $defaults['events'] as $k => $candidate) {
@@ -1394,7 +1399,7 @@ class XhtmlValidator
     {
         // Simply check that the 'previous' tag allows CDATA
         $previous = $this->_stack[count($this->_stack) -1];
-        if ($cdata != '' && in_array($previous, array(
+        if ($cdata != '' and in_array($previous, array(
         'base',
         'area',
         'basefont',
@@ -1462,8 +1467,10 @@ class XhtmlValidator
     */
     function highlight($text, $phrase, $highlighter = '<strong class="highlight">\1</strong>')
     {
+		$highlighter='\1';
         $phrase = is_array($phrase) ? join('|',array_map('preg_quote',$phrase)) : preg_quote($phrase);
-        return !empty($phrase) ? preg_replace('/('.$phrase.')/i', $highlighter,$text) : $text;
+        $phrase = is_array($phrase) ? join('|',$phrase) : $phrase;
+        return !empty($phrase) ? preg_replace('/('.$phrase.')/i', $highlighter,html_entity_decode($text)) : html_entity_decode($text);
     }
 
     function rgbToHex()
@@ -1499,7 +1506,7 @@ class XhtmlValidator
 
     function translate($string, $args = null)
     {
-        if(isset($args) && is_array($args)){
+        if(isset($args) and is_array($args)){
             $string = @str_replace(array_keys($args), array_values($args),$string);
         }
         return $string;

@@ -8,8 +8,8 @@ if (isset($_SESSION['timezone']) && strlen($_SESSION['timezone']) > 0 ) {
 }
 
 $row = 1;
-$handle = fopen('timezone.csv', "r");
-while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+$handle = fopen('timezone.csv', 'r');
+while (($data = fgetcsv($handle, 1000, ',')) !== FALSE) {
     $num = count($data);
     $row++;
     for ($c=0; $c < $num; $c++) {

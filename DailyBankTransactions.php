@@ -67,6 +67,7 @@ if (!isset($_POST['Show'])) {
 				banktrans.exrate,
 				banktrans.banktranstype,
 				banktrans.transdate,
+				banktrans.ref,
 				bankaccounts.bankaccountname,
 				banktrans.userid,
 				banktrans.ref,
@@ -94,6 +95,7 @@ if (!isset($_POST['Show'])) {
 		echo '<tr>
 						<th>' . ('Date') . '</th>
 						<th>' . ('Input By') . '</th>
+
 						<th>'._('Transaction type').'</th>
 						<th>'._('Reference').'</th>
 						<th>'._('Amount in').' '.$BankDetailRow['currcode'].'</th>
@@ -115,10 +117,10 @@ if (!isset($_POST['Show'])) {
 							<td>'. $myrow['userid'] . '</td>
 							<td>'.$myrow['typename'].'</td>
 							<td>'.$myrow['ref'].'</td>
-							<td class="number">'.number_format($myrow['amount'],2).'</td>
-							<td class="number">'.number_format($AccountCurrTotal,2).'</td>
-							<td class="number">'.number_format($myrow['amount']/$myrow['functionalexrate']/$myrow['exrate'],2).'</td>
-							<td class="number">'.number_format($LocalCurrTotal,2).'</td>
+							<td class="number">'.locale_money_format($myrow['amount'],$myrow['currcode']).'</td>
+							<td class="number">'.locale_money_format($AccountCurrTotal,$myrow['currcode']).'</td>
+							<td class="number">'.locale_money_format($myrow['amount']/$myrow['functionalexrate']/$myrow['exrate'],$_SESSION['CompanyRecord']['currencydefault']).'</td>
+							<td class="number">'.locale_money_format($LocalCurrTotal,$_SESSION['CompanyRecord']['currencydefault']).'</td>
 						</tr>';
 		}
 		echo '<tr><th colspan=8>' . _('Total number of receipts') . ' - ' . DB_num_rows($result) . '</th></tr>';

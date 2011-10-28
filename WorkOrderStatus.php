@@ -53,12 +53,12 @@ include('includes/header.inc');
 		</tr>
 	 	<tr>
 			<td class="label">' . _('Quantity Ordered') . ':</td>
-			<td class="number">' . number_format($WORow['qtyreqd'],$WORow['decimalplaces']) . '</td>
+			<td class="number">' . locale_number_format($WORow['qtyreqd'],$WORow['decimalplaces']) . '</td>
 			<td colspan="2">' . $WORow['units'] . '</td>
 		</tr>
 	 	<tr>
 			<td class="label">' . _('Already Received') . ':</td>
-			<td class="number">' . number_format($WORow['qtyrecd'],$WORow['decimalplaces']) . '</td>
+			<td class="number">' . locale_number_format($WORow['qtyrecd'],$WORow['decimalplaces']) . '</td>
 			<td colspan="2">' . $WORow['units'] . '</td>
 		</tr>
 	 	<tr>
@@ -75,12 +75,12 @@ include('includes/header.inc');
 				WHERE loccode='" . $_POST['FromLocation'] . "'",
 				$db);
 		$LocRow = DB_fetch_array($LocResult);
-		echo $LocRow['locationname'];
-		echo '<tr><td colspan="4"></td></tr>';
+
 		echo '</td></tr></table><br />';
 
 		//set up options for selection of the item to be issued to the WO
-		echo '<table class="selection"><tr><th colspan="5"><font size="2" color="navy">' . _('Material Requirements For this Work Order') . '</font></th></tr>';
+		echo '<table class="selection"><tr><th colspan="5"><font size="2" color="#616161">' . _('Material Requirements For this Work Order') . '</font></th></tr>';
+		echo '<tr><th colspan="4"><font size="2" color="#616161">' . _('Stock Issued From') . ' - ' . $LocRow['locationname'] . '</font></th></tr>';
 		echo '<tr><th colspan="2">' . _('Item') . '</th>
 				<th>' . _('Qty Required') . '</th>
 				<th>' . _('Qty Issued') . '</th>
@@ -110,8 +110,8 @@ include('includes/header.inc');
 						$db);
 			$IssuedAlreadyRow = DB_fetch_row($IssuedAlreadyResult);
 
-			echo '<td align="right">' . number_format($WORow['qtyreqd']*$RequirementsRow['qtypu'],$RequirementsRow['decimalplaces']) . '</td>
-				<td align="right">' . number_format($IssuedAlreadyRow[0],$RequirementsRow['decimalplaces']) . '</td></tr>';
+			echo '<td class="number">' . locale_number_format($WORow['qtyreqd']*$RequirementsRow['qtypu'],$RequirementsRow['decimalplaces']) . '</td>
+				<td class="number">' . locale_number_format($IssuedAlreadyRow[0],$RequirementsRow['decimalplaces']) . '</td></tr>';
 		}
 
 		echo '</table>';

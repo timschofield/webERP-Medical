@@ -71,14 +71,14 @@ if (isset($_POST['submit']) AND isset($_POST['NewCompany'])) {
 				if ($dbType=='postgres'){
 
 					$PgConnStr = 'dbname=' . $_POST['NewCompany'];
-					if ( isset($host) && ($host != "")) {
+					if ( isset($host) and ($host != "")) {
 						$PgConnStr = 'host=' . $host . ' ' . $PgConnStr;
 					}
 
-					if (isset( $dbuser ) && ($dbuser != "")) {
+					if (isset( $dbuser ) and ($dbuser != "")) {
 						// if we have a user we need to use password if supplied
 						$PgConnStr .= " user=".$dbuser;
-						if ( isset( $dbpassword ) && ($dbpassword != "") ) {
+						if ( isset( $dbpassword ) and ($dbpassword != "") ) {
 							$PgConnStr .= " password=".$dbpassword;
 						}
 					}

@@ -39,7 +39,7 @@ if (isset($_POST['ResetPart'])){
 	 unset($SelectedStockItem);
 }
 
-if (isset($OrderNumber) && $OrderNumber!='') {
+if (isset($OrderNumber) and $OrderNumber!='') {
 	if (!is_numeric($OrderNumber)){
 		echo '<br /><b>' . _('The Order Number entered') . ' <U>' . _('MUST') . '</U> ' . _('be numeric') . '.</b><br />';
 		unset ($OrderNumber);
@@ -62,12 +62,13 @@ if (isset($_POST['SearchParts'])) {
 	if (isset($_POST['Keywords']) AND isset($_POST['StockCode'])) {
 		echo '<div class="page_help_text">' ._('Stock description keywords have been used in preference to the Stock code extract entered') . '.</div>';
 	}
-	If ($_POST['Keywords']) {
+	if ($_POST['Keywords']) {
 		//insert wildcard characters in spaces
 		$SearchString = '%' . str_replace(' ', '%', $_POST['Keywords']) . '%';
 
 		$SQL = "SELECT stockmaster.stockid,
 						stockmaster.description,
+						stockmaster.decimalplaces,
 						SUM(locstock.quantity) AS qoh,
 						stockmaster.units,
 						SUM(purchorderdetails.quantityord-purchorderdetails.quantityrecd) AS qord
@@ -88,6 +89,7 @@ if (isset($_POST['SearchParts'])) {
 	 } elseif ($_POST['StockCode']){
 		$SQL = "SELECT stockmaster.stockid,
 				stockmaster.description,
+				stockmaster.decimalplaces,
 				SUM(locstock.quantity) AS qoh,
 				SUM(purchorderdetails.quantityord-purchorderdetails.quantityrecd) AS qord,
 				stockmaster.units
@@ -106,6 +108,7 @@ if (isset($_POST['SearchParts'])) {
 	 } elseif (!$_POST['StockCode'] AND !$_POST['Keywords']) {
 		$SQL = "SELECT stockmaster.stockid,
 				stockmaster.description,
+				stockmaster.decimalplaces,
 				SUM(locstock.quantity) AS qoh,
 				stockmaster.units,
 				SUM(purchorderdetails.quantityord-purchorderdetails.quantityrecd) AS qord
@@ -237,8 +240,8 @@ if (isset($StockItemsResult)) {
 			<td>%s</td></tr>',
 			$myrow['stockid'],
 			$myrow['description'],
-			$myrow['qoh'],
-			$myrow['qord'],
+			locale_number_format($myrow['qoh'], $myrow['decimalplaces']),
+			locale_number_format($myrow['qord'], $myrow['decimalplaces']),
 			$myrow['units']);
 
 		$j++;
@@ -270,7 +273,7 @@ else {
 		$StatusCriteria = " AND purchorders.status='Cancelled' ";
 	}
 
-	if (isset($OrderNumber) && $OrderNumber !='') {
+	if (isset($OrderNumber) and $OrderNumber !='') {
 		$SQL = "SELECT purchorders.orderno,
 										suppliers.suppname,
 										purchorders.orddate,
@@ -492,7 +495,7 @@ else {
 		$s2 = '<a target="_blank" href="' . $rootpath . '/PO_PDFPurchOrder.php?OrderNo=' . $myrow['orderno'] . '&realorderno=' . $myrow['realorderno'] . '&ViewingOnly=1">' . $myrow['realorderno']. '</a>';
 
 		$FormatedOrderDate = ConvertSQLDate($myrow['orddate']);
-		$FormatedOrderValue = number_format($myrow['ordervalue'],2);
+		$FormatedOrderValue = locale_money_format($myrow['ordervalue'],$myrow['currcode']);
 
 		echo '<td>' . $myrow['orderno'] . '</td>
 					<td>' . $FormatedOrderDate . '</td>

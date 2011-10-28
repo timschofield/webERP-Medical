@@ -188,6 +188,7 @@ if (isset($_POST['Update'])
 			$_SESSION['Items'.$identifier]->Quotation = $_POST['Quotation'];
 		} else {
 			$_SESSION['Items'.$identifier]->DeliverTo = $_POST['DeliverTo'];
+			$_SESSION['Items'.$identifier]->BuyerName = $_POST['BuyerName'];
 			$_SESSION['Items'.$identifier]->DelAdd1 = $_POST['BrAdd1'];
 			$_SESSION['Items'.$identifier]->DelAdd2 = $_POST['BrAdd2'];
 			$_SESSION['Items'.$identifier]->DelAdd3 = $_POST['BrAdd3'];
@@ -219,7 +220,7 @@ if (isset($_POST['Update'])
 		and show a link to set them up
 		- if shippers defined but the default shipper is bogus then use the first shipper defined
 		*/
-		if ((isset($BestShipper) and $BestShipper=='') AND ($_POST['ShipVia']=='' || !isset($_POST['ShipVia']))){
+		if ((isset($BestShipper) and $BestShipper=='') and ($_POST['ShipVia']=='' or !isset($_POST['ShipVia']))){
 			$sql =  "SELECT shipper_id
 						FROM shippers
 						WHERE shipper_id='" . $_SESSION['Default_Shipper']."'";
@@ -277,7 +278,7 @@ If (isset($_POST['ProcessOrder'])) {
 	if ($InputErrors ==0) {
 		$OK_to_PROCESS = 1;
 	}
-	If ($_POST['FreightCost'] != $OldFreightCost && $_SESSION['DoFreightCalc']==True){
+	If ($_POST['FreightCost'] != $OldFreightCost and $_SESSION['DoFreightCalc']==True){
 		$OK_to_PROCESS = 0;
 		prnMsg(_('The freight charge has been updated') . '. ' . _('Please reconfirm that the order and the freight charges are acceptable and then confirm the order again if OK') .' <br /> '. _('The new freight cost is') .' ' . $_POST['FreightCost'] . ' ' . _('and the previously calculated freight cost was') .' '. $OldFreightCost,'warn');
 	} else {
@@ -296,7 +297,7 @@ If (isset($_POST['ProcessOrder'])) {
 
 
 		$myrow = DB_fetch_array($TermsResult);
-		if ($myrow['daysbeforedue']==0 && $myrow['dayinfollowingmonth']==0){
+		if ($myrow['daysbeforedue']==0 and $myrow['dayinfollowingmonth']==0){
 
 /* THIS IS A CASH SALE NEED TO GO OFF TO 3RD PARTY SITE SENDING MERCHANT ACCOUNT DETAILS AND CHECK FOR APPROVAL FROM 3RD PARTY SITE BEFORE CONTINUING TO PROCESS THE ORDER
 
@@ -312,7 +313,7 @@ UNTIL ONLINE CREDIT CARD PROCESSING IS PERFORMED ASSUME OK TO PROCESS
 	} #end if else freight charge not altered
 } #end if process order
 
-if (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 && $_SESSION['ExistingOrder']==0){
+if (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 and $_SESSION['ExistingOrder']==0){
 
 /* finally write the order header to the database and then the order line details */
 
@@ -334,6 +335,7 @@ if (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 && $_SESSION['ExistingOrder']=
 								ordertype,
 								shipvia,
 								deliverto,
+								buyername,
 								deladd1,
 								deladd2,
 								deladd3,
@@ -355,10 +357,11 @@ if (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 && $_SESSION['ExistingOrder']=
 								'" . $_SESSION['Items'.$identifier]->Branch . "',
 								'". DB_escape_string($_SESSION['Items'.$identifier]->CustRef) ."',
 								'". DB_escape_string($_SESSION['Items'.$identifier]->Comments) ."',
-								'" . Date("Y-m-d H:i") . "',
+								'" . Date('Y-m-d H:i') . "',
 								'" . $_SESSION['Items'.$identifier]->DefaultSalesType . "',
 								'" . $_POST['ShipVia'] ."',
-								'". DB_escape_string($_SESSION['Items'.$identifier]->DeliverTo) . "',
+								'" . DB_escape_string($_SESSION['Items'.$identifier]->DeliverTo) . "',
+								'" . DB_escape_string($_SESSION['Items'.$identifier]->BuyerName) . "',
 								'" . DB_escape_string($_SESSION['Items'.$identifier]->DelAdd1) . "',
 								'" . DB_escape_string($_SESSION['Items'.$identifier]->DelAdd2) . "',
 								'" . DB_escape_string($_SESSION['Items'.$identifier]->DelAdd3) . "',
@@ -414,6 +417,23 @@ if (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 && $_SESSION['ExistingOrder']=
 		$ErrMsg = _('Unable to add the sales order line');
 		$Ins_LineItemResult = DB_query($LineItemsSQL,$db,$ErrMsg,$DbgMsg,true);
 
+		if (count($StockItem->ItemProperties) > 0) {
+			foreach ($StockItem->ItemProperties as $PropertyID=>$PropertyValue) {
+				$ItemPropertiesSQL = "INSERT INTO stockorderitemproperties (
+												stockid,
+												orderno,
+												orderlineno,
+												stkcatpropid,
+												value)
+											VALUES (
+												'" . $StockItem->StockID . "',
+												'" . $OrderNo . "',
+												'" . $StockItem->LineNumber . "',
+												'" . $PropertyID . "',
+												'" . $PropertyValue . "')";
+				$ItemPropertyResult = DB_query($ItemPropertiesSQL,$db,$ErrMsg,$DbgMsg,true);
+			}
+		}
 		/*Now check to see if the item is manufactured
 		 * 			and AutoCreateWOs is on
 		 * 			and it is a real order (not just a quotation)*/
@@ -628,7 +648,7 @@ if (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 && $_SESSION['ExistingOrder']=
 	include('includes/footer.inc');
 	exit;
 
-} elseif (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 && $_SESSION['ExistingOrder']!=0){
+} elseif (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 and $_SESSION['ExistingOrder']!=0){
 
 /* update the order header then update the old order line details and insert the new lines */
 
@@ -729,6 +749,7 @@ if (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 && $_SESSION['ExistingOrder']=
 				quotedate = '" . FormatDateForSQL(DB_escape_string($_SESSION['Items'.$identifier]->QuoteDate)) . "',
 				confirmeddate = '" . FormatDateForSQL(DB_escape_string($_SESSION['Items'.$identifier]->ConfirmedDate)) . "',
 				deliverto = '" . DB_escape_string($_SESSION['Items'.$identifier]->DeliverTo) . "',
+				buyername = '" . DB_escape_string($_SESSION['Items'.$identifier]->BuyerName) . "',
 				deladd1 = '" . DB_escape_string($_SESSION['Items'.$identifier]->DelAdd1) . "',
 				deladd2 = '" . DB_escape_string($_SESSION['Items'.$identifier]->DelAdd2) . "',
 				deladd3 = '" . DB_escape_string($_SESSION['Items'.$identifier]->DelAdd3) . "',
@@ -772,6 +793,16 @@ if (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 && $_SESSION['ExistingOrder']=
 		$ErrMsg = _('The updated order line cannot be modified because');
 		$Upd_LineItemResult = DB_query($LineItemsSQL,$db,$ErrMsg,$DbgMsg,true);
 
+		foreach ($StockItem->ItemProperties as $PropertyID=>$PropertyValue) {
+			$ItemPropertiesSQL = "UPDATE stockorderitemproperties
+											SET value='" . $PropertyValue . "'
+											WHERE stockid='" . $StockItem->StockID . "'
+												AND orderno='" . $_SESSION['Items'.$identifier]->OrderNo . "'
+												AND orderlineno='" . $StockItem->LineNumber . "'
+												AND stkcatpropid='" . $PropertyID . "'";
+			$ItemPropertyResult = DB_query($ItemPropertiesSQL,$db,$ErrMsg,$DbgMsg,true);
+		}
+
 	} /* updated line items into sales order details */
 
 	$Result=DB_Txn_Commit($db);
@@ -806,9 +837,9 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 
 	echo '<table cellpading="2" class="selection">';
 	if ($_SESSION['Items'.$identifier]->Quotation==1){
-		echo '<tr><th colspan="7"><font size="2" color="navy">'._('Quotation Summary').'</font></th></tr>';
+		echo '<tr><th colspan="7"><font size="2" color="#616161">'._('Quotation Summary').'</font></th></tr>';
 	} else {
-		echo '<tr><th colspan="7"><font size="2" color="navy">'._('Order Summary').'</font></th></tr>';
+		echo '<tr><th colspan="7"><font size="2" color="#616161">'._('Order Summary').'</font></th></tr>';
 	}
 	echo '<tr>
 			<th>'. _('Item Code') .'</th>
@@ -828,10 +859,10 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 	foreach ($_SESSION['Items'.$identifier]->LineItems as $StockItem) {
 
 		$LineTotal = $StockItem->Quantity * $StockItem->Price * (1 - $StockItem->DiscountPercent);
-		$DisplayLineTotal = number_format($LineTotal,2);
-		$DisplayPrice = number_format($StockItem->Price,2);
-		$DisplayQuantity = number_format($StockItem->Quantity,$StockItem->DecimalPlaces);
-		$DisplayDiscount = number_format(($StockItem->DiscountPercent * 100),2);
+		$DisplayLineTotal = locale_money_format($LineTotal,$_SESSION['Items'.$identifier]->DefaultCurrency);
+		$DisplayPrice = locale_money_format($StockItem->Price,$_SESSION['Items'.$identifier]->DefaultCurrency);
+		$DisplayQuantity = locale_number_format($StockItem->Quantity,$StockItem->DecimalPlaces);
+		$DisplayDiscount = locale_number_format(($StockItem->DiscountPercent * 100),2);
 
 
 		if ($k==1){
@@ -856,14 +887,14 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 		$_SESSION['Items'.$identifier]->totalWeight = $_SESSION['Items'.$identifier]->totalWeight + ($StockItem->Quantity * $StockItem->Weight);
 	}
 
-	$DisplayTotal = number_format($_SESSION['Items'.$identifier]->total,2);
+	$DisplayTotal = locale_money_format($_SESSION['Items'.$identifier]->total,$_SESSION['Items'.$identifier]->DefaultCurrency);
 	echo '<tr class="EvenTableRows">
 		<td colspan="6" class="number"><b>'. _('TOTAL Excl Tax/Freight') .'</b></td>
 		<td class="number">'.$DisplayTotal.'</td>
 	</tr>';
 
-	$DisplayVolume = number_format($_SESSION['Items'.$identifier]->totalVolume,2);
-	$DisplayWeight = number_format($_SESSION['Items'.$identifier]->totalWeight,2);
+	$DisplayVolume = locale_number_format($_SESSION['Items'.$identifier]->totalVolume,2);
+	$DisplayWeight = locale_number_format($_SESSION['Items'.$identifier]->totalWeight,2);
 	echo '<br /><tr class="EvenTableRows"><td colspan="3"></td>
 		<td>'. _('Total Weight') .':</td>
 		<td class="number">'.$DisplayWeight.'</td>
@@ -891,9 +922,9 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 	foreach ($_SESSION['Items'.$identifier]->LineItems as $StockItem) {
 
 		$LineTotal = $StockItem->Quantity * $StockItem->Price * (1 - $StockItem->DiscountPercent);
-		$DisplayLineTotal = number_format($LineTotal,2);
-		$DisplayPrice = number_format($StockItem->Price,2);
-		$DisplayQuantity = number_format($StockItem->Quantity,$StockItem->DecimalPlaces);
+		$DisplayLineTotal = locale_money_format($LineTotal,$_SESSION['Items'.$identifier]->DefaultCurrency);
+		$DisplayPrice = locale_money_format($StockItem->Price,$_SESSION['Items'.$identifier]->DefaultCurrency);
+		$DisplayQuantity = locale_number_format($StockItem->Quantity,$StockItem->DecimalPlaces);
 
 		if ($k==1){
 			echo '<tr class="OddTableRows">';
@@ -915,7 +946,7 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 
 	}
 
-	$DisplayTotal = number_format($_SESSION['Items'.$identifier]->total,2);
+	$DisplayTotal = locale_money_format($_SESSION['Items'.$identifier]->total,$_SESSION['Items'.$identifier]->DefaultCurrency);
 	echo '<table class="selection"><tr>
 		<td>'. _('Total Weight') .':</td>
 		<td>'.$DisplayWeight .'</td>
@@ -923,8 +954,8 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 		<td>'.$DisplayVolume .'</td>
 	</tr></table>';
 
-	$DisplayVolume = number_format($_SESSION['Items'.$identifier]->totalVolume,2);
-	$DisplayWeight = number_format($_SESSION['Items'.$identifier]->totalWeight,2);
+	$DisplayVolume = locale_number_format($_SESSION['Items'.$identifier]->totalVolume,2);
+	$DisplayWeight = locale_number_format($_SESSION['Items'.$identifier]->totalWeight,2);
 	echo '<table class="selection"><tr>
 		<td>'. _('Total Weight') .':</td>
 		<td>'. $DisplayWeight .'</td>
@@ -935,7 +966,7 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 }
 
 echo '<br /><table  class="selection">';
-echo '<tr><th colspan="2"><font color="navy" size="3">'._('Delivery Details').'</font></th></tr>';
+echo '<tr><th colspan="2"><font color="#616161" size="3">'._('Delivery Details').'</font></th></tr>';
 echo '<tr>
 		<td>'. _('Deliver To') .':</td>
 		<td><input type="text" size="42" maxlength="40" name="DeliverTo" value="' . $_SESSION['Items'.$identifier]->DeliverTo . '" /></td>
@@ -990,6 +1021,11 @@ echo '<tr>
 	<td>'. _('Confirmed Order Date') .':</td>
 	<td><input class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="text" size="15" maxlength="14" name="ConfirmedDate" value="' . $_SESSION['Items'.$identifier]->ConfirmedDate . '" /></td>
 	</tr>';
+
+echo '<tr>
+		<td>'. _('Buyer Name') . ':</td>
+		<td><input type="text" size="30" maxlength="30" name="BuyerName" value="' . $_SESSION['Items'.$identifier]->BuyerName . '" /></td>
+</tr>';
 
 echo '<tr>
 	<td>'. _('Delivery Address 1') . ':</td>

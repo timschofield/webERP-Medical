@@ -42,11 +42,11 @@ write the output to a file one line at a time
 
 Need code of supplier or customer and the type of message INVOIC or ORDERS*/
 
-$sql = "SELECT section, 
-		linetext 
-	FROM edimessageformat 
-	WHERE partnercode='" . $PartnerCode . "' 
-	AND messagetype='" . $MessageType . "' 
+$sql = "SELECT section,
+		linetext
+	FROM edimessageformat
+	WHERE partnercode='" . $PartnerCode . "'
+	AND messagetype='" . $MessageType . "'
 	ORDER BY sequenceno";
 
 $MessageLinesResult = DB_query($sql, $db);
@@ -76,7 +76,7 @@ while ($LineDetails = DB_fetch_array($MessageLinesResult)){
 	$LastPositionPointer = $PoistionPointer;
 	$NewLineText = $NewLineText .  substr($LineDetails['linetext'],$LastPositionPointer);
 
-	echo "<BR>$NewLineText";
+	echo '<br />'.$NewLineText;
 
 	fputs($fp, $NewLineText ."\n");
 }

@@ -21,7 +21,7 @@ if (isset($_GET['ParentCategory'])){
 } else if (isset($_POST['ParentCategory'])){
 	$ParentCategory = strtoupper($_POST['ParentCategory']);
 }
-if( isset($ParentCategory) && $ParentCategory == 0 ) {
+if( isset($ParentCategory) and $ParentCategory == 0 ) {
 	unset($ParentCategory);
 }
 
@@ -68,7 +68,7 @@ if (isset($SelectedCategory) AND isset($_FILES['ItemPicture']) AND $_FILES['Item
 
 
 
-if (isset($_POST['submit'])  && $EditName == 1 ) { // Creating or updating a category
+if (isset($_POST['submit'])  and $EditName == 1 ) { // Creating or updating a category
 
 	//initialise no input errors assumed initially before we test
 	$InputError = 0;
@@ -114,7 +114,7 @@ if (isset($_POST['submit'])  && $EditName == 1 ) { // Creating or updating a cat
 	unset($_POST['SalesCatName']);
 	unset($EditName);
 
-} elseif (isset($_GET['delete']) && $EditName == 1) {
+} elseif (isset($_GET['delete']) and $EditName == 1) {
 //the link to delete a selected record was clicked instead of the submit button
 
 // PREVENT DELETES IF DEPENDENT RECORDS IN 'StockMaster'
@@ -143,7 +143,7 @@ if (isset($_POST['submit'])  && $EditName == 1 ) { // Creating or updating a cat
 	} //end if stock category used in debtor transactions
 	unset($_GET['delete']);
 	unset($EditName);
-} elseif( isset($_POST['submit'])  && isset($_POST['AddStockID']) ) {
+} elseif( isset($_POST['submit'])  and isset($_POST['AddStockID']) ) {
 	$sql = "INSERT INTO salescatprod (
 				stockid,
 				salescatid
@@ -176,9 +176,9 @@ if (isset($ParentCategory)) {
 }
 
 $LastParentName = '';
-for($Buzy = (isset($TmpParentID) && ($TmpParentID <> ''));
+for($Buzy = (isset($TmpParentID) and ($TmpParentID <> ''));
 	$Buzy == true;
-	$Buzy = (isset($TmpParentID) && ($TmpParentID <> '')) ) {
+	$Buzy = (isset($TmpParentID) and ($TmpParentID <> '')) ) {
 	$sql = "SELECT parentcatid, salescatname FROM salescat WHERE salescatid='".$TmpParentID."'";
 	$result = DB_query($sql,$db);
 	if( $result ) {
@@ -283,7 +283,7 @@ echo '</p>';
 // ----------------------------------------------------------------------------------------
 // Show New or Edit Category
 
-echo '<p><form ENCtype="MULTIPART/FORM-DATA" method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
+echo '<p><form ENCtype="MULTIPART/FORM-DATA" method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 // This array will contain the stockids in use for this category
@@ -352,7 +352,7 @@ $sql = "SELECT stockid FROM salescatprod
 		WHERE salescatid". (isset($ParentCategory)?('='.$ParentCategory):' is NULL') . "
 		ORDER BY stockid";
 $result = DB_query($sql,$db);
-if($result && DB_num_rows($result)) {
+if($result and DB_num_rows($result)) {
 	while( $myrow = DB_fetch_array($result) ) {
 		$stockids[] = $myrow['stockid']; // Add Stock
 	}
@@ -365,7 +365,7 @@ if (isset($ParentCategory) and $ParentCategory!='NULL') {
 	$result = DB_query($sql,$db);
 	if($result and DB_num_rows($result)) {
 		// continue id stock id in the stockid array
-		echo '<p><form ENCtype="MULTIPART/FORM-DATA" method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
+		echo '<p><form ENCtype="MULTIPART/FORM-DATA" method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		if( isset($SelectedCategory) ) { // If we selected a category we need to keep it selected
 			echo '<input type="hidden" name="SelectedCategory" value="' . $SelectedCategory . '" />';

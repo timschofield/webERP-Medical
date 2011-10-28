@@ -24,26 +24,33 @@ if (isset($_POST['submit'])) {
 		the actial system/overidden variables.
 	*/
 	if (strlen($_POST['X_PastDueDays1']) > 3 || !is_numeric($_POST['X_PastDueDays1']) ) {
+
 		$InputError = 1;
 		prnMsg(_('First overdue deadline days must be a number'),'error');
 	} elseif (strlen($_POST['X_PastDueDays2'])  > 3 || !is_numeric($_POST['X_PastDueDays2']) ) {
+
 		$InputError = 1;
 		prnMsg(_('Second overdue deadline days must be a number'),'error');
 	} elseif (strlen($_POST['X_DefaultCreditLimit']) > 12 || !is_numeric($_POST['X_DefaultCreditLimit']) ) {
+
 		$InputError = 1;
 		prnMsg(_('Default Credit Limit must be a number'),'error');
 	} elseif (strstr($_POST['X_RomalpaClause'], "'") || strlen($_POST['X_RomalpaClause']) > 5000) {
+
 		$InputError = 1;
 		prnMsg(_('The Romalpa Clause may not contain single quotes and may not be longer than 5000 chars'),'error');
 	} elseif (strlen($_POST['X_QuickEntries']) > 2 || !is_numeric($_POST['X_QuickEntries']) ||
 		$_POST['X_QuickEntries'] < 1 || $_POST['X_QuickEntries'] > 99 ) {
+
 		$InputError = 1;
 		prnMsg(_('No less than 1 and more than 99 Quick entries allowed'),'error');
 	} elseif (strlen($_POST['X_FreightChargeAppliesIfLessThan']) > 12 || !is_numeric($_POST['X_FreightChargeAppliesIfLessThan']) ) {
+
 		$InputError = 1;
 		prnMsg(_('Freight Charge Applies If Less Than must be a number'),'error');
 	} elseif (strlen($_POST['X_NumberOfPeriodsOfStockUsage']) > 2 || !is_numeric($_POST['X_NumberOfPeriodsOfStockUsage']) ||
 		$_POST['X_NumberOfPeriodsOfStockUsage'] < 1 || $_POST['X_NumberOfPeriodsOfStockUsage'] > 12 ) {
+
 		$InputError = 1;
 		prnMsg(_('Financial period per year must be a number between 1 and 12'),'error');
 	} elseif (strlen($_POST['X_TaxAuthorityReferenceName']) >25) {
@@ -51,10 +58,12 @@ if (isset($_POST['submit'])) {
 		prnMsg(_('The Tax Authority Reference Name must be 25 characters or less long'),'error');
 	} elseif (strlen($_POST['X_OverChargeProportion']) > 3 || !is_numeric($_POST['X_OverChargeProportion']) ||
 		$_POST['X_OverChargeProportion'] < 0 || $_POST['X_OverChargeProportion'] > 100 ) {
+
 		$InputError = 1;
 		prnMsg(_('Over Charge Proportion must be a percentage'),'error');
 	} elseif (strlen($_POST['X_OverReceiveProportion']) > 3 || !is_numeric($_POST['X_OverReceiveProportion']) ||
 		$_POST['X_OverReceiveProportion'] < 0 || $_POST['X_OverReceiveProportion'] > 100 ) {
+
 		$InputError = 1;
 		prnMsg(_('Over Receive Proportion must be a percentage'),'error');
 	} elseif (strlen($_POST['X_PageLength']) > 3 || !is_numeric($_POST['X_PageLength']) ||
@@ -62,10 +71,12 @@ if (isset($_POST['submit'])) {
 		$InputError = 1;
 		prnMsg(_('Lines per page must be greater than 1'),'error');
 	} elseif (strlen($_POST['X_MonthsAuditTrail']) > 2 || !is_numeric($_POST['X_MonthsAuditTrail']) ||
+
 		$_POST['X_MonthsAuditTrail'] < 0 ) {
 		$InputError = 1;
 		prnMsg(_('The number of months of audit trail to keep must be zero or a positive number less than 100 months'),'error');
 	}elseif (strlen($_POST['X_DefaultTaxCategory']) > 1 || !is_numeric($_POST['X_DefaultTaxCategory']) ||
+
 		$_POST['X_DefaultTaxCategory'] < 1 ) {
 		$InputError = 1;
 		prnMsg(_('DefaultTaxCategory must be between 1 and 9'),'error');
@@ -84,6 +95,7 @@ if (isset($_POST['submit'])) {
 		$InputError = 1;
 		prnMsg(_('The Purchasing Manager Email address does not appear to be valid'),'error');
 	}elseif (strlen($_POST['X_FrequentlyOrderedItems']) > 2 || !is_numeric($_POST['X_FrequentlyOrderedItems'])) {
+
 		$InputError = 1;
 		prnMsg(_('The number of frequently ordered items to display must be numeric'),'error');
 	}
@@ -274,6 +286,9 @@ if (isset($_POST['submit'])) {
 		if ($_SESSION['PurchasingManagerEmail'] != $_POST['X_PurchasingManagerEmail']){
 			$sql[] = "UPDATE config SET confvalue='" . $_POST['X_PurchasingManagerEmail'] . "' WHERE confname='PurchasingManagerEmail'";
 		}
+		if ($_SESSION['InventoryManagerEmail'] != $_POST['X_InventoryManagerEmail']){
+			$sql[] = "UPDATE config SET confvalue='" . $_POST['X_InventoryManagerEmail'] . "' WHERE confname='InventoryManagerEmail'";
+		}
 		if ($_SESSION['AutoCreateWOs'] != $_POST['X_AutoCreateWOs']){
 			$sql[] = "UPDATE config SET confvalue='" . $_POST['X_AutoCreateWOs'] . "' WHERE confname='AutoCreateWOs'";
 		}
@@ -333,8 +348,10 @@ echo '<tr style="outline: 1px solid"><td>' . _('Default Date Format') . ':</td>
 // DefaultTheme
 echo '<tr style="outline: 1px solid"><td>' . _('New Users Default Theme') . ':</td>
 	 <td><select name="X_DefaultTheme">';
+
 $ThemeDirectory = dir('css/');
-while (false != ($ThemeName = $ThemeDirectory->read())){
+
+while (false !== ($ThemeName = $ThemeDirectory->read())){
 	if (is_dir("css/$ThemeName") AND $ThemeName != '.' AND $ThemeName != '..' AND $ThemeName != '.svn'){
 		if ($_SESSION['DefaultTheme'] == $ThemeName) {
 			echo '<option selected="True" value="' . $ThemeName . '">' . $ThemeName . '</option>';
@@ -343,6 +360,9 @@ while (false != ($ThemeName = $ThemeDirectory->read())){
 		}
 	}
 }
+
+$ThemeDirectory->close();
+
 echo '</select></td>
 	<td>' . _('The default theme is used for new users who have not yet defined the display colour scheme theme of their choice') . '</td></tr>';
 
@@ -451,8 +471,8 @@ echo '<tr style="outline: 1px solid"><td>' . _('Invoice Orientation') . ':</td>
 //Blind packing note
 echo '<tr style="outline: 1px solid"><td>' . _('Show company details on packing slips') . ':</td>
 	<td><select name="X_DefaultBlindPackNote">
-	<option '.($_SESSION['DefaultBlindPackNote']=="1"?'selected ':'').'value="1">'._('Show Company Details') . '</option>
-	<option '.($_SESSION['DefaultBlindPackNote']=="2"?'selected ':'').'value="2">'._('Hide Company Details') . '</option>
+	<option '.($_SESSION['DefaultBlindPackNote']=='1'?'selected ':'').'value="1">'._('Show Company Details') . '</option>
+	<option '.($_SESSION['DefaultBlindPackNote']=='2'?'selected ':'').'value="2">'._('Hide Company Details') . '</option>
 	</select></td>
 	<td>' . _('Customer branches can be set by default not to print packing slips with the company logo and address. This is useful for companies that ship to customers customers and to show the source of the shipment would be inappropriate. There is an option on the setup of customer branches to ship blind, this setting is the default applied to all new customer branches') . '</td>
 	</tr>';
@@ -697,9 +717,10 @@ echo '<tr style="outline: 1px solid"><td>' . _('The directory where images are s
 
 
 $CompanyDirectory = 'companies/' . $_SESSION['DatabaseName'] . '/';
+
 $DirHandle = dir($CompanyDirectory);
 
-while ($DirEntry = $DirHandle->read() ){
+while (false !== ($DirEntry = $DirHandle->read()) ){
 
 	if (is_dir($CompanyDirectory . $DirEntry)
 		AND $DirEntry != '..'
@@ -717,6 +738,9 @@ while ($DirEntry = $DirHandle->read() ){
 		}
 	}
 }
+
+$DirHandle->close();
+
 echo '</select></td>
 	<td>' . _('The directory under which all image files should be stored. Image files take the format of ItemCode.jpg - they must all be .jpg files and the part code will be the name of the image file. This is named automatically on upload. The system will check to ensure that the image is a .jpg file') . '</td>
 	</tr>';
@@ -728,7 +752,7 @@ echo '<tr style="outline: 1px solid"><td>' . _('The directory where reports are 
 
 $DirHandle = dir($CompanyDirectory);
 
-while (false != ($DirEntry = $DirHandle->read())){
+while (false !== ($DirEntry = $DirHandle->read())){
 
 	if (is_dir($CompanyDirectory . $DirEntry)
 		AND $DirEntry != '..'
@@ -750,6 +774,8 @@ while (false != ($DirEntry = $DirHandle->read())){
 		}
 	}
 }
+
+$DirHandle->close();
 
 echo '</select></td>
 	<td>' . _('The directory under which all report pdf files should be created in. A separate directory is recommended') . '</td>
@@ -863,6 +889,9 @@ echo '<tr style="outline: 1px solid"><td>' . _('Prohibit GL Journals to Periods 
 $sql = "SELECT lastdate_in_period FROM periods ORDER BY periodno DESC";
 $ErrMsg = _('Could not load periods table');
 $result = DB_query($sql,$db,$ErrMsg);
+if ($_SESSION['ProhibitPostingsBefore']=='' OR $_SESSION['ProhibitPostingsBefore']=='1900-01-01' OR !isset($_SESSION['ProhibitPostingsBefore'])){
+	echo '<option selected value="1900-01-01">' . ConvertSQLDate('1900-01-01') . '</option>';
+}
 while ($PeriodRow = DB_fetch_row($result)){
 	if ($_SESSION['ProhibitPostingsBefore']==$PeriodRow[0]){
 		echo  '<option selected="True" value="' . $PeriodRow[0] . '">' . ConvertSQLDate($PeriodRow[0]) . '</option>';
@@ -1002,6 +1031,9 @@ echo '<tr style="outline: 1px solid"><td>' . _('Purchasing Manager Email Address
 	<td><input type="text" name="X_PurchasingManagerEmail" size="50" maxlength="50" value="' . $_SESSION['PurchasingManagerEmail'] . '" /></td>
 	<td>' . _('The email address for the purchasing manager, used to receive notifications by the tendering system') .'</td></tr>';
 
+echo '<tr style="outline: 1px solid"><td>' . _('Inventory Manager Email Address') . ':</td>
+	<td><input type="text" name="X_InventoryManagerEmail" size="50" maxlength="50" value="' . $_SESSION['InventoryManagerEmail'] . '" /></td>
+	<td>' . _('The email address for the inventory manager, where notifications of all manual stock adjustments created are sent by the system. Leave blank if no emails should be sent to the factory manager for manual stock adjustments') .'</td></tr>';
 
 echo '</table>
 		<br /><div class="centre"><input type="submit" name="submit" value="' . _('Update') . '" /></div>

@@ -33,21 +33,29 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 
 	//Get the details of the GRN item and the cost at which it was received and other PODetail info
 	$SQL = "SELECT grns.podetailitem,
-								grns.grnbatch,
-								grns.itemcode,
-								grns.itemdescription,
-								grns.deliverydate,
-								purchorderdetails.glcode,
-								purchorderdetails.assetid,
-								grns.qtyrecd,
-								grns.quantityinv,
-								purchorderdetails.stdcostunit,
-								purchorders.intostocklocation,
-								purchorders.orderno
-		FROM grns, purchorderdetails, purchorders
-		WHERE grns.podetailitem=purchorderdetails.podetailitem
-		AND purchorders.orderno = purchorderdetails.orderno
-		AND grnno='" . (int) $_GET['GRNNo'] . "'";
+					grns.grnbatch,
+					grns.itemcode,
+					grns.itemdescription,
+					grns.deliverydate,
+					purchorderdetails.glcode,
+					purchorderdetails.assetid,
+					grns.qtyrecd,
+					grns.quantityinv,
+					purchorderdetails.stdcostunit,
+					purchorders.intostocklocation,
+					stockmaster.decimalplaces,
+					purchorders.orderno,
+					suppliers.currcode
+		FROM grns, purchorderdetails
+		LEFT JOIN purchorders
+			ON purchorders.orderno = purchorderdetails.orderno
+		LEFT JOIN grns
+			ON grns.podetailitem=purchorderdetails.podetailitem
+		LEFT JOIN stockmaster
+			ON stockmaster.stockid=grns.itemcode
+		LEFT JOIN suppliers
+			ON suppliers.supplierid=purchorders.supplierno
+		WHERE grnno='" . (int) $_GET['GRNNo'] . "'";
 
 	$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Could not get the details of the GRN selected for reversal because') . ' ';
 	$DbgMsg = _('The following SQL to retrieve the GRN details was used') . ':';
@@ -294,7 +302,7 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 				'" . $PeriodNo . "',
 				'" . $GRN['glcode'] . "',
 				'" . $_SESSION['DefaultTag'] . "',
-				'" . _('GRN Reversal for PO') .": " . $GRN['orderno'] . " " . $_POST['SupplierID'] . " - " . $GRN['itemcode'] . "-" . $GRN['itemdescription'] . " x " . $QtyToReverse . " @ " . number_format($GRN['stdcostunit'],2) . "',
+				'" . _('GRN Reversal for PO') .": " . $GRN['orderno'] . " " . $_POST['SupplierID'] . " - " . $GRN['itemcode'] . "-" . $GRN['itemdescription'] . " x " . $QtyToReverse . " @ " . locale_money_format($GRN['stdcostunit'],$GRN['currcode']) . "',
 				'" . -($GRN['stdcostunit'] * $QtyToReverse) . "'
 				)";
 
@@ -318,7 +326,7 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 									'" . $PeriodNo . "',
 									'" . $_SESSION['CompanyRecord']['grnact'] . "',
 									'" . $_SESSION['DefaultTag'] . "',
-									'" . _('GRN Reversal PO') . ': ' . $GRN['orderno'] . " " . $_POST['SupplierID'] . " - " . $GRN['itemcode'] . "-" . $GRN['itemdescription'] . " x " . $QtyToReverse . " @ " . number_format($GRN['stdcostunit'],2) . "',
+									'" . _('GRN Reversal PO') . ': ' . $GRN['orderno'] . " " . $_POST['SupplierID'] . " - " . $GRN['itemcode'] . "-" . $GRN['itemdescription'] . " x " . $QtyToReverse . " @ " . locale_number_format($GRN['stdcostunit'],$GRN['decimalplaces']) . "',
 									'" . $GRN['stdcostunit'] * $QtyToReverse . "'
 								)";
 
@@ -353,15 +361,18 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 	if (isset($_POST['ShowGRNS'])){
 
 		$sql = "SELECT grnno,
-									itemcode,
-									itemdescription,
-									deliverydate,
-									qtyrecd,
-									quantityinv,
-									qtyrecd-quantityinv AS qtytoreverse
-								FROM grns
-								WHERE grns.supplierid = '" . $_POST['SupplierID'] . "'
-								AND (grns.qtyrecd-grns.quantityinv) >0";
+						itemcode,
+						itemdescription,
+						deliverydate,
+						qtyrecd,
+						quantityinv,
+						stockmaster.decimalplaces,
+						qtyrecd-quantityinv AS qtytoreverse
+					FROM grns
+					LEFT JOIN stockmaster
+						ON grns.itemcode=stockmaster.stockid
+					WHERE grns.supplierid = '" . $_POST['SupplierID'] . "'
+						AND (grns.qtyrecd-grns.quantityinv) >0";
 
 		$ErrMsg = _('An error occurred in the attempt to get the outstanding GRNs for') . ' ' . $_POST['SuppName'] . '. ' . _('The message was') . ':';
   		$DbgMsg = _('The SQL that failed was') . ':';
@@ -396,9 +407,9 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 					$k=1;
 				}
 
-				$DisplayQtyRecd = number_format($myrow['qtyrecd'],2);
-				$DisplayQtyInv = number_format($myrow['quantityinv'],2);
-				$DisplayQtyRev = number_format($myrow['qtytoreverse'],2);
+				$DisplayQtyRecd = locale_number_format($myrow['qtyrecd'],$myrow['decimalplaces']);
+				$DisplayQtyInv = locale_number_format($myrow['quantityinv'],$myrow['decimalplaces']);
+				$DisplayQtyRev = locale_number_format($myrow['qtytoreverse'],$myrow['decimalplaces']);
 				$DisplayDateDel = ConvertSQLDate($myrow['deliverydate']);
 				$LinkToRevGRN = '<a href="' . $_SERVER['PHP_SELF'] . '?GRNNo=' . $myrow['grnno'] . '">' . _('Reverse') . '</a>';
 

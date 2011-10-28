@@ -29,6 +29,7 @@ if (isset($_POST['PrintPDF'])
 
 	$SQL = "SELECT debtorsmaster.debtorno,
 			debtorsmaster.name,
+			debtorsmaster.currcode,
   			currencies.currency,
 			SUM((debtortrans.ovamount + debtortrans.ovgst + debtortrans.ovfreight + debtortrans.ovdiscount - debtortrans.alloc)/debtortrans.rate) AS balance,
 			SUM(debtortrans.ovamount + debtortrans.ovgst + debtortrans.ovfreight + debtortrans.ovdiscount - debtortrans.alloc) AS fxbalance,
@@ -85,13 +86,13 @@ if (isset($_POST['PrintPDF'])
 
 		if (abs($Balance)>0.009 OR ABS($FXBalance)>0.009) {
 
-			$DisplayBalance = number_format($DebtorBalances['balance'] - $DebtorBalances['afterdatetrans'],2);
-			$DisplayFXBalance = number_format($DebtorBalances['fxbalance'] - $DebtorBalances['fxafterdatetrans'],2);
+			$DisplayBalance = locale_money_format($DebtorBalances['balance'] - $DebtorBalances['afterdatetrans'],$_SESSION['CompanyRecord']['currencydefault']);
+			$DisplayFXBalance = locale_money_format($DebtorBalances['fxbalance'] - $DebtorBalances['fxafterdatetrans'],$DebtorBalances['currcode']);
 
 			$TotBal += $Balance;
 
 			$LeftOvers = $pdf->addTextWrap($Left_Margin+3,$YPos,220-$Left_Margin,$FontSize,$DebtorBalances['debtorno'] .
-				' - ' . html_entity_decode($DebtorBalances['name']),'left');
+				' - ' . html_entity_decode($DebtorBalances['name'],ENT_QUOTES,'UTF-8'),'left');
 			$LeftOvers = $pdf->addTextWrap(220,$YPos,60,$FontSize,$DisplayBalance,'right');
 			$LeftOvers = $pdf->addTextWrap(280,$YPos,60,$FontSize,$DisplayFXBalance,'right');
 			$LeftOvers = $pdf->addTextWrap(350,$YPos,100,$FontSize,$DebtorBalances['currency'],'left');
@@ -110,23 +111,11 @@ if (isset($_POST['PrintPDF'])
 		include('includes/PDFDebtorBalsPageHeader.inc');
 	}
 
-	$DisplayTotBalance = number_format($TotBal,2);
+	$DisplayTotBalance = locale_number_format($TotBal,2);
 
 	$LeftOvers = $pdf->addTextWrap(50,$YPos,160,$FontSize,_('Total balances'),'left');
 	$LeftOvers = $pdf->addTextWrap(220,$YPos,60,$FontSize,$DisplayTotBalance,'right');
-	/* UldisN
-	$buf = $pdf->output();
-	$len = strlen($buf);
 
-	header('Content-type: application/pdf');
-	header("Content-Length: ".$len);
-	header('Content-Disposition: inline; filename=DebtorBals.pdf');
-	header('Expires: 0');
-	header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-	header('Pragma: public');
-
-	$pdf->stream();
-	*/
 	$pdf->OutputD($_SESSION['DatabaseName'] . '_DebtorBals_' . date('Y-m-d').'.pdf');//UldisN
 	$pdf->__destruct(); //UldisN
 
@@ -136,11 +125,11 @@ if (isset($_POST['PrintPDF'])
 	include('includes/header.inc');
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
 
-	if (!isset($_POST['FromCriteria']) || !isset($_POST['ToCriteria'])) {
+	if (!isset($_POST['FromCriteria']) or !isset($_POST['ToCriteria'])) {
 
 	/*if $FromCriteria is not set then show a form to allow input	*/
 
-		echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="POST"><table class="selection">';
+		echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table class="selection">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 		echo '<tr><td>' . _('From Customer Code') .':</font></td><td><input tabindex="1" type="text" maxlength="6" size="7" name="FromCriteria" value="1" /></td></tr>';

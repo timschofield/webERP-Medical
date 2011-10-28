@@ -14,6 +14,7 @@ if (isset($_POST['PrintPDF'])){
 	$FontSize=10;
 
 	if ($_POST['Activity']!='All'){
+		$_POST['ActivityAmount']=filter_number_input($_POST['ActivityAmount']);
 		if (!is_numeric($_POST['ActivityAmount'])){
 			$title = _('Customer List') . ' - ' . _('Problem Report') . '....';
 			include('includes/header.inc');
@@ -253,7 +254,7 @@ if (isset($_POST['PrintPDF'])){
 	$Area ='';
 	$SalesPerson='';
 
-	While ($Customers = DB_fetch_array($CustomersResult,$db)){
+	while ($Customers = DB_fetch_array($CustomersResult,$db)){
 
 		if ($_POST['Activity']!='All'){
 
@@ -333,7 +334,7 @@ if (isset($_POST['PrintPDF'])){
 
 			if ($_POST['Activity']!='All'){
 				$LeftOvers = $pdf->addTextWrap(230,$YPos-20,60,$FontSize,_('Turnover'),'right');
-				$LeftOvers = $pdf->addTextWrap(230,$YPos-30,60,$FontSize,number_format($LocalCurrencyTurnover), 'right');
+				$LeftOvers = $pdf->addTextWrap(230,$YPos-30,60,$FontSize,locale_money_format($LocalCurrencyTurnover, $Customers['currcode']), 'right');
 			}
 
 			$LeftOvers = $pdf->addTextWrap(290,$YPos,150,$FontSize,$Customers['brname']);
@@ -367,7 +368,7 @@ if (isset($_POST['PrintPDF'])){
 	include('includes/header.inc');
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . $title . '" alt="" />' . ' ' . $title . '</p>';
 
-	echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="POST"><table class="selection">';
+	echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<tr><td>' . _('For Sales Areas') . ':</td><td><select name=Areas[] multiple>';
 

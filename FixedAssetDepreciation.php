@@ -22,7 +22,7 @@ $result = DB_query("SELECT periods.lastdate_in_period,
 
 $LastDepnRun = DB_fetch_row($result);
 
-//echo '<BR>LastRun period = ' . $LastDepnRun[1] . ' Last date in period = ' . $LastDepnRun[0];
+//echo '<br />LastRun period = ' . $LastDepnRun[1] . ' Last date in period = ' . $LastDepnRun[0];
 
 $AllowUserEnteredProcessDate = true;
 
@@ -87,36 +87,41 @@ if (isset($_POST['CommitDepreciation']) AND $InputError==false){
 	$PeriodNo = GetPeriod($_POST['ProcessDate'],$db);
 }
 
-echo '<p></p><table>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Fixed Asset Depreciation') . '" alt="" />' . ' ' . $title . '</p>';
+
+echo '<table>';
 $Heading = '<tr><th>' . _('Asset ID') . '</th>
 				<th>' . _('Description') . '</th>
 				<th>' . _('Date Purchased') . '</th>
 				<th>' . _('Cost') . '</th>
 				<th>' . _('Accum Depn') . '</th>
 				<th>' . _('B/fwd Book Value') . '</th>
-				<th>'. _('Depn Type') . '</th>
-				<th>'. _('Depn Rate') . '</th>
+				<th>' . _('Depn Type') . '</th>
+				<th>' . _('Depn Rate') . '</th>
 				<th>' . _('New Depn') . '</th>
 			</tr>';
 echo $Heading;
 
 $AssetCategoryDescription ='0';
 
-$TotalCost =0;
-$TotalAccumDepn=0;
+$TotalCost = 0;
+$TotalAccumDepn = 0;
 $TotalDepn = 0;
 $RowCounter = 0;
+$TotalCategoryCost = 0;
+$TotalCategoryAccumDepn = 0;
+$TotalCategoryDepn = 0;
 $k=0;
 
 while ($AssetRow=DB_fetch_array($AssetsResult)) {
 	if ($AssetCategoryDescription != $AssetRow['categorydescription'] OR $AssetCategoryDescription =='0'){
 		if ($AssetCategoryDescription !='0'){ //then print totals
 			echo '<tr><th colspan="3" align="right">' . _('Total for') . ' ' . $AssetCategoryDescription . ' </th>
-						<th class="number">' . number_format($TotalCategoryCost,2) . '</th>
-						<th class="number">' . number_format($TotalCategoryAccumDepn,2) . '</th>
-						<th class="number">' . number_format(($TotalCategoryCost-$TotalCategoryAccumDepn),2) . '</th>
+						<th class="number">' . locale_money_format($TotalCategoryCost,$_SESSION['CompanyRecord']['currencydefault']) . '</th>
+						<th class="number">' . locale_money_format($TotalCategoryAccumDepn,$_SESSION['CompanyRecord']['currencydefault']) . '</th>
+						<th class="number">' . locale_money_format(($TotalCategoryCost-$TotalCategoryAccumDepn),$_SESSION['CompanyRecord']['currencydefault']) . '</th>
 						<th colspan="2"></th>
-						<th class="number">' . number_format($TotalCategoryDepn,2) . '</th>
+						<th class="number">' . locale_money_format($TotalCategoryDepn,$_SESSION['CompanyRecord']['currencydefault']) . '</th>
 					</tr>';
 		}
 		echo '<tr><th colspan="9" align="left">' . $AssetRow['categorydescription']  . '</th></tr>';
@@ -155,12 +160,12 @@ while ($AssetRow=DB_fetch_array($AssetsResult)) {
 	echo '<td>' . $AssetRow['assetid'] . '</td>
 			<td>' . $AssetRow['description'] . '</td>
 			<td>' . ConvertSQLDate($AssetRow['datepurchased']) . '</td>
-			<td class="number">' . number_format($AssetRow['costtotal'],2) . '</td>
-			<td class="number">' . number_format($AssetRow['depnbfwd'],2) . '</td>
-			<td class="number">' . number_format($AssetRow['costtotal']-$AssetRow['depnbfwd'],2) . '</td>
+			<td class="number">' . locale_money_format($AssetRow['costtotal'],$_SESSION['CompanyRecord']['currencydefault']) . '</td>
+			<td class="number">' . locale_money_format($AssetRow['depnbfwd'],$_SESSION['CompanyRecord']['currencydefault']) . '</td>
+			<td class="number">' . locale_money_format($AssetRow['costtotal']-$AssetRow['depnbfwd'],$_SESSION['CompanyRecord']['currencydefault']) . '</td>
 			<td align="center">' . $DepreciationType . '</td>
 			<td class="number">' . $AssetRow['depnrate']  . '</td>
-			<td class="number">' . number_format($NewDepreciation ,2) . '</td>
+			<td class="number">' . locale_money_format($NewDepreciation ,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
 		</tr>';
 	$TotalCategoryCost +=$AssetRow['costtotal'];
 	$TotalCategoryAccumDepn +=$AssetRow['depnbfwd'];
@@ -239,21 +244,21 @@ while ($AssetRow=DB_fetch_array($AssetsResult)) {
 	} //end if Committing the depreciation to DB
 } //end loop around the assets to calculate depreciation for
 echo '<tr><th colspan="3" align="right">' . _('Total for') . ' ' . $AssetCategoryDescription . ' </th>
-		<th class="number">' . number_format($TotalCategoryCost,2) . '</th>
-		<th class="number">' . number_format($TotalCategoryAccumDepn,2) . '</th>
-		<th class="number">' . number_format(($TotalCategoryCost-$TotalCategoryAccumDepn),2) . '</th>
+		<th class="number">' . locale_money_format($TotalCategoryCost,$_SESSION['CompanyRecord']['currencydefault']) . '</th>
+		<th class="number">' . locale_money_format($TotalCategoryAccumDepn,$_SESSION['CompanyRecord']['currencydefault']) . '</th>
+		<th class="number">' . locale_money_format(($TotalCategoryCost-$TotalCategoryAccumDepn),$_SESSION['CompanyRecord']['currencydefault']) . '</th>
 		<th colspan="2"></th>
-		<th class="number">' . number_format($TotalCategoryDepn,2) . '</th>
+		<th class="number">' . locale_money_format($TotalCategoryDepn,$_SESSION['CompanyRecord']['currencydefault']) . '</th>
 	</tr>';
 echo '<tr><th colspan="3" align="right">' . _('GRAND Total') . ' </th>
-		<th class="number">' . number_format($TotalCost,2) . '</th>
-		<th class="number">' . number_format($TotalAccumDepn,2) . '</th>
-		<th class="number">' . number_format(($TotalCost-$TotalAccumDepn),2) . '</th>
+		<th class="number">' . locale_money_format($TotalCost,$_SESSION['CompanyRecord']['currencydefault']) . '</th>
+		<th class="number">' . locale_money_format($TotalAccumDepn,$_SESSION['CompanyRecord']['currencydefault']) . '</th>
+		<th class="number">' . locale_money_format(($TotalCost-$TotalAccumDepn),$_SESSION['CompanyRecord']['currencydefault']) . '</th>
 		<th colspan="2"></th>
-		<th class="number">' . number_format($TotalDepn,2) . '</th>
+		<th class="number">' . locale_money_format($TotalDepn,$_SESSION['CompanyRecord']['currencydefault']) . '</th>
 	</tr>';
 
-echo '</table><hr><p></p>';
+echo '</table>';
 
 if (isset($_POST['CommitDepreciation']) AND $InputError==false){
 	$result = DB_Txn_Commit($db);
@@ -274,7 +279,7 @@ if (isset($_POST['CommitDepreciation']) AND $InputError==false){
 		echo '<td>'._('Date to Process Depreciation'). ':</td>
 					<td>' . $_POST['ProcessDate'] .'</td>';
 	}
-	echo '<td><div class="centre"><input type="submit" name="CommitDepreciation" value="'._('Commit Depreciation').'"></div>';
+	echo '<td><div class="centre"><input type="submit" name="CommitDepreciation" value="'._('Commit Depreciation').'" /></div>';
 	echo '</tr></table><br />';
 	echo '</form>';
 }

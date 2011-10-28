@@ -23,6 +23,7 @@ if (isset($_POST['submit']) OR isset($_GET['remove']) OR isset($_GET['add']) ) {
 	ie the page has called itself with some user input */
 	//first off validate inputs sensible
 	if (isset($_POST['GroupName']) && strlen($_POST['GroupName'])<4){
+
 		$InputError = 1;
 		prnMsg(_('The Group description entered must be at least 4 characters long'),'error');
 	}
@@ -74,7 +75,7 @@ if (isset($_POST['submit']) OR isset($_GET['remove']) OR isset($_GET['add']) ) {
 		unset($_GET['TaxAuthority']);
 	}
 	// Need to exec the query
-	if (isset($sql) && $InputError != 1 ) {
+	if (isset($sql) and $InputError != 1 ) {
 		$result = DB_query($sql,$db,$ErrMsg);
 		if( $result ) {
 			prnMsg( $SuccessMsg,'success');
@@ -264,7 +265,7 @@ if (isset($SelectedGroup)) {
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<input type="hidden" name="SelectedGroup" value="' . $SelectedGroup .'" />';
 		echo '<table class="selection">';
-		echo '<tr><th colspan="3"><font size="3" color="navy">'._('Calculation Order').'</font></th></tr>';
+		echo '<tr><th colspan="3"><font size="3" color="#616161">'._('Calculation Order').'</font></th></tr>';
 
 		echo '<tr>
 				<th>'._('Tax Authority').'</th>

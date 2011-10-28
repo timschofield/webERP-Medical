@@ -8,7 +8,7 @@ include('includes/header.inc');
 
 $Period = 42;
 
-echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
+echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 $SQL = "SELECT MonthName(lastdate_in_period) AS mnth,

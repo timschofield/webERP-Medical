@@ -28,8 +28,8 @@ if (isset($_POST['UpdateLines']) OR isset($_POST['BackToHeader'])) {
 				//this is the same as deleting the line - so delete it
 				$_SESSION['Contract'.$identifier]->Remove_ContractRequirement($ContractComponentID);
 			} else {
-				$_SESSION['Contract'.$identifier]->ContractReqts[$ContractComponentID]->Quantity=$_POST['Qty'.$ContractComponentID];
-				$_SESSION['Contract'.$identifier]->ContractReqts[$ContractComponentID]->CostPerUnit=$_POST['CostPerUnit'.$ContractComponentID];
+				$_SESSION['Contract'.$identifier]->ContractReqts[$ContractComponentID]->Quantity=filter_number_input($_POST['Qty'.$ContractComponentID]);
+				$_SESSION['Contract'.$identifier]->ContractReqts[$ContractComponentID]->CostPerUnit=filter_currency_input($_POST['CostPerUnit'.$ContractComponentID]);
 				$_SESSION['Contract'.$identifier]->ContractReqts[$ContractComponentID]->Requirement=$_POST['Requirement'.$ContractComponentID];
 			}
 		} // end loop around the items on the contract requirements array
@@ -55,18 +55,18 @@ if(isset($_GET['Delete'])){
 }
 if (isset($_POST['EnterNewRequirement'])){
 	$InputError = false;
-	if (!is_numeric($_POST['Quantity'])){
+	if (!is_numeric(filter_number_input($_POST['Quantity']))){
 		prnMsg(_('The quantity of the new requirement is expected to be numeric'),'error');
 		$InputError = true;
 	}
-	if (!is_numeric($_POST['CostPerUnit'])){
+	if (!is_numeric(filter_currency_input($_POST['CostPerUnit']))){
 		prnMsg(_('The cost per unit of the new requirement is expected to be numeric'),'error');
 		$InputError = true;
 	}
 	if (!$InputError){
 		$_SESSION['Contract'.$identifier]->Add_To_ContractRequirements ($_POST['RequirementDescription'],
-																		$_POST['Quantity'],
-																		$_POST['CostPerUnit']);
+																		filter_number_input($_POST['Quantity']),
+																		filter_currency_input($_POST['CostPerUnit']));
 		unset($_POST['RequirementDescription']);
 		unset($_POST['Quantity']);
 		unset($_POST['CostPerUnit']);
@@ -102,7 +102,7 @@ if (count($_SESSION['Contract'.$identifier]->ContractReqts)>0){
 
 		$LineTotal = $ContractComponent->Quantity * $ContractComponent->CostPerUnit;
 
-		$DisplayLineTotal = number_format($LineTotal,2);
+		$DisplayLineTotal = locale_money_format($LineTotal,$_SESSION['Contract'.$identifier]->CurrCode);
 
 		if ($k==1){
 			echo '<tr class="EvenTableRows">';
@@ -113,14 +113,14 @@ if (count($_SESSION['Contract'.$identifier]->ContractReqts)>0){
 		}
 
 		echo '<td><textarea name="Requirement' . $ContractReqtID . '" cols="30" rows="3">' . $ContractComponent->Requirement . '</textarea></td>
-			  <td><input type="text" class="number" name="Qty' . $ContractReqtID . '" size="11" value="' . $ContractComponent->Quantity  . '" /></td>
-			  <td><input type="text" class="number" name="CostPerUnit' . $ContractReqtID . '" size="11" value="' . $ContractComponent->CostPerUnit . '" /></td>
+			  <td><input type="text" class="number" name="Qty' . $ContractReqtID . '" size="11" value="' . locale_number_format($ContractComponent->Quantity,2)  . '" /></td>
+			  <td><input type="text" class="number" name="CostPerUnit' . $ContractReqtID . '" size="11" value="' . locale_money_format($ContractComponent->CostPerUnit,$_SESSION['Contract'.$identifier]->CurrCode) . '" /></td>
 			  <td class="number">' . $DisplayLineTotal . '</td>
 			  <td><a href="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier. '&amp;Delete=' . $ContractReqtID . '">' . _('Delete') . '</a></td></tr>';
 		$TotalCost += $LineTotal;
 	}
 
-	$DisplayTotal = number_format($TotalCost,2);
+	$DisplayTotal = locale_money_format($TotalCost,$_SESSION['Contract'.$identifier]->CurrCode);
 	echo '<tr><td colspan="4" class="number">' . _('Total Other Requirements Cost') . '</td><td class="number"><b>' . $DisplayTotal . '</b></td></tr></table>';
 	echo '<br /><div class="centre"><input type="submit" name="UpdateLines" value="' . _('Update Other Requirements Lines') . '" />';
 	echo ' <input type="submit" name="BackToHeader" value="' . _('Back To Contract Header') . '" /></div>';

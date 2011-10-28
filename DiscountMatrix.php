@@ -96,7 +96,7 @@ $result = DB_query($sql, $db);
 
 echo '<tr><td>' . _('Customer Price List') . ' (' . _('Sales Type') . '):</td><td>';
 
-echo '<select tabindex=1 name="SalesType">';
+echo '<select tabindex="1" name="SalesType">';
 
 while ($myrow = DB_fetch_array($result)){
 	if (isset($_POST['SalesType']) and $myrow['typeabbrev']==$_POST['SalesType']){
@@ -124,19 +124,22 @@ if (DB_num_rows($result) > 0) {
 	}
 	echo '</select></td>';
 } else {
-	echo '<input type="hidden" name="DiscountCategory" value="">';
+	echo '<input type="hidden" name="DiscountCategory" value="" />';
 }
 
-echo '<tr><td>' . _('Quantity Break') . ':</td><td><input class="number" tabindex=3 '
-	 . (in_array('QuantityBreak',$Errors) ? 'class="inputerror"' : '')
-	 .' type="text" name="QuantityBreak" size="10" maxlength="10" /></td></tr>';
+echo '<tr>
+		<td>' . _('Quantity Break') . ':</td>
+		<td><input class="number" tabindex="3" type="text" name="QuantityBreak" size="10" maxlength="10" /></td>
+	</tr>';
 
-echo '<tr><td>' . _('Discount Rate') . ' (%):</td><td><input class="number" tabindex=4 '
-	. (in_array('DiscountRate',$Errors) ? 'class="inputerror"' : '') .
-		'type="text" name="DiscountRate" size="11" maxlength="14" /></td></tr>';
+echo '<tr>
+		<td>' . _('Discount Rate') . ' (%):</td>
+		<td><input class="number" tabindex="4" type="text" name="DiscountRate" size="11" maxlength="14" /></td>
+	</tr>';
 echo '</table><br />';
 
-echo '<div class="centre"><input tabindex="5" type="submit" name="submit" value="' . _('Enter Information') . '" /></div><br />';
+echo '<div class="centre"
+		<input tabindex="5" type="submit" name="submit" value="' . _('Enter Information') . '" /></div><br />';
 
 $sql = "SELECT sales_type,
 		salestype,

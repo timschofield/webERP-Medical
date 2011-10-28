@@ -64,14 +64,14 @@ if (isset($_POST['StockID2']) AND !isset($_GET['Edit'])) {
 	$_POST['gw'] = $myrow['kgs'];
 	$_POST['CuFt'] = $myrow['volume'];
 	$_POST['MinimumOrderQty'] = $myrow['minorderqty'];
-} // end if (isset($_POST['StockID2']) && $_GET['Edit']=='')
+} // end if (isset($_POST['StockID2']) and $_GET['Edit']=='')
 
 if (isset($_POST['UpdateLines']) OR isset($_POST['Commit'])) {
 	foreach ($_SESSION['PO'.$identifier]->LineItems as $POLine) {
 		if ($POLine->Deleted==False) {
-			$_SESSION['PO'.$identifier]->LineItems[$POLine->LineNo]->Quantity=$_POST['Qty'.$POLine->LineNo];
-			$_SESSION['PO'.$identifier]->LineItems[$POLine->LineNo]->Price=$_POST['Price'.$POLine->LineNo];
-			$_SESSION['PO'.$identifier]->LineItems[$POLine->LineNo]->NetWeight=$_POST['NetWeight'.$POLine->LineNo];
+			$_SESSION['PO'.$identifier]->LineItems[$POLine->LineNo]->Quantity=filter_number_input($_POST['Qty'.$POLine->LineNo]);
+			$_SESSION['PO'.$identifier]->LineItems[$POLine->LineNo]->Price=filter_currency_input($_POST['Price'.$POLine->LineNo]);
+			$_SESSION['PO'.$identifier]->LineItems[$POLine->LineNo]->NetWeight=filter_number_input($_POST['NetWeight'.$POLine->LineNo]);
 			$_SESSION['PO'.$identifier]->LineItems[$POLine->LineNo]->ReqDelDate=$_POST['ReqDelDate'.$POLine->LineNo];
 		}
 	}
@@ -219,7 +219,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 															'" . $POLine->gw . "',
 															'" . $POLine->CuFt . "',
 															'" . $POLine->Total_Quantity . "',
-															'" . $POLine->Total_Amount . "',
+															'" . filter_currency_input($POLine->Total_Amount) . "',
 															'" . $POLine->AssetID . "')";
 					$ErrMsg =_('One of the purchase order detail records could not be inserted into the database because');
 					$DbgMsg =_('The SQL statement used to insert the purchase order detail record and failed was');
@@ -273,8 +273,8 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 				if ($POLine->Deleted==true) {
 					if ($POLine->PODetailRec!='') {
 						$sql="DELETE FROM purchorderdetails WHERE podetailitem='" . $POLine->PODetailRec . "'";
-						$ErrMsg =  _('The purchase order could not be deleted because');
-						$DbgMsg = _('The SQL statement used to delete the purchase order header record, that failed was');
+						$ErrMsg =  _('The purchase order detail line could not be deleted because');
+						$DbgMsg = _('The SQL statement used to delete the purchase order detail record, that failed was');
 						$result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 					}
 				} else if ($POLine->PODetailRec=='') {
@@ -322,7 +322,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 															'" . $POLine->gw . "',
 															'" . $POLine->CuFt . "',
 															'" . $POLine->Total_Quantity . "',
-															'" . $POLine->Total_Amount . "',
+															'" . filter_currency_input($POLine->Total_Amount) . "',
 															'" . $POLine->AssetID . "')";
 
 				} else {
@@ -346,7 +346,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 															gw='" . $POLine->gw . "',
 															cuft='" . $POLine->CuFt . "',
 															total_quantity='" . $POLine->Total_Quantity . "',
-															total_amount='" . $POLine->Total_Amount . "',
+															total_amount='" . filter_currency_input($POLine->Total_Amount) . "',
 															completed=1,
 															assetid='" . $POLine->AssetID . "'
 														WHERE podetailitem='" . $POLine->PODetailRec . "'";
@@ -370,7 +370,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 															gw='" . $POLine->gw . "',
 															cuft='" . $POLine->CuFt . "',
 															total_quantity='" . $POLine->Total_Quantity . "',
-															total_amount='" . $POLine->Total_Amount . "',
+															total_amount='" . filter_currency_input($POLine->Total_Amount) . "',
 															assetid='" . $POLine->AssetID . "'
 														WHERE podetailitem='" . $POLine->PODetailRec . "'";
 					}
@@ -501,7 +501,7 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 	$DbgMsg = _('The SQL statement that failed was');
 	$SearchResult = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
-	if (DB_num_rows($SearchResult)==0 && $debug==1){
+	if (DB_num_rows($SearchResult)==0 and $debug==1){
 		prnMsg( _('There are no products to display matching the criteria provided'),'warn');
 	}
 	if (DB_num_rows($SearchResult)==1){
@@ -737,7 +737,7 @@ if (isset($_POST['NewItem'])){ /* NewItem is set from the part selection list as
 		if (mb_substr($key, 0, 7)=='StockID') {
 			$Index=mb_substr($key,7);
 			$ItemCode=$value;
-			$Quantity=$_POST['Quantity'.$Index];;
+			$Quantity=filter_number_input($_POST['Quantity'.$Index]);
 			$AlreadyOnThisOrder =0;
 
 			if ($_SESSION['PO_AllowSameItemMultipleTimes'] ==false){
@@ -940,17 +940,9 @@ if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
 
 		if ($POLine->Deleted==False) {
 			$LineTotal = $POLine->Quantity * $POLine->Price;
-			// Note decimal places should not fixed at 2, use POLine->DecimalPlaces instead
-			//              $DisplayLineTotal = number_format($LineTotal,2);
-			$DisplayLineTotal = number_format($LineTotal,2);
-			// Note if the price is greater than 1 use 2 decimal place, if the price is a fraction of 1, use 4 decimal places
-			// This should help display where item-price is a fraction
-			if ($POLine->Price > 1) {
-				$DisplayPrice = number_format($POLine->Price,2,'.','');
-			} else {
-				$DisplayPrice = number_format($POLine->Price,4,'.','');
-			}
-			$DisplayQuantity = number_format($POLine->Quantity,$POLine->DecimalPlaces,'.','');
+			$DisplayLineTotal = locale_money_format($LineTotal,$_SESSION['PO'.$identifier]->CurrCode);
+			$DisplayPrice = locale_money_format($POLine->Price,$_SESSION['PO'.$identifier]->CurrCode);
+			$DisplayQuantity = locale_number_format($POLine->Quantity,$POLine->DecimalPlaces);
 
 			if ($k==1){
 				echo '<tr class="EvenTableRows">';
@@ -965,7 +957,7 @@ if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
 				<td>' . $POLine->ItemDescription . '</td>
 				<td><input type="text" class="number" name="Qty' . $POLine->LineNo .'" size="11" value="' . $DisplayQuantity . '" /></td>
 				<td>' . $Uom . '</td>
-				<td><input type="text" class="number" name="NetWeight' . $POLine->LineNo . '" size="11" value="' . $POLine->NetWeight . '" /></td>
+				<td><input type="text" class="number" name="NetWeight' . $POLine->LineNo . '" size="11" value="' . locale_number_format($POLine->NetWeight,4) . '" /></td>
 				<td><input type="text" class="number" name="Price' . $POLine->LineNo . '" size="11" value="' .$DisplayPrice.'" /></td>
 				<td class="number">' . $DisplayLineTotal . '</td>
 				<td><input type="text" class="date" alt="' .$_SESSION['DefaultDateFormat'].'" name="ReqDelDate' . $POLine->LineNo.'" size="11" value="' .$POLine->ReqDelDate .'" /></td>
@@ -975,7 +967,7 @@ if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
 		}
 	}
 
-	$DisplayTotal = number_format($_SESSION['PO'.$identifier]->Total,2);
+	$DisplayTotal = locale_money_format($_SESSION['PO'.$identifier]->Total,$_SESSION['PO'.$identifier]->CurrCode);
 	echo '<tr><td colspan="6" class="number">' . _('TOTAL') . _(' excluding Tax') . '</td><td class="number"><b>' . $DisplayTotal . '</b></td></tr></table>';
 	echo '<br /><div class="centre"><input type="submit" name="UpdateLines" value="Update Order Lines" />';
 	echo '&nbsp;<input type="submit" name="Commit" value="Process Order" /></div>';

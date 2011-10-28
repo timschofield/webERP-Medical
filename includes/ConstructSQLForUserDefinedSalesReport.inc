@@ -269,7 +269,7 @@ while ($Cols = DB_fetch_array($ColsResult)){
 	     include('includes/footer.inc');
 	     exit;
 	 }
-	 $strt_ColNum = 9; /* Start searching after SELECT */
+	 $strt_ColNum = 9; /* Start searching after SELECT*/
 
 	/*find the comma just before the Select Cls statement for the numerator column */
 
@@ -277,6 +277,7 @@ while ($Cols = DB_fetch_array($ColsResult)){
 	     $strt_ColNum = strpos( $SQLSelectCls, ',', $strt_ColNum + 1) + 1;
 
 	} while (strpos($SQLSelectCls, ',', $strt_ColNum) < $length_ColNum && strpos($SQLSelectCls, ',' , $strt_ColNum)!=0);
+
 
 
 /*The length of the element in the select clause defining the column will be from the comma to the
@@ -294,7 +295,7 @@ while ($Cols = DB_fetch_array($ColsResult)){
 	     Exit;
 	}
 
-	 $strt_ColDen = 7; /* start searching after SELECT */
+	 $strt_ColDen = 7; /* start searching after SELECT*/
 
 	/*find the comma just before the Select Cls statement for the denominator column */
 
@@ -302,6 +303,7 @@ while ($Cols = DB_fetch_array($ColsResult)){
 	     $strt_ColDen = strpos( $SQLSelectCls, ',', $strt_ColDen +1)+1;
 
 	} while (strpos($SQLSelectCls, ',', $strt_ColDen) < $length_ColDen && strpos($SQLSelectCls, ',' , $strt_ColDen)!=0);
+
 
 	 $length_ColDen = $length_ColDen - $strt_ColDen - 1;
 

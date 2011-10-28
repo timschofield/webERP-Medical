@@ -57,7 +57,8 @@ if (isset($_POST['PrintPDF']) OR isset($_POST['PDFTest']) ) {
 					intval($_POST['QtyByItem']),
 					$_POST['Currency'],
 					$_POST['SalesType'],
-					$_POST['StockID']);
+					$_POST['StockID'],
+					FormatDateForSQL($_POST['EffectiveDate']));
 
 			if ($ok)
 				exit(); // the print was success
@@ -90,8 +91,11 @@ function showLabelOptions() {
 		_('Label Sticker Printing'),
 		_('Select label type'),
 		_('Number of labels per item'),
-		_('Price list'), _('Currency'),
-		_('Category'), _('Update values')
+		_('Price list'),
+		_('Currency'),
+		_('Category'),
+		_('Effective Date'),
+		_('Update values')
 	);
 	if (!isset($_POST['LabelID']))
 		$_POST['LabelID']=(string)$AllLabels->label[0]->id;
@@ -114,6 +118,10 @@ function showLabelOptions() {
 
 	$TableItems = tableItems($_POST['Category'], $okItems);
 
+	if (!isset($_POST['EffectiveDate'])){
+		$_POST['EffectiveDate']=Date($_SESSION['DefaultDateFormat']);
+	}
+
 	$SendButton = '<br /><div class="centre"><input type="submit" name="PrintPDF" value="'. _('Print labels') .'" />&nbsp;&nbsp;&nbsp;
 		<input type="submit" name="PDFTest" value="'. _('Print labels with borders') .'" /></div>';
 	$iTxt=0;
@@ -129,7 +137,7 @@ function showLabelOptions() {
 		</script>";
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' .$txt[$iTxt++].'</p>';
-	echo '<form name ="form1" action="'.$_SERVER['PHP_SELF'].'" method="POST" id="form1">';
+	echo '<form name ="form1" action="'.$_SERVER['PHP_SELF'].'" method="post" id="form1">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection">';
 	echo '<tbody>';
@@ -141,8 +149,7 @@ function showLabelOptions() {
 		</tr>';
 	echo '<tr>
 				<td class="number">'.$txt[$iTxt++].':</td>
-				<td><input type="text" class="number" name="QtyByItem" value="'.$_POST['QtyByItem'].'" size="2"
-					maxlength="4"></td>
+				<td><input type="text" class="number" name="QtyByItem" value="'.$_POST['QtyByItem'].'" size="2" maxlength="4" /></td>
 		</tr>';
 	echo '<tr>
 				<td class="number">'.$txt[$iTxt++].':</td>
@@ -161,9 +168,12 @@ function showLabelOptions() {
 					'.$OptionsCategory.'
 					</select> </td>
 			</tr>';
+	echo '<tr><td class="number">'.$txt[$iTxt++].':</td>
+			<td><input type="text" class=date alt="'.$_SESSION['DefaultDateFormat'].'" name="EffectiveDate" size="11" maxlength="10" value="' . $_POST['EffectiveDate'] . '" /></td>
+		</tr>';
 	echo '<tr>
 				<th colspan="2">
-				<input type="submit" name="refresh" value="Refresh options">
+				<input type="submit" name="refresh" value="Refresh options" />
 				</th>';
 	echo '<tr>
 				<td colspan="2">
@@ -228,7 +238,7 @@ function tableItems($CategoryID, &$ok) {
 		$ok=false;
 		return noneButton( _('Select a Category') );
 	}
-	$result = getStockItems($CategoryID, $_POST['Currency'], $_POST['SalesType']);
+	$result = getStockItems($CategoryID, $_POST['Currency'], $_POST['SalesType'], FormatDateForSQL($_POST['EffectiveDate']));
 	if (!DB_num_rows($result)) {
 		$ok=false;
 		return noneButton( _('This category has no items to show') );
@@ -247,7 +257,7 @@ function tableItems($CategoryID, &$ok) {
 				<th>'.$txt[$ix++].'</th>
 				<th>'.$txt[$ix++].'</th>
 				<th colspan="2" align="center">'.$txt[$ix++].'
-					<input type="checkbox" checked onclick="setAll(this);">
+					<input type="checkbox" checked="True" onclick="setAll(this);" />
 				</th>
 			</tr>
 		</thead>
@@ -256,7 +266,7 @@ function tableItems($CategoryID, &$ok) {
 	$ok=true;
 	$odd=true;
 	while ($myrow=DB_fetch_array($result)) {
-		$price = number_format($myrow['price'],$DecimalPlaces);
+		$price = locale_money_format($myrow['price'],$_POST['Currency']);
 		$oddEven=$odd?'Odd':'Even';
 		$odd = !$odd;
 		$html .= '<tr class="'.$oddEven.'TableRows">
@@ -264,7 +274,7 @@ function tableItems($CategoryID, &$ok) {
 				<td>'.$myrow['description'].'</td>
 				<td class="number">'.$price.'</td>
 				<td><div class="centre">
-					<input type="checkbox" checked name="StockID['.$myrow['stockid'].']" id="item" />
+					<input type="checkbox" checked="True" name="StockID['.$myrow['stockid'].']" id="item" />
 					</div>
 				</td>
 				<td>&nbsp;&nbsp;&nbsp;</td>
@@ -288,13 +298,15 @@ function noneButton($msg) {
  *  The routine works in two contexts: when only the category is given
  *  it looks for all the items
  */
-function getStockItems($CategoryID, $CurrCode, $SalesType, $StockID=false) {
+function getStockItems($CategoryID, $CurrCode, $SalesType, $EffectiveDate, $StockID=false) {
 	global $db, $Today;
 	if ($StockID!==false) {
 		$WhereClause = "stockmaster.stockid='$StockID' LIMIT 1";
 	} else {
 		$WhereClause = "stockmaster.categoryid='$CategoryID' ORDER BY stockmaster.stockid";
 	}
+
+	$WhereClause = " stockmaster.discontinued!=1 AND " . $WhereClause;
 
 	$sql="SELECT stockmaster.stockid,
 				stockmaster.description,
@@ -304,20 +316,16 @@ function getStockItems($CategoryID, $CurrCode, $SalesType, $StockID=false) {
 			FROM stockmaster LEFT JOIN prices ON stockmaster.stockid=prices.stockid
 			AND prices.currabrev = '" . $CurrCode . "'
 			AND prices.typeabbrev= '" . $SalesType . "'
-			AND prices.startdate <= '" . Date('Y-m-d') . "'
-			AND (prices.enddate >= '" . Date('Y-m-d') . "' OR prices.enddate='0000-00-00')
+			AND prices.startdate <= '" . $EffectiveDate . "'
+			AND (prices.enddate >= '" . $EffectiveDate . "' OR prices.enddate='0000-00-00')
 			AND prices.debtorno=''
 			WHERE " . $WhereClause;
-
-// if current prices are those with enddate = 0000-00-00 the following line was wrong
-//			"AND ('$Today' BETWEEN pr.startdate AND prices.enddate) " .
-
 
 	return DB_query($sql, $db);
 }
 
-function getStockData($StockID, $Currency, $salesType) {
-	$result = getStockItems(null, $Currency, $salesType, $StockID);
+function getStockData($StockID, $Currency, $salesType, $EffectiveDate) {
+	$result = getStockItems(null, $Currency, $salesType, $EffectiveDate, $StockID);
 	return DB_fetch_array($result);
 }
 
@@ -386,14 +394,14 @@ function getPageDimensions($dimensions) {
 	);
 }
 
-function printLabels($dimensions, $lines, $qtyByItem, $Currency, $salesType, $StockIDList) {
+function printLabels($dimensions, $lines, $qtyByItem, $Currency, $salesType, $StockIDList, $EffectiveDate) {
 	global $pdf, $DecimalPlaces, $Version;
 	$row = $col = 0;
 
 	$DecimalPlaces=getDecimalPlaces($Currency);
 
 	foreach ($StockIDList as $StockID=>$on) {  // At least there is one item
-		$itemData = getStockData($StockID, $Currency, $salesType);
+		$itemData = getStockData($StockID, $Currency, $salesType, $EffectiveDate);
 		$num=$qtyByItem;
 		while ($num-- > 0) {	// Print $num labels per item
 			printStockid($itemData, $dimensions, $lines, $Currency, $row, $col);
@@ -480,7 +488,7 @@ function printStockid($itemData, $labelDim, $dataParams, $Currency, $row, $col) 
 			unset($ldescrip);
 			break;
 		case 'price':
-			$txt = number_format($itemData['price'], $DecimalPlaces). ' '. $Currency;
+			$txt = locale_money_format($itemData['price'], $Currency). ' '. $Currency;
 //			$adj='left';
 			break;
 		case 'bcode': break;

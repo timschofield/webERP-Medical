@@ -227,6 +227,7 @@ if (isset($_POST['SearchParts']) and $_POST['SearchParts']!=''){
 	if (isset($OrderNumber)) {
 			$SQL = "SELECT salesorders.orderno,
 					debtorsmaster.name,
+					debtorsmaster.currcode,
 					custbranch.brname,
 					salesorders.customerref,
 					salesorders.orddate,
@@ -261,6 +262,7 @@ if (isset($_POST['SearchParts']) and $_POST['SearchParts']!=''){
 	}
 			$SQL = "SELECT salesorders.orderno,
 					debtorsmaster.name,
+					debtorsmaster.currcode,
 					custbranch.brname,
 					salesorders.customerref,
 					salesorders.orddate,
@@ -294,6 +296,7 @@ if (isset($_POST['SearchParts']) and $_POST['SearchParts']!=''){
 			if (isset($SelectedStockItem)) {
 				$SQL = "SELECT salesorders.orderno,
 						debtorsmaster.name,
+						debtorsmaster.currcode,
 						custbranch.brname,
 						salesorders.customerref,
 						salesorders.orddate,
@@ -323,6 +326,7 @@ if (isset($_POST['SearchParts']) and $_POST['SearchParts']!=''){
 			} else {
 				$SQL = "SELECT salesorders.orderno,
 						debtorsmaster.name,
+						debtorsmaster.currcode,
 						custbranch.brname,
 						salesorders.customerref,
 						salesorders.orddate,
@@ -353,6 +357,7 @@ if (isset($_POST['SearchParts']) and $_POST['SearchParts']!=''){
 			if (isset($SelectedStockItem)) {
 				$SQL = "SELECT salesorders.orderno,
 						debtorsmaster.name,
+						debtorsmaster.currcode,
 						custbranch.brname,
 						salesorders.customerref,
 						salesorders.orddate,
@@ -381,6 +386,7 @@ if (isset($_POST['SearchParts']) and $_POST['SearchParts']!=''){
 			} else {
 				$SQL = "SELECT salesorders.orderno,
 						debtorsmaster.name,
+						debtorsmaster.currcode,
 						custbranch.brname,
 						salesorders.customerref,
 						salesorders.orddate,
@@ -472,7 +478,7 @@ if (!isset($SelectedStockItem)) {
 
 }
 
-If (isset($StockItemsResult)) {
+if (isset($StockItemsResult)) {
 
 	echo '<br /><table cellpadding="2" colspan="7" class="selection">';
 
@@ -520,7 +526,7 @@ If (isset($StockItemsResult)) {
 }
 //end if stock search results to show
 
-If (isset($SalesOrdersResult)) {
+if (isset($SalesOrdersResult)) {
 
 /*show a table of the orders returned by the SQL */
 
@@ -553,7 +559,7 @@ If (isset($SalesOrdersResult)) {
 		$ViewPage = $rootpath . '/OrderDetails.php?OrderNumber=' . $myrow['orderno'];
 		$FormatedDelDate = ConvertSQLDate($myrow['deliverydate']);
 		$FormatedOrderDate = ConvertSQLDate($myrow['orddate']);
-		$FormatedOrderValue = number_format($myrow['ordervalue'],2);
+		$FormatedOrderValue = locale_money_format($myrow['ordervalue'],$myrow['currcode']);
 
 		printf('<td><a href="%s">%s</a></td>
 			<td>%s</td>

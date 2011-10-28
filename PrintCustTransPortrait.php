@@ -305,7 +305,7 @@ if (isset($PrintPDF)
 				if ($myrow2['discountpercent'] == 0) {
 					$DisplayDiscount = '';
 				} else {
-					$DisplayDiscount = number_format($myrow2['discountpercent'] * 100, 2) . '%';
+					$DisplayDiscount = locale_number_format($myrow2['discountpercent'] * 100, 2) . '%';
 					$DiscountPrice = $myrow2['fxprice'] * (1 - $myrow2['discountpercent']);
 				}
 				$DisplayNet = $myrow2['fxnet'];
@@ -321,11 +321,11 @@ if (isset($PrintPDF)
 					$lines++;
 				}
 
-				$LeftOvers = $pdf->addTextWrap($Left_Margin+270,$YPos,76,$FontSize,number_format($DisplayPrice,2),'right');
-				$LeftOvers = $pdf->addTextWrap($Left_Margin+350,$YPos,36,$FontSize,number_format($DisplayQty,2),'right');
+				$LeftOvers = $pdf->addTextWrap($Left_Margin+270,$YPos,76,$FontSize,locale_money_format($DisplayPrice,$myrow['currcode']),'right');
+				$LeftOvers = $pdf->addTextWrap($Left_Margin+350,$YPos,36,$FontSizestock_,locale_number_format($DisplayQty,$myrow2['decimalplaces']),'right');
 				$LeftOvers = $pdf->addTextWrap($Left_Margin+390,$YPos,26,$FontSize,$myrow2['units'],'center');
 				$LeftOvers = $pdf->addTextWrap($Left_Margin+420,$YPos,26,$FontSize,$DisplayDiscount,'right');
-				$LeftOvers = $pdf->addTextWrap($Left_Margin+450,$YPos,72,$FontSize,number_format($DisplayNet,2),'right');
+				$LeftOvers = $pdf->addTextWrap($Left_Margin+450,$YPos,72,$FontSize,locale_money_format($DisplayNet,$myrow['currcode']),'right');
 
 				if ($myrow2['controlled']==1){
 
@@ -421,15 +421,15 @@ if (isset($PrintPDF)
 
 		if ($InvOrCredit=='Invoice') {
 
-			$DisplaySubTot = number_format($myrow['ovamount'],2);
-			$DisplayFreight = number_format($myrow['ovfreight'],2);
-			$DisplayTax = number_format($myrow['ovgst'],2);
-			$DisplayTotal = number_format($myrow['ovfreight']+$myrow['ovgst']+$myrow['ovamount'],2);
+			$DisplaySubTot = locale_money_format($myrow['ovamount'],$myrow['currcode']);
+			$DisplayFreight = locale_money_format($myrow['ovfreight'],$myrow['currcode']);
+			$DisplayTax = locale_money_format($myrow['ovgst'],$myrow['currcode']);
+			$DisplayTotal = locale_money_format($myrow['ovfreight']+$myrow['ovgst']+$myrow['ovamount'],$myrow['currcode']);
 		} else {
-			$DisplaySubTot = number_format(-$myrow['ovamount'],2);
-			$DisplayFreight = number_format(-$myrow['ovfreight'],2);
-			$DisplayTax = number_format(-$myrow['ovgst'],2);
-			$DisplayTotal = number_format(-$myrow['ovfreight']-$myrow['ovgst']-$myrow['ovamount'],2);
+			$DisplaySubTot = locale_money_format(-$myrow['ovamount'],$myrow['currcode']);
+			$DisplayFreight = locale_money_format(-$myrow['ovfreight'],$myrow['currcode']);
+			$DisplayTax = locale_money_format(-$myrow['ovgst'],$myrow['currcode']);
+			$DisplayTotal = locale_money_format(-$myrow['ovfreight']-$myrow['ovgst']-$myrow['ovamount'],$myrow['currcode']);
 		}
 	/*Print out the invoice text entered */
 		$YPos = $Bottom_Margin+(3*$line_height);
@@ -523,11 +523,11 @@ if (isset($PrintPDF)
 
 	/*if FromTransNo is not set then show a form to allow input of either a single invoice number or a range of invoices to be printed. Also get the last invoice number created to show the user where the current range is up to */
 
-		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="POST"><table class="selection">';
+		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print') . '" alt="" />' . ' ' .
 			_('Print Invoices or Credit Notes (Portrait Mode)') . '</p>';
-		echo '<tr><td>' . _('Print Invoices or Credit Notes') . '</td><td><select name=InvOrCredit>';
+		echo '<table class="selection"><tr><td>' . _('Print Invoices or Credit Notes') . '</td><td><select name=InvOrCredit>';
 		if ($InvOrCredit=='Invoice' OR !isset($InvOrCredit)){
 
 			echo '<option selected="True" value="Invoice">' . _('Invoices') . '</option>';
@@ -835,6 +835,7 @@ if (isset($PrintPDF)
 								stockmoves.qty as quantity,
 								stockmoves.discountpercent, ((1 - stockmoves.discountpercent) * stockmoves.price * " . $ExchRate . " * stockmoves.qty) AS fxnet,
 								(stockmoves.price * " . $ExchRate . ") AS fxprice,
+								stockmaster.decimalplaces,
 								stockmaster.units
 							FROM stockmoves,
 								stockmaster
@@ -882,14 +883,14 @@ if (isset($PrintPDF)
 
 						echo $RowStarter;
 
-						$DisplayPrice =number_format($myrow2['fxprice'],2);
-						$DisplayQty = number_format($myrow2['quantity'],2);
-						$DisplayNet = number_format($myrow2['fxnet'],2);
+						$DisplayPrice = locale_money_format($myrow2['fxprice'],$myrow['currcode']);
+						$DisplayQty = locale_number_format($myrow2['quantity'],$myrow2['decimalplaces']);
+						$DisplayNet = locale_money_format($myrow2['fxnet'],$myrow['currcode']);
 
 						if ($myrow2['discountpercent']==0){
 							$DisplayDiscount ='';
 						} else {
-							$DisplayDiscount = number_format($myrow2['discountpercent']*100,2) . '%';
+							$DisplayDiscount = locale_number_format($myrow2['discountpercent']*100,2) . '%';
 						}
 
 						printf ('<td>%s</td>
@@ -1013,15 +1014,15 @@ if (isset($PrintPDF)
 
 				if ($InvOrCredit=='Invoice') {
 
-					$DisplaySubTot = number_format($myrow['ovamount'],2);
-					$DisplayFreight = number_format($myrow['ovfreight'],2);
-					$DisplayTax = number_format($myrow['ovgst'],2);
-					$DisplayTotal = number_format($myrow['ovfreight']+$myrow['ovgst']+$myrow['ovamount'],2);
+					$DisplaySubTot = locale_money_format($myrow['ovamount'],$myrow['currcode']);
+					$DisplayFreight = locale_money_format($myrow['ovfreight'],$myrow['currcode']);
+					$DisplayTax = locale_money_format($myrow['ovgst'],$myrow['currcode']);
+					$DisplayTotal = locale_money_format($myrow['ovfreight']+$myrow['ovgst']+$myrow['ovamount'],$myrow['currcode']);
 				} else {
-					$DisplaySubTot = number_format(-$myrow['ovamount'],2);
-					$DisplayFreight = number_format(-$myrow['ovfreight'],2);
-					$DisplayTax = number_format(-$myrow['ovgst'],2);
-					$DisplayTotal = number_format(-$myrow['ovfreight']-$myrow['ovgst']-$myrow['ovamount'],2);
+					$DisplaySubTot = locale_money_format(-$myrow['ovamount'],$myrow['currcode']);
+					$DisplayFreight = locale_money_format(-$myrow['ovfreight'],$myrow['currcode']);
+					$DisplayTax = locale_money_format(-$myrow['ovgst'],$myrow['currcode']);
+					$DisplayTotal = locale_money_format(-$myrow['ovfreight']-$myrow['ovgst']-$myrow['ovamount'],$myrow['currcode']);
 				}
 	/*Print out the invoice text entered */
 				echo '<table class="table1"><tr>

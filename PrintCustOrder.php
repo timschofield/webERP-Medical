@@ -7,7 +7,7 @@ include('includes/class.pdf.php');
 include('includes/SQL_CommonFunctions.inc');
 
 //Get Out if we have no order number to work with
-If (!isset($_GET['TransNo']) || $_GET['TransNo']==""){
+If (!isset($_GET['TransNo']) or $_GET['TransNo']==""){
 	$title = _('Select Order To Print');
 	include('includes/header.inc');
 	echo '<div class="centre">';
@@ -34,7 +34,7 @@ $sql = "SELECT salesorders.customerref,
 		salesorders.deladd6,
 		salesorders.debtorno,
 		salesorders.branchcode,
-                salesorders.deliverydate,
+		salesorders.deliverydate,
 		debtorsmaster.name,
 		debtorsmaster.address1,
 		debtorsmaster.address2,
@@ -42,6 +42,7 @@ $sql = "SELECT salesorders.customerref,
 		debtorsmaster.address4,
 		debtorsmaster.address5,
 		debtorsmaster.address6,
+		debtorsmaster.currcode,
 		shippers.shippername,
 		salesorders.printedpackingslip,
 		salesorders.datepackingslipprinted,
@@ -110,10 +111,12 @@ $sql = "SELECT salesorderdetails.stkcode,
 		stockmaster.description,
 		salesorderdetails.quantity,
 		salesorderdetails.qtyinvoiced,
-		salesorderdetails.unitprice
-	FROM salesorderdetails INNER JOIN stockmaster
+		salesorderdetails.unitprice,
+		stockmaster.decimalplaces
+	FROM salesorderdetails
+	INNER JOIN stockmaster
 		ON salesorderdetails.stkcode=stockmaster.stockid
-	 WHERE salesorderdetails.orderno='" . $_GET['TransNo'] . "'";
+	WHERE salesorderdetails.orderno='" . $_GET['TransNo'] . "'";
 $result=DB_query($sql, $db, $ErrMsg);
 
 if (DB_num_rows($result)>0){
@@ -160,9 +163,9 @@ if (DB_num_rows($result)>0){
 
 	while ($myrow2=DB_fetch_array($result)){
 
-		$DisplayQty = number_format($myrow2['quantity'],2);
-		$DisplayPrevDel = number_format($myrow2['qtyinvoiced'],2);
-		$DisplayQtySupplied = number_format($myrow2['quantity'] - $myrow2['qtyinvoiced'],2);
+		$DisplayQty = locale_number_format($myrow2['quantity'],$myrow2['decimalplaces']);
+		$DisplayPrevDel = locale_number_format($myrow2['qtyinvoiced'],$myrow2['decimalplaces']);
+		$DisplayQtySupplied = locale_number_format($myrow2['quantity'] - $myrow2['qtyinvoiced'],$myrow2['decimalplaces']);
 
 		$LeftOvers = $pdf->addTextWrap(13,$YPos,135,$FontSize,$myrow2['stkcode']);
 		$LeftOvers = $pdf->addTextWrap(148,$YPos,239,$FontSize,$myrow2['description']);

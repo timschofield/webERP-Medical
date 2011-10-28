@@ -45,27 +45,29 @@ echo '</tr></table><br /><div class="centre"><input type="submit" name="ShowResu
 
 echo '</form></div><br />';
 
-if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
+if (isset($_POST['ShowResults']) and $_POST['TransType'] != ''){
    $SQL_FromDate = FormatDateForSQL($_POST['FromDate']);
    $SQL_ToDate = FormatDateForSQL($_POST['ToDate']);
    $sql = "SELECT type,
-		transno,
-   		trandate,
-		duedate,
-		supplierno,
-		suppname,
-		suppreference,
-		transtext,
-		rate,
-		diffonexch,
-		alloc,
-		ovamount+ovgst as totalamt,
-		currcode,
-		typename
-	FROM supptrans
-		INNER JOIN suppliers ON supptrans.supplierno=suppliers.supplierid
-		INNER JOIN systypes ON supptrans.type = systypes.typeid
-	WHERE ";
+				transno,
+				trandate,
+				duedate,
+				supplierno,
+				suppname,
+				suppreference,
+				transtext,
+				rate,
+				diffonexch,
+				alloc,
+				ovamount+ovgst as totalamt,
+				currcode,
+				typename
+			FROM supptrans
+			INNER JOIN suppliers
+				ON supptrans.supplierno=suppliers.supplierid
+			INNER JOIN systypes
+				ON supptrans.type = systypes.typeid
+			WHERE ";
 
    $sql = $sql . "trandate >='" . $SQL_FromDate . "' AND trandate <= '" . $SQL_ToDate . "'";
 	if  ($_POST['TransType']!='All')  {
@@ -122,8 +124,8 @@ if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
 			$myrow['supplierno'] . ' - ' . $myrow['suppname'],
 			$myrow['transtext'],
 			ConvertSQLDate($myrow['duedate']),
-			$myrow['rate'],
-			number_format($myrow['totalamt'],2),
+			locale_money_format($myrow['rate'],$myrow['currcode']),
+			locale_money_format($myrow['totalamt'],$myrow['currcode']),
 			$myrow['currcode']
 		);
 
@@ -152,7 +154,7 @@ if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
 					</tr>',
 					$GLTransRow['account'],
 					$GLTransRow['accountname'],
-					number_format($GLTransRow['amount'],2),
+					locale_money_format($GLTransRow['amount'],$_SESSION['Currencies']['currencydefault']),
 					$GLTransRow['narrative']);
 
 				$CheckGLTransBalance += $GLTransRow['amount'];

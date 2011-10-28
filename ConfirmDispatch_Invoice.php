@@ -15,7 +15,7 @@ include('includes/SQL_CommonFunctions.inc');
 include('includes/FreightCalculation.inc');
 include('includes/GetSalesTransGLCodes.inc');
 
-if (!isset($_GET['OrderNumber']) && !isset($_SESSION['ProcessingOrder'])) {
+if (!isset($_GET['OrderNumber']) and !isset($_SESSION['ProcessingOrder'])) {
 	/* This page can only be called with an order number for invoicing*/
 	echo '<div class="centre"><a href="' . $rootpath . '/SelectSalesOrder.php">' . _('Select a sales order to invoice'). '</a></div>';
 	echo '<br /><br />';
@@ -553,7 +553,7 @@ echo '</table><br />';
 
 
 
-if (isset($_POST['ProcessInvoice']) && $_POST['ProcessInvoice'] != ""){
+if (isset($_POST['ProcessInvoice']) and $_POST['ProcessInvoice'] != ""){
 
 /* SQL to process the postings for sales invoices...
 
@@ -864,7 +864,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 
 
 
-		} elseif (($OrderLine->Quantity - $OrderLine->QtyDispatched) >0 && DateDiff(ConvertSQLDate($DefaultDispatchDate),$_SESSION['Items']->DeliveryDate,'d') >0) {
+		} elseif (($OrderLine->Quantity - $OrderLine->QtyDispatched) >0 and DateDiff(ConvertSQLDate($DefaultDispatchDate),$_SESSION['Items']->DeliveryDate,'d') >0) {
 
 		/*The order is being short delivered after the due date - need to insert a delivery differnce log */
 
@@ -999,6 +999,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 													trandate,
 													debtorno,
 													branchcode,
+													price,
 													prd,
 													reference,
 													qty,
@@ -1013,6 +1014,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 													 '" . $DefaultDispatchDate . "',
 													 '" . $_SESSION['Items']->DebtorNo . "',
 													 '" . $_SESSION['Items']->Branch . "',
+													 '" . $_SESSION['Items']->Price . "',
 													 '" . $PeriodNo . "',
 													 '" . _('Assembly') . ': ' . $OrderLine->StockID . ' ' . _('Order') . ': ' . $_SESSION['ProcessingOrder'] . "',
 													 '" . -$AssParts['quantity'] * $OrderLine->QtyDispatched . "',

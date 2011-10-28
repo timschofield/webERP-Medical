@@ -74,7 +74,7 @@ while ($myrow=DB_fetch_array($SalesOrdersResult)) {
 	$FTPDispatchNote = $_SERVER['PHP_SELF'] . '?OrderNo=' . $myrow['orderno'];
 	$FormatedDelDate = ConvertSQLDate($myrow['deliverydate']);
 	$FormatedOrderDate = ConvertSQLDate($myrow['orddate']);
-	$FormatedOrderValue = number_format($myrow['ordervalue'],2);
+	$FormatedOrderValue = locale_money_format($myrow['ordervalue'],$_SESSION['CompanyRecord']['currencydefault']);
 	$FormatedDateLastSent = ConvertSQLDate($myrow['datepackingslipprinted']);
 	$ModifyPage = $rootpath . 'SelectOrderItems.php?&ModifyOrderNumber=' . $myrow['orderno'];
 
@@ -266,7 +266,7 @@ if (isset($_GET['OrderNo'])){ /*An order has been selected for sending */
 			// set up basic connection
 			$conn_id = ftp_connect($_SESSION['RadioBeaconFTP_server']); // login with username and password
 			$login_result = ftp_login($conn_id, $_SESSION['RadioBeaconFTP_user_name'], $_SESSION['RadioBeaconFTP_user_pass']); // check connection
-			if ((!$conn_id) || (!$login_result)) {
+			if ((!$conn_id) or (!$login_result)) {
 				echo '<br />' . _('Ftp connection has failed');
 				echo '<br />' . _('Attempted to connect to') . ' ' . $_SESSION['RadioBeaconFTP_server'] . ' ' . _('for user') . ' ' . $_SESSION['RadioBeaconFTP_user_name'];
 				die;

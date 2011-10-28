@@ -87,7 +87,7 @@ $YPos -= (1.5 * $line_height);
 //$PageNumber++;
 
 $sql="SELECT currency,
-						decimalplaces
+				currabrev
 					FROM currencies
 					WHERE currabrev=(SELECT currcode
 													FROM banktrans
@@ -96,8 +96,7 @@ $sql="SELECT currency,
 $result=DB_query($sql, $db);
 $myrow=DB_fetch_array($result);
 $Currency=$myrow['currency'];
-$DecimalPlaces=$myrow['decimalplaces'];
-
+$CurrCode=$myrow['currabrev'];
 $sql="SELECT  name,
 						address1,
 						address2,
@@ -162,3 +161,4 @@ $YPos=$YPos-($line_height*2);
 
 $pdf->OutputD('Receipt-'.$_GET['FromTransNo'], 'I');
 ?>
+

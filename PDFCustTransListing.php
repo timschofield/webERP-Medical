@@ -53,13 +53,16 @@ if (!isset($_POST['Date'])){
 }
 
 $sql= "SELECT type,
-		debtorno,
+		debtortrans.debtorno,
 		transno,
 		trandate,
 		ovamount,
 		ovgst,
+		debtorsmaster.currcode,
 		invtext
 	FROM debtortrans
+	LEFT JOIN debtorsmaster
+	ON debtortrans.debtorno=debtorsmaster.debtorno
 	WHERE type='" . $_POST['TransType'] . "'
 	AND date_format(inputdate, '%Y-%m-%d')='".FormatDateForSQL($_POST['Date'])."'";
 
@@ -104,9 +107,9 @@ while ($myrow=DB_fetch_array($result)){
 	$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,160,$FontSize,$supplierrow['name'], 'left');
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+162,$YPos,80,$FontSize,$myrow['transno'], 'left');
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+242,$YPos,70,$FontSize,ConvertSQLDate($myrow['trandate']), 'left');
-	$LeftOvers = $pdf->addTextWrap($Left_Margin+312,$YPos,70,$FontSize,number_format($myrow['ovamount'],2), 'right');
-	$LeftOvers = $pdf->addTextWrap($Left_Margin+382,$YPos,70,$FontSize,number_format($myrow['ovgst'],2), 'right');
-	$LeftOvers = $pdf->addTextWrap($Left_Margin+452,$YPos,70,$FontSize,number_format($myrow['ovamount']+$myrow['ovgst'],2), 'right');
+	$LeftOvers = $pdf->addTextWrap($Left_Margin+312,$YPos,70,$FontSize,locale_money_format($myrow['ovamount'],$myrow['currcode']), 'right');
+	$LeftOvers = $pdf->addTextWrap($Left_Margin+382,$YPos,70,$FontSize,locale_money_format($myrow['ovgst'],$myrow['currcode']), 'right');
+	$LeftOvers = $pdf->addTextWrap($Left_Margin+452,$YPos,70,$FontSize,locale_money_format($myrow['ovamount']+$myrow['ovgst'],$myrow['currcode']), 'right');
 
 	$YPos -= ($line_height);
 	$TotalCheques = $TotalCheques - $myrow['ovamount'];
@@ -120,7 +123,7 @@ while ($myrow=DB_fetch_array($result)){
 
 
 $YPos-=$line_height;
-$LeftOvers = $pdf->addTextWrap($Left_Margin+452,$YPos,70,$FontSize,number_format(-$TotalCheques,2), 'right');
+$LeftOvers = $pdf->addTextWrap($Left_Margin+452,$YPos,70,$FontSize,locale_money_format(-$TotalCheques,$_SESSION['CompanyRecord']['currencydefault']), 'right');
 $LeftOvers = $pdf->addTextWrap($Left_Margin+265,$YPos,300,$FontSize,_('Total') . '  ' . _('Transactions'), 'left');
 
 $ReportFileName = $_SESSION['DatabaseName'] . '_CustTransListing_' . date('Y-m-d').'.pdf';

@@ -12,9 +12,13 @@ $sql = "SELECT debtortrans.id,
 		debtortrans.transno,
 		ovamount+ovgst AS totamt,
 		SUM(custallocns.Amt) AS totalalloc,
-		debtorTrans.alloc
+		debtorsmaster.currcode,
+		debtortrans.alloc
 	FROM debtortrans
-		INNER JOIN custallocns ON debtortrans.id=custallocns.transid_allocto
+	INNER JOIN custallocns
+		ON debtortrans.id=custallocns.transid_allocto
+	LEFT JOIN debtorsmaster
+		ON debtortrans.debtorno=debtorsmaster.debtorno
 	WHERE debtortrans.type=10
 	GROUP BY debtortrans.ID,
 		debtortrans.type=10,
@@ -32,9 +36,9 @@ while ($myrow = DB_fetch_array($result)){
 	$AllocToID = $myrow['id'];
 
 	echo '<br />' . _('Allocations made against') . ' ' . $myrow['debtorno'] . ' ' . _('Invoice Number') . ': ' . $myrow['transno'];
-	echo '<br />' . _('Original Invoice Total') . ': '. $myrow['totamt'];
-	echo '<br />' . _('Total amount recorded as allocated against it') . ': ' . $myrow['alloc'];
-	echo '<br />' . _('Total of allocation records') . ': ' . $myrow['totalalloc'];
+	echo '<br />' . _('Original Invoice Total') . ': '. locale_money_format($myrow['totamt'], $myrow['currcode']);
+	echo '<br />' . _('Total amount recorded as allocated against it') . ': ' . locale_money_format($myrow['alloc'], $myrow['currcode']);
+	echo '<br />' . _('Total of allocation records') . ': ' . locale_money_format($myrow['totalalloc'], $myrow['currcode']);
 
 	$sql = "SELECT type,
 			transno,
@@ -92,8 +96,8 @@ while ($myrow = DB_fetch_array($result)){
 			$myrow1['transno'],
 			$myrow1['reference'],
 			$myrow1['exrate'],
-			$myrow1['totalamt'],
-			$myrow1['amt']);
+			locale_money_format($myrow1['totalamt'], $myrow['currcode']),
+			locale_money_format($myrow1['amt'], $myrow['currcode']));
 
 		$RowCounter++;
 		If ($RowCounter == 12){
@@ -104,7 +108,7 @@ while ($myrow = DB_fetch_array($result)){
 		$AllocsTotal +=$myrow1['amt'];
 	}
 	//end of while loop
-	echo '<tr><td colspan="6" class="number">' . number_format($AllocsTotal,2) . '</td></tr>';
+	echo '<tr><td colspan="6" class="number">' . locale_money_format($AllocsTotal, $myrow['currcode']) . '</td></tr>';
 	echo '</table><hr>';
 }
 

@@ -193,7 +193,7 @@ if (!isset($_GET['SelectedSectionID']) and !isset($_POST['SelectedSectionID'])) 
 
 		echo '<td>' . $myrow[0] . '</td><td>' . $myrow[1] . '</td>';
 		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?SelectedSectionID=' . $myrow[0] . '">' . _('Edit') . '</a></td>';
-		if ( $myrow[0] == '1' || $myrow[0] == '2' ) {
+		if ( $myrow[0] == '1' or $myrow[0] == '2' ) {
 			echo '<td><b>'._('Restricted').'</b></td>';
 		} else {
 			echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?SelectedSectionID=' . $myrow[0] . '&amp;delete=1">' . _('Delete') .'</a></td>';

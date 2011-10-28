@@ -163,8 +163,10 @@ if($_REQUEST['POLine'] == 1){
 			salesorderdetails.unitprice,
 			salesorderdetails.narrative,
 			salesorderdetails.poline,
+			salesorderdetails.decimalplaces,
 			salesorderdetails.itemdue
-		FROM salesorderdetails INNER JOIN stockmaster
+		FROM salesorderdetails
+		INNER JOIN stockmaster
 			ON salesorderdetails.stkcode=stockmaster.stockid
 		WHERE salesorderdetails.orderno=" . $_GET['TransNo'] . "
 		ORDER BY poline";
@@ -174,9 +176,9 @@ if($_REQUEST['POLine'] == 1){
 
 		while ($myrow2=DB_fetch_array($result)){
 
-			$DisplayQty = number_format($myrow2['quantity'],0);
-			$DisplayPrevDel = number_format($myrow2['qtyinvoiced'],0);
-			$DisplayQtySupplied = number_format($myrow2['quantity'] - $myrow2['qtyinvoiced'],0);
+			$DisplayQty = locale_number_format($myrow2['quantity'],$myrow2['decimalplaces']);
+			$DisplayPrevDel = locale_number_format($myrow2['qtyinvoiced'],$myrow2['decimalplaces']);
+			$DisplayQtySupplied = locale_number_format($myrow2['quantity'] - $myrow2['qtyinvoiced'],$myrow2['decimalplaces']);
          		$StkCode[$i] = $myrow2['stkcode'];
          		$DscCode[$i] = $myrow2['description'];
          		$QtyCode[$i] = $DisplayQty ;
@@ -189,25 +191,25 @@ if($_REQUEST['POLine'] == 1){
         		{
         			$ItemDue[$i] = date('M d, Y',strtotime($myrow2['itemdue']));
         		}
-			$MailMessage = $MailMessage . "<tr>";
+			$MailMessage = $MailMessage . '<tr>';
 			if($_REQUEST['POLine'] == 1){
-				$MailMessage = $MailMessage . "<td align='right'>" . $POLine[$i] . "</td>";
+				$MailMessage = $MailMessage . '<td align="right">' . $POLine[$i] . '</td>';
 			}
-			$MailMessage = $MailMessage . "<td>" . $myrow2['stkcode'] .
-			                "</td><td>" .
-			                $myrow2['description'] . "</td><td align='right'>" .
-			                $DisplayQty . "</td><td align='center'>" . $ItemDue[$i]  .
-                 			 "</td></tr>";
+			$MailMessage = $MailMessage . '<td>' . $myrow2['stkcode'] . '</td>
+											<td>' . $myrow2['description'] . '</td>
+											<td align="right">' . $DisplayQty . '</td>
+											<td align="center">' . $ItemDue[$i]  . '</td>
+										</tr>';
 
          $i = $i + 1;
 
 		} //end while there are line items to print out
 
 	} /*end if there are order details to show on the order*/
-$MailMessage = $MailMessage . "</table></body></html>";
+$MailMessage = $MailMessage . '</table></body></html>';
 // echo $MailMessage . "=mailMessage<br />";
 if(mail( $MailTo, $MailSubject, $MailMessage, $headers )){
-	echo " The following E-Mail was sent to $MailTo:";
+	echo ' The following E-Mail was sent to $MailTo:';
 }
 ?>
 <html>

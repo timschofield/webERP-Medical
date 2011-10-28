@@ -7,8 +7,6 @@ include ('includes/session.inc');
 
 if (isset($_POST['Period'])){
 	$SelectedPeriod = $_POST['Period'];
-} elseif (isset($_GET['Period'])){
-	$SelectedPeriod = $_GET['Period'];
 }
 
 if (isset($_POST['RunReport'])){
@@ -75,8 +73,8 @@ if (isset($_POST['RunReport'])){
 							counterindex";
 
 		} else {
-	 		$sql= "SELECT gltrans.type,
-						gltrans.typename,
+	 		$sql= "SELECT type,
+						typename,
 						gltrans.typeno,
 						gltrans.trandate,
 						gltrans.narrative,
@@ -126,9 +124,9 @@ if (isset($_POST['RunReport'])){
 			$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,150,$FontSize, _('Brought Forward Balance'));
 
 			if ($RunningTotal < 0 ){ //its a credit balance b/fwd
-   			   $LeftOvers = $pdf->addTextWrap(210,$YPos,50,$FontSize, number_format(-$RunningTotal,2) , 'right');
+   			   $LeftOvers = $pdf->addTextWrap(210,$YPos,50,$FontSize, locale_money_format(-$RunningTotal,$_SESSION['CompanyRecord']['currencydefault']) , 'right');
 			} else { //its a debit balance b/fwd
-			   $LeftOvers = $pdf->addTextWrap(160,$YPos,50,$FontSize, number_format($RunningTotal,2) , 'right');
+			   $LeftOvers = $pdf->addTextWrap(160,$YPos,50,$FontSize, locale_money_format($RunningTotal,$_SESSION['CompanyRecord']['currencydefault']) , 'right');
 			}
 		}
 		$PeriodTotal = 0;
@@ -155,9 +153,9 @@ if (isset($_POST['RunReport'])){
 		   			$YPos -=$line_height;
 					$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,150,$FontSize, _('Period Total'));
 					if ($PeriodTotal < 0 ){ //its a credit balance b/fwd
-					   $LeftOvers = $pdf->addTextWrap(210,$YPos,50,$FontSize, number_format(-$PeriodTotal,2) , 'right');
+					   $LeftOvers = $pdf->addTextWrap(210,$YPos,50,$FontSize, locale_money_format(-$PeriodTotal,$_SESSION['CompanyRecord']['currencydefault']) , 'right');
 					} else { //its a debit balance b/fwd
-					   $LeftOvers = $pdf->addTextWrap(160,$YPos,50,$FontSize, number_format($PeriodTotal,2) , 'right');
+					   $LeftOvers = $pdf->addTextWrap(160,$YPos,50,$FontSize, locale_money_format($PeriodTotal,$_SESSION['CompanyRecord']['currencydefault']) , 'right');
 					}
 				}
 				$PeriodNo = $myrow['periodno'];
@@ -168,10 +166,10 @@ if (isset($_POST['RunReport'])){
 			$PeriodTotal += $myrow['amount'];
 
 			if($myrow['amount']>=0){
-				$DebitAmount = number_format($myrow['amount'],2);
+				$DebitAmount = locale_money_format($myrow['amount'],$_SESSION['CompanyRecord']['currencydefault']);
 				$CreditAmount = '';
 			} elseif ($myrow['amount']<0){
-				$CreditAmount = number_format(-$myrow['amount'],2);
+				$CreditAmount = locale_money_format(-$myrow['amount'],$_SESSION['CompanyRecord']['currencydefault']);
 				$DebitAmount = '';
 			}
 
@@ -209,9 +207,9 @@ if (isset($_POST['RunReport'])){
 			$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,150,$FontSize, _('Balance C/Fwd'));
 		}
 		if ($RunningTotal < 0){
-		   $LeftOvers = $pdf->addTextWrap(210,$YPos,50,$FontSize, number_format(-$RunningTotal,2) , 'right');
+		   $LeftOvers = $pdf->addTextWrap(210,$YPos,50,$FontSize, locale_money_format(-$RunningTotal,$_SESSION['CompanyRecord']['currencydefault']) , 'right');
 		} else { //its a debit balance b/fwd
-		   $LeftOvers = $pdf->addTextWrap(160,$YPos,50,$FontSize, number_format($RunningTotal,2) , 'right');
+		   $LeftOvers = $pdf->addTextWrap(160,$YPos,50,$FontSize, locale_money_format($RunningTotal,$_SESSION['CompanyRecord']['currencydefault']) , 'right');
 		}
 	   	$YPos -=$line_height;
 	   	//draw a line under each account printed

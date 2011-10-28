@@ -45,8 +45,8 @@ if (!isset($_POST['continue']) and !isset($_POST['CreateSQLFile'])) {
 	echo '<div class="page_help_text">' . _('You have database updates that are required.').'<br />'.
 		_('Please ensure that you have taken a backup of your current database before continuing.'). '</div><br />';
 
-	echo '<div class="centre"><input type="submit" name="continue" value="'.('Continue With Updates').'" />
-		<input type="submit" name="CreateSQLFile" value="'.('Create an SQL file to apply manually').'" /></div>';
+	echo '<div class="centre"><input type="submit" name="continue" value="'. _('Continue With Updates').'" />
+		<input type="submit" name="CreateSQLFile" value="'. _('Create an SQL file to apply manually').'" /></div>';
 	echo '</form>';
 } else {
 	$StartingUpdate=$_SESSION['DBUpdateNumber']+1;
@@ -68,10 +68,10 @@ if (!isset($_POST['continue']) and !isset($_POST['CreateSQLFile'])) {
 //		echo '</tr>';
 	}
 	echo '<table class="selection"><tr>';
-	echo '<th colspan="4"><font size="2" color="navy"><b>'._('Database Updates Have Been Run').'</b></font></th></tr>';
+	echo '<th colspan="4"><font size="2" color="#616161"><b>'._('Database Updates Have Been Run').'</b></font></th></tr>';
 	echo '<tr><td style="background-color: #fddbdb;color: red;">'.$_SESSION['Updates']['Errors'].' '._('updates have errors in them').'</td></tr>';
 	echo '<tr><td style="background-color: #b9ecb4;color: #006400;">'.$_SESSION['Updates']['Successes'].' '._('updates have succeeded').'</td></tr>';
-	echo '<tr><td style="background-color: #c7ccf6;color: navy;">'.$_SESSION['Updates']['Warnings'].' '._('updates have not been done as the update was unnecessary on this database').'</td></tr>';
+	echo '<tr><td style="background-color: #c7ccf6;color: #616161;">'.$_SESSION['Updates']['Warnings'].' '._('updates have not been done as the update was unnecessary on this database').'</td></tr>';
 	if ($_SESSION['Updates']['Errors']>0) {
 		for ($i=0; $i<sizeOf($_SESSION['Updates']['Messages']); $i++) {
 			echo '<tr><td>'.$_SESSION['Updates']['Messages'][$i].'</td></tr>';

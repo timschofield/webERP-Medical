@@ -215,7 +215,10 @@ $MenuItems['stock']['Transactions']['Caption'] = array (_('Receive Purchase Orde
 														_('Inventory Location Transfers'),
 														_('Inventory Adjustments'),
 														_('Reverse Goods Received'),
-														_('Enter Stock Counts')
+														_('Enter Stock Counts'),
+														_('Create a New Internal Stock Request'),
+														_('Authorise Internal Stock Requests'),
+														_('Fulfill Internal Stock Requests')
 														);
 $MenuItems['stock']['Transactions']['URL'] = array ('/PO_SelectOSPurchOrder.php',
 													'/StockLocTransfer.php',
@@ -223,7 +226,10 @@ $MenuItems['stock']['Transactions']['URL'] = array ('/PO_SelectOSPurchOrder.php'
 													'/StockTransfers.php?New=Yes',
 													'/StockAdjustments.php?NewAdjustment=Yes',
 													'/ReverseGRN.php',
-													'/StockCounts.php'
+													'/StockCounts.php',
+													'/InternalStockRequest.php?New=Yes',
+													'/InternalStockRequestAuthorisation.php',
+													'/InternalStockRequestFulfill.php'
 													);
 
 $MenuItems['stock']['Reports']['Caption'] = array (_('Serial Item Research Tool'),
@@ -352,6 +358,7 @@ $MenuItems['GL']['Reports']['Caption'] = array (_('Trial Balance'),
 												_('Account Inquiry'),
 												_('Account Listing'),
 												_('Account Listing to CSV File'),
+												_('General Ledger Journal Inquiry'),
 												_('Bank Account Reconciliation Statement'),
 												_('Cheque Payments Listing'),
 												_('Daily Bank Transactions'),
@@ -366,6 +373,7 @@ $MenuItems['GL']['Reports']['URL'] = array ('/GLTrialBalance.php',
 											'/SelectGLAccount.php',
 											'/GLAccountReport.php',
 											'/GLAccountCSV.php',
+											'/GLJournalInquiry.php',
 											'/BankReconciliation.php',
 											'/PDFChequeListing.php',
 											'/DailyBankTransactions.php',
@@ -523,7 +531,9 @@ $MenuItems['system']['Maintenance']['Caption'] = array (_('Inventory Categories 
 														_('Discount Category Maintenance'),
 														_('Units of Measure'),
 														_('MRP Available Production Days'),
-														_('MRP Demand Types')
+														_('MRP Demand Types'),
+														_('Create and Manage Database Backups'),
+														_('Maintain Internal Departments')
 														);
 
 $MenuItems['system']['Maintenance']['URL'] = array ('/StockCategories.php',
@@ -531,7 +541,9 @@ $MenuItems['system']['Maintenance']['URL'] = array ('/StockCategories.php',
 													'/DiscountCategories.php',
 													'/UnitsOfMeasure.php',
 													'/MRPCalendar.php',
-													'/MRPDemandTypes.php'
+													'/MRPDemandTypes.php',
+													'/BackupDatabase.php',
+													'/Departments.php'
 													);
 
 if (isset($SupplierLogin) and $SupplierLogin==1){
@@ -611,9 +623,9 @@ echo '</table>';
 echo '</td>';
 echo '<td width="30%" valign="top">';
 if ($_SESSION['Module']=='system') {
-	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/company.png" title="' . _('General Setup Options') . '" alt="" /><b>' . _('General Setup Options') . '</b>';
+	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/company.png" title="' . _('General Setup Options') . '" alt="' . _('General Setup Options') . '" /><b>' . _('General Setup Options') . '</b>';
 } else {
-	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/transactions.png" title="' . _('Transactions') . '" alt="" /><b>'. _('Transactions') . '</b>';
+	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/transactions.png" title="' . _('Transactions') . '" alt="' . _('Transactions') . '" /><b>'. _('Transactions') . '</b>';
 }
 echo '	<table width="100%" class="selection">
 			<tr>
@@ -627,11 +639,15 @@ echo '	<table width="100%" class="selection">
 $i=0;
 foreach ($MenuItems[$_SESSION['Module']]['Transactions']['Caption'] as $Caption) {
 /* Transactions Menu Item */
-	echo '<tr>
+	$ScriptNameArray = explode('?', substr($MenuItems[$_SESSION['Module']]['Transactions']['URL'][$i],1));
+	$PageSecurity = $_SESSION['PageSecurityArray'][$ScriptNameArray[0]];
+	if ((in_array($PageSecurity, $_SESSION['AllowedPageSecurityTokens']) OR !isset($PageSecurity))) {
+		echo '<tr>
 				<td class="menu_group_item">
 					<p>&bull; <a href="' . $rootpath . $MenuItems[$_SESSION['Module']]['Transactions']['URL'][$i] .'">' . $Caption . '</a></p>
 				</td>
 				</tr>';
+	}
 	$i++;
 }
 echo '</table>';
@@ -640,9 +656,9 @@ echo '</td>';
 
 echo '<td width="30%" valign="top">';
 if ($_SESSION['Module']=='system') {
-	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/ar.png" title="' . _('Receivables/Payables Setup') . '" alt="" /><b>' . _('Receivables/Payables Setup') . '</b>';
+	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/ar.png" title="' . _('Receivables/Payables Setup') . '" alt="' . _('Receivables/Payables Setup') . '" /><b>' . _('Receivables/Payables Setup') . '</b>';
 } else {
-	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/reports.png" title="' . _('Inquiries and Reports') . '" alt="" /><b>'. _('Inquiries and Reports') . '</b>';
+	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/reports.png" title="' . _('Inquiries and Reports') . '" alt="' . _('Inquiries and Reports') . '" /><b>'. _('Inquiries and Reports') . '</b>';
 }
 echo '	<table width="100%" class="selection">
 			<tr>
@@ -655,11 +671,15 @@ echo '	<table width="100%" class="selection">
 $i=0;
 foreach ($MenuItems[$_SESSION['Module']]['Reports']['Caption'] as $Caption) {
 /* Transactions Menu Item */
-	echo '<tr>
+	$ScriptNameArray = explode('?', substr($MenuItems[$_SESSION['Module']]['Reports']['URL'][$i],1));
+	$PageSecurity = $_SESSION['PageSecurityArray'][$ScriptNameArray[0]];
+	if ((in_array($PageSecurity, $_SESSION['AllowedPageSecurityTokens']) OR !isset($PageSecurity))) {
+		echo '<tr>
 				<td class="menu_group_item">
 					<p>&bull; <a href="' . $rootpath . $MenuItems[$_SESSION['Module']]['Reports']['URL'][$i] .'">' . $Caption . '</a></p>
 				</td>
 				</tr>';
+	}
 	$i++;
 }
 echo GetRptLinks($_SESSION['Module']);
@@ -669,9 +689,9 @@ echo '</td>';
 
 echo '<td width="30%" valign="top">';
 if ($_SESSION['Module']=='system') {
-	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/inventory.png" title="' . _('Inventory Setup') . '" alt="" /><b>' . _('Inventory Setup') . '</b>';
+	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/inventory.png" title="' . _('Inventory Setup') . '" alt="' . _('Inventory Setup') . '" /><b>' . _('Inventory Setup') . '</b>';
 } else {
-	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/maintenance.png" title="' . _('Maintenance') . '" alt="" /><b>'. _('Maintenance') . '</b>';
+	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/maintenance.png" title="' . _('Maintenance') . '" alt="' . _('Maintenance') . '" /><b>'. _('Maintenance') . '</b>';
 }
 echo '	<table width="100%" class="selection">
 			<tr>
@@ -684,11 +704,15 @@ echo '	<table width="100%" class="selection">
 $i=0;
 foreach ($MenuItems[$_SESSION['Module']]['Maintenance']['Caption'] as $Caption) {
 /* Transactions Menu Item */
-	echo '<tr>
+	$ScriptNameArray = explode('?', substr($MenuItems[$_SESSION['Module']]['Maintenance']['URL'][$i],1));
+	$PageSecurity = $_SESSION['PageSecurityArray'][$ScriptNameArray[0]];
+	if ((in_array($PageSecurity, $_SESSION['AllowedPageSecurityTokens']) OR !isset($PageSecurity))) {
+		echo '<tr>
 				<td class="menu_group_item">
 					<p>&bull; <a href="' . $rootpath . $MenuItems[$_SESSION['Module']]['Maintenance']['URL'][$i] .'">' . $Caption . '</a></p>
 				</td>
-				</tr>';
+			</tr>';
+	}
 	$i++;
 }
 echo '</table>';
@@ -743,7 +767,7 @@ be generated, one for standard reports and the other for custom reports.
 				$Group=explode(':',$Report['groupname']); // break into main group and form group array
 				if ($NoForms AND $Group[0]==$GroupID AND $Report['reporttype']=='frm' AND $Report['defaultreport']==$Def) {
 					$RptLinks .= '<tr><td class="menu_group_item">';
-					$RptLinks .= '<img src="' . $rootpath . '/css/' . $_SESSION['Theme'] . '/images/folders.gif" width="16" height="13" />&nbsp;';
+					$RptLinks .= '<img src="' . $rootpath . '/css/' . $_SESSION['Theme'] . '/images/folders.gif" width="16" height="13" alt="" />&nbsp;';
 					$RptLinks .= '<p>&bull; <a href="' . $rootpath . '/reportwriter/FormMaker.php?id=' . $Report['groupname'] . '"></p>';
 					$RptLinks .= $FormGroups[$Report['groupname']] . '</a>';
 					$RptLinks .= '</td></tr>';

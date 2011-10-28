@@ -30,12 +30,12 @@ if ( isset($_POST['submit']) ) {
 
 	if (strlen($_POST['ShipperName']) >40) {
 		$InputError = 1;
-		prnMsg( _("The shipper's name must be forty characters or less long"), 'error');
+		prnMsg( _('The shippers name must be forty characters or less long'), 'error');
 		$Errors[$i] = 'ShipperName';
 		$i++;
 	} elseif( trim($_POST['ShipperName']) == '' ) {
 		$InputError = 1;
-		prnMsg( _("The shipper's name may not be empty"), 'error');
+		prnMsg( _('The shippers name may not be empty'), 'error');
 		$Errors[$i] = 'ShipperName';
 		$i++;
 	}
@@ -120,7 +120,9 @@ links to delete or edit each. These will call the same page again and allow upda
 or deletion of the records*/
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p>';
 
-	$sql = "SELECT * FROM shippers ORDER BY shipper_id";
+	$sql = "SELECT shipper_id,
+					shippername
+				FROM shippers ORDER BY shipper_id";
 	$result = DB_query($sql,$db);
 
 	echo '<table class="selection">
@@ -140,12 +142,12 @@ or deletion of the records*/
 			<td>%s</td>
 			<td><a href="%sSelectedShipper=%s">'. _('Edit').' </td>
 			<td><a href="%sSelectedShipper=%s&delete=1">'. _('Delete'). '</td></tr>',
-			$myrow[0],
-			$myrow[1],
+			$myrow['shipper_id'],
+			$myrow['shippername'],
 			$_SERVER['PHP_SELF'] . '?',
-			$myrow[0],
+			$myrow['shipper_id'],
 			$_SERVER['PHP_SELF'] . '?',
-			$myrow[0]);
+			$myrow['shipper_id']);
 	}
 	//END WHILE LIST LOOP
 	echo '</table>';
@@ -159,7 +161,7 @@ if (isset($SelectedShipper)) {
 
 if (!isset($_GET['delete'])) {
 
-	echo '<form method="POST" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (isset($SelectedShipper)) {

@@ -18,10 +18,28 @@ $Data['Address3']['MaxLength']='40';
 $Data['Address4']['DBFieldName']='address4';
 $Data['Address4']['MaxLength']='50';
 
-$Data['Phone']['DBFieldName']='phn';
-$Data['Phone']['MaxLength']='50';
+$Data['Phone']['DBFieldName']='telephone';
+$Data['Phone']['MaxLength']='25';
 
 $Data['Fax']['DBFieldName']='fax';
 $Data['Fax']['MaxLength']='25';
+
+$Data['Email']['DBFieldName']='email';
+$Data['Email']['MaxLength']='55';
+
+$Data['BankPartics']['DBFieldName']='bankpartics';
+$Data['BankPartics']['MaxLength']='12';
+
+$Data['BankRef']['DBFieldName']='bankref';
+$Data['BankRef']['MaxLength']='12';
+
+$Data['BankAct']['DBFieldName']='bankact';
+$Data['BankAct']['MaxLength']='30';
+
+$Data['TaxRef']['DBFieldName']='taxref';
+$Data['TaxRef']['MaxLength']='20';
+
+$Data['SupplierSince']['DBFieldName']='suppliersince';
+$Data['SupplierSince']['MaxLength']='10';
 
 ?>

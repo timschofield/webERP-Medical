@@ -119,7 +119,10 @@ function submit(&$db,&$ChangeDate)  //####SUBMIT_SUBMIT_SUBMIT_SUBMIT_SUBMIT_SUB
 	// manufacturing day that precedes it. That way can read the table by the non-manufacturing day,
 	// subtract the leadtime from the daynumber, and find the valid manufacturing day with that daynumber.
 	$DayNumber = 1;
-	$sql = "SELECT * FROM mrpcalendar ORDER BY calendardate";
+	$sql = "SELECT manufacturingflag,
+					calendardate
+				FROM mrpcalendar
+				ORDER BY calendardate";
 	$result = DB_query($sql,$db,$ErrMsg);
 	while ($myrow = DB_fetch_array($result)) {
 		   if ($myrow['manufacturingflag'] == "1") {
@@ -148,7 +151,7 @@ function update(&$db,&$ChangeDate)  //####UPDATE_UPDATE_UPDATE_UPDATE_UPDATE_UPD
 		  GROUP BY calendardate";
 	$result = DB_query($sql,$db);
 	$myrow = DB_fetch_row($result);
-	if ($myrow[0] < 1  ||  !Is_Date($ChangeDate))  {
+	if ($myrow[0] < 1  or  !Is_Date($ChangeDate))  {
 		$InputError = 1;
 		prnMsg(_('Invalid Change Date'),'error');
 	}
@@ -178,7 +181,10 @@ function update(&$db,&$ChangeDate)  //####UPDATE_UPDATE_UPDATE_UPDATE_UPDATE_UPD
 	// manufacturing day that precedes it. That way can read the table by the non-manufacturing day,
 	// subtract the leadtime from the daynumber, and find the valid manufacturing day with that daynumber.
 	$DayNumber = 1;
-	$sql = "SELECT * FROM mrpcalendar ORDER BY calendardate";
+	$sql = "SELECT manufacturingflag,
+					calendardate
+				FROM mrpcalendar
+				ORDER BY calendardate";
 	$result = DB_query($sql,$db,$ErrMsg);
 	while ($myrow = DB_fetch_array($result)) {
 		   if ($myrow['manufacturingflag'] == '1') {

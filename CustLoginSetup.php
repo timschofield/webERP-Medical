@@ -31,8 +31,6 @@ $CustomerName=$myrow['name'];
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') .'" alt="" />' .
 			' ' . _('Customer') . ' : ' . $_SESSION['CustomerID'] . ' - ' . $CustomerName. _(' has been selected') . '</p><br />';
-//echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/group_add.png" title="' . _('Search') . '" alt="">' . ' ' . $title.'</p><br />';
-
 
 //Make an array of the security roles where only one role is active and is ID 1
 
@@ -521,8 +519,7 @@ echo '<tr>
 
 $ThemeDirectory = dir('css/');
 
-
-while (false != ($ThemeName = $ThemeDirectory->read())){
+while (false !== ($ThemeName = $ThemeDirectory->read())){
 
 	if (is_dir('css/'.$ThemeName) AND $ThemeName != '.' AND $ThemeName != '..' AND $ThemeName != 'CVS'){
 
@@ -536,6 +533,8 @@ while (false != ($ThemeName = $ThemeDirectory->read())){
 	}
 }
 
+$ThemeDirectory->close();
+
 echo '</select></td></tr>';
 
 
@@ -545,8 +544,7 @@ echo '<tr>
 
  $LangDirHandle = dir('locale/');
 
-
-while (false != ($LanguageEntry = $LangDirHandle->read())){
+while (false !== ($LanguageEntry = $LangDirHandle->read())){
 
 	if (is_dir('locale/' . $LanguageEntry) AND $LanguageEntry != '..' AND $LanguageEntry != 'CVS' AND $LanguageEntry!='.'){
 
@@ -559,6 +557,8 @@ while (false != ($LanguageEntry = $LangDirHandle->read())){
 		}
 	}
 }
+
+ $LangDirHandle->close();
 
 echo '</select></td></tr>';
 

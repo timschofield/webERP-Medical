@@ -759,7 +759,7 @@ function CreateLinkList($ReportID,$Table) {
 			}
 		} // while
 	} // for
-	if (!$myrow[$Table] && $Table > $j) {
+	if (!$myrow[$Table] and $Table > $j) {
 		$LinkList = '';
 	}
 	return $LinkList;
@@ -810,7 +810,7 @@ function CreateLinkEqList($ReportID,$Table) {
 			}
 		} // while
 	} // for
-	if (!$myrow[$Table] && $Table > $j) {
+	if (!$myrow[$Table] and $Table > $j) {
 		$LinkEqList = '';
 	}
 	return $LinkEqList;

@@ -146,35 +146,37 @@ then none of the above are true and the list of sales types will be displayed wi
 links to delete or edit each. These will call the same page again and allow update/input
 or deletion of the records*/
 
-	$sql = "SELECT * FROM pctypetabs";
+	$sql = "SELECT typetabcode,
+					typetabdescription
+				FROM pctypetabs";
 	$result = DB_query($sql,$db);
 
 	echo '<table class="selection">';
 	echo '<tr>
-		<th>' . _('Type Of Tab') . '</th>
-		<th>' . _('Description') . '</th>
-	</tr>';
+			<th>' . _('Type Of Tab') . '</th>
+			<th>' . _('Description') . '</th>
+		</tr>';
 
-$k=0; //row colour counter
+	$k=0; //row colour counter
 
-while ($myrow = DB_fetch_row($result)) {
-	if ($k==1){
-		echo '<tr class="EvenTableRows">';
-		$k=0;
-	} else {
-		echo '<tr class="OddTableRows">';
-		$k=1;
-	}
+	while ($myrow = DB_fetch_array($result)) {
+		if ($k==1){
+			echo '<tr class="EvenTableRows">';
+			$k=0;
+		} else {
+			echo '<tr class="OddTableRows">';
+			$k=1;
+		}
 
-	printf('<td>%s</td>
-		<td>%s</td>
-		<td><a href="%sSelectedTab=%s">' . _('Edit') . '</td>
-		<td><a href="%sSelectedTab=%s&delete=yes" onclick=\'return confirm("' . _('Are you sure you wish to delete this code and all the description it may have set up?') . '");\'>' . _('Delete') . '</td>
-		</tr>',
-		$myrow['0'],
-		$myrow['1'],
-		$_SERVER['PHP_SELF']. '?', $myrow['0'],
-		$_SERVER['PHP_SELF']. '?', $myrow['0']);
+		printf('<td>%s</td>
+				<td>%s</td>
+				<td><a href="%sSelectedTab=%s">' . _('Edit') . '</td>
+				<td><a href="%sSelectedTab=%s&delete=yes" onclick=\'return confirm("' . _('Are you sure you wish to delete this code and all the description it may have set up?') . '");\'>' . _('Delete') . '</td>
+			</tr>',
+				$myrow['typetabcode'],
+				$myrow['typetabdescription'],
+				$_SERVER['PHP_SELF']. '?', $myrow['typetabcode'],
+				$_SERVER['PHP_SELF']. '?', $myrow['typetabcode']);
 	}
 	//END WHILE LIST LOOP
 	echo '</table>';

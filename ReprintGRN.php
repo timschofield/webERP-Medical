@@ -13,7 +13,7 @@ if (!isset($_POST['PONumber'])) {
 echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo '<table class="selection">';
-echo '<tr><th colspan="2"><font size="2" color="navy">' . _('Select a purchase order') . '</th></tr>';
+echo '<tr><th colspan="2"><font size="2" color="#616161">' . _('Select a purchase order') . '</th></tr>';
 echo '<tr><td>' . _('Enter a Purchase Order Number') . '</td>';
 echo '<td>' . '<input type="text" name="PONumber" class="number" size="7" value="'.$_POST['PONumber'].'" /></td></tr>';
 echo '<tr><td colspan="2" style="text-align: center">' . '<input type="submit" name="Show" value="Show GRNs" /></td></tr>';
@@ -63,7 +63,7 @@ if (isset($_POST['Show'])) {
 	}
 	$k=0;
 	echo '<br /><table class="selection">';
-	echo '<tr><th colspan="8"><font size="2" color="navy">' . _('GRNs for Purchase Order No') .' ' . $_POST['PONumber'] . '</th></tr>';
+	echo '<tr><th colspan="8"><font size="2" color="#616161">' . _('GRNs for Purchase Order No') .' ' . $_POST['PONumber'] . '</th></tr>';
 	echo '<tr><th>' . _('Supplier') . '</th>';
 	echo '<th>' . _('PO Order line') . '</th>';
 	echo '<th>' . _('GRN Number') . '</th>';
@@ -85,7 +85,7 @@ if (isset($_POST['Show'])) {
 		echo '<td>' . $myrow['itemcode'] . '</td>';
 		echo '<td>' . $myrow['itemdescription'] . '</td>';
 		echo '<td>' . $myrow['deliverydate'] . '</td>';
-		echo '<td class="number">' . number_format($myrow['qtyrecd'], $myrow['decimalplaces']) . '</td>';
+		echo '<td class="number">' . locale_number_format($myrow['qtyrecd'], $myrow['decimalplaces']) . '</td>';
 		echo '<td><a href="PDFGrn.php?GRNNo=' . $myrow['grnbatch'] .'&PONo=' . $_POST['PONumber'] . '">' . _('Reprint') . '</a></td>';
 		echo '</tr>';
 	}

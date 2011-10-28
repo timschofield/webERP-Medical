@@ -72,7 +72,7 @@ class Cpdf extends TCPDF {
 
 	function addText($xb,$yb,$size,$text)//,$angle=0,$wordSpaceAdjust=0)
 															{
-// Javier	$text = html_entity_decode($text);
+// Javier	$text = html_entity_decode($text,ENT_QUOTES,'UTF-8');
 		$this->SetFontSize($size);
 		$this->Text($xb, $this->h-$yb, $text);
 	}
@@ -150,8 +150,8 @@ class Cpdf extends TCPDF {
 		if ($angle != 0){
 			$a = -1*deg2rad((float)$angle);
 			$tmp = "\n q ";
-			$tmp .= sprintf('%.3f',cos($a)).' '.sprintf('%.3f',(-1.0*sin($a))).' '.sprintf('%.3f',sin($a)).' '.sprintf('%.3f',cos($a)).' ';
-			$tmp .= sprintf('%.3f',$x0).' '.sprintf('%.3f',$y0).' cm';
+			$tmp .= number_format(cos($a),3,'.','').' '.number_format((-1*sin($a)),3,'.','').' '.number_format(sin($a),3,'.','').' '.number_format(cos($a),3,'.','').' ';
+			$tmp .= number_format($x0,3,'.','').' '.number_format($y0,3,'.','').' cm';
 			$x0=0;
 			$y0=0;
 		} else {
@@ -164,7 +164,7 @@ class Cpdf extends TCPDF {
 		$c0 = -$r1*sin($t1);
 		$d0 = $r2*cos($t1);
 
-		$tmp.="\n".sprintf('%.3f',$a0).' '.sprintf('%.3f',$b0).' m ';
+		$tmp.="\n".number_format($a0,3,'.','').' '.number_format($b0,3,'.','').' m ';
 		for ($i=1;$i<=$nSeg;$i++){
 			// draw this bit of the total curve
 			$t1 = $i*$dt+$astart;
@@ -172,8 +172,8 @@ class Cpdf extends TCPDF {
 			$b1 = $y0+$r2*sin($t1);
 			$c1 = -$r1*sin($t1);
 			$d1 = $r2*cos($t1);
-			$tmp.="\n".sprintf('%.3f',($a0+$c0*$dtm)).' '.sprintf('%.3f',($b0+$d0*$dtm));
-			$tmp.= ' '.sprintf('%.3f',($a1-$c1*$dtm)).' '.sprintf('%.3f',($b1-$d1*$dtm)).' '.sprintf('%.3f',$a1).' '.sprintf('%.3f',$b1).' c';
+			$tmp.="\n".number_format(($a0+$c0*$dtm),3,'.','').' '.number_format($b0+$d0*$dtm,3,'.','');
+			$tmp.= ' '.number_format(($a1-$c1*$dtm),3,'.','').' '.number_format(($b1-$d1*$dtm),3,'.','').' '.number_format($a1,3,'.','').' '.number_format($b1,3,'.','').' c';
 			$a0=$a1;
 			$b0=$b1;
 			$c0=$c1;
@@ -243,8 +243,6 @@ class Cpdf extends TCPDF {
 	}
 
 	function addTextWrap($xb, $yb, $w, $h, $txt, $align='J', $border=0, $fill=0) {
-
-		//$txt = html_entity_decode($txt);
 
 		//some special characters are html encoded
 		//this code serves to make them appear human readable in pdf file

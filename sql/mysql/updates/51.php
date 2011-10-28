@@ -54,7 +54,7 @@ InsertRecord('menu', array('id', 'caption', 'parent', 'href'), array(227, 'MRP D
 
 
 if (DB_table_exists('usermenurights', $db)) {
-	$sql="select * FROM usermenurights where menuid>188";
+	$sql="SELECT menuid FROM usermenurights WHERE menuid>188";
 	$result=DB_query($sql, $db);
 	if (DB_num_rows($result)==0) {
 		$response=executeSQL("INSERT INTO `usermenurights` (userid,menuid,access) SELECT www_users.userid,  menu.`id`, 1 FROM menu, www_users WHERE menu.id>=189", $db, False);

@@ -25,7 +25,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 if (isset($_POST['ResetPart'])) {
 	unset($SelectedStockItem);
 }
-if (isset($OrderNumber) && $OrderNumber != "") {
+if (isset($OrderNumber) and $OrderNumber != "") {
 	if (!is_numeric($OrderNumber)) {
 		prnMsg(_('The Order Number entered') . ' <U>' . _('MUST') . '</U> ' . _('be numeric'), 'error');
 		unset($OrderNumber);
@@ -35,7 +35,7 @@ if (isset($OrderNumber) && $OrderNumber != "") {
 } else {
 	if (isset($SelectedSupplier)) {
 		$Intro = _('For supplier') . ': ' . $SelectedSupplier . ' ' . _('and') . ' ';
-		echo '<input type="hidden" name="SelectedSupplier" value=' . $SelectedSupplier . '>';
+		echo '<input type="hidden" name="SelectedSupplier" value="' . $SelectedSupplier . '" />';
 	}
 }
 if (isset($_POST['SearchParts'])) {
@@ -79,6 +79,7 @@ if (isset($_POST['SearchParts'])) {
 	} elseif (!$_POST['StockCode'] AND !$_POST['Keywords']) {
 		$SQL = "SELECT stockmaster.stockid,
 				stockmaster.description,
+				stockmaster.decimalplaces,
 				SUM(locstock.quantity) AS qoh,
 				stockmaster.units,
 				SUM(purchorderdetails.quantityord-purchorderdetails.quantityrecd) AS qord
@@ -154,7 +155,7 @@ if (!isset($OrderNumber) or $OrderNumber == "") {
 	} else {
 		echo '<option value="Complete">' . _('Completed') . '</option>';
 	}
- 	echo '</select> <input type="submit" name="SearchOrders" value="' . _('Search Purchase Orders') . '"></td></tr></table>';
+ 	echo '</select> <input type="submit" name="SearchOrders" value="' . _('Search Purchase Orders') . '" /></td></tr></table>';
 }
 $SQL = "SELECT categoryid, categorydescription FROM stockcategory ORDER BY categorydescription";
 $result1 = DB_query($SQL, $db);
@@ -196,8 +197,8 @@ if (isset($StockItemsResult)) {
 		}
 		echo '<td><input type="submit" name="SelectedStockItem" value="' . $myrow['stockid'] . '" /></td>
 				<td>' . $myrow['description'] . '</td>
-			<td class="number">' . $myrow['qoh'] . '</td>
-			<td class="number">' . $myrow['qord'] . '</td>
+			<td class="number">' . locale_number_format($myrow['qoh'], $myrow['decimalplaces']) . '</td>
+			<td class="number">' . locale_number_format($myrow['qord'], $myrow['decimalplaces']) . '</td>
 			<td>' . $myrow['units'] . '</td>
 			</tr>';
 		$j++;
@@ -229,7 +230,7 @@ else {
 		$StatusCriteria = " AND purchorders.status='Completed' ";
 	}
 
-	if (isset($OrderNumber) && $OrderNumber != "") {
+	if (isset($OrderNumber) and $OrderNumber != "") {
 		$SQL = "SELECT purchorders.orderno,
 										suppliers.suppname,
 										purchorders.orddate,
@@ -386,7 +387,7 @@ else {
 			}
 			$ViewPurchOrder = $rootpath . '/PO_OrderDetails.php?OrderNo=' . $myrow['orderno'];
 			$FormatedOrderDate = ConvertSQLDate($myrow['orddate']);
-			$FormatedOrderValue = number_format($myrow['ordervalue'], 2);
+			$FormatedOrderValue = locale_money_format($myrow['ordervalue'], $myrow['currcode']);
 			/*						  View					   Supplier					Currency			   Requisition			 Order Date				 Initiator				Order Total
 			ModifyPage, $myrow["orderno"],		  $myrow["suppname"],			$myrow["currcode"],		 $myrow["requisitionno"]		$FormatedOrderDate,			 $myrow["initiator"]			 $FormatedOrderValue 			Order Status*/
 			echo '<td><a href="' . $ViewPurchOrder . '">' . $myrow['orderno'] . '</a></td>

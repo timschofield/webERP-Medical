@@ -132,11 +132,7 @@ if ( isset($_POST['StockLocationTo']) ){
 }
 
 if ( isset($_POST['EnterTransfer']) ){
-
-
-
-	$result = DB_query("SELECT * FROM stockmaster WHERE stockid='" . $_SESSION['Transfer']->TransferItem[0]->StockID ."'",$db);
-	$myrow = DB_fetch_row($result);
+	$result = DB_query("SELECT stockid FROM stockmaster WHERE stockid='" . $_SESSION['Transfer']->TransferItem[0]->StockID ."'",$db);
 	$InputError = false;
 	if (DB_num_rows($result)==0) {
 		echo '<br />';

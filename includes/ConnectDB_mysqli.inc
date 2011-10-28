@@ -14,7 +14,7 @@ if (!isset($mysqlport)){
 	$mysqlport = 3306;
 }
 $db = mysqli_connect($host , $dbuser, $dbpassword,$_SESSION['DatabaseName'], $mysqlport);
-//$result=DB_query("SET sql_mode = ONLY_FULL_GROUP_BY", $db);
+$result=DB_query("SET sql_mode = ''", $db);
 //printf("tried making mysql-i Connection.\n");
 //$varabc =  mysqli_client_encoding($db);
 //printf("client encoding is %s\n", $varabc);
@@ -38,22 +38,22 @@ again') . '</p>';
 }
 
 if ( !$db ) {
-	echo '<BR>' . _('The configuration in the file config.php for the database user name and password do not provide the information required to connect to the database server');
+	echo '<br />' . _('The configuration in the file config.php for the database user name and password do not provide the information required to connect to the database server');
 	exit;
 }
 
 /* Update to allow RecurringSalesOrdersProcess.php to run via cron */
 if (isset($DatabaseName)) {
         if (!mysqli_select_db($db,$DatabaseName)) {
-            echo '<BR>' . _('The company name entered does not correspond to a database on the database server specified in the config.php configuration file. Try logging in with a different company name');  echo '<BR><A HREF="index.php">' . _('Back to login page') . '</A>';
-                echo '<BR><A HREF="index.php">' . _('Back to login page') . '</A>';
+            echo '<br />' . _('The company name entered does not correspond to a database on the database server specified in the config.php configuration file. Try logging in with a different company name');  echo '<br /><a href="index.php">' . _('Back to login page') . '</a>';
+                echo '<br /><a href="index.php">' . _('Back to login page') . '</a>';
                 unset ($DatabaseName);
                 exit;
         }
 } else {
         if (!mysqli_select_db($db,$_SESSION['DatabaseName'])) {
-            echo '<BR>' . _('The company name entered does not correspond to a database on the database server specified in the config.php configuration file. Try logging in with a different company name');  echo '<BR><A HREF="index.php">' . _('Back to login page') . '</A>';
-                echo '<BR><A HREF="index.php">' . _('Back to login page') . '</A>';
+            echo '<br />' . _('The company name entered does not correspond to a database on the database server specified in the config.php configuration file. Try logging in with a different company name');  echo '<br /><a href="index.php">' . _('Back to login page') . '</a>';
+                echo '<br /><a href="index.php">' . _('Back to login page') . '</a>';
                 unset ($_SESSION['DatabaseName']);
                 exit;
         }
@@ -92,7 +92,7 @@ function DB_query ($SQL,
 		}
 		prnMsg($ErrorMessage.'<br />' . DB_error_msg($Conn),'error', _('Database Error'));
 		if ($debug==1){
-			prnMsg($DebugMessage. "<br />$SQL<br />",'error',_('Database SQL Failure'));
+			prnMsg($DebugMessage. '<br />'.$SQL.'<br />','error',_('Database SQL Failure'));
 		}
 		if ($Transaction){
 			$SQL = 'rollback';
@@ -221,23 +221,23 @@ function DB_Maintenance($Conn){
 }
 
 function DB_Txn_Begin($Conn){
-	mysqli_query($Conn,'SET autocommit=0');
-	mysqli_query($Conn,'START TRANSACTION');
+	mysqli_query($Conn,"SET autocommit=0");
+	mysqli_query($Conn,"START TRANSACTION");
 }
 
 function DB_Txn_Commit($Conn){
-	mysqli_query($Conn,'COMMIT');
-	mysqli_query($Conn,'SET autocommit=1');
+	mysqli_query($Conn,"COMMIT");
+	mysqli_query($Conn,"SET autocommit=1");
 }
 
 function DB_Txn_Rollback($Conn){
-	mysqli_query($Conn,'ROLLBACK');
+	mysqli_query($Conn,"ROLLBACK");
 }
 function DB_IgnoreForeignKeys($Conn){
-	mysqli_query($Conn,'SET FOREIGN_KEY_CHECKS=0');
+	mysqli_query($Conn,"SET FOREIGN_KEY_CHECKS=0");
 }
 function DB_ReinstateForeignKeys($Conn){
-	mysqli_query($Conn, 'SET FOREIGN_KEY_CHECKS=1');
+	mysqli_query($Conn, "SET FOREIGN_KEY_CHECKS=1");
 }
 
 function DB_table_exists($TableName, $Conn) {

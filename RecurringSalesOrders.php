@@ -313,7 +313,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 
 
 echo '<table cellpadding="2" colspan="7" class="selection">';
-echo '<tr><th colspan="7"><font size="2" color="navy"><b>'._('Order Line Details').'</b></font></th></tr>';
+echo '<tr><th colspan="7"><font size="2" color="#616161"><b>'._('Order Line Details').'</b></font></th></tr>';
 echo '<tr>
 		<th>'. _('Item Code') .'</th>
 		<th>'. _('Item Description') .'</th>
@@ -332,10 +332,10 @@ $k = 0; //row colour counter
 foreach ($_SESSION['Items'.$identifier]->LineItems as $StockItem) {
 
 	$LineTotal = $StockItem->Quantity * $StockItem->Price * (1 - $StockItem->DiscountPercent);
-	$DisplayLineTotal = number_format($LineTotal,2);
-	$DisplayPrice = number_format($StockItem->Price,2);
-	$DisplayQuantity = number_format($StockItem->Quantity,$StockItem->DecimalPlaces);
-	$DisplayDiscount = number_format(($StockItem->DiscountPercent * 100),2);
+	$DisplayLineTotal = locale_money_format($LineTotal,$_SESSION['Items'.$identifier]->DefaultCurrency);
+	$DisplayPrice = locale_money_format($StockItem->Price,$_SESSION['Items'.$identifier]->DefaultCurrency);
+	$DisplayQuantity = locale_number_format($StockItem->Quantity,$StockItem->DecimalPlaces);
+	$DisplayDiscount = locale_number_format(($StockItem->DiscountPercent * 100),2);
 
 
 	if ($k==1){
@@ -360,15 +360,15 @@ foreach ($_SESSION['Items'.$identifier]->LineItems as $StockItem) {
 	$_SESSION['Items'.$identifier]->totalWeight = $_SESSION['Items'.$identifier]->totalWeight + ($StockItem->Quantity * $StockItem->Weight);
 }
 
-$DisplayTotal = number_format($_SESSION['Items'.$identifier]->total,2);
+$DisplayTotal = locale_money_format($_SESSION['Items'.$identifier]->total,$_SESSION['Items'.$identifier]->DefaultCurrency);
 echo '<tr>
 			<td colspan="6" class="number"><b>'. _('TOTAL Excl Tax/Freight') .'</b></td>
-			<td class="number">$DisplayTotal</td>
+			<td class="number">' . $DisplayTotal . '</td>
 		</tr>
 	</table>';
 
 echo '<br /><table class="selection">';
-echo '<tr><th colspan="7"><font size="2" color="navy"><b>'._('Order Header Details').'</b></font></th></tr>';
+echo '<tr><th colspan="7"><font size="2" color="#616161"><b>'._('Order Header Details').'</b></font></th></tr>';
 
 echo '<tr>
 		<td>'. _('Deliver To') .':</td>

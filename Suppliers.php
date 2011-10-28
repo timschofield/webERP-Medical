@@ -290,11 +290,12 @@ Function Is_ValidAccount ($ActNo) {
 
 } //End Function
 
-
 if (isset($_GET['SupplierID'])){
-	$SupplierID = strtoupper($_GET['SupplierID']);
+	$SupplierID = htmlspecialchars_decode(html_entity_decode($_GET['SupplierID']));
+
 } elseif (isset($_POST['SupplierID'])){
-	$SupplierID = strtoupper($_POST['SupplierID']);
+	$SupplierID = htmlspecialchars_decode(html_entity_decode($_POST['SupplierID']));
+
 } else {
 	unset($SupplierID);
 }
@@ -327,6 +328,7 @@ if (isset($_POST['submit'])) {
 		$i++;
 	}
 	if (strlen($_POST['SuppName']) > 40 or strlen($_POST['SuppName']) == 0 or $_POST['SuppName'] == '') {
+
 		$InputError = 1;
 		prnMsg(_('The supplier name must be entered and be forty characters or less long'),'error');
 		$Errors[$i]='Name';
@@ -339,18 +341,20 @@ if (isset($_POST['submit'])) {
 		$i++;
 	}
 	if (strlen($_POST['Phone']) >25) {
+
 		$InputError = 1;
 		prnMsg(_('The telephone number must be 25 characters or less long'),'error');
 		$Errors[$i] = 'Telephone';
 		$i++;
 	}
 	if (strlen($_POST['Fax']) >25) {
+
 		$InputError = 1;
 		prnMsg(_('The fax number must be 25 characters or less long'),'error');
 		$Errors[$i] = 'Fax';
 		$i++;
 	}
-	if (strlen($_POST['Email']) >55) {
+	if (strlen(stripslashes($_POST['Email'])) > 55) {
 		$InputError = 1;
 		prnMsg(_('The email address must be 55 characters or less long'),'error');
 		$Errors[$i] = 'Email';
@@ -362,7 +366,7 @@ if (isset($_POST['submit'])) {
 		$Errors[$i] = 'Email';
 		$i++;
 	}
-	if (strlen($_POST['BankRef']) > 12) {
+	if (mb_strlen(stripslashes($_POST['BankRef'])) > 12) {
 		$InputError = 1;
 		prnMsg(_('The bank reference text must be less than 12 characters long'),'error');
 		$Errors[$i]='BankRef';
@@ -391,7 +395,9 @@ if (isset($_POST['submit'])) {
 		$longitude = 0;
 		if ($_SESSION['geocode_integration']==1 ){
 			// Get the lat/long from our geocoding host
-			$sql = "SELECT * FROM geocode_param WHERE 1";
+			$sql = "SELECT geocode_key,
+							map_host
+						FROM geocode_param WHERE 1";
 			$ErrMsg = _('An error occurred in retrieving the information');
 			$resultgeo = DB_query($sql, $db, $ErrMsg);
 			$row = DB_fetch_array($resultgeo);
@@ -401,37 +407,37 @@ if (isset($_POST['submit'])) {
 			define('KEY', $api_key);
 			// check that some sane values are setup already in geocode tables, if not skip the geocoding but add the record anyway.
 			if ($map_host=="") {
-			echo '<div class="warn">' . _('Warning - Geocode Integration is enabled, but no hosts are setup.  Go to Geocode Setup') . '</div>';
+				echo '<div class="warn">' . _('Warning - Geocode Integration is enabled, but no hosts are setup.  Go to Geocode Setup') . '</div>';
 			} else {
-			$address = $_POST['Address1'] . ', ' . $_POST['Address2'] . ', ' . $_POST['Address3'] . ', ' . $_POST['Address4'];
+				$address = $_POST['Address1'] . ', ' . $_POST['Address2'] . ', ' . $_POST['Address3'] . ', ' . $_POST['Address4'];
 
-			$base_url = 'http://' . MAPS_HOST . '/maps/geo?output=xml' . '&key=' . KEY;
-			$request_url = $base_url . '&q=' . urlencode($address);
+				$base_url = 'http://' . MAPS_HOST . '/maps/geo?output=xml' . '&key=' . KEY;
+				$request_url = $base_url . '&q=' . urlencode($address);
 
-			$xml = simplexml_load_string(utf8_encode(file_get_contents($request_url))) or die('url not loading');
+				$xml = simplexml_load_string(utf8_encode(file_get_contents($request_url))) or die('url not loading');
 //			$xml = simplexml_load_file($request_url) or die("url not loading");
 
-			$coordinates = $xml->Response->Placemark->Point->coordinates;
-			$coordinatesSplit = explode(',', $coordinates);
-			// Format: Longitude, Latitude, Altitude
-			$latitude = $coordinatesSplit[1];
-			$longitude = $coordinatesSplit[0];
-
-			$status = $xml->Response->Status->code;
-			if (strcmp($status, "200") == 0) {
-			// Successful geocode
-				$geocode_pending = false;
 				$coordinates = $xml->Response->Placemark->Point->coordinates;
-				$coordinatesSplit = explode(",", $coordinates);
+				$coordinatesSplit = explode(',', $coordinates);
 				// Format: Longitude, Latitude, Altitude
 				$latitude = $coordinatesSplit[1];
 				$longitude = $coordinatesSplit[0];
-			} else {
+
+				$status = $xml->Response->Status->code;
+				if (strcmp($status, "200") == 0) {
+			// Successful geocode
+					$geocode_pending = false;
+					$coordinates = $xml->Response->Placemark->Point->coordinates;
+					$coordinatesSplit = explode(",", $coordinates);
+				// Format: Longitude, Latitude, Altitude
+					$latitude = $coordinatesSplit[1];
+					$longitude = $coordinatesSplit[0];
+				} else {
 			// failure to geocode
-				$geocode_pending = false;
-				echo '<p>Address: ' . $address . ' failed to geocode'."\n";
-				echo 'Received status ' . $status . "\n" . '</p>';
-			}
+					$geocode_pending = false;
+					echo '<p>Address: ' . $address . ' failed to geocode'."\n";
+					echo 'Received status ' . $status . "\n" . '</p>';
+				}
 			}
 		}
 		if (!isset($_POST['New'])) {
@@ -651,9 +657,9 @@ if (!isset($SupplierID)) {
 	echo '<tr><td>' . _('Address Line 2 (Suburb/City)') . ':</td><td><input type="text" name="Address2" size="42" maxlength="40" /></td></tr>';
 	echo '<tr><td>' . _('Address Line 3 (State/Province)') . ':</td><td><input type="text" name="Address3" size="42" maxlength="40" /></td></tr>';
 	echo '<tr><td>' . _('Address Line 4 (Postal Code)') . ':</td><td><input type="text" name="Address4" size="42" maxlength="40" /></td></tr>';
-	echo '<tr><td>' . _('Telephone') . ':</td><td><input type="text" name="Phone" size="30" maxlength="40" /></td></tr>';
-	echo '<tr><td>' . _('Facsimile') . ':</td><td><input type="text" name="Fax" size="30" maxlength="40" /></td></tr>';
-	echo '<tr><td>' . _('Email Address') . ':</td><td><input type="text" name="Email" size="30" maxlength="40" /></td></tr>';
+	echo '<tr><td>' . _('Telephone') . ':</td><td><input type="text" name="Phone" size="25" maxlength="25" /></td></tr>';
+	echo '<tr><td>' . _('Facsimile') . ':</td><td><input type="text" name="Fax" size="25" maxlength="25" /></td></tr>';
+	echo '<tr><td>' . _('Email Address') . ':</td><td><input class="email" type="text" name="Email" size="30" maxlength="40" /></td></tr>';
 	echo '<tr><td>' . _('Supplier Type') . ':</td><td><select name="SupplierType">';
 	$result=DB_query("SELECT typeid, typename FROM suppliertype", $db);
 	while ($myrow = DB_fetch_array($result)) {
@@ -769,7 +775,7 @@ if (!isset($SupplierID)) {
 		$result = DB_query($sql, $db);
 		$myrow = DB_fetch_array($result);
 
-		$_POST['SuppName'] = stripcslashes($myrow['suppname']);
+		$_POST['SuppName'] = stripslashes($myrow['suppname']);
 		$_POST['Address1']  = stripcslashes($myrow['address1']);
 		$_POST['Address2']  = stripcslashes($myrow['address2']);
 		$_POST['Address3']  = stripcslashes($myrow['address3']);
@@ -789,7 +795,7 @@ if (!isset($SupplierID)) {
 		$_POST['FactorID'] = $myrow['factorcompanyid'];
 		$_POST['TaxRef'] = $myrow['taxref'];
 
-		echo '<input type="hidden" name="SupplierID" value="' . $SupplierID . '" />';
+		echo '<input type="hidden" name="SupplierID" value="' . htmlentities($SupplierID) . '" />';
 
 	} else {
 	// its a new supplier being added
@@ -822,15 +828,15 @@ if (!isset($SupplierID)) {
 		</tr>';
 	echo '<tr>
 			<td>' . _('Telephone') . ':</td>
-			<td><input '.(in_array('Name',$Errors) ? 'class="inputerror"' : '').' type="text" name="Phone" value="' . $_POST['Phone'] . '" size="42" maxlength="40" /></td>
+			<td><input '.(in_array('Name',$Errors) ? 'class="inputerror"' : '').' type="text" name="Phone" value="' . $_POST['Phone'] . '" size="25" maxlength="25" /></td>
 		</tr>';
 	echo '<tr>
 			<td>' . _('Facsimile') . ':</td>
-			<td><input '.(in_array('Name',$Errors) ? 'class="inputerror"' : '').' type="text" name="Fax" value="' . $_POST['Fax'] . '" size="42" maxlength="40" /></td>
+			<td><input '.(in_array('Name',$Errors) ? 'class="inputerror"' : '').' type="text" name="Fax" value="' . $_POST['Fax'] . '" size="25" maxlength="25" /></td>
 		</tr>';
 	echo '<tr>
 			<td>' . _('Email Address') . ':</td>
-			<td><input '.(in_array('Name',$Errors) ? 'class="inputerror"' : '').' type="text" name="Email" value="' . $_POST['Email'] . '" size="42" maxlength="40" /></td>
+			<td><input class="email" '.(in_array('Name',$Errors) ? 'class="inputerror"' : '').' type="text" name="Email" value="' . $_POST['Email'] . '" size="42" maxlength="40" /></td>
 		</tr>';
 	echo '<tr><td>' . _('Supplier Type') . ':</td><td><select name="SupplierType">';
 	$result=DB_query("SELECT typeid, typename FROM suppliertype", $db);
@@ -933,7 +939,7 @@ if (!isset($SupplierID)) {
 	echo '</select></td></tr></table>';
 
 	if (isset($_POST['New'])) {
-		echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Add These New Supplier Details') . '" /></form></div>';
+		echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Add These New Supplier Details') . '" /></div></form>';
 	} else {
 		echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Update Supplier') . '" /></div><br />';
 //		echo '<font color=red><b>' . _('WARNING') . ': ' . _('There is no second warning if you hit the delete button below') . '. ' . _('However checks will be made to ensure there are no outstanding purchase orders or existing accounts payable transactions before the deletion is processed') . '<br /></font></b>';

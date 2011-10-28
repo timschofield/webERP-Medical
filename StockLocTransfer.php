@@ -13,7 +13,7 @@ if (isset($_POST['Submit']) OR isset($_POST['EnterMoreItems'])){
 	$InputError = False; /*Start off hoping for the best */
 	$TotalItems = 0;
 	//Make sure this Transfer has not already been entered... aka one way around the refresh & insert new records problem
-	$result = DB_query("SELECT * FROM loctransfers WHERE reference='" . $_POST['Trf_ID'] . "'",$db);
+	$result = DB_query("SELECT reference FROM loctransfers WHERE reference='" . $_POST['Trf_ID'] . "'",$db);
 	if (DB_num_rows($result)!=0){
 		$InputError = true;
 		$ErrorMessage = _('This transaction has already been entered') . '. ' . _('Please start over now').'<br />';

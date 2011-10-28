@@ -5,6 +5,7 @@
 include('includes/session.inc');
 $title = _('User Settings');
 include('includes/header.inc');
+include('includes/LanguagesArray.php');
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/user.png" title="' . _('User Settings') . '" alt="" />' . ' ' . _('User Settings') . '</p>';
 
@@ -105,16 +106,21 @@ If (!isset($_POST['DisplayRecordsMax']) OR $_POST['DisplayRecordsMax']=='') {
 
 }
 
-echo '<table class="selection"><tr><td>' . _('User ID') . ':</td><td>';
-echo $_SESSION['UserID'] . '</td></tr>';
-
-echo '<tr><td>' . _('User Name') . ':</td><td>';
-echo $_SESSION['UsersRealName'] . '</td>
-		<input type="hidden" name="RealName" value="'.$_SESSION['UsersRealName'].'" /><td></tr>';
+echo '<table class="selection">
+		<tr>
+			<td>' . _('User ID') . ':</td>
+			<td>' . $_SESSION['UserID'] . '</td>
+		</tr>';
 
 echo '<tr>
-	<td>' . _('Maximum Number of Records to Display') . ':</td>
-	<td><input type="text" class="number" name="DisplayRecordsMax" size="3" maxlength="3" value="' . $_POST['DisplayRecordsMax'] . '" /></td>
+		<td>' . _('User Name') . ':</td>
+		<td>' . $_SESSION['UsersRealName'] . '</td>
+		<input type="hidden" name="RealName" value="'.$_SESSION['UsersRealName'].'" />
+	</tr>';
+
+echo '<tr>
+		<td>' . _('Maximum Number of Records to Display') . ':</td>
+		<td><input type="text" class="number" name="DisplayRecordsMax" size="3" maxlength="3" value="' . $_POST['DisplayRecordsMax'] . '" /></td>
 	</tr>';
 
 
@@ -122,25 +128,20 @@ echo '<tr>
 	<td>' . _('Language') . ':</td>
 	<td><select name="Language">';
 
-$Languages = scandir('locale/', 0);
-
-
-foreach ($Languages as $LanguageEntry){
-
-	if (is_dir('locale/' . $LanguageEntry)
-			AND $LanguageEntry != '..'
-			AND $LanguageEntry != '.svn'
-			AND $LanguageEntry!='.'){
-
-		if ($_SESSION['Language'] == $LanguageEntry){
-			echo '<option selected="True" value="' . $LanguageEntry . '">' . $LanguageEntry . '</option>';
-		} else {
-			echo '<option value="' . $LanguageEntry . '">' . $LanguageEntry . '</option>';
-		}
-	}
+if (!isset($_POST['Language'])){
+	$_POST['Language']=$_SESSION['Language'];
 }
 
-	echo '</select></td></tr>';
+foreach ($LanguagesArray as $LanguageEntry => $LanguageName){
+	if (isset($_POST['Language']) AND $_POST['Language'] == $LanguageEntry){
+		echo '<option selected value="' . $LanguageEntry . '">' . $LanguageName .'</option>';
+	} elseif (!isset($_POST['Language']) AND $LanguageEntry == $DefaultLanguage) {
+		echo '<option selected value="' . $LanguageEntry . '">' . $LanguageName .'</option>';
+	} else {
+		echo '<option value="' . $LanguageEntry . '">' . $LanguageName .'</option>';
+	}
+}
+echo '</select></td></tr>';
 
 
 echo '<tr>

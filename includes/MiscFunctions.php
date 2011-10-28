@@ -18,6 +18,26 @@ function reverse_escape($str) {
   return str_replace($search,$replace,$str);
 }
 
+function locale_number_format($Number, $DecimalPlaces) {
+	$LocaleInfo = localeconv();
+	return number_format($Number, $DecimalPlaces, $LocaleInfo['decimal_point'], $LocaleInfo['thousands_sep']);
+}
+
+function locale_money_format($Amount, $Currency) {
+	$LocaleInfo = localeconv();
+	return number_format($Amount, $_SESSION['Currencies'][$Currency]['DecimalPlaces'], $LocaleInfo['mon_decimal_point'], $LocaleInfo['mon_thousands_sep']);
+}
+
+function filter_number_input($Number) {
+	$LocaleInfo = localeconv();
+	return str_replace($LocaleInfo['decimal_point'], '.', str_replace($LocaleInfo['thousands_sep'], '', $Number));
+}
+
+function filter_currency_input($Amount) {
+	$LocaleInfo = localeconv();
+	return str_replace($LocaleInfo['mon_decimal_point'], '.', str_replace($LocaleInfo['mon_thousands_sep'], '', $Amount));
+}
+
 function getMsg($Msg,$Type='info',$Prefix=''){
 	$Colour='';
 	if (isset($_SESSION['LogSeverity']) and $_SESSION['LogSeverity']>0) {
@@ -72,10 +92,11 @@ function IsEmailAddress($Email){
 	$LocalLen = strlen ($Local);
 	$DomainLen = strlen ($Domain);
 	if ($LocalLen < 1 || $LocalLen > 64){
+
 	    // local part length exceeded
 	    return  false;
 	}
-	if ($DomainLen < 1 || $DomainLen > 255){
+	if ($DomainLen < 1 or $DomainLen > 255){
 	    // domain part length exceeded
 	    return  false;
 	}
@@ -227,9 +248,9 @@ function AddCarriageReturns($str) {
 function wikiLink($type, $id) {
 
 	if ($_SESSION['WikiApp']==_('WackoWiki')){
-		echo '<a target="_blank" href="../' . $_SESSION['WikiPath'] . '/' . $type .  $id . '">' . _('Wiki ' . $type . ' Knowlege Base') . '</A><BR>';
+		echo '<a target="_blank" href="../' . $_SESSION['WikiPath'] . '/' . $type .  $id . '">' . _('Wiki ' . $type . ' Knowlege Base') . '</a><br />';
 	} elseif ($_SESSION['WikiApp']==_('MediaWiki')){
-		echo '<a target="_blank" href="../' . $_SESSION['WikiPath'] . '/index.php/' . $type . '/' .  $id . '">' . _('Wiki ' . $type . ' Knowlege Base') . '</A><BR>';
+		echo '<a target="_blank" href="../' . $_SESSION['WikiPath'] . '/index.php/' . $type . '/' .  $id . '">' . _('Wiki ' . $type . ' Knowlege Base') . '</a><br />';
 	}
 
 }//wikiLink

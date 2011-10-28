@@ -20,18 +20,16 @@ if (isset($_GET['StockID'])){
 //echo '<a href='" . $rootpath . '/SelectProduct.php'>" . _('Back to Items') . '</a><br />';
 
 $result = DB_query("SELECT description,
-                           units,
-                           mbflag,
-                           decimalplaces,
-                           serialised,
-                           controlled
-                    FROM
-                           stockmaster
-                    WHERE
-                           stockid='".$StockID."'",
-                           $db,
-                           _('Could not retrieve the requested item'),
-                           _('The SQL used to retrieve the items was'));
+							units,
+							mbflag,
+							decimalplaces,
+							serialised,
+							controlled
+					FROM stockmaster
+					WHERE stockid='".$StockID."'",
+							$db,
+							_('Could not retrieve the requested item'),
+							_('The SQL used to retrieve the items was'));
 
 $myrow = DB_fetch_row($result);
 
@@ -61,15 +59,15 @@ echo _('Stock Code') . ':<input type="text" name="StockID" size="21" value="' . 
 echo ' <input type="submit" name="ShowStatus" value="' . _('Show Stock Status') . '" /></div>';
 
 $sql = "SELECT locstock.loccode,
-               locations.locationname,
-               locstock.quantity,
-               locstock.reorderlevel,
-	       locations.managed
-               FROM locstock,
-                    locations
-               WHERE locstock.loccode=locations.loccode AND
-                     locstock.stockid = '" . $StockID . "'
-               ORDER BY locstock.loccode";
+				locations.locationname,
+				locstock.quantity,
+				locstock.reorderlevel,
+			locations.managed
+				FROM locstock,
+					locations
+				WHERE locstock.loccode=locations.loccode AND
+					 locstock.stockid = '" . $StockID . "'
+				ORDER BY locstock.loccode";
 
 $ErrMsg = _('The stock held at each location cannot be retrieved because');
 $DbgMsg = _('The SQL that was used to update the stock item and failed was');
@@ -107,13 +105,13 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 	}
 
 	$sql = "SELECT SUM(salesorderdetails.quantity-salesorderdetails.qtyinvoiced)*salesorderdetails.conversionfactor AS dem
-                 FROM salesorderdetails,
-                      salesorders
-                 WHERE salesorders.orderno = salesorderdetails.orderno AND
-                 salesorders.fromstkloc='" . $myrow['loccode'] . "' AND
-                 salesorderdetails.completed=0 AND
+				 FROM salesorderdetails,
+					  salesorders
+				 WHERE salesorders.orderno = salesorderdetails.orderno AND
+				 salesorders.fromstkloc='" . $myrow['loccode'] . "' AND
+				 salesorderdetails.completed=0 AND
 		 salesorders.quotation=0 AND
-                 salesorderdetails.stkcode='" . $StockID . "'";
+				 salesorderdetails.stkcode='" . $StockID . "'";
 
 	$ErrMsg = _('The demand for this product from') . ' ' . $myrow['loccode'] . ' ' . _('cannot be retrieved because');
 	$DemandResult = DB_query($sql,$db,$ErrMsg,$DbgMsg);
@@ -127,17 +125,17 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 
 	//Also need to add in the demand as a component of an assembly items if this items has any assembly parents.
 	$sql = "SELECT SUM((salesorderdetails.quantity-salesorderdetails.qtyinvoiced)*bom.quantity) AS dem
-                 FROM salesorderdetails,
-                      salesorders,
-                      bom,
-                      stockmaster
-                 WHERE salesorderdetails.stkcode=bom.parent AND
-                       salesorders.orderno = salesorderdetails.orderno AND
-                       salesorders.fromstkloc='" . $myrow['loccode'] . "' AND
-                       salesorderdetails.quantity-salesorderdetails.qtyinvoiced > 0 AND
-                       bom.component='" . $StockID . "' AND stockmaster.stockid=bom.parent AND
-                       stockmaster.mbflag='A'
-		       AND salesorders.quotation=0";
+				 FROM salesorderdetails,
+					  salesorders,
+					  bom,
+					  stockmaster
+				 WHERE salesorderdetails.stkcode=bom.parent AND
+						salesorders.orderno = salesorderdetails.orderno AND
+						salesorders.fromstkloc='" . $myrow['loccode'] . "' AND
+						salesorderdetails.quantity-salesorderdetails.qtyinvoiced > 0 AND
+						bom.component='" . $StockID . "' AND stockmaster.stockid=bom.parent AND
+						stockmaster.mbflag='A'
+				AND salesorders.quotation=0";
 
 	$ErrMsg = _('The demand for this product from') . ' ' . $myrow['loccode'] . ' ' . _('cannot be retrieved because');
 	$DemandResult = DB_query($sql,$db,$ErrMsg,$DbgMsg);
@@ -210,11 +208,11 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 			<td class="number">%s</td>
 			<td class="number">%s</td>
 			<td class="number">%s</td></tr>',
-			number_format($myrow['quantity'], $DecimalPlaces),
-			number_format($myrow['reorderlevel'], $DecimalPlaces),
-			number_format($DemandQty, $DecimalPlaces),
-			number_format($myrow['quantity'] - $DemandQty, $DecimalPlaces),
-			number_format($QOO, $DecimalPlaces)
+			locale_number_format($myrow['quantity'], $DecimalPlaces),
+			locale_number_format($myrow['reorderlevel'], $DecimalPlaces),
+			locale_number_format($DemandQty, $DecimalPlaces),
+			locale_number_format($myrow['quantity'] - $DemandQty, $DecimalPlaces),
+			locale_number_format($QOO, $DecimalPlaces)
 			);
 
 		if ($Serialised ==1){ /*The line is a serialised item*/
@@ -231,7 +229,7 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 			<td class="number">%s</td>
 			</tr>',
 			$myrow['locationname'],
-			number_format($DemandQty, $DecimalPlaces)
+			locale_number_format($DemandQty, $DecimalPlaces)
 			);
 	}
 //end of page full new headings if
@@ -271,23 +269,23 @@ if ($DebtorNo) { /* display recent pricing history for this debtor and this stoc
 	$LastPrice=0;
 	while ($myrow=DB_fetch_array($MovtsResult)) {
 	  if (($LastPrice != $myrow['price'] or $LastDiscount != $myrow['discountpercent'])) { /* consolidate price history for records with same price/discount */
-	    if (isset($qty)) {
-	    	$DateRange=ConvertSQLDate($FromDate);
-	    	if ($FromDate != $ToDate) {
-	        	$DateRange .= ' - ' . ConvertSQLDate($ToDate);
-	     	}
-	    	$PriceHistory[] = array($DateRange, $qty, $LastPrice, $LastDiscount);
-	    	$k++;
-	    	if ($k > 9) {
+		if (isset($qty)) {
+			$DateRange=ConvertSQLDate($FromDate);
+			if ($FromDate != $ToDate) {
+				$DateRange .= ' - ' . ConvertSQLDate($ToDate);
+		 	}
+			$PriceHistory[] = array($DateRange, $qty, $LastPrice, $LastDiscount);
+			$k++;
+			if ($k > 9) {
 				break; /* 10 price records is enough to display */
 			}
-	    	if ($myrow['trandate'] < FormatDateForSQL(DateAdd(date($_SESSION['DefaultDateFormat']),'y', -1))) {
+			if ($myrow['trandate'] < FormatDateForSQL(DateAdd(date($_SESSION['DefaultDateFormat']),'y', -1))) {
 				break; /* stop displaying pirce history more than a year old once we have at least one  to display */
 			}
-	    }
+		}
 		$LastPrice = $myrow['price'];
 		$LastDiscount = $myrow['discountpercent'];
-	    $ToDate = $myrow['trandate'];
+		$ToDate = $myrow['trandate'];
 		$qty = 0;
 	  }
 	  $qty += $myrow['qty'];
@@ -296,13 +294,13 @@ if ($DebtorNo) { /* display recent pricing history for this debtor and this stoc
 	if (isset($qty)) {
 		$DateRange = ConvertSQLDate($FromDate);
 		if ($FromDate != $ToDate) {
-	   		$DateRange .= ' - '.ConvertSQLDate($ToDate);
+				$DateRange .= ' - '.ConvertSQLDate($ToDate);
 		}
 		$PriceHistory[] = array($DateRange, $qty, $LastPrice, $LastDiscount);
 	}
 	if (isset($PriceHistory)) {
 	  echo '<br /><table cellpadding="4" class="selection">';
-	  echo '<tr><th colspan="4"><font color="navy" size="2">' . _('Pricing history for sales of') . ' ' . $StockID . ' ' . _('to') . ' ' . $DebtorNo . '</font></th></tr>';
+	  echo '<tr><th colspan="4"><font color="#616161" size="2">' . _('Pricing history for sales of') . ' ' . $StockID . ' ' . _('to') . ' ' . $DebtorNo . '</font></th></tr>';
 	  $tableheader = '<tr>
 			<th>' . _('Date Range') . '</th>
 			<th>' . _('Quantity') . '</th>
@@ -334,9 +332,9 @@ if ($DebtorNo) { /* display recent pricing history for this debtor and this stoc
 			<td class="number">%s%%</td>
 			</tr>',
 			$ph[0],
-			number_format($ph[1],$DecimalPlaces),
-			number_format($ph[2],2),
-			number_format($ph[3]*100,2)
+			locale_number_format($ph[1],$DecimalPlaces),
+			locale_money_format($ph[2],$_SESSION['CompanyRecord']['currencydefault']),
+			locale_number_format($ph[3]*100,2)
 			);
 	  }
 	 echo '</table>';

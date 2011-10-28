@@ -10,6 +10,7 @@ Class Allocation {
 	var $CustomerName;
 	var $TransType;
 	var $TransTypeName;
+	var $CurrCode;
 	var $TransNo;
 	var $TransDate;
 	var $TransExRate; /*Exchange rate of the transaction being allocated */
@@ -27,7 +28,7 @@ Class Allocation {
 
 			$this->Allocs[$ID] = new Allocn($ID, $TransType, $TypeNo, $TransDate, $AllocAmt, $TransAmount, $ExRate, $DiffOnExch, $PrevDiffOnExch, $PrevAlloc, $PrevAllocRecordID);
 			Return 1;
-		
+
 	}
 
 	function remove_alloc_item($AllocnID){

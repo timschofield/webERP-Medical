@@ -7,37 +7,37 @@ function webERPLogIn($ch, $TestSessionID, $RootPath, $ServerPath, $Company, $Use
 	$LoginScreenDetails->SetPostArray(array());
 
 	$LoginScreenDetails->FetchPage($RootPath, $ServerPath, $ch);
-
-	for ($i=0; $i<sizeOf($LoginScreenDetails->FormDetails['Selects']['select']['CompanyNameField']['options']); $i++) {
-		if ($LoginScreenDetails->FormDetails['Selects']['select']['CompanyNameField']['options'][$i]['label']==$Company) {
-			$PostArray['CompanyNameField']=$LoginScreenDetails->FormDetails['Selects']['select']['CompanyNameField']['options'][$i]['label'];
+	$FormDetails = $LoginScreenDetails->GetFormDetails();
+	for ($i=0; $i<sizeOf($FormDetails['Selects']['select']['CompanyNameField']['options']); $i++) {
+		if ($FormDetails['Selects']['select']['CompanyNameField']['options'][$i]['label']==$Company) {
+			$PostArray['CompanyNameField']=$FormDetails['Selects']['select']['CompanyNameField']['options'][$i]['label'];
 			break;
 		}
 	}
 
-	for ($i=0; $i<sizeOf($LoginScreenDetails->FormDetails['Texts']['text']); $i++) {
-		if ($LoginScreenDetails->FormDetails['Texts']['text'][$i]['name']=='UserNameEntryField') {
+	for ($i=0; $i<sizeOf($FormDetails['Texts']['text']); $i++) {
+		if ($FormDetails['Texts']['text'][$i]['name']=='UserNameEntryField') {
 			$PostArray['UserNameEntryField']=$UserName;
 			break;
 		}
 	}
 
-	for ($i=0; $i<sizeOf($LoginScreenDetails->FormDetails['Passwords']['password']); $i++) {
-		if ($LoginScreenDetails->FormDetails['Passwords']['password'][$i]['name']=='Password') {
+	for ($i=0; $i<sizeOf($FormDetails['Passwords']['password']); $i++) {
+		if ($FormDetails['Passwords']['password'][$i]['name']=='Password') {
 			$PostArray['Password']=$Password;
 			break;
 		}
 	}
 
-	for ($i=0; $i<sizeOf($LoginScreenDetails->FormDetails['Hiddens']['hidden']); $i++) {
-		if ($LoginScreenDetails->FormDetails['Hiddens']['hidden'][$i]['name']=='FormID') {
-			$PostArray['FormID']=$LoginScreenDetails->FormDetails['Hiddens']['hidden'][$i]['value'];
+	for ($i=0; $i<sizeOf($FormDetails['Hiddens']['hidden']); $i++) {
+		if ($FormDetails['Hiddens']['hidden'][$i]['name']=='FormID') {
+			$PostArray['FormID']=$FormDetails['Hiddens']['hidden'][$i]['value'];
 			break;
 		}
 	}
 
-	for ($i=0; $i<sizeOf($LoginScreenDetails->FormDetails['Submits']['submit']); $i++) {
-		if ($LoginScreenDetails->FormDetails['Submits']['submit'][$i]['name']=='SubmitUser') {
+	for ($i=0; $i<sizeOf($FormDetails['Submits']['submit']); $i++) {
+		if ($FormDetails['Submits']['submit'][$i]['name']=='SubmitUser') {
 			$PostArray['SubmitUser']='Login';
 			break;
 		}

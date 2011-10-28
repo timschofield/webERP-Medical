@@ -66,8 +66,8 @@ for ($i=1;$i<$argc;$i++){
 	}
 }
 // test the existance
-if (( $reportname=="") ||
-    ( $reportnumber=="") ||
+if (( $reportname=="") or
+    ( $reportnumber=="") or
     ( $emailaddresses=="")) {
              echo $usage;
              exit;

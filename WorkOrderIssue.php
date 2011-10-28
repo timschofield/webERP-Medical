@@ -31,7 +31,7 @@ if (!isset($_POST['WO']) OR !isset($_POST['StockID'])) {
 	exit;
 } else {
 	echo '<input type="hidden" name="WO" value="' .$_POST['WO'] . '" />';
-	echo '<input type="hidden" name="StockID" value="' .$_POST['StockID'] . ' />';
+	echo '<input type="hidden" name="StockID" value="' .$_POST['StockID'] . '" />';
 }
 if (isset($_GET['IssueItem'])){
 	$_POST['IssueItem']=$_GET['IssueItem'];
@@ -40,6 +40,11 @@ if (isset($_GET['FromLocation'])){
 	$_POST['FromLocation'] =$_GET['FromLocation'];
 }
 
+foreach ($_POST as $key=>$value) {
+	if (substr($key, 0, 3)=='Qty') {
+		$_POST[$key] = filter_number_input($value);
+	}
+}
 
 if (isset($_POST['Process'])){ //user hit the process the work order issues entered.
 
@@ -102,8 +107,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order issues ente
 	$IssueItemRow = DB_fetch_array($Result);
 
 	if ($IssueItemRow['cost']==0){
-		prnMsg(_('The item being issued has a zero cost. Zero cost items cannot be issued to work orders'),'error');
-		$InputError=1;
+		prnMsg(_('The item being issued has a zero cost. The issue will still be processed '),'warn');
 	}
 
 	if ($_SESSION['ProhibitNegativeStock']==1
@@ -309,7 +313,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order issues ente
 						'" . $PeriodNo . "',
 						'" . $WORow['wipact'] . "',
 						'" . $_SESSION['DefaultTag'] . "',
-						'" . $_POST['WO'] . " " . $_POST['IssueItem'] . ' x ' . $QuantityIssued . " @ " . number_format($IssueItemRow['cost'],2) . "',
+						'" . $_POST['WO'] . " " . $_POST['IssueItem'] . ' x ' . $QuantityIssued . " @ " . locale_money_format($IssueItemRow['cost'],$_SESSION['CompanyRecord']['currencydefault']) . "',
 						'" . ($IssueItemRow['cost'] * $QuantityIssued) . "')";
 
 			$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The issue of the item to the work order GL posting could not be inserted because');
@@ -331,7 +335,7 @@ if (isset($_POST['Process'])){ //user hit the process the work order issues ente
 						'" . $PeriodNo . "',
 						'" . $StockGLCode['stockact'] . "',
 						'" . $_SESSION['DefaultTag'] . "',
-						'" . $_POST['WO'] . " " . $_POST['IssueItem'] . ' x ' . $QuantityIssued . " @ " . number_format($IssueItemRow['cost'],2) . "',
+						'" . $_POST['WO'] . " " . $_POST['IssueItem'] . ' x ' . $QuantityIssued . " @ " . locale_money_format($IssueItemRow['cost'],$_SESSION['CompanyRecord']['currencydefault']) . "',
 						'" . -($IssueItemRow['cost'] * $QuantityIssued) . "')";
 
 			$ErrMsg =   _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The stock account credit on the issue of items to a work order GL posting could not be inserted because');
@@ -538,11 +542,11 @@ echo '<table cellpadding="2" class="selection">
 		<td>' . ConvertSQLDate($WORow['requiredby']) . '</td>
 	</tr>
 	 <tr><td class="label">' . _('Quantity Ordered') . ':</td>
-		<td class="number">' . number_format($WORow['qtyreqd'],$WORow['decimalplaces']) . '</td>
+		<td class="number">' . locale_number_format($WORow['qtyreqd'],$WORow['decimalplaces']) . '</td>
 		<td colspan="2">' . $WORow['units'] . '</td>
 	</tr>
 	 <tr><td class="label">' . _('Already Received') . ':</td>
-		<td class="number">' . number_format($WORow['qtyrecd'],$WORow['decimalplaces']) . '</td>
+		<td class="number">' . locale_number_format($WORow['qtyrecd'],$WORow['decimalplaces']) . '</td>
 		<td colspan="2">' . $WORow['units'] . '</td></tr>
 	<tr><td colspan="4"></td></tr>
 	 <tr><td class="label">' . _('Date Material Issued') . ':</td>
@@ -611,8 +615,8 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 										$db);
 		$IssuedAlreadyRow = DB_fetch_row($IssuedAlreadyResult);
 
-		echo '<td class="number">' . number_format($WORow['qtyreqd']*$RequirementsRow['qtypu'],$RequirementsRow['decimalplaces']) . '</td>
-			<td class="number">' . number_format($IssuedAlreadyRow[0],$RequirementsRow['decimalplaces']) . '</td></tr>';
+		echo '<td class="number">' . locale_number_format($WORow['qtyreqd']*$RequirementsRow['qtypu'],$RequirementsRow['decimalplaces']) . '</td>
+			<td class="number">' . locale_number_format($IssuedAlreadyRow[0],$RequirementsRow['decimalplaces']) . '</td></tr>';
 	}
 
 	echo '</table><br />';
@@ -784,7 +788,7 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 	} else { //not controlled - an easy one!
 		echo '<input type="hidden" name="IssueItem" value="' . $_POST['IssueItem'] . '" />';
 		echo '<tr><td>' . _('Quantity Issued') . ':</td>
-			  <td><input class="number" type="text" name="Qty" /></tr>';
+			  <td><input class="number" type="text" name="Qty" /></td></tr>';
 		echo '<tr><td colspan="2"><div class="centre"><input type="submit" name="Process" value="' . _('Process Items Issued') . '" /></div></td></tr>';
 	}
 } //end if selecting new item to issue or entering the issued item quantities

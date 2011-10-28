@@ -69,3 +69,12 @@ label{
 	margin-left:50px;
 	width:200px;
 }
+
+div.centre {
+  margin: 0 auto;
+  text-align:center;
+}
+
+h3.error {
+  color:red;
+}

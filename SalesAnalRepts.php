@@ -100,15 +100,15 @@ if (isset($_POST['submit'])) {
 		 $InputError = 1;
 		 prnMsg (_('Group by Level 1 is set but the upper and lower limits are not set') . ' - ' . _('these must be specified for the report to have any output'),'error',_('Upper/Lower limits not set'));
 	}
-	if (($_POST['GroupByData2']!='Not Used') AND ($_POST['Lower2']=='' || $_POST['Upper2']=='')) {
+	if (($_POST['GroupByData2']!='Not Used') AND ($_POST['Lower2']=='' or $_POST['Upper2']=='')) {
 		 $InputError = 1;
 		 prnMsg( _('Group by Level 2 is set but the upper and lower limits are not set') . ' - ' . _('these must be specified for the report to have any output'),'error',_('Upper/Lower Limits not set'));
 	}
-	if (($_POST['GroupByData3']!='Not Used') AND ($_POST['Lower3']=='' || $_POST['Upper3']=='')) {
+	if (($_POST['GroupByData3']!='Not Used') AND ($_POST['Lower3']=='' or $_POST['Upper3']=='')) {
 		 $InputError = 1;
 		 prnMsg( _('Group by Level 3 is set but the upper and lower limits are not set') . ' - ' . _('these must be specified for the report to have any output'),'error',_('Upper/Lower Limits not set'));
 	}
-	if (($_POST['GroupByData4']!='Not Used') AND ($_POST['Lower4']=='' || $_POST['Upper4']=='')) {
+	if (($_POST['GroupByData4']!='Not Used') AND ($_POST['Lower4']=='' or $_POST['Upper4']=='')) {
 		$InputError = 1;
 		prnMsg( _('Group by Level 4 is set but the upper and lower limits are not set') . ' - ' . _('these must be specified for the report to have any output'),'error',_('Upper/Lower Limits not set'));
 	}

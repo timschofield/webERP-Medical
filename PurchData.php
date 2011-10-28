@@ -37,7 +37,7 @@ if ((isset($_POST['AddRecord']) OR isset($_POST['UpdateRecord'])) AND isset($Sup
 		$InputError = 1;
 		prnMsg(_('There is no stock item set up enter the stock code or select a stock item using the search page'), 'error');
 	}
-	if (!is_numeric($_POST['Price'])) {
+	if (!is_numeric(filter_currency_input($_POST['Price']))) {
 		$InputError = 1;
 		unset($_POST['Price']);
 		prnMsg(_('The price entered was not numeric and a number is expected. No changes have been made to the database'), 'error');
@@ -74,7 +74,7 @@ if ((isset($_POST['AddRecord']) OR isset($_POST['UpdateRecord'])) AND isset($Sup
 										preferred)
 									VALUES ('" . $SupplierID . "',
 										'" . $StockID . "',
-										'" . $_POST['Price'] . "',
+										'" . filter_currency_input($_POST['Price']) . "',
 										'" . FormatDateForSQL($_POST['EffectiveFrom']) . "',
 										'" . $_POST['SuppliersUOM'] . "',
 										'" . $_POST['ConversionFactor'] . "',
@@ -90,7 +90,7 @@ if ((isset($_POST['AddRecord']) OR isset($_POST['UpdateRecord'])) AND isset($Sup
 		prnMsg(_('This supplier purchasing data has been added to the database'), 'success');
 	}
 	if ($InputError == 0 AND isset($_POST['UpdateRecord'])) {
-		$sql = "UPDATE purchdata SET price='" . $_POST['Price'] . "',
+		$sql = "UPDATE purchdata SET price='" . filter_currency_input($_POST['Price']) . "',
 									effectivefrom='" . FormatDateForSQL($_POST['EffectiveFrom']) . "',
 									suppliersuom='" . $_POST['SuppliersUOM'] . "',
 									conversionfactor='" . $_POST['ConversionFactor'] . "',
@@ -213,7 +213,7 @@ if (!isset($_GET['Edit'])) {
 					<td><a href="%s?StockID=%s&SupplierID=%s&Delete=1&EffectiveFrom=%s" onclick="return confirm(\'' . _('Are you sure you wish to delete this suppliers price?') . '\');">' . _('Delete') . '</a></td>
 					</tr>',
 					$myrow['suppname'],
-					number_format($myrow['price'], 3),
+					locale_money_format($myrow['price'], $myrow['currcode']),
 					$myrow['currcode'],
 					ConvertSQLDate($myrow['effectivefrom']),
 					$myrow['unitname'],
@@ -466,7 +466,7 @@ if (!isset($SuppliersResult)) {
 	echo '<tr><td>' . _('Currency') . ':</td>
 	<td><input type="hidden" name="CurrCode" . value="' . $CurrCode . '" />' . $CurrCode . '</td></tr>';
 	echo '<tr><td>' . _('Price') . ' (' . _('in Supplier Currency') . '):</td>
-	<td><input type="text" class="number" name="Price" maxlength="12" size="12" value="' . number_format($_POST['Price'], $_SESSION['Currencies'][$CurrCode]['DecimalPlaces'] ,'.','') . '" /></td></tr>';
+	<td><input type="text" class="number" name="Price" maxlength="12" size="12" value="' . locale_money_format($_POST['Price'], $CurrCode) . '" /></td></tr>';
 	echo '<tr><td>' . _('Date Updated') . ':</td>
 	<td><input type="text" class="date" alt="' . $_SESSION['DefaultDateFormat'] . '" name="EffectiveFrom" maxlength="10" size="11" value="' . $_POST['EffectiveFrom'] . '" /></td></tr>';
 	echo '<tr><td>' . _('Our Unit of Measure') . ':</td>';

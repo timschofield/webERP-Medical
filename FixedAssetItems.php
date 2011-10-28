@@ -116,7 +116,7 @@ if (isset($_POST['submit'])) {
 			$Errors[$i] = 'AssetLocation';
 			$i++;
 	}
-	if (!is_numeric($_POST['DepnRate']) OR $_POST['DepnRate']>100 OR $_POST['DepnRate']<0){
+	if (!is_numeric(filter_number_input($_POST['DepnRate'])) OR filter_number_input($_POST['DepnRate'])>100 OR filter_number_input($_POST['DepnRate'])<0){
 		$InputError = 1;
 		prnMsg(_('The depreciation rate is expected to be a number between 0 and 100'),'error');
 		$Errors[$i] = 'DepnRate';
@@ -251,7 +251,7 @@ if (isset($_POST['submit'])) {
 										assetcategoryid='" . $_POST['AssetCategoryID'] . "',
 										assetlocation='" . $_POST['AssetLocation'] . "',
 										depntype='" . $_POST['DepnType'] . "',
-										depnrate='" . $_POST['DepnRate'] . "',
+										depnrate='" . filter_number_input($_POST['DepnRate']) . "',
 										barcode='" . $_POST['BarCode'] . "',
 										serialno='" . $_POST['SerialNo'] . "'
 									WHERE assetid='" . $AssetID . "'";
@@ -277,7 +277,7 @@ if (isset($_POST['submit'])) {
 											'" . $_POST['AssetCategoryID'] . "',
 											'" . $_POST['AssetLocation'] . "',
 											'" . $_POST['DepnType'] . "',
-											'" . $_POST['DepnRate']. "',
+											'" . filter_number_input($_POST['DepnRate']). "',
 											'" . $_POST['BarCode'] . "',
 											'" . $_POST['SerialNo'] . "' )";
 			$ErrMsg =  _('The asset could not be added because');
@@ -567,13 +567,13 @@ echo '</table>';
 echo '<br /><table class="selection"><tr><th colspan="2">' . _('Asset Financial Summary') . '</th></tr>';
 
 if (isset($AssetRow)) {
-	echo '<tr><td>' . _('Accumulated Costs') . ':</td><td class="number">' . number_format($AssetRow['cost'],2) . '</td></tr>';
-	echo '<tr><td>' . _('Accumulated Depreciation') . ':</td><td class="number">' . number_format($AssetRow['accumdepn'],2) . '</td></tr>';
-	echo '<tr><td>' . _('Net Book Value') . ':</td><td class="number">' . number_format($AssetRow['cost']-$AssetRow['accumdepn'],2) . '</td></tr>';
+	echo '<tr><td>' . _('Accumulated Costs') . ':</td><td class="number">' . locale_money_format($AssetRow['cost'],$_SESSION['CompanyRecord']['currencydefault']) . '</td></tr>';
+	echo '<tr><td>' . _('Accumulated Depreciation') . ':</td><td class="number">' . locale_money_format($AssetRow['accumdepn'],$_SESSION['CompanyRecord']['currencydefault']) . '</td></tr>';
+	echo '<tr><td>' . _('Net Book Value') . ':</td><td class="number">' . locale_money_format($AssetRow['cost']-$AssetRow['accumdepn'],$_SESSION['CompanyRecord']['currencydefault']) . '</td></tr>';
 } else {
-	echo '<tr><td>' . _('Accumulated Costs') . ':</td><td class="number">0.00</td></tr>';
-	echo '<tr><td>' . _('Accumulated Depreciation') . ':</td><td class="number">0.00</td></tr>';
-	echo '<tr><td>' . _('Net Book Value') . ':</td><td class="number">0.00</td></tr>';
+	echo '<tr><td>' . _('Accumulated Costs') . ':</td><td class="number">' . locale_money_format(0,$_SESSION['CompanyRecord']['currencydefault']) . '</td></tr>';
+	echo '<tr><td>' . _('Accumulated Depreciation') . ':</td><td class="number">' . locale_money_format(0,$_SESSION['CompanyRecord']['currencydefault']) . '</td></tr>';
+	echo '<tr><td>' . _('Net Book Value') . ':</td><td class="number">' . locale_money_format(0,$_SESSION['CompanyRecord']['currencydefault']) . '</td></tr>';
 }
 $result = DB_query("SELECT periods.lastdate_in_period,
 							max(fixedassettrans.periodno)

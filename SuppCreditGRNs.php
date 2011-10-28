@@ -14,6 +14,12 @@ $title = _('Enter Supplier Credit Note Against Goods Received');
 
 include('includes/header.inc');
 
+if (isset($_POST['ChgPrice'])) {
+	$_POST['ChgPrice']=filter_currency_input($_POST['ChgPrice']);
+	$_POST['This_QuantityCredited']=filter_number_input($_POST['This_QuantityCredited']);
+}
+
+
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Dispatch') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (!isset($_SESSION['SuppTrans'])){
@@ -53,7 +59,9 @@ if (isset($_POST['AddGRNToTrans'])){
 												$_POST['JobRef'],
 												$_POST['GLCode'],
 												$_POST['PONo'],
-												$_POST['AssetID']);
+												$_POST['AssetID'],
+												0,
+												$_POST['DecimalPlaces']);
 	}
 }
 
@@ -66,7 +74,7 @@ if (isset($_GET['Delete'])){
 /*Show all the selected GRNs so far from the SESSION['SuppTrans']->GRNs array */
 
 echo '<table cellpadding="0" class="selection">';
-echo '<tr><th colspan="6"><font size="3" color="navy">' . _('Credits Against Goods Received Selected') . '</font></th></tr>';
+echo '<tr><th colspan="6"><font size="3" color="#616161">' . _('Credits Against Goods Received Selected') . '</font></th></tr>';
 $TableHeader = '<tr><th>' . _('GRN') . '</th>
 					<th>' . _('Item Code') . '</th>
 					<th>' . _('Description') . '</th>
@@ -84,9 +92,9 @@ foreach ($_SESSION['SuppTrans']->GRNs as $EnteredGRN){
 	echo '<tr><td>' . $EnteredGRN->GRNNo . '</td>
 			<td>' . $EnteredGRN->ItemCode . '</td>
 			<td>' . $EnteredGRN->ItemDescription . '</td>
-			<td class="number">' . number_format($EnteredGRN->This_QuantityInv,2) . '</td>
-			<td class="number">' . number_format($EnteredGRN->ChgPrice,2) . '</td>
-			<td class="number">' . number_format($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv,2) . '</td>
+			<td class="number">' . locale_number_format($EnteredGRN->This_QuantityInv,$EnteredGRN->DecimalPlaces) . '</td>
+			<td class="number">' . locale_money_format($EnteredGRN->ChgPrice,$_SESSION['SuppTrans']->CurrCode) . '</td>
+			<td class="number">' . locale_money_format($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv,$_SESSION['SuppTrans']->CurrCode) . '</td>
 			<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $EnteredGRN->GRNNo . '">' . _('Delete') . '</a></td></tr>';
 
 	$TotalValueCharged = $TotalValueCharged + ($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv);
@@ -98,8 +106,8 @@ foreach ($_SESSION['SuppTrans']->GRNs as $EnteredGRN){
 	}
 }
 
-echo '<tr><td colspan="5" class="number"><font size="2" color="navy">' . _('Total Value Credited Against Goods') . ':</font></td>
-		  <td class="number"><font size="2" color="navy"><u>' . number_format($TotalValueCharged,2) . '</u></font></td></tr>';
+echo '<tr><td colspan="5" class="number"><font size="2" color="#616161">' . _('Total Value Credited Against Goods') . ':</font></td>
+		  <td class="number"><font size="2" color="#616161"><u>' . locale_money_format($TotalValueCharged,$_SESSION['SuppTrans']->CurrCode) . '</u></font></td></tr>';
 echo '</table><br /><div class="centre"><a href="' . $rootpath . '/SupplierCredit.php">' . _('Back to Credit Note Entry') . '</a></div>';
 
 /* Now get all the GRNs for this supplier from the database
@@ -109,20 +117,24 @@ if (!isset($_POST['Show_Since'])){
 }
 
 $SQL = "SELECT grnno,
-			   purchorderdetails.orderno,
-			   purchorderdetails.unitprice,
-			   grns.itemcode, grns.deliverydate,
-			   grns.itemdescription,
-			   grns.qtyrecd,
-			   grns.quantityinv,
-			   purchorderdetails.stdcostunit,
-			   purchorderdetails.assetid
-			   FROM grns,
-					purchorderdetails
-			   WHERE grns.podetailitem=purchorderdetails.podetailitem AND
-					 grns.supplierid ='" . $_SESSION['SuppTrans']->SupplierID . "' AND
-					 grns.deliverydate >= '" . FormatDateForSQL($_POST['Show_Since']) . "'
-			   ORDER BY grns.grnno";
+				purchorderdetails.orderno,
+				purchorderdetails.unitprice,
+				grns.itemcode,
+				grns.deliverydate,
+				grns.itemdescription,
+				grns.qtyrecd,
+				grns.quantityinv,
+				purchorderdetails.stdcostunit,
+				purchorderdetails.assetid,
+				stockmaster.decimalplaces
+				FROM grns
+				LEFT JOIN purchorderdetails
+					ON grns.podetailitem=purchorderdetails.podetailitem
+				LEFT JOIN stockmaster
+					ON grns.itemcode=stockmaster.stockid
+				WHERE grns.supplierid ='" . $_SESSION['SuppTrans']->SupplierID . "'
+					AND grns.deliverydate >= '" . FormatDateForSQL($_POST['Show_Since']) . "'
+				ORDER BY grns.grnno";
 $GRNResults = DB_query($SQL,$db);
 
 if (DB_num_rows($GRNResults)==0){
@@ -138,9 +150,9 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 
 echo '<br /><table cellpadding="2" colspan="7" class="selection">';
 
-echo '<tr><th colspan="10"><font size="3" color="navy">' . _('Show Goods Received Since') . ':&nbsp;</font>';
+echo '<tr><th colspan="10"><font size="3" color="#616161">' . _('Show Goods Received Since') . ':&nbsp;</font>';
 echo '<input type="text" name="Show_Since" maxlength="11" size="12" class="date" alt='.$_SESSION['DefaultDateFormat'].' value="' . $_POST['Show_Since'] . '" />
-		<font size="3" color="navy"> ';
+		<font size="3" color="#616161"> ';
 echo  _('From') . ' ' . $_SESSION['SuppTrans']->SupplierName . '</font></th></tr>';
 
 $TableHeader = '<tr><th>' . _('GRN') . '</th>
@@ -173,11 +185,11 @@ while ($myrow=DB_fetch_array($GRNResults)){
 			  		<td>' . $myrow['itemcode'] . '</td>
 			  		<td>' . $myrow['itemdescription'] . '</td>
 			  		<td>' . ConvertSQLDate($myrow['deliverydate']) . '</td>
-			  		<td class="number">' . number_format($myrow['qtyrecd'],2) . '</td>
-			  		<td class="number">' . number_format($myrow['quantityinv'],2) . '</td>
-			  		<td class="number">' . number_format($myrow['qtyrecd'] - $myrow['quantityinv'],2) . '</td>
-			  		<td class="number">' . number_format($myrow['unitprice'],2) . '</td>
-			  		<td class="number">' . number_format($myrow['unitprice']*($myrow['qtyrecd'] - $myrow['quantityinv']),2) . '</td>
+			  		<td class="number">' . locale_number_format($myrow['qtyrecd'],$myrow['decimalplaces']) . '</td>
+			  		<td class="number">' . locale_number_format($myrow['quantityinv'],$myrow['decimalplaces']) . '</td>
+			  		<td class="number">' . locale_number_format($myrow['qtyrecd'] - $myrow['quantityinv'],$myrow['decimalplaces']) . '</td>
+			  		<td class="number">' . locale_money_format($myrow['unitprice'],$_SESSION['SuppTrans']->CurrCode) . '</td>
+			  		<td class="number">' . locale_money_format($myrow['unitprice']*($myrow['qtyrecd'] - $myrow['quantityinv']),$_SESSION['SuppTrans']->CurrCode) . '</td>
 			  	</tr>';
 		$i++;
 		if ($i>15){
@@ -192,32 +204,35 @@ echo '</table>';
 if (isset($_POST['GRNNo']) AND $_POST['GRNNo']!=''){
 
 	$SQL = "SELECT grnno,
-				 grns.podetailitem,
-				 purchorderdetails.orderno,
-				 purchorderdetails.unitprice,
-				 purchorderdetails.glcode,
-				 grns.itemcode,
-				 grns.deliverydate,
-				 grns.itemdescription,
-				 grns.quantityinv,
-				 grns.qtyrecd,
-				 grns.qtyrecd - grns.quantityinv
-				 AS qtyostdg,
-				 purchorderdetails.stdcostunit,
-				 purchorderdetails.shiptref,
-				 purchorderdetails.jobref,
-				 shipments.closed,
-				 purchorderdetails.assetid
-				 FROM grns,
-					  purchorderdetails
-				 LEFT JOIN shipments ON purchorderdetails.shiptref=shipments.shiptref
-				 WHERE grns.podetailitem=purchorderdetails.podetailitem AND
-					   grns.grnno='" .$_POST['GRNNo'] . "'";
+					grns.podetailitem,
+					purchorderdetails.orderno,
+					purchorderdetails.unitprice,
+					purchorderdetails.glcode,
+					grns.itemcode,
+					grns.deliverydate,
+					grns.itemdescription,
+					grns.quantityinv,
+					grns.qtyrecd,
+					grns.qtyrecd - grns.quantityinv AS qtyostdg,
+					purchorderdetails.stdcostunit,
+					purchorderdetails.shiptref,
+					purchorderdetails.jobref,
+					shipments.closed,
+					stockmaster.decimalplaces,
+					purchorderdetails.assetid
+				FROM grns
+				LEFT JOIN purchorderdetails
+					ON grns.podetailitem=purchorderdetails.podetailitem
+				LEFT JOIN shipments
+					ON purchorderdetails.shiptref=shipments.shiptref
+				LEFT JOIN stockmaster
+					ON grns.itemcode=stockmaster.stockid
+				WHERE grns.grnno='" .$_POST['GRNNo'] . "'";
 	$GRNEntryResult = DB_query($SQL,$db);
 	$myrow = DB_fetch_array($GRNEntryResult);
 
 	echo '<br /><table class="selection">';
-	echo '<tr><th colspan="6"><font size="3" color="navy">' . _('GRN Selected For Adding To A Suppliers Credit Note') . '</font></th></tr>';
+	echo '<tr><th colspan="6"><font size="3" color="#616161">' . _('GRN Selected For Adding To A Suppliers Credit Note') . '</font></th></tr>';
 	echo '<tr><th>' . _('GRN') . '</th>
 				<th>' . _('Item') . '</th>
 				<th>' . _('Quantity') . '<br />' . _('Outstanding') . '</th>
@@ -228,10 +243,10 @@ if (isset($_POST['GRNNo']) AND $_POST['GRNNo']!=''){
 
 	echo '<tr><td>' . $_POST['GRNNo'] . '</td>
 				<td>' . $myrow['itemcode'] . ' ' . $myrow['itemdescription'] . '</td>
-				<td class="number">' . number_format($myrow['qtyostdg'],2) . '</td>
-				<td><input type="text" name="This_QuantityCredited" Value=' . $myrow['qtyostdg'] . ' size="11" maxlength="10" /></td>
-				<td class="number">' . $myrow['unitprice'] . '</td>
-				<td><input type="text" name="ChgPrice" Value=' . $myrow['unitprice'] . ' size="11" maxlength="10" /></td>
+				<td class="number">' . locale_number_format($myrow['qtyostdg'], $myrow['decimalplaces']) . '</td>
+				<td><input type="text" class="number" name="This_QuantityCredited" value=' . locale_number_format($myrow['qtyostdg'], $myrow['decimalplaces']) . ' size="11" maxlength="10" /></td>
+				<td class="number">' . locale_money_format($myrow['unitprice'], $_SESSION['SuppTrans']->CurrCode) . '</td>
+				<td><input type="text" class="number" name="ChgPrice" value="' . locale_money_format($myrow['unitprice'], $_SESSION['SuppTrans']->CurrCode) . '" size="11" maxlength="10" /></td>
 			</tr>';
 	echo '</table>';
 
@@ -252,6 +267,7 @@ if (isset($_POST['GRNNo']) AND $_POST['GRNNo']!=''){
 	echo '<input type="hidden" name="Prev_QuantityInv" value="' . $myrow['quantityinv'] . '" />';
 	echo '<input type="hidden" name="OrderPrice" value="' . $myrow['unitprice'] . '" />';
 	echo '<input type="hidden" name="StdCostUnit" value="' . $myrow['stdcostunit'] . '" />';
+	echo '<input type="hidden" name="DecimalPlaces" value="' . $myrow['decimalplaces'] . '" />';
 
 	echo '<input type="hidden" name="JobRef" value="' . $myrow['jobref'] . '" />';
 	echo '<input type="hidden" name="GLCode" value="' . $myrow['glcode'] . '" />';

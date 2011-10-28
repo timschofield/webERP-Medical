@@ -278,10 +278,10 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/m
 
 	/*if $FromCriteria is not set then show a form to allow input	*/
 
-		echo '<form sction="' . $_SERVER['PHP_SELF'] . '" method="POST"><table>';
+		echo '<form sction="' . $_SERVER['PHP_SELF'] . '" method="post">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-		echo '<tr><td>' . _('From Supplier Code') . ':</font></td>
+		echo '<table><tr><td>' . _('From Supplier Code') . ':</font></td>
 			<td><input tabindex="1" type="text" maxlength="6" size="7" name="FromCriteria" value="1" /></td>
 		</tr>';
 		echo '<tr><td>' . _('To Supplier Code') . ':</td>

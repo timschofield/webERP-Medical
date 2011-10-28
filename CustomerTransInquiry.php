@@ -48,7 +48,7 @@ echo '</tr></table><br /><div class="centre"><input tabindex="4" type="submit" n
 
 echo '</form></div>';
 
-if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
+if (isset($_POST['ShowResults']) and $_POST['TransType'] != ''){
    $SQL_FromDate = FormatDateForSQL($_POST['FromDate']);
    $SQL_ToDate = FormatDateForSQL($_POST['ToDate']);
    $sql = "SELECT transno,
@@ -131,8 +131,8 @@ if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
 				$myrow['reference'],
 				$myrow['invtext'],
 				$myrow['order_'],
-				$myrow['rate'],
-				number_format($myrow['totalamt'],2),
+				locale_number_format($myrow['rate'],4),
+				locale_money_format($myrow['totalamt'],$myrow['currcode']),
 				$myrow['currcode'],
 				$rootpath,
 				$myrow['transno'],
@@ -149,8 +149,8 @@ if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
 				$myrow['reference'],
 				$myrow['invtext'],
 				$myrow['order_'],
-				$myrow['rate'],
-				number_format($myrow['totalamt'],2),
+				locale_number_format($myrow['rate'],4),
+				locale_money_format($myrow['totalamt'],$myrow['currcode']),
 				$myrow['currcode'],
 				$rootpath,
 				$myrow['transno'],
@@ -165,8 +165,8 @@ if (isset($_POST['ShowResults']) && $_POST['TransType'] != ''){
 				$myrow['reference'],
 				$myrow['invtext'],
 				$myrow['order_'],
-				$myrow['rate'],
-				number_format($myrow['totalamt'],2),
+				locale_number_format($myrow['rate'],4),
+				locale_money_format($myrow['totalamt'],$myrow['currcode']),
 				$myrow['currcode']);
 		}
 

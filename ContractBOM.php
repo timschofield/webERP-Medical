@@ -28,7 +28,7 @@ if (isset($_POST['UpdateLines']) OR isset($_POST['BackToHeader'])) {
 				//this is the same as deleting the line - so delete it
 				$_SESSION['Contract'.$identifier]->Remove_ContractComponent($ContractComponent->ComponentID);
 			} else {
-				$_SESSION['Contract'.$identifier]->ContractBOM[$ContractComponent->ComponentID]->Quantity=$_POST['Qty'.$ContractComponent->ComponentID];
+				$_SESSION['Contract'.$identifier]->ContractBOM[$ContractComponent->ComponentID]->Quantity=filter_number_input($_POST['Qty'.$ContractComponent->ComponentID]);
 			}
 		} // end loop around the items on the contract BOM
 	} // end if the contract is not currently committed to by the customer
@@ -167,9 +167,11 @@ if(isset($_GET['Delete'])){
 if (isset($_POST['NewItem'])){ /* NewItem is set from the part selection list as the part code selected */
 /* take the form entries and enter the data from the form into the PurchOrder class variable */
 	foreach ($_POST as $key => $value) {
-		if (substr($key, 0, 3)=='qty') {
-			$ItemCode=substr($key, 3, strlen($key)-3);
-			$Quantity=$value;
+		if (substr($key, 0, 7)=='StockID') {
+			$Index=substr($key, 7);
+			$ItemCode=$value;
+			$Quantity=filter_number_input($_POST['qty'.$Index]);
+
 			$AlreadyOnThisBOM = 0;
 
 			if (count($_SESSION['Contract'.$identifier]->ContractBOM)!=0){
@@ -203,7 +205,7 @@ if (isset($_POST['NewItem'])){ /* NewItem is set from the part selection list as
 
 					$_SESSION['Contract'.$identifier]->Add_To_ContractBOM ($ItemCode,
 																			$myrow['description'],
-																			$DefaultWorkCentre,
+																			$_SESSION['Contract'.$identifier]->DefaultWorkCentre,
 																			$Quantity, /* Qty */
 																			$myrow['unitcost'],
 																			$myrow['units']);
@@ -232,7 +234,7 @@ if (count($_SESSION['Contract'.$identifier]->ContractBOM)>0){
 	echo '<table cellpadding="2" class="selection">';
 
 	if (isset($_SESSION['Contract'.$identifier]->ContractRef)) {
-		echo  '<tr><th colspan="7"><font color="navy" size="2">' . _('Contract Reference:') .' '. $_SESSION['Contract'.$identifier]->ContractRef.'</font></th></tr>';
+		echo  '<tr><th colspan="7"><font color="#616161" size="2">' . _('Contract Reference:') .' '. $_SESSION['Contract'.$identifier]->ContractRef.'</font></th></tr>';
 	}
 
 	echo '<tr>
@@ -251,7 +253,7 @@ if (count($_SESSION['Contract'.$identifier]->ContractBOM)>0){
 
 		$LineTotal = $ContractComponent->Quantity * $ContractComponent->ItemCost;
 
-		$DisplayLineTotal = number_format($LineTotal,2);
+		$DisplayLineTotal = locale_money_format($LineTotal,$_SESSION['Contract'.$identifier]->CurrCode);
 
 		if ($k==1){
 			echo '<tr class="EvenTableRows">';
@@ -263,15 +265,15 @@ if (count($_SESSION['Contract'.$identifier]->ContractBOM)>0){
 
 		echo '<td>' . $ContractComponent->StockID . '</td>
 			  <td>' . $ContractComponent->ItemDescription . '</td>
-			  <td><input type="text" class="number" name="Qty' . $ContractComponent->ComponentID . '" size="11" value="' . $ContractComponent->Quantity  . '" /></td>
+			  <td><input type="text" class="number" name="Qty' . $ContractComponent->ComponentID . '" size="11" value="' . locale_number_format($ContractComponent->Quantity, $ContractComponent->DecimalPlaces)  . '" /></td>
 			  <td>' . $ContractComponent->UOM . '</td>
-			  <td class="number">' . $ContractComponent->ItemCost . '</td>
+			  <td class="number">' . locale_number_format($ContractComponent->ItemCost,4) . '</td>
 			  <td class="number">' . $DisplayLineTotal . '</td>
 			  <td><a href="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier. '&amp;Delete=' . $ContractComponent->ComponentID . '">' . _('Delete') . '</a></td></tr>';
 		$TotalCost += $LineTotal;
 	}
 
-	$DisplayTotal = number_format($TotalCost,2);
+	$DisplayTotal = locale_money_format($TotalCost,$_SESSION['Contract'.$identifier]->CurrCode);
 	echo '<tr><td colspan="6" class="number">' . _('Total Cost') . '</td><td class="number"><b>' . $DisplayTotal . '</b></td></tr></table>';
 	echo '<br /><div class="centre"><input type="submit" name="UpdateLines" value="' . _('Update Lines') . '" />';
 	echo '<input type="submit" name="BackToHeader" value="' . _('Back To Contract Header') . '" /></div>';
@@ -345,7 +347,7 @@ if (isset($SearchResult)) {
 					</tr>';
 	echo $TableHeader;
 
-	$j = 1;
+	$Index = 1;
 	$k=0; //row colour counter
 
 	while ($myrow=DB_fetch_array($SearchResult)) {
@@ -369,13 +371,15 @@ if (isset($SearchResult)) {
 				<td>'.$myrow['description'].'</td>
 				<td>'.$myrow['units'] . '</td>
 				<td>'.$ImageSource.'</td>
-				<td><input class="number" type="text" size="6" value="0" name="qty'.$myrow['stockid'].'" /></td>
+				<td><input class="number" type="text" size="6" value="0" name="qty'.$Index.'" /></td>
+				<td><input type="hidden" value="'.$myrow['stockid'].'" name="StockID'.$Index.'" /></td>
 				</tr>';
 
 		$PartsDisplayed++;
 		if ($PartsDisplayed == $Maximum_Number_Of_Parts_To_Show){
 			break;
 		}
+		$Index++;
 #end of page full new headings if
 	}
 #end of while loop
@@ -389,8 +393,6 @@ if (isset($SearchResult)) {
 	}
 	echo '<br /><div class="centre"><input type="submit" name="NewItem" value="' . _('Add to Contract Bill Of Material') .'" /></div>';
 }#end if SearchResults to show
-
-echo '<hr />';
 
 echo '</form>';
 include('includes/footer.inc');

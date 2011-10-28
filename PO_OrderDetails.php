@@ -79,18 +79,20 @@ if (DB_num_rows($GetOrdHdrResult)!=1) {
 
 $myrow = DB_fetch_array($GetOrdHdrResult);
 
+$OrderCurrCode = $myrow['currcode'];
+
 /* SHOW ALL THE ORDER INFO IN ONE PLACE */
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Purchase Order') . '" alt="" />' . ' ' . $title . '</p>';
 
 echo '<table class="selection" cellpadding="2">';
-echo '<tr><th colspan="8"><font size="3" color="navy">'. _('Order Header Details'). '</font></th></tr>';
+echo '<tr><th colspan="8"><font size="3" color="#616161">'. _('Order Header Details'). '</font></th></tr>';
 echo '<tr><th style="text-align:left">' . _('Supplier Code'). '</td><td><a href="SelectSupplier.php?SupplierID='.$myrow['supplierid'].'">' . $myrow['supplierid'] . '</a></td>
 	<th style="text-align:left">' . _('Supplier Name'). '</td><td><a href="SelectSupplier.php?SupplierID='.$myrow['supplierid'].'">' . $myrow['suppname'] . '</a></td></tr>';
 
 echo '<tr><th style="text-align:left">' . _('Ordered On'). '</td><td>' . ConvertSQLDate($myrow['orddate']) . '</td>
 	<th style="text-align:left">' . _('Delivery Address 1'). '</td><td>' . $myrow['deladd1'] . '</td></tr>';
 
-echo '<tr><th style="text-align:left">' . _('Order Currency'). '</td><td>' . $myrow['currcode'] . '</td>
+echo '<tr><th style="text-align:left">' . _('Order Currency'). '</td><td>' . $OrderCurrCode . '</td>
 	<th style="text-align:left">' . _('Delivery Address 2'). '</td><td>' . $myrow['deladd2'] . '</td></tr>';
 
 echo '<tr><th style="text-align:left">' . _('Exchange Rate'). '</td><td>' . $myrow['rate'] . '</td>
@@ -127,14 +129,25 @@ echo '</table>';
 echo '<br />';
 /*Now get the line items */
 $ErrMsg = _('The line items of the purchase order could not be retrieved');
-$LineItemsSQL = "SELECT purchorderdetails.* FROM purchorderdetails
+$LineItemsSQL = "SELECT itemcode,
+						itemdescription,
+						quantityord,
+						quantityrecd,
+						qtyinvoiced,
+						unitprice,
+						actprice,
+						deliverydate,
+						stockmaster.decimalplaces
+				FROM purchorderdetails
+				LEFT JOIN stockmaster
+					ON purchorderdetails.itemcode=stockmaster.stockid
 				WHERE purchorderdetails.orderno = '" . $_GET['OrderNo'] ."'";
 
 $LineItemsResult = db_query($LineItemsSQL,$db, $ErrMsg);
 
 
 echo '<table colspan="8" class="selection" cellpadding="0">';
-echo '<tr><th colspan="8"><font size="3" color="navy">'. _('Order Line Details'). '</font></th></tr>';
+echo '<tr><th colspan="8"><font size="3" color="#616161">'. _('Order Line Details'). '</font></th></tr>';
 echo '<tr>
 		<th>' . _('Item Code'). '</td>
 		<th>' . _('Item Description'). '</td>
@@ -173,20 +186,20 @@ while ($myrow=db_fetch_array($LineItemsResult)) {
 
 	printf ('<td>%s</td>
 		<td>%s</td>
-		<td class="number">%01.2f</td>
-		<td class="number">%01.2f</td>
-		<td class="number">%01.2f</td>
-		<td class="number">%01.2f</td>
-		<td class="number">%01.2f</td>
+		<td class="number">%s</td>
+		<td class="number">%s</td>
+		<td class="number">%s</td>
+		<td class="number">%s</td>
+		<td class="number">%s</td>
 		<td>%s</td>
 		</tr>' ,
 		$myrow['itemcode'],
 		$myrow['itemdescription'],
-		$myrow['quantityord'],
-		$myrow['quantityrecd'],
-		$myrow['qtyinvoiced'],
-		$myrow['unitprice'],
-		$myrow['actprice'],
+		locale_number_format($myrow['quantityord'], $myrow['decimalplaces']),
+		locale_number_format($myrow['quantityrecd'], $myrow['decimalplaces']),
+		locale_number_format($myrow['qtyinvoiced'], $myrow['decimalplaces']),
+		locale_money_format($myrow['unitprice'], $OrderCurrCode),
+		locale_money_format($myrow['actprice'], $OrderCurrCode),
 		$DisplayReqdDate);
 
 }
@@ -194,10 +207,10 @@ while ($myrow=db_fetch_array($LineItemsResult)) {
 echo '<tr><td><br /></td>
 	</tr>
 	<tr><td colspan="4" class="number">' . _('Total Order Value Excluding Tax') .'</td>
-	<td colspan="2" class="number">' . number_format($OrderTotal,2) . '</td></tr>';
+	<td colspan="2" class="number">' . locale_money_format($OrderTotal,$OrderCurrCode) . '</td></tr>';
 echo '<tr>
 	<td colspan="4" class="number">' . _('Total Order Value Received Excluding Tax') . '</td>
-	<td colspan="2" class="number">' . number_format($RecdTotal,2) . '</td></tr>';
+	<td colspan="2" class="number">' . locale_money_format($RecdTotal,$OrderCurrCode) . '</td></tr>';
 echo '</table>';
 
 echo '<br />';

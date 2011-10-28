@@ -7,7 +7,7 @@ include('includes/session.inc');
 include('includes/SQL_CommonFunctions.inc');
 
 //Get Out if we have no order number to work with
-If (!isset($_GET['QuotationNo']) || $_GET['QuotationNo']==""){
+If (!isset($_GET['QuotationNo']) or $_GET['QuotationNo']==""){
         $title = _('Select Quotation To Print');
         include('includes/header.inc');
         echo '<div class="centre"><br /><br /><br />';
@@ -39,6 +39,7 @@ $sql = "SELECT salesorders.customerref,
 		debtorsmaster.address4,
 		debtorsmaster.address5,
 		debtorsmaster.address6,
+		debtorsmaster.currcode,
 		shippers.shippername,
 		salesorders.printedpackingslip,
 		salesorders.datepackingslipprinted,
@@ -99,6 +100,7 @@ $sql = "SELECT salesorderdetails.stkcode,
 		salesorderdetails.unitprice,
 		salesorderdetails.discountpercent,
 		stockmaster.taxcatid,
+		stockmaster.decimalplaces,
 		salesorderdetails.narrative
 	FROM salesorderdetails INNER JOIN stockmaster
 		ON salesorderdetails.stkcode=stockmaster.stockid
@@ -129,21 +131,29 @@ if (DB_num_rows($result)>0){
 
 		} //end if need a new page headed up
 
-		$DisplayQty = number_format($myrow2['quantity'],2);
-		$DisplayPrevDel = number_format($myrow2['qtyinvoiced'],2);
-		$DisplayPrice = number_format($myrow2['unitprice'],2);
-		$DisplayDiscount = number_format($myrow2['discountpercent']*100,2) . '%';
+		$DisplayQty = locale_number_format($myrow2['quantity'],$myrow2['decimalplaces']);
+		$DisplayPrevDel = locale_number_format($myrow2['qtyinvoiced'],$myrow2['decimalplaces']);
+		$DisplayPrice = locale_money_format($myrow2['unitprice'],$myrow['currcode']);
+		$DisplayDiscount = locale_number_format($myrow2['discountpercent']*100,2) . '%';
 		$SubTot =  $myrow2['unitprice']*$myrow2['quantity']*(1-$myrow2['discountpercent']);
 		$TaxProv = $myrow['taxprovinceid'];
 		$TaxCat = $myrow2['taxcatid'];
 		$Branch = $myrow['branchcode'];
-		$sql3 = " select taxgrouptaxes.taxauthid from taxgrouptaxes INNER JOIN custbranch ON taxgrouptaxes.taxgroupid=custbranch.taxgroupid WHERE custbranch.branchcode='" .$Branch ."'";
+		$sql3 = "SELECT taxgrouptaxes.taxauthid
+					FROM taxgrouptaxes
+					INNER JOIN custbranch
+						ON taxgrouptaxes.taxgroupid=custbranch.taxgroupid
+					WHERE custbranch.branchcode='" .$Branch ."'";
 		$result3=DB_query($sql3,$db, $ErrMsg);
 		while ($myrow3=DB_fetch_array($result3)){
 			$TaxAuth = $myrow3['taxauthid'];
 		}
 
-		$sql4 = "SELECT * FROM taxauthrates WHERE dispatchtaxprovince='" .$TaxProv ."' AND taxcatid='" .$TaxCat ."' AND taxauthority='" .$TaxAuth ."'";
+		$sql4 = "SELECT taxrate
+					FROM taxauthrates
+					WHERE dispatchtaxprovince='" .$TaxProv ."'
+						AND taxcatid='" .$TaxCat ."'
+						AND taxauthority='" .$TaxAuth ."'";
 		$result4=DB_query($sql4,$db, $ErrMsg);
 		while ($myrow4=DB_fetch_array($result4)){
 			$TaxClass = 100 * $myrow4['taxrate'];
@@ -151,10 +161,10 @@ if (DB_num_rows($result)>0){
 
 		$DisplayTaxClass = $TaxClass . "%";
 		$TaxAmount =  (($SubTot/100)*(100+$TaxClass))-$SubTot;
-		$DisplayTaxAmount = number_format($TaxAmount,2);
+		$DisplayTaxAmount = locale_money_format($TaxAmount,$myrow['currcode']);
 
 		$LineTotal = $SubTot + $TaxAmount;
-		$DisplayTotal = number_format($LineTotal,2);
+		$DisplayTotal = locale_money_format($LineTotal,$myrow['currcode']);
 
 		$FontSize=10;
 
@@ -214,13 +224,13 @@ if (DB_num_rows($result)>0){
 	}
 	// $YPos -= ($line_height);
 	$LeftOvers = $pdf->addTextWrap(80,$YPos-100,400,$FontSize,_('Total Tax'),'right');
-	$LeftOvers = $pdf->addTextWrap(100,$YPos-100,450,$FontSize,number_format($TaxTotal,2),'right');
+	$LeftOvers = $pdf->addTextWrap(100,$YPos-100,450,$FontSize,locale_money_format($TaxTotal,$myrow['currcode']),'right');
 	$YPos -= 12;
 	$LeftOvers = $pdf->addTextWrap(80,$YPos-100,400,$FontSize,_('Quotation Excluding Tax'),'right');
-	$LeftOvers = $pdf->addTextWrap(100,$YPos-100,450,$FontSize,number_format($QuotationTotalEx,2),'right');
+	$LeftOvers = $pdf->addTextWrap(100,$YPos-100,450,$FontSize,locale_money_format($QuotationTotalEx,$myrow['currcode']),'right');
 	$YPos -= 12;
 	$LeftOvers = $pdf->addTextWrap(80,$YPos-100,400,$FontSize,_('Quotation Including Tax'),'right');
-	$LeftOvers = $pdf->addTextWrap(100,$YPos-100,450,$FontSize,number_format($QuotationTotal,2),'right');
+	$LeftOvers = $pdf->addTextWrap(100,$YPos-100,450,$FontSize,locale_money_format($QuotationTotal,$myrow['currcode']),'right');
 
 } /*end if there are line details to show on the quotation*/
 

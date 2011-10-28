@@ -12,7 +12,7 @@ if(!defined('SESSION_STARTED')) {
 $_SESSION['MaxLogoSize'] = 10 * 1024;	    // Limit logo file size.
 
 // Check if the page has been reloaded
-if(!isset($_GET['sessions_checked']) || $_GET['sessions_checked'] != 'true') {
+if(!isset($_GET['sessions_checked']) or $_GET['sessions_checked'] != 'true') {
 	// Set session variable
 	$_SESSION['session_support'] = '<font class="good">Enabled</font>';
 	// Reload page
@@ -167,7 +167,7 @@ function change_data(type) {
 				$GuessedURL = 'http://'.$_SERVER["SERVER_NAME"].$_SERVER["SCRIPT_NAME"];
 				$GuessedURL = trim(rtrim(dirname($GuessedURL), 'install'));
 				?>
-				<input type="text" tabindex="30" name="ba_url" size="30" value="<?php if(isset($_SESSION['ba_url'])) echo $_SESSION['ba_url']; else echo $GuessedURL; ?>"/>
+				<input type="text" tabindex="30" name="ba_url" size="30" value="<?php if(isset($_SESSION['ba_url'])) echo $_SESSION['ba_url']; else echo $GuessedURL; ?>" />
 
 			</td>
 		</tr>
@@ -181,20 +181,25 @@ function change_data(type) {
 				Server Operating System:
 			</td>
 			<td width="180">
-				<input type="radio" tabindex="40" name="operating_system" id="operating_system_linux" onclick="document.getElementById('file_perms_box').style.display = 'block';" value="linux"
+
 				<?php
 					if(!isset($_SESSION['operating_system']) OR $_SESSION['operating_system'] == 'linux') {
-						echo ' checked';
-					} ?>
-				/>
+						echo '<input type="radio" tabindex="40" name="operating_system" id="operating_system_linux" onclick="document.getElementById(\'file_perms_box\').style.display = \'block\';" value="linux" checked="True" />';
+					} else {
+						echo '<input type="radio" tabindex="40" name="operating_system" id="operating_system_linux" onclick="document.getElementById(\'file_perms_box\').style.display = \'block\';" value="linux" />';
+					}?>
+
 				<font style="cursor: pointer;" onclick="javascript: change_os('linux');">Linux/Unix based</font>
 				<br />
-				<input type="radio" tabindex="41" name="operating_system" id="operating_system_windows" onclick="document.getElementById('file_perms_box').style.display = 'none';" value="windows"
+
 				<?php
 					if(isset($_SESSION['operating_system']) AND $_SESSION['operating_system'] == 'windows') {
-						echo ' checked'; }
+						echo '<input type="radio" tabindex="41" name="operating_system" id="operating_system_windows" onclick="document.getElementById(\'file_perms_box\').style.display = \'none\';" value="windows" checked="True" />';
+					} else {
+						echo '<input type="radio" tabindex="41" name="operating_system" id="operating_system_windows" onclick="document.getElementById(\'file_perms_box\').style.display = \'none\';" value="windows" />';
+					}
 					?>
-				/>
+
 				<font style="cursor: pointer;" onclick="javascript: change_os('windows');">Windows</font>
 			</td>
 			<td>
@@ -224,16 +229,17 @@ function change_data(type) {
 		<tr>
 			<td width="120" style="color: #666666;">Host Name:</td>
 			<td width="230">
-				<input type="text" tabindex="43" name="database_host" style="width: 98%;" value="<?php if(isset($_SESSION['database_host'])) {
-																										 echo $_SESSION['database_host'];
-																									  } else {
-																										 echo 'localhost';
-																									  } ?>" />
+				<?php
+				if(isset($_SESSION['database_host'])) {
+					echo '<input type="text" tabindex="43" name="database_host" style="width: 98%;" value="' . $_SESSION['database_host'] . '" />';
+				} else {
+					echo '<input type="text" tabindex="43" name="database_host" style="width: 98%;" value="localhost" />';
+				} ?>
 			</td>
 			<td width="7">&nbsp;</td>
 			<td width="70" style="color: #666666;">Username:</td>
 			<td>
-				<input type="text" tabindex="44" name="database_username" size="10"  value="<?php if(isset($_SESSION['database_username'])) echo $_SESSION['database_username']; else echo "root";?>">
+				<input type="text" tabindex="44" name="database_username" size="10"  value="<?php if(isset($_SESSION['database_username'])) echo $_SESSION['database_username']; else echo "root";?>" />
 			</td>
 		</tr>
 		<tr>
@@ -243,19 +249,23 @@ function change_data(type) {
 			<td>&nbsp;</td>
 			<td style="color: #666666;">Password:</td>
 			<td>
-				<input type="password" tabindex="45" name="database_password" style="width: 98%;"<?php if(isset($_SESSION['database_password'])) {
-																											echo ' value = "'.$_SESSION['database_password'].'"';
-																										} ?> />
+				<?php
+				if(isset($_SESSION['database_password'])) {
+					echo '<input type="password" tabindex="45" name="database_password" style="width: 98%;" value = "'.$_SESSION['database_password'].'" />';
+				} else {
+					echo '<input type="password" tabindex="45" name="database_password" style="width: 98%;" value = "" />';
+				} ?>
 			</td>
 		</tr>
 		<tr>
 
 			<td colspan="2">
-				<input type="checkbox" tabindex="46" name="install_tables" id="install_tables" value="true"<?php if(!isset($_SESSION['install_tables'])) {
-																													echo ' checked';
-																												 } elseif($_SESSION['install_tables'] == 'true') {
-																													echo ' checked';
-																												 } ?> />
+				<?php
+				if(!isset($_SESSION['install_tables'])) {
+					echo '<input type="checkbox" tabindex="46" name="install_tables" id="install_tables" value="true" checked="False" />';
+				} elseif($_SESSION['install_tables'] == 'true') {
+					echo '<input type="checkbox" tabindex="46" name="install_tables" id="install_tables" value="true"  checked="True" />';
+				} ?>
 				<label for="install_tables" style="color: #666666;">Install Tables</label>
 				<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<span style="font-size: 10px; color: #666666;">(Please note: May remove existing tables and data)</span></td>
@@ -302,7 +312,7 @@ function change_data(type) {
 
 			<td width="180">
 			    <input type="hidden" name="MAX_FILE_SIZE" <?php echo "value=\"" . $_SESSION['MaxLogoSize'] . "\"" ?> />
-			    <input type="FILE" size="50" ID="LogoFile" name="LogoFile" tabindex="53">
+			    <input type="FILE" size="50" ID="LogoFile" name="LogoFile" tabindex="53" />
 			</td>
 		</tr>
 		<tr>
@@ -312,9 +322,12 @@ function change_data(type) {
 			<td style="color: #666666;">Username:</td>
 			<td>
 				admin
-				<!--<input type="text" tabindex="60" name="admin_username" style="width: 98%;" value="<?php if(isset($_SESSION['admin_username'])) { echo $_SESSION['admin_username'];
+				<!--<?php
+				if(isset($_SESSION['admin_username'])) {
+					echo '<input type="text" tabindex="60" name="admin_username" style="width: 98%;" value="' . $_SESSION['admin_username'] . '" />';
 				} else {
-					echo 'admin'; } ?>" />-->
+					echo '<input type="text" tabindex="60" name="admin_username" style="width: 98%;" value="admin" />';
+				} ?>"-->
 			</td>
 			<td>&nbsp;</td>
 			<td style="color: #666666;">Password:</td>

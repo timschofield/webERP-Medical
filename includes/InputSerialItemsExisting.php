@@ -27,11 +27,11 @@ if ($_POST['EntryType'] == 'KEYED'){
 
 		echo '<td valign="top"><b>'. _('Select Existing Items'). '</b><br />';
 
-		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="POST">';
+		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-        echo '<input type="hidden" name=LineNo value="' . $LineNo . '">
-                        <input type="hidden" name=StockID value="' . $StockID . '">
-                        <input type="hidden" name=EntryType value="KEYED">
+        echo '<input type="hidden" name="LineNo" value="' . $LineNo . '" />
+                        <input type="hidden" name="StockID" value="' . $StockID . '" />
+                        <input type="hidden" name="EntryType" value="KEYED" />
 			<input type="hidden" name="EditControlled" value="true" />
 			<select Name=Bundles[] multiple>';
 
@@ -44,7 +44,7 @@ if ($_POST['EntryType'] == 'KEYED'){
 					$ItemsAvailable++;
 				}
                         } else {
-                               if ( !array_key_exists($myrow['serialno'], $AllSerials)  ||
+                               if ( !array_key_exists($myrow['serialno'], $AllSerials) or
 					($myrow['quantity'] - $AllSerials[$myrow['serialno']] >= 0) ) {
 					$RecvQty = $myrow['quantity'] - $AllSerials[$myrow['serialno']];
                                         echo '<OPTION value="' . $myrow['serialno'] . '/|/'. $RecvQty .'">' .

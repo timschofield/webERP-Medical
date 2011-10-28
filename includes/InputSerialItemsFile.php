@@ -20,7 +20,7 @@ if (isset($_GET['LineNo'])){
 	$LineNo = $_POST['LineNo'];
 }
 
-echo '<div align=center>';
+echo '<div class="centre">';
 echo '<table>';
 echo $tableheader;
 
@@ -71,7 +71,7 @@ if (!isset($_SESSION['CurImportFile']) ){
 		$_SESSION['CurImportFile'] = '';
 		$LineItem->SerialItemsValid=false;
 }
-if ($_FILES['ImportFile']['name'] == '' && $_SESSION['CurImportFile'] == ''){
+if ($_FILES['ImportFile']['name'] == '' and $_SESSION['CurImportFile'] == ''){
 	$msg = _('Please Choose a file and then click Set Entry Type to upload a file for import');
 	prnMsg($msg);
 	$LineItem->SerialItemsValid=false;
@@ -79,8 +79,8 @@ if ($_FILES['ImportFile']['name'] == '' && $_SESSION['CurImportFile'] == ''){
 	include('includes/footer.inc');
 	exit();
 }
-if ($_FILES['ImportFile']['error'] != '' && !isset($_SESSION['CurImportFile'])){
-		echo _('There was a problem with the uploaded file') . '. ' . _('We received').':<BR>'.
+if ($_FILES['ImportFile']['error'] != '' and !isset($_SESSION['CurImportFile'])){
+		echo _('There was a problem with the uploaded file') . '. ' . _('We received').':<br />'.
 				 _('Name').':'.$_FILES['ImportFile']['name'].'<br />'.
 				 _('Size').':'.number_format($_FILES['ImportFile']['size']/1024,2).'kb<br />'.
 				 _('Type').':'.$_FILES['ImportFile']['type'].'<br />';
@@ -109,11 +109,11 @@ if ($_FILES['ImportFile']['error'] != '' && !isset($_SESSION['CurImportFile'])){
 		echo _('Successfully received').':<br />';
 		$ShowFileInfo = true;
 	}
-} elseif (isset($_SESSION['CurImportFile']) && $_SESSION['CurImportFile']['Processed'] ) {
+} elseif (isset($_SESSION['CurImportFile']) and $_SESSION['CurImportFile']['Processed'] ) {
 	//file exists, some action performed...
 	echo _('Working with'). ':<br />';
 	$ShowFileInfo = true;
-} elseif ($LineItem->SerialItemsValid && $_SESSION['CurImportFile']['Processed']){
+} elseif ($LineItem->SerialItemsValid and $_SESSION['CurImportFile']['Processed']){
 	$ShowInfo = true;
 }
 if ($ShowFileInfo){
@@ -132,12 +132,12 @@ if ($ShowFileInfo){
 	$filename = $_SESSION['CurImportFile']['tmp_name'];
 }
 
-if (!$LineItem->SerialItemsValid && !$_SESSION['CurImportFile']['Processed']){
+if (!$LineItem->SerialItemsValid and !$_SESSION['CurImportFile']['Processed']){
 		// IF all items are not valid, show the raw first 10 lines of the file. maybe it will help.
 	$filename = $_SESSION['CurImportFile']['tmp_name'];
 		$handle = fopen($filename, 'r');
 		$i=0;
-		while (!feof($handle) && $i < 10) {
+		while (!feof($handle) and $i < 10) {
 				$contents .= fgets($handle, 4096);
 				$i++;
 		}

@@ -22,6 +22,7 @@ if (!isset($_SESSION['SuppTrans'])){
 	/*It all stops here if there aint no supplier selected and invoice/credit initiated ie $_SESSION['SuppTrans'] started off*/
 }
 
+$_POST['Amount'] = filter_currency_input($_POST['Amount']);
 
 if (isset($_POST['AddAssetToInvoice'])){
 
@@ -80,7 +81,7 @@ foreach ($_SESSION['SuppTrans']->Assets as $EnteredAsset){
 
 	echo '<tr><td>' . $EnteredAsset->AssetID . '</td>
 						<td>' . $EnteredAsset->Description . '</td>
-		<td class="number">' . number_format($EnteredAsset->Amount,2) . '</td>
+		<td class="number">' . locale_money_format($EnteredAsset->Amount,$_SESSION['SuppTrans']->CurrCode) . '</td>
 		<td><a href="' . $_SERVER['PHP_SELF'] . '&Delete=' . $EnteredAsset->Counter . '">' . _('Delete') . '</a></td></tr>';
 
 	$TotalAssetValue +=  $EnteredAsset->Amount;
@@ -88,8 +89,8 @@ foreach ($_SESSION['SuppTrans']->Assets as $EnteredAsset){
 }
 
 echo '<tr>
-	<td class="number"><font size="2" color="navy">' . _('Total') . ':</font></td>
-	<td class="number"><font size="2" color="navy"><U>' . number_format($TotalAssetValue,2) . '</U></font></td>
+	<td class="number"><font size="2" color="#616161">' . _('Total') . ':</font></td>
+	<td class="number"><font size="2" color="#616161"><U>' . locale_money_format($TotalAssetValue,$_SESSION['SuppTrans']->CurrCode) . '</U></font></td>
 </tr>
 </table><br />';
 
@@ -137,7 +138,7 @@ if (!isset($_POST['Amount'])) {
 	$_POST['Amount']=0;
 }
 echo '<tr><td>' . _('Amount') . ':</td>
-	<td><input type="text" class="number" name="Amount" size="12" maxlength="11" value="' .  $_POST['Amount'] . '" /></td></tr>';
+	<td><input type="text" class="number" name="Amount" size="12" maxlength="11" value="' .  locale_money_format($_POST['Amount'], $_SESSION['SuppTrans']->CurrCode) . '" /></td></tr>';
 echo '</table>';
 
 echo '<br /><div class="centre"><input type="submit" name="AddAssetToInvoice" value="' . _('Enter Fixed Asset') . '" /></div>';

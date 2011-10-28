@@ -99,7 +99,7 @@ if (isset($_POST['CommitBatch']) and $_POST['CommitBatch']==_('Accept and Proces
 							'" . $JournalItem->GLCode . "',
 							'" . $_SESSION['DefaultTag'] . "',
 							'Reversal - " . $JournalItem->Narrative . "',
-							'" . -($JournalItem->Amount) ."',
+							-" . $JournalItem->Amount .",
 							'".$JournalItem->tag."'
 						)";
 
@@ -115,13 +115,15 @@ if (isset($_POST['CommitBatch']) and $_POST['CommitBatch']==_('Accept and Proces
 
 	prnMsg(_('Journal').' ' . $TransNo . ' '._('has been successfully entered'),'success');
 
+	echo '<br /><div class="centre"><a href="PDFGLJournal.php?JournalNo='.$TransNo.'">'._('Print this Journal').'</a>';
+
 	unset($_POST['JournalProcessDate']);
 	unset($_POST['JournalType']);
 	unset($_SESSION['JournalDetail']->GLEntries);
 	unset($_SESSION['JournalDetail']);
 
 	/*Set up a newy in case user wishes to enter another */
-	echo '<br /><a href="' . $_SERVER['PHP_SELF'] . '?NewJournal=Yes">'._('Enter Another General Ledger Journal').'</a>';
+	echo '<br /><a href="' . $_SERVER['PHP_SELF'] . '?NewJournal=Yes">'._('Enter Another General Ledger Journal').'</a></div>';
 	/*And post the journal too */
 	include ('includes/GLPostings.inc');
 	include ('includes/footer.inc');
@@ -138,9 +140,9 @@ if (isset($_POST['CommitBatch']) and $_POST['CommitBatch']==_('Accept and Proces
 		$_POST['GLCode'] = $extract[0];
 	}
 	if($_POST['Debit']>0) {
-		$_POST['GLAmount'] = $_POST['Debit'];
+		$_POST['GLAmount'] = filter_currency_input($_POST['Debit']);
 	} elseif($_POST['Credit']>0) {
-		$_POST['GLAmount'] = '-' . $_POST['Credit'];
+		$_POST['GLAmount'] = '-' . filter_currency_input($_POST['Credit']);
 	}
 	if ($_POST['GLManualCode'] != '' AND is_numeric($_POST['GLManualCode'])){
 		// If a manual code was entered need to check it exists and isnt a bank account
@@ -239,8 +241,7 @@ if (!Is_Date($_SESSION['JournalDetail']->JnlDate)){
 
 echo '<table><tr>
 		<td colspan="5"><table class="selection"><tr><td>'._('Date to Process Journal').':</td>
-		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="JournalProcessDate" maxlength="10" size="11" value="' .
-					 $_SESSION['JournalDetail']->JnlDate . '" /></td>';
+		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="JournalProcessDate" maxlength="10" size="11" value="' . $_SESSION['JournalDetail']->JnlDate . '" /></td>';
 echo '<td>' . _('Type') . ':</td>
 		<td><select name="JournalType">';
 
@@ -293,9 +294,7 @@ echo '</select></td>';
 if (!isset($_POST['GLManualCode'])) {
 	$_POST['GLManualCode']='';
 }
-echo '<td><input class="number" type="text" name="GLManualCode" Maxlength="12" size="12" onChange="inArray(this.value, GLCode.options,'.
-	"'".'The account code '."'".'+ this.value+ '."'".' doesnt exist'."'".')"' .
-		' value="'. $_POST['GLManualCode'] .'"  /></td>';
+echo '<td><input class="number" type="text" name="GLManualCode" Maxlength="12" size="12" onChange="inArray(this.value, GLCode.options,'. "'".'The account code '."'".'+ this.value+ '."'".' doesnt exist'."'".')"' . ' value="'. $_POST['GLManualCode'] .'"  /></td>';
 
 $sql="SELECT accountcode,
 			accountname
@@ -324,12 +323,12 @@ if (!isset($_POST['Debit'])) {
 	$_POST['Debit'] = '';
 }
 
-echo '</tr><tr><th>' . _('Debit') . '</th><td><input type="text" class="number" Name = "Debit" ' .
-			'onChange="eitherOr(this, '.'Credit'.')"'.
-			' Maxlength="12" size="10" value="' . $_POST['Debit'] . '" /></td>';
-echo '</tr><tr><th>' . _('Credit') . '</th><td><input type="text" class="number" Name = "Credit" ' .
-			'onChange="eitherOr(this, '.'Debit'.')"'.
-			' Maxlength="12" size="10" value="' . $_POST['Credit'] . '" /></td>';
+echo '</tr><tr>
+			<th>' . _('Debit') . '</th>
+			<td><input type="text" class="number" Name = "Debit" onChange="eitherOr(this, '.'Credit'.')" maxlength="12" size="10" value="' . $_POST['Debit'] . '" /></td>';
+echo '</tr><tr>
+			<th>' . _('Credit') . '</th>
+			<td><input type="text" class="number" Name = "Credit" onChange="eitherOr(this, '.'Debit'.')"  maxlength="12" size="10" value="' . $_POST['Credit'] . '" /></td>';
 echo '</tr><tr><td></td><td></td><th>'. _('Narrative'). '</th>';
 echo '</tr><tr><th></th><th>' . _('GL Narrative') . '</th>';
 
@@ -374,12 +373,12 @@ foreach ($_SESSION['JournalDetail']->GLEntries as $JournalItem) {
 	echo '<td>' . $JournalItem->tag . ' - ' . $tagdescription . '</td>';
 	echo '<td>' . $JournalItem->GLCode . ' - ' . $JournalItem->GLActName . '</td>';
 	if($JournalItem->Amount>0) {
-		echo '<td class="number">' . number_format($JournalItem->Amount,2) . '</td><td></td>';
+		echo '<td class="number">' . locale_money_format($JournalItem->Amount,$_SESSION['CompanyRecord']['currencydefault']) . '</td><td></td>';
 		$debittotal=$debittotal+$JournalItem->Amount;
 	} elseif($JournalItem->Amount<0) {
 		$credit=(-1 * $JournalItem->Amount);
 		echo '<td></td>
-			<td class="number">' . number_format($credit,2) . '</td>';
+			<td class="number">' . locale_money_format($credit,$_SESSION['CompanyRecord']['currencydefault']) . '</td>';
 		$credittotal=$credittotal+$credit;
 	}
 
@@ -390,11 +389,11 @@ foreach ($_SESSION['JournalDetail']->GLEntries as $JournalItem) {
 
 echo '<tr class="EvenTableRows"><td></td>
 		<td class="number"><b>' . _('Total') .  '</b></td>
-		<td class="number"><b>' . number_format($debittotal,2) . '</b></td>
-		<td class="number"><b>' . number_format($credittotal,2) . '</b></td></tr>';
+		<td class="number"><b>' . locale_money_format($debittotal,$_SESSION['CompanyRecord']['currencydefault']) . '</b></td>
+		<td class="number"><b>' . locale_money_format($credittotal,$_SESSION['CompanyRecord']['currencydefault']) . '</b></td></tr>';
 if ($debittotal!=$credittotal) {
 	echo '<td align="center" style="background-color: #fddbdb"><b>' . _('Required to balance') .' - </b>' .
-		number_format(abs($debittotal-$credittotal),2);
+		locale_money_format(abs($debittotal-$credittotal),$_SESSION['CompanyRecord']['currencydefault']);
 }
 if ($debittotal>$credittotal) {
 	echo ' ' . _('Credit') . '</td></tr>';

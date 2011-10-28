@@ -444,8 +444,7 @@ echo '<tr>
 
 $ThemeDirectory = dir('css/');
 
-
-while (false != ($ThemeName = $ThemeDirectory->read())){
+while (false !== ($ThemeName = $ThemeDirectory->read())){
 
 	if (is_dir('css/' . $ThemeName ) AND $ThemeName != '.' AND $ThemeName != '..' AND $ThemeName != 'CVS'){
 
@@ -459,6 +458,8 @@ while (false != ($ThemeName = $ThemeDirectory->read())){
 	}
 }
 
+$ThemeDirectory->close();
+
 echo '</select></td></tr>';
 
 
@@ -468,8 +469,7 @@ echo '<tr>
 
  $LangDirHandle = dir('locale/');
 
-
-while (false != ($LanguageEntry = $LangDirHandle->read())){
+while (false !== ($LanguageEntry = $LangDirHandle->read())){
 
 	if (is_dir('locale/' . $LanguageEntry) AND $LanguageEntry != '..' AND $LanguageEntry != 'CVS' AND $LanguageEntry!='.'){
 
@@ -482,6 +482,8 @@ while (false != ($LanguageEntry = $LangDirHandle->read())){
 		}
 	}
 }
+
+ $LangDirHandle->close();
 
 echo '</select></td></tr>';
 /*Make an array out of the comma separated list of modules allowed*/

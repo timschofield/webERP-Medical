@@ -45,8 +45,10 @@ if (isset($_GET['StockID'])){
 	$_SESSION['Adjustment']->tag = $_POST['tag'];
 	$_SESSION['Adjustment']->Narrative = $_POST['Narrative'];
 	$_SESSION['Adjustment']->StockLocation = $_POST['StockLocation'];
-	if ($_POST['Quantity']=='' or !is_numeric($_POST['Quantity'])){
+	if ($_POST['Quantity']==''){
 		$_POST['Quantity']=0;
+	} else {
+		$_POST['Quantity'] = filter_number_input($_POST['Quantity']);
 	}
 	$_SESSION['Adjustment']->Quantity = $_POST['Quantity'];
 }
@@ -74,11 +76,10 @@ if (isset($_POST['CheckCode'])) {
 	exit;
 }
 
-if (isset($_POST['EnterAdjustment']) && $_POST['EnterAdjustment']!= ''){
+if (isset($_POST['EnterAdjustment']) and $_POST['EnterAdjustment']!= ''){
 
 	$InputError = false; /*Start by hoping for the best */
-	$result = DB_query("SELECT * FROM stockmaster WHERE stockid='" . $_SESSION['Adjustment']->StockID . "'",$db);
-	$myrow = DB_fetch_row($result);
+	$result = DB_query("SELECT stockid FROM stockmaster WHERE stockid='" . $_SESSION['Adjustment']->StockID . "'",$db);
 	if (DB_num_rows($result)==0) {
 		prnMsg( _('The entered item code does not exist'),'error');
 		$InputError = true;
@@ -294,8 +295,14 @@ if (isset($_POST['EnterAdjustment']) && $_POST['EnterAdjustment']!= ''){
 
 		$Result = DB_Txn_Commit($db);
 
-		prnMsg( _('A stock adjustment for'). ' ' . $_SESSION['Adjustment']->StockID . ' -  ' . $_SESSION['Adjustment']->ItemDescription . ' '._('has been created from location').' ' . $_SESSION['Adjustment']->StockLocation .' '. _('for a quantity of') . ' ' . $_SESSION['Adjustment']->Quantity,'success');
+		$ConfirmationText = _('A stock adjustment for'). ' ' . $_SESSION['Adjustment']->StockID . ' -  ' . $_SESSION['Adjustment']->ItemDescription . ' '._('has been created from location').' ' . $_SESSION['Adjustment']->StockLocation .' '. _('for a quantity of') . ' ' . $_SESSION['Adjustment']->Quantity ;
+		prnMsg( $ConfirmationText,'success');
 
+		if ($_SESSION['InventoryManagerEmail']!=''){
+			$ConfirmationText = $ConfirmationText . ' ' . _('by user') . ' ' . $_SESSION['UserID'] . ' ' . _('at') . ' ' . Date('Y-m-d H:i:s');
+			$EmailSubject = _('Stock adjustment for'). ' ' . $_SESSION['Adjustment']->StockID;
+			mail($_SESSION['InventoryManagerEmail'],$EmailSubject,$ConfirmationText);
+		}
 		unset ($_SESSION['Adjustment']);
 	} /* end if there was no input error */
 
@@ -344,7 +351,7 @@ echo '</td><td><input type="submit" name="CheckCode" value="'._('Check Part').'"
 if (isset($_SESSION['Adjustment']) and strlen($_SESSION['Adjustment']->ItemDescription)>1){
 	echo '<tr><td colspan="3"><font color="blue" size="3">' . $_SESSION['Adjustment']->ItemDescription . ' ('._('In Units of').' ' .
 		$_SESSION['Adjustment']->PartUnit . ' ) - ' . _('Unit Cost').' = ' .
-			number_format($_SESSION['Adjustment']->StandardCost,4) . '</font></td></tr>';
+			locale_money_format($_SESSION['Adjustment']->StandardCost,$_SESSION['CompanyRecord']['currencydefault']) . '</font></td></tr>';
 }
 
 echo '<tr><td>'. _('Adjustment to Stock At Location').':</td><td><select name="StockLocation"> ';
@@ -381,12 +388,12 @@ if ($Controlled==1){
 		if ($_SESSION['Adjustment']->StockLocation == ''){
 			$_SESSION['Adjustment']->StockLocation = $_SESSION['UserStockLocation'];
 		}
-		echo '<input type="HIDDEN" name="Quantity" value="' . $_SESSION['Adjustment']->Quantity . '" />
-				'.$_SESSION['Adjustment']->Quantity.' &nbsp; &nbsp; &nbsp; &nbsp;
+		echo '<input type="hidden" name="Quantity" value="' . locale_number_format($_SESSION['Adjustment']->Quantity , $_SESSION['Adjustment']->DecimalPlaces). '" />
+				'.locale_number_format($_SESSION['Adjustment']->Quantity, $_SESSION['Adjustment']->DecimalPlaces).' &nbsp; &nbsp; &nbsp; &nbsp;
 				[<a href="'.$rootpath.'/StockAdjustmentsControlled.php?AdjType=REMOVE">'._('Remove').'</a>]
 				[<a href="'.$rootpath.'/StockAdjustmentsControlled.php?AdjType=ADD">'._('Add').'</a>]';
 } else {
-	echo '<input type="text" class="number" name="Quantity" size="12" maxlength="12" value="' . $Quantity . '" />';
+	echo '<input type="text" class="number" name="Quantity" size="12" maxlength="12" value="' . locale_number_format($Quantity, $_SESSION['Adjustment']->DecimalPlaces) . '" />';
 }
 echo '</td></tr>';
 	//Select the tag

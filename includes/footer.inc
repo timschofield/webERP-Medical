@@ -1,30 +1,27 @@
 <?php
 
 /* $Id$*/
-	setlocale(LC_ALL,$_SESSION['Language']);
-	if (!isset($DefaultClock)) {
-		include('config.php');
-	}
-	echo '<p style="text-align:right">'.(strftime('%A')).', '.(date($_SESSION['DefaultDateFormat']).' | '.(strftime(($DefaultClock==12) ? '%I:%M %p' : '%H:%M'))).'</p>';
+
+echo '<p style="text-align: right">'.(strftime('%A')).', '.(date($_SESSION['DefaultDateFormat']).' | '.(strftime(($DefaultClock==12) ? '%I:%M %p' : '%H:%M'))).'</p>';
 
 
-	echo '<table width="100%" id="footer">';
+echo '<table width="100%" id="footer">';
 
-	echo '<tr>';
-	echo '<td class="footer">';
- 	echo '<img src="'. $rootpath . '/' . $_SESSION['LogoFile'] . '" width="60" alt="webERP" title="webERP ' . _('Copyright') . ' &copy; webrp.org - ' . date('Y') . '" />';
- 	echo '<br />';
+echo '<tr>';
+echo '<td class="footer">';
+echo '<img src="'. $rootpath . '/' . $_SESSION['LogoFile'] . '" width="120" alt="webERP" title="webERP ' . _('Copyright') . ' &copy; webrp.org - ' . date('Y') . '" />';
+echo '<br />';
 
-	echo '</td></tr>';
+echo '</td></tr>';
 
-	echo '<tr><td class="footer">webERP v' . $_SESSION['VersionNumber'] . ' ' . _('Copyright') . ' &copy; web-erp.org - '.date('Y').'</td></tr>';
+echo '<tr><td class="footer">webERP v' . $_SESSION['VersionNumber'] . ' ' . _('Copyright') . ' &copy; web-erp.org - '.date('Y').'</td></tr>';
 
 //	if(http_file_exists('http://sflogo.sourceforge.net/sflogo.php')) {
 //		echo '<tr><td class="footer"><a href="https://sourceforge.net/projects/weberp"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=391629&amp;type=12" width="120" height="30" border="0" alt="Get webERP web-based ERP Accounting at SourceForge.net. Fast, secure and Free Open Source software downloads" /></a></td></tr>';
 //	}
 
-	echo '</table>';
+echo '</table>';
 
-	echo '</body>';
-	echo '</html>';
+echo '</body>';
+echo '</html>';
 ?>

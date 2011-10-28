@@ -157,7 +157,7 @@ or deletion of the records*/
 	$result = DB_query($sql,$db);
 
 	echo '<br /><table class="selection">';
-	echo '<tr><th colspan="3"><font size="2" color="navy">' . _('Expense Codes for Type of Tab ') . ' ' .$SelectedTab. '</font></th></tr>';
+	echo '<tr><th colspan="3"><font size="2" color="#616161">' . _('Expense Codes for Type of Tab ') . ' ' .$SelectedTab. '</font></th></tr>';
 	echo '<tr>
 		<th>' . _('Expense Code') . '</th>
 		<th>' . _('Description') . '</th>

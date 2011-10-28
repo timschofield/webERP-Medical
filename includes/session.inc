@@ -13,7 +13,9 @@ if (!file_exists($PathPrefix . 'config.php')){
 	header('Location:' . $rootpath . '/install/index.php');
 }
 include($PathPrefix . 'config.php');
-$DBVersion=95;
+
+$DBVersion=101;
+
 if (isset($SessionSavePath)){
 	session_save_path($SessionSavePath);
 }
@@ -178,7 +180,7 @@ if (isset($_SESSION['UpdateCurrencyRatesDaily'])){
 }
 
 
-If (isset($_POST['Theme']) && ($_SESSION['UsersRealName'] == $_POST['RealName'])) {
+if (isset($_POST['Theme']) and ($_SESSION['UsersRealName'] == $_POST['RealName'])) {
 	$_SESSION['Theme'] = $_POST['Theme'];
 	$theme = $_POST['Theme'];
 } elseif (!isset($_SESSION['Theme'])) {

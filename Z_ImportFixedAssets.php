@@ -276,7 +276,7 @@ if ($_FILES['SelectedAssetFile']['name']) { //start file processing
 
 	fclose($FileHandle);
 
-} elseif ( isset($_POST['gettemplate']) || isset($_GET['gettemplate']) ) { //download an import template
+} elseif ( isset($_POST['gettemplate']) or isset($_GET['gettemplate']) ) { //download an import template
 
 	echo '<br /><br /><br />"'. implode('","',$FieldNames). '" <br /><br /><br />';
 

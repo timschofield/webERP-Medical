@@ -8,7 +8,13 @@ include ('includes/session.inc');
 include ('includes/header.inc');
 include('includes/SQL_CommonFunctions.inc');
 
-$sql = "SELECT * FROM geocode_param WHERE 1";
+$sql="SELECT geocode_key,
+			center_long,
+			center_lat,
+			map_height,
+			map_width,
+			map_host
+		FROM geocode_param WHERE 1";
 $ErrMsg = _('An error occurred in retrieving the information');
 $resultgeo = DB_query($sql, $db, $ErrMsg);
 $row = DB_fetch_array($resultgeo);
@@ -27,30 +33,41 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/m
 	' ' . _('Geocoding of Customers and Suppliers') .'</p>';
 
 // select all the customer branches
-$sql = "SELECT * FROM custbranch WHERE 1";
+$sql = "SELECT braddress1,
+				braddress2,
+				braddress3,
+				braddress4,
+				branchcode,
+				debtorno
+			FROM custbranch WHERE 1";
 $ErrMsg = _('An error occurred in retrieving the information');
 $result = DB_query($sql, $db, $ErrMsg);
 $row = DB_fetch_array($result);
 // select all the suppliers
-$sql = "SELECT * FROM suppliers WHERE 1";
+$sql = "SELECT address1,
+				address2,
+				address3,
+				address4,
+				supplierid
+			FROM suppliers WHERE 1";
 $ErrMsg = _('An error occurred in retrieving the information');
 $result2 = DB_query($sql, $db, $ErrMsg);
 $row2 = DB_fetch_array($result2);
 
 // Initialize delay in geocode speed
 $delay = 0;
-$base_url = "http://" . MAPS_HOST . "/maps/geo?output=xml" . "&key=" . KEY;
+$base_url = 'http://' . MAPS_HOST . '/maps/geo?output=xml' . '&key=' . KEY;
 
 // Iterate through the customer branch rows, geocoding each address
 while ($row = @mysql_fetch_assoc($result)) {
   $geocode_pending = true;
 
   while ($geocode_pending) {
-    $address = $row["braddress1"] . ", " . $row["braddress2"] . ", " . $row["braddress3"] . ", " . $row["braddress4"];
-    $id = $row["branchcode"];
-    $debtorno =$row["debtorno"];
-    $request_url = $base_url . "&q=" . urlencode($address);
-    $xml = simplexml_load_string(utf8_encode(file_get_contents($request_url))) or die("url not loading");
+    $address = $row['braddress1'] . ', ' . $row['braddress2'] . ', ' . $row['braddress3'] . ', ' . $row['braddress4'];
+    $id = $row['branchcode'];
+    $debtorno =$row['debtorno'];
+    $request_url = $base_url . '&q=' . urlencode($address);
+    $xml = simplexml_load_string(utf8_encode(file_get_contents($request_url))) or die('url not loading');
 //    $xml = simplexml_load_file($request_url) or die("url not loading");
 
     $status = $xml->Response->Status->code;
@@ -93,8 +110,8 @@ while ($row2 = @mysql_fetch_assoc($result2)) {
   $geocode_pending = true;
 
   while ($geocode_pending) {
-    $address = $row2["address1"] . ", " . $row2["address2"] . ", " . $row2["address3"] . ", " . $row2["address4"];
-    $id = $row2["supplierid"];
+    $address = $row2['address1'] . ", " . $row2['address2'] . ", " . $row2['address3'] . ", " . $row2['address4'];
+    $id = $row2['supplierid'];
     $request_url = $base_url . "&q=" . urlencode($address);
     $xml = simplexml_load_string(utf8_encode(file_get_contents($request_url))) or die("url not loading");
 //    $xml = simplexml_load_file($request_url) or die("url not loading");

@@ -34,8 +34,8 @@ if (!isset($_POST['FromDate']) or !isset($_POST['ToDate'])){
 
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<table class="selection"><tr><td>' . _('Enter the date from which orders are to be listed') . ':</td><td><input type="text" class="date" alt="'.
-		$_SESSION['DefaultDateFormat'].'" name="FromDate" maxlength="10" size="10" value="' . Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m'),Date('d')-1,Date('y'))) . '" /></td></tr>';
+	echo '<table class="selection"><tr><td>' . _('Enter the date from which orders are to be listed') . ':</td>
+			<td><input type="text" class="date" alt="'. $_SESSION['DefaultDateFormat'].'" name="FromDate" maxlength="10" size="10" value="' . Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m'),Date('d')-1,Date('y'))) . '" /></td></tr>';
 	echo '<tr><td>' . _('Enter the date to which orders are to be listed') . ':</td><td>';
 	echo '<input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="ToDate" maxlength="10" size="10" value="' . Date($_SESSION['DefaultDateFormat']) . '" /></td></tr>';
 	echo '<tr><td>' . _('Inventory Category') . '</td><td>';
@@ -289,7 +289,7 @@ while ($myrow=DB_fetch_array($Result)){
 		$YPos -= $line_height;
 
 		$LeftOvers = $pdf->addTextWrap($Left_Margin+2,$YPos,40,$FontSize,$myrow['orderno'], 'left');
-		$LeftOvers = $pdf->addTextWrap($Left_Margin+40,$YPos,150,$FontSize,html_entity_decode($myrow['name']), 'left');
+		$LeftOvers = $pdf->addTextWrap($Left_Margin+40,$YPos,150,$FontSize,html_entity_decode($myrow['name'],ENT_QUOTES,'UTF-8'), 'left');
 		$LeftOvers = $pdf->addTextWrap($Left_Margin+190,$YPos,110,$FontSize,$myrow['brname'], 'left');
 
 		$LeftOvers = $pdf->addTextWrap($Left_Margin+300,$YPos,60,$FontSize,ConvertSQLDate($myrow['orddate']), 'left');
@@ -320,11 +320,11 @@ while ($myrow=DB_fetch_array($Result)){
 
 	$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,60,$FontSize,$myrow['stkcode'], 'left');
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+60,$YPos,120,$FontSize,$myrow['description'], 'left');
-	$LeftOvers = $pdf->addTextWrap($Left_Margin+180,$YPos,60,$FontSize,number_format($myrow['quantity'],$myrow['decimalplaces']), 'right');
-	$LeftOvers = $pdf->addTextWrap($Left_Margin+240,$YPos,60,$FontSize,number_format($myrow['qtyinvoiced'],$myrow['decimalplaces']), 'right');
+	$LeftOvers = $pdf->addTextWrap($Left_Margin+180,$YPos,60,$FontSize,locale_number_format($myrow['quantity'],$myrow['decimalplaces']), 'right');
+	$LeftOvers = $pdf->addTextWrap($Left_Margin+240,$YPos,60,$FontSize,localenumber_format($myrow['qtyinvoiced'],$myrow['decimalplaces']), 'right');
 
 	  if ($myrow['quantity']>$myrow['qtyinvoiced']){
-		   $LeftOvers = $pdf->addTextWrap($Left_Margin+320,$YPos,60,$FontSize,number_format($myrow['quantity']-$myrow['qtyinvoiced'],$myrow['decimalplaces']), 'right');
+		   $LeftOvers = $pdf->addTextWrap($Left_Margin+320,$YPos,60,$FontSize,locale_number_format($myrow['quantity']-$myrow['qtyinvoiced'],$myrow['decimalplaces']), 'right');
 	  } else {
 		   $LeftOvers = $pdf->addTextWrap($Left_Margin+320,$YPos,60,$FontSize,_('Complete'), 'left');
 	  }

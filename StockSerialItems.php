@@ -68,13 +68,13 @@ $LocStockResult = DB_query($sql, $db, $ErrMsg);
 echo '<table cellpadding="2" class="selection">';
 
 if ($Serialised==1){
-	echo '<tr><th colspan="5"><font color="navy" size="2">' . _('Serialised items in') . ' ';
+	echo '<tr><th colspan="5"><font color="#616161" size="2">' . _('Serialised items in') . ' ';
 } else {
-	echo '<tr><th colspan="11"><font color=navy size="2">' . _('Controlled items in') . ' ';
+	echo '<tr><th colspan="11"><font color=#616161 size="2">' . _('Controlled items in') . ' ';
 }
 echo $myrow[0]. '</font></th></tr>';
 
-echo '<tr><th colspan="11"><font color="navy" size="2">'.$StockID .'-'. $Description .'</b>  (' . _('In units of') . ' ' . $UOM . ')</font></th></tr>';
+echo '<tr><th colspan="11"><font color="#616161" size="2">'.$StockID .'-'. $Description .'</b>  (' . _('In units of') . ' ' . $UOM . ')</font></th></tr>';
 
 if ($Serialised == 1){
 	$tableheader = '<tr>
@@ -134,11 +134,11 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 		echo '<th></th>';
 	} else if ($Serialised == 0 and $Perishable==0) {
 		echo '<td>'.$myrow['serialno'].'</td>
-			<td class="number">'.number_format($myrow['quantity'],$DecimalPlaces).'</td>';
+			<td class="number">'.locale_number_format($myrow['quantity'],$DecimalPlaces).'</td>';
 		echo '<th></th>';
 	} else if ($Serialised == 0 and $Perishable==1){
 		echo '<td>'.$myrow['serialno'].'</td>
-			<td class="number">'.number_format($myrow['quantity'],$DecimalPlaces).'</td>
+			<td class="number">'.locale_number_format($myrow['quantity'],$DecimalPlaces).'</td>
 			<td>'.ConvertSQLDate($myrow['expirationdate']).'</td>';
 		echo '<th></th>';
 	}
@@ -157,7 +157,7 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 //end of while loop
 
 echo '</table><br />';
-echo '<div class="centre"><br /><b>' . _('Total quantity') . ': ' . number_format($TotalQuantity, $DecimalPlaces) . '<br /></div>';
+echo '<div class="centre"><br /><b>' . _('Total quantity') . ': ' . locale_number_format($TotalQuantity, $DecimalPlaces) . '<br /></div>';
 
 echo '</form>';
 include('includes/footer.inc');
