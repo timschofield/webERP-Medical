@@ -539,7 +539,7 @@ if (isset($SelectedCategory)) {  ?>
 			}
 
 			echo '</td>
-					<td><input type="text" "name="PropMinimum' . $PropertyCounter . '" value="' . $myrow['minimumvalue'] . '" /></td>
+					<td><input type="text" name="PropMinimum' . $PropertyCounter . '" value="' . $myrow['minimumvalue'] . '" /></td>
 						<td><input type="text" name="PropMaximum' . $PropertyCounter . '" value="' . $myrow['maximumvalue'] . '" /></td>';
 
 			if ($myrow['reqatsalesorder']==1){
