@@ -675,7 +675,7 @@ if (isset($_POST['SearchCustomers'])){
 } /*end of if search for customer codes/names */
 
 
-if (isset($_POST['SelectedCustomer'])) {
+if (isset($_POST['SelectedCustomer1'])) {
 
 /* will only be true if page called from customer selection form
  * or set because only one customer record returned from a search
@@ -869,9 +869,6 @@ if (!isset($_SESSION['Contract'.$identifier]->DebtorNo)
 	}
 
 	echo '</select></td></tr>';
-	echo '<tr><td>' . _('Default Work Centre') . ': </td><td>';
-	echo '<select name="DefaultWorkCentre">';
-
 	$sql = "SELECT code, description FROM workcentres";
 	$result = DB_query($sql,$db);
 
@@ -881,6 +878,9 @@ if (!isset($_SESSION['Contract'.$identifier]->DebtorNo)
 		include('includes/footer.inc');
 		exit;
 	}
+	echo '<tr><td>' . _('Default Work Centre') . ': </td><td>';
+
+	echo '<select name="DefaultWorkCentre">';
 
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['DefaultWorkCentre']) and $myrow['code']==$_POST['DefaultWorkCentre']) {
