@@ -668,18 +668,14 @@ if (isset($_POST['SearchCustomers'])){
 		$ErrMsg = _('The searched customer records requested cannot be retrieved because');
 		$result_CustSelect = DB_query($SQL,$db,$ErrMsg);
 
-		if (DB_num_rows($result_CustSelect)==1){
-			$myrow=DB_fetch_array($result_CustSelect);
-			$_POST['SelectedCustomer'] = $myrow['debtorno'];
-			$_POST['SelectedBranch'] = $myrow['branchcode'];
-		} elseif (DB_num_rows($result_CustSelect)==0){
+		if (DB_num_rows($result_CustSelect)==0){
 			prnMsg(_('No Customer Branch records contain the search criteria') . ' - ' . _('please try again') . ' - ' . _('Note a Customer Branch Name may be different to the Customer Name'),'info');
 		}
 	} /*one of keywords or custcode was more than a zero length string */
 } /*end of if search for customer codes/names */
 
 
-if (isset($_POST['SelectedCustomer1'])) {
+if (isset($_POST['SelectedCustomer'])) {
 
 /* will only be true if page called from customer selection form
  * or set because only one customer record returned from a search
