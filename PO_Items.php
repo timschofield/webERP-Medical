@@ -954,7 +954,7 @@ if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
 			$Uom=$POLine->UOM;
 			echo '<input type="hidden" name="ConversionFactor" value="'.$POLine->ConversionFactor.'" />';
 			echo '<td>' . $POLine->StockID  . '</td>
-				<td>' . $POLine->ItemDescription . '</td>
+				<td>' . $POLine->GetItemDescription() . '</td>
 				<td><input type="text" class="number" name="Qty' . $POLine->LineNo .'" size="11" value="' . $DisplayQuantity . '" /></td>
 				<td>' . $Uom . '</td>
 				<td><input type="text" class="number" name="NetWeight' . $POLine->LineNo . '" size="11" value="' . locale_number_format($POLine->NetWeight,4) . '" /></td>

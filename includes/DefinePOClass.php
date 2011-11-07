@@ -292,7 +292,7 @@ Class LineDetails {
 		$this->Controlled = $Controlled;
 		$this->Serialised = $Serialised;
 		$this->DecimalPlaces=$DecimalPlaces;
-		$this->ItemDescription = $ItemDescr;
+		$this->ItemDescription = DB_escape_string($ItemDescr);
 		$this->Quantity = $Qty;
 		$this->ReqDelDate = $ReqDelDate;
 		$this->Price = $Price;
@@ -326,6 +326,10 @@ Class LineDetails {
 		$this->SerialItems = array(); /*if Controlled then need to populate this later */
 		$this->SerialItemsValid=false;
 		$this->AssetID= $AssetID;
+	}
+
+	function GetItemDescription() {
+		return stripslashes($this->ItemDescription);
 	}
 }
 ?>
