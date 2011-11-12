@@ -5,6 +5,6 @@
 
 InsertRecord('debtortype', array('typeid', 'typename'), array(Null, 'Insurance'), array('typeid', 'typename'), array(Null, 'Insurance'), $db);
 
-UpdateDBNo(95, $db);
+UpdateDBNo(107, $db);
 
 ?>
