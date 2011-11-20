@@ -157,8 +157,13 @@ if (count($_SESSION['PO']->LineItems)>0 and !isset($_POST['ProcessGoodsReceived'
 		}
 
 		//Now Display LineItem
-		echo '<td>' . $LnItm->StockID . '</td>';
-		echo '<td>' . $LnItm->ItemDescription . '</td>';
+		if (file_exists($_SESSION['part_pics_dir'] . '/' . $LnItm->StockID . '.jpg')) {
+			echo '<td><a href="' . $rootpath . '/' . $_SESSION['part_pics_dir'] . '/' . $LnItm->StockID . '.jpg" target="_blank">'. $LnItm->StockID . '</a><br /></td>';
+		} else {
+			echo '<td>'. $LnItm->StockID . '</td>';
+		}
+
+		echo '<td>' . stripslashes($LnItm->ItemDescription) . '</td>';
 		echo '<td class="number">' . $DisplayQtyOrd . '</td>';
 		echo '<td>' . $LnItm->SuppUOM . '</td>';
 		echo '<td class="number">' . $DisplayQtyRec . '</td>';
