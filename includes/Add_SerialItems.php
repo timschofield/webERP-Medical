@@ -57,16 +57,21 @@ if ( isset($_POST['AddBatches']) and $_POST['AddBatches']!='') {
 				if ($LineItem->Serialised){
 					$ExistingQty = ValidBundleRef($StockID, $LocationOut, $NewSerialNo);
 					if ($NewQty == 1 and $ExistingQty != 0){
-						prnMsg( '<a href="'.$rootpath.'/StockSerialItemResearch.php?serialno='. $NewSerialNo . '" target=_blank>'.$NewSerialNo. '</a> : '. _("The Serial Number being added exists with a Quantity that is not Zero (0)!"), 'error' );
+						prnMsg( '<a href="'.$rootpath.'/StockSerialItemResearch.php?serialno='. $NewSerialNo . '" target=_blank>'.$NewSerialNo. '</a> : '. _('The Serial Number being added exists with a Quantity that is not Zero (0)!'), 'error' );
 						$SerialError = true;
 					} elseif ($NewQty == -1 and $ExistingQty != 1){
-						prnMsg( '<a href="'.$rootpath.'/StockSerialItemResearch.php?serialno='. $NewSerialNo . '" target=_blank>'.$NewSerialNo. '</a> : '. _("The Serial Number being removed exists with a Quantity that is not One (1)!"), 'error');
+						prnMsg( '<a href="'.$rootpath.'/StockSerialItemResearch.php?serialno='. $NewSerialNo . '" target=_blank>'.$NewSerialNo. '</a> : '. _('The Serial Number being removed exists with a Quantity that is not One (1)!'), 'error');
 						$SerialError = true;
 					}
 				}
+				if (isset($_POST['ExpiryDate' . $i])){
+					$ExpiryDate = $_POST['ExpiryDate' . $i];
+				} else {
+					$ExpiryDate ='0000-00-00';
+				}
 
 				if (!$SerialError){
-					$LineItem->SerialItems[$NewSerialNo] = new SerialItem ($_POST['SerialNo' . $i], $NewQty, $_POST['ExpiryDate' . $i]);
+					$LineItem->SerialItems[$NewSerialNo] = new SerialItem ($_POST['SerialNo' . $i], $NewQty, $ExpiryDate);
 				}
 			}
 		} /* end if posted Serialno . i is not blank */
