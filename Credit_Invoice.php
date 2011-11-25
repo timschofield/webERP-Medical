@@ -300,9 +300,9 @@ $j=0; //row counter
 foreach ($_SESSION['CreditItems']->LineItems as $LnItm) {
 	$LineTotal =($LnItm->QtyDispatched * $LnItm->Price * (1 - $LnItm->DiscountPercent));
 	if (!isset($_POST['ProcessCredit'])) {
-		$_SESSION['CreditItems']->total = $_SESSION['CreditItems']->total + $LineTotal;
-		$_SESSION['CreditItems']->totalVolume = $_SESSION['CreditItems']->totalVolume + $LnItm->QtyDispatched * $LnItm->Volume;
-		$_SESSION['CreditItems']->totalWeight = $_SESSION['CreditItems']->totalWeight + $LnItm->QtyDispatched * $LnItm->Weight;
+		$_SESSION['CreditItems']->total += $LineTotal;
+		$_SESSION['CreditItems']->totalVolume += $LnItm->QtyDispatched * $LnItm->Volume;
+		$_SESSION['CreditItems']->totalWeight += $LnItm->QtyDispatched * $LnItm->Weight;
 
 		if ($k==1){
 			$RowStarter = 'class="EvenTableRows"';
