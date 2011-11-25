@@ -252,6 +252,7 @@ if (isset($PrintPDF)
 								(stockmoves.price * " . $ExchRate . ") AS fxprice,
 								stockmoves.narrative,
 								stockmaster.controlled,
+								stockmaster.serialised,
 								stockmaster.units,
 								stockmoves.stkmoveno
 							FROM stockmoves,
@@ -270,6 +271,7 @@ if (isset($PrintPDF)
 								(stockmoves.price * " . $ExchRate . ") AS fxprice,
 								stockmoves.narrative,
 								stockmaster.controlled,
+								stockmaster.serialised,
 								stockmaster.units,
 								stockmoves.stkmoveno
 							FROM stockmoves,
