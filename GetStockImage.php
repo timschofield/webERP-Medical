@@ -118,7 +118,7 @@ if( $i === false )
 else {
 	$type   = strtolower(mb_substr($StockID,$i+1,mb_strlen($StockID)));
 	$StockID = mb_substr($StockID,0,$i);
-	if($blanktext && !isset($text))
+	if($blanktext and !isset($text))
 		$text = '';
 }
 $style = $type;
@@ -143,7 +143,7 @@ if ( file_exists($tmpFileName.'.jpg') ) {
 	$FileName = $DefaultImage;
 	$IsJpeg = $DefaultIsJpeg;
 }
-if( !$automake && !isset($FileName) ) {
+if( !$automake and !isset($FileName) ) {
 		$title = _('Stock Image Retrieval ....');
 		include('includes/header.inc');
 		prnMsg( _('The Image could not be retrieved because it does not exist'), 'error');
@@ -153,7 +153,7 @@ if( !$automake && !isset($FileName) ) {
 }
 
 // See if we need to automake this image
-if( $automake && !isset($FileName) || $useblank ) {
+if( $automake and !isset($FileName) || $useblank ) {
 	// Have we got height and width specs
 	if( !isset($width) )
 		$width = 64;
@@ -255,7 +255,7 @@ if( $automake && !isset($FileName) || $useblank ) {
 	}
 	$sw = imagesx($im);
 	$sh = imagesy($im);
-	if ( isset($width) && ($width != $sw) || isset($height) && ($height != $sh)) {
+	if ( isset($width) and ($width != $sw) or isset($height) and ($height != $sh)) {
 		if( !isset($width) ) {
 			$width = imagesx($im);
 		}
