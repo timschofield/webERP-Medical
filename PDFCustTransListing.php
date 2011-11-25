@@ -101,10 +101,10 @@ include ('includes/PDFCustTransListingPageHeader.inc');
 while ($myrow=DB_fetch_array($result)){
 
 	$sql="SELECT name FROM debtorsmaster WHERE debtorno='".$myrow['debtorno']."'";
-	$supplierresult=DB_query($sql, $db);
-	$supplierrow=DB_fetch_array($supplierresult);
+	$CustomerResult=DB_query($sql, $db);
+	$CustomerRow=DB_fetch_array($CustomerResult);
 
-	$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,160,$FontSize,$supplierrow['name'], 'left');
+	$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,160,$FontSize,$CustomerRow['name'], 'left');
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+162,$YPos,80,$FontSize,$myrow['transno'], 'left');
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+242,$YPos,70,$FontSize,ConvertSQLDate($myrow['trandate']), 'left');
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+312,$YPos,70,$FontSize,locale_money_format($myrow['ovamount'],$myrow['currcode']), 'right');
