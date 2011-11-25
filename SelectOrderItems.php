@@ -25,7 +25,7 @@ foreach ($_POST as $key => $value) {
 	if (mb_strstr($key,'StockID')) {
 		$Index=mb_substr($key, 7);
 		$StockID=$value;
-		$NewItem_array[$StockID] = filter_number_input($_POST['Quantity'.$Index]);
+		$NewItemArray[$StockID] = filter_number_input($_POST['Quantity'.$Index]);
 		$_POST['Units'.$StockID]=$_POST['Units'.$Index];
 		$NewItem=True;
 	}
@@ -1242,10 +1242,10 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 	} /*end of if its a new item */
 
-	if (isset($NewItem_array) AND isset($_POST['order_items'])){
+	if (isset($NewItemArray) AND isset($_POST['order_items'])){
 /* get the item details from the database and hold them in the cart object make the quantity 1 by default then add it to the cart */
 /*Now figure out if the item is a kit set - the field MBFlag='K'*/
-		foreach($NewItem_array as $NewItem => $NewItemQty) {
+		foreach($NewItemArray as $NewItem => $NewItemQty) {
 				if($NewItemQty > 0)	{
 					$sql = "SELECT stockmaster.mbflag
 									FROM stockmaster
