@@ -144,7 +144,7 @@ if (!isset($SelectedArea)) {
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
 
-	echo '<table>
+	echo '<table class="selection">
 		<tr>
 		<th>' . _('Area Code') . '</th>
 		<th>' . _('Area Name') . '</th>
