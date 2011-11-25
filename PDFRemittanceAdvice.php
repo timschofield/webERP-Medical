@@ -106,7 +106,6 @@ if (isset($_POST['PrintPDF'])
 				PageHeader();
 			}
 		} /*end while there are detail transactions to show */
-		PaymentFooter();
 		$YPos -= (0.5*$line_height);
 		$pdf->line($Left_Margin, $YPos+$line_height,$Page_Width-$Right_Margin, $YPos+$line_height);
 
@@ -164,33 +163,6 @@ if (isset($_POST['PrintPDF'])
 
 	include ('includes/footer.inc');
 } /*end of else not PrintPDF */
-
-
-function PaymentFooter (){
-	global $pdf;
-	global $YPos;
-	global $line_height;
-	global $Page_Width;
-	global $Right_Margin;
-	global $Left_Margin;
-	global $Bottom_Margin;
-	global $FontSize;
-	global $SupplierName;
-	global $AccumBalance;
-	global $TotalPayments;
-
-	$YPos -= (0.5*$line_height);
-	$pdf->line($Left_Margin, $YPos+$line_height,$Page_Width-$Right_Margin, $YPos+$line_height);
-
-	$LeftOvers = $pdf->addTextWrap($Left_Margin+280,$YPos,75,$FontSize,_('Total Payment:'), 'right');
-
-	$TotalPayments += $AccumBalance;
-
-	$LeftOvers = $pdf->addTextWrap($Left_Margin+355,$YPos,80,$FontSize, locale_money_format($AccumBalance,$_SESSION['CompanyRecord']['currencydefault']), 'right');
-
-	$YPos -= (1.5*$line_height);
-	$pdf->line($Left_Margin, $YPos+$line_height,$Page_Width-$Right_Margin, $YPos+$line_height);
-}
 
 function PageHeader(){
 	global $pdf;
