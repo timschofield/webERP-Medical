@@ -107,6 +107,18 @@ if (isset($_POST['PrintPDF'])
 			}
 		} /*end while there are detail transactions to show */
 		PaymentFooter();
+		$YPos -= (0.5*$line_height);
+		$pdf->line($Left_Margin, $YPos+$line_height,$Page_Width-$Right_Margin, $YPos+$line_height);
+
+		$LeftOvers = $pdf->addTextWrap($Left_Margin+280,$YPos,75,$FontSize,_('Total Payment:'), 'right');
+
+		$TotalPayments += $AccumBalance;
+
+		$LeftOvers = $pdf->addTextWrap($Left_Margin+355,$YPos,80,$FontSize,locale_money_format($AccumBalance,$SuppliersPaid['currcode']), 'right');
+
+		$YPos -= (1.5*$line_height);
+		$pdf->line($Left_Margin, $YPos+$line_height,$Page_Width-$Right_Margin, $YPos+$line_height);
+
 	} /* end while there are supplier payments to retrieve allocations for */
 
 
@@ -135,9 +147,9 @@ if (isset($_POST['PrintPDF'])
 		$DefaultToCriteria = $_POST['ToCriteria'];
 	}
 	echo '<tr><td>' . _('From Supplier Code') . ':</font></td>
-            <td><input type="text" maxlength="6" size="7" name="FromCriteria" value="' . $DefaultFromCriteria . '" /></td></tr>';
+			<td><input type="text" maxlength="6" size="7" name="FromCriteria" value="' . $DefaultFromCriteria . '" /></td></tr>';
 	echo '<tr><td>' . _('To Supplier Code') . ':</td>
-            <td><input type="text" maxlength="6" size="7" name="ToCriteria" value="' . $DefaultToCriteria . '" /></td></tr>';
+			<td><input type="text" maxlength="6" size="7" name="ToCriteria" value="' . $DefaultToCriteria . '" /></td></tr>';
 
 	if (!isset($_POST['PaymentDate'])){
 		$DefaultDate = Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m')+1,0 ,Date('y')));
@@ -146,7 +158,7 @@ if (isset($_POST['PrintPDF'])
 	}
 
 	echo '<tr><td>' . _('Date Of Payment') . ':</td>
-            <td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="PaymentDate" maxlength="11" size="12" value="' . $DefaultDate . '" /></td></tr>';
+			<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="PaymentDate" maxlength="11" size="12" value="' . $DefaultDate . '" /></td></tr>';
 
 	echo '</table><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div></form>';
 
