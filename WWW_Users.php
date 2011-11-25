@@ -77,6 +77,14 @@ if (isset($_POST['submit'])) {
 		$InputError = 1;
 		prnMsg(_('If you enter a Customer Code you must also enter a Branch Code valid for this Customer'),'error');
 	}
+	if (!isset($SelectedUser)){
+		/* check to ensure the user id is not already entered */
+		$result = DB_query("SELECT userid FROM www_users WHERE userid='" . $_POST['UserID'] . "'",$db);
+		if (DB_num_rows($result)==1){
+			$InputError =1;
+			prnMsg(_('The user ID') . ' ' . $_POST['UserID'] . ' ' . _('already exists and cannot be used again'),'error');
+		}
+	}
 
 	if ((mb_strlen($_POST['BranchCode'])>0) AND ($InputError !=1)) {
 		// check that the entered branch is valid for the customer code
@@ -106,7 +114,7 @@ if (isset($_POST['submit'])) {
 	$_POST['ModulesAllowed']= $ModulesAllowed;
 
 
-	if ($SelectedUser AND $InputError !=1) {
+	if (isset($SelectedUser) AND $InputError !=1) {
 
 /*SelectedUser could also exist if submit had not been clicked this code would not run in this case cos submit is false of course  see the delete code below*/
 
