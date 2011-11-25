@@ -104,9 +104,9 @@ if ($NewTransfer){
 															$myrow['decimalplaces']);
 
 
-		$_SESSION['Transfer']->TransferItem[0]->StandardCost = $myrow[3];
+		$_SESSION['Transfer']->TransferItem[0]->StandardCost = $myrow['standardcost'];
 
-		if ($myrow['mbflag']=='D' OR $myrow['mbflag']=='A' OR $myrow[2]==''mbflag''){
+		if ($myrow['mbflag']=='D' OR $myrow['mbflag']=='A' OR $myrow['mbflag']=='K'){
 			prnMsg(_('The part entered is either or a dummy part or an assembly or a kit-set part') . '. ' . _('These parts are not physical parts and no stock holding is maintained for them') . '. ' . _('Stock Transfers are therefore not possible'),'warn');
 			echo '.<hr>';
 			echo '<a href="' . $rootpath . '/StockTransfers.php?NewTransfer=Yes">' . _('Enter another Transfer') . '</a>';
