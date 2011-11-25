@@ -153,7 +153,7 @@ if( !$automake and !isset($FileName) ) {
 }
 
 // See if we need to automake this image
-if( $automake and !isset($FileName) || $useblank ) {
+if( $automake and !isset($FileName) or $useblank ) {
 	// Have we got height and width specs
 	if( !isset($width) )
 		$width = 64;
