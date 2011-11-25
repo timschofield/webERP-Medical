@@ -80,8 +80,7 @@ If (isset($_POST['PrintPDF']) AND isset($_POST['ReportOrClose'])){
 
 			if ($StockQtyDifference !=0){ // only adjust stock if there is an adjustment to make!!
 
-				$SQL = 'BEGIN';
-				$Result = DB_query($SQL,$db);
+				DB_Txn_Begin($db);
 
 				// Need to get the current location quantity will need it later for the stock movement
 				$SQL="SELECT locstock.quantity
@@ -172,8 +171,7 @@ If (isset($_POST['PrintPDF']) AND isset($_POST['ReportOrClose'])){
 
 				} //END INSERT GL TRANS
 				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Unable to COMMIT transaction while adjusting stock in StockCheckAdjustmet report');
-				$SQL = "COMMIT";
-				$Result = DB_query($SQL,$db, $ErrMsg,'',true);
+				DB_Txn_Commit($db);
 
 			} // end if $StockQtyDifference !=0
 
