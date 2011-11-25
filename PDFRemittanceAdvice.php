@@ -44,7 +44,7 @@ if (isset($_POST['PrintPDF'])
 
 	include('includes/PDFStarter.php');
 	$pdf->addInfo('Title',_('Remmitance Advice'));
-	$pdf->addInfo('Subject',_('Remittance Advice') . ' - ' . _('suppliers from') . ' ' . $_POST['FromCriteria'] . ' to ' . $_POST['ToCriteria'] . ' ' . _('and Paid On') . ' ' .  $_POST['PaymentDate']);
+	$pdf->addInfo('Subject',_('Remittance Advice') . ' - ' . _('suppliers from') . ' ' . $_POST['FromCriteria'] . ' ' . _('to') . ' ' . $_POST['ToCriteria'] . ' ' . _('and Paid On') . ' ' .  $_POST['PaymentDate']);
 
 	$line_height=12;
 

@@ -29,8 +29,8 @@ body {
 	padding: 36px 0px 0px 0px;/*fred: limiting the body will keep the elements from wandering on full page views and distorting the looks. It should still work on netbooks with 1024x600 resolution.*/
 	font-family: Arial, Verdana, Helvetica, sans-serif;
 	font-size: 9px;
-
-
+	
+	
 }
 
 img {
@@ -204,7 +204,7 @@ font.bad {
 font.header_title {
 	font-size: 14px;
 	font-weight: bold;
-
+	
 }
 
 #topMenu {
@@ -460,11 +460,11 @@ div.csv {
 }
 
 .main_menu_selected a{
-
+	
 }
 
 .main_menu_selected a:hover{
-
+  
 }
 
 span.main_menu_nolink {
@@ -621,7 +621,7 @@ span.menu_group_nolink {
 
 #footer {
 	background: url(images/footer.png) bottom no-repeat;
-	width: 99%;
+	width: 960px;
 	margin-left: 0px;
 	padding-bottom: 13px;
 }
