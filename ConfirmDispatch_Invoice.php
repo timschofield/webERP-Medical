@@ -403,8 +403,8 @@ foreach ($_SESSION['Items']->LineItems as $LnItm) {
 	}
 	echo '</tr>';
 	if (mb_strlen($LnItm->Narrative)>1){
-		$narrative=str_replace('\r\n','<br />', $LnItm->Narrative);
-		echo $RowStarter . '<td colspan="12">' . stripslashes($narrative) . '</td></tr>';
+		$Narrative=str_replace('\r\n','<br />', $LnItm->Narrative);
+		echo $RowStarter . '<td colspan="12">' . stripslashes($Narrative) . '</td></tr>';
 	}
 }//end foreach ($line)
 
