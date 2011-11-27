@@ -21,41 +21,48 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 echo '<table cellpadding="2" class="selection">
 		<tr><td valign="top">
 		<table>';
-	
+
 echo '<tr>
 		<th colspan="2" class="centre">' . _('Date Selection') . '</th>
 	</tr>
 	<tr>
-		<td>' . _('Custom Range') . ':</td>
-		<td><input type="radio" name="DateRange" value="Custom" ';
-if ($_POST['DateRange']=='Custom'){
-	echo 'checked';
+		<td>' . _('Custom Range') . ':</td>';
+if ($_POST['DateRange']=='Custom') {
+	echo '<td><input type="radio" name="DateRange" value="Custom" checked="True" onChange="ReloadForm(form1.ShowSales)" />';
+} else {
+	echo '<td><input type="radio" name="DateRange" value="Custom" onChange="ReloadForm(form1.ShowSales)" />';
 }
-echo	' onChange="ReloadForm(form1.ShowSales)" /></td>
+echo	'</td>
 		</tr>
 	<tr>
 		<td>' . _('This Week') . ':</td>
-		<td><input type="radio" name="DateRange" value="ThisWeek" ';
-if ($_POST['DateRange']=='ThisWeek'){
-	echo 'checked';
+		<td>';
+if ($_POST['DateRange']=='ThisWeek') {
+	echo '<input type="radio" name="DateRange" value="ThisWeek" checked="True" onChange="ReloadForm(form1.ShowSales)" />';
+} else {
+	echo '<input type="radio" name="DateRange" value="ThisWeek" onChange="ReloadForm(form1.ShowSales)" />';
 }
-echo	' onChange="ReloadForm(form1.ShowSales)" /></td>
+echo	'</td>
 		</tr>
 	<tr>
 		<td>' . _('This Month') . ':</td>
-		<td><input type="radio" name="DateRange" value="ThisMonth" ';
-if ($_POST['DateRange']=='ThisMonth'){
-	echo 'checked';
+		<td>';
+if ($_POST['DateRange']=='ThisMonth') {
+	echo '<input type="radio" name="DateRange" value="ThisMonth" checked="True" onChange="ReloadForm(form1.ShowSales)" />';
+} else {
+	echo '<input type="radio" name="DateRange" value="ThisMonth" onChange="ReloadForm(form1.ShowSales)" />';
 }
-echo	' onChange="ReloadForm(form1.ShowSales)" /></td>
+echo	'</td>
 		</tr>
 	<tr>
 		<td>' . _('This Quarter') . ':</td>
-		<td><input type="radio" name="DateRange" value="ThisQuarter" ';
-if ($_POST['DateRange']=='ThisQuarter'){
-	echo 'checked';
+		<td>';
+if ($_POST['DateRange']=='ThisQuarter') {
+	echo '<input type="radio" name="DateRange" value="ThisQuarter" checked="True" onChange="ReloadForm(form1.ShowSales)" />';
+} else {
+	echo '<input type="radio" name="DateRange" value="ThisQuarter" onChange="ReloadForm(form1.ShowSales)" />';
 }
-echo	' onChange="ReloadForm(form1.ShowSales)" /></td>
+echo	'</td>
 		</tr>';
 if ($_POST['DateRange']=='Custom'){
 	if (!isset($_POST['FromDate'])){
@@ -73,7 +80,7 @@ if ($_POST['DateRange']=='Custom'){
 			</tr>';
 }
 echo '</table></td>
-		<td valign=top>
+		<td valign="top">
 		<table>'; //new sub table to set parameters for order of display
 
 
@@ -84,34 +91,38 @@ echo '<tr><th colspan="2" class="centre">' . _('Display') . '</th>
 		</tr>
 	<tr>
 		<td>' . _('Order By Net Sales') . ':</td>
-		<td><input type="radio" name="OrderBy" value="NetSales" ';
-if ($_POST['OrderBy']=='NetSales'){
-	echo 'checked';
+		<td>';
+if ($_POST['OrderBy']=='NetSales') {
+	echo '<input type="radio" name="OrderBy" value="NetSales" checked="True" />';
+} else {
+	echo '<input type="radio" name="OrderBy" value="NetSales" />';
 }
-echo	' /></td>
+echo	'</td>
 		</tr>
 		<tr>
 		<td>' . _('Order By Quantity') . ':</td>
-		<td><input type="radio" name="OrderBy" value="Quantity" ';
-if ($_POST['OrderBy']=='Quantity'){
-	echo 'checked';
+		<td>';
+if ($_POST['OrderBy']=='Quantity') {
+	echo '<input type="radio" name="OrderBy" value="Quantity" checked="True" />';
+} else {
+	echo '<input type="radio" name="OrderBy" value="Quantity" />';
 }
 if (!isset($_POST['NoToDisplay'])){
 	$_POST['NoToDisplay']=20;
 }
-echo	' /></td>
+echo	'</td>
 		</tr>
 		<tr>
 		<td>' . _('Number to Display') . ':</td>
-		<td><input type="text class="number" name="NoToDisplay" size="4" maxlength="4" value="' . $_POST['NoToDisplay'] .'" ></td>
+		<td><input type="text class="number" name="NoToDisplay" size="4" maxlength="4" value="' . $_POST['NoToDisplay'] .'" /></td>
 		</tr>
 	</table>
 	</td></tr>
 	</table>';
 
 
-echo '<br /><div class="centre"><input tabindex=4 type=submit name="ShowSales" value="' . _('Show Sales') . '">';
-echo '</form></div>';
+echo '<br /><div class="centre"><input tabindex="4" type="submit" name="ShowSales" value="' . _('Show Sales') . '" />';
+echo '</div></form>';
 echo '<br />';
 
 if (isset($_POST['ShowSales'])){
@@ -169,25 +180,25 @@ if (isset($_POST['ShowSales'])){
 	$sql = "SELECT stockmaster.stockid,
 					stockmaster.description,
 					stockcategory.categorydescription,
-					SUM(CASE WHEN stockmoves.type=10 
-							OR stockmoves.type=11 THEN 
+					SUM(CASE WHEN stockmoves.type=10
+							OR stockmoves.type=11 THEN
 							 -qty
 							ELSE 0 END) as salesquantity,
-					SUM(CASE WHEN stockmoves.type=10 THEN 
+					SUM(CASE WHEN stockmoves.type=10 THEN
 							price*(1-discountpercent)* -qty
 							ELSE 0 END) as salesvalue,
-					SUM(CASE WHEN stockmoves.type=11 THEN 
+					SUM(CASE WHEN stockmoves.type=11 THEN
 							price*(1-discountpercent)* (-qty)
 							ELSE 0 END) as returnvalue,
-					SUM(CASE WHEN stockmoves.type=11 
-								OR stockmoves.type=10 THEN 
+					SUM(CASE WHEN stockmoves.type=11
+								OR stockmoves.type=10 THEN
 							price*(1-discountpercent)* (-qty)
 							ELSE 0 END) as netsalesvalue,
 					SUM((standardcost * -qty)) as cost
 			FROM stockmoves INNER JOIN stockmaster
-			ON stockmoves.stockid=stockmaster.stockid 
-			INNER JOIN stockcategory 
-			ON stockmaster.categoryid=stockcategory.categoryid 
+			ON stockmoves.stockid=stockmaster.stockid
+			INNER JOIN stockcategory
+			ON stockmaster.categoryid=stockcategory.categoryid
 			WHERE (stockmoves.type=10 or stockmoves.type=11)
 			AND show_on_inv_crds =1
 			AND trandate>='" . $FromDate . "'
@@ -195,7 +206,7 @@ if (isset($_POST['ShowSales'])){
 			GROUP BY stockmaster.stockid,
 					stockmaster.description,
 					stockcategory.categorydescription ";
-	
+
 	if ($_POST['OrderBy']=='NetSales'){
 		$sql .= " ORDER BY netsalesvalue DESC ";
 	} else {
@@ -206,13 +217,13 @@ if (isset($_POST['ShowSales'])){
 			$sql .= " LIMIT " . $_POST['NoToDisplay'];
 		}
 	}
-	
+
 	$ErrMsg = _('The sales data could not be retrieved because') . ' - ' . DB_error_msg($db);
 	$SalesResult = DB_query($sql,$db,$ErrMsg);
 
-	
+
 	echo '<table cellpadding=2 class="selection">';
-	
+
 	echo'<tr>
 		<th>' . _('Rank') . '</th>
 		<th>' . _('Item') . '</th>
@@ -222,7 +233,7 @@ if (isset($_POST['ShowSales'])){
 		<th>' . _('Net Sales') . '</th>
 		<th>' . _('Sales') .'<br />' . _('Quantity') . '</th>
 		</tr>';
-	
+
 	$CumulativeTotalSales = 0;
 	$CumulativeTotalRefunds = 0;
 	$CumulativeTotalNetSales = 0;
@@ -237,7 +248,7 @@ if (isset($_POST['ShowSales'])){
 			echo '<tr class="OddTableRows">';
 			$k=1;
 		}
-				
+
 		echo '<td>' . $i . '</td>
 				<td>' . $SalesRow['stockid'] . ' - ' . $SalesRow['description'] . '</td>
 				<td>' . $SalesRow['categorydescription'] . '</td>
@@ -247,19 +258,19 @@ if (isset($_POST['ShowSales'])){
 				<td class="number">' . locale_number_format($SalesRow['salesquantity'],'Variable') . '</td>
 				</tr>';
 		$i++;
-		
+
 		$CumulativeTotalSales += $SalesRow['salesvalue'];
 		$CumulativeTotalRefunds += $SalesRow['returnvalue'];
 		$CumulativeTotalNetSales += ($SalesRow['salesvalue']+$SalesRow['returnvalue']);
 		$CumulativeTotalQuantity += $SalesRow['salesquantity'];
 
 	} //loop around category sales for the period
-	
+
 	if ($k==1){
-		echo '<tr class="EvenTableRows"><td colspan="8"><hr></td></tr>';
+		echo '<tr class="EvenTableRows"><td colspan="8"><hr /></td></tr>';
 		echo '<tr class="OddTableRows">';
 	} else {
-		echo '<tr class="OddTableRows"><td colspan="8"><hr></td></tr>';
+		echo '<tr class="OddTableRows"><td colspan="8"><hr /></td></tr>';
 		echo '<tr class="EvenTableRows">';
 	}
 	echo '<td class="number" colspan="3">' . _('GRAND Total') . '</td>
@@ -268,7 +279,7 @@ if (isset($_POST['ShowSales'])){
 		<td class="number">' . locale_number_format($CumulativeTotalNetSales,$_SESSION['CompanyRecord']['decimalplaces']) . '</td>
 		<td class="number">' . locale_number_format($CumulativeTotalQuantity,'Variable') . '</td>
 		</tr>';
-	
+
 	echo '</table>';
 
 } //end of if user hit show sales
