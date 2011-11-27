@@ -6,9 +6,9 @@ $title = _('Sales People Maintenance');
 include('includes/header.inc');
 
 if (isset($_GET['SelectedSaleperson'])){
-	$SelectedSaleperson =mb_strtoupper($_GET['SelectedSaleperson']);
+	$SelectedSalesPerson =mb_strtoupper($_GET['SelectedSaleperson']);
 } elseif(isset($_POST['SelectedSaleperson'])){
-	$SelectedSaleperson =mb_strtoupper($_POST['SelectedSaleperson']);
+	$SelectedSalesPerson =mb_strtoupper($_POST['SelectedSaleperson']);
 }
 
 if (isset($Errors)) {
@@ -80,7 +80,7 @@ if (isset($_POST['submit'])) {
 	  $_POST['Current']=0;
 	}
 
-	if (isset($SelectedSaleperson) AND $InputError !=1) {
+	if (isset($SelectedSalesPerson) AND $InputError !=1) {
 
 		/*SelectedSaleperson could also exist if submit had not been clicked this code would not run in this case cos submit is false of course  see the delete code below*/
 
@@ -91,7 +91,7 @@ if (isset($_POST['submit'])) {
 						breakpoint='" . $_POST['Breakpoint'] . "',
 						commissionrate2='" . $_POST['CommissionRate2'] . "',
 						current='" . $_POST['Current'] . "'
-				WHERE salesmancode = '".$SelectedSaleperson."'";
+				WHERE salesmancode = '".$SelectedSalesPerson."'";
 
 		$msg = _('Salesperson record for') . ' ' . $_POST['SalesmanName'] . ' ' . _('has been updated');
 	} elseif ($InputError !=1) {
@@ -142,33 +142,33 @@ if (isset($_POST['submit'])) {
 
 // PREVENT DELETES IF DEPENDENT RECORDS IN 'DebtorsMaster'
 
-	$sql= "SELECT COUNT(*) FROM custbranch WHERE  custbranch.salesman='".$SelectedSaleperson."'";
+	$sql= "SELECT COUNT(*) FROM custbranch WHERE  custbranch.salesman='".$SelectedSalesPerson."'";
 	$result = DB_query($sql,$db);
 	$myrow = DB_fetch_row($result);
 	if ($myrow[0]>0) {
 		prnMsg(_('Cannot delete this salesperson because branches are set up referring to them') . ' - ' . _('first alter the branches concerned') . '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('branches that refer to this salesperson'),'error');
 
 	} else {
-		$sql= "SELECT COUNT(*) FROM salesanalysis WHERE salesanalysis.salesperson='".$SelectedSaleperson."'";
+		$sql= "SELECT COUNT(*) FROM salesanalysis WHERE salesanalysis.salesperson='".$SelectedSalesPerson."'";
 		$result = DB_query($sql,$db);
 		$myrow = DB_fetch_row($result);
 		if ($myrow[0]>0) {
 			prnMsg(_('Cannot delete this salesperson because sales analysis records refer to them') , '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('sales analysis records that refer to this salesperson'),'error');
 		} else {
 
-			$sql="DELETE FROM salesman WHERE salesmancode='".$SelectedSaleperson."'";
+			$sql="DELETE FROM salesman WHERE salesmancode='".$SelectedSalesPerson."'";
 			$ErrMsg = _('The salesperson could not be deleted because');
 			$result = DB_query($sql,$db,$ErrMsg);
 
-			prnMsg(_('Salesperson') . ' ' . $SelectedSalesperson . ' ' . _('has been deleted from the database'),'success');
-			unset ($SelectedSalesperson);
+			prnMsg(_('Salesperson') . ' ' . $SelectedSalesPerson . ' ' . _('has been deleted from the database'),'success');
+			unset ($SelectedSalesPerson);
 			unset($delete);
 		}
 	} //end if Sales-person used in GL accounts
 
 }
 
-if (!isset($SelectedSaleperson)) {
+if (!isset($SelectedSalesPerson)) {
 
 /* It could still be the second time the page has been run and a record has been selected for modification - SelectedSaleperson will exist because it was sent with the new call. If its the first time the page has been displayed with no parameters
 then none of the above are true and the list of Sales-persons will be displayed with
@@ -236,7 +236,7 @@ or deletion of the records*/
 	echo '</table><br />';
 } //end of ifs and buts!
 
-if (isset($SelectedSaleperson)) {
+if (isset($SelectedSalesPerson)) {
 	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Show All Sales People') . '</a></div>';
 }
 
@@ -245,7 +245,7 @@ if (! isset($_GET['delete'])) {
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-	if (isset($SelectedSaleperson)) {
+	if (isset($SelectedSalesPerson)) {
 		//editing an existing Sales-person
 
 		$sql = "SELECT salesmancode,
@@ -257,7 +257,7 @@ if (! isset($_GET['delete'])) {
 				commissionrate2,
 				current
 			FROM salesman
-			WHERE salesmancode='".$SelectedSaleperson."'";
+			WHERE salesmancode='".$SelectedSalesPerson."'";
 
 		$result = DB_query($sql, $db);
 		$myrow = DB_fetch_array($result);
@@ -272,12 +272,12 @@ if (! isset($_GET['delete'])) {
 		$_POST['Current']  = $myrow['current'];
 
 
-		echo '<input type="hidden" name="SelectedSaleperson" value="' . $SelectedSaleperson . '" />';
+		echo '<input type="hidden" name="SelectedSaleperson" value="' . $SelectedSalesPerson . '" />';
 		echo '<input type="hidden" name="SalesmanCode" value="' . $_POST['SalesmanCode'] . '" />';
 		echo '<table class="selection"> <tr><td>' . _('Salesperson code') . ':</td><td>';
 		echo $_POST['SalesmanCode'] . '</td></tr>';
 
-	} else { //end of if $SelectedSaleperson only do the else when a new record is being entered
+	} else { //end of if $SelectedSalesPerson only do the else when a new record is being entered
 
 		echo '<table class="selection"><tr><td>' . _('Salesperson code') . ':</td>
 			<td><input type="text" '. (in_array('SalesmanCode',$Errors) ? 'class="inputerror"' : '' ) .' name="SalesmanCode" size="3" maxlength="3" /></td></tr>';
