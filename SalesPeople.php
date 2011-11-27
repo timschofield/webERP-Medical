@@ -205,7 +205,11 @@ or deletion of the records*/
 		echo '<tr class="OddTableRows">';
 		$k++;
 	}
-	if ($myrow[7] == 1) $ActiveText = _("Yes"); else $ActiveText = _("No");
+	if ($myrow[7] == 1) {
+		$ActiveText = _('Yes');
+	} else {
+		$ActiveText = _('No');
+	}
 
 	printf('
 		<td>%s</td>
