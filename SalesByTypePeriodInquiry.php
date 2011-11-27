@@ -22,43 +22,46 @@ if (!isset($_POST['DateRange'])){
 echo '<form name="Form1" action="' . htmlspecialchars($_SERVER['PHP_SELF']) . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<table cellpadding=2 class="selection">
-		<tr><td valign=top>
+echo '<table cellpadding="2" class="selection">
+		<tr><td valign="top">
 		<table>';
 
 echo '<tr><th colspan="2" class="centre">' . _('Date Selection') . '</th>
 		</tr>
 	<tr>
-		<td>' . _('Custom Range') . ':</td>
-		<td><input type="radio" name="DateRange" value="Custom" ';
-if ($_POST['DateRange']=='Custom'){
-	echo 'checked';
+		<td>' . _('Custom Range') . ':</td>';
+if ($_POST['DateRange']=='Custom') {
+	echo '<td><input type="radio" name="DateRange" value="Custom" checked="True" onChange="ReloadForm(Form1.ShowSales)" />';
+} else  {
+	echo '<td><input type="radio" name="DateRange" value="Custom" onChange="ReloadForm(Form1.ShowSales)" />';
 }
-echo	' onChange="ReloadForm(Form1.ShowSales)"/></td>
+echo '</td></tr>
+	<tr>
+		<td>' . _('This Week') . ':</td>';
+if ($_POST['DateRange']=='ThisWeek') {
+	echo '<td><input type="radio" name="DateRange" value="ThisWeek" checked="True" onChange="ReloadForm(Form1.ShowSales)" />';
+} else {
+	echo '<td><input type="radio" name="DateRange" value="ThisWeek" onChange="ReloadForm(Form1.ShowSales)" />';
+}
+echo '</td>
 		</tr>
 	<tr>
-		<td>' . _('This Week') . ':</td>
-		<td><input type="radio" name="DateRange" value="ThisWeek" ';
-if ($_POST['DateRange']=='ThisWeek'){
-	echo 'checked';
+		<td>' . _('This Month') . ':</td>';
+if ($_POST['DateRange']=='ThisMonth') {
+	echo '<td><input type="radio" name="DateRange" value="ThisMonth" checked="True" onChange="ReloadForm(Form1.ShowSales)" />';
+} else {
+	echo '<td><input type="radio" name="DateRange" value="ThisMonth" onChange="ReloadForm(Form1.ShowSales)" />';
 }
-echo	' onChange="ReloadForm(Form1.ShowSales)" /></td>
+echo	'</td>
 		</tr>
 	<tr>
-		<td>' . _('This Month') . ':</td>
-		<td><input type="radio" name="DateRange" value="ThisMonth" ';
-if ($_POST['DateRange']=='ThisMonth'){
-	echo 'checked';
+		<td>' . _('This Quarter') . ':</td>';
+if ($_POST['DateRange']=='ThisQuarter') {
+	echo '<td><input type="radio" name="DateRange" value="ThisQuarter" checked="True" onChange="ReloadForm(Form1.ShowSales)" />';
+} else {
+	echo '<td><input type="radio" name="DateRange" value="ThisQuarter" onChange="ReloadForm(Form1.ShowSales)" />';
 }
-echo	' onChange="ReloadForm(Form1.ShowSales)" /></td>
-		</tr>
-	<tr>
-		<td>' . _('This Quarter') . ':</td>
-		<td><input type="radio" name="DateRange" value="ThisQuarter" ';
-if ($_POST['DateRange']=='ThisQuarter'){
-	echo 'checked';
-}
-echo	' onChange="ReloadForm(Form1.ShowSales)" /></td>
+echo	'</td>
 		</tr>';
 if ($_POST['DateRange']=='Custom'){
 	if (!isset($_POST['ToDate'])){
@@ -77,40 +80,44 @@ if ($_POST['DateRange']=='Custom'){
 echo '</table>
 		</td><td valign="top">
 		<table>';
-		
+
 echo '<tr><th colspan="2" class="centre">' . _('Display Data') . '</th>
 		</tr>
 	<tr>
-		<td>' . _('Daily') . ':</td>
-		<td><input type="radio" name="DisplayData" value="Daily" ';
-if ($_POST['DisplayData']=='Daily'){
-	echo 'checked';
+		<td>' . _('Daily') . ':</td>';
+if ($_POST['DisplayData']=='Daily') {
+	echo '<td><input type="radio" name="DisplayData" value="Daily" checked="True" onChange="ReloadForm(Form1.ShowSales)" />';
+} else {
+	echo '<td><input type="radio" name="DisplayData" value="Daily" onChange="ReloadForm(Form1.ShowSales)" />';
 }
-echo	' onChange="ReloadForm(Form1.ShowSales)" /></td>
+echo	'</td>
 		</tr>
 	<tr>
-		<td>' . _('Weekly') . ':</td>
-		<td><input type="radio" name="DisplayData" value="Weekly" ';
-if ($_POST['DisplayData']=='Weekly'){
-	echo 'checked';
+		<td>' . _('Weekly') . ':</td>';
+if ($_POST['DisplayData']=='Weekly') {
+	echo '<td><input type="radio" name="DisplayData" value="Weekly" checked="True" onChange="ReloadForm(Form1.ShowSales)" />';
+} else {
+	echo '<td><input type="radio" name="DisplayData" value="Weekly" onChange="ReloadForm(Form1.ShowSales)" />';
 }
-echo	' onChange="ReloadForm(Form1.ShowSales)" /></td>
+echo	'</td>
 		</tr>
 	<tr>
-		<td>' . _('Monthly') . ':</td>
-		<td><input type="radio" name="DisplayData" value="Monthly" ';
-if ($_POST['DisplayData']=='Monthly'){
-	echo 'checked';
+		<td>' . _('Monthly') . ':</td>';
+if ($_POST['DisplayData']=='Monthly') {
+	echo '<td><input type="radio" name="DisplayData" value="Monthly" checked="True" onChange="ReloadForm(Form1.ShowSales)" />';
+} else {
+	echo '<td><input type="radio" name="DisplayData" value="Monthly" onChange="ReloadForm(Form1.ShowSales)" />';
 }
-echo	' onChange="ReloadForm(Form1.ShowSales)" /></td>
+echo	'</td>
 		</tr>
 	<tr>
-		<td>' . _('Quarterly') . ':</td>
-		<td><input type="radio" name="DisplayData" value="Quarterly" ';
-if ($_POST['DisplayData']=='Quarterly'){
-	echo 'checked';
+		<td>' . _('Quarterly') . ':</td>';
+if ($_POST['DisplayData']=='Quarterly') {
+	echo '<td><input type="radio" name="DisplayData" value="Quarterly" checked="True" onChange="ReloadForm(Form1.ShowSales)" />';
+} else {
+	echo '<td><input type="radio" name="DisplayData" value="Quarterly" onChange="ReloadForm(Form1.ShowSales)" />';
 }
-echo	' onChange="ReloadForm(Form1.ShowSales)" /></td>
+echo	'</td>
 		</tr>';
 echo '</table>
 		</td></tr>
@@ -185,20 +192,20 @@ if (isset($_POST['ShowSales'])){
 		case 'Daily':
 			$sql = "SELECT debtortrans.trandate,
 							debtortrans.tpe,
-						SUM(CASE WHEN stockmoves.type=10 THEN 
+						SUM(CASE WHEN stockmoves.type=10 THEN
 							price*(1-discountpercent)* -qty
 							ELSE 0 END)
 						 as salesvalue,
-						 SUM(CASE WHEN stockmoves.type=10 THEN 
+						 SUM(CASE WHEN stockmoves.type=10 THEN
 							1 ELSE 0 END)
 						 as nooforders,
-						 SUM(CASE WHEN stockmoves.type=11 THEN 
+						 SUM(CASE WHEN stockmoves.type=11 THEN
 							price*(1-discountpercent)* (-qty)
 							ELSE 0 END)
 						 as returnvalue,
 						SUM((standardcost * -qty)) as cost
 					FROM stockmoves
-					INNER JOIN custbranch 
+					INNER JOIN custbranch
 					ON stockmoves.debtorno=custbranch.debtorno
 					AND stockmoves.branchcode=custbranch.branchcode
 					INNER JOIN debtortrans
@@ -212,26 +219,26 @@ if (isset($_POST['ShowSales'])){
 							tpe
 					ORDER BY debtortrans.trandate,
 							tpe";
-							
+
 			break;
 		case 'Weekly':
 			$sql = "SELECT WEEKOFYEAR(debtortrans.trandate) as week_no,
 							YEAR(debtortrans.trandate) as transyear,
 							debtortrans.tpe,
-						SUM(CASE WHEN stockmoves.type=10 THEN 
+						SUM(CASE WHEN stockmoves.type=10 THEN
 							price*(1-discountpercent)* -qty
 							ELSE 0 END)
 						 as salesvalue,
-						 SUM(CASE WHEN stockmoves.type=10 THEN 
+						 SUM(CASE WHEN stockmoves.type=10 THEN
 							1 ELSE 0 END)
 						 as nooforders,
-						 SUM(CASE WHEN stockmoves.type=11 THEN 
+						 SUM(CASE WHEN stockmoves.type=11 THEN
 							price*(1-discountpercent)* (-qty)
 							ELSE 0 END)
 						as returnvalue,
 						SUM((standardcost * -qty)) as cost
 					FROM stockmoves
-					INNER JOIN custbranch 
+					INNER JOIN custbranch
 					ON stockmoves.debtorno=custbranch.debtorno
 					AND stockmoves.branchcode=custbranch.branchcode
 					INNER JOIN debtortrans
@@ -247,27 +254,27 @@ if (isset($_POST['ShowSales'])){
 					ORDER BY transyear,
 							week_no,
 							tpe";
-							
+
 			break;
 		case 'Monthly':
 			$sql = "SELECT MONTH(debtortrans.trandate) as month_no,
 							MONTHNAME(debtortrans.trandate) as month_name,
 							YEAR(debtortrans.trandate) as transyear,
 							debtortrans.tpe,
-						SUM(CASE WHEN stockmoves.type=10 THEN 
+						SUM(CASE WHEN stockmoves.type=10 THEN
 							price*(1-discountpercent)* -qty
 							ELSE 0 END)
 						 as salesvalue,
-						 SUM(CASE WHEN stockmoves.type=10 THEN 
+						 SUM(CASE WHEN stockmoves.type=10 THEN
 							1 ELSE 0 END)
 						 as nooforders,
-						 SUM(CASE WHEN stockmoves.type=11 THEN 
+						 SUM(CASE WHEN stockmoves.type=11 THEN
 							price*(1-discountpercent)* (-qty)
 							ELSE 0 END)
 						as returnvalue,
 						SUM((standardcost * -qty)) as cost
 					FROM stockmoves
-					INNER JOIN custbranch 
+					INNER JOIN custbranch
 					ON stockmoves.debtorno=custbranch.debtorno
 					AND stockmoves.branchcode=custbranch.branchcode
 					INNER JOIN debtortrans
@@ -284,26 +291,26 @@ if (isset($_POST['ShowSales'])){
 					ORDER BY transyear,
 							month_no,
 							tpe";
-			
+
 			break;
 		case 'Quarterly':
 			$sql = "SELECT QUARTER(debtortrans.trandate) as quarter_no,
 							YEAR(debtortrans.trandate) as transyear,
 							debtortrans.tpe,
-						SUM(CASE WHEN stockmoves.type=10 THEN 
+						SUM(CASE WHEN stockmoves.type=10 THEN
 							price*(1-discountpercent)* -qty
 							ELSE 0 END)
 						 as salesvalue,
-						 SUM(CASE WHEN stockmoves.type=10 THEN 
+						 SUM(CASE WHEN stockmoves.type=10 THEN
 							1 ELSE 0 END)
 						 as nooforders,
-						 SUM(CASE WHEN stockmoves.type=11 THEN 
+						 SUM(CASE WHEN stockmoves.type=11 THEN
 							price*(1-discountpercent)* (-qty)
 							ELSE 0 END)
 						as returnvalue,
 						SUM((standardcost * -qty)) as cost
 					FROM stockmoves
-					INNER JOIN custbranch 
+					INNER JOIN custbranch
 					ON stockmoves.debtorno=custbranch.debtorno
 					AND stockmoves.branchcode=custbranch.branchcode
 					INNER JOIN debtortrans
@@ -315,20 +322,20 @@ if (isset($_POST['ShowSales'])){
 					AND debtortrans.trandate<='" . $ToDate . "'
 					GROUP BY quarter_no,
 							transyear,
-							tpe 
+							tpe
 					ORDER BY transyear,
 							quarter_no,
 							tpe";
-							
+
 			break;
 		}
-	
+
 	$ErrMsg = _('The sales data could not be retrieved because') . ' - ' . DB_error_msg($db);
 	$SalesResult = DB_query($sql,$db,$ErrMsg);
 
-	
-	echo '<table cellpadding=2 class="selection">';
-	
+
+	echo '<table cellpadding="2" class="selection">';
+
 	echo'<tr>
 		<th>' . _('Period') . '</th>
 		<th>' . _('Sales') . '<br />' . _('Type') . '</th>
@@ -339,21 +346,21 @@ if (isset($_POST['ShowSales'])){
 		<th>' . _('Cost of Sales') . '</th>
 		<th>' . _('Gross Profit') . '</th>
 		</tr>';
-	
+
 	$CumulativeTotalSales = 0;
 	$CumulativeTotalOrders = 0;
 	$CumulativeTotalRefunds = 0;
 	$CumulativeTotalNetSales = 0;
 	$CumulativeTotalCost = 0;
 	$CumulativeTotalGP = 0;
-	
+
 	$PrdTotalOrders =0;
 	$PrdTotalSales=0;
 	$PrdTotalRefunds=0;
 	$PrdTotalNetSales=0;
 	$PrdTotalCost=0;
 	$PrdTotalGP=0;
-	
+
 	$PeriodHeadingDone = false;
 	$LastPeriodHeading = 'First Run Through';
 	$k=0;
@@ -379,10 +386,10 @@ if (isset($_POST['ShowSales'])){
 							<td class="number">' . locale_number_format($PrdTotalGP,$_SESSION['CompanyRecord']['decimalplaces']) . '</td>
 						</tr>';
 						if ($k==1){
-							echo '<tr class="EvenTableRows"><td colspan="8"><hr></td></tr>';
+							echo '<tr class="EvenTableRows"><td colspan="8"><hr /></td></tr>';
 							echo '<tr class="OddTableRows">';
 						} else {
-							echo '<tr class="OddTableRows"><td colspan="8"><hr></td></tr>';
+							echo '<tr class="OddTableRows"><td colspan="8"><hr /></td></tr>';
 							echo '<tr class="EvenTableRows">';
 						}
 						$PrdTotalOrders =0;
@@ -399,7 +406,7 @@ if (isset($_POST['ShowSales'])){
 					$PeriodHeadingDone = true;
 				} else {
 					echo '<td></td>';
-				} 
+				}
 				break;
 			case 'Weekly':
 				if ($LastPeriodHeading != _('wk'). '-' . $SalesRow['week_no'] . ' ' . $SalesRow['transyear']) {
@@ -414,10 +421,10 @@ if (isset($_POST['ShowSales'])){
 							<td class="number">' . locale_number_format($PrdTotalGP,$_SESSION['CompanyRecord']['decimalplaces']) . '</td>
 						</tr>';
 						if ($k==1){
-							echo '<tr class="EvenTableRows"><td colspan="8"><hr></td></tr>';
+							echo '<tr class="EvenTableRows"><td colspan="8"><hr /></td></tr>';
 							echo '<tr class="OddTableRows">';
 						} else {
-							echo '<tr class="OddTableRows"><td colspan="8"><hr></td></tr>';
+							echo '<tr class="OddTableRows"><td colspan="8"><hr /></td></tr>';
 							echo '<tr class="EvenTableRows">';
 						}
 						$PrdTotalOrders =0;
@@ -434,7 +441,7 @@ if (isset($_POST['ShowSales'])){
 					$PeriodHeadingDone = true;
 				} else {
 					echo '<td></td>';
-				} 
+				}
 				break;
 			case 'Monthly':
 				if ($LastPeriodHeading != $SalesRow['month_name'] . ' ' . $SalesRow['transyear']) {
@@ -449,10 +456,10 @@ if (isset($_POST['ShowSales'])){
 							<td class="number">' . locale_number_format($PrdTotalGP,$_SESSION['CompanyRecord']['decimalplaces']) . '</td>
 						</tr>';
 						if ($k==1){
-							echo '<tr class="EvenTableRows"><td colspan="8"><hr></td></tr>';
+							echo '<tr class="EvenTableRows"><td colspan="8"><hr /></td></tr>';
 							echo '<tr class="OddTableRows">';
 						} else {
-							echo '<tr class="OddTableRows"><td colspan="8"><hr></td></tr>';
+							echo '<tr class="OddTableRows"><td colspan="8"><hr /></td></tr>';
 							echo '<tr class="EvenTableRows">';
 						}
 						$PrdTotalOrders =0;
@@ -484,10 +491,10 @@ if (isset($_POST['ShowSales'])){
 							<td class="number">' . locale_number_format($PrdTotalGP,$_SESSION['CompanyRecord']['decimalplaces']) . '</td>
 						</tr>';
 						if ($k==1){
-							echo '<tr class="EvenTableRows"><td colspan="8"><hr></td></tr>';
+							echo '<tr class="EvenTableRows"><td colspan="8"><hr /></td></tr>';
 							echo '<tr class="OddTableRows">';
 						} else {
-							echo '<tr class="OddTableRows"><td colspan="8"><hr></td></tr>';
+							echo '<tr class="OddTableRows"><td colspan="8"><hr /></td></tr>';
 							echo '<tr class="EvenTableRows">';
 						}
 						$PrdTotalOrders =0;
@@ -521,7 +528,7 @@ if (isset($_POST['ShowSales'])){
 		$PrdTotalNetSales += ($SalesRow['salesvalue']+$SalesRow['returnvalue']);
 		$PrdTotalCost += $SalesRow['cost'];
 		$PrdTotalGP += ($SalesRow['salesvalue']+$SalesRow['returnvalue']-$SalesRow['cost']);
-		
+
 		$CumulativeTotalSales += $SalesRow['salesvalue'];
 		$CumulativeTotalOrders = $SalesRow['nooforders'];
 		$CumulativeTotalRefunds += $SalesRow['returnvalue'];
@@ -545,10 +552,10 @@ if (isset($_POST['ShowSales'])){
 		<td class="number">' . locale_number_format($PrdTotalGP,$_SESSION['CompanyRecord']['decimalplaces']) . '</td>
 	</tr>';
 	if ($k==1){
-		echo '<tr class="EvenTableRows"><td colspan="8"><hr></td></tr>';
+		echo '<tr class="EvenTableRows"><td colspan="8"><hr /></td></tr>';
 		echo '<tr class="OddTableRows">';
 	} else {
-		echo '<tr class="OddTableRows"><td colspan="8"><hr></td></tr>';
+		echo '<tr class="OddTableRows"><td colspan="8"><hr /></td></tr>';
 		echo '<tr class="EvenTableRows">';
 	}
 	echo '<td colspan="2" class="number">' . _('GRAND Total') . '</td>
@@ -559,7 +566,7 @@ if (isset($_POST['ShowSales'])){
 		<td class="number">' . locale_number_format($CumulativeTotalCost,$_SESSION['CompanyRecord']['decimalplaces']) . '</td>
 		<td class="number">' . locale_number_format($CumulativeTotalGP,$_SESSION['CompanyRecord']['decimalplaces']) . '</td>
 		</tr>';
-	
+
 	echo '</table>';
 
 } //end of if user hit show sales
