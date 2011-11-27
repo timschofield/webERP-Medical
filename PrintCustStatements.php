@@ -23,22 +23,18 @@ if (isset($_GET['PrintPDF'])) {
 	$PaperSize='A4_Landscape';
 }
 
-
-
 if (isset($_GET['FromCust'])) {
-	$getFrom = $_GET['FromCust'];
-	$_POST['FromCust'] = $getFrom;
+	$_POST['FromCust'] = $_GET['FromCust'];
 }
 if (isset($_GET['ToCust'])) {
-	$getTo = $_GET['ToCust'];
-	$_POST['ToCust'] = $getTo;
+	$_POST['ToCust'] = $_GET['ToCust'];
 }
 
 
-If (isset($_POST['PrintPDF']) and isset($_POST['FromCust']) and $_POST['FromCust']!=''){
+if (isset($_POST['PrintPDF']) and isset($_POST['FromCust']) and $_POST['FromCust']!=''){
 	$_POST['FromCust'] = mb_strtoupper($_POST['FromCust']);
 
-	If (!isset($_POST['ToCust'])){
+	if (!isset($_POST['ToCust'])){
 	      $_POST['ToCust'] = $_POST['FromCust'];
 	} else {
 		$_POST['ToCust'] = mb_strtoupper($_POST['ToCust']);
