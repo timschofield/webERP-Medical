@@ -166,7 +166,7 @@ if (isset($PrintPDF) or isset($_GET['PrintPDF']) and $PrintPDF and isset($FromTr
 							AND debtortrans.debtorno=custbranch.debtorno
 							AND debtortrans.branchcode=custbranch.branchcode
 							AND custbranch.salesman=salesman.salesmancode";
-			if ($_POST['PrintEDI'] == 'No') {
+			if (isset($_POST['PrintEDI']) and $_POST['PrintEDI'] == 'No')
 				$sql = $sql . ' AND debtorsmaster.ediinvoices=0';
 			}
 		} // end else
