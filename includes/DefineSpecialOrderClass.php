@@ -22,6 +22,8 @@ Class SpecialOrder {
 	var $BranchName;
 	var $LinesOnOrder;
 	var $total;
+	var $Status;
+	var $AllowPrintPO;
 	var $PurchOrderNo;
 
 	function SpecialOrder(){
@@ -29,6 +31,7 @@ Class SpecialOrder {
 		$this->LineItems = array();
 		$this->total=0;
 		$this->LinesOnOrder=0;
+		$this->AllowPrintPO=0;
 	}
 
 	function add_to_order($LineNo, $Qty, $ItemDescr, $Price, $Cost, $StkCat, $ReqDelDate){
@@ -43,6 +46,14 @@ Class SpecialOrder {
 
 	function remove_from_order(&$LineNo){
 		 unset($this->LineItems[$LineNo]);
+	}
+
+	function Order_Value() {
+		$TotalValue=0;
+		foreach ($this->LineItems as $OrderedItems) {
+			$TotalValue += ($OrderedItems->Price)*($OrderedItems->Quantity);
+		}
+		return $TotalValue;
 	}
 
 
