@@ -14,10 +14,10 @@ if (isset($_POST['AddBatches'])){
 				the first entered one - no warning given though ? */
 				if ($_POST['Qty' . $i] > $ExistingBundleQty){
 					if ($LineItem->Serialised ==1){
-						echo "<br />" . $_POST['SerialNo' . $i] . " " . _('has already been sold');
+						echo '<br />' . $_POST['SerialNo' . $i] . " " . _('has already been sold');
 						$AddThisBundle = false;
 					} elseif ($ExistingBundleQty==0) { /* and its a batch */
-						echo "<br />There is none of " . $_POST['SerialNo' . $i] . " left.";
+						echo '<br />' . _('There is none of') .' '. $_POST['SerialNo' . $i] . .' '. _('left');
 						$AddThisBundle = false;
 					} else {
 					 	echo '<br />' . _('There is only') . ' ' . $ExistingBundleQty . ' ' . _('of') . ' ' . $_POST['SerialNo' . $i] .
