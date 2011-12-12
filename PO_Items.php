@@ -100,7 +100,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 
 		$result = DB_Txn_Begin($db);
 
-		if ($_SESSION['ExistingOrder']==0){ /*its a new order to be inserted */
+		if ($_SESSION['ExistingOrder'.$identifier]==0){ /*its a new order to be inserted */
 
 			$StatusComment=date($_SESSION['DefaultDateFormat']).' - ' . _('Order Created by') . ' <a href="mailto:'. $_SESSION['UserEmail'] .'">'.$_SESSION['PO'.$identifier]->Initiator.
 				'</a> - '.$_SESSION['PO'.$identifier]->StatusMessage.'<br />';

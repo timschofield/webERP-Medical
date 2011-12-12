@@ -7,7 +7,7 @@
 		unset ($_SESSION['PO'.$identifier]);
 	}
 
-	$_SESSION['ExistingOrder']=$_GET['ModifyOrderNumber'];
+	$_SESSION['ExistingOrder'.$identifier]=$_GET['ModifyOrderNumber'];
 	$_SESSION['RequireSupplierSelection'] = 0;
 	$_SESSION['PO'.$identifier] = new PurchOrder;
 
@@ -97,7 +97,7 @@
 			$_SESSION['PO'.$identifier]->Status = $myrow['status'];
 			$_SESSION['PO'.$identifier]->StatComments = $myrow['stat_comment'];
 			$_SESSION['PO'.$identifier]->DeliveryDate = ConvertSQLDate($myrow['deliverydate']);
-			$_SESSION['ExistingOrder'] = $_SESSION['PO'.$identifier]->OrderNo;
+			$_SESSION['ExistingOrder'.$identifier] = $_SESSION['PO'.$identifier]->OrderNo;
 			$_SESSION['PO'.$identifier]->PaymentTerms= $myrow['paymentterms'];
 
 			$supplierSQL = "SELECT suppliers.supplierid,

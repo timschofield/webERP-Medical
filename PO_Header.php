@@ -39,7 +39,7 @@ if (empty($_GET['identifier'])) {
 
 if (isset($_GET['NewOrder']) and isset($_SESSION['PO'.$identifier])){
 	unset($_SESSION['PO'.$identifier]);
-	$_SESSION['ExistingOrder']=0;
+	$_SESSION['ExistingOrder'.$identifier]=0;
 }
 
 if (isset($_POST['Select']) and empty($_POST['SupplierContact'])) {
@@ -111,7 +111,7 @@ if (isset($_POST['UpdateStatus']) AND $_POST['UpdateStatus']!='') {
 
 
 		if ($_POST['Status'] == 'Rejected' OR $_POST['Status'] == 'Cancelled' ) {
-			if(!isset($_SESSION['ExistingOrder']) OR $_SESSION['ExistingOrder']!=0) {
+			if(!isset($_SESSION['ExistingOrder'.$identifier]) OR $_SESSION['ExistingOrder'.$identifier]!=0) {
 			/* need to check that not already dispatched or invoiced by the supplier */
 				if($_SESSION['PO'.$identifier]->Any_Already_Received()==1){
 					$OKToUpdateStatus =0; //not ok to update the status
@@ -162,7 +162,7 @@ if (isset($_POST['UpdateStatus']) AND $_POST['UpdateStatus']!='') {
 			$SQL = "UPDATE purchorders SET status='" . $_POST['Status']. "',
 																		stat_comment='" . $_SESSION['PO'.$identifier]->StatComments ."',
 																		allowprint='".$AllowPrint."'
-										WHERE purchorders.orderno ='" . $_SESSION['ExistingOrder'] ."'";
+										WHERE purchorders.orderno ='" . $_SESSION['ExistingOrder'.$identifier] ."'";
 
 			$ErrMsg = _('The order status could not be updated because');
 			$UpdateResult=DB_query($SQL,$db,$ErrMsg);
@@ -175,7 +175,7 @@ if (isset($_GET['NewOrder']) and isset($_GET['StockID']) and isset($_GET['Select
 		/*
 		* initialise a new order
 		*/
-		$_SESSION['ExistingOrder']=0;
+		$_SESSION['ExistingOrder'.$identifier]=0;
 		unset($_SESSION['PO'.$identifier]);
 		/* initialise new class object */
 		$_SESSION['PO'.$identifier] = new PurchOrder;
@@ -275,7 +275,7 @@ if (!isset($_SESSION['PO'.$identifier])){
 	 * is where the details of the order are either updated or
 	 * inserted depending on the value of ExistingOrder */
 
-		$_SESSION['ExistingOrder']=0;
+		$_SESSION['ExistingOrder'.$identifier]=0;
 		$_SESSION['PO'.$identifier] = new PurchOrder;
 		$_SESSION['PO'.$identifier]->AllowPrintPO = 1; /*Of course cos the order aint even started !!*/
 		$_SESSION['PO'.$identifier]->GLLink = $_SESSION['CompanyRecord']['gllink_stock'];
@@ -606,7 +606,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 				' . $_SESSION['PO'.$identifier]->SupplierName . ' - ' . _('All amounts stated in') . '
 				' . $_SESSION['PO'.$identifier]->CurrCode . '<br />';
 
-	if ($_SESSION['ExistingOrder']) {
+	if ($_SESSION['ExistingOrder'.$identifier]) {
 		echo  _(' Modify Purchase Order Number') . ' ' . $_SESSION['PO'.$identifier]->OrderNo;
 		echo '</p>';
 	}
@@ -730,7 +730,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 //sub table starts
 	echo '<table class="selection" width="100%">';
 	echo '<tr><td>' . _('PO Date') . ':</td><td>';
-	if ($_SESSION['ExistingOrder']!=0){
+	if ($_SESSION['ExistingOrder'.$identifier]!=0){
 		echo ConvertSQLDate($_SESSION['PO'.$identifier]->Orig_OrderDate);
 	} else {
 		/* DefaultDateFormat defined in config.php */
@@ -791,13 +791,13 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 									</select></td>';
 		echo '<td><input type="submit" name="AllowRePrint" value="Update" /></td></tr>';
 	} elseif ($Printed) {
-		echo '<tr><td colspan="2"><a target="_blank"  href="' . $rootpath . '/PO_PDFPurchOrder.php?OrderNo=' . $_SESSION['ExistingOrder'] . '&identifier='.$identifier. '">' . _('Reprint Now') . '</a></td></tr>';
+		echo '<tr><td colspan="2"><a target="_blank"  href="' . $rootpath . '/PO_PDFPurchOrder.php?OrderNo=' . $_SESSION['ExistingOrder'.$identifier] . '&identifier='.$identifier. '">' . _('Reprint Now') . '</a></td></tr>';
 	}
 
 	echo '</table>';
 
 	echo '<td style="width:50%" valign="top"><table class="selection" width="100%">';
-	if($_SESSION['ExistingOrder'] != 0 and $_SESSION['PO'.$identifier]->Status == PurchOrder::STATUS_PRINTED){
+	if($_SESSION['ExistingOrder'.$identifier] != 0 and $_SESSION['PO'.$identifier]->Status == PurchOrder::STATUS_PRINTED){
 		echo '<tr><td><a href="' .$rootpath . '/GoodsReceived.php?&PONumber=' . $_SESSION['PO'.$identifier]->OrderNo . '&identifier='.$identifier.'">'._('Receive this order').'</a></td></tr>';
 	}
 
