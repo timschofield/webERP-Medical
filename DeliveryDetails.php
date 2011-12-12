@@ -313,7 +313,7 @@ UNTIL ONLINE CREDIT CARD PROCESSING IS PERFORMED ASSUME OK TO PROCESS
 	} #end if else freight charge not altered
 } #end if process order
 
-if (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 and $_SESSION['ExistingOrder']==0){
+if (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 and $_SESSION['ExistingOrder'.$identifier]==0){
 
 /* finally write the order header to the database and then the order line details */
 
@@ -648,7 +648,7 @@ if (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 and $_SESSION['ExistingOrder']
 	include('includes/footer.inc');
 	exit;
 
-} elseif (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 and $_SESSION['ExistingOrder']!=0){
+} elseif (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 and $_SESSION['ExistingOrder'.$identifier]!=0){
 
 /* update the order header then update the old order line details and insert the new lines */
 
@@ -662,7 +662,7 @@ if (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 and $_SESSION['ExistingOrder']
 	if ($_SESSION['Items'.$identifier]->Quotation==0) { //now its being changed? to an order
 		$ContractResult = DB_query("SELECT contractref,
 											requireddate
-									FROM contracts WHERE orderno='" .  $_SESSION['ExistingOrder'] ."'
+									FROM contracts WHERE orderno='" .  $_SESSION['ExistingOrder'.$identifier] ."'
 									AND status=1",$db);
 		if (DB_num_rows($ContractResult)==1){ //then it is a contract quotation being changed to an order
 			$ContractRow = DB_fetch_array($ContractResult);
@@ -671,7 +671,7 @@ if (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 and $_SESSION['ExistingOrder']
 			$DbgMsg = _('The SQL that failed to update the contract status was');
 			$UpdContractResult=DB_query("UPDATE contracts SET status=2,
 																wo='" . $WONo . "'
-										WHERE orderno='" .$_SESSION['ExistingOrder'] . "'", $db,$ErrMsg,$DbgMsg,true);
+										WHERE orderno='" .$_SESSION['ExistingOrder'.$identifier] . "'", $db,$ErrMsg,$DbgMsg,true);
 			$ErrMsg = _('Could not insert the contract bill of materials');
 			$InsContractBOM = DB_query("INSERT INTO bom (parent,
 																									 component,
@@ -763,7 +763,7 @@ if (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 and $_SESSION['ExistingOrder']
 				printedpackingslip = '" . $_POST['ReprintPackingSlip'] . "',
 				quotation = '" . $_SESSION['Items'.$identifier]->Quotation . "',
 				deliverblind = '" . $_SESSION['Items'.$identifier]->DeliverBlind . "'
-			WHERE salesorders.orderno='" . $_SESSION['ExistingOrder'] ."'";
+			WHERE salesorders.orderno='" . $_SESSION['ExistingOrder'.$identifier] ."'";
 
 	$DbgMsg = _('The SQL that was used to update the order and failed was');
 	$ErrMsg = _('The order cannot be updated because');
@@ -786,7 +786,7 @@ if (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 and $_SESSION['ExistingOrder']
 								completed='" . $Completed . "',
 								poline='" . $StockItem->POLine . "',
 								itemdue='" . FormatDateForSQL($StockItem->ItemDue) . "'
-					WHERE salesorderdetails.orderno='" . $_SESSION['ExistingOrder'] . "'
+					WHERE salesorderdetails.orderno='" . $_SESSION['ExistingOrder'.$identifier] . "'
 					AND salesorderdetails.orderlineno='" . $StockItem->LineNumber . "'";
 
 		$DbgMsg = _('The SQL that was used to modify the order line and failed was');
@@ -810,11 +810,11 @@ if (isset($OK_to_PROCESS) and $OK_to_PROCESS == 1 and $_SESSION['ExistingOrder']
 	unset($_SESSION['Items'.$identifier]->LineItems);
 	unset($_SESSION['Items'.$identifier]);
 
-	prnMsg(_('Order Number') .' ' . $_SESSION['ExistingOrder'] . ' ' . _('has been updated'),'success');
+	prnMsg(_('Order Number') .' ' . $_SESSION['ExistingOrder'.$identifier] . ' ' . _('has been updated'),'success');
 
-	echo '<br /><table class="selection"><tr><td><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print') . '" alt="" /></td><td><a href="' . $rootpath . '/PrintCustOrder.php?identifier='.$identifier  . '&TransNo=' . $_SESSION['ExistingOrder'] . '">'. _('Print packing slip - pre-printed stationery') .'</a></td></tr>';
-	echo '<tr><td><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print') . '" alt="" /></td><td><a  target="_blank" href="' . $rootpath . '/PrintCustOrder_generic.php?identifier='.$identifier  . '&TransNo=' . $_SESSION['ExistingOrder'] . '">'. _('Print packing slip') . ' (' . _('Laser') . ')' .'</a></td></tr>';
-	echo '<tr><td><img src="'.$rootpath.'/css/'.$theme.'/images/reports.png" title="' . _('Invoice') . '" alt="" /></td><td><a href="' . $rootpath .'/ConfirmDispatch_Invoice.php?identifier='.$identifier  . '&OrderNumber=' . $_SESSION['ExistingOrder'] . '">'. _('Confirm Order Delivery Quantities and Produce Invoice') .'</a></td></tr>';
+	echo '<br /><table class="selection"><tr><td><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print') . '" alt="" /></td><td><a href="' . $rootpath . '/PrintCustOrder.php?identifier='.$identifier  . '&TransNo=' . $_SESSION['ExistingOrder'.$identifier] . '">'. _('Print packing slip - pre-printed stationery') .'</a></td></tr>';
+	echo '<tr><td><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print') . '" alt="" /></td><td><a  target="_blank" href="' . $rootpath . '/PrintCustOrder_generic.php?identifier='.$identifier  . '&TransNo=' . $_SESSION['ExistingOrder'.$identifier] . '">'. _('Print packing slip') . ' (' . _('Laser') . ')' .'</a></td></tr>';
+	echo '<tr><td><img src="'.$rootpath.'/css/'.$theme.'/images/reports.png" title="' . _('Invoice') . '" alt="" /></td><td><a href="' . $rootpath .'/ConfirmDispatch_Invoice.php?identifier='.$identifier  . '&OrderNumber=' . $_SESSION['ExistingOrder'.$identifier] . '">'. _('Confirm Order Delivery Quantities and Produce Invoice') .'</a></td></tr>';
 	echo '<tr><td><img src="'.$rootpath.'/css/'.$theme.'/images/sales.png" title="' . _('Order') . '" alt="" /></td><td><a href="' . $rootpath .'/SelectSalesOrder.php?identifier='.$identifier   . '">'. _('Select A Different Order') .'</a></td></tr></table>';
 	include('includes/footer.inc');
 	exit;
@@ -1152,7 +1152,7 @@ echo '</table>';
 
 echo '<br /><div class="centre"><input type="submit" name="BackToLineDetails" value="' . _('Modify Order Lines') . '" /><br />';
 
-if ($_SESSION['ExistingOrder']==0){
+if ($_SESSION['ExistingOrder'.$identifier]==0){
 	echo '<br /><br /><input type="submit" name="ProcessOrder" value="' . _('Place Order') . '" />';
 	echo '<br /><br /><input type="submit" name="MakeRecurringOrder" value="' . _('Create Recurring Order') . '" />';
 } else {

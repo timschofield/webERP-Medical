@@ -83,6 +83,7 @@ Class Cart {
 							$ActDispatchDate=NULL,
 							$QtyInvoiced=0,
 							$DiscCat='',
+							$DiscOverride=0,
 							$Controlled=0,
 							$Serialised=0,
 							$DecimalPlaces=0,
@@ -116,6 +117,7 @@ Class Cart {
 															$Qty,
 															$Price,
 															$Disc,
+															$DiscOverride,
 															$Units,
 															$ConversionFactor,
 															$Volume,
@@ -161,7 +163,7 @@ Class Cart {
 														itemdue,
 														poline)
 													VALUES('" . $this->LineCounter . "',
-														'" . $_SESSION['ExistingOrder'] . "',
+														'" . $_SESSION['ExistingOrder'.$identifier] . "',
 														'" . trim(mb_strtoupper($StockID)) ."',
 														'" . $Qty . "',
 														'" . $Price . "',
@@ -187,13 +189,14 @@ Class Cart {
 								$Units,
 								$ConversionFactor=1,
 								$Disc,
+								$DiscOverride,
 								$Narrative,
 								$UpdateDB='No',
 								$ItemDue,
 								$POLine,
 								$GPPercent,
 								$ItemProperties=array()){
-
+echo $DiscOverride.'xxx';
 		if ($Qty>0){
 			$this->LineItems[$UpdateLineNumber]->Quantity = $Qty;
 		}
@@ -201,6 +204,7 @@ Class Cart {
 		$this->LineItems[$UpdateLineNumber]->Units = $Units;
 		$this->LineItems[$UpdateLineNumber]->ConversionFactor = $ConversionFactor;
 		$this->LineItems[$UpdateLineNumber]->DiscountPercent = $Disc;
+		$this->LineItems[$UpdateLineNumber]->OverrideDiscount = $DiscOverride;
 		$this->LineItems[$UpdateLineNumber]->Narrative = $Narrative;
 		$this->LineItems[$UpdateLineNumber]->ItemDue = $ItemDue;
 		$this->LineItems[$UpdateLineNumber]->POLine = $POLine;
@@ -216,7 +220,7 @@ Class Cart {
 															narrative ='" . DB_escape_string($Narrative) . "',
 															itemdue = '" . FormatDateForSQL($ItemDue) . "',
 															poline = '" . DB_escape_string($POLine) . "'
-														WHERE orderno='" . $_SESSION['ExistingOrder'] . "'
+														WHERE orderno='" . $_SESSION['ExistingOrder'.$identifier] . "'
 														AND orderlineno='" . $UpdateLineNumber . "'"
 													, $db
 				, _('The order line number') . ' ' . $UpdateLineNumber .  ' ' . _('could not be updated'));
@@ -234,20 +238,20 @@ Class Cart {
 			if ($this->Some_Already_Delivered($LineNumber)==0){
 				/* nothing has been delivered, delete it. */
 				$result = DB_query("DELETE FROM salesorderdetails
-									WHERE orderno='" . $_SESSION['ExistingOrder'] . "'
+									WHERE orderno='" . $_SESSION['ExistingOrder'.$identifier] . "'
 									AND orderlineno='" . $LineNumber . "'",
 									$db,
 									_('The order line could not be deleted because')
 									);
-				prnMsg( _('Deleted Line Number'). ' ' . $LineNumber . ' ' . _('from existing Order Number').' ' . $_SESSION['ExistingOrder'], 'success');
+				prnMsg( _('Deleted Line Number'). ' ' . $LineNumber . ' ' . _('from existing Order Number').' ' . $_SESSION['ExistingOrder'.$identifier], 'success');
 			} else {
 				/* something has been delivered. Clear the remaining Qty and Mark Completed */
 				$result = DB_query("UPDATE salesorderdetails SET quantity=qtyinvoiced, completed=1
-									WHERE orderno='".$_SESSION['ExistingOrder']."' AND orderlineno='" . $LineNumber . "'" ,
+									WHERE orderno='".$_SESSION['ExistingOrder'.$identifier]."' AND orderlineno='" . $LineNumber . "'" ,
 									$db,
 								   _('The order line could not be updated as completed because')
 								   );
-				prnMsg(_('Removed Remaining Quantity and set Line Number '). ' ' . $LineNumber . ' ' . _('as Completed for existing Order Number').' ' . $_SESSION['ExistingOrder'], 'success');
+				prnMsg(_('Removed Remaining Quantity and set Line Number '). ' ' . $LineNumber . ' ' . _('as Completed for existing Order Number').' ' . $_SESSION['ExistingOrder'.$identifier], 'success');
 			}
 		}
 		/* Since we need to check the LineItem above and might affect the DB, don't unset until after DB is updates occur */
@@ -429,6 +433,7 @@ Class LineDetails {
 	var $Quantity;
 	var $Price;
 	var $DiscountPercent;
+	var $OverrideDiscount;
 	var $Units;
 	var $ConversionFactor;
 	var $Volume;
@@ -462,6 +467,7 @@ Class LineDetails {
 							$Qty,
 							$Prc,
 							$DiscPercent,
+							$DiscOverride,
 							$Units,
 							$ConversionFactor,
 							$Volume,
@@ -491,6 +497,7 @@ Class LineDetails {
 		$this->Quantity = $Qty;
 		$this->Price = $Prc;
 		$this->DiscountPercent = $DiscPercent;
+		$this->DiscountOverride = $DiscOverride;
 		$this->Units = $Units;
 		$this->ConversionFactor = $ConversionFactor;
 		$this->Volume = $Volume;
