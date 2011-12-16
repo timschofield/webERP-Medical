@@ -645,7 +645,7 @@ if (isset($_POST['SearchCustomers'])){
 							FROM custbranch
 							LEFT JOIN debtorsmaster
 							ON custbranch.debtorno=debtorsmaster.debtorno
-							WHERE custbranch.debtorno " . LIKE . " '%" . $_POST['CustCode'] . "%' OR custbranch.branchcode " . LIKE . " '%" . $_POST['CustCode'] . "%'
+							WHERE custbranch.branchcode " . LIKE . " '%" . $_POST['CustCode'] . "%'
 							AND custbranch.disabletrans=0
 							ORDER BY custbranch.debtorno";
 
