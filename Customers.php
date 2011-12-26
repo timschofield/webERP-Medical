@@ -877,7 +877,15 @@ if (!isset($DebtorNo)) {
 
 //	echo '</td></tr><tr><td colspan="2">';
 
-  	$sql = "SELECT * FROM custcontacts where debtorno='".$DebtorNo."' ORDER BY contid";
+  	$sql = "SELECT contid,
+					debtorno,
+					contactname,
+					role,
+					phoneno,
+					notes
+				FROM custcontacts
+				WHERE debtorno='".$DebtorNo."'
+				ORDER BY contid";
 	$result = DB_query($sql,$db);
 
 	echo '<table class="selection">';
@@ -913,13 +921,13 @@ if (!isset($DebtorNo)) {
 				<td>%s</td>
 				<td>%s</td>
 				</tr>',
-				$myrow[2],
-				$myrow[3],
-				$myrow[4],
-				$myrow[5],
-				$myrow[0],
-				$myrow[1],
-				$myrow[1]);
+				$myrow['contactname'],
+				$myrow['role'],
+				$myrow['phoneno'],
+				$myrow['notes'],
+				$myrow['contid'],
+				$myrow['debtorno'],
+				$myrow['debtorno']);
 		} else {
 			printf('<td>%s</td>
 				<td>%s</td>
@@ -928,15 +936,15 @@ if (!isset($DebtorNo)) {
 				<td><a href="AddCustomerContacts.php?Id=%s&amp;DebtorNo=%s">'. _('Edit'). '</a></td>
 				<td><a href="%sID=%s&amp;DebtorNo=%s&amp;delete=1">'. _('Delete'). '</a></td>
 				</tr>',
-				$myrow[2],
-				$myrow[3],
-				$myrow[4],
-				$myrow[5],
-				$myrow[0],
-				$myrow[1],
+				$myrow['contactname'],
+				$myrow['role'],
+				$myrow['phoneno'],
+				$myrow['notes'],
+				$myrow['contid'],
+				$myrow['debtorno'],
 				$_SERVER['PHP_SELF'] . '?',
-				$myrow[0],
-				$myrow[1]);
+				$myrow['contid'],
+				$myrow['debtorno']);
 		}
 	}//END WHILE LIST LOOP
 	echo '</table>';
@@ -944,9 +952,13 @@ if (!isset($DebtorNo)) {
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?DebtorNo='.$DebtorNo.'&amp;ID='.$ID.'&amp;Edit'.$Edit.'">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	if (isset($Edit) and $Edit!='') {
-		$SQLcustcontacts="SELECT * from custcontacts
+		$SQLcustcontacts="SELECT contactname,
+								role,
+								phoneno,
+								notes
+							FROM custcontacts
 							WHERE debtorno='".$DebtorNo."'
-							and contid='".$ID."'";
+								AND contid='".$ID."'";
 		$resultcc = DB_query($SQLcustcontacts,$db);
 		$myrowcc = DB_fetch_array($resultcc);
 		$_POST['custname']=$myrowcc['contactname'];
