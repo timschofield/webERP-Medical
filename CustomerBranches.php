@@ -95,7 +95,7 @@ if (isset($_POST['submit'])) {
 	}
 	if ($_SESSION['geocode_integration']==1 ){
 		// Get the lat/long from our geocoding host
-		$sql = "SELECT * FROM geocode_param WHERE 1";
+		$sql = "SELECT geocode_key, map_host FROM geocode_param WHERE 1";
 		$ErrMsg = _('An error occurred in retrieving the information');
 		$resultgeo = DB_query($sql, $db, $ErrMsg);
 		$row = DB_fetch_array($resultgeo);
@@ -108,11 +108,11 @@ if (isset($_POST['submit'])) {
 				echo '<div class="warn">' . _('Warning - Geocode Integration is enabled, but no hosts are setup.  Go to Geocode Setup') . '</div>';
 				} else {
 
-		$address = $_POST["BrAddress1"] . ", " . $_POST["BrAddress2"] . ", " . $_POST["BrAddress3"] . ", " . $_POST["BrAddress4"];
+		$address = $_POST['BrAddress1'] . ', ' . $_POST['BrAddress2'] . ', ' . $_POST['BrAddress3'] . ', ' . $_POST['BrAddress4'];
 
-		$base_url = "http://" . MAPS_HOST . "/maps/geo?output=xml" . "&key=" . KEY;
-		$request_url = $base_url . "&q=" . urlencode($address);
-		$xml = simplexml_load_string(utf8_encode(file_get_contents($request_url))) or die("url not loading");
+		$base_url = 'http://' . MAPS_HOST . '/maps/geo?output=xml' . '&key=' . KEY;
+		$request_url = $base_url . '&q=' . urlencode($address);
+		$xml = simplexml_load_string(utf8_encode(file_get_contents($request_url))) or die('url not loading');
 //		$xml = simplexml_load_file($request_url) or die("url not loading");
 
 	  	$coordinates = $xml->Response->Placemark->Point->coordinates;
