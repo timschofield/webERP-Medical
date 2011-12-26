@@ -554,6 +554,7 @@ if ((isset($_SESSION['Items'.$identifier])) OR isset($NewItem)) {
 									$OrderLine->Units,
 									$OrderLine->ConversionFactor,
 									($DiscountPercentage/100),
+									0,
 									$Narrative,
 									'Yes', /*Update DB */
 									$_POST['ItemDue_' . $OrderLine->LineNumber],
