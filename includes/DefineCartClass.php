@@ -196,7 +196,7 @@ Class Cart {
 								$POLine,
 								$GPPercent,
 								$ItemProperties=array()){
-echo $DiscOverride.'xxx';
+
 		if ($Qty>0){
 			$this->LineItems[$UpdateLineNumber]->Quantity = $Qty;
 		}
