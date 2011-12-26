@@ -77,8 +77,15 @@ function DB_query ($SQL,
 20071102 Change from mysql to mysqli;
 	$result=mysql_query($SQL,$Conn);
 */
-
-
+/*	$ExplainSQL="EXPLAIN EXTENDED ".$SQL;
+	$AnalysisResult=mysqli_query($Conn, $ExplainSQL);
+	while ($AnalysisResult and $AnalysisRow=mysqli_fetch_row($AnalysisResult)) {
+		$Analysis=print_r($AnalysisRow, true);
+		$TrimmedSQL = str_replace("\t",'',str_replace("\n",' ',$SQL));
+		error_log($TrimmedSQL."\n", 3, '/home/tim/weberp'.date('Ymd').'.log');
+		error_log($Analysis."\n", 3, '/home/tim/weberp'.date('Ymd').'.log');
+	}
+*/
 	$result=mysqli_query($Conn, $SQL);
 	$_SESSION['LastInsertId'] = mysqli_insert_id($Conn);
 
