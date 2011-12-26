@@ -5,12 +5,11 @@
 echo '<table width="100%" id="footer">';
 
 echo '<tr>';
-echo '<td width="33%"></td><td class="footer">';
+echo '<td style="width:33%"></td><td class="footer">';
 echo '<img src="'. $rootpath . '/' . $_SESSION['LogoFile'] . '" width="120" alt="webERP" title="webERP ' . _('Copyright') . ' &copy; webrp.org - ' . date('Y') . '" /></td>';
-echo '<td width="33%" class="footer" style="text-align: right">'.(strftime('%A')).', '.(date($_SESSION['DefaultDateFormat']).' | '.(strftime(($DefaultClock==12) ? '%I:%M %p' : '%H:%M'))).'</td>';
-echo '<br />';
+echo '<td class="footer" style="text-align: right;width:33%">'.(strftime('%A')).', '.(date($_SESSION['DefaultDateFormat']).' | '.(strftime(($DefaultClock==12) ? '%I:%M %p' : '%H:%M'))).'</td>';
 
-echo '</td></tr>';
+echo '</tr>';
 
 echo '<tr><td colspan="3" class="footer">webERP v' . $_SESSION['VersionNumber'] . ' ' . _('Copyright') . ' &copy; web-erp.org - 2007-'.date('Y').'</td></tr>';
 
