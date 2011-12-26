@@ -576,7 +576,7 @@ if (isset($_GET['Application'])){ /*This is sent by this page (to itself) when t
 
 echo '<table width="99%">
 		<tr>
-			<td width="10%" valign="top">';
+			<td style="width:10%" valign="top">';
 echo '<table class="main_menu" width="100%" cellspacing="0" cellpadding="0" border="0">';
 
 	$i=0;
@@ -603,7 +603,7 @@ while ($i < count($ModuleLink)){
 echo '</table>';
 
 echo '</td>';
-echo '<td width="30%" valign="top">';
+echo '<td style="width:30%" valign="top">';
 if ($_SESSION['Module']=='system') {
 	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/company.png" title="' . _('General Setup Options') . '" alt="' . _('General Setup Options') . '" /><b>' . _('General Setup Options') . '</b>';
 } else {
@@ -636,7 +636,7 @@ echo '</table>';
 echo '</td>';
 
 
-echo '<td width="30%" valign="top">';
+echo '<td style="width:30%" valign="top">';
 if ($_SESSION['Module']=='system') {
 	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/ar.png" title="' . _('Receivables/Payables Setup') . '" alt="' . _('Receivables/Payables Setup') . '" /><b>' . _('Receivables/Payables Setup') . '</b>';
 } else {
@@ -669,7 +669,7 @@ echo '</table>';
 echo '</td>';
 
 
-echo '<td width="30%" valign="top">';
+echo '<td style="width:30%" valign="top">';
 if ($_SESSION['Module']=='system') {
 	$Header='<img src="' . $rootpath . '/css/' . $theme . '/images/inventory.png" title="' . _('Inventory Setup') . '" alt="' . _('Inventory Setup') . '" /><b>' . _('Inventory Setup') . '</b>';
 } else {
@@ -732,7 +732,7 @@ be generated, one for standard reports and the other for custom reports.
 
 	$RptLinks = '';
 	for ($Def=1; $Def>=0; $Def--) {
-		$RptLinks .= '<tr><td class="menu_group_headers"><div align="center">'.$Title[$Def].'</div></td></tr>';
+		$RptLinks .= '<tr><td class="menu_group_headers"><div style="text-align:center">'.$Title[$Def].'</div></td></tr>';
 		$NoEntries = true;
 		if ($ReportList) { // then there are reports to show, show by grouping
 			foreach ($ReportList as $Report) {
