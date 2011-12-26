@@ -158,7 +158,7 @@ class XhtmlValidator
     'href',
     'hreflang',
     'name',
-    'rel' => '/^(alternate|designates|stylesheet|start|next|prev|contents|index|glossary|copyright|chapter|section|subsection|appendix|help|bookmark| |shortcut|icon)+$/',
+    'rel' => '/^(alternate|designates|external|stylesheet|start|next|prev|contents|index|glossary|copyright|chapter|section|subsection|appendix|help|bookmark| |shortcut|icon)+$/',
     'rev' => '/^(alternate|designates|stylesheet|start|next|prev|contents|index|glossary|copyright|chapter|section|subsection|appendix|help|bookmark| |shortcut|icon)+$/',
     'shape' => '/^(rect|rectangle|circ|circle|poly|polygon)$/',
     'type',
@@ -1067,7 +1067,7 @@ class XhtmlValidator
         $xhtml_copy = $this->convertLiteralEntitiesToNumericalEntities($xhtml_copy);
         $xhtml_copy = '<all>'.$xhtml_copy.'</all>';
         if (!xml_parse($this->_parser, $xhtml_copy)) {
-            $this->addError($this->translate('XHTML is not well-formed.') .' '.xml_error_string(xml_get_error_code($this->_parser)));
+           $this->addError($this->translate('XHTML is not well-formed.') .' '.xml_error_string(xml_get_error_code($this->_parser)));
         }
         return !$this->hasErrors($xhtml);
     }
