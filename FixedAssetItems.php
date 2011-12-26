@@ -314,12 +314,12 @@ if (isset($_POST['submit'])) {
 		$CancelDelete =1; //cannot delete assets where NBV is not 0
 		prnMsg(_('The asset still has a net book value - only assets with a zero net book value can be deleted'),'error');
 	}
-	$result = DB_query("SELECT * FROM fixedassettrans WHERE assetid='" . $AssetID . "'",$db);
+	$result = DB_query("SELECT id FROM fixedassettrans WHERE assetid='" . $AssetID . "'",$db);
 	if (DB_num_rows($result) > 0){
 		$CancelDelete =1; /*cannot delete assets with transactions */
 		prnMsg(_('The asset has transactions associated with it. The asset can only be deleted when the fixed asset transactions are purged, otherwise the integrity of fixed asset reports may be compromised'),'error');
 	}
-	$result = DB_query("SELECT * FROM purchorderdetails WHERE assetid='" . $AssetID . "'",$db);
+	$result = DB_query("SELECT podetailitem FROM purchorderdetails WHERE assetid='" . $AssetID . "'",$db);
 	if (DB_num_rows($result) > 0){
 		$CancelDelete =1; /*cannot delete assets where there is a purchase order set up for it */
 		prnMsg(_('There is a purchase order set up for this asset. The purchase order line must be deleted first'),'error');
