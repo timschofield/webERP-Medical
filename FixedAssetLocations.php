@@ -25,7 +25,11 @@ if (isset($_POST['submit']) and !isset($_POST['delete'])) {
 	}
 }
 if (isset($_GET['SelectedLocation'])) {
-	$sql="SELECT * FROM fixedassetlocations WHERE locationid='".$_GET['SelectedLocation']."'";
+	$sql="SELECT locationid,
+				locationdescription,
+				parentlocationid
+			FROM fixedassetlocations
+			WHERE locationid='".$_GET['SelectedLocation']."'";
 	$result = DB_query($sql, $db);
 	$myrow = DB_fetch_array($result);
 	$LocationID = $myrow['locationid'];
@@ -80,7 +84,10 @@ if (isset($_POST['update']) and !isset($_POST['delete'])) {
 	}
 }
 
-$sql="SELECT * FROM fixedassetlocations";
+$sql="SELECT locationid,
+				locationdescription,
+				parentlocationid
+			FROM fixedassetlocations";
 $result=DB_query($sql, $db);
 
 if (DB_num_rows($result) > 0) {
@@ -116,7 +123,11 @@ echo '<td><input type="text" name="LocationDescription" size="20" value="'.$Loca
 echo '<tr><th style="text-align:left">'._('Parent Location').'</th>';
 echo '<td><select name="ParentLocationID">';
 
-$sql="SELECT * FROM fixedassetlocations";
+$sql="SELECT locationid,
+			locationdescription,
+			parentlocationid
+		FROM fixedassetlocations
+		WHERE locationid='".$_GET['SelectedLocation']."'";
 $result=DB_query($sql, $db);
 
 echo '<option value=""></option>';
