@@ -59,11 +59,11 @@ if (!isset($_SESSION['SPL']->SupplierID)){
 	$DbgMsg = _('The SQL used to retrieve the supplier details and failed was');
 	$result =DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
-	$myrow = DB_fetch_row($result);
+	$myrow = DB_fetch_array($result);
 	$_SESSION['SPL']->SupplierID = $_SESSION['SupplierID'];
-	$_SESSION['SPL']->SupplierName = $myrow[0];
-	$_SESSION['SPL']->SuppCurrCode = $myrow[1];
-	$_SESSION['SPL']->SuppCurrExRate = $myrow[2];
+	$_SESSION['SPL']->SupplierName = $myrow['suppname'];
+	$_SESSION['SPL']->SuppCurrCode = $myrow['currcode'];
+	$_SESSION['SPL']->SuppCurrExRate = $myrow['rate'];
 }
 if (!isset($_SESSION['SPL']->CustomerID)){
 	// Now check to ensure this account is not on hold */
@@ -83,15 +83,15 @@ if (!isset($_SESSION['SPL']->CustomerID)){
 	$result =DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
 	$myrow = DB_fetch_row($result);
-	if ($myrow[1] != 1){
-		if ($myrow[1]==2){
-			prnMsg(_('The') . ' ' . $myrow[0] . ' ' . _('account is currently flagged as an account that needs to be watched please contact the credit control personnel to discuss'),'warn');
+	if ($myrow['dissallowinvoices'] != 1){
+		if ($myrow['dissallowinvoices']==2){
+			prnMsg(_('The') . ' ' . $myrow['name'] . ' ' . _('account is currently flagged as an account that needs to be watched please contact the credit control personnel to discuss'),'warn');
 		}
         }
 	$_SESSION['SPL']->CustomerID = $_SESSION['CustomerID'];
-	$_SESSION['SPL']->CustomerName = $myrow[0];
-	$_SESSION['SPL']->CustCurrCode = $myrow[2];
-	$_SESSION['SPL']->CustCurrExRate = $myrow[3];
+	$_SESSION['SPL']->CustomerName = $myrow['dissallowinvoices'];
+	$_SESSION['SPL']->CustCurrCode = $myrow['currcode'];
+	$_SESSION['SPL']->CustCurrExRate = $myrow['rate'];
 }
 
 
@@ -256,6 +256,47 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 
 
 	if ($InputError!=1){
+
+		if (IsEmailAddress($_SESSION['UserEmail'])){
+			$UserDetails  = ' <a href="mailto:' . $_SESSION['UserEmail'] . '">' . $_SESSION['UsersRealName']. '</a>';
+		} else {
+			$UserDetails  = ' ' . $_SESSION['UsersRealName'] . ' ';
+		}
+
+		if ($_SESSION['AutoAuthorisePO']==1) {
+			//if the user has authority to authorise the PO then it will automatically be authorised
+			$AuthSQL ="SELECT authlevel
+						FROM purchorderauth
+						WHERE userid='".$_SESSION['UserID']."'
+						AND currabrev='".$_SESSION['SPL']->SuppCurrCode."'";
+
+			$AuthResult=DB_query($AuthSQL,$db);
+			$AuthRow=DB_fetch_array($AuthResult);
+
+			if (DB_num_rows($AuthResult) > 0 AND $AuthRow['authlevel'] > $_SESSION['SPL']->Order_Value()) { //user has authority to authrorise as well as create the order
+				$StatusComment=date($_SESSION['DefaultDateFormat']).' - ' . _('Order Created and Authorised by') . $UserDetails . '<br />'.$_SESSION['SPL']->StatusComments.'<br />';
+				$_SESSION['SPL']->AllowPrintPO=1;
+				$_SESSION['SPL']->Status = 'Authorised';
+			} else { // no authority to authorise this order
+				if (DB_num_rows($AuthResult) ==0){
+					$AuthMessage = _('Your authority to approve purchase orders in') . ' ' . $_SESSION['SPL']->SuppCurrCode . ' ' . _('has not yet been set up') . '<br />';
+				} else {
+					$AuthMessage = _('You can only authorise up to').' '.$_SESSION['SPL']->SuppCurrCode.' '.$AuthRow['authlevel'] .'.<br />';
+				}
+
+				prnMsg( _('You do not have permission to authorise this purchase order').'.<br />'. _('This order is for').' '.
+					$_SESSION['SPL']->SuppCurrCode . ' '. $_SESSION['SPL']->Order_Value() .'. '.
+					$AuthMessage .
+					_('If you think this is a mistake please contact the systems administrator') . '<br />'.
+					_('The order will be created with a status of pending and will require authorisation'), 'warn');
+
+				$StatusComment=date($_SESSION['DefaultDateFormat']).' - ' . _('Order Created by') . $UserDetails;
+				$_SESSION['SPL']->Status = 'Pending';
+			}
+		} else { //auto authorise is set to off
+			$StatusComment=date($_SESSION['DefaultDateFormat']).' - ' . _('Order Created by') . $UserDetails;
+			$_SESSION['SPL']->Status = 'Pending';
+		}
 
 		$sql = "SELECT contact,
 				deladd1,
