@@ -26,7 +26,10 @@ if ( isset($_GET['CurrencyToShow']) ){
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('View Currency Trend') . '" alt="" />' . ' ' . _('View Currency Trend') . '</p>';
 	echo '<table>'; // First column
 
-	$SQL = "SELECT * FROM currencies";
+	$SQL = "SELECT currabrev,
+					country,
+					currency
+				FROM currencies";
 	$result=DB_query($SQL,$db);
 
 
