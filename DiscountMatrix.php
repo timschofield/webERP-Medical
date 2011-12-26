@@ -138,7 +138,7 @@ echo '<tr>
 	</tr>';
 echo '</table><br />';
 
-echo '<div class="centre"
+echo '<div class="centre">
 		<input tabindex="5" type="submit" name="submit" value="' . _('Enter Information') . '" /></div><br />';
 
 $sql = "SELECT sales_type,
