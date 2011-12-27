@@ -80,7 +80,7 @@ if (isset($_POST['submit'])) {
 
 		/*Check if there are already transactions against this account - cant allow change currency if there are*/
 
-		$sql = "SELECT * FROM banktrans WHERE bankact=" . $SelectedBankAccount;
+		$sql = "SELECT banktransid FROM banktrans WHERE bankact=" . $SelectedBankAccount;
 		$BankTransResult = DB_query($sql,$db);
 		if (DB_num_rows($BankTransResult)>0) {
 			$sql = "UPDATE bankaccounts
@@ -91,7 +91,7 @@ if (isset($_POST['submit'])) {
 				invoice ='" . $_POST['DefAccount'] . "'
 			WHERE accountcode = '" . $SelectedBankAccount . "'";
 			prnMsg(_('Note that it is not possible to change the currency of the account once there are transactions against it'),'warn');
-	echo '<br />';
+			echo '<br />';
 		} else {
 			$sql = "UPDATE bankaccounts
 				SET bankaccountname='" . $_POST['BankAccountName'] . "',
