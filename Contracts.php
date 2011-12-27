@@ -461,7 +461,7 @@ if(isset($_POST['CreateQuotation']) AND !$InputError){
 	$ContractPrice = ($ContractBOMCost+$ContractReqtsCost)/((100-$_SESSION['Contract'.$identifier]->Margin)/100);
 
 //Check if the item exists already
-	$sql = "SELECT * FROM stockmaster WHERE stockid='" . $_SESSION['Contract'.$identifier]->ContractRef."'";
+	$sql = "SELECT stockid FROM stockmaster WHERE stockid='" . $_SESSION['Contract'.$identifier]->ContractRef."'";
 	$ErrMsg =  _('The item could not be retrieved because');
 	$DbgMsg = _('The SQL that was used to find the item failed was');
 	$result = DB_query($sql,$db, $ErrMsg, $DbgMsg);
