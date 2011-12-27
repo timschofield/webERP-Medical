@@ -103,7 +103,15 @@ if ( isset($_POST['submit']) ) {
 
 if (!isset($Id)) {
 
-	$sql = "SELECT * FROM custcontacts where debtorno='".$DebtorNo."' ORDER BY contid";
+	$sql = "SELECT contid,
+					debtorno,
+					contactname,
+					role,
+					phoneno,
+					notes
+				FROM custcontacts
+				WHERE debtorno='".$DebtorNo."'
+				ORDER BY contid";
 	$result = DB_query($sql,$db);
 			//echo '<br />'.$sql;
 
@@ -130,16 +138,16 @@ if (!isset($Id)) {
 				<td>%s</td>
 				<td><a href="%sId=%s&DebtorNo=%s">'. _('Edit').' </td>
 				<td><a href="%sId=%s&DebtorNo=%s&delete=1">'. _('Delete'). '</td></tr>',
-				$myrow[2],
-				$myrow[3],
-				$myrow[4],
-				$myrow[5],
+				$myrow['contactname'],
+				$myrow['role'],
+				$myrow['phoneno'],
+				$myrow['notes'],
 				$_SERVER['PHP_SELF'] . '?',
-				$myrow[0],
-				$myrow[1],
+				$myrow['contid'],
+				$myrow['debtorno'],
 				$_SERVER['PHP_SELF'] . '?',
-				$myrow[0],
-				$myrow[1]);
+				$myrow['contid'],
+				$myrow['debtorno']);
 
 	}
 	//END WHILE LIST LOOP
@@ -159,8 +167,15 @@ if (!isset($_GET['delete'])) {
 	if (isset($Id)) {
 		//editing an existing Shipper
 
-		$sql = "SELECT * FROM custcontacts WHERE contid='".$Id."'
-					and debtorno='".$DebtorNo."'";
+		$sql = "SELECT contid,
+						contactname,
+						role,
+						phoneno,
+						notes,
+						debtorno
+					FROM custcontacts
+					WHERE contid='".$Id."'
+						AND debtorno='".$DebtorNo."'";
 
 		$result = DB_query($sql, $db);
 				//echo '<br />'.$sql;
