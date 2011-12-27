@@ -91,13 +91,21 @@ if ( isset($_POST['submit']) ) {
 	}
 
 if (!isset($Id)) {
-	$SQLname="SELECT * from debtorsmaster where debtorno='".$DebtorNo."'";
-	$Result = DB_query($SQLname,$db);
-	$row = DB_fetch_array($Result);
+	$SQLname="SELECT name from debtorsmaster WHERE debtorno='".$DebtorNo."'";
+	$result = DB_query($SQLname,$db);
+	$myrow = DB_fetch_array($result);
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' .
-		_('Notes for Customer').': <b>' .$row['name'].'</b></p><br />';
+		_('Notes for Customer').': <b>' .my$row['name'].'</b></p><br />';
 
-	$sql = "SELECT * FROM custnotes where debtorno='".$DebtorNo."' ORDER BY date DESC";
+	$sql = "SELECT noteid,
+					debtorno,
+					href,
+					note,
+					date,
+					priority
+				FROM custnotes
+				WHERE debtorno='".$DebtorNo."'
+				ORDER BY date DESC";
 	$result = DB_query($sql,$db);
 			//echo '<br />'.$sql;
 
@@ -124,16 +132,16 @@ if (!isset($Id)) {
 				<td>%s</td>
 				<td><a href="%sId=%s&DebtorNo=%s">'. _('Edit').' </td>
 				<td><a href="%sId=%s&DebtorNo=%s&delete=1">'. _('Delete'). '</td></tr>',
-				ConvertSQLDate($myrow[4]),
-				$myrow[3],
-				$myrow[2],
-				$myrow[5],
+				ConvertSQLDate($myrow['date']),
+				$myrow['note'],
+				$myrow['href'],
+				$myrow['priority'],
 				$_SERVER['PHP_SELF'] . '?',
-				$myrow[0],
-				$myrow[1],
+				$myrow['noteid'],
+				$myrow['debtorno'],
 				$_SERVER['PHP_SELF'] . '?',
-				$myrow[0],
-				$myrow[1]);
+				$myrow['noteid'],
+				$myrow['debtorno']);
 
 	}
 	//END WHILE LIST LOOP
@@ -152,8 +160,15 @@ if (!isset($_GET['delete'])) {
 	if (isset($Id)) {
 		//editing an existing
 
-		$sql = "SELECT * FROM custnotes WHERE noteid='".$Id."'
-					and debtorno='".$DebtorNo."'";
+		$sql = "SELECT noteid,
+						debtorno,
+						href,
+						note,
+						date,
+						priority
+					FROM custnotes
+					WHERE noteid='".$Id."'
+						AND debtorno='".$DebtorNo."'";
 
 		$result = DB_query($sql, $db);
 				//echo '<br />'.$sql;
