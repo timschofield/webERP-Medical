@@ -12,7 +12,7 @@ if ($_SESSION['RequirePickingNote']==0) {
 	$title = _('Picking Lists Not Enabled');
 	include('includes/header.inc');
 	echo '<br />';
-	prnMsg( _('The system is not configured for picking lists. Please consult your system administrator.'), 'info');
+	prnMsg( _('The system is not configured for picking lists. A configuration parameter is required where picking slips are required. Please consult your system administrator.'), 'info');
 	include('includes/footer.inc');
 	exit;
 }
