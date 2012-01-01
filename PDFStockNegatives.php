@@ -20,6 +20,7 @@ $DbgMsg = _('The sql that failed to retrieve the negative quantities was');
 
 $sql = "SELECT stockmaster.stockid,
                stockmaster.description,
+               stockmaster.decimalplaces,
                stockmaster.categoryid,
                locstock.loccode,
                locations.locationname,
@@ -48,7 +49,7 @@ do {
 
 	$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,130,$FontSize, $NegativesRow['loccode'] . ' - ' . $NegativesRow['locationname'], 'left');
 	$LeftOvers = $pdf->addTextWrap(170,$YPos,350,$FontSize,$NegativesRow['stockid'] . ' - ' .$NegativesRow['description'], 'left');
-	$LeftOvers = $pdf->addTextWrap(520,$YPos,30,$FontSize,$NegativesRow['quantity'], 'right');
+	$LeftOvers = $pdf->addTextWrap(520,$YPos,30,$FontSize,locale_number_format($NegativesRow['quantity'], $NegativesRow['decimalplaces']), 'right');
 
 	$pdf->line($Left_Margin, $YPos-2,$Page_Width-$Right_Margin, $YPos-2);
 
