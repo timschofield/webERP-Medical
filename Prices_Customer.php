@@ -4,16 +4,14 @@
 
 include('includes/session.inc');
 
+
 $result = DB_query("SELECT debtorsmaster.name,
 							debtorsmaster.currcode,
 							debtorsmaster.salestype
-						 FROM
-							debtorsmaster
-						 WHERE
-							debtorsmaster.debtorno='" . $_SESSION['CustomerID'] . "'",$db);
-$myrow = DB_fetch_row($result);
-
-$title = _('Special Prices for') . ' '. $myrow[0];
+						 FROM debtorsmaster
+						 WHERE debtorsmaster.debtorno='" . $_SESSION['CustomerID'] . "'",$db);
+$myrow = DB_fetch_array($result);
+$title = _('Special Prices for') . ' '. $myrow['name'];
 
 include('includes/header.inc');
 
@@ -23,7 +21,7 @@ if (isset($_GET['Item'])){
 	$Item = $_POST['Item'];
 }
 
-if (!isset($Item) OR !isset($_SESSION['CustomerID']) OR $_SESSION['CustomerID']==""){
+if (!isset($Item) OR !isset($_SESSION['CustomerID']) OR $_SESSION['CustomerID']==''){
 
 	prnMsg( _('A customer must be selected from the customer selection screen') . ', '
 		. _('then an item must be selected before this page is called') . '. '
@@ -33,36 +31,28 @@ if (!isset($Item) OR !isset($_SESSION['CustomerID']) OR $_SESSION['CustomerID']=
 	exit;
 }
 
-$result = DB_query("SELECT debtorsmaster.name,
-							debtorsmaster.currcode,
-							debtorsmaster.salestype
-						 FROM
-							debtorsmaster
-						 WHERE
-							debtorsmaster.debtorno='" . $_SESSION['CustomerID'] . "'",$db);
-$myrow = DB_fetch_row($result);
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . _('Special Customer Prices').'</p>';
-echo '<p class="page_title_text"><font color="blue"><b>' . $myrow[0] . ' ' . _('in') . ' ' . $myrow[1] . '<br />' . ' ' . _('for') . ' ';
+echo '<p class="page_title_text"><font color="blue"><b>' . $myrow['name'] . ' ' . _('in') . ' ' . $myrow['currcode'] . '<br />' . ' ' . _('for') . ' ';
 
-$CurrCode = $myrow[1];
-$SalesType = $myrow[2];
+$CurrCode = $myrow['currcode'];
+$SalesType = $myrow['salestype'];
 
 $result = DB_query("SELECT stockmaster.description,
 							stockmaster.mbflag
 					FROM stockmaster
 					WHERE stockmaster.stockid='" . $Item . "'",$db);
 
-$myrow = DB_fetch_row($result);
+$myrow = DB_fetch_array($result);
 if (DB_num_rows($result)==0){
 	prnMsg( _('The part code entered does not exist in the database') . '. ' . _('Only valid parts can have prices entered against them'),'error');
 	$InputError=1;
 }
-if ($myrow[1]=='K'){
+if ($myrow['mbflag']=='K'){
 	prnMsg(_('The part selected is a kit set item') .', ' . _('these items explode into their components when selected on an order') . ', ' . _('prices must be set up for the components and no price can be set for the whole kit'),'error');
 	exit;
 }
 
-echo $Item . ' - ' . $myrow[0] . '</b></font></p>';
+echo $Item . ' - ' . $myrow['description'] . '</b></font></p>';
 
 if (isset($_POST['submit'])) {
 
@@ -163,7 +153,7 @@ if (isset($_POST['submit'])) {
 	if ($InputError!=1){
 		$result = DB_query($sql,$db,'','',false,false);
 		if (DB_error_no($db)!=0){
-		   If ($msg==_('Price Updated')){
+		   if ($msg==_('Price Updated')){
 				$msg = _('The price could not be updated because') . ' - ' . DB_error_msg($db);
 			} else {
 				$msg = _('The price could not be added because') . ' - ' . DB_error_msg($db);
