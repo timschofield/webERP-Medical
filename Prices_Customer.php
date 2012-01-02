@@ -243,10 +243,10 @@ if (DB_num_rows($result) == 0) {
 			$EndDateDisplay = ConvertSQLDate($myrow['enddate']);
 		}
 		echo '<tr class="EvenTableRows">
-				<td class="number">'.locale_money_format($myrow['price'],$CurrCode).'</td>
+				<td class="number">'.locale_number_format($myrow['price'],$myrow['decimalplaces']).'</td>
 				<td>'.$myrow['units'].'</td>
 				<td class="number">'.locale_number_format($myrow['conversionfactor'],4).'</td>
-				<td class="number">'.$myrow['decimalplaces'].'</td>
+				<td class="number">'.locale_number_format($myrow['decimalplaces'], 0).'</td>
 				<td class="date">'.ConvertSQLDate($myrow['startdate']).'</td>
 				<td class="date">'.$EndDateDisplay.'</td>
 			</tr>';
@@ -310,11 +310,11 @@ if (DB_num_rows($result) == 0) {
 			$EndDateDisplay = ConvertSQLDate($myrow['enddate']);
 		}
 		echo '<tr bgcolor="#CCCCCC">
-				<td class="number">'.locale_money_format($myrow['price'],$CurrCode).'</td>
+				<td class="number">'.locale_number_format($myrow['price'],$myrow['decimalplaces']).'</td>
 				<td>'.$Branch.'</td>
 				<td>'.$myrow['units'].'</td>
 				<td class="number">'.locale_number_format($myrow['conversionfactor'],4).'</td>
-				<td class="number">'.$myrow['decimalplaces'].'</td>
+				<td class="number">'.locale_number_format($myrow['decimalplaces'],0).'</td>
 				<td>'.ConvertSQLDate($myrow['startdate']).'</td>
 				<td>'.$EndDateDisplay.'</td>
 				<td><a href="'.$_SERVER['PHP_SELF'].'?Item='.$Item.'&amp;Price='.$myrow['price'].'&amp;Branch='.$myrow['branchcode'].'&amp;StartDate='.$myrow['startdate'].'&amp;EndDate='.$myrow['enddate'].'&amp;Edit=1">' . _('Edit') . '</a></td>
