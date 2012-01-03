@@ -174,7 +174,7 @@ if the link is not active then OvAmount must be entered manually. */
 		$_SESSION['SuppTrans']->OvAmount = round($_SESSION['SuppTrans']->OvAmount,2);
 	}else {
 /*OvAmount must be entered manually */
-		 $_SESSION['SuppTrans']->OvAmount = round($_POST['OvAmount'],2);
+		 $_SESSION['SuppTrans']->OvAmount = round(filter_currency_input($_POST['OvAmount']),2);
 	}
 }
 
