@@ -354,12 +354,13 @@ if (isset($_POST['SearchParts'])){
 
 		$SQL = "SELECT stockmaster.stockid,
 				stockmaster.description,
+				stockmaster.decimalplaces,
 				SUM(locstock.quantity) AS qoh,
 				stockmaster.units
-			FROM stockmaster,
-				locstock
-			WHERE stockmaster.stockid=locstock.stockid
-			AND stockmaster.description " . LIKE . " '" . $SearchString . "'
+			FROM stockmaster
+			INNER JOIN locstock
+			ON stockmaster.stockid=locstock.stockid
+			WHERE stockmaster.description " . LIKE . " '" . $SearchString . "'
 			AND stockmaster.categoryid='" . $_POST['StockCat']. "'
 			GROUP BY stockmaster.stockid,
 				stockmaster.description,
@@ -369,12 +370,13 @@ if (isset($_POST['SearchParts'])){
 	 } elseif (isset($_POST['StockCode'])){
 		$SQL = "SELECT stockmaster.stockid,
 				stockmaster.description,
+				stockmaster.decimalplaces,
 				sum(locstock.quantity) as qoh,
 				stockmaster.units
-			FROM stockmaster,
-				locstock
-			WHERE stockmaster.stockid=locstock.stockid
-			AND stockmaster.stockid " . LIKE . " '%" . $_POST['StockCode'] . "%'
+			FROM stockmaster
+			INNER JOIN locstock
+			ON stockmaster.stockid=locstock.stockid
+			WHERE stockmaster.stockid " . LIKE . " '%" . $_POST['StockCode'] . "%'
 			AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
 			GROUP BY stockmaster.stockid,
 				stockmaster.description,
@@ -384,12 +386,13 @@ if (isset($_POST['SearchParts'])){
 	 } elseif (!isset($_POST['StockCode']) AND !isset($_POST['Keywords'])) {
 		$SQL = "SELECT stockmaster.stockid,
 				stockmaster.description,
+				stockmaster.decimalplaces,
 				sum(locstock.quantity) as qoh,
 				stockmaster.units
-			FROM stockmaster,
-				locstock
-			WHERE stockmaster.stockid=locstock.stockid
-			AND stockmaster.categoryid='" . $_POST['StockCat'] ."'
+			FROM stockmaster
+			INNER JOIN locstock
+			ON stockmaster.stockid=locstock.stockid
+			WHERE  stockmaster.categoryid='" . $_POST['StockCat'] ."'
 			GROUP BY stockmaster.stockid,
 				stockmaster.description,
 				stockmaster.units
@@ -519,7 +522,7 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 			</tr>',
 			$myrow['stockid'],
 			$myrow['description'],
-			$myrow['qoh'],
+			locale_number_format($myrow['qoh'], $myrow['decimalplaces']),
 			$myrow['units']);
 
 		$j++;
