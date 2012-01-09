@@ -181,7 +181,6 @@ if (isset($_POST['Currency']) AND $_POST['Currency']!=''){
 	}
 }
 
-
 if (isset($_POST['Narrative']) AND $_POST['Narrative']!=''){
 	$_SESSION['PaymentDetail']->Narrative=$_POST['Narrative'];
 }
@@ -197,6 +196,13 @@ if (isset($_POST['Discount']) AND $_POST['Discount']!=''){
 } else {
 	if (!isset($_SESSION['PaymentDetail']->Discount)) {
 	  $_SESSION['PaymentDetail']->Discount=0;
+  }
+}
+if (isset($_POST['cheque']) AND $_POST['cheque']!=''){
+	$_SESSION['PaymentDetail']->cheque=$_POST['cheque'];
+} else {
+	if (!isset($_SESSION['PaymentDetail']->cheque)) {
+	  $_SESSION['PaymentDetail']->cheque='';
   }
 }
 
@@ -381,6 +387,7 @@ if (isset($_POST['CommitBatch'])){
 													type,
 													bankact,
 													ref,
+													chequeno,
 													exrate,
 													functionalexrate,
 													transdate,
@@ -392,6 +399,7 @@ if (isset($_POST['CommitBatch'])){
 							'" . $PaymentItem->GLCode . "',
 							'" . substr(_('Act Transfer From ') . $_SESSION['PaymentDetail']->Account . ' - ' . $PaymentItem->Narrative,0,50) . "',
 							 " . ((filter_number_input($_SESSION['PaymentDetail']->ExRate)."*".filter_number_input($_SESSION['PaymentDetail']->FunctionalExRate))."/".filter_number_input($TrfToBankExRate)). ",
+							'" . $PaymentItem->cheque . "',
 							'" . $TrfToBankExRate . "',
 							'" . FormatDateForSQL($_SESSION['PaymentDetail']->DatePaid) . "',
 							'" . $_SESSION['PaymentDetail']->Paymenttype . "',
@@ -527,6 +535,7 @@ if (isset($_POST['CommitBatch'])){
 					type,
 					bankact,
 					ref,
+					chequeno,
 					exrate,
 					functionalexrate,
 					transdate,
@@ -537,6 +546,7 @@ if (isset($_POST['CommitBatch'])){
 				'" . $Transtype . "',
 				'" . $_SESSION['PaymentDetail']->Account . "',
 				'" . $_SESSION['PaymentDetail']->Narrative . "',
+				'" . $_SESSION['PaymentDetail']->cheque . "',
 				'" . filter_number_input($_SESSION['PaymentDetail']->ExRate) . "',
 				'" . filter_number_input($_SESSION['PaymentDetail']->FunctionalExRate) . "',
 				'" . FormatDateForSQL($_SESSION['PaymentDetail']->DatePaid) . "',
@@ -554,6 +564,7 @@ if (isset($_POST['CommitBatch'])){
 					type,
 					bankact,
 					ref,
+					chequeno,
 					exrate,
 					functionalexrate,
 					transdate,
@@ -563,7 +574,8 @@ if (isset($_POST['CommitBatch'])){
 				$SQL= $SQL . "VALUES ('" . $TransNo . "',
 					'" . $Transtype . "',
 					'" . $_SESSION['PaymentDetail']->Account . "',
-					'" . $_SESSION['PaymentDetail']->Narrative . "',
+					'" . $PaymentItem->Narrative . "',
+					'" . $_SESSION['PaymentDetail']->cheque . "',
 					'" . filter_number_input($_SESSION['PaymentDetail']->ExRate) . "',
 					'" . filter_number_input($_SESSION['PaymentDetail']->FunctionalExRate) . "',
 					'" . FormatDateForSQL($_SESSION['PaymentDetail']->DatePaid) . "',
@@ -589,6 +601,7 @@ if (isset($_POST['CommitBatch'])){
 		unset($_POST['Paymenttype']);
 		unset($_POST['Currency']);
 		unset($_POST['Narrative']);
+		unset($_POST['cheque']);
 		unset($_POST['Amount']);
 		unset($_POST['Discount']);
 		unset($_SESSION['PaymentDetail']->GLItems);
