@@ -279,7 +279,7 @@ if (isset($_POST['PrintPDF'])
 		$SalesTypesResult=DB_query($sql,$db);
 
 		while ($myrow=DB_fetch_array($SalesTypesResult)){
-		          echo '<option Value="' . $myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
+		          echo '<option value="' . $myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
 		}
 		echo '</select></td></tr>';
 
