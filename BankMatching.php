@@ -81,7 +81,7 @@ echo '<div class="page_help_text">' . _('Use this screen to match webERP Receipt
 echo '<form action="'. $_SERVER['PHP_SELF'] . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<input type="hidden" name="Type" Value="' . $Type . '" />';
+echo '<input type="hidden" name="Type" value="' . $Type . '" />';
 
 echo '<table class="selection"><tr>';
 echo '<td align=left>' . _('Bank Account') . ':</td><td colspan="3"><select tabindex="1" name="BankAccount">';
