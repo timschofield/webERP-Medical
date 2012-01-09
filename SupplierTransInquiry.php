@@ -18,7 +18,7 @@ echo '<td>' . _('Type') . ':</td><td><select name="TransType"> ';
 $sql = "SELECT typeid, typename FROM systypes WHERE typeid >= 20 AND typeid <= 23";
 $resultTypes = DB_query($sql,$db);
 
-echo '<option Value="All"> All </option>';
+echo '<option value="All"> All </option>';
 while ($myrow=DB_fetch_array($resultTypes)){
 	if (isset($_POST['TransType'])){
 		if ($myrow['typeid'] == $_POST['TransType']){
