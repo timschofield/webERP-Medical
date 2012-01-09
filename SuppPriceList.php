@@ -195,9 +195,9 @@ if (isset($_POST['PrintPDF'])) {
 	echo '<tr><td>' . _('Supplier') . ':</td><td><select name="supplier"> ';
 	while ($myrow=DB_fetch_array($result)){
 		if (isset($_POST['supplierid']) and ($myrow['supplierid'] == $_POST['supplierid'])) {
-			 echo '<option selected="True" Value="' . $myrow['supplierid'] . '">' . $myrow['supplierid'].' - '.$myrow['suppname'].'</option>';
+			 echo '<option selected="True" value="' . $myrow['supplierid'] . '">' . $myrow['supplierid'].' - '.$myrow['suppname'].'</option>';
 		} else {
-			 echo '<option Value="' . $myrow['supplierid'] . '">' . $myrow['supplierid'].' - '.$myrow['suppname'].'</option>';
+			 echo '<option value="' . $myrow['supplierid'] . '">' . $myrow['supplierid'].' - '.$myrow['suppname'].'</option>';
 		}
 	}
 	echo '</select></td></tr>';
@@ -205,7 +205,7 @@ if (isset($_POST['PrintPDF'])) {
 	$sql="SELECT categoryid,categorydescription FROM `stockcategory`";
 	$result = DB_query($sql,$db);
 	echo '<tr><td>' . _('Category') . ':</td><td><select name="category"> ';
-		echo '<option Value="all">' ._('ALL').'</option>';
+	echo '<option value="all">' ._('ALL').'</option>';
 	while ($myrow=DB_fetch_array($result)){
 		if (isset($_POST['categoryid']) and ($myrow['categoryid'] == $_POST['categoryid'])) {
 			 echo '<option selected="True" value="' . $myrow['categoryid'] . '">' . $myrow['categoryid']-$myrow['categorydescription'].'</option>';
