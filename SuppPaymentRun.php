@@ -271,9 +271,9 @@ if ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 
 	while ($myrow=DB_fetch_array($result)){
 	if ($myrow['currabrev'] == $_SESSION['CompanyRecord']['currencydefault']){
-			echo '<option selected="True" Value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 	} else {
-		echo '<option Value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
+		echo '<option value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 	}
 	}
 	echo '</select></td></tr>';
