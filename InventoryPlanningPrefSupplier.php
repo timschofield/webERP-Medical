@@ -481,7 +481,7 @@ if (isset($_POST['PrintPDF'])){
 	$sql = "SELECT loccode, locationname FROM locations";
 	$LocnResult=DB_query($sql,$db);
 
-	echo '<option Value="All">' . _('All Locations') . '</option>';
+	echo '<option value="All">' . _('All Locations') . '</option>';
 
 	while ($myrow=DB_fetch_array($LocnResult)){
 			  echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
