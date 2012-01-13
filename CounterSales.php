@@ -2134,7 +2134,7 @@ if (!isset($_POST['ProcessSale'])){
 								AND purchorderdetails.itemcode='" . $myrow['stockid'] . "'";
 
 				$ErrMsg = _('The order details for this product cannot be retrieved because');
-				$PurchResult = db_query($sql,$db,$ErrMsg);
+				$PurchResult = DB_query($sql,$db,$ErrMsg);
 
 				$PurchRow = DB_fetch_row($PurchResult);
 				if ($PurchRow[0]!=null){
@@ -2148,8 +2148,8 @@ if (!isset($_POST['ProcessSale'])){
 							   FROM woitems
 							   WHERE stockid='" . $myrow['stockid'] ."'";
 				$ErrMsg = _('The order details for this product cannot be retrieved because');
-				$WoResult = db_query($sql,$db,$ErrMsg);
-				$WoRow = db_fetch_row($WoResult);
+				$WoResult = DB_query($sql,$db,$ErrMsg);
+				$WoRow = DB_fetch_row($WoResult);
 				if ($WoRow[0]!=null){
 					$WoQty =  $WoRow[0];
 				} else {
@@ -2316,7 +2316,7 @@ if (!isset($_POST['ProcessSale'])){
 							WHERE stockid='" . $myrow['stockid'] ."'
 							AND loccode='".$_SESSION['Items'.$identifier]->Location."'";
 				$ErrMsg = _('The batch details cannot be found');
-				$BatchResult = db_query($sql,$db,$ErrMsg);
+				$BatchResult = DB_query($sql,$db,$ErrMsg);
 
 				if ($myrow['controlled']==0) {
 					if ($k==1){
