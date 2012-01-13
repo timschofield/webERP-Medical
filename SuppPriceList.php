@@ -21,8 +21,8 @@ if (isset($_POST['PrintPDF'])) {
 
 	//get supplier
 	$sqlsup = "SELECT suppname, currcode FROM suppliers where supplierid='" . $_POST['supplier'] . "'";
-	$resultsup = db_query($sqlsup,$db);
-	$RowSup = db_fetch_array($resultsup);
+	$resultsup = DB_query($sqlsup,$db);
+	$RowSup = DB_fetch_array($resultsup);
 	$SupplierName=$RowSup['suppname'];
 	$CurrCode =$RowSup['currcode'];
 
@@ -30,7 +30,7 @@ if (isset($_POST['PrintPDF'])) {
 	if ($_POST['category']!="all"){
 		$sqlcat="SELECT categorydescription FROM `stockcategory` where categoryid ='" . $_POST['category'] . "'";
 		$resultcat = DB_query($sqlcat,$db);
-		$RowCat = db_fetch_row($resultcat);
+		$RowCat = DB_fetch_row($resultcat);
 		$Categoryname=$RowCat['0'];
 	} else {
 		$Categoryname="ALL";
