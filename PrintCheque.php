@@ -15,7 +15,7 @@ $FontSize=10;
 $PageNumber=1;
 $line_height=12;
 
-$result = db_query("SELECT hundredsname FROM currencies WHERE currabrev='" . $_SESSION['PaymentDetail']->Currency . "'",$db);
+$result = DB_query("SELECT hundredsname FROM currencies WHERE currabrev='" . $_SESSION['PaymentDetail']->Currency . "'",$db);
 
 if (DB_num_rows($result) == 0){
 	include ('includes/header.inc');
@@ -24,7 +24,7 @@ if (DB_num_rows($result) == 0){
 	exit;
 }
 
-$CurrencyRow = db_fetch_row($result);
+$CurrencyRow = DB_fetch_row($result);
 $HundredsName = $CurrencyRow[0];
 
 // cheque
