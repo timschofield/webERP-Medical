@@ -143,7 +143,7 @@ $LineItemsSQL = "SELECT itemcode,
 					ON purchorderdetails.itemcode=stockmaster.stockid
 				WHERE purchorderdetails.orderno = '" . $_GET['OrderNo'] ."'";
 
-$LineItemsResult = db_query($LineItemsSQL,$db, $ErrMsg);
+$LineItemsResult = DB_query($LineItemsSQL,$db, $ErrMsg);
 
 
 echo '<table colspan="8" class="selection" cellpadding="0">';
@@ -163,7 +163,7 @@ $k =0;  //row colour counter
 $OrderTotal=0;
 $RecdTotal=0;
 
-while ($myrow=db_fetch_array($LineItemsResult)) {
+while ($myrow=DB_fetch_array($LineItemsResult)) {
 
 	$OrderTotal += ($myrow['quantityord'] * $myrow['unitprice']);
 	$RecdTotal += ($myrow['quantityrecd'] * $myrow['unitprice']);
