@@ -642,9 +642,9 @@ if (isset($SearchResult)) {
 					AND purchorderdetails.itemcode='" . $myrow['stockid'] . "'";
 
 		$ErrMsg = _('The order details for this product cannot be retrieved because');
-		$PurchResult = db_query($sql,$db,$ErrMsg);
+		$PurchResult = DB_query($sql,$db,$ErrMsg);
 
-		$PurchRow = db_fetch_row($PurchResult);
+		$PurchRow = DB_fetch_row($PurchResult);
 		if ($PurchRow[0]!=null){
 			$PurchQty =  $PurchRow[0]/$PriceRow['conversionfactor'];
 		} else {
@@ -656,9 +656,9 @@ if (isset($SearchResult)) {
 			   FROM woitems
 			   WHERE stockid='" . $myrow['stockid'] ."'";
 		$ErrMsg = _('The order details for this product cannot be retrieved because');
-		$WoResult = db_query($sql,$db,$ErrMsg);
+		$WoResult = DB_query($sql,$db,$ErrMsg);
 
-		$WoRow = db_fetch_row($WoResult);
+		$WoRow = DB_fetch_row($WoResult);
 		if ($WoRow[0]!=null){
 			$WoQty =  $WoRow[0];
 		} else {
