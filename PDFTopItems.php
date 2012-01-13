@@ -96,8 +96,8 @@ while ($myrow = DB_fetch_array($result)) {
 	$sqloh = "SELECT   sum(quantity)as qty
 						FROM     `locstock`
 						WHERE     stockid='" . $myrow['0'] . "'";
-	$oh = db_query($sqloh, $db);
-	$ohRow = db_fetch_row($oh);
+	$oh = DB_query($sqloh, $db);
+	$ohRow = DB_fetch_row($oh);
 	$LeftOvers = $pdf->addTextWrap($Left_Margin + 1, $YPos, 300 - $Left_Margin, $FontSize, $myrow['stkcode']);
 	$LeftOvers = $pdf->addTextWrap($Left_Margin + 100, $YPos, 270 - $Left_Margin, $FontSize, $myrow['description']);
 	$LeftOvers = $pdf->addTextWrap($Left_Margin + 330, $YPos, 30, $FontSize, locale_number_format($myrow['totalinvoiced'], $myrow['decimalplaces']), 'right');
