@@ -227,10 +227,10 @@ if (isset($_GET['ModifyOrderNumber'])
 									ORDER BY salesorderdetails.orderlineno";
 
 		$ErrMsg = _('The line items of the order cannot be retrieved because');
-		$LineItemsResult = db_query($LineItemsSQL,$db,$ErrMsg);
-		if (db_num_rows($LineItemsResult)>0) {
+		$LineItemsResult = DB_query($LineItemsSQL,$db,$ErrMsg);
+		if (DB_num_rows($LineItemsResult)>0) {
 
-			while ($myrow=db_fetch_array($LineItemsResult)) {
+			while ($myrow=DB_fetch_array($LineItemsResult)) {
 					if ($myrow['completed']==0){
 
 						$PropertiesSQL="SELECT stkcatpropid,
@@ -1631,9 +1631,9 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 								AND purchorderdetails.itemcode='" . $myrow['stockid'] . "'";
 
 				$ErrMsg = _('The order details for this product cannot be retrieved because');
-				$PurchResult = db_query($sql,$db,$ErrMsg);
+				$PurchResult = DB_query($sql,$db,$ErrMsg);
 
-				$PurchRow = db_fetch_row($PurchResult);
+				$PurchRow = DB_fetch_row($PurchResult);
 				if ($PurchRow[0]!=null){
 				  $PurchQty =  $PurchRow[0];
 				} else {
@@ -1645,8 +1645,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 							   FROM woitems
 							   WHERE stockid='" . $myrow['stockid'] ."'";
 				$ErrMsg = _('The order details for this product cannot be retrieved because');
-				$WoResult = db_query($sql,$db,$ErrMsg);
-				$WoRow = db_fetch_row($WoResult);
+				$WoResult = DB_query($sql,$db,$ErrMsg);
+				$WoRow = DB_fetch_row($WoResult);
 				if ($WoRow[0]!=null){
 					$WoQty =  $WoRow[0];
 				} else {
@@ -1866,9 +1866,9 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 							AND purchorderdetails.itemcode='" . $myrow['stockid'] . "'";
 
 				$ErrMsg = _('The order details for this product cannot be retrieved because');
-				$PurchResult = db_query($sql,$db,$ErrMsg);
+				$PurchResult = DB_query($sql,$db,$ErrMsg);
 
-				$PurchRow = db_fetch_row($PurchResult);
+				$PurchRow = DB_fetch_row($PurchResult);
 				if ($PurchRow[0]!=null){
 				  $PurchQty =  $PurchRow[0]/$PriceRow['conversionfactor'];
 				} else {
@@ -1880,9 +1880,9 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 					   FROM woitems
 					   WHERE stockid='" . $myrow['stockid'] ."'";
 				$ErrMsg = _('The order details for this product cannot be retrieved because');
-				$WoResult = db_query($sql,$db,$ErrMsg);
+				$WoResult = DB_query($sql,$db,$ErrMsg);
 
-				$WoRow = db_fetch_row($WoResult);
+				$WoRow = DB_fetch_row($WoResult);
 				if ($WoRow[0]!=null){
 				  $WoQty =  $WoRow[0];
 				} else {
