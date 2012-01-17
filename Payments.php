@@ -546,7 +546,7 @@ if (isset($_POST['CommitBatch'])){
 				'" . $Transtype . "',
 				'" . $_SESSION['PaymentDetail']->Account . "',
 				'" . $_SESSION['PaymentDetail']->Narrative . "',
-				'" . $_SESSION['PaymentDetail']->cheque . "',
+				'" . $_POST['cheque'] . "',
 				'" . filter_number_input($_SESSION['PaymentDetail']->ExRate) . "',
 				'" . filter_number_input($_SESSION['PaymentDetail']->FunctionalExRate) . "',
 				'" . FormatDateForSQL($_SESSION['PaymentDetail']->DatePaid) . "',
@@ -1059,6 +1059,10 @@ the fields for entry of receipt amt and disc */
 	} else {
 		echo '<input type="hidden" name="discount" value=0 />';
 	}
+
+	echo '<tr><td>'. _('Cheque/Voucher Number') .'</td>
+			<td><input type="text" name="cheque" maxlength="12" size="12" /></td>
+		</tr>';
 	echo '</table><br />';
 	echo '<input type="submit" name="CommitBatch" value="' . _('Accept and Process Payment') . '" />';
 }
