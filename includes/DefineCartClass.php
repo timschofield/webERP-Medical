@@ -107,9 +107,8 @@ Class Cart {
 				$Price=0;
 			}
 
-			if ($LineNumber==-1){
-				$LineNumber = $this->LineCounter;
-			}
+			$LineNumber = $this->LineCounter;
+
 
 			$this->LineItems[$LineNumber] = new LineDetails($LineNumber,
 															$StockID,
@@ -176,7 +175,6 @@ Class Cart {
 							$db ,
 							_('The order line for') . ' ' . mb_strtoupper($StockID) . ' ' ._('could not be inserted'));
 			}
-
 			$this->LineCounter = $LineNumber + 1;
 			Return 1;
 		}
