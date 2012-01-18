@@ -171,6 +171,7 @@ if (!isset($_GET['OrderNumber']) and !isset($_SESSION['ProcessingOrder'])) {
 												$myrow['actualdispatchdate'],
 												$myrow['qtyinvoiced'],
 												$myrow['discountcategory'],
+												0, // Discount override
 												$myrow['controlled'],
 												$myrow['serialised'],
 												$myrow['decimalplaces'],

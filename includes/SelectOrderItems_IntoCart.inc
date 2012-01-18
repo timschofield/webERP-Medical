@@ -146,6 +146,7 @@ if ($AlreadyOnThisOrder!=1){
 															NULL, /*Actual Dispatch Date */
 															0, /*Qty Invoiced */
 															$myItemRow['discountcategory'],
+															0, //Discount override
 															$myItemRow['controlled'], /*Controlled - dont care */
 															$myItemRow['serialised'], /* need to know for autocreation wos */
 															$myItemRow['decimalplaces'],

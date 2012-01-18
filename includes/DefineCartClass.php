@@ -106,8 +106,9 @@ Class Cart {
 			if ($Price<0){ /*madness check - use a credit note to give money away!*/
 				$Price=0;
 			}
-
-			$LineNumber = $this->LineCounter;
+			if ($LineNumber==-1) {
+				$LineNumber = $this->LineCounter;
+			}
 
 
 			$this->LineItems[$LineNumber] = new LineDetails($LineNumber,
