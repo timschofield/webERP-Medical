@@ -17,7 +17,7 @@ if (isset($_POST['AddBatches'])){
 						echo '<br />' . $_POST['SerialNo' . $i] . " " . _('has already been sold');
 						$AddThisBundle = false;
 					} elseif ($ExistingBundleQty==0) { /* and its a batch */
-						echo '<br />' . _('There is none of') .' '. $_POST['SerialNo' . $i] . .' '. _('left');
+						echo '<br />' . _('There is none of') .' '. $_POST['SerialNo' . $i] . ' '. _('left');
 						$AddThisBundle = false;
 					} else {
 					 	echo '<br />' . _('There is only') . ' ' . $ExistingBundleQty . ' ' . _('of') . ' ' . $_POST['SerialNo' . $i] .
