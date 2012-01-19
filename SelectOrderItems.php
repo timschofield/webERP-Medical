@@ -260,6 +260,7 @@ if (isset($_GET['ModifyOrderNumber'])
 																	$myrow['actualdispatchdate'],
 																	$myrow['qtyinvoiced'],
 																	$myrow['discountcategory'],
+																	0, //Discount override
 																	0,	/*Controlled*/
 																	$myrow['serialised'],
 																	$myrow['decimalplaces'],
