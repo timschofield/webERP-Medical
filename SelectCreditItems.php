@@ -739,6 +739,7 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 											Date($_SESSION['DefaultDateFormat']),
 											0,
 											$myrow['discountcategory'],
+											0, //Discount override
 											$myrow['controlled'],
 											$myrow['serialised'],
 											$myrow['decimalplaces'],
@@ -912,6 +913,7 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 										Date($_SESSION['DefaultDateFormat']),
 										0,
 										$myrow['discountcategory'],
+										0, //Discount override
 										$myrow['controlled'],
 										$myrow['serialised'],
 										$myrow['decimalplaces'],
