@@ -95,7 +95,7 @@ if (!isset($Id)) {
 	$result = DB_query($SQLname,$db);
 	$myrow = DB_fetch_array($result);
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' .
-		_('Notes for Customer').': <b>' .my$row['name'].'</b></p><br />';
+		_('Notes for Customer').': <b>' .$myrow['name'].'</b></p><br />';
 
 	$sql = "SELECT noteid,
 					debtorno,
