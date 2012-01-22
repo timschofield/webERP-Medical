@@ -245,7 +245,8 @@ for ($i=0;$i<sizeof($OrdersToPick);$i++){
 			LEFT JOIN pickinglistdetails
 				ON pickinglists.pickinglistno=pickinglistdetails.pickinglistno
 			WHERE salesorderdetails.orderno='" . $OrdersToPick[$i]['orderno'] ."'
-			AND salesorderdetails.orderlineno=pickinglistdetails.orderlineno";
+			AND salesorderdetails.orderlineno=pickinglistdetails.orderlineno 
+			GROUP BY salesorderdetails.stkcode";
 		}
 		$lineresult=DB_query($sql,$db, $ErrMsg);
 	}
