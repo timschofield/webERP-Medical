@@ -209,11 +209,11 @@ if (isset($_POST['Refresh']) and !isset($_POST['NewItem'])) {
 
 if (isset($_POST['Update'])) {
 	foreach ($_POST as $key => $value) {
-		if (mb_substr($key,0,3)=='qty') {
+		if (mb_substr($key,0,3)=='Qty') {
 			$LineNo=mb_substr($key,3);
 			$Quantity=$value;
 		}
-		if (mb_substr($key,0,5)=='price') {
+		if (mb_substr($key,0,5)=='Price') {
 			$Price=$value;
 		}
 		if (mb_substr($key,0,10)=='expirydate') {
@@ -237,11 +237,11 @@ if (isset($_POST['Update'])) {
 
 if (isset($_POST['Save'])) {
 	foreach ($_POST as $key => $value) {
-		if (mb_substr($key,0,3)=='qty') {
+		if (mb_substr($key,0,3)=='Qty') {
 			$LineNo=mb_substr($key,3);
 			$Quantity=$value;
 		}
-		if (mb_substr($key,0,5)=='price') {
+		if (mb_substr($key,0,5)=='Price') {
 			$Price=$value;
 		}
 		if (mb_substr($key,0,10)=='expirydate') {
