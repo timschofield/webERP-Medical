@@ -311,13 +311,13 @@ if (isset($_POST['Location'])) {
 						FROM tags
 						ORDER BY tagref";
 
-			$result=DB_query($SQL,$db);
+			$TagResult=DB_query($SQL,$db);
 			echo '<option value=0>0 - None</option>';
-			while ($myrow=DB_fetch_array($result)){
-				if (isset($_SESSION['Adjustment']->tag) and $_SESSION['Adjustment']->tag==$myrow['tagref']){
-					echo '<option selected="True" value="' . $myrow['tagref'] . '">' . $myrow['tagref'].' - ' .$myrow['tagdescription'] . '</option>';
+			while ($mytagrow=DB_fetch_array($TagResult)){
+				if (isset($_SESSION['Adjustment']->tag) and $_SESSION['Adjustment']->tag==$mytagrow['tagref']){
+					echo '<option selected="True" value="' . $mytagrow['tagref'] . '">' . $mytagrow['tagref'].' - ' .$myrow['tagdescription'] . '</option>';
 				} else {
-					echo '<option value="' . $myrow['tagref'] . '">' . $myrow['tagref'].' - ' .$myrow['tagdescription'] . '</option>';
+					echo '<option value="' . $mytagrow['tagref'] . '">' . $mytagrow['tagref'].' - ' .$mytagrow['tagdescription'] . '</option>';
 				}
 			}
 			echo '</select></td>';
