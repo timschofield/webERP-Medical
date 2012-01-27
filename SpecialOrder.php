@@ -187,7 +187,7 @@ If(isset($_GET['Delete'])){  /*User hit the delete link on a line */
 }
 
 
-If(isset($_POST['EnterLine'])){
+if(isset($_POST['EnterLine'])){
 
 /*Add the header info to the session variable in any event */
 
@@ -202,27 +202,27 @@ If(isset($_POST['EnterLine'])){
 
 	/*THEN CHECK FOR THE WORST */
 
-	if (!is_numeric(filter_number_format($_POST['Qty']))){
+	if (!is_numeric(filter_number_input($_POST['Qty']))){
 		$AllowAdd = False;
 		prnMsg( _('Cannot Enter this order line') . '<br />' . _('The quantity of the order item must be numeric'),'warn');
 	}
 
-	if (filter_number_format($_POST['Qty'])<0){
+	if (filter_number_input($_POST['Qty'])<0){
 		$AllowAdd = False;
 		prnMsg( _('Cannot Enter this order line') . '<br />' . _('The quantity of the ordered item entered must be a positive amount'),'warn');
 	}
 
-	if (!is_numeric(filter_number_format($_POST['Price']))){
+	if (!is_numeric(filter_number_input($_POST['Price']))){
 		$AllowAdd = False;
 		prnMsg( _('Cannot Enter this order line') . '<br />' . _('The price entered must be numeric'),'warn');
 	}
 
-	if (!is_numeric(filter_number_format($_POST['Cost']))){
+	if (!is_numeric(filter_number_input($_POST['Cost']))){
 		$AllowAdd = False;
 		prnMsg( _('Cannot Enter this order line') . '<br />' . _('The cost entered must be numeric'),'warn');
 	}
 
-	if (((filter_number_format($_POST['Price'])/$_SESSION['SPL'.$identifier]->CustCurrExRate)-(filter_number_format($_POST['Cost'])/$_SESSION['SPL'.$identifier]->SuppCurrExRate))<0){
+	if (((filter_number_input($_POST['Price'])/$_SESSION['SPL'.$identifier]->CustCurrExRate)-(filter_number_input($_POST['Cost'])/$_SESSION['SPL'.$identifier]->SuppCurrExRate))<0){
 		$AllowAdd = False;
 		prnMsg( _('Cannot Enter this order line') . '<br />' . _('The sale is at a lower price than the cost'),'warn');
 	}
@@ -234,10 +234,10 @@ If(isset($_POST['EnterLine'])){
 	If ($AllowAdd == True){
 
 		$_SESSION['SPL'.$identifier]->add_to_order ($_POST['LineNo'],
-										filter_number_format($_POST['Qty']),
+										filter_number_input($_POST['Qty']),
 										$_POST['ItemDescription'],
-										filter_number_format($_POST['Price']),
-										filter_number_format($_POST['Cost']),
+										filter_number_input($_POST['Price']),
+										filter_number_input($_POST['Cost']),
 										$_POST['StkCat'],
 										$_POST['ReqDelDate']);
 
