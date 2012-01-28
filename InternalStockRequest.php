@@ -565,8 +565,6 @@ if (isset($SearchResult)) {
 	$i=0;
 	while ($myrow=DB_fetch_array($SearchResult)) {
 		$PriceSQL="SELECT currabrev,
-						price,
-						units as customerunits,
 						conversionfactor,
 						decimalplaces as pricedecimal
 					FROM prices
@@ -574,8 +572,6 @@ if (isset($SearchResult)) {
 		$PriceResult=DB_query($PriceSQL, $db);
 		if (DB_num_rows($PriceResult)==0) {
 			$PriceSQL="SELECT currabrev,
-							price,
-							units as customerunits,
 							conversionfactor,
 							decimalplaces as pricedecimal
 						FROM prices
@@ -585,8 +581,6 @@ if (isset($SearchResult)) {
 		}
 		$PriceRow=DB_fetch_array($PriceResult);
 		if (DB_num_rows($PriceResult)==0) {
-			$PriceRow['price']=0;
-			$PriceRow['customerunits']=$myrow['stockunits'];
 			$PriceRow['conversionfactor']=1;
 			$PriceRow['pricedecimal']=2;
 		}
@@ -674,14 +668,9 @@ if (isset($SearchResult)) {
 		}
 		$OnOrder = $PurchQty + $WoQty;
 		$Available = $QOH - $DemandQty + $OnOrder;
-		if ($PriceRow['customerunits']=='') {
-			$myrow['units']=$myrow['stockunits'];
-		} else {
-			$myrow['units']=$PriceRow['customerunits'];
-		}
 		echo '<td>'.$myrow['stockid'].'</font></td>
 				<td>'.$myrow['description'].'</td>
-				<td>'.$myrow['units'].'</td>
+				<td>'.$myrow['stockunits'].'</td>
 				<td class="number">'.locale_number_format($QOH,$DecimalPlaces).'</td>
 				<td class="number">'.locale_number_format($DemandQty,$DecimalPlaces).'</td>
 				<td class="number">'.locale_number_format($OnOrder, $DecimalPlaces).'</td>
@@ -693,7 +682,7 @@ if (isset($SearchResult)) {
 		echo '<input type="hidden" name="DecimalPlaces'.$i.'" value="' . $myrow['decimalplaces'] . '" />';
 		echo '<input type="hidden" name="ItemDescription'.$i.'" value="' . $myrow['description'] . '" />';
 		echo '<input type="hidden" name="ConversionFactor'.$i.'" value="' . $PriceRow['conversionfactor'] . '" />';
-		echo '<input type="hidden" name="Units'.$i.'" value="' . $myrow['units'] . '" />';
+		echo '<input type="hidden" name="Units'.$i.'" value="' . $myrow['stockunits'] . '" />';
 		if ($j==1) {
 			$jsCall = '<script  type="text/javascript">if (document.SelectParts) {defaultControl(document.SelectParts.itm'.$myrow['stockid'].');}</script>';
 		}
