@@ -231,7 +231,7 @@ or deletion of the records*/
 				$myrow[1],
 				$myrow[2],
 				$Description['accountname'],
-				$DescriptionTag['tagdesciption'],
+				$DescriptionTag['tagdescription'],
 				$_SERVER['PHP_SELF'] . '?', $myrow[0],
 				$_SERVER['PHP_SELF'] . '?', $myrow[0]);
 	}
