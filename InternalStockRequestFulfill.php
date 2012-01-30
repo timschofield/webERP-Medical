@@ -120,7 +120,7 @@ if (isset($_POST['UpdateAll'])) {
 											'"  .$AdjustmentNumber . "',
 											'" . $SQLAdjustmentDate . "',
 											'" . $PeriodNo . "',
-											'" . $StockGLCodes['adjglact'] . "',
+											'" . $StockGLCodes['issueglact'] . "',
 											'" . $StandardCost * -($Quantity) . "',
 											'" . $Narrative . "',
 											'" . $Tag . "'

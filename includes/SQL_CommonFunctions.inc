@@ -42,6 +42,7 @@ Function GetStockGLCode ($StockID, &$db){
 /*Gets the GL Codes relevant to the stock item account from the stock category record */
 	$QuerySQL = "SELECT stockact,
 						adjglact,
+						issueglact,
 						purchpricevaract,
 						materialuseagevarac,
 						wipact
