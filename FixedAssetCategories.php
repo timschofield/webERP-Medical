@@ -161,24 +161,25 @@ or deletion of the records*/
 			<th>' . _('Disposal GL') . '</th>
 			<th>' . _('Accum Depn GL') . '</th></tr>';
 
-	$k=0; //row colour counter
+	if ( DB_num_rows($result) > 0 ) {
+		$k=0; //row colour counter
 
-	while ($myrow = DB_fetch_array($result)) {
-		if ($k==1){
-			echo '<tr class="EvenTableRows">';
-			$k=0;
-		} else {
-			echo '<tr class="OddTableRows">';
-			$k=1;
-		}
-		printf('<td>%s</td>
+		while ($myrow = DB_fetch_array($result)) {
+			if ($k==1){
+				echo '<tr class="EvenTableRows">';
+				$k=0;
+			} else {
+				echo '<tr class="OddTableRows">';
+				$k=1;
+			}
+			printf('<td>%s</td>
 					<td>%s</td>
 					<td class="number">%s</td>
 					<td class="number">%s</td>
 					<td class="number">%s</td>
 					<td class="number">%s</td>
-					<td><a href="%sSelectedCategory=%s">' . _('Edit') . '</td>
-					<td><a href="%sSelectedCategory=%s&delete=yes" onclick="return confirm("' . _('Are you sure you wish to delete this fixed asset category? Additional checks will be performed before actual deletion to ensure data integrity is not compromised.') . '");">' . _('Delete') . '</td>
+					<td><a href="%sSelectedCategory=%s">' . _('Edit') . '</a></td>
+					<td><a href="%sSelectedCategory=%s&delete=yes" onclick="return confirm(\'' . _('Are you sure you wish to delete this fixed asset category? Additional checks will be performed before actual deletion to ensure data integrity is not compromised.') . '\');">' . _('Delete') . '</a></td>
 					</tr>',
 					$myrow['categoryid'],
 					$myrow['categorydescription'],
@@ -190,15 +191,20 @@ or deletion of the records*/
 					$myrow['categoryid'],
 					$_SERVER['PHP_SELF'] . '?',
 					$myrow['categoryid']);
-	}
-	//END WHILE LIST LOOP
+		}
+		//END WHILE LIST LOOP
+    } // End DB_num_rows() check.
+    else {
+    	echo '<tr><td style="text-align:center;" colspan="0">' . _('No Fixed Asset Categories Found') . '</td></tr>';
+    }
+
 	echo '</table>';
 }
 
 //end of ifs and buts!
 
 if (isset($SelectedCategory)) {
-	echo '<br /><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' ._('Show All Fixed Asset Categories') . '</a></div>';
+	echo '<br /><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' ._('Show All Fixed Asset Categories') . '</a></div><br />';
 }
 
 echo '<form name="CategoryForm" method="post" action="' . $_SERVER['PHP_SELF'] . '">';
@@ -321,7 +327,7 @@ echo '</select></td></tr></table><br />';
 
 echo '<div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div>';
 
-echo '</form>';
+echo '</form><br />';
 
 include('includes/footer.inc');
 ?>
