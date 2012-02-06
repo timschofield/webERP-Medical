@@ -7,7 +7,7 @@ if (!isset($PathPrefix)) {
 
 if (!file_exists($PathPrefix . 'config.php')){
 	$rootpath = dirname($_SERVER['PHP_SELF']);
-	if ($rootpath == '/' OR $rootpath == "\\") {
+	if ($rootpath == '/' or $rootpath == '\\') {
 		$rootpath = '';
 	}
 	header('Location:' . $rootpath . '/install/index.php');
@@ -23,6 +23,10 @@ ini_set('max_execution_time',$MaximumExecutionTime);
 
 session_write_close(); //in case a previous session is not closed
 session_start();
+if (!isset($_SESSION['initiated'])) {
+	session_regenerate_id();
+	$_SESSION['initiated']=TRUE;
+}
 
 include($PathPrefix . 'includes/ConnectDB.inc');
 include($PathPrefix . 'includes/DateFunctions.inc');
