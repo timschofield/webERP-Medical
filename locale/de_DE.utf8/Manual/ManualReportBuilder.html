@@ -1,4 +1,4 @@
-<a name="ReportBuilder"><h1 align="center">Report Builder/Form Builder</h1>
+<h1 align="center"><a name="ReportBuilder">Report Builder/Form Builder</a></h1>
 
 <h2>Table of Contents</h2>
 
@@ -13,7 +13,8 @@
 <a href="#RB_NewRpt">How Do I Create a New Report?</a><br>
 <a href="#RB_NewFrm">How Do I Create a New Form?</a><br>
 <a href="#RB_ViewRpt">Viewing your report/form</a><br>
-<a href="#RB_FrmParam">Passing Parameters to Forms</a></p>
+<a href="#RB_FrmParam">Passing Parameters to Forms</a>
+</p>
 <h2><a name="RB_RevHist">Revision History</a></h2>
 Revision History<br>
   Rev 1.0 - 2005-11-03 - Original release, written by D. Premo<br>
@@ -782,7 +783,7 @@ h =&gt; This Quarter<br>
 i =&gt; This Quarter to Date<br>
 j =&gt; This Year<br>
 k =&gt; This Year to Date</p>
-<p><strong>Variable cr1 through cr9</strong>: Variables cr1-cr9 need to correspond to the sequence of the field as specified in the form criteria. There are three parts to the value passed. The first is the text label which must match <u>exactly</u> to a label from the criteria dropdown list for the associated field. The second and third are the >From and To values for label of the criteria if they require them (such as the labels Range and Equal To). The three values are separated by semi-colons. If the second or third parameter is not required, it may be left out (such as in the case Yes, No, Printed, Unprinted, etc.). </p>
+<p><strong>Variable cr1 through cr9</strong>: Variables cr1-cr9 need to correspond to the sequence of the field as specified in the form criteria. There are three parts to the value passed. The first is the text label which must match <u>exactly</u> to a label from the criteria dropdown list for the associated field. The second and third are the From and To values for label of the criteria if they require them (such as the labels Range and Equal To). The three values are separated by semi-colons. If the second or third parameter is not required, it may be left out (such as in the case Yes, No, Printed, Unprinted, etc.). </p>
 <p>From our example above:</p>
 <p>&lt;a href=&quot;reportwriter/FormMaker.php?id=prch:po&amp;cr0=a&amp;cr1=Range:3:3&quot;&gt;</p>
 <p>The form group for Purchase Orders will appear (listing all variations of the PO forms) as shown below:</p>
