@@ -103,7 +103,7 @@ if (isset($_POST['submit'])) {
 						supplierid='" . $_POST['Supp'] ."',
 						phone='" . $_POST['Phone'] ."',
 						email='" . $_POST['Email'] ."',
-						" . $UpdatePassword .",
+						" . $UpdatePassword ."
 						pagesize='" . $_POST['PageSize'] . "',
 						fullaccess=" . $_POST['Access'] . ",
 						theme='" . $_POST['Theme'] . "',
@@ -250,8 +250,8 @@ if (!isset($SelectedUser)) {
 			<td>'.$myrow['pagesize'].'</td>
 			<td>'.$myrow['theme'].'</td>
 			<td>'.$myrow['language'].'</td>
-			<td><a href="'.$_SERVER['PHP_SELF']  . '?SelectedUser='.$myrow[0].'">' . _('Edit') . '</a></td>
-			<td><a href="'.$_SERVER['PHP_SELF'] . '?SelectedUser='.$myrow[0].'&delete=1">' . _('Delete') . '</a></td>
+			<td><a href="'.htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8')  . '?SelectedUser='.$myrow[0].'">' . _('Edit') . '</a></td>
+			<td><a href="'.htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?SelectedUser='.$myrow[0].'&delete=1">' . _('Delete') . '</a></td>
 			</tr>';
 
 	} //END WHILE LIST LOOP
@@ -260,10 +260,10 @@ if (!isset($SelectedUser)) {
 
 
 if (isset($SelectedUser)) {
-	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] .'">' . _('Review Existing Users') . '</a></div><br />';
+	echo '<div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') .'">' . _('Review Existing Users') . '</a></div><br />';
 }
 
-echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (isset($SelectedUser)) {
@@ -385,6 +385,7 @@ while ($myrow=DB_fetch_array($result)){
 	}
 
 }
+echo '</select></td></tr>';
 
 //Supplier is fixed by selection of supplier
 $_POST['Supp']=$_SESSION['SupplierID'];
@@ -467,7 +468,7 @@ echo '<tr>
 	<td>' . _('Language') . ':</td>
 	<td><select name="UserLanguage">';
 
- $LangDirHandle = dir('locale/');
+$LangDirHandle = dir('locale/');
 
 while (false !== ($LanguageEntry = $LangDirHandle->read())){
 
@@ -478,12 +479,12 @@ while (false !== ($LanguageEntry = $LangDirHandle->read())){
 		} elseif (!isset($_POST['UserLanguage']) and $LanguageEntry == $DefaultLanguage) {
 			echo '<option selected="True" value="' . $LanguageEntry . '">' . $LanguageEntry . '</option>';
 		} else {
-			echo '<option value="' . $LanguageEntry . '>' . $LanguageEntry . '</option>';
+			echo '<option value="' . $LanguageEntry . '">' . $LanguageEntry . '</option>';
 		}
 	}
 }
 
- $LangDirHandle->close();
+$LangDirHandle->close();
 
 echo '</select></td></tr>';
 /*Make an array out of the comma separated list of modules allowed*/
