@@ -46,7 +46,7 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 					stockmaster.decimalplaces,
 					purchorders.orderno,
 					suppliers.currcode
-		FROM grns, purchorderdetails
+		FROM purchorderdetails
 		LEFT JOIN purchorders
 			ON purchorders.orderno = purchorderdetails.orderno
 		LEFT JOIN grns
