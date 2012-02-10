@@ -16,7 +16,7 @@ if (isset($_POST['FromPeriod']) and ($_POST['FromPeriod'] > $_POST['ToPeriod']))
 if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POST['SelectADifferentPeriod'])){
 
 	include('includes/header.inc');
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print') . '" alt="" />' . ' ' . $title . '</p>';
 
@@ -450,7 +450,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 } else {
 
 	include('includes/header.inc');
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<input type="hidden" name="FromPeriod" value="' . $_POST['FromPeriod'] . '" />
 			<input type="hidden" name="ToPeriod" value="' . $_POST['ToPeriod'] . '" />';
@@ -638,7 +638,6 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 							</tr>',
 					$Sections[$Section],
 					locale_money_format($SectionPrdActual, $_SESSION['CompanyRecord']['currencydefault']));
-					$TotalIncome = -$SectionPrdActual;
 				} else {
 					echo '<tr>
 							<td colspan="2"></td>
@@ -655,6 +654,9 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 							</tr>',
 							$Sections[$Section],
 							locale_money_format($SectionPrdActual, $_SESSION['CompanyRecord']['currencydefault']));
+					if ($Section==1) {
+						$TotalIncome+=$SectionPrdActual;
+					}
 				}
 				if ($Section==2){ /*Cost of Sales - need sub total for Gross Profit*/
 					echo '<tr>

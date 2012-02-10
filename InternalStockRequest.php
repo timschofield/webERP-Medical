@@ -111,7 +111,7 @@ if (isset($_POST['Submit'])) {
 	}
 	DB_Txn_Commit($db);
 	prnMsg( _('The internal stock request has been entered and now needs to be authorised'), 'success');
-	echo '<br /><div class="centre"><a href="'. $_SERVER['PHP_SELF'] . '?New=Yes">' . _('Create another request') . '</a></div>';
+	echo '<br /><div class="centre"><a href="'. htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?New=Yes">' . _('Create another request') . '</a></div>';
 	include('includes/footer.inc');
 	unset($_SESSION['Request']);
 	exit;
@@ -121,7 +121,7 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/s
 		'" alt="" />' . ' ' . $title . '</p>';
 
 if (isset($_GET['Edit'])) {
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection">';
 	echo '<tr><th colspan="2"><font size="2" color="navy">' . _('Edit the Request Line') . '</font></th></tr>';
@@ -152,7 +152,7 @@ if (isset($_GET['Edit'])) {
 	exit;
 }
 
-echo '<form action="'. $_SERVER['PHP_SELF'] . '" method=post>';
+echo '<form action="'. htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<table class="selection">';
@@ -213,7 +213,7 @@ if (!isset($_SESSION['Request']->Location)) {
 
 //****************MUESTRO LA TABLA CON LOS REGISTROS DE LA TRANSFERENCIA*************************************
 $i = 0; //Line Item Array pointer
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo '<br /><table class="selection">';
 echo '<tr><th colspan="7"><font size="2" color="navy">' . _('Details of Items Requested') . '</font></th></tr>';
@@ -243,8 +243,8 @@ foreach ($_SESSION['Request']->LineItems as $LineItems) {
 			<td>' . $LineItems->ItemDescription . '</td>
 			<td class="number">' . locale_number_format($LineItems->Quantity, $LineItems->DecimalPlaces) . '</td>
 			<td>' . $LineItems->UOM . '</td>
-			<td><a href="'. $_SERVER['PHP_SELF'] . '?Edit='.$LineItems->LineNumber.'">' . _('Edit') . '</a></td>
-			<td><a href="'. $_SERVER['PHP_SELF'] . '?Delete='.$LineItems->LineNumber.'">' . _('Delete') . '</a></td>
+			<td><a href="'. htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?Edit='.$LineItems->LineNumber.'">' . _('Edit') . '</a></td>
+			<td><a href="'. htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?Delete='.$LineItems->LineNumber.'">' . _('Delete') . '</a></td>
 		</tr>';
 
 }
@@ -252,7 +252,7 @@ foreach ($_SESSION['Request']->LineItems as $LineItems) {
 echo '</table><br />';
 echo '<div class="centre"><input type="submit" name="Submit" value="' . _('Submit') . '" /></div><br />';
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Search for Inventory Items'). '</p>';
@@ -436,7 +436,7 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 } //end of if search
 /* display list if there is more than one record */
 if (isset($searchresult) AND !isset($_POST['Select'])) {
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	$ListCount = DB_num_rows($searchresult);
 	if ($ListCount > 0) {
@@ -537,7 +537,7 @@ if (isset($SearchResult)) {
 	echo '<div class="page_help_text">' . _('Select an item by entering the quantity required.  Click Order when ready.') . '</div>';
 	echo '<br />';
 	$j = 1;
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post" name="orderform">';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post" name="orderform">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="table1">';
 	echo '<tr><td>
@@ -565,8 +565,6 @@ if (isset($SearchResult)) {
 	$i=0;
 	while ($myrow=DB_fetch_array($SearchResult)) {
 		$PriceSQL="SELECT currabrev,
-						price,
-						units as customerunits,
 						conversionfactor,
 						decimalplaces as pricedecimal
 					FROM prices
@@ -574,8 +572,6 @@ if (isset($SearchResult)) {
 		$PriceResult=DB_query($PriceSQL, $db);
 		if (DB_num_rows($PriceResult)==0) {
 			$PriceSQL="SELECT currabrev,
-							price,
-							units as customerunits,
 							conversionfactor,
 							decimalplaces as pricedecimal
 						FROM prices
@@ -585,8 +581,6 @@ if (isset($SearchResult)) {
 		}
 		$PriceRow=DB_fetch_array($PriceResult);
 		if (DB_num_rows($PriceResult)==0) {
-			$PriceRow['price']=0;
-			$PriceRow['customerunits']=$myrow['stockunits'];
 			$PriceRow['conversionfactor']=1;
 			$PriceRow['pricedecimal']=2;
 		}
@@ -642,9 +636,9 @@ if (isset($SearchResult)) {
 					AND purchorderdetails.itemcode='" . $myrow['stockid'] . "'";
 
 		$ErrMsg = _('The order details for this product cannot be retrieved because');
-		$PurchResult = db_query($sql,$db,$ErrMsg);
+		$PurchResult = DB_query($sql,$db,$ErrMsg);
 
-		$PurchRow = db_fetch_row($PurchResult);
+		$PurchRow = DB_fetch_row($PurchResult);
 		if ($PurchRow[0]!=null){
 			$PurchQty =  $PurchRow[0]/$PriceRow['conversionfactor'];
 		} else {
@@ -656,9 +650,9 @@ if (isset($SearchResult)) {
 			   FROM woitems
 			   WHERE stockid='" . $myrow['stockid'] ."'";
 		$ErrMsg = _('The order details for this product cannot be retrieved because');
-		$WoResult = db_query($sql,$db,$ErrMsg);
+		$WoResult = DB_query($sql,$db,$ErrMsg);
 
-		$WoRow = db_fetch_row($WoResult);
+		$WoRow = DB_fetch_row($WoResult);
 		if ($WoRow[0]!=null){
 			$WoQty =  $WoRow[0];
 		} else {
@@ -674,14 +668,9 @@ if (isset($SearchResult)) {
 		}
 		$OnOrder = $PurchQty + $WoQty;
 		$Available = $QOH - $DemandQty + $OnOrder;
-		if ($PriceRow['customerunits']=='') {
-			$myrow['units']=$myrow['stockunits'];
-		} else {
-			$myrow['units']=$PriceRow['customerunits'];
-		}
 		echo '<td>'.$myrow['stockid'].'</font></td>
 				<td>'.$myrow['description'].'</td>
-				<td>'.$myrow['units'].'</td>
+				<td>'.$myrow['stockunits'].'</td>
 				<td class="number">'.locale_number_format($QOH,$DecimalPlaces).'</td>
 				<td class="number">'.locale_number_format($DemandQty,$DecimalPlaces).'</td>
 				<td class="number">'.locale_number_format($OnOrder, $DecimalPlaces).'</td>
@@ -693,7 +682,7 @@ if (isset($SearchResult)) {
 		echo '<input type="hidden" name="DecimalPlaces'.$i.'" value="' . $myrow['decimalplaces'] . '" />';
 		echo '<input type="hidden" name="ItemDescription'.$i.'" value="' . $myrow['description'] . '" />';
 		echo '<input type="hidden" name="ConversionFactor'.$i.'" value="' . $PriceRow['conversionfactor'] . '" />';
-		echo '<input type="hidden" name="Units'.$i.'" value="' . $myrow['units'] . '" />';
+		echo '<input type="hidden" name="Units'.$i.'" value="' . $myrow['stockunits'] . '" />';
 		if ($j==1) {
 			$jsCall = '<script  type="text/javascript">if (document.SelectParts) {defaultControl(document.SelectParts.itm'.$myrow['stockid'].');}</script>';
 		}

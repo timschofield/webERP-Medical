@@ -154,9 +154,9 @@ if (!isset($_GET['OrderNumber']) and !isset($_SESSION['ProcessingOrder'])) {
 		$DbgMsg = _('The SQL that failed was');
 		$LineItemsResult = DB_query($LineItemsSQL,$db,$ErrMsg,$DbgMsg);
 
-		if (db_num_rows($LineItemsResult)>0) {
+		if (DB_num_rows($LineItemsResult)>0) {
 
-			while ($myrow=db_fetch_array($LineItemsResult)) {
+			while ($myrow=DB_fetch_array($LineItemsResult)) {
 
 				$_SESSION['Items']->add_to_cart($myrow['stkcode'],
 												$myrow['quantity'],
@@ -171,6 +171,7 @@ if (!isset($_GET['OrderNumber']) and !isset($_SESSION['ProcessingOrder'])) {
 												$myrow['actualdispatchdate'],
 												$myrow['qtyinvoiced'],
 												$myrow['discountcategory'],
+												0, // Discount override
 												$myrow['controlled'],
 												$myrow['serialised'],
 												$myrow['decimalplaces'],
@@ -262,7 +263,7 @@ echo '<table class="selection">
 			</table>
 			<br />';
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 /***************************************************************
@@ -403,8 +404,8 @@ foreach ($_SESSION['Items']->LineItems as $LnItm) {
 	}
 	echo '</tr>';
 	if (strlen($LnItm->Narrative)>1){
-		$narrative=str_replace('\r\n','<br />', $LnItm->Narrative);
-		echo $RowStarter . '<td colspan="12">' . stripslashes($narrative) . '</td></tr>';
+		$Narrative=str_replace('\r\n','<br />', $LnItm->Narrative);
+		echo $RowStarter . '<td colspan="12">' . stripslashes($Narrative) . '</td></tr>';
 	}
 }//end foreach ($line)
 

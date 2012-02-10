@@ -7,7 +7,7 @@ include('includes/header.inc');
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>';
 
 if (!isset($_POST['Show'])) {
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<table class="selection">';
@@ -68,6 +68,7 @@ if (!isset($_POST['Show'])) {
 				banktrans.banktranstype,
 				banktrans.transdate,
 				banktrans.ref,
+				banktrans.chequeno,
 				bankaccounts.bankaccountname,
 				banktrans.userid,
 				banktrans.ref,
@@ -90,13 +91,15 @@ if (!isset($_POST['Show'])) {
 		$BankDetailRow = DB_fetch_array($BankResult);
 		echo '<table class="selection">
 						<tr>
-							<th colspan="8"><font size="3" color="blue">' . _('Account Transactions For').' '.$BankDetailRow['bankaccountname'].' '._('Between').' '.$_POST['FromTransDate'] . ' ' . _('and') . ' ' . $_POST['ToTransDate'] . '</font></th>
+							<th colspan="9"><font size="3" color="blue">' . _('Account Transactions For').' '.$BankDetailRow['bankaccountname'].' '._('Between').' '.$_POST['FromTransDate'] . ' ' . _('and') . ' ' . $_POST['ToTransDate'] . '</font></th>
 						</tr>';
 		echo '<tr>
 						<th>' . ('Date') . '</th>
 						<th>' . ('Input By') . '</th>
 
 						<th>'._('Transaction type').'</th>
+						<th>'._('Type').'</th>
+						<th>'._('Cheque/Voucher No').'</th>
 						<th>'._('Reference').'</th>
 						<th>'._('Amount in').' '.$BankDetailRow['currcode'].'</th>
 						<th>'._('Running Total').' '.$BankDetailRow['currcode'].'</th>
@@ -116,6 +119,8 @@ if (!isset($_POST['Show'])) {
 							<td>'. ConvertSQLDate($myrow['transdate']) . '</td>
 							<td>'. $myrow['userid'] . '</td>
 							<td>'.$myrow['typename'].'</td>
+							<td>'.$myrow['banktranstype'].'</td>
+							<td>'.$myrow['chequeno'].'</td>
 							<td>'.$myrow['ref'].'</td>
 							<td class="number">'.locale_money_format($myrow['amount'],$myrow['currcode']).'</td>
 							<td class="number">'.locale_money_format($AccountCurrTotal,$myrow['currcode']).'</td>
@@ -127,7 +132,7 @@ if (!isset($_POST['Show'])) {
 		echo '</table>';
 	} //end if no bank trans in the range to show
 
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<br /><div class="centre"><input type="submit" name="Return" value="' . _('Select Another Date'). '" /></div>';
 	echo '</form>';

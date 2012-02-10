@@ -538,6 +538,7 @@ if (isset($_POST['CommitBatch'])){
 		'<a href="' . $rootpath . '/PDFBankingSummary.php?BatchNo=' . $_SESSION['ReceiptBatch']->BatchNo . '">' . _('Print PDF Batch Summary') . '</a></p>';
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/allocation.png" title="' . _('Allocate') . '" alt="" />' . ' ' .
 		'<a href="' . $rootpath . '/CustomerAllocations.php">' . _('Allocate Receipts') . '</a></p>';
+	echo '<p class="page_title_text">&bull;  ' . $rootpath . '/CustomerReceipt.php?NewReceipt=Yes&Type=Customer ' . _('Enter Receipts') . ' </p>';
 	unset($_SESSION['ReceiptBatch']);
 	include('includes/footer.inc');
 	exit;
@@ -711,7 +712,7 @@ customer record returned by the search - this record is then auto selected */
 /*set up the form whatever */
 
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '?Type='.$_GET['Type'] . '" method="post" name="form1">';
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?Type='.$_GET['Type'] . '" method="post" name="form1">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 /*show the batch header details and the entries in the batch so far */
@@ -831,7 +832,7 @@ foreach ($ReceiptTypes as $RcptType) {
 	if (isset($_POST['ReceiptType']) and $_POST['ReceiptType']==$RcptType){
 		echo '<option selected="True" value="' . $RcptType . '">' . $RcptType .'</option>';
 	} else {
-		echo '<option Value="' .$RcptType . '">' . $RcptType .'</option>';
+		echo '<option value="' .$RcptType . '">' . $RcptType .'</option>';
 	}
 }
 echo '</select></td></tr>';
@@ -839,7 +840,7 @@ if (!isset($_SESSION['ReceiptBatch']->Narrative)) {
 	$_SESSION['ReceiptBatch']->Narrative='';
 }
 echo '<tr><td>' . _('Narrative') . ':</td><td><input tabindex="7" type="text" name="BatchNarrative" maxlength="50" size="52" value="' . $_SESSION['ReceiptBatch']->Narrative . '" /></td></tr>';
-echo '<tr><td colspan="3"><div class="centre"><input tabindex="8" type="submit" name="BatchInput" Value="' . _('Accept') . '" /></div></td></tr>';
+echo '<tr><td colspan="3"><div class="centre"><input tabindex="8" type="submit" name="BatchInput" value="' . _('Accept') . '" /></div></td></tr>';
 echo '</table><br />';
 
 if (isset($_SESSION['ReceiptBatch'])){
@@ -871,7 +872,7 @@ if (isset($_SESSION['ReceiptBatch'])){
 				<td>' . stripslashes($ReceiptItem->CustomerName) . '</td>
 				<td>'.$ReceiptItem->GLCode.' - '.$myrow['accountname'].'</td>
 				<td>'.$ReceiptItem->Narrative . '</td>
-				<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $ReceiptItem->ID . '&Type='.$_GET['Type'].'">' . _('Delete') . '</a></td>
+				<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?Delete=' . $ReceiptItem->ID . '&Type='.$_GET['Type'].'">' . _('Delete') . '</a></td>
 			</tr>';
 		$BatchTotal= $BatchTotal + $ReceiptItem->Amount;
 	}

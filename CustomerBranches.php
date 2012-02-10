@@ -95,7 +95,7 @@ if (isset($_POST['submit'])) {
 	}
 	if ($_SESSION['geocode_integration']==1 ){
 		// Get the lat/long from our geocoding host
-		$sql = "SELECT * FROM geocode_param WHERE 1";
+		$sql = "SELECT geocode_key, map_host FROM geocode_param WHERE 1";
 		$ErrMsg = _('An error occurred in retrieving the information');
 		$resultgeo = DB_query($sql, $db, $ErrMsg);
 		$row = DB_fetch_array($resultgeo);
@@ -108,11 +108,11 @@ if (isset($_POST['submit'])) {
 				echo '<div class="warn">' . _('Warning - Geocode Integration is enabled, but no hosts are setup.  Go to Geocode Setup') . '</div>';
 				} else {
 
-		$address = $_POST["BrAddress1"] . ", " . $_POST["BrAddress2"] . ", " . $_POST["BrAddress3"] . ", " . $_POST["BrAddress4"];
+		$address = $_POST['BrAddress1'] . ', ' . $_POST['BrAddress2'] . ', ' . $_POST['BrAddress3'] . ', ' . $_POST['BrAddress4'];
 
-		$base_url = "http://" . MAPS_HOST . "/maps/geo?output=xml" . "&key=" . KEY;
-		$request_url = $base_url . "&q=" . urlencode($address);
-		$xml = simplexml_load_string(utf8_encode(file_get_contents($request_url))) or die("url not loading");
+		$base_url = 'http://' . MAPS_HOST . '/maps/geo?output=xml' . '&key=' . KEY;
+		$request_url = $base_url . '&q=' . urlencode($address);
+		$xml = simplexml_load_string(utf8_encode(file_get_contents($request_url))) or die('url not loading');
 //		$xml = simplexml_load_file($request_url) or die("url not loading");
 
 	  	$coordinates = $xml->Response->Placemark->Point->coordinates;
@@ -422,11 +422,11 @@ if (!isset($SelectedBranch)){
 				$myrow[8],
 				$myrow[9],
 				($myrow[11]?_('No'):_('Yes')),
-				$_SERVER['PHP_SELF'],
+				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'),
 				$DebtorNo,
 				urlencode($myrow[1]),
 				_('Edit'),
-				$_SERVER['PHP_SELF'],
+				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'),
 				$DebtorNo,
 				urlencode($myrow[1]),
 				_('Delete Branch'));
@@ -466,7 +466,7 @@ if (!isset($SelectedBranch)){
 }
 
 if (!isset($_GET['delete'])) {
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] .'">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') .'">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (isset($SelectedBranch)) {
@@ -542,7 +542,7 @@ if (!isset($_GET['delete'])) {
 		echo '<p Class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') . '" alt="" />' .
 			' ' . _('Change Details for Branch'). ' '. $SelectedBranch . '</p>';
 		if (isset($SelectedBranch)) {
-			echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '?DebtorNo=' . $DebtorNo. '">' . _('Show all branches defined for'). ' '. $DebtorNo . '</a></div>';
+			echo '<div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?DebtorNo=' . $DebtorNo. '">' . _('Show all branches defined for'). ' '. $DebtorNo . '</a></div>';
 		}
 		echo '<br /><table class="selection">';
 		echo '<tr><th colspan="2"><div class="centre"><b>'._('Change Branch').'</b></th></tr>';

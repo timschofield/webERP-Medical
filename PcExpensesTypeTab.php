@@ -110,7 +110,7 @@ if (!isset($SelectedTab)){
 then none of the above are true and the list of sales types will be displayed with
 links to delete or edit each. These will call the same page again and allow update/input
 or deletion of the records*/
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection">'; //Main table
 
@@ -146,7 +146,7 @@ or deletion of the records*/
 
 } else {
 
-	echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Select another type of tab') . '</a></div></p>';
+	echo '<p><div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Select another type of tab') . '</a></div></p>';
 
 	$sql = "SELECT pctabexpenses.codeexpense, pcexpenses.description
 			FROM pctabexpenses,pcexpenses
@@ -181,7 +181,7 @@ or deletion of the records*/
 			</tr>',
 			$myrow[0],
 			$myrow[1],
-			$_SERVER['PHP_SELF'],
+			htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'),
 			$myrow[0]);
 		$k++;
 	}
@@ -193,7 +193,7 @@ or deletion of the records*/
 
 	if (!isset($_GET['delete'])) {
 
-		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+		echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<br /><table  class="selection">'; //Main table
 

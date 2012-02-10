@@ -92,7 +92,7 @@ foreach ($_SESSION['SuppTrans']->Shipts as $EnteredShiptRef){
 
 	echo '<tr><td>' . $EnteredShiptRef->ShiptRef . '</td>
 		<td class="number">' . locale_money_format($EnteredShiptRef->Amount,$_SESSION['SuppTrans']->CurrCode) . '</td>
-		<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $EnteredShiptRef->Counter . '">' . _('Delete') . '</a></td></tr>';
+		<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?Delete=' . $EnteredShiptRef->Counter . '">' . _('Delete') . '</a></td></tr>';
 
 	$TotalShiptValue = $TotalShiptValue + $EnteredShiptRef->Amount;
 
@@ -105,7 +105,7 @@ echo '<tr>
 </table><br />';
 
 /*Set up a form to allow input of new Shipment charges */
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (!isset($_POST['ShiptRef'])) {

@@ -123,7 +123,7 @@ if (isset($_POST['CommitBatch']) and $_POST['CommitBatch']==_('Accept and Proces
 	unset($_SESSION['JournalDetail']);
 
 	/*Set up a newy in case user wishes to enter another */
-	echo '<br /><a href="' . $_SERVER['PHP_SELF'] . '?NewJournal=Yes">'._('Enter Another General Ledger Journal').'</a></div>';
+	echo '<br /><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?NewJournal=Yes">'._('Enter Another General Ledger Journal').'</a></div>';
 	/*And post the journal too */
 	include ('includes/GLPostings.inc');
 	include ('includes/footer.inc');
@@ -227,7 +227,7 @@ if (isset($Cancel)){
 	unset($_POST['GLManualCode']);
 }
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post" name="form">';
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post" name="form">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>';
@@ -245,7 +245,7 @@ echo '<table><tr>
 echo '<td>' . _('Type') . ':</td>
 		<td><select name="JournalType">';
 
-if ($_POST['JournalType'] == 'Reversing'){
+if (isset($_POST['JournalType'] ) and $_POST['JournalType'] == 'Reversing'){
 	echo '<option selected="True" value = "Reversing">' . _('Reversing').'</option>';
 	echo '<option value = "Normal">' . _('Normal').'</option>';
 } else {
@@ -283,9 +283,9 @@ $result=DB_query($SQL,$db);
 echo '<option value="0">0 - None</option>';
 while ($myrow=DB_fetch_array($result)){
 	if (isset($_POST['tag']) and $_POST['tag']==$myrow['tagref']){
-		echo '<option selected="True" value="' . $myrow['tagref'] . '">' . $myrow['tagref'].' - ' .$myrow['tagdescription']."</option>";
+		echo '<option selected="True" value="' . $myrow['tagref'] . '">' . $myrow['tagref'].' - ' .$myrow['tagdescription'].'</option>';
 	} else {
-		echo '<option value="' . $myrow['tagref'] . '">' . $myrow['tagref'].' - ' .$myrow['tagdescription']."</option>";
+		echo '<option value="' . $myrow['tagref'] . '">' . $myrow['tagref'].' - ' .$myrow['tagdescription'].'</option>';
 	}
 }
 echo '</select></td>';
@@ -306,9 +306,9 @@ echo '<td><select name="GLCode" onChange="return assignComboToInput(this,'.'GLMa
 echo '<option value="">' . _('Select a general ledger account code') . '</option>';
 while ($myrow=DB_fetch_array($result)){
 	if (isset($_POST['tag']) and $_POST['tag']==$myrow['accountcode']){
-		echo '<option selected="True" value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'].' - ' .htmlentities($myrow['accountname'], ENT_QUOTES,'UTF-8')."</option>";
+		echo '<option selected="True" value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'].' - ' .htmlentities($myrow['accountname'], ENT_QUOTES,'UTF-8').'</option>';
 	} else {
-		echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'].' - ' .htmlentities($myrow['accountname'], ENT_QUOTES,'UTF-8')."</option>";
+		echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'].' - ' .htmlentities($myrow['accountname'], ENT_QUOTES,'UTF-8').'</option>';
 	}
 }
 echo '</select></td>';
@@ -383,7 +383,7 @@ foreach ($_SESSION['JournalDetail']->GLEntries as $JournalItem) {
 	}
 
 	echo '<td>' . $JournalItem->Narrative  . '</td>
-			<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $JournalItem->ID . '">'._('Delete').'</a></td>
+			<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?Delete=' . $JournalItem->ID . '">'._('Delete').'</a></td>
 		</tr>';
 }
 

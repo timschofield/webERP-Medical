@@ -178,8 +178,8 @@ if (isset($_POST['submit'])) {
 		}
 
 		echo '<td>' . $myrow[1] . '</td>';
-		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?SelectedTaxCategory=' . $myrow[0] . '">' . _('Edit') . '</a></td>';
-		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?SelectedTaxCategory=' . $myrow[0] . '&delete=1">' . _('Delete') .'</a></td>';
+		echo '<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?SelectedTaxCategory=' . $myrow[0] . '">' . _('Edit') . '</a></td>';
+		echo '<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?SelectedTaxCategory=' . $myrow[0] . '&delete=1">' . _('Delete') .'</a></td>';
 		echo '</tr>';
 
 	} //END WHILE LIST LOOP
@@ -188,14 +188,14 @@ if (isset($_POST['submit'])) {
 
 
 if (isset($SelectedTaxCategory)) {
-	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Review Tax Categories') . '</a></div>';
+	echo '<div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Review Tax Categories') . '</a></div>';
 }
 
 echo '<br />';
 
 if (! isset($_GET['delete'])) {
 
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (isset($SelectedTaxCategory)) {

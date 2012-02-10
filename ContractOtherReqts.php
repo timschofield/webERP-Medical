@@ -75,7 +75,7 @@ if (isset($_POST['EnterNewRequirement'])){
 
 /* This is where the other requirement as entered/modified should be displayed reflecting any deletions or insertions*/
 
-echo '<form name="ContractReqtsForm" action="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier. '" method="post">';
+echo '<form name="ContractReqtsForm" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?identifier='.$identifier. '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/contract.png" title="' ._('Contract Other Requirements') . '" alt="" />  ' .
 		_('Contract Other Requirements') . ' - ' . $_SESSION['Contract'.$identifier]->CustomerName.'</p>';
@@ -116,7 +116,7 @@ if (count($_SESSION['Contract'.$identifier]->ContractReqts)>0){
 			  <td><input type="text" class="number" name="Qty' . $ContractReqtID . '" size="11" value="' . locale_number_format($ContractComponent->Quantity,2)  . '" /></td>
 			  <td><input type="text" class="number" name="CostPerUnit' . $ContractReqtID . '" size="11" value="' . locale_money_format($ContractComponent->CostPerUnit,$_SESSION['Contract'.$identifier]->CurrCode) . '" /></td>
 			  <td class="number">' . $DisplayLineTotal . '</td>
-			  <td><a href="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier. '&amp;Delete=' . $ContractReqtID . '">' . _('Delete') . '</a></td></tr>';
+			  <td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?identifier='.$identifier. '&amp;Delete=' . $ContractReqtID . '">' . _('Delete') . '</a></td></tr>';
 		$TotalCost += $LineTotal;
 	}
 

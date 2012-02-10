@@ -120,7 +120,7 @@ if (isset($_POST['UpdateAll'])) {
 											'"  .$AdjustmentNumber . "',
 											'" . $SQLAdjustmentDate . "',
 											'" . $PeriodNo . "',
-											'" . $StockGLCodes['adjglact'] . "',
+											'" . $StockGLCodes['issueglact'] . "',
 											'" . $StandardCost * -($Quantity) . "',
 											'" . $Narrative . "',
 											'" . $Tag . "'
@@ -191,7 +191,7 @@ if (isset($RequestID)) {
 }
 
 if (!isset($_POST['Location'])) {
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection"><tr>';
 	echo '<td>' . _('Choose a location to issue requests from') . '</td>
@@ -241,7 +241,7 @@ if (isset($_POST['Location'])) {
 		AND stockrequest.loccode='".$_POST['Location']."'";
 	$result=DB_query($sql, $db);
 
-	if (DB_num_rows($result==0)) {
+	if (DB_num_rows($result)==0) {
 		prnMsg( _('There are no outstanding authorised requests for this location'), 'info');
 		echo '<br />';
 		echo '<div class="centre"><a href="' . $_SESSION['FormID'] . '">' . _('Select another location') . '</a></div>';
@@ -249,7 +249,7 @@ if (isset($_POST['Location'])) {
 		exit;
 	}
 
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection"><tr>';
 
@@ -311,13 +311,13 @@ if (isset($_POST['Location'])) {
 						FROM tags
 						ORDER BY tagref";
 
-			$result=DB_query($SQL,$db);
+			$TagResult=DB_query($SQL,$db);
 			echo '<option value=0>0 - None</option>';
-			while ($myrow=DB_fetch_array($result)){
-				if (isset($_SESSION['Adjustment']->tag) and $_SESSION['Adjustment']->tag==$myrow['tagref']){
-					echo '<option selected="True" value="' . $myrow['tagref'] . '">' . $myrow['tagref'].' - ' .$myrow['tagdescription'] . '</option>';
+			while ($mytagrow=DB_fetch_array($TagResult)){
+				if (isset($_SESSION['Adjustment']->tag) and $_SESSION['Adjustment']->tag==$mytagrow['tagref']){
+					echo '<option selected="True" value="' . $mytagrow['tagref'] . '">' . $mytagrow['tagref'].' - ' .$myrow['tagdescription'] . '</option>';
 				} else {
-					echo '<option value="' . $myrow['tagref'] . '">' . $myrow['tagref'].' - ' .$myrow['tagdescription'] . '</option>';
+					echo '<option value="' . $mytagrow['tagref'] . '">' . $mytagrow['tagref'].' - ' .$mytagrow['tagdescription'] . '</option>';
 				}
 			}
 			echo '</select></td>';

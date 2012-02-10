@@ -163,7 +163,7 @@ if (!isset($SelectedTabs)){
 	or deletion of the records*/
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Search') . '" alt="" />' . ' ' . $title. '</p>';
 
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<br /><table class="selection">'; //Main table
 
@@ -205,7 +205,7 @@ if (!isset($SelectedTabs)){
 	if (!isset($_POST['submit'])) {
 		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Search') . '" alt="" />' . ' ' . $title. '</p>';
 	}
-	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Select Another Petty Cash Tab ') . '</a></div>';
+	echo '<div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Select Another Petty Cash Tab ') . '</a></div>';
 
 	if (! isset($_GET['edit']) OR isset ($_POST['Go'])){
 
@@ -235,7 +235,7 @@ if (!isset($SelectedTabs)){
 
 		echo '<br /><table class="selection">';
 		echo '<tr><th colspan="8"><font color="#616161" size="2">' . _('Details Of Petty Cash Tab ') . '' .$SelectedTabs. '</form></th></tr>';
-		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+		echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<tr><th colspan="8">' . _('Detail Of PC Tab Movements For Last ') .': ';
 		echo '<input type="hidden" name="SelectedTabs" value="' . $SelectedTabs . '" />';
@@ -286,9 +286,9 @@ if (!isset($SelectedTabs)){
 					<td>'.$AuthorisedDate.'</td>
 					<td>'.$myrow['notes'].'</td>
 					<td>'.$myrow['receipt'].'</td>
-					<td><a href="'.$_SERVER['PHP_SELF'] . '?SelectedIndex='.$myrow['counterindex'].'&SelectedTabs=' .
+					<td><a href="'.htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?SelectedIndex='.$myrow['counterindex'].'&SelectedTabs=' .
 						$SelectedTabs . '&Days=' . $Days . '&edit=yes">' . _('Edit') . '</td>
-					<td><a href="'.$_SERVER['PHP_SELF'] . '?SelectedIndex='.$myrow['counterindex'].'&SelectedTabs=' .
+					<td><a href="'.htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?SelectedIndex='.$myrow['counterindex'].'&SelectedTabs=' .
 						$SelectedTabs . '&Days=' . $Days . '&delete=yes" onclick=\'return confirm("' .
 							_('Are you sure you wish to delete this code and the expense it may have set up?') . '");\'>' .
 								_('Delete') . '</td>
@@ -329,7 +329,7 @@ if (!isset($SelectedTabs)){
 			$Amount['0']=0;
 		}
 
-		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+		echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<br /><table class="selection">'; //Main table
 		if (isset($_GET['SelectedIndex'])) {

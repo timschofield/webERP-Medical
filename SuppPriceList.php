@@ -21,8 +21,8 @@ if (isset($_POST['PrintPDF'])) {
 
 	//get supplier
 	$sqlsup = "SELECT suppname, currcode FROM suppliers where supplierid='" . $_POST['supplier'] . "'";
-	$resultsup = db_query($sqlsup,$db);
-	$RowSup = db_fetch_array($resultsup);
+	$resultsup = DB_query($sqlsup,$db);
+	$RowSup = DB_fetch_array($resultsup);
 	$SupplierName=$RowSup['suppname'];
 	$CurrCode =$RowSup['currcode'];
 
@@ -30,7 +30,7 @@ if (isset($_POST['PrintPDF'])) {
 	if ($_POST['category']!="all"){
 		$sqlcat="SELECT categorydescription FROM `stockcategory` where categoryid ='" . $_POST['category'] . "'";
 		$resultcat = DB_query($sqlcat,$db);
-		$RowCat = db_fetch_row($resultcat);
+		$RowCat = DB_fetch_row($resultcat);
 		$Categoryname=$RowCat['0'];
 	} else {
 		$Categoryname="ALL";
@@ -186,7 +186,7 @@ if (isset($_POST['PrintPDF'])) {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Purchase') . '" alt="" />' . ' ' . _('Supplier Price List') . '</p>';
 	echo '<div class="page_help_text">' . _('View the Price List from supplier') . '</div><br />';
 
-	echo '<br/><form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table>';
+	echo '<br/><form action=' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'). ' method="post"><table>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	$sql = "SELECT supplierid,suppname FROM `suppliers`";
@@ -195,9 +195,9 @@ if (isset($_POST['PrintPDF'])) {
 	echo '<tr><td>' . _('Supplier') . ':</td><td><select name="supplier"> ';
 	while ($myrow=DB_fetch_array($result)){
 		if (isset($_POST['supplierid']) and ($myrow['supplierid'] == $_POST['supplierid'])) {
-			 echo '<option selected="True" Value="' . $myrow['supplierid'] . '">' . $myrow['supplierid'].' - '.$myrow['suppname'].'</option>';
+			 echo '<option selected="True" value="' . $myrow['supplierid'] . '">' . $myrow['supplierid'].' - '.$myrow['suppname'].'</option>';
 		} else {
-			 echo '<option Value="' . $myrow['supplierid'] . '">' . $myrow['supplierid'].' - '.$myrow['suppname'].'</option>';
+			 echo '<option value="' . $myrow['supplierid'] . '">' . $myrow['supplierid'].' - '.$myrow['suppname'].'</option>';
 		}
 	}
 	echo '</select></td></tr>';
@@ -205,7 +205,7 @@ if (isset($_POST['PrintPDF'])) {
 	$sql="SELECT categoryid,categorydescription FROM `stockcategory`";
 	$result = DB_query($sql,$db);
 	echo '<tr><td>' . _('Category') . ':</td><td><select name="category"> ';
-		echo '<option Value="all">' ._('ALL').'</option>';
+	echo '<option value="all">' ._('ALL').'</option>';
 	while ($myrow=DB_fetch_array($result)){
 		if (isset($_POST['categoryid']) and ($myrow['categoryid'] == $_POST['categoryid'])) {
 			 echo '<option selected="True" value="' . $myrow['categoryid'] . '">' . $myrow['categoryid']-$myrow['categorydescription'].'</option>';

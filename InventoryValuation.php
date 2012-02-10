@@ -201,7 +201,7 @@ if (isset($_POST['PrintPDF'])
 	/*if $FromCriteria is not set then show a form to allow input	*/
 		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') . '" alt="" />' . ' ' . $title . '</p>';
 
-		echo '<form action=' . $_SERVER['PHP_SELF'] . ' method="post">';
+		echo '<form action=' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . ' method="post">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 		echo '<table class="selection"><tr><td>' . _('From Inventory Category Code') . ':</font></td><td><select name=FromCriteria>';
@@ -230,7 +230,7 @@ if (isset($_POST['PrintPDF'])
 		echo '<option value="All">' . _('All Locations') . '</option>';
 
 		while ($myrow=DB_fetch_array($LocnResult)){
-				  echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+				  echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			  		}
 		echo '</select></td></tr>';
 

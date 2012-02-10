@@ -77,6 +77,14 @@ if (isset($_POST['submit'])) {
 		$InputError = 1;
 		prnMsg(_('If you enter a Customer Code you must also enter a Branch Code valid for this Customer'),'error');
 	}
+	if (!isset($SelectedUser)){
+		/* check to ensure the user id is not already entered */
+		$result = DB_query("SELECT userid FROM www_users WHERE userid='" . $_POST['UserID'] . "'",$db);
+		if (DB_num_rows($result)==1){
+			$InputError =1;
+			prnMsg(_('The user ID') . ' ' . $_POST['UserID'] . ' ' . _('already exists and cannot be used again'),'error');
+		}
+	}
 
 	if ((strlen($_POST['BranchCode'])>0) AND ($InputError !=1)) {
 		// check that the entered branch is valid for the customer code
@@ -106,7 +114,7 @@ if (isset($_POST['submit'])) {
 	$_POST['ModulesAllowed']= $ModulesAllowed;
 
 
-	if ($SelectedUser AND $InputError !=1) {
+	if (isset($SelectedUser) AND $InputError !=1) {
 
 /*SelectedUser could also exist if submit had not been clicked this code would not run in this case cos submit is false of course  see the delete code below*/
 
@@ -307,8 +315,8 @@ if (!isset($SelectedUser)) {
 					<td>%s</td>
 					<td>%s</td>
 					<td>%s</td>
-					<td><a href="%s?SelectedUser=%s">' . _('Edit') . '</a></td>
-					<td><a href="%s?SelectedUser=%s&delete=1">' . _('Delete') . '</a></td>
+					<td><a href="%sSelectedUser=%s">' . _('Edit') . '</a></td>
+					<td><a href="%sSelectedUser=%s&delete=1">' . _('Delete') . '</a></td>
 					</tr>',
 					$myrow['userid'],
 					$myrow['realname'],
@@ -325,9 +333,9 @@ if (!isset($SelectedUser)) {
 					$myrow['defaulttag'],
 					$myrow['theme'],
 					$LanguagesArray[$myrow['language']],
-					$_SERVER['PHP_SELF'],
+					htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8')  . '?',
 					$myrow['userid'],
-					$_SERVER['PHP_SELF'],
+					htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
 					$myrow['userid']);
 
 	} //END WHILE LIST LOOP
@@ -336,10 +344,10 @@ if (!isset($SelectedUser)) {
 
 
 if (isset($SelectedUser)) {
-	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Review Existing Users') . '</a></div><br />';
+	echo '<div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Review Existing Users') . '</a></div><br />';
 }
 
-echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (isset($SelectedUser)) {
@@ -556,25 +564,25 @@ if(isset($_POST['PageSize']) and $_POST['PageSize']=='A4'){
 }
 
 if(isset($_POST['PageSize']) and $_POST['PageSize']=='A3'){
-	echo '<option selected="True" Value="A3">' . _('A3') . '</option>';
+	echo '<option selected="True" value="A3">' . _('A3') . '</option>';
 } else {
 	echo '<option value="A3">A3' . '</option>';
 }
 
 if(isset($_POST['PageSize']) and $_POST['PageSize']=='A3_landscape'){
-	echo '<option selected="True" Value="A3_landscape">' . _('A3') . ' ' . _('landscape') . '</option>';
+	echo '<option selected="True" value="A3_landscape">' . _('A3') . ' ' . _('landscape') . '</option>';
 } else {
 	echo '<option value="A3_landscape">' . _('A3') . ' ' . _('landscape') . '</option>';
 }
 
 if(isset($_POST['PageSize']) and $_POST['PageSize']=='letter'){
-	echo '<option selected="True" Value="letter">' . _('Letter') . '</option>';
+	echo '<option selected="True" value="letter">' . _('Letter') . '</option>';
 } else {
 	echo '<option value="letter">' . _('Letter') . '</option>';
 }
 
 if(isset($_POST['PageSize']) and $_POST['PageSize']=='letter_landscape'){
-	echo '<option selected="True" Value="letter_landscape">' . _('Letter') . ' ' . _('landscape') . '</option>';
+	echo '<option selected="True" value="letter_landscape">' . _('Letter') . ' ' . _('landscape') . '</option>';
 } else {
 	echo '<option value="letter_landscape">' . _('Letter') . ' ' . _('landscape') . '</option>';
 }
@@ -582,7 +590,7 @@ if(isset($_POST['PageSize']) and $_POST['PageSize']=='letter_landscape'){
 if(isset($_POST['PageSize']) and $_POST['PageSize']=='legal'){
 	echo '<option selected="True" value="legal">' . _('Legal') . '</option>';
 } else {
-	echo '<option Value="legal">' . _('Legal') . '</option>';
+	echo '<option value="legal">' . _('Legal') . '</option>';
 }
 if(isset($_POST['PageSize']) and $_POST['PageSize']=='legal_landscape'){
 	echo '<option selected="True" value="legal_landscape">' . _('Legal') . ' ' . _('landscape') . '</option>';

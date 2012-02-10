@@ -11,6 +11,18 @@ include('includes/header.inc');
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') . '" alt="" />' . ' ' . _('Inventory Reorder Level Location Report') . '</p>';
 
+//update database if update pressed
+if (isset($_POST['submit'])){
+	for ($i=1;$i<count($_POST);$i++){ //loop through the returned customers
+		if (isset($_POST['StockID' . $i]) AND is_numeric(filter_number_format($_POST['ReorderLevel'.$i]))){
+			$SQLUpdate="UPDATE locstock SET reorderlevel = '" . filter_number_format($_POST['ReorderLevel'.$i]) . "'
+						WHERE loccode = '" . $_POST['StockLocation'] . "'
+						AND stockid = '" . $_POST['StockID' . $i] . "'";
+			$Result = DB_query($SQLUpdate,$db);
+		}
+	}
+}
+
 if (isset($_POST['submit']) or isset($_POST['update'])) {
 
 	if ($_POST['NumberOfDays']==""){
@@ -47,7 +59,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 	$ResultLocation = DB_query($sqlloc,$db);
 	$Location=DB_fetch_array($ResultLocation);
 
-	echo'<p class="page_title_text" align="center"><strong>' . _('Location : ') . '' . $Location['0'] . ' </strong></p>';
+	echo'<p class="page_title_text" align="center"><strong>' . _('Location : ') . '' . $Location['locationname'] . ' </strong></p>';
 	echo'<p class="page_title_text" align="center"><strong>' . _('Number Of Days Sales : ') . '' . $_POST['NumberOfDays'] . '' . _(' Days ') . ' </strong></p>';
 	echo '<table>';
 	echo '<tr><th>' . _('Code') . '</th>
@@ -60,27 +72,10 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 			<tr>';
 
 	$k=0; //row colour counter
-	echo'<form action="ReorderLevelLocation.php" method="post" name="'._('update').'">';
+	echo'<form action="ReorderLevelLocation.php" method="post" name="update">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	while ($myrow=DB_fetch_array($result))	{
-
-	//update database if update pressed
-		if ($_POST['submit']=='Update'){
-
-			$SQLUpdate="UPDATE locstock SET reorderlevel = '" . $_POST[$myrow['0']] . "'
-						    WHERE `locstock`.`loccode` = '" . $_POST['StockLocation'] . "'
-						    AND `locstock`.`stockid` = '" . $myrow['0'] . "'";
-
-			$Resultup = DB_query($SQLUpdate,$db);
-
-		}
-
-		if (isset($_POST[$myrow['0']])){
-			$reorder=$_POST[$myrow['0']];
-		}else{
-			$reorder=$myrow[2];
-		}
 
 		if ($k==1){
 			echo '<tr class="EvenTableRows">';
@@ -92,11 +87,11 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 
 		//variable for update data
 
-		echo'<input type="hidden" value="' . $_POST['order'] . '" name="'. _('order').'" />
-				<input type="hidden" value="' . $_POST['StockLocation'] . '" name="'. _('StockLocation').'" />
-				<input type="hidden" value="' . $_POST['StockCat'] . '" name="'. _('StockCat').'" />
-				<input type="hidden" value="' . $_POST['NumberOfDays'] . '" name="'. _('NumberOfDays').'" />
-				<input type="hidden" value="'.$myrow['0'].'" name="'. _('id').'" />';
+		echo'<input type="hidden" value="' . $_POST['order'] . '" name="order" />
+				<input type="hidden" value="' . $_POST['StockLocation'] . '" name="StockLocation" />
+				<input type="hidden" value="' . $_POST['StockCat'] . '" name="StockCat" />
+				<input type="hidden" value="' . $_POST['NumberOfDays'] . '" name="NumberOfDays" />
+				<input type="hidden" value="'.$myrow['0'].'" name="id" />';
 
 		//get qtyinvoice all
 		$sqlinv="SELECT sum(salesorderdetails.qtyinvoiced)as qtyinvoice
@@ -110,14 +105,14 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 
 
 		if($InvoiceAll['0']==''){
-			$QtyInvoiceAll='0';
+			$QtyInvoiceAll=0;
 		}else{
-			$QtyInvoiceAll=$InvoiceAll['0'];
+			$QtyInvoiceAll=$InvoiceAll['qtyinvoice'];
 		}
 
 		//get qty invoice
 		if($myrow['qtyinvoice']==''){
-			$QtyInvoice='0';
+			$QtyInvoice=0;
 		}else{
 			$QtyInvoice=$myrow['qtyinvoice'];
 		}
@@ -126,28 +121,28 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 		//find the quantity onhand item
 		$sqloh="SELECT   sum(quantity)as qty
 						FROM `locstock`
-						WHERE stockid='" . $myrow['0'] . "'";
-		$oh = db_query($sqloh,$db);
-		$ohRow = db_fetch_row($oh);
-		$ohRow[0];
-
+						WHERE stockid='" . $myrow['stockid'] . "'";
+		$oh = DB_query($sqloh,$db);
+		$ohRow = DB_fetch_array($oh);
 
 		//get On Hand in Location
 		$sqlohin="SELECT SUM(quantity) AS qty
 						FROM `locstock`
-						WHERE stockid='" . $myrow['0'] . "'
+						WHERE stockid='" . $myrow['stockid'] . "'
 						AND locstock.loccode = '" . $_POST['StockLocation'] . "'";
-		$ohin = db_query($sqlohin,$db);
-		$ohinRow = db_fetch_row($ohin);
+		$ohin = DB_query($sqlohin,$db);
+		$ohinRow = DB_fetch_array($ohin);
 
-		echo '<td>'.$myrow['0'].'</td>
-				<td>'.$myrow['1'].'</td>
-				<td class="number">'.$QtyInvoiceAll.'</td>
-				<td class="number">'.$QtyInvoice.'</td>
-				<td class="number">'.$ohRow['0'].'</td>
-				<td class="number">'.$ohinRow['0'].'</td>
-				<td><input type="text" class="number" name="'.$myrow['0'].'" maxlength="3" size="4" value="'. $reorder.'" /></td>
+		echo'<td>'.$myrow['stockid'].'</td>
+			<td>'.$myrow['description'].'</td>
+			<td class="number">'.$QtyInvoiceAll.'</td>
+			<td class="number">'.$QtyInvoice.'</td>
+			<td class="number">'.$ohRow['0'].'</td>
+			<td class="number">'.$ohinRow['0'].'</td>
+			<td><input type="text" class="number" name="ReorderLevel' . $i .'" maxlength="3" size="4" value="'. $myrow['reorderlevel'] .'" />
+				<input type="hidden" name="StockID' . $i . '" value="' . $myrow['stockid'] . '" /></td>
 			</tr> ';
+		$i++;
 
 	} //end of looping
 	echo'<tr>
@@ -160,7 +155,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 
 	echo '<div class="page_help_text">' . _('Use this report to display the reorder levels for Inventory items in different categories.') . '</div><br />';
 
-	echo '<br /><br /><form action="' . $_SERVER['PHP_SELF'] . '" method="post"><table>';
+	echo '<br /><br /><form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post"><table>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	$sql = "SELECT loccode,
 				   locationname

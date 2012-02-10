@@ -8,8 +8,9 @@ if ($allow_demo_mode == True and !isset($demo_text)) {
 } elseif (!isset($demo_text)) {
 	$demo_text = _('Please login here');
 }
+echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+			"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">';
 ?>
-
 <html>
 <head>
     <title>webERP Login screen</title>
@@ -30,7 +31,7 @@ if (get_magic_quotes_gpc()){
 <div id="container">
 	<div id="login_logo"></div>
 	<div id="login_box">
-	<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+	<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8');?>" method="post">
 	<input type="hidden" name="FormID" value="<?php echo $_SESSION['FormID']; ?>" />
 	<span><?php echo _('Company'); ?>:</span>
 	<?php

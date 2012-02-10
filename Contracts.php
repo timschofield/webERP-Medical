@@ -461,7 +461,7 @@ if(isset($_POST['CreateQuotation']) AND !$InputError){
 	$ContractPrice = ($ContractBOMCost+$ContractReqtsCost)/((100-$_SESSION['Contract'.$identifier]->Margin)/100);
 
 //Check if the item exists already
-	$sql = "SELECT * FROM stockmaster WHERE stockid='" . $_SESSION['Contract'.$identifier]->ContractRef."'";
+	$sql = "SELECT stockid FROM stockmaster WHERE stockid='" . $_SESSION['Contract'.$identifier]->ContractRef."'";
 	$ErrMsg =  _('The item could not be retrieved because');
 	$DbgMsg = _('The SQL that was used to find the item failed was');
 	$result = DB_query($sql,$db, $ErrMsg, $DbgMsg);
@@ -645,7 +645,7 @@ if (isset($_POST['SearchCustomers'])){
 							FROM custbranch
 							LEFT JOIN debtorsmaster
 							ON custbranch.debtorno=debtorsmaster.debtorno
-							WHERE custbranch.debtorno " . LIKE . " '%" . $_POST['CustCode'] . "%' OR custbranch.branchcode " . LIKE . " '%" . $_POST['CustCode'] . "%'
+							WHERE custbranch.branchcode " . LIKE . " '%" . $_POST['CustCode'] . "%'
 							AND custbranch.disabletrans=0
 							ORDER BY custbranch.debtorno";
 
@@ -668,11 +668,7 @@ if (isset($_POST['SearchCustomers'])){
 		$ErrMsg = _('The searched customer records requested cannot be retrieved because');
 		$result_CustSelect = DB_query($SQL,$db,$ErrMsg);
 
-		if (DB_num_rows($result_CustSelect)==1){
-			$myrow=DB_fetch_array($result_CustSelect);
-			$_POST['SelectedCustomer'] = $myrow['debtorno'];
-			$_POST['SelectedBranch'] = $myrow['branchcode'];
-		} elseif (DB_num_rows($result_CustSelect)==0){
+		if (DB_num_rows($result_CustSelect)==0){
 			prnMsg(_('No Customer Branch records contain the search criteria') . ' - ' . _('please try again') . ' - ' . _('Note a Customer Branch Name may be different to the Customer Name'),'info');
 		}
 	} /*one of keywords or custcode was more than a zero length string */
@@ -746,7 +742,7 @@ if (!isset($_SESSION['Contract'.$identifier]->DebtorNo)
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/contract.png" title="' . _('Contract') . '" alt="" />' .
 			' ' . _('Contract: Select Customer') . '</p>';
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '?identifier=' . $identifier .'" name="CustomerSelection" method="post">';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?identifier=' . $identifier .'" name="CustomerSelection" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<table cellpadding="3" colspan="4" class="selection">
@@ -814,7 +810,7 @@ if (!isset($_SESSION['Contract'.$identifier]->DebtorNo)
 //end if RequireCustomerSelection
 } else { /*A customer is already selected so get into the contract setup proper */
 
-	echo '<form name="ContractEntry" enctype="multipart/form-data" action="' . $_SERVER['PHP_SELF'] . '?identifier=' . $identifier . '" method="post">';
+	echo '<form name="ContractEntry" enctype="multipart/form-data" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?identifier=' . $identifier . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<p class="page_title_text">
@@ -873,9 +869,6 @@ if (!isset($_SESSION['Contract'.$identifier]->DebtorNo)
 	}
 
 	echo '</select></td></tr>';
-	echo '<tr><td>' . _('Default Work Centre') . ': </td><td>';
-	echo '<select name="DefaultWorkCentre">';
-
 	$sql = "SELECT code, description FROM workcentres";
 	$result = DB_query($sql,$db);
 
@@ -885,6 +878,9 @@ if (!isset($_SESSION['Contract'.$identifier]->DebtorNo)
 		include('includes/footer.inc');
 		exit;
 	}
+	echo '<tr><td>' . _('Default Work Centre') . ': </td><td>';
+
+	echo '<select name="DefaultWorkCentre">';
 
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['DefaultWorkCentre']) and $myrow['code']==$_POST['DefaultWorkCentre']) {

@@ -505,7 +505,7 @@ if ($Counter>0){
 }
 
 
-if ($_GET['ProduceCVSFile']==True){
+if (isset($_GET['ProduceCVSFile'])){
 
 	function stripcomma($str) { //because we're using comma as a delimiter
 		return str_replace(',','',$str);

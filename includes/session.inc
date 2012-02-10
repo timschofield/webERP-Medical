@@ -6,15 +6,15 @@ if (!isset($PathPrefix)) {
 }
 
 if (!file_exists($PathPrefix . 'config.php')){
-	$rootpath = dirname($_SERVER['PHP_SELF']);
-	if ($rootpath == '/' OR $rootpath == "\\") {
+	$rootpath = dirname(htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'));
+	if ($rootpath == '/' or $rootpath == '\\') {
 		$rootpath = '';
 	}
 	header('Location:' . $rootpath . '/install/index.php');
 }
 include($PathPrefix . 'config.php');
 
-$DBVersion=107;
+$DBVersion=111;
 
 if (isset($SessionSavePath)){
 	session_save_path($SessionSavePath);
@@ -23,7 +23,12 @@ if (isset($SessionSavePath)){
 ini_set('session.gc_Maxlifetime',$SessionLifeTime);
 ini_set('max_execution_time',$MaximumExecutionTime);
 
+session_write_close(); //in case a previous session is not closed
 session_start();
+if (!isset($_SESSION['initiated'])) {
+	session_regenerate_id();
+	$_SESSION['initiated']=TRUE;
+}
 
 include($PathPrefix . 'includes/ConnectDB.inc');
 include($PathPrefix . 'includes/DateFunctions.inc');

@@ -59,15 +59,7 @@ if (!function_exists('imagecreatefrompng')){
 }
 $DefaultImage = 'webERPsmall.png';
 
-// FOR APACHE
-if ( $_SERVER['PATH_TRANSLATED'][0] == '/' OR $_SERVER['PATH_TRANSLATED'][0]=='') {
-	//*nix
-	$pathsep = '/';
-} else {
-	//Windows
-	$pathsep = "\\";
-}
-$FilePath =  $_SESSION['part_pics_dir'] . $pathsep;
+$FilePath =  $_SESSION['part_pics_dir'] .'/';
 
 $StockID = trim(strtoupper($_GET['StockID']));
 if( isset($_GET['bgcolor']) )
@@ -91,13 +83,15 @@ if( isset($_GET['text']) ) {
 if( isset($_GET['transcolor'])) {
 	$doTrans = true;
 	$TranspColour = $_GET['transcolor'];
+} else {
+	$doTrans = false;
 }
 if( isset($_GET['bevel']) ) {
 	$bevel = $_GET['bevel'];
+} else {
+	$bevel = false;
 }
-if( isset($_GET['useblank']) ) {
-	$useblank = $_GET['useblank'];
-}
+
 if( isset($_GET['fontsize']) ) {
 	$fontsize = $_GET['fontsize'];
 } else {
@@ -105,6 +99,8 @@ if( isset($_GET['fontsize']) ) {
 }
 if( isset($_GET['notextbg']) ) {
 	$notextbg = true;
+} else {
+	$notextbg = false;
 }
 
 // Extension requirements and Stock ID Isolation
@@ -121,7 +117,7 @@ else {
 	$type   = strtolower(substr($StockID,$i+1,strlen($StockID)));
 	$StockID = substr($StockID,0,$i);
 
-	if($blanktext && !isset($text))
+	if($blanktext and !isset($text))
 		$text = '';
 }
 $style = $type;
@@ -146,7 +142,7 @@ if ( file_exists($tmpFileName.'.jpg') ) {
 	$FileName = $DefaultImage;
 	$IsJpeg = $DefaultIsJpeg;
 }
-if( !$automake && !isset($FileName) ) {
+if( !$automake and !isset($FileName) ) {
 		$title = _('Stock Image Retrieval ....');
 		include('includes/header.inc');
 		prnMsg( _('The Image could not be retrieved because it does not exist'), 'error');
@@ -156,7 +152,7 @@ if( !$automake && !isset($FileName) ) {
 }
 
 // See if we need to automake this image
-if( $automake && !isset($FileName) || $useblank ) {
+if( $automake and !isset($FileName)) {
 	// Have we got height and width specs
 	if( !isset($width) )
 		$width = 64;
@@ -258,7 +254,7 @@ if( $automake && !isset($FileName) || $useblank ) {
 	}
 	$sw = imagesx($im);
 	$sh = imagesy($im);
-	if ( isset($width) && ($width != $sw) || isset($height) && ($height != $sh)) {
+	if ( isset($width) and ($width != $sw) or isset($height) and ($height != $sh)) {
 		if( !isset($width) ) {
 			$width = imagesx($im);
 		}

@@ -134,8 +134,8 @@ foreach ($_SESSION['SuppTrans']->GRNs as $EnteredGRN){
 		<td class="number">' . locale_number_format($EnteredGRN->This_QuantityInv,$EnteredGRN->DecimalPlaces) . '</td>
 		<td class="number">' . locale_money_format($EnteredGRN->ChgPrice,$_SESSION['SuppTrans']->CurrCode) . '</td>
 		<td class="number">' . locale_money_format($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv,$_SESSION['SuppTrans']->CurrCode) . '</td>
-		<td><a href="' . $_SERVER['PHP_SELF'] . '?Modify=' . $EnteredGRN->GRNNo . '">'. _('Modify') . '</a></td>
-		<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $EnteredGRN->GRNNo . '">' . _('Delete') . '</a></td>
+		<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?Modify=' . $EnteredGRN->GRNNo . '">'. _('Modify') . '</a></td>
+		<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?Delete=' . $EnteredGRN->GRNNo . '">' . _('Delete') . '</a></td>
 	</tr>';
 
 	$TotalValueCharged = $TotalValueCharged + ($EnteredGRN->ChgPrice * $EnteredGRN->This_QuantityInv);
@@ -192,7 +192,7 @@ if (DB_num_rows($GRNResults)==0){
 }
 
 /*Set up a table to show the GRNs outstanding for selection */
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (!isset( $_SESSION['SuppTransTmp'])){
@@ -256,7 +256,7 @@ if (isset($_GET['Modify'])){
 	echo '</table>';
 
 /*	if ($myrow['closed']==1){ //Shipment is closed so pre-empt problems later by warning the user - need to modify the order first
-		echo '<input type="hidden" name='ShiptRef' Value='' />";
+		echo '<input type="hidden" name='ShiptRef' value='' />";
 		echo "Unfortunately, the shipment that this purchase order line item was allocated to has been closed - if you add this item to the transaction then no shipments will not be updated. If you wish to allocate the order line item to a different shipment the order must be modified first.";
 	} else {	*/
 	echo '<input type="hidden" name="ShiptRef" value="' . $GRNTmp->ShiptRef . '" />';

@@ -254,7 +254,7 @@ function display(&$db,&$ChangeDate)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPL
 		$_POST['FromDate']=date($_SESSION['DefaultDateFormat']);
 		$_POST['ToDate']=date($_SESSION['DefaultDateFormat']);
 	}
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post"><br /><br />';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post"><br /><br />';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<br /><table class="selection">';

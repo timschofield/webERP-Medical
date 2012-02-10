@@ -117,7 +117,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 		DB_free_result($result); //clear the old result
 		$result = DB_query($sql, $db); //re-run the query with the updated prices
 		$numrow = DB_num_rows($result); // get the new number - should be the same!!
-		echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Back') . '<a/></div></p>';
+		echo '<p><div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Back') . '<a/></div></p>';
 		include('includes/footer.inc');
 		exit;
 	}
@@ -158,7 +158,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 						<th>' . _('List Price') . '</th>
 					<tr>';
 		$k = 0; //row colour counter
-		echo '<form action="' .$_SERVER['PHP_SELF'] .'" method="post" name="update">';
+		echo '<form action="' .htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') .'" method="post" name="update">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo'<input type="hidden" value="' . $_POST['StockCat'] . '" name="StockCat" />
 			<input type="hidden" value="' . $_POST['Margin'] . '" name="Margin" />
@@ -222,15 +222,15 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 		echo '<input type="hidden" name="Counter" value="' . $PriceCounter . '" />';
 		echo '<tr>
 			<td colspan="12" style="text-align:center"><input type="submit" name="submit" value="' . _('Update') . '" />
-			<a href="' . $_SERVER['PHP_SELF'] . '"><input type="submit"  value="' . _('Back') . '" /><a/></td>
+			<a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '"><input type="submit"  value="' . _('Back') . '" /><a/></td>
 			 </tr></form>';
 	} else {
 		prnMsg(_('There were no prices meeting the criteria specified to review'),'info');
-		echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Back') . '<a/></div></p>';
+		echo '<p><div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Back') . '<a/></div></p>';
 	}
 } else { /*The option to submit was not hit so display form */
 	echo '<div class="page_help_text">' . _('Use this report to display price list with the cost.') . '</div><br />';
-	echo '<br /><br /><form action="' . $_SERVER['PHP_SELF'] . '" method="post"><table class="selection">';
+	echo '<br /><br /><form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	$SQL = "SELECT categoryid, categorydescription

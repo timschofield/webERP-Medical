@@ -474,14 +474,14 @@ if (isset($_POST['PrintPDF'])){
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
 
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post"><table class="selection">';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<tr><td>' . _('For Inventory in Location') . ':</td><td><select name="Location">';
 	$sql = "SELECT loccode, locationname FROM locations";
 	$LocnResult=DB_query($sql,$db);
 
-	echo '<option Value="All">' . _('All Locations') . '</option>';
+	echo '<option value="All">' . _('All Locations') . '</option>';
 
 	while ($myrow=DB_fetch_array($LocnResult)){
 			  echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';

@@ -35,8 +35,8 @@ $dbType = 'mysqli';
 //$dbType = 'mysqli'; for PHP 5 and mysql > 4.1
 
 // sql user & password
-$dbuser = 'root';
-$dbpassword = 'omu2tbdf';
+$dbuser = 'weberp_db_user';
+$dbpassword = 'weberp_db_pwd';
 
 //It would probably be inappropraite to allow selection of the company in a hosted envionment so this option can be turned off with this parameter
 $AllowCompanySelectionBox = true;
@@ -53,7 +53,7 @@ $MaximumExecutionTime =120;
 
 //The path to which session files should be stored in the server - useful for some multi-host web servers
 //this can be left commented out
-$SessionSavePath = '/home/tim/sessions';
+//$SessionSavePath = '/tmp';
 
 // which encryption function should be used
 //$CryptFunction = "md5"; // MD5 Hash
@@ -91,7 +91,7 @@ if ($rootpath == "/" OR $rootpath == "\\") {
 This is the default value set in php.ini for most installations but just to be sure it is forced here
 turning on NOTICES destroys things */
 
-error_reporting (E_ALL && ~E_NOTICE);
+error_reporting (E_ALL and ~E_NOTICE);
 
 /*Make sure there is nothing - not even spaces after this last ?> */
 ?>

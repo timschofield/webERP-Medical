@@ -302,7 +302,7 @@ if (isset($_GET['SupplierID'])){
 
 // This is aleady linked from this page
 //echo '<a href='" . $rootpath . '/SelectSupplier.php'>" . _('Back to Suppliers') . '</a><br />';
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Suppliers') . '</p>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Search') . '" alt="Search" />' . ' ' . _('Suppliers') . '</p>';
 
 $InputError = 0;
 
@@ -645,7 +645,7 @@ if (!isset($SupplierID)) {
 
 /*If the page was called without $SupplierID passed to page then assume a new supplier is to be entered show a form with a Supplier Code field other wise the form showing the fields with the existing entries against the supplier will show for editing with only a hidden SupplierID field*/
 
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<input type="hidden" name="New" value="Yes" />';
@@ -663,7 +663,7 @@ if (!isset($SupplierID)) {
 	echo '<tr><td>' . _('Supplier Type') . ':</td><td><select name="SupplierType">';
 	$result=DB_query("SELECT typeid, typename FROM suppliertype", $db);
 	while ($myrow = DB_fetch_array($result)) {
-		echo '<option value="'. $myrow['typeid'] . '">' . $myrow['typename'] . '</option>';
+		echo '<option value="'. $myrow['typeid'] . '" label="'.$myrow['typename'].'">' . $myrow['typename'] . '</option>';
 	} //end while loop
 	echo '</select></td></tr>';
 
@@ -679,7 +679,7 @@ if (!isset($SupplierID)) {
 	echo '<tr><td>' . _('Payment Terms') . ':</td><td><select name="PaymentTerms">';
 
 	while ($myrow = DB_fetch_array($result)) {
-		echo '<option value="'. $myrow['termsindicator'] . '">' . $myrow['terms'] . '</option>';
+		echo '<option value="'. $myrow['termsindicator'] . '" label="' . $myrow['terms'] . '">' . $myrow['terms'] . '</option>';
 	} //end while loop
 	DB_data_seek($result, 0);
 	echo '</select></td></tr>';
@@ -687,12 +687,12 @@ if (!isset($SupplierID)) {
 	$result=DB_query("SELECT id, coyname FROM factorcompanies", $db);
 
 	echo '<tr><td>' . _('Factor Company') . ':</td><td><select name="FactorID">';
-	echo '<option value="0">' . _('None') . '</option>';
+	echo '<option value="0" label="' . _('None') . '">' . _('None') . '</option>';
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['FactorID']) and $_POST['FactorID'] == $myrow['id']){
-		echo '<option selected="True" value="' . $myrow['id'] . '">' . $myrow['coyname'] . '</option>';
+		echo '<option selected="selected" value="' . $myrow['id'] . '" label="'.$myrow['coyname'].'">' . $myrow['coyname'] . '</option>';
 		} else {
-		echo '<option value="' . $myrow['id'] . '">' . $myrow['coyname'] . '</option>';
+		echo '<option value="' . $myrow['id'] . '" label="'.$myrow['coyname'].'">' . $myrow['coyname'] . '</option>';
 		}
 	} //end while loop
 	DB_data_seek($result, 0);
@@ -709,16 +709,16 @@ if (!isset($SupplierID)) {
 	echo '<tr><td>' . _('Supplier Currency') . ':</td><td><select name="CurrCode">';
 	while ($myrow = DB_fetch_array($result)) {
 		if ($_POST['CurrCode'] == $myrow['currabrev']){
-			echo '<option selected="True" value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
+			echo '<option selected="selected" value="' . $myrow['currabrev'] . '" label="'.$myrow['currency'].'">' . $myrow['currency'] . '</option>';
 		} else {
-			echo '<option value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
+			echo '<option value="' . $myrow['currabrev'] . '" label="'.$myrow['currency'].'">' . $myrow['currency'] . '</option>';
 		}
 	} //end while loop
 	DB_data_seek($result, 0);
 
 	echo '</select></td></tr><tr><td>' . _('Remittance Advice') . ':</td><td><select name="Remittance">';
-	echo '<option value="0">' . _('Not Required') . '</option>';
-	echo '<option value="1">' . _('Required') . '</option>';
+	echo '<option value="0" label="' . _('Not Required') . '">' . _('Not Required') . '</option>';
+	echo '<option value="1" label="' . _('Required') . '">' . _('Required') . '</option>';
 
 	echo '</select></td></tr>';
 
@@ -731,9 +731,9 @@ if (!isset($SupplierID)) {
 
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['TaxGroup']) and $_POST['TaxGroup'] == $myrow['taxgroupid']){
-			echo '<option selected="True" value="' . $myrow['taxgroupid'] . '">' . $myrow['taxgroupdescription'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['taxgroupid'] . '" label="' . $myrow['taxgroupdescription'] . '">' . $myrow['taxgroupdescription'] . '</option>';
 		} else {
-			echo '<option value="' . $myrow['taxgroupid'] . '">' . $myrow['taxgroupdescription'] . '</option>';
+			echo '<option value="' . $myrow['taxgroupid'] . '" label="' . $myrow['taxgroupdescription'] . '">' . $myrow['taxgroupdescription'] . '</option>';
 		}
 	} //end while loop
 
@@ -744,7 +744,7 @@ if (!isset($SupplierID)) {
 
 //SupplierID exists - either passed when calling the form or from the form itself
 
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection">';
 

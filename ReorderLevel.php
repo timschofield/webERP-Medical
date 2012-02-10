@@ -16,18 +16,18 @@ if (isset($_POST['PrintPDF'])) {
 	$line_height=12;
 
 	$Xpos = $Left_Margin+1;
-	$wherecategory = " ";
-	$catdescription = " ";
+	$WhereCategory = " ";
+	$CategoryDescription = " ";
 	if ($_POST['StockCat'] != 'All') {
-	    $wherecategory = " AND stockmaster.categoryid='" . $_POST['StockCat'] . "'";
+	    $WhereCategory = " AND stockmaster.categoryid='" . $_POST['StockCat'] . "'";
 		$sql= "SELECT categoryid, categorydescription FROM stockcategory WHERE categoryid='" . $_POST['StockCat'] . "'";
 		$result = DB_query($sql,$db);
 		$myrow = DB_fetch_row($result);
-		$catdescription = $myrow[1];
+		$CategoryDescription = $myrow[1];
 	}
-	$wherelocation = " ";
+	$WhereLocation = " ";
 	if ($_POST['StockLocation'] != 'All') {
-	    $wherelocation = " AND locstock.loccode='" . $_POST['StockLocation'] . "' ";
+	    $WhereLocation = " AND locstock.loccode='" . $_POST['StockLocation'] . "' ";
 	}
 
 	$sql = "SELECT locstock.stockid,
@@ -45,11 +45,11 @@ if (isset($_POST['PrintPDF'])) {
 				ON stockmaster.categoryid=stockcategory.categoryid,
 					locations
 				WHERE locstock.stockid=stockmaster.stockid " .
-				$wherelocation .
+				$WhereLocation .
 				"AND locstock.loccode=locations.loccode
 				AND locstock.reorderlevel > locstock.quantity
 				AND (stockmaster.mbflag='B' OR stockmaster.mbflag='M') " .
-				$wherecategory . " ORDER BY locstock.loccode,locstock.stockid";
+				$WhereCategory . " ORDER BY locstock.loccode,locstock.stockid";
 
 	$result = DB_query($sql,$db,'','',false,true);
 
@@ -66,7 +66,7 @@ if (isset($_POST['PrintPDF'])) {
 	}
 
 	PrintHeader($pdf,$YPos,$PageNumber,$Page_Height,$Top_Margin,$Left_Margin,
-	            $Page_Width,$Right_Margin,$catdescription);
+	            $Page_Width,$Right_Margin,$CategoryDescription);
 
     $FontSize=8;
 
@@ -92,7 +92,7 @@ if (isset($_POST['PrintPDF'])) {
 
 			if ($YPos < $Bottom_Margin + $line_height){
 			   PrintHeader($pdf,$YPos,$PageNumber,$Page_Height,$Top_Margin,$Left_Margin,$Page_Width,
-			               $Right_Margin,$catdescription);
+			               $Right_Margin,$CategoryDescription);
 			}
 
             	// Print if stock for part in other locations
@@ -121,7 +121,7 @@ if (isset($_POST['PrintPDF'])) {
 
 					if ($YPos < $Bottom_Margin + $line_height){
 					   PrintHeader($pdf,$YPos,$PageNumber,$Page_Height,$Top_Margin,$Left_Margin,$Page_Width,
-								   $Right_Margin,$catdescription);
+								   $Right_Margin,$CategoryDescription);
 					}
 
 				} /*end while loop */
@@ -130,7 +130,7 @@ if (isset($_POST['PrintPDF'])) {
 
 	if ($YPos < $Bottom_Margin + $line_height){
 	       PrintHeader($pdf,$YPos,$PageNumber,$Page_Height,$Top_Margin,$Left_Margin,$Page_Width,
-	                   $Right_Margin,$catdescription);
+	                   $Right_Margin,$CategoryDescription);
 	}
 /*Print out the grand totals */
 
@@ -157,7 +157,7 @@ if (isset($_POST['PrintPDF'])) {
 		_('Inventory Reorder Level Report') . '</p>';
 	echo '<div class="page_help_text">' . _('Use this report to display the reorder levels for Inventory items in different categories.') . '</div><br />';
 
-	echo '<br /><br /><form action="' . $_SERVER['PHP_SELF'] . '" method="post"><table>';
+	echo '<br /><br /><form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post"><table>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	$sql = "SELECT loccode,
 			locationname
@@ -217,7 +217,7 @@ if (isset($_POST['PrintPDF'])) {
 } /*end of else not PrintPDF */
 
 function PrintHeader(&$pdf,&$YPos,&$PageNumber,$Page_Height,$Top_Margin,$Left_Margin,
-                     $Page_Width,$Right_Margin,$catdescription) {
+                     $Page_Width,$Right_Margin,$CategoryDescription) {
 
 	/*PDF page header for Reorder Level report */
 	if ($PageNumber>1){
@@ -237,7 +237,7 @@ function PrintHeader(&$pdf,&$YPos,&$PageNumber,$Page_Height,$Top_Margin,$Left_Ma
 	$YPos -= $line_height;
 	$pdf->addTextWrap($Left_Margin,$YPos,50,$FontSize,_('Category'));
 	$pdf->addTextWrap(95,$YPos,50,$FontSize,$_POST['StockCat']);
-	$pdf->addTextWrap(160,$YPos,150,$FontSize,$catdescription,'left');
+	$pdf->addTextWrap(160,$YPos,150,$FontSize,$CategoryDescription,'left');
 	$YPos -= $line_height;
 	$pdf->addTextWrap($Left_Margin,$YPos,50,$FontSize,_('Location'));
 	$pdf->addTextWrap(95,$YPos,50,$FontSize,$_POST['StockLocation']);

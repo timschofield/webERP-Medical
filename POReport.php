@@ -185,9 +185,9 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 								stockmaster.decimalplaces,
 								stockmaster.description
 							FROM purchorderdetails
-							LEFT JOIN purchorders
+							INNER JOIN purchorders
 								ON purchorders.orderno=purchorderdetails.orderno
-							LEFT JOIN suppliers
+							INNER JOIN suppliers
 								ON purchorders.supplierno = suppliers.supplierid
 							LEFT JOIN stockmaster
 								ON purchorderdetails.itemcode = stockmaster.stockid
@@ -223,9 +223,9 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 							FROM grns
 							LEFT JOIN purchorderdetails
 								ON grns.podetailitem = purchorderdetails.podetailitem
-							LEFT JOIN purchorders
+							INNER JOIN purchorders
 								ON purchorders.orderno=purchorderdetails.orderno
-							LEFT JOIN suppliers
+							INNER JOIN suppliers
 								ON purchorders.supplierno = suppliers.supplierid
 							LEFT JOIN stockmaster
 								ON purchorderdetails.itemcode = stockmaster.stockid
@@ -269,9 +269,9 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 									suppliers.currcode,
 									stockmaster.description
 								FROM purchorderdetails
-								LEFT JOIN purchorders
+								INNER JOIN purchorders
 									ON purchorders.orderno=purchorderdetails.orderno
-								LEFT JOIN suppliers
+								INNER JOIN suppliers
 									ON purchorders.supplierno = suppliers.supplierid
 								LEFT JOIN stockmaster
 									ON purchorderdetails.itemcode = stockmaster.stockid
@@ -302,13 +302,13 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 									suppliers.currcode,
 									suppliers.suppname
 								FROM purchorderdetails
-								LEFT JOIN purchorders
+								INNER JOIN purchorders
 									ON purchorders.orderno=purchorderdetails.orderno
-								LEFT JOIN suppliers
+								INNER JOIN suppliers
 									ON purchorders.supplierno = suppliers.supplierid
 								LEFT JOIN stockmaster
 									ON purchorderdetails.itemcode = stockmaster.stockid
-								LEFT JOIN stockcategory
+								INNER JOIN stockcategory
 									ON stockcategory.categoryid = stockmaster.categoryid
 								WHERE purchorders.orddate >='$FromDate'
 									AND purchorders.orddate <='$ToDate'
@@ -334,13 +334,13 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 									suppliers.currcode,
 									suppliers.suppname
 								FROM purchorderdetails
-								LEFT JOIN purchorders
+								INNER JOIN purchorders
 									ON purchorders.orderno=purchorderdetails.orderno
-								LEFT JOIN suppliers
+								INNER JOIN suppliers
 									ON purchorders.supplierno = suppliers.supplierid
 								LEFT JOIN stockmaster
 									ON purchorderdetails.itemcode = stockmaster.stockid
-								LEFT JOIN stockcategory
+								INNER JOIN stockcategory
 									ON stockcategory.categoryid = stockmaster.categoryid
 								WHERE purchorders.orddate >='$FromDate'
 									AND purchorders.orddate <='$ToDate'
@@ -367,13 +367,13 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 									SUM(purchorderdetails.quantityord * purchorderdetails.unitprice) as extprice,
 									SUM(purchorderdetails.quantityord * purchorderdetails.stdcostunit) as extcost
 									FROM purchorderdetails
-								LEFT JOIN purchorders
+								INNER JOIN purchorders
 									ON purchorders.orderno=purchorderdetails.orderno
-								LEFT JOIN suppliers
+								INNER JOIN suppliers
 									ON purchorders.supplierno = suppliers.supplierid
 								LEFT JOIN stockmaster
 									ON purchorderdetails.itemcode = stockmaster.stockid
-								LEFT JOIN stockcategory
+								INNER JOIN stockcategory
 									ON stockcategory.categoryid = stockmaster.categoryid
 								WHERE purchorders.orddate >='$FromDate'
 									AND purchorders.orddate <='$ToDate'
@@ -398,13 +398,13 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 									purchorders.initiator,
 									stockcategory.categorydescription
 								FROM purchorderdetails
-								LEFT JOIN purchorders
+								INNER JOIN purchorders
 									ON purchorders.orderno=purchorderdetails.orderno
-								LEFT JOIN suppliers
+								INNER JOIN suppliers
 									ON purchorders.supplierno = suppliers.supplierid
 								LEFT JOIN stockmaster
 									ON purchorderdetails.itemcode = stockmaster.stockid
-								LEFT JOIN stockcategory
+								INNER JOIN stockcategory
 									ON stockcategory.categoryid = stockmaster.categoryid
 								WHERE purchorders.orddate >='$FromDate'
 									AND purchorders.orddate <='$ToDate'
@@ -435,13 +435,13 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 								FROM grns
 								LEFT JOIN purchorderdetails
 									ON grns.podetailitem = purchorderdetails.podetailitem
-								LEFT JOIN purchorders
+								INNER JOIN purchorders
 									ON purchorders.orderno=purchorderdetails.orderno
-								LEFT JOIN suppliers
+								INNER JOIN suppliers
 									ON purchorders.supplierno = suppliers.supplierid
 								LEFT JOIN stockmaster
 									ON purchorderdetails.itemcode = stockmaster.stockid
-								LEFT JOIN stockcategory
+								INNER JOIN stockcategory
 									ON stockcategory.categoryid = stockmaster.categoryid
 								WHERE grns.deliverydate >='$FromDate'
 									AND grns.deliverydate <='$ToDate'
@@ -469,13 +469,13 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 								FROM grns
 								LEFT JOIN purchorderdetails
 									ON grns.podetailitem = purchorderdetails.podetailitem
-								LEFT JOIN purchorders
+								INNER JOIN purchorders
 									ON purchorders.orderno=purchorderdetails.orderno
-								LEFT JOIN suppliers
+								INNER JOIN suppliers
 									ON purchorders.supplierno = suppliers.supplierid
 								LEFT JOIN stockmaster
 									ON purchorderdetails.itemcode = stockmaster.stockid
-								LEFT JOIN stockcategory
+								INNER JOIN stockcategory
 									ON stockcategory.categoryid = stockmaster.categoryid
 								WHERE grns.deliverydate >='$FromDate'
 									AND grns.deliverydate <='$ToDate'
@@ -503,13 +503,13 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 								FROM grns
 								LEFT JOIN purchorderdetails
 									ON grns.podetailitem = purchorderdetails.podetailitem
-								LEFT JOIN purchorders
+								INNER JOIN purchorders
 									ON purchorders.orderno=purchorderdetails.orderno
-								LEFT JOIN suppliers
+								INNER JOIN suppliers
 									ON purchorders.supplierno = suppliers.supplierid
 								LEFT JOIN stockmaster
 									ON purchorderdetails.itemcode = stockmaster.stockid
-								LEFT JOIN stockcategory
+								INNER JOIN stockcategory
 									ON stockcategory.categoryid = stockmaster.categoryid
 								WHERE grns.deliverydate >='$FromDate'
 									AND grns.deliverydate <='$ToDate'
@@ -539,13 +539,13 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 								FROM grns
 								LEFT JOIN purchorderdetails
 									ON grns.podetailitem = purchorderdetails.podetailitem
-								LEFT JOIN purchorders
+								INNER JOIN purchorders
 									ON purchorders.orderno=purchorderdetails.orderno
-								LEFT JOIN suppliers
+								INNER JOIN suppliers
 									ON purchorders.supplierno = suppliers.supplierid
 								LEFT JOIN stockmaster
 									ON purchorderdetails.itemcode = stockmaster.stockid
-								LEFT JOIN stockcategory
+								INNER JOIN stockcategory
 									ON stockcategory.categoryid = stockmaster.categoryid
 								WHERE grns.deliverydate >='$FromDate'
 									AND grns.deliverydate <='$ToDate'
@@ -572,13 +572,13 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 								FROM grns
 								LEFT JOIN purchorderdetails
 									ON grns.podetailitem = purchorderdetails.podetailitem
-								LEFT JOIN purchorders
+								INNER JOIN purchorders
 									ON purchorders.orderno=purchorderdetails.orderno
-								LEFT JOIN suppliers
+								INNER JOIN suppliers
 									ON purchorders.supplierno = suppliers.supplierid
 								LEFT JOIN stockmaster
 									ON purchorderdetails.itemcode = stockmaster.stockid
-								LEFT JOIN stockcategory
+								INNER JOIN stockcategory
 									ON stockcategory.categoryid = stockmaster.categoryid
 								WHERE grns.deliverydate >='$FromDate'
 									AND grns.deliverydate <='$ToDate'
@@ -873,7 +873,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 		} // End of if ($_POST['ReportType']
 
 		echo '</table>';
-		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+		echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<input type="hidden" name="ReportType" value="' . $_POST['ReportType'] . '" />';
 		echo '<input type="hidden" name="DateType" value="' . $_POST['DateType'] . '" />';
@@ -1502,7 +1502,7 @@ function display(&$db) //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_###
 
 	// the page is called.
 
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection">';
 	echo '<tr><td>' . _('Report Type') . ':</td>';

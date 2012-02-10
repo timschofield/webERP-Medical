@@ -276,7 +276,7 @@ echo '<tr><td><font color="blue"><b>' . $_SESSION['SuppTrans']->SupplierID . ' -
 	  </tr>
 	  </table>';
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post" name=form1>';
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post" name=form1>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<br /><table class="selection">';
@@ -957,7 +957,7 @@ then do the updates and inserts to process the credit note entered */
 
 									$sql = "UPDATE stockmaster
 												SET lastcost=materialcost+overheadcost+labourcost,
-													lastcurcostdate='" . Date('Y-m-d') . "'
+													lastcurcostdate='" . Date('Y-m-d') . "',
 													materialcost=materialcost+" . $CostIncrement . "
 												WHERE stockid='" . $EnteredGRN->ItemCode . "'";
 									$Result = DB_query($sql, $db, $ErrMsg, $DbgMsg, True);

@@ -100,7 +100,7 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 
 		$result = DB_Txn_Begin($db);
 
-		if ($_SESSION['ExistingOrder']==0){ /*its a new order to be inserted */
+		if ($_SESSION['ExistingOrder'.$identifier]==0){ /*its a new order to be inserted */
 
 			$StatusComment=date($_SESSION['DefaultDateFormat']).' - ' . _('Order Created by') . ' <a href="mailto:'. $_SESSION['UserEmail'] .'">'.$_SESSION['PO'.$identifier]->Initiator.
 				'</a> - '.$_SESSION['PO'.$identifier]->StatusMessage.'<br />';
@@ -906,7 +906,7 @@ if (isset($_POST['NewItem'])){ /* NewItem is set from the part selection list as
 
 /* This is where the order as selected should be displayed  reflecting any deletions or insertions*/
 
-echo '<form name=form1 action="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier. '" method="post">';
+echo '<form name=form1 action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?identifier='.$identifier. '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 //echo  _('Purchase Order') . ': <font color=BLUE size="4"><b>' . $_SESSION['PO'.$identifier]->OrderNo . ' ' . $_SESSION['PO'.$identifier]->SupplierName . ' </b></font> - ' . _('All amounts stated in') . ' ' . $_SESSION['PO'.$identifier]->CurrCode . '<br />';
@@ -954,7 +954,7 @@ if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
 			$Uom=$POLine->UOM;
 			echo '<input type="hidden" name="ConversionFactor" value="'.$POLine->ConversionFactor.'" />';
 			echo '<td>' . $POLine->StockID  . '</td>
-				<td>' . $POLine->ItemDescription . '</td>
+				<td>' . $POLine->GetItemDescription() . '</td>
 				<td><input type="text" class="number" name="Qty' . $POLine->LineNo .'" size="11" value="' . $DisplayQuantity . '" /></td>
 				<td>' . $Uom . '</td>
 				<td><input type="text" class="number" name="NetWeight' . $POLine->LineNo . '" size="11" value="' . locale_number_format($POLine->NetWeight,4) . '" /></td>
@@ -962,7 +962,7 @@ if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
 				<td class="number">' . $DisplayLineTotal . '</td>
 				<td><input type="text" class="date" alt="' .$_SESSION['DefaultDateFormat'].'" name="ReqDelDate' . $POLine->LineNo.'" size="11" value="' .$POLine->ReqDelDate .'" /></td>
 				<td>'.$POLine->PODetailRec.'</td>
-				<td><a href="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier. '&Delete=' . $POLine->LineNo . '">' . _('Delete') . '</a></td></tr>';
+				<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?identifier='.$identifier. '&Delete=' . $POLine->LineNo . '">' . _('Delete') . '</a></td></tr>';
 			$_SESSION['PO'.$identifier]->Total = $_SESSION['PO'.$identifier]->Total + $LineTotal;
 		}
 	}

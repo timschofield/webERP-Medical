@@ -80,8 +80,7 @@ If (isset($_POST['PrintPDF']) AND isset($_POST['ReportOrClose'])){
 
 			if ($StockQtyDifference !=0){ // only adjust stock if there is an adjustment to make!!
 
-				$SQL = 'BEGIN';
-				$Result = DB_query($SQL,$db);
+				DB_Txn_Begin($db);
 
 				// Need to get the current location quantity will need it later for the stock movement
 				$SQL="SELECT locstock.quantity
@@ -176,8 +175,7 @@ If (isset($_POST['PrintPDF']) AND isset($_POST['ReportOrClose'])){
 
 				} //END INSERT GL TRANS
 				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Unable to COMMIT transaction while adjusting stock in StockCheckAdjustmet report');
-				$SQL = "COMMIT";
-				$Result = DB_query($SQL,$db, $ErrMsg,'',true);
+				DB_Txn_Commit($db);
 
 			} // end if $StockQtyDifference !=0
 
@@ -330,7 +328,7 @@ If (isset($_POST['PrintPDF']) AND isset($_POST['ReportOrClose'])){
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . $title . '" alt="" />' . ' '
 		. $title . '</p>';
 
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post"><table class="selection">';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<tr><td>' . _('Choose Option'). ':</font></td><td><select name="ReportOrClose">';

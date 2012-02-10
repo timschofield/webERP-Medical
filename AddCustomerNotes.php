@@ -91,13 +91,21 @@ if ( isset($_POST['submit']) ) {
 	}
 
 if (!isset($Id)) {
-	$SQLname="SELECT * from debtorsmaster where debtorno='".$DebtorNo."'";
-	$Result = DB_query($SQLname,$db);
-	$row = DB_fetch_array($Result);
+	$SQLname="SELECT name from debtorsmaster WHERE debtorno='".$DebtorNo."'";
+	$result = DB_query($SQLname,$db);
+	$myrow = DB_fetch_array($result);
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' .
-		_('Notes for Customer').': <b>' .$row['name'].'</b></p><br />';
+		_('Notes for Customer').': <b>' .$myrow['name'].'</b></p><br />';
 
-	$sql = "SELECT * FROM custnotes where debtorno='".$DebtorNo."' ORDER BY date DESC";
+	$sql = "SELECT noteid,
+					debtorno,
+					href,
+					note,
+					date,
+					priority
+				FROM custnotes
+				WHERE debtorno='".$DebtorNo."'
+				ORDER BY date DESC";
 	$result = DB_query($sql,$db);
 			//echo '<br />'.$sql;
 
@@ -124,36 +132,43 @@ if (!isset($Id)) {
 				<td>%s</td>
 				<td><a href="%sId=%s&DebtorNo=%s">'. _('Edit').' </td>
 				<td><a href="%sId=%s&DebtorNo=%s&delete=1">'. _('Delete'). '</td></tr>',
-				ConvertSQLDate($myrow[4]),
-				$myrow[3],
-				$myrow[2],
-				$myrow[5],
-				$_SERVER['PHP_SELF'] . '?',
-				$myrow[0],
-				$myrow[1],
-				$_SERVER['PHP_SELF'] . '?',
-				$myrow[0],
-				$myrow[1]);
+				ConvertSQLDate($myrow['date']),
+				$myrow['note'],
+				$myrow['href'],
+				$myrow['priority'],
+				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
+				$myrow['noteid'],
+				$myrow['debtorno'],
+				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
+				$myrow['noteid'],
+				$myrow['debtorno']);
 
 	}
 	//END WHILE LIST LOOP
 	echo '</table>';
 }
 if (isset($Id)) {
-	echo '<div class="centre"><a href="'.$_SERVER['PHP_SELF'] . '?DebtorNo='.$DebtorNo.'"><?='._('Review all notes for this Customer').'</a></div>';
+	echo '<div class="centre"><a href="'.htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?DebtorNo='.$DebtorNo.'"><?='._('Review all notes for this Customer').'</a></div>';
 }
 echo '<br />';
 
 if (!isset($_GET['delete'])) {
 
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?DebtorNo='.$DebtorNo.'">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?DebtorNo='.$DebtorNo.'">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (isset($Id)) {
 		//editing an existing
 
-		$sql = "SELECT * FROM custnotes WHERE noteid='".$Id."'
-					and debtorno='".$DebtorNo."'";
+		$sql = "SELECT noteid,
+						debtorno,
+						href,
+						note,
+						date,
+						priority
+					FROM custnotes
+					WHERE noteid='".$Id."'
+						AND debtorno='".$DebtorNo."'";
 
 		$result = DB_query($sql, $db);
 				//echo '<br />'.$sql;

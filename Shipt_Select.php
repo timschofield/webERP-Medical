@@ -25,7 +25,7 @@ if (isset($_GET['SelectedSupplier'])){
 	$SelectedSupplier=$_POST['SelectedSupplier'];
 }
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 
@@ -110,15 +110,15 @@ if (!isset($ShiptRef) or $ShiptRef==""){
 	while ($myrow=DB_fetch_array($resultStkLocs)){
 		if (isset($_POST['StockLocation'])){
 			if ($myrow['loccode'] == $_POST['StockLocation']){
-			echo '<option selected="True" Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			} else {
-			echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			}
 		} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
 			$_POST['StockLocation'] = $_SESSION['UserStockLocation'];
-			echo '<option selected="True" Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
-			echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	}
 

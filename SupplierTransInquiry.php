@@ -8,7 +8,7 @@ include('includes/header.inc');
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p>';
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<table cellpadding="2" class="selection"><tr>';
@@ -18,7 +18,7 @@ echo '<td>' . _('Type') . ':</td><td><select name="TransType"> ';
 $sql = "SELECT typeid, typename FROM systypes WHERE typeid >= 20 AND typeid <= 23";
 $resultTypes = DB_query($sql,$db);
 
-echo '<option Value="All"> All </option>';
+echo '<option value="All"> All </option>';
 while ($myrow=DB_fetch_array($resultTypes)){
 	if (isset($_POST['TransType'])){
 		if ($myrow['typeid'] == $_POST['TransType']){

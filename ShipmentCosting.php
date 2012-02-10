@@ -115,9 +115,9 @@ $LineItemsSQL = "SELECT purchorderdetails.itemcode,
 					  purchorderdetails.itemdescription";
 
 $ErrMsg = _('The lines on the shipment could not be retrieved from the database');
-$LineItemsResult = db_query($LineItemsSQL,$db, $ErrMsg);
+$LineItemsResult = DB_query($LineItemsSQL,$db, $ErrMsg);
 
-if (db_num_rows($LineItemsResult) > 0) {
+if (DB_num_rows($LineItemsResult) > 0) {
 
 	if (isset($_POST['Close'])){
 		while ($myrow=DB_fetch_array($LineItemsResult)){
@@ -530,7 +530,7 @@ $k=0; //row colour counter
 $RowCounter =0;
 $TotalItemShipmentChgs =0;
 
-while ($myrow=db_fetch_array($ChargesResult)) {
+while ($myrow=DB_fetch_array($ChargesResult)) {
 
 
 	if ($k==1){
@@ -601,7 +601,7 @@ $k=0; //row colour counter
 $RowCounter =0;
 $TotalGeneralShipmentChgs =0;
 
-while ($myrow=db_fetch_array($ChargesResult)) {
+while ($myrow=DB_fetch_array($ChargesResult)) {
 
 	if ($k==1){
 		echo '<tr class="EvenTableRows">';
@@ -633,7 +633,7 @@ if ( isset($_GET['Close'])) { /* Only an opportunity to confirm user wishes to c
 
 // if the page was called with Close=Yes then show options to confirm OK to c
 	echo '<div class="centre">
-			<form method="post" action="' . $_SERVER['PHP_SELF'] .'?SelectedShipment=' . $_GET['SelectedShipment'] . '">';
+			<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') .'?SelectedShipment=' . $_GET['SelectedShipment'] . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 		if ($_SESSION['WeightedAverageCosting']==0){

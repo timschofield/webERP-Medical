@@ -103,7 +103,15 @@ if ( isset($_POST['submit']) ) {
 
 if (!isset($Id)) {
 
-	$sql = "SELECT * FROM custcontacts where debtorno='".$DebtorNo."' ORDER BY contid";
+	$sql = "SELECT contid,
+					debtorno,
+					contactname,
+					role,
+					phoneno,
+					notes
+				FROM custcontacts
+				WHERE debtorno='".$DebtorNo."'
+				ORDER BY contid";
 	$result = DB_query($sql,$db);
 			//echo '<br />'.$sql;
 
@@ -130,37 +138,44 @@ if (!isset($Id)) {
 				<td>%s</td>
 				<td><a href="%sId=%s&DebtorNo=%s">'. _('Edit').' </td>
 				<td><a href="%sId=%s&DebtorNo=%s&delete=1">'. _('Delete'). '</td></tr>',
-				$myrow[2],
-				$myrow[3],
-				$myrow[4],
-				$myrow[5],
-				$_SERVER['PHP_SELF'] . '?',
-				$myrow[0],
-				$myrow[1],
-				$_SERVER['PHP_SELF'] . '?',
-				$myrow[0],
-				$myrow[1]);
+				$myrow['contactname'],
+				$myrow['role'],
+				$myrow['phoneno'],
+				$myrow['notes'],
+				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
+				$myrow['contid'],
+				$myrow['debtorno'],
+				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
+				$myrow['contid'],
+				$myrow['debtorno']);
 
 	}
 	//END WHILE LIST LOOP
 	echo '</table>';
 }
 if (isset($Id)) {  ?>
-	<div class="centre"><a href="<?php echo $_SERVER['PHP_SELF'] . '?DebtorNo='.$DebtorNo;?>"><?=_('Review all contacts for this Customer')?></a></div>
+	<div class="centre"><a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?DebtorNo='.$DebtorNo;?>"><?=_('Review all contacts for this Customer')?></a></div>
 <?php } ?>
 <br />
 
 <?php
 if (!isset($_GET['delete'])) {
 
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . 'DebtorNo='.$DebtorNo.'">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . 'DebtorNo='.$DebtorNo.'">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (isset($Id)) {
 		//editing an existing Shipper
 
-		$sql = "SELECT * FROM custcontacts WHERE contid='".$Id."'
-					and debtorno='".$DebtorNo."'";
+		$sql = "SELECT contid,
+						contactname,
+						role,
+						phoneno,
+						notes,
+						debtorno
+					FROM custcontacts
+					WHERE contid='".$Id."'
+						AND debtorno='".$DebtorNo."'";
 
 		$result = DB_query($sql, $db);
 				//echo '<br />'.$sql;

@@ -22,7 +22,7 @@ echo '<br /><br />&nbsp;' . _('Utility page to rebuild the system default langua
 if (isset($_POST['submit'])) {
 
 	echo '<br /><table><tr><td>';
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 /* Run xgettext to recreate the default message.po language file */
@@ -46,7 +46,7 @@ if (isset($_POST['submit'])) {
           _('This is not usually necessary but if done before a new language is created then that language will have any new or recently modified strings') . '.<br />' .
           _('Existing languages are not affected.') . '.', 'info', _('PLEASE NOTE'));
 	echo '<br />';
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<input type="submit" name="submit" value="' . _('Proceed') . '" />&nbsp;&nbsp;';

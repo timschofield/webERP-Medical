@@ -120,7 +120,7 @@ if (isset($_POST['submit'])) {
 	if ($myrowPcTabExpenses[0]>0 or $myrowPcTabs[0]>0) {
 		prnMsg(_('Cannot delete this tab type because tabs have been created using this tab type'),'error');
 		echo '<br />';
-		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+		echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<br /><div class="centre"><input type="submit" name=return value="' . _('Return to list of tab types') . '" /></div>';
 		echo '</form>';
@@ -175,8 +175,8 @@ or deletion of the records*/
 			</tr>',
 				$myrow['typetabcode'],
 				$myrow['typetabdescription'],
-				$_SERVER['PHP_SELF']. '?', $myrow['typetabcode'],
-				$_SERVER['PHP_SELF']. '?', $myrow['typetabcode']);
+				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'). '?', $myrow['typetabcode'],
+				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'). '?', $myrow['typetabcode']);
 	}
 	//END WHILE LIST LOOP
 	echo '</table>';
@@ -185,11 +185,11 @@ or deletion of the records*/
 //end of ifs and buts!
 if (isset($SelectedTab)) {
 
-	echo '<p><div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Show All Types Tabs Defined') . '</a></div></p>';
+	echo '<p><div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Show All Types Tabs Defined') . '</a></div></p>';
 }
 if (! isset($_GET['delete'])) {
 
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<br /><table class="selection">'; //Main table
 

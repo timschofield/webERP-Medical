@@ -123,10 +123,10 @@ if (isset($_GET['NewRecurringOrder'])){
 									AND recurrsalesorderdetails.recurrorderno ='" . $_GET['ModifyRecurringSalesOrder'] . "'";
 
 			$ErrMsg = _('The line items of the order cannot be retrieved because');
-			$LineItemsResult = db_query($LineItemsSQL,$db,$ErrMsg);
-			if (db_num_rows($LineItemsResult)>0) {
+			$LineItemsResult = DB_query($LineItemsSQL,$db,$ErrMsg);
+			if (DB_num_rows($LineItemsResult)>0) {
 
-				while ($myrow=db_fetch_array($LineItemsResult)) {
+				while ($myrow=DB_fetch_array($LineItemsResult)) {
 					$_SESSION['Items'.$identifier]->add_to_cart($myrow['stkcode'],
 								$myrow['quantity'],
 								$myrow['description'],
@@ -257,7 +257,7 @@ If (isset($_POST['Process'])) {
 			$InsertQryResult = DB_query($HeaderSQL,$db,$ErrMsg,true);
 
 			$RecurrOrderNo = DB_Last_Insert_ID($db,'recurringsalesorders','recurrorderno');
-			echo 'xxx'.$RecurrOrderNo;
+
 			$StartOf_LineItemsSQL = "INSERT INTO recurrsalesorderdetails (
 						recurrorderno,
 						stkcode,
@@ -308,7 +308,7 @@ If (isset($_POST['Process'])) {
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Search') . '" alt="" />
 		<b>'.' '. _('Recurring Order for Customer') .' : ' . $_SESSION['Items'.$identifier]->CustomerName .'</b></p>';
-echo '<form action="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier. '" method="post">';
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?identifier='.$identifier. '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 

@@ -345,7 +345,7 @@ if (isset($_GET['AllocTrans'])) {
 
 	if (isset($_POST['AllocTrans'])) {
 		// Page called with trans number
-		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+		echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<input type="hidden" name="AllocTrans" value="' . $_POST['AllocTrans'] . '" />';
 
@@ -484,7 +484,7 @@ if (isset($_GET['AllocTrans'])) {
 					<td>' . ConvertSQLDate($myrow['trandate']) . '</td>
 					<td class="number">' . locale_money_format($myrow['total'],$myrow['currcode']) . '</td>
 					<td class="number">' . locale_money_format($myrow['total']-$myrow['alloc'],$myrow['currcode']) . '</td>';
-			echo '<td><a href=' . $_SERVER['PHP_SELF']. '?AllocTrans=' . $myrow['id'] . '>' . _('Allocate') . '</a></td></tr>';
+			echo '<td><a href=' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'). '?AllocTrans=' . $myrow['id'] . '>' . _('Allocate') . '</a></td></tr>';
 		}
 		DB_free_result($result);
 		echo '</table><br />';
@@ -523,7 +523,7 @@ if (isset($_GET['AllocTrans'])) {
 
 		$k=0;
 		while ($myrow = DB_fetch_array($result)) {
-			$allocate = '<a href=' . $_SERVER['PHP_SELF']. '?AllocTrans=' . $myrow['id'] . '>' . _('Allocate') . '</a>';
+			$allocate = '<a href=' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'). '?AllocTrans=' . $myrow['id'] . '>' . _('Allocate') . '</a>';
 
 			if ( $curDebtor != $myrow['debtorno'] ) {
 				if ( $curTrans > 1 ) {

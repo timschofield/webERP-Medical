@@ -104,9 +104,9 @@ if ($NewTransfer){
 															$myrow['decimalplaces']);
 
 
-		$_SESSION['Transfer']->TransferItem[0]->StandardCost = $myrow[3];
+		$_SESSION['Transfer']->TransferItem[0]->StandardCost = $myrow['standardcost'];
 
-		if ($myrow[2]=='D' OR $myrow[2]=='A' OR $myrow[2]=='K'){
+		if ($myrow['mbflag']=='D' OR $myrow['mbflag']=='A' OR $myrow['mbflag']=='K'){
 			prnMsg(_('The part entered is either or a dummy part or an assembly or a kit-set part') . '. ' . _('These parts are not physical parts and no stock holding is maintained for them') . '. ' . _('Stock Transfers are therefore not possible'),'warn');
 			echo '.<hr>';
 			echo '<a href="' . $rootpath . '/StockTransfers.php?NewTransfer=Yes">' . _('Enter another Transfer') . '</a>';
@@ -173,8 +173,8 @@ if ( isset($_POST['EnterTransfer']) ){
 		$Result = DB_query($SQL, $db, $ErrMsg, $DbgMsg, true);
 
 		if (DB_num_rows($Result)==1){
-			$LocQtyRow = DB_fetch_row($Result);
-			$QtyOnHandPrior = $LocQtyRow[0];
+			$LocQtyRow = DB_fetch_array($Result);
+			$QtyOnHandPrior = $LocQtyRow['quantity'];
 		} else {
 			// There must actually be some error this should never happen
 			$QtyOnHandPrior = 0;
@@ -294,8 +294,8 @@ if ( isset($_POST['EnterTransfer']) ){
 		$ErrMsg = _('Could not retrieve QOH at the destination because');
 		$Result = DB_query($SQL, $db, $ErrMsg, $DbgMsg,true);
 		if (DB_num_rows($Result)==1){
-			$LocQtyRow = DB_fetch_row($Result);
-			$QtyOnHandPrior = $LocQtyRow[0];
+			$LocQtyRow = DB_fetch_array($Result);
+			$QtyOnHandPrior = $LocQtyRow['quantity'];
 		} else {
 			// There must actually be some error this should never happen
 			$QtyOnHandPrior = 0;
@@ -428,7 +428,7 @@ if ( isset($_POST['EnterTransfer']) ){
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Dispatch') . '" alt="" />' . ' ' . $title . '</p>';
 
-echo '<form action="'. $_SERVER['PHP_SELF'] . '" method="post">';
+echo '<form action="'. htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 

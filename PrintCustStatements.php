@@ -23,22 +23,18 @@ if (isset($_GET['PrintPDF'])) {
 	$PaperSize='A4_Landscape';
 }
 
-
-
 if (isset($_GET['FromCust'])) {
-	$getFrom = $_GET['FromCust'];
-	$_POST['FromCust'] = $getFrom;
+	$_POST['FromCust'] = $_GET['FromCust'];
 }
 if (isset($_GET['ToCust'])) {
-	$getTo = $_GET['ToCust'];
-	$_POST['ToCust'] = $getTo;
+	$_POST['ToCust'] = $_GET['ToCust'];
 }
 
 
 if (isset($_POST['PrintPDF']) and isset($_POST['FromCust']) and $_POST['FromCust']!=''){
 	$_POST['FromCust'] = strtoupper($_POST['FromCust']);
 
-	If (!isset($_POST['ToCust'])){
+	if (!isset($_POST['ToCust'])){
 	      $_POST['ToCust'] = $_POST['FromCust'];
 	} else {
 		$_POST['ToCust'] = strtoupper($_POST['ToCust']);
@@ -419,7 +415,7 @@ if (isset($_POST['PrintPDF']) and isset($_POST['FromCust']) and $_POST['FromCust
 
 	/*if FromTransNo is not set then show a form to allow input of either a single statement number or a range of statements to be printed. Also get the last statement number created to show the user where the current range is up to */
 
-		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post"><table class="selection">';
+		echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post"><table class="selection">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 		echo '<tr><td>' . _('Starting Customer statement to print (Customer code)'). '

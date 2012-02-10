@@ -71,7 +71,7 @@ while ($myrow=DB_fetch_array($SalesOrdersResult)) {
 		$k=1;
 	}
 
-	$FTPDispatchNote = $_SERVER['PHP_SELF'] . '?OrderNo=' . $myrow['orderno'];
+	$FTPDispatchNote = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?OrderNo=' . $myrow['orderno'];
 	$FormatedDelDate = ConvertSQLDate($myrow['deliverydate']);
 	$FormatedOrderDate = ConvertSQLDate($myrow['orddate']);
 	$FormatedOrderValue = locale_money_format($myrow['ordervalue'],$_SESSION['CompanyRecord']['currencydefault']);

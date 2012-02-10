@@ -246,7 +246,7 @@ if (isset($_POST['CancelOrder'])) {
 
 	echo '<br /><br />';
 	prnMsg(_('This sale has been cancelled as requested'),'success');
-	echo '<br /><br /><a href="' .$_SERVER['PHP_SELF'] . '">' . _('Start a new Counter Sale') . '</a>';
+	echo '<br /><br /><a href="' .htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Start a new Counter Sale') . '</a>';
 	include('includes/footer.inc');
 	exit;
 
@@ -396,7 +396,7 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 
 /* Always do the stuff below */
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier . '" name="SelectParts" method="post">';
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?identifier='.$identifier . '" name="SelectParts" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 //Get The exchange rate used for GPPercent calculations on adding or amending items
@@ -554,6 +554,7 @@ if ((isset($_SESSION['Items'.$identifier])) OR isset($NewItem)) {
 									$OrderLine->Units,
 									$OrderLine->ConversionFactor,
 									($DiscountPercentage/100),
+									0,
 									$Narrative,
 									'Yes', /*Update DB */
 									$_POST['ItemDue_' . $OrderLine->LineNumber],
@@ -842,7 +843,7 @@ if (count($_SESSION['Items'.$identifier]->LineItems)>0 and !isset($_POST['Proces
 		$_SESSION['Items'.$identifier]->TaxGLCodes=$TaxGLCodes;
 		echo '<td class="number">' . locale_money_format($TaxLineTotal ,$_SESSION['Items'.$identifier]->DefaultCurrency) . '</td>';
 		echo '<td class="number">' . locale_money_format($SubTotal + $TaxLineTotal ,$_SESSION['Items'.$identifier]->DefaultCurrency) . '</td>';
-		echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier . '&amp;Delete=' . $OrderLine->LineNumber . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');">' . _('Delete') . '</a></td></tr>';
+		echo '<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?identifier='.$identifier . '&amp;Delete=' . $OrderLine->LineNumber . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');">' . _('Delete') . '</a></td></tr>';
 
 		if ($_SESSION['AllowOrderLineItemNarrative'] == 1){
 			echo $RowStarter;
@@ -2036,7 +2037,7 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 		} else {
 			echo '<img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print') . '" alt="" />' . ' ' . '<a target="_blank" href="'.$rootpath.'/PDFReceipt.php?FromTransNo='.$InvoiceNo.'&amp;InvOrCredit=Invoice&amp;PrintPDF=True">'. _('Print this receipt'). '</a><br /><br />';
 		}
-		echo '<br /><br /><a href="' .$_SERVER['PHP_SELF'] . '">' . _('Start a new Counter Sale') . '</a></div>';
+		echo '<br /><br /><a href="' .htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Start a new Counter Sale') . '</a></div>';
 
 	}
 	// There were input errors so don't process nuffin
@@ -2133,7 +2134,7 @@ if (!isset($_POST['ProcessSale'])){
 								AND purchorderdetails.itemcode='" . $myrow['stockid'] . "'";
 
 				$ErrMsg = _('The order details for this product cannot be retrieved because');
-				$PurchResult = db_query($sql,$db,$ErrMsg);
+				$PurchResult = DB_query($sql,$db,$ErrMsg);
 
 				$PurchRow = DB_fetch_row($PurchResult);
 				if ($PurchRow[0]!=null){
@@ -2147,8 +2148,8 @@ if (!isset($_POST['ProcessSale'])){
 							   FROM woitems
 							   WHERE stockid='" . $myrow['stockid'] ."'";
 				$ErrMsg = _('The order details for this product cannot be retrieved because');
-				$WoResult = db_query($sql,$db,$ErrMsg);
-				$WoRow = db_fetch_row($WoResult);
+				$WoResult = DB_query($sql,$db,$ErrMsg);
+				$WoRow = DB_fetch_row($WoResult);
 				if ($WoRow[0]!=null){
 					$WoQty =  $WoRow[0];
 				} else {
@@ -2255,7 +2256,7 @@ if (!isset($_POST['ProcessSale'])){
 
 		if (isset($SearchResult)) {
 			$j = 1;
-			echo '<form action="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier . '" method="post" name="orderform">';
+			echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?identifier='.$identifier . '" method="post" name="orderform">';
 			echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 			echo '<table class="selection">';
 			echo '<tr><td><input type="hidden" name="previous" value="'.locale_number_format($Offset-1,0).'" />
@@ -2315,7 +2316,7 @@ if (!isset($_POST['ProcessSale'])){
 							WHERE stockid='" . $myrow['stockid'] ."'
 							AND loccode='".$_SESSION['Items'.$identifier]->Location."'";
 				$ErrMsg = _('The batch details cannot be found');
-				$BatchResult = db_query($sql,$db,$ErrMsg);
+				$BatchResult = DB_query($sql,$db,$ErrMsg);
 
 				if ($myrow['controlled']==0) {
 					if ($k==1){

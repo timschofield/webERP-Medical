@@ -82,7 +82,7 @@ if (isset($_POST['submit'])) {
 	echo '<br />';
 }
 
-echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 
@@ -138,7 +138,7 @@ echo '<tr>
 	</tr>';
 echo '</table><br />';
 
-echo '<div class="centre"
+echo '<div class="centre">
 		<input tabindex="5" type="submit" name="submit" value="' . _('Enter Information') . '" /></div><br />';
 
 $sql = "SELECT sales_type,
@@ -170,7 +170,7 @@ while ($myrow = DB_fetch_array($result)) {
 		echo '<tr class="OddTableRows">';
 		$k=1;
 	}
-	$DeleteURL = $_SERVER['PHP_SELF'] . '?Delete=yes&SalesType=' . $myrow['salestype'] . '&DiscountCategory=' . $myrow['discountcategory'] . '&QuantityBreak=' . $myrow['quantitybreak'];
+	$DeleteURL = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?Delete=yes&SalesType=' . $myrow['salestype'] . '&DiscountCategory=' . $myrow['discountcategory'] . '&QuantityBreak=' . $myrow['quantitybreak'];
 
 	printf('<td>%s</td>
 		<td>%s</td>

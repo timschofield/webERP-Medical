@@ -113,9 +113,9 @@ if (!isset($SelectedCOGSPostingID)) {
 				$myrow[2],
 				$myrow[3],
 				$myrow[4],
-				$_SERVER['PHP_SELF'] . '?',
+				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
 				$myrow[0],
-				$_SERVER['PHP_SELF'] . '?',
+				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
 				$myrow[0]);
 		}//end while
 		echo '</table>';
@@ -217,9 +217,9 @@ if (!isset($SelectedCOGSPostingID)) {
 			$myrow[2],
 			$myrow[3],
 			$myrow[4],
-			$_SERVER['PHP_SELF'] . '?',
+			htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
 			$myrow[0],
-			$_SERVER['PHP_SELF'] . '?',
+			htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
 			$myrow[0]);
 
 		}//END WHILE LIST LOOP
@@ -229,12 +229,12 @@ if (!isset($SelectedCOGSPostingID)) {
 //end of ifs and buts!
 
 if (isset($SelectedCOGSPostingID)) {
-	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] .'">' . _('Show all cost of sales posting records') . '</a></div>';
+	echo '<div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') .'">' . _('Show all cost of sales posting records') . '</a></div>';
 }
 
 echo '<br />';
 
-echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (isset($SelectedCOGSPostingID)) {

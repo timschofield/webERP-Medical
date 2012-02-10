@@ -81,7 +81,7 @@ function search(&$db,&$StockID) { //####SEARCH_SEARCH_SEARCH_SEARCH_SEARCH_SEARC
 
 	// If the SELECT found records, display them
 	if (DB_num_rows($result) > 0) {
-		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+		echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<table cellpadding="2" colspan="7" class="selection">';
 		$TableHeader = '<tr><th>' . _('Code') . '</th>
@@ -226,7 +226,7 @@ function delete(&$db,$DemandID,$demandtype,$StockID) { //####DELETE_DELETE_DELET
 
 // If wanted to have a Confirm routine before did actually deletion, could check if
 // deletion = "yes"; if it did, display link that redirects back to this page
-// like this - <a href=" ' . $_SERVER['PHP_SELF'] . '?&delete=confirm&StockID=' . "$StockID" . ' ">
+// like this - <a href=" ' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?&delete=confirm&StockID=' . "$StockID" . ' ">
 // that sets delete=confirm. If delete=confirm, do actually deletion.
 //  This deletes an individual record by DemandID if called from a listall that shows
 // edit/delete or deletes all of a particular demand type if press Delete Demand Type button.
@@ -258,7 +258,7 @@ function listall(&$db,$part,$demandtype)  {//####LISTALL_LISTALL_LISTALL_LISTALL
 // Lists some in hit List Selection submit button, and uses part number if it is entered or
 // demandtype
 
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	$where = " ";
 	if ($demandtype) {
@@ -297,8 +297,8 @@ function listall(&$db,$part,$demandtype)  {//####LISTALL_LISTALL_LISTALL_LISTALL
 				<td>'.$myrow[2].'</td>
 				<td>'.$myrow[3].'</td>
 				<td>'.$displaydate.'</td>
-				<td><a href="'.$_SERVER['PHP_SELF'] . '?&DemandID='.$myrow[0].'&StockID='.$myrow[1].'">' . _('Edit') . '</td>
-				<td><a href="'.$_SERVER['PHP_SELF'] . '?&DemandID='.$myrow[0].'&StockID='.$myrow[1].'&delete=yes">' . _('Delete') .'</td>
+				<td><a href="'.htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?&DemandID='.$myrow[0].'&StockID='.$myrow[1].'">' . _('Edit') . '</td>
+				<td><a href="'.htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?&DemandID='.$myrow[0].'&StockID='.$myrow[1].'&delete=yes">' . _('Delete') .'</td>
 				</tr>';
 	}
 
@@ -317,7 +317,7 @@ function display(&$db,&$StockID,&$DemandID) { //####DISPLAY_DISPLAY_DISPLAY_DISP
 // Display Seach fields at top and Entry form below that. This function is called the first time
 // the page is called, and is also invoked at the end of all of the other functions.
 // echo "<br/>DISPLAY - DemandID = $DemandID<br/>";
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	if (!isset($StockID)) {
 		echo'</font><table cellpadding="3" colspan="4" class="selection"><tr>
@@ -327,7 +327,7 @@ function display(&$db,&$StockID,&$DemandID) { //####DISPLAY_DISPLAY_DISPLAY_DISP
 			<td><font size="1">' . _('Enter extract of the') . ' <b>' . _('Stock Code') . '</b>:</font></td>
 			<td><input tabindex="2" type="text" name="StockCode" size="15" maxlength="20" /></td>
 			<td><font size="3"><b>' . _('OR') . '</b></font></td>
-			<td><a href="'. $_SERVER['PHP_SELF'] . '?&listall=yes"><font size="3">' . _('List All Demands') .'</font></a></td></tr>
+			<td><a href="'. htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?&listall=yes"><font size="3">' . _('List All Demands') .'</font></a></td></tr>
 			<tr><td colspan="7"><div class="centre"><input tabindex="3" type="submit" name="Search" value="' . _('Search Now') . '" /></div></td></tr></table>';
 	} else {
 		if (isset($DemandID)) {
@@ -402,7 +402,7 @@ function display(&$db,&$StockID,&$DemandID) { //####DISPLAY_DISPLAY_DISPLAY_DISP
 		echo '<input type="submit" name="deletesome" value="' . _('Delete Demand Type') . '" />';
 		// If mrpdemand record exists, display option to delete it
 		if ((isset($DemandID)) AND (DB_num_rows($result) > 0)) {
-			echo '<br /><br /><a href=" ' . $_SERVER['PHP_SELF'] . '?delete=yes&StockID='.$StockID.'&DemandID=' . $DemandID . '">' . _('Or Delete Record') ;
+			echo '<br /><br /><a href=" ' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?delete=yes&StockID='.$StockID.'&DemandID=' . $DemandID . '">' . _('Or Delete Record') ;
 		}
 	}
 	echo '</form>';

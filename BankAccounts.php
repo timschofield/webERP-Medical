@@ -80,7 +80,7 @@ if (isset($_POST['submit'])) {
 
 		/*Check if there are already transactions against this account - cant allow change currency if there are*/
 
-		$sql = "SELECT * FROM banktrans WHERE bankact=" . $SelectedBankAccount;
+		$sql = "SELECT banktransid FROM banktrans WHERE bankact=" . $SelectedBankAccount;
 		$BankTransResult = DB_query($sql,$db);
 		if (DB_num_rows($BankTransResult)>0) {
 			$sql = "UPDATE bankaccounts
@@ -92,7 +92,7 @@ if (isset($_POST['submit'])) {
 				pettycash='" . $_POST['PettyCash'] . "'
 			WHERE accountcode = '" . $SelectedBankAccount . "'";
 			prnMsg(_('Note that it is not possible to change the currency of the account once there are transactions against it'),'warn');
-	echo '<br />';
+			echo '<br />';
 		} else {
 			$sql = "UPDATE bankaccounts
 				SET bankaccountname='" . $_POST['BankAccountName'] . "',
@@ -245,9 +245,9 @@ If (!isset($SelectedBankAccount)) {
 		$myrow['currcode'],
 		$defacc,
 		$PettyCash,
-		$_SERVER['PHP_SELF'],
+		htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'),
 		$myrow['accountcode'],
-		$_SERVER['PHP_SELF'],
+		htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'),
 		$myrow['accountcode']);
 
 	}
@@ -259,11 +259,11 @@ If (!isset($SelectedBankAccount)) {
 
 if (isset($SelectedBankAccount)) {
 	echo '<br />';
-	echo '<div class="centre"><p><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Show All Bank Accounts Defined') . '</a></p></div>';
+	echo '<div class="centre"><p><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Show All Bank Accounts Defined') . '</a></p></div>';
 	echo '<br />';
 }
 
-echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (isset($SelectedBankAccount) AND !isset($_GET['delete'])) {

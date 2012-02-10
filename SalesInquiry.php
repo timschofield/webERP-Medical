@@ -33,6 +33,8 @@ else {
 # Part Number operator - either LIKE or =
 if (isset($_POST['PartNumberOp'])) {
 	$PartNumberOp = $_POST['PartNumberOp'];
+} else {
+	$PartNumberOp = '=';
 }
 if (isset($_POST['DebtorNo'])) {
 	$DebtorNo = trim(strtoupper($_POST['DebtorNo']));
@@ -45,6 +47,8 @@ else {
 }
 if (isset($_POST['DebtorNoOp'])) {
 	$DebtorNoOp = $_POST['DebtorNoOp'];
+} else {
+	$DebtorNoOp = '=';
 }
 if (isset($_POST['DebtorName'])) {
 	$DebtorName = trim(strtoupper($_POST['DebtorName']));
@@ -57,6 +61,8 @@ else {
 }
 if (isset($_POST['DebtorNameOp'])) {
 	$DebtorNameOp = $_POST['DebtorNameOp'];
+} else {
+	$DebtorNameOp = '=';
 }
 if (!isset($_POST['OrderNo'])) {
 	$_POST['OrderNo'] = '';
@@ -66,8 +72,10 @@ if (!isset($_POST['OrderNo'])) {
 
 // create $sql
 
-if (isset($_POST['SummaryType'])) {
+if (isset($_POST['SummaryType'])){
 	$SaveSummaryType = $_POST['SummaryType'];
+} else {
+	$SaveSummaryType = 'name';
 }
 if (isset($_POST['submit'])) {
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/maintenance.png" title="' . _('Search') . '" alt="" />' . $title . '</p>';
@@ -145,7 +153,9 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 	}
 	if (strlen($DebtorNo) > 0) {
 		$WhereDebtorNo = " AND salesorders.debtorno " . $DebtorNoOp . " '" . $DebtorNo . "'  ";
-	}
+	} else {
+		$WhereDebtorNo = ' ';
+ 	}
 	$WhereDebtorName = ' ';
 	if (strlen($DebtorName) > 0 and $DebtorNameOp == 'LIKE') {
 		$DebtorName = $DebtorName . '%';
@@ -799,7 +809,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 
 		// Create array for summary type to display in header. Access it with $SaveSummaryType
 		$Summary_Array['orderno'] = _('Order Number');
-		$Summary_Array['stkcode'] = _('Part Number');
+		$Summary_Array['stkcode'] = _('Stock Code');
 		$Summary_Array['extprice'] = _('Extended Price');
 		$Summary_Array['debtorno'] = _('Customer Number');
 		$Summary_Array['name'] = _('Customer Name');
@@ -811,7 +821,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 
 		// Create array for sort for detail report to display in header
 		$Detail_Array['salesorderdetails.orderno'] = _('Order Number');
-		$Detail_Array['salesorderdetails.stkcode'] = _('Part Number');
+		$Detail_Array['salesorderdetails.stkcode'] = _('Stock Code');
 		$Detail_Array['debtorsmaster.debtorno,salesorderdetails.orderno'] = _('Customer Number');
 		$Detail_Array['debtorsmaster.name,debtorsmaster.debtorno,salesorderdetails.orderno'] = _('Customer Name');
 		$Detail_Array['tempstockmoves.transno,salesorderdetails.stkcode'] = _('Transaction Number');
@@ -833,7 +843,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 		echo '  ' . _('Date Type') . ' - ' . $_POST['DateType'] . '<br/>';
 		echo '  ' . _('Date Range') . ' - ' . $_POST['FromDate'] . _(' To ') . $_POST['ToDate'] . '<br/>';
 		if (strlen(trim($PartNumber)) > 0) {
-			echo '  ' . _('Part Number') . ' - ' . $_POST['PartNumberOp'] . ' ' . $_POST['PartNumber'] . '<br/>';
+			echo '  ' . _('Stock Code') . ' - ' . $_POST['PartNumberOp'] . ' ' . $_POST['PartNumber'] . '<br/>';
 		}
 		if (strlen(trim($_POST['DebtorNo'])) > 0) {
 			echo '  ' . _('Customer Number') . ' - ' . $_POST['DebtorNoOp'] . ' ' . $_POST['DebtorNo'] . '<br/>';
@@ -858,12 +868,12 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 		echo '<br/><br/>';
 		if ($_POST['ReportType'] == 'Detail') {
 			if ($_POST['DateType'] == 'Order') {
-				printf('%10s | %-20s | %10s | %-10s | %-30s | %-30s | %12s | %14s | %14s | %14s | %12s | %-10s | %-10s | %-10s | %-40s ', _('Order No') , _('Part Number') , _('Order Date') , _('Debtor No') , _('Debtor Name') , _('Branch Name') , _('Order Qty') , _('Extended Cost') , _('Extended Price') , _('Invoiced Qty') , _('Line Status') , _('Item Due') , _('Salesman') , _('Area') , _('Part Description'));
+				printf('%10s | %-20s | %10s | %-10s | %-30s | %-30s | %12s | %14s | %14s | %14s | %12s | %-10s | %-10s | %-10s | %-40s ', _('Order No') , _('Stock Code') , _('Order Date') , _('Debtor No') , _('Debtor Name') , _('Branch Name') , _('Order Qty') , _('Extended Cost') , _('Extended Price') , _('Invoiced Qty') , _('Line Status') , _('Item Due') , _('Salesman') , _('Area') , _('Part Description'));
 			}
 			else {
 
 				// Headings for Invoiced Date
-				printf('%10s | %14s | %-20s | %10s | %-10s | %-30s | %-30s | %12s | %14s | %14s | %12s | %-10s | %-10s | %-10s | %-40s ', _('Order No') , _('Trans. No') , _('Part Number') , _('Order Date') , _('Debtor No') , _('Debtor Name') , _('Branch Name') , _('Invoiced Qty') , _('Extended Cost') , _('Extended Price') , _('Line Status') , _('Invoiced') , _('Salesman') , _('Area') , _('Part Description'));
+				printf('%10s | %14s | %-20s | %10s | %-10s | %-30s | %-30s | %12s | %14s | %14s | %12s | %-10s | %-10s | %-10s | %-40s ', _('Order No') , _('Trans. No') , _('Stock Code') , _('Order Date') , _('Debtor No') , _('Debtor Name') , _('Branch Name') , _('Invoiced Qty') , _('Extended Cost') , _('Extended Price') , _('Line Status') , _('Invoiced') , _('Salesman') , _('Area') , _('Part Description'));
 			}
 			print '<br/><br/>';
 			$linectr = 0;
@@ -904,7 +914,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $DebtorNo, $DebtorNoOp, $Debto
 			}
 			if ($summarytype == 'stkcode' or $summarytype == 'extprice') {
 				$description = 'description';
-				$summaryheader = _('Part Number');
+				$summaryheader = _('Stock Code');
 				$descriptionheader = _('Part Description');
 			}
 			if ($summarytype == 'transno') {
@@ -992,7 +1002,7 @@ function display(&$db, $PartNumber, $DebtorNo, $DebtorName) //####DISPLAY_DISPLA
 
 	// the page is called.
 
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection">';
 	echo '<tr>
@@ -1036,7 +1046,7 @@ function display(&$db, $PartNumber, $DebtorNo, $DebtorName) //####DISPLAY_DISPLA
 				<input type="text" class="date" alt="' . $_SESSION['DefaultDateFormat'] . '" name="ToDate" size="10" maxlength="10" value="' . $_POST['ToDate'] . '" /></td>
 		</tr>';
 	echo '<tr>
-			<td>' . _('Part Number') . ':</td>
+			<td>' . _('Stock Code') . ':</td>
 			<td><select name="PartNumberOp">
 				<option selected="True" value="Equals">' . _('Equals') . '</option>
 				<option value="LIKE">' . _('Begins With') . '</option>
@@ -1112,7 +1122,7 @@ function display(&$db, $PartNumber, $DebtorNo, $DebtorName) //####DISPLAY_DISPLA
 			<td>' . _('Sort By') . ':</td>
 			<td><select name="SortBy">
 				<option selected="True" value="salesorderdetails.orderno">' . _('Order Number') . '</option>
-				<option value="salesorderdetails.stkcode">' . _('Part Number') . '</option>
+				<option value="salesorderdetails.stkcode">' . _('Stock Code') . '</option>
 				<option value="debtorsmaster.debtorno,salesorderdetails.orderno">' . _('Customer Number') . '</option>
 				<option value="debtorsmaster.name,debtorsmaster.debtorno,salesorderdetails.orderno">' . _('Customer Name') . '</option>
 				<option value="tempstockmoves.transno,salesorderdetails.stkcode">' . _('Transaction Number') . '</option>
@@ -1125,7 +1135,7 @@ function display(&$db, $PartNumber, $DebtorNo, $DebtorName) //####DISPLAY_DISPLA
 			<td><select name="SummaryType">
 				<option selected="True" value="orderno">' . _('Order Number') . '</option>
 				<option value="transno">' . _('Transaction Number') . '</option>
-				<option value="stkcode">' . _('Part Number') . '</option>
+				<option value="stkcode">' . _('Stock Code') . '</option>
 				<option value="extprice">' . _('Extended Price') . '</option>
 				<option value="debtorno">' . _('Customer Number') . '</option>
 				<option value="name">' . _('Customer Name') . '</option>

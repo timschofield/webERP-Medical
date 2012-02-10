@@ -255,7 +255,7 @@ if (isset($NewItem) AND isset($_POST['WO'])){
 
 if (isset($_POST['submit'])) { //The update button has been clicked
 
-	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] .'">' . _('Enter a new work order') . '</a>';
+	echo '<div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') .'">' . _('Enter a new work order') . '</a>';
 	echo '<br /><a href="' . $rootpath . '/SelectWorkOrder.php">' . _('Select an existing work order') . '</a>';
 	echo '<br /><a href="'. $rootpath . '/WorkOrderCosting.php?WO=' .  $_REQUEST['WO'] . '">' . _('Go to Costing'). '</a></div>';
 
@@ -398,7 +398,7 @@ if (isset($_POST['submit'])) { //The update button has been clicked
 	}
 }
 
-echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '" name="form1">';
+echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" name="form1">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<br /><table class="selection">';
@@ -648,7 +648,7 @@ if (isset($SearchResult)) {
 						$myrow['description'],
 						$myrow['units'],
 						$ImageSource,
-						$_SERVER['PHP_SELF'] . '?WO=' . $_POST['WO'] . '&NewItem=' . $myrow['stockid'].'&Line='.$i);
+						htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?WO=' . $_POST['WO'] . '&NewItem=' . $myrow['stockid'].'&Line='.$i);
 
 				$j++;
 				If ($j == 25){

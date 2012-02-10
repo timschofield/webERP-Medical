@@ -17,7 +17,7 @@ if (!isset($_GET['TransferNo'])){
 
 	include ('includes/header.inc');
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Reprint transfer docket').'</p><br />';
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table><tr><td>'._('Transfer docket to reprint').'</td>';
 	echo '<td><input type="text" class="number" size="10" name="TransferNo" /></td></tr></table>';
@@ -81,29 +81,7 @@ do {
 	}
 
 } while ($TransferRow = DB_fetch_array($result));
-/*
-$pdfcode = $pdf->output();
-$len = strlen($pdfcode);
 
-
-if ($len<=20){
-	include('includes/header.inc');
-	echo '<br />';
-	prnMsg( _('There was no stock location transfer to print out'), 'warn');
-	echo '<br /><a href="' . $rootpath. '/index.php">'. _('Back to the menu'). '</a>';
-	include('includes/footer.inc');
-	exit;
-} else {
-	header('Content-type: application/pdf');
-	header('Content-Length: ' . $len);
-	header('Content-Disposition: inline; filename=StockLocTrfShipment.pdf');
-	header('Expires: 0');
-	header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-	header('Pragma: public');
-
-	$pdf->Output('PDFStockLocTransfer.pdf', 'I');
-}
-*/
 $pdf->OutputD($_SESSION['DatabaseName'] . '_StockLocTrfShipment_' . date('Y-m-d') . '.pdf');//UldisN
 $pdf->__destruct(); //UldisN
 ?>

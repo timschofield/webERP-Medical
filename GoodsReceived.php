@@ -67,7 +67,7 @@ if ($Status != PurchOrder::STATUS_PRINTED) {
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Receive') . '" alt="" />' . ' ' . _('Receive Purchase Order') . '';
 
 echo ' : '. $_SESSION['PO']->OrderNo .' '. _('from'). ' ' . $_SESSION['PO']->SupplierName . '</p>';
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (!isset($_POST['ProcessGoodsReceived'])) {
@@ -157,8 +157,13 @@ if (count($_SESSION['PO']->LineItems)>0 and !isset($_POST['ProcessGoodsReceived'
 		}
 
 		//Now Display LineItem
-		echo '<td>' . $LnItm->StockID . '</td>';
-		echo '<td>' . $LnItm->ItemDescription . '</td>';
+		if (file_exists($_SESSION['part_pics_dir'] . '/' . $LnItm->StockID . '.jpg')) {
+			echo '<td><a href="' . $rootpath . '/' . $_SESSION['part_pics_dir'] . '/' . $LnItm->StockID . '.jpg" target="_blank">'. $LnItm->StockID . '</a><br /></td>';
+		} else {
+			echo '<td>'. $LnItm->StockID . '</td>';
+		}
+
+		echo '<td>' . stripslashes($LnItm->ItemDescription) . '</td>';
 		echo '<td class="number">' . $DisplayQtyOrd . '</td>';
 		echo '<td>' . $LnItm->SuppUOM . '</td>';
 		echo '<td class="number">' . $DisplayQtyRec . '</td>';

@@ -224,20 +224,34 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 			/* Dont search for supplier data if it is a preview */
 			if ($OrderNo !='Preview') {
 				//check the supplier code from code item
-				$sqlsupp = "SELECT supplierdescription
-					FROM purchdata
+                $sqlsupp = "SELECT suppliers_partno, supplierdescription
+				FROM purchdata
 					WHERE stockid='" . $POLine['itemcode'] . "'
-					AND supplierno ='" . $POHeader['supplierno'] . "'
-					AND price='".$POLine['unitprice']."'";
-				$SuppResult = DB_query($sqlsupp,$db);
-				$SuppDescRow = DB_fetch_row($SuppResult);
+					AND supplierno ='" . $POHeader['supplierno'] . "'";
+
+                $SuppResult = DB_query($sqlsupp,$db);
+
+				if ( DB_num_rows($SuppResult) > 0 ) {
+                    $SuppDescRow = DB_fetch_row($SuppResult);
+
+                    $Desc = $SuppDescRow[0] . " - ";
+
+                    // If the supplier's desc. is provided, use it;
+                    // otherwise, use the stock's desc.
+                    if ( mb_strlen($SuppDescRow[1]) > 2 ) {
+                    	$Desc .= $SuppDescRow[1];
+                    }
+                    else {
+                    	$Desc .= $POLine['itemdescription'];
+                    }
+				}
+				else {
+					// No purchdata found, so use the stock's desc.
+                    $Desc = $POLine['itemdescription'];
+				}
 			} else {
-				$SuppDescRow[0]='';
-			}
-			if($SuppDescRow[0]==""){
-				$Desc=$POLine['itemdescription'];
-			}else{
-				$Desc="".$SuppDescRow['0']." - ".$POLine['itemdescription']."";
+				// We are previewing; use the preview's desc.
+                $Desc = $POLine['itemdescription'];
 			}
 			$OrderTotal += ($POLine['unitprice']*$POLine['quantityord']);
 			$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column1->x,$YPos,$FormDesign->Data->Column1->Length,$FormDesign->Data->Column1->FontSize,$POLine['itemcode'], 'left');
@@ -342,7 +356,7 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/printer.png" title="' . _('Search') . '" alt="" />' . ' ' .
 		$title . '</p><br />';
 
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	if ($ViewingOnly==1){
 		echo '<input type="hidden" name="ViewingOnly" value="1" />';

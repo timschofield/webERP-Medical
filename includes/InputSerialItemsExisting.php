@@ -27,7 +27,7 @@ if ($_POST['EntryType'] == 'KEYED'){
 
 		echo '<td valign="top"><b>'. _('Select Existing Items'). '</b><br />';
 
-		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+		echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
         echo '<input type="hidden" name="LineNo" value="' . $LineNo . '" />
                         <input type="hidden" name="StockID" value="' . $StockID . '" />

@@ -52,7 +52,7 @@ if (($myrow[2]=='K') OR ($myrow[2]=='A') OR ($myrow[2]=='D')) {
 	echo '<tr><th><font size="3" color="#616161">' . _('Item') . ' :<b> ' . $StockID . ' - ' . $myrow[0] . ' </b>  (' . _('in units of') . ' :<b> ' . $myrow[1] . ')</b></font></th></tr>';
 }
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post"><tr><td>';
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post"><tr><td>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo _('Stock Code') . ':<input type="text" name="StockID" size="21" maxlength="20" value="' . $StockID . '" />';
 
@@ -63,15 +63,15 @@ $resultStkLocs = DB_query($sql,$db);
 while ($myrow=DB_fetch_array($resultStkLocs)){
 	if (isset($_POST['StockLocation'])){
 		if ($myrow['loccode'] == $_POST['StockLocation']){
-		     echo '<option selected="True" Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		     echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
-		     echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		     echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
-		 echo '<option selected="True" Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		 echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		 $_POST['StockLocation']=$myrow['loccode'];
 	} else {
-		 echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		 echo '<option Vvlue="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 	}
 }
 if (isset($_POST['StockLocation'])){

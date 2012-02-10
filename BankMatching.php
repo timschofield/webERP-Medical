@@ -78,10 +78,10 @@ if (isset($_POST['Update']) AND $_POST['RowCounter']>1){
 
 echo '<div class="page_help_text">' . _('Use this screen to match webERP Receipts and Payments to your Bank Statement.  Check your bank statement and click the check-box when you find the matching transaction.') . '</div><br />';
 
-echo '<form action="'. $_SERVER['PHP_SELF'] . '" method="post">';
+echo '<form action="'. htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<input type="hidden" name="Type" Value="' . $Type . '" />';
+echo '<input type="hidden" name="Type" value="' . $Type . '" />';
 
 echo '<table class="selection"><tr>';
 echo '<td align=left>' . _('Bank Account') . ':</td><td colspan="3"><select tabindex="1" name="BankAccount">';

@@ -246,7 +246,7 @@ if ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 
 	/* show form to allow input	*/
 
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post"><table class="selection">';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (!isset($_POST['FromCriteria']) or strlen($_POST['FromCriteria'])<1){
@@ -271,9 +271,9 @@ if ((isset($_POST['PrintPDF']) OR isset($_POST['PrintPDFAndProcess']))
 
 	while ($myrow=DB_fetch_array($result)){
 	if ($myrow['currabrev'] == $_SESSION['CompanyRecord']['currencydefault']){
-			echo '<option selected="True" Value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
+			echo '<option selected="True" value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 	} else {
-		echo '<option Value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
+		echo '<option value="' . $myrow['currabrev'] . '">' . $myrow['currency'] . '</option>';
 	}
 	}
 	echo '</select></td></tr>';

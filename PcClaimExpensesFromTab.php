@@ -158,7 +158,7 @@ if (!isset($SelectedTabs)){
 	or deletion of the records*/
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Payment Entry') . '" alt="" />' . ' ' . $title . '</p>';
 
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<br /><table class="selection">'; //Main table
 
@@ -197,10 +197,10 @@ if (isset($SelectedTabs)) {
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Payment Entry') . '" alt="" />' . ' ' . $title . '</p>';
 /* RICARD */
-	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Select another tab') . '</a></div>';
+	echo '<div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Select another tab') . '</a></div>';
 
 	if (! isset($_GET['edit']) OR isset ($_POST['GO'])){
-		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+		echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 		echo '<br /><table class="selection">';
@@ -294,9 +294,9 @@ if (isset($SelectedTabs)) {
 					$AuthorisedDate,
 					$myrow['notes'],
 					$myrow['receipt'],
-					$_SERVER['PHP_SELF'] . '?',
+					htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
 					$myrow['counterindex'],
-					$_SERVER['PHP_SELF'] . '?',
+					htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
 					$myrow['counterindex']);
 			} else {
 				printf('<td>%s</td>
@@ -338,7 +338,7 @@ if (isset($SelectedTabs)) {
 
 	if (! isset($_GET['delete'])) {
 
-		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+		echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<br /><table class="selection">'; //Main table
 

@@ -141,9 +141,9 @@ or deletion of the records*/
 				$myrow[2],
 				$myrow[3],
 				$myrow[4],
-				$_SERVER['PHP_SELF'] . '?',
+				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
 				$myrow[0],
-				$_SERVER['PHP_SELF'] . '?',
+				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
 				$myrow[0]);
 	}
 
@@ -155,10 +155,10 @@ or deletion of the records*/
 
 if (isset($SelectedWC)) {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p>';
-	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Show all Work Centres') . '</a></div>';
+	echo '<div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Show all Work Centres') . '</a></div>';
 }
 
-echo '<br /><form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+echo '<br /><form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (isset($SelectedWC)) {

@@ -16,7 +16,7 @@ foreach ($_POST as $key=>$value) {
 if (!(isset($_POST['Search']))) {
 
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Top Sales Order Search') . '" alt="" />' . ' ' . _('Top Sales Order Search') . '</p>';
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" name="SelectCustomer" method="post">';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" name="SelectCustomer" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table cellpadding="3" colspan="4" class="selection">';
 	//to view store location

@@ -25,57 +25,134 @@ if (isset($_POST['PlacePO'])){ //user hit button to place PO for selected orders
 	} else {
    /*  Now build SQL of items to purchase with purchasing data and preferred suppliers - sorted by preferred supplier */
 		$sql = "SELECT purchdata.supplierno,
-		               purchdata.stockid,
-			       purchdata.price,
-			       purchdata.suppliers_partno,
-		               purchdata.supplierdescription,
-			       purchdata.conversionfactor,
-			       purchdata.leadtime,
-			       purchdata.suppliersuom,
-			       stockmaster.kgs,
-			       stockmaster.volume,
-			       stockcategory.stockact,
-			       SUM(salesorderdetails.quantity-salesorderdetails.qtyinvoiced) AS orderqty
-			FROM purchdata INNER JOIN salesorderdetails ON
-			 purchdata.stockid = salesorderdetails.stkcode
-			 INNER JOIN stockmaster  ON
-			 purchdata.stockid = stockmaster.stockid
-			 INNER JOIN stockcategory ON
-			 stockmaster.categoryid = stockcategory.categoryid
-			WHERE purchdata.preferred=1
-			AND purchdata.effectivefrom <='" . Date('Y-m-d') . "'
-			AND (" . $OrdersToPlacePOFor . ")
-			GROUP BY purchdata.supplierno,
-				purchdata.stockid,
-				purchdata.price,
-				purchdata.suppliers_partno,
-				purchdata.supplierdescription,
-				purchdata.conversionfactor,
-				purchdata.leadtime,
-				purchdata.suppliersuom,
-				stockmaster.kgs,
-				stockmaster.volume,
-				stockcategory.stockact
-			ORDER BY purchdata.supplierno,
-				 purchdata.stockid";
+						purchdata.stockid,
+						purchdata.price,
+						purchdata.suppliers_partno,
+						purchdata.supplierdescription,
+						purchdata.conversionfactor,
+						purchdata.leadtime,
+						purchdata.suppliersuom,
+						stockmaster.kgs,
+						stockmaster.volume,
+						stockcategory.stockact,
+						SUM(salesorderdetails.quantity-salesorderdetails.qtyinvoiced) AS orderqty
+					FROM purchdata
+					INNER JOIN salesorderdetails
+						ON  purchdata.stockid = salesorderdetails.stkcode
+					INNER JOIN stockmaster
+						ON purchdata.stockid = stockmaster.stockid
+					INNER JOIN stockcategory
+						ON stockmaster.categoryid = stockcategory.categoryid
+					WHERE purchdata.preferred=1
+						AND purchdata.effectivefrom <='" . Date('Y-m-d') . "'
+						AND (" . $OrdersToPlacePOFor . ")
+					GROUP BY purchdata.supplierno,
+							purchdata.stockid,
+							purchdata.price,
+							purchdata.suppliers_partno,
+							purchdata.supplierdescription,
+							purchdata.conversionfactor,
+							purchdata.leadtime,
+							purchdata.suppliersuom,
+							stockmaster.kgs,
+							stockmaster.volume,
+							stockcategory.stockact
+					ORDER BY purchdata.supplierno,
+							purchdata.stockid";
 		$ErrMsg = _('Unable to retrieve the items on the selected orders for creating purchase orders for');
 		$ItemResult = DB_query($sql,$db,$ErrMsg);
 
-		if (DB_num_rows($ItemResult)==0){
+		$ItemArray = array();
+
+		while ($myrow = DB_fetch_array($ItemResult)){
+			$ItemArray[$myrow['stockid']] = $myrow;
+		}
+
+		/* Now figure out if there are any components of Assembly items that  need to be ordered too */
+		$sql = "SELECT purchdata.supplierno,
+						purchdata.stockid,
+						purchdata.price,
+						purchdata.suppliers_partno,
+						purchdata.supplierdescription,
+						purchdata.conversionfactor,
+						purchdata.leadtime,
+						purchdata.suppliersuom,
+						stockmaster.kgs,
+						stockmaster.volume,
+						stockcategory.stockact,
+						SUM(bom.quantity *(salesorderdetails.quantity-salesorderdetails.qtyinvoiced)) AS orderqty
+					FROM purchdata
+					INNER JOIN bom
+						ON purchdata.stockid=bom.component
+					INNER JOIN salesorderdetails
+						ON bom.parent=salesorderdetails.stkcode
+					INNER JOIN stockmaster
+						ON purchdata.stockid = stockmaster.stockid
+					INNER JOIN stockmaster AS stockmaster2
+						ON stockmaster2.stockid=salesorderdetails.stkcode
+					INNER JOIN stockcategory
+						ON stockmaster.categoryid = stockcategory.categoryid
+					WHERE purchdata.preferred=1
+						AND stockmaster2.mbflag='A'
+						AND bom.loccode ='" . $_SESSION['UserStockLocation'] . "'
+						AND purchdata.effectivefrom <='" . Date('Y-m-d') . "'
+						AND bom.effectiveafter <='" . Date('Y-m-d') . "'
+						AND bom.effectiveto > '" . Date('Y-m-d') . "'
+						AND (" . $OrdersToPlacePOFor . ")
+					GROUP BY purchdata.supplierno,
+							purchdata.stockid,
+							purchdata.price,
+							purchdata.suppliers_partno,
+							purchdata.supplierdescription,
+							purchdata.conversionfactor,
+							purchdata.leadtime,
+							purchdata.suppliersuom,
+							stockmaster.kgs,
+							stockmaster.volume,
+							stockcategory.stockact
+					ORDER BY purchdata.supplierno,
+							purchdata.stockid";
+		$ErrMsg = _('Unable to retrieve the items on the selected orders for creating purchase orders for');
+		$ItemResult = DB_query($sql,$db,$ErrMsg);
+
+		/* add any assembly item components from salesorders to the ItemArray */
+		while ($myrow = DB_fetch_array($ItemResult)){
+			if (isset($ItemArray[$myrow['stockid']])){
+			  /* if the item is already in the ItemArray then just add the quantity to the existing item */
+			   $ItemArray[$myrow['stockid']]['orderqty'] += $myrow['orderqty'];
+			} else { /*it is not already in the ItemArray so add it */
+				$ItemArray[$myrow['stockid']] = $myrow;
+			}
+ 		}
+
+
+		/* We need the items to order to be in supplier order so that only a single order is created for a supplier - so need to sort the multi-dimensional array to ensure it is listed by supplier sequence. To use array_multisort we need to get arrays of supplier with the same keys as the main array of rows
+		 */
+		foreach ($ItemArray as $key => $row) {
+			//to make the Supplier array with the keys of the $ItemArray
+			$SupplierArray[$key]  = $row['supplierno'];
+		}
+
+		/* Use array_multisort to Sort the ItemArray with supplierno ascending
+		Add $ItemArray as the last parameter, to sort by the common key
+		*/
+		array_multisort($SupplierArray, SORT_ASC, $ItemArray);
+
+		if (count($ItemArray)==0){
 			prnMsg(_('There might be no supplier purchasing data set up for any items on the selected sales order(s). No purchase orders have been created'),'warn');
 		} else {
 			/*Now get the default delivery address details from the users default stock location */
 			$sql = "SELECT locationname,
-					deladd1,
-					deladd2,
-					deladd3,
-					deladd4,
-					deladd5,
-					deladd6,
-					tel,
-					contact
-				FROM locations
-				WHERE loccode = '" .$_SESSION['UserStockLocation']  . "'";
+							deladd1,
+							deladd2,
+							deladd3,
+							deladd4,
+							deladd5,
+							deladd6,
+							tel,
+							contact
+						FROM locations
+						WHERE loccode = '" .$_SESSION['UserStockLocation']  . "'";
 			$ErrMsg = _('The delivery address for the order could not be obtained from the user default stock location');
 			$DelAddResult = DB_query($sql, $db,$ErrMsg);
 			$DelAddRow = DB_fetch_array($DelAddResult);
@@ -88,7 +165,7 @@ if (isset($_POST['PlacePO'])){ //user hit button to place PO for selected orders
 				$UserDetails  = ' ' . $_SESSION['UsersRealName'] . ' ';
 			}
 
-			while ($ItemRow = DB_fetch_array($ItemResult)){
+			foreach ($ItemArray as $ItemRow) {
 
 				if ($SupplierID != $ItemRow['supplierno']){
 				/* This order item is purchased from a different supplier so need to finish off the authorisation of the previous order and start a new order */
@@ -312,7 +389,7 @@ if (isset($_POST['PlacePO'])){ //user hit button to place PO for selected orders
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/sales.png" title="' . _('Sales') . '" alt="" />' . ' ' . _('Outstanding Sales Orders') . '</p> ';
 
-echo '<form action="' . $_SERVER['PHP_SELF'] .'" method="post">';
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') .'" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 
@@ -354,12 +431,13 @@ if (isset($_POST['SearchParts'])){
 
 		$SQL = "SELECT stockmaster.stockid,
 				stockmaster.description,
+				stockmaster.decimalplaces,
 				SUM(locstock.quantity) AS qoh,
 				stockmaster.units
-			FROM stockmaster,
-				locstock
-			WHERE stockmaster.stockid=locstock.stockid
-			AND stockmaster.description " . LIKE . " '" . $SearchString . "'
+			FROM stockmaster
+			INNER JOIN locstock
+			ON stockmaster.stockid=locstock.stockid
+			WHERE stockmaster.description " . LIKE . " '" . $SearchString . "'
 			AND stockmaster.categoryid='" . $_POST['StockCat']. "'
 			GROUP BY stockmaster.stockid,
 				stockmaster.description,
@@ -369,12 +447,13 @@ if (isset($_POST['SearchParts'])){
 	 } elseif (isset($_POST['StockCode'])){
 		$SQL = "SELECT stockmaster.stockid,
 				stockmaster.description,
+				stockmaster.decimalplaces,
 				sum(locstock.quantity) as qoh,
 				stockmaster.units
-			FROM stockmaster,
-				locstock
-			WHERE stockmaster.stockid=locstock.stockid
-			AND stockmaster.stockid " . LIKE . " '%" . $_POST['StockCode'] . "%'
+			FROM stockmaster
+			INNER JOIN locstock
+			ON stockmaster.stockid=locstock.stockid
+			WHERE stockmaster.stockid " . LIKE . " '%" . $_POST['StockCode'] . "%'
 			AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
 			GROUP BY stockmaster.stockid,
 				stockmaster.description,
@@ -384,12 +463,13 @@ if (isset($_POST['SearchParts'])){
 	 } elseif (!isset($_POST['StockCode']) AND !isset($_POST['Keywords'])) {
 		$SQL = "SELECT stockmaster.stockid,
 				stockmaster.description,
+				stockmaster.decimalplaces,
 				sum(locstock.quantity) as qoh,
 				stockmaster.units
-			FROM stockmaster,
-				locstock
-			WHERE stockmaster.stockid=locstock.stockid
-			AND stockmaster.categoryid='" . $_POST['StockCat'] ."'
+			FROM stockmaster
+			INNER JOIN locstock
+			ON stockmaster.stockid=locstock.stockid
+			WHERE  stockmaster.categoryid='" . $_POST['StockCat'] ."'
 			GROUP BY stockmaster.stockid,
 				stockmaster.description,
 				stockmaster.units
@@ -519,7 +599,7 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 			</tr>',
 			$myrow['stockid'],
 			$myrow['description'],
-			$myrow['qoh'],
+			locale_number_format($myrow['qoh'], $myrow['decimalplaces']),
 			$myrow['units']);
 
 		$j++;

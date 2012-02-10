@@ -129,9 +129,9 @@ if (!isset($_GET['InvoiceNumber']) AND !$_SESSION['ProcessingCredit']) {
 
 		$LineItemsResult = DB_query($LineItemsSQL,$db,$ErrMsg, $DbgMsg);
 
-		if (db_num_rows($LineItemsResult)>0) {
+		if (DB_num_rows($LineItemsResult)>0) {
 
-			while ($myrow=db_fetch_array($LineItemsResult)) {
+			while ($myrow=DB_fetch_array($LineItemsResult)) {
 
 				$LineNumber = $_SESSION['CreditItems']->LineCounter;
 
@@ -261,7 +261,7 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/c
 
 if (!isset($_POST['ProcessCredit'])) {
 
-	echo '<form action="' . $_SERVER['PHP_SELF'] .'" method="post">';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') .'" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 
@@ -300,9 +300,9 @@ $j=0; //row counter
 foreach ($_SESSION['CreditItems']->LineItems as $LnItm) {
 	$LineTotal =($LnItm->QtyDispatched * $LnItm->Price * (1 - $LnItm->DiscountPercent));
 	if (!isset($_POST['ProcessCredit'])) {
-		$_SESSION['CreditItems']->total = $_SESSION['CreditItems']->total + $LineTotal;
-		$_SESSION['CreditItems']->totalVolume = $_SESSION['CreditItems']->totalVolume + $LnItm->QtyDispatched * $LnItm->Volume;
-		$_SESSION['CreditItems']->totalWeight = $_SESSION['CreditItems']->totalWeight + $LnItm->QtyDispatched * $LnItm->Weight;
+		$_SESSION['CreditItems']->total += $LineTotal;
+		$_SESSION['CreditItems']->totalVolume += $LnItm->QtyDispatched * $LnItm->Volume;
+		$_SESSION['CreditItems']->totalWeight += $LnItm->QtyDispatched * $LnItm->Weight;
 
 		if ($k==1){
 			$RowStarter = 'class="EvenTableRows"';
@@ -382,7 +382,7 @@ foreach ($_SESSION['CreditItems']->LineItems as $LnItm) {
 
 		echo '<td class="number">' . $DisplayTaxAmount . '</td>
 			<td class="number">' . $DisplayGrossLineTotal . '</td>
-			<td><a href="'. $_SERVER['PHP_SELF'] . '?Delete=' . $LnItm->LineNumber . '">' . _('Delete') . '</a></td></tr>';
+			<td><a href="'. htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?Delete=' . $LnItm->LineNumber . '">' . _('Delete') . '</a></td></tr>';
 
 		echo '<tr'.$RowStarter . '><td colspan="12"><textarea tabindex="'.$j.'"  name="Narrative_' . $LnItm->LineNumber . '" cols=100% rows=1>' . $LnItm->Narrative . '</textarea><br /><hr></td></tr>';
 		$j++;

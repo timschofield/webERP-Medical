@@ -31,10 +31,10 @@ if ( isset($_POST['submit']) ) {
 		prnMsg( _('The Contact priority must be an integer.'), 'error');
 	} elseif (strlen($_POST['note']) >200) {
 		$InputError = 1;
-		prnMsg( _("The contact's notes must be two hundred characters or less long"), 'error');
+		prnMsg( _('The contacts notes must be two hundred characters or less long'), 'error');
 	} elseif( trim($_POST['note']) == '' ) {
 		$InputError = 1;
-		prnMsg( _("The contact's notes may not be empty"), 'error');
+		prnMsg( _('The contacts notes may not be empty'), 'error');
 	}
 
 	if ($Id AND $InputError !=1) {
@@ -88,12 +88,20 @@ if ( isset($_POST['submit']) ) {
 	}
 
 if (!isset($Id)) {
-	$SQLname="SELECT * from debtortype where typeid='".$DebtorType."'";
-	$Result = DB_query($SQLname,$db);
-	$row = DB_fetch_array($Result);
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Search') . '" alt="" />'  . _('Notes for Customer Type').': <b>' .$row['typename'].'</b></p><br />';
+	$SQLname="SELECT typename from debtortype where typeid='".$DebtorType."'";
+	$result = DB_query($SQLname,$db);
+	$myrow = DB_fetch_array($result);
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Search') . '" alt="" />'  . _('Notes for Customer Type').': <b>' .$myrow['typename'].'</b></p><br />';
 
-	$sql = "SELECT * FROM debtortypenotes where typeid='".$DebtorType."' ORDER BY date DESC";
+	$sql = "SELECT noteid,
+					typeid,
+					href,
+					note,
+					date,
+					priority
+				FROM debtortypenotes
+				WHERE typeid='".$DebtorType."'
+				ORDER BY date DESC";
 	$result = DB_query($sql,$db);
 			//echo '<br />'.$sql;
 
@@ -120,37 +128,44 @@ if (!isset($Id)) {
 				<td>%s</td>
 				<td><a href="%sId=%s&DebtorType=%s">'. _('Edit').' </td>
 				<td><a href="%sId=%s&DebtorType=%s&delete=1">'. _('Delete'). '</td></tr>',
-				$myrow[4],
-				$myrow[3],
-				$myrow[2],
-				$myrow[5],
-				$_SERVER['PHP_SELF'] . '?',
-				$myrow[0],
-				$myrow[1],
-				$_SERVER['PHP_SELF'] . '?',
-				$myrow[0],
-				$myrow[1]);
+				$myrow['date'],
+				$myrow['note'],
+				$myrow['href'],
+				$myrow['priority'],
+				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
+				$myrow['noteid'],
+				$myrow['typeid'],
+				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
+				$myrow['noteid'],
+				$myrow['typeid']);
 
 	}
 	//END WHILE LIST LOOP
 	echo '</table>';
 }
 if (isset($Id)) {  ?>
-	<div class="cantre"><a href="<?php echo $_SERVER['PHP_SELF'] . '?DebtorType='.$DebtorType;?>"><?=_('Review all notes for this Customer Type')?></a></div>
+	<div class="cantre"><a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?DebtorType='.$DebtorType;?>"><?=_('Review all notes for this Customer Type')?></a></div>
 <?php } ?>
 <br />
 
 <?php
 if (!isset($_GET['delete'])) {
 
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?DebtorType='.$DebtorType.'">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?DebtorType='.$DebtorType.'">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (isset($Id)) {
 		//editing an existing
 
-		$sql = "SELECT * FROM debtortypenotes WHERE noteid=".$Id."
-					and typeid='".$DebtorType."'";
+		$sql = "SELECT noteid,
+					typeid,
+					href,
+					note,
+					date,
+					priority
+				FROM debtortypenotes
+				WHERE noteid=".$Id."
+					AND typeid='".$DebtorType."'";
 
 		$result = DB_query($sql, $db);
 				//echo '<br />'.$sql;

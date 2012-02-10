@@ -20,7 +20,7 @@ if (isset($_GET['SelectedSupplier'])) {
 } elseif (isset($_POST['SelectedSupplier'])) {
 	$SelectedSupplier = $_POST['SelectedSupplier'];
 }
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 if (isset($_POST['ResetPart'])) {
 	unset($SelectedStockItem);
@@ -47,6 +47,7 @@ if (isset($_POST['SearchParts'])) {
 		$SearchString = '%' . str_replace(' ', '%', $_POST['Keywords']) . '%';
 		$SQL = "SELECT stockmaster.stockid,
 				stockmaster.description,
+				stockmaster.decimalplaces,
 				SUM(locstock.quantity) as qoh,
 				stockmaster.units,
 				SUM(purchorderdetails.quantityord-purchorderdetails.quantityrecd) AS qord
@@ -54,7 +55,7 @@ if (isset($_POST['SearchParts'])) {
 			ON stockmaster.stockid = locstock.stockid INNER JOIN purchorderdetails
 			ON stockmaster.stockid=purchorderdetails.itemcode
 			WHERE purchorderdetails.completed=1
-			AND stockmaster.description LIKE '" . $SearchString ."'
+			AND stockmaster.description " . LIKE  . " '" . $SearchString ."'
 			AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
 			GROUP BY stockmaster.stockid,
 				stockmaster.description,
@@ -63,6 +64,7 @@ if (isset($_POST['SearchParts'])) {
 	} elseif ($_POST['StockCode']) {
 		$SQL = "SELECT stockmaster.stockid,
 				stockmaster.description,
+				stockmaster.decimalplaces,
 				SUM(locstock.quantity) AS qoh,
 				SUM(purchorderdetails.quantityord-purchorderdetails.quantityrecd) AS qord,
 				stockmaster.units
@@ -70,7 +72,7 @@ if (isset($_POST['SearchParts'])) {
 				ON stockmaster.stockid = locstock.stockid
 				INNER JOIN purchorderdetails ON stockmaster.stockid=purchorderdetails.itemcode
 			WHERE purchorderdetails.completed=1
-			AND stockmaster.stockid LIKE '%" . $_POST['StockCode'] . "%'
+			AND stockmaster.stockid " . LIKE  . " '%" . $_POST['StockCode'] . "%'
 			AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
 			GROUP BY stockmaster.stockid,
 				stockmaster.description,

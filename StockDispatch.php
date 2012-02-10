@@ -37,14 +37,14 @@ if (isset($_POST['PrintPDF'])) {
 	// from location
 	$ErrMsg = _('Could not retrieve location name from the database');
 	$sqlfrom="SELECT locationname FROM `locations` where loccode='" . $_POST['FromLocation'] . "'";
-	$result = db_query($sqlfrom,$db,$ErrMsg);
-	$Row = db_fetch_row($result);
+	$result = DB_query($sqlfrom,$db,$ErrMsg);
+	$Row = DB_fetch_row($result);
 	$FromLocation=$Row['0'];
 
 	// to location
 	$sqlto="SELECT locationname FROM `locations` where loccode='" . $_POST['ToLocation'] .  "'";
-	$resultto = db_query($sqlto,$db,$ErrMsg);
-	$RowTo = db_fetch_row($resultto);
+	$resultto = DB_query($sqlto,$db,$ErrMsg);
+	$RowTo = DB_fetch_row($resultto);
 	$ToLocation=$RowTo['0'];
 
 	// Creates WHERE clause for stock categories. StockCat is defined as an array so can choose
@@ -221,7 +221,7 @@ if (isset($_POST['PrintPDF'])) {
 	$result = DB_query($sql, $db);
 	$myrow = DB_fetch_array($result);
 	$DefaultLocation = $myrow['defaultlocation'];
-	echo '<br/><form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table class="selection">';
+	echo '<br/><form action=' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . ' method="post"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	$sql = "SELECT loccode,
 			locationname
@@ -234,9 +234,9 @@ if (isset($_POST['PrintPDF'])) {
 	echo '<tr><td>' . _('From Stock Location') . ':</td><td><select name="FromLocation"> ';
 	while ($myrow=DB_fetch_array($resultStkLocs)){
 		if ($myrow['loccode'] == $_POST['FromLocation']){
-			 echo '<option selected="True" Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			 echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
-			 echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			 echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	}
 	echo '</select></td></tr>';
@@ -247,9 +247,9 @@ if (isset($_POST['PrintPDF'])) {
 	echo '<tr><td>' . _('To Stock Location') . ':</td><td><select name="ToLocation"> ';
 	while ($myrow=DB_fetch_array($resultStkLocs)){
 		if ($myrow['loccode'] == $_POST['ToLocation']){
-			 echo '<option selected="True" Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			 echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		} else {
-			 echo '<option Value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			 echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	}
 	echo '</select></td></tr>';
