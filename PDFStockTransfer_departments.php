@@ -19,7 +19,7 @@ if (!isset($_GET['TransferNo'])){
 		$title = _('Transfer');
 		include('includes/header.inc');
 		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print Transfer Note') . '" alt="" />' . ' ' . $title.'</p><br />';
-		echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post" name="form">';
+		echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post" name="form">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<table class="selection"><tr>';
 		echo '<td>'._('Imprimir Nota de Despacho').' : '.'</td>';
@@ -71,14 +71,14 @@ while ($myrow=DB_fetch_array($result)){
 	$To = $myrow['namedepartments'];
 	$Quantity=$myrow['quantity'];
 	$Description=$myrow['description'];
-	
-	
+
+
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+1,$YPos-10,300-$Left_Margin,$FontSize, $StockID);
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+75,$YPos-10,300-$Left_Margin,$FontSize, $Description);
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+250,$YPos-10,300-$Left_Margin,$FontSize, $From);
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+350,$YPos-10,300-$Left_Margin,$FontSize, $To);
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+475,$YPos-10,300-$Left_Margin,$FontSize, $Quantity);
-	
+
 	$YPos-=20;
 }
 
@@ -88,5 +88,5 @@ $LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos-120,300-$Left_Margin,$FontSize
 $LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos-160,300-$Left_Margin,$FontSize, _('Signed for ').$To.'______________________');
 
 $pdf->OutputD($_SESSION['DatabaseName'] . '_StockTransfer_' . date('Y-m-d') . '.pdf');
-$pdf->__destruct(); 
+$pdf->__destruct();
 ?>

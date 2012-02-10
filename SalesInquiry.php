@@ -1002,7 +1002,7 @@ function display(&$db, $PartNumber, $DebtorNo, $DebtorName) //####DISPLAY_DISPLA
 
 	// the page is called.
 
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection">';
 	echo '<tr>

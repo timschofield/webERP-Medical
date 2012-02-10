@@ -10,7 +10,7 @@ if (!isset($_POST['PONumber'])) {
 	$_POST['PONumber']='';
 }
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo '<table class="selection">';
 echo '<tr><th colspan="2"><font size="2" color="#616161">' . _('Select a purchase order') . '</th></tr>';

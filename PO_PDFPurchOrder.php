@@ -230,12 +230,12 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 					AND supplierno ='" . $POHeader['supplierno'] . "'";
 
                 $SuppResult = DB_query($sqlsupp,$db);
-				
+
 				if ( DB_num_rows($SuppResult) > 0 ) {
                     $SuppDescRow = DB_fetch_row($SuppResult);
-                
+
                     $Desc = $SuppDescRow[0] . " - ";
-                    
+
                     // If the supplier's desc. is provided, use it;
                     // otherwise, use the stock's desc.
                     if ( mb_strlen($SuppDescRow[1]) > 2 ) {
@@ -356,7 +356,7 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/printer.png" title="' . _('Search') . '" alt="" />' . ' ' .
 		$title . '</p><br />';
 
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	if ($ViewingOnly==1){
 		echo '<input type="hidden" name="ViewingOnly" value="1" />';

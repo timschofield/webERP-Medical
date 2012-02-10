@@ -144,9 +144,9 @@ or deletion of the records*/
 			<td><a href="%sSelectedShipper=%s&delete=1">'. _('Delete'). '</td></tr>',
 			$myrow['shipper_id'],
 			$myrow['shippername'],
-			$_SERVER['PHP_SELF'] . '?',
+			htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
 			$myrow['shipper_id'],
-			$_SERVER['PHP_SELF'] . '?',
+			htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
 			$myrow['shipper_id']);
 	}
 	//END WHILE LIST LOOP
@@ -156,12 +156,12 @@ or deletion of the records*/
 
 if (isset($SelectedShipper)) {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p>';
-	echo '<div class="centre"><a href="'.$_SERVER['PHP_SELF'] . '">'._('REVIEW RECORDS').'</a></div>';
+	echo '<div class="centre"><a href="'.htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">'._('REVIEW RECORDS').'</a></div>';
 }
 
 if (!isset($_GET['delete'])) {
 
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (isset($SelectedShipper)) {

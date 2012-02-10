@@ -309,8 +309,8 @@ if (!isset($SelectedUser)) {
 					<td>%s</td>
 					<td>%s</td>
 					<td>%s</td>
-					<td><a href="%s&SelectedUser=%s">' . _('Edit') . '</a></td>
-					<td><a href="%s&SelectedUser=%s&delete=1">' . _('Delete') . '</a></td>
+					<td><a href="%sSelectedUser=%s">' . _('Edit') . '</a></td>
+					<td><a href="%sSelectedUser=%s&delete=1">' . _('Delete') . '</a></td>
 					</tr>',
 					$myrow['userid'],
 					$myrow['realname'],
@@ -326,9 +326,9 @@ if (!isset($SelectedUser)) {
 					$myrow['pagesize'],
 					$myrow['theme'],
 					$LanguagesArray[$myrow['language']],
-					$_SERVER['PHP_SELF']  . '?',
+					htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8')  . '?',
 					$myrow['userid'],
-					$_SERVER['PHP_SELF'] . '?',
+					htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
 					$myrow['userid']);
 
 	} //END WHILE LIST LOOP
@@ -337,10 +337,10 @@ if (!isset($SelectedUser)) {
 
 
 if (isset($SelectedUser)) {
-	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Review Existing Users') . '</a></div><br />';
+	echo '<div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Review Existing Users') . '</a></div><br />';
 }
 
-echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (isset($SelectedUser)) {

@@ -72,9 +72,9 @@ while ($i < count($ModuleLink)){
 			$_SESSION['Module']=$ModuleLink[$i];
 		}
 		if ($ModuleLink[$i] == $_SESSION['Module']){
-			echo '<tr><td class="main_menu_selected"><a href="' . $_SERVER['PHP_SELF'] . '?Application='. $ModuleLink[$i] . '">' . $ModuleList[$i] . '</a></td></tr>';
+			echo '<tr><td class="main_menu_selected"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?Application='. $ModuleLink[$i] . '">' . $ModuleList[$i] . '</a></td></tr>';
 		} else {
-			echo '<tr><td class="main_menu_unselected"><a href="' . $_SERVER['PHP_SELF'] . '?Application='. $ModuleLink[$i] . '">' . $ModuleList[$i] . '</a></td></tr>';
+			echo '<tr><td class="main_menu_unselected"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?Application='. $ModuleLink[$i] . '">' . $ModuleList[$i] . '</a></td></tr>';
 		}
 	}
 	$i++;

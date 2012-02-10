@@ -221,7 +221,7 @@ if (isset($_POST['PrintPDF'])) {
 	$result = DB_query($sql, $db);
 	$myrow = DB_fetch_array($result);
 	$DefaultLocation = $myrow['defaultlocation'];
-	echo '<br/><form action=' . $_SERVER['PHP_SELF'] . ' method="post"><table class="selection">';
+	echo '<br/><form action=' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . ' method="post"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	$sql = "SELECT loccode,
 			locationname

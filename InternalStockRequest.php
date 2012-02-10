@@ -111,7 +111,7 @@ if (isset($_POST['Submit'])) {
 	}
 	DB_Txn_Commit($db);
 	prnMsg( _('The internal stock request has been entered and now needs to be authorised'), 'success');
-	echo '<br /><div class="centre"><a href="'. $_SERVER['PHP_SELF'] . '?New=Yes">' . _('Create another request') . '</a></div>';
+	echo '<br /><div class="centre"><a href="'. htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?New=Yes">' . _('Create another request') . '</a></div>';
 	include('includes/footer.inc');
 	unset($_SESSION['Request']);
 	exit;
@@ -121,7 +121,7 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/s
 		'" alt="" />' . ' ' . $title . '</p>';
 
 if (isset($_GET['Edit'])) {
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection">';
 	echo '<tr><th colspan="2"><font size="2" color="navy">' . _('Edit the Request Line') . '</font></th></tr>';
@@ -152,7 +152,7 @@ if (isset($_GET['Edit'])) {
 	exit;
 }
 
-echo '<form action="'. $_SERVER['PHP_SELF'] . '" method=post>';
+echo '<form action="'. htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method=post>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<table class="selection">';
@@ -213,7 +213,7 @@ if (!isset($_SESSION['Request']->Location)) {
 
 //****************MUESTRO LA TABLA CON LOS REGISTROS DE LA TRANSFERENCIA*************************************
 $i = 0; //Line Item Array pointer
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo '<br /><table class="selection">';
 echo '<tr><th colspan="7"><font size="2" color="navy">' . _('Details of Items Requested') . '</font></th></tr>';
@@ -243,8 +243,8 @@ foreach ($_SESSION['Request']->LineItems as $LineItems) {
 			<td>' . $LineItems->ItemDescription . '</td>
 			<td class="number">' . locale_number_format($LineItems->Quantity, $LineItems->DecimalPlaces) . '</td>
 			<td>' . $LineItems->UOM . '</td>
-			<td><a href="'. $_SERVER['PHP_SELF'] . '?Edit='.$LineItems->LineNumber.'">' . _('Edit') . '</a></td>
-			<td><a href="'. $_SERVER['PHP_SELF'] . '?Delete='.$LineItems->LineNumber.'">' . _('Delete') . '</a></td>
+			<td><a href="'. htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?Edit='.$LineItems->LineNumber.'">' . _('Edit') . '</a></td>
+			<td><a href="'. htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?Delete='.$LineItems->LineNumber.'">' . _('Delete') . '</a></td>
 		</tr>';
 
 }
@@ -252,7 +252,7 @@ foreach ($_SESSION['Request']->LineItems as $LineItems) {
 echo '</table><br />';
 echo '<div class="centre"><input type="submit" name="Submit" value="' . _('Submit') . '" /></div><br />';
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Search for Inventory Items'). '</p>';
@@ -436,7 +436,7 @@ if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 } //end of if search
 /* display list if there is more than one record */
 if (isset($searchresult) AND !isset($_POST['Select'])) {
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	$ListCount = DB_num_rows($searchresult);
 	if ($ListCount > 0) {
@@ -537,7 +537,7 @@ if (isset($SearchResult)) {
 	echo '<div class="page_help_text">' . _('Select an item by entering the quantity required.  Click Order when ready.') . '</div>';
 	echo '<br />';
 	$j = 1;
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post" name="orderform">';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post" name="orderform">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="table1">';
 	echo '<tr><td>

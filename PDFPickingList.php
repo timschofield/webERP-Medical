@@ -26,7 +26,7 @@ if ((!isset($_GET['TransNo']) or $_GET['TransNo']=="") and !isset($_POST['TransD
 			FROM locations";
 	$result=DB_query($sql, $db);
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/sales.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post" name="form">';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post" name="form">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection"><tr>';
 	echo '<td>'._('Create picking lists for all deliveries to be made on').' : '.'</td>';
@@ -245,7 +245,7 @@ for ($i=0;$i<sizeof($OrdersToPick);$i++){
 			LEFT JOIN pickinglistdetails
 				ON pickinglists.pickinglistno=pickinglistdetails.pickinglistno
 			WHERE salesorderdetails.orderno='" . $OrdersToPick[$i]['orderno'] ."'
-			AND salesorderdetails.orderlineno=pickinglistdetails.orderlineno 
+			AND salesorderdetails.orderlineno=pickinglistdetails.orderlineno
 			GROUP BY salesorderdetails.stkcode";
 		}
 		$lineresult=DB_query($sql,$db, $ErrMsg);

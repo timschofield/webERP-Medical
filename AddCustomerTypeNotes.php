@@ -132,10 +132,10 @@ if (!isset($Id)) {
 				$myrow['note'],
 				$myrow['href'],
 				$myrow['priority'],
-				$_SERVER['PHP_SELF'] . '?',
+				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
 				$myrow['noteid'],
 				$myrow['typeid'],
-				$_SERVER['PHP_SELF'] . '?',
+				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
 				$myrow['noteid'],
 				$myrow['typeid']);
 
@@ -144,14 +144,14 @@ if (!isset($Id)) {
 	echo '</table>';
 }
 if (isset($Id)) {  ?>
-	<div class="cantre"><a href="<?php echo $_SERVER['PHP_SELF'] . '?DebtorType='.$DebtorType;?>"><?=_('Review all notes for this Customer Type')?></a></div>
+	<div class="cantre"><a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?DebtorType='.$DebtorType;?>"><?=_('Review all notes for this Customer Type')?></a></div>
 <?php } ?>
 <br />
 
 <?php
 if (!isset($_GET['delete'])) {
 
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?DebtorType='.$DebtorType.'">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?DebtorType='.$DebtorType.'">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (isset($Id)) {

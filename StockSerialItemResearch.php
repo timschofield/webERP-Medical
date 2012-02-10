@@ -21,7 +21,7 @@ $SN = $SN;
 
 echo '<div class="centre">
 <br />
-<form name=SNRESEARCH method="post" action="' . $_SERVER['PHP_SELF'] .'">';
+<form name=SNRESEARCH method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') .'">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo  _('Serial Number') .': <input id="serialno" name="serialno" size="21" maxlength="20" value="'. $SN . '" /> &nbsp;

@@ -704,7 +704,7 @@ customer record returned by the search - this record is then auto selected */
 /*set up the form whatever */
 
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '?Type='.$_GET['Type'] . '" method="post" name="form1">';
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?Type='.$_GET['Type'] . '" method="post" name="form1">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 /*show the batch header details and the entries in the batch so far */
@@ -864,7 +864,7 @@ if (isset($_SESSION['ReceiptBatch'])){
 				<td>' . stripslashes($ReceiptItem->CustomerName) . '</td>
 				<td>'.$ReceiptItem->GLCode.' - '.$myrow['accountname'].'</td>
 				<td>'.$ReceiptItem->Narrative . '</td>
-				<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $ReceiptItem->ID . '&Type='.$_GET['Type'].'">' . _('Delete') . '</a></td>
+				<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?Delete=' . $ReceiptItem->ID . '&Type='.$_GET['Type'].'">' . _('Delete') . '</a></td>
 			</tr>';
 		$BatchTotal= $BatchTotal + $ReceiptItem->Amount;
 	}

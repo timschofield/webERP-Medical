@@ -169,7 +169,7 @@ if (isset($_POST['submit'])  and $EditName == 1 ) { // Creating or updating a ca
 // ----------------------------------------------------------------------------------------
 // Calculate Path for navigation
 
-$CategoryPath = '<a href="'.$_SERVER['PHP_SELF'] . '?ParentCategory=NULL">' . _('Main') . '</a>' . "&nbsp;\\&nbsp;";
+$CategoryPath = '<a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ParentCategory=NULL">' . _('Main') . '</a>' . "&nbsp;\\&nbsp;";
 $TempPath = '';
 if (isset($ParentCategory)) {
 	$TmpParentID = $ParentCategory;
@@ -185,7 +185,7 @@ for($Buzy = (isset($TmpParentID) and ($TmpParentID <> ''));
 		if (DB_num_rows($result) > 0) {
 			$row = DB_fetch_array($result);
 			$LastParentName =  $row['salescatname'];
-			$TempPath = '<a href="'.$_SERVER['PHP_SELF'] . '?ParentCategory='.$TmpParentID.'">'.$LastParentName .
+			$TempPath = '<a href="'. htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ParentCategory='.$TmpParentID.'">'.$LastParentName .
 				'</a>'."&nbsp;\\&nbsp;".$TempPath;
 			$TmpParentID = $row['parentcatid']; // Set For Next Round
 		} else {
@@ -260,12 +260,12 @@ if (DB_num_rows($result) == 0) {
 					<td>%s</td>
             		</tr>',
             		$myrow['salescatname'],
-            		$_SERVER['PHP_SELF'] . '?',
+            		htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
             		$myrow['salescatid'],
-            		$_SERVER['PHP_SELF'] . '?',
+            		htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
             		$myrow['salescatid'],
             		$ParentCategory,
-            		$_SERVER['PHP_SELF'] . '?',
+            		htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
             		$myrow['salescatid'],
             		$ParentCategory,
             		$CatImgLink);
@@ -283,7 +283,7 @@ echo '</p>';
 // ----------------------------------------------------------------------------------------
 // Show New or Edit Category
 
-echo '<p><form ENCtype="MULTIPART/FORM-DATA" method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+echo '<p><form ENCtype="MULTIPART/FORM-DATA" method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 // This array will contain the stockids in use for this category
@@ -365,7 +365,7 @@ if (isset($ParentCategory) and $ParentCategory!='NULL') {
 	$result = DB_query($sql,$db);
 	if($result and DB_num_rows($result)) {
 		// continue id stock id in the stockid array
-		echo '<p><form ENCtype="MULTIPART/FORM-DATA" method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+		echo '<p><form ENCtype="MULTIPART/FORM-DATA" method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		if( isset($SelectedCategory) ) { // If we selected a category we need to keep it selected
 			echo '<input type="hidden" name="SelectedCategory" value="' . $SelectedCategory . '" />';
@@ -432,7 +432,7 @@ if($result ) {
 
 			echo '<td>' . $myrow['stockid'] . '</td>';
 			echo '<td>' . $myrow['description'] . '</td>';
-			echo '<td><a href="'.$_SERVER['PHP_SELF'] . '?ParentCategory='.$ParentCategory.'&DelStockID='.$myrow['stockid'].'">'.
+			echo '<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ParentCategory='.$ParentCategory.'&DelStockID='.$myrow['stockid'].'">'.
 					_('Remove').
 					'</a></td></tr>';
 		}

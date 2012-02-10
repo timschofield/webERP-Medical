@@ -232,9 +232,9 @@ If (!isset($SelectedBankAccount)) {
 		$myrow[5],
 		$myrow[6],
 		$defacc,
-		$_SERVER['PHP_SELF'],
+		htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'),
 		$myrow[0],
-		$_SERVER['PHP_SELF'],
+		htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'),
 		$myrow[0]);
 
 	}
@@ -246,11 +246,11 @@ If (!isset($SelectedBankAccount)) {
 
 if (isset($SelectedBankAccount)) {
 	echo '<br />';
-	echo '<div class="centre"><p><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Show All Bank Accounts Defined') . '</a></p></div>';
+	echo '<div class="centre"><p><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Show All Bank Accounts Defined') . '</a></p></div>';
 	echo '<br />';
 }
 
-echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (isset($SelectedBankAccount) AND !isset($_GET['delete'])) {

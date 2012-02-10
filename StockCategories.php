@@ -269,9 +269,9 @@ or deletion of the records*/
 				$myrow['purchpricevaract'],
 				$myrow['materialuseagevarac'],
 				$myrow['wipact'],
-				$_SERVER['PHP_SELF'] . '?',
+				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
 				$myrow['categoryid'],
-				$_SERVER['PHP_SELF'] . '?',
+				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
 				$myrow['categoryid']);
 	}
 	//END WHILE LIST LOOP
@@ -283,12 +283,12 @@ or deletion of the records*/
 echo '<br />';
 
 if (isset($SelectedCategory)) {
-	echo '<a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '" >' . _('Show All Stock Categories') . '</a></div>';
+	echo '<a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" >' . _('Show All Stock Categories') . '</a></div>';
 }
 
 echo '<br />';
 
-echo '<form name="CategoryForm" method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF']) . '">';
+echo '<form name="CategoryForm" method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (isset($SelectedCategory)) {
@@ -574,7 +574,7 @@ if (isset($SelectedCategory)) {
 		}
 
 		echo '</td>
-				<td><a href="' . $_SERVER['PHP_SELF'] . '?DeleteProperty=' . $myrow['stkcatpropid'] .'&SelectedCategory=' . $SelectedCategory . '" onclick=\'return confirm("' . _('Are you sure you wish to delete this property? All properties of this type set up for stock items will also be deleted.') . '");\'>' . _('Delete') . '</td></tr>';
+				<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?DeleteProperty=' . $myrow['stkcatpropid'] .'&SelectedCategory=' . $SelectedCategory . '" onclick=\'return confirm("' . _('Are you sure you wish to delete this property? All properties of this type set up for stock items will also be deleted.') . '");\'>' . _('Delete') . '</td></tr>';
 
 		$PropertyCounter++;
 	} //end loop around defined properties for this category

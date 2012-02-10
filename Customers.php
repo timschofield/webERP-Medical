@@ -437,12 +437,12 @@ if (!isset($DebtorNo)) {
 	}
 
 	if ($SetupErrors>0) {
-		echo '<br /><div class="centre"><a href="'.$_SERVER['PHP_SELF'] .'" >'._('Click here to continue').'</a></div>';
+		echo '<br /><div class="centre"><a href="'.htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') .'" >'._('Click here to continue').'</a></div>';
 		include('includes/footer.inc');
 		exit;
 	}
 
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<input type="hidden" name="New" value="Yes" />';
@@ -602,7 +602,7 @@ if (!isset($DebtorNo)) {
 
 //DebtorNo exists - either passed when calling the form or from the form itself
 
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection" cellspacing="4"><tr><td valign="top"><table class="selection">';
 
@@ -942,14 +942,14 @@ if (!isset($DebtorNo)) {
 				$myrow['notes'],
 				$myrow['contid'],
 				$myrow['debtorno'],
-				$_SERVER['PHP_SELF'] . '?',
+				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
 				$myrow['contid'],
 				$myrow['debtorno']);
 		}
 	}//END WHILE LIST LOOP
 	echo '</table>';
 		//	echo "<input type='Submit' name='addcontact' value='" . _('ADD Contact') . "' />";
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?DebtorNo='.$DebtorNo.'&amp;ID='.$ID.'&amp;Edit'.$Edit.'">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?DebtorNo='.$DebtorNo.'&amp;ID='.$ID.'&amp;Edit'.$Edit.'">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	if (isset($Edit) and $Edit!='') {
 		$SQLcustcontacts="SELECT contactname,
@@ -987,7 +987,7 @@ if (!isset($DebtorNo)) {
 			</tr>
 			</table>';
 
-		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?DebtorNo='.$DebtorNo.'&ID'.$ID.'">';
+		echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?DebtorNo='.$DebtorNo.'&ID'.$ID.'">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 
@@ -1003,14 +1003,14 @@ if (!isset($DebtorNo)) {
 						and contid='".$Edit."'";
 		$resultupcc = DB_query($SQLupdatecc,$db);
 		echo '<br />'.$SQLupdatecc;
-		echo '<meta http-equiv="Refresh" content="0; url="' . $_SERVER['PHP_SELF'] . '?DebtorNo='.$DebtorNo.'&amp;ID='.$ID.'" />';
+		echo '<meta http-equiv="Refresh" content="0; url="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?DebtorNo='.$DebtorNo.'&amp;ID='.$ID.'" />';
 	}
 	if (isset($_GET['delete'])) {
 		$SQl="DELETE FROM custcontacts where debtorno='".$DebtorNo."'
 				and contid='".$ID."'";
 		$resultupcc = DB_query($SQl,$db);
 
-		echo '<meta http-equiv="Refresh" content="0; url=' . $_SERVER['PHP_SELF'] . '?DebtorNo='.$DebtorNo.'">';
+		echo '<meta http-equiv="Refresh" content="0; url=' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?DebtorNo='.$DebtorNo.'">';
 		echo '<br />'.$SQl;
 		prnmsg('Contact Deleted','success');
 	}

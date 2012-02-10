@@ -151,7 +151,7 @@ echo '<tr>	<td class="number">' . locale_money_format($SupplierRecord['balance']
 			<td class="number">' . locale_money_format($SupplierRecord['overdue2'],$SupplierRecord['currcode']) . '</td>
 		</tr></table>';
 
-echo '<br /><div class="centre"><form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+echo '<br /><div class="centre"><form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo _('Show all transactions after') . ': ' .
 		'<input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="TransAfterDate" value="' . $_POST['TransAfterDate'] . '" maxlength="10" size="10" />
@@ -271,12 +271,12 @@ while ($myrow=DB_fetch_array($TransResult)) {
 				$authresult=DB_query($authsql, $db);
 				$authrow=DB_fetch_array($authresult);
 				if ($authrow[0]==0) {
-					echo '<td><a href="'.$_SERVER['PHP_SELF'].'?HoldType='.$myrow['type'].'&HoldTrans='.$myrow['transno'].'&HoldStatus='.$HoldValue.'&FromDate='.$_POST['TransAfterDate'].'">'.$HoldValue.'</a></td>';
+					echo '<td><a href="'.htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8').'?HoldType='.$myrow['type'].'&HoldTrans='.$myrow['transno'].'&HoldStatus='.$HoldValue.'&FromDate='.$_POST['TransAfterDate'].'">'.$HoldValue.'</a></td>';
 				} else {
 					if ($HoldValue==_('Release')) {
 						echo '<td>'.$HoldValue.'</a></td>';
 					} else {
-						echo '<td><a href="'.$_SERVER['PHP_SELF'].'?HoldType='.$myrow['type'].'&HoldTrans='.$myrow['transno'].'&HoldStatus='.$HoldValue.'&FromDate='.$_POST['TransAfterDate'].'">'.$HoldValue.'</a></td>';
+						echo '<td><a href="'.htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8').'?HoldType='.$myrow['type'].'&HoldTrans='.$myrow['transno'].'&HoldStatus='.$HoldValue.'&FromDate='.$_POST['TransAfterDate'].'">'.$HoldValue.'</a></td>';
 					}
 				}
 				echo '<td><a target="_blank" href="'.$rootpath.'/GLTransInquiry.php?TypeID='.$myrow['type'].'&TransNo='.$myrow['transno'].'">' ._('View GL Postings') . '</a></td></tr>';
@@ -325,7 +325,7 @@ while ($myrow=DB_fetch_array($TransResult)) {
 						locale_money_format($myrow['allocated'],$myrow['currcode']),
 						locale_money_format($myrow['totalamount']-$myrow['allocated'],$myrow['currcode']),
 						$myrow['transtext'],
-						$_SERVER['PHP_SELF'],
+						htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'),
 						$myrow['type'],
 						$myrow['transno'],
 						$HoldValue,

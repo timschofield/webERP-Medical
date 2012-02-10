@@ -307,8 +307,8 @@ if (DB_num_rows($result) == 0) {
 				<td class="number">'.locale_number_format($myrow['decimalplaces'],0).'</td>
 				<td>'.ConvertSQLDate($myrow['startdate']).'</td>
 				<td>'.$EndDateDisplay.'</td>
-				<td><a href="'.$_SERVER['PHP_SELF'].'?Item='.$Item.'&amp;Price='.$myrow['price'].'&amp;Branch='.$myrow['branchcode'].'&amp;StartDate='.$myrow['startdate'].'&amp;EndDate='.$myrow['enddate'].'&amp;Edit=1">' . _('Edit') . '</a></td>
-				<td><a href="'.$_SERVER['PHP_SELF'].'?Item='.$Item.'&amp;Branch='.$myrow['branchcode'].'&amp;StartDate='.$myrow['startdate'].'&amp;EndDate='.$myrow['enddate'].'&amp;delete=yes">' . _('Delete') . '</a></td>
+				<td><a href="'.htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8').'?Item='.$Item.'&amp;Price='.$myrow['price'].'&amp;Branch='.$myrow['branchcode'].'&amp;StartDate='.$myrow['startdate'].'&amp;EndDate='.$myrow['enddate'].'&amp;Edit=1">' . _('Edit') . '</a></td>
+				<td><a href="'.htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8').'?Item='.$Item.'&amp;Branch='.$myrow['branchcode'].'&amp;StartDate='.$myrow['startdate'].'&amp;EndDate='.$myrow['enddate'].'&amp;delete=yes">' . _('Delete') . '</a></td>
 			</tr>';
 	}
 //END WHILE LIST LOOP
@@ -316,7 +316,7 @@ if (DB_num_rows($result) == 0) {
 
 echo '</table></td></tr></table><br />';
 
-echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo '<input type="hidden" name="Item" value="' . $Item . '" />';
 

@@ -300,9 +300,9 @@ if (!isset($SelectedUser)) {
 			$myrow[8],
 			$myrow[9],
 			$myrow[10],
-			$_SERVER['PHP_SELF'] . '?',
+			htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
 			$myrow[0],
-			$_SERVER['PHP_SELF'] . '?',
+			htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
 			$myrow[0]);
 
 	} //END WHILE LIST LOOP
@@ -311,10 +311,10 @@ if (!isset($SelectedUser)) {
 
 
 if (isset($SelectedUser)) {
-	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] .'">' . _('Review Existing Users') . '</a></div><br />';
+	echo '<div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') .'">' . _('Review Existing Users') . '</a></div><br />';
 }
 
-echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (isset($SelectedUser)) {

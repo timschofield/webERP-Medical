@@ -280,7 +280,7 @@ if (isset($_POST['CommitBatch'])){
 			<br />
 			<br />';
 
-		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier.'">';
+		echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?identifier='.$identifier.'">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo _('Has the cheque been printed') . '?<br /><br />';
 		echo '<input type="hidden" name="CommitBatch" value="' . $_POST['CommitBatch'] . '" />';
@@ -622,7 +622,7 @@ if (isset($_POST['CommitBatch'])){
 			echo '<br /><a href="' . $rootpath . '/Payments.php?SupplierID=' . $LastSupplier . '">' .
 				_('Enter another Payment for') . ' ' . $myrow['suppname'] . '</a>';
 		} else {
-			echo '<br /><a href="' . $_SERVER['PHP_SELF'] .'">' . _('Enter another General Ledger Payment') . '</a><br />';
+			echo '<br /><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') .'">' . _('Enter another General Ledger Payment') . '</a><br />';
 		}
 	}
 
@@ -724,7 +724,7 @@ if (isset($_POST['BankAccount']) AND $_POST['BankAccount']!='') {
 }
 
 
-echo '<form action="' . $_SERVER['PHP_SELF'] . '?identifier='.$identifier.'" method="post">';
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?identifier='.$identifier.'" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<br /><table class="selection">';
@@ -1034,7 +1034,7 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 				<td>' . $PaymentItem->GLCode . ' - ' . $PaymentItem->GLActName . '</td>
 				<td>' . stripslashes($PaymentItem->Narrative)  . '</td>
 				<td>' . $PaymentItem->tag . ' - ' . $TagName . '</td>
-				<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $PaymentItem->ID . '" onclick="return confirm(\'' . _('Are you sure you wish to delete this payment analysis item?') . '\');">' . _('Delete') . '</a></td>
+				<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?Delete=' . $PaymentItem->ID . '" onclick="return confirm(\'' . _('Are you sure you wish to delete this payment analysis item?') . '\');">' . _('Delete') . '</a></td>
 				</tr>';
 			$PaymentTotal += filter_currency_input($PaymentItem->Amount);
 		}

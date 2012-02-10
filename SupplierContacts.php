@@ -155,10 +155,10 @@ if (!isset($SelectedContact)){
 					$myrow['fax'],
 					$myrow['email'],
 					$myrow['email'],
-					$_SERVER['PHP_SELF'],
+					htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'),
 					$SupplierID,
 					$myrow['contact'],
-					$_SERVER['PHP_SELF'],
+					htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'),
 					$SupplierID,
 					$myrow['contact']);
 		}
@@ -173,13 +173,13 @@ if (!isset($SelectedContact)){
 echo '</table><br />';
 
 if (isset($SelectedContact)) {
-	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '?SupplierID=$SupplierID">' .
+	echo '<div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?SupplierID=$SupplierID">' .
 		  _('Show all the supplier contacts for') . ' ' . $SupplierID . '</a></div></p>';
 }
 
 if (! isset($_GET['delete'])) {
 
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (isset($SelectedContact)) {

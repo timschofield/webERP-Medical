@@ -43,7 +43,7 @@ if (isset($_POST['update'])) {
 }
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Print') . '" alt="" />' . ' ' . $title . '</p>';
 
-echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '" name="form">';
+echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" name="form">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo '<br /><table class="selection"><tr>';
 
@@ -73,7 +73,7 @@ $result= DB_query($sql,$db);
 
 while ($myrow = DB_fetch_array($result,$db)){
 	echo '<tr><td>'.$myrow[0].'</td><td>'.$myrow[1].'</td><td>
-		<a href="' . $_SERVER['PHP_SELF'] . '?SelectedToken=' . $myrow[0] . '&Action=edit">' . _('Edit') . '</a></td></tr>';
+		<a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?SelectedToken=' . $myrow[0] . '&Action=edit">' . _('Edit') . '</a></td></tr>';
 }
 
 echo '</table><p></p>';

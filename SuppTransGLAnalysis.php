@@ -119,8 +119,8 @@ foreach ( $_SESSION['SuppTrans']->GLCodes as $EnteredGLCode){
 		<td>' . $EnteredGLCode->GLActName . '</td>
 		<td class="number">' . locale_money_format($EnteredGLCode->Amount,$_SESSION['SuppTrans']->CurrCode) . '</td>
 		<td>' . $EnteredGLCode->Narrative . '</td>
-		<td><a href="' . $_SERVER['PHP_SELF'] . '?Edit=' . $EnteredGLCode->Counter . '">' . _('Edit') . '</a></td>
-		<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $EnteredGLCode->Counter . '">' . _('Delete') . '</a></td>
+		<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?Edit=' . $EnteredGLCode->Counter . '">' . _('Edit') . '</a></td>
+		<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?Delete=' . $EnteredGLCode->Counter . '">' . _('Delete') . '</a></td>
 		</tr>';
 
 	$TotalGLValue += $EnteredGLCode->Amount;
@@ -146,7 +146,7 @@ if ($_SESSION['SuppTrans']->InvoiceOrCredit == 'Invoice'){
 }
 
 /*Set up a form to allow input of new GL entries */
-echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<br /><table class="selection">';

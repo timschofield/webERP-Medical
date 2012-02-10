@@ -209,9 +209,9 @@ or deletion of the records*/
 		$myrow[1],
 		$FollMthText,
 		$DueAfterText,
-		$_SERVER['PHP_SELF'] . '?',
+		htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
 		$myrow[0],
-		$_SERVER['PHP_SELF']. '?',
+		htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'). '?',
 		$myrow[0]);
 
 	} //END WHILE LIST LOOP
@@ -219,12 +219,12 @@ or deletion of the records*/
 } //end of ifs and buts!
 
 if (isset($SelectedTerms)) {
-	echo '<div class="centre"><a href="' . $_SERVER['PHP_SELF'] . '">' . _('Show all Payment Terms Definitions') . '</a></div>';
+	echo '<div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Show all Payment Terms Definitions') . '</a></div>';
 }
 
 if (!isset($_GET['delete'])) {
 
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (isset($SelectedTerms)) {

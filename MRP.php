@@ -563,7 +563,7 @@ if (isset($_POST['submit'])) {
 		echo '<td>' . _('Use Shrinkage') . ':&nbsp&nbsp</td><td>' . $useshrinkage . '</td></tr>';
 		echo '</table></td>';
 	}
-	echo '<br /><form method="post" action="' . $_SERVER['PHP_SELF']  . '">';
+	echo '<br /><form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8')  . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection">';
 	// Generate selections for Location

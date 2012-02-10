@@ -17,7 +17,7 @@ if (!isset($_GET['TransferNo'])){
 
 	include ('includes/header.inc');
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Reprint transfer docket').'</p><br />';
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table><tr><td>'._('Transfer docket to reprint').'</td>';
 	echo '<td><input type="text" class="number" size="10" name="TransferNo" /></td></tr></table>';

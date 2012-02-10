@@ -142,10 +142,10 @@ if (!isset($Id)) {
 				$myrow['role'],
 				$myrow['phoneno'],
 				$myrow['notes'],
-				$_SERVER['PHP_SELF'] . '?',
+				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
 				$myrow['contid'],
 				$myrow['debtorno'],
-				$_SERVER['PHP_SELF'] . '?',
+				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
 				$myrow['contid'],
 				$myrow['debtorno']);
 
@@ -154,14 +154,14 @@ if (!isset($Id)) {
 	echo '</table>';
 }
 if (isset($Id)) {  ?>
-	<div class="centre"><a href="<?php echo $_SERVER['PHP_SELF'] . '?DebtorNo='.$DebtorNo;?>"><?=_('Review all contacts for this Customer')?></a></div>
+	<div class="centre"><a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?DebtorNo='.$DebtorNo;?>"><?=_('Review all contacts for this Customer')?></a></div>
 <?php } ?>
 <br />
 
 <?php
 if (!isset($_GET['delete'])) {
 
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . 'DebtorNo='.$DebtorNo.'">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . 'DebtorNo='.$DebtorNo.'">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (isset($Id)) {
