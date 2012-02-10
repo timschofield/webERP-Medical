@@ -118,7 +118,6 @@ if(isset($_POST['Submit'])) {
 
 	header('Location: BOMs.php?Select='.$newstkid);
 } else {
-	include('includes/header.inc');
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Contract') . '" alt="" />' . ' ' . $title . '</p>';
 
