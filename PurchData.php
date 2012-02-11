@@ -261,7 +261,7 @@ if (isset($SupplierID) AND $SupplierID != '' AND !isset($_POST['SearchSupplier']
 	}
 	if (!isset($_POST['SearchSupplier'])) {
 		echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">
-				<table cellpadding="3" colspan="4" class="selection"><tr>';
+				<table cellpadding="3" class="selection"><tr>';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<input type="hidden" name="StockID" value="' . $StockID . '" />';
 		echo '<td>' . _('Text in the Supplier') . ' <b>' . _('NAME') . '</b>:</font></td>';
@@ -343,7 +343,7 @@ if (isset($SuppliersResult)) {
 		$StockUOM = 'each';
 	}
 	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">
-			<table cellpadding="2" colspan="7" class="selection">';
+			<table cellpadding="2" class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	$TableHeader = '<tr><th>' . _('Code') . '</th>
 						<th>' . _('Supplier Name') . '</th>

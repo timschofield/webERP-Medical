@@ -44,7 +44,7 @@ $SalesOrdersResult = DB_query($SQL,$db,$ErrMsg);
 
 /*show a table of the orders returned by the SQL */
 
-echo '<table cellpadding="2" colspan="7" width="100%">';
+echo '<table cellpadding="2" width="100%">';
 $TableHeader =	'<tr>
 		<th>' . _('Modify') . '</td>
 		<th>' . _('Send to') . '<br />' . _('Radio Beacon') . '</td>
@@ -64,10 +64,10 @@ $j = 1;
 $k=0; //row colour counter
 while ($myrow=DB_fetch_array($SalesOrdersResult)) {
 	if ($k==1){
-		echo '<tr bgcolor="#CCCCCC">';
+		echo '<tr class="EvenTableRows">';
 		$k=0;
 	} else {
-		echo '<tr bgcolor="#EEEEEE">';
+		echo '<tr class="OddTableRows">';
 		$k=1;
 	}
 

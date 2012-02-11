@@ -179,7 +179,7 @@ echo '<tr><td colspan="3"><div class="centre"><input type="submit" name="SearchP
 echo '<input type="submit" name="ResetPart" value="' . _('Show All') . '" /></div></td></tr>';
 echo '</table><br /><br />';
 if (isset($StockItemsResult)) {
-	echo '<table cellpadding="2" colspan="7" class="selection">';
+	echo '<table cellpadding="2" class="selection">';
 	$TableHeader = '<tr><td class="tableheader">' . _('Code') . '</td>
 				<td class="tableheader">' . _('Description') . '</td>
 				<td class="tableheader">' . _('On Hand') . '</td>
@@ -191,10 +191,10 @@ if (isset($StockItemsResult)) {
 	$k = 0; //row colour counter
 	while ($myrow = DB_fetch_array($StockItemsResult)) {
 		if ($k == 1) {
-			echo '<tr bgcolor="#CCCCCC">';
+			echo '<tr class="EvenTableRows">';
 			$k = 0;
 		} else {
-			echo '<tr bgcolor="#EEEEEE">';
+			echo '<tr class="OddTableRows">';
 			$k = 1;
 		}
 		echo '<td><input type="submit" name="SelectedStockItem" value="' . $myrow['stockid'] . '" /></td>
@@ -366,7 +366,7 @@ else {
 
 	if (DB_num_rows($PurchOrdersResult) > 0) {
 		/*show a table of the orders returned by the SQL */
-		echo '<table cellpadding="2" colspan="7" width="90%" class="selection">';
+		echo '<table cellpadding="2" width="90%" class="selection">';
 		$TableHeader = '<tr><th>' . _('View') . '</th>
 				<th>' . _('Supplier') . '</th>
 				<th>' . _('Currency') . '</th>
@@ -381,10 +381,10 @@ else {
 		$k = 0; //row colour counter
 		while ($myrow = DB_fetch_array($PurchOrdersResult)) {
 			if ($k == 1) { /*alternate bgcolour of row for highlighting */
-				echo '<tr bgcolor="#CCCCCC">';
+				echo '<tr class="EvenTableRows">';
 				$k = 0;
 			} else {
-				echo '<tr bgcolor="#EEEEEE">';
+				echo '<tr class="OddTableRows">';
 				$k++;
 			}
 			$ViewPurchOrder = $rootpath . '/PO_OrderDetails.php?OrderNo=' . $myrow['orderno'];

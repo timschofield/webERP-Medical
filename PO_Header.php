@@ -535,7 +535,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 		echo '<input type="hidden" name="SuppliersReturned" value="' . $SuppliersReturned .'" />';
 	}
 
-	echo '<table cellpadding="3" colspan="4" class="selection">
+	echo '<table cellpadding="3" class="selection">
 	<tr>
 	<td><font size="1">' . _('Enter text in the supplier name') . ':</font></td>
 	<td><input type="text" name="Keywords" size="20" maxlength="25" /></td>
@@ -551,7 +551,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 
 	if (isset($result_SuppSelect)) {
 
-		echo '<br /><table cellpadding="3" colspan="7" class="selection">';
+		echo '<br /><table cellpadding="3" class="selection">';
 
 		$tableheader = '<tr>
 							<th>' . _('Code') . '</th>
@@ -721,7 +721,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 		$_POST['PaymentTerms']=$_SESSION['PO'.$identifier]->PaymentTerms;
 	}
 
-	echo '<br /><table colspan="1" width="80%">
+	echo '<br /><table width="80%">
 		<tr>
 			<th><font color="blue" size="4"><b>' . _('Order Initiation Details') . '</b></font></th>
 			<th><font color="blue" size="4"><b>' . _('Order Status') . '</b></font></th>

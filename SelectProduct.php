@@ -474,7 +474,7 @@ if (!$Its_A_Kitset) {
 echo '</td></tr></table>';
 } else {
 	// options (links) to pages. This requires stock id also to be passed.
-	echo '<table width="90%" colspan="2" cellpadding="4">';
+	echo '<table width="90%" cellpadding="4">';
 	echo '<tr>
 		<th width="33%">' . _('Item Inquiries') . '</th>
 		<th width="33%">' . _('Item Transactions') . '</th>
@@ -726,7 +726,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 //			echo '<input type="hidden" name=Search value="Search" />';
 			echo '<br /></div>';
 		}
-		echo '<table cellpadding="2" colspan="7">';
+		echo '<table cellpadding="2">';
 		$tableheader = '<tr>
 					<th>' . _('Code') . '</th>
 					<th>' . _('Description') . '</th>

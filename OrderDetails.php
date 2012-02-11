@@ -148,7 +148,7 @@ if (DB_num_rows($GetOrdHdrResult)==1) {
 		$OrderTotalVolume = 0;
 		$OrderTotalWeight = 0;
 
-		echo '<br /><table cellpadding="2" colspan="9" class="selection">';
+		echo '<br /><table cellpadding="2" class="selection">';
 		echo '<tr><th colspan="9"><font size="3" color="#616161">'._('Order Line Details For Order No').' '.$_GET['OrderNumber'].'</font></th></tr>';
 		echo '<tr>
 			<th>' . _('Item Code') . '</th>

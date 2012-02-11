@@ -83,7 +83,7 @@ function search(&$db,&$StockID) { //####SEARCH_SEARCH_SEARCH_SEARCH_SEARCH_SEARC
 	if (DB_num_rows($result) > 0) {
 		echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-		echo '<table cellpadding="2" colspan="7" class="selection">';
+		echo '<table cellpadding="2" class="selection">';
 		$TableHeader = '<tr><th>' . _('Code') . '</th>
 							<th>' . _('Description') . '</th>
 						</tr>';
@@ -320,7 +320,7 @@ function display(&$db,&$StockID,&$DemandID) { //####DISPLAY_DISPLAY_DISPLAY_DISP
 	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	if (!isset($StockID)) {
-		echo'</font><table cellpadding="3" colspan="4" class="selection"><tr>
+		echo'</font><table cellpadding="3" class="selection"><tr>
 			<td><font size="1">' . _('Enter text extracts in the') . ' <b>' . _('description') . '</b>:</font></td>
 			<td><input tabindex="1" type="text" name="Keywords" size="20" maxlength="25" /></td>
 			<td><font size="3"><b>' . _('OR') . '</b></font></td>

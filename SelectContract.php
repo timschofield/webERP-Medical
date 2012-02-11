@@ -143,7 +143,7 @@ $ContractsResult = DB_query($SQL,$db,$ErrMsg);
 
 /*show a table of the contracts returned by the SQL */
 
-echo '<table cellpadding="2" colspan="7" width="98%" class="selection">';
+echo '<table cellpadding="2" width="98%" class="selection">';
 
 $TableHeader = '<tr>
 			    <th>' . _('Modify') . '</th>

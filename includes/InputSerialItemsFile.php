@@ -34,10 +34,10 @@ foreach ($LineItem->SerialItems as $Bundle){
 	//only show 1st 10 lines
 	if ($RowCounter < 10){
 		if ($k==1){
-			echo '<tr bgcolor="#CCCCCC">';
+			echo '<tr class="EvenTableRows">';
 			$k=0;
 		} else {
-			echo '<tr bgcolor="#EEEEEE">';
+			echo '<tr class="OddTableRows">';
 			$k=1;
 		}
 

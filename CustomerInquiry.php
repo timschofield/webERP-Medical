@@ -182,7 +182,7 @@ if (DB_num_rows($TransResult)==0){
 }
 /*show a table of the invoices returned by the SQL */
 
-echo '<table class="selection" cellpadding="2" colspan="7">';
+echo '<table class="selection" cellpadding="2">';
 
 $tableheader = '<tr>
 							<th>' . _('Type') . '</th>

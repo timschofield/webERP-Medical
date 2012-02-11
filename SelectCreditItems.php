@@ -89,7 +89,7 @@ if ($_SESSION['RequireCustomerSelection']==1) {
 	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?identifier='.$identifier.'" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Search for Customers').'</p>';
-	echo '<table cellpadding="3" colspan="4" class="selection">';
+	echo '<table cellpadding="3" class="selection">';
 	echo '<tr><td colspan="2">' . _('Enter a partial Name') . ':</td><td>';
 	if (isset($_POST['Keywords'])) {
 		echo '<input type="text" name="Keywords" value="' . $_POST['Keywords'] . '" size="20" maxlength="25" />';
@@ -392,7 +392,7 @@ if ($_SESSION['RequireCustomerSelection']==1) {
 					<input type="submit" name="Next" value="' . _('Next') . '" />';
 				echo '</div>';
 			}
-			echo '<br /><table cellpadding="2" colspan="7" class="selection">';
+			echo '<br /><table cellpadding="2" class="selection">';
 			$TableHeader = '<tr>
 								<th>' . _('Code') . '</th>
 								<th>' . _('Customer Name') . '</th>
@@ -942,7 +942,7 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 		}
 /* This is where the credit note as selected should be displayed  reflecting any deletions or insertions*/
 
-		echo '<font color="red"><table cellpadding="2" colspan="7" class="selection">
+		echo '<font color="red"><table cellpadding="2" class="selection">
 				<tr>
 					<th>' . _('Item Code') . '</th>
 					<th>' . _('Item Description') . '</th>

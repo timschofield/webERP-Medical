@@ -745,7 +745,7 @@ if (!isset($_SESSION['Contract'.$identifier]->DebtorNo)
 	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?identifier=' . $identifier .'" name="CustomerSelection" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-	echo '<table cellpadding="3" colspan="4" class="selection">
+	echo '<table cellpadding="3" class="selection">
 			<tr>
 			<td><h5>' . _('Part of the Customer Branch Name') . ':</h5></td>
 			<td><input tabindex="1" type="text" name="CustKeywords" size="20" maxlength="25" /></td>

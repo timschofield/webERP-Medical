@@ -175,7 +175,7 @@ echo '<input type="submit" name="ResetPart" value="'. _('Show All') .'" /></div>
 
 if (isset($StockItemsResult)) {
 
-	echo '<table cellpadding="2" colspan="7" class="selection">';
+	echo '<table cellpadding="2" class="selection">';
 	$TableHeader = '<tr>
 			<th>'. _('Code').'</th>
 			<th>'. _('Description').'</th>
@@ -276,7 +276,7 @@ Code	 Description	On Hand		 Orders Ostdg     Units		 Code	Description 	 On Hand 
 	if (DB_num_rows($ShipmentsResult)>0){
 		/*show a table of the shipments returned by the SQL */
 
-		echo '<table cellpadding="2" colspan="7" width="95%" class="selection">';
+		echo '<table cellpadding="2" width="95%" class="selection">';
 		$TableHeader = '<tr>
 				<th>'. _('Shipment'). '</th>
 				<th>'. _('Supplier'). '</th>

@@ -146,7 +146,7 @@ $LineItemsSQL = "SELECT itemcode,
 $LineItemsResult = DB_query($LineItemsSQL,$db, $ErrMsg);
 
 
-echo '<table colspan="8" class="selection" cellpadding="0">';
+echo '<table class="selection" cellpadding="0">';
 echo '<tr><th colspan="8"><font size="3" color="#616161">'. _('Order Line Details'). '</font></th></tr>';
 echo '<tr>
 		<th>' . _('Item Code'). '</td>
@@ -176,10 +176,10 @@ while ($myrow=DB_fetch_array($LineItemsResult)) {
     	 	echo '<tr class="OsRow">';
 	} else {
     		if ($k==1){
-    			echo '<tr bgcolor="#CCCCCC">';
+    			echo '<tr class="EvenTableRows">';
     			$k=0;
     		} else {
-    			echo '<tr bgcolor="#EEEEEE">';
+    			echo '<tr class="OddTableRows">';
     			$k=1;
 		}
 	}

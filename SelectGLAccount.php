@@ -83,7 +83,7 @@ if (!isset($AccountID)) {
 		prnMsg($msg,'info');
 	}
 
-	echo '<table cellpadding="3" colspan="4" class="selection">
+	echo '<table cellpadding="3" class="selection">
 		<tr>
 		<td><font size="1">' . _('Enter extract of text in the Account name') .':</font></td>
 		<td><input type="text" name="Keywords" size="20" maxlength="25" /></td>
@@ -98,7 +98,7 @@ if (!isset($AccountID)) {
 
 	if (isset($result) and DB_num_rows($result)>0) {
 
-		echo '<br /><table cellpadding="2" colspan="7" class="selection">';
+		echo '<br /><table cellpadding="2" class="selection">';
 
 		$TableHeader = '<tr><th>' . _('Code') . '</th>
 					  <th>' . _('Account Name') . '</th>

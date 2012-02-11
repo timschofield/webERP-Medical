@@ -760,7 +760,7 @@ if (count($_SESSION['Items'.$identifier]->LineItems)>0 and !isset($_POST['Proces
 */
 
 	echo '<br />
-		<table width="90%" cellpadding="2" colspan="7" class="selection">
+		<table width="90%" cellpadding="2" class="selection">
 		<tr bgcolor="#800000">';
 	echo '<th>' . _('Item Code') . '</th>
 			<th>' . _('Item Description') . '</th>

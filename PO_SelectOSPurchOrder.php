@@ -212,7 +212,7 @@ echo '<br />';
 
 if (isset($StockItemsResult)) {
 
-	echo '<table cellpadding="2" colspan="7" class="selection">';
+	echo '<table cellpadding="2" class="selection">';
 	$TableHeader = 	'<tr><th>' . _('Code') . '</th>
 			<th>' . _('Description') . '</th>
 			<th>' . _('On Hand') . '</th>
@@ -437,7 +437,7 @@ else {
 
 	/*show a table of the orders returned by the SQL */
 
-	echo '<table cellpadding="2" colspan="7" width="97%" class="selection">';
+	echo '<table cellpadding="2" width="97%" class="selection">';
 
 //				   '</td><td class="tableheader">' . _('Receive') .
 

@@ -136,7 +136,7 @@ if (DB_num_rows($LineItemsResult) > 0) {
 		$PeriodNo = GetPeriod(Date($_SESSION['DefaultDateFormat']), $db);
 	}
 
-	echo '<br /><table cellpadding="2" colspan="7" class="selection">';
+	echo '<br /><table cellpadding="2" class="selection">';
 	echo '<tr><th colspan="9"><font color="#616161" size="3">' . _('Items on shipment'). '</font></th></tr>';
 
 	$TableHeader = '<tr>
@@ -472,7 +472,7 @@ echo '<tr><td colspan="6" class="number">' . _('Total Value of all variances on 
 echo '</table>';
 
 
-echo '<br /><table colspan="2" width="95%"><tr><td valign="top">'; // put this shipment charges side by side in a table (major table 2 cols)
+echo '<br /><table width="95%"><tr><td valign="top">'; // put this shipment charges side by side in a table (major table 2 cols)
 
 $sql = "SELECT suppliers.suppname,
 		supptrans.suppreference,
@@ -498,7 +498,7 @@ $sql = "SELECT suppliers.suppname,
 
 $ChargesResult = DB_query($sql,$db);
 
-echo '<table cellpadding="2" colspan="6" class="selection">';
+echo '<table cellpadding="2" class="selection">';
 echo '<tr><th colspan="6"><font color="#616161" size="3">' . _('Shipment Charges Against Products'). '</font></th></tr>';
 
 $TableHeader = '<tr>
@@ -569,7 +569,7 @@ $sql = "SELECT suppliers.suppname,
 
 $ChargesResult = DB_query($sql,$db);
 
-echo '<table cellpadding="2" colspan="5" class="selection">';
+echo '<table cellpadding="2" class="selection">';
 echo '<tr><th colspan="6"><font color="#616161" size="3">'._('General Shipment Charges').'</font></th></tr>';
 
 $TableHeader = '<tr>

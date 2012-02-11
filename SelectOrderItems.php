@@ -1341,7 +1341,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 /* This is where the order as selected should be displayed  reflecting any deletions or insertions*/
 
 		echo '<br />
-					<table width="90%" cellpadding="2" colspan="7" class="selection">
+					<table width="90%" cellpadding="2" class="selection">
 					<tr bgcolor="#800000">';
 		if($_SESSION['Items'.$identifier]->DefaultPOLine == 1){
 			echo '<th>' . _('PO Line') . '</th>';

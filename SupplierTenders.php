@@ -625,7 +625,7 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 
 	if (isset($SearchResult)) {
 
-		echo '<table cellpadding="1" colspan="7">';
+		echo '<table cellpadding="1">';
 
 		$tableheader = '<tr>
 						<th>' . _('Code')  . '</th>

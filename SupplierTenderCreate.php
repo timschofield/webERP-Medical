@@ -484,7 +484,7 @@ if (isset($_POST['Suppliers'])) {
 	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'].'?identifier='.$identifier) . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Search for Suppliers') . '</p>
-		<table cellpadding="3" colspan="4" class="selection"><tr><td>' . _('Enter a partial Name') . ':</td><td>';
+		<table cellpadding="3" class="selection"><tr><td>' . _('Enter a partial Name') . ':</td><td>';
 	if (isset($_POST['Keywords'])) {
 		echo '<input type="text" name="Keywords" value="' . $_POST['Keywords'] . '" size="20" maxlength="25" />';
 	} else {
@@ -535,7 +535,7 @@ if (isset($_POST['SearchSupplier'])) {
 	}
 	echo '<input type="hidden" name="Search" value="' . _('Search Now') . '" />';
 	echo '<br /><br />';
-	echo '<br /><table cellpadding="2" colspan="7">';
+	echo '<br /><table cellpadding="2">';
 	$tableheader = '<tr>
   		<th>' . _('Code') . '</th>
 		<th>' . _('Supplier Name') . '</th>
@@ -744,7 +744,7 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 
 	if (isset($SearchResult)) {
 
-		echo '<table cellpadding="1" colspan="7">';
+		echo '<table cellpadding="1">';
 
 		$tableheader = '<tr>
 			<th>' . _('Code')  . '</th>
