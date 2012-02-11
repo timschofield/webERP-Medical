@@ -131,8 +131,8 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
 <?php
   }
 ?>
-            </LI>
             <br><br>
+            </LI>
             <LI>
 <?php
   if (!isset($_POST['Submit'])) {
