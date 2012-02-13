@@ -95,7 +95,7 @@ if (isset($_POST['UpdateAll'])) {
 			$DbgMsg = _('The following SQL to update the stock record was used');
 			$Result = DB_query($SQL,$db, $ErrMsg, $DbgMsg,true);
 
-			$SQL = "UPDATE locstock SET quantity = quantity + '" . $Quantity . "'
+			$SQL = "UPDATE locstock SET quantity = quantity - '" . $Quantity . "'
 							WHERE stockid='" . $StockID . "'
 								AND loccode='" . $Location . "'";
 
