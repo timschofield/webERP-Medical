@@ -13,13 +13,11 @@ include('includes/header.inc');
 	$result = DB_query($sql,$db);
 
 	if( DB_num_rows($result) == 0 ) {
-		$sql = "INSERT INTO accountsection (
-					sectionid,
-					sectionname
-				) VALUES (
-					1,
-					'Income'
-				)";
+		$sql = "INSERT INTO accountsection (sectionid,
+											sectionname
+										) VALUES (
+											1,
+											'Income')";
 		$result = DB_query($sql,$db);
 	}
 
@@ -27,13 +25,11 @@ include('includes/header.inc');
 	$result = DB_query($sql,$db);
 
 	if( DB_num_rows($result) == 0 ) {
-		$sql = "INSERT INTO accountsection (
-					sectionid,
-					sectionname
-				) VALUES (
-					2,
-					'Cost Of Sales'
-				)";
+		$sql = "INSERT INTO accountsection (sectionid,
+											sectionname
+										) VALUES (
+											2,
+											'Cost Of Sales')";
 		$result = DB_query($sql,$db);
 	}
 // DONE WITH MINIMUM TESTS
@@ -58,7 +54,8 @@ if (isset($_POST['submit'])) {
 	//first off validate inputs sensible
 	if (isset($_POST['SectionID'])) {
 		$sql="SELECT sectionid
-			FROM accountsection WHERE sectionid='".$_POST['SectionID']."'";
+					FROM accountsection
+					WHERE sectionid='".$_POST['SectionID']."'";
 		$result=DB_query($sql, $db);
 
 		if ((DB_num_rows($result)!=0 and !isset($_POST['SelectedSectionID']))) {
@@ -97,8 +94,7 @@ if (isset($_POST['submit'])) {
 
 		/*SelectedSectionID could also exist if submit had not been clicked this code would not run in this case cos submit is false of course  see the delete code below*/
 
-		$sql = "UPDATE accountsection
-				SET sectionname='" . $_POST['SectionName'] . "'
+		$sql = "UPDATE accountsection SET sectionname='" . $_POST['SectionName'] . "'
 				WHERE sectionid = " . $_POST['SelectedSectionID'];
 
 		$msg = _('Record Updated');
@@ -106,13 +102,11 @@ if (isset($_POST['submit'])) {
 
 	/*SelectedSectionID is null cos no item selected on first time round so must be adding a record must be submitting new entries in the new account section form */
 
-		$sql = "INSERT INTO accountsection (
-					sectionid,
-					sectionname )
-			VALUES (
-				" . $_POST['SectionID'] . ",
-				'" . $_POST['SectionName'] ."'
-				)";
+		$sql = "INSERT INTO accountsection (sectionid,
+											sectionname
+										) VALUES (
+											" . $_POST['SectionID'] . ",
+											'" . $_POST['SectionName'] .")";
 		$msg = _('Record inserted');
 	}
 
@@ -129,7 +123,7 @@ if (isset($_POST['submit'])) {
 //the link to delete a selected record was clicked instead of the submit button
 
 // PREVENT DELETES IF DEPENDENT RECORDS IN 'accountgroups'
-	$sql= "SELECT COUNT(sectioninaccounts) as sections FROM accountgroups WHERE sectioninaccounts='" . $_GET['SelectedSectionID'] . "'";
+	$sql= "SELECT COUNT(sectioninaccounts) AS sections FROM accountgroups WHERE sectioninaccounts='" . $_GET['SelectedSectionID'] . "'";
 	$result = DB_query($sql,$db);
 	$myrow = DB_fetch_array($result);
 	if (DB_num_rows($result)>0) {
