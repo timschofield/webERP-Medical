@@ -122,10 +122,10 @@ if (isset($_POST['ProcessStockChange'])){
 	$result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 	echo ' ... ' . _('completed');
 
-	$sql="SELECT count(table_name) FROM information_schema.tables WHERE table_schema='".$_SESSION['DatabaseName']."' AND table_name='mrpplannedorders'";
+	$sql="SELECT table_name FROM information_schema.tables WHERE table_schema='".$_SESSION['DatabaseName']."' AND table_name='mrpplannedorders'";
 	$result = DB_query($sql,$db);
-	$row=DB_fetch_row($result);
-	if ($row[0]>0) {
+
+	if (DB_num_rows($result)>0) {
 		echo '<br />' . _('Changing MRP planned orders information');
 
 		$sql = "UPDATE mrpplannedorders SET part='" . $_POST['NewStockID'] . "' WHERE part='" . $_POST['OldStockID'] . "'";

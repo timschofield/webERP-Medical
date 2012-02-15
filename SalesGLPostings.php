@@ -37,14 +37,13 @@ if (isset($_POST['submit'])) {
 	/*Selected Sales GL Posting is null cos no item selected on first time round so must be	adding a record must be submitting new entries in the new SalesGLPosting form */
 
 		/* Verify if item doesn't exists to insert it, otherwise just refreshes the page. */
-		$sql = "SELECT count(*) FROM salesglpostings
+		$sql = "SELECT salestype FROM salesglpostings
 								WHERE area='" . $_POST['Area'] . "'
 									AND stkcat='" . $_POST['StkCat'] . "'
 									AND salestype='" . $_POST['SalesType'] . "'";
 
 		$result = DB_query($sql,$db);
-		$myrow = DB_fetch_row($result);
-		if ($myrow[0] == 0) {
+		if (DB_num_rows($result) == 0) {
 			$sql = "INSERT INTO salesglpostings (
 						salesglcode,
 						discountglcode,
@@ -116,7 +115,7 @@ if (!isset($SelectedSalesPostingID)) {
 			</tr>';
 		$k=0; //row colour counter
 
-		while ($myrow = DB_fetch_row($result)) {
+		while ($myrow = DB_fetch_array($result)) {
 			if ($k==1){
 				echo '<tr class="EvenTableRows">';
 				$k=0;
@@ -132,15 +131,15 @@ if (!isset($SelectedSalesPostingID)) {
 				<td>%s</td>
 				<td><a href="%sSelectedSalesPostingID=%s">' . _('Edit') . '</td>
 				<td><a href="%sSelectedSalesPostingID=%s&delete=yes">'. _('Delete') . '</td></tr>',
-				$myrow[1],
-				$myrow[2],
-				$myrow[3],
-				$myrow[4],
-				$myrow[5],
+				$myrow['area'],
+				$myrow['stkcat'],
+				$myrow['salestype'],
+				$myrow['salesglcode'],
+				$myrow['discountglcode'],
 				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
-				$myrow[0],
+				$myrow['id'],
 				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
-				$myrow[0]);
+				$myrow['id']);
 		}
 	}
 
@@ -209,8 +208,8 @@ if (!isset($SelectedSalesPostingID)) {
 				salesglpostings.area,
 				salesglpostings.stkcat,
 				salesglpostings.salestype,
-				chart1.accountname,
-				chart2.accountname
+				chart1.accountname AS chart1name,
+				chart2.accountname AS chart2name
 			FROM salesglpostings,
 				chartmaster as chart1,
 				chartmaster as chart2
@@ -229,7 +228,7 @@ if (!isset($SelectedSalesPostingID)) {
 
 		$k=0; //row colour counter
 
-		while ($myrow = DB_fetch_row($result)) {
+		while ($myrow = DB_fetch_array($result)) {
 			if ($k==1){
 				echo '<tr class="EvenTableRows">';
 				$k=0;
@@ -245,15 +244,15 @@ if (!isset($SelectedSalesPostingID)) {
 				<td>%s</td>
 				<td><a href="%sSelectedSalesPostingID=%s">' . _('Edit') . '</td>
 				<td><a href="%sSelectedSalesPostingID=%s&delete=yes">'. _('Delete') . '</td></tr>',
-				$myrow[1],
-				$myrow[2],
-				$myrow[3],
-				$myrow[4],
-				$myrow[5],
+				$myrow['area'],
+				$myrow['stkcat'],
+				$myrow['salestype'],
+				$myrow['chart1name'],
+				$myrow['chart2name'],
 				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
-				$myrow[0],
+				$myrow['id'],
 				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
-				$myrow[0]);
+				$myrow['id']);
 		}
 		//END WHILE LIST LOOP
 		echo '</table>';

@@ -25,8 +25,8 @@ if (!isset($_GET['CreditNoteNo'])){
 $SQL = "SELECT order_ FROM debtortrans WHERE transno='" . $_GET['CreditNoteNo'] . "' AND type='11'";
 $Result = DB_query($SQL, $db);
 
-$myrow = DB_fetch_row($Result);
-$OrderNo = $myrow[0];
+$myrow = DB_fetch_array($Result);
+$OrderNo = $myrow['order_'];
 
 /*Now get the stock movements that were credited into an array */
 

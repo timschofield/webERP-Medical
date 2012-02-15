@@ -463,17 +463,17 @@ if (isset($_POST['Customer']) AND $_POST['Customer']!='') {
 	$DbgMsg = _('The SQL used to retrieve the customer details and failed was');
 	$result =DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
-	$myrow = DB_fetch_row($result);
+	$myrow = DB_fetch_array($result);
 
 	$_SESSION['RequireCustomerSelection'] = 0;
-	$_SESSION['CreditItems'.$identifier]->CustomerName = $myrow[0];
+	$_SESSION['CreditItems'.$identifier]->CustomerName = $myrow['name'];
 
 /* the sales type determines the price list to be used by default the customer of the user is
 defaulted from the entry of the userid and password.  */
 
-	$_SESSION['CreditItems'.$identifier]->DefaultSalesType = $myrow[1];
-	$_SESSION['CreditItems'.$identifier]->DefaultCurrency = $myrow[2];
-	$_SESSION['CurrencyRate'] = $myrow[3];
+	$_SESSION['CreditItems'.$identifier]->DefaultSalesType = $myrow['salestype'];
+	$_SESSION['CreditItems'.$identifier]->DefaultCurrency = $myrow['currcode'];
+	$_SESSION['CurrencyRate'] = $myrow['rate'];
 
 /*  default the branch information from the customer branches table CustBranch -particularly where the stock
 will be booked back into. */
@@ -1397,8 +1397,8 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess==true){
 	$DbgMsg = '<br />' . _('The following SQL to insert the customer credit note was used');
 	$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg);
 
-	if ($myrow = DB_fetch_row($Result)){
-		$Area = $myrow[0];
+	if ($myrow = DB_fetch_array($Result)){
+		$Area = $myrow['area'];
 	}
 
 	DB_free_result($Result);
@@ -1417,7 +1417,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess==true){
 /*Now Get the next credit note number - function in SQL_CommonFunctions*/
 
 	$CreditNo = GetNextTransNo(11, $db);
-	$SQLCreditDate = Date("Y-m-d");
+	$SQLCreditDate = Date('Y-m-d');
 	$PeriodNo = GetPeriod(Date($_SESSION['DefaultDateFormat']), $db);
 
 /*Start an SQL transaction */
@@ -1498,8 +1498,8 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess==true){
 
 				$Result = DB_query($SQL, $db);
 				if (DB_num_rows($Result)==1){
-					$LocQtyRow = DB_fetch_row($Result);
-					$QtyOnHandPrior = $LocQtyRow[0];
+					$LocQtyRow = DB_fetch_array($Result);
+					$QtyOnHandPrior = $LocQtyRow['quantity'];
 				} else {
 					/*There must actually be some error this should never happen */
 					$QtyOnHandPrior = 0;
@@ -1652,7 +1652,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess==true){
 					foreach($CreditLine->SerialItems as $Item){
 
 						/*1st off check if StockSerialItems already exists */
-						$SQL = "SELECT COUNT(*)
+						$SQL = "SELECT stockid
 							FROM stockserialitems
 							WHERE stockid='" . $CreditLine->StockID . "'
 							AND loccode='" . $_SESSION['CreditItems'.$identifier]->Location . "'
@@ -1660,9 +1660,8 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess==true){
 						$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The existence of the serial stock item record could not be determined because');
 						$DbgMsg = _('The following SQL to find out if the serial stock item record existed already was used');
 						$Result = DB_query($SQL, $db, $ErrMsg, $DbgMsg, true);
-						$myrow = DB_fetch_row($Result);
 
-						if ($myrow[0]==0) {
+						if (DB_num_rows($Result)==0) {
 						/*The StockSerialItem record didnt exist
 						so insert a new record */
 							$SQL = "INSERT INTO stockserialitems (stockid,
@@ -1760,8 +1759,8 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess==true){
 
 						$Result = DB_query($SQL, $db);
 						if (DB_num_rows($Result)==1){
-							$LocQtyRow = DB_fetch_row($Result);
-							$QtyOnHandPrior = $LocQtyRow[0];
+							$LocQtyRow = DB_fetch_array($Result);
+							$QtyOnHandPrior = $LocQtyRow['quantity'];
 						} else {
 						/*There must actually be some error this should never happen */
 							$QtyOnHandPrior = 0;
@@ -1943,7 +1942,7 @@ the salesman or area has changed a new record is inserted for the customer and s
 set up. Considered just getting the area and salesman from the branch table but these can alter and the
 sales analysis needs to reflect the sales made before and after the changes*/
 
-			$SQL="SELECT COUNT(*),
+			$SQL="SELECT COUNT(*) AS totalrows,
 						salesanalysis.stkcategory,
 						salesanalysis.area,
 						salesanalysis.salesperson
@@ -1970,9 +1969,9 @@ sales analysis needs to reflect the sales made before and after the changes*/
 			$DbgMsg = _('SQL to count the no of sales analysis records');
 			$Result = DB_query($SQL,$db, $ErrMsg, $DbgMsg, true);
 
-			$myrow = DB_fetch_row($Result);
+			$myrow = DB_fetch_array($Result);
 
-			if ($myrow[0]>0){  /*Update the existing record that already exists */
+			if ($myrow['totalrows']>0){  /*Update the existing record that already exists */
 
 				if ($_POST['CreditType']=='ReverseOverCharge'){
 
@@ -1981,14 +1980,14 @@ sales analysis needs to reflect the sales made before and after the changes*/
 					$SQL = "UPDATE salesanalysis
 								SET amt=amt-" . ($CreditLine->Price * $CreditLine->Quantity*$CreditLine->ConversionFactor / $_SESSION['CurrencyRate']) . ",
 									disc=disc-" . ($CreditLine->DiscountPercent * $CreditLine->Price * $CreditLine->Quantity*$CreditLine->ConversionFactor / $_SESSION['CurrencyRate']) . "
-							WHERE salesanalysis.area='" . $myrow[2] . "'
-								AND salesanalysis.salesperson='" . $myrow[3] . "'
+							WHERE salesanalysis.area='" . $myrow['area'] . "'
+								AND salesanalysis.salesperson='" . $myrow['salesperson'] . "'
 								AND salesanalysis.typeabbrev ='" . $_SESSION['CreditItems'.$identifier]->DefaultSalesType . "'
 								AND salesanalysis.periodno = '" . $PeriodNo . "'
 								AND salesanalysis.cust = '" . $_SESSION['CreditItems'.$identifier]->DebtorNo . "'
 								AND salesanalysis.custbranch = '" . $_SESSION['CreditItems'.$identifier]->Branch . "'
 								AND salesanalysis.stockid = '" . $CreditLine->StockID . "'
-								AND salesanalysis.stkcategory ='" . $myrow[1] . "'
+								AND salesanalysis.stkcategory ='" . $myrow['stkcategory'] . "'
 								AND salesanalysis.budgetoractual=1";
 
 				} else {
@@ -1998,14 +1997,14 @@ sales analysis needs to reflect the sales made before and after the changes*/
 									cost=cost-" . ($CreditLine->StandardCost * $CreditLine->Quantity*$CreditLine->ConversionFactor) . ",
 									qty=qty-" . $CreditLine->Quantity*$CreditLine->ConversionFactor . ",
 									disc=disc-" . ($CreditLine->DiscountPercent * $CreditLine->Price *$CreditLine->Quantity*$CreditLine->ConversionFactor / $_SESSION['CurrencyRate']) . "
-							WHERE salesanalysis.area='" . $myrow[2] . "'
-								AND salesanalysis.salesperson='" . $myrow[3] . "'
+							WHERE salesanalysis.area='" . $myrow['area'] . "'
+								AND salesanalysis.salesperson='" . $myrow['salesperson'] . "'
 								AND salesanalysis.typeabbrev ='" . $_SESSION['CreditItems'.$identifier]->DefaultSalesType . "'
 								AND salesanalysis.periodno = '" . $PeriodNo . "'
 								AND salesanalysis.cust = '" . $_SESSION['CreditItems'.$identifier]->DebtorNo . "'
 								AND salesanalysis.custbranch = '" . $_SESSION['CreditItems'.$identifier]->Branch . "'
 								AND salesanalysis.stockid = '" . $CreditLine->StockID . "'
-								AND salesanalysis.stkcategory ='" . $myrow[1] . "'
+								AND salesanalysis.stkcategory ='" . $myrow['stkcategory'] . "'
 								AND salesanalysis.budgetoractual=1";
 				}
 

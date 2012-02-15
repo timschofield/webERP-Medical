@@ -103,7 +103,7 @@ if (isset($_POST['Process'])) {
 					WHERE closed=0
 					AND tenderid='".$_SESSION['offer'.$identifier]->TenderID."'";
 	$LocationResult=DB_query($LocationSQL, $db);
-	$MyLocationRow=DB_fetch_row($LocationResult);
+	$MyLocationRow=DB_fetch_array($LocationResult);
 	echo '<tr><td valign="top" style="background-color:#cccce5">' . _('Deliver To') . ':</td><td valign="top" style="background-color:#cccce5">';
 	for ($i=1; $i<8; $i++) {
 		if ($MyLocationRow[$i]!='') {
@@ -426,7 +426,7 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==3 and !isset($_POST['S
 	$result=DB_query($sql, $db);
 	echo '<table class="selection">';
 	echo '<tr><th colspan="13"><font size="3" color="#616161">' . _('Outstanding Tenders Waiting For Offer') . '</font></th></tr>';
-	while ($myrow=DB_fetch_row($result)) {
+	while ($myrow=DB_fetch_array($result)) {
 		echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<input type="hidden" name="TenderType" value="3" />';
@@ -443,9 +443,9 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==3 and !isset($_POST['S
 						LEFT JOIN locations
 						ON tenders.location=locations.loccode
 						WHERE closed=0
-						AND tenderid='".$myrow[0]."'";
+						AND tenderid='".$myrow['tenderid']."'";
 		$LocationResult=DB_query($LocationSQL, $db);
-		$MyLocationRow=DB_fetch_row($LocationResult);
+		$MyLocationRow=DB_fetch_array($LocationResult);
 		echo '<tr><td valign="top" style="background-color:#cccce5">' . _('Deliver To') . ':</td><td valign="top" style="background-color:#cccce5">';
 		for ($i=1; $i<8; $i++) {
 			if ($MyLocationRow[$i]!='') {
@@ -453,8 +453,8 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==3 and !isset($_POST['S
 			}
 		}
 		echo '</td>';
-		echo '<th colspan="8" style="vertical-align:top"><font size="2" color="#616161">' . _('Tender Number') . ': ' .$myrow[0] . '</font></th>';
-		echo '<input type="hidden" value="' . $myrow[0] . '" name="Tender" />';
+		echo '<th colspan="8" style="vertical-align:top"><font size="2" color="#616161">' . _('Tender Number') . ': ' .$myrow['tenderid'] . '</font></th>';
+		echo '<input type="hidden" value="' . $myrow['tenderid'] . '" name="Tender" />';
 		echo '<th><input type="submit" value="' . _('Process') . "\n" . _('Tender') . '" name="Process" /></th></tr>';
 		$ItemSQL="SELECT tenderitems.tenderid,
 						tenderitems.stockid,
@@ -473,7 +473,7 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==3 and !isset($_POST['S
 					AND purchdata.supplierno='".$_POST['SupplierID']."'
 					LEFT JOIN tenders
 					ON tenders.tenderid=tenderitems.tenderid
-					WHERE tenderitems.tenderid='" . $myrow[0] . "'";
+					WHERE tenderitems.tenderid='" . $myrow['tenderid'] . "'";
 		$ItemResult=DB_query($ItemSQL, $db);
 		echo '<tr><th>' . stripslashes($_SESSION['CompanyRecord']['coyname']) . '<br />' . _('Item Code') . '</th>';
 		echo '<th>' . _('Item Description') . '</th>';
@@ -503,7 +503,7 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==3 and !isset($_POST['S
 			echo '<input type="hidden" name="UOM'. $i . '" value="' . $MyItemRow['units'] . '" />';
 			echo '<input type="hidden" name="DecimalPlaces'. $i . '" value="' . $MyItemRow['decimalplaces'] . '" />';
 			echo '<td>' . $MyItemRow['suppliersuom'] . '</td>';
-			echo '<td>' . $myrow[1] . '</td>';
+			echo '<td>' . $myrow['currcode'] . '</td>';
 			echo '<td><input type="text" class="number" size="10" name="Price'. $i . '" value="0.00" /></td>';
 			echo '<td><input type="text" class="date" alt="' .$_SESSION['DefaultDateFormat'] .'" name="RequiredByDate'. $i . '" size="11" value="' . ConvertSQLDate($MyItemRow['requiredbydate']) . '" /></td>';
 		}

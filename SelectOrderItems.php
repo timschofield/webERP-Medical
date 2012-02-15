@@ -183,8 +183,8 @@ if (isset($_GET['ModifyOrderNumber'])
 										FROM currencies
 										WHERE currabrev='" . $_SESSION['Items'.$identifier]->DefaultCurrency . "'",$db);
 			if (DB_num_rows($ExRateResult)>0){
-				$ExRateRow = DB_fetch_row($ExRateResult);
-				$ExRate = $ExRateRow[0];
+				$ExRateRow = DB_fetch_array($ExRateResult);
+				$ExRate = $ExRateRow['rate'];
 			} else {
 				$ExRate =1;
 			}
@@ -447,24 +447,24 @@ if (isset($_POST['Select']) and $_POST['Select']!='') {
 	$DbgMsg = _('The SQL used to retrieve the customer details and failed was') . ':';
 	$result =DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
-	$myrow = DB_fetch_row($result);
-	if ($myrow[1] != 1){
-		if ($myrow[1]==2){
-			prnMsg(_('The') . ' ' . $myrow[0] . ' ' . _('account is currently flagged as an account that needs to be watched. Please contact the credit control personnel to discuss'),'warn');
+	$myrow = DB_fetch_array($result);
+	if ($myrow['dissallowinvoices'] != 1){
+		if ($myrow['dissallowinvoices']==2){
+			prnMsg(_('The') . ' ' . $myrow['name'] . ' ' . _('account is currently flagged as an account that needs to be watched. Please contact the credit control personnel to discuss'),'warn');
 		}
 
 		$_SESSION['Items'.$identifier]->DebtorNo=$_POST['Select'];
 		$_SESSION['RequireCustomerSelection']=0;
-		$_SESSION['Items'.$identifier]->CustomerName = $myrow[0];
+		$_SESSION['Items'.$identifier]->CustomerName = $myrow['name'];
 
 # the sales type determines the price list to be used by default the customer of the user is
 # defaulted from the entry of the userid and password.
 
-		$_SESSION['Items'.$identifier]->DefaultSalesType = $myrow[2];
-		$_SESSION['Items'.$identifier]->SalesTypeName = $myrow[3];
-		$_SESSION['Items'.$identifier]->DefaultCurrency = $myrow[4];
-		$_SESSION['Items'.$identifier]->DefaultPOLine = $myrow[5];
-		$_SESSION['Items'.$identifier]->PaymentTerms = $myrow[6];
+		$_SESSION['Items'.$identifier]->DefaultSalesType = $myrow['salestype'];
+		$_SESSION['Items'.$identifier]->SalesTypeName = $myrow['sales_type'];
+		$_SESSION['Items'.$identifier]->DefaultCurrency = $myrow['currcode'];
+		$_SESSION['Items'.$identifier]->DefaultPOLine = $myrow['customerpoline'];
+		$_SESSION['Items'.$identifier]->PaymentTerms = $myrow['terms'];
 
 # the branch was also selected from the customer selection so default the delivery details from the customer branches table CustBranch. The order process will ask for branch details later anyway
 
@@ -506,28 +506,28 @@ if (isset($_POST['Select']) and $_POST['Select']!='') {
 		}
 		// add echo
 		echo '<br />';
-		$myrow = DB_fetch_row($result);
-		if ($_SESSION['SalesmanLogin']!='' AND $_SESSION['SalesmanLogin']!=$myrow[15]){
+		$myrow = DB_fetch_array($result);
+		if ($_SESSION['SalesmanLogin']!='' and $_SESSION['SalesmanLogin']!=$myrow['salesman']){
 			prnMsg(_('Your login is only set up for a particular salesperson. This customer has a different salesperson.'),'error');
 			include('includes/footer.inc');
 			exit;
 		}
 
-		$_SESSION['Items'.$identifier]->DeliverTo = $myrow[0];
-		$_SESSION['Items'.$identifier]->DelAdd1 = $myrow[1];
-		$_SESSION['Items'.$identifier]->DelAdd2 = $myrow[2];
-		$_SESSION['Items'.$identifier]->DelAdd3 = $myrow[3];
-		$_SESSION['Items'.$identifier]->DelAdd4 = $myrow[4];
-		$_SESSION['Items'.$identifier]->DelAdd5 = $myrow[5];
-		$_SESSION['Items'.$identifier]->DelAdd6 = $myrow[6];
-		$_SESSION['Items'.$identifier]->PhoneNo = $myrow[7];
-		$_SESSION['Items'.$identifier]->Email = $myrow[8];
-		$_SESSION['Items'.$identifier]->Location = $myrow[9];
-		$_SESSION['Items'.$identifier]->ShipVia = $myrow[10];
-		$_SESSION['Items'.$identifier]->DeliverBlind = $myrow[11];
-		$_SESSION['Items'.$identifier]->SpecialInstructions = $myrow[12];
-		$_SESSION['Items'.$identifier]->DeliveryDays = $myrow[13];
-		$_SESSION['Items'.$identifier]->LocationName = $myrow[14];
+		$_SESSION['Items'.$identifier]->DeliverTo = $myrow['brname'];
+		$_SESSION['Items'.$identifier]->DelAdd1 = $myrow['braddress1'];
+		$_SESSION['Items'.$identifier]->DelAdd2 = $myrow['braddress2'];
+		$_SESSION['Items'.$identifier]->DelAdd3 = $myrow['braddress3'];
+		$_SESSION['Items'.$identifier]->DelAdd4 = $myrow['braddress4'];
+		$_SESSION['Items'.$identifier]->DelAdd5 = $myrow['braddress5'];
+		$_SESSION['Items'.$identifier]->DelAdd6 = $myrow['braddress6'];
+		$_SESSION['Items'.$identifier]->PhoneNo = $myrow['phoneno'];
+		$_SESSION['Items'.$identifier]->Email = $myrow['email'];
+		$_SESSION['Items'.$identifier]->Location = $myrow['defaultlocation'];
+		$_SESSION['Items'.$identifier]->ShipVia = $myrow['defaultshipvia'];
+		$_SESSION['Items'.$identifier]->DeliverBlind = $myrow['deliverblind'];
+		$_SESSION['Items'.$identifier]->SpecialInstructions = $myrow['specialinstructions'];
+		$_SESSION['Items'.$identifier]->DeliveryDays = $myrow['estdeliverydays'];
+		$_SESSION['Items'.$identifier]->LocationName = $myrow['locationname'];
 
 		if ($_SESSION['Items'.$identifier]->SpecialInstructions)
 		  prnMsg($_SESSION['Items'.$identifier]->SpecialInstructions,'warn');
@@ -571,18 +571,18 @@ if (isset($_POST['Select']) and $_POST['Select']!='') {
 	$DbgMsg = _('SQL used to retrieve the customer details was') . ':<br />' . $sql;
 	$result =DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
-	$myrow = DB_fetch_row($result);
-	if ($myrow[1] == 0){
+	$myrow = DB_fetch_array($result);
+	if ($myrow['dissallowinvoices'] == 0){
 
-		$_SESSION['Items'.$identifier]->CustomerName = $myrow[0];
+		$_SESSION['Items'.$identifier]->CustomerName = $myrow['name'];
 
 # the sales type determines the price list to be used by default the customer of the user is
 # defaulted from the entry of the userid and password.
 
-		$_SESSION['Items'.$identifier]->DefaultSalesType = $myrow[2];
-		$_SESSION['Items'.$identifier]->DefaultCurrency = $myrow[3];
+		$_SESSION['Items'.$identifier]->DefaultSalesType = $myrow['salestype'];
+		$_SESSION['Items'.$identifier]->DefaultCurrency = $myrow['currcode'];
 		$_SESSION['Items'.$identifier]->Branch = $_SESSION['UserBranch'];
-		$_SESSION['Items'.$identifier]->DefaultPOLine = $myrow[4];
+		$_SESSION['Items'.$identifier]->DefaultPOLine = $myrow['customerpoline'];
 
 
 	// the branch would be set in the user data so default delivery details as necessary. However,
@@ -616,20 +616,20 @@ if (isset($_POST['Select']) and $_POST['Select']!='') {
 		$DbgMsg = _('SQL used to retrieve the branch details was');
 		$result =DB_query($sql,$db,$ErrMsg, $DbgMsg);
 
-		$myrow = DB_fetch_row($result);
-		$_SESSION['Items'.$identifier]->DeliverTo = $myrow[0];
-		$_SESSION['Items'.$identifier]->DelAdd1 = $myrow[1];
-		$_SESSION['Items'.$identifier]->DelAdd2 = $myrow[2];
-		$_SESSION['Items'.$identifier]->DelAdd3 = $myrow[3];
-		$_SESSION['Items'.$identifier]->DelAdd4 = $myrow[4];
-		$_SESSION['Items'.$identifier]->DelAdd5 = $myrow[5];
-		$_SESSION['Items'.$identifier]->DelAdd6 = $myrow[6];
-		$_SESSION['Items'.$identifier]->PhoneNo = $myrow[7];
-		$_SESSION['Items'.$identifier]->Email = $myrow[8];
-		$_SESSION['Items'.$identifier]->Location = $myrow[9];
-		$_SESSION['Items'.$identifier]->DeliverBlind = $myrow[10];
-		$_SESSION['Items'.$identifier]->DeliveryDays = $myrow[11];
-		$_SESSION['Items'.$identifier]->LocationName = $myrow[12];
+		$myrow = DB_fetch_array($result);
+		$_SESSION['Items'.$identifier]->DeliverTo = $myrow['brname'];
+		$_SESSION['Items'.$identifier]->DelAdd1 = $myrow['braddress1'];
+		$_SESSION['Items'.$identifier]->DelAdd2 = $myrow['braddress2'];
+		$_SESSION['Items'.$identifier]->DelAdd3 = $myrow['braddress3'];
+		$_SESSION['Items'.$identifier]->DelAdd4 = $myrow['braddress4'];
+		$_SESSION['Items'.$identifier]->DelAdd5 = $myrow['braddress5'];
+		$_SESSION['Items'.$identifier]->DelAdd6 = $myrow['braddress6'];
+		$_SESSION['Items'.$identifier]->PhoneNo = $myrow['phoneno'];
+		$_SESSION['Items'.$identifier]->Email = $myrow['email'];
+		$_SESSION['Items'.$identifier]->Location = $myrow['defaultlocation'];
+		$_SESSION['Items'.$identifier]->DeliverBlind = $myrow['deliverblind'];
+		$_SESSION['Items'.$identifier]->DeliveryDays = $myrow['estdeliverydays'];
+		$_SESSION['Items'.$identifier]->LocationName = $myrow['locationname'];
 	} else {
 		prnMsg(_('Sorry, your account has been put on hold for some reason, please contact the credit control personnel.'),'warn');
 		include('includes/footer.inc');
@@ -921,8 +921,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 	if ($_SESSION['Items'.$identifier]->DefaultCurrency != $_SESSION['CompanyRecord']['currencydefault']){
 		$ExRateResult = DB_query("SELECT rate FROM currencies WHERE currabrev='" . $_SESSION['Items'.$identifier]->DefaultCurrency . "'",$db);
 		if (DB_num_rows($ExRateResult)>0){
-			$ExRateRow = DB_fetch_row($ExRateResult);
-			$ExRate = $ExRateRow[0];
+			$ExRateRow = DB_fetch_array($ExRateResult);
+			$ExRate = $ExRateRow['rate'];
 		} else {
 			$ExRate =1;
 		}
@@ -1321,11 +1321,11 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 													WHERE salestype='" .  $_SESSION['Items'.$identifier]->DefaultSalesType . "'
 													AND discountcategory ='" . $OrderLine->DiscCat . "'
 													AND quantitybreak <" . $QuantityOfDiscCat,$db);
-			$myrow = DB_fetch_row($result);
-			if ($myrow[0] == NULL){
+			$myrow = DB_fetch_array($result);
+			if ($myrow['discount'] == NULL){
 				$DiscountMatrixRate = 0;
 			} else {
-				$DiscountMatrixRate = $myrow[0];
+				$DiscountMatrixRate = $myrow['discount'];
 			}
 			foreach ($_SESSION['Items'.$identifier]->LineItems as $StkItems_2) {
 				/* add up total quantity of all lines of this DiscCat */
@@ -1617,9 +1617,9 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 					 _('cannot be retrieved because');
 				$DemandResult = DB_query($sql,$db,$ErrMsg);
 
-				$DemandRow = DB_fetch_row($DemandResult);
-				if ($DemandRow[0] != null){
-				  $DemandQty =  $DemandRow[0];
+				$DemandRow = DB_fetch_array($DemandResult);
+				if ($DemandRow['dem'] != null){
+				  $DemandQty =  $DemandRow['dem'];
 				} else {
 				  $DemandQty = 0;
 				}
@@ -1634,9 +1634,9 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				$ErrMsg = _('The order details for this product cannot be retrieved because');
 				$PurchResult = DB_query($sql,$db,$ErrMsg);
 
-				$PurchRow = DB_fetch_row($PurchResult);
-				if ($PurchRow[0]!=null){
-				  $PurchQty =  $PurchRow[0];
+				$PurchRow = DB_fetch_array($PurchResult);
+				if ($PurchRow['dem']!=null){
+				  $PurchQty =  $PurchRow['dem'];
 				} else {
 				  $PurchQty = 0;
 				}
@@ -1647,9 +1647,9 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 							   WHERE stockid='" . $myrow['stockid'] ."'";
 				$ErrMsg = _('The order details for this product cannot be retrieved because');
 				$WoResult = DB_query($sql,$db,$ErrMsg);
-				$WoRow = DB_fetch_row($WoResult);
-				if ($WoRow[0]!=null){
-					$WoQty =  $WoRow[0];
+				$WoRow = DB_fetch_array($WoResult);
+				if ($WoRow['dedm']!=null){
+					$WoQty =  $WoRow['dedm'];
 				} else {
 					$WoQty = 0;
 				}
@@ -1850,9 +1850,9 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				$ErrMsg = _('The demand for this product from') . ' ' . $_SESSION['Items'.$identifier]->Location . ' ' . _('cannot be retrieved because');
 				$DemandResult = DB_query($sql,$db,$ErrMsg);
 
-				$DemandRow = DB_fetch_row($DemandResult);
-				if ($DemandRow[0] != null){
-				  $DemandQty =  $DemandRow[0]/$PriceRow['conversionfactor'];
+				$DemandRow = DB_fetch_array($DemandResult);
+				if ($DemandRow['dem'] != null){
+				  $DemandQty =  $DemandRow['dem']/$PriceRow['conversionfactor'];
 				} else {
 				  $DemandQty = 0;
 				}
@@ -1869,9 +1869,9 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				$ErrMsg = _('The order details for this product cannot be retrieved because');
 				$PurchResult = DB_query($sql,$db,$ErrMsg);
 
-				$PurchRow = DB_fetch_row($PurchResult);
-				if ($PurchRow[0]!=null){
-				  $PurchQty =  $PurchRow[0]/$PriceRow['conversionfactor'];
+				$PurchRow = DB_fetch_array($PurchResult);
+				if ($PurchRow['dem']!=null){
+				  $PurchQty =  $PurchRow['dem']/$PriceRow['conversionfactor'];
 				} else {
 				  $PurchQty = 0;
 				}
@@ -1883,9 +1883,9 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				$ErrMsg = _('The order details for this product cannot be retrieved because');
 				$WoResult = DB_query($sql,$db,$ErrMsg);
 
-				$WoRow = DB_fetch_row($WoResult);
-				if ($WoRow[0]!=null){
-				  $WoQty =  $WoRow[0];
+				$WoRow = DB_fetch_array($WoResult);
+				if ($WoRow['dedm']!=null){
+				  $WoQty =  $WoRow['dedm'];
 				} else {
 				  $WoQty = 0;
 				}

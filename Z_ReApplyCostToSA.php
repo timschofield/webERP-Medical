@@ -61,8 +61,8 @@ if (isset($_POST['UpdateSalesAnalysis']) AND $_POST['PeriodNo']!=0){
 
 			$ErrMsg = _('Could not recalculate the current cost of the assembly item') . $ItemsToUpdate['stockid'] . ' ' . _('because');
 			$AssemblyCostResult = DB_query($SQL,$db,$ErrMsg);
-			$AssemblyCost = DB_fetch_row($AssemblyCostResult);
-			$Cost = $AssemblyCost[0];
+			$AssemblyCost = DB_fetch_array($AssemblyCostResult);
+			$Cost = $AssemblyCost['standardcost'];
 		} else {
 			$Cost = $ItemsToUpdate['standardcost'];
 		}

@@ -152,11 +152,11 @@ if (!isset($_SESSION['Shipment'])){
 
 	$ErrMsg = _('The supplier details for the shipment could not be retrieved because');
 	$result = DB_query($sql,$db,$ErrMsg);
-	$myrow = DB_fetch_row($result);
+	$myrow = DB_fetch_array($result);
 
 	$_SESSION['Shipment']->SupplierID = $_SESSION['SupplierID'];
-	$_SESSION['Shipment']->SupplierName = $myrow[0];
-	$_SESSION['Shipment']->CurrCode = $myrow[1];
+	$_SESSION['Shipment']->SupplierName = $myrow['suppname'];
+	$_SESSION['Shipment']->CurrCode = $myrow['currcode'];
 	$_SESSION['Shipment']->ShiptRef = GetNextTransNo (31, $db);
 }
 
@@ -321,9 +321,9 @@ if (count($_SESSION['Shipment']->LineItems)>0){
 				ON purchorders.orderno=purchorderdetails.orderno and podetailitem = '" . key($_SESSION['Shipment']->LineItems) . "'";
 
 	$result = DB_query($sql,$db);
-	$myrow = DB_fetch_row($result);
+	$myrow = DB_fetch_array($result);
 
-	$_SESSION['Shipment']->StockLocation = $myrow[0];
+	$_SESSION['Shipment']->StockLocation = $myrow['intostocklocation'];
 	$_POST['StockLocation']=$_SESSION['Shipment']->StockLocation;
 
    } else {

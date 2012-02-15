@@ -103,13 +103,13 @@ if (isset($_POST['submit'])) {
 
 // PREVENT DELETES IF DEPENDENT RECORDS IN OTHER TABLES
 
-	$sql= "SELECT COUNT(*)
+	$sql= "SELECT *
 			FROM taxgrouptaxes
 		WHERE taxauthid='" . $SelectedTaxAuthID . "'";
 
 	$result = DB_query($sql,$db);
-	$myrow = DB_fetch_row($result);
-	if ($myrow[0]>0) {
+	$myrow = ;
+	if (DB_num_rows($result)>0) {
 		prnmsg(_('Cannot delete this tax authority because there are tax groups defined that use it'),'warn');
 	} else {
 		/*Cascade deletes in TaxAuthLevels */
@@ -150,7 +150,7 @@ if (!isset($SelectedTaxAuthID)) {
 		<th>' . _('Bank Swift') . '</th>
 		</tr></font>';
 	$k=0;
-	while ($myrow = DB_fetch_row($result)) {
+	while ($myrow = DB_fetch_array($result)) {
 
 		if ($k==1){
 			echo '<tr class="EvenTableRows">';
@@ -172,20 +172,20 @@ if (!isset($SelectedTaxAuthID)) {
 				<td><a href="%s&SelectedTaxAuthID=%s&delete=yes">' . _('Delete') . '</a></td>
 				<td><td><a href="%s&TaxAuthority=%s">' . _('Edit Rates') . '</a></td>
 			</tr>',
-			$myrow[0],
-			$myrow[1],
-			$myrow[3],
-			$myrow[2],
-			$myrow[4],
-			$myrow[5],
-			$myrow[6],
-			$myrow[7],
+			$myrow['taxid'],
+			$myrow['description'],
+			$myrow['taxglcode'],
+			$myrow['purchtaxglaccount'],
+			$myrow['bank'],
+			$myrow['bankacc'],
+			$myrow['bankacctype'],
+			$myrow['bankswift'],
 			htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
-			$myrow[0],
+			$myrow['taxid'],
 			htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
-			$myrow[0],
+			$myrow['taxid'],
 			$rootpath . '/TaxAuthorityRates.php?',
-			$myrow[0]);
+			$myrow['taxid']);
 
 	}
 	//END WHILE LIST LOOP

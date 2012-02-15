@@ -226,8 +226,8 @@ if (isset($_POST['PrintPDF'])
 			}
 
 			if (DB_num_rows($DemandResult)==1){
-	  			$DemandRow = DB_fetch_row($DemandResult);
-	  			$DemandQty += $DemandRow[0];
+	  			$DemandRow = DB_fetch_array($DemandResult);
+	  			$DemandQty += $DemandRow['dem'];
 			}
 
 			$LeftOvers = $pdf->addTextWrap(350,$YPos,60,$FontSize,locale_number_format($InventoryPlan['qoh'], $InventoryPlan['decimalplaces']), 'right');

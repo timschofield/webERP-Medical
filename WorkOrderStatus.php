@@ -103,15 +103,15 @@ include('includes/header.inc');
 			} else {
 				echo '<tr><td class="notavailable">' . _('Auto Issue') . '<td class="notavailable">' .$RequirementsRow['stockid'] . ' - ' . $RequirementsRow['description'] .'</td>';
 			}
-			$IssuedAlreadyResult = DB_query("SELECT SUM(-qty) FROM stockmoves
+			$IssuedAlreadyResult = DB_query("SELECT SUM(-qty) AS quantity FROM stockmoves
 							WHERE stockmoves.type=28
 							AND stockid='" . $RequirementsRow['stockid'] . "'
 							AND reference='" . $_REQUEST['WO'] . "'",
 						$db);
-			$IssuedAlreadyRow = DB_fetch_row($IssuedAlreadyResult);
+			$IssuedAlreadyRow = DB_fetch_array($IssuedAlreadyResult);
 
 			echo '<td class="number">' . locale_number_format($WORow['qtyreqd']*$RequirementsRow['qtypu'],$RequirementsRow['decimalplaces']) . '</td>
-				<td class="number">' . locale_number_format($IssuedAlreadyRow[0],$RequirementsRow['decimalplaces']) . '</td></tr>';
+				<td class="number">' . locale_number_format($IssuedAlreadyRow['quantity'],$RequirementsRow['decimalplaces']) . '</td></tr>';
 		}
 
 		echo '</table>';

@@ -296,8 +296,8 @@ if ($_FILES['SelectedAssetFile']['name']) { //start file processing
 					<tr><td>' . _('Select Date to Upload B/Fwd Assets To:') . '</td>
 							<td><select name="DateToEnter">';
 	$PeriodsResult = DB_query("SELECT lastdate_in_period FROM periods ORDER BY periodno",$db);
-	while ($PeriodRow = DB_fetch_row($PeriodsResult)){
-		echo '<option value="' . $PeriodRow[0] . '">' . ConvertSQLDate($PeriodRow[0]) . '</option>';
+	while ($PeriodRow = DB_fetch_array($PeriodsResult)){
+		echo '<option value="' . $PeriodRow['lastdate_in_period'] . '">' . ConvertSQLDate($PeriodRow['lastdate_in_period']) . '</option>';
 	}
 	echo '</select></td></tr>';
 	echo '<tr><td>' . _('Fixed Assets Upload file:') . '</td><td><input name="SelectedAssetFile" type="file" /></tr></table>

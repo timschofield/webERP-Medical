@@ -179,24 +179,24 @@ if (isset($_POST['submit'])) {
 
 // PREVENT DELETES IF DEPENDENT RECORDS IN 'StockMaster'
 
-	$sql= "SELECT COUNT(*) FROM stockmaster WHERE stockmaster.categoryid='$SelectedCategory'";
+	$sql= "SELECT stockid FROM stockmaster WHERE stockmaster.categoryid='$SelectedCategory'";
 	$result = DB_query($sql,$db);
-	$myrow = DB_fetch_row($result);
-	if ($myrow[0]>0) {
+
+	if (DB_num_rows($result)>0) {
 		prnMsg(_('Cannot delete this stock category because stock items have been created using this stock category') .
 			'<br /> ' . _('There are') . ' ' . $myrow[0] . ' ' . _('items referring to this stock category code'),'warn');
 
 	} else {
-		$sql = "SELECT COUNT(*) FROM salesglpostings WHERE stkcat='$SelectedCategory'";
+		$sql = "SELECT stkcat FROM salesglpostings WHERE stkcat='$SelectedCategory'";
 		$result = DB_query($sql,$db);
-		$myrow = DB_fetch_row($result);
-		if ($myrow[0]>0) {
+
+		if (DB_num_rows($result)>0)
 			prnMsg(_('Cannot delete this stock category because it is used by the sales') . ' - ' . _('GL posting interface') . '. ' . _('Delete any records in the Sales GL Interface set up using this stock category first'),'warn');
 		} else {
-			$sql = "SELECT COUNT(*) FROM cogsglpostings WHERE stkcat='$SelectedCategory'";
+			$sql = "SELECT stkcat FROM cogsglpostings WHERE stkcat='$SelectedCategory'";
 			$result = DB_query($sql,$db);
-			$myrow = DB_fetch_row($result);
-			if ($myrow[0]>0) {
+
+			if (DB_num_rows($result)>0)
 				prnMsg(_('Cannot delete this stock category because it is used by the cost of sales') . ' - ' . _('GL posting interface') . '. ' . _('Delete any records in the Cost of Sales GL Interface set up using this stock category first'),'warn');
 			} else {
 				$sql="DELETE FROM stockcategory WHERE categoryid='$SelectedCategory'";

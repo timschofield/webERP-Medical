@@ -413,11 +413,11 @@ if (!isset($_GET['delete'])) {
 		$sql = "SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno DESC";
 		$ErrMsg = _('Could not load periods table');
 		$result = DB_query($sql,$db,$ErrMsg);
-		while ($PeriodRow = DB_fetch_row($result)){
-			if ($_POST['PeriodFrom']==$PeriodRow[0]){
-				echo  '<option selected="True" value="' . $PeriodRow[0] . '">' . ConvertSQLDate($PeriodRow[1]) . '</option>';
+		while ($PeriodRow = DB_fetch_array($result)){
+			if ($_POST['PeriodFrom']==$PeriodRow['periodno']){
+				echo  '<option selected="True" value="' . $PeriodRow['periodno'] . '">' . ConvertSQLDate($PeriodRow['lastdate_in_period']) . '</option>';
 			} else {
-				echo  '<option value="' . $PeriodRow[0] . '">' . ConvertSQLDate($PeriodRow[1]) . '</option>';
+				echo  '<option value="' . $PeriodRow['periodno'] . '">' . ConvertSQLDate($PeriodRow['lastdate_in_period']) . '</option>';
 			}
 		}
 		echo '</select></td></tr>';
@@ -427,11 +427,11 @@ if (!isset($_GET['delete'])) {
 		$sql = "SELECT periodno, lastdate_in_period FROM periods ORDER BY periodno DESC";
 		$ErrMsg = _('Could not load periods table');
 		$result = DB_query($sql,$db,$ErrMsg);
-		while ($PeriodRow = DB_fetch_row($result)){
-			if ($_POST['PeriodTo']==$PeriodRow[0]){
-				echo  '<option selected="True" value="' . $PeriodRow[0] . '">' . ConvertSQLDate($PeriodRow[1]) . '</option>';
+		while ($PeriodRow = DB_fetch_array($result)){
+			if ($_POST['PeriodTo']==$PeriodRow['periodno']){
+				echo  '<option selected="True" value="' . $PeriodRow['periodno'] . '">' . ConvertSQLDate($PeriodRow['lastdate_in_period']) . '</option>';
 			} else {
-				echo  '<option value="' . $PeriodRow[0] . '">' . ConvertSQLDate($PeriodRow[1]) . '</option>';
+				echo  '<option value="' . $PeriodRow['periodno'] . '">' . ConvertSQLDate($PeriodRow['lastdate_in_period']) . '</option>';
 			}
 		}
 		echo '</select></td></tr>';

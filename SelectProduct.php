@@ -138,8 +138,8 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 																		WHERE bom.parent='" . $StockID . "'
 																		AND bom.effectiveto > '" . Date('Y-m-d') . "'
 																		AND bom.effectiveafter < '" . Date('Y-m-d') . "'", $db);
-			$CostRow = DB_fetch_row($CostResult);
-			$Cost = $CostRow[0];
+			$CostRow = DB_fetch_array($CostResult);
+			$Cost = $CostRow['cost'];
 		} else {
 			$Cost = $myrow['cost'];
 		}
@@ -158,7 +158,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 				$GP = _('N/A');
 			}
 			echo $GP . '%' . '</td></tr>';
-			while ($PriceRow = DB_fetch_row($PriceResult)) {
+			while ($PriceRow = DB_fetch_array($PriceResult)) {
 				$Price = $PriceRow['price'];
 				echo '<tr><td></td>
 						<td class="select">' . $PriceRow['typeabbrev'] . '</td>
@@ -182,8 +182,8 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 															WHERE bom.parent='" . $StockID . "'
 															AND bom.effectiveto > '" . Date('Y-m-d') . "'
 															AND bom.effectiveafter < '" . Date('Y-m-d') . "'", $db);
-			$CostRow = DB_fetch_row($CostResult);
-			$Cost = $CostRow[0];
+			$CostRow = DB_fetch_array($CostResult);
+			$Cost = $CostRow['cost'];
 		} else {
 			$Cost = $myrow['cost'];
 		}
@@ -196,8 +196,8 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 	$CatValResult = DB_query("SELECT categoryid
 														FROM stockmaster
 														WHERE stockid='" . $StockID . "'", $db);
-	$CatValRow = DB_fetch_row($CatValResult);
-	$CatValue = $CatValRow[0];
+	$CatValRow = DB_fetch_array($CatValResult);
+	$CatValue = $CatValRow['categoryid'];
 	$sql = "SELECT stkcatpropid,
 					label,
 					controltype,
@@ -214,8 +214,8 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 									FROM stockitemproperties
 									WHERE stockid='" . $StockID . "'
 									AND stkcatpropid ='" . $PropertyRow['stkcatpropid']."'", $db);
-		$PropValRow = DB_fetch_row($PropValResult);
-		$PropertyValue = $PropValRow[0];
+		$PropValRow = DB_fetch_array($PropValResult);
+		$PropertyValue = $PropValRow['value'];
 		echo '<tr><th align="right">' . $PropertyRow['label'] . ':</th>';
 		switch ($PropertyRow['controltype']) {
 			case 0; //textbox
@@ -257,13 +257,13 @@ switch ($myrow['mbflag']) {
 			break;
 		case 'M':
 		case 'B':
-			$QOHResult = DB_query("SELECT sum(quantity)
+			$QOHResult = DB_query("SELECT sum(quantity) AS totalquantity
 						FROM locstock
 						WHERE stockid = '" . $StockID . "'", $db);
-			$QOHRow = DB_fetch_row($QOHResult);
-			$QOH = locale_number_format($QOHRow[0], $myrow['decimalplaces']);
+			$QOHRow = DB_fetch_array($QOHResult);
+			$QOH = locale_number_format($QOHRow['totalquantity'], $myrow['decimalplaces']);
 			$QOOSQL="SELECT SUM((purchorderdetails.quantityord*purchorderdetails.conversionfactor) -
-									(purchorderdetails.quantityrecd*purchorderdetails.conversionfactor))
+									(purchorderdetails.quantityrecd*purchorderdetails.conversionfactor)) AS qoo
 								FROM purchorders
 								LEFT JOIN purchorderdetails
 									ON purchorders.orderno=purchorderdetails.orderno
@@ -276,8 +276,8 @@ switch ($myrow['mbflag']) {
 			if (DB_num_rows($QOOResult) == 0) {
 				$QOO = 0;
 			} else {
-				$QOORow = DB_fetch_row($QOOResult);
-				$QOO = $QOORow[0];
+				$QOORow = DB_fetch_array($QOOResult);
+				$QOO = $QOORow['qoo'];
 			}
 			//Also the on work order quantities
 			$sql = "SELECT SUM(woitems.qtyreqd-woitems.qtyrecd) AS qtywo
@@ -288,8 +288,8 @@ switch ($myrow['mbflag']) {
 			$ErrMsg = _('The quantity on work orders for this product cannot be retrieved because');
 			$QOOResult = DB_query($sql, $db, $ErrMsg);
 			if (DB_num_rows($QOOResult) == 1) {
-				$QOORow = DB_fetch_row($QOOResult);
-				$QOO+= $QOORow[0];
+				$QOORow = DB_fetch_array($QOOResult);
+				$QOO+= $QOORow['qtywo'];
 			}
 			$QOO = locale_number_format($QOO, $myrow['decimalplaces']);
 			break;
@@ -301,8 +301,8 @@ $DemResult = DB_query("SELECT SUM(salesorderdetails.quantity-salesorderdetails.q
 												WHERE salesorderdetails.completed=0
 												AND salesorders.quotation=0
 												AND salesorderdetails.stkcode='" . $StockID . "'", $db);
-$DemRow = DB_fetch_row($DemResult);
-$Demand = $DemRow[0];
+$DemRow = DB_fetch_array($DemResult);
+$Demand = $DemRow['dem'];
 $DemAsComponentResult = DB_query("SELECT  SUM((salesorderdetails.quantity-salesorderdetails.qtyinvoiced)*bom.quantity) AS dem
 																		FROM salesorderdetails,
 																			salesorders,
@@ -315,8 +315,8 @@ $DemAsComponentResult = DB_query("SELECT  SUM((salesorderdetails.quantity-saleso
 																		AND stockmaster.stockid=bom.parent
 																		AND stockmaster.mbflag='A'
 																		AND salesorders.quotation=0", $db);
-$DemAsComponentRow = DB_fetch_row($DemAsComponentResult);
-$Demand+= $DemAsComponentRow[0];
+$DemAsComponentRow = DB_fetch_array($DemAsComponentResult);
+$Demand+= $DemAsComponentRow['dem'];
 //Also the demand for the item as a component of works orders
 $sql = "SELECT SUM(qtypu*(woitems.qtyreqd - woitems.qtyrecd)) AS woqtydemo
 				FROM woitems INNER JOIN worequirements
@@ -329,8 +329,8 @@ $sql = "SELECT SUM(qtypu*(woitems.qtyreqd - woitems.qtyrecd)) AS woqtydemo
 $ErrMsg = _('The workorder component demand for this product cannot be retrieved because');
 $DemandResult = DB_query($sql, $db, $ErrMsg);
 if (DB_num_rows($DemandResult) == 1) {
-		$DemandRow = DB_fetch_row($DemandResult);
-		$Demand+= $DemandRow[0];
+		$DemandRow = DB_fetch_array($DemandResult);
+		$Demand+= $DemandRow['woqtydemo'];
 }
 echo '<tr><th style="text-align:right;" width="15%">' . _('Quantity On Hand') . ':</th>
 		<td width="17%" class="select">' . $QOH . '</td></tr>';

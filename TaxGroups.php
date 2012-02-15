@@ -85,15 +85,15 @@ if (isset($_POST['submit']) OR isset($_GET['remove']) OR isset($_GET['add']) ) {
 	$sql = "SELECT taxauthid FROM taxgrouptaxes WHERE taxgroupid='" . $SelectedGroup . "'";
 	$Result = DB_query($sql,$db,_('Could not get tax authorities in the selected tax group'));
 
-	while ($myrow=DB_fetch_row($Result)){
+	while ($myrow=DB_fetch_array($Result)){
 
-		if (is_numeric($_POST['CalcOrder_' . $myrow[0]]) AND $_POST['CalcOrder_' . $myrow[0]] <5){
+		if (is_numeric($_POST['CalcOrder_' . $myrow['taxauthid']]) AND $_POST['CalcOrder_' . $myrow['taxauthid']] <5){
 
 			$sql = "UPDATE taxgrouptaxes
-				SET calculationorder='" . $_POST['CalcOrder_' . $myrow[0]] . "',
-					taxontax='" . $_POST['TaxOnTax_' . $myrow[0]] . "'
+				SET calculationorder='" . $_POST['CalcOrder_' . $myrow['taxauthid']] . "',
+					taxontax='" . $_POST['TaxOnTax_' . $myrow['taxauthid']] . "'
 				WHERE taxgroupid='" . $SelectedGroup . "'
-				AND taxauthid='" . $myrow[0] . "'";
+				AND taxauthid='" . $myrow['taxauthid'] . "'";
 
 			$result = DB_query($sql,$db);
 		}
@@ -119,17 +119,17 @@ if (isset($_POST['submit']) OR isset($_GET['remove']) OR isset($_GET['add']) ) {
 
 	/* PREVENT DELETES IF DEPENDENT RECORDS IN 'custbranch, suppliers */
 
-	$sql= "SELECT COUNT(*) FROM custbranch WHERE taxgroupid='" . $_GET['SelectedGroup'] . "'";
+	$sql= "SELECT * FROM custbranch WHERE taxgroupid='" . $_GET['SelectedGroup'] . "'";
 	$result = DB_query($sql,$db);
-	$myrow = DB_fetch_row($result);
-	if ($myrow[0]>0) {
+
+	if (DB_num_rows($result)>0) {
 		prnMsg( _('Cannot delete this tax group because some customer branches are setup using it'),'warn');
 		echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('customer branches referring to this tax group');
 	} else {
-		$sql= "SELECT COUNT(*) FROM suppliers WHERE taxgroupid='" . $_GET['SelectedGroup'] . "'";
+		$sql= "SELECT * FROM suppliers WHERE taxgroupid='" . $_GET['SelectedGroup'] . "'";
 		$result = DB_query($sql,$db);
-		$myrow = DB_fetch_row($result);
-		if ($myrow[0]>0) {
+
+		if (DB_num_rows($result)>0) {
 			prnMsg( _('Cannot delete this tax group because some suppliers are setup using it'),'warn');
 			echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('suppliers referring to this tax group');
 		} else {

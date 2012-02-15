@@ -35,8 +35,8 @@ if ( isset($_POST['pricelist']) ) {
 
 		$SQL = "SELECT sales_type FROM salestypes WHERE typeabbrev='" . $_POST['SalesType'] . "'";
 		$SalesTypeResult = DB_query($SQL,$db);
-		$SalesTypeRow = DB_fetch_row($SalesTypeResult);
-		$SalesTypeName = $SalesTypeRow[0];
+		$SalesTypeRow = DB_fetch_array($SalesTypeResult);
+		$SalesTypeName = $SalesTypeRow['sales_type'];
 
 		$SQL = "SELECT prices.typeabbrev,
 				prices.stockid,
@@ -88,7 +88,7 @@ if ( isset($_POST['pricelist']) ) {
 			stripcomma('categoryid') . ',' .
 			stripcomma('categorydescription') . "\n";
 
-	While ($PriceList = DB_fetch_array($PricesResult,$db)){
+	while ($PriceList = DB_fetch_array($PricesResult,$db)){
 		$Qty = 0;
 		$sqlQty = "SELECT newqoh
 			FROM stockmoves
@@ -98,8 +98,8 @@ if ( isset($_POST['pricelist']) ) {
 		$resultQty = DB_query($sqlQty, $db, $ErrMsg);
 		if ( $resultQty ) {
 			if( DB_num_rows($resultQty) > 0 ) {
-				$Row = DB_fetch_row($resultQty);
-				$Qty = $Row[0];
+				$Row = DB_fetch_array($resultQty);
+				$Qty = $Row['newqoh'];
 			}
 			DB_free_result($resultQty);
 		}

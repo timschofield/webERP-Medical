@@ -13,10 +13,10 @@ unset($result);
 if (isset($_POST['Select'])) {
 
 	$result = DB_query("SELECT accountname FROM chartmaster WHERE accountcode=" . $_POST['Select'],$db);
-	$myrow = DB_fetch_row($result);
+	$myrow = DB_fetch_array($result);
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Search for General Ledger Accounts') . '</p>';
 
-	echo '<div class="page_help_text">' . _('Account Code') . ' <b>' . $_POST['Select'] . ' - ' . $myrow[0]  . ' </b>' . _('has been selected') . '. <br />' . _('Select one of the links below to operate using this Account') . '.</div>';
+	echo '<div class="page_help_text">' . _('Account Code') . ' <b>' . $_POST['Select'] . ' - ' . $myrow['accountname']  . ' </b>' . _('has been selected') . '. <br />' . _('Select one of the links below to operate using this Account') . '.</div>';
 	$AccountID = $_POST['Select'];
 	$_POST['Select'] = NULL;
 
@@ -26,10 +26,10 @@ if (isset($_POST['Select'])) {
 
 } elseif (isset($_POST['Search'])){
 
-	if (mb_strlen($_POST['Keywords']>0) AND mb_strlen($_POST['GLCode'])>0) {
+	if (mb_strlen($_POST['Keywords']>0) and mb_strlen($_POST['GLCode'])>0) {
 		$msg=_('Account name keywords have been used in preference to the account code extract entered');
 	}
-	if ($_POST['Keywords']=='' AND $_POST['GLCode']=='') {
+	if ($_POST['Keywords']=='' and $_POST['GLCode']=='') {
 		$msg=_('At least one Account Name keyword OR an extract of an Account Code must be entered for the search');
 	} else {
 		If (mb_strlen($_POST['Keywords'])>0) {

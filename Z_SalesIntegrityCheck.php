@@ -91,17 +91,17 @@ $SQL = "SELECT typeno,
 $Result = DB_query($SQL,$db);
 
 while ($myrow = DB_fetch_array($Result)) {
-	$SQL2 = "SELECT SUM((ovamount+ovgst)/rate)
+	$SQL2 = "SELECT SUM((ovamount+ovgst)/rate) AS gross
 			FROM debtortrans
 			WHERE type = 12
 			AND transno = '" . $myrow['typeno'] . "'";
 
 	$Result2 = DB_query($SQL2,$db);
-	$myrow2 = DB_fetch_row($Result2);
+	$myrow2 = DB_fetch_array($Result2);
 
-	if ( $myrow2[0] + $myrow['amount'] == 0 ) {
+	if ( $myrow2['gross'] + $myrow['amount'] == 0 ) {
 			echo '<br />'._('Receipt') . ' ' . $myrow['typeno'] . " : ";
-			echo '<font color=red>' . $myrow['amount']. ' ' . _('in GL but found'). ' ' . $myrow2[0] . ' ' . _('in debtorstrans').'</font>';
+			echo '<font color=red>' . $myrow['amount']. ' ' . _('in GL but found'). ' ' . $myrow2['gross'] . ' ' . _('in debtorstrans').'</font>';
 	}
 }
 
@@ -117,9 +117,9 @@ while ($myrow = DB_fetch_array($Result)) {
 				WHERE type = 12
 				AND typeno = '" . $myrow['transno'] . "'";
 	$Result2 = DB_query($SQL2,$db);
-	$myrow2 = DB_fetch_row($Result2);
+	$myrow2 = DB_fetch_array($Result2);
 
-	if ( !$myrow2[0] ) {
+	if ( !$myrow2['amount'] ) {
 		echo '<br />'._('Receipt') . ' ' . $myrow['transno'] . " : ";
 		echo '<font color=red>' . $myrow['transno'] . ' ' ._('not found in GL').'</font>';
 	}

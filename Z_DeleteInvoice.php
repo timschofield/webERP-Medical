@@ -28,9 +28,9 @@ $SQL = "SELECT order_
 			AND transno = '" . $_GET['InvoiceNo'] . "'";
 
 $Result = DB_query($SQL,$db);
-$myrow = DB_fetch_row($Result);
+$myrow = DB_fetch_array($Result);
 
-$ProcessingOrder = $myrow[0];
+$ProcessingOrder = $myrow['order_'];
 
 /*Now get the stock movements that were invoiced into an array */
 

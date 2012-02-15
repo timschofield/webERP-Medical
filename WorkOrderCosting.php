@@ -298,12 +298,12 @@ If (isset($_POST['Close'])) {
 			of the variance relating to the stock still on hand should be posted to the stock value
 			*/
 
-			$TotOnHandResult =DB_query("SELECT SUM(quantity)
+			$TotOnHandResult =DB_query("SELECT SUM(quantity) AS totalquantity
 										FROM locstock
 										WHERE stockid='" . $WORow['stockid'] . "'",
 										$db);
-			$TotOnHandRow = DB_fetch_row($TotOnHandResult);
-			$TotalOnHand = $TotOnHandRow[0];
+			$TotOnHandRow = DB_fetch_array($TotOnHandResult);
+			$TotalOnHand = $TotOnHandRow['totalquantity'];
 
 			if ($TotalOnHand >= $WORow['qtyrecd']){
 				$ProportionOnHand = 1;

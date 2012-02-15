@@ -39,8 +39,8 @@ $sql = "SELECT secroleid,
 $Sec_Result = DB_query($sql, $db);
 $SecurityRoles = array();
 // Now load it into an a ray using Key/Value pairs
-while( $Sec_row = DB_fetch_row($Sec_Result) ) {
-	$SecurityRoles[$Sec_row[0]] = $Sec_row[1];
+while( $Sec_row = DB_fetch_array($Sec_Result) ) {
+	$SecurityRoles[$Sec_row['secroleid']] = $Sec_row['secrolename'];
 }
 DB_free_result($Sec_Result);
 

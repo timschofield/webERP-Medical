@@ -142,18 +142,18 @@ if (isset($_POST['submit'])) {
 
 // PREVENT DELETES IF DEPENDENT RECORDS IN 'DebtorsMaster'
 
-	$sql= "SELECT COUNT(*) FROM custbranch WHERE  custbranch.salesman='".$SelectedSalesPerson."'";
+	$sql= "SELECT COUNT(branchcode) AS branches FROM custbranch WHERE custbranch.salesman='".$SelectedSalesPerson."'";
 	$result = DB_query($sql,$db);
-	$myrow = DB_fetch_row($result);
-	if ($myrow[0]>0) {
-		prnMsg(_('Cannot delete this salesperson because branches are set up referring to them') . ' - ' . _('first alter the branches concerned') . '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('branches that refer to this salesperson'),'error');
+	$myrow = DB_fetch_array($result);
+	if ($myrow['branches']>0) {
+		prnMsg(_('Cannot delete this salesperson because branches are set up referring to them') . ' - ' . _('first alter the branches concerned') . '<br />' . _('There are') . ' ' . $myrow['branches'] . ' ' . _('branches that refer to this salesperson'),'error');
 
 	} else {
-		$sql= "SELECT COUNT(*) FROM salesanalysis WHERE salesanalysis.salesperson='".$SelectedSalesPerson."'";
+		$sql= "SELECT COUNT(salesperson) AS salespeople FROM salesanalysis WHERE salesanalysis.salesperson='".$SelectedSalesPerson."'";
 		$result = DB_query($sql,$db);
-		$myrow = DB_fetch_row($result);
-		if ($myrow[0]>0) {
-			prnMsg(_('Cannot delete this salesperson because sales analysis records refer to them') , '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('sales analysis records that refer to this salesperson'),'error');
+		$myrow = DB_fetch_array($result);
+		if ($myrow['salespeople']>0) {
+			prnMsg(_('Cannot delete this salesperson because sales analysis records refer to them') , '<br />' . _('There are') . ' ' . $myrow['salespeople'] . ' ' . _('sales analysis records that refer to this salesperson'),'error');
 		} else {
 
 			$sql="DELETE FROM salesman WHERE salesmancode='".$SelectedSalesPerson."'";
@@ -196,7 +196,7 @@ or deletion of the records*/
 		<th>' . _('Comm Rate 2') . '</th>
 		<th>' . _('Current') . '</th></tr>';
 	$k=0;
-	while ($myrow=DB_fetch_row($result)) {
+	while ($myarray=DB_fetch_array($result)) {
 
 	if ($k==1){
 		echo '<tr class="EvenTableRows">';
@@ -205,7 +205,7 @@ or deletion of the records*/
 		echo '<tr class="OddTableRows">';
 		$k++;
 	}
-	if ($myrow[7] == 1) {
+	if ($myrow['current'] == 1) {
 		$ActiveText = _('Yes');
 	} else {
 		$ActiveText = _('No');
@@ -223,18 +223,18 @@ or deletion of the records*/
 		<td><a href="%sSelectedSaleperson=%s">'. _('Edit') . '</a></td>
 		<td><a href="%sSelectedSaleperson=%s&delete=1">' . _('Delete') . '</a></td>
 		</tr>',
-		$myrow[0],
-		$myrow[1],
-		$myrow[2],
-		$myrow[3],
-		$myrow[4],
-		$myrow[5],
-		$myrow[6],
+		$myrow['salesmancode'],
+		$myrow['salesmanname'],
+		$myrow['smantel'],
+		$myrow['smanfax'],
+		$myrow['commissionrate1'],
+		$myrow['breakpoint'],
+		$myrow['commissionrate2'],
 		$ActiveText,
 		htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
-		$myrow[0],
+		$myrow['salesmancode'],
 		htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
-		$myrow[0]);
+		$myrow['salesmancode']);
 
 	} //END WHILE LIST LOOP
 	echo '</table><br />';

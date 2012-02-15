@@ -883,11 +883,11 @@ $result = DB_query($sql,$db,$ErrMsg);
 if ($_SESSION['ProhibitPostingsBefore']=='' OR $_SESSION['ProhibitPostingsBefore']=='1900-01-01' OR !isset($_SESSION['ProhibitPostingsBefore'])){
 	echo '<option selected value="1900-01-01">' . ConvertSQLDate('1900-01-01') . '</option>';
 }
-while ($PeriodRow = DB_fetch_row($result)){
-	if ($_SESSION['ProhibitPostingsBefore']==$PeriodRow[0]){
-		echo  '<option selected="True" value="' . $PeriodRow[0] . '">' . ConvertSQLDate($PeriodRow[0]) . '</option>';
+while ($PeriodRow = DB_fetch_array($result)){
+	if ($_SESSION['ProhibitPostingsBefore']==$PeriodRow['lastdate_in_period']){
+		echo  '<option selected="True" value="' . $PeriodRow['lastdate_in_period'] . '">' . ConvertSQLDate($PeriodRow['lastdate_in_period']) . '</option>';
 	} else {
-		echo  '<option value="' . $PeriodRow[0] . '">' . ConvertSQLDate($PeriodRow[0]) . '</option>';
+		echo  '<option value="' . $PeriodRow['lastdate_in_period'] . '">' . ConvertSQLDate($PeriodRow['lastdate_in_period']) . '</option>';
 	}
 }
 echo '</select></td><td>' . _('This allows all periods before the selected date to be locked from postings. All postings for transactions dated prior to this date will be posted in the period following this date.') . '</td></tr>';

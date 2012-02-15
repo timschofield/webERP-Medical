@@ -117,8 +117,8 @@ if (isset($_POST['Process'])){ //user hit the process the work order issues ente
 				WHERE stockid ='" . $_POST['IssueItem'] . "'
 				AND loccode ='" . $_POST['FromLocation'] . "'";
 		$CheckNegResult = DB_query($SQL,$db);
-		$CheckNegRow = DB_fetch_row($CheckNegResult);
-		if ($CheckNegRow[0]<$QuantityIssued){
+		$CheckNegRow = DB_fetch_array($CheckNegResult);
+		if ($CheckNegRow['quantity']<$QuantityIssued){
 			$InputError = true;
 			prnMsg(_('This issue cannot be processed because the system parameter is set to prohibit negative stock and this issue would result in stock going into negative. Please correct the stock first before attempting another issue'),'error');
 		}
@@ -148,8 +148,8 @@ if (isset($_POST['Process'])){ //user hit the process the work order issues ente
 
 			$Result = DB_query($SQL, $db);
 			if (DB_num_rows($Result)==1){
-				$LocQtyRow = DB_fetch_row($Result);
-				$NewQtyOnHand = ($LocQtyRow[0] - $QuantityIssued);
+				$LocQtyRow = DB_fetch_array($Result);
+				$NewQtyOnHand = ($LocQtyRow['quantity'] - $QuantityIssued);
 			} else {
 			/*There must actually be some error this should never happen */
 				$NewQtyOnHand = 0;
@@ -241,16 +241,15 @@ if (isset($_POST['Process'])){ //user hit the process the work order issues ente
 					//need to test if the batch/lot exists first already
 					if (trim($_POST['BatchRef' .$i]) != ""){
 
-						$SQL = "SELECT COUNT(*) FROM stockserialitems
+						$SQL = "SELECT * FROM stockserialitems
 								WHERE stockid='" .$_POST['IssueItem'] . "'
 								AND loccode = '" . $_POST['FromLocation'] . "'
 								AND serialno = '" . $_POST['BatchRef' .$i] . "'";
 						$ErrMsg =  _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Could not check if a batch/lot reference for the item already exists because');
 						$DbgMsg =  _('The following SQL to test for an already existing controlled item was used');
 						$Result = DB_query($SQL, $db, $ErrMsg, $DbgMsg, true);
-						$AlreadyExistsRow = DB_fetch_row($Result);
 
-						if ($AlreadyExistsRow[0]>0){
+						if (DB_num_rows($Result)>0){
 							$SQL = "UPDATE stockserialitems SET quantity = quantity - " . $_POST['Qty' . $i] . "
 										WHERE stockid='" . $_POST['IssueItem'] . "'
 										AND loccode = '" . $_POST['FromLocation'] . "'
@@ -604,15 +603,15 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 		} else {
 			echo '<tr><td class="notavailable">' . _('Auto Issue') . '<td class="notavailable">' .$RequirementsRow['stockid'] . ' - ' . $RequirementsRow['description'] .'</td>';
 		}
-		$IssuedAlreadyResult = DB_query("SELECT SUM(-qty) FROM stockmoves
+		$IssuedAlreadyResult = DB_query("SELECT SUM(-qty) AS quantity FROM stockmoves
 											WHERE stockmoves.type=28
 											AND stockid='" . $RequirementsRow['stockid'] . "'
 											AND reference='" . $_POST['WO'] . "'",
 										$db);
-		$IssuedAlreadyRow = DB_fetch_row($IssuedAlreadyResult);
+		$IssuedAlreadyRow = DB_fetch_array($IssuedAlreadyResult);
 
 		echo '<td class="number">' . locale_number_format($WORow['qtyreqd']*$RequirementsRow['qtypu'],$RequirementsRow['decimalplaces']) . '</td>
-			<td class="number">' . locale_number_format($IssuedAlreadyRow[0],$RequirementsRow['decimalplaces']) . '</td></tr>';
+			<td class="number">' . locale_number_format($IssuedAlreadyRow['quantity'],$RequirementsRow['decimalplaces']) . '</td></tr>';
 	}
 
 	echo '</table><br />';

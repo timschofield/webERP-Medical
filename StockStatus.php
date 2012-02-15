@@ -31,23 +31,23 @@ $result = DB_query("SELECT description,
 							_('Could not retrieve the requested item'),
 							_('The SQL used to retrieve the items was'));
 
-$myrow = DB_fetch_row($result);
+$myrow = DB_fetch_array($result);
 
-$DecimalPlaces = $myrow[3];
-$Serialised = $myrow[4];
-$Controlled = $myrow[5];
+$DecimalPlaces = $myrow['decimalplaces'];
+$Serialised = $myrow['serialised'];
+$Controlled = $myrow['controlled'];
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') . '" alt="" />
-		<b>' . ' ' . $StockID . ' - ' . $myrow['0'] . ' : ' . _('in units of') . ' : ' . $myrow[1] . '</b></p>';
+		<b>' . ' ' . $StockID . ' - ' . $myrow['description'] . ' : ' . _('in units of') . ' : ' . $myrow['units'] . '</b></p>';
 
 $Its_A_KitSet_Assembly_Or_Dummy =False;
-if ($myrow[2]=='K'){
+if ($myrow['mbflag']=='K'){
 	$Its_A_KitSet_Assembly_Or_Dummy =True;
 	prnMsg( _('This is a kitset part and cannot have a stock holding') . ', ' . _('only the total quantity on outstanding sales orders is shown'),'info');
-} elseif ($myrow[2]=='A'){
+} elseif ($myrow['mbflag']=='A'){
 	$Its_A_KitSet_Assembly_Or_Dummy =True;
 	prnMsg(_('This is an assembly part and cannot have a stock holding') . ', ' . _('only the total quantity on outstanding sales orders is shown'),'info');
-} elseif ($myrow[2]=='D'){
+} elseif ($myrow['mbflag']=='D'){
 	$Its_A_KitSet_Assembly_Or_Dummy =True;
 	prnMsg( _('This is an dummy part and cannot have a stock holding') . ', ' . _('only the total quantity on outstanding sales orders is shown'),'info');
 }
@@ -117,8 +117,8 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 	$DemandResult = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
 	if (DB_num_rows($DemandResult)==1){
-	  $DemandRow = DB_fetch_row($DemandResult);
-	  $DemandQty =  $DemandRow[0];
+	  $DemandRow = DB_fetch_array($DemandResult);
+	  $DemandQty =  $DemandRow['dem'];
 	} else {
 	  $DemandQty =0;
 	}
@@ -141,8 +141,8 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 	$DemandResult = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
 	if (DB_num_rows($DemandResult)==1){
-		$DemandRow = DB_fetch_row($DemandResult);
-		$DemandQty += $DemandRow[0];
+		$DemandRow = DB_fetch_array($DemandResult);
+		$DemandQty += $DemandRow['dem'];
 	}
 
 	//Also the demand for the item as a component of works orders
@@ -161,14 +161,14 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 	$DemandResult = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
 	if (DB_num_rows($DemandResult)==1){
-		$DemandRow = DB_fetch_row($DemandResult);
-		$DemandQty += $DemandRow[0];
+		$DemandRow = DB_fetch_array($DemandResult);
+		$DemandQty += $DemandRow['woqtydemo'];
 	}
 
 	if ($Its_A_KitSet_Assembly_Or_Dummy == False){
 
 		$QOOSQL="SELECT SUM((purchorderdetails.quantityord*purchorderdetails.conversionfactor) -
-									(purchorderdetails.quantityrecd*purchorderdetails.conversionfactor))
+									(purchorderdetails.quantityrecd*purchorderdetails.conversionfactor)) AS totalonorder
 								FROM purchorders
 								LEFT JOIN purchorderdetails
 									ON purchorders.orderno=purchorderdetails.orderno
@@ -182,8 +182,8 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 		if (DB_num_rows($QOOResult) == 0) {
 			$QOO = 0;
 		} else {
-			$QOORow = DB_fetch_row($QOOResult);
-			$QOO = $QOORow[0];
+			$QOORow = DB_fetch_array($QOOResult);
+			$QOO = $QOORow['totalonorder'];
 		}
 
 		//Also the on work order quantities
@@ -197,8 +197,8 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 		$QOOResult = DB_query($sql,$db,$ErrMsg, $DbgMsg);
 
 		if (DB_num_rows($QOOResult)==1){
-			$QOORow = DB_fetch_row($QOOResult);
-			$QOO +=  $QOORow[0];
+			$QOORow = DB_fetch_array($QOOResult);
+			$QOO +=  $QOORow['qtywo'];
 		}
 
 		echo '<td>' . $myrow['locationname'] . '</td>';

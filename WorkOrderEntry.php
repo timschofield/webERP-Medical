@@ -217,12 +217,12 @@ if (isset($NewItem) AND isset($_POST['WO'])){
 									WHERE bom.parent='" . $NewItem . "'
 									AND bom.loccode='" . $_POST['StockLocation'] . "'",
 							 $db);
-			$CostRow = DB_fetch_row($CostResult);
-		if (is_null($CostRow[0]) OR $CostRow[0]==0){
+		$CostRow = DB_fetch_array($CostResult);
+		if (is_null($CostRow['cost']) OR $CostRow['cost']==0){
 				$Cost =0;
 				prnMsg(_('The cost of this item as accumulated from the sum of the component costs is nil. This could be because there is no bill of material set up ... you may wish to double check this'),'warn');
 		} else {
-				$Cost = $CostRow[0];
+				$Cost = $CostRow['cost'];
 		}
 		if (!isset($EOQ)){
 			$EOQ=1;
@@ -311,12 +311,12 @@ if (isset($_POST['submit'])) { //The update button has been clicked
 											WHERE bom.parent='" . $_POST['OutputItem'.$i] . "'
 											AND bom.loccode='" . $_POST['StockLocation'] . "'",
 									 $db);
-				$CostRow = DB_fetch_row($CostResult);
-				if (is_null($CostRow[0])){
+				$CostRow = DB_fetch_array($CostResult);
+				if (is_null($CostRow['cost'])){
 					$Cost =0;
 					prnMsg(_('The cost of this item as accumulated from the sum of the component costs is nil. This could be because there is no bill of material set up ... you may wish to double check this'),'warn');
 				} else {
-					$Cost = $CostRow[0];
+					$Cost = $CostRow['cost'];
 				}
 				$sql[] = "UPDATE woitems SET qtyreqd =  '". $_POST['OutputQty' . $i] . "',
 												 nextlotsnref = '". $_POST['NextLotSNRef'.$i] ."',

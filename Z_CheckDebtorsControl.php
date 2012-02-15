@@ -23,11 +23,11 @@ include('includes/header.inc');
 
 	if ( !isset($_POST['ToPeriod']) OR $_POST['ToPeriod']=='' )
 	{
-			$SQL = "SELECT Max(periodno) FROM periods";
+			$SQL = "SELECT MAX(periodno) AS maxperiodno FROM periods";
 			$prdResult = DB_query($SQL,$db);
-			$MaxPrdrow = DB_fetch_row($prdResult);
+			$MaxPrdrow = DB_fetch_array($prdResult);
 			DB_free_result($prdResult);
-			$DefaultToPeriod = $MaxPrdrow[0];
+			$DefaultToPeriod = $MaxPrdrow['maxperiodno'];
 	} else {
 			$DefaultToPeriod = $_POST['ToPeriod'];
 	}

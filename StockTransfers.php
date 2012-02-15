@@ -222,7 +222,7 @@ if ( isset($_POST['EnterTransfer']) ){
 			The StockSerialMoves as well */
 
 				/*First need to check if the serial items already exists or not in the location from */
-				$SQL = "SELECT COUNT(*)
+				$SQL = "SELECT stockid
 					FROM stockserialitems
 					WHERE
 					stockid='" . $_SESSION['Transfer']->TransferItem[0]->StockID . "'
@@ -231,9 +231,8 @@ if ( isset($_POST['EnterTransfer']) ){
 
 				$ErrMsg =  _('The entered item code does not exist');
 				$Result = DB_query($SQL,$db,$ErrMsg);
-				$SerialItemExistsRow = DB_fetch_row($Result);
 
-				if ($SerialItemExistsRow[0]==1){
+				if (DB_num_rows($Result)==1){
 
 					$SQL = "UPDATE stockserialitems
 							SET quantity= quantity - '" . $Item->BundleQty . "',
@@ -346,9 +345,8 @@ if ( isset($_POST['EnterTransfer']) ){
 
 				$ErrMsg = _('Could not determine if the serial item exists in the transfer to location');
 				$Result = DB_query($SQL,$db,$ErrMsg);
-				$SerialItemExistsRow = DB_fetch_row($Result);
 
-				if ($SerialItemExistsRow[0]==1){
+				if (DB_num_rows($Result)==1){
 
 					$SQL = "UPDATE stockserialitems
 							SET quantity= quantity + '" . $Item->BundleQty . "',

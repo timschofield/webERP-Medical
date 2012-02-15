@@ -40,8 +40,8 @@ if (isset($_GET['New'])) {
 if (!isset($_SESSION['SuppTrans']->SupplierName)) {
 	$sql="SELECT suppname FROM suppliers WHERE supplierid='".$_GET['SupplierID']."'";
 	$result = DB_query($sql,$db);
-	$myrow = DB_fetch_row($result);
-	$SupplierName=$myrow[0];
+	$myrow = DB_fetch_array($result);
+	$SupplierName=$myrow['suppname'];
 } else {
 	$SupplierName=$_SESSION['SuppTrans']->SupplierName;
 }
@@ -122,8 +122,8 @@ if (isset($_GET['SupplierID']) and $_GET['SupplierID']!=''){
 		exit;
 	}
 
-	$LocalTaxProvinceRow = DB_fetch_row($LocalTaxProvinceResult);
-	$_SESSION['SuppTrans']->LocalTaxProvince = $LocalTaxProvinceRow[0];
+	$LocalTaxProvinceRow = DB_fetch_array($LocalTaxProvinceResult);
+	$_SESSION['SuppTrans']->LocalTaxProvince = $LocalTaxProvinceRow['taxprovinceid'];
 
 	$_SESSION['SuppTrans']->GetTaxes();
 
@@ -770,8 +770,8 @@ then do the updates and inserts to process the credit note entered */
 												INNER JOIN stockmaster
 													ON stockcategory.categoryid=stockmaster.categoryid
 												WHERE stockmaster.stockid='" . $Contract->ContractRef . "'",$db);
-				$WIPRow = DB_fetch_row($result);
-				$WIPAccount = $WIPRow[0];
+				$WIPRow = DB_fetch_array($result);
+				$WIPAccount = $WIPRow['wipact'];
 
 				$SQL = "INSERT INTO gltrans (type,
 								typeno,
@@ -852,12 +852,12 @@ then do the updates and inserts to process the credit note entered */
 								The cost of these items - $EnteredGRN->ChgPrice  / $_SESSION['SuppTrans']->ExRate
 								*/
 
-								$sql ="SELECT SUM(quantity) FROM locstock WHERE stockid='" . $EnteredGRN->ItemCode . "'";
+								$sql ="SELECT SUM(quantity) AS totalquantity FROM locstock WHERE stockid='" . $EnteredGRN->ItemCode . "'";
 								$ErrMsg =  _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The quantity on hand could not be retrieved from the database');
 								$DbgMsg = _('The following SQL to retrieve the total stock quantity was used');
 								$Result = DB_query($sql, $db, $ErrMsg, $DbgMsg, True);
-								$QtyRow = DB_fetch_row($Result);
-								$TotalQuantityOnHand = $QtyRow[0];
+								$QtyRow = DB_fetch_array($Result);
+								$TotalQuantityOnHand = $QtyRow['totalquantity'];
 
 
 								/*The cost adjustment is the price variance / the total quantity in stock

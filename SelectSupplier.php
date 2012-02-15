@@ -123,8 +123,8 @@ if (isset($_POST['Search']) OR isset($_POST['Go']) OR isset($_POST['Next']) OR i
 	} //one of keywords or SupplierCode was more than a zero length string
 	$result = DB_query($SQL, $db);
 	if (DB_num_rows($result) == 1) {
-		$myrow = DB_fetch_row($result);
-		$SingleSupplierReturned = $myrow[0];
+		$myrow = DB_fetch_array($result);
+		$SingleSupplierReturned = $myrow['supplierid'];
 	}
 } //end of if search
 if (isset($SingleSupplierReturned)) { /*there was only one supplier returned */
@@ -139,8 +139,8 @@ if (isset($_SESSION['SupplierID'])) {
 		WHERE suppliers.supplierid='" . htmlspecialchars_decode(html_entity_decode(stripslashes($_SESSION['SupplierID']))) . "'";
 	$SupplierNameResult = DB_query($SQL, $db);
 	if (DB_num_rows($SupplierNameResult) == 1) {
-		$myrow = DB_fetch_row($SupplierNameResult);
-		$SupplierName = $myrow[0];
+		$myrow = DB_fetch_array($SupplierNameResult);
+		$SupplierName = $myrow['suppname'];
 	}
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/supplier.png" title="' . _('Supplier') . '" alt="" />' . ' ' . _('Supplier') . ' : <b>' . stripslashes($_SESSION['SupplierID']) .
 				' - ' . $SupplierName . '</b> ' . _('has been selected') . '.</p>';

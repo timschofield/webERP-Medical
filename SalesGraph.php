@@ -203,16 +203,16 @@ if ((! isset($_POST['FromPeriod']) OR ! isset($_POST['ToPeriod']))
 		$GraphTitle .= ' ' . _('For All Sales Areas');
 	} else {
 		$result = DB_query("SELECT areadescription FROM areas WHERE areacode='" . $_POST['SalesArea'] . "'",$db);
-		$myrow = DB_fetch_row($result);
-		$GraphTitle .= ' ' . _('For') . ' ' . $myrow[0];
+		$myrow = DB_fetch_array($result);
+		$GraphTitle .= ' ' . _('For') . ' ' . $myrow['areadescription'];
 		$WhereClause .= " area='" . $_POST['SalesArea'] . "' AND";
 	}
 	if ($_POST['CategoryID']=='All'){
 		$GraphTitle .= ' ' . _('For All Stock Categories');
 	} else {
 		$result = DB_query("SELECT categorydescription FROM stockcategory WHERE categoryid='" . $_POST['CategoryID'] . "'",$db);
-		$myrow = DB_fetch_row($result);
-		$GraphTitle .= ' ' . _('For') . ' ' . $myrow[0];
+		$myrow = DB_fetch_array($result);
+		$GraphTitle .= ' ' . _('For') . ' ' . $myrow['categorydescription'];
 		$WhereClause .= " stkcategory='" . $_POST['CategoryID'] . "' AND";
 
 	}
@@ -220,8 +220,8 @@ if ((! isset($_POST['FromPeriod']) OR ! isset($_POST['ToPeriod']))
 		$GraphTitle .= ' ' . _('For All Salespeople');
 	} else {
 		$result = DB_query("SELECT salesmanname FROM salesman WHERE salesmancode='" . $_POST['SalesmanCode'] . "'",$db);
-		$myrow = DB_fetch_row($result);
-		$GraphTitle .= ' ' . _('For Salesperson:') . ' ' . $myrow[0];
+		$myrow = DB_fetch_array($result);
+		$GraphTitle .= ' ' . _('For Salesperson:') . ' ' . $myrow['salesmanname'];
 		$WhereClause .= " salesperson='" . $_POST['SalesmanCode'] . "' AND";
 
 	}

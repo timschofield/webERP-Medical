@@ -30,10 +30,10 @@ if (isset($_POST['PrintPDF'])) {
 	if ($_POST['category']!="all"){
 		$sqlcat="SELECT categorydescription FROM `stockcategory` where categoryid ='" . $_POST['category'] . "'";
 		$resultcat = DB_query($sqlcat,$db);
-		$RowCat = DB_fetch_row($resultcat);
-		$Categoryname=$RowCat['0'];
+		$RowCat = DB_fetch_array($resultcat);
+		$Categoryname=$RowCat['categorydescription'];
 	} else {
-		$Categoryname="ALL";
+		$Categoryname='ALL';
 	}
 
 	//get date price
@@ -44,7 +44,7 @@ if (isset($_POST['PrintPDF'])) {
 	}
 
 	//price and category = all
-	if (($_POST['price']=="all")and($_POST['category']=="all")){
+	if (($_POST['price']=='all')and($_POST['category']=='all')){
 		$sql = "SELECT 	purchdata.stockid,
 					stockmaster.description,
 					purchdata.price,
@@ -57,7 +57,7 @@ if (isset($_POST['PrintPDF'])) {
 			ORDER BY stockid ASC ,dateprice DESC";
 	} else {
 	//category=all and price != all
-		if (($_POST['price']!="all")and($_POST['category']=="all")){
+		if (($_POST['price']!='all')and($_POST['category']=='all')){
 
 			$sql = "SELECT purchdata.stockid,
 						stockmaster.description,
@@ -76,7 +76,7 @@ if (isset($_POST['PrintPDF'])) {
 			ORDER BY stockid ASC , dateprice DESC";
 		} else {
 			//price = all category !=all
-			if (($_POST['price']=="all")and($_POST['category']!="all")){
+			if (($_POST['price']=='all')and($_POST['category']!='all')){
 
 				$sql = "SELECT 	purchdata.stockid,
 					stockmaster.description,

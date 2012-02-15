@@ -98,10 +98,9 @@ if ($_FILES['userfile']['name']) { //start file processing
 		}
 
 		//first off check if the item already exists
-		$sql = "SELECT COUNT(stockid) FROM stockmaster WHERE stockid='".$StockID."'";
+		$sql = "SELECT stockid FROM stockmaster WHERE stockid='".$StockID."'";
 		$result = DB_query($sql,$db);
-		$testrow = DB_fetch_row($result);
-		if ($testrow[0] != 0) {
+		if (DB_num_rows($result) != 0) {
 			$InputError = 1;
 			prnMsg (_('Stock item "'. $StockID. '" already exists'),'error');
 		}

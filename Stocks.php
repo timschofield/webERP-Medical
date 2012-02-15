@@ -18,10 +18,10 @@ if (isset($_GET['StockID'])){
 }
 
 if (isset($StockID) and !isset($_POST['UpdateCategories'])) {
-	$sql = "SELECT COUNT(stockid) FROM stockmaster WHERE stockid='".$StockID."'";
+	$sql = "SELECT stockid FROM stockmaster WHERE stockid='".$StockID."'";
 	$result = DB_query($sql,$db);
-	$myrow = DB_fetch_row($result);
-	if ($myrow[0]==0) {
+
+	if (DB_num_rows($result)==0) {
 		$New=1;
 	} else {
 		$New=0;
@@ -221,19 +221,19 @@ if (isset($_POST['submit'])) {
 						ON stockmaster.categoryid=stockcategory.categoryid
 					WHERE stockid = '".$StockID."'";
 			$MBFlagResult = DB_query($sql,$db);
-			$myrow = DB_fetch_row($MBFlagResult);
-			$OldMBFlag = $myrow[0];
-			$OldControlled = $myrow[1];
-			$OldSerialised = $myrow[2];
-			$UnitCost = $myrow[3];
-			$OldStockAccount = $myrow[4];
-			$OldWipAccount = $myrow[5];
+			$myrow = DB_fetch_array($MBFlagResult);
+			$OldMBFlag = $myrow['mbflag'];
+			$OldControlled = $myrow['controlled'];
+			$OldSerialised = $myrow['serialised'];
+			$UnitCost = $myrow['itemcost'];
+			$OldStockAccount = $myrow['stockact'];
+			$OldWipAccount = $myrow['wipact'];
 
-			$sql = "SELECT SUM(locstock.quantity)
+			$sql = "SELECT SUM(locstock.quantity) AS totalquantity
 					FROM locstock
 					WHERE stockid='".$StockID."'";
 			$result = DB_query($sql,$db);
-			$StockQtyRow = DB_fetch_row($result);
+			$StockQtyRow = DB_fetch_array($result);
 
 			/*Now check the GL account of the new category to see if it is different to the old stock gl account */
 
@@ -249,9 +249,9 @@ if (isset($_POST['submit'])) {
 			if ($OldMBFlag != $_POST['MBFlag']){
 				if (($OldMBFlag == 'M' OR $OldMBFlag=='B') AND ($_POST['MBFlag']=='A' OR $_POST['MBFlag']=='K' OR $_POST['MBFlag']=='D' OR $_POST['MBFlag']=='G')){ /*then need to check that there is no stock holding first */
 					/* stock holding OK for phantom (ghost) items */
-					if ($StockQtyRow[0]!=0 AND $OldMBFlag!='G'){
+					if ($StockQtyRow['totalquantity']!=0 AND $OldMBFlag!='G'){
 						$InputError=1;
-						prnMsg( _('The make or buy flag cannot be changed from') . ' ' . $OldMBFlag . ' ' . _('to') . ' ' . $_POST['MBFlag'] . ' ' . _('where there is a quantity of stock on hand at any location') . '. ' . _('Currently there are') . ' ' . $StockQtyRow[0] .  ' ' . _('on hand') , 'errror');
+						prnMsg( _('The make or buy flag cannot be changed from') . ' ' . $OldMBFlag . ' ' . _('to') . ' ' . $_POST['MBFlag'] . ' ' . _('where there is a quantity of stock on hand at any location') . '. ' . _('Currently there are') . ' ' . $StockQtyRow['totalquantity'] .  ' ' . _('on hand') , 'errror');
 					}
 					/* don't allow controlled/serialized  */
 					if ($_POST['Controlled']==1){
@@ -261,40 +261,40 @@ if (isset($_POST['submit'])) {
 				}
 				/*now check that if the item is being changed to a kitset, there are no items on sales orders or purchase orders*/
 				if ($_POST['MBFlag']=='K') {
-					$sql = "SELECT quantity-qtyinvoiced
+					$sql = "SELECT quantity-qtyinvoiced AS qtyonorder
 						FROM salesorderdetails
 						WHERE stkcode = '".$StockID."'
 						AND completed=0";
 
 					$result = DB_query($sql,$db);
-					$ChkSalesOrds = DB_fetch_row($result);
-					if ($ChkSalesOrds[0]!=0){
+					$ChkSalesOrds = DB_fetch_array($result);
+					if ($ChkSalesOrds['qtyonorder']!=0){
 						$InputError = 1;
-						prnMsg( _('The make or buy flag cannot be changed to a kitset where there is a quantity outstanding to be delivered on sales orders') . '. ' . _('Currently there are') .' ' . $ChkSalesOrds[0] . ' '. _('outstanding'), 'error');
+						prnMsg( _('The make or buy flag cannot be changed to a kitset where there is a quantity outstanding to be delivered on sales orders') . '. ' . _('Currently there are') .' ' . $ChkSalesOrds['qtyonorder'] . ' '. _('outstanding'), 'error');
 					}
 				}
 				/*now check that if it is to be a kitset or assembly or dummy there is no quantity on purchase orders outstanding*/
 				if ($_POST['MBFlag']=='K' OR $_POST['MBFlag']=='A' OR $_POST['MBFlag']=='D') {
 
-					$sql = "SELECT quantityord-quantityrecd
+					$sql = "SELECT quantityord-quantityrecd AS purchorderqty
 						FROM purchorderdetails
 						WHERE itemcode = '".$StockID."'
 						AND completed=0";
 
 					$result = DB_query($sql,$db);
-					$ChkPurchOrds = DB_fetch_row($result);
-					if ($ChkPurchOrds[0]!=0){
+					$ChkPurchOrds = DB_fetch_array($result);
+					if ($ChkPurchOrds['purchorderqty']!=0){
 						$InputError = 1;
-						prnMsg( _('The make or buy flag cannot be changed to'). ' ' . $_POST['MBFlag'] . ' '. _('where there is a quantity outstanding to be received on purchase orders') . '. ' . _('Currently there are'). ' ' . $ChkPurchOrds[0] . ' '. _('yet to be received'). 'error');
+						prnMsg( _('The make or buy flag cannot be changed to'). ' ' . $_POST['MBFlag'] . ' '. _('where there is a quantity outstanding to be received on purchase orders') . '. ' . _('Currently there are'). ' ' . $ChkPurchOrds['purchorderqty'] . ' '. _('yet to be received'). 'error');
 					}
 				}
 
 				/*now check that if it was a Manufactured, Kitset, Phantom or Assembly and is being changed to a purchased or dummy - that no BOM exists */
 				if (($OldMBFlag=='M' OR $OldMBFlag =='K' OR $OldMBFlag=='A' OR $OldMBFlag=='G') AND ($_POST['MBFlag']=='B' OR $_POST['MBFlag']=='D')) {
-					$sql = "SELECT COUNT(*) FROM bom WHERE parent = '".$StockID."'";
+					$sql = "SELECT parent FROM bom WHERE parent = '".$StockID."'";
 					$result = DB_query($sql,$db);
-					$ChkBOM = DB_fetch_row($result);
-					if ($ChkBOM[0]!=0){
+
+					if (DB_num_rows($result)!=0){
 						$InputError = 1;
 						prnMsg( _('The make or buy flag cannot be changed from manufactured, kitset or assembly to'). ' ' . $_POST['MBFlag'] . ' '. _('where there is a bill of material set up for the item') . '. ' . _('Bills of material are not appropriate for purchased or dummy items'), 'error');
 					}
@@ -302,10 +302,10 @@ if (isset($_POST['submit'])) {
 
 				/*now check that if it was Manufac, Phantom or Purchased and is being changed to assembly or kitset, it is not a component on an existing BOM */
 				if (($OldMBFlag=='M' OR $OldMBFlag =='B' OR $OldMBFlag=='D' OR $OldMBFlag=='G') AND ($_POST['MBFlag']=='A' OR $_POST['MBFlag']=='K')) {
-					$sql = "SELECT COUNT(*) FROM bom WHERE component = '".$StockID."'";
+					$sql = "SELECT component FROM bom WHERE component = '".$StockID."'";
 					$result = DB_query($sql,$db);
-					$ChkBOM = DB_fetch_row($result);
-					if ($ChkBOM[0]!=0){
+
+					if (DB_num_rows($result)!=0){
 						$InputError = 1;
 						prnMsg( _('The make or buy flag cannot be changed from manufactured, purchased or dummy to a kitset or assembly where the item is a component in a bill of material') . '. ' . _('Assembly and kitset items are not appropriate as components in a bill of materials'), 'error');
 					}
@@ -313,12 +313,12 @@ if (isset($_POST['submit'])) {
 			}
 
 			/* Do some checks for changes in the Serial & Controlled setups */
-			if ($OldControlled != $_POST['Controlled'] AND $StockQtyRow[0]!=0){
+			if ($OldControlled != $_POST['Controlled'] AND $StockQtyRow['totalquantity']!=0){
 				$InputError=1;
 				prnMsg( _('You can not change a Non-Controlled Item to Controlled (or back from Controlled to non-controlled when there is currently stock on hand for the item') , 'error');
 
 			}
-			if ($OldSerialised != $_POST['Serialised'] AND $StockQtyRow[0]!=0){
+			if ($OldSerialised != $_POST['Serialised'] AND $StockQtyRow['totalquantity']!=0){
 				$InputError=1;
 				prnMsg( _('You can not change a Serialised Item to Non-Serialised (or vice-versa) when there is a quantity on hand for the item') , 'error');
 			}
@@ -394,7 +394,7 @@ if (isset($_POST['submit'])) {
 												'" . GetPeriod(Date($_SESSION['DefaultDateFormat']),$db,true) . "',
 												'" . $NewStockAct . "',
 												'" . $StockID . ' ' . _('Change stock category') . "',
-												'" . ($UnitCost* $StockQtyRow[0]) . "')";
+												'" . ($UnitCost* $StockQtyRow['totalquantity']) . "')";
 					$ErrMsg =  _('The stock cost journal could not be inserted because');
 					$DbgMsg = _('The SQL that was used to create the stock cost journal and failed was');
 					$result = DB_query($SQL,$db, $ErrMsg, $DbgMsg,true);
@@ -411,7 +411,7 @@ if (isset($_POST['submit'])) {
 												'" . GetPeriod(Date($_SESSION['DefaultDateFormat']),$db,true) . "',
 												'" . $OldStockAccount . "',
 												'" . $StockID . ' ' . _('Change stock category') . "',
-												'" . (-$UnitCost* $StockQtyRow[0]) . "')";
+												'" . (-$UnitCost* $StockQtyRow['totalquantity']) . "')";
 					$result = DB_query($SQL,$db, $ErrMsg, $DbgMsg,true);
 				}
 
@@ -577,51 +577,51 @@ if (isset($_POST['submit'])) {
 
 // PREVENT DELETES IF DEPENDENT RECORDS IN 'StockMoves'
 
-	$sql= "SELECT COUNT(*) FROM stockmoves WHERE stockid='".$StockID."'";
+	$sql= "SELECT stockid FROM stockmoves WHERE stockid='".$StockID."'";
 	$result = DB_query($sql,$db);
-	$myrow = DB_fetch_row($result);
-	if ($myrow[0]>0) {
+
+	if (DB_num_rows($result)>0) {
 		$CancelDelete = 1;
 		prnMsg( _('Cannot delete this stock item because there are stock movements that refer to this item'),'warn');
 		echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('stock movements that refer to this item');
 
 	} else {
-		$sql= "SELECT COUNT(*) FROM bom WHERE component='".$StockID."'";
+		$sql= "SELECT component FROM bom WHERE component='".$StockID."'";
 		$result = DB_query($sql,$db);
-		$myrow = DB_fetch_row($result);
-		if ($myrow[0]>0) {
+
+		if (DB_num_rows($result)>0) {
 			$CancelDelete = 1;
 			prnMsg( _('Cannot delete this item record because there are bills of material that require this part as a component'),'warn');
 			echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('bills of material that require this part as a component');
 		} else {
-			$sql= "SELECT COUNT(*) FROM salesorderdetails WHERE stkcode='".$StockID."'";
+			$sql= "SELECT stkcode FROM salesorderdetails WHERE stkcode='".$StockID."'";
 			$result = DB_query($sql,$db);
-			$myrow = DB_fetch_row($result);
-			if ($myrow[0]>0) {
+
+			if (DB_num_rows($result)>0) {
 				$CancelDelete = 1;
 				prnMsg( _('Cannot delete this item record because there are existing sales orders for this part'),'warn');
 				echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('sales order items against this part');
 			} else {
-				$sql= "SELECT COUNT(*) FROM salesanalysis WHERE stockid='".$StockID."'";
+				$sql= "SELECT stockid FROM salesanalysis WHERE stockid='".$StockID."'";
 				$result = DB_query($sql,$db);
-				$myrow = DB_fetch_row($result);
-				if ($myrow[0]>0) {
+
+				if (DB_num_rows($result)>0) {
 					$CancelDelete = 1;
 					prnMsg(_('Cannot delete this item because sales analysis records exist for it'),'warn');
 					echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('sales analysis records against this part');
 				} else {
-					$sql= "SELECT COUNT(*) FROM purchorderdetails WHERE itemcode='".$StockID."'";
+					$sql= "SELECT itemcode FROM purchorderdetails WHERE itemcode='".$StockID."'";
 					$result = DB_query($sql,$db);
-					$myrow = DB_fetch_row($result);
-					if ($myrow[0]>0) {
+
+					if (DB_num_rows($result)>0) {
 						$CancelDelete = 1;
 						prnMsg(_('Cannot delete this item because there are existing purchase order items for it'),'warn');
 						echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('purchase order item record relating to this part');
 					} else {
 						$sql = "SELECT SUM(quantity) AS qoh FROM locstock WHERE stockid='".$StockID."'";
 						$result = DB_query($sql,$db);
-						$myrow = DB_fetch_row($result);
-						if ($myrow[0]!=0) {
+						$myrow = DB_fetch_array($result);
+						if ($myrow['qoh']!=0) {
 							$CancelDelete = 1;
 							prnMsg( _('Cannot delete this item because there is currently some stock on hand'),'warn');
 							echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('on hand for this part');
@@ -1090,8 +1090,8 @@ while ($PropertyRow=DB_fetch_array($PropertiesResult)){
 									WHERE stockid='" . $StockID . "'
 									AND stkcatpropid ='" . $PropertyRow['stkcatpropid']."'",
 								$db);
-		$PropValRow = DB_fetch_row($PropValResult);
-		$PropertyValue = $PropValRow[0];
+		$PropValRow = DB_fetch_array($PropValResult);
+		$PropertyValue = $PropValRow['value'];
 	} else {
 		$PropertyValue =  '';
 	}
