@@ -22,11 +22,9 @@ $SQLname="SELECT name FROM debtorsmaster WHERE debtorno='" . $DebtorNo . "'";
 $Result = DB_query($SQLname,$db);
 $row = DB_fetch_array($Result);
 if (!isset($_GET['Id'])) {
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' .
-			' ' . _('Contacts for Customer') . ': <b>' .$row['name'].'</b></p><br />';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Contacts for Customer') . ': <b>' .$row['name'].'</b></p><br />';
 } else {
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' .
-			' ' . _('Edit contact for'). ': <b>' .$row['name'].'</b></p><br />';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Edit contact for'). ': <b>' .$row['name'].'</b></p><br />';
 }
 if ( isset($_POST['submit']) ) {
 
@@ -211,46 +209,46 @@ if (!isset($_GET['delete'])) {
 	}
 
 	echo '<tr><td>'. _('Contact Name') . '</td>';
-    if (isset($_POST['ContactName'])) {
+	if (isset($_POST['ContactName'])) {
 		echo '<td><input type="text" name="ContactName" value="' . $_POST['ContactName']. '" size="35" maxlength="40" /></td>
 			</tr>';
-    } else {
+	} else {
 		echo '<td><input type="text" name="ContactName" size="35" maxlength="40" /></td>
 			</tr>';
-    }
+	}
 	echo '<tr>
 			<td>' . _('Role') . '</td>';
-    if (isset($_POST['ContactRole'])) {
-        echo '<td><input type="text" name="ContactRole" value="'. $_POST['ContactRole']. '" size="35" maxlength="40" /></td>
+	if (isset($_POST['ContactRole'])) {
+		echo '<td><input type="text" name="ContactRole" value="'. $_POST['ContactRole']. '" size="35" maxlength="40" /></td>
 			</tr>';
-    } else {
-        echo '<td><input type="text" name="ContactRole" size="35" maxlength="40" /></td>
+	} else {
+		echo '<td><input type="text" name="ContactRole" size="35" maxlength="40" /></td>
 			</tr>';
-    }
+	}
 	echo '<tr><td>' . _('Phone') . '</td>';
-    if (isset($_POST['ContactPhone'])) {
-        echo '<td><input type="text" name="ContactPhone" value="' . $_POST['ContactPhone'] . '" size="35" maxlength="40" /></td>
+	if (isset($_POST['ContactPhone'])) {
+		echo '<td><input type="text" name="ContactPhone" value="' . $_POST['ContactPhone'] . '" size="35" maxlength="40" /></td>
 			</tr>';
-    } else {
-        echo '<td><input type="text" name="ContactPhone" size="35" maxlength="40" /></td>
+	} else {
+		echo '<td><input type="text" name="ContactPhone" size="35" maxlength="40" /></td>
 			</tr>';
-    }
-    echo '<tr>
+	}
+	echo '<tr>
 			<td>' . _('Email') . '</td>';
-    if (isset($_POST['ContactEmail'])) {
-        echo '<td><input type="text" name="ContactEmail" value="' . $_POST['ContactEmail'] . '" size="55" maxlength="55" /></td>
+	if (isset($_POST['ContactEmail'])) {
+		echo '<td><input type="text" name="ContactEmail" value="' . $_POST['ContactEmail'] . '" size="55" maxlength="55" /></td>
 			</tr>';
-    } else {
-        echo '<td><input type="text" name="ContactEmail" size="55" maxlength="55" /></td>
+	} else {
+		echo '<td><input type="text" name="ContactEmail" size="55" maxlength="55" /></td>
 			</tr>';
-    }
+	}
 	echo '<tr>
 			<td>' . _('Notes') . '</td>';
-    if (isset($_POST['ContactNotes'])) {
-        echo '<td><textarea name="ContactNotes">'. $_POST['ContactNotes'] . '</textarea>';
-    } else {
-       echo '<td><textarea name="ContactNotes"></textarea>';
-    }
+	if (isset($_POST['ContactNotes'])) {
+		echo '<td><textarea name="ContactNotes">'. $_POST['ContactNotes'] . '</textarea>';
+	} else {
+	   echo '<td><textarea name="ContactNotes"></textarea>';
+	}
 	echo '<tr>
 			<td colspan="2">
 				<div class="centre">
