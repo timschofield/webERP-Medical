@@ -6,7 +6,7 @@
 
 $sql='SHOW TABLES';
 $result=DB_Query($sql, $db);
-while ($table = DB_fetch_row($result)) {
+while ($table = DB_fetch_array($result)) {
 	if (CharacterSet($table[0], $db) != 'utf8_general_ci') {
 		$response=executeSQL('ALTER TABLE '.$table[0].' CONVERT TO CHARACTER SET utf8', $db);
 		if ($response==0) {
