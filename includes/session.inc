@@ -13,7 +13,7 @@ if (!file_exists($PathPrefix . 'config.php')){
 	header('Location:' . $rootpath . '/install/index.php');
 }
 include($PathPrefix . 'config.php');
-$DBVersion=106;
+$DBVersion=107;
 if (isset($SessionSavePath)){
 	session_save_path($SessionSavePath);
 }
@@ -291,7 +291,6 @@ if (!isset($AllowAnyone)){
 		exit;
 	}
  }
-
 
 if (in_array(15, $_SESSION['AllowedPageSecurityTokens'])) { /*System administrator login */
 	$debug = 1; //allow debug messages
