@@ -492,27 +492,30 @@ while ($myrow=DB_fetch_array($result)){
 
 echo '</select></td></tr>';
 
-echo '<tr><td>' . _('Functional Unit') . ':</td>
-	<td><select name="DefaultTag">';
+$sql="SELECT name FROM divisions";
+$result=DB_query($sql, $db);
 
-$myrow[0]='GSF';
-$myrow[1]='KCMC';
-$myrow[2]='KCRI';
+if (DB_num_rows($result) != 0) {
+	echo '<tr><td>' . _('Functional Unit') . ':</td>
+			<td><select name="DefaultTag">';
 
-foreach ($myrow as $TagName){
+	while ($myrow = DB_fetch_array($result)){
 
-	if (isset($_POST['DefaultTag']) and $TagName == $_POST['DefaultTag']){
+		if (isset($_POST['DefaultTag']) and $myrow['name'] == $_POST['DefaultTag']){
 
-		echo "<option selected value='" . $TagName . "'>" . $TagName;
+			echo '<option selected value="' . $myrow['name'] . '">' . $myrow['name'] . '</option>';
 
-	} else {
-		echo "<option Value='" . $TagName . "'>" . $TagName;
+		} else {
+			echo '<option value="' . $myrow['name'] . '">' . $myrow['name'] . '</option>';
+
+		}
 
 	}
-
+	echo '</select></td></tr>';
+} else {
+	echo '<input type="hidden" name="DefaultTag" value="">';
 }
 
-echo '</select></td></tr>';
 if (!isset($_POST['Cust'])) {
 	$_POST['Cust']='';
 }

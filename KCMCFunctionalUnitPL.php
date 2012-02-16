@@ -81,27 +81,24 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 	echo '</select></td></tr>';
 	//Select the tag
 
+	$sql="SELECT name FROM divisions";
+	$result=DB_query($sql, $db);
 	echo '<tr><td>' . _('Functional Unit') . ':</td>
-		<td><select name="tag">';
+			<td><select name="DefaultTag">';
 
-	$myrow[0]='GSF';
-	$myrow[1]='KCMC';
-	$myrow[2]='KCRI';
+	while ($myrow = DB_fetch_array($result)){
 
-	foreach ($myrow as $TagName){
+		if (isset($_POST['DefaultTag']) and $myrow['name'] == $_POST['DefaultTag']){
 
-		if (isset($_POST['DefaultTag']) and $TagName == $_POST['DefaultTag']){
-
-			echo "<option selected value='" . $TagName . "'>" . $TagName;
+			echo '<option selected value="' . $myrow['name'] . '">' . $myrow['name'] . '</option>';
 
 		} else {
-			echo "<option Value='" . $TagName . "'>" . $TagName;
+			echo '<option value="' . $myrow['name'] . '">' . $myrow['name'] . '</option>';
 
 		}
 
 	}
-
-echo '</select></td></tr>';
+	echo '</select></td></tr>';
 // End select tag
 
 	echo '<tr><td>'._('Detail Or Summary').':</td><td><select Name="Detail">';

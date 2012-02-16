@@ -14,7 +14,7 @@ if (!file_exists($PathPrefix . 'config.php')){
 }
 include($PathPrefix . 'config.php');
 
-$DBVersion=111;
+$DBVersion=112;
 
 if (isset($SessionSavePath)){
 	session_save_path($SessionSavePath);
