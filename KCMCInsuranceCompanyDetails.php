@@ -737,6 +737,7 @@ if (isset($DebtorNo)) {
 if (!isset($DebtorNo)) {
 	echo '<br /><div class="centre"><input type="Submit" name="submit" value="' . _('Add New Company') .
 		'">&nbsp;<input type=submit name="reset" value="' . _('Reset') . '"></div>';
+	echo '<input type="hidden" name="New" value="True" />';
 } else {
 	echo '<br /><div class="centre"><input type="Submit" name="submit" value="' . _('Update Company') . '">';
 	echo '&nbsp;<input type="Submit" name="delete" value="' . _('Delete Company') . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');">';
