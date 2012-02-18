@@ -13,10 +13,10 @@ echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 ?>
 <html>
 <head>
-    <title>webERP Login screen</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="css/<?php echo $theme;?>/login.css" type="text/css" />
+	<title>webERP Login screen</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="css/<?php echo $theme;?>/login.css" type="text/css" />
 </head>
 <body>
 
@@ -67,10 +67,10 @@ if (get_magic_quotes_gpc()){
 	</form>
 	</div>
 </div>
-    <script type="text/javascript">
-            <!--
-                  document.forms[0].UserNameEntryField.focus();
-            //-->
-    </script>
+	<script type="text/javascript">
+			<!--
+				  document.forms[0].UserNameEntryField.focus();
+			//-->
+	</script>
 </body>
 </html>
