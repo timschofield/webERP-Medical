@@ -190,13 +190,13 @@ if (isset($_POST['submit'])) {
 		$sql = "SELECT stkcat FROM salesglpostings WHERE stkcat='$SelectedCategory'";
 		$result = DB_query($sql,$db);
 
-		if (DB_num_rows($result)>0)
+		if (DB_num_rows($result)>0) {
 			prnMsg(_('Cannot delete this stock category because it is used by the sales') . ' - ' . _('GL posting interface') . '. ' . _('Delete any records in the Sales GL Interface set up using this stock category first'),'warn');
 		} else {
 			$sql = "SELECT stkcat FROM cogsglpostings WHERE stkcat='$SelectedCategory'";
 			$result = DB_query($sql,$db);
 
-			if (DB_num_rows($result)>0)
+			if (DB_num_rows($result)>0) {
 				prnMsg(_('Cannot delete this stock category because it is used by the cost of sales') . ' - ' . _('GL posting interface') . '. ' . _('Delete any records in the Cost of Sales GL Interface set up using this stock category first'),'warn');
 			} else {
 				$sql="DELETE FROM stockcategory WHERE categoryid='$SelectedCategory'";
