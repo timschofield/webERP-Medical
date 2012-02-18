@@ -764,8 +764,8 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 				<td>'.$myrow['description'].'</td>
 				<td class="number">' . $qoh . '</td>
 				<td>' . $myrow['units'] . '</td>
-				<td><a target="_blank" href="' . $rootpath . '/StockStatus.php?StockID=' . $myrow['stockid'].'">' . _('View') . '</a></td>
 				<td>' . $ItemStatus . '</td>
+				<td><a target="_blank" href="' . $rootpath . '/StockStatus.php?StockID=' . $myrow['stockid'].'">' . _('View') . '</a></td>
 				</tr>';
 			$j++;
 			if ($j == 20 AND ($RowIndex + 1 != $_SESSION['DisplayRecordsMax'])) {
