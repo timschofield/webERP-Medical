@@ -280,7 +280,7 @@ If (isset($_POST['Process'])) {
 				$Ins_LineItemResult = DB_query($LineItemsSQL,$db,$ErrMsg,$DbgMsg,true);
 			} /* inserted line items into sales order details */
 
-			prnmsg(_('The new recurring order template has been added'),'success');
+			prnMsg(_('The new recurring order template has been added'),'success');
 
 		} else { /* must be updating an existing recurring order */
 			$HeaderSQL = "UPDATE recurringsalesorders SET
@@ -291,7 +291,7 @@ If (isset($_POST['Process'])) {
 
 			$ErrMsg = _('The recurring order cannot be updated because');
 			$UpdateQryResult = DB_query($HeaderSQL,$db,$ErrMsg);
-			prnmsg(_('The recurring order template has been updated'),'success');
+			prnMsg(_('The recurring order template has been updated'),'success');
 		}
 
 	echo '<p><a href="'.$rootpath.'/SelectOrderItems.php?NewOrder=Yes">'. _('Enter New Sales Order') .'</a></p>';

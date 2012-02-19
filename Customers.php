@@ -1012,7 +1012,7 @@ if (!isset($DebtorNo)) {
 
 		echo '<meta http-equiv="Refresh" content="0; url=' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?DebtorNo='.$DebtorNo.'">';
 		echo '<br />'.$SQl;
-		prnmsg('Contact Deleted','success');
+		prnMsg('Contact Deleted','success');
 	}
 
 

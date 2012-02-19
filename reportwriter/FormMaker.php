@@ -125,7 +125,7 @@ switch ($_POST['todo']) {
 } // end switch 'todo'
 
 include ($PathPrefix . 'includes/header.inc');
-if ($usrMsg) foreach ($usrMsg as $temp) prnmsg($temp['message'],$temp['level']);
+if ($usrMsg) foreach ($usrMsg as $temp) prnMsg($temp['message'],$temp['level']);
 include ($IncludePage);
 include ( $PathPrefix . 'includes/footer.inc');
 // End main body

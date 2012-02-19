@@ -689,7 +689,7 @@ switch ($_GET['action']) {
 $title = $FormParams['title']; // fetch the title for the header.inc file
 
 include ($PathPrefix . 'includes/header.inc');
-if ($usrMsg) foreach ($usrMsg as $temp) prnmsg($temp['message'],$temp['level']);
+if ($usrMsg) foreach ($usrMsg as $temp) prnMsg($temp['message'],$temp['level']);
 include ($FormParams['IncludePage']);
 include ($PathPrefix . 'includes/footer.inc');
 // End main body
