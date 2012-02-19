@@ -196,7 +196,7 @@ or deletion of the records*/
 		<th>' . _('Comm Rate 2') . '</th>
 		<th>' . _('Current') . '</th></tr>';
 	$k=0;
-	while ($myarray=DB_fetch_array($result)) {
+	while ($myrow=DB_fetch_array($result)) {
 
 	if ($k==1){
 		echo '<tr class="EvenTableRows">';
