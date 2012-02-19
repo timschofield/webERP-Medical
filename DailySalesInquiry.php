@@ -93,13 +93,13 @@ $SalesResult = DB_query($sql, $db,$ErrMsg);
 echo '<table cellpadding="2" class="selection">';
 
 echo'<tr>
-	<th>' . _('Sunday') . '</th>
-	<th>' . _('Monday') . '</th>
-	<th>' . _('Tuesday') . '</th>
-	<th>' . _('Wednesday') . '</th>
-	<th>' . _('Thursday') . '</th>
-	<th>' . _('Friday') . '</th>
-	<th>' . _('Saturday') . '</th></tr>';
+	<th style="width: 14%">' . _('Sunday') . '</th>
+	<th style="width: 14%">' . _('Monday') . '</th>
+	<th style="width: 14%">' . _('Tuesday') . '</th>
+	<th style="width: 14%">' . _('Wednesday') . '</th>
+	<th style="width: 14%">' . _('Thursday') . '</th>
+	<th style="width: 14%">' . _('Friday') . '</th>
+	<th style="width: 14%">' . _('Saturday') . '</th></tr>';
 
 $CumulativeTotalSales = 0;
 $CumulativeTotalCost = 0;
