@@ -392,9 +392,16 @@ if (!isset($_GET['delete'])) {
 		$_POST['tablimit']=0;
 	}
 
-	echo '<tr><td>' . _('Limit Of Tab') . ':</td><td><input type="text" class="number" name="tablimit" size="12" maxlength="11" value="' . locale_money_format($_POST['tablimit'], $_POST['SelectCurrency']) . '" /></td></tr>';
+	if (!isset($_POST['SelectCurrency'])) {
+		$_POST['SelectCurrency'] = $_SESSION['CompanyRecord']['currencydefault'];
+	}
 
-	echo '<tr><td>' . _('Cash Assigner') . ':</td><td><select name="SelectAssigner">';
+	echo '<tr>
+			<td>' . _('Limit Of Tab') . ':</td><td><input type="text" class="number" name="tablimit" size="12" maxlength="11" value="' . locale_money_format($_POST['tablimit'], $_POST['SelectCurrency']) . '" /></td>
+		</tr>';
+
+	echo '<tr>
+			<td>' . _('Cash Assigner') . ':</td><td><select name="SelectAssigner">';
 
 	DB_data_seek($UsersResult);
 
@@ -410,7 +417,9 @@ if (!isset($_GET['delete'])) {
 
 	echo '</select></td></tr>';
 
-	echo '<tr><td>' . _('Authorizer') . ':</td><td><select name="SelectAuthorizer">';
+	echo '<tr>
+			<td>' . _('Authorizer') . ':</td>
+			<td><select name="SelectAuthorizer">';
 
 	DB_data_seek($UsersResult);
 
@@ -426,7 +435,9 @@ if (!isset($_GET['delete'])) {
 
 	echo '</select></td></tr>';
 
-	echo '<tr><td>' . _('GL Account Cash Assignment') . ':</td><td><select name="glaccountcash">';
+	echo '<tr>
+			<td>' . _('GL Account Cash Assignment') . ':</td>
+			<td><select name="glaccountcash">';
 
 	DB_free_result($result);
 	$SQL = "SELECT chartmaster.accountcode, chartmaster.accountname
@@ -448,7 +459,9 @@ if (!isset($_GET['delete'])) {
 
 	echo '</select></td></tr>';
 
-	echo '<tr><td>' . _('GL Account Petty Cash Tab') . ':</td><td><select name="glaccountpcashtab">';
+	echo '<tr>
+			<td>' . _('GL Account Petty Cash Tab') . ':</td>
+			<td><select name="glaccountpcashtab">';
 
 	DB_free_result($result);
 	$SQL = "SELECT accountcode, accountname
@@ -468,7 +481,7 @@ if (!isset($_GET['delete'])) {
 	} //end while loop
 
 	echo '</select></td></tr>';
-   	echo '</td></tr></table>'; // close main table
+   	echo '</table>'; // close main table
 
 	echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Accept') . '" />
 					<input type="submit" name="Cancel" value="' . _('Cancel') . '" /></div>';
