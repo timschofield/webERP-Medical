@@ -108,9 +108,9 @@ if (isset($_POST['submit'])) {
 		WHERE taxauthid='" . $SelectedTaxAuthID . "'";
 
 	$result = DB_query($sql,$db);
-	$myrow = ;
+
 	if (DB_num_rows($result)>0) {
-		prnmsg(_('Cannot delete this tax authority because there are tax groups defined that use it'),'warn');
+		prnMsg(_('Cannot delete this tax authority because there are tax groups defined that use it'),'warn');
 	} else {
 		/*Cascade deletes in TaxAuthLevels */
 		$result = DB_query("DELETE FROM taxauthrates WHERE taxauthority= '" . $SelectedTaxAuthID . "'",$db);
