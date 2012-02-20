@@ -640,27 +640,26 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 			echo '<option value='. $myrow1['categoryid'] . '>' . $myrow1['categorydescription'] . '</option>';
 		}
 	}
-	?>
 
-	</select>
-	<td><?php echo _('Enter text extracts in the'); ?> <b><?php echo _('description'); ?></b>:</td>
-	<td><input type="text" name="Keywords" size="20" maxlength="25" value=" <?php if (isset($_POST['Keywords'])) echo $_POST['Keywords']; ?>" /></td></tr>
+	if (!isset($_POST['Keywords'])) {
+	    $_POST['Keywords']='';
+	}
+	
+	if (!isset($_POST['StockCode'])) {
+	    $_POST['StockCode']='';
+	}
+
+echo '</select>
+	<td>' . _('Enter text extracts in the') . ' <b>' . _('description') . '</b>:</td>
+	<td><input type="text" name="Keywords" size="20" maxlength="25" value="' . $_POST['Keywords'] . '" /></td></tr>
 	<tr><td></td>
-			<td><font size="3"><b><?php echo _('OR'); ?> </b></font><?php echo _('Enter extract of the'); ?> <b><?php echo _('Stock Code'); ?></b>:</td>
-		<td><input type="text" name="StockCode" size="15" maxlength="18" value=" <?php if (isset($_POST['StockCode'])) echo $_POST['StockCode']; ?>" /></td>
-			</tr>
-			</table>
-			<br /><div class="centre"><input type="submit" name="Search" value=" <?php echo _('Search Now'); ?>" />
+	<td><font size="3"><b>' . _('OR') . ' </b></font>' . _('Enter extract of the') . ' <b>' . _('Stock Code') . '</b>:</td>
+	<td><input type="text" name="StockCode" size="15" maxlength="18" value="' . $_POST['StockCode'] . '" /></td>
+	</tr>
+	</table>
+	<br /><div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" /></div>';
 
-	<script language='JavaScript' type='text/javascript'>
-
-		document.forms[0].StockCode.select();
-		document.forms[0].StockCode.focus();
-
-	</script>
-
-	<?php
-	echo '</div>';
+echo '<script type="text/javascript">defaultControl(document.forms[0].StockCode);</script>';
 
 	if (isset($SearchResult)) {
 

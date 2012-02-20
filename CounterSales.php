@@ -2227,20 +2227,25 @@ if (!isset($_POST['ProcessSale'])){
 			}
 		}
 
-		?>
+	    if (!isset($_POST['Keywords'])) {
+	        $_POST['Keywords']='';
+	    }
+	    
+	    if (!isset($_POST['StockCode'])) {
+	        $_POST['StockCode']='';
+	    }
 
-		</select></td>
-		<td><b><?php echo _('Enter partial Description'); ?>:</b>
-		<input tabindex="2" type="text" name="Keywords" size="20" maxlength="25" value="<?php if (isset($_POST['Keywords'])) echo $_POST['Keywords']; ?>" /></td>
+	echo '</select></td>
+		<td><b>' . _('Enter partial Description') . ':</b>
+		<input tabindex="2" type="text" name="Keywords" size="20" maxlength="25" value="' . $_POST['Keywords'] . '" /></td>
 
-		<td align="right"><b><?php echo _('OR'); ?> </b><b><?php echo _('Enter extract of the Stock Code'); ?>:</b>
-		<input tabindex="3" type="text" name="StockCode" size="15" maxlength="18" value="<?php if (isset($_POST['StockCode'])) echo $_POST['StockCode']; ?>" /></td>
+		<td align="right"><b>' . _('OR') . ' </b><b>' . _('Enter extract of the Stock Code') . ':</b>
+		<input tabindex="3" type="text" name="StockCode" size="15" maxlength="18" value="' . $_POST['StockCode'] . '" /></td>
 
 		</tr><tr>
-		<td style="text-align:center" colspan="1"><input tabindex="4" type="submit" name="Search" value="<?php echo _('Search Now'); ?>" /></td>
-		<td style="text-align:center" colspan="1"><input tabindex="5" type="submit" name="QuickEntry" value="<?php echo _('Use Quick Entry'); ?>" /></td>
+		<td style="text-align:center"><input tabindex="4" type="submit" name="Search" value="' . _('Search Now') . '" /></td>
+		<td style="text-align:center"><input tabindex="5" type="submit" name="QuickEntry" value="' . _('Use Quick Entry') . '" /></td>';
 
-		<?php
 		if (!isset($_POST['PartSearch'])) {
 			echo '<script  type="text/javascript">if (document.SelectParts) {defaultControl(document.SelectParts.Keywords);}</script>';
 		}

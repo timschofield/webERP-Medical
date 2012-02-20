@@ -557,7 +557,7 @@ echo '<div class="centre"><br /><input type="submit" name="submit" value="' . _(
 
 echo '<br /><input type="submit" name="delete" value="' . _('Delete This Work Order') . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');" />';
 
-echo '<br /></div>';
+echo '</div><br />';
 
 $SQL="SELECT categoryid,
 			categorydescription
@@ -583,21 +583,24 @@ while ($myrow1 = DB_fetch_array($result1)) {
 		echo '<option value='. $myrow1['categoryid'] . '>' . $myrow1['categorydescription'] . '</option>';
 	}
 }
-?>
 
-</select>
-<td><?php echo _('Enter text extracts in the'); ?> <b><?php echo _('description'); ?></b>:</td>
-<td><input type="text" name="Keywords" size="20" maxlength="25" value="<?php if (isset($_POST['Keywords'])) echo $_POST['Keywords']; ?>" /></td></tr>
-<tr><td></td>
-		<td><font size="3"><b><?php echo _('OR'); ?> </b></font><?php echo _('Enter extract of the'); ?> <b><?php echo _('Stock Code'); ?></b>:</td>
-		<td><input type="text" name="StockCode" size="15" maxlength="18" value="<?php if (isset($_POST['StockCode'])) echo $_POST['StockCode']; ?>" /></td>
-		</tr>
-		</table>
-		<br /><div class="centre"><input type="submit" name="Search" value=" <?php echo _('Search Now'); ?>" />
+if (!isset($_POST['Keywords'])) {
+    $_POST['Keywords']='';
+}
 
-<?php
+if (!isset($_POST['StockCode'])) {
+    $_POST['StockCode']='';
+}
 
-echo '</div>';
+echo '</select>
+    <td>' . _('Enter text extracts in the') . ' <b>' . _('description') . '</b>:</td>
+    <td><input type="text" name="Keywords" size="20" maxlength="25" value="' . $_POST['Keywords'] . '" /></td></tr>
+    <tr><td>&nbsp;</td>
+	<td><font size="3"><b>' . _('OR') . ' </b></font>' . _('Enter extract of the') . ' <b>' . _('Stock Code') . '</b>:</td>
+	<td><input type="text" name="StockCode" size="15" maxlength="18" value="' . $_POST['StockCode'] . '" /></td>
+	</tr>
+	</table>
+	<br /><div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" /></div>';
 
 if (isset($SearchResult)) {
 
