@@ -9,6 +9,15 @@ echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/
 	. _('Search') . '" alt="" />' . $title.'</p>';
 
 if (isset($_POST['Create'])) {
+
+	$SalesAreaSQL = "SELECT areacode FROM areas";
+	$SalesAreaResult = DB_query($SalesAreaSQL, $db);
+	$SalesAreaRow = DB_fetch_array($SalesAreaResult);
+
+	$SalesManSQL = "SELECT salesmancode FROM salesman";
+	$SalesManResult = DB_query($SalesManSQLSQL, $db);
+	$SalesManRow = DB_fetch_array($SalesManResult);
+
 	$sql = "INSERT INTO debtorsmaster (debtorno,
 										name,
 										currcode,
@@ -19,7 +28,7 @@ if (isset($_POST['Create'])) {
 									VALUES (
 										'".$_POST['FileNumber']."',
 										'".$_POST['Name']."',
-										'TZS',
+										'".$_SESSION['CompanyRecord']['currencydefault']."',
 										'".$_POST['SalesType']."',
 										'".date('Y-m-d')."',
 										'1',
@@ -40,10 +49,10 @@ if (isset($_POST['Create'])) {
 									'CASH',
 									'".$_POST['FileNumber']."',
 									'CASH',
-									'MO',
-									'DE',
+									'".$SalesAreaRow['areacode'] . "',
+									'".$SalesManRow['salesmancode']."',
 									'".$_POST['Telephone']."',
-									'GP',
+									'".$_SESSION['DefaultFactoryLocation']."',
 									'1'
 								)";
 	$result=DB_query($sql, $db);
@@ -61,10 +70,10 @@ if (isset($_POST['Create'])) {
 									'".$_POST['Insurance']."',
 									'".$_POST['FileNumber']."',
 									'".$_POST['Insurance']."',
-									'MO',
-									'DE',
+									'".$SalesAreaRow['areacode'] . "',
+									'".$SalesManRow['salesmancode']."',
 									'".$_POST['Telephone']."',
-									'GP',
+									'".$_SESSION['DefaultFactoryLocation']."',
 									'1'
 								)";
 		$result=DB_query($sql, $db);
