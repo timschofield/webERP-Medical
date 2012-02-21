@@ -15,7 +15,7 @@ if (isset($_POST['Create'])) {
 	$SalesAreaRow = DB_fetch_array($SalesAreaResult);
 
 	$SalesManSQL = "SELECT salesmancode FROM salesman";
-	$SalesManResult = DB_query($SalesManSQLSQL, $db);
+	$SalesManResult = DB_query($SalesManSQL, $db);
 	$SalesManRow = DB_fetch_array($SalesManResult);
 
 	$sql = "INSERT INTO debtorsmaster (debtorno,
