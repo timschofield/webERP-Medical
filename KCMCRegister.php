@@ -78,8 +78,8 @@ if (isset($_POST['Create'])) {
 								)";
 		$result=DB_query($sql, $db);
 
-		prnMsg( _('The patient has been successfully registered'), 'success');
 	}
+	prnMsg( _('The patient has been successfully registered'), 'success');
 
 } else {
 
