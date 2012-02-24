@@ -648,20 +648,6 @@ if (isset($_POST['Patient'])) {
 	}
 
 	for ($i=0; $i<$_SESSION['Items']['Lines']; $i++) {
-/*		echo '<td><select name="StockID" onChange="ReloadForm(ChangeItem)">';
-		echo '<option value=""></option>';
-		while ($myrow=DB_fetch_array($result)) {
-			if ($myrow['stockid']==$_SESSION['Items'][$i]['StockID']) {
-				echo '<option selected value="'.$myrow['stockid'].'">'.$myrow['stockid']. ' - ' . $myrow['description'].'</option>';
-			} else {
-				echo '<option value="'.$myrow['stockid'].'">'.$myrow['stockid']. ' - ' . $myrow['description'].'</option>';
-			}
-		}
-		echo '</select>&nbsp;' . _('Quantity') . ' - ';
-		echo '&nbsp;' . $_SESSION['Items'][$i]['Quantity'];
-		echo '&nbsp;@&nbsp;'.number_format($_SESSION['Items'][$i]['Price'],0).' '.$_SESSION['CompanyRecord']['currencydefault'].'</td></tr>';
-		DB_data_seek($result,0);
-		echo '<tr><td>';*/
 		if (isset($_SESSION['Items'][$i])) {
 			while ($myrow=DB_fetch_array($result)) {
 				if ($myrow['stockid']==$_SESSION['Items'][$i]['StockID']) {
