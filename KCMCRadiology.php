@@ -14,6 +14,14 @@ if (isset($_GET['New']) or isset($_POST['Cancel'])) {
 	$_SESSION['Items']['Value']=0;
 }
 
+if (isset($_GET['Delete'])) {
+	$_SESSION['Items']['Value']-=$_SESSION['Items'][$_GET['Delete']]['Quantity']*$_SESSION['Items'][$_GET['Delete']]['Price'];
+	unset($_SESSION['Items'][$_GET['Delete']]);
+	$_POST['Patient'] = $_GET['Patient']. ' ' . $_GET['Branch'];
+	$Patient[0] = $_GET['Patient'];
+	$Patient[1] = $_GET['Branch'];
+}
+
 if (isset($_POST['ChangeItem'])) {
 	$sql="SELECT price
 				FROM prices
@@ -89,32 +97,34 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 		$InsertQryResult = DB_query($HeaderSQL,$db,$ErrMsg);
 
 		for ($i=0; $i<$_SESSION['Items']['Lines']; $i++) {
-			$LineItemSQL = "INSERT INTO salesorderdetails (orderlineno,
-													orderno,
-													stkcode,
-													unitprice,
-													quantity,
-													discountpercent,
-													narrative,
-													itemdue,
-													actualdispatchdate,
-													qtyinvoiced,
-													completed)
-												VALUES (
-													'" . $i . "',
-													'" . $OrderNo . "',
-													'" . $_SESSION['Items'][$i]['StockID'] . "',
-													'" . $_SESSION['Items'][$i]['Price'] . "',
-													'1',
-													'0',
-													'" . _('Sales order for radiology transaction') . "',
-													'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
-													'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
-													'1',
-													1
-												)";
-			$DbgMsg = _('Trouble inserting a line of a sales order. The SQL that failed was');
-			$Ins_LineItemResult = DB_query($LineItemSQL,$db,$ErrMsg,$DbgMsg,true);
+			if (isset($_SESSION['Items'][$i]['StockID'])) {
+				$LineItemSQL = "INSERT INTO salesorderdetails (orderlineno,
+																orderno,
+																stkcode,
+																unitprice,
+																quantity,
+																discountpercent,
+																narrative,
+																itemdue,
+																actualdispatchdate,
+																qtyinvoiced,
+																completed)
+															VALUES (
+																'" . $i . "',
+																'" . $OrderNo . "',
+																'" . $_SESSION['Items'][$i]['StockID'] . "',
+																'" . $_SESSION['Items'][$i]['Price'] . "',
+																'1',
+																'0',
+																'" . _('Sales order for radiology transaction') . "',
+																'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
+																'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
+																'1',
+																1
+															)";
+				$DbgMsg = _('Trouble inserting a line of a sales order. The SQL that failed was');
+				$Ins_LineItemResult = DB_query($LineItemSQL,$db,$ErrMsg,$DbgMsg,true);
+			}
 		}
 		$InvoiceNo = GetNextTransNo(10, $db);
 		$PeriodNo = GetPeriod($_POST['AdmissionDate'], $db);
@@ -161,7 +171,8 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 		$Result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 
 		for ($i=0; $i<$_SESSION['Items']['Lines']; $i++) {
-			$SQL = "INSERT INTO stockmoves (
+			if (isset($_SESSION['Items'][$i]['StockID'])) {
+				$SQL = "INSERT INTO stockmoves (
 						stockid,
 						type,
 						transno,
@@ -191,10 +202,11 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 						0
 					)";
 
-			$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Stock movement records for'). ' '. $_POST['StockID'] . ' ' .
-				_('could not be inserted because');
-			$DbgMsg = _('The following SQL to insert the stock movement records was used');
-			$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Stock movement records for'). ' '. $_POST['StockID'] . ' ' .
+					_('could not be inserted because');
+				$DbgMsg = _('The following SQL to insert the stock movement records was used');
+				$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+			}
 		}
 		$SQL="SELECT salestype
 				FROM debtorsmaster
@@ -520,18 +532,18 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 	$SQL.= ' ORDER BY debtorsmaster.name';
 	$ErrMsg = _('The searched patient records requested cannot be retrieved because');
 
-	$result = DB_query($SQL, $db, $ErrMsg);
-	if (DB_num_rows($result) == 0) {
+	$PatientResult = DB_query($SQL, $db, $ErrMsg);
+	if (DB_num_rows($PatientResult) == 0) {
 		prnMsg(_('No patient records contain the selected text') . ' - ' . _('please alter your search criteria and try again'), 'info');
 		echo '<br />';
 	}
 } //end of if search
 
-if (isset($result)) {
+if (isset($PatientResult)) {
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	unset($_SESSION['CustomerID']);
-	$ListCount = DB_num_rows($result);
+	$ListCount = DB_num_rows($PatientResult);
 	$ListPageMax = ceil($ListCount / $_SESSION['DisplayRecordsMax']);
 	if (isset($_POST['Next'])) {
 		if ($_POST['PageOffset'] < $ListPageMax) {
@@ -572,11 +584,11 @@ if (isset($result)) {
 	$j = 1;
 	$k = 0; //row counter to determine background colour
 	$RowIndex = 0;
-	if (DB_num_rows($result) <> 0) {
+	if (DB_num_rows($PatientResult) <> 0) {
 		if (!isset($_POST['CSV'])) {
-			DB_data_seek($result, ($_POST['PageOffset'] - 1) * $_SESSION['DisplayRecordsMax']);
+			DB_data_seek($PatientResult, ($_POST['PageOffset'] - 1) * $_SESSION['DisplayRecordsMax']);
 		}
-		while (($myrow = DB_fetch_array($result)) AND ($RowIndex <> $_SESSION['DisplayRecordsMax'])) {
+		while (($myrow = DB_fetch_array($PatientResult)) AND ($RowIndex <> $_SESSION['DisplayRecordsMax'])) {
 			if ($k == 1) {
 				echo '<tr class="EvenTableRows">';
 				$k = 0;
@@ -620,7 +632,7 @@ if (isset($_POST['Patient'])) {
 	echo '<input type="hidden" name="PatientNo" value="'.$Patient[0].'" />';
 	echo '<input type="hidden" name="BranchNo" value="'.$Patient[1].'" />';
 	echo '<table class="selection">';
-	echo '<tr><th colspan="2"><font size="3" color="navy">'._('Patient ID').' - '.$Patient[0].'</font></th></tr>';
+	echo '<tr><th colspan="4"><font size="3" color="navy">'._('Patient ID').' - '.$Patient[0].'</font></th></tr>';
 	echo '<tr><td>'._('Date of Admission').':</td>
 		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="AdmissionDate" maxlength="10" size="11" value="' .
 					 date($_SESSION['DefaultDateFormat']) . '" /></td></tr>';
@@ -640,18 +652,17 @@ if (isset($_POST['Patient'])) {
 	}
 
 	for ($i=0; $i<$_SESSION['Items']['Lines']; $i++) {
-		echo '<td><select name="StockID" onChange="ReloadForm(ChangeItem)">';
-		echo '<option value=""></option>';
-		while ($myrow=DB_fetch_array($result)) {
-			if ($myrow['stockid']==$_SESSION['Items'][$i]['StockID']) {
-				echo '<option selected value="'.$myrow['stockid'].'">'.$myrow['stockid']. ' - ' . $myrow['description'].'</option>';
-			} else {
-				echo '<option value="'.$myrow['stockid'].'">'.$myrow['stockid']. ' - ' . $myrow['description'].'</option>';
+		if (isset($_SESSION['Items'][$i])) {
+			while ($myrow=DB_fetch_array($result)) {
+				if ($myrow['stockid']==$_SESSION['Items'][$i]['StockID']) {
+					echo '<td>' . $myrow['description'] . '</td>';
+				}
 			}
+			echo '<td>&nbsp;@&nbsp;'.number_format($_SESSION['Items'][$i]['Price'],0).' '.$_SESSION['CompanyRecord']['currencydefault'].'</td>';
+			echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $i . '&Patient='.$Patient[0].'&Branch='.$Patient[1].'">' . _('Delete') . '</a></td></tr>';
+			DB_data_seek($result,0);
+			echo '<tr><td>';
 		}
-		echo '</select>&nbsp;@&nbsp;'.number_format($_SESSION['Items'][$i]['Price'],0).' '.$_SESSION['CompanyRecord']['currencydefault'].'</td></tr>';
-		DB_data_seek($result,0);
-		echo '<tr><td>';
 	}
 	echo '<td><select name="StockID" onChange="ReloadForm(ChangeItem)">';
 	echo '<option value=""></option>';
