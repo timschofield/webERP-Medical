@@ -100,7 +100,8 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 		$InsertQryResult = DB_query($HeaderSQL,$db,$ErrMsg);
 
 		for ($i=0; $i<$_SESSION['Items']['Lines']; $i++) {
-			$LineItemSQL = "INSERT INTO salesorderdetails (orderlineno,
+			if (isset($_SESSION['Items'][$i]['StockID'])) {
+				$LineItemSQL = "INSERT INTO salesorderdetails (orderlineno,
 													orderno,
 													stkcode,
 													unitprice,
@@ -124,8 +125,9 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 													'1',
 													1
 												)";
-			$DbgMsg = _('Trouble inserting a line of a sales order. The SQL that failed was');
-			$Ins_LineItemResult = DB_query($LineItemSQL,$db,$ErrMsg,$DbgMsg,true);
+				$DbgMsg = _('Trouble inserting a line of a sales order. The SQL that failed was');
+				$Ins_LineItemResult = DB_query($LineItemSQL,$db,$ErrMsg,$DbgMsg,true);
+			}
 		}
 		$InvoiceNo = GetNextTransNo(10, $db);
 		$PeriodNo = GetPeriod($_POST['AdmissionDate'], $db);
@@ -173,20 +175,21 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 
 		for ($i=0; $i<$_SESSION['Items']['Lines']; $i++) {
 		// Need to get the current location quantity will need it later for the stock movement
-			$SQL="SELECT locstock.quantity
-				FROM locstock
-				WHERE locstock.stockid='" . $_SESSION['Items'][$i]['StockID'] . "'
-				AND loccode= '" . $_SESSION['Items']['Dispensary'] . "'";
-			$Result = DB_query($SQL, $db);
-			if (DB_num_rows($Result)==1){
-				$LocQtyRow = DB_fetch_row($Result);
-				$QtyOnHandPrior = $LocQtyRow[0];
-			} else {
-				// There must actually be some error this should never happen
-				$QtyOnHandPrior = 0;
-			}
+			if (isset($_SESSION['Items'][$i]['StockID'])) {
+				$SQL="SELECT locstock.quantity
+					FROM locstock
+					WHERE locstock.stockid='" . $_SESSION['Items'][$i]['StockID'] . "'
+					AND loccode= '" . $_SESSION['Items']['Dispensary'] . "'";
+				$Result = DB_query($SQL, $db);
+				if (DB_num_rows($Result)==1){
+					$LocQtyRow = DB_fetch_row($Result);
+					$QtyOnHandPrior = $LocQtyRow[0];
+				} else {
+					// There must actually be some error this should never happen
+					$QtyOnHandPrior = 0;
+				}
 
-			$SQL = "INSERT INTO stockmoves (
+				$SQL = "INSERT INTO stockmoves (
 						stockid,
 						type,
 						transno,
@@ -216,14 +219,16 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 						'" . ($QtyOnHandPrior-$_SESSION['Items'][$i]['Quantity']) . "'
 					)";
 
-			$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Stock movement records for'). ' '. $_POST['StockID'] . ' ' .
-				_('could not be inserted because');
-			$DbgMsg = _('The following SQL to insert the stock movement records was used');
-			$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Stock movement records for'). ' '. $_POST['StockID'] . ' ' .
+					_('could not be inserted because');
+				$DbgMsg = _('The following SQL to insert the stock movement records was used');
+				$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
 
-			$SQL = "UPDATE locstock SET quantity = quantity + '" . -$_SESSION['Items'][$i]['Quantity'] . "'
+				$SQL = "UPDATE locstock SET quantity = quantity + '" . -$_SESSION['Items'][$i]['Quantity'] . "'
 					WHERE stockid='" . $_SESSION['Items'][$i]['StockID'] . "'
 					AND loccode='" . $_SESSION['Items']['Dispensary'] . "'";
+				$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+			}
 		}
 		$SQL="SELECT salestype
 				FROM debtorsmaster
