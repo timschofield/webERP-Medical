@@ -49,7 +49,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
 <?php
   }
 ?>
-          <font size="+3"><b>Inhaltsverzeichnis</b></font>
+          <h1>Inhaltsverzeichnis</h1>
           <br /><br />
           <ul>
             <li>
@@ -308,7 +308,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
                 <li>Bankangaben, Bankreferenz</li>
                 <li>Bankkontonummer</li>
                 <li>Lieferantenwährung</li>
-		<li>Zahlungsmitteilung</li>
+				<li>Zahlungsmitteilung</li>
               </ul>
               <br />
             </li>

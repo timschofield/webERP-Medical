@@ -1,7 +1,7 @@
 <br /><br />
-<a name="GettingStarted"><font size="+3"><b>Inbetriebnahme</b></font></a>
+<h1><a name="GettingStarted">Inbetriebnahme</a></h1>
 <br /><br />
-<font size="+2"><b>Voraussetzungen</b></font>
+<h2>Voraussetzungen</h2>
 <br /><br />
 <ul>
 <li>PHP größer als 4.2. Weil PHP als CGI-Modul für dem MS Internet Information Server oder als Modul für Apache sowohl unter Windows als auch Unix/Linux zur Verfügung steht, kann man das System als betriebssystemunabhängig bezeichnen. Das System wurde sowohl unter Windows (NT und XP) als auch unter Linux getestet.</li>
@@ -44,7 +44,7 @@ Angenommen, ein Webserver mit PHP-Funktion ist in Betrieb und ein MySQL-Server a
 <li>Einstellen der Systemparameter und</li>
 <li>Einstellen der Unternehmensangaben im System</li>
 </ul>
-<font size="+2"><b>Die PHP-Scripte kopieren</b></font>
+<h2>Die PHP-Scripte kopieren</h2>
 <br /><br />
 Alle Dateien des Archives werden in ein Verzeichnis unterhalb des Dokumenten-Wurzelverzeichnisses des Webservers entpackt. Dieses kann je nach Installation variieren:
 <br /><br />
@@ -54,7 +54,7 @@ ist das normale Apache-Rootverzeichnis  unter SuSE. Normalerweise ist das Apache
 <br /><br />
 Kopieren Sie das Archiv in dieses Verzeichnis und entpacken Sie dann das Archiv, das das weberp-Verzeichnis im Root-Verzeichnis anlegt und alle benötigten Dateien in diesem Verzeichnis ablegt.
 <br /><br />
-<font size="+2"><b>Die Datenbank anlegen</b></font>
+<h2>Die Datenbank anlegen</h2>
 <br /><br />
 Diese Information unterstellt, dass Sie einen MySQL-Datenbankserver verwenden. Es ist zwar eine SQL-Dump-Datei für Postgres ebenso enthalten, diese Anleitung bezieht sich aber auf das für MySQL Nötige.
 <br /><br />
@@ -115,7 +115,7 @@ shell&gt; mysql --user=weberp --password='some_pass' &lt; /path_to_the_sql_scrip
 <br /><br />
 wobei Sie den hier eingegebenen Benutzernamen weberp auf den Namen ändern, den Sie in MySQL angelegt haben und das Passwort, das hier mit 'ein_passwort' angegeben ist, durch das entsprechende Passwort für Ihren Benutzer ersetzen. Auch wird der pfad_zum_sql_skript durch etwas wie /usr/local/apache/htdocs/web-erp/sql/mysql/ ersetzt.
 <br /><br />
-<font size="+2"><b>Die Datei config.php bearbeiten</b></font>
+<h2>Die Datei config.php bearbeiten</h2>
 <br /><br />
 Die Datei config.php enthält eine Reihe von benutzerdefinierten Variablen, die festlegen, wie sich das System verhält. Kritisch ist, dass sie den Computernamen, Benutzernamen und Passwort der Datenbankverbindung enthält, die für die Verbindung mit dem Server erforderlich ist. Es gibt hier auch eine Option zu wählen, welche Art von Datenbankserver zu verwenden ist. Gegenwärtig gibt es hier nur die Optionen mysql und postgres. Es ist keine weitere Arbeit möglich, solange Sie nicht die Datei mit den Angaben versorgt haben.
 <br /><br />
@@ -219,7 +219,7 @@ end of config.php<br />
 ============================================<br />
 <br />
 <br /><br />
-<font size="+2"><b>Erstmalige Anmeldung</b></font>
+<h2>Erstmalige Anmeldung</h2>
 <br /><br />
 Öffnen Sie ein Browserfenster, das mit dem Netzwerk verbunden ist, in dem auch der Webserver verbunden ist, geben Sie die URL für das Serververzeichnis ein, in dem webERP installiert ist. Wenn der Browser auf dem selben Rechner geöffnet wird, auf dem auch der Webserver läuft, dann vielleicht:
 <br /><br />
@@ -235,11 +235,11 @@ Passwort 'weberp'
 <br /><br />
 Es ist wichtig, für den MySQL-Benutzer root ein Passwort einzustellen, ansonsten könnte jeder die Tabelle WWW_Users ändern und sich Zugriff auf die internen Unternehmensdaten verschaffen.
 <br /><br />
-<font size="+2"><b>Konfigurationssparameter</b></font>
+<h2>Konfigurationssparameter</h2>
 <br /><br />
 In den Versionen vor 3.0 wurden die Konfigurationsparameter direkt in die Datei config.php eingetragen, wodurch diese manuell gepflegt werden mussten. Seit Version 3.0 sind diese in der Datenbank gespeichert und es gibt ein Bild Systemkonfiguration, über welches die systemweiten Einstellungen gepflegt werden. Dies erlaubt Versionsänderungen, ohne dass jedes mal neu die config.php bearbeitet werden muss. Sie erreichen das Bild Systemeinstellungen im Hauptmenü unter Einstellungen &rarr; Allgemeines. Jede dieser Einstellungen sollte genau geprüft werden, Hinweise an der Seite beschreiben die Wirkungsweise jeder Variablen.
 <br /><br />
-<font size="+2"><b>Layouts und GUI-Anpassungen</b></font>
+<h2>Layouts und GUI-Anpassungen</h2>
 <br /><br />
 Oftmals spricht das optische Erscheinungsbild nicht jeden gleichermaßen an. Da es bei einer Rechnungswesen-Software zunächst einmal um die Funktionalität geht, spielt das Aussehen keine Rolle. Eine gewisse Flexibilität ist allerdings durch den Einsatz von Cascading-Style-Sheets (css) in Bezug auf Farbgestaltung und Schriftgrößen vorhanden.
 <br /><br />
@@ -252,7 +252,7 @@ Es können auch neue Layouts angelegt werden, zu diesem Zweck erstellt man zunäch
 
 <!-- Help Begin: WWW_Users -->
 
-<font size="+2"><b>Benutzer einrichten</b></font>
+<h2>Benutzer einrichten</h2>
 <br /><br />
 Sie haben sich als Benutzer demo angemeldet. Zunächst sollte ein neuer Benutzer angelegt werden, der die Berechtigungen eines Systemverwalters erhält, und der Benutzer demo sollte gelöscht werden. Vom Hauptmenü wählen Sie Einstellungen &rarr; Allgemeines den Punkt Benutzerstammsätze aus. Die angelegten Benutzer werden in einer Liste angezeigt. Anmeldenamen müssen mindestens 5 Zeichen lang sein, die Länge ist auf 20 Zeichen begrenzt. Das Passwort muss ebenfalls mindestens 5 Zeichen umfassen und darf den Anmeldenamen nicht enthalten. Die Erfassung des vollen Namens, der Telefonnummer und anderer Angaben ist nicht notwendig. Die ausgewählte Zugriffsebene ist wichtig, weil sie bestlegt, auf welche Bildschirme der Benuzter zugreifen darf. In jedem Unternehmen, das dem Benutzer nicht selbst gehört, ist es üblich, sind die Verantwortlichkeiten unter dem Personal aufgeteilt, so dass grundsätzlich keiner einen Gesamtprozess allein bearbeitet. Bei kleineren Unternehmen mag so etwas unpraktisch sein, webERP ist flexibel genug, dass die Benutzerberechtigungen fein eingestellt werden können. Weitere Informationen finden Sie im Abschnitt Sicherheitskonzept.
 <br /><br />
