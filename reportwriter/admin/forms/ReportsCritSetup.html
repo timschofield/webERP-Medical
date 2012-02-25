@@ -115,7 +115,7 @@
       <td><div align="center">
 	    <input name="Params" type="checkbox" value="1" /></div>
 	  </td>
-      <td align = "center">
+      <td align="center">
 	    <input name="todo" type="submit" value="<?php echo $GroupListings['defaults']['buttonvalue']; ?>" />
 	  </td>
       </form>
@@ -141,10 +141,10 @@
 				  <?php if ($FieldDetails['params']=='1') $selected=' checked'; else $selected=''; ?>
 				  <td align = "center"><input disabled type="checkbox"<?php echo $selected; ?> /></td>
 				  <td>
-					<input type=image name="up" value="up" src="../images/upicon.png" border="0" />
-					<input type=image name="dn" value="down" src="../images/downicon.png" border="0" />
-					<input type=image name="ed" value="edit" src="../images/editicon.png" border="0" />
-					<input type=image name="rm" value="delete" src="../images/delicon.png" border="0" onClick="return confirm('Delete this field?')" />
+					<input type="image" name="up" value="up" src="../images/upicon.png" />
+					<input type="image" name="dn" value="down" src="../images/downicon.png" />
+					<input type="image" name="ed" value="edit" src="../images/editicon.png" />
+					<input type="image" name="rm" value="delete" src="../images/delicon.png" onClick="return confirm('Delete this field?')" />
 				  </td>
 				  </form>
 			</tr>
@@ -184,7 +184,7 @@
       <td><div align="center">
         <input name="Params" type="checkbox" value="1" />
       </div></td>
-      <td align = "center">
+      <td align="center">
 	    <input name="todo" type="submit" value="<?php echo $SortListings['defaults']['buttonvalue']; ?>" />
 	  </td>
       </form>
@@ -204,16 +204,16 @@
 		  <input name="FieldName" type="hidden" value="<?php echo $FieldDetails['fieldname'] ?>" />
 		  <input name="DisplayDesc" type="hidden" value="<?php echo $FieldDetails['displaydesc'] ?>" />
 		  <input name="Params" type="hidden" value="<?php echo $FieldDetails['params'] ?>" />
-		  <td align = "center"><?php echo $FieldDetails['seqnum']; ?></td>
+		  <td align="center"><?php echo $FieldDetails['seqnum']; ?></td>
 		  <td><?php echo $FieldDetails['fieldname']; ?></td>
 		  <td><?php echo $FieldDetails['displaydesc']; ?></td>
 		  <?php if ($FieldDetails['params']=='1') $selected=' checked'; else $selected=''; ?>
-		  <td align = "center"><input disabled type="checkbox"<?php echo $selected; ?> /></td>
+		  <td align="center"><input disabled type="checkbox"<?php echo $selected; ?> /></td>
 		  <td>
-			<input type=image name="up" value="up" src="../images/upicon.png" border="0" />
-			<input type=image name="dn" value="down" src="../images/downicon.png" border="0" />
-			<input type=image name="ed" value="edit" src="../images/editicon.png" border="0" />
-			<input type=image name="rm" value="delete" src="../images/delicon.png" border="0" onClick="return confirm('Delete this field?')" />
+			<input type="image" name="up" value="up" src="../images/upicon.png" />
+			<input type="image" name="dn" value="down" src="../images/downicon.png" />
+			<input type="image" name="ed" value="edit" src="../images/editicon.png" />
+			<input type="image" name="rm" value="delete" src="../images/delicon.png" onClick="return confirm('Delete this field?')" />
 		  </td>
 		  </form>
 		</tr>
@@ -259,7 +259,7 @@
 			echo '<option value="'.$key.'"'.$selected.'>'.$value.'</option>';
 		} ?>
         </select></td>
-      <td align = "center">
+      <td align="center">
 	    <input name="todo" type="submit" value="<?php echo $CritListings['defaults']['buttonvalue']; ?>" />
 	  </td>
       </form>
@@ -279,15 +279,15 @@
 	  <input name="FieldName" type="hidden" value="<?php echo $FieldDetails['fieldname'] ?>" />
 	  <input name="DisplayDesc" type="hidden" value="<?php echo $FieldDetails['displaydesc'] ?>" />
 	  <input name="Params" type="hidden" value="<?php echo $FieldDetails['params'] ?>" />
-	  <td align = "center"><?php echo $FieldDetails['seqnum']; ?></td>
+	  <td align="center"><?php echo $FieldDetails['seqnum']; ?></td>
       <td><?php echo $FieldDetails['fieldname']; ?></td>
       <td><?php echo $FieldDetails['displaydesc']; ?></td>
-      <td align = "center"><?php echo substr($CritChoices[$FieldDetails['params']],2); ?></td>
+      <td align="center"><?php echo substr($CritChoices[$FieldDetails['params']],2); ?></td>
       <td>
-		<input type=image name="up" value="up" src="../images/upicon.png" border="0" />
-		<input type=image name="dn" value="down" src="../images/downicon.png" border="0" />
-		<input type=image name="ed" value="edit" src="../images/editicon.png" border="0" />
-		<input type=image name="rm" value="delete" src="../images/delicon.png" border="0" onClick="return confirm('Delete this field?')" />
+		<input type="image" name="up" value="up" src="../images/upicon.png" />
+		<input type="image" name="dn" value="down" src="../images/downicon.png" />
+		<input type="image" name="ed" value="edit" src="../images/editicon.png" />
+		<input type="image" name="rm" value="delete" src="../images/delicon.png" onClick="return confirm('Delete this field?')" />
 	  </td>
       </form>
 	</tr>

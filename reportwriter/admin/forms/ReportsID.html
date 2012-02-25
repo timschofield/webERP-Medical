@@ -4,7 +4,7 @@
   <input name="ReportID" type="hidden" value="<?php echo $ReportID; ?>" />
   <input name="Type" type="hidden" value="<?php echo $Type; ?>" />
   <input name="ReplaceReportID" type="hidden" value="<?php echo $ReplaceReportID; ?>" />
-  <table align="center"  border="1" cellspacing="1" cellpadding="1" />
+  <table align="center"  border="1" cellspacing="1" cellpadding="1">
    <tr>
      <td><?php if (isset($Type) and $Type=='frm') echo FRM_RPTENTER; else echo RPT_RPTENTER; ?></td>
      <td colspan="2">

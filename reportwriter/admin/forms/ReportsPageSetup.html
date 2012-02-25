@@ -24,9 +24,9 @@
         </select></td>
       <td colspan="2" width="50%"><?php echo RPT_ORIEN; ?>
 		<?php if ($myrow['paperorientation']=='P') $selected = ' checked'; else  $selected = ''; ?>
-        <label><input name="PaperOrientation" type="radio" value="P"<?php echo $selected ?> /><?php echo RPT_PORTRAIT; ?></label>
+        <label><input name="PaperOrientation" type="radio" value="P"<?php echo $selected; ?> /><?php echo RPT_PORTRAIT; ?></label>
 		<?php if ($myrow['paperorientation']=='L') $selected = ' checked'; else  $selected = ''; ?>
-        <label><input name="PaperOrientation" type="radio" value="L"<?php echo $selected ?> /><?php echo RPT_LANDSCAPE; ?></label></td>
+        <label><input name="PaperOrientation" type="radio" value="L"<?php echo $selected; ?> /><?php echo RPT_LANDSCAPE; ?></label></td>
     </tr>
     <tr bgcolor="#CCCCCC">
       <td colspan="6"><div align="center"><?php echo RPT_PGMARGIN; ?></div></td>
@@ -58,12 +58,11 @@
       <td align="center"><?php echo RPT_SIZE; ?></td>
       <td align="center"><?php echo RPT_COLOR; ?></td>
       <td align="center"><?php echo RPT_ALIGN; ?></td>
-	</td>
     </tr>
     <tr>
       <td colspan="3"><?php echo RPT_PGCOYNM; ?></td>
       <td><?php if ($myrow['coynameshow']=='1') $selected = ' checked'; else  $selected = ''; ?>
-		<input name="CoyNameShow" type="checkbox" id="CoyNameShow" value="1"<?php echo $selected ?> /></td>
+		<input name="CoyNameShow" type="checkbox" id="CoyNameShow" value="1"<?php echo $selected; ?> /></td>
       <td><select name="CoyNameFont" id="CoyNameFont">
 		<?php foreach($Fonts as $key => $value) {
 			if ($myrow['coynamefont']==$key) $selected = ' selected'; else  $selected = '';
@@ -84,13 +83,12 @@
 			if ($myrow['coynamealign']==$key) $selected = ' selected'; else  $selected = '';
 			echo '<option value="'.$key.'"'.$selected.'>'.$value.'</option>';
 		} ?> </select></td>
-	</td>
     </tr>
     <tr>
       <td colspan="3"><?php echo RPT_PGTITL1; ?>
         <input name="Title1Desc" type="text" id="Title1Desc" value="<?php echo $myrow['title1desc']; ?>" size="30" maxlength="50" /></td>
       <td><?php if ($myrow['title1show']=='1') $selected = ' checked'; else  $selected = ''; ?>
-        <input name="Title1Show" type="checkbox" id="Title1Show" value="1"<?php echo $selected ?> /></td>
+        <input name="Title1Show" type="checkbox" id="Title1Show" value="1"<?php echo $selected; ?> /></td>
       <td><select name="Title1Font" id="Title1Font">
 		<?php foreach($Fonts as $key => $value) {
 			if ($myrow['title1font']==$key) $selected = ' selected'; else  $selected = '';
@@ -116,7 +114,7 @@
       <td colspan="3"><?php echo RPT_PGTITL2; ?>
       <input name="Title2Desc" type="text" id="Title2Desc" value="<?php echo $myrow['title2desc']; ?>" size="30" maxlength="50" /></td>
       <td><?php if ($myrow['title2show']=='1') $selected = ' checked'; else  $selected = ''; ?>
-        <input name="Title2Show" type="checkbox" id="Title2Show" value="1"<?php echo $selected ?> /></td>
+        <input name="Title2Show" type="checkbox" id="Title2Show" value="1"<?php echo $selected; ?> /></td>
       <td><select name="Title2Font" id="Title2Font">
 		<?php foreach($Fonts as $key => $value) {
 			if ($myrow['title2font']==$key) $selected = ' selected'; else  $selected = '';

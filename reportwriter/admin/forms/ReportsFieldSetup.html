@@ -109,14 +109,14 @@ document.onmousedown = mouseSelect;
 	  <?php } // end if ?>
 		</td>
 	  <?php if ($Type<>'frm') { ?>
-	    <td>
-			<input type="text" name="FieldName" id="FieldName" value="<?php echo $FieldListings['defaults']['fieldname']; ?>" size="30" />
-			<image name="imgName" src="../images/pull_down_inactive.gif" height="20" width="19"
+	    <td style="padding-top:3px;">
+			<input style="float:left;" type="text" name="FieldName" id="FieldName" value="<?php echo $FieldListings['defaults']['fieldname']; ?>" size="30" />
+			<img name="imgName" src="../images/pull_down_inactive.gif" height="18" width="18"
 			onMouseOver="handleOver(); return true;" onMouseOut="handleOut(); return true;"
-			onclick="JavaScript:menuActivate('FieldName', 'combodiv', 'combosel')">
-			<div id="combodiv" style="position:absolute; display:none; top:0px; left:0px;z-index:10000" onmouseover="javascript:oOverMenu='combodiv';"
+			onclick="JavaScript:menuActivate('FieldName', 'combodiv', 'combosel');" />
+			<div id="combodiv" style="position:absolute; display:none;z-index:10000;" onmouseover="javascript:oOverMenu='combodiv';"
 			onmouseout="javascript:oOverMenu=false;">
-			<select size="10" id="combosel" style="width: 220; border-style: none" onclick="JavaScript:textSet('FieldName',this.value);"
+			<select size="10" id="combosel" style="width:auto; border-style:none;" onclick="JavaScript:textSet('FieldName',this.value);"
 			onkeypress="JavaScript:comboKey('FieldName', this);">
 			<?php echo CreateFieldList($ReportID, $FieldListings['defaults']['fieldname'],''); ?>
 			</select></div>
@@ -131,7 +131,7 @@ document.onmousedown = mouseSelect;
 	    echo '<input name="ColumnBreak" type="checkbox" value="1"'.$selected.' /></td>'; } ?>
       <td align="center">
 	  <?php if ($FieldListings['defaults']['visible']=='1') $selected = ' checked'; else  $selected = ''; ?>
-	  <input name="Visible" type="checkbox" value="1"<?php echo $selected ?> /></td>
+	  <input name="Visible" type="checkbox" value="1"<?php echo $selected; ?> /></td>
       <td>
 		<?php if ($Type=='frm') {
 			if ($FieldListings['defaults']['buttonvalue']==RPT_BTN_ADDNEW) {
@@ -192,10 +192,10 @@ document.onmousedown = mouseSelect;
 			echo $TotalLevels[$FieldDetails['params']];
 		} ?></td>
       <td>
-		<input type=image name="up" value="up" src="../images/upicon.png" border="0" />
-		<input type=image name="dn" value="down" src="../images/downicon.png" border="0" />
-		<input type=image name="ed" value="edit" src="../images/editicon.png" border="0" />
-		<input type=image name="rm" value="delete" src="../images/delicon.png" border="0" onClick="return confirm('Delete this field?')" />
+		<input type="image" name="up" value="up" src="../images/upicon.png" />
+		<input type="image" name="dn" value="down" src="../images/downicon.png" />
+		<input type="image" name="ed" value="edit" src="../images/editicon.png" />
+		<input type="image" name="rm" value="delete" src="../images/delicon.png" onClick="return confirm('Delete this field?')" />
 		<?php if ($Type=='frm') echo '<input name="todo" type="submit" value="'.RPT_BTN_PROP.'" />'; ?>
 	  </td>
     </form></tr>
