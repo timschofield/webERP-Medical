@@ -20,7 +20,7 @@
 body {
 	font-family: Arial, Verdana, Helvetica, sans-serif;
 	font-size: 10px;
-	background: #fff;
+	background: #FFFFFF;
 	margin-left: 0px;
 	margin-top: 0px;
 	margin-bottom: 0px;
@@ -49,7 +49,7 @@ a:hover {
 
 /* Table type is used for default tables*/
 table {
-  background: #eee;
+  background: #FFFFFF;
   border: 0px 0px 2px 2px #222 solid;
   margin: 0 auto;
 }
@@ -75,7 +75,7 @@ td.select {
 }
 
 table.selection {
-	background-color:#eee;
+	background-color:#D3E4EB;
 	outline-style:solid;
 	outline-width:1px;
 }
@@ -357,8 +357,8 @@ div.csv {
 	background: white;
 	border: none;
 	width: 100%;
-	margin: 0px;
-	padding: 0px;
+	margin: 1px;
+	padding: 1px;
 }
 
 .main_page {
@@ -386,7 +386,7 @@ div.csv {
 
 #quick_menu{
 	width: 100%;
-	background: #00f url(images/gelblue.png) 0px 0px repeat-x;
+	background: #00f 0px 0px repeat-x;
 	/*border-bottom: solid 2px #000;*/
 	height:28px;
 }
@@ -416,7 +416,7 @@ div.csv {
 }
 
 .quick_menu_tab{
-	background: #00f url(images/gelblue.png) 0px -2px repeat-x;
+	background: #00f 0px -2px repeat-x;
 	height:28px;
 	white-space: nowrap;
 	border-left: solid 0px #aaa;
@@ -448,7 +448,7 @@ div.csv {
 
 .quick_menu_tab:hover{
 	color:#ffd;
-	background: url(images/gelblueh.png) 0px -2px repeat-x;
+	background:  0px -2px repeat-x;
 }
 /*the Select Customer / Item / Supplier Menu tabs */
 .system_menu_tabs {
@@ -493,17 +493,18 @@ div.csv {
 }
 
 .main_menu_unselected {
-	background: #00f url(images/gelblue.png) 0px -1px repeat-x;
+	background: #00f 0px -1px repeat-x;
+	border: 1px solid #086DEA;
 	text-align: center;
 	white-space: nowrap;
-	height: 28px;
+	height: 16pt;
 }
 
 .main_menu_unselected:hover{
-	background: #00f url(images/gelblueh.png) 0px -1px repeat-x;
+	background: #04f;
 }
 .main_menu_selected:hover{
-	background: #00f url(images/gelblueh.png) 0px -1px repeat-x;
+	background: #009;
 }
 
 .main_menu_unselected a{
@@ -518,10 +519,11 @@ div.csv {
 }
 
 .main_menu_selected {
-	background: #00f url(images/gelblue.png) 0px -1px repeat-x;
-	/*border: 0px solid #888;*/
+	background: #0B0B3B 0px -1px repeat-x;
+	border: 1px solid #086DEA;
 	text-align: center;
 	white-space: nowrap;
+	height: 16pt;
 }
 
 .main_menu_selected a{
@@ -572,12 +574,12 @@ span.main_menu_nolink {
 }
 
 .menu_group_headers {
-  background: #aaa url(images/menu_bg_white.png) 0px 0px repeat-x;
+  background: #A8D1DF 0px 0px repeat-x;
   width: 25%;
 }
 
 .menu_group_headers table{
-  background: #aaa url(images/menu_bg_white.png) 0px -3px repeat-x;
+  background: #aaa 0px -3px repeat-x;
 }
 
 .menu_group_headers_text {
