@@ -97,7 +97,8 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 		$InsertQryResult = DB_query($HeaderSQL,$db,$ErrMsg);
 
 		for ($i=0; $i<$_SESSION['Items']['Lines']; $i++) {
-			$LineItemSQL = "INSERT INTO salesorderdetails (orderlineno,
+			if (isset($_SESSION['Items'][$i]['StockID'])) {
+				$LineItemSQL = "INSERT INTO salesorderdetails (orderlineno,
 													orderno,
 													stkcode,
 													unitprice,
@@ -121,8 +122,9 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 													'1',
 													1
 												)";
-			$DbgMsg = _('Trouble inserting a line of a sales order. The SQL that failed was');
-			$Ins_LineItemResult = DB_query($LineItemSQL,$db,$ErrMsg,$DbgMsg,true);
+				$DbgMsg = _('Trouble inserting a line of a sales order. The SQL that failed was');
+				$Ins_LineItemResult = DB_query($LineItemSQL,$db,$ErrMsg,$DbgMsg,true);
+			}
 		}
 		$InvoiceNo = GetNextTransNo(10, $db);
 		$PeriodNo = GetPeriod($_POST['AdmissionDate'], $db);
@@ -169,7 +171,8 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 		$Result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 
 		for ($i=0; $i<$_SESSION['Items']['Lines']; $i++) {
-			$SQL = "INSERT INTO stockmoves (
+			if (isset($_SESSION['Items'][$i]['StockID'])) {
+				$SQL = "INSERT INTO stockmoves (
 						stockid,
 						type,
 						transno,
@@ -199,10 +202,11 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 						0
 					)";
 
-			$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Stock movement records for'). ' '. $_POST['StockID'] . ' ' .
+				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Stock movement records for'). ' '. $_POST['StockID'] . ' ' .
 				_('could not be inserted because');
-			$DbgMsg = _('The following SQL to insert the stock movement records was used');
-			$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+				$DbgMsg = _('The following SQL to insert the stock movement records was used');
+				$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+			}
 		}
 		$SQL="SELECT salestype
 				FROM debtorsmaster
