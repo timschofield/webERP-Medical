@@ -171,7 +171,12 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 		$Result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 
 		for ($i=0; $i<$_SESSION['Items']['Lines']; $i++) {
-			if (isset($_SESSION['Items'][$i]['StockID'])) {
+			$SQL="SELECT mbflag
+				FROM stockmaster
+				WHERE stockid='".$_SESSION['Items'][$i]['StockID']."'";
+			$Result=DB_query($SQL, $db);
+			$myrow=DB_fetch_array($Result);
+			if (isset($_SESSION['Items'][$i]['StockID']) and $myrow['mbflag']!='D') {
 				$SQL = "INSERT INTO stockmoves (
 						stockid,
 						type,
@@ -214,7 +219,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 		$Result=DB_query($SQL, $db);
 		$myrow=DB_fetch_array($Result);
 		$SalesGLAccounts = GetSalesGLAccount('AN', $_SESSION['Items'][0]['StockID'], $myrow['salestype'], $db);
-		$SQL = "INSERT INTO gltrans (	type,
+		$SQL = "INSERT INTO gltrans (type,
 									typeno,
 									trandate,
 									periodno,
@@ -235,7 +240,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 		$DbgMsg = _('The following SQL to insert the GLTrans record was used');
 		$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
 
-		$SQL = "INSERT INTO gltrans (	type,
+		$SQL = "INSERT INTO gltrans (type,
 									typeno,
 									trandate,
 									periodno,
@@ -584,7 +589,7 @@ if (isset($PatientResult)) {
 	$j = 1;
 	$k = 0; //row counter to determine background colour
 	$RowIndex = 0;
-	if (DB_num_rows($result) <> 0) {
+	if (DB_num_rows($PatientResult) <> 0) {
 		if (!isset($_POST['CSV'])) {
 			DB_data_seek($result, ($_POST['PageOffset'] - 1) * $_SESSION['DisplayRecordsMax']);
 		}
