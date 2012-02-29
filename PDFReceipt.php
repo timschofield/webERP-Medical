@@ -27,6 +27,7 @@ $LeftOvers = $pdf->addTextWrap(0,$YPos-($line_height*7),300,$FontSize,$_SESSION[
 $LeftOvers = $pdf->addTextWrap(0,$YPos-($line_height*8),300,$FontSize,$_SESSION['CompanyRecord']['regoffice5']);
 $LeftOvers = $pdf->addTextWrap(0,$YPos-($line_height*9),300,$FontSize,$_SESSION['CompanyRecord']['regoffice6']);
 $LeftOvers = $pdf->addTextWrap(0,$YPos-($line_height*10),150,$FontSize, _('Customer Receipt Number ').'  : ' . $_GET['FromTransNo'] );
+$LeftOvers = $pdf->addTextWrap(0,$YPos-($line_height*11),150,$FontSize, _('Date ').'  : ' . date('l jS \of F Y h:i:s A') );
 $LeftOvers = $pdf->addTextWrap(0,$YPos-($line_height*12),140,$FontSize, _('Cashier').': ' . $_SESSION['UsersRealName'] );
 $NameYPos=$YPos-($line_height*13);
 $sql="SELECT MIN(id) as start FROM debtortrans WHERE type=10 AND transno='".$_GET['FromTransNo']. "'";
