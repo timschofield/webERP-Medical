@@ -805,7 +805,6 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 						FROM stockmaster,
 							stockcategory
 						WHERE stockmaster.categoryid=stockcategory.categoryid
-							AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 							AND stockmaster.mbflag <>'G'
 							AND stockmaster.description " . LIKE . " '$SearchString'
 							AND stockmaster.discontinued=0
@@ -818,7 +817,6 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 						FROM stockmaster,
 							stockcategory
 						WHERE  stockmaster.categoryid=stockcategory.categoryid
-							AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 							AND stockmaster.mbflag <>'G'
 							AND stockmaster.discontinued=0
 							AND stockmaster.description " . LIKE . " '" . $SearchString . "'
@@ -839,7 +837,6 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 						FROM stockmaster,
 							stockcategory
 						WHERE stockmaster.categoryid=stockcategory.categoryid
-							AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 							AND stockmaster.stockid " . LIKE . " '" . $SearchString . "'
 							AND stockmaster.mbflag <>'G'
 							AND stockmaster.discontinued=0
@@ -852,7 +849,6 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 						FROM stockmaster,
 							stockcategory
 						WHERE stockmaster.categoryid=stockcategory.categoryid
-							AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 							AND stockmaster.stockid " . LIKE . " '" . $SearchString . "'
 							AND stockmaster.mbflag <>'G'
 							AND stockmaster.discontinued=0
@@ -869,7 +865,6 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 						FROM stockmaster,
 							stockcategory
 						WHERE  stockmaster.categoryid=stockcategory.categoryid
-							AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 							AND stockmaster.mbflag <>'G'
 							AND stockmaster.discontinued=0
 						ORDER BY stockmaster.stockid";
@@ -881,7 +876,6 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 						FROM stockmaster,
 							stockcategory
 						WHERE stockmaster.categoryid=stockcategory.categoryid
-							AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 							AND stockmaster.mbflag <>'G'
 							AND stockmaster.discontinued=0
 							AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
@@ -1709,7 +1703,6 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		$SQL="SELECT categoryid,
 					categorydescription
 				FROM stockcategory
-				WHERE stocktype='F' OR stocktype='D'
 				ORDER BY categorydescription";
 
 		$result1 = DB_query($SQL,$db);
