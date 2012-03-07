@@ -515,7 +515,7 @@ if (!isset($DebtorNo)) {
 	}
 
 	$DateString = Date($_SESSION['DefaultDateFormat']);
-	echo '<tr><td>' . _('Customer Since') . ' (' . $_SESSION['DefaultDateFormat'] . '):</td>
+	echo '<tr><td>' . _('Date Of Birth') . ' (' . $_SESSION['DefaultDateFormat'] . '):</td>
 		<td><input tabindex="10" type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="ClientSince" value="' . $DateString . '" size="12" maxlength="10" /></td></tr>';
 	echo '<tr><td>' . _('Discount Percent') . ':</td>
 		<td><input tabindex="11" type="text" class="number" name="Discount" value="0" size="5" maxlength="4" /></td></tr>';
@@ -544,7 +544,7 @@ if (!isset($DebtorNo)) {
 
 		echo '</select></td></tr>';
 	}
-	echo '<tr><td>' . _('Credit Status') . ':</td><td><select tabindex="16" name="HoldReason">';
+	echo '<tr><td>' . _('Sex') . ':</td><td><select tabindex="16" name="HoldReason">';
 
 	$result=DB_query("SELECT reasoncode, reasondescription FROM holdreasons",$db);
 	if (DB_num_rows($result)==0){

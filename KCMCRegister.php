@@ -42,7 +42,7 @@ if (isset($_POST['Create'])) {
 										'".$_POST['Address6']."',
 										'".$_SESSION['CompanyRecord']['currencydefault']."',
 										'".$_POST['SalesType']."',
-										'".$_POST['DateOfBirth']."',
+										'".FormatDateForSQL($_POST['DateOfBirth'])."',
 										'".$_POST['Sex']."',
 										'20'
 									)";
