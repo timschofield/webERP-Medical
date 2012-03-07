@@ -20,6 +20,12 @@ if (isset($_POST['Create'])) {
 
 	$sql = "INSERT INTO debtorsmaster (debtorno,
 										name,
+										address1,
+										address2,
+										address3,
+										address4,
+										address5,
+										address6,
 										currcode,
 										salestype,
 										clientsince,
@@ -28,10 +34,16 @@ if (isset($_POST['Create'])) {
 									VALUES (
 										'".$_POST['FileNumber']."',
 										'".$_POST['Name']."',
+										'".$_POST['Address1']."',
+										'".$_POST['Address2']."',
+										'".$_POST['Address3']."',
+										'".$_POST['Address4']."',
+										'".$_POST['Address5']."',
+										'".$_POST['Address6']."',
 										'".$_SESSION['CompanyRecord']['currencydefault']."',
 										'".$_POST['SalesType']."',
-										'".date('Y-m-d')."',
-										'1',
+										'".$_POST['DateOfBirth']."',
+										'".$_POST['Sex']."',
 										'20'
 									)";
 
@@ -95,8 +107,19 @@ if (isset($_POST['Create'])) {
 	echo '<tr><td>'._('Name').':</td>';
 	echo '<td><input type="text" size="20" name="Name" value="" /></td></tr>';
 
+	echo '<tr><td>'._('Address').':</td>';
+	echo '<td><input type="text" size="20" name="Address1" value="" /></td></tr>';
+	echo '<td></td><td><input type="text" size="20" name="Address2" value="" /></td></tr>';
+	echo '<td></td><td><input type="text" size="20" name="Address3" value="" /></td></tr>';
+	echo '<td></td><td><input type="text" size="20" name="Address4" value="" /></td></tr>';
+	echo '<td></td><td><input type="text" size="20" name="Address5" value="" /></td></tr>';
+	echo '<td></td><td><input type="text" size="20" name="Address6" value="" /></td></tr>';
+
 	echo '<tr><td>'._('Telephone Number').':</td>';
 	echo '<td><input type="text" size="12" name="Telephone" value="" /></td></tr>';
+
+	echo '<tr><td>'._('Date Of Birth').':</td>';
+	echo '<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="DateOfBirth" maxlength="10" size="11" value="" /></td></tr>';
 
 	$result=DB_query("SELECT typeabbrev, sales_type FROM salestypes",$db);
 	if (DB_num_rows($result)==0){
@@ -114,6 +137,19 @@ if (isset($_POST['Create'])) {
 		DB_data_seek($result,0);
 		echo '</select></td></tr>';
 	}
+	$sql="SELECT reasoncode,
+				reasondescription
+				FROM holdreasons";
+	$result=DB_query($sql, $db);
+
+	echo '<tr><td>'._('Sex').':</td>';
+	echo '<td><select name="Sex">';
+	echo '<option value=""></option>';
+	while ($myrow=DB_fetch_array($result)) {
+		echo '<option value="'.$myrow['reasoncode'].'">'.$myrow['reasondescription'].'</option>';
+	}
+	echo '</select></td></tr>';
+
 	$sql="SELECT debtorno,
 				name
 				FROM debtorsmaster
