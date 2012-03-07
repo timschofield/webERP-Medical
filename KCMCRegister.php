@@ -2,6 +2,7 @@
 $PageSecurity=1;
 
 include('includes/session.inc');
+include('includes/SQL_CommonFunctions.inc');
 $title = _('Register a Patient');
 include('includes/header.inc');
 
@@ -17,6 +18,13 @@ if (isset($_POST['Create'])) {
 	$SalesManSQL = "SELECT salesmancode FROM salesman";
 	$SalesManResult = DB_query($SalesManSQL, $db);
 	$SalesManRow = DB_fetch_array($SalesManResult);
+
+	if ($_SESSION['AutoDebtorNo'] > 0) {
+		/* system assigned, sequential, numeric */
+		if ($_SESSION['AutoDebtorNo']== 1) {
+			$_POST['FileNumber'] = GetNextTransNo(500, $db);
+		}
+	}
 
 	$sql = "INSERT INTO debtorsmaster (debtorno,
 										name,
@@ -91,7 +99,7 @@ if (isset($_POST['Create'])) {
 		$result=DB_query($sql, $db);
 
 	}
-	prnMsg( _('The patient has been successfully registered'), 'success');
+	prnMsg( _('The patient') . ' ' . $_POST['FileNumber'] . ' ' . _('has been successfully registered'), 'success');
 
 } else {
 
@@ -101,8 +109,11 @@ if (isset($_POST['Create'])) {
 	echo '<table cellpadding=3 colspan=4 class=selection>';
 
 	echo '<tr><th colspan="2"><font size="3" color="navy">'._('New Patient Details') . '</font></th></tr>';
-	echo '<tr><td>'._('File Number').':</td>';
-	echo '<td><input type="text" size="10" name="FileNumber" value="" /></td></tr>';
+
+	if ($_SESSION['AutoDebtorNo'] == 0) {
+		echo '<tr><td>'._('File Number').':</td>';
+		echo '<td><input type="text" size="10" name="FileNumber" value="" /></td></tr>';
+	}
 
 	echo '<tr><td>'._('Name').':</td>';
 	echo '<td><input type="text" size="20" name="Name" value="" /></td></tr>';

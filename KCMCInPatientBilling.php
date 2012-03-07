@@ -21,6 +21,7 @@ if (isset($_GET['Delete'])) {
 	$Patient[0] = $_GET['Patient'];
 	$Patient[1] = $_GET['Branch'];
 }
+
 if (isset($_POST['ChangeItem'])) {
 	$sql="SELECT price
 				FROM prices
