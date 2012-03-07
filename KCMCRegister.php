@@ -119,7 +119,7 @@ if (isset($_POST['Create'])) {
 	echo '<td><input type="text" size="12" name="Telephone" value="" /></td></tr>';
 
 	echo '<tr><td>'._('Date Of Birth').':</td>';
-	echo '<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="DateOfBirth" maxlength="10" size="11" value="" /></td></tr>';
+	echo '<td><input type="text" placeholder="'.$_SESSION['DefaultDateFormat'].'" name="DateOfBirth" maxlength="10" size="11" value="" /></td></tr>';
 
 	$result=DB_query("SELECT typeabbrev, sales_type FROM salestypes",$db);
 	if (DB_num_rows($result)==0){
