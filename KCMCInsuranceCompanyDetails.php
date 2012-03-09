@@ -214,7 +214,7 @@ if (isset($_POST['submit'])) {
 			$ErrMsg = _('This company could not be added because');
 			$result = DB_query($sql,$db,$ErrMsg);
 
-			$BranchCode = substr($_POST['DebtorNo'],0,4);
+			$BranchCode = $_POST['DebtorNo'];
 
 			$sql = "INSERT INTO custbranch (
 							branchcode,
