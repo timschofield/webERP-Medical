@@ -496,7 +496,6 @@ $MenuItems['system']['Reports']['Caption'] = array (_('Sales Types'),
 													_('Payment Terms'),
 													_('Set Purchase Order Authorisation levels'),
 													_('Payment Methods'),
-													_('Sales People'),
 													_('Sales Areas'),
 													_('Shippers'),
 													_('Sales GL Interface Postings'),
@@ -512,7 +511,6 @@ $MenuItems['system']['Reports']['URL'] = array ('/SalesTypes.php',
 												'/PaymentTerms.php',
 												'/PO_AuthorisationLevels.php',
 												'/PaymentMethods.php',
-												'/SalesPeople.php',
 												'/Areas.php',
 												'/Shippers.php',
 												'/SalesGLPostings.php',
@@ -528,6 +526,7 @@ $MenuItems['system']['Maintenance']['Caption'] = array (_('Inventory Categories 
 														_('MRP Available Production Days'),
 														_('MRP Demand Types'),
 														_('Create and Manage Database Backups'),
+														_('Patient Employer Companies'),
 														_('Maintain Internal Departments')
 														);
 
@@ -538,6 +537,7 @@ $MenuItems['system']['Maintenance']['URL'] = array ('/StockCategories.php',
 													'/MRPCalendar.php',
 													'/MRPDemandTypes.php',
 													'/BackupDatabase.php',
+													'/SalesPeople.php',
 													'/Departments.php'
 													);
 ?>
