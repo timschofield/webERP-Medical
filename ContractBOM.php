@@ -336,7 +336,7 @@ if (!isset($_GET['Edit'])) {
 
 if (isset($SearchResult)) {
 
-	echo '<table cellpadding="1" colspan="7">';
+	echo '<table cellpadding="1">';
 
 	$TableHeader = '<tr>
 					<th>' . _('Code')  . '</th>

@@ -33,8 +33,8 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/s
 $sql = "SELECT secroleid, secrolename FROM securityroles WHERE secrolename = 'Supplier Log On Only'";
 $Sec_Result = DB_query($sql, $db);
 // Now load it into an aray using Key/Value pairs
-while( $Sec_row = DB_fetch_row($Sec_Result) ) {
-	$SecurityRoles[$Sec_row[0]] = $Sec_row[1];
+while( $Sec_row = DB_fetch_array($Sec_Result) ) {
+	$SecurityRoles[$Sec_row['secroleid']] = $Sec_row['secrolename'];
 }
 DB_free_result($Sec_Result);
 

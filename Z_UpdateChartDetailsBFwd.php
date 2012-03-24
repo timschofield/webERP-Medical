@@ -38,11 +38,11 @@ if (!isset($_POST['FromPeriod']) OR !isset($_POST['ToPeriod'])){
 
 	echo '</select></td></tr>';
 
-	$sql = "SELECT MAX(periodno) FROM periods";
+	$sql = "SELECT MAX(periodno) AS maxperiodno FROM periods";
 	$MaxPrd = DB_query($sql,$db);
-	$MaxPrdrow = DB_fetch_row($MaxPrd);
+	$MaxPrdrow = DB_fetch_array($MaxPrd);
 
-	$DefaultToPeriod = (int) ($MaxPrdrow[0]-1);
+	$DefaultToPeriod = (int) ($MaxPrdrow['maxperiodno']-1);
 
 	echo '<tr><td>' . _('Select Period To') . ':</td><td><select name="ToPeriod">';
 

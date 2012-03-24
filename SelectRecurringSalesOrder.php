@@ -71,7 +71,7 @@ if (isset($_POST['SearchRecurringOrders'])){
 
 	/*show a table of the orders returned by the SQL */
 
-	echo '<br /><table cellpadding="2" colspan="7" width="90%" class="selection">';
+	echo '<br /><table cellpadding="2" width="90%" class="selection">';
 
 	$tableheader = '<tr>
 			<th>' . _('Modify') . '</th>

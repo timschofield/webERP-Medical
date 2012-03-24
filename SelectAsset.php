@@ -236,7 +236,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 
 			echo '<br /></div>';
 		}
-		echo '<table cellpadding="2" colspan="7" class="selection">';
+		echo '<table cellpadding="2" class="selection">';
 		$tableheader = '<tr>
 					<th>' . _('Asset Code') . '</th>
 					<th>' . _('Description') . '</th>

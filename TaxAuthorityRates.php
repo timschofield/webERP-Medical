@@ -50,7 +50,7 @@ if (isset($_POST['UpdateRates'])){
 */
 
 $TaxAuthDetail = DB_query("SELECT description FROM taxauthorities WHERE taxid='" . $TaxAuthority . "'",$db);
-$myrow = DB_fetch_row($TaxAuthDetail);
+$myrow = DB_fetch_array($TaxAuthDetail);
 
 echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -76,7 +76,7 @@ $TaxRatesResult = DB_query("SELECT taxauthrates.taxcatid,
 if (DB_num_rows($TaxRatesResult)>0){
 
 	echo '<table cellpadding="2" class="selection">';
-	echo '<tr><th colspan="3"><font size="3" color="#616161">' . _('Update') . ' ' . $myrow[0] . ' ' . _('Rates') . '</font></th></tr>';
+	echo '<tr><th colspan="3"><font size="3" color="#616161">' . _('Update') . ' ' . $myrow['description'] . ' ' . _('Rates') . '</font></th></tr>';
 	$TableHeader = '<tr><th>' . _('Deliveries From') . '<br />' . _('Tax Province') . '</th>
 						<th>' . _('Tax Category') . '</th>
 						<th>' . _('Tax Rate') . ' %</th></tr>';

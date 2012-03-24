@@ -61,15 +61,16 @@ if (isset($_POST['CheckCode'])) {
 
 	if (strlen($_POST['StockText'])>0) {
 		$sql="SELECT stockid, description from stockmaster where description like '%".$_POST['StockText']."%'";
+
 	} else {
-		$sql="SELECT stockid, description from stockmaster where stockid like '%".$_POST['StockCode']."%'";
+		$sql="SELECT stockid, description FROM stockmaster WHERE stockid LIKE '%".$_POST['StockCode']."%'";
 	}
 	$ErrMsg=_('The stock information cannot be retrieved because');
 	$DbgMsg=_('The SQL to get the stock description was');
 	$result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 	echo '<table class="selection"><tr><th>'._('Stock Code').'</th><th>'._('Stock Description').'</th></tr>';
-	while ($myrow = DB_fetch_row($result)) {
-		echo '<tr><td>'.$myrow[0].'</td><td>'.$myrow[1].'</td><td><a href="StockAdjustments.php?StockID='.$myrow[0].'&Description='.$myrow[1].'">'._('Adjust').'</a></tr>';
+	while ($myrow = DB_fetch_array($result)) {
+		echo '<tr><td>'.$myrow['stockid'].'</td><td>'.$myrow['description'].'</td><td><a href="StockAdjustments.php?StockID='.$myrow['stockid'].'&Description='.$myrow['description'].'">'._('Adjust').'</a></tr>';
 	}
 	echo '</table>';
 	include('includes/footer.inc');
@@ -123,8 +124,8 @@ if (isset($_POST['EnterAdjustment']) and $_POST['EnterAdjustment']!= ''){
 			AND loccode= '" . $_SESSION['Adjustment']->StockLocation . "'";
 		$Result = DB_query($SQL, $db);
 		if (DB_num_rows($Result)==1){
-			$LocQtyRow = DB_fetch_row($Result);
-			$QtyOnHandPrior = $LocQtyRow[0];
+			$LocQtyRow = DB_fetch_array($Result);
+			$QtyOnHandPrior = $LocQtyRow['quantity'];
 		} else {
 			// There must actually be some error this should never happen
 			$QtyOnHandPrior = 0;
@@ -169,7 +170,7 @@ if (isset($_POST['EnterAdjustment']) and $_POST['EnterAdjustment']!= ''){
 			The StockSerialMoves as well */
 
 				/*First need to check if the serial items already exists or not */
-				$SQL = "SELECT COUNT(*)
+				$SQL = "SELECT stockid
 					FROM stockserialitems
 					WHERE
 					stockid='" . $_SESSION['Adjustment']->StockID . "'
@@ -177,9 +178,8 @@ if (isset($_POST['EnterAdjustment']) and $_POST['EnterAdjustment']!= ''){
 					AND serialno='" . $Item->BundleRef . "'";
 				$ErrMsg = _('Unable to determine if the serial item exists');
 				$Result = DB_query($SQL,$db,$ErrMsg);
-				$SerialItemExistsRow = DB_fetch_row($Result);
 
-				if ($SerialItemExistsRow[0]==1){
+				if (DB_num_rows($Result)==1){
 
 					$SQL = "UPDATE stockserialitems SET
 						quantity= quantity + " . $Item->BundleQty . "

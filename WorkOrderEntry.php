@@ -217,12 +217,12 @@ if (isset($NewItem) AND isset($_POST['WO'])){
 									WHERE bom.parent='" . $NewItem . "'
 									AND bom.loccode='" . $_POST['StockLocation'] . "'",
 							 $db);
-			$CostRow = DB_fetch_row($CostResult);
-		if (is_null($CostRow[0]) OR $CostRow[0]==0){
+		$CostRow = DB_fetch_array($CostResult);
+		if (is_null($CostRow['cost']) OR $CostRow['cost']==0){
 				$Cost =0;
 				prnMsg(_('The cost of this item as accumulated from the sum of the component costs is nil. This could be because there is no bill of material set up ... you may wish to double check this'),'warn');
 		} else {
-				$Cost = $CostRow[0];
+				$Cost = $CostRow['cost'];
 		}
 		if (!isset($EOQ)){
 			$EOQ=1;
@@ -311,12 +311,12 @@ if (isset($_POST['submit'])) { //The update button has been clicked
 											WHERE bom.parent='" . $_POST['OutputItem'.$i] . "'
 											AND bom.loccode='" . $_POST['StockLocation'] . "'",
 									 $db);
-				$CostRow = DB_fetch_row($CostResult);
-				if (is_null($CostRow[0])){
+				$CostRow = DB_fetch_array($CostResult);
+				if (is_null($CostRow['cost'])){
 					$Cost =0;
 					prnMsg(_('The cost of this item as accumulated from the sum of the component costs is nil. This could be because there is no bill of material set up ... you may wish to double check this'),'warn');
 				} else {
-					$Cost = $CostRow[0];
+					$Cost = $CostRow['cost'];
 				}
 				$sql[] = "UPDATE woitems SET qtyreqd =  '". $_POST['OutputQty' . $i] . "',
 												 nextlotsnref = '". $_POST['NextLotSNRef'.$i] ."',
@@ -518,9 +518,9 @@ if (isset($NumberOfOutputs)){
 			$_POST['OutputItem' . $i] . ' - ' . $_POST['OutputItemDesc' .$i] . '</td>';
 		if ($_POST['Controlled'.$i]==1 AND $_SESSION['DefineControlledOnWOEntry']==1){
 			echo '<td class="number">' . locale_number_format($_POST['OutputQty' . $i], $_POST['DecimalPlaces' . $i]) . '</td>';
-			echo '<input type="hidden" name="OutputQty' . $i .'" value="' . locale_number_format($_POST['OutputQty' . $i], $_POST['DecimalPlaces' . $i]) . '" />';
+			echo '<input type="hidden" name="OutputQty' . $i .'" value="' . locale_number_format($_POST['OutputQty' . $i]-$_POST['RecdQty' .$i], $_POST['DecimalPlaces' . $i]) . '" />';
 		} else {
-		  	echo'<td><input type="text" class="number" name="OutputQty' . $i . '" value="' . locale_number_format($_POST['OutputQty' . $i], $_POST['DecimalPlaces' . $i]) . '" size="10" maxlength="10" /></td>';
+		  	echo'<td><input type="text" class="number" name="OutputQty' . $i . '" value="' . locale_number_format($_POST['OutputQty' . $i]-$_POST['RecdQty' .$i], $_POST['DecimalPlaces' . $i]) . '" size="10" maxlength="10" /></td>';
 		}
 		 echo '<td class="number"><input type="hidden" name="RecdQty' . $i . '" value="' . locale_number_format($_POST['RecdQty' .$i], $_POST['DecimalPlaces' . $i]) . '" />' . locale_number_format($_POST['RecdQty' .$i], $_POST['DecimalPlaces' . $i]) .'</td>
 		  		<td class="number">' . locale_number_format(($_POST['OutputQty' . $i] - $_POST['RecdQty' .$i]), $_POST['DecimalPlaces' . $i]) . '</td>';
@@ -557,7 +557,7 @@ echo '<div class="centre"><br /><input type="submit" name="submit" value="' . _(
 
 echo '<br /><input type="submit" name="delete" value="' . _('Delete This Work Order') . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');" />';
 
-echo '<br /></div>';
+echo '</div><br />';
 
 $SQL="SELECT categoryid,
 			categorydescription
@@ -583,28 +583,30 @@ while ($myrow1 = DB_fetch_array($result1)) {
 		echo '<option value='. $myrow1['categoryid'] . '>' . $myrow1['categorydescription'] . '</option>';
 	}
 }
-?>
 
-</select>
-<td><?php echo _('Enter text extracts in the'); ?> <b><?php echo _('description'); ?></b>:</td>
+if (!isset($_POST['Keywords'])) {
+    $_POST['Keywords']='';
+}
 
-<td><input type="text" name="Keywords" size="20" maxlength="25" value="<?php if (isset($_POST['Keywords'])) echo $_POST['Keywords']; ?>" /></td></tr>
-<tr><td></td>
-		<td><font size="3"><b><?php echo _('OR'); ?> </b></font><?php echo _('Enter extract of the'); ?> <b><?php echo _('Stock Code'); ?></b>:</td>
-		<td><input type="text" name="StockCode" size="15" maxlength="18" value="<?php if (isset($_POST['StockCode'])) echo $_POST['StockCode']; ?>" /></td>
-		</tr>
-		</table>
-		<br /><div class="centre"><input type="submit" name="Search" value=" <?php echo _('Search Now'); ?>" />
+if (!isset($_POST['StockCode'])) {
+    $_POST['StockCode']='';
+}
 
-<?php
-
-echo '</div>';
+echo '</select>
+    <td>' . _('Enter text extracts in the') . ' <b>' . _('description') . '</b>:</td>
+    <td><input type="text" name="Keywords" size="20" maxlength="25" value="' . $_POST['Keywords'] . '" /></td></tr>
+    <tr><td>&nbsp;</td>
+	<td><font size="3"><b>' . _('OR') . ' </b></font>' . _('Enter extract of the') . ' <b>' . _('Stock Code') . '</b>:</td>
+	<td><input type="text" name="StockCode" size="15" maxlength="18" value="' . $_POST['StockCode'] . '" /></td>
+	</tr>
+	</table>
+	<br /><div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" /></div>';
 
 if (isset($SearchResult)) {
 
 	if (DB_num_rows($SearchResult)>1){
 
-		echo '<table cellpadding="2" colspan="7" class="selection">';
+		echo '<table cellpadding="2" class="selection">';
 		$TableHeader = '<tr><th>' . _('Code') . '</th>
 				   			<th>' . _('Description') . '</th>
 				   			<th>' . _('Units') . '</th></tr>';

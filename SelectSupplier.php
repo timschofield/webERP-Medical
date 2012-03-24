@@ -123,8 +123,8 @@ if (isset($_POST['Search']) OR isset($_POST['Go']) OR isset($_POST['Next']) OR i
 	} //one of keywords or SupplierCode was more than a zero length string
 	$result = DB_query($SQL, $db);
 	if (DB_num_rows($result) == 1) {
-		$myrow = DB_fetch_row($result);
-		$SingleSupplierReturned = $myrow[0];
+		$myrow = DB_fetch_array($result);
+		$SingleSupplierReturned = $myrow['supplierid'];
 	}
 } //end of if search
 if (isset($SingleSupplierReturned)) { /*there was only one supplier returned */
@@ -139,13 +139,13 @@ if (isset($_SESSION['SupplierID'])) {
 		WHERE suppliers.supplierid='" . htmlspecialchars_decode(html_entity_decode(stripslashes($_SESSION['SupplierID']))) . "'";
 	$SupplierNameResult = DB_query($SQL, $db);
 	if (DB_num_rows($SupplierNameResult) == 1) {
-		$myrow = DB_fetch_row($SupplierNameResult);
-		$SupplierName = $myrow[0];
+		$myrow = DB_fetch_array($SupplierNameResult);
+		$SupplierName = $myrow['suppname'];
 	}
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/supplier.png" title="' . _('Supplier') . '" alt="" />' . ' ' . _('Supplier') . ' : <b>' . stripslashes($_SESSION['SupplierID']) .
 				' - ' . $SupplierName . '</b> ' . _('has been selected') . '.</p>';
 	echo '<div class="page_help_text">' . _('Select a menu option to operate using this supplier.') . '</div>';
-	echo '<br /><table width=90% colspan="2" cellpadding="4">';
+	echo '<br /><table width=90% cellpadding="4">';
 	echo '<tr>
 		<th width="33%">' . _('Supplier Inquiries') . '</th>
 		<th width="33%">' . _('Supplier Transactions') . '</th>
@@ -178,7 +178,7 @@ if (isset($_SESSION['SupplierID'])) {
 } else {
 	// Supplier is not selected yet
 	echo '<br />';
-	echo '<table width="90%" colspan="2" cellpadding="4">';
+	echo '<table width="90%" cellpadding="4">';
 	echo '<tr>
 		<th width="33%">' . _('Supplier Inquiries') . '</th>
 		<th width="33%">' . _('Supplier Transactions') . '</th>
@@ -193,7 +193,7 @@ if (isset($_SESSION['SupplierID'])) {
 echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') .  '" alt="" />' . ' ' . _('Search for Suppliers') . '</p>
-		<table cellpadding="3" colspan="4" class="selection"><tr><td>' . _('Enter a partial Name') . ':</font></td><td>';
+		<table cellpadding="3" class="selection"><tr><td>' . _('Enter a partial Name') . ':</font></td><td>';
 if (isset($_POST['Keywords'])) {
 	echo '<input type="text" name="Keywords" value="' . $_POST['Keywords'] . '" size="20" maxlength="25" />';
 } else {
@@ -240,7 +240,7 @@ if (isset($_POST['Search'])) {
 	}
 	echo '<input type="hidden" name="Search" value="' . _('Search Now') . '" />';
 	echo '<br /><br />';
-	echo '<br /><table cellpadding="2" colspan="7">';
+	echo '<br /><table cellpadding="2">';
 	$tableheader = '<tr>
   		<th>' . _('Code') . '</th>
 		<th>' . _('Supplier Name') . '</th>
@@ -308,7 +308,7 @@ if (isset($_SESSION['SupplierID']) and $_SESSION['SupplierID'] != '') {
 		} else {
 			echo '<div class="centre"><br />';
 			echo '<tr><td colspan="2">';
-			echo '<table width="45%" colspan="2" border="2" cellpadding="4">';
+			echo '<table width="45%" border="2" cellpadding="4">';
 			echo '<tr><th width="33%">' . _('Supplier Mapping') . '</th></tr>';
 			echo '</td><td valign="top">'; /* Mapping */
 			echo '<div class="centre">' . _('Mapping is enabled, Map will display below.') . '</div>';
@@ -335,7 +335,7 @@ if (isset($_SESSION['SupplierID']) and $_SESSION['SupplierID'] != '') {
 			$row = DB_fetch_array($Total1Result);
 			echo '<br />';
 			echo '<tr><td colspan="2">';
-			echo '<table width="45%" colspan="2" cellpadding="4">';
+			echo '<table width="45%" cellpadding="4">';
 			echo '<tr><th width="33%" colspan="2">' . _('Supplier Data') . '</th></tr>';
 			echo '<tr><td valign="top" class="select">'; /* Supplier Data */
 			//echo "Distance to this Supplier: <b>TBA</b><br />";

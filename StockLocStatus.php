@@ -18,8 +18,8 @@ echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 $sql = "SELECT loccode,
-		locationname
-	FROM locations";
+				locationname
+			FROM locations";
 $resultStkLocs = DB_query($sql,$db);
 
 echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>';
@@ -170,8 +170,8 @@ if (isset($_POST['ShowStatus'])){
 		$DemandResult = DB_query($sql,$db,$ErrMsg);
 
 		if (DB_num_rows($DemandResult)==1){
-			$DemandRow = DB_fetch_row($DemandResult);
-			$DemandQty =  $DemandRow[0];
+			$DemandRow = DB_fetch_array($DemandResult);
+			$DemandQty =  $DemandRow['dem'];
 		} else {
 			$DemandQty =0;
 		}
@@ -194,8 +194,8 @@ if (isset($_POST['ShowStatus'])){
 		$DemandResult = DB_query($sql,$db, $ErrMsg);
 
 		if (DB_num_rows($DemandResult)==1){
-			$DemandRow = DB_fetch_row($DemandResult);
-			$DemandQty += $DemandRow[0];
+			$DemandRow = DB_fetch_array($DemandResult);
+			$DemandQty += $DemandRow['dem'];
 		}
 		$sql = "SELECT SUM((woitems.qtyreqd-woitems.qtyrecd)*bom.quantity) AS dem
 			FROM workorders, woitems, bom
@@ -207,8 +207,8 @@ if (isset($_POST['ShowStatus'])){
 		$DemandResult = DB_query($sql,$db, $ErrMsg);
 
 		if (DB_num_rows($DemandResult)==1){
-			$DemandRow = DB_fetch_row($DemandResult);
-			$DemandQty += $DemandRow[0];
+			$DemandRow = DB_fetch_array($DemandResult);
+			$DemandQty += $DemandRow['dem'];
 		}
 
 
@@ -230,8 +230,8 @@ if (isset($_POST['ShowStatus'])){
 		$QOOResult = DB_query($sql,$db,$ErrMsg);
 
 		if (DB_num_rows($QOOResult)==1){
-			$QOORow = DB_fetch_row($QOOResult);
-			$QOO =  $QOORow[0];
+			$QOORow = DB_fetch_array($QOOResult);
+			$QOO =  $QOORow['qoo'];
 		} else {
 			$QOOQty = 0;
 		}

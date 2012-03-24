@@ -731,7 +731,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 //			echo '<input type="hidden" name=Search value="Search" />';
 			echo '<br /></div>';
 		}
-		echo '<table cellpadding="2" colspan="7">';
+		echo '<table cellpadding="2">';
 		$tableheader = '<tr>
 					<th>' . _('Code') . '</th>
 					<th>' . _('Description') . '</th>

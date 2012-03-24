@@ -265,7 +265,7 @@ if (!isset($_POST['ProcessCredit'])) {
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 
-	echo '<table cellpadding="2" colspan="7" class="selection"><tr>';
+	echo '<table cellpadding="2" class="selection"><tr>';
 	echo '<tr><th colspan="13">';
 	echo '<div class="centre"><font color="blue" size="4"><b>' . _('Credit Invoice') . ' ' . $_SESSION['ProcessingCredit'] . '</b>
 		<b>'.' - ' . $_SESSION['CreditItems']->CustomerName . '</b></font>

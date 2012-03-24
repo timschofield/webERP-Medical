@@ -251,7 +251,7 @@ if (strlen($msg)>1){
    prnMsg($msg, 'info');
 }
 echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Search for Customers').'</p>';
-echo '<table cellpadding="3" colspan="4" class="selection">';
+echo '<table cellpadding="3" class="selection">';
 echo '<tr><td colspan="2">' . _('Enter a partial Name') . ':</td><td>';
 if (isset($_POST['Keywords'])) {
 	echo '<input type="text" name="Keywords" value="' . $_POST['Keywords'] . '" size="20" maxlength="25" />';
@@ -384,7 +384,7 @@ if (isset($result)) {
 				<input type="submit" name="Next" value="' . _('Next') . '" />';
 			echo '</div>';
 		}
-		echo '<br /><table cellpadding="2" colspan="7" class="selection">';
+		echo '<br /><table cellpadding="2" class="selection">';
 		$TableHeader = '<tr>
 				<th>' . _('Code') . '</th>
 				<th>' . _('Customer Name') . '</th>
@@ -470,7 +470,7 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 			echo '<div class="centre">' . _('Mapping is enabled, but no Mapping data to display for this Customer.') . '</div>';
 		} else {
 			echo '<tr><td colspan="2">';
-			echo '<table width="45%" colspan="2" cellpadding="4">';
+			echo '<table width="45%" cellpadding="4">';
 			echo '<tr><th width="33%">' . _('Customer Mapping') . '</th></tr>';
 			echo '</td><td valign="top">'; /* Mapping */
 			echo '<div class="centre">' . _('Mapping is enabled, Map will display below.') . '</div>';
@@ -506,7 +506,7 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 			$Total1Result = DB_query($SQL, $db);
 			$row = DB_fetch_array($Total1Result);
 			echo '<tr><td colspan="2">';
-			echo '<table width="45%" colspan="2" cellpadding="4" class="selection">';
+			echo '<table width="45%" cellpadding="4" class="selection">';
 			echo '<tr><th width="33%" colspan="3">' . _('Customer Data') . '</th></tr>';
 			echo '<tr><td valign="top" class="select">'; /* Customer Data */
 			//echo _('Distance to this customer:') . '<b>TBA</b><br />';

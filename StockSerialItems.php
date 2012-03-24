@@ -51,7 +51,7 @@ $result = DB_query("SELECT locationname
 			_('Could not retrieve the stock location of the item because'),
 			_('The SQL used to lookup the location was'));
 
-$myrow = DB_fetch_row($result);
+$myrow = DB_fetch_array($result);
 
 $sql = "SELECT serialno,
 		quantity,
@@ -72,7 +72,7 @@ if ($Serialised==1){
 } else {
 	echo '<tr><th colspan="11"><font color=#616161 size="2">' . _('Controlled items in') . ' ';
 }
-echo $myrow[0]. '</font></th></tr>';
+echo $myrow['locationname']. '</font></th></tr>';
 
 echo '<tr><th colspan="11"><font color="#616161" size="2">'.$StockID .'-'. $Description .'</b>  (' . _('In units of') . ' ' . $UOM . ')</font></th></tr>';
 

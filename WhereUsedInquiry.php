@@ -14,20 +14,6 @@ if (isset($_GET['StockID'])){
 
 echo '<a href="' . $rootpath . '/SelectProduct.php">' . _('Back to Items') . '</a><br />';
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p>';
-if (isset($StockID)){
-	$result = DB_query("SELECT description,
-					units,
-					mbflag
-				FROM stockmaster
-				WHERE stockid='".$StockID."'",$db);
-	$myrow = DB_fetch_row($result);
-	if (DB_num_rows($result)==0){
-		prnMsg(_('The item code entered') . ' - ' . $StockID . ' ' . _('is not set up as an item in the system') . '. ' . _('Re-enter a valid item code or select from the Select Item link above'),'error');
-		include('includes/footer.inc');
-		exit;
-	}
-	echo '<br /><font color="#616161" size="3"><b>'.$StockID - $myrow[0] .'</b>  (' . _('in units of') . ' ' . $myrow[1] . ')</font>';
-}
 
 echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post"><div class="centre">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -59,6 +45,19 @@ if (isset($StockID)) {
 	} else {
 
     		echo '<table width=97% class="selection">';
+			if (isset($StockID)){
+				$ItemResult = DB_query("SELECT description,
+								units
+							FROM stockmaster
+							WHERE stockid='".$StockID."'",$db);
+				$myrow = DB_fetch_array($ItemResult);
+				if (DB_num_rows($result)==0){
+					prnMsg(_('The item code entered') . ' - ' . $StockID . ' ' . _('is not set up as an item in the system') . '. ' . _('Re-enter a valid item code or select from the Select Item link above'),'error');
+					include('includes/footer.inc');
+					exit;
+				}
+				echo '<tr><th colspan="6"><font color="#616161" size="3"><b>'.$StockID . ' - ' . $myrow['description'] .'</b>  (' . _('in units of') . ' ' . $myrow['units'] . ')</font></th></tr>';
+			}
 
     		$tableheader = '<tr><th>' . _('Used By') . '</th>
 					<th>' . _('Work Centre') . '</th>
@@ -89,7 +88,7 @@ if (isset($StockID)) {
      			//end of page full new headings if
     		}
 
-    		echo '</table>';
+    		echo '</table><br />';
 	}
 } // StockID is set
 

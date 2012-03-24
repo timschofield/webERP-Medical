@@ -33,7 +33,7 @@ if (isset($_GET['EditName'])){
 	$EditName = '';
 }
 
-if (isset($SelectedCategory) AND isset($_FILES['ItemPicture']) AND $_FILES['ItemPicture']['name'] !='') {
+if (isset($SelectedCategory) and isset($_FILES['ItemPicture']) and $_FILES['ItemPicture']['name'] !='') {
 
 	$result    = $_FILES['ItemPicture']['error'];
  	$UploadTheFile = 'Yes'; //Assume all is well to start off with
@@ -47,7 +47,7 @@ if (isset($SelectedCategory) AND isset($_FILES['ItemPicture']) AND $_FILES['Item
 	} elseif ( $_FILES['ItemPicture']['size'] > ($_SESSION['MaxImageSize']*1024)) { //File Size Check
 		prnMsg(_('The file size is over the maximum allowed. The maximum size allowed in KB is') . ' ' . $_SESSION['MaxImageSize'],'warn');
 		$UploadTheFile ='No';
-	} elseif ( $_FILES['ItemPicture']['type'] == "text/plain" ) {  //File Type Check
+	} elseif ( $_FILES['ItemPicture']['type'] == 'text/plain' ) {  //File Type Check
 		prnMsg( _('Only graphics files can be uploaded'),'warn');
          	$UploadTheFile ='No';
 	} elseif (file_exists($filename)){
@@ -119,20 +119,20 @@ if (isset($_POST['submit'])  and $EditName == 1 ) { // Creating or updating a ca
 
 // PREVENT DELETES IF DEPENDENT RECORDS IN 'StockMaster'
 
-	$sql= "SELECT COUNT(*) FROM salescatprod WHERE salescatid='".$SelectedCategory . "'";
+	$sql= "SELECT COUNT(salescatid) AS categories FROM salescatprod WHERE salescatid='".$SelectedCategory . "'";
 	$result = DB_query($sql,$db);
-	$myrow = DB_fetch_row($result);
-	if ($myrow[0]>0) {
+	$myrow = DB_fetch_array($result);
+	if ($myrow['categories']>0) {
 		prnMsg(_('Cannot delete this sales category because stock items have been added to this category') .
-			'<br /> ' . _('There are') . ' ' . $myrow[0] . ' ' . _('items under to this category'),'warn');
+			'<br /> ' . _('There are') . ' ' . $myrow['categories'] . ' ' . _('items under to this category'),'warn');
 
 	} else {
-		$sql = "SELECT COUNT(*) FROM salescat WHERE parentcatid='".$SelectedCategory."'";
+		$sql = "SELECT COUNT(parentcatid) AS categories FROM salescat WHERE parentcatid='".$SelectedCategory."'";
 		$result = DB_query($sql,$db);
-		$myrow = DB_fetch_row($result);
-		if ($myrow[0]>0) {
+		$myrow = DB_fetch_array($result);
+		if ($myrow['categories']>0) {
 		prnMsg(_('Cannot delete this sales category because sub categories have been added to this category') .
-			'<br /> ' . _('There are') . ' ' . $myrow[0] . ' ' . _('sub categories'),'warn');
+			'<br /> ' . _('There are') . ' ' . $myrow['categories'] . ' ' . _('sub categories'),'warn');
 		} else {
 			$sql="DELETE FROM salescat WHERE salescatid='".$SelectedCategory."'";
 			$result = DB_query($sql,$db);

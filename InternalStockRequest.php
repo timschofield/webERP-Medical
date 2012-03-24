@@ -124,7 +124,9 @@ if (isset($_GET['Edit'])) {
 	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection">';
-	echo '<tr><th colspan="2"><font size="2" color="navy">' . _('Edit the Request Line') . '</font></th></tr>';
+	echo '<tr>
+			<th colspan="2"><font size="2" color="navy">' . _('Edit the Request Line') . '</font></th>
+		</tr>';
 	echo '<tr>
 			<td>' . _('Line number') . '</td>
 			<td>' . $_SESSION['Request']->LineItems[$_GET['Edit']]->LineNumber . '</td>
@@ -156,8 +158,11 @@ echo '<form action="'. htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 echo '<table class="selection">';
-echo '<tr><th colspan="2"><font color="navy" size="2">' . _('Internal Stock Request Details') . '</font></th></tr>';
-echo '<tr><td>' . _('Department') . ':</td>';
+echo '<tr>
+		<th colspan="2"><font color="navy" size="2">' . _('Internal Stock Request Details') . '</font></th>
+	</tr>';
+echo '<tr>
+		<td>' . _('Department') . ':</td>';
 
 $sql="SELECT departmentid,
 			description
@@ -176,7 +181,8 @@ while ($myrow=DB_fetch_array($result)){
 }
 echo '</select></td></tr>';
 
-echo '<tr><td>' . _('Location from which to request stock') . ':</td>';
+echo '<tr>
+		<td>' . _('Location from which to request stock') . ':</td>';
 $sql="SELECT loccode,
 			locationname
 		FROM locations
@@ -194,7 +200,8 @@ while ($myrow=DB_fetch_array($result)){
 }
 echo '</select></td></tr>';
 
-echo '<tr><td>' . _('Date when required') . ':</td>';
+echo '<tr>
+		<td>' . _('Date when required') . ':</td>';
 echo '<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="DispatchDate" maxlength="10" size="11" value="' . $_SESSION['Request']->DispatchDate . '" /></td>';
 
 echo '<tr><td>' . _('Narrative') . ':</td>';
@@ -216,16 +223,16 @@ $i = 0; //Line Item Array pointer
 echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo '<br /><table class="selection">';
-echo '<tr><th colspan="7"><font size="2" color="navy">' . _('Details of Items Requested') . '</font></th></tr>';
-
-$tableheader = '<tr>
+echo '<tr>
+		<th colspan="7"><font size="2" color="navy">' . _('Details of Items Requested') . '</font></th>
+	</tr>';
+echo '<tr>
 		<th>'. _('Line Number') . '</th>
 		<th>'. _('Item Code') . '</th>
 		<th>'. _('Item Description'). '</th>
 		<th>'. _('Quantity Required'). '</th>
 		<th>'. _('UOM'). '</th>
-		</tr>';
-echo $tableheader;
+	</tr>';
 
 $k=0;
 
@@ -285,25 +292,26 @@ while ($myrow1 = DB_fetch_array($result1)) {
 	}
 }
 echo '</select></td>';
-echo '<td>' . _('Enter partial') . '<b> ' . _('Description') . '</b>:</td><td>';
+echo '<td>' . _('Enter partial') . '<b> ' . _('Description') . '</b>:</td>';
 if (isset($_POST['Keywords'])) {
-	echo '<input type="text" name="Keywords" value="' . $_POST['Keywords'] . '" size="20" maxlength="25" />';
+	echo '<td><input type="text" name="Keywords" value="' . $_POST['Keywords'] . '" size="20" maxlength="25" /></td>';
 } else {
-	echo '<input type="text" name="Keywords" size="20" maxlength="25" />';
+	echo '<td><input type="text" name="Keywords" size="20" maxlength="25" /></td>';
 }
-echo '</td></tr><tr><td></td>';
+echo '</tr>
+		<tr>
+			<td></td>';
 echo '<td><font size="3"><b>' . _('OR') . ' ' . '</b></font>' . _('Enter partial') . ' <b>' . _('Stock Code') . '</b>:</td>';
-echo '<td>';
+
 if (isset($_POST['StockCode'])) {
-	echo '<input type="text" name="StockCode" value="' . $_POST['StockCode'] . '" size="15" maxlength="18" />';
+	echo '<td><input type="text" name="StockCode" value="' . $_POST['StockCode'] . '" size="15" maxlength="18" /></td>';
 } else {
-	echo '<input type="text" name="StockCode" size="15" maxlength="18" />';
+	echo '<td><input type="text" name="StockCode" size="15" maxlength="18" /></td>';
 }
-echo '</td></tr></table><br />';
+echo '</tr></table><br />';
 echo '<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" /></div><br />';
 echo '<script  type="text/javascript">defaultControl(document.forms[0].StockCode);</script>';
 echo '</form>';
-
 
 if (isset($_POST['Search']) or isset($_POST['Next']) or isset($_POST['Prev'])){
 
@@ -477,15 +485,14 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 //			echo '<input type="hidden" name=Search value="Search" />';
 			echo '<br /></div>';
 		}
-		echo '<table cellpadding="2" colspan="7">';
-		$tableheader = '<tr>
-					<th>' . _('Code') . '</th>
-					<th>' . _('Description') . '</th>
-					<th>' . _('Total Qty On Hand') . '</th>
-					<th>' . _('Units') . '</th>
-					<th>' . _('Stock Status') . '</th>
-				</tr>';
-		echo $tableheader;
+		echo '<table cellpadding="2">';
+		echo '<tr>
+				<th>' . _('Code') . '</th>
+				<th>' . _('Description') . '</th>
+				<th>' . _('Total Qty On Hand') . '</th>
+				<th>' . _('Units') . '</th>
+				<th>' . _('Stock Status') . '</th>
+			</tr>';
 		$j = 1;
 		$k = 0; //row counter to determine background colour
 		$RowIndex = 0;
@@ -512,18 +519,12 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 			}
 
 			echo '<td><input type="submit" name="Select" value="' . $myrow['stockid'] . '" /></td>
-				<td>'.$myrow['description'].'</td>
-				<td class="number">' . $qoh . '</td>
-				<td>' . $myrow['units'] . '</td>
-				<td><a target="_blank" href="' . $rootpath . '/StockStatus.php?StockID=' . $myrow['stockid'].'">' . _('View') . '</a></td>
-				<td>' . $ItemStatus . '</td>
+					<td>'.$myrow['description'].'</td>
+					<td class="number">' . $qoh . '</td>
+					<td>' . $myrow['units'] . '</td>
+					<td><a target="_blank" href="' . $rootpath . '/StockStatus.php?StockID=' . $myrow['stockid'].'">' . _('View') . '</a></td>
+					<td>' . $ItemStatus . '</td>
 				</tr>';
-			$j++;
-			if ($j == 20 AND ($RowIndex + 1 != $_SESSION['DisplayRecordsMax'])) {
-				$j = 1;
-				echo $tableheader;
-			}
-			$RowIndex = $RowIndex + 1;
 			//end of page full new headings if
 		}
 		//end of while loop
@@ -549,44 +550,21 @@ if (isset($SearchResult)) {
 	echo '<td>
 			<input type="hidden" name="nextlist" value="'.($Offset+1).'" />
 			<input tabindex="'.($j+10).'" type="submit" name="Next" value="'._('Next').'" /></td></tr>';
-	$TableHeader = '<tr><th>' . _('Code') . '</th>
-			   			<th>' . _('Description') . '</th>
-			   			<th>' . _('Units') . '</th>
-			   			<th>' . _('On Hand') . '</th>
-			   			<th>' . _('On Demand') . '</th>
-			   			<th>' . _('On Order') . '</th>
-			   			<th>' . _('Available') . '</th>
-			   			<th>' . _('Quantity') . '</th>
-			   		</tr>';
-	echo $TableHeader;
+	echo '<tr>
+			<th>' . _('Code') . '</th>
+			<th>' . _('Description') . '</th>
+			<th>' . _('Units') . '</th>
+			<th>' . _('On Hand') . '</th>
+			<th>' . _('On Demand') . '</th>
+			<th>' . _('On Order') . '</th>
+			<th>' . _('Available') . '</th>
+			<th>' . _('Quantity') . '</th>
+		</tr>';
 	$ImageSource = _('No Image');
 
 	$k=0; //row colour counter
 	$i=0;
 	while ($myrow=DB_fetch_array($SearchResult)) {
-		$PriceSQL="SELECT currabrev,
-						conversionfactor,
-						decimalplaces as pricedecimal
-					FROM prices
-					WHERE '".date('Y-m-d')."' between startdate and enddate";
-		$PriceResult=DB_query($PriceSQL, $db);
-		if (DB_num_rows($PriceResult)==0) {
-			$PriceSQL="SELECT currabrev,
-							conversionfactor,
-							decimalplaces as pricedecimal
-						FROM prices
-						WHERE stockid='".$myrow['stockid']."'
-							AND '".date('Y-m-d')."' between startdate and enddate";
-			$PriceResult=DB_query($PriceSQL, $db);
-		}
-		$PriceRow=DB_fetch_array($PriceResult);
-		if (DB_num_rows($PriceResult)==0) {
-			$PriceRow['conversionfactor']=1;
-			$PriceRow['pricedecimal']=2;
-		}
-		if ($PriceRow['conversionfactor']=='') {
-			$PriceRow['conversionfactor']=1;
-		}
 		// Find the quantity in stock at location
 		if ($myrow['decimalplaces']=='') {
 			$DecimalPlacesSQL="SELECT decimalplaces
@@ -605,10 +583,10 @@ if (isset($SearchResult)) {
 							   loccode = '" . $_SESSION['Request']->Location . "'";
 		$QOHResult =  DB_query($QOHSQL,$db);
 		$QOHRow = DB_fetch_array($QOHResult);
-		$QOH = $QOHRow['qoh']/$PriceRow['conversionfactor'];
+		$QOH = $QOHRow['qoh'];
 
 		// Find the quantity on outstanding sales orders
-		$sql = "SELECT SUM(salesorderdetails.quantity-salesorderdetails.qtyinvoiced)*salesorderdetails.conversionfactor AS dem
+		$sql = "SELECT SUM(salesorderdetails.quantity-salesorderdetails.qtyinvoiced) AS dem
 						 FROM salesorderdetails,
 					  			salesorders
 						 WHERE salesorders.orderno = salesorderdetails.orderno AND

@@ -148,7 +148,7 @@ if (DB_num_rows($GRNResults)==0){
 echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<br /><table cellpadding="2" colspan="7" class="selection">';
+echo '<br /><table cellpadding="2" class="selection">';
 
 echo '<tr><th colspan="10"><font size="3" color="#616161">' . _('Show Goods Received Since') . ':&nbsp;</font>';
 echo '<input type="text" name="Show_Since" maxlength="11" size="12" class="date" alt='.$_SESSION['DefaultDateFormat'].' value="' . $_POST['Show_Since'] . '" />

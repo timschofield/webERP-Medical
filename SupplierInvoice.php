@@ -22,8 +22,8 @@ include('includes/SQL_CommonFunctions.inc');
 if (!isset($_SESSION['SuppTrans']->SupplierName)) {
 	$sql="SELECT suppname FROM suppliers WHERE supplierid='".$_GET['SupplierID']."'";
 	$result = DB_query($sql,$db);
-	$myrow = DB_fetch_row($result);
-	$SupplierName=$myrow[0];
+	$myrow = DB_fetch_array($result);
+	$SupplierName=$myrow['suppname'];
 } else {
 	$SupplierName=$_SESSION['SuppTrans']->SupplierName;
 }
@@ -100,8 +100,8 @@ if (isset($_GET['SupplierID']) and $_GET['SupplierID']!=''){
 		exit;
 	}
 
-	$LocalTaxProvinceRow = DB_fetch_row($LocalTaxProvinceResult);
-	$_SESSION['SuppTrans']->LocalTaxProvince = $LocalTaxProvinceRow[0];
+	$LocalTaxProvinceRow = DB_fetch_array($LocalTaxProvinceResult);
+	$_SESSION['SuppTrans']->LocalTaxProvince = $LocalTaxProvinceRow['taxprovinceid'];
 
 	$_SESSION['SuppTrans']->GetTaxes();
 
@@ -224,7 +224,7 @@ if (!isset($_POST['PostInvoice'])){
 	/* everything below here only do if a Supplier is selected
 	fisrt add a header to show who we are making an invoice for */
 
-	echo '<br /><table class="selection" colspan="4">
+	echo '<br /><table class="selection">
 					<tr>
 						<th>' . _('Supplier') . '</th>
 						<th>' . _('Currency') .  '</th>
@@ -610,7 +610,7 @@ then do the updates and inserts to process the invoice entered */
 
 	} else {
 
-		$sql = "SELECT count(*)
+		$sql = "SELECT supplierno
 				FROM supptrans
 				WHERE supplierno='" . $_SESSION['SuppTrans']->SupplierID . "'
 					AND supptrans.suppreference='" . $_POST['SuppReference'] . "'";
@@ -620,8 +620,7 @@ then do the updates and inserts to process the invoice entered */
 
 		$result=DB_query($sql, $db, $ErrMsg, $DbgMsg, True);
 
-		$myrow=DB_fetch_row($result);
-		if ($myrow[0] == 1){ /*Transaction reference already entered */
+		if (DB_num_rows($result) == 1){ /*Transaction reference already entered */
 			prnMsg( _('The invoice number') . ' : ' . $_POST['SuppReference'] . ' ' . _('has already been entered') . '. ' . _('It cannot be entered again'),'error');
 			$InputError = True;
 		}
@@ -773,8 +772,8 @@ then do the updates and inserts to process the invoice entered */
 									INNER JOIN stockmaster
 										ON stockcategory.categoryid=stockmaster.categoryid
 									WHERE stockmaster.stockid='" . $Contract->ContractRef . "'",$db);
-				$WIPRow = DB_fetch_row($result);
-				$WIPAccount = $WIPRow[0];
+				$WIPRow = DB_fetch_array($result);
+				$WIPAccount = $WIPRow['wipact'];
 				$SQL = "INSERT INTO gltrans (type,
 											typeno,
 											trandate,
@@ -858,12 +857,12 @@ then do the updates and inserts to process the invoice entered */
 								The cost of these items - $EnteredGRN->ChgPrice  / $_SESSION['SuppTrans']->ExRate
 								*/
 
-								$sql ="SELECT SUM(quantity) FROM locstock WHERE stockid='" . $EnteredGRN->ItemCode . "'";
+								$sql ="SELECT SUM(quantity) AS totalquantity FROM locstock WHERE stockid='" . $EnteredGRN->ItemCode . "'";
 								$ErrMsg =  _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The quantity on hand could not be retrieved from the database');
 								$DbgMsg = _('The following SQL to retrieve the total stock quantity was used');
 								$Result = DB_query($sql, $db, $ErrMsg, $DbgMsg, True);
-								$QtyRow = DB_fetch_row($Result);
-								$TotalQuantityOnHand = $QtyRow[0];
+								$QtyRow = DB_fetch_array($Result);
+								$TotalQuantityOnHand = $QtyRow['totalquantity'];
 
 								echo '<br />' . _('Total Qty On hand') . ' = ' . $TotalQuantityOnHand;
 

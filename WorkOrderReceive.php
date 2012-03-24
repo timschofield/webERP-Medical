@@ -118,16 +118,15 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 		//need to test if the serialised item exists first already
 			if (trim($_POST['SerialNo' .$i]) != "" AND  ($_SESSION['DefineControlledOnWOEntry']==0
 					OR ($_SESSION['DefineControlledOnWOEntry']==1 AND $_POST['CheckedItem'.$i]==true))){
-					$SQL = "SELECT COUNT(*) FROM stockserialitems
+					$SQL = "SELECT * FROM stockserialitems
 							WHERE stockid='" . $_POST['StockID'] . "'
 							AND loccode = '" . $_POST['IntoLocation'] . "'
 							AND serialno = '" . $_POST['SerialNo' .$i] . "'";
 					$ErrMsg =  _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Could not check if a serial number for the stock item already exists because');
 					$DbgMsg =  _('The following SQL to test for an already existing serialised stock item was used');
 					$Result = DB_query($SQL, $db, $ErrMsg, $DbgMsg, true);
-					$AlreadyExistsRow = DB_fetch_row($Result);
 
-					if ($AlreadyExistsRow[0]>0){
+					if (DB_num_rows($Result)>0){
 						prnMsg(_('The serial number entered already exists. Duplicate serial numbers are prohibited. The duplicate item is:') . ' ' . $_POST['SerialNo'.$i] ,'error');
 						$InputError = true;
 					}
@@ -186,11 +185,11 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 									WHERE bom.parent='" . $_POST['StockID'] . "'
 									AND bom.loccode='" . $WORow['loccode'] . "'",
 									$db);
-			$CostRow = DB_fetch_row($CostResult);
-			if (is_null($CostRow[0]) OR $CostRow[0]==0){
+			$CostRow = DB_fetch_array($CostResult);
+			if (is_null($CostRow['cost']) OR $CostRow['cost']==0){
 					$Cost =0;
 			} else {
-					$Cost = $CostRow[0];
+					$Cost = $CostRow['cost'];
 			}
 			//Need to refresh the worequirments with the bom components now incase they changed
 			$DelWORequirements = DB_query("DELETE FROM worequirements
@@ -312,8 +311,8 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 											AND loccode= '" . $WORow['loccode'] . "'",
 											$db);
 				if (DB_num_rows($CompQOHResult)==1){
-							$LocQtyRow = DB_fetch_row($CompQOHResult);
-							$NewQtyOnHand = $LocQtyRow[0] - ($AutoIssueCompRow['qtypu'] * $QuantityReceived);
+							$LocQtyRow = DB_fetch_array($CompQOHResult);
+							$NewQtyOnHand = $LocQtyRow['quantity'] - ($AutoIssueCompRow['qtypu'] * $QuantityReceived);
 				} else {
 							/*There must actually be some error this should never happen */
 							$NewQtyOnHand = 0;
@@ -422,8 +421,8 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 
 		$Result = DB_query($SQL, $db);
 		if (DB_num_rows($Result)==1){
-			$LocQtyRow = DB_fetch_row($Result);
-			$QtyOnHandPrior = $LocQtyRow[0];
+			$LocQtyRow = DB_fetch_array($Result);
+			$QtyOnHandPrior = $LocQtyRow['quantity'];
 		} else {
 		/*There must actually be some error this should never happen */
 			$QtyOnHandPrior = 0;
@@ -541,20 +540,20 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 				//need to test if the batch/lot exists first already
 					if (trim($_POST['BatchRef' .$i]) != ""){
 						$LastRef = trim($_POST['BatchRef' .$i]);
-						$SQL = "SELECT COUNT(*) FROM stockserialitems
+						$SQL = "SELECT * FROM stockserialitems
 								WHERE stockid='" . $_POST['StockID'] . "'
 								AND loccode = '" . $_POST['IntoLocation'] . "'
 								AND serialno = '" . $_POST['BatchRef' .$i] . "'";
 						$ErrMsg =  _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Could not check if a serial number for the stock item already exists because');
 						$DbgMsg =  _('The following SQL to test for an already existing serialised stock item was used');
 						$Result = DB_query($SQL, $db, $ErrMsg, $DbgMsg, true);
-						$AlreadyExistsRow = DB_fetch_row($Result);
+
 						if (isset($_POST['QualityText'.$i])){
 							$QualityText = $_POST['QualityText'.$i];
 						} else {
 							$QualityText ='';
 						}
-						if ($AlreadyExistsRow[0]>0){
+						if (DB_num_rows($Result)>0){
 							$SQL = "UPDATE stockserialitems SET quantity = quantity + " . $_POST['Qty' . $i] . ",
 																qualitytext = '" . DB_escape_string($QualityText) . "'
 										WHERE stockid='" . $_POST['StockID'] . "'
@@ -593,15 +592,15 @@ if (isset($_POST['Process'])){ //user hit the process the work order receipts en
 
 						if ($_SESSION['DefineControlledOnWOEntry']==1){
 							//check how many of the batch/bundle/lot has been received
-							$SQL = "SELECT sum(moveqty) FROM stockserialmoves
+							$SQL = "SELECT sum(moveqty) AS totalquantity FROM stockserialmoves
 										INNER JOIN stockmoves ON stockserialmoves.stockmoveno=stockmoves.stkmoveno
 										WHERE stockmoves.type=26
 										AND stockserialmoves.stockid='" . $_POST['StockID'] . "'
 										AND stockserialmoves.serialno='" . 	DB_escape_string($_POST['BatchRef'.$i]) . "'";
 
 							$BatchTotQtyResult = DB_query($SQL,$db);
-							$BatchTotQtyRow = DB_fetch_row($BatchTotQtyResult);
-							if ($BatchTotQtyRow[0] >= $_POST['QtyReqd'.$i]){
+							$BatchTotQtyRow = DB_fetch_array($BatchTotQtyResult);
+							if ($BatchTotQtyRow['totalquantity'] >= $_POST['QtyReqd'.$i]){
 								//need to delete the item from woserialnos
 								$SQL = "DELETE FROM	woserialnos
 										WHERE wo='" . $_POST['WO'] . "'
@@ -817,13 +816,13 @@ if($WORow['controlled']==1){ //controlled
 				echo '<th colspan="5">' . _('No serial numbers defined yet') . '</th></tr>';
 			} else {
 				$i=0; //the SerialNo counter
-				while ($WOSNRow = DB_fetch_row($WOSNResult)){
+				while ($WOSNRow = DB_fetch_array($WOSNResult)){
 					if (($i/5 -intval($i/5))==0){
 						echo '</tr><tr>';
 					}
-					echo '<td><input type="checkbox" name="CheckItem' . $i . '" />'. $WOSNRow[0] .
-						'<input type="hidden" name="SerialNo' . $i . '" value="' . $WOSNRow[0] . '" />
-						<input type="hidden" name="QualityText' . $i . '" value="' . $WOSNRow[1] . '" /></td>';
+					echo '<td><input type="checkbox" name="CheckItem' . $i . '" />'. $WOSNRow['serialno'] .
+						'<input type="hidden" name="SerialNo' . $i . '" value="' . $WOSNRow['serialno'] . '" />
+						<input type="hidden" name="QualityText' . $i . '" value="' . $WOSNRow['qualitytext'] . '" /></td>';
 					$i++;
 				}
 			}
@@ -857,14 +856,14 @@ if($WORow['controlled']==1){ //controlled
 				echo '<th colspan="5">' . _('No batches/lots defined yet') . '</th></tr>';
 			} else {
 				$i=0; //the Batch counter
-				while ($WOSNRow = DB_fetch_row($WOSNResult)){
+				while ($WOSNRow = DB_fetch_array($WOSNResult)){
 					if (($i/5 -intval($i/5))==0){
 						echo '</tr><tr>';
 					}
-					echo '<td><input type="text" name="BatchRef' . $i . '" value="' . $WOSNRow[0] . '" /></td>
+					echo '<td><input type="text" name="BatchRef' . $i . '" value="' . $WOSNRow['serialno'] . '" /></td>
 						  <td><input type="text" class="number" name="Qty' . $i . '" />
-						  		<input type="hidden" name="QualityText' . $i . '" value="' . $WOSNRow[2] . '" />
-						  		<input type="hidden" name="QtyReqd' . $i . '" value="' . $WOSNRow[1] . '" /></td></tr>';
+						  		<input type="hidden" name="QualityText' . $i . '" value="' . $WOSNRow['qualitytext'] . '" />
+						  		<input type="hidden" name="QtyReqd' . $i . '" value="' . $WOSNRow['quantity'] . '" /></td></tr>';
 					$i++;
 				}
 			}

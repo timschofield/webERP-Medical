@@ -13,10 +13,10 @@ unset($result);
 if (isset($_POST['Select'])) {
 
 	$result = DB_query("SELECT accountname FROM chartmaster WHERE accountcode=" . $_POST['Select'],$db);
-	$myrow = DB_fetch_row($result);
+	$myrow = DB_fetch_array($result);
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Search for General Ledger Accounts') . '</p>';
 
-	echo '<div class="page_help_text">' . _('Account Code') . ' <b>' . $_POST['Select'] . ' - ' . $myrow[0]  . ' </b>' . _('has been selected') . '. <br />' . _('Select one of the links below to operate using this Account') . '.</div>';
+	echo '<div class="page_help_text">' . _('Account Code') . ' <b>' . $_POST['Select'] . ' - ' . $myrow['accountname']  . ' </b>' . _('has been selected') . '. <br />' . _('Select one of the links below to operate using this Account') . '.</div>';
 	$AccountID = $_POST['Select'];
 	$_POST['Select'] = NULL;
 
@@ -26,10 +26,10 @@ if (isset($_POST['Select'])) {
 
 } elseif (isset($_POST['Search'])){
 
-	if (strlen($_POST['Keywords']>0) AND strlen($_POST['GLCode'])>0) {
+	if (strlen($_POST['Keywords']>0) and strlen($_POST['GLCode'])>0) {
 		$msg=_('Account name keywords have been used in preference to the account code extract entered');
 	}
-	if ($_POST['Keywords']=='' AND $_POST['GLCode']=='') {
+	if ($_POST['Keywords']=='' and $_POST['GLCode']=='') {
 		$msg=_('At least one Account Name keyword OR an extract of an Account Code must be entered for the search');
 	} else {
 		If (strlen($_POST['Keywords'])>0) {
@@ -83,7 +83,7 @@ if (!isset($AccountID)) {
 		prnMsg($msg,'info');
 	}
 
-	echo '<table cellpadding="3" colspan="4" class="selection">
+	echo '<table cellpadding="3" class="selection">
 		<tr>
 		<td><font size="1">' . _('Enter extract of text in the Account name') .':</font></td>
 		<td><input type="text" name="Keywords" size="20" maxlength="25" /></td>
@@ -98,7 +98,7 @@ if (!isset($AccountID)) {
 
 	if (isset($result) and DB_num_rows($result)>0) {
 
-		echo '<br /><table cellpadding="2" colspan="7" class="selection">';
+		echo '<br /><table cellpadding="2" class="selection">';
 
 		$TableHeader = '<tr><th>' . _('Code') . '</th>
 					  <th>' . _('Account Name') . '</th>

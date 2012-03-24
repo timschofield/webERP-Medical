@@ -907,7 +907,7 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 /*Display the order without discount */
 
 	echo '<div class="centre"><b>' . _('Order Summary') . '</b></div>
-	<table cellpadding="2" colspan="7" border="1"><tr>
+	<table cellpadding="2" border="1"><tr>
 		<th>'. _('Item Description') .'</th>
 		<th>'. _('Quantity') .'</th>
 		<th>'. _('Unit') .'</th>

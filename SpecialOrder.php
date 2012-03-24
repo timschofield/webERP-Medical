@@ -397,11 +397,11 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 
 			$PartAlreadyExists =True; /*assume the worst */
 			$Counter = 0;
-			While ($PartAlreadyExists==True) {
-				$sql = "SELECT COUNT(*) FROM stockmaster WHERE stockid = '" . $PartCode . "'";
+			while ($PartAlreadyExists==True) {
+				$sql = "SELECT stockid FROM stockmaster WHERE stockid = '" . $PartCode . "'";
 				$PartCountResult = DB_query($sql,$db);
-				$PartCount = DB_fetch_row($PartCountResult);
-				if ($PartCount[0]!=0){
+
+				if (DB_num_rows($PartCountResult)!=0){
 					$PartAlreadyExists =True;
 					if (strlen($PartCode)==20){
 						$PartCode = "*" . strtoupper(substr($_SESSION['SPL'.$identifier]->PurchOrderNo,0,13)) . '_' . $SPLLine->LineNo;
@@ -444,8 +444,8 @@ if (isset($_POST['Commit'])){ /*User wishes to commit the order to the database 
 			$DbgMsg = _('The SQL statement used to get the category information and that failed was');
 			$result =DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 
-			$StkCatGL=DB_fetch_row($result);
-			$GLCode = $StkCatGL[0];
+			$StkCatGL=DB_fetch_array($result);
+			$GLCode = $StkCatGL['stockact'];
 
 			$OrderDate = FormatDateForSQL($SPLLine->ReqDelDate);
 
@@ -614,7 +614,7 @@ echo '<td>' . _('Initiated By') . ': <input type="text" name="Initiator" size="1
 if (count($_SESSION['SPL'.$identifier]->LineItems)>0){
 
 	echo '<div class="centre"><b>' . _('Special Order Summary') . '</b></div>';
-	echo '<table class="selection" cellpadding="2" colspan="7" border="1">';
+	echo '<table class="selection" cellpadding="2" border="1">';
 
 	echo '<tr>
 			<th>' . _('Item Description') . '</th>

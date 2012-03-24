@@ -46,7 +46,7 @@ to limit possibility for SQL injection attacks and cross scripting attacks
 
 if (isset($_SESSION['DatabaseName'])){
 	foreach ($_POST as $key => $value) {
-		if (gettype($value) != "array") {
+		if (gettype($value) != 'array') {
 			if(get_magic_quotes_gpc()) {
 				$_POST['name'] = stripslashes($_POST['name']);
 			}
@@ -65,7 +65,7 @@ if (isset($_SESSION['DatabaseName'])){
 	to limit possibility for SQL injection attacks and cross scripting attacks
 	*/
 	foreach ($_GET as $key => $value) {
-		if (gettype($value) != "array") {
+		if (gettype($value) != 'array') {
 			$_GET[$key] = DB_escape_string($value);
 		}
 	}
@@ -293,7 +293,6 @@ if (!isset($AllowAnyone)){
 		exit;
 	}
  }
-
 
 if (in_array(15, $_SESSION['AllowedPageSecurityTokens'])) { /*System administrator login */
 	$debug = 1; //allow debug messages

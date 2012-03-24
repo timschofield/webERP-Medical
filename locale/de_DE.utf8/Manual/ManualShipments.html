@@ -2,19 +2,19 @@
 
 <!-- Help Begin: Shipments -->
 
-<a name="Shipments"><font size="+3"><b>Beschaffungskosten</b></font></a>
+<h1><a name="Shipments">Beschaffungskosten</a></h1>
 <br /><br />
 Die Beschaffungskostenverwaltung ist für solche Situationen gedacht, wenn bedeutende Beschaffungskosten auf eingekaufte Waren anfallen und das Unternehmen die Istkosten dieser Waren nachweisen möchte. Viele kleinere Unternehmen machen solche Berechnungen mit einer Tabellenkalkulation außerhalb des integrierten Systems. Der Vorzug, dies innerhalb des Systems zu tun liegt darin, dass die Möglichkeit Zur Anpassung der Standardkosten besteht, und wenn die Kostenkalkulation abgeschlossen ist, die Preisabweichungen zu berechnen.
 <br /><br />
 Wenn Sie einen Lieferanten ausgewählt haben, erlaubt es das System, offene Bestellpositionen in einem Transport zusammenzufassen, diesem Transport wird eine Transportnummer zugeordnet. Wenn Sie diesem Transport einen erwarteten Tag der Ankunft (ETA) zuordnen, wird das Wunschlieferdatum der Bestellposition entsprechend geändert. Die Kosten die mit der Entladung und Zollabwickung der zusammen angelieferten Waren zusammenhängen, können in der Eingangsrechnung auf die Transportnummer kontiert werden. Frachtgebühren, Rollgelder von der Landestelle, Luftfracht, Auspacken, Standgelder usw. können als Kosten des Transportes erfasst werden. Die Auswertung der Transpaortkosten zeigt diese Kosten auf alle Positionen des Transportes aufgeteilt, anteilig im Verhältnis zum Einkaufswert der Waren. Die Istkosten des Transports werden zusammen mit den vorhandenen Standardkosten und der Abweichung dargestellt.
 <br /><br />
-<font size="+1"><b>Buchung der Beschaffungskosten im Hauptbuch</b></font>
+<h3>Buchung der Beschaffungskosten im Hauptbuch</h3>
 <br /><br />
 Die Beschaffungskosten werden beim Rechnungseingang auf das Wareneingangs-Verrechnungskonto gebucht. Wenn der Transport abgerechnet wird, werden die Beschaffungskosten bis zu den Standardkosten der Transportpositionen in den Bestand gebucht, der verbleibende Rest wird auf das Konto für Einkaufspreisabweichungen gebucht.
 <br /><br />
 Wenn die Möglichkeit genutzt wird, zum Zeitpunkt der Abrechnung des Transportes die Standardkosten neu zu bestimmen, wird die Differenz auf das in der Warengruppe hinterlegte Bestandsveränderungskonto gebucht.
 <br /><br />
-<font size="+1"><b>Transport anlegen</b></font>
+<h3>Transport anlegen</h3>
 <br /><br />
 Wenn Sie den Lieferanten ausgewählt haben, der die Waren liefert und an den Sie die Bestellung ausgelöst haben, Wählen Sie (unter Kreditorenpflege) Transport anlegen. Jedesmal, wenn Sie die Seite aufrufen, ermittelt das System die nächste Transportnummer und zeigt diese an. Die Seite Transporte ermöglicht es, die Angaben für die Lieferung zu erfassen.
 <br /><br />
@@ -44,7 +44,7 @@ Die Bestellpositionen zu offenen Bestellungen, die noch nicht in Rechnung gestel
 
 <!-- Help Begin: Shipt_Select -->
 
-<font size="+1"><b>Transportkalkulation</b></font>
+<h3>Transportkalkulation</h3>
 <br /><br />
 Die Kosten des Transportes werden zum Zeitpunkt des Rechnungseingangs fortgeschrieben. Wenn Sie eine Rechnung vom Spediteur erfassen, wird der Betrag und der Umrechnungskurs dem Transport zugebucht. Es ist wichtig, dass der Transport angelegt wird, bevor die Rechnung erfasst wird. Wenn von der Position bereits ein Teil berechnet wurde, kann die Bestellposition nicht mehr zum Transport hinzugefügt werden. Auch kann dann eine Position nicht mehr von einem Transport entfernt werden. Die Position muss storniert werden, bevor dies getan werden kann. Die Beschaffungskosten für die Wareneingänge werden unsichtbar im Hintergrund geführt.
 <br /><br />
@@ -62,7 +62,7 @@ Die Auswahl der Transporte wird aus der Lieferantensuche heraus vorgenommen. Die
 
 <!-- Help Begin: ShipmentCosting -->
 
-<font size="+1"><b>Abrechnung eines Transportes</b></font>
+<h3>Abrechnung eines Transportes</h3>
 <br /><br />
 Über Transporte suchen finden sie bei allen offenen Transporten den Link zum Abschließen. Das Abschließen des Transportes mach es unmöglich, zusätzliche Beträge darauf zu buchen. Wenn die Hauptbuchintegration der Bestandsführung aktiv ist, so werden Hauptbuchbelege für die Preisabweichungen auf dem Abweichungskonto erzeugt und das Wareneingangsverrechnungskonto wird bebucht. Das Abrechnen des Transportes hat auch eine Option zum Ändern der Standardkosten. Als Vorgabe ist diese Option auf Ja gesetzt. Wiederum wenn die Bestandsführungsschnittstelle aktiv ist, werden die Preisabweichungen gebucht, wie wenn Sie eine Standardpreisänderung separat vornehmen.
 <!-- Help End: ShipmentCosting -->

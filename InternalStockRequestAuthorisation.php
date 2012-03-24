@@ -49,27 +49,28 @@ $result=DB_query($sql, $db);
 
 echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<table class="selection"><tr>';
+echo '<table class="selection">';
 
 /* Create the table for the purchase order header */
-echo '<th>'._('Request Number').'</th>';
-echo '<th>'._('Department').'</th>';
-echo '<th>'._('Location Of Stock').'</th>';
-echo '<th>'._('Requested Date').'</th>';
-echo '<th>'._('Narrative').'</th>';
-echo '<th>'._('Authorise').'</th>';
-echo '</tr>';
+echo '<tr>
+		<th>'._('Request Number').'</th>
+		<th>'._('Department').'</th>
+		<th>'._('Location Of Stock').'</th>
+		<th>'._('Requested Date').'</th>
+		<th>'._('Narrative').'</th>
+		<th>'._('Authorise').'</th>
+	</tr>';
 
 while ($myrow=DB_fetch_array($result)) {
 
-	echo '<tr>';
-	echo '<td>'.$myrow['dispatchid'].'</td>';
-	echo '<td>'.$myrow['description'].'</td>';
-	echo '<td>'.$myrow['locationname'].'</td>';
-	echo '<td>'.ConvertSQLDate($myrow['despatchdate']).'</td>';
-	echo '<td>'.$myrow['narrative'].'</td>';
-	echo '<td><input type="checkbox" name="status'.$myrow['dispatchid'].'" /></td>';
-	echo '</tr>';
+	echo '<tr>
+			<td>'.$myrow['dispatchid'].'</td>
+			<td>'.$myrow['description'].'</td>
+			<td>'.$myrow['locationname'].'</td>
+			<td>'.ConvertSQLDate($myrow['despatchdate']).'</td>
+			<td>'.$myrow['narrative'].'</td>
+			<td><input type="checkbox" name="status'.$myrow['dispatchid'].'" /></td>
+		</tr>';
 	$linesql="SELECT stockrequestitems.dispatchitemsid,
 						stockrequestitems.stockid,
 						stockrequestitems.decimalplaces,
@@ -82,20 +83,26 @@ while ($myrow=DB_fetch_array($result)) {
 			WHERE dispatchid='".$myrow['dispatchid'] . "'";
 	$lineresult=DB_query($linesql, $db);
 
-	echo '<tr><td></td><td colspan="5" align="left"><table class="selection" align="left">';
-	echo '<th>'._('Product').'</th>';
-	echo '<th>'._('Quantity Required').'</th>';
-	echo '<th>'._('Units').'</th>';
-	echo '</tr>';
+	echo '<tr>
+			<td></td>
+			<td colspan="5" align="left">
+				<table class="selection" align="left">
+				<tr>
+					<th>'._('Product').'</th>
+					<th>'._('Quantity Required').'</th>
+					<th>'._('Units').'</th>
+				</tr>';
 
 	while ($linerow=DB_fetch_array($lineresult)) {
-		echo '<tr>';
-		echo '<td>'.$linerow['description'].'</td>';
-		echo '<td class="number">'.locale_number_format($linerow['quantity'],$linerow['decimalplaces']).'</td>';
-		echo '<td>'.$linerow['uom'].'</td>';
-		echo '</tr>';
+		echo '<tr>
+				<td>'.$linerow['description'].'</td>
+				<td class="number">'.locale_number_format($linerow['quantity'],$linerow['decimalplaces']).'</td>
+				<td>'.$linerow['uom'].'</td>
+			</tr>';
 	} // end while order line detail
-	echo '</table></td></tr>';
+	echo '</table>
+			</td>
+		</tr>';
 } //end while header loop
 echo '</table>';
 echo '<br /><div class="centre"><input type="submit" name="updateall" value="' . _('Update'). '" /></form>';

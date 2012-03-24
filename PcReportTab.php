@@ -32,7 +32,9 @@ if ((! isset($_POST['FromDate']) AND ! isset($_POST['ToDate'])) OR isset($_POST[
 
 	/*Show a form to allow input of criteria for Tabs to show */
 	echo '<table class="selection">';
-	echo '<tr><td>' . _('Code Of Petty Cash Tab') . ':</td><td><select name="SelectedTabs">';
+	echo '<tr>
+			<td>' . _('Code Of Petty Cash Tab') . ':</td>
+			<td><select name="SelectedTabs">';
 
 	if ($_SESSION['AccessLevel'] >= 15){ // superuser can supervise the supervisors
 		$SQL = "SELECT tabcode
@@ -46,6 +48,7 @@ if ((! isset($_POST['FromDate']) AND ! isset($_POST['ToDate'])) OR isset($_POST[
 	}
 	$result = DB_query($SQL,$db);
 
+	echo '<option value=""></option>';
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['SelectedTabs']) and $myrow['tabcode']==$_POST['SelectedTabs']) {
 			echo '<option selected="True" value="' .$myrow['tabcode'] . '">' . $myrow['tabcode'] . '</option>';
@@ -70,7 +73,12 @@ if ((! isset($_POST['FromDate']) AND ! isset($_POST['ToDate'])) OR isset($_POST[
 
 } else if (isset($_POST['PrintPDF'])) {
 
-
+	if (empty($SelectedTabs) or $SelectedTabs=='') {
+		include('includes/header.inc');
+		prnMsg( _('No tabs have been selected for the report'), 'warn');
+		include('includes/footer.inc');
+		exit;
+	}
 	include('includes/PDFStarter.php');
 	$PageNumber = 0;
 	$FontSize = 10;
@@ -93,23 +101,23 @@ if ((! isset($_POST['FromDate']) AND ! isset($_POST['ToDate'])) OR isset($_POST[
 
 	$TabDetail = DB_query($SQL,$db);
 
-if (DB_error_no($db)!=0){
-	include('includes/header.inc');
-	prnMsg(_('An error occurred getting the orders details'),'',_('Database Error'));
-	if ($debug==1){
-		prnMsg( _('The SQL used to get the orders that failed was') . '<br />' . $SQL, '',_('Database Error'));
+	if (DB_error_no($db)!=0){
+		include('includes/header.inc');
+		prnMsg(_('An error occurred getting the orders details'),'',_('Database Error'));
+		if ($debug==1){
+			prnMsg( _('The SQL used to get the orders that failed was') . '<br />' . $SQL, '',_('Database Error'));
+		}
+		include ('includes/footer.inc');
+		exit;
+	} elseif (DB_num_rows($TabDetail)==0){
+		include('includes/header.inc');
+		prnMsg(_('There were no expenses found in the database within the period from') . ' ' . $_POST['FromDate'] . ' ' . _('to') . ' '. $_POST['ToDate'] . '. ' . _('Please try again selecting a different date range'),'warn');
+		if ($debug==1) {
+			prnMsg(_('The SQL that returned no rows was') . '<br />' . $SQL,'',_('Database Error'));
+		}
+		include('includes/footer.inc');
+		exit;
 	}
-	include ('includes/footer.inc');
-	exit;
-} elseif (DB_num_rows($TabDetail)==0){
-  	include('includes/header.inc');
-	prnMsg(_('There were no expenses found in the database within the period from') . ' ' . $_POST['FromDate'] . ' ' . _('to') . ' '. $_POST['ToDate'] . '. ' . _('Please try again selecting a different date range'),'warn');
-	if ($debug==1) {
-		prnMsg(_('The SQL that returned no rows was') . '<br />' . $SQL,'',_('Database Error'));
-	}
-	include('includes/footer.inc');
-	exit;
-}
 
 	include('includes/PDFTabReportHeader.inc');
 
@@ -234,6 +242,13 @@ if (DB_error_no($db)!=0){
 
 	exit;
 } else {
+
+	if (empty($SelectedTabs) or $SelectedTabs=='') {
+		include('includes/header.inc');
+		prnMsg( _('No tabs have been selected for the report'), 'warn');
+		include('includes/footer.inc');
+		exit;
+	}
 
 	include('includes/header.inc');
 

@@ -65,7 +65,7 @@ echo '</table>';
 $ShipmentCurrency = $HeaderData['currcode'];
 /*Get the total non-stock item shipment charges */
 
-$sql = "SELECT SUM(value)
+$sql = "SELECT SUM(value) AS totalvalue
 		FROM shipmentcharges
 		WHERE stockid=''
 		AND shiptref ='" . $_GET['SelectedShipment']. "'";
@@ -79,13 +79,13 @@ if (DB_num_rows($GetShiptCostsResult)==0) {
 	exit;
 }
 
-$myrow = DB_fetch_row($GetShiptCostsResult);
+$myrow = DB_fetch_array($GetShiptCostsResult);
 
-$TotalCostsToApportion = $myrow[0];
+$TotalCostsToApportion = $myrow['totalvalue'];
 
 /*Now Get the total of stock items invoiced against the shipment */
 
-$sql = "SELECT SUM(value)
+$sql = "SELECT SUM(value) AS totalvalue
 		FROM shipmentcharges
 		WHERE stockid<>''
 		AND shiptref ='" . $_GET['SelectedShipment'] . "'";
@@ -99,9 +99,9 @@ if (DB_error_no($db) !=0 OR DB_num_rows($GetShiptCostsResult)==0) {
 	exit;
 }
 
-$myrow = DB_fetch_row($GetShiptCostsResult);
+$myrow = DB_fetch_array($GetShiptCostsResult);
 
-$TotalInvoiceValueOfShipment = $myrow[0];
+$TotalInvoiceValueOfShipment = $myrow['totalvalue'];
 
 /*Now get the lines on the shipment */
 
@@ -136,7 +136,7 @@ if (DB_num_rows($LineItemsResult) > 0) {
 		$PeriodNo = GetPeriod(Date($_SESSION['DefaultDateFormat']), $db);
 	}
 
-	echo '<br /><table cellpadding="2" colspan="7" class="selection">';
+	echo '<br /><table cellpadding="2" class="selection">';
 	echo '<tr><th colspan="9"><font color="#616161" size="3">' . _('Items on shipment'). '</font></th></tr>';
 
 	$TableHeader = '<tr>
@@ -173,8 +173,8 @@ if (DB_num_rows($LineItemsResult) > 0) {
 					 WHERE shipmentcharges.stockid ='" . $myrow['itemcode'] . "'
 					 AND shipmentcharges.shiptref='" . $_GET['SelectedShipment'] . "'";
 		$ItemChargesResult = DB_query($sql,$db);
-		$ItemChargesRow = DB_fetch_row($ItemChargesResult);
-		$ItemCharges = $ItemChargesRow[0];
+		$ItemChargesRow = DB_fetch_array($ItemChargesResult);
+		$ItemCharges = $ItemChargesRow['invoicedcharges'];
 
 		if ($TotalInvoiceValueOfShipment>0){
 			$PortionOfCharges = $TotalCostsToApportion *($ItemCharges/$TotalInvoiceValueOfShipment);
@@ -194,12 +194,12 @@ if (DB_num_rows($LineItemsResult) > 0) {
 				 		AND purchorderdetails.itemcode = '" . $myrow['itemcode'] . "'";
 
 		$StdCostResult = DB_query($sql,$db);
-		$StdCostRow = DB_fetch_row($StdCostResult);
-		$CostRecd = $StdCostRow[0];
+		$StdCostRow = DB_fetch_array($StdCostResult);
+		$CostRecd = $StdCostRow['costrecd'];
 		if ($myrow['totqtyrecd']==0) {
 			$StdCostUnit = 0;
 		} else {
-			$StdCostUnit = $StdCostRow[0]/$myrow['totqtyrecd'];
+			$StdCostUnit = $StdCostRow['costrecd']/$myrow['totqtyrecd'];
 		}
 
 		if ($ItemShipmentCost !=0){
@@ -240,12 +240,12 @@ if (DB_num_rows($LineItemsResult) > 0) {
 				The cost of these items - $ItemShipmentCost
 				*/
 
-				$sql ="SELECT SUM(quantity) FROM locstock WHERE stockid='" . $myrow['itemcode'] . "'";
+				$sql ="SELECT SUM(quantity) AS totalquantity FROM locstock WHERE stockid='" . $myrow['itemcode'] . "'";
 				$ErrMsg =  _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The quantity on hand could not be retrieved from the database');
 				$DbgMsg = _('The following SQL to retrieve the total stock quantity was used');
 				$Result = DB_query($sql, $db, $ErrMsg, $DbgMsg);
-				$QtyRow = DB_fetch_row($Result);
-				$TotalQuantityOnHand = $QtyRow[0];
+				$QtyRow = DB_fetch_array($Result);
+				$TotalQuantityOnHand = $QtyRow['totalquantity'];
 
 
 				/*The cost adjustment is the price variance / the total quantity in stock
@@ -395,9 +395,9 @@ if (DB_num_rows($LineItemsResult) > 0) {
 			if ( $_POST['UpdateCost'] == 'Yes' ){ /*Only ever a standard costing option
 												  Weighted average costing implies cost updates taking place automatically */
 
-				$QOHResult = DB_query("SELECT SUM(quantity) FROM locstock WHERE stockid ='" . $myrow['itemcode'] . "'",$db);
-				$QOHRow = DB_fetch_row($QOHResult);
-				$QOH=$QOHRow[0];
+				$QOHResult = DB_query("SELECT SUM(quantity) AS totalquantity FROM locstock WHERE stockid ='" . $myrow['itemcode'] . "'",$db);
+				$QOHRow = DB_fetch_array($QOHResult);
+				$QOH=$QOHRow['totalquantity'];
 
 				if ($_SESSION['CompanyRecord']['gllink_stock']==1){
 					$CostUpdateNo = GetNextTransNo(35, $db);
@@ -485,7 +485,7 @@ echo '<tr><td colspan="6" class="number">' . _('Total Value of all variances on 
 echo '</table>';
 
 
-echo '<br /><table colspan="2" width="95%"><tr><td valign="top">'; // put this shipment charges side by side in a table (major table 2 cols)
+echo '<br /><table width="95%"><tr><td valign="top">'; // put this shipment charges side by side in a table (major table 2 cols)
 
 $sql = "SELECT suppliers.suppname,
 		supptrans.suppreference,
@@ -511,7 +511,7 @@ $sql = "SELECT suppliers.suppname,
 
 $ChargesResult = DB_query($sql,$db);
 
-echo '<table cellpadding="2" colspan="6" class="selection">';
+echo '<table cellpadding="2" class="selection">';
 echo '<tr><th colspan="6"><font color="#616161" size="3">' . _('Shipment Charges Against Products'). '</font></th></tr>';
 
 $TableHeader = '<tr>
@@ -582,7 +582,7 @@ $sql = "SELECT suppliers.suppname,
 
 $ChargesResult = DB_query($sql,$db);
 
-echo '<table cellpadding="2" colspan="5" class="selection">';
+echo '<table cellpadding="2" class="selection">';
 echo '<tr><th colspan="6"><font color="#616161" size="3">'._('General Shipment Charges').'</font></th></tr>';
 
 $TableHeader = '<tr>

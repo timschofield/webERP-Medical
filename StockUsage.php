@@ -29,27 +29,27 @@ include('includes/header.inc');
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Dispatch') . '" alt="" />' . ' ' . $title . '</p>';
 
 $result = DB_query("SELECT description,
-				units,
-				mbflag,
-				decimalplaces
-			FROM stockmaster
-			WHERE stockid='".$StockID."'",$db);
-$myrow = DB_fetch_row($result);
+							units,
+							mbflag,
+							decimalplaces
+						FROM stockmaster
+						WHERE stockid='".$StockID."'",$db);
+$myrow = DB_fetch_array($result);
 
-$DecimalPlaces = $myrow[3];
+$DecimalPlaces = $myrow['decimalplaces'];
 
 echo '<table class="selection">';
 
 $Its_A_KitSet_Assembly_Or_Dummy =False;
-if (($myrow[2]=='K') OR ($myrow[2]=='A') OR ($myrow[2]=='D')) {
+if (($myrow['mbflag']=='K') OR ($myrow['mbflag']=='A') OR ($myrow['mbflag']=='D')) {
 	$Its_A_KitSet_Assembly_Or_Dummy =True;
-	echo '<font color="#616161" size="3"><b>' . $StockID - $myrow[0] . '</b></font>';
+	echo '<font color="#616161" size="3"><b>' . $StockID - $myrow['description'] . '</b></font>';
 
 	echo '<br />' . _('The selected item is a dummy or assembly or kit-set item and cannot have a stock holding') . '. ' . _('Please select a different item');
 
 	$StockID = '';
 } else {
-	echo '<tr><th><font size="3" color="#616161">' . _('Item') . ' :<b> ' . $StockID . ' - ' . $myrow[0] . ' </b>  (' . _('in units of') . ' :<b> ' . $myrow[1] . ')</b></font></th></tr>';
+	echo '<tr><th><font size="3" color="#616161">' . _('Item') . ' :<b> ' . $StockID . ' - ' . $myrow['description'] . ' </b>  (' . _('in units of') . ' :<b> ' . $myrow['units'] . ')</b></font></th></tr>';
 }
 
 echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post"><tr><td>';

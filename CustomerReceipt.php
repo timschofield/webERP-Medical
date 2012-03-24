@@ -1036,7 +1036,7 @@ if (((isset($_SESSION['CustomerRecord'])
 	echo '<br />';
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') . '" alt="" />' . ' ' . _('Select a Customer') . '</p>';
-	echo '<table cellpadding="3" colspan="4"  class="selection">';
+	echo '<table cellpadding="3" class="selection">';
 	echo '<tr><td>' . _('Text in the Customer') . ' ' . '<b>' . _('name') . '</b>:</td>';
 	echo '<td><input tabindex="9" type="text" name="Keywords" size="15" maxlength="25" /></td>';
 	echo '<td><font size="3"><b>' . _('OR') . '</b></font></td>';
@@ -1052,7 +1052,7 @@ if (((isset($_SESSION['CustomerRecord'])
 
 	if (isset($CustomerSearchResult)) {
 
-		echo '<table cellpadding="2" colspan="7" class="selection">';
+		echo '<table cellpadding="2" class="selection">';
 		$TableHeader = '<tr><th>' . _('Code') . '</th>
 							<th>' . _('Customer Name') . '</th></tr>';
 		echo $TableHeader;

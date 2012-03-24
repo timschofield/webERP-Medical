@@ -82,7 +82,7 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/c
 
 if (count($_SESSION['Contract'.$identifier]->ContractReqts)>0){
 
-	echo '<table cellpadding="2" colspan="7" class="selection">';
+	echo '<table cellpadding="2" class="selection">';
 
 	if (isset($_SESSION['Contract'.$identifier]->ContractRef)) {
 		echo  '<tr><th colspan="5">' . _('Contract Reference:') .' '. $_SESSION['Contract'.$identifier]->ContractRef.'</th></tr>';

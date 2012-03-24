@@ -214,8 +214,8 @@ if (isset($_POST['SearchParts']) and $_POST['SearchParts']!=''){
 		$StockItemsResult = DB_query($SQL,$db,$ErrMsg,$DbgMsg);
 
 		if (DB_num_rows($StockItemsResult)==1){
-		  	$myrow = DB_fetch_row($StockItemsResult);
-		  	$SelectedStockItem = $myrow[0];
+		  	$myrow = DB_fetch_array($StockItemsResult);
+		  	$SelectedStockItem = $myrow['stockid'];
 			$_POST['SearchOrders']='True';
 		  	unset($StockItemsResult);
 		  	echo '<br />' . _('For the part') . ': ' . $SelectedStockItem . ' ' . _('and') . ' <input type="hidden" name="SelectedStockItem" value="'.$SelectedStockItem.'" />';
@@ -480,7 +480,7 @@ if (!isset($SelectedStockItem)) {
 
 if (isset($StockItemsResult)) {
 
-	echo '<br /><table cellpadding="2" colspan="7" class="selection">';
+	echo '<br /><table cellpadding="2" class="selection">';
 
 	$TableHeadings = '<tr><th>' . _('Code') . '</th>' .
 				'<th>' . _('Description') . '</th>' .
@@ -530,7 +530,7 @@ if (isset($SalesOrdersResult)) {
 
 /*show a table of the orders returned by the SQL */
 
-	echo '<br /><table cellpadding="2" colspan="6" width="90%" class="selection">';
+	echo '<br /><table cellpadding="2" width="90%" class="selection">';
 
 	$tableheader = '<tr><th>' . _('Order') . ' #</th>
 			<th>' . _('Customer') . '</th>

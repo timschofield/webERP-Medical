@@ -79,8 +79,8 @@ if (isset($_POST['submit']) or isset($_GET['remove']) or isset($_GET['add']) ) {
 	// PREVENT DELETES IF DEPENDENT RECORDS IN 'www_users'
 	$sql= "SELECT COUNT(*) FROM www_users WHERE fullaccess='" . $_GET['SelectedRole'] . "'";
 	$result = DB_query($sql,$db);
-	$myrow = DB_fetch_row($result);
-	if ($myrow[0]>0) {
+
+	if (DB_num_rows($result)>0) {
 		prnMsg( _('Cannot delete this role because user accounts are setup using it'),'warn');
 		echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('user accounts that have this security role setting') . '</font>';
 	} else {
@@ -184,8 +184,8 @@ if (isset($SelectedRole)) {
 	$UsedResult = DB_query($sqlUsed, $db);
 	$TokensUsed = array();
 	$i=0;
-	while ($myrow=DB_fetch_row($UsedResult)){
-		$TokensUsed[$i] =$myrow[0];
+	while ($myrow=DB_fetch_array($UsedResult)){
+		$TokensUsed[$i] =$myrow['tokenid'];
 		$i++;
 	}
 

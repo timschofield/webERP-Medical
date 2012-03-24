@@ -81,16 +81,16 @@ if (isset($_POST['submit'])) {
 
 // PREVENT DELETES IF DEPENDENT RECORDS IN 'BOM'
 
-	$sql= "SELECT COUNT(*) FROM bom WHERE bom.workcentreadded='" . $SelectedWC . "'";
+	$sql= "SELECT * FROM bom WHERE bom.workcentreadded='" . $SelectedWC . "'";
 	$result = DB_query($sql,$db);
-	$myrow = DB_fetch_row($result);
-	if ($myrow[0]>0) {
+
+	if (DB_num_rows($result)>0) {
 		prnMsg(_('Cannot delete this work centre because bills of material have been created requiring components to be added at this work center') . '<br />' . _('There are') . ' ' . $myrow[0] . ' ' ._('BOM items referring to this work centre code'),'warn');
 	}  else {
-		$sql= "SELECT COUNT(*) FROM contractbom WHERE contractbom.workcentreadded='" . $SelectedWC . "'";
+		$sql= "SELECT * FROM contractbom WHERE contractbom.workcentreadded='" . $SelectedWC . "'";
 		$result = DB_query($sql,$db);
-		$myrow = DB_fetch_row($result);
-		if ($myrow[0]>0) {
+
+		if (DB_num_rows($result)>0) {
 			prnMsg(_('Cannot delete this work centre because contract bills of material have been created having components added at this work center') . '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('Contract BOM items referring to this work centre code'),'warn');
 		} else {
 			$sql="DELETE FROM workcentres WHERE code='" . $SelectedWC . "'";
@@ -126,7 +126,7 @@ or deletion of the records*/
 					<th>' . _('Overhead Per Hour') . '</th>
 			</tr>';
 
-	while ($myrow = DB_fetch_row($result)) {
+	while ($myrow = DB_fetch_array($result)) {
 
 		printf('<tr><td>%s</td>
 				<td>%s</td>
@@ -136,15 +136,15 @@ or deletion of the records*/
 				<td><a href="%s&SelectedWC=%s">' . _('Edit') . '</td>
 				<td><a href="%s&SelectedWC=%s&delete=yes">' . _('Delete') .'</td>
 				</tr>',
-				$myrow[0],
-				$myrow[1],
-				$myrow[2],
-				$myrow[3],
-				$myrow[4],
+				$myrow['code'],
+				$myrow['description'],
+				$myrow['locationname'],
+				$myrow['overheadrecoveryact'],
+				$myrow['overheadperhour'],
 				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
-				$myrow[0],
+				$myrow['code'],
 				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
-				$myrow[0]);
+				$myrow['code']);
 	}
 
 	//END WHILE LIST LOOP

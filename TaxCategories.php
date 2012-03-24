@@ -38,12 +38,12 @@ if (isset($_POST['submit'])) {
 
 		/*SelectedTaxCategory could also exist if submit had not been clicked this code would not run in this case cos submit is false of course  see the delete code below*/
 		// Check the name does not clash
-		$sql = "SELECT count(*) FROM taxcategories
+		$sql = "SELECT * FROM taxcategories
 				WHERE taxcatid <> '" . $SelectedTaxCategory ."'
 				AND taxcatname ".LIKE." '" . $_POST['TaxCategoryName'] . "'";
 		$result = DB_query($sql,$db);
-		$myrow = DB_fetch_row($result);
-		if ( $myrow[0] > 0 ) {
+
+		if (DB_num_rows($result)>0) {
 			$InputError = 1;
 			prnMsg( _('The tax category cannot be renamed because another with the same name already exists.'),'error');
 		} else {
@@ -54,8 +54,8 @@ if (isset($_POST['submit'])) {
 			$result = DB_query($sql,$db);
 			if ( DB_num_rows($result) != 0 ) {
 				// This is probably the safest way there is
-				$myrow = DB_fetch_row($result);
-				$OldTaxCategoryName = $myrow[0];
+				$myrow = DB_fetch_array($result);
+				$OldTaxCategoryName = $myrow['taxcatname'];
 				$sql = "UPDATE taxcategories
 					SET taxcatname='" . $_POST['TaxCategoryName'] . "'
 					WHERE taxcatname ".LIKE." '".$OldTaxCategoryName."'";
@@ -69,11 +69,11 @@ if (isset($_POST['submit'])) {
 		$msg = _('Tax category name changed');
 	} elseif ($InputError !=1) {
 		/*SelectedTaxCategory is null cos no item selected on first time round so must be adding a record*/
-		$sql = "SELECT count(*) FROM taxcategories
+		$sql = "SELECT * FROM taxcategories
 				WHERE taxcatname " .LIKE. " '".$_POST['TaxCategoryName'] ."'";
 		$result = DB_query($sql,$db);
-		$myrow = DB_fetch_row($result);
-		if ( $myrow[0] > 0 ) {
+
+		if (DB_num_rows($result)>0) {
 			$InputError = 1;
 			prnMsg( _('The tax category cannot be created because another with the same name already exists'),'error');
 		} else {
@@ -120,12 +120,12 @@ if (isset($_POST['submit'])) {
 		// This is probably the safest way there is
 		prnMsg( _('Cannot delete this tax category because it no longer exists'),'warn');
 	} else {
-		$myrow = DB_fetch_row($result);
-		$OldTaxCategoryName = $myrow[0];
-		$sql= "SELECT COUNT(*) FROM stockmaster WHERE taxcatid ".LIKE." '" . $OldTaxCategoryName . "'";
+		$myrow = DB_fetch_array($result);
+		$OldTaxCategoryName = $myrow['taxcatname'];
+		$sql= "SELECT stockid FROM stockmaster WHERE taxcatid ".LIKE." '" . $OldTaxCategoryName . "'";
 		$result = DB_query($sql,$db);
-		$myrow = DB_fetch_row($result);
-		if ($myrow[0]>0) {
+
+		if ( DB_num_rows($result) == 0 ) {
 			prnMsg( _('Cannot delete this tax category because inventory items have been created using this tax category'),'warn');
 			echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('inventory items that refer to this tax category') . '</font>';
 		} else {
@@ -167,7 +167,7 @@ if (isset($_POST['submit'])) {
 		</tr>';
 
 	$k=0; //row colour counter
-	while ($myrow = DB_fetch_row($result)) {
+	while ($myrow = DB_fetch_array($result)) {
 
 		if ($k==1){
 			echo '<tr class="EvenTableRows">';
@@ -177,9 +177,9 @@ if (isset($_POST['submit'])) {
 			$k++;
 		}
 
-		echo '<td>' . $myrow[1] . '</td>';
-		echo '<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?SelectedTaxCategory=' . $myrow[0] . '">' . _('Edit') . '</a></td>';
-		echo '<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?SelectedTaxCategory=' . $myrow[0] . '&delete=1">' . _('Delete') .'</a></td>';
+		echo '<td>' . $myrow['taxcatname'] . '</td>';
+		echo '<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?SelectedTaxCategory=' . $myrow['taxcatid'] . '">' . _('Edit') . '</a></td>';
+		echo '<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?SelectedTaxCategory=' . $myrow['taxcatid'] . '&delete=1">' . _('Delete') .'</a></td>';
 		echo '</tr>';
 
 	} //END WHILE LIST LOOP

@@ -8,14 +8,14 @@ include ('includes/header.inc');
 /*Script to insert ChartDetails records where one should already exist
 only necessary where manual entry of chartdetails has stuffed the system */
 
-$FirstPeriodResult = DB_query("SELECT MIN(periodno) FROM periods",$db);
-$FirstPeriodRow = DB_fetch_row($FirstPeriodResult);
+$FirstPeriodResult = DB_query("SELECT MIN(periodno) AS minperiod FROM periods",$db);
+$FirstPeriodRow = DB_fetch_array($FirstPeriodResult);
 
-$LastPeriodResult = DB_query("SELECT MAX(periodno) FROM periods",$db);
-$LastPeriodRow = DB_fetch_row($LastPeriodResult);
+$LastPeriodResult = DB_query("SELECT MAX(periodno) AS maxperiod FROM periods",$db);
+$LastPeriodRow = DB_fetch_array($LastPeriodResult);
 
-$CreateFrom = $FirstPeriodRow[0];
-$CreateTo = $LastPeriodRow[0];;
+$CreateFrom = $FirstPeriodRow['minperiod'];
+$CreateTo = $LastPeriodRow['maxperiod'];;
 
 
 /*First off see if there are any chartdetails missing create recordset of */

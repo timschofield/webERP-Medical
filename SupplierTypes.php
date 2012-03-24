@@ -19,9 +19,9 @@ if (isset($Errors)) {
 $Errors = array();
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Supplier Types') . '" alt="" />' . _('Supplier Type Setup') . '</p>';
-echo '<div class="page_help_text">' . _('Add/edit/delete Supplier Types') . '</div><br />';
+echo '<div class="page_help_text">' . _('Add/edit/delete Supplier Types') . '</div>';
 
-if (isset($_POST['submit'])) {
+if (isset($_POST['Submit']) or isset($_POST['Update'])) {
 
 	//initialise no input errors assumed initially before we test
 	$InputError = 0;
@@ -45,19 +45,19 @@ if (isset($_POST['submit'])) {
 		$i++;
 	}
 
-	$checksql = "SELECT count(*)
+	$CheckSQL = "SELECT typename
 		     FROM suppliertype
 		     WHERE typename = '" . $_POST['typename'] . "'";
-	$checkresult=DB_query($checksql, $db);
-	$checkrow=DB_fetch_row($checkresult);
-	if ($checkrow[0]>0) {
+	$CheckResult=DB_query($CheckSQL, $db);
+
+	if (DB_num_rows($CheckResult)>0) {
 		$InputError = 1;
 		echo prnMsg(_('You already have a supplier type called').' '.$_POST['typename'],'error');
 		$Errors[$i] = 'SupplierName';
 		$i++;
 	}
 
-	if (isset($SelectedType) AND $InputError !=1) {
+	if (isset($_POST['Update']) and $InputError !=1) {
 
 		$sql = "UPDATE suppliertype
 			SET typename = '" . $_POST['typename'] . "'
@@ -68,33 +68,16 @@ if (isset($_POST['submit'])) {
 
 		// First check the type is not being duplicated
 
-		$checkSql = "SELECT count(*)
-			     FROM suppliertype
-			     WHERE typeid = '" . $_POST['typeid'] . "'";
+		// Add new record on submit
 
-		$checkresult = DB_query($checkSql,$db);
-		$checkrow = DB_fetch_row($checkresult);
+		$sql = "INSERT INTO suppliertype
+					(typename)
+				VALUES ('" . $_POST['typename'] . "')";
 
-		if ( $checkrow[0] > 0 ) {
-			$InputError = 1;
-			prnMsg( _('The supplier type ') . $_POST['typeid'] . _(' already exist.'),'error');
-		} else {
+		$msg = _('Supplier type') . ' ' . $_POST['typename'] .  ' ' . _('has been created');
 
-			// Add new record on submit
-
-			$sql = "INSERT INTO suppliertype
-						(typename)
-					VALUES ('" . $_POST['typename'] . "')";
-
-
-			$msg = _('Supplier type') . ' ' . $_POST['typename'] .  ' ' . _('has been created');
-			$checkSql = "SELECT count(typeid)
-			     FROM suppliertype";
-			$result = DB_query($checkSql, $db);
-			$row = DB_fetch_row($result);
-
-		}
 	}
+
 
 	if ( $InputError !=1) {
 	//run the SQL from either of the above possibilites
@@ -106,18 +89,17 @@ if (isset($_POST['submit'])) {
 					FROM config
 					WHERE confname='DefaultSupplierType'";
 		$result = DB_query($sql,$db);
-		$SupplierTypeRow = DB_fetch_row($result);
-		$DefaultSupplierType = $SupplierTypeRow[0];
+		$SupplierTypeRow = DB_fetch_array($result);
+		$DefaultSupplierType = $SupplierTypeRow['confvalue'];
 
 	// Does it exist
-		$checkSql = "SELECT count(*)
+		$CheckSQL = "SELECT typeid
 			     FROM suppliertype
 			     WHERE typeid = '" . $DefaultSupplierType . "'";
-		$checkresult = DB_query($checkSql,$db);
-		$checkrow = DB_fetch_row($checkresult);
+		$CheckResult = DB_query($CheckSQL,$db);
 
 	// If it doesnt then update config with newly created one.
-		if ($checkrow[0] == 0) {
+		if (DB_num_rows($CheckResult)>0) {
 			$sql = "UPDATE config
 					SET confvalue='" . $_POST['typeid'] . "'
 					WHERE confname='DefaultSupplierType'";
@@ -132,14 +114,14 @@ if (isset($_POST['submit'])) {
 		unset($_POST['typename']);
 	}
 
-} elseif ( isset($_GET['delete']) ) {
+} elseif ( isset($_GET['Delete']) ) {
 
-	$sql = "SELECT COUNT(*) FROM suppliers WHERE supptype='" . $SelectedType . "'";
+	$sql = "SELECT supplierid FROM suppliers WHERE supptype='" . $SelectedType . "'";
 
 	$ErrMsg = _('The number of suppliers using this Type record could not be retrieved because');
 	$result = DB_query($sql,$db,$ErrMsg);
-	$myrow = DB_fetch_row($result);
-	if ($myrow[0]>0) {
+
+	if (DB_num_rows($result)>0) {
 		prnMsg (_('Cannot delete this type because suppliers are currently set up to use this type') . '<br />' .
 			_('There are') . ' ' . $myrow[0] . ' ' . _('suppliers with this type code'));
 	} else {
@@ -167,14 +149,16 @@ if (!isset($SelectedType)){
 	$result = DB_query($sql,$db);
 
 	echo '<table class="selection">';
+	echo '<br />';
+	echo '<tr><th colspan="4"><font size="2" color="#616161">' . _('Supplier Types') . '</th></tr>';
 	echo '<tr>
-		<th>' . _('Type ID') . '</th>
-		<th>' . _('Type Name') . '</th>
+			<th>' . _('Type ID') . '</th>
+			<th>' . _('Type Name') . '</th>
 		</tr>';
 
 $k=0; //row colour counter
 
-while ($myrow = DB_fetch_row($result)) {
+while ($myrow = DB_fetch_array($result)) {
 	if ($k==1){
 		echo '<tr class="EvenTableRows">';
 		$k=0;
@@ -186,17 +170,17 @@ while ($myrow = DB_fetch_row($result)) {
 	printf('
 		<td>%s</td>
 		<td>%s</td>
-		<td><a href="%sSelectedType=%s">' . _('Edit') . '</td>
-		<td><a href="%sSelectedType=%s&delete=yes" onclick=\'return confirm(
+		<td><a href="%sSelectedType=%s&Edit=Yes">' . _('Edit') . '</td>
+		<td><a href="%sSelectedType=%s&Delete=Yes" onclick=\'return confirm(
 			"' . _('Are you sure you wish to delete this Supplier Type?') . '");\'>' . _('Delete') . '</td>
 		</tr>',
-		$myrow[0],
-		$myrow[1],
-		htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') .'?' , $myrow[0],
-		htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') .'?' , $myrow[0]);
+		$myrow['typeid'],
+		$myrow['typename'],
+		htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') .'?' , $myrow['typeid'],
+		htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') .'?' , $myrow['typeid']);
 	}
 	//END WHILE LIST LOOP
-	echo '</table>';
+	echo '</table><br />';
 }
 
 //end of ifs and buts!
@@ -208,13 +192,10 @@ if (! isset($_GET['delete'])) {
 
 	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<br /><table class="selection">'; //Main table
-	echo '<td>'; // First column
-
-
+	echo '<table class="selection">'; //Main table
+	echo '<tr><th colspan="2"><font size="2" color="#616161">' . _('Supplier Type Details') . '</th></tr>';
 	// The user wish to EDIT an existing type
-	if ( isset($SelectedType) AND $SelectedType!='' )
-	{
+	if ( isset($_GET['Edit']) ) {
 
 		$sql = "SELECT typeid,
 			       typename
@@ -228,22 +209,32 @@ if (! isset($_GET['delete'])) {
 		$_POST['typename']  = $myrow['typename'];
 
 		echo '<input type="hidden" name="SelectedType" value="' . $SelectedType . '" />';
-		echo '<input type="hidden" name="typeid" value="' . $_POST['typeid'] . '" />';
+		echo '<input type="hidden" name="typeid" value="' . $SelectedType . '" />';
 
 		// We dont allow the user to change an existing type code
 
-		echo 'Type ID: </td><td>' . $_POST['typeid'] . '</td></tr>';
+		echo '<tr><td>' . _('Type ID') . ': </td><td>' . $SelectedType . '</td></tr>';
 
+		if (!isset($_POST['typename'])) {
+			$_POST['typename']='';
+		}
+		echo '<tr><td>' . _('Type Name') . ':</td><td><input type="text" name="typename" value="' . $_POST['typename'] . '" /></td></tr>';
+
+		echo '</table><br />'; // close main table
+
+		echo '<div class="centre"><input type="submit" name="Update" value="' . _('Update') . '" /></div><br />';
+
+	} else {
+
+		if (!isset($_POST['typename'])) {
+			$_POST['typename']='';
+		}
+		echo '<tr><td>' . _('Type Name') . ':</td><td><input type="text" name="typename" value="' . $_POST['typename'] . '" /></td></tr>';
+
+		echo '</table><br />'; // close main table
+
+		echo '<div class="centre"><input type="submit" name="Submit" value="' . _('Insert') . '" /></div><br />';
 	}
-
-	if (!isset($_POST['typename'])) {
-		$_POST['typename']='';
-	}
-	echo '<tr><td>' . _('Type Name') . ':</td><td><input type="text" name="typename" value="' . $_POST['typename'] . '" /></td></tr>';
-
-	echo '<tr><td colspan="2"><p><div class="centre"><input type="submit" name="submit" value="' . _('Accept') . '" /></div></p>';
-
-   	echo '</td></tr></table>'; // close main table
 
 	echo '</form>';
 

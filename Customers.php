@@ -694,7 +694,6 @@ if (!isset($DebtorNo)) {
 		echo '<tr><td>' . _('Address Line 4 (Postal Code)') . ':</td><td>' . $_POST['Address4'] . '</td></tr>';
 		echo '<tr><td>' . _('Address Line 5') . ':</td><td>' . $_POST['Address5'] . '</td></tr>';
 		echo '<tr><td>' . _('Address Line 6') . ':</td><td>' . $_POST['Address6'] . '</td></tr>';
-		echo '</table></td><td><table class="selection">';
 	} else {
 		echo '<tr><td>' . _('Customer Name') . ':</td>
 			<td><input ' . (in_array('CustName',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="CustName" value="' . $_POST['CustName'] . '" size="42" maxlength="40" /></td></tr>';
@@ -716,8 +715,10 @@ if (!isset($DebtorNo)) {
 			<td><input ' . (in_array('Address5',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="Address5" size="42" maxlength="40" value="' . $_POST['Address5'] . '" /></td></tr>';
 		echo '<tr><td>' . _('Address Line 6') . ':</td>
 			<td><input ' . (in_array('Address6',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="Address6" size="42" maxlength="40" value="' . $_POST['Address6'] . '" /></td></tr>';
-		echo '</table></td><td><table class="selection">';
 	}
+
+	echo '</table></td><td><table class="selection">';
+
 // Select sales types for drop down list
 	if (isset($_GET['Modify'])) {
 		$result=DB_query("SELECT sales_type FROM salestypes WHERE typeabbrev='".$_POST['SalesType']."'",$db);
@@ -858,9 +859,9 @@ if (!isset($DebtorNo)) {
 
 	if (isset($_GET['Modify'])) {
 		if ($_POST['CustomerPOLine']==0){
-			echo '<tr><td>' . _('Invoice Addressing') . ':</td><td>'._('Address to HO').'</td></tr></table>';
+			echo '<tr><td>' . _('Invoice Addressing') . ':</td><td>'._('Address to HO').'</td></tr>';
 		} else {
-			echo '<tr><td>' . _('Invoice Addressing') . ':</td><td>'._('Address to Branch').'</td></tr></table>';
+			echo '<tr><td>' . _('Invoice Addressing') . ':</td><td>'._('Address to Branch').'</td></tr>';
 		}
 	} else {
 		echo '<tr><td>' . _('Invoice Addressing') . ':</td>
@@ -872,10 +873,10 @@ if (!isset($DebtorNo)) {
 			echo '<option value="0">' . _('Address to HO') . '</option>';
 			echo '<option selected="True" value="1">' . _('Address to Branch') . '</option>';
 		}
-		echo '</select></td></tr></table></td></tr></table><br />';
+		echo '</select></td></tr>';
 	}
 
-//	echo '</td></tr><tr><td colspan="2">';
+	echo '</table></td></tr></table><br />';
 
   	$sql = "SELECT contid,
 					debtorno,
@@ -889,6 +890,8 @@ if (!isset($DebtorNo)) {
 	$result = DB_query($sql,$db);
 
 	echo '<table class="selection">';
+	echo '<caption>' . _('Customer Contacts') . '</caption>';
+
 	if (isset($_GET['Modify'])) {
 		echo '<tr>
 			<th>' . _('Name') . '</th>
@@ -901,9 +904,9 @@ if (!isset($DebtorNo)) {
 			<th>' . _('Role') . '</th>
 			<th>' . _('Phone Number') . '</th>
 			<th>' . _('Notes') . '</th>
-			<th>' . _('Edit') . '</th>
 			<th colspan="2"><input type="submit" name="addcontact" value="Add Contact" /></th></tr>';
 	}
+
 	$k=0; //row colour counter
 
 	while ($myrow = DB_fetch_array($result)) {
@@ -948,10 +951,11 @@ if (!isset($DebtorNo)) {
 		}
 	}//END WHILE LIST LOOP
 	echo '</table>';
-		//	echo "<input type='Submit' name='addcontact' value='" . _('ADD Contact') . "' />";
-	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?DebtorNo='.$DebtorNo.'&amp;ID='.$ID.'&amp;Edit'.$Edit.'">';
-	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
+
 	if (isset($Edit) and $Edit!='') {
+// I don't think this block is needed anymore?
+// The AddCustomerContact script exists to add/edit contacts.
+// [as referenced by the 'edit' hyperlink, and the meta refresh at the end of this script]
 		$SQLcustcontacts="SELECT contactname,
 								role,
 								phoneno,
@@ -986,14 +990,11 @@ if (!isset($DebtorNo)) {
 				<td colspan="2"><input type="submit" name="update" value="update" /></td>
 			</tr>
 			</table>';
-
-		echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?DebtorNo='.$DebtorNo.'&ID'.$ID.'">';
-		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-
-
 	}
-	if (isset($_POST['update'])) {
 
+	if (isset($_POST['update'])) {
+// I don't think this block is needed anymore, either?
+// [same reason as mentioned in the block above]
 		$SQLupdatecc="UPDATE custcontacts
 						SET contactname='".$_POST['custname']."',
 						role='".$_POST['role']."',
@@ -1006,17 +1007,15 @@ if (!isset($DebtorNo)) {
 		echo '<meta http-equiv="Refresh" content="0; url="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?DebtorNo='.$DebtorNo.'&amp;ID='.$ID.'" />';
 	}
 	if (isset($_GET['delete'])) {
+// This block is accessed using a Customer Contact's delete hyperlink.
 		$SQl="DELETE FROM custcontacts where debtorno='".$DebtorNo."'
 				and contid='".$ID."'";
 		$resultupcc = DB_query($SQl,$db);
 
 		echo '<meta http-equiv="Refresh" content="0; url=' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?DebtorNo='.$DebtorNo.'">';
 		echo '<br />'.$SQl;
-		prnmsg('Contact Deleted','success');
+		prnMsg('Contact Deleted','success');
 	}
-
-
-//	echo'</td></tr></table>';
 
 	if (isset($_POST['New']) and $_POST['New']) {
 		echo '<div class="centre"><input type="submit" name="submit" value="' . _('Add New Customer') . '" />&nbsp;

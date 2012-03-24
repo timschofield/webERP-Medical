@@ -71,8 +71,8 @@ if(isset($_POST['ProcessTransfer'])){
 
 				$Result = DB_query($SQL, $db, _('Could not retrieve the stock quantity at the dispatch stock location prior to this transfer being processed') );
 				if (DB_num_rows($Result)==1){
-					$LocQtyRow = DB_fetch_row($Result);
-					$QtyOnHandPrior = $LocQtyRow[0];
+					$LocQtyRow = DB_fetch_array($Result);
+					$QtyOnHandPrior = $LocQtyRow['quantity'];
 				} else {
 					/* There must actually be some error this should never happen */
 					$QtyOnHandPrior = 0;
@@ -116,7 +116,7 @@ if(isset($_POST['ProcessTransfer'])){
 					The StockSerialMoves as well */
 
 						/*First need to check if the serial items already exists or not in the location from */
-						$SQL = "SELECT COUNT(*)
+						$SQL = "SELECT stockid
 							FROM stockserialitems
 							WHERE
 							stockid='" . $TrfLine->StockID . "'
@@ -124,9 +124,8 @@ if(isset($_POST['ProcessTransfer'])){
 							AND serialno='" . $Item->BundleRef . "'";
 
 						$Result = DB_query($SQL,$db,'<br />' . _('Could not determine if the serial item exists') );
-						$SerialItemExistsRow = DB_fetch_row($Result);
 
-						if ($SerialItemExistsRow[0]==1){
+						if (DB_num_rows($Result)==1){
 
 							$SQL = "UPDATE stockserialitems SET
 								quantity= quantity - " . $Item->BundleQty . "
@@ -184,8 +183,8 @@ if(isset($_POST['ProcessTransfer'])){
 
 				$Result = DB_query($SQL, $db,  _('Could not retrieve the quantity on hand at the location being transferred to') );
 				if (DB_num_rows($Result)==1){
-					$LocQtyRow = DB_fetch_row($Result);
-					$QtyOnHandPrior = $LocQtyRow[0];
+					$LocQtyRow = DB_fetch_array($Result);
+					$QtyOnHandPrior = $LocQtyRow['quantity'];
 				} else {
 					// There must actually be some error this should never happen
 					$QtyOnHandPrior = 0;
@@ -230,7 +229,7 @@ if(isset($_POST['ProcessTransfer'])){
 					The StockSerialMoves as well */
 
 						/*First need to check if the serial items already exists or not in the location to */
-						$SQL = "SELECT COUNT(*)
+						$SQL = "SELECT stockid
 							FROM stockserialitems
 							WHERE
 							stockid='" . $TrfLine->StockID . "'
@@ -238,10 +237,9 @@ if(isset($_POST['ProcessTransfer'])){
 							AND serialno='" . $Item->BundleRef . "'";
 
 						$Result = DB_query($SQL,$db,'<br />'. _('Could not determine if the serial item exists') );
-						$SerialItemExistsRow = DB_fetch_row($Result);
 
 
-						if ($SerialItemExistsRow[0]==1){
+						if (DB_num_rows($Result)==1){
 
 							$SQL = "UPDATE stockserialitems SET
 								quantity= quantity + '" . $Item->BundleQty . "'

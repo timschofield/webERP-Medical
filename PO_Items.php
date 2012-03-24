@@ -921,7 +921,7 @@ if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
 		echo  ' ' . _('Purchase Order') .' '. $_SESSION['PO'.$identifier]->OrderNo ;
 	}
 	echo '<br /><b>'._(' Order Summary') . '</b></p>';
-	echo '<table cellpadding="2" colspan="7" class="selection">';
+	echo '<table cellpadding="2" class="selection">';
 	echo '<tr>
 		<th>' . _('Item Code') . '</th>
 		<th>' . _('Description') . '</th>
@@ -1081,7 +1081,7 @@ if (!isset($_GET['Edit'])) {
 
 if (isset($SearchResult)) {
 
-	echo '<table cellpadding="1" colspan="7" class="selection">';
+	echo '<table cellpadding="1" class="selection">';
 
 	$TableHeader = '<tr>
 						<th>' . _('Code')  . '</th>

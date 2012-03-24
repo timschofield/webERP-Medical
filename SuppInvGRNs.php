@@ -278,7 +278,7 @@ if (isset($_GET['Modify'])){
 	echo '<input type="hidden" name="DecimalPlaces" value="' . $GRNTmp->DecimalPlaces . '" />';
 } else {
 	if (count( $_SESSION['SuppTransTmp']->GRNs)>0){   /*if there are any outstanding GRNs then */
-		echo '<table cellpadding="1" colspan="7" class="selection">';
+		echo '<table cellpadding="1" class="selection">';
 		echo '<tr><th colspan="10"><font size="3" color="#616161">' . _('Goods Received Yet to be Invoiced From') . ' ' . $_SESSION['SuppTrans']->SupplierName.'</font></th></tr>';
 
 		$tableheader = '<tr bgcolor=#800000><th>' . _('Select') . '</th>

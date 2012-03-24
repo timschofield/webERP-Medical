@@ -55,121 +55,127 @@ if (isset($_POST['UpdateAll'])) {
 				$QtyOnHandPrior = 0;
 			}
 
-			$SQL = "INSERT INTO stockmoves (
-								stockid,
-								type,
-								transno,
-								loccode,
-								trandate,
-								prd,
-								reference,
-								qty,
-								newqoh)
-							VALUES (
-								'" . $StockID . "',
-								17,
-								'" . $AdjustmentNumber . "',
-								'" . $Location . "',
-								'" . $SQLAdjustmentDate . "',
-								'" . $PeriodNo . "',
-								'" . $Narrative ."',
-								'" . -$Quantity . "',
-								'" . ($QtyOnHandPrior - $Quantity) . "'
-							)";
+			if ($_SESSION['ProhibitNegativeStock']==0 or ($_SESSION['ProhibitNegativeStock']==1 and $QtyOnHandPrior>=$Quantity)) {
+
+				$SQL = "INSERT INTO stockmoves (
+									stockid,
+									type,
+									transno,
+									loccode,
+									trandate,
+									prd,
+									reference,
+									qty,
+									newqoh)
+								VALUES (
+									'" . $StockID . "',
+									17,
+									'" . $AdjustmentNumber . "',
+									'" . $Location . "',
+									'" . $SQLAdjustmentDate . "',
+									'" . $PeriodNo . "',
+									'" . $Narrative ."',
+									'" . -$Quantity . "',
+									'" . ($QtyOnHandPrior - $Quantity) . "'
+								)";
 
 
-			$ErrMsg =  _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The stock movement record cannot be inserted because');
-			$DbgMsg =  _('The following SQL to insert the stock movement record was used');
-			$Result = DB_query($SQL, $db, $ErrMsg, $DbgMsg, true);
+				$ErrMsg =  _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The stock movement record cannot be inserted because');
+				$DbgMsg =  _('The following SQL to insert the stock movement record was used');
+				$Result = DB_query($SQL, $db, $ErrMsg, $DbgMsg, true);
 
 
-/*Get the ID of the StockMove... */
-			$StkMoveNo = DB_Last_Insert_ID($db,'stockmoves','stkmoveno');
+				/*Get the ID of the StockMove... */
+				$StkMoveNo = DB_Last_Insert_ID($db,'stockmoves','stkmoveno');
 
-			$SQL="UPDATE stockrequestitems
-						SET qtydelivered=qtydelivered+".$Quantity."
-						WHERE dispatchid='".$RequestID."'
-							AND dispatchitemsid='".$LineID."'";
+				$SQL="UPDATE stockrequestitems
+							SET qtydelivered=qtydelivered+".$Quantity."
+							WHERE dispatchid='".$RequestID."'
+								AND dispatchitemsid='".$LineID."'";
 
-			$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' ._('The location stock record could not be updated because');
-			$DbgMsg = _('The following SQL to update the stock record was used');
-			$Result = DB_query($SQL,$db, $ErrMsg, $DbgMsg,true);
+				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' ._('The location stock record could not be updated because');
+				$DbgMsg = _('The following SQL to update the stock record was used');
+				$Result = DB_query($SQL,$db, $ErrMsg, $DbgMsg,true);
 
-			$SQL = "UPDATE locstock SET quantity = quantity + '" . $Quantity . "'
+				$SQL = "UPDATE locstock SET quantity = quantity - '" . $Quantity . "'
 							WHERE stockid='" . $StockID . "'
 								AND loccode='" . $Location . "'";
 
-			$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' ._('The location stock record could not be updated because');
-			$DbgMsg = _('The following SQL to update the stock record was used');
+				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' ._('The location stock record could not be updated because');
+				$DbgMsg = _('The following SQL to update the stock record was used');
 
-			$Result = DB_query($SQL, $db, $ErrMsg, $DbgMsg, true);
+				$Result = DB_query($SQL, $db, $ErrMsg, $DbgMsg, true);
 
-			if ($_SESSION['CompanyRecord']['gllink_stock']==1 AND $StandardCost > 0){
+				if ($_SESSION['CompanyRecord']['gllink_stock']==1 AND $StandardCost > 0){
 
-				$StockGLCodes = GetStockGLCode($StockID,$db);
+					$StockGLCodes = GetStockGLCode($StockID,$db);
 
-				$SQL = "INSERT INTO gltrans (type,
-											typeno,
-											trandate,
-											periodno,
-											account,
-											amount,
-											narrative,
-											tag)
-										VALUES (17,
-											'"  .$AdjustmentNumber . "',
-											'" . $SQLAdjustmentDate . "',
-											'" . $PeriodNo . "',
-											'" . $StockGLCodes['issueglact'] . "',
-											'" . $StandardCost * -($Quantity) . "',
-											'" . $Narrative . "',
-											'" . $Tag . "'
-										)";
+					$SQL = "INSERT INTO gltrans (type,
+												typeno,
+												trandate,
+												periodno,
+												account,
+												amount,
+												narrative,
+												tag)
+											VALUES (17,
+												'"  .$AdjustmentNumber . "',
+												'" . $SQLAdjustmentDate . "',
+												'" . $PeriodNo . "',
+												'" . $StockGLCodes['issueglact'] . "',
+												'" . $StandardCost * -($Quantity) . "',
+												'" . $Narrative . "',
+												'" . $Tag . "'
+											)";
 
-				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The general ledger transaction entries could not be added because');
-				$DbgMsg = _('The following SQL to insert the GL entries was used');
-				$Result = DB_query($SQL,$db, $ErrMsg, $DbgMsg, true);
+					$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The general ledger transaction entries could not be added because');
+					$DbgMsg = _('The following SQL to insert the GL entries was used');
+					$Result = DB_query($SQL,$db, $ErrMsg, $DbgMsg, true);
 
-				$SQL = "INSERT INTO gltrans (type,
-											typeno,
-											trandate,
-											periodno,
-											account,
-											amount,
-											narrative,
-											tag)
-										VALUES (17,
-											'" . $AdjustmentNumber . "',
-											'" . $SQLAdjustmentDate . "',
-											'" . $PeriodNo . "',
-											'" . $StockGLCodes['stockact'] . "',
-											'" . $StandardCost * $Quantity . "',
-											'" . $Narrative . "',
-											'" . $Tag . "'
-										)";
+					$SQL = "INSERT INTO gltrans (type,
+												typeno,
+												trandate,
+												periodno,
+												account,
+												amount,
+												narrative,
+												tag)
+											VALUES (17,
+												'" . $AdjustmentNumber . "',
+												'" . $SQLAdjustmentDate . "',
+												'" . $PeriodNo . "',
+												'" . $StockGLCodes['stockact'] . "',
+												'" . $StandardCost * $Quantity . "',
+												'" . $Narrative . "',
+												'" . $Tag . "'
+											)";
 
-				$Errmsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The general ledger transaction entries could not be added because');
-				$DbgMsg = _('The following SQL to insert the GL entries was used');
-				$Result = DB_query($SQL,$db, $ErrMsg, $DbgMsg,true);
-			}
+					$Errmsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The general ledger transaction entries could not be added because');
+					$DbgMsg = _('The following SQL to insert the GL entries was used');
+					$Result = DB_query($SQL,$db, $ErrMsg, $DbgMsg,true);
+				}
 
-			if (($Quantity>=$RequestedQuantity) or $Completed==True) {
-				$SQL="UPDATE stockrequestitems
-						SET completed=1
-						WHERE dispatchid='".$RequestID."'
-							AND dispatchitemsid='".$LineID."'";
-				$Result = DB_query($SQL,$db, $ErrMsg, $DbgMsg,true);
-			}
+				if (($Quantity>=$RequestedQuantity) or $Completed==True) {
+					$SQL="UPDATE stockrequestitems
+							SET completed=1
+							WHERE dispatchid='".$RequestID."'
+								AND dispatchitemsid='".$LineID."'";
+					$Result = DB_query($SQL,$db, $ErrMsg, $DbgMsg,true);
+				}
 
-			$Result = DB_Txn_Commit($db);
+				$Result = DB_Txn_Commit($db);
 
-			$ConfirmationText = _('A stock adjustment for'). ' ' . $StockID . _('has been created from location').' ' . $Location .' '. _('for a quantity of') . ' ' . $Quantity ;
-			prnMsg( $ConfirmationText,'success');
+				$ConfirmationText = _('A stock adjustment for'). ' ' . $StockID . _('has been created from location').' ' . $Location .' '. _('for a quantity of') . ' ' . $Quantity ;
+				prnMsg( $ConfirmationText,'success');
 
-			if ($_SESSION['InventoryManagerEmail']!=''){
-				$ConfirmationText = $ConfirmationText . ' ' . _('by user') . ' ' . $_SESSION['UserID'] . ' ' . _('at') . ' ' . Date('Y-m-d H:i:s');
-				$EmailSubject = _('Stock adjustment for'). ' ' . $StockID;
-				mail($_SESSION['InventoryManagerEmail'],$EmailSubject,$ConfirmationText);
+				if ($_SESSION['InventoryManagerEmail']!=''){
+					$ConfirmationText = $ConfirmationText . ' ' . _('by user') . ' ' . $_SESSION['UserID'] . ' ' . _('at') . ' ' . Date('Y-m-d H:i:s');
+					$EmailSubject = _('Stock adjustment for'). ' ' . $StockID;
+					mail($_SESSION['InventoryManagerEmail'],$EmailSubject,$ConfirmationText);
+				}
+			} else {
+				$ConfirmationText = _('A stock issue for'). ' ' . $StockID . ' ' . _('from location').' ' . $Location .' '. _('for a quantity of') . ' ' . $Quantity . ' ' . _('cannot be created as there is insufficient stock and your system is configured to not allow negative stocks');
+				prnMsg( $ConfirmationText,'warn');
 			}
 		}
 	}

@@ -269,7 +269,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 /***************************************************************
 	Line Item Display
 ***************************************************************/
-echo '<table width="90%" cellpadding="2" colspan="7" class="selection">
+echo '<table width="90%" cellpadding="2" class="selection">
 	<tr>
 		<th>' . _('Item Code') . '</th>
 		<th>' . _('Item Description' ) . '</th>

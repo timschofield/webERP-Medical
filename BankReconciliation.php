@@ -23,10 +23,13 @@ if (isset($_POST['PostExchangeDifference']) and is_numeric($_POST['DoExchangeDif
 		prnMsg(_('The entry in the bank statement balance is not numeric. The balance on the bank statement should be entered. The exchange difference has not been calculated and no general ledger journal has been created'),'warn');
 		echo '<br />' . $_POST['BankStatementBalance'];
 	} else {
+
 		/* Now need to get the currency of the account and the current table ex rate */
-		$SQL = "SELECT rate, bankaccountname
-						FROM bankaccounts INNER JOIN currencies
-						ON bankaccounts.currcode=currencies.currabrev
+		$SQL = "SELECT rate,
+						bankaccountname,
+						decimalplaces AS currdecimalplaces
+				FROM bankaccounts INNER JOIN currencies
+				ON bankaccounts.currcode=currencies.currabrev
 				WHERE bankaccounts.accountcode = '" . $_POST['BankAccount']."'";
 
 		$ErrMsg = _('Could not retrieve the exchange rate for the selected bank account');

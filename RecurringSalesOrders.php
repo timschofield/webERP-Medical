@@ -280,7 +280,7 @@ If (isset($_POST['Process'])) {
 				$Ins_LineItemResult = DB_query($LineItemsSQL,$db,$ErrMsg,$DbgMsg,true);
 			} /* inserted line items into sales order details */
 
-			prnmsg(_('The new recurring order template has been added'),'success');
+			prnMsg(_('The new recurring order template has been added'),'success');
 
 		} else { /* must be updating an existing recurring order */
 			$HeaderSQL = "UPDATE recurringsalesorders SET
@@ -291,7 +291,7 @@ If (isset($_POST['Process'])) {
 
 			$ErrMsg = _('The recurring order cannot be updated because');
 			$UpdateQryResult = DB_query($HeaderSQL,$db,$ErrMsg);
-			prnmsg(_('The recurring order template has been updated'),'success');
+			prnMsg(_('The recurring order template has been updated'),'success');
 		}
 
 	echo '<p><a href="'.$rootpath.'/SelectOrderItems.php?NewOrder=Yes">'. _('Enter New Sales Order') .'</a></p>';
@@ -312,7 +312,7 @@ echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 
-echo '<table cellpadding="2" colspan="7" class="selection">';
+echo '<table cellpadding="2" class="selection">';
 echo '<tr><th colspan="7"><font size="2" color="#616161"><b>'._('Order Line Details').'</b></font></th></tr>';
 echo '<tr>
 		<th>'. _('Item Code') .'</th>

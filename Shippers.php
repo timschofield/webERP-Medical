@@ -71,26 +71,26 @@ if ( isset($_POST['submit']) ) {
 
 // PREVENT DELETES IF DEPENDENT RECORDS IN 'SalesOrders'
 
-	$sql= "SELECT COUNT(*) FROM salesorders WHERE salesorders.shipvia='".$SelectedShipper."'";
+	$sql= "SELECT COUNT(orderno) AS totalorders FROM salesorders WHERE salesorders.shipvia='".$SelectedShipper."'";
 	$result = DB_query($sql,$db);
-	$myrow = DB_fetch_row($result);
-	if ($myrow[0]>0) {
+	$myrow = DB_fetch_array($result);
+	if (DB_num_rows($result)>0) {
 		$CancelDelete = 1;
 		echo '<br />';
 		prnMsg( _('Cannot delete this shipper because sales orders have been created using this shipper') . '. ' . _('There are'). ' '.
-			$myrow[0] . ' '. _('sales orders using this shipper code'), 'error');
+			$myrow['totalorders'] . ' '. _('sales orders using this shipper code'), 'error');
 
 	} else {
 		// PREVENT DELETES IF DEPENDENT RECORDS IN 'DebtorTrans'
 
-		$sql= "SELECT COUNT(*) FROM debtortrans WHERE debtortrans.shipvia='".$SelectedShipper."'";
+		$sql= "SELECT COUNT(debtorno) AS totaltrans FROM debtortrans WHERE debtortrans.shipvia='".$SelectedShipper."'";
 		$result = DB_query($sql,$db);
-		$myrow = DB_fetch_row($result);
-		if ($myrow[0]>0) {
+		$myrow = DB_fetch_array($result);
+		if (DB_num_rows($result)>0) {
 			$CancelDelete = 1;
 			echo '<br />';
 			prnMsg( _('Cannot delete this shipper because invoices have been created using this shipping company') . '. ' . _('There are').  ' ' .
-				$myrow[0] . ' ' . _('invoices created using this shipping company'), 'error');
+				$myrow['totaltrans'] . ' ' . _('invoices created using this shipping company'), 'error');
 		} else {
 			// Prevent deletion if the selected shipping company is the current default shipping company in config.php !!
 			if ($_SESSION['Default_Shipper']==$SelectedShipper) {

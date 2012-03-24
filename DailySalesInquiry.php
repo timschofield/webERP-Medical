@@ -1,36 +1,38 @@
 <?php
 
-/* $Revision: 1.00$ */
 /* $Id$*/
 
 include('includes/session.inc');
 $title = _('Daily Sales Inquiry');
 include('includes/header.inc');
-include('includes/DefineCartClass.php');
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('Daily Sales') . '" alt="" />' . ' ' . _('Daily Sales') . '</p>';
-echo '<div class="page_help_text">' . _('Select the month to show daily sales for') . '</div><br />';
+echo '<div class="page_help_text">' . _('Select the month to show daily sales for') . '</div>
+	<br />';
 
 echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<table cellpadding="2" class="selection"><tr>';
-
-echo '<td>' . _('Month to Show') . ':</td><td><select tabindex="1" name="MonthToShow">';
-
-
 if (!isset($_POST['MonthToShow'])){
 	$_POST['MonthToShow'] = GetPeriod(Date($_SESSION['DefaultDateFormat']),$db);
+	$Result = DB_query("SELECT lastdate_in_period FROM periods WHERE periodno='" . $_POST['MonthToShow'] . "'",$db);
+	$myrow = DB_fetch_array($Result);
+	$EndDateSQL = $myrow['lastdate_in_period'];
 }
+
+echo '<table class="selection">
+	<tr>
+		<td>' . _('Month to Show') . ':</td>
+		<td><select tabindex="1" name="MonthToShow">';
 
 $PeriodsResult = DB_query("SELECT periodno, lastdate_in_period FROM periods",$db);
 
 while ($PeriodRow = DB_fetch_array($PeriodsResult)){
 	if ($_POST['MonthToShow']==$PeriodRow['periodno']) {
-	     echo '<option selected="True" value="' . $PeriodRow['periodno'] . '">' . MonthAndYearFromSQLDate($PeriodRow['lastdate_in_period']) . '</option>';
-		 $EndDateSQL = $PeriodRow['lastdate_in_period'];
+		echo '<option selected="selected" value="' . $PeriodRow['periodno'] . '">' . MonthAndYearFromSQLDate($PeriodRow['lastdate_in_period']) . '</option>';
+		$EndDateSQL = $PeriodRow['lastdate_in_period'];
 	} else {
-	     echo '<option value="' . $PeriodRow['periodno'] . '">' . MonthAndYearFromSQLDate($PeriodRow['lastdate_in_period']) . '</option>';
+		echo '<option value="' . $PeriodRow['periodno'] . '">' . MonthAndYearFromSQLDate($PeriodRow['lastdate_in_period']) . '</option>';
 	}
 }
 echo '</select></td>';
@@ -111,17 +113,17 @@ $CumulativeTotalCost = 0;
 $BilledDays = 0;
 $DaySalesArray = array();
 while ($DaySalesRow=DB_fetch_array($SalesResult)) {
-	$DaySalesArray[DayOfMonthFromSQLDate($DaySalesRow['trandate'])] = new Cart;
+
 	if ($DaySalesRow['salesvalue'] > 0) {
-		$DaySalesArray[DayOfMonthFromSQLDate($DaySalesRow['trandate'])]->Sales = $DaySalesRow['salesvalue'];
+		$DaySalesArray[DayOfMonthFromSQLDate($DaySalesRow['trandate'])]['Sales'] = $DaySalesRow['salesvalue'];
 	} else {
-		$DaySalesArray[DayOfMonthFromSQLDate($DaySalesRow['trandate'])]->Sales = 0;
-    }
+		$DaySalesArray[DayOfMonthFromSQLDate($DaySalesRow['trandate'])]['Sales'] = 0;
+	}
 	if ($DaySalesRow['salesvalue'] > 0 ) {
-		$DaySalesArray[DayOfMonthFromSQLDate($DaySalesRow['trandate'])]->GPPercent = ($DaySalesRow['salesvalue']-$DaySalesRow['cost'])/$DaySalesRow['salesvalue'];
-    } else {
-		$DaySalesArray[DayOfMonthFromSQLDate($DaySalesRow['trandate'])]->GPPercent = 0;
-    }
+		$DaySalesArray[DayOfMonthFromSQLDate($DaySalesRow['trandate'])]['GPPercent'] = ($DaySalesRow['salesvalue']-$DaySalesRow['cost'])/$DaySalesRow['salesvalue'];
+	} else {
+		$DaySalesArray[DayOfMonthFromSQLDate($DaySalesRow['trandate'])]['GPPercent'] = 0;
+	}
 	$BilledDays++;
 	$CumulativeTotalSales += $DaySalesRow['salesvalue'];
 	$CumulativeTotalCost += $DaySalesRow['cost'];
@@ -135,8 +137,8 @@ for ($i=0;$i<$ColumnCounter;$i++){
 $DayNumber = 1;
 /*Set up day number headings*/
 for ($i=$ColumnCounter;$i<=6;$i++){
-       echo '<th>' . $DayNumber . '</th>';
-       $DayNumber++;
+	   echo '<th>' . $DayNumber . '</th>';
+	   $DayNumber++;
 }
 echo '</tr><tr>';
 for ($i=0;$i<$ColumnCounter;$i++){
@@ -147,20 +149,20 @@ $LastDayOfMonth = DayOfMonthFromSQLDate($EndDateSQL);
 for ($i=1;$i<=$LastDayOfMonth;$i++){
 		$ColumnCounter++;
 		if(isset($DaySalesArray[$i])) {
-			echo '<td class="number" style="outline: 1px solid gray;">' . locale_money_format($DaySalesArray[$i]->Sales,$_SESSION['CompanyRecord']['currencydefault']) . '<br />' .  locale_number_format($DaySalesArray[$i]->GPPercent*100,1) . '%</td>';
+			echo '<td class="number" style="outline: 1px solid gray;">' . locale_money_format($DaySalesArray[$i]['Sales'],$_SESSION['CompanyRecord']['currencydefault']) . '<br />' .  locale_number_format($DaySalesArray[$i]['GPPercent']*100,1) . '%</td>';
 		} else {
 			echo '<td class="number" style="outline: 1px solid gray;">' . locale_money_format(0,$_SESSION['CompanyRecord']['currencydefault']) . '<br />' .  locale_number_format(0,1) . '%</td>';
 		}
 		if ($ColumnCounter==7){
 			echo '</tr><tr>';
-                        for ($j=1;$j<=7;$j++){
-							       echo '<th>' . $DayNumber. '</th>';
-                            $DayNumber++;
-                            if($DayNumber>$LastDayOfMonth){
-                                   break;
-                            }
-                        }
-                        echo '</tr><tr>';
+						for ($j=1;$j<=7;$j++){
+								   echo '<th>' . $DayNumber. '</th>';
+							$DayNumber++;
+							if($DayNumber>$LastDayOfMonth){
+								   break;
+							}
+						}
+						echo '</tr><tr>';
 			$ColumnCounter=0;
 		}
 

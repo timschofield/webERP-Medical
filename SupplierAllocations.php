@@ -464,7 +464,7 @@ if (isset($_POST['AllocTrans'])){
 
     /*Now display the potential and existing allocations put into the array above */
 
-        echo '<table cellpadding="2" colspan="7" class="selection">';
+        echo '<table cellpadding="2" class="selection">';
 	  	  $TableHeader = '<tr><th>' . _('Type') . '</th>
 		 			<th>' . _('Trans') . '<br />' . _('Number') . '</th>
 					<th>' . _('Trans') .'<br />' . _('Date') . '</th>

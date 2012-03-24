@@ -22,7 +22,7 @@ $AccountsResult = DB_query($SQL,$db,$ErrMsg);
 
 /*show a table of the orders returned by the SQL */
 
-echo '<table cellpadding="2" colspan="2">
+echo '<table cellpadding="2">
 		<tr>
 			<th>'._('Group').'</font></th>
 			<th>'._('Code').'</font></th>

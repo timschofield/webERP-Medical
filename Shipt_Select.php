@@ -147,11 +147,10 @@ $result1 = DB_query($SQL,$db);
 
 echo '<table class="selection">';
 echo '<tr><th colspan="5"><font size="3" color="#616161">'._('To search for shipments for a specific part use the part selection facilities below') . '</font></th></tr>';
-?>
-<tr>
-<td><font size="1"><?php echo _('Select a stock category');?>:</font>
-<select name="StockCat">
-<?php
+echo '<tr>
+<td><font size="1">' . _('Select a stock category') . ':</font>
+<select name="StockCat">';
+
 while ($myrow1 = DB_fetch_array($result1)) {
 	if (isset($_POST['StockCat']) and $myrow1['categoryid']==$_POST['StockCat']){
 		echo '<option selected="True" value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
@@ -159,23 +158,22 @@ while ($myrow1 = DB_fetch_array($result1)) {
 		echo '<option value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 	}
 }
-?>
-</select>
-<td><font size="1"><?php echo _('Enter text extracts in the');?> <b><?php echo _('description');?></b>:</font></td>
+
+echo '</select>
+<td><font size="1">' . _('Enter text extracts in the') . ' <b>' . _('description') . '</b>:</font></td>
 <td><input type="text" name="Keywords" size="20" maxlength="25" /></td></tr>
-<tr><td></td>
-<td><font size="3"><b><?php echo _('OR');?> </b></font><font size="1"><?php echo _('Enter extract of the');?> <b><?php echo _('Stock Code');?></b>:</font></td>
+<tr><td>&nbsp;</td>
+<td><font size="3"><b>' . _('OR') . ' </b></font><font size="1">' . _('Enter extract of the') . ' <b>' . _('Stock Code') . '</b>:</font></td>
 <td><input type="text" name="StockCode" size="15" maxlength="18" /></td>
 </tr>
-</table><br />
+</table><br />';
 
-<?php
 echo '<div class="centre"><input type="submit" name="SearchParts" value="'._('Search Parts Now').'" />';
 echo '<input type="submit" name="ResetPart" value="'. _('Show All') .'" /></div><br />';
 
 if (isset($StockItemsResult)) {
 
-	echo '<table cellpadding="2" colspan="7" class="selection">';
+	echo '<table cellpadding="2" class="selection">';
 	$TableHeader = '<tr>
 			<th>'. _('Code').'</th>
 			<th>'. _('Description').'</th>
@@ -276,7 +274,7 @@ Code	 Description	On Hand		 Orders Ostdg     Units		 Code	Description 	 On Hand 
 	if (DB_num_rows($ShipmentsResult)>0){
 		/*show a table of the shipments returned by the SQL */
 
-		echo '<table cellpadding="2" colspan="7" width="95%" class="selection">';
+		echo '<table cellpadding="2" width="95%" class="selection">';
 		$TableHeader = '<tr>
 				<th>'. _('Shipment'). '</th>
 				<th>'. _('Supplier'). '</th>

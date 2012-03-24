@@ -63,14 +63,13 @@ if (isset($_POST['submit'])) {
 
 		// First check the type is not being duplicated
 
-		$checkSql = "SELECT count(*)
+		$checkSql = "SELECT typeabbrev
 			     FROM salestypes
 			     WHERE typeabbrev = '" . $_POST['TypeAbbrev'] . "'";
 
 		$checkresult = DB_query($checkSql,$db);
-		$checkrow = DB_fetch_row($checkresult);
 
-		if ( $checkrow[0] > 0 ) {
+		if ( DB_num_rows($checkresult) > 0 ) {
 			$InputError = 1;
 			prnMsg( _('The customer/sales/pricelist type ') . $_POST['TypeAbbrev'] . _(' already exist.'),'error');
 		} else {
@@ -83,11 +82,7 @@ if (isset($_POST['submit'])) {
 				VALUES ('" . str_replace(' ', '', $_POST['TypeAbbrev']) . "',
 					'" . $_POST['Sales_Type'] . "')";
 
-			$msg = _('Customer/sales/pricelist type') . ' ' . $_POST["Sales_Type"] .  ' ' . _('has been created');
-			$checkSql = "SELECT count(typeabbrev)
-			     FROM salestypes";
-			$result = DB_query($checkSql, $db);
-			$row = DB_fetch_row($result);
+			$msg = _('Customer/sales/pricelist type') . ' ' . $_POST['Sales_Type'] .  ' ' . _('has been created');
 
 		}
 	}
@@ -98,22 +93,16 @@ if (isset($_POST['submit'])) {
 
 
 	// Fetch the default price list.
-		$sql = "SELECT confvalue
-					FROM config
-					WHERE confname='DefaultPriceList'";
-		$result = DB_query($sql,$db);
-		$PriceListRow = DB_fetch_row($result);
-		$DefaultPriceList = $PriceListRow[0];
+		$DefaultPriceList = $_SESSION['DefaultPriceList'];
 
 	// Does it exist
-		$checkSql = "SELECT count(*)
+		$checkSql = "SELECT typeabbrev
 			     FROM salestypes
 			     WHERE typeabbrev = '" . $DefaultPriceList . "'";
 		$checkresult = DB_query($checkSql,$db);
-		$checkrow = DB_fetch_row($checkresult);
 
 	// If it doesnt then update config with newly created one.
-		if ($checkrow[0] == 0) {
+		if (DB_num_rows($checkresult) == 0) {
 			$sql = "UPDATE config
 					SET confvalue='".$_POST['TypeAbbrev']."'
 					WHERE confname='DefaultPriceList'";
@@ -133,26 +122,26 @@ if (isset($_POST['submit'])) {
 	// PREVENT DELETES IF DEPENDENT RECORDS IN 'DebtorTrans'
 	// Prevent delete if saletype exist in customer transactions
 
-	$sql= "SELECT COUNT(*)
+	$sql= "SELECT COUNT(id) AS transactions
 	       FROM debtortrans
 	       WHERE debtortrans.tpe='".$SelectedType."'";
 
 	$ErrMsg = _('The number of transactions using this customer/sales/pricelist type could not be retrieved');
 	$result = DB_query($sql,$db,$ErrMsg);
 
-	$myrow = DB_fetch_row($result);
-	if ($myrow[0]>0) {
-		prnMsg(_('Cannot delete this sale type because customer transactions have been created using this sales type') . '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('transactions using this sales type code'),'error');
+	$myrow = DB_fetch_array($result);
+	if ($myrow['transactions']>0) {
+		prnMsg(_('Cannot delete this sale type because customer transactions have been created using this sales type') . '<br />' . _('There are') . ' ' . $myrow['transactions'] . ' ' . _('transactions using this sales type code'),'error');
 
 	} else {
 
-		$sql = "SELECT COUNT(*) FROM debtorsmaster WHERE salestype='".$SelectedType."'";
+		$sql = "SELECT COUNT(debtorno) AS debtors FROM debtorsmaster WHERE salestype='".$SelectedType."'";
 
 		$ErrMsg = _('The number of transactions using this Sales Type record could not be retrieved because');
 		$result = DB_query($sql,$db,$ErrMsg);
-		$myrow = DB_fetch_row($result);
-		if ($myrow[0]>0) {
-			prnMsg (_('Cannot delete this sale type because customers are currently set up to use this sales type') . '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('customers with this sales type code'));
+		$myrow = DB_fetch_array($result);
+		if ($myrow['debtors']>0) {
+			prnMsg (_('Cannot delete this sale type because customers are currently set up to use this sales type') . '<br />' . _('There are') . ' ' . $myrow['debtors'] . ' ' . _('customers with this sales type code'));
 		} else {
 
 			$sql="DELETE FROM salestypes WHERE typeabbrev='".$SelectedType."'";

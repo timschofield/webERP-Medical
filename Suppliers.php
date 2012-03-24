@@ -318,10 +318,10 @@ if (isset($_POST['submit'])) {
 	ie the page has called itself with some user input */
 
 	//first off validate inputs sensible
-	$sql="SELECT COUNT(supplierid) FROM suppliers WHERE supplierid='".$SupplierID."'";
+	$sql="SELECT supplierid FROM suppliers WHERE supplierid='".$SupplierID."'";
 	$result=DB_query($sql,$db);
-	$myrow=DB_fetch_row($result);
-	if ($myrow[0]>0 and isset($_POST['New'])) {
+
+	if (DB_num_rows($result)>0 and isset($_POST['New'])) {
 		$InputError = 1;
 		prnMsg( _('The supplier number already exists in the database'),'error');
 		$Errors[$i] = 'ID';
@@ -449,10 +449,10 @@ if (isset($_POST['submit'])) {
 			$supptrans = DB_num_rows($suppresult);
 
 			$suppcurrssql = "SELECT currcode
-													FROM suppliers
-													WHERE supplierid='".$SupplierID ."'";
+								FROM suppliers
+								WHERE supplierid='".$SupplierID ."'";
 			$currresult = DB_query($suppcurrssql, $db);
-			$suppcurr = DB_fetch_row($currresult);
+			$suppcurr = DB_fetch_array($currresult);
 
 			if ($supptrans == 0) {
 				$sql = "UPDATE suppliers SET suppname='" . $_POST['SuppName'] . "',
@@ -478,7 +478,7 @@ if (isset($_POST['submit'])) {
 							taxref='". $_POST['TaxRef'] ."'
 						WHERE supplierid = '".$SupplierID."'";
 			} else {
-				if ($suppcurr[0] != $_POST['CurrCode']) {
+				if ($suppcurr['currcode'] != $_POST['CurrCode']) {
 					prnMsg( _('Cannot change currency code as transactions already exist'), 'info');
 				}
 				$sql = "UPDATE suppliers SET suppname='" . $_POST['SuppName'] . "',
@@ -602,27 +602,27 @@ if (isset($_POST['submit'])) {
 
 // PREVENT DELETES IF DEPENDENT RECORDS IN 'SuppTrans' , PurchOrders, SupplierContacts
 
-	$sql= "SELECT COUNT(*) FROM supptrans WHERE supplierno='" . $SupplierID . "'";
+	$sql= "SELECT supplierno FROM supptrans WHERE supplierno='" . $SupplierID . "'";
 	$result = DB_query($sql, $db);
-	$myrow = DB_fetch_row($result);
-	if ($myrow[0] > 0) {
+
+	if (DB_num_rows($result) > 0) {
 		$CancelDelete = 1;
 		prnMsg(_('Cannot delete this supplier because there are transactions that refer to this supplier'),'warn');
 		echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('transactions against this supplier');
 
 	} else {
-		$sql= "SELECT COUNT(*) FROM purchorders WHERE supplierno='" . $SupplierID . "'";
+		$sql= "SELECT supplierno FROM purchorders WHERE supplierno='" . $SupplierID . "'";
 		$result = DB_query($sql, $db);
-		$myrow = DB_fetch_row($result);
-		if ($myrow[0] > 0) {
+
+		if (DB_num_rows($result) > 0) {
 			$CancelDelete = 1;
 			prnMsg(_('Cannot delete the supplier record because purchase orders have been created against this supplier'),'warn');
 			echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('orders against this supplier');
 		} else {
-			$sql= "SELECT COUNT(*) FROM suppliercontacts WHERE supplierid='" . $SupplierID . "'";
+			$sql= "SELECT supplierid FROM suppliercontacts WHERE supplierid='" . $SupplierID . "'";
 			$result = DB_query($sql, $db);
-			$myrow = DB_fetch_row($result);
-			if ($myrow[0] > 0) {
+
+			if (DB_num_rows($result) > 0) {
 				$CancelDelete = 1;
 				prnMsg(_('Cannot delete this supplier because there are supplier contacts set up against it') . ' - ' . _('delete these first'),'warn');
 				echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('supplier contacts relating to this supplier');
@@ -701,9 +701,7 @@ if (!isset($SupplierID)) {
 
 	$result=DB_query("SELECT currency, currabrev FROM currencies", $db);
 	if (!isset($_POST['CurrCode'])){
-		$CurrResult = DB_query("SELECT currencydefault FROM companies WHERE coycode=1", $db);
-		$myrow = DB_fetch_row($CurrResult);
-		$_POST['CurrCode'] = $myrow[0];
+		$_POST['CurrCode'] = $_SESSION['CompanyRecord']['currencydefault'];
 	}
 
 	echo '<tr><td>' . _('Supplier Currency') . ':</td><td><select name="CurrCode">';

@@ -14,8 +14,8 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/i
 //update database if update pressed
 if (isset($_POST['submit'])){
 	for ($i=1;$i<count($_POST);$i++){ //loop through the returned customers
-		if (isset($_POST['StockID' . $i]) AND is_numeric(filter_number_format($_POST['ReorderLevel'.$i]))){
-			$SQLUpdate="UPDATE locstock SET reorderlevel = '" . filter_number_format($_POST['ReorderLevel'.$i]) . "'
+		if (isset($_POST['StockID' . $i]) and is_numeric(filter_number_input($_POST['ReorderLevel'.$i]))){
+			$SQLUpdate="UPDATE locstock SET reorderlevel = '" . filter_number_input($_POST['ReorderLevel'.$i]) . "'
 						WHERE loccode = '" . $_POST['StockLocation'] . "'
 						AND stockid = '" . $_POST['StockID' . $i] . "'";
 			$Result = DB_query($SQLUpdate,$db);

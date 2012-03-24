@@ -193,11 +193,13 @@ $MenuItems['PO']['Transactions']['URL'] = array ('/PO_SelectOSPurchOrder.php',
 												);
 
 $MenuItems['PO']['Reports']['Caption'] = array (_('Purchase Order Inquiry'),
-												_('Purchase Order Detail Or Summary Inquiries')
+												_('Purchase Order Detail Or Summary Inquiries'),
+												_('Supplier Price List')
 												);
 
 $MenuItems['PO']['Reports']['URL'] = array ('/PO_SelectPurchOrder.php',
-											'/POReport.php'
+											'/POReport.php',
+											'/SuppPriceList.php'
 											);
 
 $MenuItems['PO']['Maintenance']['Caption'] = array (
@@ -297,8 +299,10 @@ $MenuItems['manuf']['Transactions']['URL'] = array ('/WorkOrderEntry.php',
 													'/SelectWorkOrder.php'
 													);
 
-$MenuItems['manuf']['Reports']['Caption'] = array (_('Costed Bill Of Material Inquiry'),
+$MenuItems['manuf']['Reports']['Caption'] = array (_('Select A Work Order'),
+													_('Costed Bill Of Material Inquiry'),
 													_('Where Used Inquiry'),
+													_('Bill Of Material Listing'),
 													_('Indented Bill Of Material Listing'),
 													_('List Components Required'),
 													_('Indented Where Used Listing'),
@@ -309,8 +313,10 @@ $MenuItems['manuf']['Reports']['Caption'] = array (_('Costed Bill Of Material In
 													_('MRP Reschedules Required')
 												);
 
-$MenuItems['manuf']['Reports']['URL'] = array ('/BOMInquiry.php',
+$MenuItems['manuf']['Reports']['URL'] = array ('/WorkOrderEntry.php',
+												'/BOMInquiry.php',
 												'/WhereUsedInquiry.php',
+												'/BOMListing.php',
 												'/BOMIndented.php',
 												'/BOMExtendedQty.php',
 												'/BOMIndentedReverse.php',
@@ -323,6 +329,7 @@ $MenuItems['manuf']['Reports']['URL'] = array ('/BOMInquiry.php',
 
 $MenuItems['manuf']['Maintenance']['Caption'] = array (_('Work Centre'),
 												_('Bills Of Material'),
+												_('Copy BOM To New Item'),
 												_('Master Schedule'),
 												_('Auto Create Master Schedule'),
 												_('MRP Calculation')
@@ -330,6 +337,7 @@ $MenuItems['manuf']['Maintenance']['Caption'] = array (_('Work Centre'),
 
 $MenuItems['manuf']['Maintenance']['URL'] = array ('/WorkCentres.php',
 											'/BOMs.php',
+											'/CopyBOM.php',
 											'/MRPDemands.php',
 											'/MRPCreateDemands.php',
 											'/MRP.php'

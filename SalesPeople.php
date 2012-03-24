@@ -136,18 +136,21 @@ if (isset($_POST['submit'])) {
 
 // PREVENT DELETES IF DEPENDENT RECORDS IN 'DebtorsMaster'
 
-	$sql= "SELECT COUNT(*) FROM custbranch WHERE  custbranch.salesman='".$SelectedEmployer."'";
+
+	$sql= "SELECT COUNT(branchcode) AS branches FROM custbranch WHERE custbranch.salesman='".$SelectedEmployer."'";
 	$result = DB_query($sql,$db);
-	$myrow = DB_fetch_row($result);
-	if ($myrow[0]>0) {
-		prnMsg(_('Cannot delete this employer because patients are set up referring to them') . ' - ' . _('first alter the patients concerned') . '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('patients that refer to this employer'),'error');
+
+	$myrow = DB_fetch_array($result);
+	if ($myrow['branches']>0) {
+		prnMsg(_('Cannot delete this salesperson because branches are set up referring to them') . ' - ' . _('first alter the branches concerned') . '<br />' . _('There are') . ' ' . $myrow['branches'] . ' ' . _('branches that refer to this salesperson'),'error');
 
 	} else {
-		$sql= "SELECT COUNT(*) FROM salesanalysis WHERE salesanalysis.salesperson='".$SelectedEmployer."'";
+
+		$sql= "SELECT COUNT(salesperson) AS salespeople FROM salesanalysis WHERE salesanalysis.salesperson='".$SelectedEmployer."'";
 		$result = DB_query($sql,$db);
-		$myrow = DB_fetch_row($result);
-		if ($myrow[0]>0) {
-			prnMsg(_('Cannot delete this employer because sales analysis records refer to them') , '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('sales analysis records that refer to this patient'),'error');
+		$myrow = DB_fetch_array($result);
+		if ($myrow['salespeople']>0) {
+			prnMsg(_('Cannot delete this salesperson because sales analysis records refer to them') , '<br />' . _('There are') . ' ' . $myrow['salespeople'] . ' ' . _('sales analysis records that refer to this salesperson'),'error');
 		} else {
 
 			$sql="DELETE FROM salesman WHERE salesmancode='".$SelectedEmployer."'";
@@ -190,6 +193,11 @@ or deletion of the records*/
 		} else {
 			echo '<tr class="OddTableRows">';
 			$k++;
+		}
+		if ($myrow['current'] == 1) {
+			$ActiveText = _('Yes');
+		} else {
+			$ActiveText = _('No');
 		}
 
 		printf('

@@ -38,12 +38,12 @@ if (isset($_POST['submit'])) {
 
 		/*SelectedMeasureID could also exist if submit had not been clicked this code would not run in this case cos submit is false of course  see the delete code below*/
 		// Check the name does not clash
-		$sql = "SELECT count(*) FROM unitsofmeasure
+		$sql = "SELECT * FROM unitsofmeasure
 				WHERE unitid <> '" . $SelectedMeasureID ."'
 				AND unitname ".LIKE." '" . $_POST['MeasureName'] . "'";
 		$result = DB_query($sql,$db);
-		$myrow = DB_fetch_row($result);
-		if ( $myrow[0] > 0 ) {
+
+		if ( DB_num_rows($result) > 0 ) {
 			$InputError = 1;
 			prnMsg( _('The unit of measure can not be renamed because another with the same name already exist.'),'error');
 		} else {
@@ -55,8 +55,8 @@ if (isset($_POST['submit'])) {
 			$result = DB_query($sql,$db);
 			if ( DB_num_rows($result) != 0 ) {
 				// This is probably the safest way there is
-				$myrow = DB_fetch_row($result);
-				$OldMeasureName = $myrow[0];
+				$myrow = DB_fetch_array($result);
+				$OldMeasureName = $myrow['unitname'];
 				$sql = array();
 				$sql[] = "UPDATE unitsofmeasure
 					SET unitname='" . $_POST['MeasureName'] . "'
@@ -72,11 +72,11 @@ if (isset($_POST['submit'])) {
 		$msg = _('Unit of measure changed');
 	} elseif ($InputError !=1) {
 		/*SelectedMeasureID is null cos no item selected on first time round so must be adding a record*/
-		$sql = "SELECT count(*) FROM unitsofmeasure
+		$sql = "SELECT * FROM unitsofmeasure
 				WHERE unitname " .LIKE. " '".$_POST['MeasureName'] ."'";
 		$result = DB_query($sql,$db);
-		$myrow = DB_fetch_row($result);
-		if ( $myrow[0] > 0 ) {
+
+		if ( DB_num_rows($result) > 0 ) {
 			$InputError = 1;
 			prnMsg( _('The unit of measure can not be created because another with the same name already exists.'),'error');
 		} else {
@@ -127,12 +127,12 @@ if (isset($_POST['submit'])) {
 		// This is probably the safest way there is
 		prnMsg( _('Cannot delete this unit of measure because it no longer exist'),'warn');
 	} else {
-		$myrow = DB_fetch_row($result);
-		$OldMeasureName = $myrow[0];
-		$sql= "SELECT COUNT(*) FROM stockmaster WHERE units ".LIKE." '" . $OldMeasureName . "'";
+		$myrow = DB_fetch_array($result);
+		$OldMeasureName = $myrow['unitname'];
+		$sql= "SELECT * FROM stockmaster WHERE units ".LIKE." '" . $OldMeasureName . "'";
 		$result = DB_query($sql,$db);
-		$myrow = DB_fetch_row($result);
-		if ($myrow[0]>0) {
+
+		if (DB_num_rows($result)>0) {
 			prnMsg( _('Cannot delete this unit of measure because inventory items have been created using this unit of measure'),'warn');
 			echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('inventory items that refer to this unit of measure') . '</font>';
 		} else {
@@ -174,7 +174,7 @@ if (isset($_POST['submit'])) {
 		</tr>';
 
 	$k=0; //row colour counter
-	while ($myrow = DB_fetch_row($result)) {
+	while ($myrow = DB_fetch_array($result)) {
 
 		if ($k==1){
 			echo '<tr class="EvenTableRows">';
@@ -184,9 +184,9 @@ if (isset($_POST['submit'])) {
 			$k++;
 		}
 
-		echo '<td>' . $myrow[1] . '</td>';
-		echo '<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?SelectedMeasureID=' . $myrow[0] . '">' . _('Edit') . '</a></td>';
-		echo '<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?SelectedMeasureID=' . $myrow[0] . '&delete=1">' . _('Delete') .'</a></td>';
+		echo '<td>' . $myrow['unitname'] . '</td>';
+		echo '<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?SelectedMeasureID=' . $myrow['unitid'] . '">' . _('Edit') . '</a></td>';
+		echo '<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?SelectedMeasureID=' . $myrow['unitid'] . '&delete=1">' . _('Delete') .'</a></td>';
 		echo '</tr>';
 
 	} //END WHILE LIST LOOP
