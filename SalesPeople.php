@@ -272,7 +272,7 @@ if (! isset($_GET['delete'])) {
 	  $_POST['Current']=0;
 	}
 
-	echo '<tr><td>' . _('Employers Name') . ':</td><td><input type="text" '. (in_array('EmployerName',$Errors) ? 'class="inputerror"' : '' ) .' name="EmployerName"  size="30" maxlength="30" value="' . $_POST['EmployerName'] . '" /></td></tr>';
+	echo '<tr><td>' . _('Employers Name') . ':</td><td><input type="text" '. (in_array('EmployerName',$Errors) ? 'class="inputerror"' : '' ) .' name="EmployerName"  size="48" maxlength="48" value="' . $_POST['EmployerName'] . '" /></td></tr>';
 	echo '<tr><td>' . _('Telephone No') . ':</td><td><input type="text" name="SManTel" size="20" maxlength="20" value="' . $_POST['SManTel'] . '" /></td></tr>';
 	echo '<tr><td>' . _('Facsimile No') . ':</td><td><input type="text" name="SManFax" size="20" maxlength="20" value="' . $_POST['SManFax'] . '" /></td></tr>';
 
