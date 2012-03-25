@@ -695,6 +695,7 @@ if (isset($_POST['Patient'])) {
 		}
 		echo '</select></td></tr>';
 	}
+	echo '<tr><td>'._('Filter Item List').':</td><td><input type="search" name="SearchString" maxlength="30" size="21" value="" onKeyUp="FilterArray(StockID,SearchString.value,StockID2)" /></td></tr>';
 
 	echo '<input type="submit" name="UpdateItems" style="visibility: hidden" value=" " />';
 	echo '<tr>
@@ -767,6 +768,14 @@ if (isset($_POST['Patient'])) {
 		echo '<option value="'.$j.'">'.$j.'</option>';
 	}
 	echo '</select></td></tr>';
+	DB_data_seek($result,0);
+
+	echo '<select name="StockID2" style="visibility: hidden">';
+	echo '<option value=""></option>';
+	while ($myrow=DB_fetch_array($result)) {
+		echo '<option value="'.$myrow['stockid'].'">'.$myrow['stockid']. ' - ' . $myrow['description'].'</option>';
+	}
+	echo '</select>';
 	DB_data_seek($result,0);
 
 	echo '<input type="submit" name="ChangeItem" style="visibility: hidden" value=" " />';
