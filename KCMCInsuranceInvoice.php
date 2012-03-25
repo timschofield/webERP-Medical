@@ -273,11 +273,15 @@ if (!isset($_POST['Submit'])) {
 		_('Search') . '" alt="" />' . ' ' . _('Select Insurance Company').'</p>';
 
 	echo '<table class="selection">';
-	$sql="SELECT distinct
-				branchcode,
-				brname
-			FROM custbranch
-			WHERE branchcode<>'CASH'";
+	$sql="SELECT typeid FROM debtortype WHERE typename='Insurance'";
+	$result=DB_query($sql, $db);
+	$myrow=DB_fetch_array($result);
+	$InsuranceTypeID=$myrow['typeid'];
+
+	$sql="SELECT debtorno,
+				name
+				FROM debtorsmaster
+				WHERE typeid='".$InsuranceTypeID."'";
 	$ErrMsg = _('The companies could not be retrieved because');
 	$DbgMsg = _('The SQL used to retrieve the companies was');
 	$BranchResults = DB_query($sql,$db,$ErrMsg,$DbgMsg);
@@ -292,10 +296,10 @@ if (!isset($_POST['Submit'])) {
 		echo '<option value=""></option>';
 		while ($myrow=DB_fetch_array($BranchResults)){
 		/*list the bank account names */
-			if (isset($_POST['Company']) and $_POST['Company']==$myrow['branchcode']){
-				echo '<option selected value="' . $myrow['branchcode'] . '">' . $myrow['brname'] . '</option>';
+			if (isset($_POST['Company']) and $_POST['Company']==$myrow['debtorno']){
+				echo '<option selected value="' . $myrow['debtorno'] . '">' . $myrow['name'] . '</option>';
 			} else {
-				echo '<option value="' . $myrow['branchcode'] . '">' . $myrow['brname'] . '</option>';
+				echo '<option value="' . $myrow['debtorno'] . '">' . $myrow['name'] . '</option>';
 			}
 		}
 		echo '</select></td></tr>';
