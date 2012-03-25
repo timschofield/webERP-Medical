@@ -176,7 +176,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 				WHERE stockid='".$_SESSION['Items'][$i]['StockID']."'";
 			$Result=DB_query($SQL, $db);
 			$myrow=DB_fetch_array($Result);
-			if (isset($_SESSION['Items'][$i]['StockID']) and $myrow['mbflag']!='D') {
+			if (isset($_SESSION['Items'][$i]['StockID'])) {
 				$SQL = "INSERT INTO stockmoves (
 						stockid,
 						type,

@@ -170,7 +170,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 		$DbgMsg = _('The following SQL to insert the debtor transaction record was used');
 		$Result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 
-/*		for ($i=0; $i<$_SESSION['Items']['Lines']; $i++) {
+		for ($i=0; $i<$_SESSION['Items']['Lines']; $i++) {
 			if (isset($_SESSION['Items'][$i]['StockID'])) {
 				$SQL = "INSERT INTO stockmoves (
 						stockid,
@@ -207,7 +207,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 				$DbgMsg = _('The following SQL to insert the stock movement records was used');
 				$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
 			}
-		}*/
+		}
 		$SQL="SELECT salestype
 				FROM debtorsmaster
 				WHERE debtorno='".$_POST['PatientNo']."'";
