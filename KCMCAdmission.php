@@ -495,14 +495,14 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 	$SQL.= ' ORDER BY debtorsmaster.name';
 	$ErrMsg = _('The searched patient records requested cannot be retrieved because');
 
-	$result = DB_query($SQL, $db, $ErrMsg);
-	if (DB_num_rows($result) == 0) {
+	$PatientResult = DB_query($SQL, $db, $ErrMsg);
+	if (DB_num_rows($PatientResult) == 0) {
 		prnMsg(_('No patient records contain the selected text') . ' - ' . _('please alter your search criteria and try again'), 'info');
 		echo '<br />';
 	}
 } //end of if search
 
-if (isset($result)) {
+if (isset($PatientResult)) {
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	unset($_SESSION['CustomerID']);
@@ -547,11 +547,11 @@ if (isset($result)) {
 	$j = 1;
 	$k = 0; //row counter to determine background colour
 	$RowIndex = 0;
-	if (DB_num_rows($result) <> 0) {
+	if (DB_num_rows($PatientResult) <> 0) {
 		if (!isset($_POST['CSV'])) {
 			DB_data_seek($result, ($_POST['PageOffset'] - 1) * $_SESSION['DisplayRecordsMax']);
 		}
-		while (($myrow = DB_fetch_array($result)) AND ($RowIndex <> $_SESSION['DisplayRecordsMax'])) {
+		while (($myrow = DB_fetch_array($PatientResult)) AND ($RowIndex <> $_SESSION['DisplayRecordsMax'])) {
 			if ($k == 1) {
 				echo '<tr class="EvenTableRows">';
 				$k = 0;
@@ -580,13 +580,16 @@ if (isset($_POST['Patient'])) {
 	$Patient=explode(' ', $_POST['Patient']);
 	$sql="SELECT name,
 				clientsince,
-				salestype
+				salestype,
+				phoneno
 				FROM debtorsmaster
-				WHERE debtorno='".$Patient[0]."'";
+				LEFT JOIN custbranch
+				ON debtorsmaster.debtorno=custbranch.debtorno
+				WHERE debtorsmaster.debtorno='".$Patient[0]."'";
 	$result=DB_query($sql, $db);
 	$mydebtorrow=DB_fetch_array($result);
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/customer.png" title="'
-		. _('Search') . '" alt="" />' . ' ' . $mydebtorrow['name']. ' - '.$Patient[1].'</p>';
+		. _('Search') . '" alt="" />' . $title . '<br />'  . $mydebtorrow['name']. ' - '.$Patient[1].'</p>';
 
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -594,7 +597,10 @@ if (isset($_POST['Patient'])) {
 	echo '<input type="hidden" name="PatientNo" value="'.$Patient[0].'" />';
 	echo '<input type="hidden" name="BranchNo" value="'.$Patient[1].'" />';
 	echo '<table class="selection">';
-	echo '<tr><th colspan="2"><font size="3" color="navy">'._('Patient ID').' - '.$Patient[0].'</font></th></tr>';
+	echo '<tr>
+			<th colspan="1" style="text-align: left"><font size="3" color="navy">'._('Patient ID').' - '.$Patient[0].'</font></th>
+			<th colspan="1" style="text-align: right"><font size="3" color="navy">'.$mydebtorrow['name'].'</font><font size="2" color="navy"> - '.$mydebtorrow['phoneno'].'</font></th>
+		</tr>';
 	echo '<tr><td>'._('Date of Registration').':</td>
 		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="AdmissionDate" maxlength="10" size="11" value="' .
 					 date($_SESSION['DefaultDateFormat']) . '" /></td></tr>';

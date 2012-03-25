@@ -622,13 +622,16 @@ if (isset($_POST['Patient'])) {
 	$Patient=explode(' ', $_POST['Patient']);
 	$sql="SELECT name,
 				clientsince,
-				salestype
+				salestype,
+				phoneno
 				FROM debtorsmaster
-				WHERE debtorno='".$Patient[0]."'";
+				LEFT JOIN custbranch
+				ON debtorsmaster.debtorno=custbranch.debtorno
+				WHERE debtorsmaster.debtorno='".$Patient[0]."'";
 	$result=DB_query($sql, $db);
 	$mydebtorrow=DB_fetch_array($result);
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/customer.png" title="'
-		. _('Search') . '" alt="" />' . ' ' . $mydebtorrow['name']. ' - '.$Patient[1].'</p>';
+		. _('Search') . '" alt="" />' . $title . '<br />'  . $mydebtorrow['name']. ' - '.$Patient[1].'</p>';
 
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -637,7 +640,10 @@ if (isset($_POST['Patient'])) {
 	echo '<input type="hidden" name="PatientNo" value="'.$Patient[0].'" />';
 	echo '<input type="hidden" name="BranchNo" value="'.$Patient[1].'" />';
 	echo '<table class="selection">';
-	echo '<tr><th colspan="4"><font size="3" color="navy">'._('Patient ID').' - '.$Patient[0].'</font></th></tr>';
+	echo '<tr>
+			<th colspan="2" style="text-align: left"><font size="3" color="navy">'._('Patient ID').' - '.$Patient[0].'</font></th>
+			<th colspan="1" style="text-align: right"><font size="3" color="navy">'.$mydebtorrow['name'].'</font><font size="2" color="navy"> - '.$mydebtorrow['phoneno'].'</font></th>
+		</tr>';
 	echo '<tr><td>'._('Date of Admission').':</td>
 		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="AdmissionDate" maxlength="10" size="11" value="' .
 					 date($_SESSION['DefaultDateFormat']) . '" /></td></tr>';
