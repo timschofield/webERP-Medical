@@ -5,6 +5,6 @@
 
 UpdateField('pagesecurity', 'script', 'CopyBOM.php', "script='Z_CopyBOM.php'", $db);
 
-UpdateDBNo(106, $db);
+UpdateDBNo(114, $db);
 
 ?>

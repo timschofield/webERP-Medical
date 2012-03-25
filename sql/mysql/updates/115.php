@@ -5,6 +5,6 @@
 
 AddColumn('email', 'custcontacts', 'varchar(55)', 'not null', '', 'notes', $db);
 
-UpdateDBNo(107, $db);
+UpdateDBNo(115, $db);
 
 ?>
