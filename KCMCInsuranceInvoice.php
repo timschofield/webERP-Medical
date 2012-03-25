@@ -61,14 +61,18 @@ if (isset($_POST['Process'])) {
 		if ($Post=='on') {
 			// Credit original
 			$sql = "SELECT transno,
-					debtorno,
-					branchcode,
+					debtortrans.debtorno,
+					debtortrans.branchcode,
 					trandate,
 					order_,
 					ovamount,
 					invtext,
-					reference
+					reference,
+					custbranch.salesman
 				FROM debtortrans
+				LEFT JOIN custbranch
+				ON debtortrans.debtorno=custbranch.debtorno
+				AND custbranch.branchcode='".$_POST['Company']."'
 				WHERE id='".$ID."'";
 			$result=DB_query($sql, $db);
 			$myrow=DB_fetch_array($result);
@@ -164,7 +168,9 @@ if (isset($_POST['Process'])) {
 													itemdue,
 													actualdispatchdate,
 													qtyinvoiced,
-													completed)
+													completed,
+													patient,
+													employer)
 												VALUES (
 													'" . $OrderLine."',
 													'" . $OrderNo . "',
@@ -176,7 +182,9 @@ if (isset($_POST['Process'])) {
 													'" . Date('Y-m-d') . "',
 													'" . Date('Y-m-d') . "',
 													'1',
-													1
+													1,
+													'" . $myrow['debtorno'] . "',
+													'" . $myrow['salesman'] . "'
 												)";
 			$DbgMsg = _('Trouble inserting a line of a sales order. The SQL that failed was');
 			$Ins_LineItemResult = DB_query($LineItemSQL,$db,$ErrMsg,$DbgMsg,true);
