@@ -662,6 +662,7 @@ if (isset($_POST['Patient'])) {
 	echo '<tr><td>'._('Date of Admission').':</td>
 		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="AdmissionDate" maxlength="10" size="11" value="' .
 					 date($_SESSION['DefaultDateFormat']) . '" /></td></tr>';
+	echo '<tr><td>'._('Filter Drug List').':</td><td><input type="text" name="SearchString" maxlength="30" size="21" value="" onKeyUp="FilterArray(StockID,SearchString.value,StockID2)" /></td></tr>';
 	echo '<tr><td>'._('Select a Drug').':</td>';
 	$sql="SELECT stockid,
 				description
@@ -706,6 +707,13 @@ if (isset($_POST['Patient'])) {
 		echo '<option value="'.$j.'">'.$j.'</option>';
 	}
 	echo '</select></td></tr>';
+	DB_data_seek($result,0);
+
+	echo '<select name="StockID2" style="visibility: hidden">';
+	while ($myrow=DB_fetch_array($result)) {
+		echo '<option value="'.$myrow['stockid'].'">'.$myrow['stockid']. ' - ' . $myrow['description'].'</option>';
+	}
+	echo '</select>';
 	DB_data_seek($result,0);
 
 	echo '<input type="submit" name="ChangeItem" style="visibility: hidden" value=" " />';

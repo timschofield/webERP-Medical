@@ -26,6 +26,24 @@ function inArray(v,tA,m){
 	alert(m);
 	return false;
 }
+function stristr (haystack, needle, bool) {
+var pos = 0;
+haystack += '';
+pos = haystack.toLowerCase().indexOf((needle + '').toLowerCase());    if (pos == -1) {
+return false;
+} else {
+	return true;
+}
+}
+function FilterArray(dd,s,a){
+	while ( dd.options.length ) dd.options[0] = null;
+	for (i=0;i<a.options.length;i++) {
+		if(stristr(a.options[i].text, s)) {
+			option = new Option( a.options[i].text, a.options[i].value );
+			dd.options[dd.options.length] = option;
+		}
+	}
+}
 function isDate(dS,dF){
 	var mA=dS.match(/^(\d{1,2})(\/|-|.)(\d{1,2})(\/|-|.)(\d{4})$/);
 	if (mA==null){
