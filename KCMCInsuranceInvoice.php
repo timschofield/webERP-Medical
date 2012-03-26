@@ -271,6 +271,10 @@ if (isset($_POST['Process'])) {
 		}
 	}
 	DB_Txn_Commit($db);
+	prnMsg( _('The insurance company invoice for') . ' ' . $_POST['Company'] . ' ' . _('Hasbeen succesfuly raised'), 'success');
+	echo '<br /><div class="centre"><a href="PrintInsuranceInvoice.php?FromTransNo=' . $MainInvoiceNo . '&InvOrCredit=Invoice&PrintPDF=True">' . _('Print the invoice') . '</a></div><br />';
+	include('includes/footer.inc');
+	exit;
 }
 
 if (!isset($_POST['Submit'])) {
