@@ -74,7 +74,7 @@ $SQL = "SELECT debtorsmaster.name,
      		AND debtorsmaster.holdreason = holdreasons.reasoncode
      		AND debtorsmaster.debtorno = '" . $CustomerID . "'
      		AND debtorsmaster.debtorno = debtortrans.debtorno
-		GROUP BY debtorsmaster.name,
+ 		GROUP BY debtorsmaster.name,
 			currencies.currency,
 			paymentterms.terms,
 			paymentterms.daysbeforedue,
@@ -164,10 +164,15 @@ $SQL = "SELECT systypes.typename,
 		debtortrans.order_,
 		debtortrans.rate,
 		(debtortrans.ovamount + debtortrans.ovgst + debtortrans.ovfreight + debtortrans.ovdiscount) AS totalamount,
-		debtortrans.alloc AS allocated
+		debtortrans.alloc AS allocated,
+		debtortype.typename
 	FROM debtortrans,
-		systypes
+		systypes,
+		debtorsmaster,
+		debtortype
 	WHERE debtortrans.type = systypes.typeid
+	AND debtorsmaster.debtorno=debtortrans.debtorno
+	AND debtorsmaster.typeid=debtortype.typeid
 	AND debtortrans.debtorno = '" . $CustomerID . "'
 	AND debtortrans.trandate >= '$DateAfterCriteria'
 	ORDER BY debtortrans.id";
@@ -217,10 +222,12 @@ while ($myrow=DB_fetch_array($TransResult)) {
 
 	$FormatedTranDate = ConvertSQLDate($myrow['trandate']);
 
-	if ($_SESSION['InvoicePortraitFormat']==1){ //Invoice/credits in portrait
+	if ($_SESSION['InvoicePortraitFormat']==1 and $myrow['typename']!='Insurance'){ //Invoice/credits in portrait
 		$PrintCustomerTransactionScript = 'PrintCustTransPortrait.php';
-	} else { //produce pdfs in landscape
+	} else if ($myrow['typename']!='Insurance'){ //produce pdfs in landscape
 		$PrintCustomerTransactionScript = 'PrintCustTrans.php';
+	} else { //produce pdfs in landscape
+		$PrintCustomerTransactionScript = 'PrintInsuranceInvoice.php';
 	}
 
 	$BaseFormatString = '<td>%s</td>
