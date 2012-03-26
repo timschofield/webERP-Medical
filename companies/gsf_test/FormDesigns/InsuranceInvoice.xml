@@ -373,7 +373,7 @@
 		</Column5>
 		<Column6 type="DataText" name="Column 6" id="Data6">
 			<FontSize>10</FontSize>
-			<x>630</x>
+			<x>610</x>
 			<Length>50</Length>
 		</Column6>
 		<Column7 type="DataText" name="Column 7" id="Data7">

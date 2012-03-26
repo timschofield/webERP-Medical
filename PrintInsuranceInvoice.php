@@ -201,14 +201,20 @@ if (isset($PrintPDF) or isset($_GET['PrintPDF']) and $PrintPDF and isset($FromTr
 								stockmoves.units,
 								stockmoves.conversionfactor,
 								stockmaster.decimalplaces,
-								debtorsmaster.name
+								debtorsmaster.name,
+								salesman.salesmanname
 							FROM stockmoves,
 								stockmaster,
-								debtorsmaster
+								debtorsmaster,
+								custbranch,
+								salesman
 							WHERE stockmoves.stockid = stockmaster.stockid
 								AND stockmoves.debtorno=debtorsmaster.debtorno
+								AND debtorsmaster.debtorno=custbranch.debtorno
+								AND custbranch.salesman=salesman.salesmancode
 								AND stockmoves.type=10
 								AND stockmoves.transno='" . $FromTransNo . "'
+								AND custbranch.branchcode='" . $myrow['debtorno'] . "'
 								AND stockmoves.show_on_inv_crds=1";
 			} else {
 				/* only credit notes to be retrieved */
@@ -263,7 +269,7 @@ if (isset($PrintPDF) or isset($_GET['PrintPDF']) and $PrintPDF and isset($FromTr
 					$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column3->x, $YPos,$FormDesign->Data->Column3->Length, $FormDesign->Data->Column3->FontSize, locale_money_format($DisplayPrice,$myrow['currcode']), 'right');
 					$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column4->x, $YPos,$FormDesign->Data->Column4->Length, $FormDesign->Data->Column4->FontSize, locale_number_format($DisplayQty,$myrow2['decimalplaces']), 'right');
 					$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column5->x, $YPos,$FormDesign->Data->Column5->Length, $FormDesign->Data->Column5->FontSize, $myrow2['name'], 'left');
-					$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column6->x, $YPos,$FormDesign->Data->Column6->Length, $FormDesign->Data->Column6->FontSize, $DisplayDiscount, 'right');
+					$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column6->x, $YPos,$FormDesign->Data->Column6->Length, $FormDesign->Data->Column6->FontSize, $myrow2['salesmanname'], 'right');
 					$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column7->x, $YPos,$FormDesign->Data->Column7->Length, $FormDesign->Data->Column7->FontSize, $DisplayNet, 'right');
 					$YPos-= ($line_height);
 					$lines = explode('\r\n', htmlspecialchars_decode($myrow2['narrative']));
