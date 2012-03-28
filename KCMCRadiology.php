@@ -5,7 +5,6 @@ $title = _('Billing For Radiology Tests');
 include('includes/header.inc');
 include('includes/SQL_CommonFunctions.inc');
 include('includes/GetSalesTransGLCodes.inc');
-
 if (isset($_GET['New']) or isset($_POST['Cancel'])) {
 	unset($_POST['SubmitCash']);
 	unset($_POST['Patient']);
@@ -126,6 +125,49 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 				$Ins_LineItemResult = DB_query($LineItemSQL,$db,$ErrMsg,$DbgMsg,true);
 			}
 		}
+
+		if (isset($_POST['Doctor'])) {
+			$SuppInvoiceNumber = GetNextTransNo(20, $db);
+			$DoctorsInvoiceSQL = "INSERT INTO supptrans (transno,
+														type,
+														supplierno,
+														suppreference,
+														trandate,
+														duedate,
+														inputdate,
+														settled,
+														rate,
+														ovamount,
+														ovgst,
+														diffonexch,
+														alloc,
+														transtext,
+														hold,
+														id)
+													VALUES (
+														'" . $SuppInvoiceNumber . "',
+														'20',
+														'" . $_POST['Doctor'] . "',
+														'',
+														'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
+														'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
+														'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
+														'0',
+														'1',
+														'" . $_POST['DoctorsFee'] . "',
+														'0',
+														'0',
+														'0',
+														'" . $_POST['Doctor'] . ' ' . _('fee'). ' ' . _('for patient') . ' ' . $_POST['PatientNo'] . "',
+														'0',
+														''
+													)";
+
+			$ErrMsg =_('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The doctors transaction record could not be inserted because');
+			$DbgMsg = _('The following SQL to insert the doctors transaction record was used');
+			$Result = DB_query($DoctorsInvoiceSQL,$db,$ErrMsg,$DbgMsg,true);
+		}
+
 		$InvoiceNo = GetNextTransNo(10, $db);
 		$PeriodNo = GetPeriod($_POST['AdmissionDate'], $db);
 		if (isset($_POST['SubmitInsurance'])) {
@@ -164,7 +206,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 				'" . _('Invoice for radiology test of Patient number').' '.$_POST['PatientNo'] . "',
 				'" . $_POST['InsuranceRef'] . "',
 				'1',
-				'" . $_POST['Received'] . "')";
+				'" . filter_currency_input($_POST['Received']) . "')";
 
 		$ErrMsg =_('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The debtor transaction record could not be inserted because');
 		$DbgMsg = _('The following SQL to insert the debtor transaction record was used');
@@ -348,7 +390,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 											'" . $InvoiceNo . "',
 											'1',
 											'" . -$_SESSION['Items']['Value'] . "',
-											'" . -$_POST['Received'] . "',
+											'" . -filter_currency_input($_POST['Received']) . "',
 											'" . _('Payment of radiology test for Patient number').' '.$_POST['PatientNo'] . "'
 										)";
 
@@ -381,28 +423,28 @@ if (!isset($_POST['Patient'])) {
 	echo '<table cellpadding=3 colspan=4 class=selection>';
 	echo '<tr><td colspan=2>' . _('Enter a partial Name') . ':</td><td>';
 	if (isset($_POST['Keywords'])) {
-		echo '<input type="Text" name="Keywords" value="' . $_POST['Keywords'] . '" size=20 maxlength=25>';
+		echo '<input type="search" placeholder="Enter part of name" name="Keywords" value="' . $_POST['Keywords'] . '" size=20 maxlength=25>';
 	} else {
-		echo '<input type="Text" name="Keywords" size=20 maxlength=25>';
+		echo '<input type="search" placeholder="Enter part of name" name="Keywords" size=20 maxlength=25>';
 	}
 	echo '</td><td><font size=3><b>' . _('OR') . '</b></font></td><td>' . _('Enter a partial Code') . ':</td><td>';
 	if (isset($_POST['CustCode'])) {
-		echo '<input type="Text" name="CustCode" value="' . $_POST['CustCode'] . '" size=15 maxlength=18>';
+		echo '<input type="search" placeholder="Enter part of Patient ID" name="CustCode" value="' . $_POST['CustCode'] . '" size=25 maxlength=18>';
 	} else {
-		echo '<input type="Text" name="CustCode" size=15 maxlength=18>';
+		echo '<input type="search" placeholder="Enter part of Patient ID" name="CustCode" size=25 maxlength=18>';
 	}
 	echo '</td></tr><tr><td><font size=3><b>' . _('OR') . '</b></font></td><td>' . _('Enter a partial Phone Number') . ':</td><td>';
 	if (isset($_POST['CustPhone'])) {
-		echo '<input type="Text" name="CustPhone" value="' . $_POST['CustPhone'] . '" size=15 maxlength=18>';
+		echo '<input type="search" placeholder="Patient Phone Number" name="CustPhone" value="' . $_POST['CustPhone'] . '" size=20 maxlength=18>';
 	} else {
-		echo '<input type="Text" name="CustPhone" size=15 maxlength=18>';
+		echo '<input type="search" placeholder="Patient Phone Number" name="CustPhone" size=20 maxlength=18>';
 	}
 	echo '</td>';
 	echo '<td><font size=3><b>' . _('OR') . '</b></font></td><td>' . _('Enter part of the Address') . ':</td><td>';
 	if (isset($_POST['CustAdd'])) {
-		echo '<input type="Text" name="CustAdd" value="' . $_POST['CustAdd'] . '" size=20 maxlength=25>';
+		echo '<input type="search" placeholder="Partial Address" name="CustAdd" value="' . $_POST['CustAdd'] . '" size=20 maxlength=25>';
 	} else {
-		echo '<input type="Text" name="CustAdd" size=20 maxlength=25>';
+		echo '<input type="search" placeholder="Partial Address" name="CustAdd" size=20 maxlength=25>';
 	}
 	echo '</td></tr>';
 
@@ -622,7 +664,8 @@ if (isset($_POST['Patient'])) {
 				FROM debtorsmaster
 				LEFT JOIN custbranch
 				ON debtorsmaster.debtorno=custbranch.debtorno
-				WHERE debtorsmaster.debtorno='".$Patient[0]."'";
+				WHERE debtorsmaster.debtorno='".$Patient[0]."'
+				AND branchcode='".$Patient[1]."'";
 	$result=DB_query($sql, $db);
 	$mydebtorrow=DB_fetch_array($result);
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/customer.png" title="'
@@ -636,10 +679,9 @@ if (isset($_POST['Patient'])) {
 	echo '<input type="hidden" name="BranchNo" value="'.$Patient[1].'" />';
 	echo '<table class="selection">';
 	echo '<tr>
-			<th colspan="1" style="text-align: left"><font size="3" color="navy">'._('Patient ID').' - '.$Patient[0].'</font></th>
-			<th colspan="1" style="text-align: right"><font size="3" color="navy">'.$mydebtorrow['name'].'</font><font size="2" color="navy"> - '.$mydebtorrow['phoneno'].'</font></th>
+			<th colspan="4"><font size="3" color="navy">'.$mydebtorrow['name'].'</font><font size="2" color="navy"> - '.$mydebtorrow['phoneno'].'</font></th>
 		</tr>';
-	echo '<tr><td>'._('Date of Admission').':</td>
+	echo '<tr><td>'._('Date of Test').':</td>
 		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="AdmissionDate" maxlength="10" size="11" value="' .
 					 date($_SESSION['DefaultDateFormat']) . '" /></td></tr>';
 	echo '<tr><td>'._('Type of radiology test').':</td>';
@@ -664,14 +706,14 @@ if (isset($_POST['Patient'])) {
 					echo '<td>' . $myrow['description'] . '</td>';
 				}
 			}
-			echo '<td>&nbsp;@&nbsp;'.number_format($_SESSION['Items'][$i]['Price'],0).' '.$_SESSION['CompanyRecord']['currencydefault'].'</td>';
+			echo '<td bgcolor="white">&nbsp;@&nbsp;'.locale_money_format($_SESSION['Items'][$i]['Price'],$_SESSION['CompanyRecord']['currencydefault']).' '.$_SESSION['CompanyRecord']['currencydefault'].'</td>';
 			echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $i . '&Patient='.$Patient[0].'&Branch='.$Patient[1].'">' . _('Delete') . '</a></td></tr>';
 			DB_data_seek($result,0);
 			echo '<tr><td>';
 		}
 	}
 	echo '<td><select name="StockID" onChange="ReloadForm(ChangeItem)">';
-	echo '<option value=""></option>';
+	echo '<option value="">'._('Select a test from list').'</option>';
 	while ($myrow=DB_fetch_array($result)) {
 		echo '<option value="'.$myrow['stockid'].'">'.$myrow['stockid']. ' - ' . $myrow['description'].'</option>';
 	}
@@ -688,7 +730,7 @@ if (isset($_POST['Patient'])) {
 			$Received=$_SESSION['Items']['Value'];
 		}
 		echo '<tr><td>'._('Amount Received').'</td>';
-		echo '<td><input type="text" class="number" size="10" name="Received" value="'.number_format($Received,0,'.','').'" /></td></tr>';
+		echo '<td><input type="text" class="number" size="10" name="Received" value="'.locale_money_format($Received,$_SESSION['CompanyRecord']['currencydefault']).'" /></td></tr>';
 
 		$sql = "SELECT bankaccountname,
 				bankaccounts.accountcode,
@@ -721,20 +763,57 @@ if (isset($_POST['Patient'])) {
 			}
 			echo '</select></td></tr>';
 		}
+
+		$sql="SELECT supplierid,
+					suppname
+				FROM suppliers
+				LEFT JOIN suppliertype
+					ON suppliertype.typeid=suppliers.supptype
+				WHERE suppliertype.typename='Doctors'";
+		$result=DB_query($sql, $db);
+		if (DB_num_rows($result)>0) {
+			echo '<tr><td>'._('Doctors Name').':</td>';
+			echo '<td><select name="Doctor">';
+			echo '<option value="">'._('Select a doctor from list').'</option>';
+			while ($myrow=DB_fetch_array($result)) {
+				echo '<option value="'.$myrow['supplierid'].'">'.$myrow['supplierid']. ' - ' . $myrow['suppname'].'</option>';
+			}
+			echo '</select></td></tr>';
+			echo '<tr><td>' . _('Doctors Fee') . ':</td>';
+			echo '<td><input type="text" class="number" size="10" name="DoctorsFee" value="0" /></td></tr>';
+		}
 		echo '<tr><td>'._('Comments').'</td>';
 		echo '<td><input type="text" size="50" name="Comments" value="" /></td></tr>';
-		echo '</table><br />';
-		echo '<div class="centre"><input type="submit" name="SubmitCash" value="Make Payment" /></div>';
+		echo '<tr><th colspan="4"><button type="submit" name="SubmitCash"><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/tick.png" />'._('Make Payment').'</button>';
 	} else {
 		echo '<tr><td>'._('Insurance Reference').'</td>';
 		echo '<td><input type="text" size="10" name="InsuranceRef" value="" /></td></tr>';
+
+		$sql="SELECT supplierid,
+					suppname
+				FROM suppliers
+				LEFT JOIN suppliertype
+					ON suppliertype.typeid=suppliers.supptype
+				WHERE suppliertype.typename='Doctors'";
+		$result=DB_query($sql, $db);
+		if (DB_num_rows($result)>0) {
+			echo '<tr><td>'._('Doctors Name').':</td>';
+			echo '<td><select name="Doctor">';
+			echo '<option value="">'._('Select a doctor from list').'</option>';
+			while ($myrow=DB_fetch_array($result)) {
+				echo '<option value="'.$myrow['supplierid'].'">'.$myrow['supplierid']. ' - ' . $myrow['suppname'].'</option>';
+			}
+			echo '</select></td></tr>';
+			echo '<tr><td>' . _('Doctors Fee') . ':</td>';
+			echo '<td><input type="text" class="number" size="10" name="DoctorsFee" value="0" /></td></tr>';
+		}
 		echo '<tr><td>'._('Comments').'</td>';
 		echo '<td><input type="text" size="50" name="Comments" value="" /></td></tr>';
-		echo '</table><br />';
-		echo '<div class="centre"><input type="submit" name="SubmitInsurance" value="Process Invoice" /></div>';
+		echo '<tr><th colspan="4"><button type="submit" name="SubmitInsurance"><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/tick.png" />'._('Process Invoice').'</button>';
 	}
-	echo '<br /><div class="centre"><input type="submit" name="Cancel" value="Cancel This Payment" /></div>';
+	echo '<button type="submit" name="Cancel" value=""><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/cross.png" />'._('Cancel This Payment').'</button></th></tr>';
 
+	echo '</table><br />';
 	echo '</form>';
 }
 

@@ -126,6 +126,49 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 				$Ins_LineItemResult = DB_query($LineItemSQL,$db,$ErrMsg,$DbgMsg,true);
 			}
 		}
+
+		if (isset($_POST['Doctor'])) {
+			$SuppInvoiceNumber = GetNextTransNo(20, $db);
+			$DoctorsInvoiceSQL = "INSERT INTO supptrans (transno,
+														type,
+														supplierno,
+														suppreference,
+														trandate,
+														duedate,
+														inputdate,
+														settled,
+														rate,
+														ovamount,
+														ovgst,
+														diffonexch,
+														alloc,
+														transtext,
+														hold,
+														id)
+													VALUES (
+														'" . $SuppInvoiceNumber . "',
+														'20',
+														'" . $_POST['Doctor'] . "',
+														'',
+														'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
+														'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
+														'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
+														'0',
+														'1',
+														'" . $_POST['DoctorsFee'] . "',
+														'0',
+														'0',
+														'0',
+														'" . $_POST['Doctor'] . ' ' . _('fee'). ' ' . _('for patient') . ' ' . $_POST['PatientNo'] . "',
+														'0',
+														''
+													)";
+
+			$ErrMsg =_('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The doctors transaction record could not be inserted because');
+			$DbgMsg = _('The following SQL to insert the doctors transaction record was used');
+			$Result = DB_query($DoctorsInvoiceSQL,$db,$ErrMsg,$DbgMsg,true);
+		}
+
 		$InvoiceNo = GetNextTransNo(10, $db);
 		$PeriodNo = GetPeriod($_POST['AdmissionDate'], $db);
 		if (isset($_POST['SubmitInsurance'])) {
@@ -697,6 +740,25 @@ if (isset($_POST['Patient'])) {
 	echo '<tr><td>'._('Payment Fee').'</td>';
 	echo '<td>'.number_format($_SESSION['Items']['Value'], 0).' '.$_SESSION['CompanyRecord']['currencydefault'].'</td></tr>';
 	echo '<input type="hidden" name="Price" value="'.$_SESSION['Items']['Value'].'" />';
+
+	$sql="SELECT supplierid,
+				suppname
+			FROM suppliers
+			LEFT JOIN suppliertype
+			ON suppliertype.typeid=suppliers.supptype
+			WHERE suppliertype.typename='Doctors'";
+	$result=DB_query($sql, $db);
+	if (DB_num_rows($result)>0) {
+		echo '<tr><td>'._('Doctors Name').':</td>';
+		echo '<td><select name="Doctor">';
+		echo '<option value="">'._('Select a doctor from list').'</option>';
+		while ($myrow=DB_fetch_array($result)) {
+			echo '<option value="'.$myrow['supplierid'].'">'.$myrow['supplierid']. ' - ' . $myrow['suppname'].'</option>';
+		}
+		echo '</select></td></tr>';
+		echo '<tr><td>' . _('Doctors Fee') . ':</td>';
+		echo '<td><input type="text" class="number" size="10" name="DoctorsFee" value="" /></td></tr>';
+	}
 
 	if ($Patient[1]=='CASH') {
 		if (!isset($Received)) {
