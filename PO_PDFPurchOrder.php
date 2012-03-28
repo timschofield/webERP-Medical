@@ -295,7 +295,7 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 	//} /* end of check to see that there was an order selected to print */
 	//failed var to allow us to print if the email fails.
 	$failed = false;
-	if ($MakePDFThenDisplayIt){
+	if ($MakePDFThenDisplayIt==True){
 		$pdf->OutputD($_SESSION['DatabaseName'] . '_PurchaseOrder_' . date('Y-m-d') . '.pdf');//UldisN
 		$pdf->__destruct(); //UldisN
 	} else { /* must be MakingPDF to email it */
@@ -337,7 +337,7 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 		$emailrow=DB_fetch_array($emailresult);
 		$date = date($_SESSION['DefaultDateFormat']);
 		$StatusComment=$date.' - Printed by <a href="mailto:'.$emailrow['email'].'">'.$_SESSION['UserID'].
-			'</a><br />'.$comment;
+			'</a><br />';
 		$sql = "
 			UPDATE purchorders
 			SET
