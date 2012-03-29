@@ -668,8 +668,7 @@ if (isset($_POST['Patient'])) {
 				AND branchcode='".$Patient[1]."'";
 	$result=DB_query($sql, $db);
 	$mydebtorrow=DB_fetch_array($result);
-	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/customer.png" title="'
-		. _('Search') . '" alt="" />' . $title . '<br />'  . $mydebtorrow['name']. ' - '.$Patient[1].'</p>';
+	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/XRay.png" title="' . _('Search') . '" alt="" />' . $title . '</p>';
 
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -679,7 +678,10 @@ if (isset($_POST['Patient'])) {
 	echo '<input type="hidden" name="BranchNo" value="'.$Patient[1].'" />';
 	echo '<table class="selection">';
 	echo '<tr>
-			<th colspan="4"><font size="3" color="navy">'.$mydebtorrow['name'].'</font><font size="2" color="navy"> - '.$mydebtorrow['phoneno'].'</font></th>
+			<th colspan="3"><font size="3" color="navy">'.$mydebtorrow['name'].'</font><font size="2" color="navy"> - '.$mydebtorrow['phoneno'].'</font></th>
+			<th style="text-align: right"><a href="KCMCEditPatientDetails.php?PatientNumber='.$Patient[0].'&BranchCode='.$Patient[1].'" target="_blank">
+					<img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/user.png" alt="Patient Details" /></a>
+			</th>
 		</tr>';
 	echo '<tr><td>'._('Date of Test').':</td>
 		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="AdmissionDate" maxlength="10" size="11" value="' .
@@ -706,7 +708,7 @@ if (isset($_POST['Patient'])) {
 					echo '<td>' . $myrow['description'] . '</td>';
 				}
 			}
-			echo '<td bgcolor="white">&nbsp;@&nbsp;'.locale_money_format($_SESSION['Items'][$i]['Price'],$_SESSION['CompanyRecord']['currencydefault']).' '.$_SESSION['CompanyRecord']['currencydefault'].'</td>';
+			echo '<td>&nbsp;@&nbsp;'.locale_money_format($_SESSION['Items'][$i]['Price'],$_SESSION['CompanyRecord']['currencydefault']).' '.$_SESSION['CompanyRecord']['currencydefault'].'</td>';
 			echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $i . '&Patient='.$Patient[0].'&Branch='.$Patient[1].'">' . _('Delete') . '</a></td></tr>';
 			DB_data_seek($result,0);
 			echo '<tr><td>';
@@ -722,7 +724,7 @@ if (isset($_POST['Patient'])) {
 
 	echo '<input type="submit" name="ChangeItem" style="visibility: hidden" value=" " />';
 	echo '<tr><td>'._('Payment Fee').'</td>';
-	echo '<td>'.number_format($_SESSION['Items']['Value'], 0).' '.$_SESSION['CompanyRecord']['currencydefault'].'</td></tr>';
+	echo '<td>'.locale_money_format($_SESSION['Items']['Value'], $_SESSION['CompanyRecord']['currencydefault']).' '.$_SESSION['CompanyRecord']['currencydefault'].'</td></tr>';
 	echo '<input type="hidden" name="Price" value="'.$_SESSION['Items']['Value'].'" />';
 
 	if ($Patient[1]=='CASH') {
@@ -784,7 +786,7 @@ if (isset($_POST['Patient'])) {
 		}
 		echo '<tr><td>'._('Comments').'</td>';
 		echo '<td><input type="text" size="50" name="Comments" value="" /></td></tr>';
-		echo '<tr><th colspan="4"><button type="submit" name="SubmitCash"><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/tick.png" />'._('Make Payment').'</button>';
+		echo '<tr><th colspan="1" style="text-align: left"><button type="submit" style="width:100%;text-align:left" name="SubmitCash"><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/tick.png" />'._('Make Payment').'</button>';
 	} else {
 		echo '<tr><td>'._('Insurance Reference').'</td>';
 		echo '<td><input type="text" size="10" name="InsuranceRef" value="" /></td></tr>';
@@ -809,9 +811,9 @@ if (isset($_POST['Patient'])) {
 		}
 		echo '<tr><td>'._('Comments').'</td>';
 		echo '<td><input type="text" size="50" name="Comments" value="" /></td></tr>';
-		echo '<tr><th colspan="4"><button type="submit" name="SubmitInsurance"><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/tick.png" />'._('Process Invoice').'</button>';
+		echo '<tr><th colspan="1" style="text-align: left"><button type="submit" style="width:100%;text-align:left" name="SubmitInsurance"><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/tick.png" />'._('Process Invoice').'</button>';
 	}
-	echo '<button type="submit" name="Cancel" value=""><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/cross.png" />'._('Cancel This Payment').'</button></th></tr>';
+	echo '<br /><button type="submit" name="Cancel" value=""><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/cross.png" />'._('Cancel Transaction').'</button></th></tr>';
 
 	echo '</table><br />';
 	echo '</form>';

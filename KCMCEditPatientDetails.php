@@ -6,6 +6,10 @@ include('includes/SQL_CommonFunctions.inc');
 $title = _('Update Patient Details');
 include('includes/header.inc');
 
+if (isset($_GET['PatientNumber'])) {
+	$_POST['FileNumber']=$_GET['PatientNumber'].' '.$_GET['BranchCode'];
+}
+
 if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR isset($_POST['Next']) OR isset($_POST['Previous'])) {
 	if (isset($_POST['Search'])) {
 		$_POST['PageOffset'] = 1;

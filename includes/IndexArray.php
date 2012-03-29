@@ -21,7 +21,7 @@ $ModuleList = array(_('Sales'),
 					_('Manufacturing'),
 					_('General Ledger'),
 					_('Asset Manager'),
-					_('Petty Cash'),
+					_('KCRI Project accounting'),
 					_('Setup'));
 
 $MenuItems['orders']['Transactions']['Caption'] = array( _('Enter An Order or Quotation'),
