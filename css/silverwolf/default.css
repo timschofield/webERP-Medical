@@ -210,6 +210,21 @@ input {
 	border-right-style: solid;
 }
 
+button {
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 100%;
+	background-color: #e3e1e1;
+	border-width:1px;
+	border-bottom-color: gray;
+	border-bottom-style: solid;
+	border-top-color: gray;
+	border-top-style: solid;
+	border-left-color: gray;
+	border-left-style: solid;
+	border-right-color: gray;
+	border-right-style: solid;
+}
+
 input:hover {
 	font-family: Arial, Verdana, Helvetica, sans-serif;
 	font-size: 100%;
