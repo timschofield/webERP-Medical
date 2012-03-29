@@ -6,8 +6,7 @@ include('includes/SQL_CommonFunctions.inc');
 $title = _('Register a Patient');
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/customer.png" title="'
-	. _('Search') . '" alt="" />' . $title.'</p>';
+echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/PatientData.png" title="' . _('Search') . '" alt="" />' . $title.'</p>';
 
 if (isset($_POST['Create'])) {
 
