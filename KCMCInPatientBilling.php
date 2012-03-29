@@ -694,8 +694,7 @@ if (isset($_POST['Patient'])) {
 	$result=DB_query($sql, $db);
 	$mybalancerow=DB_fetch_array($result);
 	$Balance=$mybalancerow['balance'];
-	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/customer.png" title="'
-		. _('Search') . '" alt="" />' . $title . '<br />'  . $mydebtorrow['name']. ' - '.$Patient[1].'</p>';
+	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/DoctorFemale.png" title="' . _('Search') . '" alt="" />' . $title . '</p>';
 
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -705,8 +704,10 @@ if (isset($_POST['Patient'])) {
 	echo '<input type="hidden" name="BranchNo" value="'.$Patient[1].'" />';
 	echo '<table class="selection">';
 	echo '<tr>
-			<th colspan="2" style="text-align: left"><font size="3" color="navy">'._('Patient ID').' - '.$Patient[0].'</font></th>
-			<th colspan="2" style="text-align: right"><font size="3" color="navy">'.$mydebtorrow['name'].'</font><font size="2" color="navy"> - '.$mydebtorrow['phoneno'].'</font></th>
+			<th colspan="5"><font size="3" color="navy">'.$mydebtorrow['name'].'</font><font size="2" color="navy"> - '.$mydebtorrow['phoneno'].'</font></th>
+			<th style="text-align: right"><a href="KCMCEditPatientDetails.php?PatientNumber='.$Patient[0].'&BranchCode='.$Patient[1].'" target="_blank">
+					<img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/user.png" alt="Patient Details" /></a>
+			</th>
 		</tr>';
 	echo '<tr><td>'._('Date of Admission').':</td>
 		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="AdmissionDate" maxlength="10" size="11" value="' .
@@ -768,7 +769,7 @@ if (isset($_POST['Patient'])) {
 			}
 			while ($myrow=DB_fetch_array($result)) {
 				if ($myrow['stockid']==$_SESSION['Items'][$i]['StockID']) {
-					echo '<td>' . $myrow['description'] . '</td>';
+					echo '<td>' .$myrow['description'] . '</td>';
 				}
 			}
 			echo '<td>&nbsp;' . _('Quantity') . ' - ';
@@ -798,7 +799,7 @@ if (isset($_POST['Patient'])) {
 		ORDER BY description";
 	}
 	$result=DB_query($sql, $db);
-	echo '<td><select name="StockID">';
+	echo '<select name="StockID">';
 	echo '<option value=""></option>';
 	while ($myrow=DB_fetch_array($result)) {
 		echo '<option value="'.$myrow['stockid'].'">'.$myrow['stockid']. ' - ' . $myrow['description'].'</option>';
@@ -890,19 +891,36 @@ if (isset($_POST['Patient'])) {
 			echo '</select></td></tr>';
 		}
 		echo '<tr><td>'._('Comments').'</td>';
-		echo '<td colspan="2"><input type="text" size="50" name="Comments" value="" /></td></tr>';
-		echo '</table><br />';
-		echo '<div class="centre"><input type="submit" name="SubmitCash" value="Make Payment" /></div>';
+		echo '<td><input type="text" size="50" name="Comments" value="" /></td></tr>';
+		echo '<tr><th colspan="1" style="text-align: left"><button type="submit" style="width:100%;text-align:left" name="SubmitCash"><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/tick.png" />'._('Make Payment').'</button>';
 	} else {
 		echo '<tr><td>'._('Insurance Reference').'</td>';
 		echo '<td><input type="text" size="10" name="InsuranceRef" value="" /></td></tr>';
-		echo '<tr><td>'._('Comments').'</td>';
-		echo '<td colspan="2"><input type="text" size="50" name="Comments" value="" /></td></tr>';
-		echo '</table><br />';
-		echo '<div class="centre"><input type="submit" name="SubmitInsurance" value="Process Invoice" /></div>';
-	}
-	echo '<br /><div class="centre"><input type="submit" name="Cancel" value="Cancel This Payment" /></div>';
 
+		$sql="SELECT supplierid,
+					suppname
+				FROM suppliers
+				LEFT JOIN suppliertype
+					ON suppliertype.typeid=suppliers.supptype
+				WHERE suppliertype.typename='Doctors'";
+		$result=DB_query($sql, $db);
+		if (DB_num_rows($result)>0) {
+			echo '<tr><td>'._('Doctors Name').':</td>';
+			echo '<td><select name="Doctor">';
+			echo '<option value="">'._('Select a doctor from list').'</option>';
+			while ($myrow=DB_fetch_array($result)) {
+				echo '<option value="'.$myrow['supplierid'].'">'.$myrow['supplierid']. ' - ' . $myrow['suppname'].'</option>';
+			}
+			echo '</select></td></tr>';
+			echo '<tr><td>' . _('Doctors Fee') . ':</td>';
+			echo '<td><input type="text" class="number" size="10" name="DoctorsFee" value="0" /></td></tr>';
+		}
+		echo '<tr><td>'._('Comments').'</td>';
+		echo '<td><input type="text" size="50" name="Comments" value="" /></td></tr>';
+		echo '<tr><th colspan="1" style="text-align: left"><button type="submit" style="width:100%;text-align:left" name="SubmitInsurance"><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/tick.png" />'._('Process Invoice').'</button>';
+	}
+	echo '<br /><button type="submit" name="Cancel" value=""><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/cross.png" />'._('Cancel Transaction').'</button></th></tr>';
+	echo '</table>';
 	echo '</form>';
 }
 
