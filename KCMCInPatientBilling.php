@@ -170,7 +170,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 														'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 														'0',
 														'1',
-														'" . $_POST['DoctorsFee'] . "',
+														'" . filter_currency_input($_POST['DoctorsFee']) . "',
 														'0',
 														'0',
 														'0',
