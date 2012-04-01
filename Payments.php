@@ -835,7 +835,7 @@ if ($_SESSION['PaymentDetail'.$identifier]->AccountCurrency!=$_SESSION['PaymentD
 if ($_SESSION['PaymentDetail'.$identifier]->AccountCurrency!=$_SESSION['CompanyRecord']['currencydefault']
 												AND isset($_SESSION['PaymentDetail'.$identifier]->AccountCurrency)){
 	if (isset($SuggestedFunctionalExRate)){
-		$SuggestedFunctionalExRateText = '<b>' . _('Suggested rate:') . ' ' . locale_money_format($SuggestedFunctionalExRate,$_SESSION['PaymentDetail'.$identifier]->AccountCurrency) . '</b>';
+		$SuggestedFunctionalExRateText = '<b>' . _('Suggested rate:') . ' ' . locale_number_format($SuggestedFunctionalExRate,6) . '</b>';
 	} else {
 		$SuggestedFunctionalExRateText ='';
 	}
@@ -843,7 +843,7 @@ if ($_SESSION['PaymentDetail'.$identifier]->AccountCurrency!=$_SESSION['CompanyR
 		$_POST['FunctionalExRate'] = $SuggestedFunctionalExRate;
 	}
 	echo '<tr><td>' . _('Functional Exchange Rate') . ':</td>
-			<td><input type="text" name="FunctionalExRate" maxlength="10" size="12" value="' . locale_money_format($_POST['FunctionalExRate'], $_SESSION['PaymentDetail'.$identifier]->AccountCurrency) . '" /></td>
+			<td><input type="text" class="number" name="FunctionalExRate" maxlength="10" size="12" value="' . locale_number_format($_POST['FunctionalExRate'], 6) . '" /></td>
 			<td>' . ' ' . $SuggestedFunctionalExRateText . ' <i>' . _('The exchange rate between the currency of the business (the functional currency) AND the currency of the bank account') .  '. 1 ' . $_SESSION['CompanyRecord']['currencydefault'] . ' = ? ' . $_SESSION['PaymentDetail'.$identifier]->AccountCurrency . '</i></td></tr>';
 }
 echo '<tr><td>' . _('Payment type') . ':</td>
@@ -1038,7 +1038,7 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 				</tr>';
 			$PaymentTotal += filter_currency_input($PaymentItem->Amount);
 		}
-		echo '<tr><td></td><td class="number"><b>' . locale_money_format($PaymentTotal,$_SESSION['PaymentDetail'.$identifier]->Currency) . '</b></td><td colspan="3"></td></tr></table><br />';
+		echo '<tr><td></td><td class="number"><b>' . $PaymentTotal  . '</b></td><td colspan="3"></td></tr></table><br />';
 		echo '<input type="submit" name="CommitBatch" value="' . _('Accept and Process Payment') . '" />';
 	}
 
