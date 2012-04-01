@@ -142,7 +142,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 			}
 		}
 
-		if (isset($_POST['Doctor'])) {
+		if (isset($_POST['Doctor']) and $_POST['Doctor']!='') {
 			$SuppInvoiceNumber = GetNextTransNo(20, $db);
 			$DoctorsInvoiceSQL = "INSERT INTO supptrans (transno,
 														type,
