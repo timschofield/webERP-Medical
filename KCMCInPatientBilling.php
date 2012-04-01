@@ -872,9 +872,9 @@ if (isset($_POST['Patient'])) {
 		}
 		echo '<tr><td>'._('Amount Received').'</td>';
 		if (($Received+$Balance)<0) {
-			echo '<td><input type="text" class="number" size="10" name="Received" value="'.number_format(0,0,'.','').'" /></td></tr>';
+			echo '<td><input type="text" class="number" size="10" name="Received" value="'.locale_money_format(0,$_SESSION['CompanyRecord']['currencydefault']).'" /></td></tr>';
 		} else {
-			echo '<td><input type="text" class="number" size="10" name="Received" value="'.number_format($Received+$Balance,0,'.','').'" /></td></tr>';
+			echo '<td><input type="text" class="number" size="10" name="Received" value="'.locale_money_format($Received+$Balance,$_SESSION['CompanyRecord']['currencydefault']).'" /></td></tr>';
 		}
 
 		$sql = "SELECT bankaccountname,
