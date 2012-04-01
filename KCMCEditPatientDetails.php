@@ -279,7 +279,7 @@ if (isset($_POST['Update'])) {
 	if ($_POST['ExistingInsurance']==$_POST['Insurance']) {
 		$sql = "UPDATE custbranch SET brname='".$_POST['Insurance']."',
 									area='".$_POST['Area']."',
-									salesman='".$_POST['Salesman']."',
+									salesman='".$_POST['Employer']."',
 									phoneno='".$_POST['Telephone']."',
 									defaultlocation='".$_SESSION['DefaultFactoryLocation']."'
 								WHERE debtorno='".$_POST['FileNumber']."'
@@ -299,7 +299,7 @@ if (isset($_POST['Update'])) {
 									'".$_POST['FileNumber']."',
 									'".$_POST['Insurance']."',
 									'".$SalesAreaRow['areacode'] . "',
-									'".$SalesManRow['salesmancode']."',
+									'".$_POST['Employer']."',
 									'".$_POST['Telephone']."',
 									'".$_SESSION['DefaultFactoryLocation']."',
 									'1'
@@ -428,6 +428,26 @@ if (isset($_POST['FileNumber'])) {
 		}
 	}
 	echo '</select></td></tr>';
+	if (isset($_POST['Insurance']) or $Patient[1]!='CASH') {
+		$sql = "SELECT salesmancode,
+						salesmanname,
+						smantel,
+						smanfax
+					FROM salesman";
+		$EmployerResult = DB_query($sql,$db);
+
+		echo '<tr><td>'._('Employer Company').':</td>';
+		echo '<td><select name="Employer">';
+		echo '<option value=""></option>';
+		while ($EmployerRow=DB_fetch_array($EmployerResult)) {
+			if (isset($myrow['salesman']) and ($myrow['salesman']==$EmployerRow['salesmancode'])) {
+				echo '<option selected="selected" value="'.$EmployerRow['salesmancode'].'">'.$EmployerRow['salesmanname'].'</option>';
+			} else {
+				echo '<option value="'.$EmployerRow['salesmancode'].'">'.$EmployerRow['salesmanname'].'</option>';
+			}
+		}
+		echo '</select></td></tr>';
+	}
 	echo '</table>';
 	echo '<br /><div class="centre"><input type="submit" name="Update" value="Update Details" /></div>';
 	echo '</form>';
