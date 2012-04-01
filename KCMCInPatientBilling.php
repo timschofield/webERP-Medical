@@ -22,7 +22,8 @@ if (isset($_GET['Delete'])) {
 	$Patient[1] = $_GET['Branch'];
 }
 
-if (isset($_POST['ChangeItem'])) {
+if (isset($_POST['ChangeItem']) and $_POST['StockID']!='') {
+	echo 'here';
 	$sql="SELECT price
 				FROM prices
 				WHERE stockid='".$_POST['StockID']."'
@@ -41,6 +42,10 @@ if (isset($_POST['ChangeItem'])) {
 	$_SESSION['Items']['Value']+=$Price*$_POST['Quantity'];
 	$_SESSION['Items']['Lines']++;
 	unset($_POST['StockType']);
+} else if (isset($_POST['ChangeItem']) and $_POST['StockID']=='' and isset($_POST['AddDoctorFee'])) {
+	$_SESSION['Items']['Value']+=filter_currency_input($_POST['DoctorsFee']);
+} else if (isset($_POST['ChangeItem']) and $_POST['StockID']=='' and !isset($_POST['AddDoctorFee'])) {
+	$_SESSION['Items']['Value']-=filter_currency_input($_POST['DoctorsFee']);
 }
 if ($_POST['Dispensary']!='') {
 	$_SESSION['Items']['Dispensary']=$_POST['Dispensary'];
@@ -823,11 +828,6 @@ if (isset($_POST['Patient'])) {
 	DB_data_seek($result,0);
 
 	echo '<input type="submit" name="ChangeItem" style="visibility: hidden" value=" " />';
-	echo '<tr><td>'._('Balance on Account').'</td>';
-	echo '<td>'.number_format($Balance, 0).' '.$_SESSION['CompanyRecord']['currencydefault'].'</td></tr>';
-	echo '<tr><td>'._('Payment Fee').'</td>';
-	echo '<td>'.number_format($_SESSION['Items']['Value'], 0).' '.$_SESSION['CompanyRecord']['currencydefault'].'</td></tr>';
-	echo '<input type="hidden" name="Price" value="'.$_SESSION['Items']['Value'].'" />';
 
 	$sql="SELECT supplierid,
 				suppname
@@ -841,12 +841,30 @@ if (isset($_POST['Patient'])) {
 		echo '<td><select name="Doctor">';
 		echo '<option value="">'._('Select a doctor from list').'</option>';
 		while ($myrow=DB_fetch_array($result)) {
-			echo '<option value="'.$myrow['supplierid'].'">'.$myrow['supplierid']. ' - ' . $myrow['suppname'].'</option>';
+			if (isset($_POST['Doctor']) and $_POST['Doctor']==$myrow['supplierid']) {
+				echo '<option selected="selected" value="'.$myrow['supplierid'].'">'.$myrow['supplierid']. ' - ' . $myrow['suppname'].'</option>';
+			} else {
+				echo '<option value="'.$myrow['supplierid'].'">'.$myrow['supplierid']. ' - ' . $myrow['suppname'].'</option>';
+			}
 		}
-		echo '</select></td></tr>';
-		echo '<tr><td>' . _('Doctors Fee') . ':</td>';
-		echo '<td><input type="text" class="number" size="10" name="DoctorsFee" value="" /></td></tr>';
+		echo '</select>';
+		if (isset($_POST['DoctorsFee'])) {
+			echo _('Doctors Fee') . ':<input type="text" class="number" size="10" name="DoctorsFee" value="' . locale_money_format(filter_currency_input($_POST['DoctorsFee']), $_SESSION['CompanyRecord']['currencydefault']) .'" />';
+		} else {
+			echo _('Doctors Fee') . ':<input type="text" class="number" size="10" name="DoctorsFee" value="" />';
+		}
+		if (isset($_POST['AddDoctorFee'])) {
+			echo '<input type="checkbox" checked="checked" name="AddDoctorFee" value="Add Doctors fee to balance" onChange="ReloadForm(ChangeItem)" />' . _('Add Doctors fee to balance') . '</td></tr>';
+		} else {
+			echo '<input type="checkbox" name="AddDoctorFee" value="Add Doctors fee to balance" onChange="ReloadForm(ChangeItem)" />' . _('Add Doctors fee to balance') . '</td></tr>';
+		}
 	}
+
+	echo '<tr><td>'._('Balance on Account').'</td>';
+	echo '<td>'.number_format($Balance, 0).' '.$_SESSION['CompanyRecord']['currencydefault'].'</td></tr>';
+	echo '<tr><td>'._('Payment Fee').'</td>';
+	echo '<td>'.number_format($_SESSION['Items']['Value'], 0).' '.$_SESSION['CompanyRecord']['currencydefault'].'</td></tr>';
+	echo '<input type="hidden" name="Price" value="'.$_SESSION['Items']['Value'].'" />';
 
 	if ($Patient[1]=='CASH') {
 		if (!isset($Received)) {
