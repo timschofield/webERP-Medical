@@ -588,8 +588,7 @@ if (isset($_POST['Patient'])) {
 				WHERE debtorsmaster.debtorno='".$Patient[0]."'";
 	$result=DB_query($sql, $db);
 	$mydebtorrow=DB_fetch_array($result);
-	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/customer.png" title="'
-		. _('Search') . '" alt="" />' . $title . '<br />'  . $mydebtorrow['name']. ' - '.$Patient[1].'</p>';
+	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/PatientFile.png" title="' . _('Search') . '" alt="" />' . $title . '</p>';
 
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -598,8 +597,10 @@ if (isset($_POST['Patient'])) {
 	echo '<input type="hidden" name="BranchNo" value="'.$Patient[1].'" />';
 	echo '<table class="selection">';
 	echo '<tr>
-			<th colspan="1" style="text-align: left"><font size="3" color="navy">'._('Patient ID').' - '.$Patient[0].'</font></th>
-			<th colspan="1" style="text-align: right"><font size="3" color="navy">'.$mydebtorrow['name'].'</font><font size="2" color="navy"> - '.$mydebtorrow['phoneno'].'</font></th>
+			<th colspan="3"><font size="3" color="navy">'.$mydebtorrow['name'].'</font><font size="2" color="navy"> - '.$mydebtorrow['phoneno'].'</font></th>
+			<th style="text-align: right"><a href="KCMCEditPatientDetails.php?PatientNumber='.$Patient[0].'&BranchCode='.$Patient[1].'" target="_blank">
+					<img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/user.png" alt="Patient Details" /></a>
+			</th>
 		</tr>';
 	echo '<tr><td>'._('Date of Registration').':</td>
 		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="AdmissionDate" maxlength="10" size="11" value="' .
@@ -685,18 +686,16 @@ if (isset($_POST['Patient'])) {
 		}
 		echo '<tr><td>'._('Comments').'</td>';
 		echo '<td><input type="text" size="50" name="Comments" value="" /></td></tr>';
-		echo '</table><br />';
-		echo '<div class="centre"><input type="submit" name="SubmitCash" value="Make Payment" /></div>';
+		echo '<tr><th colspan="1" style="text-align: left"><button type="submit" style="width:100%;text-align:left" name="SubmitCash"><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/tick.png" />'._('Make Payment').'</button>';
 	} else {
 		echo '<tr><td>'._('Insurance Reference').'</td>';
 		echo '<td><input type="text" size="10" name="InsuranceRef" value="" /></td></tr>';
 		echo '<tr><td>'._('Comments').'</td>';
 		echo '<td><input type="text" size="50" name="Comments" value="" /></td></tr>';
-		echo '</table><br />';
-		echo '<div class="centre"><input type="submit" name="SubmitInsurance" value="Process Invoice" /></div>';
+		echo '<tr><th colspan="1" style="text-align: left"><button type="submit" style="width:100%;text-align:left" name="SubmitInsurance"><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/tick.png" />'._('Process Invoice').'</button>';
 	}
-	echo '<br /><div class="centre"><input type="submit" name="Cancel" value="Cancel This Payment" /></div>';
-
+	echo '<br /><button type="submit" name="Cancel" value=""><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/cross.png" />'._('Cancel Transaction').'</button></th></tr>';
+	echo '</table>';
 	echo '</form>';
 }
 

@@ -314,7 +314,7 @@ if (isset($_POST['Update'])) {
 
 if (isset($_POST['FileNumber'])) {
 
-	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/customer.png" title="' . _('Search') . '" alt="" />' . $title.'</p>';
+	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/PatientFile.png" title="' . _('Search') . '" alt="" />' . $title.'</p>';
 	$Patient=explode(' ', $_POST['FileNumber']);
 
 	$sql="SELECT name,
