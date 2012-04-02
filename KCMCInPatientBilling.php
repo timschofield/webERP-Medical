@@ -37,9 +37,9 @@ if (isset($_POST['ChangeItem']) and $_POST['StockID']!='') {
 		$Price=$myrow['price'];
 	}
 	$_SESSION['Items'][$_SESSION['Items']['Lines']]['StockID']=$_POST['StockID'];
-	$_SESSION['Items'][$_SESSION['Items']['Lines']]['Quantity']=$_POST['Quantity'];
+	$_SESSION['Items'][$_SESSION['Items']['Lines']]['Quantity']=filter_number_input($_POST['Quantity']);
 	$_SESSION['Items'][$_SESSION['Items']['Lines']]['Price']=$Price;
-	$_SESSION['Items']['Value']+=$Price*$_POST['Quantity'];
+	$_SESSION['Items']['Value']+=$Price*filter_number_input($_POST['Quantity']);
 	$_SESSION['Items']['Lines']++;
 	unset($_POST['StockType']);
 } else if (isset($_POST['ChangeItem']) and $_POST['StockID']=='' and isset($_POST['AddDoctorFee'])) {
@@ -222,7 +222,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 				'" . _('Invoice of Inpatient transactions for Patient number').' '.$_POST['PatientNo'] . "',
 				'" . $_POST['InsuranceRef'] . "',
 				'1',
-				'" . $_POST['Received'] . "'
+				'" . filter_currency_input($_POST['Received']) . "'
 			)";
 
 		$ErrMsg =_('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The debtor transaction record could not be inserted because');
@@ -383,7 +383,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 									'1',
 									'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 									'2',
-									'" . $_POST['Received'] . "',
+									'" . filter_currency_input($_POST['Received']) . "',
 									'" . $_SESSION['CompanyRecord']['currencydefault'] . "',
 									'" . $_SESSION['UserID'] . "'
 								)";
@@ -413,8 +413,8 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 											'" . $PeriodNo . "',
 											'" . $InvoiceNo . "',
 											'1',
-											'" . -$_POST['Received'] . "',
-											'" . -$_POST['Received'] . "',
+											'" . -filter_currency_input($_POST['Received']) . "',
+											'" . -filter_currency_input($_POST['Received']) . "',
 											'" . _('Payment of Inpatient Transactions for Patient number').' '.$_POST['PatientNo'] . "'
 										)";
 
