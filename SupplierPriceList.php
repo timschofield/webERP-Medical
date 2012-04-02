@@ -299,6 +299,9 @@ foreach ($_POST as $key=>$value) {
 		$LeadTime=$_POST['LeadTime'.$Index];
 		if (isset($_POST['Preferred'.$Index])) {
 			$Preferred=1;
+			$PreferredSQL="UPDATE purchdata SET preferred=0
+									WHERE stockid='" . $StockID . "'";
+			$PreferredResult=DB_query($PreferredSQL, $db);
 		} else {
 			$Preferred=0;
 		}
