@@ -184,9 +184,9 @@ $MenuItems['PO']['Reports']['URL'] = array ('/PO_SelectPurchOrder.php',
 											'/SuppPriceList.php'
 											);
 
-$MenuItems['PO']['Maintenance']['Caption'] = array (
+$MenuItems['PO']['Maintenance']['Caption'] = array (_('Maintain Supplier Price Lists')
 													);
-$MenuItems['PO']['Maintenance']['URL'] = array (
+$MenuItems['PO']['Maintenance']['URL'] = array ('/SupplierPriceList.php'
 												);
 $MenuItems['stock']['Transactions']['Caption'] = array (_('Receive Purchase Orders'),
 														_('Bulk Inventory Transfer') . ' - ' . _('Dispatch'),
