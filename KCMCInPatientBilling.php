@@ -141,6 +141,8 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 				$Ins_LineItemResult = DB_query($LineItemSQL,$db,$ErrMsg,$DbgMsg,true);
 			}
 		}
+		$InvoiceNo = GetNextTransNo(10, $db);
+		$PeriodNo = GetPeriod(Date($_POST['AdmissionDate']), $db);
 
 		if (isset($_POST['Doctor']) and $_POST['Doctor']!='') {
 			$SuppInvoiceNumber = GetNextTransNo(20, $db);
@@ -209,8 +211,6 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 			$DbgMsg = _('Trouble inserting a line of a sales order. The SQL that failed was');
 			$Ins_LineItemResult = DB_query($LineItemSQL,$db,$ErrMsg,$DbgMsg,true);
 
-			$InvoiceNo = GetNextTransNo(10, $db);
-			$PeriodNo = GetPeriod(Date($_POST['AdmissionDate']), $db);
 			$SQL = "INSERT INTO stockmoves (
 					stockid,
 					type,
@@ -247,8 +247,6 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 			$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
 		}
 
-		$InvoiceNo = GetNextTransNo(10, $db);
-		$PeriodNo = GetPeriod(Date($_POST['AdmissionDate']), $db);
 		if (isset($_POST['SubmitInsurance'])) {
 			$_POST['Received']=0;
 		} else {
