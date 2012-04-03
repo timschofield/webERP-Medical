@@ -67,7 +67,7 @@ $myrow=DB_fetch_array($MyOrderResult);
 $DebtorNo=$myrow['debtorno'];
 $Amount=$myrow['alloc'];
 $Narrative=$myrow['invtext'];
-
+DB_data_seek($MyOrderResult, 0);
 if ($Type!=12) {
 	$LeftOvers = $pdf->addTextWrap(0,$YPos-($line_height*14),140,$FontSize,$Narrative);
 }
@@ -163,3 +163,4 @@ $YPos=$YPos-($line_height*2);
 
 $pdf->OutputD('Receipt-'.$_GET['FromTransNo'], 'I');
 ?>
+
