@@ -8,11 +8,11 @@ include('includes/header.inc');
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/contract.png" title="' . _('Contracts') . '" alt="" />' . ' ' . _('Select A Contract') . '</p> ';
 
-echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') .'" method="post">';
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 
-echo '<p><div class="centre">';
+echo '<br /><div class="centre">';
 
 if (isset($_GET['ContractRef'])){
 	$_POST['ContractRef']=$_GET['ContractRef'];
@@ -44,35 +44,35 @@ if (!isset($_POST['ContractRef']) or $_POST['ContractRef']==''){
 		$_POST['Status']=4;
 	}
 	if ($_POST['Status']==0){
-		echo '<option selected="True" value="0">' . _('Not Yet Quoted'). '</option>';
-		echo '<option value="1">' . _('Quoted - No Order Placed'). '</option>';
-		echo '<option value="2">' . _('Order Placed') . '</option>';
-		echo '<option value="3">' . _('Completed') . '</option>';
-		echo '<option value="4">' . _('All Contracts') . '</option>';
+		echo '<option selected="selected" value="0">' . _('Not Yet Quoted'). '</option>
+				<option value="1">' . _('Quoted - No Order Placed'). '</option>
+				<option value="2">' . _('Order Placed') . '</option>
+				<option value="3">' . _('Completed') . '</option>
+				<option value="4">' . _('All Contracts') . '</option>';
 	} elseif($_POST['Status']==1) {
-		echo '<option value="0">' . _('Not Yet Quoted'). '</option>';
-		echo '<option selected="True" value="1">' . _('Quoted - No Order Placed'). '</option>';
-		echo '<option value="2">' . _('Order Placed') . '</option>';
-		echo '<option value="3">' . _('Completed') . '</option>';
-		echo '<option value="4">' . _('All Contracts') . '</option>';
+		echo '<option value="0">' . _('Not Yet Quoted'). '</option>
+				<option selected="selected" value="1">' . _('Quoted - No Order Placed'). '</option>
+				<option value="2">' . _('Order Placed') . '</option>
+				<option value="3">' . _('Completed') . '</option>
+				<option value="4">' . _('All Contracts') . '</option>';
 	} elseif($_POST['Status']==2) {
-		echo '<option value="0">' . _('Not Yet Quoted'). '</option>';
-		echo '<option value="1">' . _('Quoted - No Order Placed'). '</option>';
-		echo '<option selected="True" value="2">' . _('Order Placed') . '</option>';
-		echo '<option value="3">' . _('Completed') . '</option>';
-		echo '<option value="4">' . _('All Contracts') . '</option>';
+		echo '<option value="0">' . _('Not Yet Quoted'). '</option>
+				<option value="1">' . _('Quoted - No Order Placed'). '</option>
+				<option selected="selected" value="2">' . _('Order Placed') . '</option>
+				<option value="3">' . _('Completed') . '</option>
+				<option value="4">' . _('All Contracts') . '</option>';
 	} elseif($_POST['Status']==3) {
-		echo '<option value="0">' . _('Not Yet Quoted'). '</option>';
-		echo '<option value="1">' . _('Quoted - No Order Placed'). '</option>';
-		echo '<option value="2">' . _('Order Placed') . '</option>';
-		echo '<option selected="True" value="3">' . _('Completed') . '</option>';
-		echo '<option value="4">' . _('All Contracts') . '</option>';
+		echo '<option value="0">' . _('Not Yet Quoted'). '</option>
+				<option value="1">' . _('Quoted - No Order Placed'). '</option>
+				<option value="2">' . _('Order Placed') . '</option>
+				<option selected="selected" value="3">' . _('Completed') . '</option>
+				<option value="4">' . _('All Contracts') . '</option>';
 	} elseif($_POST['Status']==4) {
-		echo '<option value="0">' . _('Not Yet Quoted'). '</option>';
-		echo '<option value="1">' . _('Quoted - No Order Placed'). '</option>';
-		echo '<option value="2">' . _('Order Placed') . '</option>';
-		echo '<option value="3">' . _('Completed') . '</option>';
-		echo '<option selected="True" value="4">' . _('All Contracts') . '</option>';
+		echo '<option value="0">' . _('Not Yet Quoted'). '</option>
+				<option value="1">' . _('Quoted - No Order Placed'). '</option>
+				<option value="2">' . _('Order Placed') . '</option>
+				<option value="3">' . _('Completed') . '</option>
+				<option selected="selected" value="4">' . _('All Contracts') . '</option>';
 	}
 	echo '</select> &nbsp;&nbsp;';
 }
@@ -146,14 +146,14 @@ $ContractsResult = DB_query($SQL,$db,$ErrMsg);
 echo '<table cellpadding="2" width="98%" class="selection">';
 
 $TableHeader = '<tr>
-			    <th>' . _('Modify') . '</th>
-				<th>' . _('Order') . '</th>
-				<th>' . _('Issue To WO') . '</th>
-				<th>' . _('Costing') . '</th>
-				<th>' . _('Contract Ref') . '</th>
-				<th>' . _('Description') . '</th>
-				<th>' . _('Customer') . '</th>
-				<th>' . _('Required Date') . '</th>
+					<th>' . _('Modify') . '</th>
+					<th>' . _('Order') . '</th>
+					<th>' . _('Issue To WO') . '</th>
+					<th>' . _('Costing') . '</th>
+					<th>' . _('Contract Ref') . '</th>
+					<th>' . _('Description') . '</th>
+					<th>' . _('Customer') . '</th>
+					<th>' . _('Required Date') . '</th>
 				</tr>';
 
 echo $TableHeader;
