@@ -65,8 +65,7 @@ $MyOrderResult=DB_query($sql, $db);
 
 $myrow=DB_fetch_array($MyOrderResult);
 $DebtorNo=$myrow['debtorno'];
-$Amount=$myrow['ovamount'];
-$Received=$myrow['alloc'];
+$Amount=$myrow['alloc'];
 $Narrative=$myrow['invtext'];
 
 if ($Type!=12) {
@@ -156,7 +155,7 @@ if ($Type!=12) {
 $YPos=$YPos-($line_height*2);
 $LeftOvers = $pdf->addTextWrap(50,$YPos,300,$FontSize,_('Total received').' : ');
 if ($Type!=12) {
-	$LeftOvers = $pdf->addTextWrap(150,$YPos,300,$FontSize,number_format($Received,$DecimalPlaces).'  '.$myrow['currcode']);
+	$LeftOvers = $pdf->addTextWrap(150,$YPos,300,$FontSize,number_format($Amount,$DecimalPlaces).'  '.$myrow['currcode']);
 } else {
 	$LeftOvers = $pdf->addTextWrap(150,$YPos,300,$FontSize,number_format(-$Amount,$DecimalPlaces).'  '.$myrow['currcode']);
 }
