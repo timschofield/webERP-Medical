@@ -461,7 +461,7 @@ if (isset($_POST['Patient'])) {
 		}
 		echo '<tr><td>'._('Comments').'</td>';
 		echo '<td><input type="text" size="50" name="Comments" value="" /></td></tr>';
-		echo '<tr><th colspan="1" style="text-align: left"><button type="submit" style="width:100%;text-align:left" name="SubmitInsurance"><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/tick.png" />'._('Process Invoice').'</button>';
+		echo '<tr><th colspan="1" style="text-align: left"><button type="submit" style="width:100%;text-align:left" name="SubmitCash"><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/tick.png" />'._('Process Invoice').'</button>';
 	}
 	echo '<br /><button type="submit" name="Cancel" value=""><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/cross.png" />'._('Cancel Transaction').'</button></th></tr>';
 	echo '</table>';
