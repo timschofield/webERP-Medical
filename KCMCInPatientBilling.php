@@ -182,6 +182,69 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 			$ErrMsg =_('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The doctors transaction record could not be inserted because');
 			$DbgMsg = _('The following SQL to insert the doctors transaction record was used');
 			$Result = DB_query($DoctorsInvoiceSQL,$db,$ErrMsg,$DbgMsg,true);
+			$LineItemSQL = "INSERT INTO salesorderdetails (orderlineno,
+												orderno,
+												stkcode,
+												unitprice,
+												quantity,
+												discountpercent,
+												narrative,
+												itemdue,
+												actualdispatchdate,
+												qtyinvoiced,
+												completed)
+											VALUES (
+												'" . $i . "',
+												'" . $OrderNo . "',
+												'FEE',
+												'" . filter_currency_input($_POST['DoctorsFee']) . "',
+												'1',
+												'0',
+												'" . _('Doctors fee for inpatient transaction') . "',
+												'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
+												'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
+												'1',
+												1
+											)";
+			$DbgMsg = _('Trouble inserting a line of a sales order. The SQL that failed was');
+			$Ins_LineItemResult = DB_query($LineItemSQL,$db,$ErrMsg,$DbgMsg,true);
+
+			$InvoiceNo = GetNextTransNo(10, $db);
+			$PeriodNo = GetPeriod(Date($_POST['AdmissionDate']), $db);
+			$SQL = "INSERT INTO stockmoves (
+					stockid,
+					type,
+					transno,
+					loccode,
+					trandate,
+					debtorno,
+					branchcode,
+					prd,
+					reference,
+					qty,
+					price,
+					show_on_inv_crds,
+					newqoh
+				) VALUES (
+					'FEE',
+					 10,
+					'" . $InvoiceNo . "',
+					'" . $_SESSION['Items']['Dispensary'] . "',
+					'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
+					'" . $_POST['PatientNo'] . "',
+					'" . $_POST['BranchNo'] . "',
+					'" . $PeriodNo . "',
+					'" . _('Doctors Fee Inpatient transactions for Patient number').' '.$_POST['PatientNo'] . "',
+					'1',
+					'" . filter_currency_input($_POST['DoctorsFee']) . "',
+					1,
+					0
+				)";
+
+			$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Stock movement records for'). ' '. $_POST['StockID'] . ' ' .
+			_('could not be inserted because');
+			$DbgMsg = _('The following SQL to insert the stock movement records was used');
+			$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
 		}
 
 		$InvoiceNo = GetNextTransNo(10, $db);
