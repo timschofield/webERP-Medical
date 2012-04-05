@@ -171,6 +171,7 @@ if (isset($_SESSION['SupplierID'])) {
 	echo '<a href="' . $rootpath . '/Suppliers.php?">' . _('Add a New Supplier') . '</a><br />';
 	echo '<a href="' . $rootpath . '/Suppliers.php?SupplierID=' . urlencode(stripslashes($_SESSION['SupplierID'])) . '">' . _('Modify Or Delete Supplier Details') . '</a>';
 	echo '<br /><a href="' . $rootpath . '/SupplierContacts.php?&SupplierID=' . stripslashes($_SESSION['SupplierID']) . '">' . _('Add/Modify/Delete Supplier Contacts') . '</a>';
+	echo '<br /><a href="' . $rootpath . '/SupplierPriceList.php?&SupplierID=' . stripslashes($_SESSION['SupplierID']) . '">' . _('Add or Modify Supplier Price List') . '</a>';
 	echo '<br />';
 	echo '<br /><a href="'.$rootpath.'/Shipments.php?NewShipment=Yes">' . _('Set Up A New Shipment') . '</a>';
 	echo '<br /><a href="'.$rootpath.'/SuppLoginSetup.php">' . _('Supplier Login Configuration') . '</a>';

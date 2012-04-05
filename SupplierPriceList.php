@@ -6,6 +6,12 @@ $title = _('Supplier Purchasing Data');
 
 include ('includes/header.inc');
 
+if (isset($_GET['SupplierID'])) {
+	$SupplierID = trim(mb_strtoupper($_GET['SupplierID']));
+} elseif (isset($_POST['SupplierID'])) {
+	$SupplierID = trim(mb_strtoupper($_POST['SupplierID']));
+}
+
 if (isset($_POST['StockSearch'])) {
 	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -358,12 +364,6 @@ foreach ($_POST as $key=>$value) {
 	}
 }
 
-if (isset($_GET['SupplierID'])) {
-	$SupplierID = trim(mb_strtoupper($_GET['SupplierID']));
-} elseif (isset($_POST['SupplierID'])) {
-	$SupplierID = trim(mb_strtoupper($_POST['SupplierID']));
-}
-
 if (isset($SupplierID) AND $SupplierID != '' AND !isset($_POST['SearchSupplier'])) { /*NOT EDITING AN EXISTING BUT SUPPLIER selected OR ENTERED*/
 	$sql = "SELECT suppliers.suppname, suppliers.currcode FROM suppliers WHERE supplierid='".$SupplierID."'";
 	$ErrMsg = _('The supplier details for the selected supplier could not be retrieved because');
@@ -474,7 +474,7 @@ if (isset($SuppliersResult)) {
 }
 //end if results to show
 
-if (isset($_POST['SupplierID'])) {
+if (isset($SupplierID)) {
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/supplier.png" title="' . _('Search') . '" alt="" />' . _('Supplier Purchasing Data') . '</p><br />';
 	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -493,7 +493,7 @@ if (isset($_POST['SupplierID'])) {
 			FROM purchdata
 			INNER JOIN stockmaster
 			ON purchdata.stockid=stockmaster.stockid
-			WHERE supplierno='".$_POST['SupplierID']."'
+			WHERE supplierno='".$SupplierID."'
 			ORDER BY purchdata.stockid, effectivefrom DESC";
 
 	$result=DB_query($SQL, $db);
@@ -502,11 +502,11 @@ if (isset($_POST['SupplierID'])) {
 						unitname
 					FROM unitsofmeasure";
 	$UOMResult = DB_query($UOMSQL, $db);
-	echo '<input type="hidden" value="' . $_POST['SupplierID'] . '" name="SupplierID" />';
+	echo '<input type="hidden" value="' . $SupplierID . '" name="SupplierID" />';
 	echo '<table class="selection">';
-	echo '<tr><th colspan="8" style="text-align: left"><font color="navy" size="3">' . _('Supplier purchasing data for') . ' ' . $_POST['SupplierID'] . '</font></th>';
+	echo '<tr><th colspan="8" style="text-align: left"><font color="navy" size="3">' . _('Supplier purchasing data for') . ' ' . $SupplierID . '</font></th>';
 	echo '<th colspan="5" style="text-align: right"><font color="navy" size="2">' . _('Find new Item Code') . '</font>
-			<button type="submit" name="StockSearch"><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" /></button></th></tr>';
+			<button type="submit" name="StockSearch" title="' . _('Find an item code') . '"><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" /></button></th></tr>';
 	echo '<tr>
 			<th>' . _('StockID') . '</th>
 			<th>' . _('Description') . '</th>
@@ -548,7 +548,7 @@ if (isset($_POST['SupplierID'])) {
 				echo '<td><input type="text" class="date" size="11" value="' . date( $_SESSION['DefaultDateFormat']) . '" alt="' . $_SESSION['DefaultDateFormat'] . '"  name="EffectiveFrom0" /></td>
 				<td><input type="text" size="20" maxlength="50" value="" name="SupplierPartNo0" /></td>
 				<td><input type="text" class="number" size="11" value="1" name="MinOrderQty0" /></td>
-				<td><button type="submit" style="width:100%;text-align:left" name="Insert"><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/tick.png" /></button></td>
+				<td><button type="submit" style="width:100%;text-align:left" title="' . _('Insert this record') . '" name="Insert"><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/tick.png" /></button></td>
 			</tr>';
 	}
 
@@ -580,7 +580,7 @@ if (isset($_POST['SupplierID'])) {
 				echo '<td><input type="text" class="date" size="11" value="' . ConvertSQLDate($myrow['effectivefrom']) . '" alt="' . $_SESSION['DefaultDateFormat'] . '"  name="EffectiveFrom'.$RowCounter.'" /></td>
 				<td><input type="text" size="20" maxlength="50" value="' . $myrow['suppliers_partno'] . '" name="SupplierPartNo'.$RowCounter.'" /></td>
 				<td><input type="text" class="number" size="11" value="' . $myrow['minorderqty'] . '" name="MinOrderQty'.$RowCounter.'" /></td>
-				<td><button type="submit" style="width:100%;text-align:left" name="Update'.$RowCounter.'"><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/tick.png" /></button></td>
+				<td><button type="submit" style="width:100%;text-align:left" title="' . _('Update this record') . '" name="Update'.$RowCounter.'"><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/tick.png" /></button></td>
 			</tr>';
 		$RowCounter++;
 	}
