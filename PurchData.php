@@ -45,17 +45,17 @@ if ((isset($_POST['AddRecord']) OR isset($_POST['UpdateRecord'])) AND isset($Sup
 	if ($_POST['Price'] == 0) {
 		prnMsg(_('The price entered is zero') . '   ' . _('Is this intentional?'), 'warn');
 	}
-	if (!is_numeric(filter_number_format($_POST['LeadTime']))) {
+	if (!is_numeric(filter_number_input($_POST['LeadTime']))) {
 		$InputError = 1;
 		unset($_POST['LeadTime']);
 		prnMsg(_('The lead time entered was not numeric a number of days is expected no changes have been made to the database'), 'error');
 	}
-	if (!is_numeric(filter_number_format($_POST['MinOrderQty']))) {
+	if (!is_numeric(filter_number_input($_POST['MinOrderQty']))) {
 		$InputError = 1;
 		unset($_POST['MinOrderQty']);
 		prnMsg(_('The minimum order quantity was not numeric and a number is expected no changes have been made to the database'), 'error');
 	}
-	if (!is_numeric(filter_number_format($_POST['ConversionFactor']))) {
+	if (!is_numeric(filter_number_input($_POST['ConversionFactor']))) {
 		$InputError = 1;
 		unset($_POST['ConversionFactor']);
 		prnMsg(_('The conversion factor entered was not numeric') . ' (' . _('a number is expected') . '). ' . _('The conversion factor is the number which the price must be divided by to get the unit price in our unit of measure') . '. <br />' . _('E.g.') . ' ' . _('The supplier sells an item by the tonne and we hold stock by the kg') . '. ' . _('The suppliers price must be divided by 1000 to get to our cost per kg') . '. ' . _('The conversion factor to enter is 1000') . '. <br /><br />' . _('No changes will be made to the database'), 'error');
@@ -67,6 +67,7 @@ if ((isset($_POST['AddRecord']) OR isset($_POST['UpdateRecord'])) AND isset($Sup
 										effectivefrom,
 										suppliersuom,
 										conversionfactor,
+										uomdecimalplaces,
 										supplierdescription,
 										suppliers_partno,
 										leadtime,
@@ -78,6 +79,7 @@ if ((isset($_POST['AddRecord']) OR isset($_POST['UpdateRecord'])) AND isset($Sup
 										'" . FormatDateForSQL($_POST['EffectiveFrom']) . "',
 										'" . $_POST['SuppliersUOM'] . "',
 										'" . $_POST['ConversionFactor'] . "',
+										'" . $_POST['DecimalPlaces'] . "',
 										'" . $_POST['SupplierDescription'] . "',
 										'" . $_POST['SupplierCode'] . "',
 										'" . $_POST['LeadTime'] . "',
@@ -88,12 +90,26 @@ if ((isset($_POST['AddRecord']) OR isset($_POST['UpdateRecord'])) AND isset($Sup
 		$DbgMsg = _('The SQL that failed was');
 		$AddResult = DB_query($sql, $db, $ErrMsg, $DbgMsg);
 		prnMsg(_('This supplier purchasing data has been added to the database'), 'success');
+
+		/* If the new purchdata is the preferred one, the old ones from the same suppliers shouldn't be preferred.
+		Are kept only for historic information only */
+		if ($_POST['Preferred'] == 1){
+			$sql = "UPDATE purchdata SET preferred='0'
+								WHERE purchdata.stockid='".$StockID."'
+									AND purchdata.supplierno='".$SupplierID."'
+									AND purchdata.effectivefrom < '" . FormatDateForSQL($_POST['EffectiveFrom']) . "'";
+			$ErrMsg = _('The preferred supplier details could not be update because');
+			$DbgMsg = _('The SQL that failed was');
+			$UpdResult = DB_query($sql, $db, $ErrMsg, $DbgMsg);
+			prnMsg(_('Supplier preferred flag has been updated'), 'success');
+		}
 	}
 	if ($InputError == 0 AND isset($_POST['UpdateRecord'])) {
 		$sql = "UPDATE purchdata SET price='" . filter_currency_input($_POST['Price']) . "',
 									effectivefrom='" . FormatDateForSQL($_POST['EffectiveFrom']) . "',
 									suppliersuom='" . $_POST['SuppliersUOM'] . "',
 									conversionfactor='" . $_POST['ConversionFactor'] . "',
+									uomdecimalplaces='" . $_POST['DecimalPlaces'] . "',
 									supplierdescription='" . $_POST['SupplierDescription'] . "',
 									suppliers_partno='" . $_POST['SupplierCode'] . "',
 									leadtime='" . $_POST['LeadTime'] . "',
@@ -153,7 +169,7 @@ if (!isset($_GET['Edit'])) {
 				FROM purchdata
 				INNER JOIN suppliers
 					ON purchdata.supplierno=suppliers.supplierid
-				LEFT JOIN unitsofmeasure
+				INNER JOIN unitsofmeasure
 					ON purchdata.suppliersuom=unitsofmeasure.unitid
 				WHERE purchdata.stockid = '" . $StockID . "'
 				ORDER BY supplierno, purchdata.effectivefrom DESC";
@@ -177,6 +193,7 @@ if (!isset($_GET['Edit'])) {
 							<th>' . _('Effective From') . '</th>
 							<th>' . _('Supplier Unit') . '</th>
 							<th>' . _('Conversion Factor') . '</th>
+							<th>' . _('Price Our Units') . '</th>
 							<th>' . _('Min Order Qty') . '</th>
 							<th>' . _('Lead Time') . '</th>
 							<th>' . _('Preferred') . '</th>
@@ -207,6 +224,7 @@ if (!isset($_GET['Edit'])) {
 					<td>%s</td>
 					<td class="number">%s</td>
 					<td class="number">%s</td>
+					<td class="number">%s</td>
 					<td class="number">%s ' . _('days') . '</td>
 					<td>%s</td>
 					<td><a href="%s?StockID=%s&SupplierID=%s&Edit=1&EffectiveFrom=%s">' . _('Edit') . '</a></td>
@@ -214,13 +232,14 @@ if (!isset($_GET['Edit'])) {
 					<td><a href="%s?StockID=%s&SupplierID=%s&Delete=1&EffectiveFrom=%s" onclick="return confirm(\'' . _('Are you sure you wish to delete this suppliers price?') . '\');">' . _('Delete') . '</a></td>
 					</tr>',
 					$myrow['suppname'],
-					locale_money_format($myrow['price'], $myrow['currcode']),
+					locale_number_format($myrow['price'], 4),
 					$myrow['currcode'],
 					ConvertSQLDate($myrow['effectivefrom']),
 					$myrow['unitname'],
-					$myrow['conversionfactor'],
-					$myrow['minorderqty'],
-					$myrow['leadtime'],
+					locale_number_format($myrow['conversionfactor'], 4),
+					locale_number_format($myrow['price']/$myrow['conversionfactor'],4),
+					locale_number_format($myrow['minorderqty'], $myrow['uomdecimalplaces']),
+					locale_number_format($myrow['leadtime'], 0),
 					$DisplayPreferred,
 					htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'),
 					$StockID,
@@ -233,8 +252,7 @@ if (!isset($_GET['Edit'])) {
 					htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'),
 					$StockID,
 					$myrow['supplierno'],
-					$myrow['effectivefrom']
-				);
+					$myrow['effectivefrom']);
 		} //end of while loop
 		echo '</table><br />';
 		if ($CountPreferreds > 1) {
@@ -247,7 +265,10 @@ if (!isset($_GET['Edit'])) {
 } /* Only show the existing purchasing data records if one is not being edited */
 
 if (isset($SupplierID) AND $SupplierID != '' AND !isset($_POST['SearchSupplier'])) { /*NOT EDITING AN EXISTING BUT SUPPLIER selected OR ENTERED*/
-	$sql = "SELECT suppliers.suppname, suppliers.currcode FROM suppliers WHERE supplierid='".$SupplierID."'";
+	$sql = "SELECT suppliers.suppname,
+					suppliers.currcode
+				FROM suppliers
+				WHERE supplierid='".$SupplierID."'";
 	$ErrMsg = _('The supplier details for the selected supplier could not be retrieved because');
 	$DbgMsg = _('The SQL that failed was');
 	$SuppSelResult = DB_query($sql, $db, $ErrMsg, $DbgMsg);
@@ -261,29 +282,31 @@ if (isset($SupplierID) AND $SupplierID != '' AND !isset($_POST['SearchSupplier']
 	}
 } else {
 	if ($NoPurchasingData=0) {
-		echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' .
-			$title . ' ' . _('For Stock Code') . ' - ' . $StockID . '</p><br />';
+		echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . ' ' . _('For Stock Code') . ' - ' . $StockID . '</p><br />';
 	}
 	if (!isset($_POST['SearchSupplier'])) {
 		echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">
-				<table cellpadding="3" class="selection"><tr>';
+				<table cellpadding="3" class="selection">
+				<tr>';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<input type="hidden" name="StockID" value="' . $StockID . '" />';
-		echo '<td>' . _('Text in the Supplier') . ' <b>' . _('NAME') . '</b>:</font></td>';
+		echo '<td>' . _('Text in the Supplier') . ' <b>' . _('NAME') . '</b>:</td>';
 		echo '<td><input type="text" name="Keywords" size="20" maxlength="25" /></td>';
-		echo '<td><font size="3"><b>' . _('OR') . '</b></font></td>';
-		echo '<td>' . _('Text in Supplier') . ' <b>' . _('CODE') . '</b>:</font></td>';
-		echo '<td><input type="text" name="SupplierCode" size="15" maxlength="18" /></td>';
+		echo '<td><b>' . _('OR') . '</b></td>';
+		echo '<td>' . _('Text in Supplier') . ' <b>' . _('CODE') . '</b>:</td>';
+		echo '<td><input type="text" name="SupplierCode" size="10" maxlength="10" /></td>';
 		echo '</tr></table><br />';
-		echo '<div class="centre"><input type="submit" name="SearchSupplier" value="' . _('Find Suppliers Now') . '" /></div></form>';
+		echo '<div class="centre">
+				<input type="submit" name="SearchSupplier" value="' . _('Find Suppliers Now') . '" />
+			</div>
+			</form>';
 		include ('includes/footer.inc');
 		exit;
 	};
 }
 
 if (isset($_GET['Edit'])) {
-	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' .
-		$title . ' ' . _('For Stock Code') . ' - ' . $StockID . '</p><br />';
+	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . ' ' . _('For Stock Code') . ' - ' . $StockID . '</p><br />';
 }
 
 if (isset($_POST['SearchSupplier'])) {
@@ -299,21 +322,24 @@ if (isset($_POST['SearchSupplier'])) {
 		$SearchString = '%' . str_replace(' ', '%', $_POST['Keywords']) . '%';
 
 		$SQL = "SELECT suppliers.supplierid,
-					suppliers.suppname,
-					suppliers.currcode,
-					suppliers.address1,
-					suppliers.address2,
-					suppliers.address3
-					FROM suppliers WHERE suppliers.suppname " . LIKE  . " '".$SearchString."'";
+						suppliers.suppname,
+						suppliers.currcode,
+						suppliers.address1,
+						suppliers.address2,
+						suppliers.address3
+					FROM suppliers
+					WHERE suppliers.suppname " . LIKE  . " '".$SearchString."'";
+
 	} elseif (mb_strlen($_POST['SupplierCode']) > 0) {
 		$SQL = "SELECT suppliers.supplierid,
-				suppliers.suppname,
-				suppliers.currcode,
-				suppliers.address1,
-				suppliers.address2,
-				suppliers.address3
-			FROM suppliers
-			WHERE suppliers.supplierid " . LIKE . " '%" . $_POST['SupplierCode'] . "%'";
+						suppliers.suppname,
+						suppliers.currcode,
+						suppliers.address1,
+						suppliers.address2,
+						suppliers.address3
+					FROM suppliers
+					WHERE suppliers.supplierid " . LIKE . " '%" . $_POST['SupplierCode'] . "%'";
+
 	} //one of keywords or SupplierCode was more than a zero length string
 	$ErrMsg = _('The suppliers matching the criteria entered could not be retrieved because');
 	$DbgMsg = _('The SQL to retrieve supplier details that failed was');
@@ -332,12 +358,11 @@ if (isset($StockID)) {
 	$StockDecimalPlaces = $myrow['decimalplaces'];
 	if (DB_num_rows($result) == 1) {
 		if ($myrow['mbflag'] == 'D' OR $myrow['mbflag'] == 'A' OR $myrow['mbflag'] == 'K') {
-			prnMsg($StockID . ' - ' . $myrow['description'] . '<br /> ' . _('The item selected is a dummy part or an assembly or kit set part') . ' - ' . _('it is not purchased') .
-				'. ' . _('Entry of purchasing information is therefore inappropriate'), 'warn');
+			prnMsg($StockID . ' - ' . $myrow['description'] . '<br /> ' . _('The item selected is a dummy part or an assembly or kit set part') . ' - ' . _('it is not purchased') . '. ' . _('Entry of purchasing information is therefore inappropriate'), 'warn');
 			include ('includes/footer.inc');
 			exit;
 		} else {
- //			   echo '<br /><font color="blue" size="3"><b>' . $StockID . ' - ' . $myrow[0] . ' </b>  (' . _('In Units of') . ' ' . $myrow[1] . ' )</font>';
+ //			echo '<br /><font color="blue" size="3"><b>' . $StockID . ' - ' . $myrow[0] . ' </b>  (' . _('In Units of') . ' ' . $myrow[1] . ' )</font>';
 		}
 	} else {
 		prnMsg(_('Stock Item') . ' - ' . $StockID . ' ' . _('is not defined in the database'), 'warn');
@@ -369,13 +394,19 @@ if (isset($SuppliersResult)) {
 			echo '<tr class="OddTableRows">';
 			$k++;
 		}
-	   printf('<td><font size="1"><input type="submit" name="SupplierID" value="%s" /></font></td>
-				<td><font size="1">%s</font></td>
-				<td><font size="1">%s</font></td>
-				<td><font size="1">%s</font></td>
-				<td><font size="1">%s</font></td>
-				<td><font size="1">%s</font></td>
-			</tr>', $myrow['supplierid'], $myrow['suppname'], $myrow['currcode'], $myrow['address1'], $myrow['address2'], $myrow['address3']);
+		printf('<td><input type="submit" name="SupplierID" value="%s" /></td>
+				<td>%s</td>
+				<td>%s</td>
+				<td>%s</td>
+				<td>%s</td>
+				<td>%s</td>
+				</tr>',
+				$myrow['supplierid'],
+				$myrow['suppname'],
+				$myrow['currcode'],
+				$myrow['address1'],
+				$myrow['address2'],
+				$myrow['address3']);
 		echo '<input type="hidden" name="StockID" value="' . $StockID . '" />';
 		echo '<input type="hidden" name="StockUOM" value="' . $StockUOM . '" />';
 
@@ -442,22 +473,23 @@ if (!isset($SuppliersResult)) {
 	}
 	if (isset($_GET['Edit'])) {
 		echo '<tr><td>' . _('Supplier Name') . ':</td>
-		<td><input type="hidden" name="SupplierID" value="' . $SupplierID . '" />' . $SupplierID . ' - ' . $SuppName . '
-			<input type="hidden" name="WasEffectiveFrom" value="' . $myrow['effectivefrom'] . '" /></td></tr>';
+		<td><input type="hidden" name="SupplierID" value="' . $SupplierID . '" />' . $SupplierID . ' - ' . $SuppName . '<input type="hidden" name="WasEffectiveFrom" value="' . $myrow['effectivefrom'] . '" /></td>
+		</tr>';
 	} else {
-		echo '<tr><td>' . _('Supplier Name') . ':</td>
+		echo '<tr>
+				<td>' . _('Supplier Name') . ':</td>
 		<input type="hidden" name="SupplierID" maxlength="10" size="11" value="' . $SupplierID . '" />';
 		if ($SupplierID!='') {
 			echo '<td>'.$SuppName;
 		}
 		if (!isset($SuppName) OR $SuppName = "") {
-			echo '<font size="1">' . '(' . _('A search facility is available below if necessary') . ')';
+			echo '(' . _('A search facility is available below if necessary') . ')';
 		} else {
 			echo '<td>'.$SuppName;
 		}
 		echo '</td></tr>';
 	}
-   	echo '<td><input type="hidden" name="StockID" value="' . $StockID . '" />';
+   	echo '<td><input type="hidden" name="StockID" maxlength="10" size="11" value="' . $StockID . '" />';
 	if (!isset($CurrCode)) {
 		$CurrCode = '';
 	}
@@ -503,7 +535,8 @@ if (!isset($SuppliersResult)) {
 		}
 	}
 	echo '</td></tr>';
-	if (!isset($_POST['ConversionFactor']) OR $_POST['ConversionFactor'] == '') {
+	if (!isset($_POST['ConversionFactor'])
+		OR $_POST['ConversionFactor'] == '') {
 		$_POST['ConversionFactor'] = 1;
 	}
 	if (!isset($_POST['DecimalPlaces']) OR $_POST['DecimalPlaces'] == '') {
