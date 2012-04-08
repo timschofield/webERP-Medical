@@ -30,9 +30,6 @@ include('includes/session.inc');
 	</div>
 </div>
 
-</body>
-</html>
-
 <?php
 	// Cleanup
 	session_unset();
