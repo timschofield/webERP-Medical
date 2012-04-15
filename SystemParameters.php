@@ -292,6 +292,9 @@ if (isset($_POST['submit'])) {
 		if ($_SESSION['AutoCreateWOs'] != $_POST['X_AutoCreateWOs']){
 			$sql[] = "UPDATE config SET confvalue='" . $_POST['X_AutoCreateWOs'] . "' WHERE confname='AutoCreateWOs'";
 		}
+		if ($_SESSION['Care2xDatabase'] != $_POST['X_Care2xDatabase']){
+			$sql[] = "UPDATE config SET confvalue='" . $_POST['X_Care2xDatabase'] . "' WHERE confname='Care2xDatabase'";
+		}
 		if ($_SESSION['DefaultFactoryLocation'] != $_POST['X_DefaultFactoryLocation']){
 			$sql[] = "UPDATE config SET confvalue='" . $_POST['X_DefaultFactoryLocation'] . "' WHERE confname='DefaultFactoryLocation'";
 		}
@@ -973,7 +976,7 @@ if ($_SESSION['LogSeverity']==0) {
 } else if ($_SESSION['LogSeverity']==4) {
 	echo '<option value="0">' ._('None'). '</option>';
 	echo '<option value="1">' ._('Errors Only'). '</option>';
-	echo '<option value="2">' ._('Errors andWarnings'). '</option>';
+	echo '<option value="2">' ._('Errors and Warnings'). '</option>';
 	echo '<option value="3">' ._('Errors, Warnings and Info'). '</option>';
 	echo '<option selected="True" value="4">' ._('All'). '</option>';
 }
@@ -993,6 +996,20 @@ echo '<tr style="outline: 1px solid"><td>' . _('Controlled Items Defined At Work
 	<option '.(!$_SESSION['DefineControlledOnWOEntry']?'selected ':'').'value="0">'._('No').'</option>
 	</select></td>
 	<td>' . _('When set to yes, controlled items are defined at the time of the work order creation. Otherwise controlled items (serial numbers and batch/roll/lot references) are entered at the time the finished items are received against the work order') . '</td></tr>';
+
+//Care2x Database
+echo '<tr style="outline: 1px solid"><td>' . _('Care2x database to use') . ':</td>
+	<td><select name="X_Care2xDatabase">';
+echo '<option value="">'._('None').'</option>';
+$sql="SELECT TABLE_SCHEMA FROM information_schema.TABLES WHERE TABLE_NAME='care_users'";
+$result=DB_query($sql, $db);
+
+while( $row = DB_fetch_array($result) ) {
+	echo '<option '.($_SESSION['Care2xDatabase'] == $row['TABLE_SCHEMA']?'selected ':'').'value="'.$row['TABLE_SCHEMA'].'">'.$row['TABLE_SCHEMA'] . '</option>';
+}
+
+echo '</select></td>
+	<td>' . _('Name of the care2x database to use for this hospital') . '</td></tr>';
 
 //AutoCreateWOs
 echo '<tr style="outline: 1px solid"><td>' . _('Auto Create Work Orders') . ':</td>
