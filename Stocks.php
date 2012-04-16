@@ -353,7 +353,12 @@ if (isset($_POST['submit'])) {
 				$ErrMsg = _('The stock item could not be updated because');
 				$DbgMsg = _('The SQL that was used to update the stock item and failed was');
 				$result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
-
+				if ($_SESSION['Care2xDatabase']!='None') {
+					$SQL="UPDATE ".$_SESSION['Care2xDatabase'].".care_tz_drugsandservices
+							SET partcode='".$StockID."'
+							WHERE item_id='".$_POST['Care2xItem']."'";
+					$result=DB_query($SQL, $db);
+				}
 				//delete any properties for the item no longer relevant with the change of category
 				$result = DB_query("DELETE FROM stockitemproperties
 										WHERE stockid ='" . $StockID . "'",
@@ -524,6 +529,12 @@ if (isset($_POST['submit'])) {
 				$ErrMsg =  _('The item could not be added because');
 				$DbgMsg = _('The SQL that was used to add the item failed was');
 				$result = DB_query($sql,$db, $ErrMsg, $DbgMsg);
+				if ($_SESSION['Care2xDatabase']!='None') {
+					$SQL="UPDATE ".$_SESSION['Care2xDatabase'].".care_tz_drugsandservices
+							SET partcode='".$StockID."'
+							WHERE item_id='".$_POST['Care2xItem']."'";
+					$result=DB_query($SQL, $db);
+				}
 				if (DB_error_no($db) ==0) {
 
 					$sql = "INSERT INTO locstock (loccode,
@@ -887,6 +898,22 @@ if (!isset($_POST['NextSerialNo'])) {
 	$_POST['NextSerialNo']=0;
 }
 
+if ($_SESSION['Care2xDatabase']!='None') {
+	echo '<tr><td>' . _('Care2x Item') . '</td>';
+	echo '<td><select name="Care2xItem">';
+	$SQL="SELECT item_id,
+				item_full_description
+			FROM ".$_SESSION['Care2xDatabase'].".care_tz_drugsandservices";
+	$result=DB_query($SQL, $db);
+	while ($myrow=DB_fetch_array($result)){
+		if (!isset($_POST['Care2xItem']) or $myrow['item_id']==$_POST['Care2xItem']){
+			echo '<option selected="selected" value="'. $myrow['item_id'] . '">' . $myrow['item_full_description'] . '</option>';
+		} else {
+			echo '<option value="'. $myrow['item_id'] . '">' . $myrow['item_full_description'] . '</option>';
+		}
+	}
+	echo '</select></td></tr>';
+}
 
 echo '<tr><td>' . _('Economic Order Quantity') . ':</td><td><input ' . (in_array('EOQ',$Errors) ?  'class="inputerror"' : '' ) .'   type="text" class="number" name="EOQ" size="12" maxlength="10" value="' . $_POST['EOQ'] . '" /></td></tr>';
 
