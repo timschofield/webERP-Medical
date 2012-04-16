@@ -1000,7 +1000,7 @@ echo '<tr style="outline: 1px solid"><td>' . _('Controlled Items Defined At Work
 //Care2x Database
 echo '<tr style="outline: 1px solid"><td>' . _('Care2x database to use') . ':</td>
 	<td><select name="X_Care2xDatabase">';
-echo '<option value="">'._('None').'</option>';
+echo '<option value="None">'._('None').'</option>';
 $sql="SELECT TABLE_SCHEMA FROM information_schema.TABLES WHERE TABLE_NAME='care_users'";
 $result=DB_query($sql, $db);
 
