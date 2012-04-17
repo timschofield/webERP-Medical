@@ -695,6 +695,44 @@ if (isset($_POST['Patient'])) {
 				WHERE debtorsmaster.debtorno='".$Patient[0]."'";
 	$result=DB_query($sql, $db);
 	$mydebtorrow=DB_fetch_array($result);
+	if ($_SESSION['Care2xDatabase']!='None' and $_SESSION['Items']['Lines']==0) {
+		$Care2xSQL="SELECT ".$_SESSION['Care2xDatabase'].".care_encounter_prescription.article_item_number,
+							partcode,
+							total_dosage,
+							prescribe_date
+						FROM ".$_SESSION['Care2xDatabase'].".care_encounter_prescription
+						LEFT JOIN ".$_SESSION['Care2xDatabase'].".care_tz_drugsandservices
+						ON ".$_SESSION['Care2xDatabase'].".care_encounter_prescription.article_item_number=".$_SESSION['Care2xDatabase'].".care_tz_drugsandservices.item_id
+						LEFT JOIN stockmaster
+						ON ".$_SESSION['Care2xDatabase'].".care_tz_drugsandservices.partcode=stockmaster.stockid
+						LEFT JOIN stockcategory
+						ON stockmaster.categoryid=stockcategory.categoryid
+						WHERE ".$_SESSION['Care2xDatabase'].".care_encounter_prescription.encounter_nr='".$Patient[0]."'
+						AND stockcategory.stocktype='P'";
+
+		$Care2xResult=DB_query($Care2xSQL, $db);
+		$i=0;
+		while ($MyCare2xRow=DB_fetch_array($Care2xResult)) {
+			$PriceSQL="SELECT price
+						FROM prices
+						WHERE stockid='".$MyCare2xRow['partcode']."'
+						AND typeabbrev='".$mydebtorrow['salestype']."'
+						AND '".$MyCare2xRow['prescribe_date']."' between startdate and enddate";
+			$PriceResult=DB_query($PriceSQL,$db);
+			if (DB_num_rows($PriceResult)==0) {
+				$Price=0;
+			} else {
+				$myrow=DB_fetch_array($PriceResult);
+				$Price=$myrow['price'];
+			}
+			$_SESSION['Items'][$i]['StockID']=$MyCare2xRow['partcode'];
+			$_SESSION['Items'][$i]['Quantity']=$MyCare2xRow['total_dosage'];
+			$_SESSION['Items'][$i]['Price']=$Price;
+			$_SESSION['Items']['Value']+=$Price*$MyCare2xRow['total_dosage'];
+			$_SESSION['Items']['Lines']++;
+			$i++;
+		}
+	}
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/Vial-Pills.png" title="' . _('Search') . '" alt="" />' . $title . '</p>';
 
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';

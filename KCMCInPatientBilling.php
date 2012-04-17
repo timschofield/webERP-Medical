@@ -23,7 +23,6 @@ if (isset($_GET['Delete'])) {
 }
 
 if (isset($_POST['ChangeItem']) and $_POST['StockID']!='') {
-	echo 'here';
 	$sql="SELECT price
 				FROM prices
 				WHERE stockid='".$_POST['StockID']."'
@@ -754,6 +753,42 @@ if (isset($_POST['Patient'])) {
 				WHERE debtorsmaster.debtorno='".$Patient[0]."'";
 	$result=DB_query($sql, $db);
 	$mydebtorrow=DB_fetch_array($result);
+	if ($_SESSION['Care2xDatabase']!='None' and $_SESSION['Items']['Lines']==0) {
+		$Care2xSQL="SELECT ".$_SESSION['Care2xDatabase'].".care_encounter_prescription.article_item_number,
+							partcode,
+							total_dosage,
+							prescribe_date
+						FROM ".$_SESSION['Care2xDatabase'].".care_encounter_prescription
+						LEFT JOIN ".$_SESSION['Care2xDatabase'].".care_tz_drugsandservices
+						ON ".$_SESSION['Care2xDatabase'].".care_encounter_prescription.article_item_number=".$_SESSION['Care2xDatabase'].".care_tz_drugsandservices.item_id
+						LEFT JOIN stockmaster
+						ON ".$_SESSION['Care2xDatabase'].".care_tz_drugsandservices.partcode=stockmaster.stockid
+						LEFT JOIN stockcategory
+						ON stockmaster.categoryid=stockcategory.categoryid
+						WHERE ".$_SESSION['Care2xDatabase'].".care_encounter_prescription.encounter_nr='".$Patient[0]."'";
+		$Care2xResult=DB_query($Care2xSQL, $db);
+		$i=0;
+		while ($MyCare2xRow=DB_fetch_array($Care2xResult)) {
+			$PriceSQL="SELECT price
+						FROM prices
+						WHERE stockid='".$MyCare2xRow['partcode']."'
+						AND typeabbrev='".$mydebtorrow['salestype']."'
+						AND '".$MyCare2xRow['prescribe_date']."' between startdate and enddate";
+			$PriceResult=DB_query($PriceSQL,$db);
+			if (DB_num_rows($PriceResult)==0) {
+				$Price=0;
+			} else {
+				$myrow=DB_fetch_array($PriceResult);
+				$Price=$myrow['price'];
+			}
+			$_SESSION['Items'][$i]['StockID']=$MyCare2xRow['partcode'];
+			$_SESSION['Items'][$i]['Quantity']=$MyCare2xRow['total_dosage'];
+			$_SESSION['Items'][$i]['Price']=$Price;
+			$_SESSION['Items']['Value']+=$Price*$MyCare2xRow['total_dosage'];
+			$_SESSION['Items']['Lines']++;
+			$i++;
+		}
+	}
 	$sql="SELECT sum(ovamount+ovgst) as balance
 				FROM debtortrans
 				WHERE debtorno='".$Patient[0]."'";
@@ -814,13 +849,20 @@ if (isset($_POST['Patient'])) {
 	for ($i=0; $i<$_SESSION['Items']['Lines']; $i++) {
 //		ShowStockTypes($_SESSION['Items'][$i]['StockType']);
 		if (isset($_SESSION['Items'][$i])) {
+			$sql="SELECT stocktype
+					FROM stockmaster
+					LEFT JOIN stockcategory
+					ON stockmaster.categoryid=stockcategory.categoryid
+					WHERE stockid='".$_SESSION['Items'][$i]['StockID']."'";
+			$result=DB_query($sql, $db);
+			$myrow=DB_fetch_array($result);
 			$sql="SELECT stockid,
 						description,
 						categorydescription
 					FROM stockmaster
 					LEFT JOIN stockcategory
 						ON stockmaster.categoryid=stockcategory.categoryid
-					WHERE stockcategory.stocktype='".$_SESSION['Items'][$i]['StockType']."'
+					WHERE stockcategory.stocktype='".$myrow['stocktype']."'
 					ORDER BY description";
 
 			$result=DB_query($sql, $db);
@@ -838,7 +880,7 @@ if (isset($_POST['Patient'])) {
 					echo '<td>' .$myrow['description'] . '</td>';
 				}
 			}
-			echo '<td>&nbsp;' . _('Quantity') . ' - ';
+			echo '<td>' . _('Quantity') . ' - ';
 			echo '&nbsp;' . $_SESSION['Items'][$i]['Quantity'];
 			echo '&nbsp;@&nbsp;'.number_format($_SESSION['Items'][$i]['Price'],0).' '.$_SESSION['CompanyRecord']['currencydefault'].'</td>';
 			echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $i . '&Patient='.$Patient[0].'&Branch='.$Patient[1].'">' . _('Delete') . '</a></td></tr>';
@@ -865,7 +907,7 @@ if (isset($_POST['Patient'])) {
 		ORDER BY description";
 	}
 	$result=DB_query($sql, $db);
-	echo '<select name="StockID">';
+	echo '</td><td><select name="StockID">';
 	echo '<option value=""></option>';
 	while ($myrow=DB_fetch_array($result)) {
 		echo '<option value="'.$myrow['stockid'].'">'.$myrow['stockid']. ' - ' . $myrow['description'].'</option>';
