@@ -123,6 +123,12 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 												)";
 			$DbgMsg = _('Trouble inserting a line of a sales order. The SQL that failed was');
 			$Ins_LineItemResult = DB_query($LineItemSQL,$db,$ErrMsg,$DbgMsg,true);
+			if ($_SESSION['Care2xDatabase']!='None') {
+				$SQL="UPDATE ".$_SESSION['Care2xDatabase'].".care_encounter_prescription SET bill_number='".$OrderNo."'
+							WHERE nr='".$_SESSION['Items'][$i]['Care2x']."'";
+				$DbgMsg = _('Trouble inserting a line of a sales order. The SQL that failed was');
+				$UpdateCare2xResult = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+			}
 		}
 
 		if (isset($_POST['Doctor'])) {
@@ -670,6 +676,7 @@ if (isset($_POST['Patient'])) {
 		$Care2xSQL="SELECT ".$_SESSION['Care2xDatabase'].".care_encounter_prescription.article_item_number,
 							partcode,
 							total_dosage,
+							nr,
 							prescribe_date
 						FROM ".$_SESSION['Care2xDatabase'].".care_encounter_prescription
 						LEFT JOIN ".$_SESSION['Care2xDatabase'].".care_tz_drugsandservices
@@ -679,7 +686,8 @@ if (isset($_POST['Patient'])) {
 						LEFT JOIN stockcategory
 						ON stockmaster.categoryid=stockcategory.categoryid
 						WHERE ".$_SESSION['Care2xDatabase'].".care_encounter_prescription.encounter_nr='".$Patient[0]."'
-						AND stockcategory.stocktype='S'";
+						AND stockcategory.stocktype='S'
+						AND ".$_SESSION['Care2xDatabase'].".care_encounter_prescription.bill_number=''";
 		$Care2xResult=DB_query($Care2xSQL, $db);
 		$i=0;
 		while ($MyCare2xRow=DB_fetch_array($Care2xResult)) {
@@ -698,6 +706,7 @@ if (isset($_POST['Patient'])) {
 			$_SESSION['Items'][$i]['StockID']=$MyCare2xRow['partcode'];
 			$_SESSION['Items'][$i]['Quantity']=$MyCare2xRow['total_dosage'];
 			$_SESSION['Items'][$i]['Price']=$Price;
+			$_SESSION['Items'][$i]['Care2x']=$MyCare2xRow['nr'];
 			$_SESSION['Items']['Value']+=$Price*$MyCare2xRow['total_dosage'];
 			$_SESSION['Items']['Lines']++;
 			$i++;
