@@ -24,8 +24,7 @@ $ModuleList = array(_('Sales'),
 					_('KCRI Project accounting'),
 					_('Setup'));
 
-$MenuItems['orders']['Transactions']['Caption'] = array( _('Enter An Order or Quotation'),
-														_('Enter Shop Sales'),
+$MenuItems['orders']['Transactions']['Caption'] = array(_('Enter Shop Sales'),
 														_('Register a Patient'),
 														_('Update Patient Details'),
 														_('Registration Payments'),
@@ -36,13 +35,13 @@ $MenuItems['orders']['Transactions']['Caption'] = array( _('Enter An Order or Qu
 														_('Sales of Drugs'),
 														_('Billing for Inpatient Drugs and Services'),
 														_('Create Insurance Invoice'),
+														_('Enter An Order or Quotation'),
 														_('Outstanding Sales Orders/Quotations'),
 														_('Special Order'),
 														_('Recurring Order Template'),
 														_('Process Recurring Orders')
 														);
-$MenuItems['orders']['Transactions']['URL'] = array( '/SelectOrderItems.php?NewOrder=Yes',
-													'/CounterSales.php',
+$MenuItems['orders']['Transactions']['URL'] = array('/CounterSales.php',
 													'/KCMCRegister.php',
 													'/KCMCEditPatientDetails.php',
 													'/KCMCAdmission.php?New=True',
@@ -53,6 +52,7 @@ $MenuItems['orders']['Transactions']['URL'] = array( '/SelectOrderItems.php?NewO
 													'/KCMCPharmacy.php?New=True',
 													'/KCMCInPatientBilling.php?New=True',
 													'/KCMCInsuranceInvoice.php',
+													'/SelectOrderItems.php?NewOrder=Yes',
 													'/SelectSalesOrder.php',
 													'/SpecialOrder.php',
 													'/SelectRecurringSalesOrder.php',
