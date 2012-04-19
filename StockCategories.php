@@ -7,13 +7,17 @@ $title = _('Stock Category Maintenance');
 
 include('includes/header.inc');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Inventory Adjustment') . '" alt="" />' . ' ' . $title . '</p>';
-
 if (isset($_GET['SelectedCategory'])){
 	$SelectedCategory = strtoupper($_GET['SelectedCategory']);
 } else if (isset($_POST['SelectedCategory'])){
 	$SelectedCategory = strtoupper($_POST['SelectedCategory']);
 }
+
+if (isset($SelectedCategory)) {
+	echo '<a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" >' . _('Show All Stock Categories') . '</a></div>';
+}
+
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Inventory Adjustment') . '" alt="" />' . ' ' . $title . '</p>';
 
 if (isset($_GET['DeleteProperty'])){
 
@@ -287,14 +291,6 @@ or deletion of the records*/
 
 //end of ifs and buts!
 
-echo '<br />';
-
-if (isset($SelectedCategory)) {
-	echo '<a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" >' . _('Show All Stock Categories') . '</a></div>';
-}
-
-echo '<br />';
-
 echo '<form name="CategoryForm" method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
@@ -375,7 +371,18 @@ echo '<tr><td>' . _('Category Description') . ':</td>
 
 
 echo '<tr><td>' . _('Stock Type') . ':</td>';
-ShowStockTypes($_POST['StockType']);
+
+$StockTypes=StockTypes();
+echo '<td><select name="StockType" >';
+echo '<option value=""></option>';
+foreach ($StockTypes as $Type=>$Name) {
+	if (isset($_POST['StockType']) and $_POST['StockType']==$Type) {
+		echo '<option selected value="'.$Type.'">' . $Name . '</option>';
+	} else {
+		echo '<option value="'.$Type.'">' . $Name . '</option>';
+	}
+}
+echo '</select></td>';
 
 echo '</tr>';
 
