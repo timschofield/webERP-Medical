@@ -922,8 +922,8 @@ if (count($_SESSION['Items'.$identifier]->LineItems)>0 and !isset($_POST['Proces
 
 	echo '</table>'; //end the sub table in the second column of master table
 	echo '</th></tr></table>';	//end of column/row/master table
-	echo '<br /><div class="centre"><input type="submit" name="Recalculate" value="' . _('Re-Calculate') . '" />
-				<input type="submit" name="ProcessSale" value="' . _('Process The Sale') . '" /></div><br />';
+	echo '<br /><div class="centre"><button type="submit" name="Recalculate">' . _('Re-Calculate') . '</button>
+				<button type="submit" name="ProcessSale">' . _('Process The Sale') . '</button></div><br />';
 
 } # end of if lines
 
@@ -2196,7 +2196,7 @@ if (!isset($_POST['ProcessSale'])){
 	#end of while loop for Frequently Ordered Items
 			echo '<td style="text-align:center" colspan="8">
 					<input type="hidden" name="OrderItems" value="1" />
-					<input type="submit" value="'._('Add to Sale').'" /></td>';
+					<button type="submit">'._('Add to Sale').'</button></td>';
 			echo '</table>';
 		} //end of if Frequently Ordered Items > 0
 		if (isset($msg)){
@@ -2230,7 +2230,7 @@ if (!isset($_POST['ProcessSale'])){
 	    if (!isset($_POST['Keywords'])) {
 	        $_POST['Keywords']='';
 	    }
-	    
+
 	    if (!isset($_POST['StockCode'])) {
 	        $_POST['StockCode']='';
 	    }
@@ -2243,8 +2243,8 @@ if (!isset($_POST['ProcessSale'])){
 		<input tabindex="3" type="text" name="StockCode" size="15" maxlength="18" value="' . $_POST['StockCode'] . '" /></td>
 
 		</tr><tr>
-		<td style="text-align:center"><input tabindex="4" type="submit" name="Search" value="' . _('Search Now') . '" /></td>
-		<td style="text-align:center"><input tabindex="5" type="submit" name="QuickEntry" value="' . _('Use Quick Entry') . '" /></td>';
+		<td style="text-align:center"><button tabindex="4" type="submit" name="Search">' . _('Search Now') . '</button></td>
+		<td style="text-align:center"><button tabindex="5" type="submit" name="QuickEntry">' . _('Use Quick Entry') . '</button></td>';
 
 		if (!isset($_POST['PartSearch'])) {
 			echo '<script  type="text/javascript">if (document.SelectParts) {defaultControl(document.SelectParts.Keywords);}</script>';
@@ -2265,12 +2265,12 @@ if (!isset($_POST['ProcessSale'])){
 			echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 			echo '<table class="selection">';
 			echo '<tr><td><input type="hidden" name="previous" value="'.locale_number_format($Offset-1,0).'" />
-				<input type="submit" name="Prev" value="'._('Prev').'" /></td>';
+				<button type="submit" name="Prev">'._('Prev').'</button></td>';
 			echo '<td style="text-align:center" colspan="6">
 					<input type="hidden" name="OrderItems" value="1" />
-					<input type="submit" value="'._('Add to Sale').'" /></td>';
+					<button type="submit">'._('Add to Sale').'</button></td>';
 			echo '<td><input type="hidden" name="NextList" value="'.locale_number_format($Offset+1,0).'" />
-				<input type="submit" name="Next" value="'._('Next').'" /></td></tr>';
+				<button type="submit" name="Next">'._('Next').'</button></td></tr>';
 			$TableHeader = '<tr><th>' . _('Code') . '</th>
 								<th>' . _('Description') . '</th>
 								<th>' . _('Units') . '</th>
@@ -2400,14 +2400,14 @@ if (!isset($_POST['ProcessSale'])){
 
 			echo '<tr><td>
 					<input type="hidden" name="previous" value="'.locale_number_format($Offset-1,0).'" />
-					<input type="submit" name="Prev" value="'._('Prev').'" /></td>';
+					<button type="submit" name="Prev">'._('Prev').'</button></td>';
 			echo '<td style="text-align:center" colspan="6">
 					<input type="hidden" name="OrderItems" value="1" />
-					<input type="submit" value="'._('Add to Sale').'" />
+					<button type="submit">'._('Add to Sale').'</button>
 				</td>';
 			echo '<td>
 					<input type="hidden" name="NextList" value="'.locale_number_format($Offset+1,0).'" />
-					<input type="submit" name="Next" value="'._('Next').'" />
+					<button type="submit" name="Next">'._('Next').'</button>
 				</td></tr>';
 			echo '</table></form>';
 			echo $jsCall;
@@ -2441,12 +2441,12 @@ if (!isset($_POST['ProcessSale'])){
    		}
 		echo '<script  type="text/javascript">if (document.SelectParts) {defaultControl(document.SelectParts.part_1);}</script>';
 
-	 	echo '</table><br /><div class="centre"><input type="submit" name="QuickEntry" value="' . _('Quick Entry') . '" />
-					 <input type="submit" name="PartSearch" value="' . _('Search Parts') . '" /></div>';
+	 	echo '</table><br /><div class="centre"><button type="submit" name="QuickEntry">' . _('Quick Entry') . '</button>
+					 <button type="submit" name="PartSearch">' . _('Search Parts') . '</button></div>';
 
   	}
 	if ($_SESSION['Items'.$identifier]->ItemsOrdered >=1){
-  		echo '<br /><div class="centre"><input type="submit" name="CancelOrder" value="' . _('Cancel Sale') . '" onclick="return confirm(\'' . _('Are you sure you wish to cancel this sale?') . '\');" /></div>';
+  		echo '<br /><div class="centre"><button type="submit" name="CancelOrder" onclick="return confirm(\'' . _('Are you sure you wish to cancel this sale?') . '\');">' . _('Cancel Sale') . '</button></div>';
 	}
 }
 echo '</form>';

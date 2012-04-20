@@ -86,10 +86,6 @@ if (isset($_POST['submit'])) {
 		$Errors[$i] = 'HundredsName';
 		$i++;
 	}
-	if (($FunctionalCurrency != '') and (isset($SelectedCurrency) and $SelectedCurrency==$FunctionalCurrency)){
-		$InputError = 1;
-		prnMsg(_('The functional currency cannot be modified or deleted'),'error');
-	}
 	if (mb_strstr($_POST['Abbreviation'],"'") OR mb_strstr($_POST['Abbreviation'],'+') OR mb_strstr($_POST['Abbreviation'],"\"") OR mb_strstr($_POST['Abbreviation'],'&') OR mb_strstr($_POST['Abbreviation'],' ') OR mb_strstr($_POST['Abbreviation'],"\\") OR mb_strstr($_POST['Abbreviation'],'.') OR mb_strstr($_POST['Abbreviation'],'"')) {
 		$InputError = 1;
 		prnMsg( _('The currency code cannot contain any of the following characters') . " . - ' & + \" " . _('or a space'),'error');
@@ -270,7 +266,9 @@ or deletion of the records*/
 					<td>%s</td>
 					<td class="number">%s</td>
 					<td class="number">%s</td>
-					<td colspan="4">%s</td>
+					<td colspan="2">%s</td>
+					<td><a href="%s&SelectedCurrency=%s">%s</a></td>
+					<td><a href="%s/ExchangeRateTrend.php?%s">' . _('Graph') . '</a></td>
 					</tr>',
 					$ImageFile,
 					$myrow['currabrev'],
@@ -279,7 +277,15 @@ or deletion of the records*/
 					$myrow['hundredsname'],
 					$myrow['decimalplaces'],
 					1,
-					_('Functional Currency'));
+					_('Functional Currency'),
+					htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
+					$myrow['currabrev'],
+					_('Edit'),
+					htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
+					$myrow['currabrev'],
+					_('Delete'),
+					$rootpath,
+					'CurrencyToShow=' . $myrow['currabrev']);
 		}
 
 	} //END WHILE LIST LOOP
@@ -355,8 +361,12 @@ if (!isset($_GET['delete'])) {
 	echo '</td></tr>';
 	echo '<tr><td>'._('Exchange Rate').':</td>';
 	echo '<td>';
-	if (!isset($_POST['ExchangeRate'])) {$_POST['ExchangeRate']='0';}
-	echo '<input ' . (in_array('ExchangeRate',$Errors) ?  'class="inputerror"' : '' ) .' type="text" class="number" name="ExchangeRate" size="10" maxlength="9" value="'. locale_number_format($_POST['ExchangeRate'],5).'" />';
+	if (!isset($_POST['ExchangeRate'])) {$_POST['ExchangeRate']='1';}
+	if ($myrow[1]!=$FunctionalCurrency){
+		echo '<input ' . (in_array('ExchangeRate',$Errors) ?  'class="inputerror"' : '' ) .' type="text" class="number" name="ExchangeRate" size="10" maxlength="9" value="'. locale_number_format($_POST['ExchangeRate'],5).'" />';
+	} else {
+		echo '<input ' . (in_array('ExchangeRate',$Errors) ?  'class="inputerror"' : '' ) .' readonly type="text" class="number" name="ExchangeRate" size="10" maxlength="9" value="'. locale_number_format($_POST['ExchangeRate'],5).'" />';
+	}
 	echo '</td></tr>';
 	echo '<tr><td>'._('Decimal Places to Show').':</td>';
 	echo '<td>';
@@ -365,7 +375,7 @@ if (!isset($_GET['delete'])) {
 	echo '</td></tr>';
 	echo '</table>';
 
-	echo '<br /><div class="centre"><input type="submit" name="submit" value="'._('Enter Information').'" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="submit">'._('Enter Information').'</button></div>';
 
 	echo '</form>';
 

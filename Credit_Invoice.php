@@ -1531,16 +1531,16 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 				echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountname'].'</option>';
 			}
 		}
-		echo "</select></td></tr>";
+		echo '</select></td></tr>';
 	}
 	if (!isset($_POST['CreditText'])) {
 		$_POST['CreditText'] = '';
 	}
 	$j++;
 	echo '<tr><td>' . _('Credit note text') . '</td><td><textarea tabindex="'.$j.'"  name="CreditText" cols="31" rows="5">' . $_POST['CreditText'] . '</textarea></td></tr>';
-	echo '</table><br /><div class="centre"><input tabindex="'.$j.'" type="submit" name="Update" value="' . _('Update') . '" /><br />';
+	echo '</table><br /><div class="centre"><button tabindex="'.$j.'" type="submit" name="Update">' . _('Update') . '</button><br />';
 	$j++;
-	 echo '<input type="submit" tabindex="'.$j++.'" name="ProcessCredit" value="' . _('Process Credit') .'" /></div>';
+	 echo '<button type="submit" tabindex="'.$j++.'" name="ProcessCredit">' . _('Process Credit') .'</button></div>';
 }
 
 echo '</form>';
