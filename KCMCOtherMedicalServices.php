@@ -454,7 +454,7 @@ if (!isset($_POST['Patient'])) {
 	echo '</td></tr>';
 
 	echo '</td></tr></table><br />';
-	echo '<div class="centre"><input type=submit name="Search" value="' . _('Search Now') . '"></div></form>';
+	echo '<div class="centre"><button type=submit name="Search">' . _('Search Now') . '</button></div></form>';
 }
 
 if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR isset($_POST['Next']) OR isset($_POST['Previous'])) {
@@ -839,7 +839,7 @@ if (isset($_POST['Patient'])) {
 		}
 		echo '<tr><td>'._('Comments').'</td>';
 		echo '<td><input type="text" size="50" name="Comments" value="" /></td></tr>';
-		echo '<tr><th colspan="1" style="text-align: left"><button type="submit" style="width:100%;text-align:left" name="SubmitCash"><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/tick.png" />'._('Make Payment').'</button>';
+		echo '<tr><td colspan="2" style="text-align: left"><button type="submit" style="text-align:left" name="SubmitCash"><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/tick.png" />'._('Make Payment').'</button>';
 	} else {
 		echo '<tr><td>'._('Insurance Reference').'</td>';
 		echo '<td><input type="text" size="10" name="InsuranceRef" value="" /></td></tr>';
@@ -864,9 +864,9 @@ if (isset($_POST['Patient'])) {
 		}
 		echo '<tr><td>'._('Comments').'</td>';
 		echo '<td><input type="text" size="50" name="Comments" value="" /></td></tr>';
-		echo '<tr><th colspan="1" style="text-align: left"><button type="submit" style="width:100%;text-align:left" name="SubmitInsurance"><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/tick.png" />'._('Process Invoice').'</button>';
+		echo '<tr><td colspan="2" style="text-align: left"><button type="submit" style="text-align:left" name="SubmitInsurance"><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/tick.png" />'._('Process Invoice').'</button>';
 	}
-	echo '<br /><button type="submit" name="Cancel" value=""><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/cross.png" />'._('Cancel Transaction').'</button></th></tr>';
+	echo '<button type="submit" name="Cancel" value=""><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/cross.png" />'._('Cancel Transaction').'</button></td></tr>';
 	echo '</table>';
 	echo '</form>';
 }

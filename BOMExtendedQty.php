@@ -249,9 +249,7 @@ if (isset($_POST['PrintPDF'])) {
 	include('includes/header.inc');
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
 
-	echo '<br />
-		<br />
-		<form action=' . htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . ' method="post">
+	echo '<form action=' . htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . ' method="post">
 		<table class="selection">
 		<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />
 		<tr>
@@ -278,10 +276,8 @@ if (isset($_POST['PrintPDF'])) {
 		</tr>
 		</table>
 		<br />
-		<br />
 		<div class="centre">
-			<br />
-			<input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" />
+			<button type="submit" name="PrintPDF">' . _('Print PDF') . '</button>
 		</div>';
 
 	include('includes/footer.inc');

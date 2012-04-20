@@ -473,7 +473,7 @@ if ($_POST['GLLink_Stock']==0){
 echo '</select></td></tr>';
 
 
-echo '</table><br /><div class="centre"><input tabindex="26" type="submit" name="submit" value="' . _('Update') . '" /></div>';
+echo '</table><br /><div class="centre"><button tabindex="26" type="submit" name="submit">' . _('Update') . '</button></div>';
 
 include('includes/footer.inc');
 ?>

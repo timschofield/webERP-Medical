@@ -247,7 +247,7 @@ if (isset($_POST['Create'])) {
 	}
 
 	echo '</table>';
-	echo '<br /><div class="centre"><input type="submit" name="Create" value="Register the patient" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="Create" />'. ('Register the patient') . '</button></div>';
 	echo '</form>';
 }
 

@@ -255,7 +255,7 @@ if (! isset($_GET['delete'])) {
 		<td><input tabindex="2" ' . (in_array('SectionName',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="SectionName" size="30" maxlength="30" value="' . $_POST['SectionName'] . '" /></td>
 		</tr>';
 
-	echo '<tr><td colspan="2"><div class="centre"><input tabindex="3" type="submit" name="submit" value="' . _('Enter Information') . '" /></div></td></tr>';
+	echo '<tr><td colspan="2"><div class="centre"><button tabindex="3" type="submit" name="submit">' . _('Enter Information') . '</button></div></td></tr>';
 	echo '</table><br />';
 
 	if (!isset($_GET['SelectedSectionID']) or $_GET['SelectedSectionID']=='') {

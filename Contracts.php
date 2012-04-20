@@ -757,8 +757,8 @@ if (!isset($_SESSION['Contract'.$identifier]->DebtorNo)
 			<td><input tabindex="3" type="text" name="CustPhone" size="15" maxlength="18" /></td>
 		</tr>
 		</table>
-		<br /><div class="centre"><input tabindex="4" type="submit" name="SearchCustomers" value="' . _('Search Now') . '" />
-		<input tabindex="5" type="submit" action="reset" value="' . _('Reset') .'" /></div>';
+		<br /><div class="centre"><button tabindex="4" type="submit" name="SearchCustomers">' . _('Search Now') . '</button>
+		<button tabindex="5" type="submit" action="reset">' . _('Reset') .'</button></div>';
 
 	if (isset($result_CustSelect)) {
 
@@ -790,7 +790,7 @@ if (!isset($_SESSION['Contract'.$identifier]->DebtorNo)
 			} else {
 				echo '<td></td>';
 			}
-			echo '<td><input type="submit" name="Submit'.$j.'" value="'.htmlentities($myrow['brname'], ENT_QUOTES,'UTF-8').'" /></td>
+			echo '<td><button type="submit" name="Submit'.$j.'">'.htmlentities($myrow['brname'], ENT_QUOTES,'UTF-8').'</button></td>
 					<input type="hidden" name="SelectedCustomer'.$j.'" value="'.$myrow['debtorno'].'" />
 					<input type="hidden" name="SelectedBranch'.$j.'" value="'.$myrow['branchcode'].'" />
 					<td>'.htmlentities($myrow['contactname'], ENT_QUOTES,'UTF-8').'</td>
@@ -821,7 +821,7 @@ if (!isset($_SESSION['Contract'.$identifier]->DebtorNo)
 		echo ' - ' . _('All amounts stated in') . ' ' . $_SESSION['Contract'.$identifier]->CurrCode . '<br />';
 	}
 	if ($_SESSION['ExistingContract']) {
-		echo  _('Modify Contract') . ': ' . $_SESSION['Contract'.$identifier]->ContractRef;
+		echo  '<br />' . _('Modify Contract') . ': ' . $_SESSION['Contract'.$identifier]->ContractRef;
 	}
 	echo '</p>';
 
@@ -990,20 +990,20 @@ if (!isset($_SESSION['Contract'.$identifier]->DebtorNo)
 	echo'<table class="selection"><tr><th>' . _('Total Contract Cost') . '</th><th class="number">' . locale_money_format(($ContractBOMCost+$ContractReqtsCost),$_SESSION['Contract'.$identifier]->CurrCode) . '</th><th>' . _('Contract Price') . '</th><th class="number">' . locale_money_format(($ContractBOMCost+$ContractReqtsCost)*((100+$_SESSION['Contract'.$identifier]->Margin)/100),$_SESSION['Contract'.$identifier]->CurrCode) . '</th></tr></table>';
 
 	echo'<p></p>';
-	echo '<div class="centre"><input type="submit" name="EnterContractBOM" value="' . _('Enter Items Required') . '" />
-			<input type="submit" name="EnterContractRequirements" value="' . _('Enter Other Requirements') .'" />';
+	echo '<div class="centre"><button type="submit" name="EnterContractBOM" value="">' . _('Enter Items Required') . '</button>
+			<button type="submit" name="EnterContractRequirements">' . _('Enter Other Requirements') .'</button>';
 	if($_SESSION['Contract'.$identifier]->Status==0){ // not yet quoted
-		echo '<input type="submit" name="CommitContract" value="' . _('Commit Changes') .'" />';
+		echo '<button type="submit" name="CommitContract">' . _('Commit Changes') .'</button>';
 	} elseif($_SESSION['Contract'.$identifier]->Status==1){ //quoted but not yet ordered
-		echo '<input type="submit" name="CommitContract" value="' . _('Update Quotation') .'" />';
+		echo '<button type="submit" name="CommitContract">' . _('Update Quotation') .'</button>';
 	}
 	if($_SESSION['Contract'.$identifier]->Status==0){ //not yet quoted
-		echo ' <input type="submit" name="CreateQuotation" value="' . _('Create Quotation') .'" /></div>';
+		echo ' <button type="submit" name="CreateQuotation">' . _('Create Quotation') .'</button></div>';
 	} else {
 		echo '</div>';
 	}
 	if ($_SESSION['Contract'.$identifier]->Status!=2) {
-		echo '<p><div class="centre"><input type="submit" name="CancelContract" value="' . _('Cancel and Delete Contract') . '" /></div></p>';
+		echo '<p><div class="centre"><button type="submit" name="CancelContract">' . _('Cancel and Delete Contract') . '</button></div></p>';
 	}
 	echo '</form>';
 } /*end of if customer selected  and entering contract header*/

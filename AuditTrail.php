@@ -77,7 +77,7 @@ echo '<tr><td>' . _('Containing text') . ':</td>';
 echo '<td><input type="text" name="ContainingText" size="20" maxlength="20" value="'. $_POST['ContainingText'] . '"></td></tr>';
 
 echo '</table><br />';
-echo '<div class="centre"><input tabindex="5" type="submit" name="View" value="' . _('View') . '" /></div>';
+echo '<div class="centre"><button tabindex="5" type="submit" name="View">' . _('View') . '</button></div>';
 echo '</form>';
 
 // View the audit trail

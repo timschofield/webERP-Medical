@@ -18,8 +18,7 @@ if (isset($_POST['DebtorNo'])){
 	$DebtorNo = $_GET['DebtorNo'];
 }
 
-echo '<a href="' . $rootpath . '/SelectCustomer.php?DebtorNo=' . $DebtorNo . '">' . _('Back to Select Customer') . '</a>
-	<br />';
+echo '<a href="' . $rootpath . '/SelectCustomer.php?DebtorNo=' . $DebtorNo . '">' . _('Back to Select Customer') . '</a>';
 
 if ( isset($_POST['submit']) ) {
 
@@ -98,8 +97,7 @@ if (!isset($Id)) {
 				WHERE debtorno='".$DebtorNo."'";
 	$Result = DB_query($SQLname,$db);
 	$row = DB_fetch_array($Result);
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . _('Notes for Customer').': <b>' .$row['name'].'</b></p>
-		<br />';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . _('Notes for Customer').': <b>' .$row['name'].'</b></p>';
 
 	$sql = "SELECT noteid,
 					debtorno,
@@ -223,7 +221,7 @@ if (!isset($_GET['delete'])) {
 		echo '<td><input type="text" name="date" class="date" alt="' .$_SESSION['DefaultDateFormat']. '" id="datepicker" value="'.ConvertSQLDate($_POST['date']).'" size="10" maxlength="10" /></td>
 			</tr>';
 	} else {
-		echo '<td><input type="text" name="date" class="date" alt="' .$_SESSION['DefaultDateFormat']. '" id="datepicker" size="10" maxlength="10" /></td>
+		echo '<td><input type="text" name="date" class="date" alt="' .$_SESSION['DefaultDateFormat']. '" id="datepicker" size="10" maxlength="10" value="'.date($_SESSION['DefaultDateFormat']).'" /></td>
 			</tr>';
 	}
 	echo '<tr>
@@ -238,7 +236,7 @@ if (!isset($_GET['delete'])) {
 	echo '<tr>
 			<td colspan="2">
 			<div class="centre">
-				<input type="submit" name="submit" value="'._('Enter Information').'" />
+				<button type="submit" name="submit">'._('Enter Information').'</button>
 			</div>
 			</td>
 		</tr>

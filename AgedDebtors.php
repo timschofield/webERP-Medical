@@ -508,7 +508,7 @@ if (isset($_POST['PrintPDF'])
 			</table>
 			<br />
 			<div class="centre">
-				<input tabindex="7" type="submit" name="PrintPDF" value="' . _('Print PDF') , '" />
+				<button tabindex="7" type="submit" name="PrintPDF">' . _('Print PDF') , '</button>
 			</div>';
 	}
 	include('includes/footer.inc');

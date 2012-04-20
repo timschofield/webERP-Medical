@@ -714,7 +714,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 			echo '<input type="hidden" name="AutoIssue" value="0" />';
 		}
 
-		echo '</table><br /><div class="centre"><input tabindex="8" type="submit" name="Submit" value="' . _('Enter Information') . '" /></form></div>';
+		echo '</table><br /><div class="centre"><button tabindex="8" type="submit" name="Submit">' . _('Enter Information') . '</button></form></div>';
 
 	} //end if record deleted no point displaying form to add record
 
@@ -792,7 +792,7 @@ if (!isset($SelectedParent)) {
 	 ' <b>' . _('description') . '</b>:</font></td><td><input tabindex="1" type="text" name="Keywords" size="20" maxlength="25" /></td>
 	 <td><font size="3"><b>' . _('OR') . '</b></font></td><td><font size="1">' . _('Enter extract of the') .
      ' <b>' . _('Stock Code') . '</b>:</font></td><td><input tabindex="2" type="text" name="StockCode" size="15" maxlength="18" /></td>
-	 </tr></table><br /><div class="centre"><input tabindex="3" type="submit" name="Search" value="' . _('Search Now') . '" /></div>';
+	 </tr></table><br /><div class="centre"><button tabindex="3" type="submit" name="Search">' . _('Search Now') . '</button></div>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (isset($_POST['Search']) and isset($result) AND !isset($SelectedParent)) {
@@ -822,7 +822,7 @@ if (isset($_POST['Search']) and isset($result) AND !isset($SelectedParent)) {
 			$StockOnHand = number_format($myrow['totalonhand'],2);
 		}
 		$tab = $j+3;
-		printf('<td><input tabindex="'.$tab.'" type="submit" name="Select" value="%s" /></td>
+		printf('<td><button tabindex="'.$tab.'" type="submit" name="Select">%s</button></td>
 		        <td>%s</td>
 			<td class="number">%s</td>
 			<td>%s</td></tr>',

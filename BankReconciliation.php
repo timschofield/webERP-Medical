@@ -127,7 +127,7 @@ if (DB_num_rows($AccountsResults)==0){
 
 include ('includes/GLPostings.inc');
 
-echo '</table><br /><div class="centre"><input type="submit" tabindex="2" name="ShowRec" value="' . _('Show bank reconciliation statement') . '"></div><br />';
+echo '</table><br /><div class="centre"><button type="submit" tabindex="2" name="ShowRec">' . _('Show bank reconciliation statement') . '</button></div><br />';
 
 
 if (isset($_POST['ShowRec']) OR isset($_POST['DoExchangeDifference'])){

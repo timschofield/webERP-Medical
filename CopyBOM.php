@@ -161,7 +161,7 @@ if(isset($_POST['Submit'])) {
 		echo '</select>';
 	}
 	echo '</table>';
-	echo '<br /><div class="centre"><input type="submit" name="Submit" value="Submit" /></div></form>';
+	echo '<br /><div class="centre"><button type="submit" name="Submit">' . _('Submit') . '</button></div></form>';
 
 	include('includes/footer.inc');
 }

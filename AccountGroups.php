@@ -406,7 +406,7 @@ if (!isset($_GET['delete'])) {
 		</tr>';
 
 	echo '<tr>
-			<td colspan="2"><div class="centre"><input tabindex="6" type="submit" name="submit" value="' . _('Enter Information') . '" /></div></td>
+			<td colspan="2"><div class="centre"><button tabindex="6" type="submit" name="submit">' . _('Enter Information') . '</button></div></td>
 		</tr>';
 
 	echo '</table><br />';

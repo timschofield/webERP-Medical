@@ -122,8 +122,8 @@ if (count($_SESSION['Contract'.$identifier]->ContractReqts)>0){
 
 	$DisplayTotal = locale_money_format($TotalCost,$_SESSION['Contract'.$identifier]->CurrCode);
 	echo '<tr><td colspan="4" class="number">' . _('Total Other Requirements Cost') . '</td><td class="number"><b>' . $DisplayTotal . '</b></td></tr></table>';
-	echo '<br /><div class="centre"><input type="submit" name="UpdateLines" value="' . _('Update Other Requirements Lines') . '" />';
-	echo ' <input type="submit" name="BackToHeader" value="' . _('Back To Contract Header') . '" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="UpdateLines">' . _('Update Other Requirements Lines') . '</button>';
+	echo ' <button type="submit" name="BackToHeader">' . _('Back To Contract Header') . '</button></div>';
 
 } /*Only display the contract other requirements lines if there are any !! */
 
@@ -142,7 +142,7 @@ echo '<tr><td>' . _('Quantity Required') . ':</td><td><input type="text" class="
 echo '<tr><td>' . _('Cost Per Unit') . ':</td><td><input type="text" class="number" name="CostPerUnit" size="10"	maxlength="10" value="' . $_POST['CostPerUnit'] . '" /></td></tr>';
 echo '</table>';
 
-echo '<br /><div class="centre"><input type="submit" name="EnterNewRequirement" value="' . _('Enter New Contract Requirement') . '" /></div>';
+echo '<br /><div class="centre"><button type="submit" name="EnterNewRequirement">' . _('Enter New Contract Requirement') . '</button></div>';
 
 echo '</form>';
 include('includes/footer.inc');

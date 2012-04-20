@@ -227,7 +227,7 @@ if (!isset($SelectedBankAccount)) {
 		} else {
 			$PettyCash=_('Yes');
 		}
-		printf('<td>%s<br /><font size="2">%s</font></td>
+		printf('<td>%s<br /><font>%s</font></td>
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
@@ -435,7 +435,7 @@ echo '</select></td>';
 
 echo '</tr>';
 echo '</table><br />
-		<div class="centre"><input tabindex="7" type="Submit" name="submit" value="'. _('Enter Information') .'" /></div>';
+		<div class="centre"><button tabindex="7" type="Submit" name="submit">'. _('Enter Information') .'</button></div>';
 
 echo '</form>';
 include('includes/footer.inc');

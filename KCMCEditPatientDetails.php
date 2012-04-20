@@ -449,7 +449,7 @@ if (isset($_POST['FileNumber'])) {
 		echo '</select></td></tr>';
 	}
 	echo '</table>';
-	echo '<br /><div class="centre"><input type="submit" name="Update" value="Update Details" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="Update">' . _('Update Details') . '</button></div>';
 	echo '</form>';
 }
 
