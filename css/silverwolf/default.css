@@ -93,10 +93,12 @@ td.select {
 }
 
 table.selection {
+	margin-bottom: 5px;
 	background-color:#DCDCDC;
-	outline-style:solid;
-	outline-color: #8e8a8a;
-	outline-width:1px;
+	border: solid #A49999 1px;
+	-moz-box-shadow: 3px 3px 2px #888;
+	-webkit-box-shadow: 3px 3px 2px #888;
+	box-shadow: 3px 3px 2px #888;
 }
 
 td.number {
@@ -211,18 +213,21 @@ input {
 }
 
 button {
-	font-family: Arial, Verdana, Helvetica, sans-serif;
-	font-size: 100%;
+	display: inline-block;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	font: 10px/100% Arial, Helvetica, sans-serif;
+	padding: .1em 1em .2em;
 	background-color: #e3e1e1;
-	border-width:1px;
-	border-bottom-color: gray;
-	border-bottom-style: solid;
-	border-top-color: gray;
-	border-top-style: solid;
-	border-left-color: gray;
-	border-left-style: solid;
-	border-right-color: gray;
-	border-right-style: solid;
+	margin-bottom: 2px;
+	-webkit-border-radius: .5em;
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);	border-right-style: solid;
 }
 
 input:hover {
@@ -640,6 +645,9 @@ p.page_title_text {
         border-color: #666;
 		margin: 10px auto;
 		text-align:center;
+	-moz-box-shadow: 5px 5px 3px #888;
+	-webkit-box-shadow: 5px 5px 3px #888;
+	box-shadow: 5px 5px 3px #888;
 }
 
 div.page_help_text {

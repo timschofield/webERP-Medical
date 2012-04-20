@@ -899,14 +899,18 @@ if (!isset($_POST['NextSerialNo'])) {
 }
 
 if ($_SESSION['Care2xDatabase']!='None') {
+	if (isset($StockID)) {
+		$_POST['Care2xItem']=$StockID;
+	}
 	echo '<tr><td>' . _('Care2x Item') . '</td>';
 	echo '<td><select name="Care2xItem">';
 	$SQL="SELECT item_id,
+				partcode,
 				item_full_description
 			FROM ".$_SESSION['Care2xDatabase'].".care_tz_drugsandservices";
 	$result=DB_query($SQL, $db);
 	while ($myrow=DB_fetch_array($result)){
-		if (!isset($_POST['Care2xItem']) or $myrow['item_id']==$_POST['Care2xItem']){
+		if (!isset($_POST['Care2xItem']) or $myrow['partcode']==$_POST['Care2xItem']){
 			echo '<option selected="selected" value="'. $myrow['item_id'] . '">' . $myrow['item_full_description'] . '</option>';
 		} else {
 			echo '<option value="'. $myrow['item_id'] . '">' . $myrow['item_full_description'] . '</option>';
@@ -1176,18 +1180,18 @@ echo '</table><br />';
 echo '<input type="hidden" name="PropertyCounter" value="' . $PropertyCounter . '" />';
 
 if ($New==1) {
-	echo '<input type="submit" name="submit" value="' . _('Insert New Item') . '" />';
+	echo '<button type="submit" name="submit">' . _('Insert New Item') . '</button>';
 	echo '<input type="submit" name="UpdateCategories" style="visibility:hidden;width:1px" value="' . _('Categories') . '" />';
 
 } else {
 
 	// Now the form to enter the item properties
 
-	echo '<input type="submit" name="submit" value="' . _('Update') . '" />';
+	echo '<button type="submit" name="submit">' . _('Update') . '</button>';
 	echo '<input type="submit" name="UpdateCategories" style="visibility:hidden;width:1px" value="' . _('Categories') . '" />';
 	echo '<br />';
 	prnMsg( _('Only click the Delete button if you are sure you wish to delete the item!') .  _('Checks will be made to ensure that there are no stock movements, sales analysis records, sales order items or purchase order items for the item') . '. ' . _('No deletions will be allowed if they exist'), 'warn', _('WARNING'));
-	echo '<br /><input type="submit" name="delete" value="' . _('Delete This Item') . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');" />';
+	echo '<br /><button type="submit" name="delete" onclick="return confirm(\'' . _('Are You Sure?') . '\');">' . _('Delete This Item') . '</button>';
 }
 
 echo '</div></form>';
