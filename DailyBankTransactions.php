@@ -51,7 +51,7 @@ if (!isset($_POST['Show'])) {
 		</tr>';
 
 	echo '</table>';
-	echo '<br /><div class="centre"><input type="submit" name="Show" value="' . _('Show transactions'). '" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="Show">' . _('Show transactions'). '</button></div>';
 	echo '</form>';
 } else {
 	$SQL = "SELECT 	bankaccountname,
@@ -91,7 +91,7 @@ if (!isset($_POST['Show'])) {
 		$BankDetailRow = DB_fetch_array($BankResult);
 		echo '<table class="selection">
 						<tr>
-							<th colspan="9"><font size="3" color="blue">' . _('Account Transactions For').' '.$BankDetailRow['bankaccountname'].' '._('Between').' '.$_POST['FromTransDate'] . ' ' . _('and') . ' ' . $_POST['ToTransDate'] . '</font></th>
+							<th colspan="10"><font size="3" color="blue">' . _('Account Transactions For').' '.$BankDetailRow['bankaccountname'].' '._('Between').' '.$_POST['FromTransDate'] . ' ' . _('and') . ' ' . $_POST['ToTransDate'] . '</font></th>
 						</tr>';
 		echo '<tr>
 						<th>' . ('Date') . '</th>
@@ -128,13 +128,13 @@ if (!isset($_POST['Show'])) {
 							<td class="number">'.locale_money_format($LocalCurrTotal,$_SESSION['CompanyRecord']['currencydefault']).'</td>
 						</tr>';
 		}
-		echo '<tr><th colspan=8>' . _('Total number of receipts') . ' - ' . DB_num_rows($result) . '</th></tr>';
+		echo '<tr><th colspan=10>' . _('Total number of receipts') . ' - ' . DB_num_rows($result) . '</th></tr>';
 		echo '</table>';
 	} //end if no bank trans in the range to show
 
 	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<br /><div class="centre"><input type="submit" name="Return" value="' . _('Select Another Date'). '" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="Return">' . _('Select Another Date'). '</button></div>';
 	echo '</form>';
 }
 include('includes/footer.inc');

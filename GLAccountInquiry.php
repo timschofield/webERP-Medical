@@ -75,7 +75,7 @@ while ($myrow=DB_fetch_array($Periods,$db)){
 	}
 }
 echo '</select></td></tr><table>';
-echo '<p><div class="centre"><input type="submit" name="Show" value="'._('Show Account Transactions').'" /></div></p></form>';
+echo '<p><div class="centre"><button type="submit" name="Show">'._('Show Account Transactions').'</button></div></p></form>';
 
 /* End of the Form  rest of script is what happens if the show button is hit*/
 
@@ -144,7 +144,7 @@ if (isset($_POST['Show'])){
 	$ErrMsg = _('The transactions for account') . ' ' . $SelectedAccount . ' ' . _('could not be retrieved because') ;
 	$TransResult = DB_query($sql,$db,$ErrMsg);
 
-	echo '<br /><table class="selection">';
+	echo '<table class="selection">';
 
 	echo '<tr><th colspan="8"><b>' ._('Transactions for account').' '.$SelectedAccount. ' - '. $SelectedAccountName.'</b></th></tr>';
 	$TableHeader = '<tr>
@@ -291,7 +291,7 @@ if (isset($_POST['Show'])){
 
 	}
 
-	echo '<tr bgcolor="#FDFEEF"><td colspan="3"><b>';
+	echo '<tr><th colspan="3"><b>';
 	if ($PandLAccount==True){
 		echo _('Total Period Movement');
 	} else { /*its a balance sheet account*/

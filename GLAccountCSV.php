@@ -25,7 +25,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 $DefaultPeriodDate = Date ('Y-m-d', Mktime(0,0,0,Date('m'),0,Date('Y')));
 
 /*Show a form to allow input of criteria for the report */
-echo '<table>
+echo '<table class="selection">
 			<tr>
 			 <td>'._('Selected Accounts') . ':</td>
 			 <td><select name="Account[]" multiple>';
@@ -79,7 +79,7 @@ echo '</select></td></tr>';
 // End select tag
 
 echo '</table><br />
-<div class="centre"><input type="submit" name="MakeCSV" value="'._('Make CSV File').'" /></div></form>';
+<div class="centre"><button type="submit" name="MakeCSV">'._('Make CSV File').'</button></div></form>';
 
 /* End of the Form  rest of script is what happens if the show button is hit*/
 
@@ -265,7 +265,7 @@ if (isset($_POST['MakeCSV'])){
 
 	} /*end for each SelectedAccount */
 	fclose($fp);
-	echo '<p><a href="' .  $FileName . '">' . _('click here') . '</a> ' . _('to view the file') . '</p><br />';
+	echo '<br /><div class="centre"><a href="' .  $FileName . '">' . _('Click Here') . '</a> ' . _('to view the file') . '</div>';
 } /* end of if CreateCSV button hit */
 
 include('includes/footer.inc');

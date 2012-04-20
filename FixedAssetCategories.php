@@ -325,7 +325,7 @@ while ($myrow = DB_fetch_array($BSAccountsResult)) {
 
 echo '</select></td></tr></table><br />';
 
-echo '<div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div>';
+echo '<div class="centre"><button type="submit" name="submit">' . _('Enter Information') . '</button></div>';
 
 echo '</form><br />';
 

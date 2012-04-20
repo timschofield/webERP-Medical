@@ -52,7 +52,7 @@ if (!isset($LocationFrom) OR !isset($ShipperID)) {
 		echo '<option value=' . $myrow['loccode'] . '>' . $myrow['locationname'] . '</option>';
 	}
 
-	echo '</select></td></tr></table><br /><div class="centre"><input type="submit" value="' . _('Accept') . '" name="Accept" /></div></form>';
+	echo '</select></td></tr></table><br /><div class="centre"><button type="submit" name="Accept" />' . _('Accept') . '</button></div></form>';
 
 } else {
 
@@ -333,7 +333,7 @@ if (isset($LocationFrom) AND isset($ShipperID)) {
 
 	echo '</table><br />';
 
-	echo '<div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div>';
+	echo '<div class="centre"><button type="submit" name="submit">' . _('Enter Information') . '</button></div>';
 
 	echo '</form>';
 

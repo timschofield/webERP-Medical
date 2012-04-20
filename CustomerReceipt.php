@@ -840,7 +840,7 @@ if (!isset($_SESSION['ReceiptBatch']->Narrative)) {
 	$_SESSION['ReceiptBatch']->Narrative='';
 }
 echo '<tr><td>' . _('Narrative') . ':</td><td><input tabindex="7" type="text" name="BatchNarrative" maxlength="50" size="52" value="' . $_SESSION['ReceiptBatch']->Narrative . '" /></td></tr>';
-echo '<tr><td colspan="3"><div class="centre"><input tabindex="8" type="submit" name="BatchInput" value="' . _('Accept') . '" /></div></td></tr>';
+echo '<tr><td colspan="3"><div class="centre"><button tabindex="8" type="submit" name="BatchInput">' . _('Accept') . '</button></div></td></tr>';
 echo '</table><br />';
 
 if (isset($_SESSION['ReceiptBatch'])){
@@ -1027,8 +1027,8 @@ if (((isset($_SESSION['CustomerRecord'])
 	echo '<td>' . _('Narrative') . ':</td>';
 	echo '<td><textarea tabindex="13" name="Narrative"  cols="40" rows="1"></textarea></td>';
 	echo '</table>';
-	echo '<br /><div class="centre"><input tabindex="14" type="submit" name="Process" value="' . _('Accept') . '" />';
-	echo '<input tabindex="15" type="submit" name="Cancel" value="' . _('Cancel') . '" /></div>';
+	echo '<br /><div class="centre"><button tabindex="14" type="submit" name="Process">' . _('Accept') . '</button>';
+	echo '<button tabindex="15" type="submit" name="Cancel">' . _('Cancel') . '</button></div>';
 
 } elseif (isset($_SESSION['ReceiptBatch']) AND !isset($_POST['GLEntry'])){
 
@@ -1047,8 +1047,8 @@ if (((isset($_SESSION['CustomerRecord'])
 	echo '<td><input tabindex="11" type="text" name="CustInvNo" size="8" maxlength="8" /></td>';
 	echo '</tr></table>';
 	echo '<div class="centre"><br />';
-	echo '<input tabindex="11" type="submit" name="Search" value="' . _('Search Now') . '" />';
-	echo '<br/><br/><input tabindex="12" type="submit" name="GLEntry" value="' . _('Enter A GL Receipt') . '" /><br /></div>';
+	echo '<button tabindex="11" type="submit" name="Search">' . _('Search Now') . '</button>';
+	echo '<br/><br/><button tabindex="12" type="submit" name="GLEntry">' . _('Enter A GL Receipt') . '</button><br /></div>';
 
 	if (isset($CustomerSearchResult)) {
 
@@ -1070,7 +1070,7 @@ if (((isset($_SESSION['CustomerRecord'])
 			}
 
 			printf('<td><font size="1">
-					<input type="submit" name="Select" value="%s" /></font></td>
+					<button type="submit" name="Select">%s</button></font></td>
 					<td>%s</td></tr>',
 					$myrow['debtorno'],
 					$myrow['name']);
@@ -1092,7 +1092,7 @@ if (((isset($_SESSION['CustomerRecord'])
 }
 
 if (isset($_SESSION['ReceiptBatch']->Items) and count($_SESSION['ReceiptBatch']->Items) > 0){
-	echo '<div class="centre"><br/><input tabindex="13" type="submit" name="CommitBatch" value="' . _('Accept and Process Batch') . '" /></div>';
+	echo '<div class="centre"><br/><button tabindex="13" type="submit" name="CommitBatch">' . _('Accept and Process Batch') . '</button></div>';
 }
 
 echo '</form>';

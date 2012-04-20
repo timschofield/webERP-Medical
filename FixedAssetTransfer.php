@@ -66,7 +66,7 @@ if (isset($_GET['AssetID'])) {
 
 	echo '</td></tr></table><br />';
 
-	echo '<div class="centre"><input type="submit" name="Search" value="'. _('Search Now') . '" /></div></form><br />';
+	echo '<div class="centre"><button type="submit" name="Search">'. _('Search Now') . '</button></div></form><br />';
 }
 
 if (isset($_POST['Search'])) {
@@ -138,7 +138,7 @@ if (isset($_POST['Search'])) {
 		echo '<input type="hidden" name="Keywords" value="' . $_POST['Keywords'].'" />';
 		echo '<input type="hidden" name="AssetID" value="' . $_POST['AssetID'].'" />';
 		echo '<input type="hidden" name="Search" value="' . $_POST['Search'].'" />';
-		echo '<td><input type="submit" name="Move'.$myrow['assetid'].'" value="Move" /></td>';
+		echo '<td><button type="submit" name="Move'.$myrow['assetid'].'">'._('Move').'</button></td>';
 		echo '</tr>';
 	}
 	echo '</table></form>';

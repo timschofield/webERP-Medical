@@ -245,7 +245,7 @@ if (isset($_POST['RunReport'])){
 	$DefaultPeriodDate = Date ('Y-m-d', Mktime(0,0,0,Date('m'),0,Date('Y')));
 
 	/*Show a form to allow input of criteria for the report */
-	echo '<table>
+	echo '<table class="selection">
 				<tr>
 				 <td>'._('Selected Accounts') . ':</td>
 				 <td><select name="Account[]" multiple>';
@@ -306,7 +306,7 @@ if (isset($_POST['RunReport'])){
 
 	echo '</table><br />
 		<div class="centre">
-			<input type="submit" name="RunReport" value="' ._('Run Report'). '" /></div>
+			<button type="submit" name="RunReport">' ._('Run Report'). '</button></div>
 			</form>';
 
 	include ('includes/footer.inc');

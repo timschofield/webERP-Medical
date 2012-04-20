@@ -17,11 +17,10 @@ if (isset($_GET['FactorID'])){
 
 if (isset($_POST['Create'])) {
 	$FactorID = 0;
-	$_POST['New'] = "Yes";
+	$_POST['New'] = 'Yes';
 };
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Factor Companies') . '" alt="" />' . ' ' .$title . '</p>';
-
 /* This section has been reached because the user has pressed either the insert/update buttons on the
  form hopefully with input in the correct fields, which we check for firsrt. */
 
@@ -148,7 +147,7 @@ if (isset($_POST['submit']) or isset($_POST['update']) or isset($_POST['delete']
 /* If it didn't come with a $FactorID it must be a completely fresh start, so choose a new $factorID or give the
   option to create a new one*/
 
-if (empty($FactorID)) {
+if (empty($FactorID) and !isset($_POST['Create'])) {
 
 	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -205,7 +204,7 @@ if (empty($FactorID)) {
 		echo '<td><a href="'.$rootpath . '/Factors.php?FactorID='.$myrow['id'].'">'._('Edit').'</a></td></tr>';
 	}
 	echo '</table><br /><div class="centre">';
-	echo '<br /><input tabindex="3" type="submit" name="Create" value="' . _('Create New Factor') . '" />';
+	echo '<br /><button tabindex="3" type="submit" name="Create">' . _('Create New Factor') . '</button>';
 	echo '</div></form>';
 	include('includes/footer.inc');
 	exit;
@@ -277,16 +276,15 @@ if (isset($_POST['amend']) or isset($_POST['Create'])) {
 	echo '<tr><td>' . _('Telephone') . ':</td><td><input tabindex="9" type="text" name="Telephone" size="13" maxlength="25" value="'.$_POST['Telephone'].'" /></td></tr>';
 	echo '<tr><td>' . _('Fax') . ':</td><td><input tabindex="10" type="text" name="Fax" size="13" maxlength="25" value="'.$_POST['Fax'].'" /></td></tr>';
 	echo '<tr><td>' . _('Email') . ':</td><td><input tabindex="11" type="text" name="Email" size="55" maxlength="55" value="'.$_POST['Email'].'" /></td></tr>';
-	echo '</form>';
 }
 
 
 if (isset($_POST['Create'])) {
-	echo '</table><br /><div class="centre"><input tabindex="12" type="submit" name="submit" value="' . _('Insert New Factor') . '" /></div>';
+	echo '</table><br /><div class="centre"><button tabindex="12" type="submit" name="submit">' . _('Insert New Factor') . '</button></div>';
 } else if (isset($_POST['amend'])) {
-	echo '</table><p><div class="centre"><input tabindex="13" type="submit" name="update" value="' . _('Update Factor') . '" /></p>';
+	echo '</table><p><div class="centre"><button tabindex="13" type="submit" name="update">' . _('Update Factor') . '</button></p>';
 	prnMsg ( _('There is no second warning if you hit the delete button below') . '. ' . _('However checks will be made to ensure there are no suppliers are using this factor before the deletion is processed'), 'warn');
-	echo '<br /><input tabindex="14" type="submit" name="delete" value="' . _('Delete Factor') . '" onclick="return confirm(' . _('Are you sure you wish to delete this factoring company?') . '");" /></form></div>';
+	echo '<br /><button tabindex="14" type="submit" name="delete" onclick="return confirm(' . _('Are you sure you wish to delete this factoring company?') . '");">' . _('Delete Factor') . '</button></div></form>';
 }
 
 

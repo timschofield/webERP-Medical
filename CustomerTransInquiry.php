@@ -44,9 +44,9 @@ if (!isset($_POST['ToDate'])){
 echo '<td>' . _('From') . ':</td><td><input tabindex="2" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="text" name="FromDate" maxlength="10" size="11" value="' . $_POST['FromDate'] . '" /></td>';
 echo '<td>' . _('To') . ':</td><td><input tabindex="3" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="text" name="ToDate" maxlength="10" size="11" value="' . $_POST['ToDate'] . '" /></td>';
 
-echo '</tr></table><br /><div class="centre"><input tabindex="4" type="submit" name="ShowResults" value="' . _('Show Transactions') . '" />';
+echo '</tr></table><br /><div class="centre"><button tabindex="4" type="submit" name="ShowResults">' . _('Show Transactions') . '</button>';
 
-echo '</form></div>';
+echo '</div></form>';
 
 if (isset($_POST['ShowResults']) and $_POST['TransType'] != ''){
    $SQL_FromDate = FormatDateForSQL($_POST['FromDate']);

@@ -263,7 +263,7 @@ if (! isset($_GET['delete'])) {
 
    	echo '</td></tr></table>'; // close main table
 
-	echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Accept') . '" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="submit">' . _('Accept') . '</button></div>';
 
 	echo '</form>';
 

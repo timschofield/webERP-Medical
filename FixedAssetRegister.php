@@ -232,8 +232,8 @@ if (isset($_POST['submit']) or isset($_POST['pdf']) or isset($_POST['csv'])) {
 		echo '<th class="number">' . locale_money_format($TotalNBV, $_SESSION['CompanyRecord']['currencydefault']) . '</th>';
 		echo '<th class="number">' . locale_money_format($TotalDisposals, $_SESSION['CompanyRecord']['currencydefault']) . '</th></tr>';
 		echo '</table>';
-		echo '<br /><div class="centre"><input type="submit" name="pdf" value="' . _('Print as a pdf') . '" />&nbsp;';
-		echo '<input type="submit" name="csv" value="' . _('Print as CSV') . '" /></div></form>';
+		echo '<br /><div class="centre"><button type="submit" name="pdf">' . _('Print as a pdf') . '</button>&nbsp;';
+		echo '<button type="submit" name="csv">' . _('Print as CSV') . '</button></div></form>';
 	}
 } else {
 	include ('includes/header.inc');
@@ -293,9 +293,9 @@ if (isset($_POST['submit']) or isset($_POST['pdf']) or isset($_POST['csv'])) {
 	echo '</tr>';
 
 	echo '</table><br />';
-	echo '<div class="centre"><input type="submit" name="submit" value="' . _('Show Assets') . '" />&nbsp;';
-	echo '<input type="submit" name="pdf" value="' . _('Print as a pdf') . '" />&nbsp;';
-	echo '<input type="submit" name = "csv" value= "' . _('Print as CSV') . '" /></div>';
+	echo '<div class="centre"><button type="submit" name="submit">' . _('Show Assets') . '</button>&nbsp;';
+	echo '<button type="submit" name="pdf">' . _('Print as a pdf') . '</button>&nbsp;';
+	echo '<button type="submit" name="csv">' . _('Print as CSV') . '</button></div>';
 	echo '</form>';
 }
 include ('includes/footer.inc');

@@ -264,7 +264,7 @@ if(isset($_POST['MakeRecurringOrder']) AND ! $InputErrors){
 }
 
 
-if (isset($_POST['BackToLineDetails']) and $_POST['BackToLineDetails']==_('Modify Order Lines')){
+if (isset($_POST['BackToLineDetails'])){
 
 	echo '<meta http-equiv="Refresh" content="0; url=' . $rootpath . '/SelectOrderItems.php?identifier='.$identifier   . '">';
 	prnMsg(_('You should automatically be forwarded to the entry of the order line details page') . '. ' . _('If this does not happen') . '(' . _('if the browser does not support META Refresh') . ') ' ."<a href='" . $rootpath . '/SelectOrderItems.php?identifier='.$identifier  . "'>". _('click here') .'</a> '. _('to continue'),'info');
@@ -1113,7 +1113,7 @@ echo '<tr><td>'. _('Charge Freight Cost inc tax') .':</td>';
 echo '<td><input type="text" class="number" size="10" maxlength="12" name="FreightCost" value="' . $_SESSION['Items'.$identifier]->FreightCost . '" /></td>';
 
 if ($_SESSION['DoFreightCalc']==true){
-	echo '<td><input type="submit" name="Update" value="' . _('Recalc Freight Cost') . '" /></td></tr>';
+	echo '<td><button type="submit" name="Update">' . _('Recalc Freight Cost') . '</button></td></tr>';
 }
 
 if ((!isset($_POST['ShipVia']) OR $_POST['ShipVia']=='') AND isset($_SESSION['Items'.$identifier]->ShipVia)){
@@ -1150,13 +1150,13 @@ echo '</select></td></tr>';
 
 echo '</table>';
 
-echo '<br /><div class="centre"><input type="submit" name="BackToLineDetails" value="' . _('Modify Order Lines') . '" /><br />';
+echo '<br /><div class="centre"><button type="submit" name="BackToLineDetails">' . _('Modify Order Lines') . '</button><br />';
 
 if ($_SESSION['ExistingOrder'.$identifier]==0){
-	echo '<br /><br /><input type="submit" name="ProcessOrder" value="' . _('Place Order') . '" />';
-	echo '<br /><br /><input type="submit" name="MakeRecurringOrder" value="' . _('Create Recurring Order') . '" />';
+	echo '<br /><button type="submit" name="ProcessOrder">' . _('Place Order') . '</button>';
+	echo '<br /><button type="submit" name="MakeRecurringOrder">' . _('Create Recurring Order') . '</button>';
 } else {
-	echo '<br /><input type="submit" name="ProcessOrder" value="' . _('Commit Order Changes') . '" />';
+	echo '<button type="submit" name="ProcessOrder">' . _('Commit Order Changes') . '</button>';
 }
 
 echo '</div></form>';

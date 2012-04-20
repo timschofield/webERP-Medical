@@ -139,7 +139,7 @@ echo '<tr>
 echo '</table><br />';
 
 echo '<div class="centre">
-		<input tabindex="5" type="submit" name="submit" value="' . _('Enter Information') . '" /></div><br />';
+		<button tabindex="5" type="submit" name="submit">' . _('Enter Information') . '</button></div><br />';
 
 $sql = "SELECT sales_type,
 		salestype,

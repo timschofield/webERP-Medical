@@ -132,7 +132,7 @@ if (empty($_POST['FormName'])) {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
 	echo '<form method="post" id="ChooseForm" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<table><tr>';
+	echo '<table class="selection"><tr>';
 	echo '<td>'. _('Select the form to edit') .'</td><td><select name="FormName">';
 	/* Iterate throght the appropriate companies FormDesigns/ directory
 	 * and extract the form name from each of the xml files found */
@@ -146,7 +146,7 @@ if (empty($_POST['FormName'])) {
 		closedir($handle);
 	}
 	echo '</select></td></tr></table>';
-	echo '<br /><div class="centre"><input tabindex="6" type="submit" name="submit" value="' . _('Edit Form Layout') . '" /></div>';
+	echo '<br /><div class="centre"><button tabindex="6" type="submit" name="submit">' . _('Edit Form Layout') . '</button></div>';
 	echo '</form>';
 	include('includes/footer.inc');
 	exit;
@@ -268,8 +268,8 @@ foreach ($FormDesign as $key) {
 	}
 }
 echo '</tr></table>'; //End of outer table
-echo '<br /><div class="centre"><input tabindex="6" type="submit" name="preview" value="' . _('Preview the Form Layout') . '" /></div>';
-echo '<br /><div class="centre"><input tabindex="6" type="submit" name="save" value="' . _('Save the Form Layout') . '" /></div>';
+echo '<br /><div class="centre"><button tabindex="6" type="submit" name="preview">' . _('Preview the Form Layout') . '</button></div>';
+echo '<br /><div class="centre"><button tabindex="6" type="submit" name="save">' . _('Save the Form Layout') . '</button></div>';
 echo '</form>';
 include('includes/footer.inc');
 ?>
