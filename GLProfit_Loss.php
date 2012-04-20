@@ -95,8 +95,8 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 
 	echo '</table>';
 
-	echo '<br /><div class="centre"><input type="submit" name="ShowPL" value="'._('Show on Screen (HTML)').'" /></div>';
-	echo '<br /><div class="centre"><input type="submit" name="PrintPDF" value="'._('Produce PDF Report').'" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="ShowPL">'._('Show on Screen (HTML)').'</button></div>';
+	echo '<br /><div class="centre"><button type="submit" name="PrintPDF">'._('Produce PDF Report').'</button></div>';
 
 	/*Now do the posting while the user is thinking about the period to select*/
 
@@ -1226,7 +1226,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 		</tr>';
 
 	echo '</table>';
-	echo '<br /><div class="centre"><input type="submit" name="SelectADifferentPeriod" value="' . _('Select A Different Period') . '" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="SelectADifferentPeriod">' . _('Select A Different Period') . '</button></div>';
 }
 echo '</form>';
 include('includes/footer.inc');

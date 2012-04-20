@@ -37,7 +37,7 @@ if (!isset($_POST['Show'])) {
 		</tr>';
 
 	echo '</table>';
-	echo '<br /><div class="centre"><input type="submit" name="Show" value="' . _('Show transactions'). '" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="Show">' . _('Show transactions'). '</button></div>';
 	echo '</form>';
 } else {
 
@@ -114,7 +114,7 @@ if (!isset($_POST['Show'])) {
 
 	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<br /><div class="centre"><input type="submit" name="Return" value="' . _('Select Another Date'). '" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="Return">' . _('Select Another Date'). '</button></div>';
 	echo '</form>';
 }
 include('includes/footer.inc');

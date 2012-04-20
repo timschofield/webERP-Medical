@@ -259,20 +259,20 @@ if (count($_SESSION['PO']->LineItems)>0){
 if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then dont bother proceeding cos nothing to do ! */
 
 	prnMsg(_('There is nothing to process') . '. ' . _('Please enter valid quantities greater than zero'),'warn');
-	echo '<div class="centre"><input type="submit" name="Update" value="' . _('Update') . '" /></div>';
+	echo '<div class="centre"><button type="submit" name="Update">' . _('Update') . '</button></div>';
 
 } elseif ($NegativesFound){
 
 	prnMsg(_('Negative stocks would result by processing a negative delivery - quantities must be changed or the stock quantity of the item going negative corrected before this delivery will be processed.'),'error');
 
-	echo '<div class="centre"><input type="submit" name="Update" value="' . _('Update') . '" />';
+	echo '<div class="centre"><button type="submit" name="Update">' . _('Update') . '</button>';
 
 }elseif ($DeliveryQuantityTooLarge==1 AND isset($_POST['ProcessGoodsReceived'])){
 
 	prnMsg(_('Entered quantities cannot be greater than the quantity entered on the purchase invoice including the allowed over-receive percentage'). ' ' . '(' . $_SESSION['OverReceiveProportion'] .'%)','error');
 	echo '<br />';
 	prnMsg(_('Modify the ordered items on the purchase invoice if you wish to increase the quantities'),'info');
-	echo '<div class="centre"><input type="submit" name="Update" value="' . _('Update') . '" />';
+	echo '<div class="centre"><button type="submit" name="Update">' . _('Update') . '</button>';
 
 }  elseif (isset($_POST['ProcessGoodsReceived']) AND $SomethingReceived==1 AND $InputError == false){
 
@@ -748,8 +748,8 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 
 	echo '<br /><div class="centre"><a href="' . $rootpath . '/PO_Items.php">' . _('Modify Order Items'). '</a></div>';
 
-	echo '<br /><div class="centre"><input type="submit" name="Update" value="' . _('Update') . '" /></div><br />';
-	echo '<div class="centre"><input type="submit" name="ProcessGoodsReceived" value="' . _('Process Goods Received') . '" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="Update">' . _('Update') . '</button></div><br />';
+	echo '<div class="centre"><button type="submit" name="ProcessGoodsReceived">' . _('Process Goods Received') . '</button></div>';
 }
 
 echo '</form>';

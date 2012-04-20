@@ -287,8 +287,8 @@ function showLabel($label, $msg, $theme, $readonly=false) {
 			</tr>
 			</tbody>
 		</table>
-		<br /><input type="submit" name="'.$name.'" value="'.$value.'" />
-		<input type="submit" name="Cancel" value="'.$vCancel.'" />
+		<br /><button type="submit" name="'.$name.'">'.$value.'</button>
+		<button type="submit" name="Cancel">'.$vCancel.'</button>
 	</form>';
 }
 
@@ -437,7 +437,7 @@ function showLabelsList($list) {
 				<th>'.$txt[0].'</th>
 				<th>'.$txt[1].'</th>
 				<th>'.$txt[2].'</th>
-				<th><input type="submit" name="new" onclick="submitForm(\'form1\',\'New\',\'\');" value="'.$txt[3].'" />
+				<th><button type="submit" name="new" onclick="submitForm(\'form1\',\'New\',\'\');">'.$txt[3].'</button>
 				</th>
 			</tr>
 		</thead>
@@ -448,9 +448,9 @@ function showLabelsList($list) {
 			<tr><td>'. $label->id . '</td>
 				<td>'. $label->description . '</td>
 				<td><div class="centre">'. $dim . '</div></td>
-				<td><input type="submit" onclick="submitForm('. "'form1','Edit','". $label->id . "');" .'" value="' . $txt[4]. '" />
-				<input type="submit" onclick="submitForm('. "'form1','Copy','". $label->id . "');" .'" value="' . $txt[5]. '" />
-				<input type="submit" onclick="areYouSure('. "'form1','Delete','". $label->id . "');" .'" value="' . $txt[6]. '" />
+				<td><button type="submit" onclick="submitForm('. "'form1','Edit','". $label->id . "');" .'">' . $txt[4]. '</button>
+				<button type="submit" onclick="submitForm('. "'form1','Copy','". $label->id . "');" .'">' . $txt[5]. '</button>
+				<button type="submit" onclick="areYouSure('. "'form1','Delete','". $label->id . "');" .'">' . $txt[6]. '</button>
 				</td>
 			</tr>';
 	}

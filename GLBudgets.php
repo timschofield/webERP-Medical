@@ -29,7 +29,7 @@ if (isset($_POST['update'])) {
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>';
 echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post" name="selectaccount">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<table>';
+echo '<table class="selection">';
 
 echo '<br /><tr><td>'.  _('Select GL Account').  ':</td><td><select name="SelectedAccount"
 		onChange="ReloadForm(selectaccount.Select)">';
@@ -66,10 +66,10 @@ if (!isset($NextCode)) {$NextCode='';}
 echo '<input type="hidden" name="PrevAccount" value="'.$PrevCode.'" />';
 echo '<input type="hidden" name="NextAccount" value="'.$NextCode.'" />';
 echo '</table>';
-echo '<br /><table><tr><td><input type="submit" name="Previous" value="' . _('Prev Account') . '" /></td>';
-echo '<td><input type="submit" name="Select" value="' . _('Select Account') . '" /></td>';
-echo '<td><input type="submit" name="Next" value="' . _('Next Account') . '" /></td></tr>';
-echo '</table><br />';
+echo '<br /><div class="centre"><button type="submit" name="Previous">' . _('Prev Account') . '</button>';
+echo '<button type="submit" name="Select">' . _('Select Account') . '</button>';
+echo '<button type="submit" name="Next">' . _('Next Account') . '</button>';
+echo '</div><br />';
 echo '</form>';
 
 // End of account selection
@@ -208,13 +208,13 @@ if (isset($SelectedAccount) and $SelectedAccount != '') {
 				<td><input class="number" type="text" size="14" name="AnnualAmountTY" value="'.locale_money_format(0, $_SESSION['CompanyRecord']['currencydefault']).'" /></td>
 				<td></td>
 				<td><input onChange="numberFormat(this,2)" class="number" type="text" size="14" name="AnnualAmount" value="'.locale_money_format(0, $_SESSION['CompanyRecord']['currencydefault']).'" /></td>';
-	echo '<td><input type="submit" name="apportion" value="' . _('Apportion Budget') . '" /></td>';
+	echo '<td><button type="submit" name="apportion">' . _('Apportion Budget') . '</button></td>';
 	echo '</tr>';
 	echo '</table>';
 	echo '<input type="hidden" name="SelectedAccount" value="'.$SelectedAccount.'" />';
 
 	echo '<script>defaultControl(document.form.1next);</script>';
-	echo '<br /><div class="centre"><input type="submit" name="update" value="' . _('Update') . '" /></div></form>';
+	echo '<br /><div class="centre"><button type="submit" name="update">' . _('Update') . '</button></div></form>';
 
 	$SQL="SELECT MIN(periodno) FROM periods";
 	$result=DB_query($SQL,$db);

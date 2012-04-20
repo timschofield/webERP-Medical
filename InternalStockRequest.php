@@ -149,7 +149,7 @@ if (isset($_GET['Edit'])) {
 		</tr>';
 	echo '<input type="hidden" name="LineNumber" value="' . $_SESSION['Request']->LineItems[$_GET['Edit']]->LineNumber . '" />';
 	echo '</table><br />';
-	echo '<div class="centre"><input type="submit" name="Edit" value="' . _('Update Line') . '" /></div></form>';
+	echo '<div class="centre"><button type="submit" name="Edit">' . _('Update Line') . '</button></div></form>';
 	include('includes/footer.inc');
 	exit;
 }
@@ -209,7 +209,7 @@ echo '<td><textarea name="Narrative" cols="30">'.$_SESSION['Request']->Narrative
 
 echo '</table><br />';
 
-echo '<div class="centre"><input type="submit" name="Update" value="' . _('Update') . '" /></div>';
+echo '<div class="centre"><button type="submit" name="Update">' . _('Update') . '</button></div>';
 
 echo '</div></form>';
 
@@ -257,7 +257,7 @@ foreach ($_SESSION['Request']->LineItems as $LineItems) {
 }
 
 echo '</table><br />';
-echo '<div class="centre"><input type="submit" name="Submit" value="' . _('Submit') . '" /></div><br />';
+echo '<div class="centre"><button type="submit" name="Submit">' . _('Submit') . '</button></div><br />';
 
 echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -309,7 +309,7 @@ if (isset($_POST['StockCode'])) {
 	echo '<td><input type="text" name="StockCode" size="15" maxlength="18" /></td>';
 }
 echo '</tr></table><br />';
-echo '<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" /></div><br />';
+echo '<div class="centre"><button type="submit" name="Search">' . _('Search Now') . '</button></div><br />';
 echo '<script  type="text/javascript">defaultControl(document.forms[0].StockCode);</script>';
 echo '</form>';
 
@@ -470,9 +470,9 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 				$ListPage++;
 			}
 			echo '</select>
-				<input type="submit" name="Go" value="' . _('Go') . '" />
-				<input type="submit" name="Previous" value="' . _('Previous') . '" />
-				<input type="submit" name="Next" value="' . _('Next') . '" />';
+				<button type="submit" name="Go">' . _('Go') . '</button>
+				<button type="submit" name="Previous">' . _('Previous') . '</button>
+				<button type="submit" name="Next">' . _('Next') . '</button>';
 			echo '<input type="hidden" name=Keywords value="'.$_POST['Keywords'].'" />';
 			echo '<input type="hidden" name=StockCat value="'.$_POST['StockCat'].'" />';
 			echo '<input type="hidden" name=StockCode value="'.$_POST['StockCode'].'" />';
@@ -512,7 +512,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 				$ItemStatus ='';
 			}
 
-			echo '<td><input type="submit" name="Select" value="' . $myrow['stockid'] . '" /></td>
+			echo '<td><button type="submit" name="Select">' . $myrow['stockid'] . '</button></td>
 					<td>'.$myrow['description'].'</td>
 					<td class="number">' . $qoh . '</td>
 					<td>' . $myrow['units'] . '</td>
@@ -537,13 +537,13 @@ if (isset($SearchResult)) {
 	echo '<table class="table1">';
 	echo '<tr><td>
 			<input type="hidden" name="previous" value="'.($Offset-1).'" />
-			<input tabindex="'.($j+8).'" type="submit" name="Prev" value="'._('Prev').'" /></td>';
+			<button tabindex="'.($j+8).'" type="submit" name="Prev">'._('Prev').'</button></td>';
 	echo '<td style="text-align:center" colspan="6">
 			<input type="hidden" name="order_items" value="1" />
-			<input tabindex="'.($j+9).'" type="submit" value="'._('Add to Requisition').'" /></td>';
+			<button tabindex="'.($j+9).'" type="submit">'._('Add to Requisition').'</button></td>';
 	echo '<td>
 			<input type="hidden" name="nextlist" value="'.($Offset+1).'" />
-			<input tabindex="'.($j+10).'" type="submit" name="Next" value="'._('Next').'" /></td></tr>';
+			<button tabindex="'.($j+10).'" type="submit" name="Next">'._('Next').'</button></td></tr>';
 	echo '<tr>
 			<th>' . _('Code') . '</th>
 			<th>' . _('Description') . '</th>
@@ -663,11 +663,11 @@ if (isset($SearchResult)) {
 	}
 #end of while loop
 	echo '<tr><td><input type="hidden" name="previous" value="'.($Offset-1).'" />
-			<input tabindex="'.($j+7).'" type="submit" name="Prev" value="'._('Prev').'" /></td>';
+			<button tabindex="'.($j+7).'" type="submit" name="Prev">'._('Prev').'</button></td>';
 	echo '<td style="text-align:center" colspan="6"><input type="hidden" name="order_items" value="1" />
-		<input tabindex="'.($j+8).'" type="submit" value="'._('Add to Requisition').'" /></td>';
+		<button tabindex="'.($j+8).'" type="submit">'._('Add to Requisition').'</button></td>';
 	echo '<td><input type="hidden" name="nextlist" value="'.($Offset+1).'" />
-		<input tabindex="'.($j+9).'" type="submit" name="Next" value="'._('Next').'" /></td><tr/>';
+		<button tabindex="'.($j+9).'" type="submit" name="Next">'._('Next').'</button></td><tr/>';
 	echo '</table></form>';
 	echo $jsCall;
 

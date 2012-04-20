@@ -90,8 +90,8 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 	}
 	echo '</select></td></tr></table><br />';
 
-	echo '<div class="centre"><input type="submit" name="ShowTB" value="' . _('Show Trial Balance') .'" />';
-	echo '<input type="submit" name="PrintPDF" value="'._('PrintPDF').'" /></div>';
+	echo '<div class="centre"><button type="submit" name="ShowTB">' . _('Show Trial Balance') .'</button>';
+	echo '<button type="submit" name="PrintPDF">'._('PrintPDF').'</button></div>';
 
 /*Now do the posting while the user is thinking about the period to select*/
 
@@ -707,7 +707,7 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 		locale_money_format($CheckPeriodBudget,$_SESSION['CompanyRecord']['currencydefault']));
 
 	echo '</table><br />';
-	echo '<div class="centre"><input type="submit" name="SelectADifferentPeriod" value="' . _('Select A Different Period') . '" /></div>';
+	echo '<div class="centre"><button type="submit" name="SelectADifferentPeriod">' . _('Select A Different Period') . '</button></div>';
 }
 echo '</form>';
 include('includes/footer.inc');

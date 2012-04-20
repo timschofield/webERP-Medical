@@ -220,7 +220,7 @@ if (!isset($_POST['Location'])) {
 	}
 	echo '</select></td></tr>';
 	echo '</table><br />';
-	echo '<div class="centre"><input type="submit" name="EnterAdjustment" value="'. _('Show Requests'). '" /></div>';
+	echo '<div class="centre"><button type="submit" name="EnterAdjustment">'. _('Show Requests'). '</button></div>';
 	include('includes/footer.inc');
 	exit;
 }
@@ -336,7 +336,7 @@ if (isset($_POST['Location'])) {
 		echo '</table></td></tr>';
 	} //end while header loop
 	echo '</table>';
-	echo '<br /><div class="centre"><input type="submit" name="UpdateAll" value="' . _('Update'). '" /></form>';
+	echo '<br /><div class="centre"><button type="submit" name="UpdateAll">' . _('Update'). '</button></form>';
 }
 
 include('includes/footer.inc');

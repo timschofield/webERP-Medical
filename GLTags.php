@@ -32,7 +32,7 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/m
 
 echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" name="form">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<br /><table><tr>';
+echo '<br /><table class="selection"><tr>';
 
 
 echo '<td>'. _('Description') . '</td>
@@ -40,9 +40,9 @@ echo '<td>'. _('Description') . '</td>
 		<input type="hidden" name="reference" value="'.$_GET['SelectedTag'].'" />';
 
 if (isset($_GET['Action']) and $_GET['Action']=='edit') {
-	echo '<input type="submit" name="update" value="' . _('Update') . '" />';
+	echo '<button type="submit" name="update">' . _('Update') . '</button>';
 } else {
-	echo '<input type="submit" name="submit" value="' . _('Insert') . '" />';
+	echo '<button type="submit" name="submit">' . _('Insert') . '</button>';
 }
 
 echo '</td></tr></table><p></p>';
