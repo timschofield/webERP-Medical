@@ -73,8 +73,11 @@ td.select {
 
 table.selection {
 	background-color:#E0F3B1;
-	outline-style:solid;
-	outline-width:1px;
+	border: solid #A49999 1px;
+	border-radius: 5px;
+	-moz-box-shadow: 3px 3px 2px #888;
+	-webkit-box-shadow: 3px 3px 2px #888;
+	box-shadow: 3px 3px 2px #888;
 }
 
 .dpTD {
@@ -153,6 +156,7 @@ div.info {
 input {
 	font-family: Arial, Verdana, Helvetica, sans-serif;;
 	font-size: 10px;
+	background-color: #ABC489;
 }
 
 input.number{
@@ -165,11 +169,51 @@ input.image {
 }
 
 input:hover{
+	background-color: #ABC489;
+}
+
+button {
+	display: inline-block;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	font: 10px/100% Arial, Helvetica, sans-serif;
+	padding: .1em 1em .2em;
+	background-color: #ABC489;
+	margin-bottom: 2px;
+	-webkit-border-radius: .5em;
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);	border-right-style: solid;
 }
 
 select {
-	font-family: Arial, Verdana, Helvetica, sans-serif;;
-	font-size: 10px;
+	border-width:1px;
+	border-bottom-color: gray;
+	border-bottom-style: solid;
+	border-top-color: gray;
+	border-top-style: solid;
+	border-left-color: gray;
+	border-left-style: solid;
+	border-right-color: gray;
+	border-right-style: solid;
+     margin: 0;
+	-webkit-border-radius: .5em;
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+    -webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+	background-color: #ABC489;
+    color:#645959;
+    display: inline-block;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
 }
 
 font.good {
@@ -533,6 +577,9 @@ p.page_title_text {
 	width: 30%;
 	TEXT-ALIGN:center;
 	margin: 10px auto;
+	-moz-box-shadow: 3px 3px 2px #888;
+	-webkit-box-shadow: 3px 3px 2px #888;
+	box-shadow: 3px 3px 2px #888;
 }
 
 DIV.page_help_text {

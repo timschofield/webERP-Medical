@@ -18,7 +18,7 @@
 /* $Id$*/
 
 body {
-	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 10px;
 	background-color: #fff;
 	margin-left: 0px;
@@ -40,7 +40,7 @@ li { list-style-image: url(bullet.gif); ¡ bullet.gif only exist in fresh theme 
 
 /*links before selection */
 a {
-	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 100%;
 	font-weight: normal;
 	text-decoration: none;
@@ -83,7 +83,7 @@ th.number {
 
 /*table detail items default format */
 td {
-	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 100%;
 	text-align: left;
 }
@@ -93,10 +93,13 @@ td.select {
 }
 
 table.selection {
+	margin-bottom: 5px;
 	background-color:#DCDCDC;
-	outline-style:solid;
-	outline-color: #8e8a8a;
-	outline-width:1px;
+	border: solid #A49999 1px;
+	border-radius: 5px;
+	-moz-box-shadow: 3px 3px 2px #888;
+	-webkit-box-shadow: 3px 3px 2px #888;
+	box-shadow: 3px 3px 2px #888;
 }
 
 td.number {
@@ -181,7 +184,7 @@ div.info {
 }
 
 textarea {
-	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 100%;
 	background-color: #e3e1e1;
 	border-width:1px;
@@ -196,10 +199,11 @@ textarea {
 }
 
 input {
-	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 100%;
 	background-color: #e3e1e1;
 	border-width:1px;
+    color:#645959;
 	border-bottom-color: gray;
 	border-bottom-style: solid;
 	border-top-color: gray;
@@ -208,25 +212,11 @@ input {
 	border-left-style: solid;
 	border-right-color: gray;
 	border-right-style: solid;
-}
-
-button {
-	font-family: Arial, Verdana, Helvetica, sans-serif;
-	font-size: 100%;
-	background-color: #e3e1e1;
-	border-width:1px;
-	border-bottom-color: gray;
-	border-bottom-style: solid;
-	border-top-color: gray;
-	border-top-style: solid;
-	border-left-color: gray;
-	border-left-style: solid;
-	border-right-color: gray;
-	border-right-style: solid;
+	border-radius: 3px;
 }
 
 input:hover {
-	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 100%;
 	background-color: #e3e5f5;
 	border-width:1px;
@@ -238,6 +228,51 @@ input:hover {
 	border-left-style: solid;
 	border-right-color: gray;
 	border-right-style: solid;
+	border-radius: 3px;
+}
+
+button {
+	display: inline-block;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	font: 10px/100% Arial, Helvetica, sans-serif;
+	padding: .1em 1em .2em;
+	background-color: #e3e1e1;
+	margin-bottom: 2px;
+	-webkit-border-radius: .5em;
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);	border-right-style: solid;
+}
+
+select {
+	border-width:1px;
+	border-bottom-color: gray;
+	border-bottom-style: solid;
+	border-top-color: gray;
+	border-top-style: solid;
+	border-left-color: gray;
+	border-left-style: solid;
+	border-right-color: gray;
+	border-right-style: solid;
+     margin: 0;
+	-webkit-border-radius: .5em;
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+    -webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+    box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+	background-color: #e3e1e1;
+    color:#645959;
+    display: inline-block;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
 }
 
 input.number {
@@ -254,7 +289,7 @@ input:hover { }
 */
 
 select {
-	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 100%;
 }
 
@@ -327,7 +362,7 @@ textarea.texterror {
 
 /* From merge, uncomment to apply styles
 textarea {
-	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
 }
 
@@ -365,7 +400,7 @@ div.csv {
         VISIBILITY: visible;
         MARGIN: 0 auto;
         POSITION: static;
-        font-family: Arial, Verdana, Helvetica, sans-serif;
+        font-family: Arial, Helvetica, sans-serif;
         padding-top: 1px;
         padding-bottom: 1px;
         font-weight: normal;
@@ -375,7 +410,7 @@ div.csv {
 End Merge */
 
 .callout_main {
-	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	background-color: white;
 	border: none;
 	width: 100%;
@@ -414,7 +449,7 @@ End Merge */
 /*The main page heading left part before quick menu */
 .quick_menu_left {
 	background: none;
-	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 100%;
 	font-weight: bold;
 	border: none;
@@ -561,7 +596,7 @@ End Merge */
 }
 
 span.main_menu_nolink {
-	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 100%;
 	font-weight: bold;
 	color: #777;
@@ -603,7 +638,7 @@ span.main_menu_nolink {
 }
 
 .menu_group_headers_text {
-	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 100%;
 	font-weight: bold;
 	color: black;
@@ -627,7 +662,7 @@ span.main_menu_nolink {
 }
 
 p.page_title_text {
-        font-family: Arial, Verdana, Helvetica, sans-serif;
+        font-family: Arial, Helvetica, sans-serif;
         padding-top: 2px;
         padding-bottom: 2px;
         font-weight: bold;
@@ -638,8 +673,12 @@ p.page_title_text {
         border-style: solid;
         border-width: 1px;
         border-color: #666;
+        border-radius: 5px;
 		margin: 10px auto;
 		text-align:center;
+	-moz-box-shadow: 3px 3px 2px #888;
+	-webkit-box-shadow: 3px 3px 2px #888;
+	box-shadow: 3px 3px 2px #888;
 }
 
 div.page_help_text {
@@ -654,7 +693,7 @@ div.page_help_text {
         visibility: visible;
         margin: 0 auto;
         position: static;
-        font-family: Verdana, Arial, Helvetica;
+        font-family: Arial, Helvetica;
         font-weight: normal;
         font-size: 100%;
         color: black;
@@ -677,7 +716,7 @@ DIV.system_check {
         MARGIN: 0 auto;
         POSITION: static;
         background: lightgray;
-        font-family: Verdana, Arial, Helvetica;
+        font-family: Arial, Helvetica;
         padding-top: 1px;
         padding-bottom: 1px;
         font-weight: normal;
@@ -689,7 +728,7 @@ DIV.system_check {
 End merge */
 
 span.menu_group_nolink {
-	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 100%;
 	font-weight: normal;
 	color: #777;
@@ -707,14 +746,16 @@ span.menu_group_nolink {
 #footer {
 	border-top: solid 1px #aaa;
 	border-bottom: solid 1px #aaa;
+	border-radius: 6px;
 	background: #ccc url(images/menu_bg_grey.png) 0px 0px repeat-x;
 	position: relative;
 	bottom: -3px;
+	width: 99%;
 }
 
 /* From merge
 a.footer {
-	font-family: Verdana, Arial, Helvetica;
+	font-family: Arial, Helvetica;
 	color: black;
 	font-weight: normal;
 	font-size: 8px;
@@ -722,7 +763,7 @@ a.footer {
 End merge */
 
 .footer {
-	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	color: black;
 	font-weight: normal;
 	font-size: 10px;
@@ -742,19 +783,19 @@ End merge */
 }
 
 .promo {
-	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	color: #003;
 }
 
 .titlebar {
-	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 9px;
 	color: white;
   	background-color: #369;
 }
 
 .dingbat {
-	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	background-color: #9c9;
 	color: #066;
 	font-weight: bolder;
