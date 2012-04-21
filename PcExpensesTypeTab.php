@@ -139,8 +139,8 @@ or deletion of the records*/
    	echo '</td></tr></table>'; // close main table
 
 	echo '<br /><div class="centre">
-			<input type="submit" name=process value="' . _('Accept') . '" />
-			<input type="submit" name=Cancel value="' . _('Cancel') . '" /></div>';
+			<button type="submit" name=process>' . _('Accept') . '</button>
+			<button type="submit" name=Cancel>' . _('Cancel') . '</button></div>';
 
 	echo '</form>';
 
@@ -224,8 +224,8 @@ or deletion of the records*/
 
 		echo '</td></tr></table>'; // close main table
 
-		echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Accept') . '" />
-					<input type="submit" name="Cancel" value="' . _('Cancel') . '" /></div>';
+		echo '<br /><div class="centre"><button type="submit" name="submit">' . _('Accept') . '</button>
+					<button type="submit" name="Cancel">' . _('Cancel') . '</button></div>';
 
 		echo '</form>';
 	} // end if user wish to delete

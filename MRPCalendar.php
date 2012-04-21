@@ -254,10 +254,10 @@ function display(&$db,&$ChangeDate)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPL
 		$_POST['FromDate']=date($_SESSION['DefaultDateFormat']);
 		$_POST['ToDate']=date($_SESSION['DefaultDateFormat']);
 	}
-	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post"><br /><br />';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post"><br />';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-	echo '<br /><table class="selection">';
+	echo '<table class="selection">';
 
 	echo '<tr>
 		<td>' . _('From Date') . ':</td>
@@ -297,8 +297,8 @@ function display(&$db,&$ChangeDate)  //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPL
 		<td><input type="checkbox" name="Friday" value="Friday" /></td>
 	</tr>
 	</table><br />
-	<div class="centre"><input type="submit" name="submit" value="' . _('Create Calendar') . '" />
-	<input type="submit" name="listall" value="' . _('List Date Range') . '" /></div>';
+	<div class="centre"><button type="submit" name="submit">' . _('Create Calendar') . '</button>
+	<button type="submit" name="listall">' . _('List Date Range') . '</button></div>';
 
 if (!isset($_POST['ChangeDate'])) {
 	$_POST['ChangeDate']=date($_SESSION['DefaultDateFormat']);
@@ -308,8 +308,8 @@ echo '<br /><table class="selection">';
 echo '<tr>
 		<td>' . _('Change Date Status') . ':</td>
 		<td><input type="text" name="ChangeDate" class="date" alt="' . $_SESSION['DefaultDateFormat'] . '" size="12" maxlength="12" value="' . $_POST['ChangeDate'] . '" /></td>
-	  <td><input type="submit" name="update" value="' . _('Update') . '" /></td></tr></table>';
-echo '<br /><br /><div class="centre"></div>';
+	  <td><button type="submit" name="update">' . _('Update') . '</button></td></tr></table>';
+echo '<br />';
 echo '</form>';
 
 } // End of function display()

@@ -70,9 +70,9 @@ if (isset($_GET['Application'])){ /*This is sent by this page (to itself) when t
 echo '<table width="99%">
 		<tr>
 			<td style="width:10%" valign="top">';
-echo '<table class="main_menu" width="100%" cellspacing="0" cellpadding="0" border="0">';
+echo '<table class="main_menu" width="100%" cellspacing="0">';
 
-	$i=0;
+$i=0;
 
 while ($i < count($ModuleLink)){
 

@@ -188,8 +188,8 @@ if (!isset($SelectedTabs)){
 
 	echo '</select></td></tr>';
    	echo '</td></tr></table>'; // close main table
-	echo '<br /><div class="centre"><input type="submit" name="process" value="' . _('Accept') . '" />
-			<input type="submit" name="Cancel" value="' . _('Cancel') . '" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="process">' . _('Accept') . '</button>
+			<button type="submit" name="Cancel">' . _('Cancel') . '</button></div>';
 	echo '</form>';
 
 } elseif (isset($SelectedTabs)) {
@@ -240,7 +240,7 @@ if (!isset($SelectedTabs)){
 		echo '<tr><th colspan="8">' . _('Detail Of PC Tab Movements For Last ') .': ';
 		echo '<input type="hidden" name="SelectedTabs" value="' . $SelectedTabs . '" />';
 		echo '<input type="text" class="number" name="Days" value="' . $Days  . '" maxlength="3" size="4" /> Days ';
-		echo '<input type="submit" name="Go" value="' . _('Go') . '" />';
+		echo '<button type="submit" name="Go">' . _('Go') . '</button>';
 		echo '</th></tr></form>';
 		echo '<tr>
 				<th>' . _('Date') . '</th>

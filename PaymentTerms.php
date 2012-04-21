@@ -285,7 +285,7 @@ if (!isset($_GET['delete'])) {
 			echo '<input type="text" name="DayNumber" class="number"  size="4" maxlength="3" value="' . $DayInFollowingMonth . '" />';
 		}
 	}
-	echo '</td></tr></table><br /><div class="centre"><input type="submit" name="submit" value="'._('Enter Information').'" /></form></div>';
+	echo '</td></tr></table><br /><div class="centre"><button type="submit" name="submit" value="" />'._('Enter Information').'</button></form></div>';
 } //end if record deleted no point displaying form to add record
 
 include('includes/footer.inc');

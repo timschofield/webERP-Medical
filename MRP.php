@@ -594,7 +594,7 @@ if (isset($_POST['submit'])) {
 	echo '<td><input type="checkbox" name="pansizeflag" value="y" checked="True" /></td></tr>';
 	echo '<tr><td>' ._('Use Shrinkage?') . ':</td>';
 	echo '<td><input type="checkbox" name="shrinkageflag" value="y" checked="True" /></td></tr>';
-	echo '</table></td></tr></table><div class="centre"><br /><br /><input type="submit" name="submit" value="' . _('Run MRP') . '" /></div>';
+	echo '</table></td></tr></table><div class="centre"><br /><button type="submit" name="submit">' . _('Run MRP') . '</button></div>';
 	echo '</form>';
 }  // End of Main program logic -------------------------------------------------------
 

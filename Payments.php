@@ -285,8 +285,8 @@ if (isset($_POST['CommitBatch'])){
 		echo _('Has the cheque been printed') . '?<br /><br />';
 		echo '<input type="hidden" name="CommitBatch" value="' . $_POST['CommitBatch'] . '" />';
 		echo '<input type="hidden" name="BankAccount" value="' . $_POST['BankAccount'] . '" />';
-		echo '<input type="submit" name="ChequePrinted" value="' . _('Yes / Continue') . '" />&nbsp;&nbsp;';
-		echo '<input type="submit" name="PaymentCancelled" value="' . _('No / Cancel Payment') . '" />';
+		echo '<button type="submit" name="ChequePrinted">' . _('Yes / Continue') . '</button>&nbsp;&nbsp;';
+		echo '<button type="submit" name="PaymentCancelled">' . _('No / Cancel Payment') . '</button>';
 	} else {
 
 		//Start a transaction to do the whole lot inside
@@ -886,7 +886,7 @@ if (!isset($_POST['Narrative'])) {
 echo '<tr><td>' . _('Reference / Narrative') . ':</td>
 		<td colspan="2"><input type="text" name="Narrative" maxlength="80" size="82" value="' . $_POST['Narrative'] . '" />  ' . _('(Max. length 80 characters)') . '</td>
 		</tr>';
-echo '<tr><td colspan="3"><div class="centre"><input type="submit" name="UpdateHeader" value="' . _('Update'). '" /></td></tr>';
+echo '<tr><td colspan="3"><div class="centre"><button type="submit" name="UpdateHeader">' . _('Update'). '</button></td></tr>';
 
 
 echo '</table><br />';
@@ -947,7 +947,7 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 				echo '<option value="' . $myrow['groupname'] . '">' . $myrow['groupname'] . '</option>';
 			}
 		}
-		echo '</select><input type="submit" name="UpdateCodes" value="Select" /></td></tr>';
+		echo '</select><button type="submit" name="UpdateCodes" value="Select" />'._('Select').'</button></td></tr>';
 	}
 
 	if (isset($_POST['GLGroup']) AND $_POST['GLGroup']!='') {
@@ -1009,8 +1009,8 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 
 	echo '</table><br />';
 	echo '<div class="centre">
-			<input type="submit" name="Process" value="' . _('Accept') . '" />
-			<input type="submit" name="Cancel" value="' . _('Cancel') . '" />
+			<button type="submit" name="Process">' . _('Accept') . '</button>
+			<button type="submit" name="Cancel">' . _('Cancel') . '</button>
 		</div>';
 
 	if (sizeOf($_SESSION['PaymentDetail'.$identifier]->GLItems)>0) {
@@ -1047,7 +1047,7 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 			$PaymentTotal += filter_currency_input($PaymentItem->Amount);
 		}
 		echo '<tr><td></td><td class="number"><b>' . locale_money_format($PaymentTotal,$_SESSION['PaymentDetail'.$identifier]->Currency) . '</b></td><td colspan="3"></td></tr></table><br />';
-		echo '<input type="submit" name="CommitBatch" value="' . _('Accept and Process Payment') . '" />';
+		echo '<button type="submit" name="CommitBatch">' . _('Accept and Process Payment') . '</button>';
 	}
 
 } else {
@@ -1078,7 +1078,7 @@ the fields for entry of receipt amt and disc */
 			<td><input type="text" name="cheque" maxlength="12" size="12" /></td>
 		</tr>';
 	echo '</table><br />';
-	echo '<input type="submit" name="CommitBatch" value="' . _('Accept and Process Payment') . '" />';
+	echo '<button type="submit" name="CommitBatch">' . _('Accept and Process Payment') . '</button>';
 }
 echo '</form>';
 
