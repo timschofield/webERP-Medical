@@ -73,7 +73,7 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate']) OR $InputError==1){
 	}
 	echo '</select></td></tr>';
 
-	echo '</table><br /><div class="centre"><input type="submit" name="Go" value="' . _('Create PDF') . '" /></div>';
+	echo '</table><br /><div class="centre"><button type="submit" name="Go">' . _('Create PDF') . '</button></div>';
 
 	include('includes/footer.inc');
 	exit;

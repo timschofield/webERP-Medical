@@ -122,8 +122,8 @@ function showLabelOptions() {
 		$_POST['EffectiveDate']=Date($_SESSION['DefaultDateFormat']);
 	}
 
-	$SendButton = '<br /><div class="centre"><input type="submit" name="PrintPDF" value="'. _('Print labels') .'" />&nbsp;&nbsp;&nbsp;
-		<input type="submit" name="PDFTest" value="'. _('Print labels with borders') .'" /></div>';
+	$SendButton = '<br /><div class="centre"><button type="submit" name="PrintPDF">'. _('Print labels') .'</button>&nbsp;&nbsp;&nbsp;
+		<button type="submit" name="PDFTest">'. _('Print labels with borders') .'</button></div>';
 	$iTxt=0;
 
 	echo "<script type=\"text/javascript\">
@@ -173,7 +173,7 @@ function showLabelOptions() {
 		</tr>';
 	echo '<tr>
 				<th colspan="2">
-				<input type="submit" name="refresh" value="Refresh options" />
+				<button type="submit" name="refresh">'._('Refresh options') . '</button>
 				</th>';
 	echo '<tr>
 				<td colspan="2">
