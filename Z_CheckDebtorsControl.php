@@ -56,8 +56,8 @@ include('includes/header.inc');
 	echo $ToSelect . '</select></td></tr></table>';
 
 
-	echo '<br /><div class="centre"><input type="submit" name="Show" value="'._('Accept'). '">';
-	echo '<input type="submit" action="reset" value="' . _('Cancel') .'" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="Show">'._('Accept'). '</button>';
+	echo '<button type="submit" action="reset">' . _('Cancel') .'</button></div>';
 
 
 	if ( isset($_POST['Show']) )

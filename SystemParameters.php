@@ -1053,7 +1053,7 @@ echo '<tr style="outline: 1px solid"><td>' . _('Inventory Manager Email Address'
 	<td>' . _('The email address for the inventory manager, where notifications of all manual stock adjustments created are sent by the system. Leave blank if no emails should be sent to the factory manager for manual stock adjustments') .'</td></tr>';
 
 echo '</table>
-		<br /><div class="centre"><input type="submit" name="submit" value="' . _('Update') . '" /></div>
+		<br /><div class="centre"><button type="submit" name="submit">' . _('Update') . '</button></div>
 	</form>';
 
 include('includes/footer.inc');

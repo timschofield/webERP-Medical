@@ -101,8 +101,8 @@ else
 	}
 
 	echo '</table>';
-	echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Modify') . '" />&nbsp;&nbsp;';
-	echo '<input type="hidden" name="language" value="' . $_POST['language'] . '" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="submit">' . _('Modify') . '</button>&nbsp;&nbsp;';
+	echo '<button type="hidden" name="language">' . $_POST['language'] . '</button></div>';
 	echo '</form>';
 }
 }

@@ -24,7 +24,7 @@ if (isset($StockID)) {
 	echo _('Enter an Item Code') . ': <input type="text" name="StockID" size="21" maxlength="20" />';
 }
 
-echo '<input type="submit" name="ShowWhereUsed" value="' . _('Show Where Used') . '" />';
+echo '<button type="submit" name="ShowWhereUsed">' . _('Show Where Used') . '</button>';
 
 echo '</div><br />';
 

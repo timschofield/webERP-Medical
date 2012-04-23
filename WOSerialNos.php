@@ -254,7 +254,7 @@ if ($Serialised==1 AND $NextSerialNo>0){
 	}
 }
 
-echo '<td><input type="submit" name="AddControlledItems" value="' . _('Add') . '" /></td></tr>
+echo '<td><button type="submit" name="AddControlledItems">' . _('Add') . '</button></td></tr>
 	</table><br />';
 
 $sql = "SELECT serialno,
@@ -307,7 +307,7 @@ if (DB_num_rows($WOSerialNoResult)==0){
 	} else {
 		echo '<tr><td style="text-align: center" colspan="2">';
 	}
-	echo '<input type="submit" name="UpdateItems" value="' . _('Update') . '" /></td></tr>';
+	echo '<button type="submit" name="UpdateItems">' . _('Update') . '</button></td></tr>';
 	echo '</table>';
 
 } //end of if there are woserialno items defined

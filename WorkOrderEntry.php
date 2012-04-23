@@ -553,9 +553,9 @@ if (isset($NumberOfOutputs)){
 }
 echo '</table>';
 
-echo '<div class="centre"><br /><input type="submit" name="submit" value="' . _('Update') . '" />';
+echo '<div class="centre"><br /><button type="submit" name="submit">' . _('Update') . '</button>';
 
-echo '<br /><input type="submit" name="delete" value="' . _('Delete This Work Order') . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');" />';
+echo '<br /><button type="submit" name="delete" onclick="return confirm(\'' . _('Are You Sure?') . '\');" />' . _('Delete This Work Order') . '</button>';
 
 echo '</div><br />';
 
@@ -600,7 +600,7 @@ echo '</select>
 	<td><input type="text" name="StockCode" size="15" maxlength="18" value="' . $_POST['StockCode'] . '" /></td>
 	</tr>
 	</table>
-	<br /><div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" /></div>';
+	<br /><div class="centre"><button type="submit" name="Search">' . _('Search Now') . '</button></div>';
 
 if (isset($SearchResult)) {
 

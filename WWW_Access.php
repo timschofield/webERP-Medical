@@ -170,7 +170,7 @@ if (!isset($_POST['SecRoleName'])) {
 echo '<tr><td>' . _('Role') . ':</td>
 	<td><input type="text" name="SecRoleName" size="40" maxlength="40" value="' . $_POST['SecRoleName'] . '" /></tr>';
 echo '</table><br />
-	<div class="centre"><input type="submit" name="submit" value="' . _('Enter Role') . '" /></div></form>';
+	<div class="centre"><button type="submit" name="submit" value="" />' . _('Enter Role') . '</button></div></form>';
 
 if (isset($SelectedRole)) {
 	$sql = "SELECT tokenid, tokenname

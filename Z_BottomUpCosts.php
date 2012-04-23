@@ -48,7 +48,7 @@ if (isset($Run)) { //start bom processing
 	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post" name="form">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/sales.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Update costs for all items listed in a bill of materials').'<br /></p>';
-	echo '<div class="centre"><input type="submit" name="Run" value="' . _('Run') . '" /></div></form>';
+	echo '<div class="centre"><button type="submit" name="Run">' . _('Run') . '</button></div></form>';
 
 }
 

@@ -67,7 +67,7 @@ if (!(isset($_POST['Search']))) {
 		</tr>
 	</table>
 	<br /><div class="centre">
-				<input tabindex="5" type="submit" name="Search" value="' . _('Search') . '" />
+				<button tabindex="5" type="submit" name="Search">' . _('Search') . '</button>
 				</div></form>';
 } else {
 	// everything below here to view NumberOfTopItems items sale on selected location
@@ -211,7 +211,7 @@ if (!(isset($_POST['Search']))) {
 		$i++;
 	}
 	echo '</table>';
-	echo '<br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print To PDF') . '" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="PrintPDF">' . _('Print To PDF') . '</button></div>';
 	echo '</form>';
 }
 include ('includes/footer.inc');

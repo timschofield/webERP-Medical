@@ -85,7 +85,7 @@ echo '<td>' . _('Full code of the new language in the format en_US') . '</td>';
 echo '<td><input type="text" size="5" name="NewLanguage" />';
 echo '</td></tr></table>';
 
-echo '<br /><input type="submit" name="submit" value="' . _('Proceed') . '" />&nbsp;&nbsp;&nbsp;&nbsp;';
+echo '<br /><button type="submit" name="submit">' . _('Proceed') . '</button>&nbsp;&nbsp;&nbsp;&nbsp;';
 echo '</form>';
 
 include('includes/footer.inc');

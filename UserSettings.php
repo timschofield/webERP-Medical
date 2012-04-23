@@ -200,7 +200,7 @@ for($i=0;$i<count($PDFLanguages);$i++){
 	}
 }
 echo '</select></td></tr></table>
-	<br /><div class="centre"><input type="submit" name="Modify" value="' . _('Modify') . '" /></div>
+	<br /><div class="centre"><button type="submit" name="Modify">' . _('Modify') . '</button></div>
 	</form>';
 
 include('includes/footer.inc');
