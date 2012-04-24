@@ -907,7 +907,8 @@ if ($_SESSION['Care2xDatabase']!='None') {
 	$SQL="SELECT item_id,
 				partcode,
 				item_full_description
-			FROM ".$_SESSION['Care2xDatabase'].".care_tz_drugsandservices";
+			FROM ".$_SESSION['Care2xDatabase'].".care_tz_drugsandservices
+			ORDER BY UCASE(item_full_description)";
 	$result=DB_query($SQL, $db);
 	while ($myrow=DB_fetch_array($result)){
 		if (!isset($_POST['Care2xItem']) or $myrow['partcode']==$_POST['Care2xItem']){
