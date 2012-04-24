@@ -123,6 +123,12 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 															)";
 				$DbgMsg = _('Trouble inserting a line of a sales order. The SQL that failed was');
 				$Ins_LineItemResult = DB_query($LineItemSQL,$db,$ErrMsg,$DbgMsg,true);
+				if ($_SESSION['Care2xDatabase']!='None') {
+					$SQL="UPDATE ".$_SESSION['Care2xDatabase'].".care_encounter_prescription SET bill_number='".$OrderNo."'
+								WHERE nr='".$_SESSION['Items'][$i]['Care2x']."'";
+					$DbgMsg = _('Trouble inserting a line of a sales order. The SQL that failed was');
+					$UpdateCare2xResult = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+				}
 			}
 		}
 
@@ -668,6 +674,48 @@ if (isset($_POST['Patient'])) {
 				AND branchcode='".$Patient[1]."'";
 	$result=DB_query($sql, $db);
 	$mydebtorrow=DB_fetch_array($result);
+	if ($_SESSION['Care2xDatabase']!='None' and $_SESSION['Items']['Lines']==0) {
+		$Care2xSQL="SELECT ".$_SESSION['Care2xDatabase'].".care_encounter_prescription.article_item_number,
+							".$_SESSION['Care2xDatabase'].".care_encounter_prescription.nr,
+							partcode,
+							total_dosage,
+							prescribe_date
+						FROM ".$_SESSION['Care2xDatabase'].".care_encounter_prescription
+						LEFT JOIN ".$_SESSION['Care2xDatabase'].".care_tz_drugsandservices
+						ON ".$_SESSION['Care2xDatabase'].".care_encounter_prescription.article_item_number=".$_SESSION['Care2xDatabase'].".care_tz_drugsandservices.item_id
+						LEFT JOIN stockmaster
+						ON ".$_SESSION['Care2xDatabase'].".care_tz_drugsandservices.partcode=stockmaster.stockid
+						LEFT JOIN stockcategory
+						ON stockmaster.categoryid=stockcategory.categoryid
+						LEFT JOIN ".$_SESSION['Care2xDatabase'].".care_encounter
+						ON ".$_SESSION['Care2xDatabase'].".care_encounter.encounter_nr=".$_SESSION['Care2xDatabase'].".care_encounter_prescription.encounter_nr
+						AND stockcategory.stocktype='X'
+						WHERE ".$_SESSION['Care2xDatabase'].".care_encounter.pid='".$Patient[0]."'
+						AND ".$_SESSION['Care2xDatabase'].".care_encounter_prescription.bill_number=''";
+		$Care2xResult=DB_query($Care2xSQL, $db);
+		$i=0;
+		while ($MyCare2xRow=DB_fetch_array($Care2xResult)) {
+			$PriceSQL="SELECT price
+						FROM prices
+						WHERE stockid='".$MyCare2xRow['partcode']."'
+						AND typeabbrev='".$mydebtorrow['salestype']."'
+						AND '".$MyCare2xRow['prescribe_date']."' between startdate and enddate";
+			$PriceResult=DB_query($PriceSQL,$db);
+			if (DB_num_rows($PriceResult)==0) {
+				$Price=0;
+			} else {
+				$myrow=DB_fetch_array($PriceResult);
+				$Price=$myrow['price'];
+			}
+			$_SESSION['Items'][$i]['StockID']=$MyCare2xRow['partcode'];
+			$_SESSION['Items'][$i]['Quantity']=$MyCare2xRow['total_dosage'];
+			$_SESSION['Items'][$i]['Price']=$Price;
+			$_SESSION['Items'][$i]['Care2x']=$MyCare2xRow['nr'];
+			$_SESSION['Items']['Value']+=$Price*$MyCare2xRow['total_dosage'];
+			$_SESSION['Items']['Lines']++;
+			$i++;
+		}
+	}
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/XRay.png" title="' . _('Search') . '" alt="" />' . $title . '</p>';
 
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';

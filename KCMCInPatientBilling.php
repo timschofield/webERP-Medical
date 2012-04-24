@@ -761,9 +761,9 @@ if (isset($_POST['Patient'])) {
 	$mydebtorrow=DB_fetch_array($result);
 	if ($_SESSION['Care2xDatabase']!='None' and $_SESSION['Items']['Lines']==0) {
 		$Care2xSQL="SELECT ".$_SESSION['Care2xDatabase'].".care_encounter_prescription.article_item_number,
+							".$_SESSION['Care2xDatabase'].".care_encounter_prescription.nr,
 							partcode,
 							total_dosage,
-							nr,
 							prescribe_date
 						FROM ".$_SESSION['Care2xDatabase'].".care_encounter_prescription
 						LEFT JOIN ".$_SESSION['Care2xDatabase'].".care_tz_drugsandservices
@@ -772,7 +772,9 @@ if (isset($_POST['Patient'])) {
 						ON ".$_SESSION['Care2xDatabase'].".care_tz_drugsandservices.partcode=stockmaster.stockid
 						LEFT JOIN stockcategory
 						ON stockmaster.categoryid=stockcategory.categoryid
-						WHERE ".$_SESSION['Care2xDatabase'].".care_encounter_prescription.encounter_nr='".$Patient[0]."'
+						LEFT JOIN ".$_SESSION['Care2xDatabase'].".care_encounter
+						ON ".$_SESSION['Care2xDatabase'].".care_encounter.encounter_nr=".$_SESSION['Care2xDatabase'].".care_encounter_prescription.encounter_nr
+						WHERE ".$_SESSION['Care2xDatabase'].".care_encounter.pid='".$Patient[0]."'
 						AND ".$_SESSION['Care2xDatabase'].".care_encounter_prescription.bill_number=''";
 		$Care2xResult=DB_query($Care2xSQL, $db);
 		$i=0;
