@@ -222,7 +222,7 @@ if (! isset($_GET['delete'])) {
 
 		echo '</table><br />'; // close main table
 
-		echo '<div class="centre"><input type="submit" name="Update" value="' . _('Update') . '" /></div><br />';
+		echo '<div class="centre"><button type="submit" name="Update">' . _('Update') . '</button></div><br />';
 
 	} else {
 
@@ -233,7 +233,7 @@ if (! isset($_GET['delete'])) {
 
 		echo '</table><br />'; // close main table
 
-		echo '<div class="centre"><input type="submit" name="Submit" value="' . _('Insert') . '" /></div><br />';
+		echo '<div class="centre"><button type="submit" name="Submit">' . _('Insert') . '</button></div><br />';
 	}
 
 	echo '</form>';

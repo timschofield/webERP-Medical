@@ -194,7 +194,7 @@ echo '<tr>
 	</tr>
 	</table><br />';
 
-echo '<div class="centre"><input type="submit" name="AddGLCodeToTrans" value="' . _('Enter GL Line') . '" /></div>';
+echo '<div class="centre"><button type="submit" name="AddGLCodeToTrans">' . _('Enter GL Line') . '</button></div>';
 
 echo '</form>';
 include('includes/footer.inc');

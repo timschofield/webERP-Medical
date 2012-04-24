@@ -153,9 +153,9 @@ echo '<tr>	<td class="number">' . locale_money_format($SupplierRecord['balance']
 
 echo '<br /><div class="centre"><form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo _('Show all transactions after') . ': ' .
-		'<input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="TransAfterDate" value="' . $_POST['TransAfterDate'] . '" maxlength="10" size="10" />
-	  <input type="submit" name="Refresh Inquiry" value="' . _('Refresh Inquiry') . '" />
+echo '<table class="selection"><tr><td>' . _('Show all transactions after') . ': </td><td>' .
+		'<input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="TransAfterDate" value="' . $_POST['TransAfterDate'] . '" maxlength="10" size="10" /></td><td>
+	  <button type="submit" name="Refresh Inquiry">' . _('Refresh Inquiry') . '</button></td></tr></table>
 	  </form>
 	  <br />';
 echo '</div>';
@@ -190,8 +190,7 @@ $DbgMsg = _('The SQL that failed was');
 $TransResult = DB_query($SQL, $db, $ErrMsg, $DbgMsg);
 
 if (DB_num_rows($TransResult) == 0){
-	echo '<br /><div class="centre">' . _('There are no transactions to display since') . ' ' . $_POST['TransAfterDate'];
-	echo '</div>';
+	prnMsg( _('There are no transactions to display since') . ' ' . $_POST['TransAfterDate'], 'info');
 	include('includes/footer.inc');
 	exit;
 }

@@ -150,7 +150,7 @@ echo '<tr><td>' . _('Amount') . ':</td>
 	<td><input type="text" class="number" name="Amount" size="12" maxlength="11" value="' .  locale_money_format($_POST['Amount'], $_SESSION['SuppTrans']->CurrCode) . '" /></td></tr>';
 echo '</table>';
 
-echo '<br /><div class="centre"><input type="submit" name="AddShiptChgToInvoice" value="' . _('Enter Shipment Charge') . '" /></div>';
+echo '<br /><div class="centre"><button type="submit" name="AddShiptChgToInvoice">' . _('Enter Shipment Charge') . '</button></div>';
 
 echo '</form>';
 include('includes/footer.inc');

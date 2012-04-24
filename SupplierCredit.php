@@ -292,13 +292,13 @@ echo '<td><font color="red">' . _('Exchange Rate') . ':</font></td>
 		<td><input type="text" class="number" size="11" maxlength="10" name="ExRate" value="' . locale_money_format($_SESSION['SuppTrans']->ExRate, $_SESSION['SuppTrans']->CurrCode) . '" /></td></tr>';
 echo '</table>';
 
-echo '<br /><div class="centre"><input type="submit" name="GRNS" value="' . _('Purchase Orders') . '" /> ';
-echo '<input type="submit" name="Shipts" value="' . _('Shipments') . '" /> ';
-echo '<input type="submit" name="Contracts" value="' . _('Contracts') . '" /> ';
+echo '<br /><div class="centre"><button type="submit" name="GRNS">' . _('Purchase Orders') . '</button>';
+echo '<button type="submit" name="Shipts">' . _('Shipments') . '</button>';
+echo '<button type="submit" name="Contracts">' . _('Contracts') . '</button>';
 if ( $_SESSION['SuppTrans']->GLLink_Creditors ==1){
-	echo '<input type="submit" name="GL" value="' . _('General Ledger') . '" /> ';
+	echo '<button type="submit" name="GL">' . _('General Ledger') . '</button>';
 }
-echo '<input type="submit" name="FixedAssets" value="' . _('Fixed Assets') . '" /></div>';
+echo '<button type="submit" name="FixedAssets">' . _('Fixed Assets') . '</button></div>';
 echo '<br />';
 
 if (count($_SESSION['SuppTrans']->GRNs)>0){   /*if there are some GRNs selected for crediting then */
@@ -497,7 +497,7 @@ if ($_SESSION['SuppTrans']->GLLink_Creditors ==1){
 }
 
 echo '<tr>
-		<td colspan="2"><input type="submit" name="ToggleTaxMethod" value="' . _('Change Tax Calculation Method') . '" /></td>
+		<td colspan="2"><button type="submit" name="ToggleTaxMethod">' . _('Change Tax Calculation Method') . '</button></td>
 		<td><select name="OverRideTax" onChange="ReloadForm(form1.ToggleTaxMethod)">';
 
 if ($_POST['OverRideTax']=='Man'){
@@ -566,7 +566,7 @@ echo '<tr><td><font color="red">' . _('Credit Note Total') . '</font></td><td co
 echo '<table class="selection"><tr><td><font color="red">' . _('Comments') . '</font></td><td><textarea name="Comments" cols="40" rows="2">' .
 	  $_SESSION['SuppTrans']->Comments . '</textarea></td></tr></table>';
 
-echo '<p><div class="centre"><input type="submit" name="PostCreditNote" value="' . _('Enter Credit Note') . '" /></div></p>';
+echo '<p><div class="centre"><button type="submit" name="PostCreditNote">' . _('Enter Credit Note') . '</button></div></p>';
 
 
 if (isset($_POST['PostCreditNote'])){
