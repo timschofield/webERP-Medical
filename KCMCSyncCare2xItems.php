@@ -8,7 +8,6 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/V
 
 if (isset($_POST['UpdateLink'])) {
 	for ($i=0; $i<$_POST['TotalItems']; $i++) {
-		echo $i;
 		$SQL="UPDATE ".$_SESSION['Care2xDatabase'].".care_tz_drugsandservices
 				SET partcode='".$_POST['StockID'.$i]."'
 				WHERE item_id='".$_POST['Care2xItem'.$i]."'";
