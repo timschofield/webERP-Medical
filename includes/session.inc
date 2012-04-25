@@ -14,7 +14,7 @@ if (!file_exists($PathPrefix . 'config.php')){
 }
 include($PathPrefix . 'config.php');
 
-$DBVersion=119;
+$DBVersion=HighestFileName();
 
 if (isset($SessionSavePath)){
 	session_save_path($SessionSavePath);
@@ -308,8 +308,28 @@ function CryptPass( $Password ) {
 	} else {
 		return false;
 	}
- }
+}
 
+function HighestFileName() {
+	if($handle=opendir('sql/mysql/updates')){
+
+		$i=0;
+
+		// Go through directory:
+		while(false!==($file=readdir($handle))){
+			// filter unnecessary file/dir paths:
+			if(substr($file,-3)=='php'){
+
+				$FileNameLength=strlen($file)-4;
+				$UpdateNames[$i]=substr($file,0,$FileNameLength);
+
+				$i++;
+			}
+		}
+		closedir($handle);
+	}
+	return max($UpdateNames);
+}
 
 if (sizeof($_POST) > 0) {
 	/*Security check to ensure that the form submitted is originally sourced from webERP with the FormID = $_SESSION['FormID'] - which is set before the first login*/
