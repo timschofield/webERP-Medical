@@ -180,7 +180,7 @@ while ($myrow=DB_fetch_array($GRNResults)){
 		}
 	}
 	if ($GRNAlreadyOnCredit == False){
-		echo '<tr><td><input type="submit" name="GRNNo" value="' . $myrow['grnno'] . '" /></td>
+		echo '<tr><td><button type="submit" name="GRNNo">' . $myrow['grnno'] . '</button></td>
 			  		<td>' . $myrow['orderno'] . '</td>
 			  		<td>' . $myrow['itemcode'] . '</td>
 			  		<td>' . $myrow['itemdescription'] . '</td>
@@ -257,7 +257,7 @@ if (isset($_POST['GRNNo']) AND $_POST['GRNNo']!=''){
 		echo '<input type="hidden" name="ShiptRef" value="' . $myrow['shiptref'] . '" />';
 	}
 
-	echo '<br /><div class="centre"><input type="submit" name="AddGRNToTrans" value="' . _('Add to Credit Note') . '" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="AddGRNToTrans">' . _('Add to Credit Note') . '</button></div>';
 
 
 	echo '<input type="hidden" name="GRNNumber" value="' . $_POST['GRNNo'] . '" />';

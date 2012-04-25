@@ -114,7 +114,6 @@ echo '<br /><table class="selection">';
 
 echo '<tr><td>' . _('Enter Asset ID') . ':</td>
 	<td><input type="text" name="AssetID" size="5" maxlength="6" value="' .  $_POST['AssetID'] . '" /> <a href="FixedAssetItems.php" target=_blank>'. _('New Fixed Asset') . '</a></td></tr>';
-echo '<tr><td><b>' . _('OR') .' </b>'. _('Select from list') . ':</td><td><select name="AssetSelection">';
 
 $sql = "SELECT assetid,
 				description
@@ -123,6 +122,7 @@ $sql = "SELECT assetid,
 			ORDER BY assetid DESC";
 
 $result = DB_query($sql, $db);
+echo '<tr><td><b>' . _('OR') .' </b>'. _('Select from list') . ':</td><td><select name="AssetSelection">';
 
 while ($myrow = DB_fetch_array($result)) {
 	if (isset($_POST['AssetSelection']) AND $myrow['AssetID']==$_POST['AssetSelection']) {
@@ -141,7 +141,7 @@ echo '<tr><td>' . _('Amount') . ':</td>
 	<td><input type="text" class="number" name="Amount" size="12" maxlength="11" value="' .  locale_money_format($_POST['Amount'], $_SESSION['SuppTrans']->CurrCode) . '" /></td></tr>';
 echo '</table>';
 
-echo '<br /><div class="centre"><input type="submit" name="AddAssetToInvoice" value="' . _('Enter Fixed Asset') . '" /></div>';
+echo '<br /><div class="centre"><button type="submit" name="AddAssetToInvoice">' . _('Enter Fixed Asset') . '</button></div>';
 
 echo '</form>';
 include('includes/footer.inc');

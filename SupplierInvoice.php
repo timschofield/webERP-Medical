@@ -181,7 +181,7 @@ if the link is not active then OvAmount must be entered manually. */
 
 if (!isset($_POST['PostInvoice'])){
 
-	if (isset($_POST['GRNS']) and $_POST['GRNS'] == _('Purchase Orders')){
+	if (isset($_POST['GRNS'])){
 		/*This ensures that any changes in the page are stored in the session before calling the grn page */
 		echo '<meta http-equiv="Refresh" content="0; url=' . $rootpath . '/SuppInvGRNs.php">';
 		echo '<div class="centre">' . _('You should automatically be forwarded to the entry of invoices against goods received page') .
@@ -189,7 +189,7 @@ if (!isset($_POST['PostInvoice'])){
 			 '<a href="' . $rootpath . '/SuppInvGRNs.php">' . _('click here') . '</a> ' . _('to continue') . '</div><br />';
 		exit;
 	}
-	if (isset($_POST['Shipts']) AND $_POST['Shipts'] == _('Shipments')){
+	if (isset($_POST['Shipts'])){
 		/*This ensures that any changes in the page are stored in the session before calling the shipments page */
 		echo '<meta http-equiv="Refresh" content="0; url=' . $rootpath . '/SuppShiptChgs.php">';
 		echo '<div class="centre">' . _('You should automatically be forwarded to the entry of invoices against shipments page') .
@@ -197,7 +197,7 @@ if (!isset($_POST['PostInvoice'])){
 			'<a href="' . $rootpath . '/SuppShiptChgs.php">' . _('click here') . '</a> ' . _('to continue') . '.</div><br />';
 		exit;
 	}
-	if (isset($_POST['GL']) AND $_POST['GL'] == _('General Ledger')){
+	if (isset($_POST['GL'])){
 		/*This ensures that any changes in the page are stored in the session before calling the shipments page */
 		echo '<meta http-equiv="Refresh" content="0; url=' . $rootpath . '/SuppTransGLAnalysis.php">';
 		echo '<div class="centre">' . _('You should automatically be forwarded to the entry of invoices against the general ledger page') .
@@ -205,7 +205,7 @@ if (!isset($_POST['PostInvoice'])){
 			'<a href="' . $rootpath . '/SuppTransGLAnalysis.php">' . _('click here') . '</a> ' . _('to continue') . '.</div><br />';
 		exit;
 	}
-	if (isset($_POST['Contracts']) AND $_POST['Contracts'] == _('Contracts')){
+	if (isset($_POST['Contracts'])){
 		/*This ensures that any changes in the page are stored in the session before calling the shipments page */
 		echo '<meta http-equiv="refresh" content="0; url=' . $rootpath . '/SuppContractChgs.php">';
 		echo '<div class="centre">' . _('You should automatically be forwarded to the entry of invoices against contracts page') .
@@ -213,7 +213,7 @@ if (!isset($_POST['PostInvoice'])){
 			'<a href="' . $rootpath . '/SuppContractChgs.php">' . _('click here') . '</a> ' . _('to continue') . '.</div><br />';
 		exit;
 	}
-	if (isset($_POST['FixedAssets']) AND $_POST['FixedAssets'] == _('Fixed Assets')){
+	if (isset($_POST['FixedAssets'])){
 		/*This ensures that any changes in the page are stored in the session before calling the shipments page */
 		echo '<meta http-equiv="refresh" content="0; url=' . $rootpath . '/SuppFixedAssetChgs.php">';
 		echo '<DIV class="centre">' . _('You should automatically be forwarded to the entry of invoice amounts against fixed assets page') .
