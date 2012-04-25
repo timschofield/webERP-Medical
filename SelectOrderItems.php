@@ -661,8 +661,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 	echo '<td><input tabindex="3" type="text" name="CustPhone" size="15" maxlength="18" /></td>';
 	echo '</tr>';
 	echo '</table>';
-	echo '<br /><div class="centre"><input tabindex="4" type="submit" name="SearchCust" value="' . _('Search Now') . '" />';
-	echo '<input tabindex="5" type="reset" value="' . _('Reset') . '" /></div>';
+	echo '<br /><div class="centre"><button tabindex="4" type="submit" name="SearchCust">' . _('Search Now') . '</button>';
+	echo '<button tabindex="5" type="reset">' . _('Reset') . '</button></div>';
 
 	if (isset($result_CustSelect)) {
 
@@ -696,7 +696,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			} else {
 				echo '<td></td>';
 			}
-			echo '<td><input tabindex="'.($j+5).'" type="submit" name="Submit" value="'.$myrow['brname'].'" /></td>
+			echo '<td><button tabindex="'.($j+5).'" type="submit" name="Submit" value="'.$myrow['brname'].'" />'.$myrow['brname'].'</button></td>
 					<input type="hidden" name="Select" value="'.$myrow['debtorno'].' - '.$myrow['branchcode'].'" />
 					<td>'.$myrow['contactname'].'</td>
 					<td>'.$myrow['phoneno'].'</td>
@@ -1531,8 +1531,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 					   <tr/><table/>';
 
 
-		echo '<br /><div class="centre"><input type="submit" name="Recalculate" value="' . _('Re-Calculate') . '" />
-				<input type="submit" name="DeliveryDetails" value="' . _('Enter Delivery Details and Confirm Order') . '" /></div>';
+		echo '<br /><div class="centre"><button type="submit" name="Recalculate">' . _('Re-Calculate') . '</button>
+				<button type="submit" name="DeliveryDetails">' . _('Enter Delivery Details and Confirm Order') . '</button></div>';
 	} # end of if lines
 
 /* Now show the stock item selection search stuff below */
@@ -1685,7 +1685,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			}
 #end of while loop for Frequently Ordered Items
 			echo '<td style="text-align:center" colspan="8"><input type="hidden" name="order_items" value="1" />
-					<input tabindex="'.($j+8).'" type="submit" value="'._('Add to Sales Order').'" /></td>';
+					<button tabindex="'.($j+8).'" type="submit">'._('Add to Sales Order').'</button></td>';
 			echo '</table>';
 		} //end of if Frequently Ordered Items > 0
 
@@ -1732,15 +1732,15 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		echo '</td></tr>';
 
 		echo '<tr>
-					<td style="text-align:center" colspan="1"><input tabindex="4" type="submit" name="Search" value="' . _('Search Now') . '" /></td>
-					<td style="text-align:center" colspan="1"><input tabindex="5" type="submit" name="QuickEntry" value="' .  _('Use Quick Entry') . '" /></td>';
+					<td style="text-align:center" colspan="1"><button tabindex="4" type="submit" name="Search">' . _('Search Now') . '</button></td>
+					<td style="text-align:center" colspan="1"><button tabindex="5" type="submit" name="QuickEntry">' .  _('Use Quick Entry') . '</button></td>';
 
 		if (!isset($_POST['PartSearch'])) {
 			echo '<script  type="text/javascript">if (document.SelectParts) {defaultControl(document.SelectParts.Keywords);}</script>';
 		}
 		if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){ //not a customer entry of own order
-			echo '<td style="text-align:center" colspan="1"><input tabindex="6" type="submit" name="ChangeCustomer" value="' . _('Change Customer') . '" /></td>
-						<td style="text-align:center" colspan="1"><input tabindex="7" type="submit" name="SelectAsset" value="' . _('Fixed Asset Disposal') . '" /></td>
+			echo '<td style="text-align:center" colspan="1"><button tabindex="6" type="submit" name="ChangeCustomer">' . _('Change Customer') . '</button></td>
+						<td style="text-align:center" colspan="1"><button tabindex="7" type="submit" name="SelectAsset">' . _('Fixed Asset Disposal') . '</button></td>
 							</tr></table><br />';
 		}
 
@@ -1754,13 +1754,13 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			echo '<table class="table1">';
 			echo '<tr><td>
 					<input type="hidden" name="previous" value="'.($Offset-1).'" />
-					<input tabindex="'.($j+8).'" type="submit" name="Prev" value="'._('Prev').'" /></td>';
+					<button tabindex="'.($j+8).'" type="submit" name="Prev">'._('Prev').'</button></td>';
 			echo '<td style="text-align:center" colspan="7">
 					<input type="hidden" name="order_items" value="1" />
-					<input tabindex="'.($j+9).'" type="submit" value="'._('Add to Sales Order').'" /></td>';
+					<button tabindex="'.($j+9).'" type="submit">'._('Add to Sales Order').'</button></td>';
 			echo '<td>
 					<input type="hidden" name="nextlist" value="'.($Offset+1).'" />
-					<input tabindex="'.($j+10).'" type="submit" name="Next" value="'._('Next').'" /></td></tr>';
+					<button tabindex="'.($j+10).'" type="submit" name="Next">'._('Next').'</button></td></tr>';
 			$TableHeader = '<tr><th>' . _('Code') . '</th>
 					   			<th>' . _('Description') . '</th>
 					   			<th>' . _('Units') . '</th>
@@ -1923,11 +1923,11 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			}
 	#end of while loop
 			echo '<tr><td><input type="hidden" name="previous" value="'.($Offset-1).'" />
-					<input tabindex="'.($j+7).'" type="submit" name="Prev" value="'._('Prev').'" /></td>';
+					<button tabindex="'.($j+7).'" type="submit" name="Prev">'._('Prev').'</button></td>';
 			echo '<td style="text-align:center" colspan="7"><input type="hidden" name="order_items" value="1" />
-				<input tabindex="'.($j+8).'" type="submit" value="'._('Add to Sales Order').'" /></td>';
+				<button tabindex="'.($j+8).'" type="submit">'._('Add to Sales Order').'</button></td>';
 			echo '<td><input type="hidden" name="nextlist" value="'.($Offset+1).'" />
-				<input tabindex="'.($j+9).'" type="submit" name="Next" value="'._('Next').'" /></td><tr/>';
+				<button tabindex="'.($j+9).'" type="submit" name="Next">'._('Next').'</button></td><tr/>';
 			echo '</table></form>';
 			echo $jsCall;
 
@@ -1960,8 +1960,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 	   		}
 			echo '<script  type="text/javascript">if (document.SelectParts) {defaultControl(document.SelectParts.part_1);}</script>';
 
-		 	echo '</table><br /><div class="centre"><input type="submit" name="QuickEntry" value="' . _('Quick Entry') . '" />
-					 <input type="submit" name="PartSearch" value="' . _('Search Parts') . '" /></div>';
+		 	echo '</table><br /><div class="centre"><button type="submit" name="QuickEntry">' . _('Quick Entry') . '</button>
+					 <button type="submit" name="PartSearch">' . _('Search Parts') . '</button></div>';
 
 	  	} elseif (isset($_POST['SelectAsset'])){
 
@@ -1980,13 +1980,13 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				echo '<option value="' . $AssetRow['assetid'] . '">' . $AssetRow['assetid'] . ' - ' . $AssetRow['description'] . '</option>';
 			}
 			echo '</select></td></tr></table>
-						<br /><div class="centre"><input type="submit" name="AssetDisposalEntered" value="' . _('Add Asset To Order') . '" />
-					 <input type="submit" name="PartSearch" value="' . _('Search Parts') . '" /></div>';
+						<br /><div class="centre"><button type="submit" name="AssetDisposalEntered">' . _('Add Asset To Order') . '</button>
+					 <button type="submit" name="PartSearch">' . _('Search Parts') . '</button></div>';
 
 		} //end of if it is a Quick Entry screen/part search or asset selection form to display
 
 		if ($_SESSION['Items'.$identifier]->ItemsOrdered >=1){
-	  		echo '<br /><div class="centre"><input type="submit" name="CancelOrder" value="' . _('Cancel Whole Order') . '" onclick="return confirm(\'' . _('Are you sure you wish to cancel this entire order?') . '\');" /></div>';
+	  		echo '<br /><div class="centre"><button type="submit" name="CancelOrder" onclick="return confirm(\'' . _('Are you sure you wish to cancel this entire order?') . '\');">' . _('Cancel Whole Order') . '</button></div>';
 		}
 	}#end of else not selecting a customer
 

@@ -130,7 +130,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 echo '<table cellpadding="2" class="selection">';
 echo '<tr>
 		<th colspan="2">' . _('Item Code') . ':<input type="text" name="StockID" value="' . $StockID . '" maxlength="20" />';
-echo '<input type="submit" name="Show" value="' . _('Show Cost Details') . '" /></th></tr>';
+echo '<button type="submit" name="Show">' . _('Show Cost Details') . '</button></th></tr>';
 echo '<tr>
 		<th colspan="2"><font color="#616161" size="2">' . $StockID . ' - ' . $myrow['description'] . '</font></th>
 	</tr>';
@@ -193,7 +193,7 @@ if (!isset($UpdateSecurity) or !in_array($UpdateSecurity,$_SESSION['AllowedPageS
 		echo '<input type="hidden" name="LabourCost" value="0" />';
 		echo '<input type="hidden" name="OverheadCost" value="0" />';
 	}
-	echo '</table><br /><div class="centre"><input type="submit" name="UpdateData" value="' . _('Update') . '" /><br /><br />';
+	echo '</table><br /><div class="centre"><button type="submit" name="UpdateData">' . _('Update') . '</button><br /><br />';
 }
 if ($myrow['mbflag']!='D'){
 	echo '<div class="centre"><a href="' . $rootpath . '/StockStatus.php?StockID=' . $StockID . '">' . _('Show Stock Status') . '</a>';

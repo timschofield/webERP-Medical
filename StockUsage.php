@@ -83,8 +83,8 @@ if (isset($_POST['StockLocation'])){
 }
 echo '</select>';
 
-echo '<input type="submit" name="ShowUsage" value="' . _('Show Stock Usage') . '" />';
-echo '<input type="submit" name="ShowGraphUsage" value="' . _('Show Graph Of Stock Usage') . '" /></td></tr></table><br />';
+echo '<button type="submit" name="ShowUsage">' . _('Show Stock Usage') . '</button>';
+echo '<button type="submit" name="ShowGraphUsage">' . _('Show Graph Of Stock Usage') . '</button></td></tr></table><br />';
 
 /* $_SESSION['NumberOfPeriodsOfStockUsage']  is defined in config.php as a user definable variable
 config.php is loaded by header.inc */

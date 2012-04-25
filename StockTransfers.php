@@ -447,7 +447,7 @@ if (isset($_POST['StockID'])) {
 } else {
 	echo '<input type="text" name="StockCode" size="21" value="" maxlength="20" />';
 }
-echo '</td><td><input type="submit" name="CheckCode" value="'._('Check Part').'" /></td></tr>';
+echo '</td><td><button type="submit" name="CheckCode">'._('Check Part').'</button></td></tr>';
 
 if (isset($_SESSION['Transfer']->TransferItem[0]->ItemDescription) and strlen($_SESSION['Transfer']->TransferItem[0]->ItemDescription)>1){
 	echo '<tr><td colspan="3"><font color="blue" size="3">' . $_SESSION['Transfer']->TransferItem[0]->ItemDescription . ' ('._('In Units of').' ' . $_SESSION['Transfer']->TransferItem[0]->PartUnit . ' )</font></td></tr>';
@@ -507,7 +507,7 @@ if (isset($_SESSION['Transfer']->TransferItem[0]->Controlled) and $_SESSION['Tra
 	echo '<td><input type="text" class="number" name="Quantity" size="12" maxlength="12" value="0" /></td></tr>';
 }
 
-echo '</table><div class="centre"><br /><input type="submit" name="EnterTransfer" value="' . _('Enter Stock Transfer') . '" /><br />';
+echo '</table><div class="centre"><br /><button type="submit" name="EnterTransfer">' . _('Enter Stock Transfer') . '</button><br />';
 
 
 if (empty($_SESSION['Transfer']->TransferItem[0]->StockID) and isset($_POST['StockID'])) {

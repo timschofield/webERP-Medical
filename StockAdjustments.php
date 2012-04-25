@@ -347,7 +347,7 @@ if (isset($StockID)) {
 	echo '<input type="text" name="StockCode" size="21" value="" maxlength="20" />';
 }
 
-echo '</td><td><input type="submit" name="CheckCode" value="'._('Check Part').'" /></td></tr>';
+echo '</td><td><button type="submit" name="CheckCode">'._('Check Part').'</button></td></tr>';
 if (isset($_SESSION['Adjustment']) and strlen($_SESSION['Adjustment']->ItemDescription)>1){
 	echo '<tr><td colspan="3"><font color="blue" size="3">' . $_SESSION['Adjustment']->ItemDescription . ' ('._('In Units of').' ' .
 		$_SESSION['Adjustment']->PartUnit . ' ) - ' . _('Unit Cost').' = ' .
@@ -416,7 +416,7 @@ while ($myrow=DB_fetch_array($result)){
 echo '</select></td>';
 // End select tag
 
-echo '</table><div class="centre"><br /><input type="submit" name="EnterAdjustment" value="'. _('Enter Stock Adjustment'). '" /><br />';
+echo '</table><div class="centre"><br /><button type="submit" name="EnterAdjustment">'. _('Enter Stock Adjustment'). '</button><br />';
 
 if (!isset($_POST['StockLocation'])) {
 	$_POST['StockLocation']='';

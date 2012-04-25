@@ -91,7 +91,7 @@ if ($_POST['BelowReorderQuantity']=='All'){
 
 echo '</td></tr></table>';
 
-echo '<br /><div class="centre"><input type="submit" name="ShowStatus" value="' . _('Show Stock Status') . '" /></div>';
+echo '<br /><div class="centre"><button type="submit" name="ShowStatus">' . _('Show Stock Status') . '</button></div>';
 
 if (isset($_POST['ShowStatus'])){
 

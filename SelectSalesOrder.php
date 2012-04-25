@@ -533,7 +533,7 @@ if (!isset($StockID)) {
 		}
 
 		echo '</select> </td><td>';
-		echo '<input type="submit" name="SearchOrders" value="' . _('Search') . '" /></td>';
+		echo '<button type="submit" name="SearchOrders">' . _('Search') . '</button></td>';
 		echo '&nbsp;&nbsp;<td><a href="' . $rootpath . '/SelectOrderItems.php?NewOrder=Yes">' .
 			_('Add Sales Order') . '</a></td></tr></table>';
 	}
@@ -565,8 +565,8 @@ if (!isset($StockID)) {
       		<td><input type="text" name="StockCode" size="15" maxlength="18" /></td>
       	</tr>
       </table>';
-	echo '<br /><input type="submit" name="SearchParts" value="' . _('Search Parts Now') . '" />
-				<input type="submit" name="ResetPart" value="' . _('Show All') . '" /></div><br />';
+	echo '<br /><button type="submit" name="SearchParts">' . _('Search Parts Now') . '</button>
+				<button type="submit" name="ResetPart">' . _('Show All') . '</button></div><br />';
 
 if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 
@@ -592,7 +592,7 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 			$k++;
 		}
 
-		printf('<td><input type="submit" name="SelectedStockItem" value="%s" /></td>
+		printf('<td><button type="submit" name="SelectedStockItem" value="%s">%s</button></td>
 			<td>%s</td>
 			<td class="number">%s</td>
 			<td>%s</td>
@@ -973,7 +973,7 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 		}//end while loop through orders to display
 		if ($_POST['Quotations']=='Orders_Only'  AND $AuthRow['cancreate']==0){ //cancreate==0 means can create POs
 			echo '<tr><th colspan="8"></th><th></th><th colspan="2" class="number">
-				<input type="submit" name="PlacePO" value="' . _('Place') . "\n" . _('PO') . '" onclick="return confirm(\'' . _('This will create purchase orders for all the items on the checked sales orders above, based on the preferred supplier purchasing data held in the system. Are You Absolutely Sure?') . '\');" /></th></tr>';
+				<button type="submit" name="PlacePO" onclick="return confirm(\'' . _('This will create purchase orders for all the items on the checked sales orders above, based on the preferred supplier purchasing data held in the system. Are You Absolutely Sure?') . '\');" />' . _('Place') . "\n" . _('PO') . '</button></th></tr>';
 		}
 		echo '<tr><td colspan="9" class="number">';
 		if ($_POST['Quotations']=='Orders_Only'){

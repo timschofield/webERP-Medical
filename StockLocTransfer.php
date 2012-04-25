@@ -214,8 +214,8 @@ if(isset($_POST['Submit']) AND $InputError==False){
 
 	echo '</table><br /><div class="centre">
 		<input type="hidden" name="LinesCounter" value="'. $i .'" />
-		<input type="submit" name="EnterMoreItems" value="'. _('Add More Items'). '" />
-		<input type="submit" name="Submit" value="'. _('Create Transfer Shipment'). '" /><br />';
+		<button type="submit" name="EnterMoreItems">'. _('Add More Items'). '</button>
+		<button type="submit" name="Submit">'. _('Create Transfer Shipment'). '</button><br />';
 	echo '<script  type="text/javascript">defaultControl(document.forms[0].StockID0);</script>';
 	echo '</form></div>';
 	include('includes/footer.inc');

@@ -190,7 +190,7 @@ if (!isset($_GET['delete'])) {
 
 	</table>
 
-	<br /><div class="centre"><input type="submit" name="submit" value="'. _('Enter Information').'" /></div>
+	<br /><div class="centre"><button type="submit" name="submit">'. _('Enter Information').'</button></div>
 
 	</form>';
 

@@ -234,7 +234,7 @@ if ($_SESSION['CustomerID'] != '' AND !isset($_POST['Search']) AND !isset($_POST
 	echo '</td>';
 	echo '</tr></table><br />';
 } else {
-	echo '<table width="90%"><tr><th width="33%">' . _('Customer Inquiries') . '</th>
+	echo '<table width="90%" class="selection"><tr><th width="33%">' . _('Customer Inquiries') . '</th>
 			<th width=33%>' . _('Customer Transactions') . '</th>
 			<th width=33%>' . _('Customer Maintenance') . '</th></tr>';
 	echo '<tr><td class="select">';
@@ -346,7 +346,8 @@ if (DB_num_rows($result2) == 0) {
 }
 
 echo '</td></tr></table><br />';
-echo '<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" /><input type="submit" name="CSV" value="' . _('CSV Format') . '" /></div>';
+echo '<div class="centre"><button type="submit" name="Search">' . _('Search Now') . '</button>
+		<button type="submit" name="CSV">' . _('CSV Format') . '</button></div>';
 if (isset($_SESSION['SalesmanLogin']) and $_SESSION['SalesmanLogin'] != '') {
 	prnMsg(_('Your account enables you to see only customers allocated to you'), 'warn', _('Note: Sales-person Login'));
 }
@@ -379,9 +380,9 @@ if (isset($result)) {
 				$ListPage++;
 			}
 			echo '</select>
-				<input type="submit" name="Go1" value="' . _('Go') . '" />
-				<input type="submit" name="Previous" value="' . _('Previous') . '" />
-				<input type="submit" name="Next" value="' . _('Next') . '" />';
+				<button type="submit" name="Go1">' . _('Go') . '</button>
+				<button type="submit" name="Previous">' . _('Previous') . '</button>
+				<button type="submit" name="Next">' . _('Next') . '</button>';
 			echo '</div>';
 		}
 		echo '<br /><table cellpadding="2" class="selection">';
@@ -421,7 +422,7 @@ if (isset($result)) {
 				echo '<tr class="OddTableRows">';
 				$k = 1;
 			}
-			echo '<td><font size="1"><input type="submit" name="SubmitCustomerSelection' . $i .'" value="' . htmlentities($myrow['debtorno'].' '.$myrow['branchcode'],ENT_QUOTES,'UTF-8') . '" /></font></td>
+			echo '<td><font size="1"><button type="submit" name="SubmitCustomerSelection' . $i .'">' . htmlentities($myrow['debtorno'].' '.$myrow['branchcode'],ENT_QUOTES,'UTF-8') . '</button></td>
 				<input type="hidden" name="SelectedCustomer' . $i .'" value="'.$myrow['debtorno'].'" />
 				<input type="hidden" name="SelectedBranch' . $i .'" value="'. $myrow['branchcode'].'" />
 				<td><font size="1">' . $myrow['name'] . '</font></td>
@@ -455,9 +456,9 @@ if (!isset($_POST['CSV'])) {
 			$ListPage++;
 		}
 		echo '</select>
-			<input type="submit" name="Go2" value="' . _('Go') . '" />
-			<input type="submit" name="Previous" value="' . _('Previous') . '" />
-			<input type="submit" name="Next" value="' . _('Next') . '" />';
+			<button type="submit" name="Go2">' . _('Go') . '</button>
+			<button type="submit" name="Previous">' . _('Previous') . '</button>
+			<button type="submit" name="Next">' . _('Next') . '</button>';
 	}
 	//end if results to show
 	echo '</div></form>';
@@ -470,7 +471,7 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 			echo '<div class="centre">' . _('Mapping is enabled, but no Mapping data to display for this Customer.') . '</div>';
 		} else {
 			echo '<tr><td colspan="2">';
-			echo '<table width="45%" cellpadding="4">';
+			echo '<table width="45%" cellpadding="4" class="selection">';
 			echo '<tr><th width="33%">' . _('Customer Mapping') . '</th></tr>';
 			echo '</td><td valign="top">'; /* Mapping */
 			echo '<div class="centre">' . _('Mapping is enabled, Map will display below.') . '</div>';
@@ -559,7 +560,7 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 					ORDER BY contid";
 		$result = DB_query($sql, $db);
 		if (DB_num_rows($result) <> 0) {
-			echo '<table width="45%">';
+			echo '<table width="45%" class="selection">';
 			echo '<br /><th colspan="7"><img src="' . $rootpath . '/css/' . $theme . '/images/group_add.png" title="' . _('Customer Contacts') . '" alt="" />' . ' ' . _('Customer Contacts') . '</th>';
 			echo '<tr>
 						<th>' . _('Name') . '</th>
@@ -606,7 +607,7 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 		$result = DB_query($sql, $db);
 		if (DB_num_rows($result) <> 0) {
 			echo '<br /><div class="centre"><img src="' . $rootpath . '/css/' . $theme . '/images/note_add.png" title="' . _('Customer Notes') . '" alt="" />' . ' ' . _('Customer Notes') . '</div><br />';
-			echo '<table width="45%">';
+			echo '<table width="45%" class="selection">';
 			echo '<tr>
 					<th>' . _('date') . '</th>
 					<th>' . _('note') . '</th>
@@ -652,7 +653,7 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
 		$result = DB_query($sql, $db);
 		if (DB_num_rows($result) <> 0) {
 			echo '<br /><div class="centre"><img src="' . $rootpath . '/css/' . $theme . '/images/folder_add.png" title="' . _('Customer Type (Group) Notes') . '" alt="" />' . ' ' . _('Customer Type (Group) Notes for:' . '<b> ' . $CustomerTypeName . '</b>') . '</div><br />';
-			echo '<table width="45%">';
+			echo '<table width="45%" class="selection">';
 			echo '<tr>
 					 	<th>' . _('date') . '</th>
 					  	<th>' . _('note') . '</th>

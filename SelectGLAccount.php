@@ -93,8 +93,8 @@ if (!isset($AccountID)) {
 		</tr>
 		</table><br />';
 
-	echo '<div class="centre"><input type="submit" name="Search" value=' . _('Search Now') . '" />
-		<input type="submit" action=reset value="' . _('Reset') .'" /></div>';
+	echo '<div class="centre"><button type="submit" name="Search">' . _('Search Now') . '</button>
+		<button type="submit" action="reset">' . _('Reset') .'</button></div>';
 
 	if (isset($result) and DB_num_rows($result)>0) {
 
@@ -111,11 +111,12 @@ if (!isset($AccountID)) {
 
 		while ($myrow=DB_fetch_array($result)) {
 
-			printf('<tr><td><font size="1"><input type="submit" name="Select" value="%s" /></font></td>
+			printf('<tr><td><button type="submit" name="Select" value="%s" />%s</button></td>
 				<td><font size="1">%s</font></td>
 				<td><font size="1">%s</font></td>
 				<td><font size="1">%s</font></td>
 				</tr>',
+				$myrow['accountcode'],
 				$myrow['accountcode'],
 				$myrow['accountname'],
 				$myrow['group_'],

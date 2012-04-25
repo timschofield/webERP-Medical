@@ -42,7 +42,7 @@ $LocStockResult = DB_query($sql, $db, $ErrMsg, $DbgMsg);
 
 echo '<table cellpadding="2" class="selection">';
 echo '<tr><th colspan="3">'._('Stock Code') . ':<input type="text" name="StockID" size="21" value="' . $StockID . '" maxlength="20" />';
-echo '<input type="submit" name="Show" value="' . _('Show Re-Order Levels') . '" /></th></tr>';
+echo '<button type="submit" name="Show">' . _('Show Re-Order Levels') . '</button></th></tr>';
 echo '<tr><th colspan="3"><font color="blue" size="3"><b>' . $StockID . ' - ' . $myrow['description'] . '</b>  (' . _('In Units of') . ' ' . $myrow['units'] . ')</font></th></tr>';
 
 $TableHeader = '<tr>
@@ -95,7 +95,7 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 }
 //end of while loop
 
-echo '</table><br /><div class="centre"><input type="submit" name="UpdateData" value="' . _('Update') . '" /><br /><br />';
+echo '</table><br /><div class="centre"><button type="submit" name="UpdateData">' . _('Update') . '</button><br /><br />';
 echo '<a href="' . $rootpath . '/StockMovements.php?StockID=' . $StockID . '">' . _('Show Stock Movements') . '</a>';
 echo '<br /><a href="' . $rootpath . '/StockUsage.php?StockID=' . $StockID . '">' . _('Show Stock Usage') . '</a>';
 echo '<br /><a href="' . $rootpath . '/SelectSalesOrder.php?SelectedStockItem=' . $StockID . '">' . _('Search Outstanding Sales Orders') . '</a>';

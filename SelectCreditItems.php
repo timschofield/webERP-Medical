@@ -184,7 +184,7 @@ if ($_SESSION['RequireCustomerSelection']==1) {
 	}
 
 	echo '</table><br />';
-	echo '<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" /></div>';
+	echo '<div class="centre"><button type="submit" name="Search">' . _('Search Now') . '</button></div>';
 	if (isset($_SESSION['SalesmanLogin']) and $_SESSION['SalesmanLogin'] != '') {
 		prnMsg(_('Your account enables you to see only customers allocated to you'), 'warn', _('Note: Sales-person Login'));
 	}
@@ -351,11 +351,7 @@ if ($_SESSION['RequireCustomerSelection']==1) {
 		$ErrMsg = _('The searched customer records requested cannot be retrieved because');
 
 		$result = DB_query($SQL, $db, $ErrMsg);
-		if (DB_num_rows($result) == 1) {
-			$myrow = DB_fetch_array($result);
-			$_POST['Select'] = $myrow['debtorno'];
-			unset($result);
-		} elseif (DB_num_rows($result) == 0) {
+		if (DB_num_rows($result) == 0) {
 			prnMsg(_('No customer records contain the selected text') . ' - ' . _('please alter your search criteria and try again'), 'info');
 			echo '<br />';
 		}
@@ -387,9 +383,9 @@ if ($_SESSION['RequireCustomerSelection']==1) {
 					$ListPage++;
 				}
 				echo '</select>
-					<input type="submit" name="Go1" value="' . _('Go') . '" />
-					<input type="submit" name="Previous" value="' . _('Previous') . '" />
-					<input type="submit" name="Next" value="' . _('Next') . '" />';
+					<button type="submit" name="Go1">' . _('Go') . '</button>
+					<button type="submit" name="Previous">' . _('Previous') . '</button>
+					<button type="submit" name="Next">' . _('Next') . '</button>';
 				echo '</div>';
 			}
 			echo '<br /><table cellpadding="2" class="selection">';
@@ -419,7 +415,7 @@ if ($_SESSION['RequireCustomerSelection']==1) {
 					echo '<tr class="OddTableRows">';
 					$k = 1;
 				}
-				echo '<td><font size="1"><input type="submit" name="Customer' . $j . '" value="' . _('Select') . '" /></font></td>
+				echo '<td><font size="1"><button type="submit" name="Customer' . $j . '">' . _('Select') . '</button></font></td>
 					<td><font size="1">' . htmlspecialchars_decode($myrow['name']) . '</font></td>
 					<td><font size="1">' . htmlspecialchars_decode($myrow['brname']) . '</font></td>
 					<td><font size="1">' . htmlspecialchars_decode($myrow['contactname']) . '</font></td>
@@ -545,7 +541,6 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 								stockmaster.units as stockunits
 							FROM stockmaster, stockcategory
 							WHERE stockmaster.categoryid=stockcategory.categoryid
-								AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 								AND stockmaster.description " . LIKE . "'" . $SearchString . "'
 							GROUP BY stockmaster.stockid,
 									stockmaster.description,
@@ -559,7 +554,6 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 							FROM stockmaster,
 								stockcategory
 							WHERE stockmaster.categoryid=stockcategory.categoryid
-								AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 								AND stockmaster.description " . LIKE . "'" . $SearchString . "'
 								AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
 							GROUP BY stockmaster.stockid,
@@ -578,7 +572,6 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 							FROM stockmaster,
 								stockcategory
 							WHERE stockmaster.categoryid=stockcategory.categoryid
-								AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 								AND  stockmaster.stockid " . LIKE . " '" . $_POST['StockCode'] . "'
 							GROUP BY stockmaster.stockid,
 									stockmaster.description,
@@ -592,7 +585,6 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 							FROM stockmaster,
 								stockcategory
 							WHERE stockmaster.categoryid=stockcategory.categoryid
-								AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 								AND stockmaster.stockid " . LIKE . " '" . $_POST['StockCode'] . "' AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
 							GROUP BY stockmaster.stockid,
 									stockmaster.description,
@@ -607,7 +599,6 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 								stockmaster.units as stockunits
 							FROM stockmaster, stockcategory
 							WHERE stockmaster.categoryid=stockcategory.categoryid
-								AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 							GROUP BY stockmaster.stockid,
 									stockmaster.description,
 									stockmaster.units
@@ -620,7 +611,6 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 							FROM stockmaster,
 								stockcategory
 							WHERE stockmaster.categoryid=stockcategory.categoryid
-								AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 								AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
 							GROUP BY stockmaster.stockid,
 									stockmaster.description,
@@ -1199,10 +1189,10 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 			</tr>
 			</table><br />';
 
-		echo '<div class="centre"><input type="submit" name="Update" value="' . _('Update') . '" />
-				  				<input type="submit" name="CancelCredit" value="' . _('Cancel') . '" onclick="return confirm(\'' . _('Are you sure you wish to cancel the whole of this credit note?') . '\');" />';
+		echo '<div class="centre"><button type="submit" name="Update">' . _('Update') . '</button>
+				  				<button type="submit" name="CancelCredit" onclick="return confirm(\'' . _('Are you sure you wish to cancel the whole of this credit note?') . '\');" />' . _('Cancel') . '</button>';
 		if (!isset($_POST['ProcessCredit'])){
-			echo '<input type="submit" name="ProcessCredit" value="' . _('Process Credit Note') . '" /></div><br />';
+			echo '<button type="submit" name="ProcessCredit">' . _('Process Credit Note') . '</button></div><br />';
 		}
 	} # end of if lines
 
@@ -1248,17 +1238,17 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 		echo '</tr>';
 		echo '</table><br /><div class="centre">';
 
-		echo '<input type="submit" name="Search" value="' . _('Search Now') .'" />';
-		echo '<input type="submit" name="ChangeCustomer" value="' . _('Change Customer') . '" />';
-		echo '<input type="submit" name="Quick" value="' . _('Quick Entry') . '" />';
+		echo '<button type="submit" name="Search">' . _('Search Now') .'</button>';
+		echo '<button type="submit" name="ChangeCustomer">' . _('Change Customer') . '</button>';
+		echo '<button type="submit" name="Quick">' . _('Quick Entry') . '</button>';
 		echo '</div>';
 
 		if (isset($SearchResult)) {
 
 			echo '<br /><table cellpadding="2" class="selection">';
-			echo '<tr><td><input type="hidden" name="previous" value="'.($Offset-1).'" /><input type="submit" name="Prev" value="'._('Prev').'" /></td>';
-			echo '<td style="text-align:center" colspan="3"><input type="hidden" name="order_items" value="1" /><input type="submit" name="AddToCredit" value="'._('Add to Credit Note').'" /></td>';
-			echo '<td><input type="hidden" name="nextlist" value="'.($Offset+1).'" /><input type="submit" name="Next" value="'._('Next').'" /></td></tr>';
+			echo '<tr><td><input type="hidden" name="previous" value="'.($Offset-1).'" /><button type="submit" name="Prev">'._('Prev').'</button></td>';
+			echo '<td style="text-align:center" colspan="3"><input type="hidden" name="order_items" value="1" /><button type="submit" name="AddToCredit">'._('Add to Credit Note').'</button></td>';
+			echo '<td><input type="hidden" name="nextlist" value="'.($Offset+1).'" /><button type="submit" name="Next">'._('Next').'</button></td></tr>';
 			$TableHeader = '<tr><th>' . _('Code') . '</th>
 								<th>' . _('Description') . '</th>
 								<th>' . _('Units') .'</th>
@@ -1349,9 +1339,10 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 	#end of page full new headings if
 				}
 	#end of while loop
-			echo '<tr><td><input type="hidden" name="previous" value="'.($Offset-1).'" /><input type="submit" name="Prev" value="'._('Prev').'" /></td>';
-			echo '<td style="text-align:center" colspan="3"><input type="hidden" name="order_items" value="1" /><input type="submit" name="AddToCredit" value="'._('Add to Credit Note').'" /></td>';
-			echo '<td><input type="hidden" name="nextlist" value="'.($Offset+1).'" /><input type="submit" name="Next" value="'._('Next').'" /></td></tr>';
+			echo '<tr><td><input type="hidden" name="previous" value="'.($Offset-1).'" /><button type="submit" name="Prev">'._('Prev').'</button></td>';
+			echo '<td style="text-align:center" colspan="3"><input type="hidden" name="order_items" value="1" />
+				<button type="submit" name="AddToCredit">'._('Add to Credit Note').'</button></td>';
+			echo '<td><input type="hidden" name="nextlist" value="'.($Offset+1).'" /><button type="submit" name="Next">'._('Next').'</button></td></tr>';
 				echo '</table>';
 			}#end if SearchResults to show
 		} /*end if part searching required */ elseif(!isset($_POST['ProcessCredit'])) { /*quick entry form */
@@ -1370,8 +1361,8 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 				<td><input type="text" class="number" name="qty_' . $i . '" size="6" maxlength="6" /></td></tr>';
 		}
 
-		echo '</table><br /><div class="centre"><input type="submit" name="QuickEntry" value="' . _('Process Entries') . '" />
-			<input type="submit" name="PartSearch" value="' . _('Search Parts') . '" /></div>';
+		echo '</table><br /><div class="centre"><input type="submit" name="QuickEntry">' . _('Process Entries') . '</button>
+			<button type="submit" name="PartSearch">' . _('Search Parts') . '</button></div>';
 
 	}
 

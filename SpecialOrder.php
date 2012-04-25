@@ -159,7 +159,7 @@ if (!isset($_SESSION['SPL'.$identifier]->BranchCode)){
 				$k++;
 			}
 
-			printf('<td><input type="submit" name="SelectBranch" value="%s" /></td>
+			printf('<td><button type="submit" name="SelectBranch">%s</button></td>
 					<td>%s</td>
 					</tr>',
 				$myrow['branchcode'],
@@ -606,8 +606,7 @@ echo '<td>' . _('Initiated By') . ': <input type="text" name="Initiator" size="1
 	<tr>
 		<td valign="top" colspan="2">' . _('Comments') . ': <textarea name="Comments" cols="70" rows="2">' . $_SESSION['SPL'.$identifier]->Comments . '</textarea></td>
 	</tr>
-</table>
-<hr>'; /* Rule off the header */
+</table>';
 
 /*Now show the order so far */
 
@@ -741,13 +740,11 @@ echo '<tr>
 echo '</table>'; /* end of main table */
 
 echo '<div class="centre">
-		<input type="submit" name="EnterLine" value="' . _('Add Item to Order') . '" />
+		<button type="submit" name="EnterLine">' . _('Add Item to Order') . '</button>
 		<br />
+		<button type="submit" name="Cancel">' . _('Start Again') . '</button>
 		<br />
-		<input type="submit" name="Cancel" value="' . _('Start Again') . '" />
-		<br />
-		<br />
-		<input type="submit" name="Commit" value="' . _('Process This Order') . '" />
+		<button type="submit" name="Commit">' . _('Process This Order') . '</button>
 	</div>
 	</form>';
 

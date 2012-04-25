@@ -56,7 +56,7 @@ echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-
 echo '<div class="centre"><input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo _('Stock Code') . ':<input type="text" name="StockID" size="21" value="' . $StockID . '" maxlength="20" />';
 
-echo ' <input type="submit" name="ShowStatus" value="' . _('Show Stock Status') . '" /></div>';
+echo '<button type="submit" name="ShowStatus">' . _('Show Stock Status') . '</button></div>';
 
 $sql = "SELECT locstock.loccode,
 				locations.locationname,
