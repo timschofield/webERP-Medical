@@ -76,7 +76,7 @@ if (!isset($_POST['ContractRef']) or $_POST['ContractRef']==''){
 	}
 	echo '</select> &nbsp;&nbsp;';
 }
-echo '<input type="submit" name="SearchContracts" value="' . _('Search') . '" />';
+echo '<button type="submit" name="SearchContracts">' . _('Search') . '</button>';
 echo '&nbsp;&nbsp;<a href="' . $rootpath . '/Contracts.php">' . _('New Contract') . '</a></div></p>';
 
 

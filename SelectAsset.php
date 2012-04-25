@@ -99,7 +99,7 @@ if (isset($_POST['AssetCode'])) {
 	echo '<input type="text" name="AssetCode" size="15" maxlength="13" />';
 }
 echo '</td></tr></table><br />';
-echo '<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" /></div><br /></form>';
+echo '<div class="centre"><button type="submit" name="Search">' . _('Search Now') . '</button></div><br /></form>';
 echo '<script  type="text/javascript">defaultControl(document.forms[0].Keywords);</script>';
 echo '</form>';
 // query for list of record(s)
@@ -230,9 +230,9 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 				$ListPage++;
 			}
 			echo '</select>
-				<input type="submit" name="Go" value="' . _('Go') . '" />
-				<input type="submit" name="Previous" value="' . _('Previous') . '" />
-				<input type="submit" name="Next" value="' . _('Next') . '" />';
+				<button type="submit" name="Go">' . _('Go') . '</button>
+				<button type="submit" name="Previous">' . _('Previous') . '</button>
+				<button type="submit" name="Next">' . _('Next') . '</button>';
 
 			echo '<br /></div>';
 		}
@@ -258,7 +258,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 				echo '<tr class="OddTableRows">';
 				$k++;
 			}
-			echo '<td><input type="submit" name="Select" value="' . $myrow['assetid'] .'" /></td>
+			echo '<td><button type="submit" name="Select">' . $myrow['assetid'] .'</button></td>
 				<td>' . $myrow['description'] . '</td>
 				<td>' . $myrow['locationdescription'] . '</td>
 				<td>' . ConvertSQLDate($myrow['datepurchased']) . '</td>
