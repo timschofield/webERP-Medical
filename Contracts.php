@@ -3,6 +3,7 @@
 /* $Id: Contracts.php 3692 2010-08-15 09:22:08Z daintree $ */
 
 include('includes/DefineContractClass.php');
+include('includes/CustomerSearch.php');
 include('includes/session.inc');
 
 if (isset($_GET['ModifyContractNo'])) {
@@ -598,104 +599,45 @@ if(isset($_POST['CreateQuotation']) AND !$InputError){
 
 } //end of if making a quotation
 
-if (isset($_POST['SearchCustomers'])){
-
-	if (($_POST['CustKeywords']!='') AND (($_POST['CustCode']!='') OR ($_POST['CustPhone']!=''))) {
-		prnMsg( _('Customer Branch Name keywords have been used in preference to the Customer Branch Code or Branch Phone Number entered'), 'warn');
-	}
-	if (($_POST['CustCode']!='') AND ($_POST['CustPhone']!='')) {
-		prnMsg(_('Customer Branch Code has been used in preference to the Customer Branch Phone Number entered'), 'warn');
-	}
-	if (mb_strlen($_POST['CustKeywords'])>0) {
-	//insert wildcard characters in spaces
-		$_POST['CustKeywords'] = mb_strtoupper(trim($_POST['CustKeywords']));
-		$SearchString = '%' . str_replace(' ', '%', $_POST['CustKeywords']) . '%';
-
-		$SQL = "SELECT custbranch.brname,
-						custbranch.contactname,
-						custbranch.phoneno,
-						custbranch.faxno,
-						custbranch.branchcode,
-						custbranch.debtorno,
-						debtorsmaster.name
-					FROM custbranch
-					LEFT JOIN debtorsmaster
-						ON custbranch.debtorno=debtorsmaster.debtorno
-					WHERE custbranch.brname " . LIKE . " '$SearchString'
-						AND custbranch.disabletrans=0
-					ORDER BY custbranch.debtorno, custbranch.branchcode";
-
-	} elseif (mb_strlen($_POST['CustCode'])>0){
-
-		$_POST['CustCode'] = mb_strtoupper(trim($_POST['CustCode']));
-
-		$SQL = "SELECT custbranch.brname,
-						custbranch.contactname,
-						custbranch.phoneno,
-						custbranch.faxno,
-						custbranch.branchcode,
-						custbranch.debtorno,
-						debtorsmaster.name
-					FROM custbranch
-					LEFT JOIN debtorsmaster
-						ON custbranch.debtorno=debtorsmaster.debtorno
-					WHERE custbranch.branchcode " . LIKE . " '%" . $_POST['CustCode'] . "%'
-						AND custbranch.disabletrans=0
-					ORDER BY custbranch.debtorno";
-
-	} elseif (mb_strlen($_POST['CustPhone'])>0){
-		$SQL = "SELECT custbranch.brname,
-						custbranch.contactname,
-						custbranch.phoneno,
-						custbranch.faxno,
-						custbranch.branchcode,
-						custbranch.debtorno,
-						debtorsmaster.name
-					FROM custbranch
-					LEFT JOIN debtorsmaster
-						ON custbranch.debtorno=debtorsmaster.debtorno
-					WHERE custbranch.phoneno " . LIKE . " '%" . $_POST['CustPhone'] . "%'
-						AND custbranch.disabletrans=0
-					ORDER BY custbranch.debtorno";
-	} else {
-		$SQL = "SELECT custbranch.brname,
-						custbranch.contactname,
-						custbranch.phoneno,
-						custbranch.faxno,
-						custbranch.branchcode,
-						custbranch.debtorno,
-						debtorsmaster.name
-					FROM custbranch
-					LEFT JOIN debtorsmaster
-						ON custbranch.debtorno=debtorsmaster.debtorno
-					WHERE custbranch.disabletrans=0
-					ORDER BY custbranch.debtorno";
-	}
-
-	$ErrMsg = _('The searched customer records requested cannot be retrieved because');
-	$result_CustSelect = DB_query($SQL,$db,$ErrMsg);
-
-	if (DB_num_rows($result_CustSelect)==0){
-		prnMsg(_('No Customer Branch records contain the search criteria') . ' - ' . _('please try again') . ' - ' . _('Note a Customer Branch Name may be different to the Customer Name'),'info');
-	}
-} /*one of keywords or custcode was more than a zero length string */
+$result_CustSelect=CustomerSearchSQL($db);
 
 if (isset($_POST['SelectedCustomer1'])) {
 
 /* will only be true if page called from customer selection form
  * or set because only one customer record returned from a search
  * so parse the $Select string into debtorno and branch code */
-
-	foreach ($_POST as $key => $value) {
-		if (mb_substr($key, 0, 6)=='Submit') {
-			$Index=mb_substr($key, 6, 1);
-			$_POST['SelectedCustomer']=$_POST['SelectedCustomer'.$Index];
-			$_POST['SelectedBranch']=$_POST['SelectedBranch'.$Index];
+	if (!isset($_POST['Search'])){
+		/*Need to figure out the number of the form variable that the user clicked on */
+		for ($i=0; $i< count($_POST); $i++){ //loop through the returned customers
+			if(isset($_POST['SubmitCustomerSelection'.$i])){
+				break;
+			}
+		}
+		if ($i==count($_POST)){
+			prnMsg(_('Unable to identify the selected customer'),'error');
+		} else {
+			$_POST['SelectedCustomer'] = $_POST['SelectedCustomer'.$i];
+			$_POST['SelectedBranch'] = $_POST['SelectedBranch'.$i];
+			unset($_POST['Search']);
+			$_SESSION['Contract'.$identifier]->DebtorNo  = $_POST['SelectedCustomer'];
+			$_SESSION['Contract'.$identifier]->BranchCode = $_POST['SelectedBranch'];
 		}
 	}
 
-	$_SESSION['Contract'.$identifier]->DebtorNo  = $_POST['SelectedCustomer'];
-	$_SESSION['Contract'.$identifier]->BranchCode = $_POST['SelectedBranch'];
+} //end if a customer has just been selected
+
+
+if (!isset($_SESSION['Contract'.$identifier]->DebtorNo)
+		OR $_SESSION['Contract'.$identifier]->DebtorNo=='' ) {
+
+	ShowCustomerSearchFields($rootpath, $theme, $db);
+
+	if (isset($result_CustSelect)) {
+		ShowReturnedCustomers($result_CustSelect);
+	}//end if results to show
+
+//end if RequireCustomerSelection
+} else { /*A customer is already selected so get into the contract setup proper */
 
 	$sql = "SELECT debtorsmaster.name,
 					custbranch.brname,
@@ -739,79 +681,6 @@ if (isset($_POST['SelectedCustomer1'])) {
 			}
 		}
 	} //a customer was retrieved ok
-} //end if a customer has just been selected
-
-
-if (!isset($_SESSION['Contract'.$identifier]->DebtorNo)
-		OR $_SESSION['Contract'.$identifier]->DebtorNo=='' ) {
-
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/contract.png" title="' . _('Contract') . '" alt="" />' . ' ' . _('Contract: Select Customer') . '</p>';
-	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?identifier=' . $identifier .'" name="CustomerSelection" method="post">';
-	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-
-	echo '<table cellpadding="3" class="selection">
-			<tr>
-			<td><h5>' . _('Part of the Customer Branch Name') . ':</h5></td>
-			<td><input tabindex="1" type="text" name="CustKeywords" size="20" maxlength="25" /></td>
-			<td><h2><b>' . _('OR') . '</b></h2></td>
-			<td><h5>' .  _('Part of the Customer Branch Code'). ':</h5></td>
-			<td><input tabindex="2" type="text" name="CustCode" size="15" maxlength="18" /></td>
-			<td><h2><b>' . _('OR') . '</b></h2></td>
-			<td><h5>' . _('Part of the Branch Phone Number') . ':</h5></td>
-			<td><input tabindex="3" type="text" name="CustPhone" size="15" maxlength="18" /></td>
-		</tr>
-		</table>
-		<br /><div class="centre"><input tabindex="4" type="submit" name="SearchCustomers" value="' . _('Search Now') . '" />
-		<input tabindex="5" type="submit" name="reset" value="' . _('Reset') .'" /></div>';
-
-	if (isset($result_CustSelect)) {
-
-		echo '<br /><table cellpadding="2" class="selection">';
-
-		$TableHeader = '<tr>
-							<th>' . _('Customer') . '</th>
-							<th>' . _('Branch') . '</th>
-							<th>' . _('Contact') . '</th>
-							<th>' . _('Phone') . '</th>
-							<th>' . _('Fax') . '</th>
-						</tr>';
-		echo $TableHeader;
-
-		$j = 1;
-		$k = 0; //row counter to determine background colour
-		$LastCustomer='';
-		while ($myrow=DB_fetch_array($result_CustSelect)) {
-
-			if ($k==1){
-				echo '<tr class="EvenTableRows">';
-				$k=0;
-			} else {
-				echo '<tr class="OddTableRows">';
-				$k=1;
-			}
-			if ($LastCustomer != $myrow['name']) {
-				echo '<td>'.htmlentities($myrow['name'], ENT_QUOTES,'UTF-8').'</td>';
-			} else {
-				echo '<td></td>';
-			}
-			echo '<td><input type="submit" name="Submit'.$j.'" value="'.htmlentities($myrow['brname'], ENT_QUOTES,'UTF-8').'" /></td>
-					<input type="hidden" name="SelectedCustomer'.$j.'" value="'.$myrow['debtorno'].'" />
-					<input type="hidden" name="SelectedBranch'.$j.'" value="'.$myrow['branchcode'].'" />
-					<td>'.htmlentities($myrow['contactname'], ENT_QUOTES,'UTF-8').'</td>
-					<td>'.$myrow['phoneno'].'</td>
-					<td>'.$myrow['faxno'].'</td>
-					</tr>';
-			$LastCustomer=$myrow['name'];
-			$j++;
-//end of page full new headings if
-		}
-//end of while loop
-
-		echo '</table></form>';
-	}//end if results to show
-
-//end if RequireCustomerSelection
-} else { /*A customer is already selected so get into the contract setup proper */
 
 	echo '<form name="ContractEntry" enctype="multipart/form-data" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?identifier=' . $identifier . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -1055,15 +924,15 @@ if (!isset($_SESSION['Contract'.$identifier]->DebtorNo)
 
 	echo'<p></p>';
 	echo '<div class="centre">
-			<input type="submit" name="EnterContractBOM" value="' . _('Enter Items Required') . '" />
-			<input type="submit" name="EnterContractRequirements" value="' . _('Enter Other Requirements') .'" />';
+			<button type="submit" name="EnterContractBOM">' . _('Enter Items Required') . '</button>
+			<button type="submit" name="EnterContractRequirements">' . _('Enter Other Requirements') .'</button>';
 	if($_SESSION['Contract'.$identifier]->Status==0){ // not yet quoted
-		echo '<input type="submit" name="CommitContract" value="' . _('Commit Changes') .'" />';
+		echo '<button type="submit" name="CommitContract">' . _('Commit Changes') .'</button>';
 	} elseif($_SESSION['Contract'.$identifier]->Status==1){ //quoted but not yet ordered
-		echo '<input type="submit" name="CommitContract" value="' . _('Update Quotation') .'" />';
+		echo '<button type="submit" name="CommitContract">' . _('Update Quotation') .'</button>';
 	}
 	if($_SESSION['Contract'.$identifier]->Status==0){ //not yet quoted
-		echo ' <input type="submit" name="CreateQuotation" value="' . _('Create Quotation') .'" />
+		echo ' <button type="submit" name="CreateQuotation">' . _('Create Quotation') .'</button>
 			</div>';
 	} else {
 		echo '</div>';
@@ -1071,7 +940,7 @@ if (!isset($_SESSION['Contract'.$identifier]->DebtorNo)
 	if ($_SESSION['Contract'.$identifier]->Status!=2) {
 		echo '<div class="centre">
 				 <br />
-				 <input type="submit" name="CancelContract" value="' . _('Cancel and Delete Contract') . '" />
+				 <button type="submit" name="CancelContract">' . _('Cancel and Delete Contract') . '</button>
 			  </div>';
 	}
 	echo '</form>';

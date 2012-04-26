@@ -174,7 +174,7 @@ if (isset($result)) {
 	ShowReturnedCustomers($result);
 }
 // Only display the geocode map if the integration is turned on, and there is a latitude/longitude to display
-if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != "") {
+if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != '') {
 	if ($_SESSION['geocode_integration'] == 1) {
 		echo '<br />';
 		if ($lat == 0) {
