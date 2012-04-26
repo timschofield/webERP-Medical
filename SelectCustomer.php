@@ -10,7 +10,7 @@ if (isset($_GET['Select'])) {
 	$_SESSION['CustomerID'] = $_GET['Select'];
 }
 if (!isset($_SESSION['CustomerID'])) { //initialise if not already done
-	$_SESSION['CustomerID'] = "";
+	$_SESSION['CustomerID'] = '';
 }
 if (isset($_GET['Area'])) {
 	$_POST['Area']=$_GET['Area'];
@@ -79,7 +79,7 @@ if ($_SESSION['geocode_integration'] == 1 AND $_SESSION['CustomerID'] != "") {
 	echo '<body onload="load()" onunload="GUnload()">';
 }
 unset($result);
-$msg = "";
+$msg = '';
 if (isset($_POST['Go1']) or isset($_POST['Go2'])) {
 	$_POST['PageOffset'] = (isset($_POST['Go1']) ? $_POST['PageOffset1'] : $_POST['PageOffset2']);
 	$_POST['Go'] = '';
@@ -92,7 +92,7 @@ if (!isset($_POST['PageOffset'])) {
 	}
 }
 $result=CustomerSearchSQL($db);
-if (isset($_POST['JustSelectedACustomer']) and empty($_SESSION['CustomerID'])){
+if (!isset($_POST['Search']) and isset($_POST['JustSelectedACustomer']) and empty($_SESSION['CustomerID'])){
 	/*Need to figure out the number of the form variable that the user clicked on */
 	for ($i=0; $i< count($_POST); $i++){ //loop through the returned customers
 		if(isset($_POST['SubmitCustomerSelection'.$i])){
