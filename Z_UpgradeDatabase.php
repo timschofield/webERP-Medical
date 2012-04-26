@@ -45,14 +45,14 @@ if (!isset($_POST['continue']) and !isset($_POST['CreateSQLFile'])) {
 	echo '<div class="page_help_text">' . _('You have database updates that are required.').'<br />'.
 		_('Please ensure that you have taken a backup of your current database before continuing.'). '</div><br />';
 
-	echo '<div class="centre"><input type="submit" name="continue" value="'. _('Continue With Updates').'" />
-		<input type="submit" name="CreateSQLFile" value="'. _('Create an SQL file to apply manually').'" /></div>';
+	echo '<div class="centre"><button type="submit" name="continue">'. _('Continue With Updates').'</button>
+		<button type="submit" name="CreateSQLFile">'. _('Create an SQL file to apply manually').'</button></div>';
 	echo '</form>';
 } else {
 	$StartingUpdate=$_SESSION['DBUpdateNumber']+1;
 	$EndingUpdate=$DBVersion;
 	if (isset($_POST['CreateSQLFile'])) {
-		$SQLFile=fopen("./companies/" . $_SESSION['DatabaseName'] . "/reportwriter/UpgradeDB" . $StartingUpdate ."-".$EndingUpdate.".sql","w");
+		$SQLFile=fopen('./companies/' . $_SESSION['DatabaseName'] . '/reportwriter/UpgradeDB' . $StartingUpdate .'-'.$EndingUpdate.'.sql','w');
 	}
 	unset($_SESSION['Updates']);
 	$_SESSION['Updates']['Errors']=0;
