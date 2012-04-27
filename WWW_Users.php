@@ -652,7 +652,7 @@ if ($_POST['Blocked']==0){
 echo '</select></td></tr>';
 
 echo '</table><br />
-	<div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div>
+	<div class="centre"><button type="submit" name="submit">' . _('Enter Information') . '</button></div>
 	</form>';
 
 if (isset($_GET['SelectedUser'])) {
