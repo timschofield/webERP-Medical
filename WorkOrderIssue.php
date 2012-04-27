@@ -598,7 +598,7 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 
 	while ($RequirementsRow = DB_fetch_array($RequirmentsResult)){
 		if ($RequirementsRow['autoissue']==0){
-			echo '<tr><td><input type="submit" name="IssueItem" value="' .$RequirementsRow['stockid'] . '" /></td>
+			echo '<tr><td><button type="submit" name="IssueItem" value="' .$RequirementsRow['stockid'] . '">' .$RequirementsRow['stockid'] . '</button></td>
 					<td>' . $RequirementsRow['stockid'] . ' - ' . $RequirementsRow['description'] . '</td>';
 		} else {
 			echo '<tr><td class="notavailable">' . _('Auto Issue') . '<td class="notavailable">' .$RequirementsRow['stockid'] . ' - ' . $RequirementsRow['description'] .'</td>';
@@ -644,7 +644,7 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 	if (!isset($_POST['Keywords'])) {
 	    $_POST['Keywords']='';
 	}
-	
+
 	if (!isset($_POST['StockCode'])) {
 	    $_POST['StockCode']='';
 	}
@@ -657,7 +657,7 @@ echo '</select>
 	<td><input type="text" name="StockCode" size="15" maxlength="18" value="' . $_POST['StockCode'] . '" /></td>
 	</tr>
 	</table>
-	<br /><div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" /></div>';
+	<br /><div class="centre"><button type="submit" name="Search">' . _('Search Now') . '</button></div>';
 
 echo '<script type="text/javascript">defaultControl(document.forms[0].StockCode);</script>';
 
@@ -755,7 +755,7 @@ echo '<script type="text/javascript">defaultControl(document.forms[0].StockCode)
 						$db,_('Could not retrieve the serial numbers available at the location specified because'));
 			if (DB_num_rows($SerialNoResult)==0){
 				echo '<tr><td>' . _('There are no serial numbers at this location to issue') . '</td></tr>';
-				echo '<tr><td colspan="2"><div class="centre"><input type="submit" name="Retry" value="' . _('Reselect Location or Issued Item') . '" /></td></tr>';
+				echo '<tr><td colspan="2"><div class="centre"><button type="submit" name="Retry">' . _('Reselect Location or Issued Item') . '</button></td></tr>';
 			} else {
 				echo '<tr><td><select name="SerialNos[]" multiple>';
 				while ($SerialNoRow = DB_fetch_array($SerialNoResult)){
@@ -767,7 +767,7 @@ echo '<script type="text/javascript">defaultControl(document.forms[0].StockCode)
 				}
 				echo '</select></td></tr>';
 				echo '<input type="hidden" name="IssueItem" value="' . $_POST['IssueItem'] . '" />';
-				echo '<tr><td colspan="2"><div class="centre"><input type="submit" name="Process" value="' . _('Process Items Issued') . '" /></div></td></tr>';
+				echo '<tr><td colspan="2"><div class="centre"><button type="submit" name="Process">' . _('Process Items Issued') . '</button></div></td></tr>';
 			}
 		} else { //controlled but not serialised - just lot/batch control
 			echo '<tr><th colspan="2">' . _('Batch/Lots Issued') . '</th></tr>';
@@ -777,13 +777,13 @@ echo '<script type="text/javascript">defaultControl(document.forms[0].StockCode)
 					  <td><input type="text" name="Qty' . $i .'" /></td></tr>';
 			}
 			echo '<input type="hidden" name="IssueItem" value="' . $_POST['IssueItem'] . '" />';
-			echo '<tr><td colspan="2"><div class="centre"><input type="submit" name="Process" value="' . _('Process Items Issued') . '" /></div></td></tr>';
+			echo '<tr><td colspan="2"><div class="centre"><button type="submit" name="Process">' . _('Process Items Issued') . '</button></div></td></tr>';
 		} //end of lot/batch control
 	} else { //not controlled - an easy one!
 		echo '<input type="hidden" name="IssueItem" value="' . $_POST['IssueItem'] . '" />';
 		echo '<tr><td>' . _('Quantity Issued') . ':</td>
 			  <td><input class="number" type="text" name="Qty" /></td></tr>';
-		echo '<tr><td colspan="2"><div class="centre"><input type="submit" name="Process" value="' . _('Process Items Issued') . '" /></div></td></tr>';
+		echo '<tr><td colspan="2"><div class="centre"><button type="submit" name="Process">' . _('Process Items Issued') . '</button></div></td></tr>';
 	}
 } //end if selecting new item to issue or entering the issued item quantities
 echo '</table>';
