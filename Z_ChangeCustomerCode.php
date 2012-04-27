@@ -235,7 +235,7 @@ echo '<tr><td> ' . _('New Debtor Code') . ':</td>
 	</tr>
 	</table>';
 
-echo '<input type="submit" name="ProcessCustomerChange" value="' . _('Process') . '" />';
+echo '<button type="submit" name="ProcessCustomerChange">' . _('Process') . '</button>';
 
 echo '</form>';
 
