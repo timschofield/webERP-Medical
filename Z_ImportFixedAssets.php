@@ -301,11 +301,10 @@ if ($_FILES['SelectedAssetFile']['name']) { //start file processing
 	}
 	echo '</select></td></tr>';
 	echo '<tr><td>' . _('Fixed Assets Upload file:') . '</td><td><input name="SelectedAssetFile" type="file" /></tr></table>
-			<input type="submit" value="' . _('Send File') . '" />
+			<button type="submit">' . _('Send File') . '</button>
 		</form>';
 
 }
-
 
 include('includes/footer.inc');
 ?>
