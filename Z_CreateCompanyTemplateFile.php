@@ -254,7 +254,7 @@ while ($ChartRow = DB_fetch_array($ChartResult)){
 
 echo '</table>';
 echo '<hr>';
-echo '<div class="centre"><input type="submit" name="CreateTemplate" value="' . _('Create Template and Email') . '" /></div>';
+echo '<div class="centre"><button type="submit" name="CreateTemplate">' . _('Create Template and Email') . '</button></div>';
 
 echo '</form>';
 include('includes/footer.inc');
