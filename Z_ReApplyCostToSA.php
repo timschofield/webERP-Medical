@@ -28,7 +28,7 @@ while ($PeriodInfo=DB_fetch_array($result)){
 
 echo '</select>';
 
-echo '<p><input type="submit" name="UpdateSalesAnalysis" value="' . _('Update Sales Analysis Costs') .'" /></p></div>';
+echo '<p><button type="submit" name="UpdateSalesAnalysis">' . _('Update Sales Analysis Costs') .'</button></p></div>';
 echo '</form>';
 
 if (isset($_POST['UpdateSalesAnalysis']) AND $_POST['PeriodNo']!=0){
