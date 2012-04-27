@@ -553,7 +553,7 @@ if ( isset($_POST['pricelist']) ) {
 	}
 	echo '</select></td></tr>';
 	echo '</table>';
-	echo '<div class="centre"><input type="submit" name="pricelist" value="' . _('Export') . '" /></div>';
+	echo '<div class="centre"><button type="submit" name="pricelist">' . _('Export') . '</button></div>';
 	echo '</form><br />';
 
 	// SELECT EXPORT FOR CUSTOMER LIST
@@ -577,7 +577,7 @@ if ( isset($_POST['pricelist']) ) {
 	}
 	echo '</select></td></tr>';
 	echo '</table>';
-	echo '<div class="centre"><input type="submit" name="custlist" value="' . _('Export') . '" /></div>';
+	echo '<div class="centre"><button type="submit" name="custlist">' . _('Export') . '</button></div>';
 	echo '</form><br />';
 
 	// SELECT EXPORT FOR SALES MAN
@@ -589,7 +589,7 @@ if ( isset($_POST['pricelist']) ) {
 	echo '<table>';
 	echo '<tr><th colspan="2">' . _('Salesman List Export') . '</th></tr>';
 	echo '</table>';
-	echo '<div class="centre"><div class="centre"><input type="submit" name="salesmanlist" value="' . _('Export') . '" /></div>';
+	echo '<div class="centre"><div class="centre"><button type="submit" name="salesmanlist">' . _('Export') . '</button></div>';
 	echo '</form><br />';
 
 	// SELECT EXPORT FOR IMAGES
@@ -598,7 +598,7 @@ if ( isset($_POST['pricelist']) ) {
 	echo '<table>';
 	echo '<tr><th colspan="2">' . _('Image List Export') . '</th></tr>';
 	echo '</table>';
-	echo '<div class="centre"><input type="submit" name="imagelist" value="' . _('Export') . '" /></div>';
+	echo '<div class="centre"><button type="submit" name="imagelist">' . _('Export') . '</button></div>';
 	echo '</form><br />';
 
 	// SELECT EXPORT SECURITY TOKENS
@@ -607,7 +607,7 @@ if ( isset($_POST['pricelist']) ) {
 	echo '<table>';
 	echo '<tr><th colspan="2">' . _('Security Token List Export') . '</th></tr>';
 	echo '</table>';
-	echo '<div class="centre"><input type="submit" name="sectokenlist" value="' . _('Export') . '" /></div>';
+	echo '<div class="centre"><button type="submit" name="sectokenlist">' . _('Export') . '</button></div>';
 	echo '</form><br />';
 
 	// SELECT EXPORT SECURITY ROLES
@@ -616,7 +616,7 @@ if ( isset($_POST['pricelist']) ) {
 	echo '<table>';
 	echo '<tr><th colspan="2">' . _('Security Role List Export') . '</th></tr>';
 	echo '</table>';
-	echo '<div class="centre"><input type="submit" name="secrolelist" value="' . _('Export') . '" /></div>';
+	echo '<div class="centre"><button type="submit" name="secrolelist">' . _('Export') . '</button></div>';
 	echo '</form><br />';
 
 	// SELECT EXPORT SECURITY GROUPS
@@ -625,7 +625,7 @@ if ( isset($_POST['pricelist']) ) {
 	echo '<table>';
 	echo '<tr><th colspan="2">' . _('Security Group List Export') . '</th></tr>';
 	echo '</table>';
-	echo '<div class="centre"><input type="submit" name="secgrouplist" value="' . _('Export') . '" /></div>';
+	echo '<div class="centre"><button type="submit" name="secgrouplist">' . _('Export') . '</button></div>';
 	echo '</form><br />';
 
 	// SELECT EXPORT SECURITY USERS
@@ -634,7 +634,7 @@ if ( isset($_POST['pricelist']) ) {
 	echo '<table>';
 	echo '<tr><th colspan="2">' . _('Security User List Export') . '</th></tr>';
 	echo '</table>';
-	echo '<div class="centre"><input type="submit" name="secuserlist" value="' . _('Export') . '" /></div>';
+	echo '<div class="centre"><button type="submit" name="secuserlist">' . _('Export') . '</button></div>';
 	echo '</form><br />';
 
 
