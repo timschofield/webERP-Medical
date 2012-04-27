@@ -315,7 +315,7 @@ echo '<br /><table>
 echo '<tr><td>' . _('New Inventory Code') . ':</td><td><input type="text" name="NewStockID" size="20" maxlength="20" /></td></tr>';
 echo '</table>';
 
-echo '<div class="centre"><input type="submit" name="ProcessStockChange" value="' . _('Process') . '" /></div>';
+echo '<div class="centre"><button type="submit" name="ProcessStockChange">' . _('Process') . '</button></div>';
 
 echo '</form>';
 
