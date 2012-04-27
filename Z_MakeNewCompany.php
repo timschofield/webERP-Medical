@@ -220,7 +220,7 @@ echo '<td>' . _('Enter up to 32 character lower case character abbreviation for 
 	<tr><td>' . _('Create Database?') . '</td><td><input type="checkbox" name="CreateDB" /></td></tr>
 	</table>';
 
-echo '<br /><input type="submit" name="submit" value="' . _('Proceed') . '" />&nbsp;&nbsp;&nbsp;&nbsp;';
+echo '<br /><button type="submit" name="submit">' . _('Proceed') . '</button>&nbsp;&nbsp;&nbsp;&nbsp;';
 echo '</form>';
 echo '</div>';
 
