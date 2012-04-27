@@ -9,10 +9,10 @@ prnMsg(_('This script will run perform any modifications to the database since v
 
 echo '<p><form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '"></p>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<input type="submit" name="DoUpgrade" value="' . _('Perform Upgrade') . '" />';
+echo '<button type="submit" name="DoUpgrade">' . _('Perform Upgrade') . '</button>';
 echo '</form>';
 
-if ($_POST['DoUpgrade'] == _('Perform Upgrade')){
+if (isset($_POST['DoUpgrade'])){
 
 	$SQLScriptFile = file('./sql/mysql/upgrade3.09-3.10.sql');
 
