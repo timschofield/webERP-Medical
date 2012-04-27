@@ -831,7 +831,7 @@ if($WORow['controlled']==1){ //controlled
 		echo '</tr>';
 		echo '<input type="hidden" name="CountOfInputs" value="' . $i . '" />';
 		echo '<tr><td colspan="5"></td></tr></table>';
-		echo '<br /><div class="centre"><input type="submit" name="Process" value="' . _('Process Manufactured Items Received') . '" /></div>';
+		echo '<br /><div class="centre"><button type="submit" name="Process">' . _('Process Manufactured Items Received') . '</button></div>';
 	} else { //controlled but not serialised - just lot/batch control
 		echo '<tr><th colspan="2">' . _('Batch/Lots Received') . '</th></tr>';
 		if ($_SESSION['DefineControlledOnWOEntry']==1){ //then potentially batches/lots already set up
@@ -867,17 +867,15 @@ if($WORow['controlled']==1){ //controlled
 			}
 		}
 		echo '<input type="hidden" name="CountOfInputs" value="' . $i . '" /></table>';
-		echo '<br /><div class="centre"><input type="submit" name="Process" value="' . _('Process Manufactured Items Received') . '"></div>';
+		echo '<br /><div class="centre"><button type="submit" name="Process">' . _('Process Manufactured Items Received') . '</button></div>';
 	} //end of lot/batch control
 } else { //not controlled - an easy one!
 
 	echo '<input type="hidden" name="CountOfInputs" value="1" />';
 	echo '<tr><td>' . _('Quantity Received') . ':</td>
 			  <td><input type="text" class="number" name="Qty" /></tr></table>';
-	echo '<br /><div class="centre"><input type="submit" name="Process" value="' . _('Process Manufactured Items Received') . '" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="Process">' . _('Process Manufactured Items Received') . '</button></div>';
 }
-
-
 
 echo '</form>';
 
