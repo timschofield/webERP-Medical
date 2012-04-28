@@ -406,52 +406,54 @@ if ($SetupErrors>0) {
 	exit;
 }
 
-$sql="SELECT debtorno,
-			name,
-			address1,
-			address2,
-			address3,
-			address4,
-			address5,
-			address6,
-			currencies.currency
+if (!isset($_GET['Edit'])) {
+	$sql="SELECT debtorno,
+				name,
+				address1,
+				address2,
+				address3,
+				address4,
+				address5,
+				address6,
+				currencies.currency
 			FROM debtorsmaster
 			LEFT JOIN debtortype
 				ON debtorsmaster.typeid=debtortype.typeid
 			LEFT JOIN currencies
 				ON debtorsmaster.currcode=currencies.currabrev
-			WHERE debtortype.typename='Insurance'";
-$result=DB_query($sql, $db);
+			WHERE debtortype.typename like '%Insurance%'";
+	$result=DB_query($sql, $db);
 
-echo '<table class="selection">
-		<tr>
-			<th>' . _('Company No') . '</th>
-			<th>' . _('Name') . '</th>
-			<th>' . _('Address1') . '</th>
-			<th>' . _('Address2') . '</th>
-			<th>' . _('Address3') . '</th>
-			<th>' . _('Address4') . '</th>
-			<th>' . _('Address5') . '</th>
-			<th>' . _('Address6') . '</th>
-			<th>' . _('Currency') . '</th>
-		</tr>';
+	echo '<table class="selection">
+			<tr>
+				<th>' . _('Company No') . '</th>
+				<th>' . _('Name') . '</th>
+				<th>' . _('Address1') . '</th>
+				<th>' . _('Address2') . '</th>
+				<th>' . _('Address3') . '</th>
+				<th>' . _('Address4') . '</th>
+				<th>' . _('Address5') . '</th>
+				<th>' . _('Address6') . '</th>
+				<th>' . _('Currency') . '</th>
+			</tr>';
 
-while ($myrow=DB_fetch_array($result)) {
-	echo '<tr>
-			<td>' . $myrow['debtorno'] . '</td>
-			<td>' . $myrow['name'] . '</td>
-			<td>' . $myrow['address1'] . '</td>
-			<td>' . $myrow['address2'] . '</td>
-			<td>' . $myrow['address3'] . '</td>
-			<td>' . $myrow['address4'] . '</td>
-			<td>' . $myrow['address5'] . '</td>
-			<td>' . $myrow['address6'] . '</td>
-			<td>' . $myrow['currency'] . '</td>
-			<td><a href="' . $_SERVER['PHP_SELF'] . '?Debtor='.$myrow['debtorno'].'&Edit=True">' . _('Edit') . '</a></td>
-			<td><a href="' . $_SERVER['PHP_SELF'] . '?Debtor='.$myrow['debtorno'].'&Delete=True">' . _('Delete') . '</a></td>
-		</tr>';
+	while ($myrow=DB_fetch_array($result)) {
+		echo '<tr>
+				<td>' . $myrow['debtorno'] . '</td>
+				<td>' . $myrow['name'] . '</td>
+				<td>' . $myrow['address1'] . '</td>
+				<td>' . $myrow['address2'] . '</td>
+				<td>' . $myrow['address3'] . '</td>
+				<td>' . $myrow['address4'] . '</td>
+				<td>' . $myrow['address5'] . '</td>
+				<td>' . $myrow['address6'] . '</td>
+				<td>' . $myrow['currency'] . '</td>
+				<td><a href="' . $_SERVER['PHP_SELF'] . '?Debtor='.$myrow['debtorno'].'&Edit=True">' . _('Edit') . '</a></td>
+				<td><a href="' . $_SERVER['PHP_SELF'] . '?Debtor='.$myrow['debtorno'].'&Delete=True">' . _('Delete') . '</a></td>
+			</tr>';
+	}
+	echo '</table><br />';
 }
-echo '</table><br />';
 
 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -660,7 +662,7 @@ if (isset($DebtorNo)) {
 				<th>' . _('Phone Number') . '</th>
 				<th>' . _('Notes') . '</th>
 				<th>' . _('Edit') . '</th>
-				<th colspan=2><input type="Submit" name="addcontact" value="Add Contact"></th>
+				<th colspan=2><button type="submit" name="addcontact">' . _('Add Contact') . '</button></th>
 			</tr>';
 	}
 	$k=0; //row colour counter
@@ -726,7 +728,7 @@ if (isset($DebtorNo)) {
 				<td>' . _('Role') . '</td><td><input type=text name="role" value="'.$_POST['role'].'"></td></tr><tr>
 				<td>' . _('Phone no') . '</td><td><input type="text" name="phoneno" value="'.$_POST['phoneno'].'"></td></tr><tr>
 				<td>' . _('Notes') . '</td><td><textarea name="notes">'.$_POST['notes'].'</textarea></td></tr>
-				<tr><td colspan=2><input type=submit name=update value=update></td></tr></table>';
+				<tr><td colspan=2><div class="centre"><button type="submit" name="update">' . _('Update') . '</td></tr></table>';
 
 	}
 	if (isset($_POST['update'])) {
@@ -757,12 +759,13 @@ if (isset($DebtorNo)) {
  // end of main ifs
 }
 if (!isset($DebtorNo)) {
-	echo '<br /><div class="centre"><input type="Submit" name="submit" value="' . _('Add New Company') .
-		'">&nbsp;<input type=submit name="reset" value="' . _('Reset') . '"></div>';
+	echo '<br /><div class="centre">
+			<button type="submit" name="submit">' . _('Add New Company') . '</button>&nbsp;
+			<button type=submit name="reset">' . _('Reset') . '</button></div>';
 	echo '<input type="hidden" name="New" value="True" />';
 } else {
-	echo '<br /><div class="centre"><input type="Submit" name="submit" value="' . _('Update Company') . '">';
-	echo '&nbsp;<input type="Submit" name="delete" value="' . _('Delete Company') . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');">';
+	echo '<br /><div class="centre"><button type="submit" name="submit">' . _('Update Company') . '</button>';
+	echo '&nbsp;<button type="submit" name="delete" onclick="return confirm(\'' . _('Are You Sure?') . '\');">' . _('Delete Company') . '</button>';
 }
 if(isset($_POST['addcontact']) AND (isset($_POST['addcontact'])!=''))
 {
