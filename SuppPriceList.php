@@ -46,67 +46,71 @@ if (isset($_POST['PrintPDF'])) {
 	//price and category = all
 	if (($_POST['price']=='all')and($_POST['category']=='all')){
 		$sql = "SELECT 	purchdata.stockid,
-					stockmaster.description,
-					purchdata.price,
-					(purchdata.effectivefrom)as dateprice,
-					purchdata.supplierdescription,
-					purchdata.suppliers_partno
-			FROM purchdata,stockmaster
-			WHERE supplierno='" . $_POST['supplier'] . "'
-				AND stockmaster.stockid=purchdata.stockid
-			ORDER BY stockid ASC ,dateprice DESC";
+						stockmaster.description,
+						purchdata.price,
+						(purchdata.effectivefrom)as dateprice,
+						purchdata.supplierdescription,
+						purchdata.suppliers_partno
+					FROM purchdata
+					INNER JOIN stockmaster
+						ON stockmaster.stockid=purchdata.stockid
+					WHERE supplierno='" . $_POST['supplier'] . "'
+					ORDER BY stockid ASC ,dateprice DESC";
 	} else {
 	//category=all and price != all
 		if (($_POST['price']!='all')and($_POST['category']=='all')){
 
-			$sql = "SELECT purchdata.stockid,
-						stockmaster.description,
-						purchdata.price,
-						(SELECT purchdata.effectivefrom
-						 FROM purchdata
-						 WHERE purchdata.stockid = stockmaster.stockid
-						 ORDER BY effectivefrom DESC
-						 LIMIT 0,1) AS dateprice,
-						purchdata.supplierdescription,
-						purchdata.suppliers_partno
-			FROM purchdata, stockmaster
-			WHERE supplierno = '" . $_POST['supplier'] . "'
-			AND stockmaster.stockid = purchdata.stockid
-			GROUP BY stockid
-			ORDER BY stockid ASC , dateprice DESC";
+			$sql = "SELECT  purchdata.stockid,
+							stockmaster.description,
+							purchdata.price,
+							(SELECT purchdata.effectivefrom
+							FROM purchdata
+							WHERE purchdata.stockid = stockmaster.stockid
+							ORDER BY effectivefrom DESC
+							LIMIT 0,1) AS dateprice,
+							purchdata.supplierdescription,
+							purchdata.suppliers_partno
+						FROM purchdata
+						INNER JOIN stockmaster
+							ON stockmaster.stockid = purchdata.stockid
+						WHERE supplierno = '" . $_POST['supplier'] . "'
+						GROUP BY stockid
+						ORDER BY stockid ASC , dateprice DESC";
 		} else {
 			//price = all category !=all
 			if (($_POST['price']=='all')and($_POST['category']!='all')){
 
 				$sql = "SELECT 	purchdata.stockid,
-					stockmaster.description,
-					purchdata.price,
-					(purchdata.effectivefrom)as dateprice,
-					purchdata.supplierdescription,
-					purchdata.suppliers_partno
-				FROM purchdata,stockmaster
-				WHERE supplierno='" . $_POST['supplier'] . "'
-					AND stockmaster.stockid=purchdata.stockid
-					AND stockmaster.categoryid='" . $_POST['category'] .  "'
-				ORDER BY stockid ASC ,dateprice DESC";
+								stockmaster.description,
+								purchdata.price,
+								(purchdata.effectivefrom)as dateprice,
+								purchdata.supplierdescription,
+								purchdata.suppliers_partno
+							FROM purchdata
+							INNER JOIN stockmaster
+								ON stockmaster.stockid=purchdata.stockid
+							WHERE supplierno='" . $_POST['supplier'] . "'
+								AND stockmaster.categoryid='" . $_POST['category'] .  "'
+							ORDER BY stockid ASC ,dateprice DESC";
 			} else {
 			//price != all category !=all
 				$sql = "SELECT 	purchdata.stockid,
-					stockmaster.description,
-					purchdata.price,
-					(SELECT purchdata.effectivefrom
-					FROM purchdata
-					WHERE purchdata.stockid = stockmaster.stockid
-					ORDER BY effectivefrom DESC
-					LIMIT 0,1) AS dateprice,
-					purchdata.supplierdescription,
-					purchdata.suppliers_partno
-				FROM purchdata,stockmaster
-				WHERE supplierno='" . $_POST['supplier'] . "'
-					AND stockmaster.stockid=purchdata.stockid
-					AND stockmaster.categoryid='" . $_POST['category'] .  "'
-				GROUP BY stockid
-				ORDER BY stockid ASC ,dateprice DESC";
+								stockmaster.description,
+								purchdata.price,
+								(SELECT purchdata.effectivefrom
+								FROM purchdata
+								WHERE purchdata.stockid = stockmaster.stockid
+								ORDER BY effectivefrom DESC
+								LIMIT 0,1) AS dateprice,
+								purchdata.supplierdescription,
+								purchdata.suppliers_partno
+							FROM purchdata
+							INNER JOIN stockmaster
+								ON stockmaster.stockid=purchdata.stockid
+							WHERE supplierno='" . $_POST['supplier'] . "'
+								AND stockmaster.categoryid='" . $_POST['category'] .  "'
+							GROUP BY stockid
+							ORDER BY stockid ASC ,dateprice DESC";
 			}
 		}
 	}
@@ -186,7 +190,7 @@ if (isset($_POST['PrintPDF'])) {
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Purchase') . '" alt="" />' . ' ' . _('Supplier Price List') . '</p>';
 	echo '<div class="page_help_text">' . _('View the Price List from supplier') . '</div><br />';
 
-	echo '<br/><form action=' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'). ' method="post"><table>';
+	echo '<form action=' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'). ' method="post"><table>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	$sql = "SELECT supplierid,suppname FROM `suppliers`";
@@ -221,7 +225,7 @@ if (isset($_POST['PrintPDF'])) {
 	echo '</select></td></tr>';
 
 
-	echo '</table><br/><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
+	echo '</table><br /><div class="centre"><button type="submit" name="PrintPDF">' . _('Print PDF') . '</button></div>';
 
 	include('includes/footer.inc');
 
