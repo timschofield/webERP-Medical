@@ -198,8 +198,6 @@ if (isset($SelectedMeasureID)) {
 	echo '<div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Review Units of Measure') . '</a></div>';
 }
 
-echo '<br />';
-
 if (! isset($_GET['delete'])) {
 
 	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
@@ -237,7 +235,7 @@ if (! isset($_GET['delete'])) {
 		</tr>';
 	echo '</table>';
 
-	echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="submit">' . _('Enter Information') . '</button></div>';
 
 	echo '</form>';
 
