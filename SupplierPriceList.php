@@ -57,7 +57,7 @@ if (isset($_POST['StockSearch'])) {
 		echo '<input type="text" name="StockCode" size="15" maxlength="18" />';
 	}
 	echo '</td></tr></table><br />';
-	echo '<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" /></div><br />';
+	echo '<div class="centre"><button type="submit" name="Search">' . _('Search Now') . '</button></div><br />';
 	echo '<script  type="text/javascript">defaultControl(document.forms[0].StockCode);</script>';
 	echo '</form>';
 	include('includes/footer.inc');
@@ -249,9 +249,9 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 				$ListPage++;
 			}
 			echo '</select>
-				<input type="submit" name="Go" value="' . _('Go') . '" />
-				<input type="submit" name="Previous" value="' . _('Previous') . '" />
-				<input type="submit" name="Next" value="' . _('Next') . '" />';
+				<button type="submit" name="Go">' . _('Go') . '</button>
+				<button type="submit" name="Previous">' . _('Previous') . '</button>
+				<button type="submit" name="Next">' . _('Next') . '</button>';
 			echo '<input type="hidden" name=Keywords value="'.$_POST['Keywords'].'" />';
 			echo '<input type="hidden" name=StockCat value="'.$_POST['StockCat'].'" />';
 			echo '<input type="hidden" name=StockCode value="'.$_POST['StockCode'].'" />';
@@ -279,7 +279,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 				$k++;
 			}
 
-			echo '<td><input type="submit" name="Select" value="' . $myrow['stockid'] . '" /></td>
+			echo '<td><button type="submit" name="Select">' . $myrow['stockid'] . '</button></td>
 				<td>' . $myrow['description'] . '</td>
 				<td>' . $myrow['units'] . '</td>
 				</tr>';
@@ -393,7 +393,7 @@ if (isset($SupplierID) AND $SupplierID != '' AND !isset($_POST['SearchSupplier']
 		echo '<td>' . _('Text in Supplier') . ' <b>' . _('CODE') . '</b>:</font></td>';
 		echo '<td><input type="text" name="SupplierCode" size="15" maxlength="18" /></td>';
 		echo '</tr></table><br />';
-		echo '<div class="centre"><input type="submit" name="SearchSupplier" value="' . _('Find Suppliers Now') . '" /></div></form>';
+		echo '<div class="centre"><button type="submit" name="SearchSupplier">' . _('Find Suppliers Now') . '</button></div></form>';
 		include ('includes/footer.inc');
 		exit;
 	};
@@ -451,13 +451,14 @@ if (isset($SuppliersResult)) {
 			echo '<tr class="OddTableRows">';
 			$k++;
 		}
-	   printf('<td><font size="1"><input type="submit" name="SupplierID" value="%s" /></font></td>
+	   printf('<td><font size="1"><button type="submit" name="SupplierID" value="%s" />%s</button></font></td>
 				<td><font size="1">%s</font></td>
 				<td><font size="1">%s</font></td>
 				<td><font size="1">%s</font></td>
 				<td><font size="1">%s</font></td>
 				<td><font size="1">%s</font></td>
 			</tr>',
+				$myrow['supplierid'],
 				$myrow['supplierid'],
 				$myrow['suppname'],
 				$myrow['currcode'],
@@ -504,8 +505,8 @@ if (isset($SupplierID)) {
 	$UOMResult = DB_query($UOMSQL, $db);
 	echo '<input type="hidden" value="' . $SupplierID . '" name="SupplierID" />';
 	echo '<table class="selection">';
-	echo '<tr><th colspan="8" style="text-align: left"><font color="navy" size="3">' . _('Supplier purchasing data for') . ' ' . $SupplierID . '</font></th>';
-	echo '<th colspan="5" style="text-align: right"><font color="navy" size="2">' . _('Find new Item Code') . '</font>
+	echo '<tr><th colspan="8" class="header" style="text-align: left">' . _('Supplier purchasing data for') . ' ' . $SupplierID . '</th>';
+	echo '<th colspan="5" class="header" style="text-align: right"><font size="2">' . _('Find new Item Code') . '</font>
 			<button type="submit" name="StockSearch" title="' . _('Find an item code') . '"><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" /></button></th></tr>';
 	echo '<tr>
 			<th>' . _('StockID') . '</th>
@@ -526,7 +527,7 @@ if (isset($SupplierID)) {
 		$StockSQL="SELECT description, units FROM stockmaster WHERE stockid='" . $_POST['Select'] . "'";
 		$StockResult=DB_query($StockSQL, $db);
 		$StockRow=DB_fetch_array($StockResult);
-		echo '<tr bgcolor="#847F7F">
+		echo '<tr>
 				<td><input type="hidden" value="' . $_POST['Select'] . '" name="StockID0" />' . $_POST['Select'] . '</td>
 				<td>' . $StockRow['description'] . '</td>
 				<td><input type="text" class="number" size="11" value="0.0000" name="Price0" /></td>
