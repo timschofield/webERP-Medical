@@ -248,8 +248,13 @@ if (!isset($_POST['Description'])) {
 	$_POST['Description']='';
 }
 echo '<table class="selection">
-<tr><td>' . _('Tax Type Description') . ':</td>
-<td><input type="text" name="Description" size="21" maxlength="20" value="' . $_POST['Description'] . '" /></td></tr>';
+		<tr>
+			<th class="header" colspan="2">' . _('New Tax Authority Information') . '</th>
+		</tr>
+		<tr>
+			<td>' . _('Tax Type Description') . ':</td>
+			<td><input type="text" name="Description" size="21" maxlength="20" value="' . $_POST['Description'] . '" /></td>
+		</tr>';
 
 
 echo '<tr><td>' . _('Input tax GL Account') . ':</td>
@@ -306,7 +311,7 @@ echo '<td><input type="text" name="BankSwift" size="15" maxlength="14" value="' 
 
 echo '</table>';
 
-echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div></form>';
+echo '<br /><div class="centre"><button type="submit" name="submit">' . _('Enter Information') . '</button></div></form>';
 
 include('includes/footer.inc');
 
