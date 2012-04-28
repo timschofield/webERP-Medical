@@ -29,7 +29,7 @@ if (!isset($_SESSION['SuppTrans'])){
 
 /*If the user hit the Add to transaction button then process this first before showing  all GL codes on the transaction otherwise it wouldnt show the latest addition*/
 
-if (isset($_POST['AddGLCodeToTrans']) and $_POST['AddGLCodeToTrans'] == _('Enter GL Line')){
+if (isset($_POST['AddGLCodeToTrans'])){
 
 	$InputError = False;
 	if ($_POST['GLCode'] == ''){
@@ -194,7 +194,7 @@ echo '<tr>
 	</tr>
 	</table><br />';
 
-echo '<div class="centre"><input type="submit" name="AddGLCodeToTrans" value="' . _('Enter GL Line') . '" /></div>';
+echo '<div class="centre"><button type="submit" name="AddGLCodeToTrans">' . _('Enter GL Line') . '</button></div>';
 
 echo '</form>';
 include('includes/footer.inc');
