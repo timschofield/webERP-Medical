@@ -215,7 +215,7 @@ textarea {
 input {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 100%;
-	background-color: #e3e1e1;
+	background-color: transparent;
 	border-width:1px;
     color:#645959;
 	border-bottom-color: gray;
@@ -232,15 +232,15 @@ input {
 input:hover {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 100%;
-	background-color: #e3e5f5;
+	background-color: transparent;
 	border-width:1px;
-	border-bottom-color: gray;
+	border-bottom-color: black;
 	border-bottom-style: solid;
-	border-top-color: gray;
+	border-top-color: black;
 	border-top-style: solid;
-	border-left-color: gray;
+	border-left-color: black;
 	border-left-style: solid;
-	border-right-color: gray;
+	border-right-color: black;
 	border-right-style: solid;
 	border-radius: 3px;
 }
