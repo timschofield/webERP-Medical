@@ -229,7 +229,7 @@ if (!isset($_SESSION['tender'.$identifier])
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection">';
 	echo '<tr>
-			<th colspan="4"><font size="3" color="#616161">' . _('Tender header details') . '</font></th>
+			<th colspan="4" class="header">' . _('Tender header details') . '</th>
 		</tr>';
 	echo '<tr>
 			<td>' . _('Delivery Must Be Made Before') . '</td>
@@ -336,7 +336,7 @@ if (!isset($_SESSION['tender'.$identifier])
 	}
 
 	echo '</select>
-		<input type="submit" name="LookupDeliveryAddress" value="' ._('Select') . '" /></td>
+		<button type="submit" name="LookupDeliveryAddress">' ._('Select') . '</button></td>
 		</tr>';
 
 	/* Display the details of the delivery location
@@ -385,7 +385,7 @@ if (!isset($_SESSION['tender'.$identifier])
 			<td valign="top">
 			<table class="selection">';
 	echo '<tr>
-			<th colspan="4"><font size="3" color="#616161">' . _('Suppliers To Send Tender') . '</font></th>
+			<th colspan="4" class="header">' . _('Suppliers To Send Tender') . '</th>
 		</tr>';
 	echo '<tr>
 			<th>'. _('Supplier Code') . '</th>
@@ -404,7 +404,7 @@ if (!isset($_SESSION['tender'.$identifier])
 	/* Item Details
 	 */
 	echo '<td valign="top"><table class="selection">';
-	echo '<tr><th colspan="6"><font size="3" color="#616161">' . _('Items in Tender') . '</font></th></tr>';
+	echo '<tr><th colspan="6" class="header">' . _('Items in Tender') . '</th></tr>';
 	echo '<tr>
 			<th>'._('Stock ID').'</th>
 			<th>'._('Description').'</th>
@@ -433,15 +433,15 @@ if (!isset($_SESSION['tender'.$identifier])
 	echo '</table></td></tr></table><br />';
 
 	echo '<div class="centre">
-			<input type="submit" name="Suppliers" value="' . _('Select Suppliers') . '" />
-			<input type="submit" name="Items" value="' . _('Select Item Details') . '" />
+			<button type="submit" name="Suppliers">' . _('Select Suppliers') . '</button>
+			<button type="submit" name="Items">' . _('Select Item Details') . '</button>
 		</div>
 		<br />';
 	if ($_SESSION['tender'.$identifier]->LinesOnTender > 0
 		and $_SESSION['tender'.$identifier]->SuppliersOnTender > 0) {
 
 		echo '<div class="centre">
-				<input type="submit" name="Save" value="' . _('Save Tender') . '" />
+				<button type="submit" name="Save">' . _('Save Tender') . '</button>
 			</div>';
 	}
 	echo '</form>';
@@ -533,7 +533,7 @@ if (isset($_POST['Suppliers'])) {
 	} else {
 		echo '<input type="text" name="SupplierCode" size="15" maxlength="18" />';
 	}
-	echo '</td></tr></table><br /><div class="centre"><input type="submit" name="SearchSupplier" value="' . _('Search Now') . '" /></div>';
+	echo '</td></tr></table><br /><div class="centre"><button type="submit" name="SearchSupplier">' . _('Search Now') . '</button></div>';
 	echo '</form>';
 }
 
@@ -565,16 +565,14 @@ if (isset($_POST['SearchSupplier'])) {
 			$ListPage++;
 		}
 		echo '</select>
-			<input type="submit" name="Go" value="' . _('Go') . '" />
-			<input type="submit" name="Previous" value="' . _('Previous') . '" />
-			<input type="submit" name="Next" value="' . _('Next') . '" />';
+			<button type="submit" name="Go">' . _('Go') . '</button>
+			<button type="submit" name="Previous">' . _('Previous') . '</button>
+			<button type="submit" name="Next">' . _('Next') . '</button>';
 		echo '<br />';
 	}
 	echo '<input type="hidden" name="Search" value="' . _('Search Now') . '" />';
 	echo '<br />
-		<br />
-		<br />
-		<table cellpadding="2" colspan="7">';
+		<table cellpadding="2" colspan="7" class="selection">';
 	echo '<tr>
 	  		<th>' . _('Code') . '</th>
 			<th>' . _('Supplier Name') . '</th>
@@ -598,7 +596,7 @@ if (isset($_POST['SearchSupplier'])) {
 			echo '<tr class="OddTableRows">';
 			$k = 1;
 		}
-		echo '<td><input type="submit" name="SelectedSupplier" value="'.$myrow['supplierid'].'" /></td>
+		echo '<td><button type="submit" name="SelectedSupplier" value="'.$myrow['supplierid'].'" />'.$myrow['supplierid'].'</button></td>
 			<td>'.$myrow['suppname'].'</td>
 			<td>'.$myrow['currcode'].'</td>
 			<td>'.$myrow['address1'].'</td>
@@ -671,7 +669,7 @@ if (isset($_POST['Items'])) {
 		</table>
 		<br />
 		<div class="centre">
-			<input type="submit" name="Search" value="' . _('Search Now') . '" />
+			<button type="submit" name="Search">' . _('Search Now') . '</button>
 		</div>
 		<br />
 		</form>';
@@ -803,7 +801,7 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 
 	if (isset($SearchResult)) {
 
-		echo '<table cellpadding="1">';
+		echo '<table cellpadding="1" class="selection">';
 		echo '<tr>
 				<th>' . _('Code')  . '</th>
 				<th>' . _('Description') . '</th>
@@ -852,7 +850,7 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 		echo '<a name="end"></a>
 			<br />
 			<div class="centre">
-				<input type="submit" name="NewItem" value="' . _('Add to Tender') . '" />
+				<button type="submit" name="NewItem">' . _('Add to Tender') . '</button>
 			</div>';
 	}#end if SearchResults to show
 
