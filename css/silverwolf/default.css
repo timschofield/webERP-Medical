@@ -78,7 +78,7 @@ th.number {
 }
 
 th.header {
-	font-weight: bold;
+	font-weight: normal;
 	background: -moz-linear-gradient(left, #DCDCDC, #8D98A6);
 	background: -webkit-linear-gradient(left, #DCDCDC, #8D98A6);
 	font-size: 16px;

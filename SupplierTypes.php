@@ -50,7 +50,7 @@ if (isset($_POST['Submit']) or isset($_POST['Update'])) {
 		     WHERE typename = '" . $_POST['typename'] . "'";
 	$CheckResult=DB_query($CheckSQL, $db);
 
-	if (DB_num_rows($CheckResult)>0) {
+	if (!isset($_POST['Update']) and DB_num_rows($CheckResult)>0) {
 		$InputError = 1;
 		echo prnMsg(_('You already have a supplier type called').' '.$_POST['typename'],'error');
 		$Errors[$i] = 'SupplierName';
@@ -150,7 +150,7 @@ if (!isset($SelectedType)){
 
 	echo '<table class="selection">';
 	echo '<br />';
-	echo '<tr><th colspan="4"><font size="2" color="#616161">' . _('Supplier Types') . '</th></tr>';
+	echo '<tr><th colspan="4" class="header">' . _('Supplier Types') . '</th></tr>';
 	echo '<tr>
 			<th>' . _('Type ID') . '</th>
 			<th>' . _('Type Name') . '</th>
@@ -193,7 +193,7 @@ if (! isset($_GET['delete'])) {
 	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection">'; //Main table
-	echo '<tr><th colspan="2"><font size="2" color="#616161">' . _('Supplier Type Details') . '</th></tr>';
+	echo '<tr><th colspan="2" class="header">' . _('Supplier Type Details') . '</th></tr>';
 	// The user wish to EDIT an existing type
 	if ( isset($_GET['Edit']) ) {
 
@@ -222,7 +222,7 @@ if (! isset($_GET['delete'])) {
 
 		echo '</table><br />'; // close main table
 
-		echo '<div class="centre"><input type="submit" name="Update" value="' . _('Update') . '" /></div><br />';
+		echo '<div class="centre"><button type="submit" name="Update">' . _('Update') . '</button></div><br />';
 
 	} else {
 
@@ -233,7 +233,7 @@ if (! isset($_GET['delete'])) {
 
 		echo '</table><br />'; // close main table
 
-		echo '<div class="centre"><input type="submit" name="Submit" value="' . _('Insert') . '" /></div><br />';
+		echo '<div class="centre"><button type="submit" name="Submit">' . _('Insert') . '</button></div><br />';
 	}
 
 	echo '</form>';
