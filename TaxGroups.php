@@ -225,7 +225,7 @@ if (!isset($_POST['GroupName'])) {
 }
 echo '<tr><td>' . _('Tax Group') . ':</td>
 		<td><input type="text" name="GroupName" size="40" maxlength="40" value="' . $_POST['GroupName'] . '" /></td>';
-echo '<td><input type="submit" name="submit" value="' . _('Enter Group') . '" /></td></tr></form>';
+echo '<td><button type="submit" name="submit">' . _('Enter Group') . '</button></td></tr></form>';
 
 
 if (isset($SelectedGroup)) {
@@ -299,7 +299,7 @@ if (isset($SelectedGroup)) {
 
 		}
 		echo '</table>';
-		echo '<br /><div class="centre"><input type="submit" name="UpdateOrder" value="' . _('Update Order') . '" /></div>';
+		echo '<br /><div class="centre"><button type="submit" name="UpdateOrder">' . _('Update Order') . '</button></div>';
 	}
 
 	echo '</form>';
