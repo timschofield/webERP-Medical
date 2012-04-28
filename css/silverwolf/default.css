@@ -60,7 +60,8 @@ table {
 
 th {
 	font-weight: normal;
-	background-color: #C3C3C3;
+	background-color: transparent;
+	border: solid #A49999 1px;
 	font-size: 100%;
 	color: #300;
 	text-align: center;
@@ -97,7 +98,7 @@ td {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 100%;
 	text-align: left;
-	border-radius: 5px;
+	background-color: transparent;
 }
 
 td.select {
@@ -110,9 +111,9 @@ table.selection {
 	background: -webkit-linear-gradient(left, #DCDCDC, #8D98A6);
 	border: solid #A49999 1px;
 	border-radius: 5px;
-	-moz-box-shadow: 3px 3px 2px #888;
-	-webkit-box-shadow: 3px 3px 2px #888;
-	box-shadow: 3px 3px 2px #888;
+	-moz-box-shadow: 3px 3px 2px #B1B1B1;
+	-webkit-box-shadow: 3px 3px 2px #B1B1B1;
+	box-shadow: 3px 3px 2px #B1B1B1;
 }
 
 td.number {
