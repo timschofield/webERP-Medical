@@ -94,7 +94,8 @@ td.select {
 
 table.selection {
 	margin-bottom: 5px;
-	background-color:#DCDCDC;
+	background: -moz-linear-gradient(left, #DCDCDC, #8D98A6);
+	background: -webkit-linear-gradient(left, #DCDCDC, #8D98A6);
 	border: solid #A49999 1px;
 	border-radius: 5px;
 	-moz-box-shadow: 3px 3px 2px #888;
@@ -247,32 +248,6 @@ button {
 	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
 	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
 	box-shadow: 0 1px 2px rgba(0,0,0,.2);	border-right-style: solid;
-}
-
-select {
-	border-width:1px;
-	border-bottom-color: gray;
-	border-bottom-style: solid;
-	border-top-color: gray;
-	border-top-style: solid;
-	border-left-color: gray;
-	border-left-style: solid;
-	border-right-color: gray;
-	border-right-style: solid;
-     margin: 0;
-	-webkit-border-radius: .5em;
-	-moz-border-radius: .5em;
-	border-radius: .5em;
-    -webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
-    -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
-    box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
-	background-color: #e3e1e1;
-    color:#645959;
-    display: inline-block;
-    -webkit-appearance:none;
-    -moz-appearance:none;
-    appearance:none;
-    cursor:pointer;
 }
 
 input.number {

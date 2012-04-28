@@ -340,7 +340,7 @@ if (isset($_POST['TaxAuthority']) and
 
 
 	echo '</table>
-		<br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" />
+		<br /><div class="centre"><button type="submit" name="PrintPDF">' . _('Print PDF') . '</button>
 		</div>
 		</form>';
 
