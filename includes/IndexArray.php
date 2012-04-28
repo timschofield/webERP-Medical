@@ -555,6 +555,7 @@ $MenuItems['system']['Maintenance']['URL'] = array ('/StockCategories.php',
 													);
 
 $MenuItems['Utilities']['Transactions']['Caption'] = array (_('Change A Customer Code'),
+																_('Change An Insurance Company Code'),
 																_('Change A Customer Branch Code'),
 																_('Change An Inventory Item Code'),
 																_('Change A Supplier Code'),
@@ -564,6 +565,7 @@ $MenuItems['Utilities']['Transactions']['Caption'] = array (_('Change A Customer
 																_('Reverse all supplier payments on a specified date'));
 
 $MenuItems['Utilities']['Transactions']['URL'] = array ('/Z_ChangeCustomerCode.php',
+													'/Z_ChangeInsuranceCompanyCode.php',
 													'/Z_ChangeBranchCode.php',
 													'/Z_ChangeStockCode.php',
 													'/Z_ChangeSupplierCode.php',

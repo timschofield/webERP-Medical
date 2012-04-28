@@ -459,7 +459,29 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 echo '<table class="selection" cellspacing="4"><tr><td valign="top"><table class="selection">';
 
 if (!isset($DebtorNo)) {
-	echo '<tr><td>' . _('Company Code') . ':</td><td><input tabindex="1" type="text" name="DebtorNo" size="11" maxlength="10"></td></tr>';
+	if ($_SESSION['Care2xDatabase']=='None') {
+		echo '<tr>
+				<td>' . _('Company Code') . ':</td>
+				<td><input tabindex="1" type="text" name="DebtorNo" size="11" maxlength="10"></td>
+			</tr>';
+	} else {
+		$sql = "SELECT id,
+						name
+					FROM ".$_SESSION['Care2xDatabase'].".care_tz_company";
+		$result = DB_query($sql, $db);
+		echo '<tr>
+				<td>' . _('Insurance Company From Care2x') . ':</td>
+				<td><select tabindex="1" name="DebtorNo">';
+		echo '<option value=""></option>';
+		while ($myrow=DB_fetch_array($result)) {
+			$CheckSQL="SELECT debtorno FROM debtorsmaster WHERE debtorno='" . $myrow['id'] . "'";
+			$CheckResult=DB_query($CheckSQL, $db);
+			if (DB_num_rows($CheckResult)==0) {
+				echo '<option value="' . $myrow['id'] . '">' . $myrow['id'] . ' - ' . $myrow['name'] . '</option>';
+			}
+		}
+		echo '</select></td></tr>';
+	}
 } else {
 	echo '<tr><td>' . _('Company Code') . ':</td><td>' . $DebtorNo . '</td></tr>';
 	$sql = "SELECT debtorsmaster.debtorno,
