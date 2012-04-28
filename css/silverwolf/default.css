@@ -107,8 +107,8 @@ td.select {
 
 table.selection {
 	margin-bottom: 5px;
-	background: -moz-linear-gradient(left, #DCDCDC, #9CA4AE);
-	background: -webkit-linear-gradient(left, #DCDCDC, #9CA4AE);
+	background: -moz-linear-gradient(left, #EEE7E7, #9CA4AE);
+	background: -webkit-linear-gradient(left, #EEE7E7, #9CA4AE);
 	border: solid #A49999 1px;
 	border-radius: 5px;
 	-moz-box-shadow: 3px 3px 2px #B1B1B1;
