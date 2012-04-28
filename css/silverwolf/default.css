@@ -75,6 +75,17 @@ th.number {
 	text-align: right;
 	vertical-align: middle;
 }
+
+th.header {
+	font-weight: normal;
+	background: -moz-linear-gradient(left, #DCDCDC, #8D98A6);
+	background: -webkit-linear-gradient(left, #DCDCDC, #8D98A6);
+	font-size: 16px;
+	color: #616161;
+	text-align: center;
+	vertical-align: middle;
+}
+
 .tableheader {
 	font-weight: normal;
 	background-color: #cccce5;
@@ -86,6 +97,7 @@ td {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 100%;
 	text-align: left;
+	border-radius: 5px;
 }
 
 td.select {

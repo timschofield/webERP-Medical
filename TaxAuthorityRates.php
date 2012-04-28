@@ -76,7 +76,7 @@ $TaxRatesResult = DB_query("SELECT taxauthrates.taxcatid,
 if (DB_num_rows($TaxRatesResult)>0){
 
 	echo '<table cellpadding="2" class="selection">';
-	echo '<tr><th colspan="3"><font size="3" color="#616161">' . _('Update') . ' ' . $myrow['description'] . ' ' . _('Rates') . '</font></th></tr>';
+	echo '<tr><th colspan="3" class="header">' . _('Update') . ' ' . $myrow['description'] . ' ' . _('Rates') . '</th></tr>';
 	$TableHeader = '<tr><th>' . _('Deliveries From') . '<br />' . _('Tax Province') . '</th>
 						<th>' . _('Tax Category') . '</th>
 						<th>' . _('Tax Rate') . ' %</th></tr>';
@@ -113,7 +113,7 @@ if (DB_num_rows($TaxRatesResult)>0){
 	}
 //end of while loop
 echo '</table>';
-echo '<br /><div class="centre"><input type="submit" name="UpdateRates" value="' . _('Update Rates') . '" />';
+echo '<br /><div class="centre"><button type="submit" name="UpdateRates">' . _('Update Rates') . '</button>';
 } //end if tax taxcatid/rates to show
 	else {
 	prnMsg(_('There are no tax rates to show - perhaps the dispatch tax province records have not yet been created?'),'warn');
