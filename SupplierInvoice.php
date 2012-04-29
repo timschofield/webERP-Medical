@@ -258,15 +258,15 @@ if (!isset($_POST['PostInvoice'])){
 			<td><input type="text" class="number" size="11" maxlength="10" name="ExRate" value="' . $_SESSION['SuppTrans']->ExRate . '" /></td></tr>';
 	echo '</table>';
 
-	echo '<br /><div class="centre"><input type="submit" name="GRNS" value="' . _('Purchase Orders') . '" /> ';
+	echo '<br /><div class="centre"><button type="submit" name="GRNS">' . _('Purchase Orders') . '</button>';
 
-	echo '<input type="submit" name="Shipts" value="' . _('Shipments') . '" /> ';
-	echo '<input type="submit" name="Contracts" value="' . _('Contracts') . '" /> ';
+	echo '<button type="submit" name="Shipts">' . _('Shipments') . '</button>';
+	echo '<button type="submit" name="Contracts">' . _('Contracts') . '</button>';
 
 	if ( $_SESSION['SuppTrans']->GLLink_Creditors == 1){
-		echo '<input type="submit" name="GL" value="' . _('General Ledger') . '" /> ';
+		echo '<button type="submit" name="GL">' . _('General Ledger') . '</button>';
 	}
-	echo ' <input type="submit" name="FixedAssets" value="' . _('Fixed Assets') . '" /></div>';
+	echo ' <button type="submit" name="FixedAssets">' . _('Fixed Assets') . '</button></div>';
 
 	$TotalGRNValue = 0;
 
@@ -466,7 +466,7 @@ if (!isset($_POST['PostInvoice'])){
 	}
 
 	echo '<tr>
-			<td colspan="2"><input type="submit" name="ToggleTaxMethod" value="' . _('Update Tax Calculation') . '" /></td>
+			<td colspan="2"><button type="submit" name="ToggleTaxMethod">' . _('Update Tax Calculation') . '</button></td>
 			<td><select name="OverRideTax" onChange="ReloadForm(form1.ToggleTaxMethod)">';
 
 	if ($_POST['OverRideTax']=='Man'){
@@ -540,7 +540,7 @@ if (!isset($_POST['PostInvoice'])){
 					<td>' . _('Comments') . '</td><td><textarea name="Comments" cols="40" rows="2">' . $_SESSION['SuppTrans']->Comments . '</textarea></td>
 				</tr></table>';
 
-	echo '<p><div class="centre"><input type="submit" name="PostInvoice" value="' . _('Enter Invoice') . '" /></div></p>';
+	echo '<p><div class="centre"><button type="submit" name="PostInvoice">' . _('Enter Invoice') . '</button></div></p>';
 
 } else { //do the postings -and dont show the button to process
 
