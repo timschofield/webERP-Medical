@@ -19,13 +19,11 @@ if (isset($_POST['serialno'])) {
 $SN = $SN;
 
 
-echo '<div class="centre">
-<br />
-<form name=SNRESEARCH method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') .'">';
+echo '<form name=SNRESEARCH method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') .'">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo  _('Serial Number') .': <input id="serialno" name="serialno" size="21" maxlength="20" value="'. $SN . '" /> &nbsp;
-<input type="submit" name="submit" /></div><br />
+echo '<table class="selection"><tr><td>' . _('Serial Number') .': </td><td><input id="serialno" name="serialno" size="21" maxlength="20" value="'. $SN . '" /></td> &nbsp;
+<td><button type="submit" name="submit" />' . _('Submit') . '</button></td></tr></table><br />
 </form>';
 
 echo '<script>
