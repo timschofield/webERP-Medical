@@ -65,13 +65,13 @@ if (!isset($_POST['OnHandDate'])){
 
 echo '<td>' . _('On-Hand On Date') . ':</td>
 	<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="OnHandDate" size="12" maxlength="12" value="' . $_POST['OnHandDate'] . '" /></td></tr>';
-echo '<tr><td colspan="6"><div class="centre"><input type="submit" name="ShowStatus" value="' . _('Show Stock Status') .'" /></div></td></tr></table>';
+echo '<tr><td colspan="6"><div class="centre"><button type="submit" name="ShowStatus">' . _('Show Stock Status') .'</button></div></td></tr></table>';
 echo '</form>';
 
 $TotalQuantity = 0;
 
 if(isset($_POST['ShowStatus']) AND Is_Date($_POST['OnHandDate'])) {
-	if ($_POST['StockCategory']='All') {
+	if ($_POST['StockCategory']=='All') {
 		$sql = "SELECT stockid,
 				description,
 				decimalplaces
@@ -158,7 +158,7 @@ if(isset($_POST['ShowStatus']) AND Is_Date($_POST['OnHandDate'])) {
 		}
 
 	}//end of while loop
-	echo '<tr><td>' . _('Total Quantity') . ": " . $TotalQuantity . '</td></tr></table>';
+	echo '<tr><td colspan="3" style="text-align: right;">' . _('Total Quantity') . ': ' . $TotalQuantity . '</td></tr></table>';
 }
 
 include('includes/footer.inc');
