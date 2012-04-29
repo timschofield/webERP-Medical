@@ -677,6 +677,8 @@ p.page_title_text {
         font-size: 150%;
         color: white;
         background-color: #7A7A89;
+	background: -moz-linear-gradient(left, #C3C0C0, #7A7A89);
+	background: -webkit-linear-gradient(left, #C3C0C0, #7A7A89);
         width: 33%;
         border-style: solid;
         border-width: 1px;
