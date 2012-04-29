@@ -104,7 +104,7 @@ if ($_GET['Action'] == 'Enter'){
 
 	}
 
-	echo '</table><br /><div class="centre"><input type="submit" name="EnterCounts" value="' . _('Enter Above Counts') . '" /></div>';
+	echo '</table><br /><div class="centre"><button type="submit" name="EnterCounts">' . _('Enter Above Counts') . '</button></div>';
 
 //END OF action=ENTER
 } elseif ($_GET['Action']=='View'){
@@ -145,7 +145,7 @@ if ($_GET['Action'] == 'Enter'){
 			<td><input type="checkbox" name="DEL[' .$myrow['id'].']" maxlength="20" size="20" /></td></tr>';
 
 	}
-	echo '</table><br /><div class="centre"><input type="submit" name="SubmitChanges" value="' . _('Save Changes') . '" /></div>';
+	echo '</table><br /><div class="centre"><button type="submit" name="SubmitChanges">' . _('Save Changes') . '</button></div>';
 
 //END OF action=VIEW
 }
