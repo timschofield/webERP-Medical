@@ -158,7 +158,7 @@ if (isset($_POST['AnticipatedCost']) AND $_POST['AnticipatedCost']==1){
 
 echo '</td></tr></table><br />';
 
-echo '<div class="centre"><input type="submit" name="AddContractChgToInvoice" value="' . _('Enter Contract Charge') . '" /></div>';
+echo '<div class="centre"><button type="submit" name="AddContractChgToInvoice">' . _('Enter Contract Charge') . '</button></div>';
 
 echo '</form>';
 include('includes/footer.inc');
