@@ -22,7 +22,9 @@ if (!isset($_SESSION['SuppTrans'])){
 	/*It all stops here if there aint no supplier selected and invoice/credit initiated ie $_SESSION['SuppTrans'] started off*/
 }
 
-$_POST['Amount'] = filter_currency_input($_POST['Amount']);
+if (isset($_POST['Amount'])) {
+	$_POST['Amount'] = filter_currency_input($_POST['Amount']);
+}
 
 if (isset($_POST['AddAssetToInvoice'])){
 
@@ -141,7 +143,7 @@ echo '<tr><td>' . _('Amount') . ':</td>
 	<td><input type="text" class="number" name="Amount" size="12" maxlength="11" value="' .  locale_money_format($_POST['Amount'], $_SESSION['SuppTrans']->CurrCode) . '" /></td></tr>';
 echo '</table>';
 
-echo '<br /><div class="centre"><input type="submit" name="AddAssetToInvoice" value="' . _('Enter Fixed Asset') . '" /></div>';
+echo '<br /><div class="centre"><button type="submit" name="AddAssetToInvoice">' . _('Enter Fixed Asset') . '</button></div>';
 
 echo '</form>';
 include('includes/footer.inc');
