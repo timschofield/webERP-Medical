@@ -40,10 +40,10 @@ if (!isset($_POST['BeforeDate']) OR !Is_Date($_POST['BeforeDate'])){
 if (!isset($_POST['AfterDate']) OR !Is_Date($_POST['AfterDate'])){
    $_POST['AfterDate'] = Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m')-1,Date('d'),Date('y')));
 }
-echo ' ' . _('Show Movements before') . ': <input type="text" name="BeforeDate" size="12" maxlength="12" value="' . $_POST['BeforeDate'] . '" />';
-echo ' ' . _('But after') . ': <input type="text" name="AfterDate" size="12" maxlength="12" value="' . $_POST['AfterDate'] . '" />';
+echo ' ' . _('Show Movements before') . ': <input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="BeforeDate" size="12" maxlength="12" value="' . $_POST['BeforeDate'] . '" />';
+echo ' ' . _('But after') . ': <input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="AfterDate" size="12" maxlength="12" value="' . $_POST['AfterDate'] . '" />';
 echo '</td></tr></table><br />';
-echo '<div class="centre"><input type="submit" name="ShowMoves" value="' . _('Show Stock Movements') . '" /></div><br />';
+echo '<div class="centre"><button type="submit" name="ShowMoves">' . _('Show Stock Movements') . '</button></div><br />';
 
 
 $SQLBeforeDate = FormatDateForSQL($_POST['BeforeDate']);
