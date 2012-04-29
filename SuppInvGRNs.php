@@ -111,9 +111,9 @@ if (isset($_GET['Delete'])){
 /*Show all the selected GRNs so far from the SESSION['SuppTrans']->GRNs array */
 
 echo '<table cellpadding="1" class="selection">';
-echo '<tr><th colspan="6"><font size="3" color="#616161">' . _('Invoiced Goods Received Selected') . '</font></th></tr>';
+echo '<tr><th colspan="8" class="header">' . _('Invoiced Goods Received Selected') . '</th></tr>';
 
-$tableheader = '<tr bgcolor="#800000">
+$tableheader = '<tr>
 			<th>' . _('Sequence') . ' #</th>
 			<th>' . _('Item Code') . '</th>
 			<th>' . _('Description') . '</th>
@@ -262,7 +262,7 @@ if (isset($_GET['Modify'])){
 	echo '<input type="hidden" name="ShiptRef" value="' . $GRNTmp->ShiptRef . '" />';
 //	}
 
-	echo '<div class="centre"><p><input type="submit" name="ModifyGRN" value="' . _('Modify Line') . '" /></p></div>';
+	echo '<div class="centre"><p><button type="submit" name="ModifyGRN">' . _('Modify Line') . '</button></p></div>';
 
 	echo '<input type="hidden" name="GRNNumber" value="' . $GRNTmp->GRNNo . '" />';
 	echo '<input type="hidden" name="ItemCode" value="' . $GRNTmp->ItemCode . '" />';
@@ -279,9 +279,9 @@ if (isset($_GET['Modify'])){
 } else {
 	if (count( $_SESSION['SuppTransTmp']->GRNs)>0){   /*if there are any outstanding GRNs then */
 		echo '<table cellpadding="1" class="selection">';
-		echo '<tr><th colspan="10"><font size="3" color="#616161">' . _('Goods Received Yet to be Invoiced From') . ' ' . $_SESSION['SuppTrans']->SupplierName.'</font></th></tr>';
+		echo '<tr><th colspan="10" class="header">' . _('Goods Received Yet to be Invoiced From') . ' ' . $_SESSION['SuppTrans']->SupplierName.'</th></tr>';
 
-		$tableheader = '<tr bgcolor=#800000><th>' . _('Select') . '</th>
+		$tableheader = '<tr><th>' . _('Select') . '</th>
 				<th>' . _('Sequence') . ' #</th>
 				<th>' . _('Order') . '</th>
 				<th>' . _('Item Code') . '</th>
@@ -301,7 +301,7 @@ if (isset($_GET['Modify'])){
 
 			if (isset($POs[$GRNTmp->PONo]) and $POs[$GRNTmp->PONo] != $GRNTmp->PONo) {
 				$POs[$GRNTmp->PONo] = $GRNTmp->PONo;
-				echo '<tr><td><input type="submit" name="AddPOToTrans" value="' . $GRNTmp->PONo . '" /></td><td colspan="3" />' . _('Add Whole PO to Invoice') . '</td></tr>';
+				echo '<tr><td><button type="submit" name="AddPOToTrans" value="' . $GRNTmp->PONo . '" />' . $GRNTmp->PONo . '</button></td><td colspan="3" />' . _('Add Whole PO to Invoice') . '</td></tr>';
 			}
 			if (isset($_POST['SelectAll'])) {
 				echo '<tr><td><input type="checkbox" checked name="GRNNo_' . $GRNTmp->GRNNo . '" /></td>';
@@ -320,9 +320,9 @@ if (isset($_GET['Modify'])){
 				</tr>';
 		}
 		echo '</table>';
-		echo '<br /><div class="centre"><input type="submit" name="SelectAll" value="' . _('Select All') . '" />';
-		echo '<input type="submit" name="DeSelectAll" value="' . _('Deselect All') . '" />';
-		echo '<br /><input type="submit" name="AddGRNToTrans" value="' . _('Add to Invoice') . '" /></div>';
+		echo '<br /><div class="centre"><button type="submit" name="SelectAll">' . _('Select All') . '</button>';
+		echo '<button type="submit" name="DeSelectAll">' . _('Deselect All') . '</button>';
+		echo '<br /><button type="submit" name="AddGRNToTrans">' . _('Add to Invoice') . '</button></div>';
 	}
 }
 
