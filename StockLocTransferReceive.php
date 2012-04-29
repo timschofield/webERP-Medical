@@ -420,9 +420,9 @@ if (isset($_SESSION['Transfer'])){
 	$i = 0; //Line Item Array pointer
 
 	echo '<br /><table class="selection">';
-	echo '<tr><th colspan="7"><font size="3" color="blue">' . _('Location Transfer Reference'). ' #' . $_SESSION['Transfer']->TrfID .
+	echo '<tr><th colspan="7" class="header">' . _('Location Transfer Reference'). ' #' . $_SESSION['Transfer']->TrfID .
 			' '. _('from').' ' . $_SESSION['Transfer']->StockLocationFromName . ' '. _('to'). ' ' .
-				$_SESSION['Transfer']->StockLocationToName . '</font></th></tr>';
+				$_SESSION['Transfer']->StockLocationToName . '</th></tr>';
 
 	$tableheader = '<tr>
 			<th>'. _('Item Code') . '</th>
@@ -488,7 +488,7 @@ if (isset($_SESSION['Transfer'])){
 	} /*end of foreach TransferItem */
 
 	echo '</table><br />
-		<div class="centre"><input type="submit" name="ProcessTransfer" value="'. _('Process Inventory Transfer'). '" />
+		<div class="centre"><button type="submit" name="ProcessTransfer">'. _('Process Inventory Transfer'). '</button>
 		</form></div><br />';
 	echo '<div class="centre"><a href="'.htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'). '?NewTransfer=true">'. _('Select A Different Transfer').'</a></div>';
 
@@ -516,7 +516,7 @@ if (isset($_SESSION['Transfer'])){
 			echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	}
-	echo '</select><input type="submit" name="RefreshTransferList" value="' . _('Refresh Transfer List') . '" /></td></tr></table><br />';
+	echo '</select><button type="submit" name="RefreshTransferList">' . _('Refresh Transfer List') . '</button></td></tr></table><br />';
 
 	$sql = "SELECT DISTINCT reference,
 				locations.locationname as trffromloc,
@@ -532,7 +532,7 @@ if (isset($_SESSION['Transfer'])){
 		$LocResult = DB_query($LocSql,$db);
 		$LocRow = DB_fetch_array($LocResult);
 		echo '<table class="selection">';
-		echo '<tr><th colspan="4"><font size="3" color="blue">'._('Pending Transfers Into').' '.$LocRow['locationname'].'</font></th></tr>';
+		echo '<tr><th colspan="4" class="header">'._('Pending Transfers Into').' '.$LocRow['locationname'].'</th></tr>';
 		echo '<tr>
 				<th>'. _('Transfer Ref'). '</th>
 				<th>'. _('Transfer From'). '</th>
