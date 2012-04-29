@@ -53,10 +53,10 @@ if ($myrow['mbflag']=='K'){
 }
 
 echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
-echo '<div class="centre"><input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo _('Stock Code') . ':<input type="text" name="StockID" size="21" value="' . $StockID . '" maxlength="20" />';
+echo '<table class="selection"><input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
+echo '<tr><td>' . _('Stock Code') . ':</td><td><input type="text" name="StockID" size="21" value="' . $StockID . '" maxlength="20" /></td>';
 
-echo ' <input type="submit" name="ShowStatus" value="' . _('Show Stock Status') . '" /></div>';
+echo '<td><button type="submit" name="ShowStatus">' . _('Show Stock Status') . '</button></td></tr></table>';
 
 $sql = "SELECT locstock.loccode,
 				locations.locationname,
