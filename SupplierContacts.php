@@ -244,7 +244,7 @@ if (! isset($_GET['delete'])) {
 		<td><input type="text" name="Email" size="51" maxlength="50" value="' . $_POST['Email'] . '" /></td></tr>
 		</table><br />';
 
-	echo '<div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" />';
+	echo '<div class="centre"><button type="submit" name="submit">' . _('Enter Information') . '</button>';
 	echo '</div></form>';
 
 } //end if record deleted no point displaying form to add record
