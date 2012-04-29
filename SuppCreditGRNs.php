@@ -74,7 +74,7 @@ if (isset($_GET['Delete'])){
 /*Show all the selected GRNs so far from the SESSION['SuppTrans']->GRNs array */
 
 echo '<table cellpadding="0" class="selection">';
-echo '<tr><th colspan="6"><font size="3" color="#616161">' . _('Credits Against Goods Received Selected') . '</font></th></tr>';
+echo '<tr><th colspan="6" class="header">' . _('Credits Against Goods Received Selected') . '</th></tr>';
 $TableHeader = '<tr><th>' . _('GRN') . '</th>
 					<th>' . _('Item Code') . '</th>
 					<th>' . _('Description') . '</th>
@@ -150,9 +150,8 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 
 echo '<br /><table cellpadding="2" class="selection">';
 
-echo '<tr><th colspan="10"><font size="3" color="#616161">' . _('Show Goods Received Since') . ':&nbsp;</font>';
-echo '<input type="text" name="Show_Since" maxlength="11" size="12" class="date" alt='.$_SESSION['DefaultDateFormat'].' value="' . $_POST['Show_Since'] . '" />
-		<font size="3" color="#616161"> ';
+echo '<tr><th colspan="10" class="header">' . _('Show Goods Received Since') . ':&nbsp;';
+echo '<input type="text" name="Show_Since" maxlength="11" size="12" class="date" style="font-size: 10px"  alt='.$_SESSION['DefaultDateFormat'].' value="' . $_POST['Show_Since'] . '" />&nbsp;&nbsp;';
 echo  _('From') . ' ' . $_SESSION['SuppTrans']->SupplierName . '</font></th></tr>';
 
 $TableHeader = '<tr><th>' . _('GRN') . '</th>
@@ -180,7 +179,7 @@ while ($myrow=DB_fetch_array($GRNResults)){
 		}
 	}
 	if ($GRNAlreadyOnCredit == False){
-		echo '<tr><td><input type="submit" name="GRNNo" value="' . $myrow['grnno'] . '" /></td>
+		echo '<tr><td><button type="submit" name="GRNNo" value="' . $myrow['grnno'] . '" />' . $myrow['grnno'] . '</button></td>
 			  		<td>' . $myrow['orderno'] . '</td>
 			  		<td>' . $myrow['itemcode'] . '</td>
 			  		<td>' . $myrow['itemdescription'] . '</td>
@@ -257,7 +256,7 @@ if (isset($_POST['GRNNo']) AND $_POST['GRNNo']!=''){
 		echo '<input type="hidden" name="ShiptRef" value="' . $myrow['shiptref'] . '" />';
 	}
 
-	echo '<br /><div class="centre"><input type="submit" name="AddGRNToTrans" value="' . _('Add to Credit Note') . '" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="AddGRNToTrans">' . _('Add to Credit Note') . '</button></div>';
 
 
 	echo '<input type="hidden" name="GRNNumber" value="' . $_POST['GRNNo'] . '" />';

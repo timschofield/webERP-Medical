@@ -79,6 +79,15 @@ th.number {
 	vertical-align: middle;
 }
 
+th.date {
+	font-weight: normal;
+	background-color: #cccce5;
+	border-radius: 5px;
+	font-size: 10px;
+	color: #300;
+	vertical-align: middle;
+}
+
 th.header {
 	font-weight: normal;
 	background: transparent;
