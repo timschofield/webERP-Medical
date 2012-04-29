@@ -56,7 +56,7 @@ if (isset($StockID)) {
 					include('includes/footer.inc');
 					exit;
 				}
-				echo '<tr><th colspan="6"><font color="#616161" size="3"><b>'.$StockID . ' - ' . $myrow['description'] .'</b>  (' . _('in units of') . ' ' . $myrow['units'] . ')</font></th></tr>';
+				echo '<tr><th colspan="6" class="header"><b>'.$StockID . ' - ' . $myrow['description'] .'</b>  (' . _('in units of') . ' ' . $myrow['units'] . ')</th></tr>';
 			}
 
     		$tableheader = '<tr><th>' . _('Used By') . '</th>

@@ -143,7 +143,7 @@ if (!isset($StockID)) {
 		}
 
 		echo '</select> &nbsp&nbsp';
-		echo '<input type="submit" name="SearchOrders" value="' . _('Search') . '" />';
+		echo '<button type="submit" name="SearchOrders">' . _('Search') . '</button>';
 		echo '&nbsp;&nbsp;<a href="' . $rootpath . '/WorkOrderEntry.php">' . _('New Work Order') . '</a></td></tr></table><br />';
 	}
 
@@ -156,7 +156,7 @@ if (!isset($StockID)) {
 
 	echo '<table class="selection">
 			<tr>
-				<th colspan="6"><font size="3" color="#616161">' . _('To search for work orders for a specific item use the item selection facilities below') . '</font></th>
+				<th colspan="6" class="header">' . _('To search for work orders for a specific item use the item selection facilities below') . '</th>
 			</tr>
 	  	<tr>
 	  		<td><font size="1">' . _('Select a stock category') . ':</font>
@@ -176,8 +176,8 @@ if (!isset($StockID)) {
 				<td><input type="text" name="StockCode" size="15" maxlength="18" /></td>
 			</tr>
 		</table><br />';
-	echo '<div class="centre"><input type="submit" name="SearchParts" value="' . _('Search Items Now') . '" />
-		<input type="submit" name="ResetPart" value="' . _('Show All') . '" /></div>';
+	echo '<div class="centre"><button type="submit" name="SearchParts">' . _('Search Items Now') . '</button>
+		<button type="submit" name="ResetPart">' . _('Show All') . '</button></div>';
 }
 
 if (isset($StockItemsResult)) {
@@ -204,11 +204,12 @@ if (isset($StockItemsResult)) {
 			$k++;
 		}
 
-		printf('<td><input type="submit" name="SelectedStockItem" value="%s" /></td>
+		printf('<td><button type="submit" name="SelectedStockItem" value="%s" />%s</button></td>
 			<td>%s</td>
 			<td class="number">%s</td>
 			<td>%s</td>
 			</tr>',
+			$myrow['stockid'],
 			$myrow['stockid'],
 			$myrow['description'],
 			$myrow['qoh'],

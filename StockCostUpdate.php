@@ -130,12 +130,12 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 echo '<table cellpadding="2" class="selection">';
 echo '<tr>
 		<th colspan="2">' . _('Item Code') . ':<input type="text" name="StockID" value="' . $StockID . '" maxlength="20" />';
-echo '<input type="submit" name="Show" value="' . _('Show Cost Details') . '" /></th></tr>';
+echo '<button type="submit" name="Show">' . _('Show Cost Details') . '</button></th></tr>';
 echo '<tr>
-		<th colspan="2"><font color="#616161" size="2">' . $StockID . ' - ' . $myrow['description'] . '</font></th>
+		<th colspan="2" class="header">' . $StockID . ' - ' . $myrow['description'] . '</th>
 	</tr>';
 echo '<tr>
-		<th colspan="2"><font color="#616161" size="2">'. _('Total Quantity On Hand') . ': ' . locale_number_format($myrow['totalqoh'], $myrow['decimalplaces']) . ' ' . $myrow['units'] .'</font></th>
+		<th colspan="2" class="header">'. _('Total Quantity On Hand') . ': ' . locale_number_format($myrow['totalqoh'], $myrow['decimalplaces']) . ' ' . $myrow['units'] .'</th>
 	</tr>';
 
 if (($myrow['mbflag']=='D' AND $myrow['stocktype'] != 'L')

@@ -46,7 +46,7 @@ if (DB_num_rows($GetShiptHdrResult)==0) {
 $HeaderData = DB_fetch_array($GetShiptHdrResult);
 echo '<br />';
 echo '<table class="selection">';
-echo '<tr><th colspan="4"><font size="3" color="#616161">'._('Shipment Details').'</font></th></tr>';
+echo '<tr><th colspan="4" class="header">'._('Shipment Details').'</th></tr>';
 echo '<tr>
 		<td><b>'. _('Shipment') .': </td>
 		<td><b>' . $_GET['SelectedShipment'] . '</b></td>
@@ -137,7 +137,7 @@ if (DB_num_rows($LineItemsResult) > 0) {
 	}
 
 	echo '<br /><table cellpadding="2" class="selection">';
-	echo '<tr><th colspan="9"><font color="#616161" size="3">' . _('Items on shipment'). '</font></th></tr>';
+	echo '<tr><th colspan="9" class="header">' . _('Items on shipment'). '</th></tr>';
 
 	$TableHeader = '<tr>
 						<th>'. _('Item'). '</th>
@@ -499,7 +499,7 @@ $sql = "SELECT suppliers.suppname,
 $ChargesResult = DB_query($sql,$db);
 
 echo '<table cellpadding="2" class="selection">';
-echo '<tr><th colspan="6"><font color="#616161" size="3">' . _('Shipment Charges Against Products'). '</font></th></tr>';
+echo '<tr><th colspan="6" class="header">' . _('Shipment Charges Against Products'). '</th></tr>';
 
 $TableHeader = '<tr>
 		<th>'. _('Supplier'). '</th>
@@ -570,7 +570,7 @@ $sql = "SELECT suppliers.suppname,
 $ChargesResult = DB_query($sql,$db);
 
 echo '<table cellpadding="2" class="selection">';
-echo '<tr><th colspan="6"><font color="#616161" size="3">'._('General Shipment Charges').'</font></th></tr>';
+echo '<tr><th colspan="6" class="header">'._('General Shipment Charges').'</th></tr>';
 
 $TableHeader = '<tr>
 					<th>'. _('Supplier'). '</th>
@@ -630,7 +630,7 @@ if ( isset($_GET['Close'])) { /* Only an opportunity to confirm user wishes to c
 				<option value="No">'. _('No') . '</option>
 			</select>';
 		}
-	echo '<br /><br /><input type="submit" name="Close" value="'. _('Confirm OK to Close'). '" />';
+	echo '<br /><br /><button type="submit" name="Close">'. _('Confirm OK to Close'). '</button>';
 	echo '</form></div>';
 }
 

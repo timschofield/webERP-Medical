@@ -68,10 +68,10 @@ if (!isset($_POST['continue']) and !isset($_POST['CreateSQLFile'])) {
 //		echo '</tr>';
 	}
 	echo '<table class="selection"><tr>';
-	echo '<th colspan="4"><font size="2" color="#616161"><b>'._('Database Updates Have Been Run').'</b></font></th></tr>';
+	echo '<th colspan="4" class="header"><b>'._('Database Updates Have Been Run').'</b></th></tr>';
 	echo '<tr><td style="background-color: #fddbdb;color: red;">'.$_SESSION['Updates']['Errors'].' '._('updates have errors in them').'</td></tr>';
 	echo '<tr><td style="background-color: #b9ecb4;color: #006400;">'.$_SESSION['Updates']['Successes'].' '._('updates have succeeded').'</td></tr>';
-	echo '<tr><td style="background-color: #c7ccf6;color: #616161;">'.$_SESSION['Updates']['Warnings'].' '._('updates have not been done as the update was unnecessary on this database').'</td></tr>';
+	echo '<tr><td style="background-color: #c7ccf6;color: #616162;">'.$_SESSION['Updates']['Warnings'].' '._('updates have not been done as the update was unnecessary on this database').'</td></tr>';
 	if ($_SESSION['Updates']['Errors']>0) {
 		for ($i=0; $i<sizeOf($_SESSION['Updates']['Messages']); $i++) {
 			echo '<tr><td>'.$_SESSION['Updates']['Messages'][$i].'</td></tr>';

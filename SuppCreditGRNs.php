@@ -106,8 +106,8 @@ foreach ($_SESSION['SuppTrans']->GRNs as $EnteredGRN){
 	}
 }
 
-echo '<tr><td colspan="5" class="number"><font size="2" color="#616161">' . _('Total Value Credited Against Goods') . ':</font></td>
-		  <td class="number"><font size="2" color="#616161"><u>' . locale_money_format($TotalValueCharged,$_SESSION['SuppTrans']->CurrCode) . '</u></font></td></tr>';
+echo '<tr><th colspan="5" class="header">' . _('Total Value Credited Against Goods') . ':</th>
+		  <th class="header"><u>' . locale_money_format($TotalValueCharged,$_SESSION['SuppTrans']->CurrCode) . '</u></th></tr>';
 echo '</table><br /><div class="centre"><a href="' . $rootpath . '/SupplierCredit.php">' . _('Back to Credit Note Entry') . '</a></div>';
 
 /* Now get all the GRNs for this supplier from the database
@@ -231,7 +231,7 @@ if (isset($_POST['GRNNo']) AND $_POST['GRNNo']!=''){
 	$myrow = DB_fetch_array($GRNEntryResult);
 
 	echo '<br /><table class="selection">';
-	echo '<tr><th colspan="6"><font size="3" color="#616161">' . _('GRN Selected For Adding To A Suppliers Credit Note') . '</font></th></tr>';
+	echo '<tr><th colspan="6" class="header">' . _('GRN Selected For Adding To A Suppliers Credit Note') . '</th></tr>';
 	echo '<tr><th>' . _('GRN') . '</th>
 				<th>' . _('Item') . '</th>
 				<th>' . _('Quantity') . '<br />' . _('Outstanding') . '</th>

@@ -148,8 +148,8 @@ foreach ($_SESSION['SuppTrans']->GRNs as $EnteredGRN){
 }
 
 echo '<tr>
-	<td colspan="5" align="right"><font size="2" color="#616161">' . _('Total Value of Goods Charged') . ':</font></td>
-	<td class="number"><font size="2" color="#616161">' . locale_money_format($TotalValueCharged,$_SESSION['SuppTrans']->CurrCode) . '</font></td>
+	<th colspan="5" align="right" class="header">' . _('Total Value of Goods Charged') . ':</th>
+	<th class="number">' . locale_money_format($TotalValueCharged,$_SESSION['SuppTrans']->CurrCode) . '</th>
 </tr>';
 echo '</table>';
 echo '<br /><div class="centre"><a href="' . $rootpath . '/SupplierInvoice.php">' . _('Back to Invoice Entry') . '</a></div><br />';
@@ -235,7 +235,7 @@ if (isset($_GET['Modify'])){
 	$GRNTmp = $_SESSION['SuppTrans']->GRNs[$GRNNo];
 
 	echo '<table class="selection">';
-	echo '<tr><th colspan="10"><font size="3" color="#616161">' . _('GRN Selected For Adding To A Purchase Invoice') . '</font></th></tr>';
+	echo '<tr><th colspan="10" class="header">' . _('GRN Selected For Adding To A Purchase Invoice') . '</th></tr>';
 	echo '<tr bgcolor=#800000>
 			<th>' . _('Sequence') . ' #</th>
 			<th>' . _('Item') . '</th>

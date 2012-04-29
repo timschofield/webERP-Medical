@@ -68,13 +68,13 @@ $LocStockResult = DB_query($sql, $db, $ErrMsg);
 echo '<table cellpadding="2" class="selection">';
 
 if ($Serialised==1){
-	echo '<tr><th colspan="5"><font color="#616161" size="2">' . _('Serialised items in') . ' ';
+	echo '<tr><th colspan="5" class="header">' . _('Serialised items in') . ' ';
 } else {
-	echo '<tr><th colspan="11"><font color=#616161 size="2">' . _('Controlled items in') . ' ';
+	echo '<tr><th colspan="11" class="header">' . _('Controlled items in') . ' ';
 }
-echo $myrow['locationname']. '</font></th></tr>';
+echo $myrow['locationname']. '</th></tr>';
 
-echo '<tr><th colspan="11"><font color="#616161" size="2">'.$StockID .'-'. $Description .'</b>  (' . _('In units of') . ' ' . $UOM . ')</font></th></tr>';
+echo '<tr><th colspan="11" class="header">'.$StockID .'-'. $Description .'</b>  (' . _('In units of') . ' ' . $UOM . ')</th></tr>';
 
 if ($Serialised == 1){
 	$tableheader = '<tr>
