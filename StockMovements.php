@@ -60,7 +60,7 @@ echo '<tr><th colspan="10">' . _('Show Movements before') . ':
 		<input type="text" name="BeforeDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="12" maxlength="12" value="' . $_POST['BeforeDate'] . '" />';
 echo ' ' . _('But after') . ':
 		<input type="text" name="AfterDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="12" maxlength="12" value="' . $_POST['AfterDate'] . '" />';
-echo '     <input type="submit" name="ShowMoves" value="' . _('Show Stock Movements') . '" /></th></tr>';
+echo '<button type="submit" name="ShowMoves">' . _('Show Stock Movements') . '</button></th></tr>';
 
 $SQLBeforeDate = FormatDateForSQL($_POST['BeforeDate']);
 $SQLAfterDate = FormatDateForSQL($_POST['AfterDate']);
