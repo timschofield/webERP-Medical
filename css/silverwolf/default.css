@@ -689,10 +689,7 @@ p.page_title_text {
 	background: -moz-linear-gradient(left, #C3C0C0, #7A7A89);
 	background: -webkit-linear-gradient(left, #C3C0C0, #7A7A89);
         width: 33%;
-        border-style: solid;
-        border-width: 1px;
-        border-color: #666;
-        border-radius: 5px;
+         border-radius: 5px;
 		margin: 10px auto;
 		text-align:center;
 	-moz-box-shadow: 3px 3px 2px #888;
