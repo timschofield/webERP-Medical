@@ -207,7 +207,7 @@ if the link is not active then OvAmount must be entered manually. */
 	}
 }
 
-if (isset($_POST['GRNS']) and $_POST['GRNS'] == _('Purchase Orders')){
+if (isset($_POST['GRNS'])){
 
 	/*This ensures that any changes in the page are stored in the session before calling the grn page */
 
@@ -231,7 +231,7 @@ if (isset($_POST['Shipts'])){
 	include('includes/footer.inc');
 	exit;
 }
-if (isset($_POST['GL']) and $_POST['GL'] == _('General Ledger')){
+if (isset($_POST['GL'])){
 
 	/*This ensures that any changes in the page are stored in the session before calling the shipments page */
 
@@ -243,7 +243,7 @@ if (isset($_POST['GL']) and $_POST['GL'] == _('General Ledger')){
 	include('includes/footer.inc');
 	exit;
 }
-if (isset($_POST['Contracts']) and $_POST['Contracts'] == _('Contracts')){
+if (isset($_POST['Contracts'])){
 		/*This ensures that any changes in the page are stored in the session before calling the shipments page */
 		echo '<meta http-equiv="refresh" content="0; url=' . $rootpath . '/SuppContractChgs.php?">';
 		echo '<div class="centre">' . _('You should automatically be forwarded to the entry of supplier credit notes against contracts page') .
@@ -251,7 +251,7 @@ if (isset($_POST['Contracts']) and $_POST['Contracts'] == _('Contracts')){
 			'<a href="' . $rootpath . '/SuppContractChgs.php?">' . _('click here') . '</a> ' . _('to continue') . '.</div><br />';
 		exit;
 }
-if (isset($_POST['FixedAssets']) and $_POST['FixedAssets'] == _('Fixed Assets')){
+if (isset($_POST['FixedAssets'])){
 		/*This ensures that any changes in the page are stored in the session before calling the shipments page */
 		echo '<meta http-equiv="refresh" content="0; url=' . $rootpath . '/SuppFixedAssetChgs.php?">';
 		echo '<div class="centre">' . _('You should automatically be forwarded to the entry of invoices against fixed assets page') .
@@ -292,13 +292,13 @@ echo '<td><font color="red">' . _('Exchange Rate') . ':</font></td>
 		<td><input type="text" class="number" size="11" maxlength="10" name="ExRate" value="' . locale_money_format($_SESSION['SuppTrans']->ExRate, $_SESSION['SuppTrans']->CurrCode) . '" /></td></tr>';
 echo '</table>';
 
-echo '<br /><div class="centre"><input type="submit" name="GRNS" value="' . _('Purchase Orders') . '" /> ';
-echo '<input type="submit" name="Shipts" value="' . _('Shipments') . '" /> ';
-echo '<input type="submit" name="Contracts" value="' . _('Contracts') . '" /> ';
+echo '<br /><div class="centre"><button type="submit" name="GRNS">' . _('Purchase Orders') . '</button>';
+echo '<button type="submit" name="Shipts">' . _('Shipments') . '</button>';
+echo '<button type="submit" name="Contracts">' . _('Contracts') . '</button>';
 if ( $_SESSION['SuppTrans']->GLLink_Creditors ==1){
-	echo '<input type="submit" name="GL" value="' . _('General Ledger') . '" /> ';
+	echo '<button type="submit" name="GL">' . _('General Ledger') . '</button>';
 }
-echo '<input type="submit" name="FixedAssets" value="' . _('Fixed Assets') . '" /></div>';
+echo '<button type="submit" name="FixedAssets">' . _('Fixed Assets') . '</button></div>';
 echo '<br />';
 
 if (count($_SESSION['SuppTrans']->GRNs)>0){   /*if there are some GRNs selected for crediting then */
@@ -497,7 +497,7 @@ if ($_SESSION['SuppTrans']->GLLink_Creditors ==1){
 }
 
 echo '<tr>
-		<td colspan="2"><input type="submit" name="ToggleTaxMethod" value="' . _('Change Tax Calculation Method') . '" /></td>
+		<td colspan="2"><button type="submit" name="ToggleTaxMethod">' . _('Change Tax Calculation Method') . '</button></td>
 		<td><select name="OverRideTax" onChange="ReloadForm(form1.ToggleTaxMethod)">';
 
 if ($_POST['OverRideTax']=='Man'){
@@ -566,7 +566,7 @@ echo '<tr><td><font color="red">' . _('Credit Note Total') . '</font></td><td co
 echo '<table class="selection"><tr><td><font color="red">' . _('Comments') . '</font></td><td><textarea name="Comments" cols="40" rows="2">' .
 	  $_SESSION['SuppTrans']->Comments . '</textarea></td></tr></table>';
 
-echo '<p><div class="centre"><input type="submit" name="PostCreditNote" value="' . _('Enter Credit Note') . '" /></div></p>';
+echo '<p><div class="centre"><button type="submit" name="PostCreditNote">' . _('Enter Credit Note') . '</button></div></p>';
 
 
 if (isset($_POST['PostCreditNote'])){

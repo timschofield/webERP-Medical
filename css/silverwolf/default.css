@@ -62,6 +62,7 @@ th {
 	font-weight: normal;
 	background-color: transparent;
 	border: solid #A49999 1px;
+	border-radius: 5px;
 	font-size: 100%;
 	color: #300;
 	text-align: center;
@@ -71,6 +72,7 @@ th {
 th.number {
 	font-weight: normal;
 	background-color: #cccce5;
+	border-radius: 5px;
 	font-size: 100%;
 	color: #300;
 	text-align: right;
