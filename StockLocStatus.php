@@ -13,7 +13,6 @@ if (isset($_GET['StockID'])){
 	$StockID = trim(mb_strtoupper($_POST['StockID']));
 }
 
-
 echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
@@ -91,7 +90,7 @@ if ($_POST['BelowReorderQuantity']=='All'){
 
 echo '</td></tr></table>';
 
-echo '<br /><div class="centre"><input type="submit" name="ShowStatus" value="' . _('Show Stock Status') . '" /></div>';
+echo '<br /><div class="centre"><button type="submit" name="ShowStatus">' . _('Show Stock Status') . '</button></div>';
 
 if (isset($_POST['ShowStatus'])){
 
