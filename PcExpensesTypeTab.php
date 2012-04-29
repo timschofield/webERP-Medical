@@ -139,8 +139,8 @@ or deletion of the records*/
    	echo '</td></tr></table>'; // close main table
 
 	echo '<br /><div class="centre">
-			<input type="submit" name=process value="' . _('Accept') . '" />
-			<input type="submit" name=Cancel value="' . _('Cancel') . '" /></div>';
+			<button type="submit" name=process>' . _('Accept') . '</button>
+			<button type="submit" name=Cancel>' . _('Cancel') . '</button></div>';
 
 	echo '</form>';
 
@@ -157,7 +157,7 @@ or deletion of the records*/
 	$result = DB_query($sql,$db);
 
 	echo '<br /><table class="selection">';
-	echo '<tr><th colspan="3"><font size="2" color="#616161">' . _('Expense Codes for Type of Tab ') . ' ' .$SelectedTab. '</font></th></tr>';
+	echo '<tr><th colspan="3" type="header">' . _('Expense Codes for Type of Tab ') . ' ' .$SelectedTab. '</th></tr>';
 	echo '<tr>
 		<th>' . _('Expense Code') . '</th>
 		<th>' . _('Description') . '</th>
@@ -224,8 +224,8 @@ or deletion of the records*/
 
 		echo '</td></tr></table>'; // close main table
 
-		echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Accept') . '" />
-					<input type="submit" name="Cancel" value="' . _('Cancel') . '" /></div>';
+		echo '<br /><div class="centre"><button type="submit" name="submit">' . _('Accept') . '</button>
+					<button type="submit" name="Cancel">' . _('Cancel') . '</button></div>';
 
 		echo '</form>';
 	} // end if user wish to delete

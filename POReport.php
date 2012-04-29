@@ -630,7 +630,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 		else {
 			$SortBy_Display = $Detail_Array[$_POST['SortBy']];
 		}
-		echo '<tr><th colspan="2"><font size="3" color="#616161">' . _('Header Details') . '</font></th></tr>';
+		echo '<tr><th colspan="2" class="header">' . _('Header Details') . '</th></tr>';
 		echo '<tr><td>' . _('Purchase Order Report') . '</td><td>' . $_POST['ReportType'] . ' By ' . $SortBy_Display . '</td></tr>';
 		echo '<tr><td>' . _('Date Type') . '</td><td>' . $_POST['DateType'] . '</tr>';
 		echo '<tr><td>' . _('Date Range') . '</td><td>' . $_POST['FromDate'] . _(' To ') . $_POST['ToDate'] . '</td></tr>';
@@ -891,7 +891,7 @@ function submit(&$db, $PartNumber, $PartNumberOp, $SupplierId, $SupplierIdOp, $S
 		echo '<input type="hidden" name="Category" value="' . $_POST['Category'] . '" />';
 		echo '<input type="hidden" name="SortBy" value="' . $_POST['SortBy'] . '" />';
 		echo '<input type="hidden" name="SummaryType" value="' . $_POST['SummaryType'] . '" />';
-		echo '<br /><div class="centre"><input type="submit" name="submitcsv" value="' . _('Export as csv file') . '" /></div></td>';
+		echo '<br /><div class="centre"><button type="submit" name="submitcsv">' . _('Export as csv file') . '</button></div></td>';
 		echo '<br /><div class="centre"><a href="">' . _('Return to Selection') . '</a></div>';
 		echo '</form>';
 	} // End of if inputerror != 1
@@ -1600,10 +1600,10 @@ function display(&$db) //####DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_DISPLAY_###
 	echo '</select></td><td>&nbsp</td></tr>';
 	echo '<tr><td>&nbsp</td></tr>
 	<tr>
-		<td colspan="4"><div class="centre"><input type="submit" name="submit" value="' . _('Run Inquiry') . '" /></div></td>
+		<td colspan="4"><div class="centre"><button type="submit" name="submit">' . _('Run Inquiry') . '</button></div></td>
 	</tr>
 	<tr>
-		<td colspan="4"><div class="centre"><input type="submit" name="submitcsv" value="' . _('Export as csv file') . '" /></div></td>
+		<td colspan="4"><div class="centre"><button type="submit" name="submitcsv">' . _('Export as csv file') . '</button></div></td>
 	</tr>
 	</table>
 	<br/>';

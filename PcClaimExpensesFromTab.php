@@ -185,8 +185,8 @@ if (!isset($SelectedTabs)){
 	echo '</select></td></tr>';
    	echo '</td></tr></table>'; // close main table
 
-	echo '<br /><div class="centre"><input type="submit" name="process" value="' . _('Accept') . '" />
-			<input type="submit" name="Cancel" value="' . _('Cancel') . '" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="process">' . _('Accept') . '</button>
+			<button type="submit" name="Cancel">' . _('Cancel') . '</button></div>';
 
 	echo '</form>';
 
@@ -204,7 +204,7 @@ if (isset($SelectedTabs)) {
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 		echo '<br /><table class="selection">';
-		echo '<tr><th colspan="8"><font color="#616161" size="3">' . _('Petty Cash Tab') . ' ' .$SelectedTabs. '</font></th></tr>';
+		echo '<tr><th colspan="8" class="header">' . _('Petty Cash Tab') . ' ' .$SelectedTabs. '</th></tr>';
 		echo '<tr><th colspan="8">' . _('Detail Of Movements For Last ') .': ';
 
 		if(!isset ($Days)){
@@ -212,7 +212,7 @@ if (isset($SelectedTabs)) {
 		}
 		echo '<input type="hidden" name="SelectedTabs" value="' . $SelectedTabs . '" />';
 		echo '<input type="text" class="number" name="Days" value="' . $Days . '" maxlength="3" size="4" /> Days ';
-		echo '<input type="submit" name="Go" value="' . _('Go') . '" />';
+		echo '<button type="submit" name="Go">' . _('Go') . '</button>';
 		echo '</th></tr></form>';
 
 		if (isset($_POST['Cancel'])) {
@@ -329,6 +329,10 @@ if (isset($SelectedTabs)) {
 			$Amount['amount']=0;
 		}
 
+		if(!isset($TabRow['currency'])) {
+			$TabRow['currency']=$_SESSION['CompanyRecord']['currencydefault'];
+		}
+
 		echo '<tr><td colspan="2" class="number">' . _('Current balance') . ':</td>
 					<td class="number">'.locale_money_format($Amount['amount'],$TabRow['currency']).'</td></tr>';
 
@@ -419,8 +423,8 @@ if (isset($SelectedTabs)) {
 		echo '<input type="hidden" name="SelectedTabs" value="' . $SelectedTabs . '" />';
 		echo '<input type="hidden" name="Days" value="' .$Days. '" />';
 		echo '</td></tr></table>'; // close main table
-		echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Accept') . '" />
-				<input type="submit" name="Cancel" value="' . _('Cancel') . '" /></div>';
+		echo '<br /><div class="centre"><button type="submit" name="submit">' . _('Accept') . '</button>
+				<button type="submit" name="Cancel">' . _('Cancel') . '</button></div>';
 		echo '</form>';
 
 	} // end if user wish to delete

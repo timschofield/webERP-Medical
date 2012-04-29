@@ -58,7 +58,7 @@ if (DB_num_rows($GetOrdHdrResult)==1) {
 	$myrow = DB_fetch_array($GetOrdHdrResult);
 	$CustomerCurrency=$myrow['currcode'];
 	echo '<table class="selection">';
-	echo '<tr><th colspan="4"><font size="3" color="#616161">'._('Order Header Details For Order No').' '.$_GET['OrderNumber'].'</font></th></tr>';
+	echo '<tr><th colspan="4" class="header">'._('Order Header Details For Order No').' '.$_GET['OrderNumber'].'</th></tr>';
 	echo '<tr>
 		<th style="text-align: left">' . _('Customer Code') . ':</th>
 		<td class="OddTableRows"><font><a href="' . $rootpath . '/SelectCustomer.php?Select=' . $myrow['debtorno'] . '">' . $myrow['debtorno'] . '</a></td>
@@ -149,7 +149,7 @@ if (DB_num_rows($GetOrdHdrResult)==1) {
 		$OrderTotalWeight = 0;
 
 		echo '<br /><table cellpadding="2" class="selection">';
-		echo '<tr><th colspan="9"><font size="3" color="#616161">'._('Order Line Details For Order No').' '.$_GET['OrderNumber'].'</font></th></tr>';
+		echo '<tr><th colspan="9" class="header">'._('Order Line Details For Order No').' '.$_GET['OrderNumber'].'</th></tr>';
 		echo '<tr>
 			<th>' . _('Item Code') . '</th>
 			<th>' . _('Item Description') . '</th>

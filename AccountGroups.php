@@ -306,7 +306,7 @@ if (!isset($_GET['delete'])) {
 
 		echo '<table class="selection">';
 		echo '<tr>
-				<th colspan="2"><font size="2" color="#616161">' . _('Edit Account Group Details') . '</th>
+				<th colspan="2" class="header">' . _('Edit Account Group Details') . '</th>
 			</tr>';
 		echo '<input type="hidden" name="SelectedAccountGroup" value="' . $_GET['SelectedAccountGroup'] . '" />';
 		echo '<input type="hidden" name="GroupName" value="' . $_POST['GroupName'] . '" />';
@@ -337,7 +337,7 @@ if (!isset($_GET['delete'])) {
 		echo '<br /><table class="selection">';
 		echo '<input  type="hidden" name="SelectedAccountGroup" value="' . $_POST['SelectedAccountGroup'] . '" />';
 		echo '<tr>
-				<th colspan="2"><font size="2" color="#616161">' . _('New Account Group Details') . '</th>
+				<th colspan="2" class="header">' . _('New Account Group Details') . '</th>
 			</tr>';
 		echo '<tr>
 				<td>' . _('Account Group Name') . ':' . '</td>
@@ -406,7 +406,7 @@ if (!isset($_GET['delete'])) {
 		</tr>';
 
 	echo '<tr>
-			<td colspan="2"><div class="centre"><input tabindex="6" type="submit" name="submit" value="' . _('Enter Information') . '" /></div></td>
+			<td colspan="2"><div class="centre"><button tabindex="6" type="submit" name="submit">' . _('Enter Information') . '</button></div></td>
 		</tr>';
 
 	echo '</table><br />';

@@ -11,7 +11,7 @@ if (!isset($_POST['Show'])) {
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<table class="selection">';
-	echo '<tr><th colspan="3"><font color="#616161" size="2">' . _('Selection Criteria') . '</font></th></tr>';
+	echo '<tr><th colspan="3" class="header">' . _('Selection Criteria') . '</th></tr>';
 
 	$sql = "SELECT typeno FROM systypes WHERE typeid=0";
 	$result = DB_query($sql, $db);
@@ -28,8 +28,13 @@ if (!isset($_POST['Show'])) {
 					MAX(trandate) AS todate FROM gltrans WHERE type=0";
 	$result = DB_query($sql, $db);
 	$myrow = DB_fetch_array($result);
-	$FromDate = $myrow['fromdate'];
-	$ToDate = $myrow['todate'];
+	if (isset($FromDate) and $FromDate != '') {
+		$FromDate = $myrow['fromdate'];
+		$ToDate = $myrow['todate'];
+	} else {
+		$FromDate=date('Y-m-d');
+		$ToDate=date('Y-m-d');
+	}
 
 	echo '<tr><td>' . _('Journals Dated Between') . ':</td>
 		<td>' . _('From') . ':'. '<input type="text" name="FromTransDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" maxlength="10" size="11" value="' . ConvertSQLDate($FromDate) . '" /></td>
@@ -37,7 +42,7 @@ if (!isset($_POST['Show'])) {
 		</tr>';
 
 	echo '</table>';
-	echo '<br /><div class="centre"><input type="submit" name="Show" value="' . _('Show transactions'). '" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="Show">' . _('Show transactions'). '</button></div>';
 	echo '</form>';
 } else {
 
@@ -86,7 +91,7 @@ if (!isset($_POST['Show'])) {
 			}
 
 			if ($myrow['typeno']!=$LastJournal) {
-				echo '<tr><td colspan="8" bgcolor="#616161"></td></tr><tr>
+				echo '<tr><td colspan="8"</td></tr><tr>
 					<td>'. ConvertSQLDate($myrow['trandate']) . '</td>
 					<td class="number">'.$myrow['typeno'].'</td>';
 
@@ -114,7 +119,7 @@ if (!isset($_POST['Show'])) {
 
 	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<br /><div class="centre"><input type="submit" name="Return" value="' . _('Select Another Date'). '" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="Return">' . _('Select Another Date'). '</button></div>';
 	echo '</form>';
 }
 include('includes/footer.inc');

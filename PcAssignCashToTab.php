@@ -188,8 +188,8 @@ if (!isset($SelectedTabs)){
 
 	echo '</select></td></tr>';
    	echo '</td></tr></table>'; // close main table
-	echo '<br /><div class="centre"><input type="submit" name="process" value="' . _('Accept') . '" />
-			<input type="submit" name="Cancel" value="' . _('Cancel') . '" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="process">' . _('Accept') . '</button>
+			<button type="submit" name="Cancel">' . _('Cancel') . '</button></div>';
 	echo '</form>';
 
 } elseif (isset($SelectedTabs)) {
@@ -234,13 +234,13 @@ if (!isset($SelectedTabs)){
 		$result = DB_query($sql,$db);
 
 		echo '<br /><table class="selection">';
-		echo '<tr><th colspan="8"><font color="#616161" size="2">' . _('Details Of Petty Cash Tab ') . '' .$SelectedTabs. '</form></th></tr>';
+		echo '<tr><th colspan="8" class="header">' . _('Details Of Petty Cash Tab ') . '' .$SelectedTabs. '</th></tr>';
 		echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<tr><th colspan="8">' . _('Detail Of PC Tab Movements For Last ') .': ';
 		echo '<input type="hidden" name="SelectedTabs" value="' . $SelectedTabs . '" />';
 		echo '<input type="text" class="number" name="Days" value="' . $Days  . '" maxlength="3" size="4" /> Days ';
-		echo '<input type="submit" name="Go" value="' . _('Go') . '" />';
+		echo '<button type="submit" name="Go">' . _('Go') . '</button>';
 		echo '</th></tr></form>';
 		echo '<tr>
 				<th>' . _('Date') . '</th>
@@ -333,9 +333,9 @@ if (!isset($SelectedTabs)){
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<br /><table class="selection">'; //Main table
 		if (isset($_GET['SelectedIndex'])) {
-			echo '<tr><th colspan="2"><font color="#616161" size="3">'._('Update Cash Assignment').'</font></th></tr>';
+			echo '<tr><th colspan="2" class="header">'._('Update Cash Assignment').'</th></tr>';
 		} else {
-			echo '<tr><th colspan="2"><font color="#616161" size="3">'._('New Cash Assignment').'</font></th></tr>';
+			echo '<tr><th colspan="2" class="header">'._('New Cash Assignment').'</th></tr>';
 		}
 		if ( isset($_GET['edit'])) {
 
@@ -397,8 +397,9 @@ if (!isset($SelectedTabs)){
 		echo '</td></tr></table>'; // close main table
 
 		echo '<br /><div class="centre">
-					<input type="submit" name="submit" value="' . _('Accept') . '" />
-					<input type="submit" name="Cancel" value="' . _('Cancel') . '" /></div>';
+					<button type="submit" name="submit">' . _('Accept') . '</button>
+					<button type="submit" name="Cancel">' . _('Cancel') . '</button>
+					</div>';
 
 		echo '</form>';
 

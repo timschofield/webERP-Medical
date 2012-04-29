@@ -837,9 +837,9 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 
 	echo '<table cellpading="2" class="selection">';
 	if ($_SESSION['Items'.$identifier]->Quotation==1){
-		echo '<tr><th colspan="7"><font size="2" color="#616161">'._('Quotation Summary').'</font></th></tr>';
+		echo '<tr><th colspan="7" class="header">'._('Quotation Summary').'</th></tr>';
 	} else {
-		echo '<tr><th colspan="7"><font size="2" color="#616161">'._('Order Summary').'</font></th></tr>';
+		echo '<tr><th colspan="7" class="header">'._('Order Summary').'</th></tr>';
 	}
 	echo '<tr>
 			<th>'. _('Item Code') .'</th>
@@ -966,7 +966,7 @@ if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 }
 
 echo '<br /><table  class="selection">';
-echo '<tr><th colspan="2"><font color="#616161" size="3">'._('Delivery Details').'</font></th></tr>';
+echo '<tr><th colspan="2" class="header">'._('Delivery Details').'</th></tr>';
 echo '<tr>
 		<td>'. _('Deliver To') .':</td>
 		<td><input type="text" size="42" maxlength="40" name="DeliverTo" value="' . $_SESSION['Items'.$identifier]->DeliverTo . '" /></td>
@@ -1113,7 +1113,7 @@ echo '<tr><td>'. _('Charge Freight Cost inc tax') .':</td>';
 echo '<td><input type="text" class="number" size="10" maxlength="12" name="FreightCost" value="' . $_SESSION['Items'.$identifier]->FreightCost . '" /></td>';
 
 if ($_SESSION['DoFreightCalc']==true){
-	echo '<td><input type="submit" name="Update" value="' . _('Recalc Freight Cost') . '" /></td></tr>';
+	echo '<td><button type="submit" name="Update" value="" />' . _('Recalc Freight Cost') . '</button></td></tr>';
 }
 
 if ((!isset($_POST['ShipVia']) OR $_POST['ShipVia']=='') AND isset($_SESSION['Items'.$identifier]->ShipVia)){
@@ -1150,13 +1150,13 @@ echo '</select></td></tr>';
 
 echo '</table>';
 
-echo '<br /><div class="centre"><input type="submit" name="BackToLineDetails" value="' . _('Modify Order Lines') . '" /><br />';
+echo '<br /><div class="centre"><button type="submit" name="BackToLineDetails">' . _('Modify Order Lines') . '</button><br />';
 
 if ($_SESSION['ExistingOrder'.$identifier]==0){
-	echo '<br /><br /><input type="submit" name="ProcessOrder" value="' . _('Place Order') . '" />';
-	echo '<br /><br /><input type="submit" name="MakeRecurringOrder" value="' . _('Create Recurring Order') . '" />';
+	echo '<br /><br /><button type="submit" name="ProcessOrder">' . _('Place Order') . '</button>';
+	echo '<br /><br /><button type="submit" name="MakeRecurringOrder">' . _('Create Recurring Order') . '</button>';
 } else {
-	echo '<br /><input type="submit" name="ProcessOrder" value="' . _('Commit Order Changes') . '" />';
+	echo '<br /><button type="submit" name="ProcessOrder">' . _('Commit Order Changes') . '</button>';
 }
 
 echo '</div></form>';

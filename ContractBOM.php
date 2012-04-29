@@ -233,7 +233,7 @@ if (count($_SESSION['Contract'.$identifier]->ContractBOM)>0){
 	echo '<table cellpadding="2" class="selection">';
 
 	if (isset($_SESSION['Contract'.$identifier]->ContractRef)) {
-		echo  '<tr><th colspan="7"><font color="#616161" size="2">' . _('Contract Reference:') .' '. $_SESSION['Contract'.$identifier]->ContractRef.'</font></th></tr>';
+		echo  '<tr><th colspan="7" class="header">' . _('Contract Reference:') .' '. $_SESSION['Contract'.$identifier]->ContractRef.'</th></tr>';
 	}
 
 	echo '<tr>
@@ -274,8 +274,8 @@ if (count($_SESSION['Contract'.$identifier]->ContractBOM)>0){
 
 	$DisplayTotal = locale_money_format($TotalCost,$_SESSION['Contract'.$identifier]->CurrCode);
 	echo '<tr><td colspan="6" class="number">' . _('Total Cost') . '</td><td class="number"><b>' . $DisplayTotal . '</b></td></tr></table>';
-	echo '<br /><div class="centre"><input type="submit" name="UpdateLines" value="' . _('Update Lines') . '" />';
-	echo '<input type="submit" name="BackToHeader" value="' . _('Back To Contract Header') . '" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="UpdateLines">' . _('Update Lines') . '</button>';
+	echo '<button type="submit" name="BackToHeader">' . _('Back To Contract Header') . '</button></div>';
 
 } /*Only display the contract BOM lines if there are any !! */
 
@@ -316,17 +316,17 @@ if (!isset($_GET['Edit'])) {
 	}
 
 	echo '</select></td>
-		<td><font size="2">' . _('Enter text extracts in the description') . ':</font></td>
+		<td>' . _('Enter text extracts in the description') . ':</td>
 		<td><input type="text" name="Keywords" size="20" maxlength="25" value="' . $_POST['Keywords'] . '" /></td></tr>
 		<tr><td></td>
-		<td><font size="3"> <b>' . _('OR') . ' </b></font><font size="2">' . _('Enter extract of the Stock Code') .
-			':</font></td>
+		<td><font size="3"> <b>' . _('OR') . ' </b></font>' . _('Enter extract of the Stock Code') .
+			':</td>
 		<td><input type="text" name="StockCode" size="15" maxlength="18" value="' . $_POST['StockCode'] . '" /></td>
 		</tr>
 		<tr><td></td>
-		<td><font size="3"><b>' . _('OR') . ' </b></font><font size="2"><a target="_blank" href="'.$rootpath.'/Stocks.php?">' . _('Create a New Stock Item') . '</a></font></td></tr>
+		<td><font size="3"><b>' . _('OR') . ' </b></font><a target="_blank" href="'.$rootpath.'/Stocks.php?">' . _('Create a New Stock Item') . '</a></td></tr>
 		</table><br />
-		<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" />
+		<div class="centre"><button type="submit" name="Search">' . _('Search Now') . '</button>
 		</div><br />';
 
 
@@ -335,7 +335,7 @@ if (!isset($_GET['Edit'])) {
 
 if (isset($SearchResult)) {
 
-	echo '<table cellpadding="1">';
+	echo '<table cellpadding="1" class="selection">';
 
 	$TableHeader = '<tr>
 					<th>' . _('Code')  . '</th>
@@ -390,7 +390,7 @@ if (isset($SearchResult)) {
 		prnMsg( _('Only the first') . ' ' . $Maximum_Number_Of_Parts_To_Show . ' ' . _('can be displayed') . '. ' .
 			_('Please restrict your search to only the parts required'),'info');
 	}
-	echo '<br /><div class="centre"><input type="submit" name="NewItem" value="' . _('Add to Contract Bill Of Material') .'" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="NewItem">' . _('Add to Contract Bill Of Material') .'</button></div>';
 }#end if SearchResults to show
 
 echo '</form>';
