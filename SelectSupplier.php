@@ -145,11 +145,11 @@ if (isset($_SESSION['SupplierID'])) {
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/supplier.png" title="' . _('Supplier') . '" alt="" />' . ' ' . _('Supplier') . ' : <b>' . stripslashes($_SESSION['SupplierID']) .
 				' - ' . $SupplierName . '</b> ' . _('has been selected') . '.</p>';
 	echo '<div class="page_help_text">' . _('Select a menu option to operate using this supplier.') . '</div>';
-	echo '<br /><table width=90% cellpadding="4">';
+	echo '<br /><table width=90% cellpadding="4" class="selection">';
 	echo '<tr>
-		<th width="33%">' . _('Supplier Inquiries') . '</th>
-		<th width="33%">' . _('Supplier Transactions') . '</th>
-		<th width="33%">' . _('Supplier Maintenance') . '</th>
+		<th width="33%" class="header">' . _('Supplier Inquiries') . '</th>
+		<th width="33%" class="header">' . _('Supplier Transactions') . '</th>
+		<th width="33%" class="header">' . _('Supplier Maintenance') . '</th>
 	</tr>';
 	echo '<tr><td valign="top" class="select">'; /* Inquiry Options */
 	echo '<a href="' . $rootpath . '/SupplierInquiry.php?SupplierID=' . stripslashes($_SESSION['SupplierID']) . '">' . _('Supplier Account Inquiry') . '</a><br />';
@@ -179,11 +179,11 @@ if (isset($_SESSION['SupplierID'])) {
 } else {
 	// Supplier is not selected yet
 	echo '<br />';
-	echo '<table width="90%" cellpadding="4">';
+	echo '<table width="90%" cellpadding="4" class="selection">';
 	echo '<tr>
-		<th width="33%">' . _('Supplier Inquiries') . '</th>
-		<th width="33%">' . _('Supplier Transactions') . '</th>
-		<th width="33%">' . _('Supplier Maintenance') . '</th>
+		<th width="33%" class="header">' . _('Supplier Inquiries') . '</th>
+		<th width="33%" class="header">' . _('Supplier Transactions') . '</th>
+		<th width="33%" class="header">' . _('Supplier Maintenance') . '</th>
 		</tr>';
 	echo '<tr><td valign=top class="select">'; /* Inquiry Options */
 	echo '</td><td valign=top class="select">'; /* Supplier Transactions */
@@ -206,7 +206,7 @@ if (isset($_POST['SupplierCode'])) {
 } else {
 	echo '<input type="text" name="SupplierCode" size="15" maxlength="18" />';
 }
-echo '</td></tr></table><br /><div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" /></div>';
+echo '</td></tr></table><br /><div class="centre"><button type="submit" name="Search">' . _('Search Now') . '</button></div>';
 //if (isset($result) AND !isset($SingleSupplierReturned)) {
 if (isset($_POST['Search'])) {
 	$ListCount = DB_num_rows($result);
@@ -234,14 +234,14 @@ if (isset($_POST['Search'])) {
 			$ListPage++;
 		}
 		echo '</select>
-			<input type="submit" name="Go" value="' . _('Go') . '" />
-			<input type="submit" name="Previous" value="' . _('Previous') . '" />
-			<input type="submit" name="Next" value="' . _('Next') . '" />';
+			<button type="submit" name="Go">' . _('Go') . '</button>
+			<button type="submit" name="Previous">' . _('Previous') . '</button>
+			<button type="submit" name="Next">' . _('Next') . '</button>';
 		echo '<br />';
 	}
 	echo '<input type="hidden" name="Search" value="' . _('Search Now') . '" />';
 	echo '<br /><br />';
-	echo '<br /><table cellpadding="2">';
+	echo '<br /><table cellpadding="2" class="selection">';
 	$tableheader = '<tr>
   		<th>' . _('Code') . '</th>
 		<th>' . _('Supplier Name') . '</th>
@@ -266,7 +266,7 @@ if (isset($_POST['Search'])) {
 			echo '<tr class="OddTableRows">';
 			$k = 1;
 		}
-		echo '<td><input type="submit" name="Select" value="'.DB_escape_string($myrow['supplierid']).'" /></td>
+		echo '<td><button type="submit" name="Select" value="'.DB_escape_string($myrow['supplierid']).'">'.DB_escape_string($myrow['supplierid']).'</button></td>
 			<td>'.$myrow['suppname'].'</td>
 			<td>'.$myrow['currcode'].'</td>
 			<td>'.$myrow['address1'].'</td>
@@ -294,9 +294,9 @@ if (isset($ListPageMax) and $ListPageMax > 1) {
 		$ListPage++;
 	}
 	echo '</select>
-		<input type="submit" name="Go" value="' . _('Go') . '" />
-		<input type="submit" name="Previous" value="' . _('Previous') . '" />
-		<input type="submit" name="Next" value="' . _('Next') . '" />';
+		<button type="submit" name="Go">' . _('Go') . '</button>
+		<button type="submit" name="Previous">' . _('Previous') . '</button>
+		<button type="submit" name="Next">' . _('Next') . '</button>';
 	echo '<br />';
 }
 echo '</form>';
@@ -309,7 +309,7 @@ if (isset($_SESSION['SupplierID']) and $_SESSION['SupplierID'] != '') {
 		} else {
 			echo '<div class="centre"><br />';
 			echo '<tr><td colspan="2">';
-			echo '<table width="45%" border="2" cellpadding="4">';
+			echo '<table width="45%" class="selection" cellpadding="4">';
 			echo '<tr><th width="33%">' . _('Supplier Mapping') . '</th></tr>';
 			echo '</td><td valign="top">'; /* Mapping */
 			echo '<div class="centre">' . _('Mapping is enabled, Map will display below.') . '</div>';
@@ -336,8 +336,8 @@ if (isset($_SESSION['SupplierID']) and $_SESSION['SupplierID'] != '') {
 			$row = DB_fetch_array($Total1Result);
 			echo '<br />';
 			echo '<tr><td colspan="2">';
-			echo '<table width="45%" cellpadding="4">';
-			echo '<tr><th width="33%" colspan="2">' . _('Supplier Data') . '</th></tr>';
+			echo '<table width="45%" cellpadding="4" class="selection">';
+			echo '<tr><th width="33%" colspan="2" class="header">' . _('Supplier Data') . '</th></tr>';
 			echo '<tr><td valign="top" class="select">'; /* Supplier Data */
 			//echo "Distance to this Supplier: <b>TBA</b><br />";
 			if ($myrow['lastpaiddate'] == 0) {

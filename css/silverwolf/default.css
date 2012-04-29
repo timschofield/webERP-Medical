@@ -79,8 +79,9 @@ th.number {
 
 th.header {
 	font-weight: normal;
-	background: -moz-linear-gradient(left, #DCDCDC, #8D98A6);
-	background: -webkit-linear-gradient(left, #DCDCDC, #8D98A6);
+	background: transparent;
+	border: solid #A49999 1px;
+	border-radius: 5px;
 	font-size: 16px;
 	color: #616161;
 	text-align: center;
@@ -102,7 +103,9 @@ td {
 }
 
 td.select {
-	background-color:#eee;
+	background-color:transparent;
+	border: solid #A49999 1px;
+	border-radius: 5px;
 }
 
 table.selection {
