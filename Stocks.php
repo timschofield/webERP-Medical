@@ -853,7 +853,7 @@ if (!isset($_POST['CategoryID'])) {
 	$_POST['CategoryID']=$Category;
 }
 
-echo '</select><a target="_blank" href="'. $rootpath . '/StockCategories.php">' . _('Add or Modify Stock Categories') . '</a></td></tr>';
+echo '</select>&nbsp;<a target="_blank" href="'. $rootpath . '/StockCategories.php">' . _('Add or Modify Stock Categories') . '</a></td></tr>';
 
 if (!isset($_POST['EOQ']) or $_POST['EOQ']==''){
 	$_POST['EOQ']=0;
@@ -987,7 +987,7 @@ if ($_POST['Serialised']==1){
 } else {
 		echo '<option value="1">' . _('Yes'). '</option>';
 }
-echo '</select><i>' . _('Note') . ', ' . _('this has no effect if the item is not Controlled') . '</i></td></tr>';
+echo '</select>&nbsp;<i>' . _('Note') . ', ' . _('this has no effect if the item is not Controlled') . '</i></td></tr>';
 
 if ($_POST['Serialised']==1 AND $_POST['MBFlag']=='M'){
 	echo '<tr><td>' . _('Next Serial No (greater than 0 for auto numbering)') . ':</td><td>
@@ -1145,22 +1145,22 @@ while ($PropertyRow=DB_fetch_array($PropertiesResult)){
 	$PropertyCounter++;
 } //end loop round properties for the item category
 unset($StockID);
-echo '</table><br />';
+echo '</table>';
 echo '<input type="hidden" name="PropertyCounter" value="' . $PropertyCounter . '" />';
 
 if ($New==1) {
-	echo '<input type="submit" name="submit" value="' . _('Insert New Item') . '" />';
+	echo '<button type="submit" name="submit">' . _('Insert New Item') . '</button>';
 	echo '<input type="submit" name="UpdateCategories" style="visibility:hidden;width:1px" value="' . _('Categories') . '" />';
 
 } else {
 
 	// Now the form to enter the item properties
 
-	echo '<input type="submit" name="submit" value="' . _('Update') . '" />';
+	echo '<button type="submit" name="submit">' . _('Update') . '</button>';
 	echo '<input type="submit" name="UpdateCategories" style="visibility:hidden;width:1px" value="' . _('Categories') . '" />';
 	echo '<br />';
 	prnMsg( _('Only click the Delete button if you are sure you wish to delete the item!') .  _('Checks will be made to ensure that there are no stock movements, sales analysis records, sales order items or purchase order items for the item') . '. ' . _('No deletions will be allowed if they exist'), 'warn', _('WARNING'));
-	echo '<br /><input type="submit" name="delete" value="' . _('Delete This Item') . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');" />';
+	echo '<br /><button type="submit" name="delete" onclick="return confirm(\'' . _('Are You Sure?') . '\');">' . _('Delete This Item') . '</button>';
 }
 
 echo '</div></form>';
