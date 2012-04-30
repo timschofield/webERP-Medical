@@ -507,7 +507,7 @@ if (!isset($_GET['delete'])) {
 
 	echo '</table>';
 
-	echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div></form>';
+	echo '<br /><div class="centre"><button type="submit" name="submit">' . _('Enter Information') . '</button></div></form>';
 
 } //end if record deleted no point displaying form to add record
 

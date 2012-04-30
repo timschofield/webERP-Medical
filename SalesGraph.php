@@ -178,7 +178,7 @@ if ((! isset($_POST['FromPeriod']) OR ! isset($_POST['ToPeriod']))
 
 	echo '</table>';
 
-	echo '<br /><div class="centre"><input type="submit" name="ShowGraph" value="' . _('Show Sales Graph') .'" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="ShowGraph">' . _('Show Sales Graph') .'</button></div>';
 	include('includes/footer.inc');
 } else {
 

@@ -353,7 +353,7 @@ if (isset($_GET['GRNNo']) AND isset($_POST['SupplierID'])){
 		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="RecdAfterDate" value="' . $_POST['RecdAfterDate'] .'" maxlength="10" size="10" /></td>
 			</tr>';;
 	echo '</table>';
-	echo '<br /><div class="centre"><input type="submit" name="ShowGRNS" value="' . _('Show Outstanding Goods Received') . '" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="ShowGRNS">' . _('Show Outstanding Goods Received') . '</button></div>';
 	if (isset($_POST['ShowGRNS'])){
 
 		$sql = "SELECT grnno,

@@ -438,7 +438,7 @@ if (isset($PartString)) {
 if (!isset($OrderNumber) or $OrderNumber==''){
 	echo '<td>' . _('Order Number') . ':</td><td>' . '<input type="text" name="OrderNumber" maxlength="8" size="9" /></td><td>' . _('for all orders placed after') .
 			': </td><td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'"  name="OrdersAfterDate" maxlength="10" size="11" value="' . $_POST['OrdersAfterDate'] . '" /></td><td>' .
-			'<input type="submit" name="SearchOrders" value="' . _('Search Orders') . '" /></td></tr>';
+			'<button type="submit" name="SearchOrders">' . _('Search Orders') . '</button></td></tr>';
 	echo '<tr><td></td><td>' . _('Customer Ref') . ':</td><td>' . '<input type="text" name="2CustomerRef" maxlength="8" size="9" /></td>
 			<td></td><td colspan="2"><input type="checkbox" '.$ShowChecked.' name="completed" />'._('Show Completed orders only') . '</td></tr>';
 }
@@ -469,10 +469,10 @@ if (!isset($SelectedStockItem)) {
    echo '<td><font size="3"><b> ' ._('OR') . ' </b></font><font size="1">' . _('Enter extract of the Stock Code') . ':</font></td>';
    echo '<td><input type="text" name="StockCode" size="15" maxlength="18" /></td>';
    echo '</tr>';
-   echo '<tr><td colspan="4"><div class="centre"><input type="submit" name="SearchParts" value="' . _('Search Parts Now') . '" />';
+   echo '<tr><td colspan="4"><div class="centre"><button type="submit" name="SearchParts">' . _('Search Parts Now') . '</button>';
 
    if (count($_SESSION['AllowedPageSecurityTokens'])>1){
-		echo '<input type="submit" name="ResetPart" value="' . _('Show All') . '" /></div>';
+		echo '<button type="submit" name="ResetPart">' . _('Show All') . '</button></div>';
    }
    echo '</td></tr></table>';
 
@@ -504,12 +504,13 @@ if (isset($StockItemsResult)) {
 			$k++;
 		}
 
-		printf('<td><font size="1"><input type="submit" name="SelectedStockItem" value="%s" /></font></td>
+		printf('<td><font size="1"><button type="submit" name="SelectedStockItem" value="%s" />%s</button></font></td>
 			<td><font size="1">%s</font></td>
 			<td class="number"><font size="1">%s</font></td>
 			<td class="number"><font size="1">%s</font></td>
 			<td class="number"><font size="1">%s</font></td>
 			<td><font size="1">%s</font></td></tr>',
+			$myrow['stockid'],
 			$myrow['stockid'],
 			$myrow['description'],
 			$myrow['qoh'],

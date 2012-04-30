@@ -12,7 +12,7 @@ echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 
-echo '<br /><div class="centre">';
+echo '<br /><table class="selection">';
 
 if (isset($_GET['ContractRef'])){
 	$_POST['ContractRef']=$_GET['ContractRef'];
@@ -21,7 +21,7 @@ if (isset($_GET['SelectedCustomer'])){
 	$_POST['SelectedCustomer']=$_GET['SelectedCustomer'];
 }
 
-
+echo '<tr><td>';
 if (isset($_POST['ContractRef']) AND $_POST['ContractRef']!='') {
 	$_POST['ContractRef'] = trim($_POST['ContractRef']);
 	echo _('Contract Reference') . ' - ' . $_POST['ContractRef'];
@@ -31,11 +31,11 @@ if (isset($_POST['ContractRef']) AND $_POST['ContractRef']!='') {
 		echo '<input type="hidden" name="SelectedCustomer" value="' . $_POST['SelectedCustomer'] . '" />';
 	}
 }
-
+echo'</td>';
 if (!isset($_POST['ContractRef']) or $_POST['ContractRef']==''){
 
-	echo _('Contract Reference') . ': <input type="text" name="ContractRef" maxlength="20" size="20" />&nbsp;&nbsp;';
-	echo '<select name="Status">';
+	echo '<td>' . _('Contract Reference') . ': <input type="text" name="ContractRef" maxlength="20" size="20" /></td>&nbsp;&nbsp;';
+	echo '<td><select name="Status">';
 
 	if (isset($_GET['Status'])){
 		$_POST['Status']=$_GET['Status'];
@@ -43,15 +43,15 @@ if (!isset($_POST['ContractRef']) or $_POST['ContractRef']==''){
 	if (!isset($_POST['Status'])){
 		$_POST['Status']=4;
 	}
-	
+
 	$statuses[] = _('Not Yet Quoted');
 	$statuses[] = _('Quoted - No Order Placed');
-	$statuses[] = _('Order Placed');	
+	$statuses[] = _('Order Placed');
 	$statuses[] = _('Completed');
 	$statuses[] = _('All Contracts');
-	
+
 	$status_count = count($statuses);
-	
+
 	for ( $i = 0; $i < $status_count; $i++ ) {
 		if ( $i == $_POST['Status'] ) {
 			echo '<option selected="selected" value="' . $i . '">' . $statuses[$i] . '</option>';
@@ -60,10 +60,10 @@ if (!isset($_POST['ContractRef']) or $_POST['ContractRef']==''){
 		}
 	}
 
-	echo '</select> &nbsp;&nbsp;';
+	echo '</select></td> &nbsp;&nbsp;';
 }
-echo '<input type="submit" name="SearchContracts" value="' . _('Search') . '" />';
-echo '&nbsp;&nbsp;<a href="' . $rootpath . '/Contracts.php">' . _('New Contract') . '</a></div></p>';
+echo '<td><button type="submit" name="SearchContracts">' . _('Search') . '</button></td>';
+echo '<td>&nbsp;&nbsp;<a href="' . $rootpath . '/Contracts.php">' . _('New Contract') . '</a></td></tr></table></p>';
 
 
 //figure out the SQL required from the inputs available

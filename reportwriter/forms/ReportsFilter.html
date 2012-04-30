@@ -11,13 +11,13 @@
   <input name="GoBackURL" type="hidden" value="<?php echo $GoBackURL; ?>" />
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
-      <td width="20%"><input name="todo" type="submit" id="todo" value="<?php echo RPT_BTN_CANCEL; ?>" /></td>
+      <td width="20%"><button name="todo" type="submit" id="todo"><?php echo RPT_BTN_CANCEL; ?></button></td>
 	  <?php if (!$Prefs['defaultreport']) { ?>
-      <td width="20%"><div align="center"><input name="todo" type="submit" id="todo" value="<?php echo RPT_BTN_PGSETUP; ?>" /></div></td>
+      <td width="20%"><div align="center"><button name="todo" type="submit" id="todo"><?php echo RPT_BTN_PGSETUP; ?></button></div></td>
 	  <?php } else echo '<td width="20%">&nbsp;</td>'; ?>
-	  <td><div align="center"><input name="todo" type="submit" id="todo" value="<?php echo RPT_BTN_CPYRPT; ?>" /></div></td>
-      <td width="20%"><div align="center"><input name="todo" type="submit" id="todo" value="<?php echo RPT_BTN_EXPCSV; ?>" /></div></td>
-	  <td width="20%"><div align="right"><input name="todo" type="submit" id="todo" value="<?php echo RPT_BTN_EXPPDF; ?>" /></div></td>
+	  <td><div align="center"><button name="todo" type="submit" id="todo"><?php echo RPT_BTN_CPYRPT; ?></button></div></td>
+      <td width="20%"><div align="center"><button name="todo" type="submit" id="todo"><?php echo RPT_BTN_EXPCSV; ?></button></div></td>
+	  <td width="20%"><div align="right"><button name="todo" type="submit" id="todo"<?php echo RPT_BTN_EXPPDF; ?></div></td>
     </tr>
   </table>
   <table width="100%" border="1" cellspacing="1" cellpadding="1">
@@ -102,7 +102,7 @@
 	  <table align="center" border="1" cellspacing="1" cellpadding="1">
 		<tr>
 			<td colspan="4"><div align="center"><?php echo RPT_FIELDS; ?></div></td>
-			<td><input name="todo" type="submit" id="todo" value="<?php echo RPT_BTN_UPDATE; ?>" /></td>
+			<td><button name="todo" type="submit" id="todo"><?php echo RPT_BTN_UPDATE; ?></button></td>
 		</tr>
 		<tr>
 			<td><div align="center"><?php echo RPT_FLDNAME; ?></div></td>

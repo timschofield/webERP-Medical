@@ -236,7 +236,7 @@ if (! isset($_GET['delete'])) {
 		echo '<input type="hidden" name="SelectedType" value="' . $SelectedType . '" />';
 		echo '<input type="hidden" name="TypeAbbrev" value="' . $_POST['TypeAbbrev'] . '" />';
 		echo '<table class="selection">';
-		echo '<tr><th colspan="4"><font size="2" color="blue"><b>' . _('Sales Type/Price List Setup') . '</b></font></th></tr>';
+		echo '<tr><th colspan="4" class="header">' . _('Sales Type/Price List Setup') . '</th></tr>';
 		echo '<tr><td>' . _('Type Code') . ':</td><td>';
 
 		// We dont allow the user to change an existing type code
@@ -248,7 +248,7 @@ if (! isset($_GET['delete'])) {
 		// This is a new type so the user may volunteer a type code
 
 		echo '<table class="selection">';
-		echo '<tr><th colspan="4"><font size="2" color="blue"><b>' . _('Sales Type/Price List Setup') . '</b></font></th></tr>';
+		echo '<tr><th colspan="4" class="header"><b>' . _('Sales Type/Price List Setup') . '</b></th></tr>';
 		echo '<tr><td>' . _('Type Code') . ':</td>
 				<td><input type="text" ' . (in_array('SalesType',$Errors) ? 'class="inputerror"' : '' ) .' size="3" maxlength="2" name="TypeAbbrev" /></td></tr>';
 
@@ -261,8 +261,8 @@ if (! isset($_GET['delete'])) {
 
    	echo '</td></tr></table>'; // close main table
 
-	echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Accept') . '" />
-				<input type="submit" name="Cancel" value="' . _('Cancel') . '" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="submit">' . _('Accept') . '</button>
+				<button type="submit" name="Cancel">' . _('Cancel') . '</button></div>';
 
 	echo '</form>';
 

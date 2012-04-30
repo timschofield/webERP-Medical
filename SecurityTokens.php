@@ -53,11 +53,11 @@ if (isset($_GET['Action']) and $_GET['Action']=='edit') {
 	echo '<td>'. _('Description') . '</td>
 		<td><input type="text" size="30" maxlength="30" name="Description" value="'.$description.'" /></td><td>
 		<input type="hidden" name="TokenID" value="'.$_GET['SelectedToken'].'" />';
-	echo '<input type="submit" name="update" value="' . _('Update') . '" />';
+	echo '<button type="submit" name="update">' . _('Update') . '</button>';
 } else {
 	echo '<td>'._('Token ID') . '<td><input type="text" name="TokenID" value="'.$_POST['TokenID'].'" /></td></tr>
 		<tr><td>'. _('Description') . '</td><td><input type="text" size="70" maxlength="255" name="Description" value="'.$description.'" /></td><td>';
-	echo '<input type="submit" name="submit" value="' . _('Insert') . '" />';
+	echo '<button type="submit" name="submit">' . _('Insert') . '</button>';
 }
 
 echo '</td></tr></table><p></p>';
