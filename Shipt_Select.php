@@ -199,12 +199,13 @@ if (isset($StockItemsResult)) {
 		}
 /*
 Code	 Description	On Hand		 Orders Ostdg     Units		 Code	Description 	 On Hand     Orders Ostdg	Units	 */
-		printf('<td><input type="submit" name="SelectedStockItem" value="%s" /></td>
+		printf('<td><button type="submit" name="SelectedStockItem" value="%s" />%s</button></td>
 				<td>%s</td>
 				<td class="number">%s</td>
 				<td class="number">%s</td>
 				<td>%s</td>
 			</tr>',
+				$myrow['stockid'],
 				$myrow['stockid'],
 				$myrow['description'],
 				$myrow['qoh'],

@@ -232,11 +232,10 @@ if (!isset($_POST['PostInvoice'])){
 						<th>' . _('Tax Authority') . '</th>
 					</tr>';
 
-	echo '<tr><td><font color="blue"><b>' . $_SESSION['SuppTrans']->SupplierID . ' - ' .
-		$_SESSION['SuppTrans']->SupplierName . '</b></font></td>
-		<th><font color="blue"><b>' .  $_SESSION['SuppTrans']->CurrCode . '</b></font></th>
-		<td><font color="blue"><b>' . $_SESSION['SuppTrans']->TermsDescription . '</b></font></td>
-		<td><font color="blue"><b>' . $_SESSION['SuppTrans']->TaxGroupDescription . '</b></font></td>
+	echo '<tr><th class="header"><font size="1"><b>' . $_SESSION['SuppTrans']->SupplierID . ' - ' . $_SESSION['SuppTrans']->SupplierName . '</b></font></td>
+		<th class="header"><font size="1"><b>' .  $_SESSION['SuppTrans']->CurrCode . '</b></font></th>
+		<th class="header"><font size="1"><b>' . $_SESSION['SuppTrans']->TermsDescription . '</b></font></th>
+		<th class="header"><font size="1"><b>' . $_SESSION['SuppTrans']->TaxGroupDescription . '</b></font></th>
 		</tr>
 		</table>';
 
@@ -299,8 +298,8 @@ if (!isset($_POST['PostInvoice'])){
 
 		}
 
-		echo '<tr><td colspan="5" class="number"><font color="blue">' . _('Total Value of Goods Charged') . ':</font></td>
-			<td class="number"><font color="blue"><u>' . locale_money_format($TotalGRNValue,$_SESSION['SuppTrans']->CurrCode) . '</u></font></td></tr>';
+		echo '<tr><td colspan="5" class="number">' . _('Total Value of Goods Charged') . ':</td>
+			<td class="number"><u>' . locale_money_format($TotalGRNValue,$_SESSION['SuppTrans']->CurrCode) . '</u></td></tr>';
 		echo '</table>';
 	}
 
@@ -332,8 +331,8 @@ if (!isset($_POST['PostInvoice'])){
 			}
 		}
 
-		echo '<tr><td colspan="2" class="number"><font size="4" color="blue">' . _('Total') . ':</font></td>
-			<td class="number"><font size="4" color="blue"><u>' .  locale_money_format($TotalShiptValue,$_SESSION['SuppTrans']->CurrCode) . '</u></font></td></tr></table>';
+		echo '<tr><td colspan="2" class="number">' . _('Total') . ':</td>
+			<td class="number"><u>' .  locale_money_format($TotalShiptValue,$_SESSION['SuppTrans']->CurrCode) . '</u></td></tr></table>';
 	}
 
 	$TotalAssetValue = 0;
@@ -369,8 +368,8 @@ if (!isset($_POST['PostInvoice'])){
 		}
 
 		echo '<tr>
-				<td colspan="2" class="number"><font size="4" color="blue">' . _('Total') . ':</font></td>
-				<td class="number"><font size="4" color="blue"><u>' .  locale_money_format($TotalAssetValue,$_SESSION['SuppTrans']->CurrCode) . '</u></font></td>
+				<td colspan="2" class="number">' . _('Total') . ':</td>
+				<td class="number"><u>' .  locale_money_format($TotalAssetValue,$_SESSION['SuppTrans']->CurrCode) . '</u></td>
 			</tr></table>';
 	} //end loop around assets added to invocie
 

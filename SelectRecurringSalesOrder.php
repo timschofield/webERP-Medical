@@ -32,7 +32,7 @@ while ($myrow=DB_fetch_array($resultStkLocs)){
 
 echo '</select></td></tr></table>';
 
-echo '<br /><div class="centre"><input type="submit" name="SearchRecurringOrders" value="' . _('Search Recurring Orders') . '" /></div>';
+echo '<br /><div class="centre"><button type="submit" name="SearchRecurringOrders">' . _('Search Recurring Orders') . '</button></div>';
 
 if (isset($_POST['SearchRecurringOrders'])){
 

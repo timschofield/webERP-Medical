@@ -609,7 +609,7 @@ if (isset($SelectedCategory)) {
 
 echo '<br />
 		<div class="centre">
-			<input type="submit" name="submit" value="' . _('Enter Information') . '" />
+			<button type="submit" name="submit">' . _('Enter Information') . '</button>
 		</div>
 	</form>';
 
