@@ -297,7 +297,7 @@ if (isset($SupplierID) AND $SupplierID != '' AND !isset($_POST['SearchSupplier']
 		echo '<td><input type="text" name="SupplierCode" size="10" maxlength="10" /></td>';
 		echo '</tr></table><br />';
 		echo '<div class="centre">
-				<input type="submit" name="SearchSupplier" value="' . _('Find Suppliers Now') . '" />
+				<button type="submit" name="SearchSupplier">' . _('Find Suppliers Now') . '</button>
 			</div>
 			</form>';
 		include ('includes/footer.inc');
@@ -394,13 +394,14 @@ if (isset($SuppliersResult)) {
 			echo '<tr class="OddTableRows">';
 			$k++;
 		}
-		printf('<td><input type="submit" name="SupplierID" value="%s" /></td>
+		printf('<td><button type="submit" name="SupplierID" value="%s">%s</button></td>
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
 				</tr>',
+				$myrow['supplierid'],
 				$myrow['supplierid'],
 				$myrow['suppname'],
 				$myrow['currcode'],
@@ -466,7 +467,7 @@ if (!isset($SuppliersResult)) {
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection">
 			<tr>
-				<th colspan="3"><font color="navy" size="3">' . _('Data for Purchasing') . ' ' . $StockID . ' ' . _('from') . ' '. $SupplierID . '</font></th>
+				<th colspan="3" class="header">' . _('Data for Purchasing') . ' ' . $StockID . ' ' . _('from') . ' '. $SupplierID . '</th>
 			</tr>';
 	if (!isset($SupplierID)) {
 		$SupplierID = '';
@@ -568,9 +569,9 @@ if (!isset($SuppliersResult)) {
 	}
 	echo '</select></td></tr></table><br /><div class="centre">';
 	if (isset($_GET['Edit'])) {
-		echo '<input type="submit" name="UpdateRecord" value="' . _('Update') . '" />';
+		echo '<button type="submit" name="UpdateRecord">' . _('Update') . '</button>';
 	} else {
-		echo '<input type="submit" name="AddRecord" value="' . _('Add') . '" />';
+		echo '<button type="submit" name="AddRecord">' . _('Add') . '</button>';
 	}
 	echo '</div>';
 	echo '<div class="centre">';

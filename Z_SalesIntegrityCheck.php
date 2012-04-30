@@ -10,12 +10,10 @@ include ('includes/session.inc');
 $title = _('Sales Integrity');
 include('includes/header.inc');
 
+echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/maintenance.png" title="' . _('Sales Integrity Check') . '" alt="" />' . ' ' . _('Sales Integrity Check') . '</p>';
 
-echo '<div class="centre"><font size="4" color="blue"><u><b>' . _('Sales Integrity Check') . '</b></u></font></div>';
+echo '<table class="selection">';
 
-echo '<br /><br />'._('Check every Invoice has a Sales Order').'<br />';
-echo '<br /><br />'._('Check every Invoice has a Tax Entry').'<br />';
-echo '<br /><br />'._('Check every Invoice has a GL Entry').'<br />';
 $SQL = "SELECT id,
 				transno,
 				order_,
@@ -24,28 +22,42 @@ $SQL = "SELECT id,
 			WHERE type = 10";
 $Result = DB_query($SQL,$db);
 
+echo '<tr><td>'._('Check every Invoice has a Sales Order').'</td></tr>';
 while ($myrow = DB_fetch_array($Result)) {
 	$SQL2 = "SELECT orderno,
 					orddate
 				FROM salesorders
 				WHERE orderno = '" . $myrow['order_'] . "'";
 	$Result2 = DB_query($SQL2,$db);
-
+	echo '<tr>';
 	if ( DB_num_rows($Result2) == 0) {
-		echo '<br />'._('Invoice '). ' '. $myrow['transno'] . ' : ';
-		echo '<font color=red>' . _('No Sales Order') . '</font>';
+		echo '<td>'._('Invoice '). ' '. $myrow['transno'] . ' : </td>';
+		echo '<td><font class="bad">' . _('No Sales Order') . '</font></td>';
+	} else {
+		echo '<td></td><td><font class="good">' . _('Sales Order Exists') . '</font></td>';
 	}
+	echo '</tr>';
+}
 
+DB_data_seek($Result, 0);
+echo '<tr><td>' ._('Check every Invoice has a Tax Entry').'</td></tr>';
+while ($myrow = DB_fetch_array($Result)) {
 	$SQL3 = "SELECT debtortransid
 				FROM debtortranstaxes
 				WHERE debtortransid = '" . $myrow['id'] . "'";
 	$Result3 = DB_query($SQL3,$db);
 
 	if ( DB_num_rows($Result3) == 0) {
-		echo '<br />'. _('Invoice '). ' ' . $myrow['transno'] . ' : ';
-		echo '<font color=red>' . _('has no Tax Entry') . '</font>';
+		echo '<td>'. _('Invoice '). ' ' . $myrow['transno'] . ' : </td>';
+		echo '<td><font color=red>' . _('has no Tax Entry') . '</font></td>';
+	} else {
+		echo '<td></td><td><font class="good">' . _('Tax Entry Exists') . '</font></td>';
 	}
-
+	echo '</tr>';
+}
+DB_data_seek($Result, 0);
+echo '<br /><br />'._('Check every Invoice has a GL Entry').'<br />';
+while ($myrow = DB_fetch_array($Result)) {
 	$SQL4 = "SELECT typeno
 				FROM gltrans
 				WHERE type = 10

@@ -76,7 +76,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 	}
 	echo '<table width="90%" class="selection"><tr><th colspan="3"><img src="' . $rootpath . '/css/' . $theme . '/images/inventory.png" title="' . _('Inventory') . '" alt="" /><b>' . ' ' . $StockID . ' - ' . $myrow['description'] . ' ' . $ItemStatus . '</b></th></tr>';
 	echo '<tr><td width="40%" valign="top">
-			<table align="left">'; //nested table
+			<table align="left" style="background: transparent;">'; //nested table
 	echo '<tr><th style="text-align:right;">' . _('Item Type:') . '</th>
 			<td colspan="2" class="select">';
 	switch ($myrow['mbflag']) {
@@ -192,7 +192,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 	} //end of if PricesSecuirty allows viewing of prices
 	echo '</table>'; //end of first nested table
 	// Item Category Property mod: display the item properties
-	echo '<table align="left">';
+	echo '<table align="left" class="selection">';
 	$CatValResult = DB_query("SELECT categoryid
 														FROM stockmaster
 														WHERE stockid='" . $StockID . "'", $db);
@@ -246,7 +246,7 @@ $PropertyCounter++;
 } //end loop round properties for the item category
 echo '</table>'; //end of Item Category Property mod
 echo '<td style="width: 15%; vertical-align: top">
-			<table>'; //nested table to show QOH/orders
+			<table style="background: transparent">'; //nested table to show QOH/orders
 $QOH = 0;
 switch ($myrow['mbflag']) {
 		case 'A':
@@ -343,7 +343,7 @@ echo '</td>'; //end cell of master table
 
 if (($myrow['mbflag'] == 'B' OR ($myrow['mbflag'] == 'M'))
 	AND (in_array($SuppliersSecurity, $_SESSION['AllowedPageSecurityTokens']))){
-		echo '<td width="50%" valign="top"><table>
+		echo '<td width="50%" valign="top"><table style="background: transparent">
 			<tr><th width="50%">' . _('Supplier') . '</th>
 				<th width="15%">' . _('Cost') . '</th>
 				<th width="5%">' . _('Curr') . '</th>
@@ -474,7 +474,7 @@ if (!$Its_A_Kitset) {
 echo '</td></tr></table>';
 } else {
 	// options (links) to pages. This requires stock id also to be passed.
-	echo '<table width="90%" cellpadding="4">';
+	echo '<table width="90%" cellpadding="4" class="selection">';
 	echo '<tr>
 		<th width="33%">' . _('Item Inquiries') . '</th>
 		<th width="33%">' . _('Item Transactions') . '</th>
@@ -527,7 +527,7 @@ if (isset($_POST['StockCode'])) {
 	echo '<input type="text" name="StockCode" size="15" maxlength="18" />';
 }
 echo '</td></tr></table><br />';
-echo '<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" /></div><br />';
+echo '<div class="centre"><button type="submit" name="Search">' . _('Search Now') . '</button></div><br />';
 echo '<script  type="text/javascript">defaultControl(document.forms[0].StockCode);</script>';
 echo '</form>';
 // query for list of record(s)
@@ -717,16 +717,16 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 				$ListPage++;
 			}
 			echo '</select>
-				<input type="submit" name="Go" value="' . _('Go') . '" />
-				<input type="submit" name="Previous" value="' . _('Previous') . '" />
-				<input type="submit" name="Next" value="' . _('Next') . '" />';
+				<button type="submit" name="Go">' . _('Go') . '</button>
+				<button type="submit" name="Previous">' . _('Previous') . '</button>
+				<button type="submit" name="Next">' . _('Next') . '</button>';
 			echo '<input type="hidden" name=Keywords value="'.$_POST['Keywords'].'" />';
 			echo '<input type="hidden" name=StockCat value="'.$_POST['StockCat'].'" />';
 			echo '<input type="hidden" name=StockCode value="'.$_POST['StockCode'].'" />';
 //			echo '<input type="hidden" name=Search value="Search" />';
 			echo '<br /></div>';
 		}
-		echo '<table cellpadding="2">';
+		echo '<table cellpadding="2" class="selection">';
 		$tableheader = '<tr>
 					<th>' . _('Code') . '</th>
 					<th>' . _('Description') . '</th>
@@ -757,10 +757,10 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 			if ($myrow['discontinued']==1){
 				$ItemStatus = '<font class="bad">' . _('Obsolete') . '</font>';
 			} else {
-				$ItemStatus ='';
+				$ItemStatus = '<font class="good">' . _('Current') . '</font>';
 			}
 
-			echo '<td><input type="submit" name="Select" value="' . $myrow['stockid'] . '" /></td>
+			echo '<td><button type="submit" name="Select" value="' . $myrow['stockid'] . '" />' . $myrow['stockid'] . '</button></td>
 				<td>'.$myrow['description'].'</td>
 				<td class="number">' . $qoh . '</td>
 				<td>' . $myrow['units'] . '</td>

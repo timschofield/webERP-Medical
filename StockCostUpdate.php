@@ -22,8 +22,12 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/s
 if (isset($_POST['UpdateData'])){
 
 	$_POST['MaterialCost'] = filter_currency_input($_POST['MaterialCost']);
-	$_POST['LabourCost'] = filter_currency_input($_POST['LabourCost']);
-	$_POST['OverheadCost'] = filter_currency_input($_POST['OverheadCost']);
+	if (isset($_POST['LabourCost'])) {
+		$_POST['LabourCost'] = filter_currency_input($_POST['LabourCost']);
+	}
+	if (isset($_POST['OverheadCost'])) {
+		$_POST['OverheadCost'] = filter_currency_input($_POST['OverheadCost']);
+	}
 
 	$_POST['OldMaterialCost'] = filter_currency_input($_POST['OldMaterialCost']);
 	$_POST['OldLabourCost'] = filter_currency_input($_POST['OldLabourCost']);
@@ -193,7 +197,7 @@ if (!isset($UpdateSecurity) or !in_array($UpdateSecurity,$_SESSION['AllowedPageS
 		echo '<input type="hidden" name="LabourCost" value="0" />';
 		echo '<input type="hidden" name="OverheadCost" value="0" />';
 	}
-	echo '</table><br /><div class="centre"><input type="submit" name="UpdateData" value="' . _('Update') . '" /><br /><br />';
+	echo '</table><br /><div class="centre"><button type="submit" name="UpdateData">' . _('Update') . '</button><br />';
 }
 if ($myrow['mbflag']!='D'){
 	echo '<div class="centre"><a href="' . $rootpath . '/StockStatus.php?StockID=' . $StockID . '">' . _('Show Stock Status') . '</a>';
