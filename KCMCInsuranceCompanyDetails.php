@@ -205,7 +205,7 @@ if (isset($_POST['submit'])) {
 					'" . $_POST['Address6'] . "',
 					'" . $_POST['CurrCode'] . "',
 					'1',
-					'GE',
+					'ST',
 					'" . $_POST['PaymentTerms'] . "',
 					'" . $_POST['TaxRef'] . "',
 					'" . $InsuranceTypeID . "'
