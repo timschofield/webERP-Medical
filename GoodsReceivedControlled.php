@@ -61,8 +61,6 @@ $InOutModifier=1;
 $ShowExisting = false;
 include ('includes/InputSerialItems.php');
 
-//echo '<br /><input type="submit" name=\'AddBatches\' value=\'Enter\'><br />';
-
 /*TotalQuantity set inside this include file from the sum of the bundles
 of the item selected for dispatch */
 $_SESSION['PO']->LineItems[$LineItem->LineNo]->ReceiveQty = $TotalQuantity;

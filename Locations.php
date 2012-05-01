@@ -367,11 +367,9 @@ while ($myrow = DB_fetch_array($result)) {
 
 //end of ifs and buts!
 
-echo '<br />';
 if (isset($SelectedLocation)) {
 	echo '<a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Review Records') . '</a>';
 }
-echo '<br />';
 
 if (!isset($_GET['delete'])) {
 
@@ -423,7 +421,7 @@ if (!isset($_GET['delete'])) {
 		echo '<input type="hidden" name="SelectedLocation" value="' . $SelectedLocation . '" />';
 		echo '<input type="hidden" name="LocCode" value="' . $_POST['LocCode'] . '" />';
 		echo '<table class="selection">';
-		echo '<tr><th colspan="2"><font size="3" color="blue">'._('Amend Location details').'</font></th></tr>';
+		echo '<tr><th colspan="2" class="header">'._('Amend Location details').'</th></tr>';
 		echo '<tr><td>' . _('Location Code') . ':</td><td>';
 		echo $_POST['LocCode'] . '</td></tr>';
 	} else { //end of if $SelectedLocation only do the else when a new record is being entered
@@ -515,7 +513,7 @@ if (!isset($_GET['delete'])) {
 	*/
 	echo '</table><br />';
 
-	echo '<div class="centre"><input type="submit" name="submit" value="' .  _('Enter Information') . '" /></div>';
+	echo '<div class="centre"><button type="submit" name="submit">' .  _('Enter Information') . '</button></div><br />';
 
 	echo '</form>';
 

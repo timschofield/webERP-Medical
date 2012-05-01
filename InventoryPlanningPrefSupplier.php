@@ -516,7 +516,7 @@ if (isset($_POST['PrintPDF'])){
 	}
 	echo '</select></td></tr>';
 
-	echo '</table><br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
+	echo '</table><br /><div class="centre"><button type="submit" name="PrintPDF">' . _('Print PDF') . '</button></div><br />';
 
 	include('includes/footer.inc');
 } /*end of else not PrintPDF */

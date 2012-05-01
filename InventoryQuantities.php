@@ -146,7 +146,7 @@ if (isset($_POST['PrintPDF'])) {
 	echo '<div class="page_help_text">' . _('Use this report to display the quantity of Inventory items in different categories.') . '</div><br />';
 
 
-	echo '<br /><br /><form action=' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . ' method="post"><table>';
+	echo '<form action=' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . ' method="post"><table>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection"><tr><td>';
 	echo '<tr><td>' . _('Selection') . ':</td><td><select name="Selection">';
@@ -183,7 +183,7 @@ if (isset($_POST['PrintPDF'])) {
 		}
 	}
 	echo '</select></td></tr>';
-	echo '</table><br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
+	echo '</table><br /><div class="centre"><button type="submit" name="PrintPDF">' . _('Print PDF') . '</button></div><br />';
 
 	include('includes/footer.inc');
 
