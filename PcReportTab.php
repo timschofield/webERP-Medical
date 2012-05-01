@@ -68,8 +68,8 @@ if ((! isset($_POST['FromDate']) AND ! isset($_POST['ToDate'])) OR isset($_POST[
 	echo '<tr><td>' . _('To Date:') .'</td><td>';
 	echo '<input tabindex="3" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="text" name="ToDate" maxlength="10" size="11" value="' . $_POST['ToDate'] . '" />';
 	echo '</td></tr></table><br />';
-	echo '<div class="centre"><input type="submit" name="ShowTB" value="' . _('Show HTML') .'" />';
-	echo '<input type="submit" name="PrintPDF" value="'._('PrintPDF').'" /></div>';
+	echo '<div class="centre"><button type="submit" name="ShowTB">' . _('Show HTML') .'</button>';
+	echo '<button type="submit" name="PrintPDF">'._('PrintPDF').'</button></div><br />';
 
 } else if (isset($_POST['PrintPDF'])) {
 
@@ -446,7 +446,7 @@ if ((! isset($_POST['FromDate']) AND ! isset($_POST['ToDate'])) OR isset($_POST[
 			</tr>';
 
 	echo '</table>';
-	echo '<br /><div class="centre"><input type="submit" name="SelectDifferentDate" value="' . _('Select A Different Date') . '" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="SelectDifferentDate">' . _('Select A Different Date') . '</button></div><br />';
 }
 echo '</form>';
 include('includes/footer.inc');

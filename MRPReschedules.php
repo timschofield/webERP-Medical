@@ -124,7 +124,7 @@ if (isset($_POST['PrintPDF'])) {
 
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Stock') . '" alt="" />' . ' ' . $title . '</p>';
 
-	echo '<br /><br /><form action=' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . ' method="post"><table class="selection">';
+	echo '<br /><form action=' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . ' method="post"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<tr><td>' . _('Print Option') . ':</td><td><select name="Fill">';
 	echo '<option selected="True" value="yes">' . _('Print With Alternating Highlighted Lines') . '</option>';
@@ -136,7 +136,7 @@ if (isset($_POST['PrintPDF'])) {
 	echo '<option value="PO">' . _('Purchase Orders Only').'</option>';
 	echo '</select></td></tr>';
 	echo '</table><br />';
-	echo '<div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
+	echo '<div class="centre"><button type="submit" name="PrintPDF">' . _('Print PDF') . '</button></div><br />';
 
 	include('includes/footer.inc');
 

@@ -100,7 +100,7 @@ function search(&$db,&$StockID) { //####SEARCH_SEARCH_SEARCH_SEARCH_SEARCH_SEARC
 				$k++;
 			}
 			$tabindex=$j+4;
-			echo '<td><input tabindex="'.$tabindex.'" type="submit" name="StockID" value="'.$myrow['stockid'].'" /></td>
+			echo '<td><button tabindex="'.$tabindex.'" type="submit" name="StockID" value="'.$myrow['stockid'].'">'.$myrow['stockid'].'</button></td>
 				<td>'.$myrow['description'].'</td></tr>';
 			$j++;
 	}  //end of while loop
@@ -282,7 +282,7 @@ function listall(&$db,$part,$demandtype)  {//####LISTALL_LISTALL_LISTALL_LISTALL
 	$result = DB_query($sql,$db,$ErrMsg);
 
 	echo '<table class="selection">
-		<tr bgcolor =#800000><th>' . _('Part Number') . '</th>
+		<tr><th>' . _('Part Number') . '</th>
 				<th>' . _('Description') . '</th>
 				<th>' . _('Demand Type') . '</th>
 				<th>' . _('Quantity') . '</th>
@@ -328,7 +328,7 @@ function display(&$db,&$StockID,&$DemandID) { //####DISPLAY_DISPLAY_DISPLAY_DISP
 			<td><input tabindex="2" type="text" name="StockCode" size="15" maxlength="20" /></td>
 			<td><font size="3"><b>' . _('OR') . '</b></font></td>
 			<td><a href="'. htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?&listall=yes"><font size="3">' . _('List All Demands') .'</font></a></td></tr>
-			<tr><td colspan="7"><div class="centre"><input tabindex="3" type="submit" name="Search" value="' . _('Search Now') . '" /></div></td></tr></table>';
+			<tr><td colspan="7"><div class="centre"><button tabindex="3" type="submit" name="Search">' . _('Search Now') . '</button></div></td></tr></table>';
 	} else {
 		if (isset($DemandID)) {
 		//editing an existing MRP demand
@@ -397,12 +397,12 @@ function display(&$db,&$StockID,&$DemandID) { //####DISPLAY_DISPLAY_DISPLAY_DISP
 		echo '</select></td></tr>';
 
 		echo '</table>';
-		echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" />&nbsp&nbsp';
-		echo '<input type="submit" name="listsome" value="' . _('List Selection') . '" />&nbsp&nbsp';
-		echo '<input type="submit" name="deletesome" value="' . _('Delete Demand Type') . '" />';
+		echo '<br /><div class="centre"><button type="submit" name="submit">' . _('Enter Information') . '</button>&nbsp&nbsp';
+		echo '<button type="submit" name="listsome">' . _('List Selection') . '</button>&nbsp&nbsp';
+		echo '<button type="submit" name="deletesome">' . _('Delete Demand Type') . '</button></div><br />';
 		// If mrpdemand record exists, display option to delete it
 		if ((isset($DemandID)) AND (DB_num_rows($result) > 0)) {
-			echo '<br /><br /><a href=" ' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?delete=yes&StockID='.$StockID.'&DemandID=' . $DemandID . '">' . _('Or Delete Record') ;
+			echo '<br /><br /><a href=" ' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?delete=yes&StockID='.$StockID.'&DemandID=' . $DemandID . '">' . _('Or Delete Record') .'</a>';
 		}
 	}
 	echo '</form>';

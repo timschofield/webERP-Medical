@@ -17,7 +17,7 @@ if (isset($_GET['ManufacturerID'])){
 
 if (isset($_POST['Create'])) {
 	$ManufacturerID = 0;
-	$_POST['New'] = "Yes";
+	$_POST['New'] = 'Yes';
 };
 
 echo '<div class="centre"><p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/supplier.png" title="' . _('Manufacturing Companies') . '" alt="" />' . ' ' .$title . '</p></div>';
@@ -204,9 +204,9 @@ if (!isset($ManufacturerID)) {
 		echo '<td>' . $myrow['email'].'</td>';
 		echo '<td><a href="'.$rootpath . '/Manufacturers.php?ManufacturerID='.$myrow['id'].'">'._('Edit').'</a></td></tr>';
 	}
-	echo '</table><br /><div class="centre">';
-	echo '<br /><input tabindex="3" type="submit" name="Create" value="' . _('Create New Manufacturer') . '" />';
-	echo '</div></form>';
+	echo '</table><div class="centre">';
+	echo '<br /><button tabindex="3" type="submit" name="Create">' . _('Create New Manufacturer') . '</button>';
+	echo '</div><br /></form>';
 	include('includes/footer.inc');
 	exit;
 
@@ -281,12 +281,12 @@ if (isset($_POST['amend']) or isset($_POST['Create'])) {
 
 
 if (isset($_POST['Create'])) {
-	echo '</table><br /><div class="centre"><input tabindex="12" type="submit" name="submit" value="' . _('Insert New Manufacturer') . '" /></div>';
+	echo '</table><br /><div class="centre"><button tabindex="12" type="submit" name="submit">' . _('Insert New Manufacturer') . '</button></div><br />';
 	echo '</form>';
 } else if (isset($_POST['amend'])) {
-	echo '</table><br /><div class="centre"><input tabindex="13" type="submit" name="update" value="' . _('Update Manufacturer') . '" /><br />';
+	echo '</table><br /><div class="centre"><button tabindex="13" type="submit" name="update">' . _('Update Manufacturer') . '</button><br />';
 	prnMsg ( _('There is no second warning if you hit the delete button below') . '. ' . _('However checks will be made to ensure there are no suppliers are using this manufacturer before the deletion is processed'), 'warn');
-	echo '<br /><input tabindex="14" type="submit" name="delete" value="' . _('Delete Manufacturer') . '" onclick="return confirm("' . _('Are you sure you wish to delete this manufacturer?') . '");" /></form></div>';
+	echo '<br /><button tabindex="14" type="submit" name="delete" onclick="return confirm("' . _('Are you sure you wish to delete this manufacturer?') . '");" />' . _('Delete Manufacturer') . '</button></form></div>';
 	echo '</form>';
 }
 

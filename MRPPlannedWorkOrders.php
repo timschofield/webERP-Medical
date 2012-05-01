@@ -246,7 +246,7 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 		echo '<form action="MRPConvertWorkOrders.php" method="post">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<table class="selection">';
-		echo '<tr><th colspan="9"><font size="3" color="blue">Consolidation: ' . $_POST['Consolidation'] .
+		echo '<tr><th colspan="9" class="header">' . _('Consolidation') . ': ' . $_POST['Consolidation'] .
 			'&nbsp;&nbsp;&nbsp;&nbsp;Cutoff Date: ' . $_POST['cutoffdate'] . '</font></th></tr>';
 		echo '<tr><th></th>
 				<th>' . _('Code') . '</th>
@@ -323,7 +323,7 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 	include('includes/header.inc');
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') . '" alt="" />' . ' ' . $title . '</p>';
 
-	echo '<br /><br /><form action=' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . ' method="post"><table class="selection">';
+	echo '<br /><form action=' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . ' method="post"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<tr><td>' . _('Consolidation') . ':</td><td><select name="Consolidation">';
 	echo '<option selected="True" value="None">' . _('None') . '</option>';
@@ -337,8 +337,8 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 	echo '<tr><td>' . _('Cut Off Date') . ':</td>
 		<td><input type ="text" class="date" alt="'.$_SESSION['DefaultDateFormat'] .'" name="cutoffdate" size="10" value="'.date($_SESSION['DefaultDateFormat']).'" /></tr>';
 	echo '</table><br /><div class="centre">
-			<input type="submit" name="Review" value="' . _('Review') . '" />
-			<input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
+			<button type="submit" name="Review">' . _('Review') . '</button>
+			<button type="submit" name="PrintPDF">' . _('Print PDF') . '</button></div><br />';
 
 	include('includes/footer.inc');
 

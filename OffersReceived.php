@@ -47,7 +47,7 @@ if (!isset($_POST['supplierid'])) {
 			echo '<option value="'.$myrow['supplierid'].'">'.$myrow['suppname'].'</option>';
 		}
 		echo '</select></td></tr>';
-		echo '<tr><td colspan="12"><div class="centre"><input type="submit" name=select value="' . _('Enter Information') . '" /></div></td></tr>';
+		echo '<tr><td colspan="12"><div class="centre"><button type="submit" name=select>' . _('Enter Information') . '</button></div></td></tr>';
 		echo '</table>';
 		echo '</form>';
 	}
@@ -122,7 +122,7 @@ if (!isset($_POST['submit']) and isset($_POST['supplierid'])) {
 		echo '<td><input type="hidden" name="supplierid" value="'.$myrow['supplierid'].'" /></td>';
 		echo '</tr>';
 	}
-	echo '<tr><td colspan="12"><div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div></td></tr>';
+	echo '<tr><td colspan="12"><div class="centre"><button type="submit" name="submit">' . _('Enter Information') . '</button></div></td></tr>';
 	echo '</form></table>';
 } else if(isset($_POST['submit']) and isset($_POST['supplierid'])) {
 	include ('includes/htmlMimeMail.php');

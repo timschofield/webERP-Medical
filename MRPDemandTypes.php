@@ -108,9 +108,10 @@ if (!isset($SelectedDT) or isset($_GET['delete'])) {
 	$result = DB_query($sql,$db);
 
 	echo '<table class="selection">
-		<tr BGCOLOR =#800000><th>' . _('Demand Type') . '</th>
-				<th>' . _('Description') . '</th>
-		</tr></font>';
+		<tr>
+			<th>' . _('Demand Type') . '</th>
+			<th>' . _('Description') . '</th>
+		</tr>';
 
 	while ($myrow = DB_fetch_row($result)) {
 
@@ -177,7 +178,7 @@ echo '<tr><td>' . _('Demand Type Description') . ':</td>
 	</tr>
 	</table>';
 
-echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div>';
+echo '<br /><div class="centre"><button type="submit" name="submit">' . _('Enter Information') . '</button></div><br />';
 
 echo '</form>';
 include('includes/footer.inc');

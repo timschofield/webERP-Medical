@@ -545,7 +545,7 @@ if (isset($_POST['PrintPDF']) AND $_POST['Part']!='') {
 		echo '<input type="text" name="StockCode" size="15" maxlength="18" />';
 	}
 	echo '</td></tr></table><br />';
-	echo '<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" /></div><br /></form>';
+	echo '<div class="centre"><button type="submit" name="Search">' . _('Search Now') . '</button></div><br /></form>';
 	echo '<script  type="text/javascript">defaultControl(document.forms[0].StockCode);</script>';
 	echo '</form>';
 	if (!isset($_POST['Search'])) {
@@ -722,16 +722,16 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 				$ListPage++;
 			}
 			echo '</select>
-				<input type="submit" name="Go" value="' . _('Go') . '" />
-				<input type="submit" name="Previous" value="' . _('Previous') . '" />
-				<input type="submit" name="Next" value="' . _('Next') . '" />';
+				<button type="submit" name="Go">' . _('Go') . '</button>
+				<button type="submit" name="Previous">' . _('Previous') . '</button>
+				<button type="submit" name="Next">' . _('Next') . '</button>';
 			echo '<input type="hidden" name="Keywords" value="'.$_POST['Keywords'].'" />';
 			echo '<input type="hidden" name="StockCat" value="'.$_POST['StockCat'].'" />';
 			echo '<input type="hidden" name="StockCode" value="'.$_POST['StockCode'].'" />';
 //			echo '<input type="hidden" name=Search value="Search" />';
 			echo '<br /></div>';
 		}
-		echo '<table cellpadding="2">';
+		echo '<table cellpadding="2" class="selection">';
 		$tableheader = '<tr>
 					<th>' . _('Code') . '</th>
 					<th>' . _('Description') . '</th>
@@ -759,7 +759,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 			} else {
 				$qoh = locale_number_format($myrow['qoh'], $myrow['decimalplaces']);
 			}
-			echo '<td><input type="submit" name="Select" value="'.$myrow['stockid'].'" /></td>
+			echo '<td><button type="submit" name="Select" value="'.$myrow['stockid'].'">'.$myrow['stockid'].'</button></td>
 				<td>'.$myrow['description'].'</td>
 				<td class="number">'.$qoh.'</td>
 				<td>'.$myrow['units'].'</td>

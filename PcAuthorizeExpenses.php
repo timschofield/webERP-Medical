@@ -76,7 +76,7 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 	echo '<br /><table class="selection">';
 	echo '<tr><th colspan="7">' . _('Detail Of Movement For Last ') .': ';
 	echo '<input type="text" class="number" name="Days" value="' . $Days . '" maxlength="3" size="4" /> Days ';
-	echo '<input type="submit" name="Go" value="' . _('Go') . '" /></tr></th>';
+	echo '<button type="submit" name="Go">' . _('Go') . '</button></tr></th>';
 	echo '</form>';
 
 	$sql = "SELECT pcashdetails.counterindex,
@@ -309,7 +309,7 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 	// Do the postings
 	include ('includes/GLPostings.inc');
 
-	echo'</table><br /><div class="centre"><input type="submit" name="submit" value="' . _('Update') . '" /></div></form>';
+	echo'</table><br /><div class="centre"><button type="submit" name="submit">' . _('Update') . '</button></div></form><br />';
 
 } else { /*The option to submit was not hit so display form */
 
@@ -340,8 +340,8 @@ if (isset($_POST['submit']) or isset($_POST['update']) OR isset($SelectedTabs) O
 
 	echo '</td></tr></table>'; // close main table
 
-	echo '<br /><div class="centre"><input type="submit" name="process" value="' . _('Accept') . '" />
-			<input type="submit" name="Cancel" value="' . _('Cancel') . '" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="process">' . _('Accept') . '</button>
+			<button type="submit" name="Cancel">' . _('Cancel') . '</button></div><br />';
 
 	echo '</form>';
 } /*end of else not submit */
