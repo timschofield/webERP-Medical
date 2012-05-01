@@ -544,8 +544,8 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	<td><input type="text" name="SuppCode" size="15" maxlength="18" /></td>
 	</tr>
 	</table><br /><div class="centre">
-	<input type="submit" name="SearchSuppliers" value="' . _('Search Now') . '" />
-	<input type="submit" action="reset" value="' . _('Reset') . '" /></div>';
+	<button type="submit" name="SearchSuppliers">' . _('Search Now') . '</button>
+	<button type="submit" action="reset">' . _('Reset') . '</button></div>';
 
 	echo '<script  type="text/javascript">defaultControl(document.forms[0].Keywords);</script>';
 
@@ -575,7 +575,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 				$k++;
 			}
 
-			echo '<td><input type="submit" style="width:100%" name="Select" value="'.$myrow['supplierid'].'" /></td>
+			echo '<td><button type="submit" style="width:100%" name="Select">'.$myrow['supplierid'].'</button></td>
 				<td>'.$myrow['suppname'].'</td><td>';
 
 			for ($i=1; $i<=6; $i++) {
@@ -722,13 +722,10 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	}
 
 	echo '<br /><table width="80%">
-		<tr>
-			<th><font color="blue" size="4"><b>' . _('Order Initiation Details') . '</b></font></th>
-			<th><font color="blue" size="4"><b>' . _('Order Status') . '</b></font></th>
-		</tr>
 		<tr><td style="width:50%">';
 //sub table starts
 	echo '<table class="selection" width="100%">';
+	echo '<tr><th colspan="3" class="header">' . _('Order Initiation Details') . '</th></tr>';
 	echo '<tr><td>' . _('PO Date') . ':</td><td>';
 	if ($_SESSION['ExistingOrder'.$identifier]!=0){
 		echo ConvertSQLDate($_SESSION['PO'.$identifier]->Orig_OrderDate);
@@ -788,8 +785,8 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 							<td><select name="RePrint" onChange="ReloadForm(form1.AllowRePrint)">
 									<option selected="True" value="0">' . _('No') . '</option>
 									<option value="1">' . _('Yes') . '</option>
-									</select></td>';
-		echo '<td><input type="submit" name="AllowRePrint" value="Update" /></td></tr>';
+									</select>';
+		echo '<button type="submit" name="AllowRePrint">' . _('Update') . '</button></td></tr>';
 	} elseif ($Printed) {
 		echo '<tr><td colspan="2"><a target="_blank"  href="' . $rootpath . '/PO_PDFPurchOrder.php?OrderNo=' . $_SESSION['ExistingOrder'.$identifier] . '&identifier='.$identifier. '">' . _('Reprint Now') . '</a></td></tr>';
 	}
@@ -797,6 +794,8 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	echo '</table>';
 
 	echo '<td style="width:50%" valign="top"><table class="selection" width="100%">';
+	echo '<tr><th colspan="3" class="header">' . _('Order Status') . '</th></th></tr>';
+
 	if($_SESSION['ExistingOrder'.$identifier] != 0 and $_SESSION['PO'.$identifier]->Status == PurchOrder::STATUS_PRINTED){
 		echo '<tr><td><a href="' .$rootpath . '/GoodsReceived.php?&PONumber=' . $_SESSION['PO'.$identifier]->OrderNo . '&identifier='.$identifier.'">'._('Receive this order').'</a></td></tr>';
 	}
@@ -849,21 +848,26 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 						<td><input type="text" name="StatusComments" size="50" /></td></tr>
 					<tr><td colspan="2"><b>' .  html_entity_decode($_SESSION['PO'.$identifier]->StatComments,ENT_QUOTES,'UTF-8') .'</b></td></tr>';
 	//need to use single quotes as double quotes inside the string of StatusComments
-	echo "<input type='hidden' name='StatusCommentsComplete' value='" . addslashes(html_entity_decode($_SESSION['PO'.$identifier]->StatComments,ENT_QUOTES,'UTF-8')) ."' />";
-	echo '<tr><td><input type="submit" name="UpdateStatus" value="' . _('Status Update') .'" /></td>';
+	echo '<input type="hidden" name="StatusCommentsComplete" value="' . addslashes(html_entity_decode($_SESSION['PO'.$identifier]->StatComments,ENT_QUOTES,'UTF-8')) . '" />';
+	echo '<tr><td><button type="submit" name="UpdateStatus">' . _('Status Update') .'</button></td>';
 
 	echo '</tr></table></td>';
 
 	echo '<table width="80%">
 		<tr>
-		<th><font color="blue" size="4"><b>' . _('Warehouse Info') . '</b></font></th>
-			<th><font color="blue" size="4"><b>' . _('Supplier Info') . '</b></font></th>
+
+
 		</tr>
 		<tr><td valign="top">';
 	/*nested table level1 */
 
-	echo '<table class="selection" width="100%"><tr><td>' . _('Warehouse') . ':</td>
-			<td><select name="StkLocation" onChange="ReloadForm(form1.LookupDeliveryAddress)">';
+	echo '<table class="selection" width="100%">
+			<tr>
+				<th colspan="3" class="header">' . _('Warehouse Info') . '</th>
+			</tr>
+			<tr>
+				<td>' . _('Warehouse') . ':</td>
+				<td><select name="StkLocation" onChange="ReloadForm(form1.LookupDeliveryAddress)">';
 
 	$sql = "SELECT loccode,
 					locationname
@@ -880,7 +884,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	}
 
 	echo '</select>
-		<input type="submit" name="LookupDeliveryAddress" value="' ._('Select') . '" /></td>
+		<button type="submit" name="LookupDeliveryAddress">' ._('Select') . '</button></td>
 		</tr>';
 
 /* If this is the first time
@@ -1010,8 +1014,13 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	  /* end of sub table */
 
 	echo '</td><td>'; /*sub table nested */
-	echo '<table class="selection" width="100%"><tr><td>' . _('Supplier Selection') . ':</td><td>
-		<select name="Keywords" onChange="ReloadForm(form1.SearchSuppliers)">';
+	echo '<table class="selection" width="100%">
+			<tr>
+				<th class="header" colspan="3">' . _('Supplier Info') . '</th>
+			</tr>
+			<tr>
+				<td>' . _('Supplier Selection') . ':</td>
+				<td><select name="Keywords" onChange="ReloadForm(form1.SearchSuppliers)">';
 
 	$SuppCoResult = DB_query("SELECT supplierid, suppname FROM suppliers ORDER BY suppname",$db);
 
@@ -1024,7 +1033,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	}
 
 	echo '</select> ';
-	echo '<input type="submit" name="SearchSuppliers" value="' . _('Select Now') . '" /></td></tr>';
+	echo '<button type="submit" name="SearchSuppliers">' . _('Select Now') . '</button></td></tr>';
 
 	echo '</td></tr><tr><td>' . _('Supplier Contact') . ':</td><td>
 		<select name="SupplierContact">';
@@ -1094,7 +1103,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 	}
 	echo '</td></tr></table>'; /*end of sub table */
 
-	echo '</td></tr><tr><th colspan="4"><font color="blue" size="4"><b>' . _('Comments');
+	echo '</td></tr><tr><td colspan="2"><table class="selection" width="100%"><tr><th colspan="4" class="header">' . _('Comments') . ':</b></font></th></tr>';
 
 	$Default_Comments = '';
 
@@ -1102,13 +1111,14 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 		$_POST['Comments']=$Default_Comments;
 	}
 
-	echo ':</b></font></th></tr><tr><td colspan="4"><textarea name="Comments" style="width:100%" rows="5">' . $_POST['Comments'] . '</textarea>';
+	echo '<tr><td colspan="4"><textarea name="Comments" style="width:100%" rows="5">' . $_POST['Comments'] . '</textarea>';
 
+	echo '</table></td></tr>';
 	echo '</table>';
 
 	echo '</td></tr></table><br />'; /* end of main table */
 
-	echo '<div class="centre"><input type="submit" name="EnterLines" value="' . _('Enter Line Items') . '" /></div>';
+	echo '<div class="centre"><button type="submit" name="EnterLines">' . _('Enter Line Items') . '</button></div>';
 
 } /*end of if supplier selected */
 

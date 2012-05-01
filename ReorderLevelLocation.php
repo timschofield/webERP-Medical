@@ -35,7 +35,9 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 		$order="locstock.stockid";
 	}
 
-	$sql="SELECT locstock.stockid, stockmaster.description,
+	$sql="SELECT locstock.stockid,
+				stockmaster.description,
+				stockmaster.decimalplaces,
 				locstock.reorderlevel,
 				(SELECT SUM(salesorderdetails.qtyinvoiced)
 					FROM salesorderdetails,salesorders
@@ -59,9 +61,9 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 	$ResultLocation = DB_query($sqlloc,$db);
 	$Location=DB_fetch_array($ResultLocation);
 
-	echo'<p class="page_title_text" align="center"><strong>' . _('Location : ') . '' . $Location['locationname'] . ' </strong></p>';
-	echo'<p class="page_title_text" align="center"><strong>' . _('Number Of Days Sales : ') . '' . $_POST['NumberOfDays'] . '' . _(' Days ') . ' </strong></p>';
-	echo '<table>';
+	echo'<p class="page_title_text" align="center">' . _('Location : ') . '' . $Location['locationname'] . '</p>';
+	echo'<p class="page_title_text" align="center">' . _('Number Of Days Sales : ') . '' . $_POST['NumberOfDays'] . '' . _(' Days ') . '</p>';
+	echo '<table class="selection">';
 	echo '<tr><th>' . _('Code') . '</th>
 				<th>' . _('Description') . '</th>
 				<th>' . _('Total Invoiced').'<br />'._('At All Locations') . '</th>
@@ -133,20 +135,20 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 		$ohin = DB_query($sqlohin,$db);
 		$ohinRow = DB_fetch_array($ohin);
 
-		echo'<td>'.$myrow['stockid'].'</td>
+		echo '<td>'.$myrow['stockid'].'</td>
 			<td>'.$myrow['description'].'</td>
-			<td class="number">'.$QtyInvoiceAll.'</td>
-			<td class="number">'.$QtyInvoice.'</td>
-			<td class="number">'.$ohRow['0'].'</td>
-			<td class="number">'.$ohinRow['0'].'</td>
-			<td><input type="text" class="number" name="ReorderLevel' . $i .'" maxlength="3" size="4" value="'. $myrow['reorderlevel'] .'" />
+			<td class="number">'.locale_number_format($QtyInvoiceAll,$myrow['decimalplaces']).'</td>
+			<td class="number">'.locale_number_format($QtyInvoice,$myrow['decimalplaces']).'</td>
+			<td class="number">'.locale_number_format($ohRow['0'],$myrow['decimalplaces']).'</td>
+			<td class="number">'.locale_number_format($ohinRow['0'],$myrow['decimalplaces']).'</td>
+			<td><input type="text" class="number" name="ReorderLevel' . $i .'" maxlength="10" size="12" value="'. locale_number_format($myrow['reorderlevel'],$myrow['decimalplaces']) .'" />
 				<input type="hidden" name="StockID' . $i . '" value="' . $myrow['stockid'] . '" /></td>
 			</tr> ';
 		$i++;
 
 	} //end of looping
 	echo'<tr>
-			<td style="text-align:center" colspan="7"><input type="submit" name="submit" value="' . _('Update') . '" /></td>
+			<td style="text-align:center" colspan="7"><button type="submit" name="submit">' . _('Update') . '</button></td>
 			 </tr></form>';
 
 
@@ -196,7 +198,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 	echo '<option value="2">'. _('Code') . '</option>';
 
 	echo '</select></td></tr>';
-	echo '</table><br /><p><div class="centre"><input type="submit" name="submit" value="' . _('Submit') . '" /></div></p>';
+	echo '</table><br /><p><div class="centre"><button type="submit" name="submit">' . _('Submit') . '</button></div></p>';
 
 } /*end of else not submit */
 include('includes/footer.inc');
