@@ -118,10 +118,12 @@ if (isset($_POST['submit'])) {
 
 	if ($InputError !=1){
 
-		$sql="SELECT typeid FROM debtortype WHERE typename='Insurance'";
+		$sql="SELECT typeabbrev FROM salestypes";
 		$result=DB_query($sql, $db);
 		$myrow=DB_fetch_array($result);
-		$InsuranceTypeID=$myrow['typeid'];
+		$SalesType=$myrow['typeabbrev'];
+
+		$InsuranceTypeID=$_POST['InsuranceType'];
 
 		if (!isset($_POST['New'])) {
 
@@ -205,7 +207,7 @@ if (isset($_POST['submit'])) {
 					'" . $_POST['Address6'] . "',
 					'" . $_POST['CurrCode'] . "',
 					'1',
-					'ST',
+					'" . $SalesType . "',
 					'" . $_POST['PaymentTerms'] . "',
 					'" . $_POST['TaxRef'] . "',
 					'" . $InsuranceTypeID . "'
@@ -258,7 +260,14 @@ if (isset($_POST['submit'])) {
 	} else {
 		prnMsg( _('Validation failed') . '. ' . _('No updates or deletes took place'),'error');
 	}
-
+	unset($_POST['DebtorNo']);
+	unset($_POST['CustName']);
+	unset($_POST['Address1']);
+	unset($_POST['Address2']);
+	unset($_POST['Address3']);
+	unset($_POST['Address4']);
+	unset($_POST['Address5']);
+	unset($_POST['Address6']);
 } elseif (isset($_POST['delete'])) {
 
 //the link to delete a selected record was clicked instead of the submit button
@@ -406,55 +415,6 @@ if ($SetupErrors>0) {
 	exit;
 }
 
-if (!isset($_GET['Edit'])) {
-	$sql="SELECT debtorno,
-				name,
-				address1,
-				address2,
-				address3,
-				address4,
-				address5,
-				address6,
-				currencies.currency
-			FROM debtorsmaster
-			LEFT JOIN debtortype
-				ON debtorsmaster.typeid=debtortype.typeid
-			LEFT JOIN currencies
-				ON debtorsmaster.currcode=currencies.currabrev
-			WHERE debtortype.typename like '%Insurance%'";
-	$result=DB_query($sql, $db);
-
-	echo '<table class="selection">
-			<tr>
-				<th>' . _('Company No') . '</th>
-				<th>' . _('Name') . '</th>
-				<th>' . _('Address1') . '</th>
-				<th>' . _('Address2') . '</th>
-				<th>' . _('Address3') . '</th>
-				<th>' . _('Address4') . '</th>
-				<th>' . _('Address5') . '</th>
-				<th>' . _('Address6') . '</th>
-				<th>' . _('Currency') . '</th>
-			</tr>';
-
-	while ($myrow=DB_fetch_array($result)) {
-		echo '<tr>
-				<td>' . $myrow['debtorno'] . '</td>
-				<td>' . $myrow['name'] . '</td>
-				<td>' . $myrow['address1'] . '</td>
-				<td>' . $myrow['address2'] . '</td>
-				<td>' . $myrow['address3'] . '</td>
-				<td>' . $myrow['address4'] . '</td>
-				<td>' . $myrow['address5'] . '</td>
-				<td>' . $myrow['address6'] . '</td>
-				<td>' . $myrow['currency'] . '</td>
-				<td><a href="' . $_SERVER['PHP_SELF'] . '?Debtor='.$myrow['debtorno'].'&Edit=True">' . _('Edit') . '</a></td>
-				<td><a href="' . $_SERVER['PHP_SELF'] . '?Debtor='.$myrow['debtorno'].'&Delete=True">' . _('Delete') . '</a></td>
-			</tr>';
-	}
-	echo '</table><br />';
-}
-
 echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
@@ -485,6 +445,7 @@ if (!isset($DebtorNo)) {
 		echo '</select></td></tr>';
 	}
 } else {
+	echo '<input type="hidden" name="DebtorNo" value="'.$DebtorNo.'" />';
 	echo '<tr><td>' . _('Company Code') . ':</td><td>' . $DebtorNo . '</td></tr>';
 	$sql = "SELECT debtorsmaster.debtorno,
 					name,
@@ -498,7 +459,8 @@ if (!isset($DebtorNo)) {
 					custbranch.phoneno,
 					custbranch.faxno,
 					custbranch.email,
-					taxref
+					taxref,
+					typeid
 				FROM debtorsmaster
 				LEFT JOIN custbranch
 					ON debtorsmaster.debtorno=custbranch.debtorno
@@ -545,6 +507,25 @@ echo '</table></td><td valign="top"><table class="selection">';
 
 echo '<tr><td>' . _('Tax Reference') . ':</td>
 	<td><input tabindex=15 type="Text" name="TaxRef" size=22 maxlength=20 value="'.$_POST['TaxRef'].'"></td></tr>';
+// Show Sales Type drop down list
+	$TypeResult=DB_query("SELECT typeid, typename FROM debtortype WHERE typename like '%insurance%'",$db);
+	if (DB_num_rows($TypeResult)==0){
+		$DataError =1;
+		echo '<a href="CustomerTypes.php?" target="_parent">Setup Types</a>';
+		echo '<tr><td colspan="2">' . prnMsg(_('No insurance company types defined'),'warn') . '</td></tr>';
+	} else {
+		echo '<tr><td>' . _('Insurance Type') . ':</td>
+				<td><select tabindex="9" name="InsuranceType">';
+		echo '<option value=""></option>';
+		while ($MyTypeRow = DB_fetch_array($TypeResult)) {
+			if (isset($myrow['typeid']) and $myrow['typeid']==$MyTypeRow['typeid']) {
+				echo '<option selected="selected" value="'. $MyTypeRow['typeid'] . '">' . $MyTypeRow['typename'] . '</option>';
+			} else {
+				echo '<option value="'. $MyTypeRow['typeid'] . '">' . $MyTypeRow['typename'] . '</option>';
+			}
+		} //end while loopre
+		echo '</select></td></tr>';
+	}
 
 $result=DB_query("SELECT terms, termsindicator FROM paymentterms",$db);
 if (DB_num_rows($result)==0){
@@ -772,6 +753,55 @@ if(isset($_POST['addcontact']) AND (isset($_POST['addcontact'])!=''))
 	echo '<meta http-equiv="Refresh" content="0; url=' . $rootpath . '/AddCustomerContacts.php?DebtorNo=' .$DebtorNo.'">';
 }
 echo '</div></form>';
+
+if (!isset($_GET['Edit'])) {
+	$sql="SELECT debtorno,
+				name,
+				address1,
+				address2,
+				address3,
+				address4,
+				address5,
+				address6,
+				currencies.currency
+			FROM debtorsmaster
+			LEFT JOIN debtortype
+				ON debtorsmaster.typeid=debtortype.typeid
+			LEFT JOIN currencies
+				ON debtorsmaster.currcode=currencies.currabrev
+			WHERE debtortype.typename like '%Insurance%'";
+	$result=DB_query($sql, $db);
+
+	echo '<br /><table class="selection">
+			<tr>
+				<th>' . _('Company No') . '</th>
+				<th>' . _('Name') . '</th>
+				<th>' . _('Address1') . '</th>
+				<th>' . _('Address2') . '</th>
+				<th>' . _('Address3') . '</th>
+				<th>' . _('Address4') . '</th>
+				<th>' . _('Address5') . '</th>
+				<th>' . _('Address6') . '</th>
+				<th>' . _('Currency') . '</th>
+			</tr>';
+
+	while ($myrow=DB_fetch_array($result)) {
+		echo '<tr>
+				<td>' . $myrow['debtorno'] . '</td>
+				<td>' . $myrow['name'] . '</td>
+				<td>' . $myrow['address1'] . '</td>
+				<td>' . $myrow['address2'] . '</td>
+				<td>' . $myrow['address3'] . '</td>
+				<td>' . $myrow['address4'] . '</td>
+				<td>' . $myrow['address5'] . '</td>
+				<td>' . $myrow['address6'] . '</td>
+				<td>' . $myrow['currency'] . '</td>
+				<td><a href="' . $_SERVER['PHP_SELF'] . '?Debtor='.$myrow['debtorno'].'&Edit=True">' . _('Edit') . '</a></td>
+				<td><a href="' . $_SERVER['PHP_SELF'] . '?Debtor='.$myrow['debtorno'].'&Delete=True">' . _('Delete') . '</a></td>
+			</tr>';
+	}
+	echo '</table><br />';
+}
 
 include('includes/footer.inc');
 ?>
