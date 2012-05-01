@@ -135,6 +135,8 @@ if (isset($_POST['PrintPDF'])
 	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post"><table>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print Transfer Note') . '" alt="" />' . ' ' . $title.'</p><br />';
+
 	if (!isset($_POST['FromCriteria']) or mb_strlen($_POST['FromCriteria'])<1){
 		$DefaultFromCriteria = '1';
 	} else {
@@ -145,7 +147,7 @@ if (isset($_POST['PrintPDF'])
 	} else {
 		$DefaultToCriteria = $_POST['ToCriteria'];
 	}
-	echo '<tr><td>' . _('From Supplier Code') . ':</font></td>
+	echo '<table class="selection"><tr><td>' . _('From Supplier Code') . ':</font></td>
 			<td><input type="text" maxlength="6" size="7" name="FromCriteria" value="' . $DefaultFromCriteria . '" /></td></tr>';
 	echo '<tr><td>' . _('To Supplier Code') . ':</td>
 			<td><input type="text" maxlength="6" size="7" name="ToCriteria" value="' . $DefaultToCriteria . '" /></td></tr>';
@@ -159,7 +161,7 @@ if (isset($_POST['PrintPDF'])
 	echo '<tr><td>' . _('Date Of Payment') . ':</td>
 			<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="PaymentDate" maxlength="11" size="12" value="' . $DefaultDate . '" /></td></tr>';
 
-	echo '</table><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div></form>';
+	echo '</table><br /><div class="centre"><button type="submit" name="PrintPDF">' . _('Print PDF') . '</button></div></form><br />';
 
 	include ('includes/footer.inc');
 } /*end of else not PrintPDF */

@@ -24,7 +24,7 @@ if (!isset($_GET['TransferNo'])){
 		echo '<td>'._('Print Stock Transfer Note').' : '.'</td>';
 		echo '<td><input type="text" class="number"  name="TransferNo" maxlength="10" size="11" /></td></tr>';
 		echo '</table>';
-		echo '<br /><div class="centre"><input type="submit" name="Process" value="' . _('Print Transfer Note') . '"></div></form>';
+		echo '<br /><div class="centre"><button type="submit" name="Process">' . _('Print Transfer Note') . '</button></div></form></br />';
 		include('includes/footer.inc');
 		exit();
 	}

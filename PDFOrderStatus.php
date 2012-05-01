@@ -64,7 +64,7 @@ if (!isset($_POST['FromDate']) or !isset($_POST['ToDate'])){
 	echo '<tr><td>' . _('Back Order Only') . ':</td><td><select name="BackOrders">';
 	echo '<option selected="True" value="Yes">' . _('Only Show Back Orders') . '</option>';
 	echo '<option value="No">' . _('Show All Orders') . '</option>';
-	echo '</select></td></tr></table><br /><div class="centre"><input type="submit" name="Go" value="' . _('Create PDF') . '" /></div>';
+	echo '</select></td></tr></table><br /><div class="centre"><button type="submit" name="Go">' . _('Create PDF') . '</button></div><br />';
 
 	include('includes/footer.inc');
 	exit;

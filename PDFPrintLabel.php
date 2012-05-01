@@ -86,8 +86,8 @@ if (isset($_POST['ShowLabels'])
 		<input type="hidden" name="LabelID" value="' . $_POST['LabelID'] . '" />
 		<br />
 		<div class="centre">
-			<input type="submit" name="PrintLabels" value="'. _('Print Labels'). '" />
-		</div>
+			<button type="submit" name="PrintLabels">'. _('Print Labels'). '</button>
+		</div><br />
 		</form>';
 	exit;
 }
