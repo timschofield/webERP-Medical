@@ -162,7 +162,7 @@ or deletion of the records*/
 	echo '</table><br />';
 	if (DB_num_rows($result)==0){
 		echo '<div class="centre">
-				<input tabindex="1" type="submit" name="NewEDIInvMsg" value="' . _('Create New EDI Invoice Message From Default Template') . '" />
+				<button tabindex="1" type="submit" name="NewEDIInvMsg">' . _('Create New EDI Invoice Message From Default Template') . '</button>
 			</div><br />';
 	}
 } //end of ifs SelectedLine is not set
@@ -243,9 +243,9 @@ echo '<input tabindex="4" type="text" name="LineText" size="50" maxlength="50" v
 echo '</td></tr>';
 echo '</table><br />';
 if (isset($_GET['SelectedMessageLine'])) {
-	echo '<div class="centre"><input tabindex="5" type="submit" name="update" value="'.  _('Update Information'). '" /></div>';
+	echo '<div class="centre"><button tabindex="5" type="submit" name="update">'.  _('Update Information'). '</button></div><br />';
 } else {
-	echo '<div class="centre"><input tabindex="5" type="submit" name="submit" value="'.  _('Enter Information'). '" /></div>';
+	echo '<div class="centre"><button tabindex="5" type="submit" name="submit">'.  _('Enter Information'). '</button></div><br />';
 }
 
 echo '</form>';

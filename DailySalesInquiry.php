@@ -23,7 +23,7 @@ if (!isset($_POST['MonthToShow'])){
 echo '<table class="selection">
 	<tr>
 		<td>' . _('Month to Show') . ':</td>
-		<td><select tabindex="1" name="MonthToShow">';
+		<td><select tabindex="1" name="MonthToShow" onChange="ReloadForm(ShowResults)">';
 
 $PeriodsResult = DB_query("SELECT periodno, lastdate_in_period FROM periods",$db);
 
@@ -37,7 +37,7 @@ while ($PeriodRow = DB_fetch_array($PeriodsResult)){
 }
 echo '</select></td>
 	<td>' . _('Salesperson') . ':</td>
-	<td><select tabindex="2" name="Salesperson">';
+	<td><select tabindex="2" name="Salesperson" onChange="ReloadForm(ShowResults)">';
 
 $SalespeopleResult = DB_query("SELECT salesmancode, salesmanname FROM salesman",$db);
 if (!isset($_POST['Salesperson'])){
@@ -60,7 +60,7 @@ echo '</tr>
 	</table>
 	<br />
 	<div class="centre">
-		<input tabindex="4" type="submit" name="ShowResults" value="' . _('Show Daily Sales For The Selected Month') . '" />
+		<button tabindex="4" type="submit" name="ShowResults">' . _('Show Daily Sales For The Selected Month') . '</button>
 	</div>
 	</form>
 	<br />';

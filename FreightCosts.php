@@ -52,7 +52,7 @@ if (!isset($LocationFrom) OR !isset($ShipperID)) {
 		echo '<option value=' . $myrow['loccode'] . '>' . $myrow['locationname'] . '</option>';
 	}
 
-	echo '</select></td></tr></table><br /><div class="centre"><input type="submit" value="' . _('Accept') . '" name="Accept" /></div></form>';
+	echo '</select></td></tr></table><br /><div class="centre"><button type="submit" name="Accept" />' . _('Accept') . '</button></div><br /></form>';
 
 } else {
 
@@ -314,8 +314,7 @@ if (isset($LocationFrom) AND isset($ShipperID)) {
 	if (!isset($_POST['MAXCub'])) {$_POST['MAXCub']='';}
 
 	echo '<br /><table class="selection">';
-	echo '<tr><th colspan="2"><font size="4" color="blue">' . _('For Deliveries From') . ' ' . $LocationName . ' ' . _('using') . ' ' .
-		$ShipperName . '</font></th></tr>';
+	echo '<tr><th colspan="2" class="header">' . _('For Deliveries From') . ' ' . $LocationName . ' ' . _('using') . ' ' . $ShipperName . '</th></tr>';
 	echo'<tr><td>' . _('Destination') . ':</td>
 		<td><input type="text" maxlength="20" size="20" name="Destination" value="' . $_POST['Destination'] . '" /></td></tr>';
 	echo '<tr><td>' . _('Rate per Cubic Metre') . ':</td>
@@ -333,7 +332,7 @@ if (isset($LocationFrom) AND isset($ShipperID)) {
 
 	echo '</table><br />';
 
-	echo '<div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div>';
+	echo '<div class="centre"><button type="submit" name="submit">' . _('Enter Information') . '</button></div><br />';
 
 	echo '</form>';
 

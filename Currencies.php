@@ -50,7 +50,7 @@ if (isset($_POST['submit'])) {
 		$Errors[$i] = 'Abbreviation';
 		$i++;
 	}
-	if (mb_strlen($_POST['Abbreviation']) > 3) {
+	if (strlen($_POST['Abbreviation']) > 3) {
 		$InputError = 1;
 		prnMsg(_('The currency abbreviation must be 3 characters or less long and for automated currency updates to work correctly be one of the ISO4217 currency codes'),'error');
 		$Errors[$i] = 'Abbreviation';
@@ -68,21 +68,23 @@ if (isset($_POST['submit'])) {
 		$Errors[$i] = 'DecimalPlaces';
 		$i++;
 	}
-	if (mb_strlen($_POST['Country']) > 50) {
+	if (strlen($_POST['CurrencyName']) > 20) {
+		$InputError = 1;
+		prnMsg(_('The currency name must be 20 characters or less long'),'error');
+		$Errors[$i] = 'CurrencyName';
+		$i++;
+	}
+	if (strlen($_POST['Country']) > 50) {
 		$InputError = 1;
 		prnMsg(_('The currency country must be 50 characters or less long'),'error');
 		$Errors[$i] = 'Country';
 		$i++;
 	}
-	if (mb_strlen($_POST['HundredsName']) > 15) {
+	if (strlen($_POST['HundredsName']) > 15) {
 		$InputError = 1;
 		prnMsg(_('The hundredths name must be 15 characters or less long'),'error');
 		$Errors[$i] = 'HundredsName';
 		$i++;
-	}
-	if (($FunctionalCurrency != '') and (isset($SelectedCurrency) and $SelectedCurrency==$FunctionalCurrency)){
-		$InputError = 1;
-		prnMsg(_('The functional currency cannot be modified or deleted'),'error');
 	}
 	if (mb_strstr($_POST['Abbreviation'],"'") OR mb_strstr($_POST['Abbreviation'],'+') OR mb_strstr($_POST['Abbreviation'],"\"") OR mb_strstr($_POST['Abbreviation'],'&') OR mb_strstr($_POST['Abbreviation'],' ') OR mb_strstr($_POST['Abbreviation'],"\\") OR mb_strstr($_POST['Abbreviation'],'.') OR mb_strstr($_POST['Abbreviation'],'"')) {
 		$InputError = 1;
@@ -221,7 +223,7 @@ or deletion of the records*/
 			$k++;
 		}
 		// Lets show the country flag
-		$ImageFile = 'flags/' . mb_strtoupper($myrow[1]) . '.gif';
+		$ImageFile = 'flags/' . strtoupper($myrow[1]) . '.gif';
 
 		if(!file_exists($ImageFile)){
 			$ImageFile =  'flags/blank.gif';
@@ -264,7 +266,9 @@ or deletion of the records*/
 					<td>%s</td>
 					<td class="number">%s</td>
 					<td class="number">%s</td>
-					<td colspan="4">%s</td>
+					<td colspan="2">%s</td>
+					<td><a href="%s&SelectedCurrency=%s">%s</a></td>
+					<td><a href="%s/ExchangeRateTrend.php?%s">' . _('Graph') . '</a></td>
 					</tr>',
 					$ImageFile,
 					$myrow['currabrev'],
@@ -273,7 +277,15 @@ or deletion of the records*/
 					$myrow['hundredsname'],
 					$myrow['decimalplaces'],
 					1,
-					_('Functional Currency'));
+					_('Functional Currency'),
+					htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
+					$myrow['currabrev'],
+					_('Edit'),
+					htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
+					$myrow['currabrev'],
+					_('Delete'),
+					$rootpath,
+					'CurrencyToShow=' . $myrow['currabrev']);
 		}
 
 	} //END WHILE LIST LOOP
@@ -349,8 +361,12 @@ if (!isset($_GET['delete'])) {
 	echo '</td></tr>';
 	echo '<tr><td>'._('Exchange Rate').':</td>';
 	echo '<td>';
-	if (!isset($_POST['ExchangeRate'])) {$_POST['ExchangeRate']='0';}
-	echo '<input ' . (in_array('ExchangeRate',$Errors) ?  'class="inputerror"' : '' ) .' type="text" class="number" name="ExchangeRate" size="10" maxlength="9" value="'. locale_number_format($_POST['ExchangeRate'],5).'" />';
+	if (!isset($_POST['ExchangeRate'])) {$_POST['ExchangeRate']='1';}
+	if ($myrow[1]!=$FunctionalCurrency){
+		echo '<input ' . (in_array('ExchangeRate',$Errors) ?  'class="inputerror"' : '' ) .' type="text" class="number" name="ExchangeRate" size="10" maxlength="9" value="'. locale_number_format($_POST['ExchangeRate'],5).'" />';
+	} else {
+		echo '<input ' . (in_array('ExchangeRate',$Errors) ?  'class="inputerror"' : '' ) .' readonly type="text" class="number" name="ExchangeRate" size="10" maxlength="9" value="'. locale_number_format($_POST['ExchangeRate'],5).'" />';
+	}
 	echo '</td></tr>';
 	echo '<tr><td>'._('Decimal Places to Show').':</td>';
 	echo '<td>';
@@ -359,7 +375,7 @@ if (!isset($_GET['delete'])) {
 	echo '</td></tr>';
 	echo '</table>';
 
-	echo '<br /><div class="centre"><input type="submit" name="submit" value="'._('Enter Information').'" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="submit">'._('Enter Information').'</button></div><br />';
 
 	echo '</form>';
 

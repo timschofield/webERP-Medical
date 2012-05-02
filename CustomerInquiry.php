@@ -145,10 +145,15 @@ echo '<tr><td class="number">' . locale_money_format($CustomerRecord['balance'],
 	</tr>
 	</table>';
 
-echo '<br /><div class="centre"><form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
+echo '<br /><form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo _('Show all transactions after') . ': <input tabindex="1" type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" id="datepicker" name="TransAfterDate" value="' . $_POST['TransAfterDate'] . '" maxlength="10" size="12" />' .
-		'	<input tabindex="2" type="submit" name="Refresh Inquiry" value="' . _('Refresh Inquiry') . '" /></div></form><br />';
+echo '<table class="selection">
+		<tr>
+			<td>' . _('Show all transactions after') . ': </td>
+			<td><input tabindex="1" type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" id="datepicker" name="TransAfterDate" value="' . $_POST['TransAfterDate'] . '" maxlength="10" size="12" /></td>
+			<td><button tabindex="2" type="submit" name="Refresh Inquiry">' . _('Refresh Inquiry') . '</button></td>
+		</tr>
+	</table></form><br />';
 
 $DateAfterCriteria = FormatDateForSQL($_POST['TransAfterDate']);
 
@@ -185,21 +190,22 @@ if (DB_num_rows($TransResult)==0){
 echo '<table class="selection" cellpadding="2">';
 
 $tableheader = '<tr>
-							<th>' . _('Type') . '</th>
-							<th>' . _('Number') . '</th>
-							<th>' . _('Date') . '</th>
-							<th>' . _('Branch') . '</th>
-							<th>' . _('Reference') . '</th>
-							<th>' . _('Comments') . '</th>
-							<th>' . _('Order') . '</th>
-							<th>' . _('Total') . '</th>
-							<th>' . _('Allocated') . '</th>
-							<th>' . _('Balance') . '</th>
-							<th>' . _('More Info') . '</th>
-							<th>' . _('More Info') . '</th>
-							<th>' . _('More Info') . '</th>
-							<th>' . _('More Info') . '</th>
-							<th>' . _('More Info') . '</th></tr>';
+					<th>' . _('Type') . '</th>
+					<th>' . _('Number') . '</th>
+					<th>' . _('Date') . '</th>
+					<th>' . _('Branch') . '</th>
+					<th>' . _('Reference') . '</th>
+					<th>' . _('Comments') . '</th>
+					<th>' . _('Order') . '</th>
+					<th>' . _('Total') . '</th>
+					<th>' . _('Allocated') . '</th>
+					<th>' . _('Balance') . '</th>
+					<th>' . _('More Info') . '</th>
+					<th>' . _('More Info') . '</th>
+					<th>' . _('More Info') . '</th>
+					<th>' . _('More Info') . '</th>
+					<th>' . _('More Info') . '</th>
+				</tr>';
 
 echo $tableheader;
 

@@ -593,8 +593,8 @@ if (!isset($DebtorNo)) {
 
 	echo'</table></td></tr></table>';
 	if ($DataError ==0){
-		echo '<br /><div class="centre"><input tabindex="20" type="submit" name="submit" value="' . _('Add New Customer') . '" />&nbsp;
-		<input tabindex="21" type="submit" action="reset" value="' . _('Reset') . '" /></div>';
+		echo '<br /><div class="centre"><button tabindex="20" type="submit" name="submit">' . _('Add New Customer') . '</button>&nbsp;
+		<button tabindex="21" type="submit" action="reset">' . _('Reset') . '</button></div>';
 	}
 	echo '</form>';
 
@@ -890,7 +890,7 @@ if (!isset($DebtorNo)) {
 	$result = DB_query($sql,$db);
 
 	echo '<table class="selection">';
-	echo '<caption>' . _('Customer Contacts') . '</caption>';
+	echo '<tr><th class="header" colspan="6">' . _('Customer Contacts') . '</th></tr>';
 
 	if (isset($_GET['Modify'])) {
 		echo '<tr>
@@ -904,7 +904,7 @@ if (!isset($DebtorNo)) {
 			<th>' . _('Role') . '</th>
 			<th>' . _('Phone Number') . '</th>
 			<th>' . _('Notes') . '</th>
-			<th colspan="2"><input type="submit" name="addcontact" value="Add Contact" /></th></tr>';
+			<th colspan="2"><button type="submit" name="addcontact">' . _('Add Contact') . '</button></th></tr>';
 	}
 
 	$k=0; //row colour counter
@@ -987,7 +987,7 @@ if (!isset($DebtorNo)) {
 				<td><textarea name="notes">'.$_POST['notes'].'</textarea></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" name="update" value="update" /></td>
+				<td colspan="2"><button type="submit" name="update">' . _('update') . '</button></td>
 			</tr>
 			</table>';
 	}
@@ -1018,11 +1018,11 @@ if (!isset($DebtorNo)) {
 	}
 
 	if (isset($_POST['New']) and $_POST['New']) {
-		echo '<div class="centre"><input type="submit" name="submit" value="' . _('Add New Customer') . '" />&nbsp;
-				<input type="submit" name="reset" value="' . _('Reset') . '" /></div></form>';
+		echo '<div class="centre"><button type="submit" name="submit">' . _('Add New Customer') . '</button>&nbsp;
+				<button type="submit" name="reset">' . _('Reset') . '</button></div></form>';
 	} else if (!isset($_GET['Modify'])){
-		echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Update Customer') . '" />';
-		echo '&nbsp;<input type="submit" name="delete" value="' . _('Delete Customer') . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');" /></div></form>';
+		echo '<br /><div class="centre"><button type="submit" name="submit">' . _('Update Customer') . '</button>';
+		echo '&nbsp;<button type="submit" name="delete" onclick="return confirm(\'' . _('Are You Sure?') . '\');">' . _('Delete Customer') . '</button></div><br /></form>';
 	} else {
 		echo '</form>';
 	}

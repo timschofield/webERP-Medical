@@ -1246,6 +1246,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount)
 					VALUES (11,
@@ -1253,6 +1254,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 						'" . $DefaultDispatchDate . "',
 						'" . $PeriodNo . "',
 						'" . $COGSAccount . "',
+						'" . $_SESSION['DefaultTag'] . "',
 						'" . $_SESSION['CreditItems']->DebtorNo . " - " . $CreditLine->StockID . " x " . filter_number_input($CreditLine->QtyDispatched) . " @ " . $CreditLine->StandardCost . "',
 						'-" . filter_number_input(round($CreditLine->StandardCost * $CreditLine->QtyDispatched,2)) . "'
 						)";
@@ -1270,6 +1272,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 								trandate,
 								periodno,
 								account,
+								defaulttag,
 								narrative,
 								amount)
 						VALUES (11,
@@ -1277,6 +1280,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 							'" . $DefaultDispatchDate . "',
 							'" . $PeriodNo . "',
 							'" . $_POST['WriteOffGLCode'] . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'" . $_SESSION['CreditItems']->DebtorNo . " - " . $CreditLine->StockID . " x " . filter_number_input($CreditLine->QtyDispatched) . " @ " . $CreditLine->StandardCost . "',
 							'" . filter_number_input(round($CreditLine->StandardCost * $CreditLine->QtyDispatched,2)) . "')";
 				} else {
@@ -1286,6 +1290,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 								trandate,
 								periodno,
 								account,
+								defaulttag,
 								narrative,
 								amount)
 						VALUES (11,
@@ -1293,6 +1298,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 							'" . $DefaultDispatchDate . "',
 							'" . $PeriodNo . "',
 							'" . $StockGLCode['stockact'] . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'" . $_SESSION['CreditItems']->DebtorNo . " - " . $CreditLine->StockID . " x " . filter_number_input($CreditLine->QtyDispatched) . " @ " . $CreditLine->StandardCost . "',
 							'" . filter_number_input(round($CreditLine->StandardCost * $CreditLine->QtyDispatched,2)) . "')";
 				}
@@ -1313,6 +1319,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount)
 					VALUES (11,
@@ -1320,6 +1327,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 						'" . $DefaultDispatchDate . "',
 						'" . $PeriodNo . "',
 						'" . $SalesGLAccounts['salesglcode'] . "',
+						'" . $_SESSION['DefaultTag'] . "',
 						'" . $_SESSION['CreditItems']->DebtorNo . " - " . $CreditLine->StockID . " x " . filter_number_input($CreditLine->QtyDispatched) . " @ " . $CreditLine->Price . "',
 						'" . filter_number_input(round(($CreditLine->Price * $CreditLine->QtyDispatched)/$_SESSION['CurrencyRate'],2)) . "'
 						)";
@@ -1335,6 +1343,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 								trandate,
 								periodno,
 								account,
+								defaulttag,
 								narrative,
 								amount)
 						VALUES (11,
@@ -1342,6 +1351,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 							'" . $DefaultDispatchDate . "',
 							'" . $PeriodNo . "',
 							'" . $SalesGLAccounts['discountglcode'] . "',
+							'" . $_SESSION['DefaultTag'] . "',
 							'" . $_SESSION['CreditItems']->DebtorNo . " - " . $CreditLine->StockID . " @ " . ($CreditLine->DiscountPercent * 100) . "%',
 							'-" . filter_number_input(round(($CreditLine->Price * $CreditLine->QtyDispatched * $CreditLine->DiscountPercent)/$_SESSION['CurrencyRate'],2)) . "'
 							)";
@@ -1363,6 +1373,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount)
 					VALUES (11,
@@ -1370,6 +1381,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 						'" . $DefaultDispatchDate . "',
 						'" . $PeriodNo . "',
 						'" . $_SESSION['CompanyRecord']['debtorsact'] . "',
+						'" . $_SESSION['DefaultTag'] . "',
 						'" . $_SESSION['CreditItems']->DebtorNo . "',
 						'-" . filter_number_input(round(($_SESSION['CreditItems']->total + $_SESSION['CreditItems']->FreightCost + $TaxTotal)/$_SESSION['CurrencyRate'],2)) . "'
 					)";
@@ -1389,6 +1401,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 							trandate,
 							periodno,
 							account,
+							defaulttag,
 							narrative,
 							amount)
 				VALUES (11,
@@ -1396,6 +1409,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 					'" . $DefaultDispatchDate . "',
 					'" . $PeriodNo . "',
 					'" . $_SESSION['CompanyRecord']['freightact'] . "',
+					'" . $_SESSION['DefaultTag'] . "',
 					'" . $_SESSION['CreditItems']->DebtorNo . "',
 					'" . filter_number_input(round($_SESSION['CreditItems']->FreightCost/$_SESSION['CurrencyRate'],2)) . "'
 					)";
@@ -1413,6 +1427,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 						trandate,
 						periodno,
 						account,
+						defaulttag,
 						narrative,
 						amount
 						)
@@ -1422,6 +1437,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 						'" . $DefaultDispatchDate . "',
 						'" . $PeriodNo . "',
 						'" . $TaxGLCodes[$TaxAuthID] . "',
+						'" . $_SESSION['DefaultTag'] . "',
 						'" . $_SESSION['CreditItems']->DebtorNo . "',
 						'" . filter_number_input($TaxAmount/$_SESSION['CurrencyRate']) . "'
 					)";
@@ -1515,16 +1531,16 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 				echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountname'].'</option>';
 			}
 		}
-		echo "</select></td></tr>";
+		echo '</select></td></tr>';
 	}
 	if (!isset($_POST['CreditText'])) {
 		$_POST['CreditText'] = '';
 	}
 	$j++;
 	echo '<tr><td>' . _('Credit note text') . '</td><td><textarea tabindex="'.$j.'"  name="CreditText" cols="31" rows="5">' . $_POST['CreditText'] . '</textarea></td></tr>';
-	echo '</table><br /><div class="centre"><input tabindex="'.$j.'" type="submit" name="Update" value="' . _('Update') . '" /><br />';
+	echo '</table><br /><div class="centre"><button tabindex="'.$j.'" type="submit" name="Update">' . _('Update') . '</button><br />';
 	$j++;
-	 echo '<input type="submit" tabindex="'.$j++.'" name="ProcessCredit" value="' . _('Process Credit') .'" /></div>';
+	 echo '<button type="submit" tabindex="'.$j++.'" name="ProcessCredit">' . _('Process Credit') .'</button></div>';
 }
 
 echo '</form>';

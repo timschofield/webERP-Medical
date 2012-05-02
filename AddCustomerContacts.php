@@ -169,7 +169,7 @@ if (isset($Id)) {
 
 if (!isset($_GET['delete'])) {
 
-	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?DebtorNo='.$DebtorNo.'">';
+	echo '<br /><form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?DebtorNo='.$DebtorNo.'">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (isset($Id)) {
@@ -252,7 +252,7 @@ if (!isset($_GET['delete'])) {
 	echo '<tr>
 			<td colspan="2">
 				<div class="centre">
-					<input type="submit" name="submit" value="'. _('Enter Information') . '" />
+					<button type="submit" name="submit">'. _('Enter Information') . '</button>
 				</div>
 			</td>
 		</tr>

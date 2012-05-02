@@ -149,13 +149,13 @@ echo '</table><br />';
 
 echo '<div class="centre">';
 if (isset($_GET['SelectedLocation'])) {
-	echo '<input type="submit" name="update" value="' . _('Update Information') . '" />';
+	echo '<button type="submit" name="update">' . _('Update Information') . '</button>';
 	echo '<br />';
-	echo '<br /><div class="centre"><input type="submit" name="delete" value="' . _('Delete This Location') . '" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="delete">' . _('Delete This Location') . '</button></div>';
 } else {
-	echo '<input type="submit" name="submit" value="' . _('Enter Information') . '" />';
+	echo '<button type="submit" name="submit">' . _('Enter Information') . '</button>';
 }
-echo '</div>';
+echo '</div><br />';
 echo '</form>';
 
 include('includes/footer.inc');

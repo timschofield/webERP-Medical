@@ -36,7 +36,7 @@ echo '<td>'._('Transaction Number') . ':</td>
 	<td><input tabindex="2" type="text" name="TransNo" maxlength="10" size="10" value="'. $_POST['TransNo'] . '" /></td>';
 
 echo '</tr></table><br />
-	<div class="centre"><input tabindex="3" type="submit" name="ShowResults" value="'._('Show How Allocated').'" /></div>';
+	<div class="centre"><button tabindex="3" type="submit" name="ShowResults">'._('Show How Allocated').'</button></div><br />';
 
 if (isset($_POST['ShowResults']) AND  $_POST['TransNo']==''){
 	echo '<br />';
@@ -90,13 +90,14 @@ if (isset($_POST['ShowResults']) AND  $_POST['TransNo']!=''){
 		echo '<tr><th colspan="6"><div class="centre"><font size="3" color="blue"><b>'._('Allocations made against invoice number') . ' ' . $_POST['TransNo']
 			. '<br />'._('Transaction Total').': '. locale_money_format($myrow['totamt'],$myrow['currcode']) . '</font></b></div></th></tr>';
 
-		$tableheader = '<tr><th>'._('Type').'</th>
-					<th>'._('Number').'</th>
-					<th>'._('Reference').'</th>
-					<th>'._('Ex Rate').'</th>
-					<th>'._('Amount').'</th>
-					<th>'._('Alloc').'</th>
-				</tr>';
+		$tableheader = '<tr>
+							<th>'._('Type').'</th>
+							<th>'._('Number').'</th>
+							<th>'._('Reference').'</th>
+							<th>'._('Ex Rate').'</th>
+							<th>'._('Amount').'</th>
+							<th>'._('Alloc').'</th>
+						</tr>';
 		echo $tableheader;
 
 		$RowCounter = 1;

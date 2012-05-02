@@ -418,7 +418,7 @@ if (isset($_GET['AllocTrans'])) {
 				<td class="number"><b><u>' . locale_money_format($TotalAllocated,$_SESSION['Alloc']->CurrCode) . '</u></b></td>';
 		$j++;
 		echo '<td rowspan="2">
-				<input tabindex='.$j.' type="submit" name="RefreshAllocTotal" value="' . _('Recalculate Total To Allocate') . '" /></td>';
+				<button tabindex='.$j.' type="submit" name="RefreshAllocTotal">' . _('Recalculate Total To Allocate') . '</button></td>';
 
 		echo '<tr>
 				<td colspan="5" class="number"><b>'._('Left to allocate').'</b></td>
@@ -426,8 +426,8 @@ if (isset($_GET['AllocTrans'])) {
 			</tr>';
 		echo '</table><br />';
 		echo '<input type="hidden" name="TotalNumberOfAllocs" value="' . $Counter . '" />';
-		echo '<div class="centre"><input tabindex="'.$j.'" type="submit" name="UpdateDatabase" value="' . _('Process Allocations') . '" />';
-		echo '<input tabindex="'.$j.'" type="submit" name="Cancel" value="' . _('Cancel') . '" /></div>';
+		echo '<div class="centre"><button tabindex="'.$j.'" type="submit" name="UpdateDatabase">' . _('Process Allocations') . '</button>';
+		echo '<button tabindex="'.$j.'" type="submit" name="Cancel">' . _('Cancel') . '</button></div><br />';
 
 	} elseif (isset($_GET['DebtorNo'])) {
 		// Page called with customer code

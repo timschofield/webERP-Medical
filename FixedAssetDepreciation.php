@@ -89,7 +89,7 @@ if (isset($_POST['CommitDepreciation']) AND $InputError==false){
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('Fixed Asset Depreciation') . '" alt="" />' . ' ' . $title . '</p>';
 
-echo '<table>';
+echo '<table class="selection">';
 $Heading = '<tr><th>' . _('Asset ID') . '</th>
 				<th>' . _('Description') . '</th>
 				<th>' . _('Date Purchased') . '</th>
@@ -275,7 +275,7 @@ if (isset($_POST['CommitDepreciation']) AND $InputError==false){
 		echo '<td>'._('Date to Process Depreciation'). ':</td>
 					<td>' . $_POST['ProcessDate'] .'</td>';
 	}
-	echo '<td><div class="centre"><input type="submit" name="CommitDepreciation" value="'._('Commit Depreciation').'" /></div>';
+	echo '<td><div class="centre"><button type="submit" name="CommitDepreciation">'._('Commit Depreciation').'</button></div>';
 	echo '</tr></table><br />';
 	echo '</form>';
 }

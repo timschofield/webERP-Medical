@@ -84,7 +84,7 @@ if (isset($_POST['selectchoice'])) {
 		}
 
 		echo '</select></td>';
-		echo '<td><input type="submit" name="select" value="'._('Select').'" /></td>
+		echo '<td><button type="submit" name="select">'._('Select').'</button></td>
 			</tr>
 			</table>
 			<br />';
@@ -127,12 +127,12 @@ if (isset($_POST['selectchoice'])) {
 				<td><input type="text" name="PartID" size="10" maxlength="10" value="' . $_POST['PartID'] . '" /></td>
 				<td>' . _('Partial description') . ':</td>
 				<td><input type="text" name="PartDesc" size="10" value="' . $_POST['PartDesc'] .'" maxlength="10" /></td>
-				<td><input type="submit" name="search" value="' . _('Search') .'" /></td>
+				<td><button type="submit" name="search">' . _('Search') .'</button></td>
 			</tr>';
 
 		echo '</table>';
 
-		echo '<br /><div class="centre"><input type="submit" name="submit" value="'. _('Update Item') .'" /></div>';
+		echo '<br /><div class="centre"><button type="submit" name="submit">'. _('Update Item') .'</button></div>';
 
 		if (isset($_POST['search'])) {
 			if ($_POST['PartID']!='' and $_POST['PartDesc']=='')
@@ -149,7 +149,7 @@ if (isset($_POST['selectchoice'])) {
 			if (!isset($_POST['stockID'])) {
 				echo _('Select a part code').':<br />';
 				while ($myrow=DB_fetch_array($result)) {
-					echo '<input type="submit" name="stockID" value="'.$myrow['stockid'].'" /><br />';
+					echo '<button type="submit" name="stockID">'.$myrow['stockid'].'</button><br />';
 				}
 			}
 		}
@@ -168,7 +168,7 @@ if (isset($_POST['selectchoice'])) {
 			echo '<option value="'.$myrow['categoryid'].'">'.$myrow['categorydescription'].'</option>';
 		}
 		echo '</select></td></tr></table>';
-		echo '<br /><div class="centre"><input type="submit" name="SubmitCategory" value="'. _('Update Items') .'" /></div>';
+		echo '<br /><div class="centre"><button type="submit" name="SubmitCategory">'. _('Update Items') .'</button></div>';
 	}
 	echo '</form>';
 
@@ -198,8 +198,8 @@ if (isset($_POST['selectchoice'])) {
 
 		echo '<br /><table class="selection">';
 		echo '<tr>
-			<th>'. _('Discount Category') .'</th>
-			<th>'. _('Item') .'</th></tr>';
+				<th>'. _('Discount Category') .'</th>
+				<th>'. _('Item') .'</th></tr>';
 
 		$k=0; //row colour counter
 
@@ -244,7 +244,7 @@ if (!isset($_POST['selectchoice'])) {
 	echo '</select></td></tr>
 		</table>
 		<br />';
-	echo '<div class="centre"><input type="submit" name="selectchoice" value="'._('Select').'" /></div>';
+	echo '<div class="centre"><button type="submit" name="selectchoice">'._('Select').'</button></div><br />';
 }
 
 include('includes/footer.inc');
