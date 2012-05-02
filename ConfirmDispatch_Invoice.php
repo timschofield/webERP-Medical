@@ -554,7 +554,7 @@ echo '</table><br />';
 
 
 
-if (isset($_POST['ProcessInvoice']) and $_POST['ProcessInvoice'] != ""){
+if (isset($_POST['ProcessInvoice'])){
 
 /* SQL to process the postings for sales invoices...
 
@@ -625,7 +625,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 
 		if ($NegativesFound){
 			echo '<div class="centre">
-					<input type="submit" name=Update value="' . _('Update'). '" /></div>';
+					<button type="submit" name=Update>' . _('Update'). '</button></div>';
 			include('includes/footer.inc');
 			exit;
 		}
@@ -1666,10 +1666,10 @@ invoices can have a zero amount but there must be a quantity to invoice */
 	$j++;
 	echo '</table>
 	<br /><div class="centre">
-	<input type="submit" tabindex="'.$j.'" name="Update" value="' . _('Update'). '" /><br />';
+	<button type="submit" tabindex="'.$j.'" name="Update">' . _('Update'). '</button><br />';
 
 	$j++;
-	echo '<br /><input type="submit" tabindex="'.$j.'" name="ProcessInvoice" value="'._('Process Invoice').'" /></div>';
+	echo '<br /><button type="submit" tabindex="'.$j.'" name="ProcessInvoice">'._('Process Invoice').'</button></div><br />';
 
 	echo '<input type="hidden" name="ShipVia" value="' . $_SESSION['Items']->ShipVia . '" />';
 }
