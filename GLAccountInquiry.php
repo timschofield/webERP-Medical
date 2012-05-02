@@ -75,7 +75,7 @@ while ($myrow=DB_fetch_array($Periods,$db)){
 	}
 }
 echo '</select></td></tr><table>';
-echo '<p><div class="centre"><input type="submit" name="Show" value="'._('Show Account Transactions').'" /></div></p></form>';
+echo '<p><div class="centre"><button type="submit" name="Show">'._('Show Account Transactions').'</button></div></p></form>';
 
 /* End of the Form  rest of script is what happens if the show button is hit*/
 
@@ -178,14 +178,14 @@ if (isset($_POST['Show'])){
 
 		$RunningTotal =$ChartDetailRow['bfwd'];
 		if ($RunningTotal < 0 ){ //its a credit balance b/fwd
-			echo '<tr bgcolor="#FDFEEF">
+			echo '<tr>
 				<td colspan="3"><b>' . _('Brought Forward Balance') . '</b><td>
 				</td></td>
 				<td class="number"><b>' . locale_money_format(-$RunningTotal,$_SESSION['CompanyRecord']['currencydefault']) . '</b></td>
 				<td></td>
 				</tr>';
 		} else { //its a debit balance b/fwd
-			echo '<tr bgcolor="#FDFEEF">
+			echo '<tr>
 				<td colspan="3"><b>' . _('Brought Forward Balance') . '</b></td>
 				<td class="number"><b>' . locale_money_format($RunningTotal,$_SESSION['CompanyRecord']['currencydefault']) . '</b></td>
 				<td colspan="2"></td>
@@ -214,7 +214,7 @@ if (isset($_POST['Show'])){
 				$ChartDetailsResult = DB_query($sql,$db,$ErrMsg);
 				$ChartDetailRow = DB_fetch_array($ChartDetailsResult);
 
-				echo '<tr bgcolor="#FDFEEF">
+				echo '<tr>
 					<td colspan="3"><b>' . _('Total for period') . ' ' . $PeriodNo . '</b></td>';
 				if ($PeriodTotal < 0 ){ //its a credit balance b/fwd
 					if ($PandLAccount==True) {
@@ -291,7 +291,7 @@ if (isset($_POST['Show'])){
 
 	}
 
-	echo '<tr bgcolor="#FDFEEF"><td colspan="3"><b>';
+	echo '<tr><td colspan="3"><b>';
 	if ($PandLAccount==True){
 		echo _('Total Period Movement');
 	} else { /*its a balance sheet account*/
