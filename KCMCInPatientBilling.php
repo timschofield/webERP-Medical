@@ -1,7 +1,7 @@
 <?php
 $PageSecurity=1;
 include('includes/session.inc');
-$title = _('Billing For In Patient Drugs and Services');
+$title = _('Billing For All Drugs and Services');
 include('includes/header.inc');
 include('includes/SQL_CommonFunctions.inc');
 include('includes/GetSalesTransGLCodes.inc');
