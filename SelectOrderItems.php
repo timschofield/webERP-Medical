@@ -2,6 +2,7 @@
 /* $Id$*/
 
 include('includes/DefineCartClass.php');
+include('includes/CustomerSearch.php');
 
 /* Session started in session.inc for password checking and authorisation level check
 config.php is in turn included in session.inc*/
@@ -317,114 +318,29 @@ if (isset($_POST['ChangeCustomer']) AND $_POST['ChangeCustomer']!=''){
 	}
 }
 
-if (isset($_POST['SearchCust']) AND $_SESSION['RequireCustomerSelection']==1 AND in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
+if (isset($_POST['Search']) AND $_SESSION['RequireCustomerSelection']==1 AND in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
 
-	if (($_POST['CustKeywords']!='') AND (($_POST['CustCode']!='') OR ($_POST['CustPhone']!=''))) {
-		prnMsg( _('Customer Branch Name keywords have been used in preference to the Customer Branch Code or Branch Phone Number entered'), 'warn');
-	}
-	elseif (($_POST['CustCode']!='') AND ($_POST['CustPhone']!='')) {
-		prnMsg(_('Customer Branch Code has been used in preference to the Customer Branch Phone Number entered'), 'warn');
-	} else {
-		if (mb_strlen($_POST['CustKeywords'])>0) {
-		//insert wildcard characters in spaces
-			$_POST['CustKeywords'] = mb_strtoupper(trim($_POST['CustKeywords']));
-			$SearchString = '%' . str_replace(' ', '%', $_POST['CustKeywords']) . '%';
+		$result_CustSelect = CustomerSearchSQL($db);
 
-			$SQL = "SELECT custbranch.brname,
-							custbranch.contactname,
-							custbranch.phoneno,
-							custbranch.faxno,
-							custbranch.branchcode,
-							custbranch.debtorno,
-							debtorsmaster.name
-						FROM custbranch
-						LEFT JOIN debtorsmaster
-							ON custbranch.debtorno=debtorsmaster.debtorno
-						WHERE custbranch.brname " . LIKE . " '$SearchString'";
-
-			if ($_SESSION['SalesmanLogin']!=''){
-				$SQL .= " AND custbranch.salesman='" . $_SESSION['SalesmanLogin'] . "'";
-			}
-			$SQL .=	" AND custbranch.disabletrans=0
-						ORDER BY custbranch.debtorno, custbranch.branchcode";
-
-		} elseif (mb_strlen($_POST['CustCode'])>0){
-
-			$_POST['CustCode'] = mb_strtoupper(trim($_POST['CustCode']));
-
-			$SQL = "SELECT custbranch.brname,
-							custbranch.contactname,
-							custbranch.phoneno,
-							custbranch.faxno,
-							custbranch.branchcode,
-							custbranch.debtorno,
-							debtorsmaster.name
-						FROM custbranch
-						LEFT JOIN debtorsmaster
-							ON custbranch.debtorno=debtorsmaster.debtorno
-						WHERE custbranch.debtorno " . LIKE . " '%" . $_POST['CustCode'] . "%'
-							OR custbranch.branchcode " . LIKE . " '%" . $_POST['CustCode'] . "%'";
-
-			if ($_SESSION['SalesmanLogin']!=''){
-				$SQL .= " AND custbranch.salesman='" . $_SESSION['SalesmanLogin'] . "'";
-			}
-			$SQL .=	" AND custbranch.disabletrans=0
-						ORDER BY custbranch.debtorno";
-		} elseif (mb_strlen($_POST['CustPhone'])>0){
-			$SQL = "SELECT custbranch.brname,
-							custbranch.contactname,
-							custbranch.phoneno,
-							custbranch.faxno,
-							custbranch.branchcode,
-							custbranch.debtorno,
-							debtorsmaster.name
-						FROM custbranch
-						LEFT JOIN debtorsmaster
-							ON custbranch.debtorno=debtorsmaster.debtorno
-						WHERE custbranch.phoneno " . LIKE . " '%" . $_POST['CustPhone'] . "%'";
-
-			if ($_SESSION['SalesmanLogin']!=''){
-				$SQL .= " AND custbranch.salesman='" . $_SESSION['SalesmanLogin'] . "'";
-			}
-
-			$SQL .=	" AND custbranch.disabletrans=0
-								ORDER BY custbranch.debtorno";
-		} else {
-			$SQL = "SELECT custbranch.brname,
-							custbranch.contactname,
-							custbranch.phoneno,
-							custbranch.faxno,
-							custbranch.branchcode,
-							custbranch.debtorno,
-							debtorsmaster.name
-						FROM custbranch
-						LEFT JOIN debtorsmaster
-							ON custbranch.debtorno=debtorsmaster.debtorno";
-			if ($_SESSION['SalesmanLogin']!=''){
-				$SQL .= " AND custbranch.salesman='" . $_SESSION['SalesmanLogin'] . "'";
-			}
-		}
-
-		$ErrMsg = _('The searched customer records requested cannot be retrieved because');
-		$result_CustSelect = DB_query($SQL,$db,$ErrMsg);
-
-		if (DB_num_rows($result_CustSelect)==1){
-			$myrow=DB_fetch_array($result_CustSelect);
-			$_POST['Select'] = $myrow['debtorno'] . ' - ' . $myrow['branchcode'];
-		} elseif (DB_num_rows($result_CustSelect)==0){
-			prnMsg(_('No Customer Branch records contain the search criteria') . ' - ' . _('please try again') . ' - ' . _('Note a Customer Branch Name may be different to the Customer Name'),'info');
-		}
-	} /*one of keywords or custcode was more than a zero length string */
 } /*end of if search for customer codes/names */
 
+/*Need to figure out the number of the form variable that the user clicked on */
+if (!isset($_POST['Select'])) {
+	for ($i=0; $i< count($_POST); $i++){ //loop through the returned customers
+		if(isset($_POST['SubmitCustomerSelection'.$i])){
+			break;
+		}
+	}
+	if ($i!=count($_POST)){
+		$_POST['Select'] = $_POST['SelectedCustomer'.$i];
+		$_SESSION['Items'.$identifier]->Branch = $_POST['SelectedBranch'.$i];
+		unset($_POST['Search']);
+	}
+}
 
 // will only be true if page called from customer selection form or set because only one customer
 // record returned from a search so parse the $Select string into customer code and branch code */
 if (isset($_POST['Select']) and $_POST['Select']!='') {
-
-	$_SESSION['Items'.$identifier]->Branch = mb_substr($_POST['Select'],mb_strpos($_POST['Select'],' - ')+3);
-
-	$_POST['Select'] = mb_substr($_POST['Select'],0,mb_strpos($_POST['Select'],' - '));
 
 	// Now check to ensure this account is not on hold */
 	$sql = "SELECT debtorsmaster.name,
@@ -641,74 +557,10 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 	OR !isset($_SESSION['Items'.$identifier]->DebtorNo)
 	OR $_SESSION['Items'.$identifier]->DebtorNo=='') {
 
-
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' .
-	' ' . _('Enter an Order or Quotation') . ' : ' . _('Search for the Customer Branch.') . '</p>';
-	echo '<div class="page_help_text">' . _('Orders/Quotations are placed against the Customer Branch. A Customer may have several Branches.') . '</div>';
-	echo '<br /><form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?identifier=' . $identifier . '" name="SelectCustomer" method="post">';
-	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-
-	echo '<table cellpadding="3" class="selection">';
-	echo '<tr>';
-	echo '<td><h5>' . _('Part of the Customer Branch Name') . ':</h5></td>';
-	echo '<td><input tabindex="1" type="text" name="CustKeywords" size="20" maxlength="25" /></td>';
-	echo '<td><h2>' . _('OR') . '</h2></td>';
-	echo '<td><h5>' . _('Part of the Customer Branch Code') . ':</h5></td>';
-	echo '<td><input tabindex="2" type="text" name="CustCode" size="15" maxlength="18" /></td>';
-	echo '<td><h2>' . _('OR') . '</h2></td>';
-	echo '<td><h5>' . _('Part of the Branch Phone Number') . ':</h5></td>';
-	echo '<td><input tabindex="3" type="text" name="CustPhone" size="15" maxlength="18" /></td>';
-	echo '</tr>';
-	echo '</table>';
-	echo '<br /><div class="centre"><button tabindex="4" type="submit" name="SearchCust">' . _('Search Now') . '</button>';
-	echo '<button tabindex="5" type="submit">' . _('Reset') . '</button></div>';
+	ShowCustomerSearchFields($rootpath, $theme, $db);
 
 	if (isset($result_CustSelect)) {
-
-		echo '<table cellpadding="2" class="selection">';
-
-		$TableHeader = '<br /><tr>
-								<th>' . _('Customer') . '</th>
-								<th>' . _('Branch') . '</th>
-								<th>' . _('Contact') . '</th>
-								<th>' . _('Phone') . '</th>
-								<th>' . _('Fax') . '</th>
-							</tr>';
-		echo $TableHeader;
-
-		$j = 1;
-		$k = 0; //row counter to determine background colour
-		$LastCustomer='';
-		while ($myrow=DB_fetch_array($result_CustSelect)) {
-
-			if ($k==1){
-				echo '<tr class="EvenTableRows">';
-				$k=0;
-			} else {
-				echo '<tr class="OddTableRows">';
-				$k=1;
-			}
-			echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?identifier='.$identifier . '" name="SelectParts" method="post">';
-			echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-			if ($LastCustomer != $myrow['name']) {
-				echo '<td>'.$myrow['name'].'</td>';
-			} else {
-				echo '<td></td>';
-			}
-			echo '<td><button tabindex="'.($j+5).'" type="submit" name="Submit" value="'.$myrow['brname'].'" />'.$myrow['brname'].'</button></td>
-					<input type="hidden" name="Select" value="'.$myrow['debtorno'].' - '.$myrow['branchcode'].'" />
-					<td>'.$myrow['contactname'].'</td>
-					<td>'.$myrow['phoneno'].'</td>
-					<td>'.$myrow['faxno'].'</td>
-					</tr></form>';
-			$LastCustomer=$myrow['name'];
-			$j++;
-//end of page full new headings if
-		}
-//end of while loop
-
-		echo '</table>';
-
+		ShowReturnedCustomers($result_CustSelect);
 	}//end if results to show
 
 //end if RequireCustomerSelection
