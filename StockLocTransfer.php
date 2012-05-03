@@ -135,7 +135,7 @@ if(isset($_POST['Submit']) AND $InputError==False){
 	echo '<tr><th colspan="4"><input type="hidden" name="Trf_ID" value="' . $Trf_ID . '"><font size="3" color="blue" />'.
 			_('Inventory Location Transfer Shipment Reference').' # '. $Trf_ID. '</font></th></tr>';
 
-	$sql = "SELECT loccode, locationname FROM locations";
+	$sql = "SELECT loccode, locationname FROM locations ORDER BY locationname";
 	$resultStkLocs = DB_query($sql,$db);
 	echo '<tr><td>'._('From Stock Location').':</td><td><select name="FromStockLocation">';
 	while ($myrow=DB_fetch_array($resultStkLocs)){
@@ -214,7 +214,7 @@ if(isset($_POST['Submit']) AND $InputError==False){
 	echo '</table><br /><div class="centre">
 		<input type="hidden" name="LinesCounter" value="'. $i .'" />
 		<button type="submit" name="EnterMoreItems">'. _('Add More Items'). '</button>
-		<button type="submit" name="Submit" value="" />'. _('Create Transfer Shipment'). '</button><br />';
+		<button type="submit" name="Submit">'. _('Create Transfer Shipment'). '</button><br />';
 	echo '<script  type="text/javascript">defaultControl(document.forms[0].StockID0);</script>';
 	echo '</form></div>';
 	include('includes/footer.inc');
