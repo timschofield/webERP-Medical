@@ -67,7 +67,11 @@ $MyOrderResult=DB_query($sql, $db);
 
 $myrow=DB_fetch_array($MyOrderResult);
 $DebtorNo=$myrow['debtorno'];
-$Amount=$myrow['alloc'];
+if (!isset($_GET['Amount'])) {
+	$Amount=$myrow['alloc'];
+} else {
+	$Amount=-$_GET['Amount'];
+}
 $Narrative=$myrow['invtext'];
 DB_data_seek($MyOrderResult, 0);
 if ($Type!=12) {

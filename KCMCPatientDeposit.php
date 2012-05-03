@@ -135,7 +135,7 @@ if (isset($_POST['SubmitCash'])) {
 			$result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
 
 			DB_Txn_Commit($db);
-			echo '<meta http-equiv="Refresh" content="0; url='.$rootpath.'/PDFReceipt.php?FromTransNo='.$ReceiptNumber.'&amp;InvOrCredit=Receipt&amp;PrintPDF=True">';
+			echo '<meta http-equiv="Refresh" content="0; url='.$rootpath.'/PDFReceipt.php?FromTransNo='.$ReceiptNumber.'&amp;InvOrCredit=Receipt&amp;PrintPDF=True&amp;Amount='.$_POST['Received'].'">';
 			include('includes/footer.inc');
 			$_SESSION['DefaultCashPoint']=$_POST['BankAccount'];
 			exit;
