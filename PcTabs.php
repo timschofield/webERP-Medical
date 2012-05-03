@@ -484,7 +484,7 @@ if (!isset($_GET['delete'])) {
    	echo '</table>'; // close main table
 
 	echo '<br /><div class="centre"><button type="submit" name="submit">' . _('Accept') . '</button>
-					<button type="submit" name="Cancel">' . _('Cancel') . '</button></div>';
+					<button type="submit" name="Cancel">' . _('Cancel') . '</button></div><br />';
 
 	echo '</form>';
 

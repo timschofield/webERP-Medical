@@ -177,7 +177,7 @@ or deletion of the records*/
 	$result = DB_query($sql, $db);
 
 	echo '<table class="selection">';
-	echo '<tr><th colspan="6"><font color="blue" size="3">'._('Payment Terms.').'</font></th></tr>';
+	echo '<tr><th colspan="6" class="header">'._('Payment Terms.').'</th></tr>';
 	echo '<tr><th>' . _('Term Code') . '</th>
 		<th>' . _('Description') . '</th>
 		<th>' . _('Following Month On') . '</th>
@@ -248,7 +248,7 @@ if (!isset($_GET['delete'])) {
 		echo '<input type="hidden" name="SelectedTerms" value="' . $SelectedTerms . '" />';
 		echo '<input type="hidden" name="TermsIndicator" value="' . $_POST['TermsIndicator'] . '" />';
 		echo '<br /><table class="selection">';
-		echo '<tr><th colspan="6"><font color="blue" size="3">'._('Update Payment Terms.').'</font></th></tr>';
+		echo '<tr><th colspan="6" class="header">'._('Update Payment Terms.').'</th></tr>';
 		echo '<tr><td>' . _('Term Code') . ':</td><td>';
 		echo $_POST['TermsIndicator'] . '</td></tr>';
 
@@ -261,7 +261,7 @@ if (!isset($_GET['delete'])) {
 		if (!isset($_POST['Terms'])) $_POST['Terms']='';
 
 		echo '<table class="selection">';
-		echo '<tr><th colspan="6"><font color="blue" size="3">'._('New Payment Terms.').'</font></th></tr>';
+		echo '<tr><th colspan="6" class="header">'._('New Payment Terms.').'</th></tr>';
 		echo '<tr><td>' . _('Term Code') . ':</td>
 			<td><input type="text" name="TermsIndicator" ' . (in_array('TermsIndicator',$Errors) ? 'class="inputerror"' : '' ) .' value="' . $_POST['TermsIndicator'] . '" size="3" maxlength="2" /></td></tr>';
 	}
@@ -285,7 +285,7 @@ if (!isset($_GET['delete'])) {
 			echo '<input type="text" name="DayNumber" class="number"  size="4" maxlength="3" value="' . $DayInFollowingMonth . '" />';
 		}
 	}
-	echo '</td></tr></table><br /><div class="centre"><button type="submit" name="submit" value="" />'._('Enter Information').'</button></form></div>';
+	echo '</td></tr></table><br /><div class="centre"><button type="submit" name="submit">'._('Enter Information').'</button></form></div><br />';
 } //end if record deleted no point displaying form to add record
 
 include('includes/footer.inc');

@@ -84,7 +84,7 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate']) OR $InputError==1){
 		<br />
 		<div class="centre">
 		<button type="submit" name="Go">' . _('Create PDF') . '</button>
-		</div>';
+		</div><br />';
 
 	if ($InputError==1){
 		prnMsg($msg,'error');

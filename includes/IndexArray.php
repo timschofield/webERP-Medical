@@ -205,9 +205,9 @@ $MenuItems['PO']['Reports']['URL'] = array ('/PO_SelectPurchOrder.php',
 											'/SuppPriceList.php'
 											);
 
-$MenuItems['PO']['Maintenance']['Caption'] = array (
+$MenuItems['PO']['Maintenance']['Caption'] = array (_('Maintain Supplier Price Lists')
 													);
-$MenuItems['PO']['Maintenance']['URL'] = array (
+$MenuItems['PO']['Maintenance']['URL'] = array ('/SupplierPriceList.php'
 												);
 $MenuItems['stock']['Transactions']['Caption'] = array (_('Receive Purchase Orders'),
 														_('Bulk Inventory Transfer') . ' - ' . _('Dispatch'),
@@ -235,6 +235,7 @@ $MenuItems['stock']['Transactions']['URL'] = array ('/PO_SelectOSPurchOrder.php'
 $MenuItems['stock']['Reports']['Caption'] = array (_('Serial Item Research Tool'),
 													_('Print Price Labels'),
 													_('Reprint GRN'),
+													_('Reprint A Stock Transfer Note'),
 													_('Inventory Item Movements'),
 													_('Inventory Item Status'),
 													_('Inventory Item Usage'),
@@ -258,6 +259,7 @@ $MenuItems['stock']['Reports']['Caption'] = array (_('Serial Item Research Tool'
 $MenuItems['stock']['Reports']['URL'] = array ('/StockSerialItemResearch.php',
 												'/PDFPrintLabel.php',
 												'/ReprintGRN.php',
+												'/PDFStockLocTransfer.php',
 												'/StockMovements.php',
 												'/StockStatus.php',
 												'/StockUsage.php',
@@ -576,11 +578,13 @@ $MenuItems['Utilities']['Transactions']['URL'] = array ('/Z_ChangeCustomerCode.p
 
 $MenuItems['Utilities']['Reports']['Caption'] = array (_('Show Local Currency Total Debtor Balances'),
 													_('Show Local Currency Total Suppliers Balances'),
-													_('Show General Transactions That Do Not Balance'));
+													_('Show General Transactions That Do Not Balance'),
+													_('Sales Integrity Check'));
 
 $MenuItems['Utilities']['Reports']['URL'] = array ('/Z_CurrencyDebtorsBalances.php',
 												'/Z_CurrencySuppliersBalances.php',
-												'/Z_CheckGLTransBalance.php');
+												'/Z_CheckGLTransBalance.php',
+												'/Z_SalesIntegrityCheck.php');
 
 $MenuItems['Utilities']['Maintenance']['Caption'] = array (_('Maintain Language Files'),
 																_('Make New Company'),

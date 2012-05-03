@@ -146,7 +146,7 @@ if (empty($_POST['FormName'])) {
 		closedir($handle);
 	}
 	echo '</select></td></tr></table>';
-	echo '<br /><div class="centre"><button tabindex="6" type="submit" name="submit">' . _('Edit Form Layout') . '</button></div>';
+	echo '<br /><div class="centre"><button tabindex="6" type="submit" name="submit">' . _('Edit Form Layout') . '</button></div><br />';
 	echo '</form>';
 	include('includes/footer.inc');
 	exit;
@@ -162,11 +162,11 @@ echo '<div class="page_help_text">' . _('Enter the changes that you want in the 
 $Papers=array('A4_Landscape', 'A4_Portrait', 'A5_Landscape', 'A5_Portrait', 'A3_Landscape', 'A3_Portrait', 'letter_Portrait', 'letter_Landscape', 'legal_Portrait', 'legal_Landscape'); // Possible paper sizes/orientations
 echo '<form method="post" id="Form" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<input name=FormName type="hidden" value="'.$_POST['FormName'].'" />';
-echo '<table width=95% border=1>'; //Start of outer table
-echo '<tr><th width=33%>'._('Form Name').'<input type="text" name="formname" value="'.$FormDesign['name'].'" /></th>';
+echo '<input name="FormName" type="hidden" value="'.$_POST['FormName'].'" />';
+echo '<table width="95%" class="selection">'; //Start of outer table
+echo '<tr><th width="33%" class="header">'._('Form Name').'&nbsp;&nbsp;<input type="text" name="formname" value="'.$FormDesign['name'].'" /></th>';
 /* Select the paper size/orientation */
-echo '<th width=33%>'._('Paper Size').'<select name="PaperSize">';
+echo '<th width="33%" class="header">'._('Paper Size').'&nbsp;&nbsp;<select name="PaperSize">';
 foreach ($Papers as $Paper) {
 	if (substr($Paper,-8)=='Portrait') {
 		$PaperValue=substr($Paper,0,strlen($Paper)-9);
@@ -181,12 +181,12 @@ foreach ($Papers as $Paper) {
 }
 echo '</select></th>';
 /* and the standard line height for the form */
-echo '<th width="33%">'._('Line Height').'<input type="text" class="number" name="LineHeight" size="3" maxlength="3" value="'.$FormDesign->LineHeight.'" /></th></tr><tr>';
+echo '<th width="33%" class="header">'._('Line Height').'&nbsp;&nbsp;<input type="text" class="number" name="LineHeight" size="3" maxlength="3" value="'.$FormDesign->LineHeight.'" /></th></tr><tr>';
 $counter=1; // Count how many sub tables are in the row
 foreach ($FormDesign as $key) {
 	switch ($key['type']) {
 		case 'image':
-			echo '<td colspan="1" valign="top"><table width="100%" border="1"><tr><th colspan="8">'.$key['name'].'</th></tr>';
+			echo '<td colspan="1" valign="top"><table width="100%" class="selection"><tr><th colspan="8" class="header">'.$key['name'].'</th></tr>';
 			echo '<td class="number">'._('x').' = '.'</td><td><input type="text" class="number" name="'.$key['id'].'x" size="4" maxlength="4" value="'.$key->x.'" /></td>';
 			echo '<td class="number">'._('y').' = '.'</td><td><input type="text" class="number" name="'.$key['id'].'y" size="4" maxlength="4" value="'.$key->y.'" /></td>';
 			echo '<td class="number">'._('Width').' = '.'</td><td><input type="text" class="number" name="'.$key['id'].'width" size="4" maxlength="4" value="'.$key->width.'" /></td>';
@@ -195,19 +195,19 @@ foreach ($FormDesign as $key) {
 			$counter=$counter+1;
 			break;
 		case 'SimpleText':
-			echo '<td colspan="1" valign="top"><table width="100%" border="1"><tr><th colspan="6">'.$key['name'].'</th></tr>'."\n";
+			echo '<td colspan="1" valign="top"><table width="100%" class="selection"><tr><th colspan="6" class="header">'.$key['name'].'</th></tr>'."\n";
 			SimpleTextLine($key);
 			echo '</table></td>';
 			$counter=$counter+1;
 			break;
 		case 'MultiLineText':
-			echo '<td colspan="1" valign="top"><table width="100%" border="1"><tr><th colspan="4">'.$key['name'].'</th></tr>'."\n";
+			echo '<td colspan="1" valign="top"><table width="100%" class="selection"><tr><th colspan="4" class="header">'.$key['name'].'</th></tr>'."\n";
 			MultiTextLine($key);
 			echo '</table></td>';
 			$counter=$counter+1;
 			break;
 		case 'ElementArray':
-			echo '<td colspan="1" valign="top"><table width="100%" border="1"><tr><th colspan="7">'.$key['name'].'</th></tr>'."\n";
+			echo '<td colspan="1" valign="top"><table width="100%" class="selection"><tr><th colspan="7" class="header">'.$key['name'].'</th></tr>'."\n";
 			foreach ($key as $subkey) {
 				if ($subkey['type']=='SimpleText') {
 					echo '<tr>';
@@ -234,7 +234,7 @@ foreach ($FormDesign as $key) {
 			$counter=$counter+1;
 			break;
 		case 'CurvedRectangle':
-			echo '<td colspan="1" valign="top"><table width="100%" border="1"><tr><th colspan="6">'.$key['name'].'</th></tr>';
+			echo '<td colspan="1" valign="top"><table width="100%" class="selection"><tr><th colspan="6" class="header">'.$key['name'].'</th></tr>';
 			echo '<td class="number">'._('x').' = '.'</td><td><input type="text" class="number" name="'.$key['id'].'x" size="4" maxlength="4" value="'.$key->x.'" /></td>';
 			echo '<td class="number">'._('y').' = '.'</td><td><input type="text" class="number" name="'.$key['id'].'y" size="4" maxlength="4" value="'.$key->y.'" /></td>';
 			echo '<td class="number">'._('Width').' = '.'</td><td><input type="text" class="number" name="'.$key['id'].'width" size="4" maxlength="4" value="'.$key->width.'" /></td></tr><tr>';
@@ -244,7 +244,7 @@ foreach ($FormDesign as $key) {
 			$counter=$counter+1;
 			break;
 		case 'Rectangle':
-			echo '<td colspan="1" valign="top"><table width="100%" border="1"><tr><th colspan="6">'.$key['name'].'</th></tr>';
+			echo '<td colspan="1" valign="top"><table width="100%" class="selection"><tr><th colspan="6" class="header">'.$key['name'].'</th></tr>';
 			echo '<td class="number">'._('x').' = '.'</td><td><input type="text" class="number" name="'.$key['id'].'x" size="4" maxlength="4" value="'.$key->x.'" /></td>';
 			echo '<td class="number">'._('y').' = '.'</td><td><input type="text" class="number" name="'.$key['id'].'y" size="4" maxlength="4" value="'.$key->y.'" /></td></tr><tr>';
 			echo '<td class="number">'._('Width').' = '.'</td><td><input type="text" class="number" name="'.$key['id'].'width" size="4" maxlength="4" value="'.$key->width.'" /></td>';
@@ -253,7 +253,7 @@ foreach ($FormDesign as $key) {
 			$counter=$counter+1;
 			break;
 		case 'Line':
-			echo '<td colspan="1" valign="top"><table width="100%" border="1"><tr><th colspan="6">'.$key['name'].'</th></tr>';
+			echo '<td colspan="1" valign="top"><table width="100%" class="selection"><tr><th colspan="6" class="header">'.$key['name'].'</th></tr>';
 			echo '<td class="number">'._('Start x co-ordinate').' = '.'</td><td><input type="text" class="number" name="'.$key['id'].'startx" size="4" maxlength="4" value="'.$key->startx.'" /></td>';
 			echo '<td class="number">'._('Start y co-ordinate').' = '.'</td><td><input type="text" class="number" name="'.$key['id'].'starty" size="4" maxlength="4" value="'.$key->starty.'" /></td></tr><tr>';
 			echo '<td class="number">'._('End x co-ordinate').' = '.'</td><td><input type="text" class="number" name="'.$key['id'].'endx" size="4" maxlength="4" value="'.$key->endx.'" /></td>';
@@ -269,7 +269,7 @@ foreach ($FormDesign as $key) {
 }
 echo '</tr></table>'; //End of outer table
 echo '<br /><div class="centre"><button tabindex="6" type="submit" name="preview">' . _('Preview the Form Layout') . '</button></div>';
-echo '<br /><div class="centre"><button tabindex="6" type="submit" name="save">' . _('Save the Form Layout') . '</button></div>';
+echo '<br /><div class="centre"><button tabindex="6" type="submit" name="save">' . _('Save the Form Layout') . '</button></div><br />';
 echo '</form>';
 include('includes/footer.inc');
 ?>

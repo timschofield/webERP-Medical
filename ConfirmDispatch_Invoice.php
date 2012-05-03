@@ -554,7 +554,7 @@ echo '</table><br />';
 
 
 
-if (isset($_POST['ProcessInvoice']) and $_POST['ProcessInvoice'] != ""){
+if (isset($_POST['ProcessInvoice'])){
 
 /* SQL to process the postings for sales invoices...
 
@@ -1691,7 +1691,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 	<button type="submit" tabindex="'.$j.'" name="Update">' . _('Update'). '</button><br />';
 
 	$j++;
-	echo '<br /><button type="submit" tabindex="'.$j.'" name="ProcessInvoice">'._('Process Invoice').'</button></div>';
+	echo '<br /><button type="submit" tabindex="'.$j.'" name="ProcessInvoice">'._('Process Invoice').'</button></div><br />';
 
 	echo '<input type="hidden" name="ShipVia" value="' . $_SESSION['Items']->ShipVia . '" />';
 }

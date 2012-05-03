@@ -221,8 +221,8 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 		} //end of looping
 		echo '<input type="hidden" name="Counter" value="' . $PriceCounter . '" />';
 		echo '<tr>
-			<td colspan="12" style="text-align:center"><input type="submit" name="submit" value="' . _('Update') . '" />
-			<a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '"><input type="submit"  value="' . _('Back') . '" /><a/></td>
+			<td colspan="12" style="text-align:center"><button type="submit" name="submit">' . _('Update') . '</button>
+			<a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '"><button type="submit">' . _('Back') . '</button><a/></td>
 			 </tr></form>';
 	} else {
 		prnMsg(_('There were no prices meeting the criteria specified to review'),'info');
@@ -230,7 +230,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 	}
 } else { /*The option to submit was not hit so display form */
 	echo '<div class="page_help_text">' . _('Use this report to display price list with the cost.') . '</div><br />';
-	echo '<br /><br /><form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post"><table class="selection">';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	$SQL = "SELECT categoryid, categorydescription
@@ -283,7 +283,7 @@ if (isset($_POST['submit']) or isset($_POST['update'])) {
 	} //end while loop
 	DB_data_seek($result, 0);
 	echo '</select></td></tr>';
-	echo '</table><br /><p><div class="centre"><input type="submit" name="submit" value="' . _('Submit') . '" /></div></p>';
+	echo '</table><br /><div class="centre"><button type="submit" name="submit">' . _('Submit') . '</button></div>';
 } /*end of else not submit */
 include ('includes/footer.inc');
 ?>

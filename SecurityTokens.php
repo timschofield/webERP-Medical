@@ -56,8 +56,8 @@ if (isset($_GET['Action']) and $_GET['Action']=='edit') {
 	echo '<button type="submit" name="update">' . _('Update') . '</button>';
 } else {
 	echo '<td>'._('Token ID') . '<td><input type="text" name="TokenID" value="'.$_POST['TokenID'].'" /></td></tr>
-		<tr><td>'. _('Description') . '</td><td><input type="text" size="70" maxlength="255" name="Description" value="'.$description.'" /></td></tr>';
-	echo '<td colspan="3"><div class="centre"><button type="submit" name="submit">' . _('Insert') . '</button></div>';
+		<tr><td>'. _('Description') . '</td><td><input type="text" size="70" maxlength="255" name="Description" value="'.$description.'" /></td><td>';
+	echo '<button type="submit" name="submit">' . _('Insert') . '</button>';
 }
 
 echo '</td></tr></table><p></p>';

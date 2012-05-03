@@ -234,7 +234,7 @@ if (!isset($SelectedTabs)){
 		$result = DB_query($sql,$db);
 
 		echo '<br /><table class="selection">';
-		echo '<tr><th colspan="8"><font color="#616161" size="2">' . _('Details Of Petty Cash Tab ') . '' .$SelectedTabs. '</form></th></tr>';
+		echo '<tr><th colspan="8" class="header">' . _('Details Of Petty Cash Tab ') . '' .$SelectedTabs. '</th></tr>';
 		echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<tr><th colspan="8">' . _('Detail Of PC Tab Movements For Last ') .': ';
@@ -333,9 +333,9 @@ if (!isset($SelectedTabs)){
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<br /><table class="selection">'; //Main table
 		if (isset($_GET['SelectedIndex'])) {
-			echo '<tr><th colspan="2"><font color="#616161" size="3">'._('Update Cash Assignment').'</font></th></tr>';
+			echo '<tr><th colspan="2" class="header">'._('Update Cash Assignment').'</th></tr>';
 		} else {
-			echo '<tr><th colspan="2"><font color="#616161" size="3">'._('New Cash Assignment').'</font></th></tr>';
+			echo '<tr><th colspan="2" class="header">'._('New Cash Assignment').'</th></tr>';
 		}
 		if ( isset($_GET['edit'])) {
 
@@ -397,8 +397,9 @@ if (!isset($SelectedTabs)){
 		echo '</td></tr></table>'; // close main table
 
 		echo '<br /><div class="centre">
-					<input type="submit" name="submit" value="' . _('Accept') . '" />
-					<input type="submit" name="Cancel" value="' . _('Cancel') . '" /></div>';
+					<button type="submit" name="submit">' . _('Accept') . '</button>
+					<button type="submit" name="Cancel">' . _('Cancel') . '</button>
+					</div>';
 
 		echo '</form>';
 

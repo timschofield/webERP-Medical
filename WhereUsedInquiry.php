@@ -18,15 +18,17 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/m
 echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post"><div class="centre">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
+echo '<table class="selection">
+		<tr>';
 if (isset($StockID)) {
-	echo _('Enter an Item Code') . ': <input type="text" name="StockID" size="21" maxlength="20" value="'.$StockID.'" />';
+	echo '<td>' . _('Enter an Item Code') . ': </td><td><input type="text" name="StockID" size="21" maxlength="20" value="'.$StockID.'" /></td></tr>';
 } else {
-	echo _('Enter an Item Code') . ': <input type="text" name="StockID" size="21" maxlength="20" />';
+	echo '<td>' . _('Enter an Item Code') . ': </td><td><input type="text" name="StockID" size="21" maxlength="20" /></td></tr>';
 }
 
-echo '<button type="submit" name="ShowWhereUsed">' . _('Show Where Used') . '</button>';
+echo '<tr><td colspan="2"><div class="centre"><button type="submit" name="ShowWhereUsed">' . _('Show Where Used') . '</button></td></tr>';
 
-echo '</div><br />';
+echo '</table><br />';
 
 if (isset($StockID)) {
 
@@ -56,7 +58,7 @@ if (isset($StockID)) {
 					include('includes/footer.inc');
 					exit;
 				}
-				echo '<tr><th colspan="6"><font color="#616161" size="3"><b>'.$StockID . ' - ' . $myrow['description'] .'</b>  (' . _('in units of') . ' ' . $myrow['units'] . ')</font></th></tr>';
+				echo '<tr><th colspan="6" class="header"><b>'.$StockID . ' - ' . $myrow['description'] .'</b>  (' . _('in units of') . ' ' . $myrow['units'] . ')</th></tr>';
 			}
 
     		$tableheader = '<tr><th>' . _('Used By') . '</th>

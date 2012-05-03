@@ -659,7 +659,7 @@ if (!isset($SupplierID)) {
 	echo '<tr><td>' . _('Address Line 4 (Postal Code)') . ':</td><td><input type="text" name="Address4" size="42" maxlength="40" /></td></tr>';
 	echo '<tr><td>' . _('Telephone') . ':</td><td><input type="text" name="Phone" size="25" maxlength="25" /></td></tr>';
 	echo '<tr><td>' . _('Facsimile') . ':</td><td><input type="text" name="Fax" size="25" maxlength="25" /></td></tr>';
-	echo '<tr><td>' . _('Email Address') . ':</td><td><input class="email" type="text" name="Email" size="30" maxlength="40" /></td></tr>';
+	echo '<tr><td>' . _('Email Address') . ':</td><td><input class="email" type="email" name="Email" size="30" maxlength="40" /></td></tr>';
 	echo '<tr><td>' . _('Supplier Type') . ':</td><td><select name="SupplierType">';
 	$result=DB_query("SELECT typeid, typename FROM suppliertype", $db);
 	while ($myrow = DB_fetch_array($result)) {
@@ -942,7 +942,7 @@ if (!isset($SupplierID)) {
 		echo '<br /><div class="centre"><button type="submit" name="submit">' . _('Update Supplier') . '</button></div><br />';
 //		echo '<font color=red><b>' . _('WARNING') . ': ' . _('There is no second warning if you hit the delete button below') . '. ' . _('However checks will be made to ensure there are no outstanding purchase orders or existing accounts payable transactions before the deletion is processed') . '<br /></font></b>';
 		prnMsg(_('WARNING') . ': ' . _('There is no second warning if you hit the delete button below') . '. ' . _('However checks will be made to ensure there are no outstanding purchase orders or existing accounts payable transactions before the deletion is processed'), 'Warn');
-		echo '<br /><div class="centre"><button type="submit" name="delete" onclick="return confirm(' . _('Are you sure you wish to delete this supplier?') . ');" />' . _('Delete Supplier') . '</button>';
+		echo '<br /><div class="centre"><button type="submit" name="delete" onclick="return confirm(' . _('Are you sure you wish to delete this supplier?') . ');">' . _('Delete Supplier') . '</button>';
 		echo '<br /><a href="' . $rootpath . '/SupplierContacts.php?SupplierID=' . $SupplierID . '">' . _('Review Contact Details') . '</a></div></form>';
 	}
 } // end of main ifs

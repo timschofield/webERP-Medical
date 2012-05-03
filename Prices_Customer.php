@@ -32,7 +32,7 @@ if (!isset($Item) OR !isset($_SESSION['CustomerID']) OR $_SESSION['CustomerID']=
 }
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . _('Special Customer Prices').'</p>';
-echo '<p class="page_title_text"><font color="blue"><b>' . $myrow['name'] . ' ' . _('in') . ' ' . $myrow['currcode'] . '<br />' . ' ' . _('for') . ' ';
+echo '<p class="page_title_text">' . $myrow['name'] . ' ' . _('in') . ' ' . $myrow['currcode'] . '<br />' . ' ' . _('for') . ' ';
 
 $CurrCode = $myrow['currcode'];
 $SalesType = $myrow['salestype'];
@@ -52,7 +52,7 @@ if ($myrow['mbflag']=='K'){
 	exit;
 }
 
-echo $Item . ' - ' . $myrow['description'] . '</b></font></p>';
+echo $Item . ' - ' . $myrow['description'] . '</font></p>';
 
 if (isset($_POST['submit'])) {
 
@@ -218,14 +218,15 @@ echo '<table class="selection">';
 if (DB_num_rows($result) == 0) {
 	echo '<tr><td>' . _('There are no default prices set up for this part in this currency') . '</td></tr>';
 } else {
-	echo '<tr><th colspan="6"><font color="#616161" size="2">' . _('Normal Price') . '</font></th></tr>';
-	echo '<tr><th>' . _('Price') . '</th>
-				<th>' . _('UOM'). '</th>
-				<th>' . _('Conversion') . '<br />'._('Factor') . '</th>
-				<th>' . _('Decimal') . '<br />' . _('Places') . '</th>
-				<th>' . _('Start Date') . '</th>
-				<th>' . _('End Date') . '</th>
-			</tr>';
+	echo '<tr><th colspan="6" class="header">' . _('Normal Price') . '</th></tr>';
+	echo '<tr>
+			<th>' . _('Price') . '</th>
+			<th>' . _('UOM'). '</th>
+			<th>' . _('Conversion') . '<br />'._('Factor') . '</th>
+			<th>' . _('Decimal') . '<br />' . _('Places') . '</th>
+			<th>' . _('Start Date') . '</th>
+			<th>' . _('End Date') . '</th>
+		</tr>';
 	while ($myrow = DB_fetch_array($result)) {
 		if ($myrow['enddate']=='0000-00-00'){
 			$EndDateDisplay = _('No End Date');
@@ -271,7 +272,7 @@ $DbgMsg = _('The SQL used to retrieve these records was');
 $result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
 echo '<table class="selection">';
-echo '<tr><th colspan="9"><font color="#616161" size="2">' . _('Special Prices') . '</font></th></tr>';
+echo '<tr><th colspan="9" class="header">' . _('Special Prices') . '</th></tr>';
 
 if (DB_num_rows($result) == 0) {
 	echo '<tr><td>' . _('There are no special prices set up for this part') . '</td></tr>';
@@ -451,7 +452,7 @@ echo '<tr><td>' . _('Price') . ':</td>
 				</tr></table>';
 
 
-echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div>';
+echo '<br /><div class="centre"><button type="submit" name="submit">' . _('Enter Information') . '</button></div>';
 
 echo '</form>';
 include('includes/footer.inc');

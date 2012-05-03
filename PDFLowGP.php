@@ -141,7 +141,7 @@ if (isset($_POST['PrintPDF'])) {
 								<td><input type="text" class="number" name="GPMin" maxlength="6" size="6" value="' . locale_number_format($_POST['GPMin'],2) . '" />&nbsp;%</td>
 						</tr>';
 
-		echo '</table><br /><div class="centre"><button type="submit" name="PrintPDF">' . _('Print PDF') . '</button></div>';
+		echo '</table><br /><div class="centre"><button type="submit" name="PrintPDF">' . _('Print PDF') . '</button></div><br />';
 	}
 	include('includes/footer.inc');
 

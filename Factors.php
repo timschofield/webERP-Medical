@@ -205,7 +205,7 @@ if (empty($FactorID) and !isset($_POST['Create'])) {
 	}
 	echo '</table><br /><div class="centre">';
 	echo '<br /><button tabindex="3" type="submit" name="Create">' . _('Create New Factor') . '</button>';
-	echo '</div></form>';
+	echo '</div><br /></form>';
 	include('includes/footer.inc');
 	exit;
 
@@ -284,7 +284,7 @@ if (isset($_POST['Create'])) {
 } else if (isset($_POST['amend'])) {
 	echo '</table><p><div class="centre"><button tabindex="13" type="submit" name="update">' . _('Update Factor') . '</button></p>';
 	prnMsg ( _('There is no second warning if you hit the delete button below') . '. ' . _('However checks will be made to ensure there are no suppliers are using this factor before the deletion is processed'), 'warn');
-	echo '<br /><button tabindex="14" type="submit" name="delete" onclick="return confirm(' . _('Are you sure you wish to delete this factoring company?') . '");">' . _('Delete Factor') . '</button></div></form>';
+	echo '<br /><button tabindex="14" type="submit" name="delete" onclick="return confirm(' . _('Are you sure you wish to delete this factoring company?') . '");" />' . _('Delete Factor') . '</button></form></div>';
 }
 
 

@@ -84,7 +84,7 @@ if (isset($_POST['SearchParts'])) {
 
 if (!isset($ShiptRef) or $ShiptRef==''){
 	echo '<table class="selection">';
-
+	echo '<tr><th class="header">';
 	if (isset($ShiptRef) and $ShiptRef!='') {
 		if (!is_numeric($ShiptRef)){
 			echo '<br />';
@@ -95,16 +95,16 @@ if (!isset($ShiptRef) or $ShiptRef==''){
 		}
 	} else {
 		if (isset($SelectedSupplier)) {
-			echo '<tr><th colspan="4"><font size="3" color="#616161">' ._('For supplier'). ': '. $SelectedSupplier . ' ' . _('and'). ' ';
+			echo _('For supplier'). ': '. $SelectedSupplier . ' ' . _('and'). ' ';
 			echo '<input type="hidden" name="SelectedSupplier" value="'. $SelectedSupplier. '" />';
 		}
 		if (isset($SelectedStockItem)) {
 			echo _('for the part'). ': ' . $SelectedStockItem . '.';
-			echo '<input type="hidden" name="SelectedStockItem" value="'. $SelectedStockItem. '" /></font></th></tr>';
+			echo '<input type="hidden" name="SelectedStockItem" value="'. $SelectedStockItem. '" />';
 		}
 	}
-	echo '<tr><td>';
-	echo _('Shipment Number'). ': <input type="text" name="ShiptRef" maxlength="10" size="10" /> '.
+	echo '</th></tr>';
+	echo '<tr><td>' . _('Shipment Number'). ': <input type="text" name="ShiptRef" maxlength="10" size="10" /> '.
 		_('Into Stock Location').' :<select name="StockLocation"> ';
 	$sql = "SELECT loccode, locationname FROM locations";
 	$resultStkLocs = DB_query($sql,$db);
@@ -147,7 +147,7 @@ $result1 = DB_query($SQL,$db);
 
 
 echo '<table class="selection">';
-echo '<tr><th colspan="5"><font size="3" color="#616161">'._('To search for shipments for a specific part use the part selection facilities below') . '</font></th></tr>';
+echo '<tr><th colspan="5" class="header">'._('To search for shipments for a specific part use the part selection facilities below') . '</th></tr>';
 echo '<tr>
 <td><font size="1">' . _('Select a stock category') . ':</font>
 <select name="StockCat">';
@@ -169,7 +169,7 @@ echo '</select>
 </tr>
 </table><br />';
 
-echo '<div class="centre"><button type="submit" name="SearchParts">'._('Search Parts Now').'</button>';
+echo '<div class="centre"><button type="submit" name="SearchParts">' . _('Search Parts Now') . '</button>';
 echo '<button type="submit" name="ResetPart">'. _('Show All') .'</button></div><br />';
 
 if (isset($StockItemsResult)) {
@@ -199,12 +199,18 @@ if (isset($StockItemsResult)) {
 		}
 /*
 Code	 Description	On Hand		 Orders Ostdg     Units		 Code	Description 	 On Hand     Orders Ostdg	Units	 */
-		printf('<td><button type="submit" name="SelectedStockItem">%s</button></td>
-			<td>%s</td>
-			<td class="number">%s</td>
-			<td class="number">%s</td>
-			<td>%s</td></tr>',
-			$myrow['stockid'], $myrow['description'], $myrow['qoh'], $myrow['qord'],$myrow['units']);
+		printf('<td><button type="submit" name="SelectedStockItem" value="%s" />%s</button></td>
+				<td>%s</td>
+				<td class="number">%s</td>
+				<td class="number">%s</td>
+				<td>%s</td>
+			</tr>',
+				$myrow['stockid'],
+				$myrow['stockid'],
+				$myrow['description'],
+				$myrow['qoh'],
+				$myrow['qord'],
+				$myrow['units']);
 
 		$j++;
 		if ($j == 15){

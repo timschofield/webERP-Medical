@@ -156,7 +156,7 @@ if (!isset($StockID)) {
 
 	echo '<table class="selection">
 			<tr>
-				<th colspan="6"><font size="3" color="#616161">' . _('To search for work orders for a specific item use the item selection facilities below') . '</font></th>
+				<th colspan="6" class="header">' . _('To search for work orders for a specific item use the item selection facilities below') . '</th>
 			</tr>
 	  	<tr>
 	  		<td><font size="1">' . _('Select a stock category') . ':</font>
@@ -177,7 +177,7 @@ if (!isset($StockID)) {
 			</tr>
 		</table><br />';
 	echo '<div class="centre"><button type="submit" name="SearchParts">' . _('Search Items Now') . '</button>
-		<button type="submit" name="ResetPart">' . _('Show All') . '</div>';
+		<button type="submit" name="ResetPart">' . _('Show All') . '</button></div>';
 }
 
 if (isset($StockItemsResult)) {
@@ -209,6 +209,7 @@ if (isset($StockItemsResult)) {
 			<td class="number">%s</td>
 			<td>%s</td>
 			</tr>',
+			$myrow['stockid'],
 			$myrow['stockid'],
 			$myrow['description'],
 			$myrow['qoh'],

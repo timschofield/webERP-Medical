@@ -53,10 +53,10 @@ if ($myrow['mbflag']=='K'){
 }
 
 echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
-echo '<div class="centre"><input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo _('Stock Code') . ':<input type="text" name="StockID" size="21" value="' . $StockID . '" maxlength="20" />';
+echo '<table class="selection"><input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
+echo '<tr><td>' . _('Stock Code') . ':</td><td><input type="text" name="StockID" size="21" value="' . $StockID . '" maxlength="20" /></td>';
 
-echo '<button type="submit" name="ShowStatus">' . _('Show Stock Status') . '</button></div>';
+echo '<td><button type="submit" name="ShowStatus">' . _('Show Stock Status') . '</button></td></tr></table>';
 
 $sql = "SELECT locstock.loccode,
 				locations.locationname,
@@ -300,7 +300,7 @@ if ($DebtorNo) { /* display recent pricing history for this debtor and this stoc
 	}
 	if (isset($PriceHistory)) {
 	  echo '<br /><table cellpadding="4" class="selection">';
-	  echo '<tr><th colspan="4"><font color="#616161" size="2">' . _('Pricing history for sales of') . ' ' . $StockID . ' ' . _('to') . ' ' . $DebtorNo . '</font></th></tr>';
+	  echo '<tr><th colspan="4" class="header">' . _('Pricing history for sales of') . ' ' . $StockID . ' ' . _('to') . ' ' . $DebtorNo . '</th></tr>';
 	  $tableheader = '<tr>
 			<th>' . _('Date Range') . '</th>
 			<th>' . _('Quantity') . '</th>

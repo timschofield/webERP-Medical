@@ -43,7 +43,7 @@ $LocStockResult = DB_query($sql, $db, $ErrMsg, $DbgMsg);
 echo '<table cellpadding="2" class="selection">';
 echo '<tr><th colspan="3">'._('Stock Code') . ':<input type="text" name="StockID" size="21" value="' . $StockID . '" maxlength="20" />';
 echo '<button type="submit" name="Show">' . _('Show Re-Order Levels') . '</button></th></tr>';
-echo '<tr><th colspan="3"><font color="blue" size="3"><b>' . $StockID . ' - ' . $myrow['description'] . '</b>  (' . _('In Units of') . ' ' . $myrow['units'] . ')</font></th></tr>';
+echo '<tr><th colspan="3" class="header"><b>' . $StockID . ' - ' . $myrow['description'] . '</b>  (' . _('In Units of') . ' ' . $myrow['units'] . ')</th></tr>';
 
 $TableHeader = '<tr>
 		<th>' . _('Location') . '</th>

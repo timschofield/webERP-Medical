@@ -11,12 +11,18 @@ echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/s
 echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<table cellpadding="2" class="selection"><tr>';
+echo '<table cellpadding="2" class="selection">';
 
-echo '<td>' . _('Type') . ':</td><td><select name="TransType"> ';
-
-$sql = "SELECT typeid, typename FROM systypes WHERE typeid >= 20 AND typeid <= 23";
+$sql = "SELECT typeid,
+				typename
+			FROM systypes
+			WHERE typeid >= 20
+				AND typeid <= 23";
 $resultTypes = DB_query($sql,$db);
+
+echo '<tr>
+		<td>' . _('Type') . ':</td>
+		<td><select name="TransType"> ';
 
 echo '<option value="All"> All </option>';
 while ($myrow=DB_fetch_array($resultTypes)){
@@ -130,13 +136,17 @@ if (isset($_POST['ShowResults']) and $_POST['TransType'] != ''){
 		);
 
 
-		$GLTransResult = DB_query("SELECT account, accountname, narrative, amount
-					FROM gltrans INNER JOIN chartmaster
-					ON gltrans.account=chartmaster.accountcode
-					WHERE type='" . $myrow['type'] . "'
-					AND typeno='" . $myrow['transno'] . "'",
-					$db,
-					_('Could not retrieve the GL transactions for this AP transaction'));
+		$GLTransResult=DB_query("SELECT account,
+										accountname,
+										narrative,
+										amount
+									FROM gltrans
+									INNER JOIN chartmaster
+										ON gltrans.account=chartmaster.accountcode
+									WHERE type='" . $myrow['type'] . "'
+										AND typeno='" . $myrow['transno'] . "'",
+									$db,
+									_('Could not retrieve the GL transactions for this AP transaction'));
 
 		if (DB_num_rows($GLTransResult)==0){
 			echo '<tr><td colspan="10">' . _('There are no GL transactions created for the above AP transaction') . '</td></tr>';
@@ -154,7 +164,7 @@ if (isset($_POST['ShowResults']) and $_POST['TransType'] != ''){
 					</tr>',
 					$GLTransRow['account'],
 					$GLTransRow['accountname'],
-					locale_money_format($GLTransRow['amount'],$_SESSION['Currencies']['currencydefault']),
+					locale_money_format($GLTransRow['amount'],$_SESSION['CompanyRecord']['currencydefault']),
 					$GLTransRow['narrative']);
 
 				$CheckGLTransBalance += $GLTransRow['amount'];

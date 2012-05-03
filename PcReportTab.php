@@ -69,7 +69,7 @@ if ((! isset($_POST['FromDate']) AND ! isset($_POST['ToDate'])) OR isset($_POST[
 	echo '<input tabindex="3" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" type="text" name="ToDate" maxlength="10" size="11" value="' . $_POST['ToDate'] . '" />';
 	echo '</td></tr></table><br />';
 	echo '<div class="centre"><button type="submit" name="ShowTB">' . _('Show HTML') .'</button>';
-	echo '<button type="submit" name="PrintPDF">'._('PrintPDF').'</button></div>';
+	echo '<button type="submit" name="PrintPDF">'._('PrintPDF').'</button></div><br />';
 
 } else if (isset($_POST['PrintPDF'])) {
 
@@ -446,7 +446,7 @@ if ((! isset($_POST['FromDate']) AND ! isset($_POST['ToDate'])) OR isset($_POST[
 			</tr>';
 
 	echo '</table>';
-	echo '<br /><div class="centre"><button type="submit" name="SelectDifferentDate">' . _('Select A Different Date') . '</button></div>';
+	echo '<br /><div class="centre"><button type="submit" name="SelectDifferentDate">' . _('Select A Different Date') . '</button></div><br />';
 }
 echo '</form>';
 include('includes/footer.inc');

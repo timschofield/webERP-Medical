@@ -155,10 +155,12 @@ $sql = "SELECT sales_type,
 $result = DB_query($sql,$db);
 
 echo '<table class="selection">';
-echo '<tr><th>' . _('Sales Type') . '</th>
-	<th>' . _('Discount Category') . '</th>
-	<th>' . _('Quantity Break') . '</th>
-	<th>' . _('Discount Rate') . ' %' . '</th></tr>';
+echo '<tr>
+		<th>' . _('Sales Type') . '</th>
+		<th>' . _('Discount Category') . '</th>
+		<th>' . _('Quantity Break') . '</th>
+		<th>' . _('Discount Rate') . ' %' . '</th>
+	</tr>';
 
 $k=0; //row colour counter
 
@@ -173,16 +175,16 @@ while ($myrow = DB_fetch_array($result)) {
 	$DeleteURL = htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?Delete=yes&SalesType=' . $myrow['salestype'] . '&DiscountCategory=' . $myrow['discountcategory'] . '&QuantityBreak=' . $myrow['quantitybreak'];
 
 	printf('<td>%s</td>
-		<td>%s</td>
-		<td class="number">%s</td>
-		<td class="number">%s</td>
-		<td><a href="%s">' . _('Delete') . '</td>
+			<td>%s</td>
+			<td class="number">%s</td>
+			<td class="number">%s</td>
+			<td><a href="%s">' . _('Delete') . '</td>
 		</tr>',
-		$myrow['sales_type'],
-		$myrow['discountcategory'],
-		$myrow['quantitybreak'],
-		$myrow['discountrate']*100 ,
-		$DeleteURL);
+			$myrow['sales_type'],
+			$myrow['discountcategory'],
+			$myrow['quantitybreak'],
+			$myrow['discountrate']*100 ,
+			$DeleteURL);
 
 }
 

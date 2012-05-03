@@ -423,10 +423,10 @@ if (isset($_POST['PrintPDF']) and isset($_POST['FromCust']) and $_POST['FromCust
 			<tr><td>'. _('Ending Customer statement to print (Customer code)').'</td><td>
 				<input type="text" maxlength="6" size="7" name="ToCust" value="zzzzzz" /></td></tr></table>
 				<br /><div class="centre">
-				<input type="submit" name="PrintPDF" value="' . _('Print All Statements in the Range Selected').'" />
+				<button type="submit" name="PrintPDF">' . _('Print All Statements in the Range Selected').'</button>
 			</div>';
 	}
-	echo '<br /><br /><br />';
+	echo '<br />';
 	include('includes/footer.inc');
 
 } /*end of else not PrintPDF */

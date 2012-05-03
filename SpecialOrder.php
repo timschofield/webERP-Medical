@@ -112,15 +112,13 @@ if (isset($_POST['SelectBranch'])){
 	$_SESSION['SPL'.$identifier]->BranchCode = $_POST['SelectBranch'];
 	$_SESSION['SPL'.$identifier]->BranchName = $myrow['brname'];
 }
-echo '<div class="centre">';
+
 if (!isset($_SESSION['SPL'.$identifier]->BranchCode)){
-	echo '<br />
-		<font size="4" color="blue">' . _('Purchase from') . ' ' . $_SESSION['SPL'.$identifier]->SupplierName . ' ' . _('in') . ' ' . $_SESSION['SPL'.$identifier]->SuppCurrCode . ' ' . _('for') . ' ' . $_SESSION['SPL'.$identifier]->CustomerName . ' (' . $_SESSION['SPL'.$identifier]->CustCurrCode . ')';
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') . '" alt="" />' . ' ' . _('Purchase from') . ' ' . $_SESSION['SPL'.$identifier]->SupplierName . ' ' . _('in') . ' ' . $_SESSION['SPL'.$identifier]->SuppCurrCode . ' ' . _('for') . ' ' . $_SESSION['SPL'.$identifier]->CustomerName . ' (' . $_SESSION['SPL'.$identifier]->CustCurrCode . ')</p>';
 } else {
-	echo '<br />
-		<font size="4" color="blue">' . _('Purchase from') . ' ' . $_SESSION['SPL'.$identifier]->SupplierName . ' ' . _('in') . ' ' . $_SESSION['SPL'.$identifier]->SuppCurrCode . ' ' . _('for') . ' ' . $_SESSION['SPL'.$identifier]->CustomerName . ' (' . $_SESSION['SPL'.$identifier]->CustCurrCode . ') - ' . _('delivered to') . ' ' . $_SESSION['SPL'.$identifier]->BranchName . ' ' . _('branch');
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') . '" alt="" />' . ' ' . _('Purchase from') . ' ' . $_SESSION['SPL'.$identifier]->SupplierName . ' ' . _('in') . ' ' . $_SESSION['SPL'.$identifier]->SuppCurrCode . ' ' . _('for') . ' ' . $_SESSION['SPL'.$identifier]->CustomerName . ' (' . $_SESSION['SPL'.$identifier]->CustCurrCode . ') - ' . _('delivered to') . ' ' . $_SESSION['SPL'.$identifier]->BranchName . ' ' . _('branch') . '</p>';
 }
-echo '</font></div>';
+
 /*if the branch details and delivery details have not been entered then select them from the list */
 if (!isset($_SESSION['SPL'.$identifier]->BranchCode)){
 
@@ -132,13 +130,10 @@ if (!isset($_SESSION['SPL'.$identifier]->BranchCode)){
 
 	if (DB_num_rows($BranchResult)>0) {
 
-		echo '<div class="centre">';
-		echo '<br />
-				<br />' . _('Select the customer branch to deliver the special to from the list below');
-
 		echo '</div>
-			<br />
 			<table class="selection">';
+		echo '<tr><th class="header" colspan="2">' . _('Select the customer branch to deliver the special to from the list below') . '</th></tr>';
+
 
 		$TableHeader = '<tr>
 							<th>' ._('Code') . '</th>
@@ -159,9 +154,10 @@ if (!isset($_SESSION['SPL'.$identifier]->BranchCode)){
 				$k++;
 			}
 
-			printf('<td><button type="submit" name="SelectBranch">%s</button></td>
+			printf('<td><button type="submit" name="SelectBranch" value="%s" />%s</button></td>
 					<td>%s</td>
 					</tr>',
+				$myrow['branchcode'],
 				$myrow['branchcode'],
 				$myrow['brname']);
 

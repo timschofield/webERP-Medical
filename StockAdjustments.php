@@ -327,7 +327,7 @@ if (!isset($_SESSION['Adjustment'])) {
 	$_SESSION['Adjustment']->StandardCost=$myrow['materialcost']+$myrow['labourcost']+$myrow['overheadcost'];
 }
 echo '<br /><table class="selection">';
-echo '<tr><th colspan="4"><font color="blue" size="3">'._('Adjustment Details').'</font></th></tr>';
+echo '<tr><th colspan="4" class="header">'._('Adjustment Details').'</th></tr>';
 if (!isset($_GET['Description'])) {
 	$_GET['Description']='';
 }
@@ -346,10 +346,9 @@ if (isset($StockID)) {
 } else {
 	echo '<input type="text" name="StockCode" size="21" value="" maxlength="20" />';
 }
-
 echo '</td><td><button type="submit" name="CheckCode">'._('Check Part').'</button></td></tr>';
 if (isset($_SESSION['Adjustment']) and strlen($_SESSION['Adjustment']->ItemDescription)>1){
-	echo '<tr><td colspan="3"><font color="blue" size="3">' . $_SESSION['Adjustment']->ItemDescription . ' ('._('In Units of').' ' .
+	echo '<tr><td colspan="3"><font size="3">' . $_SESSION['Adjustment']->ItemDescription . ' ('._('In Units of').' ' .
 		$_SESSION['Adjustment']->PartUnit . ' ) - ' . _('Unit Cost').' = ' .
 			locale_money_format($_SESSION['Adjustment']->StandardCost,$_SESSION['CompanyRecord']['currencydefault']) . '</font></td></tr>';
 }

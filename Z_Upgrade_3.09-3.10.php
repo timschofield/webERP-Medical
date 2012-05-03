@@ -12,7 +12,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 echo '<button type="submit" name="DoUpgrade">' . _('Perform Upgrade') . '</button>';
 echo '</form>';
 
-if ($_POST['DoUpgrade'] == _('Perform Upgrade')){
+if (isset($_POST['DoUpgrade'])){
 
 	$SQLScriptFile = file('./sql/mysql/upgrade3.09-3.10.sql');
 

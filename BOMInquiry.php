@@ -15,6 +15,8 @@ if (isset($_GET['StockID'])){
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
 
 if (!isset($_POST['StockID'])) {
+
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/reports.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p><br />';
 	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">
 			<div class="page_help_text">'. _('Select a manufactured part') . ' (' . _('or Assembly or Kit part') . ') ' .
 	 _('to view the costed bill of materials') . '.' . '<br /><font size="1">' .
@@ -89,7 +91,7 @@ if (isset($_POST['Search'])){
 
 if (isset($_POST['Search']) and isset($result) AND !isset($SelectedParent)) {
 
-	echo '<table class="selection" cellpadding="2">';
+	echo '<br /><table class="selection" cellpadding="2">';
 	$TableHeader = '<tr><th>' . _('Code') . '</th>
 				<th>' . _('Description') . '</th>
 				<th>' . _('On Hand') . '</th>
@@ -114,10 +116,11 @@ if (isset($_POST['Search']) and isset($result) AND !isset($SelectedParent)) {
 			$StockOnHand = number_format($myrow['totalonhand'],2);
 		}
 		$tabindex=$j+4;
-		printf('<td><input tabindex="'.$tabindex.'" type="submit" name="StockID" value="%s" /></td>
+		printf('<td><button tabindex="'.$tabindex.'" type="submit" name="StockID" value="%s">%s</button></td>
 		        <td>%s</td>
 			<td class="number">%s</td>
 			<td>%s</td></tr>',
+			$myrow['stockid'],
 			$myrow['stockid'],
 			$myrow['description'],
 			$StockOnHand,
@@ -165,8 +168,7 @@ if (isset($StockID) and $StockID!=""){
 		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
 
 		echo '<table class="selection" cellpadding="2">';
-		echo '<tr><th colspan="5"><div class="centre"><font size="4"><b>' . $myrow[0] . ' : ' . _('per') . ' ' . $myrow[1] .
-			'</b></font></div></th></tr>';
+		echo '<tr><th colspan="5" class="header">' . $myrow[0] . ' : ' . _('per') . ' ' . $myrow[1] . '</div></th></tr>';
 		$TableHeader = '<tr>
 				<th>' . _('Component') . '</th>
 				<th>' . _('Description') . '</th>
@@ -230,7 +232,7 @@ if (isset($StockID) and $StockID!=""){
 		echo '</table>';
 	}
 } else { //no stock item entered
-	prnMsg(_('Enter a stock item code above') . ', ' . _('to view the costed bill of material for'),'info');
+	prnMsg(_('Select a stock item code above') . ', ' . _('to view the costed bill of material for'),'info');
 }
 
 if (!isset($_POST['StockID']) or $_POST['StockID']=='') {

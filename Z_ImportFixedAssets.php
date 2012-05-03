@@ -306,6 +306,5 @@ if ($_FILES['SelectedAssetFile']['name']) { //start file processing
 
 }
 
-
 include('includes/footer.inc');
 ?>

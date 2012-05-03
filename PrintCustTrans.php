@@ -362,7 +362,7 @@ if (isset($PrintPDF) or isset($_GET['PrintPDF']) and $PrintPDF and isset($FromTr
 	}
 } /* end loop to print invoices */
 
-if (($InvOrCredit == 'Invoice' or $InvOrCredit == 'Credit') and isset($PrintPDF)) {
+if (isset($InvOrCredit) and ($InvOrCredit == 'Invoice' or $InvOrCredit == 'Credit') and isset($PrintPDF)) {
 
 	if (isset($_GET['Email'])) { //email the invoice to address supplied
 		include ('includes/header.inc');
@@ -416,12 +416,12 @@ if (($InvOrCredit == 'Invoice' or $InvOrCredit == 'Credit') and isset($PrintPDF)
 		echo '</select></td></tr>';
 		echo '<tr><td>' . _('Start invoice/credit note number to print') . '</td><td><input type="text" class="number" maxlength="6" size="7" name="FromTransNo" /></td></tr>';
 		echo '<tr><td>' . _('End invoice/credit note number to print') . '</td><td><input type="text" class="number" maxlength="6" size="7" name="ToTransNo" /></td></tr></table>';
-		echo '<br /><div class="centre"><input type="submit" name="Print" value="' . _('Print') . '" /><br />';
-		echo '<input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
+		echo '<br /><div class="centre"><button type="submit" name="Print">' . _('Print') . '</button><br />';
+		echo '<br /><button type="submit" name="PrintPDF">' . _('Print PDF') . '</button></div>';
 		$sql = "SELECT typeno FROM systypes WHERE typeid=10";
 		$result = DB_query($sql, $db);
 		$myrow = DB_fetch_row($result);
-		echo '<div class="page_help_text"><b>' . _('The last invoice created was number') . ' ' . $myrow[0] . '</b><br />' . _('If only a single invoice is required') . ', ' . _('enter the invoice number to print in the Start transaction number to print field and leave the End transaction number to print field blank') . '. ' . _('Only use the end invoice to print field if you wish to print a sequential range of invoices') . '';
+		echo '<br /><div class="page_help_text"><b>' . _('The last invoice created was number') . ' ' . $myrow[0] . '</b><br />' . _('If only a single invoice is required') . ', ' . _('enter the invoice number to print in the Start transaction number to print field and leave the End transaction number to print field blank') . '. ' . _('Only use the end invoice to print field if you wish to print a sequential range of invoices') . '';
 		$sql = "SELECT typeno FROM systypes WHERE typeid=11";
 		$result = DB_query($sql, $db);
 		$myrow = DB_fetch_row($result);

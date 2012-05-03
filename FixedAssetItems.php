@@ -600,9 +600,9 @@ if ($New==0) {
 
 	echo '<br /><div class="centre"><button type="submit" name="submit">' . _('Update') . '</button></div>';
 	prnMsg( _('Only click the Delete button if you are sure you wish to delete the asset. Only assets with a zero book value can be deleted'), 'warn', _('WARNING'));
-	echo '<br /><div class="centre"><button type="submit" name="delete" onclick="return confirm(\'' . _('Are You Sure? Only assets with a zero book value can be deleted.') . '\');" />' . _('Delete This Asset') . '</button></div>';
+	echo '<br /><div class="centre"><button type="submit" name="delete" onclick="return confirm(\'' . _('Are You Sure? Only assets with a zero book value can be deleted.') . '\');">' . _('Delete This Asset') . '</button></div>';
 }
 
-echo '</form></div>';
+echo '</div></form><br />';
 include('includes/footer.inc');
 ?>

@@ -4,7 +4,7 @@
 
 /* $Revision: 1.12 $ */
 
-$title = _('Stock Location Transfer Docket Error');
+$title = _('Stock Location Transfer Docket Reprint');
 include('includes/session.inc');
 
 include('includes/PDFStarter.php');
@@ -19,9 +19,9 @@ if (!isset($_GET['TransferNo'])){
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Reprint transfer docket').'</p><br />';
 	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<table><tr><td>'._('Transfer docket to reprint').'</td>';
-	echo '<td><input type="text" class="number" size="10" name="TransferNo" /></td></tr></table>';
-	echo '<div class="centre"><input type="submit" name="Print" value="' . _('Print') .'" />';
+	echo '<table class="selection"><tr><td>'._('Transfer docket to reprint').'</td>';
+	echo '<td><input type="text" class="number" size="10" name="TransferNo" /></td></tr></table><br />';
+	echo '<div class="centre"><button type="submit" name="Print">' . _('Create PDF') .'</button></div><br />';
 	include ('includes/footer.inc');
 	exit;
 }

@@ -22,7 +22,9 @@ if (!isset($_SESSION['SuppTrans'])){
 	/*It all stops here if there aint no supplier selected and invoice/credit initiated ie $_SESSION['SuppTrans'] started off*/
 }
 
-$_POST['Amount'] = filter_currency_input($_POST['Amount']);
+if (isset($_POST['Amount'])) {
+	$_POST['Amount'] = filter_currency_input($_POST['Amount']);
+}
 
 if (isset($_POST['AddAssetToInvoice'])){
 
@@ -89,8 +91,8 @@ foreach ($_SESSION['SuppTrans']->Assets as $EnteredAsset){
 }
 
 echo '<tr>
-	<td class="number"><font size="2" color="#616161">' . _('Total') . ':</font></td>
-	<td class="number"><font size="2" color="#616161"><U>' . locale_money_format($TotalAssetValue,$_SESSION['SuppTrans']->CurrCode) . '</U></font></td>
+	<th class="header">' . _('Total') . ':</th>
+	<th class="header"><u>' . locale_money_format($TotalAssetValue,$_SESSION['SuppTrans']->CurrCode) . '</u></th>
 </tr>
 </table><br />';
 

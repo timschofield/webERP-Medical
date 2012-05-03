@@ -811,7 +811,7 @@ if (!isset($_GET['delete'])) {
 	if (!isset($_POST['CustBranchCode'])) {$_POST['CustBranchCode']='';}
 	echo '<td><input tabindex="27" type="text" name="CustBranchCode" size="31" maxlength="30" value="'. $_POST['CustBranchCode'].'" /></td></tr>';
 	echo '</table>';
-	echo '<br /><div class="centre"><button tabindex="28" type="submit" name="submit">' . _('Enter Branch') . '</button></div>';
+	echo '<br /><div class="centre"><button tabindex="28" type="submit" name="submit">' . _('Enter Branch') . '</button></div><br />';
 	echo '</form>';
 
 } //end if record deleted no point displaying form to add record

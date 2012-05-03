@@ -66,10 +66,10 @@ if (!isset($NextCode)) {$NextCode='';}
 echo '<input type="hidden" name="PrevAccount" value="'.$PrevCode.'" />';
 echo '<input type="hidden" name="NextAccount" value="'.$NextCode.'" />';
 echo '</table>';
-echo '<br /><div class="centre"><button type="submit" name="Previous">' . _('Prev Account') . '</button>';
-echo '<button type="submit" name="Select">' . _('Select Account') . '</button>';
-echo '<button type="submit" name="Next">' . _('Next Account') . '</button>';
-echo '</div><br />';
+echo '<br /><table><tr><td><button type="submit" name="Previous">' . _('Prev Account') . '</button></td>';
+echo '<td><button type="submit" name="Select">' . _('Select Account') . '</button></td>';
+echo '<td><button type="submit" name="Next">' . _('Next Account') . '</td></tr>';
+echo '</table><br />';
 echo '</form>';
 
 // End of account selection
@@ -214,7 +214,7 @@ if (isset($SelectedAccount) and $SelectedAccount != '') {
 	echo '<input type="hidden" name="SelectedAccount" value="'.$SelectedAccount.'" />';
 
 	echo '<script>defaultControl(document.form.1next);</script>';
-	echo '<br /><div class="centre"><button type="submit" name="update">' . _('Update') . '</button></div></form>';
+	echo '<br /><div class="centre"><button type="submit" name="update">' . _('Update') . '</button></div><br /></form>';
 
 	$SQL="SELECT MIN(periodno) FROM periods";
 	$result=DB_query($SQL,$db);

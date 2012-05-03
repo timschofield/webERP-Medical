@@ -147,7 +147,8 @@ if (!isset($_GET['InvoiceNumber']) AND !$_SESSION['ProcessingCredit']) {
 														$myrow['mbflag'],
 														$myrow['trandate'],
 														0,
-														$myrow['discountcategory'],
+														$myrow['discountcategory'],#
+														0,
 														$myrow['controlled'],
 														$myrow['serialised'],
 														$myrow['decimalplaces'],
@@ -266,10 +267,7 @@ if (!isset($_POST['ProcessCredit'])) {
 
 
 	echo '<table cellpadding="2" class="selection"><tr>';
-	echo '<tr><th colspan="13">';
-	echo '<div class="centre"><font color="blue" size="4"><b>' . _('Credit Invoice') . ' ' . $_SESSION['ProcessingCredit'] . '</b>
-		<b>'.' - ' . $_SESSION['CreditItems']->CustomerName . '</b></font>
-		<font size="3" color="blue"> - ' . _('Credit Note amounts stated in') . ' ' . $_SESSION['CreditItems']->DefaultCurrency . '</div></font>';
+	echo '<tr><th colspan="13" class="header">' . _('Credit Invoice') . ' ' . $_SESSION['ProcessingCredit'] . '<b>'.' - ' . $_SESSION['CreditItems']->CustomerName . '</b>&nbsp;&nbsp;' . _('Credit Note amounts stated in') . ' ' . $_SESSION['CreditItems']->DefaultCurrency . '</th>';
 	echo '</th></tr>';
 	echo '<th>' . _('Item Code') . '</th>
 		<th>' . _('Item Description') . '</th>
@@ -350,6 +348,11 @@ foreach ($_SESSION['CreditItems']->LineItems as $LnItm) {
 		echo '</td>';
 		echo '<td class="number">';
 
+	}
+	$sql="SELECT taxid FROM taxauthorities";
+	$result=DB_query($sql, $db);
+	while ($myrow=DB_fetch_array($result)) {
+		$TaxTotals[$myrow['taxid']]=0;
 	}
 	$i=0; // initialise the number of taxes iterated through
 	$TaxLineTotal =0; //initialise tax total for the line
@@ -1538,9 +1541,9 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 	}
 	$j++;
 	echo '<tr><td>' . _('Credit note text') . '</td><td><textarea tabindex="'.$j.'"  name="CreditText" cols="31" rows="5">' . $_POST['CreditText'] . '</textarea></td></tr>';
-	echo '</table><br /><div class="centre"><button tabindex="'.$j.'" type="submit" name="Update">' . _('Update') . '</button><br />';
+	echo '</table><br /><div class="centre"><button tabindex="'.$j.'" type="submit" name="Update">' . _('Update') . '</button></div><br />';
 	$j++;
-	 echo '<button type="submit" tabindex="'.$j++.'" name="ProcessCredit">' . _('Process Credit') .'</button></div>';
+	 echo '<div class="centre"><button type="submit" tabindex="'.$j++.'" name="ProcessCredit">' . _('Process Credit') .'</button></div><br />';
 }
 
 echo '</form>';

@@ -251,7 +251,7 @@ if (! isset($_GET['delete'])) {
 	echo '</select></td></tr>';
 	echo '</table><br />';
 
-	echo '<div class="centre"><button type="submit" name="Submit">' . _('Enter Information') . '</button></div>';
+	echo '<div class="centre"><button type="submit" name="Submit">' . _('Enter Information') . '</button></div><br />';
 
 	echo '</form>';
 

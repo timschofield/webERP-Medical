@@ -149,7 +149,7 @@ if ($myrow['editransport']=='ftp'){
 			<td><input tabindex="7" type="text" name="EDIServerPwd" size="20" maxlength="20" value="' . $myrow['ediserverpwd'] . '" /></td></tr>';
 }
 
-echo '</table><br /><div class="centre"><button tabindex="8" type="submit" name="submit">'._('Update EDI Configuration').'</button></div></form>';
+echo '</table><br /><div class="centre"><button tabindex="8" type="submit" name="submit">'._('Update EDI Configuration').'</button></div><br /></form>';
 
 include('includes/footer.inc');
 ?>

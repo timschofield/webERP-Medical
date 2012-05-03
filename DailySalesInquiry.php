@@ -23,7 +23,7 @@ if (!isset($_POST['MonthToShow'])){
 echo '<table class="selection">
 	<tr>
 		<td>' . _('Month to Show') . ':</td>
-		<td><select tabindex="1" name="MonthToShow" onChange="ReloadForm(UpdateItems)">';
+		<td><select tabindex="1" name="MonthToShow" onChange="ReloadForm(ShowResults)">';
 
 $PeriodsResult = DB_query("SELECT periodno, lastdate_in_period FROM periods",$db);
 
@@ -45,10 +45,14 @@ if (!isset($_POST['StockType'])) {
 
 ShowStockTypes($_POST['StockType']);
 echo '<input type="submit" name="UpdateItems" style="visibility:hidden" value="Not Seen" />';
-echo '</tr></table><br /><div class="centre"><button tabindex="4" type="submit" name="ShowResults">' . _('Show Daily Sales For The Selected Month') . '</button>';
-
-echo '</form></div>';
-echo '<br />';
+echo '</tr>
+	</table>
+	<br />
+	<div class="centre">
+		<button tabindex="4" type="submit" name="ShowResults">' . _('Show Daily Sales For The Selected Month') . '</button>
+	</div>
+	</form>
+	<br />';
 /*Now get and display the sales data returned */
 if (strpos($EndDateSQL,'/')) {
 	$Date_Array = explode('/',$EndDateSQL);

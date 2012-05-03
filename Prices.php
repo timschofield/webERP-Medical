@@ -225,7 +225,7 @@ if ($InputError ==0){
 		echo '<tr><th colspan="8"><form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo _('Pricing for part') . ':<input type="text" name="Item" maxsize="22" value="' . $Item . '" maxlength="20" />
-				<input type="submit" name="NewPart" value="' . _('Review Prices') . '" />';
+				<button type="submit" name="NewPart">' . _('Review Prices') . '</button>';
 		echo '</th></tr></form>';
 
 		echo '<tr>
@@ -336,7 +336,7 @@ if ($InputError ==0){
 		}
 
 		echo '<br /><table class="selection">';
-		echo '<tr><th colspan="5"><font color="blue" size="3"><b>' . $Item . ' - ' . $PartDescription . '</b></font></th></tr>';
+		echo '<tr><th colspan="5" class="header"><b>' . $Item . ' - ' . $PartDescription . '</b></th></tr>';
 
 		echo '<tr><td>' . _('Sales Type Price List') . ':</td><td><select name="TypeAbbrev">';
 
@@ -426,8 +426,8 @@ if ($InputError ==0){
 
 		echo '</table>';
 		echo '<br /><div class="centre">';
-		echo '<input type="submit" name="submit" value="'. _('Enter') . '/' . _('Amend Price') . '" />';
-		echo '</div>';
+		echo '<button type="submit" name="submit">'. _('Enter') . '/' . _('Amend Price') . '</button>';
+		echo '</div><br />';
 	}
 }
 

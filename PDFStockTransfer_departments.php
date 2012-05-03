@@ -16,16 +16,16 @@ if (!isset($_GET['TransferNo'])){
 	}
 	if (!isset($_GET['TransferNo'])){ //still not set from a post then
 	//open a form for entering a transfer number
-		$title = _('Transfer');
+		$title = _('Print an Internal Transfer Note');
 		include('includes/header.inc');
 		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print Transfer Note') . '" alt="" />' . ' ' . $title.'</p><br />';
 		echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post" name="form">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 		echo '<table class="selection"><tr>';
-		echo '<td>'._('Imprimir Nota de Despacho').' : '.'</td>';
+		echo '<td>'._('Internal Transfer number to print').' : '.'</td>';
 		echo '<td><input type=text class="number"  name="TransferNo" maxlength=10 size=11 /></td></tr>';
 		echo '</table>';
-		echo '<br><div class="centre"><input type="submit" name="Process" value="' . _('Imprimir Nota') . '"></div></form>';
+		echo '<br><div class="centre"><button type="submit" name="Process">' . _('Print Transfer Note') . '</button></div></form><br />';
 		include('includes/footer.inc');
 		exit();
 	}
@@ -43,11 +43,19 @@ $FontSize =10;
 
 /*Print out the category totals */
 
-$sql="SELECT stockmaster.stockid, stockmaster.description, dispatchitems.quantity, departments.description as namedepartments,loccode,despatchdate
-FROM dispatch, dispatchitems, stockmaster, departments
-WHERE departments.departmentid=dispatch.departmentid and stockmaster.stockid = dispatchitems.itemid
-AND dispatch.dispatchid = dispatchitems.dispatchid
-AND dispatchitems.`dispatchid` ='".$_GET['TransferNo']."'";
+$sql = "SELECT  stockmaster.stockid,
+				stockmaster.description,
+				dispatchitems.quantity,
+				departments.description as namedepartments,
+				loccode,despatchdate
+			FROM dispatch
+			INNER JOIN dispatchitems
+				ON dispatch.dispatchid = dispatchitems.dispatchid
+			INNER JOIN stockmaster
+				ON stockmaster.stockid = dispatchitems.itemid
+			INNER JOIN departments
+				ON departments.departmentid=dispatch.departmentid
+			WHERE dispatchitems.`dispatchid` ='".$_GET['TransferNo']."'";
 
 $result=DB_query($sql, $db);
 if (DB_num_rows($result) == 0){

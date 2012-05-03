@@ -20,7 +20,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 
 echo '<table cellpadding="2" class="selection">
 		<tr><td valign="top">
-		<table>';
+		<table style="background: transparent;border: 1px solid #a1afbf;border-radius: 7px;">';
 
 echo '<tr>
 		<th colspan="2" class="centre">' . _('Date Selection') . '</th>
@@ -81,7 +81,7 @@ if ($_POST['DateRange']=='Custom'){
 }
 echo '</table></td>
 		<td valign="top">
-		<table>'; //new sub table to set parameters for order of display
+		<table style="background: transparent;border: 1px solid #a1afbf;border-radius: 7px;">';
 
 
 if (!isset($_POST['OrderBy'])){ //default to order by net sales
@@ -121,7 +121,7 @@ echo	'</td>
 	</table>';
 
 
-echo '<br /><div class="centre"><input tabindex="4" type="submit" name="ShowSales" value="' . _('Show Sales') . '" />';
+echo '<br /><div class="centre"><button tabindex="4" type="submit" name="ShowSales">' . _('Show Sales') . '</button>';
 echo '</div></form>';
 echo '<br />';
 
@@ -252,10 +252,10 @@ if (isset($_POST['ShowSales'])){
 		echo '<td>' . $i . '</td>
 				<td>' . $SalesRow['stockid'] . ' - ' . $SalesRow['description'] . '</td>
 				<td>' . $SalesRow['categorydescription'] . '</td>
-				<td class="number">' . locale_number_format($SalesRow['salesvalue'],$_SESSION['CompanyRecord']['decimalplaces']) . '</td>
-				<td class="number">' . locale_number_format($SalesRow['returnvalue'],$_SESSION['CompanyRecord']['decimalplaces']) . '</td>
-				<td class="number">' . locale_number_format($SalesRow['netsalesvalue'],$_SESSION['CompanyRecord']['decimalplaces']) . '</td>
-				<td class="number">' . locale_number_format($SalesRow['salesquantity'],'Variable') . '</td>
+				<td class="number">' . locale_money_format($SalesRow['salesvalue'],$_SESSION['CompanyRecord']['currencydefault']) . '</td>
+				<td class="number">' . locale_money_format($SalesRow['returnvalue'],$_SESSION['CompanyRecord']['currencydefault']) . '</td>
+				<td class="number">' . locale_money_format($SalesRow['netsalesvalue'],$_SESSION['CompanyRecord']['currencydefault']) . '</td>
+				<td class="number">' . locale_number_format($SalesRow['salesquantity'],2) . '</td>
 				</tr>';
 		$i++;
 
@@ -274,10 +274,10 @@ if (isset($_POST['ShowSales'])){
 		echo '<tr class="EvenTableRows">';
 	}
 	echo '<td class="number" colspan="3">' . _('GRAND Total') . '</td>
-		<td class="number">' . locale_number_format($CumulativeTotalSales,$_SESSION['CompanyRecord']['decimalplaces']) . '</td>
-		<td class="number">' . locale_number_format($CumulativeTotalRefunds,$_SESSION['CompanyRecord']['decimalplaces']) . '</td>
-		<td class="number">' . locale_number_format($CumulativeTotalNetSales,$_SESSION['CompanyRecord']['decimalplaces']) . '</td>
-		<td class="number">' . locale_number_format($CumulativeTotalQuantity,'Variable') . '</td>
+		<td class="number">' . locale_money_format($CumulativeTotalSales,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
+		<td class="number">' . locale_money_format($CumulativeTotalRefunds,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
+		<td class="number">' . locale_money_format($CumulativeTotalNetSales,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
+		<td class="number">' . locale_number_format($CumulativeTotalQuantity,2) . '</td>
 		</tr>';
 
 	echo '</table>';

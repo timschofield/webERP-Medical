@@ -21,6 +21,7 @@ if (empty($_GET['identifier'])) {
 } else {
 	$identifier=$_GET['identifier'];
 }
+
 if (isset($_SESSION['Items'.$identifier])){
 	//update the Items object variable with the data posted from the form
 	$_SESSION['Items'.$identifier]->CustRef = _('Cash Sale');
@@ -556,7 +557,7 @@ if ((isset($_SESSION['Items'.$identifier])) OR isset($NewItem)) {
 									($DiscountPercentage/100),
 									0,
 									$Narrative,
-									'Yes', /*Update DB */
+									'No', /*Update DB */
 									$_POST['ItemDue_' . $OrderLine->LineNumber],
 									$_POST['POLine_' . $OrderLine->LineNumber],
 									filter_number_input($_POST['GPPercent_' . $OrderLine->LineNumber]));
@@ -761,7 +762,7 @@ if (count($_SESSION['Items'.$identifier]->LineItems)>0 and !isset($_POST['Proces
 
 	echo '<br />
 		<table width="90%" cellpadding="2" class="selection">
-		<tr bgcolor="#800000">';
+		<tr>';
 	echo '<th>' . _('Item Code') . '</th>
 			<th>' . _('Item Description') . '</th>
 			<th>' . _('Quantity') . '</th>
@@ -887,7 +888,7 @@ if (count($_SESSION['Items'.$identifier]->LineItems)>0 and !isset($_POST['Proces
 		<td><textarea name="Comments" cols="23" rows="5">' . stripcslashes($_SESSION['Items'.$identifier]->Comments) .'</textarea></td>
 	</tr>';
 	echo '</table>'; //end the sub table in the first column of master table
-	echo '</td><th valign="bottom">'; //for the master table
+	echo '</td><th style="vertical-align: top;border-width: 0px;">'; //for the master table
 	echo '<table class="selection">'; // a new nested table in the second column of master table
 	//now the payment stuff in this column
 	$PaymentMethodsResult = DB_query("SELECT paymentid, paymentname FROM paymentmethods",$db);
@@ -931,7 +932,7 @@ if (count($_SESSION['Items'.$identifier]->LineItems)>0 and !isset($_POST['Proces
  * Invoice Processing Here
  * **********************************
  * */
-if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
+if (isset($_POST['ProcessSale'])){
 
 	$InputError = false; //always assume the best
 	//but check for the worst
@@ -1542,31 +1543,31 @@ if (isset($_POST['ProcessSale']) and $_POST['ProcessSale'] != ""){
 			$StkMoveNo = DB_Last_Insert_ID($db,'stockmoves','stkmoveno');
 
 			if (isset($OrderLine->SerialItems)) {
-			foreach ($OrderLine->SerialItems['Number'] as $i => $SerialItemNumber) {
-				$Batch[$SerialItemNumber]=$OrderLine->SerialItems['Quantity'][$i];
-				$SQL="UPDATE stockserialitems
-						SET quantity=quantity-".filter_number_input($OrderLine->SerialItems['Quantity'][$i]*$OrderLine->ConversionFactor)."
-						WHERE stockid='".$OrderLine->StockID."'
-							AND serialno='".$SerialItemNumber."'";
-				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Batch numbers could not be updated');
-				$DbgMsg = _('The following SQL to update the stock batch record was used');
-				$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+				foreach ($OrderLine->SerialItems['Number'] as $i => $SerialItemNumber) {
+					$Batch[$SerialItemNumber]=$OrderLine->SerialItems['Quantity'][$i];
+					$SQL="UPDATE stockserialitems
+							SET quantity=quantity-".filter_number_input($OrderLine->SerialItems['Quantity'][$i]*$OrderLine->ConversionFactor)."
+							WHERE stockid='".$OrderLine->StockID."'
+								AND serialno='".$SerialItemNumber."'";
+					$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Batch numbers could not be updated');
+					$DbgMsg = _('The following SQL to update the stock batch record was used');
+					$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
 
-				$SQL="INSERT INTO stockserialmoves
-									(stockmoveno,
-									stockid,
-									serialno,
-									moveqty)
-								VALUES (
-									'" . $StkMoveNo . "',
-									'" . $OrderLine->StockID . "',
-									'" . $SerialItemNumber . "',
-									'-" . filter_number_input($OrderLine->SerialItems['Quantity'][$i]*$OrderLine->ConversionFactor) . "'
-								)";
-				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Batch numbers could not be updated');
-				$DbgMsg = _('The following SQL to insert the stock batch movement was used');
-				$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
-			}
+					$SQL="INSERT INTO stockserialmoves
+										(stockmoveno,
+										stockid,
+										serialno,
+										moveqty)
+									VALUES (
+										'" . $StkMoveNo . "',
+										'" . $OrderLine->StockID . "',
+										'" . $SerialItemNumber . "',
+										'-" . filter_number_input($OrderLine->SerialItems['Quantity'][$i]*$OrderLine->ConversionFactor) . "'
+									)";
+					$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Batch numbers could not be updated');
+					$DbgMsg = _('The following SQL to insert the stock batch movement was used');
+					$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+				}
 			}
 
 		/*Insert the taxes that applied to this line */

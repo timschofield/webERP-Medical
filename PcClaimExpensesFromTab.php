@@ -204,7 +204,7 @@ if (isset($SelectedTabs)) {
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 		echo '<br /><table class="selection">';
-		echo '<tr><th colspan="8"><font color="#616161" size="3">' . _('Petty Cash Tab') . ' ' .$SelectedTabs. '</font></th></tr>';
+		echo '<tr><th colspan="8" class="header">' . _('Petty Cash Tab') . ' ' .$SelectedTabs. '</th></tr>';
 		echo '<tr><th colspan="8">' . _('Detail Of Movements For Last ') .': ';
 
 		if(!isset ($Days)){
@@ -327,6 +327,10 @@ if (isset($SelectedTabs)) {
 
 		if (!isset($Amount['amount'])) {
 			$Amount['amount']=0;
+		}
+
+		if(!isset($TabRow['currency'])) {
+			$TabRow['currency']=$_SESSION['CompanyRecord']['currencydefault'];
 		}
 
 		echo '<tr><td colspan="2" class="number">' . _('Current balance') . ':</td>

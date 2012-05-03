@@ -125,7 +125,7 @@ if (isset($_GET['Edit'])) {
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection">';
 	echo '<tr>
-			<th colspan="2"><font size="2" color="navy">' . _('Edit the Request Line') . '</font></th>
+			<th colspan="2" class="header">' . _('Edit the Request Line') . '</th>
 		</tr>';
 	echo '<tr>
 			<td>' . _('Line number') . '</td>
@@ -159,7 +159,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 
 echo '<table class="selection">';
 echo '<tr>
-		<th colspan="2"><font color="navy" size="2">' . _('Internal Stock Request Details') . '</font></th>
+		<th colspan="2" class="header">' . _('Internal Stock Request Details') . '</th>
 	</tr>';
 echo '<tr>
 		<td>' . _('Department') . ':</td>';
@@ -224,7 +224,7 @@ echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 echo '<br /><table class="selection">';
 echo '<tr>
-		<th colspan="7"><font size="2" color="navy">' . _('Details of Items Requested') . '</font></th>
+		<th colspan="7" class="header">' . _('Details of Items Requested') . '</th>
 	</tr>';
 echo '<tr>
 		<th>'. _('Line Number') . '</th>
@@ -479,7 +479,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 //			echo '<input type="hidden" name=Search value="Search" />';
 			echo '<br /></div>';
 		}
-		echo '<table cellpadding="2">';
+		echo '<table cellpadding="2" class="selection">';
 		echo '<tr>
 				<th>' . _('Code') . '</th>
 				<th>' . _('Description') . '</th>
@@ -512,7 +512,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 				$ItemStatus ='';
 			}
 
-			echo '<td><button type="submit" name="Select">' . $myrow['stockid'] . '</button></td>
+			echo '<td><button type="submit" name="Select" value="' . $myrow['stockid'] . '" />' . $myrow['stockid'] . '</button></td>
 					<td>'.$myrow['description'].'</td>
 					<td class="number">' . $qoh . '</td>
 					<td>' . $myrow['units'] . '</td>
@@ -534,7 +534,7 @@ if (isset($SearchResult)) {
 	$j = 1;
 	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post" name="orderform">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<table class="table1">';
+	echo '<table class="selection">';
 	echo '<tr><td>
 			<input type="hidden" name="previous" value="'.($Offset-1).'" />
 			<button tabindex="'.($j+8).'" type="submit" name="Prev">'._('Prev').'</button></td>';
@@ -612,7 +612,7 @@ if (isset($SearchResult)) {
 
 		$PurchRow = DB_fetch_row($PurchResult);
 		if ($PurchRow[0]!=null){
-			$PurchQty =  $PurchRow[0]/$PriceRow['conversionfactor'];
+			$PurchQty =  $PurchRow[0];
 		} else {
 			$PurchQty = 0;
 		}
@@ -653,7 +653,6 @@ if (isset($SearchResult)) {
 			</tr>';
 		echo '<input type="hidden" name="DecimalPlaces'.$i.'" value="' . $myrow['decimalplaces'] . '" />';
 		echo '<input type="hidden" name="ItemDescription'.$i.'" value="' . $myrow['description'] . '" />';
-		echo '<input type="hidden" name="ConversionFactor'.$i.'" value="' . $PriceRow['conversionfactor'] . '" />';
 		echo '<input type="hidden" name="Units'.$i.'" value="' . $myrow['stockunits'] . '" />';
 		if ($j==1) {
 			$jsCall = '<script  type="text/javascript">if (document.SelectParts) {defaultControl(document.SelectParts.itm'.$myrow['stockid'].');}</script>';

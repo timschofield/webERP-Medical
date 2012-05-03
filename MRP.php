@@ -552,7 +552,7 @@ if (isset($_POST['submit'])) {
 		}
 		echo '<table cellpadding="5"><tr><td valign="top">';
 		echo '<table class="selection">';
-		echo '<tr><th colspan="3"><font color="blue" size="3">'._('Last Run Details').'</font></th></tr>';
+		echo '<tr><th colspan="3" class="header">'._('Last Run Details').'</th></tr>';
 		echo '<tr>';
 		echo '<td>' . _('Last Run Time') . ':&nbsp&nbsp</td><td>' . $myrow['runtime'] . '</td></tr>';
 		echo '<td>' . _('Location') . ':&nbsp&nbsp</td><td>' . $myrow['location'] . '</td></tr>';
@@ -567,7 +567,7 @@ if (isset($_POST['submit'])) {
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection">';
 	// Generate selections for Location
-	echo '<tr><th colspan="3"><font color="blue" size="3">'._('This Run Details').'</font></th></tr>';
+	echo '<tr><th colspan="3" class="header">'._('This Run Details').'</th></tr>';
 	echo '<tr>
 	 <td>' . _('Location') . '</td>
 	 <td><select name="location[]" multiple>
@@ -594,7 +594,7 @@ if (isset($_POST['submit'])) {
 	echo '<td><input type="checkbox" name="pansizeflag" value="y" checked="True" /></td></tr>';
 	echo '<tr><td>' ._('Use Shrinkage?') . ':</td>';
 	echo '<td><input type="checkbox" name="shrinkageflag" value="y" checked="True" /></td></tr>';
-	echo '</table></td></tr></table><div class="centre"><br /><button type="submit" name="submit">' . _('Run MRP') . '</button></div>';
+	echo '</table></td></tr></table><div class="centre"><br /><button type="submit" name="submit">' . _('Run MRP') . '</button></div></br />';
 	echo '</form>';
 }  // End of Main program logic -------------------------------------------------------
 

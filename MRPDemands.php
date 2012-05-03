@@ -100,7 +100,7 @@ function search(&$db,&$StockID) { //####SEARCH_SEARCH_SEARCH_SEARCH_SEARCH_SEARC
 				$k++;
 			}
 			$tabindex=$j+4;
-			echo '<td><button tabindex="'.$tabindex.'" type="submit" name="StockID">'.$myrow['stockid'].'</button></td>
+			echo '<td><button tabindex="'.$tabindex.'" type="submit" name="StockID" value="'.$myrow['stockid'].'">'.$myrow['stockid'].'</button></td>
 				<td>'.$myrow['description'].'</td></tr>';
 			$j++;
 	}  //end of while loop
@@ -282,7 +282,7 @@ function listall(&$db,$part,$demandtype)  {//####LISTALL_LISTALL_LISTALL_LISTALL
 	$result = DB_query($sql,$db,$ErrMsg);
 
 	echo '<table class="selection">
-		<tr bgcolor =#800000><th>' . _('Part Number') . '</th>
+		<tr><th>' . _('Part Number') . '</th>
 				<th>' . _('Description') . '</th>
 				<th>' . _('Demand Type') . '</th>
 				<th>' . _('Quantity') . '</th>
@@ -399,10 +399,10 @@ function display(&$db,&$StockID,&$DemandID) { //####DISPLAY_DISPLAY_DISPLAY_DISP
 		echo '</table>';
 		echo '<br /><div class="centre"><button type="submit" name="submit">' . _('Enter Information') . '</button>&nbsp&nbsp';
 		echo '<button type="submit" name="listsome">' . _('List Selection') . '</button>&nbsp&nbsp';
-		echo '<button type="submit" name="deletesome">' . _('Delete Demand Type') . '</button>';
+		echo '<button type="submit" name="deletesome">' . _('Delete Demand Type') . '</button></div><br />';
 		// If mrpdemand record exists, display option to delete it
 		if ((isset($DemandID)) AND (DB_num_rows($result) > 0)) {
-			echo '<br /><a href=" ' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?delete=yes&StockID='.$StockID.'&DemandID=' . $DemandID . '">' . _('Or Delete Record') ;
+			echo '<br /><br /><a href=" ' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?delete=yes&StockID='.$StockID.'&DemandID=' . $DemandID . '">' . _('Or Delete Record') .'</a>';
 		}
 	}
 	echo '</form>';

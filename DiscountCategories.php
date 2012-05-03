@@ -198,8 +198,8 @@ if (isset($_POST['selectchoice'])) {
 
 		echo '<br /><table class="selection">';
 		echo '<tr>
-			<th>'. _('Discount Category') .'</th>
-			<th>'. _('Item') .'</th></tr>';
+				<th>'. _('Discount Category') .'</th>
+				<th>'. _('Item') .'</th></tr>';
 
 		$k=0; //row colour counter
 
@@ -244,7 +244,7 @@ if (!isset($_POST['selectchoice'])) {
 	echo '</select></td></tr>
 		</table>
 		<br />';
-	echo '<div class="centre"><button type="submit" name="selectchoice">'._('Select').'</button></div>';
+	echo '<div class="centre"><button type="submit" name="selectchoice">'._('Select').'</button></div><br />';
 }
 
 include('includes/footer.inc');

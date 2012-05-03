@@ -155,7 +155,7 @@ if (isset($_GET['SelectedLocation'])) {
 } else {
 	echo '<button type="submit" name="submit">' . _('Enter Information') . '</button>';
 }
-echo '</div>';
+echo '</div><br />';
 echo '</form>';
 
 include('includes/footer.inc');

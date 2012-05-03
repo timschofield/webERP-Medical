@@ -431,7 +431,7 @@ if (isset($_GET['AllocTrans'])) {
 		echo '</table><br />';
 		echo '<input type="hidden" name="TotalNumberOfAllocs" value="' . $Counter . '" />';
 		echo '<div class="centre"><button tabindex="'.$j.'" type="submit" name="UpdateDatabase">' . _('Process Allocations') . '</button>';
-		echo '<button tabindex="'.$j.'" type="submit" name="Cancel">' . _('Cancel') . '</button></div>';
+		echo '<button tabindex="'.$j.'" type="submit" name="Cancel">' . _('Cancel') . '</button></div><br />';
 
 	} elseif (isset($_GET['DebtorNo'])) {
 		// Page called with customer code

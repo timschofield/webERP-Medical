@@ -18,7 +18,7 @@
 /* $Id$*/
 
 body {
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
 	font-size: 10px;
 	background-color: #fff;
 	margin-left: 0px;
@@ -40,11 +40,11 @@ li { list-style-image: url(bullet.gif); ¡ bullet.gif only exist in fresh theme 
 
 /*links before selection */
 a {
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
 	font-size: 100%;
 	font-weight: normal;
 	text-decoration: none;
-	color: #5B5B68;
+	color: #595968;
 }
 
 /*links on any screen except quick menu which is overridden when mouse is hovering over them */
@@ -60,7 +60,9 @@ table {
 
 th {
 	font-weight: normal;
-	background-color: #C3C3C3;
+	background-color: transparent;
+	border: solid #A49999 1px;
+	border-radius: 5px;
 	font-size: 100%;
 	color: #300;
 	text-align: center;
@@ -69,12 +71,34 @@ th {
 
 th.number {
 	font-weight: normal;
-	background-color: #cccce5;
+	background-color: transparent;
+	border-radius: 5px;
 	font-size: 100%;
 	color: #300;
 	text-align: right;
 	vertical-align: middle;
 }
+
+th.date {
+	font-weight: normal;
+	background-color: #cccce5;
+	border-radius: 5px;
+	font-size: 10px;
+	color: #300;
+	vertical-align: middle;
+}
+
+th.header {
+	font-weight: normal;
+	background: transparent;
+	border: solid #A49999 1px;
+	border-radius: 5px;
+	font-size: 16px;
+	color: #616161;
+	text-align: center;
+	vertical-align: middle;
+}
+
 .tableheader {
 	font-weight: normal;
 	background-color: #cccce5;
@@ -83,23 +107,27 @@ th.number {
 
 /*table detail items default format */
 td {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 100%;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+	font-size: 10px;
 	text-align: left;
+	background-color: transparent;
 }
 
 td.select {
-	background-color:#eee;
+	background-color:transparent;
+	border: solid #A49999 1px;
+	border-radius: 5px;
 }
 
 table.selection {
 	margin-bottom: 5px;
-	background-color:#DCDCDC;
+	background: -moz-linear-gradient(left, #EEE7E7, #9CA4AE);
+	background: -webkit-linear-gradient(left, #EEE7E7, #9CA4AE);
 	border: solid #A49999 1px;
 	border-radius: 5px;
-	-moz-box-shadow: 3px 3px 2px #888;
-	-webkit-box-shadow: 3px 3px 2px #888;
-	box-shadow: 3px 3px 2px #888;
+	-moz-box-shadow: 3px 3px 2px #B1B1B1;
+	-webkit-box-shadow: 3px 3px 2px #B1B1B1;
+	box-shadow: 3px 3px 2px #B1B1B1;
 }
 
 td.number {
@@ -113,10 +141,14 @@ div.centre {
 
 .EvenTableRows {
 	background-color: #ccc;
+	border: solid #A49999 1px;
+	border-radius: 5px;
 }
 
 .OddTableRows {
 	background-color: #eee;
+	border: solid #A49999 1px;
+	border-radius: 5px;
 }
 
 .dpTbl {
@@ -184,9 +216,9 @@ div.info {
 }
 
 textarea {
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
 	font-size: 100%;
-	background-color: #e3e1e1;
+	background-color: transparent;
 	border-width:1px;
 	border-bottom-color: gray;
 	border-bottom-style: solid;
@@ -196,12 +228,13 @@ textarea {
 	border-left-style: solid;
 	border-right-color: gray;
 	border-right-style: solid;
+	border-radius: 5px;
 }
 
 input {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 100%;
-	background-color: #e3e1e1;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+	font-size: 10px;
+	background-color: transparent;
 	border-width:1px;
     color:#645959;
 	border-bottom-color: gray;
@@ -216,64 +249,64 @@ input {
 }
 
 input:hover {
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
 	font-size: 100%;
-	background-color: #e3e5f5;
+	background-color: transparent;
 	border-width:1px;
-	border-bottom-color: gray;
+	border-bottom-color: black;
 	border-bottom-style: solid;
-	border-top-color: gray;
+	border-top-color: black;
 	border-top-style: solid;
-	border-left-color: gray;
+	border-left-color: black;
 	border-left-style: solid;
-	border-right-color: gray;
+	border-right-color: black;
 	border-right-style: solid;
 	border-radius: 3px;
 }
 
 button {
-	display: inline-block;
-	outline: none;
-	cursor: pointer;
-	text-align: center;
-	text-decoration: none;
-	font: 10px/100% Arial, Helvetica, sans-serif;
-	padding: .1em 1em .2em;
-	background-color: #e3e1e1;
-	margin-bottom: 2px;
-	-webkit-border-radius: .5em;
-	-moz-border-radius: .5em;
-	border-radius: .5em;
-	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	box-shadow: 0 1px 2px rgba(0,0,0,.2);	border-right-style: solid;
+  background-color: #C4C4C4;
+  border-top: 1px solid #a1afbf;
+  border-left: 1px solid #a7b6c7;
+  border-bottom: 1px solid #a1afbf;
+  border-right: 1px solid #a7b6c7;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 7px;
+	-moz-box-shadow: 0px 0px 2px 1px #CECECE;
+	-webkit-box-shadow: 0px 0px 2px 1px #CECECE;
+	box-shadow: 0px 0px 2px 1px #CECECE;
+  color: #092442;
+  font: normal 10px "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+  padding: 1px 1px 1px 1px;
+  margin-right: 3px;
+  text-align: center;
 }
 
-select {
-	border-width:1px;
-	border-bottom-color: gray;
-	border-bottom-style: solid;
-	border-top-color: gray;
-	border-top-style: solid;
-	border-left-color: gray;
-	border-left-style: solid;
-	border-right-color: gray;
-	border-right-style: solid;
-     margin: 0;
-	-webkit-border-radius: .5em;
-	-moz-border-radius: .5em;
-	border-radius: .5em;
-    -webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
-    -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
-    box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
-	background-color: #e3e1e1;
-    color:#645959;
-    display: inline-block;
-    -webkit-appearance:none;
-    -moz-appearance:none;
-    appearance:none;
-    cursor:pointer;
+ button:hover {
+    background-color: #ccd9e8;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ccd9e8), color-stop(100%, #c1d4e8));
+    background-image: -webkit-linear-gradient(top, #ccd9e8, #c1d4e8);
+    background-image: -moz-linear-gradient(top, #ccd9e8, #c1d4e8);
+    background-image: -ms-linear-gradient(top, #ccd9e8, #c1d4e8);
+    background-image: -o-linear-gradient(top, #ccd9e8, #c1d4e8);
+    background-image: linear-gradient(top, #ccd9e8, #c1d4e8);
+    border-top: 1px solid #a1afbf;
+    border-left: 1px solid #9caaba;
+    border-bottom: 1px solid #96a3b3;
+    border-right: 1px solid #9caaba;
+	-moz-box-shadow: 0px 0px 2px 1px #CECECE;
+	-webkit-box-shadow: 0px 0px 2px 1px #CECECE;
+	box-shadow: 0px 0px 2px 1px #CECECE;
+    color: #163659;
+    cursor: pointer;
 }
+
+button:active {
+    border: 1px solid #8c98a7;
+    -webkit-box-shadow: inset 0 0 4px 2px #abbccf, 0 0 1px 0 #eeeeee;
+    -moz-box-shadow: inset 0 0 4px 2px #abbccf, 0 0 1px 0 #eeeeee;
+    box-shadow: inset 0 0 4px 2px #abbccf, 0 0 1px 0 #eeeeee;}
 
 input.number {
 	text-align: right;
@@ -289,8 +322,21 @@ input:hover { }
 */
 
 select {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 100%;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+	font-size: 10px;
+	background: transparent;
+	border-width: 1px;
+	border-bottom-color: gray;
+	border-bottom-style: solid;
+	border-top-color: gray;
+	border-top-style: solid;
+	border-left-color: gray;
+	border-left-style: solid;
+	border-right-color: gray;
+	border-right-style: solid;
+	-webkit-border-radius: .5em;
+	-moz-border-radius: .5em;
+	border-radius: .5em;
 }
 
 font.good {
@@ -362,7 +408,7 @@ textarea.texterror {
 
 /* From merge, uncomment to apply styles
 textarea {
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
 	font-size: 12px;
 }
 
@@ -400,7 +446,7 @@ div.csv {
         VISIBILITY: visible;
         MARGIN: 0 auto;
         POSITION: static;
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
         padding-top: 1px;
         padding-bottom: 1px;
         font-weight: normal;
@@ -410,7 +456,7 @@ div.csv {
 End Merge */
 
 .callout_main {
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
 	background-color: white;
 	border: none;
 	width: 100%;
@@ -449,7 +495,7 @@ End Merge */
 /*The main page heading left part before quick menu */
 .quick_menu_left {
 	background: none;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
 	font-size: 100%;
 	font-weight: bold;
 	border: none;
@@ -596,7 +642,7 @@ End Merge */
 }
 
 span.main_menu_nolink {
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
 	font-size: 100%;
 	font-weight: bold;
 	color: #777;
@@ -627,10 +673,12 @@ span.main_menu_nolink {
 }
 
 .menu_group_headers {
-	background: #B3B3B3;
+	background: transparent;
+	font-weight: bold;
+	border: 1px solid #888;
+	border-radius: 5px;
 	width: 25%;
 	vertical-align: top;
-	padding: 0 0 2px 0;
 }
 
 .menu_group_headers table {
@@ -638,7 +686,7 @@ span.main_menu_nolink {
 }
 
 .menu_group_headers_text {
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
 	font-size: 100%;
 	font-weight: bold;
 	color: black;
@@ -662,18 +710,17 @@ span.main_menu_nolink {
 }
 
 p.page_title_text {
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
         padding-top: 2px;
         padding-bottom: 2px;
-        font-weight: bold;
+        font-weight: normal;
         font-size: 150%;
         color: white;
         background-color: #7A7A89;
+	background: -moz-linear-gradient(left, #C3C0C0, #7A7A89);
+	background: -webkit-linear-gradient(left, #C3C0C0, #7A7A89);
         width: 33%;
-        border-style: solid;
-        border-width: 1px;
-        border-color: #666;
-        border-radius: 5px;
+         border-radius: 5px;
 		margin: 10px auto;
 		text-align:center;
 	-moz-box-shadow: 3px 3px 2px #888;
@@ -728,7 +775,7 @@ DIV.system_check {
 End merge */
 
 span.menu_group_nolink {
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
 	font-size: 100%;
 	font-weight: normal;
 	color: #777;
@@ -747,7 +794,9 @@ span.menu_group_nolink {
 	border-top: solid 1px #aaa;
 	border-bottom: solid 1px #aaa;
 	border-radius: 6px;
-	background: #ccc url(images/menu_bg_grey.png) 0px 0px repeat-x;
+	background: -moz-linear-gradient(left, #EEE7E7, #9CA4AE);
+	background: -webkit-linear-gradient(left, #EEE7E7, #9CA4AE);
+	border: solid #A49999 1px;
 	position: relative;
 	bottom: -3px;
 	width: 99%;
@@ -763,7 +812,7 @@ a.footer {
 End merge */
 
 .footer {
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
 	color: black;
 	font-weight: normal;
 	font-size: 10px;
@@ -771,7 +820,7 @@ End merge */
 }
 
 .legal {
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
 	font-size: 9px;
 	color: #333333;
 }
@@ -783,19 +832,19 @@ End merge */
 }
 
 .promo {
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
 	color: #003;
 }
 
 .titlebar {
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
 	font-size: 9px;
 	color: white;
   	background-color: #369;
 }
 
 .dingbat {
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
 	background-color: #9c9;
 	color: #066;
 	font-weight: bolder;
@@ -833,8 +882,8 @@ select.selecterror {
 }
 
 .OsRow {
-	background-color: #234567;
-	color: white;
+	background-color: #FFDAE1;
+	color: #510D19;
 }
 /* From merge, uncomment to apply style
 .table_index {

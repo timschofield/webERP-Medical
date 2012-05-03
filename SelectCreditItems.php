@@ -415,7 +415,7 @@ if ($_SESSION['RequireCustomerSelection']==1) {
 					echo '<tr class="OddTableRows">';
 					$k = 1;
 				}
-				echo '<td><font size="1"><button type="submit" name="Customer' . $j . '">' . _('Select') . '</button></font></td>
+				echo '<td><button type="submit" name="Customer' . $j . '">' . _('Select') . '</button></td>
 					<td><font size="1">' . htmlspecialchars_decode($myrow['name']) . '</font></td>
 					<td><font size="1">' . htmlspecialchars_decode($myrow['brname']) . '</font></td>
 					<td><font size="1">' . htmlspecialchars_decode($myrow['contactname']) . '</font></td>
@@ -826,6 +826,7 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 																$LineItem->Units,
 																$LineItem->ConversionFactor,
 																$DiscountPercentage/100,
+																1,
 																$Narrative,
 																'No',
 																$LineItem->ItemDue,
@@ -1003,12 +1004,19 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 			$i=0; // initialise the number of taxes iterated through
 			$TaxLineTotal =0; //initialise tax total for the line
 
+			$sql="SELECT taxid FROM taxauthorities";
+			$result=DB_query($sql, $db);
+			while ($myrow=DB_fetch_array($result)) {
+				$TaxTotals[$myrow['taxid']]=0;
+			}
+
 			foreach ($LineItem->Taxes AS $Tax) {
 				if ($i>0){
 					echo '<br />';
 				}
 				echo '<input type="text" class="number" name="' . $LineItem->LineNumber . $Tax->TaxCalculationOrder . '_TaxRate" maxlength="4" size="4" value="' . locale_number_format($Tax->TaxRate*100, 2) . '" />&nbsp;%';
 				$i++;
+				echo $Tax->TaxAuthID.'<br />';
 				if ($Tax->TaxOnTax ==1){
 					$TaxTotals[$Tax->TaxAuthID] += ($Tax->TaxRate * ($LineTotal + $TaxLineTotal));
 					$TaxLineTotal += ($Tax->TaxRate * ($LineTotal + $TaxLineTotal));
@@ -1042,6 +1050,8 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 
 		if (!isset($_POST['ChargeFreightCost']) AND !isset($_SESSION['CreditItems'.$identifier]->FreightCost)){
 			$_POST['ChargeFreightCost']=0;
+		} elseif (!isset($_POST['ChargeFreightCost'])) {
+			$_POST['ChargeFreightCost']=filter_currency_input($_SESSION['CreditItems'.$identifier]->FreightCost);
 		} else {
 			$_POST['ChargeFreightCost']=filter_currency_input($_POST['ChargeFreightCost']);
 		}
@@ -1189,8 +1199,9 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 			</tr>
 			</table><br />';
 
-		echo '<div class="centre"><button type="submit" name="Update">' . _('Update') . '</button>
-				  				<button type="submit" name="CancelCredit" onclick="return confirm(\'' . _('Are you sure you wish to cancel the whole of this credit note?') . '\');" />' . _('Cancel') . '</button>';
+		echo '<div class="centre">
+				<button type="submit" name="Update">' . _('Update') . '</button>
+				<button type="submit" name="CancelCredit" onclick="return confirm(\'' . _('Are you sure you wish to cancel the whole of this credit note?') . '\');">' . _('Cancel') . '</button>';
 		if (!isset($_POST['ProcessCredit'])){
 			echo '<button type="submit" name="ProcessCredit">' . _('Process Credit Note') . '</button></div><br />';
 		}
@@ -1245,11 +1256,15 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 
 		if (isset($SearchResult)) {
 
-			echo '<br /><table cellpadding="2" class="selection">';
-			echo '<tr><td><input type="hidden" name="previous" value="'.($Offset-1).'" /><button type="submit" name="Prev">'._('Prev').'</button></td>';
-			echo '<td style="text-align:center" colspan="3"><input type="hidden" name="order_items" value="1" /><button type="submit" name="AddToCredit">'._('Add to Credit Note').'</button></td>';
-			echo '<td><input type="hidden" name="nextlist" value="'.($Offset+1).'" /><button type="submit" name="Next">'._('Next').'</button></td></tr>';
-			$TableHeader = '<tr><th>' . _('Code') . '</th>
+			echo '<br />
+					<table cellpadding="2" class="selection">
+						<tr>
+							<td><input type="hidden" name="previous" value="'.($Offset-1).'" /><button type="submit" name="Prev">'._('Prev').'</button></td>
+							<td style="text-align:center" colspan="3"><input type="hidden" name="order_items" value="1" /><button type="submit" name="AddToCredit">'._('Add to Credit Note').'</button></td>
+							<td><input type="hidden" name="nextlist" value="'.($Offset+1).'" /><button type="submit" name="Next">'._('Next').'</button></td>
+						</tr>';
+			$TableHeader = '<tr>
+								<th>' . _('Code') . '</th>
 								<th>' . _('Description') . '</th>
 								<th>' . _('Units') .'</th>
 								<th>' . _('Quantity') .'</th>
@@ -1340,8 +1355,7 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 				}
 	#end of while loop
 			echo '<tr><td><input type="hidden" name="previous" value="'.($Offset-1).'" /><button type="submit" name="Prev">'._('Prev').'</button></td>';
-			echo '<td style="text-align:center" colspan="3"><input type="hidden" name="order_items" value="1" />
-				<button type="submit" name="AddToCredit">'._('Add to Credit Note').'</button></td>';
+			echo '<td style="text-align:center" colspan="3"><input type="hidden" name="order_items" value="1" /><button type="submit" name="AddToCredit">' . _('Add to Credit Note') . '</button></td>';
 			echo '<td><input type="hidden" name="nextlist" value="'.($Offset+1).'" /><button type="submit" name="Next">'._('Next').'</button></td></tr>';
 				echo '</table>';
 			}#end if SearchResults to show
@@ -1349,7 +1363,7 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 
 		/*FORM VARIABLES TO POST TO THE CREDIT NOTE 10 AT A TIME WITH PART CODE AND QUANTITY */
 		echo '<table class="selection">';
-		echo '<tr><th colspan="2"><font size="3" color="#616161"><b>' . _('Quick Entry') . '</b></font></th></tr>';
+		echo '<tr><th colspan="2" class="header"><b>' . _('Quick Entry') . '</b></th></tr>';
 		echo '<tr>
 				<th>' . _('Part Code') . '</th>
 				<th>' . _('Quantity') . '</th>
@@ -1361,7 +1375,7 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 				<td><input type="text" class="number" name="qty_' . $i . '" size="6" maxlength="6" /></td></tr>';
 		}
 
-		echo '</table><br /><div class="centre"><input type="submit" name="QuickEntry">' . _('Process Entries') . '</button>
+		echo '</table><br /><div class="centre"><button type="submit" name="QuickEntry">' . _('Process Entries') . '</button>
 			<button type="submit" name="PartSearch">' . _('Search Parts') . '</button></div>';
 
 	}

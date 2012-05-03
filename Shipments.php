@@ -376,7 +376,7 @@ if (count($_SESSION['Shipment']->LineItems)>0){
 	/* Always display all shipment lines */
 
 	echo '<br /><table cellpadding="2" class="selection">';
-	echo '<tr><th colspan="9"><font color="#616161" size="3">'. _('Order Lines On This Shipment'). '</font></th></tr>';
+	echo '<tr><th colspan="9" class="header">'. _('Order Lines On This Shipment'). '</th></tr>';
 
 	$TableHeader = '<tr>
 			<th>'. _('Order'). '</th>
@@ -456,16 +456,16 @@ $result = DB_query($sql,$db);
 if (DB_num_rows($result)>0){
 
 	echo '<table cellpadding="2" class="selection">';
-	echo '<tr><th colspan="7"><font color="#616161" size="3">'. _('Possible Order Lines To Add To This Shipment').'</font></th></tr>';
+	echo '<tr><th colspan="7" class="header">'. _('Possible Order Lines To Add To This Shipment').'</th></tr>';
 
 	$TableHeader = '<tr>
-			<th>'. _('Order').'</th>
-			<th>'. _('Item').'</th>
-			<th>'. _('Quantity').'<br />'. _('Ordered').'</th>
-			<th>'. _('Units').'</th>
-			<th>'. _('Quantity').'<br />'. _('Received').'</th>
-			<th>'. _('Delivery').'<br />'. _('Date').'</th>
-			</tr>';
+						<th>'. _('Order').'</th>
+						<th>'. _('Item').'</th>
+						<th>'. _('Quantity').'<br />'. _('Ordered').'</th>
+						<th>'. _('Units').'</th>
+						<th>'. _('Quantity').'<br />'. _('Received').'</th>
+						<th>'. _('Delivery').'<br />'. _('Date').'</th>
+					</tr>';
 
 	echo  $TableHeader;
 

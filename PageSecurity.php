@@ -52,7 +52,7 @@ while ($myrow=DB_fetch_array($result)) {
 
 echo '</table><br />';
 
-echo '<div class="centre"><button type="submit" name="Update">'._('Update Security Levels').'</button></div><br /></form>';
+echo '<div class="centre"><button type="submit" name="Update">' . _('Update Security Levels') . '</button></div><br /></form>';
 
 include('includes/footer.inc');
 ?>

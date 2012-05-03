@@ -91,7 +91,7 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 	echo '</select></td></tr></table><br />';
 
 	echo '<div class="centre"><button type="submit" name="ShowTB">' . _('Show Trial Balance') .'</button>';
-	echo '<button type="submit" name="PrintPDF">'._('PrintPDF').'</button></div>';
+	echo '<button type="submit" name="PrintPDF">'._('PrintPDF').'</button></div><br />';
 
 /*Now do the posting while the user is thinking about the period to select*/
 
@@ -431,8 +431,7 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 	Account Code ,   Account Name , Month Actual, Month Budget, Period Actual, Period Budget */
 
 	echo '<table cellpadding="2" class="selection">';
-	echo '<tr><th colspan="6"><font size="3" color="blue"><b>'. _('Trial Balance for the month of ') . $PeriodToDate .
-		_(' and for the ') . $NumberOfMonths . _(' months to ') . $PeriodToDate .'</b></font></th></tr>';
+	echo '<tr><th colspan="6" class="header">'. _('Trial Balance for the month of ') . $PeriodToDate . _(' and for the ') . $NumberOfMonths . _(' months to ') . $PeriodToDate .'</th></tr>';
 	$TableHeader = '<tr>
 			<th>' . _('Account') . '</th>
 			<th>' . _('Account Name') . '</th>
@@ -546,7 +545,7 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 			$ParentGroups[$Level]=$myrow['groupname'];
 			$ActGrp = $myrow['groupname'];
 			printf('<tr>
-				<td colspan="6"><font size="4" color="blue"><b>%s</b></font></td>
+				<th colspan="6" class="header" style="text-align: left">%s</td>
 				</tr>',
 				$myrow['groupname']);
 			echo $TableHeader;
@@ -695,7 +694,7 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 
 
 	printf('<tr bgcolor="#ffffff">
-			<td colspan="2"><font color="blue"><b>' . _('Check Totals') . '</b></font></td>
+			<td colspan="2"><font color="black"><b>' . _('Check Totals') . '</b></font></td>
 			<td class="number">%s</td>
 			<td class="number">%s</td>
 			<td class="number">%s</td>
@@ -707,7 +706,7 @@ if ((! isset($_POST['FromPeriod']) AND ! isset($_POST['ToPeriod'])) OR isset($_P
 		locale_money_format($CheckPeriodBudget,$_SESSION['CompanyRecord']['currencydefault']));
 
 	echo '</table><br />';
-	echo '<div class="centre"><button type="submit" name="SelectADifferentPeriod">' . _('Select A Different Period') . '</button></div>';
+	echo '<div class="centre"><button type="submit" name="SelectADifferentPeriod">' . _('Select A Different Period') . '</button></div><br />';
 }
 echo '</form>';
 include('includes/footer.inc');

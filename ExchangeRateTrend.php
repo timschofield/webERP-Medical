@@ -24,7 +24,7 @@ if ( isset($_GET['CurrencyToShow']) ){
 	echo '<form method="post" name=update action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/money_add.png" title="' . _('View Currency Trend') . '" alt="" />' . ' ' . _('View Currency Trend') . '</p>';
-	echo '<table>'; // First column
+	echo '<table class="selection">'; // First column
 
 	$SQL = "SELECT currabrev,
 					country,
@@ -65,7 +65,7 @@ if ( isset($_GET['CurrencyToShow']) ){
 	$image = 'http://www.x-rates.com/d/' . $graph;
 
 	echo '<br /></div><table class="selection">';
-	echo '<tr><th><div class="centre"><font size="4" color="blue"><b><U>' . $FunctionalCurrency . ' / ' . $CurrencyToShow . '</b></U></font></th></tr>';
+	echo '<tr><th class="header">' . $FunctionalCurrency . ' / ' . $CurrencyToShow . '</th></tr>';
 	echo '<tr><td><img src=' . $image . ' alt="Trend Currently Unavailable" /></td></tr>';
 	echo '</table>';
 

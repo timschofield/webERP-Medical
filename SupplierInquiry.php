@@ -151,14 +151,16 @@ echo '<tr>	<td class="number">' . locale_money_format($SupplierRecord['balance']
 			<td class="number">' . locale_money_format($SupplierRecord['overdue2'],$SupplierRecord['currcode']) . '</td>
 		</tr></table>';
 
-echo '<br /><div class="centre"><form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
+echo '<br /><form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<table class="selection"><tr><td>' . _('Show all transactions after') . ': </td><td>' .
-		'<input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="TransAfterDate" value="' . $_POST['TransAfterDate'] . '" maxlength="10" size="10" /></td><td>
-	  <button type="submit" name="Refresh Inquiry">' . _('Refresh Inquiry') . '</button></td></tr></table>
-	  </form>
+echo '<table class="selection">
+		<tr>';
+echo '<td>' . _('Show all transactions after') . '</td><td>: ' .
+		'<input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="TransAfterDate" value="' . $_POST['TransAfterDate'] . '" maxlength="10" size="10" /></td>
+	  <td><button type="submit" name="Refresh Inquiry">' . _('Refresh Inquiry') . '</button></td></tr>
+	  </table></form>
 	  <br />';
-echo '</div>';
+
 $DateAfterCriteria = FormatDateForSQL($_POST['TransAfterDate']);
 
 $SQL = "SELECT supptrans.id,

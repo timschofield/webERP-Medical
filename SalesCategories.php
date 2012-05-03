@@ -324,7 +324,7 @@ if (isset($SelectedCategory)) {
 }
 
 echo '</table>';
-echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Submit Information') . '" /></div>';
+echo '<br /><div class="centre"><button type="submit" name="submit">' . _('Submit Information') . '</button></div>';
 
 echo '</form></p>';
 
@@ -387,7 +387,7 @@ if (isset($ParentCategory) and $ParentCategory!='NULL') {
 		}
 		echo '</select>';
 		echo '</td></tr></table>';
-		echo '<br /><div class="centre"><input type="submit" name="submit" value="' . _('Add Inventory Item') . '" /></div>';
+		echo '<br /><div class="centre"><button type="submit" name="submit">' . _('Add Inventory Item') . '</div>';
 		echo '';
 		echo '</form></p>';
 	} else {

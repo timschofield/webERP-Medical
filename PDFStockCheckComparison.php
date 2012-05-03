@@ -354,7 +354,7 @@ If (isset($_POST['PrintPDF']) AND isset($_POST['ReportOrClose'])){
 		echo '<option selected="True" value="Leave">' . _('Do not Adjust System stock to Nil') . '</option>';
 	}
 
-	echo '</table><br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF'). '"></div>';
+	echo '</table><br /><div class="centre"><button type="submit" name="PrintPDF">' . _('Print PDF'). '</button></div><br />';
 
 	include('includes/footer.inc');
 

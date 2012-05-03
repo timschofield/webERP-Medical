@@ -147,9 +147,9 @@ if (isset($_SESSION['SupplierID'])) {
 	echo '<div class="page_help_text">' . _('Select a menu option to operate using this supplier.') . '</div>';
 	echo '<br /><table width=90% cellpadding="4" class="selection">';
 	echo '<tr>
-		<th width="33%">' . _('Supplier Inquiries') . '</th>
-		<th width="33%">' . _('Supplier Transactions') . '</th>
-		<th width="33%">' . _('Supplier Maintenance') . '</th>
+		<th width="33%" class="header">' . _('Supplier Inquiries') . '</th>
+		<th width="33%" class="header">' . _('Supplier Transactions') . '</th>
+		<th width="33%" class="header">' . _('Supplier Maintenance') . '</th>
 	</tr>';
 	echo '<tr><td valign="top" class="select">'; /* Inquiry Options */
 	echo '<a href="' . $rootpath . '/SupplierInquiry.php?SupplierID=' . stripslashes($_SESSION['SupplierID']) . '">' . _('Supplier Account Inquiry') . '</a><br />';
@@ -171,6 +171,7 @@ if (isset($_SESSION['SupplierID'])) {
 	echo '<a href="' . $rootpath . '/Suppliers.php?">' . _('Add a New Supplier') . '</a><br />';
 	echo '<a href="' . $rootpath . '/Suppliers.php?SupplierID=' . urlencode(stripslashes($_SESSION['SupplierID'])) . '">' . _('Modify Or Delete Supplier Details') . '</a>';
 	echo '<br /><a href="' . $rootpath . '/SupplierContacts.php?&SupplierID=' . stripslashes($_SESSION['SupplierID']) . '">' . _('Add/Modify/Delete Supplier Contacts') . '</a>';
+	echo '<br /><a href="' . $rootpath . '/SupplierPriceList.php?&SupplierID=' . stripslashes($_SESSION['SupplierID']) . '">' . _('Add or Modify Supplier Price List') . '</a>';
 	echo '<br />';
 	echo '<br /><a href="'.$rootpath.'/Shipments.php?NewShipment=Yes">' . _('Set Up A New Shipment') . '</a>';
 	echo '<br /><a href="'.$rootpath.'/SuppLoginSetup.php">' . _('Supplier Login Configuration') . '</a>';
@@ -180,9 +181,9 @@ if (isset($_SESSION['SupplierID'])) {
 	echo '<br />';
 	echo '<table width="90%" cellpadding="4" class="selection">';
 	echo '<tr>
-		<th width="33%">' . _('Supplier Inquiries') . '</th>
-		<th width="33%">' . _('Supplier Transactions') . '</th>
-		<th width="33%">' . _('Supplier Maintenance') . '</th>
+		<th width="33%" class="header">' . _('Supplier Inquiries') . '</th>
+		<th width="33%" class="header">' . _('Supplier Transactions') . '</th>
+		<th width="33%" class="header">' . _('Supplier Maintenance') . '</th>
 		</tr>';
 	echo '<tr><td valign=top class="select">'; /* Inquiry Options */
 	echo '</td><td valign=top class="select">'; /* Supplier Transactions */
@@ -265,7 +266,7 @@ if (isset($_POST['Search'])) {
 			echo '<tr class="OddTableRows">';
 			$k = 1;
 		}
-		echo '<td><button type="submit" name="Select" value="'.DB_escape_string($myrow['supplierid']).'" />'.DB_escape_string($myrow['supplierid']).'</button></td>
+		echo '<td><button type="submit" name="Select" value="'.DB_escape_string($myrow['supplierid']).'">'.DB_escape_string($myrow['supplierid']).'</button></td>
 			<td>'.$myrow['suppname'].'</td>
 			<td>'.$myrow['currcode'].'</td>
 			<td>'.$myrow['address1'].'</td>
@@ -293,9 +294,9 @@ if (isset($ListPageMax) and $ListPageMax > 1) {
 		$ListPage++;
 	}
 	echo '</select>
-			<button type="submit" name="Go">' . _('Go') . '</button>
-			<button type="submit" name="Previous">' . _('Previous') . '</button>
-			<button type="submit" name="Next">' . _('Next') . '</button>';
+		<button type="submit" name="Go">' . _('Go') . '</button>
+		<button type="submit" name="Previous">' . _('Previous') . '</button>
+		<button type="submit" name="Next">' . _('Next') . '</button>';
 	echo '<br />';
 }
 echo '</form>';
@@ -336,7 +337,7 @@ if (isset($_SESSION['SupplierID']) and $_SESSION['SupplierID'] != '') {
 			echo '<br />';
 			echo '<tr><td colspan="2">';
 			echo '<table width="45%" cellpadding="4" class="selection">';
-			echo '<tr><th width="33%" colspan="2">' . _('Supplier Data') . '</th></tr>';
+			echo '<tr><th width="33%" colspan="2" class="header">' . _('Supplier Data') . '</th></tr>';
 			echo '<tr><td valign="top" class="select">'; /* Supplier Data */
 			//echo "Distance to this Supplier: <b>TBA</b><br />";
 			if ($myrow['lastpaiddate'] == 0) {

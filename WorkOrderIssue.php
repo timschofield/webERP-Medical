@@ -602,7 +602,7 @@ if (!isset($_POST['IssueItem'])){ //no item selected to issue yet
 
 	while ($RequirementsRow = DB_fetch_array($RequirmentsResult)){
 		if ($RequirementsRow['autoissue']==0){
-			echo '<tr><td><button type="submit" name="IssueItem">' .$RequirementsRow['stockid'] . '</button></td>
+			echo '<tr><td><button type="submit" name="IssueItem" value="' .$RequirementsRow['stockid'] . '">' .$RequirementsRow['stockid'] . '</button></td>
 					<td>' . $RequirementsRow['stockid'] . ' - ' . $RequirementsRow['description'] . '</td>';
 		} else {
 			echo '<tr><td class="notavailable">' . _('Auto Issue') . '<td class="notavailable">' .$RequirementsRow['stockid'] . ' - ' . $RequirementsRow['description'] .'</td>';

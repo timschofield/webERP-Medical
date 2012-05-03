@@ -42,7 +42,7 @@ if (!isset($_POST['Date'])){
 
 	echo '</select></td></tr>';
 
-	echo '</table><br /><div class="centre"><button type="submit" name="Go">' . _('Create PDF') . '</buuton></div>';
+	echo '</table><br /><div class="centre"><button type="submit" name="Go">' . _('Create PDF') . '</button></div><br />';
 
 
 	include('includes/footer.inc');

@@ -60,8 +60,7 @@ include('includes/header.inc');
 	echo '<button type="submit" action="reset">' . _('Cancel') .'</button></div>';
 
 
-	if ( isset($_POST['Show']) )
-	{
+	if ( isset($_POST['Show']) ) {
 		//
 		//========[ SHOW SYNOPSYS ]===========
 		//

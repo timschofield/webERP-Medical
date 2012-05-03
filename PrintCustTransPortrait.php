@@ -560,15 +560,15 @@ if (isset($PrintPDF)
 		echo '</select></td></tr>';
 		echo '<tr><td>' . _('Start invoice/credit note number to print') . '</td><td><input class="number" type="text" maxlength="6" size="7" name="FromTransNo" /></td></tr>';
 		echo '<tr><td>' . _('End invoice/credit note number to print') . '</td><td><input class="number" type="text" maxlength="6" size="7" name="ToTransNo" /></td></tr></table>';
-		echo '<div class="centre"><br /><input type="submit" name="Print" value="' . _('Print Preview') . '" /><br />';
-		echo '<input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
+		echo '<div class="centre"><br /><button type="submit" name="Print">' . _('Print Preview') . '</button><br />';
+		echo '<br /><button type="submit" name="PrintPDF">' . _('Print PDF') . '</button></div>';
 
 		$sql = "SELECT typeno FROM systypes WHERE typeid=10";
 
 		$result = DB_query($sql,$db);
 		$myrow = DB_fetch_row($result);
 
-		echo '<div class="page_help_text"><b>' . _('The last invoice created was number') . ' ' . $myrow[0] . '</b><br />' .
+		echo '<br /><div class="page_help_text"><b>' . _('The last invoice created was number') . ' ' . $myrow[0] . '</b><br />' .
 				_('if only a single invoice is required') . ', ' .
 				_('enter the invoice number to print in the Start transaction number to print field and leave the End transaction number to print field blank')
 				. '. ' . _('Only use the end invoice to print field if you wish to print a sequential range of invoices') . '';

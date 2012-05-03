@@ -150,7 +150,7 @@ if (isset($_POST['PrintPDF'])
 	echo '</select></td></tr>';
 
 
-	echo '</table><br /><div class="centre"><button tabindex="5" type="submit" name="PrintPDF">' . _('Print PDF') . '</button></div>';
+	echo '</table><br /><div class="centre"><button tabindex="5" type="submit" name="PrintPDF">' . _('Print PDF') . '</button></div><br />';
 
 	include('includes/footer.inc');
 } /*end of else not PrintPDF */

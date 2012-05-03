@@ -71,7 +71,7 @@ echo '</form>';
 $TotalQuantity = 0;
 
 if(isset($_POST['ShowStatus']) AND Is_Date($_POST['OnHandDate'])) {
-	if ($_POST['StockCategory']='All') {
+	if ($_POST['StockCategory']=='All') {
 		$sql = "SELECT stockid,
 				description,
 				decimalplaces
@@ -158,7 +158,7 @@ if(isset($_POST['ShowStatus']) AND Is_Date($_POST['OnHandDate'])) {
 		}
 
 	}//end of while loop
-	echo '<tr><td>' . _('Total Quantity') . ": " . $TotalQuantity . '</td></tr></table>';
+	echo '<tr><td colspan="3" style="text-align: right;">' . _('Total Quantity') . ': ' . $TotalQuantity . '</td></tr></table>';
 }
 
 include('includes/footer.inc');

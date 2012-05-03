@@ -102,7 +102,7 @@ if (!isset($SelectedRole)) {
 	$sql = "SELECT secroleid,
 			secrolename
 		FROM securityroles
-		ORDER BY secroleid";
+		ORDER BY secrolename";
 	$result = DB_query($sql,$db);
 
 	echo '<table class="selection">';
@@ -170,7 +170,7 @@ if (!isset($_POST['SecRoleName'])) {
 echo '<tr><td>' . _('Role') . ':</td>
 	<td><input type="text" name="SecRoleName" size="40" maxlength="40" value="' . $_POST['SecRoleName'] . '" /></tr>';
 echo '</table><br />
-	<div class="centre"><button type="submit" name="submit" value="" />' . _('Enter Role') . '</button></div></form>';
+	<div class="centre"><button type="submit" name="submit">' . _('Enter Role') . '</button></div></form>';
 
 if (isset($SelectedRole)) {
 	$sql = "SELECT tokenid, tokenname

@@ -94,24 +94,22 @@ if (!isset($AccountID)) {
 		</table><br />';
 
 	echo '<div class="centre"><button type="submit" name="Search">' . _('Search Now') . '</button>
-		<button type="submit" action="reset">' . _('Reset') .'</button></div>';
+		<button type="submit">' . _('Reset') .'</button></div>';
 
 	if (isset($result) and DB_num_rows($result)>0) {
 
 		echo '<br /><table cellpadding="2" class="selection">';
 
-		$TableHeader = '<tr><th>' . _('Code') . '</th>
-					  <th>' . _('Account Name') . '</th>
-					  <th>' . _('Group') . '</th>
-					  <th>' . _('Account Type') . '</th></tr>';
-
-		echo $TableHeader;
-
-		$j = 1;
+		echo '<tr>
+				<th>' . _('Code') . '</th>
+				<th>' . _('Account Name') . '</th>
+				<th>' . _('Group') . '</th>
+				<th>' . _('Account Type') . '</th>
+			</tr>';
 
 		while ($myrow=DB_fetch_array($result)) {
 
-			printf('<tr><td><button type="submit" name="Select" value="%s" />%s</button></td>
+			printf('<tr><td><font size="1"><button type="submit" name="Select" value="%s" />%s</button></font></td>
 				<td><font size="1">%s</font></td>
 				<td><font size="1">%s</font></td>
 				<td><font size="1">%s</font></td>
@@ -122,13 +120,6 @@ if (!isset($AccountID)) {
 				$myrow['group_'],
 				$myrow['pl']);
 
-			$j++;
-			if ($j == 12){
-				$j=1;
-				echo $TableHeader;
-
-			}
-//end of page full new headings if
 		}
 //end of while loop
 

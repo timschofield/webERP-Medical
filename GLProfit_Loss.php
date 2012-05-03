@@ -851,7 +851,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 
 			if ($_POST['Detail']=='Detailed'){
 				printf('<tr>
-							<td colspan="6"><font size="4" color="blue"><b>%s</b></font></td>
+							<th colspan="6" class="header" style="text-align: left">%s</th>
 						`</tr>',
 					$Sections[$myrow['sectioninaccounts']]);
 			}
@@ -871,7 +871,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 			$ActGrp = $myrow['groupname'];
 			if ($_POST['Detail']=='Detailed'){
 				printf('<tr>
-							<th colspan="8"><font size="3" color="blue"><b>%s</b></font></th>
+							<th colspan="8" class="header" style="text-align: left">%s</th>
 						</tr>',
 					$myrow['groupname']);
 					echo $TableHeader;
@@ -1157,7 +1157,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 
 		if ($_POST['Detail']=='Detailed' and isset($Sections[$myrow['sectioninaccounts']])){
 			printf('<tr>
-						<td colspan="6"><font size="4" color="blue"><b>%s</b></font></td>
+						<th colspan="6" class="header" style="text-align: left">%s</th>
 					</tr>',
 					$Sections[$myrow['sectioninaccounts']]);
 		}
@@ -1170,8 +1170,8 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 			<td colspan="6"><hr /></td>
 		</tr>';
 
-	printf('<tr bgcolor="#ffffff">
-				<td colspan="2"><font size="4" color="blue"><b>'._('Profit').' - '._('Loss').'</b></font></td>
+	printf('<tr>
+				<th colspan="2" class="header" style="text-align: left">'._('Profit').' - '._('Loss').'</th>
 				<td></td>
 				<td class="number">%s</td>
 				<td></td>
@@ -1226,7 +1226,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 		</tr>';
 
 	echo '</table>';
-	echo '<br /><div class="centre"><button type="submit" name="SelectADifferentPeriod">' . _('Select A Different Period') . '</button></div>';
+	echo '<br /><div class="centre"><button type="submit" name="SelectADifferentPeriod">' . _('Select A Different Period') . '</button></div><br />';
 }
 echo '</form>';
 include('includes/footer.inc');

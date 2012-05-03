@@ -133,7 +133,7 @@ echo '<br />&nbsp;' . _('Current language is') . ' ' . $_SESSION['Language'];
 		echo '</table>';
 		echo '<br /><div class="centre">';
 		echo '<button type="submit" name="submit">' . _('Modify') . '</button>&nbsp;&nbsp;';
-		echo '<button type="hidden" name="module">' . $_POST['module'] . '</button>';
+		echo '<input type="hidden" name="module" value="' . $_POST['module'] . '" />';
 
 		echo '</form>';
 		echo '</div>';

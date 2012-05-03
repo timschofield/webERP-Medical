@@ -60,7 +60,7 @@ if (!isset($_POST['FromDate']) OR !isset($_POST['ToDate']) OR $InputError==1){
 	 echo '<tr><td>' . _('Email the report off') . ':</td><td><select name="Email">';
 	 echo '<option selected="True" value="No">' . _('No') . '</option>';
 	 echo '<option value="Yes">' . _('Yes') . '</option>';
-	 echo '</select></td></tr></table><br /><div class="centre"><button type="submit" name="Go">' . _('Create PDF') . '</button></div>';
+	 echo '</select></td></tr></table><br /><div class="centre"><button type="submit" name="Go">' . _('Create PDF') . '</button></div><br />';
 
 	 if ($InputError==1){
 	 	prnMsg($msg,'error');

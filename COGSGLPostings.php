@@ -344,7 +344,7 @@ while ($myrow = DB_fetch_array($result)) {
 DB_free_result($result);
 
 echo '</select></td></tr></table>';
-echo '<br /><div class="centre"><button tabindex="5" type="submit" name="submit">' . _('Enter Information') . '</button></form></div>';
+echo '<br /><div class="centre"><button tabindex="5" type="submit" name="submit">' . _('Enter Information') . '</button></div><br /></form>';
 
 include('includes/footer.inc');
 ?>

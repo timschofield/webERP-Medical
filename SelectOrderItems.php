@@ -1337,7 +1337,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 		echo '<br />
 					<table width="90%" cellpadding="2" class="selection">
-					<tr bgcolor="#800000">';
+					<tr>';
 		if($_SESSION['Items'.$identifier]->DefaultPOLine == 1){
 			echo '<th>' . _('PO Line') . '</th>';
 		}
@@ -1528,7 +1528,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 						 <td>' . $DisplayWeight . '</td>
 						 <td>' . _('Total Volume') . ':</td>
 						 <td>' . $DisplayVolume . '</td>
-					   <tr/><table/>';
+					   </tr></table>';
 
 
 		echo '<br /><div class="centre"><button type="submit" name="Recalculate">' . _('Re-Calculate') . '</button>
@@ -1564,7 +1564,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ';
 			echo _('Frequently Ordered Items') . '</p><br />';
 			echo '<div class="page_help_text">' . _('Frequently Ordered Items') . _(', shows the most frequently ordered items in the last 6 months.  You can choose from this list, or search further for other items') . '.</div><br />';
-			echo '<table class="table1">';
+			echo '<table class="selection">';
 			$TableHeader = '<tr><th>' . _('Code') . '</th>
 								<th>' . _('Description') . '</th>
 								<th>' . _('Units') . '</th>
@@ -1751,7 +1751,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			$j = 1;
 			echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?identifier='.$identifier . '" method="post" name="orderform">';
 			echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-			echo '<table class="table1">';
+			echo '<table class="selection">';
 			echo '<tr><td>
 					<input type="hidden" name="previous" value="'.($Offset-1).'" />
 					<button tabindex="'.($j+8).'" type="submit" name="Prev">'._('Prev').'</button></td>';
@@ -1936,7 +1936,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 	   elseif( isset($_POST['QuickEntry'])) { /* show the quick entry form variable */
 		  /*FORM VARIABLES TO POST TO THE ORDER  WITH PART CODE AND QUANTITY */
 	   	echo '<div class="page_help_text"><b>' . _('Use this screen for the '). _('Quick Entry')._(' of products to be ordered') . '</b></div><br />
-		 			<table border="1">
+		 			<table class="selection">
 					<tr>';
 			/*do not display colum unless customer requires po line number by sales order line*/
 		 	if($_SESSION['Items'.$identifier]->DefaultPOLine ==1){
@@ -1966,7 +1966,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 	  	} elseif (isset($_POST['SelectAsset'])){
 
 			echo '<div class="page_help_text"><b>' . _('Use this screen to select an asset to dispose of to this customer') . '</b></div><br />
-		 			<table border="1">';
+		 			<table class="selection">';
 			/*do not display colum unless customer requires po line number by sales order line*/
 		 	if($_SESSION['Items'.$identifier]->DefaultPOLine ==1){
 				echo	'<tr><td>' . _('PO Line') . '</td>

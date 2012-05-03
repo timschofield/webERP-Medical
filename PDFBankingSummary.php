@@ -31,7 +31,7 @@ if (!isset($_POST['BatchNo'])){
 		echo '<option value="'.$myrow['transno'].'">'._('Batch') .' '. $myrow['transno'].' - '.ConvertSqlDate($myrow['transdate']).'</option>';
 	}
 	echo '</select></td></tr></table>';
-	echo '<br /><div class="centre"><button type="submit" name="EnterBatchNo">' . _('Create PDF') . '</button></div></form>';
+	echo '<br /><div class="centre"><button type="submit" name="EnterBatchNo">' . _('Create PDF') . '</button></div></form><br />';
 
 	include ('includes/footer.inc');
 	exit;

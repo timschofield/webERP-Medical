@@ -420,9 +420,9 @@ if (isset($_SESSION['Transfer'])){
 	$i = 0; //Line Item Array pointer
 
 	echo '<br /><table class="selection">';
-	echo '<tr><th colspan="7"><font size="3" color="blue">' . _('Location Transfer Reference'). ' #' . $_SESSION['Transfer']->TrfID .
+	echo '<tr><th colspan="7" class="header">' . _('Location Transfer Reference'). ' #' . $_SESSION['Transfer']->TrfID .
 			' '. _('from').' ' . $_SESSION['Transfer']->StockLocationFromName . ' '. _('to'). ' ' .
-				$_SESSION['Transfer']->StockLocationToName . '</font></th></tr>';
+				$_SESSION['Transfer']->StockLocationToName . '</th></tr>';
 
 	$tableheader = '<tr>
 			<th>'. _('Item Code') . '</th>
@@ -532,7 +532,7 @@ if (isset($_SESSION['Transfer'])){
 		$LocResult = DB_query($LocSql,$db);
 		$LocRow = DB_fetch_array($LocResult);
 		echo '<table class="selection">';
-		echo '<tr><th colspan="4"><font size="3" color="blue">'._('Pending Transfers Into').' '.$LocRow['locationname'].'</font></th></tr>';
+		echo '<tr><th colspan="4" class="header">'._('Pending Transfers Into').' '.$LocRow['locationname'].'</th></tr>';
 		echo '<tr>
 				<th>'. _('Transfer Ref'). '</th>
 				<th>'. _('Transfer From'). '</th>

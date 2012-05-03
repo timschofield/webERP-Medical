@@ -29,7 +29,7 @@ if (!isset($_SESSION['SuppTrans'])){
 
 /*If the user hit the Add to transaction button then process this first before showing  all GL codes on the transaction otherwise it wouldnt show the latest addition*/
 
-if (isset($_POST['AddGLCodeToTrans']) and $_POST['AddGLCodeToTrans'] == _('Enter GL Line')){
+if (isset($_POST['AddGLCodeToTrans'])){
 
 	$InputError = False;
 	if ($_POST['GLCode'] == ''){
@@ -133,8 +133,8 @@ foreach ( $_SESSION['SuppTrans']->GLCodes as $EnteredGLCode){
 }
 
 echo '<tr>
-	<td colspan="2" class="number"><font size="4" color="blue">' . _('Total') . ':</font></td>
-	<td class="number"><font size="2" color="#616161"><u>' . locale_money_format($TotalGLValue,$_SESSION['SuppTrans']->CurrCode) . '</u></font></td>
+	<th colspan="2" class="header">' . _('Total') . ':</th>
+	<th class="header"><u>' . locale_money_format($TotalGLValue,$_SESSION['SuppTrans']->CurrCode) . '</u></th>
 	</tr>
 	</table>';
 

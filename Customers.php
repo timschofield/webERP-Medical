@@ -890,7 +890,7 @@ if (!isset($DebtorNo)) {
 	$result = DB_query($sql,$db);
 
 	echo '<table class="selection">';
-	echo '<caption>' . _('Customer Contacts') . '</caption>';
+	echo '<tr><th class="header" colspan="6">' . _('Customer Contacts') . '</th></tr>';
 
 	if (isset($_GET['Modify'])) {
 		echo '<tr>
@@ -987,7 +987,7 @@ if (!isset($DebtorNo)) {
 				<td><textarea name="notes">'.$_POST['notes'].'</textarea></td>
 			</tr>
 			<tr>
-				<td colspan="2"><button type="submit" name="update">' . _('Update') . '</button></td>
+				<td colspan="2"><button type="submit" name="update">' . _('update') . '</button></td>
 			</tr>
 			</table>';
 	}
@@ -1022,7 +1022,7 @@ if (!isset($DebtorNo)) {
 				<button type="submit" name="reset">' . _('Reset') . '</button></div></form>';
 	} else if (!isset($_GET['Modify'])){
 		echo '<br /><div class="centre"><button type="submit" name="submit">' . _('Update Customer') . '</button>';
-		echo '&nbsp;<button type="submit" name="delete" onclick="return confirm(\'' . _('Are You Sure?') . '\');" />' . _('Delete Customer') . '</button></div></form>';
+		echo '&nbsp;<button type="submit" name="delete" onclick="return confirm(\'' . _('Are You Sure?') . '\');">' . _('Delete Customer') . '</button></div><br /></form>';
 	} else {
 		echo '</form>';
 	}

@@ -112,8 +112,9 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 
 	echo '</table><br />';
 
-	echo '<div class="centre"><button type="submit" name="ShowPL">'._('Show Statement of Income and Expenditure').'</button><br />';
-	echo '<br /><button type="submit" name="PrintPDF">'._('PrintPDF').'</button></div>';
+	echo '<div class="centre">
+			<button type="submit" name="ShowPL">'._('Show Statement of Income and Expenditure').'</button><br /><br />
+			<button type="submit" name="PrintPDF">'._('PrintPDF').'</button></div><br />';
 
 	/*Now do the posting while the user is thinking about the period to select*/
 
@@ -506,8 +507,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print') . '" alt="" />' . ' ' . $title . '</p>';
 
 	echo '<table cellpadding="2" class="selection">';
-	echo '<tr><th colspan="9"><div class="centre"><font size="3" color="blue"><b>' . _('Statement of Income and Expenditure for Tag'). ' ' .
-			$myrow[0]._('during the'). ' ' . $NumberOfMonths . ' ' . _('months to'). ' ' . $PeriodToDate . '</b></font></div></th></tr>';
+	echo '<tr><th colspan="9" class="header">' . _('Statement of Income and Expenditure for Tag'). ' ' . $myrow[0]._('during the'). ' ' . $NumberOfMonths . ' ' . _('months to'). ' ' . $PeriodToDate . '</th></tr>';
 
 	if ($_POST['Detail']=='Detailed'){
 		$TableHeader = '<tr>
@@ -697,7 +697,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 
 			if ($_POST['Detail']=='Detailed'){
 				printf('<tr>
-							<td colspan="6"><font size="4" color="blue"><b>%s</b></font></td>
+							<th colspan="6" class="header" style="text-align: left;">%s</td>
 						</tr>',
 						$Sections[$myrow['sectioninaccounts']]);
 			}
@@ -717,7 +717,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 			$ActGrp = $myrow['groupname'];
 			if ($_POST['Detail']=='Detailed'){
 				printf('<tr>
-							<td colspan="6"><font size="2" color="blue"><b>%s</b></font></td>
+							<td colspan="6" class="header" style="text-align: left;">%s</td>
 						</tr>',
 					$myrow['groupname']);
 					echo $TableHeader;
@@ -930,7 +930,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 
 		if ($_POST['Detail']=='Detailed' and isset($Sections[$myrow['sectioninaccounts']])){
 			printf('<tr>
-						<td colspan="6"><font size="4" color="blue"><b>%s</b></font></td>
+						<th colspan="6" class="header" style="text-align: left;">%s</th>
 					</tr>',
 				$Sections[$myrow['sectioninaccounts']]);
 		}
@@ -943,8 +943,8 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 			<td colspan="6"><hr /></td>
 		</tr>';
 
-	printf('<tr bgcolor="#ffffff">
-				<td colspan="2"><font size="4" color="blue"><b>'._('Surplus').' - '._('Deficit').'</b></font></td>
+	printf('<tr>
+				<th colspan="2" class="header" style="text-align: left;">'._('Surplus').' - '._('Deficit').'</th>
 				<td></td>
 				<td class="number">%s</td>
 			</tr>',
@@ -957,7 +957,7 @@ if ((!isset($_POST['FromPeriod']) AND !isset($_POST['ToPeriod'])) OR isset($_POS
 		</tr>';
 
 	echo '</table>';
-	echo '<div class="centre"><button type="submit" name="SelectADifferentPeriod">'._('Select A Different Period').'</button></div>';
+	echo '<br /><div class="centre"><button type="submit" name="SelectADifferentPeriod">'._('Select A Different Period').'</button></div><br />';
 }
 echo '</form>';
 include('includes/footer.inc');

@@ -961,7 +961,6 @@ if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
 				<td><input type="text" class="number" name="Price' . $POLine->LineNo . '" size="11" value="' .$DisplayPrice.'" /></td>
 				<td class="number">' . $DisplayLineTotal . '</td>
 				<td><input type="text" class="date" alt="' .$_SESSION['DefaultDateFormat'].'" name="ReqDelDate' . $POLine->LineNo.'" size="11" value="' .$POLine->ReqDelDate .'" /></td>
-				<td>'.$POLine->PODetailRec.'</td>
 				<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?identifier='.$identifier. '&Delete=' . $POLine->LineNo . '">' . _('Delete') . '</a></td></tr>';
 			$_SESSION['PO'.$identifier]->Total = $_SESSION['PO'.$identifier]->Total + $LineTotal;
 		}
@@ -969,8 +968,8 @@ if (count($_SESSION['PO'.$identifier]->LineItems)>0 and !isset($_GET['Edit'])){
 
 	$DisplayTotal = locale_money_format($_SESSION['PO'.$identifier]->Total,$_SESSION['PO'.$identifier]->CurrCode);
 	echo '<tr><td colspan="6" class="number">' . _('TOTAL') . _(' excluding Tax') . '</td><td class="number"><b>' . $DisplayTotal . '</b></td></tr></table>';
-	echo '<br /><div class="centre"><input type="submit" name="UpdateLines" value="Update Order Lines" />';
-	echo '&nbsp;<input type="submit" name="Commit" value="Process Order" /></div>';
+	echo '<br /><div class="centre"><button type="submit" name="UpdateLines">' . _('Update Order Lines') . '</button>';
+	echo '&nbsp;<button type="submit" name="Commit">' . _('Process Order') . '</button></div>';
 	if (!isset($_POST['NewItem']) and isset($_GET['Edit'])) {
 
 	/*show a form for putting in a new line item with or without a stock entry */
@@ -1020,7 +1019,7 @@ if (isset($_POST['NonStockOrder'])) {
 				<tr><td>'._('Delivery Date').'</td>
 						<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="ReqDelDate" size="11" value="'.$_SESSION['PO'.$identifier]->DeliveryDate .'" /></td></tr>';
 	echo '</table>';
-	echo '<div class="centre"><input type="submit" name="EnterLine" value="Enter Item" /></div>';
+	echo '<div class="centre"><button type="submit" name="EnterLine">' . _('Enter Item') . '</button></div>';
 }
 
 /* Now show the stock item selection search stuff below */
@@ -1036,9 +1035,9 @@ if (!isset($_GET['Edit'])) {
 	$DbgMsg = _('The SQL used to retrieve the category details but failed was');
 	$result1 = DB_query($sql,$db,$ErrMsg,$DbgMsg);
 
-	echo '<table class="selection"><tr><th colspan="3"><font size="3" color="blue">'. _('Search For Stock Items') . '</th>';
+	echo '<table class="selection"><tr><th colspan="3" class="header">'. _('Search For Stock Items') . '</th>';
 
-	echo ':</font></tr><tr><td><select name="StockCat">';
+	echo ':</tr><tr><td><select name="StockCat">';
 
 	echo '<option selected="True" value="All">' . _('All') . '</option>';
 	while ($myrow1 = DB_fetch_array($result1)) {
@@ -1071,8 +1070,8 @@ if (!isset($_GET['Edit'])) {
 		<tr><td></td>
 		<td><font size="3"><b>' . _('OR') . ' </b></font><a target="_blank" href="'.$rootpath.'/Stocks.php">' . _('Create a New Stock Item') . '</a></td></tr>
 		</table><br />
-		<div class="centre"><input type="submit" name="Search" value="' . _('Search Now') . '" />
-		<input type="submit" name="NonStockOrder" value="' . _('Order a non stock item') . '" />
+		<div class="centre"><button type="submit" name="Search">' . _('Search Now') . '</button>
+		<button type="submit" name="NonStockOrder">' . _('Order a non stock item') . '</button>
 		</div><br />';
 
 
@@ -1158,7 +1157,7 @@ if (isset($SearchResult)) {
 		prnMsg( _('Only the first') . ' ' . $Maximum_Number_Of_Parts_To_Show . ' ' . _('can be displayed') . '. ' .
 			_('Please restrict your search to only the parts required'),'info');
 	}
-	echo '<a name="end"></a><br /><div class="centre"><input type="submit" name="NewItem" value="Order some" /></div>';
+	echo '<a name="end"></a><br /><div class="centre"><button type="submit" name="NewItem" value="" />' . _('Order some') . '</button></div>';
 }#end if SearchResults to show
 
 echo '</form>';

@@ -170,7 +170,7 @@ if (!isset($SelectedTaxAuthID)) {
 				<td>%s</td>
 				<td><a href="%s&SelectedTaxAuthID=%s">' . _('Edit') . '</a></td>
 				<td><a href="%s&SelectedTaxAuthID=%s&delete=yes">' . _('Delete') . '</a></td>
-				<td><td><a href="%s&TaxAuthority=%s">' . _('Edit Rates') . '</a></td>
+				<td><a href="%s&TaxAuthority=%s">' . _('Edit Rates') . '</a></td>
 			</tr>',
 			$myrow['taxid'],
 			$myrow['description'],
@@ -202,7 +202,7 @@ if (isset($SelectedTaxAuthID)) {
  }
 
 
-echo '<br /><form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
+echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (isset($SelectedTaxAuthID)) {
@@ -248,8 +248,13 @@ if (!isset($_POST['Description'])) {
 	$_POST['Description']='';
 }
 echo '<table class="selection">
-<tr><td>' . _('Tax Type Description') . ':</td>
-<td><input type="text" name="Description" size="21" maxlength="20" value="' . $_POST['Description'] . '" /></td></tr>';
+		<tr>
+			<th class="header" colspan="2">' . _('New Tax Authority Information') . '</th>
+		</tr>
+		<tr>
+			<td>' . _('Tax Type Description') . ':</td>
+			<td><input type="text" name="Description" size="21" maxlength="20" value="' . $_POST['Description'] . '" /></td>
+		</tr>';
 
 
 echo '<tr><td>' . _('Input tax GL Account') . ':</td>

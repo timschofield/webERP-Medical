@@ -236,6 +236,12 @@ if (!isset($_GET['delete'])) {
 	} else { //end of if $SelectedParam only do the else when a new record is being entered
 		if (!isset($_POST['GeoCodeID'])) {
 			$_POST['GeoCodeID'] = '';
+			$_POST['GeoCode_Key']  = '';
+			$_POST['Center_Long']  = '';
+			$_POST['Center_Lat']  = '';
+			$_POST['Map_Height']  = '';
+			$_POST['Map_Width']  = '';
+			$_POST['Map_Host']  = '';
 		}
 		echo '<table class="selection">';
 

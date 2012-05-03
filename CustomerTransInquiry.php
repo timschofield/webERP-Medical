@@ -46,7 +46,7 @@ echo '<td>' . _('To') . ':</td><td><input tabindex="3" class="date" alt="'.$_SES
 
 echo '</tr></table><br /><div class="centre"><button tabindex="4" type="submit" name="ShowResults">' . _('Show Transactions') . '</button>';
 
-echo '</div></form>';
+echo '</div><br /></form>';
 
 if (isset($_POST['ShowResults']) and $_POST['TransType'] != ''){
    $SQL_FromDate = FormatDateForSQL($_POST['FromDate']);
@@ -77,7 +77,7 @@ if (isset($_POST['ShowResults']) and $_POST['TransType'] != ''){
    $DbgMsg =  _('The SQL that failed was');
    $TransResult = DB_query($sql, $db,$ErrMsg,$DbgMsg);
 
-   echo '<br /><table cellpadding="2" class="selection">';
+   echo '<table cellpadding="2" class="selection">';
 
    $tableheader = '<tr>
 			<th>' . _('Type') . '</th>

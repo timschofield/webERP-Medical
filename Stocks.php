@@ -864,7 +864,7 @@ if (!isset($_POST['CategoryID'])) {
 	$_POST['CategoryID']=$Category;
 }
 
-echo '</select><a target="_blank" href="'. $rootpath . '/StockCategories.php">' . _('Add or Modify Stock Categories') . '</a></td></tr>';
+echo '</select>&nbsp;<a target="_blank" href="'. $rootpath . '/StockCategories.php">' . _('Add or Modify Stock Categories') . '</a></td></tr>';
 
 if (!isset($_POST['EOQ']) or $_POST['EOQ']==''){
 	$_POST['EOQ']=0;
@@ -1019,7 +1019,7 @@ if ($_POST['Serialised']==1){
 } else {
 		echo '<option value="1">' . _('Yes'). '</option>';
 }
-echo '</select><i>' . _('Note') . ', ' . _('this has no effect if the item is not Controlled') . '</i></td></tr>';
+echo '</select>&nbsp;<i>' . _('Note') . ', ' . _('this has no effect if the item is not Controlled') . '</i></td></tr>';
 
 if ($_POST['Serialised']==1 AND $_POST['MBFlag']=='M'){
 	echo '<tr><td>' . _('Next Serial No (greater than 0 for auto numbering)') . ':</td><td>
@@ -1177,7 +1177,7 @@ while ($PropertyRow=DB_fetch_array($PropertiesResult)){
 	$PropertyCounter++;
 } //end loop round properties for the item category
 unset($StockID);
-echo '</table><br />';
+echo '</table>';
 echo '<input type="hidden" name="PropertyCounter" value="' . $PropertyCounter . '" />';
 
 if ($New==1) {

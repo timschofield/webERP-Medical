@@ -243,9 +243,9 @@ echo '<input tabindex="4" type="text" name="LineText" size="50" maxlength="50" v
 echo '</td></tr>';
 echo '</table><br />';
 if (isset($_GET['SelectedMessageLine'])) {
-	echo '<div class="centre"><button tabindex="5" type="submit" name="update">'.  _('Update Information'). '</button></div>';
+	echo '<div class="centre"><button tabindex="5" type="submit" name="update">'.  _('Update Information'). '</button></div><br />';
 } else {
-	echo '<div class="centre"><button tabindex="5" type="submit" name="submit">'.  _('Enter Information'). '</button></div>';
+	echo '<div class="centre"><button tabindex="5" type="submit" name="submit">'.  _('Enter Information'). '</button></div><br />';
 }
 
 echo '</form>';

@@ -79,7 +79,7 @@ echo '</select></td></tr>';
 // End select tag
 
 echo '</table><br />
-<div class="centre"><button type="submit" name="MakeCSV">'._('Make CSV File').'</button></div></form>';
+<div class="centre"><button type="submit" name="MakeCSV">'._('Make CSV File').'</button></div><br /></form>';
 
 /* End of the Form  rest of script is what happens if the show button is hit*/
 
@@ -265,7 +265,7 @@ if (isset($_POST['MakeCSV'])){
 
 	} /*end for each SelectedAccount */
 	fclose($fp);
-	echo '<br /><div class="centre"><a href="' .  $FileName . '">' . _('Click Here') . '</a> ' . _('to view the file') . '</div>';
+	echo '<div class="centre"><a href="' .  $FileName . '">' . _('click here') . '</a> ' . _('to view the file') . '</div><br />';
 } /* end of if CreateCSV button hit */
 
 include('includes/footer.inc');

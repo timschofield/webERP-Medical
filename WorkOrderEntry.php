@@ -555,7 +555,7 @@ echo '</table>';
 
 echo '<div class="centre"><br /><button type="submit" name="submit">' . _('Update') . '</button>';
 
-echo '<br /><button type="submit" name="delete" onclick="return confirm(\'' . _('Are You Sure?') . '\');" />' . _('Delete This Work Order') . '</button>';
+echo '<br /><button type="submit" name="delete" onclick="return confirm(\'' . _('Are You Sure?') . '\');">' . _('Delete This Work Order') . '></button>';
 
 echo '</div><br />';
 

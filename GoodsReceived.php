@@ -749,7 +749,7 @@ if ($SomethingReceived==0 AND isset($_POST['ProcessGoodsReceived'])){ /*Then don
 	echo '<br /><div class="centre"><a href="' . $rootpath . '/PO_Items.php">' . _('Modify Order Items'). '</a></div>';
 
 	echo '<br /><div class="centre"><button type="submit" name="Update">' . _('Update') . '</button></div><br />';
-	echo '<div class="centre"><button type="submit" name="ProcessGoodsReceived">' . _('Process Goods Received') . '</button></div>';
+	echo '<div class="centre"><button type="submit" name="ProcessGoodsReceived">' . _('Process Goods Received') . '</button></div><br />';
 }
 
 echo '</form>';

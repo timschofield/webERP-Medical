@@ -283,7 +283,7 @@ if (isset($_POST['PrintPDF'])) {
 	echo '<option selected="True" value="yes">' . _('Print With Alternating Highlighted Lines').'</option>';
 	echo '<option value="no">' . _('Plain Print').'</option>';
 	echo '</select></td></tr>';
-	echo '</table><br /><div class="centre"><button type="submit" name="PrintPDF">' . _('Print PDF') . '</button></div>';
+	echo '</table><br /><div class="centre"><button type="submit" name="PrintPDF">' . _('Print PDF') . '</button></div><br />';
 
 	include('includes/footer.inc');
 

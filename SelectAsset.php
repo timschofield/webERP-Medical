@@ -238,11 +238,11 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 		}
 		echo '<table cellpadding="2" class="selection">';
 		$tableheader = '<tr>
-					<th>' . _('Asset Code') . '</th>
-					<th>' . _('Description') . '</th>
-					<th>' . _('Asset Location') . '</th>
-					<th>' . _('Date Purchased') . '</th>
-				</tr>';
+							<th>' . _('Asset Code') . '</th>
+							<th>' . _('Description') . '</th>
+							<th>' . _('Asset Location') . '</th>
+							<th>' . _('Date Purchased') . '</th>
+						</tr>';
 		echo $tableheader;
 		$j = 1;
 		$k = 0; //row counter to determine background colour

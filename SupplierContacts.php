@@ -131,16 +131,17 @@ if (!isset($SelectedContact)){
 				AND suppliercontacts.supplierid = '".$SupplierID."'";
 
 	$result = DB_query($sql, $db);
+	$myrow=DB_fetch_array($result);
 
 	if (DB_num_rows($result)>0){
-		echo '<table class="selection"><tr><th colspan="7"><font size="3" color="#616161">' . _('Contacts Defined for') . ' - ' . $myrow['suppname'] . '</font></th></tr>';
+		echo '<br /><table class="selection"><tr><th colspan="7" class="header">' . _('Contacts Defined for') . ' - ' . $myrow['suppname'] . '</th></tr>';
 
 		echo '<tr><th>' . _('Name') . '</th>
 							<th>' . _('Position') . '</th>
 							<th>' . _('Phone No') . '</th>
 							<th>' . _('Fax No') . '</th>
 							<th>' . _('Email') . '</th></tr>';
-
+		DB_data_seek($result, 0);
 		while ($myrow = DB_fetch_array($result)) {
 			printf('<tr><td>%s</td>
 					<td>%s</td>
@@ -149,7 +150,7 @@ if (!isset($SelectedContact)){
 					<td><a href="mailto:%s">%s</td>
 					<td><a href="%s?SupplierID=%s&SelectedContact=%s">' . _('Edit') . '</td>
 					<td><a href="%s?SupplierID=%s&SelectedContact=%s&delete=yes" onclick=\'return confirm("' . _('Are you sure you wish to delete this contact?') . '");\'>' .  _('Delete') . '</td></tr>',
-					$myrow['suppname'],
+					$myrow['contact'],
 					$myrow['position'],
 					$myrow['tel'],
 					$myrow['fax'],
@@ -206,7 +207,7 @@ if (! isset($_GET['delete'])) {
 		$_POST['Mobile']  = $myrow['mobile'];
 		echo '<input type="hidden" name="SelectedContact" value="' . $_POST['Contact'] . '" />';
 		echo '<input type="hidden" name="Contact" value="' . $_POST['Contact'] . '" />';
-		echo '<table><tr><td>' . _('Contact') . ':</td><td>' . $_POST['Contact'] . '</td></tr>';
+		echo '<table class="selection"><tr><td>' . _('Contact') . ':</td><td>' . $_POST['Contact'] . '</td></tr>';
 
 	} else { //end of if $SelectedContact only do the else when a new record is being entered
 		if (!isset($_POST['Contact'])) {
@@ -244,7 +245,7 @@ if (! isset($_GET['delete'])) {
 		<td><input type="text" name="Email" size="51" maxlength="50" value="' . $_POST['Email'] . '" /></td></tr>
 		</table><br />';
 
-	echo '<div class="centre"><button type="submit" name="submit" value="" />' . _('Enter Information') . '</button>';
+	echo '<div class="centre"><button type="submit" name="submit">' . _('Enter Information') . '</button>';
 	echo '</div></form>';
 
 } //end if record deleted no point displaying form to add record

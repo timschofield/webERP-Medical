@@ -40,13 +40,17 @@ if (!isset($_POST['Date'])){
 	echo '<option value="21">' . _('Credit Notes').'</option>';
 	echo '<option value="22">' . _('Payments').'</option>';
 
-	 echo '</select></td></tr>';
+	echo '</select></td></tr>';
 
-	 echo '</select></td></tr></table><br /><div class="centre"><input type="submit" name="Go" value="' . _('Create PDF') . '" /></div>';
+	echo '</table><br />
+			<div class="centre">
+				<button type="submit" name="Go">' . _('Create PDF') . '</button>
+			</div><br />
+		</form>';
 
 
-	 include('includes/footer.inc');
-	 exit;
+	include('includes/footer.inc');
+	exit;
 } else {
 
 	include('includes/ConnectDB.inc');

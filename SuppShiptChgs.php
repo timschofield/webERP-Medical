@@ -99,8 +99,8 @@ foreach ($_SESSION['SuppTrans']->Shipts as $EnteredShiptRef){
 }
 
 echo '<tr>
-	<td class="number"><font size="2" color="#616161">' . _('Total') . ':</font></td>
-	<td class="number"><font size="2" color="#616161"><u>' . locale_money_format($TotalShiptValue,$_SESSION['SuppTrans']->CurrCode) . '</u></font></td>
+	<th class="header">' . _('Total') . ':</th>
+	<th class="header"><u>' . locale_money_format($TotalShiptValue,$_SESSION['SuppTrans']->CurrCode) . '</u></th>
 </tr>
 </table><br />';
 

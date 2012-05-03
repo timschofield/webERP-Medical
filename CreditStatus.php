@@ -241,7 +241,7 @@ if (!isset($_GET['delete'])) {
 	} else {
 		echo '<td><input tabindex="3" type="checkbox" name="DisallowInvoices" /></td></tr>';
 	}
-	echo '</table><br /><div class="centre"><button tabindex="4" type="submit" name="submit">' . _('Enter Information') . '</button></div></form>';
+	echo '</table><br /><div class="centre"><button tabindex="4" type="submit" name="submit" value="" />' . _('Enter Information') . '</button></div><br /></form>';
 } //end if record deleted no point displaying form to add record
 include('includes/footer.inc');
 ?>

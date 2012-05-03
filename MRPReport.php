@@ -731,7 +731,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 //			echo '<input type="hidden" name=Search value="Search" />';
 			echo '<br /></div>';
 		}
-		echo '<table class="selection">';
+		echo '<table cellpadding="2" class="selection">';
 		$tableheader = '<tr>
 					<th>' . _('Code') . '</th>
 					<th>' . _('Description') . '</th>
@@ -759,7 +759,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 			} else {
 				$qoh = locale_number_format($myrow['qoh'], $myrow['decimalplaces']);
 			}
-			echo '<td><button type="submit" name="Select" value='.$myrow['stockid'].'>'.$myrow['stockid'].'</button></td>
+			echo '<td><button type="submit" name="Select" value="'.$myrow['stockid'].'">'.$myrow['stockid'].'</button></td>
 				<td>'.$myrow['description'].'</td>
 				<td class="number">'.$qoh.'</td>
 				<td>'.$myrow['units'].'</td>

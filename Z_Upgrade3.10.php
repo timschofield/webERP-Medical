@@ -14,7 +14,7 @@ if (!isset($_POST['DoUpgrade'])) {
     echo '</form>';
 }
 
-if ($_POST['DoUpgrade'] == _('Perform Upgrade')){
+if (isset($_POST['DoUpgrade'])){
     echo '<table><tr><td>' . _('Inserting default Debtor type') . '</td>';
     $sql="SELECT count(typeid)
             FROM debtortype

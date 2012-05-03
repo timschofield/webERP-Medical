@@ -76,7 +76,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 	}
 	echo '<table width="90%" class="selection"><tr><th colspan="3"><img src="' . $rootpath . '/css/' . $theme . '/images/inventory.png" title="' . _('Inventory') . '" alt="" /><b>' . ' ' . $StockID . ' - ' . $myrow['description'] . ' ' . $ItemStatus . '</b></th></tr>';
 	echo '<tr><td width="40%" valign="top">
-			<table align="left">'; //nested table
+			<table align="left" style="background: transparent;">'; //nested table
 	echo '<tr><th style="text-align:right;">' . _('Item Type:') . '</th>
 			<td colspan="2" class="select">';
 	switch ($myrow['mbflag']) {
@@ -192,7 +192,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 	} //end of if PricesSecuirty allows viewing of prices
 	echo '</table>'; //end of first nested table
 	// Item Category Property mod: display the item properties
-	echo '<table align="left">';
+	echo '<table align="left" class="selection">';
 	$CatValResult = DB_query("SELECT categoryid
 														FROM stockmaster
 														WHERE stockid='" . $StockID . "'", $db);
@@ -246,7 +246,7 @@ $PropertyCounter++;
 } //end loop round properties for the item category
 echo '</table>'; //end of Item Category Property mod
 echo '<td style="width: 15%; vertical-align: top">
-			<table>'; //nested table to show QOH/orders
+			<table style="background: transparent">'; //nested table to show QOH/orders
 $QOH = 0;
 switch ($myrow['mbflag']) {
 		case 'A':
@@ -343,7 +343,7 @@ echo '</td>'; //end cell of master table
 
 if (($myrow['mbflag'] == 'B' OR ($myrow['mbflag'] == 'M'))
 	AND (in_array($SuppliersSecurity, $_SESSION['AllowedPageSecurityTokens']))){
-		echo '<td width="50%" valign="top"><table>
+		echo '<td width="50%" valign="top"><table style="background: transparent">
 			<tr><th width="50%">' . _('Supplier') . '</th>
 				<th width="15%">' . _('Cost') . '</th>
 				<th width="5%">' . _('Curr') . '</th>
@@ -474,7 +474,7 @@ if (!$Its_A_Kitset) {
 echo '</td></tr></table>';
 } else {
 	// options (links) to pages. This requires stock id also to be passed.
-	echo '<table width="90%" cellpadding="4">';
+	echo '<table width="90%" cellpadding="4" class="selection">';
 	echo '<tr>
 		<th width="33%">' . _('Item Inquiries') . '</th>
 		<th width="33%">' . _('Item Transactions') . '</th>
@@ -514,9 +514,9 @@ while ($myrow1 = DB_fetch_array($result1)) {
 echo '</select></td>';
 echo '<td>' . _('Enter partial') . '<b> ' . _('Description') . '</b>:</td><td>';
 if (isset($_POST['Keywords'])) {
-	echo '<input type="text" name="Keywords" value="' . $_POST['Keywords'] . '" size="20" maxlength="25" />';
+	echo '<input type="search" name="Keywords" value="' . $_POST['Keywords'] . '" size="34" maxlength="25" />';
 } else {
-	echo '<input type="text" name="Keywords" size="20" maxlength="25" />';
+	echo '<input type="search" name="Keywords" size="34" maxlength="25" placeholder="Enter part of the item description" />';
 }
 echo '</td></tr><tr><td></td>';
 echo '<td><font size="3"><b>' . _('OR') . ' ' . '</b></font>' . _('Enter partial') . ' <b>' . _('Stock Code') . '</b>:</td>';
@@ -757,7 +757,7 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 			if ($myrow['discontinued']==1){
 				$ItemStatus = '<font class="bad">' . _('Obsolete') . '</font>';
 			} else {
-				$ItemStatus ='';
+				$ItemStatus = '<font class="good">' . _('Current') . '</font>';
 			}
 
 			echo '<td><button type="submit" name="Select" value="' . $myrow['stockid'] . '" />' . $myrow['stockid'] . '</button></td>

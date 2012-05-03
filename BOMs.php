@@ -413,7 +413,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 			break;
 	}
 
-	echo '<br /><div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Select a Different BOM') . '</a></div><br />';
+	echo '<div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Select a Different BOM') . '</a></div><br />';
 	echo '<table class="selection">';
 	// Display Manufatured Parent Items
 	$sql = "SELECT bom.parent,
@@ -500,7 +500,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 	 	echo '</div></td></tr>';
 	}
 	echo '</table><br /><table class="selection">';
-	echo '<tr><th colspan="13"><div class="centre"><font color="blue" size="3"><b>'.$SelectedParent .' - ' . $myrow[0] . ' ('. $MBdesc. ') </font></b></th></tr>';
+	echo '<tr><th colspan="13" class="header">'.$SelectedParent .' - ' . $myrow[0] . ' ('. $MBdesc. ')</th></tr>';
 
     // *** POPAD&T
 	$BOMTree = array();
@@ -587,7 +587,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 			/* echo "Enter the details of a new component in the fields below. <br />Click on 'Enter Information' to add the new component, once all fields are completed.";
 			*/
 			echo '<table class="selection">';
-			echo '<tr><th colspan="13"><div class="centre"><font color="blue" size="3"><b>'. _('New Component Details') .'</font></b></th></tr>';
+			echo '<tr><th colspan="13" class="header">'. _('New Component Details') .'</th></tr>';
 			echo '<tr><td>' . _('Component code') . ':</td><td>';
 			echo '<select ' . (in_array('ComponentCode',$Errors) ?  'class="selecterror"' : '' ) .' tabindex="1" name="Component">';
 
@@ -714,7 +714,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 			echo '<input type="hidden" name="AutoIssue" value="0" />';
 		}
 
-		echo '</table><br /><div class="centre"><button tabindex="8" type="submit" name="Submit">' . _('Enter Information') . '</button></form></div>';
+		echo '</table><br /><div class="centre"><button tabindex="8" type="submit" name="Submit">' . _('Enter Information') . '</button></div><br /></form>';
 
 	} //end if record deleted no point displaying form to add record
 
@@ -792,7 +792,7 @@ if (!isset($SelectedParent)) {
 	 ' <b>' . _('description') . '</b>:</font></td><td><input tabindex="1" type="text" name="Keywords" size="20" maxlength="25" /></td>
 	 <td><font size="3"><b>' . _('OR') . '</b></font></td><td><font size="1">' . _('Enter extract of the') .
      ' <b>' . _('Stock Code') . '</b>:</font></td><td><input tabindex="2" type="text" name="StockCode" size="15" maxlength="18" /></td>
-	 </tr></table><br /><div class="centre"><button tabindex="3" type="submit" name="Search">' . _('Search Now') . '</button></div>';
+	 </tr></table><br /><div class="centre"><button tabindex="3" type="submit" name="Search">' . _('Search Now') . '</button></div><br />';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (isset($_POST['Search']) and isset($result) AND !isset($SelectedParent)) {
@@ -822,15 +822,16 @@ if (isset($_POST['Search']) and isset($result) AND !isset($SelectedParent)) {
 			$StockOnHand = number_format($myrow['totalonhand'],2);
 		}
 		$tab = $j+3;
-		printf('<td><button tabindex="'.$tab.'" type="submit" name="Select">%s</button></td>
+		printf('<td><button tabindex="'.$tab.'" type="submit" name="Select" value="%s" />%s</button></td>
 		        <td>%s</td>
-			<td class="number">%s</td>
-			<td>%s</td></tr>',
-			$myrow['stockid'],
-			$myrow['description'],
-			$StockOnHand,
-			$myrow['units']
-		);
+				<td class="number">%s</td>
+				<td>%s</td></tr>',
+				$myrow['stockid'],
+				$myrow['stockid'],
+				$myrow['description'],
+				$StockOnHand,
+				$myrow['units']
+			);
 
 		$j++;
 //end of page full new headings if

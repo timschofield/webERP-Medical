@@ -230,7 +230,7 @@ if (!isset($_SESSION['tender'.$identifier])
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table class="selection">';
 	echo '<tr>
-			<th colspan="4"><font size="3" color="#616161">' . _('Tender header details') . '</font></th>
+			<th colspan="4" class="header">' . _('Tender header details') . '</th>
 		</tr>';
 	echo '<tr>
 			<td>' . _('Delivery Must Be Made Before') . '</td>
@@ -386,7 +386,7 @@ if (!isset($_SESSION['tender'.$identifier])
 			<td valign="top">
 			<table class="selection">';
 	echo '<tr>
-			<th colspan="4"><font size="3" color="#616161">' . _('Suppliers To Send Tender') . '</font></th>
+			<th colspan="4" class="header">' . _('Suppliers To Send Tender') . '</th>
 		</tr>';
 	echo '<tr>
 			<th>'. _('Supplier Code') . '</th>
@@ -405,7 +405,7 @@ if (!isset($_SESSION['tender'.$identifier])
 	/* Item Details
 	 */
 	echo '<td valign="top"><table class="selection">';
-	echo '<tr><th colspan="6"><font size="3" color="#616161">' . _('Items in Tender') . '</font></th></tr>';
+	echo '<tr><th colspan="6" class="header">' . _('Items in Tender') . '</th></tr>';
 	echo '<tr>
 			<th>'._('Stock ID').'</th>
 			<th>'._('Description').'</th>
@@ -573,9 +573,7 @@ if (isset($_POST['SearchSupplier'])) {
 	}
 	echo '<input type="hidden" name="Search" value="' . _('Search Now') . '" />';
 	echo '<br />
-		<br />
-		<br />
-		<table cellpadding="2" colspan="7">';
+		<table cellpadding="2" colspan="7" class="selection">';
 	echo '<tr>
 	  		<th>' . _('Code') . '</th>
 			<th>' . _('Supplier Name') . '</th>
@@ -599,7 +597,7 @@ if (isset($_POST['SearchSupplier'])) {
 			echo '<tr class="OddTableRows">';
 			$k = 1;
 		}
-		echo '<td><button type="submit" name="SelectedSupplier">'.$myrow['supplierid'].'</button></td>
+		echo '<td><button type="submit" name="SelectedSupplier" value="'.$myrow['supplierid'].'" />'.$myrow['supplierid'].'</button></td>
 			<td>'.$myrow['suppname'].'</td>
 			<td>'.$myrow['currcode'].'</td>
 			<td>'.$myrow['address1'].'</td>
@@ -804,7 +802,7 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 
 	if (isset($SearchResult)) {
 
-		echo '<table cellpadding="1">';
+		echo '<table cellpadding="1" class="selection">';
 		echo '<tr>
 				<th>' . _('Code')  . '</th>
 				<th>' . _('Description') . '</th>

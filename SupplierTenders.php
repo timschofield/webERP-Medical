@@ -111,7 +111,7 @@ if (isset($_POST['Process'])) {
 		}
 	}
 	echo '</td>';
-	echo '<th colspan="8" style="vertical-align:top"><font size="2" color="#616161">' . _('Tender Number') . ': ' .$_SESSION['offer'.$identifier]->TenderID . '</font></th>';
+	echo '<th colspan="8" class="header" style="vertical-align:top">' . _('Tender Number') . ': ' .$_SESSION['offer'.$identifier]->TenderID . '</th>';
 	echo '<input type="hidden" value="' . $_SESSION['offer'.$identifier]->TenderID . '" name="Tender" />';
 	echo '<tr><th>' . stripslashes($_SESSION['CompanyRecord']['coyname']) . '<br />' . _('Item Code') . '</th>';
 	echo '<th>' . _('Item Description') . '</th>';
@@ -133,7 +133,7 @@ if (isset($_POST['Process'])) {
 	}
 	echo '</table><br />';
 	echo '<div class="centre"><button type="submit" name="Confirm">' . _('Confirm and Send Email') . '</button><br />';
-	echo '<br /><button type="submit" name="Cancel">' . _('Cancel Offer') . '</button></div>';
+	echo '<button type="submit" name="Cancel">' . _('Cancel Offer') . '</button></div>';
 	echo '</form>';
 	include('includes/footer.inc');
 	exit;
@@ -299,7 +299,7 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']!=3 and isset($_SESSION[
 	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'].'?identifier='.$identifier) . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/supplier.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Items to offer from').' '.$Supplier .'</p>';
-	echo '<table>';
+	echo '<table class="selection">';
 	echo '<tr>
 			<th>'._('Stock ID').'</th>
 			<th>'._('Description').'</th>
@@ -337,7 +337,7 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']!=3 and isset($_SESSION[
 	echo '</table>';
 	echo '<input type="hidden" name="TenderType" value="'.$_POST['TenderType'].'" />';
 	if ($_POST['TenderType']==1) {
-		echo '<br /><div class="centre"><button type="submit" name="Update">' . _('Update Offer') . '</button>';
+		echo '<br /><div class="centre"><button type="submit" name="Update">' . _('Update offer') . '</button>';
 		echo '<button type="submit" name="Refresh">' . _('Refresh screen') . '</button></div>';
 	} else if ($_POST['TenderType']==2) {
 		echo '<br /><div class="centre"><button type="submit" name="Save">' . _('Save offer') . '</button>';
@@ -357,9 +357,9 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==2 and !isset($_POST['S
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Search for Inventory Items') . '</p>';
 
 	$sql = "SELECT categoryid,
-			categorydescription
-		FROM stockcategory
-		ORDER BY categorydescription";
+					categorydescription
+				FROM stockcategory
+				ORDER BY categorydescription";
 	$result = DB_query($sql, $db);
 
 	if (DB_num_rows($result) == 0) {
@@ -426,7 +426,7 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==3 and !isset($_POST['S
 			ORDER BY tendersuppliers.tenderid";
 	$result=DB_query($sql, $db);
 	echo '<table class="selection">';
-	echo '<tr><th colspan="13"><font size="3" color="#616161">' . _('Outstanding Tenders Waiting For Offer') . '</font></th></tr>';
+	echo '<tr><th colspan="13" class="header">' . _('Outstanding Tenders Waiting For Offer') . '</th></tr>';
 	while ($myrow=DB_fetch_array($result)) {
 		echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
@@ -454,9 +454,13 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==3 and !isset($_POST['S
 			}
 		}
 		echo '</td>';
-		echo '<th colspan="8" style="vertical-align:top"><font size="2" color="#616161">' . _('Tender Number') . ': ' .$myrow['tenderid'] . '</font></th>';
+		echo '<th colspan="8" class="header" style="vertical-align:top">' . _('Tender Number') . ': ' .$myrow['tenderid'] . '</th>';
 		echo '<input type="hidden" value="' . $myrow['tenderid'] . '" name="Tender" />';
+<<<<<<< TREE
 		echo '<th><button type="submit" name="Process" />' . _('Process') . "\n" . _('Tender') . '</button></th></tr>';
+=======
+		echo '<th><button type="submit" value="" name="Process">' . _('Process') . "\n" . _('Tender') . '</button></th></tr>';
+>>>>>>> MERGE-SOURCE
 		$ItemSQL="SELECT tenderitems.tenderid,
 						tenderitems.stockid,
 						stockmaster.description,
@@ -626,7 +630,7 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 
 	if (isset($SearchResult)) {
 
-		echo '<table cellpadding="1">';
+		echo '<table cellpadding="1" class="selection">';
 
 		$tableheader = '<tr>
 						<th>' . _('Code')  . '</th>
@@ -705,7 +709,11 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 			prnMsg( _('Only the first') . ' ' . $Maximum_Number_Of_Parts_To_Show . ' ' . _('can be displayed') . '. ' .
 				_('Please restrict your search to only the parts required'),'info');
 		}
+<<<<<<< TREE
 		echo '<a name="end"></a><br /><div class="centre"><button type="submit" name="NewItem">' . _('Add to Offer') . '</button></div>';
+=======
+		echo '<a name="end"></a><br /><div class="centre"><button type="submit" name="NewItem" value="" />' . _('Add to Offer') . '</button></div>';
+>>>>>>> MERGE-SOURCE
 	}#end if SearchResults to show
 	echo '<input type="hidden" name="TenderType" value="'.$_POST['TenderType'].'" />';
 	echo '<input type="hidden" name="SupplierID" value="'.$_POST['SupplierID'].'" />';

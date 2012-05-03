@@ -14,7 +14,7 @@ if (empty($_POST['DoUpgrade'])){
 	echo '</form>';
 }
 
-if ($_POST['DoUpgrade'] == _('Perform Upgrade')){
+if (isset($_POST['DoUpgrade'])){
 
 	echo '<br />';
 	prnMsg(_('If there are any failures then please check with your system administrator').

@@ -220,7 +220,6 @@ while ($myrow = DB_fetch_array($result)) {
 
 DB_free_result($result);
 
-
 echo '</select></td></tr>
 	<tr><td>' . _('Overhead Recovery GL Account') . ':</td>
 		<td><select name="OverheadRecoveryAct">';

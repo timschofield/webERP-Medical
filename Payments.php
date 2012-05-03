@@ -737,7 +737,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 
 echo '<br /><table class="selection">';
 
-echo '<tr><th colspan="4"><font size="3" color="#616161">' . _('Payment');
+echo '<tr><th colspan="4" class="header">' . _('Payment');
 
 if ($_SESSION['PaymentDetail'.$identifier]->SupplierID!=''){
 	echo ' ' . _('to') . ' ' . $_SESSION['PaymentDetail'.$identifier]->SuppName;
@@ -747,7 +747,7 @@ if ($_SESSION['PaymentDetail'.$identifier]->BankAccountName!=''){
 	echo ' ' . _('from the') . ' ' . $_SESSION['PaymentDetail'.$identifier]->BankAccountName;
 }
 
-echo ' ' . _('on') . ' ' . $_SESSION['PaymentDetail'.$identifier]->DatePaid . '</font></th></tr>';
+echo ' ' . _('on') . ' ' . $_SESSION['PaymentDetail'.$identifier]->DatePaid . '</th></tr>';
 
 $SQL = "SELECT bankaccountname,
 		bankaccounts.accountcode,
@@ -843,7 +843,7 @@ if ($_SESSION['PaymentDetail'.$identifier]->AccountCurrency!=$_SESSION['PaymentD
 if ($_SESSION['PaymentDetail'.$identifier]->AccountCurrency!=$_SESSION['CompanyRecord']['currencydefault']
 												AND isset($_SESSION['PaymentDetail'.$identifier]->AccountCurrency)){
 	if (isset($SuggestedFunctionalExRate)){
-		$SuggestedFunctionalExRateText = '<b>' . _('Suggested rate:') . ' ' . locale_money_format($SuggestedFunctionalExRate,$_SESSION['PaymentDetail'.$identifier]->AccountCurrency) . '</b>';
+		$SuggestedFunctionalExRateText = '<b>' . _('Suggested rate:') . ' ' . locale_number_format($SuggestedFunctionalExRate,6) . '</b>';
 	} else {
 		$SuggestedFunctionalExRateText ='';
 	}
@@ -851,7 +851,7 @@ if ($_SESSION['PaymentDetail'.$identifier]->AccountCurrency!=$_SESSION['CompanyR
 		$_POST['FunctionalExRate'] = $SuggestedFunctionalExRate;
 	}
 	echo '<tr><td>' . _('Functional Exchange Rate') . ':</td>
-			<td><input type="text" name="FunctionalExRate" maxlength="10" size="12" value="' . locale_money_format($_POST['FunctionalExRate'], $_SESSION['PaymentDetail'.$identifier]->AccountCurrency) . '" /></td>
+			<td><input type="text" class="number" name="FunctionalExRate" maxlength="10" size="12" value="' . locale_number_format($_POST['FunctionalExRate'], 6) . '" /></td>
 			<td>' . ' ' . $SuggestedFunctionalExRateText . ' <i>' . _('The exchange rate between the currency of the business (the functional currency) AND the currency of the bank account') .  '. 1 ' . $_SESSION['CompanyRecord']['currencydefault'] . ' = ? ' . $_SESSION['PaymentDetail'.$identifier]->AccountCurrency . '</i></td></tr>';
 }
 echo '<tr><td>' . _('Payment type') . ':</td>
@@ -888,15 +888,13 @@ echo '<tr><td>' . _('Reference / Narrative') . ':</td>
 		</tr>';
 echo '<tr><td colspan="3"><div class="centre"><button type="submit" name="UpdateHeader">' . _('Update'). '</button></td></tr>';
 
-
 echo '</table><br />';
-
 
 if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDetail'.$identifier]->SupplierID==''){
 /* Set upthe form for the transaction entry for a GL Payment Analysis item */
 
 	echo '<br /><table class="selection">';
-	echo '<tr><th colspan="2"><font size="3" color="#616161">' . _('General Ledger Payment Analysis Entry') . '</font></th></tr>';
+	echo '<tr><th colspan="2" class="header">' . _('General Ledger Payment Analysis Entry') . '</th></tr>';
 
 	//Select the tag
 	echo '<tr><td>' . _('Select Tag') . ':</td><td><select name="tag">';
@@ -947,7 +945,7 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 				echo '<option value="' . $myrow['groupname'] . '">' . $myrow['groupname'] . '</option>';
 			}
 		}
-		echo '</select><button type="submit" name="UpdateCodes" value="Select" />'._('Select').'</button></td></tr>';
+		echo '</select><button type="submit" name="UpdateCodes">' . _('Select') . '</button></td></tr>';
 	}
 
 	if (isset($_POST['GLGroup']) AND $_POST['GLGroup']!='') {
@@ -1037,16 +1035,16 @@ if ($_SESSION['CompanyRecord']['gllink_creditors']==1 AND $_SESSION['PaymentDeta
 				$TagName=$TagMyrow[0];
 			}
 			echo '<tr>
-				<td align=left>' . $PaymentItem->cheque . '</td>
-				<td class="number">' . $PaymentItem->Amount . '</td>
-				<td>' . $PaymentItem->GLCode . ' - ' . $PaymentItem->GLActName . '</td>
-				<td>' . stripslashes($PaymentItem->Narrative)  . '</td>
-				<td>' . $PaymentItem->tag . ' - ' . $TagName . '</td>
-				<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?Delete=' . $PaymentItem->ID . '" onclick="return confirm(\'' . _('Are you sure you wish to delete this payment analysis item?') . '\');">' . _('Delete') . '</a></td>
+					<td align=left>' . $PaymentItem->cheque . '</td>
+					<td class="number">' . $PaymentItem->Amount . '</td>
+					<td>' . $PaymentItem->GLCode . ' - ' . $PaymentItem->GLActName . '</td>
+					<td>' . stripslashes($PaymentItem->Narrative)  . '</td>
+					<td>' . $PaymentItem->tag . ' - ' . $TagName . '</td>
+					<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?Delete=' . $PaymentItem->ID . '" onclick="return confirm(\'' . _('Are you sure you wish to delete this payment analysis item?') . '\');">' . _('Delete') . '</a></td>
 				</tr>';
 			$PaymentTotal += filter_currency_input($PaymentItem->Amount);
 		}
-		echo '<tr><td></td><td class="number"><b>' . locale_money_format($PaymentTotal,$_SESSION['PaymentDetail'.$identifier]->Currency) . '</b></td><td colspan="3"></td></tr></table><br />';
+		echo '<tr><td></td><td class="number"><b>' . locale_money_format($PaymentTotal, $_SESSION['PaymentDetail'.$identifier]->AccountCurrency)  . '</b></td><td colspan="3"></td></tr></table><br />';
 		echo '<button type="submit" name="CommitBatch">' . _('Accept and Process Payment') . '</button>';
 	}
 

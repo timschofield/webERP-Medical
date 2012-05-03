@@ -37,7 +37,7 @@ if ((!isset($_GET['TransNo']) or $_GET['TransNo']=="") and !isset($_POST['TransD
 	}
 	echo '</select></td></tr>';
 	echo '</table>';
-	echo '<br /><div class="centre"><button type="submit" name="Process">' . _('Print Picking Lists') . '</button></div></form>';
+	echo '<br /><div class="centre"><button type="submit" name="Process">' . _('Print Picking Lists') . '</buton></div><br /></form>';
 	include('includes/footer.inc');
 	exit();
 }

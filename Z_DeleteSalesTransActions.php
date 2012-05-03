@@ -175,7 +175,7 @@ echo '<br /><table>
 	</tr>
 </table>';
 
-echo '<button type="submit" name="ProcessDeletions" onclick="return confirm(\'' . _('Are You Really REALLY Sure?') . '\');" />' . _('Process') . '</button>';
+echo '<button type="submit" name="ProcessDeletions" onclick="return confirm(\'' . _('Are You Really REALLY Sure?') . '\');">' . _('Process') . '</button>';
 
 echo '</form>';
 

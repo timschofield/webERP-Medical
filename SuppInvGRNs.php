@@ -111,9 +111,9 @@ if (isset($_GET['Delete'])){
 /*Show all the selected GRNs so far from the SESSION['SuppTrans']->GRNs array */
 
 echo '<table cellpadding="1" class="selection">';
-echo '<tr><th colspan="6"><font size="3" color="#616161">' . _('Invoiced Goods Received Selected') . '</font></th></tr>';
+echo '<tr><th colspan="8" class="header">' . _('Invoiced Goods Received Selected') . '</th></tr>';
 
-$tableheader = '<tr bgcolor="#800000">
+$tableheader = '<tr>
 			<th>' . _('Sequence') . ' #</th>
 			<th>' . _('Item Code') . '</th>
 			<th>' . _('Description') . '</th>
@@ -148,8 +148,8 @@ foreach ($_SESSION['SuppTrans']->GRNs as $EnteredGRN){
 }
 
 echo '<tr>
-	<td colspan="5" align="right"><font size="2" color="#616161">' . _('Total Value of Goods Charged') . ':</font></td>
-	<td class="number"><font size="2" color="#616161">' . locale_money_format($TotalValueCharged,$_SESSION['SuppTrans']->CurrCode) . '</font></td>
+	<th colspan="5" align="right" class="header">' . _('Total Value of Goods Charged') . ':</th>
+	<th class="number">' . locale_money_format($TotalValueCharged,$_SESSION['SuppTrans']->CurrCode) . '</th>
 </tr>';
 echo '</table>';
 echo '<br /><div class="centre"><a href="' . $rootpath . '/SupplierInvoice.php">' . _('Back to Invoice Entry') . '</a></div><br />';
@@ -235,7 +235,7 @@ if (isset($_GET['Modify'])){
 	$GRNTmp = $_SESSION['SuppTrans']->GRNs[$GRNNo];
 
 	echo '<table class="selection">';
-	echo '<tr><th colspan="10"><font size="3" color="#616161">' . _('GRN Selected For Adding To A Purchase Invoice') . '</font></th></tr>';
+	echo '<tr><th colspan="10" class="header">' . _('GRN Selected For Adding To A Purchase Invoice') . '</th></tr>';
 	echo '<tr bgcolor=#800000>
 			<th>' . _('Sequence') . ' #</th>
 			<th>' . _('Item') . '</th>
@@ -279,9 +279,9 @@ if (isset($_GET['Modify'])){
 } else {
 	if (count( $_SESSION['SuppTransTmp']->GRNs)>0){   /*if there are any outstanding GRNs then */
 		echo '<table cellpadding="1" class="selection">';
-		echo '<tr><th colspan="10"><font size="3" color="#616161">' . _('Goods Received Yet to be Invoiced From') . ' ' . $_SESSION['SuppTrans']->SupplierName.'</font></th></tr>';
+		echo '<tr><th colspan="10" class="header">' . _('Goods Received Yet to be Invoiced From') . ' ' . $_SESSION['SuppTrans']->SupplierName.'</th></tr>';
 
-		$tableheader = '<tr bgcolor=#800000><th>' . _('Select') . '</th>
+		$tableheader = '<tr><th>' . _('Select') . '</th>
 				<th>' . _('Sequence') . ' #</th>
 				<th>' . _('Order') . '</th>
 				<th>' . _('Item Code') . '</th>
@@ -301,7 +301,7 @@ if (isset($_GET['Modify'])){
 
 			if (isset($POs[$GRNTmp->PONo]) and $POs[$GRNTmp->PONo] != $GRNTmp->PONo) {
 				$POs[$GRNTmp->PONo] = $GRNTmp->PONo;
-				echo '<tr><td><button type="submit" name="AddPOToTrans">' . $GRNTmp->PONo . '</button></td><td colspan="3" />' . _('Add Whole PO to Invoice') . '</td></tr>';
+				echo '<tr><td><button type="submit" name="AddPOToTrans" value="' . $GRNTmp->PONo . '" />' . $GRNTmp->PONo . '</button></td><td colspan="3" />' . _('Add Whole PO to Invoice') . '</td></tr>';
 			}
 			if (isset($_POST['SelectAll'])) {
 				echo '<tr><td><input type="checkbox" checked name="GRNNo_' . $GRNTmp->GRNNo . '" /></td>';

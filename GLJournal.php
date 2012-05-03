@@ -262,7 +262,7 @@ echo '<br />';
 echo '<table class="selection" width="70%">';
 /* Set upthe form for the transaction entry for a GL Payment Analysis item */
 
-echo '<tr><th colspan="3"><div class="centre"><font size="3" color="blue"><b>' . _('Journal Line Entry') . '</b></font></div></th></tr>';
+echo '<tr><th colspan="3" class="header">' . _('Journal Line Entry') . '</th></tr>';
 
 /*now set up a GLCode field to select from avaialble GL accounts */
 echo '<tr><th>' . _('GL Tag') . '</th>';
@@ -335,12 +335,12 @@ echo '</tr><tr><th></th><th>' . _('GL Narrative') . '</th>';
 echo '<td><input type="text" name="GLNarrative" maxlength="100" size="100" value="' . $_POST['GLNarrative'] . '" /></td>';
 
 echo '</tr></table><br />'; /*Close the main table */
-echo '<div class="centre"><button type="submit" name="Process">' . _('Accept') . '</button></div><br />';
+echo '<div class="centre"><button type="submit" name="Process">' . _('Accept') . '</button></div><br /><br />';
 
 
 echo '<table class="selection" width="85%">';
 
-echo '<tr><th colspan="6"><div class="centre"><font size="3" color="blue"><b>' . _('Journal Summary') . '</b></font></div></th></tr>';
+echo '<tr><th colspan="6" class="header">' . _('Journal Summary') . '</th></tr>';
 echo '<tr>
 		<th>'._('GL Tag').'</th>
 		<th>'._('GL Account').'</th>
@@ -403,7 +403,7 @@ if ($debittotal>$credittotal) {
 echo '</table>';
 
 if (ABS($_SESSION['JournalDetail']->JournalTotal)<0.001 AND $_SESSION['JournalDetail']->GLItemCounter > 0){
-	echo '<br /><div class="centre"><button type="submit" name="CommitBatch">'._('Accept and Process Journal').'</button></div>';
+	echo '<br /><br /><div class="centre"><button type="submit" name="CommitBatch">'._('Accept and Process Journal').'</button></div>';
 } elseif(count($_SESSION['JournalDetail']->GLEntries)>0) {
 	echo '<br /><br />';
 	prnMsg(_('The journal must balance ie debits equal to credits before it can be processed'),'warn');

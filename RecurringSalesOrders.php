@@ -313,7 +313,7 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 
 
 echo '<table cellpadding="2" class="selection">';
-echo '<tr><th colspan="7"><font size="2" color="#616161"><b>'._('Order Line Details').'</b></font></th></tr>';
+echo '<tr><th colspan="7" class="header"><b>'._('Order Line Details').'</b></th></tr>';
 echo '<tr>
 		<th>'. _('Item Code') .'</th>
 		<th>'. _('Item Description') .'</th>
@@ -368,7 +368,7 @@ echo '<tr>
 	</table>';
 
 echo '<br /><table class="selection">';
-echo '<tr><th colspan="7"><font size="2" color="#616161"><b>'._('Order Header Details').'</b></font></th></tr>';
+echo '<tr><th colspan="7" class="header"><b>'._('Order Header Details').'</b></th></tr>';
 
 echo '<tr>
 		<td>'. _('Deliver To') .':</td>
@@ -510,14 +510,14 @@ echo '</table>';
 echo '<br /><div class="centre">';
 if ($NewRecurringOrder=='Yes'){
 	echo '<input type="hidden" name="NewRecurringOrder" value="Yes" />';
-	echo '<input type="submit" name="Process" value="' . _('Create Recurring Order') . '" />';
+	echo '<button type="submit" name="Process">' . _('Create Recurring Order') . '</button>';
 } else {
 	echo '<input type="hidden" name="NewRecurringOrder" value="No" />';
 	echo '<input type="hidden" name="ExistingRecurrOrderNo" value="' . $_POST['ExistingRecurrOrderNo'] . '" />';
 
-	echo '<input type="submit" name="Process" value="' . _('Update Recurring Order Details') . '" />';
+	echo '<button type="submit" name="Process">' . _('Update Recurring Order Details') . '</button>';
 
-	echo '<br /><br /><input type="submit" name="DeleteRecurringOrder" value="' . _('Delete Recurring Order') . ' ' . $_POST['ExistingRecurrOrderNo'] . '" onclick="return confirm(\'' . _('Are you sure you wish to delete this recurring order template?') . '\');" />';
+	echo '<br /><br /><button type="submit" name="DeleteRecurringOrder" onclick="return confirm(\'' . _('Are you sure you wish to delete this recurring order template?') . '\');">' . _('Delete Recurring Order') . ' ' . $_POST['ExistingRecurrOrderNo'] . '</button>';
 }
 
 echo '</form></div>';

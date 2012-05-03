@@ -306,7 +306,7 @@ if (isset($_POST['RunReport'])){
 
 	echo '</table><br />
 		<div class="centre">
-			<button type="submit" name="RunReport">' ._('Run Report'). '</button></div>
+			<button type="submit" name="RunReport">' ._('Run Report'). '</button></div><br />
 			</form>';
 
 	include ('includes/footer.inc');
