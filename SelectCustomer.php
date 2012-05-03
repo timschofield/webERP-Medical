@@ -317,7 +317,7 @@ if (isset($_SESSION['CustomerID']) and $_SESSION['CustomerID'] != '') {
 		$result = DB_query($sql, $db);
 		if (DB_num_rows($result) <> 0) {
 			echo '<br /><div class="centre"><img src="' . $rootpath . '/css/' . $theme . '/images/note_add.png" title="' . _('Customer Notes') . '" alt="" />' . ' ' . _('Customer Notes') . '</div><br />';
-			echo '<table width="45%" class+"selection">';
+			echo '<table width="45%" class="selection">';
 			echo '<tr>
 					<th>' . _('date') . '</th>
 					<th>' . _('note') . '</th>

@@ -122,7 +122,7 @@ if (isset($_POST['submit'])) {
 		echo '<br />';
 		echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-		echo '<br /><div class="centre"><button type="submit" name=return value="' . _('Return to list of tab types') . '" /></button></div>';
+		echo '<br /><div class="centre"><button type="submit" name="return">' . _('Return to list of tab types') . '</button></div>';
 		echo '</form>';
 		include('includes/footer.inc');
 		exit;

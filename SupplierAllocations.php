@@ -529,7 +529,7 @@ if (isset($_POST['AllocTrans'])){
    echo '<div class="centre"><input type="hidden" name="TotalNumberOfAllocs" value="' . $Counter . '" />';
 
    echo '<br /><button type="submit" name="RefreshAllocTotal">' . _('Recalculate Total To Allocate') . '</button>';
-   echo '<button type="submit" name="UpdateDatabase">' . _('Process Allocations') . '</button></div></button>';
+   echo '<button type="submit" name="UpdateDatabase">' . _('Process Allocations') . '</button></div>';
 
 } elseif(isset($_GET['SupplierID'])){
 

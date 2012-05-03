@@ -741,7 +741,7 @@ echo '<div class="centre">
 		<br />
 		<button type="submit" name="Cancel">' . _('Start Again') . '</button>
 		<br />
-		<button type="submit" name="Commit" value="" />' . _('Process This Order') . '</button>
+		<button type="submit" name="Commit">' . _('Process This Order') . '</button>
 	</div>
 	</form>';
 

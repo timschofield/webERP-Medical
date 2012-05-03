@@ -661,7 +661,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 	echo '</tr>';
 	echo '</table>';
 	echo '<br /><div class="centre"><button tabindex="4" type="submit" name="SearchCust">' . _('Search Now') . '</button>';
-	echo '<button tabindex="5" type="submit" value="" />' . _('Reset') . '</button></div>';
+	echo '<button tabindex="5" type="submit">' . _('Reset') . '</button></div>';
 
 	if (isset($result_CustSelect)) {
 
@@ -1966,7 +1966,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 	   		}
 			echo '<script  type="text/javascript">if (document.SelectParts) {defaultControl(document.SelectParts.part_1);}</script>';
 
-		 	echo '</table><br /><div class="centre"><button type="submit" name="QuickEntry" value="" />' . _('Quick Entry') . '</button>
+		 	echo '</table><br /><div class="centre"><button type="submit" name="QuickEntry">' . _('Quick Entry') . '</button>
 					 <button type="submit" name="PartSearch">' . _('Search Parts') . '</button></div>';
 
 	  	} elseif (isset($_POST['SelectAsset'])){
@@ -1986,7 +1986,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				echo '<option value="' . $AssetRow['assetid'] . '">' . $AssetRow['assetid'] . ' - ' . $AssetRow['description'] . '</option>';
 			}
 			echo '</select></td></tr></table>
-						<br /><div class="centre"><button type="submit" name="AssetDisposalEntered" value="" />' . _('Add Asset To Order') . '</button>
+						<br /><div class="centre"><button type="submit" name="AssetDisposalEntered">' . _('Add Asset To Order') . '</button>
 					 <button type="submit" name="PartSearch">' . _('Search Parts') . '</button></div>';
 
 		} //end of if it is a Quick Entry screen/part search or asset selection form to display

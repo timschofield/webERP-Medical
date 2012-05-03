@@ -625,7 +625,7 @@ invoices can have a zero amount but there must be a quantity to invoice */
 
 		if ($NegativesFound){
 			echo '<div class="centre">
-					<button type="submit" name=Update>' . _('Update'). '</button></div>';
+					<button type="submit" name="Update">' . _('Update'). '</button></div>';
 			include('includes/footer.inc');
 			exit;
 		}

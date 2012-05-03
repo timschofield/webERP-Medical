@@ -1113,7 +1113,7 @@ echo '<tr><td>'. _('Charge Freight Cost inc tax') .':</td>';
 echo '<td><input type="text" class="number" size="10" maxlength="12" name="FreightCost" value="' . $_SESSION['Items'.$identifier]->FreightCost . '" /></td>';
 
 if ($_SESSION['DoFreightCalc']==true){
-	echo '<td><button type="submit" name="Update" value="" />' . _('Recalc Freight Cost') . '</button></td></tr>';
+	echo '<td><button type="submit" name="Update">' . _('Recalc Freight Cost') . '</button></td></tr>';
 }
 
 if ((!isset($_POST['ShipVia']) OR $_POST['ShipVia']=='') AND isset($_SESSION['Items'.$identifier]->ShipVia)){

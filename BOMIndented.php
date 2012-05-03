@@ -252,7 +252,7 @@ if (isset($_POST['PrintPDF'])) {
 	include('includes/header.inc');
         echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
 
-	echo '<br /><br /><form action=' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . ' method="post"><table class="selection">';
+	echo '<form action=' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . ' method="post"><table class="selection">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<tr><td>' . _('Part') . ':</td>';
 	echo '<td><input type ="text" name="Part" size="20" />';
@@ -266,7 +266,7 @@ if (isset($_POST['PrintPDF'])) {
 	echo '<option selected="True" value="yes">' . _('Print With Alternating Highlighted Lines') . '</option>';
 	echo '<option value="no">' . _('Plain Print') . '</option>';
 	echo '</select></td></tr>';
-	echo '</table><br /><div class="centre"><input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>';
+	echo '</table><br /><div class="centre"><button type="submit" name="PrintPDF">' . _('Print PDF') . '</button></div><br />';
 
 	include('includes/footer.inc');
 

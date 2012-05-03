@@ -213,7 +213,7 @@ if (!isset($SelectedBankAccount)) {
 		} elseif ($myrow['invoice']==2) {
 			$DefaultBankAccount=_('Currency Default');
 		}
-		printf('<td>%s<br /><font size="2">%s</font></td>
+		printf('<td>%s<br />%s</td>
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
@@ -395,7 +395,7 @@ if (isset($SelectedBankAccount)) {
 echo '</select></td>';
 
 echo '</tr></table><br />
-		<div class="centre"><input tabindex="7" type="submit" name="submit" value="'. _('Enter Information') .'" /></div>';
+		<div class="centre"><button tabindex="7" type="submit" name="submit">'. _('Enter Information') .'</button></div><br />';
 
 echo '</form>';
 include('includes/footer.inc');

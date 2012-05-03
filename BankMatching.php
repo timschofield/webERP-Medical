@@ -149,7 +149,7 @@ echo '</select></td>
 echo '</table>
 	<br />
 	<div class="centre">
-		<input tabindex="6" type="submit" name="ShowTransactions" value="' . _('Show selected') . ' ' . $TypeName . '" />
+		<button tabindex="6" type="submit" name="ShowTransactions">' . _('Show selected') . ' ' . $TypeName . '</button>
 		<p>
 		<a href="' . $rootpath . '/BankReconciliation.php">' . _('Show reconciliation') . '</a>
 		</p>
@@ -330,8 +330,8 @@ if ($InputError !=1
 			<br />
 			<div class="centre">
 				<input type="hidden" name="RowCounter" value="' . $i . '" />
-				<input type="submit" name="Update" value="' . _('Update Matching') . '" />
-			</div>';
+				<button type="submit" name="Update">' . _('Update Matching') . '</button>
+			</div><br />';
 }
 echo '</form>';
 include('includes/footer.inc');
