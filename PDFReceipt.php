@@ -13,7 +13,9 @@ $line_height=17;
 $FontSize=16;
 $YPos= $Page_Height-$Top_Margin;
 $XPos=0;
-$pdf->addJpegFromFile($_SESSION['LogoFile'] ,$XPos,$YPos-30,0,60);
+if ($_SESSION['ShowLogoOnReceipt']==1) {
+	$pdf->addJpegFromFile($_SESSION['LogoFile'] ,$XPos,$YPos-30,0,60);
+}
 
 $sql="SELECT locationname, deladd1 FROM locations WHERE loccode='".$_SESSION['UserStockLocation']."'";
 $result=DB_query($sql, $db);
@@ -163,4 +165,3 @@ $YPos=$YPos-($line_height*2);
 
 $pdf->OutputD('Receipt-'.$_GET['FromTransNo'], 'I');
 ?>
-

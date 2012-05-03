@@ -182,6 +182,9 @@ if (isset($_POST['submit'])) {
 		if ($_SESSION['SO_AllowSameItemMultipleTimes'] != $_POST['X_SO_AllowSameItemMultipleTimes'] ) {
 			$sql[] = "UPDATE config SET confvalue = '".$_POST['X_SO_AllowSameItemMultipleTimes']."' WHERE confname = 'SO_AllowSameItemMultipleTimes'";
 		}
+		if ($_SESSION['ShowLogoOnReceipt'] != $_POST['X_ShowLogoOnReceipt'] ) {
+			$sql[] = "UPDATE config SET confvalue = '".$_POST['X_ShowLogoOnReceipt']."' WHERE confname = 'ShowLogoOnReceipt'";
+		}
 		if ($_SESSION['YearEnd'] != $_POST['X_YearEnd'] ) {
 			$sql[] = "UPDATE config SET confvalue = '".$_POST['X_YearEnd']."' WHERE confname = 'YearEnd'";
 		}
@@ -425,6 +428,13 @@ echo '<tr style="outline: solid #A49999 1px"><td>' . _('Sales Order Allows Same 
 	<option '.($_SESSION['SO_AllowSameItemMultipleTimes']?'selected ':'').'value="1">'._('Yes').'</option>
 	<option '.(!$_SESSION['SO_AllowSameItemMultipleTimes']?'selected ':'').'value="0">'._('No').'</option>
 	</select></td><td>&nbsp;</td></tr>';
+
+// ShowLogoOnReceipt
+echo '<tr style="outline: solid #A49999 1px"><td>' . _('Show the hospital logo on the receipt') . ':</td>
+	<td><select name="X_ShowLogoOnReceipt">
+	<option '.($_SESSION['ShowLogoOnReceipt']?'selected ':'').'value="1">'._('Yes').'</option>
+	<option '.(!$_SESSION['ShowLogoOnReceipt']?'selected ':'').'value="0">'._('No').'</option>
+	</select></td><td>' . _('Show the hospital logo when printing the receipt') . '</td></tr>';
 
 //'AllowOrderLineItemNarrative'
 echo '<tr style="outline: solid #A49999 1px"><td>' . _('Order Entry allows Line Item Narrative') . ':</td>
