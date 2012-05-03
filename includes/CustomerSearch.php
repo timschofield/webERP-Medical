@@ -99,15 +99,14 @@ function ShowCustomerSearchFields($rootpath, $theme, $db) {
 	}
 
 	echo '</td></tr></table><br />';
-	echo '<div class="centre"><button type="submit" name="Search">' . _('Search Now') . '</button>
-						<button type="submit" name="CSV">' . _('CSV Format') . '</button></div>';
+	echo '<div class="centre"><button type="submit" name="Search">' . _('Search Now') . '</button></div>';
 	if (isset($_SESSION['SalesmanLogin']) and $_SESSION['SalesmanLogin'] != '') {
 		prnMsg(_('Your account enables you to see only customers allocated to you'), 'warn', _('Note: Sales-person Login'));
 	}
 }
 
 function CustomerSearchSQL($db) {
-	if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR isset($_POST['Next']) OR isset($_POST['Previous'])) {
+	if (isset($_POST['Search']) OR isset($_POST['Go']) OR isset($_POST['Next']) OR isset($_POST['Previous'])) {
 		if (isset($_POST['Search'])) {
 			$_POST['PageOffset'] = 1;
 		}
@@ -235,15 +234,6 @@ function ShowReturnedCustomers($result) {
 		$RowIndex = 0;
 	}
 	if (DB_num_rows($result) <> 0) {
-		if (isset($_POST['CSV'])) {
-			$FileName = $_SESSION['reports_dir'] . '/Customer_Listing_' . Date('Y-m-d') . '.csv';
-			echo '<br /><p class="page_title_text"><a href="' . $FileName . '">' . _('Click to view the csv Search Result') . '</p>';
-			$fp = fopen($FileName, 'w');
-			while ($myrow2 = DB_fetch_array($result)) {
-				fwrite($fp, $myrow2['debtorno'] . ',' . str_replace(',', '', $myrow2['name']) . ',' . str_replace(',', '', $myrow2['address1']) . ',' . str_replace(',', '', $myrow2['address2']) . ',' . str_replace(',', '', $myrow2['address3']) . ',' . str_replace(',', '', $myrow2['address4']) . ',' . str_replace(',', '', $myrow2['contactname']) . ',' . str_replace(',', '', $myrow2['typename']) . ',' . $myrow2['phoneno'] . ',' . $myrow2['faxno'] . "\n");
-			}
-			echo '</div>';
-		}
 		if (!isset($_POST['CSV'])) {
 			DB_data_seek($result, ($_POST['PageOffset'] - 1) * $_SESSION['DisplayRecordsMax']);
 		}
