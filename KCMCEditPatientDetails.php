@@ -173,7 +173,7 @@ if (!isset($_POST['FileNumber'])) {
 	echo '</td></tr>';
 
 	echo '</td></tr></table><br />';
-	echo '<div class="centre"><input type=submit name="Search" value="' . _('Search Now') . '"></div></form>';
+	echo '<div class="centre"><button type=submit name="Search">' . _('Search Now') . '</button></div></form>';
 }
 
 if (isset($PatientResult)) {
@@ -350,7 +350,7 @@ if (isset($_POST['FileNumber'])) {
 
 	echo '<table cellpadding=3 colspan=4 class=selection>';
 
-	echo '<tr><th colspan="2"><font size="3" color="navy">'._('Update Patient Details') . '</font></th></tr>';
+	echo '<tr><th colspan="2" class="header">'._('Update Patient Details') . '</th></tr>';
 
 	echo '<tr><td>'._('File Number').':</td>';
 	echo '<td>'.$Patient[0].'</td></tr>';
@@ -449,7 +449,7 @@ if (isset($_POST['FileNumber'])) {
 		echo '</select></td></tr>';
 	}
 	echo '</table>';
-	echo '<br /><div class="centre"><button type="submit" name="Update">' . _('Update Details') . '</button></div>';
+	echo '<br /><div class="centre"><button type="submit" name="Update">' . _('Update Details') . '</button></div><br />';
 	echo '</form>';
 }
 

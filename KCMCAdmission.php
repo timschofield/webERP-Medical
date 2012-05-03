@@ -38,29 +38,29 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 		$OrderNo = GetNextTransNo(30, $db);
 
 		$HeaderSQL = "INSERT INTO salesorders (	orderno,
-											debtorno,
-											branchcode,
-											comments,
-											orddate,
-											shipvia,
-											deliverto,
-											fromstkloc,
-											deliverydate,
-											confirmeddate,
-											deliverblind)
-										VALUES (
-											'" . $OrderNo . "',
-											'" . $_POST['PatientNo'] . "',
-											'" . $_POST['BranchNo'] . "',
-											'" . DB_escape_string($_POST['Comments']) ."',
-											'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
-											'1',
-											'" . $_SESSION['UserStockLocation'] . "',
-											'" . $_SESSION['UserStockLocation'] ."',
-											'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
-											'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
-											0
-										)";
+												debtorno,
+												branchcode,
+												comments,
+												orddate,
+												shipvia,
+												deliverto,
+												fromstkloc,
+												deliverydate,
+												confirmeddate,
+												deliverblind)
+											VALUES (
+												'" . $OrderNo . "',
+												'" . $_POST['PatientNo'] . "',
+												'" . $_POST['BranchNo'] . "',
+												'" . DB_escape_string($_POST['Comments']) ."',
+												'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
+												'1',
+												'" . $_SESSION['UserStockLocation'] . "',
+												'" . $_SESSION['UserStockLocation'] ."',
+												'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
+												'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
+												0
+											)";
 
 		$ErrMsg = _('The order cannot be added because');
 		$InsertQryResult = DB_query($HeaderSQL,$db,$ErrMsg);
@@ -337,7 +337,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 }
 
 if (!isset($_POST['Patient'])) {
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
+	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Search for Patients').'</p>';
@@ -559,7 +559,7 @@ if (isset($PatientResult)) {
 				echo '<tr class="OddTableRows">';
 				$k = 1;
 			}
-			echo '<td><font size=1><button type=submit name="Patient" value="">' . $myrow['debtorno'].' '.$myrow['branchcode'] . '</button></font></td>
+			echo '<td><font size=1><button type=submit name="Patient" value="' . $myrow['debtorno'].' '.$myrow['branchcode'] . '">' . $myrow['debtorno'].' '.$myrow['branchcode'] . '</button></font></td>
 				<td><font size=1>' . $myrow['name'] . '</font></td>
 				<td><font size=1>' . $myrow['phoneno'] . '</font></td></tr>';
 			$j++;
@@ -597,7 +597,7 @@ if (isset($_POST['Patient'])) {
 	echo '<input type="hidden" name="BranchNo" value="'.$Patient[1].'" />';
 	echo '<table class="selection">';
 	echo '<tr>
-			<th colspan="3"><font size="3" color="navy">'.$mydebtorrow['name'].'</font><font size="2" color="navy"> - '.$mydebtorrow['phoneno'].'</font></th>
+			<th colspan="3" class="header">'.$mydebtorrow['name'].' - '.$mydebtorrow['phoneno'].'</th>
 			<th style="text-align: right"><a href="KCMCEditPatientDetails.php?PatientNumber='.$Patient[0].'&BranchCode='.$Patient[1].'" target="_blank">
 					<img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/user.png" alt="Patient Details" /></a>
 			</th>

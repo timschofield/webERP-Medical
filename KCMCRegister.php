@@ -107,7 +107,7 @@ if (isset($_POST['Create'])) {
 
 	echo '<table cellpadding=3 colspan=4 class=selection>';
 
-	echo '<tr><th colspan="2"><font size="3" color="navy">'._('New Patient Details') . '</font></th></tr>';
+	echo '<tr><th colspan="2" class="header">'._('New Patient Details') . '</th></tr>';
 
 	if ($_SESSION['AutoDebtorNo'] == 0) {
 		echo '<tr><td>'._('File Number').':</td>';
