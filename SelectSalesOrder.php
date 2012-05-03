@@ -593,9 +593,9 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 		}
 
 		printf('<td><button type="submit" name="SelectedStockItem" value="%s">%s</button></td>
-			<td>%s</td>
-			<td class="number">%s</td>
-			<td>%s</td>
+				<td>%s</td>
+				<td class="number">%s</td>
+				<td>%s</td>
 			</tr>',
 			$myrow['stockid'],
 			$myrow['stockid'],
@@ -974,7 +974,7 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 		}//end while loop through orders to display
 		if ($_POST['Quotations']=='Orders_Only'  AND $AuthRow['cancreate']==0){ //cancreate==0 means can create POs
 			echo '<tr><th colspan="8"></th><th></th><th colspan="2" class="number">
-				<button type="submit" name="PlacePO" onclick="return confirm(\'' . _('This will create purchase orders for all the items on the checked sales orders above, based on the preferred supplier purchasing data held in the system. Are You Absolutely Sure?') . '\');" />' . _('Place') . "\n" . _('PO') . '</button></th></tr>';
+				<button type="submit" name="PlacePO" onclick="return confirm(\'' . _('This will create purchase orders for all the items on the checked sales orders above, based on the preferred supplier purchasing data held in the system. Are You Absolutely Sure?') . '\');">' . _('Place') . "\n" . _('PO') . '</button></th></tr>';
 		}
 		echo '<tr><td colspan="9" class="number">';
 		if ($_POST['Quotations']=='Orders_Only'){

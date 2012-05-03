@@ -601,6 +601,7 @@ End Merge */
 .main_menu_unselected {
 	background: #aaa;
 	border: 1px solid #777;
+	border-radius: 5px;
 /*	position: relative; it's not a div but a table */
 	text-align: center;
 	white-space: nowrap;
@@ -608,7 +609,7 @@ End Merge */
 }
 
 .main_menu_unselected:hover {
-	background: #aaa;
+	background: #aba;
 }
 
 .main_menu_unselected a {
@@ -623,6 +624,7 @@ End Merge */
 .main_menu_selected {
 	background: #241D1D;
 	border: 1px solid #888;
+	border-radius: 5px;
 /*	position: relative; it's not a div but a table */
 	text-align: center;
 	white-space: nowrap;

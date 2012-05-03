@@ -435,7 +435,7 @@ echo '</select></td>';
 
 echo '</tr>';
 echo '</table><br />
-		<div class="centre"><button tabindex="7" type="Submit" name="submit">'. _('Enter Information') .'</button></div>';
+		<div class="centre"><button tabindex="7" type="Submit" name="submit">'. _('Enter Information') .'</button></div><br />';
 
 echo '</form>';
 include('includes/footer.inc');

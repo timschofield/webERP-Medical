@@ -321,7 +321,7 @@ if (isset($_POST['PrintPDF'])
 			<br />
 			<div class="centre">
 				<button tabindex="6" type="submit" name="PrintPDF">' . _('Print PDF') . '</button>
-			</div>';
+			</div><br />';
 	}
 	include('includes/footer.inc');
 } /*end of else not PrintPDF */

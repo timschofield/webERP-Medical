@@ -662,7 +662,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 	echo '</tr>';
 	echo '</table>';
 	echo '<br /><div class="centre"><button tabindex="4" type="submit" name="SearchCust">' . _('Search Now') . '</button>';
-	echo '<button tabindex="5" type="reset">' . _('Reset') . '</button></div>';
+	echo '<button tabindex="5" type="submit">' . _('Reset') . '</button></div>';
 
 	if (isset($result_CustSelect)) {
 

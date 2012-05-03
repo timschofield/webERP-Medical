@@ -327,7 +327,7 @@ if (isset($_POST['ShowRec']) OR isset($_POST['DoExchangeDifference'])){
 		echo '<input type="hidden" name="DoExchangeDifference" value="' . $FXStatementBalance . '" />';
 		echo '<tr><td colspan="6">' . _('Enter the actual bank statement balance') . ' (' . $BankCurrCode . ')</b></td>
 				<td class="number"><input type="text" name="BankStatementBalance" maxlength="15" size="15" value="' . $_POST['BankStatementBalance'] . '" /><td></tr>';
-		echo '<tr><td colspan="7" align="center"><input type="submit" name="PostExchangeDifference" value="' . _('Calculate and Post Exchange Difference') . '" onclick="return confirm(\'' . _('This will create a general ledger journal to write off the exchange difference in the current balance of the account. It is important that the exchange rate above reflects the current value of the bank account currency') . ' - ' . _('Are You Sure?') . '\');" /></td></tr>';
+		echo '<tr><td colspan="7" align="center"><button type="submit" name="PostExchangeDifference" onclick="return confirm(\'' . _('This will create a general ledger journal to write off the exchange difference in the current balance of the account. It is important that the exchange rate above reflects the current value of the bank account currency') . ' - ' . _('Are You Sure?') . '\');">' . _('Calculate and Post Exchange Difference') . '</button></td></tr>';
 
 	}
 
@@ -337,7 +337,7 @@ if (isset($_POST['ShowRec']) OR isset($_POST['DoExchangeDifference'])){
 
 		echo '<tr><td colspan="7"><hr></td></tr>
 				<tr><td colspan="7">' . _('It is normal for foreign currency accounts to have exchange differences that need to be reflected as the exchange rate varies. This reconciliation is prepared using the exchange rate set up in the currencies table (see the set-up tab). This table must be maintained with the current exchange rate before running the reconciliation. If you wish to create a journal to reflect the exchange difference based on the current exchange rate to correct the reconciliation to the actual bank statement balance click below.') . '</td></tr>';
-		echo '<tr><td colspan="7" align="center"><input type="submit" name="DoExchangeDifference" value="' . _('Calculate and Post Exchange Difference') . '" /></td></tr>';
+		echo '<tr><td colspan="7" align="center"><button type="submit" name="DoExchangeDifference">' . _('Calculate and Post Exchange Difference') . '</button></td></tr>';
 	}
 	echo '</table>';
 }

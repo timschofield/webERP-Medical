@@ -331,7 +331,7 @@ if ($InputError !=1
 			<div class="centre">
 				<input type="hidden" name="RowCounter" value="' . $i . '" />
 				<button type="submit" name="Update">' . _('Update Matching') . '</button>
-			</div>';
+			</div><br />';
 }
 echo '</form>';
 include('includes/footer.inc');

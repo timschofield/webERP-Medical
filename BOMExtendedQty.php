@@ -276,10 +276,10 @@ if (isset($_POST['PrintPDF'])) {
 			</select></td>
 		</tr>
 		</table>
-		<br />
 		<div class="centre">
+			<br />
 			<button type="submit" name="PrintPDF">' . _('Print PDF') . '</button>
-		</div>';
+		</div><br />';
 
 	include('includes/footer.inc');
 
