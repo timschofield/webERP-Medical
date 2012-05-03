@@ -606,11 +606,10 @@ End Merge */
 	text-align: center;
 	white-space: nowrap;
 	height: 16pt;
-	margin-bottom: 10px;
 }
 
 .main_menu_unselected:hover {
-	background: #aaa;
+	background: #aba;
 }
 
 .main_menu_unselected a {
