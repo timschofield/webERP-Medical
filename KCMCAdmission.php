@@ -356,6 +356,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 if (!isset($Patient)) {
 	ShowCustomerSearchFields($rootpath, $theme, $db);
 }
+
 if (isset($_POST['Search']) OR isset($_POST['Go1']) OR isset($_POST['Go2']) OR isset($_POST['Next']) OR isset($_POST['Previous'])) {
 
 	$PatientResult = CustomerSearchSQL($db);
