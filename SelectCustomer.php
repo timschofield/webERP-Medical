@@ -85,13 +85,9 @@ if (isset($_POST['Go1']) or isset($_POST['Go2'])) {
 	$_POST['Go'] = '';
 }
 if (!isset($_POST['PageOffset'])) {
-	$_POST['PageOffset'] = 1;
-} else {
-	if ($_POST['PageOffset'] == 0) {
-		$_POST['PageOffset'] = 1;
-	}
+	$_POST['PageOffset'] = 0;
 }
-$result=CustomerSearchSQL($db);
+$result=CustomerSearchSQL($_POST['PageOffset'], $db);
 if (!isset($_POST['Search']) and isset($_POST['JustSelectedACustomer']) and empty($_SESSION['CustomerID'])){
 	/*Need to figure out the number of the form variable that the user clicked on */
 	for ($i=0; $i< count($_POST); $i++){ //loop through the returned customers

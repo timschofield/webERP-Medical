@@ -105,7 +105,7 @@ function ShowCustomerSearchFields($rootpath, $theme, $db) {
 	}
 }
 
-function CustomerSearchSQL($db) {
+function CustomerSearchSQL($OffSet, $db) {
 	if (isset($_POST['Search']) OR isset($_POST['Go']) OR isset($_POST['Next']) OR isset($_POST['Previous'])) {
 		if (isset($_POST['Search'])) {
 			$_POST['PageOffset'] = 1;
@@ -173,6 +173,7 @@ function CustomerSearchSQL($db) {
 			$SQL.= " AND custbranch.salesman='" . $_SESSION['SalesmanLogin'] . "'";
 		}
 		$SQL.= " ORDER BY debtorsmaster.name";
+		$SQL.= " LIMIT ".($OffSet*$_SESSION['DisplayRecordsMax']).", ".$_SESSION['DisplayRecordsMax'];
 		$ErrMsg = _('The searched customer records requested cannot be retrieved because');
 
 		$result = DB_query($SQL, $db, $ErrMsg);
