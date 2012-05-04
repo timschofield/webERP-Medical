@@ -3,7 +3,7 @@
 function ShowCustomerSearchFields($rootpath, $theme, $db) {
 	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Search for Customers').'</p>';
+	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Search for Patients').'</p>';
 	echo '<table cellpadding="3" class="selection">';
 	echo '<tr><td colspan="2">' . _('Enter a partial Name') . ':</td><td>';
 	if (isset($_POST['Keywords'])) {
@@ -99,7 +99,7 @@ function ShowCustomerSearchFields($rootpath, $theme, $db) {
 	}
 
 	echo '</td></tr></table><br />';
-	echo '<div class="centre"><button type="submit" name="Search">' . _('Search Now') . '</button></div>';
+	echo '<div class="centre"><button type="submit" name="Search">' . _('Search Now') . '</button></div><br />';
 	if (isset($_SESSION['SalesmanLogin']) and $_SESSION['SalesmanLogin'] != '') {
 		prnMsg(_('Your account enables you to see only customers allocated to you'), 'warn', _('Note: Sales-person Login'));
 	}
@@ -109,7 +109,6 @@ function CustomerSearchSQL($db) {
 	if (isset($_POST['Search']) OR isset($_POST['Go1']) OR isset($_POST['Go2']) OR isset($_POST['Next']) OR isset($_POST['Previous'])) {
 		if (isset($_POST['Go1']) or isset($_POST['Go2'])) {
 			$_POST['PageOffset'] = (isset($_POST['Go1']) ? $_POST['PageOffset1'] : $_POST['PageOffset2']);
-			echo $_POST['PageOffset'];
 			$_POST['Go'] = '';
 		}
 		if (!isset($_POST['PageOffset'])) {

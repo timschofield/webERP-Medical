@@ -5,10 +5,27 @@ $title = _('Billing Patient Registrations');
 include('includes/header.inc');
 include('includes/SQL_CommonFunctions.inc');
 include('includes/GetSalesTransGLCodes.inc');
+include('includes/CustomerSearch.php');
 
 if (isset($_GET['New']) or isset($_POST['Cancel'])) {
 	unset($_POST['SubmitCash']);
 	unset($_POST['Patient']);
+}
+
+if (!isset($_POST['Search']) and !isset($_POST['Next']) and !isset($_POST['Previous']) and !isset($_POST['Go1']) and !isset($_POST['Go2']) and isset($_POST['JustSelectedACustomer']) and empty($_POST['Patient'])){
+	/*Need to figure out the number of the form variable that the user clicked on */
+	for ($i=0; $i< count($_POST); $i++){ //loop through the returned customers
+		if(isset($_POST['SubmitCustomerSelection'.$i])){
+			break;
+		}
+	}
+	if ($i==count($_POST)){
+		prnMsg(_('Unable to identify the selected customer'),'error');
+	} else {
+		$Patient[0] = $_POST['SelectedCustomer'.$i];
+		$Patient[1] = $_POST['SelectedBranch'.$i];
+		unset($_POST['Search']);
+	}
 }
 
 if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
@@ -336,166 +353,12 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 	}
 }
 
-if (!isset($_POST['Patient'])) {
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
-	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-
-	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Search for Patients').'</p>';
-	echo '<table cellpadding=3 colspan=4 class=selection>';
-	echo '<tr><td colspan=2>' . _('Enter a partial Name') . ':</td><td>';
-	if (isset($_POST['Keywords'])) {
-		echo '<input type="Text" name="Keywords" value="' . $_POST['Keywords'] . '" size=20 maxlength=25>';
-	} else {
-		echo '<input type="Text" name="Keywords" size=20 maxlength=25>';
-	}
-	echo '</td><td><font size=3><b>' . _('OR') . '</b></font></td><td>' . _('Enter a partial Code') . ':</td><td>';
-	if (isset($_POST['CustCode'])) {
-		echo '<input type="Text" name="CustCode" value="' . $_POST['CustCode'] . '" size=15 maxlength=18>';
-	} else {
-		echo '<input type="Text" name="CustCode" size=15 maxlength=18>';
-	}
-	echo '</td></tr><tr><td><font size=3><b>' . _('OR') . '</b></font></td><td>' . _('Enter a partial Phone Number') . ':</td><td>';
-	if (isset($_POST['CustPhone'])) {
-		echo '<input type="Text" name="CustPhone" value="' . $_POST['CustPhone'] . '" size=15 maxlength=18>';
-	} else {
-		echo '<input type="Text" name="CustPhone" size=15 maxlength=18>';
-	}
-	echo '</td>';
-	echo '<td><font size=3><b>' . _('OR') . '</b></font></td><td>' . _('Enter part of the Address') . ':</td><td>';
-	if (isset($_POST['CustAdd'])) {
-		echo '<input type="Text" name="CustAdd" value="' . $_POST['CustAdd'] . '" size=20 maxlength=25>';
-	} else {
-		echo '<input type="Text" name="CustAdd" size=20 maxlength=25>';
-	}
-	echo '</td></tr>';
-
-	echo '</td></tr></table><br />';
-	echo '<div class="centre"><button type=submit name="Search">' . _('Search Now') . '</button></div></form>';
+if (!isset($Patient)) {
+	ShowCustomerSearchFields($rootpath, $theme, $db);
 }
+if (isset($_POST['Search']) OR isset($_POST['Go1']) OR isset($_POST['Go2']) OR isset($_POST['Next']) OR isset($_POST['Previous'])) {
 
-if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR isset($_POST['Next']) OR isset($_POST['Previous'])) {
-	if (isset($_POST['Search'])) {
-		$_POST['PageOffset'] = 1;
-	}
-	if ($_POST['Keywords'] AND (($_POST['CustCode']) OR ($_POST['CustPhone']))) {
-		$msg = _('Search Result: Customer Name has been used in search') . '<br>';
-		$_POST['Keywords'] = strtoupper($_POST['Keywords']);
-	}
-	if ($_POST['CustCode'] AND $_POST['CustPhone'] == "" AND isset($_POST['CustType']) AND $_POST['Keywords'] == "") {
-		$msg = _('Search Result: Customer Code has been used in search') . '<br>';
-	}
-	if (($_POST['CustPhone'])) {
-		$msg = _('Search Result: Customer Phone has been used in search') . '<br>';
-	}
-	if (($_POST['CustAdd'])) {
-		$msg = _('Search Result: Customer Address has been used in search') . '<br>';
-	}
-	if ($_POST['CustPhone'] == "" AND $_POST['CustCode'] == "" AND $_POST['Keywords'] == "" AND $_POST['CustAdd'] == "") {
-		$msg = _('Search Result: Customer Type has been used in search') . '<br>';
-	}
-	if (($_POST['Keywords'] == "") AND ($_POST['CustCode'] == "") AND ($_POST['CustPhone'] == "") AND ($_POST['CustAdd'] == "")) {
-		$SQL = "SELECT debtorsmaster.debtorno,
-				debtorsmaster.name,
-				debtorsmaster.address1,
-				debtorsmaster.address2,
-				debtorsmaster.address3,
-				debtorsmaster.address4,
-				custbranch.branchcode,
-				custbranch.brname,
-				custbranch.contactname,
-				debtortype.typename,
-				custbranch.phoneno,
-				custbranch.faxno
-			FROM debtorsmaster LEFT JOIN custbranch
-				ON debtorsmaster.debtorno = custbranch.debtorno, debtortype
-			WHERE debtorsmaster.typeid = debtortype.typeid";
-	} else {
-		if (strlen($_POST['Keywords']) > 0) {
-			//using the customer name
-			$_POST['Keywords'] = strtoupper(trim($_POST['Keywords']));
-			//insert wildcard characters in spaces
-			$SearchString = '%' . str_replace(' ', '%', $_POST['Keywords']) . '%';
-			$SQL = "SELECT debtorsmaster.debtorno,
-				debtorsmaster.name,
-				debtorsmaster.address1,
-				debtorsmaster.address2,
-				debtorsmaster.address3,
-				debtorsmaster.address4,
-				custbranch.branchcode,
-				custbranch.brname,
-				custbranch.contactname,
-				debtortype.typename,
-				custbranch.phoneno,
-				custbranch.faxno
-			FROM debtorsmaster LEFT JOIN custbranch
-				ON debtorsmaster.debtorno = custbranch.debtorno, debtortype
-			WHERE debtorsmaster.name " . LIKE . " '$SearchString'
-			AND debtorsmaster.typeid = debtortype.typeid";
-		} elseif (strlen($_POST['CustCode']) > 0) {
-			$_POST['CustCode'] = strtoupper(trim($_POST['CustCode']));
-			$SQL = "SELECT debtorsmaster.debtorno,
-				debtorsmaster.name,
-				debtorsmaster.address1,
-				debtorsmaster.address2,
-				debtorsmaster.address3,
-				debtorsmaster.address4,
-				custbranch.branchcode,
-				custbranch.brname,
-				custbranch.contactname,
-				debtortype.typename,
-				custbranch.phoneno,
-				custbranch.faxno
-			FROM debtorsmaster LEFT JOIN custbranch
-				ON debtorsmaster.debtorno = custbranch.debtorno, debtortype
-			WHERE debtorsmaster.debtorno " . LIKE . " '%" . $_POST['CustCode'] . "%'
-			AND debtorsmaster.typeid = debtortype.typeid";
-		} elseif (strlen($_POST['CustPhone']) > 0) {
-			$SQL = "SELECT debtorsmaster.debtorno,
-				debtorsmaster.name,
-				debtorsmaster.address1,
-				debtorsmaster.address2,
-				debtorsmaster.address3,
-				debtorsmaster.address4,
-				custbranch.branchcode,
-				custbranch.brname,
-				custbranch.contactname,
-				debtortype.typename,
-				custbranch.phoneno,
-				custbranch.faxno
-			FROM debtorsmaster LEFT JOIN custbranch
-				ON debtorsmaster.debtorno = custbranch.debtorno, debtortype
-			WHERE custbranch.phoneno " . LIKE . " '%" . $_POST['CustPhone'] . "%'
-			AND debtorsmaster.typeid = debtortype.typeid";
-			// Added an option to search by address. I tried having it search address1, address2, address3, and address4, but my knowledge of MYSQL is limited.  This will work okay if you select the CSV Format then you can search though the address1 field. I would like to extend this to all 4 address fields. Gilles Deacur
-
-		} elseif (strlen($_POST['CustAdd']) > 0) {
-			$SQL = "SELECT debtorsmaster.debtorno,
-				debtorsmaster.name,
-				debtorsmaster.address1,
-				debtorsmaster.address2,
-				debtorsmaster.address3,
-				debtorsmaster.address4,
-				custbranch.branchcode,
-				custbranch.brname,
-				custbranch.contactname,
-				debtortype.typename,
-				custbranch.phoneno,
-				custbranch.faxno
-			FROM debtorsmaster LEFT JOIN custbranch
-				ON debtorsmaster.debtorno = custbranch.debtorno, debtortype
-			WHERE CONCAT_WS(debtorsmaster.address1,debtorsmaster.address2,debtorsmaster.address3,debtorsmaster.address4) " . LIKE . " '%" . $_POST['CustAdd'] . "%'
-			AND debtorsmaster.typeid = debtortype.typeid";
-			// End added search feature. Gilles Deacur
-
-		}
-	} //one of keywords or custcode or custphone was more than a zero length string
-	if ($_SESSION['SalesmanLogin'] != '') {
-		$SQL.= " AND custbranch.salesman='" . $_SESSION['SalesmanLogin'] . "'";
-	}
-	$SQL.= ' ORDER BY debtorsmaster.name';
-	$ErrMsg = _('The searched patient records requested cannot be retrieved because');
-
-	$PatientResult = DB_query($SQL, $db, $ErrMsg);
+	$PatientResult = CustomerSearchSQL($db);
 	if (DB_num_rows($PatientResult) == 0) {
 		prnMsg(_('No patient records contain the selected text') . ' - ' . _('please alter your search criteria and try again'), 'info');
 		echo '<br />';
@@ -503,81 +366,10 @@ if (isset($_POST['Search']) OR isset($_POST['CSV']) OR isset($_POST['Go']) OR is
 } //end of if search
 
 if (isset($PatientResult)) {
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '?' . SID . '" method=post>';
-	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	unset($_SESSION['CustomerID']);
-	$ListCount = DB_num_rows($result);
-	$ListPageMax = ceil($ListCount / $_SESSION['DisplayRecordsMax']);
-	if (isset($_POST['Next'])) {
-		if ($_POST['PageOffset'] < $ListPageMax) {
-			$_POST['PageOffset'] = $_POST['PageOffset'] + 1;
-		}
-	}
-	if (isset($_POST['Previous'])) {
-		if ($_POST['PageOffset'] > 1) {
-			$_POST['PageOffset'] = $_POST['PageOffset'] - 1;
-		}
-	}
-	echo '<input type="hidden" name="PageOffset" value="' . $_POST['PageOffset'] . '" />';
-	if ($ListPageMax > 1) {
-		echo '<p><div class=centre>&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
-		echo '<select name="PageOffset1">';
-		$ListPage = 1;
-		while ($ListPage <= $ListPageMax) {
-			if ($ListPage == $_POST['PageOffset']) {
-				echo '<option value=' . $ListPage . ' selected>' . $ListPage . '</option>';
-			} else {
-				echo '<option value=' . $ListPage . '>' . $ListPage . '</option>';
-			}
-			$ListPage++;
-		}
-		echo '</select>
-				<input type=submit name="Go1" value="' . _('Go') . '">
-				<input type=submit name="Previous" value="' . _('Previous') . '">
-				<input type=submit name="Next" value="' . _('Next') . '">';
-		echo '</div>';
-	}
-	echo '<br /><table cellpadding=2 colspan=7 class=selection>';
-	$TableHeader = '<tr>
-				<th>' . _('Code') . '</th>
-				<th>' . _('Patient Name') . '</th>
-				<th>' . _('Phone') . '</th>
-			</tr>';
-	echo $TableHeader;
-	$j = 1;
-	$k = 0; //row counter to determine background colour
-	$RowIndex = 0;
-	if (DB_num_rows($PatientResult) <> 0) {
-		if (!isset($_POST['CSV'])) {
-			DB_data_seek($result, ($_POST['PageOffset'] - 1) * $_SESSION['DisplayRecordsMax']);
-		}
-		while (($myrow = DB_fetch_array($PatientResult)) AND ($RowIndex <> $_SESSION['DisplayRecordsMax'])) {
-			if ($k == 1) {
-				echo '<tr class="EvenTableRows">';
-				$k = 0;
-			} else {
-				echo '<tr class="OddTableRows">';
-				$k = 1;
-			}
-			echo '<td><font size=1><button type=submit name="Patient" value="' . $myrow['debtorno'].' '.$myrow['branchcode'] . '">' . $myrow['debtorno'].' '.$myrow['branchcode'] . '</button></font></td>
-				<td><font size=1>' . $myrow['name'] . '</font></td>
-				<td><font size=1>' . $myrow['phoneno'] . '</font></td></tr>';
-			$j++;
-			if ($j == 11 AND ($RowIndex + 1 != $_SESSION['DisplayRecordsMax'])) {
-				$j = 1;
-				echo $TableHeader;
-			}
-			$RowIndex++;
-			//end of page full new headings if
-
-		}
-		//end of while loop
-		echo '</table></form>';
-	}
+	ShowReturnedCustomers($PatientResult);
 }
 
-if (isset($_POST['Patient'])) {
-	$Patient=explode(' ', $_POST['Patient']);
+if (isset($Patient)) {
 	$sql="SELECT name,
 				clientsince,
 				salestype,
