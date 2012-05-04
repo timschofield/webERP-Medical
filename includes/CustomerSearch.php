@@ -106,19 +106,13 @@ function ShowCustomerSearchFields($rootpath, $theme, $db) {
 }
 
 function CustomerSearchSQL($db) {
-	if (isset($_POST['Search']) OR isset($_POST['Go']) OR isset($_POST['Next']) OR isset($_POST['Previous'])) {
-		$ListPageMax = ceil($_SESSION['ListCount'] / $_SESSION['DisplayRecordsMax']);
-		if (isset($_POST['Next'])) {
-			if ($_POST['PageOffset'] < $ListPageMax) {
-				$_POST['PageOffset'] = $_POST['PageOffset'] + 1;
-			}
+	if (isset($_POST['Search']) OR isset($_POST['Go1']) OR isset($_POST['Go2']) OR isset($_POST['Next']) OR isset($_POST['Previous'])) {
+		if (isset($_POST['Go1']) or isset($_POST['Go2'])) {
+			$_POST['PageOffset'] = (isset($_POST['Go1']) ? $_POST['PageOffset1'] : $_POST['PageOffset2']);
+			echo $_POST['PageOffset'];
+			$_POST['Go'] = '';
 		}
-		if (isset($_POST['Previous'])) {
-			if ($_POST['PageOffset'] > 1) {
-				$_POST['PageOffset'] = $_POST['PageOffset'] - 1;
-			}
-		}
-		if (isset($_POST['Search'])) {
+		if (!isset($_POST['PageOffset'])) {
 			$_POST['PageOffset'] = 1;
 		}
 		if ($_POST['Keywords'] AND (($_POST['CustCode']) OR ($_POST['CustPhone']) OR ($_POST['CustType']))) {
@@ -185,8 +179,19 @@ function CustomerSearchSQL($db) {
 		}
 		$CountResult=DB_query($SQL, $db);
 		$_SESSION['ListCount']=DB_num_rows($CountResult);
+		$_SESSION['ListPageMax'] = ceil($_SESSION['ListCount'] / $_SESSION['DisplayRecordsMax']);
+		if (isset($_POST['Next'])) {
+			if ($_POST['PageOffset'] < $_SESSION['ListPageMax']) {
+				$_POST['PageOffset'] = $_POST['PageOffset'] + 1;
+			}
+		}
+		if (isset($_POST['Previous'])) {
+			if ($_POST['PageOffset'] > 1) {
+				$_POST['PageOffset'] = $_POST['PageOffset'] - 1;
+			}
+		}
 		$SQL.= " ORDER BY debtorsmaster.name";
-		$SQL.= " LIMIT ".($_POST['PageOffset']*$_SESSION['DisplayRecordsMax']).", ".$_SESSION['DisplayRecordsMax'];
+		$SQL.= " LIMIT ".(($_POST['PageOffset']-1)*$_SESSION['DisplayRecordsMax']).", ".$_SESSION['DisplayRecordsMax'];
 		$ErrMsg = _('The searched customer records requested cannot be retrieved because');
 
 		$result = DB_query($SQL, $db, $ErrMsg);
@@ -201,11 +206,11 @@ function CustomerSearchSQL($db) {
 function ShowReturnedCustomers($result) {
 	unset($_SESSION['CustomerID']);
 	echo '<input type="hidden" name="PageOffset" value="' . $_POST['PageOffset'] . '" />';
-	if ($ListPageMax > 1) {
-		echo '<br /><div class="centre">&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
+	if ($_SESSION['ListPageMax'] > 1) {
+		echo '<br /><div class="centre">&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $_SESSION['ListPageMax'] . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
 		echo '<select name="PageOffset1">';
 		$ListPage = 1;
-		while ($ListPage <= $ListPageMax) {
+		while ($ListPage <= $_SESSION['ListPageMax']) {
 			if ($ListPage == $_POST['PageOffset']) {
 				echo '<option value=' . $ListPage . ' selected>' . $ListPage . '</option>';
 			} else {
@@ -263,11 +268,11 @@ function ShowReturnedCustomers($result) {
 	}
 
 	//end if results to show
-	if (isset($ListPageMax) and $ListPageMax > 1) {
-		echo '<br /><div class="centre">&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
+	if (isset($_SESSION['ListPageMax']) and $_SESSION['ListPageMax'] > 1) {
+		echo '<br /><div class="centre">&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $_SESSION['ListPageMax'] . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
 		echo '<select name="PageOffset2">';
 		$ListPage = 1;
-		while ($ListPage <= $ListPageMax) {
+		while ($ListPage <= $_SESSION['ListPageMax']) {
 			if ($ListPage == $_POST['PageOffset']) {
 				echo '<option value=' . $ListPage . ' selected>' . $ListPage . '</option>';
 			} else {
@@ -283,6 +288,7 @@ function ShowReturnedCustomers($result) {
 	//end if results to show
 	echo '</div></form>';
 	unset($_SESSION['ListCount']);
+	unset($_SESSION['ListPageMax']);
 }
 
 ?>

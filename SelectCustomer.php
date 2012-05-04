@@ -80,15 +80,8 @@ if ($_SESSION['geocode_integration'] == 1 AND $_SESSION['CustomerID'] != "") {
 }
 unset($result);
 $msg = '';
-if (isset($_POST['Go1']) or isset($_POST['Go2'])) {
-	$_POST['PageOffset'] = (isset($_POST['Go1']) ? $_POST['PageOffset1'] : $_POST['PageOffset2']);
-	$_POST['Go'] = '';
-}
-if (!isset($_POST['PageOffset'])) {
-	$_POST['PageOffset'] = 0;
-}
 $result=CustomerSearchSQL($db);
-if (!isset($_POST['Search']) and isset($_POST['JustSelectedACustomer']) and empty($_SESSION['CustomerID'])){
+if (!isset($_POST['Search']) and !isset($_POST['Next']) and !isset($_POST['Previous']) and !isset($_POST['Go1']) and !isset($_POST['Go2']) and isset($_POST['JustSelectedACustomer']) and empty($_SESSION['CustomerID'])){
 	/*Need to figure out the number of the form variable that the user clicked on */
 	for ($i=0; $i< count($_POST); $i++){ //loop through the returned customers
 		if(isset($_POST['SubmitCustomerSelection'.$i])){
@@ -104,7 +97,7 @@ if (!isset($_POST['Search']) and isset($_POST['JustSelectedACustomer']) and empt
 	}
 }
 
-if ($_SESSION['CustomerID'] != '' AND !isset($_POST['Search']) AND !isset($_POST['CSV'])) {
+if ($_SESSION['CustomerID'] != '' AND !isset($_POST['Search'])) {
 	$SQL = "SELECT debtorsmaster.name,
 					debtorsmaster.currcode,
 					custbranch.phoneno
@@ -162,7 +155,7 @@ if ($_SESSION['CustomerID'] != '' AND !isset($_POST['Search']) AND !isset($_POST
 	}
 	echo '</td></tr></table>';
 }
-if (mb_strlen($msg)>1){
+if (strlen($msg)>1){
    prnMsg($msg, 'info');
 }
 ShowCustomerSearchFields($rootpath, $theme, $db);
