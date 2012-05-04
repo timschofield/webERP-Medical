@@ -284,7 +284,7 @@ if (!isset($_POST['Submit'])) {
 		_('Search') . '" alt="" />' . ' ' . _('Select Insurance Company').'</p>';
 
 	echo '<table class="selection">';
-	$sql="SELECT typeid FROM debtortype WHERE typename='Insurance'";
+	$sql="SELECT typeid FROM debtortype WHERE typename like '%Insurance%'";
 	$result=DB_query($sql, $db);
 	$myrow=DB_fetch_array($result);
 	$InsuranceTypeID=$myrow['typeid'];
@@ -335,7 +335,7 @@ if (!isset($_POST['Submit'])) {
 	}
 
 	echo '</select></td></tr></table><br />';
-	echo '<div class="centre"><input type="submit" name="Submit" value="' . _('Show Invoices').'" /></div>';
+	echo '<div class="centre"><button type="submit" name="Submit">' . _('Show Invoices').'</button></div><br />';
 	echo '</form>';
 } else {
 
@@ -411,7 +411,7 @@ if (!isset($_POST['Submit'])) {
 	}
 	echo '<input type="hidden" name="Company" value="'.$_POST['Company'].'" />';
 	echo '</table><br />';
-	echo '<div class="centre"><input type="submit" name="Process" value="' . _('Process Invoice') . '" /></div>';
+	echo '<div class="centre"><button type="submit" name="Process">' . _('Process Invoice') . '</button></div><br />';
 	echo '</form>';
 }
 

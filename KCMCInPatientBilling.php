@@ -62,7 +62,7 @@ if (isset($_POST['ChangeItem']) and $_POST['StockID']!='') {
 } else if (isset($_POST['ChangeItem']) and $_POST['StockID']=='' and !isset($_POST['AddDoctorFee'])) {
 	$_SESSION['Items']['Value']-=filter_currency_input($_POST['DoctorsFee']);
 }
-if ($_POST['Dispensary']!='') {
+if (isset($_POST['Dispensary'])) {
 	$_SESSION['Items']['Dispensary']=$_POST['Dispensary'];
 } else {
 	$_SESSION['Items']['Dispensary']=$_SESSION['UserStockLocation'];
@@ -603,7 +603,6 @@ if (isset($Patient)) {
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<input type="hidden" name="PriceList" value="'.$mydebtorrow['salestype'].'" />';
-	echo '<input type="hidden" name="Patient" value="'.$_POST['Patient'].'" />';
 	echo '<input type="hidden" name="PatientNo" value="'.$Patient[0].'" />';
 	echo '<input type="hidden" name="BranchNo" value="'.$Patient[1].'" />';
 	echo '<table class="selection">';
