@@ -1,5 +1,4 @@
 <?php
-$PageSecurity=1;
 include('includes/session.inc');
 $title = _('Monthly Insurance Company Billing');
 include('includes/header.inc');

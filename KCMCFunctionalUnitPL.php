@@ -1,7 +1,6 @@
 <?php
 
 /* $Id$*/
-$PageSecurity=1;
 include ('includes/session.inc');
 $title = _('Income and Expenditure by Functional Unit');
 include('includes/SQL_CommonFunctions.inc');

@@ -136,6 +136,13 @@ function CustomerSearchSQL($db) {
 							ON debtorsmaster.debtorno = custbranch.debtorno
 						INNER JOIN debtortype
 							ON debtorsmaster.typeid = debtortype.typeid";
+			$CountSQL = "SELECT COUNT(debtorsmaster.debtorno) as totaldebtors
+							FROM debtorsmaster
+							LEFT JOIN custbranch
+								ON debtorsmaster.debtorno = custbranch.debtorno
+							INNER JOIN debtortype
+								ON debtorsmaster.typeid = debtortype.typeid";
+
 		} else {
 			$SearchKeywords = mb_strtoupper(trim(str_replace(' ', '%', $_POST['Keywords'])));
 			$_POST['CustCode'] = mb_strtoupper(trim($_POST['CustCode']));
@@ -166,6 +173,20 @@ function CustomerSearchSQL($db) {
 							OR debtorsmaster.address3 "  . LIKE . " '%" . $_POST['CustAdd'] . "%'
 							OR debtorsmaster.address4 "  . LIKE . " '%" . $_POST['CustAdd'] . "%')";
 
+			$CountSQL = "SELECT COUNT(debtorsmaster.debtorno) as totaldebtors
+						FROM debtorsmaster
+						INNER JOIN debtortype
+							ON debtorsmaster.typeid = debtortype.typeid
+						LEFT JOIN custbranch
+							ON debtorsmaster.debtorno = custbranch.debtorno
+						WHERE debtorsmaster.name " . LIKE . " '%" . $SearchKeywords . "%'
+							AND debtorsmaster.debtorno " . LIKE . " '%" . $_POST['CustCode'] . "%'
+							AND custbranch.phoneno " . LIKE . " '%" . $_POST['CustPhone'] . "%'
+							AND (debtorsmaster.address1 " . LIKE . " '%" . $_POST['CustAdd'] . "%'
+							OR debtorsmaster.address2 " . LIKE . " '%" . $_POST['CustAdd'] . "%'
+							OR debtorsmaster.address3 "  . LIKE . " '%" . $_POST['CustAdd'] . "%'
+							OR debtorsmaster.address4 "  . LIKE . " '%" . $_POST['CustAdd'] . "%')";
+
 			if (mb_strlen($_POST['CustType']) > 0 AND $_POST['CustType']!='ALL') {
 				$SQL .= " AND debtortype.typename = '" . $_POST['CustType'] . "'";
 			}
@@ -176,8 +197,9 @@ function CustomerSearchSQL($db) {
 		if ($_SESSION['SalesmanLogin'] != '') {
 			$SQL.= " AND custbranch.salesman='" . $_SESSION['SalesmanLogin'] . "'";
 		}
-		$CountResult=DB_query($SQL, $db);
-		$_SESSION['ListCount']=DB_num_rows($CountResult);
+		$CountResult=DB_query($CountSQL, $db);
+		$CountRow=DB_fetch_array($CountResult);
+		$_SESSION['ListCount']=$CountRow['totaldebtors'];
 		$_SESSION['ListPageMax'] = ceil($_SESSION['ListCount'] / $_SESSION['DisplayRecordsMax']);
 		if (isset($_POST['Next'])) {
 			if ($_POST['PageOffset'] < $_SESSION['ListPageMax']) {

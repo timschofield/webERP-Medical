@@ -1,5 +1,4 @@
 <?php
-$PageSecurity=1;
 include('includes/session.inc');
 $title = _('Billing For Radiology Tests');
 include('includes/header.inc');

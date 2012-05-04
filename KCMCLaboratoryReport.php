@@ -1,7 +1,6 @@
 <?php
 
 /* $Id$*/
-$PageSecurity=1;
 include ('includes/session.inc');
 $title = _('Financial Report for Laboratory Department');
 
