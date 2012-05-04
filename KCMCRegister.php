@@ -212,7 +212,7 @@ if (isset($_POST['Create'])) {
 				FROM debtorsmaster
 				LEFT JOIN debtortype
 				ON debtorsmaster.typeid=debtortype.typeid
-				WHERE debtortype.typename='Insurance'";
+				WHERE debtortype.typename like '%Insurance%'";
 	$result=DB_query($sql, $db);
 
 	echo '<tr><td>'._('Insurance Company').':</td>';

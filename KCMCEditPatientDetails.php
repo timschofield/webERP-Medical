@@ -206,7 +206,7 @@ if (isset($Patient)) {
 				FROM debtorsmaster
 				LEFT JOIN debtortype
 				ON debtorsmaster.typeid=debtortype.typeid
-				WHERE debtortype.typename='Insurance'";
+				WHERE debtortype.typename like '%Insurance%'";
 	$InsuranceResult=DB_query($sql, $db);
 
 	echo '<tr><td>'._('Insurance Company').':</td>';
