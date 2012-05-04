@@ -105,8 +105,19 @@ function ShowCustomerSearchFields($rootpath, $theme, $db) {
 	}
 }
 
-function CustomerSearchSQL($OffSet, $db) {
+function CustomerSearchSQL($db) {
 	if (isset($_POST['Search']) OR isset($_POST['Go']) OR isset($_POST['Next']) OR isset($_POST['Previous'])) {
+		$ListPageMax = ceil($_SESSION['ListCount'] / $_SESSION['DisplayRecordsMax']);
+		if (isset($_POST['Next'])) {
+			if ($_POST['PageOffset'] < $ListPageMax) {
+				$_POST['PageOffset'] = $_POST['PageOffset'] + 1;
+			}
+		}
+		if (isset($_POST['Previous'])) {
+			if ($_POST['PageOffset'] > 1) {
+				$_POST['PageOffset'] = $_POST['PageOffset'] - 1;
+			}
+		}
 		if (isset($_POST['Search'])) {
 			$_POST['PageOffset'] = 1;
 		}
@@ -175,7 +186,7 @@ function CustomerSearchSQL($OffSet, $db) {
 		$CountResult=DB_query($SQL, $db);
 		$_SESSION['ListCount']=DB_num_rows($CountResult);
 		$SQL.= " ORDER BY debtorsmaster.name";
-		$SQL.= " LIMIT ".($OffSet*$_SESSION['DisplayRecordsMax']).", ".$_SESSION['DisplayRecordsMax'];
+		$SQL.= " LIMIT ".($_POST['PageOffset']*$_SESSION['DisplayRecordsMax']).", ".$_SESSION['DisplayRecordsMax'];
 		$ErrMsg = _('The searched customer records requested cannot be retrieved because');
 
 		$result = DB_query($SQL, $db, $ErrMsg);
@@ -189,17 +200,6 @@ function CustomerSearchSQL($OffSet, $db) {
 
 function ShowReturnedCustomers($result) {
 	unset($_SESSION['CustomerID']);
-	$ListPageMax = ceil($_SESSION['ListCount'] / $_SESSION['DisplayRecordsMax']);
-	if (isset($_POST['Next'])) {
-		if ($_POST['PageOffset'] < $ListPageMax) {
-			$_POST['PageOffset'] = $_POST['PageOffset'] + 1;
-		}
-	}
-	if (isset($_POST['Previous'])) {
-		if ($_POST['PageOffset'] > 1) {
-			$_POST['PageOffset'] = $_POST['PageOffset'] - 1;
-		}
-	}
 	echo '<input type="hidden" name="PageOffset" value="' . $_POST['PageOffset'] . '" />';
 	if ($ListPageMax > 1) {
 		echo '<br /><div class="centre">&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
