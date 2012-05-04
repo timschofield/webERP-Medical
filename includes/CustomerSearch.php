@@ -105,8 +105,19 @@ function ShowCustomerSearchFields($rootpath, $theme, $db) {
 	}
 }
 
-function CustomerSearchSQL($OffSet, $db) {
+function CustomerSearchSQL($db) {
 	if (isset($_POST['Search']) OR isset($_POST['Go']) OR isset($_POST['Next']) OR isset($_POST['Previous'])) {
+		$ListPageMax = ceil($_SESSION['ListCount'] / $_SESSION['DisplayRecordsMax']);
+		if (isset($_POST['Next'])) {
+			if ($_POST['PageOffset'] < $ListPageMax) {
+				$_POST['PageOffset'] = $_POST['PageOffset'] + 1;
+			}
+		}
+		if (isset($_POST['Previous'])) {
+			if ($_POST['PageOffset'] > 1) {
+				$_POST['PageOffset'] = $_POST['PageOffset'] - 1;
+			}
+		}
 		if (isset($_POST['Search'])) {
 			$_POST['PageOffset'] = 1;
 		}
@@ -172,8 +183,10 @@ function CustomerSearchSQL($OffSet, $db) {
 		if ($_SESSION['SalesmanLogin'] != '') {
 			$SQL.= " AND custbranch.salesman='" . $_SESSION['SalesmanLogin'] . "'";
 		}
+		$CountResult=DB_query($SQL, $db);
+		$_SESSION['ListCount']=DB_num_rows($CountResult);
 		$SQL.= " ORDER BY debtorsmaster.name";
-		$SQL.= " LIMIT ".($OffSet*$_SESSION['DisplayRecordsMax']).", ".$_SESSION['DisplayRecordsMax'];
+		$SQL.= " LIMIT ".($_POST['PageOffset']*$_SESSION['DisplayRecordsMax']).", ".$_SESSION['DisplayRecordsMax'];
 		$ErrMsg = _('The searched customer records requested cannot be retrieved because');
 
 		$result = DB_query($SQL, $db, $ErrMsg);
@@ -187,57 +200,40 @@ function CustomerSearchSQL($OffSet, $db) {
 
 function ShowReturnedCustomers($result) {
 	unset($_SESSION['CustomerID']);
-	$ListCount = DB_num_rows($result);
-	$ListPageMax = ceil($ListCount / $_SESSION['DisplayRecordsMax']);
-	if (!isset($_POST['CSV'])) {
-		if (isset($_POST['Next'])) {
-			if ($_POST['PageOffset'] < $ListPageMax) {
-				$_POST['PageOffset'] = $_POST['PageOffset'] + 1;
+	echo '<input type="hidden" name="PageOffset" value="' . $_POST['PageOffset'] . '" />';
+	if ($ListPageMax > 1) {
+		echo '<br /><div class="centre">&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
+		echo '<select name="PageOffset1">';
+		$ListPage = 1;
+		while ($ListPage <= $ListPageMax) {
+			if ($ListPage == $_POST['PageOffset']) {
+				echo '<option value=' . $ListPage . ' selected>' . $ListPage . '</option>';
+			} else {
+				echo '<option value=' . $ListPage . '>' . $ListPage . '</option>';
 			}
+			$ListPage++;
 		}
-		if (isset($_POST['Previous'])) {
-			if ($_POST['PageOffset'] > 1) {
-				$_POST['PageOffset'] = $_POST['PageOffset'] - 1;
-			}
-		}
-		echo '<input type="hidden" name="PageOffset" value="' . $_POST['PageOffset'] . '" />';
-		if ($ListPageMax > 1) {
-			echo '<br /><div class="centre">&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
-			echo '<select name="PageOffset1">';
-			$ListPage = 1;
-			while ($ListPage <= $ListPageMax) {
-				if ($ListPage == $_POST['PageOffset']) {
-					echo '<option value=' . $ListPage . ' selected>' . $ListPage . '</option>';
-				} else {
-					echo '<option value=' . $ListPage . '>' . $ListPage . '</option>';
-				}
-				$ListPage++;
-			}
-			echo '</select>
-				<button type="submit" name="Go1">' . _('Go') . '</button>
-				<button type="submit" name="Previous">' . _('Previous') . '</button>
-				<button type="submit" name="Next">' . _('Next') . '</button>';
-			echo '</div>';
-		}
-		echo '<br /><table cellpadding="2" class="selection">';
-		$TableHeader = '<tr>
-				<th>' . _('Code') . '</th>
-				<th>' . _('Customer Name') . '</th>
-				<th>' . _('Branch') . '</th>
-				<th>' . _('Contact') . '</th>
-				<th>' . _('Type') . '</th>
-				<th>' . _('Phone') . '</th>
-				<th>' . _('Fax') . '</th>
-			</tr>';
-		echo $TableHeader;
-		$j = 1;
-		$k = 0; //row counter to determine background colour
-		$RowIndex = 0;
+		echo '</select>
+			<button type="submit" name="Go1">' . _('Go') . '</button>
+			<button type="submit" name="Previous">' . _('Previous') . '</button>
+			<button type="submit" name="Next">' . _('Next') . '</button>';
+		echo '</div>';
 	}
+	echo '<br /><table cellpadding="2" class="selection">';
+	$TableHeader = '<tr>
+			<th>' . _('Code') . '</th>
+			<th>' . _('Customer Name') . '</th>
+			<th>' . _('Branch') . '</th>
+			<th>' . _('Contact') . '</th>
+			<th>' . _('Type') . '</th>
+			<th>' . _('Phone') . '</th>
+			<th>' . _('Fax') . '</th>
+		</tr>';
+	echo $TableHeader;
+	$j = 1;
+	$k = 0; //row counter to determine background colour
+	$RowIndex = 0;
 	if (DB_num_rows($result) <> 0) {
-		if (!isset($_POST['CSV'])) {
-			DB_data_seek($result, ($_POST['PageOffset'] - 1) * $_SESSION['DisplayRecordsMax']);
-		}
 		$i=0; //counter for input controls
 		while (($myrow = DB_fetch_array($result)) AND ($RowIndex <> $_SESSION['DisplayRecordsMax'])) {
 			if ($k == 1) {
@@ -267,27 +263,26 @@ function ShowReturnedCustomers($result) {
 	}
 
 	//end if results to show
-	if (!isset($_POST['CSV'])) {
-		if (isset($ListPageMax) and $ListPageMax > 1) {
-			echo '<br /><div class="centre">&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
-			echo '<select name="PageOffset2">';
-			$ListPage = 1;
-			while ($ListPage <= $ListPageMax) {
-				if ($ListPage == $_POST['PageOffset']) {
-					echo '<option value=' . $ListPage . ' selected>' . $ListPage . '</option>';
-				} else {
-					echo '<option value=' . $ListPage . '>' . $ListPage . '</option>';
-				}
-				$ListPage++;
+	if (isset($ListPageMax) and $ListPageMax > 1) {
+		echo '<br /><div class="centre">&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
+		echo '<select name="PageOffset2">';
+		$ListPage = 1;
+		while ($ListPage <= $ListPageMax) {
+			if ($ListPage == $_POST['PageOffset']) {
+				echo '<option value=' . $ListPage . ' selected>' . $ListPage . '</option>';
+			} else {
+				echo '<option value=' . $ListPage . '>' . $ListPage . '</option>';
 			}
-			echo '</select>
-				<button type="submit" name="Go2">' . _('Go') . '</button>
-				<button type="submit" name="Previous">' . _('Previous') . '</button>
-				<button type="submit" name="Next">' . _('Next') . '</button>';
+			$ListPage++;
 		}
-		//end if results to show
-		echo '</div></form>';
+		echo '</select>
+			<button type="submit" name="Go2">' . _('Go') . '</button>
+			<button type="submit" name="Previous">' . _('Previous') . '</button>
+			<button type="submit" name="Next">' . _('Next') . '</button>';
 	}
+	//end if results to show
+	echo '</div></form>';
+	unset($_SESSION['ListCount']);
 }
 
 ?>
