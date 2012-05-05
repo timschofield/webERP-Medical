@@ -56,11 +56,11 @@ if (isset($_POST['Update']) and $_POST['RowCounter']>1){
 			$ErrMsg =  _('Could not match off this payment because');
 			$result = DB_query($sql,$db,$ErrMsg);
 
-		} elseif ((isset($_POST['AmtClear_' . $Counter]) and filter_money_format($_POST['AmtClear_' . $Counter])<0 and $Type=='Payments')
-					or ($Type=='Receipts' and isset($_POST['AmtClear_' . $Counter]) and filter_money_format($_POST['AmtClear_' . $Counter])>0)) {
+		} elseif ((isset($_POST['AmtClear_' . $Counter]) and filter_currency_input($_POST['AmtClear_' . $Counter])<0 and $Type=='Payments')
+					or ($Type=='Receipts' and isset($_POST['AmtClear_' . $Counter]) and filter_currency_input($_POST['AmtClear_' . $Counter])>0)) {
 			/*if the amount entered was numeric and negative for a payment or positive for a receipt */
 
-			$sql = "UPDATE banktrans SET amountcleared=" .  filter_money_format($_POST['AmtClear_' . $Counter]) . "
+			$sql = "UPDATE banktrans SET amountcleared=" .  filter_currency_input($_POST['AmtClear_' . $Counter]) . "
 					 WHERE banktransid='" . $_POST['BankTrans_' . $Counter]."'";
 
 			$ErrMsg = _('Could not update the amount matched off this bank transaction because');

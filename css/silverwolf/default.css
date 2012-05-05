@@ -141,13 +141,13 @@ div.centre {
 }
 
 .EvenTableRows {
-	background-color: #ccc;
+	background-color: transparent;
 	border: solid #A49999 1px;
 	border-radius: 5px;
 }
 
 .OddTableRows {
-	background-color: #eee;
+	background-color: transparent;
 	border: solid #A49999 1px;
 	border-radius: 5px;
 }
@@ -285,11 +285,13 @@ button {
 	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
 	font-size: 10px;
    vertical-align: middle;
+   cursor: hand;
    }
 button:hover {
    border-top-color: #638094;
    background: #638094;
    color: #ccc;
+   cursor: pointer;
    }
 button:active {
    border-top-color: #1b435e;
@@ -312,6 +314,7 @@ select {
 	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
 	font-size: 10px;
 	background: transparent;
+    color:#645959;
 	border-width: 1px;
 	border-bottom-color: gray;
 	border-bottom-style: solid;
@@ -321,9 +324,9 @@ select {
 	border-left-style: solid;
 	border-right-color: gray;
 	border-right-style: solid;
-	-webkit-border-radius: .5em;
-	-moz-border-radius: .5em;
-	border-radius: .5em;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
 }
 
 font.good {

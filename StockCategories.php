@@ -85,8 +85,7 @@ if (isset($_POST['submit'])) {
 									 purchpricevaract = " . $_POST['PurchPriceVarAct'] . ",
 									 materialuseagevarac = " . $_POST['MaterialUseageVarAc'] . ",
 									 wipact = " . $_POST['WIPAct'] . "
-									 WHERE
-									 categoryid = '$SelectedCategory'";
+								WHERE categoryid = '" . $SelectedCategory . "'";
 		$ErrMsg = _('Could not update the stock category') . $_POST['CategoryDescription'] . _('because');
 		$result = DB_query($sql,$db,$ErrMsg);
 
@@ -140,8 +139,17 @@ if (isset($_POST['submit'])) {
 
 		} //end of loop round properties
 
-		prnMsg(_('Updated the stock category record for') . ' ' . $_POST['CategoryDescription'],'success');
-
+		prnMsg(_('Updated the stock category record for') . ' ' . stripslashes($_POST['CategoryDescription']),'success');
+		unset($SelectedCategory);
+		unset($_POST['CategoryID']);
+		unset($_POST['StockType']);
+		unset($_POST['CategoryDescription']);
+		unset($_POST['StockAct']);
+		unset($_POST['AdjGLAct']);
+		unset($_POST['IssueGLAct']);
+		unset($_POST['PurchPriceVarAct']);
+		unset($_POST['MaterialUseageVarAc']);
+		unset($_POST['WIPAct']);
 	} elseif ($InputError !=1) {
 
 	/*Selected category is null cos no item selected on first time round so must be adding a	record must be submitting new entries in the new stock category form */
@@ -291,7 +299,7 @@ or deletion of the records*/
 
 //end of ifs and buts!
 
-echo '<form name="CategoryForm" method="post" action="' . $_SERVER['PHP_SELF'] . '">';
+echo '<form name="CategoryForm" method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 if (isset($SelectedCategory)) {
@@ -326,6 +334,9 @@ if (isset($SelectedCategory)) {
 	echo '<input type="hidden" name="CategoryID" value="' . $_POST['CategoryID'] . '" />';
 	echo '<table class="selection">
 			<tr>
+				<th class="header" colspan="2">' . _('Edit Stock Category Details') . '</th>
+			</tr>
+			<tr>
 				<td>' . _('Category Code') . ':</td>
 				<td>' . $_POST['CategoryID'] . '</td>
 			</tr>';
@@ -335,6 +346,9 @@ if (isset($SelectedCategory)) {
 		$_POST['CategoryID'] = '';
 	}
 	echo '<table class="selection">
+			<tr>
+				<th class="header" colspan="2">' . _('New Stock Category Details') . '</th>
+			</tr>
 			<tr>
 				<td>' . _('Category Code') . ':</td>
 				<td><input type="text" name="CategoryID" size="7" maxlength="6" value="' . $_POST['CategoryID'] . '" /></td>
@@ -598,6 +612,10 @@ echo '<br />
 			<button type="submit" name="submit">' . _('Enter Information') . '</button>
 		</div>
 	</form>';
+
+if (isset($SelectedCategory)) {
+	echo '<div style="text-align: right"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Show All Stock Categories') . '</a></div>';
+}
 
 include('includes/footer.inc');
 ?>
