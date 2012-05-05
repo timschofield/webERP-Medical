@@ -52,7 +52,8 @@ if (isset($_POST['submit'])) {
 	$i=1;
 
 	$sql="SELECT count(groupname)
-			FROM accountgroups WHERE groupname='".$_POST['GroupName']."'";
+			FROM accountgroups
+			WHERE groupname='".$_POST['GroupName']."'";
 
 	$DbgMsg = _('The SQL that was used to retrieve the information was');
 	$ErrMsg = _('Could not check whether the group exists because');
@@ -177,7 +178,7 @@ if (isset($_POST['submit'])) {
 	$myrow = DB_fetch_array($result);
 	if ($myrow['groups']>0) {
 		prnMsg( _('Cannot delete this account group because general ledger accounts have been created using this group'),'warn');
-		echo '<br />' . _('There are') . ' ' . $myrow['groups'] . ' ' . _('general ledger accounts that refer to this account group') . '</font>';
+		echo '<br />' . _('There are') . ' ' . $myrow['groups'] . ' ' . _('general ledger accounts that refer to this account group');
 
 	} else {
 		$sql = "SELECT COUNT(groupname) groupnames FROM accountgroups WHERE parentgroupname = '" . $_GET['SelectedAccountGroup'] . "'";
@@ -187,7 +188,7 @@ if (isset($_POST['submit'])) {
 		$myrow = DB_fetch_array($result);
 		if ($myrow['groupnames']>0) {
 			prnMsg( _('Cannot delete this account group because it is a parent account group of other account group(s)'),'warn');
-			echo '<br />' . _('There are') . ' ' . $myrow['groupnames'] . ' ' . _('account groups that have this group as its/there parent account group') . '</font>';
+			echo '<br />' . _('There are') . ' ' . $myrow['groupnames'] . ' ' . _('account groups that have this group as its/there parent account group');
 		} else {
 			$sql="DELETE FROM accountgroups WHERE groupname='" . $_GET['SelectedAccountGroup'] . "'";
 			$ErrMsg = _('An error occurred in deleting the account group');
