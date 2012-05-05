@@ -231,6 +231,9 @@ if (! isset($_GET['delete'])) {
 			echo '<input type="hidden" name="SelectedSectionID" value="' . $_POST['SectionID'] . '" />';
 			echo '<table class="selection">
 					<tr>
+						<th class="header" colspan="2">' . _('Edit Account Section Details') . '</th>
+					</tr>
+					<tr>
 						<td>' . _('Section Number') . ':' . '</td>
 						<td>' . $_POST['SectionID'] . '</td>
 					</tr>';
@@ -248,6 +251,9 @@ if (! isset($_GET['delete'])) {
 			$_POST['SectionName']='';
 		}
 		echo '<table class="selection">
+					<tr>
+						<th class="header" colspan="2">' . _('New Account Section Details') . '</th>
+					</tr>
 			<tr>
 				<td>' . _('Section Number') . ':' . '</td>
 				<td><input tabindex="1" ' . (in_array('SectionID',$Errors) ?  'class="inputerror"' : '' ) .' type="text" name="SectionID" class="number" size="4" maxlength="4" value="' . $_POST['SectionID'] . '" /></td>
