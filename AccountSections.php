@@ -8,6 +8,8 @@ $title = _('Account Sections');
 
 include('includes/header.inc');
 
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>';
+
 // SOME TEST TO ENSURE THAT AT LEAST INCOME AND COST OF SALES ARE THERE
 	$sql= "SELECT sectionid FROM accountsection WHERE sectionid=1";
 	$result = DB_query($sql,$db);
@@ -166,10 +168,8 @@ if (!isset($_GET['SelectedSectionID']) and !isset($_POST['SelectedSectionID'])) 
 
 	$ErrMsg = _('Could not get account group sections because');
 	$result = DB_query($sql,$db,$ErrMsg);
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>
-		<br />';
 
-	echo '<table name="SectionList" class="selection">
+	echo '<br /><table name="SectionList" class="selection">
 			<tr>
 				<th>' . _('Section Number') . '</th>
 				<th>' . _('Section Description') . '</th>
@@ -198,15 +198,8 @@ if (!isset($_GET['SelectedSectionID']) and !isset($_POST['SelectedSectionID'])) 
 	echo '</table><br />';
 } //end of ifs and buts!
 
-
-if (isset($_POST['SelectedSectionID']) or isset($_GET['SelectedSectionID'])) {
-	echo '<div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Review Account Sections') . '</a></div>';
-}
-
 if (! isset($_GET['delete'])) {
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>
-		<br />';
 	echo '<form method="post" name="AccountSections" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
@@ -229,7 +222,7 @@ if (! isset($_GET['delete'])) {
 			$_POST['SectionName']  = $myrow['sectionname'];
 
 			echo '<input type="hidden" name="SelectedSectionID" value="' . $_POST['SectionID'] . '" />';
-			echo '<table class="selection">
+			echo '<br /><table class="selection">
 					<tr>
 						<th class="header" colspan="2">' . _('Edit Account Section Details') . '</th>
 					</tr>
@@ -265,6 +258,10 @@ if (! isset($_GET['delete'])) {
 
 	echo '<tr><td colspan="2"><div class="centre"><button tabindex="3" type="submit" name="submit">' . _('Enter Information') . '</button></div></td></tr>';
 	echo '</table><br />';
+
+	if (isset($_POST['SelectedSectionID']) or isset($_GET['SelectedSectionID'])) {
+		echo '<div style="text-align: right"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Review Account Sections') . '</a></div>';
+	}
 
 	if (!isset($_GET['SelectedSectionID']) or $_GET['SelectedSectionID']=='') {
 		echo '<script>defaultControl(document.AccountSections.SectionID);</script>';
