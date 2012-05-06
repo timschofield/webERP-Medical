@@ -163,7 +163,7 @@ function CustomerSearchSQL($db) {
 						FROM debtorsmaster
 						INNER JOIN debtortype
 							ON debtorsmaster.typeid = debtortype.typeid
-						LEFT JOIN custbranch
+						INNER JOIN custbranch
 							ON debtorsmaster.debtorno = custbranch.debtorno
 						WHERE debtorsmaster.name " . LIKE . " '%" . $SearchKeywords . "%'
 							AND debtorsmaster.debtorno " . LIKE . " '%" . $_POST['CustCode'] . "%'
@@ -177,7 +177,7 @@ function CustomerSearchSQL($db) {
 						FROM debtorsmaster
 						INNER JOIN debtortype
 							ON debtorsmaster.typeid = debtortype.typeid
-						LEFT JOIN custbranch
+						INNER JOIN custbranch
 							ON debtorsmaster.debtorno = custbranch.debtorno
 						WHERE debtorsmaster.name " . LIKE . " '%" . $SearchKeywords . "%'
 							AND debtorsmaster.debtorno " . LIKE . " '%" . $_POST['CustCode'] . "%'
