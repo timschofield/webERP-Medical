@@ -9,6 +9,8 @@ $title = _('Account Groups');
 include('includes/header.inc');
 include('includes/SQL_CommonFunctions.inc');
 
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>';
+
 function CheckForRecursiveGroup ($ParentGroupName, $GroupName, $db) {
 
 /* returns true ie 1 if the group contains the parent group as a child group
@@ -222,9 +224,8 @@ or deletion of the records*/
 	$DbgMsg = _('The sql that was used to retrieve the account group information was ');
 	$ErrMsg = _('Could not get account groups because');
 	$result = DB_query($sql,$db,$ErrMsg,$DbgMsg);
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
 
-	echo '<table class="selection">
+	echo '<br /><table class="selection">
 			<tr>
 				<th>' . _('Group Name') . '</th>
 				<th>' . _('Section') . '</th>
@@ -269,13 +270,9 @@ or deletion of the records*/
 } //end of ifs and buts!
 
 
-if (isset($_POST['SelectedAccountGroup']) or isset($_GET['SelectedAccountGroup'])) {
-	echo '<br /><div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Review Account Groups') . '</a></div>';
-}
-
 if (!isset($_GET['delete'])) {
 
-	echo '<br /><form method="post" id="AccountGroups" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
+	echo '<form method="post" id="AccountGroups" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (isset($_GET['SelectedAccountGroup'])) {
@@ -411,6 +408,10 @@ if (!isset($_GET['delete'])) {
 		</tr>';
 
 	echo '</table><br />';
+
+	if (isset($_POST['SelectedAccountGroup']) or isset($_GET['SelectedAccountGroup'])) {
+		echo '<div style="text-align: right"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Review Account Groups') . '</a></div>';
+	}
 
 	echo '<script  type="text/javascript">defaultControl(document.forms[0].GroupName);</script>';
 
