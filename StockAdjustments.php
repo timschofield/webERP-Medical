@@ -76,7 +76,7 @@ if (isset($_POST['CheckCode'])) {
 	exit;
 }
 
-if (isset($_POST['EnterAdjustment']) and $_POST['EnterAdjustment']!= ''){
+if (isset($_POST['EnterAdjustment'])){
 
 	$InputError = false; /*Start by hoping for the best */
 	$result = DB_query("SELECT stockid FROM stockmaster WHERE stockid='" . $_SESSION['Adjustment']->StockID . "'",$db);
