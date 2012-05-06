@@ -397,28 +397,7 @@ if (isset($_POST['ResetPart'])){
 	 unset($_REQUEST['SelectedStockItem']);
 }
 
-echo '<br /><div class="centre">';
-
-if (isset($_REQUEST['OrderNumber']) AND $_REQUEST['OrderNumber']!='') {
-	$_REQUEST['OrderNumber'] = trim($_REQUEST['OrderNumber']);
-	if (!is_numeric($_REQUEST['OrderNumber'])){
-		echo '<br /><b>' . _('The Order Number entered MUST be numeric') . '</b><br />';
-		unset ($_REQUEST['OrderNumber']);
-		include('includes/footer.inc');
-		exit;
-	} else {
-		echo _('Order Number') . ' - ' . $_REQUEST['OrderNumber'];
-	}
-} else {
-	if (isset($_REQUEST['SelectedCustomer'])) {
-		echo _('For customer') . ': ' . $_REQUEST['SelectedCustomer'] . ' ' . _('and') . ' ';
-		echo '<input type="hidden" name="SelectedCustomer" value="' . $_REQUEST['SelectedCustomer'] . '" />';
-	}
-	if (isset($_REQUEST['SelectedStockItem'])) {
-		 echo _('for the part') . ': ' . $_REQUEST['SelectedStockItem'] . ' ' . _('and') . '
-			<input type="hidden" name="SelectedStockItem" value="' . $_REQUEST['SelectedStockItem'] . '" />';
-	}
-}
+echo '<div class="centre">';
 
 if (isset($_POST['SearchParts'])){
 
@@ -495,6 +474,26 @@ if (!isset($StockID)) {
 	if (!isset($_REQUEST['OrderNumber']) or $_REQUEST['OrderNumber']==''){
 
 		echo '<table class="selection">';
+
+		if (isset($_REQUEST['OrderNumber']) AND $_REQUEST['OrderNumber']!='') {
+			$_REQUEST['OrderNumber'] = trim($_REQUEST['OrderNumber']);
+			if (!is_numeric($_REQUEST['OrderNumber'])){
+				echo '<br /><b>' . _('The Order Number entered MUST be numeric') . '</b><br />';
+				unset ($_REQUEST['OrderNumber']);
+				include('includes/footer.inc');
+				exit;
+			} else {
+				echo _('Order Number') . ' - ' . $_REQUEST['OrderNumber'];
+			}
+		} else {
+			if (isset($_REQUEST['SelectedCustomer'])) {
+				echo '<tr><th colspan="7" class="header">' . _('For customer') . ': ' . $_REQUEST['SelectedCustomer'] . ' ' . _('and') . '<input type="hidden" name="SelectedCustomer" value="' . $_REQUEST['SelectedCustomer'] . '" /></th></tr>';
+			}
+			if (isset($_REQUEST['SelectedStockItem'])) {
+				echo '<tr><th colspan="7" class="header">' . _('For the part') . ': ' . $_REQUEST['SelectedStockItem'] . ' ' . _('and') . '<input type="hidden" name="SelectedStockItem" value="' . $_REQUEST['SelectedStockItem'] . '" /></th></tr>';
+			}
+		}
+
 		echo '<tr><td>' . _('Order number') . ': </td>
 			<td><input type="text" name="OrderNumber" maxlength="8" size="9" /></td><td>' .
 				_('From Stock Location') . ':</td><td><select name="StockLocation">';
