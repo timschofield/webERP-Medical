@@ -456,11 +456,7 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==3 and !isset($_POST['S
 		echo '</td>';
 		echo '<th colspan="8" class="header" style="vertical-align:top">' . _('Tender Number') . ': ' .$myrow['tenderid'] . '</th>';
 		echo '<input type="hidden" value="' . $myrow['tenderid'] . '" name="Tender" />';
-<<<<<<< TREE
 		echo '<th><button type="submit" name="Process" />' . _('Process') . "\n" . _('Tender') . '</button></th></tr>';
-=======
-		echo '<th><button type="submit" value="" name="Process">' . _('Process') . "\n" . _('Tender') . '</button></th></tr>';
->>>>>>> MERGE-SOURCE
 		$ItemSQL="SELECT tenderitems.tenderid,
 						tenderitems.stockid,
 						stockmaster.description,
@@ -709,11 +705,7 @@ if (isset($_POST['Search'])){  /*ie seach for stock items */
 			prnMsg( _('Only the first') . ' ' . $Maximum_Number_Of_Parts_To_Show . ' ' . _('can be displayed') . '. ' .
 				_('Please restrict your search to only the parts required'),'info');
 		}
-<<<<<<< TREE
 		echo '<a name="end"></a><br /><div class="centre"><button type="submit" name="NewItem">' . _('Add to Offer') . '</button></div>';
-=======
-		echo '<a name="end"></a><br /><div class="centre"><button type="submit" name="NewItem" value="" />' . _('Add to Offer') . '</button></div>';
->>>>>>> MERGE-SOURCE
 	}#end if SearchResults to show
 	echo '<input type="hidden" name="TenderType" value="'.$_POST['TenderType'].'" />';
 	echo '<input type="hidden" name="SupplierID" value="'.$_POST['SupplierID'].'" />';
