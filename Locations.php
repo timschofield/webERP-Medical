@@ -272,6 +272,15 @@ if (isset($_POST['submit'])) {
 									$CancelDelete = 1;
 									prnMsg(_('Cannot delete this location because it is used by some branch records as the default location to deliver from'),'warn');
 									echo '<br /> ' . _('There are') . ' ' . $myrow[0] . ' ' . _('branches set up to use this location by default');
+								}else {
+									$sql= "SELECT COUNT(*) FROM purchorders WHERE intostocklocation='" . $SelectedLocation . "'";
+									$result = DB_query($sql,$db);
+									$myrow = DB_fetch_row($result);
+									if ($myrow[0]>0) {
+										$CancelDelete = 1;
+										prnMsg(_('Cannot delete this location because there are purchase orders outstanding for it.'),'warn');
+										echo '<br /> ' . _('There are') . ' ' . $myrow[0] . ' ' . _('branches set up to use this location by default');
+									}
 								}
 							}
 						}
@@ -367,10 +376,6 @@ while ($myrow = DB_fetch_array($result)) {
 
 //end of ifs and buts!
 
-if (isset($SelectedLocation)) {
-	echo '<a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Review Records') . '</a>';
-}
-
 if (!isset($_GET['delete'])) {
 
 	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
@@ -428,7 +433,7 @@ if (!isset($_GET['delete'])) {
 		if (!isset($_POST['LocCode'])) {
 			$_POST['LocCode'] = '';
 		}
-		echo '<table class="selection"><tr><th colspan="2"><font size="3" color="blue">'._('New Location details').'</font></th></tr>';
+		echo '<br /><table class="selection"><tr><th colspan="2" class="header">'._('New Location details').'<th></tr>';
 		echo '<tr><td>' . _('Location Code') . ':</td><td><input type="text" name="LocCode" value="' . $_POST['LocCode'] . '" size="5" maxlength="5" /></td></tr>';
 	}
 	if (!isset($_POST['LocationName'])) {
@@ -516,6 +521,10 @@ if (!isset($_GET['delete'])) {
 	echo '<div class="centre"><button type="submit" name="submit">' .  _('Enter Information') . '</button></div><br />';
 
 	echo '</form>';
+
+if (isset($SelectedLocation)) {
+	echo '<div style="text-align: right;"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Review Records') . '</a></div>';
+}
 
 } //end if record deleted no point displaying form to add record
 
