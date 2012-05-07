@@ -37,6 +37,28 @@ function AddColumn($Column, $Table, $Type, $Null, $Default, $After, $db) {
 	}
 }
 
+function AddIndex($Columns, $Table, $Name, $db) {
+	if (DB_table_exists($Table, $db)) {
+		$sql="SHOW INDEX FROM " . $Table . " WHERE Key_name='".$Name."'";
+		$result = DB_query($sql, $db);
+	}
+	if (DB_num_rows($result)==0) {
+		$sql="ALTER TABLE `".$Table."` ADD INDEX ".$Name." (`".$Columns[0]."`";
+		for ($i=1; $i<sizeOf($Columns); $i++) {
+			$sql.=",".$Columns[$i];
+		}
+		$sql.=")";
+		$response=executeSQL($sql, $db, False);
+		if ($response==0) {
+			OutputResult( _('The index has been inserted') , 'success');
+		} else {
+			OutputResult( _('The column could not be inserted') , 'error');
+		}
+	} else {
+		OutputResult( _('The column already exists') , 'info');
+	}
+}
+
 function DropColumn($Column, $Table, $db) {
 	global $SQLFile;
 	if (DB_table_exists($Table, $db)) {
@@ -289,7 +311,7 @@ function InsertRecord($Table, $CheckFields, $CheckValues, $Fields, $Values, $db)
 		for ($i=0;$i<sizeOf($CheckFields);$i++) {
 			$sql = $sql.$CheckFields[$i]."='".$CheckValues[$i]."' AND ";
 		}
-		$sql=substr($sql, 0, strlen($sql)-5);
+		$sql=mb_substr($sql, 0, mb_strlen($sql)-5);
 		$result=DB_query($sql, $db);
 	}
 	if (DB_num_rows($result)==0 or isset($SQLFile)) {
@@ -297,11 +319,11 @@ function InsertRecord($Table, $CheckFields, $CheckValues, $Fields, $Values, $db)
 		for ($i=0;$i<sizeOf($Fields);$i++) {
 			$sql = $sql.$Fields[$i].",";
 		}
-		$sql=substr($sql, 0, strlen($sql)-1).") VALUES (";
+		$sql=mb_substr($sql, 0, mb_strlen($sql)-1).") VALUES (";
 		for ($i=0;$i<sizeOf($Values);$i++) {
 			$sql = $sql."'".$Values[$i]."',";
 		}
-		$sql=substr($sql, 0, strlen($sql)-1).")";
+		$sql=mb_substr($sql, 0, mb_strlen($sql)-1).")";
 		$response=executeSQL($sql, $db);
 		if ($response==0) {
 			OutputResult( _('The record has been inserted') , 'success');
