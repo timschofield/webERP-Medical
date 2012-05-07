@@ -161,7 +161,7 @@ if (isset($_POST['PrintPDF'])
 	while ($InventoryPlan = DB_fetch_array($InventoryResult,$db)){
 
 		if ($Category!=$InventoryPlan['categoryid']){
-			$FontSize=12;
+			$FontSize=10;
 			if ($Category!=''){ /*Then it's NOT the first time round */
 				/*draw a line under the CATEGORY TOTAL*/
 				$pdf->line($Left_Margin, $YPos-2,$Page_Width-$Right_Margin, $YPos-2);
@@ -172,7 +172,7 @@ if (isset($_POST['PrintPDF'])
 			$Category = $InventoryPlan['categoryid'];
 		}
 
-		$FontSize=10;
+		$FontSize=8;
 		$YPos -=$line_height;
 				if (isset($_POST['ShowInfo']) and $_POST['ShowInfo']==true){
 
@@ -334,7 +334,7 @@ if (isset($_POST['PrintPDF'])
 				echo '<input type="checkbox" name="NonZerosOnly" value="TRUE" />';
 		}
 
-			echo '</td></tr></table><br /><div class="centre"><button type="submit" name="PrintPDF">' . _('Print and Process') . '</button></div></form>';
+			echo '</td></tr></table><br /><div class="centre"><button type="submit" name="PrintPDF">' . _('Print and Process') . '</button></div></form><br />';
 	}
 	include('includes/footer.inc');
 

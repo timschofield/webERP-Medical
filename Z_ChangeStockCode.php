@@ -289,15 +289,16 @@ if (isset($_POST['ProcessStockChange'])){
 	$result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 	echo ' ... ' . _('completed');
 
-	$sql = 'SET FOREIGN_KEY_CHECKS=1';
-	$result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
-
 	$result = DB_Txn_Commit($db);
 
 	echo '<br />' . _('Deleting the old stock master record');
 	$sql = "DELETE FROM stockmaster WHERE stockid='" . $_POST['OldStockID'] . "'";
 	$ErrMsg = _('The SQL to delete the old stock master record failed');
 	$result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
+
+	$sql = 'SET FOREIGN_KEY_CHECKS=1';
+	$result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
+
 	echo ' ... ' . _('completed');
 
 

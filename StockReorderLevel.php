@@ -69,7 +69,7 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 	} else {
 		$_POST[$myrow['loccode']] = filter_number_input(0);
 	}
-	if (isset($_POST['UpdateData']) AND is_numeric($_POST[$myrow['loccode']]) AND $_POST[$myrow['loccode']]>=0){
+	if (isset($_POST['Old'.$myrow['loccode']]) and ($_POST['Old'.$myrow['loccode']]!=$_POST[$myrow['loccode']]) and isset($_POST['UpdateData']) AND is_numeric($_POST[$myrow['loccode']]) AND $_POST[$myrow['loccode']]>=0){
 
 	   $myrow['reorderlevel'] = $_POST[$myrow['loccode']];
 	   $sql = "UPDATE locstock SET reorderlevel = '" . $_POST[$myrow['loccode']] . "'
@@ -81,13 +81,16 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 
 	printf('<td>%s</td>
 		<td class="number">%s</td>
-		<td><input type="text" class="number" name="%s" maxlength="10" size="10" value="%s" /></td>',
+		<td><input type="text" class="number" name="%s" maxlength="10" size="10" value="%s" /></td>
+		<input type="hidden" name="Old%s" maxlength="10" size="10" value="%s" />',
 		$myrow['locationname'],
 		locale_number_format($myrow['quantity'],$myrow['decimalplaces']),
 		$myrow['loccode'],
+		locale_number_format($myrow['reorderlevel'],$myrow['decimalplaces']),
+		$myrow['loccode'],
 		locale_number_format($myrow['reorderlevel'],$myrow['decimalplaces']));
 	$j++;
-	If ($j == 12){
+	if ($j == 12){
 		$j=1;
 		echo $TableHeader;
 	}
