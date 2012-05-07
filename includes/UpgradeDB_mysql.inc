@@ -37,6 +37,28 @@ function AddColumn($Column, $Table, $Type, $Null, $Default, $After, $db) {
 	}
 }
 
+function AddIndex($Columns, $Table, $Name, $db) {
+	if (DB_table_exists($Table, $db)) {
+		$sql="SHOW INDEX FROM " . $Table . " WHERE Key_name='".$Name."'";
+		$result = DB_query($sql, $db);
+	}
+	if (DB_num_rows($result)==0) {
+		$sql="ALTER TABLE `".$Table."` ADD INDEX ".$Name." (`".$Columns[0]."`";
+		for ($i=1; $i<sizeOf($Columns); $i++) {
+			$sql.=",".$Columns[$i];
+		}
+		$sql.=")";
+		$response=executeSQL($sql, $db, False);
+		if ($response==0) {
+			OutputResult( _('The index has been inserted') , 'success');
+		} else {
+			OutputResult( _('The column could not be inserted') , 'error');
+		}
+	} else {
+		OutputResult( _('The column already exists') , 'info');
+	}
+}
+
 function DropColumn($Column, $Table, $db) {
 	global $SQLFile;
 	if (DB_table_exists($Table, $db)) {
