@@ -400,6 +400,7 @@ $result = DB_query($sql, $db);
 echo '<table class="selection">';
 echo '<tr><td>' . _('Branch') . ':</td>';
 echo '<td><select name="Branch">';
+echo '<option value="">' . _('All Branches') . '</option>';
 while ($myrow=DB_fetch_array($result)) {
 	$CustomerCurrency=$myrow['currency'];
 	$CustomerCurrencyCode=$myrow['currcode'];
