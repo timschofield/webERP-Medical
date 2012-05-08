@@ -80,7 +80,7 @@ if (isset($_POST['submit'])  and $EditName == 1 ) { // Creating or updating a ca
 
 	if (strlen($_POST['SalesCatName']) >20 OR trim($_POST['SalesCatName'])=='') {
 		$InputError = 1;
-		prnMsg(_('The Sales category description must be twenty characters or less long'),'error');
+		prnMsg(_('The Sales category name must be twenty characters or less long'),'error');
 	}
 
 	if (isset($SelectedCategory) and $InputError !=1 ) {
