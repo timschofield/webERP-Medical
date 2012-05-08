@@ -16,6 +16,7 @@ include('includes/header.inc');
 include('includes/SQL_CommonFunctions.inc');
 include('includes/GetSalesTransGLCodes.inc');
 include('includes/GetPrice.inc');
+include ('includes/CustomerSearch.php');
 
 if (empty($_GET['identifier'])) {
 	/*unique session identifier to ensure that there is no conflict with other order entry sessions on the same machine  */
@@ -72,369 +73,38 @@ if (isset($_POST['CancelCredit'])) {
 	$_SESSION['RequireCustomerSelection'] = 1;
 }
 
-foreach ($_POST as $key=>$value) {
-	if (substr($key,0,8)=='Customer') {
-		$_POST['Customer']=$_POST['Debtor'.substr($key,8)];
-		$_POST['Branch']=$_POST['Branch'.substr($key,8)];
-	}
-}
 
 if (isset($_POST['Customer'])) {
 	$_SESSION['RequireCustomerSelection']=0;
 }
 
 /* if the change customer button hit or the customer has not already been selected */
-if ($_SESSION['RequireCustomerSelection']==1) {
-
-	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?identifier='.$identifier.'" method="post">';
-	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<p class="page_title_text"><img src="' . $rootpath . '/css/' . $theme . '/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Search for Customers').'</p>';
-	echo '<table cellpadding="3" class="selection">';
-	echo '<tr><td colspan="2">' . _('Enter a partial Name') . ':</td><td>';
-	if (isset($_POST['Keywords'])) {
-		echo '<input type="text" name="Keywords" value="' . $_POST['Keywords'] . '" size="20" maxlength="25" />';
+$result=CustomerSearchSQL($db);
+if (!isset($_POST['Search']) and !isset($_POST['Next']) and !isset($_POST['Previous']) and !isset($_POST['Go1']) and !isset($_POST['Go2']) and isset($_POST['JustSelectedACustomer']) and empty($_SESSION['CustomerID'])){
+	/*Need to figure out the number of the form variable that the user clicked on */
+	for ($i=0; $i< count($_POST); $i++){ //loop through the returned customers
+		if(isset($_POST['SubmitCustomerSelection'.$i])){
+			break;
+		}
+	}
+	if ($i==count($_POST)){
+		prnMsg(_('Unable to identify the selected customer'),'error');
 	} else {
-		echo '<input type="text" name="Keywords" size="20" maxlength="25" />';
+		$_POST['Customer'] = $_POST['SelectedCustomer'.$i];
+		$_POST['Branch'] = $_POST['SelectedBranch'.$i];
+		unset($_POST['Search']);
 	}
-	echo '</td><td><font size="3"><b>' . _('OR') . '</b></font></td><td>' . _('Enter a partial Code') . ':</td><td>';
-	if (isset($_POST['CustCode'])) {
-		echo '<input type="text" name="CustCode" value="' . $_POST['CustCode'] . '" size="15" maxlength="18" />';
-	} else {
-		echo '<input type="text" name="CustCode" size="15" maxlength="18" />';
-	}
-	echo '</td></tr><tr><td><font size="3"><b>' . _('OR') . '</b></font></td><td>' . _('Enter a partial Phone Number') . ':</td><td>';
-	if (isset($_POST['CustPhone'])) {
-		echo '<input type="text" name="CustPhone" value="' . $_POST['CustPhone'] . '" size="15" maxlength="18" />';
-	} else {
-		echo '<input type="text" name="CustPhone" size="15" maxlength="18" />';
-	}
-	echo '</td>';
-	echo '<td><font size="3"><b>' . _('OR') . '</b></font></td><td>' . _('Enter part of the Address') . ':</td><td>';
-	if (isset($_POST['CustAdd'])) {
-		echo '<input type="text" name="CustAdd" value="' . $_POST['CustAdd'] . '" size="20" maxlength="25" />';
-	} else {
-		echo '<input type="text" name="CustAdd" size="20" maxlength="25" />';
-	}
-	echo '</td></tr>';
-/* End addded search feature. Gilles Deacur */
-	echo '<tr><td><font size="3"><b>' . _('OR') . '</b></font></td><td>' . _('Choose a Type') . ':</td><td>';
-	if (isset($_POST['CustType'])) {
-		// Show Customer Type drop down list
-		$result2 = DB_query("SELECT typeid, typename FROM debtortype", $db);
-		// Error if no customer types setup
-		if (DB_num_rows($result2) == 0) {
-			$DataError = 1;
-			echo '<a href="CustomerTypes.php?" target="_parent">Setup Types</a>';
-			echo '<tr><td colspan="2">' . prnMsg(_('No Customer types defined'), 'error') . '</td></tr>';
-		} else {
-			// If OK show select box with option selected
-			echo '<select name="CustType">';
-			echo '<option value="ALL">' . _('Any') . '</option>';
-			while ($myrow = DB_fetch_array($result2)) {
-				if ($_POST['CustType'] == $myrow['typename']) {
-					echo '<option selected="True" value="' . $myrow['typename'] . '">' . $myrow['typename']  . '</option>';
-				} else {
-					echo '<option value="' . $myrow['typename'] . '">' . $myrow['typename']  . '</option>';
-				}
-			} //end while loop
-			DB_data_seek($result2, 0);
-			echo '</select></td>';
-		}
-	} else {
-	// No option selected yet, so show Customer Type drop down list
-		$result2 = DB_query("SELECT typeid, typename FROM debtortype", $db);
-	// Error if no customer types setup
-		if (DB_num_rows($result2) == 0) {
-			$DataError = 1;
-			echo '<a href="CustomerTypes.php?" target="_parent">Setup Types</a>';
-			echo '<tr><td colspan="2">' . prnMsg(_('No Customer types defined'), 'error') . '</td></tr>';
-		} else {
-		// if OK show select box with available options to choose
-			echo '<select name="CustType">';
-			echo '<option value="ALL">' . _('Any'). '</option>';
-			while ($myrow = DB_fetch_array($result2)) {
-				echo '<option value="' . $myrow['typename'] . '">' . $myrow['typename'] . '</option>';
-			} //end while loop
-			DB_data_seek($result2, 0);
-			echo '</select></td>';
-		}
-	}
-
-	/* Option to select a sales area */
-	echo '<td><font size="3"><b>' . _('OR') . '</b></font></td><td>' . _('Choose an Area') . ':</td><td>';
-	$result2 = DB_query("SELECT areacode, areadescription FROM areas", $db);
-	// Error if no sales areas setup
-	if (DB_num_rows($result2) == 0) {
-		$DataError = 1;
-		echo '<a href="Areas.php?" target="_parent">Setup Types</a>';
-		echo '<tr><td colspan="2">' . prnMsg(_('No Sales Areas defined'), 'error') . '</td></tr>';
-	} else {
-		// if OK show select box with available options to choose
-		echo '<select name="Area">';
-		echo '<option value="ALL">' . _('Any') . '</option>';
-		while ($myrow = DB_fetch_array($result2)) {
-			if (isset($_POST['Area']) and $_POST['Area']==$myrow['areacode']) {
-				echo '<option selected="True" value="' . $myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
-			} else {
-				echo '<option value="' . $myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
-			}
-		} //end while loop
-		DB_data_seek($result2, 0);
-		echo '</select></td></tr>';
-	}
-
-	echo '</table><br />';
-	echo '<div class="centre"><button type="submit" name="Search">' . _('Search Now') . '</button></div>';
-	if (isset($_SESSION['SalesmanLogin']) and $_SESSION['SalesmanLogin'] != '') {
-		prnMsg(_('Your account enables you to see only customers allocated to you'), 'warn', _('Note: Sales-person Login'));
-	}
-
-	if (isset($_POST['Search']) OR isset($_POST['Go']) OR isset($_POST['Next']) OR isset($_POST['Previous'])) {
-		if (isset($_POST['Search'])) {
-			$_POST['PageOffset'] = 1;
-		}
-		if ($_POST['Keywords'] AND (($_POST['CustCode']) OR ($_POST['CustPhone']) OR ($_POST['CustType']))) {
-			$msg = _('Search Result: Customer Name has been used in search') . '<br />';
-			$_POST['Keywords'] = strtoupper($_POST['Keywords']);
-		}
-		if ($_POST['CustCode'] AND $_POST['CustPhone'] == '' AND isset($_POST['CustType']) AND $_POST['Keywords'] == '') {
-			$msg = _('Search Result: Customer Code has been used in search') . '<br />';
-		}
-		if (($_POST['CustPhone'])) {
-			$msg = _('Search Result: Customer Phone has been used in search') . '<br />';
-		}
-		if (($_POST['CustAdd'])) {
-			$msg = _('Search Result: Customer Address has been used in search') . '<br />';
-		}
-		if ($_POST['CustType'] AND $_POST['CustPhone'] == '' AND $_POST['CustCode'] == '' AND $_POST['Keywords'] == '' AND $_POST['CustAdd'] == '') {
-			$msg = _('Search Result: Customer Type has been used in search') . '<br />';
-		}
-		if (($_POST['Keywords'] == '') AND ($_POST['CustCode'] == '') AND ($_POST['CustPhone'] == '') AND ($_POST['CustType'] == 'ALL') AND ($_POST['Area'] == 'ALL') AND ($_POST['CustAdd'] == '')) {
-			$SQL = "SELECT debtorsmaster.debtorno,
-						debtorsmaster.name,
-						debtorsmaster.address1,
-						debtorsmaster.address2,
-						debtorsmaster.address3,
-						debtorsmaster.address4,
-						custbranch.branchcode,
-						custbranch.brname,
-						custbranch.contactname,
-						debtortype.typename,
-						custbranch.phoneno,
-						custbranch.faxno
-					FROM debtorsmaster
-					LEFT JOIN custbranch
-						ON debtorsmaster.debtorno = custbranch.debtorno, debtortype
-					WHERE debtorsmaster.typeid = debtortype.typeid";
-		} elseif (strlen($_POST['Keywords']) > 0) {
-			//using the customer name
-			$_POST['Keywords'] = strtoupper(trim($_POST['Keywords']));
-			//insert wildcard characters in spaces
-			$SearchString = '%' . str_replace(' ', '%', $_POST['Keywords']) . '%';
-			$SQL = "SELECT debtorsmaster.debtorno,
-						debtorsmaster.name,
-						debtorsmaster.address1,
-						debtorsmaster.address2,
-						debtorsmaster.address3,
-						debtorsmaster.address4,
-						custbranch.branchcode,
-						custbranch.brname,
-						custbranch.contactname,
-						debtortype.typename,
-						custbranch.phoneno,
-						custbranch.faxno
-					FROM debtorsmaster
-					LEFT JOIN custbranch
-						ON debtorsmaster.debtorno = custbranch.debtorno, debtortype
-					WHERE debtorsmaster.name " . LIKE . " '$SearchString'
-						AND debtorsmaster.typeid = debtortype.typeid";
-		} elseif (strlen($_POST['CustCode']) > 0) {
-			$_POST['CustCode'] = strtoupper(trim($_POST['CustCode']));
-			$SQL = "SELECT debtorsmaster.debtorno,
-						debtorsmaster.name,
-						debtorsmaster.address1,
-						debtorsmaster.address2,
-						debtorsmaster.address3,
-						debtorsmaster.address4,
-						custbranch.branchcode,
-						custbranch.brname,
-						custbranch.contactname,
-						debtortype.typename,
-						custbranch.phoneno,
-						custbranch.faxno
-					FROM debtorsmaster
-					LEFT JOIN custbranch
-						ON debtorsmaster.debtorno = custbranch.debtorno, debtortype
-					WHERE debtorsmaster.debtorno " . LIKE . " '%" . $_POST['CustCode'] . "%'
-						AND debtorsmaster.typeid = debtortype.typeid";
-		} elseif (strlen($_POST['CustPhone']) > 0) {
-			$SQL = "SELECT debtorsmaster.debtorno,
-						debtorsmaster.name,
-						debtorsmaster.address1,
-						debtorsmaster.address2,
-						debtorsmaster.address3,
-						debtorsmaster.address4,
-						custbranch.branchcode,
-						custbranch.brname,
-						custbranch.contactname,
-						debtortype.typename,
-						custbranch.phoneno,
-						custbranch.faxno
-					FROM debtorsmaster
-					LEFT JOIN custbranch
-						ON debtorsmaster.debtorno = custbranch.debtorno, debtortype
-					WHERE custbranch.phoneno " . LIKE . " '%" . $_POST['CustPhone'] . "%'
-					AND debtorsmaster.typeid = debtortype.typeid";
-			// Added an option to search by address. I tried having it search address1, address2, address3, and address4, but my knowledge of MYSQL is limited.  This will work okay if you select the CSV Format then you can search though the address1 field. I would like to extend this to all 4 address fields. Gilles Deacur
-
-		} elseif (strlen($_POST['CustAdd']) > 0) {
-			$SQL = "SELECT debtorsmaster.debtorno,
-						debtorsmaster.name,
-						debtorsmaster.address1,
-						debtorsmaster.address2,
-						debtorsmaster.address3,
-						debtorsmaster.address4,
-						custbranch.branchcode,
-						custbranch.brname,
-						custbranch.contactname,
-						debtortype.typename,
-						custbranch.phoneno,
-						custbranch.faxno
-					FROM debtorsmaster
-					LEFT JOIN custbranch
-						ON debtorsmaster.debtorno = custbranch.debtorno, debtortype
-					WHERE CONCAT_WS(debtorsmaster.address1,debtorsmaster.address2,debtorsmaster.address3,debtorsmaster.address4) " . LIKE . " '%" . $_POST['CustAdd'] . "%'
-						AND debtorsmaster.typeid = debtortype.typeid";
-			// End added search feature. Gilles Deacur
-
-		} elseif (strlen($_POST['CustType']) > 0) {
-			$SQL = "SELECT debtorsmaster.debtorno,
-						debtorsmaster.name,
-						debtorsmaster.address1,
-						debtorsmaster.address2,
-						debtorsmaster.address3,
-						debtorsmaster.address4,
-						custbranch.branchcode,
-						custbranch.brname,
-						custbranch.contactname,
-						debtortype.typename,
-						custbranch.phoneno,
-						custbranch.faxno
-					FROM debtorsmaster
-					LEFT JOIN custbranch
-						ON debtorsmaster.debtorno = custbranch.debtorno, debtortype
-					WHERE debtorsmaster.typeid LIKE debtortype.typeid
-						AND debtortype.typename = '" . $_POST['CustType'] . "'";
-		} elseif (strlen($_POST['Area']) > 0 AND $_POST['Area']!='ALL') {
-			$SQL = "SELECT debtorsmaster.debtorno,
-						debtorsmaster.name,
-						debtorsmaster.address1,
-						debtorsmaster.address2,
-						debtorsmaster.address3,
-						debtorsmaster.address4,
-						custbranch.branchcode,
-						custbranch.brname,
-						custbranch.contactname,
-						debtortype.typename,
-						custbranch.phoneno,
-						custbranch.faxno
-					FROM debtorsmaster
-					LEFT JOIN custbranch
-						ON debtorsmaster.debtorno = custbranch.debtorno, debtortype
-					WHERE debtorsmaster.typeid LIKE debtortype.typeid
-						AND custbranch.area = '" . $_POST['Area'] . "'";
-		}
-		if ($_SESSION['SalesmanLogin'] != '') {
-			$SQL.= " AND custbranch.salesman='" . $_SESSION['SalesmanLogin'] . "'";
-		}
-		$SQL.= ' ORDER BY debtorsmaster.name';
-		$ErrMsg = _('The searched customer records requested cannot be retrieved because');
-
-		$result = DB_query($SQL, $db, $ErrMsg);
-		if (DB_num_rows($result) == 0) {
-			prnMsg(_('No customer records contain the selected text') . ' - ' . _('please alter your search criteria and try again'), 'info');
-			echo '<br />';
-		}
-		unset($_SESSION['CustomerID']);
-		$ListCount = DB_num_rows($result);
-		$ListPageMax = ceil($ListCount / $_SESSION['DisplayRecordsMax']);
-		if (!isset($_POST['CSV'])) {
-			if (isset($_POST['Next'])) {
-				if ($_POST['PageOffset'] < $ListPageMax) {
-					$_POST['PageOffset'] = $_POST['PageOffset'] + 1;
-				}
-			}
-			if (isset($_POST['Previous'])) {
-				if ($_POST['PageOffset'] > 1) {
-					$_POST['PageOffset'] = $_POST['PageOffset'] - 1;
-				}
-			}
-			echo '<input type="hidden" name="PageOffset" value="' . $_POST['PageOffset'] . '" />';
-			if ($ListPageMax > 1) {
-				echo '<br /><div class="centre">&nbsp;&nbsp;' . $_POST['PageOffset'] . ' ' . _('of') . ' ' . $ListPageMax . ' ' . _('pages') . '. ' . _('Go to Page') . ': ';
-				echo '<select name="PageOffset1">';
-				$ListPage = 1;
-				while ($ListPage <= $ListPageMax) {
-					if ($ListPage == $_POST['PageOffset']) {
-						echo '<option value=' . $ListPage . ' selected>' . $ListPage . '</option>';
-					} else {
-						echo '<option value=' . $ListPage . '>' . $ListPage . '</option>';
-					}
-					$ListPage++;
-				}
-				echo '</select>
-					<button type="submit" name="Go1">' . _('Go') . '</button>
-					<button type="submit" name="Previous">' . _('Previous') . '</button>
-					<button type="submit" name="Next">' . _('Next') . '</button>';
-				echo '</div>';
-			}
-			echo '<br /><table cellpadding="2" class="selection">';
-			$TableHeader = '<tr>
-								<th>' . _('Code') . '</th>
-								<th>' . _('Customer Name') . '</th>
-								<th>' . _('Branch') . '</th>
-								<th>' . _('Contact') . '</th>
-								<th>' . _('Type') . '</th>
-								<th>' . _('Phone') . '</th>
-								<th>' . _('Fax') . '</th>
-							</tr>';
-			echo $TableHeader;
-			$j = 1;
-			$k = 0; //row counter to determine background colour
-			$RowIndex = 0;
-		}
-		if (DB_num_rows($result)!=0) {
-			if (!isset($_POST['CSV'])) {
-				DB_data_seek($result, ($_POST['PageOffset'] - 1) * $_SESSION['DisplayRecordsMax']);
-			}
-			while (($myrow = DB_fetch_array($result)) AND ($RowIndex <> $_SESSION['DisplayRecordsMax'])) {
-				if ($k == 1) {
-					echo '<tr class="EvenTableRows">';
-					$k = 0;
-				} else {
-					echo '<tr class="OddTableRows">';
-					$k = 1;
-				}
-				echo '<td><button type="submit" name="Customer' . $j . '">' . _('Select') . '</button></td>
-					<td><font size="1">' . htmlspecialchars_decode($myrow['name']) . '</font></td>
-					<td><font size="1">' . htmlspecialchars_decode($myrow['brname']) . '</font></td>
-					<td><font size="1">' . htmlspecialchars_decode($myrow['contactname']) . '</font></td>
-					<td><font size="1">' . htmlspecialchars_decode($myrow['typename']) . '</font></td>
-					<td><font size="1">' . $myrow['phoneno'] . '</font></td>
-					<td><font size="1">' . $myrow['faxno'] . '</font></td></tr>
-					<input type="hidden" name="Debtor'.$j.'" value="'.$myrow['debtorno'].'" />
-					<input type="hidden" name="Branch'.$j.'" value="'.$myrow['branchcode'].'" />';
-				$j++;
-				$RowIndex++;
-				//end of page full new headings if
-
-			}
-			//end of while loop
-			echo '</table>';
-		}
-	}
-//end if results to show
 }
+if (empty($_POST['Customer']) and empty($_SESSION['CreditItems'.$identifier]->DebtorNo)) {
+	ShowCustomerSearchFields($rootpath, $theme, $db);
+}
+
+if (isset($result)) {
+	ShowReturnedCustomers($result);
+}
+
+//end if results to show
+
 
 if (isset($_POST['Customer']) AND $_POST['Customer']!='') {
 
@@ -524,7 +194,7 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 			' ' . htmlspecialchars($_SESSION['CreditItems'.$identifier]->CustomerName)  . ' - ' . htmlspecialchars($_SESSION['CreditItems'.$identifier]->DeliverTo).'</p>';
 
  /* do the search for parts that might be being looked up to add to the credit note */
-	if (isset($_POST['Search'])){
+	if (isset($_POST['SearchParts'])){
 
 		if ($_POST['Keywords']!='' AND $_POST['StockCode']!='') {
 			prnMsg( _('Stock description keywords have been used in preference to the Stock code extract entered') . '.', 'info' );
@@ -1249,15 +919,14 @@ if (isset($_SESSION['CreditItems'.$identifier]->DebtorNo) and !isset($_POST['Pro
 		echo '</tr>';
 		echo '</table><br /><div class="centre">';
 
-		echo '<button type="submit" name="Search">' . _('Search Now') .'</button>';
+		echo '<button type="submit" name="SearchParts">' . _('Search Now') .'</button>';
 		echo '<button type="submit" name="ChangeCustomer">' . _('Change Customer') . '</button>';
 		echo '<button type="submit" name="Quick">' . _('Quick Entry') . '</button>';
-		echo '</div>';
+		echo '</div><br />';
 
 		if (isset($SearchResult)) {
 
-			echo '<br />
-					<table cellpadding="2" class="selection">
+			echo '<table cellpadding="2" class="selection">
 						<tr>
 							<td><input type="hidden" name="previous" value="'.($Offset-1).'" /><button type="submit" name="Prev">'._('Prev').'</button></td>
 							<td style="text-align:center" colspan="3"><input type="hidden" name="order_items" value="1" /><button type="submit" name="AddToCredit">'._('Add to Credit Note').'</button></td>
