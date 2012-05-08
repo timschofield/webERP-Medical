@@ -66,6 +66,7 @@ if (isset($_POST['submit']) OR isset($_POST['Update'])) {
     echo '<tr>
             <th>' . _('Code') . '</th>
             <th>' . _('Description') . '</th>
+            <th>' . _('Total Invoiced').'<br />'._('At All Locations') . '</th>
             <th>' . _('Total Invoiced').'<br />'._('At Location') . '</th>
             <th>' . _('On Hand') .'<br />'._('At All Locations') . '</th>
             <th>' . _('On Hand') .'<br />' ._('At Location') . '</th>
@@ -102,6 +103,16 @@ if (isset($_POST['submit']) OR isset($_POST['Update'])) {
 		$SalesRow=DB_fetch_array($ResultInvQty);
 
 
+		$SqlInvAll="SELECT SUM(-qty) AS qtyinvoiced
+				FROM stockmoves
+				WHERE stockid='".$myrow['stockid']."'
+				AND (type=10 OR type=11)
+				AND trandate >= '" . FormatDateForSQL(DateAdd(Date($_SESSION['DefaultDateFormat']),'d',-filter_number_input($_POST['NumberOfDays']))) . "'";
+
+		$ResultInvQtyAll = DB_query($SqlInvAll,$db);
+		$SalesRowAll=DB_fetch_array($ResultInvQtyAll);
+
+
 		//get On Hand all
 		//find the quantity onhand item
 		$SqlOH="SELECT SUM(quantity) AS qty
@@ -120,6 +131,7 @@ if (isset($_POST['submit']) OR isset($_POST['Update'])) {
 
 		echo $myrow['stockid'].'</td>
 			<td>'.$myrow['description'].'</td>
+			<td class="number">'.locale_number_format($SalesRowAll['qtyinvoiced'],$myrow['decimalplaces']).'</td>
 			<td class="number">'.locale_number_format($SalesRow['qtyinvoiced'],$myrow['decimalplaces']).'</td>
 			<td class="number">'.locale_number_format($TotQtyRow['qty'],$myrow['decimalplaces']).'</td>
 			<td class="number">'.locale_number_format($LocQtyRow['qty'],$myrow['decimalplaces']).'</td>
