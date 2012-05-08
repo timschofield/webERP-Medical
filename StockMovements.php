@@ -56,10 +56,10 @@ while ($myrow=DB_fetch_array($resultStkLocs)){
 }
 
 echo '</select></th></tr>';
-echo '<tr><th colspan="10">' . _('Show Movements before') . ':
-		<input type="text" name="BeforeDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="12" maxlength="12" value="' . $_POST['BeforeDate'] . '" />';
-echo ' ' . _('But after') . ':
+echo '<tr><th colspan="10">' . _('Show Movements between') . ':
 		<input type="text" name="AfterDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="12" maxlength="12" value="' . $_POST['AfterDate'] . '" />';
+echo ' ' . _('and') . ':
+		<input type="text" name="BeforeDate" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" size="12" maxlength="12" value="' . $_POST['BeforeDate'] . '" />';
 echo '<button type="submit" name="ShowMoves">' . _('Show Stock Movements') . '</button></th></tr>';
 
 $SQLBeforeDate = FormatDateForSQL($_POST['BeforeDate']);
