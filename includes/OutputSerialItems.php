@@ -197,7 +197,7 @@ while ($myrow=DB_fetch_array($result)){
 }
 
 echo '</table>';
-echo '<br /><div class="centre"><input type="submit" name="AddBatches" value="'. _('Enter'). '" /></div>';
+echo '<br /><div class="centre"><button type="submit" name="AddBatches" value="">'. _('Enter'). '</button></div>';
 echo '</form></td><td valign=top>';
 $ShowExisting=True;
 $_POST['EntryType']='Sequential';
