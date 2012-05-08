@@ -11,6 +11,7 @@ include('includes/session.inc');
 include('includes/SQL_CommonFunctions.inc');
 if (empty($identifier)) {
 	$identifier='';
+	unset($_SESSION['CurImportFile']);
 }
 $title = _('Receive Purchase Orders');
 include('includes/header.inc');
@@ -183,6 +184,11 @@ if (count($_SESSION['PO']->LineItems)>0 and !isset($_POST['ProcessGoodsReceived'
 			echo '<td class="number">' . $DisplayLineTotal . '</td>';
 		}
 
+		if ($LnItm->Completed ==1){
+			echo '<td><input type="checkbox" name="Complete_'. $LnItm->LineNo . '" checked="True" /></td>';
+		} else {
+			echo '<td><input type="checkbox" name="Complete_'. $LnItm->LineNo . '" /></td>';
+		}
 
 		if ($LnItm->Controlled == 1) {
 			if ($LnItm->Serialised==1){
@@ -193,13 +199,6 @@ if (count($_SESSION['PO']->LineItems)>0 and !isset($_POST['ProcessGoodsReceived'
 					_('Enter Batches'). '</a></td>';
 			}
 		}
-
-		if ($LnItm->Completed ==1){
-			echo '<td><input type="checkbox" name="Complete_'. $LnItm->LineNo . '" checked="True" /></td>';
-		} else {
-			echo '<td><input type="checkbox" name="Complete_'. $LnItm->LineNo . '" /></td>';
-		}
-
 		echo '</tr>';
 	}//foreach(LineItem)
 	echo '<script>defaultControl(document.forms[0].RecvQty_'.$LnItm->LineNo.');</script>';
