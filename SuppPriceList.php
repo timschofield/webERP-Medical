@@ -116,6 +116,14 @@ if (isset($_POST['PrintPDF'])) {
 	}
 	$result = DB_query($sql,$db,'','',false,true);
 
+	if(DB_num_rows($result)==0) {
+		$title = _('Supplier Price List Analysis');
+		include('includes/header.inc');
+		prnMsg( _('There are no results so the PDF is empty'), 'info');
+		include('includes/footer.inc');
+		exit;
+	}
+
 	if (DB_error_no($db) !=0) {
 		$title = _('Price List') . ' - ' . _('Problem Report');
 		include('includes/header.inc');
