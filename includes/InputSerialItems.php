@@ -20,18 +20,18 @@ if (isset($_GET['LineNo'])){
 	$LineNo=0;
 }
 /*
-        Entry Types:
-             Keyed Mode: 'Qty' Rows of Input Fields. Upto X shown per page (100 max)
-             Barcode Mode: Part Keyed, part not. 1st, 'Qty' of barcodes entered. Then extra data as/if
-             necessary
-             FileUpload Mode: File Uploaded must fulfill item requirements when parsed... no form based data
-                 entry. 1-upload, 2-parse&validate, 3-bad>1 good>4, 4-import.
-        switch the type we are updating from, w/ some rules...
-                Qty < X   - Default to keyed
-                X < Qty < Y - Default to barcode
-                Y < Qty - Default to upload
+		Entry Types:
+			 Keyed Mode: 'Qty' Rows of Input Fields. Upto X shown per page (100 max)
+			 Barcode Mode: Part Keyed, part not. 1st, 'Qty' of barcodes entered. Then extra data as/if
+			 necessary
+			 FileUpload Mode: File Uploaded must fulfill item requirements when parsed... no form based data
+				 entry. 1-upload, 2-parse&validate, 3-bad>1 good>4, 4-import.
+		switch the type we are updating from, w/ some rules...
+				Qty < X   - Default to keyed
+				X < Qty < Y - Default to barcode
+				Y < Qty - Default to upload
 
-        possibly override setting elsewhere.
+		possibly override setting elsewhere.
 */
 if (!isset($RecvQty)) {
 	$RecvQty=0;
@@ -84,7 +84,7 @@ if ($_POST['EntryType']=='FILE') {
 echo _('File Upload');
 echo '&nbsp; <input type="file" name="ImportFile" onClick="document.getElementById(\'FileEntry\').checked=true;" />';
 echo '</td></tr><tr><td colspan="3">';
-echo '<div class="centre"><input type="submit" value="'. _('Set Entry Type'). ':" /></div>';
+echo '<div class="centre"><button type="submit">'. _('Set Entry Type'). ':</button></div>';
 echo '</td></tr></table>';
 echo '</form>';
 
@@ -121,7 +121,7 @@ echo $EditLink . $RemoveLink;
 if ($_POST['EntryType'] == 'FILE'){
 	include('includes/InputSerialItemsFile.php');
 } elseif ($_POST['EntryType'] == 'SEQUENCE'){
-        include('includes/InputSerialItemsSequential.php');
+	include('includes/InputSerialItemsSequential.php');
 } else { /*KEYED or BARCODE */
 	include('includes/InputSerialItemsKeyed.php');
 }
