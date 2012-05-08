@@ -575,7 +575,7 @@ if ($_SESSION['RequireSupplierSelection'] ==1 OR !isset($_SESSION['PO'.$identifi
 				$k++;
 			}
 
-			echo '<td><button type="submit" style="width:100%" name="Select">'.$myrow['supplierid'].'</button></td>
+			echo '<td><button type="submit" style="width:100%" name="Select" value='.$myrow['supplierid'].'>'.$myrow['supplierid'].'</button></td>
 				<td>'.$myrow['suppname'].'</td><td>';
 
 			for ($i=1; $i<=6; $i++) {
