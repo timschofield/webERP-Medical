@@ -73,9 +73,9 @@ if (isset($_GET['StockID'])){	/*carry the stockid through to the form for additi
 if ($NewTransfer){
 
 	$_SESSION['Transfer']= new StockTransfer(0,
-										$_POST['StockLocationFrom'],
 										'',
-										$_POST['StockLocationTo'],
+										'',
+										'',
 										'',
 										Date($_SESSION['DefaultDateFormat'])
 										);
@@ -96,7 +96,7 @@ if ($NewTransfer){
 		$myrow = DB_fetch_array($result);
 		$_SESSION['Transfer']->TransferItem[0] = new LineItem (	trim(mb_strtoupper($_POST['StockID'])),
 															$myrow['description'],
-															$_POST['Quantity'],
+															0,
 															$myrow['units'],
 															$myrow['controlled'],
 															$myrow['serialised'],

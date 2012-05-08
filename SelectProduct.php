@@ -416,7 +416,7 @@ echo '</td><td valign="top" class="select">';
 /* Stock Transactions */
 if ($Its_A_Kitset_Assembly_Or_Dummy == false) {
 		echo '<a href="' . $rootpath . '/StockAdjustments.php?StockID=' . $StockID . '">' . _('Quantity Adjustments') . '</a><br />';
-		echo '<a href="' . $rootpath . '/StockTransfers.php?StockID=' . $StockID . '">' . _('Location Transfers') . '</a><br />';
+		echo '<a href="' . $rootpath . '/StockTransfers.php?StockID=' . $StockID . '&NewTransfer=Yes">' . _('Location Transfers') . '</a><br />';
 		if (function_exists('imagecreatefrompng')){
 			$StockImgLink = 'GetStockImage.php?automake=1&textcolor=FFFFFF&bgcolor=CCCCCC'.
 							'&StockID='.urlencode($StockID).
