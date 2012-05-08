@@ -14,7 +14,7 @@ if (!file_exists($PathPrefix . 'config.php')){
 }
 include($PathPrefix . 'config.php');
 
-$DBVersion=HighestFileName();
+$DBVersion=HighestFileName($PathPrefix);
 
 if (isset($SessionSavePath)){
 	session_save_path($SessionSavePath);
@@ -310,8 +310,8 @@ function CryptPass( $Password ) {
 	}
 }
 
-function HighestFileName() {
-	if($handle=opendir('sql/mysql/updates')){
+function HighestFileName($PathPrefix) {
+	if($handle=opendir($PathPrefix . 'sql/mysql/updates')){
 
 		$i=0;
 

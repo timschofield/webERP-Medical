@@ -239,9 +239,13 @@ if (!Is_Date($_SESSION['JournalDetail']->JnlDate)){
 	$_SESSION['JournalDetail']->JnlDate = Date($_SESSION['DefaultDateFormat'],mktime(0,0,0,date('m'),0,date('Y')));
 }
 
-echo '<table class="selection"><tr>
-		<td colspan="5"><td>'._('Date to Process Journal').':</td>
-		<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="JournalProcessDate" maxlength="10" size="11" value="' . $_SESSION['JournalDetail']->JnlDate . '" /></td>';
+echo '<table class="selection">
+		<tr>
+			<th colspan="5" class="header">' . _('Journal Header') . '</th>
+		</tr>
+		<tr>
+			<td></td><td>'._('Date to Process Journal').':</td>
+			<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="JournalProcessDate" maxlength="10" size="11" value="' . $_SESSION['JournalDetail']->JnlDate . '" /></td>';
 echo '<td>' . _('Type') . ':</td>
 		<td><select name="JournalType">';
 
