@@ -11,6 +11,8 @@ $title = _('Specify Dispatched Controlled Items');
 /* Session started in header.inc for password checking and authorisation level check */
 include('includes/header.inc');
 
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="" alt="" />' . ' ' . $title . '</p>';
+
 if (isset($_GET['LineNo'])){
         $LineNo = (int)$_GET['LineNo'];
 } elseif (isset($_POST['LineNo'])){
@@ -54,9 +56,7 @@ if ( $LineItem->Controlled != 1 ){
 ********************************************/
 echo '<div class="centre">';
 
-echo '<br /><a href="'. $rootpath. '/ConfirmDispatch_Invoice.php">'. _('Back to Confirmation of Dispatch') . '/' . _('Invoice'). '</a>';
-
-echo '<br /><font size="2"><b>'. _('Dispatch of up to').' '. number_format($LineItem->Quantity-$LineItem->QtyInv, $LineItem->DecimalPlaces). ' '. _('Controlled items').' ' . $LineItem->StockID  . ' - ' . $LineItem->ItemDescription . ' '. _('on order').' ' . $_SESSION['Items']->OrderNo . ' '. _('to'). ' ' . $_SESSION['Items']->CustomerName . '</b></font></div>';
+echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="" alt="" />'. _('Dispatch of up to').' '. number_format($LineItem->Quantity-$LineItem->QtyInv, $LineItem->DecimalPlaces). ' '. _('Controlled items').' ' . $LineItem->StockID  . ' - ' . $LineItem->ItemDescription . ' '. _('on order').' ' . $_SESSION['Items']->OrderNo . ' '. _('to'). ' ' . $_SESSION['Items']->CustomerName . '</p>';
 
 /** vars needed by InputSerialItem : **/
 $StockID = $LineItem->StockID;
@@ -71,6 +71,8 @@ include ('includes/OutputSerialItems.php');
 /*TotalQuantity set inside this include file from the sum of the bundles
 of the item selected for dispatch */
 $_SESSION['Items']->LineItems[$LineNo]->QtyDispatched = $TotalQuantity;
+
+echo '<br /><div style="text-align: right"><a href="'. $rootpath. '/ConfirmDispatch_Invoice.php">'. _('Back to Confirmation of Dispatch') . '/' . _('Invoice'). '</a></div>';
 
 include('includes/footer.inc');
 exit;
