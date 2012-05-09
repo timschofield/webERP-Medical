@@ -524,6 +524,24 @@ if (isset($_POST['submit'])) {
 				$ErrMsg =  _('The item could not be added because');
 				$DbgMsg = _('The SQL that was used to add the item failed was');
 				$result = DB_query($sql,$db, $ErrMsg, $DbgMsg);
+				//now insert any item properties
+				for ($i=0;$i<$_POST['PropertyCounter'];$i++){
+
+					if ($_POST['PropType' . $i] ==2){
+						if ($_POST['PropValue' . $i]=='on'){
+							$_POST['PropValue' . $i]=1;
+						} else {
+							$_POST['PropValue' . $i]=0;
+						}
+					}
+					$result = DB_query("INSERT INTO stockitemproperties (stockid,
+																			stkcatpropid,
+																			value)
+														VALUES ('" . $StockID . "',
+																'" . $_POST['PropID' . $i] . "',
+																'" . $_POST['PropValue' . $i] . "')",
+										$db,$ErrMsg,$DbgMsg,true);
+				} //end of loop around properties defined for the category
 				if (DB_error_no($db) ==0) {
 
 					$sql = "INSERT INTO locstock (loccode,
@@ -570,7 +588,7 @@ if (isset($_POST['submit'])) {
 		prnMsg( _('Validation failed, no updates or deletes took place'), 'error');
 	}
 
-} elseif (isset($_POST['delete']) AND mb_strlen($_POST['delete']) >1 ) {
+} elseif (isset($_POST['delete'])) {
 //the button to delete a selected record was clicked instead of the submit button
 
 	$CancelDelete = 0;
