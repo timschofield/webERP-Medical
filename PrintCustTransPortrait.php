@@ -494,7 +494,7 @@ if (isset($PrintPDF)
 		$FileName = $_SESSION['reports_dir'] . '/' . $_SESSION['DatabaseName'] . '_' . $InvOrCredit . '_' . $_GET['FromTransNo'] . '.pdf';
 		$pdf->Output($FileName,'F');
 		$mail = new htmlMimeMail();
-
+		$FromTransNo=$_GET['FromTransNo'];
 		$Attachment = $mail->getFile($FileName);
 		$mail->setText(_('Please find attached') . ' ' . $InvOrCredit . ' ' . $_GET['FromTransNo'] );
 		$mail->SetSubject($InvOrCredit . ' ' . $FromTransNo);

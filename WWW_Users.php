@@ -650,7 +650,7 @@ $ModulesAllowed = explode(',',$_POST['ModulesAllowed']);
 $i=0;
 foreach($ModuleList as $ModuleName){
 
-	echo '<tr><td>' . _('Display') . ' ' . $ModuleName . ' ' . _('options') . ': </td><td><select name="Module_' . $i . '">';
+	echo '<tr><td>' . _('Display') . ' ' . $ModuleName . ' ' . _('module') . ': </td><td><select name="Module_' . $i . '">';
 	if ($ModulesAllowed[$i]==0){
 		echo '<option selected="True" value=0>' . _('No') . '</option>';
 		echo '<option value=1>' . _('Yes') . '</option>';
