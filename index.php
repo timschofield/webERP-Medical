@@ -21,7 +21,7 @@ $ReportList = array('orders'=>'ord',
 
 include('includes/IndexArray.php');
 
-if (isset($SupplierLogin) and $SupplierLogin==1){
+if ($_SESSION['UserSupplierID']!=''){
 	echo '<table class="table_index">
 			<tr>
 			<td class="menu_group_item">
@@ -41,7 +41,7 @@ if (isset($SupplierLogin) and $SupplierLogin==1){
 		</table>';
 	include('includes/footer.inc');
 	exit;
-} elseif (isset($SupplierLogin) and $SupplierLogin==0){
+} elseif ($_SESSION['CustomerID']!=''){
 	echo '<table class="table_index">
 			<tr>
 			<td class="menu_group_item">
