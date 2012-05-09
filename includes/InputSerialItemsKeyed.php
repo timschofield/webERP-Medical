@@ -54,7 +54,7 @@ foreach ($LineItem->SerialItems as $Bundle){
 		echo '<td class="number">' . $Bundle->ExpiryDate . '</td>';
 	}
 
-	echo '<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?Delete=' . $Bundle->BundleRef . '&StockID=' . $LineItem->StockID . '&LineNo=' . $LineNo .'">'. _('Delete'). '</a></td></tr>';
+	echo '<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?Delete=' . $Bundle->BundleRef . '&StockID=' . $LineItem->StockID . '&LineNo=' . $LineNo .'&identifier=' . $identifier . '">'. _('Delete'). '</a></td></tr>';
 
 	$TotalQuantity += $Bundle->BundleQty;
 }
@@ -79,7 +79,7 @@ echo '<table class="selection">';
 echo $tableheader;
 
 
-echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" name="Ga6uF5Wa" method="post">
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'] . '?identifier=' . $identifier, ENT_QUOTES, 'UTF-8') . '" name="Ga6uF5Wa" method="post">
       <input type="hidden" name=LineNo value="' . $LineNo . '" />
       <input type="hidden" name=StockID value="' . $StockID . '" />
       <input type="hidden" name=EntryType value="KEYED" />';
@@ -131,7 +131,7 @@ for ($i=0;$i < 10;$i++){
 }
 
 echo '</table>';
-echo '<br /><div class="centre"><input type="submit" name="AddBatches" value="'. _('Enter'). '" /></div>';
+echo '<br /><div class="centre"><button type="submit" name="AddBatches" value="'. _('Enter'). '">'. _('Enter'). '</button></div>';
 echo '</form></td><td valign=top>';
 if ($ShowExisting){
 	include('includes/InputSerialItemsExisting.php');
