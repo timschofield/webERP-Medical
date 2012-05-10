@@ -267,12 +267,12 @@
 	<OrderTotalCaption type="SimpleText" name="Order total caption" id="OrderTotalCaption">
 		<FontSize>14</FontSize>
 		<x>450</x>
-		<y>549</y>
+		<y>563</y>
 	</OrderTotalCaption>
 	<OrderTotal type="MultiLineText" name="Order total" id="OrderTotal">
 		<FontSize>14</FontSize>
 		<x>665</x>
-		<y>549</y>
+		<y>563</y>
 		<Length>125</Length>
 	</OrderTotal>
 </form>

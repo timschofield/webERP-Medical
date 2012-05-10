@@ -10,6 +10,10 @@ include('includes/header.inc');
 
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p>';
 
+if (isset($_GET['DeleteImage'])) {
+	unlink($_SERVER['DOCUMENT_ROOT'].$rootpath.$PathPrefix . '/' . $_SESSION['part_pics_dir'] . '/cat_' . $_GET['DeleteImage'].'.jpg');
+}
+
 if (isset($_GET['SelectedCategory'])){
 	$SelectedCategory = strtoupper($_GET['SelectedCategory']);
 } else if (isset($_POST['SelectedCategory'])){
@@ -35,7 +39,7 @@ if (isset($_GET['EditName'])){
 
 if (isset($SelectedCategory) and isset($_FILES['ItemPicture']) and $_FILES['ItemPicture']['name'] !='') {
 
-	$result    = $_FILES['ItemPicture']['error'];
+	$result	= $_FILES['ItemPicture']['error'];
  	$UploadTheFile = 'Yes'; //Assume all is well to start off with
  	// Stock is always capatalized so there is no confusion since "cat_" is lowercase
 	$filename = $_SESSION['part_pics_dir'] . '/cat_' . $SelectedCategory . '.jpg';
@@ -49,7 +53,7 @@ if (isset($SelectedCategory) and isset($_FILES['ItemPicture']) and $_FILES['Item
 		$UploadTheFile ='No';
 	} elseif ( $_FILES['ItemPicture']['type'] == 'text/plain' ) {  //File Type Check
 		prnMsg( _('Only graphics files can be uploaded'),'warn');
-         	$UploadTheFile ='No';
+		 	$UploadTheFile ='No';
 	} elseif (file_exists($filename)){
 		prnMsg(_('Attempting to overwrite an existing item image'),'warn');
 		$result = unlink($filename);
@@ -61,7 +65,7 @@ if (isset($SelectedCategory) and isset($_FILES['ItemPicture']) and $_FILES['Item
 
 	if ($UploadTheFile=='Yes'){
 		$result  =  move_uploaded_file($_FILES['ItemPicture']['tmp_name'], $filename);
-		$message = ($result)?_('File url') ."<a href='". $filename ."'>" .  $filename . '</a>' : "Somthing is wrong with uploading a file.";
+		$message = ($result)?_('File url') .'<a href="'. $filename .'">' .  $filename . '</a>' : _('Something is wrong with uploading a file.');
 	}
  /* EOR Add Image upload for New Item  - by Ori */
 }
@@ -90,17 +94,17 @@ if (isset($_POST['submit'])  and $EditName == 1 ) { // Creating or updating a ca
 		delete code below*/
 
 		$sql = "UPDATE salescat SET salescatname = '" . $_POST['SalesCatName'] . "'
-                            WHERE salescatid = '" .$SelectedCategory . "'";
+							WHERE salescatid = '" .$SelectedCategory . "'";
 		$msg = _('The Sales category record has been updated');
 	} elseif ($InputError !=1) {
 
 	/*Selected category is null cos no item selected on first time round so must be adding a	record must be submitting new entries in the new stock category form */
 
 		$sql = "INSERT INTO salescat (salescatname,
-                                       parentcatid)
-                                       VALUES (
-                                       '" . $_POST['SalesCatName'] . "',
-                                       " . (isset($ParentCategory)?($ParentCategory):('NULL')) . ")";
+									   parentcatid)
+									   VALUES (
+									   '" . $_POST['SalesCatName'] . "',
+									   " . (isset($ParentCategory)?($ParentCategory):('NULL')) . ")";
 		$msg = _('A new Sales category record has been added');
 	}
 
@@ -225,7 +229,9 @@ if (DB_num_rows($result) == 0) {
 	prnMsg(_('There are no categories defined at this level.'));
 } else {
 	echo '<table class="selection">';
-	echo '<tr><th>' . _('Sub Category') . '</th></tr>';
+	echo '<tr>
+			<th>' . _('Sub Category') . '</th>
+			</tr>';
 
 	$k=0; //row colour counter
 
@@ -238,15 +244,14 @@ if (DB_num_rows($result) == 0) {
 			$k=1;
 		}
 
-		if (function_exists('imagecreatefrompng')){
+		if (function_exists('imagecreatefromjpg')){
 			$CatImgLink = '<img src="GetStockImage.php?automake=1&textcolor=FFFFFF&bgcolor=CCCCCC&stockid='.urlencode('cat_'.$myrow['salescatid'].'.jpg').'&text=&width=32&height=32" />';
 		} else {
 			if( file_exists($_SESSION['part_pics_dir'] . '/' .'cat_'.$myrow['salescatid'].'.jpg') ) {
-				$CatImgLink = '<img src="'.$rootpath . '/' . $_SESSION['part_pics_dir'] . '/' . 'cat_'.$myrow['salescatid'].'.jpg" />';
+				$CatImgLink = '<img src="'.$rootpath . '/' . $_SESSION['part_pics_dir'] . '/' . 'cat_'.$myrow['salescatid'].'.jpg" width="64px" />';
 			} else {
 				$CatImgLink = 'No Image';
 			}
-
 		}
 
 		if (!isset($ParentCategory)) {
@@ -254,21 +259,21 @@ if (DB_num_rows($result) == 0) {
 		}
 
 		printf('<td>%s</td>
-            		<td><a href="%sParentCategory=%s">' . _('Select') . '</td>
-            		<td><a href="%sSelectedCategory=%s&ParentCategory=%s">' . _('Edit') . '</td>
-            		<td><a href="%sSelectedCategory=%s&delete=yes&EditName=1&ParentCategory=%s">' . _('Delete') . '</td>
-					<td>%s</td>
-            		</tr>',
-            		$myrow['salescatname'],
-            		htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
-            		$myrow['salescatid'],
-            		htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
-            		$myrow['salescatid'],
-            		$ParentCategory,
-            		htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
-            		$myrow['salescatid'],
-            		$ParentCategory,
-            		$CatImgLink);
+				<td>%s</td>
+				<td><a href="%sParentCategory=%s">' . _('Select') . '</td>
+				<td><a href="%sSelectedCategory=%s&ParentCategory=%s">' . _('Edit') . '</td>
+				<td><a href="%sSelectedCategory=%s&delete=yes&EditName=1&ParentCategory=%s">' . _('Delete') . '</td>
+				</tr>',
+				$myrow['salescatname'],
+				$CatImgLink,
+				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
+				$myrow['salescatid'],
+				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
+				$myrow['salescatid'],
+				$ParentCategory,
+				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
+				$myrow['salescatid'],
+				$ParentCategory);
 	}
 	//END WHILE LIST LOOP
 	echo '</table>';
@@ -316,11 +321,22 @@ echo '<input type="hidden" name="EditName" value="1" />';
 echo '<table class="selection">';
 echo '<tr><th colspan="2">' . $FormCaps . '</th></tr>';
 echo '<tr><td>' . _('Category Name') . ':</td>
-            <td><input type="text" name="SalesCatName" size="20" maxlength="20" value="' . $_POST['SalesCatName'] . '" /></td></tr>';
+			<td><input type="text" name="SalesCatName" size="20" maxlength="20" value="' . $_POST['SalesCatName'] . '" /></td></tr>';
 // Image upload only if we have a selected category
 if (isset($SelectedCategory)) {
-	echo '<tr><td>'. _('Image File (.jpg)') . ':</td>
-		<td><input type="file" id="ItemPicture" name="ItemPicture" /></td></tr>';
+	$filename = $_SESSION['part_pics_dir'] . '/cat_' . $SelectedCategory . '.jpg';
+	if (!file_exists($filename)) {
+		echo '<tr><td>'. _('Image File (.jpg)') . ':</td>
+			<td><input type="file" id="ItemPicture" name="ItemPicture" /></td></tr>';
+	} else {
+		echo '<tr>
+				<td>' . _('Image File') . '</td>
+				<td>
+					<img src="'.$rootpath . '/' . $_SESSION['part_pics_dir'] . '/' . 'cat_'.$myrow['salescatid'].'.jpg" width="64px" />
+					<a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?DeleteImage='.$myrow['salescatid'].'">' . _('Delete Image') . '</a>
+				</td>
+			</tr>';
+	}
 }
 
 echo '</table>';

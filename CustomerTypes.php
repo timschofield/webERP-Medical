@@ -12,6 +12,10 @@ if (isset($_POST['SelectedType'])){
 	$SelectedType = strtoupper($_GET['SelectedType']);
 }
 
+if (isset($_GET['name'])) {
+	$_POST['typename']=$_GET['name'];
+}
+
 if (isset($Errors)) {
 	unset($Errors);
 }
@@ -65,7 +69,7 @@ if (isset($_POST['submit'])) {
 			SET typename = '" . $_POST['typename'] . "'
 			WHERE typeid = '" .$SelectedType."'";
 
-		$msg = _('The customer type') . ' ' . $SelectedType . ' ' .  _('has been updated');
+		$msg = _('The customer type') . ' ' . $_POST['typename'] . ' ' .  _('has been updated');
 	} elseif ( $InputError !=1 ) {
 
 		// First check the type is not being duplicated
@@ -89,7 +93,7 @@ if (isset($_POST['submit'])) {
 					VALUES ('" . $_POST['typename'] . "')";
 
 
-			$msg = _('Customer type') . ' ' . $_POST["typename"] .  ' ' . _('has been created');
+			$msg = _('Customer type') . ' ' . $_POST['typename'] .  ' ' . _('has been created');
 			$checkSql = "SELECT count(typeid)
 			     FROM debtortype";
 			$result = DB_query($checkSql, $db);
@@ -160,7 +164,7 @@ if (isset($_POST['submit'])) {
 			$ErrMsg = _('The Type record could not be deleted because');
 			$result = DB_query($sql,$db,$ErrMsg);
 			echo '<br />';
-			prnMsg(_('Customer type') . $SelectedType  . ' ' . _('has been deleted') ,'success');
+			prnMsg(_('Customer type') . ' ' . $_POST['typename']  . ' ' . _('has been deleted') ,'success');
 
 			unset ($SelectedType);
 			unset($_GET['delete']);
@@ -187,7 +191,7 @@ or deletion of the records*/
 
 $k=0; //row colour counter
 
-while ($myrow = DB_fetch_row($result)) {
+while ($myrow = DB_fetch_array($result)) {
 	if ($k==1){
 		echo '<tr class="EvenTableRows">';
 		$k=0;
@@ -200,14 +204,15 @@ while ($myrow = DB_fetch_row($result)) {
 		<td>%s</td>
 		<td>%s</td>
 		<td><a href="%sSelectedType=%s">' . _('Edit') . '</td>
-		<td><a href="%sSelectedType=%s&delete=yes" onclick=\'return confirm("' . _('Are you sure you wish to delete this Customer Type?') . '");\'>' . _('Delete') . '</td>
+		<td><a href="%sSelectedType=%s&delete=yes&name=%s" onclick=\'return confirm("' . _('Are you sure you wish to delete this Customer Type?') . '");\'>' . _('Delete') . '</td>
 		</tr>',
-		$myrow[0],
-		$myrow[1],
+		$myrow['typeid'],
+		$myrow['typename'],
 		htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
-		$myrow[0],
+		$myrow['typeid'],
 		htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
-		$myrow[0]);
+		$myrow['typeid'],
+		$myrow['typename']);
 	}
 	//END WHILE LIST LOOP
 	echo '</table>';
