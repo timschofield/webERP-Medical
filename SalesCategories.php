@@ -87,6 +87,13 @@ if (isset($_POST['submit'])  and $EditName == 1 ) { // Creating or updating a ca
 		prnMsg(_('The Sales category name must be twenty characters or less long'),'error');
 	}
 
+	$sql = "SELECT salescatid FROM salescat WHERE salescatname='" .$_POST['SalesCatName'] . "'";
+	$result = DB_query($sql, $db);
+	if (DB_num_rows($result)>0 and !isset($_GET['EditName'])) {
+		$InputError = 1;
+		prnMsg(_('The Sales category name already exists'),'error');
+	}
+
 	if (isset($SelectedCategory) and $InputError !=1 ) {
 
 		/*SelectedCategory could also exist if submit had not been clicked this code
