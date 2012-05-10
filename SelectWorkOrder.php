@@ -246,6 +246,7 @@ if (isset($StockItemsResult)) {
 					stockmaster.description,
 					woitems.qtyreqd,
 					woitems.qtyrecd,
+					workorders.startdate,
 					workorders.requiredby
 					FROM workorders
 					INNER JOIN woitems ON workorders.wo=woitems.wo
@@ -263,6 +264,7 @@ if (isset($StockItemsResult)) {
 					stockmaster.description,
 					woitems.qtyreqd,
 					woitems.qtyrecd,
+					workorders.startdate,
 					workorders.requiredby
 					FROM workorders
 					INNER JOIN woitems ON workorders.wo=woitems.wo
@@ -278,6 +280,7 @@ if (isset($StockItemsResult)) {
 					stockmaster.description,
 					woitems.qtyreqd,
 					woitems.qtyrecd,
+					workorders.startdate,
 					workorders.requiredby
 					FROM workorders
 					INNER JOIN woitems ON workorders.wo=woitems.wo
@@ -307,6 +310,7 @@ if (isset($StockItemsResult)) {
 							<th>' . _('Quantity Required') . '</th>
 							<th>' . _('Quantity Received') . '</th>
 							<th>' . _('Quantity Outstanding') . '</th>
+							<th>' . _('Start Date') . '</th>
 							<th>' . _('Required Date') . '</th>
 						</tr>';
 
@@ -331,6 +335,7 @@ if (isset($StockItemsResult)) {
 		$Costing_WO =$rootpath . '/WorkOrderCosting.php?WO=' .$myrow['wo'];
 
 		$FormatedRequiredByDate = ConvertSQLDate($myrow['requiredby']);
+		$FormatedStartDate = ConvertSQLDate($myrow['startdate']);
 
 
 		printf('<td><a href="%s">%s</a></td>
@@ -342,6 +347,7 @@ if (isset($StockItemsResult)) {
 				<td class="number">%s</td>
 				<td class="number">%s</td>
 				<td class="number">%s</td>
+				<td>%s</td>
 				<td>%s</td>
 				</tr>',
 				$ModifyPage,
@@ -355,6 +361,7 @@ if (isset($StockItemsResult)) {
 				$myrow['qtyreqd'],
 				$myrow['qtyrecd'],
 				$myrow['qtyreqd']-$myrow['qtyrecd'],
+				$FormatedStartDate,
 				$FormatedRequiredByDate);
 
 		$j++;
