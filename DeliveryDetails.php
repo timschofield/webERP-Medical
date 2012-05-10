@@ -264,7 +264,7 @@ if(isset($_POST['MakeRecurringOrder']) AND ! $InputErrors){
 }
 
 
-if (isset($_POST['BackToLineDetails']) and $_POST['BackToLineDetails']==_('Modify Order Lines')){
+if (isset($_POST['BackToLineDetails'])){
 
 	echo '<meta http-equiv="Refresh" content="0; url=' . $rootpath . '/SelectOrderItems.php?identifier='.$identifier   . '">';
 	prnMsg(_('You should automatically be forwarded to the entry of the order line details page') . '. ' . _('If this does not happen') . '(' . _('if the browser does not support META Refresh') . ') ' ."<a href='" . $rootpath . '/SelectOrderItems.php?identifier='.$identifier  . "'>". _('click here') .'</a> '. _('to continue'),'info');
