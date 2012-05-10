@@ -163,8 +163,8 @@ Class Cart {
 														itemdue,
 														poline)
 													VALUES('" . $this->LineCounter . "',
-														'" . $_SESSION['ExistingOrder'.$identifier] . "',
-														'" . trim(strtoupper($StockID)) ."',
+														'" . $this->OrderNo . "',
+														'" . trim(mb_strtoupper($StockID)) ."',
 														'" . $Qty . "',
 														'" . $Price . "',
 														'" . $Units . "',
@@ -219,7 +219,7 @@ Class Cart {
 															narrative ='" . DB_escape_string($Narrative) . "',
 															itemdue = '" . FormatDateForSQL($ItemDue) . "',
 															poline = '" . DB_escape_string($POLine) . "'
-														WHERE orderno='" . $_SESSION['ExistingOrder'.$identifier] . "'
+														WHERE orderno='" . $this->OrderNo . "'
 														AND orderlineno='" . $UpdateLineNumber . "'"
 													, $db
 				, _('The order line number') . ' ' . $UpdateLineNumber .  ' ' . _('could not be updated'));
@@ -237,20 +237,20 @@ Class Cart {
 			if ($this->Some_Already_Delivered($LineNumber)==0){
 				/* nothing has been delivered, delete it. */
 				$result = DB_query("DELETE FROM salesorderdetails
-									WHERE orderno='" . $_SESSION['ExistingOrder'.$identifier] . "'
+									WHERE orderno='" . $this->OrderNo . "'
 									AND orderlineno='" . $LineNumber . "'",
 									$db,
 									_('The order line could not be deleted because')
 									);
-				prnMsg( _('Deleted Line Number'). ' ' . $LineNumber . ' ' . _('from existing Order Number').' ' . $_SESSION['ExistingOrder'.$identifier], 'success');
+				prnMsg( _('Deleted Line Number'). ' ' . $LineNumber . ' ' . _('from existing Order Number').' ' . $this->OrderNo, 'success');
 			} else {
 				/* something has been delivered. Clear the remaining Qty and Mark Completed */
 				$result = DB_query("UPDATE salesorderdetails SET quantity=qtyinvoiced, completed=1
-									WHERE orderno='".$_SESSION['ExistingOrder'.$identifier]."' AND orderlineno='" . $LineNumber . "'" ,
+									WHERE orderno='".$this->OrderNo."' AND orderlineno='" . $LineNumber . "'" ,
 									$db,
 								   _('The order line could not be updated as completed because')
 								   );
-				prnMsg(_('Removed Remaining Quantity and set Line Number '). ' ' . $LineNumber . ' ' . _('as Completed for existing Order Number').' ' . $_SESSION['ExistingOrder'.$identifier], 'success');
+				prnMsg(_('Removed Remaining Quantity and set Line Number '). ' ' . $LineNumber . ' ' . _('as Completed for existing Order Number').' ' . $this->OrderNo, 'success');
 			}
 		}
 		/* Since we need to check the LineItem above and might affect the DB, don't unset until after DB is updates occur */

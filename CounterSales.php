@@ -813,9 +813,22 @@ if (count($_SESSION['Items'.$identifier]->LineItems)>0 and !isset($_POST['Proces
 				<td class="number">' . locale_number_format($OrderLine->QOHatLoc/$OrderLine->ConversionFactor,$OrderLine->DecimalPlaces) . '</td>
 				<td>' . $OrderLine->Units . '</td>';
 
-		echo '<td><input class="number" type="text" name="Price_' . $OrderLine->LineNumber . '" size="16" maxlength="16" value="' . locale_number_format($OrderLine->Price,4) . '" /></td>
-				<td><input class="number" type="text" name="Discount_' . $OrderLine->LineNumber . '" size="5" maxlength="4" value="' . locale_number_format($OrderLine->DiscountPercent * 100,2) . '" /></td>
-				<td><input class="number" type="text" name="GPPercent_' . $OrderLine->LineNumber . '" size="8" maxlength="8" value="' . locale_number_format($OrderLine->GPPercent,4) . '" /></td>';
+		if ($_SESSION['CanViewPrices']==1) {
+			echo '<td><input class="number" type="text" name="Price_' . $OrderLine->LineNumber . '" size="16" maxlength="16" value="' . locale_number_format($OrderLine->Price,4) . '" /></td>';
+		} else {
+			echo '<input type="hidden" name="Price_' . $OrderLine->LineNumber . '" value="' . locale_number_format($OrderLine->Price,4) . '" />';
+			echo '<td class="number">' . locale_number_format($OrderLine->Price,4) . '</td>';
+		}
+
+		if ($_SESSION['CanViewPrices']==1) {
+			echo '<td><input class="number" type="text" name="Discount_' . $OrderLine->LineNumber . '" size="5" maxlength="4" value="' . locale_number_format($OrderLine->DiscountPercent * 100,2) . '" /></td>
+					<td><input class="number" type="text" name="GPPercent_' . $OrderLine->LineNumber . '" size="8" maxlength="8" value="' . locale_number_format($OrderLine->GPPercent,4) . '" /></td>';
+		} else {
+			echo '<input type="hidden" name="Discount_' . $OrderLine->LineNumber . '" value="' . locale_number_format($OrderLine->DiscountPercent * 100,2) . '" />
+					<input type="hidden" name="GPPercent_' . $OrderLine->LineNumber . '" value="' . locale_number_format($OrderLine->GPPercent,4) . '" />';
+			echo '<td class="number">' . locale_number_format($OrderLine->DiscountPercent * 100,2) . '</td>
+				<td class="number">' . locale_number_format($OrderLine->GPPercent,4) . '%</td>';
+		}
 		echo '<td class="number">' . locale_money_format($SubTotal,$_SESSION['Items'.$identifier]->DefaultCurrency) . '</td>';
 		$LineDueDate = $OrderLine->ItemDue;
 		if (!Is_Date($OrderLine->ItemDue)){

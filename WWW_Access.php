@@ -15,6 +15,10 @@ if (isset($_GET['SelectedRole'])){
 	$SelectedRole = $_POST['SelectedRole'];
 }
 
+if (!isset($_POST['CanViewPrices'])) {
+	$_POST['CanViewPrices']=0;
+}
+
 if (isset($_POST['submit']) or isset($_GET['remove']) or isset($_GET['add']) ) {
 
 	//initialise no input errors assumed initially before we test
@@ -34,12 +38,14 @@ if (isset($_POST['submit']) or isset($_GET['remove']) or isset($_GET['add']) ) {
 	unset($sql);
 	if (isset($_POST['SecRoleName']) ){ // Update or Add Security Headings
 		if(isset($SelectedRole)) { // Update Security Heading
-			$sql = "UPDATE securityroles SET secrolename = '".$_POST['SecRoleName']."'
+			$sql = "UPDATE securityroles
+					SET secrolename = '".$_POST['SecRoleName']."',
+						canviewprices='".$_POST['CanViewPrices']."'
 					WHERE secroleid = '".$SelectedRole . "'";
 			$ErrMsg = _('The update of the security role description failed because');
 			$ResMsg = _('The Security role description was updated.');
 		} else { // Add Security Heading
-			$sql = "INSERT INTO securityroles (secrolename) VALUES ('".$_POST['SecRoleName']."')";
+			$sql = "INSERT INTO securityroles (secrolename, canviewprices) VALUES ('".$_POST['SecRoleName']."', '".$_POST['CanViewPrices']."')";
 			$ErrMsg = _('The update of the security role failed because');
 			$ResMsg = _('The Security role was created.');
 		}
@@ -79,8 +85,9 @@ if (isset($_POST['submit']) or isset($_GET['remove']) or isset($_GET['add']) ) {
 	// PREVENT DELETES IF DEPENDENT RECORDS IN 'www_users'
 	$sql= "SELECT COUNT(*) FROM www_users WHERE fullaccess='" . $_GET['SelectedRole'] . "'";
 	$result = DB_query($sql,$db);
+	$myrow = DB_fetch_row($result);
 
-	if (DB_num_rows($result)>0) {
+	if ($myrow[0]>0) {
 		prnMsg( _('Cannot delete this role because user accounts are setup using it'),'warn');
 		echo '<br />' . _('There are') . ' ' . $myrow[0] . ' ' . _('user accounts that have this security role setting') . '</font>';
 	} else {
@@ -100,13 +107,17 @@ if (!isset($SelectedRole)) {
 /* If its the first time the page has been displayed with no parameters then none of the above are true and the list of Users will be displayed with links to delete or edit each. These will call the same page again and allow update/input or deletion of the records*/
 
 	$sql = "SELECT secroleid,
-			secrolename
-		FROM securityroles
-		ORDER BY secrolename";
+					secrolename,
+					canviewprices
+				FROM securityroles
+				ORDER BY secrolename";
 	$result = DB_query($sql,$db);
 
 	echo '<table class="selection">';
-	echo '<tr><th>' . _('Role') . '</th></tr>';
+	echo '<tr>
+			<th>' . _('Role') . '</th>
+			<th>' . _('Can view') . '<br />' . _('prices') . '</th>
+		</tr>';
 
 	$k=0; //row colour counter
 
@@ -119,18 +130,26 @@ if (!isset($SelectedRole)) {
 			$k=1;
 		}
 
+		if ($myrow['canviewprices']==1) {
+			$CanViewPrices = _('Yes');
+		} else {
+			$CanViewPrices = _('No');
+		}
+
 		/*The SecurityHeadings array is defined in config.php */
 
 		printf('<td>%s</td>
-			<td><a href="%s?SelectedRole=%s">' . _('Edit') . '</a></td>
-			<td><a href="%s?SelectedRole=%s&delete=1&SecRoleName=%s">' . _('Delete') . '</a></td>
-			</tr>',
-			$myrow['secrolename'],
-			htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') ,
-			$myrow['secroleid'],
-			htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') ,
-			$myrow['secroleid'],
-			urlencode($myrow['secrolename']));
+				<td>%s</td>
+				<td><a href="%s?SelectedRole=%s">' . _('Edit') . '</a></td>
+				<td><a href="%s?SelectedRole=%s&delete=1&SecRoleName=%s">' . _('Delete') . '</a></td>
+				</tr>',
+				$myrow['secrolename'],
+				$CanViewPrices,
+				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') ,
+				$myrow['secroleid'],
+				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') ,
+				$myrow['secroleid'],
+				urlencode($myrow['secrolename']));
 
 	} //END WHILE LIST LOOP
 	echo '</table>';
@@ -145,7 +164,8 @@ if (isset($SelectedRole)) {
 	//editing an existing role
 
 	$sql = "SELECT secroleid,
-			secrolename
+			secrolename,
+			canviewprices
 		FROM securityroles
 		WHERE secroleid='" . $SelectedRole . "'";
 	$result = DB_query($sql, $db);
@@ -155,6 +175,7 @@ if (isset($SelectedRole)) {
 		$myrow = DB_fetch_array($result);
 		$_POST['SelectedRole'] = $myrow['secroleid'];
 		$_POST['SecRoleName'] = $myrow['secrolename'];
+		$_POST['CanViewPrices'] = $myrow['canviewprices'];
 	}
 }
 echo '<br />';
@@ -167,8 +188,25 @@ echo '<table class="selection">';
 if (!isset($_POST['SecRoleName'])) {
 	$_POST['SecRoleName']='';
 }
-echo '<tr><td>' . _('Role') . ':</td>
-	<td><input type="text" name="SecRoleName" size="40" maxlength="40" value="' . $_POST['SecRoleName'] . '" /></tr>';
+if (!isset($_POST['CanViewPrices'])) {
+	$_POST['CanViewPrices']=0;
+}
+echo '<tr>
+		<td>' . _('Role') . ':</td>
+		<td><input type="text" name="SecRoleName" size="40" maxlength="40" value="' . $_POST['SecRoleName'] . '" />
+	</tr>';
+if ($_POST['CanViewPrices']==1) {
+	echo '<tr>
+			<td>' . _('User can view prices') . ':</td>
+			<td><input type="checkbox" name="CanViewPrices" checked="checked" value="1" />
+		</tr>';
+} else {
+	echo '<tr>
+			<td>' . _('User can view prices') . ':</td>
+			<td><input type="checkbox" name="CanViewPrices" value="1" />
+		</tr>';
+}
+
 echo '</table><br />
 	<div class="centre"><button type="submit" name="submit">' . _('Enter Role') . '</button></div></form>';
 

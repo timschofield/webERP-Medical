@@ -862,7 +862,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			}
 		 }
 		 unset($NewItem);
-	 } /* end of if quick entry */
+	} /* end of if quick entry */
 
 	if (isset($_POST['AssetDisposalEntered'])){ //its an asset being disposed of
 		if ($_POST['AssetToDisposeOf'] == 'NoAssetSelected'){ //don't do anything unless an asset is disposed of
@@ -974,13 +974,15 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		foreach ($_SESSION['Items'.$identifier]->LineItems as $OrderLine) {
 
 			if (isset($_POST['Quantity_' . $OrderLine->LineNumber])){
-
+				if (!isset($PropertiesArray[$OrderLine->LineNumber])) {
+					$PropertiesArray[$OrderLine->LineNumber]='';
+				}
 				$Quantity = filter_number_input($_POST['Quantity_' . $OrderLine->LineNumber]);
 
 				if (ABS($OrderLine->Price - $_POST['Price_' . $OrderLine->LineNumber])>0.01){
 					$Price = filter_currency_input($_POST['Price_' . $OrderLine->LineNumber]);
 					$_POST['GPPercent_' . $OrderLine->LineNumber] = (($Price*(1-($_POST['Discount_' . $OrderLine->LineNumber]/100))) - $OrderLine->StandardCost*$ExRate)/($Price *(1-$_POST['Discount_' . $OrderLine->LineNumber])/100);
-				} elseif (ABS($OrderLine->GPPercent - $_POST['GPPercent_' . $OrderLine->LineNumber])>=0.001) {
+				} elseif (ABS($OrderLine->GPPercent - $_POST['GPPercent_' . $OrderLine->LineNumber])>=0.01) {
 					//then do a recalculation of the price at this new GP Percentage
 					$Price = ($OrderLine->StandardCost*$ExRate)/(1 -(($_POST['GPPercent_' . $OrderLine->LineNumber] + $_POST['Discount_' . $OrderLine->LineNumber])/100));
 				} else {
@@ -1217,10 +1219,12 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			$DisplayDiscount = locale_number_format(($OrderLine->DiscountPercent * 100),2);
 			$QtyOrdered = $OrderLine->Quantity;
 			$QtyRemain = $QtyOrdered - $OrderLine->QtyInv;
+			$LineComments = '';
 
 			if ($OrderLine->QOHatLoc < $OrderLine->Quantity AND ($OrderLine->MBflag=='B' OR $OrderLine->MBflag=='M')) {
 				/*There is a stock deficiency in the stock location selected */
 				$RowStarter = '<tr bgcolor="#EEAABB">'; //rows show red where stock deficiency
+				$LineComments = '*&nbsp;&nbsp;' . _('Insufficient Stock at Location');
 			} elseif ($k==1){
 				$RowStarter = '<tr class="OddTableRows">';
 				$k=0;
@@ -1249,7 +1253,7 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 			echo '<input type="hidden" name="Units_'.$OrderLine->LineNumber.'" value="' . $OrderLine->Units . '" />';
 			echo '<input type="hidden" name="ConversionFactor_'.$OrderLine->LineNumber.'" value="' . $OrderLine->ConversionFactor . '" />';
 
-			if (in_array(2,$_SESSION['AllowedPageSecurityTokens'])){
+			if ($_SESSION['CanViewPrices']==1){
 				/*OK to display with discount if it is an internal user with appropriate permissions */
 				echo '<td><input class="number" type="text" name="Price_' . $OrderLine->LineNumber . '" size="16" maxlength="16" value="' . locale_money_format($OrderLine->Price, $_SESSION['Items'.$identifier]->DefaultCurrency) . '" /></td>
 					<td><input class="number" type="text" name="Discount_' . $OrderLine->LineNumber . '" size="7" maxlength="6" value="' . locale_number_format($OrderLine->DiscountPercent * 100, 2) . '" />%';
@@ -1260,8 +1264,12 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 				}
 				echo '<td><input class="number" type="text" name="GPPercent_' . $OrderLine->LineNumber . '" size="8" maxlength="40" value="' . locale_number_format($OrderLine->GPPercent,2) . '" /></td>';
 			} else {
-				echo '<td class="number">' . $OrderLine->Price . '</td><td></td>';
+				echo '<td class="number">' . locale_money_format($OrderLine->Price, $_SESSION['Items'.$identifier]->DefaultCurrency)  . '</td>';
 				echo '<input type="hidden" name="Price_' . $OrderLine->LineNumber . '" value="' . $OrderLine->Price . '" />';
+				echo '<td class="number">' . locale_number_format($OrderLine->DiscountPercent * 100, 2) . '%</td>';
+				echo '<input type="hidden" name="Discount_' . $OrderLine->LineNumber . '" value="' . locale_number_format($OrderLine->DiscountPercent * 100, 2) . '" />';
+				echo '<td class="number">' . locale_number_format($OrderLine->GPPercent,2) . '%</td>';
+				echo '<input type="hidden" name="GPPercent_' . $OrderLine->LineNumber . '" value="' . locale_number_format($OrderLine->GPPercent,2) . '" />';
 			}
 			if ($_SESSION['Items'.$identifier]->Some_Already_Delivered($OrderLine->LineNumber)){
 				$RemTxt = _('Clear Remaining');
@@ -1277,7 +1285,8 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 
 			echo '<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="ItemDue_' . $OrderLine->LineNumber . '" size="10" maxlength="10" value="' . $LineDueDate . '" /></td>';
 
-			echo '<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?identifier='.$identifier . '&amp;Delete=' . $OrderLine->LineNumber . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');">' . $RemTxt . '</a></td></tr>';
+			echo '<td><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?identifier='.$identifier . '&amp;Delete=' . $OrderLine->LineNumber . '" onclick="return confirm(\'' . _('Are You Sure?') . '\');">' . $RemTxt . '</a></td>
+				<td>' . $LineComments . '</td></tr>';
 
 			if ($_SESSION['AllowOrderLineItemNarrative'] == 1){
 				echo $RowStarter;
@@ -1369,19 +1378,17 @@ if ($_SESSION['RequireCustomerSelection'] ==1
 		} else {
 			$ColSpanNumber = 1;
 		}
-		echo '<tr class="EvenTableRows"><td class="number" colspan="7"><b>' . _('TOTAL Excl Tax/Freight') . '</b></td>
-							<td colspan="' . $ColSpanNumber . '" class="number">' . $DisplayTotal . '</td></tr></table>';
-
 		$DisplayVolume = locale_number_format($_SESSION['Items'.$identifier]->totalVolume,2);
 		$DisplayWeight = locale_number_format($_SESSION['Items'.$identifier]->totalWeight,2);
-		echo '<br /><table class="selection"><tr class="EvenTableRows"><td>' . _('Total Weight') . ':</td>
+		echo '<tr class="EvenTableRows"><td colspan="2"><table class="selection"><tr class="EvenTableRows"><td>' . _('Total Weight') . ':</td>
 						 <td>' . $DisplayWeight . '</td>
 						 <td>' . _('Total Volume') . ':</td>
 						 <td>' . $DisplayVolume . '</td>
-					   </tr></table>';
+					   </tr></table></td><td class="number" colspan="4"><b>' . _('TOTAL Excl Tax/Freight') . '</b></td>
+							<td colspan="' . $ColSpanNumber . '" class="number">' . $DisplayTotal . '</td>
+							<td colspan="3" style="text-align: right;"><button type="submit" name="Recalculate">' . _('Re-Calculate') . '</button></td></tr></table>';
 
-
-		echo '<br /><div class="centre"><button type="submit" name="Recalculate">' . _('Re-Calculate') . '</button>
+		echo '<br /><div class="centre">
 				<button type="submit" name="DeliveryDetails">' . _('Enter Delivery Details and Confirm Order') . '</button></div>';
 	} # end of if lines
 

@@ -91,6 +91,12 @@ function userLogin($Name, $Password, $db) {
 			$sql = "UPDATE www_users SET lastvisitdate='". date('Y-m-d H:i:s') ."'
 							WHERE www_users.userid='" . $Name . "'";
 			$Auth_Result = DB_query($sql, $db);
+
+			$sql = "SELECT canviewprices FROM securityroles
+							WHERE secroleid =  '" . $_SESSION['AccessLevel'] . "'";
+			$ViewPricesResult = DB_query($sql, $db);
+			$MyViewPricesRow = DB_fetch_array($ViewPricesResult);
+			$_SESSION['CanViewPrices'] = $MyViewPricesRow['canviewprices'];
 			/*get the security tokens that the user has access to */
 			$sql = "SELECT tokenid FROM securitygroups
 							WHERE secroleid =  '" . $_SESSION['AccessLevel'] . "'";
