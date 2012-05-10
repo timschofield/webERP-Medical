@@ -172,13 +172,11 @@ for detail of the European Central Bank rates - published daily */
 		$stack = array();
 		foreach ($tags as $tag) {
 			$index = count($elements);
-			if (isset($tag['attributes']) and ($tag['type'] == 'complete' OR $tag['type'] == 'open')) {
+			if ($tag['type'] == 'complete' OR $tag['type'] == 'open') {
 				$elements[$index] = new XmlElement;
 				$elements[$index]->name = $tag['tag'];
-				$elements[$index]->attributes = $tag['attributes'];
-				if (isset($tag['value'])) {
-					$elements[$index]->content = $tag['value'];
-				}
+//				$elements[$index]->attributes = $tag['attributes'];
+//				$elements[$index]->content = $tag['value'];
 				if ($tag['type'] == 'open') {  // push
 					$elements[$index]->children = array();
 					$stack[count($stack)] = &$elements;
@@ -193,10 +191,8 @@ for detail of the European Central Bank rates - published daily */
 
 
 		$Currencies = array();
-		if (isset($elements)) {
-			foreach ($elements[0]->children[2]->children[0]->children as $CurrencyDetails){
-				$Currencies[$CurrencyDetails->attributes['currency']]= $CurrencyDetails->attributes['rate'] ;
-			}
+		foreach ($elements[0]->children[2]->children[0]->children as $CurrencyDetails){
+			$Currencies[$CurrencyDetails->attributes['currency']]= $CurrencyDetails->attributes['rate'] ;
 		}
 		$Currencies['EUR']=1; //ECB delivers no rate for Euro
 		//return an array of the currencies and rates
@@ -237,7 +233,6 @@ function quote_oanda_currency($CurrCode) {
 		}
 	}
 }
-
 
 function AddCarriageReturns($str) {
 	return str_replace('\r\n',chr(10),$str);

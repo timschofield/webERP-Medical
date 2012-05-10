@@ -80,6 +80,12 @@ if (isset($_POST['submit'])) {
 		$Errors[$i] = 'Country';
 		$i++;
 	}
+	if (strlen($_POST['Country']) == 0) {
+		$InputError = 1;
+		prnMsg(_('You must enter a country name'),'error');
+		$Errors[$i] = 'Country';
+		$i++;
+	}
 	if (strlen($_POST['HundredsName']) > 15) {
 		$InputError = 1;
 		prnMsg(_('The hundredths name must be 15 characters or less long'),'error');
