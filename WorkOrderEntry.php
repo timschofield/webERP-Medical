@@ -10,10 +10,17 @@ include('includes/SQL_CommonFunctions.inc');
 echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>';
 
 if (isset($_GET['ReqDate'])){
-	$ReqDate = $_GET['ReqDate'];
+	$ReqDate = ConvertSQLDate($_GET['ReqDate']);
 } else {
 	$ReqDate=Date('Y-m-d');
 }
+
+if (isset($_GET['StartDate'])){
+	$StartDate = ConvertSQLDate($_GET['StartDate']);
+} else {
+	$StartDate=Date('Y-m-d');
+}
+
 if (isset($_GET['loccode'])){
 	$LocCode = $_GET['loccode'];
 } else {
@@ -41,7 +48,7 @@ if (isset($_REQUEST['WO']) and $_REQUEST['WO']!=''){
 			 VALUES ('" . $_POST['WO'] . "',
 					'" . $LocCode . "',
 					'" . $ReqDate . "',
-					'" . Date('Y-m-d'). "')";
+					'" . $StartDate. "')";
 	$InsWOResult = DB_query($sql,$db);
 }
 
@@ -366,6 +373,8 @@ if (isset($_POST['submit']) or isset($_POST['Search'])) { //The update button ha
 
 	if ($CancelDelete==false) { //ie all tests proved ok to delete
 		DB_Txn_Begin($db);
+		$ErrMsg = _('The work order could not be deleted');
+		$DbgMsg = _('The SQL used to delete the work order was');
 		//delete the worequirements
 		$sql = "DELETE FROM worequirements WHERE wo='" . $_POST['WO'] . "'";
 		$result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
@@ -382,7 +391,7 @@ if (isset($_POST['submit']) or isset($_POST['Search'])) { //The update button ha
 		$result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 
 		DB_Txn_Commit($db);
-		prnMsg(_('The work order has been deleted'),'success');
+		prnMsg(_('The work order has been cancelled'),'success');
 
 
 		echo '<p><a href="' . $rootpath . '/SelectWorkOrder.php">' . _('Select an existing outstanding work order') . '</a></p>';
@@ -557,7 +566,7 @@ echo '</table>';
 
 echo '<br /><div class="centre"><button type="submit" name="submit">' . _('Update') . '</button></div>';
 
-echo '<br /><div class="centre"><button type="submit" name="delete" onclick="return confirm(\'' . _('Are You Sure?') . '\');">' . _('Delete This Work Order') . '</button>';
+echo '<br /><div class="centre"><button type="submit" name="delete" onclick="return confirm(\'' . _('Are You Sure?') . '\');">' . _('Cancel This Work Order') . '</button>';
 
 echo '</div><br />';
 

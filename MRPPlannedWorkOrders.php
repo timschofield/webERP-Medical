@@ -275,10 +275,11 @@ if ( isset($_POST['PrintPDF']) OR isset($_POST['Review']) ) {
 				$k++;
 			}
 
-			printf('<td><a href="%s/WorkOrderEntry.php?NewItem=%s&ReqQty=%s&ReqDate=%s">%s</a></td>',
+			printf('<td><a href="%s/WorkOrderEntry.php?NewItem=%s&ReqQty=%s&StartDate=%s&ReqDate=%s">%s</a></td>',
 				$rootpath,
 				$myrow['part'],
 				$myrow['supplyquantity'],
+				ConvertSQLDate($myrow['mrpdate']),
 				ConvertSQLDate($myrow['duedate']),
 				_('Convert')
 			);
