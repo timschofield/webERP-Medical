@@ -29,6 +29,57 @@ if (isset($_GET['DeleteProperty'])){
 	prnMsg(_('Deleted the property') . ' ' . $_GET['DeleteProperty'],'success');
 }
 
+if (isset($_POST['UpdateProperties'])) {
+	if ($_POST['PropertyCounter']==0 and $_POST['PropLabel0']!='') {
+		$_POST['PropertyCounter']=0;
+	}
+
+	for ($i=0;$i<=$_POST['PropertyCounter'];$i++){
+
+		if (isset($_POST['PropReqSO' .$i]) and $_POST['PropReqSO' .$i] == true){
+			$_POST['PropReqSO' .$i] =1;
+		} else {
+			$_POST['PropReqSO' .$i] =0;
+		}
+		if (isset($_POST['PropNumeric' .$i]) and $_POST['PropNumeric' .$i] == true){
+			$_POST['PropNumeric' .$i] =1;
+		} else {
+			$_POST['PropNumeric' .$i] =0;
+		}
+		if ($_POST['PropID' .$i] =='NewProperty' AND mb_strlen($_POST['PropLabel'.$i])>0){
+			$sql = "INSERT INTO stockcatproperties (categoryid,
+													label,
+													controltype,
+													defaultvalue,
+													minimumvalue,
+													maximumvalue,
+													numericvalue,
+													reqatsalesorder)
+											VALUES ('" . $SelectedCategory . "',
+													'" . $_POST['PropLabel' . $i] . "',
+													" . $_POST['PropControlType' . $i] . ",
+													'" . $_POST['PropDefault' .$i] . "',
+													'" . filter_number_input($_POST['PropMinimum' .$i]) . "',
+													'" . filter_number_input($_POST['PropMaximum' .$i]) . "',
+													'" . $_POST['PropNumeric' .$i] . "',
+													" . $_POST['PropReqSO' .$i] . ')';
+			$ErrMsg = _('Could not insert a new category property for') . $_POST['PropLabel' . $i];
+			$result = DB_query($sql,$db,$ErrMsg);
+		} elseif ($_POST['PropID' .$i] !='NewProperty') { //we could be amending existing properties
+			$sql = "UPDATE stockcatproperties SET label ='" . $_POST['PropLabel' . $i] . "',
+											  controltype = " . $_POST['PropControlType' . $i] . ",
+											  defaultvalue = '"	. $_POST['PropDefault' .$i] . "',
+											  minimumvalue = '" . filter_number_input($_POST['PropMinimum' .$i]) . "',
+											  maximumvalue = '" . filter_number_input($_POST['PropMaximum' .$i]) . "',
+											  numericvalue = '" . $_POST['PropNumeric' .$i] . "',
+											  reqatsalesorder = " . $_POST['PropReqSO' .$i] . "
+										WHERE stkcatpropid =" . $_POST['PropID' .$i];
+			$ErrMsg = _('Updated the stock category property for') . ' ' . $_POST['PropLabel' . $i];
+			$result = DB_query($sql,$db,$ErrMsg);
+		}
+	}
+}
+
 if (isset($_POST['submit'])) {
 
 	//initialise no input errors assumed initially before we test
@@ -504,9 +555,6 @@ echo '</select></td>
 		</tr>
 		</table>';
 
-if (!isset($SelectedCategory)) {
-	$SelectedCategory='';
-}
 if (isset($SelectedCategory)) {
 	//editing an existing stock category
 
@@ -601,6 +649,7 @@ if (isset($SelectedCategory)) {
 			<td><input type="text" class="number" name="PropMinimum' . $PropertyCounter . '" /></td>
 			<td><input type="text" class="number" name="PropMaximum' . $PropertyCounter . '" /></td>
 			<td align="center"><input type="checkbox" name="PropReqSO' . $PropertyCounter .'" /></td>
+			<td><button type="submit" name="UpdateProperties">' . _('Add new Property') . '</button></td>
 			</tr>';
 	echo '</table>';
 	echo '<input type="hidden" name="PropertyCounter" value="' . $PropertyCounter . '" />';
