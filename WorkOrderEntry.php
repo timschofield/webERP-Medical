@@ -253,7 +253,7 @@ if (isset($NewItem) AND isset($_POST['WO'])){
 } //adding a new item to the work order
 
 
-if (isset($_POST['submit'])) { //The update button has been clicked
+if (isset($_POST['submit']) or isset($_POST['Search'])) { //The update button has been clicked
 
 	echo '<div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') .'">' . _('Enter a new work order') . '</a>';
 	echo '<br /><a href="' . $rootpath . '/SelectWorkOrder.php">' . _('Select an existing work order') . '</a>';
@@ -338,8 +338,9 @@ if (isset($_POST['submit'])) { //The update button has been clicked
 			$result = DB_query($sql_stmt,$db,$ErrMsg);
 
 		}
-
-		prnMsg(_('The work order has been updated'),'success');
+		if (!isset($_POST['Search'])) {
+			prnMsg(_('The work order has been updated'),'success');
+		}
 
 		for ($i=1;$i<=$_POST['NumberOfOutputs'];$i++){
 		  		 unset($_POST['OutputItem'.$i]);
@@ -414,6 +415,7 @@ $sql="SELECT workorders.loccode,
 
 $WOResult = DB_query($sql,$db);
 if (DB_num_rows($WOResult)==1){
+
 	$myrow = DB_fetch_array($WOResult);
 	$_POST['StartDate'] = ConvertSQLDate($myrow['startdate']);
 	$_POST['CostIssued'] = $myrow['costissued'];
@@ -553,9 +555,9 @@ if (isset($NumberOfOutputs)){
 }
 echo '</table>';
 
-echo '<div class="centre"><br /><button type="submit" name="submit">' . _('Update') . '</button>';
+echo '<br /><div class="centre"><button type="submit" name="submit">' . _('Update') . '</button></div>';
 
-echo '<br /><button type="submit" name="delete" onclick="return confirm(\'' . _('Are You Sure?') . '\');">' . _('Delete This Work Order') . '></button>';
+echo '<br /><div class="centre"><button type="submit" name="delete" onclick="return confirm(\'' . _('Are You Sure?') . '\');">' . _('Delete This Work Order') . '</button>';
 
 echo '</div><br />';
 
@@ -606,7 +608,7 @@ if (isset($SearchResult)) {
 
 	if (DB_num_rows($SearchResult)>1){
 
-		echo '<table cellpadding="2" class="selection">';
+		echo '<br /><table cellpadding="2" class="selection">';
 		$TableHeader = '<tr><th>' . _('Code') . '</th>
 				   			<th>' . _('Description') . '</th>
 				   			<th>' . _('Units') . '</th></tr>';
