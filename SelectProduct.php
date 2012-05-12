@@ -137,7 +137,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 	}
 	echo '</td><th style="text-align:right;"><b>' . _('Control Level:') . '</b></th><td class="select">';
 	if ($myrow['serialised'] == 1) {
-		echo _('serialised');
+		echo '<a href="StockSerialItems.php?Location=All&StockID='.$StockID.'">' . _('serialised') . '</a>';
 	} elseif ($myrow['controlled'] == 1) {
 		echo '<a href="StockSerialItems.php?Location=All&StockID='.$StockID.'">' . _('Batchs/Lots') . '</a>';
 	} else {
@@ -153,8 +153,9 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 			<th style="text-align:right;"><b>' . _('EOQ') . ':</b></th>
 			<td class="select number">' . locale_number_format($myrow['eoq'], $myrow['decimalplaces']) . '</td></tr>';
 	if ($_SESSION['CanViewPrices']==1) {
-		echo '<tr><th colspan="2"><b>' . _('Sell Price') . ':</b></th>
-					<td class="select">';
+		echo '<tr>
+				<th colspan="2"><b>' . _('Sell Price') . ':</b></th>
+				<td class="select">';
 		$PriceResult = DB_query("SELECT typeabbrev,
 										price,
 										currabrev
@@ -775,14 +776,14 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 			echo '<br /></div>';
 		}
 		echo '<table cellpadding="2" class="selection">';
-		$tableheader = '<tr>
+		echo '<tr>
 					<th>' . _('Code') . '</th>
 					<th>' . _('Description') . '</th>
 					<th>' . _('Total Qty On Hand') . '</th>
 					<th>' . _('Units') . '</th>
 					<th>' . _('Stock Status') . '</th>
 				</tr>';
-		echo $tableheader;
+
 		$j = 1;
 		$k = 0; //row counter to determine background colour
 		$RowIndex = 0;
@@ -815,11 +816,6 @@ if (isset($searchresult) AND !isset($_POST['Select'])) {
 				<td>' . $ItemStatus . '</td>
 				<td><a target="_blank" href="' . $rootpath . '/StockStatus.php?StockID=' . $myrow['stockid'].'">' . _('View') . '</a></td>
 				</tr>';
-			$j++;
-			if ($j == 20 AND ($RowIndex + 1 != $_SESSION['DisplayRecordsMax'])) {
-				$j = 1;
-				echo $tableheader;
-			}
 			$RowIndex = $RowIndex + 1;
 			//end of page full new headings if
 		}
