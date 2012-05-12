@@ -139,7 +139,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 	if ($myrow['serialised'] == 1) {
 		echo _('serialised');
 	} elseif ($myrow['controlled'] == 1) {
-		echo _('Batchs/Lots');
+		echo '<a href="StockSerialItems.php?Location=All&StockID='.$StockID.'">' . _('Batchs/Lots') . '</a>';
 	} else {
 		echo _('N/A');
 	}
@@ -236,7 +236,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 	// Item Category Property mod: display the item properties
 	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<table align="left" class="selection">';
+	echo '<table align="left" style="background: transparent;border: gray solid 1px;border-radius: 5px">';
 	$CatValResult = DB_query("SELECT categoryid
 														FROM stockmaster
 														WHERE stockid='" . $StockID . "'", $db);
@@ -264,7 +264,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 		echo '<input type="hidden" name="PropCat' . $PropertyRow['stkcatpropid'] . '" value="' . $PropertyRow['stkcatpropid'] . '" />';
 		switch ($PropertyRow['controltype']) {
 			case 0; //textbox
-				echo '<td class="select number" width="60"><input type="text" name="PropValue' . $PropertyRow['stkcatpropid'] . '" value="' . $PropertyValue . '" />';
+				echo '<td class="select number" style="border: 0px" width="60"><input type="text" name="PropValue' . $PropertyRow['stkcatpropid'] . '" value="' . $PropertyValue . '" />';
 				break;
 			case 1; //select box
 				$OptionValues = explode(',', $PropertyRow['defaultvalue']);
@@ -290,7 +290,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 		$PropertyCounter++;
 	} //end loop round properties for the item category
 	echo '<tr>
-			<th colspan="2"><button type="submit" name="UpdateProperties">' . _('Update Properties') . '</button></th>
+			<th colspan="2" style="border: 0px"><button type="submit" name="UpdateProperties">' . _('Update Properties') . '</button></th>
 		</tr>';
 	echo '</table></form>'; //end of Item Category Property mod
 	echo '<td style="width: 15%; vertical-align: top">
@@ -463,8 +463,8 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 	echo '</td><td valign="top" class="select">';
 	/* Stock Transactions */
 	if ($Its_A_Kitset_Assembly_Or_Dummy == false) {
-		echo '<a href="' . $rootpath . '/StockAdjustments.php?StockID=' . $StockID . '">' . _('Quantity Adjustments') . '</a><br />';
-		echo '<a href="' . $rootpath . '/StockTransfers.php?StockID=' . $StockID . '&NewTransfer=Yes">' . _('Location Transfers') . '</a><br />';
+		echo InternalLink($rootpath, '/StockAdjustments.php?StockID=' . $StockID, _('Quantity Adjustments')) . '<br />';
+		echo InternalLink($rootpath, '/StockTransfers.php?StockID=' . $StockID . '&NewTransfer=Yes', _('Location Transfers')) . '<br />';
 		if (function_exists('imagecreatefrompng')){
 			$StockImgLink = 'GetStockImage.php?automake=1&textcolor=FFFFFF&bgcolor=CCCCCC'.
 							'&StockID='.urlencode($StockID).
@@ -502,8 +502,8 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 	} /* end of ($Its_A_Kitset_Assembly_Or_Dummy == False) */
 	echo '</td><td valign="top" class="select">';
 	/* Stock Maintenance Options */
-	echo '<a href="' . $rootpath . '/Stocks.php?">' . _('Add Inventory Items') . '</a><br />';
-	echo '<a href="' . $rootpath . '/Stocks.php?StockID=' . $StockID . '">' . _('Modify Item Details') . '</a><br />';
+	echo InternalLink($rootpath, '/Stocks.php?', _('Add Inventory Items'), '') . '<br />';
+	echo InternalLink($rootpath, '/Stocks.php?StockID=' . $StockID . '', _('Modify Item Details'), '') . '<br />';
 	if ($Its_A_Kitset_Assembly_Or_Dummy == False) {
 		echo '<a href="' . $rootpath . '/StockReorderLevel.php?StockID=' . $StockID . '">' . _('Maintain Reorder Levels') . '</a><br />';
 		echo '<a href="' . $rootpath . '/StockCostUpdate.php?StockID=' . $StockID . '">' . _('Maintain Standard Cost') . '</a><br />';

@@ -6,12 +6,6 @@
 /** STANDARD MESSAGE HANDLING & FORMATTING **/
 /********************************************/
 
-function prnMsg($Msg,$Type='info', $Prefix=''){
-
-	echo getMsg($Msg, $Type, $Prefix);
-
-}//prnMsg
-
 function reverse_escape($str) {
   $search=array("\\\\","\\0","\\n","\\r","\Z","\'",'\"');
   $replace=array("\\","\0","\n","\r","\x1a","'",'"');
@@ -37,6 +31,12 @@ function filter_currency_input($Amount) {
 	$LocaleInfo = localeconv();
 	return str_replace($LocaleInfo['mon_decimal_point'], '.', str_replace($LocaleInfo['mon_thousands_sep'], '', $Amount));
 }
+
+function prnMsg($Msg,$Type='info', $Prefix=''){
+
+	echo getMsg($Msg, $Type, $Prefix);
+
+}//prnMsg
 
 function getMsg($Msg,$Type='info',$Prefix=''){
 	$Colour='';
@@ -320,6 +320,14 @@ function http_file_exists($url)  {
 		return true;
 	}
 	return false;
+}
+
+function InternalLink($rootpath, $Script, $Caption, $Format='') {
+	$ScriptNameArray = explode('?', substr($Script,1));
+	$PageSecurity = $_SESSION['PageSecurityArray'][$ScriptNameArray[0]];
+	if ((in_array($PageSecurity, $_SESSION['AllowedPageSecurityTokens']) OR !isset($PageSecurity))) {
+		return '<a href="' . $rootpath . $Script .'">' . $Caption . '</a>';
+	}
 }
 
 ?>
