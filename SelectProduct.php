@@ -37,6 +37,28 @@ if (isset($_GET['ShowAll']) and $_GET['ShowAll']=='Yes') {
 	$_SESSION['ShowAllPrices'][$_SESSION['SelectedStockItem']]='No';
 }
 
+if (isset($_POST['UpdateProperties'])) {
+	foreach ($_POST as $key=>$value) {
+		if (substr($key, 0, 7)=='PropCat') {
+			$Index=substr($key, 7, strlen($key)-7);
+			$sql="SELECT controltype FROM stockcatproperties WHERE stkcatpropid='".$Index."'";
+			$result=DB_query($sql, $db);
+			$myrow=DB_fetch_array($result);
+			if ($myrow['controltype'] ==2){
+				if (isset($_POST['PropValue'.$value]) and $_POST['PropValue'.$value]=='on'){
+					$_POST['PropValue'.$value]=1;
+				} else {
+					$_POST['PropValue'.$value]=0;
+				}
+			}
+			$sql="UPDATE stockitemproperties SET value='" . $_POST['PropValue'.$value] . "'
+						WHERE stkcatpropid='" . $value . "'
+						AND stockid='" . $_SESSION['SelectedStockItem'] . "'";
+			$result=DB_query($sql, $db);
+		}
+	}
+}
+
 // Always show the search facilities
 $SQL = "SELECT categoryid,
 				categorydescription
@@ -83,7 +105,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 	} else {
 		$ItemStatus = '';
 	}
-	echo '<table width="90%" class="selection"><tr><th colspan="3"><img src="' . $rootpath . '/css/' . $theme . '/images/inventory.png" title="' . _('Inventory') . '" alt="" /><b>' . ' ' . $StockID . ' - ' . $myrow['description'] . ' ' . $ItemStatus . '</b></th></tr>';
+	echo '<table width="95%" class="selection"><tr><th colspan="3"><img src="' . $rootpath . '/css/' . $theme . '/images/inventory.png" title="' . _('Inventory') . '" alt="" /><b>' . ' ' . $StockID . ' - ' . $myrow['description'] . ' ' . $ItemStatus . '</b></th></tr>';
 	echo '<tr><td width="40%" valign="top">
 			<table align="left" style="background: transparent;">'; //nested table
 	echo '<tr><th style="text-align:right;"><b>' . _('Item Type:') . '</b></th>
@@ -123,7 +145,8 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 	}
 	echo '</td><th style="text-align:right;"><b>' . _('Units') . ':</b></th>
 			<td class="select">' . $myrow['units'] . '</td></tr>';
-	echo '<tr><th style="text-align:right;"><b>' . _('Volume') . ':</b></th>
+	echo '<tr>
+			<th style="text-align:right;"><b>' . _('Volume') . ':</b></th>
 			<td class="select number" colspan="2">' . locale_number_format($myrow['volume'], 3) . '</td>
 			<th style="text-align:right;"><b>' . _('Weight') . ':</b></th>
 			<td class="select number">' . locale_number_format($myrow['kgs'], 3) . '</td>
@@ -211,6 +234,8 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 	} //end of if PricesSecuirty allows viewing of prices
 	echo '</table>'; //end of first nested table
 	// Item Category Property mod: display the item properties
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
+	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	echo '<table align="left" class="selection">';
 	$CatValResult = DB_query("SELECT categoryid
 														FROM stockmaster
@@ -236,13 +261,14 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 		$PropValRow = DB_fetch_array($PropValResult);
 		$PropertyValue = $PropValRow['value'];
 		echo '<tr><th align="right">' . $PropertyRow['label'] . ':</th>';
+		echo '<input type="hidden" name="PropCat' . $PropertyRow['stkcatpropid'] . '" value="' . $PropertyRow['stkcatpropid'] . '" />';
 		switch ($PropertyRow['controltype']) {
 			case 0; //textbox
-				echo '<td class="select number" width="60"><input type="text" name="PropValue' . $PropertyCounter . '" value="' . $PropertyValue . '" />';
+				echo '<td class="select number" width="60"><input type="text" name="PropValue' . $PropertyRow['stkcatpropid'] . '" value="' . $PropertyValue . '" />';
 				break;
 			case 1; //select box
 				$OptionValues = explode(',', $PropertyRow['defaultvalue']);
-				echo '<td align="left" width="60"><select name="PropValue' . $PropertyCounter . '">';
+				echo '<td align="left" width="60"><select name="PropValue' . $PropertyRow['stkcatpropid'] . '">';
 				foreach($OptionValues as $PropertyOptionValue) {
 					if ($PropertyOptionValue == $PropertyValue) {
 						echo '<option selected="True" value="' . $PropertyOptionValue . '">' . $PropertyOptionValue . '</option>';
@@ -254,16 +280,19 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 				break;
 			case 2; //checkbox
 				if ($PropertyValue == 1) {
-					echo '<td align="left" width="60"><input type="checkbox" name="PropValue' . $PropertyCounter . '" checked="True" />';
+					echo '<td align="left" width="60"><input type="checkbox" name="PropValue' . $PropertyRow['stkcatpropid'] . '" checked="True" />';
 				} else {
-					echo '<td align="left" width="60"><input type="checkbox" name="PropValue' . $PropertyCounter . '" />';
+					echo '<td align="left" width="60"><input type="checkbox" name="PropValue' . $PropertyRow['stkcatpropid'] . '" />';
 				}
 				break;
 		} //end switch
 		echo '</td></tr>';
 		$PropertyCounter++;
 	} //end loop round properties for the item category
-	echo '</table>'; //end of Item Category Property mod
+	echo '<tr>
+			<th colspan="2"><button type="submit" name="UpdateProperties">' . _('Update Properties') . '</button></th>
+		</tr>';
+	echo '</table></form>'; //end of Item Category Property mod
 	echo '<td style="width: 15%; vertical-align: top">
 			<table style="background: transparent">'; //nested table to show QOH/orders
 	$QOH = 0;
