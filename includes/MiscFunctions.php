@@ -351,7 +351,8 @@ function ShowStockTypes($StockType) {
 		} else {
 			echo '<option value="'.$Type.'">' . $Name . '</option>';
 		}
-	echo '</select>';
+		echo '</select>';
+	}
 }
 
 function InternalLink($rootpath, $Script, $Caption, $Format='') {
