@@ -298,7 +298,7 @@ if (isset($SupplierID) AND $SupplierID != '' AND !isset($_POST['SearchSupplier']
 		echo '</tr></table><br />';
 		echo '<div class="centre">
 				<button type="submit" name="SearchSupplier">' . _('Find Suppliers Now') . '</button>
-			</div>
+			</div><br />
 			</form>';
 		include ('includes/footer.inc');
 		exit;
@@ -573,7 +573,7 @@ if (!isset($SuppliersResult)) {
 	} else {
 		echo '<button type="submit" name="AddRecord">' . _('Add') . '</button>';
 	}
-	echo '</div>';
+	echo '</div><br />';
 	echo '<div class="centre">';
 	if (isset($StockLocation) and isset($StockID) AND strlen($StockID) != 0) {
 		echo '<br /><a href="' . $rootpath . '/StockStatus.php?StockID=' . $StockID . '">' . _('Show Stock Status') . '</a>';

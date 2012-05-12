@@ -306,8 +306,7 @@ $MenuItems['manuf']['Transactions']['URL'] = array ('/WorkOrderEntry.php',
 													'/SelectWorkOrder.php'
 													);
 
-$MenuItems['manuf']['Reports']['Caption'] = array (_('Select A Work Order'),
-													_('Costed Bill Of Material Inquiry'),
+$MenuItems['manuf']['Reports']['Caption'] = array ( _('Costed Bill Of Material Inquiry'),
 													_('Where Used Inquiry'),
 													_('Bill Of Material Listing'),
 													_('Indented Bill Of Material Listing'),
@@ -320,8 +319,7 @@ $MenuItems['manuf']['Reports']['Caption'] = array (_('Select A Work Order'),
 													_('MRP Reschedules Required')
 												);
 
-$MenuItems['manuf']['Reports']['URL'] = array ('/WorkOrderEntry.php',
-												'/BOMInquiry.php',
+$MenuItems['manuf']['Reports']['URL'] = array ( '/BOMInquiry.php',
 												'/WhereUsedInquiry.php',
 												'/BOMListing.php',
 												'/BOMIndented.php',
