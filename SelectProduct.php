@@ -381,13 +381,19 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 		$DemandRow = DB_fetch_array($DemandResult);
 		$Demand+= $DemandRow['woqtydemo'];
 	}
-	echo '<tr><th style="text-align:right;" width="15%">' . _('Quantity On Hand') . ':</th>
-		<td width="17%" class="select number">' . $QOH . '</td></tr>';
-	echo '<tr><th style="text-align:right;" width="15%">' . _('Quantity Demand') . ':</th>
-		<td width="17%" class="select number">' . locale_number_format($Demand, $myrow['decimalplaces']) . '</td></tr>';
-	echo '<tr><th style="text-align:right;" width="15%">' . _('Quantity On Order') . ':</th>
-		<td width="17%" class="select number">' . $QOO . '</td></tr>
-				</table>'; //end of nested table
+	echo '<tr>
+			<th style="text-align:right;" width="15%">' . _('Quantity On Hand') . ':</th>
+			<td width="17%" class="select number">' . $QOH . '</td>
+		</tr>';
+	echo '<tr>
+			<th style="text-align:right;" width="15%">' . _('Quantity Demand') . ':</th>
+			<td width="17%" class="select number">' . locale_number_format($Demand, $myrow['decimalplaces']) . '</td>
+		</tr>';
+	echo '<tr>
+			<th style="text-align:right;" width="15%">' . _('Quantity On Order') . ':</th>
+			<td width="17%" class="select number">' . $QOO . '</td>
+		</tr>
+	</table>'; //end of nested table
 	echo '</td>'; //end cell of master table
 
 	if (($myrow['mbflag'] == 'B' OR ($myrow['mbflag'] == 'M'))
@@ -441,24 +447,24 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 	</tr>';
 	echo '<tr><td valign="top" class="select">';
 	/*Stock Inquiry Options */
-	echo '<a href="' . $rootpath . '/StockMovements.php?StockID=' . $StockID . '">' . _('Show Stock Movements') . '</a><br />';
+	echo InternalLink($rootpath, '/StockMovements.php?StockID=' . $StockID, _('Show Stock Movements')) . '<br />';
 	if ($Its_A_Kitset_Assembly_Or_Dummy == False) {
-		echo '<a href="' . $rootpath . '/StockStatus.php?StockID=' . $StockID . '">' . _('Show Stock Status') . '</a><br />';
-		echo '<a href="' . $rootpath . '/StockUsage.php?StockID=' . $StockID . '">' . _('Show Stock Usage') . '</a><br />';
+		echo InternalLink($rootpath, '/StockStatus.php?StockID=' . $StockID, _('Show Stock Status')) . '<br />';
+		echo InternalLink($rootpath, '/StockUsage.php?StockID=' . $StockID, _('Show Stock Usage')) . '<br />';
 	}
-	echo '<a href="' . $rootpath . '/SelectSalesOrder.php?SelectedStockItem=' . $StockID . '">' . _('Search Outstanding Sales Orders') . '</a><br />';
-	echo '<a href="' . $rootpath . '/SelectCompletedOrder.php?SelectedStockItem=' . $StockID . '">' . _('Search Completed Sales Orders') . '</a><br />';
+	echo InternalLink($rootpath, '/SelectSalesOrder.php?SelectedStockItem=' . $StockID, _('Search Outstanding Sales Orders')) . '<br />';
+	echo InternalLink($rootpath, '/SelectCompletedOrder.php?SelectedStockItem=' . $StockID, _('Search Completed Sales Orders')) . '<br />';
 	if ($Its_A_Kitset_Assembly_Or_Dummy == False) {
-		echo '<a href="' . $rootpath . '/PO_SelectOSPurchOrder.php?SelectedStockItem=' . $StockID . '">' . _('Search Outstanding Purchase Orders') . '</a><br />';
-		echo '<a href="' . $rootpath . '/PO_SelectPurchOrder.php?SelectedStockItem=' . $StockID . '">' . _('Search All Purchase Orders') . '</a><br />';
+		echo InternalLink($rootpath, '/PO_SelectOSPurchOrder.php?SelectedStockItem=' . $StockID, _('Search Outstanding Purchase Orders')) . '<br />';
+		echo InternalLink($rootpath, '/PO_SelectPurchOrder.php?SelectedStockItem=' . $StockID, _('Search All Purchase Orders')) . '<br />';
 		echo '<a href="' . $rootpath . '/' . $_SESSION['part_pics_dir'] . '/' . $StockID . '.jpg?">' . _('Show Part Picture (if available)') . '</a><br />';
 	}
 	if ($Its_A_Dummy == False) {
-		echo '<a href="' . $rootpath . '/BOMInquiry.php?StockID=' . $StockID . '">' . _('View Costed Bill Of Material') . '</a><br />';
-		echo '<a href="' . $rootpath . '/WhereUsedInquiry.php?StockID=' . $StockID . '">' . _('Where This Item Is Used') . '</a><br />';
+		echo InternalLink($rootpath, '/BOMInquiry.php?StockID=' . $StockID, _('View Costed Bill Of Material')) . '<br />';
+		echo InternalLink($rootpath, '/WhereUsedInquiry.php?StockID=' . $StockID, _('Where This Item Is Used')) . '<br />';
 	}
 	if ($Its_A_Labour_Item == True) {
-		echo '<a href="' . $rootpath . '/WhereUsedInquiry.php?StockID=' . $StockID . '">' . _('Where This Labour Item Is Used') . '</a><br />';
+		echo InternalLink($rootpath, '/WhereUsedInquiry.php?StockID=' . $StockID, _('Where This Labour Item Is Used')) . '<br />';
 	}
 	wikiLink('Product', $StockID);
 	echo '</td><td valign="top" class="select">';
@@ -496,7 +502,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 				} else {
 					$EOQ = $myrow['eoq'];
 				}
-				echo '<a href="' . $rootpath . '/PO_Header.php?NewOrder=Yes' . '&amp;SelectedSupplier=' . $SuppRow['supplierid'] . '&amp;StockID=' . $StockID . '&amp;Quantity=' . $EOQ . '">' . _('Purchase this Item from') . ' ' . $SuppRow['suppname'] . ' (' . _('default') . ')</a><br />';
+				echo InternalLink($rootpath, '/PO_Header.php?NewOrder=Yes' . '&amp;SelectedSupplier=' . $SuppRow['supplierid'] . '&amp;StockID=' . $StockID . '&amp;Quantity=' . $EOQ, _('Purchase this Item from') . ' ' . $SuppRow['suppname'] . ' (' . _('default') . ')') . '<br />';
 				/**/
 			} /* end of while */
 		} /* end of $myrow['mbflag'] == 'B' */
@@ -506,19 +512,19 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 	echo InternalLink($rootpath, '/Stocks.php?', _('Add Inventory Items'), '') . '<br />';
 	echo InternalLink($rootpath, '/Stocks.php?StockID=' . $StockID . '', _('Modify Item Details'), '') . '<br />';
 	if ($Its_A_Kitset_Assembly_Or_Dummy == False) {
-		echo '<a href="' . $rootpath . '/StockReorderLevel.php?StockID=' . $StockID . '">' . _('Maintain Reorder Levels') . '</a><br />';
-		echo '<a href="' . $rootpath . '/StockCostUpdate.php?StockID=' . $StockID . '">' . _('Maintain Standard Cost') . '</a><br />';
-		echo '<a href="' . $rootpath . '/PurchData.php?StockID=' . $StockID . '">' . _('Maintain Purchasing Data') . '</a><br />';
+		echo InternalLink($rootpath, '/StockReorderLevel.php?StockID=' . $StockID, _('Maintain Reorder Levels')) . '<br />';
+		echo InternalLink($rootpath, '/StockCostUpdate.php?StockID=' . $StockID, _('Maintain Standard Cost')) . '<br />';
+		echo InternalLink($rootpath, '/PurchData.php?StockID=' . $StockID, _('Maintain Purchasing Data')) . '<br />';
 	}
 	if ($Its_A_Labour_Item == True) {
-		echo '<a href="' . $rootpath . '/StockCostUpdate.php?StockID=' . $StockID . '">' . _('Maintain Standard Cost') . '</a><br />';
+		echo InternalLink($rootpath, '/StockCostUpdate.php?StockID=' . $StockID, _('Maintain Standard Cost')) . '<br />';
 	}
 	if (!$Its_A_Kitset) {
-		echo '<a href="' . $rootpath . '/Prices.php?Item=' . $StockID . '">' . _('Maintain Pricing') . '</a><br />';
+		echo InternalLink($rootpath, '/Prices.php?Item=' . $StockID, _('Maintain Pricing')) . '<br />';
 		if (isset($_SESSION['CustomerID']) AND $_SESSION['CustomerID'] != "" AND Strlen($_SESSION['CustomerID']) > 0) {
-			echo '<a href="' . $rootpath . '/Prices_Customer.php?Item=' . $StockID . '">' . _('Special Prices for customer') . ' - ' . $_SESSION['CustomerID'] . '</a><br />';
+			echo InternalLink($rootpath, '/Prices_Customer.php?Item=' . $StockID, _('Special Prices for customer') . ' - ' . $_SESSION['CustomerID']) . '<br />';
 		}
-		echo '<a href="' . $rootpath . '/DiscountCategories.php?StockID=' . $StockID . '">' . _('Maintain Discount Category') . '</a><br />';
+		echo InternalLink($rootpath, '/DiscountCategories.php?StockID=' . $StockID, _('Maintain Discount Category')) . '<br />';
 	}
 	echo '</td></tr></table>';
 } else {
@@ -535,7 +541,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 	/* Stock Transactions */
 	echo '</td><td class="select">';
 	/*Stock Maintenance Options */
-	echo '<a href="' . $rootpath . '/Stocks.php?">' . _('Add Inventory Items') . '</a><br />';
+	echo InternalLink($rootpath, '/Stocks.php?">', _('Add Inventory Items')) . '<br />';
 	echo '</td></tr></table>';
 } // end displaying item options if there is one and only one record
 echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
