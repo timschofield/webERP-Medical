@@ -44,35 +44,48 @@ if ($myrow['mbflag']=='K' OR $myrow['mbflag']=='A' OR $myrow['mbflag']=='D'){
 	exit;
 }
 
-$result = DB_query("SELECT locationname
-			FROM locations
-			WHERE loccode='" . $_GET['Location'] . "'",
-			$db,
-			_('Could not retrieve the stock location of the item because'),
-			_('The SQL used to lookup the location was'));
+if ($_GET['Location']!='All') {
+	$result = DB_query("SELECT locationname
+						FROM locations
+						WHERE loccode='" . $_GET['Location'] . "'",
+					$db,
+					_('Could not retrieve the stock location of the item because'),
+					_('The SQL used to lookup the location was'));
 
-$myrow = DB_fetch_array($result);
+	$myrow = DB_fetch_array($result);
+	$LocationName=$myrow['locationname'];
 
-$sql = "SELECT serialno,
-		quantity,
-		expirationdate
-	FROM stockserialitems
-	WHERE loccode='" . $_GET['Location'] . "'
-	AND stockid = '" . $StockID . "'
-	AND quantity <>0";
+	$sql = "SELECT  serialno,
+					quantity,
+					expirationdate
+				FROM stockserialitems
+				WHERE loccode='" . $_GET['Location'] . "'
+					AND stockid = '" . $StockID . "'
+					AND quantity <>0";
 
+	$ErrMsg = _('The serial numbers/batches held cannot be retrieved because');
+	$LocStockResult = DB_query($sql, $db, $ErrMsg);
+} else {
+	$LocationName=_('All Locations');
 
-$ErrMsg = _('The serial numbers/batches held cannot be retrieved because');
-$LocStockResult = DB_query($sql, $db, $ErrMsg);
+	$sql = "SELECT  serialno,
+					quantity,
+					expirationdate
+				FROM stockserialitems
+				WHERE stockid = '" . $StockID . "'
+					AND quantity <>0";
+
+	$ErrMsg = _('The serial numbers/batches held cannot be retrieved because');
+	$LocStockResult = DB_query($sql, $db, $ErrMsg);
+}
 
 echo '<table cellpadding="2" class="selection">';
 
 if ($Serialised==1){
-	echo '<tr><th colspan="5" class="header">' . _('Serialised items in') . ' ';
+	echo '<tr><th colspan="5" class="header">' . _('Serialised items in') . ' ' . $LocationName . '</th></tr>';
 } else {
-	echo '<tr><th colspan="11" class="header">' . _('Controlled items in') . ' ';
+	echo '<tr><th colspan="11" class="header">' . _('Controlled items in') . ' ' . $LocationName . '</th></tr>';
 }
-echo $myrow['locationname']. '</th></tr>';
 
 echo '<tr><th colspan="11" class="header">'.$StockID .'-'. $Description .'</b>  (' . _('In units of') . ' ' . $UOM . ')</th></tr>';
 
@@ -156,8 +169,8 @@ while ($myrow=DB_fetch_array($LocStockResult)) {
 }
 //end of while loop
 
+echo '<tr><th colspan="9"><b>' . _('Total quantity') . ': ' . locale_number_format($TotalQuantity, $DecimalPlaces) . '</b></th></tr>';
 echo '</table><br />';
-echo '<div class="centre"><br /><b>' . _('Total quantity') . ': ' . locale_number_format($TotalQuantity, $DecimalPlaces) . '<br /></div>';
 
 echo '</form>';
 include('includes/footer.inc');

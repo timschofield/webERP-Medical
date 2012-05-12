@@ -374,6 +374,19 @@ if (isset($_POST['submit'])) {
 							$_POST['PropValue' . $i]=0;
 						}
 					}
+					if ($_POST['PropType' .$i]==1){
+						if ( filter_number_input($_POST['PropValue' . $i]) >= $PropertyRow['minimumvalue'] and filter_number_input($_POST['PropValue' . $i]) <= $PropertyRow['maximumvalue']){
+							$_POST['PropValue' . $i]=filter_number_input($_POST['PropValue' . $i]);
+						} else {
+							if (filter_number_input($_POST['PropValue' . $i]) < $PropertyRow['minimumvalue']) {
+								$_POST['PropValue' . $i] = $PropertyRow['minimumvalue'];
+							} else {
+								$_POST['PropValue' . $i] = $PropertyRow['maximumvalue'];
+							}
+						}
+					} else {
+						$_POST['PropValue' . $i]=$_POST['PropValue' . $i];
+					}
 					$result = DB_query("INSERT INTO stockitemproperties (stockid,
 																			stkcatpropid,
 																			value)
@@ -544,6 +557,19 @@ if (isset($_POST['submit'])) {
 						} else {
 							$_POST['PropValue' . $i]=0;
 						}
+					}
+					if ($_POST['PropType' .$i]==1){
+						if ( filter_number_input($_POST['PropValue' . $i]) >= $PropertyRow['minimumvalue'] and filter_number_input($_POST['PropValue' . $i]) <= $PropertyRow['maximumvalue']){
+							$_POST['PropValue' . $i]=filter_number_input($_POST['PropValue' . $i]);
+						} else {
+							if (filter_number_input($_POST['PropValue' . $i]) < $PropertyRow['minimumvalue']) {
+								$_POST['PropValue' . $i] = $PropertyRow['minimumvalue'];
+							} else {
+								$_POST['PropValue' . $i] = $PropertyRow['maximumvalue'];
+							}
+						}
+					} else {
+						$_POST['PropValue' . $i]=$_POST['PropValue' . $i];
 					}
 					$result = DB_query("INSERT INTO stockitemproperties (stockid,
 																			stkcatpropid,

@@ -397,12 +397,12 @@ if (isset($_POST['submit']) or isset($_POST['Search'])) { //The update button ha
 		echo '<p><a href="' . $rootpath . '/SelectWorkOrder.php">' . _('Select an existing outstanding work order') . '</a></p>';
 		unset($_POST['WO']);
 		for ($i=1;$i<=$_POST['NumberOfOutputs'];$i++){
-		  		 unset($_POST['OutputItem'.$i]);
-					 unset($_POST['OutputQty'.$i]);
-					 unset($_POST['QtyRecd'.$i]);
-					 unset($_POST['NetLotSNRef'.$i]);
-					 unset($_POST['HasWOSerialNos'.$i]);
-				 }
+			unset($_POST['OutputItem'.$i]);
+			unset($_POST['OutputQty'.$i]);
+			unset($_POST['QtyRecd'.$i]);
+			unset($_POST['NetLotSNRef'.$i]);
+			unset($_POST['HasWOSerialNos'.$i]);
+		}
 		include('includes/footer.inc');
 		exit;
 	}
@@ -414,13 +414,14 @@ echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />'
 echo '<br /><table class="selection">';
 
 $sql="SELECT workorders.loccode,
-				 requiredby,
-				 startdate,
-				 costissued,
-				 closed
-				FROM workorders INNER JOIN locations
-				ON workorders.loccode=locations.loccode
-				WHERE workorders.wo='" . $_POST['WO'] . "'";
+			 requiredby,
+			 startdate,
+			 costissued,
+			 closed
+		FROM workorders
+		INNER JOIN locations
+			ON workorders.loccode=locations.loccode
+		WHERE workorders.wo='" . $_POST['WO'] . "'";
 
 $WOResult = DB_query($sql,$db);
 if (DB_num_rows($WOResult)==1){
