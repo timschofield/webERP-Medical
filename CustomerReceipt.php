@@ -789,11 +789,13 @@ if (!isset($_SESSION['ReceiptBatch']->FunctionalExRate)){
 }
 if ($_SESSION['ReceiptBatch']->AccountCurrency!=$_SESSION['ReceiptBatch']->Currency AND isset($_SESSION['ReceiptBatch']->AccountCurrency)){
 	if (isset($SuggestedExRate)){
-		$SuggestedExRateText = '<b>' . _('Suggested rate:') . ' ' . locale_number_format($SuggestedExRate,4) . '</b>';
+		$SuggestedExRateText = '<b>' . _('Suggested rate:') . ' ' . locale_number_format($SuggestedExRate,6) . '</b>';
 	} else {
 		$SuggestedExRateText ='';
 	}
 	if ($_SESSION['ReceiptBatch']->ExRate==1 AND isset($SuggestedExRate)){
+		$_SESSION['ReceiptBatch']->ExRate = $SuggestedExRate;
+	} elseif ($_POST['Currency'] != $_POST['PreviousCurrency'] and isset($SuggestedExRate)){//the user has changed the currency, then we should revise suggested rate
 		$_SESSION['ReceiptBatch']->ExRate = $SuggestedExRate;
 	}
 	echo '<tr><td>' . _('Receipt Exchange Rate') . ':</td>
@@ -831,7 +833,10 @@ echo '</select></td></tr>';
 if (!isset($_SESSION['ReceiptBatch']->Narrative)) {
 	$_SESSION['ReceiptBatch']->Narrative='';
 }
-echo '<tr><td>' . _('Narrative') . ':</td><td><input tabindex="7" type="text" name="BatchNarrative" maxlength="50" size="52" value="' . $_SESSION['ReceiptBatch']->Narrative . '" /></td></tr>';
+echo '<tr>
+		<td>' . _('Narrative') . ':</td><td><input tabindex="7" type="text" name="BatchNarrative" maxlength="50" size="52" value="' . $_SESSION['ReceiptBatch']->Narrative . '" /></td>
+	</tr>
+		<input type="hidden" name="PreviousCurrency" value="' . $_POST['Currency'] . '" />';
 echo '<tr><td colspan="3"><div class="centre"><button tabindex="8" type="submit" name="BatchInput">' . _('Accept') . '</button></div></td></tr>';
 echo '</table><br />';
 
