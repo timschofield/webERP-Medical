@@ -92,11 +92,15 @@ function userLogin($Name, $Password, $db) {
 							WHERE www_users.userid='" . $Name . "'";
 			$Auth_Result = DB_query($sql, $db);
 
-			$sql = "SELECT canviewprices FROM securityroles
+			$sql="desc securityroles canviewprices";
+			$result = DB_query($sql, $db);
+			if (DB_num_rows($result)!=0) {
+				$sql = "SELECT canviewprices FROM securityroles
 							WHERE secroleid =  '" . $_SESSION['AccessLevel'] . "'";
-			$ViewPricesResult = DB_query($sql, $db);
-			$MyViewPricesRow = DB_fetch_array($ViewPricesResult);
-			$_SESSION['CanViewPrices'] = $MyViewPricesRow['canviewprices'];
+				$ViewPricesResult = DB_query($sql, $db);
+				$MyViewPricesRow = DB_fetch_array($ViewPricesResult);
+				$_SESSION['CanViewPrices'] = $MyViewPricesRow['canviewprices'];
+			}
 			/*get the security tokens that the user has access to */
 			$sql = "SELECT tokenid FROM securitygroups
 							WHERE secroleid =  '" . $_SESSION['AccessLevel'] . "'";

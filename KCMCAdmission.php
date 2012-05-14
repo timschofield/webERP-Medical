@@ -28,6 +28,11 @@ if (!isset($_POST['Search']) and !isset($_POST['Next']) and !isset($_POST['Previ
 	}
 }
 
+if (isset($_POST['ChangeItem'])) {
+	$Patient[0]=$_POST['PatientNo'];
+	$Patient[1]=$_POST['BranchNo'];
+}
+
 if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 
 	$InputError=0;
@@ -385,7 +390,6 @@ if (isset($Patient)) {
 
 	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method=post>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<input type="hidden" name="Patient" value="'.$_POST['Patient'].'" />';
 	echo '<input type="hidden" name="PatientNo" value="'.$Patient[0].'" />';
 	echo '<input type="hidden" name="BranchNo" value="'.$Patient[1].'" />';
 	echo '<table class="selection">';
@@ -423,6 +427,9 @@ if (isset($Patient)) {
 	}
 	echo '</select></td></tr>';
 	echo '<input type="submit" name="ChangeItem" style="visibility: hidden" value=" " />';
+	if (!isset($_POST['AdmissionDate'])) {
+		$_POST['AdmissionDate']=date($_SESSION['DefaultDateFormat']);
+	}
 	$sql="SELECT price
 				FROM prices
 				WHERE stockid='".$StockID."'
