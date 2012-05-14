@@ -39,6 +39,8 @@ if (!isset($_POST['Search']) and !isset($_POST['Next']) and !isset($_POST['Previ
 }
 
 if (isset($_POST['ChangeItem']) and $_POST['StockID']!='') {
+	$Patient[0]=$_POST['PatientNo'];
+	$Patient[1]=$_POST['BranchNo'];
 	$sql="SELECT price
 				FROM prices
 				WHERE stockid='".$_POST['StockID']."'
@@ -70,6 +72,8 @@ if (isset($_POST['Dispensary'])) {
 
 if (isset($_POST['UpdateItems'])) {
 	$_SESSION['Items'][$_SESSION['Items']['Lines']]['StockType']=$_POST['StockType'];
+	$Patient[0]=$_POST['PatientNo'];
+	$Patient[1]=$_POST['BranchNo'];
 }
 
 if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
@@ -685,7 +689,11 @@ if (isset($Patient)) {
 			echo '<td>' . _('Quantity') . ' - ';
 			echo '&nbsp;' . $_SESSION['Items'][$i]['Quantity'];
 			echo '&nbsp;@&nbsp;'.number_format($_SESSION['Items'][$i]['Price'],0).' '.$_SESSION['CompanyRecord']['currencydefault'].'</td>';
-			echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $i . '&Patient='.$Patient[0].'&Branch='.$Patient[1].'">' . _('Delete') . '</a></td></tr>';
+			if ($_SESSION['CanViewPrices']==1){
+				echo '<td><a href="' . $_SERVER['PHP_SELF'] . '?Delete=' . $i . '&Patient='.$Patient[0].'&Branch='.$Patient[1].'">' . _('Delete') . '</a></td></tr>';
+			} else {
+				echo '<td>' . _('Delete') . '</td></tr>';
+			}
 			DB_data_seek($result,0);
 			echo '<tr><td>';
 		}
