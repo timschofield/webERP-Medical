@@ -77,7 +77,7 @@ if ($AlreadyOnThisOrder!=1){
 		/*these checks above ensure that the item has a cost if the
 		config.php variable AllowSalesOfZeroCostItems is set to false */
 
-		   	if ($_SESSION['ExistingOrder'.$identifier]!=0){
+		   	if (isset($_SESSION['ExistingOrder'.$identifier]) and $_SESSION['ExistingOrder'.$identifier]!=0){
 				$UpdateDB = 'Yes';
 				$result = DB_query("SELECT MAX(orderlineno) AS newlineno FROM  salesorderdetails WHERE orderno='" . $_SESSION['ExistingOrder'.$identifier] . "'",$db);
 				$MaxNumRow = DB_fetch_row($result);
