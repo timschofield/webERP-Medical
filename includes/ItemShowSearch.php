@@ -39,6 +39,7 @@ function __autoload($Cart) {
 }
 
 $db = mysqli_connect($host , $dbuser, $dbpassword, $_SESSION['DatabaseName'], $mysqlport);
+
 $SQL = "SELECT stockmaster.stockid,
 				stockmaster.description,
 				stockmaster.units,
