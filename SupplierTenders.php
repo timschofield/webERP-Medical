@@ -265,7 +265,7 @@ if (isset($_POST['Save'])) {
 
 /*The supplier has chosen option 1
  */
-if (isset($_POST['TenderType']) and $_POST['TenderType']==1 and !isset($_POST['Refresh'])) {
+if (isset($_POST['TenderType']) AND $_POST['TenderType']==1 AND !isset($_POST['Refresh']) AND !isset($_GET['Delete'])) {
 	$sql="SELECT offers.offerid,
 				offers.stockid,
 				stockmaster.description,
@@ -506,6 +506,7 @@ if (isset($_POST['TenderType']) and $_POST['TenderType']==3 and !isset($_POST['S
 			echo '<td>' . $myrow['currcode'] . '</td>';
 			echo '<td><input type="text" class="number" size="10" name="Price'. $i . '" value="0.00" /></td>';
 			echo '<td><input type="text" class="date" alt="' .$_SESSION['DefaultDateFormat'] .'" name="RequiredByDate'. $i . '" size="11" value="' . ConvertSQLDate($MyItemRow['requiredbydate']) . '" /></td>';
+			$i++;
 		}
 		echo '</form>';
 	}
