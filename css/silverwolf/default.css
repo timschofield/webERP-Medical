@@ -334,6 +334,23 @@ select {
 	border-radius: 3px;
 }
 
+select:hover {
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+	font-size: 10px;
+	background: transparent;
+    color:#645959;
+	border-width: 1px;
+	border-bottom-color: black;
+	border-bottom-style: solid;
+	border-top-color: black;
+	border-top-style: solid;
+	border-left-color: black;
+	border-left-style: solid;
+	border-right-color: black;
+	border-right-style: solid;
+	border-radius: 3px;
+}
+
 font.good {
     font-weight: bold;
     color: green;
