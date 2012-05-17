@@ -48,7 +48,6 @@ $SQL = "SELECT stockmaster.stockid,
 				stockmaster.decimalplaces
 			FROM stockmaster, stockcategory
 			WHERE	stockmaster.categoryid=stockcategory.categoryid
-				AND (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
 				AND stockmaster.mbflag <>'G'
 				AND stockmaster.discontinued=0
 				AND stockmaster.categoryid like '".$Category."'

@@ -52,7 +52,6 @@ function ShowItemSearchFields($rootpath, $theme, $db, $identifier) {
 	$SQL="SELECT categoryid,
 				categorydescription
 			FROM stockcategory
-			WHERE stocktype='F' OR stocktype='D'
 			ORDER BY categorydescription";
 	$result1 = DB_query($SQL,$db);
 	if (!isset($_POST['StockCat'])){
