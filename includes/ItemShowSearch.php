@@ -38,7 +38,7 @@ function __autoload($Cart) {
     include $PathPrefix . 'includes/DefineCartClass.php';
 }
 
-$db = mysqli_connect($host , $dbuser, $dbpassword,'weberpdemo', $mysqlport);
+$db = mysqli_connect($host , $dbuser, $dbpassword,$_SESSION['DatabaseName'], $mysqlport);
 $SQL = "SELECT stockmaster.stockid,
 				stockmaster.description,
 				stockmaster.units,
