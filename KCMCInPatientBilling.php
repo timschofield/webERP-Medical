@@ -38,6 +38,11 @@ if (!isset($_POST['Search']) and !isset($_POST['Next']) and !isset($_POST['Previ
 	}
 }
 
+if (isset($_POST['ChangeItem'])) {
+	$Patient[0]=$_POST['PatientNo'];
+	$Patient[1]=$_POST['BranchNo'];
+}
+
 if (isset($_POST['ChangeItem']) and $_POST['StockID']!='') {
 	$Patient[0]=$_POST['PatientNo'];
 	$Patient[1]=$_POST['BranchNo'];
@@ -527,7 +532,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 	}
 }
 
-if (!isset($Patient)) {
+if (!isset($Patient) and !isset($_POST['ChangeItem'])) {
 	ShowCustomerSearchFields($rootpath, $theme, $db);
 }
 
@@ -544,7 +549,7 @@ if (isset($PatientResult)) {
 	ShowReturnedCustomers($PatientResult);
 }
 
-if (isset($Patient)) {
+if (isset($Patient) or isset($_POST['ChangeItem'])) {
 	$sql="SELECT name,
 				clientsince,
 				salestype,
