@@ -46,9 +46,10 @@ $SQL = "SELECT stockmaster.stockid,
 				stockmaster.perishable,
 				stockmaster.controlled,
 				stockmaster.decimalplaces
-			FROM stockmaster, stockcategory
-			WHERE	stockmaster.categoryid=stockcategory.categoryid
-				AND stockmaster.mbflag <>'G'
+			FROM stockmaster
+			INNER JOIN stockcategory
+				ON stockmaster.categoryid=stockcategory.categoryid
+			WHERE stockmaster.mbflag <>'G'
 				AND stockmaster.discontinued=0
 				AND stockmaster.categoryid like '".$Category."'
 				AND stockmaster.description like '%".$Description."%'
@@ -81,7 +82,7 @@ while ($myrow=DB_fetch_array($SearchResult)) {
 						decimalplaces
 					FROM prices
 					WHERE stockid='".$myrow['stockid']."'
-						AND typeabbrev='DE'
+						AND typeabbrev='".$_SESSION['Items'.$identifier]->DefaultSalesType."'
 						AND currabrev='".$_SESSION['Items'.$identifier]->DefaultCurrency."'
 						AND '".date('Y-m-d')."' BETWEEN startdate and enddate";
 	$PricesResult = DB_query($PricesSQL, $db);
