@@ -36,7 +36,14 @@ if (isset($_POST['SubmitCash'])) {
 		$msg[]=_('You must select a cash collection point');
 	}
 
+	if (!isset($_POST['Received']) or $_POST['Received']==0) {
+		$InputError=1;
+		$msg[]=_('You must enter an amount for the deposit');
+	}
+
 	if ($InputError==1) {
+		$Patient[0] = $_POST['PatientNo'];
+		$Patient[1] = $_POST['BranchNo'];
 		foreach($msg as $message) {
 			prnMsg( $message, 'info');
 		}
