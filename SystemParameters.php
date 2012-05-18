@@ -185,6 +185,9 @@ if (isset($_POST['submit'])) {
 		if ($_SESSION['ShowLogoOnReceipt'] != $_POST['X_ShowLogoOnReceipt'] ) {
 			$sql[] = "UPDATE config SET confvalue = '".$_POST['X_ShowLogoOnReceipt']."' WHERE confname = 'ShowLogoOnReceipt'";
 		}
+		if ($_SESSION['DispenseOnBill'] != $_POST['X_DispenseOnBill'] ) {
+			$sql[] = "UPDATE config SET confvalue = '".$_POST['X_DispenseOnBill']."' WHERE confname = 'DispenseOnBill'";
+		}
 		if ($_SESSION['YearEnd'] != $_POST['X_YearEnd'] ) {
 			$sql[] = "UPDATE config SET confvalue = '".$_POST['X_YearEnd']."' WHERE confname = 'YearEnd'";
 		}
@@ -435,6 +438,13 @@ echo '<tr style="outline: solid #A49999 1px"><td>' . _('Show the hospital logo o
 	<option '.($_SESSION['ShowLogoOnReceipt']?'selected ':'').'value="1">'._('Yes').'</option>
 	<option '.(!$_SESSION['ShowLogoOnReceipt']?'selected ':'').'value="0">'._('No').'</option>
 	</select></td><td>' . _('Show the hospital logo when printing the receipt') . '</td></tr>';
+
+// DispenseOnBill
+echo '<tr style="outline: solid #A49999 1px"><td>' . _('Dispense the drugs immediately bill is raised') . ':</td>
+	<td><select name="X_DispenseOnBill">
+	<option '.($_SESSION['DispenseOnBill']?'selected ':'').'value="1">'._('Yes').'</option>
+	<option '.(!$_SESSION['DispenseOnBill']?'selected ':'').'value="0">'._('No').'</option>
+	</select></td><td>' . _('Dispense the drugs immediately bill is raised') . '</td></tr>';
 
 //'AllowOrderLineItemNarrative'
 echo '<tr style="outline: solid #A49999 1px"><td>' . _('Order Entry allows Line Item Narrative') . ':</td>
