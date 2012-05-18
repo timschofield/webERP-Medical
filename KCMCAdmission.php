@@ -48,6 +48,8 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 	}
 
 	if ($InputError==1) {
+		$Patient[0] = $_POST['PatientNo'];
+		$Patient[1] = $_POST['BranchNo'];
 		foreach($msg as $message) {
 			prnMsg( $message, 'info');
 		}

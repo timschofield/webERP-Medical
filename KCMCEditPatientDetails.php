@@ -7,7 +7,8 @@ $title = _('Update Patient Details');
 include('includes/header.inc');
 
 if (isset($_GET['PatientNumber'])) {
-	$_POST['FileNumber']=$_GET['PatientNumber'].' '.$_GET['BranchCode'];
+	$Patient[0]=$_GET['PatientNumber'];
+	$Patient[1]=$_GET['BranchCode'];
 }
 
 if (!isset($_POST['Search']) and !isset($_POST['Next']) and !isset($_POST['Previous']) and !isset($_POST['Go1']) and !isset($_POST['Go2']) and isset($_POST['JustSelectedACustomer']) and empty($_POST['Patient'])){
