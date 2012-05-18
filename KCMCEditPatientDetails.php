@@ -70,13 +70,22 @@ if (isset($_POST['Update'])) {
 	$result=DB_query($sql, $db);
 
 	if ($_POST['ExistingInsurance']==$_POST['Insurance']) {
-		$sql = "UPDATE custbranch SET brname='".$_POST['Insurance']."',
-									area='".$_POST['Area']."',
-									salesman='".$_POST['Employer']."',
-									phoneno='".$_POST['Telephone']."',
-									defaultlocation='".$_SESSION['DefaultFactoryLocation']."'
-								WHERE debtorno='".$_POST['FileNumber']."'
-								AND branchcode='".$_POST['Insurance']."'";
+		if ($_POST['Insurance']=='CASH') {
+			$sql = "UPDATE custbranch SET brname='".$_POST['Insurance']."',
+										area='".$_POST['Area']."',
+										phoneno='".$_POST['Telephone']."',
+										defaultlocation='".$_SESSION['DefaultFactoryLocation']."'
+									WHERE debtorno='".$_POST['FileNumber']."'
+										AND branchcode='".$_POST['Insurance']."'";
+		} else {
+			$sql = "UPDATE custbranch SET brname='".$_POST['Insurance']."',
+										area='".$_POST['Area']."',
+										salesman='".$_POST['Employer']."',
+										phoneno='".$_POST['Telephone']."',
+										defaultlocation='".$_SESSION['DefaultFactoryLocation']."'
+									WHERE debtorno='".$_POST['FileNumber']."'
+										AND branchcode='".$_POST['Insurance']."'";
+		}
 		$result=DB_query($sql, $db);
 	} else {
 		$sql = "INSERT INTO custbranch (branchcode,
@@ -148,7 +157,7 @@ if (isset($Patient)) {
 	echo '<td>'.$Patient[0].'</td></tr>';
 
 	echo '<tr><td>'._('Name').':</td>';
-	echo '<td><input type="text" size="20" name="Name" value="'.$myrow['name'].'" /></td></tr>';
+	echo '<td><input type="text" size="20" name="Name" value="'.trim($myrow['name']).'" /></td></tr>';
 
 	echo '<tr><td>'._('Address').':</td>';
 	echo '<td><input type="text" size="20" name="Address1" value="'.$myrow['address1'].'" /></td></tr>';
@@ -222,9 +231,7 @@ if (isset($Patient)) {
 	echo '</select></td></tr>';
 	if (isset($_POST['Insurance']) or $Patient[1]!='CASH') {
 		$sql = "SELECT salesmancode,
-						salesmanname,
-						smantel,
-						smanfax
+						salesmanname
 					FROM salesman";
 		$EmployerResult = DB_query($sql,$db);
 
