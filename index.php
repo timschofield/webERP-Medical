@@ -28,7 +28,7 @@ if ($_SESSION['UserSupplierID']!=''){
 		</table>';
 	include('includes/footer.inc');
 	exit;
-} elseif ($_SESSION['CustomerID']!=''){
+} elseif ($_SESSION['UserCustomerID']!=''){
 	echo '<table class="table_index">
 			<tr>
 			<td class="menu_group_item">
