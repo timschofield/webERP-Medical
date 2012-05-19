@@ -666,25 +666,6 @@ if (isset($Patient)) {
 	} else {
 		echo '<tr><td>'._('Insurance Reference').'</td>';
 		echo '<td><input type="text" size="10" name="InsuranceRef" value="" /></td></tr>';
-
-		$sql="SELECT supplierid,
-					suppname
-				FROM suppliers
-				LEFT JOIN suppliertype
-					ON suppliertype.typeid=suppliers.supptype
-				WHERE suppliertype.typename='Doctors'";
-		$result=DB_query($sql, $db);
-		if (DB_num_rows($result)>0) {
-			echo '<tr><td>'._('Doctors Name').':</td>';
-			echo '<td><select name="Doctor">';
-			echo '<option value="">'._('Select a doctor from list').'</option>';
-			while ($myrow=DB_fetch_array($result)) {
-				echo '<option value="'.$myrow['supplierid'].'">'.$myrow['supplierid']. ' - ' . $myrow['suppname'].'</option>';
-			}
-			echo '</select></td></tr>';
-			echo '<tr><td>' . _('Doctors Fee') . ':</td>';
-			echo '<td><input type="text" class="number" size="10" name="DoctorsFee" value="0" /></td></tr>';
-		}
 		echo '<tr><td>'._('Comments').'</td>';
 		echo '<td><input type="text" size="50" name="Comments" value="" /></td></tr>';
 		echo '<tr><td colspan="2" style="text-align: left"><button type="submit" style="text-align:left" name="SubmitInsurance"><img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/tick.png" />'._('Process Invoice').'</button>';
