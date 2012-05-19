@@ -41,6 +41,11 @@ if (isset($_GET['Delete'])) {
 if (isset($_POST['ChangeItem'])) {
 	$Patient[0]=$_POST['PatientNo'];
 	$Patient[1]=$_POST['BranchNo'];
+}
+
+if (isset($_POST['ChangeItem']) and $_POST['StockID']!='') {
+	$Patient[0]=$_POST['PatientNo'];
+	$Patient[1]=$_POST['BranchNo'];
 	$sql="SELECT price
 				FROM prices
 				WHERE stockid='".$_POST['StockID']."'
@@ -58,6 +63,10 @@ if (isset($_POST['ChangeItem'])) {
 	$_SESSION['Items'][$_SESSION['Items']['Lines']]['Price']=$Price;
 	$_SESSION['Items']['Value']+=$Price;
 	$_SESSION['Items']['Lines']++;
+} else if (isset($_POST['ChangeItem']) and $_POST['StockID']=='' and isset($_POST['AddDoctorFee'])) {
+	$_SESSION['Items']['Value']+=filter_currency_input($_POST['DoctorsFee']);
+} else if (isset($_POST['ChangeItem']) and $_POST['StockID']=='' and !isset($_POST['AddDoctorFee'])) {
+	$_SESSION['Items']['Value']-=filter_currency_input($_POST['DoctorsFee']);
 }
 
 if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
@@ -74,9 +83,17 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 		$msg[]=_('You must select a test to bill');
 	}
 
+	if ($_SESSION['Items']['Lines']==0) {
+		$InputError=1;
+		$msg[]=_('You must select at least one test');
+	}
+
 	if ($InputError==1) {
 		foreach($msg as $message) {
 			prnMsg( $message, 'info');
+			$_POST['ChangeItem']='Yes';
+			$Patient[0]=$_POST['PatientNo'];
+			$Patient[1]=$_POST['BranchNo'];
 		}
 	} else {
 
@@ -573,6 +590,38 @@ if (isset($Patient)) {
 	echo '<td>'.locale_money_format($_SESSION['Items']['Value'], $_SESSION['CompanyRecord']['currencydefault']).' '.$_SESSION['CompanyRecord']['currencydefault'].'</td></tr>';
 	echo '<input type="hidden" name="Price" value="'.$_SESSION['Items']['Value'].'" />';
 
+	$sql = "SELECT supplierid,
+					suppname
+				FROM suppliers
+				LEFT JOIN suppliertype
+					ON suppliertype.typeid=suppliers.supptype
+				WHERE suppliertype.typename='Doctors'";
+	$result=DB_query($sql, $db);
+	if (DB_num_rows($result)>0) {
+		echo '<tr><td>'._('Doctors Name').':</td>';
+		echo '<td><select name="Doctor">';
+		echo '<option value="">'._('Select a doctor from list').'</option>';
+		while ($myrow=DB_fetch_array($result)) {
+			if (isset($_POST['Doctor']) and $_POST['Doctor']==$myrow['supplierid']) {
+				echo '<option selected="selected" value="'.$myrow['supplierid'].'">'.$myrow['supplierid']. ' - ' . $myrow['suppname'].'</option>';
+			} else {
+				echo '<option value="'.$myrow['supplierid'].'">'.$myrow['supplierid']. ' - ' . $myrow['suppname'].'</option>';
+			}
+		}
+		echo '</select></td></tr>';
+		echo '<tr><td>';
+		if (isset($_POST['DoctorsFee']) and $_POST['DoctorsFee']!='') {
+			echo _('Doctors Fee') . ':</td><td><input type="text" class="number" size="10" name="DoctorsFee" value="' . locale_money_format(filter_currency_input($_POST['DoctorsFee']), $_SESSION['CompanyRecord']['currencydefault']) .'" />';
+		} else {
+			echo _('Doctors Fee') . ':</td><td><input type="text" class="number" size="10" name="DoctorsFee" value="" />';
+		}
+		if (isset($_POST['AddDoctorFee'])) {
+			echo '<input type="checkbox" checked="checked" name="AddDoctorFee" value="Add Doctors fee to balance" onChange="ReloadForm(ChangeItem)" />' . _('Add Doctors fee to balance') . '</td></tr>';
+		} else {
+			echo '<input type="checkbox" name="AddDoctorFee" value="Add Doctors fee to balance" onChange="ReloadForm(ChangeItem)" />' . _('Add Doctors fee to balance') . '</td></tr>';
+		}
+	}
+
 	if ($Patient[1]=='CASH') {
 		if (!isset($Received)) {
 			$Received=$_SESSION['Items']['Value'];
@@ -610,25 +659,6 @@ if (isset($Patient)) {
 				}
 			}
 			echo '</select></td></tr>';
-		}
-
-		$sql="SELECT supplierid,
-					suppname
-				FROM suppliers
-				LEFT JOIN suppliertype
-					ON suppliertype.typeid=suppliers.supptype
-				WHERE suppliertype.typename='Doctors'";
-		$result=DB_query($sql, $db);
-		if (DB_num_rows($result)>0) {
-			echo '<tr><td>'._('Doctors Name').':</td>';
-			echo '<td><select name="Doctor">';
-			echo '<option value="">'._('Select a doctor from list').'</option>';
-			while ($myrow=DB_fetch_array($result)) {
-				echo '<option value="'.$myrow['supplierid'].'">'.$myrow['supplierid']. ' - ' . $myrow['suppname'].'</option>';
-			}
-			echo '</select></td></tr>';
-			echo '<tr><td>' . _('Doctors Fee') . ':</td>';
-			echo '<td><input type="text" class="number" size="10" name="DoctorsFee" value="0" /></td></tr>';
 		}
 		echo '<tr><td>'._('Comments').'</td>';
 		echo '<td><input type="text" size="50" name="Comments" value="" /></td></tr>';
