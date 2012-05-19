@@ -85,6 +85,11 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 
 	$InputError=0;
 
+	if ((!isset($_POST['Dispensary']) or $_POST['Dispensary']=='')) {
+		$InputError=1;
+		$msg[]=_('You must select a location where the drugs are to be dispensed from');
+	}
+
 	if ((!isset($_POST['BankAccount']) or $_POST['BankAccount']=='') and !isset($_POST['SubmitInsurance'])) {
 		$InputError=1;
 		$msg[]=_('You must select a cash collection point');
@@ -98,6 +103,9 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 	if ($InputError==1) {
 		foreach($msg as $message) {
 			prnMsg( $message, 'info');
+			$_POST['ChangeItem']='Yes';
+			$Patient[0]=$_POST['PatientNo'];
+			$Patient[1]=$_POST['BranchNo'];
 		}
 	} else {
 
@@ -532,7 +540,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 	}
 }
 
-if (!isset($Patient) and !isset($_POST['ChangeItem'])) {
+if (!isset($Patient)) {
 	ShowCustomerSearchFields($rootpath, $theme, $db);
 }
 
@@ -769,7 +777,7 @@ if (isset($Patient) or isset($_POST['ChangeItem'])) {
 		if (isset($_POST['DoctorsFee'])) {
 			echo _('Doctors Fee') . ':<input type="text" class="number" size="10" name="DoctorsFee" value="' . locale_money_format(filter_currency_input($_POST['DoctorsFee']), $_SESSION['CompanyRecord']['currencydefault']) .'" />';
 		} else {
-			echo _('Doctors Fee') . ':<input type="text" class="number" size="10" name="DoctorsFee" value="" />';
+			echo _('Doctors Fee') . ':<input type="text" class="number" size="10" name="DoctorsFee" value="0.00" />';
 		}
 		if (isset($_POST['AddDoctorFee'])) {
 			echo '<input type="checkbox" checked="checked" name="AddDoctorFee" value="Add Doctors fee to balance" onChange="ReloadForm(ChangeItem)" />' . _('Add Doctors fee to balance') . '</td></tr>';
