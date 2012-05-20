@@ -105,7 +105,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 			$Patient[1]=$_POST['BranchNo'];
 		}
 	} else {
-
+		$ExRate=1;
 		DB_Txn_Begin($db);
 		/*First off create the sales order
 		* entries in the database
@@ -394,7 +394,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 				AND salesanalysis.typeabbrev ='" . $_POST['PriceList'] . "'
 				AND salesanalysis.periodno='" . $PeriodNo . "'
 				AND salesanalysis.cust " . LIKE . " '" . $_POST['PatientNo'] . "'
-				AND salesanalysis.custbranch " . LIKE . " '" . $Patient[1] . "'
+				AND salesanalysis.custbranch " . LIKE . " '" . $_POST['BranchNo'] . "'
 				AND salesanalysis.stockid " . LIKE . " '" . $_SESSION['Items'][$i]['StockID'] . "'
 				AND salesanalysis.budgetoractual=1
 				GROUP BY salesanalysis.stockid,
