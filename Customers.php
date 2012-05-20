@@ -47,11 +47,6 @@ if (isset($_POST['submit'])) {
 		prnMsg( _('The debtor code cannot be empty'),'error');
 		$Errors[$i] = 'DebtorNo';
 		$i++;
-	} elseif ($_SESSION['AutoDebtorNo']==0 AND (ContainsIllegalCharacters($_POST['DebtorNo']) OR mb_strpos($_POST['DebtorNo'], ' '))) {
-		$InputError = 1;
-		prnMsg( _('The customer code cannot contain any of the illefal characters') ,'error');
-		$Errors[$i] = 'DebtorNo';
-		$i++;
 	} elseif (mb_strlen($_POST['Address1']) >40) {
 		$InputError = 1;
 		prnMsg( _('The Line 1 of the address must be forty characters or less long'),'error');
