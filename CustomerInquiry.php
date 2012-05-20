@@ -92,17 +92,21 @@ if (DB_num_rows($CustomerResult)==0){
 
 	$NIL_BALANCE = True;
 
-	$SQL = "SELECT debtorsmaster.name, currencies.currency, paymentterms.terms,
-	debtorsmaster.creditlimit, holdreasons.dissallowinvoices, holdreasons.reasondescription
-	FROM debtorsmaster,
-	     paymentterms,
-	     holdreasons,
-	     currencies
-	WHERE
-	     debtorsmaster.paymentterms = paymentterms.termsindicator
-	     AND debtorsmaster.currcode = currencies.currabrev
-	     AND debtorsmaster.holdreason = holdreasons.reasoncode
-	     AND debtorsmaster.debtorno = '" . $CustomerID . "'";
+	$SQL = "SELECT  debtorsmaster.name,
+					currencies.currency,
+					paymentterms.terms,
+					debtorsmaster.creditlimit,
+					debtorsmaster.currcode,
+					holdreasons.dissallowinvoices,
+					holdreasons.reasondescription
+				FROM debtorsmaster
+				INNER JOIN paymentterms
+					ON debtorsmaster.paymentterms = paymentterms.termsindicator
+				INNER JOIN holdreasons
+					ON debtorsmaster.holdreason = holdreasons.reasoncode
+				INNER JOIN currencies
+					ON debtorsmaster.currcode = currencies.currabrev
+				WHERE debtorsmaster.debtorno = '" . $CustomerID . "'";
 
 	$ErrMsg =_('The customer details could not be retrieved by the SQL because');
 	$CustomerResult = DB_query($SQL,$db,$ErrMsg);
