@@ -131,59 +131,59 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 		$OrderNo = GetNextTransNo(30, $db);
 
 		$HeaderSQL = "INSERT INTO salesorders (	orderno,
-											debtorno,
-											branchcode,
-											comments,
-											orddate,
-											shipvia,
-											deliverto,
-											fromstkloc,
-											deliverydate,
-											confirmeddate,
-											deliverblind)
-										VALUES (
-											'" . $OrderNo . "',
-											'" . $_POST['PatientNo'] . "',
-											'" . $_POST['BranchNo'] . "',
-											'" . DB_escape_string($_POST['Comments']) ."',
-											'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
-											'1',
-											'" . $_SESSION['Items']['Dispensary'] . "',
-											'" . $_SESSION['Items']['Dispensary'] ."',
-											'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
-											'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
-											0
-										)";
+												debtorno,
+												branchcode,
+												comments,
+												orddate,
+												shipvia,
+												deliverto,
+												fromstkloc,
+												deliverydate,
+												confirmeddate,
+												deliverblind)
+											VALUES (
+												'" . $OrderNo . "',
+												'" . $_POST['PatientNo'] . "',
+												'" . $_POST['BranchNo'] . "',
+												'" . DB_escape_string($_POST['Comments']) ."',
+												'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
+												'1',
+												'" . $_SESSION['Items']['Dispensary'] . "',
+												'" . $_SESSION['Items']['Dispensary'] ."',
+												'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
+												'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
+												0
+											)";
 
 		$ErrMsg = _('The order cannot be added because');
 		$InsertQryResult = DB_query($HeaderSQL,$db,$ErrMsg);
 
 		for ($i=0; $i<$_SESSION['Items']['Lines']; $i++) {
 			if (isset($_SESSION['Items'][$i]['StockID'])) {
-				$LineItemSQL = "INSERT INTO salesorderdetails (orderlineno,
-													orderno,
-													stkcode,
-													unitprice,
-													quantity,
-													discountpercent,
-													narrative,
-													itemdue,
-													actualdispatchdate,
-													qtyinvoiced,
-													completed)
-												VALUES (
-													'" . $i . "',
-													'" . $OrderNo . "',
-													'" . $_SESSION['Items'][$i]['StockID'] . "',
-													'" . $_SESSION['Items'][$i]['Price'] . "',
-													'" . $_SESSION['Items'][$i]['Quantity'] . "',
-													'0',
-													'" . _('Sales order for inpatient transaction') . "',
-													'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
-													'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
-													'" . $_SESSION['Items'][$i]['Quantity'] . "',
-													1
-												)";
+				$LineItemSQL = "INSERT INTO salesorderdetails ( orderlineno,
+																orderno,
+																stkcode,
+																unitprice,
+																quantity,
+																discountpercent,
+																narrative,
+																itemdue,
+																actualdispatchdate,
+																qtyinvoiced,
+																completed)
+															VALUES (
+																'" . $i . "',
+																'" . $OrderNo . "',
+																'" . $_SESSION['Items'][$i]['StockID'] . "',
+																'" . $_SESSION['Items'][$i]['Price'] . "',
+																'" . $_SESSION['Items'][$i]['Quantity'] . "',
+																'0',
+																'" . _('Sales order for inpatient transaction') . "',
+																'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
+																'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
+																'" . $_SESSION['Items'][$i]['Quantity'] . "',
+																1
+															)";
 				$DbgMsg = _('Trouble inserting a line of a sales order. The SQL that failed was');
 				$Ins_LineItemResult = DB_query($LineItemSQL,$db,$ErrMsg,$DbgMsg,true);
 			}
