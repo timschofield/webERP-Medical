@@ -32,7 +32,16 @@ include('includes/header.inc');
 		include('includes/footer.inc');
 		exit;
 	}
+
 	$WORow = DB_fetch_array($WOResult);
+	if (!isset($_POST['FromLocation'])){
+		$_POST['FromLocation']=$WORow['loccode'];
+	}
+	$LocResult = DB_query("SELECT loccode, locationname
+				FROM locations
+				WHERE loccode='" . $_POST['FromLocation'] . "'",
+				$db);
+	$LocRow = DB_fetch_array($LocResult);
 
 	echo '<a href="'. $rootpath . '/SelectWorkOrder.php">' . _('Back to Work Orders'). '</a><br />';
     echo '<a href="'. $rootpath . '/WorkOrderCosting.php?WO=' .  $_REQUEST['WO'] . '">' . _('Back to Costing'). '</a><br />';
@@ -46,8 +55,8 @@ include('includes/header.inc');
 			<td>' . $_REQUEST['StockID'] . ' - ' . $WORow['description'] . '</td>
 		</tr>
 	 	<tr>
-			<td class="label">' . _('Manufactured at') . ':</td>
-			<td>' . $WORow['locationname'] . '</td>
+			<td class="label">' . _('Start Date') . ':</td>
+			<td>' . ConvertSQLDate($WORow['startdate']) . '</td>
 			<td class="label">' . _('Required By') . ':</td>
 			<td>' . ConvertSQLDate($WORow['requiredby']) . '</td>
 		</tr>
@@ -62,19 +71,12 @@ include('includes/header.inc');
 			<td colspan="2">' . $WORow['units'] . '</td>
 		</tr>
 	 	<tr>
-			<td class="label">' . _('Date Material Issued') . ':</td>
-			<td>' . Date($_SESSION['DefaultDateFormat']) . '</td>
+			<td class="label">' . _('Manufactured at') . ':</td>
+			<td>' . $WORow['locationname'] . '</td>
 			<td class="label">' . _('Issued From') . ':</td>
+			<td>' . $LocRow['locationname'] . '</td>
 		</tr>';
 
-		if (!isset($_POST['FromLocation'])){
-			$_POST['FromLocation']=$WORow['loccode'];
-		}
-		$LocResult = DB_query("SELECT loccode, locationname
-				FROM locations
-				WHERE loccode='" . $_POST['FromLocation'] . "'",
-				$db);
-		$LocRow = DB_fetch_array($LocResult);
 
 		echo '</td></tr></table><br />';
 
