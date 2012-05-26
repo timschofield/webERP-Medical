@@ -167,7 +167,7 @@ if (!(isset($_POST['Search']))) {
 		//find the quantity onhand item
 		$sqloh = "SELECT sum(quantity) AS qty
 					FROM locstock
-					WHERE stockid='" . $myrow['stkcode'] . "'";
+					WHERE stockid='" . $myrow['stockid'] . "'";
 		$oh = DB_query($sqloh, $db);
 		$ohRow = DB_fetch_row($oh);
 		if ($k == 1) {
