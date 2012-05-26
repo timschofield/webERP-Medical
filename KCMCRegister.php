@@ -11,7 +11,7 @@ if (isset($_POST['Create'])) {
 
 	$InputError=0;
 
-	if (mb_strlen($_POST['FileNumber'])==0) {
+	if ($_SESSION['AutoDebtorNo']==0 and mb_strlen($_POST['FileNumber'])==0) {
 		$InputError=1;
 		$msg[]=_('You must input a file number');
 	}
