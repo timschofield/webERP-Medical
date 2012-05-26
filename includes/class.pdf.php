@@ -103,8 +103,8 @@ class Cpdf extends TCPDF {
 	}
 
 
-	function addJpegFromFile($img,$x,$y,$w=0,$h=0){
-		$this->Image($img, $x, $this->h-$y-$h, $w, $h);
+	function addJpegFromFile($img,$XPos,$YPos,$Width=0,$Height=0,$Type=''){
+		$this->Image($img, $x=$XPos, $y=$this->h-$YPos-$Height, $w=$Width, $h=$Height,$type=$Type);
 	}
 
 	/*
