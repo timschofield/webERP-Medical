@@ -66,6 +66,7 @@ if (isset($PrintPDF)
 	I think it should be moved to each report to provide flexible Document Header and Margins in a per-report basis. */
 	$pdf->setAutoPageBreak(0);	// Javier: needs check.
 	$pdf->setPrintHeader(false);	// Javier: I added this must be called before Add Page
+	$pdf->setPrintFooter(false);
 	$pdf->AddPage();
 	$pdf->cMargin = 0;		// Javier: needs check.
 
