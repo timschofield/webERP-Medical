@@ -261,7 +261,7 @@ if (isset($_POST['submit'])) {
 										 directdemand,
 										 whererequired)
 							   SELECT worequirements.stockid,
-									  workorders.requiredby,
+									  workorders.startdate,
 									  qtypu*(woitems.qtyreqd - woitems.qtyrecd) AS netqty,
 									  'WO',
 									  woitems.wo,
@@ -414,11 +414,11 @@ if (isset($_POST['submit'])) {
 									 updateflag)
 						   SELECT Null,
 								  stockid,
-								  workorders.requiredby,
+								  workorders.startdate,
 								  (woitems.qtyreqd-woitems.qtyrecd) AS netqty,
 								  'WO',
 								  woitems.wo,
-								  workorders.requiredby,
+								  workorders.startdate,
 								  0
 							  FROM woitems INNER JOIN workorders
 								ON woitems.wo=workorders.wo
