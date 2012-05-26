@@ -29,6 +29,11 @@ if ($FromTransNo=='Preview') {
 	$FormDesign = simplexml_load_file($PathPrefix.'companies/'.$_SESSION['DatabaseName'].'/FormDesigns/SalesInvoice.xml');
 }
 if (isset($PrintPDF) or isset($_GET['PrintPDF']) and $PrintPDF and isset($FromTransNo) and isset($InvOrCredit) and $FromTransNo != '') {
+	$pdf->setAutoPageBreak(0);	// Javier: needs check.
+	$pdf->setPrintHeader(false);	// Javier: I added this must be called before Add Page
+	$pdf->setPrintFooter(false);
+	$pdf->AddPage();
+	$pdf->cMargin = 0;		// Javier: needs check.
 	$PaperSize = $FormDesign->PaperSize;
 	include ('includes/PDFStarter.php');
 	// Javier: now I use the native constructor, better to not use references
