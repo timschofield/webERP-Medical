@@ -46,8 +46,7 @@ if (isset($_POST['submit'])) {
 		$InputError = 1;
 		prnMsg( _('The debtor code cannot be empty'),'error');
 		$Errors[$i] = 'DebtorNo';
-		$i++;
-	} elseif (strlen($_POST['Address1']) >40) {
+	} elseif (mb_strlen($_POST['Address1']) >40) {
 		$InputError = 1;
 		prnMsg( _('The Line 1 of the address must be forty characters or less long'),'error');
 		$Errors[$i] = 'Address1';

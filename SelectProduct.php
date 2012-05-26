@@ -289,10 +289,10 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 		} //end switch
 		echo '</td></tr>';
 		$PropertyCounter++;
+		echo '<tr>
+				<th colspan="2" style="border: 0px"><button type="submit" name="UpdateProperties">' . _('Update Properties') . '</button></th>
+			</tr>';
 	} //end loop round properties for the item category
-	echo '<tr>
-			<th colspan="2" style="border: 0px"><button type="submit" name="UpdateProperties">' . _('Update Properties') . '</button></th>
-		</tr>';
 	echo '</table></form>'; //end of Item Category Property mod
 	echo '<td style="width: 15%; vertical-align: top">
 			<table style="background: transparent">'; //nested table to show QOH/orders

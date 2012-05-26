@@ -224,37 +224,44 @@ if (isset($MakePDFThenDisplayIt) or isset($MakePDFThenEmailIt)) {
 			/* Dont search for supplier data if it is a preview */
 			if ($OrderNo !='Preview') {
 				//check the supplier code from code item
-                $sqlsupp = "SELECT suppliers_partno, supplierdescription
+				$sqlsupp = "SELECT suppliers_partno, supplierdescription
 				FROM purchdata
 					WHERE stockid='" . $POLine['itemcode'] . "'
 					AND supplierno ='" . $POHeader['supplierno'] . "'";
 
-                $SuppResult = DB_query($sqlsupp,$db);
+				$SuppResult = DB_query($sqlsupp,$db);
 
 				if ( DB_num_rows($SuppResult) > 0 ) {
-                    $SuppDescRow = DB_fetch_row($SuppResult);
+					$SuppDescRow = DB_fetch_row($SuppResult);
 
-                    $Desc = $SuppDescRow[0] . " - ";
+					$Desc = $SuppDescRow[0] . " - ";
 
-                    // If the supplier's desc. is provided, use it;
-                    // otherwise, use the stock's desc.
-                    if ( mb_strlen($SuppDescRow[1]) > 2 ) {
-                    	$Desc .= $SuppDescRow[1];
-                    }
-                    else {
-                    	$Desc .= $POLine['itemdescription'];
-                    }
+					// If the supplier's desc. is provided, use it;
+					// otherwise, use the stock's desc.
+					if ( mb_strlen($SuppDescRow[1]) > 2 ) {
+						$Desc .= $SuppDescRow[1];
+					}
+					else {
+						$Desc .= $POLine['itemdescription'];
+					}
 				}
 				else {
 					// No purchdata found, so use the stock's desc.
-                    $Desc = $POLine['itemdescription'];
+					$Desc = $POLine['itemdescription'];
 				}
 			} else {
 				// We are previewing; use the preview's desc.
-                $Desc = $POLine['itemdescription'];
+				$Desc = $POLine['itemdescription'];
 			}
 			$OrderTotal += ($POLine['unitprice']*$POLine['quantityord']);
-			$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column1->x,$YPos,$FormDesign->Data->Column1->Length,$FormDesign->Data->Column1->FontSize,$POLine['itemcode'], 'left');
+
+			//use suppliers itemcode if available i.e. stringlength >0
+			if (strlen($POLine['suppliers_partno']>0)) {
+				$Itemcode=$POLine['suppliers_partno'];
+			} else {
+				$Itemcode=$POLine['itemcode'];
+			}
+			$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column1->x,$YPos,$FormDesign->Data->Column1->Length,$FormDesign->Data->Column1->FontSize,$Itemcode, 'left');
 			$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column2->x,$YPos,$FormDesign->Data->Column2->Length,$FormDesign->Data->Column2->FontSize,$Desc, 'left');
 			$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column3->x,$YPos,$FormDesign->Data->Column3->Length,$FormDesign->Data->Column3->FontSize,$DisplayQty, 'left');
 			$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column4->x,$YPos,$FormDesign->Data->Column4->Length,$FormDesign->Data->Column4->FontSize,$POLine['units'], 'left');

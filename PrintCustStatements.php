@@ -35,7 +35,7 @@ if (isset($_POST['PrintPDF']) and isset($_POST['FromCust']) and $_POST['FromCust
 	$_POST['FromCust'] = strtoupper($_POST['FromCust']);
 
 	if (!isset($_POST['ToCust'])){
-	      $_POST['ToCust'] = $_POST['FromCust'];
+		  $_POST['ToCust'] = $_POST['FromCust'];
 	} else {
 		$_POST['ToCust'] = strtoupper($_POST['ToCust']);
 	}
@@ -80,11 +80,10 @@ if (isset($_POST['PrintPDF']) and isset($_POST['FromCust']) and $_POST['FromCust
 
 	if (DB_Num_Rows($StatementResults) == 0){
 		$title = _('Print Statements') . ' - ' . _('No Customers Found');
-	        require('includes/header.inc');
+			require('includes/header.inc');
 		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print') . '" alt="" />' . ' ' . _('Print Customer Account Statements') . '</p>';
 		prnMsg( _('There were no Customers matching your selection of '). $_POST['FromCust']. ' - '.
 			$_POST['ToCust'].'.' , 'error');
-//		echo '</div>';
 		include('includes/footer.inc');
 		exit();
 	}
@@ -107,12 +106,12 @@ if (isset($_POST['PrintPDF']) and isset($_POST['FromCust']) and $_POST['FromCust
 
 		$OstdgTrans=DB_query($sql,$db, $ErrMsg);
 
-	   	$NumberOfRecordsReturned = DB_num_rows($OstdgTrans);
+		$NumberOfRecordsReturned = DB_num_rows($OstdgTrans);
 
 /*now get all the settled transactions which were allocated this month */
 		$ErrMsg = _('There was a problem retrieving the transactions that were settled over the course of the last month for'). ' ' . $StmtHeader['name'] . ' ' . _('from the database');
-	   	if ($_SESSION['Show_Settled_LastMonth']==1){
-	   		$sql = "SELECT DISTINCT debtortrans.id,
+		if ($_SESSION['Show_Settled_LastMonth']==1){
+			$sql = "SELECT DISTINCT debtortrans.id,
 						systypes.typename,
 						debtortrans.transno,
 						debtortrans.trandate,
@@ -133,21 +132,21 @@ if (isset($_POST['PrintPDF']) and isset($_POST['FromCust']) and $_POST['FromCust
 			$SetldTrans=DB_query($sql,$db, $ErrMsg);
 			$NumberOfRecordsReturned += DB_num_rows($SetldTrans);
 
-	   	}
+		}
 
-	  	if ( $NumberOfRecordsReturned >=1){
+		if ( $NumberOfRecordsReturned >=1){
 
 		/* Then there's a statement to print. So print out the statement header from the company record */
 
-	      		$PageNumber =1;
+		  		$PageNumber =1;
 
 			if ($FirstStatement==True){
 				$FirstStatement=False;
-	      		} else {
+			} else {
 				$pdf->newPage();
-	      		}
+			}
 
-	      		include('includes/PDFStatementPageHeader.inc');
+			include('includes/PDFStatementPageHeader.inc');
 
 
 			if ($_SESSION['Show_Settled_LastMonth']==1){
@@ -198,110 +197,110 @@ if (isset($_POST['PrintPDF']) and isset($_POST['FromCust']) and $_POST['FromCust
 				}
 			} // end of if there are transaction that were settled this month
 
-	      		if (DB_num_rows($OstdgTrans)>=1){
+			if (DB_num_rows($OstdgTrans)>=1){
 
-		      		$YPos -= ($line_height);
+				$YPos -= ($line_height);
 				if ($YPos-(2 * $line_height) <= $Bottom_Margin){
 					$PageNumber++;
 					$pdf->newPage();
 					include ('includes/PDFStatementPageHeader.inc');
 				}
-			/*Now the same again for outstanding transactions */
+				/*Now the same again for outstanding transactions */
 
-			$FontSize=12;
-			$pdf->addText($Left_Margin+1,$YPos+20,$FontSize, _('Outstanding Transactions') );
-			$YPos -= $line_height;
+				$FontSize=12;
+				$pdf->addText($Left_Margin+1,$YPos+20,$FontSize, _('Outstanding Transactions') );
+				$YPos -= $line_height;
 
-			while ($myrow=DB_fetch_array($OstdgTrans)){
+				while ($myrow=DB_fetch_array($OstdgTrans)){
 
-				$DisplayAlloc = locale_money_format($myrow['alloc'],$StmtHeader['currcode']);
-				$DisplayOutstanding = locale_money_format($myrow['ostdg'],$StmtHeader['currcode']);
+					$DisplayAlloc = locale_money_format($myrow['alloc'],$StmtHeader['currcode']);
+					$DisplayOutstanding = locale_money_format($myrow['ostdg'],$StmtHeader['currcode']);
 
-				$FontSize=9;
-				$LeftOvers = $pdf->addTextWrap($Left_Margin+1,$YPos,60,$FontSize,$myrow['typename'], 'left');
-				$LeftOvers = $pdf->addTextWrap($Left_Margin+110,$YPos,50,$FontSize,$myrow['transno'], 'left');
-				$LeftOvers = $pdf->addTextWrap($Left_Margin+211,$YPos,50,$FontSize,ConvertSQLDate($myrow['trandate']), 'left');
+					$FontSize=9;
+					$LeftOvers = $pdf->addTextWrap($Left_Margin+1,$YPos,60,$FontSize,$myrow['typename'], 'left');
+					$LeftOvers = $pdf->addTextWrap($Left_Margin+110,$YPos,50,$FontSize,$myrow['transno'], 'left');
+					$LeftOvers = $pdf->addTextWrap($Left_Margin+211,$YPos,50,$FontSize,ConvertSQLDate($myrow['trandate']), 'left');
 
-				$FontSize=10;
-				if ($myrow['total']>0){
-					$DisplayTotal = locale_money_format($myrow['total'],$StmtHeader['currcode']);
-					$LeftOvers = $pdf->addTextWrap($Left_Margin+300,$YPos,55,$FontSize,$DisplayTotal, 'right');
-				} else {
-					$DisplayTotal = locale_money_format(-$myrow['total'],$StmtHeader['currcode']);
-					$LeftOvers = $pdf->addTextWrap($Left_Margin+382,$YPos,55,$FontSize,$DisplayTotal, 'right');
-				}
+					$FontSize=10;
+					if ($myrow['total']>0){
+						$DisplayTotal = locale_money_format($myrow['total'],$StmtHeader['currcode']);
+						$LeftOvers = $pdf->addTextWrap($Left_Margin+300,$YPos,55,$FontSize,$DisplayTotal, 'right');
+					} else {
+						$DisplayTotal = locale_money_format(-$myrow['total'],$StmtHeader['currcode']);
+						$LeftOvers = $pdf->addTextWrap($Left_Margin+382,$YPos,55,$FontSize,$DisplayTotal, 'right');
+					}
 
-				$LeftOvers = $pdf->addTextWrap($Left_Margin+459,$YPos,59,$FontSize,$DisplayAlloc, 'right');
-				$LeftOvers = $pdf->addTextWrap($Left_Margin+536,$YPos,60,$FontSize,$DisplayOutstanding, 'right');
+					$LeftOvers = $pdf->addTextWrap($Left_Margin+459,$YPos,59,$FontSize,$DisplayAlloc, 'right');
+					$LeftOvers = $pdf->addTextWrap($Left_Margin+536,$YPos,60,$FontSize,$DisplayOutstanding, 'right');
 
-				/*Now show also in the remittance advice sectin */
-				$FontSize=8;
-				$LeftOvers = $pdf->addTextWrap($Perforation+10,$YPos,30,$FontSize,$myrow['typename'], 'left');
-				$LeftOvers = $pdf->addTextWrap($Perforation+75,$YPos,30,$FontSize,$myrow['transno'], 'left');
-				$LeftOvers = $pdf->addTextWrap($Perforation+90,$YPos,60,$FontSize,$DisplayOutstanding, 'right');
+					/*Now show also in the remittance advice sectin */
+					$FontSize=8;
+					$LeftOvers = $pdf->addTextWrap($Perforation+10,$YPos,30,$FontSize,$myrow['typename'], 'left');
+					$LeftOvers = $pdf->addTextWrap($Perforation+75,$YPos,30,$FontSize,$myrow['transno'], 'left');
+					$LeftOvers = $pdf->addTextWrap($Perforation+90,$YPos,60,$FontSize,$DisplayOutstanding, 'right');
 
-				if ($YPos-$line_height <= $Bottom_Margin){
-		/* head up a new statement page */
+					if ($YPos-$line_height <= $Bottom_Margin){
+					/* head up a new statement page */
 
-					$PageNumber++;
-					$pdf->newPage();
-					include ('includes/PDFStatementPageHeader.inc');
-				} //end if need a new page headed up
+						$PageNumber++;
+						$pdf->newPage();
+						include ('includes/PDFStatementPageHeader.inc');
+					} //end if need a new page headed up
 
-				/*increment a line down for the next line item */
-				$YPos -= ($line_height);
+					/*increment a line down for the next line item */
+					$YPos -= ($line_height);
 
-			} //end while there are outstanding transaction to print
-		} // end if there are outstanding transaction to print
+				} //end while there are outstanding transaction to print
+			} // end if there are outstanding transaction to print
 
 
-		/* check to see enough space left to print the totals/footer
-		which is made up of 2 ruled lines, the totals/aging another 2 lines
-		and details of the last payment made - in all 6 lines */
-		if (($YPos-$Bottom_Margin)<(4*$line_height)){
+			/* check to see enough space left to print the totals/footer
+			which is made up of 2 ruled lines, the totals/aging another 2 lines
+			and details of the last payment made - in all 6 lines */
+			if (($YPos-$Bottom_Margin)<(4*$line_height)){
 
-		/* head up a new statement/credit note page */
-			$PageNumber++;
-			$pdf->newPage();
-		include ('includes/PDFStatementPageHeader.inc');
-		}
+				/* head up a new statement/credit note page */
+				$PageNumber++;
+				$pdf->newPage();
+				include ('includes/PDFStatementPageHeader.inc');
+			}
 			/*Now figure out the aged analysis for the customer under review */
 
-		$SQL = "SELECT debtorsmaster.name,
-				currencies.currency,
-				paymentterms.terms,
-				debtorsmaster.creditlimit,
-				holdreasons.dissallowinvoices,
-				holdreasons.reasondescription,
-				SUM(debtortrans.ovamount + debtortrans.ovgst + debtortrans.ovfreight +
-				debtortrans.ovdiscount - debtortrans.alloc) AS balance,
-				SUM(CASE WHEN paymentterms.daysbeforedue > 0 THEN
-					CASE WHEN (TO_DAYS(Now()) - TO_DAYS(debtortrans.trandate)) >=
-					paymentterms.daysbeforedue
-					THEN debtortrans.ovamount + debtortrans.ovgst + debtortrans.ovfreight +
-					debtortrans.ovdiscount - debtortrans.alloc
-					ELSE 0 END
-				ELSE
-					CASE WHEN TO_DAYS(Now()) - TO_DAYS(DATE_ADD(DATE_ADD(debtortrans.trandate, " . interval('1', 'MONTH') . "), " . interval('(paymentterms.dayinfollowingmonth - DAYOFMONTH(debtortrans.trandate))','DAY') . ")) >= 0
-					THEN debtortrans.ovamount + debtortrans.ovgst + debtortrans.ovfreight +
-					debtortrans.ovdiscount - debtortrans.alloc
-					ELSE 0 END
-				END) AS due,
-				Sum(CASE WHEN paymentterms.daysbeforedue > 0 THEN
-					CASE WHEN TO_DAYS(Now()) - TO_DAYS(debtortrans.trandate) > paymentterms.daysbeforedue
-					AND TO_DAYS(Now()) - TO_DAYS(debtortrans.trandate) >=
-					(paymentterms.daysbeforedue + " . $_SESSION['PastDueDays1'] . ")
-					THEN debtortrans.ovamount + debtortrans.ovgst + debtortrans.ovfreight +
-					debtortrans.ovdiscount - debtortrans.alloc
-					ELSE 0 END
-				ELSE
-					CASE WHEN (TO_DAYS(Now()) - TO_DAYS(DATE_ADD(DATE_ADD(debtortrans.trandate, " . interval('1','MONTH') . "), " . interval('(paymentterms.dayinfollowingmonth - DAYOFMONTH(debtortrans.trandate))','DAY') .")) >= " . $_SESSION['PastDueDays1'] . ")
-					THEN debtortrans.ovamount + debtortrans.ovgst + debtortrans.ovfreight +
-					debtortrans.ovdiscount - debtortrans.alloc
-					ELSE 0 END
-				END) AS overdue1,
-				Sum(CASE WHEN paymentterms.daysbeforedue > 0 THEN
-					CASE WHEN TO_DAYS(Now()) - TO_DAYS(debtortrans.trandate) > paymentterms.daysbeforedue
+			$SQL = "SELECT  debtorsmaster.name,
+							currencies.currency,
+							paymentterms.terms,
+							debtorsmaster.creditlimit,
+							holdreasons.dissallowinvoices,
+							holdreasons.reasondescription,
+							SUM(debtortrans.ovamount + debtortrans.ovgst + debtortrans.ovfreight +
+							debtortrans.ovdiscount - debtortrans.alloc) AS balance,
+							SUM(CASE WHEN paymentterms.daysbeforedue > 0 THEN
+							CASE WHEN (TO_DAYS(Now()) - TO_DAYS(debtortrans.trandate)) >=
+							paymentterms.daysbeforedue
+							THEN debtortrans.ovamount + debtortrans.ovgst + debtortrans.ovfreight +
+							debtortrans.ovdiscount - debtortrans.alloc
+							ELSE 0 END
+							ELSE
+							CASE WHEN TO_DAYS(Now()) - TO_DAYS(DATE_ADD(DATE_ADD(debtortrans.trandate, " . interval('1', 'MONTH') . "), " . interval('(paymentterms.dayinfollowingmonth - DAYOFMONTH(debtortrans.trandate))','DAY') . ")) >= 0
+							THEN debtortrans.ovamount + debtortrans.ovgst + debtortrans.ovfreight +
+							debtortrans.ovdiscount - debtortrans.alloc
+							ELSE 0 END
+							END) AS due,
+							Sum(CASE WHEN paymentterms.daysbeforedue > 0 THEN
+							CASE WHEN TO_DAYS(Now()) - TO_DAYS(debtortrans.trandate) > paymentterms.daysbeforedue
+							AND TO_DAYS(Now()) - TO_DAYS(debtortrans.trandate) >=
+							(paymentterms.daysbeforedue + " . $_SESSION['PastDueDays1'] . ")
+							THEN debtortrans.ovamount + debtortrans.ovgst + debtortrans.ovfreight +
+							debtortrans.ovdiscount - debtortrans.alloc
+							ELSE 0 END
+							ELSE
+							CASE WHEN (TO_DAYS(Now()) - TO_DAYS(DATE_ADD(DATE_ADD(debtortrans.trandate, " . interval('1','MONTH') . "), " . interval('(paymentterms.dayinfollowingmonth - DAYOFMONTH(debtortrans.trandate))','DAY') .")) >= " . $_SESSION['PastDueDays1'] . ")
+							THEN debtortrans.ovamount + debtortrans.ovgst + debtortrans.ovfreight +
+							debtortrans.ovdiscount - debtortrans.alloc
+							ELSE 0 END
+							END) AS overdue1,
+							Sum(CASE WHEN paymentterms.daysbeforedue > 0 THEN
+							CASE WHEN TO_DAYS(Now()) - TO_DAYS(debtortrans.trandate) > paymentterms.daysbeforedue
 					AND TO_DAYS(Now()) - TO_DAYS(debtortrans.trandate) >= (paymentterms.daysbeforedue +
 					" . $_SESSION['PastDueDays2'] . ")
 					THEN debtortrans.ovamount + debtortrans.ovgst + debtortrans.ovfreight +
@@ -378,7 +377,7 @@ if (isset($_POST['PrintPDF']) and isset($_POST['FromCust']) and $_POST['FromCust
 
 			if (strlen($StmtHeader['lastpaiddate'])>1 and $StmtHeader['lastpaid']!=0){
 				$pdf->addText($Left_Margin+5, $Bottom_Margin+13, $FontSize, _('Last payment received').' ' . ConvertSQLDate($StmtHeader['lastpaiddate']) .
-					'    ' . _('Amount received was').' ' . locale_money_format($StmtHeader['lastpaid'],$StmtHeader['currcode']));
+					'	' . _('Amount received was').' ' . locale_money_format($StmtHeader['lastpaid'],$StmtHeader['currcode']));
 
 			}
 			/*also show the total due in the remittance section */
@@ -395,15 +394,15 @@ if (isset($_POST['PrintPDF']) and isset($_POST['FromCust']) and $_POST['FromCust
 
 	if (isset($pdf)){
 
-        $pdf->OutputI($_SESSION['DatabaseName'] . '_CustStatements_' . date('Y-m-d') . '.pdf');//UldisN
-        $pdf->__destruct(); //UldisN
+		$pdf->OutputI($_SESSION['DatabaseName'] . '_CustStatements_' . date('Y-m-d') . '.pdf');//UldisN
+		$pdf->__destruct(); //UldisN
 
 	} else {
 		$title = _('Print Statements') . ' - ' . _('No Statements Found');
 		include('includes/header.inc');
 		echo '<br /><br /><br />' . prnMsg( _('There were no statements to print') );
-	        echo '<br /><br /><br />';
-	        include('includes/footer.inc');
+			echo '<br /><br /><br />';
+			include('includes/footer.inc');
 	}
 
 } else { /*The option to print PDF was not hit */
