@@ -509,7 +509,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 	} /* end of ($Its_A_Kitset_Assembly_Or_Dummy == False) */
 	echo '</td><td valign="top" class="select">';
 	/* Stock Maintenance Options */
-	echo InternalLink($rootpath, '/Stocks.php?', _('Add Inventory Items'), '') . '<br />';
+	echo InternalLink($rootpath, '/Stocks.php', _('Add Inventory Items')) . '<br />';
 	echo InternalLink($rootpath, '/Stocks.php?StockID=' . $StockID . '', _('Modify Item Details'), '') . '<br />';
 	if ($Its_A_Kitset_Assembly_Or_Dummy == False) {
 		echo InternalLink($rootpath, '/StockReorderLevel.php?StockID=' . $StockID, _('Maintain Reorder Levels')) . '<br />';
@@ -541,7 +541,7 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 	/* Stock Transactions */
 	echo '</td><td class="select">';
 	/*Stock Maintenance Options */
-	echo InternalLink($rootpath, '/Stocks.php?">', _('Add Inventory Items')) . '<br />';
+	echo InternalLink($rootpath, '/Stocks.php', _('Add Inventory Items')) . '<br />';
 	echo '</td></tr></table>';
 } // end displaying item options if there is one and only one record
 echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
