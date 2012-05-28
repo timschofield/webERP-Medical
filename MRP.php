@@ -463,7 +463,8 @@ if (isset($_POST['submit'])) {
 		$sql = "SELECT part,
 						eoq,
 						pansize,
-						shrinkfactor
+						shrinkfactor,
+						leadtime
 					FROM levels
 					WHERE level = '" . $level ."' LIMIT 50000"; //should cover most eventualities!! ... yes indeed :-)
 
@@ -650,7 +651,7 @@ function LevelNetting(&$db,$part,$eoq,$PanSize,$ShrinkFactor, $LeadTime) {
 				$ReqDate = ConvertSQLDate($Requirements[$reqi]['daterequired']);
 				$DateDiff = DateDiff($DueDate,$ReqDate,'d');
 				//if ($Supplies[$supi]['duedate'] > $Requirements[$reqi]['daterequired']) {
-				if ($DateDiff > abs(filter_number_format($_POST['Leeway']))) {
+				if ($DateDiff > abs(filter_number_input($_POST['Leeway']))) {
 					$sql = "UPDATE mrpsupplies SET mrpdate = '" . $Requirements[$reqi]['daterequired'] .
 					   "' WHERE id = '" . $Supplies[$supi]['id'] . "' AND duedate = mrpdate";
 					$result = DB_query($sql,$db);
