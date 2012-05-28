@@ -55,8 +55,7 @@ if (isset($_POST['Select']) and empty($_POST['SupplierContact'])) {
 		$_POST['SupplierContact']='';
 	}
 }
-
-if (isset($_POST['UpdateStatus']) AND $_POST['UpdateStatus']!='') {
+if (isset($_POST['UpdateStatus'])) {
 	/*The cancel button on the header screen - to delete order */
 	$OKToUpdateStatus = 1;
 	$OldStatus=$_SESSION['PO'.$identifier]->Status;
