@@ -287,7 +287,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 					'" . $_POST['PatientNo'] . "',
 					'" . $_POST['BranchNo'] . "',
 					'" . $PeriodNo . "',
-					'" . _('Doctors Fee Inpatient transactions for Patient number').' '.$_POST['PatientNo'] . "',
+					'" . _('Doctors Fee Patient transactions for Patient number').' '.$_POST['PatientNo'] . "',
 					'1',
 					'" . filter_currency_input($_POST['DoctorsFee']) . "',
 					1,
@@ -333,7 +333,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 				'" . $_SESSION['Items']['Value'] . "',
 				'0',
 				'1',
-				'" . _('Invoice of Inpatient transactions for Patient number').' '.$_POST['PatientNo'] . "',
+				'" . _('Invoice of Patient transactions for Patient number').' '.$_POST['PatientNo'] . "',
 				'" . $_POST['InsuranceRef'] . "',
 				'1',
 				'" . filter_currency_input($_POST['Received']) . "'
@@ -368,7 +368,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 						'" . $_POST['PatientNo'] . "',
 						'" . $_POST['BranchNo'] . "',
 						'" . $PeriodNo . "',
-						'" . _('Invoice of Inpatient transactions for Patient number').' '.$_POST['PatientNo'] . "',
+						'" . _('Invoice of Patient transactions for Patient number').' '.$_POST['PatientNo'] . "',
 						'" . -$_SESSION['Items'][$i]['Quantity'] . "',
 						'" . $_SESSION['Items'][$i]['Price'] . "',
 						1,
@@ -548,7 +548,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 									'" . $PeriodNo . "',
 									'" . $SalesGLAccounts['salesglcode'] . "',
 									'" . $_SESSION['DefaultTag'] . "',
-									'" . _('Invoice of Inpatient Transactions for Patient number').' '.$_POST['PatientNo'] . "',
+									'" . _('Invoice of Patient Transactions for Patient number').' '.$_POST['PatientNo'] . "',
 									'" . -$_SESSION['Items']['Value'] . "')";
 
 		$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The cost of sales GL posting could not be inserted because');
@@ -569,7 +569,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 									'" . $PeriodNo . "',
 									'" . $_SESSION['CompanyRecord']['debtorsact'] . "',
 									'" . $_SESSION['DefaultTag'] . "',
-									'" . _('Invoice of Inpatient Transactions for Patient number').' '.$_POST['PatientNo'] . "',
+									'" . _('Invoice of Patient Transactions for Patient number').' '.$_POST['PatientNo'] . "',
 									'" . $_SESSION['Items']['Value'] . "'
 								)";
 
@@ -593,7 +593,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 										'" . $PeriodNo . "',
 										'" . $_POST['BankAccount'] . "',
 										'" . $_SESSION['DefaultTag'] . "',
-										'" . _('Payment of Inpatient Transactions for Patient number').' '.$_POST['PatientNo'] . "',
+										'" . _('Payment of Patient Transactions for Patient number').' '.$_POST['PatientNo'] . "',
 										'" . ($_SESSION['Items']['Value']) . "'
 									)";
 			$DbgMsg = _('The SQL that failed to insert the GL transaction for the bank account debit was');
@@ -616,7 +616,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 										'" . $PeriodNo . "',
 										'" . $_SESSION['CompanyRecord']['debtorsact'] . "',
 										'" . $_SESSION['DefaultTag'] . "',
-										'" . _('Payment of Inpatient Transactions for Patient number').' '.$_POST['PatientNo'] . "',
+										'" . _('Payment of Patient Transactions for Patient number').' '.$_POST['PatientNo'] . "',
 										'" . -($_SESSION['Items']['Value']) . "'
 									)";
 			$DbgMsg = _('The SQL that failed to insert the GL transaction for the debtors account credit was');
@@ -639,7 +639,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 								VALUES (12,
 									'" . $ReceiptNumber . "',
 									'" . $_POST['BankAccount'] . "',
-									'" . _('Inpatient Transactions for Patient').' '.$_POST['PatientNo'] . "',
+									'" . _('Patient Transactions for Patient').' '.$_POST['PatientNo'] . "',
 									'1',
 									'1',
 									'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
@@ -676,7 +676,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 											'1',
 											'" . -filter_currency_input($_POST['Received']) . "',
 											'" . -filter_currency_input($_POST['Received']) . "',
-											'" . _('Payment of Inpatient Transactions for Patient number').' '.$_POST['PatientNo'] . "'
+											'" . _('Payment of Patient Transactions for Patient number').' '.$_POST['PatientNo'] . "'
 										)";
 
 			prnMsg( _('The transaction has been successfully posted'), 'success');
