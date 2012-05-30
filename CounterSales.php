@@ -1911,7 +1911,7 @@ $ImageSource = _('No Image');
 
 /* Now show the stock item selection search stuff below */
 if (isset($_POST['PartSearch'])){
-	ShowItemSearchFields($rootpath, $theme, $db, $identifier);
+	ShowItemSearchFields($rootpath, $theme, $db, $identifier, array('A', 'K', 'M', 'B', 'D'), array('F', 'D'), 'Search');
 }
 
 echo '<br /></form>';

@@ -2,7 +2,7 @@
 
 echo '<script type="text/javascript" src = "'.$rootpath.'/javascripts/ItemSearch.js"></script>';
 
-function ShowItemSearchFields($rootpath, $theme, $db, $identifier) {
+function ShowItemSearchFields($rootpath, $theme, $db, $identifier, $MBFlags, $StockTypes, $SearchOrSelect) {
 
 	$PathPrefix=$_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']) . '/';
 	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Search for Items') . '</p>';
@@ -15,7 +15,7 @@ function ShowItemSearchFields($rootpath, $theme, $db, $identifier) {
 	echo '<table class="selection" width="98%">
 			<tr>
 				<td><b>' . _('Select a Stock Category') . ': </b></td>
-				<td><select tabindex="1" name="StockCat" onchange="ShowItems(this.value, StockCode.value, Keywords.value, MaxItems.value,' . $identifier . ')">';
+				<td><select tabindex="1" name="StockCat" onchange="ShowItems(\'' . $SearchOrSelect . '\', this.value, StockCode.value, Keywords.value, MaxItems.value,' . $identifier . ')">';
 
 	if (!isset($_POST['Keywords'])) {
 		$_POST['Keywords']='';
@@ -47,16 +47,16 @@ function ShowItemSearchFields($rootpath, $theme, $db, $identifier) {
 	echo '</select></td></tr>
 		<tr>
 			<td><b>' . _('Enter partial Description') . ':</b></td>
-			<td><input tabindex="2" type="text" name="Keywords" size="20" maxlength="25" value="' . $_POST['Keywords'] . '" onkeyup="ShowItems(StockCat.value, StockCode.value, Keywords.value, MaxItems.value,' . $identifier . ')" /></td>
+			<td><input tabindex="2" type="text" name="Keywords" size="20" maxlength="25" value="' . $_POST['Keywords'] . '" onkeyup="ShowItems(\'' . $SearchOrSelect . '\', StockCat.value, StockCode.value, Keywords.value, MaxItems.value,' . $identifier . ')" /></td>
 		</tr>
 		<tr>
 			<td><b>' . _('OR') . ' ' . _('Enter extract of the Stock Code') . ':</b></td>
-			<td><input tabindex="3" type="text" name="StockCode" size="15" maxlength="18" value="' . $_POST['StockCode'] . '" onkeyup="ShowItems(StockCat.value, StockCode.value, Keywords.value, MaxItems.value,' . $identifier . ')" /></td>
+			<td><input tabindex="3" type="text" name="StockCode" size="15" maxlength="18" value="' . $_POST['StockCode'] . '" onkeyup="ShowItems(\'' . $SearchOrSelect . '\', StockCat.value, StockCode.value, Keywords.value, MaxItems.value,' . $identifier . ')" /></td>
 		</tr>
 		<tr>
 			<td><b>' . _('Maximum number of Items to Show') . ':</b></td>
 			<td>
-				<select name="MaxItems" onchange="ShowItems(StockCat.value, StockCode.value, Keywords.value, MaxItems.value,' . $identifier . ')">
+				<select name="MaxItems" onchange="ShowItems(\'' . $SearchOrSelect . '\', StockCat.value, StockCode.value, Keywords.value, MaxItems.value,' . $identifier . ')">
 					<option value="10">10</option>
 					<option value="20">20</option>
 					<option value="30">30</option>
@@ -79,7 +79,26 @@ function ShowItemSearchFields($rootpath, $theme, $db, $identifier) {
 
 	/* Search Results*/
 	echo '<td width="67%" valign="top">';
-	include('includes/ItemShowSearch.php');
+
+	unset($_SESSION['MBFlagSQL']);
+	unset($_SESSION['StockTypesSQL']);
+	$MBFlagSQL=" AND (";
+	foreach ($MBFlags as $MBFlag) {
+		$MBFlagSQL .= "stockmaster.mbflag='".$MBFlag."' OR ";
+	}
+	$_SESSION['MBFlagSQL']=mb_substr($MBFlagSQL, 0, mb_strlen($MBFlagSQL)-3).")";
+
+	$StockTypesSQL=" (";
+	foreach ($StockTypes as $StockType) {
+		$StockTypesSQL .= "stockcategory.stocktype='".$StockType."' OR ";
+	}
+	$_SESSION['StockTypesSQL']=mb_substr($StockTypesSQL, 0, mb_strlen($StockTypesSQL)-3).") ";
+
+	if ($SearchOrSelect=='Search') {
+		include('includes/ItemShowSearch.php');
+	} else {
+		include('includes/ItemShowSelect.php');
+	}
 	echo '</td>
 		</tr>
 		</table>';

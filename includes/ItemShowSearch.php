@@ -48,8 +48,8 @@ $SQL = "SELECT stockmaster.stockid,
 			FROM stockmaster
 			INNER JOIN stockcategory
 				ON stockmaster.categoryid=stockcategory.categoryid
-			WHERE (stockcategory.stocktype='F' OR stockcategory.stocktype='D')
-				AND stockmaster.mbflag <>'G'
+			WHERE ".$_SESSION['StockTypesSQL']."
+				".$_SESSION['MBFlagSQL']."
 				AND stockmaster.discontinued=0
 				AND stockmaster.categoryid like '".$Category."'
 				AND stockmaster.description like '%".$Description."%'
