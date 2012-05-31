@@ -248,6 +248,13 @@
 		$Errors=VerifyBranchDebtorExists($BranchDetails['debtorno'], sizeof($Errors), $Errors, $db);
 		$Errors=VerifyBranchNo($BranchDetails['debtorno'], $BranchDetails['branchcode'], sizeof($Errors), $Errors, $db);
 		$Errors=VerifyBranchName($BranchDetails['brname'], sizeof($Errors), $Errors, $db);
+		if ($BranchDetails['branchcode']!='CASH') {
+			$sql="SELECT salestype FROM debtorsmaster WHERE debtorno='" . $BranchDetails['branchcode'] . "'";
+			$return=DB_query($sql, $db);
+			$myrow=DB_fetch_array($return);
+			$sql="UPDATE debtorsmaster SET salestype='".$myrow['salestype']."' WHERE debtorno='".$BranchDetails['debtorno']."'";
+			$return=DB_query($sql, $db);
+		}
 		if (isset($BranchDetails['address1'])){
 			$Errors=VerifyBranchAddressLine($BranchDetails['address1'], 40, sizeof($Errors), $Errors, $db);
 		}
