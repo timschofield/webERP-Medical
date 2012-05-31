@@ -292,7 +292,10 @@ if (!isset($_POST['Submit'])) {
 	$sql="SELECT debtorno,
 				name
 				FROM debtorsmaster
-				WHERE typeid='".$InsuranceTypeID."'";
+				LEFT JOIN debtortype
+				ON debtortype.typeid=debtorsmaster.typeid
+				WHERE typename like '%Insurance%'
+				ORDER BY name";
 	$ErrMsg = _('The companies could not be retrieved because');
 	$DbgMsg = _('The SQL used to retrieve the companies was');
 	$BranchResults = DB_query($sql,$db,$ErrMsg,$DbgMsg);
