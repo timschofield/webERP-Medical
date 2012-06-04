@@ -4,7 +4,9 @@ body {
 	margin: 0;
 	text-align: center;
 	font: 14px "Lucida Grande", "Arial", "Helvetica", "Verdana", "sans-serif";
-	background: #fff url(images/stripe.png) repeat;
+	background: #ffffff;
+	background: -moz-linear-gradient(left, #9CA4AE, #EEE7E7);
+	background: -webkit-linear-gradient(left, #9CA4AE, #EEE7E7);
 	color: #777;
 }
 
@@ -16,13 +18,21 @@ body {
 	z-index: 1000;
 	width: 300px;
 	background: #fff;
+	background: #EEE7E7;
+	background: -moz-linear-gradient(left, #EEE7E7, #9CA4AE);
+	background: -webkit-linear-gradient(left, #EEE7E7, #9CA4AE);
+	border: solid #A49999 1px;
+	border-radius: 5px;
+	-moz-box-shadow: 7px 7px 3px #B1B1B1;
+	-webkit-box-shadow: 7px 7px 3px #B1B1B1;
+	box-shadow: 7px 7px 3px #B1B1B1;
 }
 
 #login_logo {
 	width: 200px;
 	height: 51px;
 	margin: 0 0 20px 50px; /* top margin in FF3 is from body but in IE8 is from container */
-	background: #fff url(../webERP.gif); /* -repeat-x left bottom- not needed cause now img equals div */
+	background: transparent url(../logo.png); /* -repeat-x left bottom- not needed cause now img equals div */
 }
 
 form {
@@ -30,37 +40,97 @@ form {
 }
 
 select {
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+	font-size: 100%;
+	background: transparent;
+    color:#645959;
+	border-width: 1px;
+	border-bottom-color: gray;
+	border-bottom-style: solid;
+	border-top-color: gray;
+	border-top-style: solid;
+	border-left-color: gray;
+	border-left-style: solid;
+	border-right-color: gray;
+	border-right-style: solid;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	width: 200px;
+	margin: 4px 0 11px 50px;
+}
+
+select:hover {
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+	font-size: 100%;
+	background: transparent;
+    color:#645959;
+	border-width: 1px;
+	border-bottom-color: black;
+	border-bottom-style: solid;
+	border-top-color: black;
+	border-top-style: solid;
+	border-left-color: black;
+	border-left-style: solid;
+	border-right-color: black;
+	border-right-style: solid;
+	border-radius: 3px;
 	width: 200px;
 	margin: 4px 0 11px 50px;
 }
 
 input {
-	width: 200px;
-	border: solid #e3e3e3 1px;
-	height: 25px;
-	background: url(images/input_bg.png) repeat-x left top;
-	padding: 4px 0 4px 0;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+	font-size: 100%;
+	background-color: transparent;
+	border-width:1px;
+    color:#645959;
+	border-bottom-color: gray;
+	border-bottom-style: solid;
+	border-top-color: gray;
+	border-top-style: solid;
+	border-left-color: gray;
+	border-left-style: solid;
+	border-right-color: gray;
+	border-right-style: solid;
+	border-radius: 3px;
 	vertical-align: middle;
 	margin: 3px 0 10px 50px;
 }
 
 input:hover {
-	border: solid #aad4e3 1px;
-	background-position: left bottom;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+	font-size: 100%;
+	background-color: transparent;
+	border-width:1px;
+	border-bottom-color: black;
+	border-bottom-style: solid;
+	border-top-color: black;
+	border-top-style: solid;
+	border-left-color: black;
+	border-left-style: solid;
+	border-right-color: black;
+	border-right-style: solid;
+	border-radius: 3px;
 }
 
 input.button {
 	font-weight: bold;
 	color: #fff;
-	background: url(images/menu_bg.png) 0px -8px repeat-x;
+	background: #585858;
 	border: solid #e3e3e3 1px;
 	padding: 0;
 	margin: 10px 0 0 50px;
+	width: 200px;
 
 }
 
 input.button:hover {
-	background: url(images/menu_bg_dblue.png) 0px -8px repeat-x; /* works in FF3 but not in IE8 */
+	background: #574E7E; /* works in FF3 but not in IE8 */
+}
+
+input.button:active {
+	background: #000000;
 }
 
 span {
