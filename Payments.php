@@ -479,11 +479,11 @@ if (isset($_POST['CommitBatch'])){
 							amount)
 						VALUES (22,
 							'" . $TransNo . "',
-							'" . FormatDateForSQL($_SESSION['PaymentDetail']->DatePaid) . "',
+							'" . FormatDateForSQL($_SESSION['PaymentDetail'.$identifier]->DatePaid) . "',
 							'" . $PeriodNo . "',
 							'" . $_SESSION['CompanyRecord']['creditorsact'] . "',
 							'" . $_SESSION['DefaultTag'] . "',
-							'" . $_SESSION['PaymentDetail']->Narrative . "',
+							'" . $_SESSION['PaymentDetail'.$identifier]->Narrative . "',
 							'" . filter_currency_input($CreditorTotal) . "')";
 				$ErrMsg = _('Cannot insert a GL transaction for the creditors account debit because');
 				$DbgMsg = _('Cannot insert a GL transaction for the creditors account debit using the SQL');
@@ -505,7 +505,7 @@ if (isset($_POST['CommitBatch'])){
 						'" . $PeriodNo . "',
 						'" . $_SESSION['CompanyRecord']['pytdiscountact'] . "',
 						'" . $_SESSION['DefaultTag'] . "',
-						'" . $_SESSION['PaymentDetail']->Narrative . "',
+						'" . $_SESSION['PaymentDetail'.$identifier]->Narrative . "',
 						-" . filter_currency_input(filter_number_input($_SESSION['PaymentDetail'.$identifier]->Discount)/filter_number_input($_SESSION['PaymentDetail'.$identifier]->ExRate)/filter_number_input($_SESSION['PaymentDetail'.$identifier]->FunctionalExRate)) . "
 					  )";
 					$ErrMsg = _('Cannot insert a GL transaction for the payment discount credit because');
@@ -531,9 +531,9 @@ if (isset($_POST['CommitBatch'])){
 						'" . $TransNo . "',
 						'" . FormatDateForSQL($_SESSION['PaymentDetail'.$identifier]->DatePaid) . "',
 						'" . $PeriodNo . "',
-						'" . $_SESSION['PaymentDetail']->Account . "',
+						'" . $_SESSION['PaymentDetail'.$identifier]->Account . "',
 						'" . $_SESSION['DefaultTag'] . "',
-						'" . $_SESSION['PaymentDetail']->Narrative . "',
+						'" . $_SESSION['PaymentDetail'.$identifier]->Narrative . "',
 						-" . filter_currency_input(filter_currency_input($_SESSION['PaymentDetail'.$identifier]->Amount)/filter_currency_input($_SESSION['PaymentDetail'.$identifier]->ExRate)/filter_currency_input($_SESSION['PaymentDetail'.$identifier]->FunctionalExRate)) . ")";
 
 				$ErrMsg =  _('Cannot insert a GL transaction for the bank account credit because');
