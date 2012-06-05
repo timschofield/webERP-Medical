@@ -56,6 +56,10 @@ if (isset($_POST['Update'])) {
 	$SalesManResult = DB_query($SalesManSQL, $db);
 	$SalesManRow = DB_fetch_array($SalesManResult);
 
+	if (!isset($_POST['Employer'])) {
+		$_POST['Employer']=$SalesManRow['salesmancode'];
+	}
+
 	$sql = "UPDATE debtorsmaster SET name='".$_POST['Name']."',
 									address1='".$_POST['Address1']."',
 									address2='".$_POST['Address2']."',
