@@ -1,3 +1,4 @@
+<<<<<<< TREE
 <?php
 
 echo '<script type="text/javascript" src = "'.$rootpath.'/javascripts/ItemSearch.js"></script>';
@@ -5,8 +6,6 @@ echo '<script type="text/javascript" src = "'.$rootpath.'/javascripts/ItemSearch
 function ShowItemSearchFields($rootpath, $theme, $db, $identifier, $MBFlags, $StockTypes, $SearchOrSelect) {
 
 	$PathPrefix=$_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']) . '/';
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Search for Items') . '</p>';
-	echo '<div class="page_help_text">' . _('Search for Items') . _(', Searches the database for items, you can narrow the results by selecting a stock category, or just enter a partial item description or partial item code') . '.</div><br />';
 	echo '<table width="98%">
 			<tr>
 				<td width="33%" valign="top">';
@@ -15,7 +14,7 @@ function ShowItemSearchFields($rootpath, $theme, $db, $identifier, $MBFlags, $St
 	echo '<table class="selection" width="98%">
 			<tr>
 				<td><b>' . _('Select a Stock Category') . ': </b></td>
-				<td><select tabindex="1" name="StockCat" onchange="ShowItems(\'' . $SearchOrSelect . '\', this.value, StockCode.value, Keywords.value, MaxItems.value,' . $identifier . ')">';
+				<td><select tabindex="1" name="StockCat" onchange="ShowItems(\'' . $SearchOrSelect . '\', StockCat.value, StockCode.value, Keywords.value, MaxItems.value,' . $identifier . ')">';
 
 	if (!isset($_POST['Keywords'])) {
 		$_POST['Keywords']='';

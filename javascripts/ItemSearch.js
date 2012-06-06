@@ -1,4 +1,4 @@
-function ShowItems(Category, Code, Description, MaxItems, identifier)
+function ShowItems(SearchOrSelect, Category, Code, Description, MaxItems, identifier)
 {
 if (Category=="")
   {
@@ -20,6 +20,10 @@ xmlhttp.onreadystatechange=function()
     document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
     }
   }
-xmlhttp.open("GET","includes/ItemShowSearch.php?Category="+Category+"&Code="+Code+"&Description="+Description+"&MaxItems="+MaxItems+"&identifier="+identifier,true);
+  if (SearchOrSelect=='Search') {
+		xmlhttp.open("GET","includes/ItemShowSearch.php?Category="+Category+"&Code="+Code+"&Description="+Description+"&MaxItems="+MaxItems+"&identifier="+identifier,true);
+	} else {
+		xmlhttp.open("GET","includes/ItemShowSelect.php?Category="+Category+"&Code="+Code+"&Description="+Description+"&MaxItems="+MaxItems+"&identifier="+identifier,true);
+	}
 xmlhttp.send();
 }
