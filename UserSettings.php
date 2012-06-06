@@ -67,8 +67,8 @@ if (isset($_POST['Modify'])) {
 			$DbgMsg = _('The SQL that was used to update the user and failed was');
 
 			$result = DB_query($sql,$db, $ErrMsg, $DbgMsg);
+			prnMsg(_('The user settings have been updated'),'success');
 
-			prnMsg( _('The user settings have been updated') . '. ' . _('Be sure to remember your password for the next time you login'),'success');
 		} else {
 			$sql = "UPDATE www_users
 				SET displayrecordsmax='" . $_POST['DisplayRecordsMax'] . "',
@@ -84,9 +84,10 @@ if (isset($_POST['Modify'])) {
 
 			$result = DB_query($sql,$db, $ErrMsg, $DbgMsg);
 
-			prnMsg(_('The user settings have been updated'),'success');
+			prnMsg( _('The user settings have been updated') . '. ' . _('Be sure to remember your password for the next time you login'),'success');
 		}
 	  // update the session variables to reflect user changes on-the-fly
+	  echo '<br />';
 		$_SESSION['DisplayRecordsMax'] = $_POST['DisplayRecordsMax'];
 		$_SESSION['Theme'] = trim($_POST['Theme']); /*already set by session.inc but for completeness */
 		$theme = $_SESSION['Theme'];
@@ -120,7 +121,7 @@ echo '<tr>
 
 echo '<tr>
 		<td>' . _('Maximum Number of Records to Display') . ':</td>
-		<td><input type="text" class="number" name="DisplayRecordsMax" size="3" maxlength="3" value="' . $_POST['DisplayRecordsMax'] . '" /></td>
+		<td><input type="number" min="10" max="100" step="10" class="number" name="DisplayRecordsMax" size="4" maxlength="3" value="' . $_POST['DisplayRecordsMax'] . '" /></td>
 	</tr>';
 
 
@@ -152,7 +153,7 @@ $ThemeDirectory = dir('css/');
 
 while (false !== ($ThemeName = $ThemeDirectory->read())){
 
-	if (is_dir("css/$ThemeName") AND $ThemeName != '.' AND $ThemeName != '..' AND $ThemeName != '.svn'){
+	if (is_dir('css/' . $ThemeName) AND $ThemeName != '.' AND $ThemeName != '..' AND $ThemeName != '.svn'){
 
 		if ($_SESSION['Theme'] == $ThemeName){
 			echo '<option selected="True" value="' . $ThemeName . '">' . $ThemeName . '</option>';
@@ -185,13 +186,15 @@ if(!isset($_POST['email'])){
 	$_POST['email'] = $myrow['email'];
 }
 
-echo '<td><input type="text" name="email" size="40" value="' . $_POST['email'] . '" /></td></tr>';
+echo '<td><input type="email" name="email" size="40" value="' . $_POST['email'] . '" /></td></tr>';
 
 if (!isset($_POST['PDFLanguage'])){
 	$_POST['PDFLanguage']=$_SESSION['PDFLanguage'];
 }
 
-echo '<tr><td>' . _('PDF Language Support') . ': </td><td><select name="PDFLanguage">';
+echo '<tr>
+		<td>' . _('PDF Language Support') . ': </td>
+		<td><select name="PDFLanguage">';
 for($i=0;$i<count($PDFLanguages);$i++){
 	if ($_POST['PDFLanguage']==$i){
 		echo '<option selected="True" value="' . $i .'">' . $PDFLanguages[$i] . '</option>';
@@ -200,7 +203,7 @@ for($i=0;$i<count($PDFLanguages);$i++){
 	}
 }
 echo '</select></td></tr></table>
-	<br /><div class="centre"><button type="submit" name="Modify">' . _('Modify') . '</button></div>
+	<br /><div class="centre"><button type="submit" name="Modify">' . _('Modify') . '</button></div><br />
 	</form>';
 
 include('includes/footer.inc');
