@@ -81,7 +81,7 @@ if (isset($_POST['PrintPDF'])
 					AND debtorsmaster.debtorno <= '" . $_POST['ToCriteria'] . "'
 					AND debtorsmaster.currcode ='" . $_POST['Currency'] . "'
 					" . $SalesLimit . "
-				GROUP BY debtorsmaster.debtorno,
+				GROUP BY CONVERT(debtorsmaster.debtorno , SIGNED),
 					debtorsmaster.name,
 					currencies.currency,
 					paymentterms.terms,
@@ -154,7 +154,7 @@ if (isset($_POST['PrintPDF'])
 				AND debtorsmaster.debtorno <= '" . $_POST['ToCriteria'] . "'
 				AND debtorsmaster.currcode ='" . $_POST['Currency'] . "'
 				" . $SalesLimit . "
-			GROUP BY debtorsmaster.debtorno,
+				GROUP BY CONVERT(debtorsmaster.debtorno , SIGNED),
 					debtorsmaster.name,
 					currencies.currency,
 					paymentterms.terms,
@@ -242,7 +242,7 @@ if (isset($_POST['PrintPDF'])
 		AND debtorsmaster.debtorno <= '" . $_POST['ToCriteria'] . "'
 		AND debtorsmaster.currcode ='" . $_POST['Currency'] . "'
 		" . $SalesLimit . "
-		GROUP BY debtorsmaster.debtorno,
+				GROUP BY CONVERT(debtorsmaster.debtorno , SIGNED),
 		debtorsmaster.name,
 		currencies.currency,
 		paymentterms.terms,
