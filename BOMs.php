@@ -622,7 +622,6 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 			$DbgMsg = _('The SQL used to retrieve the list of potential components part was');
 			$result = DB_query($sql,$db,$ErrMsg, $DbgMsg);
 
-
 			while ($myrow = DB_fetch_array($result)) {
 				echo '<option value="'.$myrow['stockid'].'">' . str_pad($myrow['stockid'],21, '_', STR_PAD_RIGHT) . $myrow['description'] . '</option>';
 			} //end while loop
@@ -648,17 +647,18 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 		DB_free_result($result);
 
 		echo '</select></td></tr><tr><td>' . _('Work Centre Added') . ': </td><td>';
-		echo '<select tabindex="3" name="WorkCentreAdded">';
 
 		$sql = "SELECT code, description FROM workcentres";
 		$result = DB_query($sql,$db);
 
 		if (DB_num_rows($result)==0){
-			prnMsg( _('There are no work centres set up yet') . '. ' . _('Please use the link below to set up work centres'),'warn');
-			echo '<br /><a href="'.$rootpath.'/WorkCentres.php">' . _('Work Centre Maintenance') . '</a>';
+			prnMsg( _('There are no work centres set up yet') . '. ' . _('Please use the link below to set up work centres') . '.','warn');
+			echo '<a href="'.$rootpath.'/WorkCentres.php">' . _('Work Centre Maintenance') . '</a></td></tr></table><br />';
 			include('includes/footer.inc');
 			exit;
 		}
+
+		echo '<select tabindex="3" name="WorkCentreAdded">';
 
 		while ($myrow = DB_fetch_array($result)) {
 			if (isset($_POST['WorkCentreAdded']) and $myrow['code']==$_POST['WorkCentreAdded']) {
@@ -671,7 +671,7 @@ if (isset($Select)) { //Parent Stock Item selected so display BOM or edit Compon
 		DB_free_result($result);
 
 		echo '</select></td></tr><tr><td>' . _('Quantity') . ': </td><td>';
-		    ;
+
 		if (isset($_POST['Quantity'])){
 			echo '<input ' . (in_array('Quantity',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="4" type="text" class="number" name="Quantity" class="number" size="10" maxlength="8" value="'.$_POST['Quantity'] . '" />';
 		} else {
@@ -797,7 +797,7 @@ if (!isset($SelectedParent)) {
 
 if (isset($_POST['Search']) and isset($result) AND !isset($SelectedParent)) {
 
-	echo '<br /><table cellpadding="2" class="selection">';
+	echo '<table cellpadding="2" class="selection">';
 	$TableHeader = '<tr><th>' . _('Code') . '</th>
 				<th>' . _('Description') . '</th>
 				<th>' . _('On Hand') . '</th>
@@ -838,7 +838,7 @@ if (isset($_POST['Search']) and isset($result) AND !isset($SelectedParent)) {
 	}
 //end of while loop
 
-	echo '</table>';
+	echo '</table><br />';
 
 }
 //end if results to show
