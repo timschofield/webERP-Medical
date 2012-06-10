@@ -206,7 +206,7 @@ if (isset($_POST['PrintPDF'])
 
 		echo '<table class="selection"><tr><td>' . _('From Inventory Category Code') . ':</font></td><td><select name=FromCriteria>';
 
-		$sql="SELECT categoryid, categorydescription FROM stockcategory ORDER BY categorydescription";
+		$sql="SELECT categoryid, categorydescription FROM stockcategory ORDER BY categoryid";
 		$CatResult= DB_query($sql,$db);
 		while ($myrow = DB_fetch_array($CatResult)){
 			echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categoryid'] . ' - ' . $myrow['categorydescription'] . '</option>';
