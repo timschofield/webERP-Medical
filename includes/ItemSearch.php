@@ -1,4 +1,3 @@
-<<<<<<< TREE
 <?php
 
 echo '<script type="text/javascript" src = "'.$rootpath.'/javascripts/ItemSearch.js"></script>';
