@@ -60,11 +60,13 @@ if (!isset($_POST['continue']) and !isset($_POST['CreateSQLFile'])) {
 	$_SESSION['Updates']['Warnings']=0;
 	for($UpdateNumber=$StartingUpdate; $UpdateNumber<=$EndingUpdate; $UpdateNumber++) {
 //		echo '<tr><td>'.$UpdateNumber.'</td>';
-		$sql="SET FOREIGN_KEY_CHECKS=0";
-		$result=DB_Query($sql, $db);
-		include('sql/mysql/updates/'.$UpdateNumber.'.php');
-		$sql="SET FOREIGN_KEY_CHECKS=1";
-		$result=DB_Query($sql, $db);
+		if (file_exists('sql/mysql/updates/'.$UpdateNumber.'.php')) {
+			$sql="SET FOREIGN_KEY_CHECKS=0";
+			$result=DB_Query($sql, $db);
+			include('sql/mysql/updates/'.$UpdateNumber.'.php');
+			$sql="SET FOREIGN_KEY_CHECKS=1";
+			$result=DB_Query($sql, $db);
+		}
 //		echo '</tr>';
 	}
 	echo '<table class="selection"><tr>';
