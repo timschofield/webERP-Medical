@@ -51,10 +51,26 @@ if (isset($_POST['UpdateProperties'])) {
 					$_POST['PropValue'.$value]=0;
 				}
 			}
-			$sql="UPDATE stockitemproperties SET value='" . $_POST['PropValue'.$value] . "'
+			$sql="SELECT stockid FROM stockitemproperties
 						WHERE stkcatpropid='" . $value . "'
 						AND stockid='" . $_SESSION['SelectedStockItem'] . "'";
 			$result=DB_query($sql, $db);
+			if (DB_num_rows($result)>0) {
+				$sql="UPDATE stockitemproperties SET value='" . $_POST['PropValue'.$value] . "'
+							WHERE stkcatpropid='" . $value . "'
+							AND stockid='" . $_SESSION['SelectedStockItem'] . "'";
+				$result=DB_query($sql, $db);
+			} else {
+				$sql="INSERT INTO stockitemproperties (stockid,
+														stkcatpropid,
+														value
+													) VALUES (
+														'" . $_SESSION['SelectedStockItem'] . "',
+														'" . $value . "',
+														'" . $_POST['PropValue' . $value] . "'
+													)";
+				$result=DB_query($sql, $db);
+			}
 		}
 	}
 }
@@ -289,10 +305,12 @@ if (!isset($_POST['Search']) AND (isset($_POST['Select']) OR isset($_SESSION['Se
 		} //end switch
 		echo '</td></tr>';
 		$PropertyCounter++;
+	} //end loop round properties for the item category
+	if ($PropertyCounter>0) {
 		echo '<tr>
 				<th colspan="2" style="border: 0px"><button type="submit" name="UpdateProperties">' . _('Update Properties') . '</button></th>
 			</tr>';
-	} //end loop round properties for the item category
+	}
 	echo '</table></form>'; //end of Item Category Property mod
 	echo '<td style="width: 15%; vertical-align: top">
 			<table style="background: transparent">'; //nested table to show QOH/orders
