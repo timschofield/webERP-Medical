@@ -107,8 +107,8 @@ if (isset($_POST['submit'])) {
 		$sql = "INSERT INTO accountsection (sectionid,
 											sectionname
 										) VALUES (
-											" . $_POST['SectionID'] . ",
-											'" . $_POST['SectionName'] .")";
+											'" . $_POST['SectionID'] . "',
+											'" . $_POST['SectionName'] ."')";
 		$msg = _('Record inserted');
 	}
 
