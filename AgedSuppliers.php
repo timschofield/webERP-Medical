@@ -56,7 +56,7 @@ if (isset($_POST['PrintPDF'])
 						paymentterms.terms,
 						paymentterms.daysbeforedue,
 						paymentterms.dayinfollowingmonth
-				HAVING ROUND(SUM(supptrans.ovamount + supptrans.ovgst - supptrans.alloc),currencies.decimalplaces) <>0";
+				HAVING SUM(supptrans.ovamount + supptrans.ovgst - supptrans.alloc) <>0";
 
 	} else {
 
