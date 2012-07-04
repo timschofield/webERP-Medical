@@ -95,6 +95,7 @@ if ( !isset($_GET['TypeID']) OR !isset($_GET['TransNo']) ) {
 				$DetailSQL = "SELECT debtortrans.debtorno,
 									debtortrans.ovamount,
 									debtortrans.ovgst,
+									debtortrans.ovfreight,
 									debtortrans.rate,
 									debtorsmaster.name
 								FROM debtortrans,
@@ -110,6 +111,7 @@ if ( !isset($_GET['TypeID']) OR !isset($_GET['TransNo']) ) {
 				$DetailSQL = "SELECT supptrans.supplierno,
 									supptrans.ovamount,
 									supptrans.ovgst,
+									supptrans.ovfreight,
 									supptrans.rate,
 									suppliers.suppname
 								FROM supptrans,
@@ -146,18 +148,18 @@ if ( !isset($_GET['TypeID']) OR !isset($_GET['TransNo']) ) {
 				while ( $DetailRow = DB_fetch_row($DetailResult) ) {
 					if ( $TransRow['amount'] > 0){
 						if ($TransRow['account'] == $_SESSION['CompanyRecord']['debtorsact']) {
-							$Debit = locale_money_format(($DetailRow[1] + $DetailRow[2]) / $DetailRow[3],$_SESSION['CompanyRecord']['currencydefault']);
+							$Debit = locale_money_format(($DetailRow[1] + $DetailRow[2]+ $DetailRow[3]) / $DetailRow[4],$_SESSION['CompanyRecord']['currencydefault']);
 							$Credit = '&nbsp';
 						} else {
-							$Debit = locale_money_format((-$DetailRow[1] - $DetailRow[2]) / $DetailRow[3],$_SESSION['CompanyRecord']['currencydefault']);
+							$Debit = locale_money_format((-$DetailRow[1] - $DetailRow[2] $DetailRow[3]) / $DetailRow[4],$_SESSION['CompanyRecord']['currencydefault']);
 							$Credit = '&nbsp';
 						}
 					} else {
 						if ($TransRow['account'] == $_SESSION['CompanyRecord']['debtorsact']) {
-							$Credit = locale_money_format(-($DetailRow[1] + $DetailRow[2]) / $DetailRow[3],$_SESSION['CompanyRecord']['currencydefault']);
+							$Credit = locale_money_format(-($DetailRow[1] + $DetailRow[2] + $DetailRow[3]) / $DetailRow[4],$_SESSION['CompanyRecord']['currencydefault']);
 							$Debit = '&nbsp';
 						} else {
-							$Credit = locale_money_format(($DetailRow[1] + $DetailRow[2]) / $DetailRow[3],$_SESSION['CompanyRecord']['currencydefault']);
+							$Credit = locale_money_format(($DetailRow[1] + $DetailRow[2] + $DetailRow[3]) / $DetailRow[4],$_SESSION['CompanyRecord']['currencydefault']);
 							$Debit = '&nbsp';
 						}
 					}
@@ -171,7 +173,7 @@ if ( !isset($_GET['TypeID']) OR !isset($_GET['TransNo']) ) {
 					}
 					echo '<td>' . $TranDate . '</td>
 							<td>' . MonthAndYearFromSQLDate($TransRow['lastdate_in_period']) . '</td>
-							<td><a href="' . $URL . $DetailRow[0] . $date . '">' . $TransRow['accountname']  . ' - ' . $DetailRow[4] . '</a></td>
+							<td><a href="' . $URL . $DetailRow[0] . $date . '">' . $TransRow['accountname']  . ' - ' . $DetailRow[5] . '</a></td>
 							<td class="number">' . $Debit . '</td>
 							<td class="number">' . $Credit . '</td>
 							<td>' . $TransRow['narrative'] . '</td>
