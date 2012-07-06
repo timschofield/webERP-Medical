@@ -93,9 +93,9 @@ echo '<tr><th colspan="2" class="centre">' . _('Display') . '</th>
 		<td>' . _('Order By Net Sales') . ':</td>
 		<td>';
 if ($_POST['OrderBy']=='NetSales') {
-	echo '<input type="radio" name="OrderBy" value="NetSales" checked="True" />';
+	echo '<input type="radio" name="OrderBy" value="NetSales" checked="True" onChange="ReloadForm(form1.ShowSales)" />';
 } else {
-	echo '<input type="radio" name="OrderBy" value="NetSales" />';
+	echo '<input type="radio" name="OrderBy" value="NetSales" onChange="ReloadForm(form1.ShowSales)" />';
 }
 echo	'</td>
 		</tr>
@@ -103,9 +103,9 @@ echo	'</td>
 		<td>' . _('Order By Quantity') . ':</td>
 		<td>';
 if ($_POST['OrderBy']=='Quantity') {
-	echo '<input type="radio" name="OrderBy" value="Quantity" checked="True" />';
+	echo '<input type="radio" name="OrderBy" value="Quantity" checked="True" onChange="ReloadForm(form1.ShowSales)" />';
 } else {
-	echo '<input type="radio" name="OrderBy" value="Quantity" />';
+	echo '<input type="radio" name="OrderBy" value="Quantity" onChange="ReloadForm(form1.ShowSales)" />';
 }
 if (!isset($_POST['NoToDisplay'])){
 	$_POST['NoToDisplay']=20;

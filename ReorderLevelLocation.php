@@ -60,18 +60,17 @@ if (isset($_POST['submit']) OR isset($_POST['Update'])) {
 	echo'<p class="page_title_text"><strong>' . _('Number Of Days Sales : ') . '' . locale_number_format($_POST['NumberOfDays'],0) . '' . _(' Days ') . ' </strong></p>';
 	$k=0; //row colour counter
 	echo '<form action="ReorderLevelLocation.php" method="post" id="Update">';
-    echo '<div>';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-    echo '<table class="selection">';
-    echo '<tr>
-            <th>' . _('Code') . '</th>
-            <th>' . _('Description') . '</th>
-            <th>' . _('Total Invoiced').'<br />'._('At All Locations') . '</th>
-            <th>' . _('Total Invoiced').'<br />'._('At Location') . '</th>
-            <th>' . _('On Hand') .'<br />'._('At All Locations') . '</th>
-            <th>' . _('On Hand') .'<br />' ._('At Location') . '</th>
-            <th>' . _('Reorder Level') . '</th>
-        </tr>';
+	echo '<table class="selection">';
+	echo '<tr>
+			<th>' . _('Code') . '</th>
+			<th>' . _('Description') . '</th>
+			<th>' . _('Total Invoiced').'<br />'._('At All Locations') . '</th>
+			<th>' . _('Total Invoiced').'<br />'._('At Location') . '</th>
+			<th>' . _('On Hand') .'<br />'._('At All Locations') . '</th>
+			<th>' . _('On Hand') .'<br />' ._('At Location') . '</th>
+			<th>' . _('Reorder Level') . '</th>
+		</tr>';
 
 	$i=1;
 	while ($myrow=DB_fetch_array($result))	{
@@ -145,10 +144,8 @@ if (isset($_POST['submit']) OR isset($_POST['Update'])) {
 				<button type="submit" name="submit">' . _('Update') . '</button>
 			</td>
 		</tr>
-        </table>
-        </div>
+		</table>
 		</form><br />';
-
 
 } else { /*The option to submit was not hit so display form */
 
@@ -160,7 +157,7 @@ if (isset($_POST['submit']) OR isset($_POST['Update'])) {
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 	$sql = "SELECT loccode,
 				   locationname
-		    FROM locations";
+			FROM locations";
 	$resultStkLocs = DB_query($sql,$db);
 	echo '<table class="selection">
 			<tr>
@@ -190,7 +187,7 @@ if (isset($_POST['submit']) OR isset($_POST['Update'])) {
 	echo '<tr>
 			<td>' . _('Number Of Days Sales') . ':</td>
 			<td><input type="text" class="number" name="NumberOfDays" maxlength="3" size="4" value="0" /></td>
-          </tr>';
+		  </tr>';
 	echo '<tr>
 			<td>' . _('Order By') . ':</td>
 			<td><select name="Sequence">
@@ -203,7 +200,7 @@ if (isset($_POST['submit']) OR isset($_POST['Update'])) {
 			<div class="centre">
 				<button type="submit" name="submit">' . _('Submit') . '</button>
 			</div>';
-    echo '<br /></form>';
+	echo '<br /></form>';
 
 } /*end of else not submit */
 include('includes/footer.inc');

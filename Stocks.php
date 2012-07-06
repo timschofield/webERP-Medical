@@ -215,7 +215,8 @@ if (isset($_POST['submit'])) {
 							serialised,
 							materialcost+labourcost+overheadcost AS itemcost,
 							stockcategory.stockact,
-							stockcategory.wipact
+							stockcategory.wipact,
+							stockcategory.categoryid
 					FROM stockmaster
 					INNER JOIN stockcategory
 						ON stockmaster.categoryid=stockcategory.categoryid
@@ -228,6 +229,7 @@ if (isset($_POST['submit'])) {
 			$UnitCost = $myrow['itemcost'];
 			$OldStockAccount = $myrow['stockact'];
 			$OldWipAccount = $myrow['wipact'];
+			$OldCategoryId = $myrow['categoryid'];
 
 			$sql = "SELECT SUM(locstock.quantity) AS totalquantity
 					FROM locstock
@@ -328,15 +330,18 @@ if (isset($_POST['submit'])) {
 
 				DB_Txn_Begin($db);
 
-				$sql = "UPDATE stockmaster
+			$sql = "UPDATE stockmaster
 						SET longdescription='" . $_POST['LongDescription'] . "',
 							description='" . $_POST['Description'] . "',
 							discontinued='" . $_POST['Discontinued'] . "',
 							controlled='" . $_POST['Controlled'] . "',
 							serialised='" . $_POST['Serialised']."',
 							perishable='" . $_POST['Perishable']."',
-							categoryid='" . $_POST['CategoryID'] . "',
-							units='" . $_POST['Units'] . "',
+							categoryid='" . $_POST['CategoryID'] . "',";
+			if ($OldCategoryId != $_POST['CategoryID']){
+				$sql = $sql . "lastcategoryupdate='" . date('Y-m-d') . "', ";
+			}
+			$sql = $sql . "	units='" . $_POST['Units'] . "',
 							mbflag='" . $_POST['MBFlag'] . "',
 							eoq='" . $_POST['EOQ'] . "',
 							volume='" . $_POST['Volume'] . "',
@@ -503,6 +508,7 @@ if (isset($_POST['submit'])) {
 							description,
 							longdescription,
 							categoryid,
+							lastcategoryupdate,
 							units,
 							mbflag,
 							eoq,
@@ -522,6 +528,7 @@ if (isset($_POST['submit'])) {
 							'" . $_POST['Description'] . "',
 							'" . $_POST['LongDescription'] . "',
 							'" . $_POST['CategoryID'] . "',
+							'" . date('Y-m-d') . "',
 							'" . $_POST['Units'] . "',
 							'" . $_POST['MBFlag'] . "',
 							'" . $_POST['EOQ'] . "',

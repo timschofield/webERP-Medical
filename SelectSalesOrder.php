@@ -875,6 +875,7 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 				$PrintDispatchNote = $rootpath . '/PrintCustOrder.php?TransNo=' . $myrow['orderno'];
 			}
 			$PrintQuotation = $rootpath . '/PDFQuotation.php?QuotationNo=' . $myrow['orderno'];
+			$PrintQuotationPortrait = $rootpath . '/PDFQuotationPortrait.php?QuotationNo=' . $myrow['orderno'];
 			$FormatedDelDate = ConvertSQLDate($myrow['deliverydate']);
 			$FormatedOrderDate = ConvertSQLDate($myrow['orddate']);
 			$FormatedOrderValue = locale_money_format($myrow['ordervalue'],$_SESSION['CompanyRecord']['currencydefault']);
@@ -942,25 +943,26 @@ if (isset($StockItemsResult) and DB_num_rows($StockItemsResult)>0) {
 
 			} else { //must be quotes only
 				printf('<td><a href="%s">%s</a></td>
-					<td> <a href="%s" >' . $PrintText . '</a> </td>
-					<td>%s</td>
-					<td>%s</td>
-					<td>%s</td>
-					<td>%s</td>
-					<td>%s</td>
-					<td>%s</td>
-					<td class="number">%s</td>
-					</tr>',
-					$ModifyPage,
-					$myrow['orderno'],
-					$PrintQuotation,
-					$myrow['name'],
-					$myrow['brname'],
-					$myrow['customerref'],
-					$FormatedOrderDate,
-					$FormatedDelDate,
-					$myrow['deliverto'],
-					$FormatedOrderValue);
+						<td><a target="_blank" href="%s">' . _('Landscape') . '</a>&nbsp;&nbsp;<a target="_blank" href="%s">' . _('Portrait') . '</a></td>
+						<td>%s</td>
+						<td>%s</td>
+						<td>%s</td>
+						<td>%s</td>
+						<td>%s</td>
+						<td>%s</td>
+						<td class="number">%s</td>
+						</tr>',
+						$ModifyPage,
+						$myrow['orderno'],
+						$PrintQuotation,
+						$PrintQuotationPortrait,
+						$myrow['name'],
+						$myrow['brname'],
+						$myrow['customerref'],
+						$FormatedOrderDate,
+						$FormatedDelDate,
+						html_entity_decode($myrow['deliverto'],ENT_QUOTES,'UTF-8'),
+						$FormatedOrderValue);
 			}
 					$i++;
 			$j++;

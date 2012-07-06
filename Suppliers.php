@@ -594,7 +594,7 @@ if (isset($_POST['submit'])) {
 
 	}
 
-} elseif (isset($_POST['delete']) AND $_POST['delete'] != '') {
+} elseif (isset($_POST['delete'])) {
 
 //the link to delete a selected record was clicked instead of the submit button
 

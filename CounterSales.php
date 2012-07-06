@@ -1187,7 +1187,8 @@ if (isset($_POST['ProcessSale'])){
 										rate,
 										invtext,
 										shipvia,
-										alloc )
+										alloc,
+										settled)
 									VALUES (
 										'". $InvoiceNo . "',
 										10,
@@ -1204,7 +1205,8 @@ if (isset($_POST['ProcessSale'])){
 										'" . $ExRate . "',
 										'" . $_SESSION['Items'.$identifier]->Comments . "',
 										'" . $_SESSION['Items'.$identifier]->ShipVia . "',
-										'" . filter_number_input($_SESSION['Items'.$identifier]->total + $_POST['TaxTotal']) . "')";
+										'" . filter_number_input($_SESSION['Items'.$identifier]->total + $_POST['TaxTotal']) . "',
+										'1')";
 		$ErrMsg =_('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The debtor transaction record could not be inserted because');
 		$DbgMsg = _('The following SQL to insert the debtor transaction record was used');
 	 	$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
@@ -1832,7 +1834,8 @@ if (isset($_POST['ProcessSale'])){
 											rate,
 											ovamount,
 											alloc,
-											invtext)
+											invtext,
+											settled)
 										VALUES (
 											'" . $ReceiptNumber . "',
 											12,
@@ -1844,7 +1847,8 @@ if (isset($_POST['ProcessSale'])){
 											'" . $ExRate . "',
 											'-" . filter_currency_input($_POST['AmountPaid']) . "',
 											'-" . filter_currency_input($_POST['AmountPaid']) . "',
-											'" . $_SESSION['Items'.$identifier]->LocationName . ' ' . _('Counter Sale') ."')";
+											'" . $_SESSION['Items'.$identifier]->LocationName . ' ' . _('Counter Sale') ."',
+											'1')";
 
 			$DbgMsg = _('The SQL that failed to insert the customer receipt transaction was');
 			$ErrMsg = _('Cannot insert a receipt transaction against the customer because') ;
@@ -1911,7 +1915,9 @@ $ImageSource = _('No Image');
 
 /* Now show the stock item selection search stuff below */
 if (isset($_POST['PartSearch'])){
-	ShowItemSearchFields($rootpath, $theme, $db, $identifier);
+	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . _('Search for Items') . '</p>';
+	echo '<div class="page_help_text">' . _('Search for Items') . _(', Searches the database for items, you can narrow the results by selecting a stock category, or just enter a partial item description or partial item code') . '.</div><br />';
+	ShowItemSearchFields($rootpath, $theme, $db, $identifier, array('A', 'K', 'M', 'B', 'D'), array('F', 'D'), 'Search');
 }
 
 echo '<br /></form>';
