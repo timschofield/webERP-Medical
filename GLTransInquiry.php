@@ -111,7 +111,6 @@ if ( !isset($_GET['TypeID']) OR !isset($_GET['TransNo']) ) {
 				$DetailSQL = "SELECT supptrans.supplierno,
 									supptrans.ovamount,
 									supptrans.ovgst,
-									supptrans.ovfreight,
 									supptrans.rate,
 									suppliers.suppname
 								FROM supptrans,
@@ -151,7 +150,7 @@ if ( !isset($_GET['TypeID']) OR !isset($_GET['TransNo']) ) {
 							$Debit = locale_money_format(($DetailRow[1] + $DetailRow[2]+ $DetailRow[3]) / $DetailRow[4],$_SESSION['CompanyRecord']['currencydefault']);
 							$Credit = '&nbsp';
 						} else {
-							$Debit = locale_money_format((-$DetailRow[1] - $DetailRow[2] $DetailRow[3]) / $DetailRow[4],$_SESSION['CompanyRecord']['currencydefault']);
+							$Debit = locale_money_format((-$DetailRow[1] - $DetailRow[2] ) / $DetailRow[3],$_SESSION['CompanyRecord']['currencydefault']);
 							$Credit = '&nbsp';
 						}
 					} else {
@@ -159,7 +158,7 @@ if ( !isset($_GET['TypeID']) OR !isset($_GET['TransNo']) ) {
 							$Credit = locale_money_format(-($DetailRow[1] + $DetailRow[2] + $DetailRow[3]) / $DetailRow[4],$_SESSION['CompanyRecord']['currencydefault']);
 							$Debit = '&nbsp';
 						} else {
-							$Credit = locale_money_format(($DetailRow[1] + $DetailRow[2] + $DetailRow[3]) / $DetailRow[4],$_SESSION['CompanyRecord']['currencydefault']);
+							$Credit = locale_money_format(($DetailRow[1] + $DetailRow[2]) / $DetailRow[3],$_SESSION['CompanyRecord']['currencydefault']);
 							$Debit = '&nbsp';
 						}
 					}
