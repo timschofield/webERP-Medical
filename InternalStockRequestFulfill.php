@@ -123,7 +123,7 @@ if (isset($_POST['UpdateAll'])) {
 												'" . $SQLAdjustmentDate . "',
 												'" . $PeriodNo . "',
 												'" . $StockGLCodes['issueglact'] . "',
-												'" . $StandardCost * -($Quantity) . "',
+												'" . $StandardCost * ($Quantity) . "',
 												'" . $Narrative . "',
 												'" . $Tag . "'
 											)";
@@ -145,7 +145,7 @@ if (isset($_POST['UpdateAll'])) {
 												'" . $SQLAdjustmentDate . "',
 												'" . $PeriodNo . "',
 												'" . $StockGLCodes['stockact'] . "',
-												'" . $StandardCost * $Quantity . "',
+												'" . $StandardCost * -$Quantity . "',
 												'" . $Narrative . "',
 												'" . $Tag . "'
 											)";
