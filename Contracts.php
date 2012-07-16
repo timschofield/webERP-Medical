@@ -406,9 +406,9 @@ if (isset($_POST['CommitContract']) OR isset($_POST['CreateQuotation'])){
 							'" . $_POST['CategoryID'] . "',
 							'" . $_POST['LocCode'] . "',
 							'" . FormatDateForSQL($_POST['RequiredDate']) . "',
-							'" . filter_number_format($_POST['Margin']) . "',
+							'" . filter_number_input($_POST['Margin']) . "',
 							'" . $_POST['CustomerRef'] . "',
-							'". filter_number_format($_POST['ExRate']) ."')";
+							'" . filter_number_input($_POST['ExRate']) ."')";
 
 		$ErrMsg = _('The new contract could not be added because');
 		$result = DB_query($sql,$db,$ErrMsg);
