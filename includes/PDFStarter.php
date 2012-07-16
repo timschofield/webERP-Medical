@@ -71,9 +71,9 @@ switch ($PaperSize) {
 	$DocumentPaper = 'A6'; $DocumentOrientation ='P';
 
       $Page_Width=55;
-      $Page_Height=395;
-      $Top_Margin=0;
-      $Bottom_Margin=30;
+      $Page_Height=345;
+      $Top_Margin=00;
+      $Bottom_Margin=10;
       $Left_Margin=40;
       $Right_Margin=30;
       break;
