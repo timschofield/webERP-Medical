@@ -821,7 +821,7 @@ if ($_SESSION['ReceiptBatch']->AccountCurrency!=$_SESSION['CompanyRecord']['curr
 	if ($_SESSION['ReceiptBatch']->FunctionalExRate==1 AND isset($SuggestedFunctionalExRate)){
 		$_SESSION['ReceiptBatch']->FunctionalExRate = $SuggestedFunctionalExRate;
 	}
-	echo '<tr><td>' . _('Functional Exchange Rate') . ':</td><td><input tabindex="5" type="text" name="FunctionalExRate" class="number" maxlength="10" size="12" value="' . locale_number_format($_SESSION['ReceiptBatch']->FunctionalExRate) . '" /></td>
+	echo '<tr><td>' . _('Functional Exchange Rate') . ':</td><td><input tabindex="5" type="text" name="FunctionalExRate" class="number" maxlength="10" size="12" value="' . locale_number_format($_SESSION['ReceiptBatch']->FunctionalExRate, 4) . '" /></td>
 			<td>' . ' ' . $SuggestedFunctionalExRateText . ' <i>' . _('The exchange rate between the currency of the business (the functional currency) and the currency of the bank account') .  '. 1 ' . $_SESSION['CompanyRecord']['currencydefault'] . ' = ? ' . $_SESSION['ReceiptBatch']->AccountCurrency . '</i></td></tr>';
 }
 
