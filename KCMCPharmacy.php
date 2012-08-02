@@ -308,6 +308,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 						1,
 						'" . ($QtyOnHandPrior-$_SESSION['Items'][$i]['Quantity']) . "'
 					)";
+				$BaseStockID=$_SESSION['Items'][$i]['StockID'];
 
 				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Stock movement records for'). ' '. $_POST['StockID'] . ' ' .
 					_('could not be inserted because');
@@ -337,7 +338,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 													'" . $InvoiceNo . "',
 													'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 													'" . $PeriodNo . "',
-													'" . GetCOGSGLAccount($Area, $_SESSION['Items'][$i]['StockID'], $_POST['PriceList'], $db) . "',
+													'" . GetCOGSGLAccount('AN', $_SESSION['Items'][$i]['StockID'], $_POST['PriceList'], $db) . "',
 													'" . $_POST['PatientNo'] . " - " . $_SESSION['Items'][$i]['StockID'] . " x " . $_SESSION['Items'][$i]['Quantity'] . " @ " . $_SESSION['Items'][$i]['StandardCost'] . "',
 													'" . filter_currency_input($_SESSION['Items'][$i]['StandardCost'] * $_SESSION['Items'][$i]['Quantity']) . "')";
 
@@ -369,11 +370,11 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 					$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
 				} /* end of if GL and stock integrated and standard cost !=0 */
 			}
-		}
 
-		/*Insert Sales Analysis records */
+			/*Insert Sales Analysis records */
+			if (isset($_SESSION['Items'][$i]['StockID']) and $_SESSION['DispenseOnBill']==1) {
 
-		$SQL="SELECT COUNT(*),
+				$SQL="SELECT COUNT(*),
 					salesanalysis.stockid,
 					salesanalysis.stkcategory,
 					salesanalysis.cust,
@@ -406,15 +407,15 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 					salesanalysis.typeabbrev,
 					salesanalysis.salesperson";
 
-		$ErrMsg = _('The count of existing Sales analysis records could not run because');
-		$DbgMsg = _('SQL to count the no of sales analysis records');
-		$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+				$ErrMsg = _('The count of existing Sales analysis records could not run because');
+				$DbgMsg = _('SQL to count the no of sales analysis records');
+				$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
 
-		$myrow = DB_fetch_array($Result);
+				$myrow = DB_fetch_array($Result);
 
-		if ($myrow[0]>0){  /*Update the existing record that already exists */
+				if ($myrow[0]>0){  /*Update the existing record that already exists */
 
-			$SQL = "UPDATE salesanalysis
+					$SQL = "UPDATE salesanalysis
 						SET amt=amt+" . filter_currency_input($_SESSION['Items'][$i]['Price'] * $_SESSION['Items'][$i]['Quantity'] / $ExRate) . ",
 							cost=cost+" . filter_currency_input($_SESSION['Items'][$i]['StandardCost'] * $_SESSION['Items'][$i]['Quantity']) . ",
 							qty=qty +" . $_SESSION['Items'][$i]['Quantity'] . ",
@@ -429,9 +430,9 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 							AND salesanalysis.stkcategory ='" . $myrow['stkcategory'] . "'
 							AND budgetoractual=1";
 
-		} else { /* insert a new sales analysis record */
+				} else { /* insert a new sales analysis record */
 
-			$SQL = "INSERT INTO salesanalysis (	typeabbrev,
+					$SQL = "INSERT INTO salesanalysis (	typeabbrev,
 												periodno,
 												amt,
 												cost,
@@ -461,20 +462,23 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 											FROM stockmaster,
 												custbranch
 											WHERE stockmaster.stockid = '" . $_SESSION['Items'][$i]['StockID'] . "'
-												AND custbranch.debtorno = '" . $Patient[0] . "'
-												AND custbranch.branchcode='" . $Patient[1]. "'";
-		}
+												AND custbranch.debtorno = '" . $_POST['PatientNo'] . "'
+												AND custbranch.branchcode='" . $_POST['BranchNo']. "'";
+				}
+				$BaseStockID=$_SESSION['Items'][$i]['StockID'];
 
-		$ErrMsg = _('Sales analysis record could not be added or updated because');
-		$DbgMsg = _('The following SQL to insert the sales analysis record was used');
-		$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+				$ErrMsg = _('Sales analysis record could not be added or updated because');
+				$DbgMsg = _('The following SQL to insert the sales analysis record was used');
+				$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+			}
+		}
 
 		$SQL="SELECT salestype
 				FROM debtorsmaster
 				WHERE debtorno='".$_POST['PatientNo']."'";
 		$Result=DB_query($SQL, $db);
 		$myrow=DB_fetch_array($Result);
-		$SalesGLAccounts = GetSalesGLAccount('AN', $_SESSION['Items'][0]['StockID'], $myrow['salestype'], $db);
+		$SalesGLAccounts = GetSalesGLAccount('AN', $BaseStockID, $myrow['salestype'], $db);
 		$SQL = "INSERT INTO gltrans (type,
 									typeno,
 									trandate,

@@ -128,7 +128,8 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 		$InsertQryResult = DB_query($HeaderSQL,$db,$ErrMsg);
 
 		for ($i=0; $i<$_SESSION['Items']['Lines']; $i++) {
-			$LineItemSQL = "INSERT INTO salesorderdetails (orderlineno,
+			if (isset($_SESSION['Items'][$i]['StockID'])) {
+				$LineItemSQL = "INSERT INTO salesorderdetails (orderlineno,
 													orderno,
 													stkcode,
 													unitprice,
@@ -152,13 +153,14 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 													'1',
 													1
 												)";
-			$DbgMsg = _('Trouble inserting a line of a sales order. The SQL that failed was');
-			$Ins_LineItemResult = DB_query($LineItemSQL,$db,$ErrMsg,$DbgMsg,true);
-			if ($_SESSION['Care2xDatabase']!='None') {
-				$SQL="UPDATE ".$_SESSION['Care2xDatabase'].".care_encounter_prescription SET bill_number='".$OrderNo."'
-							WHERE nr='".$_SESSION['Items'][$i]['Care2x']."'";
 				$DbgMsg = _('Trouble inserting a line of a sales order. The SQL that failed was');
-				$UpdateCare2xResult = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+				$Ins_LineItemResult = DB_query($LineItemSQL,$db,$ErrMsg,$DbgMsg,true);
+				if ($_SESSION['Care2xDatabase']!='None') {
+					$SQL="UPDATE ".$_SESSION['Care2xDatabase'].".care_encounter_prescription SET bill_number='".$OrderNo."'
+								WHERE nr='".$_SESSION['Items'][$i]['Care2x']."'";
+					$DbgMsg = _('Trouble inserting a line of a sales order. The SQL that failed was');
+					$UpdateCare2xResult = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+				}
 			}
 		}
 
@@ -249,7 +251,8 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 		$Result = DB_query($sql,$db,$ErrMsg,$DbgMsg,true);
 
 		for ($i=0; $i<$_SESSION['Items']['Lines']; $i++) {
-			$SQL = "INSERT INTO stockmoves (
+			if (isset($_SESSION['Items'][$i]['StockID'])) {
+				$SQL = "INSERT INTO stockmoves (
 						stockid,
 						type,
 						transno,
@@ -278,18 +281,20 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 						1,
 						0
 					)";
+				$BaseStockID=$_SESSION['Items'][$i]['StockID'];
 
-			$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Stock movement records for'). ' '. $_POST['StockID'] . ' ' .
+				$ErrMsg = _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('Stock movement records for'). ' '. $_POST['StockID'] . ' ' .
 				_('could not be inserted because');
-			$DbgMsg = _('The following SQL to insert the stock movement records was used');
-			$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+				$DbgMsg = _('The following SQL to insert the stock movement records was used');
+				$Result = DB_query($SQL,$db,$ErrMsg,$DbgMsg,true);
+			}
 		}
 		$SQL="SELECT salestype
 				FROM debtorsmaster
 				WHERE debtorno='".$_POST['PatientNo']."'";
 		$Result=DB_query($SQL, $db);
 		$myrow=DB_fetch_array($Result);
-		$SalesGLAccounts = GetSalesGLAccount('AN', $_SESSION['Items'][0]['StockID'], $myrow['salestype'], $db);
+		$SalesGLAccounts = GetSalesGLAccount('AN', $BaseStockID, $myrow['salestype'], $db);
 		$SQL = "INSERT INTO gltrans (type,
 									typeno,
 									trandate,

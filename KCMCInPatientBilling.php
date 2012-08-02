@@ -522,6 +522,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 														AND custbranch.debtorno = '" . $_POST['PatientNo'] . "'
 														AND custbranch.branchcode='" . $_POST['BranchNo'] . "'";
 				}
+				$BaseStockID=$_SESSION['Items'][$i]['StockID'];
 
 				$ErrMsg = _('Sales analysis record could not be added or updated because');
 				$DbgMsg = _('The following SQL to insert the sales analysis record was used');
@@ -533,7 +534,7 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 				WHERE debtorno='".$_POST['PatientNo']."'";
 		$Result=DB_query($SQL, $db);
 		$myrow=DB_fetch_array($Result);
-		$SalesGLAccounts = GetSalesGLAccount('AN', $_SESSION['Items'][0]['StockID'], $myrow['salestype'], $db);
+		$SalesGLAccounts = GetSalesGLAccount('AN', $BaseStockID, $myrow['salestype'], $db);
 		$SQL = "INSERT INTO gltrans (type,
 									typeno,
 									trandate,
