@@ -65,7 +65,7 @@ if ($FromTransNo=='Preview') {
 
 $pdf->addJpegFromFile($_SESSION['LogoFile'],$FormDesign->logo->x,$Page_Height -$FormDesign->logo->y,$FormDesign->logo->width,$FormDesign->logo->height);
 if ($InvOrCredit=='Invoice') {
-	$pdf->addText($FormDesign->Title->x, $Page_Height -$FormDesign->Title->y, $FormDesign->Title->FontSize, _('TAX INVOICE') . ' ');
+	$pdf->addText($FormDesign->Title->x, $Page_Height -$FormDesign->Title->y, $FormDesign->Title->FontSize, _('INVOICE') . ' ');
 } else {
 	$pdf->addText($FormDesign->Title->x, $Page_Height -$FormDesign->Title->y, $FormDesign->Title->FontSize, _('CREDIT NOTE') . ' ');
 }
@@ -146,7 +146,7 @@ $pdf->RoundRectangle($FormDesign->MainOutputBox->x,
 											$FormDesign->MainOutputBox->radius);
 
 /*Set up headings */
-$pdf->addText($FormDesign->CustomerTaxReferenceCaption->x, $Page_Height -$FormDesign->CustomerTaxReferenceCaption->y, $FormDesign->CustomerTaxReferenceCaption->FontSize, _('Customer Tax Ref') . ':');
+$pdf->addText($FormDesign->CustomerTaxReferenceCaption->x, $Page_Height -$FormDesign->CustomerTaxReferenceCaption->y, $FormDesign->CustomerTaxReferenceCaption->FontSize, _('Customer Ref') . ':');
 $pdf->addText($FormDesign->CustomerTaxReference->x, $Page_Height -$FormDesign->CustomerTaxReference->y, $FormDesign->CustomerTaxReference->FontSize, $myrow['taxref']);
 
 /*Print a vertical line */
