@@ -665,7 +665,7 @@ if (isset($_POST['ProcessCredit']) AND $OKToProcess == true) {
 								completed=0
 						WHERE orderno = '" . $_SESSION['CreditItems']->OrderNo . "'
 						AND stkcode = '" . $CreditLine->StockID . "'
-						AND orderlineno='" . $CreditLine->LineNumber."'";
+						AND quantity >=" . $CreditLine->QtyDispatched;
 
 				$ErrMsg =  _('CRITICAL ERROR') . '! ' . _('NOTE DOWN THIS ERROR AND SEEK ASSISTANCE') . ': ' . _('The sales order detail record could not be updated for the reduced quantity invoiced because');
 				$DbgMsg = _('The following SQL to update the sales order detail record was used');
