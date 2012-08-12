@@ -3,7 +3,7 @@
 /* Include session.inc, to allow database connection, and access to
    miscfunctions, and datefunctions.*/
 	// FOLLOWING ONLY REQUIRED TO SUPPORT PER FUNCTION AUTHENTICATION
-	$api_DatabaseName='weberpdemo';
+	$api_DatabaseName='almc_stable';
 	// END OF OLD STYLE AUTHENTICATION
 
 	$AllowAnyone = true;
