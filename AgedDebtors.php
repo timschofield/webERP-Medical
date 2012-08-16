@@ -91,7 +91,7 @@ if (isset($_POST['PrintPDF'])
 					holdreasons.dissallowinvoices,
 					holdreasons.reasondescription
 				HAVING
-					ROUND(ABS(SUM(debtortrans.ovamount + debtortrans.ovgst + debtortrans.ovfreight + debtortrans.ovdiscount - debtortrans.alloc)),currencies.decimalplaces) >0.005";
+					ABS(SUM(debtortrans.ovamount + debtortrans.ovgst + debtortrans.ovfreight + debtortrans.ovdiscount - debtortrans.alloc)) >0.005";
 
 	} elseif ($_POST['All_Or_Overdues']=='OverduesOnly') {
 
