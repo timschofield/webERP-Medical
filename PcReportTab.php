@@ -187,7 +187,7 @@ if ((! isset($_POST['FromDate']) AND ! isset($_POST['ToDate'])) OR isset($_POST[
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+200,$YPos,100,$FontSize,_('Amount'));
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+250,$YPos,100,$FontSize,_('Note'));
 	$LeftOvers = $pdf->addTextWrap($Left_Margin+350,$YPos,100,$FontSize,_('Receipt'));
-	$LeftOvers = $pdf->addTextWrap($Left_Margin+420,$YPos,100,$FontSize,_('Date Authorizer'));
+	$LeftOvers = $pdf->addTextWrap($Left_Margin+420,$YPos,100,$FontSize,_('Date Authorised'));
 	$YPos -= (2 * $line_height);
 
 	while ($myrow=DB_fetch_array($TabDetail)) {
