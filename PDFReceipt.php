@@ -87,7 +87,7 @@ $YPos -=(2*$line_height);
 
 /*Draw a rectangle to put the headings in     */
 
-$pdf->line(20, $YPos+$line_height,$Page_Width-$Right_Margin, $YPos+$line_height);
+//$pdf->line(20, $YPos+$line_height,$Page_Width-$Right_Margin, $YPos+$line_height);
 
 $FontSize=14;
 $YPos -= (1.5 * $line_height);
@@ -136,12 +136,6 @@ $YPos=$YPos-($line_height*8);
 */
 if ($Type!=12) {
 	while ($mylines=DB_fetch_array($MyOrderResult)) {
-		if ($PageNumber>1){
-			$pdf->newPage();
-			$YPos= $Page_Height-$Top_Margin;
-			$XPos=0;
-			$PageNumber=1;
-		}
 
 //		$YPos=$YPos-($line_height);
 //		$LeftOvers = $pdf->addTextWrap(20,$YPos,300,$FontSize, htmlspecialchars_decode($mylines['stkcode']));
@@ -151,8 +145,10 @@ if ($Type!=12) {
 //		$LeftOvers = $pdf->addTextWrap(180,$YPos,300,$FontSize, htmlspecialchars_decode($mylines['unitprice']));
 		$LeftOvers = $pdf->addTextWrap(100,$YPos,300,$FontSize, number_format($mylines['quantity']*$mylines['unitprice'],0).' '.$myrow['currcode']);
 		$YPos=$YPos-($line_height);
-		if ($YPos<=0) {
+		if ($YPos<=$Bottom_Margin) {
 			$PageNumber++;
+			$YPos= $Page_Height-$Top_Margin;
+			$pdf->newPage();
 		}
 	}
 } else {
@@ -163,9 +159,9 @@ if ($Type!=12) {
 $YPos=$YPos-($line_height*1);
 $LeftOvers = $pdf->addTextWrap(50,$YPos,300,$FontSize,_('Total received').' : ');
 if ($Type!=12) {
-	$LeftOvers = $pdf->addTextWrap(150,$YPos,300,$FontSize,number_format($Amount,$DecimalPlaces).'  '.$myrow['currcode']);
+	$LeftOvers = $pdf->addTextWrap(150,$YPos,200,$FontSize,number_format($Amount,$DecimalPlaces).'  '.$myrow['currcode']);
 } else {
-	$LeftOvers = $pdf->addTextWrap(150,$YPos,300,$FontSize,number_format(-$Amount,$DecimalPlaces).'  '.$myrow['currcode']);
+	$LeftOvers = $pdf->addTextWrap(150,$YPos,200,$FontSize,number_format(-$Amount,$DecimalPlaces).'  '.$myrow['currcode']);
 }
 $YPos=$YPos-($line_height*2);
 
