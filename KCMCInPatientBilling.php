@@ -122,8 +122,8 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 
 		$sql="SELECT area
 				FROM custbranch
-				WHERE branchcode='" . $Patient[1] . "'
-					AND debtorno='" . $Patient[0] . "'";
+				WHERE branchcode='" . $_POST['BranchNo'] . "'
+					AND debtorno='" . $_POST['PatientNo'] . "'";
 		$result=DB_query($sql, $db);
 		$myrow=DB_fetch_array($result);
 		$Area=$myrow['area'];
@@ -143,8 +143,8 @@ if (isset($_POST['SubmitCash']) or isset($_POST['SubmitInsurance'])) {
 												deliverblind)
 											VALUES (
 												'" . $OrderNo . "',
-												'" . $Patient[0] . "',
-												'" . $Patient[1] . "',
+												'" . $_POST['PatientNo'] . "',
+												'" . $_POST['BranchNo'] . "',
 												'" . DB_escape_string($_POST['Comments']) ."',
 												'" . FormatDateForSQL($_POST['AdmissionDate']) . "',
 												'1',
