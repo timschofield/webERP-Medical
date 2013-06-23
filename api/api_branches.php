@@ -1,5 +1,5 @@
 <?php
-/* $Id: api_branches.php 4521 2011-03-29 09:04:20Z daintree $*/
+/* $Id$*/
 
 /* Check that the debtor number exists*/
 	function VerifyBranchDebtorExists($DebtorNumber, $i, $Errors, $db) {
@@ -14,10 +14,10 @@
 		return $Errors;
 	}
 
-/* Verify that the branch number is valid, and does not already
+/* Verify that the branch number is valid, and doesn't already
    exist.*/
 	function VerifyBranchNo($DebtorNumber, $BranchNumber, $i, $Errors, $db) {
-		if ((strlen($BranchNumber)<1) or (strlen($BranchNumber)>10)) {
+		if ((mb_strlen($BranchNumber)<1) or (mb_strlen($BranchNumber)>10)) {
 			$Errors[$i] = IncorrectBranchNumberLength;
 		}
 		$Searchsql = "SELECT count(debtorno)
@@ -34,12 +34,12 @@
 
 /* Verify that the branch number exists.*/
 	function VerifyBranchNoExists($DebtorNumber, $BranchNumber, $i, $Errors, $db) {
-		if ((strlen($BranchNumber)<1) or (strlen($BranchNumber)>10)) {
+		if ((mb_strlen($BranchNumber)<1) or (mb_strlen($BranchNumber)>10)) {
 			$Errors[$i] = IncorrectBranchNumberLength;
 		}
 		$Searchsql = "SELECT count(debtorno)
 				     FROM custbranch
-				     WHERE debtorno='".$DebtorNumber."'
+				     WHERE debtorno='".$DebtorNumber."' 
                      AND branchcode='".$BranchNumber."'";
 		$SearchResult=api_DB_query($Searchsql, $db);
 		$answer = DB_fetch_row($SearchResult);
@@ -52,7 +52,7 @@
 
 /* Check that the name exists and is 40 characters or less long */
 	function VerifyBranchName($BranchName, $i, $Errors) {
-		if ((strlen($BranchName)<1) or (strlen($BranchName)>40)) {
+		if ((mb_strlen($BranchName)<1) or (mb_strlen($BranchName)>40)) {
 			$Errors[$i] = IncorrectBranchNameLength;
 		}
 		return $Errors;
@@ -60,7 +60,7 @@
 
 /* Check that the address lines are correct length*/
 	function VerifyBranchAddressLine($AddressLine, $length, $i, $Errors) {
-		if (strlen($AddressLine)>$length) {
+		if (mb_strlen($AddressLine)>$length) {
 			$Errors[$i] = InvalidAddressLine;
 		}
 		return $Errors;
@@ -90,7 +90,7 @@
 		return $Errors;
 	}
 
-/* Check that the area code is set up in the weberp database */
+/* Check that the area code is set up in the kwamoja database */
 	function VerifyAreaCode($AreaCode , $i, $Errors, $db) {
 		$Searchsql = "SELECT COUNT(areacode)
 					  FROM areas
@@ -103,7 +103,7 @@
 		return $Errors;
 	}
 
-/* Check that the salesman is set up in the weberp database */
+/* Check that the salesman is set up in the kwamoja database */
 	function VerifySalesmanCode($SalesmanCode , $i, $Errors, $db) {
 		$Searchsql = "SELECT COUNT(salesmancode)
 					  FROM salesman
@@ -126,7 +126,7 @@
 
 /* Check that the phone number only has 20 or fewer characters */
 	function VerifyPhoneNumber($PhoneNumber, $i, $Errors) {
-		if (strlen($PhoneNumber)>20) {
+		if (mb_strlen($PhoneNumber)>20) {
 			$Errors[$i] = InvalidPhoneNumber;
 		}
 		return $Errors;
@@ -134,7 +134,7 @@
 
 /* Check that the fax number only has 20 or fewer characters */
 	function VerifyFaxNumber($FaxNumber, $i, $Errors) {
-		if (strlen($FaxNumber)>20) {
+		if (mb_strlen($FaxNumber)>20) {
 			$Errors[$i] = InvalidFaxNumber;
 		}
 		return $Errors;
@@ -142,7 +142,7 @@
 
 /* Check that the contact name only has 30 or fewer characters */
 	function VerifyContactName($ContactName, $i, $Errors) {
-		if (strlen($ContactName)>30) {
+		if (mb_strlen($ContactName)>30) {
 			$Errors[$i] = InvalidContactName;
 		}
 		return $Errors;
@@ -158,13 +158,13 @@
 
 /* Check that the email address is in a valid format and only has 55 or fewer characters */
 	function VerifyEmailAddress($EmailAddress, $i, $Errors) {
-		if (strlen($EmailAddress)>55 and !checkEmail($EmailAddress)) {
+		if (mb_strlen($EmailAddress)>55 and !checkEmail($EmailAddress)) {
 			$Errors[$i] = InvalidEmailAddress;
 		}
 		return $Errors;
 	}
 
-/* Check that the default location is set up in the weberp database */
+/* Check that the default location is set up in the kwamoja database */
 	function VerifyDefaultLocation($DefaultLocation , $i, $Errors, $db) {
 		$Searchsql = "SELECT COUNT(loccode)
 					  FROM locations
@@ -177,7 +177,7 @@
 		return $Errors;
 	}
 
-/* Check that the tax group id is set up in the weberp database */
+/* Check that the tax group id is set up in the kwamoja database */
 	function VerifyTaxGroupId($TaxGroupId , $i, $Errors, $db) {
 		$Searchsql = "SELECT COUNT(taxgroupid)
 					  FROM taxgroups
@@ -190,7 +190,7 @@
 		return $Errors;
 	}
 
-/* Check that the default shipper is set up in the weberp database */
+/* Check that the default shipper is set up in the kwamoja database */
 	function VerifyDefaultShipVia($DefaultShipVia , $i, $Errors, $db) {
 		$Searchsql = "SELECT COUNT(shipper_id)
 					 FROM shippers
@@ -221,7 +221,7 @@
 
 /* Check that the special instructions only have 256 or fewer characters */
 	function VerifySpecialInstructions($SpecialInstructions, $i, $Errors) {
-		if (strlen($SpecialInstructions)>256) {
+		if (mb_strlen($SpecialInstructions)>256) {
 			$Errors[$i] = InvalidSpecialInstructions;
 		}
 		return $Errors;
@@ -229,7 +229,7 @@
 
 /* Check that the customer branch code only has 30 or fewer characters */
 	function VerifyCustBranchCode($CustBranchCode, $i, $Errors) {
-		if (strlen($CustBranchCode)>30) {
+		if (mb_strlen($CustBranchCode)>30) {
 			$Errors[$i] = InvalidCustBranchCode;
 		}
 		return $Errors;
@@ -248,13 +248,6 @@
 		$Errors=VerifyBranchDebtorExists($BranchDetails['debtorno'], sizeof($Errors), $Errors, $db);
 		$Errors=VerifyBranchNo($BranchDetails['debtorno'], $BranchDetails['branchcode'], sizeof($Errors), $Errors, $db);
 		$Errors=VerifyBranchName($BranchDetails['brname'], sizeof($Errors), $Errors, $db);
-		if ($BranchDetails['branchcode']!='CASH') {
-			$sql="SELECT salestype FROM debtorsmaster WHERE debtorno='" . $BranchDetails['branchcode'] . "'";
-			$return=DB_query($sql, $db);
-			$myrow=DB_fetch_array($return);
-			$sql="UPDATE debtorsmaster SET salestype='".$myrow['salestype']."' WHERE debtorno='".$BranchDetails['debtorno']."'";
-			$return=DB_query($sql, $db);
-		}
 		if (isset($BranchDetails['address1'])){
 			$Errors=VerifyBranchAddressLine($BranchDetails['address1'], 40, sizeof($Errors), $Errors, $db);
 		}
@@ -352,8 +345,8 @@
 			$FieldNames.=$key.', ';
 			$FieldValues.='"'.$value.'", ';
 		}
-		$sql = "INSERT INTO custbranch (".substr($FieldNames,0,-2).") ".
-		  "VALUES (".substr($FieldValues,0,-2).") ";
+		$sql = 'INSERT INTO custbranch ('.mb_substr($FieldNames,0,-2).') '.
+		  'VALUES ('.mb_substr($FieldValues,0,-2).') ';
 		if (sizeof($Errors)==0) {
 			$result = DB_Query($sql, $db);
 			if (DB_error_no($db) != 0) {
@@ -471,11 +464,11 @@
 			$FieldNames.=$key.', ';
 			$FieldValues.='"'.$value.'", ';
 		}
-		$sql="UPDATE custbranch SET ";
+		$sql='UPDATE custbranch SET ';
 		foreach ($BranchDetails as $key => $value) {
 			$sql .= $key.'="'.$value.'", ';
 		}
-		$sql = substr($sql,0,-2)." WHERE debtorno='".$BranchDetails['debtorno']."'
+		$sql = mb_substr($sql,0,-2)." WHERE debtorno='".$BranchDetails['debtorno']."' 
                                    AND branchcode='".$BranchDetails['branchcode']."'";
 		if (sizeof($Errors)==0) {
 			$result = DB_Query($sql, $db);
@@ -502,7 +495,7 @@
 			$Errors[0]=NoAuthorisation;
 			return $Errors;
 		}
-		$sql = "SELECT branchcode FROM custbranch
+		$sql = "SELECT branchcode FROM custbranch 
                 WHERE debtorno = '" . $DebtorNumber . "'";
 		$result = api_DB_query($sql, $db);
 		if (DB_error_no($db) != 0)
@@ -517,7 +510,7 @@
 		return  $Errors;
  }
 /* This function takes a debtorno and branch code and returns an associative array containing
-   the database record for that branch. If the debtor/branch code does not exist
+   the database record for that branch. If the debtor/branch code doesn't exist
    then it returns an $Errors array.
 */
 	function GetCustomerBranch($DebtorNumber, $BranchCode, $user, $password) {
@@ -531,8 +524,8 @@
 		if (sizeof($Errors)!=0) {
 			return $Errors;
 		}
-		$sql="SELECT * FROM custbranch
-                     WHERE debtorno='".$DebtorNumber."'
+		$sql="SELECT * FROM custbranch 
+                     WHERE debtorno='".$DebtorNumber."' 
                      AND branchcode='".$BranchCode."'";
 		$result = api_DB_Query($sql, $db);
 		if (DB_error_no($db) != 0 ) {
