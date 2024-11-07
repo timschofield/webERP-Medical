@@ -1,26 +1,26 @@
 <br /><br />
-<h1><a name="CreatingNewSystem">Ein neues System einrichten</a></h1>
+<a name="CreatingNewSystem"><font size="+3"><b>Ein neues System einrichten</b></font></a>
 <br /><br />
-<h2>Das Demosystem erproben</h2>
+<font size="+2"><b>Das Demosystem erproben</b></font>
 <br /><br />
 Das Demosystem hat bereits erfasste Spiel-Daten, so dass die Funktionen des Systems ausprobiert werden können, ohne dass alle Daten zunächst erst angelegt werden müssen. Sie brauchen nur die vorhandenen Funktionen auf der Grundlage der gebotenen Demo-Daten untersuchen. Es sind bereits eine Reihe von Grunddaten eingerichtet, die festlegen, wie das System funktioniert. Diese Grunddaten sind sowohl im Register Einstellungen im Hauptmenü als auch in der Datei config.php eingepflegt. Um mit dem Demosystem zu arbeiten, ist es nicht notwendig, diese zu ändern, die Angaben für die Datenbankverbindung sind in der Datei config.php gesichert. Diese Datei liegt im Hauptverzeichnis für die Skripte und enthält insbesondere die Verbindungsparameter für die Datenbank und die Art der Datenbank (gegenwärtig werden MySQL und PostgreSQL unterstützt). Außerdem sind einige Parameter für die Sitzungen und Fehlermeldungen in dieser Datei eingestellt, Sie können diese Einstellungen in den meisten Fällen einfach übernehmen.
 <br /><br />
 
 <!-- Help Begin: CompanyPreferences -->
 
-<h2>Einen Mandanten einrichten</h2>
+<font size="+2"><b>Einen Mandanten einrichten</b></font>
 <br /><br />
-<h2>Das Firmenlogo</h2>
+<font size="+2"><b>Das Firmenlogo</b></font>
 <br /><br />
 Damit auf jedem Bildschirm das Firmenlogo dargestellt werden kann, muss es als .jpg-Datei logo.jpg im Verzeichnis companies/mandantenname/ albgelegt werden. webERP erlaubt unter einer Installation mit denselben Skripten mehrere Mandanten, deren Konfiguration in jeweils einer eigenen Datenbank abgelegt wird. Mit dem Namen des Mandanten existiert sowohl eine Datenbank als auch ein Unterverzeichnis unter dem Verzeichnis companies/. Für das Logo werden Leserechte für den Benutzer benötigt, unter dem der Webserver läuft (Apache unter Linux läuft normalerweise als "nobody"). Bei Windowsinstallationen ist das natürlich kein Thema.
 <br /><br />
-<h2>Der Kontenplan</h2>
+<font size="+2"><b>Der Kontenplan</b></font>
 <br /><br />
 Im System ist bereits ein Kontenplan eingerichtet. In den meisten Fällen wird ein  Unternehmen jedoch mit dem Kontenplan arbeiten wollen, den es schon immer verwendet hat. Die Pflege des Kontenplanes - das Hinzufügen neuer Konten und das Löschen der nicht mehr benötigten Konten - erfolgt aus dem Hauptmenü unter Hauptbuchhaltung. Das ist der Startpunkt beim Einrichten eines neuen Mandanten. Wenn die Funktionen zur Hauptbuchintegration eingesetzt werden sollen, ist das Einrichten des Kontenplanes notwendigerweise der erste Schritt. Wenn ein Hauptbuchkonto erst einmal bebucht ist, kann es nicht wieder gelöscht werden. 
 <br /><br />
 In der Hauptbuchhaltung gibt es eine Hierarchie Kontenbereich &rarr; Kontengruppe &rarr; Sachkonto. Die Sachkonten - der Kontenplan, die Kontengruppen und Kontenbereiche können aus dem Hauptmenü unter Hauptbuchhaltung &rarr; Einstellungen gepflegt werden. Es ist wichtig, den Kontenplan richtig einzustellen, bevor die ersten Buchungen vorgenommen werden, weil das Änderungen am Kontenplan erschwert. Sie können keine Konten löschen, wenn schon Buchungen darauf vorgenommen wurden.
 <br /><br />
-<h2>Unternehmenseinstellungen</h2>
+<font size="+2"><b>Unternehmenseinstellungen</b></font>
 <br /><br />
 Die Unternehmenseinstellungen müssen über Hauptmenü &rarr; Einstellungen &rarr; Allgemeines &rarr; Unternehmenseinstellungen korrekt eintgestellt werden. Die meisten dieser Parameter sind selbsterläuternd. Firmenname, Betriebsnummer, Postanschrift, Besucheranschrift usw., ebenso Telefonnummern und die Hauswährung. Wenn die Hauswährung noch nicht existiert, gehen Sie in die Währungspflege, wo Sie neue Währungen anlegen und die Kurse eintragen können. Achten Sie darauf, dass Sie für die Währung, die Sie als Hauswährung verwenden wollen, den Kurs 1 eintragen.
 <br /><br />
@@ -55,11 +55,11 @@ Falls entsprechende Konten nicht eingetragen wurden, legt das System automatisch
 <!-- Help End: CompanyPreferences -->
 
 <!-- Help Begin: SystemConfiguration -->
-<h2>Systemeinstellungen</h2>
+<font size="+2"><b>Systemeinstellungen</b></font>
 <br /><br />
 Dieser Bereich kann über Hauptmenü &rarr; Einstellungen &rarr; Allgemeines &rarr; Systemeinstellungen aufgerufen werden. Die Erläuterungen an der Seite sollen dem Benutzer eine Vorstellung davon geben, wozu jeder Parameter gut ist.
 <br /><br />
-<table border="1" width="100%">
+<table border=1 width=100%>
 <tr><th>Parameter</th><th>Beschreibung</th></tr>
 <tr><td>Vorgabe-Datumsformat (für die Eingabe und die Darstellung in Berichten)</td><td>Das übliche Datumsformat ist d/m/Y für Großbritannien/Australien/Neuseeland und m/d/Y für USA und Kanada</td></tr>
 <tr><td>Vorgabe-Layout für neue Benutzer</td><td>Das Vorgabe-Layout wird für neue Benutzer verwendet, die sich noch kein eigenes Layout ausgewählt haben</td></tr>
@@ -139,7 +139,7 @@ Wikis sind ein Vorteil für ein verzweigtes Unternehmen, sie sind nicht sinnvoll 
 
 <!-- Help Begin: BaseInformation -->
 
-<h2>Erforderliche Grunddaten</h2>
+<font size="+2"><b>Erforderliche Grunddaten</b></font>
 <br /><br />
 Bevor Kunden angelegt werden können, müssen einige Grunddaten eingerichtet werden, alle diese Einstellungen werden im Hauptmenü unter Einstellungen &rarr; Allgemeines &rarr; Systemeinstellungen vorgenommen.
 <br /><br />
@@ -164,7 +164,7 @@ Wenn Sie diese Grundeinstellungen vorgenommen haben, kann die Sache mit dem Anle
 <br /><br />
 Datenbankanwendungen, Excel-Tabellen oder Exportdateien im CSV-Format können auch verwendet werden, diese Daten zu übernehmen. Wenn Sie MS Access verwenden, installieren Sie einen ODBC-Treiber für MySQL auf dem Rechner installiert, auf dem Sie Access installiert ist und binden die Tabellen DebtorsMaster und CustBranch in eine leere Access-Datenbank ein. Die CSV-Datei oder die Tabelle wird in die Access-Datenbank impeortiert und mit einer Aktualisierungsabfrage werden die Quellfelder auf die Tabellen DebtorsMaster und/oder CustBranch abgebildet. Zu einem Stammsatz in DebtorsMaster können viele Niederlassungssätze in CustBranch gehören. Diese Vorgehensweise ist in dem Sinne "gefährlich", dass Sie sicherstellen müssen, dass keine Kunden- oder Niederlassungssätze in den oben beschriebenen Grunddaten auf nicht existiernde Werte verweisen.
 <br /><br />
-<h3>Materialien einrichten</h3>
+<font size="+1"><b>Materialien einrichten</b></font>
 <br /><br />
 Bevor Materialstammsätze eingerichtet werden können, sind wiederum einige Grunddaten erforderlich.
 <br /><br />
@@ -174,13 +174,13 @@ Bevor Materialstammsätze eingerichtet werden können, sind wiederum einige Grundd
 </ul>
 Für die Unterscheidung der verschiedenen Materialien ist die Materialart wichtig, diese dienen der Unterscheidung, welche Daten für ein Material erfasst werden müssen bzw. können. Es gibt die Unterscheidung Kaufteile, Eigenfertigung, Bestellsatz, Sammelmaterial und Dummymaterial. Letzteres bekommt keine Bestandsdaten und wird für Dienstleistungen und Arbeitsstunden verwendet. 
 <br /><br />
-<h3>Materialbestände einpflegen</h3>
+<font size="+1"><b>Materialbestände einpflegen</b></font>
 <br /><br />
 Wenn die Informationen über die Bestandsmaterialien - und logischerweise zuvor die Grunddaten - alle erfasst wurden (zweckmäßigerweise alle im Voraus), müssen die Bestandssalden für jede lagernde Betriebsstätte mit dem Skript für Bestandskorrekturen unter Hauptmenü &rarr; Bestandsführung &rarr; Vorgänge erfasst werden.
 <br /><br />
 Die Integration der Bestandsführung mit der Hauptbuchhaltung muss zu diesem Zeitpunkt noch ausgeschaltet bleiben, die Bestände auf dem Materialbestandskonto durch werden später eine manuelle Buchung in der Hauptbuchhaltung gesetzt. Die Abstimmung mit dem Bestandsbewertungsbericht muss vorher nachweisen, dass die Standardkosten und Mengen für jedes einzelne Material und die Summe der Bestände für alle Lagerorte stimmen. 
 <br /><br />
-<h3>Problematik der Integration der Bestandsführung mit dem Hauptbuch</h3>
+<font size="+1"><b>Problematik der Integration der Bestandsführung mit dem Hauptbuch</b></font>
 <br /><br />
 Wenn die Abstimmung der Bestandskonten im Finanzwesenmodul mit dem Materialbewerungsbericht übereinstimmt, kann der Schalter Lagerbestandsvorgänge im Hauptbuch mitbuchen wieder eingeschaltet werden. Warenbewegungen werden ab diesem Zeitpunkt automatisch in Hauptbuchbelegen dargestellt. Die Salden der Materialbestandskonten sollte dann immer mit dem im Materialbewertungsbericht übereinstimmen, vorausgesetzt, es werden keine manuellen Buchungen mehr auf diese Konten vorgenommen.
 <br /><br />
@@ -192,29 +192,29 @@ Zweitens erlaubt die Integration mit der Bestandsführung die automatische Erstel
 <br /><br />
 Es ist nicht notwendig, die Integration der Warenwirtschaft zum Hauptbuch zu verwenden, dennoch stellt eine Vollkostenrechnung zu Standardkosten mit voller Hauptbuchintegration das diskutierbar schnellste und informativste Finanzberichtensystem für Hersteller zur Verfügung.
 <br /><br />
-<h3>Problematik der Umsatz- / Debitoren-Integration mit dem Hauptbuch</h3>
+<font size="+1"><b>Problematik der Umsatz- / Debitoren-Integration mit dem Hauptbuch</b></font>
 <br /><br />
 Eine gewisse Flexibilität ist in der Art und Weise vorhanden, wie Verkaufstransaktionen in das Hauptbuch gebucht werden. Unterschiedliche Erlöskonten können in Abhängigkeit von jeder Kombination von Vertriebsbereich des Kunden, Umsatzart und der Warengruppe des verkauften Produktes. Ehe irgendwelche Verkäufe erfasst werden können, ist es wichtig, dass die notwendigen Kontenfindungen unter Hauptmenü &rarr; Einstellungen &rarr; Debitoren/Kreditoren für die Umsatzerlöse und ebenso für die Herstellkosten des Umsatzes ( die natürlich nur bebucht werden, wenn die Integration der Bestandsführung eingeschaltet ist) eingerichtet werden. Wenn letztere dann eingeschaltet wird, so ist es entscheidend, die Einstellungen für die Konten der Herstellkosten des Umsatzes richtig konfiguriert zu haben. 
 <br /><br />
-<h3>Steuern</h3>
+<font size="+1"><b>Steuern</b></font>
 <br /><br />
 Steuern müssen eingerichtet werden. Unter Hauptmenü &rarr; Einstellungen &rarr; Allgemeines finden Sie Steuergruppen pflegen, Steuerregelungen pflegen, Steuerkategorien pflegen und Steuerschlüssel und Prozentsätze pflegen. Bevor Sie die Kundenniederlassungen pflegen können, müssen Sie die Steuergruppe dazu angelegt haben - Die Steuergruppe gibt die Steuerschlüssel an, nach denen bei Verkäufen an diese Niederlassung Steuern abzuführen sind. In einer Steuergruppe kann eine beliebige Anzahl von Steuerschlüsseln enthalten sein. Die Steuerkategorie muss in der Einstellung des Materialstammes eingetragen werden. Bestimmte Materialien werden zu einem ermäßigten Steuersatz verkauft, und das wird über die Steuerkategorie hinterlegt. Es können so viele Steuerkategorien angelegt werden,wie benötigt. Weiter Informationen finden Sie im gesonderten Kapitel über Steuerberechnungen.
 <br /><br />
-<h3>Kundenstammdaten erfassen</h3>
+<font size="+1"><b>Kundenstammdaten erfassen</b></font>
 <br /><br />
 Es können so viele Kundenniederlassungen wie nötig eingerichtet werden, es empfiehlt sich diese für alle Kundenkontakte zu verwenden, auch wenn die Niederlassung selbst keine Rechnungen bekommt. Deswegen werden alle Kontakte zu der jeweiligen Kundennummer geführt, zu der sie gehören. Jede Niederlassung wird einem Vertriebsbereich und einem Verkäufer zugeordnet. Die Vertriebsbereiche sind die zum Zwecke der Umsatzauswertung definierten Regionen. Sowohl Vertriebsbereiche als auch Verkäufer werden unter Hauptmenü &rarr; Einstellungen &rarr; Debitoren/Kreditoren eingerichtet.
 <br /><br />
-<h3>Kundensalden aufnehmen</h3>
+<font size="+1"><b>Kundensalden aufnehmen</b></font>
 <br /><br />
 Die Debitorenbuchhaltung ist eine Kontokorrentbuchhaltung, bei der jede einzelne Rechnung als offener Posten erfasst werden muss, um schließlich den Kontensaldo zu bilden. Das mag für ein Unternehmen, das zuvor mit Bestandskonten für die Debitoren gearbeitet hat, eine abschreckende Aufgabe sein. Die zusätzlichen Informationen, die ein solches System bietet, insbesondere geringerer Abstimmungsaufwand am Monatsende für Kunden, die den Überblicke verloren haben, wofür sie schon bezahlt haben, wird die am Anfang notwendige Arbeit mehr als kompensieren. Bei offenen Posten müssen eingehende Zahlungen den offenen Rechnungen zugeordnet werden, sie werden ausgeglichen bzw. ausgeziffert.
 <br /><br />
 Im Idealfall werden die Eröffungsbuchungen zu einem Monatsende eingegeben. Damit können die Eröffnungsbuchungen eindeutig einer Periode zugeordnet werden, in der keine normale Geschäftstätigkeit gebucht wird. Der erste Schritt ist, dass die Hauptbuchintegration ausgeschaltet wird, während die bereits vorhandenen offenen Posten erfasst werden, um zu verhindern, dass gleichzeitig Hauptbuchbelege gebucht werden. Es wird empfohlen, dass für den Monat vor der Inbetriebnahme Abstimmungen für alle Kunden im Altsystem erzeugt werden - wenn es ein Offene-Posten-System ist, wird ein Kontoauszug alle erforderlichen Informationen liefern. Alle offenen Rechnungen (und Gutschriften) müssen eingegeben werden, die zusammen den Kontensaldo ergeben, wobei derselbe Kurs verwendet wird, mit dem die Rechnung ursprünglich erfasst wurde. Es wird empfohlen, das originale Buchungsdatum zu verwenden und die ursprüngliche Rechnungsnummer irgendwo mit zu vermerken, damit eine Zuordnung des Vorganges erhalten bleibt.
 <br /><br />
-<h3>Das Sammelkonto für Debitorenforderungen</h3>
+<font size="+1"><b>Das Sammelkonto für Debitorenforderungen</b></font>
 <br /><br />
 Es ist wichtig zu prüfen, dass die Salden über alle Kunden in der gerasterten Kundensaldenliste mit dem Saldo des Sammelkontos im Altsystem übereinstimmt, und zwar sowohl in der Hauswährung als auch in der Fremdwährung. Der Saldo im Hauptbuch (über alle Debitorenkonten) wird als manuelle Sachkontenbuchung erfasst, der Betrag muss dem Saldo auf der Kundensaldenliste übereinstimmen. Natürlich kann es passieren, dass bei Belegen in Fremdwährung abweichende Hauswährungsbeträge af Grund von Kursdifferenzen vorkommen weil der Kurs zum Zeitpunkt der Belegerfassung ein anderer war. Es gibt eine Möglichkeit, den Wert der Fremdwährungssalden zu dem Kurs anzuzeigen, der bei der Belegerfassung verwendet wurde, das ist das Skript Z_CurrencyDebtorBalances.php. Ein entsprechendes Werkzeug stehr auch für Kreditorensalden zur Verfügung. Bevor das System in Betrieb genommen wird, sollte Konto für Konto eine doppelte Prüfung erfolgen. Wenn dann endlich allen Debitorenkonten abgestimmt und die Forderungssalden im Hauptbuch gebucht sind, kann die Debitoren-Integration im Bild Unternehmenseinstellungen wieder eingestellt werden. Das System führt dann die Salden auf dem Sammelkonto für Debitorenforderungen immer automatisch auf der Summe der Debitorensalden fort.
 <br /><br />
-<h3>Bankkontensalden und Salden anderer Hauptbuchkonten</h3>
+<font size="+1"><b>Bankkontensalden und Salden anderer Hauptbuchkonten</b></font>
 <br /><br />
 Das Hauptbuch ist die zentrale Stelle der Buchhaltung, deswegen ist ein Verständnis der Buchhaltungsbegriffe wichtig für das Begreifen, was notwendig ist, um webERP ordnungsgemäß einzurichten. Dies kann keine Abhandlung über allgemeine Buchführung sein, aber eine kurze Einführung ist notwendig.
 <br /><br />
@@ -275,7 +275,7 @@ Wenn mehrere Bankkonten mit unterschiedlichen Sachkonten definiert sind, werden 
 <br /><br />
 Es ist wichtig, dass die Salden der Sammelkonten für Debitorenforderungen und Kreditorenverbindlichkeiten mit der Summe der Nebenbücher in der Hauswährung übereinstimmen.
 <br /><br />
-<h3>Zum Schluss</h3>
+<font size="+1"><b>Zum Schluss</b></font>
 <br />
 Wenn alle Buchungen vorgenommen wurden und die Zahlen abgestimmt sind, sollte das System erst einmal gesichert werden. Das MySQL-Werkzeug mysqldump ist eine Möglichkeit, mit der ein SQL-Skript erstellt wird, das die Datenbank in dem Zustand, wie sie zum Zeitpunkt der Skripterstellung war wiederhergestellt werden kann. Wenn keine Benutzer im System angemeldet sind, damit Sperrprobleme vermieden werden, und unter der Annahme das mysqldump im Pfad verfügbar ist, lautet der Befehl:
 <br /><br />

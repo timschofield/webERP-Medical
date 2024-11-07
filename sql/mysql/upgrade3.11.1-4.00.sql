@@ -1,3 +1,4 @@
+SET FOREIGN_KEY_CHECKS=0;
 ALTER TABLE accountgroups CONVERT TO CHARACTER SET utf8;
 ALTER TABLE accountsection CONVERT TO CHARACTER SET utf8;
 ALTER TABLE areas  CONVERT TO CHARACTER SET utf8;
@@ -576,7 +577,7 @@ INSERT INTO `scripts` (`script`, `pagesecurity`, `description`) VALUES
 ('Locations.php', 11, 'Defines the inventory stocking locations or warehouses'),
 ('Logout.php', 1, 'Shows when the user logs out of webERP'),
 ('MailInventoryValuation.php', 1, 'Meant to be run as a scheduled process to email the stock valuation off to a specified person. Creates the same stock valuation report as InventoryValuation.php'),
-('ManualContents.php', 10, ''),
+('ManualContents.php', 1, ''),
 ('MenuAccess.php', 15, ''),
 ('MRP.php', 9, ''),
 ('MRPCalendar.php', 9, ''),
@@ -801,11 +802,57 @@ INSERT INTO `scripts` (`script`, `pagesecurity`, `description`) VALUES
 ('Z_UploadResult.php', 15, 'Utility to upload a file to a remote server');
 
 INSERT INTO config (confname, confvalue) VALUES ('VersionNumber', '3.12.0');
-UPDATE config SET confvalue='4.0' WHERE confname='VersionNumber';
+UPDATE config SET confvalue='3.12.1' WHERE confname='VersionNumber';
 
 INSERT INTO `scripts` (`script`, `pagesecurity`, `description`) VALUES
 ('FormMaker.php', 1, 'Allows running user defined Forms'),
 ('ReportMaker.php', 1, 'Produces reports from the report writer templates created'),
 ('ReportCreator.php', 13, 'Report Writer and Form Creator script that creates templates for user defined reports and forms');
 UPDATE config SET confvalue='3.12.2' WHERE confname='VersionNumber';
-UPDATE prices SET enddate = '2030-01-01' WHERE enddate = '0000-00-00';
+ALTER TABLE `purchorderdetails` CHANGE `nw` `netweight` VARCHAR( 50 )  DEFAULT '';
+ALTER TABLE `purchorderdetails` CHANGE `gw` `kgs` VARCHAR( 50 )  DEFAULT '';
+ALTER TABLE `purchorderdetails` ADD `conversionfactor` DOUBLE NOT NULL DEFAULT '1';
+UPDATE config SET confvalue='3.12.3' WHERE confname='VersionNumber';
+ALTER TABLE `purchorderdetails` CHANGE `uom` `suppliersunit` VARCHAR( 50 );
+UPDATE config SET confvalue='3.12.31' WHERE confname='VersionNumber';
+INSERT INTO config (`confname`, `confvalue`) VALUES ('AutoAuthorisePO', '1');
+UPDATE config SET confvalue='4.03' WHERE confname='VersionNumber';
+ALTER TABLE `salesorders` ADD `poplaced` TINYINT NOT NULL DEFAULT '0',
+ADD INDEX ( `poplaced` );
+UPDATE config SET confvalue='4.03.1' WHERE confname='VersionNumber';
+
+CREATE TABLE IF NOT EXISTS `fixedassetlocations` (
+  `locationid` char(6) NOT NULL DEFAULT '',
+  `locationdescription` char(20) NOT NULL DEFAULT '',
+  `parentlocationid` char(6) DEFAULT '',
+  PRIMARY KEY (`locationid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+INSERT INTO `fixedassetlocations` (`locationid`, `locationdescription`, `parentlocationid`) VALUES
+('HEADOF', 'Head Office', '');
+UPDATE config SET confvalue='4.03.2' WHERE confname='VersionNumber';
+ALTER TABLE locations ADD cashsalebranch varchar(10) DEFAULT '';
+ALTER TABLE `locations` CHANGE `cashsalecustomer` `cashsalecustomer` VARCHAR( 10 ) DEFAULT '';
+UPDATE config SET confvalue='4.03.3' WHERE confname='VersionNumber';
+INSERT INTO `scripts` (`script`, `pagesecurity`, `description`) VALUES ('Z_ChangeSupplierCode.php', '15', 'Script to change a supplier code accross all tables necessary');
+UPDATE config SET confvalue='4.03.5' WHERE confname='VersionNumber';
+INSERT INTO `scripts` (`script` ,`pagesecurity` ,`description`) VALUES ( 'ReprintGRN.php', '11', 'Allows selection of a goods received batch for reprinting the goods received note given a purchase order number');
+UPDATE config SET confvalue='4.03.6' WHERE confname='VersionNumber';
+ALTER TABLE `paymentmethods` ADD `usepreprintedstationery` TINYINT NOT NULL DEFAULT '0';
+DELETE FROM scripts WHERE script='PDFStockTransListing.php';
+INSERT INTO scripts (`script` ,`pagesecurity` ,`description`) VALUES('PDFPeriodStockTransListing.php','3','Allows stock transactions of a specific transaction type to be listed over a single day or period range');
+UPDATE config SET confvalue='4.03.7' WHERE confname='VersionNumber';
+ALTER TABLE `purchorderdetails`
+  DROP `itemno`,
+  DROP `subtotal_amount`,
+  DROP `package`,
+  DROP `pcunit`,
+  DROP `kgs`,
+  DROP `cuft`,
+  DROP `total_quantity`,
+  DROP `netweight`,
+  DROP `total_amount`;
+  UPDATE purchdata INNER JOIN unitsofmeasure  ON purchdata.suppliersuom=unitsofmeasure.unitid SET suppliersuom = unitsofmeasure.unitname;
+UPDATE config SET confvalue='4.03.8' WHERE confname='VersionNumber';
+SET FOREIGN_KEY_CHECKS=1;

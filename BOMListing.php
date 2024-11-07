@@ -1,16 +1,13 @@
 <?php
 
-/* $Id$*/
 
-/* $Revision: 1.14 $ */
+include('includes/session.php');
 
-include('includes/session.inc');
-
-if (isset($_POST['PrintPDF'])
+If (isset($_POST['PrintPDF'])
 	AND isset($_POST['FromCriteria'])
-	AND strlen($_POST['FromCriteria'])>=1
+	AND mb_strlen($_POST['FromCriteria'])>=1
 	AND isset($_POST['ToCriteria'])
-	AND strlen($_POST['ToCriteria'])>=1){
+	AND mb_strlen($_POST['ToCriteria'])>=1){
 
 	include('includes/PDFStarter.php');
 	$pdf->addInfo('Title',_('Bill Of Material Listing'));
@@ -19,52 +16,52 @@ if (isset($_POST['PrintPDF'])
 	$PageNumber=0;
 	$line_height=12;
 
-		/*Now figure out the bills to report for the part range under review */
+      /*Now figure out the bills to report for the part range under review */
 	$SQL = "SELECT bom.parent,
-					bom.component,
-					stockmaster.description as compdescription,
-					stockmaster.decimalplaces,
-					bom.quantity,
-					bom.loccode,
-					bom.workcentreadded,
-					bom.effectiveto AS eff_to,
-					bom.effectiveafter AS eff_frm
-				FROM stockmaster
-				INNER JOIN bom
-					ON stockmaster.stockid=bom.component
-				WHERE bom.parent >= '" . $_POST['FromCriteria'] . "'
-					AND bom.parent <= '" . $_POST['ToCriteria'] . "'
-					AND bom.effectiveto >= NOW() AND bom.effectiveafter <= NOW()
-				ORDER BY
-					bom.parent,
+				bom.component,
+				stockmaster.description as compdescription,
+				stockmaster.decimalplaces,
+				stockmaster.units,
+				bom.quantity,
+				bom.loccode,
+				bom.workcentreadded,
+				bom.effectiveto AS eff_to,
+				bom.effectiveafter AS eff_frm
+			FROM stockmaster INNER JOIN bom
+			ON stockmaster.stockid=bom.component
+			INNER JOIN locationusers ON locationusers.loccode=bom.loccode AND locationusers.userid='" .  $_SESSION['UserID'] . "' AND locationusers.canview=1
+			WHERE bom.parent >= '" . $_POST['FromCriteria'] . "'
+			AND bom.parent <= '" . $_POST['ToCriteria'] . "'
+			AND bom.effectiveto > '" . date('Y-m-d') . "' AND bom.effectiveafter <= '" . date('Y-m-d') . "'
+			ORDER BY bom.parent,
 					bom.component";
 
-	$BOMResult = DB_query($SQL,$db,'','',false,false); //dont do error trapping inside DB_query
+	$BOMResult = DB_query($SQL,'','',false,false); //dont do error trapping inside DB_query
 
-	if (DB_error_no($db) !=0) {
-		$title = _('Bill of Materials Listing') . ' - ' . _('Problem Report');
-		include('includes/header.inc');
-		prnMsg(_('The Bill of Material listing could not be retrieved by the SQL because'),'error');
-		echo '<br /><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
-		if ($debug==1){
-			echo '<br />' . $SQL;
-		}
-		include('includes/footer.inc');
-		exit;
+	if (DB_error_no() !=0) {
+	   $Title = _('Bill of Materials Listing') . ' - ' . _('Problem Report');
+	   include('includes/header.php');
+	   prnMsg(_('The Bill of Material listing could not be retrieved by the SQL because'),'error');
+	   echo '<br /><a href="' .$RootPath .'/index.php">' . _('Back to the menu') . '</a>';
+	   if ($debug==1){
+	      echo '<br />' . $SQL;
+	   }
+	   include('includes/footer.php');
+	   exit;
 	}
 	if (DB_num_rows($BOMResult)==0){
-		$title = _('Bill of Materials Listing') . ' - ' . _('Problem Report');
-		include('includes/header.inc');
-		prnMsg( _('The Bill of Material listing has no bills to report on'),'warn');
-		include('includes/footer.inc');
-		exit;
+	   $Title = _('Bill of Materials Listing') . ' - ' . _('Problem Report');
+	   include('includes/header.php');
+	   prnMsg( _('The Bill of Material listing has no bills to report on'),'warn');
+	   include('includes/footer.php');
+	   exit;
 	}
 
 	include ('includes/PDFBOMListingPageHeader.inc');
 
 	$ParentPart = '';
 
-	while ($BOMList = DB_fetch_array($BOMResult,$db)){
+	while ($BOMList = DB_fetch_array($BOMResult)){
 
 		if ($ParentPart!=$BOMList['parent']){
 
@@ -76,9 +73,9 @@ if (isset($_POST['PrintPDF'])
 				$YPos -=$line_height;
 			}
 			$SQL = "SELECT description FROM stockmaster WHERE stockmaster.stockid = '" . $BOMList['parent'] . "'";
-			$ParentResult = DB_query($SQL,$db);
+			$ParentResult = DB_query($SQL);
 			$ParentRow = DB_fetch_row($ParentResult);
-				  $LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,400-$Left_Margin,$FontSize,$BOMList['parent'] . ' - ' . $ParentRow[0],'left');
+			$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,400-$Left_Margin,$FontSize,$BOMList['parent'] . ' - ' . $ParentRow[0],'left');
 			$ParentPart = $BOMList['parent'];
 		}
 
@@ -87,48 +84,63 @@ if (isset($_POST['PrintPDF'])
 		$LeftOvers = $pdf->addTextWrap($Left_Margin+5,$YPos,80,$FontSize,$BOMList['component'],'left');
 		$LeftOvers = $pdf->addTextWrap(110,$YPos,200,$FontSize,$BOMList['compdescription'],'left');
 
-		$DisplayQuantity = number_format($BOMList['quantity'],$BOMList['decimalplaces']);
+		$DisplayQuantity = locale_number_format($BOMList['quantity'],$BOMList['decimalplaces']);
 		$LeftOvers = $pdf->addTextWrap(320,$YPos,50,$FontSize,ConvertSQLDate($BOMList['eff_frm']),'left');
-		$LeftOvers = $pdf->addTextWrap(370,$YPos,50,$FontSize,ConvertSQLDate($BOMList['eff_to']),'left');
-		$LeftOvers = $pdf->addTextWrap(420,$YPos,20,$FontSize,$BOMList['loccode'],'left');
-		$LeftOvers = $pdf->addTextWrap(440,$YPos,30,$FontSize,$BOMList['workcentreadded'],'left');
+		$LeftOvers = $pdf->addTextWrap(375,$YPos,50,$FontSize,ConvertSQLDate($BOMList['eff_to']),'left');
+		$LeftOvers = $pdf->addTextWrap(430,$YPos,30,$FontSize,$BOMList['loccode'],'left');
+		$LeftOvers = $pdf->addTextWrap(465,$YPos,30,$FontSize,$BOMList['workcentreadded'],'left');
 		$LeftOvers = $pdf->addTextWrap(480,$YPos,60,$FontSize,$DisplayQuantity,'right');
+		$LeftOvers = $pdf->addTextWrap(540,$YPos,20,$FontSize,$BOMList['units'],'left');
 
 		if ($YPos < $Bottom_Margin + $line_height){
-			include('includes/PDFBOMListingPageHeader.inc');
+		   include('includes/PDFBOMListingPageHeader.inc');
 		}
 
 	} /*end BOM Listing while loop */
 
 	$YPos -=$line_height;
 	$pdf->line($Page_Width-$Right_Margin, $YPos,$Left_Margin, $YPos);
-	  $pdf->OutputD($_SESSION['DatabaseName'] . '_BOMListing_' . date('Y-m-d').'.pdf');//UldisN
-	 $pdf->__destruct(); //UldisN
+
+    $pdf->OutputD($_SESSION['DatabaseName'] . '_BOMListing_' . date('Y-m-d').'.pdf');
+    $pdf->__destruct();
 
 } else { /*The option to print PDF was not hit */
 
-	$title=_('Bill Of Material Listing');
-	include('includes/header.inc');
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/reports.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p><br />';
-	if (!isset($_POST['FromCriteria']) or !isset($_POST['ToCriteria'])) {
+	$Title=_('Bill Of Material Listing');
+
+	$ViewTopic = 'Manufacturing';
+	$BookMark = '';
+
+	include('includes/header.php');
+	echo '<p class="page_title_text"><img src="'.$RootPath.'/css/'.$Theme.'/images/reports.png" title="' . _('Search') .
+		'" alt="" />' . ' ' . $Title . '</p>';
+	if (!isset($_POST['FromCriteria']) || !isset($_POST['ToCriteria'])) {
 
 	/*if $FromCriteria is not set then show a form to allow input	*/
 
-		echo '<form action=' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . ' method="post">';
-		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
+		echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '" method="post">
+              <input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />
+			  <fieldset>
+				<legend>', _('Report Criteria'), '</legend>';
 
-		echo '<table class="selection">
-				<tr>
-					<td>' . _('From Inventory Part Code') . ':' . '</font></td><td><input tabindex="1" type="text" name="FromCriteria" size="20" maxlength="20" value="1" /></td>
-				</tr>';
+		echo '<field>
+				<label for="FromCriteria">' . _('From Inventory Part Code') . ':' . '</label>
+				<input tabindex="1" type="text" autofocus="autofocus" required="required" data-type="no-illegal-chars" title="" name="FromCriteria" size="20" maxlength="20" value="1" />
+				<fieldhelp>' . _('Enter the lowest alpha code of parent bom items to list the bill of material for') .  '</fieldhelp>
+			</field>';
 
-		echo '<tr><td>' . _('To Inventory Part Code') . ':' . '</td><td><input tabindex="2" type="text" name="ToCriteria" size="20" maxlength="20" value="zzzzzzz" /></td></tr>';
+		echo '<field>
+				<label for="ToCriteria">' . _('To Inventory Part Code') . ':' . '</label>
+				<input tabindex="2" type="text" required="required" data-type="no-illegal-chars" title="" name="ToCriteria" size="20" maxlength="20" value="zzzzzzz" />
+				<fieldhelp>' . _('Enter the end alpha numeric code of any parent bom items to list the bill of material for') .  '</fieldhelp>
+			</field>';
 
 
-		echo '</table><br /><div class="centre"><button tabindex="3" type="submit" name="PrintPDF">' . _('Print PDF') . '</button></div><br />';
-		echo '<script>defaultControl(document.forms[0].FromCriteria);</script>';
+		echo '</fieldset>
+				<div class="centre"><input tabindex="3" type="submit" name="PrintPDF" value="' . _('Print PDF') . '" /></div>
+             </form>';
 	}
-	include('includes/footer.inc');;
+	include('includes/footer.php');
 
 } /*end of else not PrintPDF */
 

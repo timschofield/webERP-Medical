@@ -9,10 +9,14 @@ Class StockRequest {
 	var $Narrative;
 	var $LineCounter=0;
 
-	function StockRequest(){
+	function __construct(){
 	/*Constructor function initialises a new shopping cart */
 		$this->DispatchDate = date($_SESSION['DefaultDateFormat']);
 		$this->LineItems=array();
+	}
+
+	function StockRequest(){
+		self::__construct();
 	}
 
 	function AddLine($StockID,
@@ -41,8 +45,9 @@ Class LineDetails {
 	var $Quantity;
 	var $UOM;
 	var $LineNumber;
+	var $DecimalPlaces;
 
-	function LineDetails($StockID,
+	function __construct($StockID,
 						$ItemDescription,
 						$Quantity,
 						$UOM,
@@ -55,6 +60,20 @@ Class LineDetails {
 		$this->Quantity=$Quantity;
 		$this->DecimalPlaces=$DecimalPlaces;
 		$this->UOM=$UOM;
+	}
+
+	function LineDetails($StockID,
+						$ItemDescription,
+						$Quantity,
+						$UOM,
+						$DecimalPlaces,
+						$LineNumber) {
+		self::__construct($StockID,
+						$ItemDescription,
+						$Quantity,
+						$UOM,
+						$DecimalPlaces,
+						$LineNumber);
 	}
 
 }

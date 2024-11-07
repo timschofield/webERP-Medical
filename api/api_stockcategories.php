@@ -1,19 +1,18 @@
 <?php
-/* $Id: api_stockcategories.php 4521 2011-03-29 09:04:20Z daintree $*/
 
 	function VerifyCategoryID($CategoryID, $i, $Errors) {
-		if (strlen($CategoryID)>6 or $CategoryID=='') {
+		if (mb_strlen($CategoryID)>6 or $CategoryID=='') {
 			$Errors[$i] = InvalidCategoryID;
 		}
 		return $Errors;
 	}
 
 /* Verify the category doesnt exist */
-	function VerifyStockCategoryAlreadyExists($StockCategory, $i, $Errors, $db) {
+	function VerifyStockCategoryAlreadyExists($StockCategory, $i, $Errors) {
 		$Searchsql = "SELECT count(categoryid)
 				      FROM stockcategory
 				      WHERE categoryid='".$StockCategory."'";
-		$SearchResult=DB_query($Searchsql, $db);
+		$SearchResult=DB_query($Searchsql);
 		$answer = DB_fetch_array($SearchResult);
 		if ($answer[0]>0) {
 			$Errors[$i] = StockCategoryAlreadyExists;
@@ -22,14 +21,14 @@
 	}
 
 	function VerifyCategoryDescription($CategoryDescription, $i, $Errors) {
-		if (strlen($CategoryDescription)>20 or $CategoryDescription=='') {
+		if (mb_strlen($CategoryDescription)>20 or $CategoryDescription=='') {
 			$Errors[$i] = InvalidCategoryDescription;
 		}
 		return $Errors;
 	}
 
 	function VerifyStockType($StockType, $i, $Errors) {
-		if (strlen($StockType)>1 or $StockType=='') {
+		if (mb_strlen($StockType)>1 or $StockType=='') {
 			$Errors[$i] = InvalidStockType;
 		}
 		if ($StockType!='F' and $StockType!='M' and $StockType!='D' and $StockType!='L') {
@@ -48,26 +47,26 @@
 		foreach ($CategoryDetails as $key => $value) {
 			$CategoryDetails[$key] = DB_escape_string($value);
 		}
-		$Errors=VerifyStockCategoryAlreadyExists($CategoryDetails['categoryid'], sizeof($Errors), $Errors, $db);
+		$Errors=VerifyStockCategoryAlreadyExists($CategoryDetails['categoryid'], sizeof($Errors), $Errors);
 		$Errors=VerifyCategoryID($CategoryDetails['categoryid'], sizeof($Errors), $Errors);
 		$Errors=VerifyCategoryDescription($CategoryDetails['categorydescription'], sizeof($Errors), $Errors);
 		$Errors=VerifyStockType($CategoryDetails['stocktype'], sizeof($Errors), $Errors);
-		$Errors=VerifyAccountCodeExists($CategoryDetails['stockact'], sizeof($Errors), $Errors, $db);
-		$Errors=VerifyAccountCodeExists($CategoryDetails['adjglact'], sizeof($Errors), $Errors, $db);
-		$Errors=VerifyAccountCodeExists($CategoryDetails['purchpricevaract'], sizeof($Errors), $Errors, $db);
-		$Errors=VerifyAccountCodeExists($CategoryDetails['materialuseagevarac'], sizeof($Errors), $Errors, $db);
-		$Errors=VerifyAccountCodeExists($CategoryDetails['wipact'], sizeof($Errors), $Errors, $db);
+		$Errors=VerifyAccountCodeExists($CategoryDetails['stockact'], sizeof($Errors), $Errors);
+		$Errors=VerifyAccountCodeExists($CategoryDetails['adjglact'], sizeof($Errors), $Errors);
+		$Errors=VerifyAccountCodeExists($CategoryDetails['purchpricevaract'], sizeof($Errors), $Errors);
+		$Errors=VerifyAccountCodeExists($CategoryDetails['materialuseagevarac'], sizeof($Errors), $Errors);
+		$Errors=VerifyAccountCodeExists($CategoryDetails['wipact'], sizeof($Errors), $Errors);
 		$FieldNames='';
 		$FieldValues='';
 		foreach ($CategoryDetails as $key => $value) {
 			$FieldNames.=$key.', ';
 			$FieldValues.='"'.$value.'", ';
 		}
-		$sql = "INSERT INTO stockcategory ('" . substr($FieldNames,0,-2) . "')
-				VALUES ('" . substr($FieldValues,0,-2) . "') ";
+		$sql = "INSERT INTO stockcategory ('" . mb_substr($FieldNames,0,-2) . "')
+				VALUES ('" . mb_substr($FieldValues,0,-2) . "') ";
 		if (sizeof($Errors)==0) {
-			$result = DB_Query($sql, $db);
-			if (DB_error_no($db) != 0) {
+			$result = DB_query($sql);
+			if (DB_error_no() != 0) {
 				$Errors[0] = DatabaseUpdateFailed;
 			} else {
 				$Errors[0]=0;
@@ -86,15 +85,15 @@
 		foreach ($CategoryDetails as $key => $value) {
 			$CategoryDetails[$key] = DB_escape_string($value);
 		}
-		$Errors=VerifyStockCategoryExists($CategoryDetails['categoryid'], sizeof($Errors), $Errors, $db);
+		$Errors=VerifyStockCategoryExists($CategoryDetails['categoryid'], sizeof($Errors), $Errors);
 		$Errors=VerifyCategoryID($CategoryDetails['categoryid'], sizeof($Errors), $Errors);
 		$Errors=VerifyCategoryDescription($CategoryDetails['categorydescription'], sizeof($Errors), $Errors);
 		$Errors=VerifyStockType($CategoryDetails['stocktype'], sizeof($Errors), $Errors);
-		$Errors=VerifyAccountCodeExists($CategoryDetails['stockact'], sizeof($Errors), $Errors, $db);
-		$Errors=VerifyAccountCodeExists($CategoryDetails['adjglact'], sizeof($Errors), $Errors, $db);
-		$Errors=VerifyAccountCodeExists($CategoryDetails['purchpricevaract'], sizeof($Errors), $Errors, $db);
-		$Errors=VerifyAccountCodeExists($CategoryDetails['materialuseagevarac'], sizeof($Errors), $Errors, $db);
-		$Errors=VerifyAccountCodeExists($CategoryDetails['wipact'], sizeof($Errors), $Errors, $db);
+		$Errors=VerifyAccountCodeExists($CategoryDetails['stockact'], sizeof($Errors), $Errors);
+		$Errors=VerifyAccountCodeExists($CategoryDetails['adjglact'], sizeof($Errors), $Errors);
+		$Errors=VerifyAccountCodeExists($CategoryDetails['purchpricevaract'], sizeof($Errors), $Errors);
+		$Errors=VerifyAccountCodeExists($CategoryDetails['materialuseagevarac'], sizeof($Errors), $Errors);
+		$Errors=VerifyAccountCodeExists($CategoryDetails['wipact'], sizeof($Errors), $Errors);
 		$FieldNames='';
 		$FieldValues='';
 		foreach ($CategoryDetails as $key => $value) {
@@ -105,11 +104,11 @@
 		foreach ($CategoryDetails as $key => $value) {
 			$sql .= $key . "='" .$value. "', ";
 		}
-		$sql = substr($sql,0,-2)." WHERE categoryid='" . $CategoryDetails['categoryid'] . "'";
+		$sql = mb_substr($sql,0,-2)." WHERE categoryid='" . $CategoryDetails['categoryid'] . "'";
 		if (sizeof($Errors)==0) {
-			$result = DB_Query($sql, $db);
-			echo DB_error_no($db);
-			if (DB_error_no($db) != 0) {
+			$result = DB_query($sql);
+			echo DB_error_no();
+			if (DB_error_no() != 0) {
 				$Errors[0] = DatabaseUpdateFailed;
 			} else {
 				$Errors[0]=0;
@@ -129,12 +128,12 @@
 			$Errors[0]=NoAuthorisation;
 			return $Errors;
 		}
-		$Errors=VerifyStockCategoryExists($Categoryid, sizeof($Errors), $Errors, $db);
+		$Errors=VerifyStockCategoryExists($Categoryid, sizeof($Errors), $Errors);
 		if (sizeof($Errors)!=0) {
 			return $Errors;
 		}
 		$sql="SELECT * FROM stockcategory WHERE categoryid='".$Categoryid."'";
-		$result = DB_Query($sql, $db);
+		$result = DB_query($sql);
 		if (sizeof($Errors)==0) {
 			return DB_fetch_array($result);
 		} else {
@@ -156,7 +155,7 @@
 					categorydescription
 			FROM stockcategory
 			WHERE " . $Field ." " . LIKE  . " '%".$Criteria."%'";
-		$result = DB_Query($sql, $db);
+		$result = DB_query($sql);
 		$i=0;
 		$CategoryList = array();
 		while ($myrow=DB_fetch_array($result)) {
@@ -176,14 +175,14 @@
 		}
 		$sql="SELECT stockitemproperties.stockid,
 					description
-				FROM stockitemproperties
-				INNER JOIN stockcatproperties
-				ON stockitemproperties.stkcatpropid=stockcatproperties.stkcatpropid
-				INNER JOIN stockmaster
-				ON stockitemproperties.stockid=stockmaster.stockid
-				WHERE stockitemproperties.value like '".$Label."'
+			FROM stockitemproperties
+			      INNER JOIN stockcatproperties
+			      ON stockitemproperties.stkcatpropid=stockcatproperties.stkcatpropid
+			      INNER JOIN stockmaster
+			      ON stockitemproperties.stockid=stockmaster.stockid
+			      WHERE stockitemproperties.value like '".$Label."'
 				AND stockcatproperties.categoryid='".$Category."'";
-		$result = DB_Query($sql, $db);
+		$result = DB_query($sql);
 		$i=0;
 		$ItemList = array();
 		$ItemList[0]=0;
@@ -203,9 +202,9 @@
 			return $Errors;
 		}
 		$sql="SELECT value FROM stockitemproperties
-				WHERE stockid='".$StockID."'
-				AND stkcatpropid='".$Property . "'";
-		$result = DB_Query($sql, $db);
+		               WHERE stockid='".$StockID."'
+		               AND stkcatpropid='".$Property . "'";
+		$result = DB_query($sql);
 		$myrow=DB_fetch_array($result);
 		$Errors[0]=0;
 		$Errors[1]=$myrow[0];
@@ -222,7 +221,7 @@
 			return $Errors;
 		}
 		$sql = "SELECT categoryid FROM stockcategory";
-		$result = DB_query($sql, $db);
+		$result = DB_query($sql);
 		$i=0;
 		while ($myrow=DB_fetch_array($result)) {
 			$StockCategoryList[$i]=$myrow[0];

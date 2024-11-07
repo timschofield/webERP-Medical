@@ -1,5 +1,4 @@
 <?php
-/* $Id: api_login.php 4095 2010-10-09 02:49:35Z daintree $*/
 //  Validates user and sets up $_SESSION environment for API users.
 function  LoginAPI($databasename, $user, $password) {
 	global  $PathPrefix;		// For included files
@@ -25,7 +24,7 @@ function  LoginAPI($databasename, $user, $password) {
 		}
 		$_SESSION['db'] = $db;		// Set in above include
 	}
-	$rc = userLogin($user, $password, $_SESSION['db']);
+	$rc = userLogin($user, $password, $SysAdminEmail);
 	switch ($rc) {
 	case  UL_OK:
 		$RetCode[0] = 0;		// All is well
@@ -80,8 +79,7 @@ function GetAPIErrorMessages( $errcodes )
 	if (isset ($ErrorDescription[$errnum]) ) {
 	    if ($errnum == DatabaseUpdateFailed &&
 			isset ($_SESSION['db_err_msg']) &&
-			strlen ($_SESSION['db_err_msg']) > 0 )
-
+			mb_strlen ($_SESSION['db_err_msg']) > 0 )
 		$rm[] = $ErrorDescription[$errnum] . ":\n" . $_SESSION['db_err_msg'];
 	    else
 		$rm[] = $ErrorDescription[$errnum];
@@ -101,7 +99,7 @@ function GetAPIErrorMessages( $errcodes )
  *  function should be called when a successful login occurs.
  */
 
-function  DoSetup()
+function DoSetup()
 {
     global  $PathPrefix;
     if (isset($_SESSION['db']) AND $_SESSION['db'] != '' )
@@ -109,19 +107,19 @@ function  DoSetup()
 
     $db = $_SESSION['db'];	    // Used a bit in the following.
     if(isset($_SESSION['DB_Maintenance'])){
-	    if ($_SESSION['DB_Maintenance']!=0)  {
+	    if ($_SESSION['DB_Maintenance']>0)  {
 		    if (DateDiff(Date($_SESSION['DefaultDateFormat']),
 				    ConvertSQLDate($_SESSION['DB_Maintenance_LastRun'])
 				    ,'d')	> 	$_SESSION['DB_Maintenance']){
 
 			    /*Do the DB maintenance routing for the DB_type selected */
-			    DB_Maintenance($db);
+			    DB_Maintenance();
 			    //purge the audit trail if necessary
 			    if (isset($_SESSION['MonthsAuditTrail'])){
 				     $sql = "DELETE FROM audittrail
 						    WHERE  transactiondate <= '" . Date('Y-m-d', mktime(0,0,0, Date('m')-$_SESSION['MonthsAuditTrail'])) . "'";
 				    $ErrMsg = _('There was a problem deleting expired audit-trail history');
-				    $result = DB_query($sql,$db);
+				    $result = DB_query($sql);
 			    }
 			    $_SESSION['DB_Maintenance_LastRun'] = Date('Y-m-d');
 		    }
@@ -137,16 +135,16 @@ function  DoSetup()
 
 			    $CurrencyRates = GetECBCurrencyRates(); // gets rates from ECB see includes/MiscFunctions.php
 			    /*Loop around the defined currencies and get the rate from ECB */
-			    $CurrenciesResult = DB_query("SELECT currabrev FROM currencies",$db);
+			    $CurrenciesResult = DB_query('SELECT currabrev FROM currencies');
 			    while ($CurrencyRow = DB_fetch_row($CurrenciesResult)){
 				    if ($CurrencyRow[0]!=$_SESSION['CompanyRecord']['currencydefault']){
 					    $UpdateCurrRateResult = DB_query("UPDATE currencies SET
 											    rate='" . GetCurrencyRate ($CurrencyRow[0],$CurrencyRates) . "'
-											    WHERE currabrev='" . $CurrencyRow[0] . "'",$db);
+											    WHERE currabrev='" . $CurrencyRow[0] . "'");
 				    }
 			    }
 			    $_SESSION['UpdateCurrencyRatesDaily'] = Date('Y-m-d');
-			    $UpdateConfigResult = DB_query("UPDATE config SET confvalue = '" . Date('Y-m-d') . "' WHERE confname='UpdateCurrencyRatesDaily'",$db);
+			    $UpdateConfigResult = DB_query("UPDATE config SET confvalue = '" . Date('Y-m-d') . "' WHERE confname='UpdateCurrencyRatesDaily'");
 		    }
 	    }
     }

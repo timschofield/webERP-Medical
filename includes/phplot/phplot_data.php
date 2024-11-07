@@ -1,5 +1,4 @@
 <?php
-/* $Id: phplot_data.php,v 1.13 2009/10/29 01:13:17 lbayuk Exp $ */
 /*
  * This file extends PHPlot by adding additional routines that can be used
  * to modify the data arrays.
@@ -256,7 +255,8 @@ class PHPlot_Data extends PHPlot
 
         $x += $offset; $y += $offset;
         reset($this->data);
-        while (list($key, $val) = each($this->data)) {
+        # while (list($key, $val) = each($this->data)) { # 20241023: deprecated
+        foreach ($this->data as $key=>$val) {
             if ($this->data[$key][$y] == 0) {
                 $this->data[$key][$x] = 0;
             } else {

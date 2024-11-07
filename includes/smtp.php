@@ -1,5 +1,5 @@
 <?php
-/* $Id$*/
+/* $Revision: 1.3 $ */
 /**
 * Filename.......: class.smtp.inc
 * Project........: SMTP Class
@@ -7,8 +7,8 @@
 * Last Modified..: 21 December 2001
 */
 
-	define('SMTP_STATUS_NOT_CONNECTED', 1, TRUE);
-	define('SMTP_STATUS_CONNECTED', 2, TRUE);
+	define('SMTP_STATUS_NOT_CONNECTED', 1);
+	define('SMTP_STATUS_CONNECTED', 2);
 
 	class smtp{
 
@@ -44,21 +44,33 @@
 		*             to fsockopen()
         */
 
-		function smtp($params = array()){
+		function __construct($params = array()){
 
 			if(!defined('CRLF'))
-				define('CRLF', "\r\n", TRUE);
+				define('CRLF', "\r\n");
 
 			$this->authenticated	= FALSE;
-			$this->timeout			= $_SESSION['SMTPSettings']['timeout'];
+			$this->timeout			= 5;
 			$this->status			= SMTP_STATUS_NOT_CONNECTED;
-			$this->host				= $_SESSION['SMTPSettings']['host'];
-			$this->port				= $_SESSION['SMTPSettings']['port'];
-			$this->helo				= $_SESSION['SMTPSettings']['heloaddress'];
-			$this->auth				= $_SESSION['SMTPSettings']['auth'];
-			$this->user				= html_entity_decode($_SESSION['SMTPSettings']['username'],ENT_QUOTES,'UTF-8');
-			$this->pass				= html_entity_decode($_SESSION['SMTPSettings']['password'],ENT_QUOTES,'UTF-8');
-			$this->errors   		= array();
+
+
+		if (!empty($GLOBALS['HTTP_SERVER_VARS']['HTTP_HOST'])) {
+			$helo = $GLOBALS['HTTP_SERVER_VARS']['HTTP_HOST'];
+		} elseif (!empty($GLOBALS['HTTP_SERVER_VARS']['SERVER_NAME'])) {
+			$helo = $GLOBALS['HTTP_SERVER_VARS']['SERVER_NAME'];
+		} else {
+			$helo = 'localhost';
+		}
+
+		$this->host = $_SESSION['SMTPSettings']['host'];
+		$this->port = $_SESSION['SMTPSettings']['port'];
+		$this->helo = $_SESSION['SMTPSettings']['heloaddress'];
+		$this->auth = $_SESSION['SMTPSettings']['auth'];
+		$this->user = html_entity_decode($_SESSION['SMTPSettings']['username']);
+		$this->pass = html_entity_decode($_SESSION['SMTPSettings']['password']);
+
+
+		$this->errors   		= array();
 
 			foreach($params as $key => $value){
 				$this->$key = $value;
@@ -92,8 +104,7 @@
 
 				$greeting = $this->get_data();
 				if(is_resource($this->connection)){
-					$return=$this->auth ? $this->ehlo() : $this->helo();
-					return $return;
+					return $this->auth ? $this->ehlo() : $this->helo();
 				}else{
 					$this->errors[] = 'Failed to connect to server: '.$errstr;
 					return FALSE;

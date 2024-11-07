@@ -1,16 +1,23 @@
-<?php
-/* $Id: Z_ImportStocks.php 4043 2010-09-30 16:17:53Z tim_schofield $*/
-/* Script to make stock locations for all parts that do not have stock location records set up*/
+ <?php
 
-include('includes/session.inc');
-$title = _('Import Items');
-include('includes/header.inc');
+include('includes/session.php');
+$Title = _('Import Items');
+$ViewTopic = 'SpecialUtilities';
+$BookMark = basename(__FILE__, '.php'); ;
+include('includes/header.php');
+echo '<p class="page_title_text"><img alt="" src="' . $RootPath . '/css/' . $Theme .
+		'/images/inventory.png" title="' .
+		_('Import Stock Items from .csv') . '" />' . ' ' .
+		_('Import Stock Items from .csv') . '</p>';
 
 // If this script is called with a file object, then the file contents are imported
 // If this script is called with the gettemplate flag, then a template file is served
 // Otherwise, a file upload form is displayed
 
-$headers = array(
+// The CSV file must be saved in a format like the template in the import module I.E. "RECVALUE","RECVALUE2". The CSV file needs ANSI encoding for the import to work properly.
+
+
+$FieldHeadings = array(
 	'StockID',         	//  0 'STOCKID',
 	'Description',     	//  1 'DESCRIPTION',
 	'LongDescription', 	//  2 'LONGDESCRIPTION',
@@ -23,7 +30,7 @@ $headers = array(
 	'Serialised',      	//  9 'SERIALISED',
 	'Perishable',      	// 10 'PERISHABLE',
 	'Volume',          	// 11 'VOLUME',
-	'KGS',             	// 12 'KGS',
+	'grossweight',		// 12 'grossweight',
 	'BarCode',         	// 13 'BARCODE',
 	'DiscountCategory',	// 14 'DISCOUNTCATEGORY',
 	'TaxCat',          	// 15 'TAXCAT',
@@ -31,103 +38,97 @@ $headers = array(
 	'ItemPDF'          	// 17 'ITEMPDF'
 );
 
-if ($_FILES['userfile']['name']) { //start file processing
+if (isset($_FILES['userfile']) and $_FILES['userfile']['name']) { //start file processing
 
 	//initialize
-	$allowType='text/csv';
-	$fieldTarget = 18;
+	$FieldTarget = 18;
 	$InputError = 0;
 
 	//check file info
-	$fileName = $_FILES['userfile']['name'];
-	$tmpName  = $_FILES['userfile']['tmp_name'];
-	$fileSize = $_FILES['userfile']['size'];
-	$fileType = $_FILES['userfile']['type'];
-	if ($fileType != $allowType) {
-		prnMsg (_('File has type '. $fileType. ', but only '. $allowType. ' is allowed.'),'error');
-		include('includes/footer.inc');
-		exit;
-	}
+	$FileName = $_FILES['userfile']['name'];
+	$TempName  = $_FILES['userfile']['tmp_name'];
+	$FileSize = $_FILES['userfile']['size'];
 
 	//get file handle
-	$handle = fopen($tmpName, 'r');
+	$FileHandle = fopen($TempName, 'r');
 
 	//get the header row
-	$headRow = fgetcsv($handle, 10000, ",");
+	$headRow = fgetcsv($FileHandle, 10000, ",",'"');  // Modified to handle " "" " enclosed csv - useful if you need to include commas in your text descriptions
 
 	//check for correct number of fields
-	if ( count($headRow) != count($headers) ) {
-		prnMsg (_('File contains '. count($headRow). ' columns, expected '. count($headers). '. Try downloading a new template.'),'error');
-		fclose($handle);
-		include('includes/footer.inc');
+	if ( count($headRow) != count($FieldHeadings) ) {
+		prnMsg (_('File contains '. count($headRow). ' columns, expected '. count($FieldHeadings). '. Try downloading a new template.'),'error');
+		fclose($FileHandle);
+		include('includes/footer.php');
 		exit;
 	}
 
 	//test header row field name and sequence
 	$head = 0;
 	foreach ($headRow as $headField) {
-		if ( strtoupper($headField) != strtoupper($headers[$head]) ) {
-			prnMsg (_('File contains incorrect headers ('. strtoupper($headField). ' != '. strtoupper($header[$head]). '. Try downloading a new template.'),'error');
-			fclose($handle);
-			include('includes/footer.inc');
+		if ( mb_strtoupper($headField) != mb_strtoupper($FieldHeadings[$head]) ) {
+			prnMsg (_('File contains incorrect headers '. mb_strtoupper($headField). ' != '. mb_strtoupper($FieldHeadings[$head]). '. Try downloading a new template.'),'error');  //Fixed $FieldHeadings from $headings
+			fclose($FileHandle);
+			include('includes/footer.php');
 			exit;
 		}
 		$head++;
 	}
 
 	//start database transaction
-	DB_Txn_Begin($db);
+	DB_Txn_Begin();
 
 	//loop through file rows
 	$row = 1;
-	while ( ($myrow = fgetcsv($handle, 10000, ",")) !== FALSE ) {
+	while ( ($myrow = fgetcsv($FileHandle, 10000, ",")) !== FALSE ) {
 
 		//check for correct number of fields
 		$fieldCount = count($myrow);
-		if ($fieldCount != $fieldTarget){
-			prnMsg (_($fieldTarget. ' fields required, '. $fieldCount. ' fields received'),'error');
-			fclose($handle);
-			include('includes/footer.inc');
+		if ($fieldCount != $FieldTarget){
+			prnMsg (_($FieldTarget. ' fields required, '. $fieldCount. ' fields received'),'error');
+			fclose($FileHandle);
+			include('includes/footer.php');
 			exit;
 		}
 
 		// cleanup the data (csv files often import with empty strings and such)
-		$StockID = strtoupper($myrow[0]);
+		$StockID = mb_strtoupper($myrow[0]);
 		foreach ($myrow as &$value) {
 			$value = trim($value);
 		}
 
 		//first off check if the item already exists
-		$sql = "SELECT stockid FROM stockmaster WHERE stockid='".$StockID."'";
-		$result = DB_query($sql,$db);
-		if (DB_num_rows($result) != 0) {
+		$sql = "SELECT COUNT(stockid) FROM stockmaster WHERE stockid='".$StockID."'";
+		$result = DB_query($sql);
+		$testrow = DB_fetch_row($result);
+		if ($testrow[0] != 0) {
 			$InputError = 1;
-			prnMsg (_('Stock item "'. $StockID. '" already exists'),'error');
+			prnMsg (_('Stock item '. $StockID. ' already exists'),'error');
 		}
 
 		//next validate inputs are sensible
-		if (!$myrow[1] or strlen($myrow[1]) > 50 OR strlen($myrow[1])==0) {
+		if (!$myrow[1] or mb_strlen($myrow[1]) > 50 OR mb_strlen($myrow[1])==0) {
 			$InputError = 1;
 			prnMsg (_('The stock item description must be entered and be fifty characters or less long') . '. ' . _('It cannot be a zero length string either') . ' - ' . _('a description is required'). ' ("'. implode('","',$myrow). $stockid. '") ','error');
 		}
-		if (strlen($myrow[2])==0) {
+		if (mb_strlen($myrow[2])==0) {
 			$InputError = 1;
 			prnMsg (_('The stock item description cannot be a zero length string') . ' - ' . _('a long description is required'),'error');
 		}
-		if (strlen($StockID) ==0) {
+		if (mb_strlen($StockID) ==0) {
 			$InputError = 1;
 			prnMsg (_('The Stock Item code cannot be empty'),'error');
 		}
-		if (mb_strstr($StockID,' ') OR mb_strstr($StockID,"'") OR mb_strstr($StockID,'+') OR mb_strstr($StockID,"\\") OR mb_strstr($StockID,"\"") OR mb_strstr($StockID,'&') OR mb_strstr($StockID,'"')) {
+		if (ContainsIllegalCharacters($StockID) OR mb_strstr($StockID,' ')) {
 			$InputError = 1;
 			prnMsg(_('The stock item code cannot contain any of the following characters') . " ' & + \" \\ " . _('or a space'). " (". $StockID. ")",'error');
 			$StockID='';
 		}
-		if (strlen($myrow[4]) >20) {
+		if (mb_strlen($myrow[4]) >20) {
 			$InputError = 1;
 			prnMsg(_('The unit of measure must be 20 characters or less long'),'error');
 		}
-		if (strlen($myrow[13]) >20) {
+		if (mb_strlen($myrow[13]) >20) {
 			$InputError = 1;
 			prnMsg(_('The barcode must be 20 characters or less long'),'error');
 		}
@@ -155,7 +156,7 @@ if ($_FILES['userfile']['name']) { //start file processing
 			$InputError = 1;
 			prnMsg(_('The economic order quantity must be numeric'),'error');
 		}
-		if ($$myrow[6] <0) {
+		if ($myrow[6] <0) {
 			$InputError = 1;
 			prnMsg (_('The economic order quantity must be a positive number'),'error');
 		}
@@ -202,12 +203,11 @@ if ($_FILES['userfile']['name']) { //start file processing
 					serialised,
 					perishable,
 					volume,
-					kgs,
+					grossweight,
 					barcode,
 					discountcategory,
 					taxcatid,
-					decimalplaces,
-					appendfile)
+					decimalplaces)
 				VALUES (
 					'$StockID',
 					'" . $myrow[1]	. "',
@@ -225,16 +225,15 @@ if ($_FILES['userfile']['name']) { //start file processing
 					'" . $myrow[13]	. "',
 					'" . $myrow[14]	. "',
 					"  . $myrow[15]	. ",
-					"  . $myrow[16]	. ",
-					'" . $myrow[17]	. "'
+					"  . $myrow[16]	. "
 				);
 			";
 
 			$ErrMsg =  _('The item could not be added because');
 			$DbgMsg = _('The SQL that was used to add the item failed was');
-			$result = DB_query($sql,$db, $ErrMsg, $DbgMsg);
+			$result = DB_query($sql, $ErrMsg, $DbgMsg);
 
-			if (DB_error_no($db) ==0) { //the insert of the new code worked so bang in the stock location records too
+			if (DB_error_no() ==0) { //the insert of the new code worked so bang in the stock location records too
 
 				$sql = "INSERT INTO locstock (loccode,
 												stockid)
@@ -244,9 +243,9 @@ if ($_FILES['userfile']['name']) { //start file processing
 
 				$ErrMsg =  _('The locations for the item') . ' ' . $StockID .  ' ' . _('could not be added because');
 				$DbgMsg = _('NB Locations records can be added by opening the utility page') . ' <i>Z_MakeStockLocns.php</i> ' . _('The SQL that was used to add the location records that failed was');
-				$InsResult = DB_query($sql,$db,$ErrMsg,$DbgMsg);
+				$InsResult = DB_query($sql,$ErrMsg,$DbgMsg);
 
-				if (DB_error_no($db) ==0) {
+				if (DB_error_no() ==0) {
 					prnMsg( _('New Item') .' ' . $StockID  . ' '. _('has been added to the transaction'),'info');
 				} else { //location insert failed so set some useful error info
 					$InputError = 1;
@@ -270,17 +269,17 @@ if ($_FILES['userfile']['name']) { //start file processing
 
 	if ($InputError == 1) { //exited loop with errors so rollback
 		prnMsg(_('Failed on row '. $row. '. Batch import has been rolled back.'),'error');
-		DB_Txn_Rollback($db);
+		DB_Txn_Rollback();
 	} else { //all good so commit data transaction
-		DB_Txn_Commit($db);
-		prnMsg( _('Batch Import of') .' ' . $fileName  . ' '. _('has been completed. All transactions committed to the database.'),'success');
+		DB_Txn_Commit();
+		prnMsg( _('Batch Import of') .' ' . $FileName  . ' '. _('has been completed. All transactions committed to the database.'),'success');
 	}
 
-	fclose($handle);
+	fclose($FileHandle);
 
-} elseif ( isset($_POST['gettemplate']) or isset($_GET['gettemplate']) ) { //download an import template
+} elseif ( isset($_POST['gettemplate']) || isset($_GET['gettemplate']) ) { //download an import template
 
-	echo '<br /><br /><br />"'. implode('","',$headers). '" <br /><br /><br />';
+	echo '<br /><br /><br />"'. implode('","',$FieldHeadings). '"<br /><br /><br />';
 
 } else { //show file upload form
 
@@ -288,18 +287,19 @@ if ($_FILES['userfile']['name']) { //start file processing
 		<br />
 		<a href="Z_ImportStocks.php?gettemplate=1">Get Import Template</a>
 		<br />
-		<br />
-	';
-	echo '<form enctype="multipart/form-data" action="Z_ImportStocks.php" method="post">';
+		<br />';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post" enctype="multipart/form-data">';
+    echo '<div class="centre">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<input type="hidden" name="MAX_FILE_SIZE" value="1000000" />' .
 			_('Upload file') . ': <input name="userfile" type="file" />
-			<button type="submit">' . _('Send File') . '</button>
+			<input type="submit" value="' . _('Send File') . '" />
+        </div>
 		</form>';
 
 }
 
 
-include('includes/footer.inc');
+include('includes/footer.php');
 ?>

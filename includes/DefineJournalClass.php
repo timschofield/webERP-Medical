@@ -1,5 +1,4 @@
 <?php
-/* $Id$*/
 /* definition of the Journal class */
 
 Class Journal {
@@ -10,16 +9,19 @@ Class Journal {
 	var $GLItemCounter; /*Counter for the number of GL entires being posted to by the journal */
 	var $GLItemID;
 	var $JournalTotal; /*Running total for the journal */
-	var $BankAccounts; /*Array of bank account GLCodes that must be posted to by a bank payment or receipt 
+	var $BankAccounts; /*Array of bank account GLCodes that must be posted to by a bank payment or receipt
 				to ensure integrity for matching off vs bank stmts */
 
-	function Journal(){
+	function __construct(){
 	/*Constructor function initialises a new journal */
 		$this->GLEntries = array();
 		$this->GLItemCounter=0;
 		$this->JournalTotal=0;
 		$this->GLItemID=0;
 		$this->BankAccounts = array();
+	}
+	function Journal() {
+		self::__construct();
 	}
 
 	function Add_To_GLAnalysis($Amount, $Narrative, $GLCode, $GLActName, $tag, $assetid=1){
@@ -28,7 +30,7 @@ Class Journal {
 			$this->GLItemCounter++;
 			$this->GLItemID++;
 			$this->JournalTotal += $Amount;
-			
+
 			Return 1;
 		}
 		Return 0;
@@ -51,8 +53,8 @@ Class JournalGLAnalysis {
 	Var $ID;
 	var $tag;
 	var $assetid;
-	
-	function JournalGLAnalysis ($Amt, $Narr, $id, $GLCode, $GLActName, $tag, $assetid){
+
+	function __construct ($Amt, $Narr, $id, $GLCode, $GLActName, $tag, $assetid){
 
 /* Constructor function to add a new JournalGLAnalysis object with passed params */
 		$this->Amount =$Amt;
@@ -62,6 +64,10 @@ Class JournalGLAnalysis {
 		$this->ID = $id;
 		$this->tag = $tag;
 		$this->assetid = $assetid;
+	}
+	function JournalGLAnalysis($Amt, $Narr, $id, $GLCode, $GLActName, $tag, $assetid){
+		self::__construct($Amt, $Narr, $id, $GLCode, $GLActName, $tag, $assetid);
+
 	}
 }
 

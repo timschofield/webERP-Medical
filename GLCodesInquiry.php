@@ -1,69 +1,61 @@
 <?php
 
-/* $Id$*/
 
-include ('includes/session.inc');
+include ('includes/session.php');
 
-$title = _('GL Codes Inquiry');
+$Title = _('GL Codes Inquiry');
 
-include('includes/header.inc');
+$ViewTopic = 'GeneralLedger';
+$BookMark = '';
+
+include('includes/header.php');
 
 $SQL = "SELECT group_,
-				accountcode ,
-				accountname
-			FROM chartmaster
-			INNER JOIN accountgroups
-			ON chartmaster.group_ = accountgroups.groupname
-			ORDER BY sequenceintb,
-					accountcode";
+		accountcode ,
+		accountname
+		FROM chartmaster INNER JOIN accountgroups ON chartmaster.group_ = accountgroups.groupname
+		ORDER BY sequenceintb,
+				accountcode";
 
 $ErrMsg = _('No general ledger accounts were returned by the SQL because');
-$AccountsResult = DB_query($SQL,$db,$ErrMsg);
+$AccountsResult = DB_query($SQL,$ErrMsg);
 
 /*show a table of the orders returned by the SQL */
 
 echo '<table cellpadding="2">
 		<tr>
-			<th>'._('Group').'</font></th>
-			<th>'._('Code').'</font></th>
-			<th>'._('Account Name').'</font></th>
+			<th><h3>' . _('Group') . '</h3></th>
+			<th><h3>' . _('Code') . '</h3></th>
+			<th><h3>' . _('Account Name') . '</h3></th>
 		</tr>';
 
 $j = 1;
-$k=0; //row colour counter
 $ActGrp ='';
 
 while ($myrow=DB_fetch_array($AccountsResult)) {
-       if ($k==1){
-              echo '<tr class="EvenTableRows">';
-              $k=0;
-       } else {
-              echo '<tr class="OddTableRows">';
-              $k++;
-       }
 
-       if ($myrow['group_']== $ActGrp){
-              printf('<td></td>
-	      		<td><font size="2">%s</font></td>
-			<td><font size="2">%s</font></td>
-			</tr>',
-			$myrow['accountcode'],
-			$myrow['accountname']);
+       if ($myrow['group_']== $ActGrp) {
+              printf('<tr class="striped_row">
+					<td></td>
+	      		      <td>%s</td>
+			          <td>%s</td>
+			          </tr>',
+			  $myrow['accountcode'],
+			  htmlspecialchars($myrow['accountname'],ENT_QUOTES,'UTF-8',false));
        } else {
               $ActGrp = $myrow['group_'];
-              printf('<td><font size="2">%s</font></td>
-	      		<td><font size="2">%s</font></td>
-			<td><font size="2">%s</font></td>
-			</tr>',
-			$myrow['group_'],
-			$myrow['accountcode'],
-			$myrow['accountname']);
+              printf('<tr class="striped_row">
+					<td><b>%s</b></td>
+	      		      <td>%s</td>
+			          <td>%s</td>
+			          </tr>',
+			  $myrow['group_'],
+			  $myrow['accountcode'],
+			  htmlspecialchars($myrow['accountname'],ENT_QUOTES,'UTF-8',false));
        }
 }
 //end of while loop
 
 echo '</table>';
-
-include('includes/footer.inc');
-
+include('includes/footer.php');
 ?>

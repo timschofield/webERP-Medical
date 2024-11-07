@@ -1,16 +1,15 @@
 <?php
-/* $Id: api_suppliers.php 4521 2011-03-29 09:04:20Z daintree $*/
 
-/* Verify that the supplier number is valid, and does not already
+/* Verify that the supplier number is valid, and doesn't already
    exist.*/
-	function VerifySupplierNo($SupplierNumber, $i, $Errors, $db) {
-		if ((strlen($SupplierNumber)<1) or (strlen($SupplierNumber)>10)) {
+	function VerifySupplierNo($SupplierNumber, $i, $Errors) {
+		if ((mb_strlen($SupplierNumber)<1) or (mb_strlen($SupplierNumber)>10)) {
 			$Errors[$i] = IncorrectDebtorNumberLength;
 		}
 		$Searchsql = "SELECT count(supplierid)
   				      FROM suppliers
 				      WHERE supplierid='".$SupplierNumber."'";
-		$SearchResult=DB_query($Searchsql, $db);
+		$SearchResult=DB_query($Searchsql);
 		$answer = DB_fetch_row($SearchResult);
 		if ($answer[0] != 0) {
 			$Errors[$i] = SupplierNoAlreadyExists;
@@ -20,14 +19,14 @@
 
 /* Verify that the supplier number is valid, and already
    exists.*/
-	function VerifySupplierNoExists($SupplierNumber, $i, $Errors, $db) {
-		if ((strlen($SupplierNumber)<1) or (strlen($SupplierNumber)>10)) {
+	function VerifySupplierNoExists($SupplierNumber, $i, $Errors) {
+		if ((mb_strlen($SupplierNumber)<1) or (mb_strlen($SupplierNumber)>10)) {
 			$Errors[$i] = IncorrectDebtorNumberLength;
 		}
 		$Searchsql = "SELECT count(supplierid)
 				      FROM suppliers
 				      WHERE supplierid='".$SupplierNumber."'";
-		$SearchResult=DB_query($Searchsql, $db);
+		$SearchResult=DB_query($Searchsql);
 		$answer = DB_fetch_row($SearchResult);
 		if ($answer[0] == 0) {
 			$Errors[$i] = SupplierNoDoesntExists;
@@ -37,7 +36,7 @@
 
 /* Check that the name exists and is 40 characters or less long */
 	function VerifySupplierName($SupplierName, $i, $Errors) {
-		if ((strlen($SupplierName)<1) or (strlen($SupplierName)>40)) {
+		if ((mb_strlen($SupplierName)<1) or (mb_strlen($SupplierName)>40)) {
 			$Errors[$i] = IncorrectSupplierNameLength;
 		}
 		return $Errors;
@@ -46,9 +45,9 @@
 /* Check that the supplier since date is a valid date. The date
  * must be in the same format as the date format specified in the
  * target webERP company */
-	function VerifySupplierSinceDate($suppliersincedate, $i, $Errors, $db) {
+	function VerifySupplierSinceDate($suppliersincedate, $i, $Errors) {
 		$sql="SELECT confvalue FROM config where confname='DefaultDateFormat'";
-		$result=DB_query($sql, $db);
+		$result=DB_query($sql);
 		$myrow=DB_fetch_array($result);
 		$DateFormat=$myrow[0];
 		if (mb_strstr('/',$PeriodEnd)) {
@@ -80,21 +79,21 @@
 	}
 
 	function VerifyBankAccount($BankAccount, $i, $Errors) {
-		if (strlen($BankAccount)>30) {
+		if (mb_strlen($BankAccount)>30) {
 			$Errors[$i] = InvalidBankAccount;
 		}
 		return $Errors;
 	}
 
 	function VerifyBankRef($BankRef, $i, $Errors) {
-		if (strlen($BankRef)>12) {
+		if (mb_strlen($BankRef)>12) {
 			$Errors[$i] = InvalidBankReference;
 		}
 		return $Errors;
 	}
 
 	function VerifyBankPartics($BankPartics, $i, $Errors) {
-		if (strlen($BankPartics)>12) {
+		if (mb_strlen($BankPartics)>12) {
 			$Errors[$i] = InvalidBankPartics;
 		}
 		return $Errors;
@@ -108,11 +107,11 @@
 	}
 
 /* Check that the factor company is set up in the weberp database */
-	function VerifyFactorCompany($factorco , $i, $Errors, $db) {
+	function VerifyFactorCompany($factorco , $i, $Errors) {
 		$Searchsql = "SELECT COUNT(id)
 					 FROM factorcompanies
 					  WHERE id='".$factorco."'";
-		$SearchResult=DB_query($Searchsql, $db);
+		$SearchResult=DB_query($Searchsql);
 		$answer = DB_fetch_row($SearchResult);
 		if ($answer[0] == 0) {
 			$Errors[$i] = FactorCompanyNotSetup;
@@ -135,7 +134,7 @@
 		foreach ($SupplierDetails as $key => $value) {
 			$SupplierDetails[$key] = DB_escape_string($value);
 		}
-		$Errors=VerifySupplierNo($SupplierDetails['supplierid'], sizeof($Errors), $Errors, $db);
+		$Errors=VerifySupplierNo($SupplierDetails['supplierid'], sizeof($Errors), $Errors);
 		$Errors=VerifySupplierName($SupplierDetails['suppname'], sizeof($Errors), $Errors);
 		if (isset($SupplierDetails['address1'])){
 			$Errors=VerifyAddressLine($SupplierDetails['address1'], 40, sizeof($Errors), $Errors);
@@ -162,13 +161,13 @@
 			$Errors=VerifyLongitude($SupplierDetails['lng'], sizeof($Errors), $Errors);
 		}
 		if (isset($SupplierDetails['currcode'])){
-			$Errors=VerifyCurrencyCode($SupplierDetails['currcode'], sizeof($Errors), $Errors, $db);
+			$Errors=VerifyCurrencyCode($SupplierDetails['currcode'], sizeof($Errors), $Errors);
 		}
 		if (isset($SupplierDetails['suppliersince'])){
-			$Errors=VerifySupplierSince($SupplierDetails['suppliersince'], sizeof($Errors), $Errors, $db);
+			$Errors=VerifySupplierSinceDate($SupplierDetails['suppliersince'], sizeof($Errors), $Errors);
 		}
 		if (isset($SupplierDetails['paymentterms'])){
-			$Errors=VerifyPaymentTerms($SupplierDetails['paymentterms'], sizeof($Errors), $Errors, $db);
+			$Errors=VerifyPaymentTerms($SupplierDetails['paymentterms'], sizeof($Errors), $Errors);
 		}
 		if (isset($SupplierDetails['lastpaid'])){
 			$Errors=VerifyLastPaid($SupplierDetails['lastpaid'], sizeof($Errors), $Errors);
@@ -189,10 +188,10 @@
 			$Errors=VerifyRemittance($SupplierDetails['remittance'], sizeof($Errors), $Errors);
 		}
 		if (isset($SupplierDetails['taxgroupid'])){
-			$Errors=VerifyTaxGroupId($SupplierDetails['taxgroupid'], sizeof($Errors), $Errors, $db);
+			$Errors=VerifyTaxGroupId($SupplierDetails['taxgroupid'], sizeof($Errors), $Errors);
 		}
 		if (isset($SupplierDetails['factorcompanyid'])){
-			$Errors=VerifyFactorCompany($SupplierDetails['factorcompanyid'], sizeof($Errors), $Errors, $db);
+			$Errors=VerifyFactorCompany($SupplierDetails['factorcompanyid'], sizeof($Errors), $Errors);
 		}
 		if (isset($CustomerDetails['taxref'])){
 			$Errors=VerifyTaxRef($CustomerDetails['taxref'], sizeof($Errors), $Errors);
@@ -203,11 +202,11 @@
 			$FieldNames.=$key.', ';
 			$FieldValues.='"'.$value.'", ';
 		}
-		$sql = "INSERT INTO suppliers (".substr($FieldNames,0,-2).") ".
-		  "VALUES (".substr($FieldValues,0,-2).") ";
+		$sql = 'INSERT INTO suppliers ('.mb_substr($FieldNames,0,-2).') '.
+		  'VALUES ('.mb_substr($FieldValues,0,-2).') ';
 		if (sizeof($Errors)==0) {
-			$result = DB_Query($sql, $db);
-			if (DB_error_no($db) != 0) {
+			$result = DB_query($sql);
+			if (DB_error_no() != 0) {
 				$Errors[0] = DatabaseUpdateFailed;
 			} else {
 				$Errors[0]=0;
@@ -226,7 +225,7 @@
 		foreach ($SupplierDetails as $key => $value) {
 			$SupplierDetails[$key] = DB_escape_string($value);
 		}
-		$Errors=VerifySupplierNoExists($SupplierDetails['supplierid'], sizeof($Errors), $Errors, $db);
+		$Errors=VerifySupplierNoExists($SupplierDetails['supplierid'], sizeof($Errors), $Errors);
 		$Errors=VerifySupplierName($SupplierDetails['suppname'], sizeof($Errors), $Errors);
 		if (isset($SupplierDetails['address1'])){
 			$Errors=VerifyAddressLine($SupplierDetails['address1'], 40, sizeof($Errors), $Errors);
@@ -253,13 +252,13 @@
 			$Errors=VerifyLongitude($SupplierDetails['lng'], sizeof($Errors), $Errors);
 		}
 		if (isset($SupplierDetails['currcode'])){
-			$Errors=VerifyCurrencyCode($SupplierDetails['currcode'], sizeof($Errors), $Errors, $db);
+			$Errors=VerifyCurrencyCode($SupplierDetails['currcode'], sizeof($Errors), $Errors);
 		}
 		if (isset($SupplierDetails['suppliersince'])){
-			$Errors=VerifySupplierSince($SupplierDetails['suppliersince'], sizeof($Errors), $Errors, $db);
+			$Errors=VerifySupplierSinceDate($SupplierDetails['suppliersince'], sizeof($Errors), $Errors);
 		}
 		if (isset($SupplierDetails['paymentterms'])){
-			$Errors=VerifyPaymentTerms($SupplierDetails['paymentterms'], sizeof($Errors), $Errors, $db);
+			$Errors=VerifyPaymentTerms($SupplierDetails['paymentterms'], sizeof($Errors), $Errors);
 		}
 		if (isset($SupplierDetails['lastpaid'])){
 			$Errors=VerifyLastPaid($SupplierDetails['lastpaid'], sizeof($Errors), $Errors);
@@ -280,23 +279,23 @@
 			$Errors=VerifyRemittance($SupplierDetails['remittance'], sizeof($Errors), $Errors);
 		}
 		if (isset($SupplierDetails['taxgroupid'])){
-			$Errors=VerifyTaxGroupId($SupplierDetails['taxgroupid'], sizeof($Errors), $Errors, $db);
+			$Errors=VerifyTaxGroupId($SupplierDetails['taxgroupid'], sizeof($Errors), $Errors);
 		}
 		if (isset($SupplierDetails['factorcompanyid'])){
-			$Errors=VerifyFactorCompany($SupplierDetails['factorcompanyid'], sizeof($Errors), $Errors, $db);
+			$Errors=VerifyFactorCompany($SupplierDetails['factorcompanyid'], sizeof($Errors), $Errors);
 		}
 		if (isset($CustomerDetails['taxref'])){
 			$Errors=VerifyTaxRef($CustomerDetails['taxref'], sizeof($Errors), $Errors);
 		}
-		$sql="UPDATE suppliers SET ";
+		$sql='UPDATE suppliers SET ';
 		foreach ($SupplierDetails as $key => $value) {
 			$sql .= $key.'="'.$value.'", ';
 		}
-		$sql = substr($sql,0,-2)." WHERE supplierid='".$SupplierDetails['supplierid']."'";
+		$sql = mb_substr($sql,0,-2)." WHERE supplierid='".$SupplierDetails['supplierid']."'";
 		if (sizeof($Errors)==0) {
-			$result = DB_Query($sql, $db);
-			echo DB_error_no($db);
-			if (DB_error_no($db) != 0) {
+			$result = DB_query($sql);
+			echo DB_error_no();
+			if (DB_error_no() != 0) {
 				$Errors[0] = DatabaseUpdateFailed;
 			} else {
 				$Errors[0]=0;
@@ -306,7 +305,7 @@
 	}
 
 /* This function takes a supplier id and returns an associative array containing
-   the database record for that supplier. If the supplier id does not exist
+   the database record for that supplier. If the supplier id doesn't exist
    then it returns an $Errors array.
 */
 	function GetSupplier($SupplierID, $user, $password) {
@@ -316,12 +315,12 @@
 			$Errors[0]=NoAuthorisation;
 			return $Errors;
 		}
-		$Errors = VerifySupplierNoExists($SupplierID, sizeof($Errors), $Errors, $db);
+		$Errors = VerifySupplierNoExists($SupplierID, sizeof($Errors), $Errors);
 		if (sizeof($Errors)!=0) {
 			return $Errors;
 		}
 		$sql="SELECT * FROM suppliers WHERE supplierid='".$SupplierID."'";
-		$result = DB_Query($sql, $db);
+		$result = DB_query($sql);
 		if (sizeof($Errors)==0) {
 			return DB_fetch_array($result);
 		} else {
@@ -339,10 +338,10 @@
 			$Errors[0]=NoAuthorisation;
 			return $Errors;
 		}
-		$sql="SELECT supplierid
+		$sql='SELECT supplierid
 			FROM suppliers
-			WHERE ".$Field." LIKE '%".$Criteria."%' ORDER BY supplierid";
-		$result = DB_Query($sql, $db);
+			WHERE '.$Field." LIKE '%".$Criteria."%' ORDER BY supplierid";
+		$result = DB_query($sql);
 		$i=0;
 		$SupplierList = array();
 		while ($myrow=DB_fetch_array($result)) {

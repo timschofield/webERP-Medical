@@ -1,21 +1,22 @@
 <?php
-/* $Id$*/
 
-include ('includes/session.inc');
-$title = _('Create Chart Details Records');
-include ('includes/header.inc');
+include ('includes/session.php');
+$Title = _('Create Chart Details Records');
+$ViewTopic = 'SpecialUtilities';
+$BookMark = basename(__FILE__, '.php'); ;
+include ('includes/header.php');
 
 /*Script to insert ChartDetails records where one should already exist
 only necessary where manual entry of chartdetails has stuffed the system */
 
-$FirstPeriodResult = DB_query("SELECT MIN(periodno) AS minperiod FROM periods",$db);
-$FirstPeriodRow = DB_fetch_array($FirstPeriodResult);
+$FirstPeriodResult = DB_query("SELECT MIN(periodno) FROM periods");
+$FirstPeriodRow = DB_fetch_row($FirstPeriodResult);
 
-$LastPeriodResult = DB_query("SELECT MAX(periodno) AS maxperiod FROM periods",$db);
-$LastPeriodRow = DB_fetch_array($LastPeriodResult);
+$LastPeriodResult = DB_query("SELECT MAX(periodno) FROM periods");
+$LastPeriodRow = DB_fetch_row($LastPeriodResult);
 
-$CreateFrom = $FirstPeriodRow['minperiod'];
-$CreateTo = $LastPeriodRow['maxperiod'];;
+$CreateFrom = $FirstPeriodRow[0];
+$CreateTo = $LastPeriodRow[0];;
 
 
 /*First off see if there are any chartdetails missing create recordset of */
@@ -28,7 +29,7 @@ $sql = "SELECT chartmaster.accountcode, MIN(periods.periodno) AS startperiod
 		AND chartdetails.accountcode IS NULL
 		GROUP BY chartmaster.accountcode";
 
-$ChartDetailsNotSetUpResult = DB_query($sql,$db,_('Could not test to see that all chart detail records properly initiated'));
+$ChartDetailsNotSetUpResult = DB_query($sql,_('Could not test to see that all chart detail records properly initiated'));
 
 if(DB_num_rows($ChartDetailsNotSetUpResult)>0){
 
@@ -42,7 +43,7 @@ if(DB_num_rows($ChartDetailsNotSetUpResult)>0){
 		AND chartdetails.accountcode IS NULL";
 
 	$ErrMsg = _('Inserting new chart details records required failed because');
-	$InsChartDetailsRecords = DB_query($sql,$db,$ErrMsg);
+	$InsChartDetailsRecords = DB_query($sql,$ErrMsg);
 
 
 	While ($AccountRow = DB_fetch_array($ChartDetailsNotSetUpResult)){
@@ -58,9 +59,9 @@ if(DB_num_rows($ChartDetailsNotSetUpResult)>0){
 			WHERE period >='" . ($AccountRow['period']-1) . "'
 			AND accountcode='" . $AccountRow['accountcode'] . "'
 			ORDER BY period";
-		$ChartDetails = DB_query($sql,$db);
+		$ChartDetails = DB_query($sql);
 
-		DB_Txn_Begin($db);
+		DB_Txn_Begin();
 		$BFwd = '';
 		$BFwdBudget ='';
 		$CFwd=0;
@@ -77,11 +78,11 @@ if(DB_num_rows($ChartDetailsNotSetUpResult)>0){
 					WHERE accountcode = '" . $AccountRow['accountcode'] . "'
 					AND period ='" . ($myrow['period']+1) . "'";
 
-				$UpdChartDetails = DB_query($sql,$db, '', '', '', false);
+				$UpdChartDetails = DB_query($sql, '', '', '', false);
 			}
 		}
 
-		DB_Txn_Commit($db);
+		DB_Txn_Commit();
 
 		DB_free_result($ChartDetailsCFwd);
 	}
@@ -93,5 +94,5 @@ if(DB_num_rows($ChartDetailsNotSetUpResult)>0){
 	prnMsg(_('No additional chart details were required to be added'),'success');
 }
 
-include('includes/footer.inc');
+include('includes/footer.php');
 ?>

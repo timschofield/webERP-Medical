@@ -20,10 +20,16 @@
 -->
 
 <?php
+//check for XSS
+if(strpos($_SERVER['REQUEST_URI'],'/%22%3E%3C')) {
+	//if so chop off the XSS code and just return the appropriate URL
+	header('Location: ' . 'http' . (($_SERVER['SERVER_PORT'] == 443) ? 's' : '')  . '://' . $_SERVER['HTTP_HOST'] . substr($_SERVER['REQUEST_URI'],0,strpos($_SERVER['REQUEST_URI'],'/%22%3E%3C')));
+}
+
 include('ManualHeader.html');
 
 ?>
-	<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'); ?>" method="post">
+	<form action="<?php echo htmlentities($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'); ?>" method="post">
 <?php
 if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
      ((isset($_POST['Submit'])) AND (isset($_POST['SelectTableOfContents'])))) {
@@ -49,7 +55,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
 <?php
   }
 ?>
-          <h1>Inhaltsverzeichnis</h1>
+          <font size="+3"><b>Inhaltsverzeichnis</b></font>
           <br /><br />
           <ul>
             <li>
@@ -57,7 +63,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectIntroduction" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=Introduction'; ?>">Einleitung</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=Introduction'; ?>">Einleitung</a>
 <?php
   } else {
 ?>
@@ -75,7 +81,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectRequirements" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=Requirements'; ?>">Anforderungen</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=Requirements'; ?>">Anforderungen</a>
 <?php
   } else {
 ?>
@@ -94,7 +100,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectGettingStarted" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=GettingStarted'; ?>">Inbetriebnahme</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=GettingStarted'; ?>">Inbetriebnahme</a>
 <?php
   } else {
 ?>
@@ -118,7 +124,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectSecuritySchema" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=SecuritySchema'; ?>">Sicherheitskonzept</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=SecuritySchema'; ?>">Sicherheitskonzept</a>
 <?php
   } else {
 ?>
@@ -132,7 +138,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectCreatingNewSystem" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=CreatingNewSystem'; ?>">Ein neues System einrichten</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=CreatingNewSystem'; ?>">Ein neues System einrichten</a>
 <?php
   } else {
 ?>
@@ -158,7 +164,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectSystemConventions" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=SystemConventions'; ?>">System-Gepflogenheiten </a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=SystemConventions'; ?>">System-Gepflogenheiten </a>
 <?php
   } else {
 ?>
@@ -177,7 +183,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectInventory" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=Inventory'; ?>">Bestandsführung</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=Inventory'; ?>">Bestandsführung</a>
 <?php
   } else {
 ?>
@@ -241,7 +247,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectAccountsReceivable" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=AccountsReceivable'; ?>">Debitorenbuchhaltung</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=AccountsReceivable'; ?>">Debitorenbuchhaltung</a>
 <?php
   } else {
 ?>
@@ -288,7 +294,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectAccountsPayable" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=AccountsPayable'; ?>">Kreditorenbuchhaltung</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=AccountsPayable'; ?>">Kreditorenbuchhaltung</a>
 <?php
   } else {
 ?>
@@ -308,7 +314,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
                 <li>Bankangaben, Bankreferenz</li>
                 <li>Bankkontonummer</li>
                 <li>Lieferantenwährung</li>
-				<li>Zahlungsmitteilung</li>
+		<li>Zahlungsmitteilung</li>
               </ul>
               <br />
             </li>
@@ -317,7 +323,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectSalesPeople" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=SalesPeople'; ?>">Verkäufer</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=SalesPeople'; ?>">Verkäufer</a>
 <?php
   } else {
 ?>
@@ -338,7 +344,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectSalesTypes" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=SalesTypes'; ?>">Umsatzarten/Preislisten</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=SalesTypes'; ?>">Umsatzarten/Preislisten</a>
 <?php
   } else {
 ?>
@@ -357,7 +363,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectPaymentTerms" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=PaymentTerms'; ?>">Zahlungsbedingungen</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=PaymentTerms'; ?>">Zahlungsbedingungen</a>
 <?php
   } else {
 ?>
@@ -377,7 +383,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectCreditStatus" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=CreditStatus'; ?>">Kreditstatus</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=CreditStatus'; ?>">Kreditstatus</a>
 <?php
   } else {
 ?>
@@ -398,7 +404,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectTax" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=Tax'; ?>">Steuern</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=Tax'; ?>">Steuern</a>
 <?php
   } else {
 ?>
@@ -421,7 +427,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectPrices" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=Prices'; ?>">Preise und Rabatte</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=Prices'; ?>">Preise und Rabatte</a>
 <?php
   } else {
 ?>
@@ -442,7 +448,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectARTransactions" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=ARTransactions'; ?>">Debitorenbuchungen</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=ARTransactions'; ?>">Debitorenbuchungen</a>
 <?php
   } else {
 ?>
@@ -456,7 +462,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
                 <li>Erstellen der Faktura zum Kundenauftrag</li>
                 <li>Gutschriften</li>
                 <li>Erfassung von Zahlungseingängen</li>
-                <li>Zahlungseingang - Debitor</li>
+                <li>Zahlungseingang - Debitor<ImportBankTrans.php/li>
                 <li>Zahlungseingang - Datum</li>
                 <li>Zahlungseingang - Währung und Umrechnungskurs</li>
                 <li>Zahlungseingang - Zahlweg</li>
@@ -475,7 +481,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectARInquiries" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=ARInquiries'; ?>">Debitorenauswertungen</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=ARInquiries'; ?>">Debitorenauswertungen</a>
 <?php
   } else {
 ?>
@@ -495,7 +501,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectARReports" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=ARReports'; ?>">Debitorenberichte</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=ARReports'; ?>">Debitorenberichte</a>
 <?php
   } else {
 ?>
@@ -517,7 +523,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectSalesAnalysis" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=SalesAnalysis'; ?>">Umsatzauswertungen</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=SalesAnalysis'; ?>">Umsatzauswertungen</a>
 <?php
   } else {
 ?>
@@ -538,7 +544,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectSalesOrders" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=SalesOrders'; ?>">Kundenaufträge</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=SalesOrders'; ?>">Kundenaufträge</a>
 <?php
   } else {
 ?>
@@ -564,7 +570,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectShipments" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=Shipments'; ?>">Transportkosten</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=Shipments'; ?>">Transportkosten</a>
 <?php
   } else {
 ?>
@@ -586,7 +592,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectManufacturing" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=Manufacturing'; ?>">Fertigung</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=Manufacturing'; ?>">Fertigung</a>
 <?php
   } else {
 ?>
@@ -609,7 +615,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectGeneralLedger" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=GeneralLedger'; ?>">Hauptbuchhaltung</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=GeneralLedger'; ?>">Hauptbuchhaltung</a>
 <?php
   } else {
 ?>
@@ -636,7 +642,7 @@ if (((!isset($_POST['Submit'])) AND (!isset($_GET['ViewTopic']))) OR
 if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectReportBuilder" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=ReportBuilder'; ?>">Report Builder/Form Builder</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=ReportBuilder'; ?>">Report Builder/Form Builder</a>
 <?php
   } else {
 ?>
@@ -663,7 +669,7 @@ if (!isset($_POST['Submit'])) {
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectMultilanguage" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=Multilanguage'; ?>">Mehrsprachigkeit</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=Multilanguage'; ?>">Mehrsprachigkeit</a>
 <?php
   } else {
 ?>
@@ -685,7 +691,7 @@ if (!isset($_POST['Submit'])) {
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectSpecialUtilities" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=SpecialUtilities'; ?>">Servicewerkzeuge</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=SpecialUtilities'; ?>">Servicewerkzeuge</a>
 <?php
   } else {
 ?>
@@ -707,7 +713,7 @@ if (!isset($_POST['Submit'])) {
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectNewScripts" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=NewScripts'; ?>">Entwicklung - Grundlagen</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=NewScripts'; ?>">Entwicklung - Grundlagen</a>
 <?php
   } else {
 ?>
@@ -717,9 +723,9 @@ if (!isset($_POST['Submit'])) {
 ?>
               <ul>
                 <li>Verzeichnisstruktur</li>
-                <li>session.inc</li>
-                <li>header.inc</li>
-                <li>footer.inc</li>
+                <li>session.php</li>
+                <li>header.php</li>
+                <li>footer.php</li>
                 <li>config.php</li>
                 <li>PDFStarter.php</li>
                 <li>Datenbank-Abstraktionsschicht - ConnectDB.inc</li>
@@ -733,7 +739,7 @@ if (!isset($_POST['Submit'])) {
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectStructure" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=Structure'; ?>">Entwicklung - Struktur</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=Structure'; ?>">Entwicklung - Struktur</a>
 <?php
   } else {
 ?>
@@ -764,7 +770,7 @@ if (!isset($_POST['Submit'])) {
   if (!isset($_POST['Submit'])) {
 ?>
               <input type="checkbox" name="SelectContributors" />
-              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?ViewTopic=Contributors'; ?>">Mitwirkende - Anerkennungen</a>
+              <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?ViewTopic=Contributors'; ?>">Mitwirkende - Anerkennungen</a>
 <?php
   } else {
 ?>

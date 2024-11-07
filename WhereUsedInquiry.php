@@ -1,104 +1,115 @@
 <?php
 
-/* $Id$*/
 
-include('includes/session.inc');
-$title = _('Where Used Inquiry');
-include('includes/header.inc');
+include('includes/session.php');
+$Title = _('Where Used Inquiry');
+$ViewTopic = 'Manufacturing';
+$BookMark = '';
+include('includes/header.php');
 
 if (isset($_GET['StockID'])){
-	$StockID = trim(strtoupper($_GET['StockID']));
+	$StockID = trim(mb_strtoupper($_GET['StockID']));
 } elseif (isset($_POST['StockID'])){
-	$StockID = trim(strtoupper($_POST['StockID']));
+	$StockID = trim(mb_strtoupper($_POST['StockID']));
 }
 
-echo '<a href="' . $rootpath . '/SelectProduct.php">' . _('Back to Items') . '</a><br />';
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p>';
+echo '<a href="' . $RootPath . '/SelectProduct.php" class="toplink">' . _('Back to Items') . '</a>
+	<p class="page_title_text">
+		<img src="'.$RootPath.'/css/'.$Theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . $Title . '
+	</p>';
+if (isset($StockID)){
+	$Result = DB_query("SELECT description,
+								units,
+								mbflag
+						FROM stockmaster
+						WHERE stockid='".$StockID."'");
+	$MyRow = DB_fetch_row($Result);
+	if (DB_num_rows($Result)==0){
+		prnMsg(_('The item code entered') . ' - ' . $StockID . ' ' . _('is not set up as an item in the system') . '. ' . _('Re-enter a valid item code or select from the Select Item link above'),'error');
+		include('includes/footer.php');
+		exit;
+	}
+	echo '<div class="centre"><h3>' . $StockID . ' - ' . $MyRow[0] . '  (' . _('in units of') . ' ' . $MyRow[1] . ')</h3></div>';
+}
 
-echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post"><div class="centre">';
-echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '" method="post">
+		<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<table class="selection">
-		<tr>';
+echo '<fieldset>
+		<legend>', _('Item Search'), '</legend>';
 if (isset($StockID)) {
-	echo '<td>' . _('Enter an Item Code') . ': </td><td><input type="text" name="StockID" size="21" maxlength="20" value="'.$StockID.'" /></td></tr>';
+	echo '<field>
+			<label for="StockID">', _('Enter an Item Code') . ':</label>
+			<input type="text" required="required" data-type="no-illegal-chars" title="" name="StockID" autofocus="autofocus" size="21" maxlength="20" value="' . $StockID . '" placeholder="'._('No illegal characters allowed').'" />
+			<fieldhelp>'._('Illegal characters and blank is not allowed').'</fieldhelp>
+		</field>';
 } else {
-	echo '<td>' . _('Enter an Item Code') . ': </td><td><input type="text" name="StockID" size="21" maxlength="20" /></td></tr>';
+	echo '<field>
+			<label for="StockID">', _('Enter an Item Code') . ':</label>
+			<input type="text" required="required" data-type="no-illegal-chars"  title="" name="StockID" autofocus="autofocus" size="21" maxlength="20" placeholder="'._('No illegal characters allowed').'" />
+			<fieldhelp>'._('Illegal characters and blank is not allowed').'</fieldhelp>
+		</field>';
 }
-
-echo '<tr><td colspan="2"><div class="centre"><button type="submit" name="ShowWhereUsed">' . _('Show Where Used') . '</button></td></tr>';
-
-echo '</table><br />';
+echo '</fieldset>';
+echo '<div class="centre">
+		<input type="submit" name="ShowWhereUsed" value="' . _('Show Where Used') . '" />
+	</div>';
 
 if (isset($StockID)) {
 
 	$SQL = "SELECT bom.*,
-    		stockmaster.description
-		FROM bom INNER JOIN stockmaster
+				stockmaster.description,
+				stockmaster.discontinued
+			FROM bom INNER JOIN stockmaster
 			ON bom.parent = stockmaster.stockid
-		WHERE component='" . $StockID . "'
-		AND bom.effectiveafter<='" . Date('Y-m-d') . "'
-		AND bom.effectiveto >='" . Date('Y-m-d') . "'";
+			INNER JOIN locationusers ON locationusers.loccode=bom.loccode AND locationusers.userid='" .  $_SESSION['UserID'] . "' AND locationusers.canview=1
+			WHERE component='" . $StockID . "'
+                AND bom.effectiveafter <= '" . date('Y-m-d') . "'
+                AND bom.effectiveto > '" . date('Y-m-d') . "'
+			ORDER BY stockmaster.discontinued, bom.parent";
 
 	$ErrMsg = _('The parents for the selected part could not be retrieved because');;
-	$result = DB_query($SQL,$db,$ErrMsg);
-	if (DB_num_rows($result)==0){
+	$Result = DB_query($SQL,$ErrMsg);
+	if (DB_num_rows($Result)==0){
 		prnMsg(_('The selected item') . ' ' . $StockID . ' ' . _('is not used as a component of any other parts'),'error');
 	} else {
 
-    		echo '<table width=97% class="selection">';
-			if (isset($StockID)){
-				$ItemResult = DB_query("SELECT description,
-								units
-							FROM stockmaster
-							WHERE stockid='".$StockID."'",$db);
-				$myrow = DB_fetch_array($ItemResult);
-				if (DB_num_rows($result)==0){
-					prnMsg(_('The item code entered') . ' - ' . $StockID . ' ' . _('is not set up as an item in the system') . '. ' . _('Re-enter a valid item code or select from the Select Item link above'),'error');
-					include('includes/footer.inc');
-					exit;
-				}
-				echo '<tr><th colspan="6" class="header"><b>'.$StockID . ' - ' . $myrow['description'] .'</b>  (' . _('in units of') . ' ' . $myrow['units'] . ')</th></tr>';
+		echo '<table width="97%" class="selection">
+			<thead>
+				<tr>
+					<th class="ascending">' . _('Used By') . '</th>
+					<th class="ascending">' . _('Status') . '</th>
+					<th class="ascending">' . _('Work Centre') . '</th>
+					<th class="ascending">' . _('Location') . '</th>
+					<th class="ascending">' . _('Quantity Required') . '</th>
+					<th class="ascending">' . _('Effective After') . '</th>
+					<th class="ascending">' . _('Effective To') . '</th>
+				</tr>
+			</thead>
+			<tbody>';
+
+		while ($MyRow=DB_fetch_array($Result)) {
+
+			if ($MyRow['discontinued'] == 1){
+				$Status = _('Obsolete');
+			}else{
+				$Status = _('Current');
 			}
+			echo '<tr class="striped_row">
+					<td><a target="_blank" href="' . $RootPath . '/BOMInquiry.php?StockID=' . $MyRow['parent'] . '" alt="' . _('Show Bill Of Material') . '">' . $MyRow['parent']. ' - ' . $MyRow['description']. '</a></td>
+					<td>' . $Status. '</td>
+					<td>' . $MyRow['workcentreadded']. '</td>
+					<td>' . $MyRow['loccode']. '</td>
+					<td class="number">' . locale_number_format($MyRow['quantity'],'Variable') . '</td>
+					<td>' . ConvertSQLDate($MyRow['effectiveafter']) . '</td>
+					<td>' . ConvertSQLDate($MyRow['effectiveto']) . '</td>
+                </tr>';
 
-    		$tableheader = '<tr><th>' . _('Used By') . '</th>
-					<th>' . _('Work Centre') . '</th>
-					<th>' . _('Location') . '</th>
-					<th>' . _('Quantity Required') . '</th>
-					<th>' . _('Effective After') . '</th>
-					<th>' . _('Effective To') . '</th></tr>';
-    		echo $tableheader;
-			$k=0;
-    		while ($myrow=DB_fetch_array($result)) {
-
-    			if ($k==1){
-    				echo '<tr class="EvenTableRows">';
-    				$k=0;
-    			} else {
-    				echo '<tr class="OddTableRows">';;
-    				$k=1;
-    			}
-
-    			echo '<td><a target="_blank" href="' . $rootpath . '/BOMInquiry.php?StockID=' . $myrow['parent'] . '" alt="' . _('Show Bill Of Material') .
-						'">' . $myrow['parent']. ' - ' . $myrow['description']. '</a></td>';
-    			echo '<td>' . $myrow['workcentreadded']. '</td>';
-    			echo '<td>' . $myrow['loccode']. '</td>';
-    			echo '<td>' . $myrow['quantity']. '</td>';
-    			echo '<td>' . ConvertSQLDate($myrow['effectiveafter']) . '</td>';
-    			echo '<td>' . ConvertSQLDate($myrow['effectiveto']) . '</td>';
-
-     			//end of page full new headings if
-    		}
-
-    		echo '</table><br />';
+			//end of page full new headings if
+		}
+		echo '</tbody></table>';
 	}
 } // StockID is set
-
-echo '<script>defaultControl(document.forms[0].StockID);</script>';
-
-
 echo '</form>';
-
-include('includes/footer.inc');
-
+include('includes/footer.php');
 ?>

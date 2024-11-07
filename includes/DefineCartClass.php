@@ -1,6 +1,5 @@
 <?php
 
-/* $Id$*/
 
 /* Definition of the cart class
 this class can hold all the information for:
@@ -24,6 +23,7 @@ Class Cart {
 	var $DefaultSalesType;
 	var $SalesTypeName;
 	var $DefaultCurrency;
+	var $CurrDecimalPlaces;
 	var $PaymentTerms;
 	var $DeliverTo;
 	var $DelAdd1;
@@ -32,6 +32,13 @@ Class Cart {
 	var $DelAdd4;
 	var $DelAdd5;
 	var $DelAdd6;
+	var $BrAdd1;
+	var $BrAdd2;
+	var $BrAdd3;
+	var $BrAdd4;
+	var $BrAdd5;
+	var $BrAdd6;
+	var $SalesPerson;
 	var $PhoneNo;
 	var $Email;
 	var $CustRef;
@@ -39,43 +46,55 @@ Class Cart {
 	var $Location;
 	var $LocationName;
 	var $DebtorNo;
+	var $BranchCode;
 	var $CustomerName;
 	var $Orig_OrderDate;
+	var $ConfirmedDate;
 	var $Branch;
 	var $TransID;
 	var $ShipVia;
+	var $InternalComments;
 	var $FreightCost;
 	var $FreightTaxes;
-	var $OrderNo;
-	var $Consignment;
-	var $Quotation;
-	var $DeliverBlind;
-	var $CreditAvailable; //in customer currency
-	var $TaxGroup;
-	var $DispatchTaxProvince;
-	var $DefaultPOLine;
-	var $DeliveryDays;
+	Var $OrderNo;
+	Var $Consignment;
+	Var $Quotation;
+	var $QuoteDate;
+	Var $DeliverBlind;
+	Var $CreditAvailable; //in customer currency
+	Var $TaxGroup;
+	Var $DispatchTaxProvince;
+	Var $DefaultPOLine;
+	Var $DeliveryDays;
 	var $TaxTotals;
 	var $TaxGLCodes;
 	var $BuyerName;
+	var $SpecialInstructions;
+	var $Packages;
 
-	function Cart(){
+	function __construct(){
 	/*Constructor function initialises a new shopping cart */
 		$this->LineItems = array();
 		$this->total=0;
 		$this->ItemsOrdered=0;
 		$this->LineCounter=0;
-		$this->DefaultSalesType="";
+		$this->DefaultSalesType='';
 		$this->FreightCost =0;
 		$this->FreightTaxes = array();
+		$this->CurrDecimalPlaces=2; //default
+	}
+
+	function cart() {
+		self::__construct();
 	}
 
 	function add_to_cart($StockID,
 							$Qty,
 							$Descr,
+							$LongDescr,
 							$Price,
 							$Disc=0,
-							$Units,
+							$UOM,
 							$Volume,
 							$Weight,
 							$QOHatLoc=0,
@@ -83,43 +102,40 @@ Class Cart {
 							$ActDispatchDate=NULL,
 							$QtyInvoiced=0,
 							$DiscCat='',
-							$DiscOverride=0,
 							$Controlled=0,
 							$Serialised=0,
 							$DecimalPlaces=0,
-							$PriceDecimals=2,
 							$Narrative='',
 							$UpdateDB='No',
 							$LineNumber=-1,
 							$TaxCategory=0,
+							$vtigerProductID='',
 							$ItemDue = '',
 							$POLine='',
 							$StandardCost=0,
 							$EOQ=1,
 							$NextSerialNo=0,
 							$ExRate=1,
-							$ConversionFactor=1,
-							$ItemProperties=array()){
+							$identifier=0){
 
 		if (isset($StockID) AND $StockID!="" AND $Qty>0 AND isset($Qty)){
 
 			if ($Price<0){ /*madness check - use a credit note to give money away!*/
 				$Price=0;
 			}
-			if ($LineNumber==-1) {
+
+			if ($LineNumber==-1){
 				$LineNumber = $this->LineCounter;
 			}
-
 
 			$this->LineItems[$LineNumber] = new LineDetails($LineNumber,
 															$StockID,
 															$Descr,
+															$LongDescr,
 															$Qty,
 															$Price,
 															$Disc,
-															$DiscOverride,
-															$Units,
-															$ConversionFactor,
+															$UOM,
 															$Volume,
 															$Weight,
 															$QOHatLoc,
@@ -130,7 +146,6 @@ Class Cart {
 															$Controlled,
 															$Serialised,
 															$DecimalPlaces,
-															$PriceDecimals,
 															$Narrative,
 															$TaxCategory,
 															$ItemDue,
@@ -139,7 +154,6 @@ Class Cart {
 															$EOQ,
 															$NextSerialNo,
 															$ExRate);
-			$this->LineItems[$LineNumber]->ItemProperties=$ItemProperties;
 			$this->ItemsOrdered++;
 
 			if ($UpdateDB=='Yes'){
@@ -151,31 +165,26 @@ Class Cart {
 				being retrieved from the DB - dont want to add them again - would return
 				errors anyway */
 
-				global $db;
 				$sql = "INSERT INTO salesorderdetails (orderlineno,
 														orderno,
 														stkcode,
 														quantity,
 														unitprice,
-														units,
-														conversionfactor,
 														discountpercent,
 														itemdue,
 														poline)
-													VALUES('" . $this->LineCounter . "',
-														'" . $this->OrderNo . "',
+													VALUES(" . $LineNumber . ",
+														" . $_SESSION['ExistingOrder' . $identifier] . ",
 														'" . trim(mb_strtoupper($StockID)) ."',
-														'" . $Qty . "',
-														'" . $Price . "',
-														'" . $Units . "',
-														'" . $ConversionFactor . "',
-														'" . $Disc . "',
-														'" . $ItemDue . "',
-														'" . $POLine . "')";
+														" . $Qty . ",
+														" . $Price . ",
+														" . $Disc . ",'
+														" . FormatDateForSQL($ItemDue) . "',
+														" . $POLine . ")";
 				$result = DB_query($sql,
-							$db ,
-							_('The order line for') . ' ' . strtoupper($StockID) . ' ' ._('could not be inserted'));
+							_('The order line for') . ' ' . mb_strtoupper($StockID) . ' ' ._('could not be inserted'));
 			}
+
 			$this->LineCounter = $LineNumber + 1;
 			Return 1;
 		}
@@ -185,75 +194,64 @@ Class Cart {
 	function update_cart_item( $UpdateLineNumber,
 								$Qty,
 								$Price,
-								$Units,
-								$ConversionFactor=1,
 								$Disc,
-								$DiscOverride,
 								$Narrative,
 								$UpdateDB='No',
 								$ItemDue,
 								$POLine,
 								$GPPercent,
-								$ItemProperties=array()){
+								$identifier){
 
 		if ($Qty>0){
 			$this->LineItems[$UpdateLineNumber]->Quantity = $Qty;
 		}
 		$this->LineItems[$UpdateLineNumber]->Price = $Price;
-		$this->LineItems[$UpdateLineNumber]->Units = $Units;
-		$this->LineItems[$UpdateLineNumber]->ConversionFactor = $ConversionFactor;
 		$this->LineItems[$UpdateLineNumber]->DiscountPercent = $Disc;
-		$this->LineItems[$UpdateLineNumber]->OverrideDiscount = $DiscOverride;
 		$this->LineItems[$UpdateLineNumber]->Narrative = $Narrative;
 		$this->LineItems[$UpdateLineNumber]->ItemDue = $ItemDue;
 		$this->LineItems[$UpdateLineNumber]->POLine = $POLine;
 		$this->LineItems[$UpdateLineNumber]->GPPercent = $GPPercent;
-		$this->LineItems[$UpdateLineNumber]->ItemProperties = $ItemProperties;
 		if ($UpdateDB=='Yes'){
-			global $db;
-			$result = DB_query("UPDATE salesorderdetails SET quantity='" . $Qty . "',
-															unitprice='" . $Price . "',
-															units='" . $Units . "',
-															conversionfactor='" . $ConversionFactor . "',
-															discountpercent='" . $Disc . "',
-															narrative ='" . DB_escape_string($Narrative) . "',
+			$result = DB_query("UPDATE salesorderdetails SET quantity=" . $Qty . ",
+															unitprice=" . $Price . ",
+															discountpercent=" . $Disc . ",
+															narrative ='" . $Narrative . "',
 															itemdue = '" . FormatDateForSQL($ItemDue) . "',
-															poline = '" . DB_escape_string($POLine) . "'
-														WHERE orderno='" . $this->OrderNo . "'
-														AND orderlineno='" . $UpdateLineNumber . "'"
-													, $db
-				, _('The order line number') . ' ' . $UpdateLineNumber .  ' ' . _('could not be updated'));
+															poline = '" . $POLine . "'
+								WHERE orderno=" . $_SESSION['ExistingOrder'.$identifier] . "
+								AND orderlineno=" . $UpdateLineNumber,
+								 _('The order line number') . ' ' . $UpdateLineNumber .  ' ' . _('could not be updated'));
 		}
 	}
 
-	function remove_from_cart($LineNumber, $UpdateDB='No'){
+	function remove_from_cart($LineNumber, $UpdateDB='No', $identifier=0){
 
-		if (!isset($LineNumber) or $LineNumber=='' or $LineNumber < 0){ /* over check it */
+		if (!isset($LineNumber) OR $LineNumber=='' OR $LineNumber < 0){ /* over check it */
 			prnMsg(_('No Line Number passed to remove_from_cart, so nothing has been removed.'), 'error');
 			return;
 		}
 		if ($UpdateDB=='Yes'){
-			global $db;
 			if ($this->Some_Already_Delivered($LineNumber)==0){
 				/* nothing has been delivered, delete it. */
 				$result = DB_query("DELETE FROM salesorderdetails
-									WHERE orderno='" . $this->OrderNo . "'
+									WHERE orderno='" . $_SESSION['ExistingOrder' . $identifier] . "'
 									AND orderlineno='" . $LineNumber . "'",
-									$db,
 									_('The order line could not be deleted because')
 									);
-				prnMsg( _('Deleted Line Number'). ' ' . $LineNumber . ' ' . _('from existing Order Number').' ' . $this->OrderNo, 'success');
+				prnMsg( _('Deleted Line Number'). ' ' . $LineNumber . ' ' . _('from existing Order Number').' ' . $_SESSION['ExistingOrder' . $identifier], 'success');
 			} else {
 				/* something has been delivered. Clear the remaining Qty and Mark Completed */
-				$result = DB_query("UPDATE salesorderdetails SET quantity=qtyinvoiced, completed=1
-									WHERE orderno='".$this->OrderNo."' AND orderlineno='" . $LineNumber . "'" ,
-									$db,
+				$result = DB_query("UPDATE salesorderdetails SET quantity=qtyinvoiced,
+																completed=1
+									WHERE orderno='" . $_SESSION['ExistingOrder' . $identifier] ."'
+									AND orderlineno='" . $LineNumber . "'" ,
 								   _('The order line could not be updated as completed because')
 								   );
-				prnMsg(_('Removed Remaining Quantity and set Line Number '). ' ' . $LineNumber . ' ' . _('as Completed for existing Order Number').' ' . $this->OrderNo, 'success');
+				prnMsg(_('Removed Remaining Quantity and set Line Number '). ' ' . $LineNumber . ' ' . _('as Completed for existing Order Number').' ' . $_SESSION['ExistingOrder'], 'success');
 			}
 		}
 		/* Since we need to check the LineItem above and might affect the DB, don't unset until after DB is updates occur */
+		$this->CreditAvailable +=  ($this->LineItems[$LineNumber]->Quantity*$this->LineItems[$LineNumber]->Price*(1-$this->LineItems[$LineNumber]->DiscountPercent));
 		unset($this->LineItems[$LineNumber]);
 		$this->ItemsOrdered--;
 
@@ -263,12 +261,12 @@ Class Cart {
 		/* Makes a comma seperated list of the stock items ordered
 		for use in SQL expressions */
 
-		$StockID_List="";
+		$StockID_List='';
 		foreach ($this->LineItems as $StockItem) {
 			$StockID_List .= ",'" . $StockItem->StockID . "'";
 		}
 
-		return substr($StockID_List, 1);
+		return mb_substr($StockID_List, 1);
 
 	}
 
@@ -304,42 +302,36 @@ Class Cart {
 	}
 
 	function GetExistingTaxes($LineNumber, $stkmoveno){
-
-		global $db;
-
 		/*Gets the Taxes and rates applicable to this line from the TaxGroup of the branch and TaxCategory of the item
 		and the taxprovince of the dispatch location */
 
 		$sql = "SELECT stockmovestaxes.taxauthid,
-				taxauthorities.description,
-				taxauthorities.taxglcode,
-				stockmovestaxes.taxcalculationorder,
-				stockmovestaxes.taxontax,
-				stockmovestaxes.taxrate
-			FROM stockmovestaxes INNER JOIN taxauthorities
-				ON stockmovestaxes.taxauthid = taxauthorities.taxid
-			WHERE stkmoveno = '" . $stkmoveno . "'
-			ORDER BY taxcalculationorder";
+					taxauthorities.description,
+					taxauthorities.taxglcode,
+					stockmovestaxes.taxcalculationorder,
+					stockmovestaxes.taxontax,
+					stockmovestaxes.taxrate
+				FROM stockmovestaxes INNER JOIN taxauthorities
+					ON stockmovestaxes.taxauthid = taxauthorities.taxid
+				WHERE stkmoveno = '" . $stkmoveno . "'
+				ORDER BY taxcalculationorder";
 
 		$ErrMsg = _('The taxes and rates for this item could not be retrieved because');
-		$GetTaxRatesResult = DB_query($sql,$db,$ErrMsg);
-
+		$GetTaxRatesResult = DB_query($sql,$ErrMsg);
+		$i=1;
 		while ($myrow = DB_fetch_array($GetTaxRatesResult)){
 
-			$this->LineItems[$LineNumber]->Taxes[$myrow['taxcalculationorder']] =
-								  new Tax($myrow['taxcalculationorder'],
-										$myrow['taxauthid'],
-										$myrow['description'],
-										$myrow['taxrate'],
-										$myrow['taxontax'],
-										$myrow['taxglcode']);
+			$this->LineItems[$LineNumber]->Taxes[$i] =   new Tax($myrow['taxcalculationorder'],
+																$myrow['taxauthid'],
+																$myrow['description'],
+																$myrow['taxrate'],
+																$myrow['taxontax'],
+																$myrow['taxglcode']);
+			$i++;
 		}
 	} //end method GetExistingTaxes
 
 	function GetTaxes($LineNumber){
-
-		global $db;
-
 		/*Gets the Taxes and rates applicable to this line from the TaxGroup of the branch and TaxCategory of the item
 		and the taxprovince of the dispatch location */
 
@@ -359,33 +351,30 @@ Class Cart {
 			ORDER BY taxgrouptaxes.calculationorder";
 
 		$ErrMsg = _('The taxes and rates for this item could not be retrieved because');
-		$GetTaxRatesResult = DB_query($SQL,$db,$ErrMsg);
+		$GetTaxRatesResult = DB_query($SQL,$ErrMsg);
 		unset($this->LineItems[$LineNumber]->Taxes);
 		if (DB_num_rows($GetTaxRatesResult)==0){
 			prnMsg(_('It appears that taxes are not defined correctly for this customer tax group') ,'error');
-		}
-		else {
-		while ($myrow = DB_fetch_array($GetTaxRatesResult)){
-
-			$this->LineItems[$LineNumber]->Taxes[$myrow['calculationorder']] = new Tax($myrow['calculationorder'],
-													$myrow['taxauthid'],
-													$myrow['description'],
-													$myrow['taxrate'],
-													$myrow['taxontax'],
-													$myrow['taxglcode']);
-		}
-	  }
+		} else {
+			$i=1;
+			while ($myrow = DB_fetch_array($GetTaxRatesResult)){
+				$this->LineItems[$LineNumber]->Taxes[$i] = new Tax($myrow['calculationorder'],
+																	$myrow['taxauthid'],
+																	$myrow['description'],
+																	$myrow['taxrate'],
+																	$myrow['taxontax'],
+																	$myrow['taxglcode']);
+				$i++;
+			} //end loop around different taxes
+		} //end if there are some taxes defined
 	} //end method GetTaxes
 
 	function GetFreightTaxes () {
-
-		global $db;
-
 		/*Gets the Taxes and rates applicable to the freight based on the tax group of the branch combined with the tax category for this particular freight
 		and SESSION['FreightTaxCategory'] the taxprovince of the dispatch location */
 
-		$sql = "SELECT taxcatid FROM taxcategories WHERE taxcatname='Freight'";
-		$TaxCatQuery = DB_query($sql, $db);
+		$sql = "SELECT taxcatid FROM taxcategories WHERE taxcatname='Freight'";// This tax category is hardcoded inside the database.
+		$TaxCatQuery = DB_query($sql);
 
 		if ($TaxCatRow = DB_fetch_array($TaxCatQuery)) {
 		  $TaxCatID = $TaxCatRow['taxcatid'];
@@ -410,65 +399,62 @@ Class Cart {
 				ORDER BY taxgrouptaxes.calculationorder";
 
 		$ErrMsg = _('The taxes and rates for this item could not be retrieved because');
-		$GetTaxRatesResult = DB_query($SQL,$db,$ErrMsg);
-
+		$GetTaxRatesResult = DB_query($SQL,$ErrMsg);
+		$i=1;
 		while ($myrow = DB_fetch_array($GetTaxRatesResult)){
 
-			$this->FreightTaxes[$myrow['calculationorder']] = new Tax($myrow['calculationorder'],
-											$myrow['taxauthid'],
-											$myrow['description'],
-											$myrow['taxrate'],
-											$myrow['taxontax'],
-											$myrow['taxglcode']);
+			$this->FreightTaxes[$i] = new Tax($myrow['calculationorder'],
+												$myrow['taxauthid'],
+												$myrow['description'],
+												$myrow['taxrate'],
+												$myrow['taxontax'],
+												$myrow['taxglcode']);
+			$i++;
 		}
 	} //end method GetFreightTaxes()
 
 } /* end of cart class defintion */
 
 Class LineDetails {
-	var $LineNumber;
-	var $StockID;
-	var $ItemDescription;
-	var $Quantity;
-	var $Price;
-	var $DiscountPercent;
-	var $OverrideDiscount;
-	var $Units;
-	var $ConversionFactor;
-	var $Volume;
-	var $Weight;
-	var $ActDispDate;
-	var $QtyInv;
-	var $QtyDispatched;
-	var $StandardCost;
-	var $QOHatLoc;
-	var $MBflag;	/*Make Buy Dummy, Assembly or Kitset */
-	var $DiscCat; /* Discount Category of the item if any */
-	var $Controlled;
-	var $Serialised;
-	var $DecimalPlaces;
-	var $PriceDecimals;
-	var $SerialItems;
-	var $Narrative;
-	var $TaxCategory;
-	var $Taxes;
-	var $WorkOrderNo;
-	var $ItemDue;
-	var $POLine;
-	var $EOQ;
-	var $NextSerialNo;
-	var $GPPercent;
-	var $ItemProperties;
+	Var $LineNumber;
+	Var $StockID;
+	Var $ItemDescription;
+	Var $LongDescription;
+	Var $Quantity;
+	Var $Price;
+	Var $DiscountPercent;
+	Var $Units;
+	Var $Volume;
+	Var $Weight;
+	Var $ActDispDate;
+	Var $QtyInv;
+	Var $QtyDispatched;
+	Var $StandardCost;
+	Var $QOHatLoc;
+	Var $MBflag;	/*Make Buy Dummy, Assembly or Kitset */
+	Var $DiscCat; /* Discount Category of the item if any */
+	Var $Controlled;
+	Var $Serialised;
+	Var $DecimalPlaces;
+	Var $SerialItems;
+	Var $Narrative;
+	Var $TaxCategory;
+	Var $Taxes;
+	Var $WorkOrderNo;
+	Var $ItemDue;
+	Var $POLine;
+	Var $EOQ;
+	Var $NextSerialNo;
+	Var $GPPercent;
 
-	function LineDetails ($LineNumber,
+	function __construct ($LineNumber,
 							$StockItem,
 							$Descr,
+							$LongDescr,
 							$Qty,
 							$Prc,
 							$DiscPercent,
-							$DiscOverride,
-							$Units,
-							$ConversionFactor,
+							$UOM,
 							$Volume,
 							$Weight,
 							$QOHatLoc,
@@ -479,7 +465,6 @@ Class LineDetails {
 							$Controlled,
 							$Serialised,
 							$DecimalPlaces,
-							$PriceDecimals,
 							$Narrative,
 							$TaxCategory,
 							$ItemDue,
@@ -493,12 +478,11 @@ Class LineDetails {
 		$this->LineNumber = $LineNumber;
 		$this->StockID =$StockItem;
 		$this->ItemDescription = $Descr;
+		$this->LongDescription = $LongDescr;
 		$this->Quantity = $Qty;
 		$this->Price = $Prc;
 		$this->DiscountPercent = $DiscPercent;
-		$this->DiscountOverride = $DiscOverride;
-		$this->Units = $Units;
-		$this->ConversionFactor = $ConversionFactor;
+		$this->Units = $UOM;
 		$this->Volume = $Volume;
 		$this->Weight = $Weight;
 		$this->ActDispDate = $ActDispatchDate;
@@ -506,7 +490,11 @@ Class LineDetails {
 		if ($Controlled==1){
 			$this->QtyDispatched = 0;
 		} else {
-			$this->QtyDispatched = $Qty - $QtyInvoiced;
+			if ($_SESSION['InvoiceQuantityDefault']==1){
+				$this->QtyDispatched = $Qty - $QtyInvoiced;
+			} else {
+				$this->QtyDispathced = 0;
+			}
 		}
 		$this->QOHatLoc = $QOHatLoc;
 		$this->MBflag = $MBflag;
@@ -514,11 +502,9 @@ Class LineDetails {
 		$this->Controlled = $Controlled;
 		$this->Serialised = $Serialised;
 		$this->DecimalPlaces = $DecimalPlaces;
-		$this->PriceDecimals = $PriceDecimals;
 		$this->SerialItems = array();
 		$this->Narrative = $Narrative;
 		$this->Taxes = array();
-		$this->ItemProperties = array();
 		$this->TaxCategory = $TaxCategory;
 		$this->WorkOrderNo = 0;
 		$this->ItemDue = $ItemDue;
@@ -534,17 +520,71 @@ Class LineDetails {
 		}
 	} //end constructor function for LineDetails
 
+	function LineDetails($LineNumber,
+							$StockItem,
+							$Descr,
+							$LongDescr,
+							$Qty,
+							$Prc,
+							$DiscPercent,
+							$UOM,
+							$Volume,
+							$Weight,
+							$QOHatLoc,
+							$MBflag,
+							$ActDispatchDate,
+							$QtyInvoiced,
+							$DiscCat,
+							$Controlled,
+							$Serialised,
+							$DecimalPlaces,
+							$Narrative,
+							$TaxCategory,
+							$ItemDue,
+							$POLine,
+							$StandardCost,
+							$EOQ,
+							$NextSerialNo,
+							$ExRate ) {
+		self::__construct($LineNumber,
+							$StockItem,
+							$Descr,
+							$LongDescr,
+							$Qty,
+							$Prc,
+							$DiscPercent,
+							$UOM,
+							$Volume,
+							$Weight,
+							$QOHatLoc,
+							$MBflag,
+							$ActDispatchDate,
+							$QtyInvoiced,
+							$DiscCat,
+							$Controlled,
+							$Serialised,
+							$DecimalPlaces,
+							$Narrative,
+							$TaxCategory,
+							$ItemDue,
+							$POLine,
+							$StandardCost,
+							$EOQ,
+							$NextSerialNo,
+							$ExRate );
+	}
+
 }
 
 Class Tax {
-	var $TaxCalculationOrder;  /*the index for the array */
-	var $TaxAuthID;
-	var $TaxAuthDescription;
-	var $TaxRate;
-	var $TaxOnTax;
+	Var $TaxCalculationOrder;  /*the index for the array */
+	Var $TaxAuthID;
+	Var $TaxAuthDescription;
+	Var $TaxRate;
+	Var $TaxOnTax;
 	var $TaxGLCode;
 
-	function Tax ($TaxCalculationOrder,
+	function __construct ($TaxCalculationOrder,
 			$TaxAuthID,
 			$TaxAuthDescription,
 			$TaxRate,
@@ -557,6 +597,20 @@ Class Tax {
 		$this->TaxRate =  $TaxRate;
 		$this->TaxOnTax = $TaxOnTax;
 		$this->TaxGLCode = $TaxGLCode;
+	}
+	function Tax ($TaxCalculationOrder,
+			$TaxAuthID,
+			$TaxAuthDescription,
+			$TaxRate,
+			$TaxOnTax,
+			$TaxGLCode) {
+
+		self::__construct($TaxCalculationOrder,
+			$TaxAuthID,
+			$TaxAuthDescription,
+			$TaxRate,
+			$TaxOnTax,
+			$TaxGLCode);
 	}
 }
 

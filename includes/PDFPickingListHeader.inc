@@ -1,5 +1,4 @@
 <?php
-/* $Id$*/
 /* pdf-php by R&OS code to set up a new sales order page */
 if ($PageNumber>1){
 	$pdf->newPage();
@@ -53,13 +52,13 @@ $pdf->addText($FormDesign->ShipperCode->x,$Page_Height - $FormDesign->ShipperCod
 
 $LeftOvers = $pdf->addTextWrap($FormDesign->Comments->x,$Page_Height - $FormDesign->Comments->y, $FormDesign->Comments->Length, $FormDesign->Comments->FontSize,stripcslashes($OrdersToPick[$i]['comments']));
 
-if (strlen($LeftOvers)>1){
+if (mb_strlen($LeftOvers)>1){
 	$LeftOvers = $pdf->addTextWrap($FormDesign->Comments->x,$Page_Height - $FormDesign->Comments->y-14, $FormDesign->Comments->Length, $FormDesign->Comments->FontSize,$LeftOvers);
-	if (strlen($LeftOvers)>1){
+	if (mb_strlen($LeftOvers)>1){
 		$LeftOvers = $pdf->addTextWrap($FormDesign->Comments->x,$Page_Height - $FormDesign->Comments->y-28, $FormDesign->Comments->Length, $FormDesign->Comments->FontSize,$LeftOvers);
-		if (strlen($LeftOvers)>1){
+		if (mb_strlen($LeftOvers)>1){
 			$LeftOvers = $pdf->addTextWrap($FormDesign->Comments->x,$Page_Height - $FormDesign->Comments->y-42, $FormDesign->Comments->Length, $FormDesign->Comments->FontSize,$LeftOvers);
-			if (strlen($LeftOvers)>1){
+			if (mb_strlen($LeftOvers)>1){
 				$LeftOvers = $pdf->addTextWrap($FormDesign->Comments->x,$Page_Height - $FormDesign->Comments->y-56, $FormDesign->Comments->Length, $FormDesign->Comments->FontSize,$LeftOvers);
 			}
 		}
@@ -76,9 +75,9 @@ $LeftOvers = $pdf->addTextWrap($FormDesign->Headings->Column4->x,$Page_Height - 
 $LeftOvers = $pdf->addTextWrap($FormDesign->Headings->Column5->x,$Page_Height - $FormDesign->Headings->Column5->y,$FormDesign->Headings->Column5->Length , $FormDesign->Headings->Column5->FontSize, _('Prev Dels'),'right');
 $LeftOvers = $pdf->addTextWrap($FormDesign->Headings->Column6->x,$Page_Height - $FormDesign->Headings->Column6->y,$FormDesign->Headings->Column6->Length , $FormDesign->Headings->Column6->FontSize, _('Actual Picked'),'right');
 
-$pdf->RoundRectangle($FormDesign->DeliveryAddressBox->x, $Page_Height - $FormDesign->DeliveryAddressBox->y,$FormDesign->DeliveryAddressBox->width, $FormDesign->DeliveryAddressBox->height, $FormDesign->DeliveryAddressBox->radius);
-$pdf->RoundRectangle($FormDesign->CustomerAddressBox->x, $Page_Height - $FormDesign->CustomerAddressBox->y,$FormDesign->CustomerAddressBox->width, $FormDesign->CustomerAddressBox->height, $FormDesign->CustomerAddressBox->radius);
-$pdf->RoundRectangle($FormDesign->DataBox->x, $Page_Height - $FormDesign->DataBox->y,$FormDesign->DataBox->width, $FormDesign->DataBox->height, $FormDesign->DataBox->radius);
+$pdf->RoundRectangle($FormDesign->DeliveryAddressBox->x, $Page_Height - $FormDesign->DeliveryAddressBox->y,$FormDesign->DeliveryAddressBox->width, $FormDesign->DeliveryAddressBox->height, $FormDesign->DeliveryAddressBox->radius, $FormDesign->DeliveryAddressBox->radius);// Function RoundRectangle from includes/class.pdf.php
+$pdf->RoundRectangle($FormDesign->CustomerAddressBox->x, $Page_Height - $FormDesign->CustomerAddressBox->y,$FormDesign->CustomerAddressBox->width, $FormDesign->CustomerAddressBox->height, $FormDesign->CustomerAddressBox->radius, $FormDesign->CustomerAddressBox->radius);// Function RoundRectangle from includes/class.pdf.php
+$pdf->RoundRectangle($FormDesign->DataBox->x, $Page_Height - $FormDesign->DataBox->y,$FormDesign->DataBox->width, $FormDesign->DataBox->height, $FormDesign->DataBox->radius, $FormDesign->DataBox->radius);// Function RoundRectangle from includes/class.pdf.php
 
 $pdf->line($FormDesign->LineBelowColumns->startx, $Page_Height -$FormDesign->LineBelowColumns->starty,$FormDesign->LineBelowColumns->endx, $Page_Height -$FormDesign->LineBelowColumns->endy);
 $pdf->line($FormDesign->ColumnLine1->startx, $Page_Height -$FormDesign->ColumnLine1->starty,$FormDesign->ColumnLine1->endx, $Page_Height -$FormDesign->ColumnLine1->endy);

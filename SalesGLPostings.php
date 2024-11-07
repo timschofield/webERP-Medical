@@ -1,10 +1,11 @@
 <?php
 
-/* $Id$*/
 
-include('includes/session.inc');
-$title = _('Sales GL Postings Set Up');
-include('includes/header.inc');
+include('includes/session.php');
+$Title = _('Sales GL Postings Set Up');
+$ViewTopic= 'CreatingNewSystem';
+$BookMark = 'SalesGLPostings';
+include('includes/header.php');
 
 if (isset($_GET['SelectedSalesPostingID'])){
 	$SelectedSalesPostingID =$_GET['SelectedSalesPostingID'];
@@ -14,7 +15,7 @@ if (isset($_GET['SelectedSalesPostingID'])){
 
 $InputError=false;
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$RootPath.'/css/'.$Theme.'/images/customer.png" title="' . _('Search') . '" alt="" />' . ' ' . $Title . '</p>';
 
 if (isset($_POST['submit'])) {
 
@@ -26,24 +27,25 @@ if (isset($_POST['submit'])) {
 		/*SelectedSalesPostingID could also exist if submit had not been clicked this		code would not run in this case cos submit is false of course	see the delete code below*/
 
 		$sql = "UPDATE salesglpostings SET salesglcode = '" . $_POST['SalesGLCode'] . "',
-											discountglcode = '" . $_POST['DiscountGLCode'] . "',
-											area = '" . $_POST['Area'] . "',
-											stkcat = '" . $_POST['StkCat'] . "',
-											salestype = '" . $_POST['SalesType'] . "'
-										WHERE salesglpostings.id = '".$SelectedSalesPostingID."'";
+										discountglcode = '" . $_POST['DiscountGLCode'] . "',
+										area = '" . $_POST['Area'] . "',
+										stkcat = '" . $_POST['StkCat'] . "',
+										salestype = '" . $_POST['SalesType'] . "'
+				WHERE salesglpostings.id = '".$SelectedSalesPostingID."'";
 		$msg = _('The sales GL posting record has been updated');
 	} else {
 
 	/*Selected Sales GL Posting is null cos no item selected on first time round so must be	adding a record must be submitting new entries in the new SalesGLPosting form */
 
 		/* Verify if item doesn't exists to insert it, otherwise just refreshes the page. */
-		$sql = "SELECT salestype FROM salesglpostings
-								WHERE area='" . $_POST['Area'] . "'
-									AND stkcat='" . $_POST['StkCat'] . "'
-									AND salestype='" . $_POST['SalesType'] . "'";
+		$sql = "SELECT count(*) FROM salesglpostings
+				WHERE area='" . $_POST['Area'] . "'
+				AND stkcat='" . $_POST['StkCat'] . "'
+				AND salestype='" . $_POST['SalesType'] . "'";
 
-		$result = DB_query($sql,$db);
-		if (DB_num_rows($result) == 0) {
+		$result = DB_query($sql);
+		$myrow = DB_fetch_row($result);
+		if ($myrow[0] == 0) {
 			$sql = "INSERT INTO salesglpostings (
 						salesglcode,
 						discountglcode,
@@ -65,7 +67,7 @@ if (isset($_POST['submit'])) {
 	}
 	//run the SQL from either of the above possibilites
 
-	$result = DB_query($sql,$db);
+	$result = DB_query($sql);
 
 	if ($InputError==false){
 		prnMsg($msg,'success');
@@ -80,10 +82,9 @@ if (isset($_POST['submit'])) {
 } elseif (isset($_GET['delete'])) {
 //the link to delete a selected record was clicked instead of the submit button
 
-	$sql="DELETE FROM salesglpostings
-		WHERE id='".$SelectedSalesPostingID."'";
+	$sql="DELETE FROM salesglpostings WHERE id='".$SelectedSalesPostingID."'";
 
-	$result = DB_query($sql,$db);
+	$result = DB_query($sql);
 
 	prnMsg( _('Sales posting record has been deleted'),'success');
 }
@@ -100,9 +101,12 @@ if (!isset($SelectedSalesPostingID)) {
 				salesglpostings.discountglcode
 				FROM salesglpostings LEFT JOIN chartmaster
 					ON salesglpostings.salesglcode = chartmaster.accountcode
-				WHERE chartmaster.accountcode IS NULL";
+				WHERE chartmaster.accountcode IS NULL
+				ORDER BY salesglpostings.area,
+					salesglpostings.stkcat,
+					salesglpostings.salestype";
 
-	$result = DB_query($SQL,$db);
+	$result = DB_query($SQL);
 	if (DB_num_rows($result)>0){
 		$ShowLivePostingRecords = false;
 		prnMsg (_('The following posting records that do not have valid general ledger code specified - these records must be amended.'),'error');
@@ -113,33 +117,26 @@ if (!isset($SelectedSalesPostingID)) {
 				<th>' . _('Sales Account') . '</th>
 				<th>' . _('Discount Account') . '</th>
 			</tr>';
-		$k=0; //row colour counter
 
-		while ($myrow = DB_fetch_array($result)) {
-			if ($k==1){
-				echo '<tr class="EvenTableRows">';
-				$k=0;
-			} else {
-				echo '<tr class="OddTableRows">';
-				$k=1;
-			}
+		while ($myrow = DB_fetch_row($result)) {
 
-			printf('<td>%s</td>
+			printf('<tr class="striped_row">
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
-				<td><a href="%sSelectedSalesPostingID=%s">' . _('Edit') . '</td>
-				<td><a href="%sSelectedSalesPostingID=%s&delete=yes">'. _('Delete') . '</td></tr>',
-				$myrow['area'],
-				$myrow['stkcat'],
-				$myrow['salestype'],
-				$myrow['salesglcode'],
-				$myrow['discountglcode'],
-				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
-				$myrow['id'],
-				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
-				$myrow['id']);
+				<td>%s</td>
+				<td><a href="%sSelectedSalesPostingID=%s">' . _('Edit') . '</a></td>
+				<td><a href="%sSelectedSalesPostingID=%s&amp;delete=yes" onclick="return confirm(\'' . _('Are you sure you wish to delete this sales GL posting record?') . '\');">' .  _('Delete') . '</a></td></tr>',
+				$myrow[1],
+				$myrow[2],
+				$myrow[3],
+				htmlspecialchars($myrow[4],ENT_QUOTES,'UTF-8'),
+				$myrow[5],
+				htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?',
+				$myrow[0],
+				htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8'). '?',
+				$myrow[0]);
 		}
 	}
 
@@ -147,32 +144,34 @@ if (!isset($SelectedSalesPostingID)) {
 			salesglpostings.area,
 			salesglpostings.stkcat,
 			salesglpostings.salestype
-		FROM salesglpostings";
+			FROM salesglpostings";
 
-	$result = DB_query($SQL,$db);
+	$result = DB_query($SQL);
 
 	if (DB_num_rows($result)==0){
 		/* there is no default set up so need to check that account 1 is not already used */
 		/* First Check if we have at least a group_ caled Sales */
 		$SQL = "SELECT groupname FROM accountgroups WHERE groupname = 'Sales'";
-		$result = DB_query($SQL,$db);
+		$result = DB_query($SQL);
 		if (DB_num_rows($result)==0){
 			/* The required group does not seem to exist so we create it */
 			$SQL = "INSERT INTO accountgroups (
 					groupname,
 					sectioninaccounts,
 					pandl,
-					sequenceintb
+					sequenceintb,
+					parentgroupname
 				) VALUES (
 					'Sales',
-					'1',
-					'1',
-					'10')";
+					1,
+					1,
+					10,
+					' ')";
 
-			$result = DB_query($SQL,$db);
+			$result = DB_query($SQL);
 		}
-		$SQL = "SELECT accountcode FROM chartmaster WHERE accountcode='1'";
-		$result = DB_query($SQL,$db);
+		$SQL = "SELECT accountcode FROM chartmaster WHERE accountcode ='1'";
+		$result = DB_query($SQL);
 		if (DB_num_rows($result)==0){
 		/* account number 1 is not used, so insert a new account */
 			$SQL = "INSERT INTO chartmaster (
@@ -180,11 +179,11 @@ if (!isset($SelectedSalesPostingID)) {
 						accountname,
 						group_)
 					VALUES (
-						'1',
+						1,
 						'Default Sales/Discounts',
 						'Sales'
-					)";
-			$result = DB_query($SQL,$db);
+						)";
+			$result = DB_query($SQL);
 		}
 
 		$SQL = "INSERT INTO salesglpostings (
@@ -193,13 +192,12 @@ if (!isset($SelectedSalesPostingID)) {
 						salestype,
 						salesglcode,
 						discountglcode)
-					VALUES ('AN',
-						'ANY',
-						'AN',
-						'1',
-						'1'
-					)";
-		$result = DB_query($SQL,$db);
+				VALUES ('AN',
+					'ANY',
+					'AN',
+					1,
+					1)";
+		$result = DB_query($SQL);
 
 	}
 	if ($ShowLivePostingRecords){
@@ -208,51 +206,47 @@ if (!isset($SelectedSalesPostingID)) {
 				salesglpostings.area,
 				salesglpostings.stkcat,
 				salesglpostings.salestype,
-				chart1.accountname AS chart1name,
-				chart2.accountname AS chart2name
+				chart1.accountname,
+				chart2.accountname
 			FROM salesglpostings,
 				chartmaster as chart1,
 				chartmaster as chart2
 			WHERE salesglpostings.salesglcode = chart1.accountcode
-			AND salesglpostings.discountglcode = chart2.accountcode";
+			AND salesglpostings.discountglcode = chart2.accountcode
+			ORDER BY salesglpostings.area,
+					salesglpostings.stkcat,
+					salesglpostings.salestype";
 
-		$result = DB_query($SQL,$db);
+		$result = DB_query($SQL);
 
-		echo '<table class="selection">';
-		echo '<tr><th>' . _('Area') . '</th>
+		echo '<table class="selection">
+			<tr>
+			<th>' . _('Area') . '</th>
 			<th>' . _('Stock Category') . '</th>
 			<th>' . _('Sales Type') . '</th>
 			<th>' . _('Sales Account') . '</th>
 			<th>' . _('Discount Account') . '</th>
 			</tr>';
 
-		$k=0; //row colour counter
+		while ($myrow = DB_fetch_row($result)) {
 
-		while ($myrow = DB_fetch_array($result)) {
-			if ($k==1){
-				echo '<tr class="EvenTableRows">';
-				$k=0;
-			} else {
-				echo '<tr class="OddTableRows">';
-				$k=1;
-			}
-
-			printf('<td>%s</td>
+			printf('<tr class="striped_row">
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
-				<td><a href="%sSelectedSalesPostingID=%s">' . _('Edit') . '</td>
-				<td><a href="%sSelectedSalesPostingID=%s&delete=yes">'. _('Delete') . '</td></tr>',
-				$myrow['area'],
-				$myrow['stkcat'],
-				$myrow['salestype'],
-				$myrow['chart1name'],
-				$myrow['chart2name'],
-				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
-				$myrow['id'],
-				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?',
-				$myrow['id']);
+				<td>%s</td>
+				<td><a href="%sSelectedSalesPostingID=%s">' . _('Edit') . '</a></td>
+				<td><a href="%sSelectedSalesPostingID=%s&amp;delete=yes" onclick="return confirm(\'' . _('Are you sure you wish to delete this sales GL posting record?') . '\');">' .  _('Delete') . '</a></td></tr>',
+				$myrow[1],
+				$myrow[2],
+				$myrow[3],
+                htmlspecialchars($myrow[4],ENT_QUOTES,'UTF-8'),
+				$myrow[5],
+				htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?',
+				$myrow[0],
+				htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8'). '?',
+				$myrow[0]);
 		}
 		//END WHILE LIST LOOP
 		echo '</table>';
@@ -262,13 +256,13 @@ if (!isset($SelectedSalesPostingID)) {
 //end of ifs and buts!
 
 if (isset($SelectedSalesPostingID)) {
-	echo '<div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">' . _('Show All Sales Posting Codes Defined') . '</a></div>';
+	echo '<div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '">' . _('Show All Sales Posting Codes Defined') . '</a></div>';
 }
 
 
 if (!isset($_GET['delete'])) {
 
-	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') .  '">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') .  '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (isset($SelectedSalesPostingID)) {
@@ -282,7 +276,7 @@ if (!isset($_GET['delete'])) {
 			FROM salesglpostings
 			WHERE salesglpostings.id='".$SelectedSalesPostingID."'";
 
-		$result = DB_query($sql, $db);
+		$result = DB_query($sql);
 		$myrow = DB_fetch_array($result);
 
 		$_POST['SalesGLCode']= $myrow['salesglcode'];
@@ -299,71 +293,82 @@ if (!isset($_GET['delete'])) {
 
 	$SQL = "SELECT areacode,
 			areadescription FROM areas";
-	$result = DB_query($SQL,$db);
+	$result = DB_query($SQL);
 
-	echo '<br /><table class="selection">
-		<tr>
-		<td>' . _('Area') . ':</td>
-		<td><select name="Area"><option value="AN">' . _('Any Other') . '</option>';
+	echo '<fieldset>
+			<legend>', _('Sales/GL Configuration'), '</legend>';
+
+	echo '<field>
+			<label for="Area">' . _('Area') . ':</label>
+			<select name="Area">
+				<option value="AN">' . _('Any Other') . '</option>';
 
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['Area']) and $myrow['areacode']==$_POST['Area']) {
-			echo '<option selected="True" value="' . $myrow['areacode'] . "'>" . $myrow['areadescription'] . '</option>';
+			echo '<option selected="selected" value="';
 		} else {
-			echo '<option value="' . $myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
+			echo '<option value="';
 		}
+		echo $myrow['areacode'] . '">' .  $myrow['areadescription'] . '</option>';
 
 	} //end while loop
 
 	DB_free_result($result);
 
 	$SQL = "SELECT categoryid, categorydescription FROM stockcategory";
-	$result = DB_query($SQL,$db);
+	$result = DB_query($SQL);
 
-	echo '</select></td></tr>';
+	echo '</select>
+		</field>';
 
-
-	echo '<tr><td>' . _('Stock Category') . ':</td>
-		<td><select name="StkCat"><option value="ANY">' . _('Any Other') . '</option>';
+	echo '<field>
+			<label for="StkCat">' . _('Stock Category') . ':</label>
+			<select name="StkCat">
+				<option value="ANY">' . _('Any Other') . '</option>';
 
 	while ($myrow = DB_fetch_array($result)) {
 
 		if (isset($_POST['StkCat']) and $myrow['categoryid']==$_POST['StkCat']) {
-			echo '<option selected="True" value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
+			echo '<option selected="selected" value="';
 		} else {
-			echo '<option value="' . $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
+			echo '<option value="';
 		}
+		echo $myrow['categoryid'] . '">' . $myrow['categorydescription'] . '</option>';
 
 	} //end while loop
 
-	echo '</select></td></tr>';
-
+	echo '</select>
+		</field>';
 
 	DB_free_result($result);
 
 	$SQL = "SELECT typeabbrev,
-			sales_type
-		FROM salestypes";
-	$result = DB_query($SQL,$db);
+					sales_type
+			FROM salestypes";
+	$result = DB_query($SQL);
 
 
-	echo '<tr><td>' . _('Sales Type') . ' / ' . _('Price List') . ':</td>
-		<td><select name="SalesType">';
+	echo '<field>
+			<label for="SalesType">' . _('Sales Type') . ' / ' . _('Price List') . ':</label>
+			<select name="SalesType">';
 	echo '<option value="AN">' . _('Any Other') . '</option>';
 
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['SalesType']) and $myrow['typeabbrev']==$_POST['SalesType']) {
-			echo '<option selected="True" value="' . $myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
+			echo '<option selected="selected" value="';
 		} else {
-			echo '<option value="' . $myrow['typeabbrev'] . '">' . $myrow['sales_type'] . '</option>';
+			echo '<option value="';
 		}
+		echo $myrow['typeabbrev'] . '">' . $myrow['sales_type']  . '</option>';
 
 	} //end while loop
 
-	echo '</select></td></tr>';
+	echo '</select>
+		</field>';
 
-
-	echo '<tr><td>' . _('Post Sales to GL Account') . ':</td><td><select name="SalesGLCode">';
+	echo '<field>
+			<label for="SalesGLCode">' . _('Post Sales to GL Account') . ':</label>
+			<select name="SalesGLCode">';
 
 	DB_free_result($result);
 	$SQL = "SELECT chartmaster.accountcode,
@@ -371,46 +376,51 @@ if (!isset($_GET['delete'])) {
 		FROM chartmaster,
 			accountgroups
 		WHERE chartmaster.group_=accountgroups.groupname
-		AND accountgroups.pandl=1
+		AND accountgroups.pandl='1'
 		ORDER BY accountgroups.sequenceintb,
 			chartmaster.accountcode";
 
-	$result = DB_query($SQL,$db);
+	$result = DB_query($SQL);
 
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['SalesGLCode']) and $myrow['accountcode']==$_POST['SalesGLCode']) {
-			echo '<option selected="True" value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
+			echo '<option selected="selected" value="';
 		} else {
-			echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
+			echo '<option value="';
 		}
+		echo $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . htmlspecialchars($myrow['accountname'], ENT_QUOTES, 'UTF-8', false)  . '</option>';
 
 	} //end while loop
 
 	DB_data_seek($result,0);
 
-	echo '</td></tr>
-		<tr><td>' . _('Post Discount to GL Account') . ':</td>
-			<td><select name="DiscountGLCode">';
+	echo '</select>
+		</field>';
+
+	echo '<field>
+			<label for="DiscountGLCode">' . _('Post Discount to GL Account') . ':</label>
+			<select name="DiscountGLCode">';
 
 	while ($myrow = DB_fetch_array($result)) {
 		if (isset($_POST['DiscountGLCode']) and $myrow['accountcode']==$_POST['DiscountGLCode']) {
-			echo '<option selected="True" value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
+			echo '<option selected="selected" value="';
 		} else {
-			echo '<option value="' . $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . $myrow['accountname'] . '</option>';
+			echo '<option value="';
 		}
+		echo $myrow['accountcode'] . '">' . $myrow['accountcode'] . ' - ' . htmlspecialchars($myrow['accountname'], ENT_QUOTES, 'UTF-8', false)  . '</option>';
 
 	} //end while loop
 
-	echo'</select></td>
-	</tr>
-	</table>';
+	echo'</select>
+		</field>
+	</fieldset>';
 
-	echo '<br /><div class="centre"><button type="submit" name="submit">' . _('Enter Information') . '</button></div>';
+	echo '<div class="centre"><input type="submit" name="submit" value="' . _('Enter Information') . '" /></div>';
 
 	echo '</form>';
 
 } //end if record deleted no point displaying form to add record
 
 
-include('includes/footer.inc');
+include('includes/footer.php');
 ?>

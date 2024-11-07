@@ -1,88 +1,84 @@
 <?php
 
-/* $Id: SalesCategoryPeriodInquiry.php 4261 2010-12-22 15:56:50Z  $*/
 
-include('includes/session.inc');
-$title = _('Sales Category Report');
-include('includes/header.inc');
-include('includes/DefineCartClass.php');
+include('includes/session.php');
+$Title = _('Sales Category Report');
+$ViewTopic = 'Sales';
+$BookMark = '';
+include('includes/header.php');
+if (isset($_POST['FromDate'])){$_POST['FromDate'] = ConvertSQLDate($_POST['FromDate']);};
+if (isset($_POST['ToDate'])){$_POST['ToDate'] = ConvertSQLDate($_POST['ToDate']);};
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . _('Sales Report') . '" alt="" />' . ' ' . _('Sales Category Report') . '</p>';
-echo '<div class="page_help_text">' . _('Select the parameters for the report') . '</div><br />';
+echo '<p class="page_title_text"><img src="'.$RootPath.'/css/'.$Theme.'/images/transactions.png" title="' . _('Sales Report') . '" alt="" />' . ' ' . _('Sales Category Report') . '</p>';
+echo '<div class="page_help_text">' . _('Select the parameters for the report') . '</div>';
 
 if (!isset($_POST['DateRange'])){
 	/* then assume report is for This Month - maybe wrong to do this but hey better than reporting an error?*/
 	$_POST['DateRange']='ThisMonth';
 }
 
-echo '<form name="form1" action="' . htmlspecialchars($_SERVER['PHP_SELF']) . '" method="post">';
+echo '<form id="form1" action="' . htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<table cellpadding="2" class="selection">';
+echo '<fieldset>';
 
-echo '<tr><th colspan="2" class="centre">' . _('Date Selection') . '</th>
-		</tr>
-		<tr>
-		<td>' . _('Custom Range') . ':</td>';
-if ($_POST['DateRange']=='Custom') {
-	echo '<td><input type="radio" name="DateRange" value="Custom" checked="True" onChange="ReloadForm(form1.ShowSales)" />';
-} else {
-	echo '<td><input type="radio" name="DateRange" value="Custom" onChange="ReloadForm(form1.ShowSales)" />';
+echo '<legend>' . _('Date Selection') . '</legend>
+		<field>
+		<label for="DateRange">' . _('Custom Range') . ':</label>
+		<input type="radio" name="DateRange" value="Custom" ';
+if ($_POST['DateRange']=='Custom'){
+	echo 'checked="checked"';
 }
-echo	'</td>
-		</tr>
-		<tr>
-		<td>' . _('This Week') . ':</td>
-		<td>';
-if ($_POST['DateRange']=='ThisWeek') {
-	echo '<input type="radio" name="DateRange" value="ThisWeek" checked="True" onChange="ReloadForm(form1.ShowSales)" />';
-} else {
-	echo '<input type="radio" name="DateRange" value="ThisWeek" onChange="ReloadForm(form1.ShowSales)" />';
+echo ' onchange="ReloadForm(form1.ShowSales)" />
+		</field>';
+
+echo '<field>
+		<label for="DateRange">' . _('This Week') . ':</label>
+		<input type="radio" name="DateRange" value="ThisWeek" ';
+if ($_POST['DateRange']=='ThisWeek'){
+	echo 'checked="checked"';
 }
-echo	'</td>
-		</tr>
-		<tr>
-		<td>' . _('This Month') . ':</td>
-		<td>';
-if ($_POST['DateRange']=='ThisMonth') {
-	echo '<input type="radio" name="DateRange" value="ThisMonth" checked="True" onChange="ReloadForm(form1.ShowSales)" />';
-} else {
-	echo '<input type="radio" name="DateRange" value="ThisMonth" onChange="ReloadForm(form1.ShowSales)" />';
+echo ' onchange="ReloadForm(form1.ShowSales)" />
+		</field>';
+
+echo '<field>
+		<label for="DateRange">' . _('This Month') . ':</label>
+		<input type="radio" name="DateRange" value="ThisMonth" ';
+if ($_POST['DateRange']=='ThisMonth'){
+	echo 'checked="checked"';
 }
-echo	'</td>
-		</tr>
-		<tr>
-		<td>' . _('This Quarter') . ':</td>
-		<td>';
-if ($_POST['DateRange']=='ThisQuarter') {
-	echo '<input type="radio" name="DateRange" value="ThisQuarter" checked="True" onChange="ReloadForm(form1.ShowSales)" />';
-} else {
-	echo '<input type="radio" name="DateRange" value="ThisQuarter" onChange="ReloadForm(form1.ShowSales)" />';
+echo ' onchange="ReloadForm(form1.ShowSales)" />
+		</field>';
+
+echo '<field>
+		<label for="DateRange">' . _('This Quarter') . ':</label>
+		<input type="radio" name="DateRange" value="ThisQuarter" ';
+if ($_POST['DateRange']=='ThisQuarter'){
+	echo 'checked="checked"';
 }
-echo	'</td>
-		</tr>';
+echo' onchange="ReloadForm(form1.ShowSales)" />
+	</field>';
 if ($_POST['DateRange']=='Custom'){
 	if (!isset($_POST['FromDate'])){
 		unset($_POST['ShowSales']);
 		$_POST['FromDate'] = Date($_SESSION['DefaultDateFormat'],mktime(1,1,1,Date('m')-12,Date('d')+1,Date('Y')));
 		$_POST['ToDate'] = Date($_SESSION['DefaultDateFormat']);
 	}
-	echo '<tr>
-			<td>' . _('Date From') . ':</td>
-			<td><input type="text" class="date" alt="' . $_SESSION['DefaultDateFormat'] . '" name="FromDate" maxlength="10" size="11" value="' . $_POST['FromDate'] . '" /></td>
-			</tr>';
-	echo '<tr>
-			<td>' . _('Date To') . ':</td>
-			<td><input type="text" class="date" alt="' . $_SESSION['DefaultDateFormat'] . '" name="ToDate" maxlength="10" size="11" value="' . $_POST['ToDate'] . '" /></td>
-			</tr>';
+	echo '<field>
+			<label for="FromDate">' . _('Date From') . ':</label>
+			<input type="date" name="FromDate" maxlength="10" size="11" value="' . FormatDateForSQL($_POST['FromDate']) . '" />
+		</field>';
+
+	echo '<field>
+			<label for="ToDate">' . _('Date To') . ':</label>
+			<input type="date" name="ToDate" maxlength="10" size="11" value="' . FormatDateForSQL($_POST['ToDate']) . '" />
+		</field>';
 }
-echo '</table>';
+echo '</fieldset>';
 
 
-echo '<br /><div class="centre"><button tabindex="4" type="submit" name="ShowSales">' . _('Show Sales') . '</button>';
-echo '</div></form>';
-echo '<br />';
-
+echo '<div class="centre"><input tabindex="4" type="submit" name="ShowSales" value="' . _('Show Sales') . '" /></div>';
+echo '</form>';
 
 if (isset($_POST['ShowSales'])){
 	$InputError=0; //assume no input errors now test for errors
@@ -160,8 +156,8 @@ if (isset($_POST['ShowSales'])){
 			GROUP BY stockmaster.categoryid
 			ORDER BY netsalesvalue DESC";
 
-	$ErrMsg = _('The sales data could not be retrieved because') . ' - ' . DB_error_msg($db);
-	$SalesResult = DB_query($sql,$db,$ErrMsg);
+	$ErrMsg = _('The sales data could not be retrieved because') . ' - ' . DB_error_msg();
+	$SalesResult = DB_query($sql,$ErrMsg);
 
 	echo '<table cellpadding="2" class="selection">';
 
@@ -180,22 +176,15 @@ if (isset($_POST['ShowSales'])){
 	$CumulativeTotalCost = 0;
 	$CumulativeTotalGP = 0;
 
-	$k=0;
 	while ($SalesRow=DB_fetch_array($SalesResult)) {
-		if ($k==1){
-			echo '<tr class="EvenTableRows">';
-			$k=0;
-		} else {
-			echo '<tr class="OddTableRows">';
-			$k=1;
-		}
 
-		echo '<td>' . $SalesRow['categoryid'] . ' - ' . $SalesRow['categorydescription'] . '</td>
-				<td class="number">' . locale_money_format($SalesRow['salesvalue'],$_SESSION['CompanyRecord']['currencydefault']) . '</td>
-				<td class="number">' . locale_money_format($SalesRow['returnvalue'],$_SESSION['CompanyRecord']['currencydefault']) . '</td>
-				<td class="number">' . locale_money_format($SalesRow['salesvalue']+$SalesRow['returnvalue'],$_SESSION['CompanyRecord']['currencydefault']) . '</td>
-				<td class="number">' . locale_money_format($SalesRow['cost'],$_SESSION['CompanyRecord']['currencydefault']) . '</td>
-				<td class="number">' . locale_money_format(($SalesRow['salesvalue']+$SalesRow['returnvalue']-$SalesRow['cost']),$_SESSION['CompanyRecord']['currencydefault']) . '</td>
+		echo '<tr class="striped_row">
+				<td>' . $SalesRow['categoryid'] . ' - ' . $SalesRow['categorydescription'] . '</td>
+				<td class="number">' . locale_number_format($SalesRow['salesvalue'],$_SESSION['CompanyRecord']['decimalplaces']) . '</td>
+				<td class="number">' . locale_number_format($SalesRow['returnvalue'],$_SESSION['CompanyRecord']['decimalplaces']) . '</td>
+				<td class="number">' . locale_number_format($SalesRow['salesvalue']+$SalesRow['returnvalue'],$_SESSION['CompanyRecord']['decimalplaces']) . '</td>
+				<td class="number">' . locale_number_format($SalesRow['cost'],$_SESSION['CompanyRecord']['decimalplaces']) . '</td>
+				<td class="number">' . locale_number_format(($SalesRow['salesvalue']+$SalesRow['returnvalue']-$SalesRow['cost']),$_SESSION['CompanyRecord']['decimalplaces']) . '</td>
 			</tr>';
 
 		$CumulativeTotalSales += $SalesRow['salesvalue'];
@@ -205,23 +194,19 @@ if (isset($_POST['ShowSales'])){
 		$CumulativeTotalGP += ($SalesRow['salesvalue']+$SalesRow['returnvalue']-$SalesRow['cost']);
 	} //loop around category sales for the period
 
-	if ($k==1){
-		echo '<tr class="EvenTableRows"><td colspan="8" style="background: transparent;"><hr /></td></tr>';
-		echo '<tr class="OddTableRows">';
-	} else {
-		echo '<tr class="OddTableRows"><td colspan="8" style="background: transparent;"><hr /></td></tr>';
-		echo '<tr class="EvenTableRows">';
-	}
+	echo '<tr class="striped_row"><td colspan="8"><hr /></td></tr>';
+	echo '<tr class="striped_row">';
+
 	echo '<td class="number">' . _('GRAND Total') . '</td>
-		<td class="number">' . locale_money_format($CumulativeTotalSales,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
-		<td class="number">' . locale_money_format($CumulativeTotalRefunds,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
-		<td class="number">' . locale_money_format($CumulativeTotalNetSales,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
-		<td class="number">' . locale_money_format($CumulativeTotalCost,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
-		<td class="number">' . locale_money_format($CumulativeTotalGP,$_SESSION['CompanyRecord']['currencydefault']) . '</td>
+		<td class="number">' . locale_number_format($CumulativeTotalSales,$_SESSION['CompanyRecord']['decimalplaces']) . '</td>
+		<td class="number">' . locale_number_format($CumulativeTotalRefunds,$_SESSION['CompanyRecord']['decimalplaces']) . '</td>
+		<td class="number">' . locale_number_format($CumulativeTotalNetSales,$_SESSION['CompanyRecord']['decimalplaces']) . '</td>
+		<td class="number">' . locale_number_format($CumulativeTotalCost,$_SESSION['CompanyRecord']['decimalplaces']) . '</td>
+		<td class="number">' . locale_number_format($CumulativeTotalGP,$_SESSION['CompanyRecord']['decimalplaces']) . '</td>
 		</tr>';
 
 	echo '</table>';
 
 } //end of if user hit show sales
-include('includes/footer.inc');
+include('includes/footer.php');
 ?>

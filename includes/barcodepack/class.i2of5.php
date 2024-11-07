@@ -18,9 +18,9 @@ define('E_ODD_LENGTH', 500);
 
 /**
  * i2of5
- * 
+ *
  * Interleaved 2/5
- * 
+ *
  * @author Tomáš Horáček <info@webpack.cz>
  * @package BarcodePack
  */
@@ -54,7 +54,7 @@ class i2of5 extends linearBarcode {
 
 	/**
 	 * Constructor
-	 * 
+	 *
 	 * @param string $text
 	 * @param int $modulesize
 	 */
@@ -62,7 +62,7 @@ class i2of5 extends linearBarcode {
 	{
 		try {
 			parent::__construct($text, $moduleSize, $this->allowedChars);
-			
+
 			if((strlen($this->text)%2)!=0) {
 				throw new Exception('The number of characters must be even', E_ODD_LENGTH);
 			}
@@ -71,7 +71,7 @@ class i2of5 extends linearBarcode {
 		}
 		catch(Exception $e) {
 			throw $e;
-		}	
+		}
 
 	}
 
@@ -101,7 +101,7 @@ class i2of5 extends linearBarcode {
 				// Encode first char into lines
 				$bars = true;
 				while($bars && $firstCounter<13) {
-					if($this->codeTable[$this->text{$i}]{$firstCounter}=="1") {
+					if($this->codeTable[$this->text[$i]][$firstCounter]=="1") {
 						$biteCode['DATA'] .= '1';	// line
 					} else {
 						$bars = false;
@@ -112,7 +112,7 @@ class i2of5 extends linearBarcode {
 				// Second char is encoded to spaces
 				$spaces = true;
 				while($spaces && $secondCounter<13) {
-					if($this->codeTable[$this->text{$i+1}]{$secondCounter}=='1') {
+					if($this->codeTable[$this->text[$i+1]][$secondCounter]=='1') {
 						$biteCode['DATA'] .= '0';	// space
 						$secondCounter++;
 					} else {
@@ -121,7 +121,7 @@ class i2of5 extends linearBarcode {
 					}
 				}
 			}
-			
+
 			$i++;	// jump to next char
 		}
 

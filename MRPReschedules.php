@@ -1,22 +1,16 @@
 <?php
-
-/*$Id$ */
-
-/* $Revision: 1.4 $ */
 // MRPReschedules.php - Report of purchase orders and work orders that MRP determines should be
 // rescheduled.
 
-include('includes/session.inc');
+include('includes/session.php');
 
-$sql='show tables where Tables_in_'.$_SESSION['DatabaseName'].'="mrprequirements"';
-$result=DB_query($sql,$db);
-if (DB_num_rows($result)==0) {
-	$title='MRP error';
-	include('includes/header.inc');
+if ( !DB_table_exists('mrprequirements') ) {
+	$Title='MRP error';
+	include('includes/header.php');
 	echo '<br />';
-	prnMsg( _('The MRP calculation must be run before you can run this report').'<br />'.
-			_('To run the MRP calculation click').' '.'<a href="'.$rootpath .'/MRP.php">'._('here').'</a>', 'error');
-	include('includes/footer.inc');
+	prnMsg( _('The MRP calculation must be run before you can run this report') . '<br />' .
+			_('To run the MRP calculation click').' ' . '<a href="'.$RootPath .'/MRP.php">' . _('here') . '</a>', 'error');
+	include('includes/footer.php');
 	exit;
 }
 if (isset($_POST['PrintPDF'])) {
@@ -40,29 +34,29 @@ if (isset($_POST['PrintPDF'])) {
 			  WHERE mrpsupplies.part = stockmaster.stockid AND duedate <> mrpdate
 				 $selecttype
 			  ORDER BY mrpsupplies.part";
-	$result = DB_query($sql,$db,'','',false,true);
+	$result = DB_query($sql,'','',false,true);
 
-	if (DB_error_no($db) !=0) {
-	  $title = _('MRP Reschedules') . ' - ' . _('Problem Report');
-	  include('includes/header.inc');
-	   prnMsg( _('The MRP reschedules could not be retrieved by the SQL because') . ' '  . DB_error_msg($db),'error');
-	   echo '<br /><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
+	if (DB_error_no() !=0) {
+	  $Title = _('MRP Reschedules') . ' - ' . _('Problem Report');
+	  include('includes/header.php');
+	   prnMsg( _('The MRP reschedules could not be retrieved by the SQL because') . ' '  . DB_error_msg(),'error');
+	   echo '<br /><a href="' .$RootPath .'/index.php">' . _('Back to the menu') . '</a>';
 	   if ($debug==1){
 		  echo '<br />' . $sql;
 	   }
-	   include('includes/footer.inc');
+	   include('includes/footer.php');
 	   exit;
 	}
 
 	if (DB_num_rows($result) == 0) {
-	  $title = _('MRP Reschedules') . ' - ' . _('Problem Report');
-	  include('includes/header.inc');
+	  $Title = _('MRP Reschedules') . ' - ' . _('Problem Report');
+	  include('includes/header.php');
 	   prnMsg( _('No MRP reschedule retrieved'), 'warn');
-	   echo '<br /><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
+	   echo '<br /><a href="' .$RootPath .'/index.php">' . _('Back to the menu') . '</a>';
 	   if ($debug==1){
 		echo '<br />' . $sql;
 	   }
-	   include('includes/footer.inc');
+	   include('includes/footer.php');
 	   exit;
 	}
 
@@ -71,7 +65,7 @@ if (isset($_POST['PrintPDF'])) {
 	$Tot_Val=0;
 	$fill = false;
 	$pdf->SetFillColor(224,235,255);
-	while ($myrow = DB_fetch_array($result,$db)){
+	While ($myrow = DB_fetch_array($result)){
 
 		$YPos -=$line_height;
 		$FontSize=8;
@@ -89,7 +83,7 @@ if (isset($_POST['PrintPDF'])) {
 
 		// Parameters for addTextWrap are defined in /includes/class.pdf.php
 		// 1) X position 2) Y position 3) Width
-		// 4) Height 5) text 6) Alignment 7) Border 8) Fill - True to use SetFillColor
+		// 4) Height 5) Text 6) Alignment 7) Border 8) Fill - True to use SetFillColor
 		// and False to set to transparent
 		$pdf->addTextWrap($Left_Margin,$YPos,90,$FontSize,$myrow['part'],'',0,$fill);
 		$pdf->addTextWrap(130,$YPos,200,$FontSize,$myrow['description'],'',0,$fill);
@@ -114,31 +108,47 @@ if (isset($_POST['PrintPDF'])) {
 					   $Right_Margin);
 	}
 
-	$pdf->OutputD($_SESSION['DatabaseName'] . '_MRPReschedules_' . date('Y-m-d').'.pdf');//UldisN
-	$pdf->__destruct(); //UldisN
+	$pdf->OutputD($_SESSION['DatabaseName'] . '_MRPReschedules_' . date('Y-m-d').'.pdf');
+	$pdf->__destruct();
 
 } else { /*The option to print PDF was not hit so display form */
 
-	$title=_('MRP Reschedule Reporting');
-	include('includes/header.inc');
+	$Title=_('MRP Reschedule Reporting');
+	$ViewTopic = 'MRP';
+	$BookMark = '';
+	include('includes/header.php');
 
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Stock') . '" alt="" />' . ' ' . $title . '</p>';
+	echo '<p class="page_title_text">
+			<img src="'.$RootPath.'/css/'.$Theme.'/images/inventory.png" title="'
+		. _('Stock') . '" alt="" />' . ' ' . $Title . '
+		</p>';
 
-	echo '<br /><form action=' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . ' method="post"><table class="selection">';
-	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<tr><td>' . _('Print Option') . ':</td><td><select name="Fill">';
-	echo '<option selected="True" value="yes">' . _('Print With Alternating Highlighted Lines') . '</option>';
-	echo '<option value="no">' . _('Plain Print') . '</option>';
-	echo '</select></td></tr>';
-	echo '<tr><td>' . _('Selection') . ':</td><td><select name="Selection">';
-	echo '<option selected="True" value="All">' . _('All').'</option>';
-	echo '<option value="WO">' . _('Work Orders Only').'</option>';
-	echo '<option value="PO">' . _('Purchase Orders Only').'</option>';
-	echo '</select></td></tr>';
-	echo '</table><br />';
-	echo '<div class="centre"><button type="submit" name="PrintPDF">' . _('Print PDF') . '</button></div><br />';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '" method="post">
+		<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />
+		<fieldset>
+		<legend>', _('Report Criteria'), '</legend>
+		<field>
+			<label for="Fill">' . _('Print Option') . ':</label>
+			<select name="Fill">
+				<option selected="selected" value="yes">' . _('Print With Alternating Highlighted Lines') . '</option>
+				<option value="no">' . _('Plain Print') . '</option>
+			</select>
+		</field>
+		<field>
+			<label for="Selection">' . _('Selection') . ':</label>
+			<select name="Selection">
+				<option selected="selected" value="All">' . _('All') . '</option>
+				<option value="WO">' . _('Work Orders Only') . '</option>
+				<option value="PO">' . _('Purchase Orders Only') . '</option>
+			</select>
+		</field>
+		</fieldset>
+		<div class="centre">
+			<input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" />
+		</div>
+		</form>';
 
-	include('includes/footer.inc');
+	include('includes/footer.php');
 
 } /*end of else not PrintPDF */
 

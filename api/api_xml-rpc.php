@@ -4,7 +4,7 @@
 		 * Must be a better way of doing this, but at
 		 * least it works */
 	}
-
+    /* Note api_php.php includes api */
 	include 'api_php.php';
 
 	include '../xmlrpc/lib/xmlrpc.inc';
@@ -12,7 +12,7 @@
 	include '../xmlrpc/lib/xmlrpcs.inc';
 
 	$Description = _('This function is used to login into the API methods for the specified the database.')
-		.'<p><b>' . _('NOTE: using this function means that the User Name and Password fields in the following functions are no longer required.  When calling those functions, leave the last two parameters off.') . '</b></p>';
+		 . '<p>' . _('NOTE: using this function means that the User Name and Password fields in the following functions are no longer required.  When calling those functions, leave the last two parameters off.') . '</p>';
 	$Parameter[0]['name'] = _('Database Name');
 	$Parameter[0]['description'] = _('The name of the database to use for the transactions to come. ');
 	$Parameter[1]['name'] = _('User name');
@@ -29,8 +29,8 @@
 	function xmlrpc_Login($xmlrpcmsg) {
 		ob_start('ob_file_callback');
 		$rtn = new xmlrpcresp(php_xmlrpc_encode(LoginAPI($xmlrpcmsg->getParam(0)->scalarval(),
-																										$xmlrpcmsg->getParam(1)->scalarval(),
-																										$xmlrpcmsg->getParam(2)->scalarval())));
+														$xmlrpcmsg->getParam(1)->scalarval(),
+														$xmlrpcmsg->getParam(2)->scalarval())));
 		ob_end_flush();
 		return  $rtn;
 	}
@@ -61,10 +61,10 @@
 	$Description = _('This function is used to insert a new customer into the webERP database.');
 	$Parameter[0]['name'] = _('Customer Details');
 	$Parameter[0]['description'] = _('A set of key/value pairs where the key must be identical to the name of the field to be updated. ')
-			._('The field names can be found ').'<a href="../../Z_DescribeTable.php?table=debtorsmaster">'._('here ').'</a>'
+			._('The field names can be found ') . '<a href="../../Z_DescribeTable.php?table=debtorsmaster">' . _('here ') . '</a>'
 			._('and are case sensitive. ')._('The values should be of the correct type, and the api will check them before updating the database. ')
 			._('It is not necessary to include all the fields in this parameter, the database default value will be used if the field is not given.')
-			.'<p>'._('If the Create Debtor Codes Automatically flag is set, then anything sent in the debtorno field will be ignored, and the debtorno field will be set automatically.').'</p>';
+			 . '<p>' . _('If the Create Debtor Codes Automatically flag is set, then anything sent in the debtorno field will be ignored, and the debtorno field will be set automatically.');
 	$Parameter[1]['name'] = _('User name');
 	$Parameter[1]['description'] = _('A valid weberp username. This user should have security access  to this data.');
 	$Parameter[2]['name'] = _('User password');
@@ -73,8 +73,8 @@
 			._('If the first element is zero then the function was successful. ')
 			._('Otherwise an array of error codes is returned and no insertion takes place. ');
 
-/*E*/	$InsertCustomer_sig = array(array($xmlrpcStruct,$xmlrpcStruct),
-/*x*/					array($xmlrpcStruct,$xmlrpcStruct,$xmlrpcString,$xmlrpcString));
+/*E*/$InsertCustomer_sig = array(array($xmlrpcStruct,$xmlrpcStruct),
+/*x*/						array($xmlrpcStruct,$xmlrpcStruct,$xmlrpcString,$xmlrpcString));
 	$InsertCustomer_doc = apiBuildDocHTML( $Description,$Parameter,$ReturnValue );
 
 	function  xmlrpc_InsertCustomer($xmlrpcmsg){
@@ -98,7 +98,7 @@
 	$Description = _('This function is used to insert a new customer branch into the webERP database.');
 	$Parameter[0]['name'] = _('Branch Details');
 	$Parameter[0]['description'] = _('A set of key/value pairs where the key must be identical to the name of the field to be updated. ')
-			._('The field names can be found ').'<a href="../../Z_DescribeTable.php?table=custbranch">'._('here ').'</a>'
+			._('The field names can be found ') . '<a href="../../Z_DescribeTable.php?table=custbranch">' . _('here ') . '</a>'
 			._('and are case sensitive. ')._('The values should be of the correct type, and the api will check them before updating the database. ')
 			._('It is not necessary to include all the fields in this parameter, the database default value will be used if the field is not given.');
 	$Parameter[1]['name'] = _('User name');
@@ -109,14 +109,13 @@
 			._('If the first element is zero then the function was successful. ')
 			._('Otherwise an array of error codes is returned and no insertion takes place. ');
 
-/*E*/	$InsertBranch_sig = array(array($xmlrpcStruct,$xmlrpcStruct),
+/*E*/$InsertBranch_sig = array(array($xmlrpcStruct,$xmlrpcStruct),
 /*x*/					array($xmlrpcStruct,$xmlrpcStruct,$xmlrpcString,$xmlrpcString));
 	$InsertBranch_doc = apiBuildDocHTML( $Description,$Parameter,$ReturnValue );
 
 	function  xmlrpc_InsertBranch($xmlrpcmsg){
 		ob_start('ob_file_callback');
-/*x*/		if ($xmlrpcmsg->getNumParams() == 3)
-/*x*/		{
+/*x*/		if ($xmlrpcmsg->getNumParams() == 3) {
 /*x*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(InsertBranch(php_xmlrpc_decode($xmlrpcmsg->getParam( 0 )),
 /*x*/			$xmlrpcmsg->getParam( 1 )->scalarval(  ),
 /*x*/				$xmlrpcmsg->getParam( 2 )->scalarval(  ))) );
@@ -134,10 +133,10 @@
 	$Description = _('This function is used to modify a customer which is already setup in the webERP database.');
 	$Parameter[0]['name'] = _('Customer Details');
 	$Parameter[0]['description'] = _('A set of key/value pairs where the key must be identical to the name of the field to be updated. ')
-			._('The field names can be found ').'<a href="../../Z_DescribeTable.php?table=debtorsmaster">'._('here ').'</a>'
+			._('The field names can be found ') . '<a href="../../Z_DescribeTable.php?table=debtorsmaster">' . _('here ') . '</a>'
 			._('and are case sensitive. ')._('The values should be of the correct type, and the api will check them before updating the database. ')
 			._('It is not necessary to include all the fields in this parameter, the database default value will be used if the field is not given.')
-			.'<p>'._('The debtorno must already exist in the weberp database.') . '</p>';
+			 . '<p>' . _('The debtorno must already exist in the weberp database.');
 	$Parameter[1]['name'] = _('User name');
 	$Parameter[1]['description'] = _('A valid weberp username. This user should have security access  to this data.');
 	$Parameter[2]['name'] = _('User password');
@@ -152,13 +151,12 @@
 
 	function  xmlrpc_ModifyCustomer($xmlrpcmsg){
 		ob_start('ob_file_callback');
-/*x*/		if ($xmlrpcmsg->getNumParams() == 3)
-/*x*/		{
-/*x*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(ModifyCustomer(php_xmlrpc_decode($xmlrpcmsg->getParam( 0 )),
-/*x*/			$xmlrpcmsg->getParam( 1 )->scalarval(  ),
+/*x*/		if ($xmlrpcmsg->getNumParams() == 3) {
+/*x*/		 	$rtn = new xmlrpcresp( php_xmlrpc_encode(ModifyCustomer(php_xmlrpc_decode($xmlrpcmsg->getParam( 0 )),
+/*x*/				$xmlrpcmsg->getParam( 1 )->scalarval(  ),
 /*x*/				$xmlrpcmsg->getParam( 2 )->scalarval(  ))) );
 /*x*/		} else {
-/*e*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(ModifyCustomer(php_xmlrpc_decode($xmlrpcmsg->getParam( 0 )), '', '')));
+/*e*/		 	$rtn = new xmlrpcresp( php_xmlrpc_encode(ModifyCustomer(php_xmlrpc_decode($xmlrpcmsg->getParam( 0 )), '', '')));
 /*x*/		}
 		ob_end_flush();
 		return $rtn;
@@ -171,10 +169,10 @@
 	$Description = _('This function is used to modify a customer branch which is already setup in the webERP database.');
 	$Parameter[0]['name'] = _('Branch Details');
 	$Parameter[0]['description'] = _('A set of key/value pairs where the key must be identical to the name of the field to be updated. ')
-			._('The field names can be found ').'<a href="../../Z_DescribeTable.php?table=custbranch">'._('here ').'</a>'
+			._('The field names can be found ') . '<a href="../../Z_DescribeTable.php?table=custbranch">' . _('here ') . '</a>'
 			._('and are case sensitive. ')._('The values should be of the correct type, and the api will check them before updating the database. ')
 			._('It is not necessary to include all the fields in this parameter, the database default value will be used if the field is not given.')
-			.'<p>'._('The branchcode/debtorno combination must already exist in the weberp database.') . '</p>';
+			 . '<p>' . _('The branchcode/debtorno combination must already exist in the weberp database.');
 	$Parameter[1]['name'] = _('User name');
 	$Parameter[1]['description'] = _('A valid weberp username. This user should have security access  to this data.');
 	$Parameter[2]['name'] = _('User password');
@@ -183,19 +181,18 @@
 			._('If the first element is zero then the function was successful. ')
 			._('Otherwise an array of error codes is returned and no insertion takes place. ');
 
-/*E*/	$ModifyBranch_sig = array(array($xmlrpcStruct,$xmlrpcStruct),
+/*E*/$ModifyBranch_sig = array(array($xmlrpcStruct,$xmlrpcStruct),
 /*x*/					array($xmlrpcStruct,$xmlrpcStruct,$xmlrpcString,$xmlrpcString));
 	$ModifyBranch_doc = apiBuildDocHTML( $Description,$Parameter,$ReturnValue );
 
 	function  xmlrpc_ModifyBranch($xmlrpcmsg){
 		ob_start('ob_file_callback');
-/*x*/		if ($xmlrpcmsg->getNumParams() == 3)
-/*x*/		{
-/*x*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(ModifyBranch(php_xmlrpc_decode($xmlrpcmsg->getParam( 0 )),
+/*x*/		if ($xmlrpcmsg->getNumParams() == 3) {
+/*x*/		  $rtn = new xmlrpcresp( php_xmlrpc_encode(ModifyBranch(php_xmlrpc_decode($xmlrpcmsg->getParam( 0 )),
 /*x*/			$xmlrpcmsg->getParam( 1 )->scalarval(  ),
 /*x*/				$xmlrpcmsg->getParam( 2 )->scalarval(  ))) );
 /*x*/		} else {
-/*e*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(ModifyBranch(php_xmlrpc_decode($xmlrpcmsg->getParam( 0 )), '', '')));
+/*e*/		  $rtn = new xmlrpcresp( php_xmlrpc_encode(ModifyBranch(php_xmlrpc_decode($xmlrpcmsg->getParam( 0 )), '', '')));
 /*x*/		}
 		ob_end_flush();
 		return $rtn;
@@ -213,8 +210,8 @@
 	$Parameter[2]['name'] = _('User password');
 	$Parameter[2]['description'] = _('The weberp password associated with this user name. ');
 	$ReturnValue[0] = _('If successful this function returns an array of branch codes, which may be strings or integers. ')
-			._('If the first element is zero then the function was successful.').'<p>'
-			._('Otherwise an array of error codes is returned. ') . '</p>';
+			._('If the first element is zero then the function was successful.') . '<p>'
+			._('Otherwise an array of error codes is returned. ');
 
 /*E*/	$GetCustomerBranchCodes_sig = array(array($xmlrpcStruct,$xmlrpcString),
 /*x*/					array($xmlrpcStruct,$xmlrpcString,$xmlrpcString,$xmlrpcString));
@@ -249,9 +246,9 @@
 	$Parameter[3]['description'] = _('The weberp password associated with this user name. ');
 	$ReturnValue[0] = _('If successful this function returns a set of key/value pairs containing the details of this branch. ')
 			._('The key will be identical with field name from the ')
-			.'<a href="../../Z_DescribeTable.php?table=custbranch">'._('custbranch table. ').'</a>'
-			._('All fields will be in the set regardless of whether the value was set.').'<p>'
-			._('Otherwise an array of error codes is returned. ') . '</p>';
+			 . '<a href="../../Z_DescribeTable.php?table=custbranch">' . _('custbranch table. ') . '</a>'
+			._('All fields will be in the set regardless of whether the value was set.') . '<p>'
+			._('Otherwise an array of error codes is returned. ');
 
 /*E*/	$GetCustomerBranch_sig = array(array($xmlrpcStruct,$xmlrpcString,$xmlrpcString),
 /*x*/					array($xmlrpcStruct,$xmlrpcString,$xmlrpcString,$xmlrpcString,$xmlrpcString));
@@ -285,8 +282,8 @@
 	$Parameter[2]['name'] = _('User password');
 	$Parameter[2]['description'] = _('The weberp password associated with this user name. ');
 	$ReturnValue[0] = _('If successful this function returns a set of key/value pairs containing the details of this customer. ')
-			._('The key will be identical with field name from the debtorsmaster table. All fields will be in the set regardless of whether the value was set.').'<p>'
-			._('Otherwise an array of error codes is returned. ') . '</p>';
+			._('The key will be identical with field name from the debtorsmaster table. All fields will be in the set regardless of whether the value was set.') . '<p>'
+			._('Otherwise an array of error codes is returned. ');
 
 /*E*/	$GetCustomer_sig = array(array($xmlrpcStruct,$xmlrpcString),
 /*x*/					array($xmlrpcStruct,$xmlrpcString,$xmlrpcString,$xmlrpcString));
@@ -313,7 +310,7 @@
 	$Description = _('This function is used to retrieve the details of a customer from the webERP database.');
 	$Parameter[0]['name'] = _('Field Name');
 	$Parameter[0]['description'] = _('The name of a database field to search on. ')
-			._('The field names can be found ').'<a href="../../Z_DescribeTable.php?table=debtorsmaster">'._('here ').'</a>'
+			._('The field names can be found ') . '<a href="../../Z_DescribeTable.php?table=debtorsmaster">' . _('here ') . '</a>'
 			._('and are case sensitive. ');
 	$Parameter[1]['name'] = _('Search Criteria');
 	$Parameter[1]['description'] = _('A (partial) string to match in the above Field Name.');
@@ -358,19 +355,17 @@
 			._('If the first element is zero then the function was successful. ')
 			._('Otherwise an array of error codes is returned and no insertion takes place. ');
 
-/*E*/	$GetCurrencyList_sig = array(array($xmlrpcStruct),
-/*x*/					array($xmlrpcStruct,$xmlrpcString,$xmlrpcString));
+/*E*/$GetCurrencyList_sig = array(array($xmlrpcStruct),
+/*x*/						array($xmlrpcStruct,$xmlrpcString,$xmlrpcString));
 	$GetCurrencyList_doc = apiBuildDocHTML( $Description,$Parameter,$ReturnValue );
 
 	function  xmlrpc_GetCurrencyList($xmlrpcmsg){
 		ob_start('ob_file_callback');
-/*x*/		if ($xmlrpcmsg->getNumParams() == 2)
-/*x*/		{
-/*x*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(GetCurrencyList($xmlrpcmsg->getParam( 0 )->scalarval(  ),
-/*x*/			$xmlrpcmsg->getParam( 1 )->scalarval(  ))) );
-/*x*/		} else {
-/*e*/ $rtn = new xmlrpcresp( php_xmlrpc_encode(GetCurrencyList( '', '')));
-/*x*/		}
+/*x*/	if ($xmlrpcmsg->getNumParams() == 2)	{
+/*x*/		$rtn = new xmlrpcresp( php_xmlrpc_encode(GetCurrencyList($xmlrpcmsg->getParam( 0 )->scalarval(  ), $xmlrpcmsg->getParam( 1 )->scalarval(  ))) );
+/*x*/	} else {
+/*e*/ 		$rtn = new xmlrpcresp( php_xmlrpc_encode(GetCurrencyList('','')));
+/*x*/	}
 		ob_end_flush();
 		return $rtn;
 	}
@@ -474,7 +469,7 @@
 	$Description = _('This function is used to insert sales type details into the webERP database.');
 	$Parameter[0]['name'] = _('Sales Type Details');
 	$Parameter[0]['description'] = _('A set of key/value pairs where the key must be identical to the name of the field to be updated. ')
-			._('The field names can be found ').'<a href="../../Z_DescribeTable.php?table=salestypes">'._('here ').'</a>'
+			._('The field names can be found ') . '<a href="../../Z_DescribeTable.php?table=salestypes">' . _('here ') . '</a>'
 			._('and are case sensitive. ')._('The values should be of the correct type, and the api will check them before updating the database. ')
 			._('It is not necessary to include all the fields in this parameter, the database default value will be used if the field is not given.');
 	$Parameter[1]['name'] = _('User name');
@@ -520,12 +515,10 @@
 
 	function  xmlrpc_GetHoldReasonList($xmlrpcmsg){
 		ob_start('ob_file_callback');
-/*x*/		if ($xmlrpcmsg->getNumParams() == 2)
-/*x*/		{
-/*x*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(GetHoldReasonList($xmlrpcmsg->getParam( 0 )->scalarval(  ),
-/*x*/			$xmlrpcmsg->getParam( 1 )->scalarval(  ))) );
+/*x*/		if ($xmlrpcmsg->getNumParams() == 2)	{
+/*x*/			$rtn = new xmlrpcresp( php_xmlrpc_encode(GetHoldReasonList($xmlrpcmsg->getParam( 0 )->scalarval(  ), $xmlrpcmsg->getParam( 1 )->scalarval(  ))) );
 /*x*/		} else {
-/*e*/ $rtn = new xmlrpcresp( php_xmlrpc_encode(GetHoldReasonList( '', '')));
+				$rtn = new xmlrpcresp( php_xmlrpc_encode(GetHoldReasonList( '', '')));
 /*x*/		}
 		ob_end_flush();
 		return $rtn;
@@ -550,11 +543,8 @@
 
 	function  xmlrpc_GetHoldReasonDetails($xmlrpcmsg){
 		ob_start('ob_file_callback');
-/*x*/		if ($xmlrpcmsg->getNumParams() == 3)
-/*x*/		{
-/*x*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(GetHoldReasonDetails($xmlrpcmsg->getParam( 0 )->scalarval(  ),
-/*x*/			$xmlrpcmsg->getParam( 1 )->scalarval(  ),
-/*x*/				$xmlrpcmsg->getParam( 2 )->scalarval(  ))) );
+/*x*/		if ($xmlrpcmsg->getNumParams() == 3) {
+/*x*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(GetHoldReasonDetails($xmlrpcmsg->getParam( 0 )->scalarval(  ),	$xmlrpcmsg->getParam( 1 )->scalarval(  ),$xmlrpcmsg->getParam( 2 )->scalarval(  ))) );
 /*x*/		} else {
 /*e*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(GetHoldReasonDetails($xmlrpcmsg->getParam( 0 )->scalarval(  ), '', '')));
 /*x*/		}
@@ -620,6 +610,64 @@
 		ob_end_flush();
 		return $rtn;
 	}
+
+    unset($Description);
+	unset($Parameter);
+	unset($ReturnValue);
+
+	$Description = _('This function returns a list of payment method codes.');
+	$Parameter[0]['name'] = _('User name');
+	$Parameter[0]['description'] = _('A valid weberp username. This user should have security access  to this data.');
+	$Parameter[1]['name'] = _('User password');
+	$Parameter[1]['description'] = _('The weberp password associated with this user name. ');
+	$ReturnValue[0] = _('This function returns an array of payment method codes.');
+
+/*E*/$GetPaymentMethodsList_sig = array(array($xmlrpcStruct),
+/*x*/					array($xmlrpcStruct,$xmlrpcString,$xmlrpcString));
+	$GetPaymentMethodsList_doc = apiBuildDocHTML( $Description,$Parameter,$ReturnValue );
+
+    function  xmlrpc_GetPaymentMethodsList($xmlrpcmsg){
+		ob_start('ob_file_callback');
+/*x*/		if ($xmlrpcmsg->getNumParams() == 2) {
+/*x*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(GetPaymentMethodsList($xmlrpcmsg->getParam( 0 )->scalarval(  ), $xmlrpcmsg->getParam( 1 )->scalarval(  ))) );
+/*x*/		} else {
+/*e*/ $rtn = new xmlrpcresp( php_xmlrpc_encode(GetPaymentMethodsList( '', '')));
+/*x*/		}
+		ob_end_flush();
+		return $rtn;
+	}
+
+	unset($Description);
+	unset($Parameter);
+	unset($ReturnValue);
+
+	$Description = _('This function takes a payment method code and returns details of that payment method.');
+	$Parameter[0]['name'] = _('Payment method code');
+	$Parameter[0]['description'] = _('A payment method code as returned by the GetPaymentMethodsList function.');
+	$Parameter[1]['name'] = _('User name');
+	$Parameter[1]['description'] = _('A valid weberp username. This user should have security access to this data.');
+	$Parameter[2]['name'] = _('User password');
+	$Parameter[2]['description'] = _('The weberp password associated with this user name. ');
+	$ReturnValue[0] = _('This function returns an array of payment terms details.');
+
+/*E*/$GetPaymentMethodDetails_sig = array(array($xmlrpcStruct,$xmlrpcString),
+/*x*/					array($xmlrpcStruct,$xmlrpcString,$xmlrpcString,$xmlrpcString));
+	$GetPaymentMethodDetails_doc = apiBuildDocHTML( $Description,$Parameter,$ReturnValue );
+
+	function  xmlrpc_GetPaymentMethodDetails($xmlrpcmsg){
+		ob_start('ob_file_callback');
+/*x*/		if ($xmlrpcmsg->getNumParams() == 3)
+/*x*/		{
+/*x*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(GetPaymentMethodDetails($xmlrpcmsg->getParam( 0 )->scalarval(  ),
+/*x*/			$xmlrpcmsg->getParam( 1 )->scalarval(  ),
+/*x*/				$xmlrpcmsg->getParam( 2 )->scalarval(  ))) );
+/*x*/		} else {
+/*e*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(GetPaymentMethodDetails($xmlrpcmsg->getParam( 0 )->scalarval(  ), '', '')));
+/*x*/		}
+		ob_end_flush();
+		return $rtn;
+	}
+
 
 	unset($Description);
 	unset($Parameter);
@@ -700,8 +748,8 @@
 	$Parameter[2]['name'] = _('User password');
 	$Parameter[2]['description'] = _('The weberp password associated with this user name. ');
 	$ReturnValue[0] = _('If successful this function returns a set of key/value pairs containing the details of this stock item. ')
-			._('The key will be identical with field name from the stockmaster table. All fields will be in the set regardless of whether the value was set.').'<p>'
-			._('Otherwise an array of error codes is returned. ') . '</p>';
+			._('The key will be identical with field name from the stockmaster table. All fields will be in the set regardless of whether the value was set.') . '<p>'
+			._('Otherwise an array of error codes is returned. ');
 
 /*E*/	$GetStockItem_sig = array(array($xmlrpcStruct,$xmlrpcString),
 /*x*/					array($xmlrpcStruct,$xmlrpcString,$xmlrpcString,$xmlrpcString));
@@ -741,7 +789,7 @@
 	$SearchStockItems_doc = apiBuildDocHTML( $Description,$Parameter,$ReturnValue );
 
 	function  xmlrpc_SearchStockItems($xmlrpcmsg){
-		ob_start('ob_file_callback');
+		//ob_start('ob_file_callback');
 /*x*/		if ($xmlrpcmsg->getNumParams() == 4)
 /*x*/		{
 /*x*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(SearchStockItems($xmlrpcmsg->getParam( 0 )->scalarval(  ),
@@ -752,7 +800,7 @@
 		 $rtn = new xmlrpcresp( php_xmlrpc_encode(SearchStockItems($xmlrpcmsg->getParam( 0 )->scalarval(  ),
 /*e*/			$xmlrpcmsg->getParam( 1 )->scalarval(  ), '', '')));
 /*x*/		}
-		ob_end_flush();
+		//ob_end_flush();
 		return $rtn;
 	}
 
@@ -992,7 +1040,7 @@
 /*x*/				$xmlrpcmsg->getParam( 2 )->scalarval(  ),
 /*x*/					$xmlrpcmsg->getParam( 3 )->scalarval(  ),
 /*x*/						$xmlrpcmsg->getParam( 4 )->scalarval(  ))) );
-/*x*/		} else {
+/*x*/		} else { //only 3 parameters if login already in session
 		 $rtn = new xmlrpcresp( php_xmlrpc_encode(GetStockPrice($xmlrpcmsg->getParam( 0 )->scalarval(  ),
 			$xmlrpcmsg->getParam( 1 )->scalarval(  ),
 /*e*/				$xmlrpcmsg->getParam( 2 )->scalarval(  ), '', '')));
@@ -1005,14 +1053,106 @@
 	unset($Parameter);
 	unset($ReturnValue);
 
-	$Description = _('Inserts a sales invoice into the debtortrans table and does the relevant GL entries');
+	$Description = _('Creates a customer receipt from the details passed to the method as an associative array');
+	$Parameter[0]['name'] = _('Receipt Details');
+	$Parameter[0]['description'] = _('An associative array describing the customer receipt with the following fields: debtorno - the customer code; trandate - the date of the receipt in Y-m-d format; amountfx - the amount in FX; paymentmethod - the payment method of the receipt e.g. cash/EFTPOS/credit card; bankaccount - the webERP bank account to use for the transaction, reference - the reference to record against the webERP receipt transaction');
+	$Parameter[1]['name'] = _('User name');
+	$Parameter[1]['description'] = _('A valid weberp username. This user should have security access to this data.');
+	$Parameter[2]['name'] = _('User password');
+	$Parameter[2]['description'] = _('The weberp password associated with this user name. ');
+	$ReturnValue[0] = _('This function returns an array of integers. ')
+			._('If the first element is zero then the function was successful, and the second element is the receipt number. ')
+			._('Otherwise an array of error codes is returned and no insertion takes place. ');
+
+/*E*/$InsertDebtorReceipt_sig = array(array($xmlrpcStruct,$xmlrpcStruct),
+/*x*/					array($xmlrpcStruct,$xmlrpcStruct,$xmlrpcString,$xmlrpcString));
+	$InsertDebtorReceipt_doc = apiBuildDocHTML( $Description,$Parameter,$ReturnValue );
+
+	function  xmlrpc_InsertDebtorReceipt($xmlrpcmsg){
+		ob_start('ob_file_callback');
+/*x*/	if ($xmlrpcmsg->getNumParams() == 3) {
+/*x*/		$rtn = new xmlrpcresp( php_xmlrpc_encode(InsertDebtorReceipt(php_xmlrpc_decode($xmlrpcmsg->getParam( 0 )), $xmlrpcmsg->getParam( 1 )->scalarval(  ),$xmlrpcmsg->getParam( 2 )->scalarval(  ))) );
+/*x*/	} else {
+/*e*/		$rtn = new xmlrpcresp( php_xmlrpc_encode(InsertDebtorReceipt(php_xmlrpc_decode($xmlrpcmsg->getParam( 0 )), '', '')));
+/*x*/	}
+		ob_end_flush();
+		return $rtn;
+	}
+
+	unset($Description);
+	unset($Parameter);
+	unset($ReturnValue);
+
+	$Description = _('Allocates a debtor receipt or credit to a debtor invoice. Using the customerref field to match up which invoice to allocate to');
+	$Parameter[0]['name'] = _('Allocation Details');
+	$Parameter[0]['description'] = _('An associative array describing the customer, the transaction being allocated from, it\'s transaction type 12 for a receipt or 11 for a credit note, the webERP transaction number, the customer ref that is to be searched for in invoices to match to. The fields are: debtorno, type, transno, customerref');
+	$Parameter[1]['name'] = _('User name');
+	$Parameter[1]['description'] = _('A valid weberp username. This user should have security access to this data.');
+	$Parameter[2]['name'] = _('User password');
+	$Parameter[2]['description'] = _('The weberp password associated with this user name. ');
+	$ReturnValue[0] = _('This function returns an array of integers. ')
+			._('If the first element is zero then the function was successful.')
+			._('Otherwise an array of error codes is returned and no insertion takes place. ');
+
+/*E*/$AllocateTrans_sig = array(array($xmlrpcStruct,$xmlrpcStruct),
+/*x*/					array($xmlrpcStruct,$xmlrpcStruct,$xmlrpcString,$xmlrpcString));
+	$AllocateTrans_doc = apiBuildDocHTML( $Description,$Parameter,$ReturnValue );
+
+	function  xmlrpc_AllocateTrans($xmlrpcmsg){
+		ob_start('ob_file_callback');
+/*x*/	if ($xmlrpcmsg->getNumParams() == 3) {
+/*x*/		$rtn = new xmlrpcresp( php_xmlrpc_encode(AllocateTrans(php_xmlrpc_decode($xmlrpcmsg->getParam( 0 )), $xmlrpcmsg->getParam( 1 )->scalarval(  ),$xmlrpcmsg->getParam( 2 )->scalarval(  ))) );
+/*x*/	} else {
+/*e*/		$rtn = new xmlrpcresp( php_xmlrpc_encode(AllocateTrans(php_xmlrpc_decode($xmlrpcmsg->getParam( 0 )), '', '')));
+/*x*/	}
+		ob_end_flush();
+		return $rtn;
+	}
+
+	unset($Description);
+	unset($Parameter);
+	unset($ReturnValue);
+
+	$Description = _('Creates a credit note from header details associative array and line items. This function implements most of a webERP credit note with the exception that it cannot handle serialised or lot/batch controlled items. All the necessary updates and inserts are handled for stock quantities returned, taxes, sales analysis, stock movements, sales and cost of sales journals');
+	$Parameter[0]['name'] = _('Credit Note Header Details');
+	$Parameter[0]['description'] = _('An associative array describing the credit note header with the fields debtorno, branchcode, trandate, tpe, fromstkloc, customerref, shipvia');
+	$Parameter[1]['name'] = _('Credit note line items');
+	$Parameter[1]['description'] = _('The lines of stock being returned on this credit note. Only stock returns can be dealt with using this API method. This is an array of associative arrays containing the fields, stockid, price, qty, discountpercent for the items returned');
+	$Parameter[2]['name'] = _('User name');
+	$Parameter[2]['description'] = _('A valid weberp username. This user should have security access to this data.');
+	$Parameter[3]['name'] = _('User password');
+	$Parameter[3]['description'] = _('The weberp password associated with this user name. ');
+	$ReturnValue[0] = _('This function returns an array of integers. ')
+			._('If the first element is zero then the function was successful, and the second element is the credit note number. ')
+			._('Otherwise an array of error codes is returned and no insertion takes place. ');
+
+/*E*/$CreateCreditNote_sig = array(array($xmlrpcStruct,$xmlrpcStruct),
+/*x*/					array($xmlrpcStruct,$xmlrpcStruct,$xmlrpcArray,$xmlrpcString,$xmlrpcString));
+	$CreateCreditNote_doc = apiBuildDocHTML( $Description,$Parameter,$ReturnValue );
+
+	function  xmlrpc_CreateCreditNote($xmlrpcmsg){
+		ob_start('ob_file_callback');
+/*x*/	if ($xmlrpcmsg->getNumParams() == 4) {
+/*x*/		$rtn = new xmlrpcresp( php_xmlrpc_encode(CreateCreditNote(php_xmlrpc_decode($xmlrpcmsg->getParam( 0 )), php_xmlrpc_decode($xmlrpcmsg->getParam( 1 )), $xmlrpcmsg->getParam( 2 )->scalarval(  ),$xmlrpcmsg->getParam( 3 )->scalarval(  ))) );
+/*x*/	} else {
+/*e*/		$rtn = new xmlrpcresp( php_xmlrpc_encode(CreateCreditNote(php_xmlrpc_decode($xmlrpcmsg->getParam( 0 )),php_xmlrpc_decode($xmlrpcmsg->getParam( 1 )), '', '')));
+/*x*/	}
+		ob_end_flush();
+		return $rtn;
+	}
+
+	unset($Description);
+	unset($Parameter);
+	unset($ReturnValue);
+
+	$Description = _('Inserts a sales invoice into the debtortrans table and does the relevant GL entries. Note that this function does not do the tax entries, insert stock movements, update the stock quanties, sales analysis data or do any cost of sales gl journals. Caution is advised in using this function. To create a full webERP invoice with all tables updated use the InvoiceSalesOrder function.');
 	$Parameter[0]['name'] = _('Invoice Details');
 	$Parameter[0]['description'] = _('An array of index/value items describing the invoice.')
-			._('The field names can be found ').'<a href="../../Z_DescribeTable.php?table=debtortrans">'._('here ').'</a>'
+			._('The field names can be found ') . '<a href="../../Z_DescribeTable.php?table=debtortrans">' . _('here ') . '</a>'
 			._('and are case sensitive. ')._('The values should be of the correct type, and the api will check them before updating the database. ')
 			._('The transno key is generated by this call, and if a value is supplied, it will be ignored. ')
-			._('Two additional fields are required. "partcode" needs to be a genuine part number, though it appears to serve no real purpose. ')
-			._('"salesarea" also is required, though again it appears to serve no useful purpose. ')
+			._('Two additional fields are required. partcode needs to be a genuine part number, though it appears to serve no real purpose. ')
+			._('salesarea also is required, though again it appears to serve no useful purpose. ')
 			._('It is not necessary to include all the fields in this parameter, the database default value will be used if the field is not given.');
 	$Parameter[1]['name'] = _('User name');
 	$Parameter[1]['description'] = _('A valid weberp username. This user should have security access to this data.');
@@ -1026,7 +1166,7 @@
 /*x*/					array($xmlrpcStruct,$xmlrpcStruct,$xmlrpcString,$xmlrpcString));
 	$InsertSalesInvoice_doc = apiBuildDocHTML( $Description,$Parameter,$ReturnValue );
 
-	function  xmlrpc_InsertSalesInvoice($xmlrpcmsg){
+		function  xmlrpc_InsertSalesInvoice($xmlrpcmsg){
 		ob_start('ob_file_callback');
 /*x*/		if ($xmlrpcmsg->getNumParams() == 3)
 /*x*/		{
@@ -1043,9 +1183,8 @@
 	unset($Description);
 	unset($Parameter);
 	unset($ReturnValue);
-
 	$ReturnValue = _('Return Value Descriptions go here');
-	$Description = _('This function is used to insert a new Sales Credit to the webERP database.');
+	$Description = _('This function is used to insert a new Sales Credit to the webERP database. Note that this function does not implement a webERP credit note in full and caution is advised in using this function. It does not handle tax at all, it does not add stockmovements, it does not update stock for any quantity returned or update sales analysis. To create a credit note using webERP logic use the CreateCreditNote function');
 	$Parameter[0]['name'] = _('Credit Details');
 	$Parameter[0]['description'] = _('An array of index/value items describing the credit.  All values must be negative.');
 	$Parameter[1]['name'] = _('User name');
@@ -1061,11 +1200,11 @@
 		ob_start('ob_file_callback');
 /*x*/		if ($xmlrpcmsg->getNumParams() == 3)
 /*x*/		{
-/*x*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(InsertSalesCedit(php_xmlrpc_decode($xmlrpcmsg->getParam( 0 )),
+/*x*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(InsertSalesCredit(php_xmlrpc_decode($xmlrpcmsg->getParam( 0 )),
 /*x*/			$xmlrpcmsg->getParam( 1 )->scalarval(  ),
 /*x*/				$xmlrpcmsg->getParam( 2 )->scalarval(  ))) );
 /*x*/		} else {
-/*e*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(InsertSalesCedit(php_xmlrpc_decode($xmlrpcmsg->getParam( 0 )), '', '')));
+/*e*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(InsertSalesCredit(php_xmlrpc_decode($xmlrpcmsg->getParam( 0 )), '', '')));
 /*x*/		}
 		ob_end_flush();
 		return $rtn;
@@ -1078,7 +1217,7 @@
 	$Description = 'This function is used to start a new sales order.';
 	$Parameter[0]['name'] = _('Insert Sales Order Header');
 	$Parameter[0]['description'] = _('A set of key/value pairs where the key must be identical to the name of the field to be updated. ')
-			._('The field names can be found ').'<a href="../../Z_DescribeTable.php?table=salesorders">'._('here ').'</a>'
+			._('The field names can be found ') . '<a href="../../Z_DescribeTable.php?table=salesorders">' . _('here ') . '</a>'
 			._('and are case sensitive. ')._('The values should be of the correct type, and the api will check them before updating the database. ')
 			._('The orderno key is generated by this call, and if a value is supplied, it will be ignored. ')
 			._('It is not necessary to include all the fields in this parameter, the database default value will be used if the field is not given.');
@@ -1094,8 +1233,7 @@
 
 	function  xmlrpc_InsertSalesOrderHeader($xmlrpcmsg){
 		ob_start('ob_file_callback');
-/*x*/		if ($xmlrpcmsg->getNumParams() == 3)
-/*x*/		{
+/*x*/		if ($xmlrpcmsg->getNumParams() == 3) {
 /*x*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(InsertSalesOrderHeader(php_xmlrpc_decode($xmlrpcmsg->getParam( 0 )),
 /*x*/			$xmlrpcmsg->getParam( 1 )->scalarval(  ),
 /*x*/				$xmlrpcmsg->getParam( 2 )->scalarval(  ))) );
@@ -1110,10 +1248,40 @@
 	unset($Parameter);
 	unset($ReturnValue);
 
+	$Description = 'This function is used to invoice a sales order for the full quantity on the order assuming it is all dispatched. NB It does not deal with serialised/controlled items.';
+	$Parameter[0]['name'] = _('Sales Order to invoice');
+	$Parameter[0]['description'] = _('An integer representing the webERP sales order number');
+	$Parameter[1]['name'] = _('User name');
+	$Parameter[1]['description'] = _('A valid weberp username. This user should have security access  to this data.');
+	$Parameter[2]['name'] = _('User password');
+	$Parameter[2]['description'] = _('The weberp password associated with this user name. ');
+	$ReturnValue[0] = _('If successful this function returns a two element array; the first element is 0 for success or an error code, while the second element is the invoice number.');
+
+/*E*/$InvoiceSalesOrder_sig = array(array($xmlrpcStruct,$xmlrpcStruct),
+/*x*/					array($xmlrpcStruct,$xmlrpcInt,$xmlrpcString,$xmlrpcString));
+	$InvoiceSalesOrder_doc = apiBuildDocHTML( $Description,$Parameter,$ReturnValue );
+
+	function  xmlrpc_InvoiceSalesOrder($xmlrpcmsg){
+		ob_start('ob_file_callback');
+/*x*/		if ($xmlrpcmsg->getNumParams() == 3) {
+/*x*/			$rtn = new xmlrpcresp( php_xmlrpc_encode(InvoiceSalesOrder($xmlrpcmsg->getParam( 0 )->scalarval(  ), $xmlrpcmsg->getParam( 1 )->scalarval(  ), $xmlrpcmsg->getParam( 2 )->scalarval(  ))) );
+			} else { //do it with the current login
+/*e*/			$rtn = new xmlrpcresp( php_xmlrpc_encode(InvoiceSalesOrder($xmlrpcmsg->getParam( 0 )->scalarval(  ), '', '')));
+/*x*/		}
+		ob_end_flush();
+		return $rtn;
+	}
+
+	unset($Description);
+	unset($Parameter);
+	unset($ReturnValue);
+
+
+
 	$Description = 'This function is used to modify the header details of a sales order';
 	$Parameter[0]['name'] = _('Modify Sales Order Header Details');
 	$Parameter[0]['description'] = _('A set of key/value pairs where the key must be identical to the name of the field to be updated. ')
-			._('The field names can be found ').'<a href="../../Z_DescribeTable.php?table=salesorders">'._('here ').'</a>'
+			._('The field names can be found ') . '<a href="../../Z_DescribeTable.php?table=salesorders">' . _('here ') . '</a>'
 			._('and are case sensitive. ')._('The values should be of the correct type, and the api will check them before updating the database. ')
 			._('It is not necessary to include all the fields in this parameter, the database default value will be used if the field is not given.');
 	$Parameter[1]['name'] = _('User name');
@@ -1147,7 +1315,7 @@
 	$Description = 'This function is used to add line items to a sales order.';
 	$Parameter[0]['name'] = _('Insert Sales Order Line');
 	$Parameter[0]['description'] = _('A set of key/value pairs where the key must be identical to the name of the field to be updated. ')
-			._('The field names can be found ').'<a href="../../Z_DescribeTable.php?table=salesorderdetails">'._('here ').'</a>'
+			._('The field names can be found ') . '<a href="../../Z_DescribeTable.php?table=salesorderdetails">' . _('here ') . '</a>'
 			._('and are case sensitive. ')._('The values should be of the correct type, and the api will check them before updating the database. ')
 			._('The orderno key must be one of these values. ')
 			._('It is not necessary to include all the fields in this parameter, the database default value will be used if the field is not given.');
@@ -1182,7 +1350,7 @@
 	$Description = 'This function is used to modify line items on a sales order.';
 	$Parameter[0]['name'] = _('Modify Sales Order Line');
 	$Parameter[0]['description'] = _('A set of key/value pairs where the key must be identical to the name of the field to be updated. ')
-			._('The field names can be found ').'<a href="../../Z_DescribeTable.php?table=salesorderdetails">'._('here ').'</a>'
+			._('The field names can be found ') . '<a href="../../Z_DescribeTable.php?table=salesorderdetails">' . _('here ') . '</a>'
 			._('and are case sensitive. ')._('The values should be of the correct type, and the api will check them before updating the database. ')
 			._('The orderno and stkcode keys must be one of these values. ')
 			._('It is not necessary to include all the fields in this parameter, the database default value will be used if the field is not given.');
@@ -1213,7 +1381,6 @@
 	unset($Description);
 	unset($Parameter);
 	unset($ReturnValue);
-
 	$ReturnValue = _('Return Value Descriptions go here');
 	$Description = _('Function Description go here');
 	$Parameter[0]['name'] = _('Account Details');
@@ -1247,6 +1414,7 @@
 
 	$ReturnValue = _('Return Value Descriptions go here');
 	$Description = _('Function Description go here');
+
 	$Parameter[0]['name'] = _('Account Section Details');
 	$Parameter[0]['description'] = _('An array of index/value items describing the account section to insert.');
 	$Parameter[1]['name'] = _('User name');
@@ -1278,6 +1446,7 @@
 
 	$ReturnValue = _('Return Value Descriptions go here');
 	$Description = _('Function Description go here');
+
 	$Parameter[0]['name'] = _('Account Group Details');
 	$Parameter[0]['description'] = _('An array of index/value items describing the account group to insert.');
 	$Parameter[1]['name'] = _('User name');
@@ -1516,6 +1685,7 @@
 
 	$ReturnValue = _('Return Value Descriptions go here');
 	$Description = _('Function Description go here');
+
 	$Parameter[0]['name'] = _('Sales Area Details');
 	$Parameter[0]['description'] = _('An array of index/value items describing the sales area to insert.');
 	$Parameter[1]['name'] = _('User name');
@@ -1637,6 +1807,7 @@
 
 	$ReturnValue = _('Return Value Descriptions go here');
 	$Description = _('Function Description go here');
+
 	$Parameter[0]['name'] = _('Salesman Details');
 	$Parameter[0]['description'] = _('An array of index/value items describing the salesman to insert.');
 	$Parameter[1]['name'] = _('User name');
@@ -1673,22 +1844,21 @@
 	$Parameter[1]['description'] = _('The weberp password associated with this user name. ');
 	$ReturnValue[0] = _('This function returns an array of tax group IDs.');
 
-/*E*/	$GetTaxgroupList_sig = array(array($xmlrpcStruct),
+/*E*/$GetTaxGroupList_sig = array(array($xmlrpcStruct),
 /*x*/					array($xmlrpcStruct,$xmlrpcString,$xmlrpcString));
-	$GetTaxgroupList_doc = apiBuildDocHTML( $Description,$Parameter,$ReturnValue );
+	$GetTaxGroupList_doc = apiBuildDocHTML( $Description,$Parameter,$ReturnValue );
 
-	function  xmlrpc_GetTaxgroupList($xmlrpcmsg){
+	function  xmlrpc_GetTaxGroupList($xmlrpcmsg){
 		ob_start('ob_file_callback');
-/*x*/		if ($xmlrpcmsg->getNumParams() == 2)
-/*x*/		{
-/*x*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(GetTaxgroupList($xmlrpcmsg->getParam( 0 )->scalarval(  ),
-/*x*/			$xmlrpcmsg->getParam( 1 )->scalarval(  ))) );
-/*x*/		} else {
-/*e*/ $rtn = new xmlrpcresp( php_xmlrpc_encode(GetTaxgroupList( '', '')));
-/*x*/		}
+/*x*/	if ($xmlrpcmsg->getNumParams() == 2)	{
+/*x*/		$rtn = new xmlrpcresp( php_xmlrpc_encode(GetTaxGroupList($xmlrpcmsg->getParam( 0 )->scalarval(  ), $xmlrpcmsg->getParam( 1 )->scalarval(  ))) );
+/*x*/	} else {
+/*e*/ 		$rtn = new xmlrpcresp( php_xmlrpc_encode(GetTaxGroupList( '', '')));
+/*x*/	}
 		ob_end_flush();
 		return $rtn;
 	}
+
 
 	unset($Description);
 	unset($Parameter);
@@ -1703,19 +1873,126 @@
 	$Parameter[2]['description'] = _('The weberp password associated with this user name. ');
 	$ReturnValue[0] = _('This function returns an array of tax group details.');
 
-/*E*/	$GetTaxgroupDetails_sig = array(array($xmlrpcStruct,$xmlrpcString),
+/*E*/$GetTaxGroupDetails_sig = array(array($xmlrpcStruct,$xmlrpcString),
 /*x*/					array($xmlrpcStruct,$xmlrpcString,$xmlrpcString,$xmlrpcString));
-	$GetTaxgroupDetails_doc = apiBuildDocHTML( $Description,$Parameter,$ReturnValue );
+	$GetTaxGroupDetails_doc = apiBuildDocHTML( $Description,$Parameter,$ReturnValue );
 
-	function  xmlrpc_GetTaxgroupDetails($xmlrpcmsg){
+	function  xmlrpc_GetTaxGroupDetails($xmlrpcmsg){
 		ob_start('ob_file_callback');
-/*x*/		if ($xmlrpcmsg->getNumParams() == 3)
-/*x*/		{
-/*x*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(GetTaxgroupDetails($xmlrpcmsg->getParam( 0 )->scalarval(  ),
-/*x*/			$xmlrpcmsg->getParam( 1 )->scalarval(  ),
-/*x*/				$xmlrpcmsg->getParam( 2 )->scalarval(  ))) );
-/*x*/		} else {
-/*e*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(GetTaxgroupDetails($xmlrpcmsg->getParam( 0 )->scalarval(  ), '', '')));
+/*x*/	if ($xmlrpcmsg->getNumParams() == 3)	{
+/*x*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(GetTaxGroupDetails($xmlrpcmsg->getParam( 0 )->scalarval(  ),
+/*x*/		$xmlrpcmsg->getParam( 1 )->scalarval(  ),
+/*x*/		$xmlrpcmsg->getParam( 2 )->scalarval(  ))) );
+/*x*/	} else {
+/*e*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(GetTaxGroupDetails($xmlrpcmsg->getParam( 0 )->scalarval(  ), '', '')));
+/*x*/	}
+		ob_end_flush();
+		return $rtn;
+	}
+
+	$Description = _('This function returns a list of tax authority IDs.');
+	$Parameter[0]['name'] = _('User name');
+	$Parameter[0]['description'] = _('A valid weberp username. This user should have security access  to this data.');
+	$Parameter[1]['name'] = _('User password');
+	$Parameter[1]['description'] = _('The weberp password associated with this user name. ');
+	$ReturnValue[0] = _('This function returns an array of tax group IDs.');
+
+/*E*/$GetTaxAuthorityList_sig = array(array($xmlrpcStruct),
+/*x*/					array($xmlrpcStruct,$xmlrpcString,$xmlrpcString));
+	$GetTaxAuthorityList_doc = apiBuildDocHTML( $Description,$Parameter,$ReturnValue );
+
+	function  xmlrpc_GetTaxAuthorityList($xmlrpcmsg){
+		ob_start('ob_file_callback');
+/*x*/	if ($xmlrpcmsg->getNumParams() == 2)	{
+/*x*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(GetTaxAuthorityList($xmlrpcmsg->getParam( 0 )->scalarval(  ), $xmlrpcmsg->getParam( 1 )->scalarval(  ))) );
+/*x*/	} else {
+/*e*/ 		$rtn = new xmlrpcresp( php_xmlrpc_encode(GetTaxAuthorityList( '', '')));
+/*x*/	}
+		ob_end_flush();
+		return $rtn;
+	}
+
+	unset($Description);
+	unset($Parameter);
+	unset($ReturnValue);
+
+	$Description = _('This function takes a tax authority ID and returns details of that tax authority.');
+	$Parameter[0]['name'] = _('Tax Authority ID');
+	$Parameter[0]['description'] = _('A tax Authority ID as returned by the GetTaxAuthorityList function.');
+	$Parameter[1]['name'] = _('User name');
+	$Parameter[1]['description'] = _('A valid weberp username. This user should have security access to this data.');
+	$Parameter[2]['name'] = _('User password');
+	$Parameter[2]['description'] = _('The weberp password associated with this user name. ');
+	$ReturnValue[0] = _('This function returns an array of tax authority details.');
+
+/*E*/$GetTaxAuthorityDetails_sig = array(array($xmlrpcStruct,$xmlrpcString),
+/*x*/					array($xmlrpcStruct,$xmlrpcString,$xmlrpcString,$xmlrpcString));
+	$GetTaxAuthorityDetails_doc = apiBuildDocHTML( $Description,$Parameter,$ReturnValue );
+
+	function  xmlrpc_GetTaxAuthorityDetails($xmlrpcmsg){
+		ob_start('ob_file_callback');
+/*x*/	if ($xmlrpcmsg->getNumParams() == 3)	{
+/*x*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(GetTaxAuthorityDetails($xmlrpcmsg->getParam( 0 )->scalarval(  ), $xmlrpcmsg->getParam( 1 )->scalarval(  ), $xmlrpcmsg->getParam( 2 )->scalarval(  ))) );
+/*x*/	} else {
+/*e*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(GetTaxAuthorityDetails($xmlrpcmsg->getParam( 0 )->scalarval(  ), '', '')));
+/*x*/	}
+		ob_end_flush();
+		return $rtn;
+	}
+
+    unset($Description);
+	unset($Parameter);
+	unset($ReturnValue);
+
+	$Description = _('This function takes a tax authority ID and returns the rates of tax for the authority.');
+	$Parameter[0]['name'] = _('Tax Authority ID');
+	$Parameter[0]['description'] = _('A tax Authority ID as returned by the GetTaxAuthorityList function.');
+	$Parameter[1]['name'] = _('User name');
+	$Parameter[1]['description'] = _('A valid weberp username. This user should have security access to this data.');
+	$Parameter[2]['name'] = _('User password');
+	$Parameter[2]['description'] = _('The weberp password associated with this user name. ');
+	$ReturnValue[0] = _('This function returns the tax rates for the authority.');
+
+/*E*/$GetTaxAuthorityRates_sig = array(array($xmlrpcStruct,$xmlrpcString),
+/*x*/					array($xmlrpcStruct,$xmlrpcString,$xmlrpcString,$xmlrpcString));
+	$GetTaxAuthorityRates_doc = apiBuildDocHTML( $Description,$Parameter,$ReturnValue );
+
+	function  xmlrpc_GetTaxAuthorityRates($xmlrpcmsg){
+		ob_start('ob_file_callback');
+/*x*/	if ($xmlrpcmsg->getNumParams() == 3)	{
+/*x*/		$rtn = new xmlrpcresp( php_xmlrpc_encode(GetTaxAuthorityRates($xmlrpcmsg->getParam( 0 )->scalarval(  ),
+/*x*/																		$xmlrpcmsg->getParam( 1 )->scalarval(  ),
+/*x*/																		$xmlrpcmsg->getParam( 2 )->scalarval(  ) )) );
+/*x*/	} else {
+/*e*/		$rtn = new xmlrpcresp( php_xmlrpc_encode(GetTaxAuthorityRates($xmlrpcmsg->getParam( 0 )->scalarval(  ), '', '')));
+/*x*/	}
+		ob_end_flush();
+		return $rtn;
+	}
+
+    unset($Description);
+	unset($Parameter);
+	unset($ReturnValue);
+
+	$Description = _('This function takes a tax group ID and returns the taxes that belong to that tax group.');
+	$Parameter[0]['name'] = _('Tax Group ID');
+	$Parameter[0]['description'] = _('A tax group ID as returned by the GetTaxgroupList function.');
+	$Parameter[1]['name'] = _('User name');
+	$Parameter[1]['description'] = _('A valid weberp username. This user should have security access to this data.');
+	$Parameter[2]['name'] = _('User password');
+	$Parameter[2]['description'] = _('The weberp password associated with this user name. ');
+	$ReturnValue[0] = _('This function returns an array of tax group details.');
+
+/*E*/$GetTaxGroupTaxes_sig = array(array($xmlrpcStruct,$xmlrpcString),
+/*x*/					array($xmlrpcStruct,$xmlrpcString,$xmlrpcString,$xmlrpcString));
+	$GetTaxGroupTaxes_doc = apiBuildDocHTML( $Description,$Parameter,$ReturnValue );
+
+	function  xmlrpc_GetTaxGroupTaxes($xmlrpcmsg){
+		ob_start('ob_file_callback');
+/*x*/	if ($xmlrpcmsg->getNumParams() == 3)	{
+/*x*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(GetTaxGroupTaxes($xmlrpcmsg->getParam( 0 )->scalarval(  ), 	$xmlrpcmsg->getParam( 1 )->scalarval(  ), $xmlrpcmsg->getParam( 2 )->scalarval(  ))) );
+/*x*/	} else {
+/*e*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(GetTaxGroupTaxes($xmlrpcmsg->getParam( 0 )->scalarval(  ), '', '')));
 /*x*/		}
 		ob_end_flush();
 		return $rtn;
@@ -1730,7 +2007,7 @@
 	$Parameter[0]['description'] = _('A valid weberp username. This user should have security access  to this data.');
 	$Parameter[1]['name'] = _('User password');
 	$Parameter[1]['description'] = _('The weberp password associated with this user name. ');
-	$ReturnValue[0] = _('This function returns an array of customer types.');
+	$ReturnValue[0] = _('This function returns an array of customer types');
 
 /*E*/	$GetCustomerTypeList_sig = array(array($xmlrpcStruct),
 /*x*/					array($xmlrpcStruct,$xmlrpcString,$xmlrpcString));
@@ -1738,13 +2015,11 @@
 
 	function  xmlrpc_GetCustomerTypeList($xmlrpcmsg){
 		ob_start('ob_file_callback');
-/*x*/		if ($xmlrpcmsg->getNumParams() == 2)
-/*x*/		{
-/*x*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(GetCustomerTypeList($xmlrpcmsg->getParam( 0 )->scalarval(  ),
-/*x*/			$xmlrpcmsg->getParam( 1 )->scalarval(  ))) );
-/*x*/		} else {
-/*e*/ $rtn = new xmlrpcresp( php_xmlrpc_encode(GetCustomerTypeList( '', '')));
-/*x*/		}
+/*x*/	if ($xmlrpcmsg->getNumParams() == 2)	{
+/*x*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(GetCustomerTypeList($xmlrpcmsg->getParam( 0 )->scalarval(  ), $xmlrpcmsg->getParam( 1 )->scalarval(  ))) );
+/*x*/	} else {
+/*e*/ 		$rtn = new xmlrpcresp( php_xmlrpc_encode(GetCustomerTypeList( '', '')));
+/*x*/	}
 		ob_end_flush();
 		return $rtn;
 	}
@@ -1786,6 +2061,7 @@
 
 	$ReturnValue = _('Return Value Descriptions go here');
 	$Description = _('Function Description go here');
+
 	$Parameter[0]['name'] = _('Category Details');
 	$Parameter[0]['description'] = _('An array of index/value items describing the stock category to insert.');
 	$Parameter[1]['name'] = _('User name');
@@ -1817,6 +2093,7 @@
 
 	$ReturnValue = _('Return Value Descriptions go here');
 	$Description = _('Function Description go here');
+
 	$Parameter[0]['name'] = _('Category Details');
 	$Parameter[0]['description'] = _('An array of index/value items describing the stock category to modify.');
 	$Parameter[1]['name'] = _('User name');
@@ -1906,6 +2183,7 @@
 
 	$ReturnValue = _('Return Value Descriptions go here');
 	$Description = _('Function Description go here');
+
 	$Parameter[0]['name'] = _('Field Name');
 	$Parameter[0]['description'] = _('The field name to search on.');
 	$Parameter[1]['name'] = _('Match Criteria');
@@ -1941,6 +2219,7 @@
 
 	$ReturnValue = _('Return Value Descriptions go here');
 	$Description = _('Function Description go here');
+
 	$Parameter[0]['name'] = _('Label Name');
 	$Parameter[0]['description'] = _('The category label to search on.');
 	$Parameter[1]['name'] = _('Match Criteria');
@@ -2071,7 +2350,7 @@
 	$Description = _('This function is used to insert a new supplier into the webERP database.');
 	$Parameter[0]['name'] = _('Supplier Details');
 	$Parameter[0]['description'] = _('A set of key/value pairs where the key must be identical to the name of the field to be updated. ')
-			._('The field names can be found ').'<a href="../../Z_DescribeTable.php?table=suppliers">'._('here ').'</a>'
+			._('The field names can be found ') . '<a href="../../Z_DescribeTable.php?table=suppliers">' . _('here ') . '</a>'
 			._('and are case sensitive. ')._('The values should be of the correct type, and the api will check them before updating the database. ')
 			._('It is not necessary to include all the fields in this parameter, the database default value will be used if the field is not given.');
 	$Parameter[1]['name'] = _('User name');
@@ -2107,10 +2386,10 @@
 	$Description = _('This function is used to modify a supplier which is already setup in the webERP database.');
 	$Parameter[0]['name'] = _('Supplier Details');
 	$Parameter[0]['description'] = _('A set of key/value pairs where the key must be identical to the name of the field to be updated. ')
-			._('The field names can be found ').'<a href="../../Z_DescribeTable.php?table=suppliers">'._('here ').'</a>'
+			._('The field names can be found ') . '<a href="../../Z_DescribeTable.php?table=suppliers">' . _('here ') . '</a>'
 			._('and are case sensitive. ')._('The values should be of the correct type, and the api will check them before updating the database. ')
 			._('It is not necessary to include all the fields in this parameter, the database default value will be used if the field is not given.')
-			.'<p>'._('The supplierid must already exist in the weberp database.') . '</p>';
+			 . '<p>' . _('The supplierid must already exist in the weberp database.');
 	$Parameter[1]['name'] = _('User name');
 	$Parameter[1]['description'] = _('A valid weberp username. This user should have security access  to this data.');
 	$Parameter[2]['name'] = _('User password');
@@ -2149,8 +2428,8 @@
 	$Parameter[2]['name'] = _('User password');
 	$Parameter[2]['description'] = _('The weberp password associated with this user name. ');
 	$ReturnValue[0] = _('If successful this function returns a set of key/value pairs containing the details of this supplier. ')
-			._('The key will be identical with field name from the suppliers table. All fields will be in the set regardless of whether the value was set.').'<p>'
-			._('Otherwise an array of error codes is returned. ') . '</p>';
+			._('The key will be identical with field name from the suppliers table. All fields will be in the set regardless of whether the value was set.') . '<p>'
+			._('Otherwise an array of error codes is returned. ');
 
 /*E*/	$GetSupplier_sig = array(array($xmlrpcStruct,$xmlrpcString),
 /*x*/					array($xmlrpcStruct,$xmlrpcString,$xmlrpcString,$xmlrpcString));
@@ -2381,7 +2660,7 @@
 	$Description = _('This function is used to insert new purchasing data into the webERP database.');
 	$Parameter[0]['name'] = _('Purchasing data');
 	$Parameter[0]['description'] = _('A set of key/value pairs where the key must be identical to the name of the field to be updated. ')
-			._('The field names can be found ').'<a href="../../Z_DescribeTable.php?table=purchdata">'._('here ').'</a>'
+			._('The field names can be found ') . '<a href="../../Z_DescribeTable.php?table=purchdata">' . _('here ') . '</a>'
 			._('and are case sensitive. ')._('The values should be of the correct type, and the api will check them before updating the database. ')
 			._('It is not necessary to include all the fields in this parameter, the database default value will be used if the field is not given.');
 	$Parameter[1]['name'] = _('User name');
@@ -2417,7 +2696,7 @@
 	$Description = _('This function is used to modify purchasing data into the webERP database.');
 	$Parameter[0]['name'] = _('Purchasing data');
 	$Parameter[0]['description'] = _('A set of key/value pairs where the key must be identical to the name of the field to be updated. ')
-			._('The field names can be found ').'<a href="../../Z_DescribeTable.php?table=purchdata">'._('here ').'</a>'
+			._('The field names can be found ') . '<a href="../../Z_DescribeTable.php?table=purchdata">' . _('here ') . '</a>'
 			._('and are case sensitive. ')._('The values should be of the correct type, and the api will check them before updating the database. ')
 			._('It is not necessary to include all the fields in this parameter, the database default value will be used if the field is not given.');
 	$Parameter[1]['name'] = _('User name');
@@ -2453,7 +2732,7 @@
 	$Description = _('This function is used to insert a new work order into the webERP database. Currently this works only for single line orders.');
 	$Parameter[0]['name'] = _('Work order details');
 	$Parameter[0]['description'] = _('A set of key/value pairs where the key must be identical to the name of the field to be updated. ')
-			._('The field names can be found ').'<a href="../../Z_DescribeTable.php?table=workorders">'._('here ').'</a>'
+			._('The field names can be found ') . '<a href="../../Z_DescribeTable.php?table=workorders">' . _('here ') . '</a>'
 			._('and are case sensitive. ')._('The values should be of the correct type, and the api will check them before updating the database. ')
 			._('It is not necessary to include all the fields in this parameter, the database default value will be used if the field is not given.');
 	$Parameter[1]['name'] = _('User name');
@@ -2553,7 +2832,7 @@
 /*x*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(GetDefaultDateFormat($xmlrpcmsg->getParam( 0 )->scalarval(  ),
 /*x*/			$xmlrpcmsg->getParam( 1 )->scalarval(  ))) );
 /*x*/		} else {
-/*e*/ $rtn = new xmlrpcresp( php_xmlrpc_encode(GetDefaultDateFormat( '', '')));
+/*e*/ 			$rtn = new xmlrpcresp( php_xmlrpc_encode(GetDefaultDateFormat( '', '')));
 /*x*/		}
 		ob_end_flush();
 		return $rtn;
@@ -2562,6 +2841,37 @@
 	unset($Description);
 	unset($Parameter);
 	unset($ReturnValue);
+
+	$Description = _('Returns the webERP default shipper');
+	$Parameter[0]['name'] = _('User name');
+	$Parameter[0]['description'] = _('A valid weberp username. This user should have security access  to this data.');
+	$Parameter[1]['name'] = _('User password');
+	$Parameter[1]['description'] = _('The weberp password associated with this user name. ');
+	$ReturnValue[0] = _('If successful this function returns an array of two elements the first should contain an integer of zero for successful and the second an associative array containing the key of confvalue the value of which is the Default_Shipper.')
+			._('Otherwise an array of error codes is returned. ');
+
+/*E*/$GetDefaultShipper_sig = array(array($xmlrpcStruct),
+/*x*/					array($xmlrpcStruct,$xmlrpcString,$xmlrpcString));
+	$GetDefaultShipper_doc = apiBuildDocHTML( $Description,$Parameter,$ReturnValue );
+
+	function  xmlrpc_GetDefaultShipper($xmlrpcmsg){
+		ob_start('ob_file_callback');
+/*x*/		if ($xmlrpcmsg->getNumParams() == 2)
+/*x*/		{
+/*x*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(GetDefaultShipper($xmlrpcmsg->getParam( 0 )->scalarval(  ),
+/*x*/			$xmlrpcmsg->getParam( 1 )->scalarval(  ))) );
+/*x*/		} else {
+/*e*/ 			$rtn = new xmlrpcresp( php_xmlrpc_encode(GetDefaultShipper( '', '')));
+/*x*/		}
+		ob_end_flush();
+		return $rtn;
+	}
+
+	unset($Description);
+	unset($Parameter);
+	unset($ReturnValue);
+
+
 
 	$Description = _('Returns the webERP default location');
 	$Parameter[0]['name'] = _('User name');
@@ -2621,12 +2931,12 @@
 	unset($Parameter);
 	unset($ReturnValue);
 
-	$Description = _('Returns the webERP currency code');
+	$Description = _('Returns the webERP default inventory location');
 	$Parameter[0]['name'] = _('User name');
 	$Parameter[0]['description'] = _('A valid weberp username. This user should have security access  to this data.');
 	$Parameter[1]['name'] = _('User password');
 	$Parameter[1]['description'] = _('The weberp password associated with this user name. ');
-	$ReturnValue[0] = _('If successful this function returns a string contain the default currency code. ')
+	$ReturnValue[0] = _('If successful this function returns a string contain the default inventory location. ')
 			._('Otherwise an array of error codes is returned. ');
 
 /*E*/	$GetDefaultLocation_sig = array(array($xmlrpcStruct),
@@ -2635,16 +2945,98 @@
 
 	function  xmlrpc_GetDefaultLocation($xmlrpcmsg){
 		ob_start('ob_file_callback');
-/*x*/		if ($xmlrpcmsg->getNumParams() == 2)
-/*x*/		{
-/*x*/		 $rtn = new xmlrpcresp( php_xmlrpc_encode(GetDefaultLocation($xmlrpcmsg->getParam( 0 )->scalarval(  ),
-/*x*/			$xmlrpcmsg->getParam( 1 )->scalarval(  ))) );
+		if ($xmlrpcmsg->getNumParams() == 2){
+			$rtn = new xmlrpcresp( php_xmlrpc_encode(GetDefaultLocation($xmlrpcmsg->getParam( 0 )->scalarval(  ), $xmlrpcmsg->getParam( 1 )->scalarval(  ))) );
+		} else {
+			$rtn = new xmlrpcresp( php_xmlrpc_encode(GetDefaultLocation( '', '')));
+		}
+		ob_end_flush();
+		return $rtn;
+	}
+
+	$Description = _('Returns the webERP reports directory for the company selected');
+	$Parameter[0]['name'] = _('User name');
+	$Parameter[0]['description'] = _('A valid weberp username. This user should have security access  to this data.');
+	$Parameter[1]['name'] = _('User password');
+	$Parameter[1]['description'] = _('The weberp password associated with this user name. ');
+	$ReturnValue[0] = _('If successful this function returns a string containing the path to the company reports directory') . ' ' . _('Otherwise an array of error codes is returned. ');
+
+	$GetReportsDirectory_sig = array(array($xmlrpcStruct),
+									array($xmlrpcStruct,$xmlrpcString,$xmlrpcString));
+	$GetReportsDirectory_doc = apiBuildDocHTML( $Description,$Parameter,$ReturnValue );
+
+	function  xmlrpc_GetReportsDirectory($xmlrpcmsg){
+		ob_start('ob_file_callback');
+		if ($xmlrpcmsg->getNumParams() == 2) {
+			$rtn = new xmlrpcresp( php_xmlrpc_encode(GetReportsDirectory($xmlrpcmsg->getParam( 0 )->scalarval(  ), $xmlrpcmsg->getParam( 1 )->scalarval(  ))) );
+		} else {
+			$rtn = new xmlrpcresp( php_xmlrpc_encode(GetReportsDirectory( '', '')));
+		}
+		ob_end_flush();
+		return $rtn;
+	}
+	unset($Description);
+	unset($Parameter);
+	unset($ReturnValue);
+
+	$Description = _('This function creates a POS data file on the webERP server for download by the POS');
+	$Parameter[0]['name'] = _('POS Customer Code - a valid webERP customer that sales from the POS are made against.');
+	$Parameter[0]['description'] = _('POS Customer Branch Code - a valid branch code of the webERP customer that the POS sales are made against');
+	$Parameter[1]['name'] = _('User name');
+	$Parameter[1]['description'] = _('A valid weberp username. This user should have security access  to this data.');
+	$Parameter[2]['name'] = _('User name');
+	$Parameter[2]['description'] = _('A valid weberp username. This user should have security access  to this data.');
+	$Parameter[3]['name'] = _('User password');
+	$Parameter[3]['description'] = _('The weberp password associated with this user name. ');
+	$ReturnValue[0] = _('If successful this function returns 0 for success and 1 for error. ');
+
+	$CreatePOSDataFull_sig = array(array($xmlrpcStruct,$xmlrpcString,$xmlrpcString,$xmlrpcString,$xmlrpcString));
+	$CreatePOSDataFull_doc = apiBuildDocHTML( $Description,$Parameter,$ReturnValue );
+
+	function  xmlrpc_CreatePOSDataFull($xmlrpcmsg){
+		ob_start('ob_file_callback');
+/*x*/		if ($xmlrpcmsg->getNumParams() == 4) {
+/*x*/			$rtn = new xmlrpcresp( php_xmlrpc_encode(CreatePOSDataFull($xmlrpcmsg->getParam( 0 )->scalarval(  ),
+/*x*/																		$xmlrpcmsg->getParam( 1 )->scalarval(  ),
+																			$xmlrpcmsg->getParam( 2 )->scalarval(  ),
+																			$xmlrpcmsg->getParam( 3 )->scalarval(  ))) );
 /*x*/		} else {
-/*e*/ $rtn = new xmlrpcresp( php_xmlrpc_encode(GetDefaultLocation( '', '')));
+/*e*/ 			$rtn = new xmlrpcresp( php_xmlrpc_encode(CreatePOSDataFull( $xmlrpcmsg->getParam( 0 )->scalarval(  ),
+/*x*/																		$xmlrpcmsg->getParam( 1 )->scalarval(  ),
+																			'',
+																			'')));
 /*x*/		}
 		ob_end_flush();
 		return $rtn;
 	}
+
+	unset($Description);
+	unset($Parameter);
+	unset($ReturnValue);
+
+	$Description = _('This function deletes a POS data file on the webERP server');
+	$Parameter[0]['name'] = _('User name');
+	$Parameter[0]['description'] = _('A valid weberp username. This user should have security access  to this data.');
+	$Parameter[1]['name'] = _('User password');
+	$Parameter[1]['description'] = _('The weberp password associated with this user name. ');
+	$ReturnValue[0] = _('Returns 0 if the delete POS Data was successful');
+
+/*E*/$DeletePOSData_sig = array(array($xmlrpcStruct,$xmlrpcString,$xmlrpcString));
+	$DeletePOSData_doc = apiBuildDocHTML( $Description,$Parameter,$ReturnValue );
+
+
+	function  xmlrpc_DeletePOSData($xmlrpcmsg){
+		ob_start('ob_file_callback');
+		if ($xmlrpcmsg->getNumParams() == 2) {
+			$rtn = new xmlrpcresp( php_xmlrpc_encode(DeletePOSData($xmlrpcmsg->getParam( 0 )->scalarval(  ),
+																	$xmlrpcmsg->getParam( 1 )->scalarval(  ) )) );
+		} else {
+			$rtn = new xmlrpcresp( php_xmlrpc_encode(DeletePOSData( '','')));
+		}
+		ob_end_flush();
+		return $rtn;
+	}
+
 
 	unset($Description);
 	unset($Parameter);
@@ -2702,350 +3094,407 @@
 
 
 	$s = new xmlrpc_server( array(
-		"weberp.xmlrpc_Login" => array(
-			"function" => "xmlrpc_Login",
-			"signature" => $Login_sig,
-			"docstring" => $Login_doc),
-		"weberp.xmlrpc_Logout" => array(
-			"function" => "xmlrpc_Logout",
-			"signature" => $Logout_sig,
-			"docstring" => $Logout_doc),
-		"weberp.xmlrpc_InsertCustomer" => array(
-			"function" => "xmlrpc_InsertCustomer",
-			"signature" => $InsertCustomer_sig,
-			"docstring" => $InsertCustomer_doc),
-		"weberp.xmlrpc_ModifyCustomer" => array(
-			"function" => "xmlrpc_ModifyCustomer",
-			"signature" => $ModifyCustomer_sig,
-			"docstring" => $ModifyCustomer_doc),
-		"weberp.xmlrpc_GetCustomer" => array(
-			"function" => "xmlrpc_GetCustomer",
-			"signature" => $GetCustomer_sig,
-			"docstring" => $GetCustomer_doc),
-		"weberp.xmlrpc_SearchCustomers" => array(
-			"function" => "xmlrpc_SearchCustomers",
-			"signature" => $SearchCustomers_sig,
-			"docstring" => $SearchCustomers_doc),
-		"weberp.xmlrpc_GetCurrencyList" => array(
-			"function" => "xmlrpc_GetCurrencyList",
-			"signature" => $GetCurrencyList_sig,
-			"docstring" => $GetCurrencyList_doc),
-		"weberp.xmlrpc_GetCurrencyDetails" => array(
-			"function" => "xmlrpc_GetCurrencyDetails",
-			"signature" => $GetCurrencyDetails_sig,
-			"docstring" => $GetCurrencyDetails_doc),
-		"weberp.xmlrpc_GetSalesTypeList" => array(
-			"function" => "xmlrpc_GetSalesTypeList",
-			"signature" => $GetSalesTypeList_sig,
-			"docstring" => $GetSalesTypeList_doc),
-		"weberp.xmlrpc_GetSalesTypeDetails" => array(
-			"function" => "xmlrpc_GetSalesTypeDetails",
-			"signature" => $GetSalesTypeDetails_sig,
-			"docstring" => $GetSalesTypeDetails_doc),
-		"weberp.xmlrpc_InsertSalesType" => array(
-			"function" => "xmlrpc_InsertSalesType",
-			"signature" => $InsertSalesType_sig,
-			"docstring" => $InsertSalesType_doc),
-		"weberp.xmlrpc_GetHoldReasonList" => array(
-			"function" => "xmlrpc_GetHoldReasonList",
-			"signature" => $GetHoldReasonList_sig,
-			"docstring" => $GetHoldReasonList_doc),
-		"weberp.xmlrpc_GetHoldReasonDetails" => array(
-			"function" => "xmlrpc_GetHoldReasonDetails",
-			"signature" => $GetHoldReasonDetails_sig,
-			"docstring" => $GetHoldReasonDetails_doc),
-		"weberp.xmlrpc_GetPaymentTermsList" => array(
-			"function" => "xmlrpc_GetPaymentTermsList",
-			"signature" => $GetPaymentTermsList_sig,
-			"docstring" => $GetPaymentTermsList_doc),
-		"weberp.xmlrpc_GetPaymentTermsDetails" => array(
-			"function" => "xmlrpc_GetPaymentTermsDetails",
-			"signature" => $GetPaymentTermsDetails_sig,
-			"docstring" => $GetPaymentTermsDetails_doc),
-		"weberp.xmlrpc_InsertStockItem" => array(
-			"function" => "xmlrpc_InsertStockItem",
-			"signature" => $InsertStockItem_sig,
-			"docstring" => $InsertStockItem_doc),
-		"weberp.xmlrpc_ModifyStockItem" => array(
-			"function" => "xmlrpc_ModifyStockItem",
-			"signature" => $ModifyStockItem_sig,
-			"docstring" => $ModifyStockItem_doc),
-		"weberp.xmlrpc_GetStockItem" => array(
-			"function" => "xmlrpc_GetStockItem",
-			"signature" => $GetStockItem_sig,
-			"docstring" => $GetStockItem_doc),
-		"weberp.xmlrpc_SearchStockItems" => array(
-			"function" => "xmlrpc_SearchStockItems",
-			"signature" => $SearchStockItems_sig,
-			"docstring" => $SearchStockItems_doc),
-		"weberp.xmlrpc_GetStockBalance" => array(
-			"function" => "xmlrpc_GetStockBalance",
-			"signature" => $GetStockBalance_sig,
-			"docstring" => $GetStockBalance_doc),
-		"weberp.xmlrpc_GetStockReorderLevel" => array(
-			"function" => "xmlrpc_GetStockReorderLevel",
-			"signature" => $GetStockReorderLevel_sig,
-			"docstring" => $GetStockReorderLevel_doc),
-		"weberp.xmlrpc_SetStockReorderLevel" => array(
-			"function" => "xmlrpc_SetStockReorderLevel",
-			"signature" => $SetStockReorderLevel_sig,
-			"docstring" => $SetStockReorderLevel_doc),
-		"weberp.xmlrpc_GetAllocatedStock" => array(
-			"function" => "xmlrpc_GetAllocatedStock",
-			"signature" => $GetAllocatedStock_sig,
-			"docstring" => $GetAllocatedStock_doc),
-		"weberp.xmlrpc_GetOrderedStock" => array(
-			"function" => "xmlrpc_GetOrderedStock",
-			"signature" => $GetOrderedStock_sig,
-			"docstring" => $GetOrderedStock_doc),
-		"weberp.xmlrpc_SetStockPrice" => array(
-			"function" => "xmlrpc_SetStockPrice",
-			"signature" => $SetStockPrice_sig,
-			"docstring" => $SetStockPrice_doc),
-		"weberp.xmlrpc_GetStockPrice" => array(
-			"function" => "xmlrpc_GetStockPrice",
-			"signature" => $GetStockPrice_sig,
-			"docstring" => $GetStockPrice_doc),
-		"weberp.xmlrpc_InsertSalesInvoice" => array(
-			"function" => "xmlrpc_InsertSalesInvoice",
-			"signature" => $InsertSalesInvoice_sig,
-			"docstring" => $InsertSalesInvoice_doc),
-		"weberp.xmlrpc_InsertSalesCredit" => array(
-			"function" => "xmlrpc_InsertSalesCredit",
-			"signature" => $InsertSalesCredit_sig,
-			"docstring" => $InsertSalesCredit_doc),
-		"weberp.xmlrpc_InsertBranch" => array(
-			"function" => "xmlrpc_InsertBranch",
-			"signature" => $InsertBranch_sig,
-			"docstring" => $InsertBranch_doc),
-		"weberp.xmlrpc_ModifyBranch" => array(
-			"function" => "xmlrpc_ModifyBranch",
-			"signature" => $ModifyBranch_sig,
-			"docstring" => $ModifyBranch_doc),
-		"weberp.xmlrpc_GetCustomerBranchCodes" => array(
-			"function" => "xmlrpc_GetCustomerBranchCodes",
-			"signature" => $GetCustomerBranchCodes_sig,
-			"docstring" => $GetCustomerBranchCodes_doc),
-		"weberp.xmlrpc_GetCustomerBranch" => array(
-			"function" => "xmlrpc_GetCustomerBranch",
-			"signature" => $GetCustomerBranch_sig,
-			"docstring" => $GetCustomerBranch_doc),
-		"weberp.xmlrpc_InsertSalesOrderHeader" => array(
-			"function" => "xmlrpc_InsertSalesOrderHeader",
-			"signature" => $InsertSalesOrderHeader_sig,
-			"docstring" => $InsertSalesOrderHeader_doc),
-		"weberp.xmlrpc_ModifySalesOrderHeader" => array(
-			"function" => "xmlrpc_ModifySalesOrderHeader",
-			"signature" => $ModifySalesOrderHeader_sig,
-			"docstring" => $ModifySalesOrderHeader_doc),
-		"weberp.xmlrpc_InsertSalesOrderLine" => array(
-			"function" => "xmlrpc_InsertSalesOrderLine",
-			"signature" => $InsertSalesOrderLine_sig,
-			"docstring" => $InsertSalesOrderLine_doc),
-		"weberp.xmlrpc_ModifySalesOrderLine" => array(
-			"function" => "xmlrpc_ModifySalesOrderLine",
-			"signature" => $ModifySalesOrderLine_sig,
-			"docstring" => $ModifySalesOrderLine_doc),
-		"weberp.xmlrpc_InsertGLAccount" => array(
-			"function" => "xmlrpc_InsertGLAccount",
-			"signature" => $InsertGLAccount_sig,
-			"docstring" => $InsertGLAccount_doc),
-		"weberp.xmlrpc_InsertGLAccountSection" => array(
-			"function" => "xmlrpc_InsertGLAccountSection",
-			"signature" => $InsertGLAccountSection_sig,
-			"docstring" => $InsertGLAccountSection_doc),
-		"weberp.xmlrpc_InsertGLAccountGroup" => array(
-			"function" => "xmlrpc_InsertGLAccountGroup",
-			"signature" => $InsertGLAccountGroup_sig,
-			"docstring" => $InsertGLAccountGroup_doc),
-		"weberp.xmlrpc_GetLocationList" => array(
-			"function" => "xmlrpc_GetLocationList",
-			"signature" => $GetLocationList_sig,
-			"docstring" => $GetLocationList_doc),
-		"weberp.xmlrpc_GetLocationDetails" => array(
-			"function" => "xmlrpc_GetLocationDetails",
-			"signature" => $GetLocationDetails_sig,
-			"docstring" => $GetLocationDetails_doc),
-		"weberp.xmlrpc_GetShipperList" => array(
-			"function" => "xmlrpc_GetShipperList",
-			"signature" => $GetShipperList_sig,
-			"docstring" => $GetShipperList_doc),
-		"weberp.xmlrpc_GetShipperDetails" => array(
-			"function" => "xmlrpc_GetShipperDetails",
-			"signature" => $GetShipperDetails_sig,
-			"docstring" => $GetShipperDetails_doc),
-		"weberp.xmlrpc_GetSalesAreasList" => array(
-			"function" => "xmlrpc_GetSalesAreasList",
-			"signature" => $GetSalesAreasList_sig,
-			"docstring" => $GetSalesAreasList_doc),
-		"weberp.xmlrpc_InsertSalesArea" => array(
-			"function" => "xmlrpc_InsertSalesArea",
-			"signature" => $InsertSalesArea_sig,
-			"docstring" => $InsertSalesArea_doc),
-		"weberp.xmlrpc_GetSalesAreaDetails" => array(
-			"function" => "xmlrpc_GetSalesAreaDetails",
-			"signature" => $GetSalesAreaDetails_sig,
-			"docstring" => $GetSalesAreaDetails_doc),
-		"weberp.xmlrpc_GetSalesAreaDetailsFromName" => array(
-			"function" => "xmlrpc_GetSalesAreaDetailsFromName",
-			"signature" => $GetSalesAreaDetailsFromName_sig,
-			"docstring" => $GetSalesAreaDetailsFromName_doc),
-		"weberp.xmlrpc_GetSalesmanList" => array(
-			"function" => "xmlrpc_GetSalesmanList",
-			"signature" => $GetSalesmanList_sig,
-			"docstring" => $GetSalesmanList_doc),
-		"weberp.xmlrpc_GetSalesmanDetails" => array(
-			"function" => "xmlrpc_GetSalesmanDetails",
-			"signature" => $GetSalesmanDetails_sig,
-			"docstring" => $GetSalesmanDetails_doc),
-		"weberp.xmlrpc_GetSalesmanDetailsFromName" => array(
-			"function" => "xmlrpc_GetSalesmanDetailsFromName",
-			"signature" => $GetSalesmanDetailsFromName_sig,
-			"docstring" => $GetSalesmanDetailsFromName_doc),
-		"weberp.xmlrpc_InsertSalesman" => array(
-			"function" => "xmlrpc_InsertSalesman",
-			"signature" => $InsertSalesman_sig,
-			"docstring" => $InsertSalesman_doc),
-		"weberp.xmlrpc_GetTaxgroupList" => array(
-			"function" => "xmlrpc_GetTaxgroupList",
-			"signature" => $GetTaxgroupList_sig,
-			"docstring" => $GetTaxgroupList_doc),
-		"weberp.xmlrpc_GetTaxgroupDetails" => array(
-			"function" => "xmlrpc_GetTaxgroupDetails",
-			"signature" => $GetTaxgroupDetails_sig,
-			"docstring" => $GetTaxgroupDetails_doc),
-		"weberp.xmlrpc_GetCustomerTypeList" => array(
-			"function" => "xmlrpc_GetCustomerTypeList",
-			"signature" => $GetCustomerTypeList_sig,
-			"docstring" => $GetCustomerTypeList_doc),
-		"weberp.xmlrpc_GetCustomerTypeDetails" => array(
-			"function" => "xmlrpc_GetCustomerTypeDetails",
-			"signature" => $GetCustomerTypeDetails_sig,
-			"docstring" => $GetCustomerTypeDetails_doc),
-		"weberp.xmlrpc_InsertStockCategory" => array(
-			"function" => "xmlrpc_InsertStockCategory",
-			"signature" => $InsertStockCategory_sig,
-			"docstring" => $InsertStockCategory_doc),
-		"weberp.xmlrpc_ModifyStockCategory" => array(
-			"function" => "xmlrpc_ModifyStockCategory",
-			"signature" => $ModifyStockCategory_sig,
-			"docstring" => $ModifyStockCategory_doc),
-		"weberp.xmlrpc_GetStockCategory" => array(
-			"function" => "xmlrpc_GetStockCategory",
-			"signature" => $GetStockCategory_sig,
-			"docstring" => $GetStockCategory_doc),
-		"weberp.xmlrpc_SearchStockCategories" => array(
-			"function" => "xmlrpc_SearchStockCategories",
-			"signature" => $SearchStockCategories_sig,
-			"docstring" => $SearchStockCategories_doc),
-		"weberp.xmlrpc_StockCatPropertyList" => array(
-			"function" => "xmlrpc_StockCatPropertyList",
-			"signature" => $StockCatPropertyList_sig,
-			"docstring" => $StockCatPropertyList_doc),
-		"weberp.xmlrpc_GetStockCategoryList" => array(
-			"function" => "xmlrpc_GetStockCategoryList",
-			"signature" => $GetStockCategoryList_sig,
-			"docstring" => $GetStockCategoryList_doc),
-		"weberp.xmlrpc_GetGLAccountList" => array(
-			"function" => "xmlrpc_GetGLAccountList",
-			"signature" => $GetGLAccountList_sig,
-			"docstring" => $GetGLAccountList_doc),
-		"weberp.xmlrpc_GetGLAccountDetails" => array(
-			"function" => "xmlrpc_GetGLAccountDetails",
-			"signature" => $GetGLAccountDetails_sig,
-			"docstring" => $GetGLAccountDetails_doc),
-		"weberp.xmlrpc_GetStockTaxRate" => array(
-			"function" => "xmlrpc_GetStockTaxRate",
-			"signature" => $GetStockTaxRate_sig,
-			"docstring" => $GetStockTaxRate_doc),
-		"weberp.xmlrpc_InsertSupplier" => array(
-			"function" => "xmlrpc_InsertSupplier",
-			"signature" => $InsertSupplier_sig,
-			"docstring" => $InsertSupplier_doc),
-		"weberp.xmlrpc_ModifySupplier" => array(
-			"function" => "xmlrpc_ModifySupplier",
-			"signature" => $ModifySupplier_sig,
-			"docstring" => $ModifySupplier_doc),
-		"weberp.xmlrpc_GetSupplier" => array(
-			"function" => "xmlrpc_GetSupplier",
-			"signature" => $GetSupplier_sig,
-			"docstring" => $GetSupplier_doc),
-		"weberp.xmlrpc_SearchSuppliers" => array(
-			"function" => "xmlrpc_SearchSuppliers",
-			"signature" => $SearchSuppliers_sig,
-			"docstring" => $SearchSuppliers_doc),
-		"weberp.xmlrpc_StockAdjustment" => array(
-			"function" => "xmlrpc_StockAdjustment",
-			"signature" => $StockAdjustment_sig,
-			"docstring" => $StockAdjustment_doc),
-		"weberp.xmlrpc_WorkOrderIssue" => array(
-			"function" => "xmlrpc_WorkOrderIssue",
-			"signature" => $WorkOrderIssue_sig,
-			"docstring" => $WorkOrderIssue_doc),
-		"weberp.xmlrpc_InsertPurchData" => array(
-			"function" => "xmlrpc_InsertPurchData",
-			"signature" => $InsertPurchData_sig,
-			"docstring" => $InsertPurchData_doc),
-		"weberp.xmlrpc_ModifyPurchData" => array(
-			"function" => "xmlrpc_ModifyPurchData",
-			"signature" => $ModifyPurchData_sig,
-			"docstring" => $ModifyPurchData_doc),
-		"weberp.xmlrpc_InsertWorkOrder" => array(
-			"function" => "xmlrpc_InsertWorkOrder",
-			"signature" => $InsertWorkOrder_sig,
-			"docstring" => $InsertWorkOrder_doc),
-		"weberp.xmlrpc_WorkOrderReceive" => array(
-			"function" => "xmlrpc_WorkOrderReceive",
-			"signature" => $WorkOrderReceive_sig,
-			"docstring" => $WorkOrderReceive_doc),
-		"weberp.xmlrpc_SearchWorkOrders" => array(
-			"function" => "xmlrpc_SearchWorkOrders",
-			"signature" => $SearchWorkOrders_sig,
-			"docstring" => $SearchWorkOrders_doc),
-		"weberp.xmlrpc_GetBatches" => array(
-			"function" => "xmlrpc_GetBatches",
-			"signature" => $GetBatches_sig,
-			"docstring" => $GetBatches_doc),
-		"weberp.xmlrpc_GetDefaultDateFormat" => array(
-			"function" => "xmlrpc_GetDefaultDateFormat",
-			"signature" => $GetDefaultDateFormat_sig,
-			"docstring" => $GetDefaultDateFormat_doc),
-		"weberp.xmlrpc_GetDefaultCurrency" => array(
-			"function" => "xmlrpc_GetDefaultCurrency",
-			"signature" => $GetDefaultCurrency_sig,
-			"docstring" => $GetDefaultCurrency_doc),
-		"weberp.xmlrpc_GetDefaultPriceList" => array(
-			"function" => "xmlrpc_GetDefaultPriceList",
-			"signature" => $GetDefaultPriceList_sig,
-			"docstring" => $GetDefaultPriceList_doc),
-		"weberp.xmlrpc_GetDefaultLocation" => array(
-			"function" => "xmlrpc_GetDefaultLocation",
-			"signature" => $GetDefaultLocation_sig,
-			"docstring" => $GetDefaultLocation_doc),
-		"weberp.xmlrpc_GetStockCatProperty" => array(
-			"function" => "xmlrpc_GetStockCatProperty",
-			"signature" => $GetStockCatProperty_sig,
-			"docstring" => $GetStockCatProperty_doc),
-		"weberp.xmlrpc_GetErrorMessages" => array(
-			"function" => "xmlrpc_GetErrorMessages",
-			"signature" => $GetErrorMessages_sig,
-			"docstring" => $GetErrorMessages_doc),
-	)
+			"weberp.xmlrpc_Login" => array(
+				"function" => "xmlrpc_Login",
+				"signature" => $Login_sig,
+				"docstring" => $Login_doc),
+			"weberp.xmlrpc_Logout" => array(
+				"function" => "xmlrpc_Logout",
+				"signature" => $Logout_sig,
+				"docstring" => $Logout_doc),
+			"weberp.xmlrpc_InsertCustomer" => array(
+				"function" => "xmlrpc_InsertCustomer",
+				"signature" => $InsertCustomer_sig,
+				"docstring" => $InsertCustomer_doc),
+			"weberp.xmlrpc_ModifyCustomer" => array(
+				"function" => "xmlrpc_ModifyCustomer",
+				"signature" => $ModifyCustomer_sig,
+				"docstring" => $ModifyCustomer_doc),
+			"weberp.xmlrpc_GetCustomer" => array(
+				"function" => "xmlrpc_GetCustomer",
+				"signature" => $GetCustomer_sig,
+				"docstring" => $GetCustomer_doc),
+			"weberp.xmlrpc_SearchCustomers" => array(
+				"function" => "xmlrpc_SearchCustomers",
+				"signature" => $SearchCustomers_sig,
+				"docstring" => $SearchCustomers_doc),
+			"weberp.xmlrpc_GetCurrencyList" => array(
+				"function" => "xmlrpc_GetCurrencyList",
+				"signature" => $GetCurrencyList_sig,
+				"docstring" => $GetCurrencyList_doc),
+			"weberp.xmlrpc_GetCurrencyDetails" => array(
+				"function" => "xmlrpc_GetCurrencyDetails",
+				"signature" => $GetCurrencyDetails_sig,
+				"docstring" => $GetCurrencyDetails_doc),
+			"weberp.xmlrpc_GetSalesTypeList" => array(
+				"function" => "xmlrpc_GetSalesTypeList",
+				"signature" => $GetSalesTypeList_sig,
+				"docstring" => $GetSalesTypeList_doc),
+			"weberp.xmlrpc_GetSalesTypeDetails" => array(
+				"function" => "xmlrpc_GetSalesTypeDetails",
+				"signature" => $GetSalesTypeDetails_sig,
+				"docstring" => $GetSalesTypeDetails_doc),
+			"weberp.xmlrpc_InsertSalesType" => array(
+				"function" => "xmlrpc_InsertSalesType",
+				"signature" => $InsertSalesType_sig,
+				"docstring" => $InsertSalesType_doc),
+			"weberp.xmlrpc_GetHoldReasonList" => array(
+				"function" => "xmlrpc_GetHoldReasonList",
+				"signature" => $GetHoldReasonList_sig,
+				"docstring" => $GetHoldReasonList_doc),
+			"weberp.xmlrpc_GetHoldReasonDetails" => array(
+				"function" => "xmlrpc_GetHoldReasonDetails",
+				"signature" => $GetHoldReasonDetails_sig,
+				"docstring" => $GetHoldReasonDetails_doc),
+			"weberp.xmlrpc_GetPaymentTermsList" => array(
+				"function" => "xmlrpc_GetPaymentTermsList",
+				"signature" => $GetPaymentTermsList_sig,
+				"docstring" => $GetPaymentTermsList_doc),
+			"weberp.xmlrpc_GetPaymentTermsDetails" => array(
+				"function" => "xmlrpc_GetPaymentTermsDetails",
+				"signature" => $GetPaymentTermsDetails_sig,
+				"docstring" => $GetPaymentTermsDetails_doc),
+			"weberp.xmlrpc_GetPaymentMethodsList" => array(
+				"function" => "xmlrpc_GetPaymentMethodsList",
+				"signature" => $GetPaymentMethodsList_sig,
+				"docstring" => $GetPaymentMethodsList_doc),
+			"weberp.xmlrpc_GetPaymentMethodDetails" => array(
+				"function" => "xmlrpc_GetPaymentMethodDetails",
+				"signature" => $GetPaymentMethodDetails_sig,
+				"docstring" => $GetPaymentMethodDetails_doc),
+			"weberp.xmlrpc_InsertStockItem" => array(
+				"function" => "xmlrpc_InsertStockItem",
+				"signature" => $InsertStockItem_sig,
+				"docstring" => $InsertStockItem_doc),
+			"weberp.xmlrpc_ModifyStockItem" => array(
+				"function" => "xmlrpc_ModifyStockItem",
+				"signature" => $ModifyStockItem_sig,
+				"docstring" => $ModifyStockItem_doc),
+			"weberp.xmlrpc_GetStockItem" => array(
+				"function" => "xmlrpc_GetStockItem",
+				"signature" => $GetStockItem_sig,
+				"docstring" => $GetStockItem_doc),
+			"weberp.xmlrpc_SearchStockItems" => array(
+				"function" => "xmlrpc_SearchStockItems",
+				"signature" => $SearchStockItems_sig,
+				"docstring" => $SearchStockItems_doc),
+			"weberp.xmlrpc_GetStockBalance" => array(
+				"function" => "xmlrpc_GetStockBalance",
+				"signature" => $GetStockBalance_sig,
+				"docstring" => $GetStockBalance_doc),
+			"weberp.xmlrpc_GetStockReorderLevel" => array(
+				"function" => "xmlrpc_GetStockReorderLevel",
+				"signature" => $GetStockReorderLevel_sig,
+				"docstring" => $GetStockReorderLevel_doc),
+			"weberp.xmlrpc_SetStockReorderLevel" => array(
+				"function" => "xmlrpc_SetStockReorderLevel",
+				"signature" => $SetStockReorderLevel_sig,
+				"docstring" => $SetStockReorderLevel_doc),
+			"weberp.xmlrpc_GetAllocatedStock" => array(
+				"function" => "xmlrpc_GetAllocatedStock",
+				"signature" => $GetAllocatedStock_sig,
+				"docstring" => $GetAllocatedStock_doc),
+			"weberp.xmlrpc_GetOrderedStock" => array(
+				"function" => "xmlrpc_GetOrderedStock",
+				"signature" => $GetOrderedStock_sig,
+				"docstring" => $GetOrderedStock_doc),
+			"weberp.xmlrpc_SetStockPrice" => array(
+				"function" => "xmlrpc_SetStockPrice",
+				"signature" => $SetStockPrice_sig,
+				"docstring" => $SetStockPrice_doc),
+			"weberp.xmlrpc_GetStockPrice" => array(
+				"function" => "xmlrpc_GetStockPrice",
+				"signature" => $GetStockPrice_sig,
+				"docstring" => $GetStockPrice_doc),
+			"weberp.xmlrpc_InsertSalesInvoice" => array(
+				"function" => "xmlrpc_InsertSalesInvoice",
+				"signature" => $InsertSalesInvoice_sig,
+				"docstring" => $InsertSalesInvoice_doc),
+			"weberp.xmlrpc_AllocateTrans" => array(
+				"function" => "xmlrpc_AllocateTrans",
+				"signature" => $AllocateTrans_sig,
+				"docstring" => $AllocateTrans_doc),
+			"weberp.xmlrpc_InsertDebtorReceipt" => array(
+				"function" => "xmlrpc_InsertDebtorReceipt",
+				"signature" => $InsertDebtorReceipt_sig,
+				"docstring" => $InsertDebtorReceipt_doc),
+			"weberp.xmlrpc_CreateCreditNote" => array(
+				"function" => "xmlrpc_CreateCreditNote",
+				"signature" => $CreateCreditNote_sig,
+				"docstring" => $CreateCreditNote_doc),
+			"weberp.xmlrpc_InsertSalesCredit" => array(
+				"function" => "xmlrpc_InsertSalesCredit",
+				"signature" => $InsertSalesCredit_sig,
+				"docstring" => $InsertSalesCredit_doc),
+			"weberp.xmlrpc_InsertBranch" => array(
+				"function" => "xmlrpc_InsertBranch",
+				"signature" => $InsertBranch_sig,
+				"docstring" => $InsertBranch_doc),
+			"weberp.xmlrpc_ModifyBranch" => array(
+				"function" => "xmlrpc_ModifyBranch",
+				"signature" => $ModifyBranch_sig,
+				"docstring" => $ModifyBranch_doc),
+			"weberp.xmlrpc_GetCustomerBranchCodes" => array(
+				"function" => "xmlrpc_GetCustomerBranchCodes",
+				"signature" => $GetCustomerBranchCodes_sig,
+				"docstring" => $GetCustomerBranchCodes_doc),
+			"weberp.xmlrpc_GetCustomerBranch" => array(
+				"function" => "xmlrpc_GetCustomerBranch",
+				"signature" => $GetCustomerBranch_sig,
+				"docstring" => $GetCustomerBranch_doc),
+			"weberp.xmlrpc_InsertSalesOrderHeader" => array(
+				"function" => "xmlrpc_InsertSalesOrderHeader",
+				"signature" => $InsertSalesOrderHeader_sig,
+				"docstring" => $InsertSalesOrderHeader_doc),
+			"weberp.xmlrpc_ModifySalesOrderHeader" => array(
+				"function" => "xmlrpc_ModifySalesOrderHeader",
+				"signature" => $ModifySalesOrderHeader_sig,
+				"docstring" => $ModifySalesOrderHeader_doc),
+			"weberp.xmlrpc_InsertSalesOrderLine" => array(
+				"function" => "xmlrpc_InsertSalesOrderLine",
+				"signature" => $InsertSalesOrderLine_sig,
+				"docstring" => $InsertSalesOrderLine_doc),
+			"weberp.xmlrpc_ModifySalesOrderLine" => array(
+				"function" => "xmlrpc_ModifySalesOrderLine",
+				"signature" => $ModifySalesOrderLine_sig,
+				"docstring" => $ModifySalesOrderLine_doc),
+			"weberp.xmlrpc_InvoiceSalesOrder" => array(
+				"function" => "xmlrpc_InvoiceSalesOrder",
+				"signature" => $InvoiceSalesOrder_sig,
+				"docstring" => $InvoiceSalesOrder_doc),
+			"weberp.xmlrpc_InsertGLAccount" => array(
+				"function" => "xmlrpc_InsertGLAccount",
+				"signature" => $InsertGLAccount_sig,
+				"docstring" => $InsertGLAccount_doc),
+			"weberp.xmlrpc_InsertGLAccountSection" => array(
+				"function" => "xmlrpc_InsertGLAccountSection",
+				"signature" => $InsertGLAccountSection_sig,
+				"docstring" => $InsertGLAccountSection_doc),
+			"weberp.xmlrpc_InsertGLAccountGroup" => array(
+				"function" => "xmlrpc_InsertGLAccountGroup",
+				"signature" => $InsertGLAccountGroup_sig,
+				"docstring" => $InsertGLAccountGroup_doc),
+			"weberp.xmlrpc_GetLocationList" => array(
+				"function" => "xmlrpc_GetLocationList",
+				"signature" => $GetLocationList_sig,
+				"docstring" => $GetLocationList_doc),
+			"weberp.xmlrpc_GetLocationDetails" => array(
+				"function" => "xmlrpc_GetLocationDetails",
+				"signature" => $GetLocationDetails_sig,
+				"docstring" => $GetLocationDetails_doc),
+			"weberp.xmlrpc_GetShipperList" => array(
+				"function" => "xmlrpc_GetShipperList",
+				"signature" => $GetShipperList_sig,
+				"docstring" => $GetShipperList_doc),
+			"weberp.xmlrpc_GetShipperDetails" => array(
+				"function" => "xmlrpc_GetShipperDetails",
+				"signature" => $GetShipperDetails_sig,
+				"docstring" => $GetShipperDetails_doc),
+			"weberp.xmlrpc_GetSalesAreasList" => array(
+				"function" => "xmlrpc_GetSalesAreasList",
+				"signature" => $GetSalesAreasList_sig,
+				"docstring" => $GetSalesAreasList_doc),
+			"weberp.xmlrpc_InsertSalesArea" => array(
+				"function" => "xmlrpc_InsertSalesArea",
+				"signature" => $InsertSalesArea_sig,
+				"docstring" => $InsertSalesArea_doc),
+			"weberp.xmlrpc_GetSalesAreaDetails" => array(
+				"function" => "xmlrpc_GetSalesAreaDetails",
+				"signature" => $GetSalesAreaDetails_sig,
+				"docstring" => $GetSalesAreaDetails_doc),
+			"weberp.xmlrpc_GetSalesAreaDetailsFromName" => array(
+				"function" => "xmlrpc_GetSalesAreaDetailsFromName",
+				"signature" => $GetSalesAreaDetailsFromName_sig,
+				"docstring" => $GetSalesAreaDetailsFromName_doc),
+			"weberp.xmlrpc_GetSalesmanList" => array(
+				"function" => "xmlrpc_GetSalesmanList",
+				"signature" => $GetSalesmanList_sig,
+				"docstring" => $GetSalesmanList_doc),
+			"weberp.xmlrpc_GetSalesmanDetails" => array(
+				"function" => "xmlrpc_GetSalesmanDetails",
+				"signature" => $GetSalesmanDetails_sig,
+				"docstring" => $GetSalesmanDetails_doc),
+			"weberp.xmlrpc_GetSalesmanDetailsFromName" => array(
+				"function" => "xmlrpc_GetSalesmanDetailsFromName",
+				"signature" => $GetSalesmanDetailsFromName_sig,
+				"docstring" => $GetSalesmanDetailsFromName_doc),
+			"weberp.xmlrpc_InsertSalesman" => array(
+				"function" => "xmlrpc_InsertSalesman",
+				"signature" => $InsertSalesman_sig,
+				"docstring" => $InsertSalesman_doc),
+			"weberp.xmlrpc_GetTaxGroupList" => array(
+				"function" => "xmlrpc_GetTaxGroupList",
+				"signature" => $GetTaxGroupList_sig,
+				"docstring" => $GetTaxGroupList_doc),
+			"weberp.xmlrpc_GetTaxGroupDetails" => array(
+				"function" => "xmlrpc_GetTaxGroupDetails",
+				"signature" => $GetTaxGroupDetails_sig,
+				"docstring" => $GetTaxGroupDetails_doc),
+			"weberp.xmlrpc_GetTaxGroupTaxes" => array(
+				"function" => "xmlrpc_GetTaxGroupTaxes",
+				"signature" => $GetTaxGroupTaxes_sig,
+				"docstring" => $GetTaxGroupTaxes_doc),
+			"weberp.xmlrpc_GetTaxAuthorityList" => array(
+				"function" => "xmlrpc_GetTaxAuthorityList",
+				"signature" => $GetTaxAuthorityList_sig,
+				"docstring" => $GetTaxAuthorityList_doc),
+			"weberp.xmlrpc_GetTaxAuthorityDetails" => array(
+				"function" => "xmlrpc_GetTaxAuthorityDetails",
+				"signature" => $GetTaxAuthorityDetails_sig,
+				"docstring" => $GetTaxAuthorityDetails_doc),
+			"weberp.xmlrpc_GetTaxAuthorityRates" => array(
+				"function" => "xmlrpc_GetTaxAuthorityRates",
+				"signature" => $GetTaxAuthorityRates_sig,
+				"docstring" => $GetTaxAuthorityRates_doc),
+			"weberp.xmlrpc_GetCustomerTypeList" => array(
+				"function" => "xmlrpc_GetCustomerTypeList",
+				"signature" => $GetCustomerTypeList_sig,
+				"docstring" => $GetCustomerTypeList_doc),
+			"weberp.xmlrpc_GetCustomerTypeDetails" => array(
+				"function" => "xmlrpc_GetCustomerTypeDetails",
+				"signature" => $GetCustomerTypeDetails_sig,
+				"docstring" => $GetCustomerTypeDetails_doc),
+			"weberp.xmlrpc_InsertStockCategory" => array(
+				"function" => "xmlrpc_InsertStockCategory",
+				"signature" => $InsertStockCategory_sig,
+				"docstring" => $InsertStockCategory_doc),
+			"weberp.xmlrpc_ModifyStockCategory" => array(
+				"function" => "xmlrpc_ModifyStockCategory",
+				"signature" => $ModifyStockCategory_sig,
+				"docstring" => $ModifyStockCategory_doc),
+			"weberp.xmlrpc_GetStockCategory" => array(
+				"function" => "xmlrpc_GetStockCategory",
+				"signature" => $GetStockCategory_sig,
+				"docstring" => $GetStockCategory_doc),
+			"weberp.xmlrpc_SearchStockCategories" => array(
+				"function" => "xmlrpc_SearchStockCategories",
+				"signature" => $SearchStockCategories_sig,
+				"docstring" => $SearchStockCategories_doc),
+			"weberp.xmlrpc_StockCatPropertyList" => array(
+				"function" => "xmlrpc_StockCatPropertyList",
+				"signature" => $StockCatPropertyList_sig,
+				"docstring" => $StockCatPropertyList_doc),
+			"weberp.xmlrpc_GetStockCategoryList" => array(
+				"function" => "xmlrpc_GetStockCategoryList",
+				"signature" => $GetStockCategoryList_sig,
+				"docstring" => $GetStockCategoryList_doc),
+			"weberp.xmlrpc_GetGLAccountList" => array(
+				"function" => "xmlrpc_GetGLAccountList",
+				"signature" => $GetGLAccountList_sig,
+				"docstring" => $GetGLAccountList_doc),
+			"weberp.xmlrpc_GetGLAccountDetails" => array(
+				"function" => "xmlrpc_GetGLAccountDetails",
+				"signature" => $GetGLAccountDetails_sig,
+				"docstring" => $GetGLAccountDetails_doc),
+			"weberp.xmlrpc_GetStockTaxRate" => array(
+				"function" => "xmlrpc_GetStockTaxRate",
+				"signature" => $GetStockTaxRate_sig,
+				"docstring" => $GetStockTaxRate_doc),
+			"weberp.xmlrpc_InsertSupplier" => array(
+				"function" => "xmlrpc_InsertSupplier",
+				"signature" => $InsertSupplier_sig,
+				"docstring" => $InsertSupplier_doc),
+			"weberp.xmlrpc_ModifySupplier" => array(
+				"function" => "xmlrpc_ModifySupplier",
+				"signature" => $ModifySupplier_sig,
+				"docstring" => $ModifySupplier_doc),
+			"weberp.xmlrpc_GetSupplier" => array(
+				"function" => "xmlrpc_GetSupplier",
+				"signature" => $GetSupplier_sig,
+				"docstring" => $GetSupplier_doc),
+			"weberp.xmlrpc_SearchSuppliers" => array(
+				"function" => "xmlrpc_SearchSuppliers",
+				"signature" => $SearchSuppliers_sig,
+				"docstring" => $SearchSuppliers_doc),
+			"weberp.xmlrpc_StockAdjustment" => array(
+				"function" => "xmlrpc_StockAdjustment",
+				"signature" => $StockAdjustment_sig,
+				"docstring" => $StockAdjustment_doc),
+			"weberp.xmlrpc_WorkOrderIssue" => array(
+				"function" => "xmlrpc_WorkOrderIssue",
+				"signature" => $WorkOrderIssue_sig,
+				"docstring" => $WorkOrderIssue_doc),
+			"weberp.xmlrpc_InsertPurchData" => array(
+				"function" => "xmlrpc_InsertPurchData",
+				"signature" => $InsertPurchData_sig,
+				"docstring" => $InsertPurchData_doc),
+			"weberp.xmlrpc_ModifyPurchData" => array(
+				"function" => "xmlrpc_ModifyPurchData",
+				"signature" => $ModifyPurchData_sig,
+				"docstring" => $ModifyPurchData_doc),
+			"weberp.xmlrpc_InsertWorkOrder" => array(
+				"function" => "xmlrpc_InsertWorkOrder",
+				"signature" => $InsertWorkOrder_sig,
+				"docstring" => $InsertWorkOrder_doc),
+			"weberp.xmlrpc_WorkOrderReceive" => array(
+				"function" => "xmlrpc_WorkOrderReceive",
+				"signature" => $WorkOrderReceive_sig,
+				"docstring" => $WorkOrderReceive_doc),
+			"weberp.xmlrpc_SearchWorkOrders" => array(
+				"function" => "xmlrpc_SearchWorkOrders",
+				"signature" => $SearchWorkOrders_sig,
+				"docstring" => $SearchWorkOrders_doc),
+			"weberp.xmlrpc_GetBatches" => array(
+				"function" => "xmlrpc_GetBatches",
+				"signature" => $GetBatches_sig,
+				"docstring" => $GetBatches_doc),
+			"weberp.xmlrpc_GetDefaultDateFormat" => array(
+				"function" => "xmlrpc_GetDefaultDateFormat",
+				"signature" => $GetDefaultDateFormat_sig,
+				"docstring" => $GetDefaultDateFormat_doc),
+			"weberp.xmlrpc_GetDefaultShipper" => array(
+				"function" => "xmlrpc_GetDefaultShipper",
+				"signature" => $GetDefaultShipper_sig,
+				"docstring" => $GetDefaultShipper_doc),
+			"weberp.xmlrpc_GetDefaultCurrency" => array(
+				"function" => "xmlrpc_GetDefaultCurrency",
+				"signature" => $GetDefaultCurrency_sig,
+				"docstring" => $GetDefaultCurrency_doc),
+			"weberp.xmlrpc_GetDefaultPriceList" => array(
+				"function" => "xmlrpc_GetDefaultPriceList",
+				"signature" => $GetDefaultPriceList_sig,
+				"docstring" => $GetDefaultPriceList_doc),
+			"weberp.xmlrpc_GetDefaultLocation" => array(
+				"function" => "xmlrpc_GetDefaultLocation",
+				"signature" => $GetDefaultLocation_sig,
+				"docstring" => $GetDefaultLocation_doc),
+			"weberp.xmlrpc_GetReportsDirectory" => array(
+				"function" => "xmlrpc_GetReportsDirectory",
+				"signature" => $GetReportsDirectory_sig,
+				"docstring" => $GetReportsDirectory_doc),
+			"weberp.xmlrpc_CreatePOSDataFull" => array(
+				"function" => "xmlrpc_CreatePOSDataFull",
+				"signature" => $CreatePOSDataFull_sig,
+				"docstring" => $CreatePOSDataFull_doc),
+			"weberp.xmlrpc_DeletePOSData" => array(
+				"function" => "xmlrpc_DeletePOSData",
+				"signature" => $DeletePOSData_sig,
+				"docstring" => $DeletePOSData_doc),
+			"weberp.xmlrpc_GetStockCatProperty" => array(
+				"function" => "xmlrpc_GetStockCatProperty",
+				"signature" => $GetStockCatProperty_sig,
+				"docstring" => $GetStockCatProperty_doc),
+			"weberp.xmlrpc_GetErrorMessages" => array(
+				"function" => "xmlrpc_GetErrorMessages",
+				"signature" => $GetErrorMessages_sig,
+				"docstring" => $GetErrorMessages_doc),
+		)
 	);
+
 
 //  Generate the HTMLised description string for each API.
 
 function apiBuildDocHTML( $description, $parameter, $return )
 {
-	$doc = '<tr><td><b><u>'._('Description').'</u></b></td><td colspan="2">' .$description.'</td></tr>
-			<tr><td valign="top"><b><u>'._('Parameters').'</u></b></td>';
+	$doc = '<tr><td><b><u>' . _('Description') . '</u></b></td><td colspan=2>' .$description . '</td></tr>
+			<tr><td valign="top"><b><u>' . _('Parameters') . '</u></b></td>';
 	for ($ii=0; $ii<sizeof($parameter); $ii++) {
-		$doc .= '<tr><td valign="top">'.$parameter[$ii]['name'].'</td><td>'.
-			$parameter[$ii]['description'].'</td></tr>';
+		$doc .= '<tr><td valign="top">' . $parameter[$ii]['name'] . '</td><td>' .
+			$parameter[$ii]['description'] . '</td></tr>';
 	}
-	$doc .= '<tr><td valign="top"><b><u>'._('Return Value');
+	$doc .= '<tr><td valign="top"><b><u>' . _('Return Value');
 	for ($ii=0; $ii<sizeof($return); $ii++) {
-		$doc .= '<td valign="top">'.$return[$ii].'</td></tr>';
+		$doc .= '<td valign="top">' . $return[$ii] . '</td></tr>';
 	}
 	$doc .= '</table>';
 

@@ -1,5 +1,4 @@
 <?php
-/* $Id: PDFTopItemsHeader.inc 4495 2011-02-22 09:45:01Z daintree $*/
 /*PDF page header for Top Items report */
 if ($PageNumber>1){
 	$pdf->newPage();
@@ -14,8 +13,8 @@ if ($_GET['Customers']!='All'){
 	$SQL="SELECT typename
 		  FROM `debtortype`
 		  WHERE typeid='".$_GET['Customers']."'";
-	
-	$result = DB_query($SQL,$db);
+
+	$result = DB_query($SQL);
 	$myrow=DB_fetch_array($result);
 	$Customers=$myrow["0"];
 }else{
@@ -23,9 +22,9 @@ if ($_GET['Customers']!='All'){
 }
 
 //Display the searching condition
-$pdf->addTextWrap($XPos+40,$YPos-70,500,9,_('Search On Location').' : '.$_GET['Location']);  
+$pdf->addTextWrap($XPos+40,$YPos-70,500,9,_('Search On Location').' : '.$_GET['Location']);
 $pdf->addTextWrap($XPos+240,$YPos-70,500,9,_('Customers'). ' : '.$Customers);
-$pdf->addTextWrap($XPos+40,$YPos-90,500,9,_('Number Of Days')." : ".$_GET['NumberOfDays']." ");  
+$pdf->addTextWrap($XPos+40,$YPos-90,500,9,_('Number Of Days')." : ".$_GET['NumberOfDays']." ");
 $pdf->addTextWrap($XPos+240,$YPos-90,500,9,_('Number Of Items')." : ".$_GET['NumberOfTopItems']);
 $pdf->addTextWrap($XPos+40,$YPos-110,500,9,_('Order By')." : ".$_GET['Sequence']);
 

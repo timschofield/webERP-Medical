@@ -1,109 +1,117 @@
 <?php
 
-/* $Id$*/
 
-include('includes/session.inc');
-$title = _('Stock Re-Order Level Maintenance');
-include('includes/header.inc');
+include('includes/session.php');
+$Title = _('Stock Re-Order Level Maintenance');
+$ViewTopic = 'Inventory';
+$BookMark = '';
+include('includes/header.php');
 
 if (isset($_GET['StockID'])){
-	$StockID = trim(strtoupper($_GET['StockID']));
+	$StockID = trim(mb_strtoupper($_GET['StockID']));
 } elseif (isset($_POST['StockID'])){
-	$StockID = trim(strtoupper($_POST['StockID']));
+	$StockID = trim(mb_strtoupper($_POST['StockID']));
+}else{
+	$StockID = '';
 }
 
-echo '<a href="' . $rootpath . '/SelectProduct.php">' . _('Back to Items') . '</a>';
+echo '<a href="' . $RootPath . '/SelectProduct.php">' . _('Back to Items') . '</a>';
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') . '" alt="" /><b>' . $title. '</b></p>';
+echo '<p class="page_title_text">
+		<img src="'.$RootPath.'/css/'.$Theme.'/images/inventory.png" title="' . _('Inventory') . '" alt="" /><b>' . $Title. '</b>
+	</p>';
 
-$result = DB_query("SELECT description, units FROM stockmaster WHERE stockid='" . $StockID . "'", $db);
-$myrow = DB_fetch_array($result);
+$result = DB_query("SELECT description, units FROM stockmaster WHERE stockid='" . $StockID . "'");
+$myrow = DB_fetch_row($result);
 
-echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '" method="post">';
+echo '<div>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 $sql = "SELECT locstock.loccode,
-			locations.locationname,
-			locstock.quantity,
-			locstock.reorderlevel,
-			stockmaster.decimalplaces
-		FROM locstock
-		INNER JOIN locations
-		ON locstock.loccode=locations.loccode
-		INNER JOIN stockmaster
-		ON locstock.stockid=stockmaster.stockid
+				locations.locationname,
+				locstock.quantity,
+				locstock.reorderlevel,
+				stockmaster.decimalplaces,
+				canupd
+		FROM locstock INNER JOIN locations
+			ON locstock.loccode=locations.loccode
+		INNER JOIN locationusers ON locationusers.loccode=locstock.loccode AND locationusers.userid='" .  $_SESSION['UserID'] . "' AND locationusers.canview=1
+			INNER JOIN stockmaster
+			ON locstock.stockid=stockmaster.stockid
 		WHERE locstock.stockid = '" . $StockID . "'
-		ORDER BY locstock.loccode";
+		ORDER BY locations.locationname";
 
 $ErrMsg = _('The stock held at each location cannot be retrieved because');
 $DbgMsg = _('The SQL that failed was');
 
-$LocStockResult = DB_query($sql, $db, $ErrMsg, $DbgMsg);
+$LocStockResult = DB_query($sql, $ErrMsg, $DbgMsg);
 
-echo '<table cellpadding="2" class="selection">';
-echo '<tr><th colspan="3">'._('Stock Code') . ':<input type="text" name="StockID" size="21" value="' . $StockID . '" maxlength="20" />';
-echo '<button type="submit" name="Show">' . _('Show Re-Order Levels') . '</button></th></tr>';
-echo '<tr><th colspan="3" class="header"><b>' . $StockID . ' - ' . $myrow['description'] . '</b>  (' . _('In Units of') . ' ' . $myrow['units'] . ')</th></tr>';
-
-$TableHeader = '<tr>
-		<th>' . _('Location') . '</th>
-		<th>' . _('Quantity On Hand') . '</th>
-		<th>' . _('Re-Order Level') . '</th>
-		</tr>';
-
-echo $TableHeader;
-$j = 1;
-$k=0; //row colour counter
+echo '<table class="selection">
+	<thead>
+		<tr>
+		<th colspan="3">' . _('Stock Code') . ':<input  type="text" data-type="no-illegal-chars" title="'._('The stock id should not contains illegal characters and blank or percentage mark is not allowed').'" required="required" name="StockID" size="21" value="' . $StockID . '" maxlength="20" /><input type="submit" name="Show" value="' . _('Show Re-Order Levels') . '" /></th>
+		</tr>
+		<tr>
+		<th colspan="3"><h3><b>' . $StockID . ' - ' . $myrow[0] . '</b>  (' . _('In Units of') . ' ' . $myrow[1] . ')</h3></th>
+		</tr>
+		<tr>
+					<th class="ascending">' . _('Location') . '</th>
+					<th class="ascending">' . _('Quantity On Hand') . '</th>
+					<th class="ascending">' . _('Re-Order Level') . '</th>
+		</tr>
+	</thead>
+	<tbody>';
 
 while ($myrow=DB_fetch_array($LocStockResult)) {
 
-	if ($k==1){
-		echo '<tr class="EvenTableRows">';
-		$k=0;
-	} else {
-		echo '<tr class="OddTableRows">';
-		$k=1;
-	}
-	if (isset($_POST[$myrow['loccode']])) {
-		$_POST[$myrow['loccode']] = filter_number_input($_POST[$myrow['loccode']]);
-	} else {
-		$_POST[$myrow['loccode']] = filter_number_input(0);
-	}
-	if (isset($_POST['Old'.$myrow['loccode']]) and ($_POST['Old'.$myrow['loccode']]!=$_POST[$myrow['loccode']]) and isset($_POST['UpdateData']) AND is_numeric($_POST[$myrow['loccode']]) AND $_POST[$myrow['loccode']]>=0){
+	if (isset($_POST['UpdateData'])
+		AND $_POST['Old_' . $myrow['loccode']]!= filter_number_format($_POST[$myrow['loccode']])
+		AND is_numeric(filter_number_format($_POST[$myrow['loccode']]))
+		AND filter_number_format($_POST[$myrow['loccode']])>=0){
 
-	   $myrow['reorderlevel'] = $_POST[$myrow['loccode']];
-	   $sql = "UPDATE locstock SET reorderlevel = '" . $_POST[$myrow['loccode']] . "'
+	   $myrow['reorderlevel'] = filter_number_format($_POST[$myrow['loccode']]);
+	   $sql = "UPDATE locstock SET reorderlevel = '" . filter_number_format($_POST[$myrow['loccode']]) . "'
 	   		WHERE stockid = '" . $StockID . "'
 			AND loccode = '"  . $myrow['loccode'] ."'";
-	   $UpdateReorderLevel = DB_query($sql, $db);
+	   $UpdateReorderLevel = DB_query($sql);
 
 	}
-
-	printf('<td>%s</td>
-		<td class="number">%s</td>
-		<td><input type="text" class="number" name="%s" maxlength="10" size="10" value="%s" /></td>
-		<input type="hidden" name="Old%s" maxlength="10" size="10" value="%s" />',
-		$myrow['locationname'],
-		locale_number_format($myrow['quantity'],$myrow['decimalplaces']),
-		$myrow['loccode'],
-		locale_number_format($myrow['reorderlevel'],$myrow['decimalplaces']),
-		$myrow['loccode'],
-		locale_number_format($myrow['reorderlevel'],$myrow['decimalplaces']));
-	$j++;
-	if ($j == 12){
-		$j=1;
-		echo $TableHeader;
+	if ($myrow['canupd']==1) {
+		$UpdateCode='<input title="'._('Input safety stock quantity').'" type="text" class="number" name="%s" maxlength="10" size="10" value="%s" />
+			<input type="hidden" name="Old_%s" value="%s" />';
+	} else {
+		$UpdateCode='<input type="hidden" name="%s">%s<input type="hidden" name="Old_%s" value="%s" />';
 	}
-//end of page full new headings if
+	printf('<tr class="striped_row">
+			<td>%s</td>
+			<td class="number">%s</td>
+			<td class="number">' . $UpdateCode . '</td>
+			</tr>',
+			$myrow['locationname'],
+			locale_number_format($myrow['quantity'],$myrow['decimalplaces']),
+			$myrow['loccode'],
+			$myrow['reorderlevel'],
+			$myrow['loccode'],
+			$myrow['reorderlevel']);
+
 }
 //end of while loop
 
-echo '</table><br /><div class="centre"><button type="submit" name="UpdateData">' . _('Update') . '</button><br /><br />';
-echo '<a href="' . $rootpath . '/StockMovements.php?StockID=' . $StockID . '">' . _('Show Stock Movements') . '</a>';
-echo '<br /><a href="' . $rootpath . '/StockUsage.php?StockID=' . $StockID . '">' . _('Show Stock Usage') . '</a>';
-echo '<br /><a href="' . $rootpath . '/SelectSalesOrder.php?SelectedStockItem=' . $StockID . '">' . _('Search Outstanding Sales Orders') . '</a>';
-echo '<br /><a href="' . $rootpath . '/SelectCompletedOrder.php?SelectedStockItem=' . $StockID . '">' . _('Search Completed Sales Orders') . '</a>';
+echo '</tbody></table>
+	<br />
+	<div class="centre">
+		<input type="submit" name="UpdateData" value="' . _('Update') . '" />
+		<br />
+		<br />';
 
-echo '</div></form>';
-include('includes/footer.inc');
+echo '<a href="' . $RootPath . '/StockMovements.php?StockID=' . $StockID . '">' . _('Show Stock Movements') . '</a>';
+echo '<br /><a href="' . $RootPath . '/StockUsage.php?StockID=' . $StockID . '">' . _('Show Stock Usage') . '</a>';
+echo '<br /><a href="' . $RootPath . '/SelectSalesOrder.php?SelectedStockItem=' . $StockID . '">' . _('Search Outstanding Sales Orders') . '</a>';
+echo '<br /><a href="' . $RootPath . '/SelectCompletedOrder.php?SelectedStockItem=' . $StockID . '">' . _('Search Completed Sales Orders') . '</a>';
+
+echo '</div>
+    </div>
+	</form>';
+include('includes/footer.php');
 ?>

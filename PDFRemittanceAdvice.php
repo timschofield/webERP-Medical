@@ -1,13 +1,13 @@
 <?php
-/* $Id$*/
 
-include('includes/session.inc');
+include('includes/session.php');
+if (isset($_POST['PaymentDate'])){$_POST['PaymentDate'] = ConvertSQLDate($_POST['PaymentDate']);};
 
-if (isset($_POST['PrintPDF'])
+If ((isset($_POST['PrintPDF']))
 			AND isset($_POST['FromCriteria'])
-			AND strlen($_POST['FromCriteria'])>=1
+			AND mb_strlen($_POST['FromCriteria'])>=1
 			AND isset($_POST['ToCriteria'])
-			AND strlen($_POST['ToCriteria'])>=1)	{
+			AND mb_strlen($_POST['ToCriteria'])>=1)	{
 	/*Now figure out the invoice less credits due for the Supplier range under review */
 
 	$sql = "SELECT suppliers.supplierid,
@@ -19,10 +19,11 @@ if (isset($_POST['PrintPDF'])
 					suppliers.address5,
 					suppliers.address6,
 					suppliers.currcode,
-					suppliers.paymentterms,
-					supptrans.id
+					supptrans.id,
+					currencies.decimalplaces AS currdecimalplaces
 			FROM supptrans INNER JOIN suppliers ON supptrans.supplierno = suppliers.supplierid
 			INNER JOIN paymentterms ON suppliers.paymentterms = paymentterms.termsindicator
+			INNER JOIN currencies ON suppliers.currcode=currencies.currabrev
 			WHERE supptrans.type=22
 			AND trandate ='" . FormatDateForSQL($_POST['PaymentDate']) . "'
 			AND supplierno >= '" . $_POST['FromCriteria'] . "'
@@ -30,24 +31,23 @@ if (isset($_POST['PrintPDF'])
 			AND suppliers.remittance=1
 			ORDER BY supplierno";
 
-	$SuppliersResult = DB_query($sql,$db);
+	$SuppliersResult = DB_query($sql);
 	if (DB_num_rows($SuppliersResult)==0){
 		//then there aint awt to print
-		$title = _('Print Remittance Advices Error');
-		include('includes/header.inc');
+		$Title = _('Print Remittance Advices Error');
+		include('includes/header.php');
 		prnMsg(_('There were no remittance advices to print out for the supplier range and payment date specified'),'warn');
-		echo '<br /><a href="'.htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') .'">'. _('Back').'</a>';
-		include('includes/footer.inc');
+		echo '<br /><a href="'.htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '">' .  _('Back') . '</a>';
+		include('includes/footer.php');
 		exit;
 	}
 /*then print the report */
 
 	include('includes/PDFStarter.php');
-	$pdf->addInfo('Title',_('Remmitance Advice'));
+	$pdf->addInfo('Title',_('Remittance Advice'));
 	$pdf->addInfo('Subject',_('Remittance Advice') . ' - ' . _('suppliers from') . ' ' . $_POST['FromCriteria'] . ' ' . _('to') . ' ' . $_POST['ToCriteria'] . ' ' . _('and Paid On') . ' ' .  $_POST['PaymentDate']);
 
 	$line_height=12;
-
 
 	$SupplierID ='';
 	$RemittanceAdviceCounter =0;
@@ -75,16 +75,16 @@ if (isset($_POST['PrintPDF'])
 						 supptrans.transno";
 
 
-		$TransResult = DB_query($sql,$db,'','',false,false);
-		if (DB_error_no($db) !=0) {
-			$title = _('Remittance Advice Problem Report');
-			include('includes/header.inc');
-			prnMsg(_('The details of the payment to the supplier could not be retrieved because') . ' - ' . DB_error_msg($db),'error');
-			echo '<br /><a href="' . $rootpath . '/index.php">' . _('Back to the menu') . '</a>';
+		$TransResult = DB_query($sql,'','',false,false);
+		if (DB_error_no() !=0) {
+			$Title = _('Remittance Advice Problem Report');
+			include('includes/header.php');
+			prnMsg(_('The details of the payment to the supplier could not be retrieved because') . ' - ' . DB_error_msg(),'error');
+			echo '<br /><a href="' . $RootPath . '/index.php">' . _('Back to the menu') . '</a>';
 			if ($debug==1){
 				echo '<br />' . _('The SQL that failed was') . ' ' . $sql;
 			}
-			include('includes/footer.inc');
+			include('includes/footer.php');
 			exit;
 		}
 
@@ -96,8 +96,8 @@ if (isset($_POST['PrintPDF'])
 			$LeftOvers = $pdf->addTextWrap($Left_Margin+5, $YPos, 80,$FontSize,$DetailTrans['typename'], 'left');
 			$LeftOvers = $pdf->addTextWrap($Left_Margin+95, $YPos, 80,$FontSize,$DisplayTranDate, 'left');
 			$LeftOvers = $pdf->addTextWrap($Left_Margin+175, $YPos, 80,$FontSize,$DetailTrans['suppreference'], 'left');
-			$LeftOvers = $pdf->addTextWrap($Left_Margin+255, $YPos, 80,$FontSize,locale_money_format($DetailTrans['trantotal'],$SuppliersPaid['currcode']), 'right');
-			$LeftOvers = $pdf->addTextWrap($Left_Margin+355, $YPos,80,$FontSize,locale_money_format($DetailTrans['amt'],$SuppliersPaid['currcode']), 'right');
+			$LeftOvers = $pdf->addTextWrap($Left_Margin+255, $YPos, 80,$FontSize,locale_number_format($DetailTrans['trantotal'],$SuppliersPaid['currdecimalplaces']), 'right');
+			$LeftOvers = $pdf->addTextWrap($Left_Margin+355, $YPos,80,$FontSize,locale_number_format($DetailTrans['amt'],$SuppliersPaid['currdecimalplaces']), 'right');
 			$AccumBalance += $DetailTrans['amt'];
 
 			$YPos -=$line_height;
@@ -107,16 +107,16 @@ if (isset($_POST['PrintPDF'])
 			}
 		} /*end while there are detail transactions to show */
 		$YPos -= (0.5*$line_height);
-		$pdf->line($Left_Margin, $YPos+$line_height,$Page_Width-$Right_Margin, $YPos+$line_height);
+    	$pdf->line($Left_Margin, $YPos+$line_height,$Page_Width-$Right_Margin, $YPos+$line_height);
 
-		$LeftOvers = $pdf->addTextWrap($Left_Margin+280,$YPos,75,$FontSize,_('Total Payment:'), 'right');
+	    $LeftOvers = $pdf->addTextWrap($Left_Margin+280,$YPos,75,$FontSize,_('Total Payment:'), 'right');
 
-		$TotalPayments += $AccumBalance;
+        $TotalPayments += $AccumBalance;
 
-		$LeftOvers = $pdf->addTextWrap($Left_Margin+355,$YPos,80,$FontSize,locale_money_format($AccumBalance,$SuppliersPaid['currcode']), 'right');
+	    $LeftOvers = $pdf->addTextWrap($Left_Margin+355,$YPos,80,$FontSize,locale_number_format($AccumBalance,$SuppliersPaid['currdecimalplaces']), 'right');
 
-		$YPos -= (1.5*$line_height);
-		$pdf->line($Left_Margin, $YPos+$line_height,$Page_Width-$Right_Margin, $YPos+$line_height);
+	    $YPos -= (1.5*$line_height);
+	    $pdf->line($Left_Margin, $YPos+$line_height,$Page_Width-$Right_Margin, $YPos+$line_height);
 
 	} /* end while there are supplier payments to retrieve allocations for */
 
@@ -127,30 +127,38 @@ if (isset($_POST['PrintPDF'])
 
 } else { /*The option to print PDF was not hit */
 
-	$title=_('Remittance Advices');
-	include('includes/header.inc');
+	$Title=_('Remittance Advices');
+	$ViewTopic = 'AccountsPayable';
+	$BookMark = '';
+	include('includes/header.php');
 
+    echo '<p class="page_title_text"><img src="'.$RootPath.'/css/'.$Theme.'/images/printer.png" title="' . $Title . '" alt="" />' . ' '
+        . $Title . '</p>';
 	/* show form to allow input	*/
 
-	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post"><table>';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/printer.png" title="' . _('Print Transfer Note') . '" alt="" />' . ' ' . $title.'</p><br />';
+    echo '<fieldset>
+			<legend>', _('Remittance Advice Criteria'), '</legend>';
 
 	if (!isset($_POST['FromCriteria']) or mb_strlen($_POST['FromCriteria'])<1){
 		$DefaultFromCriteria = '1';
 	} else {
 		$DefaultFromCriteria = $_POST['FromCriteria'];
 	}
-	if (!isset($_POST['ToCriteria']) or strlen($_POST['ToCriteria'])<1){
+	if (!isset($_POST['ToCriteria']) or mb_strlen($_POST['ToCriteria'])<1){
 		$DefaultToCriteria = 'zzzzzzz';
 	} else {
 		$DefaultToCriteria = $_POST['ToCriteria'];
 	}
-	echo '<table class="selection"><tr><td>' . _('From Supplier Code') . ':</font></td>
-			<td><input type="text" maxlength="6" size="7" name="FromCriteria" value="' . $DefaultFromCriteria . '" /></td></tr>';
-	echo '<tr><td>' . _('To Supplier Code') . ':</td>
-			<td><input type="text" maxlength="6" size="7" name="ToCriteria" value="' . $DefaultToCriteria . '" /></td></tr>';
+	echo '<field>
+			<label for="FromCriteria">' . _('From Supplier Code') . ':</label>
+			<input type="text" maxlength="6" size="7" name="FromCriteria" value="' . $DefaultFromCriteria . '" />
+		</field>';
+	echo '<field>
+			<label for="ToCriteria">' . _('To Supplier Code') . ':</label>
+			<input type="text" maxlength="6" size="7" name="ToCriteria" value="' . $DefaultToCriteria . '" />
+		</field>';
 
 	if (!isset($_POST['PaymentDate'])){
 		$DefaultDate = Date($_SESSION['DefaultDateFormat'], Mktime(0,0,0,Date('m')+1,0 ,Date('y')));
@@ -158,12 +166,19 @@ if (isset($_POST['PrintPDF'])
 		$DefaultDate = $_POST['PaymentDate'];
 	}
 
-	echo '<tr><td>' . _('Date Of Payment') . ':</td>
-			<td><input type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="PaymentDate" maxlength="11" size="12" value="' . $DefaultDate . '" /></td></tr>';
+	echo '<field>
+			<label for="PaymentDate">' . _('Date Of Payment') . ':</label>
+			<input type="date" name="PaymentDate" maxlength="10" size="11" value="' . FormatDateForSQL($DefaultDate) . '" />
+		</field>';
 
-	echo '</table><br /><div class="centre"><button type="submit" name="PrintPDF">' . _('Print PDF') . '</button></div></form><br />';
+	echo '</fieldset>
+		<div class="centre">
+			<input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" />
+		</div>';
 
-	include ('includes/footer.inc');
+    echo '</form>';
+
+	include ('includes/footer.php');
 } /*end of else not PrintPDF */
 
 function PageHeader(){
@@ -259,7 +274,7 @@ function PageHeader(){
 	$XPos = $Page_Width/2 - 60;
 	$pdf->addText($XPos, $YPos,$FontSize, _('All amounts stated in') . ' - ' . $SuppliersPaid['currcode']);
 	$YPos -= $line_height;
-	$pdf->addText($XPos, $YPos,$FontSize, $SuppliersPaid['paymentterms']);
+	$pdf->addText($XPos, $YPos,$FontSize, $SuppliersPaid['terms']);
 
 	$YPos = $Page_Height - $Top_Margin - 180;
 	//$YPos -= $line_height;

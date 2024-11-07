@@ -1,14 +1,17 @@
 <?php
 
-/* $Id$ */
+include('includes/session.php');
 
-include('includes/session.inc');
+if (isset($_POST['FromDate'])){$_POST['FromDate'] = ConvertSQLDate($_POST['FromDate']);};
+if (isset($_POST['ToDate'])){$_POST['ToDate'] = ConvertSQLDate($_POST['ToDate']);};
 
-$title = _('Audit Trail');
+$Title = _('Audit Trail');
+$ViewTopic = 'Setup';
+$BookMark = 'AuditTrail';
 
-include('includes/header.inc');
+include('includes/header.php');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p>';
+echo '<p class="page_title_text"><img src="'.$RootPath.'/css/'.$Theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $Title . '</p>';
 
 if (!isset($_POST['FromDate'])){
 	$_POST['FromDate'] = Date($_SESSION['DefaultDateFormat'],mktime(0,0,0, Date('m')-$_SESSION['MonthsAuditTrail']));
@@ -18,7 +21,7 @@ if (!isset($_POST['ToDate'])){
 }
 
 if ((!(Is_Date($_POST['FromDate'])) OR (!Is_Date($_POST['ToDate']))) AND (isset($_POST['View']))) {
-	prnMsg( _('Incorrect date format used, please re-enter'), error);
+	prnMsg( _('Incorrect date format used, please re-enter'), 'error');
 	unset($_POST['View']);
 }
 
@@ -29,56 +32,68 @@ if (isset($_POST['ContainingText'])){
 }
 
 // Get list of tables
-$TableResult = DB_show_tables($db);
+$TableResult = DB_show_tables();
 
 // Get list of users
-$UserResult = DB_query("SELECT userid FROM www_users",$db);
+$UserResult = DB_query("SELECT userid FROM www_users ORDER BY userid");
 
-echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<table class="selection">';
+echo '<fieldset>
+		<legend>', _('Report Criteria'), '</legend>';
 
-echo '<tr><td>'. _('From Date') . ' ' . $_SESSION['DefaultDateFormat'] .'</td>
-	<td><input tabindex="1" type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="FromDate" size="11" maxlength="10" value="' .$_POST['FromDate'].'" /></td></tr>';
-echo '<tr><td>'. _('To Date') . ' ' . $_SESSION['DefaultDateFormat'] .'</td>
-	<td><input tabindex="2" type="text" class="date" alt="'.$_SESSION['DefaultDateFormat'].'" name="ToDate" size="11" maxlength="10" value="' . $_POST['ToDate'] . '" /></td></tr>';
+echo '<field>
+		<label for="FromDate">' .  _('From Date') . ' ' . $_SESSION['DefaultDateFormat']  . '</label>
+		<input tabindex="1" type="date" name="FromDate" size="11" maxlength="10" autofocus="autofocus" required="required" value="' . FormatDateForSQL($_POST['FromDate']) . '" onchange="isDate(this, this.value, '."'".$_SESSION['DefaultDateFormat']."'".')"/>
+	</field>
+	<field>
+		<label for="ToDate">' .  _('To Date') . ' ' . $_SESSION['DefaultDateFormat']  . '</label>
+		<input tabindex="2" type="date" name="ToDate" size="11" maxlength="10" required="required" value="' . FormatDateForSQL($_POST['ToDate']) . '" onchange="isDate(this, this.value, '."'".$_SESSION['DefaultDateFormat']."'".')"/>
+	</field>';
 
 // Show user selections
-echo '<tr><td>'. _('User ID'). '</td>
-		<td><select tabindex="3" name="SelectedUser">';
-echo '<option value="ALL">' . _('ALL') . '</option>';
-while ($users = DB_fetch_row($UserResult)) {
-	if (isset($_POST['SelectedUser']) and $users[0]==$_POST['SelectedUser']) {
-		echo '<option selected="True" value="' . $users[0] . '">' . $users[0] . '</option>';
+echo '<field>
+		<label for="SelectedUser">' .  _('User ID'). '</label>
+		<select tabindex="3" name="SelectedUser">
+			<option value="ALL">' . _('All') . '</option>';
+while ($Users = DB_fetch_row($UserResult)) {
+	if (isset($_POST['SelectedUser']) and $Users[0]==$_POST['SelectedUser']) {
+		echo '<option selected="selected" value="' . $Users[0] . '">' . $Users[0] . '</option>';
 	} else {
-		echo '<option value="' . $users[0] . '">' . $users[0] . '</option>';
+		echo '<option value="' . $Users[0] . '">' . $Users[0] . '</option>';
 	}
 }
-echo '</select></td></tr>';
+echo '</select>
+	</field>';
 
 // Show table selections
-echo '<tr><td>'. _('Table '). '</td>
-		<td><select tabindex="4" name="SelectedTable">';
-echo '<option value="ALL">' . _('ALL') . '</option>';
-while ($tables = DB_fetch_row($TableResult)) {
-	if (isset($_POST['SelectedTable']) and $tables[0]==$_POST['SelectedTable']) {
-		echo '<option selected="True" value=' . $tables[0] . '>' . $tables[0] . '</option>';
+echo '<field>
+		<label for="SelectedTable">' .  _('Table '). '</label>
+		<select tabindex="4" name="SelectedTable">
+			<option value="ALL">' . _('All') . '</option>';
+while ($Tables = DB_fetch_row($TableResult)) {
+	if (isset($_POST['SelectedTable']) and $Tables[0]==$_POST['SelectedTable']) {
+		echo '<option selected="selected" value="' . $Tables[0] . '">' . $Tables[0] . '</option>';
 	} else {
-		echo '<option value=' . $tables[0] . '>' . $tables[0] . '</option>';
+		echo '<option value="' . $Tables[0] . '">' . $Tables[0] . '</option>';
 	}
 }
-echo '</select></td></tr>';
+echo '</select>
+	</field>';
 
 if(!isset($_POST['ContainingText'])){
 	$_POST['ContainingText']='';
 }
 // Show the text
-echo '<tr><td>' . _('Containing text') . ':</td>';
-echo '<td><input type="text" name="ContainingText" size="20" maxlength="20" value="'. $_POST['ContainingText'] . '"></td></tr>';
-
-echo '</table><br />';
-echo '<div class="centre"><button tabindex="5" type="submit" name="View">' . _('View') . '</button></div><br />';
-echo '</form>';
+echo '<field>
+		<label for="ContainingText">' . _('Containing text') . ':</label>
+		<input type="text" name="ContainingText" size="20" maxlength="20" value="'. $_POST['ContainingText'] . '" />
+	</field>
+	</fieldset>
+	<div class="centre">
+		<input tabindex="5" type="submit" name="View" value="' . _('View') . '" />
+	</div>
+	</form>';
 
 // View the audit trail
 if (isset($_POST['View'])) {
@@ -125,21 +140,21 @@ if (isset($_POST['View'])) {
 	}
 
 	function DeleteQueryInfo($SQLString) {
-		$SQLArray = explode('WHERE', $SQLString);
+		$SQLArray = explode("WHERE", $SQLString);
 		$_SESSION['SQLString']['table'] = $SQLArray[0];
 		$SQLString = trim(str_replace($SQLArray[0], '', $SQLString));
-		$SQLString = trim(str_replace('DELETE', '', $SQLString));
-		$SQLString = trim(str_replace('FROM', '', $SQLString));
-		$SQLString = trim(str_replace('WHERE', '', $SQLString));
+		$SQLString = trim(str_replace("DELETE", '', $SQLString));
+		$SQLString = trim(str_replace("FROM", '', $SQLString));
+		$SQLString = trim(str_replace("WHERE", '', $SQLString));
 		$Assigment = explode('=', $SQLString);
 		$_SESSION['SQLString']['fields'][0] = $Assigment[0];
-		$_SESSION['SQLString']['values'][0] = $Assigment[1];
+		if (isset($Assigment[1])) {$_SESSION['SQLString']['values'][0] = $Assigment[1];};
 	}
 
 	if (mb_strlen($ContainingText) > 0) {
-		$ContainingText = " AND querystring LIKE '%" . $ContainingText . "%' ";
+	    $ContainingText = " AND querystring LIKE '%" . $ContainingText . "%' ";
 	}else{
-		$ContainingText = "";
+	    $ContainingText = "";
 	}
 
 	if ($_POST['SelectedUser'] == 'ALL') {
@@ -147,40 +162,40 @@ if (isset($_POST['View'])) {
 				userid,
 				querystring
 			FROM audittrail
-			WHERE transactiondate BETWEEN '". $FromDate."' AND '".$ToDate."'" .
-			$ContainingText;
+			WHERE transactiondate BETWEEN '". $FromDate."' AND '".$ToDate."'" . $ContainingText;
 	} else {
 		$sql="SELECT transactiondate,
 				userid,
 				querystring
 			FROM audittrail
-			AND transactiondate BETWEEN '".$FromDate."' AND '".$ToDate."'" .
-			$ContainingText;
+			WHERE userid='".$_POST['SelectedUser']."'
+			AND transactiondate BETWEEN '".$FromDate."' AND '".$ToDate."'" . $ContainingText;
 	}
-	$result = DB_query($sql,$db);
+	$result = DB_query($sql);
 
-	echo '<table width="98%" class="selection">';
-	echo '<tr><th>' . _('Date/Time') . '</th>
-				<th>' . _('User') . '</th>
-				<th>' . _('Type') . '</th>
-				<th>' . _('Table') . '</th>
-				<th>' . _('Field Name') . '</th>
-				<th>' . _('Value') . '</th></tr>';
+	echo '<table border="0" width="98%" class="selection">
+		<tr>
+			<th>' . _('Date/Time') . '</th>
+			<th>' . _('User') . '</th>
+			<th>' . _('Type') . '</th>
+			<th>' . _('Table') . '</th>
+			<th>' . _('Field Name') . '</th>
+			<th>' . _('Value') . '</th></tr>';
 	while ($myrow = DB_fetch_row($result)) {
-		if (Query_Type($myrow[2]) == 'INSERT') {
+		if (Query_Type($myrow[2]) == "INSERT") {
 			InsertQueryInfo(str_replace("INSERT INTO",'',$myrow[2]));
 			$RowColour = '#a8ff90';
 		}
-		if (Query_Type($myrow[2]) == 'UPDATE') {
+		if (Query_Type($myrow[2]) == "UPDATE") {
 			UpdateQueryInfo(str_replace("UPDATE",'',$myrow[2]));
 			$RowColour = '#feff90';
 		}
-		if (Query_Type($myrow[2]) == 'DELETE') {
+		if (Query_Type($myrow[2]) == "DELETE") {
 			DeleteQueryInfo(str_replace("DELETE FROM",'',$myrow[2]));
 			$RowColour = '#fe90bf';
 		}
 
-		if ((trim($_SESSION['SQLString']['table']) == $_POST['SelectedTable'])  or
+		if ((trim($_SESSION['SQLString']['table']) == $_POST['SelectedTable'])  ||
 			($_POST['SelectedTable'] == 'ALL')) {
 			if (!isset($_SESSION['SQLString']['values'])) {
 				$_SESSION['SQLString']['values'][0]='';
@@ -196,22 +211,22 @@ if (isset($_POST['View'])) {
 				if (isset($_SESSION['SQLString']['values'][$i]) and (trim(str_replace("'","",$_SESSION['SQLString']['values'][$i])) != "") &
 				(trim($_SESSION['SQLString']['fields'][$i]) != 'password') &
 				(trim($_SESSION['SQLString']['fields'][$i]) != 'www_users.password')) {
-					echo '<tr bgcolor="' . $RowColour . '">';
+					echo '<tr style="background-color:' . $RowColour . '">';
 					echo '<td></td>
 						<td></td>
 						<td></td>
 						<td></td>';
-					echo '<td>'.$_SESSION['SQLString']['fields'][$i].'</td>
-						<td>'. trim(str_replace("'","",$_SESSION['SQLString']['values'][$i])) .'</td>';
+					echo '<td>' . $_SESSION['SQLString']['fields'][$i] . '</td>
+						<td>' .  trim(str_replace("'","",$_SESSION['SQLString']['values'][$i]))  . '</td>';
 					echo '</tr>';
 				}
 			}
-			echo '<tr bgcolor="black"> <td colspan="6"></td> </tr>';
+			echo '<tr style="background-color:black"> <td colspan="6"></td> </tr>';
 		}
 		unset($_SESSION['SQLString']);
 	}
 	echo '</table>';
 }
-include('includes/footer.inc');
+include('includes/footer.php');
 
 ?>

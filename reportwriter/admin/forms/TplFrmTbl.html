@@ -73,17 +73,17 @@ document.onmousedown = mouseSelect;
 <h2 align="center"><?php echo 'Form Field: '.$DisplayName.' - '.RPT_BTN_PROP; ?></h2>
 <form name="DBRptLine" method="post" action="ReportCreator.php?action=step6a">
 	<input type="hidden" name="FormID" value="<?php echo $_SESSION['FormID']; ?>" />
-	<input name="DisplayName" type="hidden" value="<?php echo $DisplayName; ?>" />
-	<input name="index" type="hidden" value="<?php echo $Params['index']; ?>" />
-	<input name="ID" type="hidden" value="<?php echo $FormParams['id']; ?>" />
-	<input name="SeqNum" type="hidden" value="<?php echo $SeqNum; ?>" />
-	<input name="ReportID" type="hidden" value="<?php echo $ReportID; ?>" />
-	<input name="ReportName" type="hidden" value="<?php echo $reportname; ?>" />
+	<input name="DisplayName" type="hidden" value="<?php echo $DisplayName; ?>">
+	<input name="index" type="hidden" value="<?php echo $Params['index']; ?>">
+	<input name="ID" type="hidden" value="<?php echo $FormParams['id']; ?>">
+	<input name="SeqNum" type="hidden" value="<?php echo $SeqNum; ?>">
+	<input name="ReportID" type="hidden" value="<?php echo $ReportID; ?>">
+	<input name="ReportName" type="hidden" value="<?php echo $reportname; ?>">
   <table align="center" width="550"  border="0" cellspacing="0" cellpadding="0">
     <tr>
-      <td><input name="todo" type="submit" id="todo" value="<?php echo RPT_BTN_CANCEL; ?>" /></td>
-      <td><div align="center"><input name="todo" type="submit" id="todo" value="<?php echo RPT_BTN_UPDATE; ?>" /></div></td>
-      <td><div align="right"><input name="todo" type="submit" id="todo" value="<?php echo RPT_BTN_FINISH; ?>" /></div></td>
+      <td><input name="todo" type="submit" id="todo" value="<?php echo RPT_BTN_CANCEL; ?>"></td>
+      <td><div align="center"><input name="todo" type="submit" id="todo" value="<?php echo RPT_BTN_UPDATE; ?>"></div></td>
+      <td><div align="right"><input name="todo" type="submit" id="todo" value="<?php echo RPT_BTN_FINISH; ?>"></div></td>
     </tr>
   </table>
   <table align="center" border="2" cellspacing="1" cellpadding="1">
@@ -94,19 +94,19 @@ document.onmousedown = mouseSelect;
     <tr>
       <td><div align="center"><?php echo RPT_ABSCISSA; ?>
 	  	<?php if (!$Params['LineXStrt']) $Params['LineXStrt']='10'; ?>
-		<input name="LineXStrt" type="text" value="<?php echo $Params['LineXStrt']; ?>" size="4" maxlength="3" />
+		<input name="LineXStrt" type="text" value="<?php echo $Params['LineXStrt']; ?>" size="4" maxlength="3">
       </div></td>
       <td><div align="center"><?php echo RPT_ODINATE; ?>
 	  	<?php if (!$Params['LineYStrt']) $Params['LineYStrt']='10'; ?>
-        <input name="LineYStrt" type="text" value="<?php echo $Params['LineYStrt']; ?>" size="4" maxlength="3" />
+        <input name="LineYStrt" type="text" value="<?php echo $Params['LineYStrt']; ?>" size="4" maxlength="3">
       </div></td>
       <td><div align="center"><?php echo RPT_WIDTH; ?>
 	  	<?php if (!$Params['BoxWidth']) $Params['BoxWidth']='60'; ?>
-          <input name="BoxWidth" type="text" value="<?php echo $Params['BoxWidth']; ?>" size="4" maxlength="3" />
+          <input name="BoxWidth" type="text" value="<?php echo $Params['BoxWidth']; ?>" size="4" maxlength="3">
       </div></td>
       <td><div align="center"><?php echo RPT_HEIGHT; ?>
 	  	<?php if (!$Params['BoxHeight']) $Params['BoxHeight']='50'; ?>
-          <input name="BoxHeight" type="text" value="<?php echo $Params['BoxHeight']; ?>" size="4" maxlength="3" />
+          <input name="BoxHeight" type="text" value="<?php echo $Params['BoxHeight']; ?>" size="4" maxlength="3">
       </div></td>
     </tr>
     <tr bordercolor="#FFFFFF" bgcolor="#CCCCCC">
@@ -115,43 +115,43 @@ document.onmousedown = mouseSelect;
     </tr>
     <tr>
 		<?php if (!$Params['Line'] OR $Params['Line']=='0') $selected=' checked'; else $selected=''; ?>
-      <td><input name="Line" type="radio" value="0"<?php echo $selected; ?> /><?php echo RPT_NOBRDR; ?> </td>
+      <td><input name="Line" type="radio" value="0"<?php echo $selected; ?>><?php echo RPT_NOBRDR; ?> </td>
       <td><?php echo RPT_LINEWIDTH; ?><select name="LineSize">
 	  <?php foreach($LineSizes as $key => $value) {
 			if ($Params['LineSize']==$key) $selected = ' selected'; else  $selected = '';
 			echo '<option value="'.$key.'"'.$selected.'>'.$value.'</option>';
 		} ?> </select></td>
 		<?php if (!$Params['Fill'] OR $Params['Fill']=='0') $selected=' checked'; else $selected=''; ?>
-      <td colspan="2"><input name="Fill" type="radio" value="0"<?php echo $selected; ?> /><?php echo RPT_NOFILL; ?></td>
+      <td colspan="2"><input name="Fill" type="radio" value="0"<?php echo $selected; ?>><?php echo RPT_NOFILL; ?></td>
     </tr>
     <tr>
 		<?php if ($Params['Line']=='1') $selected=' checked'; else $selected=''; ?>
-      <td><input name="Line" type="radio" value="1"<?php echo $selected; ?> /><?php echo RPT_STDCOLOR; ?><br />
+      <td><input name="Line" type="radio" value="1"<?php echo $selected; ?>><?php echo RPT_STDCOLOR; ?><br />
 		<div align="center"><select name="BrdrColor">
 	  <?php foreach($FontColors as $key => $value) {
 			if ($Params['BrdrColor']==$key) $selected = ' selected'; else  $selected = '';
 			echo '<option value="'.$key.'"'.$selected.'>'.$value.'</option>';
 		} ?> </select></div></td>
 		<?php if ($Params['Line']=='2') $selected=' checked'; else $selected=''; ?>
-      <td><input name="Line" type="radio" value="2"<?php echo $selected; ?> /><?php echo RPT_CUSTCOLOR; ?><br />
+      <td><input name="Line" type="radio" value="2"<?php echo $selected; ?>><?php echo RPT_CUSTCOLOR; ?><br />
 		<div align="center">
-		<?php echo RPT_RED; ?> <input name="BrdrRed" type="text" value="<?php echo $Params['BrdrRed']; ?>" size="4" maxlength="3" />
-    	<?php echo RPT_GREEN; ?> <input name="BrdrGreen" type="text" value="<?php echo $Params['BrdrGreen']; ?>" size="4" maxlength="3" />
-    	<?php echo RPT_BLUE; ?> <input name="BrdrBlue" type="text" value="<?php echo $Params['BrdrBlue']; ?>" size="4" maxlength="3" />
+		<?php echo RPT_RED; ?> <input name="BrdrRed" type="text" value="<?php echo $Params['BrdrRed']; ?>" size="4" maxlength="3">
+    	<?php echo RPT_GREEN; ?> <input name="BrdrGreen" type="text" value="<?php echo $Params['BrdrGreen']; ?>" size="4" maxlength="3">
+    	<?php echo RPT_BLUE; ?> <input name="BrdrBlue" type="text" value="<?php echo $Params['BrdrBlue']; ?>" size="4" maxlength="3">
 	  </div></td>
 		<?php if ($Params['Fill']=='1') $selected=' checked'; else $selected=''; ?>
-      <td><input name="Fill" type="radio" value="1"<?php echo $selected; ?> /><?php echo RPT_STDCOLOR; ?><br />
+      <td><input name="Fill" type="radio" value="1"<?php echo $selected; ?>><?php echo RPT_STDCOLOR; ?><br />
 		<div align="center"><select name="FillColor">
 	  <?php foreach($FontColors as $key => $value) {
 			if ($Params['FillColor']==$key) $selected = ' selected'; else  $selected = '';
 			echo '<option value="'.$key.'"'.$selected.'>'.$value.'</option>';
 		} ?> </select></div></td>
 		<?php if ($Params['Fill']=='2') $selected=' checked'; else $selected=''; ?>
-      <td><input name="Fill" type="radio" value="2"<?php echo $selected; ?> /><?php echo RPT_CUSTCOLOR; ?><br />
+      <td><input name="Fill" type="radio" value="2"<?php echo $selected; ?>><?php echo RPT_CUSTCOLOR; ?><br />
 		<div align="center">
-		<?php echo RPT_RED; ?> <input name="FillRed" type="text" value="<?php echo $Params['FillRed']; ?>" size="4" maxlength="3" />
-    	<?php echo RPT_GREEN; ?> <input name="FillGreen" type="text" value="<?php echo $Params['FillGreen']; ?>" size="4" maxlength="3" />
-    	<?php echo RPT_BLUE; ?> <input name="FillBlue" type="text" value="<?php echo $Params['FillBlue']; ?>" size="4" maxlength="3" />
+		<?php echo RPT_RED; ?> <input name="FillRed" type="text" value="<?php echo $Params['FillRed']; ?>" size="4" maxlength="3">
+    	<?php echo RPT_GREEN; ?> <input name="FillGreen" type="text" value="<?php echo $Params['FillGreen']; ?>" size="4" maxlength="3">
+    	<?php echo RPT_BLUE; ?> <input name="FillBlue" type="text" value="<?php echo $Params['FillBlue']; ?>" size="4" maxlength="3">
 	  </div></td>
     </tr>
 </table>
@@ -165,18 +165,18 @@ document.onmousedown = mouseSelect;
       <td colspan="2"><div align="center"><?php echo RPT_DISPNAME; ?></div></td>
       <td colspan="2"><div align="center"><?php echo RPT_TEXTPROC; ?></div></td>
       <td rowspan="4" align="center">
-	  	<input name="todo" type="submit" id="todo" value="<?php echo $ButtonValue; ?>" /></td>
+	  	<input name="todo" type="submit" id="todo" value="<?php echo $ButtonValue; ?>"></td>
     </tr>
     <tr>
       <td rowspan="3"><div align="center">
 		  <?php if ($ButtonValue=='Change') { ?>
-		  <input name="TblSeqNum" type="hidden" value="<?php echo $Params['TblSeqNum']; ?>" />
+		  <input name="TblSeqNum" type="hidden" value="<?php echo $Params['TblSeqNum']; ?>">
 		  <?php echo $Params['TblSeqNum']; } else { ?>
-		  <input name="TblSeqNum"  type="text" value="<?php echo $Params['TblSeqNum']; ?>" size="3" maxlength="2" />
+		  <input name="TblSeqNum"  type="text" value="<?php echo $Params['TblSeqNum']; ?>" size="3" maxlength="2">
 		  <?php } // end if ?></div></td>
       <td colspan="2">
-		<input type="text" name="TblField" id="TblField" value="<?php echo $Params['TblField']; ?>" size="30" />
-		<image name="imgName" src="../images/pull_down_inactive.gif" height="20" width="19"
+		<input type="text" name="TblField" id="TblField" value="<?php echo $Params['TblField']; ?>" size="30">
+		<img name="imgName" src="../images/pull_down_inactive.gif" height="20" width="19"
 		onMouseOver="handleOver(); return true;" onMouseOut="handleOut(); return true;"
 		onclick="JavaScript:menuActivate('TblField', 'combodiv', 'combosel')">
 		<div id="combodiv" style="position:absolute; display:none; top:0px; left:0px;z-index:10000" onmouseover="javascript:oOverMenu='combodiv';"
@@ -186,7 +186,7 @@ document.onmousedown = mouseSelect;
 		<?php echo CreateFieldList($ReportID, $FieldListings['defaults']['fieldname'],''); ?>
 		</select></div>
 	  </td>
-      <td colspan="2"><input type="text" name="TblDesc" value="<?php echo $Params['TblDesc']; ?>" /></td>
+      <td colspan="2"><input type="text" name="TblDesc" value="<?php echo $Params['TblDesc']; ?>"></td>
       <td colspan="2"><select name="Processing">
 		<?php foreach($FormProcessing as $key => $value) {
 			if ($Params['Processing']==$key) $selected = ' selected'; else  $selected = '';
@@ -224,11 +224,11 @@ document.onmousedown = mouseSelect;
 		} ?> </select></div></td>
       <td><div align="center">
 	  	<?php if ($Params['TblColWidth']=='') $Params['TblColWidth']='20'; ?>
-        <input type="text" name="TblColWidth" value="<?php echo $Params['TblColWidth']; ?>" size="3" maxlength="4" />
+        <input type="text" name="TblColWidth" value="<?php echo $Params['TblColWidth']; ?>" size="3" maxlength="4">
       </div></td>
       <td><div align="center">
 	  	<?php if ($Params['TblShow']=='1' OR $Params['TblShow']=='') $checked=' checked'; else $checked = ''; ?>
-        <input type="checkbox" name="TblShow" value="1"<?php echo $checked; ?> />
+        <input type="checkbox" name="TblShow" value="1"<?php echo $checked; ?>>
       </div></td>
     </tr>
     <tr bordercolor="#FFFFFF" bgcolor="#CCCCCC">
@@ -240,10 +240,10 @@ document.onmousedown = mouseSelect;
 			echo'<td align="center" colspan="2">'.$myrow['TblField'].'</td>';
 			echo'<td align="center" colspan="2">'.$myrow['TblDesc'].'</td>';
 			echo'<td align="center" colspan="2">'.$FormProcessing[$myrow['Processing']].'</td>';
-			echo'<td><input type="image" name="up'.$myrow['TblSeqNum'].'" value="up" src="../images/upicon.png" border="0" />
-			<input type="image" name="dn'.$myrow['TblSeqNum'].'" value="dn" src="../images/downicon.png" border="0" />
-			<input type="image" name="ed'.$myrow['TblSeqNum'].'" value="ed" src="../images/editicon.png" border="0" />
-			<input type="image" name="rm'.$myrow['TblSeqNum'].'" value="rm" src="../images/delicon.png" border="0" onClick="return confirm(\'Delete this field?\')" />
+			echo'<td><input type="image" name="up'.$myrow['TblSeqNum'].'" value="up" src="../images/upicon.png" border="0">
+			<input type="image" name="dn'.$myrow['TblSeqNum'].'" value="dn" src="../images/downicon.png" border="0">
+			<input type="image" name="ed'.$myrow['TblSeqNum'].'" value="ed" src="../images/editicon.png" border="0">
+			<input type="image" name="rm'.$myrow['TblSeqNum'].'" value="rm" src="../images/delicon.png" border="0" onClick="return confirm(\'Delete this field?\')">
 			</td></tr>';
 		}
 	} else {

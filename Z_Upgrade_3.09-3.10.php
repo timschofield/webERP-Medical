@@ -1,18 +1,18 @@
 <?php
-/* $Id$*/
-include('includes/session.inc');
-$title = _('Upgrade webERP 3.09 - 3.10');
-include('includes/header.inc');
+
+include('includes/session.php');
+$Title = _('Upgrade webERP 3.09 - 3.10');
+include('includes/header.php');
 
 
 prnMsg(_('This script will run perform any modifications to the database since v 3.09 required to allow the additional functionality in version 3.09 scripts'),'info');
 
-echo '<p><form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '"></p>';
+echo '<p><form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<button type="submit" name="DoUpgrade">' . _('Perform Upgrade') . '</button>';
+echo '<input type="submit" name="DoUpgrade" value="' . _('Perform Upgrade') . '" />';
 echo '</form>';
 
-if (isset($_POST['DoUpgrade'])){
+if ($_POST['DoUpgrade'] == _('Perform Upgrade')){
 
 	$SQLScriptFile = file('./sql/mysql/upgrade3.09-3.10.sql');
 
@@ -25,24 +25,24 @@ if (isset($_POST['DoUpgrade'])){
 
 		$SQLScriptFile[$i] = trim($SQLScriptFile[$i]);
 
-		if (substr($SQLScriptFile[$i], 0, 2) != '--'
-			AND substr($SQLScriptFile[$i], 0, 3) != 'USE'
-			AND strstr($SQLScriptFile[$i],'/*')==FALSE
-			AND strlen($SQLScriptFile[$i])>1){
+		if (mb_substr($SQLScriptFile[$i], 0, 2) != '--'
+			AND mb_substr($SQLScriptFile[$i], 0, 3) != 'USE'
+			AND mb_strstr($SQLScriptFile[$i],'/*')==FALSE
+			AND mb_strlen($SQLScriptFile[$i])>1){
 
 			$SQL .= ' ' . $SQLScriptFile[$i];
 
 			//check if this line kicks off a function definition - pg chokes otherwise
-			if (substr($SQLScriptFile[$i],0,15) == 'CREATE FUNCTION'){
+			if (mb_substr($SQLScriptFile[$i],0,15) == 'CREATE FUNCTION'){
 				$InAFunction = true;
 			}
 			//check if this line completes a function definition - pg chokes otherwise
-			if (substr($SQLScriptFile[$i],0,8) == 'LANGUAGE'){
+			if (mb_substr($SQLScriptFile[$i],0,8) == 'LANGUAGE'){
 				$InAFunction = false;
 			}
-			if (strpos($SQLScriptFile[$i],';')>0 AND ! $InAFunction){
-				$SQL = substr($SQL,0,strlen($SQL)-1);
-				$result = DB_query($SQL, $db, $ErrMsg);
+			if (mb_strpos($SQLScriptFile[$i],';')>0 AND ! $InAFunction){
+				$SQL = mb_substr($SQL,0,mb_strlen($SQL)-1);
+				$result = DB_query($SQL, $ErrMsg);
 				$SQL='';
 			}
 
@@ -53,5 +53,5 @@ if (isset($_POST['DoUpgrade'])){
 
 } /*Dont do upgrade */
 
-include('includes/footer.inc');
+include('includes/footer.php');
 ?>

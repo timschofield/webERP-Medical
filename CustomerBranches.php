@@ -1,35 +1,33 @@
 <?php
+/* Defines the details of customer branches such as delivery address and contact details - also sales area, representative etc.*/
 
-/* $Revision: 1.53 $ */
-/* $Id$*/
-
-include('includes/session.inc');
-$title = _('Customer Branches');
-include('includes/header.inc');
+include('includes/session.php');
+$Title = _('Customer Branches');// Screen identification.
+$ViewTopic = 'AccountsReceivable';// Filename's id in ManualContents.php's TOC.
+$BookMark = 'NewCustomerBranch';// Anchor's id in the manual's html document.
+include('includes/header.php');
+include('includes/CountriesArray.php');
 
 if (isset($_GET['DebtorNo'])) {
-	$DebtorNo = strtoupper($_GET['DebtorNo']);
+	$DebtorNo = mb_strtoupper($_GET['DebtorNo']);
 } else if (isset($_POST['DebtorNo'])){
-	$DebtorNo = strtoupper($_POST['DebtorNo']);
+	$DebtorNo = mb_strtoupper($_POST['DebtorNo']);
 }
 
 if (!isset($DebtorNo)) {
 	prnMsg(_('This page must be called with the debtor code of the customer for whom you wish to edit the branches for').'.
-		<br />'._('When the pages is called from within the system this will always be the case').' <br />'.
+		<br />' . _('When the pages is called from within the system this will always be the case').' <br />' .
 			_('Select a customer first then select the link to add/edit/delete branches'),'warn');
-	include('includes/footer.inc');
+	include('includes/footer.php');
 	exit;
 }
 
 
 if (isset($_GET['SelectedBranch'])){
-	$SelectedBranch = strtoupper($_GET['SelectedBranch']);
+	$SelectedBranch = mb_strtoupper($_GET['SelectedBranch']);
 } else if (isset($_POST['SelectedBranch'])){
-	$SelectedBranch = strtoupper($_POST['SelectedBranch']);
+	$SelectedBranch = mb_strtoupper($_POST['SelectedBranch']);
 }
-
-// This link is already available on the menu on this page
-//echo "<a href='" . $rootpath . '/SelectCustomer.php'>" . _('Back to Customers') . '</a><br />';
 
 if (isset($Errors)) {
 	unset($Errors);
@@ -48,8 +46,17 @@ if (isset($_POST['submit'])) {
 
 	//first off validate inputs sensible
 
-	$_POST['BranchCode'] = strtoupper($_POST['BranchCode']);
+	$_POST['BranchCode'] = mb_strtoupper($_POST['BranchCode']);
 
+	if ($_SESSION['SalesmanLogin'] != '') {
+		$_POST['Salesman'] = $_SESSION['SalesmanLogin'];
+	}
+	if (ContainsIllegalCharacters($_POST['BranchCode']) OR mb_strstr($_POST['BranchCode'],' ')) {
+		$InputError = 1;
+		prnMsg(_('The Branch code cannot contain any of the following characters')." - &amp; \' &lt; &gt;",'error');
+		$Errors[$i] = 'BranchCode';
+		$i++;
+	}
 	if (mb_strlen($_POST['BranchCode'])==0) {
 		$InputError = 1;
 		prnMsg(_('The Branch code must be at least one character long'),'error');
@@ -68,13 +75,13 @@ if (isset($_POST['submit'])) {
 		$Errors[$i] = 'FwdDate';
 		$i++;
 	}
-	if (!is_numeric($_POST['EstDeliveryDays'])) {
+	if (!is_numeric(filter_number_format($_POST['EstDeliveryDays']))) {
 		$InputError = 1;
 		prnMsg(_('The estimated delivery days is expected to be a number and a recognised number has not been entered'),'error');
 		$Errors[$i] = 'EstDeliveryDays';
 		$i++;
 	}
-	if ($_POST['EstDeliveryDays'] >60) {
+	if (filter_number_format($_POST['EstDeliveryDays']) >60) {
 		$InputError = 1;
 		prnMsg(_('The estimated delivery days should be a number of days less than 60') . '. ' . _('A package can be delivered by seafreight anywhere in the world normally in less than 60 days'),'error');
 		$Errors[$i] = 'EstDeliveryDays';
@@ -83,76 +90,65 @@ if (isset($_POST['submit'])) {
 	if (!isset($_POST['EstDeliveryDays'])) {
 		$_POST['EstDeliveryDays']=1;
 	}
-	if (!isset($latitude)) {
-		$latitude=0.0;
-		$longitude=0.0;
+	if (!isset($Latitude)) {
+		$Latitude=0.0;
+		$Longitude=0.0;
 	}
 	if ($_SESSION['geocode_integration']==1 ){
 		// Get the lat/long from our geocoding host
-		$sql = "SELECT geocode_key, map_host FROM geocode_param WHERE 1";
+		$SQL = "SELECT * FROM geocode_param WHERE 1";
 		$ErrMsg = _('An error occurred in retrieving the information');
-		$resultgeo = DB_query($sql, $db, $ErrMsg);
+		$resultgeo = DB_query($SQL, $ErrMsg);
 		$row = DB_fetch_array($resultgeo);
 		$api_key = $row['geocode_key'];
 		$map_host = $row['map_host'];
-		define("MAPS_HOST", $map_host);
-		define("KEY", $api_key);
+		define('MAPS_HOST', $map_host);
+		define('KEY', $api_key);
 		if ($map_host=="") {
 		// check that some sane values are setup already in geocode tables, if not skip the geocoding but add the record anyway.
-				echo '<div class="warn">' . _('Warning - Geocode Integration is enabled, but no hosts are setup.  Go to Geocode Setup') . '</div>';
-				} else {
-
-		$address = $_POST['BrAddress1'] . ', ' . $_POST['BrAddress2'] . ', ' . $_POST['BrAddress3'] . ', ' . $_POST['BrAddress4'];
-
-		$base_url = 'http://' . MAPS_HOST . '/maps/geo?output=xml' . '&key=' . KEY;
-		$request_url = $base_url . '&q=' . urlencode($address);
-		$xml = simplexml_load_string(utf8_encode(file_get_contents($request_url))) or die('url not loading');
-//		$xml = simplexml_load_file($request_url) or die("url not loading");
-
-	  	$coordinates = $xml->Response->Placemark->Point->coordinates;
-	  	$coordinatesSplit = explode(",", $coordinates);
-	  	// Format: Longitude, Latitude, Altitude
-	  	$latitude = $coordinatesSplit[1];
-	  	$longitude = $coordinatesSplit[0];
-
-		$status = $xml->Response->Status->code;
-		if (strcmp($status, "200") == 0) {
-	  		// Successful geocode
-			$geocode_pending = false;
-	  		$coordinates = $xml->Response->Placemark->Point->coordinates;
-	  		$coordinatesSplit = explode(",", $coordinates);
-	  		// Format: Longitude, Latitude, Altitude
-	  		$latitude = $coordinatesSplit[1];
-	  		$longitude = $coordinatesSplit[0];
+			echo '<div class="warn">' . _('Warning - Geocode Integration is enabled, but no hosts are setup. Go to Geocode Setup') . '</div>';
 		} else {
-	  		// failure to geocode
-	  		$geocode_pending = false;
-	  		echo '<div class="page_help_text"><b>Geocode Notice:</b> Address: ' . $address . ' failed to geocode. ';
-	  		echo 'Received status ' . $status . '</div>';
+			$address = urlencode($_POST['BrAddress1'] . ', ' . $_POST['BrAddress2'] . ', ' . $_POST['BrAddress3'] . ', ' . $_POST['BrAddress4']);
+			$base_url = "https://" . MAPS_HOST . "/maps/api/geocode/xml?address=";
+			$request_url = $base_url . $address . '&key=' . KEY . '&sensor=true';
+			$xml = simplexml_load_string(utf8_encode(file_get_contents($request_url))) or die('url not loading');
+
+			$Status = $xml->status;
+			if (strcmp($Status, 'OK') == 0) {
+				// Successful geocode
+				$Geocode_Pending = false;
+				// Format: Longitude, Latitude, Altitude
+				$Latitude = $xml->result->geometry->location->lat;
+				$Longitude = $xml->result->geometry->location->lng;
+			} else {
+				// failure to geocode
+				$Geocode_Pending = false;
+				echo '<div class="page_help_text"><b>' . _('Geocode Notice') . ':</b> ' . _('Address') . ': ' . $address . ' ' . _('failed to geocode');
+				echo _('Received status') . ' ' . $Status . '</div>';
+			}
 		}
-	}
 	}
 	if (isset($SelectedBranch) AND $InputError !=1) {
 
 		/*SelectedBranch could also exist if submit had not been clicked this code would not run in this case cos submit is false of course see the 	delete code below*/
 
-		$sql = "UPDATE custbranch SET brname = '" . $_POST['BrName'] . "',
+		$SQL = "UPDATE custbranch SET brname = '" . $_POST['BrName'] . "',
 						braddress1 = '" . $_POST['BrAddress1'] . "',
 						braddress2 = '" . $_POST['BrAddress2'] . "',
 						braddress3 = '" . $_POST['BrAddress3'] . "',
 						braddress4 = '" . $_POST['BrAddress4'] . "',
 						braddress5 = '" . $_POST['BrAddress5'] . "',
 						braddress6 = '" . $_POST['BrAddress6'] . "',
-						lat = '" . $latitude . "',
-						lng = '" . $longitude . "',
-						specialinstructions = '" . $_POST['specialinstructions'] . "',
+						lat = '" . $Latitude . "',
+						lng = '" . $Longitude . "',
+						specialinstructions = '" . $_POST['SpecialInstructions'] . "',
 						phoneno='" . $_POST['PhoneNo'] . "',
 						faxno='" . $_POST['FaxNo'] . "',
 						fwddate= '" . $_POST['FwdDate'] . "',
 						contactname='" . $_POST['ContactName'] . "',
 						salesman= '" . $_POST['Salesman'] . "',
 						area='" . $_POST['Area'] . "',
-						estdeliverydays ='" . $_POST['EstDeliveryDays'] . "',
+						estdeliverydays ='" . filter_number_format($_POST['EstDeliveryDays']) . "',
 						email='" . $_POST['Email'] . "',
 						taxgroupid='" . $_POST['TaxGroup'] . "',
 						defaultlocation='" . $_POST['DefaultLocation'] . "',
@@ -160,19 +156,24 @@ if (isset($_POST['submit'])) {
 						brpostaddr2 = '" . $_POST['BrPostAddr2'] . "',
 						brpostaddr3 = '" . $_POST['BrPostAddr3'] . "',
 						brpostaddr4 = '" . $_POST['BrPostAddr4'] . "',
+						brpostaddr5 = '" . $_POST['BrPostAddr5'] . "',
 						disabletrans='" . $_POST['DisableTrans'] . "',
 						defaultshipvia='" . $_POST['DefaultShipVia'] . "',
 						custbranchcode='" . $_POST['CustBranchCode'] ."',
 						deliverblind='" . $_POST['DeliverBlind'] . "'
 					WHERE branchcode = '".$SelectedBranch."' AND debtorno='".$DebtorNo."'";
 
+		if ($_SESSION['SalesmanLogin'] != '') {
+			$SQL .= " AND custbranch.salesman='" . $_SESSION['SalesmanLogin'] . "'";
+		}
+
 		$msg = $_POST['BrName'] . ' '._('branch has been updated.');
 
 	} else if ($InputError !=1) {
 
 	/*Selected branch is null cos no item selected on first time round so must be adding a	record must be submitting new entries in the new Customer Branches form */
-		$SelectedBranch=$_POST['BranchCode'];
-		$sql = "INSERT INTO custbranch (branchcode,
+
+		$SQL = "INSERT INTO custbranch (branchcode,
 						debtorno,
 						brname,
 						braddress1,
@@ -198,6 +199,7 @@ if (isset($_POST['submit'])) {
 						brpostaddr2,
 						brpostaddr3,
 						brpostaddr4,
+						brpostaddr5,
 						disabletrans,
 						defaultshipvia,
 						custbranchcode,
@@ -211,10 +213,10 @@ if (isset($_POST['submit'])) {
 					'" . $_POST['BrAddress4'] . "',
 					'" . $_POST['BrAddress5'] . "',
 					'" . $_POST['BrAddress6'] . "',
-					'" . $latitude . "',
-					'" . $longitude . "',
-					'" . $_POST['specialinstructions'] . "',
-					'" . $_POST['EstDeliveryDays'] . "',
+					'" . $Latitude . "',
+					'" . $Longitude . "',
+					'" . $_POST['SpecialInstructions'] . "',
+					'" . filter_number_format($_POST['EstDeliveryDays']) . "',
 					'" . $_POST['FwdDate'] . "',
 					'" . $_POST['Salesman'] . "',
 					'" . $_POST['PhoneNo'] . "',
@@ -228,30 +230,23 @@ if (isset($_POST['submit'])) {
 					'" . $_POST['BrPostAddr2'] . "',
 					'" . $_POST['BrPostAddr3'] . "',
 					'" . $_POST['BrPostAddr4'] . "',
+					'" . $_POST['BrPostAddr5'] . "',
 					'" . $_POST['DisableTrans'] . "',
 					'" . $_POST['DefaultShipVia'] . "',
 					'" . $_POST['CustBranchCode'] ."',
-					'" . $_POST['DeliverBlind'] . "'
-					)";
+					'" . $_POST['DeliverBlind'] . "')";
 	}
 	echo '<br />';
-	$msg = _('Customer branch').' <b>' . $_POST['BranchCode'] . ': ' . $_POST['BrName'] . ' </b>'._('has been added, add another branch, or return to') . '<a href="index.php">'._('Main Menu') . '</a>';
+	$msg = _('Customer branch') . '<b> ' . $_POST['BranchCode'] . ': ' . $_POST['BrName'] . ' </b>' . _('has been added, add another branch, or return to the') . ' <a href="index.php">' . _('Main Menu') . '</a>';
 
 	//run the SQL from either of the above possibilites
 
 	$ErrMsg = _('The branch record could not be inserted or updated because');
 	if ($InputError==0) {
-		$result = DB_query($sql,$db, $ErrMsg);
-		if (isset($_POST['CashSalesBranch'])) {
-			$LocationsSQL="UPDATE locations
-					SET cashsalecustomer='".$DebtorNo."',
-						cashsalebranch='".$SelectedBranch."'
-					WHERE loccode='".$_POST['DefaultLocation']."'";
-			$LocationsResult=DB_query($LocationsSQL, $db);
-		}
+		$result = DB_query($SQL, $ErrMsg);
 	}
 
-	if (DB_error_no($db) ==0 and $InputError==0) {
+	if (DB_error_no() ==0 AND $InputError==0) {
 		prnMsg($msg,'success');
 		unset($_POST['BranchCode']);
 		unset($_POST['BrName']);
@@ -261,7 +256,7 @@ if (isset($_POST['submit'])) {
 		unset($_POST['BrAddress4']);
 		unset($_POST['BrAddress5']);
 		unset($_POST['BrAddress6']);
-		unset($_POST['specialinstructions']);
+		unset($_POST['SpecialInstructions']);
 		unset($_POST['EstDeliveryDays']);
 		unset($_POST['FwdDate']);
 		unset($_POST['Salesman']);
@@ -277,6 +272,7 @@ if (isset($_POST['submit'])) {
 		unset($_POST['BrPostAddr2']);
 		unset($_POST['BrPostAddr3']);
 		unset($_POST['BrPostAddr4']);
+		unset($_POST['BrPostAddr5']);
 		unset($_POST['DefaultShipVia']);
 		unset($_POST['CustBranchCode']);
 		unset($_POST['DeliverBlind']);
@@ -287,113 +283,139 @@ if (isset($_POST['submit'])) {
 
 // PREVENT DELETES IF DEPENDENT RECORDS IN 'DebtorTrans'
 
-	$sql= "SELECT COUNT(*) FROM debtortrans WHERE debtortrans.branchcode='".$SelectedBranch."' AND debtorno = '".$DebtorNo."'";
-	$result = DB_query($sql,$db);
+	$SQL= "SELECT COUNT(*) FROM debtortrans WHERE debtortrans.branchcode='".$SelectedBranch."' AND debtorno = '".$DebtorNo."'";
+
+	$result = DB_query($SQL);
 	$myrow = DB_fetch_row($result);
 	if ($myrow[0]>0) {
 		prnMsg(_('Cannot delete this branch because customer transactions have been created to this branch') . '<br />' .
 			 _('There are').' ' . $myrow[0] . ' '._('transactions with this Branch Code'),'error');
 
 	} else {
-		$sql= "SELECT COUNT(*) FROM salesanalysis WHERE salesanalysis.custbranch='".$SelectedBranch."' AND salesanalysis.cust = '".$DebtorNo."'";
+		$SQL= "SELECT COUNT(*) FROM salesanalysis WHERE salesanalysis.custbranch='".$SelectedBranch."' AND salesanalysis.cust = '".$DebtorNo."'";
 
-		$result = DB_query($sql,$db);
+		$result = DB_query($SQL);
 
 		$myrow = DB_fetch_row($result);
 		if ($myrow[0]>0) {
 			prnMsg(_('Cannot delete this branch because sales analysis records exist for it'),'error');
-			echo '<br />'._('There are').' ' . $myrow[0] . ' '._('sales analysis records with this Branch Code/customer');
+			echo '<br />' . _('There are').' ' . $myrow[0] . ' '._('sales analysis records with this Branch Code/customer');
 
 		} else {
 
-			$sql= "SELECT COUNT(*) FROM salesorders WHERE salesorders.branchcode='".$SelectedBranch."' AND salesorders.debtorno = '".$DebtorNo."'";
-			$result = DB_query($sql,$db);
+			$SQL= "SELECT COUNT(*) FROM salesorders WHERE salesorders.branchcode='".$SelectedBranch."' AND salesorders.debtorno = '".$DebtorNo."'";
+			$result = DB_query($SQL);
 
 			$myrow = DB_fetch_row($result);
 			if ($myrow[0]>0) {
 				prnMsg(_('Cannot delete this branch because sales orders exist for it') . '. ' . _('Purge old sales orders first'),'warn');
-				echo '<br />'._('There are').' ' . $myrow[0] . ' '._('sales orders for this Branch/customer');
+				echo '<br />' . _('There are').' ' . $myrow[0] . ' '._('sales orders for this Branch/customer');
 			} else {
 				// Check if there are any users that refer to this branch code
-				$sql= "SELECT COUNT(*) FROM www_users WHERE www_users.branchcode='".$SelectedBranch."' AND www_users.customerid = '".$DebtorNo."'";
+				$SQL= "SELECT COUNT(*) FROM www_users WHERE www_users.branchcode='".$SelectedBranch."' AND www_users.customerid = '".$DebtorNo."'";
 
-				$result = DB_query($sql,$db);
+				$result = DB_query($SQL);
 				$myrow = DB_fetch_row($result);
 
 				if ($myrow[0]>0) {
 					prnMsg(_('Cannot delete this branch because users exist that refer to it') . '. ' . _('Purge old users first'),'warn');
-					echo '<br />'._('There are').' ' . $myrow[0] . ' '._('users referring to this Branch/customer');
+					echo '<br />' . _('There are') . ' ' . $myrow[0] . ' '._('users referring to this Branch/customer');
 				} else {
+						// Check if there are any contract that refer to this branch code
+					$SQL = "SELECT COUNT(*) FROM contracts WHERE contracts.branchcode='" . $SelectedBranch . "' AND contracts.debtorno = '" . $DebtorNo . "'";
 
-					$sql="DELETE FROM custbranch WHERE branchcode='" . $SelectedBranch . "' AND debtorno='" . $DebtorNo . "'";
-					$ErrMsg = _('The branch record could not be deleted') . ' - ' . _('the SQL server returned the following message');
-						$result = DB_query($sql,$db,$ErrMsg);
-					if (DB_error_no($db)==0){
-						prnMsg(_('Branch Deleted'),'success');
+					$result = DB_query($SQL);
+					$myrow = DB_fetch_row($result);
+
+					if ($myrow[0]>0) {
+						prnMsg(_('Cannot delete this branch because contract have been created that refer to it') . '. ' . _('Purge old contracts first'),'warn');
+						echo '<br />' . _('There are') . ' ' . $myrow[0] . ' '._('contracts referring to this branch/customer');
+					} else {
+						//check if this it the last customer branch - don't allow deletion of the last branch
+						$SQL = "SELECT COUNT(*) FROM custbranch WHERE debtorno='" . $DebtorNo . "'";
+
+						$result = DB_query($SQL);
+						$myrow = DB_fetch_row($result);
+
+						if ($myrow[0]==1) {
+							prnMsg(_('Cannot delete this branch because it is the only branch defined for this customer.'),'warn');
+						} else {
+							$SQL="DELETE FROM custbranch WHERE branchcode='" . $SelectedBranch . "' AND debtorno='" . $DebtorNo . "'";
+							if ($_SESSION['SalesmanLogin'] != '') {
+								$SQL .= " AND custbranch.salesman='" . $_SESSION['SalesmanLogin'] . "'";
+							}
+							$ErrMsg = _('The branch record could not be deleted') . ' - ' . _('the SQL server returned the following message');
+							$result = DB_query($SQL,$ErrMsg);
+							if (DB_error_no()==0){
+								prnMsg(_('Branch Deleted'),'success');
+							}
+						}
 					}
 				}
 			}
 		}
-	} //end ifs to test if the branch can be deleted
+	}//end ifs to test if the branch can be deleted
 
 }
 if (!isset($SelectedBranch)){
 
 /* It could still be the second time the page has been run and a record has been selected for modification - SelectedBranch will exist because it was sent with the new call. If its the first time the page has been displayed with no parameters then none of the above are true and the list of branches will be displayed with links to delete or edit each. These will call the same page again and allow update/input or deletion of the records*/
 
-	$sql = "SELECT debtorsmaster.name,
-			custbranch.branchcode,
-			brname,
-			salesman.salesmanname,
-			areas.areadescription,
-			contactname,
-			phoneno,
-			faxno,
-			custbranch.email,
-			taxgroups.taxgroupdescription,
-			custbranch.branchcode,
-			custbranch.disabletrans
-		FROM custbranch,
-			debtorsmaster,
-			areas,
-			salesman,
-			taxgroups
-		WHERE custbranch.debtorno=debtorsmaster.debtorno
-		AND custbranch.area=areas.areacode
-		AND custbranch.salesman=salesman.salesmancode
-		AND custbranch.taxgroupid=taxgroups.taxgroupid
-		AND custbranch.debtorno = '".$DebtorNo."'";
+	$SQL = "SELECT debtorsmaster.name,
+					custbranch.branchcode,
+					brname,
+					salesman.salesmanname,
+					areas.areadescription,
+					contactname,
+					phoneno,
+					faxno,
+					custbranch.email,
+					taxgroups.taxgroupdescription,
+					custbranch.disabletrans
+				FROM custbranch INNER JOIN debtorsmaster
+				ON custbranch.debtorno=debtorsmaster.debtorno
+				INNER JOIN areas
+				ON custbranch.area=areas.areacode
+				INNER JOIN salesman
+				ON custbranch.salesman=salesman.salesmancode
+				INNER JOIN taxgroups
+				ON custbranch.taxgroupid=taxgroups.taxgroupid
+				WHERE custbranch.debtorno = '".$DebtorNo."'";
 
-	$result = DB_query($sql,$db);
+	if ($_SESSION['SalesmanLogin'] != '') {
+		$SQL .= " AND custbranch.salesman='" . $_SESSION['SalesmanLogin'] . "'";
+	}
+
+	$result = DB_query($SQL);
 	$myrow = DB_fetch_row($result);
 	$TotalEnable = 0;
 	$TotalDisable = 0;
 	if ($myrow) {
-		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') .'" alt="" />' .
-			' ' . _('Branches defined for'). ' '. $DebtorNo . ' - ' . $myrow[0] . '</p>';
-		echo '<table class="selection">';
-		echo '<tr><th>'._('Code').'</th>
-			<th>'._('Name').'</th>
-			<th>'._('Branch Contact').'</th>
-			<th>'._('Salesman').'</th>
-			<th>'._('Area').'</th>
-			<th>'._('Phone No').'</th>
-			<th>'._('Fax No').'</th>
-			<th>'._('Email').'</th>
-			<th>'._('Tax Group').'</th>
-			<th>'._('Enabled?').'</th></tr>';
-		$k=0;
+		echo '<p class="page_title_text"><img alt="" src="', $RootPath, '/css/', $Theme,
+			'/images/customer.png" title="',// Icon image.
+			_('Customer'), '" /> ',// Icon title.
+			_('Branches defined for'), ' ', $DebtorNo, ' - ', $myrow[0], '</p>';// Page title.
+		echo '<table class="selection">
+			<thead>
+			<tr>
+				<th class="ascending">' . _('Code') . '</th>
+				<th class="ascending">' . _('Name') . '</th>
+				<th class="ascending">' . _('Branch Contact') . '</th>
+				<th class="ascending">' . _('Salesman') . '</th>
+				<th class="ascending">' . _('Area') . '</th>
+				<th class="ascending">' . _('Phone No') . '</th>
+				<th class="ascending">' . _('Fax No') . '</th>
+				<th class="ascending">' . _('Email') . '</th>
+				<th class="ascending">' . _('Tax Group') . '</th>
+				<th class="ascending">' . _('Enabled?') . '</th>
+				</tr>
+			</thead>
+			<tbody>';
+
 		do {
-			if ($k==1){
-				echo '<tr class="EvenTableRows">';
-				$k=0;
-			} else {
-				echo '<tr class="OddTableRows">';
-				$k=1;
-			}
 
-
-			printf('<td>%s</td>
+			printf('<tr class="striped_row">
+				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
@@ -403,9 +425,9 @@ if (!isset($SelectedBranch)){
 				<td><a href="Mailto:%s">%s</a></td>
 				<td>%s</td>
 				<td>%s</td>
-				<td><a href="%s?DebtorNo=%s&SelectedBranch=%s">%s</td>
-				<td><a href="%s?DebtorNo=%s&SelectedBranch=%s&delete=yes" onclick=\'return confirm("' . _('Are you sure you wish to delete this branch?') . '");\'>%s</td></tr>',
-				$myrow[10],
+				<td><a href="%s?DebtorNo=%s&amp;SelectedBranch=%s">%s</a></td>
+				<td><a href="%s?DebtorNo=%s&amp;SelectedBranch=%s&amp;delete=yes" onclick=\'return confirm("' . _('Are you sure you wish to delete this branch?') . '");\'>%s</a></td></tr>',
+				$myrow[1],
 				$myrow[2],
 				$myrow[5],
 				$myrow[3],
@@ -415,39 +437,49 @@ if (!isset($SelectedBranch)){
 				$myrow[8],
 				$myrow[8],
 				$myrow[9],
-				($myrow[11]?_('No'):_('Yes')),
-				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'),
+				($myrow[10]?_('No'):_('Yes')),
+				htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8'),
 				$DebtorNo,
 				urlencode($myrow[1]),
 				_('Edit'),
-				htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'),
+				htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8'),
 				$DebtorNo,
 				urlencode($myrow[1]),
 				_('Delete Branch'));
-			if ($myrow[11]){ $TotalDisable++; }
-			else { $TotalEnable++; }
 
+			if ($myrow[10]){
+				$TotalDisable++;
+			} else {
+				$TotalEnable++;
+			}
 		} while ($myrow = DB_fetch_row($result));
 		//END WHILE LIST LOOP
-		echo '</table><br /><table class="selection"><tr><td><div class="centre">';
-		echo '<b>'.$TotalEnable.'</b> ' . _('Branches are enabled.') . '<br />';
-		echo '<b>'.$TotalDisable.'</b> ' . _('Branches are disabled.') . '<br />';
-		echo '<b>'.($TotalEnable+$TotalDisable). '</b> ' . _('Total Branches') . '</div></td></tr></table>';
-	} else {
-		$sql = "SELECT debtorsmaster.name,
-				address1,
-				address2,
-				address3,
-				address4,
-				address5,
-				address6
-			FROM debtorsmaster
-			WHERE debtorno = '".$DebtorNo."'";
 
-		$result = DB_query($sql,$db);
+		echo '</tbody>
+			</table>
+			<table class="selection">
+			<tr>
+				<td><div class="centre">';
+		echo '<b>' . $TotalEnable . '</b> ' . _('Branches are enabled.') . '<br />';
+		echo '<b>' . $TotalDisable . '</b> ' . _('Branches are disabled.') . '<br />';
+		echo '<b>' . ($TotalEnable+$TotalDisable). '</b> ' . _('Total Branches') . '</div></td>
+			</tr>
+			</table>';
+	} else {
+		$SQL = "SELECT debtorsmaster.name,
+						address1,
+						address2,
+						address3,
+						address4,
+						address5,
+						address6
+					FROM debtorsmaster
+					WHERE debtorno = '".$DebtorNo."'";
+
+		$result = DB_query($SQL);
 		$myrow = DB_fetch_row($result);
-		echo '<div class="page_help_text">'._('No Branches are defined for').' - '.$myrow[0]. '. ' . _('You must have a minimum of one branch for each Customer. Please add a branch now.') .'</div>';
-		$_POST['BranchCode'] = substr($DebtorNo,0,10);
+		echo '<div class="page_help_text">' . _('No Branches are defined for').' - '.$myrow[0]. '. ' . _('You must have a minimum of one branch for each Customer. Please add a branch now.') . '</div>';
+		$_POST['BranchCode'] = mb_substr($DebtorNo,0,10);
 		$_POST['BrName'] = $myrow[0];
 		$_POST['BrAddress1'] = $myrow[1];
 		$_POST['BrAddress2'] = $myrow[2];
@@ -460,61 +492,67 @@ if (!isset($SelectedBranch)){
 }
 
 if (!isset($_GET['delete'])) {
-	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') .'">';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') .'">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	if (isset($SelectedBranch)) {
 		//editing an existing branch
 
-		$sql = "SELECT branchcode,
-				brname,
-				braddress1,
-				braddress2,
-				braddress3,
-				braddress4,
-				braddress5,
-				braddress6,
-				specialinstructions,
-				estdeliverydays,
-				fwddate,
-				salesman,
-				area,
-				phoneno,
-				faxno,
-				contactname,
-				email,
-				taxgroupid,
-				defaultlocation,
-				brpostaddr1,
-				brpostaddr2,
-				brpostaddr3,
-				brpostaddr4,
-				disabletrans,
-				defaultshipvia,
-				custbranchcode,
-				deliverblind
-			FROM custbranch
-			WHERE branchcode='".$SelectedBranch."'
-			AND debtorno='".$DebtorNo."'";
+		$SQL = "SELECT branchcode,
+						brname,
+						braddress1,
+						braddress2,
+						braddress3,
+						braddress4,
+						braddress5,
+						braddress6,
+						specialinstructions,
+						estdeliverydays,
+						fwddate,
+						salesman,
+						area,
+						phoneno,
+						faxno,
+						contactname,
+						email,
+						taxgroupid,
+						defaultlocation,
+						brpostaddr1,
+						brpostaddr2,
+						brpostaddr3,
+						brpostaddr4,
+						brpostaddr5,
+						disabletrans,
+						defaultshipvia,
+						custbranchcode,
+						deliverblind
+					FROM custbranch
+					WHERE branchcode='".$SelectedBranch."'
+					AND debtorno='".$DebtorNo."'";
 
-		$result = DB_query($sql, $db);
+		if ($_SESSION['SalesmanLogin'] != '') {
+			$SQL .= " AND custbranch.salesman='" . $_SESSION['SalesmanLogin'] . "'";
+		}
+
+		$result = DB_query($SQL);
 		$myrow = DB_fetch_array($result);
 
 		if ($InputError==0) {
 			$_POST['BranchCode'] = $myrow['branchcode'];
-			$_POST['BrName']  = $myrow['brname'];
-			$_POST['BrAddress1']  = $myrow['braddress1'];
-			$_POST['BrAddress2']  = $myrow['braddress2'];
-			$_POST['BrAddress3']  = $myrow['braddress3'];
-			$_POST['BrAddress4']  = $myrow['braddress4'];
-			$_POST['BrAddress5']  = $myrow['braddress5'];
-			$_POST['BrAddress6']  = $myrow['braddress6'];
-			$_POST['specialinstructions']  = $myrow['specialinstructions'];
-			$_POST['BrPostAddr1']  = $myrow['brpostaddr1'];
-			$_POST['BrPostAddr2']  = $myrow['brpostaddr2'];
-			$_POST['BrPostAddr3']  = $myrow['brpostaddr3'];
-			$_POST['BrPostAddr4']  = $myrow['brpostaddr4'];
-			$_POST['EstDeliveryDays']  = $myrow['estdeliverydays'];
+			$_POST['BrName'] = $myrow['brname'];
+			$_POST['BrAddress1'] = $myrow['braddress1'];
+			$_POST['BrAddress2'] = $myrow['braddress2'];
+			$_POST['BrAddress3'] = $myrow['braddress3'];
+			$_POST['BrAddress4'] = $myrow['braddress4'];
+			$_POST['BrAddress5'] = $myrow['braddress5'];
+			$_POST['BrAddress6'] = $myrow['braddress6'];
+			$_POST['SpecialInstructions'] = $myrow['specialinstructions'];
+			$_POST['BrPostAddr1'] = $myrow['brpostaddr1'];
+			$_POST['BrPostAddr2'] = $myrow['brpostaddr2'];
+			$_POST['BrPostAddr3'] = $myrow['brpostaddr3'];
+			$_POST['BrPostAddr4'] = $myrow['brpostaddr4'];
+			$_POST['BrPostAddr5'] = $myrow['brpostaddr5'];
+			$_POST['EstDeliveryDays'] = locale_number_format($myrow['estdeliverydays'],0);
 			$_POST['FwdDate'] =$myrow['fwddate'];
 			$_POST['ContactName'] = $myrow['contactname'];
 			$_POST['Salesman'] =$myrow['salesman'];
@@ -533,35 +571,38 @@ if (!isset($_GET['delete'])) {
 		echo '<input type="hidden" name="SelectedBranch" value="' . $SelectedBranch . '" />';
 		echo '<input type="hidden" name="BranchCode" value="' . $_POST['BranchCode'] . '" />';
 
-		echo '<p Class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') . '" alt="" />' .
-			' ' . _('Change Details for Branch'). ' '. $SelectedBranch . '</p>';
+		echo '<p class="page_title_text"><img src="'.$RootPath.'/css/'.$Theme.'/images/customer.png" title="' . _('Customer') . '" alt="" />
+				 ' . ' ' . _('Change Details for Branch'). ' '. $SelectedBranch . '</p>';
 		if (isset($SelectedBranch)) {
-			echo '<div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '?DebtorNo=' . $DebtorNo. '">' . _('Show all branches defined for'). ' '. $DebtorNo . '</a></div>';
+			echo '<div class="centre"><a href="' . htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '?DebtorNo=' . $DebtorNo. '">' . _('Show all branches defined for'). ' '. $DebtorNo . '</a></div>';
 		}
-		echo '<br /><table class="selection">';
-		echo '<tr><th colspan="2"><div class="centre"><b>'._('Change Branch').'</b></th></tr>';
-		echo '<tr><td>'._('Branch Code').':</td><td>';
-		echo $_POST['BranchCode'] . '</td></tr>';
+		echo '<fieldset>
+				<legend>', _('Edit Branch Details'), '</legend>
+				<field>
+					<label for="BranchCode">' . _('Branch Code').':</label>
+					<fieldtext>' . $_POST['BranchCode'] . '</fieldtext>
+				</field>';
 
-	} else { //end of if $SelectedBranch only do the else when a new record is being entered
+	} else {//end of if $SelectedBranch only do the else when a new record is being entered
 
-	/* SETUP ANY $_GET VALUES THAT ARE PASSED.  This really is just used coming from the Customers.php when a new customer is created.
+	/* SETUP ANY $_GET VALUES THAT ARE PASSED. This really is just used coming from the Customers.php when a new customer is created.
 			Maybe should only do this when that page is the referrer?
 	*/
 		if (isset($_GET['BranchCode'])){
-			$sql="SELECT name,
-					address1,
-					address2,
-					address3,
-					address4,
-					address5,
-					address6
-				FROM debtorsmaster
-				WHERE debtorno='".$_GET['BranchCode']."'";
-			$result = DB_query($sql, $db);
+			$SQL="SELECT name,
+						address1,
+						address2,
+						address3,
+						address4,
+						address5,
+						address6
+					FROM
+					debtorsmaster
+					WHERE debtorno='".$_GET['BranchCode']."'";
+			$result = DB_query($SQL);
 			$myrow = DB_fetch_array($result);
 			$_POST['BranchCode'] = $_GET['BranchCode'];
-			$_POST['BrName']	 = $myrow['name'];
+			$_POST['BrName'] = $myrow['name'];
 		 	$_POST['BrAddress1'] = $myrow['addrsss1'];
 			$_POST['BrAddress2'] = $myrow['addrsss2'];
 			$_POST['BrAddress3'] = $myrow['addrsss3'];
@@ -572,243 +613,375 @@ if (!isset($_GET['delete'])) {
 		if (!isset($_POST['BranchCode'])) {
 			$_POST['BranchCode']='';
 		}
-		echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/customer.png" title="' . _('Customer') . '" alt="" />' . ' ' . _('Add a Branch').'</p>';
-		echo '<table class="selection"><tr><td>'._('Branch Code'). ':</td>
-			<td><input ' .(in_array('BranchCode',$Errors) ?  'class="inputerror"' : '' ) . ' tabindex="1" type="text" name="BranchCode" size="12" maxlength="10" value="' . $_POST['BranchCode'] . '" /></td></tr>';
+		echo '<p class="page_title_text"><img src="'.$RootPath.'/css/'.$Theme.'/images/customer.png" title="' . _('Customer') . '" alt="" />' . ' ' . _('Add a Branch') . '</p>';
+		echo '<fieldset>
+				<legend>', _('Create New Branch Details'), '</legend>
+				<field>
+					<label for="BranchCode">' . _('Branch Code'). ':</label>
+					<input data-type="no-illegal-chars" ' . (in_array('BranchCode',$Errors) ? 'class="inputerror"' : '' ) . ' tabindex="1" type="text" name="BranchCode" required="required" title ="" placeholder="'._('alpha-numeric').'" size="12" maxlength="10" value="' . $_POST['BranchCode'] . '" />
+					<fieldhelp>'._('Up to 10 characters for the branch code. The following characters are prohibited:') . ' \' &quot; + . &amp; \\ &gt; &lt;</fieldhelp>
+				</field>';
 		$_POST['DeliverBlind'] = $_SESSION['DefaultBlindPackNote'];
-	}
-
-	//SQL to poulate account selection boxes
-	$sql = "SELECT salesmanname, salesmancode FROM salesman";
-
-	$result = DB_query($sql,$db);
-
-	if (DB_num_rows($result)==0){
-		echo '</table>';
-		prnMsg(_('There are no sales people defined as yet') . ' - ' . _('customer branches must be allocated to a sales person') . '. ' . _('Please use the link below to define at least one sales person'),'error');
-		echo '<p align="center"><a href="' . $rootpath . '/SalesPeople.php?">'._('Define Sales People') . '</a></p>';
-		include('includes/footer.inc');
-		exit;
 	}
 
 	echo '<input type="hidden" name="DebtorNo" value="'. $DebtorNo . '" />';
 
-
-	echo '<tr><td>'._('Branch Name').':</td>';
+	echo '<field>
+			<label for="BrName">', _('Branch Name').':</label>';
 	if (!isset($_POST['BrName'])) {$_POST['BrName']='';}
-	echo '<td><input tabindex="2" type="text" name="BrName" size="41" maxlength="40" value="'. $_POST['BrName'].'" /></td></tr>';
-	echo '<tr><td>'._('Branch Contact').':</td>';
+	echo '<input tabindex="2" type="text" autofocus="autofocus" required="required" name="BrName" title="" minlength="5" size="41" maxlength="40" value="'. $_POST['BrName'].'" />
+		<fieldhelp>' . _('The branch name should identify the particular delivery address of the customer and must be entered') . '</fieldhelp>
+	</field>';
+	
+	echo '<field>
+			<label for="ContactName">' . _('Branch Contact').':</label>';
 	if (!isset($_POST['ContactName'])) {$_POST['ContactName']='';}
-	echo '<td><input tabindex="3" type="text" name="ContactName" size="41" maxlength="40" value="'. $_POST['ContactName'].'" /></td></tr>';
-	echo '<tr><td>'._('Street Address 1 (Street)').':</td>';
-	if (!isset($_POST['BrAddress1'])) {$_POST['BrAddress1']='';}
-	echo '<td><input tabindex="4" type="text" name="BrAddress1" size="41" maxlength="40" value="'. $_POST['BrAddress1'].'" /></td></tr>';
-	echo '<tr><td>'._('Street Address 2 (Suburb/City)').':</td>';
-	if (!isset($_POST['BrAddress2'])) {$_POST['BrAddress2']='';}
-	echo '<td><input tabindex="5" type="text" name="BrAddress2" size="41" maxlength="40" value="'. $_POST['BrAddress2'].'" /></td></tr>';
-	echo '<tr><td>'._('Street Address 3 (State)').':</td>';
-	if (!isset($_POST['BrAddress3'])) {$_POST['BrAddress3']='';}
-	echo '<td><input tabindex="6" type="text" name="BrAddress3" size="41" maxlength="40" value="'. $_POST['BrAddress3'].'" /></td></tr>';
-	echo '<tr><td>'._('Street Address 4 (Postal Code)').':</td>';
-	if (!isset($_POST['BrAddress4'])) {$_POST['BrAddress4']='';}
-	echo '<td><input tabindex="7" type="text" name="BrAddress4" size="31" maxlength="40" value="'. $_POST['BrAddress4'].'" /></td></tr>';
-	echo '<tr><td>'._('Street Address 5').':</td>';
-	if (!isset($_POST['BrAddress5'])) {$_POST['BrAddress5']='';}
-	echo '<td><input tabindex="8" type="text" name="BrAddress5" size="21" maxlength="20" value="'. $_POST['BrAddress5'].'" /></td></tr>';
-	echo '<tr><td>'._('Street Address 6').':</td>';
-	if (!isset($_POST['BrAddress6'])) {$_POST['BrAddress6']='';}
-	echo '<td><input tabindex="9" type="text" name="BrAddress6" size="16" maxlength="15" value="'. $_POST['BrAddress6'].'" /></td></tr>';
-	echo '<tr><td>'._('Special Instructions').':</td>';
-	if (!isset($_POST['specialinstructions'])) {$_POST['specialinstructions']='';}
-	echo '<td><input tabindex="10" type="text" name="specialinstructions" size="56" value="'. $_POST['specialinstructions'].'" /></td></tr>';
-	echo '<tr><td>'._('Default days to deliver').':</td>';
-	if (!isset($_POST['EstDeliveryDays'])) {$_POST['EstDeliveryDays']=0;}
-	echo '<td><input ' .(in_array('EstDeliveryDays',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="11" type="text" class="number" name="EstDeliveryDays" size="4" maxlength="2" value="'. $_POST['EstDeliveryDays'].'" /></td></tr>';
-	echo '<tr><td>'._('Forward Date After (day in month)').':</td>';
-	if (!isset($_POST['FwdDate'])) {$_POST['FwdDate']=0;}
-	echo '<td><input ' .(in_array('FwdDate',$Errors) ?  'class="inputerror"' : '' ) .' tabindex="12" type="text" class="number" name="FwdDate" size="4" maxlength="2" value="'. $_POST['FwdDate'].'" /></td></tr>';
-
-	echo '<tr><td>'._('Salesperson').':</td>';
-	echo '<td><select tabindex="13" name="Salesman">';
-
-	while ($myrow = DB_fetch_array($result)) {
-		if (isset($_POST['Salesman']) and $myrow['salesmancode']==$_POST['Salesman']) {
-			echo '<option selected="True" value="'.$myrow['salesmancode'] . '">' . $myrow['salesmanname'] . '</option>';
+	echo '<input tabindex="3" type="text" name="ContactName" required="required" size="41" maxlength="40" value="'. $_POST['ContactName'].'" />
+		</field>';
+		
+	echo '<field>
+			<label for="BrAddress1">' . _('Street Address 1 (Street)').':</label>';
+	if (!isset($_POST['BrAddress1'])) {
+		$_POST['BrAddress1']='';
+	}
+	echo '<input tabindex="4" type="text" name="BrAddress1" size="41" maxlength="40" value="'. $_POST['BrAddress1'].'" />
+		</field>';
+		
+	echo '<field>
+			<label for="BrAddress2">' . _('Street Address 2 (Street)').':</label>';
+	if (!isset($_POST['BrAddress2'])) {
+		$_POST['BrAddress2']='';
+	}
+	echo '<input tabindex="5" type="text" name="BrAddress2" size="41" maxlength="40" value="'. $_POST['BrAddress2'].'" />
+		</field>';
+		
+	echo '<field>
+			<label for="BrAddress3">' . _('Street Address 3 (Suburb/City)').':</label>';
+	if (!isset($_POST['BrAddress3'])) {
+		$_POST['BrAddress3']='';
+	}
+	echo '<input tabindex="6" type="text" name="BrAddress3" size="41" maxlength="40" value="'. $_POST['BrAddress3'].'" />
+		</field>';
+		
+	echo '<field>
+			<label for="BrAddress4">' . _('Street Address 4 (State/Province)').':</label>';
+	if (!isset($_POST['BrAddress4'])) {
+		$_POST['BrAddress4']='';
+	}
+	echo '<input tabindex="7" type="text" name="BrAddress4" size="51" maxlength="50" value="'. $_POST['BrAddress4'].'" />
+		</field>';
+		
+	echo '<field>
+			<label for="BrAddress5">' . _('Street Address 5 (Postal Code)').':</label>';
+	if (!isset($_POST['BrAddress5'])) {
+		$_POST['BrAddress5']='';
+	}
+	echo '<input tabindex="8" type="text" name="BrAddress5" size="21" maxlength="20" value="'. $_POST['BrAddress5'].'" />
+		</field>';
+		
+	echo '<field>
+			<label for="BrAddress6">' . _('Country').':</label>';
+	if (!isset($_POST['BrAddress6'])) {
+		$_POST['BrAddress6']='';
+	}
+	echo '<select name="BrAddress6">';
+	foreach ($CountriesArray as $CountryEntry => $CountryName){
+		if (isset($_POST['BrAddress6']) AND ($_POST['BrAddress6'] == $CountryName)) {
+			echo '<option selected="selected" value="' . $CountryName . '">' . $CountryName . '</option>';
+		} elseif (!isset($_POST['BrAddress6']) AND $CountryName == "") {
+			echo '<option selected="selected" value="' . $CountryName . '">' . $CountryName . '</option>';
 		} else {
-			echo '<option value="'.$myrow['salesmancode'] . '">' . $myrow['salesmanname'] . '</option>';
+			echo '<option value="' . $CountryName . '">' . $CountryName . '</option>';
 		}
-	} //end while loop
+	}
+	echo '</select>
+		</field>';
 
-	echo '</select></td></tr>';
+	echo '<field>
+			<label for="SpecialInstructions">' . _('Special Instructions').':</label>';
+	if (!isset($_POST['SpecialInstructions'])) {
+		$_POST['SpecialInstructions']='';
+	}
+	echo '<input tabindex="10" type="text" name="SpecialInstructions" size="56" value="'. $_POST['SpecialInstructions'].'" />
+		</field>';
+		
+	echo '<field>
+			<label for=EstDeliveryDays">' . _('Default days to deliver').':</label>';
+	if (!isset($_POST['EstDeliveryDays'])) {
+		$_POST['EstDeliveryDays']=0;
+	}
+	echo '<input ' .(in_array('EstDeliveryDays',$Errors) ? 'class="inputerror"' : '' ) .' tabindex="11" type="text" class="integer" name="EstDeliveryDays" size="4" maxlength="2" value="'. $_POST['EstDeliveryDays'].'" />
+		</field>';
+		
+	echo '<field>
+			<label for="FwdDate">' . _('Forward Date After (day in month)').':</label>';
+	if (!isset($_POST['FwdDate'])) {
+		$_POST['FwdDate']=0;
+	}
+	echo '<input ' .(in_array('FwdDate',$Errors) ? 'class="inputerror"' : '' ) .' tabindex="12" class="integer" name="FwdDate" size="4" maxlength="2" value="'. $_POST['FwdDate'].'" />
+		</field>';
 
-	DB_data_seek($result,0);
+	if ($_SESSION['SalesmanLogin'] != '') {
+		echo '<field>
+				<label for="Salesman">' . _('Salesperson').':</label>
+				<fieldtext>', $_SESSION['UsersRealName'], '</fieldtext>
+			</field>';
+	} else {
 
-	$sql = "SELECT areacode, areadescription FROM areas";
-	$result = DB_query($sql,$db);
+		//SQL to poulate account selection boxes
+		$SQL = "SELECT salesmanname,
+						salesmancode
+				FROM salesman
+				WHERE current = 1
+				ORDER BY salesmanname";
+
+		$result = DB_query($SQL);
+
+		if (DB_num_rows($result)==0){
+			echo '</fieldset>';
+			prnMsg(_('There are no sales people defined as yet') . ' - ' . _('customer branches must be allocated to a sales person') . '. ' . _('Please use the link below to define at least one sales person'),'error');
+			echo '<p align="center"><a href="' . $RootPath . '/SalesPeople.php">' . _('Define Sales People') . '</a>';
+			include('includes/footer.php');
+			exit;
+		}
+
+		echo '<field>
+				<label for="Salesman">' . _('Salesperson').':</label>
+				<select tabindex="13" name="Salesman">';
+		while ($myrow = DB_fetch_array($result)) {
+			if (isset($_POST['Salesman']) AND $myrow['salesmancode']==$_POST['Salesman']) {
+				echo '<option selected="selected" value="';
+			} else {
+				echo '<option value="';
+			}
+			echo $myrow['salesmancode'] . '">' . $myrow['salesmanname'] . '</option>';
+
+		}//end while loop
+		echo '</select>
+			</field>';
+
+	//	DB_data_seek($result,0);//by thumb
+	}
+	$SQL = "SELECT areacode, areadescription FROM areas ORDER BY areadescription";
+	$result = DB_query($SQL);
 	if (DB_num_rows($result)==0){
-		echo '</table>';
+		echo '</fieldset>';
 		prnMsg(_('There are no areas defined as yet') . ' - ' . _('customer branches must be allocated to an area') . '. ' . _('Please use the link below to define at least one sales area'),'error');
-		echo '<br /><a href="'.$rootpath.'/Areas.php?">'._('Define Sales Areas').'</a>';
-		include('includes/footer.inc');
+		echo '<br /><a href="' . $RootPath. '/Areas.php">' . _('Define Sales Areas') . '</a>';
+		include('includes/footer.php');
 		exit;
 	}
 
-	echo '<tr><td>'._('Sales Area').':</td>';
-	echo '<td><select tabindex="14" name="Area">';
+	echo '<field>
+			<label for="Area">' . _('Sales Area').':</label>
+			<select tabindex="14" name="Area">';
 	while ($myrow = DB_fetch_array($result)) {
-		if (isset($_POST['Area']) and $myrow['areacode']==$_POST['Area']) {
-			echo '<option selected="True" value="'.$myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
+		if (isset($_POST['Area']) AND $myrow['areacode']==$_POST['Area']) {
+			echo '<option selected="selected" value="';
 		} else {
-			echo '<option value="'.$myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
+			echo '<option value="';
 		}
-	} //end while loop
+		echo $myrow['areacode'] . '">' . $myrow['areadescription'] . '</option>';
 
-
-	echo '</select></td></tr>';
+	}//end while loop
+	echo '</select>
+		</field>';
 	DB_data_seek($result,0);
 
-	$sql = "SELECT loccode, locationname FROM locations";
-	$result = DB_query($sql,$db);
+	$SQL = "SELECT locations.loccode,
+					locationname
+			FROM locations
+			INNER JOIN locationusers
+			ON locationusers.loccode=locations.loccode
+				AND locationusers.userid='" . $_SESSION['UserID'] . "'
+				AND locationusers.canupd=1
+			WHERE locations.allowinvoicing='1'
+			ORDER BY locationname";
+	$result = DB_query($SQL);
 
 	if (DB_num_rows($result)==0){
 		echo '</table>';
-		prnMsg(_('There are no stock locations defined as yet') . ' - ' . _('customer branches must refer to a default location where stock is normally drawn from') . '. ' . _('Please use the link below to define at least one stock location'),'error');
-		echo '<br /><a href="'.$rootpath.'/Locations.php?">'._('Define Stock Locations').'</a>';
-		include('includes/footer.inc');
+		prnMsg(_('There are no stock locations defined for which this user has access to as yet') . ' - ' . _('customer branches must refer to a default location where stock is normally drawn from') . '. ' . _('Please use the link below to define at least one stock location'),'error');
+		echo '<br /><a href="', $RootPath, '/Locations.php">', _('Define Stock Locations'), '</a>';
+		include('includes/footer.php');
 		exit;
 	}
 
-	echo '<tr><td>'._('Draw Stock From').':</td>';
-	echo '<td><select tabindex="15" name="DefaultLocation">';
-
+	echo '<field>
+			<label for="DefaultLocation">', _('Draw Stock From'), ':</label>
+			<select name="DefaultLocation" tabindex="15">';
 	while ($myrow = DB_fetch_array($result)) {
-		if (isset($_POST['DefaultLocation']) and $myrow['loccode']==$_POST['DefaultLocation']) {
-			echo '<option selected="True" value="'.$myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+		if (isset($_POST['DefaultLocation']) AND $myrow['loccode']==$_POST['DefaultLocation']) {
+			echo '<option selected="selected" value="';
 		} else {
-			echo '<option value="'.$myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option value="';
 		}
-	} //end while loop
+		echo $myrow['loccode'], '">', $myrow['locationname'], '</option>';
 
-	echo '</select></td></tr>';
-
-	if (isset($SelectedBranch)) {
-		$sql="SELECT count(loccode)
-			FROM locations
-			WHERE loccode='".$_POST['DefaultLocation']."'
-				AND cashsalecustomer='".$DebtorNo."'
-				AND cashsalebranch='".$SelectedBranch."'";
-		$result=DB_query($sql, $db);
-		$myrow=DB_fetch_row($result);
-		if ($myrow[0]>0) {
-			$IsCashSaleBranch=True;
-		} else {
-			$IsCashSaleBranch=False;
-		}
-	} else {
-		$IsCashSaleBranch=False;
+	}// End while loop.
+	echo '</select>
+		</field>';
+		
+	echo '<field>
+			<label for="PhoneNo">' . _('Phone Number').':</label>';
+	if (!isset($_POST['PhoneNo'])) {
+		$_POST['PhoneNo']='';
 	}
+	echo '<input tabindex="16" type="tel" name="PhoneNo" pattern="[0-9+()\s-]*" size="22" maxlength="20" value="'. $_POST['PhoneNo'].'" />
+		</field>';
 
-	echo '<tr><td>'. _('Use as default for cash sales from this location').'</td>';
-	if ($IsCashSaleBranch) {
-		echo '<td><input type="checkbox" checked="True" name="CashSalesBranch" /></td></tr>';
-	} else {
-		echo '<td><input type="checkbox" name="CashSalesBranch" /></td></tr>';
+	echo '<field>
+			<label for="FaxNo">' . _('Fax Number').':</label>';
+	if (!isset($_POST['FaxNo'])) {
+		$_POST['FaxNo']='';
 	}
-	echo '<tr><td>'._('Phone Number').':</td>';
-	if (!isset($_POST['PhoneNo'])) {$_POST['PhoneNo']='';}
-	echo '<td><input tabindex="16" type="text" name="PhoneNo" size="22" maxlength="20" value="'. $_POST['PhoneNo'].'" /></td></tr>';
+	echo '<input tabindex="17" type="tel" name="FaxNo" pattern="[0-9+()\s-]*" size="22" maxlength="20" value="'. $_POST['FaxNo'].'" />
+		</field>';
 
-	echo '<tr><td>'._('Fax Number').':</td>';
-	if (!isset($_POST['FaxNo'])) {$_POST['FaxNo']='';}
-	echo '<td><input tabindex="17" type="text" name="FaxNo" size="22" maxlength="20" value="'. $_POST['FaxNo'].'" /></td></tr>';
-
-	if (!isset($_POST['Email'])) {$_POST['Email']='';}
-	echo '<tr><td>'.(($_POST['Email']) ? '<a href="Mailto:'.$_POST['Email'].'">'._('Email').':</a>' : _('Email').':').'</td>';
-	  //only display email link if there is an email address
-	echo '<td><input tabindex="18" type="text" name="Email" size="56" maxlength="55" value="'. $_POST['Email'].'" /></td></tr>';
-
-	echo '<tr><td>'._('Tax Group').':</td>';
-	echo '<td><select tabindex="19" name="TaxGroup">';
+	if (!isset($_POST['Email'])) {
+		$_POST['Email']='';
+	}
+	echo '<field>
+			<label for="Email">' . (($_POST['Email']) ? '<a href="Mailto:'.$_POST['Email'].'">' . _('Email').':</a>' : _('Email').':') . '</label>';
+	//only display email link if there is an email address
+	echo '<input tabindex="18" type="email" name="Email" placeholder="e.g. example@domain.com" size="56" maxlength="55" value="'. $_POST['Email'].'" />
+		</field>';
 
 	DB_data_seek($result,0);
 
-	$sql = "SELECT taxgroupid, taxgroupdescription FROM taxgroups";
-	$result = DB_query($sql,$db);
-
-	while ($myrow = DB_fetch_array($result)) {
-		if (isset($_POST['TaxGroup']) and $myrow['taxgroupid']==$_POST['TaxGroup']) {
-			echo '<option selected="True" value="'. $myrow['taxgroupid'] . '">' . $myrow['taxgroupdescription'] . '</option>';
-		} else {
-			echo '<option value="'. $myrow['taxgroupid'] . '">' . $myrow['taxgroupdescription'] . '</option>';
-		}
-		;
-
-	} //end while loop
-
-	echo '</select></td></tr>';
-	echo '<tr><td>'._('Transactions on this branch').':</td><td><select tabindex="20" name="DisableTrans">';
-	if ($_POST['DisableTrans']==0){
-		echo '<option selected="True" value="0">' . _('Enabled') . '</option>';
-		echo '<option value="1">' . _('Disabled') . '</option>';
-	} else {
-		echo '<option selected="True" value="1">' . _('Disabled') . '</option>';
-		echo '<option value="0">' . _('Enabled') . '</option>';
+	$SQL = "SELECT taxgroupid, taxgroupdescription FROM taxgroups";
+	$TaxGroupResults = DB_query($SQL);
+	if (DB_num_rows($TaxGroupResults)==0){
+		echo '</fieldset>';
+		prnMsg(_('There are no tax groups defined - these must be set up first before any branches can be set up') . '
+				<br /><a href="' . $RootPath . '/TaxGroups.php">' . _('Define Tax Groups') . '</a>','error');
+		include('includes/footer.php');
+		exit;
 	}
+	echo '<field>
+			<label for="TaxGroup">' . _('Tax Group').':</label>
+			<select tabindex="19" name="TaxGroup">';
 
-	echo '	</select></td></tr>';
+	while ($myrow = DB_fetch_array($TaxGroupResults)) {
+		if (isset($_POST['TaxGroup']) AND $myrow['taxgroupid']==$_POST['TaxGroup']) {
+			echo '<option selected="selected" value="';
+		} else {
+			echo '<option value="';
+		}
+		echo $myrow['taxgroupid'] . '">' . $myrow['taxgroupdescription'] . '</option>';
 
-	echo '<tr><td>'._('Default freight/shipper method').':</td><td><select tabindex="21" name="DefaultShipVia">';
+	}//end while loop
+
+	echo '</select>
+		</field>';
+		
+	echo '<field>
+			<label for="DisableTrans">' . _('Transactions on this branch') . ':</label>
+			<select tabindex="20" name="DisableTrans">';
+	if (!isset($_POST['DisableTrans']) OR $_POST['DisableTrans']==0){
+		echo '<option selected="selected" value="0">' . _('Enabled') . '</option>
+				<option value="1">' . _('Disabled') . '</option>';
+	} else {
+		echo '<option selected="selected" value="1">' . _('Disabled') . '</option>
+				<option value="0">' . _('Enabled') . '</option>';
+	}
+	echo '</select>
+		</field>';
+
 	$SQL = "SELECT shipper_id, shippername FROM shippers";
-	$ShipperResults = DB_query($SQL,$db);
+	$ShipperResults = DB_query($SQL);
+	if (DB_num_rows($ShipperResults)==0){
+		echo '</fieldset>';
+		prnMsg(_('There are no shippers defined - these must be set up first before any branches can be set up') . '
+				<br /><a href="' . $RootPath . '/Shippers.php">' . _('Define Shippers') . '</a>','error');
+		include('includes/footer.php');
+		exit;
+	}
+	echo '<field>
+			<label for="DefaultShipVia">' . _('Default freight/shipper method') . ':</label>
+			<select tabindex="21" name="DefaultShipVia">';
 	while ($myrow=DB_fetch_array($ShipperResults)){
-		if (isset($_POST['DefaultShipVia'])and $myrow['shipper_id']==$_POST['DefaultShipVia']){
-			echo '<option selected="True" value="' . $myrow['shipper_id'] . '">' . $myrow['shippername'] . '</option>';
-		}else {
+		if ((isset($_POST['DefaultShipVia'])and $myrow['shipper_id']==$_POST['DefaultShipVia']) OR ($_SESSION['Default_Shipper'] == $myrow['shipper_id'])) {
+			echo '<option selected="selected" value="' . $myrow['shipper_id'] . '">' . $myrow['shippername'] . '</option>';
+		} else {
 			echo '<option value="' . $myrow['shipper_id'] . '">' . $myrow['shippername'] . '</option>';
 		}
 	}
-
-	echo '</select></td></tr>';
+	echo '</select>
+		</field>';
 
 	/* This field is a default value that will be used to set the value
 	on the sales order which will control whether or not to display the
 	company logo and address on the packlist */
-	echo '<tr><td>' . _('Default Packlist') . ':</td><td><select tabindex="22" name="DeliverBlind">';
-		for ($p = 1; $p <= 2; $p++) {
-			if ($p == $_POST['DeliverBlind']) {
-				echo '<option value=' . $p . ' selected>';
-			} else {
-				echo '<option value=' . $p . '>';
-			}
-			switch ($p) {
-				case 1:
-					echo _('Show company details and logo') . '</option>'; break;
-				case 2:
-					echo _('Hide company details and logo') . '</option>'; break;
-			}
-		}
-	echo '</select></td></tr>';
+	echo '<field>
+			<label for="DeliverBlind">' . _('Default Packlist') . ':</label>
+			<select tabindex="22" name="DeliverBlind">';
+	if ($_POST['DeliverBlind']==2){
+		echo '<option value="1">' . _('Show company details and logo') . '</option>
+				<option selected="selected" value="2">' . _('Hide company details and logo') . '</option>';
+	} else {
+		echo '<option selected="selected" value="1">' . _('Show company details and logo') . '</option>
+				<option value="2">' . _('Hide company details and logo') . '</option>';
+	}
+	echo '</select>
+		</field>';
 
-	echo '<tr><td>'._('Postal Address 1 (Street)').':</td>';
-	if (!isset($_POST['BrPostAddr1'])) {$_POST['BrPostAddr1']='';}
-	echo '<td><input tabindex="23" type="text" name="BrPostAddr1" size="41" maxlength="40" value="'. $_POST['BrPostAddr1'].'" /></td></tr>';
-	echo '<tr><td>'._('Postal Address 2 (Suburb/City)').':</td>';
-	if (!isset($_POST['BrPostAddr2'])) {$_POST['BrPostAddr2']='';}
-	echo '<td><input tabindex="24" type="text" name="BrPostAddr2" size="41" maxlength="40" value="'. $_POST['BrPostAddr2'].'" /></td></tr>';
-	echo '<tr><td>'._('Postal Address 3 (State)').':</td>';
-	if (!isset($_POST['BrPostAddr3'])) {$_POST['BrPostAddr3']='';}
-	echo '<td><input tabindex="25" type="text" name="BrPostAddr3" size="31" maxlength="30" value="'. $_POST['BrPostAddr3'].'" /></td></tr>';
-	echo '<tr><td>'._('Postal Address 4 (Postal Code)').':</td>';
-	if (!isset($_POST['BrPostAddr4'])) {$_POST['BrPostAddr4']='';}
-	echo '<td><input tabindex="26" type="text" name="BrPostAddr4" size="21" maxlength="20" value="'. $_POST['BrPostAddr4'].'" /></td></tr>';
-	echo '<tr><td>'._('Customers Internal Branch Code (EDI)').':</td>';
-	if (!isset($_POST['CustBranchCode'])) {$_POST['CustBranchCode']='';}
-	echo '<td><input tabindex="27" type="text" name="CustBranchCode" size="31" maxlength="30" value="'. $_POST['CustBranchCode'].'" /></td></tr>';
-	echo '</table>';
-	echo '<br /><div class="centre"><button tabindex="28" type="submit" name="submit">' . _('Enter Branch') . '</button></div><br />';
-	echo '</form>';
+	if (!isset($_POST['BrPostAddr1'])) {// Postal address, line 1. Database: custbranch.brpostaddr1, varchar(40)
+		$_POST['BrPostAddr1']='';
+	}
+	echo '<field>
+			<label for="BrPostAddr1">' . _('Postal Address 1 (Street)') . ':</label>
+			<input maxlength="40" name="BrPostAddr1" size="41" tabindex="23" type="text" value="', $_POST['BrPostAddr1'].'" />
+		</field>';
 
-} //end if record deleted no point displaying form to add record
+	if (!isset($_POST['BrPostAddr2'])){// Postal address, line 2. Database: custbranch.brpostaddr2, varchar(40)
+		$_POST['BrPostAddr2']='';
+	}
+	echo '<field>
+			<label for="BrPostAddr2">' , _('Postal Address 2 (Suburb/City)'), ':</label>
+			<input maxlength="40" name="BrPostAddr2" size="41" tabindex="24" type="text" value="', $_POST['BrPostAddr2'].'" />
+		</field>';
 
-include('includes/footer.inc');
+	if (!isset($_POST['BrPostAddr3'])) {// Postal address, line 3. Database: custbranch.brpostaddr3, varchar(40)
+		$_POST['BrPostAddr3']='';
+	}
+	echo '<field>
+			<label for="BrPostAddr3">', _('Postal Address 3 (State)'), ':</label>
+			<input maxlength="40" name="BrPostAddr3" size="41" tabindex="25" type="text" value="', $_POST['BrPostAddr3'].'" />
+		</field>';
+
+	if (!isset($_POST['BrPostAddr4'])) {// Postal address, line 4. Database: custbranch.brpostaddr4, varchar(40)
+		$_POST['BrPostAddr4']='';
+	}
+	echo '<field>
+			<label for="BrPostAddr4">', _('Postal Address 4 (Postal Code)'), ':</label>
+			<input maxlength="40" name="BrPostAddr4" size="41" tabindex="26" type="text" value="', $_POST['BrPostAddr4'].'" />
+		</field>';
+
+	if (!isset($_POST['BrPostAddr5'])) {// Postal address, line 5. Database: custbranch.brpostaddr5, varchar(20)
+		$_POST['BrPostAddr5']='';
+	}
+	echo '<field>
+			<label for="BrPostAddr5">', _('Postal Address 5'), ':</label>
+			<input maxlength="20" name="BrPostAddr5" size="21" tabindex="27" type="text" value="', $_POST['BrPostAddr5'].'" />
+		</field>';
+
+	if(!isset($_POST['CustBranchCode'])) {
+		$_POST['CustBranchCode']='';
+	}
+	echo '<field>
+			<label for="CustBranchCode">', _('Customers Internal Branch Code (EDI)'), ':</label>
+			<input maxlength="30" name="CustBranchCode" size="31" tabindex="28" type="text" value="', $_POST['CustBranchCode'], '" />
+		</field>';
+		
+	echo '</fieldset>';
+	
+	echo '<div class="centre">
+			<input name="submit" tabindex="29" type="submit" value="', _('Enter Or Update Branch'), '" />
+		</div>
+		</form>';
+
+}//end if record deleted no point displaying form to add record
+
+include('includes/footer.php');
 ?>

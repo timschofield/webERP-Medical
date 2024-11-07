@@ -1,6 +1,5 @@
 <?php
 
-/* $Id$ */
 
 $AllowAnyone = true;
 
@@ -8,17 +7,23 @@ $FromCriteria ='1'; /*Category From */
 $ToCriteria ='zzzzzzzz'; /*Category To */
 $Location =  'All';  /* Location to report on */
 $DetailedReport = 'Yes';  /* Total by category or complete listing */
-$Recipients = array('"Postmaster" < postmaster@localhost>','"someone" <someone@localhost>');
-
 
 $_POST['DetailedReport'] = $DetailedReport; /* so PDFInventoryValnPageHeader.inc works too */
 $_POST['FromCriteria']=$FromCriteria; /* so PDFInventoryValnPageHeader.inc works too */
 $_POST['ToCriteria']=$ToCriteria; /* so PDFInventoryValnPageHeader.inc works too */
 $_POST['Location'] = $Location; /* so PDFInventoryValnPageHeader.inc works too */
 
-include('includes/session.inc');
+include('includes/session.php');
 include ('includes/class.pdf.php');
+$Recipients = GetMailList('InventoryValuationRecipients');
 
+if (sizeOf($Recipients) == 0) {
+	$Title = _('Inventory Valuation') . ' - ' . _('Problem Report');
+      	include('includes/header.php');
+	prnMsg( _('There are no members of the Inventory Valuation Recipients email group'), 'warn');
+	include('includes/footer.php');
+	exit;
+}
 /* A4_Portrait */
 
 $Page_Width=595;
@@ -38,7 +43,7 @@ $pdf = new Cpdf('P', 'pt', 'A4');
 
 /* Standard PDF file creation header stuff */
 
-$pdf->addInfo('Creator','WebERP http://www.web-erp.org');
+$pdf->addInfo('Creator','WebERP http://www.weberp.org');
 $pdf->addInfo('Author','WebERP ' . $Version);
 
 
@@ -63,65 +68,63 @@ $line_height = 12;
 if ($Location=='All'){
 
 	$SQL = "SELECT stockmaster.categoryid,
-			stockcategory.categorydescription,
-			stockmaster.stockid,
-			stockmaster.description,
-			stockmaster.decimalplaces,
-			SUM(locstock.quantity) as qtyonhand,
-			stockmaster.materialcost + stockmaster.labourcost + stockmaster.overheadcost AS unitcost,
-			SUM(locstock.quantity) *(stockmaster.materialcost + stockmaster.labourcost + stockmaster.overheadcost) AS itemtotal
-		FROM stockmaster,
-			stockcategory,
-			locstock
-		WHERE stockmaster.stockid=locstock.stockid
-		AND stockmaster.categoryid=stockcategory.categoryid
-		GROUP BY stockmaster.categoryid,
-			stockcategory.categorydescription,
-			unitcost,
-			stockmaster.stockid,
-			stockmaster.description
-		HAVING SUM(locstock.quantity)!=0
-		AND stockmaster.categoryid >= '" . $FromCriteria . "'
-		AND stockmaster.categoryid <= '" . $ToCriteria . "'
-		ORDER BY stockmaster.categoryid,
-			stockmaster.stockid";
+				stockcategory.categorydescription,
+				stockmaster.stockid,
+				stockmaster.description,
+				SUM(locstock.quantity) as qtyonhand,
+				stockmaster.materialcost + stockmaster.labourcost + stockmaster.overheadcost AS unitcost,
+				SUM(locstock.quantity) *(stockmaster.materialcost + stockmaster.labourcost + stockmaster.overheadcost) AS itemtotal
+			FROM stockmaster,
+				stockcategory,
+				locstock
+			WHERE stockmaster.stockid=locstock.stockid
+			AND stockmaster.categoryid=stockcategory.categoryid
+			GROUP BY stockmaster.categoryid,
+				stockcategory.categorydescription,
+				unitcost,
+				stockmaster.stockid,
+				stockmaster.description
+			HAVING SUM(locstock.quantity)!=0
+			AND stockmaster.categoryid >= '" . $FromCriteria . "'
+			AND stockmaster.categoryid <= '" . $ToCriteria . "'
+			ORDER BY stockmaster.categoryid,
+				stockmaster.stockid";
 
 } else {
 
 	$SQL = "SELECT stockmaster.categoryid,
-			stockcategory.categorydescription,
-			stockmaster.stockid,
-			stockmaster.description,
-			stockmaster.decimalplaces,
-			locstock.quantity as qtyonhand,
-			stockmaster.materialcost + stockmaster.labourcost + stockmaster.overheadcost AS unitcost,
-			locstock.quantity *(stockmaster.materialcost + stockmaster.labourcost + stockmaster.overheadcost) AS itemtotal
-		FROM stockmaster,
-			stockcategory,
-			locstock
-		WHERE stockmaster.stockid=locstock.stockid
-		AND stockmaster.categoryid=stockcategory.categoryid
-		AND locstock.quantity!=0
-		AND stockmaster.categoryid >= '" . $FromCriteria . "'
-		AND stockmaster.categoryid <= '" . $ToCriteria . "'
-		AND locstock.loccode = '" . $Location . "'
-		ORDER BY stockmaster.categoryid,
-			stockmaster.stockid";
+				stockcategory.categorydescription,
+				stockmaster.stockid,
+				stockmaster.description,
+				locstock.quantity as qtyonhand,
+				stockmaster.materialcost + stockmaster.labourcost + stockmaster.overheadcost AS unitcost,
+				locstock.quantity *(stockmaster.materialcost + stockmaster.labourcost + stockmaster.overheadcost) AS itemtotal
+			FROM stockmaster,
+				stockcategory,
+				locstock
+			WHERE stockmaster.stockid=locstock.stockid
+			AND stockmaster.categoryid=stockcategory.categoryid
+			AND locstock.quantity!=0
+			AND stockmaster.categoryid >= '" . $FromCriteria . "'
+			AND stockmaster.categoryid <= '" . $ToCriteria . "'
+			AND locstock.loccode = '" . $Location . "'
+			ORDER BY stockmaster.categoryid,
+				stockmaster.stockid";
 
 }
-$InventoryResult = DB_query($SQL,$db,'','',false,true);
+$InventoryResult = DB_query($SQL,'','',false,true);
 $ListCount = DB_num_rows($InventoryResult);
 
-if (DB_error_no($db) !=0) {
-	$title = _('Inventory Valuation') . ' - ' . _('Problem Report');
-	include('includes/header.inc');
-	echo _('The inventory valuation could not be retrieved by the SQL because') . ' - ' . DB_error_msg($db);
-	echo '<br /><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
+if (DB_error_no() !=0) {
+	$Title = _('Inventory Valuation') . ' - ' . _('Problem Report');
+	include('includes/header.php');
+	echo _('The inventory valuation could not be retrieved by the SQL because') . ' - ' . DB_error_msg();
+	echo '<br /><a href="' .$RootPath .'/index.php">' . _('Back to the menu') . '</a>';
 	if ($debug==1){
 		echo '<br />' . $SQL;
 	}
 
-include('includes/footer.inc');
+include('includes/footer.php');
 exit;
 }
 
@@ -130,7 +133,7 @@ include ('includes/PDFInventoryValnPageHeader.inc');
 $Tot_Val=0;
 $Category = '';
 $CatTot_Val=0;
-while ($InventoryValn = DB_fetch_array($InventoryResult,$db)){
+While ($InventoryValn = DB_fetch_array($InventoryResult)){
 
 	if ($Category!=$InventoryValn['categoryid']){
 		$FontSize=10;
@@ -139,14 +142,14 @@ while ($InventoryValn = DB_fetch_array($InventoryResult,$db)){
 		/* need to print the total of previous category */
 			if ($_POST['DetailedReport']=='Yes'){
 				$YPos -= (2*$line_height);
-				$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,260-$Left_Margin,$FontSize,_('Total for') . ' ' . $Category . ' - ' . $CategoryName);
+				$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,260-$Left_Margin,$FontSize,_('Total for') . ' ' . $Category . " - " . $CategoryName);
 			}
 
-			$DisplayCatTotVal = locale_money_format($CatTot_Val,$_SESSION['CompanyRecord']['currencydefault']);
+			$DisplayCatTotVal = locale_number_format($CatTot_Val,2);
 			$LeftOvers = $pdf->addTextWrap(500,$YPos,60,$FontSize,$DisplayCatTotVal, 'right');
 			$YPos -=$line_height;
 
-			if ($_POST['DetailedReport']=='Yes'){
+			If ($_POST['DetailedReport']=='Yes'){
 			/*draw a line under the CATEGORY TOTAL*/
 				$pdf->line($Left_Margin, $YPos+$line_height-2,$Page_Width-$Right_Margin, $YPos+$line_height-2);
 				$YPos -=(2*$line_height);
@@ -163,9 +166,9 @@ while ($InventoryValn = DB_fetch_array($InventoryResult,$db)){
 		$FontSize=8;
 
 		$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,60,$FontSize,$InventoryValn['stockid']);				$LeftOvers = $pdf->addTextWrap(120,$YPos,260,$FontSize,$InventoryValn['description']);
-		$DisplayUnitCost = locale_money_format($InventoryValn['unitcost'],$_SESSION['CompanyRecord']['currencydefault']);
-		$DisplayQtyOnHand = locale_number_format($InventoryValn['qtyonhand'],$InventoryValn['decimalplaces']);
-		$DisplayItemTotal = locale_money_format($InventoryValn['itemtotal'],$_SESSION['CompanyRecord']['currencydefault']);
+		$DisplayUnitCost = locale_number_format($InventoryValn['unitcost'],$_SESSION['CompanyRecord']['decimalplaces']);
+		$DisplayQtyOnHand = locale_number_format($InventoryValn['qtyonhand'],0);
+		$DisplayItemTotal = locale_number_format($InventoryValn['itemtotal'],$_SESSION['CompanyRecord']['decimalplaces']);
 
 		$LeftOvers = $pdf->addTextWrap(380,$YPos,60,$FontSize,$DisplayQtyOnHand,'right');
 		$LeftOvers = $pdf->addTextWrap(440,$YPos,60,$FontSize,$DisplayUnitCost, 'right');
@@ -188,10 +191,10 @@ if ($_POST['DetailedReport']=='Yes'){
 	$LeftOvers = $pdf->addTextWrap($Left_Margin,$YPos,260-$Left_Margin,$FontSize, _('Total for') . ' ' . $Category . ' - ' . $CategoryName, 'left');
 }
 
-$DisplayCatTotVal = locale_money_format($CatTot_Val,$_SESSION['CompanyRecord']['currencydefault']);
+$DisplayCatTotVal = locale_number_format($CatTot_Val,2);
 $LeftOvers = $pdf->addTextWrap(500,$YPos,60,$FontSize,$DisplayCatTotVal, 'right');
 
-if ($_POST['DetailedReport']=='Yes'){
+If ($_POST['DetailedReport']=='Yes'){
 	/*draw a line under the CATEGORY TOTAL*/
 	$pdf->line($Left_Margin, $YPos+$line_height-2,$Page_Width-$Right_Margin, $YPos+$line_height-2);
 	$YPos -=(2*$line_height);
@@ -201,19 +204,19 @@ $YPos -= (2*$line_height);
 
 /*Print out the grand totals */
 $LeftOvers = $pdf->addTextWrap(80, $YPos,260-$Left_Margin,$FontSize, _('Grand Total Value'), 'right');
-$DisplayTotalVal = locale_money_format($Tot_Val,$_SESSION['CompanyRecord']['currencydefault']);
+$DisplayTotalVal = locale_number_format($Tot_Val,2);
 $LeftOvers = $pdf->addTextWrap(500,$YPos,60,$FontSize,$DisplayTotalVal, 'right');
-if ($_POST['DetailedReport']=='Yes'){
+If ($_POST['DetailedReport']=='Yes'){
 	$pdf->line($Left_Margin, $YPos+$line_height-2,$Page_Width-$Right_Margin, $YPos+$line_height-2);
 	$YPos -=(2*$line_height);
 }
 
 if ($ListCount == 0) {
-	$title = _('Print Inventory Valuation Error');
-	include('includes/header.inc');
-	echo '<br />' . _('There were no items with any value to print out for the location specified');
-	echo '<br /><a href="' . $rootpath . '/index.php">' . _('Back to the menu') . '</a>';
-	include('includes/footer.inc');
+	$Title = _('Print Inventory Valuation Error');
+	include('includes/header.php');
+	echo '<p>' . _('There were no items with any value to print out for the location specified');
+	echo '<br /><a href="' . $RootPath . '/index.php">' . _('Back to the menu') . '</a>';
+	include('includes/footer.php');
 	exit; // Javier: needs check
 } else {
 	include('includes/htmlMimeMail.php');
@@ -226,8 +229,29 @@ if ($ListCount == 0) {
 	$mail->setText(_('Please find herewith the stock valuation report'));
 	$mail->setSubject(_('Inventory Valuation Report'));
 	$mail->addAttachment($attachment, 'InventoryReport.pdf', 'application/pdf');
-	$mail->setFrom($_SESSION['CompanyRecord']['coyname'] . "<" . $_SESSION['CompanyRecord']['email'] . ">");
-	$result = $mail->send($Recipients);
+	if($_SESSION['SmtpSetting']==0){
+		$mail->setFrom($_SESSION['CompanyRecord']['coyname'] . '<' . $_SESSION['CompanyRecord']['email'] . '>');
+		$result = $mail->send($Recipients);
+	}else{
+		$result = SendmailBySmtp($mail,$Recipients);
+	}
+	if($result){
+			$Title = _('Print Inventory Valuation');
+			include('includes/header.php');
+			prnMsg(_('The Inventory valuation report has been mailed'),'success');
+			echo '<br /><a href="' . $RootPath . '/index.php">' . _('Back to the menu') . '</a>';
+			include('includes/footer.php');
+			exit;
+
+	} else {
+			$Title = _('Print Inventory Valuation Error');
+			include('includes/header.php');
+			prnMsg(_('There are errors lead to mails not sent'),'error');
+			echo '<br /><a href="' . $RootPath . '/index.php">' . _('Back to the menu') . '</a>';
+			include('includes/footer.php');
+			exit;
+
+	}
 
 }
 ?>

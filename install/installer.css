@@ -1,0 +1,214 @@
+/*
+ * Installer Theme for WebERP
+ * V1.0 2013-07-26
+ * HTML5 - for usability
+ * (incomplete- needs refinement with font size, margin sizes etc)
+ **/
+body {
+font-family: Arial,sans-serif;
+background: #1A1A1A;
+color: #E6E6FA;
+margin:0;
+padding:0;
+border:0;
+width:100%;
+height:auto;
+min-height:10%;
+text-align:center; /* Align the whole form page centre */
+}
+.wizard {
+position:absolute;
+margin: 0 auto;
+width:80%;
+height:80%;
+background:#FFFFFF;
+color:#1A1A1A;
+margin-left:12%;
+margin-top:5%;
+border-radius:20px;
+text-align:left;
+}
+header{
+background:#4682B4;
+color:#FFFFFF;
+margin:5px;
+border-radius:25px;
+padding:5px;
+padding-left:20px;
+font-size:2em;
+font-weight:bold;
+text-align:left;
+}
+#main_icon{
+width:40%;
+float:left;
+margin-top:20px;
+}
+#license_form {
+text-align:left;
+margin-bottom:3px;
+margin-left:5px;
+display:block;
+}
+form > #license {
+width: 50%;
+height:80%;
+margin-top:5px;
+margin-left:5px;
+padding-left:5px;
+resize: none;
+overflow: scroll;
+scrollbar-color: #FFFFFF #4682B4;
+}
+#license_form > label {
+padding-left:5px;
+margin-bottom:5px;
+}
+#license_agree{
+display:block;
+}
+.nav_button{
+display:inline;
+position:relative;
+float:right;
+bottom:0px;
+font-size:1.2em;
+padding:10px 20px 10px 10px;
+background:#383838;
+border:0px;
+border-radius:17px;
+cursor:pointer;
+margin-left:5px;
+width:7rem;
+text-align:center;
+color:#FFFFFF;
+}
+.install {
+background:url(images/install.png) no-repeat left #383838;
+background-size:24px 24px;
+background-position:6px;
+padding-left:32px;
+width:7rem;
+}
+.is_disabled {
+cursor: not-allowed;
+opacity: 0.5;
+text-decoration: none;
+}
+.nav_button > a{
+color:#FFFFFF;
+text-decoration:none;
+}
+footer{
+position:absolute;
+bottom:10px;
+width:90%;
+padding:10px;
+margin-left:5%;
+}
+.installer_about{
+position:relative;
+text-align: left;
+left: 5px;
+}
+ol{
+list-style-position: inside;
+}
+.success{
+background: #e9ffcf url(valid.png) no-repeat right;
+border: 1px solid #7AAA3A;
+border-radius: 5px;
+padding: 2px 8px;
+margin: 2px 0;
+margin-left:41%;
+margin-right:10px;
+margin-bottom:8px;
+text-align:left;
+}
+.error {
+background:#ffd3bf url(invalid.png) no-repeat right;
+border:1px solid #ED5410;
+border-radius:5px;
+padding:2px 8px;
+margin:2px 0;
+margin-left:41%;
+margin-right:10px;
+margin-bottom:8px;
+text-align:left;
+}
+form fieldset {
+background:#556699;
+color:#FFFFFF;
+display: block;
+border:solid 1px;
+margin:auto;
+padding-top:7px;
+margin-top:4px;
+margin-bottom:4px;
+margin-right:2px;
+border-radius:7px;
+text-align:left;
+vertical-align:top;
+}
+form fieldset legend {
+background-color:#CCDDFF;
+color:#374149;
+padding:3px;
+border: 1px solid #374149;
+border-radius:3px;
+font-size:150%;
+margin-top:3px;
+}
+form select:focus + fieldhelp, textarea:focus + fieldhelp, input:not([type=submit]):focus + fieldhelp {
+background:#BDF3BD;
+color:#0E3E0E;
+padding:2px;
+padding-left:10px;
+border-top-left-radius:0px;
+border-bottom-left-radius:6px;
+margin-left:2px;
+visibility:visible;
+height:auto;
+max-width:500px;
+word-wrap:normal;
+position:absolute;
+font-size:0.8rem;
+}
+form select + fieldhelp, textarea + fieldhelp, input:not([type=submit]) + fieldhelp {
+padding:2px;
+border-radius:2px;
+padding-left:10px;
+margin-left:2px;
+visibility:hidden;
+height:auto;
+max-width:500px;
+word-wrap:normal;
+position:absolute;
+}
+form fieldset field label {
+float:left;
+width:16.5em;
+text-align:left;
+}
+form fieldset field {
+padding-bottom: 10px;
+display: block;
+}
+.result_icon {
+width:20px;
+margin-left:5px;
+margin-right:5px;
+margin-bottom:-4px;
+}
+#save{
+background:#383838;
+padding-top:4px;
+padding-bottom:4px;
+border-radius:5px;
+color:#FFFFFF;
+border:0px;
+cursor:pointer;
+}
+#save:hover{
+background:#000000;
+}

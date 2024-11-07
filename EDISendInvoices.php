@@ -1,25 +1,26 @@
 <?php
 
-/* $Id$*/
 
-include ('includes/session.inc');
-include ('includes/header.inc');
+include ('includes/session.php');
+$ViewTopic = 'EDI';
+$BookMark = '';
+include ('includes/header.php');
 include('includes/SQL_CommonFunctions.inc'); //need for EDITransNo
 include('includes/htmlMimeMail.php'); // need for sending email attachments
 
 /*Get the Customers who are enabled for EDI invoicing */
 $sql = "SELECT debtorno,
-		edireference,
-		editransport,
-		ediaddress,
-		ediserveruser,
-		ediserverpwd,
-		daysbeforedue,
-		dayinfollowingmonth
-	FROM debtorsmaster INNER JOIN paymentterms ON debtorsmaster.paymentterms=paymentterms.termsindicator
-	WHERE ediinvoices=1";
+			edireference,
+			editransport,
+			ediaddress,
+			ediserveruser,
+			ediserverpwd,
+			daysbeforedue,
+			dayinfollowingmonth
+		FROM debtorsmaster INNER JOIN paymentterms ON debtorsmaster.paymentterms=paymentterms.termsindicator
+		WHERE ediinvoices=1";
 
-$EDIInvCusts = DB_query($sql,$db);
+$EDIInvCusts = DB_query($sql);
 
 if (DB_num_rows($EDIInvCusts)==0){
 	exit;
@@ -30,32 +31,32 @@ while ($CustDetails = DB_fetch_array($EDIInvCusts)){
 	/*Figure out if there are any unset invoices or credits for the customer */
 
 	$sql = "SELECT debtortrans.id,
-			transno,
-			type,
-			order_,
-			trandate,
-			ovgst,
-			ovamount,
-			ovfreight,
-			ovdiscount,
-			debtortrans.branchcode,
-			custbranchcode,
-			invtext,
-			shipvia,
-			rate,
-			brname,
-			braddress1,
-			braddress2,
-			braddress3,
-			braddress4
-		FROM debtortrans INNER JOIN custbranch ON custbranch.debtorno = debtortrans.debtorno
-		AND custbranch.branchcode = debtortrans.branchcode
-		WHERE (type=10 or type=11)
-		AND edisent=0
-		AND debtortrans.debtorno='" . $CustDetails['debtorno'] . "'";
+					transno,
+					type,
+					order_,
+					trandate,
+					ovgst,
+					ovamount,
+					ovfreight,
+					ovdiscount,
+					debtortrans.branchcode,
+					custbranchcode,
+					invtext,
+					shipvia,
+					rate,
+					brname,
+					braddress1,
+					braddress2,
+					braddress3,
+					braddress4
+				FROM debtortrans INNER JOIN custbranch ON custbranch.debtorno = debtortrans.debtorno
+				AND custbranch.branchcode = debtortrans.branchcode
+				WHERE (type=10 or type=11)
+				AND edisent=0
+				AND debtortrans.debtorno='" . $CustDetails['debtorno'] . "'";
 
 	$ErrMsg = _('There was a problem retrieving the customer transactions because');
-	$TransHeaders = DB_query($sql,$db,$ErrMsg);
+	$TransHeaders = DB_query($sql,$ErrMsg);
 
 
 	if (DB_num_rows($TransHeaders)==0){
@@ -98,12 +99,12 @@ while ($CustDetails = DB_fetch_array($EDIInvCusts)){
 			write the output to a file one line at a time */
 
 		$sql = "SELECT section,
-						linetext
-				FROM edimessageformat
-				WHERE partnercode='" . $CustDetails['debtorno'] . "'
-					AND messagetype='INVOIC' ORDER BY sequenceno";
+                       linetext
+                FROM edimessageformat
+                WHERE partnercode='" . $CustDetails['debtorno'] . "'
+                AND messagetype='INVOIC' ORDER BY sequenceno";
 		$ErrMsg =  _('An error occurred in getting the EDI format template for') . ' ' . $CustDetails['debtorno'] . ' ' . _('because');
-		$MessageLinesResult = DB_query($sql, $db,$ErrMsg);
+		$MessageLinesResult = DB_query($sql,$ErrMsg);
 
 
 		if (DB_num_rows($MessageLinesResult)>0){
@@ -119,7 +120,7 @@ while ($CustDetails = DB_fetch_array($EDIInvCusts)){
 			}
 			DB_data_seek($MessageLinesResult,0);
 
-			$EDITransNo = GetNextTransNo(99,$db);
+			$EDITransNo = GetNextTransNo(99);
 			$fp = fopen( $_SESSION['EDI_MsgPending'] . '/EDI_INV_' . $EDITransNo , 'w');
 
 			while ($LineDetails = DB_fetch_array($MessageLinesResult)){
@@ -135,36 +136,36 @@ while ($CustDetails = DB_fetch_array($EDIInvCusts)){
 
 					if ($TransDetail['type']==10){ /*its an invoice */
 						 $sql = "SELECT stockmoves.stockid,
-						 		stockmaster.description,
-								-stockmoves.qty as quantity,
-								stockmoves.discountpercent,
-								((1 - stockmoves.discountpercent) * stockmoves.price * " . $ExchRate . "* -stockmoves.qty) AS fxnet,
-								(stockmoves.price * " . $ExchRate . ") AS fxprice,
-								stockmoves.taxrate,
-								stockmaster.units
-							FROM stockmoves,
-								stockmaster
-							WHERE stockmoves.stockid = stockmaster.stockid
-							AND stockmoves.type=10
-							AND stockmoves.transno='" . $TransNo . "'
-							AND stockmoves.show_on_inv_crds=1";
+							 		stockmaster.description,
+									-stockmoves.qty as quantity,
+									stockmoves.discountpercent,
+									((1 - stockmoves.discountpercent) * stockmoves.price * " . $ExchRate . "* -stockmoves.qty) AS fxnet,
+									(stockmoves.price * " . $ExchRate . ") AS fxprice,
+									stockmoves.taxrate,
+									stockmaster.units
+								FROM stockmoves,
+									stockmaster
+								WHERE stockmoves.stockid = stockmaster.stockid
+								AND stockmoves.type=10
+								AND stockmoves.transno='" . $TransNo . "'
+								AND stockmoves.show_on_inv_crds=1";
 					} else {
 					/* credit note */
 						$sql = "SELECT stockmoves.stockid,
-								stockmaster.description,
-								stockmoves.qty as quantity,
-								stockmoves.discountpercent,
-								((1 - stockmoves.discountpercent) * stockmoves.price * " . $ExchRate . " * stockmoves.qty) as fxnet,
-								(stockmoves.price * " . $ExchRate . ") AS fxprice,
-								stockmoves.taxrate,
-								stockmaster.units
-							FROM stockmoves,
-								stockmaster
-							WHERE stockmoves.stockid = stockmaster.stockid
-							AND stockmoves.type=11 and stockmoves.transno='" . $TransNo . "'
-							AND stockmoves.show_on_inv_crds=1";
+									stockmaster.description,
+									stockmoves.qty as quantity,
+									stockmoves.discountpercent,
+									((1 - stockmoves.discountpercent) * stockmoves.price * " . $ExchRate . " * stockmoves.qty) as fxnet,
+									(stockmoves.price * " . $ExchRate . ") AS fxprice,
+									stockmoves.taxrate,
+									stockmaster.units
+								FROM stockmoves,
+									stockmaster
+								WHERE stockmoves.stockid = stockmaster.stockid
+								AND stockmoves.type=11 and stockmoves.transno='" . $TransNo . "'
+								AND stockmoves.show_on_inv_crds=1";
 					}
-					$TransLinesResult = DB_query($sql,$db);
+					$TransLinesResult = DB_query($sql);
 
 					$LineNumber = 0;
 					while ($TransLines = DB_fetch_array($TransLinesResult)){
@@ -174,11 +175,11 @@ while ($CustDetails = DB_fetch_array($EDIInvCusts)){
 						$StockID = $TransLines['StockID'];
 						$sql = "SELECT partnerstockid
 								FROM ediitemmapping
-							WHERE supporcust='CUST'
-							AND partnercode ='" . $CustDetails['debtorno'] . "'
-							AND stockid='" . $TransLines['stockid'] . "'";
+								WHERE supporcust='CUST'
+								AND partnercode ='" . $CustDetails['debtorno'] . "'
+								AND stockid='" . $TransLines['stockid'] . "'";
 
-						$CustStkResult = DB_query($sql,$db);
+						$CustStkResult = DB_query($sql);
 						if (DB_num_rows($CustStkResult)==1){
 							$CustStkIDRow = DB_fetch_row($CustStkResult);
 							$CustStockID = $CustStkIDRow[0];
@@ -207,7 +208,7 @@ while ($CustDetails = DB_fetch_array($EDIInvCusts)){
 				}
 			} /*end while there are message lines to parse and substitute vbles for */
 			fclose($fp); /*close the file at the end of each transaction */
-			//DB_query("UPDATE DebtorTrans SET EDISent=1 WHERE ID=" . $TransDetails['ID'],$db);
+			//DB_query("UPDATE DebtorTrans SET EDISent=1 WHERE ID=" . $TransDetails['ID']);
 			/*Now send the file using the customer transport */
 			if ($CustDetails['editransport']=='email'){
 
@@ -216,7 +217,12 @@ while ($CustDetails = DB_fetch_array($EDIInvCusts)){
 				$mail->SetSubject('EDI Invoice/Credit Note ' . $EDITransNo);
 				$mail->addAttachment($attachment, 'EDI_INV_' . $EDITransNo, 'application/txt');
 				$mail->setFrom($_SESSION['CompanyRecord']['coyname'] . '<' . $_SESSION['CompanyRecord']['email'] . '>');
-				$MessageSent = $mail->send(array($CustDetails['ediaddress']));
+				if($_SESSION['SmtpSetting']==0){
+					$mail->setFrom($_SESSION['CompanyRecord']['coyname'] . '<' . $_SESSION['CompanyRecord']['email'] . '>');
+					$MessageSent = $mail->send(array($CustDetails['ediaddress']));
+				}else{
+					$MessageSent = SendmailBySmtp($mail,array($CustDetails['ediaddress']));
+				}
 
 				if ($MessageSent==True){
 					echo '<br /><br />';
@@ -230,9 +236,9 @@ while ($CustDetails = DB_fetch_array($EDIInvCusts)){
 				// set up basic connection
 				$conn_id = ftp_connect($CustDetails['ediaddress']); // login with username and password
 				$login_result = ftp_login($conn_id, $CustDetails['ediserveruser'], $CustDetails['ediserverpwd']); // check connection
-				if ((!$conn_id) or (!$login_result)) {
+				if ((!$conn_id) || (!$login_result)) {
 					prnMsg( _('Ftp connection has failed'). '<br />' . _('Attempted to connect to') . ' ' . $CustDetails['ediaddress'] . ' ' ._('for user') . ' ' . $CustDetails['ediserveruser'],'error');
-					include('includes/footer.inc');
+					include('includes/footer.php');
 					exit;
 				}
 				$MessageSent = ftp_put($conn_id, $_SESSION['EDI_MsgPending'] . '/EDI_INV_' . $EDITransNo, 'EDI_INV_' . $EDITransNo, FTP_ASCII); // check upload status
@@ -261,5 +267,5 @@ while ($CustDetails = DB_fetch_array($EDIInvCusts)){
 
 } /*loop around all the customers enabled for EDI Invoices */
 
-include ('includes/footer.inc');
+include ('includes/footer.php');
 ?>

@@ -1,76 +1,120 @@
 <?php
-/* $Id$*/
-// Display demo user name and password within login form if $allow_demo_mode is true
-include ('LanguageSetup.php');
+// Display demo user name and password within login form if $AllowDemoMode is true
+include ($PathPrefix . 'includes/LanguageSetup.php');
+include ('LanguagesArray.php');
 
-if ($allow_demo_mode == True and !isset($demo_text)) {
-	$demo_text = _('login as user') .': <i>' . _('admin') . '</i><br />' ._('with password') . ': <i>' . _('weberp') . '</i>';
-} elseif (!isset($demo_text)) {
-	$demo_text = _('Please login here');
-}
-echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-			"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">';
-?>
-<html>
-<head>
-	<title>webERP Login screen</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-	<link rel="stylesheet" href="css/<?php echo $theme;?>/login.css" type="text/css" />
-</head>
-<body>
+if ((isset($AllowDemoMode)) and ($AllowDemoMode == True) and (!isset($demo_text))) {
+	$demo_text = _('Login as user') . ': <i>' . _('admin') . '</i><br />' . _('with password') . ': <i>' . _('kwamoja') . '</i>';
+	} elseif (!isset($demo_text)) {
+		$demo_text = _('Please login here');
+	}
 
-<?php
-if (get_magic_quotes_gpc()){
-	echo '<p style="background:white">';
-	echo _('Your webserver is configured to enable Magic Quotes. This may cause problems if you use punctuation (such as quotes) when doing data entry. You should contact your webmaster to disable Magic Quotes');
-	echo '</p>';
-}
-?>
+	echo '<!DOCTYPE html>';
+	echo '<html>
+		<head>
+			<title>WebERP ', _('Login screen'), '</title>
+			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<link rel="shortcut icon" href="favicon.ico?v=2" type="image/x-icon" />
+			<script async type="text/javascript" src = "', $PathPrefix, $RootPath, '/javascripts/Login.js"></script>';
 
-<div id="container">
-	<div id="login_logo"></div>
-	<div id="login_box">
-	<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8');?>" method="post">
-	<input type="hidden" name="FormID" value="<?php echo $_SESSION['FormID']; ?>" />
-	<span><?php echo _('Company'); ?>:</span>
-	<?php
-		if ($AllowCompanySelectionBox == true){
-			echo '<select name="CompanyNameField">';
+	if ($LanguagesArray[$DefaultLanguage]['Direction'] == 'rtl') {
+		echo '<link rel="stylesheet" href="css/login_rtl.css" type="text/css" />';
+	} else {
+		echo '<link rel="stylesheet" href="css/login.css" type="text/css" />';
+	}
+	echo '</head>';
 
-			$DirHandle = dir('companies/');
+	echo '<body>
+		<div id="container">
+			<div id="login_logo">
+				<div class="logo logo-left">web</div><div class="logo logo-right">ERP</div>
+			</div>
+			<div id="login_box">
+				<form action="index.php" name="LogIn" method="post" class="noPrint">
+				<input type="hidden" name="FormID" value="', $_SESSION['FormID'], '" />';
 
-			while (false !== ($CompanyEntry = $DirHandle->read())){
-				if (is_dir('companies/' . $CompanyEntry) AND $CompanyEntry != '..' AND $CompanyEntry != '' AND $CompanyEntry!='.svn' AND $CompanyEntry!='.'){
-					if ($CompanyEntry==$DefaultCompany) {
-						echo '<option selected="selected" label="'.$CompanyEntry.'" value="'.$CompanyEntry.'">'.$CompanyEntry.'</option>';
-					} else {
-						echo '<option label="'.$CompanyEntry.'" value="'.$CompanyEntry.'">'.$CompanyEntry.'</option>';
-					}
+	if (isset($_COOKIE['Login'])) {
+		$DefaultCompany = $_COOKIE['Login'];
+	}
+	if ($AllowCompanySelectionBox === 'Hide') {
+		// do not show input or selection box
+		echo '<input type="hidden" name="CompanyNameField"  value="' . $DefaultCompany . '" />';
+	} else if ($AllowCompanySelectionBox === 'ShowInputBox') {
+		// show input box
+		echo '<input type="text" required="required" autofocus="autofocus" name="CompanyNameField"  value="' . $DefaultCompany . '" />';
+	} else {
+		// Show selection box ($AllowCompanySelectionBox == 'ShowSelectionBox')
+		echo '<select name="CompanyNameField" id="CompanyNameField">';
+
+		$DirHandle = dir('companies/');
+
+		while (false !== ($CompanyEntry = $DirHandle->read())) {
+			if (is_dir('companies/' . $CompanyEntry) and $CompanyEntry != '..' and $CompanyEntry != '' and $CompanyEntry != '.' and $CompanyEntry != 'default') {
+				if (file_exists('companies/' . $CompanyEntry . '/Companies.php')) {
+					include ('companies/' . $CompanyEntry . '/Companies.php');
+				} else {
+					$CompanyName[$CompanyEntry] = $CompanyEntry;
+				}
+				if ($CompanyEntry == $DefaultCompany) {
+					echo '<option selected="selected" value="' . $CompanyEntry . '">' . $CompanyName[$CompanyEntry] . '</option>';
+				} else {
+					echo '<option value="' . $CompanyEntry . '">' . $CompanyName[$CompanyEntry] . '</option>';
 				}
 			}
-
-			$DirHandle->close();
-
-			echo '</select>';
-		} else {
-			echo '<input type="text" name="CompanyNameField"  value="' . $DefaultCompany . '" />';
 		}
-	?>
-	<br />
-	<span><?php echo _('User name'); ?>:</span><br />
-	<input type="text" name="UserNameEntryField" maxlength="20" /><br />
-	<span><?php echo _('Password'); ?>:</span><br />
-	<input type="password" name="Password" /><br />
-	<div id="demo_text"><?php echo $demo_text;?></div>
-	<input class="button" type="submit" value="<?php echo _('Login'); ?>" name="SubmitUser" />
-	</form>
+
+		$DirHandle->close();
+
+		echo '</select>';
+	}
+
+	echo '<label for="dropdownlist">', _('Company'), ':</label>';
+
+	echo '<input type="text" id="CompanySelect" readonly value="' . $CompanyName[$DefaultCompany] . '" />';
+
+	echo '<ol id="dropdownlist" class="dropdownlist">';
+
+	$DirHandle = dir('companies/');
+
+	while (false !== ($CompanyEntry = $DirHandle->read())) {
+		if (is_dir('companies/' . $CompanyEntry) and $CompanyEntry != '..' and $CompanyEntry != '' and $CompanyEntry != '.' and $CompanyEntry != 'default') {
+			if (file_exists('companies/' . $CompanyEntry . '/Companies.php')) {
+				include ('companies/' . $CompanyEntry . '/Companies.php');
+			} else {
+				$CompanyName[$CompanyEntry] = $CompanyEntry;
+			}
+			/*if ($CompanyEntry == $DefaultCompany) {
+				echo '<li class="option" id="' . $CompanyEntry . '" ><img id="optionlogo" src="companies/' . $CompanyEntry . '/logo.png" /><span id="optionlabel">', $CompanyName[$CompanyEntry], '</span></li>';
+			} else*/ {
+				echo '<li class="option" id="' . $CompanyEntry . '" ><img id="optionlogo" src="companies/' . $CompanyEntry . '/logo.png" /><span id="optionlabel">', $CompanyName[$CompanyEntry], '</span></li>';
+			}
+		}
+	}
+	$DirHandle->close();
+
+	echo '</ol>';
+
+	echo '<label>', _('User name'), ':</label>
+		<input type="text" autocomplete="username" autofocus="autofocus" required="required" name="UserNameEntryField" placeholder="', _('User name'), '" maxlength="20" /><br />
+		<label>', _('Password'), ':</label>
+		<input type="password" autocomplete="current-password" id="password" required="required" name="Password" placeholder="', _('Password'), '" />
+		<input type="text" id="eye" readonly title="', _('Show Password'), '" />
+		<div id="demo_text">';
+
+	if (isset($demo_text)) {
+		echo $demo_text;
+	}
+
+	echo '</div>';
+
+	echo '<button class="button" type="submit" value="', _('Login'), '" name="SubmitUser" onclick="ShowSpinner()"><img id="waiting_show" class="waiting_show" src="css/waiting.gif" />', _('Login'), ' ', '<img src="css/tick.png" title="', _('Login'), '" alt="" class="ButtonIcon" />
+	</button>';
+
+	echo '</form>
 	</div>
-</div>
-	<script type="text/javascript">
-			<!--
-				  document.forms[0].UserNameEntryField.focus();
-			//-->
-	</script>
-</body>
-</html>
+</div>';
+
+	echo '</body>
+	</html>';
+?>

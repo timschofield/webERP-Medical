@@ -1,8 +1,7 @@
 <?php
 
-/* $Id: GetStockImage.php 4630 2011-07-14 10:27:29Z daintree $*/
 
-include ('includes/session.inc');
+include ('includes/session.php');
 /*
 http://127.0.0.1/~brink/webERP/GetStockImage.php
 ?automake=1&width=81&height=74&stockid=&textcolor=FFFFF0&bevel=3&text=aa&bgcolor=007F00
@@ -20,29 +19,28 @@ bevel - if specified draws a drop down bevel
 
 */
 // Color decode function
-
 function DecodeBgColor( $ColourStr ) {
 	if ( $ColourStr[0] == '#' ) {
-		$ColourStr = substr($ColourStr,1,strlen($ColourStr));
+		$ColourStr = mb_substr($ColourStr,1,mb_strlen($ColourStr));
 	}
 	$Red = 0;
 	if(mb_strlen($ColourStr) > 1) {
-		$Red = hexdec(substr($ColourStr,0,2));
-		$ColourStr = substr($ColourStr,2,strlen($ColourStr));
+		$Red = hexdec(mb_substr($ColourStr,0,2));
+		$ColourStr = mb_substr($ColourStr,2,mb_strlen($ColourStr));
 	}
 	$Green = 0;
-	if(strlen($ColourStr) > 1) {
-		$Green = hexdec(substr($ColourStr,0,2));
-		$ColourStr = substr($ColourStr,2,strlen($ColourStr));
+	if(mb_strlen($ColourStr) > 1) {
+		$Green = hexdec(mb_substr($ColourStr,0,2));
+		$ColourStr = mb_substr($ColourStr,2,mb_strlen($ColourStr));
 	}
 	$Blue = 0;
 	if(mb_strlen($ColourStr) > 1) {
-		$Blue = hexdec(substr($ColourStr,0,2));
-		$ColourStr = substr($ColourStr,2,strlen($ColourStr));
+		$Blue = hexdec(mb_substr($ColourStr,0,2));
+		$ColourStr = mb_substr($ColourStr,2,mb_strlen($ColourStr));
 	}
-	if(strlen($ColourStr) > 1) {
-		$Alpha = hexdec(substr($ColourStr,0,2));
-		$ColourStr = substr($ColourStr,2,strlen($ColourStr));
+	if(mb_strlen($ColourStr) > 1) {
+		$Alpha = hexdec(mb_substr($ColourStr,0,2));
+		$ColourStr = mb_substr($ColourStr,2,mb_strlen($ColourStr));
 	}
 	if ( isset($Alpha) )
 		return array('red' => $Red, 'green' => $Green, 'blue' => $Blue, 'alpha' => $Alpha );
@@ -50,18 +48,11 @@ function DecodeBgColor( $ColourStr ) {
 		return array('red' => $Red, 'green' => $Green, 'blue' => $Blue );
 }
 
-if (!function_exists('imagecreatefrompng')){
-	$title = _('Image Manipulation Script Problem');
-	include('includes/header.inc');
-	prnMsg(_('This script requires the gd image functions to be available to php - this needs to be enabled in your server php version before this script can be used'),'error');
-	include('includes/footer.inc');
-	exit;
-}
 $DefaultImage = 'webERPsmall.png';
 
-$FilePath =  $_SESSION['part_pics_dir'] .'/';
+$FilePath =  $_SESSION['part_pics_dir'] . '/';
 
-$StockID = trim(strtoupper($_GET['StockID']));
+$StockID = trim(mb_strtoupper($_GET['StockID']));
 if( isset($_GET['bgcolor']) )
 	$BackgroundColour = $_GET['bgcolor'];
 if( isset($_GET['textcolor']) )
@@ -103,6 +94,10 @@ if( isset($_GET['notextbg']) ) {
 	$notextbg = false;
 }
 
+
+
+
+
 // Extension requirements and Stock ID Isolation
 if($StockID == '') {
 	$StockID = $DefaultImage;
@@ -113,11 +108,9 @@ $i = strrpos($StockID,'.');
 if( $i === false )
   	$type = 'png';
 else {
-
-	$type   = strtolower(substr($StockID,$i+1,strlen($StockID)));
-	$StockID = substr($StockID,0,$i);
-
-	if($blanktext and !isset($text))
+	$type   = strtolower(mb_substr($StockID,$i+1,mb_strlen($StockID)));
+	$StockID = mb_substr($StockID,0,$i);
+	if($blanktext && !isset($text))
 		$text = '';
 }
 $style = $type;
@@ -142,17 +135,17 @@ if ( file_exists($tmpFileName.'.jpg') ) {
 	$FileName = $DefaultImage;
 	$IsJpeg = $DefaultIsJpeg;
 }
-if( !$automake and !isset($FileName) ) {
-		$title = _('Stock Image Retrieval ....');
-		include('includes/header.inc');
+if( !$automake && !isset($FileName) ) {
+		$Title = _('Stock Image Retrieval ....');
+		include('includes/header.php');
 		prnMsg( _('The Image could not be retrieved because it does not exist'), 'error');
-		echo '<br /><a href="' .$rootpath .'/index.php">'.  _('Back to the menu'). '</a>';
-		include('includes/footer.inc');
+		echo '<br /><a href="' .$RootPath .'/index.php">' .   _('Back to the menu'). '</a>';
+		include('includes/footer.php');
 		exit;
 }
 
 // See if we need to automake this image
-if( $automake and !isset($FileName)) {
+if( $automake AND !isset($FileName) ) {
 	// Have we got height and width specs
 	if( !isset($width) )
 		$width = 64;
@@ -166,10 +159,10 @@ if( $automake and !isset($FileName)) {
 		$BackgroundColour = DecodeBgColor( '#7F7F7F' );
 	if( !isset($BackgroundColour['alpha']) ) {
 		$ixbgcolor = imagecolorallocate($im,
-		$BackgroundColour['red'],$BackgroundColour['green'],$BackgroundColour['blue']);
+			$BackgroundColour['red'],$BackgroundColour['green'],$BackgroundColour['blue']);
 	} else {
 		$ixbgcolor = imagecolorallocatealpha($im,
-		$BackgroundColour['red'],$BackgroundColour['green'],$BackgroundColour['blue'],$BackgroundColour['alpha']);
+			$BackgroundColour['red'],$BackgroundColour['green'],$BackgroundColour['blue'],$BackgroundColour['alpha']);
 	}
 	// Have we got a text color
 	if( isset($TextColour) )
@@ -178,10 +171,10 @@ if( $automake and !isset($FileName)) {
 		$TextColour = DecodeBgColor( '#000000' );
 	if( !isset($TextColour['alpha']) ) {
 		$ixtextcolor = imagecolorallocate($im,
-		$TextColour['red'],$TextColour['green'],$TextColour['blue']);
+			$TextColour['red'],$TextColour['green'],$TextColour['blue']);
 	} else {
 		$ixtextcolor = imagecolorallocatealpha($im,
-		$TextColour['red'],$TextColour['green'],$TextColour['blue'],$TextColour['alpha']);
+			$TextColour['red'],$TextColour['green'],$TextColour['blue'],$TextColour['alpha']);
 	}
 	// Have we got transparency requirements
 	if( isset($TranspColour) ) {
@@ -189,10 +182,10 @@ if( $automake and !isset($FileName)) {
 		if( $TranspColour != $BackgroundColour ) {
 			if( !isset($TextColour['alpha']) ) {
 				$ixtranscolor = imagecolorallocate($im,
-				$TranspColour['red'],$TranspColour['green'],$TranspColour['blue']);
+					$TranspColour['red'],$TranspColour['green'],$TranspColour['blue']);
 			} else {
 				$ixtranscolor = imagecolorallocatealpha($im,
-				$TranspColour['red'],$TranspColour['green'],$TranspColour['blue'],$TranspColour['alpha']);
+					$TranspColour['red'],$TranspColour['green'],$TranspColour['blue'],$TranspColour['alpha']);
 			}
 		} else {
 			$ixtranscolor = $ixbgcolor;
@@ -206,16 +199,15 @@ if( $automake and !isset($FileName)) {
 
 	if(!isset($text))
 		$text = $StockID;
-	if(strlen($text) > 0 ) {
+	if(mb_strlen($text) > 0 ) {
 		$fw = imagefontwidth($fontsize);
 		$fh = imagefontheight($fontsize);
 		$fy = (imagesy($im) - ($fh)) / 2;
 		$fyh = $fy + $fh - 1;
-		$textwidth = $fw * strlen($text);
+		$textwidth = $fw * mb_strlen($text);
 		$px = (imagesx($im) - $textwidth) / 2;
-		if (!$notextbg) {
+		if (!$notextbg)
 			imagefilledrectangle($im,$px,$fy,imagesx($im)-($px+1),$fyh, $ixtextbgcolor );
-		}
 		imagestring($im, $fontsize, $px, $fy, $text, $ixtextcolor);
 	}
 
@@ -227,41 +219,38 @@ if( $automake and !isset($FileName)) {
 		$im = imagecreatefrompng($tmpFileName);
 	}
 	// Have we got a background color
-	if( isset($BackgroundColour) ) {
+	if( isset($BackgroundColour) )
 		$BackgroundColour = DecodeBgColor( $BackgroundColour );
-	} else {
+	else
 		$BackgroundColour = DecodeBgColor( '#7F7F7F' );
-	}
 	if( !isset($BackgroundColour['alpha']) ) {
 		$ixbgcolor = imagecolorallocate($im,
-		$BackgroundColour['red'],$BackgroundColour['green'],$BackgroundColour['blue']);
+			$BackgroundColour['red'],$BackgroundColour['green'],$BackgroundColour['blue']);
 	} else {
 		$ixbgcolor = imagecolorallocatealpha($im,
-		$BackgroundColour['red'],$BackgroundColour['green'],$BackgroundColour['blue'],$BackgroundColour['alpha']);
+			$BackgroundColour['red'],$BackgroundColour['green'],$BackgroundColour['blue'],$BackgroundColour['alpha']);
 	}
 	// Have we got a text color
-	if( isset($TextColour) ) {
+	if( isset($TextColour) )
 		$TextColour = DecodeBgColor( $TextColour );
-	} else {
+	else
 		$TextColour = DecodeBgColor( '#000000' );
-	}
 	if( !isset($TextColour['alpha']) ) {
 		$ixtextcolor = imagecolorallocate($im,
-		$TextColour['red'],$TextColour['green'],$TextColour['blue']);
+			$TextColour['red'],$TextColour['green'],$TextColour['blue']);
 	} else {
 		$ixtextcolor = imagecolorallocatealpha($im,
-		$TextColour['red'],$TextColour['green'],$TextColour['blue'],$TextColour['alpha']);
+			$TextColour['red'],$TextColour['green'],$TextColour['blue'],$TextColour['alpha']);
 	}
+
 	$sw = imagesx($im);
 	$sh = imagesy($im);
-	if ( isset($width) and ($width != $sw) or isset($height) and ($height != $sh)) {
-		if( !isset($width) ) {
+	if ( isset($width) AND ($width != $sw) OR isset($height) AND ($height != $sh)) {
+		if( !isset($width) )
 			$width = imagesx($im);
-		}
-		if( !isset($height) ) {
+		if( !isset($height) )
 			$height = imagesy($im);
-		}
-		$resize_scale = min($width/$sw, $height/$sh);
+			$resize_scale = min($width/$sw, $height/$sh);
 		if ($resize_scale < 1) {
 			$resize_new_width = floor($resize_scale*$sw);
 			$resize_new_height = floor($resize_scale*$sh);
@@ -272,24 +261,24 @@ if( $automake and !isset($FileName)) {
 
 		$tmpim = imagecreatetruecolor($resize_new_width, $resize_new_height);
 		imagealphablending ( $tmpim, true);
-		imagecopyresized($tmpim,$im,0,0,0,0,$width, $height, imagesx($im), imagesy($im) );
+		imagecopyresampled($tmpim,$im,0,0,0,0,$resize_new_width, $resize_new_height, $sw, $sh );
 		imagedestroy($im);
 		$im = $tmpim;
 		unset($tmpim);
 
 		if( !isset($BackgroundColour['alpha']) ) {
 			$ixbgcolor = imagecolorallocate($im,
-			$BackgroundColour['red'],$BackgroundColour['green'],$BackgroundColour['blue']);
+				$BackgroundColour['red'],$BackgroundColour['green'],$BackgroundColour['blue']);
 		} else {
 			$ixbgcolor = imagecolorallocatealpha($im,
-			$BackgroundColour['red'],$BackgroundColour['green'],$BackgroundColour['blue'],$BackgroundColour['alpha']);
+				$BackgroundColour['red'],$BackgroundColour['green'],$BackgroundColour['blue'],$BackgroundColour['alpha']);
 		}
 		if( !isset($TextColour['alpha']) ) {
 			$ixtextcolor = imagecolorallocate($im,
-			$TextColour['red'],$TextColour['green'],$TextColour['blue']);
+				$TextColour['red'],$TextColour['green'],$TextColour['blue']);
 		} else {
 			$ixtextcolor = imagecolorallocatealpha($im,
-			$TextColour['red'],$TextColour['green'],$TextColour['blue'],$TextColour['alpha']);
+				$TextColour['red'],$TextColour['green'],$TextColour['blue'],$TextColour['alpha']);
 		}
 		//imagealphablending ( $im, false);
 	}
@@ -299,10 +288,10 @@ if( $automake and !isset($FileName)) {
 		if( $TranspColour != $BackgroundColour ) {
 			if( !isset($TextColour['alpha']) ) {
 				$ixtranscolor = imagecolorallocate($im,
-				$TranspColour['red'],$TranspColour['green'],$TranspColour['blue']);
+					$TranspColour['red'],$TranspColour['green'],$TranspColour['blue']);
 			} else {
 				$ixtranscolor = imagecolorallocatealpha($im,
-				$TranspColour['red'],$TranspColour['green'],$TranspColour['blue'],$TranspColour['alpha']);
+					$TranspColour['red'],$TranspColour['green'],$TranspColour['blue'],$TranspColour['alpha']);
 			}
 		} else {
 			$ixtranscolor = $ixbgcolor;
@@ -311,26 +300,23 @@ if( $automake and !isset($FileName)) {
 	if( $doTrans ) {
 		imagecolortransparent($im, $ixtranscolor);
 	}
-	if( $doTrans ) {
+	if( $doTrans )
 		$ixtextbgcolor = $ixtranscolor;
-	} else {
-		$ixtextbgcolor = $ixbgcolor;
-	}
+	else
+	    $ixtextbgcolor = $ixbgcolor;
 //	$ixtextbgcolor = imagecolorallocatealpha($im,
 //		0,0,0,0);
-	if(!isset($text)) {
+	if(!isset($text))
 		$text = $StockID;
-	}
-	if(strlen($text) > 0 ) {
+	if(mb_strlen($text) > 0 ) {
 		$fw = imagefontwidth($fontsize);
 		$fh = imagefontheight($fontsize);
 		$fy = imagesy($im) - ($fh);
 		$fyh = imagesy($im) - 1;
-		$textwidth = $fw * strlen($text);
+		$textwidth = $fw * mb_strlen($text);
 		$px = (imagesx($im) - $textwidth) / 2;
-		if (!$notextbg) {
+		if (!$notextbg)
 			imagefilledrectangle($im,$px,$fy,imagesx($im)-($px+1),$fyh, $ixtextbgcolor );
-		}
 		imagestring($im, $fontsize, $px, $fy, $text, $ixtextcolor);
 	}
 }

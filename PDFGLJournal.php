@@ -1,17 +1,23 @@
 <?php
 
-/* $Id$*/
 
 /* $Revision: 1.5 $ */
 
-include('includes/session.inc');
+include('includes/session.php');
 
 if (isset($_POST['JournalNo'])) {
 	$JournalNo=$_POST['JournalNo'];
+	$Type = $_POST['Type'];
 } else if (isset($_GET['JournalNo'])) {
 	$JournalNo=$_GET['JournalNo'];
+	$Type = $_GET['Type'];
 } else {
 	$JournalNo='';
+}
+if (empty($JournalNo) OR empty($Type)) {
+	prnMsg(_('This page should be called with Journal No and Type'),'error');
+	include('includes/footer.php');
+	exit;
 }
 
 if ($JournalNo=='Preview') {
@@ -44,9 +50,10 @@ if ($JournalNo=='Preview') {
 				ON gltrans.account=chartmaster.accountcode
 			LEFT JOIN tags
 				ON gltrans.tag=tags.tagref
-			WHERE gltrans.type='0'
+			WHERE gltrans.type='" . $Type . "'
 				AND gltrans.typeno='" . $JournalNo . "'";
-	$result=DB_query($sql, $db);
+
+	$result=DB_query($sql);
 	$LineCount = DB_num_rows($result); // UldisN
 	$myrow=DB_fetch_array($result);
 	$JournalDate=$myrow['trandate'];
@@ -80,7 +87,7 @@ while ($counter<=$LineCount) {
 	$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column1->x,$Page_Height-$YPos,$FormDesign->Data->Column1->Length,$FormDesign->Data->Column1->FontSize, $AccountCode);
 	$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column2->x,$Page_Height-$YPos,$FormDesign->Data->Column2->Length,$FormDesign->Data->Column2->FontSize, $Description);
 	$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column3->x,$Page_Height-$YPos,$FormDesign->Data->Column3->Length,$FormDesign->Data->Column3->FontSize, $Narrative);
-	$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column4->x,$Page_Height-$YPos,$FormDesign->Data->Column4->Length,$FormDesign->Data->Column4->FontSize, locale_money_format($Amount,$_SESSION['CompanyRecord']['currencydefault']), 'right');
+	$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column4->x,$Page_Height-$YPos,$FormDesign->Data->Column4->Length,$FormDesign->Data->Column4->FontSize, locale_number_format($Amount,$_SESSION['CompanyRecord']['decimalplaces']), 'right');
 	$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column5->x,$Page_Height-$YPos,$FormDesign->Data->Column5->Length,$FormDesign->Data->Column5->FontSize, $Tag);
 	$LeftOvers = $pdf->addTextWrap($FormDesign->Data->Column6->x,$Page_Height-$YPos,$FormDesign->Data->Column6->Length,$FormDesign->Data->Column6->FontSize, $JobRef, 'left');
 	$YPos += $line_height;
@@ -93,19 +100,15 @@ while ($counter<=$LineCount) {
 	} //end if need a new page headed up
 }
 
-$LeftOvers = $pdf->addText($FormDesign->ReceiptDate->x,$Page_Height-$FormDesign->ReceiptDate->y,$FormDesign->ReceiptDate->FontSize, _('Date of Receipt: ').$Date);
-
-$LeftOvers = $pdf->addText($FormDesign->SignedFor->x,$Page_Height-$FormDesign->SignedFor->y,$FormDesign->SignedFor->FontSize, _('Signed for ').'______________________');
-
 if ($LineCount == 0) {   //UldisN
-	$title = _('GRN Error');
-	include('includes/header.inc');
-	prnMsg(_('There were no GRN to print'),'warn');
-	echo '<br /><a href="'.$rootpath.'/index.php">'. _('Back to the menu').'</a>';
-	include('includes/footer.inc');
+	$Title = _('Printing Error');
+	include('includes/header.php');
+	prnMsg(_('There were no Journals to print'),'warn');
+	echo '<br /><a href="'.$RootPath.'/index.php">' .  _('Back to the menu') . '</a>';
+	include('includes/footer.php');
 	exit;
 } else {
-    $pdf->OutputD($_SESSION['DatabaseName'] . '_GRN_' . date('Y-m-d').'.pdf');//UldisN
+    $pdf->OutputD($_SESSION['DatabaseName'] . '_Journal_' . date('Y-m-d').'.pdf');//UldisN
     $pdf->__destruct(); //UldisN
 }
 ?>

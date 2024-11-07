@@ -14,7 +14,7 @@ require_once 'class.linearBarcode.php';
 /**
  * Code 128
  * Class implements Code 128 barcode
- * 
+ *
  * @author Tomáš Horáček <info@webpack.cz>
  * @package BarcodePack
  */
@@ -166,17 +166,17 @@ class code128 extends linearBarcode {
 		'11000111010',	// 106 STOP
 		'11'			// 107 Termination bar
 	);
-	
+
 
 	/**
 	 * Constructor
-	 * 
+	 *
 	 * @param string $text
 	 * @param int $moduleSize
 	 */
 	public function  __construct($text, $moduleSize=2)
 	{
-		try {	
+		try {
 			// Fill set A
 			for($i=32; $i<=95; $i++) {
 				// chars SPACE - UNDERSPACE
@@ -199,8 +199,8 @@ class code128 extends linearBarcode {
 				$this->charsB .= chr($i);
 				$allowedChars[] = chr($i);
 			}
-			
-			
+
+
 			parent::__construct($text, $moduleSize, $allowedChars);
 
 
@@ -209,7 +209,7 @@ class code128 extends linearBarcode {
 		} catch (Exception $e) {
 			throw $e;
 		}
-		
+
 	}
 
 
@@ -230,18 +230,18 @@ class code128 extends linearBarcode {
 
 		$biteCode['DATA'] = '';
 		// Find start character
-		if(strlen($this->text)>=2 && is_numeric($this->text{0}) && is_numeric($this->text{1})) {
+		if(strlen($this->text)>=2 && is_numeric($this->text[0]) && is_numeric($this->text[1])) {
 			// If the first and second characters are numeric use character set C
 			// and insert START_C char
 			$biteCode['DATA'] .= $this->codeTable[self::START_C];
 			$characterSet = self::CHARSET_C;
 			$weightedSum += self::START_C;
-		} else if (strpos ($this->charsB, $this->text{0})) {
+		} else if (strpos ($this->charsB, $this->text[0])) {
 			// Character set B
 			$biteCode['DATA'] .= $this->codeTable[self::START_B];
 			$characterSet = self::CHARSET_B;
 			$weightedSum += self::START_B;
-		} else if (strpos ($this->charsA, $this->text{0})) {
+		} else if (strpos ($this->charsA, $this->text[0])) {
 			// Character set A
 			$biteCode['DATA'] .= $this->codeTable[self::START_A];
 			$characterSet = self::CHARSET_A;
@@ -255,39 +255,39 @@ class code128 extends linearBarcode {
 			switch ($characterSet) {
 				case 'B':
 					// Character set B is default, so it is first
-					$characterValue = $this->setB[ord($this->text{$i})];
+					$characterValue = $this->setB[ord($this->text[$i])];
 					$biteCode['DATA'] .= $this->codeTable[$characterValue];
 					break;
 
 				case 'A':
-					$characterValue = $this->setA[ord($this->text{$i})];
+					$characterValue = $this->setA[ord($this->text[$i])];
 					$biteCode['DATA'] .= $this->codeTable[$characterValue];
 					break;
 
 				case 'C':
-					$characterValue = intval($this->text{$i}.$this->text{$i+1});
+					$characterValue = intval($this->text[$i].$this->text[$i+1]);
 					$biteCode['DATA'] .= $this->codeTable[$characterValue];
-					$i++;		
+					$i++;
 					break;
 
 				default:
 					break;
 			}
-			
+
 			$weightedSum += $characterValue*$checksumCounter;
-			$checksumCounter++;	
+			$checksumCounter++;
 
 			// find next char set.
-			if(strlen($this->text) > ($i+2) && is_numeric($this->text{$i+1}) && is_numeric($this->text{$i+2})) {
+			if(strlen($this->text) > ($i+2) && is_numeric($this->text[$i+1]) && is_numeric($this->text[$i+2])) {
 				if($characterSet!=self::CHARSET_C) {
 					$characterValue = 99;
 					$biteCode['DATA'] .= $this->codeTable[$characterValue];
 					$weightedSum += $characterValue*$checksumCounter;
-					$checksumCounter++;	
+					$checksumCounter++;
 				}
 				$characterSet = 'C';
-			} else if(isset($this->text{$i+1})) {
-				$newCharacterSet = $this->findCharacterSet($this->text{$i+1});
+			} else if(isset($this->text[$i+1])) {
+				$newCharacterSet = $this->findCharacterSet($this->text[$i+1]);
 				if($characterSet==self::CHARSET_C) {
 					if($newCharacterSet==self::CHARSET_A) {
 						$characterValue = 101;
@@ -296,7 +296,7 @@ class code128 extends linearBarcode {
 						$characterValue = 100;
 					}
 					$weightedSum += $characterValue*$checksumCounter;
-					$checksumCounter++;	
+					$checksumCounter++;
 					$biteCode['DATA'] .= $this->codeTable[$characterValue];
 				}
 				$characterSet = $newCharacterSet;
@@ -305,7 +305,7 @@ class code128 extends linearBarcode {
 
 		// Count the checksum
 		$checkSum = (int) $weightedSum%103;
-		
+
 		// Add the checksum
 		$biteCode['DATA'] .= $this->codeTable[$checkSum];
 
@@ -322,7 +322,7 @@ class code128 extends linearBarcode {
 	/**
 	 * Find Character Set
 	 * Find correct character set depends on imput char
-	 * 
+	 *
 	 * @param char $char
 	 * @return char
 	 */

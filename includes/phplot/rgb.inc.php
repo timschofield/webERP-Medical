@@ -1,5 +1,5 @@
 <?php
-/* $Id: rgb.inc.php,v 1.2 2009/06/12 01:58:35 lbayuk Exp $ */
+/* $Id: rgb.inc.php 393 2009-06-12 01:58:35Z lbayuk $ */
 /*
  * This is a large color map which can be used by PHPlot via
  *     $plot->SetRGBArray('large')
@@ -77,8 +77,8 @@ $ColorArray = array(
 	"LightGray"			=> array(211, 211, 211),
 	"midnight blue"		=> array( 25,  25, 112),
 	"MidnightBlue"		=> array( 25,  25, 112),
-	"#616161"			=> array(  0,   0, 128),
-	"#616161 blue"			=> array(  0,   0, 128),
+	"navy"			=> array(  0,   0, 128),
+	"navy blue"			=> array(  0,   0, 128),
 	"NavyBlue"			=> array(  0,   0, 128),
 	"cornflower blue"	=> array(100, 149, 237),
 	"CornflowerBlue"	=> array(100, 149, 237),

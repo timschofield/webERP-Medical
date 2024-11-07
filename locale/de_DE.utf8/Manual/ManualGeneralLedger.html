@@ -1,7 +1,7 @@
 <br /><br />
-<h1><a name="GeneralLedger">Hauptbuchhaltung</a></h1>
+<a name="GeneralLedger"><font size="+3"><b>Hauptbuchhaltung</b></font></a>
 <br /><br />
-<h2>Überblick</h2>
+<font size="+2"><b>Überblick</b></font>
 <br /><br />
 Die Hauptbuchhaltung ist der zentrale Buchhaltungsbereich für die Nebenbücher für die Lieferanten (Kreditoren), Kunden (Debitoren) und Materialien (Bestände). Alle Buchungen in den Nebenbüchern werden auch im Hauptbuch durch Buchungen abgebildet. Durch die Einstellungen zur Integration wird festgelegt, wie die Buchungen in den Nebenbuchhaltungen im Hauptbuch abgebildet werden. Die meisten Vorgänge im Hauptbuch werden automatich durch die Aktivitäten in den Nebenbüchern der Debitoren, Kreditoren und Bestandsführung angelegt.
 <br /><br />
@@ -17,7 +17,7 @@ Daneben gibt es außerdem die Möglichkeiten:
 
 <!-- Help Begin: AccountGroups -->
 
-<h2>Kontengruppen</h2>
+<font size="+2"><b>Kontengruppen</b></font>
 <br /><br />
 Die Kontengruppe ist die übergeordntete Gruppierung der Hauptbuchkonten (Parentobjekt - für diejenigen, die etwas von objektorientierter Programmierung verstehen). Die angelegten Konten erben die Eigenschaften von der Kontengruppe, d. h. das Konto wird ein Erfolgskonto, wenn die Kontengruppe der Gewinn- und Verlustrechnung zugeordnet ist. Andernfalls, wenn die Kontengruppe der Bilanz zugeordnet ist, werden die Konten in der Bilanzstruktur in der durch die Kontengruppen-Reihenfolge bestimmten Folge als Bestandskonto dargestellt.
 <br /><br />
@@ -41,7 +41,7 @@ Ein Bilanzkonto (oder Bestandskonto) ist eines, bei dem nur der Saldo am Ende de
 
 <!-- Help Begin: BankAccounts -->
 
-<h2>Bankkonten</h2>
+<font size="+2"><b>Bankkonten</b></font>
 <br /><br />
 Bestimmte Hauptbuchkonten können als Bankkonten definiert sein - dabei können Sie so viele Bankkonten wie nötig anlegen. Als Bankkonten eingerichtete Hauptbuchkonten can be reconciled to bank statements using the matching facilities. Buchungen auf Bankkonten können Zahlungseingänge oder Zahlungsausgänge sein, das können auch Sammelbuchungen sein, die aber für die Zwecke der Zuordnung der Kontoauszüge vorbehalten sind. Mit dem Vorgang zur Erfassung von Bankzahlungen können Sie auch eine Vielzahl anderer Hauptbuchkonten ansprechen, aber nur eine Position für das Bankkonto. Dieser Vorgang erlaubt es auch, Ausgangszahlungen an Kreditoren anzulegen. Analog dazu können mit dem Vorgang Zahlungseingang eine Reihe von Eingängen von den Unterschiedlichsten Kunden erfasst werden, die in einem Betrag zusammen dem Bankkonto gutgeschrieben werden. Dabei erscheint nur ein Betrag als Summe dieser Buchungen auf dem Bankkonto. Dieser Bankkontenvorgang ist auf die Zuordnung von Zahlungseingängen ausgehend vom Kontoauszug eingerichtet worden.
 <br /><br />
@@ -55,7 +55,7 @@ Bankkonten können über Hauptmenü &rarr; Einstellungen &rarr; Allgemeines &rarr; 
 
 <!-- Help Begin: Payments -->
 
-<h3>Zahlungsausgänge</h3>
+<font size="+1"><b>Zahlungsausgänge</b></font>
 <br /><br />
 Aus dem Hauptmenü &rarr; Hauptbuchhaltung &rarr; Vorgänge wählen Sie Zahlungsausgänge.
 <br /><br />
@@ -73,7 +73,7 @@ Zahlungen können auf zweierlei Weise ausgeführt werden, als Zahlungsausgang im H
 <!-- Help End: Payments -->
 
 <br /><br />
-<h2>Einrichten der Hauptbuchintegration</h2>
+<font size="+2"><b>Einrichten der Hauptbuchintegration</b></font>
 <br /><br />
 Jede Buchung wird an zwei Stellen dokumentiert, z. B. auf dem Bankkonto und dem Aufwandskonto, wofür die Zahlung erfolgt ist (Bürobedarf, Benzin, Bewirtung, Werbungskosten oder was immer) (doppelte Buchführung). Eine Position wird links im Soll gebucht, die andere rechts auf der Habenseite, wenn Sie sich die Probebilanz ansehen ist die Summe aller Sollsalden gleich der Summe der Habensalden.
 <br /><br />
@@ -149,7 +149,7 @@ Die Ebene der Hauptbuchintegration wird durch die Schalter in den Unternehmensei
 
 <!-- Help Begin: SalesGLPostings -->
 
-<h3>Umsatzpositionen</h3>
+<font size="+1"><b>Umsatzpositionen</b></font>
 <br /><br />
 Die bebuchten Sachkonten werden durch eine Reihe von Parametern festgelegt. 
 <br /><br />
@@ -179,7 +179,7 @@ Das Umsatzsteuerkonto ergibt sich aus der Liste der Steuerschlüssel in der Steue
 
 <!-- Help Begin: COGSGLPostings -->
 
-<h3>Bestandsbuchungen</h3>
+<font size="+1"><b>Bestandsbuchungen</b></font>
 <br /><br />
 Die verwendeten Sachkonten werden auf der Grundlage des Vertriebsbereiches, der Umsatzart/Preisliste und der Warengruppe der verkauften Materialien bestimmt. Ähnlich wie für die Bestimmung der Erlöskonten werden die Konten in einer Kontenfindungstabelle gehalten und können unter Einstellungen Debitoren/Kreditoren gepflegt werden. Es wird die gleiche Logik für die Bestimmung des Konten verwendet wie oben für die Erlöskonten beschrieben, die Funktion GetCOGSGLAccount ist im selben GetSalesTransGLCode.inc enthalten und kann bei Bedarf einfach angepasst werden.
 <br /><br />
@@ -192,14 +192,14 @@ Auch das Erfolgskonto für die Preisabweichungen zwischen den Standardkosten und 
 <!-- Help End: COGSGLPostings -->
 
 <br /><br />
-<h2>EDI</h2>
+<font size="+2"><b>EDI</b></font>
 <br /><br />
 EDI steht für Electronic Data Interchange - den elektronischen Datenaustausch von Buchungsinformationen zwischen Geschäftspartnern. Es gibt viele Standards für die Verschlüsselung solcher Vorgänge, weit verbreitet ist der EDIFACT-Standard der Vereinten Nationen und davon abgeleitet die EANCOM-Variante. Tatsächlich nutzen viele Brachen die Standformate in leicht abgewandeltet Weise, und einzelne Unternehmen innerhalb ihrer Branche wiederum vom Branchenstandard leicht abgewandelt. So sind letztendlich die Standards tatsächlich nur als Rahmenwerk zu gebrauchen, wie die Nachrichten aussehen sollten. Bei der Umsetzung von EDI in webERP ist einige Flexibilität im Format der zu sendenden und zu empfangenden Nachrichten vorgesehen. EDI-Meldungen werden als Textdatei in dem Verzeichnis angelegt, das in der Konfiguration für ausgehende EDI-Meldungen hinterlegt ist und auch die Protokolle der gesendeten Meldungen aufnimmt. Die Nachrichten können als Email-Anhang versendet werden oder per FTP an eine vom Kunden genannte IP-Adresse hochgeladen werden (ftp-Benutzer und Passwort nennt Ihnen der Kunde).
 <br /><br />
 
 <!-- Help Begin: CustEDISetup -->
 
-<h3>EDI einrichten</h3>
+<font size="+1"><b>EDI einrichten</b></font>
 <br /><br />
 Um EDI-Belege für einen Kunden einzurichten, wählen Sie zuerst den Kunden in der Kundensuche aus und klicken dann auf den Link Kunden-EDI-konfiguration. Diese Seite erlaubt die Auswahl der Vorgänge, die elektronisch übermittelt werden sollen, momentan sind nur die Nachrichtenarten INVOIC für das Versenden von Rechnungen und Gutschriften und ORDER für das Empfangen von Kundenaufträgen unterstützt. Die Nachrichtenarten müssen einzen aktiviert und eingerichtet werden. Jeder Kunde muss folgende Angaben haben:
 <br /><br />
@@ -213,7 +213,7 @@ Um das Versenden von EDI-Rechnungen zu aktivieren, muss das Skript EDISendInvoic
 <br /><br />
 Um das Entgegennehmen von EDI-Aufträgen zu aktivieren, muss das Skript EDIProcessOrders.php mit cron oder einem anderen Scheduler eingeplant werden.
 <br /><br />
-<h3>Versenden von EDI-Rechnungen</h3>
+<font size="+1"><b>Versenden von EDI-Rechnungen</b></font>
 <br /><br />
 EDI-Nachrichten bestehen aus einzelnen Segmenten, die in einer bestimmten Reihenfolge angeordnet werden. Weil Kunden die EDI-Nachrichten in geringfügig voneinander abweichenden Formaten benötigen, kann das genaue Format in der Tabelle EDIMessageFormat konfiguriert werden. Diese Tabelle hat für jede Rechnungszeile einen Datensatz und die Angabe der Reihenfolge wann diese in der Nachricht erscheint. Das Feld Zeilentext in dieser Tabelle kann alle vordefinierten EDI-Variablen enthalten, sie sind durch [ und ] eingeklammert, um anzugeben, dass es sich um Variablen handelt, die durch den entsprechenden Wert ersetzt werden.
 <br /><br />

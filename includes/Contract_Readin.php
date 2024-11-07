@@ -1,34 +1,35 @@
 <?php
-/* $Id: Contract_Readin.php 3692 2010-08-15 09:22:08Z daintree $ */
 /*Contract_Readin.php is used by the modify existing Contract in Contracts.php and also by ContractCosting.php */
 
 $ContractHeaderSQL = "SELECT contractdescription,
-															contracts.debtorno,
-															contracts.branchcode,
-															contracts.loccode,
-															status,
-															categoryid,
-															orderno,
-															margin,
-															wo,
-															requireddate,
-															drawing,
-															exrate,
-															debtorsmaster.name,
-															custbranch.brname,
-															debtorsmaster.currcode
-													FROM contracts INNER JOIN debtorsmaster
-													ON contracts.debtorno=debtorsmaster.debtorno
-													INNER JOIN currencies
-													ON debtorsmaster.currcode=currencies.currabrev
-													INNER JOIN custbranch
-													ON debtorsmaster.debtorno=custbranch.debtorno
-													AND contracts.branchcode=custbranch.branchcode
-													WHERE contractref= '" . $ContractRef . "'";
+							contracts.debtorno,
+							contracts.branchcode,
+							contracts.loccode,
+							contracts.customerref,
+							status,
+							categoryid,
+							orderno,
+							margin,
+							wo,
+							requireddate,
+							drawing,
+							exrate,
+							debtorsmaster.name,
+							custbranch.brname,
+							debtorsmaster.currcode
+						FROM contracts INNER JOIN debtorsmaster
+						ON contracts.debtorno=debtorsmaster.debtorno
+						INNER JOIN currencies
+						ON debtorsmaster.currcode=currencies.currabrev
+						INNER JOIN custbranch
+						ON debtorsmaster.debtorno=custbranch.debtorno
+						AND contracts.branchcode=custbranch.branchcode
+						INNER JOIN locationusers ON locationusers.loccode=contracts.loccode AND locationusers.userid='" .  $_SESSION['UserID'] . "' AND locationusers.canupd=1
+						WHERE contractref= '" . $ContractRef . "'";
 
 $ErrMsg =  _('The contract cannot be retrieved because');
 $DbgMsg =  _('The SQL statement that was used and failed was');
-$ContractHdrResult = DB_query($ContractHeaderSQL,$db,$ErrMsg,$DbgMsg);
+$ContractHdrResult = DB_query($ContractHeaderSQL,$ErrMsg,$DbgMsg);
 
 if (DB_num_rows($ContractHdrResult)==1 and !isset($_SESSION['Contract'.$identifier]->ContractRef )) {
 
@@ -38,6 +39,7 @@ if (DB_num_rows($ContractHdrResult)==1 and !isset($_SESSION['Contract'.$identifi
 	$_SESSION['Contract'.$identifier]->DebtorNo = $myrow['debtorno'];
 	$_SESSION['Contract'.$identifier]->BranchCode = $myrow['branchcode'];
 	$_SESSION['Contract'.$identifier]->LocCode = $myrow['loccode'];
+	$_SESSION['Contract'.$identifier]->CustomerRef = $myrow['customerref'];
 	$_SESSION['Contract'.$identifier]->Status = $myrow['status'];
 	$_SESSION['Contract'.$identifier]->CategoryID = $myrow['categoryid'];
 	$_SESSION['Contract'.$identifier]->OrderNo = $myrow['orderno'];
@@ -55,18 +57,19 @@ if (DB_num_rows($ContractHdrResult)==1 and !isset($_SESSION['Contract'.$identifi
 /*now populate the contract BOM array with the items required for the contract */
 
 	$ContractBOMsql = "SELECT contractbom.stockid,
-														stockmaster.description,
-														contractbom.workcentreadded,
-														contractbom.quantity,
-														stockmaster.units,
-														stockmaster.materialcost+stockmaster.labourcost+stockmaster.overheadcost AS cost
-												FROM contractbom INNER JOIN stockmaster
-												ON contractbom.stockid=stockmaster.stockid
-												WHERE contractref ='" . $ContractRef . "'";
+							stockmaster.description,
+							contractbom.workcentreadded,
+							contractbom.quantity,
+							stockmaster.units,
+							stockmaster.decimalplaces,
+							stockmaster.materialcost+stockmaster.labourcost+stockmaster.overheadcost AS cost
+						FROM contractbom INNER JOIN stockmaster
+						ON contractbom.stockid=stockmaster.stockid
+						WHERE contractref ='" . $ContractRef . "'";
 
 	$ErrMsg =  _('The bill of material cannot be retrieved because');
 	$DbgMsg =  _('The SQL statement that was used to retrieve the contract bill of material was');
-	$ContractBOMResult = DB_query($ContractBOMsql,$db,$ErrMsg,$DbgMsg);
+	$ContractBOMResult = DB_query($ContractBOMsql,$ErrMsg,$DbgMsg);
 
 	if (DB_num_rows($ContractBOMResult) > 0) {
 		while ($myrow=DB_fetch_array($ContractBOMResult)) {
@@ -75,21 +78,22 @@ if (DB_num_rows($ContractHdrResult)==1 and !isset($_SESSION['Contract'.$identifi
 																	$myrow['workcentreadded'],
 																	$myrow['quantity'],
 																	$myrow['cost'],
-																	$myrow['units']);
+																	$myrow['units'],
+																	$myrow['decimalplaces']);
 		} /* add contract bill of materials BOM lines*/
 	} //end is there was a contract BOM to add
 	//Now add the contract requirments
 	$ContractReqtsSQL = "SELECT requirement,
-															quantity,
-															costperunit,
-															contractreqid
-													FROM contractreqts
-													WHERE contractref ='" . $ContractRef . "'
-													ORDER BY contractreqid";
+								quantity,
+								costperunit,
+								contractreqid
+						FROM contractreqts
+						WHERE contractref ='" . $ContractRef . "'
+						ORDER BY contractreqid";
 
 	$ErrMsg =  _('The other contract requirementscannot be retrieved because');
 	$DbgMsg =  _('The SQL statement that was used to retrieve the other contract requirments was');
-	$ContractReqtsResult = DB_query($ContractReqtsSQL,$db,$ErrMsg,$DbgMsg);
+	$ContractReqtsResult = DB_query($ContractReqtsSQL,$ErrMsg,$DbgMsg);
 
 	if (DB_num_rows($ContractReqtsResult) > 0) {
 		while ($myrow=DB_fetch_array($ContractReqtsResult)) {

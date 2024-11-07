@@ -1,29 +1,33 @@
 <?php
-
-/* $Id$ */
+// Z_poEditLangRemaining.php
+// Edit Remaining Strings For This Language.
 
 /* Steve Kitchen */
 
 /* This code is really ugly ... */
 
-include ('includes/session.inc');
+//$PageSecurity = 15;
 
-$title = _('Edit Remaining Items');
+include ('includes/session.php');
+$ViewTopic = "SpecialUtilities";
+$BookMark = "Z_poEditLangRemaining";
+$Title = _('Edit Remaining Strings For This Language');
+include('includes/header.php');
+echo '<p class="page_title_text"><img alt="" src="', $RootPath, '/css/', $Theme,
+	'/images/maintenance.png" title="', // Icon image.
+	$Title, '" /> ', // Icon title.
+	$Title, '</p>';// Page title.
 
-include('includes/header.inc');
+/* Your webserver user MUST have read/write access to here,	otherwise you'll be wasting your time */
 
-/* Your webserver user MUST have read/write access to here,
-	otherwise you'll be wasting your time */
+echo '<br />&nbsp;<a href="' . $RootPath . '/Z_poAdmin.php">' . _('Back to the translation menu') . '</a>';
+echo '<br /><br />&nbsp;' . _('Utility to edit a language file module');
+echo '<br />&nbsp;' . _('Current language is') . ' ' . $_SESSION['Language'];
 
 $PathToLanguage		= './locale/' . $_SESSION['Language'] . '/LC_MESSAGES/messages.po';
 $PathToNewLanguage	= './locale/' . $_SESSION['Language'] . '/LC_MESSAGES/messages.po.new';
 
-echo '<br />&nbsp;<a href="' . $rootpath . '/Z_poAdmin.php">' . _('Back to the translation menu') . '</a>';
-echo '<br /><br />&nbsp;' . _('Utility to edit a language file module');
-echo '<br />&nbsp;' . _('Current language is') . ' ' . $_SESSION['Language'];
-
-
-	$PathToLanguage_mo = substr($PathToLanguage,0,strrpos($PathToLanguage,'.')) . '.mo';
+$PathToLanguage_mo = mb_substr($PathToLanguage,0,strrpos($PathToLanguage,'.')) . '.mo';
 
   /* now read in the language file */
 
@@ -34,7 +38,7 @@ echo '<br />&nbsp;' . _('Current language is') . ' ' . $_SESSION['Language'];
     // save the modifications
 
 		echo '<br /><table><tr><td>';
-		echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
+		echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
     /* write the new language file */
@@ -80,12 +84,12 @@ echo '<br />&nbsp;' . _('Current language is') . ' ' . $_SESSION['Language'];
 		$j = 1;
 
 		for ($i=17; $i<=$LangFileEntries; $i++) {			/* start at line 18 to skip the header */
-			if (substr($LangFile[$i], 0, 2) == '#:') {		/* it's a module reference */
-				$AlsoIn[$j] .= str_replace(' ','<br />', substr($LangFile[$i],3)) . '<br />';
-			} elseif (substr($LangFile[$i], 0 , 5) == 'msgid') {
-				$DefaultText[$j] = substr($LangFile[$i], 7, strlen($LangFile[$i])-9);
-			} elseif (substr($LangFile[$i], 0 , 6) == 'msgstr') {
-				$ModuleText[$j] = substr($LangFile[$i], 8, strlen($LangFile[$i])-10);
+			if (mb_substr($LangFile[$i], 0, 2) == '#:') {		/* it's a module reference */
+				$AlsoIn[$j] .= str_replace(' ','<br />', mb_substr($LangFile[$i],3)) . '<br />';
+			} elseif (mb_substr($LangFile[$i], 0 , 5) == 'msgid') {
+				$DefaultText[$j] = mb_substr($LangFile[$i], 7, mb_strlen($LangFile[$i])-9);
+			} elseif (mb_substr($LangFile[$i], 0 , 6) == 'msgstr') {
+				$ModuleText[$j] = mb_substr($LangFile[$i], 8, mb_strlen($LangFile[$i])-10);
 				$msgstr[$j] = $i;
 				$j++;
 			}
@@ -95,21 +99,21 @@ echo '<br />&nbsp;' . _('Current language is') . ' ' . $_SESSION['Language'];
 
 /* stick it on the screen */
 
-		echo '<br />&nbsp;' . _('When finished modifying you must click on Modify at the bottom in order to save changes');
+    echo '<br />&nbsp;' . _('When finished modifying you must click on Modify at the bottom in order to save changes');
 		echo '<div class="centre">';
 		echo '<br />';
 		prnMsg (_('Your existing translation file (messages.po) will be saved as messages.po.old') . '<br />', 'info', _('PLEASE NOTE'));
 		echo '<br />';
 		echo '</div>';
-		echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
-		echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
+		echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '">';
+	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 		echo '<table>';
-		echo '<tr><th align="center">' . _('Language File for') . ' "' . $_SESSION['Language'] . '" </th></tr>';
+		echo '<tr><th ALIGN="center">' . _('Language File for') . ' "' . $_SESSION['Language'] . '"</th></tr>';
 		echo '<tr><td></td></tr>';
 		echo '<tr><td>';
 
-		echo '<table width="100%">';
+		echo '<table WIDTH="100%">';
 		echo '<tr>';
 		echo '<th>' . _('Default text') . '</th>';
 		echo '<th>' . _('Translation') . '</th>';
@@ -119,9 +123,9 @@ echo '<br />&nbsp;' . _('Current language is') . ' ' . $_SESSION['Language'];
 		for ($i=1; $i<=$TotalLines; $i++) {
 			if ($ModuleText[$i] == "") {
 				echo '<tr>';
-				echo '<td valign="top"><I>'. $DefaultText[$i] . '</I></td>';
-				echo '<td valign="top"><input type="text" size="60" name="moduletext_' . $msgstr[$i] . '" value="' . $ModuleText[$i] . '" /></td>';
-				echo '<td valign="top">' . $AlsoIn[$i] . '<input type="hidden" name="msgstr_' . $msgstr[$i] . '" value="' . $msgstr[$i] . '" /></td>';
+				echo '<td VALIGN="top"><I>' .  $DefaultText[$i] . '</I></td>';
+				echo '<td VALIGN="top"><input type="text" size="60" name="moduletext_' . $msgstr[$i] . '" value="' . $ModuleText[$i] . '" /></td>';
+				echo '<td VALIGN="top">' . $AlsoIn[$i] . '<input type="hidden" name="msgstr_' . $msgstr[$i] . '" value="' . $msgstr[$i] . '" /></td>';
 				echo '</tr>';
 				echo '<tr><th colspan="3"></th></tr>';
 			}
@@ -132,13 +136,15 @@ echo '<br />&nbsp;' . _('Current language is') . ' ' . $_SESSION['Language'];
 		echo '</td></tr>';
 		echo '</table>';
 		echo '<br /><div class="centre">';
-		echo '<button type="submit" name="submit">' . _('Modify') . '</button>&nbsp;&nbsp;';
+		echo '<input type="submit" name="submit" value="' . _('Modify') . '" />&nbsp;&nbsp;';
 		echo '<input type="hidden" name="module" value="' . $_POST['module'] . '" />';
 
 		echo '</form>';
 		echo '</div>';
 	}
 
-include('includes/footer.inc');
+
+
+include('includes/footer.php');
 
 ?>

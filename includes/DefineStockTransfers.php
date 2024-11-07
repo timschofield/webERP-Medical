@@ -1,5 +1,4 @@
 <?php
-/* $Id$*/
 
 /*Class to hold stock transfer records */
 
@@ -8,25 +7,48 @@ class StockTransfer {
 	Var $TrfID;
 	Var $StockLocationFrom;
 	Var $StockLocationFromName;
+	Var $StockLocationFromAccount;
 	Var $StockLocationTo;
 	Var $StockLocationToName;
+	Var $StockLocationToAccount;
 	Var $TranDate;
 	Var $TransferItem; /*Array of LineItems */
 
-	function StockTransfer($TrfID,
+	function __construct($TrfID,
 				$StockLocationFrom,
 				$StockLocationFromName,
+				$StockLocationFromAccount,
 				$StockLocationTo,
 				$StockLocationToName,
+				$StockLocationToAccount,
 				$TranDate )	{
 
 		$this->TrfID = $TrfID;
 		$this->StockLocationFrom = $StockLocationFrom;
 		$this->StockLocationFromName = $StockLocationFromName;
+		$this->StockLocationFromAccount = $StockLocationFromAccount;
 		$this->StockLocationTo =$StockLocationTo;
 		$this->StockLocationToName =$StockLocationToName;
+		$this->StockLocationToAccount =$StockLocationToAccount;
 		$this->TranDate = $TranDate;
 		$this->TransferItem=array(); /*Array of LineItem s */
+	}
+	function StockTransfer($TrfID,
+				$StockLocationFrom,
+				$StockLocationFromName,
+				$StockLocationFromAccount,
+				$StockLocationTo,
+				$StockLocationToName,
+				$StockLocationToAccount,
+				$TranDate ) {
+		self::__construct($TrfID,
+				$StockLocationFrom,
+				$StockLocationFromName,
+				$StockLocationFromAccount,
+				$StockLocationTo,
+				$StockLocationToName,
+				$StockLocationToAccount,
+				$TranDate );
 	}
 }
 
@@ -39,11 +61,12 @@ class LineItem {
 	var $PartUnit;
 	var $Controlled;
 	var $Serialised;
-	var $Perishable;
 	var $DecimalPlaces;
+	var $Perishable;
 	var $SerialItems; /*array to hold controlled items*/
+	var $StandardCost;
 //Constructor
-	function LineItem($StockID,
+	function __construct($StockID,
 			$ItemDescription,
 			$Quantity,
 			$PartUnit,
@@ -57,8 +80,8 @@ class LineItem {
 		$this->PartUnit = $PartUnit;
 		$this->Controlled = $Controlled;
 		$this->Serialised = $Serialised;
-		$this->Perishable = $Perishable;
 		$this->DecimalPlaces = $DecimalPlaces;
+		$this->Perishable = $Perishable;
 		$this->ShipQty = $Quantity;
 		if ($this->Controlled==1){
 			$this->Quantity = 0;
@@ -66,6 +89,24 @@ class LineItem {
 			$this->Quantity = $Quantity;
 		}
 		$this->SerialItems = array();
+	}
+
+	function LineItem($StockID,
+				$ItemDescription,
+				$Quantity,
+				$PartUnit,
+				$Controlled,
+				$Serialised,
+				$Perishable,
+				$DecimalPlaces) {
+		self::__construct($StockID,
+					$ItemDescription,
+					$Quantity,
+					$PartUnit,
+					$Controlled,
+					$Serialised,
+					$Perishable,
+					$DecimalPlaces);
 	}
 }
 ?>

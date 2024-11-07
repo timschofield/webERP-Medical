@@ -1,27 +1,20 @@
 <?php
-/* $Id$*/
 
-include('includes/session.inc');
+//$PageSecurity=15;
 
-$title=_('File Upload');
+include('includes/session.php');
 
-include('includes/header.inc');
+$Title=_('File Upload');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
+include('includes/header.php');
 
-echo '<form enctype="multipart/form-data" action="Z_UploadResult.php" method="post">';
-echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
+echo '<form ENCtype="multipart/form-data" action="Z_UploadResult.php" method="post">';
+	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-echo '<input type="hidden" name="MAX_FILE_SIZE" value="1000000" />';
-echo '<table class="selection">
-		<tr>
-			<td>' . _('Send this file') . ': </td>
-			<td><input name="userfile" type="file" /></td>
-		</tr>
-		<tr>
-			<td colspan="2"><div class="centre"><button type="submit">' . _('Send File') . '</button></div></td>
-		</tr>
-	</table></form>';
+echo '<input type="hidden" name="MAX_FILE_SIZE" value="1000000" />' .
+		_('Send this file') . ': <input name="userfile" type="file" />
+		<input type="submit" value="' . _('Send File') . '" />
+		</form>';
 
-include('includes/footer.inc');
+include('includes/footer.php');
 ?>

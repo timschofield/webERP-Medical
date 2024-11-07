@@ -1,5 +1,4 @@
 <?php
-/* $Id$*/
 /*PO_ReadInOrder.inc is used by the modify existing order code in PO_Header.php and also by GoodsReceived.php */
 
 	if (isset($_SESSION['PO'.$identifier])){
@@ -7,7 +6,7 @@
 		unset ($_SESSION['PO'.$identifier]);
 	}
 
-	$_SESSION['ExistingOrder'.$identifier]=$_GET['ModifyOrderNumber'];
+	$_SESSION['ExistingOrder']=$_GET['ModifyOrderNumber'];
 	$_SESSION['RequireSupplierSelection'] = 0;
 	$_SESSION['PO'.$identifier] = new PurchOrder;
 
@@ -16,49 +15,51 @@
 /*read in all the guff from the selected order into the PO PurchOrder Class variable  */
 
 	$OrderHeaderSQL = "SELECT purchorders.supplierno,
-							suppliers.suppname,
-							purchorders.comments,
-							purchorders.orddate,
-							purchorders.rate,
-							purchorders.dateprinted,
-							purchorders.deladd1,
-							purchorders.deladd2,
-							purchorders.deladd3,
-							purchorders.deladd4,
-							purchorders.deladd5,
-							purchorders.deladd6,
-							purchorders.tel,
-							purchorders.suppdeladdress1,
-							purchorders.suppdeladdress2,
-							purchorders.suppdeladdress3,
-							purchorders.suppdeladdress4,
-							purchorders.suppdeladdress5,
-							purchorders.suppdeladdress6,
-							purchorders.contact,
-							purchorders.supptel,
-							purchorders.contact,
-							purchorders.allowprint,
-							purchorders.requisitionno,
-							purchorders.intostocklocation,
-							purchorders.initiator,
-							purchorders.version,
-							purchorders.status,
-							purchorders.stat_comment,
-							purchorders.deliverydate,
-							purchorders.port,
-							suppliers.currcode,
-							locations.managed ,
-							purchorders.paymentterms
-						FROM purchorders
-							LEFT JOIN locations
-							ON purchorders.intostocklocation=locations.loccode
-							Left JOIN suppliers
-							ON purchorders.supplierno = suppliers.supplierid
+								suppliers.suppname,
+								purchorders.comments,
+								purchorders.orddate,
+								purchorders.rate,
+								purchorders.dateprinted,
+								purchorders.deladd1,
+								purchorders.deladd2,
+								purchorders.deladd3,
+								purchorders.deladd4,
+								purchorders.deladd5,
+								purchorders.deladd6,
+								purchorders.tel,
+								purchorders.suppdeladdress1,
+								purchorders.suppdeladdress2,
+								purchorders.suppdeladdress3,
+								purchorders.suppdeladdress4,
+								purchorders.suppdeladdress5,
+								purchorders.suppdeladdress6,
+								purchorders.suppliercontact,
+								purchorders.supptel,
+								purchorders.contact,
+								purchorders.allowprint,
+								purchorders.requisitionno,
+								purchorders.intostocklocation,
+								purchorders.initiator,
+								purchorders.version,
+								purchorders.status,
+								purchorders.stat_comment,
+								purchorders.deliverydate,
+								purchorders.deliveryby,
+								purchorders.port,
+								suppliers.currcode,
+								locations.managed,
+								purchorders.paymentterms,
+								currencies.decimalplaces
+							FROM purchorders
+							INNER JOIN locations ON purchorders.intostocklocation=locations.loccode
+							INNER JOIN locationusers ON locationusers.loccode=locations.loccode AND locationusers.userid='" .  $_SESSION['UserID'] . "' AND locationusers.canupd=1
+							INNER JOIN suppliers ON purchorders.supplierno = suppliers.supplierid
+							INNER JOIN currencies ON suppliers.currcode=currencies.currabrev
 							WHERE purchorders.orderno = '" . $_GET['ModifyOrderNumber'] . "'";
 
 	   $ErrMsg =  _('The order cannot be retrieved because');
 	   $DbgMsg =  _('The SQL statement that was used and failed was');
-	   $GetOrdHdrResult = DB_query($OrderHeaderSQL,$db,$ErrMsg,$DbgMsg);
+	   $GetOrdHdrResult = DB_query($OrderHeaderSQL,$ErrMsg,$DbgMsg);
 
 	if (DB_num_rows($GetOrdHdrResult)==1 and !isset($_SESSION['PO'.$identifier]->OrderNo )) {
 
@@ -67,6 +68,7 @@
 			$_SESSION['PO'.$identifier]->SupplierID = $myrow['supplierno'];
 			$_SESSION['PO'.$identifier]->SupplierName = $myrow['suppname'];
 			$_SESSION['PO'.$identifier]->CurrCode = $myrow['currcode'];
+			$_SESSION['PO'.$identifier]->CurrDecimalPlaces = $myrow['decimalplaces'];
 			$_SESSION['PO'.$identifier]->Orig_OrderDate = $myrow['orddate'];
 			$_SESSION['PO'.$identifier]->AllowPrintPO = $myrow['allowprint'];
 			$_SESSION['PO'.$identifier]->DatePurchaseOrderPrinted = $myrow['dateprinted'];
@@ -88,19 +90,20 @@
 			$_SESSION['PO'.$identifier]->SuppDelAdd4 = $myrow['suppdeladdress4'];
 			$_SESSION['PO'.$identifier]->SuppDelAdd5 = $myrow['suppdeladdress5'];
 			$_SESSION['PO'.$identifier]->SuppDelAdd6 = $myrow['suppdeladdress6'];
-			$_SESSION['PO'.$identifier]->SupplierContact = $myrow['contact'];
+			$_SESSION['PO'.$identifier]->SupplierContact = $myrow['suppliercontact'];
 			$_SESSION['PO'.$identifier]->SuppTel= $myrow['supptel'];
 			$_SESSION['PO'.$identifier]->Contact = $myrow['contact'];
 			$_SESSION['PO'.$identifier]->Managed = $myrow['managed'];
 			$_SESSION['PO'.$identifier]->Version = $myrow['version'];
 			$_SESSION['PO'.$identifier]->Port = $myrow['port'];
+			$_SESSION['PO'.$identifier]->DeliveryBy = $myrow['deliveryby'];
 			$_SESSION['PO'.$identifier]->Status = $myrow['status'];
-			$_SESSION['PO'.$identifier]->StatComments = $myrow['stat_comment'];
+			$_SESSION['PO'.$identifier]->StatusComments = html_entity_decode($myrow['stat_comment'],ENT_QUOTES,'UTF-8');
 			$_SESSION['PO'.$identifier]->DeliveryDate = ConvertSQLDate($myrow['deliverydate']);
-			$_SESSION['ExistingOrder'.$identifier] = $_SESSION['PO'.$identifier]->OrderNo;
+			$_SESSION['ExistingOrder'] = $_SESSION['PO'.$identifier]->OrderNo;
 			$_SESSION['PO'.$identifier]->PaymentTerms= $myrow['paymentterms'];
 
-			$supplierSQL = "SELECT suppliers.supplierid,
+			$SupplierSQL = "SELECT suppliers.supplierid,
 									suppliers.suppname,
 									suppliers.address1,
 									suppliers.address2,
@@ -109,12 +112,12 @@
 									suppliers.address5,
 									suppliers.address6,
 									suppliers.currcode
-								FROM suppliers
-								WHERE suppliers.supplierid='" . $_SESSION['PO'.$identifier]->SupplierID."'
-								ORDER BY suppliers.supplierid";
+							FROM suppliers
+							WHERE suppliers.supplierid='" . $_SESSION['PO'.$identifier]->SupplierID."'
+							ORDER BY suppliers.supplierid";
 
 			$ErrMsg = _('The searched supplier records requested cannot be retrieved because');
-			$result_SuppSelect = DB_query($supplierSQL,$db,$ErrMsg);
+			$result_SuppSelect = DB_query($SupplierSQL,$ErrMsg);
 
 			if (DB_num_rows($result_SuppSelect)==1){
 				$myrow=DB_fetch_array($result_SuppSelect);
@@ -126,49 +129,42 @@
 /*now populate the line PO array with the purchase order details records */
 
 			  $LineItemsSQL = "SELECT podetailitem,
-									itemcode,
+									purchorderdetails.itemcode,
 									stockmaster.description,
 									purchorderdetails.deliverydate,
-									itemdescription,
+									purchorderdetails.itemdescription,
 									glcode,
 									accountname,
-									qtyinvoiced,
-									unitprice,
-									units,
-									quantityord,
-									quantityrecd,
-									shiptref,
-									completed,
-									jobref,
-									stdcostunit,
-									itemno,
+									purchorderdetails.qtyinvoiced,
+									purchorderdetails.unitprice,
+									stockmaster.units,
+									purchorderdetails.quantityord,
+									purchorderdetails.quantityrecd,
+									purchorderdetails.shiptref,
+									purchorderdetails.completed,
+									purchorderdetails.jobref,
+									purchorderdetails.stdcostunit,
 									stockmaster.controlled,
 									stockmaster.serialised,
 									stockmaster.decimalplaces,
-									subtotal_amount,
-									package,
-									pcunit,
-									purchorderdetails.netweight,
-									gw,
-									cuft,
-									total_quantity,
-									total_amount,
-									assetid,
-									uom
-								FROM purchorderdetails
-								LEFT JOIN stockmaster
+									purchorderdetails.assetid,
+									purchorderdetails.conversionfactor,
+									purchorderdetails.suppliersunit,
+									purchorderdetails.suppliers_partno
+									FROM purchorderdetails
+									LEFT JOIN stockmaster
 									ON purchorderdetails.itemcode=stockmaster.stockid
-								LEFT JOIN purchorders
+									INNER JOIN purchorders
 									ON purchorders.orderno=purchorderdetails.orderno
-								LEFT JOIN chartmaster
+									LEFT JOIN chartmaster
 									ON purchorderdetails.glcode=chartmaster.accountcode
-								WHERE purchorderdetails.completed=0
+									WHERE purchorderdetails.completed=0
 									AND purchorderdetails.orderno ='" . $_GET['ModifyOrderNumber'] . "'
-								ORDER BY podetailitem";
+									ORDER BY podetailitem";
 
 			$ErrMsg =  _('The lines on the purchase order cannot be retrieved because');
 			$DbgMsg =  _('The SQL statement that was used to retrieve the purchase order lines was');
-			$LineItemsResult = DB_query($LineItemsSQL,$db,$ErrMsg,$DbgMsg);
+			$LineItemsResult = DB_query($LineItemsSQL,$ErrMsg,$DbgMsg);
 
 		  if (DB_num_rows($LineItemsResult) > 0) {
 
@@ -189,35 +185,6 @@
 					} else {
 						$StockID = $myrow['itemcode'];
 					}
-					$LatestPurchDataSQL="SELECT max(effectivefrom)
-											FROM purchdata
-											WHERE supplierno='".$_SESSION['PO'.$identifier]->SupplierID."'
-												AND stockid='". $StockID."'
-												AND effectivefrom<='".$_SESSION['PO'.$identifier]->Orig_OrderDate."'";
-					$LatestPurchDataResult=DB_query($LatestPurchDataSQL, $db);
-					$LatestPurchDataRow=DB_fetch_row($LatestPurchDataResult);
-					if ($LatestPurchDataRow[0] != '') {
-						$sql="SELECT unitsofmeasure.unitname,
-												suppliers_partno,
-												conversionfactor
-											FROM purchdata
-											LEFT JOIN unitsofmeasure
-											ON purchdata.suppliersuom=unitsofmeasure.unitid
-											WHERE supplierno='".$_SESSION['PO'.$identifier]->SupplierID."'
-											AND stockid='".$StockID."'
-											AND effectivefrom='".$LatestPurchDataRow[0]."'";
-						$PurchDataResult=DB_query($sql, $db);
-						$myrow2=DB_fetch_array($PurchDataResult);
-					} else {
-						$sql="SELECT units as unitname, stockid as suppliers_partno FROM stockmaster WHERE stockid='".$StockID."'";
-						$PurchDataResult=DB_query($sql, $db);
-						$myrow2=DB_fetch_array($PurchDataResult);
-						$myrow2['conversionfactor']=1;
-					}
-					if ($StockID=='') {
-						$myrow2['unitname']='';
-						$myrow2['suppliers_partno']='';
-					}
 
 					$_SESSION['PO'.$identifier]->add_to_order($_SESSION['PO'.$identifier]->LinesOnOrder+1,
 															$StockID,
@@ -226,7 +193,7 @@
 															$myrow['quantityord'],
 															stripslashes($myrow['itemdescription']),
 															$myrow['unitprice'],
-															$myrow['uom'],
+															$Units,
 															$GLCode,
 															ConvertSQLDate($myrow['deliverydate']),
 															$myrow['shiptref'],
@@ -236,19 +203,10 @@
 															$myrow['quantityrecd'],
 															$myrow['accountname'],
 															$myrow['decimalplaces'],
-															$myrow['itemno'],
-															$myrow2['unitname'],
-															$myrow2['conversionfactor'],
-															$myrow2['suppliers_partno'],
-															$myrow['subtotal_amount'],
-															0,
-															$myrow['package'],
-															$myrow['pcunit'],
-															$myrow['netweight'],
-															$myrow['gw'],
-															$myrow['cuft'],
-															$myrow['total_quantity'],
-															$myrow['total_amount'],
+															$myrow['suppliersunit'],
+															$myrow['conversionfactor'],
+															1,
+															$myrow['suppliers_partno'],
 															$myrow['assetid'] );
 
 					$_SESSION['PO'.$identifier]->LineItems[$_SESSION['PO'.$identifier]->LinesOnOrder]->PODetailRec = $myrow['podetailitem'];

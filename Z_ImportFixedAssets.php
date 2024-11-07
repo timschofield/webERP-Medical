@@ -1,32 +1,36 @@
 <?php
-/* $Id:  $*/
 /* Script to import fixed assets into a specified period*/
 
-
-include('includes/session.inc');
-$title = _('Import Fixed Assets');
-include('includes/header.inc');
+include('includes/session.php');
+$Title = _('Import Fixed Assets');
+$ViewTopic = 'SpecialUtilities';
+$BookMark = basename(__FILE__, '.php'); ;
+include('includes/header.php');
 include('includes/SQL_CommonFunctions.inc');
+echo '<p class="page_title_text"><img alt="" src="' . $RootPath . '/css/' . $Theme .
+		'/images/descending.png" title="' .
+		_('Import Fixed Assets from .csv file') . '" />' . ' ' .
+		_('Import Fixed Assets from .csv file') . '</p>';
 
 // If this script is called with a file object, then the file contents are imported
 // If this script is called with the gettemplate flag, then a template file is served
 // Otherwise, a file upload form is displayed
 
 $FieldNames = array(
-	'Description',  //0
-	'LongDescription', //1
-	'AssetCategoryID', //2
-	'SerialNo',  //3
-	'BarCode', //4
-	'AssetLocationCode', //5
-	'Cost', //6
-	'AccumDepn', //7
-	'DepnType', //8 - SL or DV
-	'DepnRate', //9
-	'DatePurchased' //10
+	'Description',			//  0 'Title of the fixed asset',
+	'LongDescription',		//  1 'Description of the fixed asset',
+	'AssetCategoryID',		//  2 'Asset category id',
+	'SerialNo',				//  3 'Serial number',
+	'BarCode',				//  4 'Bar code',
+	'AssetLocationCode',	//  5 'Asset location code',
+	'Cost',					//  6 'Cost',
+	'AccumDepn',			//  7 'Accumulated depreciation',
+	'DepnType',				//  8 'Depreciation type - SL or DV',
+	'DepnRate',				//  9 'Depreciation rate',
+	'DatePurchased'			// 10 'Date of purchase',
 );
 
-if ($_FILES['SelectedAssetFile']['name']) { //start file processing
+if (isset($_FILES['SelectedAssetFile']['name'])) { //start file processing
 
 	//initialize
 	$InputError = false;
@@ -34,7 +38,7 @@ if ($_FILES['SelectedAssetFile']['name']) { //start file processing
 /*
 	if ($_FILES['SelectedAssetFile']['type'] != 'text/csv') {
 		prnMsg (_('File has type') . ' ' . $_FILES['SelectedAssetFile']['type'] . ', ' . _('but only "text/csv" is allowed.'),'error');
-		include('includes/footer.inc');
+		include('includes/footer.php');
 		exit;
 	}
 */
@@ -48,24 +52,24 @@ if ($_FILES['SelectedAssetFile']['name']) { //start file processing
 	if ( count($HeaderRow) != count($FieldNames) ) {
 		prnMsg (_('File contains') . ' '. count($HeaderRow). ' ' . _('columns, expected') . ' '. count($FieldNames). '. ' . _('Study a downloaded template to see the format for the file'),'error');
 		fclose($FileHandle);
-		include('includes/footer.inc');
+		include('includes/footer.php');
 		exit;
 	}
 
 	//test header row field name and sequence
 	$i = 0;
 	foreach ($HeaderRow as $FieldName) {
-		if ( strtoupper($FieldName) != strtoupper($FieldNames[$i]) ) {
-			prnMsg (_('The selected file contains fields in the incorrect order ('. strtoupper($FieldName). ' != '. strtoupper($FieldNames[$i]). _('. Download a template and ensuer that fields are in the same sequence as the template.')),'error');
+		if ( mb_strtoupper($FieldName) != mb_strtoupper($FieldNames[$i]) ) {
+			prnMsg (_('The selected file contains fields in the incorrect order ('. mb_strtoupper($FieldName). ' != '. mb_strtoupper($FieldNames[$i]). '. ' ._('Download a template and ensure that fields are in the same sequence as the template.')),'error');
 			fclose($FileHandle);
-			include('includes/footer.inc');
+			include('includes/footer.php');
 			exit;
 		}
 		$i++;
 	}
 
 	//start database transaction
-	DB_Txn_Begin($db);
+	DB_Txn_Begin();
 
 	//loop through file rows
 	$Row = 1;
@@ -76,7 +80,7 @@ if ($_FILES['SelectedAssetFile']['name']) { //start file processing
 		if ($FieldCount != count($FieldNames)){
 			prnMsg (count($FieldNames) . ' ' . _('fields are required, but') . ' '. $FieldCount . ' ' . _('fields were received'),'error');
 			fclose($FileHandle);
-			include('includes/footer.inc');
+			include('includes/footer.php');
 			exit;
 		}
 
@@ -109,7 +113,7 @@ if ($_FILES['SelectedAssetFile']['name']) { //start file processing
 					$AccumDepn = $myrow[$i];
 					break;
 				case 8:
-					$DepnType = strtoupper($myrow[$i]);
+					$DepnType = mb_strtoupper($myrow[$i]);
 					break;
 				case 9:
 					$DepnRate= $myrow[$i];
@@ -120,7 +124,7 @@ if ($_FILES['SelectedAssetFile']['name']) { //start file processing
 			} //end switch
 		} //end loop around fields from import
 
-		if (strlen($Description)==0 OR strlen($Description)>50){
+		if (mb_strlen($Description)==0 OR mb_strlen($Description)>50){
 			prnMsg('The description of the asset is expected to be more than 3 characters long and less than 50 characters long','error');
 			echo '<br />' . _('Row:') . $Row . ' - ' . _('Invalid Description:') . ' ' . $Description;
 			$InputError=true;
@@ -153,17 +157,17 @@ if ($_FILES['SelectedAssetFile']['name']) { //start file processing
 			$InputError=true;
 		}
 		if ($DepnType !='SL' AND $DepnType!='DV'){
-			prnMsg(_('The depreciation type must be either "SL" - Straight Line or "DV" - Diminishing Value'),'error');
+			prnMsg(_('The depreciation type must be either SL - Straight Line or DV - Diminishing Value'),'error');
 			echo '<br />' . _('Row:') . $Row . ' - ' . _('Invalid depreciation type:') . ' ' . $DepnType;
 			$InputError = true;
 		}
-		$result = DB_query("SELECT categoryid FROM fixedassetcategories WHERE categoryid='" . $AssetCategoryID . "'", $db);
+		$result = DB_query("SELECT categoryid FROM fixedassetcategories WHERE categoryid='" . $AssetCategoryID . "'");
 		if (DB_num_rows($result)==0){
 			$InputError = true;
 			prnMsg(_('The asset category code entered must be exist in the assetcategories table'),'error');
 			echo '<br />' . _('Row:') . $Row . ' - ' . _('Invalid asset category:') . ' ' . $AssetCategoryID;
 		}
-		$result = DB_query("SELECT locationid FROM fixedassetlocations WHERE locationid='" . $AssetLocationCode . "'", $db);
+		$result = DB_query("SELECT locationid FROM fixedassetlocations WHERE locationid='" . $AssetLocationCode . "'");
 		if (DB_num_rows($result)==0){
 			$InputError = true;
 			prnMsg(_('The asset location code entered must be exist in the asset locations table'),'error');
@@ -182,8 +186,8 @@ if ($_FILES['SelectedAssetFile']['name']) { //start file processing
 
 		if ($InputError == false){ //no errors
 
-			$TransNo = GetNextTransNo(49,$db);
-			$PeriodNo = GetPeriod(ConvertSQLDate($_POST['DateToEnter']),$db);
+			$TransNo = GetNextTransNo(49);
+			$PeriodNo = GetPeriod(ConvertSQLDate($_POST['DateToEnter']));
 
 			//attempt to insert the stock item
 			$sql = "INSERT INTO fixedassets (description,
@@ -211,12 +215,33 @@ if ($_FILES['SelectedAssetFile']['name']) { //start file processing
 
 			$ErrMsg =  _('The asset could not be added because');
 			$DbgMsg = _('The SQL that was used to add the asset and failed was');
-			$result = DB_query($sql,$db, $ErrMsg, $DbgMsg);
+			$result = DB_query($sql, $ErrMsg, $DbgMsg);
 
-			if (DB_error_no($db) ==0) { //the insert of the new code worked so bang in the fixedassettrans records too
+			if (DB_error_no() ==0) { //the insert of the new code worked so bang in the fixedassettrans records too
 
 
-				$AssetID = DB_Last_Insert_ID($db, 'fixedassets','assetid');
+				$AssetID = DB_Last_Insert_ID('fixedassets','assetid');
+				$sql = "INSERT INTO fixedassettrans ( assetid,
+												transtype,
+												transno,
+												transdate,
+												periodno,
+												inputdate,
+												fixedassettranstype,
+												amount)
+									VALUES ( '" . $AssetID . "',
+											'49',
+											'" . $TransNo . "',
+											'" . $_POST['DateToEnter'] . "',
+											'" . $PeriodNo . "',
+											'" . Date('Y-m-d') . "',
+											'cost',
+											'" . $Cost . "')";
+
+				$ErrMsg =  _('The transaction for the cost of the asset could not be added because');
+				$DbgMsg = _('The SQL that was used to add the fixedasset trans record that failed was');
+				$InsResult = DB_query($sql,$ErrMsg,$DbgMsg);
+
 				$sql = "INSERT INTO fixedassettrans ( assetid,
 													transtype,
 													transno,
@@ -225,40 +250,20 @@ if ($_FILES['SelectedAssetFile']['name']) { //start file processing
 													inputdate,
 													fixedassettranstype,
 													amount)
-												VALUES ( '" . $AssetID . "',
-													'49',
-													'" . $TransNo . "',
-													'" . $_POST['DateToEnter'] . "',
-													'" . $PeriodNo . "',
-													'" . Date('Y-m-d') . "',
-													'cost',
-													'" . $Cost . "')";
-				$ErrMsg =  _('The transaction for the cost of the asset could not be added because');
-				$DbgMsg = _('The SQL that was used to add the fixedasset trans record that failed was');
-				$InsResult = DB_query($sql,$db,$ErrMsg,$DbgMsg);
-
-				$sql = "INSERT INTO fixedassettrans ( assetid,
-																					transtype,
-																					transno,
-																					transdate,
-																					periodno,
-																					inputdate,
-																					fixedassettranstype,
-																					amount)
-											VALUES ( '" . $AssetID . "',
-															'49',
-															'" . $TransNo . "',
-															'" . $_POST['DateToEnter'] . "',
-															'" . $PeriodNo . "',
-															'" . Date('Y-m-d') . "',
-															'depn',
-															'" . $AccumDepn . "')";
+									VALUES ( '" . $AssetID . "',
+											'49',
+											'" . $TransNo . "',
+											'" . $_POST['DateToEnter'] . "',
+											'" . $PeriodNo . "',
+											'" . Date('Y-m-d') . "',
+											'depn',
+											'" . $AccumDepn . "')";
 
 				$ErrMsg =  _('The transaction for the cost of the asset could not be added because');
 				$DbgMsg = _('The SQL that was used to add the fixedasset trans record that failed was');
-				$InsResult = DB_query($sql,$db,$ErrMsg,$DbgMsg);
+				$InsResult = DB_query($sql,$ErrMsg,$DbgMsg);
 
-				if (DB_error_no($db) ==0) {
+				if (DB_error_no() ==0) {
 					prnMsg( _('Inserted the new asset:') . ' ' . $Description,'info');
 				}
 			}
@@ -268,43 +273,47 @@ if ($_FILES['SelectedAssetFile']['name']) { //start file processing
 
 	if ($InputError == 1) { //exited loop with errors so rollback
 		prnMsg(_('Failed on row '. $Row. '. Batch import has been rolled back.'),'error');
-		DB_Txn_Rollback($db);
+		DB_Txn_Rollback();
 	} else { //all good so commit data transaction
-		DB_Txn_Commit($db);
+		DB_Txn_Commit();
 		prnMsg( _('Batch Import of') .' ' . $_FILES['SelectedAssetFile']['name']  . ' '. _('has been completed. All assets in the file have been committed to the database.'),'success');
 	}
 
 	fclose($FileHandle);
 
-} elseif ( isset($_POST['gettemplate']) or isset($_GET['gettemplate']) ) { //download an import template
+} elseif ( isset($_POST['gettemplate']) OR isset($_GET['gettemplate']) ) { //download an import template
 
-	echo '<br /><br /><br />"'. implode('","',$FieldNames). '" <br /><br /><br />';
+	echo '<br /><br /><br />"'. implode('","',$FieldNames). '"<br /><br /><br />';
 
 } else { //show file upload form
 
-	echo '
-		<br />
-		<a href="Z_ImportFixedAssets.php?gettemplate=1">' . _('Get Import Template') . '</a>
-		<br />
-		<br />
-	';
-	echo '<form enctype="multipart/form-data" action="Z_ImportFixedAssets.php" method="post">';
+	echo '<a href="Z_ImportFixedAssets.php?gettemplate=1">' . _('Get Import Template') . '</a>';
+	echo '<form enctype="multipart/form-data" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 	echo '<input type="hidden" name="MAX_FILE_SIZE" value="1000000" />';
-	echo '<table class="selection">
-					<tr><td>' . _('Select Date to Upload B/Fwd Assets To:') . '</td>
-							<td><select name="DateToEnter">';
-	$PeriodsResult = DB_query("SELECT lastdate_in_period FROM periods ORDER BY periodno",$db);
-	while ($PeriodRow = DB_fetch_array($PeriodsResult)){
-		echo '<option value="' . $PeriodRow['lastdate_in_period'] . '">' . ConvertSQLDate($PeriodRow['lastdate_in_period']) . '</option>';
+	echo '<fieldset>
+			<legend>', _('Import Details'), '</legend>
+			<field>
+				<label>' . _('Select Date to Upload B/Fwd Assets To:') . '</label>
+				<select name="DateToEnter">';
+	$PeriodsResult = DB_query("SELECT lastdate_in_period FROM periods ORDER BY periodno");
+	while ($PeriodRow = DB_fetch_row($PeriodsResult)){
+		echo '<option value="' . $PeriodRow[0] . '">' . ConvertSQLDate($PeriodRow[0]) . '</option>';
 	}
-	echo '</select></td></tr>';
-	echo '<tr><td>' . _('Fixed Assets Upload file:') . '</td><td><input name="SelectedAssetFile" type="file" /></tr></table>
-			<button type="submit">' . _('Send File') . '</button>
-		</form>';
+	echo '</select>
+		</field>';
+	echo '<field>
+			<label>' . _('Fixed Assets Upload file:') . '</label>
+			<input name="SelectedAssetFile" type="file" />
+		</field>
+	</fieldset>
+	<div class="centre">
+		<input type="submit" value="' . _('Send File') . '" />
+	</div>
+	</form>';
 
 }
 
-include('includes/footer.inc');
+include('includes/footer.php');
 ?>

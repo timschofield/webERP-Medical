@@ -1,4 +1,4 @@
-<?php /* Version 1.0 */
+<?php
 
 /**************************************************************************************
 Locale language file for reports. This file can be broken out for apps that use
@@ -11,8 +11,8 @@ use getttext for translation.
 define('RPT_SAVEDEF',_('The name you entered is a default report. Please enter a new My Report name.'));
 define('RPT_SAVEDUP',_('This report name already exists! Press Replace to overwrite or enter a new name and press continue.'));
 define('RPT_DUPDB',_('There is an error in your database selection. Check your database names and link equations.'));
-define('RPT_BADFLD',_('There is an error in your database field or description. Pleae check and try again.'));
-define('RPT_BADDATA',_('There is an error in one of your data fields. Pleae check and try again.'));
+define('RPT_BADFLD',_('There is an error in your database field or description. Please check and try again.'));
+define('RPT_BADDATA',_('There is an error in one of your data fields. Please check and try again.'));
 define('RPT_EMPTYFIELD',_('A data field has been left empty located at sequence number: '));
 define('RPT_DEFDEL',_('If you replace this report/form, the original report/form will be deleted!'));
 define('RPT_NODATA',_('There was not any data in this report based on the criteria provided!'));
@@ -37,13 +37,13 @@ define('RPT_DEFIMP',_('Select a default report to import.'));
 define('RPT_RPTBROWSE',_('Or browse for a report to upload.'));
 
 // Error messages for importing reports
-define('RPT_IMP_ERMSG1',_('The filesize exceeds the upload_max_filesize directive in you php.ini settings.'));
-define('RPT_IMP_ERMSG2',_('The filesize exceeds the MAX_FLE_SIZE directive in the webERP form.'));
+define('RPT_IMP_ERMSG1',_('The filesize exceeds the upload_max_filesize directive in your php.ini settings.'));
+define('RPT_IMP_ERMSG2',_('The filesize exceeds the MAX_FILE_SIZE directive in the webERP form.'));
 define('RPT_IMP_ERMSG3',_('The file was not completely uploaded. Please retry.'));
 define('RPT_IMP_ERMSG4',_('No file was selected to upload.'));
 define('RPT_IMP_ERMSG5',_('Unknown php upload error, php returned error # '));
 define('RPT_IMP_ERMSG6',_('This file is not reported by the server as a text file.'));
-define('RPT_IMP_ERMSG7',_('The uploaded file does not conatin any data!'));
+define('RPT_IMP_ERMSG7',_('The uploaded file does not contain any data!'));
 define('RPT_IMP_ERMSG8',_('webERP could not find a valid report to import in the uploaded file!'));
 define('RPT_IMP_ERMSG9',_(' was successfully imported!'));
 define('RPT_IMP_ERMSG10',_('There was an unexpected error uploading the file!'));
@@ -156,6 +156,7 @@ define('RPT_BTN_SAVE',_('Save'));
 define('RPT_BTN_UPDATE',_('Update'));
 
 // Report  Specific
+define('RPT_RPTBASIS',_('Accrual Basis'));
 define('RPT_RPTFILTER',_('Report Filters: '));
 define('RPT_GROUPBY',_('Grouped by:'));
 define('RPT_SORTBY',_('Sorted by:'));
@@ -191,7 +192,7 @@ define('RPT_CUSTRPT',_('Custom Reports'));
 define('RPT_DATEDEF',_('Default Date Selected'));
 define('RPT_DATEFNAME',_('Date Fieldname (table.fieldname)'));
 define('RPT_DATEINFO',_('Report Date Information'));
-define('RPT_DATEINST',_('Uncheck all boxes for date independent reports; leave Date Fieldname empty'));
+define('RPT_DATEINST',_('For date-independent reports:<br />Uncheck all period range boxes<br />Leave Date Fieldname empty'));
 define('RPT_DATELIST',_('Date Field List<br />(check all that apply)'));
 define('RPT_DEFRPT',_('Default Reports'));
 define('RPT_ENDPOS',_('End Position (mm)'));
@@ -301,31 +302,40 @@ define('RPT_LANDSCAPE',_('Landscape'));
 
 // Font Names
 define('RPT_COURIER',_('Courier'));
+define('RPT_COURIERB',_('Courier Bold'));
+define('RPT_COURIERBI',_('Courier Bold Italic'));
+define('RPT_COURIERI',_('Courier Italic'));
 define('RPT_HELVETICA',_('Helvetica'));
+define('RPT_HELVETICAB',_('Helvetica Bold'));
+define('RPT_HELVETICABI',_('Helvetica Bold Italic'));
+define('RPT_HELVETICAI',_('Helvetica Italic'));
 define('RPT_TIMES',_('Times'));
+define('RPT_TIMESB',_('Times Bold'));
+define('RPT_TIMESBI',_('Times Bold Italic'));
+define('RPT_TIMESI',_('Times Italic'));
 
 // General Number Definitions
-define('RPT_1',_('1'));
-define('RPT_2',_('2'));
-define('RPT_3',_('3'));
-define('RPT_4',_('4'));
-define('RPT_5',_('5'));
-define('RPT_6',_('6'));
-define('RPT_7',_('7'));
-define('RPT_8',_('8'));
-define('RPT_9',_('9'));
-define('RPT_10',_('10'));
-define('RPT_12',_('12'));
-define('RPT_14',_('14'));
-define('RPT_16',_('16'));
-define('RPT_18',_('18'));
-define('RPT_20',_('20'));
-define('RPT_24',_('24'));
-define('RPT_28',_('28'));
-define('RPT_32',_('32'));
-define('RPT_36',_('36'));
-define('RPT_40',_('40'));
-define('RPT_50',_('50'));
+define('RPT_1','1');
+define('RPT_2','2');
+define('RPT_3','3');
+define('RPT_4','4');
+define('RPT_5','5');
+define('RPT_6','6');
+define('RPT_7','7');
+define('RPT_8','8');
+define('RPT_9','9');
+define('RPT_10','10');
+define('RPT_12','12');
+define('RPT_14','14');
+define('RPT_16','16');
+define('RPT_18','18');
+define('RPT_20','20');
+define('RPT_24','24');
+define('RPT_28','28');
+define('RPT_32','32');
+define('RPT_36','36');
+define('RPT_40','40');
+define('RPT_50','50');
 
 // Color definitions
 define('RPT_BLACK',_('Black'));
@@ -346,4 +356,17 @@ define('RPT_QUARTER',_('This Quarter'));
 define('RPT_QTD',_('This Quarter To Date'));
 define('RPT_YEAR',_('This Year'));
 define('RPT_YTD',_('This Year To Date'));
+define('RPT_YESTERDAY',_('Yesterday'));
+define('RPT_LASTWEEK',_('Last Week'));
+define('RPT_LASTWTD',_('Last Week To Date'));
+define('RPT_LASTMONTH',_('Last Month'));
+define('RPT_LASTMTD',_('Last Month To Date'));
+define('RPT_LASTQUARTER',_('Last Quarter'));
+define('RPT_LASTQTD',_('Last Quarter To Date'));
+define('RPT_LASTYEAR',_('Last Year'));
+define('RPT_LASTYTD',_('Last Year To Date'));
+define('RPT_NEXTWEEK',_('Next Week'));
+define('RPT_NEXTMONTH',_('Next Month'));
+define('RPT_NEXTQUARTER',_('Next Quarter'));
+define('RPT_NEXTYEAR',_('Next Year'));
 ?>

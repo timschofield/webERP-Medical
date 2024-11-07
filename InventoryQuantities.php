@@ -1,14 +1,11 @@
 <?php
 
-/* $Revision: 1.4 $ */
-
-/* $Id$ */
 
 // InventoryQuantities.php - Report of parts with quantity. Sorts by part and shows
 // all locations where there are quantities of the part
 
-include('includes/session.inc');
-if (isset($_POST['PrintPDF'])) {
+include('includes/session.php');
+If (isset($_POST['PrintPDF'])) {
 
 	include('includes/PDFStarter.php');
 	$pdf->addInfo('Title',_('Inventory Quantities Report'));
@@ -18,12 +15,15 @@ if (isset($_POST['PrintPDF'])) {
 	$line_height=12;
 
 	$Xpos = $Left_Margin+1;
-	$WhereCategory = " ";
-	$CatDescription = " ";
+	$WhereCategory = ' ';
+	$CatDescription = ' ';
 	if ($_POST['StockCat'] != 'All') {
 	    $WhereCategory = " AND stockmaster.categoryid='" . $_POST['StockCat'] . "'";
-		$sql= "SELECT categoryid, categorydescription FROM stockcategory WHERE categoryid='" . $_POST['StockCat'] . "' ";
-		$result = DB_query($sql,$db);
+		$sql= "SELECT categoryid,
+					categorydescription
+				FROM stockcategory
+				WHERE categoryid='" . $_POST['StockCat'] . "' ";
+		$result = DB_query($sql);
 		$myrow = DB_fetch_row($result);
 		$CatDescription = $myrow[1];
 	}
@@ -38,16 +38,15 @@ if (isset($_POST['PrintPDF'])) {
 					stockmaster.decimalplaces,
 					stockmaster.serialised,
 					stockmaster.controlled
-				FROM locstock,
-					stockmaster
-			LEFT JOIN stockcategory
-			ON stockmaster.categoryid=stockcategory.categoryid,
-					locations
-				WHERE locstock.stockid=stockmaster.stockid
-				AND locstock.loccode=locations.loccode
-				AND locstock.quantity <> 0
+				FROM locstock INNER JOIN stockmaster
+				ON locstock.stockid=stockmaster.stockid
+				INNER JOIN locations
+				ON locstock.loccode=locations.loccode
+				WHERE locstock.quantity <> 0
 				AND (stockmaster.mbflag='B' OR stockmaster.mbflag='M') " .
-				$WhereCategory . " ORDER BY locstock.stockid,locstock.loccode";
+				$WhereCategory . "
+				ORDER BY locstock.stockid,
+						locstock.loccode";
 	} else {
 		// sql to only select parts in more than one location
 		// The SELECT statement at the beginning of the WHERE clause limits the selection to
@@ -61,51 +60,59 @@ if (isset($_POST['PrintPDF'])) {
 					stockmaster.decimalplaces,
 					stockmaster.serialised,
 					stockmaster.controlled
-				FROM locstock,
-					stockmaster,
-					locations
+				FROM locstock INNER JOIN stockmaster
+				ON locstock.stockid=stockmaster.stockid
+				INNER JOIN locations
+				ON locstock.loccode=locations.loccode
 				WHERE (SELECT count(*)
 					  FROM locstock
 					  WHERE stockmaster.stockid = locstock.stockid
 					  AND locstock.quantity <> 0
 					  GROUP BY locstock.stockid) > 1
-				AND locstock.stockid=stockmaster.stockid
-				AND locstock.loccode=locations.loccode
 				AND locstock.quantity <> 0
 				AND (stockmaster.mbflag='B' OR stockmaster.mbflag='M') " .
-				$WhereCategory . " ORDER BY locstock.stockid,locstock.loccode";
+				$WhereCategory . "
+				ORDER BY locstock.stockid,
+						locstock.loccode";
 	}
 
 
-	$result = DB_query($sql,$db,'','',false,true);
+	$result = DB_query($sql,'','',false,true);
 
-	if (DB_error_no($db) !=0) {
-	  $title = _('Inventory Quantities') . ' - ' . _('Problem Report');
-	  include('includes/header.inc');
-	   prnMsg( _('The Inventory Quantity report could not be retrieved by the SQL because') . ' '  . DB_error_msg($db),'error');
-	   echo '<br /><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
+	if (DB_error_no() !=0) {
+	  $Title = _('Inventory Quantities') . ' - ' . _('Problem Report');
+	  include('includes/header.php');
+	   prnMsg( _('The Inventory Quantity report could not be retrieved by the SQL because') . ' '  . DB_error_msg(),'error');
+	   echo '<br /><a href="' .$RootPath .'/index.php">' . _('Back to the menu') . '</a>';
 	   if ($debug==1){
 	      echo '<br />' . $sql;
 	   }
-	   include('includes/footer.inc');
+	   include('includes/footer.php');
 	   exit;
 	}
 	if (DB_num_rows($result)==0){
-			$title = _('Print Inventory Quantities Report');
-			include('includes/header.inc');
+			$Title = _('Print Inventory Quantities Report');
+			include('includes/header.php');
 			prnMsg(_('There were no items with inventory quantities'),'error');
-			echo '<br /><a href="'.$rootpath.'/index.php?">' . _('Back to the menu') . '</a>';
-			include('includes/footer.inc');
+			echo '<br /><a href="'.$RootPath.'/index.php">' . _('Back to the menu') . '</a>';
+			include('includes/footer.php');
 			exit;
 	}
 
-	PrintHeader($pdf,$YPos,$PageNumber,$Page_Height,$Top_Margin,$Left_Margin,
-	            $Page_Width,$Right_Margin,$CatDescription);
+	PrintHeader($pdf,
+				$YPos,
+				$PageNumber,
+				$Page_Height,
+				$Top_Margin,
+				$Left_Margin,
+				$Page_Width,
+				$Right_Margin,
+				$CatDescription);
 
     $FontSize=8;
 
     $holdpart = " ";
-	while ($myrow = DB_fetch_array($result,$db)){
+	While ($myrow = DB_fetch_array($result)){
 	      if ($myrow['stockid'] != $holdpart) {
 			  $YPos -=(2 * $line_height);
 			  $holdpart = $myrow['stockid'];
@@ -115,14 +122,16 @@ if (isset($_POST['PrintPDF'])) {
 
 			// Parameters for addTextWrap are defined in /includes/class.pdf.php
 			// 1) X position 2) Y position 3) Width
-			// 4) Height 5) text 6) Alignment 7) Border 8) Fill - True to use SetFillColor
+			// 4) Height 5) Text 6) Alignment 7) Border 8) Fill - True to use SetFillColor
 			// and False to set to transparent
 
 				$pdf->addTextWrap(50,$YPos,100,$FontSize,$myrow['stockid'],'',0);
 				$pdf->addTextWrap(150,$YPos,150,$FontSize,$myrow['description'],'',0);
 				$pdf->addTextWrap(310,$YPos,60,$FontSize,$myrow['loccode'],'left',0);
-				$pdf->addTextWrap(370,$YPos,50,$FontSize,locale_number_format($myrow['quantity'], $myrow['decimalplaces']),'right',0);
-				$pdf->addTextWrap(420,$YPos,50,$FontSize,locale_number_format($myrow['reorderlevel'], $myrow['decimalplaces']),'right',0);
+				$pdf->addTextWrap(370,$YPos,50,$FontSize,locale_number_format($myrow['quantity'],
+				                                    $myrow['decimalplaces']),'right',0);
+				$pdf->addTextWrap(420,$YPos,50,$FontSize,locale_number_format($myrow['reorderlevel'],
+				                                    $myrow['decimalplaces']),'right',0);
 
 			if ($YPos < $Bottom_Margin + $line_height){
 			   PrintHeader($pdf,$YPos,$PageNumber,$Page_Height,$Top_Margin,$Left_Margin,$Page_Width,
@@ -140,52 +149,66 @@ if (isset($_POST['PrintPDF'])) {
 	$pdf->__destruct();
 } else { /*The option to print PDF was not hit so display form */
 
-	$title=_('Inventory Quantities Reporting');
-	include('includes/header.inc');
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') . '" alt="" />' . ' ' . _('Inventory Quantities Report') . '</p>';
+	$Title=_('Inventory Quantities Reporting');
+	$ViewTopic = 'Inventory';
+	$BookMark = '';
+	include('includes/header.php');
+	echo '<p class="page_title_text"><img src="'.$RootPath.'/css/'.$Theme.'/images/inventory.png" title="' . _('Inventory') . '" alt="" />' . ' ' . _('Inventory Quantities Report') . '</p>';
 	echo '<div class="page_help_text">' . _('Use this report to display the quantity of Inventory items in different categories.') . '</div><br />';
 
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '" method="post">
+		<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />
+		<fieldset>
+			<legend>', _('Report Criteria'), '</legend>';
 
-	echo '<form action=' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . ' method="post"><table>';
-	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<table class="selection"><tr><td>';
-	echo '<tr><td>' . _('Selection') . ':</td><td><select name="Selection">';
-	echo '<option selected="True" value="All">' . _('All') . '</option>';
-	echo '<option value="Multiple">' . _('Only Parts With Multiple Locations') . '</option>';
-	echo '</select></td></tr>';
+	echo '<field>
+			<label for="Selection">' . _('Selection') . ':</label>
+			<select name="Selection">
+				<option selected="selected" value="All">' . _('All') . '</option>
+				<option value="Multiple">' . _('Only Parts With Multiple Locations') . '</option>
+			</select>
+		</field>';
 
-	$SQL="SELECT categoryid, categorydescription FROM stockcategory where stocktype<>'A' ORDER BY categorydescription";
-	$result1 = DB_query($SQL,$db);
+	$SQL="SELECT categoryid,
+				categorydescription
+			FROM stockcategory
+			ORDER BY categorydescription";
+	$result1 = DB_query($SQL);
 	if (DB_num_rows($result1)==0){
-		echo '</table></td></tr>
-			</table>
-			<br />';
+		echo '</table>
+			<p />';
 		prnMsg(_('There are no stock categories currently defined please use the link below to set them up'),'warn');
-		echo '<br /><a href="' . $rootpath . '/StockCategories.php">' . _('Define Stock Categories') . '</a>';
-		include ('includes/footer.inc');
+		echo '<br /><a href="' . $RootPath . '/StockCategories.php">' . _('Define Stock Categories') . '</a>';
+		include ('includes/footer.php');
 		exit;
 	}
 
-	echo '<tr><td>' . _('In Stock Category') . ':</td><td><select name="StockCat">';
+	echo '<field>
+			<label for="StockCat">' . _('In Stock Category') . ':</label>
+			<select name="StockCat">';
 	if (!isset($_POST['StockCat'])){
 		$_POST['StockCat']='All';
 	}
 	if ($_POST['StockCat']=='All'){
-		echo '<option selected="True" value="All">' . _('All') . '</option>';
+		echo '<option selected="selected" value="All">' . _('All') . '</option>';
 	} else {
 		echo '<option value="All">' . _('All') . '</option>';
 	}
 	while ($myrow1 = DB_fetch_array($result1)) {
 		if ($myrow1['categoryid']==$_POST['StockCat']){
-			echo '<option selected="True" value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
+			echo '<option selected="selected" value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 		} else {
 			echo '<option value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 		}
 	}
-	echo '</select></td></tr>';
-	echo '</table><br /><div class="centre"><button type="submit" name="PrintPDF">' . _('Print PDF') . '</button></div><br />';
-
-	include('includes/footer.inc');
+	echo '</select>
+		</field>
+		</fieldset>
+		<div class="centre">
+			<input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" />
+		</div>';
+    echo '</form>';
+	include('includes/footer.php');
 
 } /*end of else not PrintPDF */
 
@@ -226,7 +249,6 @@ function PrintHeader(&$pdf,&$YPos,&$PageNumber,$Page_Height,$Top_Margin,$Left_Ma
 
 
 	$FontSize=8;
-//	$YPos =$YPos - (2*$line_height);
 	$PageNumber++;
 } // End of PrintHeader() function
 ?>

@@ -1,9 +1,9 @@
 <?php
 
-/* $Id$*/
-
 include('includes/SQL_CommonFunctions.inc');
-include ('includes/session.inc');
+include ('includes/session.php');
+if (isset($_POST['FromDate'])){$_POST['FromDate'] = ConvertSQLDate($_POST['FromDate']);};
+if (isset($_POST['ToDate'])){$_POST['ToDate'] = ConvertSQLDate($_POST['ToDate']);};
 
 $InputError=0;
 if (isset($_POST['FromDate']) AND !Is_Date($_POST['FromDate'])){
@@ -14,127 +14,139 @@ if (isset($_POST['FromDate']) AND !Is_Date($_POST['FromDate'])){
 
 if (!isset($_POST['FromDate'])){
 
-	 $title = _('Stock Transaction Listing');
-	 include ('includes/header.inc');
+	 $Title = _('Stock Transaction Listing');
+	 $ViewTopic = 'Inventory';
+	 $BookMark = '';
+	 include ('includes/header.php');
 
-	echo '<div class="centre"><p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . $title . '" alt="" />' . ' '
-		. _('Stock Transaction Listing').'</p></div>';
+	echo '<div class="centre">
+			<p class="page_title_text"><img src="'.$RootPath.'/css/'.$Theme.'/images/transactions.png" title="' . $Title . '" alt="" />' . ' '. _('Stock Transaction Listing') . '</p>
+		</div>';
 
 	if ($InputError==1){
 		prnMsg($msg,'error');
 	}
 
-	 echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
-	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	 echo '<table class="selection">';
-	 echo '<tr>
-				<td>' . _('Enter the date from which the transactions are to be listed') . ':</td>
-				<td><input type="text" name="FromDate" maxlength="10" size="10" class="date" alt="' . $_SESSION['DefaultDateFormat'] . '" value="' . Date($_SESSION['DefaultDateFormat']) . '" /></td>
-			</tr>';
-	 echo '<tr>
-				<td>' . _('Enter the date to which the transactions are to be listed') . ':</td>
-				<td><input type="text" name="ToDate" maxlength="10" size="10" class="date" alt="' . $_SESSION['DefaultDateFormat'] . '" value="' . Date($_SESSION['DefaultDateFormat']) . '" /></td>
-			</tr>';
+	echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '">
+		<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />
+		<fieldset>
+			<legend>', _('Report Criteria'), '</legend>
+		<field>
+			<label for="FromDate">' . _('Enter the date from which the transactions are to be listed') . ':</label>
+			<input required="required" autofocus="autofocus" name="FromDate" maxlength="10" size="11" type="date" value="' . Date('Y-m-d') . '" />
+		</field>
+		<field>
+			<label for="ToDate">' . _('Enter the date to which the transactions are to be listed') . ':</label>
+			<input required="required" name="ToDate" maxlength="10" size="11" type="date" value="' . Date('Y-m-d') . '" />
+		</field>
+		<field>
+			<label for="TransType">' . _('Transaction type') . '</label>
+			<select name="TransType">
+				<option value="10">' . _('Sales Invoice') . '</option>
+				<option value="11">' . _('Sales Credit Note') . '</option>
+				<option value="16">' . _('Location Transfer') . '</option>
+				<option value="17">' . _('Stock Adjustment') . '</option>
+				<option value="25">' . _('Purchase Order Delivery') . '</option>
+				<option value="26">' . _('Work Order Receipt') . '</option>
+				<option value="28">' . _('Work Order Issue') . '</option>
+			</select>
+		</field>';
 
-	echo '<tr><td>' . _('Transaction type') . '</td><td>';
+	$sql = "SELECT locations.loccode, locationname FROM locations INNER JOIN locationusers ON locationusers.loccode=locations.loccode AND locationusers.userid='" .  $_SESSION['UserID'] . "' AND locationusers.canview=1";
+	$resultStkLocs = DB_query($sql);
 
-	echo '<select name="TransType">';
-	echo '<option value="10">' . _('Sales Invoice').'</option>
-			<option value="11">' . _('Sales Credit Note').'</option>
-			<option value="16">' . _('Location Transfer').'</option>
-			<option value="17">' . _('Stock Adjustment').'</option>
-			<option value="25">' . _('Purchase Order Delivery').'</option>
-			<option value="26">' . _('Work Order Receipt').'</option>
-			<option value="28">' . _('Work Order Issue').'</option>';
+	echo '<field>
+			<label for="StockLocation">' . _('For Stock Location') . ':</label>
+			<select required="required" name="StockLocation">
+				<option value="All">' . _('All') . '</option>';
 
-	 echo '</select></td></tr>';
-
-	$sql = "SELECT loccode, locationname FROM locations";
-	$resultStkLocs = DB_query($sql, $db);
-
-	echo '<tr><td>' . _('For Stock Location') . ':</td>
-		<td><select name="StockLocation">';
-	echo '<option value="All">' . _('All') . '</option>';
 	while ($myrow=DB_fetch_array($resultStkLocs)){
 		if (isset($_POST['StockLocation']) AND $_POST['StockLocation']!='All'){
 			if ($myrow['loccode'] == $_POST['StockLocation']){
-				echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+				echo '<option selected="selected" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			} else {
 				echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			}
 		} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
-			echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+			echo '<option selected="selected" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			$_POST['StockLocation']=$myrow['loccode'];
 		} else {
 			echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 		}
 	}
-	echo '</select></td></tr>';
+	echo '</select>
+		</field>';
 
-	echo '</table><br /><div class="centre"><button type="submit" name="Go">' . _('Create PDF') . '</button></div><br />';
+	echo '</fieldset>
+			<div class="centre">
+				<input type="submit" name="Go" value="' . _('Create PDF') . '" />
+			</div>';
+	echo '</form>';
 
-	 include('includes/footer.inc');
+	 include('includes/footer.php');
 	 exit;
 } else {
 
 	include('includes/ConnectDB.inc');
 }
 
+
 if ($_POST['StockLocation']=='All') {
 	$sql= "SELECT stockmoves.type,
-		stockmoves.stockid,
-		stockmaster.description,
-		stockmaster.decimalplaces,
-		stockmoves.transno,
-		stockmoves.trandate,
-		stockmoves.qty,
-		stockmoves.reference,
-		stockmoves.narrative,
-		locations.locationname
-	FROM stockmoves
-	LEFT JOIN stockmaster
-	ON stockmoves.stockid=stockmaster.stockid
-	LEFT JOIN locations
-	ON stockmoves.loccode=locations.loccode
-	WHERE type='" . $_POST['TransType'] . "'
-	AND date_format(trandate, '%Y-%m-%d')>='".FormatDateForSQL($_POST['FromDate'])."'
-	AND date_format(trandate, '%Y-%m-%d')<='".FormatDateForSQL($_POST['ToDate'])."'";
+				stockmoves.stockid,
+				stockmaster.description,
+				stockmaster.decimalplaces,
+				stockmoves.transno,
+				stockmoves.trandate,
+				stockmoves.qty,
+				stockmoves.reference,
+				stockmoves.narrative,
+				locations.locationname
+			FROM stockmoves
+			LEFT JOIN stockmaster
+			ON stockmoves.stockid=stockmaster.stockid
+			LEFT JOIN locations
+			ON stockmoves.loccode=locations.loccode
+			INNER JOIN locationusers ON locationusers.loccode=locations.loccode AND locationusers.userid='" .  $_SESSION['UserID'] . "' AND locationusers.canview=1
+			WHERE type='" . $_POST['TransType'] . "'
+			AND date_format(trandate, '%Y-%m-%d')>='".FormatDateForSQL($_POST['FromDate'])."'
+			AND date_format(trandate, '%Y-%m-%d')<='".FormatDateForSQL($_POST['ToDate'])."'";
 } else {
 	$sql= "SELECT stockmoves.type,
-		stockmoves.stockid,
-		stockmaster.description,
-		stockmaster.decimalplaces,
-		stockmoves.transno,
-		stockmoves.trandate,
-		stockmoves.qty,
-		stockmoves.reference,
-		stockmoves.narrative,
-		locations.locationname
-	FROM stockmoves
-	LEFT JOIN stockmaster
-	ON stockmoves.stockid=stockmaster.stockid
-	LEFT JOIN locations
-	ON stockmoves.loccode=locations.loccode
-	WHERE type='" . $_POST['TransType'] . "'
-	AND date_format(trandate, '%Y-%m-%d')>='".FormatDateForSQL($_POST['FromDate'])."'
-	AND date_format(trandate, '%Y-%m-%d')<='".FormatDateForSQL($_POST['ToDate'])."'
-	AND stockmoves.loccode='" . $_POST['StockLocation'] . "'";
+				stockmoves.stockid,
+				stockmaster.description,
+				stockmaster.decimalplaces,
+				stockmoves.transno,
+				stockmoves.trandate,
+				stockmoves.qty,
+				stockmoves.reference,
+				stockmoves.narrative,
+				locations.locationname
+			FROM stockmoves
+			LEFT JOIN stockmaster
+			ON stockmoves.stockid=stockmaster.stockid
+			LEFT JOIN locations
+			ON stockmoves.loccode=locations.loccode
+			INNER JOIN locationusers ON locationusers.loccode=locations.loccode AND locationusers.userid='" .  $_SESSION['UserID'] . "' AND locationusers.canview=1
+			WHERE type='" . $_POST['TransType'] . "'
+			AND date_format(trandate, '%Y-%m-%d')>='".FormatDateForSQL($_POST['FromDate'])."'
+			AND date_format(trandate, '%Y-%m-%d')<='".FormatDateForSQL($_POST['ToDate'])."'
+			AND stockmoves.loccode='" . $_POST['StockLocation'] . "'";
 }
-$result=DB_query($sql,$db,'','',false,false);
+$result=DB_query($sql,'','',false,false);
 
-if (DB_error_no($db)!=0){
-	$title = _('Transaction Listing');
-	include('includes/header.inc');
+if (DB_error_no()!=0){
+	$Title = _('Transaction Listing');
+	include('includes/header.php');
 	prnMsg(_('An error occurred getting the transactions'),'error');
-	include('includes/footer.inc');
+	include('includes/footer.php');
 	exit;
 } elseif (DB_num_rows($result) == 0){
-	$title = _('Transaction Listing');
-	include('includes/header.inc');
+	$Title = _('Transaction Listing');
+	include('includes/header.php');
 	echo '<br />';
-  	prnMsg (_('There were no transactions found in the database between the dates') . ' ' . $_POST['FromDate'] .
-		' ' . _('and') . ' '. $_POST['ToDate'] .'<br />' ._('Please try again selecting a different date'), 'info');
-	include('includes/footer.inc');
+	prnMsg (_('There were no transactions found in the database between the dates') . ' ' . $_POST['FromDate'] . ' ' . _('and') . ' '. $_POST['ToDate']  . '<br />' ._('Please try again selecting a different date'), 'info');
+	include('includes/footer.php');
   	exit;
 }
 

@@ -1,7 +1,7 @@
 <html><head></head><body>
 <!-- Help Begin: Manufacturing -->
 <br /><br />
-<h1><a name="Manufacturing"><!-- Manufacturing -->Fertigung</a></h1>
+<a name="Manufacturing"><font size="+3"><b><!-- Manufacturing -->Fertigung</b></font></a>
 <br /><br />
 Die Fertigung - kurz gesagt die Verbindung von Teilen miteinander, um andere Teile herzustellen, kann von der webERP-Version 3.06 effektiv eingesetzt werden.
 <br />
@@ -17,7 +17,7 @@ Die Folge der Ereignisse bei der Fertigung eines Produktes ist folgende:
 <li>Wenn alle Komponenten und Rohmaterialien zum Fertigungsauftrag entnommen wurden und keine weiteren Fertigteile mehr abgeliefert werden müssen, kann der Fertigungsauftrag abgeschlossen werden. Der Abschluss kalkuliert die Kosten der mit dem Fertigungsauftrag gefertigten Teile neu und falls die Bewertung zum gewichteten Durchschnitt verwendet wird, werden die Wertveränderungen gebucht.</li>
 </ul>
 <br /><br />
-<h3>Probleme der Hauptbuchintegration</h3>
+<font size="+1"><b>Probleme der Hauptbuchintegration</b></font>
 <br /><br />
 Wenn in den Unternehmenseinstellungen die Option "Lagerbestandsvorgänge im Hauptbuch mitbuchen (zu Standardkosten):" auf Ja gesetzt ist, werden im Ergebnis von Vorgängen mit Fertigungsaufträgen Hauptbuch-Buchungen erzeugt. Wenn der Fertigungsauftrag angelegt wird, ist das Hauptbuch nicht betroffen. Die Vorgänge, bei denen das Hauptbuch im Ergebnis des Fertigungsprozesses betroffen ist, sind folgende:
 <ul>
@@ -26,7 +26,7 @@ Wenn in den Unternehmenseinstellungen die Option "Lagerbestandsvorgänge im Haupt
 <li>Abschließen des Fertigungsauftrages - Es wird die Menge der zum Fertigungsauftrag entnommenen Komponenten mit der Stückliste zum Zeitpunkt der ersten Ablieferung der Fertigerzeugnisse verglichen. Mengenabweichungen werden zu Standardkosten bewertet (wie zum Zeitpunkt der ersten Ablieferung) und je nach Abweichung im Soll oder im Haben auf dem Erfolgskonto Mengenabweichung aus der Warengruppe des Fertigerzeugnisses gebucht. Dann werden die Kosten der entnommenen Komponenten mit den Kosten zum Zeitpunkt der ersten Ablieferung verglichen, die hier festgestellten Kostenabweichungen werden auf dem Erfolgskonto Preisabweichungen aus der Warengruppe des Fertigerzeugnisses gebucht. Mit dem Abschluss des Fertigungsauftrages wird dafür gesorgt, dass der Wert der Ablieferungen der Fertigerzeungnisse des Auftrags gleich dem Wert der zum Fertigungauftag entnommenen Komponenten und Rohmaterialien ist.</li>
 </ul>
 <br /><br />
-<h3>Fertigungsauftrag anlegen</h3>
+<font size="+1"><b>Fertigungsauftrag anlegen</b></font>
 <br /><br />
 Der Fertigungsauftrag ist das Bezugsobjekt, zu dem Entnahmen von Komponenten/ Rohmaterialien erfasst werden. Eine laufende Summe der Kosten der Entnahmen wird geführt. Die Fertigungsaufträge können für eine beliebige Anzahl von Produkten angelegt werden. Die Materialien, zu denen Fertigungsaufträge angelegt werden können, sind auf die Materialart "Fertigerzeugnis" beschränkt. Der Fertigungsauftrag verfolgt die zum Produkt abgelieferten Mengen und prüft, dass nicht mehr als die ursprünglich angegebene Auftragsmenge und eine Toleranz wie sie auch für Bestellungen definiert wird, dazu abgeliefert wird.
 <br /><br />
@@ -39,7 +39,7 @@ Mit den oben angegebenen Informationen müssen die zu fertigenden Produkte zum Fe
 <br /><br />
 Die abgelieferte Menge wird automatisch gegen die Fertigungsauftrag abgeglichen. Der Saldo aus noch zu fertigenden und abgelieferten Teilen wird in der Bestandsstatusanzeige als "Auftragsmenge" angezeigt. Gleichermaßen wird die Bedarfsmenge der Komponenten zum Fertigungsauftrag, die durch die Stückliste aufgelöst werden, als Bedarfsmengen in der Bestandsstatusanzeige der Komponenten ausgewiesen.
 <br /><br />
-<h3>Fertigungsaufträge abschließen</h3>
+<font size="+1"><b>Fertigungsaufträge abschließen</b></font>
 <br /><br />
 Aus der Liste "Fertigungsaufträge suchen" ist es möglich, die Kosten anzuzeigen. Die Kostenanzeige listet alle Entnahmen von Rohmaterialien und Komponenten zum Fertigungsauftrag im Vergleich zum Bedarf aus der Stückliste des Produktes in der Bewertung zum Zeitpunkt der ersten Ablieferung auf. Die Abweichungen auf dem Fertigungsauftrag als Einsatzmengenabweichung und die erwarteten Kosten der entnommenen Materialien / Komponenten werden angezeigt. Das Abschließen des Fertigungsauftrages übernimmt diese Abweichungen, und wenn die Hauptbuchintegration der Bestandsführung eingerichtet ist, werden Hauptbuch-Buchungen erzeigt, die den Bestand an Ware in Arbeit zurückschreiben. Falls mit dem Fertigungsauftrag natürlich mehrere Produkte erzeugt werden (Kuppelproduktion), werden die Abweichungen entsprechend der abgelieferten Mengen der Produkte multipliziert mit den erwarteten Kosten im Verhältnis der erwarteten Gesamtkosten aller Erzeugnisse des Fertigungsauftrages aufgeteilt. Welche Buchungssätze gebildet werden, hängt im Detail davon ab, ob Sie die Bestände zu Standardkosten oder zum gewichteten Durchschnitt bewerten.
 <ul>

@@ -2,9 +2,8 @@
 
 /* Include session.inc, to allow database connection, and access to
    miscfunctions, and datefunctions.*/
-	// FOLLOWING ONLY REQUIRED TO SUPPORT PER FUNCTION AUTHENTICATION
-	$api_DatabaseName='almc_stable';
-	// END OF OLD STYLE AUTHENTICATION
+	// FOLLOWING IS ALWAYS REQUIRED
+	$api_DatabaseName='weberpdemo';
 
 	$AllowAnyone = true;
 	$PathPrefix=dirname(__FILE__).'/../';
@@ -12,7 +11,10 @@
 
 	include('api_errorcodes.php');
 	/* Include SQL_CommonFunctions.inc, to use GetNextTransNo().*/
-	include($PathPrefix.'includes/SQL_CommonFunctions.inc');
+	include($PathPrefix . 'includes/SQL_CommonFunctions.inc');
+	/* Required for creating invoices/credits */
+	include($PathPrefix . 'includes/GetSalesTransGLCodes.inc');
+	include($PathPrefix . 'includes/Z_POSDataCreation.php');
 
 /* Get weberp authentication, and return a valid database
    connection */
@@ -20,11 +22,11 @@
 		if (!isset($_SESSION['AccessLevel']) OR
 		           $_SESSION['AccessLevel'] == '') {
 			//  Login to default database = old clients.
-			if ($user != '' and $password != '') {
+			if ($user != '' AND $password != '') {
 			    global  $api_DatabaseName;
 			    $rc = LoginAPI ($api_DatabaseName, $user, $password);
 			    if ($rc[0] == UL_OK ) {
-				return $_SESSION['db'];
+					return $_SESSION['db'];
 			    }
 			}
 			return NoAuthorisation;

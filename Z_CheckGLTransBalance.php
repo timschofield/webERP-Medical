@@ -1,39 +1,44 @@
 <?php
-/* $Id$*/
 
-include('includes/session.inc');
-$title=_('Check Period Sales Ledger Control Account');
-include('includes/header.inc');
+include('includes/session.php');
+$Title=_('Check Period Sales Ledger Control Account');
+$ViewTopic = 'SpecialUtilities';
+$BookMark = basename(__FILE__, '.php'); ;
+include('includes/header.php');
 
 echo '<table>';
 
 $Header = '<tr>
-		<th>' . _('Type') . '</th>
-		<th>' . _('Number') . '</th>
-		<th>' . _('Period') . '</th>
-		<th>' . _('Difference') . '</th>
+			<th>' . _('Date') . '</th>
+			<th>' . _('Type') . '</th>
+			<th>' . _('Number') . '</th>
+			<th>' . _('Period') . '</th>
+			<th>' . _('Difference') . '</th>
 		</tr>';
 
 echo $Header;
 
 $sql = "SELECT gltrans.type,
-		systypes.typename,
-		gltrans.typeno,
-		periodno,
-		SUM(amount) AS nettot
-	FROM gltrans,
-		systypes
-	WHERE gltrans.type = systypes.typeid
-	GROUP BY gltrans.type,
-		systypes.typename,
-		typeno,
-		periodno
-	HAVING ABS(SUM(amount))>0.01";
+			gltrans.trandate,
+			systypes.typename,
+			gltrans.typeno,
+			periodno,
+			SUM(amount) AS nettot
+		FROM gltrans
+			INNER JOIN chartmaster ON
+			gltrans.account=chartmaster.accountcode
+			INNER JOIN systypes ON gltrans.type = systypes.typeid
+		GROUP BY gltrans.type,
+			systypes.typename,
+			typeno,
+			periodno
+		HAVING ABS(SUM(amount))>= " . 1/pow(10,$_SESSION['CompanyRecord']['decimalplaces']) . "
+		ORDER BY gltrans.counterindex";
 
-$OutOfWackResult = DB_query($sql,$db);
+$OutOfWackResult = DB_query($sql);
 
 
-$RowCounter = 0;
+$RowCounter =0;
 
 while ($OutOfWackRow = DB_fetch_array($OutOfWackResult)){
 
@@ -44,14 +49,15 @@ while ($OutOfWackRow = DB_fetch_array($OutOfWackResult)){
 		$RowCounter++;
 	}
 	echo '<tr>
-			<td><a href="' . $rootpath . '/GLTransInquiry.php?TypeID=' . $OutOfWackRow['type'] . '&TransNo=' .
-				$OutOfWackRow['typeno'] . '">' . $OutOfWackRow['typename'] . '</a></td><td class="number">' . $OutOfWackRow['typeno'] . '</td>
-			<td class="number">' . $OutOfWackRow['periodno'] . '</td>
-			<td class="number">' . locale_money_format($OutOfWackRow['nettot'],$_SESSION['CompanyRecord']['currencydefault']) . '</td>
-		</tr>';
+	<td>' . ConvertSQLDate($OutOfWackRow['trandate']) . '</td>
+	<td><a href="' . $RootPath . '/GLTransInquiry.php?TypeID=' . $OutOfWackRow['type'] . '&TransNo=' . $OutOfWackRow['typeno'] . '">' . $OutOfWackRow['typename'] . '</a></td>
+	<td class="number">' . $OutOfWackRow['typeno'] . '</td>
+	<td class="number">' . $OutOfWackRow['periodno'] . '</td>
+	<td class="number">' . locale_number_format($OutOfWackRow['nettot'],$_SESSION['CompanyRecord']['decimalplaces']) . '</td>
+	</tr>';
 
 }
 echo '</table>';
 
-include('includes/footer.inc');
+include('includes/footer.php');
 ?>

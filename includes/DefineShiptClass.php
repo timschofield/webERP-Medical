@@ -1,11 +1,9 @@
 <?php
-/* $Id$*/
 /* Definition of the Shipment class to hold all the information for a shipment*/
 
 Class Shipment {
 
 	var $ShiptRef; /*unqique identifier for the shipment */
-
 	var $LineItems; /*array of objects of class LineDetails using the product id as the pointer */
 	var $SupplierID;
 	var $SupplierName;
@@ -15,27 +13,32 @@ Class Shipment {
 	var $ETA;
 	var $StockLocation;
 	var $Closed;
+	var $CurrDecimalPlaces;
+	var $AccumValue;
 
-	function Shipment(){
+	function __construct(){
 	/*Constructor function initialises a new Shipment object */
 		$this->LineItems = array();
 		$this->AccumValue =0;
 		$this->Closed =0;
 	}
 
-	function add_to_shipment($PODetailItem,
-					$OrderNo,
-					$StockID,
-					$ItemDescr,
-					$QtyInvoiced,
-					$UnitPrice,
-					$UOM,
-					$DelDate,
-					$QuantityOrd,
-					$QuantityRecd,
-					$StdCostUnit,
-					$DecimalPlaces,
-					&$db){
+	function Shipment() {
+		self::__construct();
+	}
+
+	function Add_To_Shipment($PODetailItem,
+							$OrderNo,
+							$StockID,
+							$ItemDescr,
+							$QtyInvoiced,
+							$UnitPrice,
+							$UOM,
+							$DelDate,
+							$QuantityOrd,
+							$QuantityRecd,
+							$StdCostUnit,
+							$DecimalPlaces){
 
 		$this->LineItems[$PODetailItem]= new LineDetails($PODetailItem,
 														$OrderNo,
@@ -53,19 +56,19 @@ Class Shipment {
 		$sql = "UPDATE purchorderdetails SET shiptref = '" . $this->ShiptRef . "'
 			WHERE podetailitem = '" . $PODetailItem . "'";
 		$ErrMsg = _('There was an error updating the purchase order detail record to make it part of shipment') . ' ' . $this->ShiptRef . ' ' . _('the error reported was');
-		$result = DB_query($sql, $db, $ErrMsg);
+		$result = DB_query($sql, $ErrMsg);
 
-		return 1;
+		Return 1;
 	}
 
 
-	function remove_from_shipment($PODetailItem,&$db){
+	function Remove_From_Shipment($PODetailItem){
 
 		if ($this->LineItems[$PODetailItem]->QtyInvoiced==0){
 
 			unset($this->LineItems[$PODetailItem]);
 			$sql = "UPDATE purchorderdetails SET shiptref = 0 WHERE podetailitem='" . $PODetailItem . "'";
-			$Result = DB_query($sql,$db);
+			$Result = DB_query($sql);
 		} else {
 			prnMsg(_('This shipment line has a quantity invoiced and already charged to the shipment - it cannot now be removed'),'warn');
 		}
@@ -89,7 +92,7 @@ Class LineDetails {
 	var $DecimalPlaces;
 
 
-	function LineDetails ($PODetailItem,
+	function __construct ($PODetailItem,
 							$OrderNo,
 							$StockID,
 							$ItemDescr,
@@ -100,7 +103,7 @@ Class LineDetails {
 							$QuantityOrd,
 							$QuantityRecd,
 							$StdCostUnit,
-							$DecimalPlaces){
+							$DecimalPlaces=2){
 
 	/* Constructor function to add a new LineDetail object with passed params */
 		$this->PODetailItem = $PODetailItem;
@@ -115,6 +118,32 @@ Class LineDetails {
 		$this->QuantityOrd = $QuantityOrd;
 		$this->StdCostUnit = $StdCostUnit;
 		$this->DecimalPlaces = $DecimalPlaces;
+	}
+
+	function LineDetails($PODetailItem,
+							$OrderNo,
+							$StockID,
+							$ItemDescr,
+							$QtyInvoiced,
+							$UnitPrice,
+							$UOM,
+							$DelDate,
+							$QuantityOrd,
+							$QuantityRecd,
+							$StdCostUnit,
+							$DecimalPlaces=2) {
+			self::__construct($PODetailItem,
+							$OrderNo,
+							$StockID,
+							$ItemDescr,
+							$QtyInvoiced,
+							$UnitPrice,
+							$UOM,
+							$DelDate,
+							$QuantityOrd,
+							$QuantityRecd,
+							$StdCostUnit,
+							$DecimalPlaces=2);
 	}
 }
 

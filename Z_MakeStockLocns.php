@@ -1,10 +1,11 @@
 <?php
-/* $Id$*/
 /* Script to make stock locations for all parts that do not have stock location records set up*/
 
-include ('includes/session.inc');
-$title = _('Make LocStock Records');
-include('includes/header.inc');
+include ('includes/session.php');
+$Title = _('Make LocStock Records');
+$ViewTopic = 'SpecialUtilities';
+$BookMark = basename(__FILE__, '.php'); ;
+include('includes/header.php');
 
 echo '<br /><br />' . _('This script makes stock location records for parts where they do not already exist');
 
@@ -18,10 +19,10 @@ $sql = "INSERT INTO locstock (stockid, loccode)
                 WHERE locstock.stockid IS NULL";
 
 $ErrMsg = _('The items/locations that need stock location records created cannot be retrieved because');
-$Result = DB_query($sql,$db,$ErrMsg);
+$Result = DB_query($sql,$ErrMsg);
 
-echo '<br />';
+echo '<p />';
 prnMsg(_('Any stock items that may not have had stock location records have now been given new location stock records'),'info');
 
-include('includes/footer.inc');
+include('includes/footer.php');
 ?>

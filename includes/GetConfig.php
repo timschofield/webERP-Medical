@@ -1,52 +1,53 @@
 <?php
 // Systems can temporarily force a reload by setting the variable
 // $ForceConfigReload to true
-/* $Id$*/
 
-if(isset($ForceConfigReload) and $ForceConfigReload==TRUE OR !isset($_SESSION['CompanyDefaultsLoaded'])) {
-	global  $db;		// It is global, we may not be.
+if(isset($ForceConfigReload) AND $ForceConfigReload==true OR !isset($_SESSION['CompanyDefaultsLoaded'])) {
 	$sql = "SELECT confname, confvalue FROM config";
 	$ErrMsg = _('Could not get the configuration parameters from the database because');
-	$ConfigResult = DB_query($sql,$db,$ErrMsg);
-	while( $myrow = DB_fetch_row($ConfigResult) ) {
-		if (is_numeric($myrow[1]) and $myrow[0]!='DefaultPriceList'){
+	$ConfigResult = DB_query($sql,$ErrMsg);
+	while( $myrow = DB_fetch_array($ConfigResult) ) {
+		if (is_numeric($myrow['confvalue']) AND $myrow['confname']!='DefaultPriceList' AND $myrow['confname']!='VersionNumber'){
 			//the variable name is given by $myrow[0]
-			$_SESSION[$myrow[0]] = (double) $myrow[1];
+			$_SESSION[$myrow['confname']] = (double) $myrow['confvalue'];
 		} else {
-			$_SESSION[$myrow[0]] =  $myrow[1];
+			$_SESSION[$myrow['confname']] =  $myrow['confvalue'];
 		}
 	} //end loop through all config variables
+	if (!isset($_SESSION['DBUpdateNumber'])) {
+		$_SESSION['DBUpdateNumber'] = -1;
+	}
 	$_SESSION['CompanyDefaultsLoaded'] = true;
 
 	DB_free_result($ConfigResult); // no longer needed
 	/*Maybe we should check config directories exist and try to create if not */
+
+	if (!isset($_SESSION['VersionNumber'])){ // the config record for VersionNumber is not yet added
+		header('Location: UpgradeDatabase.php'); //divert to the db upgrade if the VersionNumber is not in the config table
+	}
+
 	/*Load the pagesecurity settings from the database */
-
-	if (DB_table_exists('pagesecurity', $db)) {
-		$sql="SELECT script, security FROM pagesecurity";
-		$ErrMsg = _('Could not get the page security details from the database because');
-		$result=DB_query($sql, $db);
-
-		while ($myrow=DB_fetch_array($result)) {
-			$_SESSION['PageSecurityArray'][$myrow['script']]=$myrow['security'];
-		}
-	} else {
-		header('Location: Z_UpgradeDatabase.php'); //divert to the db upgrade if the table doesn't exist
+	$sql="SELECT script, pagesecurity FROM scripts";
+	$result=DB_query($sql,'','',false,false);
+	if (DB_error_no()!=0){
+		/* the table may not exist with the pagesecurity field in it if it is an older webERP database
+		 * divert to the db upgrade if the VersionNumber is not in the config table
+		 * */
+		header('Location: UpgradeDatabase.php');
+	}
+	//Populate the PageSecurityArray array for each script's  PageSecurity value
+	while ($myrow=DB_fetch_array($result)) {
+		$_SESSION['PageSecurityArray'][$myrow['script']]=$myrow['pagesecurity'];
 	}
 
-	if (!isset($_SESSION['DBUpdateNumber'])){ // the config record for VersionNumber is not yet added
-		$_SESSION['DBUpdateNumber']=-1;
-		header('Location: Z_UpgradeDatabase.php'); //divert to the db upgrade if the VersionNumber is not in the config table
-	}
 	/*
 	 check the decimalplaces field exists in currencies - this was added in 4.0 but is required in 4.04 as it is used everywhere as the default decimal places to show on all home currency amounts
 	*/
-	$result = DB_query("SELECT decimalplaces FROM currencies",$db,'','',false,false);
-	if (DB_error_no($db)!=0) { //then decimalplaces not already a field in currencies
+	$result = DB_query("SELECT decimalplaces FROM currencies",'','',false,false);
+	if (DB_error_no()!=0) { //then decimalplaces not already a field in currencies
 		$result = DB_query("ALTER TABLE `currencies`
-							ADD COLUMN `decimalplaces` tinyint(3) NOT NULL DEFAULT 2 AFTER `hundredsname`",$db);
+							ADD COLUMN `decimalplaces` tinyint(3) NOT NULL DEFAULT 2 AFTER `hundredsname`");
 	}
-
 /* Also reads all the company data set up in the company record and returns an array */
 
 	$sql=	"SELECT	coyname,
@@ -66,26 +67,21 @@ if(isset($ForceConfigReload) and $ForceConfigReload==TRUE OR !isset($_SESSION['C
 					creditorsact,
 					payrollact,
 					grnact,
+					commissionsact,
 					exchangediffact,
 					purchasesexchangediffact,
 					retainedearnings,
 					freightact,
 					gllink_debtors,
 					gllink_creditors,
-					gllink_stock
+					gllink_stock,
+					decimalplaces
 				FROM companies
+				INNER JOIN currencies ON companies.currencydefault=currencies.currabrev
 				WHERE coycode=1";
 
 	$ErrMsg = _('An error occurred accessing the database to retrieve the company information');
-	$ReadCoyResult = DB_query($sql,$db,$ErrMsg);
-
-	$sql="SELECT currabrev,
-				decimalplaces
-			FROM currencies";
-	$CurrenciesResult=DB_query($sql, $db);
-	while ($CurrenciesRow=DB_fetch_array($CurrenciesResult)) {
-		$_SESSION['Currencies'][$CurrenciesRow['currabrev']]['DecimalPlaces']=$CurrenciesRow['decimalplaces'];
-	}
+	$ReadCoyResult = DB_query($sql,$ErrMsg);
 
 	if (DB_num_rows($ReadCoyResult)==0) {
       		echo '<br /><b>';
@@ -96,6 +92,7 @@ if(isset($ForceConfigReload) and $ForceConfigReload==TRUE OR !isset($_SESSION['C
 	}
 
 	/*Now read in smtp email settings - not needed in a properly set up server environment - but helps for those who can't control their server .. I think! */
+
 	$sql="SELECT id,
 				host,
 				port,
@@ -105,16 +102,31 @@ if(isset($ForceConfigReload) and $ForceConfigReload==TRUE OR !isset($_SESSION['C
 				timeout,
 				auth
 			FROM emailsettings";
-	$result=DB_query($sql, $db);
-	$myrow=DB_fetch_array($result);
+	$result=DB_query($sql,'','',false,false);
+	if (DB_error_no()==0 and DB_num_rows($result) > 0) {
+		/*test to ensure that the emailsettings table exists!!
+		 * if it doesn't exist then we are into an UpgradeDatabase scenario anyway
+		*/
+		$myrow=DB_fetch_array($result);
 
-	$_SESSION['SMTPSettings']['host']=$myrow['host'];
-	$_SESSION['SMTPSettings']['port']=$myrow['port'];
-	$_SESSION['SMTPSettings']['heloaddress']=$myrow['heloaddress'];
-	$_SESSION['SMTPSettings']['username']=$myrow['username'];
-	$_SESSION['SMTPSettings']['password']=$myrow['password'];
-	$_SESSION['SMTPSettings']['timeout']=$myrow['timeout'];
-	$_SESSION['SMTPSettings']['auth']=$myrow['auth'];
+		$_SESSION['SMTPSettings']['host']=$myrow['host'];
+		$_SESSION['SMTPSettings']['port']=$myrow['port'];
+		$_SESSION['SMTPSettings']['heloaddress']=$myrow['heloaddress'];
+		$_SESSION['SMTPSettings']['username']=$myrow['username'];
+		$_SESSION['SMTPSettings']['password']=$myrow['password'];
+		$_SESSION['SMTPSettings']['timeout']=$myrow['timeout'];
+		$_SESSION['SMTPSettings']['auth']=$myrow['auth'];
+	}
+	//Add favorite scripts
+	//Check that the favourites table exists (upgrades will choke otherwise)
+
+	$sql = "SELECT href, caption FROM favourites WHERE userid='" . $_SESSION['UserID'] . "'";
+	$result = DB_query($sql,'','',false,false);
+	if (DB_num_rows($result)>0) {
+		while ($myrow = DB_fetch_array($result)) {
+			$_SESSION['Favourites'][$myrow['href']] = $myrow['caption'];
+		}
+	}
 
 } //end if force reload or not set already
 
@@ -123,7 +135,7 @@ if(isset($ForceConfigReload) and $ForceConfigReload==TRUE OR !isset($_SESSION['C
 These variable if required are in config.php
 
 $DefaultLanguage = en_GB
-$allow_demo_mode = 1
+$AllowDemoMode = 1
 
 $EDIHeaderMsgId = D:01B:UN:EAN010
 $EDIReference = WEBERP

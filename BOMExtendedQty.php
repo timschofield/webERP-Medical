@@ -1,10 +1,9 @@
 <?php
 
-/* $Id$*/
 
 // BOMExtendedQty.php - Quantity Extended Bill of Materials
 
-include('includes/session.inc');
+include('includes/session.php');
 
 if (isset($_POST['PrintPDF'])) {
 
@@ -14,21 +13,21 @@ if (isset($_POST['PrintPDF'])) {
 	$FontSize=9;
 	$PageNumber=1;
 	$line_height=12;
-	$YPos = $Page_Height - $Top_Margin;
+    PrintHeader($pdf,$YPos,$PageNumber,$Page_Height,$Top_Margin,$Left_Margin,$Page_Width,$Right_Margin);
 
-	if (!$_POST['Quantity'] or !is_numeric(filter_number_input($_POST['Quantity']))) {
+	if (!$_POST['Quantity'] or !is_numeric(filter_number_format($_POST['Quantity']))) {
 		$_POST['Quantity'] = 1;
 	}
 
-	$result = DB_query("DROP TABLE IF EXISTS tempbom",$db);
-	$result = DB_query("DROP TABLE IF EXISTS passbom",$db);
-	$result = DB_query("DROP TABLE IF EXISTS passbom2",$db);
+	$result = DB_query("DROP TABLE IF EXISTS tempbom");
+	$result = DB_query("DROP TABLE IF EXISTS passbom");
+	$result = DB_query("DROP TABLE IF EXISTS passbom2");
 	$sql = "CREATE TEMPORARY TABLE passbom (
 				part char(20),
 				extendedqpa double,
 				sortpart text) DEFAULT CHARSET=utf8";
-	$ErrMsg = _('The SQL to to create passbom failed with the message');
-	$result = DB_query($sql,$db,$ErrMsg);
+	$ErrMsg = _('The SQL to create passbom failed with the message');
+	$result = DB_query($sql,$ErrMsg);
 
 	$sql = "CREATE TEMPORARY TABLE tempbom (
 				parent char(20),
@@ -40,7 +39,7 @@ if (isset($_POST['PrintPDF'])) {
 				effectiveafter date,
 				effectiveto date,
 				quantity double) DEFAULT CHARSET=utf8";
-	$result = DB_query($sql,$db,_('Create of tempbom failed because'));
+	$result = DB_query($sql,_('Create of tempbom failed because'));
 	// First, find first level of components below requested assembly
 	// Put those first level parts in passbom, use COMPONENT in passbom
 	// to link to PARENT in bom to find next lower level and accumulate
@@ -49,13 +48,13 @@ if (isset($_POST['PrintPDF'])) {
 	// This finds the top level
 	$sql = "INSERT INTO passbom (part, extendedqpa, sortpart)
 			   SELECT bom.component AS part,
-					  (" . filter_number_input($_POST['Quantity']) . " * bom.quantity) as extendedqpa,
+					  (" . filter_number_format($_POST['Quantity']) . " * bom.quantity) as extendedqpa,
 					   CONCAT(bom.parent,bom.component) AS sortpart
 					  FROM bom
 			  WHERE bom.parent ='" . $_POST['Part'] . "'
-			  AND bom.effectiveto >= NOW()
-			  AND bom.effectiveafter <= NOW()";
-	$result = DB_query($sql,$db);
+              AND bom.effectiveafter <= '" . date('Y-m-d') . "'
+              AND bom.effectiveto > '" . date('Y-m-d') . "'";
+	$result = DB_query($sql);
 
 	$LevelCounter = 2;
 	// $LevelCounter is the level counter
@@ -77,12 +76,12 @@ if (isset($_POST['PrintPDF'])) {
 					 bom.loccode,
 					 bom.effectiveafter,
 					 bom.effectiveto,
-					 (" . filter_number_input($_POST['Quantity']) . " * bom.quantity) as extendedqpa
+					 (" . filter_number_format($_POST['Quantity']) . " * bom.quantity) as extendedqpa
 			FROM bom
 			WHERE bom.parent ='" . $_POST['Part'] . "'
-			AND bom.effectiveto >= NOW()
-			AND bom.effectiveafter <= NOW()";
-	$result = DB_query($sql,$db);
+            AND bom.effectiveafter <= '" . date('Y-m-d') . "'
+            AND bom.effectiveto > '" . date('Y-m-d') . "'";
+	$result = DB_query($sql);
 	//echo "<br />sql is $sql<br />";
 	// This while routine finds the other levels as long as $ComponentCounter - the
 	// component counter finds there are more components that are used as
@@ -112,18 +111,18 @@ if (isset($_POST['PrintPDF'])) {
 					 (bom.quantity * passbom.extendedqpa)
 			 FROM bom,passbom
 			 WHERE bom.parent = passbom.part
-			  AND bom.effectiveto >= NOW()
-			  AND bom.effectiveafter <= NOW()";
-		$result = DB_query($sql,$db);
+             AND bom.effectiveafter <= '" . date('Y-m-d') . "'
+             AND bom.effectiveto > '" . date('Y-m-d') . "'";
+		$result = DB_query($sql);
 
-		$result = DB_query("DROP TABLE IF EXISTS passbom2",$db);
-		$result = DB_query("ALTER TABLE passbom RENAME AS passbom2",$db);
-		$result = DB_query("DROP TABLE IF EXISTS passbom",$db);
+		$result = DB_query("DROP TABLE IF EXISTS passbom2");
+		$result = DB_query("ALTER TABLE passbom RENAME AS passbom2");
+		$result = DB_query("DROP TABLE IF EXISTS passbom");
 
 		$sql = "CREATE TEMPORARY TABLE passbom (part char(20),
 												extendedqpa decimal(10,3),
 												sortpart text) DEFAULT CHARSET=utf8";
-		$result = DB_query($sql,$db);
+		$result = DB_query($sql);
 
 		$sql = "INSERT INTO passbom (part,
 									extendedqpa,
@@ -134,31 +133,31 @@ if (isset($_POST['PrintPDF'])) {
 									FROM bom
 									INNER JOIN passbom2
 									ON bom.parent = passbom2.part
-									WHERE bom.effectiveto >= NOW()
-										AND bom.effectiveafter <= NOW()";
-		$result = DB_query($sql,$db);
+									WHERE bom.effectiveafter <= '" . date('Y-m-d') . "'
+                                    AND bom.effectiveto > '" . date('Y-m-d') . "'";
+		$result = DB_query($sql);
 
 		$sql = "SELECT COUNT(bom.parent) AS components
 					FROM bom
 					INNER JOIN passbom
 					ON bom.parent = passbom.part
 					GROUP BY passbom.part";
-		$result = DB_query($sql,$db);
+		$result = DB_query($sql);
 
 		$myrow = DB_fetch_array($result);
 		$ComponentCounter = $myrow['components'];
 
 	} // End of while $ComponentCounter > 0
 
-	if (DB_error_no($db) !=0) {
-		$title = _('Quantity Extended BOM Listing') . ' - ' . _('Problem Report');
-		include('includes/header.inc');
-		prnMsg( _('The Quantiy Extended BOM Listing could not be retrieved by the SQL because') . ' '  . DB_error_msg($db),'error');
-		echo '<br /><a href="' .$rootpath .'/index.php">' . _('Back to the menu') . '</a>';
+	if (DB_error_no() !=0) {
+		$Title = _('Quantity Extended BOM Listing') . ' - ' . _('Problem Report');
+		include('includes/header.php');
+		prnMsg( _('The Quantiy Extended BOM Listing could not be retrieved by the SQL because') . ' '  . DB_error_msg(),'error');
+		echo '<br /><a href="' .$RootPath .'/index.php">' . _('Back to the menu') . '</a>';
 		if ($debug==1){
 			echo '<br />' . $sql;
 		}
-		include('includes/footer.inc');
+		include('includes/footer.php');
 		exit;
 	}
 
@@ -173,30 +172,36 @@ if (isset($_POST['PrintPDF'])) {
 				   (SELECT
 					  SUM(locstock.quantity) as invqty
 					  FROM locstock
+					  INNER JOIN locationusers ON locationusers.loccode=locstock.loccode AND locationusers.userid='" .  $_SESSION['UserID'] . "' AND locationusers.canview=1
 					  WHERE locstock.stockid = tempbom.component
 					  GROUP BY locstock.stockid) AS qoh,
 				   (SELECT
 					  SUM(purchorderdetails.quantityord - purchorderdetails.quantityrecd) as netqty
-					  FROM purchorderdetails
+					  FROM purchorderdetails INNER JOIN purchorders
+					  ON purchorderdetails.orderno=purchorders.orderno
+					  INNER JOIN locationusers ON locationusers.loccode=purchorders.intostocklocation AND locationusers.userid='" .  $_SESSION['UserID'] . "' AND locationusers.canview=1
 					  WHERE purchorderdetails.itemcode = tempbom.component
-					  AND completed = 0
+					  AND purchorderdetails.completed = 0
+					  AND (purchorders.status = 'Authorised' OR purchorders.status='Printed')
 					  GROUP BY purchorderdetails.itemcode) AS poqty,
 				   (SELECT
 					  SUM(woitems.qtyreqd - woitems.qtyrecd) as netwoqty
 					  FROM woitems INNER JOIN workorders
 					  ON woitems.wo = workorders.wo
+					  INNER JOIN locationusers ON locationusers.loccode=workorders.loccode AND locationusers.userid='" .  $_SESSION['UserID'] . "' AND locationusers.canview=1
 					  WHERE woitems.stockid = tempbom.component
 					  AND workorders.closed=0
 					  GROUP BY woitems.stockid) AS woqty
 			  FROM tempbom INNER JOIN stockmaster
 			  ON tempbom.component = stockmaster.stockid
+			  INNER JOIN locationusers ON locationusers.loccode=tempbom.loccode AND locationusers.userid='" .  $_SESSION['UserID'] . "' AND locationusers.canview=1
 			  GROUP BY tempbom.component,
 					   stockmaster.description,
 					   stockmaster.decimalplaces,
 					   stockmaster.mbflag";
-	$result = DB_query($sql,$db);
+	$result = DB_query($sql);
 	$ListCount = DB_num_rows($result);
-	while ($myrow = DB_fetch_array($result,$db)){
+	while ($myrow = DB_fetch_array($result)){
 
 		// Parameters for addTextWrap are defined in /includes/class.pdf.php
 		// 1) X position 2) Y position 3) Width
@@ -231,13 +236,12 @@ if (isset($_POST['PrintPDF'])) {
 	if ($YPos < $Bottom_Margin + $line_height){
 		PrintHeader($pdf,$YPos,$PageNumber,$Page_Height,$Top_Margin,$Left_Margin,$Page_Width,$Right_Margin);
 	}
-
 	if ($ListCount == 0) {
-		$title = _('Print Indented BOM Listing Error');
-		include('includes/header.inc');
+		$Title = _('Print Indented BOM Listing Error');
+		include('includes/header.php');
 		prnMsg(_('There were no items for the selected assembly'),'error');
-		echo '<br /><a href="' . $rootpath . '/index.php">' . _('Back to the menu') . '</a>';
-		include('includes/footer.inc');
+		echo '<br /><a href="' . $RootPath . '/index.php">' . _('Back to the menu') . '</a>';
+		include('includes/footer.php');
 		exit;
 	} else {
 		$pdf->OutputD($_SESSION['DatabaseName'] . '_BOM_Extended_Qty_' . date('Y-m-d').'.pdf');
@@ -246,42 +250,47 @@ if (isset($_POST['PrintPDF'])) {
 
 } else { /*The option to print PDF was not hit so display form */
 
-	$title=_('Quantity Extended BOM Listing');
-	include('includes/header.inc');
-	echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $title.'</p><br />';
+	$ViewTopic = 'Manufacturing';
+	$BookMark = '';
 
-	echo '<form action=' . htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . ' method="post">
-		<table class="selection">
-		<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />
-		<tr>
-			<td>' . _('Part') . ':</td>
-			<td><input type ="text" name="Part" size="20" /></td>
-		</tr>
-		<tr>
-			<td>' . _('Quantity') . ':</td>
-			<td><input type="text" class="number" name="Quantity" size="4" /></td>
-		</tr>
-		<tr>
-			<td>' . _('Selection Option') . ':</td>
-			<td><select name="Select">
+	$Title=_('Quantity Extended BOM Listing');
+	include('includes/header.php');
+	echo '<p class="page_title_text"><img src="'.$RootPath.'/css/'.$Theme.'/images/maintenance.png" title="' . _('Search') . '" alt="" />' . ' ' . $Title . '</p>';
+
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '" method="post">
+        <input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />
+		<fieldset>
+			<legend>', _('Report Criteria'), '</legend>
+		<field>
+			<label for="Part">' . _('Part') . ':</label>
+			<input type="text" autofocus="autofocus" required="required" name="Part" size="20" title="" />
+			<fieldhelp>' . _('Enter the item code that you wish to display the extended bill of material for') . '</fieldhelp
+		</field>
+		<field>
+			<label for="Quantity">' . _('Quantity') . ':</label>
+			<input type="text" class="number" required="required" name="Quantity" size="4" />
+		</field>
+		<field>
+			<label for="Select">' . _('Selection Option') . ':</label>
+			<select name="Select">
 				<option selected="selected" value="All">' . _('Show All Parts') . '</option>
 				<option value="Shortages">' . _('Only Show Shortages') . '</option>
-			</select></td>
-		</tr>
-		<tr>
-			<td>' . _('Print Option') . ':</td>
-			<td><select name="Fill">
+			</select>
+		</field>
+		<field>
+			<label for="Fill">' . _('Print Option') . ':</label>
+			<select name="Fill">
 				<option selected="selected" value="yes">' . _('Print With Alternating Highlighted Lines') . '</option>
 				<option value="no">' . _('Plain Print') . '</option>
-			</select></td>
-		</tr>
-		</table>
+			</select>
+		</field>
+		</fieldset>
 		<div class="centre">
-			<br />
-			<button type="submit" name="PrintPDF">' . _('Print PDF') . '</button>
-		</div><br />';
+			<input type="submit" name="PrintPDF" value="' . _('Print PDF') . '" />
+        </div>
+        </form>';
 
-	include('includes/footer.inc');
+	include('includes/footer.php');
 
 } /*end of else not PrintPDF */
 
@@ -302,11 +311,11 @@ function PrintHeader(&$pdf,&$YPos,&$PageNumber,$Page_Height,$Top_Margin,$Left_Ma
 	$YPos -=$line_height;
 
 	$pdf->addTextWrap($Left_Margin,$YPos,300,$FontSize,_('Extended Quantity BOM Listing For	   ')
-		. strtoupper($_POST['Part']));
+		. mb_strtoupper($_POST['Part']));
 	$pdf->addTextWrap($Page_Width-$Right_Margin-140,$YPos,160,$FontSize,_('Printed') . ': ' .
 		 Date($_SESSION['DefaultDateFormat']) . '   ' . _('Page') . ' ' . $PageNumber,'left');
 	$YPos -=$line_height;
-	$pdf->addTextWrap($Left_Margin,$YPos,300,$FontSize,_('Build Quantity:  ') . $_POST['Quantity']);
+	$pdf->addTextWrap($Left_Margin,$YPos,300,$FontSize,_('Build Quantity:  ') . locale_number_format($_POST['Quantity'],'Variable'),'left');
 
 	$YPos -=(2*$line_height);
 

@@ -1,29 +1,48 @@
 <?php
 
-/* $Id$*/
 
-include('includes/session.inc');
-$title = _('Search Work Orders');
-include('includes/header.inc');
+include('includes/session.php');
+$Title = _('Search Work Orders');
+$ViewTopic = 'Manufacturing';
+$BookMark = '';
+include('includes/header.php');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . $title . '</p>';
-echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
+echo '<p class="page_title_text"><img src="'.$RootPath.'/css/'.$Theme.'/images/magnifier.png" title="' . _('Search') . '" alt="" />' . ' ' . $Title . '</p>';
+
+echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
 
-if (isset($_POST['ResetPart'])){
-	unset($_REQUEST['SelectedStockItem']);
+if (isset($_GET['WO'])) {
+	$SelectedWO = $_GET['WO'];
+} elseif (isset($_POST['WO'])){
+	$SelectedWO = $_POST['WO'];
+} else {
+	unset($SelectedWO);
 }
 
-if (isset($_REQUEST['WO']) AND $_REQUEST['WO']!='') {
-	$_REQUEST['WO'] = trim($_REQUEST['WO']);
-	if (!is_numeric($_REQUEST['WO'])){
-		prnMsg(_('The work order number entered MUST be numeric'),'warn');
-		unset ($_REQUEST['WO']);
-		include('includes/footer.inc');
-		exit;
+if (isset($_GET['SelectedStockItem'])) {
+	$SelectedStockItem = $_GET['SelectedStockItem'];
+} elseif (isset($_POST['SelectedStockItem'])){
+	$SelectedStockItem = $_POST['SelectedStockItem'];
+} else {
+	unset($SelectedStockItem);
+}
+
+
+if (isset($_POST['ResetPart'])){
+	 unset($SelectedStockItem);
+}
+
+if (isset($SelectedWO) AND $SelectedWO!='') {
+	$SelectedWO = trim($SelectedWO);
+	if (!is_numeric($SelectedWO)){
+		  prnMsg(_('The work order number entered MUST be numeric'),'warn');
+		  unset ($SelectedWO);
+		  include('includes/footer.php');
+		  exit;
 	} else {
-		echo _('Work Order Number') . ' - ' . $_REQUEST['WO'];
+		echo _('Work Order Number') . ' - ' . $SelectedWO;
 	}
 }
 
@@ -38,60 +57,66 @@ if (isset($_POST['SearchParts'])){
 
 		$SQL = "SELECT stockmaster.stockid,
 						stockmaster.description,
+						stockmaster.decimalplaces,
 						SUM(locstock.quantity) AS qoh,
 						stockmaster.units
 					FROM stockmaster,
 						locstock
 					WHERE stockmaster.stockid=locstock.stockid
-						AND stockmaster.description " . LIKE . " '" . $SearchString . "'
-						AND stockmaster.categoryid='" . $_POST['StockCat']. "'
-						AND stockmaster.mbflag='M'
+					AND stockmaster.description " . LIKE . " '" . $SearchString . "'
+					AND stockmaster.categoryid='" . $_POST['StockCat']. "'
+					AND stockmaster.mbflag='M'
 					GROUP BY stockmaster.stockid,
-							stockmaster.description,
-							stockmaster.units
+						stockmaster.description,
+						stockmaster.decimalplaces,
+						stockmaster.units
 					ORDER BY stockmaster.stockid";
 
 	 } elseif (isset($_POST['StockCode'])){
 		$SQL = "SELECT stockmaster.stockid,
 						stockmaster.description,
+						stockmaster.decimalplaces,
 						sum(locstock.quantity) as qoh,
 						stockmaster.units
 					FROM stockmaster,
 						locstock
 					WHERE stockmaster.stockid=locstock.stockid
-						AND stockmaster.stockid " . LIKE . " '%" . $_POST['StockCode'] . "%'
-						AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
-						AND stockmaster.mbflag='M'
+					AND stockmaster.stockid " . LIKE . " '%" . $_POST['StockCode'] . "%'
+					AND stockmaster.categoryid='" . $_POST['StockCat'] . "'
+					AND stockmaster.mbflag='M'
 					GROUP BY stockmaster.stockid,
-							stockmaster.description,
-							stockmaster.units
+						stockmaster.description,
+						stockmaster.decimalplaces,
+						stockmaster.units
 					ORDER BY stockmaster.stockid";
 
 	 } elseif (!isset($_POST['StockCode']) AND !isset($_POST['Keywords'])) {
 		$SQL = "SELECT stockmaster.stockid,
 						stockmaster.description,
+						stockmaster.decimalplaces,
 						sum(locstock.quantity) as qoh,
 						stockmaster.units
 					FROM stockmaster,
 						locstock
 					WHERE stockmaster.stockid=locstock.stockid
-						AND stockmaster.categoryid='" . $_POST['StockCat'] ."'
-						AND stockmaster.mbflag='M'
+					AND stockmaster.categoryid='" . $_POST['StockCat'] ."'
+					AND stockmaster.mbflag='M'
 					GROUP BY stockmaster.stockid,
-							stockmaster.description,
-							stockmaster.units
+						stockmaster.description,
+						stockmaster.decimalplaces,
+						stockmaster.units
 					ORDER BY stockmaster.stockid";
 	 }
 
 	$ErrMsg =  _('No items were returned by the SQL because');
 	$DbgMsg = _('The SQL used to retrieve the searched parts was');
-	$StockItemsResult = DB_query($SQL,$db,$ErrMsg,$DbgMsg);
+	$StockItemsResult = DB_query($SQL,$ErrMsg,$DbgMsg);
 }
 
 if (isset($_POST['StockID'])){
-	$StockID = trim(strtoupper($_POST['StockID']));
+	$StockID = trim(mb_strtoupper($_POST['StockID']));
 } elseif (isset($_GET['StockID'])){
-	$StockID = trim(strtoupper($_GET['StockID']));
+	$StockID = trim(mb_strtoupper($_GET['StockID']));
 }
 
 if (!isset($StockID)) {
@@ -101,284 +126,297 @@ if (!isset($StockID)) {
 	$OrdersAfterDate = Date('d/m/Y',Mktime(0,0,0,Date('m')-2,Date('d'),Date('Y')));
 	 */
 
-	if (!isset($_REQUEST['WO']) or ($_REQUEST['WO']=='')){
-		echo '<table class="selection"><tr><td>';
-		if (isset($_REQUEST['SelectedStockItem'])) {
-			echo _('For the item') . ': ' . $_REQUEST['SelectedStockItem'] . ' ' . _('and') .
-			' <input type="hidden" name="SelectedStockItem" value="' . $_REQUEST['SelectedStockItem'] . '" />';
+	if (!isset($SelectedWO) or ($SelectedWO=='')){
+		echo '<fieldset>
+				<legend class="search">', _('Search Criteria'), '</legend>';
+		if (isset($SelectedStockItem)) {
+			echo '<field>
+					<label for="SelectedStockItem">', _('For the item') . ':</label>
+					<fieldtext>' . $SelectedStockItem . '</fieldtext>
+					<input type="hidden" name="SelectedStockItem" value="' . $SelectedStockItem . '" />
+				</field>';
 		}
-		echo _('Work Order number') . ': <input type="text" name="WO" maxlength="8" size="9" />&nbsp ' . _('Processing at') . ':<select name="StockLocation"> ';
+		echo '<field>
+				<label for="WO">', _('Work Order number') . ':</label>
+				<input type="text" name="WO" autofocus="autofocus" maxlength="8" size="9" />
+			</field>
+			<field>
+				<label for ="StockLocation">' . _('Processing at') . ':</label>
+				<select name="StockLocation"> ';
 
-		$sql = "SELECT loccode, locationname FROM locations";
+		$sql = "SELECT locations.loccode, locationname FROM locations
+				INNER JOIN locationusers
+					ON locationusers.loccode=locations.loccode
+					AND locationusers.userid='" .  $_SESSION['UserID'] . "'
+					AND locationusers.canview=1
+				WHERE locations.usedforwo = 1";
 
-		$resultStkLocs = DB_query($sql,$db);
+		$resultStkLocs = DB_query($sql);
 
 		while ($myrow=DB_fetch_array($resultStkLocs)){
 			if (isset($_POST['StockLocation'])){
 				if ($myrow['loccode'] == $_POST['StockLocation']){
-					 echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+					 echo '<option selected="selected" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 				} else {
 					 echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 				}
 			} elseif ($myrow['loccode']==$_SESSION['UserStockLocation']){
-				 echo '<option selected="True" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
+				 echo '<option selected="selected" value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			} else {
 				 echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 			}
 		}
 
-		echo '</select> &nbsp&nbsp';
-		echo '<select name="ClosedOrOpen">';
+		echo '</select>';
 
-		if ($_GET['ClosedOrOpen']=='Closed_Only'){
+		echo '<field>
+				<label for="ClosedOrOpen">', _('Order Status'), '</label>
+				<select name="ClosedOrOpen">';
+
+		if (isset($_GET['ClosedOrOpen']) AND $_GET['ClosedOrOpen']=='Closed_Only'){
 			$_POST['ClosedOrOpen']='Closed_Only';
 		}
 
-		if ($_POST['ClosedOrOpen']=='Closed_Only'){
-			echo '<option selected="True" value="Closed_Only">' . _('Closed Work Orders Only') . '</option>';
-			echo '<option value="Open_Only">' . _('Open Work Orders Only') . '</option>';
+		if (isset($_POST['ClosedOrOpen']) AND $_POST['ClosedOrOpen']=='Closed_Only'){
+			echo '<option selected="selected" value="Closed_Only">' . _('Closed Work Orders Only') . '</option>';
+			echo '<option value="Open_Only">' . _('Open Work Orders Only')  . '</option>';
 		} else {
-			echo '<option value="Closed_Only">' . _('Closed Work Orders Only') . '</option>';
-			echo '<option selected="True" value="Open_Only">' . _('Open Work Orders Only') . '</option>';
+			echo '<option value="Closed_Only">' . _('Closed Work Orders Only')  . '</option>';
+			echo '<option selected="selected" value="Open_Only">' . _('Open Work Orders Only')  . '</option>';
 		}
 
-		echo '</select> &nbsp&nbsp';
-		echo '<button type="submit" name="SearchOrders">' . _('Search') . '</button>';
-		echo '&nbsp;&nbsp;<a href="' . $rootpath . '/WorkOrderEntry.php">' . _('New Work Order') . '</a></td></tr></table><br />';
+		echo '</select>
+			</field>
+		</fieldset>';
+
+		echo '<div class="centre">
+				<input type="submit" name="SearchOrders" value="' . _('Search') . '" />
+				<a href="' . $RootPath . '/WorkOrderEntry.php">' . _('New Work Order') . '</a>
+			</div>';
 	}
 
 	$SQL="SELECT categoryid,
-				categorydescription
+			categorydescription
 			FROM stockcategory
 			ORDER BY categorydescription";
 
-	$result1 = DB_query($SQL,$db);
+	$result1 = DB_query($SQL);
 
-	echo '<table class="selection">
-			<tr>
-				<th colspan="6" class="header">' . _('To search for work orders for a specific item use the item selection facilities below') . '</th>
-			</tr>
-	  	<tr>
-	  		<td><font size="1">' . _('Select a stock category') . ':</font>
+	echo '<fieldset>
+			<legend class="search">' . _('To search for work orders for a specific item use the item selection facilities below') . '</legend>
+			<field>
+				<label for="StockCat">' . _('Select a stock category') . ':</label>
 	  			<select name="StockCat">';
 
 	while ($myrow1 = DB_fetch_array($result1)) {
 		echo '<option value="'. $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 	}
 
-	  echo '</select>
-				<td><font size="1">' . _('Enter text extract(s) in the description') . ':</font></td>
-				<td><input type="text" name="Keywords" size="20" maxlength="25" /></td>
-			</tr>
+	echo '</select>
+		</field>';
+
+	echo '<field>
+			<label for="Keywords">' . _('Enter text extract(s) in the description') . ':</label>
+			<input type="text" name="Keywords" size="20" maxlength="25" />
+		</field>';
+
+	echo '<h3>' . _('OR') . '</h3>';
+
+	echo '<field>
+			<label for="StockCode">' . _('Enter extract of the Stock Code') . ':</label>
+			<input type="text" name="StockCode" size="15" maxlength="18" />
+		</field>
+	</fieldset>';
+	echo '<div class="centre">
+			<input type="submit" name="SearchParts" value="' . _('Search Items Now') . '" />
+			<input type="submit" name="ResetPart" value="' . _('Show All') . '" />
+		</div>';
+
+	if (isset($StockItemsResult)) {
+
+		echo '<table cellpadding="2" class="selection">
+			<thead>
 			<tr>
-				<td></td>
-				<td><font size="3"><b>' . _('OR') . ' </b></font><font size="1">' . _('Enter extract of the Stock Code') . '</b>:</font></td>
-				<td><input type="text" name="StockCode" size="15" maxlength="18" /></td>
-			</tr>
-		</table><br />';
-	echo '<div class="centre"><button type="submit" name="SearchParts">' . _('Search Items Now') . '</button>
-		<button type="submit" name="ResetPart">' . _('Show All') . '</button></div>';
-}
-
-if (isset($StockItemsResult)) {
-
-	echo '<br /><table cellpadding="2" class="selection">';
-	$TableHeader = '<tr>
-				<th>' . _('Code') . '</th>
-				<th>' . _('Description') . '</th>
-				<th>' . _('On Hand') . '</th>
+				<th class="ascending">' . _('Code') . '</th>
+				<th class="ascending">' . _('Description') . '</th>
+				<th class="ascending">' . _('On Hand') . '</th>
 				<th>' . _('Units') . '</th>
-			</tr>';
-	echo $TableHeader;
+				</tr>
+			</thead>
+			<tbody>';
 
-	$j=1;
-	$k=0; //row colour counter
+		while ($myrow=DB_fetch_array($StockItemsResult)) {
 
-	while ($myrow=DB_fetch_array($StockItemsResult)) {
+			printf('<tr class="striped_row">
+					<td><input type="submit" name="SelectedStockItem" value="%s" /></td>
+					<td>%s</td>
+					<td class="number">%s</td>
+					<td>%s</td>
+					</tr>',
+					$myrow['stockid'],
+					$myrow['description'],
+					locale_number_format($myrow['qoh'],$myrow['decimalplaces']),
+					$myrow['units']);
 
-		if ($k==1){
-			echo '<tr class="EvenTableRows">';
-			$k=0;
+		}//end of while loop
+		echo '</tbody></table>';
+	}
+	//end if stock search results to show
+	  else {
+
+	  	if (!isset($_POST['StockLocation'])) {
+	  		$_POST['StockLocation'] = '';
+	  	}
+
+		//figure out the SQL required from the inputs available
+		if (isset($_POST['ClosedOrOpen']) and $_POST['ClosedOrOpen']=='Open_Only'){
+			$ClosedOrOpen = 0;
 		} else {
-			echo '<tr class="OddTableRows">';
-			$k++;
+			$ClosedOrOpen = 1;
 		}
-
-		printf('<td><button type="submit" name="SelectedStockItem" value="%s">%s</button></td>
-			<td>%s</td>
-			<td class="number">%s</td>
-			<td>%s</td>
-			</tr>',
-			$myrow['stockid'],
-			$myrow['stockid'],
-			$myrow['description'],
-			$myrow['qoh'],
-			$myrow['units']);
-
-		$j++;
-		if ($j == 12){
-			$j=1;
-			echo $TableHeader;
-		}
-//end of page full new headings if
-	}
-//end of while loop
-
-	echo '</table>';
-
-}
-//end if stock search results to show
-  else {
-
-  	if (!isset($_POST['StockLocation'])) {
-  		$_POST['StockLocation'] = '';
-  	}
-
-	//figure out the SQL required from the inputs available
-	if (isset($_POST['ClosedOrOpen']) and $_POST['ClosedOrOpen']=='Open_Only'){
-		$ClosedOrOpen = 0;
-	} else {
-		$ClosedOrOpen = 1;
-	}
-	if (isset($_REQUEST['WO']) and $_REQUEST['WO'] !='') {
-			$SQL = "SELECT workorders.wo,
-					woitems.stockid,
-					stockmaster.description,
-					woitems.qtyreqd,
-					woitems.qtyrecd,
-					workorders.startdate,
-					workorders.requiredby
-					FROM workorders
-					INNER JOIN woitems ON workorders.wo=woitems.wo
-					INNER JOIN stockmaster ON woitems.stockid=stockmaster.stockid
-					WHERE workorders.closed='" . $ClosedOrOpen . "'
-					AND workorders.wo='". $_REQUEST['WO'] ."'
-					ORDER BY workorders.wo,
-							 woitems.stockid";
-	} else {
-		  /* $DateAfterCriteria = FormatDateforSQL($OrdersAfterDate); */
-
-			if (isset($_REQUEST['SelectedStockItem'])) {
+		if (isset($SelectedWO) AND $SelectedWO !='') {
 				$SQL = "SELECT workorders.wo,
-					woitems.stockid,
-					stockmaster.description,
-					woitems.qtyreqd,
-					woitems.qtyrecd,
-					workorders.startdate,
-					workorders.requiredby
-					FROM workorders
-					INNER JOIN woitems ON workorders.wo=woitems.wo
-					INNER JOIN stockmaster ON woitems.stockid=stockmaster.stockid
-					WHERE workorders.closed='" . $ClosedOrOpen . "'
-					AND woitems.stockid='". $_REQUEST['SelectedStockItem'] ."'
-					AND workorders.loccode='" . $_POST['StockLocation'] . "'
-					ORDER BY workorders.wo,
-							 woitems.stockid";
-			} else {
-				$SQL = "SELECT workorders.wo,
-					woitems.stockid,
-					stockmaster.description,
-					woitems.qtyreqd,
-					woitems.qtyrecd,
-					workorders.startdate,
-					workorders.requiredby
-					FROM workorders
-					INNER JOIN woitems ON workorders.wo=woitems.wo
-					INNER JOIN stockmaster ON woitems.stockid=stockmaster.stockid
-					WHERE workorders.closed='" . $ClosedOrOpen . "'
-					AND workorders.loccode='" . $_POST['StockLocation'] . "'
-					ORDER BY workorders.wo,
-							 woitems.stockid";
-			}
-	} //end not order number selected
-
-	$ErrMsg = _('No works orders were returned by the SQL because');
-	$WorkOrdersResult = DB_query($SQL,$db,$ErrMsg);
-
-	/*show a table of the orders returned by the SQL */
-	if (DB_num_rows($WorkOrdersResult)>0) {
-		echo '<br /><table cellpadding="2" width="95%" class="selection">';
-
-
-		$tableheader = '<tr>
-							<th>' . _('Modify') . '</th>
-							<th>' . _('Status') . '</th>
-							<th>' . _('Receive') . '</th>
-							<th>' . _('Issue To') . '</th>
-							<th>' . _('Costing') . '</th>
-							<th>' . _('Item') . '</th>
-							<th>' . _('Quantity Required') . '</th>
-							<th>' . _('Quantity Received') . '</th>
-							<th>' . _('Quantity Outstanding') . '</th>
-							<th>' . _('Start Date') . '</th>
-							<th>' . _('Required Date') . '</th>
-						</tr>';
-
-		echo $tableheader;
-	}
-	$j = 1;
-	$k=0; //row colour counter
-	while ($myrow=DB_fetch_array($WorkOrdersResult)) {
-
-		if ($k==1){
-			echo '<tr class="EvenTableRows">';
-			$k=0;
+								woitems.stockid,
+								stockmaster.description,
+								stockmaster.decimalplaces,
+								woitems.qtyreqd,
+								woitems.qtyrecd,
+								workorders.requiredby,
+								workorders.startdate,
+								workorders.reference,
+								workorders.loccode
+						FROM workorders
+						INNER JOIN woitems ON workorders.wo=woitems.wo
+						INNER JOIN stockmaster ON woitems.stockid=stockmaster.stockid
+						INNER JOIN locationusers ON locationusers.loccode=workorders.loccode AND locationusers.userid='" .  $_SESSION['UserID'] . "' AND locationusers.canview=1
+						WHERE workorders.closed='" . $ClosedOrOpen . "'
+						AND workorders.wo='". $SelectedWO ."'
+						ORDER BY workorders.wo,
+								woitems.stockid";
 		} else {
-			echo '<tr class="OddTableRows">';
-			$k++;
+			  /* $DateAfterCriteria = FormatDateforSQL($OrdersAfterDate); */
+
+				if (isset($SelectedStockItem)) {
+					$SQL = "SELECT workorders.wo,
+									woitems.stockid,
+									stockmaster.description,
+									stockmaster.decimalplaces,
+									woitems.qtyreqd,
+									woitems.qtyrecd,
+									workorders.requiredby,
+									workorders.startdate,
+									workorders.reference,
+									workorders.loccode
+							FROM workorders
+							INNER JOIN woitems ON workorders.wo=woitems.wo
+							INNER JOIN stockmaster ON woitems.stockid=stockmaster.stockid
+							INNER JOIN locationusers ON locationusers.loccode=workorders.loccode AND locationusers.userid='" .  $_SESSION['UserID'] . "' AND locationusers.canview=1
+							WHERE workorders.closed='" . $ClosedOrOpen . "'
+							AND woitems.stockid='". $SelectedStockItem ."'
+							AND workorders.loccode='" . $_POST['StockLocation'] . "'
+							ORDER BY workorders.wo,
+								 woitems.stockid";
+				} else {
+					$SQL = "SELECT workorders.wo,
+									woitems.stockid,
+									stockmaster.description,
+									stockmaster.decimalplaces,
+									woitems.qtyreqd,
+									woitems.qtyrecd,
+									workorders.requiredby,
+									workorders.startdate,
+									workorders.reference,
+									workorders.loccode
+							FROM workorders
+							INNER JOIN woitems ON workorders.wo=woitems.wo
+							INNER JOIN locationusers ON locationusers.loccode=workorders.loccode AND locationusers.userid='" .  $_SESSION['UserID'] . "' AND locationusers.canview=1
+							INNER JOIN stockmaster ON woitems.stockid=stockmaster.stockid
+							WHERE workorders.closed='" . $ClosedOrOpen . "'
+							AND workorders.loccode='" . $_POST['StockLocation'] . "'
+							ORDER BY workorders.wo,
+									 woitems.stockid";
+				}
+		} //end not order number selected
+
+		$ErrMsg = _('No works orders were returned by the SQL because');
+		$WorkOrdersResult = DB_query($SQL,$ErrMsg);
+
+		/*show a table of the orders returned by the SQL */
+		if (DB_num_rows($WorkOrdersResult)>0) {
+			echo '<br />
+				<table cellpadding="2" width="95%" class="selection">
+				<thead>
+				<tr>
+					<th>' . _('Modify') . '</th>
+					<th class="ascending">' . _('Status') . '</th>
+					<th>' . _('Issue To') . '</th>
+					<th>' . _('Receive') . '</th>
+					<th>' . _('Costing') . '</th>
+					<th>' . _('Paperwork') . '</th>
+					<th>' . _('Location') . '</th>
+					<th class="ascending">' . _('Item') . '</th>
+					<th class="ascending">' . _('Quantity Required') . '</th>
+					<th class="ascending">' . _('Quantity Received') . '</th>
+					<th class="ascending">' . _('Quantity Outstanding') . '</th>
+					<th class="ascending">' . _('Start Date')  . '</th>
+					<th class="ascending">' . _('Required Date') . '</th>
+					</tr>
+				</thead>
+				<tbody>';
+
+		while ($myrow=DB_fetch_array($WorkOrdersResult)) {
+
+			$ModifyPage = $RootPath . '/WorkOrderEntry.php?WO=' . $myrow['wo'];
+			$Status_WO = $RootPath . '/WorkOrderStatus.php?WO=' .$myrow['wo'] . '&amp;StockID=' . urlencode($myrow['stockid']);
+			$Receive_WO = $RootPath . '/WorkOrderReceive.php?WO=' .$myrow['wo'] . '&amp;StockID=' . urlencode($myrow['stockid']);
+			$Issue_WO = $RootPath . '/WorkOrderIssue.php?WO=' .$myrow['wo'] . '&amp;StockID=' . urlencode($myrow['stockid']);
+			$Costing_WO =$RootPath . '/WorkOrderCosting.php?WO=' .$myrow['wo'];
+			$Printing_WO =$RootPath . '/PDFWOPrint.php?WO=' .$myrow['wo'] . '&amp;StockID=' . urlencode($myrow['stockid']);
+
+			$FormatedRequiredByDate = ConvertSQLDate($myrow['requiredby']);
+			$FormatedStartDate = ConvertSQLDate($myrow['startdate']);
+
+
+			printf('<tr class="striped_row">
+					<td><a href="%s">%s</a></td>
+					<td><a href="%s">' . _('Status') . '</a></td>
+					<td><a href="%s">' . _('Issue To') . '</a></td>
+					<td><a href="%s">' . _('Receive') . '</a></td>
+					<td><a href="%s">' . _('Costing') . '</a></td>
+					<td><a href="%s">' . _('Print W/O') . '</a></td>
+					<td>%s</td>
+					<td>%s - %s</td>
+					<td class="number">%s</td>
+					<td class="number">%s</td>
+					<td class="number">%s</td>
+					<td>%s</td>
+					<td>%s</td>
+					</tr>',
+					$ModifyPage,
+					$myrow['wo'].'['.$myrow['reference'] . ']',
+					$Status_WO,
+					$Issue_WO,
+					$Receive_WO,
+					$Costing_WO,
+					$Printing_WO,
+					$myrow['loccode'],
+					urlencode($myrow['stockid']),
+					$myrow['description'],
+					locale_number_format($myrow['qtyreqd'],$myrow['decimalplaces']),
+					locale_number_format($myrow['qtyrecd'],$myrow['decimalplaces']),
+					locale_number_format($myrow['qtyreqd']-$myrow['qtyrecd'],$myrow['decimalplaces']),
+					$FormatedStartDate,
+					$FormatedRequiredByDate);
 		}
+		//end of while loop
 
-		$ModifyPage = $rootpath . '/WorkOrderEntry.php?WO=' . $myrow['wo'];
-		$Status_WO = $rootpath . '/WorkOrderStatus.php?WO=' .$myrow['wo'] . '&StockID=' . $myrow['stockid'];
-		$Receive_WO = $rootpath . '/WorkOrderReceive.php?WO=' .$myrow['wo'] . '&StockID=' . $myrow['stockid'];
-		$Issue_WO = $rootpath . '/WorkOrderIssue.php?WO=' .$myrow['wo'] . '&StockID=' . $myrow['stockid'];
-		$Costing_WO =$rootpath . '/WorkOrderCosting.php?WO=' .$myrow['wo'];
-
-		$FormatedRequiredByDate = ConvertSQLDate($myrow['requiredby']);
-		$FormatedStartDate = ConvertSQLDate($myrow['startdate']);
-
-
-		printf('<td><a href="%s">%s</a></td>
-				<td><a href="%s">' . _('Status') . '</a></td>
-				<td><a href="%s">' . _('Receive') . '</a></td>
-				<td><a href="%s">' . _('Issue To') . '</a></td>
-				<td><a href="%s">' . _('Costing') . '</a></td>
-				<td>%s - %s</td>
-				<td class="number">%s</td>
-				<td class="number">%s</td>
-				<td class="number">%s</td>
-				<td>%s</td>
-				<td>%s</td>
-				</tr>',
-				$ModifyPage,
-				$myrow['wo'],
-				$Status_WO,
-				$Receive_WO,
-				$Issue_WO,
-				$Costing_WO,
-				$myrow['stockid'],
-				$myrow['description'],
-				$myrow['qtyreqd'],
-				$myrow['qtyrecd'],
-				$myrow['qtyreqd']-$myrow['qtyrecd'],
-				$FormatedStartDate,
-				$FormatedRequiredByDate);
-
-		$j++;
-		if ($j == 12){
-			$j=1;
-			echo $tableheader;
-		}
-	//end of page full new headings if
+			echo '</tbody></table>';
+      }
 	}
-	//end of while loop
 
-	echo '</table>';
+	echo '</div>
+          </form>';
 }
 
-echo '<script>defaultControl(document.forms[0].WO);</script>';
-
-echo '</form>';
-
-include('includes/footer.inc');
+include('includes/footer.php');
 ?>

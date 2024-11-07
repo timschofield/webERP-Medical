@@ -1,12 +1,11 @@
 <?php
-/* $Id: api_glaccounts.php 4521 2011-03-29 09:04:20Z daintree $*/
 
 /* Check that the account code doesn't already exist'*/
-	function VerifyAccountCode($AccountCode, $i, $Errors, $db) {
+	function VerifyAccountCode($AccountCode, $i, $Errors) {
 		$Searchsql = "SELECT count(accountcode)
 				FROM chartmaster
 				WHERE accountcode='".$AccountCode."'";
-		$SearchResult=DB_query($Searchsql, $db);
+		$SearchResult=DB_query($Searchsql);
 		$answer = DB_fetch_array($SearchResult);
 		if ($answer[0]>0) {
 			$Errors[$i] = GLAccountCodeAlreadyExists;
@@ -15,11 +14,11 @@
 	}
 
 /* Check that the account code already exists'*/
-	function VerifyAccountCodeExists($AccountCode, $i, $Errors, $db) {
+	function VerifyAccountCodeExists($AccountCode, $i, $Errors) {
 		$Searchsql = "SELECT count(accountcode)
 				FROM chartmaster
 				WHERE accountcode='".$AccountCode."'";
-		$SearchResult=DB_query($Searchsql, $db);
+		$SearchResult=DB_query($Searchsql);
 		$answer = DB_fetch_array($SearchResult);
 		if ($answer[0]==0) {
 			$Errors[$i] = GLAccountCodeDoesntExists;
@@ -29,18 +28,18 @@
 
 /* Check that the name is 50 characters or less long */
 	function VerifyAccountName($AccountName, $i, $Errors) {
-		if (strlen($AccountName)>50) {
+		if (mb_strlen($AccountName)>50) {
 			$Errors[$i] = IncorrectAccountNameLength;
 		}
 		return $Errors;
 	}
 
 /* Check that the account group exists*/
-	function VerifyAccountGroupExists($AccountGroup, $i, $Errors, $db) {
+	function VerifyAccountGroupExists($AccountGroup, $i, $Errors) {
 		$Searchsql = "SELECT count(groupname)
 				FROM accountgroups
 				WHERE groupname='".$AccountGroup."'";
-		$SearchResult=DB_query($Searchsql, $db);
+		$SearchResult=DB_query($Searchsql);
 		$answer = DB_fetch_array($SearchResult);
 		if ($answer[0]==0) {
 			$Errors[$i] = AccountGroupDoesntExist;
@@ -58,11 +57,11 @@
 		foreach ($AccountDetails as $key => $value) {
 			$AccountDetails[$key] = DB_escape_string($value);
 		}
-		$Errors=VerifyAccountCode($AccountDetails['accountcode'], sizeof($Errors), $Errors, $db);
+		$Errors=VerifyAccountCode($AccountDetails['accountcode'], sizeof($Errors), $Errors);
 		if (isset($AccountDetails['accountname'])){
 			$Errors=VerifyAccountName($AccountDetails['accountname'], sizeof($Errors), $Errors);
 		}
-		$Errors=VerifyAccountGroupExists($AccountDetails['group_'], sizeof($Errors), $Errors, $db);
+		$Errors=VerifyAccountGroupExists($AccountDetails['group_'], sizeof($Errors), $Errors);
 		$FieldNames='';
 		$FieldValues='';
 		foreach ($AccountDetails as $key => $value) {
@@ -70,16 +69,16 @@
 			$FieldValues.='"'.$value.'", ';
 		}
 		if (sizeof($Errors)==0) {
-			$sql = "INSERT INTO chartmaster (".substr($FieldNames,0,-2).") ".
-		  		"VALUES ('".substr($FieldValues,0,-2)."') ";
-			$result = DB_Query($sql, $db);
-			$sql="INSERT INTO chartdetails (accountcode,
+			$sql = 'INSERT INTO chartmaster ('.mb_substr($FieldNames,0,-2).') '.
+		  		"VALUES ('".mb_substr($FieldValues,0,-2)."') ";
+			$result = DB_query($sql);
+			$sql='INSERT INTO chartdetails (accountcode,
 							period)
-				SELECT " . $AccountDetails['accountcode'] . ",
+				SELECT ' . $AccountDetails['accountcode'] . ',
 					periodno
-				FROM periods";
-			$result = DB_query($sql,$db,'','','',false);
-			if (DB_error_no($db) != 0) {
+				FROM periods';
+			$result = DB_query($sql,'','','',false);
+			if (DB_error_no() != 0) {
 				$Errors[0] = DatabaseUpdateFailed;
 			} else {
 				$Errors[0]=0;
@@ -99,13 +98,13 @@
 			$Errors[0]=NoAuthorisation;
 			return $Errors;
 		}
-		$sql = "SELECT chartmaster.accountcode,
+		$sql = 'SELECT chartmaster.accountcode,
 					chartmaster.accountname,
 					accountgroups.pandl
 				FROM chartmaster INNER JOIN accountgroups
 				ON chartmaster.group_=accountgroups.groupname
-				ORDER BY accountcode";
-		$result = DB_query($sql, $db);
+				ORDER BY accountcode';
+		$result = DB_query($sql);
 		$i=0;
 		while ($myrow=DB_fetch_array($result)) {
 			$GLAccountList[$i]['accountcode']=$myrow[0];
@@ -129,7 +128,7 @@
 			return $Errors;
 		}
 		$sql = "SELECT * FROM chartmaster WHERE accountcode='".$AccountCode."'";
-		$result = DB_query($sql, $db);
+		$result = DB_query($sql);
 		return DB_fetch_array($result);
 	}
 

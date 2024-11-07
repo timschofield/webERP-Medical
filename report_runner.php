@@ -18,7 +18,6 @@
 //you must tell the script where you main installation is located
 //Rememeber this is different for each location
 //$weberp_home=/srv/www/htdocs/weberp
-/* $Id$*/
 
 $usage="USAGE\n".$argv[0].":\n".
        "     -r reportnumber (the number of the weberp report)\n".
@@ -66,8 +65,8 @@ for ($i=1;$i<$argc;$i++){
 	}
 }
 // test the existance
-if (( $reportname=="") or
-    ( $reportnumber=="") or
+if (( $reportname=="") ||
+    ( $reportnumber=="") ||
     ( $emailaddresses=="")) {
              echo $usage;
              exit;
@@ -93,7 +92,7 @@ for ($i=0;$i<count($Recipients); $i++) {
 }
 
 $AllowAnyone = true;
-include('includes/session.inc');
+include('includes/session.php');
 
 include ('includes/ConstructSQLForUserDefinedSalesReport.inc');
 include ('includes/PDFSalesAnalysis.inc');
@@ -111,14 +110,20 @@ if ($Counter >0){ /* the number of lines of the sales report is more than 0  ie 
 	$mail->setText($mailtext."\nPlease find herewith ".$reportname."  report");
 	$mail->setSubject($reportname." Report");
 	$mail->addAttachment($attachment, $reportname, 'application/pdf');
-	$mail->setFrom("");
-	$result = $mail->send($Recipients);
+	if($_SESSION['SmtpSetting']==0){
+		$mail->setFrom("");
+		$result = $mail->send($Recipients);
+	}else{
+		$result = SendmailBySmtp($mail,$Recipients);
+	}
 
 } else {
 	$mail->setText("Error running automated sales report number $ReportID");
- 	$mail->setFrom("Do_not_reply_".$_SESSION['CompanyRecord']['coyname'] . "<" . $_SESSION['CompanyRecord']['email'] . ">");
-
-	$result = $mail->send($Recipients);
+	if($_SESSION['SmtpSetting']==0){
+		$mail->setFrom("Do_not_reply_".$_SESSION['CompanyRecord']['coyname'] . "<" . $_SESSION['CompanyRecord']['email'] . ">");
+		$result = $mail->send($Recipients);
+	}else{
+		$result = SendmailBySmtp($mail,$Recipients);
+	}
 }
-
 ?>

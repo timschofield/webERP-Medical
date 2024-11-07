@@ -1,39 +1,57 @@
 <?php
-/* $Revision: 1.17 $ */
-/* $Id$*/
 
-$AllowAnyone=True; /* Allow all users to log off  */
+include('includes/session.php');
+$SQL = "DELETE FROM session_data WHERE userid='" . $_SESSION['UserID'] . "' AND field='module'";
+$Result = DB_query($SQL);
+$SQL ="INSERT INTO session_data VALUES('" . $_SESSION['UserID'] . "', 'module', '" . $_SESSION['Module'] . "')";
+$Result = DB_query($SQL);
 
-include('includes/session.inc');
+// Cleanup
+session_unset();
+session_destroy();
 
+// Do not assume php.ini defaults are in use on other systems using this app.
+$Name = session_name();
+
+// We do not use session_set_cookie_params(), so fetch the php.ini values.
+// This information is needed for proper handling to avoid the "common pitfalls"
+// referenced within the PHP setcookie() documentation:
+// "Cookies must be deleted with the same parameters as they were set with."
+$CookieInfo = session_get_cookie_params();
+
+/////////////////// OWASP
+
+// Destroy the cookie handling based on OWASP recommendations:
+// https://www.owasp.org/index.php/PHP_Security_Cheat_Sheet#Proper_Deletion
+
+setcookie($Name, '', 1, $CookieInfo['path']);
+setcookie($Name, false);
+unset($_COOKIE[$Name]);
+
+/////////////////// END OWASP
+
+/*
+    Testing the cookie destroy handling with the three calls above appears to be
+    OK. However, one could easily be misled to assume that the cookie is NOT
+    destroyed while viewing the cookies in the browser's debugger while using
+    our app after logout.
+
+    The cookie's name (which comes from session.name, or session_name() could be
+    used to override) will appear to remain with a newly regenerated value,
+    which it does, but this is due to OUR handling as we have tight-coupling to
+    certain $_SESSION data in files index.php and the included header.php.
+
+    Post-logout handling is redirected to index.php, and the index.php file
+    includes session.php. Function session_start() is called from session.php
+    and that call recreates the cookie with same name but with a new cookie
+    value. (basically, the cookie is removed and then recreated)
+
+    So, to test that the cookie is actually removed, I added a header redirect
+    in index.php (followed by exit, before including session.php) to another
+    local file that does NOT have a session_start() call. When watching the
+    cookies in the browser's debugger, one can witness that the cookie with the
+    session name is removed.
+
+    I verifed this behavior with Firefox and Chrome.
+*/
 ?>
-<html>
-<head>
-	<title><?php echo $_SESSION['CompanyRecord']['coyname'];?> - <?php echo _('Log Off'); ?></title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link rel="stylesheet" href="css/<?php echo $theme;?>/login.css" type="text/css" />
-</head>
-
-<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
-
-<div id="container">
-	<div id="login_logo"></div>
-	<div id="login_box">
-	<form action=" <?php echo $rootpath;?>/index.php" name="loginform" method="post">
-<?php
-	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-?>
-		<span><?php echo _('Thank you for using webERP'); ?></span>
-	<br />
-	<input class="button" type="submit" value="<?php echo _('Login'); ?>" name="SubmitUser" />
-	</form>
-	</div>
-</div>
-
-<?php
-	// Cleanup
-	session_unset();
-	session_destroy();
-?>
-</body>
-</html>

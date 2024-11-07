@@ -1,5 +1,4 @@
 <?php
-/* $Id$*/
 /* Definition of the SpecialOrder class to hold all the information for a special quote/order and delivery
 */
 
@@ -14,19 +13,22 @@ Class SpecialOrder {
 	var $SupplierName;
 	var $SuppCurrCode;
 	var $SuppCurrExRate;
+	var $SuppCurrDecimalPlaces;
 	var $CustomerID;
 	var $BranchCode;
 	var $CustomerName;
 	var $CustCurrCode;
+	var $CustCurrDecimalPlaces;
 	var $CustRef;
 	var $BranchName;
 	var $LinesOnOrder;
 	var $total;
+	var $PurchOrderNo;
 	var $Status;
 	var $AllowPrintPO;
-	var $PurchOrderNo;
+	var $CustCurrExRate;
 
-	function SpecialOrder(){
+	function __construct(){
 	/*Constructor function initialises a new special order object */
 		$this->LineItems = array();
 		$this->total=0;
@@ -34,8 +36,12 @@ Class SpecialOrder {
 		$this->AllowPrintPO=0;
 	}
 
+	function SpecialOrder() {
+		self::__construct();
+	}
+
 	function add_to_order($LineNo, $Qty, $ItemDescr, $Price, $Cost, $StkCat, $ReqDelDate){
-		if ($Qty!=0 and isset($Qty)){
+		if ($Qty!=0 AND isset($Qty)){
 			$this->LineItems[$LineNo] = new LineDetails($LineNo, $Qty, $ItemDescr, $Price, $Cost, $StkCat, $ReqDelDate);
 			$this->LinesOnOrder++;
 			Return 1;
@@ -44,7 +50,7 @@ Class SpecialOrder {
 	}
 
 
-	function remove_from_order(&$LineNo){
+	function remove_from_order($LineNo){
 		 unset($this->LineItems[$LineNo]);
 	}
 
@@ -56,21 +62,20 @@ Class SpecialOrder {
 		return $TotalValue;
 	}
 
-
 } /* end of class defintion */
 
 Class LineDetails {
 
-	Var $LineNo;
-	Var $ItemDescription;
-	Var $Quantity;
-	Var $Price;
-	Var $Cost;
-	Var $StkCat;
-	Var $ReqDelDate;
-	Var $PartCode;
+	var $LineNo;
+	var $ItemDescription;
+	var $Quantity;
+	var $Price;
+	var $Cost;
+	var $StkCat;
+	var $ReqDelDate;
+	var $PartCode;
 
-	function LineDetails ($LineNo, $Qty, $ItemDescr, $Price, $Cost, $StkCat, $ReqDelDate){
+	function __construct ($LineNo, $Qty, $ItemDescr, $Price, $Cost, $StkCat, $ReqDelDate){
 
 	/* Constructor function to add a new LineDetail object with passed params */
 		$this->LineNo = $LineNo;
@@ -81,6 +86,11 @@ Class LineDetails {
 		$this->Cost = $Cost;
 		$this->StkCat = $StkCat;
 	}
+
+	function LineDetails ($LineNo, $Qty, $ItemDescr, $Price, $Cost, $StkCat, $ReqDelDate){
+		self::__construct($LineNo, $Qty, $ItemDescr, $Price, $Cost, $StkCat, $ReqDelDate);
+	}
+
 }
 
 ?>

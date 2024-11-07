@@ -1,28 +1,40 @@
 <?php
 
-/* $Id$*/
 
-include('includes/session.inc');
+include('includes/session.php');
 
-$title = _('Authorise Internal Stock Requests');
+$Title = _('Authorise Internal Stock Requests');
+$ViewTopic = 'Inventory';
+$BookMark = 'AuthoriseRequest';
 
-include('includes/header.inc');
+include('includes/header.php');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/transactions.png" title="' . $title . '" alt="" />' . ' ' . $title . '</p>';
+echo '<p class="page_title_text"><img src="'.$RootPath.'/css/'.$Theme.'/images/transactions.png" title="' . $Title . '" alt="" />' . ' ' . $Title . '</p>';
 
-$emailsql="SELECT email FROM www_users WHERE userid='".$_SESSION['UserID']."'";
-$emailresult=DB_query($emailsql, $db);
-$emailrow=DB_fetch_array($emailresult);
-
-if (isset($_POST['updateall'])) {
-	foreach ($_POST as $key => $value) {
-		if (mb_substr($key,0,6)=='status') {
-			$RequestNo=mb_substr($key,6);
+if (isset($_POST['UpdateAll'])) {
+	foreach ($_POST as $POSTVariableName => $POSTValue) {
+		if (mb_substr($POSTVariableName,0,6)=='status') {
+			$RequestNo=mb_substr($POSTVariableName,6);
 			$sql="UPDATE stockrequest
-				SET authorised='1'
-				WHERE dispatchid='".$RequestNo."'";
-			$result=DB_query($sql, $db);
+					SET authorised='1'
+					WHERE dispatchid='" . $RequestNo . "'";
+			$result=DB_query($sql);
 		}
+		if (strpos($POSTVariableName, 'cancel')) {
+ 			$CancelItems = explode('cancel', $POSTVariableName);
+ 			$sql = "UPDATE stockrequestitems
+ 						SET completed=1
+ 						WHERE dispatchid='" . $CancelItems[0] . "'
+ 						AND dispatchitemsid='" . $CancelItems[1] . "'";
+ 			$result = DB_query($sql);
+ 			$result = DB_query("SELECT stockid FROM stockrequestitems WHERE completed=0 AND dispatchid='" . $CancelItems[0] . "'");
+ 			if (DB_num_rows($result) ==0){
+				$result = DB_query("UPDATE stockrequest
+									SET authorised='1'
+									WHERE dispatchid='" . $CancelItems[0] . "'");
+			}
+
+ 		}
 	}
 }
 
@@ -35,69 +47,71 @@ $sql="SELECT stockrequest.dispatchid,
 			departments.description,
 			www_users.realname,
 			www_users.email
-		FROM stockrequest
-		LEFT JOIN departments
+		FROM stockrequest INNER JOIN departments
 			ON stockrequest.departmentid=departments.departmentid
-		LEFT JOIN locations
+		INNER JOIN locations
 			ON stockrequest.loccode=locations.loccode
-		LEFT JOIN www_users
+		INNER JOIN locationusers ON locationusers.loccode=locations.loccode AND locationusers.userid='" .  $_SESSION['UserID'] . "' AND locationusers.canupd=1
+		INNER JOIN www_users
 			ON www_users.userid=departments.authoriser
-	WHERE stockrequest.authorised=0
+		WHERE stockrequest.authorised=0
 		AND stockrequest.closed=0
 		AND www_users.userid='".$_SESSION['UserID']."'";
-$result=DB_query($sql, $db);
+$result=DB_query($sql);
 
 echo '<form method="post" action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '">';
+echo '<div>';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-echo '<table class="selection">';
-
-/* Create the table for the purchase order header */
-echo '<tr>
-		<th>'._('Request Number').'</th>
-		<th>'._('Department').'</th>
-		<th>'._('Location Of Stock').'</th>
-		<th>'._('Requested Date').'</th>
-		<th>'._('Narrative').'</th>
-		<th>'._('Authorise').'</th>
+echo '<table class="selection">
+	<tr>
+		<th>' . _('Request Number') . '</th>
+		<th>' . _('Department') . '</th>
+		<th>' . _('Location Of Stock') . '</th>
+		<th>' . _('Requested Date') . '</th>
+		<th>' . _('Narrative') . '</th>
+		<th>' . _('Authorise') . '</th>
 	</tr>';
 
 while ($myrow=DB_fetch_array($result)) {
 
 	echo '<tr>
-			<td>'.$myrow['dispatchid'].'</td>
-			<td>'.$myrow['description'].'</td>
-			<td>'.$myrow['locationname'].'</td>
-			<td>'.ConvertSQLDate($myrow['despatchdate']).'</td>
-			<td>'.$myrow['narrative'].'</td>
+			<td>' . $myrow['dispatchid'] . '</td>
+			<td>' . $myrow['description'] . '</td>
+			<td>' . $myrow['locationname'] . '</td>
+			<td>' . ConvertSQLDate($myrow['despatchdate']) . '</td>
+			<td>' . $myrow['narrative'] . '</td>
 			<td><input type="checkbox" name="status'.$myrow['dispatchid'].'" /></td>
 		</tr>';
-	$linesql="SELECT stockrequestitems.dispatchitemsid,
+	$LinesSQL="SELECT stockrequestitems.dispatchitemsid,
 						stockrequestitems.stockid,
 						stockrequestitems.decimalplaces,
 						stockrequestitems.uom,
 						stockmaster.description,
 						stockrequestitems.quantity
 				FROM stockrequestitems
-				LEFT JOIN stockmaster
+				INNER JOIN stockmaster
 				ON stockmaster.stockid=stockrequestitems.stockid
-			WHERE dispatchid='".$myrow['dispatchid'] . "'";
-	$lineresult=DB_query($linesql, $db);
+			WHERE dispatchid='".$myrow['dispatchid'] . "'
+			AND completed=0";
+	$LineResult=DB_query($LinesSQL);
 
 	echo '<tr>
 			<td></td>
 			<td colspan="5" align="left">
 				<table class="selection" align="left">
 				<tr>
-					<th>'._('Product').'</th>
-					<th>'._('Quantity Required').'</th>
-					<th>'._('Units').'</th>
+					<th>' . _('Product') . '</th>
+					<th>' . _('Quantity Required') . '</th>
+					<th>' . _('Units') . '</th>
+					<th>' . _('Cancel Line') . '</th>
 				</tr>';
 
-	while ($linerow=DB_fetch_array($lineresult)) {
+	while ($LineRow=DB_fetch_array($LineResult)) {
 		echo '<tr>
-				<td>'.$linerow['description'].'</td>
-				<td class="number">'.locale_number_format($linerow['quantity'],$linerow['decimalplaces']).'</td>
-				<td>'.$linerow['uom'].'</td>
+				<td>' . $LineRow['description'] . '</td>
+				<td class="number">' . locale_number_format($LineRow['quantity'],$LineRow['decimalplaces']) . '</td>
+				<td>' . $LineRow['uom'] . '</td>
+				<td><input type="checkbox" name="' . $myrow['dispatchid'] . 'cancel' . $LineRow['dispatchitemsid'] . '" /></td
 			</tr>';
 	} // end while order line detail
 	echo '</table>
@@ -105,7 +119,9 @@ while ($myrow=DB_fetch_array($result)) {
 		</tr>';
 } //end while header loop
 echo '</table>';
-echo '<br /><div class="centre"><button type="submit" name="updateall">' . _('Update'). '</button></div><br /></form>';
+echo '<br /><div class="centre"><input type="submit" name="UpdateAll" value="' . _('Update'). '" /></div>
+      </div>
+      </form>';
 
-include('includes/footer.inc');
+include('includes/footer.php');
 ?>

@@ -1,18 +1,21 @@
 <?php
 
-/* $Id: SelectContract.php 3692 2010-08-15 09:22:08Z daintree $*/
+include('includes/session.php');
+$Title = _('Select Contract');
+$ViewTopic= 'Contracts';
+$BookMark = 'SelectContract';
+include('includes/header.php');
 
-include('includes/session.inc');
-$title = _('Select Contract');
-include('includes/header.inc');
-
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/contract.png" title="' . _('Contracts') . '" alt="" />' . ' ' . _('Select A Contract') . '</p> ';
+echo '<p class="page_title_text"><img alt="" src="', $RootPath, '/css/', $Theme,
+	'/images/contract.png" title="', // Icon image.
+	_('Contracts'), '" /> ', // Icon title.
+	_('Select A Contract'), '</p>';// Page title.
 
 echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post">';
 echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
 
-
-echo '<br /><table class="selection">';
+echo '<fieldset>
+		<legend class="search">', _('Contract Search'), '</legend>';
 
 if (isset($_GET['ContractRef'])){
 	$_POST['ContractRef']=$_GET['ContractRef'];
@@ -21,7 +24,7 @@ if (isset($_GET['SelectedCustomer'])){
 	$_POST['SelectedCustomer']=$_GET['SelectedCustomer'];
 }
 
-echo '<tr><td>';
+
 if (isset($_POST['ContractRef']) AND $_POST['ContractRef']!='') {
 	$_POST['ContractRef'] = trim($_POST['ContractRef']);
 	echo _('Contract Reference') . ' - ' . $_POST['ContractRef'];
@@ -31,11 +34,17 @@ if (isset($_POST['ContractRef']) AND $_POST['ContractRef']!='') {
 		echo '<input type="hidden" name="SelectedCustomer" value="' . $_POST['SelectedCustomer'] . '" />';
 	}
 }
-echo'</td>';
+
 if (!isset($_POST['ContractRef']) or $_POST['ContractRef']==''){
 
-	echo '<td>' . _('Contract Reference') . ': <input type="text" name="ContractRef" maxlength="20" size="20" /></td>&nbsp;&nbsp;';
-	echo '<td><select name="Status">';
+	echo '<field>
+			<label for="ContractRef">', _('Contract Reference') . ':</label>
+			<input type="text" name="ContractRef" maxlength="20" size="20" />
+		</field>';
+
+	echo '<field>
+			<label for="Status">', _('Search Contracts In'), '</label>
+			<select name="Status">';
 
 	if (isset($_GET['Status'])){
 		$_POST['Status']=$_GET['Status'];
@@ -60,10 +69,13 @@ if (!isset($_POST['ContractRef']) or $_POST['ContractRef']==''){
 		}
 	}
 
-	echo '</select></td> &nbsp;&nbsp;';
+	echo '</select>
+		</field>';
 }
-echo '<td><button type="submit" name="SearchContracts">' . _('Search') . '</button></td>';
-echo '<td>&nbsp;&nbsp;<a href="' . $rootpath . '/Contracts.php">' . _('New Contract') . '</a></td></tr></table></p>';
+echo '</fieldset>';
+echo '<div class="centre">
+		<input type="submit" name="SearchContracts" value="' . _('Search') . '" />';
+echo '&nbsp;&nbsp;<a href="' . $RootPath . '/Contracts.php">' . _('New Contract') . '</a></div>';
 
 
 //figure out the SQL required from the inputs available
@@ -82,6 +94,7 @@ if (isset($_POST['ContractRef']) AND $_POST['ContractRef'] !='') {
 					   requireddate
 				FROM contracts INNER JOIN debtorsmaster
 				ON contracts.debtorno = debtorsmaster.debtorno
+				INNER JOIN locationusers ON locationusers.loccode=contracts.loccode AND locationusers.userid='" .  $_SESSION['UserID'] . "' AND locationusers.canview=1
 				WHERE contractref " . LIKE . " '%" .  $_POST['ContractRef'] ."%'";
 
 } else { //contractref not selected
@@ -100,6 +113,7 @@ if (isset($_POST['ContractRef']) AND $_POST['ContractRef'] !='') {
 					   requireddate
 				FROM contracts INNER JOIN debtorsmaster
 				ON contracts.debtorno = debtorsmaster.debtorno
+				INNER JOIN locationusers ON locationusers.loccode=contracts.loccode AND locationusers.userid='" .  $_SESSION['UserID'] . "' AND locationusers.canview=1
 				WHERE debtorno='". $_POST['SelectedCustomer'] ."'";
 		if ($_POST['Status']!=4){
 			$SQL .= " AND status='" . $_POST['Status'] . "'";
@@ -117,7 +131,8 @@ if (isset($_POST['ContractRef']) AND $_POST['ContractRef'] !='') {
 					   customerref,
 					   requireddate
 				FROM contracts INNER JOIN debtorsmaster
-				ON contracts.debtorno = debtorsmaster.debtorno";
+				ON contracts.debtorno = debtorsmaster.debtorno
+				INNER JOIN locationusers ON locationusers.loccode=contracts.loccode AND locationusers.userid='" .  $_SESSION['UserID'] . "' AND locationusers.canview=1";
 		if ($_POST['Status']!=4){
 			$SQL .= " AND status='" . $_POST['Status'] . "'";
 		}
@@ -125,7 +140,7 @@ if (isset($_POST['ContractRef']) AND $_POST['ContractRef'] !='') {
 } //end not contract ref selected
 
 $ErrMsg = _('No contracts were returned by the SQL because');
-$ContractsResult = DB_query($SQL,$db,$ErrMsg);
+$ContractsResult = DB_query($SQL,$ErrMsg);
 
 /*show a table of the contracts returned by the SQL */
 
@@ -145,20 +160,14 @@ $TableHeader = '<tr>
 echo $TableHeader;
 
 $j = 1;
-$k=0; //row colour counter
-while ($myrow=DB_fetch_array($ContractsResult)) {
-	if ($k==1){
-		echo '<tr class="EvenTableRows">';
-		$k=0;
-	} else {
-		echo '<tr class="OddTableRows">';
-		$k++;
-	}
 
-	$ModifyPage = $rootpath . '/Contracts.php?ModifyContractRef=' . $myrow['contractref'];
-	$OrderModifyPage = $rootpath . '/SelectOrderItems.php?ModifyOrderNumber=' . $myrow['orderno'];
-	$IssueToWOPage = $rootpath . '/WorkOrderIssue.php?WO=' . $myrow['wo'] . '&amp;StockID=' . $myrow['contractref'];
-	$CostingPage = $rootpath . '/ContractCosting.php?SelectedContract=' . $myrow['contractref'];
+while ($myrow=DB_fetch_array($ContractsResult)) {
+	echo '<tr class="striped_row">';
+
+	$ModifyPage = $RootPath . '/Contracts.php?ModifyContractRef=' . $myrow['contractref'];
+	$OrderModifyPage = $RootPath . '/SelectOrderItems.php?ModifyOrderNumber=' . $myrow['orderno'];
+	$IssueToWOPage = $RootPath . '/WorkOrderIssue.php?WO=' . $myrow['wo'] . '&amp;StockID=' . $myrow['contractref'];
+	$CostingPage = $RootPath . '/ContractCosting.php?SelectedContract=' . $myrow['contractref'];
 	$FormatedRequiredDate = ConvertSQLDate($myrow['requireddate']);
 
 	if ($myrow['status']==0 OR $myrow['status']==1){ //still setting up the contract
@@ -195,6 +204,9 @@ while ($myrow=DB_fetch_array($ContractsResult)) {
 }
 //end of while loop
 
-echo '</table></form><br />';
-include('includes/footer.inc');
+echo '</table>
+      </div>
+      </form>
+      <br />';
+include('includes/footer.php');
 ?>

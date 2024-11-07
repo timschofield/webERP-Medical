@@ -1,12 +1,12 @@
 <br /><br />
 
-<h1><a name="DevelopmentStructure">Entwicklung - Struktur</a></h1>
+<a name="DevelopmentStructure"><font size="+3"><b>Entwicklung - Struktur</b></font></a>
 
 <br /><br />
 Diese Seite wird vorrangig für Entwickler von Interesse sein, die das System und wie die verschiedenen Skripte funktionieren, verstehen wollen.
 <br /><br />
 
-<h2>Kundenaufträge</h2>
+<font size="+2"><b>Kundenaufträge</b></font>
 
 <br /><br />
 Das Anlegen der Kundenaufträge wird mit dem Skript
@@ -27,7 +27,7 @@ Das Skript bietet zwei Möglichkeiten, Materialien zu einem Kundenauftrag hinzuzu
 <li>Durch Auswahl der Warengruppe oder eines Teiles der Materialnummer oder Beschreibung. Der Benutzer muss dann die Suchen-Taste anklicken, um die Suche einzuleiten. Die Seite zeigt die Auswahl der Materialien, die dem Selektionskriterium entsprechen.</li>
 <li>Durch die direkte Eingabe der Materialnummer und Menge. Das erlaubt die Schnellerfassung von Kundenaufträgen, sofern der Benutzer mit den einzelnen Materialnummern vertraut ist. Der Benutzer muss die Taste "Positionen erfassen" anklicken, um die Übernahme der Einträge in der Erfassungsmaske anzustoßen.</li>
 </ol>
-<h2>Preisfestlegung</h2>
+<font size="+2"><b>Preisfestlegung</b></font>
 
 <br /><br />
 Das Skript sucht die Preisfestlegung für den Kunden auf der Grundlage der Kundenwährung und der Umsatzart. So viele Umsatzarten wie nötig können eingerichtet werden, jeweils mit ihrer eigenen Preisliste. Sofern für die Umsatzart und die Währung des Kunden keine Preise festgelegt sind, stehen keine Materialien für das Hinzufügen zum Auftrag zur Verfügung. 
@@ -39,7 +39,7 @@ können erfasst werden, diese werden beim Einrichten der Materialstammsätze festg
 können ebenso eingegeben werden, die auf einzelne Komponenten verweisen, welche aber als nur ein Artikel verkauft werden. Das Sammelmaterial wird nicht schon bei der Auftragserfassung in seine Komponenten aufgelöst wie ein Bestellsatz. Es existiert in den Kundenaufträgen und Umsatzauswertungen, nicht aber bei den Warenbeständen als ein Material, Warenbewegungen werden sowohl für das Sammelmaterial als Ganzes wie auch für die Komponenten fortgeschrieben.
 <br /><br />
 
-<h2>Lieferangaben und Versandkosten</h2>
+<font size="+2"><b>Lieferangaben und Versandkosten</b></font>
 
 <br /><br />
 Nachdem Sie den Kunden und die Auftragspositionen festgelegt haben, ist es erforderlich, die Lieferangaben festzulegen. In Abhängigkeit von den Festlegungen in den Unternehmenseinstellungen werden Versandkosten berechnet. Es gibt die Option, keine Versandkosten in Rechnung zu stellen, wenn der Auftragswert eine bestimmte Höhe übersteigt. Die Berechnung erfolgt auf der Grundlage der für die verschiedenen Versandarten hinterlegten Einträge für die Entfernung vom Lagerort zur Stadt der Lieferanschrift des Kunden. Wenn die Stadt nicht in der Zeile 2 oder 3 der Lieferanschrift gefunden wird, gibt das System einen Fehler zurück. Wenn mehrere Versandarten gefunden werden, wählt das System auf der Basis des Gesamtgewichtes und des Volumens des Auftrages diejenige mit den den geringsten Versandkosten aus. Die Berechnung der Versandkosten geschieht in einer Funktion in der separanten Datei FreightCalc.php, der die Zeilen der Lieferadresse, der Versandort, das Volumen und das Gewicht des Auftrages als Parameter benötigt. Die Funktion gibt ein Array zurück, dass die beste Versandart und die Versandkosten enthält. Das Skript FreightCalc.php wird in das Script DeliveryDetails.php eingebunden. Deswegen besteht das Erfordernis, für jedes Material das Gewicht in kg und das Volumen in m³ zu pflegen und die gesamte Skale möglicher Versandkosten zu hinterlegen, wenn diese Funktion genutzt werden soll.
@@ -49,7 +49,7 @@ Wenn die Datenanforderungen als zu umfangreich erachtet werden, ist es auch mögl
 Wenn die Lieferangaben alle im Skript DeliveryDetails.php eingegeben wurden, kann der Kundenauftrage in der Datenbank gesichert werden. Bis zu diesem Zeitpunkt wurde er vollständig in der Items-Sessionvariablen gehalten und nur wenn der Auftrag bestätigt wird, werden die Angaben in die Datenbank übernommen.
 <br /><br />
 
-<h2>Kundenaufträge suchen</h2>
+<font size="+2"><b>Kundenaufträge suchen</b></font>
 
 <br /><br />
 Kundenaufträge können mit dem Skript
@@ -70,7 +70,7 @@ bietet für die zurückgegebenen Kundenaufträge auch Links an, über welche diese g
 Änderungen der Auftragspositionen werden mit dem selben Skript durchgeführt, mit dem sie ursprünglich angelegt wurden (SelectOrderItems.php), wobei es nicht möglich ist, die Menge einer Position unter den Wert abzuändern, der bereits in Rechnung gestellt wurde oder eine Position zu löschen, für die bereits eine Menge fakturiert wurde.
 <br /><br />
 
-<h2>Faktura</h2>
+<font size="+2"><b>Faktura</b></font>
 
 <br /><br />
 Eine Rechnung kann nur angelegt werden, wenn zuvor die Positionen eines Kundenauftrages ausgewählt wurden. Dann kann zum Kundenauftrag die Rechnung gelegt werde.
@@ -86,19 +86,19 @@ SelectCompletedOrder.php.
 Es besitzt vergleichbare Auswahlmöglichkeiten wie für die Suche nach offenen Kundenaufträgen. Die Seite zeigt auch die gelieferten und fakturierten Mengen an.
 <br /><br />
 
-<h2>Forderungen / Debitorenkonten</h2>
+<font size="+2"><b>Forderungen / Debitorenkonten</b></font>
 
 <br /><br />
 Ein Kundenkonto besteht aus einem Stammsatz, den Daten der Niederlassungen zum Stammsatz und den Buchungen, wobei die Rechnungen und Gutschriften sich jeweils auf eine Niederlassung beziehen, aber für die Zahlungseingänge eine Niederlassung nicht nötig ist. Der Saldo des Kontos wird aus den Einzelbelegen, die noch nicht ausgeglichen sind, zusammengefasst. Sollbeträge aus Rechnungen (SysTypes TypeID=10) werden als positive Zahlen, Habenbeträge aus Gutschriften(Storno) (SysTypes TypeID=11) und Zahlungseingängen (SysTypes TypeID=12) als negative Beträge geführt.
 <br /><br />
 
-<h2>Debitoren-Zahlungseingänge</h2>
+<font size="+2"><b>Debitoren-Zahlungseingänge</b></font>
 
 <br /><br />
 Für Zahlungseingänge gibt es eine Reihe von Gründen, in den meisten Fällen wird es sich um die Bezahlung von Rechnungen handeln. Das Formular für die Erfassung von Zahlungseingängen erlaubt sowohl die Verbuchung von Hauptbuchbelegen wie auch die Erfassung von Zahlungseingängen zu Debitorenforderungen. Die Summe derer wird für die Verbuchung auf dem Bankkonto benötigt. Die Zuordnung der Zahlungseingänge, das Ausgleichen, ist ein vollkommen eigenständiger Prozess, siehe unten. Das Skript für die Zahlungseingänge legt zunächst eine Klasseninstanz an, die sämtliche Informationen über den Zahlungseingang aufnimmt, bevor er insgesamt verbucht wird. Erst dann werden die erforderlichen Sätze für die Zahlung und - sofern die Hauptbuchintegration der Debitorenbuchhaltung aktiv ist - auch für das Hauptbuch in die Datenbank übernommen. 
 <br /><br />
 
-<h2>Debitoren-Ausgleich</h2>
+<font size="+2"><b>Debitoren-Ausgleich</b></font>
 
 <br /><br />
 Das System ist darauf ausgelegt, dass Ausgleiche nur dadurch vorgenommen werden können, dass Gutschriften oder Zahlungseingänge und die offenen Rechnungspositionen ausgewählt werden. Rechnungsbeträge können solange der Gutschrift/Zahlung hinzugefügt werden, bis deren Gesamtbetrag erreicht ist. Eine Funktion ermöglicht es, die noch zuzuordnende Summe neu zu berechnen, wobei die bereits zugeordneten Positionen berücksichtigt werden.
@@ -112,7 +112,7 @@ Das Skript für den Debitorenausgleich kann aufgerufen werden:
 <li>Mit einer Kundennummer, es werden alle Gutschriften und Zahlungseingänge angezeigt, die noch voll zugeordnet werden müssen.</li>
 <li>Mit einer Belegart 11 oder 12 und der Belegnummer, dabei werden der ausgewählte Beleg (Gutschrift oder Zahlungseingang) und der diesem bereits früher zugeordnete Betrag angezeigt und die noch nicht zugeordnteten Rechnungen stehen zur Auswahl zur Verfügung. Die vorhandenen Zuordnungen können nach Belieben verändert und neue Zuordnungen vorgenommen werden.</li>
 </ol>
-<h2>Umsatzauswertungen</h2>
+<font size="+2"><b>Umsatzauswertungen</b></font>
 
 <br /><br />
 Alle Rechnungen und Gutschriften fließen in die Summensätze der Ergebnisrechnung mit ein. Die Datensätze der Ergebnisrechnung gehen in ihrer Detaillierung hinab bis auf die Ebenen der Materialien. Es gibt eine gewisse Datenredundanz, weil diese Informationen in einer eigenen Tabelle doppelt gehalten werden. Der Gründe dafür sind:
@@ -128,7 +128,7 @@ Die Ergebnisberichte werden als eine Kopfinformation mit Selektions- und Sortier
 Bei der Festlegung der Spalten wird die Art der anzuzeigenden Informationen, wie Menge, Wert, Kosten, Rohertrag sowie ein Periodenbereich angegeben. Die Perioden sind Monatswerte und für den Benutzer unsichtbar gepflegt. Die Perioden werden nur für die Ergebnisdarstellung und die Berichte der Hauptbuchhaltung verwendet. Eine Abfrage auf der Seite der Spaltendefinition ermöglicht eine einfache Information, in welchen Perioden Werte gebucht sind.
 <br /><br />
 
-<h2>Bestellungen</h2>
+<font size="+2"><b>Bestellungen</b></font>
 
 <br /><br />
 Eine zur Auswahl der Kundenaufträge vergleichbare Funktionalität für Bestellungen bietet das Skript
@@ -144,7 +144,7 @@ Mit dem Skript werden auch Links angezeigt, um
 <li>Wareneingänge zu Bestellung zu erfassen.</li>
 </ol>
 
-<h2>Bestand</h2>
+<font size="+2"><b>Bestand</b></font>
 
 <br /><br />
 Warenbewegungen werden in Abhängigkeit von der Materialart jedesmal dann verbucht, wenn ein Artikel in Rechnung gestellt oder eine Gutschrift dazu erzeugt wird. Wenn eine Gutschrift erstellt und die Waren abgeschrieben werden, weil z. B. die Waren beim Transport beschädigt wurden, werden zwei Warenbewegungen angelegt:
@@ -166,7 +166,7 @@ Die Materialbestandsführung ist deswegen voll mit dem Vertieb und dem Einkauf in
 Es ist nicht möglich, diese zwei Arten von Warenbewegungen auf Dummymaterialien, Sammelmaterialien oder Bestellsätze anzuwenden, weil für diese Materialarten keine Bestände geführt werden.
 <br /><br />
 
-<h2>Bestandsauswertungen</h2>
+<font size="+2"><b>Bestandsauswertungen</b></font>
 
 <br /><br />
 Die Materialsuche zeigt die für das gewählte Material möglichen Funktionen:
@@ -180,7 +180,7 @@ Die Materialsuche zeigt die für das gewählte Material möglichen Funktionen:
 Alle Auswertungen folgen einem gleichen Format, das es erlaubt, die Materialnummer direkt einzugeben wenn die Benutzer mit den Materialnummern vertraut sind. Alternativ kann die Abfrage über die Materialsuche aufgerufen werden, die alle Möglichkeiten bietet, das gewünschte Material auszuwählen.
 <br /><br />
 
-<h2>Kreditoren</h2>
+<font size="+2"><b>Kreditoren</b></font>
 
 <br /><br />
 Kreditorenrechnungen können mit dem Skript
@@ -200,7 +200,7 @@ Die Summe aller Positionen der berechneten Wareneingänge werden zusammengefasst.
 Das Fälligkeitsdatum der Kreditorenrechnung wird ausgehend vom Rechnungsdatum unter Berücksichtigung der für den Lieferanten definierten Zahlungsbedingung vorgeschlagen. Es gibt auch eine Option, direkt aus der Rechnungserfassung einen Zahlungsausgang zu erstellen. Die Zahlung wird über den Gesamtbetrag der einzelnen Rechnung angelegt.
 <br /><br />
 
-<h2>Kreditorenzahlungen</h2>
+<font size="+2"><b>Kreditorenzahlungen</b></font>
 
 <br /><br />
 Zahlungen können für alle fälligen Beträge entweder durch den Zahlungslauf angelegt werden oder durch die manuelle Erfassung einer Einzelzahlung.

@@ -1,5 +1,4 @@
 <?php
-/* $Id$*/
 /* definition of the Payment class */
 
 Class Payment {
@@ -12,6 +11,7 @@ Class Payment {
 	var $ExRate; /*Exchange rate between the payment and the account currency*/
 	var $FunctionalExRate; /*Ex rate between the account currency and functional currency */
 	var $Currency; /*Currency being Paid - defaulted to bank account currency */
+	var $CurrDecimalPlaces;
 	var $SupplierID; /* supplier code */
 	var $SuppName;
 	var $Address1;
@@ -23,9 +23,15 @@ Class Payment {
 	var $Discount;
 	var $Amount;
 	var $Narrative;
+	var $BankTransRef;
 	var $GLItemCounter; /*Counter for the number of GL accounts being posted to by the Payment */
+	var $Paymenttype;
+	var $PaymentType;
+	var $gltrans_narrative;
+	var $supptrans_suppreference;
+	var $supptrans_transtext;
 
-	function Payment(){
+	function __construct(){
 	/*Constructor function initialises a new Payment batch */
 		$this->GLItems = array();
 		$this->GLItemCounter=0;
@@ -40,10 +46,27 @@ Class Payment {
 
 	}
 
-	function Add_To_GLAnalysis($Amount, $Narrative, $GLCode, $GLActName, $tag, $cheque){
+	function Payment() {
+		self::__construct();
+	}
+
+	function Add_To_GLAnalysis($Amount,
+								$Narrative,
+								$GLCode,
+								$GLActName,
+								$Tag,
+								$Cheque){
+
 		if (isset($GLCode) AND $Amount!=0){
-			$this->GLItems[$this->GLItemCounter] = new PaymentGLAnalysis($Amount, $Narrative, $this->GLItemCounter, $GLCode, $GLActName, $tag, $cheque);
+			$this->GLItems[$this->GLItemCounter] = new PaymentGLAnalysis($Amount,
+																		$Narrative,
+																		$this->GLItemCounter,
+																		$GLCode,
+																		$GLActName,
+																		$Tag,
+																		$Cheque);
 			$this->GLItemCounter++;
+			$this->Amount += $Amount;
 			Return 1;
 		}
 		Return 0;
@@ -62,10 +85,16 @@ Class PaymentGLAnalysis {
 	var $GLCode;
 	var $GLActName;
 	var $ID;
-	var $tag;
-	var $cheque;
+	var $Tag;
+	var $Cheque;
 
-	function PaymentGLAnalysis ($Amt, $Narr, $id, $GLCode, $GLActName, $tag, $cheque){
+	function __construct ($Amt,
+								$Narr,
+								$id,
+								$GLCode,
+								$GLActName,
+								$Tag,
+								$Cheque){
 
 /* Constructor function to add a new PaymentGLAnalysis object with passed params */
 		$this->Amount =$Amt;
@@ -73,8 +102,23 @@ Class PaymentGLAnalysis {
 		$this->GLCode = $GLCode;
 		$this->GLActName = $GLActName;
 		$this->ID = $id;
-		$this->tag = $tag;
-		$this->cheque = $cheque;
+		$this->Tag = $Tag;
+		$this->Cheque = $Cheque;
+	}
+	function PaymentGLAnalysis($Amt,
+								$Narr,
+								$id,
+								$GLCode,
+								$GLActName,
+								$Tag,
+								$Cheque){
+		self::__construct($Amt,
+								$Narr,
+								$id,
+								$GLCode,
+								$GLActName,
+								$Tag,
+								$Cheque);
 	}
 }
 

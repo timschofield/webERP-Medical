@@ -1,5 +1,4 @@
 <?php
-/* $Id: api_salestypes.php 4521 2011-03-29 09:04:20Z daintree $*/
 
 /* This function returns a list of the sales type abbreviations
  * currently setup on webERP
@@ -13,7 +12,8 @@
 			return $Errors;
 		}
 		$sql = "SELECT typeabbrev FROM salestypes";
-		$result = DB_query($sql, $db);
+		$result = DB_query($sql);
+        $SalesTypeList = array();
 		$i=0;
 		while ($myrow=DB_fetch_array($result)) {
 			$SalesTypeList[$i]=$myrow[0];
@@ -36,10 +36,10 @@
 			$Errors[0]=NoAuthorisation;
 			return $Errors;
 		}
-		$Errors = VerifySalesType($salestype, sizeof($Errors), $Errors, $db);
+		$Errors = VerifySalesType($salestype, sizeof($Errors), $Errors);
 		if (sizeof($Errors)==0) {
 			$sql = "SELECT * FROM salestypes WHERE typeabbrev='".$salestype."'";
-			$result = DB_query($sql, $db);
+			$result = DB_query($sql);
 			$Errors[0]=0;
 			$Errors[1]=DB_fetch_array($result);
 			return $Errors;
@@ -66,11 +66,11 @@
 			$FieldNames.=$key.', ';
 			$FieldValues.='"'.$value.'", ';
 		}
-		$sql = "INSERT INTO salestypes ('" . substr($FieldNames,0,-2) . "')
-				VALUES ('" . substr($FieldValues,0,-2) . "') ";
+		$sql = "INSERT INTO salestypes ('" . mb_substr($FieldNames,0,-2) . "')
+				VALUES ('" . mb_substr($FieldValues,0,-2) . "') ";
 		if (sizeof($Errors)==0) {
-			$result = DB_Query($sql, $db);
-			if (DB_error_no($db) != 0) {
+			$result = DB_query($sql);
+			if (DB_error_no() != 0) {
 				$Errors[0] = DatabaseUpdateFailed;
 			} else {
 				$Errors[0]=0;

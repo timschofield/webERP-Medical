@@ -1,5 +1,4 @@
 <?php
-/* $Id$*/
 
 if ($PageNumber>1){
 	$pdf->newPage();
@@ -11,14 +10,14 @@ $YPos = 575;
 $pdf->addText($XPos, $YPos,$FontSize, $myrow['deliverto']);
 $pdf->addText($XPos, $YPos-13,$FontSize, $myrow['deladd1']);
 $pdf->addText($XPos, $YPos-26,$FontSize, $myrow['deladd2']);
-$pdf->addText($XPos, $YPos-39,$FontSize, $myrow['deladd3'] . ' ' . $myrow['deladd4'] . ' ' . $myrow['deladd5']. ' ' . $myrow['deladd6']);
+$pdf->addText($XPos, $YPos-39,$FontSize, $myrow['deladd3'] . ' ' . $myrow['deladd4'] . ' ' . $myrow['deladd5'] . ' ' . $myrow['deladd6']);
 
 $YPos = 510;
 
 $pdf->addText($XPos, $YPos,$FontSize, $myrow['name']);
 $pdf->addText($XPos, $YPos-13,$FontSize, $myrow['address1']);
 $pdf->addText($XPos, $YPos-26,$FontSize, $myrow['address2']);
-$pdf->addText($XPos, $YPos-39,$FontSize, $myrow['address3'] . ' ' . $myrow['address4'] . ' ' . $myrow['address5']. ' ' . $myrow['address6']);
+$pdf->addText($XPos, $YPos-39,$FontSize, $myrow['address3'] . ' ' . $myrow['address4'] . ' ' . $myrow['address5']. ' ' . $myrow['deladd6']);
 
 
 /*Print Dispatch Date - as current date
@@ -64,13 +63,13 @@ $XPos=609;
 $YPos=96;
 $LeftOvers = $pdf->addTextWrap($XPos,$YPos,170,$FontSize,stripcslashes($myrow['comments']));
 
-if (strlen($LeftOvers)>1){
+if (mb_strlen($LeftOvers)>1){
 	$LeftOvers = $pdf->addTextWrap($XPos,$YPos-14,170,$FontSize,$LeftOvers);
-	if (strlen($LeftOvers)>1){
+	if (mb_strlen($LeftOvers)>1){
 		$LeftOvers = $pdf->addTextWrap($XPos,$YPos-28,170,$FontSize,$LeftOvers);
-		if (strlen($LeftOvers)>1){
+		if (mb_strlen($LeftOvers)>1){
 			$LeftOvers = $pdf->addTextWrap($XPos,$YPos-42,170,$FontSize,$LeftOvers);
-			if (strlen($LeftOvers)>1){
+			if (mb_strlen($LeftOvers)>1){
 				$LeftOvers = $pdf->addTextWrap($XPos,$YPos-56,170,$FontSize,$LeftOvers);
 			}
 		}

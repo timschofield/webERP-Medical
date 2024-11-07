@@ -1,5 +1,7 @@
 <br /><br />
-<h1><a name="Multilanguage">Mehrsprachigkeit</a></h1>
+<a name="Multilanguage"><font size="+3"><b>
+Mehrsprachigkeit
+</b></font></a>
 <br /><br />
 webERP kann in jede beliebige Sprache übersetzt werden, so dass die gesamte Web-Oberfläche in der Sprache des Benutzers angezeigt werden kann. Das System kann zur gleichen Zeit unterschiedliche Sprachen für unterschiedliche Benutzer anzeigen, das ist davon abhängig, welche Sprache in den Benutzereinstellungen des jeweiligen Benutzers festgelegt ist.
 <br /><br />
@@ -25,9 +27,9 @@ Schicken Sie die Datei die Ihre Übersetzung enthält an submissions@web-erp.org e
 <br /><br />
 Ein Archiv mit dem neuen Sprachverzeichnis und Anleitungen wird bei sourceforge eingestellt, so dass jeder  auf Ihre Übersetzung zugreifen kann.
 <br /><br />
-<h3>
+<font size=+1><b>
 Technische Übersicht
-</h3>
+</b></font>
 <br /><br />
 <b>
 Wie es gemacht wird</b>
@@ -44,9 +46,9 @@ Neue Verzeichnisse müssen erstellt werden, wenn ein Übersetzer eine lokale Sprac
 <br /><br />
 Für die Bearbeitung der .po-Datei kann jeder Texteditor verwendet werden. Es gibt auch ein Werkzeug poedit, das von Übersetzern oft empfohlen wird und auch der GNU Emacs hat einen speziellen PO-Modus.
 <br /><br />
-<h3>
+<b><font size=+1>
 Die Datei messages.po verstehen
-</h3>
+</font></b>
 <br /><br />
 Die Übersetzung wird vorgenommen, indem die Zeichenketten ind der Datei messages.po in die andere Sprache übersetzt werden. Es ist wichtig, diese Übersetzung mit der neuesten messages.po-Datei aus dem Verzeichnis locale/en_GB/LC_MESSAGES/ vorzunehmen. Sie haben auch die Möglichkeit, diese mit einer Email an info@web-erp.org oder eine Nachricht im Übersetzungs-Board abzufordern.
 <!-- The translation is performed by tranlating the strings in the messages.po file into the other language. It is important to work on the most recent messages.po file from the locale/en_GB/LC_MESSAGES/ deirectory in the CVS.
@@ -71,9 +73,9 @@ Dieser Text ist die englische Zeichenkette, die bei der Ausgabe durch den Text i
 <br /><br />
 Der Aufwand bei der Übersetzung besteht darin, die übersetzte Nachricht zwischen die Anführungszeichen in der Zeile msgstr einzutragen.
 <br /><br />
-<h2>
+<b><font size=+2>
 Der Kopf der .po-Datei
-</h2>
+</font></b>
 <br /><br />
 Die .po-Datei beginnt mit einigen einleitenden Kommentaren, die ebenfalls vervollständigt werden sollten.
 <br /><br />"SOME DESCRIPTIVE TITLE", sollte ausgefüllt werden mit webERP - LANGUAGE Translation File, wobei LANGUAGE die Sprache angibt, in welche die Datei übersetzt wurde.<!-- - should be replaced with webERP - LANGUAGE Translation File - where LANGUAGE is the language being translated into -->
@@ -134,7 +136,9 @@ Weitere Ressourcen</b>
 <br /><br />
 <a href="http://www.gnu.org/software/gettext/manual/html_chapter/gettext_toc.html#SEC_Contents">Die GNU gettext-Beschreibung</A>
 <br /><br />
-<h1>Übersetzungshilfsmittel</h1>
+<font size=+3><b>
+Übersetzungshilfsmittel
+</b></font>
 <br /><br />
 webERP wird zusammen mit einigen Online-Werkzeugen für die Sprachenverwaltung ausgeliefert, es gibt aber einige Probleme bei der Pflege von Übersetzungen mit diesen Werkzeugen. Im Einzelnen können bestimmte Zeichen Probleme bereiten und Zeichencodierungen können verlorengehen. Es kann daher die Verwendung dieser nicht empfohlen werden, außer für eine Ad-Hoc-Pflege, wenn die Sicherung der letzten messages.po noch anderweitig verfügbar ist.
 <br /><br />
@@ -154,15 +158,15 @@ Für die Bearbeitung der Sprachdateien sind vier Werkzeuge vorhanden:
 <br /><br />
 Beachten Sie, dass die Erläuterungen darüber, was das System macht, für diejenigen bestimmt sind, die das System bedienen und die Dateien verwalten. Wenn Sie sich nur mit der Übersetzung beschäftigen, müssen Sie das nicht verstehen.
 <br /><br />
-<h2>
+<font size="+2"><b>
 Die System-Sprachdatei neu erstellen
-</h2>
+</b></font>
 <br /><br />
 Das System hat nur eine Systemsprachdatei. Wenn eine neue Sprache angelegt wird, wird eine Kopie dieser Datei angelegt, die für die gewünschte Sprache bearbeitet wird. Die Neuerstellung dieser System-Sprachdatei besteht darin, dass alle zum System gehörenden Skriptdateien durchgegangen werden, um die gefundenen Meldungen in eine neue Systemsprachdatei aufzunehmen. Wenn Sie das vor dem Beginn der Übersetzung durchführen, stellen Sie sicher, dass Sie mit den aktuellen Zeichenketten arbeiten.
 <br /><br />
-<h2>
+<font size="+2"><b>
 Eine neue Sprache zum System hinzufügen
-</h2>
+</b></font>
 <br /><br />
 Verwenden Sie dieses Werkzeug, um eine neue Sprache anzulegen. Es ist wichtig, dass Sie sich vergegenwärtigen, dass Sie nur Sprachen verwenden können, für die die entsprechenden Sprachendateien auf dem Server vorhanden sind. Der Sprachenschlüssel muss den Sprachdateien auf dem Webserver entsprechen. Geben Sie die Sprache in der Form xx_XX ein, wobei die ersten zwei Zeichen die Kleinbuchstaben für die entsprechende Sprache (en für Englisch) sind, die letzten beiden Großbuchstaben sind der Länderschlüssel wie US für Vereinigte Staaten von Amerika. Der Unterstrich trennt Sprachen- und Länderschlüssel und vervollständigt den Schlüssel auf insgesamt 5 Zeichen. Sie müssen auf Ausführen klicken nachdem Sie den Schlüssel eingegeben haben, damit die Sprache angelegt wird. Das System erstellt daraufhin ein neues Sprachenverzeichnis unter dem Verzeichnis locale/ und ein Verzeichnis LC_MESSAGES wiederum in diesem Sprachenverzeichnis. Dann wird in dieses neue Verzeichnis locale/xx_XX/LC_MESSAGES die Systemdprachdatei messages.po hineinkopiert. Am Anfang gibt es noch keine Übersetzungen in dieser neuen Datei.
 <br /><br />
@@ -174,17 +178,17 @@ Es ist nicht nötig, die Struktur der Sprachdatei im Detail zu kennen, wenn Sie m
 <li>Den einzelnen Meldungs-Identifikatoren, die mit msgid beginnen und dann den zu übersetzenden englischen Text, eingeschlossen von Anführungszeichen, beinhalten. Die Skripte, in denen die Zeichenkette vorkommt, wird ebenfalls oberhalb jeder msgid-Zeile angegeben.</li>
 <li>Die Meldungszeichenketten, die mit msgstr beginnen. In einer neuen Datei messages.po sind alle "". Die Aufgabe des Übersetzens ist es, dass für die entsprechende Sprache in msgstr ein Text eingegeben wird, der dem Text in msgid entspricht.</li>
 <br /><br />
-<h2>
+<font size="+2"><b>
 Sprachdatei-Kopf bearbeiten
-</h2>
+</b></font>
 <br /><br />
 Mit diesem Werkzeug kann der Kopf der Sprachdatei bearbeitet werden. Ein wichtiger Grund dafür ist es, den Zeichensatz anzugeben, der für diese Spracheinstellung angewendet werden soll. Für Englisch wird der Zeichensatz gewöhnlich auf ISO 8829-1 oder etwas ähnliches gesetzt. Nachdem Sie die verschiedenen Bereiche des Kopfes bearbeitet haben, müssen Sie am unteren Rand auf Speichern klicken, damit die Eingaben gespeichert werden.
 <br /><br />
-<h2>
+<font size="+2"><b>
 Sprachdatei-Module bearbeiten
-</h2>
+</b></font>
 <br /><br />
-Der Hauptteil der Übersetzungsarbeit wird mit diesem Werkzeug gemacht. Zuerst wählen Sie die Sprache, die Sie bearbeiten wollen und dann wählen Sie Sprachdatei-Module bearbeiten. Für eine vollständige Übersetzung des gesamten Systems müssen Sie alle diese Module übersetzen. Viele ziehen zuerst einmal die Module von index.php und includes/header.inc vor, damit das Hauptmenü in ihrer Sprache erscheint. Von da aus können zuerst die wichtigsten Module bearbeitet werden oder alles nacheinander. Ein Merksystem sollte verwendet werden, damit Sie wissen, welche Module in den nachfolgenden Schritten noch bearbeitet werden müssen.
+Der Hauptteil der Übersetzungsarbeit wird mit diesem Werkzeug gemacht. Zuerst wählen Sie die Sprache, die Sie bearbeiten wollen und dann wählen Sie Sprachdatei-Module bearbeiten. Für eine vollständige Übersetzung des gesamten Systems müssen Sie alle diese Module übersetzen. Viele ziehen zuerst einmal die Module von index.php und includes/header.php vor, damit das Hauptmenü in ihrer Sprache erscheint. Von da aus können zuerst die wichtigsten Module bearbeitet werden oder alles nacheinander. Ein Merksystem sollte verwendet werden, damit Sie wissen, welche Module in den nachfolgenden Schritten noch bearbeitet werden müssen.
 <br /><br />
 Wenn Sie die Sprache und Module ausgewählt haben, klicken Sie auf Ausführen. Eine Oberfläche erscheint, in der die Zeichenketten des ausgewählten Moduls angezeigt werden und daneben ein Bereich, in den Sie die Übersetzung der Zeichenkette eintragen. Rechts davon ist eine Liste von Zeilennummern, wo die Zeichenkette innerhalb des Moduls vorkommt. Nachdem Sie die Übersetzungen eingetragen haben, klicken Sie Speichern, damit alle Änderungen gesichert werden.
 <br /><br />

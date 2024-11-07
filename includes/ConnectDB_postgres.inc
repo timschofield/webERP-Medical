@@ -1,32 +1,31 @@
 <?php
-
-/* $Id$ */
+/* Database abstraction for postgres */
 
 define ('LIKE','ILIKE');
 /* $PgConnStr = $PgConnStr = "host=".$host." dbname=".$_SESSION['DatabaseName']; */
 $PgConnStr = 'dbname='.$_SESSION['DatabaseName'];
 
-if ( isset($host) and ($host != "")) {
+if( isset($host) && ($host != "")) {
 	$PgConnStr = 'host='.$host.' '.$PgConnStr;
 }
 
-if ( isset( $dbuser ) and ($dbuser != "") ) {
-    // if we have a user we need to use password if supplied
-    $PgConnStr .= " user=".$dbuser;
-    if ( isset( $dbpassword ) and ($dbpassword != "") ) {
-	$PgConnStr .= " password=".$dbpassword;
-    }
+if( isset( $DBUser ) && ($DBUser != "") ) {
+	// if we have a user we need to use password if supplied
+	$PgConnStr .= " user=".$DBUser;
+	if( isset( $DBPassword ) && ($DBPassword != "") ) {
+		$PgConnStr .= " password=".$DBPassword;
+	}
 }
 
-global  $db;		// Make sure it IS global, regardless of our context
+global $db;		// Make sure it IS global, regardless of our context
 $db = pg_connect( $PgConnStr );
 
-if ( !$db ) {
-	if ($debug==1){
-		echo '<br />' . $PgConnStr . '<br />';
+if( !$db ) {
+	if($debug==1) {
+		echo '<br>' . $PgConnStr . '<br>';
 	}
-	echo '<br />' . _('The company name entered together with the configuration in the file config.php for the database user name and password do not provide the information required to connect to the database.') . '<br /><br />' . _(' Try logging in with an alternative company name.');
-	echo '<br /><a href="index.php">' . _('Back to login page') . '</a>';
+	echo '<br>' . _('The company name entered together with the configuration in the file config.php for the database user name and password do not provide the information required to connect to the database.') . '<br><br>' . _(' Try logging in with an alternative company name.');
+	echo '<br><a href="index.php">' . _('Back to login page') . '</a>';
 	unset($_SESSION['DatabaseName']);
 	exit;
 }
@@ -36,37 +35,36 @@ require_once ($PathPrefix .'includes/MiscFunctions.php');
 //DB wrapper functions to change only once for whole application
 
 function DB_query ($SQL,
-				&$Conn,
 				$ErrorMessage='',
 				$DebugMessage= '',
 				$Transaction=false,
-				$TrapErrors=true){
+				$TrapErrors=true) {
 
 	global $debug;
 	global $PathPrefix;
 
-	$result = pg_query($Conn, $SQL);
-	if ($DebugMessage == '') {
+	$result = pg_query($db, $SQL);
+	if($DebugMessage == '') {
 		$DebugMessage = _('The SQL that failed was:');
 	}
-	//if (DB_error_no($Conn) != 0){
-	if ( !$result AND $TrapErrors){
-		if ($TrapErrors){
-			require_once($PathPrefix . 'includes/header.inc');
+
+	if( !$result AND $TrapErrors) {
+		if($TrapErrors) {
+			require_once($PathPrefix . 'includes/header.php');
 		}
-		prnMsg($ErrorMessage.'<br />' . DB_error_msg($Conn),'error', _('DB ERROR:'));
-		if ($debug==1){
-			echo '<br />' . $DebugMessage. '<br />'.$SQL.'<br />';
+		prnMsg($ErrorMessage . '<BR>' . DB_error_msg(),'error', _('DB ERROR:'));
+		if($debug==1) {
+			echo '<BR>' . $DebugMessage. "<BR>$SQL<BR>";
 		}
-		if ($Transaction){
+		if($Transaction) {
 			$SQL = 'rollback';
-			$Result = DB_query($SQL,$Conn);
-			if (DB_error_no($Conn) !=0){
-				prnMsg('<br />'.  _('Error Rolling Back Transaction!!'), '', _('DB DEBUG:') );
+			$Result = DB_query($SQL);
+			if(DB_error_no() !=0) {
+				prnMsg('<br />' . _('Error Rolling Back Transaction!!'), '', _('DB DEBUG:') );
 			}
 		}
-		if ($TrapErrors){
-			include($PathPrefix . 'includes/footer.inc');
+		if($TrapErrors) {
+			include($PathPrefix . 'includes/footer.php');
 			exit;
 		}
 	}
@@ -74,82 +72,92 @@ function DB_query ($SQL,
 
 }
 
-function DB_fetch_row (&$ResultIndex) {
+function DB_fetch_row($ResultIndex) {
 	$RowPointer=pg_fetch_row($ResultIndex);
-	Return $RowPointer;
+	return $RowPointer;
 }
 
-function DB_fetch_assoc (&$ResultIndex) {
-
+function DB_fetch_assoc($ResultIndex) {
 	$RowPointer=pg_fetch_assoc($ResultIndex);
-	Return $RowPointer;
+	return $RowPointer;
 }
 
-function DB_fetch_array (&$ResultIndex) {
-	$RowPointer=pg_fetch_array($ResultIndex);
-	Return $RowPointer;
+function DB_fetch_array($ResultIndex) {
+	$RowPointer = pg_fetch_array($ResultIndex);
+	return $RowPointer;
 }
 
-function DB_data_seek (&$ResultIndex,$Record) {
+function DB_data_seek(&$ResultIndex,$Record) {
 	pg_result_seek($ResultIndex,$Record);
 }
 
-function DB_free_result (&$ResultIndex){
+function DB_free_result($ResultIndex) {
 	pg_free_result($ResultIndex);
 }
 
-function DB_num_rows (&$ResultIndex){
+function DB_num_rows($ResultIndex) {
 	return pg_num_rows($ResultIndex);
 }
 // Added by MGT
-function DB_affected_rows (&$ResultIndex){
+function DB_affected_rows($ResultIndex) {
 	return pg_affected_rows($ResultIndex);
 }
 
-function DB_error_no (&$Conn){
-	return DB_error_msg($Conn) == ""?0:-1;
+function DB_error_no() {
+	return DB_error_msg() == ""?0:-1;
 }
 
-function DB_error_msg(&$Conn){
-	return pg_last_error($Conn);
+function DB_error_msg() {
+	global $db;
+	return pg_last_error($db);
 }
 
-function DB_Last_Insert_ID(&$Conn, $table, $fieldname) {
-	$tempres = DB_query ("SELECT currval('".$table."_".$fieldname."_seq') FROM ".$table,$Conn);
+function DB_Last_Insert_ID($table, $fieldname) {
+	$tempres = DB_query ("SELECT currval('".$table."_".$fieldname."_seq') FROM ".$table);
 	$Res = pg_fetch_result( $tempres, 0, 0 );
 	DB_free_result($tempres);
 	return $Res;
 }
 
-function DB_escape_string($String){
-	Return pg_escape_string(htmlspecialchars($String, ENT_COMPAT, 'ISO-8859-1'));
+function DB_escape_string($String) {
+	return pg_escape_string(htmlspecialchars($String, ENT_COMPAT, 'ISO-8859-1'));
 }
 
 function INTERVAL( $val, $Inter ) {
-	global $dbtype;
-	return "\n(CAST( (" . $val . ") as text ) or ' ". $Inter ."')::interval\n";
+	return "\n(CAST( (" . $val . ") as text ) || ' ". $Inter ."')::interval\n";
 }
-function DB_show_tables (&$Conn){
-	$Result =DB_query("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'",$Conn);
-	Return $Result;
+function DB_show_tables() {
+	$Result =DB_query("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'");
+	return $Result;
 }
-function DB_show_fields($TableName,&$Conn){
-	$Result = DB_query("SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_name='" . $TableName . "'",$Conn);
-	if (DB_num_rows($Result)==1){
-		$Result = DB_query("SELECT column_name FROM information_schema.columns WHERE table_name ='$TableName'",$Conn);
-		Return $Result;
+function DB_show_fields($TableName) {
+	$Result = DB_query("SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_name='" . $TableName . "'");
+	if(DB_num_rows($Result)==1) {
+		$Result = DB_query("SELECT column_name FROM information_schema.columns WHERE table_name ='$TableName'");
+		return $Result;
 	}
 }
-function DB_Maintenance($Conn){
+function DB_Maintenance() {
 
 	prnMsg(_('The system has just run the regular database administration and optimisation routine'),'info');
 
-	$Result = DB_query('VACUUM ANALYZE',$Conn);
+	$Result = DB_query('VACUUM ANALYZE');
 
 	$Result = DB_query("UPDATE config
-				SET confvalue='" . Date('Y-m-d') . "'
-				WHERE confname='DB_Maintenance_LastRun'",
-				$Conn);
+				SET confvalue = CURRENT_DATE
+				WHERE confname = 'DB_Maintenance_LastRun'");
 }
 
+function DB_table_exists($TableName) {
+	global $db;
+
+	$SQL = "SELECT TABLE_NAME FROM information_schema.tables WHERE TABLE_SCHEMA = '" . $_SESSION['DatabaseName'] . "' AND TABLE_NAME = '" . $TableName . "'";
+	$Result = DB_query($SQL);
+
+	if (DB_num_rows($Result) > 0) {
+		return True;
+	} else {
+		return False;
+	}
+}
 ?>

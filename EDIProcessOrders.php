@@ -1,13 +1,13 @@
 <?php
 
-/* $Revision: 1.20 $ */
-/* $Id$*/
 
-include ('includes/session.inc');
+include ('includes/session.php');
 
-$title = _('Process EDI Orders');
+$Title = _('Process EDI Orders');
+$ViewTopic = 'EDI';
+$BookMark = '';
 
-include ('includes/header.inc');
+include ('includes/header.php');
 include('includes/SQL_CommonFunctions.inc'); // need for EDITransNo
 include('includes/htmlMimeMail.php'); // need for sending email attachments
 include('includes/DefineCartClass.php');
@@ -39,7 +39,7 @@ If the order processed ok then move the file to processed and go on to next file
 
 
 $sql = "SELECT id, segtag, maxoccur, seggroup FROM edi_orders_segs";
-$OrderSeg = DB_query($sql,$db);
+$OrderSeg = DB_query($sql);
 $i=0;
 $Seg = array();
 
@@ -51,18 +51,18 @@ while ($SegRow=DB_fetch_array($OrderSeg)){
 $TotalNoOfSegments = $i-1;
 
 /*get the list of files in the incoming orders directory - from config.php */
-$dirhandle = opendir($_SERVER['DOCUMENT_ROOT'] . '/' . $rootpath . '/' . $_SESSION['EDI_Incoming_Orders']);
+$dirhandle = opendir($_SERVER['DOCUMENT_ROOT'] . '/' . $RootPath . '/' . $_SESSION['EDI_Incoming_Orders']);
 
  while (false !== ($OrderFile=readdir($dirhandle))){ /*there are files in the incoming orders dir */
 
 	$TryNextFile = False;
-	echo "<br />$OrderFile";
+	echo '<br />' . $OrderFile;
 
 	/*Counter that keeps track of the array pointer for the 1st seg in the current seg group */
 	$FirstSegInGrp =0;
 	$SegGroup =0;
 
-	$fp = fopen($_SERVER['DOCUMENT_ROOT'] .'/$rootpath/'.$_SESSION['EDI_Incoming_Orders'].'/'.$OrderFile,'r');
+	$fp = fopen($_SERVER['DOCUMENT_ROOT'] .'/$RootPath/'.$_SESSION['EDI_Incoming_Orders'].'/'.$OrderFile,'r');
 
 	$SegID = 0;
 	$SegCounter =0;
@@ -77,11 +77,11 @@ $dirhandle = opendir($_SERVER['DOCUMENT_ROOT'] . '/' . $rootpath . '/' . $_SESSI
 	while ($LineText = fgets($fp) AND $TryNextFile != True){ /* get each line of the order file */
 
 		$LineText = StripTrailingComma($LineText);
-		echo "<br />".$LineText;
+		echo '<br />' . $LineText;
 
-		if ($SegTag != substr($LineText,0,3)){
+		if ($SegTag != mb_substr($LineText,0,3)){
 			$SegCounter=1;
-			$SegTag = substr($LineText,0,3);
+			$SegTag = mb_substr($LineText,0,3);
 		} else {
 			$SegCounter++;
 			if ($SegCounter > $Seg[$SegID]['MaxOccur']){
@@ -120,17 +120,17 @@ $dirhandle = opendir($_SERVER['DOCUMENT_ROOT'] . '/' . $rootpath . '/' . $_SESSI
 		echo '<br />' . _('The segment tag') . ' ' . $SegTag . ' ' . _('is being processed');
 		switch ($SegTag){
 			case 'UNH':
-				$UNH_elements = explode ('+',substr($LineText,4));
+				$UNH_elements = explode ('+',mb_substr($LineText,4));
 				$Order->Comments .= _('Customer EDI Ref') . ': ' . $UNH_elements[0];
 				$EmailText .= "\n" . _('EDI Message Ref') . ': ' . $UNH_elements[0];
-				if (substr($UNH_elements[1],0,6)!='ORDERS'){
+				if (mb_substr($UNH_elements[1],0,6)!='ORDERS'){
 					$EmailText .= "\n" . _('This message is not an order');
 					$TryNextFile = True;
 				}
 
 				break;
 			case 'BGM':
-				$BGM_elements = explode('+',substr($LineText,4));
+				$BGM_elements = explode('+',mb_substr($LineText,4));
 				$BGM_C002 = explode(':',$BGM_elements[0]);
 				switch ($BGM_C002[0]){
 					case '220':
@@ -141,7 +141,7 @@ $dirhandle = opendir($_SERVER['DOCUMENT_ROOT'] . '/' . $rootpath . '/' . $_SESSI
 						$Order->Comments .= "\n" . _('blanket order');
 						break;
 					case '224':
-						$EmailText .= "\n\n" . _('This order is URGENT') . "</font>";
+						$EmailText .= "\n\n" . _('This order is URGENT') . '</font>';
 						$Order->Comments .= "\n" . _('URGENT ORDER');
 						break;
 					case '226':
@@ -185,7 +185,7 @@ $dirhandle = opendir($_SERVER['DOCUMENT_ROOT'] . '/' . $rootpath . '/' . $_SESSI
 					$EmailText .= "\n" . _('Customers order ref') . ': ' . $BGM_C106[0];
 				}
 				if (isset($BGM_elements[2])){
-					echo "<br />echo BGM_elements[2] " .$BGM_elements[2];
+					echo '<br />echo BGM_elements[2] ' .$BGM_elements[2];
 					$BGM_1225 = explode(':',$BGM_elements[2]);
 					$MsgFunction = $BGM_1225[0];
 
@@ -240,7 +240,7 @@ $dirhandle = opendir($_SERVER['DOCUMENT_ROOT'] . '/' . $rootpath . '/' . $_SESSI
 				break;
 			case 'DTM':
 				/*explode into an arrage all items delimited by the : - only after the + */
-				$DTM_C507 = explode(':',substr($LineText,4));
+				$DTM_C507 = explode(':',mb_substr($LineText,4));
 				$LocalFormatDate = ConvertEDIDate($DTM_C507[1],$DTM_C507[2]);
 
 				switch ($DTM_C507[0]){
@@ -295,7 +295,7 @@ $dirhandle = opendir($_SERVER['DOCUMENT_ROOT'] . '/' . $rootpath . '/' . $_SESSI
 				break;
 			case 'PAI':
 				/*explode into an array all items delimited by the : - only after the + */
-				$PAI_C534 = explode(':',substr($LineText,4));
+				$PAI_C534 = explode(':',mb_substr($LineText,4));
 				if ($PAI_C534[0]=='1'){
 					$EmailText .= "\n" . _('Payment will be effected by a direct payment for this order');
 				} elseif($PAI_C534[0]=='OA'){
@@ -319,11 +319,11 @@ $dirhandle = opendir($_SERVER['DOCUMENT_ROOT'] . '/' . $rootpath . '/' . $_SESSI
 				}
 				break;
 			case 'ALI':
-				$ALI = explode('+',substr($LineText,4));
-				if (strlen($ALI[0])>1){
+				$ALI = explode('+',mb_substr($LineText,4));
+				if (mb_strlen($ALI[0])>1){
 					$EmailText .= "\n" . _('Goods of origin') . ' ' . $ALI[0];
 				}
-				if (strlen($ALI[1])>1){
+				if (mb_strlen($ALI[1])>1){
 					$EmailText .= "\n" . _('Duty regime code') . ' ' . $ALI[1];
 				}
 				switch ($ALI[2]){
@@ -348,17 +348,17 @@ $dirhandle = opendir($_SERVER['DOCUMENT_ROOT'] . '/' . $rootpath . '/' . $_SESSI
 				}
 				break;
 			case 'FTX':
-				$FTX = explode('+',substr($LineText,4));
+				$FTX = explode('+',mb_substr($LineText,4));
 				/*agreed coded text is not catered for ... yet
 				only free form text */
-				if (strlen($FTX[3])>5){
+				if (mb_strlen($FTX[3])>5){
 					$FTX_C108=explode(':',$FTX[3]);
 					$Order->Comments .= $FTX_C108[0] . " " . $FTX_C108[1] . ' ' . $FTX_C108[2] . ' ' . $FTX_C108[3] . ' ' . $FTX_C108[4];
 					$EmailText .= "\n" . $FTX_C108[0] . ' ' . $FTX_C108[1] . ' ' . $FTX_C108[2] . ' ' . $FTX_C108[3] . ' ' . $FTX_C108[4] . ' ';
 				}
 				break;
 			case 'RFF':
-				$RFF = explode(':',substr($LineText,4));
+				$RFF = explode(':',mb_substr($LineText,4));
 				switch ($RFF[0]){
 					case 'AE':
 						$MsgText = "\n" . _('Authorisation for expense no') . ' ' . $RFF[1];
@@ -405,7 +405,7 @@ $dirhandle = opendir($_SERVER['DOCUMENT_ROOT'] . '/' . $rootpath . '/' . $_SESSI
 				$EmailText .= $MsgText;
 				break;
 			case 'NAD':
-				$NAD = explode('+',substr($LineText,4));
+				$NAD = explode('+',mb_substr($LineText,4));
 				$NAD_C082 = explode(':', $NAD[1]);
 				$NAD_C058 = explode(':', $NAD[2]); /*Not used according to MIG */
 				$NAD_C080 = explode(':', $NAD[3]);
@@ -415,7 +415,7 @@ $dirhandle = opendir($_SERVER['DOCUMENT_ROOT'] . '/' . $rootpath . '/' . $_SESSI
 						/*Look up the EAN Code given $NAD[1] for the buyer */
 						if ($NAD_C082[2] ==9){
 						/*if NAD_C082[2] must = 9 then NAD_C082[0] is the EAN Intnat Article Numbering Assocn code of the customer - look up the customer by EDIReference*/
-							$InvoiceeResult = DB_query("SELECT debtorno FROM debtorsmaster WHERE edireference='" . $NAD_C082[0] . "' AND ediorders=1",$db);
+							$InvoiceeResult = DB_query("SELECT debtorno FROM debtorsmaster WHERE edireference='" . $NAD_C082[0] . "' AND ediorders=1");
 							if (DB_num_rows($InvoiceeResult)!=1){
 								$EmailText .= "\n" . _('The Buyer reference was specified as an EAN International Article Numbering Association code') . '. ' . _('Unfortunately the field EDIReference of any of the customers currently set up to receive EDI orders does not match with the code') . ' ' . $NAD_C082[0] . ' ' . _('used in this message') . '. ' . _('So that is the end of the road for this message');
 								$TryNextFile = True; /* Look for other EDI msgs */
@@ -426,7 +426,7 @@ $dirhandle = opendir($_SERVER['DOCUMENT_ROOT'] . '/' . $rootpath . '/' . $_SESSI
 							}
 							break;
 						}
-						if (strlen($NAD_C080[0])>0){
+						if (mb_strlen($NAD_C080[0])>0){
 							$Order->CustomerName = $NAD_C080[0];
 						}
 						break;
@@ -443,10 +443,10 @@ $dirhandle = opendir($_SERVER['DOCUMENT_ROOT'] . '/' . $rootpath . '/' . $_SESSI
 						/*Delivery Party - get the address and name etc */
 
 						/*Snag here - how do I figure out what branch to charge */
-						if (strlen($NAD_C080[0])>0){
+						if (mb_strlen($NAD_C080[0])>0){
 							$Order->DeliverTo = $NAD_C080[0];
 						}
-						if (strlen($NAD_C059[0])>0){
+						if (mb_strlen($NAD_C059[0])>0){
 							$Order->DelAdd1 = $NAD_C059[0];
 							$Order->DelAdd2 = $NAD_C059[1];
 							$Order->DelAdd3 = $NAD_C059[2];
@@ -458,22 +458,23 @@ $dirhandle = opendir($_SERVER['DOCUMENT_ROOT'] . '/' . $rootpath . '/' . $_SESSI
 					case 'SN':
 						/*Store Number - get the branch details from the store number - snag here too cos need to ensure got the Customer detail first before try looking up its branches */
 						$BranchResult = DB_query("SELECT branchcode,
-										brname,
-										braddress1,
-										braddress2,
-										braddress3,
-										braddress4,
-										braddress5,
-										braddress6,
-										contactname,
-										defaultlocation,
-										phoneno,
-										email
-									FROM custbranch INNER JOIN debtorsmaster ON custbranch.debtorno = custbranch.debtorno WHERE custbranchcode='" . $NAD_C082[0] . "' AND custbranch.debtorno='" . $Order->DebtorNo . "' AND debtorsmaster.ediorders=1",$db);
+														brname,
+														braddress1,
+														braddress2,
+														braddress3,
+														braddress4,
+														braddress5,
+														braddress6,
+														contactname,
+														defaultlocation,
+														phoneno,
+														email
+												FROM custbranch INNER JOIN debtorsmaster ON custbranch.debtorno = custbranch.debtorno WHERE custbranchcode='" . $NAD_C082[0] . "' AND custbranch.debtorno='" . $Order->DebtorNo . "' AND debtorsmaster.ediorders=1");
 						if (DB_num_rows($BranchResult)!=1){
 							$EmailText .= "\n" . _('The Store number was specified as') . ' ' . $NAD_C082[0] . ' ' . _('Unfortunately there are either no branches of customer code') . ' ' . $Order->DebtorNo . ' ' ._('or several that match this store number') . '. ' . _('This order could not be processed further');
 							$TryNextFile = True; /* Look for other EDI msgs */
-							$CreateOrder = False; /*Dont create order in system */						} else {
+							$CreateOrder = False; /*Dont create order in system */
+						} else {
 							$BranchRow = DB_fetch_array($BranchResult);
 							$Order->BranchCode = $BranchRow['branchcode'];
 							$Order->DeliverTo = $BranchRow['brname'];
@@ -512,7 +513,7 @@ $dirhandle = opendir($_SERVER['DOCUMENT_ROOT'] . '/' . $rootpath . '/' . $_SESSI
 		} /*end case  Seg Tag*/
 	} /*end while get next line of message */
 	/*Thats the end of the message or had to abort */
-	if (strlen($EmailText)>10){
+	if (mb_strlen($EmailText)>10){
 		/*Now send the email off to the appropriate person */
 		$mail = new htmlMimeMail();
 		$mail->setText($EmailText);
@@ -521,10 +522,10 @@ $dirhandle = opendir($_SERVER['DOCUMENT_ROOT'] . '/' . $rootpath . '/' . $_SESSI
 		if ($TryNextFile==True){ /*had to abort this message */
 			/* send the email to the sysadmin  - get email address from users*/
 
-			$Result = DB_query("SELECT realname, email FROM www_users WHERE fullaccess=7 AND email <>''",$db);
+			$Result = DB_query("SELECT realname, email FROM www_users WHERE fullaccess=7 AND email <>''");
 			if (DB_num_rows($Result)==0){ /*There are no sysadmins with email address specified */
 
-				$Recipients = array("'tim' <tim@localhost>");
+				$Recipients = array("'phil' <phil@localhost>");
 
 			} else { /*Make an array of the sysadmin recipients */
 				$Recipients = array();
@@ -539,13 +540,17 @@ $dirhandle = opendir($_SERVER['DOCUMENT_ROOT'] . '/' . $rootpath . '/' . $_SESSI
 		} else {
 
 			$mail->setSubject(_('EDI Order Message') . ' ' . $Order->CustRef);
-			$EDICustServPerson ="'tim' <tim@localhost>";
+			$EDICustServPerson = $_SESSION['PurchasingManagerEmail'];
 			$Recipients = array($EDICustServPerson);
 		}
 
+		if($_SESSION['SmtpSetting']==0){
+			$MessageSent = $mail->send($Recipients);
+		}else{
+			$MessageSent = SendmailBySmtp($mail,$Recipients);
+		}
 
 
-		$result = $mail->send($Recipients);
 
 		echo $EmailText;
 	} /* nothing in the email text to send - the message file is a complete dud - maybe directory */
@@ -554,16 +559,15 @@ $dirhandle = opendir($_SERVER['DOCUMENT_ROOT'] . '/' . $rootpath . '/' . $_SESSI
 
 
 
-
  } /*end of the loop around all the incoming order files in the incoming orders directory */
 
 
-include ('includes/footer.inc');
+include ('includes/footer.php');
 
 function StripTrailingComma ($StringToStrip){
 
 	if (strrpos($StringToStrip,"'")){
-		Return substr($StringToStrip,0,strrpos($StringToStrip,"'"));
+		Return mb_substr($StringToStrip,0,strrpos($StringToStrip,"'"));
 	} else {
 		Return $StringToStrip;
 	}

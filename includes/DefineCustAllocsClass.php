@@ -1,5 +1,4 @@
 <?php
-/* $Id$*/
 /* definition of the Debtor Receipt/Credit note allocation class */
 
 Class Allocation {
@@ -10,17 +9,20 @@ Class Allocation {
 	var $CustomerName;
 	var $TransType;
 	var $TransTypeName;
-	var $CurrCode;
 	var $TransNo;
 	var $TransDate;
 	var $TransExRate; /*Exchange rate of the transaction being allocated */
 	var $TransAmt; /*Total amount of the transaction in FX */
 	var $PrevDiffOnExch; /*The difference on exchange before this allocation */
+	var $CurrDecimalPlaces;
 
-
-	function Allocation(){
+	function __construct(){
 	/*Constructor function initialises a new debtor allocation*/
 		$this->Allocs = array();
+	}
+
+	function Allocation(){
+		self::__construct();
 	}
 
 	function add_to_AllocsAllocn ($ID, $TransType, $TypeNo, $TransDate, $AllocAmt, $TransAmount, $ExRate, $DiffOnExch, $PrevDiffOnExch, $PrevAlloc, $PrevAllocRecordID){
@@ -57,7 +59,7 @@ Class Allocn {
 				   THERE CAN BE ONLY ONE ... allocation record for each
 				   receipt/inovice combination  */
 
-	function Allocn ($ID, $TransType, $TypeNo, $TransDate, $AllocAmt, $TransAmount, $ExRate, $DiffOnExch, $PrevDiffOnExch, $PrevAlloc, $PrevAllocRecordID){
+	function __construct ($ID, $TransType, $TypeNo, $TransDate, $AllocAmt, $TransAmount, $ExRate, $DiffOnExch, $PrevDiffOnExch, $PrevAlloc, $PrevAllocRecordID){
 
 /* Constructor function to add a new Allocn object with passed params */
 		$this->ID =$ID;
@@ -73,6 +75,10 @@ Class Allocn {
 		$this->PrevAlloc = $PrevAlloc;
 		$this->PrevAllocRecordID= $PrevAllocRecordID;
 	}
+	function Allocn($ID, $TransType, $TypeNo, $TransDate, $AllocAmt, $TransAmount, $ExRate, $DiffOnExch, $PrevDiffOnExch, $PrevAlloc, $PrevAllocRecordID){
+		self::__construct($ID, $TransType, $TypeNo, $TransDate, $AllocAmt, $TransAmount, $ExRate, $DiffOnExch, $PrevDiffOnExch, $PrevAlloc, $PrevAllocRecordID);
+	}
+
 }
 
 ?>

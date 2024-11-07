@@ -16,7 +16,7 @@ class PDF extends PDF_Language {
 	var $pageY; // y value of bottom of page less bottom margin
 	var $PageCnt; // tracks the page count for correct page numbering for multipage and multiform printouts
 
-	function PDF() {
+	function __construct() {
 		global $Prefs;
 		define('RowSpace',2); // define separation between the heading rows
 		$PaperSize = explode(':',$Prefs['papersize']);
@@ -277,21 +277,21 @@ class PDF extends PDF_Language {
 		if ($CurWidth>($ColWidth*.90)) { // then it needs to be truncated
 			// for now we'll do an approximation based on averages and scale to 90% of the width to allow for variance
 			// A better aproach would be an recursive call to this function until the string just fits.
-			$NumChars = strlen($strData);
+			$NumChars = mb_strlen($strData);
 			// Reduce the string by 1-$percent and retest
-			$strData = $this->TruncData(substr($strData, 0, ($ColWidth/$CurWidth)*$NumChars*$percent), $ColWidth);
+			$strData = $this->TruncData(mb_substr($strData, 0, ($ColWidth/$CurWidth)*$NumChars*$percent), $ColWidth);
 		}
 		return $strData;
 	}
 
 	function ProcessData($strData, $Process) {
 		switch ($Process) {
-			case "uc": return strtoupper($strData);
+			case "uc": return mb_strtoupper($strData);
 			case "lc": return strtolower($strData);
 			case "neg": return -$strData;
-			case "rnd2d": return number_format($strData, 2);
-			case "dlr": return '$ '.number_format($strData, 2);
-			case "euro": return chr(128).' '.number_format($strData, 2); // assumes standard FPDF fonts
+			case "rnd2d": return locale_number_format($strData, $_SESSION['CompanyRecord']['decimalplaces']);
+			case "dlr": return '$ '.locale_number_format($strData, $_SESSION['CompanyRecord']['decimalplaces']);
+			case "euro": return chr(128).' '.locale_number_format($strData, $_SESSION['CompanyRecord']['decimalplaces']); // assumes standard FPDF fonts
 			default: return $strData; // do nothing if Process not recognized
 		}
 	}
@@ -299,20 +299,19 @@ class PDF extends PDF_Language {
 } // end class
 
 function BuildPDF($ReportID, $Prefs) {
-	global $db;
 	global $FieldListings, $FieldValues;
 	// first fetch all the fields we need to display
-	$FieldListings = '';
+	$FieldListings = [];
 	$sql = "SELECT seqnum, params FROM ".DBRptFields."
 		WHERE reportid=".$ReportID." AND entrytype='fieldlist' AND visible=1
 		ORDER BY seqnum";
-	$Result=DB_query($sql,$db,'','',false,true);
+	$Result=DB_query($sql,'','',false,true);
 	while ($FieldValues = DB_fetch_assoc($Result)) {
 		$FieldValues['params'] = unserialize($FieldValues['params']);
 		$FieldListings[] = $FieldValues;
 	}
 	// check for at least one field selected to show
-	if (!$FieldListings) { // No fields are checked to show, that's bad
+	if (!empty($FieldListings)) { // No fields are checked to show, that's bad
 		$usrMsg['message'] = RPT_NOROWS;
 		$usrMsg['level'] = 'error';
 		return $usrMsg;
@@ -332,14 +331,14 @@ function BuildPDF($ReportID, $Prefs) {
 		}
 	}
 	// strip the extra comma, space and continue
-	$strField = substr($strField,0,-2);
+	$strField = mb_substr($strField,0,-2);
 
 	// fetch date filter info
 	$df = $Prefs['DateListings']['fieldname'];
 	$Today = date('Y-m-d', time());
-	$ThisDay = substr($Today,8,2);
-	$ThisMonth = substr($Today,5,2);
-	$ThisYear = substr($Today,0,4);
+	$ThisDay = mb_substr($Today,8,2);
+	$ThisMonth = mb_substr($Today,5,2);
+	$ThisYear = mb_substr($Today,0,4);
 	// find total number of days in this month
 	if ($ThisMonth=='04' OR $ThisMonth=='06' OR $ThisMonth=='09' OR $ThisMonth=='11') {
 		$TotalDays=30;
@@ -362,7 +361,7 @@ function BuildPDF($ReportID, $Prefs) {
 			$d='';
 			if ($DateArray[1]<>'') $d .= $df.">='".FormatDateForSQL($DateArray[1])."'";
 			if ($DateArray[2]<>'') { // a value entered, check
-				if (strlen($d)>0) $d .= ' AND ';
+				if (mb_strlen($d)>0) $d .= ' AND ';
 				$d .= $df."<='".FormatDateForSQL($DateArray[2])."'";
 			}
 			break;
@@ -416,13 +415,13 @@ function BuildPDF($ReportID, $Prefs) {
 		$Params = explode(':',$FieldValues['params']);
 		switch ($Params[1]) {
 			case RPT_RANGE:
-				if (strlen($strCrit)>0) $strCrit .= ' AND ';
+				if (mb_strlen($strCrit)>0) $strCrit .= ' AND ';
 				$t='';
 				if (isset($Params[2])) { // a from value entered, check
 					$t .= $FieldValues['fieldname'].">='".($Params[2]."'");
 				}
 				if (isset($Params[3])) { // a to value entered, check
-					if (strlen($t)>0) $t .= ' AND ';
+					if (mb_strlen($t)>0) $t .= ' AND ';
 					$t .= $FieldValues['fieldname']."<='".($Params[3]."'");
 				}
 				$strCrit .= $t;
@@ -431,14 +430,14 @@ function BuildPDF($ReportID, $Prefs) {
 			case RPT_TRUE:
 			case RPT_ACTIVE:
 			case RPT_PRINTED:
-				if (strlen($strCrit)>0) $strCrit .= ' AND ';
+				if (mb_strlen($strCrit)>0) $strCrit .= ' AND ';
 				$strCrit .= $FieldValues['fieldname'].'=1';
 				break;
 			case RPT_NO:
 			case RPT_FALSE:
 			case RPT_INACTIVE:
 			case RPT_UNPRINTED:
-				if (strlen($strCrit)>0) $strCrit .= ' AND ';
+				if (mb_strlen($strCrit)>0) $strCrit .= ' AND ';
 				$strCrit .= $FieldValues['fieldname'].'=0';
 				break;
 			case RPT_STOCK: // TBD field to compare so default to nothing
@@ -468,7 +467,7 @@ function BuildPDF($ReportID, $Prefs) {
 	if ($sqlCrit) $sql .=' WHERE '.$sqlCrit;
 	$sql .=" GROUP BY ".$PageBreakField;
 	// execute sql to see if we have data
-	$Result=DB_query($sql,$db,'','',false,true);
+	$Result=DB_query($sql,'','',false,true);
 	if (DB_num_rows($Result)==0) {
 		$usrMsg['message'] = RPT_NOROWS;
 		$usrMsg['level'] = 'error';
@@ -491,9 +490,9 @@ function BuildPDF($ReportID, $Prefs) {
 		}
 	}
 	if ($strTxtBlk<>'') { // then we have data, fill in TextField value with data
-		$strTxtBlk = substr($strTxtBlk,0,-2);
+		$strTxtBlk = mb_substr($strTxtBlk,0,-2);
 		$sql = "SELECT ".$strTxtBlk." FROM ".CompanyDataBase." LIMIT 1;";
-		$Result=DB_query($sql,$db,'','',false,true);
+		$Result=DB_query($sql,'','',false,true);
 		$CoyData = DB_fetch_row($Result);
 		$i=0;
 		foreach ($FieldListings as $key=>$SingleObject) {
@@ -513,9 +512,9 @@ function BuildPDF($ReportID, $Prefs) {
 			}
 			$strTxtBlk=''; // Build the fieldlist
 			foreach ($SingleObject['params']['Seq'] as $OneField) $strTxtBlk .= $OneField['TblField'].', ';
-			$strTxtBlk = substr($strTxtBlk,0,-2);
+			$strTxtBlk = mb_substr($strTxtBlk,0,-2);
 			$sql = "SELECT ".$strTxtBlk." FROM ".CompanyDataBase." LIMIT 1;";
-			$Result=DB_query($sql,$db,'','',false,true);
+			$Result=DB_query($sql,'','',false,true);
 			$TxtBlkValues = DB_fetch_row($Result);
 			$TextField = '';
 			foreach($TxtBlkValues as $t=>$Temp) $TextField .= $Temp.AddSep($SingleObject['params']['Seq'][$t]['Processing']);
@@ -529,7 +528,7 @@ function BuildPDF($ReportID, $Prefs) {
 		if ($sqlCrit) $TrailingSQL=" FROM ".$sqlTable." WHERE ".$sqlCrit." AND ".$PageBreakField."='".$Fvalue."'";
 			else $TrailingSQL =" FROM ".$sqlTable." WHERE ".$PageBreakField."='".$Fvalue."'";
 		$sql = "SELECT " . $strField . $TrailingSQL;
-		$Result=DB_query($sql,$db,'','',false,true);
+		$Result=DB_query($sql,'','',false,true);
 		$FieldValues = DB_fetch_row($Result);
 		// Build the text block strings
 		foreach ($FieldListings as $key=>$SingleObject) {
@@ -541,9 +540,9 @@ function BuildPDF($ReportID, $Prefs) {
 				}
 				$strTxtBlk=''; // Build the fieldlist
 				foreach ($SingleObject['params']['Seq'] as $OneField) $strTxtBlk .= $OneField['TblField'].', ';
-				$strTxtBlk = substr($strTxtBlk,0,-2);
+				$strTxtBlk = mb_substr($strTxtBlk,0,-2);
 				$sql = "SELECT ".$strTxtBlk.$TrailingSQL;
-				$Result=DB_query($sql,$db,'','',false,true);
+				$Result=DB_query($sql,'','',false,true);
 				$TxtBlkValues = DB_fetch_row($Result);
 				$TextField = '';
 				foreach($TxtBlkValues as $t=>$Temp) $TextField .= $Temp.AddSep($SingleObject['params']['Seq'][$t]['Processing']);
@@ -567,16 +566,18 @@ function BuildPDF($ReportID, $Prefs) {
 				}
 				// Build the sql
 				$tblField = '';
-				$tblHeading = '';
+				$tblHeading = array();
 				foreach ($SingleObject['params']['Seq'] as $TableField) {
 					$tblField .= $TableField['TblField'].', ';
 					$tblHeading[] = $TableField['TblDesc'];
 				}
-				$tblField = substr($tblField,0,-2); // remove the last two chars (comma and space)
-				$SingleObject['params']['Data'][] = $tblHeading; // set the first data element to the headings
+				$tblField = mb_substr($tblField,0,-2); // remove the last two chars (comma and space)
+				$SingleObject['params']['Data'] = [$tblHeading]; // set the first data element to the headings
 				$sql = "SELECT ".$tblField.$TrailingSQL;
-				$Result=DB_query($sql,$db,'','',false,true);
-				while ($Temp = DB_fetch_assoc($Result)) $SingleObject['params']['Data'][] = $Temp;
+				$Result=DB_query($sql,'','',false,true);
+				while ($Temp = DB_fetch_assoc($Result)){
+                    $SingleObject['params']['Data'][] = $Temp;
+                }
 				$pdf->FormTable($SingleObject['params']);
 			}
 		}
@@ -590,8 +591,8 @@ function BuildPDF($ReportID, $Prefs) {
 				}
 				$ttlField = '';
 				foreach ($SingleObject['params']['Seq'] as $Temp) $ttlField .= $Temp.'+';
-				$sql = "SELECT SUM(".substr($ttlField,0,-1).")".$TrailingSQL;
-				$Result=DB_query($sql,$db,'','',false,true);
+				$sql = "SELECT SUM(".mb_substr($ttlField,0,-1).")".$TrailingSQL;
+				$Result=DB_query($sql,'','',false,true);
 				$Temp = DB_fetch_row($Result);
 				$FieldListings[$key]['params']['TextField'] = $Temp[0];
 			}

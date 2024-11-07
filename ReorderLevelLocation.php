@@ -1,25 +1,27 @@
 <?php
 
-/* $Id: ReorderLevelLocation.php 5246 2012-04-16 01:59:04Z tehonu $*/
 
 // ReorderLevelLocation.php - Report of reorder level by category
 
-include('includes/session.inc');
+include('includes/session.php');
 
-$title=_('Reorder Level Location Reporting');
-include('includes/header.inc');
+$Title=_('Reorder Level Location Reporting');
+$ViewTopic = 'Inventory';
+$BookMark = '';
+include('includes/header.php');
 
-echo '<p class="page_title_text"><img src="'.$rootpath.'/css/'.$theme.'/images/inventory.png" title="' . _('Inventory') . '" alt="" />' . ' ' . _('Inventory Reorder Level Location Report') . '</p>';
+echo '<p class="page_title_text"><img src="'.$RootPath.'/css/'.$Theme.'/images/inventory.png" title="' . _('Inventory') . '" alt="" />' . ' ' . _('Inventory Reorder Level Location Report') . '</p>';
 
 
 //update database if update pressed
 if (isset($_POST['submit'])){
 	for ($i=1;$i<count($_POST);$i++){ //loop through the returned customers
-		if (isset($_POST['StockID' . $i]) AND is_numeric(filter_number_input($_POST['ReorderLevel'.$i]))){
-			$SQLUpdate="UPDATE locstock SET reorderlevel = '" . filter_number_input($_POST['ReorderLevel'.$i]) . "'
+		if (isset($_POST['StockID' . $i]) AND is_numeric(filter_number_format($_POST['ReorderLevel'.$i]))){
+			$SQLUpdate="UPDATE locstock SET reorderlevel = '" . filter_number_format($_POST['ReorderLevel'.$i]) . "',
+											bin = '" . strtoupper($_POST['BinLocation'.$i]) . "'
 						WHERE loccode = '" . $_POST['StockLocation'] . "'
 						AND stockid = '" . $_POST['StockID' . $i] . "'";
-			$Result = DB_query($SQLUpdate,$db);
+			$Result = DB_query($SQLUpdate);
 		}
 	}
 }
@@ -39,49 +41,45 @@ if (isset($_POST['submit']) OR isset($_POST['Update'])) {
 	$sql="SELECT locstock.stockid,
 				description,
 				reorderlevel,
-				decimalplaces
+				bin,
+				quantity,
+				decimalplaces,
+				canupd
 			FROM locstock INNER JOIN stockmaster
 			ON locstock.stockid = stockmaster.stockid
+			INNER JOIN locationusers ON locationusers.loccode=locstock.loccode AND locationusers.userid='" .  $_SESSION['UserID'] . "' AND locationusers.canview=1
 			WHERE stockmaster.categoryid = '" . $_POST['StockCat'] . "'
 			AND locstock.loccode = '" . $_POST['StockLocation'] . "'
 			AND stockmaster.discontinued = 0
 			ORDER BY '" . $Sequence . "' ASC";
 
-	$result = DB_query($sql,$db);
+	$result = DB_query($sql);
 
 	$SqlLoc="SELECT locationname
 		   FROM locations
 		   WHERE loccode='".$_POST['StockLocation']."'";
 
-	$ResultLocation = DB_query($SqlLoc,$db);
+	$ResultLocation = DB_query($SqlLoc);
 	$Location=DB_fetch_array($ResultLocation);
 
 	echo'<p class="page_title_text"><strong>' . _('Location : ') . '' . $Location['locationname'] . ' </strong></p>';
 	echo'<p class="page_title_text"><strong>' . _('Number Of Days Sales : ') . '' . locale_number_format($_POST['NumberOfDays'],0) . '' . _(' Days ') . ' </strong></p>';
-	$k=0; //row colour counter
-	echo '<form action="ReorderLevelLocation.php" method="post" id="Update">';
+
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8') . '" method="post" id="Update">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	echo '<table class="selection">';
-	echo '<tr>
-			<th>' . _('Code') . '</th>
-			<th>' . _('Description') . '</th>
-			<th>' . _('Total Invoiced').'<br />'._('At All Locations') . '</th>
-			<th>' . _('Total Invoiced').'<br />'._('At Location') . '</th>
-			<th>' . _('On Hand') .'<br />'._('At All Locations') . '</th>
-			<th>' . _('On Hand') .'<br />' ._('At Location') . '</th>
-			<th>' . _('Reorder Level') . '</th>
-		</tr>';
+    echo '<table>';
+    echo '<tr>
+            <th>' . _('Code') . '</th>
+            <th>' . _('Description') . '</th>
+            <th>' . _('Total Invoiced') . '<br />' . _('At Location') . '</th>
+            <th>' . _('On Hand')  . '<br />' . _('At All Locations') . '</th>
+            <th>' . _('On Hand')  . '<br />' ._('At Location') . '</th>
+            <th>' . _('Reorder Level') . '</th>
+            <th>' . _('Bin Location') . '</th>
+        </tr>';
 
 	$i=1;
 	while ($myrow=DB_fetch_array($result))	{
-
-		if ($k==1){
-			echo '<tr class="EvenTableRows"><td>';
-			$k=0;
-		} else {
-			echo '<tr class="OddTableRows"><td>';
-			$k=1;
-		}
 
 		//variable for update data
 
@@ -96,112 +94,109 @@ if (isset($_POST['submit']) OR isset($_POST['Update'])) {
 				WHERE stockid='".$myrow['stockid']."'
 				AND (type=10 OR type=11)
 				AND loccode='" . $_POST['StockLocation'] ."'
-				AND trandate >= '" . FormatDateForSQL(DateAdd(Date($_SESSION['DefaultDateFormat']),'d',-filter_number_input($_POST['NumberOfDays']))) . "'";
+				AND trandate >= '" . FormatDateForSQL(DateAdd(Date($_SESSION['DefaultDateFormat']),'d',-filter_number_format($_POST['NumberOfDays']))) . "'";
 
-		$ResultInvQty = DB_query($SqlInv,$db);
+		$ResultInvQty = DB_query($SqlInv);
 		$SalesRow=DB_fetch_array($ResultInvQty);
-
-
-		$SqlInvAll="SELECT SUM(-qty) AS qtyinvoiced
-				FROM stockmoves
-				WHERE stockid='".$myrow['stockid']."'
-				AND (type=10 OR type=11)
-				AND trandate >= '" . FormatDateForSQL(DateAdd(Date($_SESSION['DefaultDateFormat']),'d',-filter_number_input($_POST['NumberOfDays']))) . "'";
-
-		$ResultInvQtyAll = DB_query($SqlInvAll,$db);
-		$SalesRowAll=DB_fetch_array($ResultInvQtyAll);
 
 
 		//get On Hand all
 		//find the quantity onhand item
 		$SqlOH="SELECT SUM(quantity) AS qty
 				FROM locstock
+				INNER JOIN locationusers ON locationusers.loccode=locstock.loccode AND locationusers.userid='" .  $_SESSION['UserID'] . "' AND locationusers.canview=1
 				WHERE stockid='" . $myrow['stockid'] . "'";
-		$TotQtyResult = DB_query($SqlOH,$db);
+		$TotQtyResult = DB_query($SqlOH);
 		$TotQtyRow = DB_fetch_array($TotQtyResult);
 
-		//get On Hand in Location
-		$SqlOHLoc="SELECT SUM(quantity) AS qty
-					FROM locstock
-					WHERE stockid='" . $myrow['stockid'] . "'
-					AND locstock.loccode = '" . $_POST['StockLocation'] . "'";
-		$LocQtyResult = DB_query($SqlOHLoc,$db);
-		$LocQtyRow = DB_fetch_array($LocQtyResult);
-
-		echo $myrow['stockid'].'</td>
-			<td>'.$myrow['description'].'</td>
-			<td class="number">'.locale_number_format($SalesRowAll['qtyinvoiced'],$myrow['decimalplaces']).'</td>
-			<td class="number">'.locale_number_format($SalesRow['qtyinvoiced'],$myrow['decimalplaces']).'</td>
-			<td class="number">'.locale_number_format($TotQtyRow['qty'],$myrow['decimalplaces']).'</td>
-			<td class="number">'.locale_number_format($LocQtyRow['qty'],$myrow['decimalplaces']).'</td>
-			<td><input type="text" class="number" name="ReorderLevel' . $i .'" maxlength="10" size="10" value="'. locale_number_format($myrow['reorderlevel'],0) .'" />
+		echo '<tr class="striped_row">
+			<td>' . $myrow['stockid'] . '</td>
+			<td>' . $myrow['description'] . '</td>
+			<td class="number">' . locale_number_format($SalesRow['qtyinvoiced'],$myrow['decimalplaces']) . '</td>
+			<td class="number">' . locale_number_format($TotQtyRow['qty'],$myrow['decimalplaces']) . '</td>
+			<td class="number">' . locale_number_format($myrow['quantity'],$myrow['decimalplaces']) . '</td>
+			<td class="number">';
+		if ($myrow['canupd']==1) {
+			echo '<input type="text" class="number" name="ReorderLevel' . $i .'" maxlength="10" size="10" value="'. locale_number_format($myrow['reorderlevel'],0) .'" />
 				<input type="hidden" name="StockID' . $i . '" value="' . $myrow['stockid'] . '" /></td>
+			<td><input type="text" name="BinLocation' . $i .'" maxlength="10" size="10" value="'. $myrow['bin'] .'" />';
+		} else {
+			echo locale_number_format($myrow['reorderlevel'],0) . '</td><td>' . $myrow['bin'] . '</td>';
+		}
+
+		echo '</td>
 			</tr> ';
 		$i++;
 	} //end of looping
 	echo'<tr>
-			<td style="text-align:center" colspan="7">
-				<button type="submit" name="submit">' . _('Update') . '</button>
+			<td class="centre" colspan="7">
+				<input type="submit" name="submit" value="' . _('Update') . '" />
 			</td>
 		</tr>
-		</table>
-		</form><br />';
+        </table>
+		</form>';
+
 
 } else { /*The option to submit was not hit so display form */
 
 
-	echo '<div class="page_help_text">' . _('Use this report to display the reorder levels for Inventory items in different categories.') . '</div><br />';
+	echo '<div class="page_help_text">' . _('Use this report to display the reorder levels for Inventory items in different categories.') . '</div>';
 
-	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '" method="post">
-		<div>';
+	echo '<form action="' . htmlspecialchars($_SERVER['PHP_SELF'],ENT_QUOTES,'UTF-8') . '" method="post">';
 	echo '<input type="hidden" name="FormID" value="' . $_SESSION['FormID'] . '" />';
-	$sql = "SELECT loccode,
+	$sql = "SELECT locations.loccode,
 				   locationname
-			FROM locations";
-	$resultStkLocs = DB_query($sql,$db);
-	echo '<table class="selection">
-			<tr>
-				<td>' . _('Location') . ':</td>
-				<td><select name="StockLocation"> ';
+		    FROM locations INNER JOIN locationusers ON locationusers.loccode=locations.loccode AND locationusers.userid='" .  $_SESSION['UserID'] . "' AND locationusers.canview=1";
+	$resultStkLocs = DB_query($sql);
+	echo '<fieldset>
+			<legend>', _('Report Criteria'), '</legend>
+			<field>
+				<label for="StockLocation">' . _('Location') . ':</label>
+				<select name="StockLocation"> ';
 
 	while ($myrow=DB_fetch_array($resultStkLocs)){
 		echo '<option value="' . $myrow['loccode'] . '">' . $myrow['locationname'] . '</option>';
 	}
-	echo '</select></td></tr>';
+	echo '</select>
+		</field>';
 
 	$SQL="SELECT categoryid,
 				categorydescription
 			FROM stockcategory
 			ORDER BY categorydescription";
 
-	$result1 = DB_query($SQL,$db);
+	$result1 = DB_query($SQL);
 
-	echo '<tr><td>' . _('Category') . ':</td>
-				<td><select name="StockCat">';
+	echo '<field>
+			<label for="StockCat">' . _('Category') . ':</label>
+			<select name="StockCat">';
 
 	while ($myrow1 = DB_fetch_array($result1)) {
 		echo '<option value="' . $myrow1['categoryid'] . '">' . $myrow1['categorydescription'] . '</option>';
 	}
 
-	echo '</select></td></tr>';
-	echo '<tr>
-			<td>' . _('Number Of Days Sales') . ':</td>
-			<td><input type="text" class="number" name="NumberOfDays" maxlength="3" size="4" value="0" /></td>
-		  </tr>';
-	echo '<tr>
-			<td>' . _('Order By') . ':</td>
-			<td><select name="Sequence">
-				<option value="1">'. _('Total Invoiced') . '</option>
-				<option value="2">'. _('Item Code') . '</option>
-				</select></td>
-		</tr>';
-	echo '</table>
-			<br />
+	echo '</select>
+		</field>';
+
+	echo '<field>
+			<label for="NumberOfDays">' . _('Number Of Days Sales') . ':</label>
+			<input type="text" class="number" name="NumberOfDays" maxlength="3" size="4" value="0" />
+		</field>';
+
+	echo '<field>
+			<label for="Sequence">' . _('Order By') . ':</label>
+			<select name="Sequence">
+				<option value="1">' .  _('Total Invoiced') . '</option>
+				<option value="2">' .  _('Item Code') . '</option>
+			</select>
+		</field>';
+
+	echo '</fieldset>
 			<div class="centre">
-				<button type="submit" name="submit">' . _('Submit') . '</button>
+				<input type="submit" name="submit" value="' . _('Submit') . '" />
 			</div>';
-	echo '<br /></form>';
+    echo '</form>';
 
 } /*end of else not submit */
-include('includes/footer.inc');
+include('includes/footer.php');
 ?>

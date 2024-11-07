@@ -1,16 +1,9 @@
 <?php
-/* $Id: api_session.inc 3352 2010-02-19 09:46:15Z lindsayh $*/
 
 if (!isset($PathPrefix)) {
 	$PathPrefix='';
 }
-if (!file_exists($PathPrefix . 'config.php')){
-	$rootpath = dirname(htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES, 'UTF-8'));
-	if ($rootpath == '/' OR $rootpath == "\\") {
-		$rootpath = '';
-	}
-	header('Location:' . $rootpath . '/install/index.php');
-}
+
 include($PathPrefix . 'config.php');
 
 if (isset($SessionSavePath)){
@@ -40,7 +33,7 @@ if (!isset($_SESSION['AttemptsCounter'])){
 	$_SESSION['AttemptsCounter'] = 0;
 }
 
-if (isset($_SESSION['HTTPS_Only']) and $_SESSION['HTTPS_Only']==1){
+if (isset($_SESSION['HTTPS_Only']) AND $_SESSION['HTTPS_Only']==1){
 	if ($_SERVER['HTTPS']!='on'){
 		prnMsg(_('webERP is configured to allow only secure socket connections. Pages must be called with https://') . ' .....','error');
 		exit;
@@ -52,50 +45,38 @@ if (isset($_SESSION['HTTPS_Only']) and $_SESSION['HTTPS_Only']==1){
 // arrays defining access for each group of users. These definitions can be modified by a system admin under setup
 
 
-if (isset($_SESSION['AllowedPageSecurityTokens']) and !is_array($_SESSION['AllowedPageSecurityTokens']) AND !isset($AllowAnyone)) {
-/*  NO HTML output - but may need an XMLRPC style error message here.
-	Lindsay: 12Jan10
-	$title = _('Account Error Report');
-	include($PathPrefix . 'includes/header.inc');
-	echo '<br /><br /><br />';
-	prnMsg(_('Security settings have not been defined for your user account. Please advise your system administrator. It could also be that there is a session problem with your PHP web server'),'error');
-	include($PathPrefix . 'includes/footer.inc');
- */
-	exit;
-}
-
-if (!isset($AllowAnyone)){
-	if ((!in_array($PageSecurity, $_SESSION['AllowedPageSecurityTokens']) OR !isset($PageSecurity))) {
-		exit;
-	}
+function CryptPass( $Password ) {
+    if (PHP_VERSION_ID < 50500) {
+        $salt = base64_encode(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM));
+        $salt = str_replace('+', '.', $salt);
+        $hash = crypt($Password, '$2y$10$'.$salt.'$');
+    } else {
+        $hash = password_hash($Password,PASSWORD_DEFAULT);
+    }
+    return $hash;
  }
 
-function CryptPass( $Password ) {
-	global $CryptFunction;
-	if ( $CryptFunction == 'sha1' ) {
-		return sha1($Password);
-	} elseif ( $CryptFunction == 'md5' ) {
-		return md5($Password);
-	} else {
-		return $Password;
-	}
+ function VerifyPass($Password,$Hash) {
+     if(PHP_VERSION_ID < 50500) {
+         return (crypt($Password,$Hash)==$Hash);
+     } else {
+         return password_verify($Password,$Hash);
+     }
  }
 
 // API wrapper for DB issues - no HTML output, AND remember any error message
-function api_DB_query( $sql, $db, $EMsg= '', $DMsg= '', $Transaction='', $TrapErrors=false )
+function api_DB_query( $sql, $EMsg= '', $DMsg= '', $Transaction='', $TrapErrors=false )
 {
     //  Basically we have disabled the error reporting from the standard
     //  query function,  and will remember any error message in the session
     //  data.
 
-    $result = DB_query($sql, $db, $Emsg, $Dmsg, $Transaction, $TrapErrors);
-    if (DB_error_no($db) != 0)
-    {
-	$_SESSION['db_err_msg'] = "SQL: " . $sql . "\nDB error message: " .
-					DB_error_msg($db) . "\n";
-    }
-    else
-	$_SESSION['db_err_msg'] = '';
+    $result = DB_query($sql, $EMsg, $DMsg, $Transaction, $TrapErrors);
+    if (DB_error_no() != 0) {
+		$_SESSION['db_err_msg'] = "SQL: " . $sql . "\nDB error message: " . DB_error_msg() . "\n";
+    } else {
+		$_SESSION['db_err_msg'] = '';
+	}
 
     return  $result;
 }

@@ -19,7 +19,7 @@ $GlobalTags = array('id'=>array('desc'=> _('Label id'),
  */
 $DimensionTags = array(
     'Unit'=>array('desc'=>_('Units'),'type'=>'s',
-	'values'=>array('pt'=>'pt', 'in'=>'in', 'mm'=>'mm', 'cm'=>'cm' ) ), // select
+    'values'=>array('pt'=>'pt', 'in'=>'in', 'mm'=>'mm', 'cm'=>'cm' ) ), // select
     'Rows'=>array('desc'=>_('Rows per sheet'),'type'=>'i','sz'=>2,'maxsz'=>3), // integer numeric
     'Cols'=>array('desc'=>_('Cols per sheet'),'type'=>'i','sz'=>2,'maxsz'=>3),
     'Sh'=>array('desc'=>_('Sheet height'),'type'=>'n','sz'=>5,'maxsz'=>8),  // float numeric
@@ -164,12 +164,12 @@ class LabelList extends SimpleXMLElement {
  *  @return nothing
  */
 function abortMsg($msg) {
-    global $rootpath, $DefaultClock, $Version, $theme;
-    $title=_('No label templates exist');
-    include ('includes/header.inc');
+    global $RootPath, $DefaultClock, $Version, $Theme;
+    $Title=_('No label templates exist');
+    include ('includes/header.php');
     echo '<br />';
     prnMsg( $msg, 'error');
-    include ('includes/footer.inc');
+    include ('includes/footer.php');
     exit;
 }
 ?>
