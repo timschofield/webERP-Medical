@@ -81,9 +81,9 @@ while ($MyRow = DB_fetch_array($Result)) {
 			<td>', $MyRow['material_note'], '</td>
 			<td>', $MyRow['diagnosis_note'], '</td>
 			<td>', $ImmuneSuppressed, '</td>
-			<td><a href="', $RootPath, '/KCMCRequestBacteriologyTest.php?Edit=Yes&SelectedBatch=', $MyRow['batch_nr'], '">', _('Edit Batch'), '</a></td>
-			<td><a href="', $RootPath, '/KCMCViewBacteriologyTest.php?SelectedBatch=', $MyRow['batch_nr'], '">', _('View Batch'), '</a></td>
-			<td><a href="', $RootPath, '/KCMCEnterBacteriologyTestResults.php?Batch=', $MyRow['batch_nr'], '">', _('Enter Results'), '</a></td>
+			<td><a href="', $RootPath, '/MedRequestBacteriologyTest.php?Edit=Yes&SelectedBatch=', $MyRow['batch_nr'], '">', _('Edit Batch'), '</a></td>
+			<td><a href="', $RootPath, '/MedViewBacteriologyTest.php?SelectedBatch=', $MyRow['batch_nr'], '">', _('View Batch'), '</a></td>
+			<td><a href="', $RootPath, '/MedEnterBacteriologyTestResults.php?Batch=', $MyRow['batch_nr'], '">', _('Enter Results'), '</a></td>
 		</tr>';
 }
 
@@ -91,7 +91,7 @@ echo '</tbody>
 	</table>';
 
 echo '<div class="centre">
-		<a href="', $RootPath, '/KCMCBacteriologyLaboratory.php">', _('Return to Bacteriology Centre'), '</a>
+		<a href="', $RootPath, '/MedBacteriologyLaboratory.php">', _('Return to Bacteriology Centre'), '</a>
 	</div>';
 
 include ('includes/footer.php');

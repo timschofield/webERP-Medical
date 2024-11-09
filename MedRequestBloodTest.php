@@ -409,7 +409,7 @@ if (isset($SelectedPatient) and $SelectedPatient != '') {
 			</select>
 		</field>';
 
-	include ('includes/KCMCDrawPatientLabel.php');
+	include ('includes/MedDrawPatientLabel.php');
 	echo '</fieldset>
 		</div>';
 

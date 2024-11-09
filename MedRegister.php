@@ -210,8 +210,8 @@ if (isset($_POST['Create'])) {
 		prnMsg(_('The patient') . ' ' . $_POST['FileNumber'] . ' ' . _('has been successfully registered'), 'success');
 
 		echo '<div class="centre">
-				<a href="', $RootPath, '/KCMCInpatientAdmission.php?SelectedPatient=', $PID, '">', _('Admit as Inpatient'), '</a><br />
-				<a href="', $RootPath, '/KCMCOutpatientAdmission.php?SelectedPatient=', $PID, '">', _('Admit as Outpatient'), '</a>
+				<a href="', $RootPath, '/MedInpatientAdmission.php?SelectedPatient=', $PID, '">', _('Admit as Inpatient'), '</a><br />
+				<a href="', $RootPath, '/MedOutpatientAdmission.php?SelectedPatient=', $PID, '">', _('Admit as Outpatient'), '</a>
 			</div>';
 
 		unset($_POST['FileNumber']);
@@ -342,7 +342,7 @@ if (isset($_POST['Create'])) {
 		prnMsg(_('The patient') . ' ' . $_POST['FileNumber'] . ' ' . _('has been successfully updated'), 'success');
 
 		echo '<div class="centre">
-				<a href="', $RootPath, '/KCMCSelectPatient.php?Select=', $SelectedPatient, '">', _('Return to Patient Screen'), '</a>
+				<a href="', $RootPath, '/MedSelectPatient.php?Select=', $SelectedPatient, '">', _('Return to Patient Screen'), '</a>
 			</div>';
 
 		unset($_POST['FileNumber']);

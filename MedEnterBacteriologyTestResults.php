@@ -12,7 +12,7 @@ if (isset($_POST['Batch'])) {
 } else {
 	prnMsg(_('You must first select a batch of tests to view'), 'warn');
 	echo '<div class="centre">
-			<a href="', $RootPath, '/KCMCPendingBacteriologyTests.php>', _('Select a batch to view'), '</a>
+			<a href="', $RootPath, '/MedPendingBacteriologyTests.php>', _('Select a batch to view'), '</a>
 		</div>';
 	include ('includes/footer.php');
 	exit;
@@ -780,7 +780,7 @@ echo '</fieldset>
 echo '<div class="baclab_label">
 		<fieldset>
 			<legend>', _('Label'), '</legend>';
-include ('includes/KCMCDrawPatientLabel.php');
+include ('includes/MedDrawPatientLabel.php');
 echo '</fieldset>
 	</div>'; // Label
 echo '<div class="baclab_batch_details">

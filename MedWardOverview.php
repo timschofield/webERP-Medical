@@ -80,7 +80,7 @@ if (isset($_SESSION['WardID'])) {
 			<legend><img alt="" src="', $RootPath . '/css/', $_SESSION['Theme'], '/images/transactions.png" title="', _('Ward Transactions'), '" />', _('Ward Transactions'), '</legend>
 			<ul>
 				<li class="MenuItem">
-					<a href="KCMCAllocatePatientsToBeds.php?SelectedWard=', $_SESSION['WardID'], '">', _('Allocate Patients to beds'), '</a>
+					<a href="MedAllocatePatientsToBeds.php?SelectedWard=', $_SESSION['WardID'], '">', _('Allocate Patients to beds'), '</a>
 				</li>
 			<ul>
 		</fieldset>';
@@ -89,10 +89,10 @@ if (isset($_SESSION['WardID'])) {
 			<legend><img alt="" src="', $RootPath . '/css/', $_SESSION['Theme'], '/images/maintenance.png" title="', _('Ward Maintenance'), '" />', _('Ward Maintenance'), '</legend>
 			<ul>
 				<li class="MenuItem">
-					<a href="KCMCMaintainWards.php?SelectedWard=', $_SESSION['WardID'], '">', _('Maintain ward details'), '</a>
+					<a href="MedMaintainWards.php?SelectedWard=', $_SESSION['WardID'], '">', _('Maintain ward details'), '</a>
 				</li>
 				<li class="MenuItem">
-					<a href="KCMCMaintainWardRooms.php?SelectedWard=', $_SESSION['WardID'], '">', _('Maintain details of rooms in the ward'), '</a>
+					<a href="MedMaintainWardRooms.php?SelectedWard=', $_SESSION['WardID'], '">', _('Maintain details of rooms in the ward'), '</a>
 				</li>
 			</ul>
 		</fieldset>';

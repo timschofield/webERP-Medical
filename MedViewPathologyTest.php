@@ -12,7 +12,7 @@ if (isset($_POST['Batch'])) {
 } else {
 	prnMsg(_('You must first select a batch of tests to view'), 'warn');
 	echo '<div class="centre">
-			<a href="', $RootPath, '/KCMCPendingPathologyTests.php>', _('Select a batch to view'), '</a>
+			<a href="', $RootPath, '/MedPendingPathologyTests.php>', _('Select a batch to view'), '</a>
 		</div>';
 	include ('includes/footer.php');
 	exit;
@@ -122,7 +122,7 @@ if (isset($_POST['SendRequest'])) {
 		prnMsg(_('The batch of tests has been updated successfully'), 'success');
 		unset($SelectedBatch);
 		echo '<div class="centre">
-				<a href="KCMCPathologyLaboratory.php">', _('Return to Pathology Laboratory'), '</a>
+				<a href="MedPathologyLaboratory.php">', _('Return to Pathology Laboratory'), '</a>
 			</div>';
 		include ('includes/footer.php');
 		exit;
@@ -384,7 +384,7 @@ if (isset($SelectedBatch)) {
 }
 
 echo '<div class="centre">
-		<a href="', $RootPath, '/KCMCPathologyLaboratory.php">', _('Return to Pathology Centre'), '</a>
+		<a href="', $RootPath, '/MedPathologyLaboratory.php">', _('Return to Pathology Centre'), '</a>
 	</div>';
 
 include ('includes/footer.php');

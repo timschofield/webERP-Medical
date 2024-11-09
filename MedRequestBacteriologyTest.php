@@ -227,10 +227,10 @@ if (isset($_POST['UpdateRequest'])) {
 	prnMsg(_('The batch of tests has been updated successfully'), 'success');
 
 	echo '<div class="centre">
-			<a href="', $RootPath, '/KCMCViewBacteriologyTest.php?SelectedBatch=', $_POST['SelectedBatch'], '">', _('Print the request form'), '</a><br />
-			<a href="', $RootPath, '/KCMCRequestBacteriologyTest.php?Edit=Yes&SelectedBatch=', $_POST['SelectedBatch'], '">', _('Edit the same test request'), '</a><br />
-			<a href="', $RootPath, '/KCMCRequestBacteriologyTest.php?SelectedPatient=', $SelectedPatient, '">', _('Create a new test request for the same patient'), '</a><br />
-			<a href="', $RootPath, '/KCMCRequestBacteriologyTest.php">', _('Create a test request for another patient'), '</a>
+			<a href="', $RootPath, '/MedViewBacteriologyTest.php?SelectedBatch=', $_POST['SelectedBatch'], '">', _('Print the request form'), '</a><br />
+			<a href="', $RootPath, '/MedRequestBacteriologyTest.php?Edit=Yes&SelectedBatch=', $_POST['SelectedBatch'], '">', _('Edit the same test request'), '</a><br />
+			<a href="', $RootPath, '/MedRequestBacteriologyTest.php?SelectedPatient=', $SelectedPatient, '">', _('Create a new test request for the same patient'), '</a><br />
+			<a href="', $RootPath, '/MedRequestBacteriologyTest.php">', _('Create a test request for another patient'), '</a>
 		</div>';
 
 	unset($_SESSION['TestRequest' . $Identifier]);
@@ -381,10 +381,10 @@ if (isset($_POST['SendRequest'])) {
 	prnMsg(_('The batch of tests has been sent successfully'), 'success');
 
 	echo '<div class="centre">
-			<a href="', $RootPath, '/KCMCViewBacteriologyTest.php?SelectedBatch=', $SelectedBatch, '">', _('Print the request form'), '</a><br />
-			<a href="', $RootPath, '/KCMCRequestBacteriologyTest.php?Edit=Yes&SelectedBatch=', $BatchNumber, '">', _('Edit the same test request'), '</a><br />
-			<a href="', $RootPath, '/KCMCRequestBacteriologyTest.php?SelectedPatient=', $SelectedPatient, '">', _('Create a new test request for the same patient'), '</a><br />
-			<a href="', $RootPath, '/KCMCRequestBacteriologyTest.php">', _('Create a test request for another patient'), '</a>
+			<a href="', $RootPath, '/MedViewBacteriologyTest.php?SelectedBatch=', $SelectedBatch, '">', _('Print the request form'), '</a><br />
+			<a href="', $RootPath, '/MedRequestBacteriologyTest.php?Edit=Yes&SelectedBatch=', $BatchNumber, '">', _('Edit the same test request'), '</a><br />
+			<a href="', $RootPath, '/MedRequestBacteriologyTest.php?SelectedPatient=', $SelectedPatient, '">', _('Create a new test request for the same patient'), '</a><br />
+			<a href="', $RootPath, '/MedRequestBacteriologyTest.php">', _('Create a test request for another patient'), '</a>
 		</div>';
 
 	unset($_SESSION['TestRequest' . $Identifier]);

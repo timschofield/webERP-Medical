@@ -20,7 +20,7 @@ echo '<fieldset class="MenuList">
 		<legend><img alt="" src="', $RootPath, '/css/', $_SESSION['Theme'], '/images/reports.png" data-title="', _('Inquiries and Reports'), '" />', _('Laboratory Inquiries'), '</legend>
 		<ul>
 			<li class="MenuItem">
-				<a href="', $RootPath, '/KCMCPendingBloodTests.php">', _('Pending Blood Requests'), '</a>
+				<a href="', $RootPath, '/MedPendingBloodTests.php">', _('Pending Blood Requests'), '</a>
 			</li>
 		</ul>
 	</fieldset>';
@@ -29,7 +29,7 @@ echo '<fieldset class="MenuList">
 		<legend><img alt="" src="', $RootPath, '/css/', $_SESSION['Theme'], '/images/transactions.png" data-title="', _('Laboratory Transactions'), '" />', _('Laboratory Transactions'), '</legend>
 		<ul>
 			<li class="MenuItem">
-				<a href="', $RootPath, '/KCMCRequestBloodTest.php?New=Yes">', _('Blood Request'), '</a>
+				<a href="', $RootPath, '/MedRequestBloodTest.php?New=Yes">', _('Blood Request'), '</a>
 			</li>
 		</ul>
 	</fieldset>';

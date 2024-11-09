@@ -8,7 +8,7 @@ $BookMark = '';
 include ('includes/header.php');
 
 echo '<div class="toplink">
-		<a href="', $RootPath, '/KCMCBacteriologyLaboratory.php">', _('Back to Main Bacteriology Laboratory page'), '</a>
+		<a href="', $RootPath, '/MedBacteriologyLaboratory.php">', _('Back to Main Bacteriology Laboratory page'), '</a>
 	</div>';
 
 echo '<p class="page_title_text">

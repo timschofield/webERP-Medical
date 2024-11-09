@@ -20,7 +20,7 @@ echo '<fieldset class="MenuList">
 		<legend><img alt="" src="', $RootPath, '/css/', $_SESSION['Theme'], '/images/reports.png" data-title="', _('Inquiries and Reports'), '" />', _('Lobaoratory Inquiries'), '</legend>
 		<ul>
 			<li class="MenuItem">
-				<a href="', $RootPath, '/KCMCPendingLaboratoryTests.php">', _('Pending Laboratory Tests'), '</a>
+				<a href="', $RootPath, '/MedPendingLaboratoryTests.php">', _('Pending Laboratory Tests'), '</a>
 			</li>
 		</ul>
 	</fieldset>';
@@ -29,7 +29,7 @@ echo '<fieldset class="MenuList">
 		<legend><img alt="" src="', $RootPath, '/css/', $_SESSION['Theme'], '/images/transactions.png" data-title="', _('Lobaoratory Transactions'), '" />', _('Lobaoratory Transactions'), '</legend>
 		<ul>
 			<li class="MenuItem">
-				<a href="', $RootPath, '/KCMCRequestLaboratoryTest.php?New=Yes">', _('Request a Laboratory Test'), '</a>
+				<a href="', $RootPath, '/MedRequestLaboratoryTest.php?New=Yes">', _('Request a Laboratory Test'), '</a>
 			</li>
 		</ul>
 	</fieldset>';

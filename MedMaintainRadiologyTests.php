@@ -8,7 +8,7 @@ $BookMark = '';
 include ('includes/header.php');
 
 echo '<div class="toplink">
-		<a href="', $RootPath, '/KCMCRadiologyLaboratory.php">', _('Back to Main Radiology page'), '</a>
+		<a href="', $RootPath, '/MedRadiologyLaboratory.php">', _('Back to Main Radiology page'), '</a>
 	</div>';
 
 echo '<p class="page_title_text">

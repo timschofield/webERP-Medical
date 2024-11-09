@@ -202,7 +202,7 @@ if (isset($_POST['SelectBed'])) {
 
 	prnMsg(_('The patient has been successfully transferred'), 'success');
 	echo '<div class="centre">
-			<a href="KCMCWardOverview.php">', _('Return to ward overview'), '</a>
+			<a href="MedWardOverview.php">', _('Return to ward overview'), '</a>
 		</div>';
 
 	include ('includes/footer.php');

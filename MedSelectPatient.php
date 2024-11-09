@@ -84,16 +84,16 @@ if ($_SESSION['PatientID'] != '' and !isset($_POST['Search'])) {
 			<legend><img alt="" src="', $RootPath, '/css/', $_SESSION['Theme'], '/images/transactions.png" data-title="', _('Patient Transactions'), '" />', _('Patient Transactions'), '</legend>
 			<ul>
 				<li class="MenuItem">
-					<a href="', $RootPath, '/KCMCRegister.php?Edit=Yes&SelectedPatient=', urlencode($_SESSION['PatientID']), '">', _('Modify patient registration data'), '</a>
+					<a href="', $RootPath, '/MedRegister.php?Edit=Yes&SelectedPatient=', urlencode($_SESSION['PatientID']), '">', _('Modify patient registration data'), '</a>
 				</li>
 				<li class="MenuItem">
-					<a href="', $RootPath, '/KCMCInpatientAdmission.php?Edit=Yes&SelectedPatient=', urlencode($_SESSION['PatientID']), '">', _('Modify Inpatient admission data'), '</a>
+					<a href="', $RootPath, '/MedInpatientAdmission.php?Edit=Yes&SelectedPatient=', urlencode($_SESSION['PatientID']), '">', _('Modify Inpatient admission data'), '</a>
 				</li>
 				<li class="MenuItem">
-					<a href="', $RootPath, '/KCMCOutpatientAdmission.php?Edit=Yes&SelectedPatient=', urlencode($_SESSION['PatientID']), '">', _('Modify Outpatient admission data'), '</a>
+					<a href="', $RootPath, '/MedOutpatientAdmission.php?Edit=Yes&SelectedPatient=', urlencode($_SESSION['PatientID']), '">', _('Modify Outpatient admission data'), '</a>
 				</li>
 				<li class="MenuItem">
-					<a href="', $RootPath, '/KCMCDischargePatient.php?Encounter=', urlencode(GetEncounterFromPID($_SESSION['PatientID'])), '">', _('Discharge this patient'), '</a>
+					<a href="', $RootPath, '/MedDischargePatient.php?Encounter=', urlencode(GetEncounterFromPID($_SESSION['PatientID'])), '">', _('Discharge this patient'), '</a>
 				</li>
 			</ul>
 		</fieldset>';

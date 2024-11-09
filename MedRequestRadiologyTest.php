@@ -130,7 +130,7 @@ if (isset($_POST['SendRequest'])) {
 			prnMsg(_('The batch of tests has been sent successfully'), 'success');
 			unset($SelectedPatient);
 			echo '<div class="centre">
-					<a href="KCMCRadiologyLaboratory.php">', _('Return to Radiology Department'), '</a>
+					<a href="MedRadiologyLaboratory.php">', _('Return to Radiology Department'), '</a>
 				</div>';
 		}
 	}
@@ -177,7 +177,7 @@ if (isset($SelectedPatient) and $SelectedPatient != '') {
 	echo '<fieldset style="width:51%">
 			<legend>', _('Request Radiology Test'), '</legend>';
 
-	include ('includes/KCMCDrawPatientLabel.php');
+	include ('includes/MedDrawPatientLabel.php');
 
 	echo '<br /><fieldset style="width:51%">
 			<legend>', _('Select Diagnostic Test'), '</legend>';

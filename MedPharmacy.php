@@ -739,7 +739,7 @@ if (isset($Patient)) {
 	echo '<table class="selection">';
 	echo '<tr>
 			<th colspan="3" class="header">' . $mydebtorrow['name'] . '</font><font size="2" color="navy"> - ' . $mydebtorrow['phoneno'] . '</th>
-			<th style="text-align: right"><a href="KCMCEditPatientDetails.php?PatientNumber=' . $Patient[0] . '&BranchCode=' . $Patient[1] . '" target="_blank">
+			<th style="text-align: right"><a href="MedEditPatientDetails.php?PatientNumber=' . $Patient[0] . '&BranchCode=' . $Patient[1] . '" target="_blank">
 					<img width="15px" src="' . $RootPath . '/css/' . $_SESSION['Theme'] . '/images/user.png" alt="Patient Details" /></a>
 			</th>
 		</tr>';

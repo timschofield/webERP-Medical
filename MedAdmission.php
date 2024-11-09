@@ -397,7 +397,7 @@ if (isset($Patient)) {
 	echo '<table class="selection">';
 	echo '<tr>
 			<th colspan="3" class="header">'.$mydebtorrow['name'].' - '.$mydebtorrow['phoneno'].'</th>
-			<th style="text-align: right"><a href="KCMCEditPatientDetails.php?PatientNumber='.$Patient[0].'&BranchCode='.$Patient[1].'" target="_blank">
+			<th style="text-align: right"><a href="MedEditPatientDetails.php?PatientNumber='.$Patient[0].'&BranchCode='.$Patient[1].'" target="_blank">
 					<img width="15px" src="' . $rootpath . '/css/' . $theme . '/images/user.png" alt="Patient Details" /></a>
 			</th>
 		</tr>';

@@ -11,7 +11,7 @@ if (isset($_POST['SelectedWard'])) {
 	$SelectedWard = $_GET['SelectedWard'];
 }
 
-echo '<div class="toplink"><a href="' . $RootPath . '/KCMCWardOverview.php?SelectedWard=', $SelectedWard, '">' . _('Ward Overview Screen') . '</a></div>';
+echo '<div class="toplink"><a href="' . $RootPath . '/MedWardOverview.php?SelectedWard=', $SelectedWard, '">' . _('Ward Overview Screen') . '</a></div>';
 
 echo '<p class="page_title_text">
 		<img src="', $RootPath, '/css/', $_SESSION['Theme'], '/images-medical/hospital.png" title="', _('Hospital Ward Configuration'), '" alt="" />', $Title, '
@@ -275,7 +275,7 @@ if (!isset($SelectedWard)) {
 					<td>', $MyRow['dept_nr'], ' - ', $MyRow['description'], '</td>
 					<td>', $MyRow['roomprefix'], $MyRow['room_nr_start'], ' ', _('to'), ' ', $MyRow['roomprefix'], $MyRow['room_nr_end'], '</td>
 					<td><a href="', htmlspecialchars(basename(__FILE__), ENT_QUOTES, 'UTF-8') . '?SelectedWard=', urlencode($MyRow['nr']), '">', _('Edit'), '</a></td>
-					<td><a href="KCMCMaintainWardRooms.php?SelectedWard=', urlencode($MyRow['nr']), '">', _('Maintain Rooms'), '</a></td>
+					<td><a href="MedMaintainWardRooms.php?SelectedWard=', urlencode($MyRow['nr']), '">', _('Maintain Rooms'), '</a></td>
 				</tr>';
 		}
 		echo '</table>';

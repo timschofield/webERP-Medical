@@ -14,7 +14,7 @@ if (isset($_POST['Batch'])) {
 } else {
 	prnMsg(_('You must first select a batch of tests to enter results for'), 'warn');
 	echo '<div class="centre">
-			<a href="', $RootPath, '/KCMCPendingLaboratoryTests.php">', _('Select a batch to process'), '</a>
+			<a href="', $RootPath, '/MedPendingLaboratoryTests.php">', _('Select a batch to process'), '</a>
 		</div>';
 	include ('includes/footer.php');
 	exit;
@@ -159,7 +159,7 @@ if (isset($_POST['SaveResults'])) {
 	prnMsg(_('The test results were saved successfully'), 'success');
 
 	echo '<div class="centre">
-			<a href="', $RootPath, '/KCMCPendingLaboratoryTests.php">', _('Select another batch to enter'), '</a>
+			<a href="', $RootPath, '/MedPendingLaboratoryTests.php">', _('Select another batch to enter'), '</a>
 		</div>';
 
 	include ('includes/footer.php');

@@ -88,9 +88,9 @@ while ($MyRow = DB_fetch_array($Result)) {
 			<td>', $MyRow['blood_group'], ' ', $MyRow['rh_factor'], '</td>
 			<td>', $MyRow['diagnosis'], '</td>
 			<td>', $MyRow['notes'], '</td>
-			<td><a href="', $RootPath, '/KCMCRequestBloodTest.php?Edit=Yes&SelectedBatch=', $MyRow['batch_nr'], '&SelectedPatient=', $PID, '">', _('Edit Batch'), '</a></td>
-			<td><a href="', $RootPath, '/KCMCViewBloodTest.php?SelectedBatch=', $MyRow['batch_nr'], '">', _('View Batch'), '</a></td>
-			<td><a href="', $RootPath, '/KCMCEnterBloodTestResults.php?Batch=', $MyRow['batch_nr'], '">', _('Enter Results'), '</a></td>
+			<td><a href="', $RootPath, '/MedRequestBloodTest.php?Edit=Yes&SelectedBatch=', $MyRow['batch_nr'], '&SelectedPatient=', $PID, '">', _('Edit Batch'), '</a></td>
+			<td><a href="', $RootPath, '/MedViewBloodTest.php?SelectedBatch=', $MyRow['batch_nr'], '">', _('View Batch'), '</a></td>
+			<td><a href="', $RootPath, '/MedEnterBloodTestResults.php?Batch=', $MyRow['batch_nr'], '">', _('Enter Results'), '</a></td>
 		</tr>';
 }
 
@@ -98,7 +98,7 @@ echo '</tbody>
 	</table>';
 
 echo '<div class="centre">
-		<a href="', $RootPath, '/KCMCBloodLaboratory.php">', _('Return to Bllod Centre'), '</a>
+		<a href="', $RootPath, '/MedBloodLaboratory.php">', _('Return to Bllod Centre'), '</a>
 	</div>';
 
 include ('includes/footer.php');

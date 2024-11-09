@@ -166,7 +166,7 @@ if (isset($_POST['SendRequest'])) {
 		prnMsg(_('The batch of tests has been sent successfully'), 'success');
 		unset($SelectedPatient);
 		echo '<div class="centre">
-				<a href="KCMCPathologyLaboratory.php">', _('Return to Pathology Laboratory'), '</a>
+				<a href="MedPathologyLaboratory.php">', _('Return to Pathology Laboratory'), '</a>
 			</div>';
 		include ('includes/footer.php');
 		exit;

@@ -88,7 +88,9 @@ echo '</fieldset>';
 
 echo '<div class="centre">
 		<input type="submit" name="update" value="', _('Update Bed Numbers'), '" />
-		<a href="KCMCMaintainWards.php?SelectedWard=">', _('Return to main Ward Configuration Screen'), '</a>
+		<a href="MedMaintainWards.php?SelectedWard=', $SelectedWard . '">', _('Return to main Ward Configuration Screen'), '</a>
 	</div>
 </form>';
+
+include('includes/footer.php');
 ?>

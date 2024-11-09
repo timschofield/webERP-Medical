@@ -28,7 +28,7 @@ if (isset($PatientResult)) {
 }
 
 if (isset($Patient)) {
-	echo '<div class="toplink"><a href="' . $RootPath . '/KCMCAddPatientNotes.php">' . _('Select Another Patient') . '</a></div>';
+	echo '<div class="toplink"><a href="' . $RootPath . '/MedAddPatientNotes.php">' . _('Select Another Patient') . '</a></div>';
 
 	if (isset($_POST['submit'])) {
 

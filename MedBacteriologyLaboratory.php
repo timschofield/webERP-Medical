@@ -20,7 +20,7 @@ echo '<fieldset class="MenuList">
 		<legend><img alt="" src="', $RootPath, '/css/', $_SESSION['Theme'], '/images/reports.png" data-title="', _('Inquiries and Reports'), '" />', _('Laboratory Inquiries'), '</legend>
 		<ul>
 			<li class="MenuItem">
-				<a href="', $RootPath, '/KCMCPendingBacteriologyTests.php">', _('Pending Bacteriology Tests'), '</a>
+				<a href="', $RootPath, '/MedPendingBacteriologyTests.php">', _('Pending Bacteriology Tests'), '</a>
 			</li>
 		</ul>
 	</fieldset>';
@@ -29,7 +29,7 @@ echo '<fieldset class="MenuList">
 		<legend><img alt="" src="', $RootPath, '/css/', $_SESSION['Theme'], '/images/transactions.png" data-title="', _('Laboratory Transactions'), '" />', _('Laboratory Transactions'), '</legend>
 		<ul>
 			<li class="MenuItem">
-				<a href="', $RootPath, '/KCMCRequestBacteriologyTest.php?New=Yes">', _('Request a Bacteriology Test'), '</a>
+				<a href="', $RootPath, '/MedRequestBacteriologyTest.php?New=Yes">', _('Request a Bacteriology Test'), '</a>
 			</li>
 		</ul>
 	</fieldset>';
@@ -38,7 +38,7 @@ echo '<fieldset class="MenuList">
 		<legend><img alt="" src="', $RootPath, '/css/', $_SESSION['Theme'], '/images/maintenance.png" data-title="', _('Laboratory Maintenance'), '" />', _('Laboratory Maintenance'), '</legend>
 		<ul>
 			<li class="MenuItem">
-				<a href="', $RootPath, '/KCMCMaintainBacteriologyTests.php">', _('Maintain Bacteriology Tests'), '</a>
+				<a href="', $RootPath, '/MedMaintainBacteriologyTests.php">', _('Maintain Bacteriology Tests'), '</a>
 			</li>
 		</ul>
 	</fieldset>';

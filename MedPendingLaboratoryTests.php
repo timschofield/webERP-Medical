@@ -83,8 +83,8 @@ while ($MyRow = DB_fetch_array($Result)) {
 			<td>', ConvertSQLDate($MyRow['send_date']), '</td>
 			<td>', $MyRow['notes'], '</td>
 			<td>', $Urgent, '</td>
-			<td><a href="', $RootPath, '/KCMCViewLaboratoryTest.php?Batch=', $MyRow['batch_nr'], '">', _('View Batch'), '</a></td>
-			<td><a href="', $RootPath, '/KCMCEnterLaboratoryTestResults.php?Batch=', $MyRow['batch_nr'], '">', _('Enter Results'), '</a></td>
+			<td><a href="', $RootPath, '/MedViewLaboratoryTest.php?Batch=', $MyRow['batch_nr'], '">', _('View Batch'), '</a></td>
+			<td><a href="', $RootPath, '/MedEnterLaboratoryTestResults.php?Batch=', $MyRow['batch_nr'], '">', _('Enter Results'), '</a></td>
 		</tr>';
 }
 
@@ -92,7 +92,7 @@ echo '</tbody>
 	</table>';
 
 echo '<div class="centre">
-		<a href="', $RootPath, '/KCMCMedicalLaboratory.php">', _('Return to Laboratory Centre'), '</a>
+		<a href="', $RootPath, '/MedMedicalLaboratory.php">', _('Return to Laboratory Centre'), '</a>
 	</div>';
 
 include ('includes/footer.php');

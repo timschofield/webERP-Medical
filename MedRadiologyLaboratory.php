@@ -20,7 +20,7 @@ echo '<fieldset class="MenuList">
 		<legend><img alt="" src="', $RootPath, '/css/', $_SESSION['Theme'], '/images/reports.png" data-title="', _('Radiology Inquiries'), '" />', _('Radiology Inquiries'), '</legend>
 		<ul>
 			<li class="MenuItem">
-				<a href="', $RootPath, '/KCMCPendingRadiologyTests.php">', _('Pending Radiology Tests'), '</a>
+				<a href="', $RootPath, '/MedPendingRadiologyTests.php">', _('Pending Radiology Tests'), '</a>
 			</li>
 		</ul>
 	</fieldset>';
@@ -29,7 +29,7 @@ echo '<fieldset class="MenuList">
 		<legend><img alt="" src="', $RootPath, '/css/', $_SESSION['Theme'], '/images/transactions.png" data-title="', _('Radiology Transactions'), '" />', _('Radiology Transactions'), '</legend>
 		<ul>
 			<li class="MenuItem">
-				<a href="', $RootPath, '/KCMCRequestRadiologyTest.php?New=Yes">', _('Request a Radiology Test'), '</a>
+				<a href="', $RootPath, '/MedRequestRadiologyTest.php?New=Yes">', _('Request a Radiology Test'), '</a>
 			</li>
 		</ul>
 	</fieldset>';
@@ -38,7 +38,7 @@ echo '<fieldset class="MenuList">
 		<legend><img alt="" src="', $RootPath, '/css/', $_SESSION['Theme'], '/images/maintenance.png" data-title="', _('Radiology Maintenance'), '" />', _('Radiology Maintenance'), '</legend>
 		<ul>
 			<li class="MenuItem">
-				<a href="', $RootPath, '/KCMCMaintainRadiologyTests.php">', _('Maintain Radiology Tests'), '</a>
+				<a href="', $RootPath, '/MedMaintainRadiologyTests.php">', _('Maintain Radiology Tests'), '</a>
 			</li>
 		</ul>
 	</fieldset>';

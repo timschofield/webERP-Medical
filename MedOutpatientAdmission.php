@@ -15,7 +15,7 @@ if (isset($SelectedPatient) and isset($_GET['Edit'])) {
 	if (DB_num_rows($Result) == 0) {
 		prnMsg(_('This patient is not currently admitted as an outpatient'), 'error');
 		echo '<div class="centre">
-				<a href="', $RootPath, '/KCMCSelectPatient.php?Select=', $SelectedPatient, '">', _('Return to Patient Screen'), '</a>
+				<a href="', $RootPath, '/MedSelectPatient.php?Select=', $SelectedPatient, '">', _('Return to Patient Screen'), '</a>
 			</div>';
 		include ('includes/footer.php');
 		exit;
@@ -156,7 +156,7 @@ if (isset($_POST['Create'])) {
 	unset($_POST['InsuranceNo']);
 
 	echo '<div class="centre">
-				<a href="', $RootPath, '/KCMCSelectPatient.php?SelectedPatient=', $SelectedPatient, '">', _('Return to Patient Screen'), '</a>
+				<a href="', $RootPath, '/MedSelectPatient.php?SelectedPatient=', $SelectedPatient, '">', _('Return to Patient Screen'), '</a>
 			</div>';
 
 	include ('includes/footer.php');

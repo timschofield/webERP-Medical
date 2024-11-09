@@ -250,27 +250,27 @@ if (DB_num_rows($Result) > 0) {
 				echo '<td>', $MyPersonRow['hospital_file_nr'], '</td>';
 				echo '<td>', $MyInsuranceRow['name'], '</td>';
 				echo '<td>
-						<a href="', $RootPath . '/KCMCYellowPaper.php?Encounter=', $PatientsInWard[$SelectedWard][$MyRow['room_nr']][$BedNumber], '&Ward=', $SelectedWard, '" target="_blank">
+						<a href="', $RootPath . '/MedYellowPaper.php?Encounter=', $PatientsInWard[$SelectedWard][$MyRow['room_nr']][$BedNumber], '&Ward=', $SelectedWard, '" target="_blank">
 						<img src="', $RootPath, '/css/', $_SESSION['Theme'], '/images-medical/yellow.png" title="', _('Patient Notes'), '" /></a>
 					</td>';
 				echo '<td>
-						<a href="', $RootPath . '/KCMCDailyWardNotes.php?Encounter=', $PatientsInWard[$SelectedWard][$MyRow['room_nr']][$BedNumber], '&Ward=', $SelectedWard, '" target="_blank">
+						<a href="', $RootPath . '/MedDailyWardNotes.php?Encounter=', $PatientsInWard[$SelectedWard][$MyRow['room_nr']][$BedNumber], '&Ward=', $SelectedWard, '" target="_blank">
 						<img src="', $RootPath, '/css/', $_SESSION['Theme'], '/images-medical/pinned_note.png" title="', _('Daily Ward Notes'), '" /></a>
 					</td>';
 				echo '<td>
-						<a href="', $RootPath . '/KCMCDailyWardNotes.php?Encounter=', $PatientsInWard[$SelectedWard][$MyRow['room_nr']][$BedNumber], '" target="_blank">
+						<a href="', $RootPath . '/MedDailyWardNotes.php?Encounter=', $PatientsInWard[$SelectedWard][$MyRow['room_nr']][$BedNumber], '" target="_blank">
 						<img src="', $RootPath, '/css/', $_SESSION['Theme'], '/images/folder_add.png" title="', _('Patients Info Chart'), '" /></a>
 					</td>';
 				echo '<td>
-						<a href="', $RootPath . '/KCMCInpatientAdmission.php?Edit=Yes&SelectedPatient=', GetPIDFRomEncounter($PatientsInWard[$SelectedWard][$MyRow['room_nr']][$BedNumber]), '" target="_blank">
+						<a href="', $RootPath . '/MedInpatientAdmission.php?Edit=Yes&SelectedPatient=', GetPIDFRomEncounter($PatientsInWard[$SelectedWard][$MyRow['room_nr']][$BedNumber]), '" target="_blank">
 						<img src="', $RootPath, '/css/', $_SESSION['Theme'], '/images-medical/index_card.png" title="', _('Admission Data'), '" /></a>
 					</td>';
 				echo '<td>
-						<a href="', $RootPath . '/KCMCTransferBeds.php?Encounter=', $PatientsInWard[$SelectedWard][$MyRow['room_nr']][$BedNumber], '" target="_blank">
+						<a href="', $RootPath . '/MedTransferBeds.php?Encounter=', $PatientsInWard[$SelectedWard][$MyRow['room_nr']][$BedNumber], '" target="_blank">
 						<img src="', $RootPath, '/css/', $_SESSION['Theme'], '/images-medical/transfer.png" title="', _('Transfer Patient to another bed'), '" /></a>
 					</td>';
 				echo '<td>
-						<a href="', $RootPath . '/KCMCDischargePatient.php?Encounter=', $PatientsInWard[$SelectedWard][$MyRow['room_nr']][$BedNumber], '" target="_blank">
+						<a href="', $RootPath . '/MedDischargePatient.php?Encounter=', $PatientsInWard[$SelectedWard][$MyRow['room_nr']][$BedNumber], '" target="_blank">
 						<img src="', $RootPath, '/css/', $_SESSION['Theme'], '/images-medical/discharge.png" title="', _('Discharge Patient'), '" /></a>
 					</td>';
 			}
